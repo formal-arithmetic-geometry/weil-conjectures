@@ -1,1 +1,11 @@
-import WeilConjectures.Basic
+import WeilConjectures.AnalyticAux
+import WeilConjectures.ClosedPoints
+import WeilConjectures.Convergence
+import WeilConjectures.EulerProduct
+import WeilConjectures.EulerProductAux
+import WeilConjectures.Evaluation
+import WeilConjectures.PointCount
+import WeilConjectures.SpecialValues
+import WeilConjectures.Statement
+import WeilConjectures.ZetaFunction
+import WeilConjectures.ZetaSeries
