@@ -1,0 +1,50 @@
+name: Blueprint
+
+# Build the Verso blueprint (blueprint/) and upload the rendered site.
+# Runs only on commits to master, which includes pull requests merged into
+# master. Can also be started manually from the Actions tab.
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      # The Verso packages are built from source; cache them keyed on the
+      # dependency manifest so subsequent runs skip the ~10 minute rebuild.
+      # (The mathlib build cache is fetched by lean-action separately.)
+      - name: Cache Verso packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            .lake/packages/verso
+            .lake/packages/verso-slides
+            .lake/packages/VersoBlueprint
+            .lake/packages/subverso
+            .lake/packages/MD4Lean
+            .lake/packages/illuminate
+          key: verso-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}
+
+      - name: Build blueprint library
+        uses: leanprover/lean-action@v1
+        with:
+          build-args: "Blueprint"
+
+      - name: Render blueprint site
+        run: ./scripts/build_blueprint.sh
+
+      - name: Upload blueprint site
+        uses: actions/upload-artifact@v4
+        with:
+          name: blueprint-site
+          path: _out/site/html-multi
