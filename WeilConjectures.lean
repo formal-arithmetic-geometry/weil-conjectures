@@ -10,5 +10,6 @@ import WeilConjectures.Evaluation
 import WeilConjectures.PointCount
 import WeilConjectures.SpecialValues
 import WeilConjectures.Statement
+import WeilConjectures.Weights.FrobeniusModule
 import WeilConjectures.ZetaFunction
 import WeilConjectures.ZetaSeries
