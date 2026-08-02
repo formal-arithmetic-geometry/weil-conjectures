@@ -212,22 +212,31 @@ $`V^{I_s}` is $`\iota`-mixed of weights $`\leq w` (relative to
 $`q_s`).
 :::
 
-:::proof "MON-boundary-m1" (uses := "TR-l-function, SIX-affine-curve-bounds, LA-locally-finite-products")
+:::proof "MON-boundary-m1" (uses := "TR-l-function, SIX-affine-curve-bounds, LA-locally-finite-products, PUR-real-envelope")
 Deep input, *but with an elementary elimination already scripted in
-the lecture notes* (semicontinuity capsule): for each $`m`, apply
-$`\iota` to the L-function identity ({bpref "TR-l-function"}[]) for
-the $`2m`-th tensor power of the middle extension on the *complete*
-curve. The left side is a product of local factors with the boundary
-factor $`\det(1 - t F_s | (V^{\otimes 2m})^{I_s})^{-1}` among them;
-$`(V^{I_s})^{\otimes 2m} \subseteq (V^{\otimes 2m})^{I_s}`. The right
+the lecture notes* (semicontinuity capsule). Audited version — the
+positivity step silently requires the real envelope: first replace
+$`L` by its $`\iota`-real envelope
+$`\mathcal{E} = L \oplus (L^\vee \otimes \Qlbar^{(b)})`
+({bpref "PUR-real-envelope"}[]); the boundary invariants of $`L`
+embed in those of $`\mathcal{E}`, so bounding the latter suffices —
+*for a general pure $`L` the $`\iota`-images of local factors are not
+positive, and the radius comparison below would be illegitimate
+without this step.* Now, for each $`m`, apply $`\iota` to the
+L-function identity ({bpref "TR-l-function"}[]) for the $`2m`-th
+tensor power of the middle extension of $`\mathcal{E}` on the
+*complete* curve: the even tensor powers of the $`\iota`-real
+$`\mathcal{E}` have local factors with non-negative real
+coefficients, so in the locally finite product
+({bpref "LA-locally-finite-products"}[]) each factor converges
+wherever the product does. The boundary factor
+$`\det(1 - t F_s \mid (\mathcal{E}^{\otimes 2m})^{I_s})^{-1}`
+contains $`((\mathcal{E}^{I_s})^{\otimes 2m}` as a sub; the right
 side has poles only from $`H^0` and $`H^2` of the complete curve,
 whose weights are pinned by invariants/coinvariants
-({bpref "SIX-affine-curve-bounds"}[]); comparing radii of the
-$`\iota`-images (positivity of coefficients for the even powers makes
-radius comparison legitimate factor by factor,
-{bpref "LA-locally-finite-products"}[]) bounds every eigenvalue
-$`\beta` of $`F_s` on $`V^{I_s}` by
-$`\|\iota\beta\|^{2 \cdot 2m} \leq q_s^{2m w + O(1)}`; letting
+({bpref "SIX-affine-curve-bounds"}[]). Comparing radii bounds every
+eigenvalue $`\beta` of $`F_s` on $`\mathcal{E}^{I_s}` by
+$`\|\iota\beta\|^{4m} \leq q_s^{2mw + O(1)}`; letting
 $`m \to \infty` gives $`\|\iota\beta\|^2 \leq q_s^{w}`. Scheduled to
 be proved (not axiomatized) as soon as {bpref "TR-l-function"}[] is
 available.
@@ -297,14 +306,17 @@ already is.
 
 # Local Fourier theory (LFT)
 
-:::theorem "LFT-stationary-phase" (parent := "grp-monodromy") (uses := "PUR-fourier-def, SIX-j-star-curves") (tags := "deep-input, temporary-axiom") (effort := "large")
-Stationary phase for middle extensions on the affine line: let $`L_0`
+:::theorem "LFT-stationary-phase" (parent := "grp-monodromy") (uses := "PUR-fourier-def, SIX-j-star-curves, PUR-ft-middle-extension") (tags := "deep-input, temporary-axiom") (effort := "large")
+Stationary phase, local content (rescoped by the audit): let $`L_0`
 be irreducible lisse on open dense $`U_0 \subseteq \mathbb{A}^1_{\Fq}`,
-not geometrically constant, unramified at $`\infty`. Then
-$`\operatorname{FT}_\psi((j_* L)[1]) \cong (j'_* L')[1]` for an
-irreducible lisse $`L'` on $`\mathbb{A}^1{}' \setminus \{0'\}`
-(unramified outside $`0'` and $`\infty'`), and at $`0'` there is a
-Frobenius- and inertia-equivariant exact sequence
+not geometrically constant, unramified at $`\infty`, and let
+$`j'_* L' = \operatorname{FT}_\psi((j_* L)[1])[-1]` be its transform —
+already known to be the middle extension of an irreducible lisse
+sheaf by {bpref "PUR-ft-middle-extension"}[] (that part is *no longer
+inside this axiom*). The remaining assertions: $`L'` is lisse on all
+of $`\mathbb{A}^1{}' \setminus \{0'\}` (ramified at most at $`0'` and
+$`\infty'`), and at $`0'` there is a Frobenius- and
+inertia-equivariant exact sequence
 $$`0 \to H^1_c(\mathbb{A}^1, j_* L) \to L'_{\bar\eta_{0'}} \to L_\infty(-1) \to 0`
 in which the first term is exactly the inertia invariants
 $`(L'_{\bar\eta_{0'}})^{I_{0'}}`, the inertia action on the image of
@@ -315,18 +327,19 @@ its Frobenius.
 :::
 
 :::proof "LFT-stationary-phase" (uses := "PUR-fourier-inversion, PUR-fourier-concentration")
-Deep input (Laumon's local Fourier transform / stationary phase),
-kept as one narrowly-scoped statement. Internal decomposition when
-attacked: local transforms
-$`\operatorname{FT}(0, \infty')`, $`\operatorname{FT}(\infty, 0')`
-defined on henselian traits; the global-to-local decomposition of
-$`\operatorname{FT}_\psi` of a middle extension (this is where a curve
+Deep input (Laumon's local Fourier transform / stationary phase). The
+audit *shrank* this axiom: the global middle-extension and
+irreducibility statements moved to
+{bpref "PUR-ft-middle-extension"}[], where they have an elementary
+proof from inversion; what remains deep is strictly local — the local
+transforms $`\operatorname{FT}(0, \infty')`,
+$`\operatorname{FT}(\infty, 0')` on henselian traits, the
+global-to-local decomposition (this is where a curve
 $`t`-structure fragment appears — quarantined *inside* this leaf, per
-the overview's perversity policy); the principle of stationary phase
-identifying the local contribution at $`\infty` with the twist
-$`L_\infty(-1)` and the unipotent block; irreducibility preservation
-via inversion ({bpref "PUR-fourier-inversion"}[]). Alternative route:
-Katz's explicit local analysis. Until eliminated, this axiom and
+the overview's perversity policy), and the principle of stationary
+phase identifying the local contribution at $`\infty` with the twist
+$`L_\infty(-1)` and the unipotent block. Alternative route: Katz's
+explicit local analysis. Until eliminated, this axiom and
 {bpref "MON-jordan-purity"}[] are consumed *only* by
 {bpref "PUR-affine-line"}[].
 :::

@@ -141,6 +141,35 @@ purity bookkeeping, in particular {bpref "PUR-duality-squeeze"}[] and
 {bpref "MON-stationary-bookkeeping"}[].
 :::
 
+:::lemma_ "WT-base-extension" (parent := "grp-weights") (uses := "WT-pure") (tags := "elementary-missing") (effort := "small")
+Base-extension invariance (exposed by the audit): let
+$`\mathcal{F}_0` be a Weil sheaf on $`X_0/\Fq` and
+$`X_m = X_0 \times_{\Fq} \Fqn{m}` the base extension, with pulled-back
+Weil sheaf $`\mathcal{F}_m`. If $`\mathcal{F}_0` is punctually
+$`\iota`-pure of weight $`w` (resp. mixed $`\leq w`), then so is
+$`\mathcal{F}_m` — with the *same* weight, in the local normalization
+of {bpref "WT-sheaf-punctual"}[]. Likewise weight bounds on
+$`H^i_c(X, \mathcal{F})` are unchanged by replacing $`(X_0, q)` with
+$`(X_m, q^m)` (the Frobenius is replaced by its $`m`-th power).
+:::
+
+:::proof "WT-base-extension"
+A closed point $`x'` of $`X_m` over a closed point $`x` of $`X_0`
+has $`\kappa(x') = \kappa(x) \cdot \Fqn{m}`, and the local geometric
+Frobenius satisfies $`F_{x'} = F_x^{e}` with
+$`e = \deg(x')\, m / \deg(x) = [\kappa(x') : \kappa(x)]`, so
+$`q_{x'} = q_x^{e}`; eigenvalues are raised to the $`e`-th power and
+$`\|\iota(\alpha^e)\|^2 = (q_x^{w})^{e} = q_{x'}^{w}`. Filtrations
+pull back. On global cohomology, base extension replaces $`F` by
+$`F^m` and $`q` by $`q^m`: eigenvalues are $`m`-th powers, weights
+(normalized to the new $`q^m`) unchanged. *Why the audit added
+this*: the devissages quietly extend the base field (radicial
+base changes in {bpref "PUR-devissage-homeo"}[], the rational-point
+choice in {bpref "PUR-move-infinity"}[], the covers in
+{bpref "GEO-tame-reduction"}[]); without this lemma those steps do
+not literally return to the original statement.
+:::
+
 # Sheaf-level definitions
 
 :::definition "WT-sheaf-punctual" (parent := "grp-weights") (uses := "SH-weil-sheaf, WT-pure") (tags := "infrastructure") (effort := "small")

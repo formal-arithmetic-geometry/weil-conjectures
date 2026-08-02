@@ -16,6 +16,7 @@ import WeilConjecturesBlueprint.Chapters.EtaleCohomology
 import WeilConjecturesBlueprint.Chapters.SixOperations
 import WeilConjecturesBlueprint.Chapters.GeometricInputs
 import WeilConjecturesBlueprint.Chapters.FinalAssembly
+import WeilConjecturesBlueprint.Chapters.Audit
 
 open Verso.Genre
 open Verso.Genre.Manual
@@ -57,6 +58,8 @@ realization (Version III).
 {include 0 WeilConjecturesBlueprint.Chapters.GeometricInputs}
 
 {include 0 WeilConjecturesBlueprint.Chapters.FinalAssembly}
+
+{include 0 WeilConjecturesBlueprint.Chapters.Audit}
 
 {blueprint_graph}
 {blueprint_summary}
