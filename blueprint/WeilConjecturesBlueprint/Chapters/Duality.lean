@@ -190,32 +190,33 @@ trivially when $`d` is even). Then:
 1. $`\delta^2 = 1`, i.e. $`\delta \in \{\pm 1\}` — by
    {bpref "DU-determinant-pairing"}[](ii);
 2. $`\prod_{i=0}^{2d} D_i^{(-1)^i} = \delta^{(-1)^d} \, q^{d\chi/2}`;
-3. the sign of the functional equation is
-   $`\varepsilon = (-1)^{\chi}\, \delta^{(-1)^d}`.
-So $`\varepsilon` is *explicitly computable from* $`\det F_d`: for
-example $`\varepsilon = +1` whenever $`\chi` is even and
-$`\det F_d = +q^{d b_d/2}`. The blueprint records $`\varepsilon`
-explicitly here; the final combined theorem only needs its existence in
-$`\{\pm 1\}`, but nothing is left as an unexplained $`\pm`.
+3. *define* $`\varepsilon := (-1)^{\chi}\, \delta^{(-1)^d} \in
+   \{\pm 1\}`.
+The theorem {bpref "DU-graded-fe"}[] then *proves* that this
+$`\varepsilon` is the sign of the functional equation — the logical
+order is (1)(2)(3) here, then the substitution computation there;
+nothing circulates. So $`\varepsilon` is explicitly computable from
+$`\det F_d`: for example $`\varepsilon = +1` whenever $`\chi` is even
+and $`\det F_d = +q^{d b_d/2}`. The final combined theorem only needs
+$`\varepsilon \in \{\pm 1\}`, but nothing is left as an unexplained
+$`\pm`.
 :::
 
 :::proof "DU-sign-analysis"
-For 2: pair off $`i < d` with $`2d - i`:
+For 1: {bpref "DU-determinant-pairing"}[](ii) gives
+$`D_d^2 = q^{d b_d}`, so $`\delta^2 = D_d^2 q^{-d b_d} = 1`. For 2:
+pair off $`i < d` with $`2d - i`:
 $`D_i^{(-1)^i} D_{2d-i}^{(-1)^{2d-i}} = (D_i D_{2d-i})^{(-1)^i} =
 q^{d b_i (-1)^i}` by {bpref "DU-determinant-pairing"}[](i) (the
 exponents agree since $`(-1)^{2d-i} = (-1)^i`); the middle contributes
-$`D_d^{(-1)^d} = (\delta\, q^{d b_d/2})^{(-1)^d}`. Multiplying:
+$`D_d^{(-1)^d} = (\delta\, q^{d b_d/2})^{(-1)^d}` — using
+$`\delta = \delta^{-1}` when $`d` is odd. Multiplying:
 $`\prod_i D_i^{(-1)^i} = q^{d \sum_{i<d} (-1)^i b_i} \cdot
 \delta^{(-1)^d} q^{(-1)^d d b_d / 2} = \delta^{(-1)^d} q^{d\chi/2}`
-using {bpref "DU-euler-char"}[](ii). Item 3 is read off from the graded
-functional equation ({bpref "DU-graded-fe"}[]), where the substitution
-produces exactly the factor $`(-1)^\chi \prod_i D_i^{(-1)^i} \cdot
-q^{-d\chi}`… combining with 2 gives
-$`\varepsilon = (-1)^\chi \delta^{(-1)^d}`. *No Pfaffians*: the
-lecture notes' warning is preserved — one never needs to know
-*which* sign $`\delta` is, only that $`\delta^2 = 1`; computing
-$`\delta` for a given $`X` amounts to computing $`\det F_d`, which the
-blueprint does not need.
+using {bpref "DU-euler-char"}[](ii). Item 3 is a definition. *No
+Pfaffians*: one never needs to know *which* sign $`\delta` is, only
+that $`\delta^2 = 1`; computing $`\delta` for a given $`X` amounts to
+computing $`\det F_d`, which the blueprint does not need.
 :::
 
 :::theorem "DU-graded-fe" (parent := "grp-duality") (uses := "DU-interface, LA-charpoly-rev") (tags := "elementary-missing") (effort := "medium") (priority := "high")
@@ -228,22 +229,26 @@ $`\chi = \sum (-1)^i b_i`, $`\delta = D_d q^{-db_d/2}`.
 :::
 
 :::proof "DU-graded-fe" (uses := "DU-reciprocal-charpoly, DU-sign-analysis, DU-euler-char")
-Substitute $`T \mapsto q^{-d}T^{-1}` into the product. For each $`i`,
-{bpref "DU-reciprocal-charpoly"}[] applied to the similitude pair
-$`(F_i, F_{2d-i})` (with $`u = F_i`, $`v = F_{2d-i}`, $`r = b_i`) gives
-$`P_{F_{2d-i}}(q^{-d}T^{-1}) = (-1)^{b_i} T^{-b_i} (\det F_i)^{-1}
-P_{F_i}(T)`; re-index the product by $`i \mapsto 2d - i` (a bijection
-preserving the exponent parity $`(-1)^{i+1}`) to express
-$`Z_F(q^{-d}T^{-1})` in terms of the $`P_{F_i}(T)`. Collect the three
-prefactor families: the signs give
-$`\prod_i ((-1)^{b_i})^{(-1)^{i+1}} = (-1)^{\sum (-1)^{i+1} b_i} =
-(-1)^{\chi}` (a sign to the power $`\pm 1` is itself); the powers of
-$`T` give $`T^{\sum (-1)^{i+1}(-b_i)} = T^{\chi}`; the determinants give
-$`\prod_i (\det F_i)^{(-1)^i} = \delta^{(-1)^d} q^{d\chi/2}` by
-{bpref "DU-sign-analysis"}[](2). Every power of $`q` and $`T` is
-accounted for above; the verification that the three bookkeeping
-computations compose correctly is mechanical and is exactly what the
-formal proof will check.
+Independent recomputation (audited): from
+{bpref "DU-reciprocal-charpoly"}[] in the form
+$`P_{F_i}\bigl(1/(q^d T)\bigr) = (-q^d T)^{-b_i}\, D_i\, P_{F_{2d-i}}(T)`
+(the similitude pair $`(F_i, F_{2d-i})` with multiplier $`q^d`),
+substitute into the product:
+$`Z_F(q^{-d}T^{-1}) = \prod_i \bigl[(-q^dT)^{-b_i} D_i
+P_{F_{2d-i}}(T)\bigr]^{(-1)^{i+1}}`. The three prefactor families:
+$`\prod_i (-q^dT)^{-b_i(-1)^{i+1}} = (-q^dT)^{\chi} =
+(-1)^{\chi} q^{d\chi} T^{\chi}`; the determinants give
+$`\prod_i D_i^{(-1)^{i+1}} = \bigl(\prod_i D_i^{(-1)^i}\bigr)^{-1} =
+\delta^{-(-1)^d} q^{-d\chi/2} = \delta^{(-1)^d} q^{-d\chi/2}` by
+{bpref "DU-sign-analysis"}[](1)(2); re-indexing
+$`i \mapsto 2d - i` (parity-preserving) turns the last family into
+$`Z_F(T)`. Total:
+$`Z_F(q^{-d}T^{-1}) = (-1)^{\chi}\delta^{(-1)^d} q^{d\chi - d\chi/2}
+T^{\chi} Z_F(T) = \varepsilon\, q^{d\chi/2}\, T^{\chi}\, Z_F(T)`.
+Sanity test $`\mathbb{P}^1` ($`d = 1`, $`b_0 = b_2 = 1`, $`b_1 = 0`,
+$`\chi = 2`, $`H^1 = 0` so $`D_1 = 1`, $`\delta = 1`):
+$`\varepsilon = (+1)(1) = +1` and indeed
+$`Z(1/(qT)) = qT^2 Z(T)` for $`Z = ((1-T)(1-qT))^{-1}`.
 :::
 
 # Realization nodes

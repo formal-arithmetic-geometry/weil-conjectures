@@ -159,18 +159,27 @@ form, which carries no sign, and the classical form with its explicit
 $`\varepsilon` is this separate node.
 :::
 
-:::proof "W-functional-equation" (uses := "W-factorization, DU-graded-fe, DU-reciprocal-transport, DU-sign-analysis, W-rationality-reduced")
-Form 1 is the eigenvalue-multiset statement of the similitude transport
-({bpref "DU-reciprocal-transport"}[]): the pairing identifies
-$`F_{2d-i}` with $`q^d (F_i^{-1})^\vee`, whose eigenvalue multiset is
-$`\{q^d/\alpha_j\}`; multiplicities are preserved because characteristic
-polynomials are conjugation- and dual-invariant. Form 2 is the abstract
-graded functional equation ({bpref "DU-graded-fe"}[]) applied to the
-factorization ({bpref "W-factorization"}[]), with the determinant and
-sign bookkeeping of {bpref "DU-sign-analysis"}[]; the resulting identity
-holds in $`K(t)`, both sides lie in the subfield $`\QQ(t)` (by
-{bpref "W-rationality-reduced"}[]), and $`\QQ(t) \to K(t)` is injective,
-so it descends to $`\QQ`.
+:::proof "W-functional-equation" (uses := "W-factorization, DU-graded-fe, DU-reciprocal-charpoly, DU-sign-analysis, W-rationality-reduced, W-integral-coefficients")
+Form 1 (audited route, avoiding multiset transport over $`K`): the
+Laurent identity of {bpref "DU-reciprocal-charpoly"}[],
+$`P_i(1/(q^dT)) \cdot (-q^dT)^{b_i} = D_i\, P_{2d-i}(T)`, has both
+sides in $`\ZZ[T, T^{-1}]` once {bpref "W-integral-coefficients"}[]
+puts $`P_i, P_{2d-i} \in \ZZ[t]` — note $`D_i = \det F_i =
+(-1)^{b_i} \cdot (\text{leading coefficient of } P_i) \in \ZZ` — and
+it holds in $`K[T, T^{-1}]`, hence in $`\ZZ[T, T^{-1}]` by
+injectivity. Mapping to $`\CC[T, T^{-1}]` and comparing root
+multisets: the roots of $`P_{2d-i}` in $`\CC` are exactly the images
+of the roots of $`P_i` under $`z \mapsto (q^d z)^{-1}`, with
+multiplicity — which is the predicate {bpref "Z-fe-predicate"}[]. (No
+eigenvalue multisets over $`K` and no transfer of multiplicities
+between $`K` and $`\CC` are needed: the comparison happens entirely
+inside $`\CC[T,T^{-1}]` for integer Laurent polynomials.) Form 2 is
+the abstract graded functional equation ({bpref "DU-graded-fe"}[])
+applied to the factorization ({bpref "W-factorization"}[]), with the
+sign bookkeeping of {bpref "DU-sign-analysis"}[]; the resulting
+identity holds in $`K(t)`, both sides lie in the subfield $`\QQ(t)`
+(by {bpref "W-rationality-reduced"}[]), and
+$`\QQ(t) \to K(t)` is injective, so it descends to $`\QQ`.
 :::
 
 :::lemma_ "W-fe-uniqueness" (parent := "grp-final") (uses := "Z-zeta-series") (tags := "elementary-missing") (effort := "small")
@@ -258,17 +267,21 @@ Rationality of the factors: each $`P_{F_i}` lies in $`\QQ[t]`
 (coefficientwise, under $`\QQ \subseteq K`).
 :::
 
-:::proof "W-rational-coefficients" (uses := "WT-aut-stability, LA-aut-fixed-field, COH-purity-input")
+:::proof "W-rational-coefficients" (uses := "WT-aut-stability, LA-aut-fixed-field, COH-purity-input, W-no-cancellation, LA-charpoly-rev-props")
 Let $`\sigma` be any ring automorphism of $`K`; it fixes $`\QQ`
 pointwise. $`\sigma` transports the factorization
 $`A = \prod_\alpha (1 - \alpha t)^{m_\alpha}` of the integer polynomial
-$`A` in $`K[t]`, so it permutes the reciprocal-root multiset of $`A`
+$`A` in $`K[t]` ({bpref "LA-charpoly-rev-props"}[](iv) supplies the
+splitting), so it permutes the reciprocal-root multiset of $`A`
 (with multiplicities), and likewise for $`B`. By Aut-stability of
 universal weights ({bpref "WT-aut-stability"}[]) and universal purity
 ({bpref "COH-purity-input"}[]), $`\sigma` preserves each weight class;
-by {bpref "W-no-cancellation"}[] the reciprocal-root multiset of
-$`P_{F_i}` is exactly the weight-$`i` part of the multiset of $`A` (odd
-$`i`) or $`B` (even $`i`). Hence $`\sigma` fixes that sub-multiset, and
+by {bpref "W-no-cancellation"}[] the root multisets of the
+$`P_{F_i}` for distinct $`i` of equal parity are disjoint, so the
+multiset of $`A` is their disjoint union and the reciprocal-root
+multiset of $`P_{F_i}` is exactly the weight-$`i` part of the multiset
+of $`A` (odd $`i`) or $`B` (even $`i`) — including multiplicities.
+Hence $`\sigma` fixes that sub-multiset, and
 therefore fixes each coefficient of $`P_{F_i}` (elementary symmetric
 functions of a $`\sigma`-stable multiset). Since this holds for *every*
 automorphism, the coefficients lie in the fixed field of

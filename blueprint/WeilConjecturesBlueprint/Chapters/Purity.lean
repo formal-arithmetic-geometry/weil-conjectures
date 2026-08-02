@@ -162,7 +162,7 @@ restricting $`Y_0` to a dense open and to its (lower-dimensional)
 closed complement separately.
 :::
 
-:::proof "PUR-devissage-target" (uses := "WT-filtration-bound")
+:::proof "PUR-devissage-target" (uses := "WT-filtration-bound, SIX-localization-triangle")
 Punctual purity is a stalkwise notion and the stalk of
 $`R^i f_!\mathcal{F}` at $`\bar y` is $`H^i_c` of the fiber
 ({bpref "SIX-base-change"}[](i)), which only sees the base change of
@@ -308,13 +308,20 @@ upper bound $`\leq -w + (2 - i)` for the dual gives a lower bound
 $`\geq w + i` — purity follows from upper bounds alone.
 (iii) *Irreducible reduction* is {bpref "PUR-irreducible-reduction"}[].
 (iv) *Geometrically constant case* is {bpref "PUR-constant-case"}[].
-(v) *Irreducible non-constant case*: the localization sequence for
-$`\mathbb{A}^1 \subseteq \mathbb{P}^1` reduces the upper bound for
-$`H^1(\mathbb{P}^1, j_* L)` to the affine-line estimate
-{bpref "PUR-affine-line"}[] (the $`H^1` injects into
-$`H^1_c(\mathbb{A}^1, j_* L)` up to boundary terms controlled by
-{bpref "MON-boundary-m1"}[]/{bpref "MON-r1j-m2"}[]); $`H^0` and
-$`H^2` are invariants resp. coinvariants, handled directly.
+(v) *Irreducible non-constant case*: first apply
+{bpref "PUR-move-infinity"}[] so that (after a harmless base
+extension and coordinate change) $`L` is unramified at $`\infty`.
+Writing $`k \colon \mathbb{A}^1 \hookrightarrow \mathbb{P}^1` and
+$`\mathcal{G} = j_* L` on $`\mathbb{P}^1`, the localization sequence
+({bpref "SIX-localization-triangle"}[]) for
+$`0 \to k_!(\mathcal{G}|_{\mathbb{A}^1}) \to \mathcal{G} \to
+i_{\infty *}\mathcal{G}_{\infty} \to 0` gives (audited direction!)
+that $`H^1(\mathbb{P}^1, \mathcal{G})` is a *quotient* of
+$`H^1_c(\mathbb{A}^1, j_* L)` (the next term is $`H^1` of a
+skyscraper, which vanishes); upper weight bounds pass to quotients,
+so {bpref "PUR-affine-line"}[] gives weights $`\leq w + 1`.
+$`H^0` and $`H^2` are invariants resp. coinvariants, handled
+directly.
 :::
 
 :::lemma_ "PUR-irreducible-reduction" (parent := "grp-purity") (uses := "WT-sheaf-punctual, SIX-j-star-curves") (tags := "elementary-missing") (effort := "small")
@@ -364,7 +371,39 @@ everything to $`\mathbb{P}^1`). Tensoring multiplies weights
 the projection formula does all the work.
 :::
 
+Audited proof-dependency corrections in this section: the target
+localization devissage also consumes the localization triangle, and
+the affine-line estimate consumes the middle-extension node — the
+edges below reflect this.
+
 # The Fourier transform and the affine-line estimate
+
+:::lemma_ "PUR-move-infinity" (parent := "grp-purity") (uses := "WT-sheaf-punctual") (tags := "elementary-missing") (effort := "small")
+Reduction to "unramified at $`\infty`" (exposed by the audit): let
+$`L_0` be lisse punctually $`\iota`-pure on a dense open
+$`U_0 \subseteq \mathbb{P}^1_{\Fq}`. After a finite extension
+$`\Fq \to \Fqn{m}` (harmless by {bpref "WT-base-extension"}[]) there
+is a rational point $`u \in U(\Fqn{m})`, and an automorphism of
+$`\mathbb{P}^1` over $`\Fqn{m}` moves $`u` to $`\infty`. After this
+change of coordinates, $`\infty` lies in the lisse locus of $`L`, so
+$`L` is unramified at $`\infty` — the hypothesis of
+{bpref "PUR-affine-line"}[]. Without this step the affine-line
+estimate would only cover middle extensions with an unramified point
+at $`\infty`, and a general middle extension on $`\mathbb{P}^1` has
+no reason to present itself in that coordinate.
+:::
+
+:::proof "PUR-move-infinity" (uses := "WT-base-extension")
+$`U_0` is a nonempty open of $`\mathbb{P}^1`, hence has closed
+points; a closed point of degree $`m` becomes rational after the
+extension of degree $`m`. $`\operatorname{PGL}_2` acts transitively
+on rational points. Punctual purity and all weight bounds are
+invariant under the base extension and under coordinate
+automorphisms ({bpref "WT-base-extension"}[]; automorphisms are
+isomorphisms of the situation). Elementary once stated — the audit
+point is that it must be *stated*, because it silently changes
+$`(q, F)` to $`(q^m, F^m)`.
+:::
 
 :::theorem "PUR-affine-line" (parent := "grp-purity") (uses := "WT-sheaf-punctual, SIX-artin-schreier") (tags := "elementary-missing") (effort := "large") (priority := "high")
 Affine-line estimate (the heart): let
@@ -375,21 +414,22 @@ unramified at $`\infty`. Then $`H^1_c(\mathbb{A}^1, j_* L)` is
 $`\iota`-mixed of weights $`\leq w + 1`.
 :::
 
-:::proof "PUR-affine-line" (uses := "PUR-fourier-def, PUR-fourier-concentration, LFT-stationary-phase, PUR-real-envelope, PUR-real-purity, MON-boundary-m1, MON-jordan-purity, MON-stationary-bookkeeping")
+:::proof "PUR-affine-line" (uses := "PUR-fourier-def, PUR-fourier-concentration, PUR-ft-middle-extension, LFT-stationary-phase, PUR-real-envelope, PUR-reality-transport, PUR-real-purity, MON-boundary-m1, MON-jordan-purity, MON-stationary-bookkeeping")
 The Fourier argument, following the lecture notes step by step.
 *Admissibility*: $`j_* L` has no Artin–Schreier subquotient
 $`\mathcal{L}_{\psi(a\cdot)}`: for $`a = 0` this would contradict
 non-constancy, for $`a \neq 0` unramifiedness at $`\infty` (Swan
 conductors differ). *Transform*: by the concentration lemma
 ({bpref "PUR-fourier-concentration"}[]) the Fourier transform of
-$`j_* L` is (up to shift) a single sheaf; by local Fourier theory
-({bpref "LFT-stationary-phase"}[]) it is a middle extension
-$`j'_* L'` on the dual line with $`L'` irreducible lisse on
-$`\mathbb{A}^1{}' \setminus \{0'\}`, and there is a
+$`j_* L` is (up to shift) a single sheaf; by middle-extension
+preservation ({bpref "PUR-ft-middle-extension"}[]) that sheaf is the
+middle extension $`j'_* L'` of an irreducible lisse $`L'`; local
+Fourier theory ({bpref "LFT-stationary-phase"}[]) pins its lisse
+locus to $`\mathbb{A}^1{}' \setminus \{0'\}` and provides the
 Frobenius-and-inertia-equivariant exact sequence
 $$`0 \to H^1_c(\mathbb{A}^1, j_* L) \to L'_{\bar\eta_{0'}} \to L_\infty(-1) \to 0`
-whose first term is exactly the inertia invariants of the middle term,
-and whose quotient carries a length-two unipotent Jordan-block
+whose first term is exactly the inertia invariants of the middle
+term, and whose quotient carries a length-two unipotent Jordan-block
 structure. *Purity of the transform*: the real envelope
 ({bpref "PUR-real-envelope"}[]) embeds $`L` in an $`\iota`-real sheaf
 whose transform is again $`\iota`-real
@@ -418,15 +458,19 @@ $`\operatorname{FT}_\psi(K)_{\bar a} \cong
 R\Gamma_c(\mathbb{A}^1, K \otimes \mathcal{L}_{\psi(a\,\cdot)})[1]`.
 :::
 
-:::theorem "PUR-fourier-concentration" (parent := "grp-purity") (uses := "PUR-fourier-def, SIX-affine-curve-bounds") (tags := "elementary-missing") (effort := "medium")
+:::theorem "PUR-fourier-concentration" (parent := "grp-purity") (uses := "PUR-fourier-def") (tags := "elementary-missing") (effort := "medium")
 Concentration lemma (perversity-free): if $`L_0` is as in
 {bpref "PUR-affine-line"}[] (irreducible, not geometrically constant,
 unramified at $`\infty`, extended by $`j_*`), then for every
 $`a`, $`H^i_c(\mathbb{A}^1, j_* L \otimes \mathcal{L}_{\psi(a\cdot)})`
 vanishes for $`i \neq 1`; hence $`\operatorname{FT}_\psi(j_* L [1])`
-is a single sheaf in degree $`-1`+1, i.e. the transform of the shifted
-sheaf is a plain sheaf. *This replaces the perverse t-structure on
-the critical path.*
+is a single sheaf placed in degree $`0` after the shift — the
+transform of the shifted middle extension is a plain sheaf. *Audit
+note*: this lemma alone replaces only the *degree* half of the
+customary perverse statement; the *shape* half (that the resulting
+sheaf is again a middle extension) is the separate node
+{bpref "PUR-ft-middle-extension"}[], which earlier versions of this
+blueprint had concealed inside the local Fourier axiom.
 :::
 
 :::proof "PUR-fourier-concentration" (uses := "SIX-affine-curve-bounds, SIX-artin-schreier")
@@ -441,6 +485,52 @@ $`L` is tame there (unramified even), so the product has no trivial
 quotient; for $`a = 0` irreducibility and non-constancy of $`L` kill
 the coinvariants. All statements are sheaf-level; no perverse
 formalism enters.
+:::
+
+:::theorem "PUR-ft-middle-extension" (parent := "grp-purity") (uses := "PUR-fourier-def, SIX-j-star-curves") (tags := "elementary-missing") (effort := "medium") (priority := "high")
+Middle-extension preservation (exposed by the audit): in the situation
+of {bpref "PUR-affine-line"}[], the sheaf
+$`\mathcal{G}` with $`\operatorname{FT}_\psi(j_* L[1]) =
+\mathcal{G}[1]` (a plain sheaf by
+{bpref "PUR-fourier-concentration"}[]) satisfies: (i) $`\mathcal{G}`
+is lisse on a dense open $`V' \subseteq \mathbb{A}^1{}'`; (ii)
+$`\mathcal{G}` has no nonzero punctual subsheaf; (iii) at every point
+of $`\mathbb{A}^1{}' \setminus V'` the stalk of $`\mathcal{G}` equals
+the inertia invariants of its generic part — i.e.
+$`\mathcal{G} = j'_*(\mathcal{G}|_{V'})` is the middle extension of
+its lisse restriction; and (iv) $`\mathcal{G}|_{V'}` is irreducible as
+a lisse sheaf.
+:::
+
+:::proof "PUR-ft-middle-extension" (uses := "PUR-fourier-inversion, SIX-as-orthogonality, SH-constructible, GEO-finiteness, PUR-fourier-concentration")
+Perversity-free route (Katz-style, via inversion). (i) $`\mathcal{G}`
+is constructible ({bpref "SIX-rf-shriek"}[] constructibility via
+{bpref "GEO-finiteness"}[]), and a constructible sheaf on a curve is
+lisse on a dense open directly from the definition of
+constructibility ({bpref "SH-constructible"}[]). (ii) A punctual
+subsheaf supported at $`a'` would, under the inverse transform
+({bpref "PUR-fourier-inversion"}[]), produce a nonzero map from a
+geometrically constant twist
+$`\mathcal{L}_{\psi(a'\cdot)}(-1)`-type sheaf into $`j_* L` (the
+transform of a skyscraper is a rank-one Artin–Schreier twist —
+computed by {bpref "SIX-as-orthogonality"}[]); irreducibility and the
+admissibility of $`L` (no Artin–Schreier constituent) forbid this.
+(iii) The adjunction map $`\mathcal{G} \to j'_*(\mathcal{G}|_{V'})`
+is injective by (ii) (its kernel is punctual); its cokernel $`Q` is
+punctual, and applying the inverse transform to
+$`0 \to \mathcal{G} \to j'_* (\mathcal{G}|_{V'}) \to Q \to 0` again
+produces an Artin–Schreier-twist quotient of (a twist of) $`j_* L`,
+excluded as in (ii) — so $`Q = 0`. (iv) A proper nonzero lisse
+subsheaf of $`\mathcal{G}|_{V'}` middle-extends to a proper subobject
+whose inverse transform is a proper subobject of $`j_* L[1]`'s
+sheaf-part, contradicting irreducibility of $`L` (sub-middle
+extensions of $`j_* L` correspond to monodromy subrepresentations of
+$`L`). *Why the previous graph concealed this*: the statement had
+been folded into the temporary axiom
+{bpref "LFT-stationary-phase"}[]; splitting it out shows that this
+half of the customary perverse package has an elementary proof from
+inversion and orthogonality, while only the genuinely local analysis
+at $`0'` and $`\infty'` remains deep.
 :::
 
 :::theorem "PUR-fourier-inversion" (parent := "grp-purity") (uses := "PUR-fourier-def") (tags := "infrastructure") (effort := "medium")
