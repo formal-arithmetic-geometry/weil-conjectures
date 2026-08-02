@@ -9,6 +9,7 @@ import WeilConjecturesBlueprint.Chapters.FrobeniusLinearAlgebra
 import WeilConjecturesBlueprint.Chapters.ZetaFunctions
 import WeilConjecturesBlueprint.Chapters.TraceFormula
 import WeilConjecturesBlueprint.Chapters.Duality
+import WeilConjecturesBlueprint.Chapters.AbstractCohomology
 import WeilConjecturesBlueprint.Chapters.Weights
 import WeilConjecturesBlueprint.Chapters.Purity
 import WeilConjecturesBlueprint.Chapters.EtaleCohomology
@@ -42,6 +43,8 @@ realization (Version III).
 {include 0 WeilConjecturesBlueprint.Chapters.TraceFormula}
 
 {include 0 WeilConjecturesBlueprint.Chapters.Duality}
+
+{include 0 WeilConjecturesBlueprint.Chapters.AbstractCohomology}
 
 {include 0 WeilConjecturesBlueprint.Chapters.Weights}
 
