@@ -322,7 +322,7 @@ theorem isOpenLocalization_iff_mono [J.Subcanonical] (f : V ⟶ U) :
     (_root_.CategoryTheory.yoneda.map g₁)
   have nat₂ := (sheafificationAdjunction J (Type v)).unit.naturality
     (_root_.CategoryTheory.yoneda.map g₂)
-  simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map,
+  simp only [Functor.id_obj, Functor.id_map, Functor.comp_map,
     sheafificationAdjunction_unit_app] at nat₁ nat₂
   apply _root_.CategoryTheory.yoneda.map_injective
   have hM := congrArg (fun q => (sheafToPresheaf J (Type v)).map q) e''
