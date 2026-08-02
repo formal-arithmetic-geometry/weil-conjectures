@@ -4,8 +4,8 @@ import WeilConjectures.Convergence
 import WeilConjectures.EulerProduct
 import WeilConjectures.EulerProductAux
 import WeilConjectures.Evaluation
-import WeilConjectures.NagataCompactification.Defs
-import WeilConjectures.NagataCompactification.NagataCompactification
+import WeilConjectures.Compactification.Defs
+import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.PointCount
 import WeilConjectures.SpecialValues
 import WeilConjectures.Statement

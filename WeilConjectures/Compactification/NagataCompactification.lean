@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.NagataCompactification.Defs
+public import WeilConjectures.Compactification.Defs
 
 /-!
 
