@@ -1,0 +1,143 @@
+/-
+Copyright (c) 2026 Christian Merten. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Christian Merten
+-/
+module
+
+public import Mathlib
+
+/-!
+
+# Compactifications of morphisms of schemes
+
+A compactification of a morphism of schemes `f : X ⟶ Y` is a factorization `f = i ≫ g`
+where `g : Z ⟶ Y` is proper and `i : X ⟶ Z` is a dominant open immersion. We record
+the data of a compactification of `f` in the class
+`AlgebraicGeometry.Compactification f`.
+
+We derive the properties of the morphisms involved in a compactification:
+
+- `Compactification.isSeparated`: `f` is separated;
+- `Compactification.locallyOfFiniteType`: `f` is locally of finite type;
+- `Compactification.quasiCompact_openImmersion_iff`: `i` is quasi-compact if and only
+  if `f` is;
+- `Compactification.denseRange`: the image of `X` in `Z` is dense;
+- `Compactification.ofIsProper`: a proper morphism is a compactification of itself.
+
+Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
+`Nonempty (Compactification f)`. Nagata's compactification theorem asserts
+`HasCompactification f` whenever `f` is separated and of finite type (and `Y` is
+quasi-compact and quasi-separated). Any `f` satisfying `HasCompactification f` is
+separated and locally of finite type; these are instances.
+
+-/
+
+public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+/-- The data of a compactification of `f : X ⟶ Y`: a scheme `Z` together with a proper
+morphism `g : Z ⟶ Y` and a dominant open immersion `i : X ⟶ Z` such that `f = i ≫ g`. -/
+structure Compactification {X Y : Scheme.{u}} (f : X ⟶ Y) where
+  /-- The scheme in which `X` is compactified. -/
+  Z : Scheme.{u}
+  /-- The structure morphism of the compactification, which is proper. -/
+  g : Z ⟶ Y
+  /-- The dominant open immersion of `X` into the compactification. -/
+  i : X ⟶ Z
+  comm : f = i ≫ g
+  isProper : IsProper g
+  isOpenImmersion : IsOpenImmersion i
+  isDominant : IsDominant i
+
+attribute [instance] Compactification.isProper Compactification.isOpenImmersion
+  Compactification.isDominant
+
+namespace Compactification
+
+variable {X Y : Scheme.{u}}
+
+/-- A proper morphism is a compactification of itself. -/
+def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
+  Z := X
+  g := f
+  i := 𝟙 X
+  comm := (Category.id_comp f).symm
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+  isDominant := inferInstance
+
+variable {f : X ⟶ Y} (c : Compactification f)
+include c
+
+/-- The image of `X` in a compactification is dense. -/
+theorem denseRange : DenseRange c.i.base :=
+  c.isDominant.denseRange
+
+/-- A morphism admitting a compactification is separated. -/
+theorem isSeparated : IsSeparated f := by
+  rw [c.comm]
+  infer_instance
+
+/-- A morphism admitting a compactification is locally of finite type. -/
+theorem locallyOfFiniteType : LocallyOfFiniteType f := by
+  rw [c.comm]
+  infer_instance
+
+/-- If the open immersion into a compactification is quasi-compact, the compactified
+morphism is quasi-compact. -/
+theorem quasiCompact (hi : QuasiCompact c.i) : QuasiCompact f := by
+  rw [c.comm]
+  infer_instance
+
+/-- The open immersion into a compactification of a quasi-compact morphism is
+quasi-compact. -/
+theorem quasiCompact_openImmersion (hf : QuasiCompact f) : QuasiCompact c.i := by
+  have : QuasiCompact (c.i ≫ c.g) := c.comm ▸ hf
+  exact .of_comp c.i c.g
+
+/-- The open immersion into a compactification is quasi-compact if and only if the
+compactified morphism is. -/
+theorem quasiCompact_openImmersion_iff : QuasiCompact c.i ↔ QuasiCompact f :=
+  ⟨c.quasiCompact, c.quasiCompact_openImmersion⟩
+
+end Compactification
+
+variable {X Y : Scheme.{u}}
+
+/-- A morphism `f : X ⟶ Y` has a compactification if it factors as a dominant open
+immersion followed by a proper morphism. -/
+class HasCompactification (f : X ⟶ Y) : Prop where
+  compactification : Nonempty (Compactification f)
+
+attribute [instance low] HasCompactification.compactification
+
+lemma Compactification.hasCompactification {f : X ⟶ Y} (c : Compactification f) :
+    HasCompactification f := ⟨⟨c⟩⟩
+
+namespace HasCompactification
+
+/-- A proper morphism has a compactification, namely itself. -/
+instance (priority := 100) of_isProper (f : X ⟶ Y) [IsProper f] : HasCompactification f :=
+  ⟨⟨.ofIsProper f⟩⟩
+
+variable (f : X ⟶ Y) [hf : HasCompactification f]
+
+/-- A morphism admitting a compactification is separated. -/
+instance isSeparated : IsSeparated f := by
+  obtain ⟨c⟩ := hf.compactification
+  exact c.isSeparated
+
+/-- A morphism admitting a compactification is locally of finite type. -/
+instance locallyOfFiniteType : LocallyOfFiniteType f := by
+  obtain ⟨c⟩ := hf.compactification
+  exact c.locallyOfFiniteType
+
+end HasCompactification
+
+end AlgebraicGeometry
