@@ -233,11 +233,14 @@ variable (A : Type u') [Category.{v'} A]
 variable {V U : C} (f : V ⟶ U)
 
 set_option synthInstance.maxHeartbeats 80000 in
+-- The instance search follows a long chain (`HasColimitsOfSize` → colimits over comma
+-- categories → `HasPointwiseLeftKanExtension`) that slightly exceeds the default limit.
 example [HasColimitsOfSize.{v, max u v} A] (P : (Over V)ᵒᵖ ⥤ A) :
     (Over.map f).op.HasPointwiseLeftKanExtension P :=
   inferInstance
 
 set_option synthInstance.maxHeartbeats 80000 in
+-- Same instance chain as in the previous example.
 noncomputable example [HasColimitsOfSize.{v, max u v} A] [HasWeakSheafify (J.over U) A] :
     Sheaf (J.over V) A ⥤ Sheaf (J.over U) A :=
   J.localizationLowerShriek A f
