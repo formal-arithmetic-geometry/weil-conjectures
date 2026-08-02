@@ -9,7 +9,7 @@ public import WeilConjectures.NagataCompactification.Defs
 
 /-!
 
-# Main Statements of Nageta Compactification
+# Main Statements of Nagata Compactification
 
 -/
 
@@ -23,10 +23,12 @@ namespace AlgebraicGeometry
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-def NagataCompactification [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+def NagataCompactification [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [CompactSpace Y] [QuasiSeparatedSpace Y] :
     Compactification f := sorry
 
-instance [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : HasCompactification f :=
+instance [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [CompactSpace Y] [QuasiSeparatedSpace Y] : HasCompactification f :=
   (NagataCompactification f).hasCompactification
 
 end AlgebraicGeometry
