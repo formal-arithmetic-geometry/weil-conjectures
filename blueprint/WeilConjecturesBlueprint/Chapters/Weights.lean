@@ -10,65 +10,167 @@ open Informal
 
 #doc (Manual) "Weights" =>
 
-Weight predicates on Frobenius modules are the vocabulary in which purity is
-consumed by the final assembly. They are stated for an arbitrary ring
-homomorphism $`\iota \colon K \to \CC` and quantified over *all* such
-homomorphisms in the universal form; no topology on $`K` is ever used. The
-squared normalization $`\|\iota\alpha\|^2 = q^w` avoids square roots and
-half-integer exponents throughout.
+Weight predicates at two levels. At the *module* level (used by the final
+assembly) weights are eigenvalue bounds for a single Frobenius module —
+several of these nodes are already formalized and sorry-free. At the
+*sheaf* level (used by the purity branch) mixedness is a filtration
+condition on Weil sheaves, with punctual purity fiber by fiber. The
+comparison lemma and the filtration weight bound (the spectral-sequence
+surrogate) connect the two levels.
 
-:::group "group:weights"
-Purity and mixedness predicates for Frobenius modules, and the weight
-separation arguments used in the no-cancellation step.
+:::group "grp-weights"
+Purity and mixedness predicates for Frobenius modules and Weil sheaves;
+weight separation, stability, and the filtration bound.
 :::
 
-# Purity predicates
+# Module-level predicates
 
-:::definition "def:pure-weight" (parent := "group:weights") (uses := "def:frobenius-eigenvalue") (lean := "Weil.IsPureWeight")
-Let $`(V, f)` be a Frobenius module over $`K`, let
-$`\iota \colon K \to \CC` be a ring homomorphism, $`q \in \mathbb{N}` and
-$`w \in \ZZ`. Then $`(V, f)` is *$`\iota`-pure of weight $`w`* (relative to
-$`q`) if every eigenvalue $`\alpha` of $`f` satisfies
-$$`\|\iota \alpha\|^2 = q^{w}.`
-There are companion predicates *mixed of weight $`\leq w`* and *mixed of
-weight $`\geq w`*, defined by the corresponding eigenvalue bounds. At the
-module level mixedness is an eigenvalue bound, not a filtration; over an
-algebraically closed field the two agree, and only the sheaf level needs
-filtrations.
+:::definition "WT-pure" (parent := "grp-weights") (uses := "LA-eigenvalue") (lean := "Weil.IsPureWeight") (tags := "existing-project")
+$`\iota`-purity: for a ring homomorphism $`\iota \colon K \to \CC`,
+$`q \in \mathbb{N}`, $`w \in \ZZ`, the Frobenius module $`(V, f)` is
+*$`\iota`-pure of weight $`w`* if every eigenvalue $`\alpha` of $`f`
+satisfies $`\|\iota\alpha\|^2 = q^w` (squared convention — no square
+roots). Formalized as `Weil.IsPureWeight`, sorry-free.
 :::
 
-:::definition "def:universal-purity" (parent := "group:weights") (uses := "def:pure-weight") (lean := "Weil.IsUnivPureWeight")
-$`(V, f)` is *universally pure of weight $`w`* if it is $`\iota`-pure of
-weight $`w` for *every* ring homomorphism $`\iota \colon K \to \CC`. This
-universal quantifier is essential: the Galois-stability arguments that make
-the polynomials $`P_i` rational, and the conversion of purity into a
-statement about all complex roots of integer polynomials, use exactly the
-freedom to move $`\iota`. A single embedding would not suffice.
+:::definition "WT-mixed" (parent := "grp-weights") (uses := "WT-pure") (lean := "Weil.IsMixedLE") (tags := "existing-project")
+Mixedness bounds: $`(V, f)` is *mixed of weight $`\leq w`*
+(`Weil.IsMixedLE`: every eigenvalue has $`\|\iota\alpha\|^2 \leq q^w`)
+resp. $`\geq w` (`Weil.IsMixedGE`), with monotonicity in $`w`
+(`IsMixedLE.mono`, sorry-free) and the equivalence "pure ⟺ mixed
+$`\leq w` and $`\geq w`". At module level mixedness is an *eigenvalue
+bound*, not a filtration; over algebraically closed $`K` the two agree
+({bpref "WT-module-filtration"}[]).
 :::
 
-# Weight separation
-
-:::lemma_ "lem:weight-separation" (parent := "group:weights") (uses := "def:pure-weight") (lean := "Weil.IsPureWeight.not_isEigenvalue_of_ne")
-Let $`q \geq 2`. If $`(V, f)` is $`\iota`-pure of weight $`w`, $`(W, g)` is
-$`\iota`-pure of weight $`w'`, and $`w \neq w'`, then no eigenvalue of $`f`
-is an eigenvalue of $`g`. In particular a nonzero Frobenius module is pure
-of at most one weight.
+:::definition "WT-universal" (parent := "grp-weights") (uses := "WT-pure") (lean := "Weil.IsUnivPureWeight") (tags := "existing-project")
+Universal purity: pure of weight $`w` for *every* ring homomorphism
+$`\iota \colon K \to \CC` (`Weil.IsUnivPureWeight`, sorry-free). The
+universal quantifier is what makes weight classes stable under all
+automorphisms of $`K` ({bpref "WT-aut-stability"}[]) — a single
+$`\iota` would not suffice for the descent pipeline.
 :::
 
-:::proof "lem:weight-separation"
-If $`\alpha` were a common eigenvalue then
-$`q^{w} = \|\iota\alpha\|^2 = q^{w'}`, and
-$`n \mapsto q^n` is injective on $`\ZZ` for $`q \geq 2` (strict
-monotonicity of integer powers of a real number $`> 1`). This lemma is
-formalized and sorry-free; it is the kernel of the *no-cancellation*
-argument: for $`i \neq j` the factors $`P_i` and $`P_j` share no
-reciprocal root, so the odd and even parity products are coprime.
+:::lemma_ "WT-separation" (parent := "grp-weights") (uses := "WT-pure") (lean := "Weil.IsPureWeight.not_isEigenvalue_of_ne") (tags := "existing-project")
+Weight separation: for $`q \geq 2` and $`w \neq w'`, an
+$`\iota`-pure module of weight $`w` and one of weight $`w'` share no
+eigenvalue; a nonzero module is pure of at most one weight
+(`IsPureWeight.weight_eq`, `IsUnivPureWeight.weight_eq`). Formalized,
+sorry-free.
 :::
 
-Future nodes of this chapter: stability of universal weights under
-$`\operatorname{Aut}(K/\QQ)`, the fixed field of the automorphism group of
-an algebraically closed characteristic-$`0` field being $`\QQ`, extension of
-complex embeddings from subfields (under the cardinality bound
-$`\#K \leq 2^{\aleph_0}`), the finite-filtration weight bound that replaces
-every spectral-sequence argument, and the Weil-polynomial bridge between
-eigenvalue purity and complex root moduli.
+:::proof "WT-separation"
+A common eigenvalue would give $`q^w = \|\iota\alpha\|^2 = q^{w'}`,
+and $`n \mapsto (q : \RR)^n` is injective on $`\ZZ` for $`q \geq 2`
+(strict monotonicity of `zpow` for base $`> 1`). Already kernel-checked
+in the repository; consumers: {bpref "W-no-cancellation"}[] and the
+weight-gap exactness trick {bpref "PUR-irreducible-reduction"}[].
+:::
+
+:::lemma_ "WT-aut-stability" (parent := "grp-weights") (uses := "WT-universal") (tags := "elementary-missing") (effort := "small")
+Automorphism stability: if $`\sigma` is a ring automorphism of $`K` and
+$`\alpha \in K` is universally pure of weight $`w` (as an eigenvalue —
+equivalently the one-dimensional module $`(K, \alpha)` is), then
+$`\sigma\alpha` is universally pure of weight $`w`; and no
+$`\alpha \neq 0` is universally pure of two distinct weights.
+:::
+
+:::proof "WT-aut-stability"
+For $`\iota \colon K \to \CC`, the composite $`\iota \circ \sigma` is
+again a ring homomorphism $`K \to \CC`, so
+$`\|\iota(\sigma\alpha)\|^2 = \|(\iota\sigma)(\alpha)\|^2 = q^w` — the
+universal quantifier absorbs the automorphism. Uniqueness of the weight
+is {bpref "WT-separation"}[] applied at any single $`\iota`
+(existence by {bpref "LA-embedding-extension"}[]). Consumer:
+{bpref "W-rational-coefficients"}[].
+:::
+
+:::lemma_ "WT-module-filtration" (parent := "grp-weights") (uses := "WT-mixed") (tags := "elementary-missing") (effort := "small")
+Module-level comparison: over algebraically closed $`K`, $`(V, f)` is
+mixed of weight $`\leq w` (eigenvalue bound) iff it admits a finite
+$`f`-stable filtration whose graded pieces are $`\iota`-pure of weights
+$`\leq w`. (One direction extracts eigenvectors repeatedly; the other
+is {bpref "WT-filtration-bound"}[].) This is the bridge between the
+module predicates and the sheaf-level filtration definition.
+:::
+
+:::proof "WT-module-filtration" (uses := "LA-eigenvalue-exists, LA-charpoly-rev-mult")
+Given the bound, build a full flag: pick an eigenvector
+({bpref "LA-eigenvalue-exists"}[]), quotient, recurse — each graded
+piece is one-dimensional, pure of the weight of its eigenvalue, all
+$`\leq w`. Conversely a filtration with mixed-$`\leq w` pieces gives
+the eigenvalue bound because the eigenvalue multiset of $`f` is the
+union over graded pieces ({bpref "LA-charpoly-rev-mult"}[]).
+:::
+
+:::lemma_ "WT-filtration-bound" (parent := "grp-weights") (uses := "WT-mixed") (tags := "elementary-missing") (effort := "small") (priority := "high")
+Filtration weight bound (the spectral-sequence surrogate): if a
+Frobenius module $`H` has a finite $`F`-stable filtration whose graded
+pieces are subquotients of modules that are mixed of weights
+$`\leq w`, then $`H` is mixed of weights $`\leq w`. Likewise for
+$`\geq` and for purity ranges.
+:::
+
+:::proof "WT-filtration-bound" (uses := "LA-charpoly-rev-mult")
+Eigenvalues of a filtered endomorphism form the union (with
+multiplicity) of the eigenvalues on the graded pieces, and eigenvalues
+of sub- or quotient modules inject into those of the ambient module —
+both by {bpref "LA-charpoly-rev-mult"}[]. Chain the two facts. *Role:*
+this three-line lemma is what every "Leray spectral sequence" in the
+lecture notes compiles to; combined with
+{bpref "SIX-rf-composition"}[] it eliminates spectral sequences from
+the entire project.
+:::
+
+:::lemma_ "WT-twist-shift" (parent := "grp-weights") (uses := "WT-pure") (tags := "elementary-missing") (effort := "small")
+Weight arithmetic: if $`(V, f)` is $`\iota`-pure of weight $`w` then
+the Tate twist $`V(m)` (Frobenius $`q^{-m} f`) is pure of weight
+$`w - 2m`; duals have weight $`-w`; tensor products of pure modules add
+weights; and the similitude transport of
+{bpref "DU-reciprocal-transport"}[] sends weight-$`w` modules to
+weight-$`(2d - w)` modules (eigenvalues $`q^d/\alpha`).
+:::
+
+:::proof "WT-twist-shift"
+Direct from the definitions:
+$`\|\iota(q^{-m}\alpha)\|^2 = q^{-2m}\|\iota\alpha\|^2`;
+eigenvalues of the dual are inverses; eigenvalues of a tensor product
+of triangularizable operators are products; and
+$`\|\iota(q^d/\alpha)\|^2 = q^{2d}/q^w`. Consumers: every step of the
+purity bookkeeping, in particular {bpref "PUR-duality-squeeze"}[] and
+{bpref "MON-stationary-bookkeeping"}[].
+:::
+
+# Sheaf-level definitions
+
+:::definition "WT-sheaf-punctual" (parent := "grp-weights") (uses := "SH-weil-sheaf, WT-pure") (tags := "infrastructure") (effort := "small")
+Punctual purity: a Weil sheaf $`\mathcal{F}_0` on $`X_0/\Fq` is
+*punctually $`\iota`-pure of weight $`w`* if for every closed point
+$`x` of $`X_0`, the Frobenius module
+$`(\mathcal{F}_{\bar x}, F_x)` is $`\iota`-pure of weight $`w`
+relative to $`q_x = q^{\deg x}` — note the *local* normalization by
+$`q_x`, which makes the notion invariant under finite extension of the
+base field.
+:::
+
+:::definition "WT-sheaf-mixed" (parent := "grp-weights") (uses := "WT-sheaf-punctual") (tags := "infrastructure") (effort := "small")
+Sheaf-level mixedness: $`\mathcal{F}_0` is *$`\iota`-mixed of weights
+$`\leq w`* if it admits a finite filtration by Weil subsheaves whose
+graded pieces are punctually $`\iota`-pure of weights $`\leq w`.
+*Filtration form is essential at sheaf level* (a stalkwise eigenvalue
+bound is not known to globalize and is never used); the module-level
+comparison {bpref "WT-module-filtration"}[] holds only over a point. A
+complex has weights $`\leq w` if $`\mathcal{H}^j` is mixed of weights
+$`\leq w + j` for all $`j`.
+:::
+
+:::definition "WT-iota-real" (parent := "grp-weights") (uses := "SH-weil-sheaf") (tags := "infrastructure") (effort := "small")
+$`\iota`-real sheaves: a lisse Weil sheaf $`\mathcal{G}_0` is
+*$`\iota`-real* if for every closed point $`x`, the polynomial
+$`\iota\bigl(\det(1 - t F_x \mid \mathcal{G}_{\bar x})\bigr)` has real
+coefficients. Stable under direct sums and tensor products; the input
+notion of the real-sheaf purity criterion
+({bpref "PUR-real-purity"}[]) and the reason the whole branch works
+with Weil sheaves ({bpref "PUR-real-envelope"}[] twists by
+non-descending scalars).
+:::
