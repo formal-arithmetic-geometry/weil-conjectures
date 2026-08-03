@@ -1,50 +1,129 @@
 name: Blueprint
 
-# Build the Verso blueprint (blueprint/) and upload the rendered site.
-# Runs only on commits to master, which includes pull requests merged into
-# master. Can also be started manually from the Actions tab.
-
 on:
   push:
     branches:
       - master
+      # Working branch for the blueprint bring-up; drop after merge to master.
+      - yw_new
+  pull_request_target:
+    paths:
+      - 'blueprint/**'
+      - 'WeilConjectures/**'
+      - 'Comparator/**'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+      - '.github/workflows/blueprint.yml'
   workflow_dispatch:
 
+# The deploy jobs push to the `gh-pages` branch
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: ${{ github.repository }}-blueprint-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
+    name: Build blueprint site
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
-      # The Verso packages are built from source; cache them keyed on the
-      # dependency manifest so subsequent runs skip the ~10 minute rebuild.
-      # (The mathlib build cache is fetched by lean-action separately.)
-      - name: Cache Verso packages
+      - name: Install elan
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Restore Lake package cache
+        uses: actions/cache@v4
+        with:
+          path: blueprint/.lake/packages
+          key: ${{ runner.os }}-blueprint-lake-packages-${{ hashFiles('blueprint/lean-toolchain', 'blueprint/lake-manifest.json') }}
+          restore-keys: |
+            ${{ runner.os }}-blueprint-lake-packages-
+
+      - name: Restore Lean build cache
         uses: actions/cache@v4
         with:
           path: |
-            .lake/packages/verso
-            .lake/packages/verso-slides
-            .lake/packages/VersoBlueprint
-            .lake/packages/subverso
-            .lake/packages/MD4Lean
-            .lake/packages/illuminate
-          key: verso-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}
+            blueprint/.lake/build
+            .lake/build
+          key: ${{ runner.os }}-blueprint-lean-build-${{ hashFiles('blueprint/lean-toolchain', 'blueprint/lake-manifest.json', 'blueprint/lakefile.toml', 'blueprint/**/*.lean', 'WeilConjectures/**/*.lean', 'Comparator/**/*.lean') }}
+          restore-keys: |
+            ${{ runner.os }}-blueprint-lean-build-${{ hashFiles('blueprint/lean-toolchain', 'blueprint/lake-manifest.json', 'blueprint/lakefile.toml') }}-
+            ${{ runner.os }}-blueprint-lean-build-
 
-      - name: Build blueprint library
-        uses: leanprover/lean-action@v1
-        with:
-          build-args: "Blueprint"
+      - name: Get Mathlib cache
+        working-directory: blueprint
+        run: lake exe cache get || true
 
-      - name: Render blueprint site
-        run: ./scripts/build_blueprint.sh
+      - name: Build blueprint site
+        run: ./blueprint/scripts/ci-pages.sh
 
-      - name: Upload blueprint site
+      - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
           name: blueprint-site
-          path: _out/site/html-multi
+          path: blueprint/_out/site/html-multi
+
+  deploy:
+    name: Deploy to GitHub Pages (/blueprint)
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    # Serialize all jobs that push to gh-pages (across workflows) to avoid
+    # racing deployments.
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: blueprint-site
+          path: _site
+
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _site
+          branch: gh-pages
+          target-folder: blueprint
+          force: false
+          commit-message: 'deploy blueprint for ${{ github.sha }}'
+
+  deploy-preview:
+    name: Deploy PR preview (/preview/<pr>/blueprint)
+    if: github.event_name == 'pull_request_target'
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: blueprint-site
+          path: _site
+
+      - name: Deploy preview to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _site
+          branch: gh-pages
+          target-folder: preview/${{ github.event.pull_request.number }}/blueprint
+          force: false
+          commit-message: 'deploy blueprint preview for PR #${{ github.event.pull_request.number }} (${{ github.sha }})'
