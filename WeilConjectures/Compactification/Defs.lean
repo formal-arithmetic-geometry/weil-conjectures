@@ -12,7 +12,7 @@ public import Mathlib
 # Compactifications of morphisms of schemes
 
 A compactification of a morphism of schemes `f : X ⟶ Y` is a factorization `f = i ≫ g`
-where `g : Z ⟶ Y` is proper and `i : X ⟶ Z` is a dominant open immersion. We record
+where `g : Z ⟶ Y` is proper and `i : X ⟶ Z` is an open immersion. We record
 the data of a compactification of `f` in the class
 `AlgebraicGeometry.Compactification f`.
 
@@ -22,7 +22,6 @@ We derive the properties of the morphisms involved in a compactification:
 - `Compactification.locallyOfFiniteType`: `f` is locally of finite type;
 - `Compactification.quasiCompact_openImmersion_iff`: `i` is quasi-compact if and only
   if `f` is;
-- `Compactification.denseRange`: the image of `X` in `Z` is dense;
 - `Compactification.ofIsProper`: a proper morphism is a compactification of itself.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
@@ -42,21 +41,19 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The data of a compactification of `f : X ⟶ Y`: a scheme `Z` together with a proper
-morphism `g : Z ⟶ Y` and a dominant open immersion `i : X ⟶ Z` such that `f = i ≫ g`. -/
+morphism `g : Z ⟶ Y` and an open immersion `i : X ⟶ Z` such that `f = i ≫ g`. -/
 structure Compactification {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- The scheme in which `X` is compactified. -/
   Z : Scheme.{u}
   /-- The structure morphism of the compactification, which is proper. -/
   g : Z ⟶ Y
-  /-- The dominant open immersion of `X` into the compactification. -/
+  /-- The open immersion of `X` into the compactification. -/
   i : X ⟶ Z
   comm : f = i ≫ g
   isProper : IsProper g
   isOpenImmersion : IsOpenImmersion i
-  isDominant : IsDominant i
 
 attribute [instance] Compactification.isProper Compactification.isOpenImmersion
-  Compactification.isDominant
 
 namespace Compactification
 
@@ -70,14 +67,9 @@ def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
   comm := (Category.id_comp f).symm
   isProper := inferInstance
   isOpenImmersion := inferInstance
-  isDominant := inferInstance
 
 variable {f : X ⟶ Y} (c : Compactification f)
 include c
-
-/-- The image of `X` in a compactification is dense. -/
-theorem denseRange : DenseRange c.i.base :=
-  c.isDominant.denseRange
 
 /-- A morphism admitting a compactification is separated. -/
 theorem isSeparated : IsSeparated f := by
@@ -110,7 +102,7 @@ end Compactification
 
 variable {X Y : Scheme.{u}}
 
-/-- A morphism `f : X ⟶ Y` has a compactification if it factors as a dominant open
+/-- A morphism `f : X ⟶ Y` has a compactification if it factors as an open
 immersion followed by a proper morphism. -/
 class HasCompactification (f : X ⟶ Y) : Prop where
   compactification : Nonempty (Compactification f)
