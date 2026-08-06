@@ -17,21 +17,23 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
 
 - `F` is *constant* if it is isomorphic to the sheafification of a constant presheaf;
   this is mathlib's `CategoryTheory.Sheaf.IsConstant`.
-- `F` is *locally constant* (`IsLocallyConstantSheaf`) if there is a jointly surjective
-  family of étale maps `Uᵢ ⟶ X` such that the restriction of `F` to each `Uᵢ` is
-  isomorphic to the restriction of a constant sheaf.
-- `F` is *finite locally constant* (`IsFiniteLocallyConstantSheaf`) if moreover the
-  values of the trivializing constant sheaves are finite.
+- `F` is *locally constant* (`IsLocallyConstantSheaf`) if there is an étale cover of `X`
+  (a jointly surjective family of étale maps `Uᵢ ⟶ X`, a cover in
+  `Scheme.etalePrecoverage`) such that the restriction of `F` to each `Uᵢ` is isomorphic
+  to a constant sheaf; the trivializing data is packaged in `LocallyConstantDatum`.
+- `F` is *finite* (`IsFiniteSheaf`) if the stalk of `F` at every geometric point of `X`
+  (`Scheme.pointSmallEtale`) is finite.
+- `F` is *finite locally constant* (`IsFiniteLocallyConstantSheaf`) if it is locally
+  constant and finite.
 - `F` is *constructible* (`IsConstructibleSheaf`) if there is a stratification of `X`
   (`Scheme.Stratification`: a finite family of schemes immersed in `X` with pairwise
   disjoint constructible images covering `X`) such that the pullback of `F` to each
   stratum is finite locally constant.
 
-The last two notions require a notion of finiteness for the values of `F`, so there `A` is
-assumed to be a concrete category and finiteness refers to the underlying type
-`CategoryTheory.ToType`. This covers sheaves of sets (`A = Type u`), of abelian groups
-(`A = Ab`) and of `Λ`-modules (`A = ModuleCat Λ`), the case relevant for the `ℓ`-adic
-formalism, where `Λ` is the finite ring `Λₙ = ℤ/ℓⁿℤ`.
+The notions involving finiteness require `A` to be a concrete category, and finiteness
+refers to the underlying type `CategoryTheory.ToType`. This covers sheaves of sets
+(`A = Type u`), of abelian groups (`A = Ab`) and of `Λ`-modules (`A = ModuleCat Λ`), the
+case relevant for the `ℓ`-adic formalism, where `Λ` is the finite ring `Λₙ = ℤ/ℓⁿℤ`.
 
 To restrict `F` to an étale `U ⟶ X` we use the localized site: `F.over U` is the sheaf
 induced by `F` on the localization of the small étale site at `U`, which is equivalent to
@@ -115,47 +117,86 @@ end PullbackFunctor
 
 section LocallyConstant
 
-variable {A : Type u'} [Category.{v} A] [HasWeakSheafify X.smallEtaleTopology A]
+variable {A : Type u'} [Category.{v} A]
+  [∀ U : X.Etale, HasWeakSheafify (X.smallEtaleTopology.over U) A]
 
-/-- A sheaf `F` on the small étale site of `X` is *constant with value `V` over an étale
-`U ⟶ X`* if the restriction of `F` to the site localized at `U` is isomorphic to the
-restriction of the constant sheaf with value `V`. -/
-def IsConstantSheafOn (F : Sheaf X.smallEtaleTopology A) (V : A) (U : X.Etale) : Prop :=
-  Nonempty (F.over U ≅ ((constantSheaf X.smallEtaleTopology A).obj V).over U)
+/-- The object of the small étale site of `X` given by a member of an étale cover
+of `X`. -/
+abbrev Cover.etalePrecoverageToEtale (𝒰 : Cover.{u} etalePrecoverage X) (i : 𝒰.I₀) : X.Etale :=
+  MorphismProperty.Over.mk ⊤ (𝒰.f i) (𝒰.map_prop i)
 
-/-- A sheaf `F` on the small étale site of `X` is *locally constant* if there is a
-jointly surjective family of étale maps `Uᵢ ⟶ X` such that the restriction of `F` to
-each `Uᵢ` is constant. Applies to sheaves of sets (`A = Type u`), abelian groups
-(`A = Ab`), modules, etc. -/
+/-- The datum of a trivialization of a sheaf `F` on the small étale site of `X`: an étale
+cover of `X` — a jointly surjective family of étale maps, a cover in
+`Scheme.etalePrecoverage` — together with values and isomorphisms of the restriction of
+`F` to the site localized at each member of the cover with the constant sheaf at the
+corresponding value. `F` is locally constant if such a datum exists, see
+`IsLocallyConstantSheaf`. -/
+structure LocallyConstantDatum (F : Sheaf X.smallEtaleTopology A) where
+  /-- The trivializing étale cover. -/
+  cover : Cover.{u} etalePrecoverage X
+  /-- The values of `F` on the members of the cover. -/
+  val : cover.I₀ → A
+  /-- The trivializing isomorphisms. -/
+  iso (i : cover.I₀) : F.over (cover.etalePrecoverageToEtale i) ≅
+    (constantSheaf (X.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) A).obj (val i)
+
+/-- Given a trivializing datum for `F`, the restriction of `F` to the site localized at
+each member of the trivializing cover is constant in the sense of
+`CategoryTheory.Sheaf.IsConstant`. -/
+lemma LocallyConstantDatum.isConstant {F : Sheaf X.smallEtaleTopology A}
+    (D : LocallyConstantDatum F) (i : D.cover.I₀) :
+    (F.over (D.cover.etalePrecoverageToEtale i)).IsConstant
+      (X.smallEtaleTopology.over (D.cover.etalePrecoverageToEtale i)) :=
+  Sheaf.isConstant_of_iso _ (D.iso i)
+
+/-- A sheaf `F` on the small étale site of `X` is *locally constant* if there is an étale
+cover of `X` trivializing `F`, i.e. a `LocallyConstantDatum`. Applies to sheaves of sets
+(`A = Type u`), abelian groups (`A = Ab`), modules, etc. -/
 def IsLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop :=
-  ∃ (ι : Type u) (U : ι → X.Etale) (V : ι → A),
-    (⋃ i, Set.range (U i).hom : Set X) = Set.univ ∧
-    ∀ i, IsConstantSheafOn F (V i) (U i)
+  Nonempty (LocallyConstantDatum F)
 
 end LocallyConstant
+
+section FiniteSheaf
+
+variable {A : Type u'} [Category.{v} A]
+  {FA : A → A → Type*} {CD : A → Type*}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory A FA]
+  [HasColimitsOfSize.{u, u} A]
+
+/-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
+*finite* if the stalk of `F` at every geometric point of `X` is finite. A geometric
+point `Spec Ω ⟶ X`, with `Ω` a separably closed field, induces a point of the small
+étale site (`Scheme.pointSmallEtale`), and the stalk of `F` is its fiber
+`CategoryTheory.GrothendieckTopology.Point.sheafFiber` at this point. -/
+def IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop :=
+  ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+    Finite (ToType ((pointSmallEtale s).sheafFiber.obj F))
+
+end FiniteSheaf
 
 section FiniteLocallyConstant
 
 variable {A : Type u'} [Category.{v} A]
   {FA : A → A → Type*} {CD : A → Type*}
   [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory A FA]
-  [HasWeakSheafify X.smallEtaleTopology A]
+  [∀ U : X.Etale, HasWeakSheafify (X.smallEtaleTopology.over U) A]
+  [HasColimitsOfSize.{u, u} A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
-*finite locally constant* if there is a jointly surjective family of étale maps `Uᵢ ⟶ X`
-trivializing `F` with finite objects as values. For sheaves of sets, equivalently (not
-proved here), `F` is representable by a scheme finite étale over `X`. -/
+*finite locally constant* if it is locally constant and finite. For sheaves of sets,
+equivalently (not proved here), `F` is representable by a scheme finite étale over
+`X`. -/
 def IsFiniteLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop :=
-  ∃ (ι : Type u) (U : ι → X.Etale) (V : ι → A),
-    (⋃ i, Set.range (U i).hom : Set X) = Set.univ ∧
-    (∀ i, Finite (ToType (V i))) ∧
-    ∀ i, IsConstantSheafOn F (V i) (U i)
+  IsLocallyConstantSheaf F ∧ IsFiniteSheaf F
 
 theorem IsFiniteLocallyConstantSheaf.isLocallyConstantSheaf
     {F : Sheaf X.smallEtaleTopology A} (hF : IsFiniteLocallyConstantSheaf F) :
-    IsLocallyConstantSheaf F := by
-  obtain ⟨ι, U, V, hcover, -, htriv⟩ := hF
-  exact ⟨ι, U, V, hcover, htriv⟩
+    IsLocallyConstantSheaf F := hF.1
+
+theorem IsFiniteLocallyConstantSheaf.isFiniteSheaf
+    {F : Sheaf X.smallEtaleTopology A} (hF : IsFiniteLocallyConstantSheaf F) :
+    IsFiniteSheaf F := hF.2
 
 end FiniteLocallyConstant
 
@@ -196,6 +237,7 @@ section Constructible
 variable {A : Type u'} [Category.{v} A]
   {FA : A → A → Type*} {CD : A → Type*}
   [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory A FA]
+  [HasColimitsOfSize.{u, u} A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
 *constructible* if there is a stratification of `X` such that the pullback of `F` to each
@@ -206,12 +248,12 @@ The stratification records a choice of scheme structure on each stratum via the 
 condition does not depend on this choice.
 
 The pullback `Etale.upperStar` needs left Kan extensions along base change by the
-immersions and a sheafification functor for the small étale sites of the strata; both are
-assumed as instance hypotheses inside the quantification. The Kan extensions always exist
-mathematically but are not known to exist with current mathlib (see the module
-implementation notes); the sheafification hypothesis is discharged by mathlib's
-`HasSheafify` instance for `smallEtaleTopology` whenever `A` is a suitable concrete
-category.
+immersions, and stating `IsFiniteLocallyConstantSheaf` needs sheafification for the small
+étale sites of the strata and their localizations; all are assumed as instance hypotheses
+inside the quantification. The Kan extensions always exist mathematically but are not
+known to exist with current mathlib (see the module implementation notes); the
+sheafification hypothesis for `smallEtaleTopology` is discharged by mathlib's
+`HasSheafify` instance whenever `A` is a suitable concrete category.
 
 For `X` quasi-compact and quasi-separated this global definition agrees with the
 affine-local one of [Stacks 03RW]. In the `ℓ`-adic formalism it is applied with
@@ -220,7 +262,8 @@ def IsConstructibleSheaf (F : Sheaf X.smallEtaleTopology A) : Prop :=
   ∃ S : Stratification X, ∀ (i : Fin S.n)
     [∀ P : X.Etaleᵒᵖ ⥤ A,
         (MorphismProperty.Over.pullback @Etale ⊤ (S.immersion i)).op.HasLeftKanExtension P]
-      [HasWeakSheafify (S.domain i).smallEtaleTopology A],
+      [HasWeakSheafify (S.domain i).smallEtaleTopology A]
+      [∀ U : (S.domain i).Etale, HasWeakSheafify ((S.domain i).smallEtaleTopology.over U) A],
         IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj F)
 
 end Constructible
