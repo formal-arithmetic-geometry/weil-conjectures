@@ -10,6 +10,8 @@ public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.DerivedFunctors.Bounded
+public import WeilConjectures.SixFunctors.DerivedFunctors.BoundedConstructible
+public import WeilConjectures.SixFunctors.DerivedFunctors.Constructible
 public import WeilConjectures.SixFunctors.DerivedFunctors.Plus
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
