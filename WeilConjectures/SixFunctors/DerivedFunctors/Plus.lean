@@ -57,36 +57,6 @@ instance Etale.enoughInjectives_sheaf (X : Scheme.{u}) :
     EnoughInjectives (Sheaf X.smallEtaleTopology A) :=
   sorry
 
-section Additive
-
-variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-
-/-- The pushforward `g_*` on étale sheaves with values in an abelian category is additive:
-it acts on morphisms by whiskering, which is compatible with the objectwise addition. -/
-instance Etale.lowerStar_additive : (Etale.lowerStar A g).Additive where
-
-/-- The restriction `j^*` along an open immersion on étale sheaves with values in an
-abelian category is additive: it acts on morphisms by whiskering, which is compatible with
-the objectwise addition. -/
-instance Etale.openImmersionRestriction_additive {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] : (Etale.openImmersionRestriction A j).Additive where
-
-/-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
-abelian category is additive, being left adjoint to the additive restriction `j^*`. -/
-instance Etale.openImmersionLowerShriek_additive {U X : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j] : (Etale.openImmersionLowerShriek A j).Additive :=
-  (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
-
-/-- The lower shriek `f_!` on étale sheaves with values in an abelian category is additive,
-being the composition of the extension by zero along the open immersion of the chosen
-compactification with the pushforward along its proper structure morphism. -/
-instance Etale.lowerShriek_additive {X : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
-    (Etale.lowerShriek A f).Additive := by
-  rw [Etale.lowerShriek_eq]
-  infer_instance
-
-end Additive
-
 section DerivedLowerStar
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)

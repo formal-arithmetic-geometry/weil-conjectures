@@ -205,6 +205,12 @@ noncomputable def Etale.openImmersionRestrictionLowerStarAdjunction :
   GrothendieckTopology.localizationRestrictionLowerStarAdjunction A @Etale @Etale j
     inferInstance
 
+/-- The restriction `j^*` along an open immersion on étale sheaves with values in a
+preadditive category is additive: it acts on morphisms by whiskering, which is compatible
+with the objectwise addition. -/
+instance Etale.openImmersionRestriction_additive [Preadditive A] :
+    (Etale.openImmersionRestriction A j).Additive where
+
 variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 
 /-- The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
@@ -228,6 +234,12 @@ instance : (Etale.openImmersionLowerShriek A j).IsLeftAdjoint :=
 
 instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
   (Etale.openImmersionLowerShriekAdjunction A j).isRightAdjoint
+
+/-- The extension by zero `j_!` along an open immersion on étale sheaves with values in a
+preadditive category is additive, being left adjoint to the additive restriction `j^*`. -/
+instance Etale.openImmersionLowerShriek_additive [Preadditive A] :
+    (Etale.openImmersionLowerShriek A j).Additive :=
+  (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
 abelian category is exact. This is the left exactness half; it preserves finite colimits

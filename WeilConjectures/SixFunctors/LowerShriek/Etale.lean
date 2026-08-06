@@ -85,6 +85,13 @@ lemma Etale.lowerShriek_eq :
         Etale.lowerStar A (HasCompactification.compactification f).g :=
   rfl
 
+/-- The lower shriek `f_!` on étale sheaves with values in a preadditive category is
+additive, being the composition of the extension by zero along the open immersion of the
+chosen compactification with the pushforward along its proper structure morphism. -/
+instance Etale.lowerShriek_additive [Preadditive A] : (Etale.lowerShriek A f).Additive := by
+  rw [Etale.lowerShriek_eq]
+  infer_instance
+
 /-- The lower shriek `f_!` on étale sheaves with values in an abelian category is left
 exact, being the composition of the exact extension by zero along the open immersion of
 the chosen compactification with the left exact pushforward along its proper structure

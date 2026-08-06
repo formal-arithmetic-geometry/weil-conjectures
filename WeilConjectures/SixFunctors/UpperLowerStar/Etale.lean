@@ -155,6 +155,11 @@ lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G 
       φ.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
 
+/-- The pushforward `g_*` on étale sheaves with values in a preadditive category is
+additive: it acts on morphisms by whiskering, which is compatible with the objectwise
+addition. -/
+instance Etale.lowerStar_additive [Preadditive A] : (Etale.lowerStar A g).Additive where
+
 /-- The pushforward `g_*` on étale sheaves with values in an abelian category is left
 exact. -/
 instance Etale.preservesFiniteLimits_lowerStar [Abelian A] :
