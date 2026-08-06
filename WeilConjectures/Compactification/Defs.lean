@@ -29,10 +29,12 @@ Finally, we define the class `AlgebraicGeometry.HasCompactification f`, assertin
 `HasCompactification f` whenever `f` is separated and of finite type (and `Y` is
 quasi-compact and quasi-separated). Any `f` satisfying `HasCompactification f` is
 separated and locally of finite type; these are instances.
+A choice of compactification is extracted from `HasCompactification f` by
+`HasCompactification.compactification f`.
 
 -/
 
-public section
+@[expose] public section
 
 universe u
 
@@ -105,12 +107,19 @@ variable {X Y : Scheme.{u}}
 /-- A morphism `f : X ⟶ Y` has a compactification if it factors as an open
 immersion followed by a proper morphism. -/
 class HasCompactification (f : X ⟶ Y) : Prop where
-  compactification : Nonempty (Compactification f)
+  nonempty_compactification : Nonempty (Compactification f)
 
-attribute [instance low] HasCompactification.compactification
+attribute [instance low] HasCompactification.nonempty_compactification
 
 lemma Compactification.hasCompactification {f : X ⟶ Y} (c : Compactification f) :
     HasCompactification f := ⟨⟨c⟩⟩
+
+/-- A choice of compactification of `f`, extracted from a `HasCompactification f`
+instance using choice. -/
+@[no_expose]
+noncomputable def HasCompactification.compactification (f : X ⟶ Y) [hf : HasCompactification f] :
+    AlgebraicGeometry.Compactification f :=
+  Classical.arbitrary _
 
 namespace HasCompactification
 
@@ -121,14 +130,10 @@ instance (priority := 100) of_isProper (f : X ⟶ Y) [IsProper f] : HasCompactif
 variable (f : X ⟶ Y) [hf : HasCompactification f]
 
 /-- A morphism admitting a compactification is separated. -/
-instance isSeparated : IsSeparated f := by
-  obtain ⟨c⟩ := hf.compactification
-  exact c.isSeparated
+instance isSeparated : IsSeparated f := hf.compactification.isSeparated
 
 /-- A morphism admitting a compactification is locally of finite type. -/
-instance locallyOfFiniteType : LocallyOfFiniteType f := by
-  obtain ⟨c⟩ := hf.compactification
-  exact c.locallyOfFiniteType
+instance locallyOfFiniteType : LocallyOfFiniteType f := hf.compactification.locallyOfFiniteType
 
 end HasCompactification
 
