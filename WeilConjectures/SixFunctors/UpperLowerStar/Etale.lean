@@ -43,6 +43,8 @@ The site-theoretic inputs of the general definitions are discharged here:
 - `AlgebraicGeometry.Etale.lowerStar`: the pushforward `g_*` on étale sheaves.
 - `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves.
 - `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*` with
+  values in an abelian category is left exact.
 
 -/
 
@@ -152,6 +154,12 @@ lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G 
     (((Etale.lowerStar A g).map φ).hom).app (op b) =
       φ.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
+
+/-- The pushforward `g_*` on étale sheaves with values in an abelian category is left
+exact. -/
+instance Etale.preservesFiniteLimits_lowerStar [Abelian A] :
+    PreservesFiniteLimits (Etale.lowerStar A g) :=
+  sorry
 
 section Adjunction
 

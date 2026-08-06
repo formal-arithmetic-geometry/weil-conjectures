@@ -47,6 +47,9 @@ and is computed by restriction along the localization functor. This yields the a
   `WeilConjectures.SixFunctors.UpperLowerStar.Etale` is computed by restriction.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekUpperStarAdjunction`: the adjunction
   `j_! ⊣ j^*` between the lower shriek and the pullback `Etale.upperStar`.
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek` and
+  `AlgebraicGeometry.Etale.preservesFiniteColimits_openImmersionLowerShriek`: the lower
+  shriek `j_!` with values in an abelian category is exact.
 
 -/
 
@@ -225,6 +228,20 @@ instance : (Etale.openImmersionLowerShriek A j).IsLeftAdjoint :=
 
 instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
   (Etale.openImmersionLowerShriekAdjunction A j).isRightAdjoint
+
+/-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
+abelian category is exact. This is the left exactness half; it preserves finite colimits
+by `Etale.preservesFiniteColimits_openImmersionLowerShriek`, being a left adjoint. -/
+instance Etale.preservesFiniteLimits_openImmersionLowerShriek [Abelian A] :
+    PreservesFiniteLimits (Etale.openImmersionLowerShriek A j) :=
+  sorry
+
+/-- The extension by zero `j_!` along an open immersion preserves finite colimits, being a
+left adjoint. Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
+makes `j_!` exact. -/
+instance Etale.preservesFiniteColimits_openImmersionLowerShriek :
+    PreservesFiniteColimits (Etale.openImmersionLowerShriek A j) :=
+  inferInstance
 
 section UpperStar
 

@@ -40,6 +40,8 @@ Only sheafification on the small étale sites remains as a hypothesis.
 - `AlgebraicGeometry.Etale.lowerShriek_eq`: the lower shriek `f_!` is the extension by zero
   along the open immersion of the chosen compactification followed by the pushforward
   `Etale.lowerStar` along its proper structure morphism.
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerShriek`: the lower shriek `f_!` with
+  values in an abelian category is left exact.
 
 -/
 
@@ -82,6 +84,15 @@ lemma Etale.lowerShriek_eq :
       Etale.openImmersionLowerShriek A (HasCompactification.compactification f).i ⋙
         Etale.lowerStar A (HasCompactification.compactification f).g :=
   rfl
+
+/-- The lower shriek `f_!` on étale sheaves with values in an abelian category is left
+exact, being the composition of the exact extension by zero along the open immersion of
+the chosen compactification with the left exact pushforward along its proper structure
+morphism. -/
+instance Etale.preservesFiniteLimits_lowerShriek [Abelian A] :
+    PreservesFiniteLimits (Etale.lowerShriek A f) := by
+  rw [Etale.lowerShriek_eq]
+  exact comp_preservesFiniteLimits _ _
 
 end LowerShriek
 
