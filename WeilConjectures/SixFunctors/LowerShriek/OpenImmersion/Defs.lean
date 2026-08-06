@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.UpperLowerStar
+public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
 
@@ -28,7 +28,7 @@ the restriction functor `j_f^*`.
 - `GrothendieckTopology.localizationRestrictionLowerStarAdjunction`: the adjunction
   `j_f^* ⊣ f_*`, completing the triple `j_{f!} ⊣ j_f^* ⊣ f_*`.
 - `GrothendieckTopology.upperStarIsoLocalizationRestriction`: for `f` satisfying `P` the
-  pullback `f^*` of `WeilConjectures.SixFunctors.UpperLowerStar` is computed by
+  pullback `f^*` of `WeilConjectures.SixFunctors.UpperLowerStar.Defs` is computed by
   restriction, both being left adjoint to `f_*`.
 - `GrothendieckTopology.localizationLowerShriekUpperStarAdjunction`: the adjunction
   `j_{f!} ⊣ f^*`.
@@ -47,7 +47,7 @@ the restriction functor `j_f^*`.
   e.g. as soon as `A` has colimits of the relevant size.
 - `j_f^*` restricts along the localization functor, so it requires `P f`, but it needs
   neither Kan extensions nor sheafification. The pullback `GrothendieckTopology.upperStar`
-  of `WeilConjectures.SixFunctors.UpperLowerStar` is defined for an arbitrary morphism at
+  of `WeilConjectures.SixFunctors.UpperLowerStar.Defs` is defined for an arbitrary morphism at
   the cost of both; the two agree for `f` satisfying `P`, by
   `upperStarIsoLocalizationRestriction`. Consequently
   `localizationLowerShriekUpperStarAdjunction` carries the hypotheses of both

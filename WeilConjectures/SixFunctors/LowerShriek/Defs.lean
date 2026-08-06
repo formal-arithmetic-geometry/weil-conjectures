@@ -7,7 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.Compactification.Defs
-public import WeilConjectures.SixFunctors.UpperLowerStar
+public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 
 /-!
@@ -31,7 +31,7 @@ extension by zero along `i` with the pushforward `GrothendieckTopology.lowerStar
 
 ## Implementation notes
 
-- The pushforward `g_*` of `WeilConjectures.SixFunctors.UpperLowerStar` is defined along
+- The pushforward `g_*` of `WeilConjectures.SixFunctors.UpperLowerStar.Defs` is defined along
   the base change functor, which exists for an *arbitrary* morphism `g` — in contrast to
   the localization functor `MorphismProperty.Over.map ⊤ h` of
   `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs`, which requires `P g`. This
