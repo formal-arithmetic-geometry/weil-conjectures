@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-      # Working branch for the blueprint bring-up; drop after merge to master.
-      - yw_new
   pull_request_target:
     paths:
       - 'blueprint/**'
@@ -35,42 +33,39 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
-      - name: Install elan
-        run: |
-          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Build project
+        uses: leanprover/lean-action@v1
 
-      - name: Restore Lake package cache
-        uses: actions/cache@v4
+      - name: Build blueprint (web + PDF)
+        uses: xu-cheng/texlive-action@v2
         with:
-          path: blueprint/.lake/packages
-          key: ${{ runner.os }}-blueprint-lake-packages-${{ hashFiles('blueprint/lean-toolchain', 'blueprint/lake-manifest.json') }}
-          restore-keys: |
-            ${{ runner.os }}-blueprint-lake-packages-
+          docker_image: ghcr.io/xu-cheng/texlive-full:20250401
+          run: |
+            apk update
+            apk add --update make py3-pip git pkgconfig graphviz graphviz-dev gcc musl-dev
+            git config --global --add safe.directory "$GITHUB_WORKSPACE"
+            git config --global --add safe.directory "$(pwd)"
+            python3 -m venv env
+            source env/bin/activate
+            pip install --upgrade pip requests wheel
+            pip install pygraphviz --config-settings="--global-option=build_ext" --config-settings="--global-option=-L/usr/lib/graphviz/" --config-settings="--global-option=-R/usr/lib/graphviz/"
+            pip install leanblueprint
+            leanblueprint pdf
+            leanblueprint web
+            mkdir -p _site
+            cp -r blueprint/web/. _site/
+            cp blueprint/print/print.pdf _site/blueprint.pdf
 
-      - name: Restore Lean build cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            blueprint/.lake/build
-            .lake/build
-          key: ${{ runner.os }}-blueprint-lean-build-${{ hashFiles('blueprint/lean-toolchain', 'blueprint/lake-manifest.json', 'blueprint/lakefile.toml', 'blueprint/**/*.lean', 'WeilConjectures/**/*.lean', 'Comparator/**/*.lean') }}
-          restore-keys: |
-            ${{ runner.os }}-blueprint-lean-build-${{ hashFiles('blueprint/lean-toolchain', 'blueprint/lake-manifest.json', 'blueprint/lakefile.toml') }}-
-            ${{ runner.os }}-blueprint-lean-build-
-
-      - name: Get Mathlib cache
-        working-directory: blueprint
-        run: lake exe cache get || true
-
-      - name: Build blueprint site
-        run: ./blueprint/scripts/ci-pages.sh
+      # `leanblueprint web` writes the declarations referenced by `\lean{...}`
+      # to blueprint/lean_decls.
+      - name: Check blueprint declarations exist in the Lean code
+        run: ~/.elan/bin/lake exe checkdecls blueprint/lean_decls
 
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
           name: blueprint-site
-          path: blueprint/_out/site/html-multi
+          path: _site
 
   deploy:
     name: Deploy to GitHub Pages (/blueprint)

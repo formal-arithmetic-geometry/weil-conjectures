@@ -11,28 +11,26 @@ arithmetically in terms of integer polynomials and their complex roots.
 ## Blueprint
 
 A browsable blueprint (chapters, statement/proof dependencies, dependency
-graph, progress summary) is generated with
-[VersoBlueprint](https://github.com/leanprover/verso-blueprint) from the
-sources in `blueprint/` and deployed to GitHub Pages:
+graph, progress summary) is written in LaTeX under `blueprint/src/` and
+built with [leanblueprint](https://github.com/PatrickMassot/leanblueprint).
+It is deployed to GitHub Pages:
 
 > https://jjdishere.github.io/weil_conj/blueprint/
+> (PDF: https://jjdishere.github.io/weil_conj/blueprint/blueprint.pdf)
 
-The blueprint is a self-contained Lake package nested in `blueprint/`; it
-depends on the parent project via a path dependency and does not affect the
-main project's build or dependency graph.
+The content lives in `blueprint/src/content.tex` and is currently empty.
 
-To build it locally:
+Building locally requires a TeX distribution, Graphviz and
+`pip install leanblueprint`; then, from the repository root:
 
 ```bash
-cd blueprint
-lake exe cache get   # Mathlib build cache
-lake exe vbp build   # writes the site to _out/site/html-multi/
+leanblueprint web   # writes the site to blueprint/web/
+leanblueprint pdf   # writes blueprint/print/print.pdf
 ```
 
-or run the CI entry point `blueprint/scripts/ci-pages.sh`. The GitHub
-workflow `.github/workflows/blueprint.yml` builds the site, deploys it to
-the `gh-pages` branch under `/blueprint`, and publishes previews for pull
-requests that touch the blueprint or the Lean sources under
+The GitHub workflow `.github/workflows/blueprint.yml` builds the site,
+deploys it to the `gh-pages` branch under `/blueprint`, and publishes
+previews for pull requests that touch the blueprint under
 `/preview/<pr>/blueprint`.
 
 ## GitHub configuration
