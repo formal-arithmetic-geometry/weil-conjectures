@@ -30,14 +30,14 @@ Weil's fourth conjecture — if `X` lifts to a smooth proper scheme over a numbe
 `deg Pᵢ` is the `i`-th Betti number of the associated complex manifold — needs singular
 cohomology of the analytification and is not part of the challenge.
 
-- `Definitions.lean` — the definitions shared by challenge and solution, using **only
+- `Weil/Definitions.lean` — the definitions shared by challenge and solution, using **only
   mathlib** (`import Mathlib`): the model `FiniteField.galoisExtension k n` of the degree
   `n` extension of `k`, the rational points `AlgebraicGeometry.Scheme.Hom.fieldPoints`
   and point counts `AlgebraicGeometry.Scheme.Hom.pointCount` relative to a structure
   morphism `f : X ⟶ Spec k`, the zeta function
   `AlgebraicGeometry.Scheme.Hom.zetaSeries` itself, and the three predicates above.
-- `Challenge.lean` — states the two theorems, with `sorry`.
-- `Solution.lean` — proves the identical statements using this repository
+- `Weil/Challenge.lean` — states the two theorems, with `sorry`.
+- `Weil/Solution.lean` — proves the identical statements using this repository
   (`WeilConjectures/Statement.lean`).
 - `config.json` — the comparator configuration.
 

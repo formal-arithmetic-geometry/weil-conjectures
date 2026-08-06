@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Definitions
+public import Weil.Definitions
 public import WeilConjectures.ZetaFunction
 
 @[expose] public section
@@ -25,7 +25,7 @@ formal substitution `ζ_X(s) = Z(X, q ^ (-s))`.
 
 The power series `Z(X, t)` and the objects it is built from (`FiniteField.galoisExtension`,
 `AlgebraicGeometry.Scheme.Hom.fieldPoints` and
-`AlgebraicGeometry.Scheme.Hom.pointCount`) are defined in `Comparator/Definitions.lean`,
+`AlgebraicGeometry.Scheme.Hom.pointCount`) are defined in `Comparator/Weil/Definitions.lean`,
 since they are needed to state the Weil conjectures in the comparator challenge.
 
 ## Main definitions
