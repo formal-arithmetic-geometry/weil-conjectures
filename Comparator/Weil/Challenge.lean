@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Definitions
+public import Weil.Definitions
 
 @[expose] public section
 
@@ -13,11 +13,11 @@ public import Definitions
 # Challenge: the Weil conjectures
 
 This is a `leanprover/comparator` challenge file. It is stated using only mathlib and the
-shared definitions file `Definitions.lean` (which itself only imports mathlib).
+shared definitions file `Weil/Definitions.lean` (which itself only imports mathlib).
 
 Let `X` be a smooth, proper, geometrically integral scheme of dimension `d` over a finite
 field `k` with `q` elements and let `Z(X, t) ∈ ℚ⟦t⟧` be its zeta function
-(`AlgebraicGeometry.Scheme.Hom.zetaSeries`, defined in `Definitions.lean` as
+(`AlgebraicGeometry.Scheme.Hom.zetaSeries`, defined in `Weil/Definitions.lean` as
 `exp (∑ N_n t ^ n / n)` with `N_n = #X(𝔽_(q ^ n))`). The Weil conjectures [weil1949]
 assert:
 
@@ -38,7 +38,7 @@ assert:
 The three conjectures are stated in terms of the complex roots of the `Pᵢ` (a root `z` of
 `Pᵢ` is the inverse of an inverse root `α`), packaged into the predicates
 `AlgebraicGeometry.IsWeilFactorization`, `AlgebraicGeometry.WeilFunctionalEquation` and
-`AlgebraicGeometry.WeilRiemannHypothesis` of `Definitions.lean`. They form the second
+`AlgebraicGeometry.WeilRiemannHypothesis` of `Weil/Definitions.lean`. They form the second
 challenge theorem `weil_conjectures`.
 
 Weil's fourth conjecture — if `X` lifts to a smooth proper scheme over a number ring, then

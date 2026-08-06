@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Definitions
+public import Weil.Definitions
 public import WeilConjectures
 
 @[expose] public section
@@ -13,9 +13,9 @@ public import WeilConjectures
 /-!
 # Solution: the Weil conjectures
 
-This is the solution to the `leanprover/comparator` challenge in `Challenge.lean`. The
+This is the solution to the `leanprover/comparator` challenge in `Weil/Challenge.lean`. The
 challenge statements are about the zeta function defined in the shared mathlib-only
-definitions file `Definitions.lean`; they are proved in `WeilConjectures/Statement.lean`
+definitions file `Weil/Definitions.lean`; they are proved in `WeilConjectures/Statement.lean`
 using this repository.
 -/
 

@@ -43,7 +43,7 @@ proof `deg Pᵢ` is the `ℚ_ℓ`-dimension of the `i`-th étale cohomology of t
 
 The predicates `AlgebraicGeometry.IsWeilFactorization`,
 `AlgebraicGeometry.WeilFunctionalEquation` and `AlgebraicGeometry.WeilRiemannHypothesis`
-spelling out the three conjectures are defined in `Comparator/Definitions.lean`, since
+spelling out the three conjectures are defined in `Comparator/Weil/Definitions.lean`, since
 they are needed to state the comparator challenge of this repository (see
 `Comparator/README.md`).
 
