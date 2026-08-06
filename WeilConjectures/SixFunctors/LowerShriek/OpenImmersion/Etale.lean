@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
 
@@ -25,12 +26,27 @@ terminal object of the comma category, and if no lift exists the comma category 
 hence all pointwise left Kan extensions with values in a category with an initial object
 exist, which is registered as an instance.
 
+Since an open immersion `j` is in particular étale, the pullback `j^*` of
+`WeilConjectures.SixFunctors.UpperLowerStar.Etale` is available without further hypotheses
+and is computed by restriction along the localization functor. This yields the adjunction
+`j_! ⊣ j^*`, completing the triple `j_! ⊣ j^* ⊣ j_*` on the small étale sites.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Etale.LiftIndex`: the type of lifts of `V : X.Etale`
   through `j`.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriek`: the lower shriek `j_!` on étale
   sheaves along an open immersion `j`.
+- `AlgebraicGeometry.Etale.openImmersionRestriction`: the restriction `j^*` along an open
+  immersion `j`, given objectwise by `(j^* G)(T → U) = G(T → U → X)`.
+- `AlgebraicGeometry.Etale.openImmersionLowerShriekAdjunction`: the adjunction
+  `j_! ⊣ j^*` with the restriction.
+- `AlgebraicGeometry.Etale.openImmersionRestrictionLowerStarAdjunction`: the adjunction
+  `j^* ⊣ j_*`, completing the triple `j_! ⊣ j^* ⊣ j_*`.
+- `AlgebraicGeometry.Etale.upperStarIsoOpenImmersionRestriction`: the pullback `j^*` of
+  `WeilConjectures.SixFunctors.UpperLowerStar.Etale` is computed by restriction.
+- `AlgebraicGeometry.Etale.openImmersionLowerShriekUpperStarAdjunction`: the adjunction
+  `j_! ⊣ j^*` between the lower shriek and the pullback `Etale.upperStar`.
 
 -/
 
@@ -164,6 +180,28 @@ section LowerShriek
 
 variable (A : Type u') [Category.{v'} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- The restriction `j^*` along an open immersion `j : U ⟶ X` on sheaves for the small
+étale sites, given objectwise by `(j^* G)(T → U) = G(T → U → X)`. In contrast to
+`Etale.upperStar` it requires neither Kan extensions nor sheafification. -/
+def Etale.openImmersionRestriction :
+    Sheaf X.smallEtaleTopology A ⥤ Sheaf U.smallEtaleTopology A :=
+  GrothendieckTopology.localizationRestriction A @Etale @Etale j inferInstance
+
+/-- The sections of `j^* G` over `T → U` are the sections of `G` over `T → U → X`. -/
+lemma Etale.openImmersionRestriction_obj_val_obj (G : Sheaf X.smallEtaleTopology A)
+    (b : U.Etale) :
+    ((Etale.openImmersionRestriction A j).obj G).obj.obj (op b) =
+      G.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ j)).obj b)) :=
+  rfl
+
+/-- Restriction along an open immersion is left adjoint to the pushforward `j_*`: this is
+the right half of the triple `j_! ⊣ j^* ⊣ j_*`. -/
+noncomputable def Etale.openImmersionRestrictionLowerStarAdjunction :
+    Etale.openImmersionRestriction A j ⊣ Etale.lowerStar A j :=
+  GrothendieckTopology.localizationRestrictionLowerStarAdjunction A @Etale @Etale j
+    inferInstance
+
 variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 
 /-- The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
@@ -173,6 +211,42 @@ noncomputable def Etale.openImmersionLowerShriek :
   have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
   GrothendieckTopology.localizationLowerShriek A @Etale @Etale j inferInstance
+
+/-- The adjunction `j_! ⊣ j^*` between the extension by zero and the restriction along an
+open immersion. -/
+noncomputable def Etale.openImmersionLowerShriekAdjunction :
+    Etale.openImmersionLowerShriek A j ⊣ Etale.openImmersionRestriction A j :=
+  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+    inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
+  GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale j inferInstance
+
+instance : (Etale.openImmersionLowerShriek A j).IsLeftAdjoint :=
+  (Etale.openImmersionLowerShriekAdjunction A j).isLeftAdjoint
+
+instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
+  (Etale.openImmersionLowerShriekAdjunction A j).isRightAdjoint
+
+section UpperStar
+
+variable [HasWeakSheafify U.smallEtaleTopology A]
+
+/-- For an open immersion `j`, the pullback `j^*` of
+`WeilConjectures.SixFunctors.UpperLowerStar.Etale` is computed by restriction along the
+localization functor: both are left adjoint to `j_*`. In particular its sections are given
+by `Etale.openImmersionRestriction_obj_val_obj`. -/
+noncomputable def Etale.upperStarIsoOpenImmersionRestriction :
+    Etale.upperStar A j ≅ Etale.openImmersionRestriction A j :=
+  (Etale.upperStarLowerStarAdjunction A j).leftAdjointUniq
+    (Etale.openImmersionRestrictionLowerStarAdjunction A j)
+
+/-- The adjunction `j_! ⊣ j^*` between the lower shriek along an open immersion and the
+pullback `Etale.upperStar`. -/
+noncomputable def Etale.openImmersionLowerShriekUpperStarAdjunction :
+    Etale.openImmersionLowerShriek A j ⊣ Etale.upperStar A j :=
+  (Etale.openImmersionLowerShriekAdjunction A j).ofNatIsoRight
+    (Etale.upperStarIsoOpenImmersionRestriction A j).symm
+
+end UpperStar
 
 end LowerShriek
 
