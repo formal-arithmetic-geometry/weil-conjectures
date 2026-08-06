@@ -8,6 +8,7 @@ public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.DerivedFunctors.Bounded
 public import WeilConjectures.SixFunctors.DerivedFunctors.Plus
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
