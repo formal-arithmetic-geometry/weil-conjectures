@@ -1,11 +1,15 @@
-import WeilConjectures.AnalyticAux
-import WeilConjectures.ClosedPoints
-import WeilConjectures.Convergence
-import WeilConjectures.EulerProduct
-import WeilConjectures.EulerProductAux
-import WeilConjectures.Evaluation
-import WeilConjectures.PointCount
-import WeilConjectures.SpecialValues
-import WeilConjectures.Statement
-import WeilConjectures.ZetaFunction
-import WeilConjectures.ZetaSeries
+module
+
+public import WeilConjectures.AnalyticAux
+public import WeilConjectures.ClosedPoints
+public import WeilConjectures.Convergence
+public import WeilConjectures.EulerProduct
+public import WeilConjectures.EulerProductAux
+public import WeilConjectures.Evaluation
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.PointCount
+public import WeilConjectures.SpecialValues
+public import WeilConjectures.Statement
+public import WeilConjectures.ZetaFunction
+public import WeilConjectures.ZetaSeries

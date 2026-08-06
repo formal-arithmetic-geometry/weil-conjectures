@@ -3,8 +3,12 @@ Copyright (c) 2026 Christian Merten. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Christian Merten
 -/
-import WeilConjectures.AnalyticAux
-import WeilConjectures.EulerProduct
+module
+
+public import WeilConjectures.AnalyticAux
+public import WeilConjectures.EulerProduct
+
+@[expose] public section
 
 /-!
 # The zeta function is the evaluation of the zeta series
