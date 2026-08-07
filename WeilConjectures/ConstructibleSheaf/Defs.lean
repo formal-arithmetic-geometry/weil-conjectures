@@ -105,6 +105,49 @@ lemma Sheaf.isConstant_over (F : Sheaf J A) [F.IsConstant J] :
 
 end ConstantSheafLocalization
 
+section SheafifyOfOverTerminal
+
+variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
+  (A : Type u') [Category.{v} A] {W : C}
+
+/-- The canonical section `C ⥤ Over W` of `Over.forget W` for a terminal object `W` is
+cocontinuous for the localized topology: under `Over.forget W` its pullback of a sieve
+identifies with `CategoryTheory.Sieve.overEquiv`. -/
+lemma isCocontinuous_equivalenceOfIsTerminal_inverse (hW : IsTerminal W) :
+    (Over.equivalenceOfIsTerminal hW).inverse.IsCocontinuous J (J.over W) where
+  cover_lift {U S} hS := by
+    rw [GrothendieckTopology.mem_over_iff] at hS
+    refine J.superset_covering (fun Z f hf ↦ ?_) hS
+    rw [Sieve.overEquiv_iff] at hf
+    have : (Over.equivalenceOfIsTerminal hW).inverse.map f =
+        (Over.homMk (𝟙 Z) (hW.hom_ext _ _) :
+          Over.mk (hW.from Z) ⟶ Over.mk (f ≫ hW.from U)) ≫
+          (Over.homMk f : Over.mk (f ≫ hW.from U) ⟶ Over.mk (hW.from U)) := by
+      ext
+      exact (Category.id_comp f).symm
+    change S ((Over.equivalenceOfIsTerminal hW).inverse.map f)
+    rw [this]
+    exact S.downward_closed hf _
+
+/-- Sheafification for the localization of a site at a terminal object gives
+sheafification for the site itself, along the equivalence `Over W ≌ C` given by
+`CategoryTheory.Over.equivalenceOfIsTerminal`. Compare
+`CategoryTheory.Equivalence.hasSheafify`, which assumes the strong `HasSheafify`. -/
+lemma GrothendieckTopology.hasWeakSheafify_of_over_isTerminal (hW : IsTerminal W)
+    [HasWeakSheafify (J.over W) A] : HasWeakSheafify J A := by
+  let e : C ≌ Over W := (Over.equivalenceOfIsTerminal hW).symm
+  haveI : e.functor.IsCocontinuous J (J.over W) :=
+    isCocontinuous_equivalenceOfIsTerminal_inverse J hW
+  haveI : e.inverse.IsCocontinuous (J.over W) J :=
+    inferInstanceAs ((Over.forget W).IsCocontinuous (J.over W) J)
+  haveI : e.inverse.IsDenseSubsite (J.over W) J :=
+    Equivalence.isDenseSubsite_inverse_of_isCocontinuous J (J.over W) e
+  exact ⟨_, ⟨((e.op.congrLeft.toAdjunction.comp (sheafificationAdjunction (J.over W) A)).comp
+      (e.sheafCongr J (J.over W) A).symm.toAdjunction).ofNatIsoRight
+    (NatIso.ofComponents (fun F ↦ Functor.isoWhiskerRight e.op.unitIso.symm F.obj))⟩⟩
+
+end SheafifyOfOverTerminal
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
@@ -156,6 +199,12 @@ section LocallyConstant
 variable {A : Type u'} [Category.{v} A]
   [∀ U : X.Etale, HasWeakSheafify (X.smallEtaleTopology.over U) A]
 
+/-- Sheafification for the localizations of the small étale site at all étale `U ⟶ X`
+gives sheafification for the small étale site itself, by localizing at the terminal
+object `𝟙 X`. -/
+instance hasWeakSheafify_smallEtaleTopology : HasWeakSheafify X.smallEtaleTopology A :=
+  X.smallEtaleTopology.hasWeakSheafify_of_over_isTerminal A terminalIsTerminal
+
 /-- The object of the small étale site of `X` given by a member of an étale cover
 of `X`. -/
 abbrev Cover.etalePrecoverageToEtale (𝒰 : Cover.{u} etalePrecoverage X) (i : 𝒰.I₀) : X.Etale :=
@@ -185,7 +234,6 @@ identity cover. The right Kan extension hypothesis compares sheafification on th
 étale site with sheafification on its localizations; it always holds mathematically, see
 the module implementation notes. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
-    [HasWeakSheafify X.smallEtaleTopology A]
     [∀ (U : X.Etale) (P : (Over U)ᵒᵖ ⥤ A), (Over.forget U).op.HasPointwiseRightKanExtension P]
     {F : Sheaf X.smallEtaleTopology A} (h : F.IsConstant X.smallEtaleTopology) :
     IsLocallyConstantSheaf F :=
@@ -272,7 +320,6 @@ variable {A : Type u'} [Category.{v} A]
   [HasColimitsOfSize.{u, u} A]
   [∀ (T : Scheme.{u}) (f : T ⟶ X) (P : X.Etaleᵒᵖ ⥤ A),
     (MorphismProperty.Over.pullback @Etale ⊤ f).op.HasLeftKanExtension P]
-  [∀ T : Scheme.{u}, HasWeakSheafify T.smallEtaleTopology A]
   [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
@@ -287,10 +334,12 @@ The pullback `Etale.upperStar` needs left Kan extensions along base change by th
 immersions, and stating `IsFiniteLocallyConstantSheaf` needs sheafification for the small
 étale sites of the strata and their localizations. Since the stratification is
 existentially quantified, these existence conditions are hypotheses of the definition,
-quantified over all schemes and morphisms into `X`. They always hold mathematically but
-are not known to hold with current mathlib (see the module implementation notes); the
-sheafification hypotheses for `smallEtaleTopology` are discharged by mathlib's
-`HasSheafify` instance whenever `A` is a suitable concrete category.
+quantified over all schemes and morphisms into `X`. The sheafification hypothesis is
+stated for the localized sites only: sheafification for the small étale sites themselves
+follows by localizing at the terminal object, see
+`AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`. The conditions always
+hold mathematically but are not known to hold with current mathlib (see the module
+implementation notes).
 
 For `X` quasi-compact and quasi-separated this global definition agrees with the
 affine-local one of [Stacks 03RW]. In the `ℓ`-adic formalism it is applied with
