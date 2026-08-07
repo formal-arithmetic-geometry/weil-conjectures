@@ -56,7 +56,6 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
-variable [∀ Z : Scheme.{u}, HasSheafify Z.smallEtaleTopology A]
 
 section DerivedLowerStar
 

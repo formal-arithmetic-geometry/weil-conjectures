@@ -62,8 +62,6 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
-  [HasColimitsOfSize.{u, u} A]
-  [∀ Z : Scheme.{u}, HasSheafify Z.smallEtaleTopology A]
   [∀ (T S : Scheme.{u}) (f : T ⟶ S) (P : S.Etaleᵒᵖ ⥤ A),
     (MorphismProperty.Over.pullback @Etale ⊤ f).op.HasLeftKanExtension P]
   [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
