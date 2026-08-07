@@ -61,6 +61,9 @@ variable (A : Type u') [Category.{v'} A] [Abelian A]
   [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory A FA]
   [HasColimitsOfSize.{u, u} A]
   [∀ Z : Scheme.{u}, HasSheafify Z.smallEtaleTopology A]
+  [∀ (T S : Scheme.{u}) (f : T ⟶ S) (P : S.Etaleᵒᵖ ⥤ A),
+    (MorphismProperty.Over.pullback @Etale ⊤ f).op.HasLeftKanExtension P]
+  [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
 
 section ConstructibleHomology
 
