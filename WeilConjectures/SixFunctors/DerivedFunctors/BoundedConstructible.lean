@@ -55,9 +55,13 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{v'} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type*}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory A FA]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
   [HasColimitsOfSize.{u, u} A]
   [∀ Z : Scheme.{u}, HasSheafify Z.smallEtaleTopology A]
   [∀ (T S : Scheme.{u}) (f : T ⟶ S) (P : S.Etaleᵒᵖ ⥤ A),

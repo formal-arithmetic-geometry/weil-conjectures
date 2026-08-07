@@ -72,7 +72,13 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{v'} A] [Abelian A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable [∀ Z : Scheme.{u}, HasSheafify Z.smallEtaleTopology A]
 
 section BoundedLowerStar

@@ -21,14 +21,17 @@ and this file records their total right derived functors
 derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctorPlus`.
 
 The chosen localized categories `HasDerivedCategory` are inputs with a general universe.
-That the sheaf categories have enough injectives is recorded as a separate instance, which
-is currently a `sorry`: it should be deduced from the sheaf categories being Grothendieck
-abelian for suitable `A`.
+That the sheaf categories have enough injectives is deduced by mathlib's instances from
+the sheaf categories being Grothendieck abelian
+(`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`): this holds
+whenever the coefficient category `A` is a concrete Grothendieck abelian category (with
+hom types and underlying types in the universe `u` of the base schemes, and the
+forgetful functor preserving limits and filtered colimits and reflecting isomorphisms),
+since the small étale site is equivalent to the essentially small affine étale site.
+This covers the intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.enoughInjectives_sheaf`: the category of `A`-valued étale
-  sheaves has enough injectives (currently a `sorry`).
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus`: the total right derived functor
   `Rg_*` of the pushforward on bounded below derived categories of étale sheaves.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus`: the total right derived functor
@@ -46,16 +49,14 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{v'} A] [Abelian A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable [∀ Z : Scheme.{u}, HasSheafify Z.smallEtaleTopology A]
-
-/-- The category of `A`-valued sheaves on the small étale site has enough injectives.
-
-TODO: this should be deduced from `IsGrothendieckAbelian` of the sheaf category, which
-holds for suitable Grothendieck abelian coefficient categories `A`. -/
-instance Etale.enoughInjectives_sheaf (X : Scheme.{u}) :
-    EnoughInjectives (Sheaf X.smallEtaleTopology A) :=
-  sorry
 
 section DerivedLowerStar
 
