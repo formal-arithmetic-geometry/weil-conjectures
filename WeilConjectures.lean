@@ -15,6 +15,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProdu
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
+public import WeilConjectures.SixFunctors.DerivedFunctors.Full
 public import WeilConjectures.SixFunctors.DerivedFunctors.Plus
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
