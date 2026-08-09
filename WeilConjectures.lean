@@ -15,7 +15,11 @@ public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.KProject
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Minus
 public import WeilConjectures.FromJoel.Algebra.Homology.Factorizations.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureKProjectives
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.LeftDerivedFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+public import WeilConjectures.Mathlib.CategoryTheory.GuitartExact.KanExtension
+public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+public import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseLeftDerived
 public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Minus
