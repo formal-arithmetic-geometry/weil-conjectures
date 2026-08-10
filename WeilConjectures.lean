@@ -14,6 +14,9 @@ public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.Homological
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
 public import WeilConjectures.SixFunctors.DerivedFunctors.Full
 public import WeilConjectures.SixFunctors.DerivedFunctors.Plus
@@ -26,5 +29,6 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.PointCount
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
+public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries

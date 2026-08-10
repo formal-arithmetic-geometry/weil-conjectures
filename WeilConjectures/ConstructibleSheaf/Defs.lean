@@ -6,7 +6,10 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.Topology.Stratification
 
 /-!
 # Constructible sheaves on the small étale site
@@ -73,100 +76,9 @@ open CategoryTheory Limits Opposite
 
 noncomputable section
 
-namespace CategoryTheory
-
-section ConstantSheafLocalization
-
-variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
-  (A : Type u') [Category.{v} A] (W : C)
-  [HasWeakSheafify J A] [HasWeakSheafify (J.over W) A]
-  [∀ P : (Over W)ᵒᵖ ⥤ A, (Over.forget W).op.HasPointwiseRightKanExtension P]
-
-/-- The constant sheaf functor commutes with localization of the site at an object:
-the restriction of the constant sheaf at `a : A` to `J.over W` is the constant sheaf
-at `a`. -/
-def GrothendieckTopology.overPullbackConstantSheafIso :
-    constantSheaf J A ⋙ J.overPullback A W ≅ constantSheaf (J.over W) A :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (Functor.const Cᵒᵖ)
-      ((Over.forget W).pushforwardContinuousSheafificationCompatibility A (J.over W) J).symm ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (Functor.constCompWhiskeringLeftIso _ (Over.forget W).op)
-      (presheafToSheaf (J.over W) A)
-
-variable {J A} in
-/-- The restriction of a constant sheaf to the site localized at an object is
-constant. -/
-lemma Sheaf.isConstant_over (F : Sheaf J A) [F.IsConstant J] :
-    (F.over W).IsConstant (J.over W) := by
-  obtain ⟨a, ⟨e⟩⟩ := F.mem_essImage_of_isConstant
-  exact Sheaf.isConstant_of_iso _
-    ((J.overPullback A W).mapIso e.symm ≪≫ (J.overPullbackConstantSheafIso A W).app a)
-
-end ConstantSheafLocalization
-
-section SheafifyOfOverTerminal
-
-variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
-  (A : Type u') [Category.{v} A] {W : C}
-
-/-- The canonical section `C ⥤ Over W` of `Over.forget W` for a terminal object `W` is
-cocontinuous for the localized topology: under `Over.forget W` its pullback of a sieve
-identifies with `CategoryTheory.Sieve.overEquiv`. -/
-lemma isCocontinuous_equivalenceOfIsTerminal_inverse (hW : IsTerminal W) :
-    (Over.equivalenceOfIsTerminal hW).inverse.IsCocontinuous J (J.over W) where
-  cover_lift {U S} hS := by
-    rw [GrothendieckTopology.mem_over_iff] at hS
-    refine J.superset_covering (fun Z f hf ↦ ?_) hS
-    rw [Sieve.overEquiv_iff] at hf
-    have : (Over.equivalenceOfIsTerminal hW).inverse.map f =
-        (Over.homMk (𝟙 Z) (hW.hom_ext _ _) :
-          Over.mk (hW.from Z) ⟶ Over.mk (f ≫ hW.from U)) ≫
-          (Over.homMk f : Over.mk (f ≫ hW.from U) ⟶ Over.mk (hW.from U)) := by
-      ext
-      exact (Category.id_comp f).symm
-    change S ((Over.equivalenceOfIsTerminal hW).inverse.map f)
-    rw [this]
-    exact S.downward_closed hf _
-
-/-- Sheafification for the localization of a site at a terminal object gives
-sheafification for the site itself, along the equivalence `Over W ≌ C` given by
-`CategoryTheory.Over.equivalenceOfIsTerminal`. Compare
-`CategoryTheory.Equivalence.hasSheafify`, which assumes the strong `HasSheafify`. -/
-lemma GrothendieckTopology.hasWeakSheafify_of_over_isTerminal (hW : IsTerminal W)
-    [HasWeakSheafify (J.over W) A] : HasWeakSheafify J A := by
-  let e : C ≌ Over W := (Over.equivalenceOfIsTerminal hW).symm
-  haveI : e.functor.IsCocontinuous J (J.over W) :=
-    isCocontinuous_equivalenceOfIsTerminal_inverse J hW
-  haveI : e.inverse.IsCocontinuous (J.over W) J :=
-    inferInstanceAs ((Over.forget W).IsCocontinuous (J.over W) J)
-  haveI : e.inverse.IsDenseSubsite (J.over W) J :=
-    Equivalence.isDenseSubsite_inverse_of_isCocontinuous J (J.over W) e
-  exact ⟨_, ⟨((e.op.congrLeft.toAdjunction.comp (sheafificationAdjunction (J.over W) A)).comp
-      (e.sheafCongr J (J.over W) A).symm.toAdjunction).ofNatIsoRight
-    (NatIso.ofComponents (fun F ↦ Functor.isoWhiskerRight e.op.unitIso.symm F.obj))⟩⟩
-
-end SheafifyOfOverTerminal
-
-end CategoryTheory
-
 namespace AlgebraicGeometry.Scheme
 
 variable {X Y : Scheme.{u}}
-
-section Functoriality
-
-/-- The base change functor `Y.Etale ⥤ X.Etale` along a morphism `f : X ⟶ Y`, sending an
-étale `V ⟶ Y` to the projection `V ×_Y X ⟶ X`. This is the functor along which the
-pushforward `AlgebraicGeometry.Etale.lowerStar` and the pullback
-`AlgebraicGeometry.Etale.upperStar` are defined. -/
-def Hom.Etale (f : X ⟶ Y) : Y.Etale ⥤ X.Etale :=
-  MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f
-
-instance (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
-  inferInstanceAs <| PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f)
-
-end Functoriality
 
 section PullbackFunctor
 
@@ -198,12 +110,6 @@ section LocallyConstant
 
 variable {A : Type u'} [Category.{v} A]
   [∀ U : X.Etale, HasWeakSheafify (X.smallEtaleTopology.over U) A]
-
-/-- Sheafification for the localizations of the small étale site at all étale `U ⟶ X`
-gives sheafification for the small étale site itself, by localizing at the terminal
-object `𝟙 X`. -/
-instance hasWeakSheafify_smallEtaleTopology : HasWeakSheafify X.smallEtaleTopology A :=
-  X.smallEtaleTopology.hasWeakSheafify_of_over_isTerminal A terminalIsTerminal
 
 /-- The object of the small étale site of `X` given by a member of an étale cover
 of `X`. -/
@@ -279,20 +185,6 @@ class IsFiniteLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop
 end FiniteLocallyConstant
 
 section Stratification
-
-/-- A *stratification* of a topological space `X`, following [Stacks 09XZ]: a finite
-partition of `X` into pairwise disjoint locally closed subsets — the *strata* — covering
-`X`. Finiteness is not required in loc. cit.; it is included here since finite
-stratifications are the ones relevant for constructible sheaves. -/
-@[stacks 09XZ]
-structure _root_.Topology.Stratification (X : Type*) [TopologicalSpace X] where
-  /-- The number of strata. -/
-  n : ℕ
-  /-- The strata. -/
-  stratum : Fin n → Set X
-  isLocallyClosed_stratum : ∀ i, IsLocallyClosed (stratum i)
-  iUnion_stratum_eq_univ : ⋃ i, stratum i = Set.univ
-  pairwise_disjoint_stratum : Pairwise (Function.onFun Disjoint stratum)
 
 /-- A *stratification* of a scheme `X`: a stratification of the underlying topological
 space of `X` (`Topology.Stratification`: a finite partition into locally closed subsets
