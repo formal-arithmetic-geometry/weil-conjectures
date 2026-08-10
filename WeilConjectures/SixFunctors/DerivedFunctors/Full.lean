@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctor
+public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
