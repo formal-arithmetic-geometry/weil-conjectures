@@ -3,6 +3,7 @@ module
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.Affine
 public import WeilConjectures.Blowup.Complement
+public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.Functoriality
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.Helpers
@@ -14,9 +15,13 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.Flattening
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Compactification.PartialSection
+public import WeilConjectures.Compactification.PowerTorsion
 public import WeilConjectures.Compactification.SchemeTheoreticImage
 public import WeilConjectures.Compactification.SchemeTheoreticallyDense
+public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
