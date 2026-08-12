@@ -163,4 +163,15 @@ lemma partialSectionRestrictIso_hom_fst :
 
 end KernelIdentity
 
+/-- **The graph image is proper over the base**: if `Y ⟶ S` is proper, the
+scheme-theoretic image of a partial section `γ : U ⟶ X ×_S Y`, projected to `X`, is
+proper. This is the properness half of the graph-extension lemma: together with
+`partialSectionRestrictIso` (the image restricts to `U` over `U ×_S Y`) it yields the
+proper extension `SIm(γ) ⟶ X` of the partial section
+(Stacks Project Tag 0F3Z; revised blueprint `lemma:nagata-graph-extension`). -/
+theorem isProper_imageι_fst [IsProper y] :
+    IsProper (γ.imageι ≫ pullback.fst x y) := by
+  haveI : IsProper (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
+  infer_instance
+
 end AlgebraicGeometry.Nagata

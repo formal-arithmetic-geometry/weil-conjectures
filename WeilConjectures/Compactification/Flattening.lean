@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Exceptional
+public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.Compactification.StrictTransform
 
 /-!
@@ -55,7 +56,10 @@ The predicates `Scheme.IdealSheafData.FiniteType` and
 ## Remaining inputs (Stacks citations of the revised blueprint)
 
 The revised blueprint invokes the following Stacks Project results through its choice
-notation (`def:nagata-choice-notation`); they remain `sorry` here:
+notation (`def:nagata-choice-notation`); they remain `sorry` here. Their dedicated
+formalization plan is `blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md`
+(phases A–D); the affine algebra core of Phase A is proved in
+`WeilConjectures.Compactification.FiniteTypeExtension`:
 
 - `Scheme.exists_finiteType_ideal_zeroLocus_compl_qcOpen`: a quasi-compact open of a
   qcqs scheme is the complement of the vanishing locus of a finite-type ideal
@@ -139,6 +143,14 @@ lemma le_preservedOpen : U ≤ B.preservedOpen := by
   intro x hx
   exact Set.disjoint_left.mp B.disjoint_support hx
 
+/-- **A `U`-admissible blow-up is proper**: transport of the properness of the blow-up
+(`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
+`thm:nagata-global-blowup-proper`) across the chosen identification with the blow-up
+of the center. -/
+theorem isProper_π : IsProper B.π := by
+  rw [← B.iso_π, MorphismProperty.cancel_left_of_respectsIso (P := @IsProper)]
+  exact B.I.isProper_blowupMap B.finiteType
+
 /-- A `U`-admissible blow-up is an isomorphism over `U`. This transports the blow-up
 complement theorem (`thm:nagata-global-blowup-complement`) across the chosen
 identification with the blow-up of the center.
@@ -194,8 +206,12 @@ with `U` a quasi-compact open, the composite of a `U`-admissible blow-up of `X` 
 theorem exists_comp [CompactSpace X] [QuasiSeparatedSpace X] (hU : IsCompact (U : Set X))
     (B₁ : AdmissibleBlowup X U) (B₂ : AdmissibleBlowup B₁.X' (B₁.π ⁻¹ᵁ U)) :
     ∃ (B : AdmissibleBlowup X U) (e : B.X' ≅ B₂.X'), e.hom ≫ B₂.π ≫ B₁.π = B.π := by
-  -- TODO (blueprint): `thm:nagata-composition-of-blowups` writes the composite as the
-  -- blow-up of a single finite-type center supported away from `U`.
+  -- TODO: `blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md` §3:
+  -- reduce to the composition theorem for arbitrary blow-ups (Stacks Tag 080B), whose
+  -- own inputs are the finite-degree relative-Proj description (Tag 0803), the
+  -- product-ideal comparison (Tag 080A) and invertible-center triviality (Tag 0807);
+  -- then the image/preimage disjointness lemma yields admissibility of the composite
+  -- center (Phase C of the blueprint).
   sorry
 
 end AdmissibleBlowup
@@ -211,8 +227,13 @@ theorem _root_.AlgebraicGeometry.Scheme.exists_finiteType_ideal_zeroLocus_compl_
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U : X.Opens)
     (hU : IsCompact (U : Set X)) :
     ∃ I : X.IdealSheafData, I.FiniteType ∧ (I.support : Set X) = (U : Set X)ᶜ := by
-  -- TODO (blueprint): finite-type approximation of `Scheme.IdealSheafData.vanishingIdeal`
-  -- via `lemma:nagata-finite-type-ideal-extension-exists`.
+  -- TODO: `blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md` §2.3:
+  -- apply the finite-type extension `Scheme.exists_finiteType_ideal_extension` (01PF)
+  -- to the unit ideal inside the vanishing ideal of the reduced boundary
+  -- `Scheme.IdealSheafData.vanishingIdeal`; the affine clearing-denominators core is
+  -- proved in `WeilConjectures.Compactification.FiniteTypeExtension`
+  -- (`Ideal.exists_fg_le_map_localization_eq`). The locally Noetherian instance is
+  -- proved below.
   sorry
 
 /-- On a locally Noetherian scheme, the finite-type ideal cutting out the complement of
@@ -282,8 +303,12 @@ theorem _root_.AlgebraicGeometry.Scheme.exists_finiteType_ideal_extension
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (W : X.Opens)
     (hW : IsCompact (W : Set X)) (J : W.toScheme.IdealSheafData) (hJ : J.FiniteType) :
     ∃ I : X.IdealSheafData, I.FiniteType ∧ I.comap W.ι = J := by
-  -- TODO (blueprint): Stacks Project Tag 01PF, by extending finitely generated pieces
-  -- over a finite affine cover with quasi-compact overlaps.
+  -- TODO: `blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md` §1
+  -- (Phase A): the quasi-coherent extension `ker (F ⟶ j_*((F|_U)/G))` (Tag 01PE), the
+  -- affine clearing-denominators lemma — proved as
+  -- `Ideal.exists_fg_le_map_localization_eq` in
+  -- `WeilConjectures.Compactification.FiniteTypeExtension` — and the binary-gluing
+  -- induction over a finite affine cover.
   sorry
 
 section BoundarySeparation
@@ -340,14 +365,17 @@ theorem separationBlowup_disjoint_strictTransforms (I₁ I₂ : X.IdealSheafData
       (Set.range ((separationBlowup I₁ I₂ h₁ h₂ hdisj).strictTransformMap I₁.subschemeι))
       (Set.range ((separationBlowup I₁ I₂ h₁ h₂ hdisj).strictTransformMap
         I₂.subschemeι)) := by
-  -- TODO (revised blueprint): the charts of `Bl_{I₁ ⊔ I₂}` at degree-one elements
-  -- coming from local sections of `I₁` (resp. `I₂`) cover the blow-up. On a chart at
-  -- `a ∈ I₁(V)`, the pullback of `a` to `Z₁ ×_X Bl` vanishes while the extended ideal
-  -- is generated by `a` (`AffineBlowup.map_awayAlgebraMap_eq_span`), so the locus of
-  -- `Z₁ ×_X Bl` over the complement of the center misses the chart; since the strict
-  -- transform is the closure of that locus and closure commutes with restriction to
-  -- opens, the strict transform of `Z₁` misses every `I₁`-chart, and symmetrically for
-  -- `Z₂`. The two strict transforms therefore live over complementary charts.
+  -- TODO: `blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md` §4
+  -- (Phase D). Chart route: the charts of `Bl_{I₁ ⊔ I₂}` at degree-one elements
+  -- coming from local sections of `I₁` (resp. `I₂`) cover the blow-up (refine mixed
+  -- charts along `D(x + y) ⊆ D(x) ∪ D(y)`). On a chart at `a ∈ I₁(V)`, the pullback
+  -- of `a` to `Z₁ ×_X Bl` vanishes while the extended ideal is generated by `a`
+  -- (`AffineBlowup.map_awayAlgebraMap_eq_span`), so the locus of `Z₁ ×_X Bl` over the
+  -- complement of the center misses the chart; since the strict transform is the
+  -- closure of that locus and closure commutes with restriction to opens, the strict
+  -- transform of `Z₁` misses every `I₁`-chart, and symmetrically for `Z₂`. The
+  -- blueprint's §4.2 alternative separates the two quasi-compact opens of
+  -- `Z = V(I₁I₂)` via the uniform-nilpotence blow-up of Stacks Tag 080P.
   sorry
 
 end BoundarySeparation

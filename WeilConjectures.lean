@@ -8,6 +8,7 @@ public import WeilConjectures.Blowup.Functoriality
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.Helpers
 public import WeilConjectures.Blowup.Localization
+public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.Blowup.ReesGrading
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Convergence
@@ -15,6 +16,7 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.Flattening
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.PartialSection
