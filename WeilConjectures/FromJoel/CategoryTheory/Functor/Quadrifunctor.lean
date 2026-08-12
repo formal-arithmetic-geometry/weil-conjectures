@@ -184,7 +184,17 @@ set_option backward.isDefEq.respectTransparency false in
 lemma currying₄_unitIso_hom_app_app_app_app_app (F : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E)
     (X₁ : C₁) (X₂ : C₂) (X₃ : C₃) (X₄ : C₄) :
     ((((currying₄.unitIso.hom.app F).app X₁).app X₂).app X₃).app X₄ = 𝟙 _ := by
-  simp [currying₄, Equivalence.unit]
+  simp only [id_obj, currying₄, Equivalence.trans_functor, Equivalence.congrLeft_functor,
+    prod.associativity_inverse, Equivalence.trans_inverse, Equivalence.congrLeft_inverse,
+    prod.associativity_functor, comp_obj, whiskeringLeft_obj_obj, currying_inverse_obj_obj_obj,
+    Equivalence.trans_unitIso, isoWhiskerRight_trans, Iso.trans_assoc, isoWhiskerLeft_trans,
+    Iso.trans_hom, isoWhiskerRight_hom, Iso.symm_hom, isoWhiskerLeft_hom, NatTrans.comp_app,
+    whiskerRight_app, rightUnitor_inv_app, map_id, whiskerLeft_app,
+    Equivalence.congrLeft_unitIso_hom_app, associator_inv_app, associator_hom_app,
+    Category.comp_id, Category.id_comp, currying_functor_obj_obj, currying_unitIso_hom_app_app_app,
+    currying_inverse_map_app_app, currying₃_unitIso_hom_app_app_app_app, curry₃_map_app_app_app,
+    Equivalence.funInvIdAssoc_inv_app, prod.associator_obj, prod.inverseAssociator_obj,
+    Equivalence.unit, prod.associativity_unitIso, Iso.refl_hom, NatTrans.id_app, prod_id]
   exact Functor.map_id _ _
 
 set_option backward.defeqAttrib.useBackward true in
@@ -193,7 +203,18 @@ set_option backward.isDefEq.respectTransparency false in
 lemma currying₄_unitIso_inv_app_app_app_app_app (F : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E)
     (X₁ : C₁) (X₂ : C₂) (X₃ : C₃) (X₄ : C₄) :
     ((((currying₄.unitIso.inv.app F).app X₁).app X₂).app X₃).app X₄ = 𝟙 _ := by
-  simp [currying₄, Equivalence.unitInv]
+  simp only [currying₄, Equivalence.trans_functor, Equivalence.congrLeft_functor,
+    prod.associativity_inverse, Equivalence.trans_inverse, Equivalence.congrLeft_inverse,
+    prod.associativity_functor, comp_obj, whiskeringLeft_obj_obj, currying_inverse_obj_obj_obj,
+    id_obj, Equivalence.trans_unitIso, isoWhiskerRight_trans, Iso.trans_assoc,
+    isoWhiskerLeft_trans, Iso.trans_inv, isoWhiskerRight_inv, Iso.symm_inv, isoWhiskerLeft_inv,
+    Category.assoc, NatTrans.comp_app, associator_inv_app, whiskerRight_app, associator_hom_app,
+    map_id, whiskerLeft_app, Equivalence.congrLeft_unitIso_inv_app, rightUnitor_hom_app,
+    Category.id_comp, currying_inverse_map_app_app, currying_functor_obj_obj,
+    currying_unitIso_inv_app_app_app, Category.comp_id, curry₃_map_app_app_app,
+    Equivalence.funInvIdAssoc_hom_app, prod.associator_obj, prod.inverseAssociator_obj,
+    Equivalence.unitInv, prod.associativity_unitIso, Iso.refl_inv, NatTrans.id_app, prod_id,
+    currying₃_unitIso_inv_app_app_app_app]
   exact Functor.map_id _ _
 
 @[simp]

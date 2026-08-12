@@ -44,7 +44,7 @@ variable (K L) in
 @[simp]
 lemma map_zero : map (0 : K ⟶ L) c₁₂ = 0 := by
   ext i₁₂ i₁ i₂ h
-  simp [HomologicalComplex.zero_f_apply]
+  simp
 
 variable (K) in
 lemma isZero (hK : IsZero K) : IsZero (K.total c₁₂) := by

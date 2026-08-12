@@ -145,12 +145,12 @@ instance [e₁.IsTruncLE] [e₂.IsTruncLE] : Epi (K.mapStupidTruncLE h) :=
 
 variable (e₁) in
 @[simp]
-noncomputable def mapStupidTruncLE_refl [e₁.IsTruncLE] :
+theorem mapStupidTruncLE_refl [e₁.IsTruncLE] :
     K.mapStupidTruncLE (Subset.refl e₁) = 𝟙 _ := by
   rw [← cancel_epi (K.πStupidTrunc e₁), mapStupidTruncLE_fac, comp_id]
 
 @[reassoc (attr := simp)]
-noncomputable def mapStupidTruncLE_trans [e₁.IsTruncLE] [e₂.IsTruncLE] [e₃.IsTruncLE]
+theorem mapStupidTruncLE_trans [e₁.IsTruncLE] [e₂.IsTruncLE] [e₃.IsTruncLE]
     (h' : e₂.Subset e₃) :
     K.mapStupidTruncLE h' ≫ K.mapStupidTruncLE h = K.mapStupidTruncLE (h.trans h') := by
   rw [← cancel_epi (K.πStupidTrunc e₃), mapStupidTruncLE_fac_assoc,
@@ -209,12 +209,12 @@ lemma isIso_mapStupidTruncGE_f [e₁.IsTruncGE] [e₂.IsTruncGE] (i : ι)
 
 variable (e₁) in
 @[simp]
-noncomputable def mapStupidTruncGE_refl [e₁.IsTruncGE] :
+theorem mapStupidTruncGE_refl [e₁.IsTruncGE] :
     K.mapStupidTruncGE (Subset.refl e₁) = 𝟙 _ := by
   rw [← cancel_mono (K.ιStupidTrunc e₁), mapStupidTruncGE_fac, id_comp]
 
 @[reassoc (attr := simp)]
-noncomputable def mapStupidTruncGE_trans [e₁.IsTruncGE] [e₂.IsTruncGE] [e₃.IsTruncGE]
+theorem mapStupidTruncGE_trans [e₁.IsTruncGE] [e₂.IsTruncGE] [e₃.IsTruncGE]
     (h' : e₂.Subset e₃) :
     K.mapStupidTruncGE h ≫ K.mapStupidTruncGE h' = K.mapStupidTruncGE (h.trans h') := by
   rw [← cancel_mono (K.ιStupidTrunc e₃), assoc, mapStupidTruncGE_fac,

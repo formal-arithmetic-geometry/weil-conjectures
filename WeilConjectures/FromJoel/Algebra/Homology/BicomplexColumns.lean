@@ -456,8 +456,8 @@ noncomputable def isColimit : IsColimit κ.cofan :=
   isColimitCofanOfIsZero (K.toGradedObject.mapObjFun (ComplexShape.π c₁ c₂ c) n) κ.φ
     κ.injective_φ κ.isZero'
 
-@[implicit_reducible]
-def hasCoproduct :
+include κ in
+theorem hasCoproduct :
     HasCoproduct (K.toGradedObject.mapObjFun (ComplexShape.π c₁ c₂ c) n) :=
   ⟨_, κ.isColimit⟩
 
@@ -848,7 +848,7 @@ noncomputable def singleColumnObjTotal (L : CochainComplex C ℤ) (x x' : ℤ) (
 
 set_option backward.defeqAttrib.useBackward true in
 @[reassoc (attr := simp)]
-noncomputable def singleColumnObjTotal_inv_naturality {K L : CochainComplex C ℤ} (φ : K ⟶ L)
+theorem singleColumnObjTotal_inv_naturality {K L : CochainComplex C ℤ} (φ : K ⟶ L)
     (x x' : ℤ) (h : x + x' = 0) :
     (singleColumnObjTotal K x x' h).inv ≫
       total.map ((HomologicalComplex.single _ (up ℤ) x).map φ) (up ℤ) =
@@ -861,7 +861,7 @@ noncomputable def singleColumnObjTotal_inv_naturality {K L : CochainComplex C �
     HomologicalComplex.singleObjXIsoOfEq]
 
 @[reassoc (attr := simp)]
-noncomputable def singleColumnObjTotal_hom_naturality {K L : CochainComplex C ℤ} (φ : K ⟶ L)
+theorem singleColumnObjTotal_hom_naturality {K L : CochainComplex C ℤ} (φ : K ⟶ L)
     (x x' : ℤ) (h : x + x' = 0) :
     total.map ((HomologicalComplex.single _ (up ℤ) x).map φ) (up ℤ) ≫
       (singleColumnObjTotal L x x' h).hom =
