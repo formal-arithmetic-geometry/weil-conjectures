@@ -85,6 +85,11 @@ lemma quasiIso_mapHomologicalComplex_map_of_kFlat [F.PreservesKFlatQuasiIso]
     QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f) :=
   PreservesKFlatQuasiIso.quasiIso_map hK hL f
 
+/-- An exact functor preserves all quasi-isomorphisms, in particular the
+quasi-isomorphisms between K-flat complexes. -/
+instance (priority := 100) [F.PreservesHomology] : F.PreservesKFlatQuasiIso where
+  quasiIso_map _ _ _ := inferInstance
+
 section
 
 variable [HasDerivedCategory D] [F.PreservesKFlatQuasiIso]
