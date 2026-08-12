@@ -4,3 +4,4 @@ import Weil.EulerFactors
 import Weil.FrobeniusOrbits
 import Weil.OrbitEulerProducts
 import Weil.ClosedPointInterfaces
+import Weil.IntegralEulerFamilies
