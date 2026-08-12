@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.SixFunctors.Preliminaries.DerivedAdjunction
 public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
 public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
@@ -230,5 +231,63 @@ noncomputable def Etale.leftDerivedUpperStar :
   (Etale.upperStar A g).leftDerivedFunctor
 
 end DerivedUpperStar
+
+section DerivedUpperLowerStarAdjunction
+
+/-!
+## The derived adjunction `Lg^* ⊣ Rg_*`
+
+The adjunction `g^* ⊣ g_*` between the pullback and the pushforward of étale sheaves
+induces an adjunction `Lg^* ⊣ Rg_*` between their total derived functors on the
+unbounded derived categories, by
+`CategoryTheory.Adjunction.derivedAdjunction`
+(`WeilConjectures.SixFunctors.Preliminaries.DerivedAdjunction`): the left adjoint is
+derived via the K-flat left derivability structure on `D(Y_ét)` and the right adjoint
+via the K-injective right derivability structure on `D(Z_ét)`, and the two
+"absoluteness" hypotheses of mathlib's abstract theorem `Adjunction.derived` hold
+because the derived-functor comparison maps are isomorphisms on K-flat, respectively
+K-injective, complexes.
+
+The hypotheses of this section are those of the section `DerivedUpperStar`: the
+K-injective resolutions on the pushforward side are supplied by the sheaf category
+being Grothendieck abelian.
+-/
+
+open MonoidalCategory
+
+variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+variable [HasWeakSheafify Z.smallEtaleTopology A]
+variable [HasDerivedCategory.{w} (Sheaf Y.smallEtaleTopology A)]
+variable [HasDerivedCategory.{w'} (Sheaf Z.smallEtaleTopology A)]
+variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
+  (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
+variable [MonoidalCategory (Sheaf Y.smallEtaleTopology A)]
+  [MonoidalPreadditive (Sheaf Y.smallEtaleTopology A)]
+variable [∀ (j : ℤ), HasColimitsOfShape
+    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}))
+    (Sheaf Y.smallEtaleTopology A)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)),
+    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)),
+    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)),
+    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+variable [HasColimitsOfShape ℤ (Sheaf Y.smallEtaleTopology A)]
+  [HasExactColimitsOfShape ℤ (Sheaf Y.smallEtaleTopology A)]
+  [∀ (X : Sheaf Y.smallEtaleTopology A),
+    PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf Y.smallEtaleTopology A)).obj X)]
+  [∀ (X : Sheaf Y.smallEtaleTopology A),
+    PreservesColimitsOfShape ℤ
+      ((curriedTensor (Sheaf Y.smallEtaleTopology A)).flip.obj X)]
+variable [Abelian.HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A)]
+
+/-- The derived adjunction `Lg^* ⊣ Rg_*` between the total derived functors of the
+pullback and the pushforward along an arbitrary morphism `g : Z ⟶ Y` on the unbounded
+derived categories of étale sheaves, induced by the adjunction `g^* ⊣ g_*`. -/
+noncomputable def Etale.derivedUpperStarLowerStarAdjunction :
+    Etale.leftDerivedUpperStar A g ⊣ Etale.rightDerivedLowerStar A g :=
+  (Etale.upperStarLowerStarAdjunction A g).derivedAdjunction
+
+end DerivedUpperLowerStarAdjunction
 
 end AlgebraicGeometry
