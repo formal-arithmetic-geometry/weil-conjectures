@@ -17,10 +17,13 @@ public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
+public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.Flattening
+public import WeilConjectures.Compactification.Modification
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Compactification.PartialSection
 public import WeilConjectures.Compactification.PowerTorsion
 public import WeilConjectures.Compactification.SchemeTheoreticImage
 public import WeilConjectures.Compactification.SchemeTheoreticallyDense
