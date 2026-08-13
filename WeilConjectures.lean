@@ -5,6 +5,7 @@ public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.Affine.Localization
 public import WeilConjectures.Blowup.Affine.ReesGrading
+public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.FiniteDegree
