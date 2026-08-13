@@ -24,3 +24,11 @@ public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
+public import WeilConjectures.chap3_power_series.FormalExpLog
+public import WeilConjectures.chap3_power_series.LocallyFiniteProducts
+public import WeilConjectures.chap3_power_series.EulerFactors
+public import WeilConjectures.chap3_power_series.FrobeniusOrbits
+public import WeilConjectures.chap3_power_series.OrbitEulerProducts
+public import WeilConjectures.chap3_power_series.ClosedPointInterfaces
+public import WeilConjectures.chap3_power_series.IntegralEulerFamilies
+public import WeilConjectures.chap3_power_series.LiteralIntegralRealization
