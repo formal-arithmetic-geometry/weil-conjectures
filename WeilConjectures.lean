@@ -2,6 +2,7 @@ module
 
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.Affine
+public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.FiniteDegree
