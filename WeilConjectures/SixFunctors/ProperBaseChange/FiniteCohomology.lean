@@ -8,6 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.SixFunctors.DerivedFunctors.Full
 public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
+public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 
 /-!
 
@@ -34,9 +35,10 @@ closed field:
   `RΓ(X_ét, -) : D(X_ét) ⥤ D(A)`.
 - `AlgebraicGeometry.Etale.cohomologyFunctor`: étale cohomology
   `H^n_ét(X, -) := H^n(RΓ(X, -))`.
-- `AlgebraicGeometry.Etale.lowerShriekToLowerStar`: the canonical comparison
-  `ι_f : Rf_! ⟶ Rf_*` for `f` admitting a compactification, an isomorphism for proper
-  `f` (`Etale.isIso_lowerShriekToLowerStar`).
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekToLowerStar`: the canonical comparison
+  `ι_f : Rf_! ⟶ Rf_*` for `f` admitting a compactification, obtained by right-deriving
+  the sheaf-level comparison of `WeilConjectures.SixFunctors.LowerShriek.Comparison`; an
+  isomorphism for proper `f` (`Etale.isIso_rightDerivedLowerShriekToLowerStar`).
 - `AlgebraicGeometry.Etale.derivedCompactlySupportedGlobalSections`: compactly supported
   derived global sections `RΓ_c(X, -) := RΓ(Spec k, Rp_! -)` for `p : X ⟶ Spec k`.
 - `AlgebraicGeometry.Etale.compactlySupportedCohomologyFunctor`: compactly supported
@@ -70,6 +72,33 @@ closed field:
 universe w u' u
 
 open CategoryTheory Limits Opposite Abelian
+
+namespace CategoryTheory.Functor
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions C]
+
+/-- Functoriality of the total right derived functor: a natural transformation `F ⟶ G`
+of additive functors induces a natural transformation
+`RF ⟶ RG : DerivedCategory C ⥤ DerivedCategory D` of the total right derived
+functors. -/
+noncomputable def rightDerivedFunctorNatTrans {F G : C ⥤ D} [F.Additive] [G.Additive]
+    (τ : F ⟶ G) : F.rightDerivedFunctor ⟶ G.rightDerivedFunctor :=
+  rightDerivedNatTrans F.rightDerivedFunctor G.rightDerivedFunctor
+    F.rightDerivedFunctorUnit G.rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+    (Functor.whiskerRight (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ))
+      DerivedCategory.Qh)
+
+/-- The natural transformation induced on total right derived functors by a natural
+isomorphism is an isomorphism: the inverse is induced by the inverse. -/
+lemma isIso_rightDerivedFunctorNatTrans {F G : C ⥤ D} [F.Additive] [G.Additive]
+    (τ : F ⟶ G) [IsIso τ] : IsIso (rightDerivedFunctorNatTrans τ) := by
+  refine ⟨⟨rightDerivedFunctorNatTrans (CategoryTheory.inv τ), ?_, ?_⟩⟩ <;>
+    simp [rightDerivedFunctorNatTrans, ← Functor.whiskerRight_comp,
+      ← NatTrans.mapHomotopyCategory_comp]
+
+end CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -136,24 +165,21 @@ section LowerShriekComparison
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- The canonical comparison `ι_f : Rf_! ⟶ Rf_*` from the exceptional direct image to
-the derived pushforward, for a morphism `f` admitting a compactification.
-
-Mathematically, after choosing a compactification `X --j--> X̄ --f̄--> Y` (with `j` an
-open immersion and `f̄` proper), it is induced by the canonical monomorphism
-`j_! ⟶ j_*` from extension by zero to pushforward, using `Rf_! = Rf̄_* ∘ j_!` and the
-composition isomorphism `Rf̄_* ∘ Rj_* ≅ Rf_*`; the resulting transformation is
-independent of the chosen compactification. Its formalization is part of the pending
-composition/independence infrastructure for the lower shriek (see the TODOs in
-`WeilConjectures.SixFunctors.LowerShriek.Etale`) and is not yet available. -/
-noncomputable def Etale.lowerShriekToLowerStar :
+the derived pushforward, for a morphism `f` admitting a compactification: the total
+right derived natural transformation of the sheaf-level comparison
+`Etale.lowerShriekToLowerStar` of `WeilConjectures.SixFunctors.LowerShriek.Comparison`. -/
+noncomputable def Etale.rightDerivedLowerShriekToLowerStar :
     Etale.rightDerivedLowerShriek A f ⟶ Etale.rightDerivedLowerStar A f :=
-  sorry
+  Functor.rightDerivedFunctorNatTrans (Etale.lowerShriekToLowerStar A f)
 
+omit [HasDerivedCategory.{w} A] in
 /-- For a proper morphism `f`, the canonical comparison `ι_f : Rf_! ⟶ Rf_*` is an
-isomorphism: a proper morphism is a compactification of itself, with `j = 𝟙 X`. -/
-theorem Etale.isIso_lowerShriekToLowerStar [IsProper f] :
-    IsIso (Etale.lowerShriekToLowerStar A f) :=
-  sorry
+isomorphism, since the sheaf-level comparison `f_! ⟶ f_*` is
+(`Etale.isIso_lowerShriekToLowerStar`). -/
+theorem Etale.isIso_rightDerivedLowerShriekToLowerStar [IsProper f] :
+    IsIso (Etale.rightDerivedLowerShriekToLowerStar A f) := by
+  haveI := Etale.isIso_lowerShriekToLowerStar A f
+  exact Functor.isIso_rightDerivedFunctorNatTrans _
 
 end LowerShriekComparison
 
@@ -181,7 +207,7 @@ ordinary derived global sections, induced by `ι_p : Rp_! ⟶ Rp_*` and the Lera
 composition isomorphism. -/
 noncomputable def Etale.compactlySupportedToGlobalSections :
     Etale.derivedCompactlySupportedGlobalSections A k p ⟶ Etale.derivedGlobalSections A X :=
-  Functor.whiskerRight (Etale.lowerShriekToLowerStar A p)
+  Functor.whiskerRight (Etale.rightDerivedLowerShriekToLowerStar A p)
       (Etale.derivedGlobalSections A (Spec (.of k))) ≫
     (Etale.derivedGlobalSectionsComp A p).hom
 
@@ -189,7 +215,7 @@ noncomputable def Etale.compactlySupportedToGlobalSections :
 agree: the canonical comparison `RΓ_c(X, K) ⟶ RΓ(X, K)` is an isomorphism. -/
 theorem Etale.isIso_compactlySupportedToGlobalSections [IsProper p] :
     IsIso (Etale.compactlySupportedToGlobalSections A k p) := by
-  haveI := Etale.isIso_lowerShriekToLowerStar A p
+  haveI := Etale.isIso_rightDerivedLowerShriekToLowerStar A p
   simp only [Etale.compactlySupportedToGlobalSections]
   infer_instance
 
