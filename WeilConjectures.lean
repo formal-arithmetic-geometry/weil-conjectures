@@ -11,6 +11,7 @@ public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.Proper
+public import WeilConjectures.Blowup.Flattening
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
