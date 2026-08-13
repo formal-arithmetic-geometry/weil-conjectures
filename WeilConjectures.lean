@@ -7,6 +7,7 @@ public import WeilConjectures.Blowup.Affine.Localization
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Exceptional
+public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.ClosedPoints
