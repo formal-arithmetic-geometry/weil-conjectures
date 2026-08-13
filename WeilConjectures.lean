@@ -27,6 +27,7 @@ public import WeilConjectures.Compactification.PowerTorsion
 public import WeilConjectures.Compactification.SchemeTheoreticImage
 public import WeilConjectures.Compactification.SchemeTheoreticallyDense
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
