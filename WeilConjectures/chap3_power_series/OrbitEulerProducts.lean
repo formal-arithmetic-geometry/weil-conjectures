@@ -27,8 +27,12 @@ Design notes, following the conventions of the earlier section files:
   compared through the generic constant-coefficient formula for locally
   finite products rather than through the empty-index argument of the text.
 -/
-import WeilConjectures.chap3_power_series.EulerFactors
-import WeilConjectures.chap3_power_series.FrobeniusOrbits
+module
+
+public import WeilConjectures.chap3_power_series.EulerFactors
+public import WeilConjectures.chap3_power_series.FrobeniusOrbits
+
+@[expose] public section
 
 open PowerSeries
 

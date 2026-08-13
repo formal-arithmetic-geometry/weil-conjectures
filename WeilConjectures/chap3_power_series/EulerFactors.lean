@@ -16,8 +16,12 @@ Design notes, following the conventions of `Weil.FormalExpLog`:
   `(m : ℚ⟦X⟧) * X ^ (m - 1)`, the natural-number cast into the power-series
   ring, which is exactly the form produced by `PowerSeries.derivative_pow`.
 -/
-import WeilConjectures.chap3_power_series.FormalExpLog
-import WeilConjectures.chap3_power_series.LocallyFiniteProducts
+module
+
+public import WeilConjectures.chap3_power_series.FormalExpLog
+public import WeilConjectures.chap3_power_series.LocallyFiniteProducts
+
+@[expose] public section
 
 open PowerSeries
 

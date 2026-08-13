@@ -19,7 +19,11 @@ Design notes, following the conventions of the earlier section files:
   reflexivities demanded by the text; they are recorded so that later
   rewriting steps can cite them by name.
 -/
-import WeilConjectures.chap3_power_series.IntegralEulerFamilies
+module
+
+public import WeilConjectures.chap3_power_series.IntegralEulerFamilies
+
+@[expose] public section
 
 open PowerSeries
 

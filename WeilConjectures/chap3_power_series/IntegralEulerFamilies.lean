@@ -16,7 +16,11 @@ Design notes, following the conventions of the earlier section files:
   lemmas, mirroring their rational counterparts in
   `Weil.OrbitEulerProducts`; the text uses these facts inline.
 -/
-import WeilConjectures.chap3_power_series.ClosedPointInterfaces
+module
+
+public import WeilConjectures.chap3_power_series.ClosedPointInterfaces
+
+@[expose] public section
 
 open PowerSeries
 

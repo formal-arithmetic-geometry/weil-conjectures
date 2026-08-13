@@ -20,7 +20,11 @@ Design notes, following the conventions of the earlier section files:
   coercion to a type of the finset `Fix_D(n)`, so the cardinal comparisons
   go through `Fintype.card_coe` as prescribed.
 -/
-import WeilConjectures.chap3_power_series.OrbitEulerProducts
+module
+
+public import WeilConjectures.chap3_power_series.OrbitEulerProducts
+
+@[expose] public section
 
 open PowerSeries
 

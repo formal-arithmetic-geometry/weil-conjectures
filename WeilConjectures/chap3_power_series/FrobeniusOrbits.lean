@@ -27,10 +27,14 @@ Design notes, following the conventions of the earlier section files:
   finsets; the sigma-type equivalence demanded by
   `lemma:weil-relevant-orbit-degree-sigma-equiv` is provided as stated.
 -/
-import Mathlib.Data.ZMod.QuotientGroup
-import Mathlib.NumberTheory.ArithmeticFunction.Moebius
-import Mathlib.Data.Set.Card
-import Mathlib.Tactic
+module
+
+public import Mathlib.Data.ZMod.QuotientGroup
+public import Mathlib.NumberTheory.ArithmeticFunction.Moebius
+public import Mathlib.Data.Set.Card
+public import Mathlib.Tactic
+
+@[expose] public section
 
 namespace Weil
 

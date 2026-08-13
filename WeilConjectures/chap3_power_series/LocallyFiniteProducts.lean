@@ -23,7 +23,11 @@ Design notes:
   `[CommRing R] [Algebra ℚ R] [IsAddTorsionFree R]`; the coefficient-subring
   layer is again generic.
 -/
-import WeilConjectures.chap3_power_series.FormalExpLog
+module
+
+public import WeilConjectures.chap3_power_series.FormalExpLog
+
+@[expose] public section
 
 open PowerSeries Nat
 

@@ -23,11 +23,15 @@ Design notes, following the "Formalization note" conventions of the guideline:
   "Rational coefficient scope" paragraph on, the parameters are
   `[CommRing R] [Algebra ℚ R] [IsAddTorsionFree R]`.
 -/
-import Mathlib.RingTheory.PowerSeries.Substitution
-import Mathlib.RingTheory.PowerSeries.Derivative
-import Mathlib.RingTheory.PowerSeries.Exp
-import Mathlib.RingTheory.PowerSeries.WellKnown
-import Mathlib.Tactic
+module
+
+public import Mathlib.RingTheory.PowerSeries.Substitution
+public import Mathlib.RingTheory.PowerSeries.Derivative
+public import Mathlib.RingTheory.PowerSeries.Exp
+public import Mathlib.RingTheory.PowerSeries.WellKnown
+public import Mathlib.Tactic
+
+@[expose] public section
 
 open PowerSeries Nat
 
@@ -223,7 +227,7 @@ theorem formalDerivative_add (A B : R⟦X⟧) :
 
 /-- The derivation law `D(1) = 0`, used repeatedly below. -/
 theorem formalDerivative_one : formalDerivative (1 : R⟦X⟧) = 0 :=
-  PowerSeries.derivative_one
+  (PowerSeries.derivative R).map_one_eq_zero
 
 /-- `lemma:weil-formal-log-outer-series-derivative`.  Derivative of the
 universal outer logarithm. -/
@@ -382,8 +386,8 @@ exponential. -/
 theorem formalExp_derivative {U : R⟦X⟧} (hU : constantCoeff U = 0) :
     formalDerivative (formalExp U) = formalDerivative U * formalExp U := by
   have hs : HasSubst U := HasSubst.of_constantCoeff_zero' hU
-  show PowerSeries.derivative R ((exp R).subst U) = _
-  rw [derivative_subst hs, derivative_exp, mul_comm]
+  change PowerSeries.derivative R ((exp R).subst U) = _
+  rw [derivative_subst R hs, derivative_exp, mul_comm]
   rfl
 
 /-- `lemma:weil-deriv-log-subst-eq-geometric-inverse`.  The substituted
@@ -417,7 +421,8 @@ theorem formalLog_derivative {A : R⟦X⟧} (hA : constantCoeff A = 1) :
   have hs : HasSubst (A - 1) := HasSubst.of_constantCoeff_zero' hU
   have key := subst_derivLog_eq_geometricInverse hA
   simp only [formalDerivative] at key ⊢
-  rw [formalLog, derivative_subst hs, key, map_sub, derivative_one, sub_zero, mul_comm]
+  rw [formalLog, derivative_subst R hs, key, map_sub,
+    (PowerSeries.derivative R).map_one_eq_zero, sub_zero, mul_comm]
 
 /-- `lemma:weil-formal-exp-sum-derivative`.  Derivative of the exponential of
 a sum. -/
