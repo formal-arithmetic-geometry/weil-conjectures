@@ -106,6 +106,7 @@ public import WeilConjectures.SixFunctors.Preliminaries.HomotopyAdjunction
 public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
 public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedMapDerivedCategory
 public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
+public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctorComp
 public import WeilConjectures.SixFunctors.ProperBaseChange.BaseChangeMorphism
 public import WeilConjectures.SixFunctors.ProperBaseChange.FiniteCohomology
 public import WeilConjectures.SixFunctors.ProperBaseChange.Proper

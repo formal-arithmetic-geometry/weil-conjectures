@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.SixFunctors.DerivedFunctors.Full
 public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
+public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctorComp
 
 /-!
 
@@ -35,6 +36,9 @@ closed field:
   `RΓ(X_ét, -) : D(X_ét) ⥤ D(A)`.
 - `AlgebraicGeometry.Etale.cohomologyFunctor`: étale cohomology
   `H^n_ét(X, -) := H^n(RΓ(X, -))`.
+- `AlgebraicGeometry.Etale.derivedGlobalSectionsComp`: the Leray composition
+  isomorphism `RΓ(Y, Rf_* K) ≅ RΓ(X, K)`, an instance of the composition theorem for
+  total right derived functors since `f_*` preserves K-injective complexes.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekToLowerStar`: the canonical comparison
   `ι_f : Rf_! ⟶ Rf_*` for `f` admitting a compactification, obtained by right-deriving
   the sheaf-level comparison of `WeilConjectures.SixFunctors.LowerShriek.Comparison`; an
@@ -72,33 +76,6 @@ closed field:
 universe w u' u
 
 open CategoryTheory Limits Opposite Abelian
-
-namespace CategoryTheory.Functor
-
-variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions C]
-
-/-- Functoriality of the total right derived functor: a natural transformation `F ⟶ G`
-of additive functors induces a natural transformation
-`RF ⟶ RG : DerivedCategory C ⥤ DerivedCategory D` of the total right derived
-functors. -/
-noncomputable def rightDerivedFunctorNatTrans {F G : C ⥤ D} [F.Additive] [G.Additive]
-    (τ : F ⟶ G) : F.rightDerivedFunctor ⟶ G.rightDerivedFunctor :=
-  rightDerivedNatTrans F.rightDerivedFunctor G.rightDerivedFunctor
-    F.rightDerivedFunctorUnit G.rightDerivedFunctorUnit
-    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
-    (Functor.whiskerRight (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ))
-      DerivedCategory.Qh)
-
-/-- The natural transformation induced on total right derived functors by a natural
-isomorphism is an isomorphism: the inverse is induced by the inverse. -/
-lemma isIso_rightDerivedFunctorNatTrans {F G : C ⥤ D} [F.Additive] [G.Additive]
-    (τ : F ⟶ G) [IsIso τ] : IsIso (rightDerivedFunctorNatTrans τ) := by
-  refine ⟨⟨rightDerivedFunctorNatTrans (CategoryTheory.inv τ), ?_, ?_⟩⟩ <;>
-    simp [rightDerivedFunctorNatTrans, ← Functor.whiskerRight_comp,
-      ← NatTrans.mapHomotopyCategory_comp]
-
-end CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -144,21 +121,50 @@ noncomputable def Etale.cohomologyFunctor (n : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ A :=
   Etale.derivedGlobalSections A X ⋙ DerivedCategory.homologyFunctor A n
 
-/-- The Leray composition isomorphism `RΓ(Y_ét, Rf_* K) ≅ RΓ(X_ét, K)` for a morphism
-`f : X ⟶ Y`.
+end GlobalSections
 
-Mathematically, at the underived level `Γ_Y ∘ f_*` is canonically isomorphic to `Γ_X`
-(the sections of `f_* F` over `𝟙 Y` are the sections of `F` over the base change
-`Y ×_Y X ≅ X`), and `f_*` preserves K-injective complexes since it is right adjoint to
-the exact pullback `f^*`; hence the composition of the derived functors is the derived
-functor of the composition. Its formalization is part of the pending composition
-infrastructure for the derived functors and is not yet available. -/
-noncomputable def Etale.derivedGlobalSectionsComp {X Y : Scheme.{u}} (f : X ⟶ Y) :
+section Leray
+
+variable [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
+    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- The base change of the terminal object `𝟙 Y` of the small étale site of `Y` along
+`f : X ⟶ Y` is the terminal object `𝟙 X` of the small étale site of `X`: the
+isomorphism `Y ×_Y X ≅ X` over `X`. -/
+noncomputable def Etale.pullbackTerminalIso :
+    (MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk (𝟙 Y)) ≅
+      Scheme.Etale.mk (𝟙 X) :=
+  MorphismProperty.Over.isoMk (asIso (Limits.pullback.snd (𝟙 Y) f))
+    (by exact Category.comp_id _)
+
+/-- The underived Leray comparison: the composition of the pushforward `f_*` with global
+sections over `Y` is canonically isomorphic to global sections over `X`, since the
+sections of `f_* G` over `𝟙 Y` are the sections of `G` over the base change
+`Y ×_Y X ≅ X`. -/
+noncomputable def Etale.lowerStarCompGlobalSectionsIso :
+    Etale.lowerStar A f ⋙ Etale.globalSections A Y ≅ Etale.globalSections A X :=
+  NatIso.ofComponents
+    (fun G => G.obj.mapIso (Etale.pullbackTerminalIso f).op.symm)
+    (fun φ => (φ.hom.naturality _).symm)
+
+/-- The pushforward `f_*` on étale sheaves preserves K-injective complexes, being right
+adjoint to the exact pullback `f^*`. -/
+instance Etale.preservesKInjectiveComplexes_lowerStar :
+    (Etale.lowerStar A f).PreservesKInjectiveComplexes :=
+  (Etale.upperStarLowerStarAdjunction A f).preservesKInjectiveComplexes
+
+/-- The **Leray composition isomorphism** `RΓ(Y_ét, Rf_* K) ≅ RΓ(X_ét, K)` for a
+morphism `f : X ⟶ Y`: the instance of the composition theorem for total right derived
+functors (`Functor.rightDerivedFunctorCompIso'`) associated with the underived
+comparison `Γ_Y ∘ f_* ≅ Γ_X`, using that `f_*` preserves K-injective complexes. -/
+noncomputable def Etale.derivedGlobalSectionsComp :
     Etale.rightDerivedLowerStar A f ⋙ Etale.derivedGlobalSections A Y ≅
       Etale.derivedGlobalSections A X :=
-  sorry
+  Functor.rightDerivedFunctorCompIso' (Etale.lowerStar A f) (Etale.globalSections A Y)
+    (Etale.lowerStarCompGlobalSectionsIso A f)
 
-end GlobalSections
+end Leray
 
 section LowerShriekComparison
 
@@ -185,6 +191,8 @@ end LowerShriekComparison
 
 section CompactSupport
 
+variable [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
+    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
 variable (k : Type u) [Field k]
 variable {X : Scheme.{u}} (p : X ⟶ Spec (.of k)) [HasCompactification p]
 
