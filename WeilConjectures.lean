@@ -96,6 +96,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
 public import WeilConjectures.SixFunctors.DerivedFunctors.Full
 public import WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory
+public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
