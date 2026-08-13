@@ -95,6 +95,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
 public import WeilConjectures.SixFunctors.DerivedFunctors.Full
+public import WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
@@ -102,11 +103,13 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.Preliminaries.DerivedAdjunction
 public import WeilConjectures.SixFunctors.Preliminaries.HomotopyAdjunction
 public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
+public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedMapDerivedCategory
 public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProperBaseChange.BaseChangeMorphism
 public import WeilConjectures.SixFunctors.ProperBaseChange.FiniteCohomology
 public import WeilConjectures.SixFunctors.ProperBaseChange.Proper
 public import WeilConjectures.SixFunctors.ProperBaseChange.Smooth
+public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.PointCount

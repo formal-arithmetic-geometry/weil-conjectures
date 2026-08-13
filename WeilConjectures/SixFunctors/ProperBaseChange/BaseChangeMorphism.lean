@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.DerivedFunctors.Full
+public import WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory
 
 /-!
 
@@ -51,10 +52,15 @@ The file also constructs the cohomological base-change morphism
 classical sheaf-level form `g^* R^q f_* F ⟶ R^q f'_* g'^* F` for the higher direct images
 `R^q f_* F := H^q(Rf_*(F[0]))`.
 
+The comparison isomorphisms of the derived pullback used here — the composition
+isomorphism `Etale.leftDerivedUpperStarComp`, the exactness comparison
+`Etale.homologyLeftDerivedUpperStarIso`, and the single-degree comparison
+`Etale.singleCompLeftDerivedUpperStarIso` — are provided by
+`WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory`, via the
+identification of `Lg^*` with the levelwise functor induced by the exact `g^*`.
+
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.leftDerivedUpperStarComp`: the composition isomorphism
-  `L(h₁ ≫ h₂)^* ≅ Lh₁^* ∘ Lh₂^*` of derived pullbacks (infrastructure input, sorried).
 - `AlgebraicGeometry.Etale.pullbackSquareComparison`: the pullback comparison `θ_sq` of a
   commutative square.
 - `AlgebraicGeometry.Etale.baseChangeUnitStep`, `Etale.baseChangeSquareStep`,
@@ -119,23 +125,6 @@ variable [∀ (T : Scheme.{u}), MonoidalCategory (Sheaf T.smallEtaleTopology A)]
   [∀ (T : Scheme.{u}), Abelian.HasFunctorialFlatResolution (Sheaf T.smallEtaleTopology A)]
 
 section PullbackComposition
-
-/-- The composition isomorphism `L(h₁ ≫ h₂)^* ≅ Lh₁^* ∘ Lh₂^*` of derived pullbacks.
-
-Mathematically, this comes from the corresponding composition isomorphism of the
-underived pullbacks `(h₁ ≫ h₂)^* ≅ h₁^* ∘ h₂^*` — which follows from uniqueness of left
-adjoints, since the pushforwards compose via the pseudofunctoriality
-`MorphismProperty.Over.pullback` of base change on the étale sites — together with the
-fact that all functors involved are exact, so that the total left derived functor of a
-composition is the composition of the total left derived functors. Its formalization is
-part of the pending pseudofunctoriality infrastructure for the derived functors (see also
-the composition TODO in `WeilConjectures.SixFunctors.LowerShriek.Etale`) and is not yet
-available. -/
-noncomputable def Etale.leftDerivedUpperStarComp {T S R : Scheme.{u}}
-    (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
-    Etale.leftDerivedUpperStar A (h₁ ≫ h₂) ≅
-      Etale.leftDerivedUpperStar A h₂ ⋙ Etale.leftDerivedUpperStar A h₁ :=
-  sorry
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -217,23 +206,6 @@ end BaseChangeTransformation
 
 section CohomologicalBaseChange
 
-/-- The exactness comparison `κ : h^* ∘ H^n ≅ H^n ∘ Lh^*`: since the underived pullback
-`h^*` on étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of
-the derived category computes the `n`-th homology sheaf of the derived pullback.
-
-Mathematically this is immediate from the exactness of `h^*`
-(`Etale.preservesFiniteLimits_upperStar` together with the colimit preservation from the
-adjunction): an exact functor commutes with homology, and `Lh^*` is computed by applying
-`h^*` levelwise. Its formalization requires the compatibility of
-`Etale.leftDerivedUpperStar` with the homology functors of the derived categories, which
-is part of the pending derived-functor infrastructure and not yet available. -/
-noncomputable def Etale.homologyLeftDerivedUpperStarIso {T S : Scheme.{u}}
-    (h : T ⟶ S) (n : ℤ) :
-    DerivedCategory.homologyFunctor (Sheaf S.smallEtaleTopology A) n ⋙ Etale.upperStar A h ≅
-      Etale.leftDerivedUpperStar A h ⋙
-        DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology A) n :=
-  sorry
-
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
@@ -268,20 +240,6 @@ noncomputable def Etale.higherDirectImage (n : ℤ) :
   DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0 ⋙
     Etale.rightDerivedLowerStar A f ⋙
       DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology A) n
-
-/-- The single-degree comparison for the derived pullback: since the underived pullback
-`h^*` on étale sheaves is exact, the derived pullback of a sheaf placed in degree `0` is
-the pullback of the sheaf placed in degree `0`, `Lh^*(F[0]) ≅ (h^* F)[0]`.
-
-As for `Etale.homologyLeftDerivedUpperStarIso`, this is mathematically immediate from the
-exactness of `h^*`; its formalization is part of the pending derived-functor
-infrastructure and not yet available. -/
-noncomputable def Etale.singleCompLeftDerivedUpperStarIso {T S : Scheme.{u}} (h : T ⟶ S) :
-    DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology A) 0 ⋙
-        Etale.leftDerivedUpperStar A h ≅
-      Etale.upperStar A h ⋙
-        DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology A) 0 :=
-  sorry
 
 variable {X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
