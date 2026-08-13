@@ -5,7 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.Localization
+public import WeilConjectures.Blowup.Affine.Localization
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 
@@ -17,7 +18,7 @@ blow-ups `AffineBlowup (I.ideal U)` over the locally directed cover of all affin
 `X`. Since the index category is a thin preorder, no cocycle conditions appear; the gluing
 obligation is that the local blow-ups form a functor whose structure maps are equifibered
 over `X`, which we reduce to the localization theorem of
-`WeilConjectures.Blowup.Localization`.
+`WeilConjectures.Blowup.Affine.Localization`.
 
 ## Main definitions
 
@@ -41,7 +42,7 @@ over `X`, which we reduce to the localization theorem of
 The blueprint's original roadmap glues over a chosen affine open cover with pairwise basic
 overlap comparisons and explicit cocycle checks. We instead glue over the thin category of
 all affine opens via `Scheme.Cover.RelativeGluingData`, which eliminates the cocycle
-conditions; the overlap content is carried by the functoriality (`blowupHom_comp`) and the
+conditions; the overlap content is carried by the functoriality (`AffineBlowup.hom_comp`) and the
 equifiberedness of the structure maps.
 
 -/
@@ -56,41 +57,19 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 variable {X : Scheme.{u}} (I : X.IdealSheafData)
 
-/-- The `Spec` of a restriction map intertwines the canonical isomorphisms
-`Spec Γ(X, U) ≅ U` with the inclusion of opens. -/
-private lemma specMap_res_isoSpec_inv {U V : X.affineOpens} (hUV : U ≤ V) :
-    Spec.map (X.presheaf.map (homOfLE (X := X.Opens) hUV).op) ≫ V.2.isoSpec.inv =
-      U.2.isoSpec.inv ≫ X.homOfLE hUV := by
-  rw [← cancel_mono V.1.ι, Category.assoc, Category.assoc, IsAffineOpen.isoSpec_inv_ι,
-    Scheme.homOfLE_ι, IsAffineOpen.isoSpec_inv_ι,
-    V.2.map_fromSpec U.2 (homOfLE (X := X.Opens) hUV).op]
-
-/-- Membership in the range of the inclusion of a smaller open. -/
-private lemma mem_opensRange_homOfLE {U V : X.Opens} (hUV : U ≤ V) (x : V.toScheme) :
-    x ∈ (X.homOfLE hUV).opensRange ↔ x.1 ∈ U := by
-  rw [Scheme.opensRange_homOfLE]
-  exact Iff.rfl
-
-/-- Preimages of ranges of inclusions of opens. -/
-private lemma homOfLE_preimage_opensRange {U V W : X.Opens} (hWU : W ≤ U) (hUV : U ≤ V) :
-    X.homOfLE hUV ⁻¹ᵁ (X.homOfLE (hWU.trans hUV)).opensRange =
-      (X.homOfLE hWU).opensRange := by
-  rw [Scheme.opensRange_homOfLE, Scheme.opensRange_homOfLE, ← Scheme.Hom.comp_preimage,
-    Scheme.homOfLE_ι]
-
 /-- The diagram `U ↦ Bl_{I(U)} (Spec Γ(X, U))` over the affine opens of `X`.
 (blueprint: `def:nagata-global-blowup-local-model`) -/
 noncomputable def blowupFunctor : X.affineOpens ⥤ Scheme.{u} where
   obj U := AffineBlowup (I.ideal U)
   map {U V} f :=
-    blowupHom (X.presheaf.map (homOfLE (X := X.Opens) (leOfHom f)).op).hom
+    AffineBlowup.hom (X.presheaf.map (homOfLE (X := X.Opens) (leOfHom f)).op).hom
       (I.map_ideal (leOfHom f))
   map_id U := by
     have e : (X.presheaf.map (homOfLE (X := X.Opens) (leOfHom (𝟙 U))).op).hom =
         RingHom.id Γ(X, U.1) := by
       rw [show homOfLE (X := X.Opens) (leOfHom (𝟙 U)) = 𝟙 U.1 from Subsingleton.elim _ _,
         op_id, X.presheaf.map_id, CommRingCat.hom_id]
-    exact (blowupHom_congr e _).trans blowupHom_id
+    exact (AffineBlowup.hom_congr e _).trans AffineBlowup.hom_id
   map_comp {U V W} f g := by
     have e : (X.presheaf.map (homOfLE (X := X.Opens) (leOfHom (f ≫ g))).op).hom =
         ((X.presheaf.map (homOfLE (X := X.Opens) (leOfHom f)).op).hom).comp
@@ -98,8 +77,8 @@ noncomputable def blowupFunctor : X.affineOpens ⥤ Scheme.{u} where
       rw [← CommRingCat.hom_comp, ← Functor.map_comp, ← op_comp,
         show homOfLE (X := X.Opens) (leOfHom f) ≫ homOfLE (X := X.Opens) (leOfHom g) =
           homOfLE (X := X.Opens) (leOfHom (f ≫ g)) from Subsingleton.elim _ _]
-    exact (blowupHom_congr e _).trans
-      (blowupHom_comp _ _ (I.map_ideal (leOfHom g)) (I.map_ideal (leOfHom f)))
+    exact (AffineBlowup.hom_congr e _).trans
+      (AffineBlowup.hom_comp _ _ (I.map_ideal (leOfHom g)) (I.map_ideal (leOfHom f)))
 
 @[simp]
 lemma blowupFunctor_obj (U : X.affineOpens) :
@@ -108,7 +87,7 @@ lemma blowupFunctor_obj (U : X.affineOpens) :
 
 lemma blowupFunctor_map {U V : X.affineOpens} (f : U ⟶ V) :
     I.blowupFunctor.map f =
-      blowupHom (X.presheaf.map (homOfLE (X := X.Opens) (leOfHom f)).op).hom
+      AffineBlowup.hom (X.presheaf.map (homOfLE (X := X.Opens) (leOfHom f)).op).hom
       (I.map_ideal (leOfHom f)) :=
   rfl
 
@@ -120,7 +99,7 @@ noncomputable def blowupNatTrans :
   naturality {U V} f := by
     have hG : X.directedAffineCover.functorOfLocallyDirected.map f =
         X.homOfLE (leOfHom f) := rfl
-    rw [hG, blowupFunctor_map, blowupHom_toSpec_assoc, CommRingCat.ofHom_hom,
+    rw [hG, blowupFunctor_map, AffineBlowup.hom_toSpec_assoc, CommRingCat.ofHom_hom,
       specMap_res_isoSpec_inv (leOfHom f), Category.assoc]
 
 lemma blowupNatTrans_app (U : X.affineOpens) :
@@ -141,7 +120,7 @@ lemma isPullback_blowupNatTrans_of_basicOpen {U V : X.affineOpens} (hUV : U ≤ 
     IsPullback (I.blowupFunctor.map (homOfLE hUV)) (I.blowupNatTrans.app U)
       (I.blowupNatTrans.app V) (X.homOfLE hUV) := by
   letI := (X.presheaf.map (homOfLE (X := X.Opens) hUV).op).hom.toAlgebra
-  haveI : IsLocalization.Away f Γ(X, U.1) :=
+  have : IsLocalization.Away f Γ(X, U.1) :=
     V.2.isLocalization_of_eq_basicOpen f (homOfLE hUV) hU
   have halg : algebraMap Γ(X, V.1) Γ(X, U.1) =
       (X.presheaf.map (homOfLE (X := X.Opens) hUV).op).hom :=
@@ -149,39 +128,24 @@ lemma isPullback_blowupNatTrans_of_basicOpen {U V : X.affineOpens} (hUV : U ≤ 
   have hmap : ((I.ideal V).map (algebraMap Γ(X, V.1) Γ(X, U.1)) : Ideal Γ(X, U.1)) =
       I.ideal U := by
     rw [halg]; exact I.map_ideal hUV
-  have key := isPullback_blowupHom_of_isLocalization (B := Γ(X, U.1)) f hmap
+  have key := AffineBlowup.isPullback_hom_of_isLocalization (B := Γ(X, U.1)) f hmap
   have w : Spec.map (CommRingCat.ofHom (algebraMap Γ(X, V.1) Γ(X, U.1))) ≫
       V.2.isoSpec.inv = U.2.isoSpec.inv ≫ X.homOfLE hUV := by
     rw [halg, CommRingCat.ofHom_hom]
     exact specMap_res_isoSpec_inv hUV
   have e : I.blowupFunctor.map (homOfLE hUV) =
-      blowupHom (algebraMap Γ(X, V.1) Γ(X, U.1)) hmap :=
-    (blowupHom_congr halg hmap).symm
+      AffineBlowup.hom (algebraMap Γ(X, V.1) Γ(X, U.1)) hmap :=
+    (AffineBlowup.hom_congr halg hmap).symm
   rw [blowupNatTrans_app, blowupNatTrans_app, e]
   exact key.paste_vert (IsPullback.of_vert_isIso ⟨w⟩)
-
-/-- The transition map into an affine open in which the source is basic is an open
-immersion. -/
-private lemma isOpenImmersion_blowupFunctor_map_of_basicOpen {U V : X.affineOpens}
-    (hUV : U ≤ V) (f : Γ(X, V.1)) (hU : U.1 = X.basicOpen f) :
-    IsOpenImmersion (I.blowupFunctor.map (homOfLE hUV)) :=
-  (I.isPullback_blowupNatTrans_of_basicOpen hUV f hU).isOpenImmersion_fst
-
-/-- The range formula for a transition map into an affine open in which the source is
-basic. -/
-private lemma opensRange_blowupFunctor_map_of_basicOpen {U V : X.affineOpens}
-    (hUV : U ≤ V) (f : Γ(X, V.1)) (hU : U.1 = X.basicOpen f) :
-    haveI := I.isOpenImmersion_blowupFunctor_map_of_basicOpen hUV f hU
-    (I.blowupFunctor.map (homOfLE hUV)).opensRange =
-      I.blowupNatTrans.app V ⁻¹ᵁ (X.homOfLE hUV).opensRange :=
-  (I.isPullback_blowupNatTrans_of_basicOpen hUV f hU).opensRange_fst
 
 /-- Step B(i): the transition maps of the blow-up diagram are open immersions. -/
 lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
     IsOpenImmersion (I.blowupFunctor.map (homOfLE hUV)) := by
-  haveI H : ∀ i : {W : X.affineOpens // W ≤ U ∧ ∃ g : Γ(X, V.1), W.1 = X.basicOpen g},
+  have H : ∀ i : {W : X.affineOpens // W ≤ U ∧ ∃ g : Γ(X, V.1), W.1 = X.basicOpen g},
       IsOpenImmersion (I.blowupFunctor.map (homOfLE (i.2.1.trans hUV))) := fun i ↦
-    I.isOpenImmersion_blowupFunctor_map_of_basicOpen _ i.2.2.choose i.2.2.choose_spec
+    (I.isPullback_blowupNatTrans_of_basicOpen _ i.2.2.choose
+      i.2.2.choose_spec).isOpenImmersion_fst
   apply IsZariskiLocalAtTarget.of_range_subset_iSup (P := @IsOpenImmersion)
     (fun i : {W : X.affineOpens // W ≤ U ∧ ∃ g : Γ(X, V.1), W.1 = X.basicOpen g} ↦
       (I.blowupFunctor.map (homOfLE (i.2.1.trans hUV))).opensRange)
@@ -195,10 +159,10 @@ lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
         X.basicOpen ((X.presheaf.map (homOfLE (X := X.Opens) hUV).op) g) := by
       rw [X.basicOpen_res, inf_eq_right.mpr hgU]
       rfl
-    haveI := I.isOpenImmersion_blowupFunctor_map_of_basicOpen hWU _ hWgU
+    have := (I.isPullback_blowupNatTrans_of_basicOpen hWU _ hWgU).isOpenImmersion_fst
     have hzW : z ∈ (I.blowupFunctor.map (homOfLE hWU)).opensRange := by
-      rw [I.opensRange_blowupFunctor_map_of_basicOpen hWU _ hWgU, Scheme.Hom.mem_preimage,
-        mem_opensRange_homOfLE]
+      rw [(I.isPullback_blowupNatTrans_of_basicOpen hWU _ hWgU).opensRange_fst,
+        Scheme.Hom.mem_preimage, mem_opensRange_homOfLE]
       exact hzg
     obtain ⟨y, hy⟩ := hzW
     rw [← hy, ← Scheme.Hom.comp_apply, ← Functor.map_comp,
@@ -209,8 +173,8 @@ lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
     have hWgU : i.1.1 =
         X.basicOpen ((X.presheaf.map (homOfLE (X := X.Opens) hUV).op) g) := by
       rw [X.basicOpen_res, ← hWg, inf_eq_right.mpr (i.2.1 : i.1.1 ≤ U.1)]
-    haveI h1 : IsOpenImmersion (I.blowupFunctor.map (homOfLE i.2.1)) :=
-      I.isOpenImmersion_blowupFunctor_map_of_basicOpen i.2.1 _ hWgU
+    have h1 : IsOpenImmersion (I.blowupFunctor.map (homOfLE i.2.1)) :=
+      (I.isPullback_blowupNatTrans_of_basicOpen i.2.1 _ hWgU).isOpenImmersion_fst
     have hcomp : homOfLE i.2.1 ≫ homOfLE hUV = homOfLE (i.2.1.trans hUV) :=
       Subsingleton.elim _ _
     have w : I.blowupFunctor.map (homOfLE i.2.1) ≫ I.blowupFunctor.map (homOfLE hUV) =
@@ -220,9 +184,9 @@ lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
     have hpre : I.blowupFunctor.map (homOfLE hUV) ⁻¹ᵁ
         (I.blowupFunctor.map (homOfLE (i.2.1.trans hUV))).opensRange =
         (I.blowupFunctor.map (homOfLE i.2.1)).opensRange := by
-      rw [I.opensRange_blowupFunctor_map_of_basicOpen (i.2.1.trans hUV)
-          i.2.2.choose i.2.2.choose_spec,
-        I.opensRange_blowupFunctor_map_of_basicOpen i.2.1 _ hWgU,
+      rw [(I.isPullback_blowupNatTrans_of_basicOpen (i.2.1.trans hUV)
+          i.2.2.choose i.2.2.choose_spec).opensRange_fst,
+        (I.isPullback_blowupNatTrans_of_basicOpen i.2.1 _ hWgU).opensRange_fst,
         ← Scheme.Hom.comp_preimage, I.blowupNatTrans_naturality hUV,
         Scheme.Hom.comp_preimage,
         homOfLE_preimage_opensRange (i.2.1 : i.1.1 ≤ U.1) (hUV : U.1 ≤ V.1)]
@@ -230,15 +194,14 @@ lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
       (morphismRestrictArrowIso (I.blowupFunctor.map (homOfLE hUV)) (𝟙 _) w hpre)]
     infer_instance
 
+instance {U V : X.affineOpens} (f : U ⟶ V) : IsOpenImmersion (I.blowupFunctor.map f) :=
+  I.isOpenImmersion_blowupFunctor_map (leOfHom f)
+
 /-- Step B(ii): the range of a transition map of the blow-up diagram is the preimage of the
 corresponding open. -/
 lemma opensRange_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
-    haveI : IsOpenImmersion (I.blowupFunctor.map (homOfLE hUV)) :=
-      I.isOpenImmersion_blowupFunctor_map hUV
     (I.blowupFunctor.map (homOfLE hUV)).opensRange =
       I.blowupNatTrans.app V ⁻¹ᵁ (X.homOfLE hUV).opensRange := by
-  haveI : IsOpenImmersion (I.blowupFunctor.map (homOfLE hUV)) :=
-    I.isOpenImmersion_blowupFunctor_map hUV
   refine SetLike.ext fun z ↦ ?_
   constructor
   · rintro ⟨w, rfl⟩
@@ -254,9 +217,9 @@ lemma opensRange_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
     have hWU : X.affineBasicOpen g ≤ U := hgU
     have hWV : X.affineBasicOpen g ≤ V := hWU.trans hUV
     have hb : (X.affineBasicOpen g).1 = X.basicOpen g := rfl
-    haveI := I.isOpenImmersion_blowupFunctor_map_of_basicOpen hWV g hb
     have hzW : z ∈ (I.blowupFunctor.map (homOfLE hWV)).opensRange := by
-      rw [I.opensRange_blowupFunctor_map_of_basicOpen hWV g hb, Scheme.Hom.mem_preimage]
+      rw [(I.isPullback_blowupNatTrans_of_basicOpen hWV g hb).opensRange_fst,
+        Scheme.Hom.mem_preimage]
       exact (mem_opensRange_homOfLE hWV _).mpr hzg
     obtain ⟨y, hy⟩ := hzW
     refine ⟨I.blowupFunctor.map (homOfLE hWU) y, ?_⟩
@@ -268,8 +231,6 @@ lemma opensRange_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
 (blueprint: `lemma:nagata-global-blowup-glue-data-valid`) -/
 lemma blowupNatTrans_equifibered : I.blowupNatTrans.Equifibered := by
   intro U V f
-  haveI : IsOpenImmersion (I.blowupFunctor.map f) :=
-    I.isOpenImmersion_blowupFunctor_map (leOfHom f)
   exact (IsOpenImmersion.isPullback (I.blowupNatTrans.app U) (I.blowupFunctor.map f)
     (X.homOfLE (leOfHom f)) (I.blowupNatTrans.app V)
     (I.blowupNatTrans_naturality (leOfHom f))
@@ -281,9 +242,6 @@ noncomputable def blowupGluingData : X.directedAffineCover.RelativeGluingData wh
   functor := I.blowupFunctor
   natTrans := I.blowupNatTrans
   equifibered := I.blowupNatTrans_equifibered
-
-instance {U V : X.affineOpens} (f : U ⟶ V) : IsOpenImmersion (I.blowupFunctor.map f) :=
-  inferInstanceAs (IsOpenImmersion (I.blowupGluingData.functor.map f))
 
 instance : (I.blowupFunctor ⋙ Scheme.forget).IsLocallyDirected :=
   inferInstanceAs ((I.blowupGluingData.functor ⋙ Scheme.forget).IsLocallyDirected)

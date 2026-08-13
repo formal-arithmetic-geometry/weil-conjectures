@@ -5,15 +5,15 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.ReesGrading
-public import WeilConjectures.Blowup.Helpers
+public import WeilConjectures.Blowup.Affine.ReesGrading
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 
 # The blow-up of an affine scheme along an ideal
 
 We define the blow-up of `Spec A` along an ideal `I : Ideal A` as `Proj` of the Rees algebra
-of `I` (with the grading of `WeilConjectures.Blowup.ReesGrading`), together with its
+of `I` (with the grading of `WeilConjectures.Blowup.Affine.ReesGrading`), together with its
 structure morphism to `Spec A` and its standard affine charts at the degree-one elements
 `a·X`, `a ∈ I`.
 
@@ -52,7 +52,7 @@ variable {A : Type u} [CommRing A] (I : Ideal A)
 
 /-- The blow-up of `Spec A` along the ideal `I`, defined as `Proj` of the Rees algebra
 of `I`. (blueprint: `def:nagata-affine-blowup`) -/
-noncomputable abbrev AffineBlowup : Scheme.{u} :=
+noncomputable def AffineBlowup : Scheme.{u} :=
   Proj (reesGrading I)
 
 namespace AffineBlowup
@@ -172,11 +172,11 @@ lemma bijective_awayAlgebraMap_of_eq_top (h : I = ⊤) :
 (blueprint: `lemma:nagata-affine-blowup-top`) -/
 theorem isIso_toSpec_of_eq_top (h : I = ⊤) : IsIso (toSpec I) := by
   have h1 : (1 : A) ∈ I := by rw [h]; trivial
-  haveI hchart : IsIso (chart I (reesX I 1 h1) (reesX_mem I 1 h1)) := by
+  have hchart : IsIso (chart I (reesX I 1 h1) (reesX_mem I 1 h1)) := by
     refine isIso_of_isOpenImmersion_of_opensRange_eq_top _ ?_
     rw [opensRange_chart]
     exact basicOpen_reesX_one_eq_top h
-  haveI hcomp : IsIso (chart I (reesX I 1 h1) (reesX_mem I 1 h1) ≫ toSpec I) := by
+  have hcomp : IsIso (chart I (reesX I 1 h1) (reesX_mem I 1 h1) ≫ toSpec I) := by
     rw [chart_toSpec, isIso_SpecMap_iff]
     simpa using bijective_awayAlgebraMap_of_eq_top h
   exact IsIso.of_isIso_comp_left (chart I (reesX I 1 h1) (reesX_mem I 1 h1)) (toSpec I)
