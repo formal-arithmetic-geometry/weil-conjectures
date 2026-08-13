@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.FiniteDegree
+public import WeilConjectures.Blowup.FiniteDegree
 
 /-!
 

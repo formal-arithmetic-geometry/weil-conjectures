@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.Proper
-public import WeilConjectures.Compactification.BlowupUniversal
-public import WeilConjectures.Compactification.FiniteDegree
+public import WeilConjectures.Blowup.BlowupUniversal
+public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.StrictTransform
 

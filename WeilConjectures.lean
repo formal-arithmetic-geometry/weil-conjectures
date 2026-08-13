@@ -10,6 +10,7 @@ public import WeilConjectures.Blowup.Helpers
 public import WeilConjectures.Blowup.Localization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.Blowup.ReesGrading
+public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
@@ -17,7 +18,6 @@ public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Defs
-public import WeilConjectures.Compactification.FiniteDegree
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.Flattening
 public import WeilConjectures.Compactification.Modification
