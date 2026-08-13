@@ -12,10 +12,12 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
+public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.PointCount
