@@ -3,10 +3,12 @@ module
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.Affine
 public import WeilConjectures.Blowup.Complement
+public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.Functoriality
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.Helpers
 public import WeilConjectures.Blowup.Localization
+public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.Blowup.ReesGrading
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Convergence
