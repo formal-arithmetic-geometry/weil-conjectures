@@ -1,0 +1,382 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\newcommand{\OO}{\mathcal O}
+\newcommand{\Bl}{\operatorname{Bl}}
+
+\title{Natural-language proof of \texttt{IdealSheafData.exists\_blowup\_mul\_iso}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Statement}
+
+Let \(X\) and \(X_1\) be schemes, with \(X\) quasi-compact and quasi-separated.
+Let \(I\) be a finite-type ideal sheaf on \(X\), let
+\[
+  \pi : X_1 \longrightarrow X,
+\]
+and suppose that
+\[
+  g : X_1 \xrightarrow{\sim} \Bl_I(X)
+\]
+is an isomorphism satisfying
+\[
+  g \circ I.\mathrm{blowupMap} \text{ in Lean notation, equivalently }
+  g.\mathrm{hom} \gg I.\mathrm{blowupMap}=\pi.
+\]
+Let \(L\) be another finite-type ideal sheaf on \(X\).
+
+Then there is an isomorphism
+\[
+  e :
+  \Bl_{I L}(X)
+  \xrightarrow{\sim}
+  \Bl_{\pi^{-1}L}(X_1)
+\]
+such that, as morphisms to \(X\),
+\[
+  e.\mathrm{hom}
+  \gg
+  (L.\mathrm{comap}\,\pi).\mathrm{blowupMap}
+  \gg
+  \pi
+  =
+  (I*L).\mathrm{blowupMap}.
+\]
+
+Here \(\pi^{-1}L\) means the inverse-image ideal
+\(L.\mathrm{comap}\,\pi\).
+
+\section*{Proof}
+
+Write
+\[
+  b_I : \Bl_I(X)\longrightarrow X
+\]
+for the blow-up of \(I\), and use the given isomorphism
+\[
+  g:X_1\xrightarrow{\sim}\Bl_I(X)
+\]
+to regard \(\pi:X_1\to X\) as a chosen model of this blow-up.  Thus
+\[
+  \pi=g\circ b_I
+\]
+in ordinary geometric notation, or
+\(g.\mathrm{hom}\gg I.\mathrm{blowupMap}=\pi\) in Lean's composition convention.
+
+Now let
+\[
+  q:Y\longrightarrow X_1
+\]
+be the blow-up of the inverse-image ideal
+\[
+  L_1:=L.\mathrm{comap}\,\pi.
+\]
+Thus
+\[
+  Y=(L.\mathrm{comap}\,\pi).\mathrm{blowup}.
+\]
+We shall prove that the composite
+\[
+  \rho:=q\circ\pi:Y\longrightarrow X
+\]
+is, up to unique isomorphism over \(X\), the blow-up of the product ideal
+\(I L\).
+
+\subsection*{1. The product ideal becomes invertible on the iterated blow-up}
+
+Because \(\pi:X_1\to X\) is the blow-up of \(I\), the inverse image of \(I\)
+on \(X_1\),
+\[
+  I_1:=I.\mathrm{comap}\,\pi,
+\]
+is an invertible ideal sheaf.  Equivalently, it is the ideal sheaf of the
+exceptional effective Cartier divisor of the first blow-up.
+
+Pulling an invertible ideal back along an arbitrary morphism preserves
+invertibility.  Hence
+\[
+  q^{-1}I_1\cdot\OO_Y
+\]
+is an invertible ideal on \(Y\).
+
+By construction of \(q\), the inverse image of \(L_1\) on \(Y\),
+\[
+  q^{-1}L_1\cdot\OO_Y,
+\]
+is also an invertible ideal: it is the exceptional ideal of the second
+blow-up.
+
+The inverse image of a product of quasi-coherent ideals is the product of
+their inverse images.  Therefore the pullback of \(I L\) along
+\(\rho=\pi\circ q\) is
+\[
+\begin{aligned}
+  \rho^{-1}(I L)\cdot\OO_Y
+  &=
+  \bigl(\rho^{-1}I\cdot\OO_Y\bigr)
+  \bigl(\rho^{-1}L\cdot\OO_Y\bigr)\\
+  &=
+  \bigl(q^{-1}I_1\cdot\OO_Y\bigr)
+  \bigl(q^{-1}L_1\cdot\OO_Y\bigr).
+\end{aligned}
+\]
+Both factors are invertible ideals, hence so is their product.
+
+Consequently the morphism
+\[
+  \rho:Y\longrightarrow X
+\]
+has the defining property required by the universal property of the
+blow-up of \(I L\): the inverse image of \(I L\) is invertible.  Hence there
+is a unique morphism
+\[
+  \alpha:
+  Y\longrightarrow \Bl_{I L}(X)
+\]
+over \(X\).  In particular,
+\[
+  \alpha\circ b_{I L}=\rho
+\]
+with the appropriate convention for composition; in Lean notation this
+says
+\[
+  \alpha \gg (I*L).\mathrm{blowupMap}
+  =
+  q\gg\pi.
+\]
+
+\subsection*{2. Recovering the first blow-up from the product blow-up}
+
+Conversely, let
+\[
+  c:Z\longrightarrow X
+\]
+denote the blow-up of the product ideal \(I L\):
+\[
+  Z=(I*L).\mathrm{blowup},
+  \qquad
+  c=(I*L).\mathrm{blowupMap}.
+\]
+By definition of the blow-up,
+\[
+  c^{-1}(I L)\cdot\OO_Z
+\]
+is an invertible ideal sheaf on \(Z\).
+
+We claim that
+\[
+  c^{-1}I\cdot\OO_Z
+\]
+is itself invertible.  This is the standard ``factor of an invertible
+product ideal'' lemma used in the proof of Stacks Project, Tag 080A.
+Indeed, locally on \(Z\), if the product
+\[
+  \bigl(c^{-1}I\cdot\OO_Z\bigr)
+  \bigl(c^{-1}L\cdot\OO_Z\bigr)
+\]
+is an invertible ideal, then the first factor defines an effective Cartier
+divisor; equivalently, it is an invertible ideal.  Geometrically, the
+closed subscheme defined by the first factor is an effective Cartier
+divisor because its sum with the closed subscheme defined by the second
+factor is the effective Cartier divisor defined by the product.
+
+Thus \(c^{-1}I\cdot\OO_Z\) is invertible.  Applying the universal property
+of the blow-up of \(I\), there is a unique morphism
+\[
+  \beta_0:Z\longrightarrow \Bl_I(X)
+\]
+over \(X\).
+
+Using the given isomorphism
+\[
+  g:X_1\xrightarrow{\sim}\Bl_I(X),
+\]
+define
+\[
+  \beta:=\beta_0\circ g^{-1}:Z\longrightarrow X_1.
+\]
+Then \(\beta\) lies over \(X\):
+\[
+  \pi\circ\beta=c.
+\]
+Equivalently, in Lean notation,
+\[
+  \beta\gg\pi=(I*L).\mathrm{blowupMap}.
+\]
+
+\subsection*{3. The pullback of \(L\) is invertible after the first factorization}
+
+It remains to show that \(\beta:Z\to X_1\) factors through the blow-up of
+\(L_1=L.\mathrm{comap}\,\pi\).
+
+The inverse image of \(L_1\) along \(\beta\) is exactly the inverse image of
+\(L\) along \(c=\pi\circ\beta\):
+\[
+  \beta^{-1}L_1\cdot\OO_Z
+  =
+  c^{-1}L\cdot\OO_Z.
+\]
+We therefore need to show that \(c^{-1}L\cdot\OO_Z\) is invertible.
+
+Again,
+\[
+  \bigl(c^{-1}I\cdot\OO_Z\bigr)
+  \bigl(c^{-1}L\cdot\OO_Z\bigr)
+  =
+  c^{-1}(I L)\cdot\OO_Z
+\]
+is invertible.  We have already shown that the first factor
+\(c^{-1}I\cdot\OO_Z\) is invertible.  Tensoring, or equivalently multiplying
+by its inverse line bundle, shows that the second factor
+\(c^{-1}L\cdot\OO_Z\) is invertible as well.
+
+Hence the universal property of the blow-up
+\[
+  q:Y=\Bl_{L_1}(X_1)\longrightarrow X_1
+\]
+gives a unique morphism
+\[
+  \gamma:Z\longrightarrow Y
+\]
+over \(X_1\).  Therefore
+\[
+  q\circ\gamma=\beta.
+\]
+Composing with \(\pi\), we obtain
+\[
+  \rho\circ\gamma
+  =
+  \pi\circ q\circ\gamma
+  =
+  \pi\circ\beta
+  =
+  c.
+\]
+Thus \(\gamma\) is also a morphism over \(X\).
+
+\subsection*{4. The two morphisms are inverse}
+
+We have constructed morphisms
+\[
+  \alpha:Y\longrightarrow Z
+  \qquad\text{and}\qquad
+  \gamma:Z\longrightarrow Y,
+\]
+where
+\[
+  Y=\Bl_{L.\mathrm{comap}\,\pi}(X_1),
+  \qquad
+  Z=\Bl_{I L}(X).
+\]
+
+Consider \(\alpha\circ\gamma:Z\to Z\).  Both this composite and
+\(\operatorname{id}_Z\) are morphisms over \(X\).  Moreover, \(Z\) is the
+blow-up of \(I L\), hence it is final among \(X\)-schemes on which the
+inverse image of \(I L\) is invertible.  Since the inverse image of \(I L\)
+on \(Z\) is invertible, there is only one morphism from \(Z\) to the
+blow-up \(Z\) over \(X\).  Therefore
+\[
+  \alpha\circ\gamma=\operatorname{id}_Z.
+\]
+
+For the other composite, \(\gamma\circ\alpha:Y\to Y\), we use the second
+blow-up universal property.  Both \(\gamma\circ\alpha\) and
+\(\operatorname{id}_Y\) are morphisms over \(X_1\): indeed \(\gamma\) was
+constructed over \(X_1\), and \(\alpha\) respects the factorization through
+the first blow-up by uniqueness in the universal property of
+\(\Bl_I(X)\).  Since \(Y\) is the blow-up of \(L_1\) and the inverse image
+of \(L_1\) on \(Y\) is invertible, uniqueness gives
+\[
+  \gamma\circ\alpha=\operatorname{id}_Y.
+\]
+
+Thus \(\gamma\) and \(\alpha\) are inverse isomorphisms.  Taking
+\[
+  e:=\gamma:
+  (I*L).\mathrm{blowup}
+  \xrightarrow{\sim}
+  (L.\mathrm{comap}\,\pi).\mathrm{blowup},
+\]
+we obtain the required isomorphism.
+
+Finally, because \(\gamma\) was constructed over \(X_1\) and
+\(\beta\) was constructed over \(X\), we have
+\[
+  e.\mathrm{hom}
+  \gg
+  (L.\mathrm{comap}\,\pi).\mathrm{blowupMap}
+  \gg
+  \pi
+  =
+  (I*L).\mathrm{blowupMap},
+\]
+which is precisely the compatibility required in the theorem.
+
+\hfill\(\Box\)
+
+\section*{Formalization-oriented summary}
+
+For a Lean formalization, the proof naturally separates into the following
+universal-property steps.
+
+\begin{enumerate}
+  \item On
+  \[
+    Y=(L.\mathrm{comap}\,\pi).\mathrm{blowup},
+  \]
+  show that the pullback of \(I*L\) along
+  \[
+    Y\to X_1\overset{\pi}{\to}X
+  \]
+  is invertible.  The \(I\)-factor is invertible because \(X_1\) is
+  isomorphic over \(X\) to the blow-up of \(I\); the \(L\)-factor is
+  invertible by the defining property of the second blow-up.
+
+  \item Apply the universal property of \((I*L).\mathrm{blowup}\) to obtain
+  \[
+    Y\to (I*L).\mathrm{blowup}.
+  \]
+
+  \item On
+  \[
+    Z=(I*L).\mathrm{blowup},
+  \]
+  use the standard lemma that if the pullback of \(I*L\) is invertible,
+  then the pullback of \(I\) is invertible.  Apply the universal property
+  of \(I.\mathrm{blowup}\), and transport the resulting morphism through
+  \(g^{-1}\), obtaining
+  \[
+    Z\to X_1.
+  \]
+
+  \item Show that the pullback of \(L.\mathrm{comap}\,\pi\) along this map
+  is invertible.  Since the pullback of \(I*L\) and the pullback of \(I\)
+  are invertible, so is the pullback of \(L\).
+
+  \item Apply the universal property of
+  \((L.\mathrm{comap}\,\pi).\mathrm{blowup}\) to obtain
+  \[
+    Z\to Y.
+  \]
+
+  \item Prove the two composites are identities by uniqueness in the two
+  relevant blow-up universal properties.
+
+  \item The required equality of structure morphisms is built into the
+  construction of the map \(Z\to Y\).
+\end{enumerate}
+
+This is the scheme-theoretic argument of Stacks Project, Tag 080A, rewritten
+in the notation of the stated Lean theorem.
+
+\end{document}

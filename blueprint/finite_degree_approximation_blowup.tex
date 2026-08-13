@@ -1,0 +1,604 @@
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+
+\newcommand{\OO}{\mathcal O}
+\newcommand{\Bl}{\operatorname{Bl}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Proj}{\operatorname{Proj}}
+
+\title{Finite-Degree Approximation on the Blow-Up Itself}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{theorem}[Finite-degree approximation on the blow-up itself]
+Let $X$ be a quasi-compact and quasi-separated scheme, let $I$ be a finite-type
+quasi-coherent ideal sheaf on $X$, and let
+\[
+  \pi:Y=\Bl_I(X)\longrightarrow X
+\]
+be the blow-up of $X$ along $I$.
+Let $J$ be a finite-type quasi-coherent ideal sheaf on $Y$, and write
+\[
+  I_E := I\OO_Y = \pi^{-1}I\cdot \OO_Y
+\]
+for the exceptional ideal.
+
+Then there exist an integer $d\geq 1$ and a finite-type quasi-coherent ideal
+sheaf $L\subset I^d$ such that
+\[
+  L\OO_Y = I_E^d J.
+\]
+Equivalently, in the notation of the Lean statement,
+\[
+  L.\operatorname{comap}(I.\operatorname{blowupMap})
+  =
+  \bigl(I.\operatorname{comap}(I.\operatorname{blowupMap})\bigr)^d * J.
+\]
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+  \pi:Y=\Bl_I(X)\longrightarrow X
+\]
+be the blow-up, and write
+\[
+  I_E := I\OO_Y
+\]
+for the exceptional ideal.
+We want to construct $d>0$ and a finite-type ideal $L\subset I^d$ whose
+inverse image to $Y$ is exactly $I_E^dJ$.
+
+The proof is organized around the following maximal degree-$d$ candidate:
+\[
+  C_d := I^d \cap \pi_*(I_E^dJ).
+\]
+More precisely, $C_d$ is the subsheaf of $I^d$ consisting of sections whose
+pullback to the blow-up lies in $I_E^dJ$.
+Thus $C_d$ is the largest possible degree-$d$ ideal whose inverse image is
+contained in $I_E^dJ$.
+
+The main point is to show that for all sufficiently large $d$,
+\[
+  C_d\OO_Y = I_E^dJ.
+\]
+After that, since $C_d$ need not itself be of finite type, we will select
+finitely many local generators inside $C_d$ and place them in a finite-type
+quasi-coherent subideal $L\subset C_d$.
+
+\medskip
+
+\noindent
+\textbf{Step 1: Choose finitely many affine blow-up charts.}
+
+Since $X$ is quasi-compact, choose a finite affine open cover
+\[
+  X=\bigcup_{\alpha=1}^N V_\alpha,
+  \qquad
+  V_\alpha=\Spec(A_\alpha).
+\]
+Because $I$ is of finite type, after refining this cover if necessary we may
+write
+\[
+  I(V_\alpha)
+  =
+  I_\alpha
+  =
+  (a_{\alpha,1},\dots,a_{\alpha,r_\alpha}).
+\]
+
+Over $V_\alpha$, the blow-up is
+\[
+  \pi^{-1}(V_\alpha)
+  =
+  \Proj\!\left(\bigoplus_{n\geq 0} I_\alpha^n\right),
+\]
+and it is covered by the standard affine blow-up charts
+\[
+  U_{\alpha,i}
+  =
+  \Spec(B_{\alpha,i}),
+  \qquad
+  B_{\alpha,i}
+  =
+  A_\alpha\!\left[\frac{I_\alpha}{a_{\alpha,i}}\right].
+\]
+
+Fix $\alpha$ temporarily and suppress it from the notation. Thus we write
+\[
+  A,\qquad
+  I=(a_1,\dots,a_r),\qquad
+  B_i=A[I/a_i],\qquad
+  U_i=\Spec(B_i).
+\]
+
+On the chart $U_i$, the pullback of $I$ is principal:
+\[
+  I_EB_i = IB_i = a_iB_i.
+\]
+Indeed, for every $b\in I$,
+\[
+  b = a_i\cdot \frac{b}{a_i}
+\]
+in $B_i$.
+Consequently,
+\[
+  (I_E^dJ)|_{U_i}
+  =
+  a_i^dJ_i,
+\]
+where
+\[
+  J_i := J(U_i)\subset B_i.
+\]
+
+Since $J$ is finite type and $U_i$ is affine, choose finitely many generators
+\[
+  \mu_{i,1},\dots,\mu_{i,s_i}
+\]
+for $J_i$.
+
+Thus, in order to prove that $C_d\OO_Y$ contains $I_E^dJ$, it is enough to
+produce, for each generator $\mu_{i,k}$ and for one common sufficiently large
+$d$, an element
+\[
+  m_{i,k}\in C_d(V)
+\]
+such that
+\[
+  \frac{m_{i,k}}{a_i^d}
+  =
+  \mu_{i,k}
+\]
+on $U_i$.
+Indeed, this equality is equivalent to
+\[
+  m_{i,k}=a_i^d\mu_{i,k}
+\]
+as a function on $U_i$, and these elements generate
+\[
+  a_i^dJ_i=(I_E^dJ)|_{U_i}.
+\]
+
+\medskip
+
+\noindent
+\textbf{Step 2: The same-Rees-algebra denominator-clearing argument.}
+
+Fix one chart $U_i$ and one generator
+\[
+  \mu\in J_i.
+\]
+Because
+\[
+  B_i=A[I/a_i]
+\]
+is the degree-zero part of the localization of the Rees algebra, every element
+of $B_i$ may be represented in the form
+\[
+  \mu=\frac{g}{a_i^e}
+\]
+for some $e\geq 0$ and some
+\[
+  g\in I^e.
+\]
+
+If there were no other charts, then for any $d\geq e$ we could simply put
+\[
+  m=a_i^{d-e}g.
+\]
+Then $m\in I^d$ and
+\[
+  \frac{m}{a_i^d}
+  =
+  \frac{a_i^{d-e}g}{a_i^d}
+  =
+  \frac{g}{a_i^e}
+  =
+  \mu.
+\]
+The only issue is to ensure that the same numerator $m$ satisfies the
+required membership condition on every other blow-up chart.
+
+Fix another chart $U_j$.
+Inside
+\[
+  B_j=A[I/a_j]
+\]
+consider the genuine element
+\[
+  x_j:=\frac{g}{a_j^e}.
+\]
+This is an element of $B_j$ because $g\in I^e$.
+
+On the overlap $U_i\cap U_j$, we have
+\[
+  x_j
+  =
+  \frac{g}{a_j^e}
+  =
+  \left(\frac{a_i}{a_j}\right)^e
+  \frac{g}{a_i^e}
+  =
+  \left(\frac{a_i}{a_j}\right)^e\mu.
+\]
+Since $\mu$ is a section of $J$ on $U_i$, its restriction to the overlap lies
+in the restriction of $J$ there.
+Therefore $x_j$ lies in the localization of $J_j$ obtained by inverting
+\[
+  s_{ij}:=\frac{a_i}{a_j}\in B_j.
+\]
+Equivalently,
+\[
+  x_j\in (J_j)_{s_{ij}}.
+\]
+
+By the elementary localization criterion for submodule membership, there
+exists an integer $N_j\geq 0$ such that
+\[
+  s_{ij}^{N_j}x_j\in J_j.
+\]
+In other words,
+\[
+  \left(\frac{a_i}{a_j}\right)^{N_j}
+  \frac{g}{a_j^e}
+  \in J_j.
+\]
+
+There are only finitely many charts $U_j$, so choose
+\[
+  N\geq N_j
+\]
+for all $j$.
+Because $J_j$ is an ideal, this implies
+\[
+  \left(\frac{a_i}{a_j}\right)^N
+  \frac{g}{a_j^e}
+  \in J_j
+\]
+for every $j$.
+
+Now put
+\[
+  d_0:=e+N,
+  \qquad
+  m:=a_i^Ng.
+\]
+Then
+\[
+  m\in I^{e+N}=I^{d_0}.
+\]
+
+On the $i$-th chart,
+\[
+  \frac{m}{a_i^{d_0}}
+  =
+  \frac{a_i^Ng}{a_i^{e+N}}
+  =
+  \frac{g}{a_i^e}
+  =
+  \mu.
+\]
+
+On the $j$-th chart,
+\[
+  \frac{m}{a_j^{d_0}}
+  =
+  \frac{a_i^Ng}{a_j^{e+N}}
+  =
+  \left(\frac{a_i}{a_j}\right)^N
+  \frac{g}{a_j^e}
+  \in J_j.
+\]
+Therefore
+\[
+  m
+  =
+  a_j^{d_0}
+  \left(\frac{m}{a_j^{d_0}}\right)
+  \in
+  a_j^{d_0}J_j
+  =
+  (I_E^{d_0}J)|_{U_j}.
+\]
+Since the $U_j$ cover $\pi^{-1}(V)$, the pullback of $m$ belongs to
+$I_E^{d_0}J$ everywhere over $V$.
+Hence
+\[
+  m\in C_{d_0}(V).
+\]
+Moreover,
+\[
+  \frac{m}{a_i^{d_0}}=\mu.
+\]
+
+This proves the desired construction for one chosen local generator.
+
+\medskip
+
+\noindent
+\textbf{Step 3: The construction persists in all larger degrees.}
+
+Suppose
+\[
+  m\in C_{d_0}(V)
+\]
+and
+\[
+  \frac{m}{a_i^{d_0}}=\mu.
+\]
+For any $d\geq d_0$, define
+\[
+  m^{(d)}
+  :=
+  a_i^{d-d_0}m.
+\]
+Then $m^{(d)}\in I^d$, and on $U_i$,
+\[
+  \frac{m^{(d)}}{a_i^d}
+  =
+  \frac{m}{a_i^{d_0}}
+  =
+  \mu.
+\]
+
+On another chart $U_j$,
+\[
+  \frac{m^{(d)}}{a_j^d}
+  =
+  \left(\frac{a_i}{a_j}\right)^{d-d_0}
+  \frac{m}{a_j^{d_0}}.
+\]
+Since $m\in C_{d_0}(V)$, the second factor lies in $J_j$, and the first factor
+lies in $B_j$.
+Because $J_j$ is an ideal,
+\[
+  \frac{m^{(d)}}{a_j^d}\in J_j.
+\]
+Thus
+\[
+  m^{(d)}\in C_d(V).
+\]
+
+Therefore each chosen local generator of $J$ can be represented by an element
+of $C_d$ for every sufficiently large $d$.
+
+\medskip
+
+\noindent
+\textbf{Step 4: Choose one global degree.}
+
+Return to the finite affine cover
+\[
+  X=\bigcup_\alpha V_\alpha.
+\]
+For every triple
+\[
+  (\alpha,i,k)
+\]
+consisting of an affine open $V_\alpha$, a blow-up chart
+$U_{\alpha,i}$, and a chosen generator $\mu_{\alpha,i,k}$ of $J$ on that
+chart, the previous argument produces a threshold
+\[
+  d_{\alpha,i,k}
+\]
+such that for every $d\geq d_{\alpha,i,k}$ there exists
+\[
+  m_{\alpha,i,k}\in C_d(V_\alpha)
+\]
+with
+\[
+  \frac{m_{\alpha,i,k}}{a_{\alpha,i}^d}
+  =
+  \mu_{\alpha,i,k}.
+\]
+
+There are only finitely many such triples.
+Choose one integer
+\[
+  d\geq 1
+\]
+larger than all the $d_{\alpha,i,k}$.
+
+Then for every $(\alpha,i,k)$ we have a section
+\[
+  m_{\alpha,i,k}\in C_d(V_\alpha)
+\]
+such that
+\[
+  m_{\alpha,i,k}
+  =
+  a_{\alpha,i}^d\mu_{\alpha,i,k}
+\]
+on $U_{\alpha,i}$.
+
+Since the $\mu_{\alpha,i,k}$ generate $J$ on $U_{\alpha,i}$, the sections
+$m_{\alpha,i,k}$ generate
+\[
+  a_{\alpha,i}^dJ
+  =
+  I_E^dJ
+\]
+there.
+Thus the inverse image of $C_d$ contains $I_E^dJ$ locally on every blow-up
+chart.
+
+The reverse inclusion is built into the definition of $C_d$: every section
+of $C_d$ is a section of $I^d$ whose pullback lies in $I_E^dJ$.
+Hence
+\[
+  C_d\OO_Y=I_E^dJ.
+\]
+
+\medskip
+
+\noindent
+\textbf{Step 5: Extract a finite-type subideal.}
+
+The ideal $C_d$ need not itself be of finite type.
+However, only finitely many local sections
+\[
+  m_{\alpha,i,k}
+\]
+are needed to generate $I_E^dJ$ after pullback.
+
+Because $X$ is quasi-compact and quasi-separated, a quasi-coherent module is
+the directed union of its finite-type quasi-coherent submodules.
+Therefore there exists a finite-type quasi-coherent submodule
+\[
+  L\subset C_d
+\]
+containing all the finitely many sections $m_{\alpha,i,k}$.
+
+Since
+\[
+  C_d\subset I^d\subset \OO_X,
+\]
+the sheaf $L$ is itself a quasi-coherent ideal sheaf, and
+\[
+  L\subset I^d.
+\]
+
+We now show that
+\[
+  L\OO_Y=I_E^dJ.
+\]
+
+Because $L\subset C_d$, the defining property of $C_d$ gives
+\[
+  L\OO_Y\subset I_E^dJ.
+\]
+
+For the reverse inclusion, work on one chart $U_{\alpha,i}$.
+There,
+\[
+  I_E^dJ
+  =
+  a_{\alpha,i}^dJ.
+\]
+The ideal $J$ is generated by the finitely many
+\[
+  \mu_{\alpha,i,1},\dots,\mu_{\alpha,i,s_i},
+\]
+so $I_E^dJ$ is generated by
+\[
+  a_{\alpha,i}^d\mu_{\alpha,i,k}.
+\]
+By construction,
+\[
+  a_{\alpha,i}^d\mu_{\alpha,i,k}
+  =
+  m_{\alpha,i,k},
+\]
+and each $m_{\alpha,i,k}$ lies in $L(V_\alpha)$.
+Therefore every generator of $I_E^dJ$ on $U_{\alpha,i}$ belongs to
+$L\OO_Y$.
+Hence
+\[
+  I_E^dJ|_{U_{\alpha,i}}
+  \subset
+  L\OO_Y|_{U_{\alpha,i}}.
+\]
+
+Since the charts $U_{\alpha,i}$ cover $Y$, this gives globally
+\[
+  I_E^dJ\subset L\OO_Y.
+\]
+Combining the two inclusions,
+\[
+  L\OO_Y=I_E^dJ.
+\]
+
+Thus we have constructed an integer $d>0$ and a finite-type quasi-coherent
+ideal sheaf $L$ satisfying
+\[
+  L\subset I^d
+  \qquad\text{and}\qquad
+  L\OO_Y=I_E^dJ.
+\]
+This is exactly the desired conclusion.
+\end{proof}
+
+\bigskip
+
+\begin{remark}[Formalization structure]
+For a Lean formalization, the argument naturally separates into the following
+four auxiliary statements.
+
+\begin{enumerate}[label=\arabic*.]
+  \item
+  \emph{Blow-up chart description:}
+  over $V=\Spec(A)$ with $I=(a_1,\dots,a_r)$, the blow-up is covered by
+  $\Spec(A[I/a_i])$, and on the $a_i$-chart the exceptional ideal is
+  generated by $a_i$.
+
+  \item
+  \emph{Same-Rees-algebra clearing lemma:}
+  if
+  \[
+    \mu=\frac{g}{a_i^e}\in J_i,
+    \qquad g\in I^e,
+  \]
+  then for every $j$ one has
+  \[
+    \frac{g}{a_j^e}\in B_j,
+  \]
+  and after multiplying by a sufficiently large power of $a_i/a_j$ the
+  result lies in $J_j$.
+  Choosing one exponent valid for every $j$ gives
+  \[
+    m=a_i^Ng,\qquad d=e+N,
+  \]
+  with
+  \[
+    \frac{m}{a_i^d}=\mu,
+    \qquad
+    \frac{m}{a_j^d}\in J_j
+    \quad\text{for all }j.
+  \]
+
+  \item
+  \emph{Uniform-degree lemma:}
+  once a chosen generator is represented in degree $d_0$, multiplying the
+  numerator by $a_i^{d-d_0}$ produces a representation in every degree
+  $d\geq d_0$.
+  Finiteness of the affine cover, blow-up charts, and generator sets then
+  gives a single global degree $d$.
+
+  \item
+  \emph{Finite-type extraction:}
+  place all selected local numerators inside the maximal candidate
+  \[
+    C_d
+    =
+    I^d\cap \pi_*(I_E^dJ).
+  \]
+  The qcqs hypothesis gives a finite-type quasi-coherent subideal
+  \[
+    L\subset C_d
+  \]
+  containing them.
+  The inclusion $L\subset C_d$ gives one inclusion after pullback, and the
+  selected chart generators give the reverse inclusion.
+\end{enumerate}
+
+Thus the only genuinely nonformal algebraic step is the denominator-clearing
+argument on two affine charts belonging to the same Rees algebra.
+\end{remark}
+
+\end{document}
