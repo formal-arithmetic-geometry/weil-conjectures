@@ -103,6 +103,10 @@ public import WeilConjectures.SixFunctors.Preliminaries.DerivedAdjunction
 public import WeilConjectures.SixFunctors.Preliminaries.HomotopyAdjunction
 public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
 public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
+public import WeilConjectures.SixFunctors.ProperBaseChange.BaseChangeMorphism
+public import WeilConjectures.SixFunctors.ProperBaseChange.FiniteCohomology
+public import WeilConjectures.SixFunctors.ProperBaseChange.Proper
+public import WeilConjectures.SixFunctors.ProperBaseChange.Smooth
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.PointCount
