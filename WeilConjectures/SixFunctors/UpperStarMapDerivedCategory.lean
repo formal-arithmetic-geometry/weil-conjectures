@@ -8,7 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.SixFunctors.Derived
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
+public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
 
