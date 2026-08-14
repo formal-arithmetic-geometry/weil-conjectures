@@ -9,7 +9,7 @@ public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctorComp
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
