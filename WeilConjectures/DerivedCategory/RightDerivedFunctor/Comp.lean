@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.DerivedCategory.Adjunction
+public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 

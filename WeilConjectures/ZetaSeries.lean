@@ -61,11 +61,11 @@ variable (k : Type u) [Field k] (n : ℕ)
 theorem nat_card_galoisExtension [Finite k] (hn : n ≠ 0) :
     Nat.card (galoisExtension k n) = Nat.card k ^ n := by
   classical
-  haveI : Fintype k := Fintype.ofFinite k
+  have : Fintype k := Fintype.ofFinite k
   set L := galoisExtension k n with hL
   set g : k[X] := X ^ Nat.card k ^ n - X with hgdef
   obtain ⟨p, hcharp, s, hp, hcard⟩ := FiniteField.card' (K := k)
-  haveI := hcharp
+  have := hcharp
   have hq1 : 1 < Nat.card k := Finite.one_lt_card
   have hqs : Nat.card k = p ^ (s : ℕ) := by rw [Nat.card_eq_fintype_card]; exact hcard
   have hpq : p ∣ Nat.card k ^ n :=
@@ -73,8 +73,8 @@ theorem nat_card_galoisExtension [Finite k] (hn : n ≠ 0) :
   have hg0 : g ≠ 0 := FiniteField.X_pow_card_pow_sub_X_ne_zero (K' := k) hn hq1
   have hsep : g.Separable := galois_poly_separable p (Nat.card k ^ n) hpq
   -- every element of `L` is fixed by the `q ^ n`-power Frobenius
-  haveI : CharP L p := charP_of_injective_algebraMap (algebraMap k L).injective p
-  haveI : ExpChar L p := .prime hp
+  have : CharP L p := charP_of_injective_algebraMap (algebraMap k L).injective p
+  have : ExpChar L p := .prime hp
   have hpsn : p ^ ((s : ℕ) * n) = Nat.card k ^ n := by rw [pow_mul, ← hqs]
   have hak : ∀ a : k, a ^ Nat.card k ^ n = a := fun a ↦ by
     rw [Nat.card_eq_fintype_card]; exact FiniteField.pow_card_pow n a
@@ -112,12 +112,12 @@ theorem nat_card_galoisExtension [Finite k] (hn : n ≠ 0) :
 /-- The degree `n` extension of a finite field `k` has degree `n` over `k`. -/
 theorem finrank_galoisExtension [Finite k] (hn : n ≠ 0) :
     Module.finrank k (galoisExtension k n) = n := by
-  haveI : Fintype k := Fintype.ofFinite k
+  have : Fintype k := Fintype.ofFinite k
   have hcard := nat_card_galoisExtension k n hn
-  haveI : Finite (galoisExtension k n) := Nat.finite_of_card_ne_zero (by
+  have : Finite (galoisExtension k n) := Nat.finite_of_card_ne_zero (by
     rw [hcard]
     exact (pow_pos Nat.card_pos n).ne')
-  haveI : Fintype (galoisExtension k n) := Fintype.ofFinite _
+  have : Fintype (galoisExtension k n) := Fintype.ofFinite _
   rw [Nat.card_eq_fintype_card, Nat.card_eq_fintype_card, Module.card_eq_pow_finrank
     (K := k) (V := galoisExtension k n)] at hcard
   exact Nat.pow_right_injective Fintype.one_lt_card hcard
@@ -220,7 +220,7 @@ noncomputable def Hom.residueFieldAlgebraMap (f : X.Hom (Spec (.of k))) (x : X) 
 /-- The degree `[κ(x) : k]` of a point `x` of a scheme `X` over a field `k`, with junk
 value `0` if the residue field extension is infinite. -/
 noncomputable def Hom.degreeOver (f : X.Hom (Spec (.of k))) (x : X) : ℕ :=
-  letI := (f.residueFieldAlgebraMap x).toAlgebra
+  let := (f.residueFieldAlgebraMap x).toAlgebra
   Module.finrank k (X.residueField x)
 
 end AlgebraicGeometry.Scheme

@@ -22,22 +22,6 @@ derived category with the right derived functor
   DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor`
 
 (`Functor.rightDerivedFunctorPlusCompatibility`).
-
-The proof is by uniqueness of right derived functors: both sides are right derived
-functors of `F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⋙ DerivedCategory.Plus.ι`
-with respect to the quasi-isomorphisms of the bounded below homotopy category. By the
-injective right derivability structure `HomotopyCategory.Plus.localizerMorphism`, it
-suffices to check that the corresponding units are isomorphisms on bounded below
-complexes of injectives:
-
-- for `F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι`, whose unit is obtained by
-  whiskering `F.rightDerivedFunctorPlusUnit` with the inclusion, this holds since the
-  unit of `F.rightDerivedFunctorPlus` is an isomorphism on complexes of injectives;
-- for `DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor`, whose unit is obtained by
-  whiskering `F.rightDerivedFunctorUnit` with the inclusion of the bounded below
-  homotopy category, this holds since a bounded below complex of injectives is
-  K-injective and the unit of `F.rightDerivedFunctor` is an isomorphism on K-injective
-  complexes.
 -/
 
 @[expose] public section

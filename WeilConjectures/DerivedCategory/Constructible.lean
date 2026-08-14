@@ -13,7 +13,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 # The constructible bounded derived category of étale sheaves
 
 For a scheme `X` and a concrete abelian coefficient category `A`, this file defines the
-subcategory `Dᵇc( X, A)` of the derived category
+subcategory `Dᵇc(X, A)` of the derived category
 `DerivedCategory (Sheaf X.smallEtaleTopology A)` of étale sheaves consisting of the
 bounded complexes all of whose homology sheaves are constructible
 (`AlgebraicGeometry.Scheme.IsConstructibleSheaf`). Boundedness refers to the canonical
@@ -85,14 +85,14 @@ noncomputable instance : Category (Etale.DerivedCategoryBoundedConstructible A X
   inferInstanceAs <|
     Category (Etale.DerivedCategory.boundedConstructible A X).FullSubcategory
 
-/-- The inclusion of `Dᵇc( X, A)` into the derived category of étale sheaves. -/
+/-- The inclusion of `Dᵇc(X, A)` into the derived category of étale sheaves. -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible.ι :
     Etale.DerivedCategoryBoundedConstructible A X ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (Etale.DerivedCategory.boundedConstructible A X).ι
 
 @[inherit_doc Etale.DerivedCategoryBoundedConstructible]
-scoped notation "Dᵇc( " X "," A ")" =>
+scoped notation "Dᵇc(" X ", " A ")" =>
   Etale.DerivedCategoryBoundedConstructible A X
 
 end BoundedConstructible

@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
@@ -22,16 +23,14 @@ public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibil
 Given an adjunction `adj : f ⊣ g` of additive functors between abelian categories, this
 file lifts `adj` through the stages of the derived formalism:
 
-* `Adjunction.mapHomologicalComplex`: the induced adjunction
-  `f.mapHomologicalComplex c ⊣ g.mapHomologicalComplex c` between the categories of
-  homological complexes, with unit and counit given degreewise.
 * `Adjunction.mapHomotopyCategory`: the induced adjunction
   `f.mapHomotopyCategory c ⊣ g.mapHomotopyCategory c` between the homotopy categories,
   whenever the quotient functors to the homotopy categories are localizations with
   respect to homotopy equivalences (which holds, in particular, for the complex shapes
-  `ComplexShape.up ℤ` and `ComplexShape.down ι`); it is obtained from the previous
-  adjunction by descent along the localization functors, using
-  `Adjunction.localization`.
+  `ComplexShape.up ℤ` and `ComplexShape.down ι`); it is obtained from the adjunction
+  `Adjunction.mapHomologicalComplex` between the categories of homological complexes
+  (`WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction`) by descent along the
+  localization functors, using `Adjunction.localization`.
 * `Adjunction.derivedAdjunction`: the derived adjunction
 
   `f.leftDerivedFunctor ⊣ g.rightDerivedFunctor`
@@ -69,40 +68,6 @@ universe v₁ v₂ u₁ u₂
 open CategoryTheory Category Limits MonoidalCategory Abelian
 
 namespace CategoryTheory
-
-section MapHomologicalComplex
-
-variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
-  [Preadditive C] [Preadditive D] {ι : Type*} (c : ComplexShape ι)
-
-/-- An adjunction `G ⊣ F` of additive functors induces an adjunction
-`G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c` between the induced functors on
-categories of homological complexes. -/
-noncomputable def Adjunction.mapHomologicalComplex {G : D ⥤ C} {F : C ⥤ D} (adj : G ⊣ F)
-    [G.Additive] [F.Additive] :
-    G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c where
-  unit :=
-    { app := fun M =>
-        { f := fun n => adj.unit.app (M.X n)
-          comm' := fun i j _ => (adj.unit.naturality (M.d i j)).symm }
-      naturality := fun M N φ => by
-        ext n
-        exact adj.unit.naturality (φ.f n) }
-  counit :=
-    { app := fun K =>
-        { f := fun n => adj.counit.app (K.X n)
-          comm' := fun i j _ => (adj.counit.naturality (K.d i j)).symm }
-      naturality := fun K L ψ => by
-        ext n
-        exact adj.counit.naturality (ψ.f n) }
-  left_triangle_components X := by
-    ext n
-    exact adj.left_triangle_components (X.X n)
-  right_triangle_components Y := by
-    ext n
-    exact adj.right_triangle_components (Y.X n)
-
-end MapHomologicalComplex
 
 section MapHomotopyCategory
 
@@ -228,7 +193,8 @@ noncomputable def Adjunction.derivedAdjunctionPlus {f : C ⥤ D} {g : D ⥤ C} (
     [PreservesFiniteLimits f] [PreservesFiniteColimits f]
     [EnoughInjectives D] :
     f.mapDerivedCategoryPlus ⊣ g.rightDerivedFunctorPlus :=
-  (adj.derivedAdjunction.ofNatIsoLeft f.leftDerivedFunctorIsoMapDerivedCategory).restrictFullyFaithful
+  Adjunction.restrictFullyFaithful
+    (adj.derivedAdjunction.ofNatIsoLeft f.leftDerivedFunctorIsoMapDerivedCategory)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     f.mapDerivedCategoryPlusCompatibility.symm
     g.rightDerivedFunctorPlusCompatibility.symm
