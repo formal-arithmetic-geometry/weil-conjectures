@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
@@ -24,8 +24,7 @@ derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctor`
 The chosen localized categories `HasDerivedCategory` are inputs with a general universe.
 The construction of the unbounded right derived functor requires the source abelian
 category to have K-injective resolutions (`CategoryTheory.Abelian.HasKInjectiveResolutions`).
-As in `WeilConjectures.SixFunctors.DerivedFunctors.Plus`, the sheaf categories are
-Grothendieck abelian
+The sheaf categories are Grothendieck abelian
 (`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`) whenever the
 coefficient category `A` is a concrete Grothendieck abelian category (with hom types and
 underlying types in the universe `u` of the base schemes, and the forgetful functor
@@ -54,8 +53,7 @@ namespace CategoryTheory.Abelian
 
 /-- Every Grothendieck abelian category has K-injective resolutions: any cochain
 complex admits a monomorphic quasi-isomorphism into a K-injective complex. This is a
-theorem of Alonso Tarrío–Jeremías López–Souto Salorio and Serpé, whose formalization
-is not yet available. -/
+theorem of Alonso Tarrío–Jeremías López–Souto Salorio and Serpé. -/
 instance hasKInjectiveResolutions_of_isGrothendieckAbelian
     {C : Type u'} [Category.{v'} C] [Abelian C] [IsGrothendieckAbelian.{w} C] :
     HasKInjectiveResolutions C :=
