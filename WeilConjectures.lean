@@ -39,6 +39,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Degreew
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.MonoidalTriangulated
