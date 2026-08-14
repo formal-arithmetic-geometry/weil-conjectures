@@ -59,11 +59,11 @@ sheafification for the site itself, along the equivalence `Over W ≌ C` given b
 lemma GrothendieckTopology.hasWeakSheafify_of_over_isTerminal (hW : IsTerminal W)
     [HasWeakSheafify (J.over W) A] : HasWeakSheafify J A := by
   let e : C ≌ Over W := (Over.equivalenceOfIsTerminal hW).symm
-  haveI : e.functor.IsCocontinuous J (J.over W) :=
+  have : e.functor.IsCocontinuous J (J.over W) :=
     isCocontinuous_equivalenceOfIsTerminal_inverse J hW
-  haveI : e.inverse.IsCocontinuous (J.over W) J :=
+  have : e.inverse.IsCocontinuous (J.over W) J :=
     inferInstanceAs ((Over.forget W).IsCocontinuous (J.over W) J)
-  haveI : e.inverse.IsDenseSubsite (J.over W) J :=
+  have : e.inverse.IsDenseSubsite (J.over W) J :=
     Equivalence.isDenseSubsite_inverse_of_isCocontinuous J (J.over W) e
   exact ⟨_, ⟨((e.op.congrLeft.toAdjunction.comp (sheafificationAdjunction (J.over W) A)).comp
       (e.sheafCongr J (J.over W) A).symm.toAdjunction).ofNatIsoRight

@@ -13,6 +13,11 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
+public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
@@ -26,6 +31,8 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.SixFunctors.Derived
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
