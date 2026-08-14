@@ -8,8 +8,13 @@ module
 public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # Adjunctions of derived functors
@@ -49,6 +54,12 @@ file lifts `adj` through the stages of the derived formalism:
   natural transformation is an isomorphism on K-flat (respectively K-injective) complexes
   because the counit `f.leftDerivedFunctorCounit` (respectively the unit
   `g.rightDerivedFunctorUnit`) is.
+* `Adjunction.derivedAdjunctionPlus`: for `f` moreover *exact*, the bounded below
+  derived adjunction `f.mapDerivedCategoryPlus ⊣ g.rightDerivedFunctorPlus`, obtained by
+  restricting the derived adjunction along the inclusions of the bounded below derived
+  categories, using the identification of the left derived functor of the exact functor
+  `f` with `f.mapDerivedCategory` and the compatibility of `g.rightDerivedFunctorPlus`
+  with the unbounded right derived functor.
 -/
 
 @[expose] public section
@@ -197,6 +208,30 @@ noncomputable def Adjunction.derivedAdjunction {f : C ⥤ D} {g : D ⥤ C} (adj 
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
     (HomotopyCategory.quasiIso D (ComplexShape.up ℤ))
     f.leftDerivedFunctorCounit g.rightDerivedFunctorUnit
+
+/-- The bounded below derived adjunction of an adjoint pair `adj : f ⊣ g` of additive
+functors between abelian categories, where `f` is moreover *exact*:
+
+`f.mapDerivedCategoryPlus ⊣ g.rightDerivedFunctorPlus`
+
+between the functor induced by `f` on the bounded below derived categories and the right
+derived functor of `g` on the bounded below derived categories. It is obtained by
+restricting the unbounded derived adjunction `Adjunction.derivedAdjunction` along the
+inclusions of the bounded below derived categories: since `f` is exact, its total left
+derived functor identifies with `f.mapDerivedCategory`
+(`Functor.leftDerivedFunctorIsoMapDerivedCategory`), which restricts to the bounded
+below derived categories as `f.mapDerivedCategoryPlus`; on the right adjoint side, the
+restriction of `g.rightDerivedFunctor` identifies with `g.rightDerivedFunctorPlus` by
+`Functor.rightDerivedFunctorPlusCompatibility`. -/
+noncomputable def Adjunction.derivedAdjunctionPlus {f : C ⥤ D} {g : D ⥤ C} (adj : f ⊣ g)
+    [f.Additive] [g.Additive] [f.PreservesKFlatQuasiIso]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [EnoughInjectives D] :
+    f.mapDerivedCategoryPlus ⊣ g.rightDerivedFunctorPlus :=
+  (adj.derivedAdjunction.ofNatIsoLeft f.leftDerivedFunctorIsoMapDerivedCategory).restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    f.mapDerivedCategoryPlusCompatibility.symm
+    g.rightDerivedFunctorPlusCompatibility.symm
 
 end DerivedAdjunction
 

@@ -275,6 +275,18 @@ noncomputable def Etale.derivedUpperStarLowerStarAdjunction :
     Etale.leftDerivedUpperStar A g ⊣ Etale.rightDerivedLowerStar A g :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunction
 
+/-- The bounded below version of `Etale.derivedUpperStarLowerStarAdjunction`: since the
+pullback `g^*` on étale sheaves is exact, its derived functor on the bounded below
+derived categories is the restriction `(g^*).mapDerivedCategoryPlus` of the functor
+induced by `g^*`, and it is left adjoint to the right derived functor
+`(g_*).rightDerivedFunctorPlus` of the pushforward on the bounded below derived
+categories. The right adjoint is derived via injective resolutions, which exist since
+the étale sheaf category is Grothendieck abelian. -/
+noncomputable def Etale.derivedUpperStarLowerStarAdjunctionPlus :
+    (Etale.upperStar A g).mapDerivedCategoryPlus ⊣
+      (Etale.lowerStar A g).rightDerivedFunctorPlus :=
+  (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
+
 end DerivedUpperLowerStarAdjunction
 
 end AlgebraicGeometry
