@@ -26,6 +26,10 @@ sheafification.
   extension on presheaves followed by sheafification.
 - `CategoryTheory.GrothendieckTopology.upperStarLowerStarAdjunction`: the adjunction
   `g^* ⊣ g_*`.
+- `CategoryTheory.GrothendieckTopology.lowerStarComp` and
+  `CategoryTheory.GrothendieckTopology.upperStarComp`: the composition isomorphisms
+  `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`, the latter
+  obtained from the former by uniqueness of left adjoints.
 
 ## Implementation notes
 
@@ -111,6 +115,54 @@ instance : (upperStar A P Q g).IsLeftAdjoint :=
   (upperStarLowerStarAdjunction A P Q g).isLeftAdjoint
 
 end Adjunction
+
+section Comp
+
+variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+
+variable [(MorphismProperty.Over.pullback P ⊤ h₁).IsContinuous
+    (S.smallGrothendieckTopology Q (Q := P)) (T.smallGrothendieckTopology Q (Q := P))]
+  [(MorphismProperty.Over.pullback P ⊤ h₂).IsContinuous
+    (R.smallGrothendieckTopology Q (Q := P)) (S.smallGrothendieckTopology Q (Q := P))]
+  [(MorphismProperty.Over.pullback P ⊤ (h₁ ≫ h₂)).IsContinuous
+    (R.smallGrothendieckTopology Q (Q := P)) (T.smallGrothendieckTopology Q (Q := P))]
+
+/-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
+sheaves for the small sites: both sides send a sheaf `G` to the sheaf
+`(V → R) ↦ G(V ×_R T → T)`, up to the pullback pasting isomorphism
+`(V ×_R S) ×_S T ≅ V ×_R T` of `MorphismProperty.Over.pullbackComp`. -/
+noncomputable def lowerStarComp :
+    lowerStar A P Q h₁ ⋙ lowerStar A P Q h₂ ≅ lowerStar A P Q (h₁ ≫ h₂) :=
+  Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) h₁ h₂).symm) A
+    (R.smallGrothendieckTopology Q (Q := P)) (S.smallGrothendieckTopology Q (Q := P))
+    (T.smallGrothendieckTopology Q (Q := P))
+
+section UpperStar
+
+variable [∀ F : (P.Over ⊤ S)ᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback P ⊤ h₁).op.HasLeftKanExtension F]
+  [∀ F : (P.Over ⊤ R)ᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback P ⊤ h₂).op.HasLeftKanExtension F]
+  [∀ F : (P.Over ⊤ R)ᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback P ⊤ (h₁ ≫ h₂)).op.HasLeftKanExtension F]
+  [HasWeakSheafify (S.smallGrothendieckTopology Q (Q := P)) A]
+  [HasWeakSheafify (T.smallGrothendieckTopology Q (Q := P)) A]
+
+/-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on sheaves
+for the small sites, obtained from the composition isomorphism `lowerStarComp` of the
+pushforwards by uniqueness of left adjoints: both sides are left adjoint to
+`(h₁)_* ⋙ (h₂)_*`. -/
+noncomputable def upperStarComp :
+    upperStar A P Q (h₁ ≫ h₂) ≅ upperStar A P Q h₂ ⋙ upperStar A P Q h₁ :=
+  ((conjugateIsoEquiv (upperStarLowerStarAdjunction A P Q (h₁ ≫ h₂))
+      ((upperStarLowerStarAdjunction A P Q h₂).comp
+        (upperStarLowerStarAdjunction A P Q h₁))).symm
+    (lowerStarComp A P Q h₁ h₂).symm).symm
+
+end UpperStar
+
+end Comp
 
 end GrothendieckTopology
 
