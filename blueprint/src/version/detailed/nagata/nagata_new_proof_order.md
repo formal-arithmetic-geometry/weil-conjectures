@@ -133,9 +133,9 @@ the Lean proof deviates from the written route.
 | #21 | 21, 22 (`StrictTransform`, over-complement), 23 affine layer, Tags 01PE/01PF | proved; chart model of the strict transform bypassed |
 | #22 | Tag 0803 (`exists_finiteDegree_center_le_blowup`) | proved, ideal-sheaf form |
 | #23 | 16 (Stacks 0806, `existsUnique_lift_blowup`) + effective-Cartier kit (07ZV) | proved, chart-local route |
-| #24 | 18 (080A), 19 (080K), 24 (080Y), Tags 080B/080L/01PH/01PF, 0F3V (`separationBlowup_disjoint_strictTransforms`) | proved except one `sorry`: Tag 0807 (`exists_blowup_mul_isEffectiveCartier_iso`); 0F3V by direct sum-ideal chart argument, 080P bypassed |
+| #24 | 18 (080A), 19 (080K), 24 (080Y), Tags 080B/080L/01PH/01PF, 0F3V (`separationBlowup_disjoint_strictTransforms`) | proved; the one remaining `sorry`, Tag 0807 (`exists_blowup_mul_isEffectiveCartier_iso`), is closed in PR #26 via the Tag 0806 universal-property kit; 0F3V by direct sum-ideal chart argument, 080P bypassed |
 | #25 | 34, 36, 37 + partial-section lemma, dense refinement | proved; items 30-33 (Tags 081S/0F3Y/0F3X/0F3Z) stated with `sorry`; 0F3W not yet stated |
-| #26 | 38-41 (Tags 02JQ/052K/00IA) | proved; item 42 (Tag 0894) stated with `sorry`, split into universally-closed and separated halves |
+| #26 | 38-41 (Tags 02JQ/052K/00IA) + Tag 0807 | proved; item 42 (Tag 0894) stated with `sorry`, split into `universallyClosed_of_isDominant` and `isSeparated_of_isDominant`; the valuation-theoretic items 39-41 (`comapResidue`, `comap_eq_of_le_comap`, `exists_comap_eq`) and the topological core of 02JQ (`exists_specializes_of_mem_closure_range`) live in `WeilConjectures/Mathlib/` helper files |
 
 ## Remaining implementation notes
 

@@ -3313,9 +3313,9 @@ closed subscheme of the first blow-up.
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso}
 
   Let $X$ be a scheme, let $\mathcal L$ be an invertible ideal on $X$, and
-  let $\mathcal J$ be a finite-type quasi-coherent ideal.  Then the blow-ups
-  of $\mathcal L\mathcal J$ and of $\mathcal J$ are canonically isomorphic
-  over $X$.
+  let $\mathcal J$ be a quasi-coherent ideal (finite-typeness is not needed).
+  Then the blow-ups of $\mathcal L\mathcal J$ and of $\mathcal J$ are
+  canonically isomorphic over $X$.
 \end{lemma}
 
 \begin{proof}
@@ -5796,9 +5796,9 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Existence of a valuation probe through a dense source]
   \label{lemma:nagata-dense-valuation-probe-exists}
   \uses{def:nagata-scheme-theoretic-image}
-  \lean{AlgebraicGeometry.exists_valuationRing_through_schemeDense_raw}
+  \lean{AlgebraicGeometry.nonempty_valuationProbe}
 
-  Let $h\colon T\to P$ be quasi-compact and quasi-separated, assume its image
+  Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
   $P$ is affine, and let $z\in P$.  There
   exist a valuation ring $A'$ with fraction field $K'$, a morphism
@@ -5824,7 +5824,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-dense-valuation-probe-exists}
   \lean{AlgebraicGeometry.ValuationProbe}
 
-  Let $h\colon T\to P$ be quasi-compact and quasi-separated, assume its image
+  Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
   $P$ is affine, and let $z\in P$.
   Select a witness from
@@ -5843,7 +5843,8 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Properties of the valuation probe]
   \label{lemma:nagata-dense-valuation-probe}
   \uses{def:nagata-dense-valuation-probe}
-  \lean{AlgebraicGeometry.exists_valuationRing_through_schemeDense}
+  \lean{AlgebraicGeometry.ValuationProbe.commSq,
+    AlgebraicGeometry.ValuationProbe.closedPoint_eq}
 
   The maps in $\mathsf{VP}(h,z)$ form a commutative diagram
   \[
@@ -5978,11 +5979,14 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Extension of a valuation ring to a field extension,
   {\cite[\href{https://stacks.math.columbia.edu/tag/00IA}{Lemma 10.50.2}]{stacks-project}}]
   \label{lemma:nagata-valuation-ring-extension}
-  \lean{ValuationSubring.exists_dominating_extension}
+  \lean{ValuationSubring.exists_comap_eq}
 
   Let $A$ be a valuation ring with fraction field $K$, and let
   $K\hookrightarrow L$ be a field extension.  There exists a valuation ring
-  $B\subseteq L$ with fraction field $L$ which dominates $A$.
+  $B\subseteq L$ with fraction field $L$ which dominates $A$.  In Lean the
+  conclusion is recorded in the combined form $K\cap B=A$ of
+  \Cref{lemma:nagata-valuation-intersection}, from which the domination is
+  recovered.
 \end{lemma}
 
 \begin{proof}
@@ -6003,7 +6007,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0894}{Tag 0894}]{stacks-project}}]
   \label{lemma:nagata-dense-source-valuative}
-  \lean{AlgebraicGeometry.ValuativeCriterion.universallyClosed_of_dense}
+  \lean{AlgebraicGeometry.ValuativeCriterion.universallyClosed_of_isDominant}
 
   Let \(f\colon X\to S\) be quasi-compact and let
   \(h\colon U\to X\) be quasi-compact and quasi-separated,
@@ -6020,16 +6024,17 @@ correction explicit before it is sheafified and glued.
 
 \begin{remark}[Formalization route]
   In Lean the two conclusions are split into
-  \texttt{ValuativeCriterion.universallyClosed\_of\_dense} and
-  \texttt{ValuativeCriterion.isSeparated\_of\_dense}; both are currently
+  \texttt{ValuativeCriterion.universallyClosed\_of\_isDominant} and
+  \texttt{ValuativeCriterion.isSeparated\_of\_isDominant}; both are currently
   stated with \texttt{sorry}.  The stated ingredients — the valuation probe
-  (Tag 02JQ, \texttt{exists\_valuationRing\_through\_schemeDense\_raw}), the
+  (Tag 02JQ, \texttt{nonempty\_valuationProbe}), the
   composite valuation ring (\texttt{ValuationSubring.comapResidue}), the
   intersection lemma (Tag 052K,
   \texttt{ValuationSubring.comap\_eq\_of\_le\_comap}) and the extension lemma
-  (Tag 00IA, \texttt{ValuationSubring.exists\_dominating\_extension}, via
+  (Tag 00IA, \texttt{ValuationSubring.exists\_comap\_eq}, via
   Mathlib's Chevalley extension theorem rather than the Zorn argument) — are
-  all proved.
+  all proved; the valuation-theoretic ingredients live in the
+  \texttt{WeilConjectures.Mathlib} helper files.
 \end{remark}
 
 \begin{proof}

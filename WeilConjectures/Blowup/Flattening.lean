@@ -496,7 +496,7 @@ blow-up of `C * M` is effective Cartier by the factor lemma
 composites are identities by the uniqueness of lifts. -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso
     {Y : Scheme.{u}} {C : Y.IdealSheafData} (hC : C.IsEffectiveCartier)
-    (M : Y.IdealSheafData) (_hM : M.FiniteType) :
+    (M : Y.IdealSheafData) :
     ∃ e : (C * M).blowup ≅ M.blowup, e.hom ≫ M.blowupMap = (C * M).blowupMap := by
   -- the pullback of `C * M` to the blow-up of `M` is effective Cartier
   have hCM : ((C * M).comap M.blowupMap).IsEffectiveCartier := by
@@ -561,7 +561,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp
       rw [h1]
       exact (I.extendedToBlowup_isEffectiveCartier.comap_of_isIso g.hom).pow d
     obtain ⟨e₂, he₂⟩ :=
-      Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso hEC J hJ
+      Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso hEC J
     refine ⟨e₁ ≪≫ eqToIso (congrArg Scheme.IdealSheafData.blowup hLpull) ≪≫ e₂, ?_⟩
     calc (e₁ ≪≫ eqToIso (congrArg Scheme.IdealSheafData.blowup hLpull) ≪≫ e₂).hom ≫
           J.blowupMap ≫ π
