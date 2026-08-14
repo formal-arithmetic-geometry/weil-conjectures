@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerived
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 
@@ -18,7 +18,7 @@ An exact functor `F : C ⥤ D` between abelian categories induces a functor
 levelwise (`Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`). When the monoidal
 abelian category `C` moreover admits functorial flat resolutions, `F` also has a total
 left derived functor `F.leftDerivedFunctor` computed via K-flat resolutions
-(`WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors`). This file shows that
+(`WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`). This file shows that
 the two constructions agree:
 
 - `Functor.leftDerivedFunctorIsoMapDerivedCategory`: the canonical isomorphism

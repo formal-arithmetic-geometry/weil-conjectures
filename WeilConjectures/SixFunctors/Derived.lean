@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
@@ -113,7 +113,7 @@ section DerivedUpperStar
 ## The derived pullback `Lg^*`
 
 The pullback `g^* = Etale.upperStar` is left derived using the K-flat left
-derivability structure of `WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors`.
+derivability structure of `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`.
 This requires the source sheaf category `Sheaf Y.smallEtaleTopology A` to carry a
 preadditive monoidal structure whose tensor product interacts well with coproducts and
 `ℤ`-indexed colimits, and to admit functorial flat resolutions. These inputs are taken

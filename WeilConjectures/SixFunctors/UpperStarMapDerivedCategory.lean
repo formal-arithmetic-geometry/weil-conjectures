@@ -7,7 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.Derived
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedMapDerivedCategory
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
 
 /-!
@@ -21,7 +21,7 @@ since `g^*` is a left adjoint), so it induces a functor
 levelwise. This file records the compatibility of the total left derived functor
 `Lg^* = Etale.leftDerivedUpperStar` (defined via K-flat resolutions in
 `WeilConjectures.SixFunctors.Derived`) with this levelwise functor, by
-instantiating `WeilConjectures.SixFunctors.Preliminaries.LeftDerivedMapDerivedCategory`,
+instantiating `WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory`,
 and derives the consequences needed by the base-change package:
 
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`: the canonical
