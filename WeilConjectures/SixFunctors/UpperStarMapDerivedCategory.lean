@@ -65,27 +65,20 @@ variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
     (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
   [∀ (T : Scheme.{u}), HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology A)]
 
-/- The K-flat resolution package on the étale sheaf categories of all schemes at once,
-as in the section `DerivedUpperStar` of
-`WeilConjectures.SixFunctors.Derived`. -/
-variable [∀ (T : Scheme.{u}), MonoidalCategory (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}), MonoidalPreadditive (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}) (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}))
-    (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ X₄ : GradedObject ℤ (Sheaf T.smallEtaleTopology A)),
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology A)),
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology A)),
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (T : Scheme.{u}), HasColimitsOfShape ℤ (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}), HasExactColimitsOfShape ℤ (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology A),
-    PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf T.smallEtaleTopology A)).obj F)]
-  [∀ (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology A),
-    PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf T.smallEtaleTopology A)).flip.obj F)]
-  [∀ (T : Scheme.{u}), Abelian.HasFunctorialFlatResolution (Sheaf T.smallEtaleTopology A)]
+/- The K-flat resolution package on the coefficient category `A`, as in the section
+`DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`; it is transported to the
+étale sheaf categories of all schemes at once by the instances of the section
+`SheafInstances` there. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A]
+  [∀ (j : ℤ), HasColimitsOfShape
+    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) A]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution A]
 
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
 derived functor `Lh^*`, computed via K-flat resolutions, is canonically isomorphic to
