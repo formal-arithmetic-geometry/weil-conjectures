@@ -28,13 +28,22 @@ jobs:
     name: Build blueprint site
     runs-on: ubuntu-latest
     steps:
+      # The texlive-full image is ~5GB and a stock runner is tight on space.
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.0
+        with:
+          tool-cache: false
+          android: true
+          dotnet: false
+          haskell: false
+          large-packages: false
+          docker-images: false
+          swap-storage: false
+
       - name: Checkout project
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-
-      - name: Build project
-        uses: leanprover/lean-action@v1
 
       - name: Build blueprint (web + PDF)
         uses: xu-cheng/texlive-action@v2
@@ -56,21 +65,48 @@ jobs:
             cp -r blueprint/web/. _site/
             cp blueprint/print/print.pdf _site/blueprint.pdf
 
-      # `leanblueprint web` writes the declarations referenced by `\lean{...}`
-      # to blueprint/lean_decls.
-      - name: Check blueprint declarations exist in the Lean code
-        run: ~/.elan/bin/lake exe checkdecls blueprint/lean_decls
-
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
           name: blueprint-site
           path: _site
 
+      # Written by `leanblueprint web`: the declarations referenced by
+      # `\lean{...}`, checked against the Lean code by the `checkdecls` job.
+      - name: Upload declaration list
+        uses: actions/upload-artifact@v4
+        with:
+          name: blueprint-lean-decls
+          path: blueprint/lean_decls
+
+  checkdecls:
+    name: Check blueprint declarations exist in the Lean code
+    # Runs in its own job: the Lean build and the ~5GB texlive image do not
+    # both fit on a stock runner.
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Build project
+        uses: leanprover/lean-action@v1
+
+      - name: Download declaration list
+        uses: actions/download-artifact@v4
+        with:
+          name: blueprint-lean-decls
+          path: blueprint
+
+      - name: Run checkdecls
+        run: ~/.elan/bin/lake exe checkdecls blueprint/lean_decls
+
   deploy:
     name: Deploy to GitHub Pages (/blueprint)
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    needs: build
+    needs: [build, checkdecls]
     runs-on: ubuntu-latest
     # Serialize all jobs that push to gh-pages (across workflows) to avoid
     # racing deployments.
@@ -99,7 +135,7 @@ jobs:
   deploy-preview:
     name: Deploy PR preview (/preview/<pr>/blueprint)
     if: github.event_name == 'pull_request_target'
-    needs: build
+    needs: [build, checkdecls]
     runs-on: ubuntu-latest
     concurrency:
       group: gh-pages
