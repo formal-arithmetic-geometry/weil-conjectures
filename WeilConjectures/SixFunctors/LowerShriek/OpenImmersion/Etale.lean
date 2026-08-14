@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
@@ -201,6 +203,17 @@ noncomputable def Etale.openImmersionRestrictionLowerStarAdjunction :
     Etale.openImmersionRestriction A j ⊣ Etale.lowerStar A j :=
   GrothendieckTopology.localizationRestrictionLowerStarAdjunction A @Etale @Etale j
     inferInstance
+
+/-- The counit of the adjunction `j^* ⊣ j_*` along an open immersion `j` is an
+isomorphism: the restriction of a pushforward along an open immersion is the original
+sheaf. This holds since `j` is a monomorphism, so the unit of the site-level adjunction
+`MorphismProperty.Over.mapPullbackAdj` is an isomorphism. -/
+instance Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit :
+    IsIso (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit :=
+  Adjunction.isIso_sheafPushforwardContinuous_counit A
+    (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ j inferInstance trivial)
+    (U.smallGrothendieckTopology (Q := @Etale) @Etale)
+    (X.smallGrothendieckTopology (Q := @Etale) @Etale)
 
 variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 

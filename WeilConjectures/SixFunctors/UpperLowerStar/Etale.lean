@@ -43,6 +43,9 @@ The site-theoretic inputs of the general definitions are discharged here:
 - `AlgebraicGeometry.Etale.lowerStar`: the pushforward `g_*` on étale sheaves.
 - `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves.
 - `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
+- `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
+  the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
+  `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`.
 
 -/
 
@@ -186,5 +189,41 @@ instance : (Etale.upperStar A g).IsLeftAdjoint :=
 end Adjunction
 
 end Star
+
+section Comp
+
+variable (A : Type u') [Category.{v'} A]
+variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+
+/-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
+étale sheaves. -/
+noncomputable def Etale.lowerStarComp :
+    Etale.lowerStar A h₁ ⋙ Etale.lowerStar A h₂ ≅ Etale.lowerStar A (h₁ ≫ h₂) :=
+  GrothendieckTopology.lowerStarComp A @Etale @Etale h₁ h₂
+
+section UpperStar
+
+variable [∀ F : S.Etaleᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback @Etale ⊤ h₁).op.HasLeftKanExtension F]
+  [∀ F : R.Etaleᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback @Etale ⊤ h₂).op.HasLeftKanExtension F]
+  [∀ F : R.Etaleᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback @Etale ⊤ (h₁ ≫ h₂)).op.HasLeftKanExtension F]
+  [HasWeakSheafify S.smallEtaleTopology A]
+  [HasWeakSheafify T.smallEtaleTopology A]
+
+/-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale
+sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
+noncomputable def Etale.upperStarComp :
+    Etale.upperStar A (h₁ ≫ h₂) ≅ Etale.upperStar A h₂ ⋙ Etale.upperStar A h₁ :=
+  haveI : HasWeakSheafify (S.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+    inferInstanceAs (HasWeakSheafify S.smallEtaleTopology A)
+  haveI : HasWeakSheafify (T.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+    inferInstanceAs (HasWeakSheafify T.smallEtaleTopology A)
+  GrothendieckTopology.upperStarComp A @Etale @Etale h₁ h₂
+
+end UpperStar
+
+end Comp
 
 end AlgebraicGeometry
