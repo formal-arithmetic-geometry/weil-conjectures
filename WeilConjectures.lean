@@ -1,6 +1,12 @@
 module
 
 public import WeilConjectures.AnalyticAux
+public import WeilConjectures.Blowup.Affine.Defs
+public import WeilConjectures.Blowup.Affine.Functoriality
+public import WeilConjectures.Blowup.Affine.Localization
+public import WeilConjectures.Blowup.Affine.ReesGrading
+public import WeilConjectures.Blowup.Complement
+public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
@@ -8,6 +14,14 @@ public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
