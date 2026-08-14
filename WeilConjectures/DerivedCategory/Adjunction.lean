@@ -5,48 +5,128 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
-public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 
 /-!
-# The adjunction between total derived functors of an adjoint pair
+# Adjunctions of derived functors
 
-Let `f : C ⥤ D` and `g : D ⥤ C` be an adjoint pair `adj : f ⊣ g` of additive
-functors between abelian categories, where
+Given an adjunction `adj : f ⊣ g` of additive functors between abelian categories, this
+file lifts `adj` through the stages of the derived formalism:
 
-* `C` is monoidal and admits functorial flat resolutions, and `f` preserves
-  K-flat quasi-isomorphisms (`f.PreservesKFlatQuasiIso`), so that the total
-  left derived functor `f.leftDerivedFunctor : DerivedCategory C ⥤
-  DerivedCategory D` is defined (see
-  `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`);
-* `D` has K-injective resolutions, so that the total right derived functor
-  `g.rightDerivedFunctor : DerivedCategory D ⥤ DerivedCategory C` is defined
-  (see `WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs`).
+* `Adjunction.mapHomologicalComplex`: the induced adjunction
+  `f.mapHomologicalComplex c ⊣ g.mapHomologicalComplex c` between the categories of
+  homological complexes, with unit and counit given degreewise.
+* `Adjunction.mapHomotopyCategory`: the induced adjunction
+  `f.mapHomotopyCategory c ⊣ g.mapHomotopyCategory c` between the homotopy categories,
+  whenever the quotient functors to the homotopy categories are localizations with
+  respect to homotopy equivalences (which holds, in particular, for the complex shapes
+  `ComplexShape.up ℤ` and `ComplexShape.down ι`); it is obtained from the previous
+  adjunction by descent along the localization functors, using
+  `Adjunction.localization`.
+* `Adjunction.derivedAdjunction`: the derived adjunction
 
-We construct the derived adjunction
+  `f.leftDerivedFunctor ⊣ g.rightDerivedFunctor`
 
-`Adjunction.derivedAdjunction adj : f.leftDerivedFunctor ⊣ g.rightDerivedFunctor`
+  between the total derived functors on the unbounded derived categories, where
 
-by applying the abstract theorem `Adjunction.derived` to the adjunction
-`adj.mapHomotopyCategory (.up ℤ)` between the induced functors on homotopy
-categories. The two "absoluteness" hypotheses of `Adjunction.derived` are
-verified using the good-object isomorphism criteria of the K-flat left
-derivability structure (for `f.leftDerivedFunctor ⋙ g.rightDerivedFunctor`)
-and of the K-injective right derivability structure
-(for `g.rightDerivedFunctor ⋙ f.leftDerivedFunctor`): in both cases, the
-comparison natural transformation is an isomorphism on K-flat (respectively
-K-injective) complexes because the counit `f.leftDerivedFunctorCounit`
-(respectively the unit `g.rightDerivedFunctorUnit`) is.
+  - the source category is monoidal and admits functorial flat resolutions, and `f`
+    preserves K-flat quasi-isomorphisms (`f.PreservesKFlatQuasiIso`), so that the total
+    left derived functor is defined
+    (see `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`);
+  - the target category has K-injective resolutions, so that the total right derived
+    functor is defined (see `WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs`).
 
+  It is constructed by applying the abstract theorem `Adjunction.derived` to the
+  adjunction `adj.mapHomotopyCategory (.up ℤ)`. The two "absoluteness" hypotheses of
+  `Adjunction.derived` are verified using the good-object isomorphism criteria of the
+  K-flat left derivability structure (for `f.leftDerivedFunctor ⋙ g.rightDerivedFunctor`)
+  and of the K-injective right derivability structure
+  (for `g.rightDerivedFunctor ⋙ f.leftDerivedFunctor`): in both cases, the comparison
+  natural transformation is an isomorphism on K-flat (respectively K-injective) complexes
+  because the counit `f.leftDerivedFunctorCounit` (respectively the unit
+  `g.rightDerivedFunctorUnit`) is.
 -/
 
 @[expose] public section
 
-open CategoryTheory Limits MonoidalCategory Abelian
+universe v₁ v₂ u₁ u₂
+
+open CategoryTheory Category Limits MonoidalCategory Abelian
 
 namespace CategoryTheory
+
+section MapHomologicalComplex
+
+variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+  [Preadditive C] [Preadditive D] {ι : Type*} (c : ComplexShape ι)
+
+/-- An adjunction `G ⊣ F` of additive functors induces an adjunction
+`G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c` between the induced functors on
+categories of homological complexes. -/
+noncomputable def Adjunction.mapHomologicalComplex {G : D ⥤ C} {F : C ⥤ D} (adj : G ⊣ F)
+    [G.Additive] [F.Additive] :
+    G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c where
+  unit :=
+    { app := fun M =>
+        { f := fun n => adj.unit.app (M.X n)
+          comm' := fun i j _ => (adj.unit.naturality (M.d i j)).symm }
+      naturality := fun M N φ => by
+        ext n
+        exact adj.unit.naturality (φ.f n) }
+  counit :=
+    { app := fun K =>
+        { f := fun n => adj.counit.app (K.X n)
+          comm' := fun i j _ => (adj.counit.naturality (K.d i j)).symm }
+      naturality := fun K L ψ => by
+        ext n
+        exact adj.counit.naturality (ψ.f n) }
+  left_triangle_components X := by
+    ext n
+    exact adj.left_triangle_components (X.X n)
+  right_triangle_components Y := by
+    ext n
+    exact adj.right_triangle_components (Y.X n)
+
+end MapHomologicalComplex
+
+section MapHomotopyCategory
+
+variable {ι : Type*} {V W : Type*} [Category V] [Category W]
+  [Preadditive V] [Preadditive W]
+  {f : V ⥤ W} {g : W ⥤ V} [f.Additive] [g.Additive]
+
+variable (f) in
+/-- The 2-commutative square expressing that `Functor.mapHomotopyCategory`
+descends `Functor.mapHomologicalComplex` along the quotient functors to the
+homotopy categories. -/
+instance Functor.catCommSqMapHomotopyCategory (c : ComplexShape ι) :
+    CatCommSq (f.mapHomologicalComplex c) (HomotopyCategory.quotient V c)
+      (HomotopyCategory.quotient W c) (f.mapHomotopyCategory c) :=
+  ⟨(f.mapHomotopyCategoryFactors c).symm⟩
+
+/-- An adjunction `f ⊣ g` between additive functors induces an adjunction
+between the induced functors on homotopy categories, whenever the quotient
+functors to the homotopy categories are localizations with respect to
+homotopy equivalences. This holds, in particular, for cochain complexes
+indexed by `ℤ` (`ComplexShape.up ℤ`). -/
+noncomputable def Adjunction.mapHomotopyCategory (adj : f ⊣ g) (c : ComplexShape ι)
+    [(HomotopyCategory.quotient V c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences V c)]
+    [(HomotopyCategory.quotient W c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences W c)] :
+    f.mapHomotopyCategory c ⊣ g.mapHomotopyCategory c :=
+  (adj.mapHomologicalComplex c).localization
+    (HomotopyCategory.quotient V c) (HomologicalComplex.homotopyEquivalences V c)
+    (HomotopyCategory.quotient W c) (HomologicalComplex.homotopyEquivalences W c)
+    (f.mapHomotopyCategory c) (g.mapHomotopyCategory c)
+
+end MapHomotopyCategory
+
+section DerivedAdjunction
 
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [MonoidalCategory C] [MonoidalPreadditive C]
@@ -117,5 +197,7 @@ noncomputable def Adjunction.derivedAdjunction {f : C ⥤ D} {g : D ⥤ C} (adj 
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
     (HomotopyCategory.quasiIso D (ComplexShape.up ℤ))
     f.leftDerivedFunctorCounit g.rightDerivedFunctorUnit
+
+end DerivedAdjunction
 
 end CategoryTheory

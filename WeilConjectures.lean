@@ -38,6 +38,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.MonoidalTriangulated
@@ -92,6 +93,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFu
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -106,8 +108,6 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.DerivedCategory.Adjunction
-public import WeilConjectures.Mathlib.Algebra.Homology.Additive
-public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
