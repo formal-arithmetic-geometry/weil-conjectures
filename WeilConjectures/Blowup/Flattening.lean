@@ -73,8 +73,16 @@ The predicates `Scheme.IdealSheafData.FiniteType` and
   interface form. The composite center is `K = I * L` for the finite-degree descent
   `L` of the second center; finite-typeness, the support formula and the comparison of
   blow-ups (product comparison, then removal of the effective Cartier exceptional
-  factor `(I.comap π)^d` of `L.comap π`) are assembled here from the three inputs
-  listed under "Remaining inputs" below;
+  factor `(I.comap π)^d` of `L.comap π`) are assembled here from the finite-degree
+  descent and the two universal-property comparisons below;
+- `Scheme.IdealSheafData.exists_blowup_mul_iso`: the product-ideal comparison
+  `Bl_{I·L}(X) ≅ Bl_{L·O}(Bl_I X)` over `X` (`thm:nagata-blowup-product-ideal`,
+  Stacks Tag 080A), and
+  `Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso`: multiplying a
+  center by an effective Cartier ideal does not change the blow-up
+  (`lemma:nagata-blowup-invertible-factor`, Stacks Tag 0807); both are proved from
+  the universal property of blowing up (Tag 0806) and the effective Cartier kit of
+  `WeilConjectures.Blowup.BlowupUniversal`;
 - `separationBlowup_disjoint_strictTransforms`: disjointness of strict transforms
   after the separation blow-up (`lemma:nagata-separate-closed-subschemes`, Stacks
   Tag 0F3V), by the chart-level argument of the revised blueprint: the charts of
@@ -87,7 +95,7 @@ The predicates `Scheme.IdealSheafData.FiniteType` and
   `Scheme.IdealSheafData.quasiCompact_blowupMap` and
   `Scheme.IdealSheafData.isCompact_coe_compl_support`.
 
-## Remaining inputs (Stacks citations of the revised blueprint)
+## Further inputs (Stacks citations of the revised blueprint)
 
 The finite-degree approximation on the blow-up itself
 (`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks Tag 0803,
@@ -96,22 +104,15 @@ The finite-degree approximation on the blow-up itself
 identified total space (`exists_finiteDegree_center_le`) and the support formula of
 the full finite-degree statement (`coe_support_eq_of_comap_pow_mul`) are proved here.
 
-The revised blueprint invokes the following Stacks Project results through its choice
-notation (`def:nagata-choice-notation`); they remain `sorry` here. Their dedicated
-formalization plan is `blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md`
-(phases B–C). Both reduce, in the Stacks Project, to the universal property of
-blowing up (Tag 0806) and the relative-Proj morphism classification, which the
-chart-glued blow-up of `WeilConjectures.Blowup.Gluing` does not yet provide:
-
-- `Scheme.IdealSheafData.exists_blowup_mul_iso`: the product-ideal comparison
-  `Bl_{I·L}(X) ≅ Bl_{L·O}(Bl_I X)` over `X` (`thm:nagata-blowup-product-ideal`,
-  Stacks Tag 080A);
-- `Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso`: multiplying a
-  center by an effective Cartier ideal does not change the blow-up
-  (`lemma:nagata-blowup-invertible-factor`, Stacks Tag 0807).
+The universal property of blowing up (Stacks Tag 0806) and the effective Cartier
+kit (`exists_lift_blowup`, `hom_ext_of_isEffectiveCartier_comap`,
+`IsEffectiveCartier.mul`/`of_mul_left`/`of_mul_right`/`comap_blowupMap`) are provided
+by `WeilConjectures.Blowup.BlowupUniversal`.
 
 The affine-chart algebra of module strict transforms (Stacks Tag 080W) is proved in
 `WeilConjectures.Compactification.PowerTorsion`.
+
+This file is `sorry`-free.
 
 -/
 
@@ -484,16 +485,42 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
 /-- **Multiplying a center by an effective Cartier ideal does not change the blow-up**
 (consequence of Stacks Project Tags 0807 and 080A; blueprint
 `lemma:nagata-blowup-invertible-factor`): the blow-up of `C * M` for an effective
-Cartier ideal `C` is the blow-up of `M`, over the base. On a chart the generator of `C`
-is a nonzerodivisor unit factor of the Rees algebra.
+Cartier ideal `C` is the blow-up of `M`, over the base.
 
-This awaits the blow-up universal-property chapter
-(`blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md`, Phase B). -/
+The proof runs through the universal property of blowing up
+(`Scheme.IdealSheafData.existsUnique_lift_blowup`, Stacks Project Tag 0806): the
+pullback of `C * M` to the blow-up of `M` is a product of effective Cartier ideals,
+giving a lift `α : M.blowup ⟶ (C * M).blowup`; conversely the pullback of `M` to the
+blow-up of `C * M` is effective Cartier by the factor lemma
+(`IsEffectiveCartier.of_mul_right`), giving `β` in the other direction; the two
+composites are identities by the uniqueness of lifts. -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso
     {Y : Scheme.{u}} {C : Y.IdealSheafData} (hC : C.IsEffectiveCartier)
-    (M : Y.IdealSheafData) (hM : M.FiniteType) :
+    (M : Y.IdealSheafData) (_hM : M.FiniteType) :
     ∃ e : (C * M).blowup ≅ M.blowup, e.hom ≫ M.blowupMap = (C * M).blowupMap := by
-  sorry
+  -- the pullback of `C * M` to the blow-up of `M` is effective Cartier
+  have hCM : ((C * M).comap M.blowupMap).IsEffectiveCartier := by
+    rw [Scheme.IdealSheafData.comap_mul]
+    exact (hC.comap_blowupMap M).mul M.extendedToBlowup_isEffectiveCartier
+  obtain ⟨α, hα⟩ := (C * M).exists_lift_blowup hCM
+  -- the pullback of `M` to the blow-up of `C * M` is effective Cartier
+  have hECcm : ((C * M).comap (C * M).blowupMap).IsEffectiveCartier :=
+    (C * M).extendedToBlowup_isEffectiveCartier
+  have hMcm : (M.comap (C * M).blowupMap).IsEffectiveCartier := by
+    refine Scheme.IdealSheafData.IsEffectiveCartier.of_mul_right
+      (K₁ := C.comap (C * M).blowupMap) ?_
+    rw [← Scheme.IdealSheafData.comap_mul]
+    exact hECcm
+  obtain ⟨β, hβ⟩ := M.exists_lift_blowup hMcm
+  -- the two composites are identities, by uniqueness of lifts
+  have hβα : β ≫ α = 𝟙 (C * M).blowup := by
+    refine (C * M).hom_ext_of_isEffectiveCartier_comap hECcm ?_ (Category.id_comp _)
+    rw [Category.assoc, hα, hβ]
+  have hαβ : α ≫ β = 𝟙 M.blowup := by
+    refine M.hom_ext_of_isEffectiveCartier_comap M.extendedToBlowup_isEffectiveCartier ?_
+      (Category.id_comp _)
+    rw [Category.assoc, hβ, hα]
+  exact ⟨⟨β, α, hβα, hαβ⟩, hβ⟩
 
 /-- **Composition of blow-ups** (Stacks Project Tag 080B), interface form: on a qcqs
 scheme `X`, given a finite-type center `I` with blow-up `π : X₁ ⟶ X` (identified with
