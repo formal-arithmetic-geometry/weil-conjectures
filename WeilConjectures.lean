@@ -15,6 +15,8 @@ public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.Homological
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.Algebra.Homology.Additive
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over

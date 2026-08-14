@@ -6,6 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.Algebra.Homology.Additive
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 
 /-!
@@ -45,8 +47,6 @@ functors yields `RF ⋙ RG ≅ RH` in one step
 
 ## Main definitions
 
-- `CategoryTheory.Adjunction.mapHomologicalComplex`: an adjunction of additive functors
-  induces an adjunction between the functors on homological complexes.
 - `CategoryTheory.Functor.PreservesKInjectiveComplexes`: the class of additive functors
   sending K-injective complexes to K-injective complexes, with the criterion
   `CategoryTheory.Adjunction.preservesKInjectiveComplexes` for right adjoints of exact
@@ -68,50 +68,9 @@ open CategoryTheory Category Limits Abelian
 
 namespace CategoryTheory
 
-section MapHomologicalComplex
-
-variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
-  [Preadditive C] [Preadditive D] {ι : Type*} (c : ComplexShape ι)
-
-/-- An adjunction `G ⊣ F` of additive functors induces an adjunction
-`G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c` between the induced functors on
-categories of homological complexes. -/
-noncomputable def Adjunction.mapHomologicalComplex {G : D ⥤ C} {F : C ⥤ D} (adj : G ⊣ F)
-    [G.Additive] [F.Additive] :
-    G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c where
-  unit :=
-    { app := fun M =>
-        { f := fun n => adj.unit.app (M.X n)
-          comm' := fun i j _ => (adj.unit.naturality (M.d i j)).symm }
-      naturality := fun M N φ => by
-        ext n
-        exact adj.unit.naturality (φ.f n) }
-  counit :=
-    { app := fun K =>
-        { f := fun n => adj.counit.app (K.X n)
-          comm' := fun i j _ => (adj.counit.naturality (K.d i j)).symm }
-      naturality := fun K L ψ => by
-        ext n
-        exact adj.counit.naturality (ψ.f n) }
-  left_triangle_components X := by
-    ext n
-    exact adj.left_triangle_components (X.X n)
-  right_triangle_components Y := by
-    ext n
-    exact adj.right_triangle_components (Y.X n)
-
-end MapHomologicalComplex
-
 section PreservesKInjective
 
 variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [Abelian C] [Abelian D]
-
-/-- An exact functor preserves acyclicity of homological complexes. -/
-lemma HomologicalComplex.Acyclic.map {ι : Type*} {c : ComplexShape ι}
-    {M : HomologicalComplex C c} (hM : M.Acyclic) (F : C ⥤ D) [F.Additive]
-    [F.PreservesHomology] :
-    ((F.mapHomologicalComplex c).obj M).Acyclic :=
-  fun i => ShortComplex.Exact.map (hM i) F
 
 /-- An additive functor `F` between abelian categories *preserves K-injective complexes*
 if the image of any K-injective cochain complex under `F.mapHomologicalComplex` is
@@ -234,12 +193,12 @@ instance isRightDerivedFunctor_rightDerivedFunctor_comp [F.PreservesKInjectiveCo
   obtain ⟨K, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective X₁
   change IsIso ((rightDerivedFunctorCompUnit F G).app
     ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))
-  haveI h₁ : IsIso (F.rightDerivedFunctorUnit.app
+  have h₁ : IsIso (F.rightDerivedFunctorUnit.app
       ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K)) := inferInstance
-  haveI h₂ : IsIso (G.rightDerivedFunctorUnit.app
+  have h₂ : IsIso (G.rightDerivedFunctorUnit.app
       ((HomotopyCategory.quotient D (ComplexShape.up ℤ)).obj
         ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) := inferInstance
-  haveI h₂' : IsIso (G.rightDerivedFunctorUnit.app
+  have h₂' : IsIso (G.rightDerivedFunctorUnit.app
       ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
         ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))) := h₂
   dsimp [rightDerivedFunctorCompUnit]
