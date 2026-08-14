@@ -105,7 +105,7 @@ topologies. -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
-  haveI : RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
+  have : RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
     flat_of_preservesFiniteLimits _
   Functor.isContinuous_of_coverPreserving
     (compatiblePreservingOfFlat _ _)
@@ -182,14 +182,14 @@ Kan extension hypothesis is automatic by
 see `Etale.upperStarIsoOpenImmersionRestriction`. -/
 noncomputable def Etale.upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
-  haveI : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  have : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
   GrothendieckTopology.upperStar A @Etale @Etale g
 
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites. -/
 noncomputable def Etale.upperStarLowerStarAdjunction :
     Etale.upperStar A g ⊣ Etale.lowerStar A g :=
-  haveI : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  have : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
   GrothendieckTopology.upperStarLowerStarAdjunction A @Etale @Etale g
 
@@ -208,7 +208,7 @@ instance Etale.preservesFiniteLimits_upperStar [Abelian A] :
 /-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
 instance Etale.preservesFiniteColimits_upperStar :
     PreservesFiniteColimits (Etale.upperStar A g) :=
-  haveI : PreservesColimitsOfSize.{0, 0} (Etale.upperStar A g) :=
+  have : PreservesColimitsOfSize.{0, 0} (Etale.upperStar A g) :=
     (Etale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits
   PreservesColimitsOfSize.preservesFiniteColimits _
 

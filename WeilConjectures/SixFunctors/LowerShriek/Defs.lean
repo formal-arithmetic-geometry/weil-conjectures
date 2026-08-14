@@ -82,7 +82,7 @@ small `Q`-topologies, by adjunction with the cocontinuous localization functor. 
 lemma isContinuous_overPullback_of_le (hg : P g) (hQP : Q ≤ P) :
     (MorphismProperty.Over.pullback P ⊤ g).IsContinuous
       (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P)) :=
-  haveI := isCocontinuous_overMap_of_le hg hQP
+  have := isCocontinuous_overMap_of_le hg hQP
   (MorphismProperty.Over.mapPullbackAdj P ⊤ g hg _root_.trivial).isContinuous_of_isCocontinuous
     _ _
 
