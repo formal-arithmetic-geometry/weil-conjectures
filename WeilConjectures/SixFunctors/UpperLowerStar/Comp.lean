@@ -120,9 +120,9 @@ variable [∀ F : S.Etaleᵒᵖ ⥤ A,
 sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
 noncomputable def Etale.upperStarComp :
     Etale.upperStar A (h₁ ≫ h₂) ≅ Etale.upperStar A h₂ ⋙ Etale.upperStar A h₁ :=
-  have : HasWeakSheafify (S.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  haveI : HasWeakSheafify (S.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify S.smallEtaleTopology A)
-  have : HasWeakSheafify (T.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  haveI : HasWeakSheafify (T.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify T.smallEtaleTopology A)
   GrothendieckTopology.upperStarComp A @Etale @Etale h₁ h₂
 
