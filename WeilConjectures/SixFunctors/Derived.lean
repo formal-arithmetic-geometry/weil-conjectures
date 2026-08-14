@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import WeilConjectures.DerivedCategory.GrothendieckAbelian
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
@@ -48,18 +48,6 @@ López–Souto Salorio and Serpé; it is recorded here as the sorried instance
 universe w w' v' u' u
 
 open CategoryTheory Abelian Limits
-
-namespace CategoryTheory.Abelian
-
-/-- Every Grothendieck abelian category has K-injective resolutions: any cochain
-complex admits a monomorphic quasi-isomorphism into a K-injective complex. This is a
-theorem of Alonso Tarrío–Jeremías López–Souto Salorio and Serpé. -/
-instance hasKInjectiveResolutions_of_isGrothendieckAbelian
-    {C : Type u'} [Category.{v'} C] [Abelian C] [IsGrothendieckAbelian.{w} C] :
-    HasKInjectiveResolutions C :=
-  sorry
-
-end CategoryTheory.Abelian
 
 namespace AlgebraicGeometry
 

@@ -82,7 +82,7 @@ private lemma etale_val (α : Etale.LiftIndex j V) : Etale α.1 := by
 
 /-- The étale `U`-scheme determined by a lift of `V : X.Etale` through `j`. -/
 private def toEtale (α : Etale.LiftIndex j V) : U.Etale :=
-  haveI := α.etale_val
+  have := α.etale_val
   Etale.mk α.1
 
 /-- The comparison morphism from `V` to the image of `α.toEtale` in `X.Etale`; its
@@ -158,7 +158,8 @@ open Scheme in
 /-- Along the localization functor induced by an étale monomorphism `j`, all pointwise
 left Kan extensions with values in a category with an initial object exist: the indexing
 comma categories are either empty or admit a terminal object. -/
-instance [Mono j] [HasInitial A] (F : U.Etaleᵒᵖ ⥤ A) :
+instance hasPointwiseLeftKanExtension_of_etale_and_mono
+    [Mono j] [HasInitial A] (F : U.Etaleᵒᵖ ⥤ A) :
     (MorphismProperty.Over.map ⊤ ‹Etale j›).op.HasPointwiseLeftKanExtension F := by
   intro V
   by_cases h : Nonempty (Etale.LiftIndex j V.unop)
@@ -211,7 +212,7 @@ variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 étale sites. -/
 noncomputable def Etale.openImmersionLowerShriek :
     Sheaf U.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
-  haveI : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
   GrothendieckTopology.localizationLowerShriek A @Etale @Etale j inferInstance
 
@@ -219,7 +220,7 @@ noncomputable def Etale.openImmersionLowerShriek :
 open immersion. -/
 noncomputable def Etale.openImmersionLowerShriekAdjunction :
     Etale.openImmersionLowerShriek A j ⊣ Etale.openImmersionRestriction A j :=
-  haveI : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
   GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale j inferInstance
 
@@ -236,17 +237,14 @@ instance Etale.openImmersionLowerShriek_additive [Preadditive A] :
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
-abelian category is exact. This is the left exactness half; it preserves finite colimits
-by `Etale.preservesFiniteColimits_openImmersionLowerShriek`, being a left adjoint. -/
+abelian category is exact. This is the left exactness half. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek [Abelian A] :
     PreservesFiniteLimits (Etale.openImmersionLowerShriek A j) :=
   sorry
 
-/-- The extension by zero `j_!` along an open immersion preserves finite colimits, being a
-left adjoint. Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
+/-- Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
 makes `j_!` exact. -/
-instance Etale.preservesFiniteColimits_openImmersionLowerShriek :
-    PreservesFiniteColimits (Etale.openImmersionLowerShriek A j) :=
+example : PreservesFiniteColimits (Etale.openImmersionLowerShriek A j) :=
   inferInstance
 
 section UpperStar

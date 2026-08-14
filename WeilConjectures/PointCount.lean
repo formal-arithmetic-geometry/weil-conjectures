@@ -62,14 +62,14 @@ theorem Hom.specMap_residueFieldAlgebraMap (f : X.Hom (Spec (.of k))) (x : X) :
 /-- The degree of a point with finite residue field is positive. -/
 theorem Hom.degreeOver_ne_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
     (hx : x ∈ X.finitePoints) : f.degreeOver x ≠ 0 := by
-  letI := (f.residueFieldAlgebraMap x).toAlgebra
-  haveI : Finite (X.residueField x) := X.mem_finitePoints.mp hx
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have : Finite (X.residueField x) := X.mem_finitePoints.mp hx
   exact Module.finrank_pos.ne'
 
 /-- The degree of a point with infinite residue field is `0` (by junk convention). -/
 theorem Hom.degreeOver_eq_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
     (hx : x ∉ X.finitePoints) : f.degreeOver x = 0 := by
-  letI := (f.residueFieldAlgebraMap x).toAlgebra
+  let := (f.residueFieldAlgebraMap x).toAlgebra
   have h : ¬ Module.Finite k (X.residueField x) := fun _ ↦
     hx (X.mem_finitePoints.mpr (Module.finite_of_finite k))
   exact Module.finrank_of_not_finite h
@@ -78,7 +78,7 @@ theorem Hom.degreeOver_eq_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
 type. -/
 private lemma finite_ringHom {A B : Type u} [CommRing A] [CommRing B] [Finite B]
     {s : Set A} (hs : s.Finite) (hcl : Subring.closure s = ⊤) : Finite (A →+* B) := by
-  haveI := hs.to_subtype
+  have := hs.to_subtype
   refine Finite.of_injective (fun φ (x : s) ↦ φ x.1) fun φ ψ h ↦ ?_
   have hle : Subring.closure s ≤ φ.eqLocus ψ :=
     Subring.closure_le.mpr fun x hx ↦ congrFun h ⟨x, hx⟩
@@ -92,10 +92,10 @@ private lemma finite_hom_of_isAffine [Finite k] {U : Scheme.{u}} [IsAffine U]
     Finite (Spec (.of K) ⟶ U) := by
   have hft : RingHom.FiniteType (g.appTop).hom :=
     (HasRingHomProperty.iff_of_isAffine (P := @LocallyOfFiniteType)).mp ‹LocallyOfFiniteType g›
-  letI : Algebra Γ(Spec (.of k), ⊤) Γ(U, ⊤) := (g.appTop).hom.toAlgebra
+  let : Algebra Γ(Spec (.of k), ⊤) Γ(U, ⊤) := (g.appTop).hom.toAlgebra
   have halg : Algebra.FiniteType Γ(Spec (.of k), ⊤) Γ(U, ⊤) := hft
   obtain ⟨s, hs⟩ := halg.out
-  haveI : Finite Γ(Spec (.of k), ⊤) :=
+  have : Finite Γ(Spec (.of k), ⊤) :=
     Finite.of_injective _ (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.injective
   have hcl : Subring.closure
       (Set.range (algebraMap Γ(Spec (.of k), ⊤) Γ(U, ⊤)) ∪ ↑s) = ⊤ := by
@@ -103,7 +103,7 @@ private lemma finite_hom_of_isAffine [Finite k] {U : Scheme.{u}} [IsAffine U]
     rw [hs] at h
     rw [← h]
     exact Algebra.top_toSubring
-  haveI : Finite (Γ(U, ⊤) →+* K) :=
+  have : Finite (Γ(U, ⊤) →+* K) :=
     finite_ringHom ((Set.finite_range _).union s.finite_toSet) hcl
   refine Finite.of_injective
     (fun h : Spec (.of K) ⟶ U ↦ (Spec.preimage (h ≫ U.isoSpec.hom)).hom) fun h₁ h₂ e ↦ ?_
@@ -117,11 +117,11 @@ the spectrum of a finite field. -/
 private lemma finite_hom [Finite k] (f : X.Hom (Spec (.of k))) [QuasiCompact f]
     [LocallyOfFiniteType f] (K : Type u) [Field K] [Finite K] :
     Finite (Spec (.of K) ⟶ X) := by
-  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   let 𝒰 : X.OpenCover := X.affineCover.finiteSubcover
-  haveI : Fintype 𝒰.I₀ := inferInstanceAs (Fintype X.affineCover.finiteSubcover.I₀)
-  haveI : ∀ i, IsAffine (𝒰.X i) := fun i ↦ inferInstanceAs (IsAffine (X.affineCover.X _))
-  haveI : ∀ i, Finite (Spec (.of K) ⟶ 𝒰.X i) := fun i ↦
+  have : Fintype 𝒰.I₀ := inferInstanceAs (Fintype X.affineCover.finiteSubcover.I₀)
+  have : ∀ i, IsAffine (𝒰.X i) := fun i ↦ inferInstanceAs (IsAffine (X.affineCover.X _))
+  have : ∀ i, Finite (Spec (.of K) ⟶ 𝒰.X i) := fun i ↦
     finite_hom_of_isAffine (𝒰.f i ≫ f) K
   have key : ∀ g : Spec (.of K) ⟶ X,
       ∃ p : Σ i, (Spec (.of K) ⟶ 𝒰.X i), p.2 ≫ 𝒰.f p.1 = g := by
@@ -140,7 +140,7 @@ in any finite field extension of the base field. -/
 theorem Hom.finite_fieldPoints [Finite k] (f : X.Hom (Spec (.of k))) (K : Type u)
     [Field K] [Algebra k K] [Finite K] [QuasiCompact f] [LocallyOfFiniteType f] :
     Finite (f.fieldPoints K) := by
-  haveI : Finite (Spec (.of K) ⟶ X) := finite_hom f K
+  have : Finite (Spec (.of K) ⟶ X) := finite_hom f K
   exact Finite.of_injective (fun g : f.fieldPoints K ↦ g.1) fun g₁ g₂ h ↦ Subtype.ext h
 
 /-- A morphism `Spec K ⟶ X` built from an embedding of a residue field lies over `k` if
@@ -164,9 +164,9 @@ private def Hom.FieldPointFiber (f : X.Hom (Spec (.of k))) (K : Type u) [Field K
 residue fields. -/
 private noncomputable def algHomEquivFieldPointFiber (f : X.Hom (Spec (.of k)))
     (K : Type u) [Field K] [Algebra k K] (x : X) :
-    letI := (f.residueFieldAlgebraMap x).toAlgebra
+    let := (f.residueFieldAlgebraMap x).toAlgebra
     (X.residueField x →ₐ[k] K) ≃ f.FieldPointFiber K x :=
-  letI := (f.residueFieldAlgebraMap x).toAlgebra
+  let := (f.residueFieldAlgebraMap x).toAlgebra
   { toFun := fun ψ ↦ ⟨CommRingCat.ofHom ψ.toRingHom, ψ.comp_algebraMap⟩
     invFun := fun φ ↦ { toRingHom := φ.1.hom, commutes' := fun a ↦ RingHom.congr_fun φ.2 a }
     left_inv := fun _ ↦ rfl
@@ -191,8 +191,8 @@ private lemma nat_card_fieldPointFiber [Finite k] (f : X.Hom (Spec (.of k))) {n 
     (hn : n ≠ 0) (x : X) :
     Nat.card (f.FieldPointFiber (FiniteField.galoisExtension k n) x) =
       if f.degreeOver x ∣ n then f.degreeOver x else 0 := by
-  letI := (f.residueFieldAlgebraMap x).toAlgebra
-  haveI : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
   rw [← Nat.card_congr (algHomEquivFieldPointFiber f (FiniteField.galoisExtension k n) x)]
   by_cases hdvd : f.degreeOver x ∣ n
   · rw [if_pos hdvd]
@@ -203,7 +203,7 @@ private lemma nat_card_fieldPointFiber [Finite k] (f : X.Hom (Spec (.of k))) {n 
     rw [FiniteField.natCard_algHom_of_finrank_dvd hdvd']
     rfl
   · rw [if_neg hdvd]
-    haveI : IsEmpty (X.residueField x →ₐ[k] FiniteField.galoisExtension k n) := by
+    have : IsEmpty (X.residueField x →ₐ[k] FiniteField.galoisExtension k n) := by
       rw [← not_nonempty_iff, FiniteField.nonempty_algHom_iff_finrank_dvd,
         FiniteField.finrank_galoisExtension k n hn]
       exact hdvd
@@ -227,8 +227,8 @@ private lemma degreeOver_dvd_of_fieldPointFiber [Finite k] (f : X.Hom (Spec (.of
     {n : ℕ} (hn : n ≠ 0) {x : X}
     (φ : f.FieldPointFiber (FiniteField.galoisExtension k n) x) :
     f.degreeOver x ∣ n := by
-  letI := (f.residueFieldAlgebraMap x).toAlgebra
-  haveI : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have : Finite (FiniteField.galoisExtension k n) := Module.finite_of_finite k
   have h : Nonempty (X.residueField x →ₐ[k] FiniteField.galoisExtension k n) :=
     ⟨(algHomEquivFieldPointFiber f (FiniteField.galoisExtension k n) x).symm φ⟩
   rw [FiniteField.nonempty_algHom_iff_finrank_dvd,
@@ -247,7 +247,7 @@ are finite. -/
 private lemma finite_fieldPointFiber (f : X.Hom (Spec (.of k))) {K : Type u} [Field K]
     [Algebra k K] [Finite K] {x : X} (hx : x ∈ X.finitePoints) :
     Finite (f.FieldPointFiber K x) := by
-  haveI : Finite (X.residueField x) := X.mem_finitePoints.mp hx
+  have : Finite (X.residueField x) := X.mem_finitePoints.mp hx
   exact Finite.of_injective
     (fun φ : f.FieldPointFiber K x ↦ (φ.1.hom : X.residueField x → K))
     fun φ ψ h ↦ Subtype.ext (CommRingCat.hom_ext (DFunLike.coe_injective h))
@@ -257,8 +257,8 @@ degree. -/
 theorem Hom.finite_setOf_degreeOver_le [Finite k] (f : X.Hom (Spec (.of k)))
     [QuasiCompact f] [LocallyOfFiniteType f] (n : ℕ) :
     {x : X.finitePoints | f.degreeOver x.1 ≤ n}.Finite := by
-  haveI : Finite (FiniteField.galoisExtension k n.factorial) := Module.finite_of_finite k
-  haveI := f.finite_fieldPoints (FiniteField.galoisExtension k n.factorial)
+  have : Finite (FiniteField.galoisExtension k n.factorial) := Module.finite_of_finite k
+  have := f.finite_fieldPoints (FiniteField.galoisExtension k n.factorial)
   rw [← Set.finite_coe_iff]
   have key : ∀ x : {x : X.finitePoints | f.degreeOver x.1 ≤ n},
       Nonempty (f.FieldPointFiber (FiniteField.galoisExtension k n.factorial) x.1.1) := fun x ↦
@@ -282,7 +282,7 @@ theorem Hom.pointCount_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
     (hT : ∀ x : X.finitePoints, f.degreeOver x.1 ∣ n → x ∈ T) :
     f.pointCount n = ∑ x ∈ T with f.degreeOver x.1 ∣ n, f.degreeOver x.1 := by
   set K := FiniteField.galoisExtension k n with hK
-  haveI : Finite K := Module.finite_of_finite k
+  have : Finite K := Module.finite_of_finite k
   set T' : Finset X.finitePoints := T.filter (fun x ↦ f.degreeOver x.1 ∣ n) with hT'
   have h₁ : ∀ (x : X), f.FieldPointFiber K x → x ∈ X.finitePoints := fun x φ ↦
     mem_finitePoints_of_fieldPointFiber f φ
@@ -295,7 +295,7 @@ theorem Hom.pointCount_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
       invFun := fun q ↦ ⟨q.1.1.1, q.2⟩
       left_inv := fun _ ↦ rfl
       right_inv := fun _ ↦ rfl }
-  haveI : ∀ q : T', Finite (f.FieldPointFiber K q.1.1) := fun q ↦
+  have : ∀ q : T', Finite (f.FieldPointFiber K q.1.1) := fun q ↦
     finite_fieldPointFiber f q.1.2
   calc f.pointCount n
       = Nat.card (f.fieldPoints K) := rfl

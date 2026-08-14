@@ -3295,7 +3295,8 @@ the element specified in (REES0).
 
 \begin{definition}[Rees algebra]
   \label{def:nagata-rees-algebra}
-  \lean{}
+  \lean{reesAlgebra}
+  \leanok
 
   For the datum (REES0), define the Rees algebra by
   \[
@@ -3316,7 +3317,8 @@ the element specified in (REES0).
 \begin{definition}[Homogeneous piece of the Rees algebra]
   \label{def:nagata-rees-piece}
   \uses{def:nagata-rees-algebra}
-  \lean{}
+  \lean{AlgebraicGeometry.reesGrading}
+  \leanok
 
   Let $\iota\colon\mathcal R_A(I)\hookrightarrow A[t]$ be the inclusion of
   \Cref{def:nagata-rees-algebra}.  For $n\in\mathbb N$, define
@@ -3330,7 +3332,8 @@ the element specified in (REES0).
 \begin{definition}[Coefficients, homogeneous components, and support]
   \label{def:nagata-rees-components}
   \uses{def:nagata-rees-algebra,def:nagata-rees-piece}
-  \lean{}
+  \lean{AlgebraicGeometry.reesMonomial, AlgebraicGeometry.reesX}
+  \leanok
 
   Let $\iota\colon\mathcal R_A(I)\hookrightarrow A[t]$ be the inclusion of
   \Cref{def:nagata-rees-piece}.  For $F\in\mathcal R_A(I)$ and
@@ -3359,7 +3362,8 @@ the element specified in (REES0).
 \begin{lemma}[Membership in one Rees piece]
   \label{lemma:nagata-rees-piece-membership}
   \uses{def:nagata-rees-piece}
-  \lean{}
+  \lean{AlgebraicGeometry.mem_reesGrading_iff_exists}
+  \leanok
 
   For $n\in\mathbb N$, an element $F\in\mathcal R_A(I)$ lies in
   $\mathcal R_A(I)_n$ if and only if
@@ -3374,6 +3378,7 @@ the element specified in (REES0).
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $F\in\mathcal R_A(I)$, and use $F_k$ as defined in
   \Cref{def:nagata-rees-components}.  If
   $F\in\mathcal R_A(I)_n$, coefficient extensionality is the equality
@@ -3397,7 +3402,9 @@ the element specified in (REES0).
 
 \begin{lemma}[Multiplication of Rees pieces]
   \label{lemma:nagata-rees-piece-mul}
-  \lean{}
+  \lean{AlgebraicGeometry.reesMonomial_mul,
+    AlgebraicGeometry.reesGrading.instGradedMonoid}
+  \leanok
 
   For $m,n\in\mathbb N$, multiplication maps
   \[
@@ -3408,6 +3415,7 @@ the element specified in (REES0).
 
 \begin{proof}
   \uses{lemma:nagata-rees-piece-membership}
+  \leanok
   Let $F\in\mathcal R_A(I)_m$ and
   $G\in\mathcal R_A(I)_n$.  By
   \Cref{lemma:nagata-rees-piece-membership}, choose
@@ -3423,7 +3431,8 @@ the element specified in (REES0).
 \begin{lemma}[Finite support of the homogeneous decomposition]
   \label{lemma:nagata-rees-component-finite-support}
   \uses{def:nagata-rees-components}
-  \lean{}
+  \lean{Polynomial.support}
+  \leanok
 
   For $F\in\mathcal R_A(I)$, only finitely many homogeneous components
   $F_nt^n$ are nonzero.
@@ -3434,6 +3443,7 @@ the element specified in (REES0).
 \end{lemma}
 
 \begin{proof}
+  \leanok
   By \Cref{def:nagata-rees-components},
   \[
     \operatorname{supp}(F)
@@ -3466,7 +3476,8 @@ the element specified in (REES0).
 
 \begin{lemma}[Reconstruction from homogeneous components]
   \label{lemma:nagata-rees-sum-components}
-  \lean{}
+  \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   Every $F\in\mathcal R_A(I)$ is the finite sum of the monomials
   $F_nt^n$ regarded as elements of $\mathcal R_A(I)_n$.
@@ -3475,6 +3486,7 @@ the element specified in (REES0).
 \begin{proof}
   \uses{lemma:nagata-rees-component-finite-support,
     lemma:nagata-rees-piece-membership}
+  \leanok
   Let $F_n$ and $\operatorname{supp}(F)$ be as in
   \Cref{def:nagata-rees-components}, and put
   $E:=\operatorname{supp}(F)$.  By
@@ -3496,7 +3508,8 @@ the element specified in (REES0).
 
 \begin{lemma}[Uniqueness of the homogeneous decomposition]
   \label{lemma:nagata-rees-components-unique}
-  \lean{}
+  \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   If $E\subseteq\mathbb N$ is finite and
   $H_n\in\mathcal R_A(I)_n$ for $n\in E$, then
@@ -3508,6 +3521,7 @@ the element specified in (REES0).
 
 \begin{proof}
   \uses{lemma:nagata-rees-piece-membership}
+  \leanok
   Let $E\subseteq\mathbb N$ be finite, let
   $H_n\in\mathcal R_A(I)_n$ for $n\in E$, and assume
   $\sum_{n\in E}H_n=0$.  Fix $k\in E$.  Applying
@@ -3529,7 +3543,8 @@ the element specified in (REES0).
 
 \begin{proposition}[Graded-ring structure on the Rees algebra]
   \label{prop:nagata-rees-graded}
-  \lean{}
+  \lean{AlgebraicGeometry.reesGrading.instGradedRing}
+  \leanok
 
   The family $n\mapsto\mathcal R_A(I)_n$ defines an
   $\mathbb N$-graded-ring structure on $\mathcal R_A(I)$.
@@ -3538,6 +3553,7 @@ the element specified in (REES0).
 \begin{proof}
   \uses{lemma:nagata-rees-piece-mul,lemma:nagata-rees-sum-components,
     lemma:nagata-rees-components-unique}
+  \leanok
   For all $m,n\in\mathbb N$, graded multiplication is the inclusion
   \[
     \mathcal R_A(I)_m\mathcal R_A(I)_n
@@ -3565,7 +3581,8 @@ the element specified in (REES0).
 
 \begin{lemma}[The degree-zero piece]
   \label{lemma:nagata-rees-degree-zero}
-  \lean{}
+  \lean{AlgebraicGeometry.reesGradingZero}
+  \leanok
 
   Let $\iota\colon\mathcal R_A(I)\hookrightarrow A[t]$ be the inclusion in
   \Cref{def:nagata-rees-algebra}.  Define
@@ -3583,6 +3600,7 @@ the element specified in (REES0).
 
 \begin{proof}
   \uses{lemma:nagata-rees-piece-membership}
+  \leanok
   Define
   \[
     c_0\colon\mathcal R_A(I)_0\to A,
@@ -3638,7 +3656,8 @@ the element specified in (REES0).
 \begin{lemma}[Degree-one element associated to an ideal element]
   \label{lemma:nagata-rees-degree-one-element}
   \uses{def:nagata-rees-components}
-  \lean{}
+  \lean{AlgebraicGeometry.reesX, AlgebraicGeometry.reesX_mem}
+  \leanok
 
   Let $\iota\colon\mathcal R_A(I)\hookrightarrow A[t]$ be the inclusion of
   \Cref{def:nagata-rees-components}.  For $a\in I$, define
@@ -3663,6 +3682,7 @@ the element specified in (REES0).
 
 \begin{proof}
   \uses{lemma:nagata-rees-piece-membership}
+  \leanok
   For $a\in I=I^1$, the definition in the statement and
   \Cref{lemma:nagata-rees-piece-membership} are the equalities
   \[
@@ -3725,29 +3745,35 @@ the element specified in (REES0).
 
 \begin{definition}[Affine blow-up]
   \label{def:nagata-affine-blowup}
-  \uses{def:nagata-rees-algebra,def:nagata-relative-proj,
-    lemma:nagata-relative-proj-interface}
-  \lean{}
+  \uses{def:nagata-rees-algebra,def:nagata-rees-piece,
+    lemma:nagata-rees-degree-zero}
+  \lean{AlgebraicGeometry.AffineBlowup, AlgebraicGeometry.AffineBlowup.toSpec}
+  \leanok
 
   For an ideal $I\subseteq A$, define
   \[
     \operatorname{Bl}_I(\operatorname{Spec}A)
-      =\operatorname{Proj}(\mathcal R_A(I)).
+      =\operatorname{Proj}(\mathcal R_A(I)),
   \]
-  Let $u_0\colon A\xrightarrow{\sim}\mathcal R_A(I)_0$ be the inverse of
+  the absolute homogeneous \(\operatorname{Proj}\) of the graded Rees
+  algebra of \Cref{def:nagata-rees-piece}.  Let
+  $u_0\colon A\xrightarrow{\sim}\mathcal R_A(I)_0$ be the inverse of
   the equivalence in \Cref{lemma:nagata-rees-degree-zero}.  Define
   \[
     b_{A,I}\colon\operatorname{Proj}(\mathcal R_A(I))\longrightarrow
       \operatorname{Spec}(A)
   \]
-  to be the relative-Proj structure morphism determined by $u_0$.
+  to be the composite of the absolute structure morphism
+  $\operatorname{Proj}(\mathcal R_A(I))\to
+   \operatorname{Spec}(\mathcal R_A(I)_0)$ with
+  $\operatorname{Spec}(u_0)$.
 
   \paragraph{Mathlib relation.}
-  Mathlib supplies \texttt{\detokenize{AlgebraicGeometry.Proj}} and its
-  structure map \texttt{\detokenize{Proj.toSpecZero}}, but no current
-  declaration named \texttt{\detokenize{AlgebraicGeometry.affineBlowup}}.
-  This definition specializes absolute \texttt{Proj} to
-  \texttt{\detokenize{reesAlgebra I}}.
+  The ambient constructions are
+  \texttt{\detokenize{AlgebraicGeometry.Proj}} and its structure map
+  \texttt{\detokenize{Proj.toSpecZero}}, specialized to the graded
+  Rees algebra.  No relative-\texttt{Proj} construction is needed for the
+  affine blow-up.
 \end{definition}
 
 \begin{definition}[Affine blow-up chart algebra]
@@ -4083,38 +4109,42 @@ the element specified in (REES0).
 \begin{lemma}[Blow-up of the unit ideal]
   \label{lemma:nagata-affine-blowup-top}
   \uses{def:nagata-affine-blowup}
-  \lean{}
+  \lean{AlgebraicGeometry.AffineBlowup.isIso_toSpec_of_eq_top}
+  \leanok
 
-  There is a unique isomorphism
+  If $I=A$, then the structure morphism
   \[
-    \upsilon_A\colon
-      \operatorname{Bl}_{A}(\operatorname{Spec}A)
-      \xrightarrow{\sim}\operatorname{Spec}(A)
+    b_{A,I}\colon
+      \operatorname{Bl}_{I}(\operatorname{Spec}A)
+      \longrightarrow\operatorname{Spec}(A)
   \]
-  satisfying $\upsilon_A=b_{A,A}$.
+  is an isomorphism.  We write
+  $\upsilon_A:=b_{A,A}$ for this isomorphism.
 \end{lemma}
 
 \begin{proof}
-  \uses{prop:nagata-affine-blowup-chart}
+  \uses{lemma:nagata-rees-degree-zero,
+    lemma:nagata-rees-degree-one-element}
+  \leanok
   By \Cref{def:nagata-rees-algebra},
   \[
     \mathcal R_A(A)=\bigoplus_{n\ge0}A^nt^n=A[t].
   \]
-  By \Cref{lemma:nagata-rees-generators-cover-proj},
-  $\operatorname{Proj}(A[t])=D_+(t)$, while
-  \Cref{def:nagata-blowup-chart-ring} is the equality $A[A/1]=A$.  Under
-  these two equalities, the isomorphism $\chi_1$ of
-  \Cref{prop:nagata-affine-blowup-chart} satisfies
+  Every homogeneous element $at^n$ of positive degree factors as
+  $(at^{n-1})\cdot(1\cdot t)$, so the irrelevant ideal is contained in the
+  principal ideal $(t)$ and $\operatorname{Proj}(A[t])=D_+(t)$.  Hence the
+  affine chart at the degree-one element $t=1\cdot t$ of
+  \Cref{lemma:nagata-rees-degree-one-element} is an isomorphism onto
+  $\operatorname{Bl}_{A}(\operatorname{Spec}A)$.  Composed with the
+  structure morphism it is the morphism of spectra induced by the canonical
+  ring homomorphism
   \[
-    \chi_1=b_{A,A}.
+    A\longrightarrow \mathcal R_A(A)_{(t)},\qquad
+    a\longmapsto \frac{at^0}{1},
   \]
-  Define $\upsilon_A:=\chi_1$.  If
-  $\psi\colon\operatorname{Bl}_{A}(\operatorname{Spec}A)
-  \xrightarrow{\sim}\operatorname{Spec}(A)$ satisfies
-  $\psi=b_{A,A}$, then
-  \[
-    \psi=b_{A,A}=\chi_1=\upsilon_A.
-  \]
+  which is bijective: injectivity because $t$ is a non-zerodivisor in
+  $A[t]$, surjectivity because every degree-zero fraction $at^n/t^n$ equals
+  $at^0/1$.  Two-out-of-three for isomorphisms proves the claim.
 \end{proof}
 
 \begin{lemma}[Blow-up of the zero ideal]
@@ -4154,1419 +4184,672 @@ the element specified in (REES0).
 Throughout this subsection, fix the explicitly typed datum
 \[
   \mathsf D_{\mathrm{loc}}:=(A,I,s),\qquad
-  A\text{ a commutative ring},\quad I\triangleleft A,\quad s\in A.
+  A\text{ a commutative ring},\qquad I\triangleleft A,\qquad s\in A.
                                                                     \tag{LOC0}
 \]
-Every occurrence of $A$, $I$, or $s$ before the next subsection denotes the
-corresponding projection of $\mathsf D_{\mathrm{loc}}$.
+Write $\lambda_s\colon A\to A_s$ for a localization of $A$ away from $s$.
 
-\begin{lemma}[Localization commutes with powers of an ideal]
+\paragraph{Roadmap note.}  Compared to an earlier draft of this blueprint,
+the transports below are organized around the \emph{coefficientwise
+functoriality} of the graded Rees algebra rather than around
+tensor-product comparison isomorphisms: every ring homomorphism
+$\varphi\colon A\to B$ with $I.\varphi$-extension $J$ induces a graded
+homomorphism $\mathcal R(\varphi)\colon\mathcal R_A(I)\to\mathcal R_B(J)$,
+and the identity, composition, and localization laws are stated for these
+maps.  The tensor-product isomorphisms of the earlier draft become the
+single chart-wise localization statement
+\Cref{prop:nagata-rees-localization}, and the explicit cocycle bookkeeping
+becomes the composition law \Cref{lemma:nagata-affine-blowup-restrict-cocycle}.
+This matches the Lean implementation in
+\texttt{WeilConjectures.Blowup.Functoriality} and
+\texttt{WeilConjectures.Blowup.Localization}.
+
+\begin{lemma}[Powers of the extended ideal]
   \label{lemma:nagata-localization-ideal-pow}
-  \lean{}
+  \lean{Ideal.map_pow}
+  \leanok
 
-  Let $s\in A$, put $S_s:=\{s^k\mid k\in\mathbb N\}$ and
-  $A_s:=S_s^{-1}A$, and write $IA_s$ for the extension of $I$ along
-  $A\to A_s$.  For every $n\in\mathbb N$ one has
+  Let $\varphi\colon A\to B$ be a ring homomorphism and let
+  $I B:=\varphi(I)B$ denote the extended ideal.  For every $n\in\mathbb N$,
   \[
-    (I^n)A_s=(IA_s)^n.
+    (I^n)B=(IB)^n.
   \]
+  In particular $(I^n)A_s=(IA_s)^n$.
 
   \paragraph{Mathlib relation.}
-  Extension along the localization map is
-  \texttt{\detokenize{Ideal.map}}, and the displayed equality is exactly
-  \texttt{\detokenize{Ideal.map_pow}} for that map.
+  Extension is \texttt{\detokenize{Ideal.map}}; the equality is exactly
+  \texttt{\detokenize{Ideal.map_pow}}.
 \end{lemma}
 
 \begin{proof}
-  Extension of ideals along $A\to A_s$ satisfies
-  \[
-    (JK)A_s=(JA_s)(KA_s),
-    \qquad AA_s=A_s.
-  \]
-  For $n=0$,
-  $(I^0)A_s=A_s=(IA_s)^0$.  If
-  $(I^n)A_s=(IA_s)^n$, then
-  \[
-    (I^{n+1})A_s
-      =(I^nI)A_s
-      =((I^n)A_s)(IA_s)
-      =(IA_s)^n(IA_s)
-      =(IA_s)^{n+1}.
-  \]
-  Induction proves the equality.
+  \leanok
+  Induction on $n$, using $(JK)B=(JB)(KB)$ for ideals $J,K$ and
+  $AB=B$.
 \end{proof}
 
-\begin{lemma}[Localization of each Rees piece]
+\begin{lemma}[Coefficientwise transport of monomials]
   \label{lemma:nagata-localization-rees-piece}
-  \lean{}
+  \uses{def:nagata-rees-components}
+  \lean{AlgebraicGeometry.reesHom_reesMonomial}
+  \leanok
 
-  With $A_s$ as in \Cref{lemma:nagata-localization-ideal-pow}, define
+  Let $\varphi\colon A\to B$ be a ring homomorphism and put
+  $J:=IB$.  For $n\in\mathbb N$ and $a\in I^n$, one has
+  $\varphi(a)\in J^n$, and the assignment
   \[
-    \ell_{s,n}\colon A_s\otimes_A\mathcal R_A(I)_n
-      \longrightarrow\mathcal R_{A_s}(IA_s)_n,
-    \qquad
-    (r/s^k)\otimes(xt^n)\longmapsto(rx/s^k)t^n.
+    a\mathbf t^n\longmapsto\varphi(a)\mathbf t^n
   \]
-  Then $\ell_{s,n}$ is an $A_s$-linear equivalence
-  \[
-    A_s\otimes_A\mathcal R_A(I)_n
-      \cong\mathcal R_{A_s}(IA_s)_n
-  \]
-  for every $n$.
+  sends the degree-$n$ piece $\mathcal R_A(I)_n$ into
+  $\mathcal R_B(J)_n$.
 \end{lemma}
 
 \begin{proof}
-  \uses{lemma:nagata-localization-ideal-pow,lemma:nagata-rees-piece-membership}
-  By \Cref{lemma:nagata-rees-piece-membership}, coefficient extraction and
-  the monomial maps are inverse equivalences
-  \[
-    \mathcal R_A(I)_n\xrightarrow{\sim}I^n,
-    \qquad
-    \mathcal R_{A_s}(IA_s)_n\xrightarrow{\sim}(IA_s)^n.
-  \]
-  Under them, $\ell_{s,n}$ is the map
-  \[
-    \mu_{s,n}\colon A_s\otimes_AI^n\longrightarrow(IA_s)^n,
-    \qquad (r/s^k)\otimes x\longmapsto rx/s^k.
-  \]
-  Flatness of $A_s$ over $A$ identifies its source with $(I^n)A_s$, and
-  \Cref{lemma:nagata-localization-ideal-pow} is the target equality in
-  \[
-    A_s\otimes_AI^n\xrightarrow{\mu_{s,n}}(I^n)A_s
-      =(IA_s)^n.
-  \]
-  The displayed composite identifies $\mu_{s,n}$ as an equivalence; under
-  the two coefficient equivalences, the same statement is
-  \[
-    \ell_{s,n}\text{ is an equivalence}.
-  \]
+  \uses{lemma:nagata-localization-ideal-pow,
+    lemma:nagata-rees-piece-membership}
+  \leanok
+  By \Cref{lemma:nagata-localization-ideal-pow},
+  $\varphi(I^n)\subseteq(I^n)B=J^n$, and
+  \Cref{lemma:nagata-rees-piece-membership} identifies the degree-$n$
+  pieces with monomials.
 \end{proof}
 
-\begin{definition}[Coefficientwise Rees-localization map]
+\begin{definition}[Coefficientwise Rees homomorphism]
   \label{def:nagata-rees-localization-map}
-  \uses{def:nagata-rees-algebra}
-  \lean{}
+  \uses{def:nagata-rees-algebra,def:nagata-rees-piece}
+  \lean{AlgebraicGeometry.reesHom}
+  \leanok
 
-  With $A_s$ as in \Cref{lemma:nagata-localization-ideal-pow}, define
+  Let $\varphi\colon A\to B$ be a ring homomorphism and put $J:=IB$.
+  Define the graded ring homomorphism
   \[
-    \rho_s\colon A_s\otimes_A\mathcal R_A(I)
-      \longrightarrow\mathcal R_{A_s}(IA_s)
+    \mathcal R(\varphi)\colon\mathcal R_A(I)\longrightarrow\mathcal R_B(J),
+    \qquad
+    \textstyle\sum_n a_n\mathbf t^n\longmapsto\sum_n\varphi(a_n)\mathbf t^n,
   \]
-  on homogeneous pure tensors by
-  \[
-    \rho_s\bigl((r/s^k)\otimes(xt^n)\bigr)
-      :=(rx/s^k)t^n.
-  \]
+  i.e.\ coefficientwise application of $\varphi$ to the underlying
+  polynomial; it is well defined by
+  \Cref{lemma:nagata-localization-rees-piece} and degree preserving.  For
+  the datum (LOC0) put $\rho_s:=\mathcal R(\lambda_s)\colon
+  \mathcal R_A(I)\to\mathcal R_{A_s}(IA_s)$.
 \end{definition}
 
-\begin{proposition}[Graded localization of the Rees algebra]
-  \label{prop:nagata-rees-localization}
-  \uses{def:nagata-rees-localization-map}
-  \lean{}
+\begin{lemma}[Degree-one transport]
+  \label{lemma:nagata-rees-localization-degree-one}
+  \uses{def:nagata-rees-localization-map,
+    lemma:nagata-rees-degree-one-element}
+  \lean{AlgebraicGeometry.reesHom_reesX}
+  \leanok
 
-  The map $\rho_s$ is a graded ring equivalence.
+  For $a\in I$, the map $\mathcal R(\varphi)$ of
+  \Cref{def:nagata-rees-localization-map} satisfies
+  $\mathcal R(\varphi)(a\mathbf t)=\varphi(a)\mathbf t$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Immediate from the coefficientwise definition.
+\end{proof}
+
+\begin{lemma}[Identity law]
+  \label{lemma:nagata-rees-localization-one}
+  \uses{def:nagata-rees-localization-map}
+  \lean{AlgebraicGeometry.reesHom_id}
+  \leanok
+
+  For $\varphi=\operatorname{id}_A$ (so $J=I$), one has
+  $\mathcal R(\operatorname{id}_A)=\operatorname{id}_{\mathcal R_A(I)}$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Coefficientwise application of the identity is the identity.
+\end{proof}
+
+\begin{lemma}[Composition law]
+  \label{lemma:nagata-rees-localization-mul}
+  \uses{def:nagata-rees-localization-map}
+  \lean{AlgebraicGeometry.reesHom_comp}
+  \leanok
+
+  Let $\varphi\colon A\to B$ and $\psi\colon B\to C$ be ring homomorphisms
+  and put $J:=IB$, $K:=JC=IC$.  Then
+  \[
+    \mathcal R(\psi)\circ\mathcal R(\varphi)=\mathcal R(\psi\circ\varphi)
+    \colon\mathcal R_A(I)\longrightarrow\mathcal R_C(K).
+  \]
+  In particular, for iterated localizations
+  $A\to A_s\to(A_s)_{t_s}$ the composite of the coefficientwise maps is
+  the coefficientwise map of the composite localization; no separate
+  cocycle datum is required.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Coefficientwise, $\psi\circ\varphi$ applied to each coefficient.
+\end{proof}
+
+\begin{lemma}[Congruence]
+  \label{lemma:nagata-rees-localization-natural}
+  \uses{def:nagata-rees-localization-map}
+  \lean{AlgebraicGeometry.reesHom_congr}
+  \leanok
+
+  The homomorphism $\mathcal R(\varphi)$ depends only on $\varphi$: if
+  $\varphi=\varphi'$ as ring homomorphisms $A\to B$, then
+  $\mathcal R(\varphi)=\mathcal R(\varphi')$.  Together with
+  \Cref{lemma:nagata-rees-localization-mul} this subsumes the naturality
+  of the localization comparisons under ring isomorphisms.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Immediate.
+\end{proof}
+
+\begin{definition}[Induced morphism of affine blow-ups]
+  \label{def:nagata-affine-blowup-restriction-map}
+  \uses{def:nagata-affine-blowup,def:nagata-rees-localization-map}
+  \lean{AlgebraicGeometry.blowupHom}
+  \leanok
+
+  Let $\varphi\colon A\to B$ with $J:=IB$.  Contravariance of
+  $\operatorname{Proj}$ applied to $\mathcal R(\varphi)$ defines
+  \[
+    \operatorname{Bl}(\varphi):=\operatorname{Proj}(\mathcal R(\varphi))
+    \colon\operatorname{Bl}_J(\operatorname{Spec}B)
+    \longrightarrow\operatorname{Bl}_I(\operatorname{Spec}A).
+  \]
+  The required irrelevant-ideal condition holds because every homogeneous
+  element of $\mathcal R_B(J)$ of positive degree $n$ has coefficient in
+  $J^n=(I^n)B$, hence lies in the ideal generated by the image of the
+  irrelevant ideal of $\mathcal R_A(I)$.  For the datum (LOC0) put
+  $r_s:=\operatorname{Bl}(\lambda_s)$.
+\end{definition}
+
+\begin{lemma}[Structure-map compatibility]
+  \label{lemma:nagata-rees-localization-degree-zero}
+  \uses{def:nagata-affine-blowup-restriction-map,
+    lemma:nagata-rees-degree-zero}
+  \lean{AlgebraicGeometry.blowupHom_toSpec}
+  \leanok
+
+  On degree zero, $\mathcal R(\varphi)$ is $\varphi$ itself under the
+  identifications $u_0$ of \Cref{lemma:nagata-rees-degree-zero}.
+  Consequently the square
+  \[
+  \begin{aligned}
+    \operatorname{Bl}(\varphi)\circ b_{A,I}^{\phantom{1}}
+    \colon\quad
+    \operatorname{Bl}_J(\operatorname{Spec}B)
+    &\longrightarrow\operatorname{Spec}(A)
+  \end{aligned}
+  \qquad
+    b_{A,I}\circ\operatorname{Bl}(\varphi)
+      =\operatorname{Spec}(\varphi)\circ b_{B,J}
+  \]
+  commutes.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-rees-degree-zero}
+  \leanok
+  Both composites agree chart-wise on the standard affine charts, where
+  they are induced by the commuting square of degree-zero ring maps.
+\end{proof}
+
+\begin{lemma}[Identity and cocycle laws for the induced morphisms]
+  \label{lemma:nagata-affine-blowup-restrict-cocycle}
+  \uses{def:nagata-affine-blowup-restriction-map}
+  \lean{AlgebraicGeometry.blowupHom_id, AlgebraicGeometry.blowupHom_comp}
+  \leanok
+
+  One has
+  \[
+    \operatorname{Bl}(\operatorname{id}_A)
+      =\operatorname{id}_{\operatorname{Bl}_I(\operatorname{Spec}A)},
+    \qquad
+    \operatorname{Bl}(\psi\circ\varphi)
+      =\operatorname{Bl}(\varphi)\circ\operatorname{Bl}(\psi)
+  \]
+  for composable $\varphi\colon A\to B$, $\psi\colon B\to C$ as in
+  \Cref{lemma:nagata-rees-localization-mul}.  These two laws replace the
+  explicit gluing cocycle of the earlier draft.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-rees-localization-one,
+    lemma:nagata-rees-localization-mul}
+  \leanok
+  Apply functoriality of $\operatorname{Proj}$ to
+  \Cref{lemma:nagata-rees-localization-one,lemma:nagata-rees-localization-mul}.
+\end{proof}
+
+\begin{proposition}[Chart-wise localization]
+  \label{prop:nagata-rees-localization}
+  \uses{def:nagata-rees-localization-map,def:nagata-affine-blowup,
+    lemma:nagata-rees-piece-membership}
+  \lean{AlgebraicGeometry.AffineBlowup.isLocalization_away_map}
+  \leanok
+
+  Let $J:=IA_s$ and let $a\in I$.  Write
+  $\mathcal R_A(I)_{(a\mathbf t)}$ for the degree-zero homogeneous
+  localization at the degree-one element $a\mathbf t$ (the coordinate ring
+  of the standard chart $D_+(a\mathbf t)$ of
+  $\operatorname{Bl}_I(\operatorname{Spec}A)$), and let
+  \[
+    \mathcal R(\lambda_s)_{(a\mathbf t)}\colon
+    \mathcal R_A(I)_{(a\mathbf t)}
+    \longrightarrow
+    \mathcal R_{A_s}(J)_{(\lambda_s(a)\mathbf t)}
+  \]
+  be the map induced by $\rho_s$ on chart rings.  This map exhibits the
+  target as the localization of the source away from the degree-zero
+  fraction $s\mathbf t^0/1$.
 \end{proposition}
 
 \begin{proof}
-  \uses{lemma:nagata-localization-rees-piece,
-    lemma:nagata-localization-ideal-pow}
-  For homogeneous pure tensors
-  $u=(r/s^k)\otimes(xt^m)$ and
-  $v=(q/s^\ell)\otimes(yt^n)$,
-  \[
-    \rho_s(uv)
-      =(rqxy/s^{k+\ell})t^{m+n}
-      =\rho_s(u)\rho_s(v),
-    \qquad \rho_s(1\otimes1)=1.
-  \]
-  These multiplication and unit identities, together with preservation of
-  the displayed degrees, state that $\rho_s$ is a graded ring homomorphism.
-  Its degree-$n$ restriction is
-  $\ell_{s,n}$ from \Cref{lemma:nagata-localization-rees-piece}.  For
-  $F\in\mathcal R_{A_s}(IA_s)$, define
-  \[
-    \sigma_s(F):=
-      \sum_n\ell_{s,n}^{-1}(\operatorname{hcomp}_n(F)).
-  \]
-  The equality
-  \[
-    F=\sum_n\operatorname{hcomp}_n(F)
-  \]
-  and finiteness of the displayed sum are
-  \Cref{def:nagata-rees-components,lemma:nagata-rees-sum-components,lemma:nagata-rees-component-finite-support}.
-  Uniqueness is \Cref{lemma:nagata-rees-components-unique}.  For every
-  $n\geq0$, the two degree-$n$ composites are
-  \[
-    (\sigma_s\circ\rho_s)|_n
-      =\ell_{s,n}^{-1}\circ\ell_{s,n}
-      =\operatorname{id}_{A_s\otimes_A\mathcal R_A(I)_n},
-    \qquad
-    (\rho_s\circ\sigma_s)|_n
-      =\ell_{s,n}\circ\ell_{s,n}^{-1}
-      =\operatorname{id}_{\mathcal R_{A_s}(IA_s)_n}.
-  \]
-  Equality of graded homomorphisms is degreewise, so
-  \[
-    \sigma_s\circ\rho_s
-      =\operatorname{id}_{A_s\otimes_A\mathcal R_A(I)},
-    \qquad
-    \rho_s\circ\sigma_s
-      =\operatorname{id}_{\mathcal R_{A_s}(IA_s)}.
-  \]
-  These two inverse identities state that $\rho_s$ is a graded ring
-  equivalence.
+  \uses{lemma:nagata-localization-ideal-pow,
+    lemma:nagata-rees-piece-membership,
+    lemma:nagata-rees-localization-degree-zero}
+  \leanok
+  Write elements of both chart rings in the normal form
+  $x\mathbf t^n/(a\mathbf t)^n$ with $x\in I^n$, respectively
+  $y\mathbf t^n/(\lambda_s(a)\mathbf t)^n$ with $y\in J^n$
+  (\Cref{lemma:nagata-rees-piece-membership}).  The image of
+  $s\mathbf t^0/1$ is the unit $\lambda_s(s)\mathbf t^0/1$.  For
+  surjectivity up to powers of $s$, expand $y\in J^n=(I^n)A_s$
+  (\Cref{lemma:nagata-localization-ideal-pow}) as
+  $\lambda_s(s)^m y=\lambda_s(c)$ with $c\in I^n$; then
+  $y\mathbf t^n/(\lambda_s(a)\mathbf t)^n$ times the image of
+  $(s\mathbf t^0/1)^m$ is the image of
+  $c\mathbf t^n/(a\mathbf t)^n$.  For the kernel condition, an equality of
+  two images is, after clearing denominators, an equality of monomials in
+  $\mathcal R_{A_s}(J)$; extracting the relevant polynomial coefficient
+  and using the defining property of the localization $A_s$ produces
+  $s^m\bigl(a^{k+n_2}c_1-a^{k+n_1}c_2\bigr)=0$ in $A$ for some
+  $m,k$, which is precisely the statement that the two normal forms agree
+  after multiplication by $(s\mathbf t^0/1)^m$.
 \end{proof}
-
-\begin{lemma}[Compatibility with degree zero]
-  \label{lemma:nagata-rees-localization-degree-zero}
-  \lean{}
-
-  On degree zero, $\rho_s$ of \Cref{def:nagata-rees-localization-map} is
-  \[
-    \mu_s\colon A_s\otimes_AA\xrightarrow{\sim}A_s,
-    \qquad (r/s^k)\otimes x\longmapsto rx/s^k.
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{prop:nagata-rees-localization,lemma:nagata-rees-degree-zero}
-  Under \Cref{lemma:nagata-rees-degree-zero}, a degree-zero pure tensor is
-  $(r/s^k)\otimes(xt^0)$.  By
-  \Cref{def:nagata-rees-localization-map},
-  \[
-    \rho_s((r/s^k)\otimes(xt^0))=(rx/s^k)t^0.
-  \]
-  Applying the degree-zero coefficient homomorphism is the equality
-  \[
-    \mu_s((r/s^k)\otimes x)=rx/s^k.
-  \]
-  Pure tensors generate the source, so
-  the two maps are equal.
-\end{proof}
-
-\begin{lemma}[Compatibility with degree-one generators]
-  \label{lemma:nagata-rees-localization-degree-one}
-  \lean{}
-
-  For $a\in I$, the element $1\otimes(at)$ maps to $(a/1)t$ in the localized
-  Rees algebra.
-\end{lemma}
-
-\begin{proof}
-  \uses{prop:nagata-rees-localization,lemma:nagata-rees-degree-one-element}
-  Substituting $r=1$, $k=0$, $x=a$, and $n=1$ in
-  \Cref{def:nagata-rees-localization-map} is the equality
-  \[
-    \rho_s(1\otimes(at))=(a/1)t.
-  \]
-  Both sides have degree one by
-  \Cref{lemma:nagata-rees-degree-one-element}.
-\end{proof}
-
-\begin{lemma}[Localization at one]
-  \label{lemma:nagata-rees-localization-one}
-  \lean{}
-
-  Define
-  \[
-  \begin{aligned}
-    \lambda_1&\colon A_1\xrightarrow{\sim}A,
-      &\lambda_1(a/1^k)&:=a,\\
-    \theta_1&\colon A_1\otimes_A\mathcal R_A(I)
-        \xrightarrow{\sim}\mathcal R_A(I),
-      &\theta_1((a/1^k)\otimes xt^n)&:=axt^n,\\
-    \Lambda_1&\colon\mathcal R_{A_1}(IA_1)
-        \xrightarrow{\sim}\mathcal R_A(I),
-      &\Lambda_1((x/1^k)t^n)&:=xt^n,\\
-    \rho_1^{\mathrm{tr}}
-      &:=\Lambda_1\circ\rho_1\circ\theta_1^{-1}
-        \colon\mathcal R_A(I)\longrightarrow\mathcal R_A(I).
-  \end{aligned}
-  \]
-  Then
-  \[
-    \rho_1^{\mathrm{tr}}=\operatorname{id}_{\mathcal R_A(I)}.
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{prop:nagata-rees-localization}
-  For $a\in I^n$, \Cref{def:nagata-rees-localization-map} and the three
-  definitions in the statement are the equality chain
-  \[
-  \begin{aligned}
-    \rho_1^{\mathrm{tr}}(at^n)
-      &=\Lambda_1\!\left(\rho_1(1\otimes at^n)\right)\\
-      &=\Lambda_1((a/1)t^n)
-       =at^n.
-  \end{aligned}
-  \]
-  By \Cref{lemma:nagata-rees-sum-components}, every $F\in\mathcal R_A(I)$
-  has an equality $F=\sum_{n=0}^N a_nt^n$ with $a_n\in I^n$.  Additivity
-  and the preceding chain are
-  \[
-    \rho_1^{\mathrm{tr}}(F)
-      =\sum_{n=0}^N\rho_1^{\mathrm{tr}}(a_nt^n)
-      =\sum_{n=0}^Na_nt^n
-      =F.
-  \]
-  Extensionality of functions is
-  \[
-    (\forall F\in\mathcal R_A(I))\ 
-      \rho_1^{\mathrm{tr}}(F)=F
-      \Longrightarrow
-      \rho_1^{\mathrm{tr}}=\operatorname{id}_{\mathcal R_A(I)}.
-  \]
-\end{proof}
-
-\begin{lemma}[Iterated localization coherence]
-  \label{lemma:nagata-rees-localization-mul}
-  \uses{def:nagata-rees-localization-map}
-  \lean{}
-
-  Let $s,t\in A$.  Write
-  \[
-  \begin{gathered}
-    \ell_s\colon A\to A_s,
-    \qquad t_s:=\ell_s(t),
-    \qquad B_{s,t}:=(A_s)_{t_s},
-    \qquad C_{s,t}:=A_{st},\\
-    \ell_{t_s}\colon A_s\to B_{s,t},
-    \qquad \ell_{st}\colon A\to C_{s,t}.
-  \end{gathered}
-  \]
-  Define the canonical localization isomorphism and its inverse by
-  \[
-  \begin{aligned}
-    \lambda_{s,t}\colon B_{s,t}&\xrightarrow{\ \sim\ }C_{s,t},&
-    \lambda_{s,t}\!\left(\frac{a/s^m}{t_s^n}\right)
-      &:=\frac{a s^n t^m}{(st)^{m+n}},\\
-    \lambda_{s,t}^{-1}\colon C_{s,t}&\xrightarrow{\ \sim\ }B_{s,t},&
-    \lambda_{s,t}^{-1}\!\left(\frac a{(st)^k}\right)
-      &:=\frac{a/s^k}{t_s^k}.
-  \end{aligned}
-  \]
-  Put
-  \[
-    J_{s,t}:=(IA_s)B_{s,t},
-    \qquad K_{s,t}:=IC_{s,t},
-    \qquad
-    (\lambda_{s,t})_*(J_{s,t})
-      :=C_{s,t}\cdot
-        \{\lambda_{s,t}(b)\mid b\in J_{s,t}\}.
-  \]
-  The coefficientwise transport associated to $\lambda_{s,t}$ is
-  \[
-  \begin{aligned}
-    \Lambda_{s,t}\colon
-      \mathcal R_{B_{s,t}}(J_{s,t})
-      &\xrightarrow{\ \sim\ }
-        \mathcal R_{C_{s,t}}(K_{s,t}),\\
-    \Lambda_{s,t}(b\mathbf u^n)&:=\lambda_{s,t}(b)\mathbf u^n,
-  \end{aligned}
-  \]
-  where $\mathbf u$ denotes the Rees grading variable.  Define the tensor
-  associator and the source transport by
-  \[
-  \begin{aligned}
-    \mathfrak a_{s,t}\colon
-      B_{s,t}\otimes_{A_s}(A_s\otimes_A\mathcal R_A(I))
-      &\xrightarrow{\ \sim\ }
-        B_{s,t}\otimes_A\mathcal R_A(I),\\
-    \mathfrak a_{s,t}(b\otimes(c\otimes F))
-      &:=b\ell_{t_s}(c)\otimes F,\\
-    \mathfrak a_{s,t}^{-1}(b\otimes F)&:=b\otimes(1\otimes F),\\[2pt]
-    \alpha_{s,t}
-      &:=\mathfrak a_{s,t}^{-1}\circ
-        (\lambda_{s,t}^{-1}\otimes_A
-          \operatorname{id}_{\mathcal R_A(I)})\\
-      &\colon C_{s,t}\otimes_A\mathcal R_A(I)
-        \xrightarrow{\ \sim\ }
-        B_{s,t}\otimes_{A_s}(A_s\otimes_A\mathcal R_A(I)).
-  \end{aligned}
-  \]
-  In the two formulas for $\mathfrak a_{s,t}^{\pm1}$,
-  \[
-    b\in B_{s,t},\qquad c\in A_s,
-    \qquad F\in\mathcal R_A(I).
-  \]
-  With these definitions, the typed coherence equality is
-  \[
-  \boxed{
-    \rho_{st}
-      =\Lambda_{s,t}\circ\rho_{t_s}\circ
-        (\operatorname{id}_{B_{s,t}}\otimes_{A_s}\rho_s)
-        \circ\alpha_{s,t}}
-    \colon C_{s,t}\otimes_A\mathcal R_A(I)
-      \longrightarrow\mathcal R_{C_{s,t}}(K_{s,t}).
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{prop:nagata-rees-localization,
-    lemma:nagata-rees-sum-components}
-  The two fraction formulas in the statement evaluate, for
-  $a\in A$ and $k,m,n\in\mathbb N$, the chains
-  \[
-  \begin{aligned}
-    \lambda_{s,t}\!\left(
-      \lambda_{s,t}^{-1}\!\left(\frac a{(st)^k}\right)\right)
-      &=\lambda_{s,t}\!\left(\frac{a/s^k}{t_s^k}\right)
-       =\frac{as^kt^k}{(st)^{2k}}
-       =\frac a{(st)^k},\\
-    \lambda_{s,t}^{-1}\!\left(
-      \lambda_{s,t}\!\left(\frac{a/s^m}{t_s^n}\right)\right)
-      &=\lambda_{s,t}^{-1}\!\left(
-        \frac{as^nt^m}{(st)^{m+n}}\right)\\
-      &=\frac{as^nt^m/s^{m+n}}{t_s^{m+n}}
-       =\frac{a/s^m}{t_s^n}.
-  \end{aligned}
-  \]
-  Fraction extensionality is the pair of identities
-  \[
-    \lambda_{s,t}\circ\lambda_{s,t}^{-1}
-      =\operatorname{id}_{C_{s,t}},
-    \qquad
-    \lambda_{s,t}^{-1}\circ\lambda_{s,t}
-      =\operatorname{id}_{B_{s,t}}.
-  \]
-  For $a\in A$, substitution $m=n=0$ is
-  \[
-    (\lambda_{s,t}\circ\ell_{t_s}\circ\ell_s)(a)
-      =\lambda_{s,t}((a/1)/1)
-      =a/1
-      =\ell_{st}(a),
-  \]
-  hence
-  \[
-    \lambda_{s,t}\circ\ell_{t_s}\circ\ell_s=\ell_{st}.
-  \]
-  Moreover,
-  \[
-  \begin{aligned}
-    (\lambda_{s,t})_*(J_{s,t})
-      &=C_{s,t}\cdot
-        \lambda_{s,t}\bigl((IA_s)B_{s,t}\bigr)\\
-      &=C_{s,t}\cdot
-        (\lambda_{s,t}\circ\ell_{t_s}\circ\ell_s)(I)\\
-      &=C_{s,t}\cdot\ell_{st}(I)
-       =IC_{s,t}=K_{s,t}.
-  \end{aligned}
-  \]
-  This ideal equality is exactly the well-typedness condition for
-  $\Lambda_{s,t}$.
-
-  Let $c\in C_{s,t}$, $x\in I^n$, and set
-  $b:=\lambda_{s,t}^{-1}(c)\in B_{s,t}$.  The definitions of
-  $\alpha_{s,t}$ and $\rho_s$ satisfy
-  \[
-  \begin{aligned}
-    \alpha_{s,t}(c\otimes x\mathbf u^n)
-      &=b\otimes(1\otimes x\mathbf u^n),\\
-    (\operatorname{id}_{B_{s,t}}\otimes_{A_s}\rho_s)
-      (b\otimes(1\otimes x\mathbf u^n))
-      &=b\otimes((x/1)\mathbf u^n).
-  \end{aligned}
-  \]
-  Applying the remaining two maps is the explicit chain
-  \[
-  \begin{aligned}
-    &\bigl(\Lambda_{s,t}\circ\rho_{t_s}\circ
-      (\operatorname{id}_{B_{s,t}}\otimes_{A_s}\rho_s)
-      \circ\alpha_{s,t}\bigr)(c\otimes x\mathbf u^n)\\
-      &\qquad
-       =\Lambda_{s,t}(b(x/1)\mathbf u^n)\\
-      &\qquad
-       =\lambda_{s,t}(b)(x/1)\mathbf u^n\\
-      &\qquad
-       =c(x/1)\mathbf u^n\\
-      &\qquad
-       =\rho_{st}(c\otimes x\mathbf u^n).
-  \end{aligned}
-  \]
-  By \Cref{lemma:nagata-rees-sum-components}, the additive-span equality
-  \[
-    C_{s,t}\otimes_A\mathcal R_A(I)
-      =\left\langle c\otimes x\mathbf u^n
-        \ \middle|\ c\in C_{s,t},\ n\in\mathbb N,\ x\in I^n
-        \right\rangle_{\mathbb Z}
-  \]
-  holds.  Additive-map extensionality applied to the preceding chain is the
-  boxed equality in the statement.
-\end{proof}
-
-\begin{lemma}[Naturality under a ring isomorphism]
-  \label{lemma:nagata-rees-localization-natural}
-  \lean{}
-
-  Let $\varphi\colon A\xrightarrow{\sim}B$ be a ring isomorphism, put
-  $J:=\varphi(I)$ and $u:=\varphi(s)$, and let
-  $\varphi_s\colon A_s\xrightarrow{\sim}B_u$ be
-  $a/s^k\mapsto\varphi(a)/u^k$.  Let
-  $\mathcal R(\varphi)(at^n):=\varphi(a)t^n$.  Then
-  \[
-    \mathcal R(\varphi_s)\circ\rho_s
-      =\rho_u\circ(\varphi_s\otimes\mathcal R(\varphi)).
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{prop:nagata-rees-localization}
-  For $a\in I^n$, the left-hand route is
-  \[
-    1\otimes at^n\xmapsto{\rho_s}(a/1)t^n
-      \xmapsto{\mathcal R(\varphi_s)}(\varphi(a)/1)t^n,
-  \]
-  while the right-hand route is
-  \[
-    1\otimes at^n
-      \xmapsto{\varphi_s\otimes\mathcal R(\varphi)}
-        1\otimes\varphi(a)t^n
-      \xmapsto{\rho_u}(\varphi(a)/1)t^n.
-  \]
-  The values coincide.  The maps are $B_u$-linear and homogeneous pure
-  tensors generate the source, so they are equal.
-\end{proof}
-
-\begin{definition}[Affine blow-up restriction morphism]
-  \label{def:nagata-affine-blowup-restriction-map}
-  \uses{def:nagata-affine-blowup,
-    def:nagata-rees-localization-map,
-    def:nagata-relative-proj,
-    lemma:nagata-relative-proj-interface}
-  \lean{}
-
-  Put
-  \[
-    P_s:=\operatorname{Bl}_I(\operatorname{Spec}A)
-      \times_{\operatorname{Spec}A}\operatorname{Spec}(A_s).
-  \]
-  Define
-  \[
-    r_s:=\operatorname{Proj}_{A_s}(\rho_s)\colon
-    \operatorname{Bl}_{IA_s}(\operatorname{Spec}A_s)
-      \longrightarrow
-    P_s
-  \]
-  using the graded equivalence $\rho_s$ from
-  \Cref{prop:nagata-rees-localization}, contravariance of relative Proj,
-  and the degree-zero equivalence
-  $A_s\otimes_AA\xrightarrow{\sim}A_s$ of
-  \Cref{lemma:nagata-rees-localization-degree-zero}.
-\end{definition}
 
 \begin{proposition}[Restriction of an affine blow-up]
   \label{prop:nagata-affine-blowup-restrict}
   \uses{def:nagata-affine-blowup-restriction-map}
-  \lean{}
+  \lean{AlgebraicGeometry.isPullback_blowupHom_of_isLocalization,
+    AlgebraicGeometry.isOpenImmersion_blowupHom_of_isLocalization}
+  \leanok
 
-  The morphism $r_s$ of \Cref{def:nagata-affine-blowup-restriction-map} is an
-  isomorphism over
-  $\operatorname{Spec}(A_s)$.
+  For the datum (LOC0) with $J:=IA_s$, the commuting square
+  \[
+    \begin{array}{ccc}
+      \operatorname{Bl}_J(\operatorname{Spec}A_s)
+        &\xrightarrow{\ r_s\ }
+        &\operatorname{Bl}_I(\operatorname{Spec}A)\\
+      \downarrow b_{A_s,J}& &\downarrow b_{A,I}\\
+      \operatorname{Spec}(A_s)
+        &\xrightarrow{\operatorname{Spec}(\lambda_s)}
+        &\operatorname{Spec}(A)
+    \end{array}
+  \]
+  is cartesian.  In particular $r_s$ is an open immersion with image
+  $b_{A,I}^{-1}(D(s))$, i.e.\ the blow-up commutes with restriction to a
+  basic open.
 \end{proposition}
 
 \begin{proof}
   \uses{prop:nagata-rees-localization,
-    lemma:nagata-rees-localization-degree-zero}
-  By \Cref{prop:nagata-rees-localization},
-  \[
-    \rho_s\colon A_s\otimes_A\mathcal R_A(I)
-      \xrightarrow{\sim}\mathcal R_{A_s}(IA_s)
-  \]
-  is a graded equivalence.  Contravariant relative Proj sends $\rho_s$ to
-  \[
-    \operatorname{Proj}_{A_s}(\mathcal R_{A_s}(IA_s))
-      \xrightarrow{\sim}
-    \operatorname{Proj}_{A_s}(A_s\otimes_A\mathcal R_A(I))=P_s.
-  \]
-  This morphism is $r_s$ by
-  \Cref{def:nagata-affine-blowup-restriction-map}.  On degree zero,
-  \Cref{lemma:nagata-rees-localization-degree-zero} identifies both
-  structural composites with
-  \[
-    \operatorname{Spec}(\operatorname{id}_{A_s})
-      =\operatorname{id}_{\operatorname{Spec}(A_s)}.
-  \]
-\end{proof}
-
-\begin{lemma}[Identity and cocycle laws for affine restriction]
-  \label{lemma:nagata-affine-blowup-restrict-cocycle}
-  \uses{def:nagata-relative-proj,
-    lemma:nagata-relative-proj-interface}
-  \lean{}
-
-  Let $\rho_1^{\mathrm{tr}}$ be the transported graded map of
-  \Cref{lemma:nagata-rees-localization-one}, and define
-  \[
-    r_1^{\mathrm{tr}}
-      :=\operatorname{Proj}_A(\rho_1^{\mathrm{tr}})
-      \colon\operatorname{Bl}_I(\operatorname{Spec}A)
-      \longrightarrow\operatorname{Bl}_I(\operatorname{Spec}A).
-  \]
-  Then
-  \[
-    r_1^{\mathrm{tr}}
-      =\operatorname{id}_{\operatorname{Bl}_I(\operatorname{Spec}A)}.
-  \]
-
-  For $s,t\in A$, retain the objects
-  $B_{s,t},C_{s,t},J_{s,t},K_{s,t},\lambda_{s,t},
-  \Lambda_{s,t}$ of \Cref{lemma:nagata-rees-localization-mul}.  Define
-  \[
-  \begin{aligned}
-    E_{s,t}
-      &:=\operatorname{Bl}_{IA_s}(\operatorname{Spec}A_s)
-        \times_{\operatorname{Spec}A_s}\operatorname{Spec}B_{s,t},\\
-    Q_{s,t}
-      &:=P_s\times_{\operatorname{Spec}A_s}\operatorname{Spec}B_{s,t},\\
-    \Pi_{s,t}
-      &:=\operatorname{Proj}(\Lambda_{s,t})
-        \colon
-        \operatorname{Bl}_{K_{s,t}}(\operatorname{Spec}C_{s,t})
-        \longrightarrow
-        \operatorname{Bl}_{J_{s,t}}(\operatorname{Spec}B_{s,t}),\\
-    r_{t_s}^{A_s}
-      &:=\operatorname{Proj}_{B_{s,t}}(\rho_{t_s})
-        \colon
-        \operatorname{Bl}_{J_{s,t}}(\operatorname{Spec}B_{s,t})
-        \longrightarrow E_{s,t},\\
-    r_{s,t}&:=r_{t_s}^{A_s}\circ\Pi_{s,t}
-        \colon
-        \operatorname{Bl}_{K_{s,t}}(\operatorname{Spec}C_{s,t})
-        \longrightarrow E_{s,t},\\
-    (r_s)_{B_{s,t}}
-      &:=r_s\times_{\operatorname{Spec}A_s}
-        \operatorname{id}_{\operatorname{Spec}B_{s,t}}
-        \colon E_{s,t}\longrightarrow Q_{s,t}.
-  \end{aligned}
-  \]
-  Let $q_P\colon Q_{s,t}\to P_s$ and
-  $q_B\colon Q_{s,t}\to\operatorname{Spec}B_{s,t}$ be the projections.
-  Let $p_{\mathrm{Bl},s}\colon P_s\to
-  \operatorname{Bl}_I(\operatorname{Spec}A)$ and
-  $p_{\mathrm{Bl},st}\colon P_{st}\to
-  \operatorname{Bl}_I(\operatorname{Spec}A)$ be the first projections, and
-  let
-  \[
-    p_{A_s,s}\colon P_s\to\operatorname{Spec}A_s,
-    \qquad
-    p_{C,st}\colon P_{st}\to\operatorname{Spec}C_{s,t}
-  \]
-  be the second projections.  Define
-  \[
-  \begin{aligned}
-    \jmath_{s,t}&:=\lambda_{s,t}\circ\ell_{t_s}\colon
-      A_s\longrightarrow C_{s,t},\\
-    h_{s,t}&:=
-      \bigl(p_{\mathrm{Bl},st},
-        \operatorname{Spec}(\jmath_{s,t})\circ p_{C,st}\bigr)
-      \colon P_{st}\longrightarrow P_s.
-  \end{aligned}
-  \]
-  Define the fibre-product reassociation morphisms by
-  \[
-  \begin{aligned}
-    \operatorname{bc}_{s,t}
-      &:=(p_{\mathrm{Bl},s}\circ q_P,
-        \operatorname{Spec}(\lambda_{s,t}^{-1})\circ q_B)
-        \colon Q_{s,t}\longrightarrow P_{st},\\
-    \operatorname{bc}_{s,t}^{-1}
-      &:=(h_{s,t},
-        \operatorname{Spec}(\lambda_{s,t})\circ p_{C,st})
-        \colon P_{st}\longrightarrow Q_{s,t}.
-  \end{aligned}
-  \]
-  Their projection equations are
-  \[
-  \begin{gathered}
-    p_{\mathrm{Bl},st}\circ\operatorname{bc}_{s,t}
-      =p_{\mathrm{Bl},s}\circ q_P,
-    \qquad
-    p_{C,st}\circ\operatorname{bc}_{s,t}
-      =\operatorname{Spec}(\lambda_{s,t}^{-1})\circ q_B,\\
-    q_P\circ\operatorname{bc}_{s,t}^{-1}=h_{s,t},
-    \qquad
-    q_B\circ\operatorname{bc}_{s,t}^{-1}
-      =\operatorname{Spec}(\lambda_{s,t})\circ p_{C,st}.
-  \end{gathered}
-  \]
-  They satisfy
-  \[
-    \operatorname{bc}_{s,t}^{-1}\circ\operatorname{bc}_{s,t}
-      =\operatorname{id}_{Q_{s,t}},
-    \qquad
-    \operatorname{bc}_{s,t}\circ\operatorname{bc}_{s,t}^{-1}
-      =\operatorname{id}_{P_{st}}.
-  \]
-  The cocycle equality, with no suppressed source transport, is
-  \[
-    r_{st}
-      =\operatorname{bc}_{s,t}\circ(r_s)_{B_{s,t}}\circ r_{s,t}.
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{lemma:nagata-rees-localization-one,lemma:nagata-rees-localization-mul,
-    prop:nagata-affine-blowup-restrict}
-  By \Cref{lemma:nagata-rees-localization-one},
-  $\rho_1^{\mathrm{tr}}=\operatorname{id}_{\mathcal R_A(I)}$.
-  Substitution into the definition of $r_1^{\mathrm{tr}}$ and functoriality
-  of relative Proj are the chain
-  \[
-    r_1^{\mathrm{tr}}
-      =\operatorname{Proj}_A
-        ((\operatorname{id}_{\mathcal R_A(I)})^{-1})
-      =\operatorname{Proj}_A
-        (\operatorname{id}_{\mathcal R_A(I)})
-      =\operatorname{id}_{\operatorname{Bl}_I(\operatorname{Spec}A)}.
-  \]
-  Since $\jmath_{s,t}=\lambda_{s,t}\circ\ell_{t_s}$, one has
-  \[
-    \lambda_{s,t}^{-1}\circ\jmath_{s,t}=\ell_{t_s}.
-  \]
-  Put
-  \[
-    u_{s,t}:=
-      \operatorname{bc}_{s,t}^{-1}\circ\operatorname{bc}_{s,t}
-      \in\operatorname{End}(Q_{s,t}).
-  \]
-  Substitution of the four projection equations into this definition is the
-  chain
-  \[
-  \begin{aligned}
-    q_B\circ u_{s,t}
-      &=\operatorname{Spec}(\lambda_{s,t})\circ
-        \operatorname{Spec}(\lambda_{s,t}^{-1})\circ q_B=q_B,\\
-    p_{\mathrm{Bl},s}\circ q_P\circ u_{s,t}
-      &=p_{\mathrm{Bl},s}\circ q_P,\\
-    p_{A_s,s}\circ q_P\circ u_{s,t}
-      &=\operatorname{Spec}(\jmath_{s,t})\circ
-        \operatorname{Spec}(\lambda_{s,t}^{-1})\circ q_B\\
-      &=\operatorname{Spec}(\ell_{t_s})\circ q_B
-       =p_{A_s,s}\circ q_P.
-  \end{aligned}
-  \]
-  The uniqueness clause in the defining fibre product $P_s$ is
-  \[
-    \left\{v\in\operatorname{Hom}(Q_{s,t},P_s)\ \middle|\
-      p_{\mathrm{Bl},s}\circ v=p_{\mathrm{Bl},s}\circ q_P,\
-      p_{A_s,s}\circ v=p_{A_s,s}\circ q_P\right\}
-      =\{q_P\}.
-  \]
-  The last two projection chains are therefore the membership and equality
-  \[
-    q_P\circ u_{s,t}\in\{q_P\},\qquad
-    q_P\circ u_{s,t}=q_P.                                       \tag{BC0}
-  \]
-  The uniqueness clause in the defining fibre product $Q_{s,t}$ and the first
-  projection chain together with (BC0) are
-  \[
-    \left\{u\in\operatorname{End}(Q_{s,t})\ \middle|\
-      q_B\circ u=q_B,\ q_P\circ u=q_P\right\}
-      =\left\{\operatorname{id}_{Q_{s,t}}\right\},\qquad
-    u_{s,t}\in\left\{\operatorname{id}_{Q_{s,t}}\right\}.
-  \]
-  Substitution of the definition of $u_{s,t}$ is the equality
-  \[
-    \operatorname{bc}_{s,t}^{-1}\circ\operatorname{bc}_{s,t}
-      =\operatorname{id}_{Q_{s,t}}.                              \tag{BC1}
-  \]
-  For the opposite composite, substitution of the projection equations in
-  the definition of $\operatorname{bc}_{s,t}$ and
-  $\operatorname{bc}_{s,t}^{-1}$ is the pair of chains
-  \[
-  \begin{aligned}
-    p_{\mathrm{Bl},st}\circ\operatorname{bc}_{s,t}\circ
-      \operatorname{bc}_{s,t}^{-1}
-      &=p_{\mathrm{Bl},s}\circ q_P\circ
-        \operatorname{bc}_{s,t}^{-1}
-       =p_{\mathrm{Bl},s}\circ h_{s,t}
-       =p_{\mathrm{Bl},st},\\
-    p_{C,st}\circ\operatorname{bc}_{s,t}\circ
-      \operatorname{bc}_{s,t}^{-1}
-      &=\operatorname{Spec}(\lambda_{s,t}^{-1})\circ
-        \operatorname{Spec}(\lambda_{s,t})\circ p_{C,st}
-       =p_{C,st},
-  \end{aligned}
-  \]
-  Here the first-projection equality used in the first chain is, by the
-  definition of $h_{s,t}$,
-  \[
-    p_{\mathrm{Bl},s}\circ h_{s,t}
-      =p_{\mathrm{Bl},s}\circ
-        (p_{\mathrm{Bl},st},
-          \operatorname{Spec}(\jmath_{s,t})\circ p_{C,st})
-      =p_{\mathrm{Bl},st}.
-  \]
-  The uniqueness clause in the
-  defining fibre product $P_{st}$ is the singleton equality
-  \[
-    \left\{u\in\operatorname{End}(P_{st})\ \middle|\
-      p_{\mathrm{Bl},st}\circ u=p_{\mathrm{Bl},st},\ 
-      p_{C,st}\circ u=p_{C,st}\right\}
-      =\left\{\operatorname{id}_{P_{st}}\right\}.
-  \]
-  The preceding two chains are the membership and equality
-  \[
-    \operatorname{bc}_{s,t}\circ\operatorname{bc}_{s,t}^{-1}
-      \in\left\{\operatorname{id}_{P_{st}}\right\},\qquad
-    \operatorname{bc}_{s,t}\circ\operatorname{bc}_{s,t}^{-1}
-      =\operatorname{id}_{P_{st}}.                               \tag{BC2}
-  \]
-  Taking inverses in the boxed equality of
-  \Cref{lemma:nagata-rees-localization-mul} is the typed graded-map equality
-  \[
-    \rho_{st}^{-1}
-      =\alpha_{s,t}^{-1}\circ
-        (\operatorname{id}_{B_{s,t}}\otimes_{A_s}\rho_s^{-1})\circ
-        \rho_{t_s}^{-1}\circ\Lambda_{s,t}^{-1}
-      \colon
-      \mathcal R_{C_{s,t}}(K_{s,t})
-      \longrightarrow C_{s,t}\otimes_A\mathcal R_A(I).
-  \]
-  Applying relative Proj to the four factors, and substituting the four
-  definitions in the statement, is the equality
-  \[
-    r_{st}
-      =\operatorname{bc}_{s,t}\circ(r_s)_{B_{s,t}}\circ r_{s,t}.
-  \]
+    lemma:nagata-rees-localization-degree-zero,
+    lemma:nagata-affine-blowup-restrict-cocycle}
+  \leanok
+  The standard charts $D_+(a\mathbf t)$, $a\in I$, cover
+  $\operatorname{Bl}_I(\operatorname{Spec}A)$, and by
+  \Cref{prop:nagata-rees-localization} the restriction of $r_s$ over each
+  chart is the morphism of spectra of a localization away from one
+  element, hence an open immersion with image the basic open of
+  $s\mathbf t^0/1$.  Openness of immersions and the computation of the
+  ranges are Zariski-local on the target, so $r_s$ is an open immersion
+  whose range is the preimage of the range of
+  $\operatorname{Spec}(\lambda_s)$ under $b_{A,I}$.  A commuting square of
+  schemes whose vertical maps are open immersions with this preimage
+  compatibility is cartesian.
 \end{proof}
 
 \subsection{Global blow-up by gluing}
 
-\begin{definition}[Local blow-up model on an affine open]
-  \label{def:nagata-global-blowup-local-model}
-  \uses{def:nagata-affine-blowup}
-  \lean{}
+\paragraph{Roadmap note.}  Compared to an earlier draft of this blueprint,
+the global blow-up is glued over the \emph{canonical locally directed
+cover by all affine opens} of $X$ rather than over a chosen affine open
+cover with pairwise overlap isomorphisms.  Because the index category of
+this cover is a thin preorder, no cocycle conditions arise: the gluing
+input is a functor of local blow-ups together with equifibered structure
+maps, and the overlap content of the earlier draft is carried by the
+composition law \Cref{lemma:nagata-affine-blowup-restrict-cocycle} and by
+\Cref{lemma:nagata-global-blowup-glue-data-valid}.  This matches the Lean
+implementation in \texttt{WeilConjectures.Blowup.Gluing}, which uses the
+Mathlib relative-gluing machinery
+(\texttt{\detokenize{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}},
+\texttt{\detokenize{AlgebraicGeometry.Scheme.directedAffineCover}},
+Stacks 01LH).  The comparison items after
+\Cref{prop:nagata-global-blowup-affine-restrict} retain the notation of
+the earlier draft and are not part of the current formalization.
 
-  Let $\mathcal I\subseteq\mathcal O_X$ be a quasi-coherent ideal, let
-  $v\colon V\hookrightarrow X$ be an affine open immersion, fix an equality
-  $V=\operatorname{Spec}(A)$, and set
+Throughout this subsection let $X$ be a scheme and let
+$\mathcal I\subseteq\mathcal O_X$ be a quasi-coherent ideal, encoded as
+the datum of an ideal $I_U:=\mathcal I(U)\subseteq\Gamma(U,\mathcal O_X)$
+for every affine open $U\subseteq X$, compatible with restriction to
+basic affine opens.  For affine opens $U\subseteq V$ the compatibility
+extends to $I_V\cdot\Gamma(U,\mathcal O_X)=I_U$.
+
+\paragraph{Mathlib relation.}
+The encoding is exactly
+\texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData}}; the
+restriction compatibility for arbitrary inclusions of affine opens is
+\texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.map_ideal}}.
+
+\begin{definition}[Local blow-up models and their transition maps]
+  \label{def:nagata-global-blowup-local-model}
+  \uses{def:nagata-affine-blowup,def:nagata-affine-blowup-restriction-map}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}
+  \leanok
+
+  For an affine open $U\subseteq X$ with coordinate ring
+  $A_U:=\Gamma(U,\mathcal O_X)$, define the local blow-up model
   \[
-    I_V:=\Gamma(V,v^*\mathcal I)\subseteq
-      \Gamma(V,\mathcal O_V)=A.
-  \]
-  Define
-  \[
-    \mathsf B_V(\mathcal I):=\operatorname{Bl}_{I_V}(V),
+    \mathsf B_U(\mathcal I):=\operatorname{Bl}_{I_U}(\operatorname{Spec}A_U),
     \qquad
-    b_V:=b_{A,I_V}\colon\mathsf B_V(\mathcal I)\longrightarrow V.
+    b_U:=b_{A_U,I_U}\colon\mathsf B_U(\mathcal I)\longrightarrow
+      \operatorname{Spec}(A_U).
   \]
+  For an inclusion $U\subseteq V$ of affine opens, the restriction
+  homomorphism
+  $\operatorname{res}^V_U\colon A_V\to A_U$ satisfies
+  $I_V A_U=I_U$, so \Cref{def:nagata-affine-blowup-restriction-map}
+  supplies the transition morphism
+  \[
+    \operatorname{Bl}(\operatorname{res}^V_U)\colon
+      \mathsf B_U(\mathcal I)\longrightarrow\mathsf B_V(\mathcal I).
+  \]
+  By \Cref{lemma:nagata-affine-blowup-restrict-cocycle} these data form a
+  functor from the poset of affine opens of $X$ to schemes.
 \end{definition}
 
-\begin{definition}[Basic-overlap comparison map]
+\begin{definition}[Structure maps of the local models]
   \label{def:nagata-global-blowup-overlap-basic-map}
   \uses{def:nagata-global-blowup-local-model,
-    def:nagata-affine-blowup-restriction-map}
-  \lean{}
+    lemma:nagata-rees-localization-degree-zero}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans}
+  \leanok
 
-  Let $v_i\colon V_i=\operatorname{Spec}(A_i)\hookrightarrow X$ and
-  $v_j\colon V_j=\operatorname{Spec}(A_j)\hookrightarrow X$ be affine
-  opens.  Let $W\subseteq V_i\cap V_j$ be affine and basic in each chart:
+  For every affine open $U\subseteq X$, composing the structure morphism
+  $b_U$ with the canonical isomorphism
+  $\operatorname{Spec}(A_U)\cong U$ defines
   \[
-    W=D_{V_i}(s_i)=D_{V_j}(s_j)
+    \beta_U\colon\mathsf B_U(\mathcal I)\longrightarrow U.
   \]
-  for $s_i\in A_i$ and $s_j\in A_j$.  Put
+  For every inclusion $U\subseteq V$ of affine opens, the square
   \[
-    A_W:=\Gamma(W,\mathcal O_W),\qquad
-    I_i:=\Gamma(V_i,\mathcal I|_{V_i}),\qquad
-    I_j:=\Gamma(V_j,\mathcal I|_{V_j}),\qquad
-    I_W:=\Gamma(W,\mathcal I|_W).
+    \begin{array}{ccc}
+      \mathsf B_U(\mathcal I)
+        &\xrightarrow{\operatorname{Bl}(\operatorname{res}^V_U)}
+        &\mathsf B_V(\mathcal I)\\
+      \downarrow\beta_U& &\downarrow\beta_V\\
+      U&\hookrightarrow&V
+    \end{array}
   \]
-  For $\nu\in\{i,j\}$, define the restriction isomorphism
-  \[
-  \begin{aligned}
-    \varphi_{\nu,W}\colon(A_\nu)_{s_\nu}
-      &\xrightarrow{\ \sim\ }A_W,&
-    \varphi_{\nu,W}(a/s_\nu^n)
-      &:=(a|_W)(s_\nu|_W)^{-n}.
-  \end{aligned}
-  \]
-  Quasi-coherence of $\mathcal I$ is the pair of ideal-transport equalities
-  \[
-    \varphi_{i,W}\bigl(I_i(A_i)_{s_i}\bigr)=I_W,
-    \qquad
-    \varphi_{j,W}\bigl(I_j(A_j)_{s_j}\bigr)=I_W.       \tag{OB0}
-  \]
-  Define the coefficientwise graded-ring isomorphism and the induced blow-up
-  isomorphism by
-  \[
-  \begin{aligned}
-    \mathcal R(\varphi_{\nu,W})\colon
-      \mathcal R_{(A_\nu)_{s_\nu}}(I_\nu(A_\nu)_{s_\nu})
-      &\xrightarrow{\ \sim\ }\mathcal R_{A_W}(I_W),&
-    a\mathbf u^n&\longmapsto\varphi_{\nu,W}(a)\mathbf u^n,\\
-    \operatorname{Bl}(\varphi_{\nu,W})
-      &:=\operatorname{Proj}(\mathcal R(\varphi_{\nu,W})^{-1})\\
-      &\colon
-      \operatorname{Bl}_{I_\nu(A_\nu)_{s_\nu}}
-        (\operatorname{Spec}(A_\nu)_{s_\nu})
-      \xrightarrow{\ \sim\ }\operatorname{Bl}_{I_W}(W).
-  \end{aligned}
-  \]
-  By \Cref{prop:nagata-affine-blowup-restrict}, define
-  \[
-    \varrho_{\nu,W}:=r_{s_\nu}^{-1}\colon
-      b_{V_\nu}^{-1}(W)\xrightarrow{\ \sim\ }
-      \operatorname{Bl}_{I_\nu(A_\nu)_{s_\nu}}
-        (\operatorname{Spec}(A_\nu)_{s_\nu}),
-    \qquad
-    r_{\nu,W}:=\operatorname{Bl}(\varphi_{\nu,W})\circ\varrho_{\nu,W}.
-  \]
-  The two instances $\nu=i,j$ of the definition of $r_{\nu,W}$ are
-  \[
-    r_{i,W}\colon b_{V_i}^{-1}(W)\xrightarrow{\sim}
-      \operatorname{Bl}_{I_W}(W),
-    \qquad
-    r_{j,W}\colon b_{V_j}^{-1}(W)\xrightarrow{\sim}
-      \operatorname{Bl}_{I_W}(W).
-  \]
-  Define
-  \[
-    \omega_{ij,W}:=r_{j,W}^{-1}\circ r_{i,W}\colon
-      b_{V_i}^{-1}(W)
-      \longrightarrow
-      b_{V_j}^{-1}(W).
-  \]
+  commutes by \Cref{lemma:nagata-rees-localization-degree-zero}; i.e.\ the
+  $\beta_U$ form a natural transformation from the functor of
+  \Cref{def:nagata-global-blowup-local-model} to the inclusion diagram of
+  the affine opens of $X$.
 \end{definition}
 
-\begin{lemma}[The basic-overlap comparison is an isomorphism]
+\begin{lemma}[Basic-open inclusions give cartesian squares]
   \label{lemma:nagata-global-blowup-overlap-basic}
   \uses{def:nagata-global-blowup-overlap-basic-map}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupNatTrans_of_basicOpen}
+  \leanok
 
-  The morphism $\omega_{ij,W}$ of
-  \Cref{def:nagata-global-blowup-overlap-basic-map} is an isomorphism over
-  $W$.
+  Let $U\subseteq V$ be affine opens of $X$ such that $U$ is a basic open
+  of $V$, say $U=D_V(f)$ with $f\in A_V$.  Then the square of
+  \Cref{def:nagata-global-blowup-overlap-basic-map} is cartesian.
 \end{lemma}
 
 \begin{proof}
   \uses{prop:nagata-affine-blowup-restrict}
-  The ideal identifications are the named transport equalities (OB0), and
-  $r_{i,W}$ and $r_{j,W}$ are the composites defined in
-  \Cref{def:nagata-global-blowup-overlap-basic-map}.  The definition is
-  \[
-    \omega_{ij,W}^{-1}=r_{i,W}^{-1}\circ r_{j,W},
-  \]
-  and direct composition is the pair of identities
-  \[
-    \omega_{ij,W}^{-1}\circ\omega_{ij,W}
-      =r_{i,W}^{-1}r_{j,W}r_{j,W}^{-1}r_{i,W}
-      =\operatorname{id}_{b_{V_i}^{-1}(W)},
-  \]
-  \[
-    \omega_{ij,W}\circ\omega_{ij,W}^{-1}
-      =r_{j,W}^{-1}r_{i,W}r_{i,W}^{-1}r_{j,W}
-      =\operatorname{id}_{b_{V_j}^{-1}(W)}.
-  \]
-  Since both $r_{i,W}$ and $r_{j,W}$ are over $W$, so is
-  $\omega_{ij,W}$.
+  \leanok
+  In this case $A_U$ is a localization of $A_V$ away from $f$ and
+  $I_U=I_VA_U$, so the claim is
+  \Cref{prop:nagata-affine-blowup-restrict} transported along the
+  canonical isomorphisms $\operatorname{Spec}(A_U)\cong U$ and
+  $\operatorname{Spec}(A_V)\cong V$.
 \end{proof}
 
-\begin{lemma}[Independence of the basic refinement]
+\begin{lemma}[General inclusions give open immersions with the expected range]
   \label{lemma:nagata-global-blowup-overlap-independent}
-  \lean{}
+  \uses{def:nagata-global-blowup-overlap-basic-map}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_blowupFunctor_map,
+    AlgebraicGeometry.Scheme.IdealSheafData.opensRange_blowupFunctor_map}
+  \leanok
 
-  If $W$ and $W'$ are basic affine opens as in
-  \Cref{def:nagata-global-blowup-overlap-basic-map}, then on every basic
-  affine $Q\subseteq W\cap W'$ one has
-  \[
-    \omega_{ij,W}|_{b_{V_i}^{-1}(Q)}
-      =\omega_{ij,Q}
-      =\omega_{ij,W'}|_{b_{V_i}^{-1}(Q)}.
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{lemma:nagata-affine-blowup-restrict-cocycle,
-    lemma:nagata-global-blowup-overlap-basic}
-  Write $Q=D_W(q)=D_{W'}(q')$.  For $\nu\in\{i,j\}$, the cocycle equality of
-  \Cref{lemma:nagata-affine-blowup-restrict-cocycle} is
-  \[
-    r_{\nu,Q}=r_{W,Q}\circ(r_{\nu,W}|_Q)
-      =r_{W',Q}\circ(r_{\nu,W'}|_Q).
-  \]
-  Substitution into $\omega_{ij,W}=r_{j,W}^{-1}r_{i,W}$ is the equality
-  \[
-    \omega_{ij,W}|_Q=r_{j,Q}^{-1}r_{i,Q}=\omega_{ij,Q},
-  \]
-  and the same calculation with $W'$ is
-  \[
-    \omega_{ij,W'}|_Q=\omega_{ij,Q}.
-  \]
-  The basic opens $Q$ cover
-  $W\cap W'$, so morphism locality proves equality on the intersection.
-\end{proof}
-
-\begin{lemma}[Identity and symmetry of overlap isomorphisms]
-  \label{lemma:nagata-global-blowup-overlap-id-symm}
-  \lean{}
-
-  Put
-  \[
-    B_{ij}:=b_{V_i}^{-1}(V_i\cap V_j),\qquad
-    B_{ji}:=b_{V_j}^{-1}(V_i\cap V_j).
-  \]
-  Let $\mathfrak W_{ij}$ be a basic affine cover of $V_i\cap V_j$.  For
-  $W\in\mathfrak W_{ij}$, put
-  \[
-  \begin{gathered}
-    U_{i,W}:=b_{V_i}^{-1}(W),\qquad
-    U_{j,W}:=b_{V_j}^{-1}(W),\\
-    \iota_{i,W}\colon U_{i,W}\hookrightarrow B_{ij},\qquad
-    \iota_{j,W}\colon U_{j,W}\hookrightarrow B_{ji},\\
-    \widehat\omega_{ij,W}:=
-      \iota_{j,W}\circ\omega_{ij,W}\colon U_{i,W}\longrightarrow B_{ji},
-  \end{gathered}
-  \]
-  where $\omega_{ij,W}$ is
-  \Cref{def:nagata-global-blowup-overlap-basic-map}.  Define the equalizer
-  \[
-  \begin{aligned}
-    E_{ij}:=\Bigl\{(h_W)_{W\in\mathfrak W_{ij}}
-      &\in\prod_{W\in\mathfrak W_{ij}}
-        \operatorname{Hom}(U_{i,W},B_{ji})\ \Bigm|\ {}\\
-      &h_W|_{U_{i,W}\cap U_{i,W'}}
-       =h_{W'}|_{U_{i,W}\cap U_{i,W'}}
-       \quad(W,W'\in\mathfrak W_{ij})\Bigr\}.
-  \end{aligned}
-  \]
-  The source-local gluing axiom for scheme morphisms is the bijection
-  \[
-    \operatorname{res}_{ij}\colon
-      \operatorname{Hom}(B_{ij},B_{ji})
-      \xrightarrow{\ \sim\ }E_{ij},\qquad
-    h\longmapsto(h|_{U_{i,W}})_{W\in\mathfrak W_{ij}}.
-  \]
-  By \Cref{lemma:nagata-global-blowup-overlap-independent},
-  \[
-    (\widehat\omega_{ij,W})_{W\in\mathfrak W_{ij}}\in E_{ij}.
-  \]
-  Define
-  \[
-  \begin{aligned}
-    \omega_{ij}
-      &:=\operatorname{res}_{ij}^{-1}
-        ((\widehat\omega_{ij,W})_{W\in\mathfrak W_{ij}})
-        \colon B_{ij}\longrightarrow B_{ji},\\
-    \omega_{ij}|_{U_{i,W}}&=\widehat\omega_{ij,W}
-      =\iota_{j,W}\circ\omega_{ij,W}
-      \qquad(W\in\mathfrak W_{ij}).
-  \end{aligned}
-  \]
-  Then
-  \[
-    \omega_{ii}=\operatorname{id}_{\mathsf B_{V_i}(\mathcal I)},
-    \qquad
-    \omega_{ji}=\omega_{ij}^{-1}.
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{lemma:nagata-global-blowup-overlap-independent}
-  On a basic $W\subseteq V_i\cap V_j$, the definition is the equality
-  \[
-    \omega_{ii,W}=r_{i,W}^{-1}r_{i,W}
-      =\operatorname{id}_{b_{V_i}^{-1}(W)},
-  \]
-  and
-  \[
-    \omega_{ji,W}\circ\omega_{ij,W}
-      =(r_{i,W}^{-1}r_{j,W})(r_{j,W}^{-1}r_{i,W})
-      =\operatorname{id}_{b_{V_i}^{-1}(W)},
-  \]
-  \[
-    \omega_{ij,W}\circ\omega_{ji,W}
-      =(r_{j,W}^{-1}r_{i,W})(r_{i,W}^{-1}r_{j,W})
-      =\operatorname{id}_{b_{V_j}^{-1}(W)}.
-  \]
-  Applying the injective restriction map $\operatorname{res}_{ij}$ of the
-  statement to the preceding chart equalities is the system
-  \[
-  \begin{aligned}
-    \operatorname{res}_{ii}(\omega_{ii})
-      &=\operatorname{res}_{ii}
-        (\operatorname{id}_{\mathsf B_{V_i}(\mathcal I)}),\\
-    \operatorname{res}_{ii}(\omega_{ji}\circ\omega_{ij})
-      &=\operatorname{res}_{ii}
-        (\operatorname{id}_{B_{ij}}),\\
-    \operatorname{res}_{jj}(\omega_{ij}\circ\omega_{ji})
-      &=\operatorname{res}_{jj}
-        (\operatorname{id}_{B_{ji}}).
-  \end{aligned}
-  \]
-  Injectivity is the three global equalities
-  \[
-    \omega_{ii}=\operatorname{id}_{\mathsf B_{V_i}(\mathcal I)},
-    \qquad
-    \omega_{ji}\circ\omega_{ij}=\operatorname{id}_{B_{ij}},
-    \qquad
-    \omega_{ij}\circ\omega_{ji}=\operatorname{id}_{B_{ji}}.
-  \]
-\end{proof}
-
-\begin{lemma}[Triple-overlap cocycle]
-  \label{lemma:nagata-global-blowup-overlap-cocycle}
-  \lean{}
-
-  On $V_i\cap V_j\cap V_k$, the overlap maps of
-  \Cref{lemma:nagata-global-blowup-overlap-id-symm} satisfy
-  \[
-    \omega_{jk}\circ\omega_{ij}=\omega_{ik}.
-  \]
-\end{lemma}
-
-\begin{proof}
-  \uses{lemma:nagata-affine-blowup-restrict-cocycle,
-    lemma:nagata-global-blowup-overlap-independent}
-  Choose a basic affine cover $(W_\lambda)_\lambda$ of
-  $V_i\cap V_j\cap V_k$ refining the three pairwise basic covers.  By
-  \Cref{lemma:nagata-global-blowup-overlap-independent}, on $W_\lambda$,
-  \[
-    \omega_{ij}=r_{j,W_\lambda}^{-1}r_{i,W_\lambda},
-    \quad
-    \omega_{jk}=r_{k,W_\lambda}^{-1}r_{j,W_\lambda},
-    \quad
-    \omega_{ik}=r_{k,W_\lambda}^{-1}r_{i,W_\lambda}.
-  \]
-  Substitution of the three displayed expressions is
-  \[
-    \omega_{jk}\circ\omega_{ij}
-      =r_{k,W_\lambda}^{-1}r_{j,W_\lambda}
-        r_{j,W_\lambda}^{-1}r_{i,W_\lambda}
-      =r_{k,W_\lambda}^{-1}r_{i,W_\lambda}
-      =\omega_{ik}.
-  \]
-  Equality on the cover $(W_\lambda)_\lambda$ proves the assertion.
-\end{proof}
-
-\begin{definition}[Raw global blow-up gluing datum]
-  \label{def:nagata-global-blowup-glue-data}
-  \uses{def:nagata-global-blowup-local-model,
-    def:nagata-global-blowup-overlap-basic-map}
-  \lean{}
-
-  Fix affine open immersions
-  $v_i\colon V_i=\operatorname{Spec}(A_i)\hookrightarrow X$ with
-  $X=\bigcup_iV_i$.  Put
-  \[
-    B_i:=\mathsf B_{V_i}(\mathcal I),\qquad
-    B_{ij}:=b_{V_i}^{-1}(V_i\cap V_j)\subseteq B_i.
-  \]
-  Choose a basic affine cover
-  $\mathfrak W_{ij}:=(W_{ij,\lambda})_\lambda$ of $V_i\cap V_j$, and define
-  \[
-    \omega_{ij}:=
-      \operatorname{res}_{ij}^{-1}
-      ((\widehat\omega_{ij,W})_{W\in\mathfrak W_{ij}})
-      \colon B_{ij}\longrightarrow B_{ji}
-  \]
-  by the Hom-equalizer construction in
-  \Cref{lemma:nagata-global-blowup-overlap-id-symm}.
-  Define
-  \[
-    \mathsf G(X,\mathcal I,(V_i)_i):=
-      \bigl((B_i)_i,(B_{ij})_{i,j},(\omega_{ij})_{i,j}\bigr).
-  \]
-\end{definition}
-
-\begin{lemma}[Validity of the global blow-up gluing datum]
-  \label{lemma:nagata-global-blowup-glue-data-valid}
-  \uses{def:nagata-global-blowup-glue-data}
-  \lean{}
-
-  The datum $\mathsf G(X,\mathcal I,(V_i)_i)$ of
-  \Cref{def:nagata-global-blowup-glue-data} has isomorphism-valued
-  overlap maps satisfying the identity, symmetry, and triple-overlap cocycle
-  axioms.  By the definition of a scheme gluing datum, these properties are
-  the assertion that $\mathsf G(X,\mathcal I,(V_i)_i)$ is a scheme gluing
-  datum.
+  Let $U\subseteq V$ be arbitrary affine opens of $X$.  Then
+  $\operatorname{Bl}(\operatorname{res}^V_U)$ is an open immersion whose
+  range is $\beta_V^{-1}(U)$.
 \end{lemma}
 
 \begin{proof}
   \uses{lemma:nagata-global-blowup-overlap-basic,
-    lemma:nagata-global-blowup-overlap-id-symm,
-    lemma:nagata-global-blowup-overlap-cocycle}
-  On each $b_{V_i}^{-1}(W_{ij,\lambda})$,
-  \Cref{lemma:nagata-global-blowup-overlap-basic} is the equality
-  \[
-    \omega_{ij}|_{W_{ij,\lambda}}
-      =\omega_{ij,W_{ij,\lambda}}\colon
-      b_{V_i}^{-1}(W_{ij,\lambda})
-      \xrightarrow{\sim}b_{V_j}^{-1}(W_{ij,\lambda}).
-  \]
-  Define
-  \[
-    \upsilon_{ij}:=\omega_{ji}\colon B_{ji}\longrightarrow B_{ij}.
-  \]
-  The symmetry equality of
-  \Cref{lemma:nagata-global-blowup-overlap-id-symm}, applied first to
-  $(i,j)$ and then to $(j,i)$, is the pair
-  \[
-    \upsilon_{ij}\circ\omega_{ij}
-      =\omega_{ji}\circ\omega_{ij}=\operatorname{id}_{B_{ij}},
-    \qquad
-    \omega_{ij}\circ\upsilon_{ij}
-      =\omega_{ij}\circ\omega_{ji}=\operatorname{id}_{B_{ji}}.
-  \]
-  Hence
-  \[
-    \operatorname{IsIso}(\omega_{ij}),\qquad
-    \omega_{ij}^{-1}=\upsilon_{ij}=\omega_{ji}.
-  \]
-  The remaining gluing axioms are the explicit equalities
-  \[
-    \omega_{ii}=\operatorname{id}_{B_i},\qquad
-    \omega_{ji}=\omega_{ij}^{-1},\qquad
-    \omega_{jk}\circ\omega_{ij}=\omega_{ik},
-  \]
-  proved in \Cref{lemma:nagata-global-blowup-overlap-id-symm} and
-  \Cref{lemma:nagata-global-blowup-overlap-cocycle}.  These are precisely the
-  identity, symmetry, and cocycle axioms for scheme gluing.
+    lemma:nagata-affine-blowup-restrict-cocycle}
+  \leanok
+  Every point of $U$ lies in an affine open $W$ that is basic in $V$ and
+  contained in $U$; such a $W$ is then automatically basic in $U$ as
+  well.  Over each such $W$, both inclusions $W\subseteq U$ and
+  $W\subseteq V$ are covered by \Cref{lemma:nagata-global-blowup-overlap-basic},
+  and the composition law
+  \Cref{lemma:nagata-affine-blowup-restrict-cocycle} identifies the
+  restriction of $\operatorname{Bl}(\operatorname{res}^V_U)$ over the
+  corresponding part of $\mathsf B_V(\mathcal I)$ with
+  $\operatorname{Bl}(\operatorname{res}^U_W)$ composed with an
+  isomorphism.  Being an open immersion is Zariski-local on the target,
+  and the ranges are computed on the same cover.
+\end{proof}
+
+\begin{lemma}[Identity and symmetry are automatic]
+  \label{lemma:nagata-global-blowup-overlap-id-symm}
+  \uses{def:nagata-global-blowup-local-model}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}
+  \leanok
+
+  The transition maps of \Cref{def:nagata-global-blowup-local-model}
+  satisfy
+  $\operatorname{Bl}(\operatorname{res}^U_U)=\operatorname{id}$ and, for
+  $U\subseteq V\subseteq W$,
+  $\operatorname{Bl}(\operatorname{res}^W_V)\circ
+   \operatorname{Bl}(\operatorname{res}^V_U)
+   =\operatorname{Bl}(\operatorname{res}^W_U)$;
+  i.e.\ the local models form a functor on the poset of affine opens.
+  There are no symmetry data to check: the index category is a poset, so
+  distinct affine opens are related only through common refinements.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-affine-blowup-restrict-cocycle}
+  \leanok
+  Functoriality of $\operatorname{Bl}(-)$
+  (\Cref{lemma:nagata-affine-blowup-restrict-cocycle}) applied to the
+  presheaf identities
+  $\operatorname{res}^U_U=\operatorname{id}$ and
+  $\operatorname{res}^V_U\circ\operatorname{res}^W_V
+    =\operatorname{res}^W_U$.
+\end{proof}
+
+\begin{lemma}[No cocycle condition]
+  \label{lemma:nagata-global-blowup-overlap-cocycle}
+  \uses{lemma:nagata-global-blowup-overlap-id-symm}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}
+  \leanok
+
+  In the locally directed gluing of
+  \Cref{def:nagata-global-blowup-glue-data} the triple-overlap cocycle
+  condition of the earlier draft is vacuous: the index category of the
+  cover by all affine opens is a thin preorder, so any two parallel
+  composites of transition maps agree by
+  \Cref{lemma:nagata-global-blowup-overlap-id-symm}.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Immediate from thinness of the index category and functoriality.
+\end{proof}
+
+\begin{definition}[Relative gluing datum]
+  \label{def:nagata-global-blowup-glue-data}
+  \uses{def:nagata-global-blowup-local-model,
+    def:nagata-global-blowup-overlap-basic-map}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupGluingData}
+  \leanok
+
+  Define $\mathsf G(X,\mathcal I)$ to be the relative gluing datum over
+  the locally directed cover of $X$ by all of its affine opens whose
+  functor is the functor of local blow-up models
+  (\Cref{def:nagata-global-blowup-local-model}) and whose structure maps
+  are the $\beta_U$ of
+  \Cref{def:nagata-global-blowup-overlap-basic-map}.
+\end{definition}
+
+\begin{lemma}[The gluing datum is equifibered]
+  \label{lemma:nagata-global-blowup-glue-data-valid}
+  \uses{def:nagata-global-blowup-glue-data}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
+  \leanok
+
+  For every inclusion $U\subseteq V$ of affine opens of $X$, the
+  naturality square of \Cref{def:nagata-global-blowup-overlap-basic-map}
+  is cartesian.  Hence $\mathsf G(X,\mathcal I)$ is a valid relative
+  gluing datum in the sense of Stacks 01LH.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-global-blowup-overlap-basic,
+    lemma:nagata-global-blowup-overlap-independent}
+  \leanok
+  A commuting square whose two vertical maps are open immersions and in
+  which the range of the top map is the preimage of the range of the
+  bottom map is cartesian.  The top map
+  $\operatorname{Bl}(\operatorname{res}^V_U)$ is an open immersion with
+  range $\beta_V^{-1}(U)$ by
+  \Cref{lemma:nagata-global-blowup-overlap-independent}, and the bottom
+  map $U\hookrightarrow V$ is an open immersion.
 \end{proof}
 
 \begin{definition}[Global blow-up]
   \label{def:nagata-global-blowup}
-  \uses{def:nagata-global-blowup-glue-data}
-  \lean{}
+  \uses{def:nagata-global-blowup-glue-data,
+    lemma:nagata-global-blowup-glue-data-valid}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowup,
+    AlgebraicGeometry.Scheme.IdealSheafData.blowupι}
+  \leanok
 
-  Let $\mathsf G(X,\mathcal I,(V_i)_i)$ be the gluing datum of
+  Let $\mathsf G(X,\mathcal I)$ be the gluing datum of
   \Cref{def:nagata-global-blowup-glue-data}.  Define
-  $\operatorname{Bl}_{\mathcal I}(X)$ to be its glued scheme, and denote its
-  open chart embeddings by
+  $\operatorname{Bl}_{\mathcal I}(X)$ to be its glued scheme (the
+  colimit of the functor of local models), and denote the chart
+  embeddings by
   \[
-    e_i\colon B_i\hookrightarrow\operatorname{Bl}_{\mathcal I}(X).
+    e_U\colon\mathsf B_U(\mathcal I)
+      \hookrightarrow\operatorname{Bl}_{\mathcal I}(X).
   \]
-  They are characterized by
-  \[
-    e_i(B_i)\text{ cover }\operatorname{Bl}_{\mathcal I}(X),
-    \qquad
-    e_j\circ\omega_{ij}=e_i\text{ on }B_{ij}.
-  \]
+  They are open immersions, their images cover
+  $\operatorname{Bl}_{\mathcal I}(X)$, and
+  $e_V\circ\operatorname{Bl}(\operatorname{res}^V_U)=e_U$ for
+  $U\subseteq V$.
 \end{definition}
 
 \begin{lemma}[Compatibility of the local structure maps]
   \label{lemma:nagata-global-blowup-local-maps-agree}
   \uses{def:nagata-global-blowup-overlap-basic-map}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupι_blowupMap}
+  \leanok
 
-  With $b_{V_i}\colon B_i\to V_i$ and
-  $v_i\colon V_i\hookrightarrow X$ as in
-  \Cref{def:nagata-global-blowup-local-model}, one has on $B_{ij}$
+  With $v_U\colon U\hookrightarrow X$ the inclusions, one has for every
+  inclusion $U\subseteq V$ of affine opens
   \[
-    v_j\circ b_{V_j}\circ\omega_{ij}=v_i\circ b_{V_i}.
+    v_V\circ\beta_V\circ\operatorname{Bl}(\operatorname{res}^V_U)
+      =v_U\circ\beta_U.
   \]
 \end{lemma}
 
 \begin{proof}
-  \uses{prop:nagata-affine-blowup-restrict}
-  On $b_{V_i}^{-1}(W)$ for a basic
-  $W\subseteq V_i\cap V_j$, the definition
-  $\omega_{ij,W}=r_{j,W}^{-1}r_{i,W}$ is the chain
-  \[
-    b_{V_j}|_W\circ\omega_{ij,W}
-      =b_{I_W}\circ r_{j,W}r_{j,W}^{-1}r_{i,W}
-      =b_{I_W}\circ r_{i,W}
-      =b_{V_i}|_W,
-  \]
-  where $b_{I_W}\colon\operatorname{Bl}_{I_W}(W)\to W$ and the first and
-  last equalities are the compatibility over $W$ from
-  \Cref{prop:nagata-affine-blowup-restrict}.  Composing with the common open
-  immersion $W\hookrightarrow X$ is the equality
-  \[
-    v_jb_{V_j}\omega_{ij,W}=v_ib_{V_i}.
-  \]
-  The chosen basic opens cover $V_i\cap V_j$; morphism locality is the
-  equality
-  \[
-    v_j\circ b_{V_j}\circ\omega_{ij}=v_i\circ b_{V_i}
-      \quad\text{on }B_{ij}.
-  \]
+  \uses{lemma:nagata-rees-localization-degree-zero}
+  \leanok
+  Naturality of $\beta$
+  (\Cref{def:nagata-global-blowup-overlap-basic-map}) composed with
+  $v_V\circ(U\hookrightarrow V)=v_U$.
 \end{proof}
 
 \begin{definition}[Global blow-up morphism]
   \label{def:nagata-global-blowup-map}
   \uses{def:nagata-global-blowup,
-    def:nagata-global-blowup-local-model}
-  \lean{}
+    def:nagata-global-blowup-local-model,
+    lemma:nagata-global-blowup-local-maps-agree}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupMap}
+  \leanok
 
-  With the chart embeddings $e_i$ from
-  \Cref{def:nagata-global-blowup}, define the local structure maps
-  \[
-    \beta_i:=v_i\circ b_{V_i}\colon B_i\longrightarrow X.
-  \]
-  By \Cref{lemma:nagata-global-blowup-local-maps-agree}, their overlap
-  equations are
-  \[
-    \beta_j\circ\omega_{ij}
-      =v_j\circ b_{V_j}\circ\omega_{ij}
-      =v_i\circ b_{V_i}
-      =\beta_i
-      \qquad\text{on }B_{ij}.                         \tag{GB0}
-  \]
-  Define the Hom-equalizer fibre
-  \[
-    \mathscr B_{X,\mathcal I}
-      :=\left\{h\in
-        \operatorname{Hom}(\operatorname{Bl}_{\mathcal I}(X),X)
-        \ \middle|\
-        (\forall i)\ h\circ e_i=\beta_i\right\}.
-  \]
-  The Hom equalizer for the open cover $(e_i(B_i))_i$ and (GB0) is the
-  singleton equality
-  \[
-    \mathscr B_{X,\mathcal I}=\{b_{X,\mathcal I}\}.
-  \]
-  This equality defines
+  By \Cref{lemma:nagata-global-blowup-local-maps-agree} the composites
+  $v_U\circ\beta_U\colon\mathsf B_U(\mathcal I)\to X$ are compatible
+  with the transition maps, so they glue to a unique morphism
   \[
     b_{X,\mathcal I}\colon
       \operatorname{Bl}_{\mathcal I}(X)\longrightarrow X,
     \qquad
-    b_{X,\mathcal I}\circ e_i=\beta_i=v_i\circ b_{V_i}
-      \quad(\forall i).
+    b_{X,\mathcal I}\circ e_U=v_U\circ\beta_U\quad(\forall U).
   \]
+  Uniqueness holds because the $e_U(\mathsf B_U(\mathcal I))$ cover
+  $\operatorname{Bl}_{\mathcal I}(X)$.
 \end{definition}
 
 \begin{definition}[Affine-restriction comparison for the global blow-up]
   \label{def:nagata-global-blowup-affine-restriction-map}
   \uses{def:nagata-global-blowup-map,
     def:nagata-global-blowup-local-model}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupMap_preimage}
+  \leanok
 
-  Let $v\colon V=\operatorname{Spec}(A)\hookrightarrow X$ be an affine open
-  and put $I_V:=\Gamma(V,\mathcal I|_V)$.  Set
-  \[
-    B_V^X:=b_{X,\mathcal I}^{-1}(V),\qquad
-    B_V:=\operatorname{Bl}_{I_V}(V).
-  \]
-  On each basic affine
-  $W\subseteq V\cap V_i$, define
-  \[
-    B^X_{i,W}:=e_i\bigl(b_{V_i}^{-1}(W)\bigr)\subseteq B_V^X,
-    \qquad
-    B_{V,W}:=b_V^{-1}(W)\subseteq B_V,
-  \]
-  and let
-  \[
-    e_{i,W}:=e_i|_{b_{V_i}^{-1}(W)}\colon
-      b_{V_i}^{-1}(W)\xrightarrow{\sim}B^X_{i,W}.
-  \]
-  Define
-  \[
-    q_{V,W}:=
-      r_{V,W}^{-1}\circ r_{i,W}\circ e_{i,W}^{-1}\colon
-      B^X_{i,W}\longrightarrow B_{V,W},
-  \]
-  where $r_{i,W}$ and $r_{V,W}$ are the restriction isomorphisms of
-  \Cref{prop:nagata-affine-blowup-restrict}.  Let
-  $\kappa_{V,W}\colon B_{V,W}\hookrightarrow B_V$ be the open immersion and
-  define
-  \[
-    \widehat q_{V,i,W}:=\kappa_{V,W}\circ q_{V,W}\colon
-      B^X_{i,W}\longrightarrow B_V.
-  \]
-  On
-  $B^X_{i,W}\cap B^X_{j,W'}$, the equality of
-  \Cref{lemma:nagata-global-blowup-overlap-independent} is the equality
-  \[
-    \widehat q_{V,i,W}|_{B^X_{i,W}\cap B^X_{j,W'}}
-      =\widehat q_{V,j,W'}|_{B^X_{i,W}\cap B^X_{j,W'}}.
-  \]
-  Define
-  \[
-    \mathscr Q_V:=
-      \left\{h\in\operatorname{Hom}(B_V^X,B_V)\ \middle|\
-        h|_{B^X_{i,W}}=\widehat q_{V,i,W}
-        \text{ for every }(i,W)\right\}.
-  \]
-  The source-local Hom gluing bijection for the cover $(B^X_{i,W})_{i,W}$ is
-  the singleton equality
-  \[
-    \mathscr Q_V=\{q_V\},\qquad
-    q_V\colon B_V^X\longrightarrow B_V.
-  \]
+  For every affine open $U\subseteq X$, the preimage
+  $b_{X,\mathcal I}^{-1}(U)$ equals the image of the chart embedding
+  $e_U$; the restriction of $b_{X,\mathcal I}$ over $U$ is thereby
+  identified with $v_U\circ\beta_U$ on
+  $\mathsf B_U(\mathcal I)$.
 \end{definition}
 
 \begin{proposition}[Affine restriction of the global blow-up]
   \label{prop:nagata-global-blowup-affine-restrict}
   \uses{def:nagata-global-blowup-affine-restriction-map}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupι}
+  \leanok
 
-  The morphism $q_V$ of
-  \Cref{def:nagata-global-blowup-affine-restriction-map} is an isomorphism
-  over $V$.
+  For every affine open $U\subseteq X$, the square
+  \[
+    \begin{array}{ccc}
+      \mathsf B_U(\mathcal I)
+        &\xrightarrow{\ e_U\ }
+        &\operatorname{Bl}_{\mathcal I}(X)\\
+      \downarrow\beta_U& &\downarrow b_{X,\mathcal I}\\
+      U&\xhookrightarrow{\ v_U\ }&X
+    \end{array}
+  \]
+  is cartesian; i.e.\
+  $b_{X,\mathcal I}^{-1}(U)\cong
+    \operatorname{Bl}_{I_U}(\operatorname{Spec}A_U)$
+  compatibly with the two structure maps.
 \end{proposition}
 
 \begin{proof}
-  \uses{prop:nagata-affine-blowup-restrict,
-    lemma:nagata-global-blowup-overlap-independent,
-    lemma:nagata-global-blowup-local-maps-agree,
-    lemma:nagata-morphism-property-calculus}
-  Let $(W_{i,\lambda})_{i,\lambda}$ be the basic covers used in
-  \Cref{def:nagata-global-blowup-affine-restriction-map}.  For every
-  $(i,\lambda)$,
-  \[
-    q_V|_{B^X_{i,W_{i,\lambda}}}
-      =r_{V,W_{i,\lambda}}^{-1}\circ r_{i,W_{i,\lambda}}
-        \circ e_{i,W_{i,\lambda}}^{-1}
-  \]
-  is an isomorphism by
-  \Cref{prop:nagata-affine-blowup-restrict}.  Define on
-  $B_{V,W_{i,\lambda}}$
-  \[
-    q_{V,i,\lambda}^{-1}:=
-      e_{i,W_{i,\lambda}}\circ r_{i,W_{i,\lambda}}^{-1}
-        \circ r_{V,W_{i,\lambda}}.
-  \]
-  \Cref{lemma:nagata-global-blowup-overlap-independent} is the equality
-  \[
-    q_{V,i,\lambda}^{-1}=q_{V,j,\mu}^{-1}
-      \quad\text{on }B_{V,W_{i,\lambda}\cap W_{j,\mu}},
-  \]
-  Let
-  \[
-    j^V_{i,\lambda}\colon B_{V,W_{i,\lambda}}\hookrightarrow B_V
-  \]
-  denote the chart inclusion.  With the notation (PC11) of
-  \Cref{lemma:nagata-morphism-property-calculus}, the preceding overlap
-  equality is the membership statement
-  \[
-    \mathbf q_V^{-1}:=(q_{V,i,\lambda}^{-1})_{i,\lambda}
-      \in\mathscr G_{B_V}
-        \bigl(B_V^X,(B_{V,W_{i,\lambda}})_{i,\lambda}\bigr).
-  \]
-  Define the inverse candidate by the inverse of the bijection (PC12):
-  \[
-  \begin{gathered}
-    q_V^{-1}:=
-      \operatorname{res}_{B_V,B_V^X}^{-1}(\mathbf q_V^{-1})
-      \colon B_V\to B_V^X,\\
-    q_V^{-1}\circ j^V_{i,\lambda}=q_{V,i,\lambda}^{-1}
-      \qquad\text{for every }(i,\lambda).
-  \end{gathered}
-  \]
-  On every
-  $B^X_{i,W_{i,\lambda}}$,
-  \[
-    q_V^{-1}q_V
-      =e_{i,W_{i,\lambda}}r_{i,W_{i,\lambda}}^{-1}
-        r_{V,W_{i,\lambda}}r_{V,W_{i,\lambda}}^{-1}
-        r_{i,W_{i,\lambda}}e_{i,W_{i,\lambda}}^{-1}
-      =\operatorname{id}_{B^X_{i,W_{i,\lambda}}},
-  \]
-  and on every $B_{V,W_{i,\lambda}}$,
-  \[
-    q_Vq_V^{-1}
-      =r_{V,W_{i,\lambda}}^{-1}r_{i,W_{i,\lambda}}
-        e_{i,W_{i,\lambda}}^{-1}e_{i,W_{i,\lambda}}
-        r_{i,W_{i,\lambda}}^{-1}r_{V,W_{i,\lambda}}
-      =\operatorname{id}_{B_{V,W_{i,\lambda}}}.
-  \]
-  Equality on the cover proves that $q_V$ is an isomorphism.  The
-  restriction of
-  $b_{I_V}\circ q_V=b_{X,\mathcal I}|_{B_V^X}$ to each
-  $W_{i,\lambda}$ is the equality in
-  \Cref{lemma:nagata-global-blowup-local-maps-agree}, so $q_V$ is over $V$.
+  \uses{lemma:nagata-global-blowup-glue-data-valid}
+  \leanok
+  This is the defining property of the relative gluing of an equifibered
+  datum (Stacks 01LH): over each member of the cover, the glued object
+  restricts to the given local object.  It is supplied directly by the
+  Mathlib relative-gluing machinery applied to
+  $\mathsf G(X,\mathcal I)$, which is admissible by
+  \Cref{lemma:nagata-global-blowup-glue-data-valid}.
 \end{proof}
 
 \begin{definition}[Comparison between two affine-cover constructions]
@@ -6076,7 +5359,8 @@ corresponding projection of $\mathsf D_{\mathrm{loc}}$.
 
 \begin{lemma}[The center ideal is the unit ideal off its support]
   \label{lemma:nagata-ideal-unit-off-support}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.ideal_eq_top_of_disjoint_support}
+  \leanok
 
   Let
   \[
@@ -6084,235 +5368,83 @@ corresponding projection of $\mathsf D_{\mathrm{loc}}$.
       :=\{x\in X\mid\mathcal I_x\subseteq\mathfrak m_x\},
     \qquad U:=X\setminus Z,
   \]
-  where $\mathfrak m_x\subseteq\mathcal O_{X,x}$ is the maximal ideal.  Then
-  $\mathcal I|_U=\mathcal O_U$.
+  where $\mathfrak m_x\subseteq\mathcal O_{X,x}$ is the maximal ideal.
+  For every affine open $W\subseteq X$ disjoint from $Z$, one has
+  $I_W=A_W$, the unit ideal.
 
   \paragraph{Mathlib relation.}
-  Restriction to the complementary open is
-  \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.comap}}.
-  Its support is computed by
-  \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.support_comap}},
-  and
+  The closed set $Z$ is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.support}};
+  the statement mirrors
   \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.support_eq_bot_iff}}
-  gives the displayed equality with the unit ideal.
+  localized at one affine open.
 \end{lemma}
 
 \begin{proof}
-  If $x\in U$, define $a_x$ by choosing
-  \[
-    a_x\in\mathcal I_x\setminus\mathfrak m_x,
-  \]
-  which is possible by the definition of $U$.  Since
-  $\mathcal O_{X,x}$ is local,
-  \[
-    a_x\notin\mathfrak m_x
-      \Longrightarrow a_x\in\mathcal O_{X,x}^{\times}
-      \Longrightarrow
-      1=a_x^{-1}a_x\in\mathcal I_x
-      \Longrightarrow
-      \mathcal I_x=\mathcal O_{X,x}.
-  \]
-  The stalk equality is
-  \[
-    (\mathcal I|_U)_x=(\mathcal O_U)_x\qquad(x\in U).
-  \]
-  Equality of subsheaves is stalkwise, so
-  $\mathcal I|_U=\mathcal O_U$.
+  \leanok
+  Inside the affine open $W=\operatorname{Spec}(A_W)$, the intersection
+  $Z\cap W$ is the image of the vanishing locus
+  $V(I_W)\subseteq\operatorname{Spec}(A_W)$.  Disjointness makes this
+  vanishing locus empty, and an ideal with empty vanishing locus is the
+  unit ideal, since otherwise it would be contained in a maximal ideal.
 \end{proof}
 
-\begin{lemma}[Affine complement-of-center isomorphism]
+\begin{lemma}[Complement isomorphism over an affine open with unit ideal]
   \label{lemma:nagata-affine-blowup-complement}
-  \lean{}
+  \uses{def:nagata-global-blowup-map}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict_of_ideal_eq_top}
+  \leanok
 
-  Let $Z:=V(I)\subseteq\operatorname{Spec}(A)$ and
-  $U:=\operatorname{Spec}(A)\setminus Z$.  If
+  Let $W\subseteq X$ be an affine open with $I_W=A_W$.  Then the
+  restriction
   \[
-    b_U\colon
-      \operatorname{Bl}_I(\operatorname{Spec}A)\times_{\operatorname{Spec}A}U
-      \longrightarrow U
+    b_{X,\mathcal I}|_{b_{X,\mathcal I}^{-1}(W)}\colon
+      b_{X,\mathcal I}^{-1}(W)\longrightarrow W
   \]
-  is the base change of $b_{A,I}$ from
-  \Cref{def:nagata-affine-blowup}, then $b_U$ is an isomorphism.
+  is an isomorphism.
 \end{lemma}
 
 \begin{proof}
-  \uses{lemma:nagata-affine-blowup-top,
-    prop:nagata-affine-blowup-restrict,
-    lemma:nagata-affine-blowup-restrict-cocycle,
-    lemma:nagata-morphism-property-calculus}
-  Define
-  \[
-    B_U:=\operatorname{Bl}_I(\operatorname{Spec}A)
-      \times_{\operatorname{Spec}A}U,
-    \qquad b_U:=\operatorname{pr}_U\colon B_U\to U.
-  \]
-  For every $\mathfrak p\in\operatorname{Spec}(A)$, the definitions of
-  $U$, $V(I)$, and $D(a)$ expand to the equivalence chain
-  \[
-  \begin{aligned}
-    \mathfrak p\in U
-      &\Longleftrightarrow \mathfrak p\notin V(I)
-       \Longleftrightarrow I\nsubseteq\mathfrak p
-       \Longleftrightarrow
-         (\exists a\in I)\ a\notin\mathfrak p\\
-      &\Longleftrightarrow
-         (\exists a\in I)\ \mathfrak p\in D(a)
-       \Longleftrightarrow
-         \mathfrak p\in\bigcup_{a\in I}D(a).
-  \end{aligned}
-  \]
-  Hence
-  \[
-    U=\bigcup_{a\in I}D(a).                                      \tag{OC1}
-  \]
-  For $a\in I$, write $a/1\in A_a$ for its image and $1/a\in A_a$ for
-  its inverse.  Then
-  \[
-    1=(1/a)(a/1)\in IA_a\subseteq A_a,
-    \qquad IA_a=A_a.                                             \tag{OC2}
-  \]
-  By \Cref{prop:nagata-affine-blowup-restrict} and
-  \Cref{lemma:nagata-affine-blowup-top}, define, for $a\in I$,
-  \[
-  \begin{gathered}
-    B_a:=B_U\times_UD(a),\qquad
-    \iota_a^U\colon D(a)\hookrightarrow U,\qquad
-    \iota_a^B\colon B_a\hookrightarrow B_U,\\
-    \alpha_a:=\upsilon_{A_a}\circ r_a^{-1}
-      \colon B_a\xrightarrow{\sim}D(a),\\
-    \beta_a:=\iota_a^B\circ\alpha_a^{-1}
-      \colon D(a)\longrightarrow B_U.
-  \end{gathered}                                                   \tag{OC3}
-  \]
-  Base change of (OC1) along $b_U$ is the open-cover equality
-  \[
-    B_U=\bigcup_{a\in I}\iota_a^B(B_a).                         \tag{OC3a}
-  \]
-  For $a,b\in I$, the transported cocycle equality of
-  \Cref{lemma:nagata-affine-blowup-restrict-cocycle} is
-  \[
-    r_{ab}
-      =\operatorname{bc}_{a,b}\circ
-        (r_a)_{B_{a,b}}\circ r_{a,b}.                            \tag{OC3b}
-  \]
-  Let $\lambda_{a,b}$ and $\lambda_{b,a}$ be the localization
-  isomorphisms of \Cref{lemma:nagata-rees-localization-mul}; explicitly,
-  \[
-  \begin{aligned}
-    \lambda_{a,b}\colon(A_a)_{b/1}&\xrightarrow{\sim}A_{ab},&
-    \lambda_{a,b}\!\left(\frac{x/a^m}{(b/1)^n}\right)
-      &:=\frac{x a^n b^m}{(ab)^{m+n}},\\
-    \lambda_{b,a}\colon(A_b)_{a/1}&\xrightarrow{\sim}A_{ab},&
-    \lambda_{b,a}\!\left(\frac{x/b^m}{(a/1)^n}\right)
-      &:=\frac{x b^n a^m}{(ab)^{m+n}}.
-  \end{aligned}                                                    \tag{OC3c}
-  \]
-  Define the transported scheme and blow-up isomorphisms
-  \[
-  \begin{gathered}
-    \ell_{a,b}:=\operatorname{Spec}(\lambda_{a,b}^{-1}),\qquad
-    \widetilde\ell_{a,b}:=
-      \operatorname{Proj}(\Lambda_{a,b}^{-1}),\\
-    \ell_{b,a}:=\operatorname{Spec}(\lambda_{b,a}^{-1}),\qquad
-    \widetilde\ell_{b,a}:=
-      \operatorname{Proj}(\Lambda_{b,a}^{-1}),
-  \end{gathered}
-  \]
-  where $\Lambda_{a,b}$ and $\Lambda_{b,a}$ are the coefficientwise Rees
-  isomorphisms defined in
-  \Cref{lemma:nagata-rees-localization-mul}.  Naturality of the structure
-  map $\upsilon$ in \Cref{lemma:nagata-affine-blowup-top} is the pair
-  \[
-  \begin{aligned}
-    \ell_{a,b}\circ\upsilon_{(A_a)_{b/1}}
-      &=\upsilon_{A_{ab}}\circ\widetilde\ell_{a,b},\\
-    \ell_{b,a}\circ\upsilon_{(A_b)_{a/1}}
-      &=\upsilon_{A_{ab}}\circ\widetilde\ell_{b,a}.
-  \end{aligned}                                                    \tag{OC3d}
-  \]
-  Substitution of (OC3b)--(OC3d) into the definitions in (OC3) is the pair
-  of overlap equalities
-  \[
-    (\iota_a^U\circ\alpha_a)|_{B_U\times_UD(ab)}
-      =(\iota_b^U\circ\alpha_b)|_{B_U\times_UD(ab)},
-    \qquad
-    \beta_a|_{D(ab)}=\beta_b|_{D(ab)}.                            \tag{OC4}
-  \]
-  In the notation (PC11), (OC4) is
-  \[
-  \begin{gathered}
-    (\iota_a^U\circ\alpha_a)_{a\in I}
-      \in\mathscr G_{B_U}(U,(B_a)_{a\in I}),\\
-    (\beta_a)_{a\in I}
-      \in\mathscr G_U(B_U,(D(a))_{a\in I}).
-  \end{gathered}
-  \]
-  Define the two global morphisms by the inverse of (PC12):
-  \[
-  \begin{aligned}
-    \alpha&:=\operatorname{res}_{B_U,U}^{-1}
-      ((\iota_a^U\circ\alpha_a)_{a\in I})\colon B_U\to U,\\
-    \beta&:=\operatorname{res}_{U,B_U}^{-1}
-      ((\beta_a)_{a\in I})\colon U\to B_U.
-  \end{aligned}                                                   \tag{OC5}
-  \]
-  The restriction equalities in (PC11), the inverse identities for
-  $\alpha_a$, and injectivity of both restriction bijections (PC12) are
-  \[
-    b_U\circ\iota_a^B=\iota_a^U\circ\alpha_a\quad(a\in I),
-    \qquad b_U=\alpha,
-  \]
-  and
-  \[
-    \alpha\circ\beta=\operatorname{id}_U,
-    \qquad
-    \beta\circ\alpha=\operatorname{id}_{B_U}.
-  \]
-  Substitution of $b_U=\alpha$ into these two identities is
-  \[
-    b_U\circ\beta=\operatorname{id}_U,
-    \qquad
-    \beta\circ b_U=\operatorname{id}_{B_U},
-    \qquad
-    \operatorname{IsIso}(b_U).
-  \]
+  \uses{prop:nagata-global-blowup-affine-restrict,
+    lemma:nagata-affine-blowup-top}
+  \leanok
+  By \Cref{prop:nagata-global-blowup-affine-restrict}, the restriction of
+  $b_{X,\mathcal I}$ over $W$ is identified with the structure morphism
+  $\beta_W$ of the local model
+  $\operatorname{Bl}_{I_W}(\operatorname{Spec}A_W)$.  Since $I_W=A_W$ is
+  the unit ideal, $\beta_W$ is an isomorphism by
+  \Cref{lemma:nagata-affine-blowup-top}.
 \end{proof}
 
-\begin{theorem}[Complement of the center]
+\begin{theorem}[The blow-up is an isomorphism away from the center]
   \label{thm:nagata-global-blowup-complement}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict,
+    AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict_support_compl}
+  \leanok
 
   Let $U:=X\setminus V(\mathcal I)$ and put
   $B_U:=b_{X,\mathcal I}^{-1}(U)$.  The restriction
   \[
     b_{X,\mathcal I}|_{B_U}\colon B_U\longrightarrow U
   \]
-  is an isomorphism.
+  is an isomorphism.  More generally, the restriction of
+  $b_{X,\mathcal I}$ over any open $U'\subseteq X$ disjoint from
+  $V(\mathcal I)$ is an isomorphism.
 \end{theorem}
 
 \begin{proof}
-  \uses{prop:nagata-global-blowup-affine-restrict,
-    lemma:nagata-affine-blowup-complement}
-  Choose an affine open cover $(V_i)_i$ of $X$, put
-  $I_i:=\Gamma(V_i,\mathcal I|_{V_i})$, and set $U_i:=U\cap V_i$.
-  By \Cref{prop:nagata-global-blowup-affine-restrict}, there is an isomorphism
-  \[
-    q_i\colon b_{X,\mathcal I}^{-1}(V_i)
-      \xrightarrow{\sim}\operatorname{Bl}_{I_i}(V_i)
-  \]
-  over $V_i$.  Under $q_i$, the restriction of $b_{X,\mathcal I}$ over
-  $U_i$ is the morphism
-  \[
-    \operatorname{Bl}_{I_i}(V_i)|_{U_i}\longrightarrow U_i,
-  \]
-  which is an isomorphism by
-  \Cref{lemma:nagata-affine-blowup-complement}.  Consequently,
-  \[
-    (b_{X,\mathcal I}|_{B_U})\times_UU_i
-      \text{ is an isomorphism}\qquad(i).
-  \]
-  Since $(U_i)_i$ covers $U$, target-locality of isomorphisms is the
-  assertion that $b_{X,\mathcal I}|_{B_U}$ is an isomorphism.
+  \uses{lemma:nagata-ideal-unit-off-support,
+    lemma:nagata-affine-blowup-complement,
+    prop:nagata-global-blowup-affine-restrict}
+  \leanok
+  Cover the open $U'$ by affine opens $W\subseteq U'$ of $X$.  Each such
+  $W$ is disjoint from $V(\mathcal I)$, so $I_W=A_W$ by
+  \Cref{lemma:nagata-ideal-unit-off-support}, and the restriction of
+  $b_{X,\mathcal I}$ over $W$ is an isomorphism by
+  \Cref{lemma:nagata-affine-blowup-complement}.  Being an isomorphism is
+  Zariski-local on the target, so
+  $b_{X,\mathcal I}|_{b_{X,\mathcal I}^{-1}(U')}$ is an isomorphism.
+  Taking $U'=U$ proves the displayed statement.
 \end{proof}
 
 \begin{definition}[Homogeneous polynomial map to the Rees algebra]

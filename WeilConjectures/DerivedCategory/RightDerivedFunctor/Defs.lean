@@ -183,8 +183,7 @@ noncomputable def rightDerivedFunctorUnit :
   (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).totalRightDerivedUnit
     DerivedCategory.Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
 
-instance :
-    F.rightDerivedFunctor.IsRightDerivedFunctor
+instance : F.rightDerivedFunctor.IsRightDerivedFunctor
       F.rightDerivedFunctorUnit (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) := by
   dsimp only [rightDerivedFunctor, rightDerivedFunctorUnit]
   infer_instance
