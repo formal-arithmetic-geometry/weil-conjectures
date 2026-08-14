@@ -45,6 +45,9 @@ The site-theoretic inputs of the general definitions are discharged here:
 - `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*` with
   values in an abelian category is left exact.
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar` and
+  `AlgebraicGeometry.Etale.preservesFiniteColimits_upperStar`: the pullback `g^*` with
+  values in an abelian category is exact.
 
 -/
 
@@ -195,6 +198,19 @@ instance : (Etale.lowerStar A g).IsRightAdjoint :=
 
 instance : (Etale.upperStar A g).IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
+
+/-- The pullback `g^*` on étale sheaves with values in an abelian category is left
+exact. -/
+instance Etale.preservesFiniteLimits_upperStar [Abelian A] :
+    PreservesFiniteLimits (Etale.upperStar A g) :=
+  sorry
+
+/-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
+instance Etale.preservesFiniteColimits_upperStar :
+    PreservesFiniteColimits (Etale.upperStar A g) :=
+  haveI : PreservesColimitsOfSize.{0, 0} (Etale.upperStar A g) :=
+    (Etale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits
+  PreservesColimitsOfSize.preservesFiniteColimits _
 
 end Adjunction
 

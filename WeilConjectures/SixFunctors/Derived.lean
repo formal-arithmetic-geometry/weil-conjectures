@@ -7,8 +7,8 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.Preliminaries.DerivedAdjunction
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
-public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
@@ -27,8 +27,7 @@ derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctor`
 The chosen localized categories `HasDerivedCategory` are inputs with a general universe.
 The construction of the unbounded right derived functor requires the source abelian
 category to have K-injective resolutions (`CategoryTheory.Abelian.HasKInjectiveResolutions`).
-As in `WeilConjectures.SixFunctors.DerivedFunctors.Plus`, the sheaf categories are
-Grothendieck abelian
+The sheaf categories are Grothendieck abelian
 (`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`) whenever the
 coefficient category `A` is a concrete Grothendieck abelian category (with hom types and
 underlying types in the universe `u` of the base schemes, and the forgetful functor
@@ -57,8 +56,7 @@ namespace CategoryTheory.Abelian
 
 /-- Every Grothendieck abelian category has K-injective resolutions: any cochain
 complex admits a monomorphic quasi-isomorphism into a K-injective complex. This is a
-theorem of Alonso Tarrío–Jeremías López–Souto Salorio and Serpé, whose formalization
-is not yet available. -/
+theorem of Alonso Tarrío–Jeremías López–Souto Salorio and Serpé. -/
 instance hasKInjectiveResolutions_of_isGrothendieckAbelian
     {C : Type u'} [Category.{v'} C] [Abelian C] [IsGrothendieckAbelian.{w} C] :
     HasKInjectiveResolutions C :=
@@ -116,7 +114,7 @@ section DerivedUpperStar
 ## The derived pullback `Lg^*`
 
 The pullback `g^* = Etale.upperStar` is left derived using the K-flat left
-derivability structure of `WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors`.
+derivability structure of `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`.
 This requires the source sheaf category `Sheaf Y.smallEtaleTopology A` to carry a
 preadditive monoidal structure whose tensor product interacts well with coproducts and
 `ℤ`-indexed colimits, and to admit functorial flat resolutions. These inputs are taken
@@ -195,17 +193,6 @@ instance : (Etale.upperStar A g).Additive :=
 
 local instance : (Etale.upperStar A g).PreservesZeroMorphisms :=
   Functor.preservesZeroMorphisms_of_additive (F := Etale.upperStar A g)
-
-/-- The pullback `g^*` on étale sheaves is left exact: it is the composition of the left
-Kan extension along the opposite of the base change functor, which is exact because base
-change preserves finite limits (so the relevant comma categories are cofiltered) and
-filtered colimits in the Grothendieck abelian coefficient category are exact, with the
-finite-limit-preserving sheafification. This is the dual counterpart of the sorried
-instance `Etale.preservesFiniteLimits_lowerStar`; its formalization is not yet
-available. -/
-instance Etale.preservesFiniteLimits_upperStar :
-    PreservesFiniteLimits (Etale.upperStar A g) :=
-  sorry
 
 instance : (Etale.upperStar A g).PreservesHomology := by
   have : PreservesColimitsOfSize.{0, 0} (Etale.upperStar A g) :=

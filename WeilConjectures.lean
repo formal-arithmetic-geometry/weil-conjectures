@@ -37,6 +37,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.MonoidalTriangulated
@@ -93,9 +94,9 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
-public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
-public import WeilConjectures.SixFunctors.DerivedFunctors.Full
-public import WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory
+public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.SixFunctors.UpperStarMapDerivedCategory
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
@@ -103,9 +104,8 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.Preliminaries.DerivedAdjunction
 public import WeilConjectures.SixFunctors.Preliminaries.HomotopyAdjunction
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedMapDerivedCategory
-public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale

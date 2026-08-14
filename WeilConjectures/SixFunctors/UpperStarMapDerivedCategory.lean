@@ -6,8 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.DerivedFunctors.Full
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedMapDerivedCategory
+public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
 
 /-!
@@ -20,8 +20,8 @@ since `g^*` is a left adjoint), so it induces a functor
 `(Etale.upperStar A g).mapDerivedCategory` on derived categories by applying `g^*`
 levelwise. This file records the compatibility of the total left derived functor
 `Lg^* = Etale.leftDerivedUpperStar` (defined via K-flat resolutions in
-`WeilConjectures.SixFunctors.DerivedFunctors.Full`) with this levelwise functor, by
-instantiating `WeilConjectures.SixFunctors.Preliminaries.LeftDerivedMapDerivedCategory`,
+`WeilConjectures.SixFunctors.Derived`) with this levelwise functor, by
+instantiating `WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory`,
 and derives the consequences needed by the base-change package:
 
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`: the canonical
@@ -67,7 +67,7 @@ variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
 
 /- The K-flat resolution package on the étale sheaf categories of all schemes at once,
 as in the section `DerivedUpperStar` of
-`WeilConjectures.SixFunctors.DerivedFunctors.Full`. -/
+`WeilConjectures.SixFunctors.Derived`. -/
 variable [∀ (T : Scheme.{u}), MonoidalCategory (Sheaf T.smallEtaleTopology A)]
   [∀ (T : Scheme.{u}), MonoidalPreadditive (Sheaf T.smallEtaleTopology A)]
   [∀ (T : Scheme.{u}) (j : ℤ), HasColimitsOfShape
@@ -86,16 +86,6 @@ variable [∀ (T : Scheme.{u}), MonoidalCategory (Sheaf T.smallEtaleTopology A)]
   [∀ (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology A),
     PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf T.smallEtaleTopology A)).flip.obj F)]
   [∀ (T : Scheme.{u}), Abelian.HasFunctorialFlatResolution (Sheaf T.smallEtaleTopology A)]
-
-/-- The pullback `g^*` on étale sheaves preserves finite colimits, being a left
-adjoint. Together with the assumed left exactness
-(`Etale.preservesFiniteLimits_upperStar`), this makes `g^*` exact, so that
-`(Etale.upperStar A g).mapDerivedCategory` is defined. -/
-instance Etale.preservesFiniteColimits_upperStar {T S : Scheme.{u}} (h : T ⟶ S) :
-    PreservesFiniteColimits (Etale.upperStar A h) :=
-  have : PreservesColimitsOfSize.{0, 0} (Etale.upperStar A h) :=
-    (Etale.upperStarLowerStarAdjunction A h).leftAdjoint_preservesColimits
-  inferInstance
 
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
 derived functor `Lh^*`, computed via K-flat resolutions, is canonically isomorphic to

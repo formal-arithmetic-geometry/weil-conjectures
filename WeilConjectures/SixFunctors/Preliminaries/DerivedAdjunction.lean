@@ -7,8 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.SixFunctors.Preliminaries.HomotopyAdjunction
-public import WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors
-public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor
+public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 
 /-!
 # The adjunction between total derived functors of an adjoint pair
@@ -20,10 +20,10 @@ functors between abelian categories, where
   K-flat quasi-isomorphisms (`f.PreservesKFlatQuasiIso`), so that the total
   left derived functor `f.leftDerivedFunctor : DerivedCategory C ⥤
   DerivedCategory D` is defined (see
-  `WeilConjectures.SixFunctors.Preliminaries.LeftDerivedFunctors`);
+  `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`);
 * `D` has K-injective resolutions, so that the total right derived functor
   `g.rightDerivedFunctor : DerivedCategory D ⥤ DerivedCategory C` is defined
-  (see `WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor`).
+  (see `WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs`).
 
 We construct the derived adjunction
 
