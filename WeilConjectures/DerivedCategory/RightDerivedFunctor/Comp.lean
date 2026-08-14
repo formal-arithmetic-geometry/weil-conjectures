@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.Mathlib.Algebra.Homology.Additive
+public import WeilConjectures.DerivedCategory.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 
@@ -148,7 +148,7 @@ noncomputable def rightDerivedFunctorNatIso {F G : C ⥤ D} [F.Additive] [G.Addi
 
 /-- The natural transformation induced on total right derived functors by a natural
 isomorphism is an isomorphism. -/
-lemma isIso_rightDerivedFunctorNatTrans {F G : C ⥤ D} [F.Additive] [G.Additive]
+instance isIso_rightDerivedFunctorNatTrans {F G : C ⥤ D} [F.Additive] [G.Additive]
     (τ : F ⟶ G) [IsIso τ] : IsIso (rightDerivedFunctorNatTrans τ) :=
   (inferInstanceAs (IsIso (rightDerivedFunctorNatIso (asIso τ)).hom))
 
