@@ -110,7 +110,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.PointCount
