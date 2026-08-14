@@ -143,8 +143,8 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
     [∀ (U : X.Etale) (P : (Over U)ᵒᵖ ⥤ A), (Over.forget U).op.HasPointwiseRightKanExtension P]
     {F : Sheaf X.smallEtaleTopology A} (h : F.IsConstant X.smallEtaleTopology) :
     IsLocallyConstantSheaf F :=
-  haveI := h
-  haveI : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
+  have := h
+  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
   ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ F.isConstant_over _⟩⟩⟩
 
 end LocallyConstant

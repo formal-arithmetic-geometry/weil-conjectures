@@ -46,6 +46,10 @@ The site-theoretic inputs of the general definitions are discharged here:
 - `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
   the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
   `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`.
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*` with
+  values in an abelian category is left exact.
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar` : the pullback `g^*` with
+  values in an abelian category is left exact, thus exact.
 
 -/
 
@@ -103,7 +107,7 @@ topologies. -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
-  haveI : RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
+  have : RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
     flat_of_preservesFiniteLimits _
   Functor.isContinuous_of_coverPreserving
     (compatiblePreservingOfFlat _ _)
@@ -122,10 +126,10 @@ indexing comma categories of the pointwise left Kan extensions along it have ter
 objects. In particular all pointwise left Kan extensions along it exist. -/
 instance Etale.hasPointwiseLeftKanExtension_op_overPullback (F : Y.Etaleᵒᵖ ⥤ A) :
     (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasPointwiseLeftKanExtension F := by
-  haveI : (MorphismProperty.Over.pullback @Etale ⊤ g).op.IsLeftAdjoint :=
+  have : (MorphismProperty.Over.pullback @Etale ⊤ g).op.IsLeftAdjoint :=
     ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ g ‹Etale g› _root_.trivial).op).isLeftAdjoint
   intro V
-  haveI : HasTerminal (CostructuredArrow (MorphismProperty.Over.pullback @Etale ⊤ g).op V) :=
+  have : HasTerminal (CostructuredArrow (MorphismProperty.Over.pullback @Etale ⊤ g).op V) :=
     (mkTerminalOfRightAdjoint _
       (Adjunction.ofIsLeftAdjoint (MorphismProperty.Over.pullback @Etale ⊤ g).op) V).hasTerminal
   infer_instance
@@ -156,6 +160,17 @@ lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G 
       φ.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
 
+/-- The pushforward `g_*` on étale sheaves with values in a preadditive category is
+additive: it acts on morphisms by whiskering, which is compatible with the objectwise
+addition. -/
+instance Etale.lowerStar_additive [Preadditive A] : (Etale.lowerStar A g).Additive where
+
+/-- The pushforward `g_*` on étale sheaves with values in an abelian category is left
+exact. -/
+instance Etale.preservesFiniteLimits_lowerStar [Abelian A] :
+    PreservesFiniteLimits (Etale.lowerStar A g) :=
+  sorry
+
 section Adjunction
 
 variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
@@ -185,6 +200,15 @@ instance : (Etale.lowerStar A g).IsRightAdjoint :=
 
 instance : (Etale.upperStar A g).IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
+
+/-- The pullback `g^*` on étale sheaves with values in an abelian category is left
+exact. -/
+instance Etale.preservesFiniteLimits_upperStar [Abelian A] :
+    PreservesFiniteLimits (Etale.upperStar A g) :=
+  sorry
+
+/-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
+example : PreservesFiniteColimits (Etale.upperStar A g) := inferInstance
 
 end Adjunction
 

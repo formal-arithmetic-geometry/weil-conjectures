@@ -1,13 +1,32 @@
 module
 
 public import WeilConjectures.AnalyticAux
+public import WeilConjectures.Blowup.Affine.Defs
+public import WeilConjectures.Blowup.Affine.Functoriality
+public import WeilConjectures.Blowup.Affine.Localization
+public import WeilConjectures.Blowup.Affine.ReesGrading
+public import WeilConjectures.Blowup.Complement
+public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
+public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
@@ -15,6 +34,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
+public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.SixFunctors.Derived
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
