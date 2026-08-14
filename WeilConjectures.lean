@@ -41,6 +41,8 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.SixFunctors.Derived
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
