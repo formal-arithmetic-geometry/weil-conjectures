@@ -91,6 +91,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
