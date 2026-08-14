@@ -70,8 +70,9 @@ variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
 étale sheaf categories of all schemes at once by the instances of the section
 `SheafInstances` there. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) A]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+  [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]

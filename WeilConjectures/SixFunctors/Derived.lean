@@ -5,10 +5,13 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
+public import WeilConjectures.SixFunctors.SheafCompose
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
@@ -47,9 +50,43 @@ López–Souto Salorio and Serpé; it is recorded here as the sorried instance
 
 @[expose] public section
 
-universe w w' v' u' u
+universe w w' v' u' v'' u'' u
 
 open CategoryTheory Abelian Limits
+
+namespace ComplexShape
+
+/-!
+The coproducts appearing in the definition of the tensor product of cochain complexes
+are indexed by the discrete categories on the fibers of the total degree map
+`(p, q) ↦ p + q` on `ℤ × ℤ`. The fiber over `j` is the antidiagonal
+`{(p, q) | p + q = j}`, which is in bijection with `ℤ` via `p ↦ (p, j - p)`, so the
+hypotheses on these shapes reduce to a single condition of shape `Discrete ℤ`.
+-/
+
+/-- The fiber over `j` of the total degree map `(p, q) ↦ p + q` on `ℤ × ℤ` is in
+bijection with `ℤ`, via `p ↦ (p, j - p)`. -/
+def πUpIntFiberEquiv (j : ℤ) :
+    ℤ ≃ ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}) where
+  toFun p := ⟨(p, j - p), show p + (j - p) = j by omega⟩
+  invFun x := x.1.1
+  left_inv p := rfl
+  right_inv := fun ⟨⟨p, q⟩, h⟩ => by
+    have h' : p + q = j := h
+    obtain rfl : q = j - p := by omega
+    rfl
+
+/-- A category with `ℤ`-indexed coproducts admits the coproducts indexed by the
+fibers of the total degree map on `ℤ × ℤ` which define the tensor product of cochain
+complexes. -/
+instance hasColimitsOfShape_discrete_π_up_int {C : Type u''} [Category.{v''} C]
+    [HasColimitsOfShape (Discrete ℤ) C] (j : ℤ) :
+    HasColimitsOfShape
+      (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}))
+      C :=
+  hasColimitsOfShape_of_equivalence (Discrete.equivalence (πUpIntFiberEquiv j))
+
+end ComplexShape
 
 namespace AlgebraicGeometry
 
@@ -119,39 +156,85 @@ of these hypotheses from the coefficient category `A` to the categories of `A`-v
 - the functorial flat resolutions are provided for module coefficients by the
   functorial local free covers `⊕ j_{U!} Λ_U` (Stacks Project, Tag 06YL).
 
-These constructions are not yet formalized, so the instances are recorded with `sorry`.
+The monoidal structure itself is obtained below from `CategoryTheory.Sheaf.monoidalCategory`:
+its inputs are the sheafification (from the concreteness assumptions on `A`) and the
+monoidality of the class `W` of sheafification-inverting morphisms of presheaves, which
+is checked on the stalks at the geometric points of the small étale site and needs the
+tensor product of `A` to commute with filtered colimits in each variable. The remaining
+constructions are not yet formalized, so their instances are recorded with `sorry`.
 -/
 
 open MonoidalCategory
 
 variable (Y : Scheme.{u})
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+/-- Postcomposition with a limit-preserving functor preserves sheaves on the small
+étale site. This does not follow from `hasSheafCompose_of_preservesLimitsOfSize`
+directly, since the covering sieves of the small étale site are indexed by a large
+type; it is instead transported from the small affine étale site, which is
+`1`-hypercover dense and essentially small. -/
+lemma Etale.hasSheafCompose_smallEtaleTopology {B : Type u''} [Category.{v''} B]
+    (F : A ⥤ B) [PreservesLimitsOfSize.{u, u} F] :
+    Y.smallEtaleTopology.HasSheafCompose F :=
+  GrothendieckTopology.hasSheafCompose_of_isOneHypercoverDense
+    (Scheme.AffineEtale.Spec Y) (Scheme.AffineEtale.topology Y) _ F
+
+/-- Postcomposition with the forgetful functor of the concrete coefficient category
+preserves étale sheaves. This is the instance of
+`Etale.hasSheafCompose_smallEtaleTopology` needed to check statements about étale
+sheaves on their stalks; it is restricted to `forget A` so that instance search never
+considers it for goals mentioning an unknown functor. -/
+instance Etale.hasSheafCompose_forget_smallEtaleTopology :
+    Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A) :=
+  Etale.hasSheafCompose_smallEtaleTopology A Y _
+
+section Monoidal
+
+/- The monoidal structure on the coefficient category, whose tensor product commutes
+with filtered colimits in each variable. The latter hypothesis makes the tensor product
+of presheaves interact well with the stalks at the points of the small étale site; it
+holds in the intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`, where the
+tensor product commutes with all colimits. -/
+variable [MonoidalCategory A]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+
+/-- The class `Y.smallEtaleTopology.W` of morphisms of `A`-valued étale presheaves
+inverted by sheafification is monoidal: this is checked on the stalks at the geometric
+points of `Y`, which form a conservative family of points of the small étale site. -/
+instance Etale.isMonoidal_W_smallEtaleTopology :
+    (Y.smallEtaleTopology.W (A := A)).IsMonoidal := by
+  obtain ⟨P, _, hP⟩ :=
+    GrothendieckTopology.HasEnoughPoints.exists_objectProperty.{u} Y.smallEtaleTopology
+  exact hP.isMonoidal_W A
+
 /-- The monoidal structure on `A`-valued étale sheaves induced by a monoidal structure
 on the coefficient category `A`: the sheafification of the objectwise tensor product of
 presheaves. -/
-noncomputable instance Etale.sheafMonoidalCategory [MonoidalCategory A] :
+noncomputable instance Etale.sheafMonoidalCategory :
     MonoidalCategory (Sheaf Y.smallEtaleTopology A) :=
-  sorry
+  Sheaf.monoidalCategory _ _
 
 /-- The monoidal structure on étale sheaves is preadditive when the one on the
 coefficient category is. -/
-instance Etale.sheafMonoidalPreadditive [MonoidalCategory A] [MonoidalPreadditive A] :
+instance Etale.sheafMonoidalPreadditive [MonoidalPreadditive A] :
     MonoidalPreadditive (Sheaf Y.smallEtaleTopology A) :=
   sorry
 
-/-- Existence of the coproducts defining the tensor product of complexes of étale
-sheaves, induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafHasColimitsOfShapeDiscretePi [∀ (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) A]
-    (j : ℤ) :
-    HasColimitsOfShape
-      (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}))
-      (Sheaf Y.smallEtaleTopology A) :=
+/-- Existence of `ℤ`-indexed coproducts of étale sheaves, induced by the corresponding
+condition on the coefficient category. Via
+`ComplexShape.hasColimitsOfShape_discrete_π_up_int`, this provides the coproducts
+defining the tensor product of complexes of étale sheaves, whose indexing fibers
+`(ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}` are in
+bijection with `ℤ`. -/
+instance Etale.sheafHasCoproductsOfShapeInt [HasColimitsOfShape (Discrete ℤ) A] :
+    HasColimitsOfShape (Discrete ℤ) (Sheaf Y.smallEtaleTopology A) :=
   sorry
 
 /-- Compatibility of the tensor product of graded étale sheaves with coproducts,
 induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafHasTensor₄ObjExt [MonoidalCategory A]
+instance Etale.sheafHasTensor₄ObjExt
     [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
     (X₁ X₂ X₃ X₄ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)) :
     GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
@@ -159,7 +242,7 @@ instance Etale.sheafHasTensor₄ObjExt [MonoidalCategory A]
 
 /-- Compatibility of the tensor product of graded étale sheaves with coproducts,
 induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafHasGoodTensor₁₂Tensor [MonoidalCategory A]
+instance Etale.sheafHasGoodTensor₁₂Tensor
     [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
     (X₁ X₂ X₃ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)) :
     GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
@@ -167,7 +250,7 @@ instance Etale.sheafHasGoodTensor₁₂Tensor [MonoidalCategory A]
 
 /-- Compatibility of the tensor product of graded étale sheaves with coproducts,
 induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafHasGoodTensorTensor₂₃ [MonoidalCategory A]
+instance Etale.sheafHasGoodTensorTensor₂₃
     [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
     (X₁ X₂ X₃ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)) :
     GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
@@ -188,7 +271,7 @@ instance Etale.sheafHasExactColimitsOfShapeInt [HasColimitsOfShape ℤ A]
 
 /-- Preservation of `ℤ`-indexed colimits by the tensor product of étale sheaves in the
 first variable, induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafPreservesColimitsOfShapeCurriedTensorObj [MonoidalCategory A]
+instance Etale.sheafPreservesColimitsOfShapeCurriedTensorObj
     [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
     (X : Sheaf Y.smallEtaleTopology A) :
     PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf Y.smallEtaleTopology A)).obj X) :=
@@ -196,7 +279,7 @@ instance Etale.sheafPreservesColimitsOfShapeCurriedTensorObj [MonoidalCategory A
 
 /-- Preservation of `ℤ`-indexed colimits by the tensor product of étale sheaves in the
 second variable, induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafPreservesColimitsOfShapeCurriedTensorFlipObj [MonoidalCategory A]
+instance Etale.sheafPreservesColimitsOfShapeCurriedTensorFlipObj
     [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
     (X : Sheaf Y.smallEtaleTopology A) :
     PreservesColimitsOfShape ℤ
@@ -205,10 +288,12 @@ instance Etale.sheafPreservesColimitsOfShapeCurriedTensorFlipObj [MonoidalCatego
 
 /-- Functorial flat resolutions of étale sheaves: for module coefficients these are
 given by the functorial local free covers `⊕ j_{U!} Λ_U` (Stacks Project, Tag 06YL). -/
-instance Etale.sheafHasFunctorialFlatResolution [MonoidalCategory A]
+instance Etale.sheafHasFunctorialFlatResolution
     [Abelian.HasFunctorialFlatResolution A] :
     Abelian.HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A) :=
   sorry
+
+end Monoidal
 
 end SheafInstances
 
@@ -252,13 +337,20 @@ follows from the essential smallness of the étale sites and cocompleteness of `
 variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
   (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
 
-/- The preadditive monoidal structure on the coefficient category. -/
+/- The preadditive monoidal structure on the coefficient category, whose tensor
+product commutes with filtered colimits in each variable (as it does in the intended
+applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`); the latter hypothesis is what
+allows the monoidal structure to descend to the étale sheaf categories via the stalk
+functors, see the section `SheafInstances`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
 
-/- Existence of the coproducts defining the tensor product of complexes, and its
-compatibility with the tensor product, on the coefficient category. -/
-variable [∀ (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) A]
+/- Existence of the coproducts defining the tensor product of complexes (the indexing
+fibers of the total degree map are in bijection with `ℤ`, see
+`ComplexShape.hasColimitsOfShape_discrete_π_up_int`), and its compatibility with the
+tensor product, on the coefficient category. -/
+variable [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
