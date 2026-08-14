@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
-public import WeilConjectures.SixFunctors.Preliminaries.HomotopyAdjunction
+public import WeilConjectures.DerivedCategory.HomotopyAdjunction
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 

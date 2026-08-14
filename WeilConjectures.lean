@@ -102,8 +102,8 @@ public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
-public import WeilConjectures.SixFunctors.Preliminaries.DerivedAdjunction
-public import WeilConjectures.SixFunctors.Preliminaries.HomotopyAdjunction
+public import WeilConjectures.DerivedCategory.Adjunction
+public import WeilConjectures.DerivedCategory.HomotopyAdjunction
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
