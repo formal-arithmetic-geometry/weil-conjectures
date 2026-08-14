@@ -124,10 +124,10 @@ indexing comma categories of the pointwise left Kan extensions along it have ter
 objects. In particular all pointwise left Kan extensions along it exist. -/
 instance Etale.hasPointwiseLeftKanExtension_op_overPullback (F : Y.Etaleᵒᵖ ⥤ A) :
     (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasPointwiseLeftKanExtension F := by
-  haveI : (MorphismProperty.Over.pullback @Etale ⊤ g).op.IsLeftAdjoint :=
+  have : (MorphismProperty.Over.pullback @Etale ⊤ g).op.IsLeftAdjoint :=
     ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ g ‹Etale g› _root_.trivial).op).isLeftAdjoint
   intro V
-  haveI : HasTerminal (CostructuredArrow (MorphismProperty.Over.pullback @Etale ⊤ g).op V) :=
+  have : HasTerminal (CostructuredArrow (MorphismProperty.Over.pullback @Etale ⊤ g).op V) :=
     (mkTerminalOfRightAdjoint _
       (Adjunction.ofIsLeftAdjoint (MorphismProperty.Over.pullback @Etale ⊤ g).op) V).hasTerminal
   infer_instance
@@ -182,14 +182,14 @@ Kan extension hypothesis is automatic by
 see `Etale.upperStarIsoOpenImmersionRestriction`. -/
 noncomputable def Etale.upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
-  have : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  haveI : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
   GrothendieckTopology.upperStar A @Etale @Etale g
 
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites. -/
 noncomputable def Etale.upperStarLowerStarAdjunction :
     Etale.upperStar A g ⊣ Etale.lowerStar A g :=
-  have : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  haveI : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
   GrothendieckTopology.upperStarLowerStarAdjunction A @Etale @Etale g
 

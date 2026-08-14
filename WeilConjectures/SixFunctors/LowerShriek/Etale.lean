@@ -71,7 +71,7 @@ variable [∀ Z : Scheme.{u}, HasWeakSheafify Z.smallEtaleTopology A]
 sheaves for the small étale sites. -/
 noncomputable def Etale.lowerShriek :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
-  have : ∀ Z : Scheme.{u},
+  haveI : ∀ Z : Scheme.{u},
       HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     fun Z => inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
   AlgebraicGeometry.lowerShriek A @Etale @Etale f isOpenImmersion_le_etale

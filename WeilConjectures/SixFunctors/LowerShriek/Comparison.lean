@@ -6,6 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.UpperLowerStar.Comp
 
@@ -43,12 +45,6 @@ and extension by zero along an open and closed immersion agrees with the pushfor
 
 ## Main definitions
 
-- `CategoryTheory.MorphismProperty.Over.full_map` and
-  `CategoryTheory.MorphismProperty.Over.faithful_map`: the localization functor
-  `MorphismProperty.Over.map` along a monomorphism is fully faithful.
-- `CategoryTheory.Adjunction.isIso_sheafPushforwardContinuous_counit`: the counit of the
-  sheaf-level adjunction induced by a site-level adjunction with invertible unit is an
-  isomorphism.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekToLowerStar`: the canonical map
   `i_! ⟶ i_*` for an open immersion `i`.
 - `AlgebraicGeometry.Etale.lowerShriekToLowerStar`: the canonical comparison
@@ -63,65 +59,6 @@ and extension by zero along an open and closed immersion agrees with the pushfor
 universe w v' u' u
 
 open CategoryTheory Category Limits Opposite
-
-namespace CategoryTheory
-
-section FullyFaithfulMap
-
-variable {T : Type*} [Category T] {P Q : MorphismProperty T} [Q.IsMultiplicative]
-  [P.IsStableUnderComposition] {X Y : T} {f : X ⟶ Y} (hPf : P f)
-
-/-- The functor `MorphismProperty.Over.map` given by post-composition with `f` is always
-faithful: it acts as the identity on the underlying morphisms. -/
-instance MorphismProperty.Over.faithful_map : (MorphismProperty.Over.map Q hPf).Faithful where
-  map_injective {A B} {φ ψ} h := by
-    apply MorphismProperty.Over.Hom.ext
-    have h' : ((MorphismProperty.Over.map Q hPf).map φ).left =
-        ((MorphismProperty.Over.map Q hPf).map ψ).left := by rw [h]
-    simpa using h'
-
-/-- For a monomorphism `f`, the functor `MorphismProperty.Over.map` given by
-post-composition with `f` is full: the compatibility with the structure morphisms over
-the target can be cancelled along `f`. -/
-instance MorphismProperty.Over.full_map [Mono f] : (MorphismProperty.Over.map Q hPf).Full where
-  map_surjective {A B} ψ := by
-    refine ⟨MorphismProperty.Over.homMk ψ.left ?_ ψ.prop_hom_left, ?_⟩
-    · rw [← cancel_mono f]
-      simpa using MorphismProperty.Over.w ψ
-    · apply MorphismProperty.Over.Hom.ext
-      simp
-
-end FullyFaithfulMap
-
-section SheafCounit
-
-variable {C D : Type u} [Category.{w} C] [Category.{w} D]
-  (E : Type u') [Category.{v'} E]
-  {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
-  (J : GrothendieckTopology C) (K : GrothendieckTopology D)
-  [F.IsContinuous J K] [G.IsContinuous K J]
-
-/-- If the unit of a site-level adjunction `F ⊣ G` is an isomorphism, then the counit of
-the induced sheaf-level adjunction between the pushforward functors is an isomorphism:
-its components are given by applying the sheaves to the components of the unit. -/
-lemma Adjunction.isIso_sheafPushforwardContinuous_counit [IsIso adj.unit] :
-    IsIso (adj.sheafPushforwardContinuous (E := E) J K).counit := by
-  suffices h : ∀ P, IsIso ((adj.sheafPushforwardContinuous (E := E) J K).counit.app P) from
-    NatIso.isIso_of_isIso_app _
-  intro P
-  have : IsIso (((adj.sheafPushforwardContinuous (E := E) J K).counit.app P).hom) := by
-    suffices h : ∀ c, IsIso
-        ((((adj.sheafPushforwardContinuous (E := E) J K).counit.app P).hom).app c) from
-      NatIso.isIso_of_isIso_app _
-    intro c
-    exact inferInstanceAs (IsIso (𝟙 _ ≫ P.obj.map ((adj.unit.app c.unop).op) ≫ 𝟙 _))
-  haveI : IsIso ((sheafToPresheaf J E).map
-      ((adj.sheafPushforwardContinuous (E := E) J K).counit.app P)) := this
-  exact isIso_of_reflects_iso _ (sheafToPresheaf _ _)
-
-end SheafCounit
-
-end CategoryTheory
 
 namespace AlgebraicGeometry
 

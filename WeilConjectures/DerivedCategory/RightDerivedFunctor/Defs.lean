@@ -66,12 +66,12 @@ instance [HasDerivedCategory C] :
   inferInstanceAs ((Qh (C := C)).IsLocalization _)
 
 instance : (localizerMorphism C).IsLocalizedEquivalence := by
-  have := HasDerivedCategory.standard C
+  let this := HasDerivedCategory.standard C
   exact .of_isLocalization_of_isLocalization _ DerivedCategory.Qh
 
 instance (X : HomotopyCategory C (ComplexShape.up ℤ)) :
     IsConnected ((localizerMorphism C).RightResolution X) := by
-  have := HasDerivedCategory.standard C
+  let this := HasDerivedCategory.standard C
   obtain ⟨K, rfl⟩ := quotient_obj_surjective X
   obtain ⟨L, _, i, _, _⟩ := HasKInjectiveResolutions.exists_isKInjective K
   have : Nonempty ((localizerMorphism C).RightResolution ((quotient _ _).obj K)) :=

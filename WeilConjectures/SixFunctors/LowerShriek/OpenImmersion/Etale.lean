@@ -163,12 +163,12 @@ instance [Mono j] [HasInitial A] (F : U.Etaleᵒᵖ ⥤ A) :
   intro V
   by_cases h : Nonempty (Etale.LiftIndex j V.unop)
   · obtain ⟨α⟩ := h
-    haveI : HasTerminal (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
+    have : HasTerminal (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
       α.isTerminalCostructuredArrow.hasTerminal
     infer_instance
-  · haveI : IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
+  · have : IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
       Etale.LiftIndex.isEmpty_costructuredArrow j V.unop (not_nonempty_iff.mp h)
-    haveI : HasColimitsOfShape
+    have : HasColimitsOfShape
         (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) A :=
       hasColimitsOfShape_of_equivalence (equivalenceOfIsEmpty (Discrete PEmpty.{1}) _)
     infer_instance
@@ -211,7 +211,7 @@ variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 étale sites. -/
 noncomputable def Etale.openImmersionLowerShriek :
     Sheaf U.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
-  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  haveI : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
   GrothendieckTopology.localizationLowerShriek A @Etale @Etale j inferInstance
 
@@ -219,7 +219,7 @@ noncomputable def Etale.openImmersionLowerShriek :
 open immersion. -/
 noncomputable def Etale.openImmersionLowerShriekAdjunction :
     Etale.openImmersionLowerShriek A j ⊣ Etale.openImmersionRestriction A j :=
-  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+  haveI : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
     inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
   GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale j inferInstance
 
