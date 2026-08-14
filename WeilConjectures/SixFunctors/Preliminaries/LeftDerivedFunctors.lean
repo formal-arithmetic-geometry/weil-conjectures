@@ -37,7 +37,7 @@ on K-flat complexes.
 
 This is the left analogue, via K-flat resolutions, of
 `CategoryTheory.Functor.rightDerivedFunctor` in
-`WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctor`.
+`WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs`.
 It is designed so that the left derivation `Lf^*` of the inverse image
 functor `f^*` on (étale) sheaves of modules can be obtained by
 instantiating `C` and `D` with the relevant sheaf categories and proving

@@ -44,7 +44,7 @@ that left derivation commutes with the constructions preserved by `mapDerivedCat
 These are the general inputs needed to identify the derived pullback `Lg^*` of étale
 sheaves (which is left derived from the *exact* functor `g^*`) with the levelwise
 functor, and to obtain its composition, homology, and single-degree compatibilities; see
-`WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory`.
+`WeilConjectures.SixFunctors.UpperStarMapDerivedCategory`.
 
 -/
 
