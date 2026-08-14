@@ -13,7 +13,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 # The constructible bounded derived category of étale sheaves
 
 For a scheme `X` and a concrete abelian coefficient category `A`, this file defines the
-subcategory `D^b_c( X _ét A)` of the derived category
+subcategory `Dᵇc( X, A)` of the derived category
 `DerivedCategory (Sheaf X.smallEtaleTopology A)` of étale sheaves consisting of the
 bounded complexes all of whose homology sheaves are constructible
 (`AlgebraicGeometry.Scheme.IsConstructibleSheaf`). Boundedness refers to the canonical
@@ -27,7 +27,7 @@ t-structure `DerivedCategory.TStructure.t`.
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible`: the property of being
   bounded with constructible homology.
 - `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible`: the subcategory
-  `D^b_c( X _ét A)` cut out by the property above, the constructible bounded derived
+  `Dᵇc( X, A)` cut out by the property above, the constructible bounded derived
   category of the `ℓ`-adic formalism.
 
 -/
@@ -75,7 +75,7 @@ noncomputable def Etale.DerivedCategory.boundedConstructible :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
   DerivedCategory.TStructure.t.bounded ⊓ Etale.DerivedCategory.constructibleHomology A X
 
-/-- The constructible bounded derived category `D^b_c( X _ét A)`, realized as the full
+/-- The constructible bounded derived category `Dᵇc( X, A)`, realized as the full
 subcategory of bounded complexes with constructible homology in the derived category of
 étale sheaves. -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible : Type _ :=
@@ -85,14 +85,14 @@ noncomputable instance : Category (Etale.DerivedCategoryBoundedConstructible A X
   inferInstanceAs <|
     Category (Etale.DerivedCategory.boundedConstructible A X).FullSubcategory
 
-/-- The inclusion of `D^b_c( X _ét A)` into the derived category of étale sheaves. -/
+/-- The inclusion of `Dᵇc( X, A)` into the derived category of étale sheaves. -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible.ι :
     Etale.DerivedCategoryBoundedConstructible A X ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (Etale.DerivedCategory.boundedConstructible A X).ι
 
 @[inherit_doc Etale.DerivedCategoryBoundedConstructible]
-scoped notation "D^b_c( " X " _ét " A ")" =>
+scoped notation "Dᵇc( " X "," A ")" =>
   Etale.DerivedCategoryBoundedConstructible A X
 
 end BoundedConstructible
