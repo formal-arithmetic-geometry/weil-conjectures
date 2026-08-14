@@ -13,8 +13,12 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Compactification.Defs
-public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
+public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
@@ -27,7 +31,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf

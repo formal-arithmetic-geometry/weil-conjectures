@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.DerivedCategory.GrothendieckAbelian
+public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
