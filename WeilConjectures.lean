@@ -130,9 +130,12 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.DerivedCategory.Adjunction
 public import WeilConjectures.SixFunctors.ProperBaseChange.BaseChangeMorphism
+public import WeilConjectures.SixFunctors.ProperBaseChange.«BaseChangeMorphism'»
 public import WeilConjectures.SixFunctors.ProperBaseChange.FiniteCohomology
 public import WeilConjectures.SixFunctors.ProperBaseChange.Proper
+public import WeilConjectures.SixFunctors.ProperBaseChange.«Proper'»
 public import WeilConjectures.SixFunctors.ProperBaseChange.Smooth
+public import WeilConjectures.SixFunctors.ProperBaseChange.«Smooth'»
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.PointCount
