@@ -39,7 +39,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.NumberTheory.ArithmeticFunction.Moebius
+public import WeilConjectures.Mathlib.NumberTheory.Divisors
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.ClosedPointInterfaces
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.EulerFactors
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Exp
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.OrbitEulerProducts

@@ -4052,5 +4052,806 @@ $\Omega:=D.\texttt{points}$ and $F:=D.\texttt{frobenius}$.
   positive-order input $S_D^+$, gives
   $c(Z_{\mathrm{cnt},D})=1$.
 \end{proof}
+\section{Abstract finite-extension and closed-point interfaces}
+\label{sec:weil-closed-point-interface}
+
+The following structures package explicit combinatorial assumptions.  No
+construction of these structures from schemes is asserted in this chapter.
+
+\begin{definition}[Finite-extension point interface]
+  \label{def:weil-finite-extension-point-interface}
+  \uses{def:weil-finite-orbit-frobenius-datum}
+  \lean{Weil.FiniteExtensionPointInterface}
+
+  A finite-extension point interface $P$ over a finite-orbit datum $D$ is
+  the structure with fields
+  \begin{align*}
+    &\texttt{Rat}:\mathbf N\to\texttt{Type u},\\
+    &\texttt{ratFintype}:\forall n,\texttt{Fintype}(\texttt{Rat }n),\\
+    &\texttt{rho}:\forall n,0<n\to
+      \bigl(\texttt{Rat }n\simeq
+        \{x:\Omega\mid x\in\operatorname{Fix}_D(n)\}\bigr).
+  \end{align*}
+  We write $\operatorname{Rat}_P(n)$ for \texttt{P.Rat n}.  In particular,
+  the type and its selected finite structure do not depend on a proof of
+  $0<n$; only the comparison equivalence takes that proof.
+\end{definition}
+
+\paragraph{Formal finite-extension context.}
+For the finite-extension counting subchain below, ending immediately before
+the closed-point interface, fix explicit
+parameters $D:\texttt{Weil.FiniteOrbitFrobeniusData}$ and
+$P:\texttt{Weil.FiniteExtensionPointInterface }D$.  The symbols
+$\operatorname{Rat}_P$, $N_n(P)$, $S_P$, and $Z_P$ are always formed from
+these parameters.
+
+\begin{definition}[Finite-extension point count]
+  \label{def:weil-finite-extension-point-count}
+  \uses{def:weil-finite-extension-point-interface}
+  \lean{Weil.FiniteExtensionPointInterface.pointCount}
+
+  For every $n\in\mathbf N$, install the selected instance
+  \texttt{P.ratFintype n} and define
+  \[
+    N_n(P):=\operatorname{Fintype.card}(\operatorname{Rat}_P(n)).
+  \]
+\end{definition}
+
+\begin{lemma}[Finite-extension point count equals fixed-point count]
+  \label{lemma:weil-finite-extension-point-count-eq-fixed}
+  \uses{def:weil-finite-extension-point-interface,
+    def:weil-finite-extension-point-count,
+    def:weil-frobenius-fixed-point-count}
+  \lean{Weil.FiniteExtensionPointInterface.pointCount_eq_fixedPointCount}
+
+  For every $n\geq1$,
+  \[
+    N_n(P)=N_n(D).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-finite-extension-point-interface,
+    def:weil-finite-extension-point-count,
+    def:weil-frobenius-fixed-point-count}
+  Install \texttt{P.ratFintype n}.  Apply \texttt{Fintype.card\_congr} to
+  the equivalence \texttt{P.rho n h} stored in the interface, where
+  $h:0<n$.
+  The target subtype has cardinal
+  $\#\operatorname{Fix}_D(n)$ by
+  \texttt{Fintype.card\_coe}; this cardinal is $N_n(D)$ by definition.
+\end{proof}
+
+\begin{definition}[Finite-extension counting logarithm]
+  \label{def:weil-finite-extension-counting-log-series}
+  \uses{def:weil-finite-extension-point-count}
+  \lean{Weil.FiniteExtensionPointInterface.countingLogSeries}
+
+  Define $S_P(T)\in\mathbf Q[[T]]$ by
+  \[
+    [T^0]S_P=0,\qquad
+    [T^n]S_P=\frac{(N_n(P):\mathbf Q)}{(n:\mathbf Q)}\quad(n\geq1).
+  \]
+\end{definition}
+
+\begin{lemma}[The finite-extension counting logarithm has positive order]
+  \label{lemma:weil-finite-extension-counting-log-series-positive}
+  \uses{def:weil-finite-extension-counting-log-series,
+    def:weil-positive-series}
+  \lean{Weil.FiniteExtensionPointInterface.countingLogSeries_positive}
+
+  One has $c(S_P)=0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-finite-extension-counting-log-series}
+  Definition~\ref{def:weil-finite-extension-counting-log-series} specifies
+  the degree-zero coefficient of $S_P$ to be zero.
+\end{proof}
+
+\begin{definition}[Bundled finite-extension counting logarithm]
+  \label{def:weil-bundled-finite-extension-counting-log-series}
+  \uses{def:weil-finite-extension-counting-log-series,
+    def:weil-positive-series,
+    lemma:weil-finite-extension-counting-log-series-positive}
+  \constructedby{lemma:weil-finite-extension-counting-log-series-positive}
+  \lean{Weil.FiniteExtensionPointInterface.positiveCountingLogSeries}
+
+  Define the single bundled object
+  \[
+    S_P^+:=\left\langle S_P,
+      \text{Lemma~\ref{lemma:weil-finite-extension-counting-log-series-positive}}
+    \right\rangle\in\operatorname{PositiveSeries}(\mathbf Q).
+  \]
+\end{definition}
+
+\begin{definition}[Finite-extension counting zeta series]
+  \label{def:weil-finite-extension-counting-zeta-series}
+  \uses{def:weil-bundled-finite-extension-counting-log-series,
+    def:weil-formal-exp}
+  \lean{Weil.FiniteExtensionPointInterface.countingZetaSeries}
+
+  Define
+  \[
+    Z_P(T):=\operatorname{Exp}(S_P^+).
+  \]
+  The customary expression
+  $\operatorname{Exp}(\sum_{n\geq1}N_n(P)T^n/n)$ is only shorthand for
+  this coefficientwise definition; it introduces no infinite-sum operation.
+\end{definition}
+
+\begin{proposition}[Finite-extension and orbit counting zeta series agree]
+  \label{prop:weil-finite-extension-zeta-eq-orbit-zeta}
+  \uses{def:weil-finite-extension-counting-zeta-series,
+    def:weil-counting-zeta-series,
+    def:weil-bundled-finite-extension-counting-log-series,
+    def:weil-bundled-counting-log-series,
+    lemma:weil-finite-extension-counting-log-series-positive,
+    lemma:weil-counting-log-series-positive}
+  \lean{Weil.FiniteExtensionPointInterface.countingZetaSeries_eq}
+
+  One has
+  \[
+    Z_P(T)=Z_{\mathrm{cnt},D}(T).
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{def:weil-finite-extension-counting-log-series,
+    def:weil-counting-log-series,
+    def:weil-finite-extension-counting-zeta-series,
+    def:weil-counting-zeta-series,
+    def:weil-bundled-finite-extension-counting-log-series,
+    def:weil-bundled-counting-log-series,
+    lemma:weil-finite-extension-point-count-eq-fixed,
+    lemma:weil-finite-extension-counting-log-series-positive,
+    lemma:weil-counting-log-series-positive}
+  Definitions~\ref{def:weil-finite-extension-counting-log-series}
+  and~\ref{def:weil-counting-log-series} give zero as the degree-zero
+  coefficient of $S_P$ and $S_D$.  In every positive degree $n$,
+  Lemma~\ref{lemma:weil-finite-extension-point-count-eq-fixed} gives
+  $(N_n(P):\mathbf Q)/(n:\mathbf Q)
+   =(N_n(D):\mathbf Q)/(n:\mathbf Q)$.  Thus the underlying power series satisfy
+  $S_P=S_D$ by \texttt{PowerSeries.ext}.  Bundle them using
+  Lemmas~\ref{lemma:weil-finite-extension-counting-log-series-positive}
+  and~\ref{lemma:weil-counting-log-series-positive}; \texttt{Subtype.ext}
+  upgrades the underlying equality to $S_P^+=S_D^+$.  Rewrite
+  Definitions~\ref{def:weil-finite-extension-counting-zeta-series}
+  and~\ref{def:weil-counting-zeta-series}, and apply
+  \texttt{congrArg} to the bundled function $\operatorname{Exp}$.
+\end{proof}
+
+\begin{definition}[Closed-point--orbit interface]
+  \label{def:weil-closed-point-orbit-interface}
+  \uses{def:weil-frobenius-orbit-type,
+    def:weil-frobenius-orbit-degree}
+  \lean{Weil.ClosedPointOrbitInterface}
+
+  A closed-point--orbit interface $C$ over $D$ consists of:
+  \begin{enumerate}[label=\textup{(\roman*)}]
+    \item a type $\operatorname{ClPt}(C)$;
+    \item a function
+      $\deg_C:\operatorname{ClPt}(C)\to\mathbf N$ and a proof
+      $\deg_C(c)\geq1$ for every $c$;
+    \item a selected equivalence
+      \[
+        \theta_C:\operatorname{ClPt}(C)
+          \xrightarrow{\ \sim\ }\operatorname{Orb}_F(\Omega);
+      \]
+    \item for every $c$, the equality
+      \[
+        \deg_C(c)=\deg_F(\theta_C(c)).
+      \]
+  \end{enumerate}
+\end{definition}
+
+\paragraph{Formal closed-point context.}
+For every following declaration involving closed points, fix explicit
+parameters $D:\texttt{Weil.FiniteOrbitFrobeniusData}$ and
+$C:\texttt{Weil.ClosedPointOrbitInterface }D$.  If a declaration also uses
+finite-extension points, it separately quantifies
+$P:\texttt{Weil.FiniteExtensionPointInterface }D$.
+
+\begin{definition}[Finset of closed points of one degree]
+  \label{def:weil-degree-closed-point-finset}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-degree-frobenius-orbit-finset}
+  \lean{Weil.ClosedPointOrbitInterface.degreeClosedPointFinset}
+
+  For $m\geq1$, define
+  \[
+    \mathcal C_m:=
+      \mathcal O_m.\operatorname{preimage}
+        (\theta_C)
+        \bigl(\theta_C.\texttt{injective.injOn}\bigr).
+  \]
+  The third argument has the exact type
+  $\texttt{Set.InjOn }\theta_C
+    (\theta_C^{-1}(\uparrow\!\mathcal O_m))$
+  required by \texttt{Finset.preimage}.
+  Equivalently, this is the finset transported from $\mathcal O_m$ through
+  the inverse equivalence $\theta_C^{-1}$.
+\end{definition}
+
+\begin{lemma}[Membership in the one-degree closed-point finset]
+  \label{lemma:weil-degree-closed-point-finset-mem}
+  \uses{def:weil-degree-closed-point-finset}
+  \lean{Weil.ClosedPointOrbitInterface.mem_degreeClosedPointFinset}
+
+  For $m\geq1$,
+  \[
+    c\in\mathcal C_m\quad\Longleftrightarrow\quad\deg_C(c)=m.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    lemma:weil-degree-frobenius-orbit-finset-mem}
+  By the finset preimage membership theorem,
+  $c\in\mathcal C_m$ if and only if $\theta_C(c)\in\mathcal O_m$.
+  The orbit membership criterion turns this into
+  $\deg_F(\theta_C(c))=m$.  Replace this degree by $\deg_C(c)$ using the
+  compatibility field of the interface.
+\end{proof}
+
+\begin{definition}[Number of closed points of one degree]
+  \label{def:weil-closed-point-count}
+  \uses{def:weil-degree-closed-point-finset}
+  \lean{Weil.ClosedPointOrbitInterface.closedPointCount}
+
+  For $m\geq1$, define $b_m(C):=\#\mathcal C_m$.
+\end{definition}
+
+\begin{definition}[Forward candidate on a fixed closed-point degree]
+  \label{def:weil-degree-closed-point-forward-candidate}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-degree-closed-point-finset}
+  \lean{Weil.ClosedPointOrbitInterface.degreeForwardCandidate}
+
+  For $m\geq1$, define
+  \[
+    f_m:\{c:\operatorname{ClPt}(C)\mid c\in\mathcal C_m\}\longrightarrow
+      \operatorname{Orb}_F(\Omega),
+    \qquad f_m(c):=\theta_C(c.1).
+  \]
+\end{definition}
+
+\begin{lemma}[The fixed-degree forward candidate lands in the orbit fiber]
+  \label{lemma:weil-degree-closed-point-forward-candidate-mem}
+  \uses{def:weil-degree-closed-point-forward-candidate,
+    def:weil-degree-frobenius-orbit-finset}
+  \lean{Weil.ClosedPointOrbitInterface.degreeForwardCandidate_mem}
+
+  For every
+  $c:\{c:\operatorname{ClPt}(C)\mid c\in\mathcal C_m\}$,
+  one has $f_m(c)\in\mathcal O_m$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-degree-closed-point-forward-candidate,
+    def:weil-degree-closed-point-finset}
+  The subtype field $c.2$ is membership of $c.1$ in $\mathcal C_m$.
+  By Definition~\ref{def:weil-degree-closed-point-finset}, this is exactly
+  membership of $\theta_C(c.1)=f_m(c)$ in $\mathcal O_m$; the final equality
+  is Definition~\ref{def:weil-degree-closed-point-forward-candidate}.
+\end{proof}
+
+\begin{definition}[Forward map on a fixed closed-point degree]
+  \label{def:weil-degree-closed-point-forward-map}
+  \uses{def:weil-degree-closed-point-forward-candidate,
+    def:weil-degree-frobenius-orbit-finset,
+    lemma:weil-degree-closed-point-forward-candidate-mem}
+  \constructedby{lemma:weil-degree-closed-point-forward-candidate-mem}
+  \lean{Weil.ClosedPointOrbitInterface.degreeForwardMap}
+
+  Define
+  \[
+    \bar f_m:\{c:\operatorname{ClPt}(C)\mid c\in\mathcal C_m\}\longrightarrow
+      \{O:\operatorname{Orb}_F(\Omega)\mid O\in\mathcal O_m\}
+  \]
+  by pairing $f_m(c)$ with
+  Lemma~\ref{lemma:weil-degree-closed-point-forward-candidate-mem}.
+\end{definition}
+
+\begin{definition}[Inverse candidate on a fixed orbit degree]
+  \label{def:weil-degree-closed-point-inverse-candidate}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-degree-frobenius-orbit-finset}
+  \lean{Weil.ClosedPointOrbitInterface.degreeInverseCandidate}
+
+  For $m\geq1$, define
+  \[
+    g_m:\{O:\operatorname{Orb}_F(\Omega)\mid O\in\mathcal O_m\}\longrightarrow
+      \operatorname{ClPt}(C),
+    \qquad g_m(O):=\theta_C^{-1}(O.1).
+  \]
+\end{definition}
+
+\begin{lemma}[The fixed-degree inverse candidate lands in the closed-point fiber]
+  \label{lemma:weil-degree-closed-point-inverse-candidate-mem}
+  \uses{def:weil-degree-closed-point-inverse-candidate,
+    def:weil-degree-closed-point-finset}
+  \lean{Weil.ClosedPointOrbitInterface.degreeInverseCandidate_mem}
+
+  For every
+  $O:\{O:\operatorname{Orb}_F(\Omega)\mid O\in\mathcal O_m\}$,
+  one has $g_m(O)\in\mathcal C_m$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-degree-closed-point-inverse-candidate,
+    def:weil-degree-closed-point-finset}
+  Unfolding the inverse candidate gives $g_m(O)=\theta_C^{-1}(O.1)$.
+  Membership in $\mathcal C_m$ therefore means
+  $\theta_C(\theta_C^{-1}(O.1))\in\mathcal O_m$.  The right-inverse identity
+  of $\theta_C$ reduces this to the subtype field $O.2$.
+\end{proof}
+
+\begin{definition}[Inverse map on a fixed orbit degree]
+  \label{def:weil-degree-closed-point-inverse-map}
+  \uses{def:weil-degree-closed-point-inverse-candidate,
+    def:weil-degree-closed-point-finset,
+    lemma:weil-degree-closed-point-inverse-candidate-mem}
+  \constructedby{lemma:weil-degree-closed-point-inverse-candidate-mem}
+  \lean{Weil.ClosedPointOrbitInterface.degreeInverseMap}
+
+  Define
+  \[
+    \bar g_m:\{O:\operatorname{Orb}_F(\Omega)\mid O\in\mathcal O_m\}
+      \longrightarrow
+      \{c:\operatorname{ClPt}(C)\mid c\in\mathcal C_m\}
+  \]
+  by pairing $g_m(O)$ with
+  Lemma~\ref{lemma:weil-degree-closed-point-inverse-candidate-mem}.
+\end{definition}
+
+\begin{lemma}[The inverse map is a left inverse of the forward map]
+  \label{lemma:weil-degree-closed-point-maps-left-inverse}
+  \uses{def:weil-degree-closed-point-forward-map,
+    def:weil-degree-closed-point-inverse-map}
+  \lean{Weil.ClosedPointOrbitInterface.degreeMaps_leftInverse}
+
+  For every
+  $c:\{c:\operatorname{ClPt}(C)\mid c\in\mathcal C_m\}$, one has
+  $\bar g_m(\bar f_m(c))=c$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-degree-closed-point-forward-map,
+    def:weil-degree-closed-point-inverse-map}
+  Unfold the forward and inverse maps, then apply subtype extensionality.
+  The underlying equality is
+  $\theta_C^{-1}(\theta_C(c.1))=c.1$, which is the left-inverse field of
+  the equivalence in
+  Definition~\ref{def:weil-closed-point-orbit-interface}.
+\end{proof}
+
+\begin{lemma}[The inverse map is a right inverse of the forward map]
+  \label{lemma:weil-degree-closed-point-maps-right-inverse}
+  \uses{def:weil-degree-closed-point-forward-map,
+    def:weil-degree-closed-point-inverse-map}
+  \lean{Weil.ClosedPointOrbitInterface.degreeMaps_rightInverse}
+
+  For every
+  $O:\{O:\operatorname{Orb}_F(\Omega)\mid O\in\mathcal O_m\}$, one has
+  $\bar f_m(\bar g_m(O))=O$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-degree-closed-point-forward-map,
+    def:weil-degree-closed-point-inverse-map}
+  Unfold the forward and inverse maps, then apply subtype extensionality.
+  The underlying equality is
+  $\theta_C(\theta_C^{-1}(O.1))=O.1$, which is the right-inverse field of
+  the equivalence in
+  Definition~\ref{def:weil-closed-point-orbit-interface}.
+\end{proof}
+
+\begin{definition}[Equivalence of fixed-degree closed points and orbits]
+  \label{def:weil-degree-closed-point-orbit-equiv}
+  \uses{def:weil-degree-closed-point-forward-map,
+    def:weil-degree-closed-point-inverse-map,
+    lemma:weil-degree-closed-point-maps-left-inverse,
+    lemma:weil-degree-closed-point-maps-right-inverse}
+  \constructedby{lemma:weil-degree-closed-point-maps-left-inverse,
+    lemma:weil-degree-closed-point-maps-right-inverse}
+  \lean{Weil.ClosedPointOrbitInterface.degreeEquiv}
+
+  Define
+  \[
+    \bar\theta_{C,m}:
+      \{c:\operatorname{ClPt}(C)\mid c\in\mathcal C_m\}
+        \simeq
+      \{O:\operatorname{Orb}_F(\Omega)\mid O\in\mathcal O_m\}
+  \]
+  with forward map $\bar f_m$, inverse map $\bar g_m$, left-inverse field
+  Lemma~\ref{lemma:weil-degree-closed-point-maps-left-inverse}, and
+  right-inverse field
+  Lemma~\ref{lemma:weil-degree-closed-point-maps-right-inverse}.
+\end{definition}
+
+\begin{lemma}[Closed-point degree counts equal orbit degree counts]
+  \label{lemma:weil-closed-point-count-eq-orbit-count}
+  \uses{def:weil-closed-point-count,
+    def:weil-frobenius-orbit-count}
+  \lean{Weil.ClosedPointOrbitInterface.closedPointCount_eq_orbitCount}
+
+  For $m\geq1$,
+  \[
+    b_m(C)=a_m(D).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-count,
+    def:weil-frobenius-orbit-count,
+    def:weil-degree-closed-point-orbit-equiv}
+  Apply \texttt{Fintype.card\_congr} to
+  $\bar\theta_{C,m}$.  Rewrite both resulting subtype cardinals with
+  \texttt{Fintype.card\_coe}; they become the finset cardinals
+  $\#\mathcal C_m$ and $\#\mathcal O_m$.  Unfolding Definitions
+  \ref{def:weil-closed-point-count} and
+  \ref{def:weil-frobenius-orbit-count} identifies these with $b_m(C)$ and
+  $a_m(D)$.
+\end{proof}
+
+\begin{definition}[Raw closed-point Euler-factor family]
+  \label{def:weil-closed-point-euler-factor-family}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-inverse-euler-factor-positive-part}
+  \lean{Weil.ClosedPointOrbitInterface.eulerFactorFamily}
+
+  For a closed point $c$, define
+  \[
+    w_c(T):=E_{\deg_C(c)}(T)-1.
+  \]
+\end{definition}
+
+\begin{lemma}[Closed-point Euler factors have positive order]
+  \label{lemma:weil-closed-point-euler-factor-family-positive}
+  \uses{def:weil-closed-point-euler-factor-family,
+    def:weil-positive-series}
+  \lean{Weil.ClosedPointOrbitInterface.eulerFactorFamily_positive}
+
+  Every $w_c$ has constant coefficient zero.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    lemma:weil-inverse-euler-factor-constant}
+  The interface gives $\deg_C(c)\geq1$, so the inverse Euler-factor
+  constant lemma gives $c(E_{\deg_C(c)})=1$.  Subtracting one gives
+  $c(w_c)=0$.
+\end{proof}
+
+\begin{lemma}[Closed-point components transport to orbit components]
+  \label{lemma:weil-closed-point-euler-component-transport}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-orbit-euler-factor-family,
+    def:weil-closed-point-euler-factor-family}
+  \lean{Weil.ClosedPointOrbitInterface.eulerFactorFamily_component_transport}
+
+  For every closed point $c$,
+  \[
+    u_{\theta_C(c)}=w_c
+    \qquad\text{in }\mathbf Q[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-orbit-euler-factor-family,
+    def:weil-closed-point-euler-factor-family}
+  Unfold the two raw component Definitions.  The left side is
+  $E_{\deg_F(\theta_C(c))}-1$ and the right side is
+  $E_{\deg_C(c)}-1$.  Rewrite the former with the degree-compatibility field
+  $\deg_F(\theta_C(c))=\deg_C(c)$ of the interface.  The two displayed
+  power series are then definitionally identical.
+\end{proof}
+
+\begin{lemma}[Active closed points map into active orbits]
+  \label{lemma:weil-closed-point-active-image-subset}
+  \uses{def:weil-series-agree-through,
+    def:weil-closed-point-orbit-interface,
+    def:weil-orbit-euler-factor-family,
+    def:weil-closed-point-euler-factor-family}
+  \lean{Weil.ClosedPointOrbitInterface.activeClosed_image_subset_activeOrbit}
+
+  For every $N\geq0$,
+  \[
+    \theta_C''\{c\mid w_c\not\equiv_N0\}
+      \subseteq \{O\mid u_O\not\equiv_N0\}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-series-agree-through,
+    lemma:weil-closed-point-euler-component-transport}
+  Take $O$ in the image.  By image membership there is a closed point $c$
+  with $w_c\not\equiv_N0$ and $O=\theta_C(c)$.  Substitute this equality
+  and then substitute
+  $u_{\theta_C(c)}=w_c$ from the component-transport lemma.  The target
+  non-agreement is exactly the source non-agreement.
+\end{proof}
+
+\begin{lemma}[The active closed-point image is finite]
+  \label{lemma:weil-closed-point-active-image-finite}
+  \uses{def:weil-series-agree-through,
+    def:weil-closed-point-orbit-interface,
+    def:weil-orbit-euler-factor-family,
+    def:weil-closed-point-euler-factor-family}
+  \lean{Weil.ClosedPointOrbitInterface.activeClosed_image_finite}
+
+  For every $N\geq0$, the set
+  \[
+    \theta_C''\{c\mid w_c\not\equiv_N0\}
+  \]
+  is finite.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-closed-point-active-image-subset,
+    lemma:weil-orbit-euler-factor-family-locally-finite}
+  The orbit-family local-finiteness lemma makes
+  $\{O\mid u_O\not\equiv_N0\}$ finite.  Apply
+  \texttt{Set.Finite.subset} once, with the subset relation supplied by
+  Lemma~\ref{lemma:weil-closed-point-active-image-subset}.
+\end{proof}
+
+\begin{lemma}[Local finiteness of the closed-point Euler family]
+  \label{lemma:weil-closed-point-euler-factor-family-locally-finite}
+  \uses{def:weil-closed-point-euler-factor-family,
+    def:weil-series-agree-through}
+  \lean{Weil.ClosedPointOrbitInterface.eulerFactorFamily_locallyFinite}
+
+  For every $N\geq0$, only finitely many
+  $c\in\operatorname{ClPt}(C)$ satisfy $w_c\not\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    lemma:weil-closed-point-active-image-finite}
+  Apply \texttt{Set.Finite.of\_finite\_image}.  Its first argument is the
+  finiteness of
+  $\theta_C''\{c\mid w_c\not\equiv_N0\}$ supplied by
+  Lemma~\ref{lemma:weil-closed-point-active-image-finite}.  Its second argument is the restricted
+  injectivity proof
+  $\theta_C.\texttt{injective.injOn}$ supplied by the equivalence field.
+\end{proof}
+
+\begin{definition}[Packaged closed-point Euler family]
+  \label{def:weil-closed-point-euler-locally-finite-family}
+  \uses{def:weil-closed-point-euler-factor-family,
+    def:weil-t-adic-locally-finite-family,
+    lemma:weil-closed-point-euler-factor-family-positive,
+    lemma:weil-closed-point-euler-factor-family-locally-finite}
+  \constructedby{lemma:weil-closed-point-euler-factor-family-positive,
+    lemma:weil-closed-point-euler-factor-family-locally-finite}
+  \lean{Weil.ClosedPointOrbitInterface.eulerFamily}
+
+  Define $\mathcal E_C$ to be the locally finite family indexed by
+  $\operatorname{ClPt}(C)$, with component $w_c$.  Its positive-order field
+  is Lemma~\ref{lemma:weil-closed-point-euler-factor-family-positive}, and
+  its local-finiteness field is
+  Lemma~\ref{lemma:weil-closed-point-euler-factor-family-locally-finite}.
+\end{definition}
+
+\begin{definition}[Closed-point Euler product]
+  \label{def:weil-closed-point-euler-product}
+  \uses{def:weil-closed-point-euler-locally-finite-family,
+    def:weil-locally-finite-product}
+  \lean{Weil.ClosedPointOrbitInterface.eulerProduct}
+
+  Define
+  \[
+    Z_{\mathrm{cl},C}(T):=
+      \prod_{c\in\operatorname{ClPt}(C)}^{\mathrm{lf}}
+        E_{\deg_C(c)}(T).
+  \]
+\end{definition}
+
+\begin{lemma}[Active closed points correspond exactly to active orbits]
+  \label{lemma:weil-closed-point-active-iff-orbit-active}
+  \uses{def:weil-active-index-finset,
+    def:weil-closed-point-euler-locally-finite-family,
+    def:weil-orbit-euler-locally-finite-family}
+  \lean{Weil.ClosedPointOrbitInterface.mem_activeFinset_iff}
+
+  For every $N\geq0$ and every $c\in\operatorname{ClPt}(C)$,
+  \[
+    c\in A_N(\mathcal E_C)
+      \quad\Longleftrightarrow\quad
+    \theta_C(c)\in A_N(\mathcal E_D).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-closed-point-euler-factor-family,
+    def:weil-orbit-euler-factor-family,
+    lemma:weil-active-index-finset-mem}
+  Active membership on the left is
+  $E_{\deg_C(c)}-1\not\equiv_N0$, while active membership on the right is
+  $E_{\deg_F(\theta_C(c))}-1\not\equiv_N0$.  The degree-compatibility
+  field of $C$ identifies the two series, so the two predicates are
+  equivalent.
+\end{proof}
+
+\begin{lemma}[Closed-point and orbit truncated products agree]
+  \label{lemma:weil-closed-point-truncated-product-reindex}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-closed-point-euler-locally-finite-family,
+    def:weil-orbit-euler-locally-finite-family,
+    def:weil-truncated-product}
+  \lean{Weil.ClosedPointOrbitInterface.truncatedProduct_eq}
+
+  For every $N\geq0$,
+  \[
+    \Pi_N(\mathcal E_C)=\Pi_N(\mathcal E_D).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-closed-point-euler-factor-family,
+    def:weil-orbit-euler-factor-family,
+    def:weil-truncated-product,
+    lemma:weil-closed-point-active-iff-orbit-active}
+  Unfold the two truncated products.  Apply
+  \texttt{Finset.prod\_equiv} with the equivalence
+  $\theta_C:\operatorname{ClPt}(C)\simeq\operatorname{Orb}_F(\Omega)$,
+  source finset $A_N(\mathcal E_C)$, and target finset
+  $A_N(\mathcal E_D)$.  Its membership-equivalence argument is
+  Lemma~\ref{lemma:weil-closed-point-active-iff-orbit-active}.  For a source member $c$, the two
+  factors are
+  $E_{\deg_C(c)}$ and $E_{\deg_F(\theta_C(c))}$; the degree-compatibility
+  field of $C$ identifies them.
+\end{proof}
+
+\begin{lemma}[Closed-point and orbit Euler products agree coefficientwise]
+  \label{lemma:weil-closed-point-euler-product-coeff-reindex}
+  \uses{def:weil-closed-point-euler-product,
+    def:weil-orbit-euler-product}
+  \lean{Weil.ClosedPointOrbitInterface.coeff_eulerProduct_eq}
+
+  For every $N\geq0$,
+  \[
+    [T^N]Z_{\mathrm{cl},C}(T)=[T^N]Z_{\mathrm{orb},D}(T).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-locally-finite-product-coeff,
+    lemma:weil-closed-point-truncated-product-reindex}
+  The locally finite product coefficient formula identifies the two
+  displayed coefficients with the degree-$N$ coefficients of
+  $\Pi_N(\mathcal E_C)$ and $\Pi_N(\mathcal E_D)$, respectively.
+  Replace the first truncated product by the second using
+  Lemma~\ref{lemma:weil-closed-point-truncated-product-reindex}.
+\end{proof}
+
+\begin{proposition}[Reindexing the closed-point product by Frobenius orbits]
+  \label{prop:weil-closed-point-euler-product-reindex}
+  \uses{def:weil-closed-point-euler-product,
+    def:weil-orbit-euler-product}
+  \lean{Weil.ClosedPointOrbitInterface.eulerProduct_eq_orbitEulerProduct}
+
+  One has
+  \[
+    Z_{\mathrm{cl},C}(T)=Z_{\mathrm{orb},D}(T).
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-closed-point-euler-product-coeff-reindex}
+  Apply \texttt{PowerSeries.ext}.  The required equality in every degree
+  is Lemma~\ref{lemma:weil-closed-point-euler-product-coeff-reindex}.
+\end{proof}
+
+\begin{theorem}[Closed-point Euler product and finite-extension point counts]
+  \label{thm:weil-closed-point-euler-exponential}
+  \uses{def:weil-finite-extension-point-interface,
+    def:weil-closed-point-orbit-interface,
+    def:weil-finite-extension-counting-zeta-series,
+    def:weil-closed-point-euler-product,
+    def:weil-power-series-over-subring}
+  \lean{Weil.ClosedPointOrbitInterface.eulerProduct_eq_countingZeta}
+
+  Given both a finite-extension point interface $P$ and a closed-point--orbit
+  interface $C$ over the same datum $D$,
+  \[
+    Z_P(T)=Z_{\mathrm{cl},C}(T)
+      =\prod_{c\in\operatorname{ClPt}(C)}^{\mathrm{lf}}
+        E_{\deg_C(c)}(T)
+  \]
+  as an equality in $\mathbf Q[[T]]$.  In addition,
+  \[
+    c(Z_P)=1,
+    \qquad
+    \texttt{HasCoefficientsIn}\!\left(
+      (\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}).\operatorname{range},
+      Z_P
+    \right).
+  \]
+  Thus the common rational series has constant coefficient one and integer
+  coefficients; no typed object of $\mathbf Z[[T]]$ is asserted here.
+\end{theorem}
+
+\begin{proof}
+  \uses{def:weil-power-series-over-subring,
+    prop:weil-finite-extension-zeta-eq-orbit-zeta,
+    thm:weil-orbit-euler-exponential,
+    prop:weil-closed-point-euler-product-reindex,
+    cor:weil-counting-zeta-integral,
+    lemma:weil-orbit-euler-product-constant}
+  Proposition~\ref{prop:weil-finite-extension-zeta-eq-orbit-zeta} identifies
+  $Z_P$ with $Z_{\mathrm{cnt},D}$.  Theorem
+  \ref{thm:weil-orbit-euler-exponential} identifies it with
+  $Z_{\mathrm{orb},D}$, and
+  Proposition~\ref{prop:weil-closed-point-euler-product-reindex} has the
+  orientation $Z_{\mathrm{cl},C}=Z_{\mathrm{orb},D}$; take its symmetry to
+  identify $Z_{\mathrm{orb},D}$ with the closed-point product.  After unfolding
+  Definition~\ref{def:weil-power-series-over-subring}, the integer-coefficient
+  predicate transfers from
+  Corollary~\ref{cor:weil-counting-zeta-integral} across these equalities.
+  The common value equals $Z_{\mathrm{orb},D}$, whose constant coefficient is
+  one by Lemma~\ref{lemma:weil-orbit-euler-product-constant}; hence
+  $c(Z_P)=1$.
+\end{proof}
+
+\begin{lemma}[A quotient by a positive divisor is positive]
+  \label{lemma:weil-positive-divisor-quotient-positive}
+  \uses{}
+  \lean{Weil.natDiv_pos_of_mem_divisors}
+
+  If $0<m$ and $r\in m.\texttt{divisors}$, then $0<m/r$.
+\end{lemma}
+
+\begin{proof}
+  \uses{}
+  The exact theorems \texttt{Nat.divisor\_le} and
+  \texttt{Nat.pos\_of\_mem\_divisors} give respectively $r\leq m$ and
+  $0<r$.  Apply \texttt{Nat.div\_pos} to these two inequalities.
+\end{proof}
+
+\begin{corollary}[Closed points recovered from finite-extension point counts]
+  \label{cor:weil-closed-point-mobius-recovery}
+  \uses{def:weil-finite-extension-point-count,
+    def:weil-closed-point-count,
+    lemma:weil-positive-divisor-quotient-positive}
+  \lean{Weil.ClosedPointOrbitInterface.closedPointCount_eq_mobius}
+
+  Given a finite-extension point interface $P$ and a closed-point--orbit
+  interface $C$ over the same datum $D$, for $m\geq1$ one has
+  \[
+    (b_m(C):\mathbf Q)
+      =\frac1{(m:\mathbf Q)}
+        \sum_{r\mid m}\mu(r)\,(N_{m/r}(P):\mathbf Q)
+  \]
+  in $\mathbf Q$.
+\end{corollary}
+
+\begin{proof}
+  \uses{lemma:weil-finite-extension-point-count-eq-fixed,
+    lemma:weil-closed-point-count-eq-orbit-count,
+    cor:weil-orbit-count-mobius-recovery,
+    lemma:weil-positive-divisor-quotient-positive}
+  Lemma~\ref{lemma:weil-closed-point-count-eq-orbit-count} replaces
+  $b_m(C)$ by $a_m(D)$ in $\mathbf Q$.  Apply
+  Corollary~\ref{cor:weil-orbit-count-mobius-recovery}.  For
+  $r\in m.\texttt{divisors}$,
+  Lemma~\ref{lemma:weil-positive-divisor-quotient-positive} gives
+  $1\leq m/r$; hence
+  Lemma~\ref{lemma:weil-finite-extension-point-count-eq-fixed} applies at
+  $m/r$.  Cast each resulting natural-number equality with
+  \texttt{congrArg} for $k\mapsto(k:\mathbf Q)$, and use
+  \texttt{Finset.sum\_congr} to replace the summands
+  $(N_{m/r}(D):\mathbf Q)$ by $(N_{m/r}(P):\mathbf Q)$ throughout the finite
+  divisor sum.  The earlier replacement $b_m(C)=a_m(D)$ is cast in the same
+  explicit way.
+\end{proof}
+
 
 \end{document}
