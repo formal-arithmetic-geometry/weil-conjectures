@@ -4474,7 +4474,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Scheme-theoretic density survives flat pullback]
   \label{lemma:nagata-dense-flat-pullback}
   \uses{def:nagata-scheme-theoretic-image}
-  \lean{Scheme.Hom.schemeDense_baseChange_of_flat}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isPullback}
 
   Let \(h\colon U\to X\) be quasi-compact and quasi-separated with
   scheme-theoretic image \(X\), and let
@@ -5924,7 +5924,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Dense image into a reduced scheme is schematically dense]
   \label{lemma:nagata-reduced-dense-image-schematic}
   \uses{def:nagata-scheme-theoretic-image}
-  \lean{Scheme.Hom.schemeTheoreticImage_eq_top_of_reduced_denseRange}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isDominant}
 
   Let $X$ be reduced and let $h\colon U\to X$ be quasi-compact and
   quasi-separated with dense topological image.  Then the image inclusion
@@ -5941,7 +5941,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[A field-valued point has a flat polynomial presentation]
   \label{lemma:nagata-field-point-polynomial-presentation}
-  \lean{Algebra.exists_polynomial_flat_surjection_to_field}
 
   For every ring homomorphism $B\to K$ with $K$ a field, there is a
   polynomial $B$-algebra $P$ and a surjective $B$-algebra map $P\to K$.
@@ -6007,7 +6006,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0894}{Tag 0894}]{stacks-project}}]
   \label{lemma:nagata-dense-source-valuative}
-  \lean{AlgebraicGeometry.ValuativeCriterion.universallyClosed_of_isDominant}
+  \lean{AlgebraicGeometry.ValuativeCriterion.universallyClosed_of_isDominant,
+    AlgebraicGeometry.ValuativeCriterion.isSeparated_of_isDominant}
 
   Let \(f\colon X\to S\) be quasi-compact and let
   \(h\colon U\to X\) be quasi-compact and quasi-separated,
@@ -6025,16 +6025,28 @@ correction explicit before it is sheafified and glued.
 \begin{remark}[Formalization route]
   In Lean the two conclusions are split into
   \texttt{ValuativeCriterion.universallyClosed\_of\_isDominant} and
-  \texttt{ValuativeCriterion.isSeparated\_of\_isDominant}; both are currently
-  stated with \texttt{sorry}.  The stated ingredients — the valuation probe
+  \texttt{ValuativeCriterion.isSeparated\_of\_isDominant}; both are fully
+  proved.  The ingredients — the valuation probe
   (Tag 02JQ, \texttt{nonempty\_valuationProbe}), the
   composite valuation ring (\texttt{ValuationSubring.comapResidue}), the
   intersection lemma (Tag 052K,
   \texttt{ValuationSubring.comap\_eq\_of\_le\_comap}) and the extension lemma
   (Tag 00IA, \texttt{ValuationSubring.exists\_comap\_eq}, via
-  Mathlib's Chevalley extension theorem rather than the Zorn argument) — are
-  all proved; the valuation-theoretic ingredients live in the
-  \texttt{WeilConjectures.Mathlib} helper files.
+  Mathlib's Chevalley extension theorem rather than the Zorn argument) — live
+  in the \texttt{WeilConjectures.Mathlib} helper files.  The formalized proof
+  deviates from the Stacks Project text in two reductions: instead of
+  replacing $U,X,S$ by their reductions, the morphism $h$ is factored through
+  its scheme-theoretic image — the factor map \texttt{Scheme.Hom.toImage} is
+  scheme-theoretically dominant with no reducedness hypothesis, and the
+  valuative data factors through the image because $\operatorname{Spec}$ of a
+  valuation ring or of a field is reduced
+  (\texttt{Scheme.IdealSheafData.le\_ker\_of\_range\_subset\_support}); and the
+  polynomial presentation of
+  \Cref{lemma:nagata-field-point-polynomial-presentation} is inlined via
+  \texttt{MvPolynomial.eval₂Hom}.  The flat-pullback and reduced-density
+  inputs (\Cref{lemma:nagata-dense-flat-pullback},
+  \Cref{lemma:nagata-reduced-dense-image-schematic}) are provided by Mathlib's
+  \texttt{IsSchemeTheoreticallyDominant} API.
 \end{remark}
 
 \begin{proof}
