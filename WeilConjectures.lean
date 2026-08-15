@@ -38,6 +38,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunc
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Exp
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.Derived
