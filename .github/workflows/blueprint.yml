@@ -19,8 +19,12 @@ on:
 permissions:
   contents: write
 
+# `pull_request_target` runs in the context of the base branch, so `github.ref`
+# is `refs/heads/master` for every PR: keying on it alone would make all PR runs
+# and the push-to-master run share one group and cancel each other. The PR
+# number is empty for `push`/`workflow_dispatch`, which then fall back to the ref.
 concurrency:
-  group: ${{ github.repository }}-blueprint-${{ github.ref }}
+  group: ${{ github.repository }}-blueprint-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
