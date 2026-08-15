@@ -26,14 +26,14 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInject
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.Compactification.SchemeTheoreticImage
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
+public import WeilConjectures.Mathlib.Algebra.Ring.NonZeroDivisors
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous

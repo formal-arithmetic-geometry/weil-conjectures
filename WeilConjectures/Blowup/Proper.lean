@@ -30,7 +30,8 @@ restricts to the affine blow-up over every affine open.
   finite-type quasi-coherent ideal is proper
   (blueprint: `thm:nagata-global-blowup-proper`). The finite-type hypothesis is
   phrased as finite generation of the ideal of sections on every affine open, which is
-  `Scheme.IdealSheafData.FiniteType` of `WeilConjectures.Blowup.Exceptional`.
+  `Scheme.IdealSheafData.FiniteType` of
+  `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic`.
 
 -/
 
