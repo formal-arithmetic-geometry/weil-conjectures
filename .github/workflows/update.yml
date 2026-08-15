@@ -5,6 +5,13 @@ on:
   #   - cron: "0 8 * * *" # Every day at 08:00 AM UTC (see https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule)
   workflow_dispatch:    # Allows the workflow to be triggered manually via the GitHub interface
 
+# Least privilege by default, so `check-for-updates` — which only discovers new
+# mathlib tags and emits outputs — gets a read-only token instead of inheriting
+# the repository default. `do-update` opts back in to what it needs below; a
+# job-level block replaces this default rather than merging with it.
+permissions:
+  contents: read
+
 jobs:
   check-for-updates: # Determines which updates to apply.
     runs-on: self-hosted
