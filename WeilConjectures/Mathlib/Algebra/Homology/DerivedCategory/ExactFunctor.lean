@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 
 /-!
 # Functoriality of `mapDerivedCategory`
@@ -21,6 +22,13 @@ For exact functors between abelian categories, the induced functor
 - `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
   `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
   isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility`.
+- `CategoryTheory.Functor.mapDerivedCategoryPlusNatIso` and
+  `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso`: the corresponding
+  functoriality of `mapDerivedCategoryPlus`, obtained by cancelling the fully faithful
+  inclusions `DerivedCategory.Plus.ι`.
+- `CategoryTheory.Functor.mapDerivedCategoryPlusSingleFunctor`: the compatibility of
+  `mapDerivedCategoryPlus` with the single functors of the bounded below derived
+  categories.
 -/
 
 @[expose] public section
@@ -110,6 +118,56 @@ noncomputable def mapDerivedCategoryPlusCompatibility :
     F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ≅
       DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory :=
   Iso.refl _
+
+/-- An isomorphism `F ≅ G` of exact functors between abelian categories induces an
+isomorphism `F.mapDerivedCategoryPlus ≅ G.mapDerivedCategoryPlus` of the functors
+induced on the bounded below derived categories: the restriction of
+`Functor.mapDerivedCategoryNatIso` along the inclusions `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusNatIso {F G : C ⥤ D} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) :
+    F.mapDerivedCategoryPlus ≅ G.mapDerivedCategoryPlus :=
+  fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    (F.mapDerivedCategoryPlusCompatibility ≪≫
+      isoWhiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryNatIso e) ≪≫
+      G.mapDerivedCategoryPlusCompatibility.symm)
+
+/-- The composition isomorphism
+`(F ⋙ G).mapDerivedCategoryPlus ≅ F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus`
+for exact functors between abelian categories: the restriction of
+`Functor.mapDerivedCategoryCompIso` along the inclusions `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusCompIso (F : C ⥤ D) (G : D ⥤ E)
+    [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+    (F ⋙ G).mapDerivedCategoryPlus ≅
+      F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus :=
+  fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    ((F ⋙ G).mapDerivedCategoryPlusCompatibility ≪≫
+      isoWhiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight F.mapDerivedCategoryPlusCompatibility.symm G.mapDerivedCategory ≪≫
+      Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft F.mapDerivedCategoryPlus
+        G.mapDerivedCategoryPlusCompatibility.symm ≪≫
+      (Functor.associator _ _ _).symm)
+
+/-- `DerivedCategory.Plus.singleFunctor` commutes with an exact functor `F` and
+`F.mapDerivedCategoryPlus`: the restriction of `Functor.mapDerivedCategorySingleFunctor`
+along the inclusions `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusSingleFunctor (n : ℤ) :
+    DerivedCategory.Plus.singleFunctor C n ⋙ F.mapDerivedCategoryPlus ≅
+      F ⋙ DerivedCategory.Plus.singleFunctor D n :=
+  fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    (Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C n)
+        F.mapDerivedCategoryPlusCompatibility ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight (DerivedCategory.Plus.singleFunctorιIso C n)
+        F.mapDerivedCategory ≪≫
+      F.mapDerivedCategorySingleFunctor n ≪≫
+      isoWhiskerLeft F (DerivedCategory.Plus.singleFunctorιIso D n).symm ≪≫
+      (Functor.associator _ _ _).symm)
 
 end Plus
 
