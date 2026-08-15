@@ -44,6 +44,8 @@ public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.ClosedPointInterfaces
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.EulerFactors
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Exp
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.IntegralEulerFamilies
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.LiteralIntegralRealization
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.OrbitEulerProducts
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.DerivedCategory.Constructible

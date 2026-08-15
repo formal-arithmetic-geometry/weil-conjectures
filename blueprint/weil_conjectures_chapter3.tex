@@ -4853,5 +4853,1531 @@ $P:\texttt{Weil.FiniteExtensionPointInterface }D$.
   explicit way.
 \end{proof}
 
+\section{Integral Euler-family packages for the literal lift}
+\label{sec:weil-integral-euler-family-packages}
+
+Throughout this section the coefficient ring is exactly $\mathbf Z$.  These
+declarations instantiate only the coefficient-ring-generic definitions and
+lemmas above; no formal logarithm, division by a positive integer, or
+$\mathbf Q$-algebra structure is used.
+
+\paragraph{Formal integral-family context.}
+Every declaration in this section involving orbit or degree data is
+universally quantified over an explicit parameter
+$D:\texttt{Weil.FiniteOrbitFrobeniusData}$; write
+$\Omega:=D.\texttt{points}$ and $F:=D.\texttt{frobenius}$.  Every declaration
+involving closed points additionally fixes
+$C:\texttt{Weil.ClosedPointOrbitInterface }D$.
+
+\begin{definition}[Raw integer orbit Euler-factor family]
+  \label{def:weil-integer-orbit-euler-factor-family}
+  \uses{def:weil-frobenius-orbit-type,
+    def:weil-frobenius-orbit-degree,
+    def:weil-integral-inverse-euler-factor}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerFactorFamily}
+
+  For $O\in\operatorname{Orb}_F(\Omega)$, define the series
+  \[
+    u_O^{\mathbf Z}(T):=
+      E_{\deg_F(O)}^{\mathbf Z}(T)-1\in\mathbf Z[[T]],
+  \]
+  where the superscript records that the inverse Euler factor is formed over
+  $\mathbf Z$.
+\end{definition}
+
+\begin{lemma}[Positive order of every integer orbit component]
+  \label{lemma:weil-integer-orbit-euler-factor-family-positive}
+  \uses{def:weil-integer-orbit-euler-factor-family,
+    def:weil-positive-series}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerFactorFamily_positive}
+
+  For every orbit $O$, one has $c(u_O^{\mathbf Z})=0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-orbit-euler-factor-family,
+    lemma:weil-frobenius-orbit-degree-positive,
+    lemma:weil-integral-inverse-euler-factor-initial-vanishing}
+  The orbit degree $m=\deg_F(O)$ is positive.  Instantiate the constant-
+  coefficient conclusion of the raw integral initial-vanishing lemma at this
+  $m$.  Its series $E_m^{\mathbf Z}-1$ is exactly $u_O^{\mathbf Z}$ after
+  unfolding the raw component Definition.
+\end{proof}
+
+\begin{lemma}[Local finiteness of the integer orbit components]
+  \label{lemma:weil-integer-orbit-euler-factor-family-locally-finite}
+  \uses{def:weil-integer-orbit-euler-factor-family,
+    def:weil-series-agree-through}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerFactorFamily_locallyFinite}
+
+  For every $N\geq0$, the set
+  \[
+    \left\{O\in\operatorname{Orb}_F(\Omega)\mid
+      u_O^{\mathbf Z}\not\equiv_N0\right\}
+  \]
+  is finite.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-orbit-euler-factor-family,
+    lemma:weil-frobenius-orbit-degree-positive,
+    lemma:weil-integral-inverse-euler-factor-initial-vanishing,
+    lemma:weil-bounded-frobenius-orbit-finset-mem}
+  If $N<\deg_F(O)$, the raw integral initial-vanishing lemma gives
+  $u_O^{\mathbf Z}\equiv_N0$.  Hence every active orbit
+  has degree at most $N$.  For $N=0$ there is no such orbit because orbit
+  degrees are positive.  For $N\geq1$, the bounded-orbit membership lemma
+  gives
+  \[
+    \{O\mid u_O^{\mathbf Z}\not\equiv_N0\}
+      \subseteq\uparrow\!\mathcal O_{\leq N}.
+  \]
+  The set on the right is finite as the coercion of a finset, so
+  \texttt{Set.Finite.subset} proves the claim.
+\end{proof}
+
+\begin{definition}[Packaged integer orbit Euler family]
+  \label{def:weil-integer-orbit-euler-locally-finite-family}
+  \uses{def:weil-integer-orbit-euler-factor-family,
+    def:weil-t-adic-locally-finite-family,
+    lemma:weil-integer-orbit-euler-factor-family-positive,
+    lemma:weil-integer-orbit-euler-factor-family-locally-finite}
+  \constructedby{lemma:weil-integer-orbit-euler-factor-family-positive,
+    lemma:weil-integer-orbit-euler-factor-family-locally-finite}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerFamily}
+
+  Instantiate Definition~\ref{def:weil-t-adic-locally-finite-family} with the
+  explicit index parameter $I:=\operatorname{Orb}_F(\Omega)$.  Define
+  $\mathcal E_D^{\mathbf Z}$ by assigning its three record fields
+  \[
+    \begin{aligned}
+      u(O)&=u_O^{\mathbf Z},\\
+      h_{\mathrm{pos}}&=
+        \text{Lemma~\ref{lemma:weil-integer-orbit-euler-factor-family-positive}},\\
+      h_{\mathrm{fin}}&=
+        \text{Lemma~\ref{lemma:weil-integer-orbit-euler-factor-family-locally-finite}}.
+    \end{aligned}
+  \]
+\end{definition}
+
+\begin{definition}[Raw integer degree-grouped Euler-factor family]
+  \label{def:weil-integer-degree-euler-factor-family}
+  \uses{def:weil-positive-natural-degree-index,
+    def:weil-frobenius-orbit-count,
+    def:weil-integral-inverse-euler-factor}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerFactorFamily}
+
+  For $m\in\mathbf N_{>0}$, define
+  \[
+    v_m^{\mathbf Z}(T):=
+      \left(E_m^{\mathbf Z}(T)\right)^{a_m(D)}-1
+      \in\mathbf Z[[T]].
+  \]
+\end{definition}
+
+\begin{lemma}[Positive order of every integer degree component]
+  \label{lemma:weil-integer-degree-euler-factor-family-positive}
+  \uses{def:weil-integer-degree-euler-factor-family,
+    def:weil-positive-series}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerFactorFamily_positive}
+
+  For every $m\in\mathbf N_{>0}$, one has $c(v_m^{\mathbf Z})=0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-degree-euler-factor-family,
+    lemma:weil-integral-inverse-euler-factor-constant}
+  The raw integral constant-coefficient lemma gives
+  $c(E_m^{\mathbf Z})=1$.
+  The degree-zero multiplication formula, iterated $a_m(D)$ times, gives
+  $c((E_m^{\mathbf Z})^{a_m(D)})=1^{a_m(D)}=1$.  Subtracting the constant
+  series one gives $c(v_m^{\mathbf Z})=0$.
+\end{proof}
+
+\begin{lemma}[Local finiteness of the integer degree components]
+  \label{lemma:weil-integer-degree-euler-factor-family-locally-finite}
+  \uses{def:weil-integer-degree-euler-factor-family,
+    def:weil-series-agree-through}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerFactorFamily_locallyFinite}
+
+  For every $N\geq0$, the set
+  \[
+    \left\{m\in\mathbf N_{>0}\mid
+      v_m^{\mathbf Z}\not\equiv_N0\right\}
+  \]
+  is finite.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-degree-euler-factor-family,
+    def:weil-positive-degree-index-finset,
+    lemma:weil-integral-inverse-euler-factor-initial-vanishing,
+    lemma:weil-series-agree-through-operations,
+    lemma:weil-series-agree-through-pow,
+    lemma:weil-series-agree-through-sub,
+    lemma:weil-positive-degree-index-finset-mem}
+  Fix $N$ and let $m>N$.  Raw integral initial vanishing gives
+  $E_m^{\mathbf Z}-1\equiv_N0$.  Add one to both sides to obtain
+  $E_m^{\mathbf Z}\equiv_N1$, apply preservation under the natural power
+  $a_m(D)$, and subtract one.  The result is
+  $v_m^{\mathbf Z}\equiv_N0$.  By
+  Lemma~\ref{lemma:weil-positive-degree-index-finset-mem}, this gives
+  \[
+    \{m\mid v_m^{\mathbf Z}\not\equiv_N0\}\subseteq\uparrow I_N^+.
+  \]
+  The right side is finite because $I_N^+$ is the finset of
+  Definition~\ref{def:weil-positive-degree-index-finset}; apply
+  \texttt{Set.Finite.subset}.
+\end{proof}
+
+\begin{definition}[Packaged integer degree-grouped Euler family]
+  \label{def:weil-integer-degree-euler-locally-finite-family}
+  \uses{def:weil-positive-natural-degree-index,
+    def:weil-integer-degree-euler-factor-family,
+    def:weil-t-adic-locally-finite-family,
+    lemma:weil-integer-degree-euler-factor-family-positive,
+    lemma:weil-integer-degree-euler-factor-family-locally-finite}
+  \constructedby{lemma:weil-integer-degree-euler-factor-family-positive,
+    lemma:weil-integer-degree-euler-factor-family-locally-finite}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerFamily}
+
+  Instantiate Definition~\ref{def:weil-t-adic-locally-finite-family} with the
+  explicit index parameter $I:=\mathbf N_{>0}$.  Define
+  $\mathcal G_D^{\mathbf Z}$ by assigning its three record fields
+  \[
+    \begin{aligned}
+      u(m)&=v_m^{\mathbf Z},\\
+      h_{\mathrm{pos}}&=
+        \text{Lemma~\ref{lemma:weil-integer-degree-euler-factor-family-positive}},\\
+      h_{\mathrm{fin}}&=
+        \text{Lemma~\ref{lemma:weil-integer-degree-euler-factor-family-locally-finite}}.
+    \end{aligned}
+  \]
+\end{definition}
+
+\begin{definition}[Raw integer closed-point Euler-factor family]
+  \label{def:weil-integer-closed-point-euler-factor-family}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-integral-inverse-euler-factor}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFactorFamily}
+
+  For $c\in\operatorname{ClPt}(C)$, define
+  \[
+    w_c^{\mathbf Z}(T):=
+      E_{\deg_C(c)}^{\mathbf Z}(T)-1\in\mathbf Z[[T]].
+  \]
+\end{definition}
+
+\begin{lemma}[Positive order of every integer closed-point component]
+  \label{lemma:weil-integer-closed-point-euler-factor-family-positive}
+  \uses{def:weil-integer-closed-point-euler-factor-family,
+    def:weil-positive-series}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFactorFamily_positive}
+
+  For every closed point $c$, one has $c(w_c^{\mathbf Z})=0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-integer-closed-point-euler-factor-family,
+    lemma:weil-integral-inverse-euler-factor-initial-vanishing}
+  The interface supplies $\deg_C(c)\geq1$.  Instantiate the constant-
+  coefficient conclusion of raw integral initial vanishing at
+  $m=\deg_C(c)$; the displayed difference is $w_c^{\mathbf Z}$ after
+  unfolding the raw component Definition.
+\end{proof}
+
+\begin{lemma}[Integer closed-point components transport to orbit components]
+  \label{lemma:weil-integer-closed-point-euler-component-transport}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-integer-orbit-euler-factor-family,
+    def:weil-integer-closed-point-euler-factor-family}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFactorFamily_component_transport}
+
+  For every closed point $c$,
+  \[
+    u_{\theta_C(c)}^{\mathbf Z}=w_c^{\mathbf Z}
+    \qquad\text{in }\mathbf Z[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    def:weil-integer-orbit-euler-factor-family,
+    def:weil-integer-closed-point-euler-factor-family}
+  Unfold both raw integer component Definitions.  The left side is
+  $E_{\deg_F(\theta_C(c))}^{\mathbf Z}-1$ and the right side is
+  $E_{\deg_C(c)}^{\mathbf Z}-1$.  Rewrite the former using
+  $\deg_F(\theta_C(c))=\deg_C(c)$ from the interface.  The resulting
+  integral power series are definitionally identical.
+\end{proof}
+
+\begin{lemma}[Active integer closed points map into active integer orbits]
+  \label{lemma:weil-integer-closed-point-active-image-subset}
+  \uses{def:weil-series-agree-through,
+    def:weil-closed-point-orbit-interface,
+    def:weil-integer-orbit-euler-factor-family,
+    def:weil-integer-closed-point-euler-factor-family}
+  \lean{Weil.ClosedPointOrbitInterface.integerActiveClosed_image_subset_activeOrbit}
+
+  For every $N\geq0$,
+  \[
+    \theta_C''\{c\mid w_c^{\mathbf Z}\not\equiv_N0\}
+      \subseteq
+    \{O\mid u_O^{\mathbf Z}\not\equiv_N0\}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-series-agree-through,
+    lemma:weil-integer-closed-point-euler-component-transport}
+  Take $O$ in the displayed image.  Its membership supplies a closed point
+  $c$ with $w_c^{\mathbf Z}\not\equiv_N0$ and $O=\theta_C(c)$.  Substitute
+  $O=\theta_C(c)$ and then
+  $u_{\theta_C(c)}^{\mathbf Z}=w_c^{\mathbf Z}$ from
+  Lemma~\ref{lemma:weil-integer-closed-point-euler-component-transport}.
+  The target non-agreement is the given source
+  non-agreement.
+\end{proof}
+
+\begin{lemma}[The active integer closed-point image is finite]
+  \label{lemma:weil-integer-closed-point-active-image-finite}
+  \uses{def:weil-series-agree-through,
+    def:weil-closed-point-orbit-interface,
+    def:weil-integer-orbit-euler-factor-family,
+    def:weil-integer-closed-point-euler-factor-family}
+  \lean{Weil.ClosedPointOrbitInterface.integerActiveClosed_image_finite}
+
+  For every $N\geq0$, the set
+  \[
+    \theta_C''\{c\mid w_c^{\mathbf Z}\not\equiv_N0\}
+  \]
+  is finite.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-integer-closed-point-active-image-subset,
+    lemma:weil-integer-orbit-euler-factor-family-locally-finite}
+  The integer-orbit local-finiteness lemma makes
+  $\{O\mid u_O^{\mathbf Z}\not\equiv_N0\}$ finite.  Apply
+  \texttt{Set.Finite.subset} once, using
+  Lemma~\ref{lemma:weil-integer-closed-point-active-image-subset}.
+\end{proof}
+
+\begin{lemma}[Local finiteness of the integer closed-point components]
+  \label{lemma:weil-integer-closed-point-euler-factor-family-locally-finite}
+  \uses{def:weil-integer-closed-point-euler-factor-family,
+    def:weil-series-agree-through}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFactorFamily_locallyFinite}
+
+  For every $N\geq0$, the set
+  \[
+    \left\{c\in\operatorname{ClPt}(C)\mid
+      w_c^{\mathbf Z}\not\equiv_N0\right\}
+  \]
+  is finite.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-closed-point-orbit-interface,
+    lemma:weil-integer-closed-point-active-image-finite}
+  Apply \texttt{Set.Finite.of\_finite\_image}.  Its first argument is the
+  finiteness proof from
+  Lemma~\ref{lemma:weil-integer-closed-point-active-image-finite} for
+  $\theta_C''\{c\mid w_c^{\mathbf Z}\not\equiv_N0\}$.  Its second
+  argument is
+  $\theta_C.\texttt{injective.injOn}$, the restriction of the equivalence's
+  injectivity field.
+\end{proof}
+
+\begin{definition}[Packaged integer closed-point Euler family]
+  \label{def:weil-integer-closed-point-euler-locally-finite-family}
+  \uses{def:weil-integer-closed-point-euler-factor-family,
+    def:weil-t-adic-locally-finite-family,
+    lemma:weil-integer-closed-point-euler-factor-family-positive,
+    lemma:weil-integer-closed-point-euler-factor-family-locally-finite}
+  \constructedby{lemma:weil-integer-closed-point-euler-factor-family-positive,
+    lemma:weil-integer-closed-point-euler-factor-family-locally-finite}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFamily}
+
+  Instantiate Definition~\ref{def:weil-t-adic-locally-finite-family} with the
+  explicit index parameter $I:=\operatorname{ClPt}(C)$.  Define
+  $\mathcal E_C^{\mathbf Z}$ by assigning its three record fields
+  \[
+    \begin{aligned}
+      u(c)&=w_c^{\mathbf Z},\\
+      h_{\mathrm{pos}}&=
+        \text{Lemma~\ref{lemma:weil-integer-closed-point-euler-factor-family-positive}},\\
+      h_{\mathrm{fin}}&=
+        \text{Lemma~\ref{lemma:weil-integer-closed-point-euler-factor-family-locally-finite}}.
+    \end{aligned}
+  \]
+\end{definition}
+
+\section{Literal integral power-series realization}
+\label{sec:weil-literal-integral-realization-promoted}
+
+Every coefficient-ring comparison in this section uses the forward map
+$\mathbf Z[[T]]\to\mathbf Q[[T]]$ defined below.  No map in the reverse
+direction and no coefficientwise choice of integral preimages is introduced.
+
+\paragraph{Formal literal-realization context.}
+Every declaration in this section involving orbit or degree data is
+universally quantified over an explicit parameter
+$D:\texttt{Weil.FiniteOrbitFrobeniusData}$; write
+$\Omega:=D.\texttt{points}$ and $F:=D.\texttt{frobenius}$.  Every declaration
+involving closed points additionally fixes
+$C:\texttt{Weil.ClosedPointOrbitInterface }D$.
+
+\begin{definition}[Integer-to-rational power-series map]
+  \label{def:weil-power-series-integer-to-rational}
+  \uses{}
+  \lean{Weil.powerSeriesIntegerToRational}
+
+  Define the ring homomorphism
+  \[
+    \iota_*\colon\mathbf Z[[T]]\longrightarrow\mathbf Q[[T]],
+    \qquad
+    \iota_*:=
+      \texttt{PowerSeries.map}
+        (\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}).
+  \]
+\end{definition}
+
+\begin{lemma}[Coefficient formula for integer-to-rational scalar extension]
+  \label{lemma:weil-power-series-integer-to-rational-coeff}
+  \uses{def:weil-power-series-integer-to-rational}
+  \lean{Weil.powerSeriesIntegerToRational_coeff}
+
+  For \(A\in\mathbf Z[[T]]\) and \(n\geq0\),
+  \[
+    [T^n]\iota_*(A)
+      =\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}([T^n]A).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-power-series-integer-to-rational}
+  Apply the exact theorem \texttt{PowerSeries.coeff\_map} with
+  \(R=\mathbf Z\), \(S=\mathbf Q\),
+  \(f=\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}\), degree \(n\), and
+  series \(A\).  Its conclusion is the displayed equality.
+\end{proof}
+
+\begin{lemma}[Injectivity of integer-to-rational scalar extension]
+  \label{lemma:weil-power-series-integer-to-rational-injective}
+  \uses{def:weil-power-series-integer-to-rational}
+  \lean{Weil.powerSeriesIntegerToRational_injective}
+
+  The map \(\iota_*\) is injective.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-power-series-integer-to-rational-coeff}
+  Let \(\iota_*(A)=\iota_*(B)\).  Apply
+  \(\texttt{PowerSeries.coeff }n\) for an arbitrary \(n\).
+  The coefficient formula rewrites the resulting equality as
+  \[
+    ([T^n]A:\mathbf Q)=([T^n]B:\mathbf Q).
+  \]
+  The exact theorem \texttt{Int.cast\_injective} gives
+  \([T^n]A=[T^n]B\).  Apply \texttt{PowerSeries.ext}.
+\end{proof}
+
+\paragraph{Formal generic integral-family context.}
+For the generic integral-family subchain immediately below, ending before
+the specialization to orbit, degree, and closed-point families, whenever the
+symbols $I$, $u$, or $u_i$ occur fix explicit parameters
+$I:\texttt{Type u}$ and
+$u:\texttt{Weil.TAdicallyLocallyFiniteFamily }\mathbf Z\,I$.
+Declarations in that interval which do not mention these parameters remain
+independent of them.
+
+\begin{definition}[Raw rational components of an integral locally finite family]
+  \label{def:weil-integer-family-rational-components}
+  \uses{def:weil-t-adic-locally-finite-family,
+    def:weil-power-series-integer-to-rational}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.rationalComponents}
+
+  Let \(u\) be a \(T\)-adically locally finite family over \(\mathbf Z\), with
+  index type \(I\) and components \(u_i\in\mathbf Z[[T]]\).  Define its raw
+  rational component family by
+  \[
+    u_i^{\mathbf Q}:=\iota_*(u_i)\in\mathbf Q[[T]]
+    \qquad(i\in I).
+  \]
+\end{definition}
+
+\begin{lemma}[Scalar extension reflects finite-degree agreement]
+  \label{lemma:weil-power-series-integer-to-rational-agree-through}
+  \uses{def:weil-power-series-integer-to-rational,
+    def:weil-series-agree-through}
+  \lean{Weil.powerSeriesIntegerToRational_agreeThrough}
+
+  For \(A,B\in\mathbf Z[[T]]\) and \(N\geq0\),
+  \[
+    A\equiv_NB
+      \quad\Longleftrightarrow\quad
+    \iota_*(A)\equiv_N\iota_*(B).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-series-agree-through,
+    lemma:weil-power-series-integer-to-rational-coeff}
+  Suppose first that \(A\equiv_NB\), and fix \(j\leq N\).
+  Rewrite both mapped coefficients with the coefficient formula and map the
+  equality \([T^j]A=[T^j]B\) into \(\mathbf Q\).
+  Conversely, suppose that the mapped series agree through \(N\), and fix
+  \(j\leq N\).  Rewrite their degree-\(j\) coefficient equality with the same
+  coefficient formula.  Apply \texttt{Int.cast\_injective} to recover
+  \([T^j]A=[T^j]B\).  These are the two implications in the definition of
+  agreement through \(N\).
+\end{proof}
+
+\begin{lemma}[Coefficient formula for a mapped component]
+  \label{lemma:weil-integer-family-rational-components-coeff}
+  \uses{def:weil-integer-family-rational-components}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.coeff_rationalComponents}
+
+  For every \(i\in I\) and \(n\geq0\),
+  \[
+    [T^n]u_i^{\mathbf Q}
+      =\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}([T^n]u_i).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-family-rational-components,
+    lemma:weil-power-series-integer-to-rational-coeff}
+  Unfold \(u_i^{\mathbf Q}\) and apply the scalar-extension coefficient
+  formula to \(u_i\) at degree \(n\).
+\end{proof}
+
+\begin{lemma}[Mapped components retain positive order]
+  \label{lemma:weil-integer-family-rational-components-positive}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-positive-series}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.rationalComponents_positive}
+
+  For every \(i\in I\), one has \(c(u_i^{\mathbf Q})=0\).
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-t-adic-locally-finite-family,
+    lemma:weil-integer-family-rational-components-coeff}
+  Put \(n=0\) in the mapped-component coefficient formula.  The integral
+  family stores \(c(u_i)=0\), so the right side is the image of \(0\), hence
+  is \(0\).
+\end{proof}
+
+\begin{lemma}[Activity is preserved by integer-to-rational scalar extension]
+  \label{lemma:weil-integer-family-rational-components-active-iff}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-series-agree-through}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.rationalComponents_active_iff}
+
+  For every \(i\in I\) and \(N\geq0\),
+  \[
+    u_i\not\equiv_N0
+      \quad\Longleftrightarrow\quad
+    u_i^{\mathbf Q}\not\equiv_N0.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-power-series-integer-to-rational,
+    lemma:weil-power-series-integer-to-rational-agree-through}
+  Apply the agreement-reflection lemma to \(A=u_i\) and \(B=0\).
+  The right side it supplies is
+  \(\iota_*(u_i)\equiv_N\iota_*(0)\).
+  Because \(\iota_*\) is a ring homomorphism,
+  \(\iota_*(0)=0\); unfold \(u_i^{\mathbf Q}\).  Negating the resulting
+  equivalence gives the displayed active-index equivalence.
+\end{proof}
+
+\begin{lemma}[Equality of active index sets before and after scalar extension]
+  \label{lemma:weil-integer-family-rational-components-active-set}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-series-agree-through}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.rationalComponents_activeSet}
+
+  For every \(N\geq0\),
+  \[
+    \{i\in I\mid u_i\not\equiv_N0\}
+      =
+    \{i\in I\mid u_i^{\mathbf Q}\not\equiv_N0\}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-integer-family-rational-components-active-iff}
+  Apply \texttt{Set.ext} and fix \(i\).  Membership in the two displayed
+  sets is exactly the two sides of the active-index equivalence.
+\end{proof}
+
+\begin{lemma}[Local finiteness after integer-to-rational scalar extension]
+  \label{lemma:weil-integer-family-rational-components-locally-finite}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-series-agree-through,
+    def:weil-t-adic-locally-finite-family}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.rationalComponents_locallyFinite}
+
+  For every \(N\geq0\), the set
+  \[
+    \{i\in I\mid u_i^{\mathbf Q}\not\equiv_N0\}
+  \]
+  is finite.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-t-adic-locally-finite-family,
+    lemma:weil-integer-family-rational-components-active-set}
+  The integral locally finite family stores finiteness of
+  \(\{i\mid u_i\not\equiv_N0\}\).  Rewrite that set using
+  Lemma~\ref{lemma:weil-integer-family-rational-components-active-set}.
+  The rewritten finiteness proof has exactly the
+  displayed target.
+\end{proof}
+
+\begin{definition}[Packaged rational image of an integral locally finite family]
+  \label{def:weil-integer-family-rational-locally-finite-family}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-t-adic-locally-finite-family,
+    lemma:weil-integer-family-rational-components-positive,
+    lemma:weil-integer-family-rational-components-locally-finite}
+  \constructedby{lemma:weil-integer-family-rational-components-positive,
+    lemma:weil-integer-family-rational-components-locally-finite}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.rationalization}
+
+  Define \(u^{\mathbf Q}\) to be the \(T\)-adically locally finite family
+  over \(\mathbf Q\) with index type \(I\) and component
+  \(u_i^{\mathbf Q}\).  Its positive-order field is
+  Lemma~\ref{lemma:weil-integer-family-rational-components-positive}, and
+  its active-set-finiteness field is
+  Lemma~\ref{lemma:weil-integer-family-rational-components-locally-finite}.
+\end{definition}
+
+\begin{lemma}[Active-finset equality after scalar extension]
+  \label{lemma:weil-integer-family-rational-active-finset}
+  \uses{def:weil-integer-family-rational-locally-finite-family,
+    def:weil-active-index-finset}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.activeFinset_rationalization}
+
+  For every \(N\geq0\),
+  \[
+    A_N(u)=A_N(u^{\mathbf Q}).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-active-index-finset-mem,
+    lemma:weil-integer-family-rational-components-active-iff}
+  Apply \texttt{Finset.ext} and fix \(i\).  The active-finset membership
+  lemma rewrites membership on each side as failure of agreement with zero
+  through degree \(N\).  The mapped-component active equivalence identifies
+  those two predicates.
+\end{proof}
+
+\begin{lemma}[Scalar extension of a finite power-series product]
+  \label{lemma:weil-power-series-integer-to-rational-finset-product}
+  \uses{def:weil-power-series-integer-to-rational}
+  \lean{Weil.powerSeriesIntegerToRational_finsetProduct}
+
+  Let \(I\) be a type, let \(S:\texttt{Finset }I\), and let
+  \(A:I\to\mathbf Z[[T]]\).
+  Then
+  \[
+    \iota_*\left(\prod_{i\in S}A_i\right)
+       =\prod_{i\in S}\iota_*(A_i).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-power-series-integer-to-rational}
+  Apply the exact theorem \texttt{map\_prod} with the monoid homomorphism
+  underlying the ring homomorphism \(\iota_*\), the family \(i\mapsto A_i\),
+  and the finset \(S\).  Its conclusion is the displayed identity.
+\end{proof}
+
+\begin{lemma}[Scalar extension of an integral inverse Euler factor]
+  \label{lemma:weil-inverse-euler-factor-integer-to-rational}
+  \uses{def:weil-integral-inverse-euler-factor,
+    def:weil-inverse-euler-factor,
+    def:weil-power-series-integer-to-rational}
+  \lean{Weil.powerSeriesIntegerToRational_inverseEulerFactor}
+
+  For every \(m\geq1\),
+  \[
+    \iota_*(E_m^{\mathbf Z})=E_m^{\mathbf Q}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-integral-inverse-euler-factor-coeff,
+    lemma:weil-inverse-euler-factor-coeff,
+    lemma:weil-power-series-integer-to-rational-coeff}
+  Apply \texttt{PowerSeries.ext} and fix \(n\geq0\).  The scalar-extension
+  coefficient formula in
+  Lemma~\ref{lemma:weil-power-series-integer-to-rational-coeff} identifies
+  the coefficient on the left with the image in \(\mathbf Q\) of
+  \([T^n]E_m^{\mathbf Z}\).  The raw integral coefficient formula
+  Lemma~\ref{lemma:weil-integral-inverse-euler-factor-coeff} identifies this
+  integer with \(1\) if \(m\mid n\) and with \(0\) otherwise.  The rational
+  instance of Lemma~\ref{lemma:weil-inverse-euler-factor-coeff} gives the
+  same case split for the coefficient on the right.
+\end{proof}
+
+\begin{lemma}[Scalar extension of the positive Euler part]
+  \label{lemma:weil-inverse-euler-positive-part-integer-to-rational}
+  \uses{def:weil-integral-inverse-euler-factor,
+    def:weil-inverse-euler-factor-positive-part,
+    def:weil-power-series-integer-to-rational}
+  \lean{Weil.powerSeriesIntegerToRational_inverseEulerFactorPositivePart}
+
+  For every \(m\geq1\),
+  \[
+    \iota_*(E_m^{\mathbf Z}-1)=E_m^{\mathbf Q}-1.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-power-series-integer-to-rational,
+    lemma:weil-inverse-euler-factor-integer-to-rational}
+  Because \(\iota_*\) is a ring homomorphism, it preserves subtraction and
+  sends \(1\) to \(1\).  Apply these two map laws and then substitute
+  Lemma~\ref{lemma:weil-inverse-euler-factor-integer-to-rational}.
+\end{proof}
+
+\begin{lemma}[Component projection of the packaged integral orbit family]
+  \label{lemma:weil-integer-orbit-euler-family-component}
+  \uses{def:weil-integer-orbit-euler-factor-family,
+    def:weil-integer-orbit-euler-locally-finite-family}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerFamily_component}
+
+  For every orbit \(O\), the \(O\)-component of
+  \(\mathcal E_D^{\mathbf Z}\) is \(u_O^{\mathbf Z}\).
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-orbit-euler-locally-finite-family}
+  Unfold the record constructor.  Its component projection is definitionally
+  the raw component function, so the assertion is reflexivity.
+\end{proof}
+
+\begin{lemma}[Rational realization of an integral orbit component]
+  \label{lemma:weil-integer-orbit-euler-family-rational-component}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-integer-orbit-euler-locally-finite-family,
+    def:weil-orbit-euler-factor-family}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerFamily_rationalComponent}
+
+  For every orbit \(O\), the \(O\)-component of the generic rationalization
+  \((\mathcal E_D^{\mathbf Z})^{\mathbf Q}\) is the previously defined
+  rational component \(u_O\).
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-orbit-euler-factor-family,
+    lemma:weil-integer-orbit-euler-family-component,
+    lemma:weil-frobenius-orbit-degree-positive,
+    lemma:weil-inverse-euler-positive-part-integer-to-rational}
+  Unfold the generic rational-component Definition and use the component
+  projection lemma.  The resulting equality is precisely scalar extension of
+  the positive Euler part with \(m=\deg_F(O)\); the required hypothesis
+  $1\leq\deg_F(O)$ is
+  Lemma~\ref{lemma:weil-frobenius-orbit-degree-positive}.
+\end{proof}
+
+\begin{lemma}[Component projection of the packaged integral degree family]
+  \label{lemma:weil-integer-degree-euler-family-component}
+  \uses{def:weil-integer-degree-euler-factor-family,
+    def:weil-integer-degree-euler-locally-finite-family}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerFamily_component}
+
+  For every \(m\in\mathbf N_{>0}\), the \(m\)-component of
+  \(\mathcal G_D^{\mathbf Z}\) is \(v_m^{\mathbf Z}\).
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-degree-euler-locally-finite-family}
+  Unfold the record constructor.  The component projection reduces
+  definitionally to the raw component function.
+\end{proof}
+
+\begin{lemma}[Rational realization of an integral degree component]
+  \label{lemma:weil-integer-degree-euler-family-rational-component}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-integer-degree-euler-locally-finite-family,
+    def:weil-degree-euler-factor-family}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerFamily_rationalComponent}
+
+  For every \(m\in\mathbf N_{>0}\), the \(m\)-component of
+  \((\mathcal G_D^{\mathbf Z})^{\mathbf Q}\) is the previously defined
+  rational component \(v_m\).
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-degree-euler-factor-family,
+    lemma:weil-integer-degree-euler-family-component,
+    def:weil-power-series-integer-to-rational,
+    lemma:weil-inverse-euler-factor-integer-to-rational}
+  The subtype field of $m\in\mathbf N_{>0}$ supplies
+  $1\leq(m:\mathbf N)$.  Unfold the generic rational component and the two
+  raw degree-component Definitions.  The ring-homomorphism laws give
+  \[
+    \iota_*\bigl((E_m^{\mathbf Z})^{a_m(D)}-1\bigr)
+      =\iota_*(E_m^{\mathbf Z})^{a_m(D)}-1.
+  \]
+  Replace \(\iota_*(E_m^{\mathbf Z})\) by \(E_m^{\mathbf Q}\) using the
+  inverse-Euler-factor comparison.  The result is \(v_m\).
+\end{proof}
+
+\begin{lemma}[Component projection of the packaged integral closed-point family]
+  \label{lemma:weil-integer-closed-point-euler-family-component}
+  \uses{def:weil-integer-closed-point-euler-factor-family,
+    def:weil-integer-closed-point-euler-locally-finite-family}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFamily_component}
+
+  For every closed point \(c\), the \(c\)-component of
+  \(\mathcal E_C^{\mathbf Z}\) is \(w_c^{\mathbf Z}\).
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-closed-point-euler-locally-finite-family}
+  Unfold the record constructor.  The component projection reduces
+  definitionally to the raw component function.
+\end{proof}
+
+\begin{lemma}[Rational realization of an integral closed-point component]
+  \label{lemma:weil-integer-closed-point-euler-family-rational-component}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-integer-closed-point-euler-locally-finite-family,
+    def:weil-closed-point-euler-factor-family}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFamily_rationalComponent}
+
+  For every closed point \(c\), the \(c\)-component of
+  \((\mathcal E_C^{\mathbf Z})^{\mathbf Q}\) is the previously defined
+  rational component \(w_c\).
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-closed-point-orbit-interface,
+    def:weil-closed-point-euler-factor-family,
+    lemma:weil-integer-closed-point-euler-family-component,
+    lemma:weil-inverse-euler-positive-part-integer-to-rational}
+  Unfold the generic rational-component Definition and use the component
+  projection lemma.  The remaining equality is scalar extension of the
+  positive Euler part with \(m=\deg_C(c)\).  Definition
+  \ref{def:weil-closed-point-orbit-interface} supplies the required
+  hypothesis $1\leq\deg_C(c)$.
+\end{proof}
+
+\begin{lemma}[Scalar extension of a locally finite product]
+  \label{lemma:weil-power-series-integer-to-rational-locally-finite-product}
+  \uses{def:weil-power-series-integer-to-rational,
+    def:weil-t-adic-locally-finite-family,
+    def:weil-integer-family-rational-locally-finite-family,
+    def:weil-locally-finite-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.product_rationalization}
+
+  Let \(u\) be a \(T\)-adically locally finite family over
+  \(\mathbf Z\), with index type \(I\) and components
+  \(u_i\in\mathbf Z[[T]]\).  For its packaged rational image
+  \(u^{\mathbf Q}\), one has
+  \[
+    \iota_*\!\left(
+      \prod_{i\in I}^{\mathrm{lf}}(1+u_i)
+    \right)
+    =
+    \prod_{i\in I}^{\mathrm{lf}}(1+u_i^{\mathbf Q})
+    \qquad\text{in }\mathbf Q[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-family-rational-components,
+    def:weil-truncated-product,
+    lemma:weil-power-series-integer-to-rational-coeff,
+    def:weil-power-series-integer-to-rational,
+    lemma:weil-locally-finite-product-coeff,
+    lemma:weil-integer-family-rational-active-finset,
+    lemma:weil-power-series-integer-to-rational-finset-product}
+  Apply \texttt{PowerSeries.ext} and fix \(N\geq0\).  Write
+  \(\iota=\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}\), and denote the
+  two locally finite products in the statement by \(P_{\mathbf Z}\) and
+  \(P_{\mathbf Q}\).  Then
+  \[
+  \begin{aligned}
+    [T^N]\iota_*(P_{\mathbf Z})
+      &=\iota\bigl([T^N]P_{\mathbf Z}\bigr) \\
+      &=\iota\bigl([T^N]\Pi_N(u)\bigr) \\
+      &=[T^N]\iota_*\bigl(\Pi_N(u)\bigr) \\
+      &=[T^N]\prod_{i\in A_N(u)}\iota_*(1+u_i) \\
+      &=[T^N]\prod_{i\in A_N(u)}(1+u_i^{\mathbf Q}) \\
+      &=[T^N]\prod_{i\in A_N(u^{\mathbf Q})}(1+u_i^{\mathbf Q}) \\
+      &=[T^N]\Pi_N(u^{\mathbf Q}) \\
+      &=[T^N]P_{\mathbf Q}.
+  \end{aligned}
+  \]
+  The first and third equalities are the scalar-extension coefficient
+  formula.  The second and last are the locally finite product coefficient
+  formula, first over \(\mathbf Z\) and then over \(\mathbf Q\).  After
+  unfolding \(\Pi_N(u)\), the fourth equality is the finite-product map
+  lemma.  The ring-homomorphism laws and the definition
+  \(u_i^{\mathbf Q}=\iota_*(u_i)\) give
+  \(\iota_*(1+u_i)=1+u_i^{\mathbf Q}\), proving the fifth equality
+  factor by factor.  The active-finset equality gives the sixth, and the
+  definition of the truncated product gives the seventh.  Thus the
+  degree-\(N\) coefficients agree; extensionality proves the claim.
+\end{proof}
+
+\begin{definition}[Integer orbit Euler product]
+  \label{def:weil-integer-orbit-euler-product}
+  \uses{def:weil-integer-orbit-euler-locally-finite-family,
+    def:weil-locally-finite-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerProduct}
+
+  Let \(\mathcal E_D^{\mathbf Z}\) be the already constructed integral
+  orbit family.  Define its integer orbit Euler product by
+  \[
+    Z_{\mathrm{orb},D}^{\mathbf Z}(T):=
+      \prod_{O\in\operatorname{Orb}_F(\Omega)}^{\mathrm{lf}}
+        \bigl(1+u_O^{\mathbf Z}(T)\bigr)
+      \in\mathbf Z[[T]].
+  \]
+  The notation means the coefficientwise locally finite product of
+  Definition~\ref{def:weil-locally-finite-product}, applied to the family
+  \(\mathcal E_D^{\mathbf Z}\).
+\end{definition}
+
+\begin{lemma}[Active finsets after rationalizing the integral orbit family]
+  \label{lemma:weil-integer-orbit-euler-family-rationalization-active-finset}
+  \uses{def:weil-integer-orbit-euler-locally-finite-family,
+    def:weil-integer-family-rational-locally-finite-family,
+    def:weil-orbit-euler-locally-finite-family,
+    def:weil-active-index-finset}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerFamily_rationalization_activeFinset}
+
+  For every \(N\geq0\), the active finsets of the rationalized integral
+  family and of the previously defined rational orbit family coincide:
+  \[
+    A_N\bigl((\mathcal E_D^{\mathbf Z})^{\mathbf Q}\bigr)
+      =A_N(\mathcal E_D).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-active-index-finset,
+    lemma:weil-active-index-finset-mem,
+    lemma:weil-integer-orbit-euler-family-rational-component}
+  Apply \texttt{Finset.ext} and fix an orbit \(O\).  By the active-finset
+  membership lemma, membership on the left is equivalent to
+  \[
+    ((\mathcal E_D^{\mathbf Z})^{\mathbf Q})_O
+       \not\equiv_N0,
+  \]
+  while membership on the right is equivalent to \(u_O\not\equiv_N0\).
+  The rational-component lemma identifies
+  \(((\mathcal E_D^{\mathbf Z})^{\mathbf Q})_O\) with \(u_O\); substituting
+  this equality makes the two predicates identical.  Hence the two finset
+  membership propositions agree for every \(O\), and extensionality gives the
+  displayed equality.
+\end{proof}
+
+\begin{lemma}[Rationalized integral orbit product equals the rational orbit product]
+  \label{lemma:weil-integer-orbit-euler-product-rationalization}
+  \uses{def:weil-integer-orbit-euler-locally-finite-family,
+    def:weil-integer-family-rational-locally-finite-family,
+    def:weil-orbit-euler-locally-finite-family,
+    def:weil-orbit-euler-product,
+    def:weil-locally-finite-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerProduct_rationalization}
+
+  One has the equality in \(\mathbf Q[[T]]\)
+  \[
+    \prod_{O}^{\mathrm{lf}}
+      \bigl(1+((\mathcal E_D^{\mathbf Z})^{\mathbf Q})_O\bigr)
+      =Z_{\mathrm{orb},D}(T).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-locally-finite-product,
+    def:weil-truncated-product,
+    lemma:weil-locally-finite-product-coeff,
+    lemma:weil-integer-orbit-euler-family-rationalization-active-finset,
+    lemma:weil-integer-orbit-euler-family-rational-component,
+    def:weil-orbit-euler-product}
+  Apply \texttt{PowerSeries.ext} and fix \(N\geq0\).  The coefficient formula
+  for the locally finite product rewrites the coefficient on the left as
+  \[
+    [T^N]\prod_{O\in A_N((\mathcal E_D^{\mathbf Z})^{\mathbf Q})}
+      \bigl(1+((\mathcal E_D^{\mathbf Z})^{\mathbf Q})_O\bigr),
+  \]
+  and rewrites the coefficient of the right-hand product as
+  \[
+    [T^N]\prod_{O\in A_N(\mathcal E_D)}(1+u_O).
+  \]
+  Replace the first active finset by the second using
+  Lemma~\ref{lemma:weil-integer-orbit-euler-family-rationalization-active-finset}.
+  For each member \(O\) of this common finset,
+  the rational-component lemma gives
+  \(((\mathcal E_D^{\mathbf Z})^{\mathbf Q})_O=u_O\); adding \(1\) to both
+  sides gives equality of the corresponding factors.  Apply the exact theorem
+  \texttt{Finset.prod\_congr} to the common active finset.  Its finset-equality
+  argument is reflexivity, and its pointwise factor-equality argument is the
+  equality just obtained.  The theorem therefore identifies the finite products,
+  and hence their degree-\(N\) coefficients.  Since \(N\) was arbitrary,
+  \texttt{PowerSeries.ext} proves the asserted series equality.
+\end{proof}
+
+\begin{lemma}[Scalar image of the integer orbit Euler product]
+  \label{lemma:weil-integer-orbit-euler-product-map}
+  \uses{def:weil-power-series-integer-to-rational,
+    def:weil-integer-orbit-euler-product,
+    def:weil-orbit-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerProduct_map}
+
+  For the canonical coefficient map \(\iota_*:\mathbf Z[[T]]\to\mathbf Q[[T]]\),
+  \[
+    \iota_*\bigl(Z_{\mathrm{orb},D}^{\mathbf Z}(T)\bigr)
+      =Z_{\mathrm{orb},D}(T).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-orbit-euler-locally-finite-family,
+    def:weil-integer-orbit-euler-product,
+    lemma:weil-power-series-integer-to-rational-locally-finite-product,
+    lemma:weil-integer-orbit-euler-product-rationalization}
+  Instantiate the scalar-extension lemma for the integral family
+  \(u=\mathcal E_D^{\mathbf Z}\).  By the definition of the integer orbit
+  product, its left-hand side is
+  \(\iota_*(Z_{\mathrm{orb},D}^{\mathbf Z})\), and the lemma identifies it
+  with
+  \[
+    \prod_O^{\mathrm{lf}}
+      \bigl(1+((\mathcal E_D^{\mathbf Z})^{\mathbf Q})_O\bigr).
+  \]
+  The rationalization-product lemma identifies this last series with
+  \(Z_{\mathrm{orb},D}\).  Substitution gives the displayed equality.
+\end{proof}
+
+\begin{lemma}[Constant coefficient of the integer orbit Euler product]
+  \label{lemma:weil-integer-orbit-euler-product-constant}
+  \uses{def:weil-integer-orbit-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerProduct_constantCoeff}
+
+  The integer orbit Euler product has constant coefficient one:
+  \[
+    [T^0]Z_{\mathrm{orb},D}^{\mathbf Z}(T)=1\quad\text{in }\mathbf Z.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-orbit-euler-product,
+    lemma:weil-locally-finite-product-constant}
+  Apply the generic constant-coefficient lemma for a locally finite product
+  to the family \(\mathcal E_D^{\mathbf Z}\).  The product in that lemma is
+  exactly the product used in the Definition of
+  \(Z_{\mathrm{orb},D}^{\mathbf Z}\), so its coefficient at degree zero is
+  \(1\).
+\end{proof}
+
+\begin{proposition}[Integral lift of the counting zeta series]
+  \label{prop:weil-counting-zeta-integral-lift}
+  \uses{def:weil-power-series-integer-to-rational,
+    def:weil-integer-orbit-euler-product,
+    def:weil-counting-zeta-series}
+  \lean{Weil.FiniteOrbitFrobeniusData.countingZetaSeries_integralLift}
+
+  The counting zeta series is the scalar image of the integer orbit product:
+  \[
+    \iota_*\bigl(Z_{\mathrm{orb},D}^{\mathbf Z}(T)\bigr)
+      =Z_{\mathrm{cnt},D}(T).
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-integer-orbit-euler-product-map,
+    thm:weil-orbit-euler-exponential}
+  The scalar-map lemma gives
+  \[
+    \iota_*(Z_{\mathrm{orb},D}^{\mathbf Z})=Z_{\mathrm{orb},D}.
+  \]
+  The orbit Euler exponential theorem gives
+  \(Z_{\mathrm{cnt},D}=Z_{\mathrm{orb},D}\); reversing that equality gives
+  \(Z_{\mathrm{orb},D}=Z_{\mathrm{cnt},D}\).  Substituting this second
+  equality into the first yields the displayed integral-lift identity.
+\end{proof}
+
+\begin{definition}[Integer degree-grouped Euler product]
+  \label{def:weil-integer-degree-euler-product}
+  \uses{def:weil-integer-degree-euler-locally-finite-family,
+    def:weil-locally-finite-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerProduct}
+
+  Let \(\mathcal G_D^{\mathbf Z}\) be the previously constructed integral
+  degree-grouped family.  Define
+  \[
+    Z_{\deg,D}^{\mathbf Z}(T):=
+      \prod_{m\in\mathbf N_{>0}}^{\mathrm{lf}}
+        \bigl(1+v_m^{\mathbf Z}(T)\bigr)
+      \in\mathbf Z[[T]].
+  \]
+  This is the coefficientwise locally finite product of
+  Definition~\ref{def:weil-locally-finite-product}, applied to
+  \(\mathcal G_D^{\mathbf Z}\).
+\end{definition}
+
+\begin{lemma}[Active finsets after rationalizing the integral degree family]
+  \label{lemma:weil-integer-degree-rationalized-active-finset}
+  \uses{def:weil-integer-degree-euler-locally-finite-family,
+    def:weil-integer-family-rational-locally-finite-family,
+    def:weil-degree-euler-locally-finite-family,
+    def:weil-active-index-finset}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegree_rationalizedActiveFinset}
+
+  For every \(N\geq0\),
+  \[
+    A_N\bigl((\mathcal G_D^{\mathbf Z})^{\mathbf Q}\bigr)
+      =A_N(\mathcal G_D).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-active-index-finset-mem,
+    lemma:weil-integer-degree-euler-family-rational-component,
+    def:weil-degree-euler-factor-family}
+  Apply \texttt{Finset.ext} and fix \(m\in\mathbf N_{>0}\).  The
+  active-finset membership lemma rewrites membership on the left as
+  \[
+    ((\mathcal G_D^{\mathbf Z})^{\mathbf Q})_m\not\equiv_N0
+  \]
+  and membership on the right as \(v_m\not\equiv_N0\), after unfolding the
+  generic degree-family component.  The rational-component lemma gives
+  \(((\mathcal G_D^{\mathbf Z})^{\mathbf Q})_m=v_m\).  Substitution makes
+  the two membership predicates identical.  Finset extensionality proves
+  the displayed equality.
+\end{proof}
+
+\begin{lemma}[Rationalized and generic degree truncations agree]
+  \label{lemma:weil-integer-degree-rationalized-truncated-product}
+  \uses{def:weil-integer-degree-euler-locally-finite-family,
+    def:weil-integer-family-rational-locally-finite-family,
+    def:weil-degree-euler-locally-finite-family,
+    def:weil-truncated-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegree_rationalizedTruncatedProduct}
+
+  For every \(N\geq0\),
+  \[
+    \Pi_N\bigl((\mathcal G_D^{\mathbf Z})^{\mathbf Q}\bigr)
+      =\Pi_N(\mathcal G_D)
+      \quad\text{in }\mathbf Q[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-truncated-product,
+    def:weil-degree-euler-factor-family,
+    lemma:weil-integer-degree-rationalized-active-finset,
+    lemma:weil-integer-degree-euler-family-rational-component}
+  Replace the active finset in the left-hand truncated product using
+  Lemma~\ref{lemma:weil-integer-degree-rationalized-active-finset}.
+  On this common finite index set,
+  the rational-component lemma gives, for every \(m\),
+  \[
+    1+((\mathcal G_D^{\mathbf Z})^{\mathbf Q})_m=1+v_m.
+  \]
+  The generic degree-family component is \(v_m\) by its raw component
+  Definition.  Apply \texttt{Finset.prod\_congr} to the displayed factor
+  equality.  After unfolding the two truncated products, the conclusion of
+  \texttt{Finset.prod\_congr} is precisely the asserted equality.
+\end{proof}
+
+\begin{lemma}[Scalar image of the integer degree-grouped Euler product]
+  \label{lemma:weil-integer-degree-euler-product-map}
+  \uses{def:weil-power-series-integer-to-rational,
+    def:weil-integer-degree-euler-locally-finite-family,
+    def:weil-integer-degree-euler-product,
+    def:weil-degree-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerDegreeEulerProduct_map}
+
+  For the integer-to-rational coefficient map \(\iota_*\),
+  \[
+    \iota_*\bigl(Z_{\deg,D}^{\mathbf Z}(T)\bigr)=Z_{\deg,D}(T)
+    \quad\text{in }\mathbf Q[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-degree-euler-product,
+    def:weil-degree-euler-product,
+    lemma:weil-power-series-integer-to-rational-locally-finite-product,
+    lemma:weil-locally-finite-product-coeff,
+    lemma:weil-integer-degree-rationalized-truncated-product}
+  Instantiate the scalar-extension theorem for locally finite products at
+  the integral family \(\mathcal G_D^{\mathbf Z}\).  It gives
+  \[
+    \iota_*\bigl(Z_{\deg,D}^{\mathbf Z}\bigr)
+      =\prod_m^{\mathrm{lf}}
+        \bigl(1+((\mathcal G_D^{\mathbf Z})^{\mathbf Q})_m\bigr).
+  \]
+  It remains to identify the product on the right with \(Z_{\deg,D}\).
+  Apply \texttt{PowerSeries.ext} and fix \(N\geq0\).  The locally finite
+  product coefficient formula changes their degree-\(N\) coefficients into
+  \[
+    [T^N]\Pi_N((\mathcal G_D^{\mathbf Z})^{\mathbf Q})
+    \quad\text{and}\quad
+    [T^N]\Pi_N(\mathcal G_D),
+  \]
+  respectively.  These two truncated products are equal by
+  Lemma~\ref{lemma:weil-integer-degree-rationalized-truncated-product}.
+  Hence the two coefficients agree for every \(N\); extensionality
+  gives the desired product equality, and substitution into the first
+  displayed equality proves the scalar-map formula.
+\end{proof}
+
+\begin{proposition}[The integer orbit product regrouped by degree]
+  \label{prop:weil-integer-orbit-euler-product-grouped}
+  \uses{def:weil-integer-orbit-euler-product,
+    def:weil-integer-degree-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.integerOrbitEulerProduct_eq_integerDegreeEulerProduct}
+
+  One has the equality in \(\mathbf Z[[T]]\)
+  \[
+    Z_{\mathrm{orb},D}^{\mathbf Z}(T)
+      =Z_{\deg,D}^{\mathbf Z}(T).
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-power-series-integer-to-rational-injective,
+    lemma:weil-integer-orbit-euler-product-map,
+    lemma:weil-integer-degree-euler-product-map,
+    prop:weil-orbit-euler-product-grouped}
+  Apply injectivity of
+  \(\iota_*:\mathbf Z[[T]]\to\mathbf Q[[T]]\) to the desired equality.
+  The orbit scalar-map lemma changes the image of the left side into
+  \(Z_{\mathrm{orb},D}\), and the degree scalar-map lemma changes the image
+  of the right side into \(Z_{\deg,D}\).  The rational regrouping
+  proposition proves \(Z_{\mathrm{orb},D}=Z_{\deg,D}\).  Thus the mapped
+  series are equal, and injectivity gives the equality over \(\mathbf Z\).
+\end{proof}
+
+\begin{definition}[Integral closed-point Euler product]
+  \label{def:weil-integer-closed-point-euler-product}
+  \uses{def:weil-integer-closed-point-euler-locally-finite-family,
+    def:weil-integer-closed-point-euler-factor-family,
+    def:weil-locally-finite-product}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerProduct}
+
+  Let \(\mathcal E_C^{\mathbf Z}\) be the already constructed integral
+  closed-point Euler family.  Define its coefficientwise locally finite
+  product by
+  \[
+    Z_{\mathrm{cl},C}^{\mathbf Z}(T)
+      :=\prod_{c\in\operatorname{ClPt}(C)}^{\mathrm{lf}}
+          \bigl(1+w_c^{\mathbf Z}(T)\bigr)
+      \in\mathbf Z[[T]],
+  \]
+  where \(w_c^{\mathbf Z}\) is the component of
+  \(\mathcal E_C^{\mathbf Z}\).  Thus the factor at \(c\) is literally
+  \(E_{\deg_C(c)}^{\mathbf Z}\), but the Definition uses the already
+  constructed locally finite-family product and makes no new infinite
+  multiplication operation.
+\end{definition}
+
+\begin{lemma}[Active finsets after rationalizing the integral closed-point family]
+  \label{lemma:weil-integer-closed-point-rational-active-finset}
+  \uses{def:weil-integer-family-rational-locally-finite-family,
+    def:weil-integer-closed-point-euler-locally-finite-family,
+    def:weil-closed-point-euler-locally-finite-family,
+    def:weil-active-index-finset}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerFamily_rationalActiveFinset}
+
+  For every \(N\geq0\), the active finset of the rationalized integral
+  closed-point family is the active finset of the previously defined
+  rational closed-point family:
+  \[
+    A_N\bigl((\mathcal E_C^{\mathbf Z})^{\mathbf Q}\bigr)
+      =A_N(\mathcal E_C).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-active-index-finset-mem,
+    lemma:weil-integer-closed-point-euler-family-rational-component}
+  Apply \texttt{Finset.ext} and fix a closed point \(c\).  By the active-
+  finset membership lemma, membership on the left is equivalent to
+  \((\mathcal E_C^{\mathbf Z})^{\mathbf Q}_c\not\equiv_N0\), while membership
+  on the right is equivalent to \(w_c\not\equiv_N0\).
+  Lemma~\ref{lemma:weil-integer-closed-point-euler-family-rational-component}
+  gives the equality
+  \((\mathcal E_C^{\mathbf Z})^{\mathbf Q}_c=w_c\).  Substitute this
+  equality into the first predicate; both membership propositions are then
+  identical, which is the required finset extensionality statement.
+\end{proof}
+
+\begin{lemma}[The rationalized integral closed-point product is the rational closed-point product]
+  \label{lemma:weil-integer-closed-point-rationalized-product}
+  \uses{def:weil-integer-family-rational-locally-finite-family,
+    def:weil-integer-closed-point-euler-locally-finite-family,
+    def:weil-closed-point-euler-locally-finite-family,
+    def:weil-closed-point-euler-product,
+    def:weil-locally-finite-product}
+  \lean{Weil.ClosedPointOrbitInterface.rationalizedIntegerEulerProduct_eq}
+
+  In \(\mathbf Q[[T]]\), one has
+  \[
+    \prod_{c\in\operatorname{ClPt}(C)}^{\mathrm{lf}}
+       \bigl(1+(\mathcal E_C^{\mathbf Z})^{\mathbf Q}_c\bigr)
+      =Z_{\mathrm{cl},C}(T).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-family-rational-locally-finite-family,
+    def:weil-closed-point-euler-locally-finite-family,
+    def:weil-closed-point-euler-product,
+    def:weil-closed-point-euler-factor-family,
+    def:weil-truncated-product,
+    lemma:weil-locally-finite-product-coeff,
+    lemma:weil-integer-closed-point-rational-active-finset,
+    lemma:weil-integer-closed-point-euler-family-rational-component}
+  Apply \texttt{PowerSeries.ext} and fix \(N\geq0\).  Denote the left
+  product by \(P^{\mathrm{rat}}\) and the right product by \(Z_{\mathrm{cl},C}\).
+  The locally finite-product coefficient formula gives
+  \[
+    [T^N]P^{\mathrm{rat}}
+      =[T^N]\Pi_N\bigl((\mathcal E_C^{\mathbf Z})^{\mathbf Q}\bigr),
+    \qquad
+    [T^N]Z_{\mathrm{cl},C}
+      =[T^N]\Pi_N(\mathcal E_C).
+  \]
+  Unfold both truncated products.  Lemma
+  \ref{lemma:weil-integer-closed-point-rational-active-finset} replaces the
+  first finite index set by the second.  On this common finset,
+  Lemma~\ref{lemma:weil-integer-closed-point-euler-family-rational-component}
+  gives, for each \(c\),
+  \[
+    1+(\mathcal E_C^{\mathbf Z})^{\mathbf Q}_c=1+w_c.
+  \]
+  Apply \texttt{Finset.prod\_congr} to replace every factor in the finite
+  product.  The two degree-\(N\) coefficients are equal, and
+  \texttt{PowerSeries.ext} yields the displayed equality of series.
+\end{proof}
+
+\begin{lemma}[Scalar extension of the integral closed-point Euler product]
+  \label{lemma:weil-integer-closed-point-euler-product-map}
+  \uses{def:weil-integer-closed-point-euler-product,
+    def:weil-closed-point-euler-product,
+    def:weil-power-series-integer-to-rational}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerProduct_map}
+
+  The canonical coefficient map carries the integral closed-point product to
+  the rational closed-point product:
+  \[
+    \iota_*\bigl(Z_{\mathrm{cl},C}^{\mathbf Z}(T)\bigr)
+       =Z_{\mathrm{cl},C}(T)
+    \qquad\text{in }\mathbf Q[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integer-closed-point-euler-product,
+    def:weil-integer-closed-point-euler-locally-finite-family,
+    def:weil-integer-family-rational-locally-finite-family,
+    def:weil-closed-point-euler-product,
+    lemma:weil-power-series-integer-to-rational-locally-finite-product,
+    lemma:weil-integer-closed-point-rationalized-product}
+  Unfold the integral-product Definition, so the left side is
+  \(\iota_*(\prod_c^{\mathrm{lf}}(1+w_c^{\mathbf Z}))\).  Instantiate the
+  scalar-extension theorem for locally finite products with coefficient rings
+  \(\mathbf Z\) and \(\mathbf Q\), the canonical map \(\iota_*\), and the
+  family \(u=\mathcal E_C^{\mathbf Z}\).  Its conclusion is the explicit
+  equality
+  \[
+    \iota_*\bigl(Z_{\mathrm{cl},C}^{\mathbf Z}\bigr)
+      =\prod_{c}^{\mathrm{lf}}
+         \bigl(1+(\mathcal E_C^{\mathbf Z})^{\mathbf Q}_c\bigr).
+  \]
+  The rationalized-product comparison lemma identifies the right-hand side
+  with \(Z_{\mathrm{cl},C}\).  Transitivity of equality proves the claim.
+\end{proof}
+
+\begin{lemma}[The two integral products have the same rational image]
+  \label{lemma:weil-integer-closed-point-orbit-rational-image}
+  \uses{def:weil-power-series-integer-to-rational,
+    def:weil-integer-closed-point-euler-product,
+    def:weil-integer-orbit-euler-product}
+  \lean{Weil.ClosedPointOrbitInterface.integerProducts_rationalImage_eq}
+
+  Their scalar extensions satisfy
+  \[
+    \iota_*(Z_{\mathrm{cl},C}^{\mathbf Z})
+      =\iota_*(Z_{\mathrm{orb},D}^{\mathbf Z})
+      \quad\text{in }\mathbf Q[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-integer-closed-point-euler-product-map,
+    lemma:weil-integer-orbit-euler-product-map,
+    prop:weil-closed-point-euler-product-reindex}
+  Lemmas~\ref{lemma:weil-integer-closed-point-euler-product-map} and
+  \ref{lemma:weil-integer-orbit-euler-product-map}, together with
+  Proposition~\ref{prop:weil-closed-point-euler-product-reindex}, form the
+  explicit chain
+  \[
+    \iota_*(Z_{\mathrm{cl},C}^{\mathbf Z})
+      = Z_{\mathrm{cl},C}
+      = Z_{\mathrm{orb},D}
+      = \iota_*(Z_{\mathrm{orb},D}^{\mathbf Z}).
+  \]
+  The first equality is Lemma~\ref{lemma:weil-integer-closed-point-euler-product-map}.
+  The second is Proposition~\ref{prop:weil-closed-point-euler-product-reindex}.
+  The last is the symmetry of
+  Lemma~\ref{lemma:weil-integer-orbit-euler-product-map}.  Transitivity gives the required
+  equality in $\mathbf Q[[T]]$.
+\end{proof}
+
+\begin{proposition}[Integral closed-point/orbit Euler-product reindexing]
+  \label{prop:weil-integer-closed-point-euler-product-reindex}
+  \uses{def:weil-integer-closed-point-euler-product,
+    def:weil-integer-orbit-euler-product}
+  \lean{Weil.ClosedPointOrbitInterface.integerEulerProduct_eq_orbitEulerProduct}
+
+  One has
+  \[
+    Z_{\mathrm{cl},C}^{\mathbf Z}(T)
+      =Z_{\mathrm{orb},D}^{\mathbf Z}(T)
+      \quad\text{in }\mathbf Z[[T]].
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-integer-closed-point-orbit-rational-image,
+    lemma:weil-power-series-integer-to-rational-injective}
+  Let $A=Z_{\mathrm{cl},C}^{\mathbf Z}$ and
+  $B=Z_{\mathrm{orb},D}^{\mathbf Z}$.  Lemma~\ref{lemma:weil-integer-closed-point-orbit-rational-image}
+  gives $\iota_*(A)=\iota_*(B)$.  Injectivity from
+  Lemma~\ref{lemma:weil-power-series-integer-to-rational-injective}
+  therefore gives $A=B$.
+\end{proof}
+
+\begin{definition}[Type of literal integral zeta certificates]
+  \label{def:weil-literal-integral-zeta-certificate-type}
+  \uses{def:weil-finite-orbit-frobenius-datum,
+    def:weil-closed-point-orbit-interface,
+    def:weil-power-series-integer-to-rational,
+    def:weil-counting-zeta-series,
+    def:weil-degree-euler-product,
+    def:weil-closed-point-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.LiteralIntegralZetaCertificate}
+
+  Fix a finite-orbit datum $D$ from
+  Definition~\ref{def:weil-finite-orbit-frobenius-datum} and a
+  closed-point--orbit interface $C$ over $D$ from
+  Definition~\ref{def:weil-closed-point-orbit-interface}.  Define
+  $\operatorname{LiteralZetaCert}(C,D)$ to be the record type
+  whose element $\mathfrak Z$ has three data fields
+  \[
+    \mathfrak Z.\texttt{orbit},\quad
+    \mathfrak Z.\texttt{degree},\quad
+    \mathfrak Z.\texttt{closed}
+      \in\mathbf Z[[T]],
+  \]
+  together with the six explicitly named proof fields
+  \[
+  \begin{aligned}
+    \mathfrak Z.\texttt{orbit\_map}&:
+      \iota_*(\mathfrak Z.\texttt{orbit})=Z_{\mathrm{cnt},D},\\
+    \mathfrak Z.\texttt{degree\_map}&:
+      \iota_*(\mathfrak Z.\texttt{degree})=Z_{\deg,D},\\
+    \mathfrak Z.\texttt{orbit\_eq\_degree}&:
+      \mathfrak Z.\texttt{orbit}=\mathfrak Z.\texttt{degree},\\
+    \mathfrak Z.\texttt{closed\_map}&:
+      \iota_*(\mathfrak Z.\texttt{closed})=Z_{\mathrm{cl},C},\\
+    \mathfrak Z.\texttt{closed\_eq\_orbit}&:
+      \mathfrak Z.\texttt{closed}=\mathfrak Z.\texttt{orbit},\\
+    \mathfrak Z.\texttt{orbit\_const}&:
+      [T^0]\mathfrak Z.\texttt{orbit}=1.
+  \end{aligned}
+  \]
+  Here $\iota_*$, $Z_{\mathrm{cnt},D}$, $Z_{\deg,D}$, and
+  $Z_{\mathrm{cl},C}$ are Definitions
+  \ref{def:weil-power-series-integer-to-rational},
+  \ref{def:weil-counting-zeta-series},
+  \ref{def:weil-degree-euler-product}, and
+  \ref{def:weil-closed-point-euler-product}, respectively.
+\end{definition}
+
+\begin{definition}[Canonical literal integral zeta certificate]
+  \label{def:weil-literal-integral-zeta-certificate}
+  \uses{def:weil-literal-integral-zeta-certificate-type,
+    def:weil-integer-orbit-euler-product,
+    def:weil-integer-degree-euler-product,
+    def:weil-integer-closed-point-euler-product,
+    prop:weil-counting-zeta-integral-lift,
+    lemma:weil-integer-degree-euler-product-map,
+    prop:weil-integer-orbit-euler-product-grouped,
+    lemma:weil-integer-closed-point-euler-product-map,
+    prop:weil-integer-closed-point-euler-product-reindex,
+    lemma:weil-integer-orbit-euler-product-constant}
+  \constructedby{prop:weil-counting-zeta-integral-lift,
+    lemma:weil-integer-degree-euler-product-map,
+    prop:weil-integer-orbit-euler-product-grouped,
+    lemma:weil-integer-closed-point-euler-product-map,
+    prop:weil-integer-closed-point-euler-product-reindex,
+    lemma:weil-integer-orbit-euler-product-constant}
+  \lean{Weil.FiniteOrbitFrobeniusData.literalIntegralZetaCertificate}
+
+  For $D$ and $C$ as in
+  Definition~\ref{def:weil-literal-integral-zeta-certificate-type}, define
+  \[
+    \mathfrak Z^{\mathbf Z}_{C,D}:
+      \operatorname{LiteralZetaCert}(C,D)
+  \]
+  by the named record assignments
+  \[
+  \begin{aligned}
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{orbit}
+      &:=Z_{\mathrm{orb},D}^{\mathbf Z},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{degree}
+      &:=Z_{\deg,D}^{\mathbf Z},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{closed}
+      &:=Z_{\mathrm{cl},C}^{\mathbf Z},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{orbit\_map}
+      &:=\text{Proposition~\ref{prop:weil-counting-zeta-integral-lift}},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{degree\_map}
+      &:=\text{Lemma~\ref{lemma:weil-integer-degree-euler-product-map}},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{orbit\_eq\_degree}
+      &:=\text{Proposition~\ref{prop:weil-integer-orbit-euler-product-grouped}},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{closed\_map}
+      &:=\text{Lemma~\ref{lemma:weil-integer-closed-point-euler-product-map}},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{closed\_eq\_orbit}
+      &:=\text{Proposition~\ref{prop:weil-integer-closed-point-euler-product-reindex}},\\
+    \mathfrak Z^{\mathbf Z}_{C,D}.\texttt{orbit\_const}
+      &:=\text{Lemma~\ref{lemma:weil-integer-orbit-euler-product-constant}}.
+  \end{aligned}
+  \]
+  These data fields are Definitions
+  \ref{def:weil-integer-orbit-euler-product},
+  \ref{def:weil-integer-degree-euler-product}, and
+  \ref{def:weil-integer-closed-point-euler-product}.  Assign the six proof
+  fields by name using
+  Proposition~\ref{prop:weil-counting-zeta-integral-lift},
+  Lemma~\ref{lemma:weil-integer-degree-euler-product-map},
+  Proposition~\ref{prop:weil-integer-orbit-euler-product-grouped},
+  Lemma~\ref{lemma:weil-integer-closed-point-euler-product-map},
+  Proposition~\ref{prop:weil-integer-closed-point-euler-product-reindex}, and
+  Lemma~\ref{lemma:weil-integer-orbit-euler-product-constant}.
+\end{definition}
 
 \end{document}
