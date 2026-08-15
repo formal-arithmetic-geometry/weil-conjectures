@@ -6,10 +6,10 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.DerivedFunctors.Full
-public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
+public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
-public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctorComp
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
 
@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Preliminaries.RightDerivedFunctorComp
 
 This file introduces derived global sections and étale cohomology, compactly supported
 global sections and compactly supported étale cohomology (via the exceptional direct
-image `Rp_!` of `WeilConjectures.SixFunctors.DerivedFunctors.Full`), the canonical
+image `Rp_!` of `WeilConjectures.SixFunctors.Derived`), the canonical
 comparison `Rf_! ⟶ Rf_*` (an isomorphism for proper `f`), and states the finiteness
 theorems for constructible complexes with finite coefficients over an algebraically
 closed field:
@@ -271,7 +271,7 @@ that is stable under compactification and exceptional direct image. -/
 theorem Etale.finite_compactlySupportedCohomology
     (p : X ⟶ Spec (.of k)) [HasCompactification p] [QuasiCompact p]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)))
-    (hK : Etale.boundedConstructible (ModuleCat.{u} Λ) X K) (n : ℤ) :
+    (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u} Λ) X K) (n : ℤ) :
     Module.Finite Λ
       ((Etale.compactlySupportedCohomologyFunctor (ModuleCat.{u} Λ) k p n).obj K) :=
   sorry
@@ -286,7 +286,7 @@ transporting finiteness along the isomorphism
 theorem Etale.finite_cohomology_of_isProper
     (p : X ⟶ Spec (.of k)) [IsProper p]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)))
-    (hK : Etale.boundedConstructible (ModuleCat.{u} Λ) X K) (n : ℤ) :
+    (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u} Λ) X K) (n : ℤ) :
     Module.Finite Λ ((Etale.cohomologyFunctor (ModuleCat.{u} Λ) X n).obj K) :=
   sorry
 

@@ -7,7 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.ProperBaseChange.BaseChangeMorphism
-public import WeilConjectures.SixFunctors.DerivedFunctors.CategoryConstruction
+public import WeilConjectures.DerivedCategory.Constructible
 
 /-!
 
@@ -90,33 +90,24 @@ variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology (ModuleCat.
   [∀ (T : Scheme.{u}),
     HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
 
-/- The K-flat resolution package on the étale sheaf categories with `Λ`-module
-coefficients, as in `WeilConjectures.SixFunctors.ProperBaseChange.BaseChangeMorphism`. -/
-variable [∀ (T : Scheme.{u}), MonoidalCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
-  [∀ (T : Scheme.{u}), MonoidalPreadditive (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
-  [∀ (T : Scheme.{u}) (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}))
-    (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ X₄ :
-      GradedObject ℤ (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))),
+/- The K-flat resolution package on the coefficient category `ModuleCat Λ`, as in
+`WeilConjectures.SixFunctors.ProperBaseChange.BaseChangeMorphism`; the monoidal
+structure, its preadditivity and the existence of colimits are provided by mathlib's
+instances for `ModuleCat`. -/
+variable [∀ (X : ModuleCat.{u} Λ), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
+  [∀ (X : ModuleCat.{u} Λ), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (ModuleCat.{u} Λ)),
     GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ :
-      GradedObject ℤ (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))),
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)),
     GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ :
-      GradedObject ℤ (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))),
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)),
     GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (T : Scheme.{u}), HasColimitsOfShape ℤ (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
-  [∀ (T : Scheme.{u}),
-    HasExactColimitsOfShape ℤ (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
-  [∀ (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ)),
-    PreservesColimitsOfShape ℤ
-      ((curriedTensor (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))).obj F)]
-  [∀ (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ)),
-    PreservesColimitsOfShape ℤ
-      ((curriedTensor (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))).flip.obj F)]
-  [∀ (T : Scheme.{u}),
-    Abelian.HasFunctorialFlatResolution (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
+  [HasExactColimitsOfShape ℤ (ModuleCat.{u} Λ)]
+  [∀ (X : ModuleCat.{u} Λ),
+    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).obj X)]
+  [∀ (X : ModuleCat.{u} Λ),
+    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ)]
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -141,7 +132,7 @@ complexes of torsion sheaves): every object of `D^b_c` is bounded and all its co
 sheaves are torsion because `Λ` is finite. -/
 theorem Etale.properBaseChange [IsProper f] (sq : IsPullback g' f' f g)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)))
-    (_hK : Etale.boundedConstructible (ModuleCat.{u} Λ) X K) :
+    (_hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u} Λ) X K) :
     IsIso ((Etale.baseChange (ModuleCat.{u} Λ) sq.toCommSq).app K) :=
   Etale.properBaseChange_unbounded Λ sq K
 

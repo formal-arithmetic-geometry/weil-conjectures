@@ -6,8 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.DerivedFunctors.Full
-public import WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory
+public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.SixFunctors.UpperStarMapDerivedCategory
 
 /-!
 
@@ -27,7 +27,7 @@ recorded as `sq : CommSq g' f' f g` (the base-change theorems will additionally 
 square to be cartesian, `IsPullback g' f' f g`, but no such hypothesis enters the
 *construction* of the base-change morphism).
 
-Using the derived functors of `WeilConjectures.SixFunctors.DerivedFunctors.Full` — the
+Using the derived functors of `WeilConjectures.SixFunctors.Derived` — the
 derived pullbacks `Lg^*` (isomorphic to the exact `g^*` levelwise) and the derived
 pushforwards `Rf_*` on the unbounded derived categories of étale sheaves — together with
 the derived adjunctions `Lf^* ⊣ Rf_*`, this file constructs the *derived base-change
@@ -56,7 +56,7 @@ The comparison isomorphisms of the derived pullback used here — the compositio
 isomorphism `Etale.leftDerivedUpperStarComp`, the exactness comparison
 `Etale.homologyLeftDerivedUpperStarIso`, and the single-degree comparison
 `Etale.singleCompLeftDerivedUpperStarIso` — are provided by
-`WeilConjectures.SixFunctors.DerivedFunctors.UpperStarMapDerivedCategory`, via the
+`WeilConjectures.SixFunctors.UpperStarMapDerivedCategory`, via the
 identification of `Lg^*` with the levelwise functor induced by the exact `g^*`.
 
 ## Main definitions
@@ -100,29 +100,21 @@ variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
     (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
   [∀ (T : Scheme.{u}), HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology A)]
 
-/- The preadditive monoidal structure with its compatibilities with coproducts and
-`ℤ`-indexed colimits, and functorial flat resolutions, on the étale sheaf categories of
-all schemes at once: the K-flat resolution package needed for the derived pullbacks, as
-in the sections `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
-`WeilConjectures.SixFunctors.DerivedFunctors.Full`. -/
-variable [∀ (T : Scheme.{u}), MonoidalCategory (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}), MonoidalPreadditive (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}) (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}))
-    (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ X₄ : GradedObject ℤ (Sheaf T.smallEtaleTopology A)),
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology A)),
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (T : Scheme.{u}) (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology A)),
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (T : Scheme.{u}), HasColimitsOfShape ℤ (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}), HasExactColimitsOfShape ℤ (Sheaf T.smallEtaleTopology A)]
-  [∀ (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology A),
-    PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf T.smallEtaleTopology A)).obj F)]
-  [∀ (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology A),
-    PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf T.smallEtaleTopology A)).flip.obj F)]
-  [∀ (T : Scheme.{u}), Abelian.HasFunctorialFlatResolution (Sheaf T.smallEtaleTopology A)]
+/- The K-flat resolution package on the coefficient category `A`, as in the sections
+`DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
+`WeilConjectures.SixFunctors.Derived`; it is transported to the étale sheaf categories
+of all schemes at once by the instances of the section `SheafInstances` there. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
+  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+  [HasColimitsOfShape (Discrete ℤ) A]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution A]
 
 section PullbackComposition
 

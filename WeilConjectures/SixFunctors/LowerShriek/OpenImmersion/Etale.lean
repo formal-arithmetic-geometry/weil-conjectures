@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
@@ -33,23 +35,19 @@ and is computed by restriction along the localization functor. This yields the a
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Etale.LiftIndex`: the type of lifts of `V : X.Etale`
-  through `j`.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriek`: the lower shriek `j_!` on étale
   sheaves along an open immersion `j`.
 - `AlgebraicGeometry.Etale.openImmersionRestriction`: the restriction `j^*` along an open
   immersion `j`, given objectwise by `(j^* G)(T → U) = G(T → U → X)`.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekAdjunction`: the adjunction
   `j_! ⊣ j^*` with the restriction.
-- `AlgebraicGeometry.Etale.openImmersionRestrictionLowerStarAdjunction`: the adjunction
-  `j^* ⊣ j_*`, completing the triple `j_! ⊣ j^* ⊣ j_*`.
 - `AlgebraicGeometry.Etale.upperStarIsoOpenImmersionRestriction`: the pullback `j^*` of
   `WeilConjectures.SixFunctors.UpperLowerStar.Etale` is computed by restriction.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekUpperStarAdjunction`: the adjunction
   `j_! ⊣ j^*` between the lower shriek and the pullback `Etale.upperStar`.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek` and
   `AlgebraicGeometry.Etale.preservesFiniteColimits_openImmersionLowerShriek`: the lower
-  shriek `j_!` with values in an abelian category is exact.
+  shriek `j_!` is exact when `j` is an open immersion.
 
 -/
 
@@ -70,7 +68,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [Etale j] (V : X.Etale)
 /-- The type of lifts of `V : X.Etale` through `j : U ⟶ X`: factorizations of the
 structure morphism of `V` through `j`. It indexes the colimit computing the presheaf-level
 lower shriek at `V`. -/
-def Etale.LiftIndex : Type u :=
+private def Etale.LiftIndex : Type u :=
   {α : V.left ⟶ U // α ≫ j = V.hom}
 
 namespace Etale.LiftIndex
@@ -78,33 +76,33 @@ namespace Etale.LiftIndex
 variable {j V}
 
 /-- The lift of an étale `X`-scheme through an étale morphism is étale. -/
-lemma etale_val (α : Etale.LiftIndex j V) : Etale α.1 := by
+private lemma etale_val (α : Etale.LiftIndex j V) : Etale α.1 := by
   have h : Etale (α.1 ≫ j) := by
     rw [α.2]
     infer_instance
   exact Etale.of_comp α.1 j
 
 /-- The étale `U`-scheme determined by a lift of `V : X.Etale` through `j`. -/
-def toEtale (α : Etale.LiftIndex j V) : U.Etale :=
-  haveI := α.etale_val
+private def toEtale (α : Etale.LiftIndex j V) : U.Etale :=
+  have := α.etale_val
   Etale.mk α.1
 
 /-- The comparison morphism from `V` to the image of `α.toEtale` in `X.Etale`; its
 underlying morphism is the identity. -/
-def homToComp (α : Etale.LiftIndex j V) :
+private def homToComp (α : Etale.LiftIndex j V) :
     V ⟶ (MorphismProperty.Over.map ⊤ ‹Etale j›).obj α.toEtale :=
   MorphismProperty.Over.homMk (𝟙 V.left) ((Category.id_comp _).trans α.2)
 
 /-- The object of the comma category indexing the pointwise left Kan extension at `V`
 associated with a lift `α`; for a monomorphism `j` it is terminal, see
 `Etale.LiftIndex.isTerminalCostructuredArrow`. -/
-def costructuredArrow (α : Etale.LiftIndex j V) :
+private def costructuredArrow (α : Etale.LiftIndex j V) :
     CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op (op V) :=
   CostructuredArrow.mk α.homToComp.op
 
 variable (j V) in
 /-- The lift of `V` extracted from an object of the indexing comma category. -/
-def ofCostructuredArrow
+private def ofCostructuredArrow
     (s : CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op (op V)) :
     Etale.LiftIndex j V :=
   ⟨s.hom.unop.left ≫ s.left.unop.hom, by
@@ -116,13 +114,13 @@ def ofCostructuredArrow
 
 variable (j V) in
 /-- If `V` has no lift through `j`, the indexing comma category is empty. -/
-lemma isEmpty_costructuredArrow (h : IsEmpty (Etale.LiftIndex j V)) :
+private lemma isEmpty_costructuredArrow (h : IsEmpty (Etale.LiftIndex j V)) :
     IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op (op V)) :=
   ⟨fun s => h.elim (ofCostructuredArrow j V s)⟩
 
 /-- For a monomorphism `j`, the comma object associated with a lift `α` of `V` is
 terminal: the pointwise left Kan extension formula collapses to a single value. -/
-noncomputable def isTerminalCostructuredArrow [Mono j] (α : Etale.LiftIndex j V) :
+private noncomputable def isTerminalCostructuredArrow [Mono j] (α : Etale.LiftIndex j V) :
     IsTerminal α.costructuredArrow :=
   IsTerminal.ofUniqueHom
     (fun s =>
@@ -162,17 +160,18 @@ open Scheme in
 /-- Along the localization functor induced by an étale monomorphism `j`, all pointwise
 left Kan extensions with values in a category with an initial object exist: the indexing
 comma categories are either empty or admit a terminal object. -/
-instance [Mono j] [HasInitial A] (F : U.Etaleᵒᵖ ⥤ A) :
+instance hasPointwiseLeftKanExtension_of_etale_and_mono
+    [Mono j] [HasInitial A] (F : U.Etaleᵒᵖ ⥤ A) :
     (MorphismProperty.Over.map ⊤ ‹Etale j›).op.HasPointwiseLeftKanExtension F := by
   intro V
   by_cases h : Nonempty (Etale.LiftIndex j V.unop)
   · obtain ⟨α⟩ := h
-    haveI : HasTerminal (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
+    have : HasTerminal (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
       α.isTerminalCostructuredArrow.hasTerminal
     infer_instance
-  · haveI : IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
+  · have : IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) :=
       Etale.LiftIndex.isEmpty_costructuredArrow j V.unop (not_nonempty_iff.mp h)
-    haveI : HasColimitsOfShape
+    have : HasColimitsOfShape
         (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) A :=
       hasColimitsOfShape_of_equivalence (equivalenceOfIsEmpty (Discrete PEmpty.{1}) _)
     infer_instance
@@ -205,9 +204,18 @@ noncomputable def Etale.openImmersionRestrictionLowerStarAdjunction :
   GrothendieckTopology.localizationRestrictionLowerStarAdjunction A @Etale @Etale j
     inferInstance
 
-/-- The restriction `j^*` along an open immersion on étale sheaves with values in a
-preadditive category is additive: it acts on morphisms by whiskering, which is compatible
-with the objectwise addition. -/
+/-- The counit of the adjunction `j^* ⊣ j_*` along an open immersion `j` is an
+isomorphism: the restriction of a pushforward along an open immersion is the original
+sheaf. This holds since `j` is a monomorphism, so the unit of the site-level adjunction
+`MorphismProperty.Over.mapPullbackAdj` is an isomorphism. -/
+instance Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit :
+    IsIso (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit :=
+  Adjunction.isIso_sheafPushforwardContinuous_counit A
+    (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ j inferInstance trivial)
+    (U.smallGrothendieckTopology (Q := @Etale) @Etale)
+    (X.smallGrothendieckTopology (Q := @Etale) @Etale)
+
+/-- The restriction `j^*` along an open immersion on étale sheaves is additive. -/
 instance Etale.openImmersionRestriction_additive [Preadditive A] :
     (Etale.openImmersionRestriction A j).Additive where
 
@@ -242,17 +250,14 @@ instance Etale.openImmersionLowerShriek_additive [Preadditive A] :
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
-abelian category is exact. This is the left exactness half; it preserves finite colimits
-by `Etale.preservesFiniteColimits_openImmersionLowerShriek`, being a left adjoint. -/
+abelian category is exact. This is the left exactness half. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek [Abelian A] :
     PreservesFiniteLimits (Etale.openImmersionLowerShriek A j) :=
   sorry
 
-/-- The extension by zero `j_!` along an open immersion preserves finite colimits, being a
-left adjoint. Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
+/-- Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
 makes `j_!` exact. -/
-instance Etale.preservesFiniteColimits_openImmersionLowerShriek :
-    PreservesFiniteColimits (Etale.openImmersionLowerShriek A j) :=
+example : PreservesFiniteColimits (Etale.openImmersionLowerShriek A j) :=
   inferInstance
 
 section UpperStar

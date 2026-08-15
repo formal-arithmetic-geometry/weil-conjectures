@@ -43,8 +43,13 @@ The site-theoretic inputs of the general definitions are discharged here:
 - `AlgebraicGeometry.Etale.lowerStar`: the pushforward `g_*` on étale sheaves.
 - `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves.
 - `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
+- `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
+  the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
+  `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*` with
   values in an abelian category is left exact.
+- `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar` : the pullback `g^*` with
+  values in an abelian category is left exact, thus exact.
 
 -/
 
@@ -102,7 +107,7 @@ topologies. -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
-  haveI : RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
+  have : RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
     flat_of_preservesFiniteLimits _
   Functor.isContinuous_of_coverPreserving
     (compatiblePreservingOfFlat _ _)
@@ -121,10 +126,10 @@ indexing comma categories of the pointwise left Kan extensions along it have ter
 objects. In particular all pointwise left Kan extensions along it exist. -/
 instance Etale.hasPointwiseLeftKanExtension_op_overPullback (F : Y.Etaleᵒᵖ ⥤ A) :
     (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasPointwiseLeftKanExtension F := by
-  haveI : (MorphismProperty.Over.pullback @Etale ⊤ g).op.IsLeftAdjoint :=
+  have : (MorphismProperty.Over.pullback @Etale ⊤ g).op.IsLeftAdjoint :=
     ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ g ‹Etale g› _root_.trivial).op).isLeftAdjoint
   intro V
-  haveI : HasTerminal (CostructuredArrow (MorphismProperty.Over.pullback @Etale ⊤ g).op V) :=
+  have : HasTerminal (CostructuredArrow (MorphismProperty.Over.pullback @Etale ⊤ g).op V) :=
     (mkTerminalOfRightAdjoint _
       (Adjunction.ofIsLeftAdjoint (MorphismProperty.Over.pullback @Etale ⊤ g).op) V).hasTerminal
   infer_instance
@@ -196,8 +201,53 @@ instance : (Etale.lowerStar A g).IsRightAdjoint :=
 instance : (Etale.upperStar A g).IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
 
+/-- The pullback `g^*` on étale sheaves with values in an abelian category is left
+exact. -/
+instance Etale.preservesFiniteLimits_upperStar [Abelian A] :
+    PreservesFiniteLimits (Etale.upperStar A g) :=
+  sorry
+
+/-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
+example : PreservesFiniteColimits (Etale.upperStar A g) := inferInstance
+
 end Adjunction
 
 end Star
+
+section Comp
+
+variable (A : Type u') [Category.{v'} A]
+variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+
+/-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
+étale sheaves. -/
+noncomputable def Etale.lowerStarComp :
+    Etale.lowerStar A h₁ ⋙ Etale.lowerStar A h₂ ≅ Etale.lowerStar A (h₁ ≫ h₂) :=
+  GrothendieckTopology.lowerStarComp A @Etale @Etale h₁ h₂
+
+section UpperStar
+
+variable [∀ F : S.Etaleᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback @Etale ⊤ h₁).op.HasLeftKanExtension F]
+  [∀ F : R.Etaleᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback @Etale ⊤ h₂).op.HasLeftKanExtension F]
+  [∀ F : R.Etaleᵒᵖ ⥤ A,
+    (MorphismProperty.Over.pullback @Etale ⊤ (h₁ ≫ h₂)).op.HasLeftKanExtension F]
+  [HasWeakSheafify S.smallEtaleTopology A]
+  [HasWeakSheafify T.smallEtaleTopology A]
+
+/-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale
+sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
+noncomputable def Etale.upperStarComp :
+    Etale.upperStar A (h₁ ≫ h₂) ≅ Etale.upperStar A h₂ ⋙ Etale.upperStar A h₁ :=
+  haveI : HasWeakSheafify (S.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+    inferInstanceAs (HasWeakSheafify S.smallEtaleTopology A)
+  haveI : HasWeakSheafify (T.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
+    inferInstanceAs (HasWeakSheafify T.smallEtaleTopology A)
+  GrothendieckTopology.upperStarComp A @Etale @Etale h₁ h₂
+
+end UpperStar
+
+end Comp
 
 end AlgebraicGeometry

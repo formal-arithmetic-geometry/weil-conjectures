@@ -57,7 +57,7 @@ open Scheme
 
 /-- Open immersions are étale, as an inequality of morphism properties. -/
 lemma isOpenImmersion_le_etale : @IsOpenImmersion ≤ @Etale := fun _ _ _ hi =>
-  haveI : IsOpenImmersion _ := hi
+  have : IsOpenImmersion _ := hi
   inferInstance
 
 section LowerShriek

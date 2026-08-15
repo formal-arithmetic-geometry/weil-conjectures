@@ -53,7 +53,7 @@ private noncomputable def residueFieldEquivOfField {k : Type u} [Field k]
 /-- The zeta function of the spectrum of a finite field `k` is `(1 - #k ^ (-s))⁻¹`. -/
 theorem zeta_spec_eq_of_finite (k : Type u) [Field k] [Finite k] (s : ℂ) :
     (Spec (.of k)).zeta s = (1 - (Nat.card k : ℂ) ^ (-s))⁻¹ := by
-  haveI : Unique ↥(Spec (CommRingCat.of k)) := inferInstanceAs (Unique (PrimeSpectrum k))
+  have : Unique ↥(Spec (CommRingCat.of k)) := inferInstanceAs (Unique (PrimeSpectrum k))
   have hmem : (default : ↥(Spec (CommRingCat.of k))) ∈ (Spec (CommRingCat.of k)).finitePoints :=
     Finite.of_equiv k (residueFieldEquivOfField default).symm
   have hnorm : (Spec (CommRingCat.of k)).pointNorm default = Nat.card k :=
@@ -70,10 +70,10 @@ theorem zeta_spec_eq_of_finite (k : Type u) [Field k] [Finite k] (s : ℂ) :
 private lemma not_finite_residueField_of_eq_bot {I : Ideal ℤ} [I.IsPrime] (hI : I = ⊥) :
     ¬Finite I.ResidueField := by
   subst hI
-  haveI : Infinite (ℤ ⧸ (⊥ : Ideal ℤ)) :=
+  have : Infinite (ℤ ⧸ (⊥ : Ideal ℤ)) :=
     Infinite.of_injective (Ideal.Quotient.mk ⊥)
       ((RingHom.injective_iff_ker_eq_bot _).mpr Ideal.mk_ker)
-  haveI : Infinite ((⊥ : Ideal ℤ).ResidueField) :=
+  have : Infinite ((⊥ : Ideal ℤ).ResidueField) :=
     Infinite.of_injective (algebraMap (ℤ ⧸ (⊥ : Ideal ℤ)) ((⊥ : Ideal ℤ).ResidueField))
       (⊥ : Ideal ℤ).injective_algebraMap_quotient_residueField
   exact fun h ↦ @not_finite ((⊥ : Ideal ℤ).ResidueField) _ h
@@ -83,9 +83,9 @@ private lemma finite_residueField_of_span {I : Ideal ℤ} [I.IsPrime] {p : ℕ} 
     (hI : I = Ideal.span {(p : ℤ)}) :
     Finite I.ResidueField ∧ Nat.card I.ResidueField = p := by
   subst hI
-  haveI : (Ideal.span {(p : ℤ)} : Ideal ℤ).IsMaximal :=
+  have : (Ideal.span {(p : ℤ)} : Ideal ℤ).IsMaximal :=
     IsPrime.to_maximal_ideal (by simpa using hp.ne_zero)
-  haveI : NeZero p := ⟨hp.ne_zero⟩
+  have : NeZero p := ⟨hp.ne_zero⟩
   have e : ZMod p ≃ (Ideal.span {(p : ℤ)} : Ideal ℤ).ResidueField :=
     ((Int.quotientSpanNatEquivZMod p).symm.trans
       (RingEquiv.ofBijective (algebraMap (ℤ ⧸ Ideal.span {(p : ℤ)}) _)
