@@ -1746,5 +1746,556 @@ the already constructed locally finite product.
   Lemma~\ref{lemma:weil-locally-finite-product-coeff}.
 \end{proof}
 
+\section{Single Euler factors}
+\label{sec:weil-euler-products}
+
+\paragraph{Generic Euler-factor scope.}
+Retain the arbitrary-commutative-ring hypothesis.  The inverse Euler factor
+is first defined in $\mathbf Z[[T]]$ and is mapped to $R[[T]]$ along the
+canonical ring homomorphism.  Its coefficient, inverse, constant-coefficient,
+positive-part, and initial-vanishing declarations below require no rational
+scalars.
+
+\begin{definition}[Raw integral inverse Euler factor]
+  \label{def:weil-integral-inverse-euler-factor}
+  \uses{}
+  \lean{Weil.integralInverseEulerFactor}
+
+  For every $m\in\mathbf N$, define the total function
+  \[
+    E_m^{\mathbf Z}(T):=\texttt{PowerSeries.mk}\left(
+      n\longmapsto
+      \begin{cases}
+        1,&m\mid n,\\
+        0,&m\nmid n
+      \end{cases}\right)\in\mathbf Z[[T]].
+  \]
+\end{definition}
+
+\begin{lemma}[Coefficient formula for the raw integral inverse Euler factor]
+  \label{lemma:weil-integral-inverse-euler-factor-coeff}
+  \uses{def:weil-integral-inverse-euler-factor}
+  \lean{Weil.coeff_integralInverseEulerFactor}
+
+  For $m\geq1$ and $n\geq0$,
+  \[
+    [T^n]E_m^{\mathbf Z}(T)=
+      \begin{cases}1,&m\mid n,\\0,&m\nmid n.
+      \end{cases}
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integral-inverse-euler-factor}
+  Unfold $E_m^{\mathbf Z}$.  The theorem
+  \texttt{PowerSeries.coeff\_mk}, instantiated with the displayed function
+  and degree $n$, returns that function's value at $n$, which is exactly the
+  stated divisibility split.
+\end{proof}
+
+\begin{lemma}[Constant coefficient of the raw integral inverse Euler factor]
+  \label{lemma:weil-integral-inverse-euler-factor-constant}
+  \uses{def:weil-integral-inverse-euler-factor}
+  \lean{Weil.integralInverseEulerFactor_constantCoeff}
+
+  For $m\geq1$, one has $c(E_m^{\mathbf Z})=1$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-integral-inverse-euler-factor-coeff}
+  Instantiate the raw integral coefficient formula at $n=0$.  Since
+  $m\mid0$, its first branch is $1$.
+\end{proof}
+
+\begin{lemma}[Initial vanishing of the raw integral positive part]
+  \label{lemma:weil-integral-inverse-euler-factor-initial-vanishing}
+  \uses{def:weil-integral-inverse-euler-factor,
+    def:weil-series-agree-through}
+  \lean{Weil.integralInverseEulerFactor_sub_one_agree_zero}
+
+  The series $E_m^{\mathbf Z}-1$ has constant coefficient zero.  If $N<m$,
+  then $E_m^{\mathbf Z}-1\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integral-inverse-euler-factor,
+    def:weil-series-agree-through,
+    lemma:weil-integral-inverse-euler-factor-coeff}
+  Instantiate \texttt{map\_sub} for the additive homomorphism
+  \texttt{PowerSeries.coeff (R := Int) n}.  At $n=0$, unfold
+  Definition~\ref{def:weil-integral-inverse-euler-factor}.  Since $m\mid0$
+  for every $m$, \texttt{PowerSeries.coeff\_mk} and
+  \texttt{PowerSeries.coeff\_one} give
+  $[T^0](E_m^{\mathbf Z}-1)=1-1=0$.  Now assume $1\leq n\leq N<m$.
+  These inequalities imply $0<m$, so the raw coefficient lemma applies.
+  Then $m\nmid n$, so the raw coefficient formula gives
+  $[T^n]E_m^{\mathbf Z}=0$; since $n\neq0$,
+  \texttt{PowerSeries.coeff\_one} gives $[T^n]1=0$.  Thus the degree-$n$
+  coefficient of the difference is zero.  Unfolding agreement through $N$
+  yields the second assertion.
+\end{proof}
+
+\begin{definition}[Scalar extension of an inverse Euler factor]
+  \label{def:weil-inverse-euler-factor}
+  \uses{def:weil-integral-inverse-euler-factor}
+  \lean{Weil.inverseEulerFactor}
+
+  For the current commutative coefficient ring $R$ and every
+  $m\in\mathbf N$, define the total function
+  \[
+    E_{m,R}(T):=
+      \texttt{PowerSeries.map}\bigl(\texttt{Int.castRingHom }R\bigr)
+        \bigl(E_m^{\mathbf Z}(T)\bigr)\in R[[T]].
+  \]
+  When $R$ is fixed by the surrounding scope, write this series as $E_m(T)$.
+\end{definition}
+
+\begin{lemma}[Coefficient formula for a scalar-extended inverse Euler factor]
+  \label{lemma:weil-inverse-euler-factor-coeff}
+  \uses{def:weil-inverse-euler-factor}
+  \lean{Weil.coeff_inverseEulerFactor}
+
+  For $m\geq1$ and $n\geq0$,
+  \[
+    [T^n]E_{m,R}(T)=
+      \begin{cases}1,&m\mid n,\\0,&m\nmid n.
+      \end{cases}
+  \]
+  If, in addition, $R$ is nontrivial, then for $m>0$ its coefficient support
+  is precisely the set of multiples $\{mr\mid r\in\mathbf N\}$.  This
+  sentence is a reformulation of the coefficient formula, not an invocation
+  of an infinite-sum operation.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-integral-inverse-euler-factor,
+    def:weil-inverse-euler-factor}
+  Unfold $E_{m,R}$ and apply \texttt{PowerSeries.coeff\_map}.  Its
+  degree-$n$ coefficient is
+  \[
+    \bigl(\texttt{Int.castRingHom }R\bigr)
+      \bigl([T^n]E_m^{\mathbf Z}\bigr).
+  \]
+  Unfold $E_m^{\mathbf Z}$ and apply
+  \texttt{PowerSeries.coeff\_mk}; the inner integral coefficient is $1$ when
+  $m\mid n$ and $0$ otherwise.  The ring homomorphism sends these values to
+  $1_R$ and $0_R$ by \texttt{map\_one} and \texttt{map\_zero}.  Under
+  \texttt{Nontrivial R}, these values are distinct.  When $m>0$, the support
+  description follows because $m\mid n$ if and only if $n=mr$ for some
+  $r\in\mathbf N$; cancellation by the positive integer $m$ makes that $r$
+  unique.
+\end{proof}
+
+\begin{lemma}[Constant coefficient of an inverse Euler factor]
+  \label{lemma:weil-inverse-euler-factor-constant}
+  \uses{def:weil-inverse-euler-factor}
+  \lean{Weil.inverseEulerFactor_constantCoeff}
+
+  For $m\geq1$, one has $c(E_m)=1$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-inverse-euler-factor-coeff}
+  Instantiate Lemma~\ref{lemma:weil-inverse-euler-factor-coeff} at $n=0$.
+  Since every positive $m$ divides $0$, its first branch gives
+  $[T^0]E_m=1$.
+\end{proof}
+
+\begin{lemma}[Inverse identity for a single Euler factor]
+  \label{lemma:weil-inverse-euler-factor-mul}
+  \uses{def:weil-inverse-euler-factor}
+  \lean{Weil.one_sub_X_pow_mul_inverseEulerFactor}
+
+  For $m\geq1$,
+  \[
+    (1-T^m)E_m(T)=1=E_m(T)(1-T^m).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-inverse-euler-factor-coeff}
+  The constant coefficient of the left product is $1$.  For $n\geq1$, use
+  \texttt{PowerSeries.coeff\_mul}.  Since $1-T^m$ has nonzero coefficients
+  only in degrees $0$ and $m$, the result is
+  \[
+    [T^n]E_m-\begin{cases}[T^{n-m}]E_m,&m\leq n,\\0,&n<m.
+    \end{cases}
+  \]
+  If $n<m$, then $m\nmid n$, so the first term is zero and the second term is
+  absent.  If $m\leq n$ and $m\nmid n$, then
+  $m\nmid(n-m)$: otherwise $m\mid(n-m)$ together with $m\mid m$ would imply
+  $m\mid n$.  Hence both displayed terms are zero.  Finally, if $m\mid n$
+  and $n>0$, positivity of $m$ gives $m\leq n$, and both terms are one.
+  Thus every positive coefficient is zero.  Equality of coefficients gives
+  the first identity, and commutativity gives the second.
+\end{proof}
+
+\begin{definition}[Positive part of an inverse Euler factor]
+  \label{def:weil-inverse-euler-factor-positive-part}
+  \uses{def:weil-inverse-euler-factor}
+  \lean{Weil.inverseEulerFactorPositivePart}
+
+  For every $m\in\mathbf N$, define the total function
+  $e_m(T):=E_m(T)-1$.
+\end{definition}
+
+\begin{lemma}[Initial vanishing of an inverse Euler factor]
+  \label{lemma:weil-inverse-euler-factor-initial-vanishing}
+  \uses{def:weil-inverse-euler-factor-positive-part,
+    def:weil-series-agree-through}
+  \lean{Weil.inverseEulerFactorPositivePart_agree_zero}
+
+  The series $e_m$ has constant coefficient zero.  If $N<m$, then
+  $e_m\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-inverse-euler-factor-positive-part,
+    def:weil-series-agree-through,
+    def:weil-inverse-euler-factor,
+    lemma:weil-inverse-euler-factor-coeff}
+  At degree zero unfold $E_m$ and the raw coefficient function.  Since
+  $m\mid0$ for every $m$, \texttt{PowerSeries.coeff\_map} and
+  \texttt{PowerSeries.coeff\_mk} give $c(E_m)=1$, hence $c(e_m)=0$.
+  If $N<m$, then $0<m$, so the coefficient lemma is available.  For
+  $1\leq n<m$, the positive integer $m$ does not divide $n$, hence the
+  coefficient of $E_m$, and therefore of $e_m$, is zero.  This proves
+  agreement through every $N<m$.
+\end{proof}
+
+\begin{lemma}[Activation of an inverse Euler factor over a nontrivial ring]
+  \label{lemma:weil-inverse-euler-factor-activation}
+  \uses{def:weil-inverse-euler-factor-positive-part,
+    def:weil-series-agree-through}
+  \lean{Weil.inverseEulerFactorPositivePart_not_agree_zero}
+
+  Assume that the commutative ring $R$ is nontrivial.  If $1\leq m\leq N$,
+  then $e_m\not\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-inverse-euler-factor-positive-part,
+    def:weil-series-agree-through,
+    lemma:weil-inverse-euler-factor-coeff}
+  Unfold $e_m=E_m-1$ and instantiate \texttt{map\_sub} for the additive
+  homomorphism \texttt{PowerSeries.coeff (R := R) m}; this gives
+  $[T^m](E_m-1)=[T^m]E_m-[T^m]1$.  Since $m\mid m$, the inverse
+  Euler-factor coefficient formula gives
+  $[T^m]E_m=1$.  Since $m\geq1$, one has $m\neq0$, and
+  \texttt{PowerSeries.coeff\_one} gives $[T^m]1=0$.  Hence
+  $[T^m]e_m=1-0=1$.  Nontriviality of $R$ gives $1\neq0$, so this differs
+  from the degree-$m$ coefficient of the zero series.  Because $m\leq N$,
+  agreement through $N$ fails.
+\end{proof}
+
+\paragraph{Rational Euler-logarithm scope.}
+For the remaining declarations of this section set $R=\mathbf Q$ once and
+for all.  Thus $E_m$ now abbreviates $E_{m,\mathbf Q}\in\mathbf Q[[T]]$,
+every displayed integer scalar is inserted by the canonical cast
+$\mathbf N\to\mathbf Q$.  In the coefficient definition below, $n/m$ is
+first the total natural-number quotient and is then cast to $\mathbf Q$;
+the outer division by that cast, and all other displayed divisions in this
+scope, are taken in $\mathbf Q$.
+This specialization is used only for division, formal logarithm,
+exponential, and the differential equations; the inverse-factor construction
+of Definition~\ref{def:weil-inverse-euler-factor} remains valid over an
+arbitrary commutative ring.
+
+\begin{definition}[Logarithm series of a single Euler factor]
+  \label{def:weil-euler-log-series}
+  \uses{}
+  \lean{Weil.eulerLogSeries}
+
+  For every $m\in\mathbf N$, define $L_m(T)\in\mathbf Q[[T]]$ by
+  \[
+    [T^n]L_m(T)=
+      \begin{cases}
+        (1:\mathbf Q)/((n/m:\mathbf N):\mathbf Q),
+          &n>0\text{ and }m\mid n,\\
+        0,&\text{otherwise}.
+      \end{cases}
+  \]
+  This coefficient formula is the formal meaning of the customary notation
+  $\sum_{r\geq1}T^{mr}/r$; no ambient infinite-sum operation on power
+  series is used in the definition.
+\end{definition}
+
+\begin{lemma}[Shifted divisibility for Euler coefficients]
+  \label{lemma:weil-euler-log-shift-divisibility}
+  \uses{}
+  \lean{Weil.dvd_succ_iff_pred_le_and_dvd_sub_pred}
+
+  If $1\leq m$, then for every $n\in\mathbf N$,
+  \[
+    m\mid n+1
+      \quad\Longleftrightarrow\quad
+    m-1\leq n\ \text{ and }\ m\mid n-(m-1).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{}
+  Suppose first that $m\mid n+1$.  Since $0<n+1$,
+  \texttt{Nat.le\_of\_dvd} gives $m\leq n+1$, hence $m-1\leq n$.
+  The exact theorem \texttt{Nat.dvd\_sub}, applied to $m\mid n+1$ and
+  $m\mid m$, gives $m\mid(n+1)-m$; under the preceding inequality,
+  natural-number subtraction satisfies
+  $(n+1)-m=n-(m-1)$.
+
+  Conversely, put $q=n-(m-1)$ and assume $m-1\leq n$ and $m\mid q$.
+  The identities \texttt{Nat.sub\_add\_cancel} and
+  $m-1+1=m$ (the latter using $1\leq m$) give
+  $n+1=m+q$.  The divisibilities $m\mid m$ and $m\mid q$, followed by
+  \texttt{Nat.dvd\_add}, prove $m\mid n+1$.
+\end{proof}
+
+\begin{lemma}[Constant coefficient and derivative of the Euler logarithm]
+  \label{lemma:weil-euler-log-series-derivative}
+  \uses{def:weil-euler-log-series,def:weil-formal-derivative,
+    def:weil-inverse-euler-factor}
+  \lean{Weil.eulerLogSeries_derivative}
+
+  For $m\geq1$, one has $c(L_m)=0$ and
+  \[
+    DL_m=(m:\mathbf Q)T^{m-1}E_m(T).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-euler-log-series,
+    lemma:weil-formal-derivative-rules,
+    lemma:weil-euler-log-shift-divisibility,
+    lemma:weil-inverse-euler-factor-coeff}
+  Fix $m\geq1$.  The constant coefficient is zero by the $n=0$ branch of
+  Definition~\ref{def:weil-euler-log-series}.  For the derivative equality,
+  apply \texttt{PowerSeries.ext} and fix $n$.  By
+  Lemma~\ref{lemma:weil-formal-derivative-rules}, the left coefficient is
+  \[
+    (n+1:\mathbf Q)[T^{n+1}]L_m.
+  \]
+  Put $q:=(n+1)/m\in\mathbf N$ and split on $m\mid n+1$.
+
+  If this divisibility fails, the defining coefficient of $L_m$ is zero.
+  On the right, commute the monomial past $E_m$ and apply the exact formula
+  \texttt{PowerSeries.coeff\_mul\_X\_pow'}.  A nonzero coefficient would
+  require both $m-1\leq n$ and $m\mid n-(m-1)$ by
+  Lemma~\ref{lemma:weil-inverse-euler-factor-coeff};
+  Lemma~\ref{lemma:weil-euler-log-shift-divisibility} says that their
+  conjunction is precisely $m\mid n+1$, a contradiction.  Thus both
+  coefficients are zero.
+
+  Now suppose $m\mid n+1$.  The positivity of $m$ and
+  \texttt{Nat.le\_of\_dvd} give $0<q$.  The identity
+  \texttt{Nat.div\_mul\_cancel} casts to
+  \[
+    (n+1:\mathbf Q)=(m:\mathbf Q)(q:\mathbf Q).
+  \]
+  Since $(q:\mathbf Q)\ne0$, the coefficient on the left is therefore
+  $(m:\mathbf Q)(q:\mathbf Q)/(q:\mathbf Q)=(m:\mathbf Q)$.
+  On the right, the shifted-divisibility lemma supplies
+  $m-1\leq n$ and $m\mid n-(m-1)$.  Hence
+  \texttt{PowerSeries.coeff\_mul\_X\_pow'} reduces the coefficient to
+  $(m:\mathbf Q)[T^{n-(m-1)}]E_m$, and
+  Lemma~\ref{lemma:weil-inverse-euler-factor-coeff} makes the remaining
+  coefficient equal to $1$.  The two coefficients agree.
+\end{proof}
+
+\begin{lemma}[Derivative of a power-series monomial]
+  \label{lemma:weil-formal-derivative-X-pow}
+  \uses{def:weil-formal-derivative}
+  \lean{Weil.formalDerivative_X_pow}
+
+  For every $m\in\mathbf N$,
+  \[
+    D(T^m)=(m:\mathbf Q)T^{m-1}
+    \qquad\text{in }\mathbf Q[[T]].
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-formal-derivative-rules}
+  Apply \texttt{PowerSeries.derivative\_pow} to $T^m$ and then substitute
+  \texttt{PowerSeries.derivative\_X}.  Commutativity collects the resulting
+  $m$ identical factors as the scalar $(m:\mathbf Q)$; for $m=0$ both sides
+  are zero.
+\end{proof}
+
+\begin{lemma}[Derivative of an inverse Euler factor]
+  \label{lemma:weil-inverse-euler-factor-derivative}
+  \uses{def:weil-inverse-euler-factor,def:weil-formal-derivative}
+  \lean{Weil.inverseEulerFactor_derivative}
+
+  For $m\geq1$,
+  \[
+    DE_m=(m:\mathbf Q)T^{m-1}E_m^2.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-inverse-euler-factor-mul,
+    lemma:weil-formal-derivative-rules,
+    lemma:weil-formal-derivative-X-pow}
+  Differentiate $(1-T^m)E_m=1$.  The product rule and the direct monomial
+  derivative $D(T^m)=(m:\mathbf Q)T^{m-1}$ give
+  \[
+    -(m:\mathbf Q)T^{m-1}E_m+(1-T^m)DE_m=0.
+  \]
+  Multiply by $E_m$ and use $(1-T^m)E_m=1$.  The result is the displayed
+  identity.
+\end{proof}
+
+\begin{lemma}[The exponential Euler series satisfies the Euler ODE]
+  \label{lemma:weil-exp-euler-log-series-ode}
+  \uses{def:weil-formal-exp,def:weil-euler-log-series,
+    def:weil-inverse-euler-factor,def:weil-formal-derivative}
+  \lean{Weil.formalExp_eulerLogSeries_ode}
+
+  For $m\geq1$,
+  \[
+    D\operatorname{Exp}(L_m)
+      =((m:\mathbf Q)T^{m-1}E_m)\operatorname{Exp}(L_m).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-euler-log-series-derivative,
+    lemma:weil-formal-exp-derivative}
+  Lemma~\ref{lemma:weil-euler-log-series-derivative} gives $c(L_m)=0$ and
+  $DL_m=(m:\mathbf Q)T^{m-1}E_m$.  Apply
+  Lemma~\ref{lemma:weil-formal-exp-derivative} to $L_m$ and
+  substitute this displayed value of $DL_m$.
+\end{proof}
+
+\begin{lemma}[The inverse Euler factor satisfies the Euler ODE]
+  \label{lemma:weil-inverse-euler-factor-ode}
+  \uses{def:weil-inverse-euler-factor,def:weil-formal-derivative}
+  \lean{Weil.inverseEulerFactor_ode}
+
+  For $m\geq1$,
+  \[
+    DE_m=((m:\mathbf Q)T^{m-1}E_m)E_m.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-inverse-euler-factor-derivative}
+  Lemma~\ref{lemma:weil-inverse-euler-factor-derivative} gives
+  $DE_m=(m:\mathbf Q)T^{m-1}E_m^2$.  Unfold the square as $E_mE_m$ and reassociate the
+  three factors.
+\end{proof}
+
+\begin{lemma}[Exponential of the Euler logarithm]
+  \label{lemma:weil-exp-euler-log-series}
+  \uses{def:weil-formal-exp,def:weil-euler-log-series,
+    def:weil-inverse-euler-factor}
+  \lean{Weil.formalExp_eulerLogSeries}
+
+  For $m\geq1$,
+  \[
+    \operatorname{Exp}(L_m)=E_m.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-euler-log-series-derivative,
+    lemma:weil-formal-exp-constant,
+    lemma:weil-inverse-euler-factor-constant,
+    lemma:weil-exp-euler-log-series-ode,
+    lemma:weil-inverse-euler-factor-ode,
+    lemma:weil-common-logarithmic-derivative-unique}
+  Set $X=\operatorname{Exp}(L_m)$, $Y=E_m$, and
+  $H=(m:\mathbf Q)T^{m-1}E_m$.
+  Lemmas~\ref{lemma:weil-exp-euler-log-series-ode} and
+  \ref{lemma:weil-inverse-euler-factor-ode} give $DX=HX$ and $DY=HY$.
+  Lemma~\ref{lemma:weil-euler-log-series-derivative} gives $c(L_m)=0$, so
+  the formal-exponential constant lemma gives $c(X)=1$; the inverse Euler
+  constant lemma gives $c(Y)=1$.  Apply
+  Lemma~\ref{lemma:weil-common-logarithmic-derivative-unique}.
+\end{proof}
+
+\begin{definition}[Bundled normalized inverse Euler factor]
+  \label{def:weil-bundled-inverse-euler-factor}
+  \uses{def:weil-inverse-euler-factor,def:weil-one-series,
+    lemma:weil-inverse-euler-factor-constant}
+  \constructedby{lemma:weil-inverse-euler-factor-constant}
+  \lean{Weil.normalizedInverseEulerFactor}
+
+  For $m\geq1$, define
+  \[
+    \widehat E_m:=\left\langle E_m,
+      \text{Lemma~\ref{lemma:weil-inverse-euler-factor-constant}}
+    \right\rangle\in\operatorname{OneSeries}(\mathbf Q).
+  \]
+  Proof irrelevance makes this independent of the witness $1\leq m$.
+\end{definition}
+
+\begin{lemma}[Logarithm of an inverse Euler factor]
+  \label{lemma:weil-log-inverse-euler-factor}
+  \uses{def:weil-formal-log,def:weil-inverse-euler-factor,
+    def:weil-bundled-inverse-euler-factor,
+    def:weil-euler-log-series,
+    lemma:weil-inverse-euler-factor-constant}
+  \lean{Weil.formalLog_inverseEulerFactor}
+
+  For $m\geq1$,
+  \[
+    \operatorname{Log}(\widehat E_m)=L_m(T),
+  \]
+  where $[T^n]L_m=(1:\mathbf Q)/((n/m:\mathbf N):\mathbf Q)$ when $n>0$ and
+  $m\mid n$, and is zero otherwise.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-exp-euler-log-series,
+    lemma:weil-formal-log-exp,
+    lemma:weil-formal-exp-constant,
+    lemma:weil-euler-log-series-derivative,
+    def:weil-bundled-inverse-euler-factor,
+    def:weil-euler-log-series}
+  Fix $h_m:1\leq m$.  The series $L_m$ has zero constant coefficient by
+  Lemma~\ref{lemma:weil-euler-log-series-derivative}; form
+  $L_m^+:=\langle L_m,c(L_m)=0\rangle\in
+  \operatorname{PositiveSeries}(\mathbf Q)$.  By
+  Lemma~\ref{lemma:weil-formal-exp-constant}, also form
+  \[
+    \widehat X_m:=\langle\operatorname{Exp}(L_m^+),
+      c(\operatorname{Exp}(L_m^+))=1\rangle
+      \in\operatorname{OneSeries}(\mathbf Q).
+  \]
+  Lemma~\ref{lemma:weil-exp-euler-log-series} is the equality of the
+  underlying power series of $\widehat X_m$ and $\widehat E_m$.
+  \texttt{Subtype.ext} upgrades it to
+  $\widehat X_m=\widehat E_m$; apply \texttt{congrArg} for the bundled map
+  $\operatorname{Log}$.  Then
+  Lemma~\ref{lemma:weil-formal-log-exp} identifies the left side with $L_m$;
+  the right side is $\operatorname{Log}(\widehat E_m)$.  This gives
+  $L_m=\operatorname{Log}(\widehat E_m)$, so take symmetry to obtain the
+  equality in the stated direction.
+  The coefficient description on the right is part of
+  Definition~\ref{def:weil-euler-log-series}.
+\end{proof}
+
+\begin{lemma}[Rational reciprocal of a divisor quotient]
+  \label{lemma:weil-rational-reciprocal-divisor-quotient}
+  \uses{}
+  \lean{Weil.one_div_natDiv_cast}
+
+  If $0<m$, $0<n$, and $m\mid n$, then in $\mathbf Q$,
+  \[
+    \frac{1}{((n/m:\mathbf N):\mathbf Q)}
+      =\frac{(m:\mathbf Q)}{(n:\mathbf Q)}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{}
+  From $m\mid n$ and $0<n$, \texttt{Nat.le\_of\_dvd} gives $m\leq n$;
+  with $0<m$, \texttt{Nat.div\_pos} gives $0<n/m$.  Hence both
+  $((n/m:\mathbf N):\mathbf Q)$ and $(n:\mathbf Q)$ are nonzero.
+  The identity \texttt{Nat.div\_mul\_cancel} applied to $m\mid n$ says
+  $(n/m)m=n$.  Cast it with \texttt{Nat.cast\_mul}, then clear the two
+  nonzero denominators (or use \texttt{field\_simp}); the result is the
+  displayed equality.
+\end{proof}
 
 \end{document}
