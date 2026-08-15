@@ -6,22 +6,23 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
 # Scheme-theoretically dense compactifications
 
 A compactification `X ⟶ Z ⟶ Y` of `f : X ⟶ Y` is scheme-theoretically dense if the
-sheaf morphism `𝒪_Z ⟶ i_* 𝒪_X` is injective, i.e. if the kernel ideal sheaf of the
-open immersion `i : X ⟶ Z` is trivial. This is `IsSchemeTheoreticallyDominant c.i` in
-terms of Mathlib's `AlgebraicGeometry.IsSchemeTheoreticallyDominant` (blueprint labels
-`def:nagata-scheme-theoretically-dense-open` and `def:nagata-dense-compactification`).
+kernel ideal sheaf of its open immersion `i : X ⟶ Z` is trivial, i.e. if
+`IsSchemeTheoreticallyDominant c.i` holds (blueprint:
+`def:nagata-dense-compactification`). When `i` is quasi-compact — equivalently, by
+`Compactification.quasiCompact_openImmersion_iff`, when `f` is — this says precisely
+that the sheaf morphism `𝒪_Z ⟶ i_* 𝒪_X` is injective; in general `Scheme.Hom.ker` is
+only the largest quasi-coherent ideal sheaf contained in that kernel.
 
-We characterize this by the condition that the inclusion of the scheme-theoretic image
-of the open immersion into the compactification is an isomorphism
-(`lemma:nagata-dense-compactification-characterization`). Under the resulting
-identification the factor map `c.i.toImage` is identified with `c.i` by the
-factorization `Scheme.Hom.toImage_imageι`.
+We characterize this condition by the requirement that the inclusion of the
+scheme-theoretic image of the open immersion into the compactification is an
+isomorphism.
 
 -/
 
@@ -36,12 +37,12 @@ namespace AlgebraicGeometry.Compactification
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- A compactification is scheme-theoretically dense (i.e. its open immersion `c.i` is
-scheme-theoretically dominant, `def:nagata-dense-compactification`) if and only if the
-inclusion of the scheme-theoretic image of its open immersion is an isomorphism.
-(Blueprint: `lemma:nagata-dense-compactification-characterization`.) -/
+scheme-theoretically dominant, blueprint: `def:nagata-dense-compactification`) if and
+only if the inclusion of the scheme-theoretic image of its open immersion is an
+isomorphism. This is the special case of
+`AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι` for `c.i`. -/
 theorem isSchemeTheoreticallyDominant_iff_isIso_imageι (c : Compactification f) :
     IsSchemeTheoreticallyDominant c.i ↔ IsIso c.i.imageι :=
-  (isSchemeTheoreticallyDominant_iff c.i).trans
-    (Scheme.isIso_subschemeι_iff_eq_bot c.i.ker).symm
+  _root_.AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι c.i
 
 end AlgebraicGeometry.Compactification

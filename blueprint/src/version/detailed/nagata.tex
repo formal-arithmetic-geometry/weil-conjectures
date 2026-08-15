@@ -1681,7 +1681,8 @@ declarations.
   \label{def:nagata-dense-compactification}
   \uses{def:nagata-compactification,
     def:nagata-direct-image-structure-map}
-  \lean{}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant}
+  \leanok
 
   Let \(f\colon X\to S\) be a morphism of schemes, and let
   $C=(\overline X,j,p,e)\in
@@ -1713,11 +1714,48 @@ declarations.
   \texttt{\detokenize{isSchemeTheoreticallyDominant_iff}}.
 \end{definition}
 
+\begin{lemma}[Characterization of scheme-theoretically dense compactifications]
+  \label{lemma:nagata-dense-compactification-characterization}
+  \uses{def:nagata-dense-compactification,
+    def:nagata-scheme-theoretic-image}
+  \lean{AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι}
+  \leanok
+
+  Let $g\colon T\to Y$ be a morphism of schemes.  Then
+  \[
+    \operatorname{SchematicallyDense}(g)
+      \quad\Longleftrightarrow\quad
+    i_g\colon\operatorname{SIm}_Y(g)\to Y\text{ is an isomorphism.}
+  \]
+  In particular, for a compactification
+  $C=(\overline X,j,p,e)$ of $f\colon X\to S$ as in
+  \Cref{def:nagata-dense-compactification}, $C$ is dense if and only if
+  $i_j$ is an isomorphism.
+
+  \paragraph{Mathlib relation.}
+  The kernel characterization is
+  \texttt{\detokenize{isSchemeTheoreticallyDominant_iff}} and the
+  criterion for the inclusion of a closed subscheme to be an isomorphism is
+  \texttt{\detokenize{Scheme.isIso_subschemeι_iff_eq_bot}}.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  \uses{def:nagata-scheme-theoretic-image}
+  By \Cref{def:nagata-scheme-theoretic-image}, $i_g$ is the closed immersion
+  classified by $\mathcal K_g$, and a closed immersion classified by an ideal
+  sheaf is an isomorphism if and only if that ideal sheaf vanishes.  Hence
+  $i_g$ is an isomorphism if and only if $\mathcal K_g=0$, which is the
+  definition of $\operatorname{SchematicallyDense}(g)$.
+\end{proof}
+
 \begin{definition}[Scheme-theoretic image]
   \label{def:nagata-scheme-theoretic-image}
   \uses{def:nagata-direct-image-structure-map,
     def:nagata-quotient-relative-spec}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.image,
+    AlgebraicGeometry.Scheme.Hom.imageι}
+  \leanok
 
   Let \(g\colon T\to Y\) satisfy
   \(\operatorname{IsQCQS}(g)\).  By
@@ -1785,7 +1823,8 @@ declarations.
   \uses{def:nagata-direct-image-structure-map,
     def:nagata-scheme-theoretic-image,
     lemma:nagata-quotient-relative-spec}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.toImage}
+  \leanok
 
   For $g\colon T\to Y$ and
   $(\mathcal K_g,\pi_g,i_g,\chi_g)$ as in
@@ -1837,7 +1876,8 @@ declarations.
     def:nagata-closed-subscheme-class,
     def:nagata-direct-image-structure-map,
     def:nagata-scheme-theoretic-image}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.image.lift}
+  \leanok
 
   Let $g\colon T\to Y$ be as in
   \Cref{def:nagata-scheme-theoretic-image}.  Suppose that
@@ -1951,7 +1991,10 @@ declarations.
 \begin{lemma}[Universal property of the scheme-theoretic image]
   \label{lemma:nagata-scheme-image-universal}
   \uses{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.image.lift_fac,
+    AlgebraicGeometry.Scheme.Hom.image.toImage_lift,
+    AlgebraicGeometry.Scheme.Hom.image.lift_unique}
+  \leanok
 
   With the notation of
   \Cref{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison},
@@ -2124,13 +2167,88 @@ declarations.
   These equalities define the asserted inverse and cartesian identification.
 \end{proof}
 
+\begin{lemma}[Flat base change for scheme-theoretic images]
+  \label{lemma:nagata-scheme-image-flat-base-change}
+  \uses{def:nagata-scheme-image-factor,
+    def:nagata-scheme-theoretic-image,
+    lemma:nagata-morphism-property-calculus}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd,
+    AlgebraicGeometry.Scheme.Hom.image.pullbackIso}
+  \leanok
+
+  Let \(g\colon T\to Y\) satisfy \(\operatorname{IsQCQS}(g)\), as in
+  \Cref{def:nagata-scheme-theoretic-image}, and let \(q\colon Y'\to Y\) be
+  flat.  Define
+  \[
+    T':=T\times_{Y,g,q}Y',
+    \qquad
+    \pi_T\colon T'\to T,
+    \qquad
+    g':=\operatorname{pr}_{Y'}\colon T'\to Y',
+  \]
+  so that $g'$ is the base change of $g$ along $q$.  Then
+  \[
+    \mathcal K_{g'}=q^{-1}\mathcal K_g
+                                                                  \tag{SIFB1}
+  \]
+  as ideal sheaves on $Y'$, and there is a unique isomorphism
+  \[
+    \beta_{g,q}\colon\operatorname{SIm}_{Y'}(g')
+      \xrightarrow{\ \sim\ }\operatorname{SIm}_Y(g)\times_{Y,i_g,q}Y'
+  \]
+  satisfying
+  \[
+    \operatorname{pr}_{Y'}\circ\beta_{g,q}=i_{g'},
+    \qquad
+    \operatorname{pr}_{\operatorname{SIm}_Y(g)}\circ\beta_{g,q}
+      \circ (g')^{\mathrm{im}}=g^{\mathrm{im}}\circ\pi_T.
+                                                                  \tag{SIFB2}
+  \]
+  This is
+  \cite[\href{https://stacks.math.columbia.edu/tag/081I}{Tag 081I}]
+  {stacks-project}.
+
+  \paragraph{Mathlib relation.}
+  Identity (SIFB1) is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}}
+  (stated for an arbitrary cartesian square in
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.ker_of_isPullback}}), the
+  isomorphism $\beta_{g,q}$ is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.image.pullbackIso}}, and
+  the two identities (SIFB2) are
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.image.pullbackIso_hom_fst}}
+  and
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.image.toImage_pullbackIso_hom_snd}}.
+  The Lean statements assume only that $g$ is quasi-compact, since Mathlib's
+  \texttt{\detokenize{Scheme.Hom.ker}} theory needs no quasi-separatedness.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  \uses{def:nagata-scheme-image-factor,def:nagata-scheme-theoretic-image}
+  The factorization $i_g\circ g^{\mathrm{im}}=g$ of
+  \Cref{def:nagata-scheme-image-factor} base changes to a factorization of
+  $g'$ through $P:=\operatorname{SIm}_Y(g)\times_{Y}Y'$, whose comparison map
+  $T'\to P$ is the base change of $g^{\mathrm{im}}$ along the flat projection
+  $P\to\operatorname{SIm}_Y(g)$.  Since $g^{\mathrm{im}}$ is
+  scheme-theoretically dominant and formation of the kernel of
+  $\varepsilon_{(-)}$ commutes with flat base change, that comparison map is
+  again scheme-theoretically dominant.  Hence $\mathcal K_{g'}$ is the kernel
+  of the closed immersion $P\to Y'$, which is $q^{-1}\mathcal K_g$; this is
+  (SIFB1).  The map $\beta_{g,q}$ is then the comparison map of
+  \Cref{def:nagata-scheme-image-comparison} for the closed immersion
+  $P\to Y'$, an isomorphism because the two kernels agree, and (SIFB2) are
+  its defining identities.
+\end{proof}
+
 \begin{lemma}[Restriction of a scheme-theoretic image to an open target]
   \label{lemma:nagata-scheme-image-restrict-open}
   \uses{def:nagata-closed-subscheme-class,def:nagata-scheme-image-factor,
     def:nagata-presented-relative-spec,
     def:nagata-scheme-theoretic-image,
     lemma:nagata-morphism-property-calculus}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_morphismRestrict}
+  \leanok
 
   Let \(g\colon T\to Y\) satisfy \(\operatorname{IsQCQS}(g)\), as in
   \Cref{def:nagata-scheme-theoretic-image}, and let
