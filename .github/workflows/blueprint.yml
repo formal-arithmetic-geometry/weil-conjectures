@@ -26,7 +26,7 @@ concurrency:
 jobs:
   build:
     name: Build blueprint site
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       # The texlive-full image is ~5GB and a stock runner is tight on space.
       - name: Free disk space
@@ -82,9 +82,9 @@ jobs:
   checkdecls:
     name: Check blueprint declarations exist in the Lean code
     # Runs in its own job: the Lean build and the ~5GB texlive image do not
-    # both fit on a stock runner.
+    # both fit on a single runner.
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
@@ -107,7 +107,7 @@ jobs:
     name: Deploy to GitHub Pages (/blueprint)
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: [build, checkdecls]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     # Serialize all jobs that push to gh-pages (across workflows) to avoid
     # racing deployments.
     concurrency:
@@ -136,7 +136,7 @@ jobs:
     name: Deploy PR preview (/preview/<pr>/blueprint)
     if: github.event_name == 'pull_request_target'
     needs: [build, checkdecls]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     concurrency:
       group: gh-pages
       cancel-in-progress: false
