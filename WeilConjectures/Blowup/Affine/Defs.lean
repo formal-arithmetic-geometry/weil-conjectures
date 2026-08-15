@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Affine.ReesGrading
-public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 
