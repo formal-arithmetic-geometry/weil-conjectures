@@ -6,6 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 
 /-!
 # Functoriality of `mapDerivedCategory`
@@ -17,6 +19,16 @@ For exact functors between abelian categories, the induced functor
   functors induces an isomorphism `F.mapDerivedCategory ≅ G.mapDerivedCategory`.
 - `CategoryTheory.Functor.mapDerivedCategoryCompIso`: the composition isomorphism
   `(F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory`.
+- `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
+  `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
+  isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility`.
+- `CategoryTheory.Functor.mapDerivedCategoryPlusNatIso` and
+  `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso`: the corresponding
+  functoriality of `mapDerivedCategoryPlus`, obtained by cancelling the fully faithful
+  inclusions `DerivedCategory.Plus.ι`.
+- `CategoryTheory.Functor.mapDerivedCategoryPlusSingleFunctor`: the compatibility of
+  `mapDerivedCategoryPlus` with the single functors of the bounded below derived
+  categories.
 -/
 
 @[expose] public section
@@ -70,5 +82,93 @@ noncomputable def mapDerivedCategoryCompIso (F : C ⥤ D) (G : D ⥤ E)
     ((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
     (F ⋙ G).mapDerivedCategory (F.mapDerivedCategory ⋙ G.mapDerivedCategory)
     (Iso.refl _)
+
+section Plus
+
+variable (F : C ⥤ D) [F.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+/-- An exact functor between abelian categories preserves bounded below objects of the
+derived categories: an object isomorphic to a complex concentrated in degrees `≥ n` is
+sent to an object with the same property. -/
+lemma isGE_mapDerivedCategory_obj (X : DerivedCategory C) (n : ℤ) [X.IsGE n] :
+    (F.mapDerivedCategory.obj X).IsGE n := by
+  obtain ⟨K, hK, ⟨e⟩⟩ := X.exists_iso_Q_obj_of_isGE n
+  have : DerivedCategory.TStructure.t.IsGE
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q).obj K) n :=
+    inferInstanceAs (DerivedCategory.IsGE (DerivedCategory.Q.obj
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) n)
+  exact DerivedCategory.TStructure.t.isGE_of_iso
+    (F.mapDerivedCategory.mapIso e ≪≫ F.mapDerivedCategoryFactors.app K).symm n
+
+/-- The functor induced on the bounded below derived categories by an exact functor
+between abelian categories: the restriction of `F.mapDerivedCategory` to
+`DerivedCategory.Plus`, which is well defined since an exact functor preserves bounded
+below objects. -/
+noncomputable def mapDerivedCategoryPlus :
+    DerivedCategory.Plus C ⥤ DerivedCategory.Plus D :=
+  DerivedCategory.TStructure.t.plus.lift
+    (DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory) (by
+      rintro ⟨X, n, hn⟩
+      exact ⟨n, F.isGE_mapDerivedCategory_obj X n⟩)
+
+/-- The restriction `F.mapDerivedCategoryPlus` of `F.mapDerivedCategory` to the bounded
+below derived categories is compatible with the inclusions. -/
+noncomputable def mapDerivedCategoryPlusCompatibility :
+    F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ≅
+      DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory :=
+  Iso.refl _
+
+/-- An isomorphism `F ≅ G` of exact functors between abelian categories induces an
+isomorphism `F.mapDerivedCategoryPlus ≅ G.mapDerivedCategoryPlus` of the functors
+induced on the bounded below derived categories: the restriction of
+`Functor.mapDerivedCategoryNatIso` along the inclusions `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusNatIso {F G : C ⥤ D} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) :
+    F.mapDerivedCategoryPlus ≅ G.mapDerivedCategoryPlus :=
+  fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    (F.mapDerivedCategoryPlusCompatibility ≪≫
+      isoWhiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryNatIso e) ≪≫
+      G.mapDerivedCategoryPlusCompatibility.symm)
+
+/-- The composition isomorphism
+`(F ⋙ G).mapDerivedCategoryPlus ≅ F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus`
+for exact functors between abelian categories: the restriction of
+`Functor.mapDerivedCategoryCompIso` along the inclusions `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusCompIso (F : C ⥤ D) (G : D ⥤ E)
+    [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+    (F ⋙ G).mapDerivedCategoryPlus ≅
+      F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus :=
+  fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    ((F ⋙ G).mapDerivedCategoryPlusCompatibility ≪≫
+      isoWhiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight F.mapDerivedCategoryPlusCompatibility.symm G.mapDerivedCategory ≪≫
+      Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft F.mapDerivedCategoryPlus
+        G.mapDerivedCategoryPlusCompatibility.symm ≪≫
+      (Functor.associator _ _ _).symm)
+
+/-- `DerivedCategory.Plus.singleFunctor` commutes with an exact functor `F` and
+`F.mapDerivedCategoryPlus`: the restriction of `Functor.mapDerivedCategorySingleFunctor`
+along the inclusions `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusSingleFunctor (n : ℤ) :
+    DerivedCategory.Plus.singleFunctor C n ⋙ F.mapDerivedCategoryPlus ≅
+      F ⋙ DerivedCategory.Plus.singleFunctor D n :=
+  fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    (Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C n)
+        F.mapDerivedCategoryPlusCompatibility ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight (DerivedCategory.Plus.singleFunctorιIso C n)
+        F.mapDerivedCategory ≪≫
+      F.mapDerivedCategorySingleFunctor n ≪≫
+      isoWhiskerLeft F (DerivedCategory.Plus.singleFunctorιIso D n).symm ≪≫
+      (Functor.associator _ _ _).symm)
+
+end Plus
 
 end CategoryTheory.Functor

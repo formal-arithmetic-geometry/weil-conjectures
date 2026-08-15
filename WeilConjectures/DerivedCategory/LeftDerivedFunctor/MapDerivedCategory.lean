@@ -36,7 +36,9 @@ that left derivation commutes with the constructions preserved by `mapDerivedCat
 
 - `Functor.mapDerivedCategoryNatIso`, `Functor.mapDerivedCategoryCompIso`,
   `Functor.mapDerivedCategoryHomologyFunctorIso`: `mapDerivedCategory` applied to a
-  natural isomorphism, to a composition, and its commutation with the homology functors.
+  natural isomorphism, to a composition, and its commutation with the homology functors;
+  the latter also in the bounded below variant
+  `Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
 - `Functor.leftDerivedFunctorNatIso`, `Functor.leftDerivedFunctorCompIso`,
   `Functor.leftDerivedFunctorHomologyFunctorIso`,
   `Functor.singleFunctorCompLeftDerivedFunctorIso`: the corresponding statements for the
@@ -93,6 +95,20 @@ noncomputable def mapDerivedCategoryHomologyFunctorIso (F : C ⥤ D) [F.Additive
     (DerivedCategory.homologyFunctor C n ⋙ F)
     (F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n)
     (Iso.refl _)
+
+/-- An exact functor commutes with the homology functors of the bounded below derived
+categories: the restriction of `Functor.mapDerivedCategoryHomologyFunctorIso` along the
+inclusion `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusHomologyFunctorIso (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) :
+    DerivedCategory.Plus.homologyFunctor C n ⋙ F ≅
+      F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.homologyFunctor D n :=
+  Functor.associator DerivedCategory.Plus.ι (DerivedCategory.homologyFunctor C n) F ≪≫
+    isoWhiskerLeft DerivedCategory.Plus.ι (F.mapDerivedCategoryHomologyFunctorIso n) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    isoWhiskerRight F.mapDerivedCategoryPlusCompatibility.symm
+      (DerivedCategory.homologyFunctor D n) ≪≫
+    Functor.associator _ _ _
 
 end MapDerivedCategory
 
