@@ -1150,5 +1150,601 @@ logarithmic-derivative uniqueness arguments are used.
   $\operatorname{Log}(AB)=\operatorname{Log}(A)+\operatorname{Log}(B)$.
 \end{proof}
 
+\section{Locally finite sums and products}
+\label{sec:weil-locally-finite-products}
+
+\paragraph{Generic coefficient-ring scope.}
+Reset $R$ to an arbitrary commutative ring.  Agreement through a degree,
+positive-order locally finite families, active finsets, truncated products,
+and coefficientwise locally finite products below use only this hypothesis.
+In particular, all of these Definitions and their product-compatibility
+proofs are available for $R=\mathbf Z$; no $\mathbf Q$-algebra structure is
+present or used in this scope.
+
+\begin{definition}[Agreement through a degree]
+  \label{def:weil-series-agree-through}
+  \uses{}
+  \lean{Weil.PowerSeries.AgreeThrough}
+
+  For $A,B\in R[[T]]$ and $N\in\mathbf N$, write
+  $A\equiv_NB$ if $[T^j]A=[T^j]B$ for every $0\leq j\leq N$.
+\end{definition}
+
+\begin{lemma}[Agreement is preserved by addition and multiplication]
+  \label{lemma:weil-series-agree-through-operations}
+  \uses{def:weil-series-agree-through}
+  \lean{Weil.PowerSeries.AgreeThrough.add_mul}
+
+  If $A\equiv_NA'$ and $B\equiv_NB'$, then
+  $A+B\equiv_NA'+B'$ and $AB\equiv_NA'B'$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-series-agree-through}
+  The addition assertion follows coefficient by coefficient.  For the
+  product assertion, fix $j\leq N$ and apply
+  \texttt{PowerSeries.coeff\_mul} to both products.  Every pair
+  $(r,s)$ in \texttt{Finset.antidiagonal j} satisfies $r,s\leq j\leq N$,
+  so the two hypotheses identify both factors in every summand.  The finite
+  sums are therefore equal.
+\end{proof}
+
+\begin{lemma}[Agreement is preserved by subtraction]
+  \label{lemma:weil-series-agree-through-sub}
+  \uses{def:weil-series-agree-through}
+  \lean{Weil.PowerSeries.AgreeThrough.sub}
+
+  If $A\equiv_NA'$ and $B\equiv_NB'$, then
+  \[
+    A-B\equiv_NA'-B'.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-series-agree-through}
+  Fix $j\leq N$.  The coefficient of $A-B$ in degree $j$ is
+  $[T^j]A-[T^j]B$, and the corresponding coefficient of $A'-B'$ is
+  $[T^j]A'-[T^j]B'$.  Substitute the two agreement hypotheses.
+\end{proof}
+
+\begin{lemma}[Agreement is preserved by natural powers]
+  \label{lemma:weil-series-agree-through-pow}
+  \uses{def:weil-series-agree-through}
+  \lean{Weil.PowerSeries.AgreeThrough.pow}
+
+  If $A\equiv_NB$, then for every $r\in\mathbf N$,
+  \[
+    A^r\equiv_NB^r.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-series-agree-through-operations}
+  Induct on $r$.  At $r=0$, both powers are $1$.  At the successor step,
+  rewrite $A^{r+1}=A^rA$ and $B^{r+1}=B^rB$, and apply the multiplicative
+  agreement lemma to the induction hypothesis and $A\equiv_NB$.
+\end{proof}
+
+\begin{lemma}[Agreement is preserved by finite products]
+  \label{lemma:weil-series-agree-through-finset-product}
+  \uses{def:weil-series-agree-through}
+  \lean{Weil.PowerSeries.AgreeThrough.finsetProd}
+
+  Let $S$ be a finset and let $A_i,B_i\in R[[T]]$.  If
+  $A_i\equiv_NB_i$ for every $i\in S$, then
+  \[
+    \prod_{i\in S}A_i\equiv_N\prod_{i\in S}B_i.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-series-agree-through-operations}
+  Work classically and induct on $S$.  For the empty finset both products
+  are one.  At an insertion $S\cup\{a\}$ with $a\notin S$, the hypothesis
+  gives $A_a\equiv_NB_a$, while restriction to $S$ and the induction
+  hypothesis give agreement of the remaining products.  Apply the
+  multiplicative part of
+  Lemma~\ref{lemma:weil-series-agree-through-operations} and rewrite the two
+  products with \texttt{Finset.prod\_insert}.
+\end{proof}
+
+\begin{definition}[$T$-adically locally finite family]
+  \label{def:weil-t-adic-locally-finite-family}
+  \uses{def:weil-positive-series,def:weil-series-agree-through}
+  \lean{Weil.TAdicallyLocallyFiniteFamily}
+
+  Fix a type $I$.  For a commutative ring $R$, define
+  $\operatorname{TAdicallyLocallyFiniteFamily}(R,I)$ to be a record with a
+  component map $u:I\to R[[T]]$, a positive-order certificate
+  $h_{\mathrm{pos}}:\forall i,\ c(u_i)=0$; and, writing
+  \[
+    \operatorname{Act}_N(u):=
+    \left\{i\in I\mid u_i\not\equiv_N0\right\},
+  \]
+  an active-set certificate
+  $h_{\mathrm{fin}}:\forall N,\ \operatorname{Act}_N(u)$ is finite.
+  The index type is an explicit parameter rather than a hidden structure
+  field.  Both displayed certificates are structure fields.
+\end{definition}
+
+\begin{definition}[Active-index finset]
+  \label{def:weil-active-index-finset}
+  \uses{def:weil-t-adic-locally-finite-family}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.activeFinset}
+
+  For locally finite $u$ and $N\geq0$, define
+  $A_N(u)$ to be the finset obtained from the finite set
+  $\operatorname{Act}_N(u)$ by \texttt{Set.Finite.toFinset}, using the field
+  $h_{\mathrm{fin}}(N)$.  This is a noncomputable definition and its Lean
+  body begins with \texttt{classical}.
+\end{definition}
+
+\begin{lemma}[Membership in the active-index finset]
+  \label{lemma:weil-active-index-finset-mem}
+  \uses{def:weil-series-agree-through,
+    def:weil-t-adic-locally-finite-family,
+    def:weil-active-index-finset}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.mem_activeFinset}
+
+  One has $i\in A_N(u)$ if and only if $u_i\not\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-active-index-finset}
+  This is \texttt{Set.Finite.mem\_toFinset} applied to the finite set
+  $\operatorname{Act}_N(u)$ used in the definition.
+\end{proof}
+
+\begin{lemma}[Monotonicity of active-index finsets]
+  \label{lemma:weil-active-index-finset-mono}
+  \uses{def:weil-active-index-finset}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.activeFinset_mono}
+
+  If $M\leq N$, then $A_M(u)\subseteq A_N(u)$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-series-agree-through,
+    lemma:weil-active-index-finset-mem}
+  If $i\notin A_N(u)$, then $[T^j]u_i=0$ for every $j\leq N$.
+  This includes every $j\leq M$, so $i\notin A_M(u)$.  Taking the
+  contrapositive gives the inclusion.
+\end{proof}
+
+\begin{definition}[Finite product at a truncation level]
+  \label{def:weil-truncated-product}
+  \uses{def:weil-active-index-finset}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.truncatedProduct}
+
+  For a locally finite family $u$, define
+  \[
+    \Pi_N(u):=\prod_{i\in A_N(u)}(1+u_i)\in R[[T]].
+  \]
+\end{definition}
+
+\begin{lemma}[Compatibility of finite truncated products]
+  \label{lemma:weil-truncated-products-compatible}
+  \uses{def:weil-series-agree-through,
+    def:weil-t-adic-locally-finite-family,
+    def:weil-truncated-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.truncatedProduct_agree}
+
+  If $M\leq N$, then $\Pi_N(u)\equiv_M\Pi_M(u)$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-series-agree-through-operations,
+    lemma:weil-series-agree-through-finset-product,
+    lemma:weil-active-index-finset-mem,
+    lemma:weil-active-index-finset-mono}
+  By Lemma~\ref{lemma:weil-active-index-finset-mono}, split the finite product
+  over $A_N(u)$ into the factors indexed by $A_M(u)$ and those indexed by
+  $A_N(u)\setminus A_M(u)$.  For an index in the second set,
+  Lemma~\ref{lemma:weil-active-index-finset-mem} gives
+  $u_i\equiv_M0$, hence $1+u_i\equiv_M1$ by the additive part of
+  Lemma~\ref{lemma:weil-series-agree-through-operations}.  Apply
+  Lemma~\ref{lemma:weil-series-agree-through-finset-product} to the difference
+  finset to replace all of these factors simultaneously by $1$.  The product
+  over the difference agrees with one through $M$, and multiplying by the
+  common product over $A_M(u)$ gives $\Pi_N(u)\equiv_M\Pi_M(u)$.
+\end{proof}
+
+\begin{definition}[Coefficientwise locally finite product]
+  \label{def:weil-locally-finite-product}
+  \uses{def:weil-truncated-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.product}
+
+  Define the locally finite product explicitly by
+  \[
+    \prod_{i\in I}^{\mathrm{lf}}(1+u_i)
+       :=\texttt{PowerSeries.mk}\bigl(
+          N\longmapsto[T^N]\Pi_N(u)\bigr).
+  \]
+  Thus no inverse-limit object and no unspecified choice of a compatible
+  lift occurs in the definition.
+\end{definition}
+
+\begin{lemma}[Coefficient formula for the locally finite product]
+  \label{lemma:weil-locally-finite-product-coeff}
+  \uses{def:weil-locally-finite-product,def:weil-truncated-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.coeff_product}
+
+  For every $N$,
+  \[
+    [T^N]\prod_{i\in I}^{\mathrm{lf}}(1+u_i)
+       =[T^N]\Pi_N(u).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-locally-finite-product}
+  Apply \texttt{PowerSeries.coeff\_mk} at the index $N$.  Its right-hand
+  side is exactly the coefficient function used in the definition.
+\end{proof}
+
+\begin{lemma}[Constant coefficient of a locally finite product]
+  \label{lemma:weil-locally-finite-product-constant}
+  \uses{def:weil-locally-finite-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.product_constantCoeff}
+
+  For every $T$-adically locally finite family $u$,
+  \[
+    c\!\left(\prod_i^{\mathrm{lf}}(1+u_i)\right)=1.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-truncated-product,
+    lemma:weil-locally-finite-product-coeff}
+  The coefficient formula at degree zero identifies the left side with
+  $[T^0]\Pi_0(u)$.  Every factor $1+u_i$ in this finite product has
+  constant coefficient $1$, because $c(u_i)=0$ is a field of the locally
+  finite family.  Repeated use of the degree-zero instance of
+  \texttt{PowerSeries.coeff\_mul} makes the constant coefficient of the
+  finite product equal to the finite product of ones, hence to one.
+\end{proof}
+
+\begin{lemma}[The locally finite product has the prescribed truncations]
+  \label{lemma:weil-locally-finite-product-agree}
+  \uses{def:weil-series-agree-through,
+    def:weil-locally-finite-product,def:weil-truncated-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.product_agree}
+
+  For every $N$,
+  \[
+    \prod_{i\in I}^{\mathrm{lf}}(1+u_i)\equiv_N\Pi_N(u).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-truncated-products-compatible,
+    lemma:weil-locally-finite-product-coeff}
+  Fix $j\leq N$.  The coefficient formula at level $j$ identifies the left
+  coefficient with $[T^j]\Pi_j(u)$.  Compatibility with $M=j$ identifies
+  that coefficient with $[T^j]\Pi_N(u)$.  This holds for every $j\leq N$,
+  which is the definition of agreement through $N$.
+\end{proof}
+
+\begin{lemma}[A prescribed finite superset gives the same truncation]
+  \label{lemma:weil-truncated-product-agree-prescribed-finset}
+  \uses{def:weil-series-agree-through,
+    def:weil-t-adic-locally-finite-family,
+    def:weil-active-index-finset,def:weil-truncated-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.truncatedProduct_agree_finset}
+
+  Let $S$ be a finset of indices.  If $A_N(u)\subseteq S$, then
+  \[
+    \Pi_N(u)\equiv_N\prod_{i\in S}(1+u_i).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-truncated-product,
+    lemma:weil-active-index-finset-mem,
+    lemma:weil-series-agree-through-operations,
+    lemma:weil-series-agree-through-finset-product}
+  Use \texttt{Finset.prod\_sdiff} with $A_N(u)\subseteq S$ to split the
+  product over $S$ into the
+  product over $A_N(u)$ and the factors indexed by
+  $S\setminus A_N(u)$.  For $i$ in the latter difference,
+  Lemma~\ref{lemma:weil-active-index-finset-mem} gives
+  $u_i\equiv_N0$, hence $1+u_i\equiv_N1$ by the additive agreement lemma.
+  Lemma~\ref{lemma:weil-series-agree-through-finset-product} replaces the
+  product over the finite difference by the product of ones, which is one.
+  Multiplying by the common product over $A_N(u)$ gives the required
+  agreement.
+\end{proof}
+
+\begin{lemma}[A locally finite product agrees with a prescribed truncation]
+  \label{lemma:weil-locally-finite-product-agree-prescribed-finset}
+  \uses{def:weil-series-agree-through,
+    def:weil-t-adic-locally-finite-family,
+    def:weil-active-index-finset,def:weil-locally-finite-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.product_agree_finset}
+
+  Let $S$ be a finset of indices.  If $A_N(u)\subseteq S$, then
+  \[
+    \prod_i^{\mathrm{lf}}(1+u_i)
+       \equiv_N\prod_{i\in S}(1+u_i).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-locally-finite-product-agree,
+    lemma:weil-truncated-product-agree-prescribed-finset}
+  Fix $j\leq N$.  Lemma~\ref{lemma:weil-locally-finite-product-agree}
+  identifies the degree-$j$
+  coefficient of the locally finite product with that of $\Pi_N(u)$; the
+  latter coefficient equals that of the product over $S$ by
+  Lemma~\ref{lemma:weil-truncated-product-agree-prescribed-finset}.
+  This is exactly agreement through $N$.
+\end{proof}
+
+\paragraph{Rational logarithm scope.}
+For the logarithmic subchain beginning here, use the explicit Lean parameters
+\texttt{[CommRing R] [Algebra $\mathbf Q$ R] [IsAddTorsionFree R]}.
+The active finsets, truncated products,
+and locally finite product remain Definitions
+\ref{def:weil-active-index-finset}, \ref{def:weil-truncated-product}, and
+\ref{def:weil-locally-finite-product}, specialized along this stronger
+coefficient-ring structure.
+
+\begin{definition}[Locally finite logarithm sum]
+  \label{def:weil-locally-finite-log-sum}
+  \uses{def:weil-t-adic-locally-finite-family,
+    def:weil-active-index-finset,def:weil-formal-log}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.logSum}
+
+  For a locally finite family $u$, its field $h_{\mathrm{pos}}$ gives
+  $c(1+u_i)=1$ for every $i$, so every logarithm below is defined.  Define
+  \[
+    \sum_{i\in I}^{\mathrm{lf}}\operatorname{Log}(1+u_i)
+      :=\texttt{PowerSeries.mk}\left(
+         N\longmapsto
+           \sum_{i\in A_N(u)}[T^N]\operatorname{Log}(1+u_i)
+       \right).
+  \]
+\end{definition}
+
+\begin{lemma}[An inactive factor has inactive logarithm]
+  \label{lemma:weil-inactive-logarithm}
+  \uses{def:weil-series-agree-through,def:weil-formal-log}
+  \lean{Weil.formalLog_agree_zero}
+
+  If $u\equiv_N0$ and $c(u)=0$, then
+  $\operatorname{Log}(1+u)\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-series-agree-through-pow,
+    lemma:weil-formal-log-coeff}
+  Fix $j\leq N$.  In the finite coefficient formula for
+  $[T^j]\operatorname{Log}(1+u)$, every summand contains a coefficient of
+  $u^r$ with $r\geq1$.  By
+  Lemma~\ref{lemma:weil-series-agree-through-pow},
+  $u^r\equiv_N0^r=0$, so its degree-$j$ coefficient vanishes.  Thus every
+  summand in the logarithm coefficient formula is zero.
+\end{proof}
+
+\begin{lemma}[Formal logarithm respects finite-degree agreement]
+  \label{lemma:weil-formal-log-agree-through}
+  \uses{def:weil-series-agree-through,def:weil-formal-log}
+  \lean{Weil.formalLog_agreeThrough}
+
+  If $A\equiv_NB$ and $c(A)=c(B)=1$, then
+  \[
+    \operatorname{Log}(A)\equiv_N\operatorname{Log}(B).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-series-agree-through-sub,
+    lemma:weil-series-agree-through-pow,
+    lemma:weil-formal-log-coeff}
+  Subtracting the identical constant series $1$ gives
+  $A-1\equiv_NB-1$.  Hence, for every $r$, the power-agreement lemma gives
+  $(A-1)^r\equiv_N(B-1)^r$.  Fix $j\leq N$.  If $j=0$, both logarithmic
+  coefficients are zero.  If $j\geq1$, apply the finite coefficient formula
+  for formal logarithm at degree $j$.  Every summand has
+  $1\leq r\leq j$, and power agreement identifies its degree-$j$
+  coefficient on the two sides.  The two finite sums are equal.
+\end{proof}
+
+\begin{lemma}[Formal logarithm of one is zero]
+  \label{lemma:weil-formal-log-one}
+  \uses{def:weil-formal-log}
+  \lean{Weil.formalLog_one}
+
+  One has $\operatorname{Log}(1)=0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-formal-log-coeff}
+  The constant coefficient is zero by the logarithm coefficient lemma.
+  In every positive degree, that lemma writes the coefficient as a finite
+  sum of coefficients of $(1-1)^r=0^r$ with $r\geq1$; every summand is
+  zero.  Apply \texttt{PowerSeries.ext}.
+\end{proof}
+
+\begin{lemma}[A finite product turns into a finite logarithm sum]
+  \label{lemma:weil-formal-log-finset-product}
+  \uses{def:weil-formal-log}
+  \lean{Weil.formalLog_finsetProd}
+
+  Let $S$ be a finset and let $A_i\in R[[T]]$ satisfy $c(A_i)=1$ for
+  every $i\in S$.  Then
+  \[
+    \operatorname{Log}\!\left(\prod_{i\in S}A_i\right)
+       =\sum_{i\in S}\operatorname{Log}(A_i).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-formal-log-one,
+    lemma:weil-formal-log-mul}
+  Induct on $S$.  For the empty finset, both sides are zero by
+  Lemma~\ref{lemma:weil-formal-log-one}.  At an insertion $S\cup\{a\}$
+  with $a\notin S$, the degree-zero coefficient formula for a finite
+  product and the hypotheses give $c(\prod_{i\in S}A_i)=1$.
+  Apply Lemma~\ref{lemma:weil-formal-log-mul} to
+  $A_a\prod_{i\in S}A_i$, then substitute the induction hypothesis and
+  the \texttt{Finset.sum\_insert} identity.
+\end{proof}
+
+\begin{lemma}[Logarithms agree with the active finite truncation]
+  \label{lemma:weil-locally-finite-log-agree-truncation}
+  \uses{def:weil-series-agree-through,
+    def:weil-locally-finite-product,def:weil-formal-log,
+    def:weil-truncated-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.log_agree_truncatedProduct}
+
+  For every $N\geq0$,
+  \[
+    \operatorname{Log}\!\left(\prod_i^{\mathrm{lf}}(1+u_i)\right)
+      \equiv_N\operatorname{Log}(\Pi_N(u)).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-locally-finite-product-constant,
+    lemma:weil-locally-finite-product-agree,
+    lemma:weil-formal-log-agree-through}
+  The locally finite product has constant coefficient one.  The finite
+  product $\Pi_N(u)$ also has constant coefficient one, because every
+  factor $1+u_i$ does.  The locally finite product agrees with
+  $\Pi_N(u)$ through $N$.  Instantiate the logarithm-agreement lemma with
+  these two constant-coefficient certificates and this agreement.
+\end{proof}
+
+\begin{lemma}[The truncated logarithm has the prescribed coefficient]
+  \label{lemma:weil-truncated-log-coeff}
+  \uses{def:weil-locally-finite-log-sum,
+    def:weil-formal-log,def:weil-truncated-product}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.coeff_log_truncatedProduct}
+
+  For every $N\geq0$,
+  \[
+    [T^N]\operatorname{Log}(\Pi_N(u))
+      =
+    [T^N]\sum_i^{\mathrm{lf}}\operatorname{Log}(1+u_i).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-locally-finite-log-sum,
+    lemma:weil-formal-log-finset-product}
+  Apply the finite-product logarithm lemma to
+  $\Pi_N(u)=\prod_{i\in A_N(u)}(1+u_i)$; each factor has constant
+  coefficient one.  Apply \texttt{PowerSeries.coeff} in degree $N$ and use
+  that this additive homomorphism preserves the finite sum; the result is
+  $\sum_{i\in A_N(u)}[T^N]\operatorname{Log}(1+u_i)$.  Finally,
+  \texttt{PowerSeries.coeff\_mk} identifies this finite sum with the
+  degree-$N$ coefficient in
+  Definition~\ref{def:weil-locally-finite-log-sum}.
+\end{proof}
+
+\begin{lemma}[Coefficient formula for the logarithm of a locally finite product]
+  \label{lemma:weil-locally-finite-log-coeff}
+  \uses{def:weil-locally-finite-product,
+    def:weil-locally-finite-log-sum,def:weil-formal-log}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.coeff_log_product}
+
+  For every $N\geq0$,
+  \[
+    [T^N]\operatorname{Log}\!\left(
+      \prod_i^{\mathrm{lf}}(1+u_i)\right)
+      =
+    [T^N]\sum_i^{\mathrm{lf}}\operatorname{Log}(1+u_i).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-locally-finite-log-agree-truncation,
+    lemma:weil-truncated-log-coeff}
+  Lemma~\ref{lemma:weil-locally-finite-log-agree-truncation} identifies the
+  degree-$N$ coefficient on the left with
+  $[T^N]\operatorname{Log}(\Pi_N(u))$.  Lemma~\ref{lemma:weil-truncated-log-coeff}
+  identifies that coefficient with the right side.
+\end{proof}
+
+\begin{proposition}[Logarithm of a locally finite product]
+  \label{prop:weil-log-locally-finite-product}
+  \uses{def:weil-locally-finite-product,
+    def:weil-locally-finite-log-sum,def:weil-formal-log}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.log_product}
+
+  For every $T$-adically locally finite family,
+  \[
+    \operatorname{Log}\!\left(
+      \prod_{i\in I}^{\mathrm{lf}}(1+u_i)\right)
+       =\sum_{i\in I}^{\mathrm{lf}}\operatorname{Log}(1+u_i).
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-locally-finite-log-coeff}
+  Apply \texttt{PowerSeries.ext}.  At every coefficient degree $N$, the
+  required equality is
+  Lemma~\ref{lemma:weil-locally-finite-log-coeff}.
+\end{proof}
+
+\paragraph{Generic coefficient-ring reset.}
+Reset $R$ to an arbitrary commutative ring.  The following coefficient-subring
+predicate and preservation lemma concern only finite coefficient formulas for
+the already constructed locally finite product.
+
+\begin{definition}[Coefficientwise membership in a subring]
+  \label{def:weil-power-series-over-subring}
+  \uses{}
+  \lean{Weil.PowerSeries.HasCoefficientsIn}
+
+  Let $R_0:\operatorname{Subring}(R)$.  Say that $A\in R[[T]]$ has
+  coefficients in $R_0$ if $[T^n]A\in R_0$ for every $n\geq0$.
+\end{definition}
+
+\begin{lemma}[Coefficient-subring membership is closed under finite products]
+  \label{lemma:weil-power-series-over-subring-finset-product}
+  \uses{def:weil-power-series-over-subring}
+  \lean{Weil.PowerSeries.HasCoefficientsIn.finsetProd}
+
+  Let $R_0:\operatorname{Subring}(R)$, let $S$ be a finset, and let
+  $A_i\in R[[T]]$.  If every $A_i$ with $i\in S$ has coefficients in
+  $R_0$, then $\prod_{i\in S}A_i$ has coefficients in $R_0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-power-series-over-subring}
+  Work classically and induct on $S$.  The empty product is one, whose
+  coefficients lie in $R_0$.  At an insertion $S\cup\{a\}$, use
+  \texttt{PowerSeries.coeff\_mul}.  Every coefficient of
+  $A_a\prod_{i\in S}A_i$ is a finite sum over an antidiagonal.  Each summand
+  is a product of a coefficient of $A_a$ and, by the induction hypothesis,
+  a coefficient of the remaining product.  Closure of $R_0$ under
+  multiplication and finite sums proves the successor step.
+\end{proof}
+
+\begin{lemma}[A locally finite product preserves a coefficient subring]
+  \label{lemma:weil-locally-finite-product-subring}
+  \uses{def:weil-locally-finite-product,
+    def:weil-power-series-over-subring}
+  \lean{Weil.TAdicallyLocallyFiniteFamily.product_mem_subring}
+
+  Let $R_0:\operatorname{Subring}(R)$.  If every $u_i$ has coefficients in
+  $R_0$, then $\prod_i^{\mathrm{lf}}(1+u_i)$ has coefficients in $R_0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-truncated-product,
+    lemma:weil-power-series-over-subring-finset-product,
+    lemma:weil-locally-finite-product-coeff}
+  Fix $N$.  The coefficient formula computes the desired coefficient inside
+  the finite product $\Pi_N(u)$.  Each factor $1+u_i$ has coefficients in
+  $R_0$ because $R_0$ contains the coefficients of one and is closed under
+  addition.  Apply
+  Lemma~\ref{lemma:weil-power-series-over-subring-finset-product} to the
+  active finset $A_N(u)$, then use
+  Lemma~\ref{lemma:weil-locally-finite-product-coeff}.
+\end{proof}
+
 
 \end{document}
