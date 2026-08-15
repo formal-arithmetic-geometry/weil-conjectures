@@ -3191,5 +3191,866 @@ declaration is universally quantified over this explicit parameter $D$.
   Substitution gives the quotient equality, and
   \texttt{Int.ofNat\_nonneg} gives its nonnegativity.
 \end{proof}
+\section{Orbit Euler products and the counting zeta series}
+\label{sec:weil-orbit-euler-product}
+
+\paragraph{Rational coefficient scope.}
+Throughout this section and the following abstract finite-extension and
+closed-point interface section, the coefficient ring is
+exactly $\mathbf Q$.  Thus $E_m$ denotes the scalar extension
+$E_{m,\mathbf Q}$ of Definition~\ref{def:weil-inverse-euler-factor}, and
+every occurrence of $\operatorname{Log}$ and $\operatorname{Exp}$ denotes
+Definitions~\ref{def:weil-formal-log} and~\ref{def:weil-formal-exp},
+respectively.
+
+\paragraph{Formal Euler-product datum context.}
+Every declaration in this section is universally quantified over an explicit
+parameter $D:\texttt{Weil.FiniteOrbitFrobeniusData}$; as before, write
+$\Omega:=D.\texttt{points}$ and $F:=D.\texttt{frobenius}$.
+
+\begin{definition}[Raw orbit Euler-factor family]
+  \label{def:weil-orbit-euler-factor-family}
+  \uses{def:weil-frobenius-orbit-type,
+    def:weil-frobenius-orbit-degree,
+    def:weil-inverse-euler-factor-positive-part}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerFactorFamily}
+
+  For $O\in\operatorname{Orb}_F(\Omega)$, define
+  \[
+    u_O(T):=E_{\deg_F(O)}(T)-1.
+  \]
+\end{definition}
+
+\begin{lemma}[Orbit Euler factors have positive order]
+  \label{lemma:weil-orbit-euler-factor-family-positive}
+  \uses{def:weil-orbit-euler-factor-family,
+    def:weil-positive-series}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerFactorFamily_positive}
+
+  Every $u_O$ has constant coefficient zero.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-frobenius-orbit-degree-positive,
+    lemma:weil-inverse-euler-factor-initial-vanishing}
+  The degree $\deg_F(O)$ is positive.  Apply
+  Lemma~\ref{lemma:weil-inverse-euler-factor-initial-vanishing} with
+  $m=\deg_F(O)$; its first conclusion is $c(E_m-1)=0$.
+\end{proof}
+
+\begin{lemma}[Local finiteness of the orbit Euler-factor family]
+  \label{lemma:weil-orbit-euler-factor-family-locally-finite}
+  \uses{def:weil-orbit-euler-factor-family,
+    def:weil-series-agree-through}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerFactorFamily_locallyFinite}
+
+  For every $N\geq0$, only finitely many orbits $O$ satisfy
+  $u_O\not\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-inverse-euler-factor-initial-vanishing,
+    lemma:weil-bounded-frobenius-orbit-finset-mem,
+    lemma:weil-frobenius-orbit-degree-positive}
+  By Lemma~\ref{lemma:weil-inverse-euler-factor-initial-vanishing},
+  $N<\deg_F(O)$ implies $u_O\equiv_N0$.  Contraposition therefore gives
+  
+  \[
+    u_O\not\equiv_N0\quad\Longrightarrow\quad\deg_F(O)\leq N.
+  \]
+  If $N=0$, this contradicts
+  Lemma~\ref{lemma:weil-frobenius-orbit-degree-positive}, so the active set
+  is empty.  If $N\geq1$, Lemma
+  \ref{lemma:weil-bounded-frobenius-orbit-finset-mem} gives the inclusion
+  \[
+    \{O\mid u_O\not\equiv_N0\}\subseteq
+      \uparrow\!\mathcal O_{\leq N}.
+  \]
+  The set on the right is finite because it is the coercion of a finset.
+  Applying \texttt{Set.Finite.subset} proves finiteness of the active set.
+\end{proof}
+
+\begin{definition}[Packaged locally finite orbit Euler family]
+  \label{def:weil-orbit-euler-locally-finite-family}
+  \uses{def:weil-orbit-euler-factor-family,
+    def:weil-t-adic-locally-finite-family,
+    lemma:weil-orbit-euler-factor-family-positive,
+    lemma:weil-orbit-euler-factor-family-locally-finite}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerFamily}
+  \constructedby{lemma:weil-orbit-euler-factor-family-positive,
+    lemma:weil-orbit-euler-factor-family-locally-finite}
+
+  Define $\mathcal E_D$ to be the $T$-adically locally finite family with
+  index type $\operatorname{Orb}_F(\Omega)$, component $u_O=E_{\deg_F(O)}-1$,
+  with positive-order field
+  Lemma~\ref{lemma:weil-orbit-euler-factor-family-positive} and
+  active-set-finiteness field
+  Lemma~\ref{lemma:weil-orbit-euler-factor-family-locally-finite}.
+\end{definition}
+
+\begin{definition}[Orbit Euler product]
+  \label{def:weil-orbit-euler-product}
+  \uses{def:weil-orbit-euler-locally-finite-family,
+    def:weil-locally-finite-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerProduct}
+
+  Define
+  \[
+    Z_{\mathrm{orb},D}(T):=
+      \prod_{O\in\operatorname{Orb}_F(\Omega)}^{\mathrm{lf}}
+        E_{\deg_F(O)}(T).
+  \]
+\end{definition}
+
+\begin{lemma}[Active orbit Euler factors are exactly bounded-degree orbits]
+  \label{lemma:weil-orbit-euler-active-finset}
+  \uses{def:weil-active-index-finset,
+    def:weil-orbit-euler-locally-finite-family,
+    def:weil-bounded-frobenius-orbit-finset}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerFamily_activeFinset}
+
+  For $N\geq1$, the active-index finset
+  $A_N(\mathcal E_D)$ equals $\mathcal O_{\leq N}$.  At $N=0$ it is empty.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-active-index-finset-mem,
+    lemma:weil-inverse-euler-factor-initial-vanishing,
+    lemma:weil-inverse-euler-factor-activation,
+    lemma:weil-bounded-frobenius-orbit-finset-mem,
+    lemma:weil-frobenius-orbit-degree-positive}
+  For $N\geq1$, active-index membership is
+  $E_{\deg_F(O)}-1\not\equiv_N0$.  The initial-vanishing and activation
+  lemmas say this is equivalent to $\deg_F(O)\leq N$, and the bounded-orbit
+  membership lemma
+  says the latter is equivalent to $O\in\mathcal O_{\leq N}$.  Finset
+  extensionality gives equality.  For $N=0$, positivity of $\deg_F(O)$ and
+  the same initial-vanishing lemma show that no index is active.
+\end{proof}
+
+\begin{lemma}[Constant coefficient of the orbit Euler product]
+  \label{lemma:weil-orbit-euler-product-constant}
+  \uses{def:weil-orbit-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerProduct_constantCoeff}
+
+  One has $c(Z_{\mathrm{orb},D})=1$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-locally-finite-product-coeff,
+    lemma:weil-orbit-euler-active-finset}
+  At truncation level zero the active finset is empty, so the truncated
+  product is the empty product $1$.  The locally finite coefficient formula
+  therefore gives constant coefficient one.
+\end{proof}
+
+\begin{definition}[Bundled normalized orbit Euler product]
+  \label{def:weil-bundled-orbit-euler-product}
+  \uses{def:weil-orbit-euler-product,def:weil-one-series,
+    lemma:weil-orbit-euler-product-constant}
+  \constructedby{lemma:weil-orbit-euler-product-constant}
+  \lean{Weil.FiniteOrbitFrobeniusData.normalizedOrbitEulerProduct}
+
+  Define the single bundled object
+  \[
+    Z_{\mathrm{orb},D}^{1}:=
+      \left\langle Z_{\mathrm{orb},D},
+        \text{Lemma~\ref{lemma:weil-orbit-euler-product-constant}}
+      \right\rangle\in\operatorname{OneSeries}(\mathbf Q).
+  \]
+\end{definition}
+
+\begin{definition}[Counting logarithm series]
+  \label{def:weil-counting-log-series}
+  \uses{def:weil-frobenius-fixed-point-count}
+  \lean{Weil.FiniteOrbitFrobeniusData.countingLogSeries}
+
+  Define $S_D(T)\in\mathbf Q[[T]]$ by
+  \[
+    [T^0]S_D=0,\qquad
+    [T^n]S_D=\frac{(N_n(D):\mathbf Q)}{(n:\mathbf Q)}\quad(n\geq1).
+  \]
+\end{definition}
+
+\begin{lemma}[The counting logarithm has positive order]
+  \label{lemma:weil-counting-log-series-positive}
+  \uses{def:weil-counting-log-series,def:weil-positive-series}
+  \lean{Weil.FiniteOrbitFrobeniusData.countingLogSeries_positive}
+
+  One has $c(S_D)=0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-counting-log-series}
+  This is the coefficient specified at degree zero in the definition.
+\end{proof}
+
+\begin{definition}[Bundled counting logarithm]
+  \label{def:weil-bundled-counting-log-series}
+  \uses{def:weil-counting-log-series,def:weil-positive-series,
+    lemma:weil-counting-log-series-positive}
+  \constructedby{lemma:weil-counting-log-series-positive}
+  \lean{Weil.FiniteOrbitFrobeniusData.positiveCountingLogSeries}
+
+  Define the single bundled object
+  \[
+    S_D^+:=\left\langle S_D,
+      \text{Lemma~\ref{lemma:weil-counting-log-series-positive}}
+    \right\rangle\in\operatorname{PositiveSeries}(\mathbf Q).
+  \]
+\end{definition}
+
+\begin{definition}[Exponential counting zeta series]
+  \label{def:weil-counting-zeta-series}
+  \uses{def:weil-bundled-counting-log-series,def:weil-formal-exp}
+  \lean{Weil.FiniteOrbitFrobeniusData.countingZetaSeries}
+
+  Define
+  \[
+    Z_{\mathrm{cnt},D}(T):=\operatorname{Exp}(S_D^+).
+  \]
+  The familiar expression
+  $\operatorname{Exp}(\sum_{n\geq1}N_n(D)T^n/n)$ is only coefficientwise
+  shorthand for this definition; it is not an ambient infinite sum.
+\end{definition}
+
+\begin{lemma}[Coefficient of the logarithm of the orbit Euler product]
+  \label{lemma:weil-log-orbit-euler-product-coeff}
+  \uses{def:weil-orbit-euler-product,
+    def:weil-bundled-orbit-euler-product,
+    def:weil-formal-log,
+    def:weil-locally-finite-log-sum,
+    def:weil-relevant-frobenius-orbit-finset,
+    def:weil-frobenius-orbit-degree,
+    def:weil-euler-log-series,
+    lemma:weil-orbit-euler-product-constant,
+    lemma:weil-rational-reciprocal-divisor-quotient}
+  \lean{Weil.FiniteOrbitFrobeniusData.coeff_log_orbitEulerProduct}
+
+  For every $n\geq1$,
+  \[
+    [T^n]\operatorname{Log}(Z_{\mathrm{orb},D}^{1})
+       =\frac{(1:\mathbf Q)}{(n:\mathbf Q)}
+          \sum_{O\in\mathcal O(n)}(\deg_F(O):\mathbf Q).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{prop:weil-log-locally-finite-product,
+    def:weil-locally-finite-log-sum,
+    lemma:weil-orbit-euler-active-finset,
+    lemma:weil-log-inverse-euler-factor,
+    def:weil-euler-log-series,
+    lemma:weil-relevant-frobenius-orbit-finset-mem,
+    lemma:weil-orbit-euler-product-constant,
+    def:weil-bundled-orbit-euler-product,
+    def:weil-bundled-inverse-euler-factor,
+    lemma:weil-rational-reciprocal-divisor-quotient,
+    lemma:weil-frobenius-orbit-degree-positive}
+  Use the normalized input $Z_{\mathrm{orb},D}^{1}$ from
+  Definition~\ref{def:weil-bundled-orbit-euler-product}; its underlying
+  power series is $Z_{\mathrm{orb},D}$.
+  Proposition~\ref{prop:weil-log-locally-finite-product}, followed by the
+  coefficient definition of the locally finite logarithm sum in
+  Definition~\ref{def:weil-locally-finite-log-sum}, turns the left side into
+  the finite sum over
+  $A_n(\mathcal E_D)=\mathcal O_{\leq n}$, where the equality is
+  Lemma~\ref{lemma:weil-orbit-euler-active-finset}, of
+  logarithms of the locally packaged factors.  For each active orbit $O$,
+  let
+  \[
+    \widehat E_O^{\mathrm{lf}}
+      :=\langle 1+u_O,c(1+u_O)=1\rangle
+      \in\operatorname{OneSeries}(\mathbf Q).
+  \]
+  Unfolding $u_O=E_{\deg_F(O)}-1$ and simplifying the underlying series
+  gives $1+u_O=E_{\deg_F(O)}$.  Positivity of $\deg_F(O)$ from
+  Lemma~\ref{lemma:weil-frobenius-orbit-degree-positive} supplies the
+  standard object $\widehat E_{\deg_F(O)}$ of
+  Definition~\ref{def:weil-bundled-inverse-euler-factor}.
+  Apply \texttt{Subtype.ext} to the underlying equality and then
+  \texttt{congrArg} to the bundled map $\operatorname{Log}$; this identifies
+  the summand with
+  $[T^n]\operatorname{Log}(\widehat E_{\deg_F(O)})$.  By
+  Lemma~\ref{lemma:weil-log-inverse-euler-factor}, the summand is zero unless
+  $\deg_F(O)\mid n$; when it divides $n$, the summand is
+  \[
+    \frac{(1:\mathbf Q)}{((n/\deg_F(O):\mathbf N):\mathbf Q)}
+      =\frac{(\deg_F(O):\mathbf Q)}{(n:\mathbf Q)}.
+  \]
+  This equality is exactly
+  Lemma~\ref{lemma:weil-rational-reciprocal-divisor-quotient}, using
+  $0<n$, Lemma~\ref{lemma:weil-frobenius-orbit-degree-positive}, and the
+  current divisibility condition; all four displayed naturals are explicitly
+  cast to $\mathbf Q$.
+  Filtering $\mathcal O_{\leq n}$ by this divisibility condition gives
+  $\mathcal O(n)$ by
+  Lemma~\ref{lemma:weil-relevant-frobenius-orbit-finset-mem}.  Pulling out
+  the common scalar $(1:\mathbf Q)/(n:\mathbf Q)$ gives the formula.
+\end{proof}
+
+\begin{proposition}[Logarithm of the orbit Euler product is the counting logarithm]
+  \label{prop:weil-log-orbit-euler-product}
+  \uses{def:weil-orbit-euler-product,
+    def:weil-counting-log-series,
+    def:weil-bundled-orbit-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.log_orbitEulerProduct}
+
+  One has
+  \[
+    \operatorname{Log}(Z_{\mathrm{orb},D}^{1})=S_D.
+  \]
+  Equivalently, the positive-degree coefficient is
+  $(N_n(D):\mathbf Q)/(n:\mathbf Q)$; the usual
+  symbol $\sum_{n\geq1}N_n(D)T^n/n$ is only shorthand for these coefficients.
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-orbit-euler-product-constant,
+    lemma:weil-formal-log-coeff,
+    def:weil-counting-log-series,
+    lemma:weil-log-orbit-euler-product-coeff,
+    lemma:weil-fixed-point-count-relevant-orbits}
+  Lemma~\ref{lemma:weil-orbit-euler-product-constant} supplies
+  $c(Z_{\mathrm{orb},D})=1$.  Hence the degree-zero clause of
+  Lemma~\ref{lemma:weil-formal-log-coeff} gives
+  $[T^0]\operatorname{Log}(Z_{\mathrm{orb},D}^{1})=0$, while
+  Definition~\ref{def:weil-counting-log-series} gives $[T^0]S_D=0$.
+  For $n\geq1$, Lemma~\ref{lemma:weil-log-orbit-euler-product-coeff} gives
+  \[
+    [T^n]\operatorname{Log}(Z_{\mathrm{orb},D}^{1})
+       =\frac{(1:\mathbf Q)}{(n:\mathbf Q)}
+          \sum_{O\in\mathcal O(n)}(\deg_F(O):\mathbf Q)
+       =\frac{(N_n(D):\mathbf Q)}{(n:\mathbf Q)},
+  \]
+  For the second equality, apply \texttt{congrArg} with
+  $k\mapsto(k:\mathbf Q)$ to
+  Lemma~\ref{lemma:weil-fixed-point-count-relevant-orbits}, rewrite the
+  cast of the finite sum by \texttt{Nat.cast\_sum}, and multiply both sides
+  by $(n:\mathbf Q)^{-1}$.  This is the
+  defining coefficient of $S_D$.  Apply \texttt{PowerSeries.ext}.
+\end{proof}
+
+\begin{theorem}[Euler product equals the exponential counting series]
+  \label{thm:weil-orbit-euler-exponential}
+  \uses{def:weil-orbit-euler-product,
+    def:weil-counting-zeta-series,
+    def:weil-inverse-euler-factor,
+    def:weil-frobenius-orbit-type,
+    def:weil-frobenius-orbit-degree}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerProduct_eq_countingZeta}
+
+  For every finite-orbit geometric-Frobenius datum,
+  \[
+    Z_{\mathrm{cnt},D}(T)
+       =Z_{\mathrm{orb},D}(T)
+       =\prod_{O\in\operatorname{Orb}_F(\Omega)}^{\mathrm{lf}}
+          E_{\deg_F(O)}(T)
+  \]
+  as an equality in $\mathbf Q[[T]]$.
+\end{theorem}
+
+\begin{proof}
+  \uses{def:weil-counting-zeta-series,
+    def:weil-bundled-counting-log-series,
+    def:weil-bundled-orbit-euler-product,
+    def:weil-orbit-euler-product,
+    def:weil-orbit-euler-factor-family,
+    lemma:weil-orbit-euler-product-constant,
+    prop:weil-log-orbit-euler-product,
+    lemma:weil-formal-exp-log,
+    lemma:weil-counting-log-series-positive,
+    lemma:weil-formal-log-coeff}
+  Lemma~\ref{lemma:weil-formal-log-coeff} gives
+  $c(\operatorname{Log}(Z_{\mathrm{orb},D}^{1}))=0$, while
+  Lemma~\ref{lemma:weil-counting-log-series-positive} gives $c(S_D)=0$.
+  Bundle both sides of
+  Proposition~\ref{prop:weil-log-orbit-euler-product} in
+  $\operatorname{PositiveSeries}(\mathbf Q)$; \texttt{Subtype.ext} turns its
+  underlying equality into an equality of bundled inputs.  Apply
+  \texttt{congrArg} for $\operatorname{Exp}$ to that equality.  Since the
+  orbit product has constant coefficient one by
+  Lemma~\ref{lemma:weil-orbit-euler-product-constant},
+  Lemma~\ref{lemma:weil-formal-exp-log} makes the left side
+  $Z_{\mathrm{orb},D}$.  The right side is $Z_{\mathrm{cnt},D}$ by
+  Definition~\ref{def:weil-counting-zeta-series}.  This first gives
+  $Z_{\mathrm{orb},D}=Z_{\mathrm{cnt},D}$; take its symmetry for the order in
+  the theorem.  The last displayed
+  product is Definition~\ref{def:weil-orbit-euler-product}: after unfolding
+  Definition~\ref{def:weil-orbit-euler-factor-family}, each factor is
+  $1+u_O=1+(E_{\deg_F(O)}-1)=E_{\deg_F(O)}$.
+\end{proof}
+
+\begin{lemma}[Orbit Euler components have integral coefficients]
+  \label{lemma:weil-orbit-euler-factor-family-integral-coefficients}
+  \uses{def:weil-orbit-euler-factor-family,
+    def:weil-power-series-over-subring,
+    lemma:weil-inverse-euler-factor-coeff,
+    lemma:weil-frobenius-orbit-degree-positive}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerFactorFamily_integralCoefficients}
+
+  For every orbit $O$, one has
+  \[
+    \texttt{HasCoefficientsIn}\!\left(
+      (\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}).\operatorname{range},
+      u_O
+    \right).
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-orbit-euler-factor-family,
+    def:weil-power-series-over-subring,
+    lemma:weil-inverse-euler-factor-coeff,
+    lemma:weil-frobenius-orbit-degree-positive}
+  Fix an orbit $O$.  By
+  Lemma~\ref{lemma:weil-frobenius-orbit-degree-positive},
+  $1\leq\deg_F(O)$, so the coefficient formula for the inverse Euler factor
+  is available at this degree.  Fix a coefficient degree $n$.  By
+  Definition~\ref{def:weil-orbit-euler-factor-family},
+  \[
+    [T^n]u_O=[T^n]E_{\deg_F(O)}-[T^n]1.
+  \]
+  Lemma~\ref{lemma:weil-inverse-euler-factor-coeff} makes the first term
+  either $0$ or $1$, and \texttt{PowerSeries.coeff\_one} does the same for
+  the second term.  Both terms lie in
+  $(\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}).\operatorname{range}$,
+  which is a subring and is therefore closed under subtraction.  Unfolding
+  Definition~\ref{def:weil-power-series-over-subring} proves the claim.
+\end{proof}
+
+\begin{corollary}[Integrality of the counting zeta series]
+  \label{cor:weil-counting-zeta-integral}
+  \uses{def:weil-counting-zeta-series,
+    def:weil-power-series-over-subring}
+  \lean{Weil.FiniteOrbitFrobeniusData.countingZetaSeries_integral}
+
+  One has
+  \[
+    \texttt{HasCoefficientsIn}\!\left(
+      (\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}).\operatorname{range},
+      Z_{\mathrm{cnt},D}
+    \right).
+  \]
+\end{corollary}
+
+\begin{proof}
+  \uses{lemma:weil-orbit-euler-factor-family-integral-coefficients,
+    lemma:weil-locally-finite-product-subring,
+    thm:weil-orbit-euler-exponential}
+  Lemma~\ref{lemma:weil-orbit-euler-factor-family-integral-coefficients}
+  gives the coefficient-subring hypothesis for every component.  Apply
+  Lemma~\ref{lemma:weil-locally-finite-product-subring} to the subring
+  $(\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}).\operatorname{range}$;
+  it gives the displayed coefficient predicate for
+  $Z_{\mathrm{orb},D}$.  Transfer them to $Z_{\mathrm{cnt},D}$ using
+  Theorem~\ref{thm:weil-orbit-euler-exponential}.
+\end{proof}
+
+\begin{definition}[Positive natural degree indices]
+  \label{def:weil-positive-natural-degree-index}
+  \uses{}
+  \lean{Weil.PositiveDegreeIndex}
+
+  Define the index type
+  \[
+    \mathbf N_{>0}:=\{m:\mathbf N\mid1\leq m\}.
+  \]
+  Its coercion to $\mathbf N$ is the subtype projection.
+\end{definition}
+
+\begin{definition}[Raw degree-grouped Euler-factor family]
+  \label{def:weil-degree-euler-factor-family}
+  \uses{def:weil-positive-natural-degree-index,
+    def:weil-frobenius-orbit-count,
+    def:weil-inverse-euler-factor}
+  \lean{Weil.FiniteOrbitFrobeniusData.degreeEulerFactorFamily}
+
+  For $m\in\mathbf N_{>0}$, using its subtype projection whenever a
+  natural-number degree or exponent is required, define
+  \[
+    v_m(T):=E_m(T)^{a_m(D)}-1.
+  \]
+\end{definition}
+
+\begin{lemma}[Degree-grouped Euler factors have positive order]
+  \label{lemma:weil-degree-euler-factor-family-positive}
+  \uses{def:weil-degree-euler-factor-family,
+    def:weil-positive-series}
+  \lean{Weil.FiniteOrbitFrobeniusData.degreeEulerFactorFamily_positive}
+
+  For every $m\in\mathbf N_{>0}$, one has $c(v_m)=0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-degree-euler-factor-family,
+    lemma:weil-inverse-euler-factor-constant}
+  The constant coefficient of $E_m$ is one.  Repeated use of the
+  degree-zero coefficient formula for multiplication gives
+  $c(E_m^{a_m(D)})=1^{a_m(D)}=1$.  Subtracting the constant series $1$
+  gives $c(v_m)=0$.
+\end{proof}
+
+\begin{lemma}[Local finiteness of the degree-grouped Euler family]
+  \label{lemma:weil-degree-euler-factor-family-locally-finite}
+  \uses{def:weil-degree-euler-factor-family,
+    def:weil-series-agree-through}
+  \lean{Weil.FiniteOrbitFrobeniusData.degreeEulerFactorFamily_locallyFinite}
+
+  For every $N\geq0$, only finitely many $m\in\mathbf N_{>0}$ satisfy
+  $v_m\not\equiv_N0$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-inverse-euler-factor-initial-vanishing,
+    lemma:weil-series-agree-through-operations,
+    lemma:weil-series-agree-through-sub}
+  Fix $N$.  If $m>N$, then
+  Lemma~\ref{lemma:weil-inverse-euler-factor-initial-vanishing} gives
+  $E_m\equiv_N1$.  Repeated application of the multiplicative part of
+  Lemma~\ref{lemma:weil-series-agree-through-operations} gives
+  $E_m^{a_m(D)}\equiv_N1^{a_m(D)}=1$, so $v_m\equiv_N0$.
+  The last implication is the subtraction clause
+  Lemma~\ref{lemma:weil-series-agree-through-sub}.
+  Thus the active set is contained in
+  \[
+    B_N:=\{m:\mathbf N_{>0}\mid(m:\mathbf N)\leq N\}.
+  \]
+  The image of $B_N$ under the subtype coercion is contained in the finite
+  set $\uparrow(\texttt{Finset.Icc }1\,N)$.  First combine this inclusion
+  with \texttt{Finset.finite\_toSet} using \texttt{Set.Finite.subset}; this
+  proves that the precise image
+  $\texttt{Subtype.val}\,''B_N$ is finite.  Since the coercion is injective,
+  pass that finite-image proof and
+  \texttt{Subtype.val\_injective.injOn} to
+  \texttt{Set.Finite.of\_finite\_image}; it proves that $B_N$ is finite.
+  Finish with \texttt{Set.Finite.subset} and the displayed inclusion.
+\end{proof}
+
+\begin{definition}[Packaged degree-grouped Euler family]
+  \label{def:weil-degree-euler-locally-finite-family}
+  \uses{def:weil-positive-natural-degree-index,
+    def:weil-degree-euler-factor-family,
+    def:weil-t-adic-locally-finite-family,
+    lemma:weil-degree-euler-factor-family-positive,
+    lemma:weil-degree-euler-factor-family-locally-finite}
+  \constructedby{lemma:weil-degree-euler-factor-family-positive,
+    lemma:weil-degree-euler-factor-family-locally-finite}
+  \lean{Weil.FiniteOrbitFrobeniusData.degreeEulerFamily}
+
+  Define $\mathcal G_D$ to be the locally finite family indexed by positive
+  integers, with component $v_m=E_m^{a_m(D)}-1$.  Its positive-order field
+  is Lemma~\ref{lemma:weil-degree-euler-factor-family-positive}, and its
+  local-finiteness field is
+  Lemma~\ref{lemma:weil-degree-euler-factor-family-locally-finite}.
+\end{definition}
+
+\begin{definition}[Degree-grouped Euler product]
+  \label{def:weil-degree-euler-product}
+  \uses{def:weil-degree-euler-locally-finite-family,
+    def:weil-locally-finite-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.degreeEulerProduct}
+
+  Define
+  \[
+    Z_{\deg,D}(T):=
+      \prod_{m\in\mathbf N_{>0}}^{\mathrm{lf}}E_m(T)^{a_m(D)}.
+  \]
+\end{definition}
+
+\begin{definition}[Finite positive-degree index set]
+  \label{def:weil-positive-degree-index-finset}
+  \uses{def:weil-positive-natural-degree-index}
+  \lean{Weil.positiveDegreeIndexFinset}
+
+  For $N\in\mathbf N$, define the finset
+  \[
+    I_N^+:=\{m\in\mathbf N_{>0}\mid (m:\mathbf N)\leq N\}.
+  \]
+  Concretely, define it by the complete Lean term
+  \[
+    I_N^+:=
+    (\texttt{Finset.Icc }1\,N).\texttt{preimage}
+      (\texttt{Subtype.val})
+      (\texttt{Subtype.val\_injective.injOn}).
+  \]
+  Here \texttt{Finset.preimage} produces a finset on
+  $\mathbf N_{>0}$; its third argument is precisely the required
+  injectivity on the preimage of the interval.
+\end{definition}
+
+\begin{lemma}[Membership in the finite positive-degree index set]
+  \label{lemma:weil-positive-degree-index-finset-mem}
+  \uses{def:weil-positive-degree-index-finset}
+  \lean{Weil.mem_positiveDegreeIndexFinset}
+
+  For $m\in\mathbf N_{>0}$,
+  \[
+    m\in I_N^+\quad\Longleftrightarrow\quad(m:\mathbf N)\leq N.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-positive-degree-index-finset}
+  Unfold $I_N^+$ and apply \texttt{Finset.mem\_preimage}.  It reduces the
+  left side to $(m:\mathbf N)\in\texttt{Finset.Icc }1\,N$, hence to
+  $1\leq(m:\mathbf N)\leq N$.  The lower inequality is the subtype field
+  $m.\texttt{property}$; deleting it leaves exactly
+  $(m:\mathbf N)\leq N$.
+\end{proof}
+
+\begin{lemma}[A bounded-orbit degree fiber is the one-degree orbit finset]
+  \label{lemma:weil-bounded-orbit-degree-fiber}
+  \uses{def:weil-positive-degree-index-finset,
+    def:weil-bounded-frobenius-orbit-finset,
+    def:weil-degree-frobenius-orbit-finset,
+    def:weil-frobenius-orbit-degree}
+  \lean{Weil.FiniteOrbitFrobeniusData.boundedOrbit_degreeFiber}
+
+  If $N\geq1$ and $m\in I_N^+$, then
+  \[
+    \mathcal O_{\leq N}.
+      \operatorname{filter}(O\mapsto\deg_F(O)=(m:\mathbf N))
+      =\mathcal O_m.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-positive-degree-index-finset-mem,
+    lemma:weil-bounded-frobenius-orbit-finset-mem,
+    lemma:weil-degree-frobenius-orbit-finset-mem}
+  Apply \texttt{Finset.ext} and fix an orbit $O$.  Membership on the left is
+  equivalent to
+  $\deg_F(O)\leq N$ and $\deg_F(O)=m$.  Membership on the right is
+  equivalent to $\deg_F(O)=m$.  The forward implication discards the first
+  conjunct.  For the reverse implication, substitute $\deg_F(O)=m$ and use
+  $m\leq N$, obtained from
+  Lemma~\ref{lemma:weil-positive-degree-index-finset-mem}.
+\end{proof}
+
+\begin{lemma}[Finite bounded-orbit products regroup by degree]
+  \label{lemma:weil-bounded-orbit-product-regroup-by-degree}
+  \uses{def:weil-positive-degree-index-finset,
+    def:weil-bounded-frobenius-orbit-finset,
+    def:weil-frobenius-orbit-degree,
+    def:weil-frobenius-orbit-count,
+    def:weil-inverse-euler-factor}
+  \lean{Weil.FiniteOrbitFrobeniusData.boundedOrbitProduct_regroup_degree}
+
+  If $N\geq1$, then
+  \[
+    \prod_{O\in\mathcal O_{\leq N}}E_{\deg_F(O)}
+      =\prod_{m\in I_N^+}E_m^{a_m(D)}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-frobenius-orbit-count,
+    lemma:weil-frobenius-orbit-degree-positive,
+    lemma:weil-positive-degree-index-finset-mem,
+    lemma:weil-bounded-frobenius-orbit-finset-mem,
+    lemma:weil-bounded-orbit-degree-fiber}
+  Put
+  $g(O)=\langle\deg_F(O),1\leq\deg_F(O)\rangle\in\mathbf N_{>0}$; the
+  positivity certificate is
+  Lemma~\ref{lemma:weil-frobenius-orbit-degree-positive}.  Apply the exact
+  theorem \texttt{Finset.prod\_comp} to
+  $s=\mathcal O_{\leq N}$, $f(m)=E_m$, and $g$.  It gives
+  \[
+    \prod_{O\in s}E_{g(O)}
+      =\prod_{m\in s.\operatorname{image}g}
+        E_m^{\#\{O\in s\mid g(O)=m\}}.
+  \]
+  If $O\in s$, Lemma~\ref{lemma:weil-bounded-frobenius-orbit-finset-mem}
+  gives $\deg_F(O)\leq N$; together with
+  Lemma~\ref{lemma:weil-positive-degree-index-finset-mem} this proves
+  $s.\operatorname{image}g\subseteq I_N^+$.
+
+  Extend the product from $s.\operatorname{image}g$ to $I_N^+$ using
+  \texttt{Finset.prod\_subset}.  For an added index $m$ the filtered fiber is
+  empty, since a member of it would put $m$ in the image; hence its exponent
+  is zero and its factor is one.  For $m\in I_N^+$,
+  \texttt{Subtype.ext\_iff} rewrites $g(O)=m$ as
+  $\deg_F(O)=(m:\mathbf N)$.  Therefore
+  Lemma~\ref{lemma:weil-bounded-orbit-degree-fiber} identifies the filtered
+  fiber with $\mathcal O_m$.  Unfolding
+  Definition~\ref{def:weil-frobenius-orbit-count} changes its cardinal to
+  $a_m(D)$, giving the required right side.
+\end{proof}
+
+\begin{lemma}[Active degree indices are bounded by the truncation degree]
+  \label{lemma:weil-degree-euler-active-finset-subset}
+  \uses{def:weil-active-index-finset,
+    def:weil-degree-euler-locally-finite-family,
+    def:weil-positive-degree-index-finset}
+  \lean{Weil.FiniteOrbitFrobeniusData.degreeEulerFamily_activeFinset_subset}
+
+  For every $N\geq0$,
+  \[
+    A_N(\mathcal G_D)\subseteq I_N^+.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-degree-euler-factor-family,
+    lemma:weil-active-index-finset-mem,
+    lemma:weil-inverse-euler-factor-initial-vanishing,
+    lemma:weil-series-agree-through-operations,
+    lemma:weil-series-agree-through-sub,
+    lemma:weil-positive-degree-index-finset-mem}
+  Let $m\in A_N(\mathcal G_D)$ and suppose $m>N$.  The initial-vanishing
+  lemma gives $E_m\equiv_N1$.  Induction on the natural exponent $a_m(D)$,
+  using the multiplicative agreement lemma at the successor step, gives
+  $E_m^{a_m(D)}\equiv_N1$.  Lemma
+  \ref{lemma:weil-series-agree-through-sub}, applied to this equality and
+  $1\equiv_N1$, gives
+  $v_m=E_m^{a_m(D)}-1\equiv_N0$, contradicting the active-index membership
+  criterion.  Hence $m\leq N$, which is membership in $I_N^+$ by
+  Lemma~\ref{lemma:weil-positive-degree-index-finset-mem}.
+\end{proof}
+
+\begin{lemma}[The degree Euler product has the bounded-degree truncation]
+  \label{lemma:weil-degree-euler-product-agree-bounded-product}
+  \uses{def:weil-series-agree-through,
+    def:weil-degree-euler-product,
+    def:weil-positive-degree-index-finset}
+  \lean{Weil.FiniteOrbitFrobeniusData.degreeEulerProduct_agree_boundedProduct}
+
+  For every $N\geq0$,
+  \[
+    Z_{\deg,D}\equiv_N\prod_{m\in I_N^+}E_m^{a_m(D)}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-degree-euler-factor-family,
+    lemma:weil-degree-euler-active-finset-subset,
+    lemma:weil-locally-finite-product-agree-prescribed-finset}
+  Apply
+  Lemma~\ref{lemma:weil-locally-finite-product-agree-prescribed-finset} to
+  the locally finite family $\mathcal G_D$ and the prescribed finset
+  $I_N^+$.  Its inclusion hypothesis is
+  Lemma~\ref{lemma:weil-degree-euler-active-finset-subset}.  Unfold the
+  component $v_m=E_m^{a_m(D)}-1$; then $1+v_m=E_m^{a_m(D)}$ in every factor.
+\end{proof}
+
+\begin{lemma}[The orbit Euler product has the bounded-orbit truncation]
+  \label{lemma:weil-orbit-euler-product-agree-bounded-product}
+  \uses{def:weil-series-agree-through,
+    def:weil-orbit-euler-product,
+    def:weil-bounded-frobenius-orbit-finset}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerProduct_agree_boundedProduct}
+
+  If $N\geq1$, then
+  \[
+    Z_{\mathrm{orb},D}
+      \equiv_N\prod_{O\in\mathcal O_{\leq N}}E_{\deg_F(O)}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{def:weil-orbit-euler-factor-family,
+    def:weil-truncated-product,
+    lemma:weil-orbit-euler-active-finset,
+    lemma:weil-locally-finite-product-agree}
+  The active-orbit lemma identifies
+  $A_N(\mathcal E_D)$ with $\mathcal O_{\leq N}$.  Substitute this equality
+  into the prescribed-truncation lemma for $\mathcal E_D$.  Unfold
+  $u_O=E_{\deg_F(O)}-1$ in the finite product, so that its factor
+  $1+u_O$ is $E_{\deg_F(O)}$.
+\end{proof}
+
+\begin{proposition}[Regrouping the orbit Euler product by degree]
+  \label{prop:weil-orbit-euler-product-grouped}
+  \uses{def:weil-orbit-euler-product,
+    def:weil-degree-euler-product}
+  \lean{Weil.FiniteOrbitFrobeniusData.orbitEulerProduct_eq_degreeEulerProduct}
+
+  One has
+  \[
+    Z_{\mathrm{orb},D}(T)=Z_{\deg,D}(T).
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-orbit-euler-product-constant,
+    lemma:weil-positive-degree-index-finset-mem,
+    lemma:weil-degree-euler-product-agree-bounded-product,
+    lemma:weil-orbit-euler-product-agree-bounded-product,
+    lemma:weil-bounded-orbit-product-regroup-by-degree}
+  Apply \texttt{PowerSeries.ext} and fix a coefficient degree $N$.
+  If $N=0$, the orbit product has constant coefficient one by
+  Lemma~\ref{lemma:weil-orbit-euler-product-constant}.  The degree-product
+  index finset is empty.  To prove $I_0^+=\varnothing$, apply
+  \texttt{Finset.ext} and fix $m$.  Membership on the right is false; if
+  $m\in I_0^+$, then
+  Lemma~\ref{lemma:weil-positive-degree-index-finset-mem} gives
+  $(m:\mathbf N)\leq0$, contradicting the subtype field
+  $m.\texttt{property}:1\leq(m:\mathbf N)$.  Thus membership on the left is
+  false as well, proving the required finset equality.  The degree-product
+  agreement lemma at $N=0$ identifies the other constant coefficient with
+  that of the empty product over $I_0^+$, hence also with one.
+  Now assume $N\geq1$.  The orbit-product agreement lemma identifies the
+  degree-$N$ coefficient of $Z_{\mathrm{orb},D}$ with that of
+  $\prod_{O\in\mathcal O_{\leq N}}E_{\deg_F(O)}$.  The finite regrouping
+  lemma replaces this series by
+  $\prod_{m\in I_N^+}E_m^{a_m(D)}$.  Finally, the degree-product agreement
+  lemma identifies its degree-$N$ coefficient with that of $Z_{\deg,D}$.
+  Thus the two degree-$N$ coefficients agree in both cases.
+\end{proof}
+
+\begin{corollary}[Three equivalent forms of the orbit zeta series]
+  \label{cor:weil-orbit-zeta-three-forms}
+  \uses{def:weil-counting-zeta-series,
+    def:weil-bundled-counting-log-series,
+    def:weil-orbit-euler-product,
+    def:weil-degree-euler-product,
+    def:weil-power-series-over-subring}
+  \lean{Weil.FiniteOrbitFrobeniusData.zeta_three_forms}
+
+  For every finite-orbit datum,
+  \[
+    Z_{\mathrm{cnt},D}=\operatorname{Exp}(S_D^+)
+      =\prod_{O\in\operatorname{Orb}_F(\Omega)}^{\mathrm{lf}}
+         E_{\deg_F(O)}
+      =\prod_{m\in\mathbf N_{>0}}^{\mathrm{lf}}E_m^{a_m(D)}.
+  \]
+  All equalities and all locally finite products in this statement are
+  taken in $\mathbf Q[[T]]$.  The symbol $S_D^+$ denotes the bundled series
+  of Definition~\ref{def:weil-bundled-counting-log-series}.  Moreover,
+  \[
+    c(Z_{\mathrm{cnt},D})=1,
+    \qquad
+    \texttt{HasCoefficientsIn}\!\left(
+      (\operatorname{algebraMap}_{\mathbf Z,\mathbf Q}).\operatorname{range},
+      Z_{\mathrm{cnt},D}
+    \right).
+  \]
+  Thus the conclusion presently asserts the integer-coefficient predicate
+  inside $\mathbf Q[[T]]$; it does not assert a typed lift in
+  $\mathbf Z[[T]]$.
+\end{corollary}
+
+\begin{proof}
+  \uses{def:weil-counting-zeta-series,
+    def:weil-bundled-counting-log-series,
+    def:weil-power-series-over-subring,
+    thm:weil-orbit-euler-exponential,
+    prop:weil-orbit-euler-product-grouped,
+    cor:weil-counting-zeta-integral,
+    lemma:weil-counting-log-series-positive,
+    lemma:weil-formal-exp-constant}
+  The first equality is Definition~\ref{def:weil-counting-zeta-series}.
+  The second equality is
+  Theorem~\ref{thm:weil-orbit-euler-exponential}; the third is
+  Proposition~\ref{prop:weil-orbit-euler-product-grouped}.  After unfolding
+  Definition~\ref{def:weil-power-series-over-subring}, the required
+  coefficient predicate is exactly
+  Corollary~\ref{cor:weil-counting-zeta-integral}.  Finally,
+  $Z_{\mathrm{cnt},D}=\operatorname{Exp}(S_D^+)$ by definition.  Hence
+  Lemma~\ref{lemma:weil-formal-exp-constant}, applied directly to the bundled
+  positive-order input $S_D^+$, gives
+  $c(Z_{\mathrm{cnt},D})=1$.
+\end{proof}
 
 \end{document}
