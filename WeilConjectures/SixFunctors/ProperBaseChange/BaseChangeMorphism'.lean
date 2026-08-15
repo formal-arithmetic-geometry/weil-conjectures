@@ -48,22 +48,11 @@ The file also constructs the cohomological base-change morphism
 `g^* R^q f_* F ⟶ R^q f'_* g'^* F` for the higher direct images computed on the bounded
 below derived categories.
 
-## Missing infrastructure
-
 The functoriality of `Functor.mapDerivedCategoryPlus` in natural isomorphisms and
-compositions, and its compatibility with the homology and single functors of the
-bounded below derived categories, are not yet provided by
-`WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`. They are
-recorded here in the section `MapDerivedCategoryPlusFunctoriality` (in the
-`CategoryTheory.Functor` namespace), by restricting the corresponding unbounded
-statements along the fully faithful inclusions `DerivedCategory.Plus.ι`; they should
-eventually be moved to
-`WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`:
-
-- `CategoryTheory.Functor.mapDerivedCategoryPlusNatIso`
-- `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso`
-- `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`
-- `CategoryTheory.Functor.mapDerivedCategoryPlusSingleFunctor`
+compositions and its compatibility with the single functors are provided by
+`WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`, and its
+commutation with the homology functors by
+`WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory`.
 
 ## Main definitions
 
@@ -86,95 +75,6 @@ eventually be moved to
 universe w u' u
 
 open CategoryTheory Limits MonoidalCategory Abelian
-
-section MapDerivedCategoryPlusFunctoriality
-
-/-!
-## Functoriality of `mapDerivedCategoryPlus`
-
-The following general statements restrict the functoriality of
-`Functor.mapDerivedCategory` for exact functors, and its compatibility with the
-homology and single functors, to the bounded below derived categories, by cancelling
-the fully faithful inclusion `DerivedCategory.Plus.ι`. They should eventually be moved
-to `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`.
--/
-
-namespace CategoryTheory.Functor
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
-variable {C D E : Type*} [Category C] [Category D] [Category E]
-  [Abelian C] [Abelian D] [Abelian E]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-
-/-- An isomorphism `F ≅ G` of exact functors between abelian categories induces an
-isomorphism `F.mapDerivedCategoryPlus ≅ G.mapDerivedCategoryPlus` of the functors
-induced on the bounded below derived categories: the restriction of
-`Functor.mapDerivedCategoryNatIso` along the inclusions `DerivedCategory.Plus.ι`. -/
-noncomputable def mapDerivedCategoryPlusNatIso {F G : C ⥤ D} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) :
-    F.mapDerivedCategoryPlus ≅ G.mapDerivedCategoryPlus :=
-  fullyFaithfulCancelRight DerivedCategory.Plus.ι
-    (F.mapDerivedCategoryPlusCompatibility ≪≫
-      isoWhiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryNatIso e) ≪≫
-      G.mapDerivedCategoryPlusCompatibility.symm)
-
-/-- The composition isomorphism
-`(F ⋙ G).mapDerivedCategoryPlus ≅ F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus`
-for exact functors between abelian categories: the restriction of
-`Functor.mapDerivedCategoryCompIso` along the inclusions `DerivedCategory.Plus.ι`. -/
-noncomputable def mapDerivedCategoryPlusCompIso (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
-    (F ⋙ G).mapDerivedCategoryPlus ≅
-      F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus :=
-  fullyFaithfulCancelRight DerivedCategory.Plus.ι
-    ((F ⋙ G).mapDerivedCategoryPlusCompatibility ≪≫
-      isoWhiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G) ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      isoWhiskerRight F.mapDerivedCategoryPlusCompatibility.symm G.mapDerivedCategory ≪≫
-      Functor.associator _ _ _ ≪≫
-      isoWhiskerLeft F.mapDerivedCategoryPlus
-        G.mapDerivedCategoryPlusCompatibility.symm ≪≫
-      (Functor.associator _ _ _).symm)
-
-/-- An exact functor commutes with the homology functors of the bounded below derived
-categories: the restriction of `Functor.mapDerivedCategoryHomologyFunctorIso` along the
-inclusion `DerivedCategory.Plus.ι`. -/
-noncomputable def mapDerivedCategoryPlusHomologyFunctorIso (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) :
-    DerivedCategory.Plus.homologyFunctor C n ⋙ F ≅
-      F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.homologyFunctor D n :=
-  Functor.associator DerivedCategory.Plus.ι (DerivedCategory.homologyFunctor C n) F ≪≫
-    isoWhiskerLeft DerivedCategory.Plus.ι (F.mapDerivedCategoryHomologyFunctorIso n) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    isoWhiskerRight F.mapDerivedCategoryPlusCompatibility.symm
-      (DerivedCategory.homologyFunctor D n) ≪≫
-    Functor.associator _ _ _
-
-/-- `DerivedCategory.Plus.singleFunctor` commutes with an exact functor `F` and
-`F.mapDerivedCategoryPlus`: the restriction of `Functor.mapDerivedCategorySingleFunctor`
-along the inclusions `DerivedCategory.Plus.ι`. -/
-noncomputable def mapDerivedCategoryPlusSingleFunctor (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) :
-    DerivedCategory.Plus.singleFunctor C n ⋙ F.mapDerivedCategoryPlus ≅
-      F ⋙ DerivedCategory.Plus.singleFunctor D n :=
-  fullyFaithfulCancelRight DerivedCategory.Plus.ι
-    (Functor.associator _ _ _ ≪≫
-      isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C n)
-        F.mapDerivedCategoryPlusCompatibility ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      isoWhiskerRight (DerivedCategory.Plus.singleFunctorιIso C n)
-        F.mapDerivedCategory ≪≫
-      F.mapDerivedCategorySingleFunctor n ≪≫
-      isoWhiskerLeft F (DerivedCategory.Plus.singleFunctorιIso D n).symm ≪≫
-      (Functor.associator _ _ _).symm)
-
-end CategoryTheory.Functor
-
-end MapDerivedCategoryPlusFunctoriality
 
 namespace AlgebraicGeometry
 
