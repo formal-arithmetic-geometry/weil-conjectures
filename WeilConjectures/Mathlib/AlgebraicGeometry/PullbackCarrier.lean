@@ -24,12 +24,6 @@ namespace AlgebraicGeometry
 
 variable {P X Y Z : Scheme.{u}} {fst : P ⟶ X} {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z}
 
-/-- In a pullback square of schemes whose bottom is an open immersion, the top is an open
-immersion. -/
-lemma _root_.CategoryTheory.IsPullback.isOpenImmersion_fst [IsOpenImmersion g]
-    (h : IsPullback fst snd f g) : IsOpenImmersion fst :=
-  MorphismProperty.of_isPullback (P := @IsOpenImmersion) h.flip inferInstance
-
 /-- In a pullback square of schemes whose bottom `g` is an open immersion, the range of the
 top is the preimage under `f` of the range of `g`. -/
 lemma _root_.CategoryTheory.IsPullback.opensRange_fst [IsOpenImmersion g]
