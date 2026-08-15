@@ -5,8 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib
 public import WeilConjectures.Blowup.Complement
-public import WeilConjectures.Compactification.SchemeTheoreticImage
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
@@ -37,7 +38,7 @@ recovers the classical strict transform; the specialization is
 
 ## Main results
 
-- `AlgebraicGeometry.Nagata.ker_comap_self`: a quasi-compact flat monomorphism is
+- `AlgebraicGeometry.Scheme.Hom.ker_comap_self`: a quasi-compact flat monomorphism is
   scheme-theoretically dense in its own image; the key computation for the following;
 - `AlgebraicGeometry.strictTransform_ker_comap_openι`: over the preserved open locus
   the ideal sheaf cutting out the strict transform vanishes;
@@ -65,22 +66,19 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-namespace Nagata
-
 /-- A quasi-compact flat monomorphism `j` is scheme-theoretically dense in its
 scheme-theoretic image: the defining ideal sheaf of the image pulls back to zero along
 `j`. This applies in particular to quasi-compact open immersions. -/
-theorem ker_comap_self {W P : Scheme.{u}} (j : W ⟶ P) [QuasiCompact j] [Flat j] [Mono j] :
+theorem Scheme.Hom.ker_comap_self {W P : Scheme.{u}} (j : W ⟶ P)
+    [QuasiCompact j] [Flat j] [Mono j] :
     j.ker.comap j = ⊥ := by
   have e := (IsKernelPair.id_of_mono j).isoPullback_hom_snd
   have : IsIso ((IsKernelPair.id_of_mono j).isoPullback.hom ≫ pullback.snd j j) := by
     rw [e]; infer_instance
   have h : IsIso (pullback.snd j j) :=
     IsIso.of_isIso_comp_left (IsKernelPair.id_of_mono j).isoPullback.hom _
-  rw [← schemeImageFlatBaseChange j j]
+  rw [← Scheme.Hom.ker_pullback_snd j j]
   simp
-
-end Nagata
 
 variable {X Y X' : Scheme.{u}} (f : Y ⟶ X) (π : X' ⟶ X) (U : X.Opens)
 
@@ -140,7 +138,7 @@ vanishes: nothing is lost over `U`.
 (Blueprint: `lemma:nagata-strict-transform-over-complement`.) -/
 theorem strictTransform_ker_comap_openι :
     ((strictTransformOpen f π U).ι).ker.comap (strictTransformOpen f π U).ι = ⊥ :=
-  Nagata.ker_comap_self _
+  Scheme.Hom.ker_comap_self _
 
 /-- The strict transform contains the whole open locus over `U`: the base change of the
 closed immersion `StrictTransform f π U ⟶ Y ×_X X'` to the open locus over `U` is an

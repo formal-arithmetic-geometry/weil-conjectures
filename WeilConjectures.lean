@@ -6,9 +6,7 @@ public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.Affine.Localization
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Complement
-public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.Gluing
-public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
@@ -29,7 +27,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProdu
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.PowerTorsion
 public import WeilConjectures.Compactification.SchemeTheoreticImage
-public import WeilConjectures.Compactification.SchemeTheoreticallyDense
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
