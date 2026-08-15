@@ -32,7 +32,7 @@ lemma Proj.map_congr {f g : 𝒜 →+*ᵍ ℬ} (e : f = g)
     (hf : HomogeneousIdeal.irrelevant ℬ ≤ (HomogeneousIdeal.irrelevant 𝒜).map f)
     (hg : HomogeneousIdeal.irrelevant ℬ ≤ (HomogeneousIdeal.irrelevant 𝒜).map g) :
     Proj.map f hf = Proj.map g hg := by
-  subst e; rfl
+  congr
 
 /-- Naturality of `Proj.toSpecZero` with respect to `Proj.map`: the square
 
