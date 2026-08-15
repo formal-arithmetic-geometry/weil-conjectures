@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  pull_request_target:
+  pull_request:
     paths:
       - 'blueprint/**'
       - 'WeilConjectures/**'
@@ -15,9 +15,13 @@ on:
       - '.github/workflows/blueprint.yml'
   workflow_dispatch:
 
-# The deploy jobs push to the `gh-pages` branch
+# `build` and `checkdecls` run the pull request's own code, so the default token
+# must stay read-only. Write access is granted per job to `deploy`, which only
+# ever runs on `push`/`workflow_dispatch`. Pull request previews are deployed by
+# `blueprint-preview.yml`, which runs from the base branch and never touches
+# pull request code.
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: ${{ github.repository }}-blueprint-${{ github.ref }}
@@ -42,8 +46,6 @@ jobs:
 
       - name: Checkout project
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Build blueprint (web + PDF)
         uses: xu-cheng/texlive-action@v2
@@ -79,6 +81,20 @@ jobs:
           name: blueprint-lean-decls
           path: blueprint/lean_decls
 
+      # `blueprint-preview.yml` needs the pull request number, and the
+      # `workflow_run` payload it receives does not carry one for pull requests
+      # opened from a fork. Pass it along as an artifact instead.
+      - name: Record pull request number
+        if: github.event_name == 'pull_request'
+        run: echo '${{ github.event.pull_request.number }}' > pr_number
+
+      - name: Upload pull request number
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: blueprint-pr-number
+          path: pr_number
+
   checkdecls:
     name: Check blueprint declarations exist in the Lean code
     # Runs in its own job: the Lean build and the ~5GB texlive image do not
@@ -88,8 +104,6 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Build project
         uses: leanprover/lean-action@v1
@@ -108,6 +122,10 @@ jobs:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: [build, checkdecls]
     runs-on: self-hosted
+    # Only this job pushes to the repository, and it never sees pull request
+    # code.
+    permissions:
+      contents: write
     # Serialize all jobs that push to gh-pages (across workflows) to avoid
     # racing deployments.
     concurrency:
@@ -131,30 +149,3 @@ jobs:
           target-folder: blueprint
           force: false
           commit-message: 'deploy blueprint for ${{ github.sha }}'
-
-  deploy-preview:
-    name: Deploy PR preview (/preview/<pr>/blueprint)
-    if: github.event_name == 'pull_request_target'
-    needs: [build, checkdecls]
-    runs-on: self-hosted
-    concurrency:
-      group: gh-pages
-      cancel-in-progress: false
-    steps:
-      - name: Checkout project
-        uses: actions/checkout@v4
-
-      - name: Download site artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: blueprint-site
-          path: _site
-
-      - name: Deploy preview to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: _site
-          branch: gh-pages
-          target-folder: preview/${{ github.event.pull_request.number }}/blueprint
-          force: false
-          commit-message: 'deploy blueprint preview for PR #${{ github.event.pull_request.number }} (${{ github.sha }})'
