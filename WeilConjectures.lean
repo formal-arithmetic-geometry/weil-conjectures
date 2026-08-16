@@ -51,5 +51,7 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
+public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.GeometricFrobenius
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
