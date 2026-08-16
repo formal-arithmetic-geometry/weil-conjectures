@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 
@@ -30,6 +31,14 @@ sheafification.
   `CategoryTheory.GrothendieckTopology.upperStarComp`: the composition isomorphisms
   `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`, the latter
   obtained from the former by uniqueness of left adjoints.
+
+## Main results
+
+- `CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_lowerStar` and
+  `CategoryTheory.GrothendieckTopology.preservesFiniteLimits_lowerStar`: the pushforward
+  `g_*` preserves every limit that exists in the coefficient category. This needs no
+  hypothesis beyond the continuity of the base change functor, in particular it does not
+  use the adjunction `g^* ⊣ g_*`.
 
 ## Implementation notes
 
@@ -86,6 +95,21 @@ lemma lowerStar_map_hom_app
     (((lowerStar A P Q g).map φ).hom).app (op b) =
       φ.hom.app (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
   rfl
+
+/-- `g_*` preserves limits of any shape that exists in the coefficient category: it is
+given by restriction along the base change functor, and limits of sheaves are computed
+pointwise on the underlying presheaves. -/
+instance preservesLimitsOfShape_lowerStar (E : Type*) [Category E] [HasLimitsOfShape E A] :
+    PreservesLimitsOfShape E (lowerStar A P Q g) := by
+  unfold lowerStar
+  infer_instance
+
+/-- `g_*` is left exact. Note that this does not use the adjunction `g^* ⊣ g_*`, which is
+only available under the extra hypotheses of the section below. -/
+instance preservesFiniteLimits_lowerStar [HasFiniteLimits A] :
+    PreservesFiniteLimits (lowerStar A P Q g) := by
+  unfold lowerStar
+  infer_instance
 
 section Adjunction
 

@@ -46,8 +46,10 @@ The site-theoretic inputs of the general definitions are discharged here:
 - `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
   the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
   `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`.
-- `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*` with
-  values in an abelian category is left exact.
+- `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
+  `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
+  preserves every limit that exists in the coefficient category; in particular it is left
+  exact for values in an abelian category.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar` : the pullback `g^*` with
   values in an abelian category is left exact, thus exact.
 
@@ -165,11 +167,17 @@ additive: it acts on morphisms by whiskering, which is compatible with the objec
 addition. -/
 instance Etale.lowerStar_additive [Preadditive A] : (Etale.lowerStar A g).Additive where
 
+/-- The pushforward `g_*` on étale sheaves preserves limits of any shape that exists in the
+coefficient category. -/
+instance Etale.preservesLimitsOfShape_lowerStar (E : Type*) [Category E]
+    [HasLimitsOfShape E A] : PreservesLimitsOfShape E (Etale.lowerStar A g) :=
+  GrothendieckTopology.preservesLimitsOfShape_lowerStar A @Etale @Etale g E
+
 /-- The pushforward `g_*` on étale sheaves with values in an abelian category is left
 exact. -/
 instance Etale.preservesFiniteLimits_lowerStar [Abelian A] :
     PreservesFiniteLimits (Etale.lowerStar A g) :=
-  sorry
+  GrothendieckTopology.preservesFiniteLimits_lowerStar A @Etale @Etale g
 
 section Adjunction
 
