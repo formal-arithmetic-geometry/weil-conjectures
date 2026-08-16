@@ -32,8 +32,6 @@ exact.
 
 - `CategoryTheory.Limits.preservesLimitsOfShape_of_isTerminal_obj`: a functor all of whose
   values are terminal preserves all limits.
-- `CategoryTheory.Limits.isInitialOfIsColimitOfIsEmpty`: a colimit of a diagram indexed by
-  an empty category is an initial object.
 - `CategoryTheory.Functor.isInitialLanObjObj`: the left Kan extension is initial at an
   object with empty comma category.
 - `CategoryTheory.Functor.evaluationObjIsoLanCompEvaluation`: for fully faithful `L`,
@@ -64,13 +62,6 @@ lemma preservesLimitsOfShape_of_isTerminal_obj {F : C ⥤ H} (hF : ∀ X, IsTerm
     fac _ _ := (hF _).hom_ext _ _
     uniq _ _ _ := (hF _).hom_ext _ _ }⟩⟩
 
-/-- A colimit of a diagram indexed by an empty category is an initial object. -/
-def isInitialOfIsColimitOfIsEmpty {J : Type*} [Category* J] [IsEmpty J] {K : J ⥤ H}
-    {c : Cocone K} (hc : IsColimit c) : IsInitial c.pt where
-  desc s := hc.desc ⟨s.pt, ⟨fun j ↦ isEmptyElim j, fun {j} ↦ isEmptyElim j⟩⟩
-  fac _ j := j.as.elim
-  uniq _ _ _ := hc.hom_ext fun j ↦ isEmptyElim j
-
 end Limits
 
 namespace Functor
@@ -87,7 +78,7 @@ functor along `L` is initial at `Y`: it is a colimit over an empty category. -/
 noncomputable def isInitialLanObjObj (F : C ⥤ H) {Y : D} (hY : IsEmpty (CostructuredArrow L Y)) :
     IsInitial ((L.lan.obj F).obj Y) :=
   have := hY
-  isInitialOfIsColimitOfIsEmpty (L.isPointwiseLeftKanExtensionLeftKanExtensionUnit F Y)
+  isColimitEquivIsInitialOfIsEmpty _ _ (L.isPointwiseLeftKanExtensionLeftKanExtensionUnit F Y)
 
 variable [L.Full] [L.Faithful]
 
