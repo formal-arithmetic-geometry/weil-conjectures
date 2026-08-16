@@ -5450,7 +5450,9 @@ restriction compatibility for arbitrary inclusions of affine opens is
 \begin{definition}[Homogeneous polynomial map to the Rees algebra]
   \label{def:nagata-rees-polynomial-map}
   \uses{def:nagata-rees-algebra}
-  \lean{}
+  \lean{AlgebraicGeometry.reesPresentation,
+    AlgebraicGeometry.reesGradedPresentation}
+  \leanok
 
   Let $A$ be a commutative ring, let $r\geq0$, and let
   $I=(f_0,\ldots,f_r)\triangleleft A$.  Put
@@ -5463,12 +5465,25 @@ restriction compatibility for arbitrary inclusions of affine opens is
   \[
     \rho_I|_A(a)=at^0,\qquad \rho_I(T_i)=f_it.
   \]
+
+  \paragraph{Mathlib relation.}
+  The formalization indexes the generators by an arbitrary type $\sigma$ rather
+  than by $\{0,\ldots,r\}$, so that $P$ is
+  \texttt{\detokenize{MvPolynomial}} $\sigma$ $A$ with its total-degree grading
+  \texttt{\detokenize{MvPolynomial.homogeneousSubmodule}}; taking
+  $\sigma=\operatorname{Fin}(r+1)$ recovers the statement above.  The map is
+  \texttt{\detokenize{MvPolynomial.aeval}} applied to the degree-one elements
+  $f_it$, and \texttt{\detokenize{reesGradedPresentation}} is the same map
+  packaged as a homomorphism of graded rings.
 \end{definition}
 
 \begin{lemma}[Properties of the homogeneous polynomial map]
   \label{lemma:nagata-rees-polynomial-surjection}
   \uses{def:nagata-rees-polynomial-map}
-  \lean{}
+  \lean{AlgebraicGeometry.reesPresentation_mem_reesGrading,
+    AlgebraicGeometry.reesPresentation_surjective,
+    AlgebraicGeometry.reesGradedPresentation_surjective}
+  \leanok
 
   Let $A,r,I=(f_0,\ldots,f_r)$ be the datum of
   \Cref{def:nagata-rees-polynomial-map}.  The map $\rho_I$ of that
@@ -5478,6 +5493,7 @@ restriction compatibility for arbitrary inclusions of affine opens is
 \begin{proof}
   \uses{lemma:nagata-rees-degree-one-element,
     prop:nagata-rees-finite-generation}
+  \leanok
   By \Cref{lemma:nagata-rees-degree-one-element},
   $\rho_I(T_i)=f_it\in\mathcal R_A(I)_1$, while
   $\rho_I(a)=at^0\in\mathcal R_A(I)_0$ for $a\in A$.  For a homogeneous
