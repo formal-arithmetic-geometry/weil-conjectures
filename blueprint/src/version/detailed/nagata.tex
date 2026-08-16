@@ -5622,7 +5622,8 @@ restriction compatibility for arbitrary inclusions of affine opens is
 
 \begin{lemma}[Properness of the affine blow-up]
   \label{lemma:nagata-affine-blowup-proper}
-  \lean{}
+  \lean{AlgebraicGeometry.AffineBlowup.isProper_toSpec}
+  \leanok
 
   If \(I\) is finitely generated, the affine blow-up morphism is proper.
 
@@ -5644,6 +5645,27 @@ restriction compatibility for arbitrary inclusions of affine opens is
   The theorem that projective morphisms are proper makes this composite
   proper.
 \end{proof}
+
+\formalizationnote{%
+  The Lean proof of \Cref{lemma:nagata-affine-blowup-proper} does not use the
+  projective embedding, and therefore does not depend on
+  \Cref{prop:nagata-affine-blowup-projective},
+  \Cref{lemma:nagata-affine-blowup-projective-embedding} or
+  \Cref{lemma:nagata-rees-polynomial-surjection}.  Instead it applies the
+  Mathlib instance named in the ``Mathlib relation'' paragraph above directly
+  to $\mathcal R_A(I)$: writing
+  $b_{A,I}
+    =\bigl(\operatorname{Proj}\mathcal R_A(I)
+      \to\operatorname{Spec}\mathcal R_A(I)_0\bigr)
+     \circ\operatorname{Spec}(\varepsilon)^{-1}$,
+  where $\varepsilon\colon A\xrightarrow{\ \sim\ }\mathcal R_A(I)_0$ is the
+  isomorphism of \Cref{lemma:nagata-rees-degree-zero}, properness of the first
+  factor holds as soon as $\mathcal R_A(I)$ is of finite type over
+  $\mathcal R_A(I)_0$, which follows from
+  \Cref{prop:nagata-rees-finite-generation} transported along $\varepsilon$,
+  and the second factor is an isomorphism.  The projective embedding is still
+  wanted, for the strictly stronger
+  \Cref{prop:nagata-affine-blowup-projective}.}
 
 \begin{lemma}[Local properness of the global blow-up]
   \label{lemma:nagata-global-blowup-proper-local}
