@@ -1,19 +1,30 @@
 name: Lean Action CI
 
 on:
+  # Only the default branch: a push to a branch with an open PR is already
+  # covered by the `pull_request` trigger, and building it twice ties up the
+  # shared self-hosted runner pool for no benefit.
   push:
+    branches:
+      - master
   pull_request:
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# This workflow only checks out and builds the project; it deploys nothing.
 permissions:
   contents: read # Read access to repository contents
-  pages: write # Write access to GitHub Pages
-  id-token: write # Write access to ID tokens
+
+# One in-flight build per PR (and one per branch for pushes): a superseded
+# build is cancelled instead of queueing ahead of everything else on the
+# shared runners. Keyed on the PR number when there is one, matching
+# blueprint.yml; `github.ref` covers `push` and `workflow_dispatch`.
+concurrency:
+  group: ${{ github.repository }}-lean-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v5
