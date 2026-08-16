@@ -218,7 +218,8 @@ left Kan extension is either an evaluation or a zero object. -/
 instance preservesFiniteLimits_lan_of_etale_and_mono [Mono j] [Abelian A] :
     PreservesFiniteLimits
       ((MorphismProperty.Over.map ⊤ ‹Etale j›).op.lan : (U.Etaleᵒᵖ ⥤ A) ⥤ X.Etaleᵒᵖ ⥤ A) :=
-  Functor.preservesFiniteLimits_lan _ (essImage_or_isEmpty_costructuredArrow j)
+  Functor.preservesFiniteLimits_lan_of_essImage_or_isEmpty _
+    (essImage_or_isEmpty_costructuredArrow j)
 
 end KanExtension
 

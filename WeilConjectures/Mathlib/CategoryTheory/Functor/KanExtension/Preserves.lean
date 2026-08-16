@@ -24,8 +24,9 @@ Kan extension along `L` is computed by
 
 In particular, if the initial object of `H` is a zero object, left Kan extension along `L`
 preserves every limit that exists in `H`
-(`CategoryTheory.Functor.preservesLimitsOfShape_lan`). This is the abstract form of the
-statement that extension by zero along an open immersion is left exact.
+(`CategoryTheory.Functor.preservesLimitsOfShape_lan_of_essImage_or_isEmpty`). This is the
+abstract form of the statement that extension by zero along an open immersion is left
+exact.
 
 ## Main results
 
@@ -37,7 +38,8 @@ statement that extension by zero along an open immersion is left exact.
   object with empty comma category.
 - `CategoryTheory.Functor.evaluationObjIsoLanCompEvaluation`: for fully faithful `L`,
   evaluating the left Kan extension at `L.obj X` is evaluation at `X`.
-- `CategoryTheory.Functor.preservesLimitsOfShape_lan`: the exactness statement.
+- `CategoryTheory.Functor.preservesLimitsOfShape_lan_of_essImage_or_isEmpty`: the exactness
+  statement.
 
 -/
 
@@ -106,7 +108,7 @@ or has empty comma category, and the initial object of `H` is a zero object.
 This is the abstract form of the left exactness of extension by zero along an open
 immersion: on the presheaf level, the extension of `F` is `F` on objects lying over the open
 subobject and zero elsewhere. -/
-lemma preservesLimitsOfShape_lan [L.Full] [L.Faithful] [HasZeroMorphisms H]
+lemma preservesLimitsOfShape_lan_of_essImage_or_isEmpty [L.Full] [L.Faithful] [HasZeroMorphisms H]
     [∀ F : C ⥤ H, L.HasPointwiseLeftKanExtension F]
     (hL : ∀ Y : D, (∃ X : C, Nonempty (L.obj X ≅ Y)) ∨ IsEmpty (CostructuredArrow L Y))
     (J : Type*) [Category* J] [HasLimitsOfShape J H] :
@@ -119,12 +121,12 @@ lemma preservesLimitsOfShape_lan [L.Full] [L.Faithful] [HasZeroMorphisms H]
       (fun F ↦ (L.isInitialLanObjObj F hY).isZero.isTerminal) J
 
 /-- Left Kan extension along a fully faithful functor with empty fibers is left exact.
-See `CategoryTheory.Functor.preservesLimitsOfShape_lan`. -/
-lemma preservesFiniteLimits_lan [L.Full] [L.Faithful] [HasZeroMorphisms H]
+See `CategoryTheory.Functor.preservesLimitsOfShape_lan_of_essImage_or_isEmpty`. -/
+lemma preservesFiniteLimits_lan_of_essImage_or_isEmpty [L.Full] [L.Faithful] [HasZeroMorphisms H]
     [∀ F : C ⥤ H, L.HasPointwiseLeftKanExtension F] [HasFiniteLimits H]
     (hL : ∀ Y : D, (∃ X : C, Nonempty (L.obj X ≅ Y)) ∨ IsEmpty (CostructuredArrow L Y)) :
     PreservesFiniteLimits (L.lan : (C ⥤ H) ⥤ D ⥤ H) where
-  preservesFiniteLimits _ := L.preservesLimitsOfShape_lan hL _
+  preservesFiniteLimits _ := L.preservesLimitsOfShape_lan_of_essImage_or_isEmpty hL _
 
 end Functor
 
