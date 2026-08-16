@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
@@ -48,6 +49,14 @@ and is computed by restriction along the localization functor. This yields the a
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek` and
   `AlgebraicGeometry.Etale.preservesFiniteColimits_openImmersionLowerShriek`: the lower
   shriek `j_!` is exact when `j` is an open immersion.
+
+## Main results
+
+- `AlgebraicGeometry.essImage_or_isEmpty_costructuredArrow`: every étale `X`-scheme either
+  lies in the essential image of the localization functor along an étale monomorphism `j`,
+  or has empty indexing comma category.
+- `AlgebraicGeometry.preservesFiniteLimits_lan_of_etale_and_mono`: consequently the
+  presheaf-level lower shriek along an étale monomorphism is left exact.
 
 -/
 
@@ -92,6 +101,20 @@ underlying morphism is the identity. -/
 private def homToComp (α : Etale.LiftIndex j V) :
     V ⟶ (MorphismProperty.Over.map ⊤ ‹Etale j›).obj α.toEtale :=
   MorphismProperty.Over.homMk (𝟙 V.left) ((Category.id_comp _).trans α.2)
+
+/-- A lift of `V` through `j` identifies `V` with the image of an étale `U`-scheme under the
+localization functor: the comparison morphism `Etale.LiftIndex.homToComp` is the identity on
+underlying schemes. -/
+private def isoComp (α : Etale.LiftIndex j V) :
+    V ≅ (MorphismProperty.Over.map ⊤ ‹Etale j›).obj α.toEtale where
+  hom := α.homToComp
+  inv := MorphismProperty.Over.homMk (𝟙 V.left) ((Category.id_comp _).trans α.2.symm)
+  hom_inv_id := by
+    apply MorphismProperty.Over.Hom.ext
+    exact Category.id_comp _
+  inv_hom_id := by
+    apply MorphismProperty.Over.Hom.ext
+    exact Category.id_comp _
 
 /-- The object of the comma category indexing the pointwise left Kan extension at `V`
 associated with a lift `α`; for a monomorphism `j` it is terminal, see
@@ -176,6 +199,27 @@ instance hasPointwiseLeftKanExtension_of_etale_and_mono
       hasColimitsOfShape_of_equivalence (equivalenceOfIsEmpty (Discrete PEmpty.{1}) _)
     infer_instance
 
+open Scheme in
+/-- Every étale `X`-scheme either lies in the essential image of the localization functor
+along an étale monomorphism `j`, or has empty indexing comma category. This is the
+dichotomy underlying the left exactness of the presheaf-level lower shriek. -/
+lemma essImage_or_isEmpty_costructuredArrow [Mono j] (V : X.Etaleᵒᵖ) :
+    (∃ W : U.Etaleᵒᵖ,
+        Nonempty ((MorphismProperty.Over.map ⊤ ‹Etale j›).op.obj W ≅ V)) ∨
+      IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ ‹Etale j›).op V) := by
+  by_cases h : Nonempty (Etale.LiftIndex j V.unop)
+  · obtain ⟨α⟩ := h
+    exact Or.inl ⟨op α.toEtale, ⟨α.isoComp.op⟩⟩
+  · exact Or.inr
+      (Etale.LiftIndex.isEmpty_costructuredArrow j V.unop (not_nonempty_iff.mp h))
+
+/-- The presheaf-level lower shriek along an étale monomorphism is left exact: the pointwise
+left Kan extension is either an evaluation or a zero object. -/
+instance preservesFiniteLimits_lan_of_etale_and_mono [Mono j] [Abelian A] :
+    PreservesFiniteLimits
+      ((MorphismProperty.Over.map ⊤ ‹Etale j›).op.lan : (U.Etaleᵒᵖ ⥤ A) ⥤ X.Etaleᵒᵖ ⥤ A) :=
+  Functor.preservesFiniteLimits_lan _ (essImage_or_isEmpty_costructuredArrow j)
+
 end KanExtension
 
 section LowerShriek
@@ -250,10 +294,28 @@ instance Etale.openImmersionLowerShriek_additive [Preadditive A] :
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
-abelian category is exact. This is the left exactness half. -/
-instance Etale.preservesFiniteLimits_openImmersionLowerShriek [Abelian A] :
-    PreservesFiniteLimits (Etale.openImmersionLowerShriek A j) :=
-  sorry
+abelian category is exact. This is the left exactness half.
+
+`j_!` is the presheaf-level left Kan extension followed by sheafification, and both factors
+are left exact: the first by
+`AlgebraicGeometry.preservesFiniteLimits_lan_of_etale_and_mono`, the second by the
+`HasSheafify` hypothesis. Note that this is genuinely stronger than the `HasWeakSheafify`
+needed to define `j_!`: `HasWeakSheafify` only provides the sheafification adjunction, and
+exactness of sheafification is exactly the extra content of `HasSheafify`. The hypothesis is
+harmless in practice, since Mathlib provides `HasSheafify X.smallEtaleTopology A` for the
+concrete coefficient categories of interest (`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`). -/
+instance Etale.preservesFiniteLimits_openImmersionLowerShriek [Abelian A]
+    [HasSheafify X.smallEtaleTopology A] :
+    PreservesFiniteLimits (Etale.openImmersionLowerShriek A j) := by
+  have heq : Etale.openImmersionLowerShriek A j =
+      sheafToPresheaf U.smallEtaleTopology A ⋙
+        localizationLowerShriekPresheaf A @Etale j inferInstance ⋙
+          presheafToSheaf X.smallEtaleTopology A :=
+    rfl
+  have hlan : PreservesFiniteLimits (localizationLowerShriekPresheaf A @Etale j inferInstance) :=
+    preservesFiniteLimits_lan_of_etale_and_mono A j
+  rw [heq]
+  exact comp_preservesFiniteLimits _ _
 
 /-- Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
 makes `j_!` exact. -/
