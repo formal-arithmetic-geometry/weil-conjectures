@@ -21,6 +21,7 @@ public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCateg
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Exchange
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
@@ -121,6 +122,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.SixFunctors.BaseChangeTheorems.CoefficientChange
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Derived
 public import WeilConjectures.SixFunctors.SheafCompose
