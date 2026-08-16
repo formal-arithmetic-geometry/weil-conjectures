@@ -5689,7 +5689,8 @@ restriction compatibility for arbitrary inclusions of affine opens is
 
 \begin{lemma}[Local properness of the global blow-up]
   \label{lemma:nagata-global-blowup-proper-local}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap_restrict}
+  \leanok
 
   If $\mathcal I$ is of finite type, the restriction of
   $b_{X,\mathcal I}$ over every affine open of $X$ is proper.
@@ -5697,6 +5698,7 @@ restriction compatibility for arbitrary inclusions of affine opens is
 
 \begin{proof}
   \uses{prop:nagata-global-blowup-affine-restrict,lemma:nagata-affine-blowup-proper}
+  \leanok
   Let $V=\operatorname{Spec}(A)\subseteq X$ be affine and put
   $I_V:=\Gamma(V,\mathcal I|_V)$.  Since $\mathcal I$ is of finite type,
   choose $f_0,\ldots,f_r\in I_V$ with $I_V=(f_0,\ldots,f_r)$.  By
@@ -5772,7 +5774,8 @@ restriction compatibility for arbitrary inclusions of affine opens is
 
 \begin{theorem}[Properness of the global blow-up]
   \label{thm:nagata-global-blowup-proper}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap}
+  \leanok
 
   If \(\mathcal I\) is of finite type, then
   \(b_{X,\mathcal I}\) is proper.
@@ -5780,6 +5783,7 @@ restriction compatibility for arbitrary inclusions of affine opens is
 
 \begin{proof}
   \uses{thm:nagata-global-blowup-projective}
+  \leanok
   By \Cref{thm:nagata-global-blowup-projective},
   \[
     b_{X,\mathcal I}\colon\operatorname{Bl}_{\mathcal I}(X)\to X
@@ -5787,6 +5791,26 @@ restriction compatibility for arbitrary inclusions of affine opens is
   is projective.  The theorem that projective morphisms are proper applied to
   this displayed morphism proves that it is proper.
 \end{proof}
+
+\formalizationnote{%
+  The Lean proof of \Cref{thm:nagata-global-blowup-proper} does not go through
+  projectivity, and therefore depends on neither
+  \Cref{thm:nagata-global-blowup-projective} nor
+  \Cref{def:nagata-global-blowup-relative-proj-comparison}.  Instead it uses
+  that properness is Zariski-local on the target, which reduces the theorem to
+  \Cref{lemma:nagata-global-blowup-proper-local} over the affine opens of $X$;
+  that lemma is in turn \Cref{prop:nagata-global-blowup-affine-restrict}
+  combined with \Cref{lemma:nagata-affine-blowup-proper}, exactly as its proof
+  above describes.  \Cref{thm:nagata-global-blowup-projective} is still wanted,
+  as the strictly stronger statement; the \texttt{\textbackslash uses} list of
+  the proof printed above records the informal route, not the formalized one.
+
+  The finite type condition on $\mathcal I$ is spelled out in Lean as
+  ``$\Gamma(V,\mathcal I|_V)$ is a finitely generated ideal for every affine
+  open $V\subseteq X$'', since this Mathlib has no predicate for a finite type
+  quasi-coherent ideal sheaf.  On a locally Noetherian scheme the hypothesis is
+  automatic, and the resulting unconditional statement is registered as an
+  instance.}
 
 \begin{lemma}[Principalization on one affine chart]
   \label{lemma:nagata-chart-extended-ideal-principal}
