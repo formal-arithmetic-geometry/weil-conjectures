@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
@@ -39,6 +40,11 @@ sheafification.
   `g_*` preserves every limit that exists in the coefficient category. This needs no
   hypothesis beyond the continuity of the base change functor, in particular it does not
   use the adjunction `g^* ⊣ g_*`.
+- `CategoryTheory.GrothendieckTopology.preservesFiniteLimits_upperStar`: the pullback `g^*`
+  is left exact, provided sheafification is and the left Kan extension along the opposite
+  of the base change functor is. In contrast to `g_*` this is not automatic; see
+  `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` for the case of an
+  étale morphism, where the Kan extension is precomposition with a right adjoint.
 
 ## Implementation notes
 
@@ -137,6 +143,20 @@ instance : (lowerStar A P Q g).IsRightAdjoint :=
 
 instance : (upperStar A P Q g).IsLeftAdjoint :=
   (upperStarLowerStarAdjunction A P Q g).isLeftAdjoint
+
+/-- `g^*` is left exact as soon as the left Kan extension along the base change functor is:
+`g^*` is the composite of the inclusion of sheaves into presheaves, which preserves finite
+limits, that left Kan extension, and sheafification, which is left exact by
+`HasSheafify`. Unlike `preservesFiniteLimits_lowerStar` this is not automatic; see
+`AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` for the case of an étale
+morphism, where the Kan extension is precomposition with a right adjoint. -/
+instance preservesFiniteLimits_upperStar [HasFiniteLimits A]
+    [HasSheafify (W.smallGrothendieckTopology Q (Q := P)) A]
+    [PreservesFiniteLimits ((MorphismProperty.Over.pullback P ⊤ g).op.lan :
+      ((P.Over ⊤ U)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ W)ᵒᵖ ⥤ A)] :
+    PreservesFiniteLimits (upperStar A P Q g) := by
+  unfold upperStar Functor.sheafPullbackConstruction.sheafPullback
+  infer_instance
 
 end Adjunction
 
