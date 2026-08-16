@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Affine.Defs
+public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 
 /-!
@@ -17,7 +18,9 @@ generated ideal `I : Ideal A` is proper.
 
 Mathlib knows that `Proj 𝒜 ⟶ Spec (𝒜 0)` is proper as soon as `𝒜` is of finite type over
 its degree-zero part, so the only work is to see that the Rees algebra of a finitely
-generated ideal is of finite type over `reesGrading I 0 ≃+* A`.
+generated ideal is of finite type over `reesGrading I 0 ≃+* A`. The scalar tower along
+which this is transported is `SetLike.GradeZero.isScalarTower` of
+`WeilConjectures.Mathlib.Algebra.DirectSum.Internal`.
 
 ## Main results
 
@@ -48,12 +51,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 variable {A : Type u} [CommRing A] (I : Ideal A)
-
-/-- The degree-zero part of the Rees algebra sits between the base ring and the Rees
-algebra. Spelled out because instance search does not find it in time. -/
-instance isScalarTower_reesGrading_zero :
-    IsScalarTower A (reesGrading I 0) (reesAlgebra I) :=
-  IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
 
 /-- The Rees algebra of a finitely generated ideal is of finite type over its degree-zero
 part. This is the hypothesis of Mathlib's properness of `Proj.toSpecZero`. -/
