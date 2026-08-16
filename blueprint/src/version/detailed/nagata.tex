@@ -5525,7 +5525,10 @@ restriction compatibility for arbitrary inclusions of affine opens is
   \uses{def:nagata-affine-blowup,def:nagata-rees-polynomial-map,
     def:nagata-relative-projective-space,
     lemma:nagata-relative-proj-interface}
-  \lean{}
+  \lean{AlgebraicGeometry.ProjectiveSpace,
+    AlgebraicGeometry.ProjectiveSpace.toSpec,
+    AlgebraicGeometry.AffineBlowup.toProjectiveSpace}
+  \leanok
 
   Put
   \[
@@ -5546,12 +5549,31 @@ restriction compatibility for arbitrary inclusions of affine opens is
   quotient closed immersion are supplied in this chapter by
   \Cref{lemma:nagata-relative-proj-interface}; no exact
   \texttt{\detokenize{affineBlowupToProjectiveSpace}} declaration exists.
+
+  \formalizationnote{%
+    The formalization stays in the absolute setting, where both sides are
+    literally \texttt{\detokenize{AlgebraicGeometry.Proj}} and no relative
+    \(\operatorname{Proj}\) is needed: the target \(\mathbf P^r_A\) is
+    \texttt{\detokenize{AlgebraicGeometry.ProjectiveSpace}}, defined as
+    \(\operatorname{Proj}\) of \(A[T]\) with its total-degree grading, and
+    \(e_I\) is
+    \texttt{\detokenize{AlgebraicGeometry.AffineBlowup.toProjectiveSpace}},
+    obtained by applying \texttt{\detokenize{AlgebraicGeometry.Proj.map}} to
+    \(\rho_I\).  The variables are indexed by an arbitrary type
+    \(\sigma\) rather than by \(\{0,\ldots,r\}\); the finitely generated
+    case of the blueprint is recovered by taking \(\sigma\) to be a finite
+    generating set, as in
+    \texttt{\detokenize{AffineBlowup.exists_isClosedImmersion_comp_projectiveSpaceToSpec}}.
+    Mathlib does not make the total-degree grading of \(A[T]\) a global
+    instance, so it is enabled locally in that file.}
 \end{definition}
 
 \begin{lemma}[Closed immersion into relative projective space]
   \label{lemma:nagata-affine-blowup-projective-embedding}
   \uses{def:nagata-affine-blowup-projective-embedding}
-  \lean{}
+  \lean{AlgebraicGeometry.AffineBlowup.isClosedImmersion_toProjectiveSpace,
+    AlgebraicGeometry.AffineBlowup.toProjectiveSpace_toSpec}
+  \leanok
 
   Let $A,r,I=(f_0,\ldots,f_r)$ be the datum of
   \Cref{def:nagata-affine-blowup-projective-embedding}.
@@ -5563,6 +5585,7 @@ restriction compatibility for arbitrary inclusions of affine opens is
 
 \begin{proof}
   \uses{lemma:nagata-rees-polynomial-surjection}
+  \leanok
   By \Cref{lemma:nagata-rees-polynomial-surjection}, $\rho_I$ is a surjective
   graded $A$-algebra map.  The relative-Proj quotient theorem applied to
   this named map is the closed immersion
@@ -5582,11 +5605,38 @@ restriction compatibility for arbitrary inclusions of affine opens is
   \[
     (\mathbf P_A^r\to\operatorname{Spec}A)\circ e_I=b_{A,I}.
   \]
+
+  \formalizationnote{%
+    The general input used here --- that \(\operatorname{Proj}\) of a
+    surjective graded ring homomorphism is a closed immersion, which is the
+    absolute case of (MLRP3) of
+    \Cref{lemma:nagata-relative-proj-interface} --- is not in Mathlib.  It is
+    proved in this project as
+    \texttt{\detokenize{AlgebraicGeometry.Proj.isClosedImmersion_map}}, by
+    Zariski-locality of \texttt{\detokenize{IsClosedImmersion}} on the target
+    together with the identification of the restriction of
+    \texttt{\detokenize{Proj.map}} over a standard affine open \(D_+(s)\)
+    with \(\operatorname{Spec}\) of the induced map on the degree-zero parts
+    of the localizations, which is surjective because a surjective graded ring
+    homomorphism is surjective in each degree.
+
+    The two conclusions are formalized separately: the closed immersion is
+    \texttt{\detokenize{isClosedImmersion_toProjectiveSpace}}, and the
+    factorization over \(\operatorname{Spec}(A)\) is
+    \texttt{\detokenize{toProjectiveSpace_toSpec}}.  The latter is the formal
+    content of ``\(\rho_I|_A=\operatorname{id}_A\)'': it identifies \(A\)
+    with the degree-zero part of \(A[T]\) via \(a\mapsto C(a)\) and with
+    the degree-zero part of \(\mathcal R_A(I)\) by
+    \Cref{lemma:nagata-rees-degree-zero}, and checks that \(\rho_I\)
+    intertwines the two.}
 \end{proof}
 
 
 \begin{proposition}[Projectivity of the affine blow-up]
   \label{prop:nagata-affine-blowup-projective}
+  % Not formalized: this Mathlib has no morphism class `IsProjective' for
+  % schemes, so ``is projective'' cannot be stated.  See the formalization
+  % note after the proof.
   \lean{}
 
   Let $A$ be a commutative ring and let $I\triangleleft A$ be finitely
@@ -5634,6 +5684,23 @@ restriction compatibility for arbitrary inclusions of affine opens is
   \[
     \operatorname{IsProjective}(b_{A,I}).
   \]
+
+  \formalizationnote{%
+    This proposition is not formalized, because this Mathlib has no morphism
+    class \texttt{\detokenize{IsProjective}} for schemes --- there is no
+    \texttt{\detokenize{Mathlib/AlgebraicGeometry/Morphisms/Projective.lean}}
+    --- so its conclusion cannot be stated.  Everything the proof supplies
+    before the final substitution \emph{is} formalized, as
+    \texttt{\detokenize{AffineBlowup.exists_isClosedImmersion_comp_projectiveSpaceToSpec}}:
+    for finitely generated \(I\) there is a finite index set \(\sigma\) and
+    a morphism \(e_I\colon\operatorname{Bl}_I(\operatorname{Spec}A)\to
+    \mathbf P^\sigma_A\) which is a closed immersion and satisfies
+    \(\pi_A\circ e_I=b_{A,I}\).  Only the wrapping of that data into the
+    predicate (P0) is missing.
+
+    Nothing downstream is blocked: \Cref{lemma:nagata-affine-blowup-proper} is
+    formalized without going through projectivity, as its own formalization
+    note records.}
 \end{proof}
 
 \begin{lemma}[Properness of the affine blow-up]
