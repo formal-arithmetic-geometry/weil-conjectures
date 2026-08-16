@@ -51,6 +51,11 @@ structures through `Rf_!` later on.
   `g_X = 𝟙 X₀ × σ` on the geometric fiber.
 - `AlgebraicGeometry.Scheme.Hom.isPullback_geometricFrobenius`: the Frobenius square is
   Cartesian.
+- `AlgebraicGeometry.Scheme.Hom.geometricFiberMap`: the geometric base change
+  `h̄ : X ⟶ Y` of a morphism `h : X₀ ⟶ Y₀` over `k`.
+- `AlgebraicGeometry.Scheme.Hom.isPullback_geometricFrobenius_geometricFiberMap`: the
+  geometric base change intertwines the geometric Frobenii, `g_Y ∘ h̄ = h̄ ∘ g_X`, and
+  the resulting Frobenius square is Cartesian.
 
 -/
 
@@ -202,6 +207,59 @@ theorem isPullback_geometricFrobenius :
     exact IsPullback.of_hasPullback f (specAlgebraicClosure k)
   exact h.of_right f.geometricFrobenius_hom_struct
     (IsPullback.of_hasPullback f (specAlgebraicClosure k))
+
+section GeometricFiberMap
+
+variable {Y₀ : Scheme.{u}} (fY : Y₀ ⟶ Spec (.of k)) (h : X₀ ⟶ Y₀)
+
+/-- The geometric base change `h̄ : X ⟶ Y` of a morphism `h : X₀ ⟶ Y₀` over the finite
+base field, between the geometric fibers of `X₀` (with structure morphism `h ≫ fY`) and
+of `Y₀`. -/
+def geometricFiberMap : (h ≫ fY).geometricFiber ⟶ fY.geometricFiber :=
+  pullback.map (h ≫ fY) (specAlgebraicClosure k) fY (specAlgebraicClosure k) h
+    (𝟙 _) (𝟙 _) (by simp) (by simp)
+
+omit [Finite k] in
+/-- The geometric base change lies over the original morphism: `p_Y ∘ h̄ = h ∘ p_X`. -/
+@[reassoc (attr := simp)]
+theorem geometricFiberMap_proj :
+    fY.geometricFiberMap h ≫ fY.geometricFiberProj = (h ≫ fY).geometricFiberProj ≫ h := by
+  simp [geometricFiberMap, geometricFiberProj]
+
+omit [Finite k] in
+/-- The geometric base change is a morphism over `Spec k̄`: `a_Y ∘ h̄ = a_X`. -/
+@[reassoc (attr := simp)]
+theorem geometricFiberMap_struct :
+    fY.geometricFiberMap h ≫ fY.geometricFiberStruct = (h ≫ fY).geometricFiberStruct := by
+  simp [geometricFiberMap, geometricFiberStruct]
+
+/-- The geometric base change intertwines the geometric Frobenii: `h̄ ∘ g_X = g_Y ∘ h̄`.
+Both act through the geometric Frobenius on the coefficients only. -/
+@[reassoc]
+theorem geometricFrobenius_hom_geometricFiberMap :
+    (h ≫ fY).geometricFrobenius.hom ≫ fY.geometricFiberMap h =
+      fY.geometricFiberMap h ≫ fY.geometricFrobenius.hom := by
+  apply pullback.hom_ext <;> simp [geometricFrobenius, geometricFiberMap]
+
+/-- The Frobenius square
+
+```
+X  -- g_X -->  X
+|              |
+h̄              h̄
+v              v
+Y  -- g_Y -->  Y
+```
+
+of the geometric base change of a morphism over the finite base field is Cartesian: the
+horizontal morphisms are isomorphisms. Its compact-support base change isomorphism
+transports Weil structures through `Rh̄_!`. -/
+theorem isPullback_geometricFrobenius_geometricFiberMap :
+    IsPullback (h ≫ fY).geometricFrobenius.hom (fY.geometricFiberMap h)
+      (fY.geometricFiberMap h) fY.geometricFrobenius.hom :=
+  IsPullback.of_horiz_isIso ⟨fY.geometricFrobenius_hom_geometricFiberMap h⟩
+
+end GeometricFiberMap
 
 end Scheme.Hom
 
