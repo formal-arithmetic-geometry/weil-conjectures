@@ -6,6 +6,7 @@ public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.Affine.Localization
 public import WeilConjectures.Blowup.Affine.PolynomialPresentation
 public import WeilConjectures.Blowup.Affine.Principalization
+public import WeilConjectures.Blowup.Affine.Projective
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Complement
@@ -42,6 +43,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunc
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
