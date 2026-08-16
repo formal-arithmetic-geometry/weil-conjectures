@@ -5787,7 +5787,9 @@ restriction compatibility for arbitrary inclusions of affine opens is
 \begin{lemma}[Principalization on one affine chart]
   \label{lemma:nagata-chart-extended-ideal-principal}
   \uses{def:nagata-blowup-chart-ring}
-  \lean{}
+  \lean{AlgebraicGeometry.AffineBlowup.map_awayAlgebraMap_reesX_eq_span_singleton,
+    AlgebraicGeometry.AffineBlowup.map_awayAlgebraMap_eq_span_singleton}
+  \leanok
 
   Let $A$ be a commutative ring, let $I\triangleleft A$, and let $a\in I$.
   In $A[I/a]$, the extended ideal satisfies
@@ -5797,6 +5799,7 @@ restriction compatibility for arbitrary inclusions of affine opens is
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $B:=A[I/a]$.  For every $x\in I$,
   \[
     x=a(x/a)\in aB,
@@ -5811,13 +5814,22 @@ restriction compatibility for arbitrary inclusions of affine opens is
 \begin{lemma}[Regularity of the chart generator]
   \label{lemma:nagata-chart-generator-regular}
   \uses{def:nagata-blowup-chart-ring}
-  \lean{}
+  \lean{AlgebraicGeometry.AffineBlowup.isRegular_awayAlgebraMap_reesX,
+    AlgebraicGeometry.AffineBlowup.isRegular_awayAlgebraMap}
+  \leanok
 
   Let $A$ be a commutative ring, let $I\triangleleft A$, and let $a\in I$.
   Multiplication by $a$ on $A[I/a]$ is injective.
 \end{lemma}
 
 \begin{proof}
+  \leanok
+  The formalization argues directly in $\mathcal R_A(I)$ rather than through
+  $\jmath$: if $z=F/(at)^n$ with $F$ homogeneous and $az=0$, then
+  $(at)^k\,aF=0$ in $\mathcal R_A(I)$ for some $k$, hence
+  $(at)^{k+1}F=t\,(at)^k\,aF=0$ in $A[t]$ and therefore $z=0$.  The argument of
+  the blueprint is the following.
+
   By \Cref{def:nagata-blowup-chart-ring}, the inclusion
   $\jmath\colon A[I/a]\hookrightarrow A_a$ is injective.  If
   $z\in A[I/a]$ satisfies $az=0$, then
@@ -5835,7 +5847,8 @@ restriction compatibility for arbitrary inclusions of affine opens is
 \begin{lemma}[Transition between local exceptional generators]
   \label{lemma:nagata-chart-generators-associated}
   \uses{def:nagata-affine-blowup-chart-map}
-  \lean{}
+  \lean{AlgebraicGeometry.AffineBlowup.exists_units_awayAlgebraMap_eq_mul}
+  \leanok
 
   Let $A$ be a commutative ring, let $I\triangleleft A$, and let $a,b\in I$.
   Put
@@ -5891,10 +5904,19 @@ restriction compatibility for arbitrary inclusions of affine opens is
     u_{ab}u_{ba}=u_{ba}u_{ab}=1,
   \]
   in the explicitly defined ring $B_{ab}$.
+
+  \paragraph{Formalization.}
+  The Lean statement is the last display: it produces a unit $u_{ba}$ of
+  $B_{ab}=\texttt{\detokenize{HomogeneousLocalization.Away (reesGrading I) (reesX I a ha * reesX I b hb)}}$
+  with $b=a\,u_{ba}$.  The identification of $\operatorname{Spec}(B_{ab})$ with
+  the overlap of the two charts is the one carried by Mathlib's
+  \texttt{\detokenize{Proj}} API and is not restated there.
 \end{lemma}
 
 \begin{proof}
-  \uses{lemma:nagata-chart-extended-ideal-principal}
+  \uses{lemma:nagata-chart-extended-ideal-principal,
+    lemma:nagata-chart-generator-regular}
+  \leanok
   By \Cref{lemma:nagata-chart-extended-ideal-principal}, restriction to
   $B_{ab}$ is the ideal equality
   \[
