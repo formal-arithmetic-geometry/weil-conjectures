@@ -47,12 +47,6 @@ classical forms of the theorem at once:
   rings is by restriction of scalars, which is exact, conservative, and compatible with
   the base-change mates; see `reference.pdf` in this directory.
 
-The sheaf-level special case `g^*(f_* F) ≅ Rf'_*(g'^* F)` for a single torsion sheaf
-`F`, placed in degree `0`, is recorded as `Etale.properBaseChange_single`.
-
-All statements are `Prop`-valued and their proofs are deferred (`sorry`); this file is
-the statement layer of the theorem.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.properBaseChange`: the general proper base change theorem,
@@ -60,8 +54,6 @@ the statement layer of the theorem.
 - `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`: for a torsion coefficient
   ring, the base-change transformation of a proper cartesian square is an isomorphism
   of functors.
-- `AlgebraicGeometry.Etale.properBaseChange_single`: proper base change for a single
-  torsion sheaf placed in degree `0`.
 
 ## References
 
@@ -157,19 +149,5 @@ theorem Etale.isIso_baseChange_of_isProper (hΛ : AddMonoid.IsTorsion Λ) [IsPro
     Etale.properBaseChange Λ sq K
       (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ K)
   NatIso.isIso_of_isIso_app _
-
-/-- **Proper base change for a single torsion sheaf**: for a cartesian square with `f`
-proper and a torsion sheaf `F` of `Λ`-modules on `X_ét`, the base-change morphism
-`Lg^*(Rf_* F) ⟶ Rf'_*(g'^* F)`, with `F` placed in degree `0`, is an isomorphism. This
-is the classical form `g^* Rᵠf_* F ≅ Rᵠf'_* g'^* F` of the theorem [Stacks 095T], read
-in the bounded below derived category. -/
-theorem Etale.properBaseChange_single [IsProper f] (sq : IsPullback g' f' f g)
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) [IsTorsionSheaf F] :
-    IsIso ((Etale.baseChange (ModuleCat.{u} Λ) sq.toCommSq).app
-      ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) 0).obj
-        F)) :=
-  Etale.properBaseChange Λ sq _ (by
-    -- the cohomology of `F[0]` is `F` in degree `0` and zero otherwise, hence torsion
-    sorry)
 
 end AlgebraicGeometry
