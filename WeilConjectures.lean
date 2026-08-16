@@ -13,6 +13,7 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
 public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.DerivedCategory.ConstructiblePullback
 public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
 public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp

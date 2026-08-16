@@ -201,6 +201,11 @@ instance : (Etale.lowerStar A g).IsRightAdjoint :=
 instance : (Etale.upperStar A g).IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
 
+/-- The pullback `g^*` on étale sheaves with values in a preadditive category is
+additive, being left adjoint to the additive pushforward `g_*`. -/
+instance Etale.upperStar_additive [Preadditive A] : (Etale.upperStar A g).Additive :=
+  (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive
+
 /-- The pullback `g^*` on étale sheaves with values in an abelian category is left
 exact. -/
 instance Etale.preservesFiniteLimits_upperStar [Abelian A] :

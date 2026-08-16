@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.DerivedCategory.ConstructiblePullback
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.WeilSheaf.GeometricFrobenius
 
@@ -43,10 +44,24 @@ specializing `CategoryTheory.WeilObject` to the Frobenius pullback endofunctors.
 Since the pullback `g_X^*` on sheaves is exact, its action on the derived category is
 the localization of its termwise action on complexes
 (`CategoryTheory.Functor.mapDerivedCategory`); no unbounded left derived functor
-machinery is needed for the Frobenius pullback. The restriction of Weil complexes to
-the bounded constructible subcategory `Dᵇc(X, A)`, the canonical Weil structure on
-objects descended from `X₀`, and the transport of Weil structures through `Rf_!` are
-subsequent layers built on top of these definitions.
+machinery is needed for the Frobenius pullback. Two further layers are provided here:
+
+- Since the derived pullback preserves the bounded constructible subcategory
+  `Dᵇc(X, A)` (assumed in `WeilConjectures.DerivedCategory.ConstructiblePullback`), the
+  Frobenius pullback restricts to an endofunctor of `Dᵇc(X, A)` and yields the category
+  `AlgebraicGeometry.WeilComplexBoundedConstructible` of bounded constructible Weil
+  complexes.
+- Since `G_X` is t-exact, a Weil complex induces for every `n` a Weil sheaf structure
+  `g_X^* Hⁿ(K) ≅ Hⁿ(G_X K) ≅ Hⁿ(K)` on its `n`-th homology sheaf. This is packaged as
+  the functors `AlgebraicGeometry.WeilComplex.homologyFunctor` and
+  `AlgebraicGeometry.WeilComplexBoundedConstructible.homologyFunctor` into
+  `AlgebraicGeometry.WeilSheaf`, built from the general transport of Weil objects
+  `CategoryTheory.WeilObject.map` along the homology commutation isomorphism
+  `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso` of the exact functor
+  `g_X^*`.
+
+The canonical Weil structure on objects descended from `X₀` and the transport of Weil
+structures through `Rf_!` are subsequent layers built on top of these definitions.
 
 ## Main definitions
 
@@ -57,8 +72,10 @@ subsequent layers built on top of these definitions.
 - `CategoryTheory.WeilObject.strIterate`: the coherently iterated structure isomorphism
   `Φ^[n] : Gⁿ K ≅ K`, defined recursively by `Φ^[0] = 𝟙` and
   `Φ^[n+1] = Φ ∘ G(Φ^[n])`.
-- `AlgebraicGeometry.Etale.upperStar_additive`: the pullback `g^*` on étale sheaves
-  with values in a preadditive category is additive.
+- `CategoryTheory.WeilObject.map`: transport of Weil objects along a functor equipped
+  with a commutation isomorphism with the endofunctors.
+- `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: an exact functor of
+  abelian categories commutes with the homology functors of the derived categories.
 - `AlgebraicGeometry.Etale.frobeniusPullback`: the Frobenius pullback endofunctor
   `G_X = g_X^*` on étale sheaves on the geometric fiber.
 - `AlgebraicGeometry.WeilSheaf`: the category of Weil sheaves on the geometric fiber.
@@ -66,12 +83,19 @@ subsequent layers built on top of these definitions.
   endofunctor on the derived category of étale sheaves on the geometric fiber.
 - `AlgebraicGeometry.WeilComplex`: the category of Weil complexes on the geometric
   fiber.
+- `AlgebraicGeometry.WeilComplex.homologyFunctor`: the Weil sheaf structure on the
+  homology sheaves of a Weil complex.
+- `AlgebraicGeometry.Etale.derivedFrobeniusPullbackBoundedConstructible`: the Frobenius
+  pullback endofunctor on the bounded constructible derived category `Dᵇc(X, A)`.
+- `AlgebraicGeometry.WeilComplexBoundedConstructible`: the category of bounded
+  constructible Weil complexes, with its comparison functor `toWeilComplex` and the
+  Weil sheaf structure `homologyFunctor` on its homology sheaves.
 
 -/
 
 @[expose] public section
 
-universe w v v' u u'
+universe w w' v v' u u'
 
 open CategoryTheory Limits
 
@@ -167,28 +191,80 @@ lemma strIterate_one (K : WeilObject G) :
     K.strIterate 1 = G.mapIso (Iso.refl K.obj) ≪≫ K.str :=
   rfl
 
+section Map
+
+variable {D : Type u'} [Category.{v'} D]
+
+/-- Transport of Weil objects along a functor `F : C ⥤ D` equipped with a commutation
+isomorphism `e : F ⋙ H ≅ G ⋙ F` with the endofunctors: a Weil object `(K, Φ)` for `G`
+is sent to `F K` with the structure isomorphism `H (F K) ≅ F (G K) ≅ F K`. For the
+homology functor on the derived category of étale sheaves, equipped with the
+commutation isomorphism expressing the t-exactness of the Frobenius pullback, this
+sends Weil complexes to the Weil sheaves on their homology. -/
+def map {H : D ⥤ D} {F : C ⥤ D} (e : F ⋙ H ≅ G ⋙ F) :
+    WeilObject G ⥤ WeilObject H where
+  obj K :=
+    { obj := F.obj K.obj
+      str := e.app K.obj ≪≫ F.mapIso K.str }
+  map {K L} φ :=
+    { hom := F.map φ.hom
+      comm := by
+        have h := e.hom.naturality φ.hom
+        simp only [Functor.comp_map] at h
+        simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+        rw [reassoc_of% h, ← F.map_comp, φ.comm, F.map_comp, Category.assoc] }
+  map_id K := hom_ext (F.map_id K.obj)
+  map_comp φ ψ := hom_ext (F.map_comp φ.hom ψ.hom)
+
+end Map
+
 end WeilObject
+
+section MapDerivedCategoryHomology
+
+variable {C₁ : Type u} [Category.{v} C₁] [Abelian C₁]
+  {C₂ : Type u'} [Category.{v'} C₂] [Abelian C₂]
+  (F : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+/-- An exact functor `F` between abelian categories commutes with the homology functors
+of homological complexes: the natural isomorphism
+`F.mapHomologicalComplex c ⋙ homologyFunctor ≅ homologyFunctor ⋙ F`, given objectwise
+by `ShortComplex.mapHomologyIso`. -/
+noncomputable def Functor.mapHomologicalComplexHomologyFunctorIso
+    {ι : Type*} (c : ComplexShape ι) (i : ι) :
+    F.mapHomologicalComplex c ⋙ HomologicalComplex.homologyFunctor C₂ c i ≅
+      HomologicalComplex.homologyFunctor C₁ c i ⋙ F :=
+  NatIso.ofComponents (fun K ↦ (K.sc i).mapHomologyIso F)
+    (fun φ ↦ ShortComplex.mapHomologyIso_hom_naturality
+      (φ := (HomologicalComplex.shortComplexFunctor C₁ c i).map φ) (F := F))
+
+/-- An exact functor `F` between abelian categories commutes with the homology functors
+of the derived categories: the natural isomorphism
+`F.mapDerivedCategory ⋙ homologyFunctor ≅ homologyFunctor ⋙ F`, obtained by descending
+the commutation isomorphism for homological complexes through the localization. For the
+Frobenius pullback on étale sheaves this expresses its t-exactness and induces the Weil
+sheaf structures on the homology of Weil complexes. -/
+noncomputable def Functor.mapDerivedCategoryHomologyFunctorIso
+    [HasDerivedCategory.{w} C₁] [HasDerivedCategory.{w'} C₂] (n : ℤ) :
+    F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor C₂ n ≅
+      DerivedCategory.homologyFunctor C₁ n ⋙ F :=
+  Localization.liftNatIso DerivedCategory.Q
+    (HomologicalComplex.quasiIso C₁ (ComplexShape.up ℤ))
+    ((F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ⋙
+      DerivedCategory.homologyFunctor C₂ n)
+    ((DerivedCategory.Q ⋙ DerivedCategory.homologyFunctor C₁ n) ⋙ F) _ _
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.homologyFunctorFactors C₂ n) ≪≫
+      F.mapHomologicalComplexHomologyFunctorIso (ComplexShape.up ℤ) n ≪≫
+      Functor.isoWhiskerRight (DerivedCategory.homologyFunctorFactors C₁ n).symm F)
+
+end MapDerivedCategoryHomology
 
 end CategoryTheory
 
 namespace AlgebraicGeometry
 
 open Scheme
-
-section Additive
-
-variable (A : Type u') [Category.{v'} A] [Preadditive A]
-variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
-variable [HasWeakSheafify Z.smallEtaleTopology A]
-
-/-- The pullback `g^*` on étale sheaves with values in a preadditive category is
-additive, being left adjoint to the additive pushforward `g_*`. -/
-instance Etale.upperStar_additive : (Etale.upperStar A g).Additive :=
-  (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive
-
-end Additive
 
 section WeilSheaf
 
@@ -265,7 +341,81 @@ noncomputable def WeilComplex.forget :
     WeilComplex A f ⥤ DerivedCategory (Sheaf (f.geometricFiber).smallEtaleTopology A) :=
   WeilObject.forget (Etale.derivedFrobeniusPullback A f)
 
+/-- Since the Frobenius pullback `g_X^*` is t-exact, the `n`-th homology sheaf of a
+Weil complex carries the induced Weil sheaf structure
+`g_X^* Hⁿ(K) ≅ Hⁿ(G_X K) ≅ Hⁿ(K)`: the transport of the Weil structure along the
+homology functor via the commutation isomorphism
+`CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`. -/
+noncomputable def WeilComplex.homologyFunctor (n : ℤ) :
+    WeilComplex A f ⥤ WeilSheaf A f :=
+  WeilObject.map
+    ((Etale.frobeniusPullback A f).mapDerivedCategoryHomologyFunctorIso n).symm
+
 end WeilComplex
+
+section WeilComplexBoundedConstructible
+
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
+  [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
+
+variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
+variable [∀ (T : Scheme.{u}) (φ : T ⟶ f.geometricFiber)
+    (P : (f.geometricFiber).Etaleᵒᵖ ⥤ A),
+  (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension P]
+variable [HasDerivedCategory.{w} (Sheaf (f.geometricFiber).smallEtaleTopology A)]
+
+/-- The Frobenius pullback endofunctor `G_X` on the bounded constructible derived
+category `Dᵇc(X, A)` of the geometric fiber: the restriction of
+`Etale.derivedFrobeniusPullback`, using that the derived pullback preserves bounded
+constructible objects
+(`Etale.DerivedCategory.boundedConstructible_upperStar_mapDerivedCategory`). -/
+noncomputable def Etale.derivedFrobeniusPullbackBoundedConstructible :
+    Dᵇc(f.geometricFiber, A) ⥤ Dᵇc(f.geometricFiber, A) :=
+  (Etale.DerivedCategory.boundedConstructible A f.geometricFiber).lift
+    (Etale.DerivedCategoryBoundedConstructible.ι A f.geometricFiber ⋙
+      Etale.derivedFrobeniusPullback A f)
+    (fun K ↦ Etale.DerivedCategory.boundedConstructible_upperStar_mapDerivedCategory A
+      f.geometricFrobenius.hom K.property)
+
+/-- A *bounded constructible Weil complex* on the geometric fiber `X` of a scheme over
+a finite field is an object `K` of the bounded constructible derived category
+`Dᵇc(X, A)` together with an isomorphism `Φ : G_X K ≅ K` along the Frobenius pullback.
+The isomorphism `Φ` is structure data. Morphisms are morphisms of `Dᵇc(X, A)` commuting
+with the structure isomorphisms. -/
+noncomputable def WeilComplexBoundedConstructible : Type _ :=
+  WeilObject (Etale.derivedFrobeniusPullbackBoundedConstructible A f)
+
+noncomputable instance : Category (WeilComplexBoundedConstructible A f) :=
+  inferInstanceAs
+    (Category (WeilObject (Etale.derivedFrobeniusPullbackBoundedConstructible A f)))
+
+/-- The forgetful functor from bounded constructible Weil complexes to `Dᵇc(X, A)`,
+discarding the Frobenius structure isomorphisms. -/
+noncomputable def WeilComplexBoundedConstructible.forget :
+    WeilComplexBoundedConstructible A f ⥤ Dᵇc(f.geometricFiber, A) :=
+  WeilObject.forget (Etale.derivedFrobeniusPullbackBoundedConstructible A f)
+
+/-- A bounded constructible Weil complex is in particular a Weil complex: the inclusion
+of `Dᵇc(X, A)` into the derived category commutes definitionally with the Frobenius
+pullbacks and transports the Weil structure. -/
+noncomputable def WeilComplexBoundedConstructible.toWeilComplex :
+    WeilComplexBoundedConstructible A f ⥤ WeilComplex A f :=
+  WeilObject.map
+    (F := Etale.DerivedCategoryBoundedConstructible.ι A f.geometricFiber) (Iso.refl _)
+
+/-- The Weil sheaf structure on the `n`-th homology sheaf of a bounded constructible
+Weil complex, obtained through the underlying Weil complex. -/
+noncomputable def WeilComplexBoundedConstructible.homologyFunctor (n : ℤ) :
+    WeilComplexBoundedConstructible A f ⥤ WeilSheaf A f :=
+  WeilComplexBoundedConstructible.toWeilComplex A f ⋙ WeilComplex.homologyFunctor A f n
+
+end WeilComplexBoundedConstructible
 
 end AlgebraicGeometry
 
