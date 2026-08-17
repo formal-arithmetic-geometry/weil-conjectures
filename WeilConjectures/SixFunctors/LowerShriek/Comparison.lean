@@ -76,8 +76,8 @@ statement in this file that is still `sorry`ed; everything else, including the r
 the proper case to it and the geometric input that `i` has clopen range, is proved. Its
 docstring records the intended argument and why `HasZeroObject A` is a necessary hypothesis.
 
-The remaining work is a single statement. Writing `k : W ⟶ X` for the open immersion
-complementary to the clopen `j`, the pair `{j, k}` is jointly surjective, so by
+The remaining work is bookkeeping, not mathematics. Writing `k : W ⟶ X` for the open
+immersion complementary to the clopen `j`, the pair `{j, k}` is jointly surjective, so by
 `AlgebraicGeometry.Etale.isIso_of_isIso_openImmersionRestriction`
 (`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Conservative`) it suffices to prove
 that `j^*` and `k^*` of the comparison are isomorphisms.
@@ -89,15 +89,34 @@ that `j^*` and `k^*` of the comparison are isomorphisms.
   general statement with no clopen hypothesis, proved in
   `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful` from the adjoint
   triple `j_! ⊣ j^* ⊣ j_*`.
-- `k^*` of the comparison is what is left. Here the source is initial and the target is
-  terminal: `k^* j_* F` has sections `F(T ×_X U) = F(∅)` over an étale `W`-scheme `T`,
-  terminal by the sheaf condition for the empty covering of the empty scheme; and
-  `k^* j_! F` is initial because
-  `Hom(k^* j_! F, H) ≅ Hom(j_! F, k_* H) ≅ Hom(F, j^* k_* H)` by the two adjunctions, and
-  `j^* k_* H` is terminal for the same reason. This never computes sections of `j_! F`,
-  which matters because `j_!` is a sheafification. With `HasZeroObject A` initial and
-  terminal agree, so the comparison is an isomorphism there — which is exactly where that
-  hypothesis is used, and why it cannot be dropped.
+- `k^*` of the comparison is **proved**, in
+  `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement`, as
+  `Etale.isIso_clopenComplement_openImmersionLowerShriekToLowerStar`. Both sides vanish on the
+  complement: `k^* j_* F` has sections `F(T ×_X U) = F(∅)` over an étale `W`-scheme `T`,
+  terminal by the sheaf condition for the empty covering of the empty scheme, hence zero; and
+  `k^* j_! F` is initial because `Hom(k^* j_! F, H) ≅ Hom(j_! F, k_* H) ≅ Hom(F, j^* k_* H)`
+  by the two adjunctions, with `j^* k_* H` zero for the same reason. This never computes
+  sections of `j_! F`, which matters because `j_!` is a sheafification. This is where
+  `HasZeroObject A` is consumed, and why it cannot be dropped.
+
+**Both halves are therefore available, but not in this file.** `Complement` imports this
+module — it has to, since the comparison is defined here — so the `k^*` half cannot be cited
+above the `sorry` below. Discharging it is a matter of moving the headline statement (and
+the proper case that consumes it) downstream of `Complement`, not of proving anything
+further; the two hypothesis-carrying forms
+`Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_complRestriction` (below) and
+`Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_openImmersionRestriction`
+(in `Complement`) are each one application away from it.
+
+A second, independent presentation of the site-theoretic input is available in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen`: for a decomposition of `X`
+into two disjoint opens, the sections of a sheaf over `V : X.Etale` are the *product* of the
+sections over the two pieces (`Scheme.Etale.isLimitClopenFan`). That is stronger than the
+conservativity used above and is not needed for it, but it is what the alternative route —
+constructing the counit `j_* j^* G ⟶ G` as "extend by zero on the complementary piece" —
+would consume. The same file proves `Scheme.Etale.isTerminalSectionsOfIsEmpty`, that a sheaf
+has terminal sections over an object with empty underlying scheme, which is the input to the
+`k^*` half above.
 
 -/
 
