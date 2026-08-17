@@ -34,6 +34,18 @@ categories have K-injective resolutions is a theorem of Alonso Tarrío–Jeremí
 López–Souto Salorio and Serpé; it is recorded here as the sorried instance
 `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`.
 
+Because of that `sorry`, the definitions in this file are **not** unconditional: `#print
+axioms AlgebraicGeometry.Etale.rightDerivedLowerStar` reports `sorryAx`. Code that only
+needs bounded below complexes should therefore prefer the counterparts in
+`WeilConjectures.SixFunctors.DerivedPlus`, which construct `R⁺g_*` and `R⁺f_!` on the
+bounded below derived categories out of enough injectives alone and are free of `sorryAx`.
+That covers the intended application, where the target is `D^b_c`. The two constructions
+agree where both apply, by
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompatibility`. This file remains the right
+long-term home: the sorried instance is a placeholder for a true theorem, and once it is
+proved — most naturally upstream in Mathlib — the unbounded functors become unconditional
+too.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerStar`: the total right derived functor

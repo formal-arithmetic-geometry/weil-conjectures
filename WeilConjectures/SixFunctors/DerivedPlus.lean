@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
@@ -52,6 +53,10 @@ unbounded ones. The two agree where both apply, by
   of the pushforward on bounded below derived categories of étale sheaves.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus`: the right derived functor `R⁺f_!`
   of the lower shriek on bounded below derived categories of étale sheaves.
+- `AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar`: for étale `g`, the
+  pushforward `g_*` preserves injective objects, being right adjoint to the exact `g^*`.
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarPlusComp`: the composition isomorphism
+  `R⁺(h₁)_* ⋙ R⁺(h₂)_* ≅ R⁺(h₁ ≫ h₂)_*` for étale `h₁`.
 
 -/
 
@@ -112,5 +117,43 @@ noncomputable def Etale.rightDerivedLowerShriekPlus :
   (Etale.lowerShriek A f).rightDerivedFunctorPlus
 
 end DerivedLowerShriek
+
+section Comp
+
+/-- For an étale `g`, the pushforward `g_*` preserves injective objects, being right adjoint
+to the pullback `g^*`, which is exact and in particular preserves monomorphisms. This is the
+hypothesis of `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso`, and it is what makes
+the composition isomorphism below available.
+
+Only `g` étale is covered because that is the generality in which
+`AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar` fires by instance search; for a
+general `g` the left exactness of `g^*` carries an extra hypothesis on the left Kan
+extension along base change. -/
+instance Etale.preservesInjectiveObjects_lowerStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) [Etale g] :
+    (Etale.lowerStar A g).PreservesInjectiveObjects :=
+  Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+    (Etale.upperStarLowerStarAdjunction A g)
+
+variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) [Etale h₁]
+variable [HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology A)]
+variable [HasDerivedCategory.{w'} (Sheaf S.smallEtaleTopology A)]
+variable [HasDerivedCategory.{w'} (Sheaf R.smallEtaleTopology A)]
+
+/-- The composition isomorphism `R⁺(h₁)_* ⋙ R⁺(h₂)_* ≅ R⁺(h₁ ≫ h₂)_*` for the bounded below
+derived pushforwards, for `h₁` étale. It is the general
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'` applied to the underived
+composition isomorphism `AlgebraicGeometry.Etale.lowerStarComp`.
+
+There is no unbounded counterpart of this in the repository that is free of the K-injective
+`sorry`: the unbounded composition theorem
+`CategoryTheory.Functor.rightDerivedFunctorCompIso` needs `HasKInjectiveResolutions` on both
+sheaf categories. -/
+noncomputable def Etale.rightDerivedLowerStarPlusComp :
+    Etale.rightDerivedLowerStarPlus A h₁ ⋙ Etale.rightDerivedLowerStarPlus A h₂ ≅
+      Etale.rightDerivedLowerStarPlus A (h₁ ≫ h₂) :=
+  Functor.rightDerivedFunctorPlusCompIso' (Etale.lowerStar A h₁) (Etale.lowerStar A h₂)
+    (Etale.lowerStarComp A h₁ h₂)
+
+end Comp
 
 end AlgebraicGeometry
