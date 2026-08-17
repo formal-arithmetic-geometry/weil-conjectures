@@ -82,10 +82,12 @@ variable (Λ : Type u) [CommRing Λ]
 convention of `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`;
 sheafification for the small étale sites is provided by mathlib's `HasSheafify` instance
 for the concrete category `ModuleCat Λ`. -/
-variable [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ ModuleCat.{u} Λ),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T : Scheme.{u}),
-    HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
+instance (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ ModuleCat.{u} Λ) :
+    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F :=
+  sorry
+
+variable [∀ (T : Scheme.{u}),
+  HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
 
 /- The K-flat resolution package on the coefficient category `ModuleCat Λ`, as in
 `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`; the monoidal structure,
