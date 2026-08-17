@@ -36,6 +36,11 @@ and is computed by restriction along the localization functor. This yields the a
 
 ## Main definitions
 
+- `AlgebraicGeometry.Scheme.Etale.LiftIndex`: the type of factorizations of the structure
+  morphism of `V : X.Etale` through `j`, together with
+  `AlgebraicGeometry.Scheme.Etale.LiftIndex.toEtale`, the induced étale `U`-scheme, and
+  `AlgebraicGeometry.Scheme.Etale.LiftIndex.isoComp`, which identifies `V` with its image
+  under the localization functor.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriek`: the lower shriek `j_!` on étale
   sheaves along an open immersion `j`.
 - `AlgebraicGeometry.Etale.openImmersionRestriction`: the restriction `j^*` along an open
@@ -77,7 +82,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [Etale j] (V : X.Etale)
 /-- The type of lifts of `V : X.Etale` through `j : U ⟶ X`: factorizations of the
 structure morphism of `V` through `j`. It indexes the colimit computing the presheaf-level
 lower shriek at `V`. -/
-private def Etale.LiftIndex : Type u :=
+def Etale.LiftIndex : Type u :=
   {α : V.left ⟶ U // α ≫ j = V.hom}
 
 namespace Etale.LiftIndex
@@ -85,27 +90,27 @@ namespace Etale.LiftIndex
 variable {j V}
 
 /-- The lift of an étale `X`-scheme through an étale morphism is étale. -/
-private lemma etale_val (α : Etale.LiftIndex j V) : Etale α.1 := by
+lemma etale_val (α : Etale.LiftIndex j V) : Etale α.1 := by
   have h : Etale (α.1 ≫ j) := by
     rw [α.2]
     infer_instance
   exact Etale.of_comp α.1 j
 
 /-- The étale `U`-scheme determined by a lift of `V : X.Etale` through `j`. -/
-private def toEtale (α : Etale.LiftIndex j V) : U.Etale :=
+def toEtale (α : Etale.LiftIndex j V) : U.Etale :=
   have := α.etale_val
   Etale.mk α.1
 
 /-- The comparison morphism from `V` to the image of `α.toEtale` in `X.Etale`; its
 underlying morphism is the identity. -/
-private def homToComp (α : Etale.LiftIndex j V) :
+def homToComp (α : Etale.LiftIndex j V) :
     V ⟶ (MorphismProperty.Over.map ⊤ ‹Etale j›).obj α.toEtale :=
   MorphismProperty.Over.homMk (𝟙 V.left) ((Category.id_comp _).trans α.2)
 
 /-- A lift of `V` through `j` identifies `V` with the image of an étale `U`-scheme under the
 localization functor: the comparison morphism `Etale.LiftIndex.homToComp` is the identity on
 underlying schemes. -/
-private def isoComp (α : Etale.LiftIndex j V) :
+def isoComp (α : Etale.LiftIndex j V) :
     V ≅ (MorphismProperty.Over.map ⊤ ‹Etale j›).obj α.toEtale where
   hom := α.homToComp
   inv := MorphismProperty.Over.homMk (𝟙 V.left) ((Category.id_comp _).trans α.2.symm)
