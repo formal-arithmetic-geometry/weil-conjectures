@@ -39,9 +39,9 @@ immersion `i`:
   (`Etale.lowerShriekToLowerStar`).
 
 For a proper morphism `f`, the comparison `ι_f` is an isomorphism
-(`Etale.isIso_lowerShriekToLowerStar`, stated with `sorry`): the open immersion into a
-compactification of a proper morphism is also proper, hence a closed and open immersion,
-and extension by zero along an open and closed immersion agrees with the pushforward.
+(`Etale.isIso_lowerShriekToLowerStar`): the open immersion `i` into a compactification of a
+proper morphism is also proper, hence a closed immersion, so its range is clopen; and
+extension by zero along an open immersion with clopen range agrees with the pushforward.
 
 ## Main definitions
 
@@ -49,8 +49,22 @@ and extension by zero along an open and closed immersion agrees with the pushfor
   `i_! ⟶ i_*` for an open immersion `i`.
 - `AlgebraicGeometry.Etale.lowerShriekToLowerStar`: the canonical comparison
   `ι_f : f_! ⟶ f_*` for `f` admitting a compactification.
+
+## Main results
+
+- `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar`: for an open immersion
+  with clopen range the comparison `i_! ⟶ i_*` is an isomorphism.
+- `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
+  the comparison for `f` to the comparison for the open immersion of its compactification.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`: for proper `f`, the comparison
   `ι_f` is an isomorphism.
+
+## Remaining `sorry`
+
+`Etale.isIso_openImmersionLowerShriekToLowerStar` — the clopen-immersion case — is the one
+statement in this file that is still `sorry`ed; everything else, including the reduction of
+the proper case to it and the geometric input that `i` has clopen range, is proved. Its
+docstring records the intended argument and why `HasZeroObject A` is a necessary hypothesis.
 
 -/
 
@@ -86,6 +100,27 @@ noncomputable def Etale.openImmersionLowerShriekToLowerStar :
       (Etale.openImmersionLowerShriekAdjunction A j).counit ≫
     (Functor.rightUnitor _).hom
 
+/-- For an open immersion `j` with **clopen** range — equivalently, an open immersion that
+is also a closed immersion — the comparison `j_! ⟶ j_*` is an isomorphism.
+
+Write `X = U ⊔ W` for the decomposition of `X` into the range of `j` and its complement.
+Every `V : X.Etale` decomposes accordingly as `V = V_U ⊔ V_W` with `V_U = V ×_X U`, and this
+is a covering of `V` in the small étale topology, so for a sheaf the sections over `V` are
+the product of the sections over the two pieces. Now `(j_* F)(V) = F(V_U)`, while `j_! F` is
+the sheafification of the presheaf that is `F` on the objects admitting a lift through `j`
+and initial elsewhere; the two pieces of the decomposition of `V` give `F(V_U)` and the
+sections of the initial sheaf over `V_W`, so `j_! F` and `j_* F` agree as soon as the
+initial object of `A` is also terminal.
+
+The hypothesis `HasZeroObject A` is genuinely needed, and not an artefact of the proof: for
+`A = Type` and `j` a clopen immersion with nonempty complement `W`, `(j_* F)(W) = F(∅)` is a
+singleton while `(j_! F)(W)` is empty, since every étale cover of the nonempty `W` has a
+piece with no lift through `j`. So the comparison is not an isomorphism there. -/
+theorem Etale.isIso_openImmersionLowerShriekToLowerStar [HasZeroObject A]
+    (hj : IsClopen (Set.range j)) :
+    IsIso (Etale.openImmersionLowerShriekToLowerStar A j) :=
+  sorry
+
 end OpenImmersion
 
 section Comparison
@@ -106,18 +141,34 @@ noncomputable def Etale.lowerShriekToLowerStar :
       (HasCompactification.compactification f).g).hom ≫
     eqToHom (by rw [← (HasCompactification.compactification f).comm])
 
+/-- The comparison `ι_f` is an isomorphism as soon as the comparison for the open immersion
+`i` of the chosen compactification is: the remaining two factors of `ι_f` are an isomorphism
+and an `eqToHom` by construction, and whiskering preserves isomorphisms.
+
+This step is purely formal; it uses nothing about `f`. -/
+lemma Etale.isIso_lowerShriekToLowerStar_of_isIso
+    (h : IsIso (Etale.openImmersionLowerShriekToLowerStar A
+      (HasCompactification.compactification f).i)) :
+    IsIso (Etale.lowerShriekToLowerStar A f) := by
+  rw [Etale.lowerShriekToLowerStar]
+  infer_instance
+
 /-- For a **proper** morphism `f`, the canonical comparison `ι_f : f_! ⟶ f_*` is an
 isomorphism.
 
-Mathematically, since `f` is proper and the structure morphism `g` of the
-compactification is separated, the open immersion `i` is proper as well, hence a closed
-immersion; an open and closed immersion `i` satisfies `i_! ≅ i_*` (a section over an
-étale `Z`-scheme `V` is determined by its restrictions to the open and closed
-complementary pieces of `V`), so the induced comparison of the composites is an
-isomorphism. -/
-theorem Etale.isIso_lowerShriekToLowerStar [IsProper f] :
+Since `f` is proper and the structure morphism `g` of the compactification is separated, the
+open immersion `i` is proper as well
+(`AlgebraicGeometry.Compactification.isProper_openImmersion`), hence a closed immersion with
+clopen range (`AlgebraicGeometry.Compactification.isClopen_range_openImmersion`). An open
+immersion with clopen range satisfies `i_! ≅ i_*`
+(`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar`), and the induced
+comparison of the composites is then an isomorphism by
+`AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`. -/
+theorem Etale.isIso_lowerShriekToLowerStar [IsProper f] [HasZeroObject A] :
     IsIso (Etale.lowerShriekToLowerStar A f) :=
-  sorry
+  Etale.isIso_lowerShriekToLowerStar_of_isIso A f
+    (Etale.isIso_openImmersionLowerShriekToLowerStar A _
+      ((HasCompactification.compactification f).isClopen_range_openImmersion ‹IsProper f›))
 
 end Comparison
 
