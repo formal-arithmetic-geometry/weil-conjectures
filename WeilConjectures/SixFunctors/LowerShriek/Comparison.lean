@@ -61,7 +61,9 @@ extension by zero along an open immersion with clopen range agrees with the push
   open immersion, by conservativity of the pair.
 - `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar`: the
   restriction `i^*` of the comparison is an isomorphism, for *any* open immersion `i`. This
-  discharges the first of the two hypotheses of that reduction.
+  discharges the first of the two hypotheses of that reduction, leaving
+  `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_complRestriction`:
+  the clopen case follows from the restriction along the complementary open immersion alone.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
   the comparison for `f` to the comparison for the open immersion of its compactification.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`: for proper `f`, the comparison
@@ -208,6 +210,23 @@ instance Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar
       ((Etale.openImmersionLowerShriekToLowerStar A j).app F)) := by
   rw [Etale.openImmersionLowerShriekToLowerStar_app, Functor.map_comp]
   infer_instance
+
+/-- **The clopen case, reduced to the complement alone.** For an open immersion `j` with
+clopen range, the comparison `j_! ⟶ j_*` is an isomorphism as soon as its restriction along
+the complementary open immersion is.
+
+This is `Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_restriction` with its
+first hypothesis discharged by
+`Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar`. It is the whole of what
+remains of `Etale.isIso_openImmersionLowerShriekToLowerStar`. -/
+theorem Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_complRestriction
+    (hj : IsClopen (Set.range j))
+    (hkc : ∀ F, IsIso ((Etale.openImmersionRestriction A
+      ((Scheme.Hom.clopenComplement j hj)).ι).map
+        ((Etale.openImmersionLowerShriekToLowerStar A j).app F))) :
+    IsIso (Etale.openImmersionLowerShriekToLowerStar A j) :=
+  Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_restriction A j hj
+    (fun _ => inferInstance) hkc
 
 end OpenImmersion
 
