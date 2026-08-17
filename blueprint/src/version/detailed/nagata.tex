@@ -1180,7 +1180,7 @@ declarations.
 \begin{definition}[Compactification] \checked
   \label{def:nagata-compactification}
   \uses{def:nagata-morphism-predicate-notation}
-  \lean{}
+  \lean{AlgebraicGeometry.Compactification}
 
   Let $f\colon X\to S$ be a morphism of schemes.  A \emph{compactification}
   of $f$ is a quadruple $C=(\overline X,j,p,e)$ consisting of a scheme
@@ -1212,20 +1212,38 @@ declarations.
       \end{array}\right\}.
   \]
 
-  \paragraph{Mathlib relation.}
-  No current Mathlib declaration named
-  \texttt{\detokenize{AlgebraicGeometry.Compactification}} was found.  Its
-  component predicates are the exact Mathlib interfaces
-  \texttt{\detokenize{IsOpenImmersion}},
-  \texttt{\detokenize{QuasiCompact}}, and
-  \texttt{\detokenize{IsProper}}; the bundled record is a project
-  declaration.
+  \paragraph{Formalization.}
+  The bundled record is the project declaration
+  \texttt{\detokenize{AlgebraicGeometry.Compactification}}
+  (\texttt{\detokenize{WeilConjectures/Compactification/Defs.lean}}), with fields
+  \texttt{\detokenize{Z}}, \texttt{\detokenize{g}}, \texttt{\detokenize{i}},
+  \texttt{\detokenize{comm}}, \texttt{\detokenize{isProper}} and
+  \texttt{\detokenize{isOpenImmersion}} corresponding to
+  $\overline X$, $p$, $j$, $e$, $\operatorname{IsProper}(p)$ and the open-immersion half of
+  $\operatorname{IsQuasiCompactOpenImmersion}(j)$.  The component predicates are the exact
+  Mathlib interfaces \texttt{\detokenize{IsOpenImmersion}},
+  \texttt{\detokenize{QuasiCompact}} and \texttt{\detokenize{IsProper}}.
+
+  \textbf{This entry is deliberately not marked as formalized, because the Lean structure is
+  strictly weaker than the definition above: it has no \texttt{\detokenize{QuasiCompact i}}
+  field.}  The two notions agree exactly when $f$ is quasi-compact, by
+  \texttt{\detokenize{Compactification.quasiCompact_openImmersion_iff}}, which states
+  $\operatorname{QuasiCompact}(j)\iff\operatorname{QuasiCompact}(f)$ for any $C$,
+  and they genuinely differ otherwise: an open immersion into a proper scheme need not be
+  quasi-compact, so the Lean type is a strictly larger set of quadruples for general $f$.
+  The field is deliberately absent rather than overlooked --- the class
+  \texttt{\detokenize{HasCompactification}} below is consumed as a hypothesis by the
+  six-functor formalism (\texttt{\detokenize{Etale.lowerShriek}} and the comparison
+  $f_!\to f_*$), so adding a field would make that hypothesis harder to discharge for no gain
+  at the use sites, which carry \texttt{\detokenize{QuasiCompact}} separately when they need
+  it.  Every application of this definition inside this chapter is at a morphism of finite
+  type, hence quasi-compact, where the two notions coincide.
 \end{definition}
 
 \begin{definition}[Compactifiability]
   \label{def:nagata-compactifiable}
   \uses{def:nagata-compactification}
-  \lean{}
+  \lean{AlgebraicGeometry.HasCompactification}
 
   Let \(f\colon X\to S\) be a morphism of schemes.  Define the predicate
   \[
@@ -1236,15 +1254,30 @@ declarations.
   The phrase ``$f$ is compactifiable'' abbreviates
   $\operatorname{Compactifiable}(f)$.
 
-  \paragraph{Mathlib relation.}
-  This is the local nonemptiness predicate for
-  \Cref{def:nagata-compactification}; no current declaration named
-  \texttt{\detokenize{AlgebraicGeometry.Compactifiable}} was found.
+  \paragraph{Formalization.}
+  This is the project class
+  \texttt{\detokenize{AlgebraicGeometry.HasCompactification}}, defined as
+  \texttt{\detokenize{Nonempty (Compactification f)}} --- literally the displayed
+  nonemptiness predicate.  A choice of compactification is extracted by
+  \texttt{\detokenize{HasCompactification.compactification}}, and
+  \texttt{\detokenize{Compactification.hasCompactification}} is the converse packaging.  No
+  declaration named \texttt{\detokenize{AlgebraicGeometry.Compactifiable}} exists; the
+  \texttt{\detokenize{Has}}-prefixed class name is the Mathlib convention for this shape.
+
+  Not marked as formalized, for the reason given in
+  \Cref{def:nagata-compactification}: the underlying Lean structure omits quasi-compactness
+  of $j$, so \texttt{\detokenize{HasCompactification f}} is implied by, but does not imply,
+  $\operatorname{Compactifiable}(f)$ for a general $f$.  The two agree whenever $f$ is
+  quasi-compact.
 \end{definition}
 
 \begin{definition}[Direct-image structure morphism]
   \label{def:nagata-direct-image-structure-map}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.app,
+    AlgebraicGeometry.Scheme.Hom.appTop,
+    AlgebraicGeometry.Scheme.Hom.comp_app,
+    AlgebraicGeometry.IsSchemeTheoreticallyDominant}
+  \leanok
 
   Let $a\colon A\to B$ be a morphism of schemes and let
   \(a^\flat\colon\mathcal O_B\to a_*\mathcal O_A\) be the adjoint
@@ -1291,17 +1324,35 @@ declarations.
       \mathcal O_A(|A|)=R_A.                                      \tag{DIM0}
   \]
 
-  \paragraph{Mathlib relation.}
-  There is no public declaration named
-  \texttt{\detokenize{Scheme.Hom.directImageStructureMap}}.  The same
-  structure morphism and its maps on sections and stalks are exposed by
-  \texttt{\detokenize{Scheme.Hom.c}},
-  \texttt{\detokenize{Scheme.Hom.app}},
-  \texttt{\detokenize{Scheme.Hom.appTop}}, and
-  \texttt{\detokenize{Scheme.Hom.stalkMap}}; composition is controlled by
-  \texttt{\detokenize{Scheme.Hom.comp_app}} and
-  \texttt{\detokenize{Scheme.Hom.comp_appTop}}.  The symbol
-  $\varepsilon_a$ is the blueprint's adapter notation for that API.
+  \paragraph{Formalization.}
+  This definition introduces notation rather than a new object, so it has no single Lean
+  counterpart and none should be invented: there is no declaration named
+  \texttt{\detokenize{Scheme.Hom.directImageStructureMap}}, and $\varepsilon_a$ is the
+  blueprint's adapter notation for an API that is already complete in Mathlib.
+
+  The component $\varepsilon_{a,V}$ is \texttt{\detokenize{Scheme.Hom.app a V}}, of type
+  $\Gamma(B,V)\to\Gamma(A,|a|^{-1}(V))$; it is an abbreviation for the application of the
+  structure field \texttt{\detokenize{AlgebraicGeometry.PresheafedSpace.Hom.c}}, written
+  \texttt{\detokenize{a.c}}, which is $\varepsilon_a=a^\flat$ itself.  There is no
+  declaration named \texttt{\detokenize{Scheme.Hom.c}}.  Naturality of $\varepsilon_a$ in $V$
+  is \texttt{\detokenize{Scheme.Hom.naturality}}, and the induced maps on stalks are
+  \texttt{\detokenize{Scheme.Hom.stalkMap}}.
+
+  The two composition identities are \texttt{\detokenize{Scheme.Hom.comp_app}} and
+  \texttt{\detokenize{Scheme.Hom.comp_appTop}}.  Both are written in diagrammatic order in
+  Lean, so the first reads ``the section map of $f$ then $g$ at $U$ is the section map of $g$
+  at $U$ followed by that of $f$ at $|g|^{-1}(U)$'', which is the displayed
+  $\varepsilon_{b\circ a,V}=\varepsilon_{a,|b|^{-1}(V)}\circ\varepsilon_{b,V}$ with $a=f$ and
+  $b=g$.
+
+  $\operatorname{SchematicallyDense}(a)$ is exactly
+  \texttt{\detokenize{AlgebraicGeometry.IsSchemeTheoreticallyDominant a}}, and the displayed
+  characterization $\ker(\varepsilon_a)=0$ is
+  \texttt{\detokenize{isSchemeTheoreticallyDominant_iff}}, phrased as the vanishing of the
+  ideal sheaf \texttt{\detokenize{Scheme.Hom.ker a}} rather than of a literal kernel subsheaf.
+  Finally (DIM0), the induced ring map $a^{\#}$ on global sections, is
+  \texttt{\detokenize{Scheme.Hom.appTop}}, which is defined for arbitrary schemes and
+  specializes to the affine case.
 \end{definition}
 
 \begin{definition}[Literal ideal sheaves and Mathlib ideal-sheaf data]
@@ -1681,7 +1732,9 @@ declarations.
   \label{def:nagata-dense-compactification}
   \uses{def:nagata-compactification,
     def:nagata-direct-image-structure-map}
-  \lean{}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant,
+    AlgebraicGeometry.isSchemeTheoreticallyDominant_iff}
+  \leanok
 
   Let \(f\colon X\to S\) be a morphism of schemes, and let
   $C=(\overline X,j,p,e)\in
@@ -1705,19 +1758,28 @@ declarations.
     \ker(\varepsilon_j)=0_{\mathcal O_{\overline X}}.
   \]
 
-  \paragraph{Mathlib relation.}
-  The compactification wrapper is local, while its density condition is the
-  exact predicate
-  \texttt{\detokenize{AlgebraicGeometry.IsSchemeTheoreticallyDominant j}};
-  the kernel characterization is
-  \texttt{\detokenize{isSchemeTheoreticallyDominant_iff}}.
+  \paragraph{Formalization.}
+  The density condition itself is formalized exactly: $\operatorname{Dense}(C)$ is
+  \texttt{\detokenize{AlgebraicGeometry.IsSchemeTheoreticallyDominant c.i}} applied to the
+  open immersion field of the Lean \texttt{\detokenize{Compactification}} record, and the
+  displayed kernel characterization $\ker(\varepsilon_j)=0$ is
+  \texttt{\detokenize{isSchemeTheoreticallyDominant_iff}}, stated as the vanishing of the
+  ideal sheaf \texttt{\detokenize{Scheme.Hom.ker j}}.  Both are Mathlib declarations; no wrapper
+  predicate on \texttt{\detokenize{Compactification}} is defined, and none is needed, since
+  the condition is a predicate on $j$ alone.
+
+  The quasi-compactness caveat of \Cref{def:nagata-compactification} applies to the ambient
+  quadruple $C$, not to this predicate.
 \end{definition}
 
 \begin{definition}[Scheme-theoretic image]
   \label{def:nagata-scheme-theoretic-image}
   \uses{def:nagata-direct-image-structure-map,
     def:nagata-quotient-relative-spec}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker,
+    AlgebraicGeometry.Scheme.Hom.image,
+    AlgebraicGeometry.Scheme.Hom.imageι}
+  \leanok
 
   Let \(g\colon T\to Y\) satisfy
   \(\operatorname{IsQCQS}(g)\).  By
@@ -1771,13 +1833,35 @@ declarations.
     \operatorname{SIm}(g):=\operatorname{SIm}_Y(g).
   \]
 
-  \paragraph{Mathlib relation.}
-  This object is exactly
-  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.image g}}, reducibly
-  \texttt{\detokenize{(Scheme.Hom.ker g).subscheme}}; its inclusion is
-  \texttt{\detokenize{Scheme.Hom.imageι g}}.  Thus the proposed name
-  \texttt{\detokenize{Scheme.Hom.schemeTheoreticImage}} should be read as a
-  blueprint alias for those declarations.
+  \paragraph{Formalization.}
+  $\operatorname{SIm}_Y(g)$ is \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.image g}},
+  reducibly \texttt{\detokenize{(Scheme.Hom.ker g).subscheme}}, and $i_g$ is
+  \texttt{\detokenize{Scheme.Hom.imageι g}}.  The proposed name
+  \texttt{\detokenize{Scheme.Hom.schemeTheoreticImage}} is a blueprint alias for those, not a
+  Mathlib declaration.  The ideal sheaf $\mathcal K_g$ is
+  \texttt{\detokenize{Scheme.Hom.ker g}}.  The structure isomorphism $\chi_g$ has no Lean
+  counterpart as an isomorphism; its content --- that the closed immersion $i_g$ cuts out
+  exactly $\mathcal K_g$, i.e.\ $\ker(\varepsilon_{i_g})=\mathcal K_g$ --- is the equation
+  \texttt{\detokenize{Scheme.IdealSheafData.ker_subschemeι}}, and that is the form every
+  downstream argument in this chapter uses.
+
+  Two differences of presentation are worth recording, neither of them a gap.
+
+  First, Mathlib carries no quasi-coherence hypothesis here.  The blueprint assumes
+  $\operatorname{IsQCQS}(g)$ so that Tag 01R5 makes $\mathcal K_g$ quasi-coherent, and then
+  forms $\operatorname{Spec}_Y$ of the quotient.  Mathlib's
+  \texttt{\detokenize{Scheme.Hom.ker}} lands in
+  \texttt{\detokenize{Scheme.IdealSheafData}}, which encodes a compatible family of ideals on
+  affine opens and is therefore quasi-coherent by construction, so
+  \texttt{\detokenize{Scheme.Hom.image g}} is defined for \emph{every} $g$ with no
+  hypothesis.  The Lean object is thus available in strictly greater generality, and agrees
+  with the blueprint's under $\operatorname{IsQCQS}(g)$.
+
+  Second, the relative spectrum does not appear: the closed subscheme cut out by an ideal
+  sheaf is constructed directly as
+  \texttt{\detokenize{Scheme.IdealSheafData.subscheme}}, with inclusion
+  \texttt{\detokenize{subschemeι}}, rather than as
+  $\operatorname{Spec}_Y(\mathcal O_Y/\mathcal K_g)$.
 \end{definition}
 
 \begin{definition}[Canonical factor through a scheme-theoretic image]
@@ -1785,7 +1869,9 @@ declarations.
   \uses{def:nagata-direct-image-structure-map,
     def:nagata-scheme-theoretic-image,
     lemma:nagata-quotient-relative-spec}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.toImage,
+    AlgebraicGeometry.Scheme.Hom.toImage_imageι}
+  \leanok
 
   For $g\colon T\to Y$ and
   $(\mathcal K_g,\pi_g,i_g,\chi_g)$ as in
@@ -1823,12 +1909,23 @@ declarations.
          \circ\chi_g\circ\pi_g.
   \]
 
-  \paragraph{Mathlib relation.}
-  The exact factor is \texttt{\detokenize{Scheme.Hom.toImage g}}, and its
-  defining equation is
-  \texttt{\detokenize{Scheme.Hom.toImage_imageι}} (with the associated
-  \texttt{\detokenize{toImage_imageι_assoc}} lemma).  The proposed name
-  \texttt{\detokenize{toSchemeTheoreticImage}} is not a current declaration.
+  \paragraph{Formalization.}
+  $g^{\mathrm{im}}$ is \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.toImage g}}, and the
+  equality witness $e_g^{\mathrm{im}}\colon i_g\circ g^{\mathrm{im}}=g$ is
+  \texttt{\detokenize{Scheme.Hom.toImage_imageι}}, written in diagrammatic order as
+  ``\texttt{\detokenize{g.toImage}} then \texttt{\detokenize{g.imageι}} equals
+  \texttt{\detokenize{g}}''; the reassociated form
+  \texttt{\detokenize{toImage_imageι_assoc}} is provided for rewriting.  The proposed name
+  \texttt{\detokenize{toSchemeTheoreticImage}} is not a declaration.
+
+  The Lean construction does not go through the relative-spectrum adjunction: it is the
+  universal property of \texttt{\detokenize{Scheme.IdealSheafData.subscheme}}, packaged
+  categorically by \texttt{\detokenize{Scheme.kerAdjunction}} as an adjunction over $Y$
+  between the closed-subscheme functor
+  \texttt{\detokenize{Scheme.IdealSheafData.subschemeFunctor}}, taking
+  $\mathcal K$ to $V(\mathcal K)$, and the kernel functor
+  \texttt{\detokenize{Scheme.kerFunctor}}, taking $h$ to $\ker(\varepsilon_h)$.  So
+  $\overline\varepsilon_g$ is not named separately; the morphism it classifies is.
 \end{definition}
 
 \begin{definition}[Comparison map for a closed factorization]
@@ -1837,7 +1934,10 @@ declarations.
     def:nagata-closed-subscheme-class,
     def:nagata-direct-image-structure-map,
     def:nagata-scheme-theoretic-image}
-  \lean{}
+  \lean{AlgebraicGeometry.IsClosedImmersion.lift,
+    AlgebraicGeometry.IsClosedImmersion.lift_fac,
+    AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp}
+  \leanok
 
   Let $g\colon T\to Y$ be as in
   \Cref{def:nagata-scheme-theoretic-image}.  Suppose that
@@ -1938,20 +2038,42 @@ declarations.
       =i_g.
   \]
 
-  \paragraph{Mathlib relation.}
-  This chosen comparison packages
-  \texttt{\detokenize{AlgebraicGeometry.IsClosedImmersion.lift}},
-  \texttt{\detokenize{lift_fac}},
-  \texttt{\detokenize{isIso_lift}}, and the categorical
-  \texttt{\detokenize{Scheme.kerAdjunction}}.  There is no single current
-  declaration named
-  \texttt{\detokenize{Scheme.Hom.schemeTheoreticImageComparison}}.
+  \paragraph{Formalization.}
+  The comparison $c_{g,z}\colon\operatorname{SIm}_Y(g)\to Z$ is
+  \texttt{\detokenize{IsClosedImmersion.lift z (Scheme.Hom.imageι g) H}}, where $H$ is a proof
+  of $\mathcal K_z\le\mathcal K_{i_g}$,
+  and $e_{g,z}^{\mathrm{cmp}}\colon z\circ c_{g,z}=i_g$ is
+  \texttt{\detokenize{IsClosedImmersion.lift_fac}}.  There is no declaration named
+  \texttt{\detokenize{Scheme.Hom.schemeTheoreticImageComparison}}; the blueprint symbol is an
+  alias for that application of \texttt{\detokenize{lift}}.
+
+  The hypothesis $H$ is the displayed inclusion $\mathcal K_z\subseteq\mathcal K_g$, supplied
+  by the project lemma
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp}}, which combines
+  Mathlib's \texttt{\detokenize{Scheme.Hom.le_ker_comp}} (the kernel of $z$ is contained in
+  the kernel of $z\circ h$) with
+  \texttt{\detokenize{Scheme.IdealSheafData.ker_subschemeι}} (the kernel of $i_g$ is
+  $\mathcal K_g$).
+
+  The Lean route \textbf{avoids the chosen isomorphism $\sigma_z$ entirely}.  Where the proof
+  above replaces $Z$ by $\operatorname{Spec}_Y(\mathcal O_Y/\mathcal K_z)$ using a choice from
+  the nonempty set $\mathscr S_z$ and then descends $q_{g,z}$,
+  \texttt{\detokenize{lift}} takes the ideal-sheaf inequality directly and produces the
+  morphism into $Z$ itself.  The class equality (SIC0) is then not needed as an input; the
+  statement corresponding to it is
+  \texttt{\detokenize{IsClosedImmersion.isIso_lift}}, which says that the lift is an
+  isomorphism when the two ideal sheaves are equal.
 \end{definition}
 
 \begin{lemma}[Universal property of the scheme-theoretic image]
   \label{lemma:nagata-scheme-image-universal}
   \uses{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.toImage_imageι,
+    AlgebraicGeometry.IsClosedImmersion.lift_fac,
+    AlgebraicGeometry.Scheme.Hom.toImage_lift,
+    AlgebraicGeometry.IsClosedImmersion.isClosedImmersion_lift,
+    AlgebraicGeometry.IsClosedImmersion.eq_lift}
+  \leanok
 
   With the notation of
   \Cref{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison},
@@ -1966,11 +2088,35 @@ declarations.
       =\{c_{g,z}\}.
   \]
 
-  \paragraph{Mathlib relation.}
-  The lift, factorization, and isomorphism components are the exact closed
-  immersion declarations listed in
-  \Cref{def:nagata-scheme-image-comparison}; the displayed aggregate and its
-  chosen comparison map are blueprint-local.
+  \paragraph{Formalization.}
+  All five assertions are formalized, though not as a single declaration --- the aggregate is
+  blueprint-local.  Write $c_{g,z}$ for the lift of
+  \Cref{def:nagata-scheme-image-comparison}.
+
+  The equality $i_g\circ g^{\mathrm{im}}=g$ is
+  \texttt{\detokenize{Scheme.Hom.toImage_imageι}} and $z\circ c_{g,z}=i_g$ is
+  \texttt{\detokenize{IsClosedImmersion.lift_fac}}; both are Mathlib.  The third equality
+  $c_{g,z}\circ g^{\mathrm{im}}=h$ is the project lemma
+  \texttt{\detokenize{Scheme.Hom.toImage_lift}}, proved exactly as above by cancelling the
+  monomorphism $z$.
+
+  That $c_{g,z}$ is a closed immersion is the project instance
+  \texttt{\detokenize{IsClosedImmersion.isClosedImmersion_lift}}.  Its Lean proof is not the
+  affine argument given above: since $c_{g,z}$ composed with $z$ is the closed immersion
+  $i_g$, and $z$ is a closed immersion,
+  \texttt{\detokenize{IsClosedImmersion.of_comp_isClosedImmersion}} applies directly, so no
+  affine chart and no surjectivity criterion is needed.
+
+  The uniqueness clause is the project lemma
+  \texttt{\detokenize{IsClosedImmersion.eq_lift}}, stated in the equivalent pointwise form
+  ``any $c$ with $z\circ c=i_g$ equals the lift'', proved by
+  \texttt{\detokenize{cancel_mono}}.
+
+  The three project declarations are in
+  \texttt{\detokenize{WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean}}
+  and are upstreamable as written: they complete the API of Mathlib's
+  \texttt{\detokenize{IsClosedImmersion.lift}}, which previously supplied only
+  \texttt{\detokenize{lift_fac}} and \texttt{\detokenize{isIso_lift}}.
 \end{lemma}
 
 \begin{proof}
@@ -2409,7 +2555,8 @@ declarations.
     def:nagata-scheme-image-factor,
     lemma:nagata-immersion-qcqs-criteria,
     lemma:nagata-morphism-property-calculus}
-  \lean{}
+  \lean{AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact,
+    AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact}
 
   Let $g\colon T\to Y$ satisfy
   \[
@@ -2428,13 +2575,29 @@ declarations.
   \Cref{def:nagata-scheme-image-factor} is an open immersion,
   and its image is topologically and scheme-theoretically dense.
 
-  \paragraph{Mathlib relation.}
-  The open-immersion conclusion is the exact instance
-  \texttt{\detokenize{AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact}},
-  with \texttt{\detokenize{IsImmersion.instToImage}} and
-  \texttt{\detokenize{Scheme.instIsDominantToImageOfQuasiCompact}} supplying
-  related structure.  The added schematic-density clause is assembled from
-  the separate scheme-theoretic-dominance API.
+  \paragraph{Formalization.}
+  Two of the three conclusions are exact Mathlib instances, and the Lean proofs need neither
+  the Stacks factorization $g=u\circ k$ nor the pullback $T_U$ constructed below.
+
+  That $g^{\mathrm{im}}$ is an open immersion is
+  \texttt{\detokenize{AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact}}
+  in \texttt{\detokenize{Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean}}, which fires by
+  instance search from the two hypotheses $\operatorname{IsImmersion}(g)$ and
+  $\operatorname{IsQuasiCompact}(g)$.  That its image is topologically dense is
+  \texttt{\detokenize{Scheme.instIsDominantToImageOfQuasiCompact}}, which gives
+  $\operatorname{IsDominant}(g^{\mathrm{im}})$ from quasi-compactness of $g$ alone.  A third
+  instance, \texttt{\detokenize{IsImmersion.instToImage}}, records the weaker statement that
+  $g^{\mathrm{im}}$ is an immersion without any quasi-compactness hypothesis.
+
+  \textbf{The scheme-theoretic density clause is not formalized, which is why this lemma is
+  not marked as formalized.}  It asks for
+  \texttt{\detokenize{IsSchemeTheoreticallyDominant g.toImage}}, equivalently
+  $\ker(\varepsilon_{g^{\mathrm{im}}})=0$, i.e.\ vanishing of
+  \texttt{\detokenize{Scheme.Hom.ker g.toImage}}.  Neither statement is in Mathlib and
+  neither is found by instance search or by \texttt{\detokenize{exact?}}; there is no
+  \texttt{\detokenize{Scheme.Hom.ker_toImage}}.  This single missing lemma is also what
+  blocks the dense-refinement construction elsewhere in this chapter, so it should be proved
+  once and cited from both places.
 \end{lemma}
 
 \begin{proof}
