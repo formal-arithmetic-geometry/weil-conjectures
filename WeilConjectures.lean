@@ -12,6 +12,7 @@ public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
+public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
@@ -122,6 +123,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.Derived
 public import WeilConjectures.SixFunctors.SheafCompose
 public import WeilConjectures.SixFunctors.UpperStarMapDerivedCategory
