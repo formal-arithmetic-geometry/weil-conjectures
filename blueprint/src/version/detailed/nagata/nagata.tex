@@ -2675,7 +2675,8 @@ declarations.
   \uses{def:nagata-compactification,
     def:nagata-scheme-image-factor,
     lemma:nagata-immersion-qcqs-criteria}
-  \lean{}
+  \lean{AlgebraicGeometry.Compactification.ofImmersion}
+  \leanok
 
   Let $g\colon X\to Y$ and $p_Y\colon Y\to S$ satisfy
   $f:=p_Y\circ g$,
@@ -2714,21 +2715,43 @@ declarations.
       \bigl(\operatorname{SIm}_Y(g),g^{\mathrm{im}},q_g,
         e_{\mathsf C(g)}\bigr).
   \]
+
+  \paragraph{Formalization.}
+  \texttt{\detokenize{AlgebraicGeometry.Compactification.ofImmersion}} takes the
+  factorization as a hypothesis \texttt{\detokenize{hf : f = g ≫ p}} rather than
+  defining $f$ to be $p_Y\circ g$, so that it applies to a morphism already named.
+  Constructing the term \emph{is} the proof, so this declaration also formalizes
+  \Cref{lemma:nagata-immersion-into-proper}; the separate name recorded there is the
+  \texttt{\detokenize{HasCompactification}} consequence, which is what downstream code
+  consumes.
 \end{definition}
 
 \begin{lemma}[The immersion construction is a compactification]
   \label{lemma:nagata-immersion-into-proper}
   \uses{def:nagata-immersion-compactification}
-  \lean{}
+  \lean{AlgebraicGeometry.HasCompactification.of_isImmersion}
+  \leanok
 
   The factorization $\mathsf C(g)$ of
   \Cref{def:nagata-immersion-compactification} is a compactification of
   $X\to S$.
+
+  \paragraph{Formalization.}
+  Both properties are instances in Mathlib and neither needs an argument in Lean:
+  \texttt{\detokenize{IsImmersion.instIsOpenImmersionToImageOfQuasiCompact}} is
+  \Cref{lemma:nagata-immersion-open-in-scheme-image}, and properness of $q_g$ is
+  composition-stability applied to the closed immersion $i_g$.  In particular the proof
+  below is more elaborate than the formal one: it routes quasi-compactness of
+  $g^{\mathrm{im}}$ through \Cref{lemma:nagata-scheme-image-factor-cartesian}, whereas
+  Mathlib proves \texttt{\detokenize{QuasiCompact f.toImage}} from
+  \texttt{\detokenize{QuasiCompact f}} directly.  The cartesian square is therefore
+  \emph{not} a prerequisite of this lemma.
 \end{lemma}
 
 \begin{proof}
   \uses{lemma:nagata-immersion-open-in-scheme-image,
     lemma:nagata-scheme-image-factor-cartesian}
+  \leanok
   By \Cref{lemma:nagata-immersion-open-in-scheme-image},
   \[
     \operatorname{IsOpenImmersion}(g^{\mathrm{im}}).
@@ -2896,7 +2919,8 @@ declarations.
   \uses{def:nagata-compactification,
     def:nagata-scheme-image-factor,
     lemma:nagata-immersion-qcqs-criteria}
-  \lean{}
+  \lean{AlgebraicGeometry.Compactification.dense}
+  \leanok
 
   Let $C=(\overline X,j,p,e)$ be a compactification of $f\colon X\to S$.
   By \Cref{def:nagata-compactification,lemma:nagata-immersion-qcqs-criteria},
@@ -2937,21 +2961,47 @@ declarations.
       \left(\operatorname{SIm}_{\overline X}(j),
         j^{\mathrm{im}},p_{\mathrm{im}},e_{\mathrm{im}}\right).
   \]
+
+  \paragraph{Formalization.}
+  \texttt{\detokenize{AlgebraicGeometry.Compactification.dense}} takes (DR-1) as an
+  instance argument \texttt{\detokenize{[QuasiCompact c.i]}}, because the Lean
+  \texttt{\detokenize{Compactification}} structure — unlike
+  \Cref{def:nagata-compactification} — does not carry it;
+  \texttt{\detokenize{Compactification.quasiCompact_openImmersion_iff}} converts it to and
+  from quasi-compactness of $f$.  The refinement is again quasi-compact
+  (\texttt{\detokenize{Compactification.quasiCompact_dense_i}}), so it can be refined
+  again, idempotently.
 \end{definition}
 
 \begin{proposition}[Properties of the dense-refinement construction]
   \label{prop:nagata-dense-refinement}
   \uses{def:nagata-dense-compactification,def:nagata-dense-refinement}
-  \lean{}
+  \lean{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_dense_i}
+  \leanok
 
   The quadruple $\mathsf{Dense}(C)$ of
   \Cref{def:nagata-dense-refinement} is a scheme-theoretically dense
   compactification of the same morphism as $C$.
+
+  \paragraph{Formalization.}
+  ``Compactification of the same morphism'' is definitional in Lean, since
+  \texttt{\detokenize{Compactification.dense}} is a term of type
+  \texttt{\detokenize{Compactification f}} for the same \texttt{\detokenize{f}}, so the
+  recorded declaration is the density alone.  Its content is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.ker_toImage}},
+  $\ker(\varepsilon_{j^{\mathrm{im}}})=0$, which was not in Mathlib and is proved in the
+  mirror tree from \texttt{\detokenize{Scheme.Hom.toImage_app_injective}} on the affine
+  opens of $\operatorname{SIm}_{\overline X}(j)$ obtained by pulling back the affine opens
+  of $\overline X$ along the closed immersion $i_j$.  As with
+  \Cref{lemma:nagata-immersion-into-proper}, the proof below routes quasi-compactness of
+  $j^{\mathrm{im}}$ through \Cref{lemma:nagata-scheme-image-factor-cartesian}, which the
+  formalization does not need.
 \end{proposition}
 
 \begin{proof}
   \uses{lemma:nagata-immersion-open-in-scheme-image,
     lemma:nagata-scheme-image-factor-cartesian}
+  \leanok
   By \Cref{lemma:nagata-immersion-open-in-scheme-image},
   \[
     \operatorname{IsOpenImmersion}(j^{\mathrm{im}}),
