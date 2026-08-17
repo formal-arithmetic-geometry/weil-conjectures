@@ -91,20 +91,31 @@ variable [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ ModuleCat
 `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`; the monoidal structure,
 its preadditivity and the existence of colimits are provided by mathlib's instances for
 `ModuleCat`. -/
-variable [∀ (X : ModuleCat.{u} Λ), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : ModuleCat.{u} Λ), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (ModuleCat.{u} Λ)),
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)),
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)),
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasExactColimitsOfShape ℤ (ModuleCat.{u} Λ)]
-  [∀ (X : ModuleCat.{u} Λ),
-    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).obj X)]
-  [∀ (X : ModuleCat.{u} Λ),
-    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ)]
+instance (X : ModuleCat.{u} Λ) : PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X) := sorry
+
+instance (X : ModuleCat.{u} Λ) : PreservesFilteredColimitsOfSize.{u, u} (tensorRight X) := sorry
+
+instance (X₁ X₂ X₃ X₄ : GradedObject ℤ (ModuleCat.{u} Λ)) :
+    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := sorry
+
+instance (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)) :
+    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := sorry
+
+instance (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)) :
+    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := sorry
+
+instance : HasExactColimitsOfShape ℤ (ModuleCat.{u} Λ) := sorry
+
+instance (X : ModuleCat.{u} Λ) :
+    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).obj X) :=
+  sorry
+
+instance (X : ModuleCat.{u} Λ) :
+    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).flip.obj X) :=
+  sorry
+
+instance : Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ) :=
+  sorry
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
