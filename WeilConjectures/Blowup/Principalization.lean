@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Blowup.Affine.Principalization
 public import WeilConjectures.Blowup.Gluing
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
@@ -35,6 +36,9 @@ is only used to keep the chart cover finite, which is irrelevant for a local sta
   charts of the blow-up cover it.
 - `AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_comap_blowupMap` — the centre becomes
   an invertible ideal on the blow-up (blueprint: `thm:nagata-blowup-principalizes-center`).
+- `AlgebraicGeometry.Scheme.IdealSheafData.isEffectiveCartierCenter_subschemeι_comap_blowupMap`
+  — the closed subscheme it cuts out is an effective Cartier centre, which is the second half
+  of the same blueprint theorem.
 
 -/
 
@@ -83,5 +87,13 @@ theorem isInvertible_comap_blowupMap : (I.comap I.blowupMap).IsInvertible := by
     rw [AffineBlowup.map_awayAlgebraMap_reesX_eq_span_singleton]
     exact Ideal.isRegularPrincipal_span_singleton_of_isRegular
       (AffineBlowup.isRegular_awayAlgebraMap_reesX (I.ideal U) a a.2)
+
+/-- **The exceptional divisor is an effective Cartier centre.** The closed subscheme of the
+blow-up cut out by the extended ideal `I · 𝒪_{Bl_I(X)}` is an effective Cartier centre, since
+that ideal is invertible. This is the second half of the blueprint's principalization
+theorem. (blueprint: `thm:nagata-blowup-principalizes-center`, (MLCI1) half) -/
+theorem isEffectiveCartierCenter_subschemeι_comap_blowupMap :
+    IsEffectiveCartierCenter (I.comap I.blowupMap).subschemeι :=
+  I.isInvertible_comap_blowupMap.isEffectiveCartierCenter
 
 end AlgebraicGeometry.Scheme.IdealSheafData
