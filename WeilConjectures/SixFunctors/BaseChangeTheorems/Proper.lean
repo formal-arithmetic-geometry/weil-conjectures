@@ -67,7 +67,7 @@ classical forms of the theorem at once:
 
 @[expose] public section
 
-universe w u
+universe u
 
 open CategoryTheory Limits MonoidalCategory Abelian
 
@@ -86,8 +86,7 @@ instance (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ ModuleCat.{u} 
     (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F :=
   sorry
 
-variable [∀ (T : Scheme.{u}),
-  HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
+attribute [local instance] HasDerivedCategory.standard
 
 /- The K-flat resolution package on the coefficient category `ModuleCat Λ`, as in
 `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`; the monoidal structure,
