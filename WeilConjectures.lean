@@ -11,6 +11,7 @@ public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Gluing
+public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.ClosedPoints
