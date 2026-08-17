@@ -16,8 +16,8 @@ permissions:
 
 # One in-flight build per PR (and one per branch for pushes): a superseded
 # build is cancelled instead of queueing ahead of everything else on the
-# shared runners. Keyed on the PR number when there is one, matching
-# blueprint.yml; `github.ref` covers `push` and `workflow_dispatch`.
+# shared runners. Keyed on the PR number when there is one; `github.ref`
+# covers `push` and `workflow_dispatch`.
 concurrency:
   group: ${{ github.repository }}-lean-ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
