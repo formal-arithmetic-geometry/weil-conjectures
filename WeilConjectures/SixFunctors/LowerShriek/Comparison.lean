@@ -76,17 +76,34 @@ so by `AlgebraicGeometry.Etale.isIso_of_isIso_openImmersionRestriction`
 (`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Conservative`) it suffices to prove
 that `j^*` and `k^*` of the comparison are isomorphisms. Explicitly:
 
-- `j^*` of the comparison. Since `j^* j_* F ≅ F` is the (inverted) counit already used to
-  build the comparison, this amounts to `j^* j_! F ≅ F`, i.e. to `j_!` being fully faithful
-  for an open immersion `j`. That is a general statement about the lower shriek, with no
-  clopen hypothesis, and it is *not* yet in this repository.
-- `k^*` of the comparison. Here the source is initial and the target is terminal: `k^* j_* F`
-  has sections `F(T ×_X U) = F(∅)` over an étale `W`-scheme `T`, terminal by the sheaf
-  condition for the empty covering of the empty scheme; and `k^* j_! F` is initial because
-  `Hom(k^* j_! F, H) ≅ Hom(j_! F, k_* H) ≅ Hom(F, j^* k_* H)` by the two adjunctions, and
-  `j^* k_* H` is terminal for the same reason. With `HasZeroObject A` initial and terminal
-  agree, so the comparison is an isomorphism there — which is exactly where that hypothesis
-  is used, and why it cannot be dropped.
+- `j^*` of the comparison — **still open, and now the only thing missing.** Since
+  `j^* j_* F ≅ F` is the (inverted) counit already used to build the comparison, this amounts
+  to `j^* j_! F ≅ F`, i.e. to `j_!` being fully faithful for an open immersion `j`. That is a
+  general statement about the lower shriek, with no clopen hypothesis, and it is *not* yet in
+  this repository.
+- `k^*` of the comparison — **proved**, in
+  `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement`, as
+  `Etale.isIso_clopenComplement_openImmersionLowerShriekToLowerStar`. Both sides vanish on the
+  complement: `k^* j_* F` has sections `F(T ×_X U) = F(∅)` over an étale `W`-scheme `T`,
+  terminal by the sheaf condition for the empty covering of the empty scheme, hence zero; and
+  `k^* j_! F` is initial because `Hom(k^* j_! F, H) ≅ Hom(j_! F, k_* H) ≅ Hom(F, j^* k_* H)`
+  by the two adjunctions, with `j^* k_* H` zero for the same reason. This is where
+  `HasZeroObject A` is consumed, and why it cannot be dropped.
+
+Consequently the whole of the clopen case is now
+`Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_openImmersionRestriction` (same
+file), which takes only the `j^*` hypothesis. The `sorry` below is kept rather than restated
+in terms of that hypothesis so that the headline statement does not change shape again.
+
+A second, independent presentation of the site-theoretic input is available in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen`: for a decomposition of `X`
+into two disjoint opens, the sections of a sheaf over `V : X.Etale` are the *product* of the
+sections over the two pieces (`Scheme.Etale.isLimitClopenFan`). That is stronger than the
+conservativity used above and is not needed for it, but it is what the alternative route —
+constructing the counit `j_* j^* G ⟶ G` as "extend by zero on the complementary piece" —
+would consume. The same file proves `Scheme.Etale.isTerminalSectionsOfIsEmpty`, that a sheaf
+has terminal sections over an object with empty underlying scheme, which is the input to the
+`k^*` half above.
 
 -/
 
