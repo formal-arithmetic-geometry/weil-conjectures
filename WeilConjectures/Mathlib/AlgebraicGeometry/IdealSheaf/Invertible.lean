@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
@@ -28,6 +29,7 @@ a family of open immersions covering `X`.
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.of_isAffine`
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.comap_of_flat`
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.comap_of_isOpenImmersion`
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.of_iSup_opensRange_eq_top`
 
@@ -35,7 +37,7 @@ a family of open immersions covering `X`.
 
 This file implements `def:nagata-invertible-ideal-effective-cartier` (MLCI0) and the parts of
 `lemma:nagata-invertible-ideal-effective-cartier` asserting locality and stability under
-restriction to an open subscheme and under isomorphism.
+restriction to an open subscheme, under isomorphism, and under flat pullback.
 -/
 
 @[expose] public section
@@ -58,31 +60,30 @@ lemma IsInvertible.of_isAffine [IsAffine X] {J : X.IdealSheafData}
     (h : (J.ideal ⟨⊤, isAffineOpen_top X⟩).IsRegularPrincipal) : J.IsInvertible :=
   fun _ ↦ ⟨⟨⊤, isAffineOpen_top X⟩, trivial, h⟩
 
+/-- **Invertibility is stable under flat pullback.** If `f : X ⟶ Y` is flat and `J` is an
+invertible ideal on `Y`, then the extended ideal `J · 𝒪_X` is invertible.
+
+On an affine chart `V ⊆ f ⁻¹ᵁ U` the extended ideal is `(J.ideal U).map (f.appLE U V)` by
+`ideal_comap_appLE`, that map is flat by `Scheme.Hom.flat_appLE`, and a flat ring map sends
+non-zerodivisors to non-zerodivisors.
+(blueprint: part of `lemma:nagata-invertible-ideal-effective-cartier`) -/
+lemma IsInvertible.comap_of_flat {J : Y.IdealSheafData} (hJ : J.IsInvertible) (f : X ⟶ Y)
+    [Flat f] : (J.comap f).IsInvertible := by
+  intro x
+  obtain ⟨U, hxU, hU⟩ := hJ (f x)
+  obtain ⟨V, hVaff, hxV, hVU⟩ :=
+    exists_isAffineOpen_mem_and_subset (U := f ⁻¹ᵁ U.1) (x := x) hxU
+  refine ⟨⟨V, hVaff⟩, hxV, ?_⟩
+  rw [ideal_comap_appLE J f U ⟨V, hVaff⟩ hVU]
+  exact hU.map_of_flat (f.flat_appLE U.2 hVaff hVU)
+
 /-- Invertibility is preserved by restriction along an open immersion; in particular by
-restriction to an open subscheme and by isomorphism.
+restriction to an open subscheme and by isomorphism. This is the special case of
+`IsInvertible.comap_of_flat` for an open immersion, which is flat.
 (blueprint: part of `lemma:nagata-invertible-ideal-effective-cartier`) -/
 lemma IsInvertible.comap_of_isOpenImmersion {J : Y.IdealSheafData} (hJ : J.IsInvertible)
-    (f : X ⟶ Y) [IsOpenImmersion f] : (J.comap f).IsInvertible := by
-  intro x
-  obtain ⟨U, hxU, s, hs, hsU⟩ := hJ (f x)
-  obtain ⟨g, hgr, hxg⟩ := U.2.exists_basicOpen_le (V := f.opensRange) ⟨f x, ⟨x, rfl⟩⟩ hxU
-  have hgaff : IsAffineOpen (Y.basicOpen g) := U.2.basicOpen g
-  have himg : f ''ᵁ f ⁻¹ᵁ Y.basicOpen g = Y.basicOpen g := by
-    rw [f.image_preimage_eq_opensRange_inf, inf_eq_right.mpr hgr]
-  refine ⟨⟨f ⁻¹ᵁ Y.basicOpen g, hgaff.preimage_of_isOpenImmersion f hgr⟩, hxg, ?_⟩
-  rw [ideal_comap_of_isOpenImmersion]
-  refine Ideal.IsRegularPrincipal.comap_of_bijective ?_ (ConcreteCategory.bijective_of_isIso _)
-  rw [show (⟨f ''ᵁ f ⁻¹ᵁ Y.basicOpen g,
-        (hgaff.preimage_of_isOpenImmersion f hgr).image_of_isOpenImmersion f⟩ : Y.affineOpens) =
-      Y.affineBasicOpen g from Subtype.ext himg,
-    ← J.map_ideal_basicOpen U g, hsU, Ideal.map_span, Set.image_singleton]
-  refine Ideal.isRegularPrincipal_span_singleton ?_
-  letI := (Y.presheaf.map (homOfLE (Y.basicOpen_le g)).op).hom.toAlgebra
-  haveI : IsLocalization.Away g Γ(Y, Y.basicOpen g) := U.2.isLocalization_basicOpen g
-  have h : algebraMap Γ(Y, U.1) Γ(Y, Y.basicOpen g) s ∈ nonZeroDivisors Γ(Y, Y.basicOpen g) :=
-    IsLocalization.nonZeroDivisors_le_comap (M := Submonoid.powers g)
-      (S := ↥Γ(Y, Y.basicOpen g)) hs
-  rwa [RingHom.algebraMap_toAlgebra] at h
+    (f : X ⟶ Y) [IsOpenImmersion f] : (J.comap f).IsInvertible :=
+  hJ.comap_of_flat f
 
 /-- Invertibility on an affine chart: if a morphism `Spec R ⟶ X` is `Spec` of a ring map `ψ`
 followed by the canonical morphism of an affine open `U`, and the extension of `J.ideal U`
