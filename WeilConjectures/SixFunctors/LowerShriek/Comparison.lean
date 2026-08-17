@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
+public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
@@ -54,6 +55,9 @@ extension by zero along an open immersion with clopen range agrees with the push
 
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar`: for an open immersion
   with clopen range the comparison `i_! ⟶ i_*` is an isomorphism.
+- `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar`: the
+  restriction `i^*` of the comparison is an isomorphism, for *any* open immersion `i`. This
+  is one of the two halves of the statement above.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
   the comparison for `f` to the comparison for the open immersion of its compactification.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`: for proper `f`, the comparison
@@ -65,6 +69,21 @@ extension by zero along an open immersion with clopen range agrees with the push
 statement in this file that is still `sorry`ed; everything else, including the reduction of
 the proper case to it and the geometric input that `i` has clopen range, is proved. Its
 docstring records the intended argument and why `HasZeroObject A` is a necessary hypothesis.
+
+Half of it is now proved. Writing `k` for the open immersion complementary to the clopen
+`i`, the pair `{i, k}` is jointly surjective, so it suffices to prove that `i^*` and `k^*` of
+the comparison are isomorphisms.
+
+- `i^*` of the comparison is `Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar`
+  above, which needs no clopen hypothesis: it comes from `i_!` being fully faithful along an
+  open immersion (`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful`).
+- `k^*` of the comparison is what remains. There the source is initial and the target is
+  terminal — `k^* i_* F` has sections `F(T ×_X U) = F(∅)`, terminal by the sheaf condition
+  for the empty covering of the empty scheme, and `k^* i_! F` is initial because
+  `Hom(k^* i_! F, H) ≅ Hom(i_! F, k_* H) ≅ Hom(F, i^* k_* H)` by the two adjunctions with
+  `i^* k_* H` terminal for the same reason. This never computes sections of `i_! F`, which
+  matters because `i_!` is a sheafification. With `HasZeroObject A` initial and terminal
+  agree, which is exactly where that hypothesis is used.
 
 -/
 
@@ -120,6 +139,42 @@ theorem Etale.isIso_openImmersionLowerShriekToLowerStar [HasZeroObject A]
     (hj : IsClopen (Set.range j)) :
     IsIso (Etale.openImmersionLowerShriekToLowerStar A j) :=
   sorry
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The components of the comparison `j_! ⟶ j_*`: the unitors and the associator in its
+definition are identities, so at `F` it is `j_!` of the inverted counit of `j^* ⊣ j_*`,
+followed by the counit of `j_! ⊣ j^*` at `j_* F`. -/
+lemma Etale.openImmersionLowerShriekToLowerStar_app (F : Sheaf U.smallEtaleTopology A) :
+    (Etale.openImmersionLowerShriekToLowerStar A j).app F =
+      (Etale.openImmersionLowerShriek A j).map
+          ((inv (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit).app F) ≫
+        (Etale.openImmersionLowerShriekAdjunction A j).counit.app
+          ((Etale.lowerStar A j).obj F) := by
+  simp only [Etale.openImmersionLowerShriekToLowerStar, NatTrans.comp_app,
+    Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.id_obj,
+    NatIso.isIso_inv_app, Functor.map_inv, Functor.associator_hom_app, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app, id_comp, IsIso.eq_inv_comp, IsIso.hom_inv_id_assoc]
+  exact Category.comp_id _
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **`j^*` of the comparison `j_! ⟶ j_*` is an isomorphism**, for any open immersion `j`
+and with no hypothesis on the range of `j`.
+
+Both factors of `Etale.openImmersionLowerShriekToLowerStar_app` become invertible after
+applying `j^*`: the first is `j_!` of an isomorphism, and the second is
+`Etale.isIso_openImmersionRestriction_map_lowerShriekAdjunction_counit`, which holds because
+`j_!` is fully faithful along an open immersion.
+
+This discharges the `j^*` half of
+`Etale.isIso_openImmersionLowerShriekToLowerStar`; the remaining half is the restriction
+along the complementary open immersion, which is where the clopen hypothesis and
+`HasZeroObject A` are consumed. -/
+instance Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar
+    (F : Sheaf U.smallEtaleTopology A) :
+    IsIso ((Etale.openImmersionRestriction A j).map
+      ((Etale.openImmersionLowerShriekToLowerStar A j).app F)) := by
+  rw [Etale.openImmersionLowerShriekToLowerStar_app, Functor.map_comp]
+  infer_instance
 
 end OpenImmersion
 
