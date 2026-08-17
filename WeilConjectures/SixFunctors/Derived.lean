@@ -8,6 +8,7 @@ module
 public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
@@ -45,6 +46,17 @@ formalism only needs `Dᵇc`, that is the version to build on until the K-inject
 is proved; `WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
 the restriction of the unbounded functors to `DerivedCategory.Plus` with these.
 
+The same asymmetry governs the composition isomorphism. The unbounded
+`CategoryTheory.Functor.rightDerivedFunctorCompIso`
+(`WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp`) takes
+`HasKInjectiveResolutions` on both sheaf categories, so instantiating it here reintroduces
+the `sorry`. Its bounded below counterpart
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso` in
+`WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp` asks only that the first
+functor preserve injective objects, which for an étale `g` holds because `g_*` is right
+adjoint to the left exact `g^*`. That is what makes `Etale.rightDerivedLowerStarPlusComp`
+below unconditional as well.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerStar`: the total right derived functor
@@ -54,6 +66,11 @@ the restriction of the unbounded functors to `DerivedCategory.Plus` with these.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus` and
   `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus`: the same two functors on the
   bounded below derived categories, free of the K-injective hypothesis.
+- `AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar`: for étale `g`, the
+  pushforward `g_*` preserves injective objects, being right adjoint to the left exact `g^*`.
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarPlusComp`: the composition isomorphism
+  `R⁺(h₁)_* ⋙ R⁺(h₂)_* ≅ R⁺(h₁ ≫ h₂)_*` for `h₁` étale, again free of the K-injective
+  hypothesis.
 
 -/
 
@@ -130,6 +147,44 @@ noncomputable def Etale.rightDerivedLowerShriekPlus :
 
 end DerivedLowerShriek
 
+section Comp
+
+/-- For an étale `g`, the pushforward `g_*` preserves injective objects, being right adjoint
+to the pullback `g^*`, which is left exact and in particular preserves monomorphisms. This is
+the hypothesis of `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso`, and it is what
+makes the composition isomorphism below available.
+
+Only `g` étale is covered because that is the generality in which
+`AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar` fires by instance search; for a
+general `g` the left exactness of `g^*` carries an extra hypothesis on the left Kan
+extension along base change. -/
+instance Etale.preservesInjectiveObjects_lowerStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) [Etale g] :
+    (Etale.lowerStar A g).PreservesInjectiveObjects :=
+  Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+    (Etale.upperStarLowerStarAdjunction A g)
+
+variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) [Etale h₁]
+variable [HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology A)]
+variable [HasDerivedCategory.{w'} (Sheaf S.smallEtaleTopology A)]
+variable [HasDerivedCategory.{w'} (Sheaf R.smallEtaleTopology A)]
+
+/-- The composition isomorphism `R⁺(h₁)_* ⋙ R⁺(h₂)_* ≅ R⁺(h₁ ≫ h₂)_*` for the bounded below
+derived pushforwards, for `h₁` étale. It is the general
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'` applied to the underived
+composition isomorphism `AlgebraicGeometry.Etale.lowerStarComp`.
+
+There is no unbounded counterpart of this in the repository that is free of the K-injective
+`sorry`: the unbounded composition theorem
+`CategoryTheory.Functor.rightDerivedFunctorCompIso` needs `HasKInjectiveResolutions` on both
+sheaf categories. -/
+noncomputable def Etale.rightDerivedLowerStarPlusComp :
+    Etale.rightDerivedLowerStarPlus A h₁ ⋙ Etale.rightDerivedLowerStarPlus A h₂ ≅
+      Etale.rightDerivedLowerStarPlus A (h₁ ≫ h₂) :=
+  Functor.rightDerivedFunctorPlusCompIso' (Etale.lowerStar A h₁) (Etale.lowerStar A h₂)
+    (Etale.lowerStarComp A h₁ h₂)
+
+end Comp
+
 /-! ### The bounded below functors are free of the K-injective `sorry`
 
 The whole point of the `Plus` variants is that they do not rest on the sorried instance
@@ -150,6 +205,16 @@ Classical.choice, Quot.sound] -/
 Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms rightDerivedLowerShriekPlus
+
+/-- info: 'AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar' depends on axioms:
+[propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms preservesInjectiveObjects_lowerStar
+
+/-- info: 'AlgebraicGeometry.Etale.rightDerivedLowerStarPlusComp' depends on axioms: [propext,
+Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms rightDerivedLowerStarPlusComp
 
 end AxiomChecks
 
