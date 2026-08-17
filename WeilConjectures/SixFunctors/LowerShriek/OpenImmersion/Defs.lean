@@ -32,6 +32,10 @@ the restriction functor `j_f^*`.
   restriction, both being left adjoint to `f_*`.
 - `GrothendieckTopology.localizationLowerShriekUpperStarAdjunction`: the adjunction
   `j_{f!} ⊣ f^*`.
+- `GrothendieckTopology.localizationAdjunctionTriple`: the triple `j_{f!} ⊣ j_f^* ⊣ f_*` as
+  a `CategoryTheory.Adjunction.Triple`. Via
+  `CategoryTheory.Adjunction.Triple.isIso_unit_iff_isIso_counit` this is what makes `j_{f!}`
+  fully faithful as soon as `f_*` is.
 - `localizationLowerShriekPresheaf` and `localizationLowerShriekPresheafAdjunction`: the
   presheaf-level Kan extension `j_{f,!}^{pre}` and its adjunction with restriction.
 - `GrothendieckTopology.isContinuous_overMap_of_le` and
@@ -57,9 +61,10 @@ the restriction functor `j_f^*`.
   and is found automatically for `Q = P`.
 
 When `f` is an open immersion (in particular a monomorphism), `j_{f!}` is the *extension by
-zero* functor: it is fully faithful (`WeilConjectures.SixFunctors.LowerShriek.OpenImmersionSlop`)
-and on stalks it keeps the stalks at points of `P.Over ⊤ V` while the stalks at points
-outside vanish (`WeilConjectures.SixFunctors.LowerShriek.OpenImmersionStalk`).
+zero* functor. It is then fully faithful; for the small étale sites this is
+`AlgebraicGeometry.Etale.fullyFaithfulOpenImmersionLowerShriek` in
+`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful`, proved from
+`localizationAdjunctionTriple` above.
 -/
 
 @[expose] public section
@@ -325,6 +330,14 @@ noncomputable def localizationLowerShriekUpperStarAdjunction :
     localizationLowerShriek A P Q f h ⊣ upperStar A P Q f :=
   (localizationLowerShriekAdjunction A P Q f h).ofNatIsoRight
     (upperStarIsoLocalizationRestriction A P Q f h).symm
+
+/-- The adjoint triple `j_{f!} ⊣ j_f^* ⊣ f_*` on sheaves, bundling
+`localizationLowerShriekAdjunction` and `localizationRestrictionLowerStarAdjunction`. -/
+noncomputable def localizationAdjunctionTriple :
+    Adjunction.Triple (localizationLowerShriek A P Q f h) (localizationRestriction A P Q f h)
+      (lowerStar A P Q f) where
+  adj₁ := localizationLowerShriekAdjunction A P Q f h
+  adj₂ := localizationRestrictionLowerStarAdjunction A P Q f h
 
 end
 
