@@ -124,6 +124,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.LowerShriek.MorphismDefs
+public import WeilConjectures.SixFunctors.BaseChangeTheorems.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Derived
