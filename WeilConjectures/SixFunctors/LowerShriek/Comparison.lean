@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
+public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Conservative
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
@@ -54,6 +55,9 @@ extension by zero along an open immersion with clopen range agrees with the push
 
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar`: for an open immersion
   with clopen range the comparison `i_! ⟶ i_*` is an isomorphism.
+- `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_restriction`:
+  the reduction of that statement to the restrictions along `i` and along the complementary
+  open immersion, by conservativity of the pair.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
   the comparison for `f` to the comparison for the open immersion of its compactification.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`: for proper `f`, the comparison
@@ -65,6 +69,24 @@ extension by zero along an open immersion with clopen range agrees with the push
 statement in this file that is still `sorry`ed; everything else, including the reduction of
 the proper case to it and the geometric input that `i` has clopen range, is proved. Its
 docstring records the intended argument and why `HasZeroObject A` is a necessary hypothesis.
+
+The remaining work has been cut down to two independent statements. Writing `k : W ⟶ X` for
+the open immersion complementary to the clopen `j`, the pair `{j, k}` is jointly surjective,
+so by `AlgebraicGeometry.Etale.isIso_of_isIso_openImmersionRestriction`
+(`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Conservative`) it suffices to prove
+that `j^*` and `k^*` of the comparison are isomorphisms. Explicitly:
+
+- `j^*` of the comparison. Since `j^* j_* F ≅ F` is the (inverted) counit already used to
+  build the comparison, this amounts to `j^* j_! F ≅ F`, i.e. to `j_!` being fully faithful
+  for an open immersion `j`. That is a general statement about the lower shriek, with no
+  clopen hypothesis, and it is *not* yet in this repository.
+- `k^*` of the comparison. Here the source is initial and the target is terminal: `k^* j_* F`
+  has sections `F(T ×_X U) = F(∅)` over an étale `W`-scheme `T`, terminal by the sheaf
+  condition for the empty covering of the empty scheme; and `k^* j_! F` is initial because
+  `Hom(k^* j_! F, H) ≅ Hom(j_! F, k_* H) ≅ Hom(F, j^* k_* H)` by the two adjunctions, and
+  `j^* k_* H` is terminal for the same reason. With `HasZeroObject A` initial and terminal
+  agree, so the comparison is an isomorphism there — which is exactly where that hypothesis
+  is used, and why it cannot be dropped.
 
 -/
 
@@ -99,6 +121,27 @@ noncomputable def Etale.openImmersionLowerShriekToLowerStar :
     Functor.whiskerLeft (Etale.lowerStar A j)
       (Etale.openImmersionLowerShriekAdjunction A j).counit ≫
     (Functor.rightUnitor _).hom
+
+/-- **The reduction of the clopen case to the two restrictions.** Let `j` be an open
+immersion with clopen range and `k` the inclusion of the complementary open subscheme. Since
+`{j, k}` is jointly surjective, restriction along the two is conservative
+(`Etale.isIso_of_isIso_openImmersionRestriction_of_isClopen`), so the comparison
+`j_! ⟶ j_*` is an isomorphism as soon as `j^*` and `k^*` of it are, sheaf by sheaf.
+
+This is the entry point for finishing `Etale.isIso_openImmersionLowerShriekToLowerStar`; see
+the "Remaining `sorry`" section of the module docstring for what discharging the two
+hypotheses amounts to. -/
+lemma Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_restriction
+    (hj : IsClopen (Set.range j))
+    (hjc : ∀ F, IsIso ((Etale.openImmersionRestriction A j).map
+      ((Etale.openImmersionLowerShriekToLowerStar A j).app F)))
+    (hkc : ∀ F, IsIso ((Etale.openImmersionRestriction A
+      ((Scheme.Hom.clopenComplement j hj)).ι).map
+        ((Etale.openImmersionLowerShriekToLowerStar A j).app F))) :
+    IsIso (Etale.openImmersionLowerShriekToLowerStar A j) := by
+  have : ∀ F, IsIso ((Etale.openImmersionLowerShriekToLowerStar A j).app F) := fun F =>
+    Etale.isIso_of_isIso_openImmersionRestriction_of_isClopen A j hj _ (hjc F) (hkc F)
+  exact NatIso.isIso_of_isIso_app _
 
 /-- For an open immersion `j` with **clopen** range — equivalently, an open immersion that
 is also a closed immersion — the comparison `j_! ⟶ j_*` is an isomorphism.
