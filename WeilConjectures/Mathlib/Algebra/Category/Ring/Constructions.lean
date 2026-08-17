@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # Quotients by extended ideals are pushouts
@@ -13,49 +14,45 @@ public import Mathlib.Algebra.Category.Ring.Constructions
 For an ideal `K` of `R` and a ring map `φ : R ⟶ S`, the square formed by the quotient
 maps `R ⟶ R ⧸ K`, `S ⟶ S ⧸ K·S` and the induced map `R ⧸ K ⟶ S ⧸ K·S` is a pushout in
 `CommRingCat`.
+
+This is not proved by exhibiting the colimit cocone by hand: it is the tensor-product
+pushout `CommRingCat.isPushout_tensorProduct` transported along the isomorphism
+`Algebra.TensorProduct.quotIdealMapEquivTensorQuot : S ⧸ K·S ≃ₐ[S] S ⊗[R] (R ⧸ K)`.
+
+## Main results
+
+- `CommRingCat.isPushout_quotient`
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory TensorProduct
 
 namespace CommRingCat
 
-/-- Quotients by extended ideals are pushouts in `CommRingCat`. -/
+/-- Quotients by extended ideals are pushouts in `CommRingCat`: base change of the closed
+immersion cut out by `K` along `φ` is the closed immersion cut out by the extended ideal. -/
 lemma isPushout_quotient {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R) :
-    IsPushout (CommRingCat.ofHom (Ideal.Quotient.mk K)) φ
-      (CommRingCat.ofHom (Ideal.quotientMap (K.map φ.hom) φ.hom Ideal.le_comap_map))
-      (CommRingCat.ofHom (Ideal.Quotient.mk (K.map φ.hom))) := by
-  have w : CommRingCat.ofHom (Ideal.Quotient.mk K) ≫
-      CommRingCat.ofHom (Ideal.quotientMap (K.map φ.hom) φ.hom Ideal.le_comap_map) =
-      φ ≫ CommRingCat.ofHom (Ideal.Quotient.mk (K.map φ.hom)) := by
-    rw [← CommRingCat.ofHom_comp, Ideal.quotientMap_comp_mk, CommRingCat.ofHom_comp,
-      CommRingCat.ofHom_hom]
-  have hkill : ∀ s : Limits.PushoutCocone (CommRingCat.ofHom (Ideal.Quotient.mk K)) φ,
-      ∀ a ∈ K.map φ.hom, s.inr.hom a = 0 := by
-    intro s a ha
-    have hle : K.map φ.hom ≤ RingHom.ker s.inr.hom := by
-      rw [Ideal.map_le_iff_le_comap]
-      intro k hk
-      have hc := congrArg (fun t ↦ CommRingCat.Hom.hom t k) s.condition
-      simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at hc
-      rw [Ideal.mem_comap, RingHom.mem_ker, ← hc, Ideal.Quotient.eq_zero_iff_mem.mpr hk,
-        map_zero]
-    exact RingHom.mem_ker.mp (hle ha)
-  refine IsPushout.of_isColimit' ⟨w⟩ (Limits.PushoutCocone.IsColimit.mk _
-    (fun s ↦ CommRingCat.ofHom (Ideal.Quotient.lift (K.map φ.hom) s.inr.hom (hkill s)))
-    (fun s ↦ ?_) (fun s ↦ ?_) (fun s m hl hr ↦ ?_))
-  · ext x
-    have hc := congrArg (fun t ↦ CommRingCat.Hom.hom t x) s.condition
-    simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at hc
-    simp [Ideal.quotientMap_mk, Ideal.Quotient.lift_mk, ← hc]
-  · ext x
-    simp [Ideal.Quotient.lift_mk]
-  · ext x
-    have hc := congrArg (fun t ↦ CommRingCat.Hom.hom t x) hr
-    simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at hc
-    simp [Ideal.Quotient.lift_mk, ← hc]
+    IsPushout (ofHom (Ideal.Quotient.mk K)) φ
+      (ofHom (Ideal.quotientMap (K.map φ.hom) φ.hom Ideal.le_comap_map))
+      (ofHom (Ideal.Quotient.mk (K.map φ.hom))) := by
+  letI := φ.hom.toAlgebra
+  let e : of (S ⧸ K.map φ.hom) ≅ of (S ⊗[R] (R ⧸ K)) :=
+    (Algebra.TensorProduct.quotIdealMapEquivTensorQuot S K).toRingEquiv.toCommRingCatIso
+  refine (isPushout_tensorProduct R S (R ⧸ K)).flip.of_iso' (Iso.refl _) (Iso.refl _)
+    (Iso.refl _) e ?_ ?_ ?_ ?_
+  · ext r
+    simp
+  · ext r
+    rfl
+  · ext r
+    simp only [e, Iso.refl_hom, Category.id_comp, RingEquiv.toCommRingCatIso_hom, hom_comp,
+      hom_ofHom, RingHom.comp_apply, Ideal.quotientMap_mk, AlgEquiv.coe_ringEquiv,
+      RingEquiv.coe_toRingHom, AlgHom.toRingHom_eq_coe]
+    exact (Algebra.TensorProduct.tmul_one_eq_one_tmul r).symm
+  · ext r
+    exact (Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk S K r).symm
 
 end CommRingCat
