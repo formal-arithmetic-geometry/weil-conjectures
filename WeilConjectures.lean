@@ -11,6 +11,7 @@ public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Gluing
+public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.ClosedPoints
@@ -23,6 +24,7 @@ public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
 public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
