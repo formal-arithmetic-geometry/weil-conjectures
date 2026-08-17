@@ -27,7 +27,7 @@ is an isomorphism (`Functor.rightDerivedFunctorPlusCompIso`).
 unbounded derived category, but it assumes `HasKInjectiveResolutions` on both `C` and `D`,
 whose only source in this repository is a `sorry`. The bounded below statement needs only
 enough injectives, so it rests on proved theorems; see
-`WeilConjectures.SixFunctors.DerivedPlus` for why that distinction matters here. This file
+`WeilConjectures.SixFunctors.Derived` for why that distinction matters here. This file
 therefore deliberately does not import anything from
 `WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian`.
 
