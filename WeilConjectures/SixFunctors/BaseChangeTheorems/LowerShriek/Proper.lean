@@ -74,27 +74,8 @@ variable (Λ : Type u) [CommRing Λ]
 convention of `WeilConjectures.SixFunctors.BaseChangeTheorems.Proper`; sheafification
 for the small étale sites is provided by mathlib's `HasSheafify` instance for the
 concrete category `ModuleCat Λ`. -/
-variable [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ ModuleCat.{u} Λ),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T : Scheme.{u}),
+variable [∀ (T : Scheme.{u}),
     HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
-
-/- The K-flat resolution package on the coefficient category `ModuleCat Λ`, as in
-`WeilConjectures.SixFunctors.BaseChangeTheorems.Proper`. -/
-variable [∀ (X : ModuleCat.{u} Λ), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : ModuleCat.{u} Λ), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (ModuleCat.{u} Λ)),
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)),
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)),
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasExactColimitsOfShape ℤ (ModuleCat.{u} Λ)]
-  [∀ (X : ModuleCat.{u} Λ),
-    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).obj X)]
-  [∀ (X : ModuleCat.{u} Λ),
-    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ)]
 
 /-- Extension by zero along an open immersion preserves torsion cohomology: since `j_!`
 is exact, the cohomology sheaves of `j_! K` are the extensions by zero of the cohomology
@@ -143,6 +124,8 @@ theorem Etale.lowerShriekProperBaseChange (c : Compactification f)
       ((Etale.openImmersionLowerShriek (ModuleCat.{u} Λ) c.i).mapDerivedCategoryPlus.obj K)) :=
     Etale.properBaseChange Λ (c.baseChange_isPullback_g sq) _
       (Etale.DerivedCategory.Plus.torsionHomology_openImmersionLowerShriek Λ c.i K hK)
+  apply IsIso.comp_isIso' (NatIso.hom_app_isIso _ _)
+  --apply IsIso.comp_isIso'  h
   sorry
 
 /-- **The base change theorem for the lower shriek as an isomorphism of functors**: if
