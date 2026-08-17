@@ -66,6 +66,14 @@ statement in this file that is still `sorry`ed; everything else, including the r
 the proper case to it and the geometric input that `i` has clopen range, is proved. Its
 docstring records the intended argument and why `HasZeroObject A` is a necessary hypothesis.
 
+The site-theoretic half of that argument is available and proved, in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen`: for a decomposition of `X`
+into two disjoint opens, every `V : X.Etale` is covered by its two pieces, the sections of a
+sheaf over `V` are the product of the sections over them
+(`Scheme.Etale.isLimitClopenFan`), and a morphism of sheaves which is an isomorphism on both
+pieces is an isomorphism over `V` (`Scheme.Etale.isIso_app_of_isIso_clopen`). What is missing
+is the identification of `j_!F` and `j_*F` on each piece separately.
+
 -/
 
 @[expose] public section
