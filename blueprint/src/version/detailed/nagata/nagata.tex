@@ -16619,7 +16619,9 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-closed-subscheme-class,
     def:nagata-scheme-theoretic-image,
     lemma:nagata-morphism-property-calculus}
-  \lean{}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.pullbackSnd,
+    CategoryTheory.MorphismProperty.pullback_snd}
+  \leanok
 
   Let $h\colon U\to X$ satisfy $\operatorname{IsQCQS}(h)$ and
   \[
@@ -16795,7 +16797,8 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-dense-valuation-probe}
   \uses{def:nagata-choice-notation,def:nagata-closed-subscheme-class,
     def:nagata-scheme-theoretic-image}
-  \lean{}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt}
+  \leanok
 
   Let $h\colon T\to P$ satisfy $\operatorname{IsQCQS}(h)$, assume
   \[
@@ -16843,7 +16846,9 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-valuation-probe}
   \uses{def:nagata-closed-subscheme-class,
     def:nagata-dense-valuation-probe}
-  \lean{}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant,
+    AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes}
+  \leanok
 
   Let $h\colon T\to P$ satisfy $\operatorname{IsQCQS}(h)$ and
   \[
@@ -16860,6 +16865,22 @@ correction explicit before it is sheafified and glued.
     \qquad
     \alpha_{h,z}(c_{A'_{h,z}})=z.
   \]
+
+  \paragraph{Formalization.}
+  The Lean statement is the definition
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}}, which builds
+  the bundled record \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt}}
+  directly, so the tuple $\mathsf{VP}(h,z)$ is that record and the three displayed
+  properties are its fields.  The formalized hypotheses are weaker
+  than the ones stated above: quasi-compactness of $h$ together with topological dominance
+  ($\overline{|h|(|T|)}=|P|$, the Mathlib class
+  \texttt{\detokenize{AlgebraicGeometry.IsDominant}}) suffices, and no affineness of $P$
+  is required.  The probe is produced from a specialization $h(t)\rightsquigarrow z$ by
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes}}, and such
+  a specialization exists by
+  \texttt{\detokenize{AlgebraicGeometry.exists_specializes_of_mem_closure_range}}, which in
+  turn comes from the statement about prime spectra
+  \texttt{\detokenize{PrimeSpectrum.exists_specializes_of_mem_closure_range_comap}}.
 \end{lemma}
 
 \begin{proof}
@@ -16875,7 +16896,10 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Composite of two valuation rings]
   \label{lemma:nagata-composite-valuation-ring}
-  \lean{}
+  \lean{ValuationSubring.comapResidue,
+    ValuationSubring.mem_comapResidue_of_not_isUnit,
+    ValuationSubring.residueRestrictEquiv}
+  \leanok
 
   Let $A'$ be a valuation ring, put
   $K'=\operatorname{Frac}(A')$, let $\mathfrak m'$ be its maximal ideal, and
@@ -16894,6 +16918,18 @@ correction explicit before it is sheafified and glued.
     C/\mathfrak m'\xrightarrow{\sim}A'',\quad
     c+\mathfrak m'\longmapsto\rho(c).
   \]
+
+  \paragraph{Formalization.}
+  $A'$ is a \texttt{\detokenize{ValuationSubring K'}} and $A''$ a
+  \texttt{\detokenize{ValuationSubring (IsLocalRing.ResidueField A')}}; the composite $C$
+  is \texttt{\detokenize{ValuationSubring.comapResidue}}, so
+  $\operatorname{Frac}(C)=K'$ holds by construction, as for every valuation subring of
+  $K'$.  The inclusion $\mathfrak m'\subseteq C$ is
+  \texttt{\detokenize{ValuationSubring.mem_comapResidue_of_not_isUnit}} and the
+  isomorphism $C/\mathfrak m'\xrightarrow{\sim}A''$ is
+  \texttt{\detokenize{ValuationSubring.residueRestrictEquiv}}, built from the surjection
+  \texttt{\detokenize{ValuationSubring.residueRestrict}} and its kernel
+  \texttt{\detokenize{ValuationSubring.ker_residueRestrict}}.
 \end{lemma}
 
 \begin{proof}
@@ -16936,7 +16972,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Intersection with a dominating valuation ring]
   \label{lemma:nagata-valuation-intersection}
-  \lean{}
+  \lean{ValuationSubring.comap_eq_of_toLocalSubring_le}
+  \leanok
 
   Let $A$ be a valuation ring, put $K=\operatorname{Frac}(A)$, let
   $\iota\colon K\hookrightarrow L$ be a field embedding, and let
@@ -16951,6 +16988,15 @@ correction explicit before it is sheafified and glued.
     \iota(K)\cap B=\iota(A)
   \]
   inside \(L\).
+
+  \paragraph{Formalization.}
+  The intersection $\iota(K)\cap B$ is \texttt{\detokenize{ValuationSubring.comap}} of $B$
+  along $\iota$, and the two displayed domination conditions together are exactly the
+  inequality $A\le B.\mathrm{comap}\,\iota$ in the domination order on
+  \texttt{\detokenize{LocalSubring K}}, whence the Lean name
+  \texttt{\detokenize{ValuationSubring.comap_eq_of_toLocalSubring_le}}.  A dominating $B$
+  always exists, by \texttt{\detokenize{ValuationSubring.exists_comap_eq}}
+  (\cite[\href{https://stacks.math.columbia.edu/tag/00IA}{Tag 00IA}]{stacks-project}).
 \end{lemma}
 
 \begin{proof}
@@ -16974,10 +17020,14 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0894}{Tag 0894}]{stacks-project}}]
   \label{lemma:nagata-dense-source-valuative}
-  \lean{}
+  \lean{AlgebraicGeometry.ValuativeCriterion.RelativeTo,
+    AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant,
+    AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant,
+    AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}
+  \leanok
 
-  Let $f\colon X\to S$ be quasi-compact, let $h\colon U\to X$ satisfy
-  $\operatorname{IsQCQS}(h)$, and assume
+  Let $f\colon X\to S$ be quasi-compact, let $h\colon U\to X$ be quasi-compact,
+  and assume
   $\overline{|h|(|U|)}=|X|$.  Suppose that for every valuation ring $A$,
   with $K=\operatorname{Frac}(A)$ and
   $\nu_A\colon\operatorname{Spec}(K)\to\operatorname{Spec}(A)$, every pair
@@ -17000,15 +17050,40 @@ correction explicit before it is sheafified and glued.
   Then $f$ is universally closed.  If $f$ is quasi-separated, then $f$ is
   separated.
 
-  \paragraph{Mathlib relation.}
-  The quantified square is represented by
-  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSq}}.  Its existence
-  and uniqueness predicates are the exact morphism properties
+  \paragraph{Formalization.}
+  The quantified square is
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSq}}, and the whole
+  displayed hypothesis --- unique lifting against those squares whose generic
+  point factors through $h$ --- is the project definition
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.RelativeTo}}, phrased with
+  Mathlib's \texttt{\detokenize{CategoryTheory.CommSq.LiftStruct}} exactly as
   \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Existence}} and
-  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Uniqueness}}.
-  The lemma's dense-source reduction to those predicates is a
-  blueprint-local theorem, not an existing declaration with the proposed
-  name above.
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Uniqueness}} are.
+
+  The conclusion is formalized in the sharper form
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant}},
+  which produces the morphism property
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Existence}} and needs no
+  quasi-compactness of $f$ at all; universal closedness and separatedness are read off
+  from it as
+  \texttt{\detokenize{AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant}}
+  (which uses $\operatorname{QuasiCompact}(f)$) and
+  \texttt{\detokenize{AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}}
+  (which uses only $\operatorname{QuasiSeparated}(f)$).
+
+  The formalized hypotheses on $h$ are quasi-compactness together with topological
+  dominance; quasi-separatedness of $h$ is never used, and the statement above has been
+  relaxed accordingly.  The Lean proof also takes two routes different from the informal
+  proof below: instead of passing to the reductions of $U$, $X$ and $S$ it factors $h$
+  through its scheme-theoretic image, which is scheme-theoretically dominant with no
+  reducedness hypothesis
+  (\texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.ker_toImage}}) and through which every
+  morphism from a reduced scheme factors
+  (\texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support}});
+  and instead of choosing a single affine chart of $S$ it uses that
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Existence}} is local at the
+  target.  The extension of a valuation ring along a field extension used in the argument
+  is \texttt{\detokenize{ValuationSubring.exists_comap_eq}} (Tag 00IA).
 \end{lemma}
 
 \begin{proof}
