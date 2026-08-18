@@ -56,6 +56,7 @@ public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.ZetaCounting.ClosedPoints
+public import WeilConjectures.ZetaCounting.Comparison
 public import WeilConjectures.ZetaCounting.EulerProducts
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
