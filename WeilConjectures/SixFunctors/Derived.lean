@@ -9,8 +9,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.DerivedCategory.Adjunction
-public import WeilConjectures.DerivedCategory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.DerivedCategory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.DerivedCategory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
