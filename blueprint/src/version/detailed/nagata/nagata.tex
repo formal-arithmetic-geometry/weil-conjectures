@@ -2187,7 +2187,8 @@ declarations.
 \begin{lemma}[Cartesian square defined by the scheme-image factor]
   \label{lemma:nagata-scheme-image-factor-cartesian}
   \uses{def:nagata-scheme-image-factor}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.isPullback_id_toImage}
+  \leanok
 
   Let $g\colon T\to Y$ be as in
   \Cref{def:nagata-scheme-theoretic-image}.  Define
@@ -2223,8 +2224,27 @@ declarations.
   \texttt{\detokenize{Scheme.Hom.toImage_imageι}}.  It is not the different
   Mathlib theorem
   \texttt{\detokenize{IsImmersion.isPullback_toImage_liftCoborder}}, whose
-  lower-left object is a coborder range; the proposed declaration name here
-  is therefore not marked exact.
+  lower-left object is a coborder range.
+
+  \paragraph{Formalization.}
+  Formalized as
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.isPullback_id_toImage}} in
+  \texttt{\detokenize{WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Image}}.
+  The statement is not scheme-theoretic: for \emph{any} monomorphism $i$ and any
+  factorization $f=t\circ i$, the square with top edge $\operatorname{id}$ is
+  cartesian, which is the Mathlib lemma
+  \texttt{\detokenize{CategoryTheory.IsPullback.of_horiz_isIso_mono}}.  Here
+  $i_g$ is a closed immersion, hence a preimmersion, hence a monomorphism, so
+  the proof is that lemma applied to
+  \texttt{\detokenize{Scheme.Hom.toImage_imageι}} and nothing else.
+
+  The advertised downstream use --- deducing
+  $\operatorname{QuasiCompact}(g^{\mathrm{im}})$ from
+  $\operatorname{QuasiCompact}(g)$ by base change --- turned out to be
+  unnecessary: Mathlib already has that as an instance,
+  \texttt{\detokenize{instance [QuasiCompact f] : QuasiCompact f.toImage}} in
+  \texttt{\detokenize{Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme}}, proved
+  directly from \texttt{\detokenize{QuasiCompact.of_comp}}.
 \end{lemma}
 
 \begin{proof}
@@ -2276,7 +2296,8 @@ declarations.
     def:nagata-presented-relative-spec,
     def:nagata-scheme-theoretic-image,
     lemma:nagata-morphism-property-calculus}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.imageRestrictIso}
+  \leanok
 
   Let \(g\colon T\to Y\) satisfy \(\operatorname{IsQCQS}(g)\), as in
   \Cref{def:nagata-scheme-theoretic-image}, and let
@@ -2337,6 +2358,35 @@ declarations.
   gluing interfaces, but no single current Mathlib declaration with the
   proposed \texttt{\detokenize{schemeTheoreticImage_restrict}} name was
   found.  This remains a project lemma over those APIs.
+
+  \paragraph{Formalization.}
+  Formalized in
+  \texttt{\detokenize{WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Image}}:
+  the isomorphism $\delta_{g,w}$ is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.imageRestrictIso}}, and the three
+  asserted compatibilities are
+  \texttt{\detokenize{imageRestrictIso_hom_pullback_snd}}
+  ($\rho_W\circ\delta_{g,w}=i_{g_W}$),
+  \texttt{\detokenize{imageRestrictIso_hom_pullback_fst_imageι}}
+  ($i_g\circ\widetilde w_g=w\circ i_{g_W}$) and
+  \texttt{\detokenize{toImage_imageRestrictIso_hom_pullback_fst}}
+  ($\widetilde w_g\circ g_W^{\mathrm{im}}=g^{\mathrm{im}}\circ\pi_T$).  The
+  hypothesis used is $\operatorname{QuasiCompact}(g)$ alone; quasi-separatedness
+  is not needed, so the formalized statement is slightly stronger than
+  $\operatorname{IsQCQS}(g)$ as stated above.
+
+  The proof is shorter than the stalkwise argument below.  Both
+  $i_{g_W}$ and $\rho_W$ are closed immersions into $W$, and two closed
+  immersions into the same scheme with the same kernel are canonically
+  isomorphic
+  (\texttt{\detokenize{AlgebraicGeometry.IsClosedImmersion.isIso_lift}}), so the
+  whole statement reduces to the equality of ideal sheaves
+  \texttt{\detokenize{ker_pullback_snd_eq_ker_pullback_snd_imageι}}.  That equality is
+  \texttt{\detokenize{Scheme.ker_ideal_of_isPullback_of_isOpenImmersion}}
+  applied twice, once to $g$ and once to $i_g$: the two applications produce
+  literally the same expression, because $i_g$ has the same kernel as $g$ by
+  \texttt{\detokenize{Scheme.IdealSheafData.ker_subschemeι}}.  No stalk
+  computation and no gluing interface is used.
 \end{lemma}
 
 \begin{proof}
