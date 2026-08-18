@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
-public import WeilConjectures.Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 
@@ -28,16 +27,17 @@ valuative squares whose generic point factors through `h`.
 
 ## Main results
 
-- `AlgebraicGeometry.ValuationProbe` and `AlgebraicGeometry.nonempty_valuationProbe`: the
-  **valuation probe through a dense source** (Stacks Project Tag 02JQ; blueprint:
-  `def:nagata-dense-valuation-probe`, `lemma:nagata-dense-valuation-probe`).
+- `AlgebraicGeometry.ValuativeCommSqWithPt` and
+  `AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant`: the **valuation probe through a
+  dense source** (Stacks Project Tag 02JQ; blueprint: `def:nagata-dense-valuation-probe`,
+  `lemma:nagata-dense-valuation-probe`).
 - `AlgebraicGeometry.ValuativeCriterion.RelativeTo`: the dense-source lifting hypothesis.
-- `AlgebraicGeometry.ValuativeCriterion.existence_of_isDominant`: the **dense-source
-  valuative criterion** (Stacks Project Tag 0894; blueprint:
+- `AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant`: the
+  **dense-source valuative criterion** (Stacks Project Tag 0894; blueprint:
   `lemma:nagata-dense-source-valuative`), in the form of the existence part
   `AlgebraicGeometry.ValuativeCriterion.Existence`.
-- `AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_denseSource` and
-  `AlgebraicGeometry.IsSeparated.of_valuativeCriterion_denseSource`: the two consequences
+- `AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant` and
+  `AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant`: the two consequences
   of the criterion.
 
 The valuation-theoretic inputs live in the Mathlib helper files: the composite of two
@@ -76,25 +76,26 @@ open CategoryTheory Limits IsLocalRing
 
 namespace AlgebraicGeometry
 
-/-- The data of a **valuation probe** for a morphism `h : T ⟶ P` centred at `z ∈ P`: a
-valuative commutative square for `h` whose valuation-ring leg takes the closed point of
-`Spec R` to `z`.
+/-- A **valuative commutative square centred at a point** `z ∈ P` of a morphism
+`h : T ⟶ P`: a valuative commutative square for `h` whose valuation-ring leg takes the
+closed point of `Spec R` to `z`. It is the *valuation probe* of Stacks Project Tag 02JQ.
 (Blueprint: `def:nagata-dense-valuation-probe`.) -/
-structure ValuationProbe {T P : Scheme.{u}} (h : T ⟶ P) (z : P) extends ValuativeCommSq h where
+structure ValuativeCommSqWithPt {T P : Scheme.{u}} (h : T ⟶ P) (z : P) extends
+    ValuativeCommSq h where
   /-- The valuation-ring leg of the square is centred at `z`. -/
   closedPoint_eq : i₂ (closedPoint R) = z
 
-/-- **A specialization of a point of the range gives a valuation probe**: if `h t`
-specializes to `z`, then `h` admits a valuation probe centred at `z`.
+/-- **A specialization of a point of the range gives a square centred at that point**: if
+`h t` specializes to `z`, then `h` admits a valuative commutative square centred at `z`.
 
-The probe is the one Mathlib builds in `ValuativeCriterion.Existence.specializingMap`: the
+The square is the one Mathlib builds in `ValuativeCriterion.Existence.specializingMap`: the
 stalk composite `𝒪_{P,z} ⟶ 𝒪_{T,t} ⟶ κ(t)` factors through a valuation subring `A ⊆ κ(t)`
 by the Chevalley extension theorem `IsLocalRing.exists_factor_valuationRing`. -/
-theorem nonempty_valuationProbe_of_specializes {T P : Scheme.{u}} (h : T ⟶ P) {t : T}
-    {z : P} (ht : h t ⤳ z) : Nonempty (ValuationProbe h z) := by
+def ValuativeCommSqWithPt.ofSpecializes {T P : Scheme.{u}} (h : T ⟶ P) {t : T}
+    {z : P} (ht : h t ⤳ z) : ValuativeCommSqWithPt h z := by
   let ρ : P.presheaf.stalk z ⟶ T.residueField t :=
     P.presheaf.stalkSpecializes ht ≫ h.stalkMap t ≫ T.residue t
-  obtain ⟨A, hA, hA_local⟩ := IsLocalRing.exists_factor_valuationRing ρ.hom
+  choose A hA hA_local using IsLocalRing.exists_factor_valuationRing ρ.hom
   let toA : P.presheaf.stalk z ⟶ .of A := CommRingCat.ofHom (ρ.hom.codRestrict _ hA)
   have w : T.fromSpecResidueField t ≫ h =
       Spec.map (CommRingCat.ofHom (algebraMap A (T.residueField t))) ≫
@@ -103,28 +104,28 @@ theorem nonempty_valuationProbe_of_specializes {T P : Scheme.{u}} (h : T ⟶ P) 
       ← Scheme.SpecMap_stalkSpecializes_fromSpecStalk ht]
     simp_rw [← Spec.map_comp_assoc]
     rfl
-  refine ⟨{ R := A
-            K := T.residueField t
-            i₁ := T.fromSpecResidueField t
-            i₂ := Spec.map toA ≫ P.fromSpecStalk z
-            commSq := ⟨w⟩
-            closedPoint_eq := ?_ }⟩
   have hclosed : Spec.map toA (closedPoint A) = closedPoint (P.presheaf.stalk z) :=
     IsLocalRing.comap_closedPoint (S := A) (ρ.hom.codRestrict A.toSubring hA)
-  rw [Scheme.Hom.comp_apply, hclosed, Scheme.fromSpecStalk_closedPoint]
+  exact { R := A
+          K := T.residueField t
+          i₁ := T.fromSpecResidueField t
+          i₂ := Spec.map toA ≫ P.fromSpecStalk z
+          commSq := ⟨w⟩
+          closedPoint_eq := by
+            rw [Scheme.Hom.comp_apply, hclosed, Scheme.fromSpecStalk_closedPoint] }
 
-/-- **Existence of a valuation probe through a dense source** (Stacks Project Tag 02JQ):
-every point of the target of a quasi-compact dominant morphism is the centre of a
-valuation probe.
+/-- **A valuative commutative square through a dense source** (Stacks Project Tag 02JQ):
+every point of the target of a quasi-compact dominant morphism is the centre of a valuative
+commutative square.
 (Blueprint: `lemma:nagata-dense-valuation-probe`.) -/
 @[stacks 02JQ]
-theorem nonempty_valuationProbe {T P : Scheme.{u}} (h : T ⟶ P) [QuasiCompact h]
-    [IsDominant h] (z : P) : Nonempty (ValuationProbe h z) := by
+def ValuativeCommSqWithPt.ofIsDominant {T P : Scheme.{u}} (h : T ⟶ P)
+    [QuasiCompact h] [IsDominant h] (z : P) : ValuativeCommSqWithPt h z := by
   have hz : z ∈ closure (Set.range h) := by
     rw [h.denseRange.closure_range]
     trivial
-  obtain ⟨t, ht⟩ := exists_specializes_of_mem_closure_range h hz
-  exact nonempty_valuationProbe_of_specializes h ht
+  choose t ht using exists_specializes_of_mem_closure_range h hz
+  exact .ofSpecializes h ht
 
 namespace ValuativeCriterion
 
@@ -279,12 +280,13 @@ theorem RelativeTo.toImage {f : X ⟶ S} (H : RelativeTo f h) :
 
 end ValuativeCriterion
 
-/-- **Flat polynomial presentation of a field point**: every `K`-point of a scheme `X`, for
-`K` a field, is the image of a flat morphism `Spec P ⟶ X` along a surjection `P ↠ K`.
+/-- **Flat polynomial presentation of a morphism from the spectrum of a field**: every
+morphism `Spec K ⟶ X` with `K` a field factors as a surjection `P ↠ K` followed by a flat
+morphism `Spec P ⟶ X`.
 
 The presentation is `P = K[x_s : s ∈ Γ(X, V)]` for an affine open `V` containing the image
 of the point, evaluated at the corresponding `K`-algebra map. -/
-theorem exists_flat_presentation_of_fieldPoint {X : Scheme.{u}} {K : Type u} [Field K]
+theorem exists_flat_polynomial_presentation {X : Scheme.{u}} {K : Type u} [Field K]
     (i₁ : Spec (CommRingCat.of K) ⟶ X) :
     ∃ (P : CommRingCat.{u}) (π : P ⟶ CommRingCat.of K) (p : Spec P ⟶ X),
       Function.Surjective π.hom ∧ Flat p ∧ Spec.map π ≫ p = i₁ := by
@@ -333,8 +335,7 @@ theorem exists_stalkClosedPointTo_of_generic_eq {X : Scheme.{u}} {K L : Type u} 
   -- the field structures on the bundled rings are needed for `closedPoint`
   letI : Field (CommRingCat.of K) := inferInstanceAs (Field K)
   letI : Field (CommRingCat.of L) := inferInstanceAs (Field L)
-  have hτlocal : IsLocalHom τ := .of_field τ
-  have : IsLocalHom (CommRingCat.ofHom τ).hom := hτlocal
+  have : IsLocalHom (CommRingCat.ofHom τ).hom := inferInstanceAs (IsLocalHom τ)
   -- the generic point of `Spec B` is carried by `g` to the `K`-point
   have hgen : g (Spec.map (CommRingCat.ofHom B.subtype) (closedPoint (CommRingCat.of L))) =
       i₁ (closedPoint (CommRingCat.of K)) := by
@@ -378,20 +379,22 @@ variable {U X : Scheme.{u}}
 if `h : U ⟶ X` is quasi-compact and scheme-theoretically dominant and `f : X ⟶ Spec R`
 satisfies the valuative criterion relative to `h`, then `f` satisfies the existence part of
 the valuative criterion. -/
-theorem existence_core {R : CommRingCat.{u}} (f : X ⟶ Spec R) (h : U ⟶ X) [QuasiCompact h]
+theorem RelativeTo.existence_of_isSchemeTheoreticallyDominant_of_isAffine
+    {R : CommRingCat.{u}} {f : X ⟶ Spec R} {h : U ⟶ X} [QuasiCompact h]
     [IsSchemeTheoreticallyDominant h] (H : RelativeTo f h) : Existence f := by
   intro sqf
   obtain ⟨A, K, i₁, i₂, ⟨w⟩⟩ := sqf
   -- `obtain` loses the field instance on the bundled ring, which `closedPoint` needs
   letI : Field (CommRingCat.of K) := inferInstanceAs (Field K)
   -- Step 1: a flat polynomial presentation `p : Spec P ⟶ X` of the `K`-point `i₁`
-  obtain ⟨P, π, p, hπ, hpflat, hi₁p⟩ := exists_flat_presentation_of_fieldPoint i₁
+  obtain ⟨P, π, p, hπ, hpflat, hi₁p⟩ := exists_flat_polynomial_presentation i₁
   have : Flat p := hpflat
-  -- Step 2: a valuation probe for `U ×_X Spec P ⟶ Spec P` centred at the image of `i₁`
+  -- Step 2: a valuative square for `U ×_X Spec P ⟶ Spec P` centred at the image of `i₁`
   have : QuasiCompact (pullback.snd h p) := MorphismProperty.pullback_snd _ _ inferInstance
-  obtain ⟨pr⟩ := nonempty_valuationProbe (pullback.snd h p)
+  let pr := ValuativeCommSqWithPt.ofIsDominant (pullback.snd h p)
     (Spec.map π (closedPoint (CommRingCat.of K)))
-  -- Step 3: replace the abstract probe valuation ring by its image in `pr.K`
+  clear_value pr
+  -- Step 3: replace the abstract valuation ring of `pr` by its image in `pr.K`
   let VA' : ValuationSubring pr.K := (ValuationRing.valuation pr.R pr.K).valuationSubring
   let e' : pr.R ≃+* ↥VA' := ValuationRing.equivInteger pr.R pr.K
   have : IsLocalHom (e' : pr.R →+* ↥VA') := ⟨fun a ha ↦ by
@@ -546,10 +549,12 @@ theorem existence_core {R : CommRingCat.{u}} (f : X ⟶ Spec R) (h : U ⟶ X) [Q
 variable {S : Scheme.{u}}
 
 /-- **The dense-source valuative criterion, scheme-theoretically dominant source** (Stacks
-Project Tag 0894): the affine-base case `ValuativeCriterion.existence_core` globalizes,
-since `ValuativeCriterion.Existence` is local at the target. -/
-theorem existence_of_isSchemeTheoreticallyDominant (f : X ⟶ S) (h : U ⟶ X) [QuasiCompact h]
-    [IsSchemeTheoreticallyDominant h] (H : RelativeTo f h) : Existence f := by
+Project Tag 0894): the affine-base case
+`ValuativeCriterion.RelativeTo.existence_of_isSchemeTheoreticallyDominant_of_isAffine`
+globalizes, since `ValuativeCriterion.Existence` is local at the target. -/
+theorem RelativeTo.existence_of_isSchemeTheoreticallyDominant {f : X ⟶ S} {h : U ⟶ X}
+    [QuasiCompact h] [IsSchemeTheoreticallyDominant h] (H : RelativeTo f h) :
+    Existence f := by
   refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := Existence)
     (fun V : S.affineOpens ↦ V.1) (iSup_affineOpens_eq_top S) fun V ↦ ?_
   have : IsAffine V.1.toScheme := V.2
@@ -558,7 +563,8 @@ theorem existence_of_isSchemeTheoreticallyDominant (f : X ⟶ S) (h : U ⟶ X) [
   have : IsSchemeTheoreticallyDominant (h ∣_ (f ⁻¹ᵁ V.1)) :=
     .of_isPullback (isPullback_morphismRestrict h (f ⁻¹ᵁ V.1)).flip
   rw [← MorphismProperty.cancel_right_of_respectsIso Existence _ V.2.isoSpec.hom]
-  exact existence_core _ _ ((H.restrict V.1).postcomp_iso V.2.isoSpec.hom)
+  exact ((H.restrict V.1).postcomp_iso
+    V.2.isoSpec.hom).existence_of_isSchemeTheoreticallyDominant_of_isAffine
 
 /-- **The dense-source valuative criterion** (Stacks Project Tag 0894): if `h : U ⟶ X` is
 quasi-compact and dominant and every valuative square for `f : X ⟶ S` whose generic point
@@ -566,10 +572,9 @@ factors through `h` has a unique lift, then `f` satisfies the existence part of 
 valuative criterion.
 (Blueprint: `lemma:nagata-dense-source-valuative`.) -/
 @[stacks 0894]
-theorem existence_of_isDominant (f : X ⟶ S) (h : U ⟶ X) [QuasiCompact h] [IsDominant h]
-    (H : RelativeTo f h) : Existence f :=
-  Existence.of_imageι h
-    (existence_of_isSchemeTheoreticallyDominant (h.imageι ≫ f) h.toImage H.toImage)
+theorem RelativeTo.existence_of_isDominant {f : X ⟶ S} {h : U ⟶ X} [QuasiCompact h]
+    [IsDominant h] (H : RelativeTo f h) : Existence f :=
+  Existence.of_imageι h H.toImage.existence_of_isSchemeTheoreticallyDominant
 
 end ValuativeCriterion
 
@@ -578,10 +583,10 @@ Tag 0894): a quasi-compact morphism satisfying the valuative criterion relative 
 quasi-compact dominant `h : U ⟶ X` is universally closed.
 (Blueprint: `lemma:nagata-dense-source-valuative`.) -/
 @[stacks 0894]
-theorem UniversallyClosed.of_valuativeCriterion_denseSource {U X S : Scheme.{u}} (f : X ⟶ S)
+theorem UniversallyClosed.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)
     [QuasiCompact f] (h : U ⟶ X) [QuasiCompact h] [IsDominant h]
     (H : ValuativeCriterion.RelativeTo f h) : UniversallyClosed f :=
-  UniversallyClosed.of_valuativeCriterion _ (ValuativeCriterion.existence_of_isDominant f h H)
+  UniversallyClosed.of_valuativeCriterion _ H.existence_of_isDominant
 
 /-- **The dense-source valuative criterion, separatedness** (Stacks Project Tag 0894): a
 quasi-separated morphism satisfying the valuative criterion relative to a quasi-compact
@@ -591,12 +596,12 @@ The uniqueness half of the hypothesis makes the diagonal satisfy the dense-sourc
 for universal closedness, and a universally closed immersion is a closed immersion.
 (Blueprint: `lemma:nagata-dense-source-valuative`.) -/
 @[stacks 0894]
-theorem IsSeparated.of_valuativeCriterion_denseSource {U X S : Scheme.{u}} (f : X ⟶ S)
+theorem IsSeparated.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)
     [QuasiSeparated f] (h : U ⟶ X) [QuasiCompact h] [IsDominant h]
     (H : ValuativeCriterion.RelativeTo f h) : IsSeparated f := by
   constructor
   have : UniversallyClosed (pullback.diagonal f) := by
-    refine UniversallyClosed.of_valuativeCriterion_denseSource (pullback.diagonal f) h ?_
+    refine UniversallyClosed.of_valuativeCriterion_of_isDominant (pullback.diagonal f) h ?_
     refine ValuativeCriterion.RelativeTo.of_existsUnique fun sq ηU hηU ↦ ?_
     -- a square for the diagonal is a pair of maps to `X` agreeing over `S`; the
     -- uniqueness hypothesis for `f` forces the pair to coincide
