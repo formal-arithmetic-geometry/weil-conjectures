@@ -8,9 +8,28 @@ module
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 
 /-!
-# The map to the scheme-theoretic image is scheme-theoretically dominant
+# Complements on the subscheme cut out by an ideal sheaf
+
+This file adds two independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
+
+## Base change of the subscheme cut out by an ideal sheaf
+
+The affine cover of the closed subscheme `V(I)` cut out by a quasi-coherent ideal `I` is
+obtained by base change: over an affine open `U` of `X`, the square formed by the chart
+`Spec (Γ(X, U) ⧸ I(U)) ⟶ V(I)` of `I.subschemeCover`, the closed immersion `I.subschemeι`
+and `U.2.fromSpec` is a pullback
+(`AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`).
+
+Pasting this square with `Spec` of the pushout square `CommRingCat.isPushout_quotient`
+computes the base change of `I.subschemeι` along an arbitrary affine probe
+`Spec.map φ ≫ U.2.fromSpec`: it is the closed immersion cut out by the extended ideal
+`I(U)·S` (`AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`).
+
+## The map to the scheme-theoretic image is scheme-theoretically dominant
 
 For a quasi-compact `f : X ⟶ Y`, Mathlib factors `f` as `f.toImage ≫ f.imageι` through the
 scheme-theoretic image, and knows that `f.toImage` is dominant and quasi-compact. It does not
@@ -22,6 +41,12 @@ The proof is the expected one and uses no new input: `f.toImage.app` is injectiv
 preimage of an affine open of `Y` (`AlgebraicGeometry.Scheme.Hom.toImage_app_injective`), those
 preimages are affine because `f.imageι` is a closed immersion, and they cover the image, so
 the kernel ideal vanishes on a cover by affine opens.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
+- `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
+- `AlgebraicGeometry.Scheme.Hom.ker_toImage`
 -/
 
 @[expose] public section
@@ -29,6 +54,35 @@ the kernel ideal vanishes on a cover by affine opens.
 universe u
 
 open CategoryTheory
+
+namespace AlgebraicGeometry.Scheme.IdealSheafData
+
+variable {X : Scheme.{u}} (I : X.IdealSheafData) (U : X.affineOpens)
+
+/-- The affine chart of the subscheme over an affine open is the fibre product: the
+square with the chart `Spec (Γ(X, U) ⧸ I(U)) ⟶ V(I)` and `fromSpec` is a pullback. -/
+lemma isPullback_subschemeCover_map :
+    IsPullback (I.subschemeCover.f U)
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U))))
+      I.subschemeι U.2.fromSpec := by
+  refine (IsOpenImmersion.isPullback _ _ _ _ ?_ ?_).flip
+  · exact (I.subschemeCover_map_subschemeι U).trans (I.glueDataObjι_ι U)
+  · rw [U.2.opensRange_fromSpec, opensRange_subschemeCover_map]
+
+/-- **The subscheme of an ideal sheaf base changes to the subscheme of the extended
+ideal.** Along a morphism `Spec S ⟶ X` of the form `Spec.map φ ≫ U.2.fromSpec` with `U` an
+affine open, the base change of `I.subschemeι` is `Spec` of the quotient of `S` by the
+extension of `I(U)` along `φ`. -/
+lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, U.1) ⟶ S) :
+    IsPullback (Spec.map (CommRingCat.ofHom (Ideal.quotientMap ((I.ideal U).map φ.hom) φ.hom
+        Ideal.le_comap_map)) ≫ I.subschemeCover.f U)
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk ((I.ideal U).map φ.hom))))
+      I.subschemeι (Spec.map φ ≫ U.2.fromSpec) :=
+  (isPullback_SpecMap_of_isPushout _ _ _ _
+    (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
+      (I.isPullback_subschemeCover_map U)
+
+end AlgebraicGeometry.Scheme.IdealSheafData
 
 namespace AlgebraicGeometry.Scheme.Hom
 
