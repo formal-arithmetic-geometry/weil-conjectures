@@ -6,12 +6,17 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # The ideal of sections on an affine open disjoint from the support
 
 On an affine open disjoint from the support of a quasi-coherent ideal, the ideal of
 sections is the unit ideal.
+
+We also record `AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support`:
+an ideal sheaf is contained in the kernel of a morphism from a reduced scheme if and only
+if the range of the morphism lies in its support.
 -/
 
 @[expose] public section
@@ -33,5 +38,12 @@ lemma ideal_eq_top_of_disjoint_support {U : X.affineOpens}
   have h := (U.2.fromSpec_image_zeroLocus _).trans_subset hsub
   simp only [Set.subset_empty_iff, Set.image_eq_empty] at h
   exact PrimeSpectrum.zeroLocus_empty_iff_eq_top.mp h
+
+/-- An ideal sheaf is contained in the kernel of a morphism from a reduced scheme exactly
+when the range of the morphism lies in its support. -/
+lemma le_ker_iff_range_subset_support {W : Scheme.{u}} (g : W ⟶ X) [IsReduced W] :
+    I ≤ g.ker ↔ Set.range g ⊆ (I.support : Set X) := by
+  rw [← map_bot, le_map_iff_comap_le, le_bot_iff, ← support_eq_top_iff, support_comap]
+  simp [TopologicalSpace.Closeds.ext_iff, Set.preimage_eq_univ_iff]
 
 end AlgebraicGeometry.Scheme.IdealSheafData
