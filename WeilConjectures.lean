@@ -60,6 +60,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.IsIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.Dynamics.PeriodicPts.Defs
+public import WeilConjectures.Mathlib.Dynamics.PeriodicPts.OrbitCount
+public import WeilConjectures.Mathlib.NumberTheory.ArithmeticFunction.Moebius
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
@@ -68,6 +71,7 @@ public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Exp
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Derived
@@ -84,5 +88,9 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
+public import WeilConjectures.ZetaCounting.Comparison
+public import WeilConjectures.ZetaCounting.Defs
+public import WeilConjectures.ZetaCounting.EulerProducts
+public import WeilConjectures.ZetaCounting.Orbits
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries

@@ -1,0 +1,600 @@
+% Section 3.2: Euler products and the counting zeta series.
+% This file is a chapter fragment; it is \input from
+% version/detailed/weil_conjectures_chapter3.tex and must not carry a preamble.
+
+\section{Euler products and the counting zeta series}
+\label{sec:weil-counting-euler-product}
+
+A \emph{counting function} is a map $c\colon\mathbf N\to\mathbf N$.  The two
+cases of interest are $c(n)=\#\operatorname{Fix}_F(n)$ for a self-map $F$ as in
+\Cref{sec:weil-finite-orbits}, and $c(n)=\#X(\mathbf F_{q^n})$ for a scheme $X$
+of finite type over $\Fq$.  Its zeta series is
+\[
+  Z_c(T):=\operatorname{Exp}\Bigl(\sum_{n\ge 1}\frac{c(n)}{n}T^n\Bigr)
+  \in\mathbf Q[[T]],
+\]
+with $\operatorname{Exp}$ the formal exponential of
+\Cref{chap:weil-formal-exp-log}.
+
+The goal of this section is \Cref{thm:weil-counting-zeta-euler-product}: if the
+counting function is assembled from a family of positive \emph{degrees}
+$d\colon I\to\mathbf N$ by
+\[
+  c(n)=\sum_{\substack{i\in I\\ d(i)\mid n}}d(i)\qquad(n\ge 1),
+\]
+then $Z_c$ is the Euler product $\prod_{i\in I}(1-T^{d(i)})^{-1}$.  Grouping the
+factors of equal degree gives the classical form
+$\prod_{m\ge 1}(1-T^m)^{-a_m}$ (\Cref{thm:weil-counting-zeta-degree-euler-product}),
+and reading off a coefficient of a finite subproduct shows $Z_c\in\Z[[T]]$
+(\Cref{thm:weil-counting-zeta-integral-lift}).
+
+Throughout, infinite products of power series are taken in the coefficientwise
+(product) topology on $R[[T]]$.
+
+\subsection{The zeta series of a counting function}
+
+\begin{definition}[Counting logarithm series]
+  \label{def:weil-counting-log-series}
+  \lean{PowerSeries.countingLogSeries}
+  \leanok
+
+  For a counting function $c$ put
+  $S_c:=\sum_{n\ge 1}\frac{c(n)}{n}T^n\in\mathbf Q[[T]]$, that is, the power
+  series with $[T^0]S_c=0$ and $[T^n]S_c=c(n)/n$ for $n\ge 1$.
+\end{definition}
+
+\begin{definition}[Counting zeta series]
+  \label{def:weil-counting-zeta-series}
+  \uses{def:weil-counting-log-series, def:weil-formal-exp}
+  \lean{PowerSeries.countingZetaSeries}
+  \leanok
+
+  The zeta series of $c$ is $Z_c:=\operatorname{Exp}(S_c)\in\mathbf Q[[T]]$.
+\end{definition}
+
+\begin{lemma}[Normalisation]
+  \label{lemma:weil-counting-zeta-series-constant}
+  \uses{def:weil-counting-zeta-series, lemma:weil-constant-coeff-exp}
+  \lean{PowerSeries.constantCoeff_countingZetaSeries}
+  \leanok
+
+  $Z_c(0)=1$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-constant-coeff-exp}
+  \leanok
+  $S_c$ has vanishing constant coefficient, and $\operatorname{Exp}$ takes such
+  series to series with constant coefficient $1$.
+\end{proof}
+
+\begin{lemma}[Logarithmic derivative of $S_c$]
+  \label{lemma:weil-counting-log-series-derivative}
+  \uses{def:weil-counting-log-series}
+  \lean{PowerSeries.X_mul_derivative_countingLogSeries}
+  \leanok
+
+  $T\,S_c'(T)=\sum_{n\ge 1}c(n)T^n$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Compare coefficients: $[T^{m+1}]\bigl(T\,S_c'\bigr)=(m+1)[T^{m+1}]S_c=c(m+1)$.
+\end{proof}
+
+\begin{lemma}[Logarithmic differential equation for $Z_c$]
+  \label{lemma:weil-counting-zeta-series-derivative}
+  \uses{def:weil-counting-zeta-series, lemma:weil-counting-log-series-derivative,
+    lemma:weil-derivative-exp}
+  \lean{PowerSeries.X_mul_derivative_countingZetaSeries}
+  \leanok
+
+  $T\,Z_c'(T)=\bigl(\sum_{n\ge 1}c(n)T^n\bigr)\,Z_c(T)$.  Together with
+  \Cref{lemma:weil-counting-zeta-series-constant} this determines $Z_c$
+  uniquely.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-derivative-exp, lemma:weil-counting-log-series-derivative}
+  \leanok
+  The chain rule for $\operatorname{Exp}$ gives
+  $Z_c'=S_c'\operatorname{Exp}(S_c)$; multiply by $T$ and use
+  \Cref{lemma:weil-counting-log-series-derivative}.
+\end{proof}
+
+\begin{lemma}[Only the positive values matter]
+  \label{lemma:weil-counting-zeta-series-congr}
+  \uses{def:weil-counting-zeta-series}
+  \lean{PowerSeries.countingZetaSeries_congr}
+  \leanok
+
+  If $c(n)=c'(n)$ for all $n\ge 1$ then $Z_c=Z_{c'}$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  The value $c(0)$ does not occur in $S_c$.
+\end{proof}
+
+\subsection{Coefficientwise infinite products}
+
+The Euler products below are infinite, and are handled by the elementary
+observation that a factor congruent to $1$ modulo $T^{n+1}$ cannot change the
+$n$-th coefficient of a product.  We fix a commutative ring $R$, a family
+$(f_i)_{i\in I}$ in $R[[T]]$ and \emph{orders} $d\colon I\to\mathbf N$ with
+\[
+  T^{d(i)}\mid f_i-1\quad\text{for all }i,
+  \qquad
+  \#\{i\mid d(i)\le n\}<\infty\quad\text{for all }n .
+\]
+
+\begin{lemma}[Products stay congruent to $1$]
+  \label{lemma:weil-X-pow-dvd-prod-sub-one}
+  \lean{PowerSeries.X_pow_dvd_prod_sub_one}
+  \leanok
+
+  If $T^k\mid f_i-1$ for every $i$ in a finite set $S$, then
+  $T^k\mid\prod_{i\in S}f_i-1$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Induction on $S$, using
+  $fg-1=f(g-1)+(f-1)$.
+\end{proof}
+
+\begin{lemma}[Harmless factors]
+  \label{lemma:weil-coeff-mul-eq-of-X-pow-dvd-sub-one}
+  \lean{PowerSeries.coeff_mul_eq_of_X_pow_dvd_sub_one}
+  \leanok
+
+  If $T^{n+1}\mid H-1$ then $[T^n](HF)=[T^n]F$ for every $F$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Write $H=1+T^{n+1}c$; then $HF=F+T^{n+1}(cF)$ and the second summand has no
+  coefficient in degree $n$.
+\end{proof}
+
+\begin{lemma}[Truncating a finite product]
+  \label{lemma:weil-coeff-prod-congr}
+  \uses{lemma:weil-X-pow-dvd-prod-sub-one,
+    lemma:weil-coeff-mul-eq-of-X-pow-dvd-sub-one}
+  \lean{PowerSeries.coeff_prod_congr}
+  \leanok
+
+  Let $T\subseteq S$ be finite sets with $T^{n+1}\mid f_i-1$ for every
+  $i\in S\setminus T$.  Then
+  $[T^n]\prod_{i\in S}f_i=[T^n]\prod_{i\in T}f_i$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-X-pow-dvd-prod-sub-one,
+    lemma:weil-coeff-mul-eq-of-X-pow-dvd-sub-one}
+  \leanok
+  Split off the product over $S\setminus T$ and apply the two previous lemmas.
+\end{proof}
+
+\begin{lemma}[Multipliability]
+  \label{lemma:weil-multipliable-of-X-pow-dvd-sub-one}
+  \lean{PowerSeries.WithPiTopology.multipliable_of_X_pow_dvd_sub_one}
+  \leanok
+
+  Under the standing hypotheses the family $(f_i)_{i\in I}$ is multipliable in
+  the coefficientwise topology.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  The family $\bigl(\prod_{i\in s}(f_i-1)\bigr)_{s}$ indexed by the finite
+  subsets $s\subseteq I$ is summable coefficientwise: in degree $n$ only the
+  subsets of $\{i\mid d(i)\le n\}$ contribute, and there are finitely many of
+  those.  A family $(1+g_i)$ is multipliable as soon as
+  $\bigl(\prod_{i\in s}g_i\bigr)_s$ is summable.
+\end{proof}
+
+\begin{lemma}[Coefficients of an infinite product]
+  \label{lemma:weil-coeff-tprod-eq-coeff-prod}
+  \uses{lemma:weil-coeff-prod-congr,
+    lemma:weil-multipliable-of-X-pow-dvd-sub-one}
+  \lean{PowerSeries.WithPiTopology.coeff_tprod_eq_coeff_prod}
+  \leanok
+
+  For every $n$ and every finite $T\subseteq I$ containing all $i$ with
+  $d(i)\le n$,
+  \[
+    [T^n]\prod_{i\in I}f_i=[T^n]\prod_{i\in T}f_i .
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-coeff-prod-congr,
+    lemma:weil-multipliable-of-X-pow-dvd-sub-one}
+  \leanok
+  The net of finite partial products converges coefficientwise, and by
+  \Cref{lemma:weil-coeff-prod-congr} its $n$-th coefficient is eventually
+  constant, equal to that of the subproduct over $\{i\mid d(i)\le n\}$; the
+  same lemma compares that subproduct with the one over $T$.
+\end{proof}
+
+\subsection{The Euler product}
+
+\begin{theorem}[Euler product of a degree family]
+  \label{thm:weil-counting-zeta-euler-product}
+  \uses{def:weil-counting-zeta-series, lemma:weil-counting-zeta-series-constant,
+    lemma:weil-counting-zeta-series-derivative,
+    lemma:weil-coeff-tprod-eq-coeff-prod}
+  \lean{PowerSeries.countingZetaSeries_eq_tprod}
+  \leanok
+
+  Let $d\colon I\to\mathbf N$ satisfy $d(i)\ne 0$ for all $i$ and
+  $\#\{i\mid d(i)\le n\}<\infty$ for all $n$, and let $c$ be a counting function
+  with
+  \[
+    c(n)=\sum_{\substack{i\in T\\ d(i)\mid n}}d(i)
+    \qquad\text{for every }n\ge 1
+    \text{ and every finite }T\supseteq\{i\mid d(i)\mid n\}.
+  \]
+  Then
+  \[
+    Z_c(T)=\prod_{i\in I}\bigl(1-T^{d(i)}\bigr)^{-1}.
+  \]
+\end{theorem}
+
+\begin{proof}
+  \uses{lemma:weil-counting-zeta-series-constant,
+    lemma:weil-counting-zeta-series-derivative,
+    lemma:weil-coeff-tprod-eq-coeff-prod}
+  \leanok
+  Fix $n$ and let $T:=\{i\mid d(i)\le n\}$.  By
+  \Cref{lemma:weil-coeff-tprod-eq-coeff-prod} the $n$-th coefficient of the
+  infinite product is that of $P:=\prod_{i\in T}(1-T^{d(i)})^{-1}$.  Both $Z_c$
+  and $P$ have constant coefficient $1$ and satisfy a logarithmic differential
+  equation $T\,F'=A\,F$: for $Z_c$ with
+  $A=\sum_{n\ge 1}c(n)T^n$ by
+  \Cref{lemma:weil-counting-zeta-series-derivative}, and for $P$ with
+  $A=\sum_{i\in T}\sum_{m\ge 1}d(i)T^{m\,d(i)}$, because the logarithmic
+  derivative of $(1-T^{d})^{-1}$ is $\sum_{m\ge 1}dT^{md}$ and logarithmic
+  derivatives add.  The counting hypothesis says exactly that the two right
+  hand sides agree in every degree $\le n$, and such an equation determines the
+  coefficients recursively by $n\,[T^n]F=\sum_{j<n}[T^{n-j}]A\cdot[T^j]F$.
+\end{proof}
+
+\begin{lemma}[From degrees to multiplicities]
+  \label{lemma:weil-degree-sum-eq-multiplicity-sum}
+  \lean{PowerSeries.sum_filter_dvd_eq_sum_divisors_mul_ncard}
+  \leanok
+
+  With $d$ as above and $a_m:=\#d^{-1}(m)$, for every $n\ge 1$ and every finite
+  $T\supseteq\{i\mid d(i)\mid n\}$,
+  \[
+    \sum_{\substack{i\in T\\ d(i)\mid n}}d(i)=\sum_{m\mid n}m\,a_m .
+  \]
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Group the left hand sum by the value of $d$; the fibre over $m$ is contained
+  in $T$ whenever $m\mid n$, and contributes $m\,a_m$.
+\end{proof}
+
+\begin{theorem}[Euler product grouped by degree]
+  \label{thm:weil-counting-zeta-degree-euler-product}
+  \uses{def:weil-counting-zeta-series, lemma:weil-counting-zeta-series-constant,
+    lemma:weil-counting-zeta-series-derivative,
+    lemma:weil-coeff-tprod-eq-coeff-prod}
+  \lean{PowerSeries.countingZetaSeries_eq_tprod_pow}
+  \leanok
+
+  Let $a\colon\mathbf N\to\mathbf N$ satisfy $a_0=0$ and let $c$ be a counting
+  function with $c(n)=\sum_{m\mid n}m\,a_m$ for every $n\ge 1$.  Then
+  \[
+    Z_c(T)=\prod_{m\ge 1}\bigl(1-T^m\bigr)^{-a_m}.
+  \]
+\end{theorem}
+
+\begin{proof}
+  \uses{lemma:weil-counting-zeta-series-constant,
+    lemma:weil-counting-zeta-series-derivative,
+    lemma:weil-coeff-tprod-eq-coeff-prod}
+  \leanok
+  As in \Cref{thm:weil-counting-zeta-euler-product}: the $n$-th coefficient of
+  the right hand side is that of $\prod_{m\le n}(1-T^m)^{-a_m}$, which is the
+  finite product $\prod_{(m,j)}(1-T^m)^{-1}$ over the pairs with $m\le n$ and
+  $j<a_m$; its logarithmic derivative is
+  $\sum_{m\le n}a_m\sum_{r\ge 1}mT^{rm}$, and in degrees $\le n$ this agrees
+  with $\sum_{n'\ge1}c(n')T^{n'}$ by the hypothesis on $c$.
+\end{proof}
+
+\subsection{Integrality}
+
+\begin{lemma}[Recognising an image]
+  \label{lemma:weil-exists-map-eq-of-coeff-mem-range}
+  \lean{PowerSeries.exists_map_eq_of_forall_coeff_mem_range}
+  \leanok
+
+  Let $\varphi\colon R\to S$ be a ring homomorphism.  A power series
+  $P\in S[[T]]$ all of whose coefficients lie in the image of $\varphi$ is the
+  coefficientwise image of a power series over $R$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Choose a preimage of each coefficient.
+\end{proof}
+
+\begin{lemma}[Euler factors are integral]
+  \label{lemma:weil-coeff-tprod-mem-range}
+  \uses{lemma:weil-coeff-tprod-eq-coeff-prod}
+  \lean{PowerSeries.coeff_tprod_inv_one_sub_X_pow_mem_range}
+  \leanok
+
+  With $d$ as in \Cref{thm:weil-counting-zeta-euler-product}, every coefficient
+  of $\prod_{i\in I}(1-T^{d(i)})^{-1}$ is an integer.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-coeff-tprod-eq-coeff-prod}
+  \leanok
+  By \Cref{lemma:weil-coeff-tprod-eq-coeff-prod} the coefficient in degree $n$
+  is one of a finite subproduct, and $(1-T^{d})^{-1}=\sum_{d\mid j}T^j$ is the
+  image of a power series over $\Z$; finite products of such are again images.
+\end{proof}
+
+\begin{lemma}[Degree-grouped Euler factors are integral]
+  \label{lemma:weil-coeff-tprod-pow-mem-range}
+  \uses{lemma:weil-coeff-tprod-eq-coeff-prod}
+  \lean{PowerSeries.coeff_tprod_pow_inv_one_sub_X_pow_mem_range}
+  \leanok
+
+  For $a_0=0$ every coefficient of $\prod_{m\ge 1}(1-T^m)^{-a_m}$ is an
+  integer.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-coeff-tprod-eq-coeff-prod}
+  \leanok
+  As for \Cref{lemma:weil-coeff-tprod-mem-range}.
+\end{proof}
+
+\begin{corollary}[Integrality of the zeta series]
+  \label{cor:weil-counting-zeta-integral}
+  \uses{thm:weil-counting-zeta-euler-product, lemma:weil-coeff-tprod-mem-range}
+  \lean{PowerSeries.coeff_countingZetaSeries_mem_range}
+  \leanok
+
+  Under the hypotheses of \Cref{thm:weil-counting-zeta-euler-product} every
+  coefficient of $Z_c$ is an integer.
+\end{corollary}
+
+\begin{proof}
+  \uses{thm:weil-counting-zeta-euler-product, lemma:weil-coeff-tprod-mem-range}
+  \leanok
+  Combine the two statements.
+\end{proof}
+
+\begin{corollary}[Integrality, degree-grouped form]
+  \label{cor:weil-counting-zeta-integral-grouped}
+  \uses{thm:weil-counting-zeta-degree-euler-product,
+    lemma:weil-coeff-tprod-pow-mem-range}
+  \lean{PowerSeries.coeff_countingZetaSeries_mem_range_of_multiplicity}
+  \leanok
+
+  Under the hypotheses of \Cref{thm:weil-counting-zeta-degree-euler-product}
+  every coefficient of $Z_c$ is an integer.
+\end{corollary}
+
+\begin{proof}
+  \uses{thm:weil-counting-zeta-degree-euler-product,
+    lemma:weil-coeff-tprod-pow-mem-range}
+  \leanok
+  Combine the two statements.
+\end{proof}
+
+\begin{theorem}[Integral lift]
+  \label{thm:weil-counting-zeta-integral-lift}
+  \uses{cor:weil-counting-zeta-integral,
+    lemma:weil-exists-map-eq-of-coeff-mem-range}
+  \lean{PowerSeries.exists_map_intCast_eq_countingZetaSeries}
+  \leanok
+
+  Under the hypotheses of \Cref{thm:weil-counting-zeta-euler-product} there is
+  a power series $Z\in\Z[[T]]$ whose image in $\mathbf Q[[T]]$ is $Z_c$.
+\end{theorem}
+
+\begin{proof}
+  \uses{cor:weil-counting-zeta-integral,
+    lemma:weil-exists-map-eq-of-coeff-mem-range}
+  \leanok
+  Immediate from the two statements.
+\end{proof}
+
+\subsection{The orbit Euler product}
+
+We return to the setting of \Cref{sec:weil-finite-orbits}: a self-map
+$F\colon\Omega\to\Omega$ with $\operatorname{Fix}_F(n)$ finite for all $n\ge 1$,
+and $a_m$ the number of orbits of $F$ of exact size $m$.
+
+\begin{theorem}[Orbit Euler product]
+  \label{thm:weil-orbit-euler-product}
+  \uses{thm:weil-counting-zeta-degree-euler-product,
+    prop:weil-fixed-points-orbit-count, lemma:weil-frobenius-orbit-count-zero}
+  \lean{Function.countingZetaSeries_ncard_ptsOfPeriod}
+  \leanok
+
+  With $c(n)=N_n=\#\operatorname{Fix}_F(n)$,
+  \[
+    Z_c(T)=\prod_{m\ge 1}\bigl(1-T^m\bigr)^{-a_m},
+  \]
+  one factor for each orbit of $F$, of degree its size.
+\end{theorem}
+
+\begin{proof}
+  \uses{thm:weil-counting-zeta-degree-euler-product,
+    prop:weil-fixed-points-orbit-count, lemma:weil-frobenius-orbit-count-zero}
+  \leanok
+  \Cref{prop:weil-fixed-points-orbit-count} is $N_n=\sum_{m\mid n}m\,a_m$, and
+  $a_0=0$ by \Cref{lemma:weil-frobenius-orbit-count-zero}; apply
+  \Cref{thm:weil-counting-zeta-degree-euler-product}.
+\end{proof}
+
+\begin{corollary}[Integrality of the orbit zeta series]
+  \label{cor:weil-orbit-zeta-integral}
+  \uses{thm:weil-orbit-euler-product, cor:weil-counting-zeta-integral-grouped}
+  \lean{Function.coeff_countingZetaSeries_ncard_ptsOfPeriod_mem_range}
+  \leanok
+
+  The zeta series of the periodic point counts of $F$ has integer
+  coefficients.
+\end{corollary}
+
+\begin{proof}
+  \uses{cor:weil-counting-zeta-integral-grouped}
+  \leanok
+  Immediate from \Cref{cor:weil-counting-zeta-integral-grouped}.
+\end{proof}
+
+\subsection{The zeta function of a scheme over a finite field}
+
+Let $X$ be a scheme of finite type over a finite field $k$, given by a
+structure morphism $f\colon X\to\operatorname{Spec}k$, let $N_n$ be the number
+of points of $X$ rational over the degree $n$ extension of $k$, and let
+$\deg(x)=[\kappa(x):k]$ be the degree of a closed point.  The zeta series
+$Z(X,T)=\operatorname{Exp}(\sum_{n\ge1}N_nT^n/n)$ is by definition the zeta
+series of the counting function $n\mapsto N_n$.  The Euler product
+$Z(X,T)=\prod_x(1-T^{\deg x})^{-1}$ over the closed points is the special case
+of \Cref{thm:weil-counting-zeta-euler-product} for the degree function
+$x\mapsto\deg(x)$.  Its two consequences are recorded here.
+
+\begin{definition}[Closed point counts]
+  \label{def:weil-closed-point-count}
+  \lean{AlgebraicGeometry.Scheme.Hom.closedPointCount}
+  \leanok
+
+  $a_m:=\#\{x\in X\text{ closed}\mid\deg(x)=m\}$.
+\end{definition}
+
+\begin{lemma}[No closed point of degree zero]
+  \label{lemma:weil-closed-point-count-zero}
+  \uses{def:weil-closed-point-count}
+  \lean{AlgebraicGeometry.Scheme.Hom.closedPointCount_zero}
+  \leanok
+
+  $a_0=0$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  A closed point of a scheme of finite type over $k$ has a finite residue field
+  extension of $k$, of positive degree.
+\end{proof}
+
+\begin{proposition}[Point counts from closed point counts]
+  \label{prop:weil-point-count-eq-sum-closed-point-count}
+  \uses{def:weil-closed-point-count, lemma:weil-degree-sum-eq-multiplicity-sum}
+  \lean{AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum_divisors_mul_closedPointCount}
+  \leanok
+
+  $N_n=\sum_{m\mid n}m\,a_m$ for every $n\ge 1$.
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-degree-sum-eq-multiplicity-sum}
+  \leanok
+  The point counting formula
+  $N_n=\sum_{\deg(x)\mid n}\deg(x)$ grouped by the value of $\deg$, by
+  \Cref{lemma:weil-degree-sum-eq-multiplicity-sum}.
+\end{proof}
+
+\begin{corollary}[Degree-grouped Euler product of $Z(X,T)$]
+  \label{cor:weil-zeta-degree-euler-product}
+  \uses{thm:weil-counting-zeta-degree-euler-product,
+    prop:weil-point-count-eq-sum-closed-point-count,
+    lemma:weil-closed-point-count-zero}
+  \lean{AlgebraicGeometry.Scheme.Hom.zetaSeries_eq_tprod_pow}
+  \leanok
+
+  $Z(X,T)=\prod_{m\ge1}(1-T^m)^{-a_m}$.
+\end{corollary}
+
+\begin{proof}
+  \uses{thm:weil-counting-zeta-degree-euler-product,
+    prop:weil-point-count-eq-sum-closed-point-count,
+    lemma:weil-closed-point-count-zero}
+  \leanok
+  Apply \Cref{thm:weil-counting-zeta-degree-euler-product} to
+  \Cref{prop:weil-point-count-eq-sum-closed-point-count}.
+\end{proof}
+
+\begin{lemma}[M\"obius inversion of a degree-weighted divisor sum]
+  \label{lemma:weil-moebius-inversion-degree-weighted}
+  \lean{ArithmeticFunction.sum_divisors_moebius_mul_eq_mul}
+  \leanok
+
+  Let $c,a\colon\mathbf N\to\mathbf N$ and $m\ge1$ be such that
+  $c(n)=\sum_{k\mid n}k\,a_k$ for every divisor $n\ge1$ of $m$.  Then
+  \[
+    \sum_{r\mid m}\mu(r)\,c(m/r)=m\,a_m .
+  \]
+  In particular $m$ divides the left hand side.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  This is M\"obius inversion applied to the pair of functions
+  $k\mapsto k\,a_k$ and $c$ on the divisors of $m$.
+\end{proof}
+
+\begin{corollary}[M\"obius recovery of the closed point counts]
+  \label{cor:weil-closed-point-mobius-recovery}
+  \uses{def:weil-closed-point-count,
+    prop:weil-point-count-eq-sum-closed-point-count,
+    lemma:weil-moebius-inversion-degree-weighted}
+  \lean{AlgebraicGeometry.Scheme.Hom.sum_divisors_moebius_mul_pointCount}
+  \leanok
+
+  For every $m\ge1$, $\sum_{r\mid m}\mu(r)N_{m/r}=m\,a_m$; the number of closed points of
+  degree $m$ is determined by the point counts.
+\end{corollary}
+
+\begin{proof}
+  \uses{prop:weil-point-count-eq-sum-closed-point-count,
+    lemma:weil-moebius-inversion-degree-weighted}
+  \leanok
+  Apply \Cref{lemma:weil-moebius-inversion-degree-weighted} to
+  \Cref{prop:weil-point-count-eq-sum-closed-point-count}.
+\end{proof}
+
+\begin{corollary}[Integrality of $Z(X,T)$]
+  \label{cor:weil-zeta-coefficients-integral}
+  \uses{cor:weil-counting-zeta-integral}
+  \lean{AlgebraicGeometry.Scheme.Hom.coeff_zetaSeries_mem_range}
+  \leanok
+
+  Every coefficient of $Z(X,T)$ is an integer.
+\end{corollary}
+
+\begin{proof}
+  \uses{cor:weil-counting-zeta-integral}
+  \leanok
+  Apply \Cref{cor:weil-counting-zeta-integral} to the degree function on closed
+  points.
+\end{proof}
+
+\begin{corollary}[$Z(X,T)\in\Z[[T]]$]
+  \label{cor:weil-zeta-integral-lift}
+  \uses{cor:weil-zeta-coefficients-integral,
+    lemma:weil-exists-map-eq-of-coeff-mem-range}
+  \lean{AlgebraicGeometry.Scheme.Hom.exists_map_intCast_eq_zetaSeries}
+  \leanok
+
+  There is $Z\in\Z[[T]]$ whose image in $\mathbf Q[[T]]$ is $Z(X,T)$.
+\end{corollary}
+
+\begin{proof}
+  \uses{cor:weil-zeta-coefficients-integral,
+    lemma:weil-exists-map-eq-of-coeff-mem-range}
+  \leanok
+  Immediate from the two statements.
+\end{proof}
