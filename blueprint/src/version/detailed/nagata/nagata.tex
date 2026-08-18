@@ -8882,7 +8882,12 @@ closed subscheme of the first blow-up.
   \label{def:nagata-strict-transform}
   \uses{def:nagata-scheme-image-factor,
     def:nagata-scheme-theoretic-image}
-  \lean{}
+  \lean{AlgebraicGeometry.strictTransformOpen,
+    AlgebraicGeometry.strictTransform,
+    AlgebraicGeometry.strictTransformι,
+    AlgebraicGeometry.strictTransformFactor,
+    AlgebraicGeometry.Scheme.IdealSheafData.strictTransform,
+    AlgebraicGeometry.Scheme.IdealSheafData.strictTransformι}
 
   Let $f\colon Z\to X$, let $\pi\colon X'\to X$, let
   $j\colon U\hookrightarrow X$ be a quasi-compact open immersion, and fix
@@ -9043,6 +9048,33 @@ closed subscheme of the first blow-up.
   \texttt{\detokenize{Scheme.Hom.toImage}}.  Mathlib does not currently
   package the data depending on $(U,\alpha_U)$ as a strict-transform
   construction; this definition specializes its scheme-image API.
+
+  \paragraph{Formalization.}
+  The Lean definition takes a shorter route which does not mention $\alpha_U$ at all.
+  Put
+  \[
+    P_U^{\mathrm{op}}
+      :=\operatorname{pr}_{X'}^{-1}\bigl(\pi^{-1}(U)\bigr)\subseteq P
+      =Z\times_XX',
+  \]
+  an \emph{open subscheme} of $P$
+  (\texttt{\detokenize{AlgebraicGeometry.strictTransformOpen}}), and define
+  \[
+    \operatorname{ST}_\pi(Z)
+      :=\operatorname{SIm}\bigl(P_U^{\mathrm{op}}\hookrightarrow P\bigr)
+  \]
+  (\texttt{\detokenize{AlgebraicGeometry.strictTransform}}), with
+  $\iota_{f,\pi}$ and $\lambda_{f,\pi}^{\mathrm{im}}$ the corresponding
+  \texttt{\detokenize{imageι}} and \texttt{\detokenize{toImage}}
+  (\texttt{\detokenize{AlgebraicGeometry.strictTransformι}},
+  \texttt{\detokenize{AlgebraicGeometry.strictTransformFactor}}).  Whenever
+  $\alpha_U$ exists, $\lambda_{f,\pi}$ is an isomorphism of $Z_U$ onto
+  $P_U^{\mathrm{op}}$, so the two descriptions of $\operatorname{ST}_\pi(Z)$
+  agree; all dependence on $\alpha_U$ has been moved to
+  \Cref{lemma:nagata-strict-transform-over-complement}, where it is the hypothesis
+  that $\pi$ restricts to an isomorphism over $U$.  The blow-up specialization
+  $\pi=b_{X,\mathcal I}$, $U=X\setminus V(\mathcal I)$ is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.strictTransform}}.
 \end{definition}
 
 \begin{lemma}[Strict transform as an image in the modified space]
@@ -9102,7 +9134,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{definition}[Power-torsion submodule]
   \label{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion}
+  \leanok
 
   Let $R$ be a commutative ring, let $M$ be an $R$-module, and let $a\in R$.
   Put $S_a=\{a^n\mid n\in\mathbf N\}$ and define
@@ -9119,7 +9152,8 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Power torsion is a submodule]
   \label{lemma:nagata-power-torsion-submodule}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion}
+  \leanok
 
   The subset $\Gamma_{(a)}(M)$ contains zero and is closed under addition and
   scalar multiplication.
@@ -9161,10 +9195,19 @@ correction explicit before it is sheafified and glued.
   submodule axioms.
 \end{proof}
 
+\begin{remark}
+  \leanok
+  In Lean these closure properties are discharged by the definition:
+  \texttt{\detokenize{Submodule.powTorsion}} is defined as
+  \texttt{\detokenize{Submodule.torsion'}} at
+  \texttt{\detokenize{Submonoid.powers}}, which is already submodule-valued.
+\end{remark}
+
 \begin{lemma}[Membership in power torsion]
   \label{lemma:nagata-mem-power-torsion}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.mem_powTorsion_iff}
+  \leanok
 
   One has
   \[
@@ -9180,6 +9223,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   By the set-builder equality in \Cref{def:nagata-power-torsion}, the
   membership predicate is
   \[
@@ -9196,7 +9240,9 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Power torsion as a localization kernel]
   \label{lemma:nagata-power-torsion-kernel-localization}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion_eq_ker_localization,
+    Submodule.torsion'_eq_ker}
+  \leanok
 
   Put $M_a:=S_a^{-1}M$ and let
   $\ell_{M,a}\colon M\to M_a$, $m\mapsto m/1$, be the localization map.
@@ -9213,6 +9259,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   For $m\in M$, the zero criterion for the localization $S_a^{-1}M$ is
   \[
   \begin{aligned}
@@ -9239,7 +9286,9 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Localization of power torsion]
   \label{lemma:nagata-power-torsion-localization}
-  \lean{}
+  \lean{Submodule.localized'_powTorsion,
+    Submodule.localized'_torsion'}
+  \leanok
 
   Let $s\in R$, put $S_s=\{s^n\mid n\in\mathbf N\}$, and write
   $M_s=S_s^{-1}M$.  For a submodule $N\subseteq M$, write
@@ -9252,6 +9301,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-power-torsion-kernel-localization}
+  \leanok
   Let
   \[
     \ell_{M,a}\colon M\to M_a,
@@ -9321,13 +9371,16 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[The power-torsion quotient has no exceptional torsion]
   \label{lemma:nagata-power-torsion-quotient-torsionfree}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion_quotient_eq_bot,
+    Submodule.isSMulRegular_quotient_powTorsion}
+  \leanok
 
   Multiplication by $a$ on $M/\Gamma_{(a)}(M)$ is injective.  More generally,
   no nonzero class in the quotient is killed by a power of $a$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let
   $q\colon M\to\overline M:=M/\Gamma_{(a)}(M)$ be the quotient map.  Its
   defining identities are
@@ -11480,7 +11533,10 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Strict transform on the preserved open]
   \label{lemma:nagata-strict-transform-over-complement}
-  \lean{}
+  \lean{AlgebraicGeometry.isIso_pullback_fst_strictTransformι,
+    AlgebraicGeometry.isPullback_strictTransformOpen,
+    AlgebraicGeometry.isPullback_strictTransform_over,
+    AlgebraicGeometry.Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap}
 
   Let $f\colon Y\to X$, let
   $\mathcal I\subseteq\mathcal O_X$ be a finite-type quasi-coherent ideal,
@@ -11522,6 +11578,26 @@ correction explicit before it is sheafified and glued.
   \]
   where $\alpha_U\colon X'_U\xrightarrow{\sim}U$ is the isomorphism of
   \Cref{thm:nagata-global-blowup-complement}.
+
+  \paragraph{Formalization.}
+  The Lean side proves the two halves separately.  That nothing is lost over $U$,
+  i.e.\ that the base change of $\iota_{f,\pi}$ to $P_U^{\mathrm{op}}$ is an
+  isomorphism, is
+  \texttt{\detokenize{AlgebraicGeometry.isIso_pullback_fst_strictTransformι}}; it needs
+  no hypothesis at all, since
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.comap_ker_self}} holds for every
+  morphism.  That $P_U^{\mathrm{op}}$ is $Y\times_XU$ is
+  \texttt{\detokenize{AlgebraicGeometry.isPullback_strictTransformOpen}}, under the
+  hypothesis \texttt{\detokenize{IsIso (π ∣_ U)}} replacing the chosen $\alpha_U$.
+  Their combination
+  \texttt{\detokenize{AlgebraicGeometry.isPullback_strictTransform_over}} states the
+  conclusion as a cartesian square over $f$ and $j_U$ rather than as a unique
+  isomorphism $\alpha^{\mathrm{st}}_U$; the two formulations are interchangeable by the
+  universal property of the fibre product, but the identification of
+  $\operatorname{ST}_\pi(Y)\times_{X'}X'_U$ with
+  $\operatorname{ST}_\pi(Y)\times_PP_U^{\mathrm{op}}$ is not carried out in Lean, so this
+  statement is not marked as formalized.  The blow-up specialization is
+  \texttt{\detokenize{Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap}}.
 \end{lemma}
 
 \begin{proof}
@@ -12444,7 +12520,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{definition}[Finite-type extension of an ideal from a quasi-compact open]
   \label{def:nagata-finite-type-ideal-extension}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.FiniteType,
+    AlgebraicGeometry.Scheme.IdealSheafData.FiniteTypeOn}
 
   Let $X$ be quasi-compact and quasi-separated, let
   $\iota\colon W\hookrightarrow X$ be a quasi-compact open immersion, and let
@@ -12472,17 +12549,44 @@ correction explicit before it is sheafified and glued.
       :=\operatorname{ch}(\mathscr E_{X,W}(\mathcal J))
       \subseteq\mathcal O_X.
   \]
+
+  \paragraph{Formalization.}
+  Finite-typeness of an ideal sheaf is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.FiniteType}} (all ideals
+  of sections on affine opens are finitely generated), and its relative form on an open
+  $W$ is \texttt{\detokenize{...IdealSheafData.FiniteTypeOn}}, defined as
+  finite-typeness of the restriction.  No choice operator is applied on the Lean side:
+  the extension is produced in existential form by
+  \texttt{\detokenize{...IdealSheafData.exists_finiteType_comap_eq}}, since
+  $\mathscr E_{X,W}(\mathcal J)$ has no canonical minimal element and every consumer of
+  $\operatorname{Ext}_{X,W}(\mathcal J)$ below only uses the two defining properties.
 \end{definition}
 
 \begin{lemma}[Finite-type ideal extension,
   {\cite[\href{https://stacks.math.columbia.edu/tag/01PF}{Tag 01PF}]{stacks-project}}]
   \label{lemma:nagata-extend-finite-type-ideal}
   \uses{def:nagata-finite-type-ideal-extension}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq,
+    AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq}
 
   The sheaf $\operatorname{Ext}_{X,W}(\mathcal J)$ is a finite type
   quasi-coherent ideal on $X$, and its restriction to $W$ is
   $\mathcal J$.
+
+  \paragraph{Formalization.}
+  The content of the statement, namely
+  $\mathscr E_{X,W}(\mathcal J)\neq\varnothing$, is
+  \texttt{\detokenize{...IdealSheafData.exists_finiteType_comap_eq}}: for $X$
+  quasi-compact and quasi-separated, $W$ a quasi-compact open and
+  $\mathcal J$ of finite type, there exists a finite-type
+  $\mathcal I\subseteq\mathcal O_X$ with
+  $\iota^{-1}\mathcal I\cdot\mathcal O_W=\mathcal J$.  The Lean proof establishes the
+  sharper form \texttt{\detokenize{...IdealSheafData.exists_finiteType_le_comap_eq}},
+  in which $\mathcal I$ is moreover contained in any prescribed ambient ideal sheaf
+  $\mathcal H_0$ restricting to $\mathcal J$ on $W$; this is what the gluing induction
+  needs and what \Cref{def:nagata-extended-admissible-blowup} uses.  Since no choice
+  operator is applied in Lean, the statement is formalized in existential rather than in
+  $\operatorname{Ext}$ form.
 \end{lemma}
 
 \begin{proof}
