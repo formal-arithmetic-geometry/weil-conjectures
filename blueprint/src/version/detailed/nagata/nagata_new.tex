@@ -991,7 +991,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Homogeneous piece of the Rees algebra]
   \label{def:nagata-rees-piece}
   \uses{def:nagata-rees-algebra}
-  \lean{ReesAlgebra.piece}
+  \lean{AlgebraicGeometry.reesGrading}
 
   For $n\in\mathbb N$, let $\mathcal R_A(I)_n$ be the $A$-submodule of Rees
   elements whose underlying polynomial is supported in degree $n$.
@@ -1000,7 +1000,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Membership in one Rees piece]
   \label{lemma:nagata-rees-piece-membership}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.mem_piece_iff}
+  \lean{AlgebraicGeometry.mem_reesGrading_iff_exists}
 
   An element $F\in\mathcal R_A(I)$ lies in $\mathcal R_A(I)_n$ if and only if
   there is $a\in I^n$ such that the underlying polynomial of $F$ is
@@ -1019,7 +1019,8 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Multiplication of Rees pieces]
   \label{lemma:nagata-rees-piece-mul}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.piece_mul_piece}
+  \lean{AlgebraicGeometry.reesMonomial_mul,
+    AlgebraicGeometry.reesGrading.instGradedMonoid}
 
   Multiplication maps
   \[
@@ -1052,7 +1053,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Reconstruction from homogeneous components]
   \label{lemma:nagata-rees-sum-components}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.sum_components}
+  \lean{AlgebraicGeometry.reesGrading_isInternal}
 
   Every $F\in\mathcal R_A(I)$ is the finite sum of the monomials
   $F_nt^n$ regarded as elements of $\mathcal R_A(I)_n$.
@@ -1068,7 +1069,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Uniqueness of the homogeneous decomposition]
   \label{lemma:nagata-rees-components-unique}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.components_unique}
+  \lean{AlgebraicGeometry.reesGrading_isInternal}
 
   Let $E$ be a finite set of pairwise distinct degrees and choose one element
   $F_n\in\mathcal R_A(I)_n$ for each $n\in E$.  If
@@ -1085,7 +1086,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Graded-ring structure on the Rees algebra]
   \label{prop:nagata-rees-graded}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.instGradedRingPiece}
+  \lean{AlgebraicGeometry.reesGrading.instGradedRing}
 
   The family $n\mapsto\mathcal R_A(I)_n$ defines an
   $\mathbb N$-graded-ring structure on $\mathcal R_A(I)$.
@@ -1103,7 +1104,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[The degree-zero piece]
   \label{lemma:nagata-rees-degree-zero}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.pieceZeroEquiv}
+  \lean{AlgebraicGeometry.reesGradingZero}
 
   Taking the constant coefficient gives a ring equivalence
   \[
@@ -1162,7 +1163,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Affine blow-up]
   \label{def:nagata-affine-blowup}
   \uses{def:nagata-rees-algebra,def:nagata-affine-proj}
-  \lean{AlgebraicGeometry.affineBlowup}
+  \lean{AlgebraicGeometry.AffineBlowup, AlgebraicGeometry.AffineBlowup.toSpec}
 
   For an ideal $I\subseteq A$, define
   \[
@@ -1348,7 +1349,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Blow-up of the unit ideal]
   \label{lemma:nagata-affine-blowup-top}
   \uses{def:nagata-affine-blowup}
-  \lean{AlgebraicGeometry.affineBlowup_top_iso}
+  \lean{AlgebraicGeometry.AffineBlowup.isIso_toSpec_of_eq_top}
 
   The blow-up of $\operatorname{Spec}(A)$ in the unit ideal is canonically
   isomorphic to $\operatorname{Spec}(A)$ over $\operatorname{Spec}(A)$.
@@ -1380,7 +1381,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Localization commutes with powers of an ideal]
   \label{lemma:nagata-localization-ideal-pow}
-  \lean{Ideal.map_localization_pow}
+  \lean{Ideal.map_pow}
 
   Let $s\in A$.  For every $n$ there is a canonical equality
   \[
@@ -1596,7 +1597,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[Local blow-up model on an affine open]
   \label{def:nagata-global-blowup-local-model}
   \uses{def:nagata-affine-blowup}
-  \lean{Scheme.IdealSheafData.localBlowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}
 
   Let $\mathcal I\subseteq\mathcal O_X$ be quasi-coherent and let
   $V=\operatorname{Spec}(A)\subseteq X$ be affine.  Put
@@ -1735,7 +1736,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{def:nagata-global-blowup}
   \uses{def:nagata-global-blowup-glue-data,
     lemma:nagata-global-blowup-glue-data-valid}
-  \lean{Scheme.IdealSheafData.blowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowup}
 
   Let $\operatorname{Bl}_{\mathcal I}(X)$ be the scheme produced by applying
   \texttt{AlgebraicGeometry.Scheme.GlueData.glued} to the valid datum of
@@ -1745,7 +1746,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Compatibility of the local structure maps]
   \label{lemma:nagata-global-blowup-local-maps-agree}
   \uses{def:nagata-global-blowup-overlap-basic-map}
-  \lean{Scheme.IdealSheafData.localBlowupMap_compatible}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupι_blowupMap}
 
   On every overlap, the two local structure maps to $X$ agree after applying
   the constructed overlap map $\omega_{ij}$.
@@ -1764,7 +1765,7 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-global-blowup,
     def:nagata-global-blowup-local-model,
     lemma:nagata-global-blowup-local-maps-agree}
-  \lean{Scheme.IdealSheafData.blowupMap}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupMap}
 
   Define
   \[
@@ -1780,7 +1781,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{def:nagata-global-blowup-affine-restriction-map}
   \uses{def:nagata-global-blowup-map,
     def:nagata-global-blowup-local-model}
-  \lean{Scheme.IdealSheafData.preimageAffineMap}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupMap_preimage}
 
   If $V=\operatorname{Spec}(A)\subseteq X$ and $I_V$ represents
   $\mathcal I|_V$, define
@@ -1795,7 +1796,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{proposition}[Affine restriction of the global blow-up]
   \label{prop:nagata-global-blowup-affine-restrict}
   \uses{def:nagata-global-blowup-affine-restriction-map}
-  \lean{Scheme.IdealSheafData.preimageAffineIso}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupι}
 
   The constructed comparison $q_V$ is an isomorphism over $V$.
 \end{proposition}
@@ -1851,7 +1852,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[The center ideal is the unit ideal off its support]
   \label{lemma:nagata-ideal-unit-off-support}
-  \lean{Scheme.IdealSheafData.restrict_compl_support_eq_top}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.ideal_eq_top_of_disjoint_support}
 
   If $Z=V(\mathcal I)$ and $U=X\setminus Z$, then
   $\mathcal I|_U=\mathcal O_U$.
@@ -1886,7 +1887,8 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{theorem}[Complement of the center]
   \label{thm:nagata-global-blowup-complement}
-  \lean{Scheme.IdealSheafData.blowup_compl_support_iso}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict,
+    AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict_support_compl}
 
   Let $U=X\setminus V(\mathcal I)$.  The restriction
   \[
