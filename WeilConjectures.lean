@@ -35,6 +35,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Derivabi
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
@@ -68,6 +69,7 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocali
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
+public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Derived
