@@ -216,8 +216,8 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
   have hπ : Function.Surjective π := fun k ↦ ⟨MvPolynomial.X k, MvPolynomial.eval₂Hom_X' _ _ _⟩
   let p : Spec (CommRingCat.of P) ⟶ X :=
     Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, V) P)) ≫ hV.isoSpec.inv ≫ V.ι
-  haveI hpflat : Flat p := by
-    haveI : Flat (Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, V) P))) :=
+  have hpflat : Flat p := by
+    have : Flat (Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, V) P))) :=
       Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
     infer_instance
   have hi₁p : Spec.map (CommRingCat.ofHom π) ≫ p = i₁ := by
@@ -227,13 +227,13 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       show π.comp (algebraMap ↥Γ(X, V) P) = φ.hom from
         MvPolynomial.eval₂Hom_comp_C _ _, CommRingCat.ofHom_hom, hφ]
   -- Step 3: the valuation probe through `U ×_X Spec P ⟶ Spec P`.
-  haveI : QuasiCompact (pullback.snd h p) := MorphismProperty.pullback_snd _ _ inferInstance
+  have : QuasiCompact (pullback.snd h p) := MorphismProperty.pullback_snd _ _ inferInstance
   obtain ⟨pr⟩ := nonempty_valuationProbe (pullback.snd h p)
     (Spec.map (CommRingCat.ofHom π) (closedPoint (CommRingCat.of K)))
   -- Step 4: replace the abstract probe valuation ring by its image in `pr.K`.
   let VA' : ValuationSubring pr.K := fractionValuationSubring pr.R pr.K
   let e' : pr.R ≃+* ↥VA' := fractionValuationSubringEquiv pr.R pr.K
-  haveI : IsLocalHom (e' : pr.R →+* ↥VA') := ⟨fun a ha ↦ by
+  have : IsLocalHom (e' : pr.R →+* ↥VA') := ⟨fun a ha ↦ by
     simpa using ha.map e'.symm.toRingHom⟩
   let αV : Spec (CommRingCat.of ↥VA') ⟶ Spec (CommRingCat.of P) :=
     Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA')) ≫ pr.α
@@ -266,8 +266,7 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       simp only [CommRingCat.hom_ofHom]
       rw [ha]
       exact zero_mem _
-    rw [← hclosed, ← hρ] at hmem
-    rw [PrimeSpectrum.mem_zeroLocus, Set.singleton_subset_iff] at hmem
+    rw [← hclosed, ← hρ, PrimeSpectrum.mem_zeroLocus, Set.singleton_subset_iff] at hmem
     exact hmem
   let τ : K →+* ResidueField ↥VA' :=
     (Ideal.Quotient.lift (RingHom.ker π) ((residue ↥VA').comp ρ.hom)
@@ -313,8 +312,7 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       congrArg (fun (g : R ⟶ CommRingCat.of K) ↦ g.hom r) hπpre
     have h4 : algebraMap A K (ψ.hom r) ∈ VA := ⟨ψ.hom r, rfl⟩
     rw [← hA''] at h4
-    rw [h2, h3]
-    exact h4
+    rwa [h2, h3]
   let γ : ↥R →+* ↥C := ((algebraMap ↥VA' pr.K).comp θ).codRestrict C.toSubring
     (fun r ↦ (VA'.mem_comapResidue A'').mpr ⟨(θ r).2, hθmem r⟩)
   -- the two basic compatibilities of `γ` and `θ` at the level of `Spec`
@@ -364,9 +362,9 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
           show ιC.comp γ = θ from by ext r; rfl, hθspec]
     rw [h2, ← h1]
   -- Step 9: restrict `gC` along the closed immersion `Spec A'' ⟶ Spec C`.
-  haveI : ValuationRing ↥A''.toSubring := inferInstanceAs (ValuationRing ↥A'')
-  haveI : IsDomain ↥A''.toSubring := inferInstanceAs (IsDomain ↥A'')
-  haveI : IsLocalRing ↥A''.toSubring := inferInstanceAs (IsLocalRing ↥A'')
+  have : ValuationRing ↥A''.toSubring := inferInstanceAs (ValuationRing ↥A'')
+  have : IsDomain ↥A''.toSubring := inferInstanceAs (IsDomain ↥A'')
+  have : IsLocalRing ↥A''.toSubring := inferInstanceAs (IsLocalRing ↥A'')
   let rr : ↥C →+* ↥A''.toSubring := VA'.residueRestrict A''
   let g'' : Spec (CommRingCat.of ↥A''.toSubring) ⟶ X := Spec.map (CommRingCat.ofHom rr) ≫ gC
   -- Identity (I): the generic point of `Spec A''` recovers the base change of `i₁`
@@ -387,12 +385,12 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
   -- opaque so that unification does not unfold it.
   clear_value rr g'' γ θ pre ψ τ ρ αV e' VA'
   -- The closed point of `Spec A''` maps to a specialization of the `K`-point.
-  haveI hτlocal : IsLocalHom τ := ⟨fun a ha ↦ by
+  have hτlocal : IsLocalHom τ := ⟨fun a ha ↦ by
     by_contra hna
     rw [isUnit_iff_ne_zero, not_not] at hna
     rw [hna, map_zero] at ha
     exact ha.ne_zero rfl⟩
-  haveI : IsLocalHom (CommRingCat.ofHom τ).hom := hτlocal
+  have : IsLocalHom (CommRingCat.ofHom τ).hom := hτlocal
   have hgen : g'' ((Spec.map (CommRingCat.ofHom A''.toSubring.subtype))
       (closedPoint (ResidueField ↥VA'))) = i₁ (closedPoint (CommRingCat.of K)) :=
     calc g'' ((Spec.map (CommRingCat.ofHom A''.toSubring.subtype))
@@ -428,7 +426,7 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       _ = i₁ := Scheme.Spec_stalkClosedPointTo_fromSpecStalk i₁
   clear_value κ
   -- The master identity: `τ ∘ κ` is the closed-point stalk map of `g''`.
-  haveI hpre : IsPreimmersion (X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) :=
+  have hpre : IsPreimmersion (X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) :=
     inferInstance
   have hMspec : Spec.map (κ ≫ CommRingCat.ofHom τ) ≫
         X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring)) =
@@ -525,7 +523,7 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
         _ = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ Spec.map ψ :=
             congrArg (Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ ·) hψ.symm
         _ = Spec.map (ψ ≫ CommRingCat.ofHom (algebraMap A K)) := (Spec.map_comp _ _).symm
-    haveI : Mono (CommRingCat.ofHom (algebraMap A K)) :=
+    have : Mono (CommRingCat.ofHom (algebraMap A K)) :=
       (ConcreteCategory.mono_iff_injective_of_preservesPullback _).mpr
         (IsFractionRing.injective A K)
     have h2 : Spec.preimage
@@ -573,7 +571,7 @@ theorem universallyClosed_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)
   -- The factor map through the scheme-theoretic image is scheme-theoretically
   -- dominant: its kernel vanishes on the affine cover of the image pulled back from
   -- `X`, where the section map is injective by `Scheme.Hom.toImage_app_injective`.
-  haveI : IsSchemeTheoreticallyDominant h.toImage := by
+  have : IsSchemeTheoreticallyDominant h.toImage := by
     refine ⟨Scheme.IdealSheafData.ext_of_iSup_eq_top
       (fun U : X.affineOpens ↦ ⟨h.imageι ⁻¹ᵁ U.1, U.2.preimage h.imageι⟩)
       (h.imageι.iSup_preimage_eq_top (iSup_affineOpens_eq_top X)) fun U ↦ ?_⟩
@@ -606,9 +604,9 @@ theorem universallyClosed_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)
   -- Restrict the image factorization over the chart; the restricted source stays
   -- quasi-compact and scheme-theoretically dominant.
   let W₂ : h.image.Opens := (h.imageι ≫ f) ⁻¹ᵁ VS
-  haveI : QuasiCompact (h.toImage ∣_ W₂) :=
+  have : QuasiCompact (h.toImage ∣_ W₂) :=
     IsZariskiLocalAtTarget.restrict (P := @QuasiCompact) inferInstance W₂
-  haveI : IsSchemeTheoreticallyDominant (h.toImage ∣_ W₂) :=
+  have : IsSchemeTheoreticallyDominant (h.toImage ∣_ W₂) :=
     .of_isPullback (isPullback_morphismRestrict h.toImage W₂).flip
   have hWU : (h.toImage ∣_ W₂) ≫ W₂.ι = (h.toImage ⁻¹ᵁ W₂).ι ≫ h.toImage :=
     morphismRestrict_ι _ _
@@ -809,7 +807,7 @@ theorem isSeparated_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompa
         l ≫ f = sq.i₂) :
     IsSeparated f := by
   constructor
-  haveI : UniversallyClosed (pullback.diagonal f) := by
+  have : UniversallyClosed (pullback.diagonal f) := by
     refine universallyClosed_of_isDominant (pullback.diagonal f) h ?_
     intro sq ηU hηU
     -- A square for the diagonal is a pair of maps to `X` agreeing over `S`; the

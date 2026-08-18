@@ -34,7 +34,7 @@ of the chart maps to a generization. -/
 theorem exists_specializes_of_mem_closure_range {T P : Scheme.{u}} (h : T ⟶ P)
     [QuasiCompact h] [IsAffine P] {z : P} (hz : z ∈ closure (Set.range h)) :
     ∃ t : T, h t ⤳ z := by
-  haveI : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace h
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace h
   -- a finite affine cover of `T`
   obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
     (fun V : T.affineOpens ↦ (V.1 : Set T)) (fun V ↦ V.1.isOpen) (by
@@ -84,10 +84,10 @@ theorem exists_specializes_of_mem_closure_range {T P : Scheme.{u}} (h : T ⟶ P)
     rw [h1] at hz2
     exact (PrimeSpectrum.mem_zeroLocus _ _).mp hz2
   -- choose a prime of the chart ring contracting into the prime of `z'` (Stacks 00FK)
-  haveI := z'.2
+  have := z'.2
   obtain ⟨q, -, hq_prime, hq_le⟩ := Ideal.exists_ideal_comap_le_prime (f := φ.hom)
     z'.asIdeal (⊥ : Ideal Γ(T, V₀.1)) (by rwa [← RingHom.ker_eq_comap_bot])
-  haveI := hq_prime
+  have := hq_prime
   refine ⟨V₀.2.fromSpec ⟨q, hq_prime⟩, ?_⟩
   -- the lifted point maps to the contraction of `q` in the spectrum
   have hgq : P.isoSpec.hom (h (V₀.2.fromSpec ⟨q, hq_prime⟩)) =

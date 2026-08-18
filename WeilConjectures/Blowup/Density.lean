@@ -85,7 +85,7 @@ theorem IsEffectiveCartier.isSchemeTheoreticallyDominant_compl_support
     refine Function.Injective.comp ?_ ?_
     · have hiso : IsIso (Y.presheaf.map (eqToHom himg).op) := inferInstance
       exact ((ConcreteCategory.isIso_iff_bijective _).mp hiso).1
-    · haveI := (V x).2.isLocalization_basicOpen (a x)
+    · have := (V x).2.isLocalization_basicOpen (a x)
       have halg : algebraMap Γ(Y, (V x).1) Γ(Y, Y.basicOpen (a x)) =
           (Y.presheaf.map (homOfLE (Y.basicOpen_le (a x))).op).hom :=
         RingHom.algebraMap_toAlgebra _
@@ -116,7 +116,7 @@ variable {X : Scheme.{u}} {U : X.Opens} (B : AdmissibleBlowup X U)
 /-- A `U`-admissible blow-up is an isomorphism over the complement of the center. -/
 theorem isIso_π_restrict_preservedOpen : IsIso (B.π ∣_ B.preservedOpen) := by
   rw [← B.iso_π, morphismRestrict_comp]
-  haveI : IsIso (B.I.blowupMap ∣_ B.preservedOpen) :=
+  have : IsIso (B.I.blowupMap ∣_ B.preservedOpen) :=
     B.I.isIso_blowupMap_restrict_support_compl
   infer_instance
 
@@ -124,7 +124,7 @@ theorem isIso_π_restrict_preservedOpen : IsIso (B.π ∣_ B.preservedOpen) := b
 is scheme-theoretically dense in the total space. -/
 theorem isSchemeTheoreticallyDominant_preimage_preservedOpen_ι :
     IsSchemeTheoreticallyDominant (B.π ⁻¹ᵁ B.preservedOpen).ι := by
-  haveI := B.I.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
+  have := B.I.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
   have he : B.π ⁻¹ᵁ B.preservedOpen =
       B.iso.hom ⁻¹ᵁ (B.I.blowupMap ⁻¹ᵁ B.I.support.compl) := by
     rw [← Scheme.Hom.comp_preimage, B.iso_π]
@@ -138,15 +138,15 @@ under any `U`-admissible blow-up is scheme-theoretically dense in the total spac
 theorem isSchemeTheoreticallyDominant_preimage_ι [QuasiCompact U.ι]
     [IsSchemeTheoreticallyDominant U.ι] :
     IsSchemeTheoreticallyDominant (B.π ⁻¹ᵁ U).ι := by
-  haveI := B.isSchemeTheoreticallyDominant_preimage_preservedOpen_ι
+  have := B.isSchemeTheoreticallyDominant_preimage_preservedOpen_ι
   exact .preimage_ι_of_le B.π B.le_preservedOpen B.isIso_π_restrict_preservedOpen
 
 /-- The blown-up scheme of an admissible blow-up of a Noetherian scheme is
 Noetherian. -/
 theorem isNoetherian_X' [IsNoetherian X] : IsNoetherian B.X' := by
-  haveI := B.isProper_π
-  haveI : IsLocallyNoetherian B.X' := LocallyOfFiniteType.isLocallyNoetherian B.π
-  haveI : CompactSpace B.X' := QuasiCompact.compactSpace_of_compactSpace B.π
+  have := B.isProper_π
+  have : IsLocallyNoetherian B.X' := LocallyOfFiniteType.isLocallyNoetherian B.π
+  have : CompactSpace B.X' := QuasiCompact.compactSpace_of_compactSpace B.π
   exact ⟨⟩
 
 /-- **Topological density transports through an admissible blow-up**: the inverse
@@ -155,17 +155,17 @@ The preimage of the complement of the center is scheme-theoretically, hence
 topologically, dense, and the blow-up is an isomorphism there. -/
 theorem dense_preimage [IsNoetherian X] {D : Set X} (hD : Dense D) :
     Dense (B.π ⁻¹' D) := by
-  haveI : IsNoetherian B.X' := B.isNoetherian_X'
-  haveI : CompactSpace (B.π ⁻¹ᵁ B.preservedOpen).toScheme :=
+  have : IsNoetherian B.X' := B.isNoetherian_X'
+  have : CompactSpace (B.π ⁻¹ᵁ B.preservedOpen).toScheme :=
     isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
-  haveI : IsNoetherian (B.π ⁻¹ᵁ B.preservedOpen).toScheme := ⟨⟩
+  have : IsNoetherian (B.π ⁻¹ᵁ B.preservedOpen).toScheme := ⟨⟩
   -- the preimage of the preserved open is (scheme-theoretically, hence) dense
   have hPd : Dense ((B.π ⁻¹ᵁ B.preservedOpen : B.X'.Opens) : Set B.X') := by
-    haveI := B.isSchemeTheoreticallyDominant_preimage_preservedOpen_ι
+    have := B.isSchemeTheoreticallyDominant_preimage_preservedOpen_ι
     have hdr : DenseRange (B.π ⁻¹ᵁ B.preservedOpen).ι :=
       Scheme.Hom.denseRange (B.π ⁻¹ᵁ B.preservedOpen).ι
     rwa [DenseRange, Scheme.Opens.range_ι] at hdr
-  haveI hiso : IsIso (B.π ∣_ B.preservedOpen) := B.isIso_π_restrict_preservedOpen
+  have hiso : IsIso (B.π ∣_ B.preservedOpen) := B.isIso_π_restrict_preservedOpen
   rw [dense_iff_inter_open]
   rintro O' hO' hne
   -- `O'` meets the dense preimage of the preserved open

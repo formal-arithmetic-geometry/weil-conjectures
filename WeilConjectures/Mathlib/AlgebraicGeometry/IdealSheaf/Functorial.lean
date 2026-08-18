@@ -51,7 +51,7 @@ variable (A K : Type u) [CommRing A] [IsDomain A] [Field K] [Algebra A K]
 scheme-theoretically dominant. -/
 instance : IsSchemeTheoreticallyDominant
     (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
-  haveI : IsDominant (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
+  have : IsDominant (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
     constructor
     change DenseRange (PrimeSpectrum.comap (algebraMap A K))
     rw [PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical,

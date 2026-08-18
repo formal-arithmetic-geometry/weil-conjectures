@@ -139,12 +139,10 @@ lemma IsZariskiLocalAtSource.pushoutDesc {P : MorphismProperty Scheme.{u}}
   cases i with
   | left =>
     change P (pushout.inl f g ≫ pushout.desc h k w)
-    rw [pushout.inl_desc]
-    exact hh
+    rwa [pushout.inl_desc]
   | right =>
     change P (pushout.inr f g ≫ pushout.desc h k w)
-    rw [pushout.inr_desc]
-    exact hk
+    rwa [pushout.inr_desc]
 
 /-- **Separatedness of a gluing of two schemes along a common open**: let `h : X ⟶ S`
 and `k : Y ⟶ S` be separated morphisms restricting to the same morphism on a common
@@ -156,10 +154,10 @@ theorem IsSeparated.pushoutDesc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     (w : f ≫ h = g ≫ k) [IsSeparated h] [IsSeparated k]
     (hd : IsClosedImmersion (pullback.lift f g w)) :
     IsSeparated (pushout.desc h k w) := by
-  haveI h₁ : IsSeparated (pushout.inl f g ≫ pushout.desc h k w) := by
+  have h₁ : IsSeparated (pushout.inl f g ≫ pushout.desc h k w) := by
     rw [pushout.inl_desc]
     infer_instance
-  haveI h₂ : IsSeparated (pushout.inr f g ≫ pushout.desc h k w) := by
+  have h₂ : IsSeparated (pushout.inr f g ≫ pushout.desc h k w) := by
     rw [pushout.inr_desc]
     infer_instance
   refine IsSeparated.of_two_open_cover (pushout.desc h k w) (pushout.inl f g)
@@ -176,7 +174,7 @@ theorem IsSeparated.pushoutDesc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     · simp only [Category.assoc, pullback.congrHom_inv, pullback.lift_snd,
         Category.comp_id, hp.isoPullback_inv_snd]
   rw [heq]
-  haveI := hd
+  have := hd
   infer_instance
 
 end AlgebraicGeometry

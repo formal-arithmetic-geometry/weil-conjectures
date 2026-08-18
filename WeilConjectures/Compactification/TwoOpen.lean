@@ -161,9 +161,9 @@ lemma graph_snd : σ.graph ≫ pullback.snd u σ.s = σ.V.ι := pullback.lift_sn
 /-- The graph of the proper extension is proper; in particular its range is closed.
 (Blueprint: `lemma:nagata-proper-extension-graph-closed`.) -/
 theorem isProper_graph : IsProper σ.graph := by
-  haveI := σ.isProper_ψ
-  haveI := σ.isProper_s
-  haveI : IsProper (σ.graph ≫ pullback.fst u σ.s) := by
+  have := σ.isProper_ψ
+  have := σ.isProper_s
+  have : IsProper (σ.graph ≫ pullback.fst u σ.s) := by
     rw [σ.graph_fst]
     exact σ.isProper_ψ
   exact IsProper.of_comp σ.graph (pullback.fst u σ.s)
@@ -219,13 +219,13 @@ lemma intermediateGraph_openι :
 through the embedded copy of `O` exactly over `O` (`TwoOpenSide.range_υ`). -/
 theorem isClosedImmersion_intermediateGraph :
     IsClosedImmersion σ.intermediateGraph := by
-  haveI := σ.isOpenImmersion_υ
-  haveI hprop := σ.isProper_graph
+  have := σ.isOpenImmersion_υ
+  have hprop := σ.isProper_graph
   -- the overlap map is an immersion since its first projection is an open immersion
-  haveI : IsImmersion (σ.intermediateGraph ≫ pullback.fst u (σ.interior.ι ≫ σ.s)) := by
+  have : IsImmersion (σ.intermediateGraph ≫ pullback.fst u (σ.interior.ι ≫ σ.s)) := by
     rw [σ.intermediateGraph_fst]
     infer_instance
-  haveI : IsImmersion σ.intermediateGraph :=
+  have : IsImmersion σ.intermediateGraph :=
     IsImmersion.of_comp σ.intermediateGraph (pullback.fst u (σ.interior.ι ≫ σ.s))
   refine IsClosedImmersion.of_isPreimmersion _ ?_
   -- the range is the preimage of the closed range of the proper graph
@@ -277,8 +277,8 @@ section Structure
 `lemma:nagata-intermediate-separated`): the two charts of `Wᵢ ⟶ S` are separated and
 their overlap is a closed immersion. -/
 theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediateHom := by
-  haveI := σ.isProper_s
-  haveI : IsSeparated (σ.interior.ι ≫ σ.s) := inferInstance
+  have := σ.isProper_s
+  have : IsSeparated (σ.interior.ι ≫ σ.s) := inferInstance
   exact IsSeparated.pushoutDesc O.ι σ.interiorEmb σ.interiorEmb_comm
     σ.isClosedImmersion_intermediateGraph
 
@@ -286,26 +286,26 @@ theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediat
 `lemma:nagata-intermediate-separated`, finite-type part). -/
 theorem locallyOfFiniteType_intermediateHom [LocallyOfFiniteType u] :
     LocallyOfFiniteType σ.intermediateHom := by
-  haveI := σ.isProper_s
+  have := σ.isProper_s
   exact IsZariskiLocalAtSource.pushoutDesc O.ι σ.interiorEmb σ.interiorEmb_comm
     inferInstance inferInstance
 
 /-- The intermediate scheme of a side over a Noetherian base is quasi-compact. -/
 theorem compactSpace_intermediate [IsNoetherian S] [QuasiCompact u] :
     CompactSpace σ.intermediate := by
-  haveI : IsNoetherian σ.X := σ.isNoetherian_X
-  haveI : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
-  haveI : CompactSpace σ.interior.toScheme :=
+  have : IsNoetherian σ.X := σ.isNoetherian_X
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
+  have : CompactSpace σ.interior.toScheme :=
     isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
   exact inferInstanceAs (CompactSpace ↑(pushout O.ι σ.interiorEmb))
 
 /-- The intermediate scheme of a side over a Noetherian base is Noetherian. -/
 theorem isNoetherian_intermediate [IsNoetherian S] [LocallyOfFiniteType u]
     [QuasiCompact u] : IsNoetherian σ.intermediate := by
-  haveI : IsLocallyNoetherian σ.intermediate := by
-    haveI := σ.locallyOfFiniteType_intermediateHom
+  have : IsLocallyNoetherian σ.intermediate := by
+    have := σ.locallyOfFiniteType_intermediateHom
     exact LocallyOfFiniteType.isLocallyNoetherian σ.intermediateHom
-  haveI := σ.compactSpace_intermediate
+  have := σ.compactSpace_intermediate
   exact ⟨⟩
 
 end Structure
@@ -334,35 +334,35 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     [HasCompactification (O₁.ι ≫ u)] [HasCompactification (O₂.ι ≫ u)] :
     HasCompactification u := by
   -- basic instances
-  haveI : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian u
-  haveI : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
-  haveI : IsNoetherian U := ⟨⟩
+  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian u
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
+  have : IsNoetherian U := ⟨⟩
   -- the comparison layer: prepared sides with the key boundary disjointness
   obtain ⟨P⟩ := nonempty_twoOpenPreparation u O₁ O₂ hcov
-  haveI := P.side₁.isProper_s
-  haveI := P.side₂.isProper_s
+  have := P.side₁.isProper_s
+  have := P.side₂.isProper_s
   -- the two intermediate schemes are separated, of finite type and Noetherian
-  haveI : IsSeparated P.side₁.intermediateHom := P.side₁.isSeparated_intermediateHom
-  haveI : IsSeparated P.side₂.intermediateHom := P.side₂.isSeparated_intermediateHom
-  haveI : LocallyOfFiniteType P.side₁.intermediateHom :=
+  have : IsSeparated P.side₁.intermediateHom := P.side₁.isSeparated_intermediateHom
+  have : IsSeparated P.side₂.intermediateHom := P.side₂.isSeparated_intermediateHom
+  have : LocallyOfFiniteType P.side₁.intermediateHom :=
     P.side₁.locallyOfFiniteType_intermediateHom
-  haveI : LocallyOfFiniteType P.side₂.intermediateHom :=
+  have : LocallyOfFiniteType P.side₂.intermediateHom :=
     P.side₂.locallyOfFiniteType_intermediateHom
-  haveI : IsNoetherian P.side₁.intermediate := P.side₁.isNoetherian_intermediate
-  haveI : IsNoetherian P.side₂.intermediate := P.side₂.isNoetherian_intermediate
+  have : IsNoetherian P.side₁.intermediate := P.side₁.isNoetherian_intermediate
+  have : IsNoetherian P.side₂.intermediate := P.side₂.isNoetherian_intermediate
   -- the common modification of the two intermediate schemes (Stacks 0F3X)
   obtain ⟨cm⟩ := exists_commonModification u P.side₁.intermediateHom
     P.side₂.intermediateHom P.side₁.intermediateU P.side₂.intermediateU
     P.side₁.intermediateU_hom P.side₂.intermediateU_hom
   -- the open immersion of `U` into the glued scheme
-  haveI hu₁OI : IsOpenImmersion cm.u₁ :=
+  have hu₁OI : IsOpenImmersion cm.u₁ :=
     isOpenImmersion_of_comp_of_isIso_restrict cm.u₁ cm.B₁.π P.side₁.intermediateU
       cm.u₁_π cm.B₁.isIso_π_restrict
-  haveI hu₂OI : IsOpenImmersion cm.u₂ :=
+  have hu₂OI : IsOpenImmersion cm.u₂ :=
     isOpenImmersion_of_comp_of_isIso_restrict cm.u₂ cm.B₂.π P.side₂.intermediateU
       cm.u₂_π cm.B₂.isIso_π_restrict
   set jW : U ⟶ cm.W := cm.u₁ ≫ cm.k₁ with hjW_def
-  haveI : IsOpenImmersion jW := inferInstance
+  have : IsOpenImmersion jW := inferInstance
   have hjWu : jW ≫ cm.w = u := by
     rw [hjW_def, Category.assoc, cm.k₁_w, ← Category.assoc, cm.u₁_π,
       P.side₁.intermediateU_hom]
@@ -370,11 +370,11 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
   set h : (O₁ ⊓ O₂ : U.Opens).toScheme ⟶ cm.W := (O₁ ⊓ O₂ : U.Opens).ι ≫ jW with hh_def
   have hhw : h ≫ cm.w = (O₁ ⊓ O₂ : U.Opens).ι ≫ u := by
     rw [hh_def, Category.assoc, hjWu]
-  haveI : CompactSpace (O₁ ⊓ O₂ : U.Opens).toScheme :=
+  have : CompactSpace (O₁ ⊓ O₂ : U.Opens).toScheme :=
     isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
-  haveI : IsNoetherian (O₁ ⊓ O₂ : U.Opens).toScheme := ⟨⟩
-  haveI : QuasiCompact h := inferInstance
-  haveI : QuasiSeparated h := inferInstance
+  have : IsNoetherian (O₁ ⊓ O₂ : U.Opens).toScheme := ⟨⟩
+  have : QuasiCompact h := inferInstance
+  have : QuasiSeparated h := inferInstance
   -- density transport (blueprint: items 46–47): the copies of `U` are dense in the
   -- two modified charts, and `O₁ ∩ O₂` is dense in `U`
   have hdense₁ : Dense (Set.range cm.u₁) := by
@@ -385,7 +385,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     rw [range_eq_preimage_of_comp_of_isIso_restrict cm.u₂ cm.B₂.π
       P.side₂.intermediateU cm.u₂_π cm.B₂.isIso_π_restrict]
     exact cm.B₂.dense_preimage P.side₂.dense_range_intermediateU
-  haveI hdom : IsDominant h := by
+  have hdom : IsDominant h := by
     constructor
     rw [DenseRange, dense_iff_inter_open]
     rintro W₀ hW₀ ⟨w₀, hw₀⟩
@@ -393,22 +393,20 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
         IsOpenImmersion k → Dense (Set.range uu) → uu ≫ k = jW →
         w₀ ∈ Set.range k → (W₀ ∩ Set.range h).Nonempty := by
       intro W' k uu hkOI hdu hglue hw₀k
-      haveI := hkOI
+      have := hkOI
       obtain ⟨b₀, rfl⟩ := hw₀k
       obtain ⟨b, hbW₀, y, rfl⟩ := dense_iff_inter_open.mp hdu (k ⁻¹' W₀)
         (hW₀.preimage k.continuous) ⟨b₀, hw₀⟩
       obtain ⟨d, hdW, hdO⟩ := dense_iff_inter_open.mp hdense (uu ⁻¹' (k ⁻¹' W₀))
         ((hW₀.preimage k.continuous).preimage uu.continuous) ⟨y, hbW₀⟩
       obtain ⟨p, rfl⟩ : d ∈ Set.range (O₁ ⊓ O₂ : U.Opens).ι := by
-        rw [Scheme.Opens.range_ι]
-        exact hdO
+        rwa [Scheme.Opens.range_ι]
       refine ⟨h p, ?_, p, rfl⟩
       have heq : h p = k (uu ((O₁ ⊓ O₂ : U.Opens).ι p)) :=
         calc h p = jW ((O₁ ⊓ O₂ : U.Opens).ι p) := Scheme.Hom.comp_apply _ _ _
           _ = (uu ≫ k) ((O₁ ⊓ O₂ : U.Opens).ι p) := by rw [hglue]
           _ = k (uu ((O₁ ⊓ O₂ : U.Opens).ι p)) := Scheme.Hom.comp_apply _ _ _
-      rw [heq]
-      exact hdW
+      rwa [heq]
     have hw₀cov : w₀ ∈ Set.range cm.k₁ ∪ Set.range cm.k₂ := by
       rw [cm.cover]
       trivial
@@ -417,7 +415,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     · exact chartCase cm.k₂ cm.u₂ inferInstance hdense₂
         (cm.u_glue.symm.trans hjW_def.symm) hw₀k
   -- the dense-source valuative criterion (Stacks 0894): `W ⟶ S` is universally closed
-  haveI huc : UniversallyClosed cm.w := by
+  have huc : UniversallyClosed cm.w := by
     refine ValuativeCriterion.universallyClosed_of_isDominant cm.w h ?_
     rintro ⟨R, K, i₁, i₂, ⟨wsq⟩⟩ ηU hηU
     letI : Field (CommRingCat.of K) := ‹_›
@@ -428,7 +426,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ g =
             ηU ≫ U.homOfLE hle ≫ σ.embX ∧ g ≫ σ.s = i₂ := by
       intro O O' σ hle
-      haveI := σ.isProper_s
+      have := σ.isProper_s
       have hcomm : (ηU ≫ U.homOfLE hle ≫ σ.embX) ≫ σ.s =
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ i₂ := by
         have h1 : (ηU ≫ U.homOfLE hle ≫ σ.embX) ≫ σ.s =
@@ -465,8 +463,8 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
         ∃ l : Spec (CommRingCat.of R) ⟶ cm.W,
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ l = i₁ ∧ l ≫ cm.w = i₂ := by
       intro O O' σ hle B k uu huu hkw hglue g hg hgs hrange
-      haveI := σ.isProper_s
-      haveI := σ.isOpenImmersion_υ
+      have := σ.isProper_s
+      have := σ.isOpenImmersion_υ
       -- corestrict to the complement of the forbidden boundary
       let g₀ : Spec (CommRingCat.of R) ⟶ σ.interior.toScheme :=
         IsOpenImmersion.lift σ.interior.ι g (by rwa [Scheme.Opens.range_ι])
@@ -494,7 +492,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
           simp only [Category.assoc]
         rw [h1, h2, ← σ.intermediate_condition]
         simp only [Scheme.homOfLE_ι_assoc]
-      haveI := B.isProper_π
+      have := B.isProper_π
       have hEB : ValuativeCriterion.Existence B.π := by
         have huc' : (ValuativeCriterion.Existence ⊓ @QuasiCompact) B.π := by
           rw [← UniversallyClosed.eq_valuativeCriterion]
@@ -531,7 +529,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     exact congrArg CommSq.LiftStruct.l
       (@Subsingleton.elim _ huniq ⟨l', hl'.1, hl'.2⟩ ⟨l, hl₁, hl₂⟩)
   -- `W ⟶ S` is proper, and `U ⟶ W` is a quasi-compact open immersion
-  haveI : IsProper cm.w := ⟨⟩
+  have : IsProper cm.w := ⟨⟩
   exact ⟨⟨{ Z := cm.W
             g := cm.w
             i := jW

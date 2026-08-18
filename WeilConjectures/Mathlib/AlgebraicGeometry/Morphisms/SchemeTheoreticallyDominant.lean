@@ -204,7 +204,7 @@ dominant. -/
 theorem IsSchemeTheoreticallyDominant.homOfLE {U W : X.Opens} (h : U ≤ W)
     [QuasiCompact U.ι] [IsSchemeTheoreticallyDominant U.ι] :
     IsSchemeTheoreticallyDominant (X.homOfLE h) := by
-  haveI hd : IsSchemeTheoreticallyDominant (X.homOfLE (inf_le_right : U ⊓ W ≤ W)) :=
+  have hd : IsSchemeTheoreticallyDominant (X.homOfLE (inf_le_right : U ⊓ W ≤ W)) :=
     .of_isPullback (isPullback_opens_inf U W)
   have he : X.homOfLE h =
       (X.isoOfEq (inf_eq_left.mpr h)).inv ≫ X.homOfLE (inf_le_right : U ⊓ W ≤ W) := by
@@ -244,16 +244,17 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
     (hUW : U ≤ W) [QuasiCompact U.ι] [IsSchemeTheoreticallyDominant U.ι]
     (hW : IsIso (f ∣_ W)) [IsSchemeTheoreticallyDominant (f ⁻¹ᵁ W).ι] :
     IsSchemeTheoreticallyDominant (f ⁻¹ᵁ U).ι := by
-  haveI hU : IsIso (f ∣_ U) := isIso_morphismRestrict_of_le f hUW hW
-  haveI := hW
+  have hU : IsIso (f ∣_ U) := isIso_morphismRestrict_of_le f hUW hW
+  have := hW
   have hpre : f ⁻¹ᵁ U ≤ f ⁻¹ᵁ W := f.preimage_mono hUW
   -- the square `(f ∣_ U) ≫ homOfLE hUW = homOfLE hpre ≫ (f ∣_ W)`
   have hsq : X'.homOfLE hpre = (f ∣_ U) ≫ X.homOfLE hUW ≫ inv (f ∣_ W) := by
     rw [eq_comm, ← Category.assoc, IsIso.comp_inv_eq, ← cancel_mono W.ι]
     simp [morphismRestrict_ι, Scheme.homOfLE_ι_assoc, Scheme.homOfLE_ι]
-  haveI : IsSchemeTheoreticallyDominant (X.homOfLE hUW) := .homOfLE hUW
-  haveI : IsSchemeTheoreticallyDominant (X'.homOfLE hpre) := by
-    rw [hsq]; infer_instance
+  have : IsSchemeTheoreticallyDominant (X.homOfLE hUW) := .homOfLE hUW
+  have : IsSchemeTheoreticallyDominant (X'.homOfLE hpre) := by
+    rw [hsq]
+    infer_instance
   have he : (f ⁻¹ᵁ U).ι = X'.homOfLE hpre ≫ (f ⁻¹ᵁ W).ι := (Scheme.homOfLE_ι _ _).symm
   rw [he]
   infer_instance

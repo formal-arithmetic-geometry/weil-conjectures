@@ -161,7 +161,7 @@ theorem schemeImageFlatBaseChange {Y' : Scheme.{u}} (q : Y' ⟶ Y) [Flat q] :
     refine .of_right ?_ (pullback.lift_snd _ _ _) (.of_hasPullback q g.imageι)
     rw [pullback.lift_fst, g.toImage_imageι]
     exact (IsPullback.of_hasPullback g q).flip
-  haveI : IsSchemeTheoreticallyDominant
+  have : IsSchemeTheoreticallyDominant
       (pullback.lift (pullback.snd g q) (pullback.fst g q ≫ g.toImage) w) :=
     .of_isPullback hsq.flip
   rw [← pullback.lift_fst (pullback.snd g q) (pullback.fst g q ≫ g.toImage) w,

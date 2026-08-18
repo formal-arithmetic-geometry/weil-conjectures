@@ -192,8 +192,8 @@ identification with the blow-up of the center.
 (Blueprint: `lemma:nagata-admissible-blowup-over-open`.) -/
 theorem isIso_π_restrict : IsIso (B.π ∣_ U) := by
   rw [← B.iso_π, morphismRestrict_comp]
-  haveI h1 : IsIso (B.iso.hom ∣_ B.I.blowupMap ⁻¹ᵁ U) := inferInstance
-  haveI h2 : IsIso (B.I.blowupMap ∣_ U) :=
+  have h1 : IsIso (B.iso.hom ∣_ B.I.blowupMap ⁻¹ᵁ U) := inferInstance
+  have h2 : IsIso (B.I.blowupMap ∣_ U) :=
     B.I.isIso_blowupMap_restrict B.disjoint_support
   exact IsIso.comp_isIso' h1 h2
 
@@ -268,7 +268,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.IsEffectiveCartier.comap_
     rw [← Scheme.Hom.comp_apply, IsIso.inv_hom_id]
     rfl
   have haff : IsAffineOpen (f ⁻¹ᵁ V.1) := V.2.preimage_of_isOpenImmersion f hle
-  haveI hiso : IsIso (f.appLE V.1 (f ⁻¹ᵁ V.1) le_rfl) := by
+  have hiso : IsIso (f.appLE V.1 (f ⁻¹ᵁ V.1) le_rfl) := by
     rw [← Scheme.Hom.app_eq_appLE]
     exact f.isIso_app V.1 hle
   refine ⟨⟨f ⁻¹ᵁ V.1, haff⟩, hyV, (f.appLE V.1 (f ⁻¹ᵁ V.1) le_rfl).hom a,
@@ -321,10 +321,10 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_of_comap_p
     (L.support : Set X) = (I.support : Set X) ∪ π '' (J.support : Set X₁) := by
   set U₀ : X.Opens := I.support.compl with hU₀def
   -- the blow-up is an isomorphism over the complement of the support of `I`
-  haveI hiso : IsIso (π ∣_ U₀) := by
+  have hiso : IsIso (π ∣_ U₀) := by
     rw [← hg, morphismRestrict_comp]
-    haveI h1 : IsIso (g.hom ∣_ I.blowupMap ⁻¹ᵁ U₀) := inferInstance
-    haveI h2 : IsIso (I.blowupMap ∣_ U₀) := by
+    have h1 : IsIso (g.hom ∣_ I.blowupMap ⁻¹ᵁ U₀) := inferInstance
+    have h2 : IsIso (I.blowupMap ∣_ U₀) := by
       rw [hU₀def]
       exact I.isIso_blowupMap_restrict_support_compl
     exact IsIso.comp_isIso' h1 h2
@@ -347,8 +347,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_of_comap_p
     refine Or.inr ?_
     -- lift `z` through the isomorphism over the complement of `supp I`
     obtain ⟨z', rfl⟩ : z ∈ Set.range U₀.ι := by
-      rw [Scheme.Opens.range_ι, hU₀def]
-      exact hzI
+      rwa [Scheme.Opens.range_ι, hU₀def]
     have hstep : (π ∣_ U₀) (inv (π ∣_ U₀) z') = z' := by
       rw [← Scheme.Hom.comp_apply, IsIso.inv_hom_id]
       rfl
@@ -359,8 +358,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_of_comap_p
         _ = U₀.ι ((π ∣_ U₀) (inv (π ∣_ U₀) z')) := Scheme.Hom.comp_apply _ _ _
         _ = U₀.ι z' := by rw [hstep]
     have hx₁L : (π ⁻¹ᵁ U₀).ι (inv (π ∣_ U₀) z') ∈ π ⁻¹' (L.support : Set X) := by
-      rw [Set.mem_preimage, hπx₁]
-      exact hz
+      rwa [Set.mem_preimage, hπx₁]
     rw [hsupp₁] at hx₁L
     rcases hx₁L with hx₁I | hx₁J
     · exact absurd (by rw [← hπx₁]; exact hx₁I) hzI
@@ -446,8 +444,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
   have hECc : ((I * L).comap c).IsEffectiveCartier :=
     (I * L).extendedToBlowup_isEffectiveCartier
   have hprod : ((I.comap c) * (L.comap c)).IsEffectiveCartier := by
-    rw [← Scheme.IdealSheafData.comap_mul]
-    exact hECc
+    rwa [← Scheme.IdealSheafData.comap_mul]
   have hIc : (I.comap c).IsEffectiveCartier :=
     Scheme.IdealSheafData.IsEffectiveCartier.of_mul_left hprod
   have hLc : (L.comap c).IsEffectiveCartier :=
@@ -460,8 +457,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
   have hLβ : ((L.comap π).comap (β₀ ≫ g.inv)).IsEffectiveCartier := by
     have h6 : (L.comap π).comap (β₀ ≫ g.inv) = L.comap c := by
       rw [← Scheme.IdealSheafData.comap_comp, hβπ]
-    rw [h6]
-    exact hLc
+    rwa [h6]
   obtain ⟨γ, hγ⟩ := (L.comap π).exists_lift_blowup hLβ
   -- Step 4: the two composites are identities, by uniqueness of lifts
   have hγα : γ ≫ α = 𝟙 (I * L).blowup := by
@@ -469,8 +465,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
     rw [Category.assoc, hα, ← Category.assoc, hγ, hβπ]
   have hαβ₀ : α ≫ β₀ = q ≫ g.hom := by
     have hEρ : (I.comap (q ≫ π)).IsEffectiveCartier := by
-      rw [Scheme.IdealSheafData.comap_comp]
-      exact hE3
+      rwa [Scheme.IdealSheafData.comap_comp]
     refine I.hom_ext_of_isEffectiveCartier_comap hEρ ?_ ?_
     · rw [Category.assoc, hβ₀, hα]
     · rw [Category.assoc, hg]
@@ -509,8 +504,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_isEffec
   have hMcm : (M.comap (C * M).blowupMap).IsEffectiveCartier := by
     refine Scheme.IdealSheafData.IsEffectiveCartier.of_mul_right
       (K₁ := C.comap (C * M).blowupMap) ?_
-    rw [← Scheme.IdealSheafData.comap_mul]
-    exact hECcm
+    rwa [← Scheme.IdealSheafData.comap_mul]
   obtain ⟨β, hβ⟩ := M.exists_lift_blowup hMcm
   -- the two composites are identities, by uniqueness of lifts
   have hβα : β ≫ α = 𝟙 (C * M).blowup := by
@@ -610,7 +604,7 @@ theorem exists_comp [CompactSpace X] [QuasiSeparatedSpace X] (_hU : IsCompact (U
       = e'.hom ≫ (B₂.iso.inv ≫ B₂.π) ≫ B₁.π := by
         simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
     _ = e'.hom ≫ B₂.I.blowupMap ≫ B₁.π := by rw [h2]
-    _ = (AdmissibleBlowup.ofIdeal K hKft hdisj).π := by rw [ofIdeal_π]; exact he'
+    _ = (AdmissibleBlowup.ofIdeal K hKft hdisj).π := by rwa [ofIdeal_π]
 
 end AdmissibleBlowup
 
@@ -625,7 +619,7 @@ theorem _root_.AlgebraicGeometry.Scheme.exists_finiteType_ideal_zeroLocus_compl_
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U : X.Opens)
     (hU : IsCompact (U : Set X)) :
     ∃ I : X.IdealSheafData, I.FiniteType ∧ (I.support : Set X) = (U : Set X)ᶜ := by
-  haveI : QuasiCompact U.ι := Scheme.Opens.quasiCompact_ι U hU
+  have : QuasiCompact U.ι := Scheme.Opens.quasiCompact_ι U hU
   set H₀ : X.IdealSheafData :=
     Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set X)ᶜ, U.isOpen.isClosed_compl⟩ with hH₀def
   -- the vanishing ideal of the boundary restricts to the unit ideal on `U`
@@ -644,7 +638,8 @@ theorem _root_.AlgebraicGeometry.Scheme.exists_finiteType_ideal_zeroLocus_compl_
     have h1 : I.comap U.ι = ⊤ := by rw [hIcomap, hcomap]
     have h2 : U.ι ⁻¹' (I.support : Set X) = ∅ := by
       have h3 : ((I.comap U.ι).support : Set U.toScheme) = ∅ := by
-        rw [h1]; simp
+        rw [h1]
+        simp
       rwa [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage] at h3
     rw [Set.subset_compl_iff_disjoint_right, Set.disjoint_iff_inter_eq_empty,
       ← Scheme.Opens.range_ι (U := U), ← Set.image_preimage_eq_inter_range, h2,
@@ -724,7 +719,7 @@ theorem _root_.AlgebraicGeometry.Scheme.exists_finiteType_ideal_extension
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (W : X.Opens)
     (hW : IsCompact (W : Set X)) (J : W.toScheme.IdealSheafData) (hJ : J.FiniteType) :
     ∃ I : X.IdealSheafData, I.FiniteType ∧ I.comap W.ι = J := by
-  haveI : QuasiCompact W.ι := Scheme.Opens.quasiCompact_ι W hW
+  have : QuasiCompact W.ι := Scheme.Opens.quasiCompact_ι W hW
   have hcomap : (J.map W.ι).comap W.ι = J := Scheme.IdealSheafData.comap_map_ι W J
   obtain ⟨I, -, hft, hIcomap⟩ := Scheme.IdealSheafData.exists_finiteType_le_comap_eq
     (J.map W.ι) W hW (fun U' ↦ by rw [hcomap]; exact hJ U')
@@ -795,7 +790,7 @@ lemma Scheme.IdealSheafData.isCompact_coe_compl_support {X : Scheme.{u}} [Compac
     simp only [Set.mem_inter_iff, Set.mem_compl_iff, Set.mem_image]
     constructor
     · rintro ⟨hxs, hxV⟩
-      have hxr : x ∈ Set.range V.2.fromSpec := by rw [V.2.range_fromSpec]; exact hxV
+      have hxr : x ∈ Set.range V.2.fromSpec := by rwa [V.2.range_fromSpec]
       obtain ⟨p, rfl⟩ := hxr
       refine ⟨p, fun hp ↦ hxs ?_, rfl⟩
       have hmem : V.2.fromSpec p ∈ X.zeroLocus (U := V.1) (K.ideal V : Set _) ∩ V.1 := by
@@ -804,7 +799,8 @@ lemma Scheme.IdealSheafData.isCompact_coe_compl_support {X : Scheme.{u}} [Compac
       exact ((K.coe_support_inter V).symm ▸ hmem).1
     · rintro ⟨p, hp, rfl⟩
       have hxV : V.2.fromSpec p ∈ (V.1 : Set X) := by
-        rw [← V.2.range_fromSpec]; exact ⟨p, rfl⟩
+        rw [← V.2.range_fromSpec]
+        exact ⟨p, rfl⟩
       refine ⟨fun hsupp ↦ hp ?_, hxV⟩
       have hmem : V.2.fromSpec p ∈ X.zeroLocus (U := V.1) (K.ideal V : Set _) ∩ V.1 :=
         (K.coe_support_inter V) ▸ ⟨hsupp, hxV⟩
@@ -935,8 +931,7 @@ lemma Scheme.IdealSheafData.disjoint_range_strictTransformMap_of_probe
           K.support.compl t) =
         strictTransformMap J.subschemeι K.blowupMap K.support.compl t :=
       (Scheme.Hom.comp_apply _ _ _).symm
-    rw [heq]
-    exact hxc
+    rwa [heq]
   obtain ⟨w', hw'⟩ := mem_closure_iff.mp hwcl _ hopen hwmem
   obtain ⟨hw'o, hw'W⟩ := hw'
   obtain ⟨y', hy'⟩ := Set.mem_preimage.mp hw'o
@@ -979,15 +974,15 @@ lemma Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
     [QuasiSeparatedSpace X] {K : X.IdealSheafData} (hK : K.FiniteType)
     (hU₀ : IsCompact ((K.support.compl : X.Opens) : Set X)) (J : X.IdealSheafData) :
     QuasiCompact (strictTransformOpen J.subschemeι K.blowupMap K.support.compl).ι := by
-  haveI hπqc : QuasiCompact K.blowupMap :=
+  have hπqc : QuasiCompact K.blowupMap :=
     Scheme.IdealSheafData.quasiCompact_blowupMap hK
-  haveI hproper : IsProper K.blowupMap := K.isProper_blowupMap hK
-  haveI hfstQS : QuasiSeparated (pullback.fst J.subschemeι K.blowupMap) :=
+  have hproper : IsProper K.blowupMap := K.isProper_blowupMap hK
+  have hfstQS : QuasiSeparated (pullback.fst J.subschemeι K.blowupMap) :=
     MorphismProperty.pullback_fst _ _ inferInstance
-  haveI hPqs : QuasiSeparatedSpace ↥(Limits.pullback J.subschemeι K.blowupMap) :=
+  have hPqs : QuasiSeparatedSpace ↥(Limits.pullback J.subschemeι K.blowupMap) :=
     quasiSeparatedSpace_of_quasiSeparated
       (pullback.fst J.subschemeι K.blowupMap ≫ J.subschemeι)
-  haveI hfstQC : QuasiCompact (pullback.fst J.subschemeι K.blowupMap) :=
+  have hfstQC : QuasiCompact (pullback.fst J.subschemeι K.blowupMap) :=
     MorphismProperty.pullback_fst _ _ inferInstance
   refine Scheme.Opens.quasiCompact_ι _ ?_
   rw [strictTransformOpen_eq_preimage]
@@ -1025,8 +1020,8 @@ theorem separationBlowup_disjoint_strictTransforms [CompactSpace X]
     exact Submodule.FG.sup (h₁ V) (h₂ V)
   have hU₀ : IsCompact (((I₁ ⊔ I₂).support.compl : X.Opens) : Set X) :=
     Scheme.IdealSheafData.isCompact_coe_compl_support hKft
-  haveI := Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι hKft hU₀ I₁
-  haveI := Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι hKft hU₀ I₂
+  have := Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι hKft hU₀ I₁
+  have := Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι hKft hU₀ I₂
   rw [Set.disjoint_left]
   intro x hx₁ hx₂
   obtain ⟨U', b, hbK, hb12, hxc⟩ :=

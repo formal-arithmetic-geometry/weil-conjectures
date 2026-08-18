@@ -79,7 +79,7 @@ def Compactification.denseRefinement (c : Compactification f) [QuasiCompact f] :
     exact c.comm
   isProper := inferInstance
   isOpenImmersion := by
-    haveI : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
+    have : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
     infer_instance
 
 /-- The dense refinement of a compactification is scheme-theoretically dense: the
@@ -88,7 +88,7 @@ factor map through the scheme-theoretic image is scheme-theoretically dominant.
 theorem Compactification.denseRefinement_isSchemeTheoreticallyDense
     (c : Compactification f) [QuasiCompact f] :
     c.denseRefinement.IsSchemeTheoreticallyDense := by
-  haveI : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
   change IsSchemeTheoreticallyDominant c.i.toImage
   infer_instance
 
@@ -194,11 +194,9 @@ theorem mem_range_strictTransformMap {x' : X'} (hU : π x' ∈ U)
   obtain ⟨w, hw1, hw2⟩ := Scheme.Pullback.exists_preimage_pullback z x' hz
   have hwU : w ∈ strictTransformOpen q π U := by
     change π (pullback.snd q π w) ∈ U
-    rw [hw2]
-    exact hU
+    rwa [hw2]
   obtain ⟨w₀, rfl⟩ : w ∈ Set.range (strictTransformOpen q π U).ι := by
-    rw [Scheme.Opens.range_ι]
-    exact hwU
+    rwa [Scheme.Opens.range_ι]
   refine ⟨strictTransformFactor q π U w₀, ?_⟩
   have h2 : strictTransformFactor q π U ≫ strictTransformMap q π U =
       (strictTransformOpen q π U).ι ≫ pullback.snd q π := by
@@ -215,7 +213,7 @@ theorem mem_range_strictTransformMap {x' : X'} (hU : π x' ∈ U)
 subscheme of the modified scheme. -/
 theorem isClosedImmersion_strictTransformMap [IsClosedImmersion q] :
     IsClosedImmersion (strictTransformMap q π U) := by
-  haveI : IsClosedImmersion (pullback.snd q π) := MorphismProperty.pullback_snd _ _ ‹_›
+  have : IsClosedImmersion (pullback.snd q π) := MorphismProperty.pullback_snd _ _ ‹_›
   unfold strictTransformMap
   infer_instance
 
@@ -244,7 +242,7 @@ theorem AdmissibleBlowup.closure_preimage_subset_range_strictTransformMap
     (B : AdmissibleBlowup X U) (I : X.IdealSheafData) {T : Set U.toScheme}
     (hT : T ⊆ U.ι ⁻¹' (I.support : Set X)) :
     closure (B.π ⁻¹' (U.ι '' T)) ⊆ Set.range (B.strictTransformMap I.subschemeι) := by
-  haveI : IsClosedImmersion
+  have : IsClosedImmersion
       (AlgebraicGeometry.strictTransformMap I.subschemeι B.π B.preservedOpen) :=
     isClosedImmersion_strictTransformMap I.subschemeι B.π B.preservedOpen
   refine closure_minimal ?_
@@ -282,8 +280,8 @@ theorem exists_admissibleBlowup_disjoint_closures
     (hc₁ : IsCompact T₁ᶜ) (hc₂ : IsCompact T₂ᶜ) (hdisj : Disjoint T₁ T₂) :
     ∃ B : AdmissibleBlowup X U,
       Disjoint (closure (B.π ⁻¹' (U.ι '' T₁))) (closure (B.π ⁻¹' (U.ι '' T₂))) := by
-  haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
-  haveI : QuasiSeparatedSpace U.toScheme := quasiSeparatedSpace_of_quasiSeparated U.ι
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  have : QuasiSeparatedSpace U.toScheme := quasiSeparatedSpace_of_quasiSeparated U.ι
   -- the finite-type vanishing ideals of `T₁`, `T₂` on `U`
   obtain ⟨J₁, hJ₁ft, hJ₁supp⟩ := U.toScheme.exists_finiteType_ideal_zeroLocus_compl_qcOpen
     ⟨T₁ᶜ, hT₁.isOpen_compl⟩ hc₁
@@ -310,8 +308,7 @@ theorem exists_admissibleBlowup_disjoint_closures
     rw [Set.disjoint_left]
     rintro x hxU ⟨hx1, hx2⟩
     obtain ⟨t, rfl⟩ : x ∈ Set.range U.ι := by
-      rw [Scheme.Opens.range_ι]
-      exact hxU
+      rwa [Scheme.Opens.range_ι]
     exact Set.disjoint_left.mp hdisj (hpre₁ ▸ Set.mem_preimage.mpr hx1)
       (hpre₂ ▸ Set.mem_preimage.mpr hx2)
   -- blow up the sum of the ideals

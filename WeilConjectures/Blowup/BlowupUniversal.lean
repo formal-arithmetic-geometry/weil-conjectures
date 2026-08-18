@@ -80,7 +80,7 @@ lemma exists_unit_mul_of_span_singleton_eq {c d : R}
   have hvw : (v * w) * c = 1 * c := by
     rw [one_mul, mul_assoc, hw, hv]
   have h1 : v * w = 1 := (mul_cancel_right_mem_nonZeroDivisors hc).mp hvw
-  have h1' : w * v = 1 := by rw [mul_comm]; exact h1
+  have h1' : w * v = 1 := by rwa [mul_comm]
   refine ⟨⟨w, v, h1', h1⟩, hw.symm, ?_⟩
   rw [← hw]
   exact mul_mem_nonZeroDivisors.mpr
@@ -453,7 +453,7 @@ theorem Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le (f : Y ⟶ X)
   calc ((I.comap f).ideal W).map (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom
       = ((I.comap f).comap W.2.fromSpec).ideal ⟨⊤, isAffineOpen_top _⟩ := h1.symm
     _ = (I.ideal V).map ((f.appLE V.1 W.1 h) ≫ (Scheme.ΓSpecIso Γ(Y, W.1)).inv).hom := by
-        rw [h3]; exact h4
+        rwa [h3]
     _ = ((I.ideal V).map (f.appLE V.1 W.1 h).hom).map
           (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom := by
         rw [CommRingCat.hom_comp, Ideal.map_map]
@@ -514,7 +514,7 @@ theorem presentation_restrict_basicOpen {K : Y.IdealSheafData} {U : Y.affineOpen
   subst hW
   change ∃ c' ∈ nonZeroDivisors Γ(Y, Y.basicOpen g),
     K.ideal (Y.affineBasicOpen g) = Ideal.span {c'}
-  haveI : IsLocalization.Away g Γ(Y, Y.basicOpen g) := U.2.isLocalization_basicOpen g
+  have : IsLocalization.Away g Γ(Y, Y.basicOpen g) := U.2.isLocalization_basicOpen g
   have halg : algebraMap Γ(Y, U.1) Γ(Y, Y.basicOpen g) =
       (Y.presheaf.map (homOfLE (Y.basicOpen_le g)).op).hom :=
     RingHom.algebraMap_toAlgebra _
@@ -551,7 +551,7 @@ theorem comap_of_isOpenImmersion {K : Y.IdealSheafData} (hK : K.IsEffectiveCarti
   obtain ⟨W, hjW, hWle, c, hc, hgen⟩ := hK.exists_presentation_le hjz
   have haff : IsAffineOpen (j ⁻¹ᵁ W.1) := W.2.preimage_of_isOpenImmersion j hWle
   have hle : (⟨j ⁻¹ᵁ W.1, haff⟩ : T.affineOpens).1 ≤ j ⁻¹ᵁ W.1 := le_rfl
-  haveI hiso : IsIso (j.appLE W.1 (j ⁻¹ᵁ W.1) hle) := by
+  have hiso : IsIso (j.appLE W.1 (j ⁻¹ᵁ W.1) hle) := by
     rw [← Scheme.Hom.app_eq_appLE]
     exact j.isIso_app W.1 hWle
   refine ⟨⟨j ⁻¹ᵁ W.1, haff⟩, hjW, (j.appLE W.1 (j ⁻¹ᵁ W.1) hle).hom c,
@@ -594,7 +594,9 @@ theorem _root_.AlgebraicGeometry.exists_span_eq_top_localization_factor_span
         J₁.map (algebraMap R S) = Ideal.span {algebraMap R S (a i)} := by
   classical
   -- a finite representation `c = ∑ eᵢ · aᵢ · bᵢ` with `aᵢ ∈ J₁`, `bᵢ ∈ J₂`
-  have hcmem : c ∈ J₁ * J₂ := by rw [hmul]; exact Ideal.mem_span_singleton_self c
+  have hcmem : c ∈ J₁ * J₂ := by
+    rw [hmul]
+    exact Ideal.mem_span_singleton_self c
   obtain ⟨T, T', hT, hT', hcspan⟩ := Submodule.mem_span_mul_finite_of_mem_mul hcmem
   obtain ⟨n, e, u, hu⟩ := Submodule.mem_span_set'.mp hcspan
   have hmem : ∀ i, ∃ (x y : R), x ∈ J₁ ∧ y ∈ J₂ ∧ x * y = (u i : R) := by
@@ -634,7 +636,9 @@ theorem _root_.AlgebraicGeometry.exists_span_eq_top_localization_factor_span
     have hxnzd : algebraMap R S (x i) ∈ nonZeroDivisors S := by
       -- `x i * (e i * y i) = t i * c` is a nonzerodivisor
       have hprod : algebraMap R S (x i) * algebraMap R S (e i * y i) ∈ nonZeroDivisors S := by
-        have hxi : x i * (e i * y i) = t i * c := by rw [ht i]; ring
+        have hxi : x i * (e i * y i) = t i * c := by
+          rw [ht i]
+          ring
         rw [← map_mul, hxi, map_mul]
         exact mul_mem_nonZeroDivisors.mpr ⟨hunit.mem_nonZeroDivisors, hcnzd⟩
       exact left_mem_nonZeroDivisors_of_mul hprod
@@ -681,7 +685,7 @@ theorem of_mul_left {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsEffectiv
   have hcov : U.1 ≤ ⨆ f : Set.range t, Y.basicOpen f.1 :=
     (U.2.self_le_iSup_basicOpen_iff (s := Set.range t)).mpr htop
   obtain ⟨⟨v, i, rfl⟩, hyi⟩ := TopologicalSpace.Opens.mem_iSup.mp (hcov hyU)
-  haveI : IsLocalization.Away (t i) Γ(Y, Y.basicOpen (t i)) :=
+  have : IsLocalization.Away (t i) Γ(Y, Y.basicOpen (t i)) :=
     U.2.isLocalization_basicOpen (t i)
   obtain ⟨hnzd, hspan⟩ := hloc i Γ(Y, Y.basicOpen (t i))
   refine ⟨Y.affineBasicOpen (t i), hyi,
@@ -707,7 +711,7 @@ theorem of_mul_right {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsEffecti
 /-- Membership in the nonzerodivisors transported along an equality of elements. -/
 private lemma mem_nonZeroDivisors_of_eq {S : Type u} [CommRing S] {x y : S} (h : x = y)
     (hy : y ∈ nonZeroDivisors S) : x ∈ nonZeroDivisors S := by
-  rw [h]; exact hy
+  rwa [h]
 
 /-- **The chart section map of the blow-up preserves nonzerodivisors.** Standalone
 lemma with its own heartbeat budget: the chart ring is a large
@@ -800,7 +804,7 @@ lemma _root_.HomogeneousLocalization.Away.exists_factor_of_isUnit {B : Type u} [
     ∃ ψ' : HomogeneousLocalization.Away 𝒜 x →+* R,
       ψ'.comp (HomogeneousLocalization.awayMap 𝒜 hg hx) = ψ := by
   letI := (HomogeneousLocalization.awayMap 𝒜 hg hx).toAlgebra
-  haveI : IsLocalization.Away (HomogeneousLocalization.Away.isLocalizationElem hf hg)
+  have : IsLocalization.Away (HomogeneousLocalization.Away.isLocalizationElem hf hg)
       (HomogeneousLocalization.Away 𝒜 x) :=
     HomogeneousLocalization.Away.isLocalization_mul hf hg hx hd
   refine ⟨IsLocalization.Away.lift (S := HomogeneousLocalization.Away 𝒜 x)
@@ -894,8 +898,7 @@ lemma Scheme.IdealSheafData.exists_chartRingHom_of_probe (I : X.IdealSheafData)
       have h0 : W.2.fromSpec w ∈ (W.2.fromSpec).opensRange := ⟨w, rfl⟩
       rwa [W.2.opensRange_fromSpec] at h0
     rw [Scheme.Hom.mem_preimage] at hmem
-    rw [Scheme.Hom.comp_apply]
-    exact hmem
+    rwa [Scheme.Hom.comp_apply]
   have hl : IsOpenImmersion.lift (I.blowupChart V ha) (W.2.fromSpec ≫ h) hrange ≫
       I.blowupChart V ha = W.2.fromSpec ≫ h :=
     IsOpenImmersion.lift_fac _ _ hrange
@@ -919,7 +922,7 @@ lemma Scheme.IdealSheafData.exists_chartRingHom_of_probe (I : X.IdealSheafData)
       _ = (Spec.map (Spec.preimage (IsOpenImmersion.lift (I.blowupChart V ha)
             (W.2.fromSpec ≫ h) hrange)) ≫ I.blowupChart V ha) ≫ I.blowupMap :=
           (Category.assoc _ _ _).symm
-      _ = (W.2.fromSpec ≫ h) ≫ I.blowupMap := by rw [Spec.map_preimage]; rw [hl]
+      _ = (W.2.fromSpec ≫ h) ≫ I.blowupMap := by rw [Spec.map_preimage, hl]
       _ = W.2.fromSpec ≫ t := by rw [Category.assoc, hht]
       _ = Spec.map (t.appLE V.1 W.1 hWt) ≫ V.2.fromSpec :=
           (IsAffineOpen.SpecMap_appLE_fromSpec t V.2 W.2 hWt).symm
@@ -929,8 +932,7 @@ lemma Scheme.IdealSheafData.exists_chartRingHom_of_probe (I : X.IdealSheafData)
           (W.2.fromSpec ≫ h) hrange) = t.appLE V.1 W.1 hWt := by
     apply Spec.map_injective
     apply (cancel_mono V.2.fromSpec).mp
-    rw [Spec.map_comp]
-    exact hbase
+    rwa [Spec.map_comp]
   refine ⟨(Spec.preimage (IsOpenImmersion.lift (I.blowupChart V ha)
     (W.2.fromSpec ≫ h) hrange)).hom, ?_, ?_⟩
   · rw [CommRingCat.ofHom_hom, Spec.map_preimage]
@@ -970,8 +972,7 @@ lemma Scheme.IdealSheafData.probe_comp_eq_of_charts (I : X.IdealSheafData)
   obtain ⟨ψ₂, hψ₂, hψ₂c⟩ := I.exists_chartRingHom_of_probe e₂ V hb W hWt hW₂
   -- the extension of `I(V)` on the probe is principal on the images of `a`, `b`, `c`
   have hIφ : (I.ideal V).map (t.appLE V.1 W.1 hWt).hom = Ideal.span {c} := by
-    rw [← Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le t I V W hWt]
-    exact hgen
+    rwa [← Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le t I V W hWt]
   have hspan_a : (I.ideal V).map (t.appLE V.1 W.1 hWt).hom =
       Ideal.span {(t.appLE V.1 W.1 hWt).hom a} :=
     AffineBlowup.span_map_eq_of_comp_awayAlgebraMap (I.ideal V) ha hψ₁c
@@ -993,8 +994,7 @@ lemma Scheme.IdealSheafData.probe_comp_eq_of_charts (I : X.IdealSheafData)
         (t.appLE V.1 W.1 hWt).hom a := RingHom.congr_fun hψ₁c a
     have hb' : ψ₁ (AffineBlowup.awayAlgebraMap (I.ideal V) (reesX (I.ideal V) a ha) b) =
         (t.appLE V.1 W.1 hWt).hom b := RingHom.congr_fun hψ₁c b
-    rw [← ha', ← hb']
-    exact h0
+    rwa [← ha', ← hb']
   have hel₂ : ψ₂ (HomogeneousLocalization.Away.isLocalizationElem
       (reesX_mem (I.ideal V) b hb) (reesX_mem (I.ideal V) a ha)) *
         (t.appLE V.1 W.1 hWt).hom b = (t.appLE V.1 W.1 hWt).hom a := by
@@ -1005,8 +1005,7 @@ lemma Scheme.IdealSheafData.probe_comp_eq_of_charts (I : X.IdealSheafData)
         (t.appLE V.1 W.1 hWt).hom a := RingHom.congr_fun hψ₂c a
     have hb' : ψ₂ (AffineBlowup.awayAlgebraMap (I.ideal V) (reesX (I.ideal V) b hb) b) =
         (t.appLE V.1 W.1 hWt).hom b := RingHom.congr_fun hψ₂c b
-    rw [← ha', ← hb']
-    exact h0
+    rwa [← ha', ← hb']
   have hu₁ : IsUnit (ψ₁ (HomogeneousLocalization.Away.isLocalizationElem
       (reesX_mem (I.ideal V) a ha) (reesX_mem (I.ideal V) b hb))) := by
     have h1 : ψ₁ (HomogeneousLocalization.Away.isLocalizationElem
@@ -1136,14 +1135,12 @@ theorem Scheme.IdealSheafData.hom_ext_of_isEffectiveCartier_comap (I : X.IdealSh
       rw [Scheme.Hom.mem_preimage]
       have h0 : I.blowupMap (h₁ z) = t z := by
         rw [← Scheme.Hom.comp_apply, e₁]
-      rw [h0]
-      exact hV
+      rwa [h0]
     have hz₂ : h₂ z ∈ I.blowupMap ⁻¹ᵁ V.1 := by
       rw [Scheme.Hom.mem_preimage]
       have h0 : I.blowupMap (h₂ z) = t z := by
         rw [← Scheme.Hom.comp_apply, e₂]
-      rw [h0]
-      exact hV
+      rwa [h0]
     obtain ⟨a, ha, hmem₁⟩ := I.exists_mem_opensRange_blowupChart V hz₁
     obtain ⟨b, hb, hmem₂⟩ := I.exists_mem_opensRange_blowupChart V hz₂
     have hzO : z ∈ t ⁻¹ᵁ V.1 ⊓ (h₁ ⁻¹ᵁ (I.blowupChart V ha).opensRange ⊓
@@ -1195,7 +1192,9 @@ lemma exists_span_eq_top_localization_span_of_map_eq_span {A R : Type u} [CommRi
         (J.map φ).map (algebraMap R S) = Ideal.span {algebraMap R S (φ (x j))} := by
   classical
   have hcmem : c ∈ Ideal.span (φ '' (J : Set A)) := by
-    have h0 : c ∈ J.map φ := by rw [hspan]; exact Ideal.mem_span_singleton_self c
+    have h0 : c ∈ J.map φ := by
+      rw [hspan]
+      exact Ideal.mem_span_singleton_self c
     exact h0
   obtain ⟨n, e, u, hu⟩ := Submodule.mem_span_set'.mp hcmem
   have hmem : ∀ i : Fin n, ∃ xa : A, xa ∈ J ∧ φ xa = (u i : R) := by
@@ -1232,7 +1231,8 @@ lemma exists_span_eq_top_localization_span_of_map_eq_span {A R : Type u} [CommRi
       calc algebraMap R S (q j) *
             (algebraMap R S (e j) * IsLocalization.Away.invSelf (e j * q j))
           = algebraMap R S (e j * q j) * IsLocalization.Away.invSelf (e j * q j) := by
-            rw [map_mul]; ring
+            rw [map_mul]
+            ring
         _ = 1 := IsLocalization.Away.mul_invSelf _
     have hcnzd : algebraMap R S c ∈ nonZeroDivisors S :=
       IsLocalization.Away.algebraMap_mem_nonZeroDivisors (e j * q j) hc
@@ -1265,14 +1265,13 @@ lemma Scheme.IdealSheafData.exists_probe_lift (I : X.IdealSheafData)
   have hztV : z ∈ t ⁻¹ᵁ V.1 := hV
   obtain ⟨W, hzW, hWle, c, hc, hgen⟩ := hEC.exists_presentation_le hztV
   have hφspan : (I.ideal V).map (t.appLE V.1 W.1 hWle).hom = Ideal.span {c} := by
-    rw [← Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le t I V W hWle]
-    exact hgen
+    rwa [← Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le t I V W hWle]
   obtain ⟨n, x, tt, hxJ, htop, hloc⟩ :=
     exists_span_eq_top_localization_span_of_map_eq_span hc hφspan
   have hcov : W.1 ≤ ⨆ f : Set.range tt, T.basicOpen f.1 :=
     (W.2.self_le_iSup_basicOpen_iff (s := Set.range tt)).mpr htop
   obtain ⟨⟨v, j, rfl⟩, hzj⟩ := TopologicalSpace.Opens.mem_iSup.mp (hcov hzW)
-  haveI : IsLocalization.Away (tt j) Γ(T, T.basicOpen (tt j)) :=
+  have : IsLocalization.Away (tt j) Γ(T, T.basicOpen (tt j)) :=
     W.2.isLocalization_basicOpen (tt j)
   obtain ⟨hnzd, hspan⟩ := hloc j Γ(T, T.basicOpen (tt j))
   have hOle : (T.affineBasicOpen (tt j) : T.Opens) ≤ t ⁻¹ᵁ V.1 :=

@@ -57,9 +57,11 @@ def diagonalRestrictChartArrowIso :
     · simp
     · simp [pullback.condition]
   · have hΔfst : ∀ y : W, (pullback.fst w w) (pullback.diagonal w y) = y := fun y ↦ by
-      rw [← Scheme.Hom.comp_apply, pullback.diagonal_fst]; simp
+      rw [← Scheme.Hom.comp_apply, pullback.diagonal_fst]
+      simp
     have hΔsnd : ∀ y : W, (pullback.snd w w) (pullback.diagonal w y) = y := fun y ↦ by
-      rw [← Scheme.Hom.comp_apply, pullback.diagonal_snd]; simp
+      rw [← Scheme.Hom.comp_apply, pullback.diagonal_snd]
+      simp
     ext x
     simp only [TopologicalSpace.Opens.map_coe, Set.mem_preimage, SetLike.mem_coe,
       Scheme.Hom.mem_opensRange]
@@ -162,7 +164,7 @@ theorem IsSeparated.of_two_open_cover
   rw [IsZariskiLocalAtTarget.iff_of_iSup_eq_top (P := @IsClosedImmersion) c hO]
   have h21 : IsClosedImmersion (pullback.map j₂ j₁ (j₂ ≫ w) (j₁ ≫ w) (𝟙 T₂) (𝟙 T₁) w
       (by simp) (by simp)) := by
-    haveI := hd
+    have := hd
     rw [pullback_map_symmetry w]
     infer_instance
   rintro ⟨a, b⟩

@@ -97,9 +97,9 @@ lemma partialSection_openι :
 
 /-- The graph of a partial section of a separated projection is a closed immersion. -/
 instance [IsSeparated y] : IsClosedImmersion (partialSection x y j γ hγ) := by
-  haveI hsep : IsSeparated (pullback.fst (j ≫ x) y) :=
+  have hsep : IsSeparated (pullback.fst (j ≫ x) y) :=
     MorphismProperty.pullback_fst _ _ ‹_›
-  haveI : IsClosedImmersion
+  have : IsClosedImmersion
       (partialSection x y j γ hγ ≫ pullback.fst (j ≫ x) y) := by
     rw [partialSection_fst]
     infer_instance
@@ -109,7 +109,7 @@ include hγ in
 /-- A partial section over a quasi-compact open immersion is quasi-compact. -/
 lemma quasiCompact_of_partialSection [IsSeparated y] [IsOpenImmersion j] [QuasiCompact j] :
     QuasiCompact γ := by
-  haveI : QuasiCompact (partialSection x y j γ hγ ≫ partialSectionOpenι x y j) :=
+  have : QuasiCompact (partialSection x y j γ hγ ≫ partialSectionOpenι x y j) :=
     inferInstance
   rw [partialSection_openι x y j γ hγ] at this
   exact this
@@ -131,7 +131,7 @@ immersion) graph of `γ`.
 (Revised blueprint: `lemma:nagata-scheme-image-partial-section`, kernel form.) -/
 theorem ker_comap_partialSectionOpenι :
     γ.ker.comap (partialSectionOpenι x y j) = (partialSection x y j γ hγ).ker := by
-  haveI := quasiCompact_of_partialSection x y j γ hγ
+  have := quasiCompact_of_partialSection x y j γ hγ
   rw [← Nagata.schemeImageRestrictOpen γ (partialSectionOpenι x y j)]
   have H := isPullback_partialSection x y j γ hγ
   have hsnd : pullback.snd γ (partialSectionOpenι x y j) =
@@ -171,7 +171,7 @@ proper extension `SIm(γ) ⟶ X` of the partial section
 (Stacks Project Tag 0F3Z; revised blueprint `lemma:nagata-graph-extension`). -/
 theorem isProper_imageι_fst [IsProper y] :
     IsProper (γ.imageι ≫ pullback.fst x y) := by
-  haveI : IsProper (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
+  have : IsProper (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
   infer_instance
 
 end AlgebraicGeometry.Nagata

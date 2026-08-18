@@ -88,12 +88,12 @@ def comparisonSnd : comparisonSpace σ₁ σ₂ ⟶ σ₂.X :=
 `lemma:nagata-comparison-projections-proper`): the projection `X₁₂ ⟶ X₁` is a closed
 immersion followed by a base change of the proper structure morphism of `X₂`. -/
 theorem isProper_comparisonFst : IsProper (comparisonFst σ₁ σ₂) := by
-  haveI := σ₂.isProper_s
+  have := σ₂.isProper_s
   rw [comparisonFst]
   infer_instance
 
 theorem isProper_comparisonSnd : IsProper (comparisonSnd σ₁ σ₂) := by
-  haveI := σ₁.isProper_s
+  have := σ₁.isProper_s
   rw [comparisonSnd]
   infer_instance
 
@@ -130,8 +130,8 @@ theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
     (hS : g₁ ≫ σ₁.s = g₂ ≫ σ₂.s) :
     Set.range g₁ ⊆ (σ₁.interior : Set σ₁.X) ∨
       Set.range g₂ ⊆ (σ₂.interior : Set σ₂.X) := by
-  haveI := σ₁.isOpenImmersion_υ
-  haveI := σ₂.isOpenImmersion_υ
+  have := σ₁.isOpenImmersion_υ
+  have := σ₂.isOpenImmersion_υ
   -- it suffices that one closed point avoids its forbidden boundary
   by_contra hcon
   rw [not_or] at hcon

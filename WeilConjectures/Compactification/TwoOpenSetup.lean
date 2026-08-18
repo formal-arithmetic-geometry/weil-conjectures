@@ -110,9 +110,9 @@ lemma dense_range_embX : Dense (Set.range σ.embX) := σ.dense_range
 
 /-- The ambient model of a side over a Noetherian base is Noetherian. -/
 lemma isNoetherian_X [IsNoetherian S] : IsNoetherian σ.X := by
-  haveI := σ.isProper_s
-  haveI : IsLocallyNoetherian σ.X := LocallyOfFiniteType.isLocallyNoetherian σ.s
-  haveI : CompactSpace σ.X := QuasiCompact.compactSpace_of_compactSpace σ.s
+  have := σ.isProper_s
+  have : IsLocallyNoetherian σ.X := LocallyOfFiniteType.isLocallyNoetherian σ.s
+  have : CompactSpace σ.X := QuasiCompact.compactSpace_of_compactSpace σ.s
   exact ⟨⟩
 
 section Boundary
@@ -186,7 +186,7 @@ lemma interiorEmb_ι : σ.interiorEmb ≫ σ.interior.ι = σ.embX :=
   IsOpenImmersion.lift_fac _ _ _
 
 instance : IsOpenImmersion σ.interiorEmb := by
-  haveI h : IsOpenImmersion (σ.interiorEmb ≫ σ.interior.ι) := by
+  have h : IsOpenImmersion (σ.interiorEmb ≫ σ.interior.ι) := by
     rw [σ.interiorEmb_ι]
     infer_instance
   exact IsOpenImmersion.of_comp σ.interiorEmb σ.interior.ι
@@ -204,11 +204,11 @@ dense in the blow-up.
 (Blueprint: `def:nagata-two-open-prepared-boundaries`,
 `def:nagata-two-open-improved-comparison`.) -/
 def admissibleBlowup : TwoOpenSide u O O' :=
-  haveI : IsIso (B.π ∣_ σ.V) := B.isIso_π_restrict
-  haveI := B.isProper_π
-  haveI := σ.isProper_s
-  haveI := σ.isProper_ψ
-  haveI := σ.isOpenImmersion_υ
+  have : IsIso (B.π ∣_ σ.V) := B.isIso_π_restrict
+  have := B.isProper_π
+  have := σ.isProper_s
+  have := σ.isProper_ψ
+  have := σ.isOpenImmersion_υ
   { X := B.X'
     s := B.π ≫ σ.s
     isProper_s := inferInstance
@@ -247,7 +247,7 @@ def admissibleBlowup : TwoOpenSide u O O' :=
           Category.comp_id, ho]
     isIso_ψ_restrict := by
       rw [morphismRestrict_comp]
-      haveI := σ.isIso_ψ_restrict
+      have := σ.isIso_ψ_restrict
       infer_instance
     dense_range := by
       have hle : (σ.υ ≫ σ.V.ι).opensRange ≤ σ.V := by
@@ -262,7 +262,7 @@ def admissibleBlowup : TwoOpenSide u O O' :=
           IsIso.inv_hom_id_assoc]
       have hrange := range_eq_preimage_of_comp_of_isIso_restrict
         ((σ.υ ≫ inv (B.π ∣_ σ.V)) ≫ (B.π ⁻¹ᵁ σ.V).ι) B.π (σ.υ ≫ σ.V.ι) hq hiso
-      haveI := σ.isNoetherian_X
+      have := σ.isNoetherian_X
       rw [hrange]
       exact B.dense_preimage σ.dense_range }
 
@@ -270,7 +270,7 @@ def admissibleBlowup : TwoOpenSide u O O' :=
 lemma admissibleBlowup_image_preimage (A : Set U) :
     (σ.admissibleBlowup B).V.ι '' ((σ.admissibleBlowup B).ψ ⁻¹' A) =
       B.π ⁻¹' (σ.V.ι '' (σ.ψ ⁻¹' A)) := by
-  haveI : IsIso (B.π ∣_ σ.V) := B.isIso_π_restrict
+  have : IsIso (B.π ∣_ σ.V) := B.isIso_π_restrict
   have hcomm : ∀ v' : (B.π ⁻¹ᵁ σ.V).toScheme,
       B.π ((B.π ⁻¹ᵁ σ.V).ι v') = σ.V.ι ((B.π ∣_ σ.V) v') := by
     intro v'
@@ -281,8 +281,7 @@ lemma admissibleBlowup_image_preimage (A : Set U) :
     refine Set.mem_preimage.mpr ⟨(B.π ∣_ σ.V) v', ?_, (hcomm v').symm⟩
     have : (σ.admissibleBlowup B).ψ v' = σ.ψ ((B.π ∣_ σ.V) v') :=
       Scheme.Hom.comp_apply _ _ _
-    rw [Set.mem_preimage, ← this]
-    exact hv'
+    rwa [Set.mem_preimage, ← this]
   · intro hx'
     obtain ⟨w, hw, hweq⟩ := Set.mem_preimage.mp hx'
     have hx'V : x' ∈ Set.range (B.π ⁻¹ᵁ σ.V).ι := by
@@ -297,8 +296,7 @@ lemma admissibleBlowup_image_preimage (A : Set U) :
       rw [← hcomm v', hweq]
     have : (σ.admissibleBlowup B).ψ v' = σ.ψ ((B.π ∣_ σ.V) v') :=
       Scheme.Hom.comp_apply _ _ _
-    rw [Set.mem_preimage, this, hwv]
-    exact hw
+    rwa [Set.mem_preimage, this, hwv]
 
 lemma admissibleBlowup_selfBoundary :
     (σ.admissibleBlowup B).selfBoundary =
@@ -341,30 +339,30 @@ theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated 
     [LocallyOfFiniteType u] [QuasiCompact u] (O O' : U.Opens) (hcov : O ⊔ O' = ⊤)
     [HasCompactification (O.ι ≫ u)] :
     ∃ σ : TwoOpenSide u O O', σ.Prepared := by
-  haveI : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian u
-  haveI : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
-  haveI : IsNoetherian U := ⟨⟩
-  haveI : QuasiCompact (O.ι ≫ u) := inferInstance
+  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian u
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
+  have : IsNoetherian U := ⟨⟩
+  have : QuasiCompact (O.ι ≫ u) := inferInstance
   -- item 34: a scheme-theoretically dense compactification of `O ⟶ S`
   obtain ⟨c, hc⟩ := HasCompactification.exists_isSchemeTheoreticallyDense (O.ι ≫ u)
-  haveI : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
-  haveI : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
-  haveI : IsNoetherian c.Z := ⟨⟩
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
   -- Stacks 0F3Z: the graph extension of the compactification
   obtain ⟨B, Vgr, ψ, v, hψ, hv, hvπ, hvψ, hpre, hiso, hψu⟩ :=
     Compactification.exists_properExtension u O
       (TopologicalSpace.NoetherianSpace.isCompact _) c
-  haveI := hψ
-  haveI := hv
-  haveI := B.isProper_π
+  have := hψ
+  have := hv
+  have := B.isProper_π
   -- the graph-extension side
   have hdense : Dense (Set.range (v ≫ Vgr.ι)) := by
     have hq : (v ≫ Vgr.ι) ≫ B.π = c.i := by rw [Category.assoc, hvπ]
     have hiso' : IsIso (B.π ∣_ c.i.opensRange) := B.isIso_π_restrict
     rw [range_eq_preimage_of_comp_of_isIso_restrict (v ≫ Vgr.ι) B.π c.i hq hiso']
     refine B.dense_preimage ?_
-    haveI : IsSchemeTheoreticallyDominant c.i := hc
-    haveI : QuasiCompact c.i := inferInstance
+    have : IsSchemeTheoreticallyDominant c.i := hc
+    have : QuasiCompact c.i := inferInstance
     have := Scheme.Hom.denseRange c.i
     exact this
   let σ₀ : TwoOpenSide u O O' :=
@@ -378,14 +376,16 @@ theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated 
       υ := v
       isOpenImmersion_υ := hv
       υ_ψ := hvψ
-      range_υ := by rw [← hpre]; rfl
+      range_υ := by
+        rw [← hpre]
+        rfl
       isIso_ψ_restrict := hiso
       dense_range := hdense }
   -- Stacks 0F3V: separate the two boundary loci of `σ₀`
-  haveI : IsNoetherian σ₀.X := σ₀.isNoetherian_X
-  haveI : CompactSpace σ₀.V.toScheme :=
+  have : IsNoetherian σ₀.X := σ₀.isNoetherian_X
+  have : CompactSpace σ₀.V.toScheme :=
     isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
-  haveI : IsNoetherian σ₀.V.toScheme := ⟨⟩
+  have : IsNoetherian σ₀.V.toScheme := ⟨⟩
   have hT₁ : IsClosed (σ₀.ψ ⁻¹' ((O' : Set U)ᶜ)) :=
     O'.isOpen.isClosed_compl.preimage σ₀.ψ.continuous
   have hT₂ : IsClosed (σ₀.ψ ⁻¹' ((O : Set U)ᶜ)) :=
@@ -395,8 +395,7 @@ theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated 
     simpa [Set.union_comm] using this
   have hdisj : Disjoint (σ₀.ψ ⁻¹' ((O' : Set U)ᶜ)) (σ₀.ψ ⁻¹' ((O : Set U)ᶜ)) := by
     refine Disjoint.preimage _ ?_
-    rw [Set.disjoint_iff_inter_eq_empty, ← Set.compl_union, Set.compl_empty_iff]
-    exact huniv
+    rwa [Set.disjoint_iff_inter_eq_empty, ← Set.compl_union, Set.compl_empty_iff]
   obtain ⟨B₁, hB₁⟩ := exists_admissibleBlowup_disjoint_closures
     (TopologicalSpace.NoetherianSpace.isCompact _) hT₁ hT₂
     (TopologicalSpace.NoetherianSpace.isCompact _)
