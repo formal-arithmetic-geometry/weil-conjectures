@@ -23,12 +23,25 @@ name = "proetale"
 git = "https://github.com/Thmoas-Guan/slopetale_fork"
 rev = "weil-conjecture-dependency"
 
-# Provides `lake exe checkdecls`, run locally against `blueprint/lean_decls`
-# (written by `leanblueprint web`) to check that the declarations referenced
-# by `\lean{...}` in blueprint/src actually exist.
+# The two halves of the blueprint <-> Lean contract, both run against
+# `blueprint/lean_decls` (written by `leanblueprint web`), which lists the
+# declarations referenced by `\lean{...}` in blueprint/src:
+#
+#   lake exe checkdecls   -- does the declaration exist?
+#   lake exe checkaxioms  -- is it actually proved, or is it closed by `sorry`?
+#
+# Neither subsumes the other. `checkdecls` cannot see a `sorry`, and since
+# `warn.sorry = false` above neither can `lake build`; `checkaxioms` deliberately
+# does not fail on a name that is missing, because that is `checkdecls`' question.
 [[require]]
 name = "checkdecls"
 git = "https://github.com/PatrickMassot/checkdecls.git"
+
+[[lean_exe]]
+name = "checkaxioms"
+srcDir = "scripts"
+root = "checkaxioms"
+supportInterpreter = true
 
 [[lean_lib]]
 name = "WeilConjectures"
