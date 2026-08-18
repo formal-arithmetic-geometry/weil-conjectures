@@ -78,6 +78,10 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Exp
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
