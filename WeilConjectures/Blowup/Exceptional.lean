@@ -234,7 +234,7 @@ lemma chart_blowupι_comp_blowupMap (I : X.IdealSheafData) (U : X.affineOpens)
         congrArg (Spec.map (CommRingCat.ofHom (AffineBlowup.awayAlgebraMap (I.ideal U)
           (reesX (I.ideal U) a ha))) ≫ ·) U.2.isoSpec_inv_ι
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 800000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them during the assembly of the chart data exceeds the default heartbeat limit.
 /-- **Principalization of the center** (blueprint:

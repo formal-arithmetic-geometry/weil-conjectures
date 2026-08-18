@@ -838,7 +838,6 @@ lemma Scheme.IdealSheafData.isCompact_coe_compl_support {X : Scheme.{u}} [Compac
   rw [hpiece V]
   exact ((hK V).isCompact_compl_zeroLocus).image V.2.fromSpec.continuous
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit (as in
 -- `Scheme.IdealSheafData.extendedToBlowup_isEffectiveCartier`).
@@ -1007,7 +1006,7 @@ lemma Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
     (f := pullback.fst J.subschemeι K.blowupMap ≫ J.subschemeι) _
     (K.support.compl).isOpen hU₀
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 800000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit (as in
 -- `Scheme.IdealSheafData.extendedToBlowup_isEffectiveCartier`).

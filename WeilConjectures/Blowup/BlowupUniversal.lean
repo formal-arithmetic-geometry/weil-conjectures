@@ -747,7 +747,6 @@ end AffineBlowup
 
 variable {X T : Scheme.{u}}
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Chart capture**: a point of the blow-up over an affine open `V` of the base lies
@@ -765,7 +764,6 @@ lemma Scheme.IdealSheafData.exists_mem_opensRange_blowupChart (I : X.IdealSheafD
   obtain ⟨z, rfl⟩ := hy
   exact ⟨a.1, a.2, ⟨z, I.blowupChart_apply V a.2 z⟩⟩
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Chart-ring extraction of a probe of the blow-up**: an affine probe of `T` on
@@ -1003,7 +1001,6 @@ lemma Scheme.IdealSheafData.probe_comp_eq_of_charts (I : X.IdealSheafData)
         congrArg (fun ρ ↦ Spec.map (CommRingCat.ofHom ρ) ≫ I.blowupChart V hb) hfac₂
     _ = W.2.fromSpec ≫ h₂ := hψ₂
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Uniqueness of lifts along the blow-up map** (Stacks Project Tag 0806,
@@ -1139,7 +1136,6 @@ lemma exists_span_eq_top_localization_span_of_map_eq_span {A R : Type u} [CommRi
 
 variable {X T : Scheme.{u}}
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Local existence of lifts to the blow-up**: near every point of `T` there is an

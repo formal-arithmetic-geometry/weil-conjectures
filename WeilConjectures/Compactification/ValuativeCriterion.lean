@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
+public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 
@@ -179,25 +180,34 @@ private lemma algebraMap_fractionValuationSubringEquiv_symm (A K : Type u) [Comm
   rw [← algebraMap_fractionValuationSubringEquiv A K, RingEquiv.apply_symm_apply,
     ValuationSubring.algebraMap_apply]
 
-set_option maxHeartbeats 1000000 in
--- The proof assembles a long chain of `Spec.map` and stalk identities in a context
--- carrying the polynomial presentation and the probe data; the resulting unification
--- problems exceed the default heartbeat budget.
-open IsLocalRing in
-/-- The heart of the dense-source valuative criterion (Stacks Project Tag 0894), for an
-affine base and a scheme-theoretically dominant source: given the unique-lifting
-hypothesis against squares through `U`, every valuative square for `f` has a lift. -/
-private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶ Spec R)
-    (h : U ⟶ X) [QuasiCompact h] [IsSchemeTheoreticallyDominant h]
-    (H : ∀ (sq : ValuativeCommSq f) (ηU : Spec (CommRingCat.of sq.K) ⟶ U),
-      ηU ≫ h = sq.i₁ →
-      ∃! l : Spec (CommRingCat.of sq.R) ⟶ X,
-        Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ l = sq.i₁ ∧
-        l ≫ f = sq.i₂)
-    (sq : ValuativeCommSq f) : sq.commSq.HasLift := by
-  obtain ⟨A, K, i₁, i₂, ⟨w⟩⟩ := sq
-  letI : Field (CommRingCat.of K) := ‹_›
-  -- Step 1: an affine chart `V ∋ x₀` around the image of the `K`-point `i₁`.
+/-- Morphisms from the spectrum of a domain to an affine scheme are determined by their
+restriction to the generic point: `Spec` of the inclusion into the fraction field is an
+epimorphism of schemes onto its source in this weak sense. -/
+private lemma eq_of_specMap_algebraMap_comp_eq {R : CommRingCat.{u}} {A K : Type u}
+    [CommRing A] [IsDomain A] [Field K] [Algebra A K] [IsFractionRing A K]
+    {a b : Spec (CommRingCat.of A) ⟶ Spec R}
+    (h : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ a =
+      Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ b) : a = b := by
+  have : Mono (CommRingCat.ofHom (algebraMap A K)) :=
+    (ConcreteCategory.mono_iff_injective_of_preservesPullback _).mpr
+      (IsFractionRing.injective A K)
+  have h1 : Spec.preimage a ≫ CommRingCat.ofHom (algebraMap A K) =
+      Spec.preimage b ≫ CommRingCat.ofHom (algebraMap A K) := by
+    apply Spec.map_injective
+    rw [Spec.map_comp, Spec.map_comp, Spec.map_preimage, Spec.map_preimage]
+    exact h
+  rw [← Spec.map_preimage a, ← Spec.map_preimage b, (cancel_mono _).mp h1]
+
+/-- **A flat presentation of a field-valued point** (Steps 1 and 2 of the Stacks
+Project proof of Tag 0894): every morphism `i₁ : Spec K ⟶ X` from the spectrum of a
+field factors as `Spec K ⟶ Spec P ⟶ X` with `P ↠ K` surjective and `Spec P ⟶ X`
+flat. For `P` one takes a polynomial ring, with one variable for every element of `K`,
+over the sections of an affine chart around the image point. -/
+private lemma exists_flat_presentation_of_field_point {X : Scheme.{u}} {K : Type u}
+    [Field K] (i₁ : Spec (CommRingCat.of K) ⟶ X) :
+    ∃ (P : CommRingCat.{u}) (π : P ⟶ CommRingCat.of K) (p : Spec P ⟶ X),
+      Function.Surjective π.hom ∧ Flat p ∧ Spec.map π ≫ p = i₁ := by
+  -- an affine chart `V` around the image of the `K`-point
   obtain ⟨V, hV, hx₀V⟩ : ∃ V : X.Opens, IsAffineOpen V ∧
       i₁ (closedPoint (CommRingCat.of K)) ∈ V := by
     obtain ⟨_, ⟨V, hV, rfl⟩, hx₀V, -⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
@@ -214,7 +224,7 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
   let φ : Γ(X, V) ⟶ CommRingCat.of K := Spec.preimage (j ≫ hV.isoSpec.hom)
   have hφ : Spec.map φ ≫ hV.isoSpec.inv ≫ V.ι = i₁ := by
     rw [Spec.map_preimage, Category.assoc, Iso.hom_inv_id_assoc, hj]
-  -- Step 2: a flat polynomial presentation `P ↠ K` of the field point.
+  -- the polynomial ring with one variable for every element of `K`
   let P : Type u := MvPolynomial K ↥Γ(X, V)
   let π : P →+* K := MvPolynomial.eval₂Hom φ.hom id
   have hπ : Function.Surjective π := fun k ↦ ⟨MvPolynomial.X k, MvPolynomial.eval₂Hom_X' _ _ _⟩
@@ -230,16 +240,33 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       ← CommRingCat.ofHom_comp,
       show π.comp (algebraMap ↥Γ(X, V) P) = φ.hom from
         MvPolynomial.eval₂Hom_comp_C _ _, CommRingCat.ofHom_hom, hφ]
+  exact ⟨CommRingCat.of P, CommRingCat.ofHom π, p, hπ, hpflat, hi₁p⟩
+
+open IsLocalRing in
+/-- The heart of the dense-source valuative criterion (Stacks Project Tag 0894), for an
+affine base and a scheme-theoretically dominant source: given the unique-lifting
+hypothesis against squares through `U`, every valuative square for `f` has a lift. -/
+private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶ Spec R)
+    (h : U ⟶ X) [QuasiCompact h] [IsSchemeTheoreticallyDominant h]
+    (H : ∀ (sq : ValuativeCommSq f) (ηU : Spec (CommRingCat.of sq.K) ⟶ U),
+      ηU ≫ h = sq.i₁ →
+      ∃! l : Spec (CommRingCat.of sq.R) ⟶ X,
+        Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ l = sq.i₁ ∧
+        l ≫ f = sq.i₂)
+    (sq : ValuativeCommSq f) : sq.commSq.HasLift := by
+  obtain ⟨A, K, i₁, i₂, ⟨w⟩⟩ := sq
+  letI : Field (CommRingCat.of K) := ‹_›
+  obtain ⟨P, π, p, hπ, hpflat, hi₁p⟩ := exists_flat_presentation_of_field_point i₁
   -- Step 3: the valuation probe through `U ×_X Spec P ⟶ Spec P`.
   have : QuasiCompact (pullback.snd h p) := MorphismProperty.pullback_snd _ _ inferInstance
   obtain ⟨pr⟩ := nonempty_valuationProbe (pullback.snd h p)
-    (Spec.map (CommRingCat.ofHom π) (closedPoint (CommRingCat.of K)))
+    (Spec.map π (closedPoint (CommRingCat.of K)))
   -- Step 4: replace the abstract probe valuation ring by its image in `pr.K`.
   let VA' : ValuationSubring pr.K := fractionValuationSubring pr.R pr.K
   let e' : pr.R ≃+* ↥VA' := fractionValuationSubringEquiv pr.R pr.K
   have : IsLocalHom (e' : pr.R →+* ↥VA') := ⟨fun a ha ↦ by
     simpa using ha.map e'.symm.toRingHom⟩
-  let αV : Spec (CommRingCat.of ↥VA') ⟶ Spec (CommRingCat.of P) :=
+  let αV : Spec (CommRingCat.of ↥VA') ⟶ Spec P :=
     Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA')) ≫ pr.α
   have halg : CommRingCat.ofHom (e' : pr.R →+* ↥VA') ≫
       CommRingCat.ofHom (algebraMap ↥VA' pr.K) =
@@ -251,47 +278,28 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
     rw [pr.commSq.w, show αV = Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA')) ≫ pr.α
       from rfl, ← Category.assoc, ← Spec.map_comp, halg]
   have hclosed : αV (closedPoint ↥VA') =
-      Spec.map (CommRingCat.ofHom π) (closedPoint (CommRingCat.of K)) := by
+      Spec.map π (closedPoint (CommRingCat.of K)) := by
     rw [show αV = Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA')) ≫ pr.α from rfl,
       Scheme.Hom.comp_apply,
       show (Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA'))) (closedPoint ↥VA') =
         closedPoint pr.R from IsLocalRing.comap_closedPoint _,
       pr.closedPoint_eq]
   -- Step 5: descend the residue map of `VA'` to a field embedding `τ : K → k'`.
-  let ρ : CommRingCat.of P ⟶ CommRingCat.of ↥VA' := Spec.preimage αV
+  let ρ : P ⟶ CommRingCat.of ↥VA' := Spec.preimage αV
   have hρ : Spec.map ρ = αV := Spec.map_preimage _
-  have hker : ∀ a : P, a ∈ RingHom.ker π → ρ.hom a ∈ maximalIdeal ↥VA' := by
+  have hker : ∀ a ∈ RingHom.ker π.hom, ρ.hom a ∈ maximalIdeal ↥VA' := by
     intro a ha
-    have hmem : Spec.map (CommRingCat.ofHom π) (closedPoint (CommRingCat.of K)) ∈
+    have hmem : Spec.map π (closedPoint (CommRingCat.of K)) ∈
         PrimeSpectrum.zeroLocus {a} := by
       rw [PrimeSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
       refine Ideal.mem_comap.mpr ?_
       rw [RingHom.mem_ker] at ha
-      simp only [CommRingCat.hom_ofHom]
       rw [ha]
       exact zero_mem _
     rw [← hclosed, ← hρ, PrimeSpectrum.mem_zeroLocus, Set.singleton_subset_iff] at hmem
     exact hmem
-  let τ : K →+* ResidueField ↥VA' :=
-    (Ideal.Quotient.lift (RingHom.ker π) ((residue ↥VA').comp ρ.hom)
-      (fun a ha ↦ by
-        rw [RingHom.comp_apply]
-        exact Ideal.Quotient.eq_zero_iff_mem.mpr (hker a ha))).comp
-    ((RingHom.quotientKerEquivOfSurjective hπ).symm : K →+* P ⧸ RingHom.ker π)
-  have hτπ : τ.comp π = (residue ↥VA').comp ρ.hom := by
-    refine RingHom.ext fun a ↦ ?_
-    have h1 : (RingHom.quotientKerEquivOfSurjective hπ).symm (π a) =
-        Ideal.Quotient.mk (RingHom.ker π) a := by
-      apply (RingHom.quotientKerEquivOfSurjective hπ).injective
-      rw [RingEquiv.apply_symm_apply]
-      exact (RingHom.kerLift_mk π a).symm
-    change τ (π a) = residue ↥VA' (ρ.hom a)
-    have h2 : τ (π a) = (Ideal.Quotient.lift (RingHom.ker π) ((residue ↥VA').comp ρ.hom)
-        (fun b hb ↦ by
-          rw [RingHom.comp_apply]
-          exact Ideal.Quotient.eq_zero_iff_mem.mpr (hker b hb)))
-        ((RingHom.quotientKerEquivOfSurjective hπ).symm (π a)) := rfl
-    rw [h2, h1, Ideal.Quotient.lift_mk, RingHom.comp_apply]
+  obtain ⟨τ, hτπ⟩ :=
+    IsLocalRing.exists_ringHom_residue_comp_of_surjective hπ ρ.hom hker
   -- Step 6: extend the valuation ring `A ⊆ K` along `τ` and form the composite.
   let VA : ValuationSubring K := fractionValuationSubring A K
   obtain ⟨A'', hA''⟩ := ValuationSubring.exists_comap_eq τ VA
@@ -301,18 +309,19 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
   -- Step 7: the square through `U` for the composite valuation ring `C`.
   let ψ : R ⟶ CommRingCat.of A := Spec.preimage i₂
   have hψ : Spec.map ψ = i₂ := Spec.map_preimage _
-  let pre : R ⟶ CommRingCat.of P := Spec.preimage (p ≫ f)
+  let pre : R ⟶ P := Spec.preimage (p ≫ f)
   have hpre : Spec.map pre = p ≫ f := Spec.map_preimage _
   let θ : ↥R →+* ↥VA' := ρ.hom.comp pre.hom
-  have hπpre : pre ≫ CommRingCat.ofHom π = ψ ≫ CommRingCat.ofHom (algebraMap A K) := by
+  have hπpre : pre ≫ π = ψ ≫ CommRingCat.ofHom (algebraMap A K) := by
     apply Spec.map_injective
     rw [Spec.map_comp, Spec.map_comp, hpre, hψ, ← Category.assoc, hi₁p, w]
   have hθmem : ∀ r : ↥R, residue ↥VA' (θ r) ∈ A'' := by
     intro r
-    have h2 : residue ↥VA' (θ r) = τ (π (pre.hom r)) := by
-      rw [show τ (π (pre.hom r)) = τ.comp π (pre.hom r) from rfl, hτπ]
+    have h2 : residue ↥VA' (θ r) = τ (π.hom (pre.hom r)) := by
+      have h1 : τ (π.hom (pre.hom r)) = τ.comp π.hom (pre.hom r) := rfl
+      rw [h1, hτπ]
       rfl
-    have h3 : π (pre.hom r) = algebraMap A K (ψ.hom r) :=
+    have h3 : π.hom (pre.hom r) = algebraMap A K (ψ.hom r) :=
       congrArg (fun (g : R ⟶ CommRingCat.of K) ↦ g.hom r) hπpre
     have h4 : algebraMap A K (ψ.hom r) ∈ VA := ⟨ψ.hom r, rfl⟩
     rw [← hA''] at h4
@@ -374,7 +383,7 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
   -- Identity (I): the generic point of `Spec A''` recovers the base change of `i₁`
   -- along `τ`.
   have hcomm : ρ ≫ CommRingCat.ofHom (residue ↥VA') =
-      CommRingCat.ofHom π ≫ CommRingCat.ofHom τ := by
+      π ≫ CommRingCat.ofHom τ := by
     apply CommRingCat.hom_ext
     simpa using hτπ.symm
   have hI : Spec.map (CommRingCat.ofHom A''.toSubring.subtype) ≫ g'' =
@@ -387,7 +396,7 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       hi₁p]
   -- From here on, only the established equations matter: make the constructed data
   -- opaque so that unification does not unfold it.
-  clear_value rr g'' γ θ pre ψ τ ρ αV e' VA'
+  clear_value rr g'' γ θ pre ψ ρ αV e' VA'
   -- The closed point of `Spec A''` maps to a specialization of the `K`-point.
   have hτlocal : IsLocalHom τ := ⟨fun a ha ↦ by
     by_contra hna
@@ -505,40 +514,8 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       _ = i₁ := hκSpec
   have hl2 : (Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f =
       i₂ := by
-    have h1 : Spec.map (Spec.preimage
-          ((Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f) ≫
-          CommRingCat.ofHom (algebraMap A K)) =
-        Spec.map (ψ ≫ CommRingCat.ofHom (algebraMap A K)) :=
-      calc Spec.map (Spec.preimage
-              ((Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f) ≫
-              CommRingCat.ofHom (algebraMap A K))
-          = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ Spec.map (Spec.preimage
-              ((Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f)) :=
-            Spec.map_comp _ _
-        _ = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫
-              ((Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f) :=
-            congrArg (Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ ·)
-              (Spec.map_preimage _)
-        _ = (Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫
-              (Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring)))) ≫ f :=
-            (Category.assoc _ _ _).symm
-        _ = i₁ ≫ f := congrArg (· ≫ f) hl1
-        _ = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ i₂ := w
-        _ = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ Spec.map ψ :=
-            congrArg (Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ ·) hψ.symm
-        _ = Spec.map (ψ ≫ CommRingCat.ofHom (algebraMap A K)) := (Spec.map_comp _ _).symm
-    have : Mono (CommRingCat.ofHom (algebraMap A K)) :=
-      (ConcreteCategory.mono_iff_injective_of_preservesPullback _).mpr
-        (IsFractionRing.injective A K)
-    have h2 : Spec.preimage
-        ((Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f) = ψ :=
-      (cancel_mono _).mp (Spec.map_injective h1)
-    calc (Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f
-        = Spec.map (Spec.preimage
-            ((Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring))) ≫ f)) :=
-          (Spec.map_preimage _).symm
-      _ = Spec.map ψ := congrArg Spec.map h2
-      _ = i₂ := hψ
+    refine eq_of_specMap_algebraMap_comp_eq (A := A) (K := K) ?_
+    rw [← Category.assoc, hl1, w]
   exact ⟨⟨⟨Spec.map φl ≫ X.fromSpecStalk (g'' (closedPoint ↥A''.toSubring)), hl1, hl2⟩⟩⟩
 
 end ExistenceCore
