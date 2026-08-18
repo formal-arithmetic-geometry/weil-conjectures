@@ -43,8 +43,6 @@ counting formula, and it specialises to the classical Euler product over closed 
 (`WeilConjectures.ZetaCounting.Orbits`).
 -/
 
-open Finset
-
 namespace PowerSeries
 
 noncomputable section
