@@ -1,0 +1,435 @@
+\chapter{The formal exponential and logarithm}\label{chap:weil-formal-exp-log}
+
+This chapter is the power-series input for the zeta-function chapter: the
+formal exponential $\operatorname{Exp}$, its inverse the formal logarithm
+$\operatorname{Log}$, and the uniqueness principle for logarithmic
+differential equations that produces both.  Nothing analytic happens: all
+statements are coefficientwise identities of formal power series over a
+commutative ring.
+
+Throughout, $R$ is a commutative ring, $R[[T]]$ is the ring of formal power
+series in one indeterminate (written \texttt{\detokenize{R⟦X⟧}} in Lean),
+$c\colon R[[T]]\to R$ is the constant-coefficient ring homomorphism, and $D$
+is the formal derivative $D(\sum a_nT^n)=\sum(n+1)a_{n+1}T^n$.  Mathlib
+supplies $D$ as the derivation \texttt{\detokenize{PowerSeries.derivative}},
+notation \texttt{\detokenize{d⁄dX}}, the exponential series
+\texttt{\detokenize{PowerSeries.exp}}, the logarithmic series
+\texttt{\detokenize{PowerSeries.log}}, and the substituted logarithm
+\texttt{\detokenize{PowerSeries.logOf}}.  This chapter adds the missing
+companion $\operatorname{Exp}$ and the inversion package relating the two.
+The material is classical; it is the formal-series calculus underlying the
+zeta function of a variety over a finite field, as in
+\cite[Appendix~C]{Hartshorne}.
+
+\paragraph{Coefficient-ring scope.}
+Sections~\ref{sec:weil-log-ode} and~\ref{sec:weil-one-series} need only a
+commutative ring, the first additionally torsion-free as an abelian group.
+From Section~\ref{sec:weil-formal-exp} onwards $R$ is a commutative
+$\mathbf Q$-algebra, and the inversion statements of
+Section~\ref{sec:weil-exp-log-inverse} add torsion-freeness.  Each
+declaration carries exactly the hypotheses it uses.
+
+\section{Uniqueness for logarithmic differential equations}
+\label{sec:weil-log-ode}
+
+The whole chapter rests on one principle: a normalized power series is
+determined by its logarithmic derivative.  It costs no denominators, so it is
+stated over an arbitrary torsion-free commutative ring.  Recall that a power
+series $A$ with $c(A)=1$ is a unit, with inverse
+\texttt{\detokenize{PowerSeries.invOfUnit A 1}}, and that Mathlib's
+\texttt{\detokenize{PowerSeries.derivative.ext}} says that $D$ together with
+$c$ separates power series over a torsion-free ring.
+
+\begin{lemma}[Normalized series with vanishing derivative]
+  \label{lemma:weil-eq-one-of-derivative-eq-zero}
+  \lean{PowerSeries.eq_one_of_derivative_eq_zero}
+  \leanok
+
+  Let $R$ be a torsion-free commutative ring and let $P\in R[[T]]$ satisfy
+  $c(P)=1$ and $DP=0$.  Then $P=1$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  $D1=0$ because $D$ is a derivation, and $c(1)=1$.  So $P$ and $1$ have the
+  same derivative and the same constant coefficient, and
+  \texttt{\detokenize{PowerSeries.derivative.ext}} applies.
+\end{proof}
+
+\begin{lemma}[Common logarithmic derivative]
+  \label{lemma:weil-eq-of-derivative-eq-mul}
+  \uses{lemma:weil-eq-one-of-derivative-eq-zero}
+  \lean{PowerSeries.eq_of_derivative_eq_mul}
+  \leanok
+
+  Let $R$ be a torsion-free commutative ring and let $H,P,Q\in R[[T]]$
+  satisfy
+  \[
+    c(P)=c(Q)=1,\qquad DP=HP,\qquad DQ=HQ .
+  \]
+  Then $P=Q$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Write $Q^{-1}$ for \texttt{\detokenize{invOfUnit Q 1}}, so that $QQ^{-1}=1$
+  by \texttt{\detokenize{PowerSeries.mul_invOfUnit}}.  Differentiating that
+  identity and using $DQ=HQ$ gives
+  \[
+    Q\,D(Q^{-1})+Q^{-1}HQ=0 ,
+  \]
+  and multiplying by $Q^{-1}$ gives $D(Q^{-1})=-HQ^{-1}$.  Hence, by the
+  Leibniz rule,
+  \[
+    D\bigl(PQ^{-1}\bigr)
+      = (DP)Q^{-1}+P\,D(Q^{-1})
+      = HPQ^{-1}-PHQ^{-1}=0 .
+  \]
+  Moreover $c(PQ^{-1})=c(P)c(Q^{-1})=1$, because the constant coefficient of
+  \texttt{\detokenize{invOfUnit Q 1}} is $1$.  So $PQ^{-1}=1$ by
+  \Cref{lemma:weil-eq-one-of-derivative-eq-zero}, and multiplying by $Q$
+  gives $P=Q$.
+\end{proof}
+
+\section{The submonoid of normalized series}
+\label{sec:weil-one-series}
+
+\begin{definition}[Normalized one-series]
+  \label{def:weil-one-submonoid}
+  \lean{PowerSeries.oneSubmonoid}
+  \leanok
+
+  Let $R$ be a commutative ring.  Define
+  \[
+    \operatorname{OneSeries}(R):=\{A\in R[[T]]\mid c(A)=1\},
+  \]
+  the kernel of $c$ viewed as a homomorphism of multiplicative monoids.  It
+  is therefore a submonoid of $R[[T]]$ and carries the multiplication and the
+  unit of $R[[T]]$.
+
+  \formalizationnote{Dually, $\{U\mid c(U)=0\}$ is the ring-theoretic kernel
+  $\ker c$, an ideal of $R[[T]]$, and is used in that form below; no separate
+  definition is introduced for it.}
+\end{definition}
+
+\begin{lemma}[Membership in the one-series submonoid]
+  \label{lemma:weil-mem-one-submonoid}
+  \uses{def:weil-one-submonoid}
+  \lean{PowerSeries.mem_oneSubmonoid}
+  \leanok
+
+  For $A\in R[[T]]$ one has $A\in\operatorname{OneSeries}(R)$ if and only if
+  $c(A)=1$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  This is the definition of the kernel of a monoid homomorphism.
+\end{proof}
+
+\section{The alternating geometric series}
+\label{sec:weil-geometric}
+
+\begin{lemma}[Inverse of $1+T$]
+  \label{lemma:weil-mk-neg-one-pow-mul-one-add-X}
+  \lean{PowerSeries.mk_neg_one_pow_mul_one_add_X}
+  \leanok
+
+  Let $R$ be a commutative ring.  Then
+  \[
+    \Bigl(\sum_{n\ge0}(-1)^nT^n\Bigr)\,(1+T)=1 .
+  \]
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Compare coefficients.  In degree $0$ the left-hand side has coefficient
+  $(-1)^0=1$.  In degree $n+1$ it has coefficient
+  $(-1)^{n+1}+(-1)^n=0$.
+\end{proof}
+
+\begin{lemma}[Substituted derivative of the logarithm]
+  \label{lemma:weil-subst-derivative-log}
+  \uses{lemma:weil-mk-neg-one-pow-mul-one-add-X}
+  \lean{PowerSeries.subst_derivative_log}
+  \leanok
+
+  Let $R$ be a commutative $\mathbf Q$-algebra and let $A\in R[[T]]$ satisfy
+  $c(A)=1$.  Then
+  \[
+    \bigl(D\Lambda_R\bigr)\big|_{T=A-1}=A^{-1},
+  \]
+  where $\Lambda_R=\texttt{\detokenize{PowerSeries.log}}$ is the logarithmic
+  series and $A^{-1}=\texttt{\detokenize{invOfUnit A 1}}$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Mathlib's \texttt{\detokenize{PowerSeries.deriv_log}} identifies
+  $D\Lambda_R$ with $\sum_{n\ge0}(-1)^nT^n$.  Substitution at $A-1$, which is
+  legitimate because $c(A-1)=0$, is a ring homomorphism, so applying it to
+  \Cref{lemma:weil-mk-neg-one-pow-mul-one-add-X} and using
+  $1+(A-1)=A$ gives $\bigl(D\Lambda_R\bigr)\big|_{T=A-1}\cdot A=1$.  A
+  two-sided inverse in a commutative ring is unique, and $AA^{-1}=1$, so the
+  two inverses of $A$ agree.
+\end{proof}
+
+\section{The formal exponential}
+\label{sec:weil-formal-exp}
+
+\begin{definition}[Formal exponential]
+  \label{def:weil-formal-exp}
+  \lean{PowerSeries.expOf}
+  \leanok
+
+  Let $R$ be a commutative $\mathbf Q$-algebra.  For $U\in R[[T]]$ define
+  \[
+    \operatorname{Exp}(U):=E_R\big|_{T=U},
+    \qquad E_R:=\sum_{n\ge0}\frac{T^n}{n!},
+  \]
+  the substitution of $U$ into Mathlib's exponential series
+  \texttt{\detokenize{PowerSeries.exp}}.
+
+  \formalizationnote{\texttt{\detokenize{PowerSeries.subst}} is a total
+  function, so $\operatorname{Exp}$ is defined on all of $R[[T]]$; the
+  hypothesis $c(U)=0$, which makes the substitution meaningful, is carried by
+  the individual lemmas.  The defining equation is
+  \texttt{\detokenize{PowerSeries.expOf_eq}}.}
+\end{definition}
+
+\begin{lemma}[Constant coefficient of the exponential]
+  \label{lemma:weil-constant-coeff-exp}
+  \uses{def:weil-formal-exp}
+  \lean{PowerSeries.constantCoeff_expOf}
+  \leanok
+
+  If $c(U)=0$, then $c(\operatorname{Exp}(U))=1$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Substitution at $U$ is a ring homomorphism, so
+  $\operatorname{Exp}(U)-1=(E_R-1)\big|_{T=U}$.  The series $E_R-1$ has
+  vanishing constant coefficient, and substituting a series with vanishing
+  constant coefficient into one with vanishing constant coefficient again has
+  vanishing constant coefficient
+  (\texttt{\detokenize{PowerSeries.constantCoeff_subst_eq_zero}}).
+\end{proof}
+
+\begin{lemma}[Chain rule for the exponential]
+  \label{lemma:weil-derivative-exp}
+  \uses{def:weil-formal-exp}
+  \lean{PowerSeries.derivative_expOf}
+  \leanok
+
+  If $c(U)=0$, then
+  $D\operatorname{Exp}(U)=(DU)\operatorname{Exp}(U)$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  By \texttt{\detokenize{PowerSeries.derivative_subst}}, $D(f|_{T=U})
+  =(Df)|_{T=U}\cdot DU$; apply this to $f=E_R$ and use
+  $DE_R=E_R$ (\texttt{\detokenize{PowerSeries.derivative_exp}}).
+\end{proof}
+
+\begin{lemma}[Chain rule for the logarithm]
+  \label{lemma:weil-derivative-log}
+  \uses{lemma:weil-subst-derivative-log}
+  \lean{PowerSeries.derivative_logOf}
+  \leanok
+
+  Let $A\in R[[T]]$ satisfy $c(A)=1$.  Then
+  \[
+    D\operatorname{Log}(A)=(DA)A^{-1},
+  \]
+  where $\operatorname{Log}=\texttt{\detokenize{PowerSeries.logOf}}$ is
+  Mathlib's substituted logarithm $\Lambda_R\big|_{T=A-1}$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Again by \texttt{\detokenize{PowerSeries.derivative_subst}},
+  $D\operatorname{Log}(A)=\bigl(D\Lambda_R\bigr)\big|_{T=A-1}\cdot D(A-1)$.
+  Now $D(A-1)=DA$, and the substituted factor is $A^{-1}$ by
+  \Cref{lemma:weil-subst-derivative-log}.
+\end{proof}
+
+\section{Exponential and logarithm are inverse}
+\label{sec:weil-exp-log-inverse}
+
+From here on $R$ is a torsion-free commutative $\mathbf Q$-algebra.
+
+\begin{lemma}[Exponential of a sum]
+  \label{lemma:weil-exp-add}
+  \uses{lemma:weil-eq-of-derivative-eq-mul,lemma:weil-constant-coeff-exp,
+    lemma:weil-derivative-exp}
+  \lean{PowerSeries.expOf_add}
+  \leanok
+
+  If $c(U)=c(V)=0$, then
+  $\operatorname{Exp}(U+V)=\operatorname{Exp}(U)\operatorname{Exp}(V)$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Both sides have constant coefficient $1$ and both solve the logarithmic
+  differential equation with $H=DU+DV$: for the left-hand side this is
+  \Cref{lemma:weil-derivative-exp} applied to $U+V$, and for the right-hand
+  side it is the Leibniz rule together with
+  \Cref{lemma:weil-derivative-exp} for $U$ and for $V$.  Conclude by
+  \Cref{lemma:weil-eq-of-derivative-eq-mul}.
+\end{proof}
+
+\begin{lemma}[Exponential of zero]
+  \label{lemma:weil-exp-zero}
+  \uses{lemma:weil-eq-one-of-derivative-eq-zero,lemma:weil-derivative-exp}
+  \lean{PowerSeries.expOf_zero}
+  \leanok
+
+  $\operatorname{Exp}(0)=1$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  $c(\operatorname{Exp}(0))=1$ and
+  $D\operatorname{Exp}(0)=(D0)\operatorname{Exp}(0)=0$, so
+  \Cref{lemma:weil-eq-one-of-derivative-eq-zero} applies.
+\end{proof}
+
+\begin{proposition}[Logarithm after exponential]
+  \label{prop:weil-log-exp}
+  \uses{lemma:weil-derivative-log,lemma:weil-derivative-exp,
+    lemma:weil-constant-coeff-exp}
+  \lean{PowerSeries.logOf_expOf}
+  \leanok
+
+  If $c(U)=0$, then $\operatorname{Log}(\operatorname{Exp}(U))=U$.
+\end{proposition}
+
+\begin{proof}
+  \leanok
+  Write $A=\operatorname{Exp}(U)$, so $c(A)=1$.  By
+  \Cref{lemma:weil-derivative-log} and \Cref{lemma:weil-derivative-exp},
+  \[
+    D\operatorname{Log}(A)=(DA)A^{-1}=(DU)AA^{-1}=DU .
+  \]
+  Also $c(\operatorname{Log}(A))=0=c(U)$ by
+  \texttt{\detokenize{PowerSeries.constantCoeff_logOf}}.  Conclude with
+  \texttt{\detokenize{PowerSeries.derivative.ext}}.
+\end{proof}
+
+\begin{proposition}[Exponential after logarithm]
+  \label{prop:weil-exp-log}
+  \uses{lemma:weil-eq-of-derivative-eq-mul,lemma:weil-derivative-log,
+    lemma:weil-derivative-exp}
+  \lean{PowerSeries.expOf_logOf}
+  \leanok
+
+  If $c(A)=1$, then $\operatorname{Exp}(\operatorname{Log}(A))=A$.
+\end{proposition}
+
+\begin{proof}
+  \leanok
+  Put $H=(DA)A^{-1}$.  Both $\operatorname{Exp}(\operatorname{Log}(A))$ and
+  $A$ have constant coefficient $1$.  The first satisfies
+  $D\operatorname{Exp}(\operatorname{Log}(A))
+   =\bigl(D\operatorname{Log}(A)\bigr)\operatorname{Exp}(\operatorname{Log}(A))
+   =H\operatorname{Exp}(\operatorname{Log}(A))$ by
+  \Cref{lemma:weil-derivative-exp} and \Cref{lemma:weil-derivative-log}, and
+  the second satisfies $DA=(DA)A^{-1}A=HA$.  Conclude by
+  \Cref{lemma:weil-eq-of-derivative-eq-mul}.
+\end{proof}
+
+\begin{lemma}[Logarithm of one]
+  \label{lemma:weil-log-one}
+  \uses{prop:weil-log-exp,lemma:weil-exp-zero}
+  \lean{PowerSeries.logOf_one}
+  \leanok
+
+  $\operatorname{Log}(1)=0$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  $\operatorname{Log}(1)=\operatorname{Log}(\operatorname{Exp}(0))=0$ by
+  \Cref{lemma:weil-exp-zero} and \Cref{prop:weil-log-exp}.
+\end{proof}
+
+\begin{proposition}[Logarithm of a product]
+  \label{prop:weil-log-mul}
+  \uses{lemma:weil-exp-add,prop:weil-log-exp,prop:weil-exp-log}
+  \lean{PowerSeries.logOf_mul}
+  \leanok
+
+  If $c(A)=c(B)=1$, then
+  $\operatorname{Log}(AB)=\operatorname{Log}(A)+\operatorname{Log}(B)$.
+\end{proposition}
+
+\begin{proof}
+  \leanok
+  By \Cref{prop:weil-exp-log} and \Cref{lemma:weil-exp-add},
+  \[
+    AB=\operatorname{Exp}(\operatorname{Log}(A))
+       \operatorname{Exp}(\operatorname{Log}(B))
+      =\operatorname{Exp}\bigl(\operatorname{Log}(A)+\operatorname{Log}(B)\bigr).
+  \]
+  Both logarithms have vanishing constant coefficient, so applying
+  \Cref{prop:weil-log-exp} to the right-hand side gives the claim.
+\end{proof}
+
+\begin{proposition}[Logarithm of a finite product]
+  \label{prop:weil-log-prod}
+  \uses{prop:weil-log-mul,lemma:weil-log-one}
+  \lean{PowerSeries.logOf_prod}
+  \leanok
+
+  Let $S$ be a finite index set and let $A_i\in R[[T]]$ satisfy $c(A_i)=1$
+  for every $i\in S$.  Then
+  \[
+    \operatorname{Log}\Bigl(\prod_{i\in S}A_i\Bigr)
+      =\sum_{i\in S}\operatorname{Log}(A_i).
+  \]
+\end{proposition}
+
+\begin{proof}
+  \leanok
+  Induction on $S$.  The empty case is \Cref{lemma:weil-log-one}.  For the
+  induction step, the product over the smaller set again has constant
+  coefficient $1$, so \Cref{prop:weil-log-mul} applies.
+\end{proof}
+
+\begin{theorem}[Exponential/logarithm bijection]
+  \label{thm:weil-exp-log-equiv}
+  \uses{def:weil-one-submonoid,lemma:weil-exp-add,prop:weil-log-exp,
+    prop:weil-exp-log,lemma:weil-constant-coeff-exp}
+  \lean{PowerSeries.expOfMulEquiv}
+  \leanok
+
+  Let $R$ be a torsion-free commutative $\mathbf Q$-algebra.  The formal
+  exponential is an isomorphism
+  \[
+    \operatorname{Exp}\colon
+      \bigl(\ker c,+\bigr)\;\xrightarrow{\ \sim\ }\;
+      \bigl(\operatorname{OneSeries}(R),\cdot\bigr)
+  \]
+  from the additive group of the ideal $\ker c\subseteq R[[T]]$ onto the
+  multiplicative monoid of normalized one-series, with inverse
+  $\operatorname{Log}$.
+\end{theorem}
+
+\begin{proof}
+  \leanok
+  \Cref{lemma:weil-constant-coeff-exp} and
+  \texttt{\detokenize{PowerSeries.constantCoeff_logOf}} show that
+  $\operatorname{Exp}$ and $\operatorname{Log}$ restrict to maps between the
+  two carriers; \Cref{prop:weil-log-exp} and \Cref{prop:weil-exp-log} show
+  that they are mutually inverse; \Cref{lemma:weil-exp-add} is
+  multiplicativity.
+
+  \formalizationnote{In Lean the source is written
+  \texttt{\detokenize{Multiplicative (RingHom.ker (constantCoeff (R := R)))}}
+  so that the statement is a \texttt{\detokenize{MulEquiv}}; the projection
+  lemmas are \texttt{\detokenize{PowerSeries.expOfMulEquiv_apply}} and
+  \texttt{\detokenize{PowerSeries.expOfMulEquiv_symm_apply}}.}
+\end{proof}
