@@ -26,6 +26,7 @@ public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.Dynamics.OrbitCount
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
@@ -58,7 +59,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.IsIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.Dynamics.PeriodicPts.Defs
-public import WeilConjectures.Mathlib.Dynamics.PeriodicPts.OrbitCount
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
