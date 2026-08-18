@@ -166,15 +166,15 @@ theorem one_sub_X_pow_mul_inverseEulerFactor_and_mul_one_sub_X_pow {m : ℕ}
       inverseEulerFactor R m * (1 - X ^ m) = 1 :=
   ⟨one_sub_X_pow_mul_inverseEulerFactor hm, inverseEulerFactor_mul_one_sub_X_pow hm⟩
 
-/-- `lemma:weil-inverse-euler-factor-map`.  Inverse Euler factors are compatible
-with coefficientwise ring maps: `map f E_{m,R} = E_{m,S}`. -/
+/-- Inverse Euler factors are compatible with coefficientwise ring maps:
+`map f E_{m,R} = E_{m,S}`. (blueprint: `lemma:weil-inverse-euler-factor-map`) -/
 theorem map_inverseEulerFactor {S : Type*} [CommRing S] (f : R →+* S) (m : ℕ) :
     PowerSeries.map f (inverseEulerFactor R m) = inverseEulerFactor S m := by
   ext n
   simp [inverseEulerFactor, coeff_map]
 
-/-- `lemma:weil-inverse-euler-factor-int`.  Over `ℤ` the scalar extension is the
-raw integral inverse Euler factor. -/
+/-- Over `ℤ` the scalar extension is the raw integral inverse Euler factor.
+(blueprint: `lemma:weil-inverse-euler-factor-int`) -/
 theorem inverseEulerFactor_int (m : ℕ) :
     inverseEulerFactor ℤ m = integralInverseEulerFactor m := by
   ext n
@@ -185,15 +185,16 @@ theorem inverseEulerFactor_int (m : ℕ) :
 def inverseEulerFactorPositivePart (R : Type*) [CommRing R] (m : ℕ) : R⟦X⟧ :=
   inverseEulerFactor R m - 1
 
-/-- The factor `1 + e_m` is the inverse Euler factor `E_m`. -/
+/-- The factor `1 + e_m` is the inverse Euler factor `E_m`.
+(blueprint: `lemma:weil-inverse-euler-factor-one-add-positive-part`) -/
 @[simp]
 theorem one_add_inverseEulerFactorPositivePart (m : ℕ) :
     1 + inverseEulerFactorPositivePart R m = inverseEulerFactor R m := by
   rw [inverseEulerFactorPositivePart]
   ring
 
-/-- `lemma:weil-inverse-euler-positive-part-map`.  The positive part of an inverse
-Euler factor is compatible with coefficientwise ring maps. -/
+/-- The positive part of an inverse Euler factor is compatible with coefficientwise ring
+maps. (blueprint: `lemma:weil-inverse-euler-positive-part-map`) -/
 theorem map_inverseEulerFactorPositivePart {S : Type*} [CommRing S] (f : R →+* S)
     (m : ℕ) :
     PowerSeries.map f (inverseEulerFactorPositivePart R m) =

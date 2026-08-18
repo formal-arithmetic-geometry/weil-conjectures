@@ -128,7 +128,8 @@ theorem one_add {N : ℕ} {u : R⟦X⟧} (h : PowerSeries.AgreeThrough N u 0) :
     PowerSeries.AgreeThrough N (1 + u) 1 := by
   simpa using (refl N (1 : R⟦X⟧)).add h
 
-/-- Agreement through a degree is preserved by a coefficientwise ring map. -/
+/-- Agreement through a degree is preserved by a coefficientwise ring map.
+(blueprint: `lemma:weil-series-agree-through-map`) -/
 theorem map {S : Type*} [CommRing S] (f : R →+* S) {N : ℕ} {A B : R⟦X⟧}
     (h : PowerSeries.AgreeThrough N A B) :
     PowerSeries.AgreeThrough N (PowerSeries.map f A) (PowerSeries.map f B) := by
@@ -268,7 +269,8 @@ theorem product_agree_finset {N : ℕ} {S : Finset I}
 
 /-! #### Reindexing and coefficient change -/
 
-/-- A locally finite family is determined by its components. -/
+/-- A locally finite family is determined by its components.
+(blueprint: `lemma:weil-t-adic-locally-finite-family-ext`) -/
 @[ext]
 theorem ext {u v : TAdicallyLocallyFiniteFamily R I} (h : ∀ i, u.toFun i = v.toFun i) :
     u = v := by
@@ -280,7 +282,8 @@ theorem ext {u v : TAdicallyLocallyFiniteFamily R I} (h : ∀ i, u.toFun i = v.t
       subst huv
       rfl
 
-/-- Reindexing a locally finite family along an equivalence of index types. -/
+/-- Reindexing a locally finite family along an equivalence of index types.
+(blueprint: `def:weil-locally-finite-family-reindex`) -/
 def reindex {J : Type*} (e : J ≃ I) : TAdicallyLocallyFiniteFamily R J where
   toFun j := u.toFun (e j)
   constantCoeff_eq_zero j := u.constantCoeff_eq_zero (e j)
@@ -291,18 +294,21 @@ theorem reindex_toFun {J : Type*} (e : J ≃ I) (j : J) :
     (u.reindex e).toFun j = u.toFun (e j) :=
   rfl
 
-/-- Reindexing does not change the truncated products. -/
+/-- Reindexing does not change the truncated products.
+(blueprint: `lemma:weil-locally-finite-truncated-product-reindex`) -/
 theorem truncatedProduct_reindex {J : Type*} (e : J ≃ I) (N : ℕ) :
     (u.reindex e).truncatedProduct N = u.truncatedProduct N :=
   Finset.prod_equiv e
     (fun j ↦ by rw [mem_activeFinset, mem_activeFinset, reindex_toFun]) fun _ _ ↦ rfl
 
-/-- `Equiv`-reindexing does not change the locally finite product. -/
+/-- `Equiv`-reindexing does not change the locally finite product.
+(blueprint: `prop:weil-locally-finite-product-reindex`) -/
 theorem product_reindex {J : Type*} (e : J ≃ I) : (u.reindex e).product = u.product := by
   ext N
   rw [coeff_product, coeff_product, u.truncatedProduct_reindex e N]
 
-/-- The image of a locally finite family under a coefficientwise ring map. -/
+/-- The image of a locally finite family under a coefficientwise ring map.
+(blueprint: `def:weil-locally-finite-family-map`) -/
 def map {S : Type*} [CommRing S] (f : R →+* S) : TAdicallyLocallyFiniteFamily S I where
   toFun i := PowerSeries.map f (u.toFun i)
   constantCoeff_eq_zero i := by
@@ -317,7 +323,8 @@ theorem map_toFun {S : Type*} [CommRing S] (f : R →+* S) (i : I) :
     (u.map f).toFun i = PowerSeries.map f (u.toFun i) :=
   rfl
 
-/-- A coefficient change can only deactivate indices. -/
+/-- A coefficient change can only deactivate indices.
+(blueprint: `lemma:weil-locally-finite-active-finset-map-subset`) -/
 theorem activeFinset_map_subset {S : Type*} [CommRing S] (f : R →+* S) (N : ℕ) :
     (u.map f).activeFinset N ⊆ u.activeFinset N := by
   intro i hi
@@ -325,7 +332,8 @@ theorem activeFinset_map_subset {S : Type*} [CommRing S] (f : R →+* S) (N : �
   intro h
   exact hi (by simpa using h.map f)
 
-/-- Coefficientwise ring maps commute with locally finite products. -/
+/-- Coefficientwise ring maps commute with locally finite products.
+(blueprint: `prop:weil-locally-finite-product-map`) -/
 theorem product_map {S : Type*} [CommRing S] (f : R →+* S) :
     PowerSeries.map f u.product = (u.map f).product := by
   ext N

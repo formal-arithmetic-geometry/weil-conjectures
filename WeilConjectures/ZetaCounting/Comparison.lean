@@ -34,7 +34,8 @@ namespace Weil
 
 noncomputable section
 
-/-- An inverse Euler factor is the geometric series `(1 - T^m)⁻¹`. -/
+/-- An inverse Euler factor is the geometric series `(1 - T^m)⁻¹`.
+(blueprint: `lemma:weil-inverse-euler-factor-geometric`) -/
 theorem inverseEulerFactor_eq_inv_one_sub_X_pow {m : ℕ} (hm : 1 ≤ m) :
     inverseEulerFactor ℚ m = ((1 - PowerSeries.X ^ m)⁻¹ : ℚ⟦X⟧) := by
   rw [PowerSeries.inv_one_sub_X_pow_eq_mk (by omega : m ≠ 0)]
@@ -43,7 +44,8 @@ theorem inverseEulerFactor_eq_inv_one_sub_X_pow {m : ℕ} (hm : 1 ≤ m) :
 
 open scoped PowerSeries.WithPiTopology in
 /-- The locally finite Euler product of a degree function is the coefficientwise infinite
-product `∏' i, (1 - T^{d i})⁻¹` of `PowerSeries.WithPiTopology`. -/
+product `∏' i, (1 - T^{d i})⁻¹` of `PowerSeries.WithPiTopology`.
+(blueprint: `prop:weil-euler-product-eq-tprod`) -/
 theorem eulerProduct_eq_tprod {ι : Type*} (d : ι → ℕ) (hd : ∀ i, 1 ≤ d i)
     (hfin : ∀ N : ℕ, {i : ι | d i ≤ N}.Finite) :
     eulerProduct ℚ d hfin = ∏' i, ((1 - PowerSeries.X ^ d i)⁻¹ : ℚ⟦X⟧) := by
@@ -55,8 +57,8 @@ theorem eulerProduct_eq_tprod {ι : Type*} (d : ι → ℕ) (hd : ∀ i, 1 ≤ d
   exact congrArg _
     (Finset.prod_congr rfl fun i _ ↦ inverseEulerFactor_eq_inv_one_sub_X_pow (hd i))
 
-/-- The counting zeta series of the point counts of a scheme over a finite field is its
-zeta series `Z(X, t) = Exp(∑ N_n tⁿ/n)`. -/
+/-- The counting zeta series of the point counts of a scheme over a finite field is its zeta
+series `Z(X, t) = Exp(∑ N_n tⁿ/n)`. (blueprint: `prop:weil-counting-zeta-eq-scheme-zeta`) -/
 theorem countingZetaSeries_pointCount {S : AlgebraicGeometry.Scheme.{u}} {k : Type u}
     [Field k] (f : S.Hom (AlgebraicGeometry.Spec (.of k))) :
     countingZetaSeries f.pointCount = f.zetaSeries :=
