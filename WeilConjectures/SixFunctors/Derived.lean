@@ -487,11 +487,11 @@ being Grothendieck abelian.
 open MonoidalCategory
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-variable [HasWeakSheafify Z.smallEtaleTopology A]
-variable [HasDerivedCategory.{w} (Sheaf Y.smallEtaleTopology A)]
-variable [HasDerivedCategory.{w'} (Sheaf Z.smallEtaleTopology A)]
+variable [HasSheafify Z.smallEtaleTopology A]
 variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
   (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
+variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
+  (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
 variable [MonoidalCategory A] [MonoidalPreadditive A]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
