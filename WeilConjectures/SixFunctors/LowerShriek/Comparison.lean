@@ -122,7 +122,7 @@ has terminal sections over an object with empty underlying scheme, which is the 
 
 @[expose] public section
 
-universe w v' u' u
+universe w u' u
 
 open CategoryTheory Category Limits Opposite
 
@@ -130,13 +130,17 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 
 section OpenImmersion
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-
-variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 
 /-- The canonical natural transformation `i_! ⟶ i_*` from the extension by zero to the
 pushforward along an open immersion, obtained from the adjoint triple `i_! ⊣ i^* ⊣ i_*`:
@@ -185,11 +189,12 @@ and initial elsewhere; the two pieces of the decomposition of `V` give `F(V_U)` 
 sections of the initial sheaf over `V_W`, so `j_! F` and `j_* F` agree as soon as the
 initial object of `A` is also terminal.
 
-The hypothesis `HasZeroObject A` is genuinely needed, and not an artefact of the proof: for
-`A = Type` and `j` a clopen immersion with nonempty complement `W`, `(j_* F)(W) = F(∅)` is a
-singleton while `(j_! F)(W)` is empty, since every étale cover of the nonempty `W` has a
-piece with no lift through `j`. So the comparison is not an isomorphism there. -/
-theorem Etale.isIso_openImmersionLowerShriekToLowerStar [HasZeroObject A]
+The zero object of `A` (available since `A` is abelian) is genuinely needed, and not an
+artefact of the proof: for `A = Type` and `j` a clopen immersion with nonempty complement
+`W`, `(j_* F)(W) = F(∅)` is a singleton while `(j_! F)(W)` is empty, since every étale
+cover of the nonempty `W` has a piece with no lift through `j`. So the comparison is not
+an isomorphism there. -/
+theorem Etale.isIso_openImmersionLowerShriekToLowerStar
     (hj : IsClopen (Set.range j)) :
     IsIso (Etale.openImmersionLowerShriekToLowerStar A j) :=
   sorry
@@ -252,7 +257,6 @@ end OpenImmersion
 section Comparison
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-variable [HasInitial A] [∀ Z : Scheme.{u}, HasWeakSheafify Z.smallEtaleTopology A]
 
 /-- The canonical comparison `ι_f : f_! ⟶ f_*` from the lower shriek to the pushforward
 along a morphism `f` admitting a compactification `X --i--> Z --g--> Y`: it is induced by
@@ -290,7 +294,7 @@ immersion with clopen range satisfies `i_! ≅ i_*`
 (`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar`), and the induced
 comparison of the composites is then an isomorphism by
 `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`. -/
-theorem Etale.isIso_lowerShriekToLowerStar [IsProper f] [HasZeroObject A] :
+theorem Etale.isIso_lowerShriekToLowerStar [IsProper f] :
     IsIso (Etale.lowerShriekToLowerStar A f) :=
   Etale.isIso_lowerShriekToLowerStar_of_isIso A f
     (Etale.isIso_openImmersionLowerShriekToLowerStar A _

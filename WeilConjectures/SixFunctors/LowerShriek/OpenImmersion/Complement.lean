@@ -19,8 +19,9 @@ and deduces that `k^*` of the comparison `j_! ⟶ j_*` is an isomorphism.
 Together with the `j^*` half (`j_!` fully faithful for an open immersion), this discharges the
 hypothesis `hkc` of
 `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isIso_restriction`, and
-it is the one place where `[HasZeroObject A]` is consumed — see the counterexample recorded in
-the docstring of `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar`.
+it is the one place where the zero object of the abelian `A` is consumed — see the
+counterexample recorded in the docstring of
+`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar`.
 
 ## The argument
 
@@ -130,7 +131,13 @@ end Geometry
 
 section Disjoint
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable {U W X : Scheme.{u}} (j : U ⟶ X) (k : W ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -157,9 +164,8 @@ noncomputable def Etale.isTerminalSections_openImmersionRestriction_lowerStar
     ((MorphismProperty.Over.pullback @Etale ⊤ j).obj
       ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ k)).obj T))
 
-variable [HasZeroObject A]
-
 set_option backward.isDefEq.respectTransparency false in
+omit [IsGrothendieckAbelian.{u} A] in
 /-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. -/
 lemma Etale.isZero_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
@@ -169,8 +175,6 @@ lemma Etale.isZero_openImmersionRestriction_lowerStar
   exact IsZero.of_iso (isZero_zero A)
     ((Etale.isTerminalSections_openImmersionRestriction_lowerStar A j k hjk F T).uniqueUpToIso
       HasZeroObject.zeroIsTerminal)
-
-variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **`k^* j_! F` is initial**, proved through Hom-sets rather than through sections: the two
@@ -224,9 +228,14 @@ lemma Scheme.Hom.range_inter_range_clopenComplement_ι (j : U ⟶ X) [IsOpenImme
   rw [Scheme.Opens.range_ι]
   exact Set.inter_compl_self _
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable (j : U ⟶ X) [IsOpenImmersion j]
-variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A] [HasZeroObject A]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **The hypothesis `hkc` of

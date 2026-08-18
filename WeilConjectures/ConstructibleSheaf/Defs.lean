@@ -55,14 +55,14 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   followed by sheafification, and the Kan extensions in question are not known to exist
   for an arbitrary `f` with current mathlib: the full small étale site is not known to be
   essentially small (only the small affine étale site
-  `AlgebraicGeometry.Scheme.AffineEtale` is). Mathematically they always exist, so in
-  `IsConstructibleSheaf`, where the stratification is existentially quantified, their
-  existence — together with `HasWeakSheafify` for the small étale sites of all schemes
-  and their localizations — is assumed as instance hypotheses of the definition,
-  quantified over all morphisms into `X`; the definition is mathematically unchanged and
-  the hypotheses become vacuous once essential smallness of the small étale site is
-  formalized (for concrete `A`, `HasWeakSheafify` already holds by mathlib's
-  `HasSheafify` instance for `smallEtaleTopology`).
+  `AlgebraicGeometry.Scheme.AffineEtale` is). Mathematically they always exist; they are
+  provided by the sorried instance
+  `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
+  `WeilConjectures.SixFunctors.Instances`. What remains assumed as an instance hypothesis
+  of `IsConstructibleSheaf` is `HasWeakSheafify` for the localizations of the small étale
+  sites of all schemes, quantified because the stratification is existentially
+  quantified; for concrete `A`, `HasWeakSheafify` for the (unlocalized) small étale sites
+  already holds by mathlib's `HasSheafify` instance for `smallEtaleTopology`.
 - Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the
   existence of the right Kan extensions along `(Over.forget U).op` needed to compare
   sheafification on the small étale site with sheafification on its localizations.
@@ -82,15 +82,19 @@ variable {X Y : Scheme.{u}}
 
 section PullbackFunctor
 
-variable (A : Type u') [Category.{v} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 
 /-- The pullback of étale sheaves along `f : X ⟶ Y` sends constant sheaves to constant
 sheaves: `constantSheaf ⋙ f^*` and `constantSheaf` are both left adjoint to global
 sections of the pushforward, since base change preserves the terminal object of the
 small étale site (`X ×_Y Y ≅ X`). -/
-def upperStarConstantSheafIso (f : X ⟶ Y)
-    [∀ P : Y.Etaleᵒᵖ ⥤ A, (MorphismProperty.Over.pullback @Etale ⊤ f).op.HasLeftKanExtension P]
-    [HasWeakSheafify Y.smallEtaleTopology A] [HasWeakSheafify X.smallEtaleTopology A] :
+def upperStarConstantSheafIso (f : X ⟶ Y) :
     constantSheaf Y.smallEtaleTopology A ⋙ Etale.upperStar A f ≅
       constantSheaf X.smallEtaleTopology A :=
   Adjunction.leftAdjointUniq
@@ -206,12 +210,14 @@ end Stratification
 
 section Constructible
 
-variable {A : Type u'} [Category.{v} A]
-  {FA : A → A → Type*} {CD : A → Type*}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory A FA]
+variable {A : Type u'} [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
   [HasColimitsOfSize.{u, u} A]
-  [∀ (T : Scheme.{u}) (f : T ⟶ X) (P : X.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ f).op.HasLeftKanExtension P]
   [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
@@ -222,16 +228,14 @@ The stratification records a choice of scheme structure on each stratum via the 
 `S.immersion i : S.domain i ⟶ X`; by topological invariance of the small étale site the
 condition does not depend on this choice.
 
-The pullback `Etale.upperStar` needs left Kan extensions along base change by the
-immersions, and stating `IsFiniteLocallyConstantSheaf` needs sheafification for the small
-étale sites of the strata and their localizations. Since the stratification is
-existentially quantified, these existence conditions are hypotheses of the definition,
-quantified over all schemes and morphisms into `X`. The sheafification hypothesis is
-stated for the localized sites only: sheafification for the small étale sites themselves
-follows by localizing at the terminal object, see
-`AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`. The conditions always
-hold mathematically but are not known to hold with current mathlib (see the module
-implementation notes).
+The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
+provided by the sorried instance
+`CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
+`WeilConjectures.SixFunctors.Instances`. Stating `IsFiniteLocallyConstantSheaf` needs
+sheafification for the localizations of the small étale sites of the strata; since the
+stratification is existentially quantified, this is a hypothesis of the definition,
+quantified over all schemes. It always holds mathematically but is not known to hold
+with current mathlib (see the module implementation notes).
 
 For `X` quasi-compact and quasi-separated this global definition agrees with the
 affine-local one of [Stacks 03RW]. In the `ℓ`-adic formalism it is applied with

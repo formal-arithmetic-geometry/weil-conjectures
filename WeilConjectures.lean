@@ -66,6 +66,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.SixFunctors.Instances
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale

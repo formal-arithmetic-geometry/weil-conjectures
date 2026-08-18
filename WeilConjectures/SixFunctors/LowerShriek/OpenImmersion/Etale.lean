@@ -67,7 +67,7 @@ and is computed by restriction along the localization functor. This yields the a
 
 @[expose] public section
 
-universe v' u' u
+universe u' u
 
 open CategoryTheory Limits Opposite
 
@@ -181,7 +181,13 @@ end Scheme
 
 section KanExtension
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [Etale j]
 
 open Scheme in
@@ -189,7 +195,7 @@ open Scheme in
 left Kan extensions with values in a category with an initial object exist: the indexing
 comma categories are either empty or admit a terminal object. -/
 instance hasPointwiseLeftKanExtension_of_etale_and_mono
-    [Mono j] [HasInitial A] (F : U.Etaleᵒᵖ ⥤ A) :
+    [Mono j] (F : U.Etaleᵒᵖ ⥤ A) :
     (MorphismProperty.Over.map ⊤ ‹Etale j›).op.HasPointwiseLeftKanExtension F := by
   intro V
   by_cases h : Nonempty (Etale.LiftIndex j V.unop)
@@ -220,7 +226,7 @@ lemma essImage_or_isEmpty_costructuredArrow [Mono j] (V : X.Etaleᵒᵖ) :
 
 /-- The presheaf-level lower shriek along an étale monomorphism is left exact: the pointwise
 left Kan extension is either an evaluation or a zero object. -/
-instance preservesFiniteLimits_lan_of_etale_and_mono [Mono j] [Abelian A] :
+instance preservesFiniteLimits_lan_of_etale_and_mono [Mono j] :
     PreservesFiniteLimits
       ((MorphismProperty.Over.map ⊤ ‹Etale j›).op.lan : (U.Etaleᵒᵖ ⥤ A) ⥤ X.Etaleᵒᵖ ⥤ A) :=
   Functor.preservesFiniteLimits_lan_of_essImage_or_isEmpty _
@@ -230,7 +236,13 @@ end KanExtension
 
 section LowerShriek
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- The restriction `j^*` along an open immersion `j : U ⟶ X` on sheaves for the small
@@ -240,6 +252,7 @@ def Etale.openImmersionRestriction :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf U.smallEtaleTopology A :=
   GrothendieckTopology.localizationRestriction A @Etale @Etale j inferInstance
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- The sections of `j^* G` over `T → U` are the sections of `G` over `T → U → X`. -/
 lemma Etale.openImmersionRestriction_obj_val_obj (G : Sheaf X.smallEtaleTopology A)
     (b : U.Etale) :
@@ -266,25 +279,19 @@ instance Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit :
     (X.smallGrothendieckTopology (Q := @Etale) @Etale)
 
 /-- The restriction `j^*` along an open immersion on étale sheaves is additive. -/
-instance Etale.openImmersionRestriction_additive [Preadditive A] :
+instance Etale.openImmersionRestriction_additive :
     (Etale.openImmersionRestriction A j).Additive where
-
-variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 
 /-- The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
 étale sites. -/
 noncomputable def Etale.openImmersionLowerShriek :
     Sheaf U.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
-  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
   GrothendieckTopology.localizationLowerShriek A @Etale @Etale j inferInstance
 
 /-- The adjunction `j_! ⊣ j^*` between the extension by zero and the restriction along an
 open immersion. -/
 noncomputable def Etale.openImmersionLowerShriekAdjunction :
     Etale.openImmersionLowerShriek A j ⊣ Etale.openImmersionRestriction A j :=
-  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
   GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale j inferInstance
 
 instance : (Etale.openImmersionLowerShriek A j).IsLeftAdjoint :=
@@ -295,7 +302,7 @@ instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in a
 preadditive category is additive, being left adjoint to the additive restriction `j^*`. -/
-instance Etale.openImmersionLowerShriek_additive [Preadditive A] :
+instance Etale.openImmersionLowerShriek_additive :
     (Etale.openImmersionLowerShriek A j).Additive :=
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
@@ -304,14 +311,12 @@ abelian category is exact. This is the left exactness half.
 
 `j_!` is the presheaf-level left Kan extension followed by sheafification, and both factors
 are left exact: the first by
-`AlgebraicGeometry.preservesFiniteLimits_lan_of_etale_and_mono`, the second by the
-`HasSheafify` hypothesis. Note that this is genuinely stronger than the `HasWeakSheafify`
-needed to define `j_!`: `HasWeakSheafify` only provides the sheafification adjunction, and
-exactness of sheafification is exactly the extra content of `HasSheafify`. The hypothesis is
-harmless in practice, since Mathlib provides `HasSheafify X.smallEtaleTopology A` for the
-concrete coefficient categories of interest (`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`). -/
-instance Etale.preservesFiniteLimits_openImmersionLowerShriek [Abelian A]
-    [HasSheafify X.smallEtaleTopology A] :
+`AlgebraicGeometry.preservesFiniteLimits_lan_of_etale_and_mono`, the second by the left
+exactness of sheafification, which is the content of `HasSheafify` beyond the
+`HasWeakSheafify` needed to define `j_!`; both are provided for the concrete Grothendieck
+abelian coefficient category `A` by Mathlib
+(`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`). -/
+instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (Etale.openImmersionLowerShriek A j) := by
   have heq : Etale.openImmersionLowerShriek A j =
       sheafToPresheaf U.smallEtaleTopology A ⋙
@@ -329,8 +334,6 @@ example : PreservesFiniteColimits (Etale.openImmersionLowerShriek A j) :=
   inferInstance
 
 section UpperStar
-
-variable [HasWeakSheafify U.smallEtaleTopology A]
 
 /-- For an open immersion `j`, the pullback `j^*` of
 `WeilConjectures.SixFunctors.UpperLowerStar.Etale` is computed by restriction along the

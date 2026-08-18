@@ -16,21 +16,21 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 # Derived pushforward and derived lower shriek on unbounded derived categories
 
-For an abelian coefficient category `A` admitting sheafification on the small étale sites,
-the categories of `A`-valued étale sheaves are abelian, the pushforward
+The categories of `A`-valued étale sheaves are abelian, the pushforward
 `g_* = Etale.lowerStar` along an arbitrary morphism `g` and the lower shriek
 `f_! = Etale.lowerShriek` along a morphism `f` admitting a compactification are additive,
 and this file records their total right derived functors
 `Rg_* : D(Z_ét) ⥤ D(Y_ét)` and `Rf_! : D(X_ét) ⥤ D(Y_ét)` on the unbounded
 derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctor`.
 
-The sheaf categories are Grothendieck abelian
-(`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`) whenever the
-coefficient category `A` is a concrete Grothendieck abelian category (with hom types and
+Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
+concrete Grothendieck abelian category with objects in `Type u'`, `Hom`-types and
 underlying types in the universe `u` of the base schemes, and the forgetful functor
-preserving limits and filtered colimits and reflecting isomorphisms); this covers the
-intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
-categories are accordingly fixed once and for all by the instance
+preserving limits and filtered colimits and reflecting isomorphisms; this covers the
+intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The sheaf categories are
+then Grothendieck abelian by Mathlib's
+`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`. The chosen
+localized categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
 installs `HasDerivedCategory.{u}` on every sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`; no auxiliary universe parameters appear.
@@ -197,9 +197,12 @@ end Comp
 The `Plus` variants avoid the K-injective hypothesis in the derived functor machinery
 itself, but every derived functor in this file goes through the chosen
 `HasDerivedCategory.{u}` instance, which is built from the sorried
-`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`; hence
+`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`; and the
+pullback `g^*` along an arbitrary morphism is defined through the sorried Kan extension
+instance of `WeilConjectures.SixFunctors.Instances`, on which
+`preservesInjectiveObjects_lowerStar` depends through the adjunction `g^* ⊣ g_*`. Hence
 `sorryAx` appears below. These guards pin down the exact axiom dependencies, so that any
-change in them cannot go unnoticed; once the K-injective instance is proved, the `sorryAx`
+change in them cannot go unnoticed; once the sorried instances are proved, the `sorryAx`
 entries below should disappear again.
 -/
 
@@ -220,7 +223,10 @@ sorryAx, Classical.choice, Quot.sound] -/
 #print axioms rightDerivedLowerShriekPlus
 
 /-- info: 'AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar' depends on axioms:
-[propext, Classical.choice, Quot.sound] -/
+[propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound] -/
 #guard_msgs in
 #print axioms preservesInjectiveObjects_lowerStar
 

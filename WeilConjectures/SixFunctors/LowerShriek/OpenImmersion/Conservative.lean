@@ -60,7 +60,7 @@ docstring of `WeilConjectures.SixFunctors.LowerShriek.Comparison`.
 
 @[expose] public section
 
-universe v' u' u
+universe u' u
 
 open CategoryTheory Category Limits Opposite
 
@@ -88,11 +88,18 @@ end Scheme.Etale
 
 section Conservative
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable {X : Scheme.{u}} {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
   [∀ i, IsOpenImmersion (g i)]
 
 set_option backward.isDefEq.respectTransparency false in
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- **Restriction along a jointly surjective family of open immersions is conservative.**
 A morphism of `A`-valued étale sheaves on `X` whose restrictions along a family of open
 immersions `g i : W i ⟶ X` covering `X` are isomorphisms is itself an isomorphism. -/
@@ -118,8 +125,6 @@ theorem Etale.isIso_of_isIso_openImmersionRestriction
   haveI := hrest α.toEtale
   exact NatTrans.isIso_app_of_iso φ.hom α.isoComp.op.symm
 
-variable [∀ i, HasWeakSheafify (W i).smallEtaleTopology A]
-
 set_option backward.isDefEq.respectTransparency false in
 /-- The version of `AlgebraicGeometry.Etale.isIso_of_isIso_openImmersionRestriction` phrased
 with the pullback `AlgebraicGeometry.Etale.upperStar` instead of the restriction; the two
@@ -144,9 +149,17 @@ end Conservative
 
 section Pair
 
-variable (A : Type u') [Category.{v'} A] {U W X : Scheme.{u}}
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
+variable {U W X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- The two-element case of
 `AlgebraicGeometry.Etale.isIso_of_isIso_openImmersionRestriction`: a morphism of étale
 sheaves on `X` whose restrictions along two open immersions covering `X` are isomorphisms is
@@ -184,6 +197,7 @@ lemma Scheme.Hom.range_union_range_clopenComplement_ι (j : U ⟶ X) [IsOpenImme
   exact Set.union_compl_self _
 
 set_option backward.isDefEq.respectTransparency false in
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- For an open immersion `j` with **clopen** range, a morphism of étale sheaves on `X` is an
 isomorphism as soon as its restrictions along `j` and along the inclusion of the
 complementary open subscheme are. This is the form in which the conservativity is meant to

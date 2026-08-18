@@ -8,6 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+public import WeilConjectures.SixFunctors.Instances
 
 /-!
 
@@ -48,46 +49,56 @@ sheafification.
 
 ## Implementation notes
 
+- The coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
+  universe `u` of the base schemes, following the convention of the `SixFunctors` folder.
 - Both functors are defined along the base change functor, which exists for an *arbitrary*
   morphism `g` — in contrast to the localization functor `MorphismProperty.Over.map ⊤ h`
   of `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs`, which requires `P g`.
   This is essential for compactifications, whose structure morphism is proper and in
   general does not satisfy `P`.
-- The continuity of the base change functor for the small `Q`-topologies is assumed as an
-  instance hypothesis; for `g` satisfying `P` it is provided by
-  `CategoryTheory.GrothendieckTopology.isContinuous_overPullback_of_le` of
-  `WeilConjectures.SixFunctors.LowerShriek.Defs`.
+- The continuity of the base change functor along an arbitrary morphism, the left Kan
+  extensions on presheaves and the sheafification entering the definitions are provided,
+  for `Q ≤ P`, by the sorried instances of `WeilConjectures.SixFunctors.Instances`, under
+  the multiplicativity-type assumptions on `P` and `Q` assumed throughout; the inequality
+  `Q ≤ P` is assumed as a `Fact` instance, which holds definitionally for `Q = P`, in
+  particular for `P = Q = @Etale`. For `g` satisfying `P` the continuity is proved as
+  `CategoryTheory.GrothendieckTopology.isContinuous_overPullback_of_le` in
+  `WeilConjectures.SixFunctors.LowerShriek.Defs`, and for the small étale sites along an
+  arbitrary morphism as `AlgebraicGeometry.Etale.isContinuous_overPullback` in
+  `WeilConjectures.SixFunctors.UpperLowerStar.Etale`.
 
 -/
 
 @[expose] public section
 
-universe v' u' u
+universe u' u
 
 open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace CategoryTheory
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 
 namespace GrothendieckTopology
 
 variable (P Q : MorphismProperty Scheme.{u})
-variable [P.IsStableUnderBaseChange]
+variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
+  [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
+variable [Fact (Q ≤ P)]
 
 variable {W U : Scheme.{u}} (g : W ⟶ U)
 
-variable [(MorphismProperty.Over.pullback P ⊤ g).IsContinuous
-    (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))]
-
 /-- The pushforward `g_*` along `g : W ⟶ U`, given objectwise by
-`(g_* G)(V → U) = G(V ×_U W → W)`. -/
+`(g_* G)(V → U) = G(V ×_U W → W)`. The continuity of the base change functor is provided
+by the sorried instance `CategoryTheory.GrothendieckTopology.isContinuous_overPullback` of
+`WeilConjectures.SixFunctors.Instances`. -/
 noncomputable def lowerStar :
     Sheaf (W.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (U.smallGrothendieckTopology Q (Q := P)) A :=
   (MorphismProperty.Over.pullback P ⊤ g).sheafPushforwardContinuous A
     (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- The sections of `g_* G` over `V → U` are the sections of `G` over `V ×_U W → W`. -/
 lemma lowerStar_obj_val_obj
     (G : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
@@ -95,6 +106,7 @@ lemma lowerStar_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
   rfl
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback P ⊤ g).op`. -/
 lemma lowerStar_map_hom_app
     {G G' : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ U) :
@@ -112,19 +124,16 @@ instance preservesLimitsOfShape_lowerStar (E : Type*) [Category E] [HasLimitsOfS
 
 /-- `g_*` is left exact. Note that this does not use the adjunction `g^* ⊣ g_*`, which is
 only available under the extra hypotheses of the section below. -/
-instance preservesFiniteLimits_lowerStar [HasFiniteLimits A] :
+instance preservesFiniteLimits_lowerStar :
     PreservesFiniteLimits (lowerStar A P Q g) := by
   unfold lowerStar
   infer_instance
 
 section Adjunction
 
-variable [∀ F : (P.Over ⊤ U)ᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback P ⊤ g).op.HasLeftKanExtension F]
-variable [HasWeakSheafify (W.smallGrothendieckTopology Q (Q := P)) A]
-
 /-- The pullback `g^*` along `g : W ⟶ U`: left Kan extension on presheaves followed by
-sheafification, left adjoint to `lowerStar`. -/
+sheafification, left adjoint to `lowerStar`. The Kan extensions and the sheafification
+are provided by the sorried instances of `WeilConjectures.SixFunctors.Instances`. -/
 noncomputable def upperStar :
     Sheaf (U.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (W.smallGrothendieckTopology Q (Q := P)) A :=
@@ -150,8 +159,7 @@ limits, that left Kan extension, and sheafification, which is left exact by
 `HasSheafify`. Unlike `preservesFiniteLimits_lowerStar` this is not automatic; see
 `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` for the case of an étale
 morphism, where the Kan extension is precomposition with a right adjoint. -/
-instance preservesFiniteLimits_upperStar [HasFiniteLimits A]
-    [HasSheafify (W.smallGrothendieckTopology Q (Q := P)) A]
+instance preservesFiniteLimits_upperStar
     [PreservesFiniteLimits ((MorphismProperty.Over.pullback P ⊤ g).op.lan :
       ((P.Over ⊤ U)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ W)ᵒᵖ ⥤ A)] :
     PreservesFiniteLimits (upperStar A P Q g) := by
@@ -163,13 +171,6 @@ end Adjunction
 section Comp
 
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
-
-variable [(MorphismProperty.Over.pullback P ⊤ h₁).IsContinuous
-    (S.smallGrothendieckTopology Q (Q := P)) (T.smallGrothendieckTopology Q (Q := P))]
-  [(MorphismProperty.Over.pullback P ⊤ h₂).IsContinuous
-    (R.smallGrothendieckTopology Q (Q := P)) (S.smallGrothendieckTopology Q (Q := P))]
-  [(MorphismProperty.Over.pullback P ⊤ (h₁ ≫ h₂)).IsContinuous
-    (R.smallGrothendieckTopology Q (Q := P)) (T.smallGrothendieckTopology Q (Q := P))]
 
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
 sheaves for the small sites: both sides send a sheaf `G` to the sheaf
@@ -183,15 +184,6 @@ noncomputable def lowerStarComp :
     (T.smallGrothendieckTopology Q (Q := P))
 
 section UpperStar
-
-variable [∀ F : (P.Over ⊤ S)ᵒᵖ ⥤ A,
-    (MorphismProperty.Over.pullback P ⊤ h₁).op.HasLeftKanExtension F]
-  [∀ F : (P.Over ⊤ R)ᵒᵖ ⥤ A,
-    (MorphismProperty.Over.pullback P ⊤ h₂).op.HasLeftKanExtension F]
-  [∀ F : (P.Over ⊤ R)ᵒᵖ ⥤ A,
-    (MorphismProperty.Over.pullback P ⊤ (h₁ ≫ h₂)).op.HasLeftKanExtension F]
-  [HasWeakSheafify (S.smallGrothendieckTopology Q (Q := P)) A]
-  [HasWeakSheafify (T.smallGrothendieckTopology Q (Q := P)) A]
 
 /-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on sheaves
 for the small sites, obtained from the composition isomorphism `lowerStarComp` of the
