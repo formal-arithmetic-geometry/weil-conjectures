@@ -70,7 +70,7 @@ theorem exists_finset_subset_span_image_eq {S : Type*} [CommSemiring S] (N : Ide
         Finset.mem_image.mpr ⟨_, Finset.mem_attach _ _, rfl⟩⟩
     exact Ideal.span_mono hsub (hTmem ⟨y, hy⟩)
 
-/-- **Clearing denominators**: if the extensions of an ideal `N` along a finite family of
+/-- Clearing denominators: if the extensions of an ideal `N` along a finite family of
 ring homomorphisms are all finitely generated, then a single finitely generated subideal
 `N' ≤ N` realizes all of them (Stacks Project Tag 01PF, affine core). -/
 theorem exists_fg_le_map_eq {ι : Type*} (N : Ideal R) (s : Finset ι) (S : ι → Type*)

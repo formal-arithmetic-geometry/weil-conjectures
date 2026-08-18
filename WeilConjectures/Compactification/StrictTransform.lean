@@ -147,7 +147,7 @@ theorem isPullback_strictTransformOpen :
   · simp
   · simp [morphismRestrict_ι]
 
-/-- **The strict transform over the preserved open**: combining
+/-- The strict transform over the preserved open: combining
 `AlgebraicGeometry.isIso_pullback_fst_strictTransformι` with
 `AlgebraicGeometry.isPullback_strictTransformOpen`, the part of the strict transform lying
 over `U` is the ordinary base change `Y ×_X U`.
@@ -173,14 +173,12 @@ end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.IdealSheafData
 
-universe v
-
-variable {X : Scheme.{v}} (I : X.IdealSheafData) {Y : Scheme.{v}} (f : Y ⟶ X)
+variable {X Y : Scheme.{u}} (I : X.IdealSheafData) (f : Y ⟶ X)
 
 /-- The strict transform of `f : Y ⟶ X` along the blow-up of the ideal sheaf `I`,
 preserving the complement of the support of `I`.
 (Blueprint: `def:nagata-strict-transform`.) -/
-def strictTransform : Scheme.{v} :=
+def strictTransform : Scheme.{u} :=
   AlgebraicGeometry.strictTransform f I.blowupMap I.support.compl
 
 /-- The closed immersion of the strict transform along a blow-up into `Y ×_X Bl_I X`. -/

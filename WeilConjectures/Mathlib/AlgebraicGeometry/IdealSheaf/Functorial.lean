@@ -137,7 +137,7 @@ end OpenImmersion
 
 section FlatBaseChange
 
-/-- **Flat base change for pushforward of ideal sheaves**: for a cartesian square whose
+/-- Flat base change for pushforward of ideal sheaves: for a cartesian square whose
 right-hand edge `q` is flat and whose left-hand edge `g` is quasi-compact, pushing forward
 along `g` and then restricting along `q` is restricting along `p` and then pushing forward
 along `g'`. This is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap`

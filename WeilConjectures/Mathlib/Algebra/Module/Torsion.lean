@@ -111,12 +111,12 @@ theorem localized'_torsion' (S : Submonoid R) (f : M →ₗ[R] N) [IsLocalizedMo
       IsLocalizedModule.mk'_cancel_left f m t s⟩
 
 /-- Localization of power torsion, the case `S = Submonoid.powers a` of
-`Submodule.localized'_torsion'`.
+`Submodule.localized'_torsion'`: the localization of `Γ_(a)(M)` is the power torsion of
+the localized module at the image of `a`.
 (Blueprint: `lemma:nagata-power-torsion-localization`.) -/
 theorem localized'_powTorsion (f : M →ₗ[R] N) [IsLocalizedModule p f] :
-    (powTorsion R M a).localized' S' p f =
-      torsion' S' N ((Submonoid.powers a).map (algebraMap R S')) :=
-  localized'_torsion' S' p _ f
+    (powTorsion R M a).localized' S' p f = powTorsion S' N (algebraMap R S' a) := by
+  rw [powTorsion, localized'_torsion', powTorsion, Submonoid.map_powers]
 
 end Localization
 

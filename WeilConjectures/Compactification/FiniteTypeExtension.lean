@@ -96,7 +96,7 @@ theorem finiteTypeOn_iff (I : X.IdealSheafData) (O : X.Opens) :
     rw [fg_ideal_comap_iff]
     exact h _ (O.ι_image_le U'.1)
 
-/-- **Locality of finite-typeness**: an ideal sheaf which is of finite type on two opens is
+/-- Locality of finite-typeness: an ideal sheaf which is of finite type on two opens is
 of finite type on their union. -/
 theorem FiniteTypeOn.sup {I : X.IdealSheafData} {O₁ O₂ : X.Opens}
     (h₁ : I.FiniteTypeOn O₁) (h₂ : I.FiniteTypeOn O₂) :
@@ -142,7 +142,7 @@ section Gluing
 
 variable [QuasiSeparatedSpace X]
 
-/-- **The binary gluing step of the finite-type extension theorem** (Stacks Project
+/-- The binary gluing step of the finite-type extension theorem (Stacks Project
 Tag 01PF): if `I₀ ≤ H₀` is of finite type on a quasi-compact open `O`, there is an
 `I ≤ H₀` of finite type on `O ⊔ V`, for `V` affine, with the same restriction to `O`. -/
 theorem exists_le_finiteTypeOn_sup {H₀ I₀ : X.IdealSheafData} {O : X.Opens}
@@ -266,7 +266,7 @@ theorem exists_le_finiteTypeOn_sup {H₀ I₀ : X.IdealSheafData} {O : X.Opens}
     rw [hK'ideal U'']
     exact Ideal.FG.map hN'fg _
 
-/-- **Existence of a finite-type ideal sheaf with prescribed restriction** (Stacks Project
+/-- Existence of a finite-type ideal sheaf with prescribed restriction (Stacks Project
 Tag 01PF, order-theoretic form): on a quasi-compact quasi-separated scheme, every ideal
 sheaf `H₀` whose restriction to a quasi-compact open `W` is of finite type contains a
 finite-type ideal sheaf with the same restriction to `W`.
@@ -314,7 +314,7 @@ theorem exists_finiteType_le_comap_eq [CompactSpace X] (H₀ : X.IdealSheafData)
   exact (le_sup_right : (t.sup fun V ↦ V.1) ≤ W ⊔ t.sup fun V ↦ V.1)
     ((Finset.le_sup (f := fun V ↦ V.1) hVt) hxV)
 
-/-- **Extension of a finite-type ideal sheaf from a quasi-compact open** (Stacks Project
+/-- Extension of a finite-type ideal sheaf from a quasi-compact open (Stacks Project
 Tag 01PF): on a quasi-compact quasi-separated scheme, every finite-type ideal sheaf on a
 quasi-compact open extends to a finite-type ideal sheaf on the whole scheme.
 (Blueprint: `lemma:nagata-extend-finite-type-ideal`.) -/
@@ -322,8 +322,10 @@ theorem exists_finiteType_comap_eq [CompactSpace X] (W : X.Opens)
     (hW : IsCompact (W : Set X)) (J : W.toScheme.IdealSheafData) (hJ : J.FiniteType) :
     ∃ I : X.IdealSheafData, I.FiniteType ∧ I.comap W.ι = J := by
   have : CompactSpace W.toScheme := isCompact_iff_compactSpace.mp hW
-  obtain ⟨I, -, hft, hcomap⟩ :=
-    exists_finiteType_le_comap_eq (J.map W.ι) W hW (by rw [finiteTypeOn_def, comap_map]; exact hJ)
+  have hJ' : (J.map W.ι).FiniteTypeOn W := by
+    rw [finiteTypeOn_def, comap_map]
+    exact hJ
+  obtain ⟨I, -, hft, hcomap⟩ := exists_finiteType_le_comap_eq (J.map W.ι) W hW hJ'
   exact ⟨I, hft, by rw [hcomap, comap_map]⟩
 
 end Gluing
