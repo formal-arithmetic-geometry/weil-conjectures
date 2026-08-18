@@ -34,7 +34,7 @@ theorem, following the blueprint chapter "Nagata compactification", sections
   `lemma:nagata-common-modification`): two separated finite-type models of a common
   open `U` admit `U`-admissible blow-ups which glue along a common copy of the
   modified `U`-locus to a separated finite-type model;
-- `AlgebraicGeometry.Compactification.exists_properExtension`: **graph extension**
+- `AlgebraicGeometry.Compactification.nonempty_properExtension`: **graph extension**
   (Stacks Project Tag 0F3Z; blueprint `def:nagata-graph-extension`,
   `lemma:nagata-graph-extension`): a compactification of a quasi-compact open
   `V ⊆ U` extends, after a `V`-admissible blow-up of the compactification, to a
@@ -57,7 +57,7 @@ The finite-type helper lemmas of the blueprint
 
 `exists_admissibleBlowup_strictTransform_open` (Tag 081S) is the only *primitive*
 obligation of this file: `schemeTheoreticImage_after_admissibleBlowup` (0F3Y),
-`exists_commonModification` (0F3X), `Compactification.exists_properExtension` (0F3Z)
+`exists_commonModification` (0F3X), `Compactification.nonempty_properExtension` (0F3Z)
 and `exists_admissibleBlowup_strictTransform_isIso_near_closure` (0F3W) are all
 consumers of it, and the two-open compactification theorem (proof order items 43–48)
 consumes those. Tag 081S in turn is the application of Raynaud–Gruson flattening,
@@ -227,39 +227,54 @@ section GraphExtension
 
 variable {S U : Scheme.{u}}
 
-/-- **Graph extension** (Stacks Project Tag 0F3Z): let `u : U ⟶ S` be separated and of
-finite type over the qcqs scheme `S`, let `V ⊆ U` be a quasi-compact open and let
-`c` be a compactification of `V ⟶ S`. Then there are a `V`-admissible blow-up
-`B : Y^gr ⟶ c.Z` of the compactification, an open subscheme `V^gr ⊆ Y^gr` and a
-morphism `ψ : V^gr ⟶ U` such that:
+/-- The data of a **graph extension** of a compactification `c` of a quasi-compact open
+`V ⊆ U` (Stacks Project Tag 0F3Z): a `V`-admissible blow-up `B : Y^gr ⟶ c.Z` of the
+compactification, an open subscheme `V^gr ⊆ Y^gr` and a proper morphism
+`ψ : V^gr ⟶ U` over `S` extending the inclusion of `V`, such that `V` embeds in `V^gr`
+as the whole inverse image of `V` and `ψ` is an isomorphism over `V`.
+(Blueprint: `def:nagata-graph-extension`.) -/
+structure Compactification.ProperExtension (u : U ⟶ S) (V : U.Opens)
+    (c : Compactification (V.ι ≫ u)) where
+  /-- The `V`-admissible blow-up of the compactification. -/
+  B : AdmissibleBlowup c.Z c.i.opensRange
+  /-- The open subscheme `V^gr` of the blown-up compactification carrying the
+  extension. -/
+  Vgr : B.X'.Opens
+  /-- The proper extension `V^gr ⟶ U` of the inclusion of `V`. -/
+  ψ : Vgr.toScheme ⟶ U
+  /-- The open embedding of `V` into `V^gr`. -/
+  v : V.toScheme ⟶ Vgr.toScheme
+  isProper_ψ : IsProper ψ
+  isOpenImmersion_v : IsOpenImmersion v
+  /-- The embedded copy of `V` lifts the open immersion of the compactification. -/
+  v_π : v ≫ Vgr.ι ≫ B.π = c.i
+  /-- The extension really extends the inclusion of `V`. -/
+  v_ψ : v ≫ ψ = V.ι
+  /-- The inverse image of `V` is exactly the embedded copy of `V`. -/
+  range_v : ((ψ ⁻¹ᵁ V : Vgr.toScheme.Opens) : Set Vgr.toScheme) = Set.range v
+  isIso_ψ_restrict : IsIso (ψ ∣_ V)
+  /-- The extension lies over `S`. -/
+  ψ_u : ψ ≫ u = Vgr.ι ≫ B.π ≫ c.g
 
-- `ψ` is proper;
-- `V` embeds as an open subscheme of `V^gr` lifting `c.i` along `B.π`;
-- `ψ` extends the inclusion `V ⟶ U`;
-- the inverse image of `V` under `ψ` is exactly the embedded copy of `V`, and `ψ` is
-  an isomorphism over `V`.
+attribute [instance] Compactification.ProperExtension.isProper_ψ
+  Compactification.ProperExtension.isOpenImmersion_v
 
-The construction is the graph construction of the blueprint: `V^gr` is the open
-strict transform of the scheme-theoretic image of the graph `V ⟶ c.Z ×_S U`, supplied
-by the partial-section lemma (`Nagata.partialSectionRestrictIso`), the image transport
-lemma (`Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`) and elimination of
-indeterminacy (`exists_admissibleBlowup_strictTransform_open`); `ψ` is the second
-projection, proper because `c.Z ×_S U ⟶ U` is proper
-(`Nagata.isProper_imageι_fst`).
-(Blueprint: `def:nagata-graph-extension`, `lemma:nagata-graph-extension`;
-proof order item 33.) -/
-theorem Compactification.exists_properExtension
+/-- **Graph extension** (Stacks Project Tag 0F3Z): a compactification of a
+quasi-compact open `V ⊆ U` extends, after a `V`-admissible blow-up of the
+compactification, to a proper morphism `V^gr ⟶ U` restricting to the identity on `V`.
+(Blueprint: `lemma:nagata-graph-extension`; proof order item 33.) -/
+theorem Compactification.nonempty_properExtension
     [CompactSpace S] [QuasiSeparatedSpace S] (u : U ⟶ S)
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     (V : U.Opens) (hV : IsCompact (V : Set U)) (c : Compactification (V.ι ≫ u)) :
-    ∃ (B : AdmissibleBlowup c.Z c.i.opensRange) (Vgr : B.X'.Opens)
-      (ψ : Vgr.toScheme ⟶ U) (v : V.toScheme ⟶ Vgr.toScheme),
-      IsProper ψ ∧ IsOpenImmersion v ∧
-      v ≫ Vgr.ι ≫ B.π = c.i ∧
-      v ≫ ψ = V.ι ∧
-      ((ψ ⁻¹ᵁ V : Vgr.toScheme.Opens) : Set Vgr.toScheme) = Set.range v ∧
-      IsIso (ψ ∣_ V) ∧
-      ψ ≫ u = Vgr.ι ≫ B.π ≫ c.g := by
+    Nonempty (Compactification.ProperExtension u V c) := by
+  -- The graph construction of the blueprint: `V^gr` is the open strict transform of
+  -- the scheme-theoretic image of the graph `V ⟶ c.Z ×_S U`, supplied by the
+  -- partial-section lemma (`Nagata.partialSectionRestrictIso`), the image transport
+  -- lemma (`Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`) and elimination
+  -- of indeterminacy (`exists_admissibleBlowup_strictTransform_open`); `ψ` is the
+  -- second projection, proper because `c.Z ×_S U ⟶ U` is proper
+  -- (`Nagata.isProper_imageι_fst`).
   sorry
 
 end GraphExtension

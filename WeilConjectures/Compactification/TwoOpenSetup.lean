@@ -43,7 +43,7 @@ Finally `AlgebraicGeometry.exists_prepared_twoOpenSide` constructs a prepared si
 a compactifiable open `O` covering `U` together with `O'`: choose a
 scheme-theoretically dense compactification (proof order item 34,
 `HasCompactification.exists_isSchemeTheoreticallyDense`), extend it by the graph
-construction (Stacks Project Tag 0F3Z, `Compactification.exists_properExtension`;
+construction (Stacks Project Tag 0F3Z, `Compactification.nonempty_properExtension`;
 blueprint `def:nagata-two-open-graph-extensions`,
 `lemma:nagata-two-open-graph-extensions`, `def:nagata-two-open-boundary-loci`,
 `lemma:nagata-boundary-loci`), and separate the boundary closures by the
@@ -350,8 +350,8 @@ theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated 
   have : IsNoetherian c.Z := ⟨⟩
   -- Stacks 0F3Z: the graph extension of the compactification
   obtain ⟨B, Vgr, ψ, v, hψ, hv, hvπ, hvψ, hpre, hiso, hψu⟩ :=
-    Compactification.exists_properExtension u O
-      (TopologicalSpace.NoetherianSpace.isCompact _) c
+    (Compactification.nonempty_properExtension u O
+      (TopologicalSpace.NoetherianSpace.isCompact _) c).some
   have := hψ
   have := hv
   have := B.isProper_π
