@@ -61,9 +61,7 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.EulerFactors
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Exp
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Derived
