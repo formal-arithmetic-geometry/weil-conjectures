@@ -17062,7 +17062,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-dense-valuation-probe}
   \uses{def:nagata-choice-notation,def:nagata-closed-subscheme-class,
     def:nagata-scheme-theoretic-image}
-  \lean{AlgebraicGeometry.ValuationProbe}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt}
   \leanok
 
   Let $h\colon T\to P$ satisfy $\operatorname{IsQCQS}(h)$, assume
@@ -17111,8 +17111,8 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-valuation-probe}
   \uses{def:nagata-closed-subscheme-class,
     def:nagata-dense-valuation-probe}
-  \lean{AlgebraicGeometry.nonempty_valuationProbe,
-    AlgebraicGeometry.nonempty_valuationProbe_of_specializes}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant,
+    AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes}
   \leanok
 
   Let $h\colon T\to P$ satisfy $\operatorname{IsQCQS}(h)$ and
@@ -17132,18 +17132,19 @@ correction explicit before it is sheafified and glued.
   \]
 
   \paragraph{Formalization.}
-  The Lean statement is the nonemptiness
-  \texttt{\detokenize{AlgebraicGeometry.nonempty_valuationProbe}} of the bundled record
-  \texttt{\detokenize{AlgebraicGeometry.ValuationProbe}}, so no choice operator is needed
-  and the three displayed properties are its fields.  The formalized hypotheses are weaker
+  The Lean statement is the definition
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}}, which builds
+  the bundled record \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt}}
+  directly, so the tuple $\mathsf{VP}(h,z)$ is that record and the three displayed
+  properties are its fields.  The formalized hypotheses are weaker
   than the ones stated above: quasi-compactness of $h$ together with topological dominance
   ($\overline{|h|(|T|)}=|P|$, the Mathlib class
   \texttt{\detokenize{AlgebraicGeometry.IsDominant}}) suffices, and no affineness of $P$
   is required.  The probe is produced from a specialization $h(t)\rightsquigarrow z$ by
-  \texttt{\detokenize{AlgebraicGeometry.nonempty_valuationProbe_of_specializes}}, and such
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes}}, and such
   a specialization exists by
-  \texttt{\detokenize{AlgebraicGeometry.exists_specializes_of_mem_closure_range}}, whose
-  ring-theoretic core is
+  \texttt{\detokenize{AlgebraicGeometry.exists_specializes_of_mem_closure_range}}, which in
+  turn comes from the statement about prime spectra
   \texttt{\detokenize{PrimeSpectrum.exists_specializes_of_mem_closure_range_comap}}.
 \end{lemma}
 
@@ -17285,9 +17286,9 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0894}{Tag 0894}]{stacks-project}}]
   \label{lemma:nagata-dense-source-valuative}
   \lean{AlgebraicGeometry.ValuativeCriterion.RelativeTo,
-    AlgebraicGeometry.ValuativeCriterion.existence_of_isDominant,
-    AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_denseSource,
-    AlgebraicGeometry.IsSeparated.of_valuativeCriterion_denseSource}
+    AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant,
+    AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant,
+    AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}
   \leanok
 
   Let $f\colon X\to S$ be quasi-compact, let $h\colon U\to X$ be quasi-compact,
@@ -17325,14 +17326,14 @@ correction explicit before it is sheafified and glued.
   \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Uniqueness}} are.
 
   The conclusion is formalized in the sharper form
-  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.existence_of_isDominant}},
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant}},
   which produces the morphism property
   \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Existence}} and needs no
   quasi-compactness of $f$ at all; universal closedness and separatedness are read off
   from it as
-  \texttt{\detokenize{AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_denseSource}}
+  \texttt{\detokenize{AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant}}
   (which uses $\operatorname{QuasiCompact}(f)$) and
-  \texttt{\detokenize{AlgebraicGeometry.IsSeparated.of_valuativeCriterion_denseSource}}
+  \texttt{\detokenize{AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}}
   (which uses only $\operatorname{QuasiSeparated}(f)$).
 
   The formalized hypotheses on $h$ are quasi-compactness together with topological

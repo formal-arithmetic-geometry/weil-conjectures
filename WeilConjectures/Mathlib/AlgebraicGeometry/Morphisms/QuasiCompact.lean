@@ -14,7 +14,8 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 
 A point in the closure of the range of a quasi-compact morphism is a specialization of a
 point of the range (`AlgebraicGeometry.exists_specializes_of_mem_closure_range`). This is
-the topological content of Stacks Project Tag 02JQ; the ring-theoretic core is
+the topological content of Stacks Project Tag 02JQ; it is deduced from the corresponding
+statement about prime spectra,
 `PrimeSpectrum.exists_specializes_of_mem_closure_range_comap`.
 -/
 
