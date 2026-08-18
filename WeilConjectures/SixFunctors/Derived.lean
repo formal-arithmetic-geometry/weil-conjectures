@@ -88,7 +88,7 @@ below free of any K-injective hypothesis as well.
 
 @[expose] public section
 
-universe w w' v' u' v'' u'' u
+universe v'' u'' u' u
 
 open CategoryTheory Abelian Limits
 
@@ -374,10 +374,11 @@ preadditive monoidal structure whose tensor product interacts well with coproduc
 as hypotheses on the coefficient category `A` only; they are transported to the sheaf
 categories by the instances of the section `SheafInstances` above.
 
-The additivity and homology-preservation (exactness) of `g^*` are derived here from the
-adjunction `g^* ⊣ g_*`; the left exactness of `g^*` is recorded as the sorried instance
-`Etale.preservesFiniteLimits_upperStar`, mirroring the sorried
-`Etale.preservesFiniteLimits_lowerStar`. Since `g^*` is exact, it preserves in
+The additivity and right exactness of `g^*` are derived here from the adjunction
+`g^* ⊣ g_*`; the left exactness comes from `Etale.preservesFiniteLimits_upperStar`, whose
+hypotheses — sheafification on the small étale site of `Z` and left exactness of the left
+Kan extension along the opposite of base change — are stated as variables of this section;
+for an étale `g` both are automatic. Since `g^*` is exact, it preserves in
 particular all K-flat quasi-isomorphisms, which is the input needed by the
 derivability-structure machinery.
 -/
@@ -390,16 +391,21 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 derivable from the concreteness assumptions on `A`) so that the instances declared in
 this section do not depend on the concrete-category data of `A`; this keeps instance
 resolution fast. -/
-variable [HasWeakSheafify Z.smallEtaleTopology A]
-
-variable [HasDerivedCategory.{w} (Sheaf Y.smallEtaleTopology A)]
-variable [HasDerivedCategory.{w'} (Sheaf Z.smallEtaleTopology A)]
+variable [HasSheafify Z.smallEtaleTopology A]
 
 /- The pointwise left Kan extensions defining `g^*` exist; for étale `g` this is
 automatic (`Etale.hasPointwiseLeftKanExtension_op_overPullback`), and in general it
 follows from the essential smallness of the étale sites and cocompleteness of `A`. -/
 variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
   (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
+
+/- Left exactness of the left Kan extension along the opposite of base change, the
+remaining hypothesis of `Etale.preservesFiniteLimits_upperStar`. For an étale `g` it is
+automatic (`Etale.preservesFiniteLimits_op_lan_overPullback`); in general the left Kan
+extension is a filtered colimit and its left exactness holds e.g. when `A` is concrete
+with exact filtered colimits. -/
+variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
+  (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
 
 /- The preadditive monoidal structure on the coefficient category, whose tensor
 product commutes with filtered colimits in each variable (as it does in the intended

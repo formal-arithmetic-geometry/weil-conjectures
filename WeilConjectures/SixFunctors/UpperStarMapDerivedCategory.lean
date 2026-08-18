@@ -42,7 +42,7 @@ morphism construction in the proper base change package
 
 @[expose] public section
 
-universe w u' u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Abelian
 
@@ -58,12 +58,18 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
 
-/- Sheafification, pointwise left Kan extensions and chosen localized derived categories
-for the small étale sites of all schemes at once. -/
-variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
+/- Sheafification and pointwise left Kan extensions for the small étale sites of all
+schemes at once, together with the left exactness of the left Kan extensions along the
+opposites of base change (the hypotheses of `Etale.preservesFiniteLimits_upperStar`, as
+in the section `DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`); the chosen
+localized derived categories are provided by the instance
+`Scheme.hasDerivedCategory_sheaf_smallEtaleTopology`. -/
+variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
   [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
     (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T : Scheme.{u}), HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology A)]
+  [∀ (T S : Scheme.{u}) (φ : T ⟶ S),
+    PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ φ).op.lan :
+      (S.Etaleᵒᵖ ⥤ A) ⥤ T.Etaleᵒᵖ ⥤ A)]
 
 /- The K-flat resolution package on the coefficient category `A`, as in the section
 `DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`; it is transported to the
