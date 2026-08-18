@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.SixFunctors.Derived
 
 /-!
 
@@ -34,7 +35,7 @@ t-structure `DerivedCategory.TStructure.t`.
 
 @[expose] public section
 
-universe w u' u
+universe u' u
 
 open CategoryTheory Limits
 
@@ -54,7 +55,6 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
 variable (X : Scheme.{u})
   [∀ (T : Scheme.{u}) (f : T ⟶ X) (P : X.Etaleᵒᵖ ⥤ A),
     (MorphismProperty.Over.pullback @Etale ⊤ f).op.HasLeftKanExtension P]
-  [HasDerivedCategory.{w} (Sheaf X.smallEtaleTopology A)]
 
 section ConstructibleHomology
 
