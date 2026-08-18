@@ -51,24 +51,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Pullback of ideal sheaves along an open immersion commutes with products. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.comap_mul_of_isOpenImmersion
-    {Y Z : Scheme.{u}} (f : Y ⟶ Z) [IsOpenImmersion f] (I K : Z.IdealSheafData) :
-    (I * K).comap f = I.comap f * K.comap f := by
-  ext U : 2
-  simp only [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply,
-    Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion, CommRingCat.ideal_comap_inv_hom,
-    Ideal.map_mul]
-
-/-- Pullback of ideal sheaves along an open immersion commutes with powers. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.comap_pow_of_isOpenImmersion
-    {Y Z : Scheme.{u}} (f : Y ⟶ Z) [IsOpenImmersion f] (I : Z.IdealSheafData) (d : ℕ) :
-    (I ^ d).comap f = (I.comap f) ^ d := by
-  ext U : 2
-  simp only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply,
-    Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion, CommRingCat.ideal_comap_inv_hom,
-    Ideal.map_pow]
-
 -- Unifying the image affine opens through `appIso` exceeds the default heartbeat limit.
 /-- The pullback of a finite-type ideal sheaf along an open immersion is finite type. -/
 lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.FiniteType.comap_of_isOpenImmersion
@@ -375,14 +357,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart_comp_blowupMap
         (reesX (I.ideal V) a ha))) ≫ V.2.fromSpec :=
   chart_blowupι_comp_blowupMap I V a ha
 
-/-- The affine probe `Spec.map φ ≫ fromSpec` attached to an affine open `V` lies
-over `V`. -/
-lemma _root_.AlgebraicGeometry.specMap_comp_fromSpec_preimage_le (V : X.affineOpens)
-    {S : CommRingCat.{u}} (φ : Γ(X, V.1) ⟶ S) :
-    (⊤ : (Spec S).Opens) ≤ (Spec.map φ ≫ V.2.fromSpec) ⁻¹ᵁ V.1 := by
-  rw [Scheme.Hom.comp_preimage, V.2.fromSpec_preimage_self]
-  exact le_rfl
-
 /-- The chart probe lies over the affine open `V`. Derived from the abstract-probe
 form `specMap_comp_fromSpec_preimage_le`, which keeps the chart ring out of the
 rewrite motives. -/
@@ -488,8 +462,8 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_pow_mul_comap_p
     ((((I.comap I.blowupMap) ^ d) * J').comap c).ideal ⟨⊤, isAffineOpen_top _⟩ =
       ((I.comap I.blowupMap).comap c).ideal ⟨⊤, isAffineOpen_top _⟩ ^ d *
         (J'.comap c).ideal ⟨⊤, isAffineOpen_top _⟩ := by
-  rw [Scheme.IdealSheafData.comap_mul_of_isOpenImmersion,
-    Scheme.IdealSheafData.comap_pow_of_isOpenImmersion,
+  rw [Scheme.IdealSheafData.comap_mul,
+    Scheme.IdealSheafData.comap_pow,
     Scheme.IdealSheafData.ideal_mul, Pi.mul_apply, Scheme.IdealSheafData.ideal_pow,
     Pi.pow_apply]
 

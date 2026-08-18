@@ -314,8 +314,8 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_cente
     rw [← Scheme.IdealSheafData.comap_comp, hg]
   have h2 : I.comap π = (I.comap I.blowupMap).comap g.hom := by
     rw [← Scheme.IdealSheafData.comap_comp, hg]
-  rw [h1, h2, hLcomap, Scheme.IdealSheafData.comap_mul_of_isOpenImmersion,
-    Scheme.IdealSheafData.comap_pow_of_isOpenImmersion]
+  rw [h1, h2, hLcomap, Scheme.IdealSheafData.comap_mul,
+    Scheme.IdealSheafData.comap_pow]
   congr 1
   rw [← Scheme.IdealSheafData.comap_comp, Iso.hom_inv_id, Scheme.IdealSheafData.comap_id]
 
@@ -678,16 +678,16 @@ theorem _root_.AlgebraicGeometry.Scheme.exists_finiteType_ideal_zeroLocus_compl_
     exact IsNoetherian.noetherian _
   · simp [Scheme.IdealSheafData.coe_support_vanishingIdeal]
 
-/-- **Preparation of a Cartier boundary** (Stacks Project Tag 080Y): on a
-quasi-compact quasi-separated scheme `X` with a quasi-compact open `U`, there is a
-`U`-admissible blow-up whose boundary — the complement of the preimage of `U` — is the
-support of an effective Cartier ideal.
+/-- **Preparation of a Cartier boundary from a boundary ideal**: blowing up a
+finite-type ideal whose support is the complement of `U` produces a `U`-admissible
+blow-up whose boundary is the support of an effective Cartier ideal, namely the
+extension of the center. This is the geometric half of Stacks Project Tag 080Y; the
+two theorems below only differ in how the boundary ideal is produced.
 (Blueprint: `lemma:nagata-cartier-boundary-preparation`; proof order item 24.) -/
-theorem exists_admissibleBlowup_cartierBoundary [CompactSpace X] [QuasiSeparatedSpace X]
-    (hU : IsCompact (U : Set X)) :
+theorem exists_admissibleBlowup_cartierBoundary_of_ideal (I : X.IdealSheafData)
+    (hft : I.FiniteType) (hsupp : (I.support : Set X) = (U : Set X)ᶜ) :
     ∃ (B : AdmissibleBlowup X U) (J : B.X'.IdealSheafData), J.IsEffectiveCartier ∧
       (J.support : Set B.X') = ((B.π ⁻¹ᵁ U) : Set B.X')ᶜ := by
-  obtain ⟨I, hft, hsupp⟩ := X.exists_finiteType_ideal_zeroLocus_compl_qcOpen U hU
   have hdisj : Disjoint (U : Set X) (I.support : Set X) := by
     rw [hsupp]
     exact disjoint_compl_right
@@ -698,6 +698,18 @@ theorem exists_admissibleBlowup_cartierBoundary [CompactSpace X] [QuasiSeparated
   rw [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage, hsupp,
     Set.preimage_compl]
   rfl
+
+/-- **Preparation of a Cartier boundary** (Stacks Project Tag 080Y): on a
+quasi-compact quasi-separated scheme `X` with a quasi-compact open `U`, there is a
+`U`-admissible blow-up whose boundary — the complement of the preimage of `U` — is the
+support of an effective Cartier ideal.
+(Blueprint: `lemma:nagata-cartier-boundary-preparation`; proof order item 24.) -/
+theorem exists_admissibleBlowup_cartierBoundary [CompactSpace X] [QuasiSeparatedSpace X]
+    (hU : IsCompact (U : Set X)) :
+    ∃ (B : AdmissibleBlowup X U) (J : B.X'.IdealSheafData), J.IsEffectiveCartier ∧
+      (J.support : Set B.X') = ((B.π ⁻¹ᵁ U) : Set B.X')ᶜ :=
+  let ⟨I, hft, hsupp⟩ := X.exists_finiteType_ideal_zeroLocus_compl_qcOpen U hU
+  exists_admissibleBlowup_cartierBoundary_of_ideal (X := X) (U := U) I hft hsupp
 
 /-- **Preparation of a Cartier boundary, locally Noetherian case**: on a locally
 Noetherian scheme every open has a `U`-admissible blow-up with effective Cartier
@@ -710,18 +722,10 @@ This is the instance needed for the Noetherian compactification theorem
 theorem exists_admissibleBlowup_cartierBoundary_of_locallyNoetherian
     [IsLocallyNoetherian X] :
     ∃ (B : AdmissibleBlowup X U) (J : B.X'.IdealSheafData), J.IsEffectiveCartier ∧
-      (J.support : Set B.X') = ((B.π ⁻¹ᵁ U) : Set B.X')ᶜ := by
-  obtain ⟨I, hft, hsupp⟩ := X.exists_finiteType_ideal_zeroLocus_compl_of_locallyNoetherian U
-  have hdisj : Disjoint (U : Set X) (I.support : Set X) := by
-    rw [hsupp]
-    exact disjoint_compl_right
-  refine ⟨.ofIdeal I hft hdisj, I.extendedToBlowup,
-    I.extendedToBlowup_isEffectiveCartier, ?_⟩
-  change (I.extendedToBlowup.support : Set I.blowup) =
-    ((I.blowupMap ⁻¹ᵁ U : I.blowup.Opens) : Set I.blowup)ᶜ
-  rw [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage, hsupp,
-    Set.preimage_compl]
-  rfl
+      (J.support : Set B.X') = ((B.π ⁻¹ᵁ U) : Set B.X')ᶜ :=
+  let ⟨I, hft, hsupp⟩ :=
+    X.exists_finiteType_ideal_zeroLocus_compl_of_locallyNoetherian U
+  exists_admissibleBlowup_cartierBoundary_of_ideal (X := X) (U := U) I hft hsupp
 
 /-- **Extension of finite-type ideals from a quasi-compact open** (Stacks Project
 Tag 01PF): on a qcqs scheme, a finite-type quasi-coherent ideal on a quasi-compact

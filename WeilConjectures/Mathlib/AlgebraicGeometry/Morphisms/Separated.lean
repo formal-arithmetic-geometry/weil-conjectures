@@ -10,19 +10,21 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
-# Separatedness from a two-open cover
+# Separatedness from an open cover of the source
 
-We prove the criterion of separatedness over a two-open cover (Stacks Project
-Tag 0F3U): if `W = T₁ ∪ T₂` is a union of two opens over `S` such that each `Tᵢ ⟶ S`
-is separated and the overlap morphism `T₁ ×_W T₂ ⟶ T₁ ×_S T₂` is a closed immersion,
-then `W ⟶ S` is separated.
+We prove the criterion of separatedness over an open cover (Stacks Project Tag 0F3U):
+`w : W ⟶ S` is separated as soon as `W` has an open cover `𝒰` for which every overlap
+morphism `𝒰ᵢ ×_W 𝒰ⱼ ⟶ 𝒰ᵢ ×_S 𝒰ⱼ` is a closed immersion
+(`AlgebraicGeometry.IsSeparated.of_openCover`), together with its two-element special
+case `AlgebraicGeometry.IsSeparated.of_two_open_cover`, in which the diagonal overlaps
+are supplied by separatedness of `T₁ ⟶ S` and `T₂ ⟶ S`.
 
-The proof covers `W ×_S W` by the four chart opens `T_a ×_S T_b` and identifies the
-restriction of the diagonal over the chart `T_a ×_S T_b` with the canonical morphism
-`T_a ×_W T_b ⟶ T_a ×_S T_b` (`AlgebraicGeometry.diagonalRestrictChartArrowIso`); over
-the diagonal charts this morphism is the closed-immersion diagonal of `T_a ⟶ S`
-(`AlgebraicGeometry.isClosedImmersion_pullback_map_self`), and over the mixed charts
-it is the overlap morphism up to the symmetry isomorphism
+The proof covers `W ×_S W` by the chart opens `𝒰ᵢ ×_S 𝒰ⱼ` and identifies the
+restriction of the diagonal over such a chart with the overlap morphism
+(`AlgebraicGeometry.diagonalRestrictChartArrowIso`); over the diagonal charts that
+morphism is the closed-immersion diagonal of `𝒰ᵢ ⟶ S`
+(`AlgebraicGeometry.isClosedImmersion_pullback_map_self`), and the two mixed charts of
+a two-element cover are exchanged by the symmetry isomorphism
 (`AlgebraicGeometry.pullback_map_symmetry`).
 -/
 
@@ -74,20 +76,20 @@ def diagonalRestrictChartArrowIso :
       obtain ⟨⟨x₁, hx₁⟩, ⟨x₂, hx₂⟩⟩ := hx
       rw [hΔfst] at hx₁
       rw [hΔsnd] at hx₂
-      have : x ∈ Set.range (pullback.fst j₁ j₂ ≫ j₁) := by
+      have hr : x ∈ Set.range (pullback.fst j₁ j₂ ≫ j₁) := by
         rw [Scheme.Pullback.range_fst_comp]
         exact ⟨⟨x₁, hx₁⟩, ⟨x₂, hx₂⟩⟩
-      exact this
+      exact hr
     · rintro ⟨t, ht⟩
       have hx : x ∈ Set.range (pullback.fst j₁ j₂ ≫ j₁) := ⟨t, ht⟩
       rw [Scheme.Pullback.range_fst_comp] at hx
       obtain ⟨⟨x₁, hx₁⟩, ⟨x₂, hx₂⟩⟩ := hx
-      have : pullback.diagonal w x ∈
+      have hr : pullback.diagonal w x ∈
           Set.range (pullback.map (j₁ ≫ w) (j₂ ≫ w) w w j₁ j₂ (𝟙 S)
             (by simp) (by simp)) := by
         rw [Scheme.Pullback.range_map]
         exact ⟨⟨x₁, by rw [hΔfst]; exact hx₁⟩, ⟨x₂, by rw [hΔsnd]; exact hx₂⟩⟩
-      exact this
+      exact hr
 
 variable {j₁ j₂}
 
@@ -117,66 +119,60 @@ theorem pullback_map_symmetry :
 
 variable (j₁ j₂)
 
+/-- **Separatedness is detected on an open cover of the source** (Stacks Project
+Tag 0F3U): if `𝒰` is an open cover of `W` and every canonical overlap morphism
+`𝒰ᵢ ×_W 𝒰ⱼ ⟶ 𝒰ᵢ ×_S 𝒰ⱼ` is a closed immersion, then `w : W ⟶ S` is separated. The
+diagonal cases `i = j` say exactly that `𝒰ᵢ ⟶ S` is separated, see
+`AlgebraicGeometry.isClosedImmersion_pullback_map_self`. -/
+theorem IsSeparated.of_openCover (𝒰 : W.OpenCover)
+    (hd : ∀ i j : 𝒰.I₀, IsClosedImmersion (pullback.map (𝒰.f i) (𝒰.f j)
+      (𝒰.f i ≫ w) (𝒰.f j ≫ w) (𝟙 (𝒰.X i)) (𝟙 (𝒰.X j)) w (by simp) (by simp))) :
+    IsSeparated w := by
+  constructor
+  -- the product charts `𝒰ᵢ ×_S 𝒰ⱼ` of `W ×_S W`
+  let c : 𝒰.I₀ × 𝒰.I₀ → (pullback w w).Opens := fun p ↦
+    (pullback.map (𝒰.f p.1 ≫ w) (𝒰.f p.2 ≫ w) w w (𝒰.f p.1) (𝒰.f p.2) (𝟙 S)
+      (by simp) (by simp)).opensRange
+  have hO : (⨆ p : 𝒰.I₀ × 𝒰.I₀, c p) = ⊤ := by
+    rw [eq_top_iff]
+    rintro z -
+    rw [TopologicalSpace.Opens.mem_iSup]
+    refine ⟨(𝒰.idx (pullback.fst w w z), 𝒰.idx (pullback.snd w w z)), ?_⟩
+    simp only [c, Scheme.Hom.mem_opensRange, ← Set.mem_range, Scheme.Pullback.range_map]
+    exact ⟨𝒰.covers _, 𝒰.covers _⟩
+  rw [IsZariskiLocalAtTarget.iff_of_iSup_eq_top (P := @IsClosedImmersion) c hO]
+  rintro ⟨i, j⟩
+  exact (MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion
+    (diagonalRestrictChartArrowIso w (𝒰.f i) (𝒰.f j))).mpr (hd i j)
+
 /-- **Separatedness from a two-open cover** (Stacks Project Tag 0F3U; blueprint:
 `lemma:nagata-separated-two-open-cover`): let `W = T₁ ∪ T₂` be a union of two open
 subschemes over `S` such that each `Tᵢ ⟶ S` is separated and the canonical overlap
-morphism `T₁ ×_W T₂ ⟶ T₁ ×_S T₂` is a closed immersion. Then `W ⟶ S` is separated. -/
+morphism `T₁ ×_W T₂ ⟶ T₁ ×_S T₂` is a closed immersion. Then `W ⟶ S` is separated.
+This is the two-element case of `AlgebraicGeometry.IsSeparated.of_openCover`. -/
 theorem IsSeparated.of_two_open_cover
     (hcov : Set.range j₁ ∪ Set.range j₂ = Set.univ)
     [IsSeparated (j₁ ≫ w)] [IsSeparated (j₂ ≫ w)]
     (hd : IsClosedImmersion (pullback.map j₁ j₂ (j₁ ≫ w) (j₂ ≫ w) (𝟙 T₁) (𝟙 T₂) w
       (by simp) (by simp))) :
     IsSeparated w := by
-  constructor
-  -- the four product charts of `W ×_S W`
-  have hmem : ∀ {A B : Scheme.{u}} (i₁ : A ⟶ W) (i₂ : B ⟶ W) (_ : IsOpenImmersion i₁)
-      (_ : IsOpenImmersion i₂) (z : ↑(pullback w w)),
-      pullback.fst w w z ∈ Set.range i₁ → pullback.snd w w z ∈ Set.range i₂ →
-      z ∈ (pullback.map (i₁ ≫ w) (i₂ ≫ w) w w i₁ i₂ (𝟙 S)
-        (by simp) (by simp)).opensRange := by
-    intro A B i₁ i₂ _ _ z h₁ h₂
-    have : z ∈ Set.range (pullback.map (i₁ ≫ w) (i₂ ≫ w) w w i₁ i₂ (𝟙 S)
-        (by simp) (by simp)) := by
-      rw [Scheme.Pullback.range_map]
-      exact ⟨h₁, h₂⟩
-    exact this
-  classical
-  let c : Fin 2 × Fin 2 → (pullback w w).Opens := fun p ↦
-    if p = (0, 0) then
-      (pullback.map (j₁ ≫ w) (j₁ ≫ w) w w j₁ j₁ (𝟙 S) (by simp) (by simp)).opensRange
-    else if p = (0, 1) then
-      (pullback.map (j₁ ≫ w) (j₂ ≫ w) w w j₁ j₂ (𝟙 S) (by simp) (by simp)).opensRange
-    else if p = (1, 0) then
-      (pullback.map (j₂ ≫ w) (j₁ ≫ w) w w j₂ j₁ (𝟙 S) (by simp) (by simp)).opensRange
-    else
-      (pullback.map (j₂ ≫ w) (j₂ ≫ w) w w j₂ j₂ (𝟙 S) (by simp) (by simp)).opensRange
-  have hO : (⨆ p : Fin 2 × Fin 2, c p) = ⊤ := by
-    rw [eq_top_iff]
-    rintro z -
-    have h₁ : pullback.fst w w z ∈ Set.range j₁ ∪ Set.range j₂ := hcov ▸ Set.mem_univ _
-    have h₂ : pullback.snd w w z ∈ Set.range j₁ ∪ Set.range j₂ := hcov ▸ Set.mem_univ _
-    rw [TopologicalSpace.Opens.mem_iSup]
-    obtain h₁ | h₁ := h₁ <;> obtain h₂ | h₂ := h₂
-    · exact ⟨(0, 0), by simpa [c] using hmem j₁ j₁ ‹_› ‹_› z h₁ h₂⟩
-    · exact ⟨(0, 1), by simpa [c] using hmem j₁ j₂ ‹_› ‹_› z h₁ h₂⟩
-    · exact ⟨(1, 0), by simpa [c] using hmem j₂ j₁ ‹_› ‹_› z h₁ h₂⟩
-    · exact ⟨(1, 1), by simpa [c] using hmem j₂ j₂ ‹_› ‹_› z h₁ h₂⟩
-  rw [IsZariskiLocalAtTarget.iff_of_iSup_eq_top (P := @IsClosedImmersion) c hO]
+  -- the remaining mixed chart is the given one up to the symmetry of the fibre products
   have h21 : IsClosedImmersion (pullback.map j₂ j₁ (j₂ ≫ w) (j₁ ≫ w) (𝟙 T₂) (𝟙 T₁) w
       (by simp) (by simp)) := by
     have := hd
     rw [pullback_map_symmetry w]
     infer_instance
-  rintro ⟨a, b⟩
-  fin_cases a <;> fin_cases b <;> simp only [c]
-  · exact (MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion
-      (diagonalRestrictChartArrowIso w j₁ j₁)).mpr (isClosedImmersion_pullback_map_self w j₁)
-  · exact (MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion
-      (diagonalRestrictChartArrowIso w j₁ j₂)).mpr hd
-  · exact (MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion
-      (diagonalRestrictChartArrowIso w j₂ j₁)).mpr h21
-  · exact (MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion
-      (diagonalRestrictChartArrowIso w j₂ j₂)).mpr (isClosedImmersion_pullback_map_self w j₂)
+  refine IsSeparated.of_openCover w (Scheme.Cover.mkOfCovers WalkingPair
+    (fun k ↦ WalkingPair.casesOn k T₁ T₂) (fun k ↦ WalkingPair.casesOn k j₁ j₂)
+    (fun x ↦ ?_) (fun k ↦ by cases k <;> infer_instance)) (fun i j ↦ ?_)
+  · have hx : x ∈ Set.range j₁ ∪ Set.range j₂ := by
+      rw [hcov]
+      trivial
+    obtain ⟨y, hy⟩ | ⟨y, hy⟩ := hx
+    exacts [⟨WalkingPair.left, y, hy⟩, ⟨WalkingPair.right, y, hy⟩]
+  · cases i <;> cases j
+    exacts [isClosedImmersion_pullback_map_self w j₁, hd, h21,
+      isClosedImmersion_pullback_map_self w j₂]
 
 end TwoOpenCover
 

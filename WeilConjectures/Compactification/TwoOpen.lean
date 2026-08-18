@@ -36,7 +36,7 @@ The intermediate schemes of the construction are built from a prepared side
   `lemma:nagata-intermediate-overlap-closed`; the constructibility detour of the
   blueprint is bypassed by the exact description `range υ = ψ⁻¹(O)`);
 - `AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom`: `Wᵢ ⟶ S` is separated
-  (Stacks Project Tag 0F3U via `IsSeparated.pushoutDesc`; blueprint:
+  (Stacks Project Tag 0F3U via `IsSeparated.pushout_desc`; blueprint:
   `lemma:nagata-intermediate-separated`);
 - `AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU`: the copy of `U` is dense
   in `Wᵢ` (blueprint: part of `lemma:nagata-two-open-density-transport`).
@@ -279,7 +279,7 @@ their overlap is a closed immersion. -/
 theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediateHom := by
   have := σ.isProper_s
   have : IsSeparated (σ.interior.ι ≫ σ.s) := inferInstance
-  exact IsSeparated.pushoutDesc O.ι σ.interiorEmb σ.interiorEmb_comm
+  exact IsSeparated.pushout_desc O.ι σ.interiorEmb σ.interiorEmb_comm
     σ.isClosedImmersion_intermediateGraph
 
 /-- The intermediate scheme is of finite type over the base (blueprint:
@@ -287,7 +287,7 @@ theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediat
 theorem locallyOfFiniteType_intermediateHom [LocallyOfFiniteType u] :
     LocallyOfFiniteType σ.intermediateHom := by
   have := σ.isProper_s
-  exact IsZariskiLocalAtSource.pushoutDesc O.ι σ.interiorEmb σ.interiorEmb_comm
+  exact IsZariskiLocalAtSource.pushout_desc O.ι σ.interiorEmb σ.interiorEmb_comm
     inferInstance inferInstance
 
 /-- The intermediate scheme of a side over a Noetherian base is quasi-compact. -/

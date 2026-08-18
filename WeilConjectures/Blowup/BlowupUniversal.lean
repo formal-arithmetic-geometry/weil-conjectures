@@ -31,10 +31,6 @@ The proof is chart-local, with the algebraic core the universal property of the
 
 On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
 
-- `Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le`: the affine-local
-  description of the inverse image ideal sheaf along an arbitrary morphism;
-- `Scheme.IdealSheafData.comap_mul`: inverse images commute with products of ideal
-  sheaves (for arbitrary morphisms);
 - the effective Cartier lemma kit: local presentations on a basis
   (`IsEffectiveCartier.exists_presentation_le`), stability under pullback along open
   immersions, products, factors of products
@@ -404,93 +400,6 @@ theorem awayAlgebraMap_mem_nonZeroDivisors_of_mem {a : A} (ha : a ∈ I₀) {s :
 end AffineBlowup
 
 end NonZeroDivisorTransfer
-
-section ComapAffineLocality
-
-/-! ### The affine-local description of the inverse image ideal sheaf
-
-For an arbitrary morphism `f : Y ⟶ X` and affine opens `W ≤ f ⁻¹ᵁ V`, the pullback
-ideal `(I.comap f)(W)` is the extension of `I(V)` along the section map
-`f.appLE V W`. This extends `Scheme.IdealSheafData.ideal_comap_eq_map_appLE` (the
-open immersion case) to arbitrary morphisms, and yields multiplicativity of `comap`. -/
-
-/-- Pushforward of ideals along the inverse of an isomorphism of commutative rings is
-injective. -/
-lemma CommRingCat.ideal_map_inv_injective {R S : CommRingCat.{u}} (e : R ≅ S) :
-    Function.Injective (fun J : Ideal S ↦ J.map e.inv.hom) := by
-  intro J₁ J₂ hJ
-  have h := congrArg (Ideal.map e.hom.hom) hJ
-  simp only [Ideal.map_map, ← CommRingCat.hom_comp, Iso.inv_hom_id, CommRingCat.hom_id,
-    Ideal.map_id] at h
-  exact h
-
-variable {Y X : Scheme.{u}}
-
-/-- **The affine-local description of the inverse image ideal sheaf** along an
-arbitrary morphism: on an affine open `W` mapping into an affine open `V`, the
-pullback of `I` is the extension of `I(V)` along the induced map on sections. -/
-theorem Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le (f : Y ⟶ X)
-    (I : X.IdealSheafData) (V : X.affineOpens) (W : Y.affineOpens)
-    (h : W.1 ≤ f ⁻¹ᵁ V.1) :
-    (I.comap f).ideal W = (I.ideal V).map (f.appLE V.1 W.1 h).hom := by
-  have h1 : ((I.comap f).comap W.2.fromSpec).ideal ⟨⊤, isAffineOpen_top _⟩ =
-      ((I.comap f).ideal W).map (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom := by
-    have e1 := (I.comap f).ideal_comap_specMap_fromSpec W (𝟙 Γ(Y, W.1))
-      (specMap_comp_fromSpec_preimage_le W _)
-    rw [appLE_specMap_comp_fromSpec W (𝟙 _) (specMap_comp_fromSpec_preimage_le W _),
-      Category.id_comp, Spec.map_id, Category.id_comp] at e1
-    exact e1
-  have h3 : (I.comap f).comap W.2.fromSpec =
-      I.comap (Spec.map (f.appLE V.1 W.1 h) ≫ V.2.fromSpec) := by
-    rw [← Scheme.IdealSheafData.comap_comp,
-      IsAffineOpen.SpecMap_appLE_fromSpec f V.2 W.2 h]
-  have h4 : (I.comap (Spec.map (f.appLE V.1 W.1 h) ≫ V.2.fromSpec)).ideal
-      ⟨⊤, isAffineOpen_top _⟩ =
-      (I.ideal V).map ((f.appLE V.1 W.1 h) ≫ (Scheme.ΓSpecIso Γ(Y, W.1)).inv).hom := by
-    rw [I.ideal_comap_specMap_fromSpec V _ (specMap_comp_fromSpec_preimage_le V _),
-      appLE_specMap_comp_fromSpec V _ (specMap_comp_fromSpec_preimage_le V _)]
-  apply CommRingCat.ideal_map_inv_injective (Scheme.ΓSpecIso Γ(Y, W.1))
-  calc ((I.comap f).ideal W).map (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom
-      = ((I.comap f).comap W.2.fromSpec).ideal ⟨⊤, isAffineOpen_top _⟩ := h1.symm
-    _ = (I.ideal V).map ((f.appLE V.1 W.1 h) ≫ (Scheme.ΓSpecIso Γ(Y, W.1)).inv).hom := by
-        rwa [h3]
-    _ = ((I.ideal V).map (f.appLE V.1 W.1 h).hom).map
-          (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom := by
-        rw [CommRingCat.hom_comp, Ideal.map_map]
-
-/-- Every point of `Y` lies in an affine open contained in the preimage of an affine
-open of `X`. -/
-lemma exists_affineOpens_le_preimage (f : Y ⟶ X) (y : Y) :
-    ∃ (V : X.affineOpens) (W : Y.affineOpens), W.1 ≤ f ⁻¹ᵁ V.1 ∧ y ∈ W.1 := by
-  have hfy : f y ∈ (⊤ : X.Opens) := trivial
-  rw [← iSup_affineOpens_eq_top X] at hfy
-  obtain ⟨V, hV⟩ := TopologicalSpace.Opens.mem_iSup.mp hfy
-  obtain ⟨-, ⟨W₀, hW₀, rfl⟩, hyW₀, hsub⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
-    (show y ∈ ((f ⁻¹ᵁ V.1 : Y.Opens) : Set Y) from hV) (f ⁻¹ᵁ V.1).isOpen
-  exact ⟨V, ⟨W₀, hW₀⟩, fun z hz ↦ hsub hz, hyW₀⟩
-
-/-- **Inverse images of ideal sheaves commute with products** (for arbitrary
-morphisms). -/
-theorem Scheme.IdealSheafData.comap_mul (f : Y ⟶ X) (I J : X.IdealSheafData) :
-    (I * J).comap f = I.comap f * J.comap f := by
-  refine Scheme.IdealSheafData.ext_of_iSup_eq_top
-    (ι := {p : X.affineOpens × Y.affineOpens // p.2.1 ≤ f ⁻¹ᵁ p.1.1})
-    (fun p ↦ p.1.2) ?_ ?_
-  · rw [eq_top_iff]
-    intro y _
-    obtain ⟨V, W, hle, hyW⟩ := exists_affineOpens_le_preimage f y
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(V, W), hle⟩, hyW⟩
-  · rintro ⟨⟨V, W⟩, hle⟩
-    have hmul : (I * J).ideal V = I.ideal V * J.ideal V := by
-      rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
-    have hmul' : (I.comap f * J.comap f).ideal W =
-        (I.comap f).ideal W * (J.comap f).ideal W := by
-      rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
-    rw [Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le f (I * J) V W hle, hmul, hmul',
-      Ideal.map_mul, Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le f I V W hle,
-      Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le f J V W hle]
-
-end ComapAffineLocality
 
 section EffectiveCartierKit
 

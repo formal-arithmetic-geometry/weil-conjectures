@@ -23,7 +23,7 @@ records the basic geometry of this pushout:
 - `AlgebraicGeometry.IsOpenImmersion.isPullback_pushout`: the pushout square is also a
   pullback square, i.e. the two charts intersect in exactly the glued copy of `U`;
 - `CompactSpace` transfers from the two charts to the pushout;
-- `AlgebraicGeometry.IsZariskiLocalAtSource.pushoutDesc`: a source-local property holds
+- `AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`: a source-local property holds
   for `pushout.desc h k w` as soon as it holds for `h` and `k`.
 
 These are the raw ingredients for the intermediate schemes `Wᵢ = U ⊔_{Uᵢ} Xᵢ°` of the
@@ -43,7 +43,10 @@ namespace AlgebraicGeometry
 
 variable {U X Y : Scheme.{u}} (f : U ⟶ X) (g : U ⟶ Y) [IsOpenImmersion f] [IsOpenImmersion g]
 
-instance span_map_isOpenImmersion : ∀ {i j : WalkingSpan} (h : i ⟶ j),
+/-- Every arrow of the span of two open immersions is an open immersion: the two
+non-identity arrows are `f` and `g` themselves. This is what makes the span a locally
+directed diagram, hence gluable. -/
+instance IsOpenImmersion.span_map : ∀ {i j : WalkingSpan} (h : i ⟶ j),
     IsOpenImmersion ((span f g).map h)
   | _, _, .id _ => by rw [span_map_id]; infer_instance
   | _, _, .init WalkingPair.left => inferInstanceAs (IsOpenImmersion f)
@@ -131,18 +134,14 @@ def IsOpenImmersion.pushoutCover : (pushout f g).OpenCover :=
 /-- **Source-local properties descend to a pushout of open immersions**: if `P` is
 Zariski-local on the source and holds for `h : X ⟶ S` and `k : Y ⟶ S`, then it holds
 for the glued morphism `pushout.desc h k w : X ⊔_U Y ⟶ S`. -/
-lemma IsZariskiLocalAtSource.pushoutDesc {P : MorphismProperty Scheme.{u}}
+lemma IsZariskiLocalAtSource.pushout_desc {P : MorphismProperty Scheme.{u}}
     [IsZariskiLocalAtSource P] {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     (w : f ≫ h = g ≫ k) (hh : P h) (hk : P k) : P (pushout.desc h k w) := by
   rw [IsZariskiLocalAtSource.iff_of_openCover (P := P) (IsOpenImmersion.pushoutCover f g)]
   intro i
   cases i with
-  | left =>
-    change P (pushout.inl f g ≫ pushout.desc h k w)
-    rwa [pushout.inl_desc]
-  | right =>
-    change P (pushout.inr f g ≫ pushout.desc h k w)
-    rwa [pushout.inr_desc]
+  | left => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inl_desc] using hh
+  | right => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inr_desc] using hk
 
 /-- **Separatedness of a gluing of two schemes along a common open**: let `h : X ⟶ S`
 and `k : Y ⟶ S` be separated morphisms restricting to the same morphism on a common
@@ -150,7 +149,7 @@ open subscheme `U`, and assume the graph morphism `(f, g) : U ⟶ X ×_S Y` is a
 immersion. Then the glued morphism `X ⊔_U Y ⟶ S` is separated. This is the form of the
 two-open criterion (Stacks Project Tag 0F3U, `IsSeparated.of_two_open_cover`) used for
 the intermediate schemes of the two-open compactification theorem. -/
-theorem IsSeparated.pushoutDesc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
+theorem IsSeparated.pushout_desc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     (w : f ≫ h = g ≫ k) [IsSeparated h] [IsSeparated k]
     (hd : IsClosedImmersion (pullback.lift f g w)) :
     IsSeparated (pushout.desc h k w) := by

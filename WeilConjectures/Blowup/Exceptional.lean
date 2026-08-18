@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Gluing
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 
@@ -38,10 +39,9 @@ The file culminates in the principalization theorem
 `Scheme.IdealSheafData.extendedToBlowup_isEffectiveCartier`
 (blueprint: `thm:nagata-blowup-principalizes-center`): the extension of the center to
 the blow-up is an effective Cartier ideal. The supporting computation of the inverse
-image ideal sheaf along an affine probe, `ideal_comap_specMap_fromSpec`, identifies the
-pullback of the subscheme of `I` explicitly via the pushout property of quotient rings
-(`isPushout_quotient`) and the affine chart of the subscheme
-(`isPullback_subschemeCover_f`).
+image ideal sheaf along an affine probe,
+`Scheme.IdealSheafData.ideal_comap_specMap_fromSpec`, is general and lives in
+`WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial`.
 
 -/
 
@@ -160,145 +160,6 @@ abbrev extendedToBlowup (I : X.IdealSheafData) : I.blowup.IdealSheafData :=
   I.comap I.blowupMap
 
 end Scheme.IdealSheafData
-
-section InverseImageIdeal
-
-/-! ### The inverse image ideal sheaf on an affine probe
-
-For a morphism `Spec S ⟶ X` factoring through an affine open `U` as
-`Spec.map φ ≫ fromSpec`, we compute the ideal of sections of the inverse image ideal
-sheaf `I.comap _` on `⊤` as the extension of `I(U)` along the section map. The pullback
-of the subscheme of `I` is computed explicitly: it is `Spec` of the quotient by the
-extended ideal, via the pushout property of quotient rings and the affine chart
-`Spec (Γ(X, U) ⧸ I(U))` of the subscheme. -/
-
-/-- Quotients by extended ideals are pushouts in `CommRingCat`. -/
-lemma isPushout_quotient {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R) :
-    IsPushout (CommRingCat.ofHom (Ideal.Quotient.mk K)) φ
-      (CommRingCat.ofHom (Ideal.quotientMap (K.map φ.hom) φ.hom Ideal.le_comap_map))
-      (CommRingCat.ofHom (Ideal.Quotient.mk (K.map φ.hom))) := by
-  have w : CommRingCat.ofHom (Ideal.Quotient.mk K) ≫
-      CommRingCat.ofHom (Ideal.quotientMap (K.map φ.hom) φ.hom Ideal.le_comap_map) =
-      φ ≫ CommRingCat.ofHom (Ideal.Quotient.mk (K.map φ.hom)) := by
-    rw [← CommRingCat.ofHom_comp, Ideal.quotientMap_comp_mk, CommRingCat.ofHom_comp,
-      CommRingCat.ofHom_hom]
-  have hkill : ∀ s : Limits.PushoutCocone (CommRingCat.ofHom (Ideal.Quotient.mk K)) φ,
-      ∀ a ∈ K.map φ.hom, s.inr.hom a = 0 := by
-    intro s a ha
-    have hle : K.map φ.hom ≤ RingHom.ker s.inr.hom := by
-      rw [Ideal.map_le_iff_le_comap]
-      intro k hk
-      have hc := congrArg (fun t ↦ CommRingCat.Hom.hom t k) s.condition
-      simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at hc
-      rw [Ideal.mem_comap, RingHom.mem_ker, ← hc, Ideal.Quotient.eq_zero_iff_mem.mpr hk,
-        map_zero]
-    exact RingHom.mem_ker.mp (hle ha)
-  refine IsPushout.of_isColimit' ⟨w⟩ (Limits.PushoutCocone.IsColimit.mk _
-    (fun s ↦ CommRingCat.ofHom (Ideal.Quotient.lift (K.map φ.hom) s.inr.hom (hkill s)))
-    (fun s ↦ ?_) (fun s ↦ ?_) (fun s m hl hr ↦ ?_))
-  · ext x
-    have hc := congrArg (fun t ↦ CommRingCat.Hom.hom t x) s.condition
-    simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at hc
-    simp [Ideal.quotientMap_mk, Ideal.Quotient.lift_mk, ← hc]
-  · ext x
-    simp [Ideal.Quotient.lift_mk]
-  · ext x
-    have hc := congrArg (fun t ↦ CommRingCat.Hom.hom t x) hr
-    simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at hc
-    simp [Ideal.Quotient.lift_mk, ← hc]
-
-variable {X : Scheme.{u}}
-
-/-- The affine chart of the subscheme over an affine open is the fibre product: the
-square with the chart `Spec (Γ(X, U) ⧸ I(U)) ⟶ 𝒪ₓ/I` and `fromSpec` is a pullback. -/
-lemma isPullback_subschemeCover_f (I : X.IdealSheafData) (U : X.affineOpens) :
-    IsPullback (I.subschemeCover.f U)
-      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U))))
-      I.subschemeι U.2.fromSpec := by
-  refine (IsOpenImmersion.isPullback _ _ _ _ ?_ ?_).flip
-  · exact (I.subschemeCover_map_subschemeι U).trans (I.glueDataObjι_ι U)
-  · rw [U.2.opensRange_fromSpec, Scheme.IdealSheafData.opensRange_subschemeCover_map]
-
-/-- The section map of `Spec.map φ ≫ fromSpec` from the affine open to the total
-sections is `φ` composed with the global-sections isomorphism of the spectrum. -/
-lemma appLE_specMap_comp_fromSpec (U : X.affineOpens) {S : CommRingCat.{u}}
-    (φ : Γ(X, U.1) ⟶ S) (h : (⊤ : (Spec S).Opens) ≤ (Spec.map φ ≫ U.2.fromSpec) ⁻¹ᵁ U.1) :
-    (Spec.map φ ≫ U.2.fromSpec).appLE U.1 ⊤ h = φ ≫ (Scheme.ΓSpecIso S).inv := by
-  have e₁ : (⊤ : (Spec Γ(X, U.1)).Opens) ≤ U.2.fromSpec ⁻¹ᵁ U.1 :=
-    U.2.fromSpec_preimage_self.ge
-  have e₂ : (⊤ : (Spec S).Opens) ≤ Spec.map φ ⁻¹ᵁ ⊤ := le_rfl
-  rw [← Scheme.Hom.appLE_comp_appLE (Spec.map φ) U.2.fromSpec U.1 ⊤ ⊤ e₁ e₂]
-  have h1 : U.2.fromSpec.appLE U.1 ⊤ e₁ = (Scheme.ΓSpecIso Γ(X, U.1)).inv := by
-    rw [Scheme.Hom.appLE, U.2.fromSpec_app_self, Category.assoc, ← Functor.map_comp]
-    rw [show (eqToHom U.2.fromSpec_preimage_self).op ≫ (homOfLE e₁).op = 𝟙 _ from
-      Subsingleton.elim _ _]
-    rw [CategoryTheory.Functor.map_id, Category.comp_id]
-  have h2 : (Spec.map φ).appLE ⊤ ⊤ e₂ =
-      (Scheme.ΓSpecIso Γ(X, U.1)).hom ≫ φ ≫ (Scheme.ΓSpecIso S).inv := by
-    have hTop : (Spec.map φ).appLE ⊤ ⊤ e₂ = (Spec.map φ).appTop :=
-      Scheme.Hom.appLE_eq_app (Spec.map φ)
-    rw [hTop, Scheme.ΓSpecIso_inv_naturality, ← Category.assoc, Iso.hom_inv_id,
-      Category.id_comp]
-  rw [h1, h2, ← Category.assoc, Iso.inv_hom_id, Category.id_comp]
-
-/-- The ideal of sections on `⊤` of `ofIdealTop`. -/
-lemma ideal_top_ofIdealTop {Y : Scheme.{u}} [IsAffine Y] (K : Ideal Γ(Y, ⊤)) :
-    (Scheme.IdealSheafData.ofIdealTop K).ideal ⟨⊤, isAffineOpen_top _⟩ = K := by
-  have h1 : Y.presheaf.map ((homOfLE le_top).op :
-      Opposite.op (⊤ : Y.Opens) ⟶ Opposite.op (((⟨⊤, isAffineOpen_top Y⟩ :
-        Y.affineOpens) : Y.Opens))) = 𝟙 _ := Y.presheaf.map_id _
-  rw [Scheme.IdealSheafData.ofIdealTop_ideal, h1, CommRingCat.hom_id, Ideal.map_id]
-
-/-- The kernel ideal sheaf of `Spec` of a quotient map, on global sections. -/
-lemma ideal_top_ker_specMap_quotient {S : CommRingCat.{u}} (L : Ideal S) :
-    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk L))).ker.ideal
-      ⟨⊤, isAffineOpen_top _⟩ = L.map (Scheme.ΓSpecIso S).inv.hom := by
-  rw [Scheme.ker_of_isAffine, ideal_top_ofIdealTop]
-  have happ : (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk L))).appTop =
-      (Scheme.ΓSpecIso S).hom ≫ CommRingCat.ofHom (Ideal.Quotient.mk L) ≫
-        (Scheme.ΓSpecIso _).inv := by
-    rw [Scheme.ΓSpecIso_inv_naturality, ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
-  rw [happ]
-  have hdec : (((Scheme.ΓSpecIso S).hom ≫ CommRingCat.ofHom (Ideal.Quotient.mk L) ≫
-      (Scheme.ΓSpecIso _).inv)).hom =
-      ((Scheme.ΓSpecIso (.of (S ⧸ L))).symm.commRingCatIsoToRingEquiv.toRingHom).comp
-        ((Ideal.Quotient.mk L).comp (Scheme.ΓSpecIso S).hom.hom) := rfl
-  rw [hdec, RingHom.ker_equiv_comp, ← RingHom.comap_ker, Ideal.mk_ker]
-  exact (Ideal.map_symm (Scheme.ΓSpecIso S).commRingCatIsoToRingEquiv).symm
-
-/-- **The inverse image ideal sheaf on an affine probe**: for an affine open
-`U ⊆ X` and a morphism `Spec S ⟶ X` of the form `Spec.map φ ≫ fromSpec`, the ideal of
-sections of `I.comap _` on `⊤` is the extension of `I(U)` along the section map.
-(Blueprint: part of `thm:nagata-blowup-principalizes-center`, the affine description of
-the inverse image ideal sheaf.) -/
-theorem Scheme.IdealSheafData.ideal_comap_specMap_fromSpec (I : X.IdealSheafData)
-    (U : X.affineOpens) {S : CommRingCat.{u}} (φ : Γ(X, U.1) ⟶ S)
-    (h : (⊤ : (Spec S).Opens) ≤ (Spec.map φ ≫ U.2.fromSpec) ⁻¹ᵁ U.1) :
-    (I.comap (Spec.map φ ≫ U.2.fromSpec)).ideal ⟨⊤, isAffineOpen_top _⟩ =
-      (I.ideal U).map ((Spec.map φ ≫ U.2.fromSpec).appLE U.1 ⊤ h).hom := by
-  -- the explicit pullback of the subscheme along the probe
-  have s1 := isPullback_SpecMap_of_isPushout _ _ _ _ (isPushout_quotient φ (I.ideal U))
-  have H := (s1.paste_horiz (isPullback_subschemeCover_f I U)).flip
-  -- the first projection is the quotient `Spec` map, up to the pullback isomorphism
-  have hfst : pullback.fst (Spec.map φ ≫ U.2.fromSpec) I.subschemeι =
-      H.isoPullback.inv ≫ Spec.map (CommRingCat.ofHom
-        (Ideal.Quotient.mk ((I.ideal U).map φ.hom))) :=
-    ((Iso.inv_comp_eq _).mpr H.isoPullback_hom_fst.symm).symm
-  have hker : I.comap (Spec.map φ ≫ U.2.fromSpec) =
-      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk ((I.ideal U).map φ.hom)))).ker := by
-    change (pullback.fst (Spec.map φ ≫ U.2.fromSpec) I.subschemeι).ker = _
-    rw [hfst, Scheme.Hom.ker_comp_of_isIso]
-  refine (congrArg (fun J ↦ Scheme.IdealSheafData.ideal J ⟨⊤, isAffineOpen_top _⟩)
-    hker).trans ?_
-  refine (ideal_top_ker_specMap_quotient _).trans ?_
-  -- identify the two descriptions of the extended ideal
-  refine Eq.symm ?_
-  refine (congrArg (fun t ↦ (I.ideal U).map (CommRingCat.Hom.hom t))
-    (appLE_specMap_comp_fromSpec U φ h)).trans ?_
-  refine (congrArg ((I.ideal U).map ·) (CommRingCat.hom_comp _ _)).trans ?_
-  exact (Ideal.map_map _ _).symm
-
-end InverseImageIdeal
 
 section Assembly
 
