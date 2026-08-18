@@ -78,7 +78,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 sheaves for the small étale sites. -/
 noncomputable def Etale.lowerShriek :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
-  AlgebraicGeometry.lowerShriek A @Etale @Etale f isOpenImmersion_le_etale
+  AlgebraicGeometry.lowerShriek A @Etale @Etale le_rfl f isOpenImmersion_le_etale
 
 /-- The lower shriek `f_!` on étale sheaves is the extension by zero along the open
 immersion of the chosen compactification followed by the pushforward `Etale.lowerStar`

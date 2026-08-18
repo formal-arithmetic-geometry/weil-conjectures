@@ -250,7 +250,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 `Etale.upperStar` it requires neither Kan extensions nor sheafification. -/
 def Etale.openImmersionRestriction :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf U.smallEtaleTopology A :=
-  GrothendieckTopology.localizationRestriction A @Etale @Etale j inferInstance
+  GrothendieckTopology.localizationRestriction A @Etale @Etale le_rfl j inferInstance
 
 omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- The sections of `j^* G` over `T → U` are the sections of `G` over `T → U → X`. -/
@@ -264,7 +264,7 @@ lemma Etale.openImmersionRestriction_obj_val_obj (G : Sheaf X.smallEtaleTopology
 the right half of the triple `j_! ⊣ j^* ⊣ j_*`. -/
 noncomputable def Etale.openImmersionRestrictionLowerStarAdjunction :
     Etale.openImmersionRestriction A j ⊣ Etale.lowerStar A j :=
-  GrothendieckTopology.localizationRestrictionLowerStarAdjunction A @Etale @Etale j
+  GrothendieckTopology.localizationRestrictionLowerStarAdjunction A @Etale @Etale le_rfl j
     inferInstance
 
 /-- The counit of the adjunction `j^* ⊣ j_*` along an open immersion `j` is an
@@ -292,7 +292,7 @@ noncomputable def Etale.openImmersionLowerShriek :
 open immersion. -/
 noncomputable def Etale.openImmersionLowerShriekAdjunction :
     Etale.openImmersionLowerShriek A j ⊣ Etale.openImmersionRestriction A j :=
-  GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale j inferInstance
+  GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale le_rfl j inferInstance
 
 instance : (Etale.openImmersionLowerShriek A j).IsLeftAdjoint :=
   (Etale.openImmersionLowerShriekAdjunction A j).isLeftAdjoint

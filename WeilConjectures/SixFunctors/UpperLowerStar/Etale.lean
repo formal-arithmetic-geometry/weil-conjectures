@@ -195,7 +195,7 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 étale sites, given objectwise by `(g_* G)(V → Y) = G(V ×_Y Z → Z)`. -/
 noncomputable def Etale.lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
-  GrothendieckTopology.lowerStar A @Etale @Etale g
+  GrothendieckTopology.lowerStar A @Etale @Etale le_rfl g
 
 omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- The sections of `g_* G` over `V → Y` are the sections of `G` over `V ×_Y Z → Z`. -/
@@ -221,13 +221,13 @@ instance Etale.lowerStar_additive : (Etale.lowerStar A g).Additive where
 coefficient category. -/
 instance Etale.preservesLimitsOfShape_lowerStar (E : Type*) [Category E]
     [HasLimitsOfShape E A] : PreservesLimitsOfShape E (Etale.lowerStar A g) :=
-  GrothendieckTopology.preservesLimitsOfShape_lowerStar A @Etale @Etale g E
+  GrothendieckTopology.preservesLimitsOfShape_lowerStar A @Etale @Etale le_rfl g E
 
 /-- The pushforward `g_*` on étale sheaves with values in an abelian category is left
 exact. -/
 instance Etale.preservesFiniteLimits_lowerStar :
     PreservesFiniteLimits (Etale.lowerStar A g) :=
-  GrothendieckTopology.preservesFiniteLimits_lowerStar A @Etale @Etale g
+  GrothendieckTopology.preservesFiniteLimits_lowerStar A @Etale @Etale le_rfl g
 
 section Adjunction
 
@@ -243,7 +243,7 @@ noncomputable def Etale.upperStar :
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites. -/
 noncomputable def Etale.upperStarLowerStarAdjunction :
     Etale.upperStar A g ⊣ Etale.lowerStar A g :=
-  GrothendieckTopology.upperStarLowerStarAdjunction A @Etale @Etale g
+  GrothendieckTopology.upperStarLowerStarAdjunction A @Etale @Etale le_rfl g
 
 instance : (Etale.lowerStar A g).IsRightAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isRightAdjoint
@@ -285,7 +285,7 @@ variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 étale sheaves. -/
 noncomputable def Etale.lowerStarComp :
     Etale.lowerStar A h₁ ⋙ Etale.lowerStar A h₂ ≅ Etale.lowerStar A (h₁ ≫ h₂) :=
-  GrothendieckTopology.lowerStarComp A @Etale @Etale h₁ h₂
+  GrothendieckTopology.lowerStarComp A @Etale @Etale le_rfl h₁ h₂
 
 section UpperStar
 
@@ -293,7 +293,7 @@ section UpperStar
 sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
 noncomputable def Etale.upperStarComp :
     Etale.upperStar A (h₁ ≫ h₂) ≅ Etale.upperStar A h₂ ⋙ Etale.upperStar A h₁ :=
-  GrothendieckTopology.upperStarComp A @Etale @Etale h₁ h₂
+  GrothendieckTopology.upperStarComp A @Etale @Etale le_rfl h₁ h₂
 
 end UpperStar
 

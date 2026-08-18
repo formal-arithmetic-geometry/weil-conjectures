@@ -40,11 +40,10 @@ extension by zero along `i` with the pushforward `GrothendieckTopology.lowerStar
 - The continuity of the base change functor along a general `g` (in particular the proper
   structure morphism of a compactification), the left Kan extensions and the
   sheafification entering the extension by zero are provided, for `Q ≤ P`, by the sorried
-  instances of `WeilConjectures.SixFunctors.Instances`; the inequality `Q ≤ P` they
-  require is assumed as a `Fact` instance, which holds definitionally for `Q = P`. For
-  `g` satisfying `P` the continuity is proved as
-  `GrothendieckTopology.isContinuous_overPullback_of_le` below, via the adjunction with
-  the cocontinuous localization functor.
+  results of `WeilConjectures.SixFunctors.Instances`; the inequality `hQP : Q ≤ P` they
+  require is an explicit argument of the definitions. For `g` satisfying `P` the
+  continuity is proved as `GrothendieckTopology.isContinuous_overPullback_of_le` below,
+  via the adjunction with the cocontinuous localization functor.
 - The hypothesis `@IsOpenImmersion ≤ P` provides `P` for the open immersion of the chosen
   compactification.
 
@@ -93,14 +92,14 @@ namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 /- The left Kan extensions, the sheafification and the continuity of the base change
-functor entering the definitions below are provided by the sorried instances of
+functor entering the definitions below are provided by the sorried results of
 `WeilConjectures.SixFunctors.Instances`, under the following multiplicativity-type
-assumptions on `P` and `Q` and the inequality `Q ≤ P`, assumed as a `Fact` instance;
-all of them hold for `P = Q = @Etale`. -/
+assumptions on `P` and `Q` and the inequality `hQP : Q ≤ P`; all of them hold for
+`P = Q = @Etale`. -/
 variable (P Q : MorphismProperty Scheme.{u})
 variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
   [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
-variable [Fact (Q ≤ P)]
+variable (hQP : Q ≤ P)
 variable {X Y : Scheme.{u}}
 
 namespace Compactification
@@ -113,7 +112,7 @@ noncomputable def lowerShriek :
     Sheaf (X.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (Y.smallGrothendieckTopology Q (Q := P)) A :=
   GrothendieckTopology.localizationLowerShriek A P Q c.i hi ⋙
-    GrothendieckTopology.lowerStar A P Q c.g
+    GrothendieckTopology.lowerStar A P Q hQP c.g
 
 end Compactification
 
@@ -125,18 +124,18 @@ composition `i_! ⋙ g_*` associated with the chosen compactification
 noncomputable def lowerShriek :
     Sheaf (X.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (Y.smallGrothendieckTopology Q (Q := P)) A :=
-  (HasCompactification.compactification f).lowerShriek A P Q
+  (HasCompactification.compactification f).lowerShriek A P Q hQP
     (hP _ (HasCompactification.compactification f).isOpenImmersion)
 
 /-- The lower shriek of `f` is definitionally the extension by zero along the open
 immersion of the chosen compactification followed by the pushforward along its proper
 structure morphism. -/
 lemma lowerShriek_eq :
-    lowerShriek A P Q f hP =
+    lowerShriek A P Q hQP f hP =
       GrothendieckTopology.localizationLowerShriek A P Q
           (HasCompactification.compactification f).i
           (hP _ (HasCompactification.compactification f).isOpenImmersion) ⋙
-        GrothendieckTopology.lowerStar A P Q (HasCompactification.compactification f).g :=
+        GrothendieckTopology.lowerStar A P Q hQP (HasCompactification.compactification f).g :=
   rfl
 
 end AlgebraicGeometry

@@ -74,7 +74,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 noncomputable def Etale.openImmersionAdjunctionTriple :
     Adjunction.Triple (Etale.openImmersionLowerShriek A j)
       (Etale.openImmersionRestriction A j) (Etale.lowerStar A j) :=
-  GrothendieckTopology.localizationAdjunctionTriple A @Etale @Etale j inferInstance
+  GrothendieckTopology.localizationAdjunctionTriple A @Etale @Etale le_rfl j inferInstance
 
 /-- **The unit of `j_! ⊣ j^*` is an isomorphism for an open immersion `j`**, i.e.
 `j^* j_! F ≅ F` naturally in `F`.
