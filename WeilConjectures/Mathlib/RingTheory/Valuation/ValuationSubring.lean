@@ -40,8 +40,7 @@ theorem inv_mem_of_isUnit {x : K} (hx : x ∈ A) (hu : IsUnit (⟨x, hx⟩ : A))
     rw [← hu]
     exact u.inv_mul
   have h2 : (((u⁻¹ : Aˣ) : A) : K) * x = 1 := by
-    have := congrArg (Subtype.val : A → K) h1
-    simpa using this
+    simpa using congrArg (Subtype.val : A → K) h1
   rw [inv_eq_of_mul_eq_one_left h2]
   exact SetLike.coe_mem (((u⁻¹ : Aˣ) : A))
 
@@ -71,14 +70,16 @@ def comapResidue (A'' : ValuationSubring (ResidueField A)) : ValuationSubring K 
         have hxinvA : x⁻¹ ∈ A := A.inv_mem_of_isUnit hxA hunit
         refine Or.inr (Subring.mem_map.mpr
           ⟨⟨x⁻¹, hxinvA⟩, Subring.mem_comap.mpr ?_, rfl⟩)
+        have hone : (⟨x, hxA⟩ : A) * ⟨x⁻¹, hxinvA⟩ = 1 :=
+          Subtype.ext (mul_inv_cancel₀ hx0)
         have hmul : residue A ⟨x, hxA⟩ * residue A ⟨x⁻¹, hxinvA⟩ = 1 := by
-          rw [← map_mul, show (⟨x, hxA⟩ : A) * ⟨x⁻¹, hxinvA⟩ = 1 from
-            Subtype.ext (mul_inv_cancel₀ hx0), map_one]
+          rw [← map_mul, hone, map_one]
         rcases A''.mem_or_inv_mem (residue A ⟨x, hxA⟩) with h | h
         · exact absurd h hres
-        · change residue A ⟨x⁻¹, hxinvA⟩ ∈ A''
-          rwa [show residue A ⟨x⁻¹, hxinvA⟩ = (residue A ⟨x, hxA⟩)⁻¹ from
-            eq_inv_of_mul_eq_one_left (mul_comm (residue A ⟨x, hxA⟩) _ ▸ hmul)]
+        · have hinv : residue A ⟨x⁻¹, hxinvA⟩ = (residue A ⟨x, hxA⟩)⁻¹ :=
+            eq_inv_of_mul_eq_one_left ((mul_comm (residue A ⟨x⁻¹, hxinvA⟩) _).trans hmul)
+          change residue A ⟨x⁻¹, hxinvA⟩ ∈ A''
+          rwa [hinv]
     · -- `x⁻¹` lies in the maximal ideal of `A`, so its residue is `0 ∈ A''`
       have hxinv : x⁻¹ ∈ A := (A.mem_or_inv_mem x).resolve_left hxA
       have hnu : ¬IsUnit (⟨x⁻¹, hxinv⟩ : A) := by
@@ -95,6 +96,8 @@ def comapResidue (A'' : ValuationSubring (ResidueField A)) : ValuationSubring K 
 
 variable (A'' : ValuationSubring (ResidueField A))
 
+/-- Membership in the composite valuation ring: `x` lies in `A.comapResidue A''` if and
+only if `x` lies in `A` and its residue lies in `A''`. -/
 theorem mem_comapResidue {x : K} :
     x ∈ A.comapResidue A'' ↔ ∃ hx : x ∈ A, residue A ⟨x, hx⟩ ∈ A'' := by
   constructor
@@ -105,9 +108,8 @@ theorem mem_comapResidue {x : K} :
     exact Subring.mem_map.mpr ⟨⟨x, hx⟩, hres, rfl⟩
 
 /-- The composite valuation ring is contained in `A`. -/
-theorem comapResidue_le : (A.comapResidue A'').toSubring ≤ A.toSubring := by
-  intro x hx
-  exact (mem_comapResidue A A''|>.mp hx).1
+theorem comapResidue_le : (A.comapResidue A'').toSubring ≤ A.toSubring :=
+  fun _ hx ↦ ((mem_comapResidue A A'').mp hx).1
 
 /-- The composite valuation ring contains the maximal ideal of `A`. -/
 theorem mem_comapResidue_of_not_isUnit {x : K} (hx : x ∈ A)
@@ -117,11 +119,14 @@ theorem mem_comapResidue_of_not_isUnit {x : K} (hx : x ∈ A)
       (_root_.mem_nonunits_iff.mpr h))]
     exact zero_mem _⟩
 
+/-- The residue of an element of the composite valuation ring, taken in `A` along the
+inclusion `C ⊆ A`, lies in `A''`. This is what makes
+`ValuationSubring.residueRestrict` well defined. -/
 theorem residue_inclusion_mem (c : A.comapResidue A'') :
     residue A (Subring.inclusion (A.comapResidue_le A'') c) ∈ A'' := by
   obtain ⟨hx, hres⟩ := (mem_comapResidue A A'').mp c.2
-  rwa [show Subring.inclusion (A.comapResidue_le A'') c = ⟨(c : K), hx⟩ from
-    Subtype.ext rfl]
+  have he : Subring.inclusion (A.comapResidue_le A'') c = ⟨(c : K), hx⟩ := Subtype.ext rfl
+  rwa [he]
 
 /-- The residue map of the composite valuation ring onto the second factor: the
 restriction of the residue map of `A` along the inclusion `C ⊆ A`, corestricted
@@ -140,9 +145,9 @@ theorem residueRestrict_surjective :
     (mem_comapResidue A A'').mpr ⟨a.2, by rwa [ha]⟩
   refine ⟨⟨(a : K), hmem⟩, ?_⟩
   apply Subtype.ext
+  have he : Subring.inclusion (A.comapResidue_le A'') ⟨(a : K), hmem⟩ = a := Subtype.ext rfl
   change residue A (Subring.inclusion (A.comapResidue_le A'') ⟨(a : K), hmem⟩) = b
-  rw [show Subring.inclusion (A.comapResidue_le A'') ⟨(a : K), hmem⟩ = a from
-    Subtype.ext rfl, ha]
+  rw [he, ha]
 
 /-- The kernel of the residue map of the composite valuation ring is the trace of the
 maximal ideal of `A`. Together with `residueRestrict_surjective` this is the

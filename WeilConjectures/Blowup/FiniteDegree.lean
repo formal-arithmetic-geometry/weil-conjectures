@@ -34,10 +34,10 @@ chart by chart (`Scheme.IdealSheafData.ideal_pow_mul_le_comap_of_numerators`).
 
 Elaboration-performance conventions: the chart rings of the blow-up are large
 `HomogeneousLocalization` types, so all `Finset` bookkeeping over generating sets is
-done by the abstract combinators `exists_uniform_ge₂`/`exists_finset_forall_mem` over
-variable types, chart probes keep their ring abstract
+done by the abstract combinators `exists_forall_ge_of_biIndexed` and
+`exists_finset_image_biIndexed` over variable types, chart probes keep their ring abstract
 (`Scheme.IdealSheafData.ideal_comap_comap_of_probe`), and memberships are transported
-along morphism equalities by `mem_of_ringHom_eq` instead of `▸`-rewrites.
+along morphism equalities by `mem_ideal_of_hom_eq` instead of `▸`-rewrites.
 
 -/
 
@@ -749,7 +749,7 @@ section Combinators
 properties over a finite set and dependent finite sets admit a single threshold. The
 index types are abstract, so all `Finset.sup` bookkeeping happens over variables and
 never touches the large chart-ring types. -/
-private lemma exists_uniform_ge₂ {α : Type u} (T : Finset α)
+private lemma exists_forall_ge_of_biIndexed {α : Type u} (T : Finset α)
     {γ : ∀ a, a ∈ T → Type u}
     (Gf : ∀ (a : α) (ha : a ∈ T), Finset (γ a ha))
     {P : ∀ (a : α) (ha : a ∈ T) (c : γ a ha), c ∈ Gf a ha → ℕ → Prop}
@@ -767,7 +767,7 @@ private lemma exists_uniform_ge₂ {α : Type u} (T : Finset α)
 /-- **Collection of a doubly-indexed family into a finite set**, with both the
 enumeration and the membership property. The index types are abstract, so the
 `Finset.biUnion`/`attach` bookkeeping happens over variables. -/
-private lemma exists_finset_forall_mem {α β : Type u} (T : Finset α)
+private lemma exists_finset_image_biIndexed {α β : Type u} (T : Finset α)
     {γ : ∀ a, a ∈ T → Type u}
     (Gf : ∀ (a : α) (ha : a ∈ T), Finset (γ a ha))
     (mf : ∀ (a : α) (ha : a ∈ T) (c : γ a ha), c ∈ Gf a ha → β) :
@@ -792,7 +792,7 @@ private lemma exists_finset_forall_mem {α β : Type u} (T : Finset α)
 /-- Transport of an ideal membership along an equality of `CommRingCat` morphisms.
 Applying this generic lemma is cheap where a `▸`-rewrite on the chart section rings
 would have to abstract over the large chart types. -/
-private lemma mem_of_ringHom_eq {R S : CommRingCat.{u}} {f g : R ⟶ S} (h : f = g)
+private lemma mem_ideal_of_hom_eq {R S : CommRingCat.{u}} {f g : R ⟶ S} (h : f = g)
     {x : R} {P : Ideal S} (hx : g.hom x ∈ P) : f.hom x ∈ P := by
   rwa [h]
 
@@ -987,9 +987,9 @@ lemma AffineBlowup.exists_uniform_numerator
           (reesX_mem I₀ b (hs ▸ Ideal.subset_span hbs)) (reesX_mem I₀ a ha') ^ N' *
         AffineBlowup.chartFrac I₀ (hs ▸ Ideal.subset_span hbs) hg ∈
       Jc b (hs ▸ Ideal.subset_span hbs) := fun b hbs ↦
+    have hbI : b ∈ I₀ := hs ▸ Ideal.subset_span hbs
     AffineBlowup.exists_isLocalizationElem_pow_mul_chartFrac_mem I₀ ha'
-      (hs ▸ Ideal.subset_span hbs) (Jc a ha') (Jc b (hs ▸ Ideal.subset_span hbs))
-      (hJc a b ha' (hs ▸ Ideal.subset_span hbs)) hg hμ
+      hbI (Jc a ha') (Jc b hbI) (hJc a b ha' hbI) hg hμ
   choose N hN using hclear
   refine ⟨(s.attach.sup fun b ↦ N b.1 b.2) + e, fun d hd ↦ ?_⟩
   obtain ⟨k, rfl⟩ : ∃ k, d = k + e := ⟨d - e, by omega⟩
@@ -1052,17 +1052,17 @@ lemma AffineBlowup.exists_uniform_numerator_finset
           AffineBlowup.chartFrac I₀ (hs ▸ Ideal.subset_span hbs') hm ∈
             Jc b' (hs ▸ Ideal.subset_span hbs') := by
     intro b hbs μ hμG
-    obtain ⟨e, g, hg, rfl⟩ := AffineBlowup.chartFrac_surjective I₀
-      (hs ▸ Ideal.subset_span hbs) μ
+    have hbI : b ∈ I₀ := hs ▸ Ideal.subset_span hbs
+    obtain ⟨e, g, hg, rfl⟩ := AffineBlowup.chartFrac_surjective I₀ hbI μ
     exact AffineBlowup.exists_uniform_numerator I₀ s hs Jc hJc hbs hg
-      ((hG b (hs ▸ Ideal.subset_span hbs)) ▸ Ideal.subset_span hμG)
+      ((hG b hbI) ▸ Ideal.subset_span hμG)
   -- one uniform threshold, by the abstract double-sup combinator
-  obtain ⟨d₀, hd₀⟩ := exists_uniform_ge₂ s
+  obtain ⟨d₀, hd₀⟩ := exists_forall_ge_of_biIndexed s
     (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) hnum
   refine ⟨d₀, fun d hd ↦ ?_⟩
   -- the numerators at degree `d`, collected into a finite set
   choose mf hmI hrest using hd₀ d hd
-  obtain ⟨M, hM₁, hM₂⟩ := exists_finset_forall_mem s
+  obtain ⟨M, hM₁, hM₂⟩ := exists_finset_image_biIndexed s
     (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) mf
   refine ⟨M, ?_, ?_⟩
   · intro m hmM
@@ -1082,7 +1082,7 @@ variable {X : Scheme.{u}}
 /-- The image of a factored element under a ring homomorphism, commuted into the shape
 of a power times a factor. Keeping the rings abstract makes this cheap to instantiate
 at the section rings of blow-up charts. -/
-private lemma ringHom_pow_mul_eq {R S : Type u} [CommRing R] [CommRing S]
+private lemma map_pow_mul_map_eq_map_of_mul_pow_eq {R S : Type u} [CommRing R] [CommRing S]
     (f : R →+* S) {x y z : R} (d : ℕ) (h : y * x ^ d = z) :
     (f x) ^ d * f y = f z := by
   rw [← h, map_mul, map_pow, mul_comm]
@@ -1117,7 +1117,7 @@ lemma Scheme.IdealSheafData.blowupChartSection_mem_of_chartFrac_mem
   Scheme.IdealSheafData.mem_ideal_comap_pow_mul_probe I J d (I.blowupChart V hb)
     ((I.ideal_comap_comap_blowupChart_self V hb).ge (Ideal.subset_span rfl))
     ((I.mem_chartIdeal_iff J V hb).mp hfrac)
-    (ringHom_pow_mul_eq
+    (map_pow_mul_map_eq_map_of_mul_pow_eq
       (Scheme.ΓSpecIso (CommRingCat.of (HomogeneousLocalization.Away
         (reesGrading (I.ideal V)) (reesX (I.ideal V) b hb)))).inv.hom d
       (AffineBlowup.chartFrac_mul_awayAlgebraMap_pow (I.ideal V) hb hm))
@@ -1131,7 +1131,7 @@ open HomogeneousLocalization
 variable {X : Scheme.{u}}
 
 /-- Transport of a generating set along an isomorphism of `CommRingCat`. -/
-private lemma span_eq_of_map_iso_span {R S : CommRingCat.{u}} (E : R ≅ S)
+private lemma eq_span_image_inv_of_span_eq_map {R S : CommRingCat.{u}} (E : R ≅ S)
     {P : Ideal R} {G : Set S} (h : Ideal.span G = P.map E.hom.hom) :
     P = Ideal.span (E.inv.hom '' G) := by
   have h1 := congrArg (Ideal.map E.inv.hom) h
@@ -1143,7 +1143,7 @@ private lemma span_eq_of_map_iso_span {R S : CommRingCat.{u}} (E : R ≅ S)
 `μ` of an ideal spanned by `e '' G` satisfies `μ · f(b)ᵈ = f(m)` for some `m` in an
 ideal `K` of the base ring, then `(g b)ᵈ · span (e '' G)` is contained in the
 extension of `K` along the composite `g` of `f` and `e`. -/
-private lemma span_pow_mul_span_le_map_explicit
+private lemma pow_mul_span_le_map_of_forall_mul_pow_eq
     {A B C : Type*}
     [CommSemiring A] [CommSemiring B] [CommSemiring C]
     (K : Ideal A)
@@ -1215,14 +1215,14 @@ lemma Scheme.IdealSheafData.ideal_pow_mul_le_comap_of_numerators
     (congrArg
       (fun Q ↦
         Ideal.span {(I.blowupChartSection V hb).hom b} ^ d * Q)
-      (span_eq_of_map_iso_span
+      (eq_span_image_inv_of_span_eq_map
         (Scheme.ΓSpecIso
           (CommRingCat.of
             (HomogeneousLocalization.Away
               (reesGrading (I.ideal V))
               (reesX (I.ideal V) b hb))))
         hG)) ?_
-  apply span_pow_mul_span_le_map_explicit
+  apply pow_mul_span_le_map_of_forall_mul_pow_eq
     (K := L.ideal V)
     (f :=
       AffineBlowup.awayAlgebraMap
@@ -1282,7 +1282,7 @@ lemma Scheme.IdealSheafData.mem_ideal_map_pow_mul_of_chartFrac_mem
     (I.preimage_subset_iUnion_range_blowupChart V hs)
     (fun b' ↦ I.blowupChart_comp_blowupMap_preimage V (hs ▸ Ideal.subset_span b'.2)) ?_
   intro b'
-  exact mem_of_ringHom_eq
+  exact mem_ideal_of_hom_eq
     (I.appLE_blowupChart_comp_blowupMap V (hs ▸ Ideal.subset_span b'.2)
       (I.blowupChart_comp_blowupMap_preimage V (hs ▸ Ideal.subset_span b'.2)))
     (I.blowupChartSection_mem_of_chartFrac_mem J V (hs ▸ Ideal.subset_span b'.2) hm

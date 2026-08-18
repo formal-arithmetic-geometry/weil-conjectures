@@ -99,7 +99,17 @@ lemma strictTransformOpen_eq_preimage :
 /-- The strict transform of `f : Y ⟶ X` along `π : X' ⟶ X` relative to the open
 `U ⊆ X`: the scheme-theoretic closure of the open locus of `Y ×_X X'` lying over `U`.
 For `π` the blow-up of an ideal with support complement `U` this is the classical
-strict transform. (Blueprint: `def:nagata-strict-transform`.) -/
+strict transform. (Blueprint: `def:nagata-strict-transform`.)
+
+**Standing quasi-compactness assumption.** The scheme-theoretic image is the intended
+object — the smallest closed subscheme through which the inclusion factors, and the
+one that commutes with restriction to opens — only when the inclusion of the open
+locus is quasi-compact, i.e. when `strictTransformOpen f π U` is a quasi-compact open
+of `Y ×_X X'`; without it Mathlib's `Scheme.Hom.image` still exists but does not have
+those properties. The definition itself does not require the hypothesis, so that the
+object can be named unconditionally, but every lemma about it that needs the
+comparison carries `[QuasiCompact (strictTransformOpen f π U).ι]` (equivalently,
+`U` quasi-compact, which holds in all uses of this file). -/
 def StrictTransform : Scheme.{u} :=
   ((strictTransformOpen f π U).ι).image
 

@@ -84,17 +84,27 @@ def comparisonFst : comparisonSpace σ₁ σ₂ ⟶ σ₁.X :=
 def comparisonSnd : comparisonSpace σ₁ σ₂ ⟶ σ₂.X :=
   (comparisonMap σ₁ σ₂).imageι ≫ pullback.snd σ₁.s σ₂.s
 
+@[simp]
+lemma comparisonFst_eq :
+    comparisonFst σ₁ σ₂ = (comparisonMap σ₁ σ₂).imageι ≫ pullback.fst σ₁.s σ₂.s := rfl
+
+@[simp]
+lemma comparisonSnd_eq :
+    comparisonSnd σ₁ σ₂ = (comparisonMap σ₁ σ₂).imageι ≫ pullback.snd σ₁.s σ₂.s := rfl
+
 /-- **Properness of the comparison projections** (blueprint:
 `lemma:nagata-comparison-projections-proper`): the projection `X₁₂ ⟶ X₁` is a closed
 immersion followed by a base change of the proper structure morphism of `X₂`. -/
 theorem isProper_comparisonFst : IsProper (comparisonFst σ₁ σ₂) := by
   have := σ₂.isProper_s
-  rw [comparisonFst]
+  rw [comparisonFst_eq]
   infer_instance
 
+/-- **Properness of the comparison projections**, second projection: `X₁₂ ⟶ X₂` is a
+closed immersion followed by a base change of the proper structure morphism of `X₁`. -/
 theorem isProper_comparisonSnd : IsProper (comparisonSnd σ₁ σ₂) := by
   have := σ₁.isProper_s
-  rw [comparisonSnd]
+  rw [comparisonSnd_eq]
   infer_instance
 
 /-- The **key boundary disjointness** (blueprint:
@@ -195,8 +205,9 @@ theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
         = (l ≫ comparisonSnd σ₁ σ₂) (closedPoint (CommRingCat.of A)) :=
           (Scheme.Hom.comp_apply _ _ _).symm
       _ = g₂ (closedPoint (CommRingCat.of A)) := by rw [hl₂]
-  exact hkey (l (closedPoint (CommRingCat.of A)))
-    (heq₁.symm ▸ hz₁) (heq₂.symm ▸ hz₂)
+  refine hkey (l (closedPoint (CommRingCat.of A))) ?_ ?_
+  · rwa [heq₁]
+  · rwa [heq₂]
 
 end Avoids
 

@@ -41,11 +41,11 @@ theorem comap_eq_of_le_comap (f : K →+* L) (A : ValuationSubring K)
 /-- **Extension of a valuation ring to a field extension** (Stacks Project Tag 00IA):
 for every field extension `f : K ⟶ L` and every valuation subring `A ⊆ K` there is a
 valuation subring `B ⊆ L` with `K ∩ B = A`; its fraction field is `L`, as for every
-valuation subring of `L`. The witness produced by Mathlib's Chevalley extension
-theorem (`IsLocalRing.exists_factor_valuationRing`) dominates the image of `A`, and
-`comap_eq_of_le_comap` upgrades the domination to the equality `B.comap f = A`. -/
+valuation subring of `L`. -/
 theorem exists_comap_eq (f : K →+* L) (A : ValuationSubring K) :
     ∃ B : ValuationSubring L, B.comap f = A := by
+  -- Mathlib's Chevalley extension theorem produces a `B` dominating the image of `A`;
+  -- `comap_eq_of_le_comap` upgrades the domination to the equality `B.comap f = A`.
   obtain ⟨B, hmem, hloc⟩ := IsLocalRing.exists_factor_valuationRing (f.comp A.subtype)
   have hsub : A.toLocalSubring.toSubring ≤ (B.comap f).toLocalSubring.toSubring :=
     fun x hx ↦ hmem ⟨x, hx⟩
@@ -53,8 +53,7 @@ theorem exists_comap_eq (f : K →+* L) (A : ValuationSubring K) :
   obtain ⟨v, hv⟩ := isUnit_iff_exists_inv.mp ha
   -- the image of `a` in `B` is a unit with inverse the image of `v`
   have hval : (a : K) * (v : K) = 1 := by
-    have := congrArg (Subtype.val : (B.comap f).toLocalSubring.toSubring → K) hv
-    simpa using this
+    simpa using congrArg (Subtype.val : (B.comap f).toLocalSubring.toSubring → K) hv
   have hBunit : IsUnit ((f.comp A.subtype).codRestrict B.toSubring hmem a) := by
     refine isUnit_iff_exists_inv.mpr ⟨⟨f (v : K), v.2⟩, ?_⟩
     apply Subtype.ext
