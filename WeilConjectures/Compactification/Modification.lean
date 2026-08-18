@@ -38,7 +38,13 @@ theorem, following the blueprint chapter "Nagata compactification", sections
   (Stacks Project Tag 0F3Z; blueprint `def:nagata-graph-extension`,
   `lemma:nagata-graph-extension`): a compactification of a quasi-compact open
   `V ⊆ U` extends, after a `V`-admissible blow-up of the compactification, to a
-  proper morphism `V^gr ⟶ U` restricting to the identity on `V`.
+  proper morphism `V^gr ⟶ U` restricting to the identity on `V`;
+- `AlgebraicGeometry.exists_admissibleBlowup_strictTransform_isIso_near_closure`:
+  **isomorphism near a boundary closure** (Stacks Project Tag 0F3W; blueprint
+  `def:nagata-isomorphism-near-closure`, `lemma:nagata-isomorphism-near-closure`): a
+  proper morphism which is an isomorphism over a neighbourhood of a closed piece `T`
+  of `U` acquires, after a `U`-admissible blow-up, a strict transform which is an
+  isomorphism over a neighbourhood of the closure of `T`.
 
 The finite-type helper lemmas of the blueprint
 (`lemma:nagata-proper-to-separated-target` = Mathlib's `IsProper.of_comp`,
@@ -47,7 +53,7 @@ The finite-type helper lemmas of the blueprint
 `AlgebraicGeometry.Nagata.locallyOfFiniteType_of_comp_of_isSeparated` and
 `AlgebraicGeometry.Nagata.quasiCompact_of_comp_of_isSeparated`.
 
-The three existence theorems marked `sorry` await the flattening input of Stacks
+The four existence theorems marked `sorry` await the flattening input of Stacks
 Project Tag 081S (see the module docstring of
 `WeilConjectures.Compactification.Flattening` for the status of the blow-up
 universal-property chapter they reduce to); their statements are the interfaces
@@ -247,9 +253,40 @@ theorem Compactification.exists_properExtension
       v ≫ Vgr.ι ≫ B.π = c.i ∧
       v ≫ ψ = V.ι ∧
       ((ψ ⁻¹ᵁ V : Vgr.toScheme.Opens) : Set Vgr.toScheme) = Set.range v ∧
-      IsIso (ψ ∣_ V) := by
+      IsIso (ψ ∣_ V) ∧
+      ψ ≫ u = Vgr.ι ≫ B.π ≫ c.g := by
   sorry
 
 end GraphExtension
+
+section IsomorphismNearClosure
+
+/-- **Isomorphism near the closure of a boundary piece** (Stacks Project Tag 0F3W): let
+`X` be qcqs, `U ⊆ X` a quasi-compact open, `q : Z ⟶ X` proper and `T ⊆ U` a subset
+closed in `U` such that `q` is an isomorphism over an open neighbourhood `N` of `T`.
+Then there is a `U`-admissible blow-up `B` of `X` such that the strict transform of `q`
+is an isomorphism over an open neighbourhood of the closure of `T` in the blown-up
+scheme.
+
+The construction of the blueprint separates `T` from the complement of the maximal
+isomorphism open of `q` (`Scheme.Hom.maximalIsomorphismOpen`) by the boundary
+separation blow-up (`exists_admissibleBlowup_disjoint_closures`) and then eliminates
+the indeterminacy of `q` (`exists_admissibleBlowup_strictTransform_open`) away from
+the separated bad locus; a proper open immersion onto a scheme-theoretically dense
+open is an isomorphism.
+(Blueprint: `def:nagata-isomorphism-near-closure`,
+`lemma:nagata-isomorphism-near-closure`; used for the improved comparison projection
+of the two-open compactification theorem.) -/
+theorem exists_admissibleBlowup_strictTransform_isIso_near_closure
+    {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]
+    {T : Set X} (hTU : T ⊆ (U : Set X)) (hT : IsClosed (U.ι ⁻¹' T))
+    {N : X.Opens} (hTN : T ⊆ (N : Set X)) (hN : IsIso (q ∣_ N)) :
+    ∃ (B : AdmissibleBlowup X U) (N' : B.X'.Opens),
+      closure (B.π ⁻¹' T) ⊆ (N' : Set B.X') ∧
+      IsIso (B.strictTransformMap q ∣_ N') := by
+  sorry
+
+end IsomorphismNearClosure
 
 end AlgebraicGeometry

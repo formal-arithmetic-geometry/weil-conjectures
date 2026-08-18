@@ -5320,7 +5320,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{definition}[Maximal isomorphism open]
   \label{def:nagata-maximal-isomorphism-open}
-  \lean{Scheme.Hom.maximalIsomorphismOpen}
+  \lean{AlgebraicGeometry.Scheme.Hom.maximalIsomorphismOpen}
 
   For a morphism $q\colon Z\to X$, define $\operatorname{IsoOpen}(q)$ to be
   the union of all open subschemes $W\subseteq X$ for which
@@ -5330,7 +5330,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Properties of the maximal isomorphism open]
   \label{lemma:nagata-maximal-isomorphism-open}
   \uses{def:nagata-maximal-isomorphism-open}
-  \lean{Scheme.Hom.isOpen_maximalIsomorphismOpen}
+  \lean{AlgebraicGeometry.Scheme.Hom.isIso_restrict_maximalIsomorphismOpen}
 
   The subset $\operatorname{IsoOpen}(q)$ is open,
   $q^{-1}(\operatorname{IsoOpen}(q))\to\operatorname{IsoOpen}(q)$ is an
@@ -5354,7 +5354,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-elimination-indeterminacy,
     def:nagata-extended-admissible-blowup,
     def:nagata-maximal-isomorphism-open}
-  \lean{AlgebraicGeometry.isomorphismNearClosureConstruction}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_strictTransform_isIso_near_closure}
 
   Let $X$ be qcqs, let $q\colon Z\to X$ be proper, let $V\subseteq X$ be a
   quasi-compact open, set
@@ -5451,7 +5451,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/0F3W}{Tag 0F3W}]{stacks-project}}]
   \label{lemma:nagata-isomorphism-near-closure}
   \uses{def:nagata-isomorphism-near-closure}
-  \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_near_closure}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_strictTransform_isIso_near_closure}
 
   If $U\to V$ is an isomorphism over an open neighbourhood of $T$, then
   $\mathsf{IsoBl}_{V,T}(q)\to X$ is $V$-admissible and the strict transform
@@ -5780,7 +5780,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Factorization through a closed subscheme over a valuation ring]
   \label{lemma:nagata-valuation-factor-closed}
-  \lean{Scheme.Spec.factor_closed_of_fractionField_factor}
+  \lean{AlgebraicGeometry.IsClosedImmersion.exists_lift_of_isFractionRing}
 
   Let $A$ be a valuation ring with fraction field $K$, let $Z\hookrightarrow Y$
   be a closed immersion, and let $g\colon\operatorname{Spec}(A)\to Y$.  If the
@@ -6177,7 +6177,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-graph-extensions}
   \uses{def:nagata-two-open-dense-compactifications,
     def:nagata-graph-extension}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenGraphExtensions}
+  \lean{AlgebraicGeometry.TwoOpenSide}
 
   Apply the graph-extension construction to
   $U_i\subseteq U$ and $C_i$.  Denote its output by
@@ -6193,7 +6193,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Properties of the chosen graph extensions]
   \label{lemma:nagata-two-open-graph-extensions}
   \uses{def:nagata-two-open-graph-extensions}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenGraphExtensions_spec}
+  \lean{AlgebraicGeometry.exists_prepared_twoOpenSide}
 
   Each replacement $X_i\to X_i^{\mathrm{old}}$ is $U_i$-admissible;
   the resulting structural morphism $X_i\to S$ is proper;
@@ -6215,7 +6215,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{definition}[The four boundary loci]
   \label{def:nagata-two-open-boundary-loci}
   \uses{def:nagata-two-open-graph-extensions}
-  \lean{AlgebraicGeometry.Compactifiable.boundaryLociConstruction}
+  \lean{AlgebraicGeometry.TwoOpenSide.forbiddenBoundary}
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6233,7 +6233,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Closedness and disjointness of the four boundary loci]
   \label{lemma:nagata-boundary-loci}
   \uses{def:nagata-two-open-boundary-loci}
-  \lean{AlgebraicGeometry.Compactifiable.boundaryLoci}
+  \lean{AlgebraicGeometry.TwoOpenSide.closure_image_preimage_inter}
 
   The subschemes $Z_i$ are closed in $U$.  Each $Z_{i,k}$ is closed in
   $V_i$, their underlying closed sets are disjoint, and $\psi_i$ is an
@@ -6257,7 +6257,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-prepared-boundaries}
   \uses{def:nagata-two-open-boundary-loci,
     def:nagata-separate-constructible-closed}
-  \lean{AlgebraicGeometry.Compactifiable.preparedBoundaryConstruction}
+  \lean{AlgebraicGeometry.TwoOpenSide.Prepared}
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6273,7 +6273,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Properties of the prepared boundary closures]
   \label{lemma:nagata-prepared-boundaries}
   \uses{def:nagata-two-open-prepared-boundaries}
-  \lean{AlgebraicGeometry.Compactifiable.prepareBoundaryClosures}
+  \lean{AlgebraicGeometry.exists_prepared_twoOpenSide}
 
   The constructed replacement $X_i^{\mathrm{prep}}\to X_i^{\mathrm{old}}$
   is $V_i$-admissible, the closures
@@ -6323,7 +6323,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-comparison-space}
   \uses{def:nagata-two-open-prepared-boundaries,
     def:nagata-scheme-theoretic-image}
-  \lean{AlgebraicGeometry.Compactifiable.comparisonSpace}
+  \lean{AlgebraicGeometry.TwoOpenSide.comparisonSpace}
 
   Define
   \[
@@ -6346,7 +6346,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-comparison-space,
     lemma:nagata-prepared-boundaries,
     lemma:nagata-scheme-image-universal}
-  \lean{AlgebraicGeometry.Compactifiable.comparisonProjection_isProper}
+  \lean{AlgebraicGeometry.TwoOpenSide.isProper_comparisonFst}
 
   Both projections $p_i\colon X_{12}\to X_i$ are proper.
 \end{lemma}
@@ -6367,7 +6367,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-comparison-boundary}
   \uses{def:nagata-two-open-boundary-loci,
     def:nagata-two-open-comparison-space}
-  \lean{AlgebraicGeometry.Compactifiable.comparisonBoundary}
+  \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
 
   Define
   \[
@@ -6379,7 +6379,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-comparison-boundary}
   \uses{def:nagata-two-open-comparison-boundary,
     def:nagata-two-open-comparison-space}
-  \lean{AlgebraicGeometry.Compactifiable.comparisonBoundary_eq}
+  \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
 
   Inside $V_{12}$ one has
   \[
@@ -6405,7 +6405,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-proper-to-separated-target,
     lemma:nagata-scheme-image-of-closed-immersion}
-  \lean{AlgebraicGeometry.Compactifiable.comparison_preimage_properExtension}
+  \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
 
   For \(\{i,j\}=\{1,2\}\), the canonical morphism
   \[
@@ -6454,7 +6454,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-isomorphism-near-closure,
     def:nagata-strict-transform,
     def:nagata-maximal-isomorphism-open}
-  \lean{AlgebraicGeometry.Compactifiable.improvedComparisonConstruction}
+  \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
 
   Let $N_2=\operatorname{IsoOpen}(\psi_2)\subseteq U$.  Apply
   $\mathsf{IsoBl}_{V_1,Z_{1,2}}(p_1)$ to the proper projection
@@ -6468,7 +6468,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Properties of the improved first comparison projection]
   \label{lemma:nagata-comparison-isIso-near-boundary}
   \uses{def:nagata-two-open-improved-comparison}
-  \lean{AlgebraicGeometry.Compactifiable.prepareComparisonProjection}
+  \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
 
   The constructed map $X_1^{\mathrm{cmp}}\to X_1^{\mathrm{old}}$ is
   $V_1$-admissible, the transported $p_1$ is an isomorphism over an open
@@ -6503,7 +6503,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Density over the prepared boundary]
   \label{lemma:nagata-comparison-boundary-density}
-  \lean{AlgebraicGeometry.Compactifiable.comparisonBoundary_dense}
+  \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
 
   The subset $Z_{12,2}$ is dense in
   $p_1^{-1}(\overline Z_{1,2})$.
@@ -6526,7 +6526,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Key boundary disjointness]
   \label{lemma:nagata-key-boundary-disjointness}
-  \lean{AlgebraicGeometry.Compactifiable.keyBoundaryDisjointness}
+  \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint}
 
   Inside $X_1\times_SX_2$ one has
   \[
@@ -6561,7 +6561,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-intermediate-schemes}
   \uses{def:nagata-two-open-improved-comparison,
     def:nagata-two-open-prepared-boundaries}
-  \lean{AlgebraicGeometry.Compactifiable.intermediateSchemes}
+  \lean{AlgebraicGeometry.TwoOpenSide.intermediate}
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6582,7 +6582,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-proper-extension-graph-closed}
   \uses{def:nagata-two-open-graph-extensions,
     lemma:nagata-proper-to-separated-target}
-  \lean{AlgebraicGeometry.Compactifiable.properExtensionGraph_isClosed}
+  \lean{AlgebraicGeometry.TwoOpenSide.isProper_graph}
 
   The morphism
   \[
@@ -6607,7 +6607,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Constructibility of the overlap image]
   \label{lemma:nagata-intermediate-overlap-constructible}
   \uses{def:nagata-two-open-intermediate-schemes}
-  \lean{AlgebraicGeometry.Compactifiable.intermediateOverlap_constructible}
+  \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
 
   The image of
   \[
@@ -6627,7 +6627,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-intermediate-specialization-boundary}
   \uses{def:nagata-two-open-intermediate-schemes,
     def:nagata-two-open-prepared-boundaries}
-  \lean{AlgebraicGeometry.Compactifiable.intermediateSpecialization_mem_boundary}
+  \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
 
   Let a point in the image of $U_i$ specialize in $U\times_SX_i$ to a point
   $(u,x)$.  There is a point $v\in V_i$ with
@@ -6651,7 +6651,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-intermediate-schemes,
     lemma:nagata-intermediate-specialization-boundary,
     lemma:nagata-two-open-graph-extensions}
-  \lean{AlgebraicGeometry.Compactifiable.intermediateOverlap_specializationClosed}
+  \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
 
   The image of $U_i$ in
   $U\times_S(X_i\setminus\overline Z_{i,j})$ is stable under specialization.
@@ -6674,7 +6674,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Closedness of the intermediate overlap]
   \label{lemma:nagata-intermediate-overlap-closed}
   \uses{def:nagata-two-open-intermediate-schemes}
-  \lean{AlgebraicGeometry.Compactifiable.intermediateOverlap_isClosedImmersion}
+  \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
 
   The canonical immersion
   \[
@@ -6704,7 +6704,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Separatedness of the intermediate schemes]
   \label{lemma:nagata-intermediate-separated}
   \uses{def:nagata-two-open-intermediate-schemes}
-  \lean{AlgebraicGeometry.Compactifiable.intermediate_isSeparated}
+  \lean{AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom}
 
   Each $W_i\to S$ is separated and of finite type.
 \end{lemma}
@@ -6726,7 +6726,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-valuation-pair-factors-comparison}
   \uses{def:nagata-two-open-comparison-space,
     lemma:nagata-valuation-factor-closed}
-  \lean{AlgebraicGeometry.Compactifiable.valuationPair_factorsComparison}
+  \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
 
   Let $A$ be a valuation ring with fraction field $K$.  Suppose
   $\operatorname{Spec}(K)\to U_1\cap U_2$ is an $S$-morphism and let
@@ -6750,7 +6750,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[An open containing the closed point of a valuation spectrum is total]
   \label{lemma:nagata-valuation-open-closed-point}
-  \lean{AlgebraicGeometry.Spec.valuation_open_of_closed_mem}
+  \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
 
   Let $A$ be a valuation ring and let $O\subseteq\operatorname{Spec}(A)$ be
   open.  If the closed point $\mathfrak m_A$ belongs to $O$, then
@@ -6767,7 +6767,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-one-valuation-avoids-boundary}
   \uses{def:nagata-two-open-comparison-space,
     def:nagata-two-open-intermediate-schemes}
-  \lean{AlgebraicGeometry.Compactifiable.exists_valuationExtension_avoidingBoundary}
+  \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
 
   Let $A$ be a valuation ring with fraction field $K$.  Let
   $\operatorname{Spec}(K)\to U_1\cap U_2$ be an $S$-morphism and let
@@ -6797,7 +6797,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Existence part of the proper valuative criterion]
   \label{lemma:nagata-proper-valuative-criterion-existence-api}
-  \lean{AlgebraicGeometry.IsProper.exists_valuation_lift}
+  \lean{AlgebraicGeometry.UniversallyClosed.eq_valuativeCriterion}
 
   Let $f\colon Y\to S$ be proper.  For every valuation ring $A$ with
   fraction field $K$, every $S$-morphism
@@ -6831,7 +6831,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Uniqueness of a valuation lift for a separated morphism]
   \label{lemma:nagata-separated-valuation-lift-unique}
-  \lean{AlgebraicGeometry.IsSeparated.unique_valuation_lift}
+  \lean{AlgebraicGeometry.IsSeparated.valuativeCriterion}
 
   Let $f\colon Y\to S$ be separated, let $A$ be a valuation ring with
   fraction field $K$, and let $h_1,h_2\colon\operatorname{Spec}(A)\to Y$ be
@@ -6851,7 +6851,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Valuative extension to a proper separated morphism]
   \label{lemma:nagata-proper-separated-valuation-extension}
-  \lean{AlgebraicGeometry.IsProper.exists_unique_valuation_lift}
+  \lean{AlgebraicGeometry.IsProper.eq_valuativeCriterion}
 
   Let $f\colon Y\to S$ be proper and separated.  Every commutative square
   \[
@@ -6878,7 +6878,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-final-modification}
   \uses{def:nagata-two-open-intermediate-schemes,
     def:nagata-common-modification}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenFinalModification}
+  \lean{AlgebraicGeometry.CommonModification}
 
   Apply the common-modification construction to the two open immersions
   $U\hookrightarrow W_1$ and $U\hookrightarrow W_2$.  Denote its output by
@@ -6894,7 +6894,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Structural properties of the final common modification]
   \label{lemma:nagata-two-open-final-modification}
   \uses{def:nagata-two-open-final-modification}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenFinalModification_spec}
+  \lean{AlgebraicGeometry.exists_commonModification}
 
   Each $W'_i\to W_i$ is $U$-admissible; the maps $W'_i\hookrightarrow W$
   are open immersions covering $W$; their copies of $U$ agree; and $W\to S$
@@ -6917,7 +6917,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{definition}[Two-open compactification candidate]
   \label{def:nagata-two-open-compactification-candidate}
   \uses{def:nagata-two-open-final-modification}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenCandidate}
+  \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
 
   Define $\mathsf C_{12}(U/S)$ to be the constructed factorization
   \[
@@ -6927,7 +6927,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Density and quasi-compactness under the finite modification diagram]
   \label{lemma:nagata-two-open-density-transport}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenDensity_transport}
+  \lean{AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU}
 
   In the finite diagram defining $W'_1,W'_2$ and $W$, assume that $U$ is
   scheme-theoretically dense in each initial ambient piece and that every
@@ -6965,7 +6965,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Density after the final common modification]
   \label{lemma:nagata-final-density}
   \uses{def:nagata-two-open-compactification-candidate}
-  \lean{AlgebraicGeometry.Compactifiable.dense_intersection_in_finalGlue}
+  \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
 
   The constructed map $U_1\cap U_2\to W$ is quasi-compact and has dense
   image.
@@ -6983,7 +6983,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Valuative lifting for the two-open candidate]
   \label{lemma:nagata-two-open-valuative-lifting}
   \uses{def:nagata-two-open-compactification-candidate}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenCandidate_valuative}
+  \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
 
   Let $A$ be a valuation ring with fraction field $K$.  Every commutative
   diagram whose generic map
@@ -7016,7 +7016,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Properness of the two-open candidate]
   \label{lemma:nagata-two-open-candidate-proper}
   \uses{def:nagata-two-open-compactification-candidate}
-  \lean{AlgebraicGeometry.Compactifiable.twoOpenCandidate_isProper}
+  \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
 
   The constructed structural morphism $W\to S$ is proper.
 \end{lemma}
@@ -7037,7 +7037,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0F40}{Tag 0F40}]{stacks-project}}]
   \label{thm:nagata-two-open}
   \uses{def:nagata-compactification,def:nagata-two-open-compactification-candidate}
-  \lean{AlgebraicGeometry.Compactifiable.union_of_two}
+  \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
 
   The constructed factorization $\mathsf C_{12}(U/S)$ is a compactification
   of $U\to S$.  Consequently $U\to S$ is compactifiable.

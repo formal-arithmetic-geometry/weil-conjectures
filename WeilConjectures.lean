@@ -7,6 +7,7 @@ public import WeilConjectures.Blowup.Affine.Localization
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
+public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Flattening
@@ -23,6 +24,9 @@ public import WeilConjectures.Compactification.PowerTorsion
 public import WeilConjectures.Compactification.SchemeTheoreticImage
 public import WeilConjectures.Compactification.SchemeTheoreticallyDense
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Compactification.TwoOpen
+public import WeilConjectures.Compactification.TwoOpenComparison
+public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
@@ -42,8 +46,13 @@ public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProdu
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier

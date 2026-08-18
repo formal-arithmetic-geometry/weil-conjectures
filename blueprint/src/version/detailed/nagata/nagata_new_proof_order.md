@@ -123,7 +123,7 @@ not by the shortest source-file path.
 
 Where each core node (and its Stacks tag) is realized in the Lean development;
 labels not listed are either upstream (items 1-2, PR #18) or not yet started
-(items 43-60).  "Formalization route" remarks in `nagata_new.tex` record where
+(items 49-60).  "Formalization route" remarks in `nagata_new.tex` record where
 the Lean proof deviates from the written route.
 
 | PR | Items / results | Status |
@@ -136,6 +136,7 @@ the Lean proof deviates from the written route.
 | #24 | 18 (080A), 19 (080K), 24 (080Y), Tags 080B/080L/01PH/01PF, 0F3V (`separationBlowup_disjoint_strictTransforms`) | proved; the one remaining `sorry`, Tag 0807 (`exists_blowup_mul_isEffectiveCartier_iso`), is closed in PR #26 via the Tag 0806 universal-property kit; 0F3V by direct sum-ideal chart argument, 080P bypassed |
 | #25 | 34, 36, 37 + partial-section lemma, dense refinement | proved; items 30-33 (Tags 081S/0F3Y/0F3X/0F3Z) stated with `sorry`; 0F3W not yet stated |
 | #26 | 38-41 (Tags 02JQ/052K/00IA) + Tag 0807 | proved; item 42 (Tag 0894) stated with `sorry`, split into `universallyClosed_of_isDominant` and `isSeparated_of_isDominant`; the valuation-theoretic items 39-41 (`comapResidue`, `comap_eq_of_le_comap`, `exists_comap_eq`) and the topological core of 02JQ (`exists_specializes_of_mem_closure_range`) live in `WeilConjectures/Mathlib/` helper files |
+| (2026-08-16) | 34-48 (two-open theorem; Stacks 0F3U/0F40) | **items 43-48 proved**: `HasCompactification.of_two_open_cover` (`Compactification/TwoOpen.lean`) assembles the two-open theorem from `TwoOpenSide`/`TwoOpenPreparation` (`TwoOpenSetup.lean`, `TwoOpenComparison.lean`); the intermediate schemes are pushouts of open immersions (`Mathlib/AlgebraicGeometry/Gluing.lean`), separatedness via Tag 0F3U (`IsSeparated.pushoutDesc`), overlap-closedness without the constructibility detour (`isClosedImmersion_intermediateGraph`), density via `AdmissibleBlowup.dense_preimage`, properness via Tag 0894. Item 35-37 packaging `exists_prepared_twoOpenSide` proved from the (sorried) Tag 0F3Z. Tag 0F3W newly stated (`exists_admissibleBlowup_strictTransform_isIso_near_closure`, `sorry`). One new `sorry`: `exists_prepared_keyDisjoint_twoOpenSide` (the improved-comparison chain, items comparison-restriction/0F3W/0F3Y/boundary-density/key-disjointness), blocked on Tags 0F3W/0F3Y |
 
 ## Remaining implementation notes
 
