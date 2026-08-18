@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 
 @[expose] public section
 
@@ -169,75 +170,27 @@ section Tprod
 
 variable {ι : Type*} {d : ι → ℕ}
 
-private lemma X_pow_succ_dvd_prod_inv_one_sub_X_pow_sub_one {n : ℕ} {U : Finset ι}
-    (hU : ∀ i ∈ U, n < d i) :
-    (X : ℚ⟦X⟧) ^ (n + 1) ∣ (∏ i ∈ U, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) - 1 := by
-  classical
-  induction U using Finset.induction_on with
-  | empty => simp
-  | insert a U ha ih =>
-    have h1 : (X : ℚ⟦X⟧) ^ (n + 1) ∣ ((1 - X ^ d a)⁻¹ : ℚ⟦X⟧) - 1 := by
-      rw [inv_one_sub_X_pow_sub_one
-        (by have := hU a (Finset.mem_insert_self a U); omega)]
-      exact dvd_mul_of_dvd_left (pow_dvd_pow X (hU a (Finset.mem_insert_self a U))) _
-    have h2 := ih fun i hi ↦ hU i (Finset.mem_insert_of_mem hi)
-    rw [Finset.prod_insert ha]
-    have heq : ((1 - X ^ d a)⁻¹ : ℚ⟦X⟧) * ∏ i ∈ U, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧) - 1 =
-        (1 - X ^ d a)⁻¹ * ((∏ i ∈ U, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) - 1) +
-          ((1 - X ^ d a)⁻¹ - 1) := by
-      ring
-    rw [heq]
-    exact dvd_add (Dvd.dvd.mul_left h2 _) h1
-
-private lemma coeff_mul_eq_of_X_pow_dvd_sub_one {F H : ℚ⟦X⟧} {n : ℕ}
-    (hH : (X : ℚ⟦X⟧) ^ (n + 1) ∣ H - 1) :
-    coeff n (H * F) = coeff n F := by
-  obtain ⟨c, hc⟩ := hH
-  have heq : H * F = X ^ (n + 1) * (c * F) + F := by
-    have hHeq : H = X ^ (n + 1) * c + 1 := by linear_combination hc
-    rw [hHeq]; ring
-  rw [heq, map_add, coeff_X_pow_mul', if_neg (by omega), zero_add]
+private lemma X_pow_dvd_inv_one_sub_X_pow_sub_one {i : ι} (hd : d i ≠ 0) :
+    (X : ℚ⟦X⟧) ^ d i ∣ ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧) - 1 :=
+  ⟨(1 - X ^ d i)⁻¹, inv_one_sub_X_pow_sub_one hd⟩
 
 /-- Factors of degree greater than `n` do not affect the `n`-th coefficient of a product
 of geometric series. -/
 theorem coeff_prod_inv_one_sub_X_pow_congr {S T : Finset ι} (hTS : T ⊆ S) {n : ℕ}
     (h : ∀ i ∈ S, i ∉ T → n < d i) :
     coeff n (∏ i ∈ S, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) =
-      coeff n (∏ i ∈ T, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) := by
-  classical
-  rw [← Finset.prod_sdiff hTS]
-  exact coeff_mul_eq_of_X_pow_dvd_sub_one
-    (X_pow_succ_dvd_prod_inv_one_sub_X_pow_sub_one fun i hi ↦
-      h i (Finset.mem_sdiff.mp hi).1 (Finset.mem_sdiff.mp hi).2)
+      coeff n (∏ i ∈ T, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) :=
+  coeff_prod_congr hTS fun i hi hiT ↦
+    (pow_dvd_pow (X : ℚ⟦X⟧) (h i hi hiT)).trans
+      (X_pow_dvd_inv_one_sub_X_pow_sub_one (by have := h i hi hiT; omega))
 
 open WithPiTopology in
 /-- A family of geometric series `(1 - X ^ d i)⁻¹` with only finitely many exponents
 below any given bound is multipliable in the coefficientwise topology. -/
 theorem multipliable_inv_one_sub_X_pow (hd : ∀ i, d i ≠ 0)
     (hfin : ∀ n, {i | d i ≤ n}.Finite) :
-    Multipliable fun i ↦ ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧) := by
-  classical
-  have hsum : Summable fun s : Finset ι ↦
-      ∏ i ∈ s, (((1 - X ^ d i)⁻¹ : ℚ⟦X⟧) - 1) := by
-    rw [summable_iff_summable_coeff]
-    intro n
-    apply summable_of_hasFiniteSupport
-    apply ((hfin n).toFinset.powerset.finite_toSet.subset)
-    intro s hs
-    rw [Function.mem_support] at hs
-    rw [Finset.mem_coe, Finset.mem_powerset]
-    intro j hj
-    rw [Set.Finite.mem_toFinset]
-    by_contra hjn
-    rw [Set.mem_setOf_eq, not_le] at hjn
-    apply hs
-    have h1 : (X : ℚ⟦X⟧) ^ (n + 1) ∣ ((1 - X ^ d j)⁻¹ : ℚ⟦X⟧) - 1 := by
-      rw [inv_one_sub_X_pow_sub_one (hd j)]
-      exact dvd_mul_of_dvd_left (pow_dvd_pow X hjn) _
-    exact X_pow_dvd_iff.mp
-      (h1.trans (Finset.dvd_prod_of_mem (fun i ↦ ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧) - 1) hj)) n
-      (Nat.lt_succ_self n)
-  exact (multipliable_one_add_of_summable_prod hsum).congr fun i ↦ by ring
+    Multipliable fun i ↦ ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧) :=
+  multipliable_of_X_pow_dvd_sub_one hfin fun i ↦ X_pow_dvd_inv_one_sub_X_pow_sub_one (hd i)
 
 open WithPiTopology in
 /-- The `n`-th coefficient of the infinite product `∏ (1 - X ^ d i)⁻¹` equals the `n`-th
@@ -247,31 +200,8 @@ theorem coeff_tprod_inv_one_sub_X_pow (hd : ∀ i, d i ≠ 0)
     (hfin : ∀ n, {i | d i ≤ n}.Finite) (n : ℕ) {T : Finset ι}
     (hT : ∀ i, d i ≤ n → i ∈ T) :
     coeff n (∏' i, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) =
-      coeff n (∏ i ∈ T, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) := by
-  classical
-  set T₀ : Finset ι := (hfin n).toFinset with hT₀
-  have hsub : T₀ ⊆ T := fun i hi ↦ hT i ((hfin n).mem_toFinset.mp hi)
-  have hTT₀ : ∀ i ∈ T, i ∉ T₀ → n < d i := by
-    intro i _ hni
-    by_contra hle
-    exact hni ((hfin n).mem_toFinset.mpr (not_lt.mp hle))
-  have hmul := multipliable_inv_one_sub_X_pow hd hfin
-  have htend : Filter.Tendsto
-      (fun s : Finset ι ↦ coeff n (∏ i ∈ s, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)))
-      Filter.atTop (nhds (coeff n (∏' i, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)))) :=
-    ((continuous_coeff ℚ n).tendsto _).comp hmul.hasProd
-  have heq : Filter.EventuallyEq Filter.atTop
-      (fun s : Finset ι ↦ coeff n (∏ i ∈ s, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)))
-      (fun _ ↦ coeff n (∏ i ∈ T₀, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧))) := by
-    filter_upwards [Filter.eventually_ge_atTop T₀] with s hs
-    refine coeff_prod_inv_one_sub_X_pow_congr hs fun i _ hni ↦ ?_
-    by_contra hle
-    exact hni ((hfin n).mem_toFinset.mpr (not_lt.mp hle))
-  have h1 : coeff n (∏' i, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) =
-      coeff n (∏ i ∈ T₀, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) :=
-    tendsto_nhds_unique htend (Filter.Tendsto.congr' heq.symm tendsto_const_nhds)
-  rw [h1]
-  exact (coeff_prod_inv_one_sub_X_pow_congr hsub hTT₀).symm
+      coeff n (∏ i ∈ T, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) :=
+  coeff_tprod_eq_coeff_prod hfin (fun i ↦ X_pow_dvd_inv_one_sub_X_pow_sub_one (hd i)) n hT
 
 end Tprod
 

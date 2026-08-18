@@ -64,6 +64,7 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocali
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Derived
@@ -80,5 +81,9 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
+public import WeilConjectures.ZetaCounting.Comparison
+public import WeilConjectures.ZetaCounting.Defs
+public import WeilConjectures.ZetaCounting.EulerProducts
+public import WeilConjectures.ZetaCounting.Orbits
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
