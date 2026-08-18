@@ -527,6 +527,45 @@ $x\mapsto\deg(x)$.  Its two consequences are recorded here.
   \Cref{prop:weil-point-count-eq-sum-closed-point-count}.
 \end{proof}
 
+\begin{lemma}[M\"obius inversion of a degree-weighted divisor sum]
+  \label{lemma:weil-moebius-inversion-degree-weighted}
+  \lean{ArithmeticFunction.sum_divisors_moebius_mul_eq_mul}
+  \leanok
+
+  Let $c,a\colon\mathbf N\to\mathbf N$ and $m\ge1$ be such that
+  $c(n)=\sum_{k\mid n}k\,a_k$ for every divisor $n\ge1$ of $m$.  Then
+  \[
+    \sum_{r\mid m}\mu(r)\,c(m/r)=m\,a_m .
+  \]
+  In particular $m$ divides the left hand side.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  This is M\"obius inversion applied to the pair of functions
+  $k\mapsto k\,a_k$ and $c$ on the divisors of $m$.
+\end{proof}
+
+\begin{corollary}[M\"obius recovery of the closed point counts]
+  \label{cor:weil-closed-point-mobius-recovery}
+  \uses{def:weil-closed-point-count,
+    prop:weil-point-count-eq-sum-closed-point-count,
+    lemma:weil-moebius-inversion-degree-weighted}
+  \lean{AlgebraicGeometry.Scheme.Hom.sum_divisors_moebius_mul_pointCount}
+  \leanok
+
+  For every $m\ge1$, $\sum_{r\mid m}\mu(r)N_{m/r}=m\,a_m$; the number of closed points of
+  degree $m$ is determined by the point counts.
+\end{corollary}
+
+\begin{proof}
+  \uses{prop:weil-point-count-eq-sum-closed-point-count,
+    lemma:weil-moebius-inversion-degree-weighted}
+  \leanok
+  Apply \Cref{lemma:weil-moebius-inversion-degree-weighted} to
+  \Cref{prop:weil-point-count-eq-sum-closed-point-count}.
+\end{proof}
+
 \begin{corollary}[Integrality of $Z(X,T)$]
   \label{cor:weil-zeta-coefficients-integral}
   \uses{cor:weil-counting-zeta-integral}

@@ -6,6 +6,7 @@ Authors: mathhzstx
 module
 
 public import WeilConjectures.EulerProduct
+public import WeilConjectures.Mathlib.NumberTheory.ArithmeticFunction.Moebius
 
 @[expose] public section
 
@@ -23,6 +24,8 @@ degree `m`, and reading off the coefficients of a finite subproduct shows that
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Hom.zetaSeries_eq_tprod_pow`
+- `AlgebraicGeometry.Scheme.Hom.sum_divisors_moebius_mul_pointCount`, Möbius recovery of
+  the closed point counts from the point counts
 - `AlgebraicGeometry.Scheme.Hom.coeff_zetaSeries_mem_range` and
   `AlgebraicGeometry.Scheme.Hom.exists_map_intCast_eq_zetaSeries`, the coefficientwise
   and the typed form of the integrality of the zeta series
@@ -73,6 +76,15 @@ theorem Hom.zetaSeries_eq_tprod_pow :
       ∏' m : ℕ, ((1 - PowerSeries.X ^ m : PowerSeries ℚ)⁻¹) ^ f.closedPointCount m := by
   rw [f.zetaSeries_eq_countingZetaSeries]
   exact countingZetaSeries_eq_tprod_pow f.closedPointCount_zero fun n hn ↦
+    f.pointCount_eq_sum_divisors_mul_closedPointCount hn
+
+/-- **Möbius recovery of the closed point counts** from the point counts of `X`:
+`m * a_m = ∑_{r ∣ m} μ(r) N_{m/r}`.
+(blueprint: `cor:weil-closed-point-mobius-recovery`) -/
+theorem Hom.sum_divisors_moebius_mul_pointCount {m : ℕ} (hm : m ≠ 0) :
+    ∑ r ∈ m.divisors, (ArithmeticFunction.moebius r : ℤ) * f.pointCount (m / r) =
+      (m : ℤ) * f.closedPointCount m :=
+  ArithmeticFunction.sum_divisors_moebius_mul_eq_mul hm fun _ hn _ ↦
     f.pointCount_eq_sum_divisors_mul_closedPointCount hn
 
 /-- **The coefficients of the zeta function are integers.**

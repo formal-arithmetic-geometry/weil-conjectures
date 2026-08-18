@@ -6,8 +6,8 @@ Authors: Tingxiao Shi
 module
 
 public import Mathlib.Data.Set.Card
-public import Mathlib.NumberTheory.ArithmeticFunction.Moebius
 public import WeilConjectures.Mathlib.Dynamics.PeriodicPts.Defs
+public import WeilConjectures.Mathlib.NumberTheory.ArithmeticFunction.Moebius
 
 @[expose] public section
 
@@ -144,23 +144,10 @@ noncomputable def moebiusPtsOfPeriodSum (f : α → α) (m : ℕ) : ℤ :=
 (blueprint: `lemma:weil-orbit-count-mobius-numerator-eq`) -/
 theorem moebiusPtsOfPeriodSum_eq_mul_orbitCount (hm : 0 < m)
     (hfin : (ptsOfPeriod f m).Finite) :
-    moebiusPtsOfPeriodSum f m = (m : ℤ) * orbitCount f m := by
-  have hclosed : ∀ k l : ℕ, k ∣ l → l ∈ {k | k ∣ m} → k ∈ {k | k ∣ m} :=
-    fun _ _ hkl hl ↦ hkl.trans hl
-  have hsum : ∀ k : ℕ, 0 < k → k ∈ {k | k ∣ m} →
-      ∑ i ∈ k.divisors, ((i : ℤ) * (orbitCount f i : ℤ))
-        = ((ptsOfPeriod f k).ncard : ℤ) := by
-    intro k hk hkm
-    have := ncard_ptsOfPeriod_eq_sum_divisors_mul_orbitCount (f := f) hk
-      (hfin.subset (ptsOfPeriod_subset_of_dvd f hkm))
-    exact_mod_cast this.symm
-  have key := (ArithmeticFunction.sum_eq_iff_sum_mul_moebius_eq_on (R := ℤ)
-    (f := fun i ↦ (i : ℤ) * (orbitCount f i : ℤ))
-    (g := fun k ↦ ((ptsOfPeriod f k).ncard : ℤ)) _ hclosed).mp hsum m hm dvd_rfl
-  simp only [Int.cast_id] at key
-  rw [moebiusPtsOfPeriodSum, ← Nat.sum_divisorsAntidiagonal
-    fun r s ↦ ArithmeticFunction.moebius r * ((ptsOfPeriod f s).ncard : ℤ)]
-  exact key
+    moebiusPtsOfPeriodSum f m = (m : ℤ) * orbitCount f m :=
+  ArithmeticFunction.sum_divisors_moebius_mul_eq_mul hm.ne' fun _ hn hnm ↦
+    ncard_ptsOfPeriod_eq_sum_divisors_mul_orbitCount (Nat.pos_of_ne_zero hn)
+      (hfin.subset (ptsOfPeriod_subset_of_dvd f hnm))
 
 /-- The Möbius transform of the periodic-point counting function is divisible by the degree.
 (blueprint: `cor:weil-orbit-count-mobius-integrality`) -/

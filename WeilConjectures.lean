@@ -59,6 +59,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.IsIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.Dynamics.PeriodicPts.Defs
 public import WeilConjectures.Mathlib.Dynamics.PeriodicPts.OrbitCount
+public import WeilConjectures.Mathlib.NumberTheory.ArithmeticFunction.Moebius
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
