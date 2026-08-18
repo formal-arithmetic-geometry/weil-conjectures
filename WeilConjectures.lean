@@ -20,8 +20,9 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
 public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.DerivedCategory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.DerivedCategory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
-public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
@@ -34,6 +35,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInject
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
