@@ -9,6 +9,8 @@ public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 
 /-!
 
@@ -132,37 +134,6 @@ charts through the localization `B_a → B_{a·b}` of `HomogeneousLocalization.a
 `HomogeneousLocalization.Away.isLocalization_mul`). -/
 
 open HomogeneousLocalization Polynomial
-
-/-- **Clearing denominators in a localization**: if the image of `x` under the
-localization map away from `t` lies in the extension of an ideal `K`, then some power
-of `t` multiplies `x` into `K`. -/
-lemma _root_.Ideal.exists_pow_mul_mem_of_algebraMap_mem_map {R S : Type u} [CommRing R]
-    [CommRing S] [Algebra R S] (t : R) [IsLocalization.Away t S] {K : Ideal R} {x : R}
-    (hx : algebraMap R S x ∈ K.map (algebraMap R S)) :
-    ∃ k : ℕ, t ^ k * x ∈ K := by
-  obtain ⟨⟨j, u⟩, hju⟩ :=
-    (IsLocalization.mem_map_algebraMap_iff (Submonoid.powers t) S).mp hx
-  obtain ⟨k₁, hk₁⟩ := u.2
-  have hu : (u : R) = t ^ k₁ := hk₁.symm
-  have h0 : algebraMap R S (x * t ^ k₁ - j) = 0 := by
-    rwa [map_sub, map_mul, sub_eq_zero, ← hu]
-  obtain ⟨⟨-, k₂, rfl⟩, hk₂⟩ :=
-    (IsLocalization.map_eq_zero_iff (Submonoid.powers t) S _).mp h0
-  refine ⟨k₂ + k₁, ?_⟩
-  have h1 : t ^ (k₂ + k₁) * x = t ^ k₂ * (j : R) := by
-    have h2 : t ^ k₂ * (x * t ^ k₁ - (j : R)) = 0 := hk₂
-    rw [pow_add]
-    linear_combination h2
-  rw [h1]
-  exact K.mul_mem_left _ j.2
-
-/-- Membership in the image of an ideal under an isomorphism of commutative rings. -/
-lemma _root_.CommRingCat.hom_mem_ideal_map_iso_iff {R S : CommRingCat.{u}} (e : R ≅ S)
-    (P : Ideal R) (x : R) : e.hom.hom x ∈ P.map e.hom.hom ↔ x ∈ P := by
-  conv_rhs =>
-    rw [← Ideal.comap_map_of_bijective _ (ConcreteCategory.bijective_of_isIso e.hom)
-      (I := P)]
-  exact Iff.rfl
 
 /-- The degree-one Rees elements are additive in the section. -/
 lemma _root_.AlgebraicGeometry.reesX_add {A : Type u} [CommRing A] (I : Ideal A)
@@ -314,14 +285,6 @@ We compute the ideal of global sections of the pullback of an ideal sheaf along 
 probe, and along a probe precomposed with `Spec` of a ring map. -/
 
 open HomogeneousLocalization
-
-/-- Comparing two ideals through the pullback along a bijective ring homomorphism. -/
-lemma _root_.Ideal.le_of_comap_le_comap_of_bijective {R S : Type u} [CommRing R]
-    [CommRing S] {f : R →+* S} (hf : Function.Bijective f) {P Q : Ideal S}
-    (h : P.comap f ≤ Q.comap f) : P ≤ Q := by
-  intro x hx
-  obtain ⟨y, rfl⟩ := hf.2 x
-  exact h (Ideal.mem_comap.mpr hx)
 
 variable {X : Scheme.{u}}
 

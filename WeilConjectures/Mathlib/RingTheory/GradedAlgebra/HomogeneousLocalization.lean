@@ -47,4 +47,25 @@ theorem map_surjective (g : 𝒜 →+*ᵍ ℬ) (hg : Function.Surjective g) {d :
   obtain ⟨a, ha, rfl⟩ := GradedRingHom.exists_mem_of_surjective hg hb
   exact ⟨Away.mk 𝒜 hs n a ha, by rw [Away.map_mk]⟩
 
+/-- **Factoring a chart ring map through the chart-overlap localization**: a ring map
+out of `A_{(f)}` sending the localization element `g^d/f^e` to a unit factors through
+`A_{(fg)}`. -/
+lemma exists_factor_of_isUnit {B : Type u} [CommRing B]
+    {σ : Type*} [SetLike σ B] [AddSubgroupClass σ B] {𝒜 : ℕ → σ} [GradedRing 𝒜]
+    {d e : ℕ} {f g : B} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e) {x : B} (hx : x = f * g)
+    (hd : d ≠ 0) {R : Type u} [CommRing R]
+    (ψ : Away 𝒜 f →+* R)
+    (hu : IsUnit (ψ (Away.isLocalizationElem hf hg))) :
+    ∃ ψ' : Away 𝒜 x →+* R,
+      ψ'.comp (awayMap 𝒜 hg hx) = ψ := by
+  letI := (awayMap 𝒜 hg hx).toAlgebra
+  have : IsLocalization.Away (Away.isLocalizationElem hf hg)
+      (Away 𝒜 x) :=
+    Away.isLocalization_mul hf hg hx hd
+  refine ⟨IsLocalization.Away.lift (S := Away 𝒜 x)
+    (Away.isLocalizationElem hf hg) hu, ?_⟩
+  have h := IsLocalization.Away.lift_comp (S := Away 𝒜 x)
+    (x := Away.isLocalizationElem hf hg) (g := ψ) hu
+  rwa [RingHom.algebraMap_toAlgebra] at h
+
 end HomogeneousLocalization.Away

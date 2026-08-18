@@ -6,8 +6,12 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Basic
+public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 
 /-!
 
@@ -19,25 +23,17 @@ Project tags 01PF (finite-type extension of quasi-coherent submodules) and 01PH
 (quasi-compact opens are complements of finite-type vanishing loci), which are the
 remaining leaves of `WeilConjectures.Blowup.Admissible`.
 
-We prove the affine finite-generation core of Tag 01PF (blueprint §1.2.B): if an ideal
-`N` of a ring `R` has finitely generated localizations at each element of a finite set
-`s`, then a single finitely generated subideal `N' ≤ N` realizes all those
-localizations simultaneously. The proof clears the finitely many localization
-denominators, replacing each generator `x/fᵏ` of a localized ideal by its numerator.
-
-We also prove the compactness micro-lemma of blueprint §2.4: the complement of the
-vanishing locus of a finitely generated ideal in the prime spectrum is quasi-compact,
-being the finite union of the basic opens at the generators.
+The purely ring-theoretic inputs are proved in the mirror tree: the affine
+finite-generation core of Tag 01PF (blueprint §1.2.B),
+`Ideal.exists_fg_le_map_localization_eq` in
+`WeilConjectures.Mathlib.RingTheory.Localization.Away.Basic`; the compactness
+micro-lemma of blueprint §2.4, `Ideal.FG.isCompact_compl_zeroLocus` in
+`WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology`; and retrocompactness
+(blueprint §2.2), `Scheme.Opens.quasiCompact_ι` in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact`.
 
 ## Main results
 
-- `Ideal.exists_fg_le_map_localization_eq`: the affine clearing-denominators lemma
-  (blueprint §1.2.B, `Submodule.exists_fg_eq_localization_on_finset`);
-- `Ideal.FG.isCompact_compl_zeroLocus`: quasi-compactness of the complement of the
-  vanishing locus of a finitely generated ideal (blueprint §2.4);
-- `Scheme.Opens.quasiCompact_ι`: the inclusion of a quasi-compact open of a
-  quasi-separated scheme is a quasi-compact morphism (blueprint §2.2,
-  retrocompactness);
 - `Scheme.IdealSheafData.openExtension` and
   `Scheme.IdealSheafData.comap_openExtension`: the canonical quasi-coherent extension
   of an ideal sheaf from a retrocompact open, with its restriction identity
@@ -69,130 +65,6 @@ These provide the inputs for the Stacks Tags 01PF and 01PH statements
 
 universe u
 
-section ClearingDenominators
-
-variable {R : Type u} [CommRing R]
-
-/-- One localization at a time: if the localization of `N` away from `f` is finitely
-generated, there is a finite set of elements of `N` whose images generate it. The
-generators of the localized ideal are multiplied by their denominators, which are
-units in the localization. -/
-lemma Ideal.exists_finset_span_image_eq_map_localization (N : Ideal R) (f : R)
-    (H : (N.map (algebraMap R (Localization.Away f))).FG) :
-    ∃ T : Finset R, (T : Set R) ⊆ (N : Set R) ∧
-      Ideal.span (algebraMap R (Localization.Away f) '' T) =
-        N.map (algebraMap R (Localization.Away f)) := by
-  classical
-  obtain ⟨G, hG⟩ := H
-  have hmem : ∀ y ∈ G, y ∈ N.map (algebraMap R (Localization.Away f)) := by
-    intro y hy
-    rw [← hG]
-    exact Ideal.subset_span hy
-  choose nm hnm using fun (y : G) ↦
-    (IsLocalization.mem_map_algebraMap_iff (Submonoid.powers f)
-      (Localization.Away f)).mp (hmem y y.2)
-  refine ⟨G.attach.image (fun y ↦ ((nm y).1 : R)), ?_, le_antisymm ?_ ?_⟩
-  · intro x hx
-    rw [Finset.mem_coe, Finset.mem_image] at hx
-    obtain ⟨y, -, rfl⟩ := hx
-    exact (nm y).1.2
-  · rw [Ideal.span_le]
-    rintro z ⟨x, hx, rfl⟩
-    rw [Finset.mem_coe, Finset.mem_image] at hx
-    obtain ⟨y, -, rfl⟩ := hx
-    exact Ideal.mem_map_of_mem _ (nm y).1.2
-  · rw [← hG, Ideal.span_le]
-    intro y hy
-    have h1 : y * algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).2 : R) =
-        algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).1 : R) := hnm ⟨y, hy⟩
-    obtain ⟨u, hu⟩ : IsUnit (algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).2 : R)) :=
-      IsLocalization.map_units (Localization.Away f) (nm ⟨y, hy⟩).2
-    have hy2 : y = algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).1 : R) * ↑u⁻¹ := by
-      rw [← h1, ← hu, mul_assoc, Units.mul_inv, mul_one]
-    rw [hy2]
-    refine Ideal.mul_mem_right _ _ (Ideal.subset_span ?_)
-    refine Set.mem_image_of_mem _ ?_
-    rw [Finset.mem_coe, Finset.mem_image]
-    exact ⟨⟨y, hy⟩, Finset.mem_attach _ _, rfl⟩
-
-/-- **The affine clearing-denominators lemma** (Stacks Project Tag 01PF, affine core;
-blueprint §1.2.B): if the localizations of an ideal `N` away from each member of a
-finite set `s` are finitely generated, then there is a single finitely generated
-subideal `N' ≤ N` whose localization away from each `f ∈ s` agrees with that of
-`N`. -/
-theorem Ideal.exists_fg_le_map_localization_eq (N : Ideal R) (s : Finset R)
-    (H : ∀ f ∈ s, (N.map (algebraMap R (Localization.Away f))).FG) :
-    ∃ N' : Ideal R, N' ≤ N ∧ N'.FG ∧ ∀ f ∈ s,
-      N'.map (algebraMap R (Localization.Away f)) =
-        N.map (algebraMap R (Localization.Away f)) := by
-  classical
-  choose T hTsub hTspan using fun (f : s) ↦
-    N.exists_finset_span_image_eq_map_localization f (H f f.2)
-  refine ⟨Ideal.span (s.attach.biUnion T : Finset R), ?_, ⟨_, rfl⟩, ?_⟩
-  · rw [Ideal.span_le]
-    intro x hx
-    rw [Finset.mem_coe, Finset.mem_biUnion] at hx
-    obtain ⟨f, -, hf⟩ := hx
-    exact hTsub f (Finset.mem_coe.mpr hf)
-  · intro f hf
-    refine le_antisymm (Ideal.map_mono ?_) ?_
-    · rw [Ideal.span_le]
-      intro x hx
-      rw [Finset.mem_coe, Finset.mem_biUnion] at hx
-      obtain ⟨g, -, hg⟩ := hx
-      exact hTsub g (Finset.mem_coe.mpr hg)
-    · rw [← hTspan ⟨f, hf⟩]
-      refine Ideal.span_le.mpr ?_
-      rintro z ⟨x, hx, rfl⟩
-      refine Ideal.mem_map_of_mem _ (Ideal.subset_span ?_)
-      rw [Finset.mem_coe, Finset.mem_biUnion]
-      exact ⟨⟨f, hf⟩, Finset.mem_attach _ _, Finset.mem_coe.mp hx⟩
-
-/-- **Transfer of finite generation to the abstract localization**: if the extension of `N`
-to some localization of `R` away from `f` is finitely generated, so is its extension to
-`Localization.Away f`. This bridges the scheme-theoretic sections rings (which are
-localizations via `IsAffineOpen.isLocalization_basicOpen`) and the abstract localizations
-used by the clearing-denominators lemma. -/
-lemma Ideal.FG.map_localizationAway {S : Type u} [CommRing S] [Algebra R S] {f : R}
-    [IsLocalization.Away f S] {N : Ideal R} (H : (N.map (algebraMap R S)).FG) :
-    (N.map (algebraMap R (Localization.Away f))).FG := by
-  let e : S ≃ₐ[R] Localization.Away f :=
-    IsLocalization.algEquiv (Submonoid.powers f) S (Localization.Away f)
-  have h1 : N.map (algebraMap R (Localization.Away f)) =
-      (N.map (algebraMap R S)).map (e.toAlgHom : S →+* Localization.Away f) := by
-    rw [Ideal.map_map, AlgHom.comp_algebraMap]
-  rw [h1]
-  exact H.map _
-
-/-- **Transfer of an equality of localized ideals along an `f`-inverting homomorphism**: if
-two ideals of `R` have the same extension to `Localization.Away f`, they have the same
-extension along every ring homomorphism inverting `f`. The homomorphism factors through the
-localization by `IsLocalization.Away.lift`. -/
-lemma Ideal.map_eq_map_of_localizationAway {T : Type u} [CommRing T] {χ : R →+* T} {f : R}
-    (hf : IsUnit (χ f)) {N N' : Ideal R}
-    (H : N.map (algebraMap R (Localization.Away f)) =
-      N'.map (algebraMap R (Localization.Away f))) :
-    N.map χ = N'.map χ := by
-  have hχ : (IsLocalization.Away.lift (S := Localization.Away f) f hf).comp
-      (algebraMap R (Localization.Away f)) = χ := IsLocalization.Away.lift_comp f hf
-  rw [← hχ, ← Ideal.map_map, ← Ideal.map_map, H]
-
-/-- **Quasi-compactness of the complement of a finitely generated vanishing locus**
-(blueprint §2.4): the complement of `V(I)` in the prime spectrum of `R` is
-quasi-compact for a finitely generated ideal `I`, being the finite union of the basic
-opens at the generators. -/
-theorem Ideal.FG.isCompact_compl_zeroLocus {I : Ideal R} (hI : I.FG) :
-    IsCompact (PrimeSpectrum.zeroLocus (I : Set R))ᶜ := by
-  obtain ⟨s, rfl⟩ := hI
-  have h1 : (PrimeSpectrum.zeroLocus ((Ideal.span (s : Set R) : Ideal R) : Set R))ᶜ =
-      ⋃ f ∈ s, (PrimeSpectrum.basicOpen f : Set (PrimeSpectrum R)) := by
-    ext x
-    simp [PrimeSpectrum.mem_zeroLocus, Set.not_subset]
-  rw [h1]
-  exact s.finite_toSet.isCompact_biUnion fun f _ ↦ PrimeSpectrum.isCompact_basicOpen f
-
-end ClearingDenominators
-
 namespace AlgebraicGeometry
 
 section OpenExtension
@@ -200,16 +72,6 @@ section OpenExtension
 open CategoryTheory Limits
 
 variable {X : Scheme.{u}} (W : X.Opens)
-
-/-- **Retrocompactness** (blueprint §2.2): the inclusion of a quasi-compact open of a
-quasi-separated scheme is a quasi-compact morphism. -/
-theorem Scheme.Opens.quasiCompact_ι [QuasiSeparatedSpace X]
-    (hW : IsCompact (W : Set X)) : QuasiCompact W.ι := by
-  constructor
-  intro U hU hU'
-  rw [W.ι.isEmbedding.isCompact_iff, Set.image_preimage_eq_inter_range,
-    Scheme.Opens.range_ι]
-  exact QuasiSeparatedSpace.inter_isCompact U W hU hU' W.isOpen hW
 
 variable (J : W.toScheme.IdealSheafData)
 
@@ -340,18 +202,6 @@ scheme-theoretic images (`Scheme.Hom.ker_pullback_snd`). -/
 open CategoryTheory Limits
 
 variable {X : Scheme.{u}}
-
-/-- Pullback of ideals along the inverse of an isomorphism of commutative rings is
-pushforward along the isomorphism. -/
-lemma _root_.CommRingCat.ideal_comap_inv_hom {R S : CommRingCat.{u}} (e : R ≅ S)
-    (I : Ideal R) : I.comap e.inv.hom = I.map e.hom.hom := by
-  refine le_antisymm (fun x hx ↦ ?_) (Ideal.map_le_iff_le_comap.mpr fun x hx ↦ ?_)
-  · have hxeq : e.hom.hom (e.inv.hom x) = x :=
-      DFunLike.congr_fun (congrArg CommRingCat.Hom.hom e.inv_hom_id) x
-    exact hxeq ▸ Ideal.mem_map_of_mem _ hx
-  · have hxeq : e.inv.hom (e.hom.hom x) = x :=
-      DFunLike.congr_fun (congrArg CommRingCat.Hom.hom e.hom_inv_id) x
-    simpa only [Ideal.mem_comap, hxeq] using hx
 
 /-- Pullback of ideal sheaves along an open immersion commutes with intersections. -/
 lemma Scheme.IdealSheafData.comap_inf_of_isOpenImmersion {Z T : Scheme.{u}} (j : Z ⟶ T)

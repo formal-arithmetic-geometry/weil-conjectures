@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
@@ -15,6 +16,10 @@ A point in the closure of the range of a quasi-compact morphism to an affine sch
 a specialization of a point of the range
 (`AlgebraicGeometry.exists_specializes_of_mem_closure_range`). This is the topological
 core of Stacks Project Tag 02JQ.
+
+We also record retrocompactness, `AlgebraicGeometry.Scheme.Opens.quasiCompact_ι`: the
+inclusion of a quasi-compact open of a quasi-separated scheme is a quasi-compact
+morphism.
 -/
 
 @[expose] public section
@@ -106,5 +111,21 @@ theorem exists_specializes_of_mem_closure_range {T P : Scheme.{u}} (h : T ⟶ P)
   have := hsp.map P.isoSpec.inv.continuous
   rw [← hgq, hinv, hz'def, hinv] at this
   exact this
+
+section Retrocompact
+
+variable {X : Scheme.{u}} (W : X.Opens)
+
+/-- **Retrocompactness** (blueprint §2.2): the inclusion of a quasi-compact open of a
+quasi-separated scheme is a quasi-compact morphism. -/
+theorem Scheme.Opens.quasiCompact_ι [QuasiSeparatedSpace X]
+    (hW : IsCompact (W : Set X)) : QuasiCompact W.ι := by
+  constructor
+  intro U hU hU'
+  rw [W.ι.isEmbedding.isCompact_iff, Set.image_preimage_eq_inter_range,
+    Scheme.Opens.range_ι]
+  exact QuasiSeparatedSpace.inter_isCompact U W hU hU' W.isOpen hW
+
+end Retrocompact
 
 end AlgebraicGeometry

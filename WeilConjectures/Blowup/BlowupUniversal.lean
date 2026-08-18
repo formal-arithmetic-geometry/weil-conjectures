@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.FiniteDegree
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
 
@@ -700,27 +701,6 @@ lemma specMap_ofHom_comp_assoc {R S T : Type u} [CommRing R] [CommRing S] [CommR
     Spec.map (CommRingCat.ofHom (ψ'.comp m)) ≫ C =
       Spec.map (CommRingCat.ofHom ψ') ≫ (Spec.map (CommRingCat.ofHom m) ≫ C) := by
   rw [CommRingCat.ofHom_comp, Spec.map_comp, Category.assoc]
-
-/-- **Factoring a chart ring map through the chart-overlap localization**: a ring map
-out of `A_{(f)}` sending the localization element `g^d/f^e` to a unit factors through
-`A_{(fg)}`. -/
-lemma _root_.HomogeneousLocalization.Away.exists_factor_of_isUnit {B : Type u} [CommRing B]
-    {σ : Type*} [SetLike σ B] [AddSubgroupClass σ B] {𝒜 : ℕ → σ} [GradedRing 𝒜]
-    {d e : ℕ} {f g : B} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e) {x : B} (hx : x = f * g)
-    (hd : d ≠ 0) {R : Type u} [CommRing R]
-    (ψ : HomogeneousLocalization.Away 𝒜 f →+* R)
-    (hu : IsUnit (ψ (HomogeneousLocalization.Away.isLocalizationElem hf hg))) :
-    ∃ ψ' : HomogeneousLocalization.Away 𝒜 x →+* R,
-      ψ'.comp (HomogeneousLocalization.awayMap 𝒜 hg hx) = ψ := by
-  letI := (HomogeneousLocalization.awayMap 𝒜 hg hx).toAlgebra
-  have : IsLocalization.Away (HomogeneousLocalization.Away.isLocalizationElem hf hg)
-      (HomogeneousLocalization.Away 𝒜 x) :=
-    HomogeneousLocalization.Away.isLocalization_mul hf hg hx hd
-  refine ⟨IsLocalization.Away.lift (S := HomogeneousLocalization.Away 𝒜 x)
-    (HomogeneousLocalization.Away.isLocalizationElem hf hg) hu, ?_⟩
-  have h := IsLocalization.Away.lift_comp (S := HomogeneousLocalization.Away 𝒜 x)
-    (x := HomogeneousLocalization.Away.isLocalizationElem hf hg) (g := ψ) hu
-  rwa [RingHom.algebraMap_toAlgebra] at h
 
 namespace AffineBlowup
 
