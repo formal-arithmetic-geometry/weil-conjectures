@@ -5,7 +5,11 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.SchemeTheoreticImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Tactic.CategoryTheory.Reassoc
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
@@ -132,7 +136,7 @@ immersion) graph of `γ`.
 theorem ker_comap_partialSectionOpenι :
     γ.ker.comap (partialSectionOpenι x y j) = (partialSection x y j γ hγ).ker := by
   have := quasiCompact_of_partialSection x y j γ hγ
-  rw [← Nagata.schemeImageRestrictOpen γ (partialSectionOpenι x y j)]
+  rw [← Scheme.Hom.ker_pullback_snd γ (partialSectionOpenι x y j)]
   have H := isPullback_partialSection x y j γ hγ
   have hsnd : pullback.snd γ (partialSectionOpenι x y j) =
       H.isoPullback.inv ≫ partialSection x y j γ hγ :=
@@ -158,7 +162,7 @@ lemma partialSectionRestrictIso_hom_fst :
       partialSection x y j γ hγ := by
   simp only [partialSectionRestrictIso, Iso.trans_hom, asIso_hom, eqToIso.hom,
     Category.assoc, Scheme.IdealSheafData.comapIso_hom_fst]
-  rw [Nagata.subschemeι_eqToHom ((ker_comap_partialSectionOpenι x y j γ hγ).symm)]
+  rw [Scheme.IdealSheafData.subschemeι_eqToHom ((ker_comap_partialSectionOpenι x y j γ hγ).symm)]
   exact (partialSection x y j γ hγ).toImage_imageι
 
 end KernelIdentity

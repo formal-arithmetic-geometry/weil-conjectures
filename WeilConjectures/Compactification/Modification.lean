@@ -5,9 +5,9 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.Flattening
+public import WeilConjectures.Blowup.Admissible
 public import WeilConjectures.Compactification.PartialSection
-public import WeilConjectures.Compactification.SchemeTheoreticallyDense
+public import WeilConjectures.Compactification.Defs
 
 /-!
 
@@ -53,11 +53,16 @@ The finite-type helper lemmas of the blueprint
 `AlgebraicGeometry.Nagata.locallyOfFiniteType_of_comp_of_isSeparated` and
 `AlgebraicGeometry.Nagata.quasiCompact_of_comp_of_isSeparated`.
 
-The four existence theorems marked `sorry` await the flattening input of Stacks
-Project Tag 081S (see the module docstring of
-`WeilConjectures.Compactification.Flattening` for the status of the blow-up
-universal-property chapter they reduce to); their statements are the interfaces
-consumed by the two-open compactification theorem (proof order items 43–48).
+## Dependency structure
+
+`exists_admissibleBlowup_strictTransform_open` (Tag 081S) is the only *primitive*
+obligation of this file: `schemeTheoreticImage_after_admissibleBlowup` (0F3Y),
+`exists_commonModification` (0F3X), `Compactification.exists_properExtension` (0F3Z)
+and `exists_admissibleBlowup_strictTransform_isIso_near_closure` (0F3W) are all
+consumers of it, and the two-open compactification theorem (proof order items 43–48)
+consumes those. Tag 081S in turn is the application of Raynaud–Gruson flattening,
+Stacks Tags 0815 and 081R, which this development does not yet state; see the
+"Route" section of the module docstring of `WeilConjectures.Blowup.Admissible`.
 
 -/
 
@@ -101,11 +106,6 @@ scheme, `U ⊆ X` a quasi-compact open and `q : Z ⟶ X` separated, of finite ty
 isomorphism over `U`. Then there is a `U`-admissible blow-up `X' ⟶ X` such that the
 strict transform `Z' ⟶ X'` of `q` is an open immersion.
 
-In the Stacks Project this is proved by flattening the (finite type, over `U` flat)
-structure sheaf datum of `q` by a `U`-admissible blow-up (Tags 0815 and 081R) and
-observing that a flat, finitely presented monomorphism-over-`U` strict transform is an
-open immersion. The flattening input is the remaining `sorry` of this development;
-see the module docstring.
 (Blueprint: `def:nagata-elimination-indeterminacy`,
 `lemma:nagata-elimination-indeterminacy`; proof order item 30.) -/
 theorem exists_admissibleBlowup_strictTransform_open
@@ -114,6 +114,11 @@ theorem exists_admissibleBlowup_strictTransform_open
     [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q]
     (hq : IsIso (q ∣_ U)) :
     ∃ B : AdmissibleBlowup X U, IsOpenImmersion (B.strictTransformMap q) := by
+  -- The Stacks proof flattens the (finite type, flat over `U`) structure sheaf datum
+  -- of `q` by a `U`-admissible blow-up (Tags 0815 and 081R) and observes that a flat,
+  -- finitely presented strict transform which is a monomorphism over `U` is an open
+  -- immersion. Neither flattening theorem is available yet; this is the one primitive
+  -- obligation of the modification layer.
   sorry
 
 section ImageTransport

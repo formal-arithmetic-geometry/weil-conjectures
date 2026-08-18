@@ -5,17 +5,19 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.SchemeTheoreticImage
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
 # Finite-type extension of ideals: the affine algebra layer
 
 This file begins Phase A of the formalization plan
-`blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md` for the Stacks
+`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md` for the Stacks
 Project tags 01PF (finite-type extension of quasi-coherent submodules) and 01PH
 (quasi-compact opens are complements of finite-type vanishing loci), which are the
-remaining leaves of `WeilConjectures.Compactification.Flattening`.
+remaining leaves of `WeilConjectures.Blowup.Admissible`.
 
 We prove the affine finite-generation core of Tag 01PF (blueprint §1.2.B): if an ideal
 `N` of a ring `R` has finitely generated localizations at each element of a finite set
@@ -59,7 +61,7 @@ being the finite union of the basic opens at the generators.
 These provide the inputs for the Stacks Tags 01PF and 01PH statements
 (`Scheme.exists_finiteType_ideal_extension`,
 `Scheme.exists_finiteType_ideal_zeroLocus_compl_qcOpen`) proved in
-`WeilConjectures.Compactification.Flattening`.
+`WeilConjectures.Blowup.Admissible`.
 
 -/
 
@@ -224,11 +226,11 @@ noncomputable def Scheme.IdealSheafData.openExtension : X.IdealSheafData :=
 Tag 01PE): pulling the extension back along the quasi-compact open immersion recovers
 `J`. The proof identifies the restriction of the kernel with the kernel of the closed
 immersion of `J` via flat base change of scheme-theoretic images
-(`Nagata.schemeImageRestrictOpen`). -/
+(`Scheme.Hom.ker_pullback_snd`). -/
 theorem Scheme.IdealSheafData.comap_openExtension [QuasiCompact W.ι] :
     (Scheme.IdealSheafData.openExtension W J).comap W.ι = J := by
   rw [Scheme.IdealSheafData.openExtension,
-    ← AlgebraicGeometry.Nagata.schemeImageRestrictOpen (J.subschemeι ≫ W.ι) W.ι]
+    ← AlgebraicGeometry.Scheme.Hom.ker_pullback_snd (J.subschemeι ≫ W.ι) W.ι]
   have H : IsPullback (𝟙 J.subscheme) J.subschemeι (J.subschemeι ≫ W.ι) W.ι :=
     IsPullback.of_horiz_isIso_mono ⟨by rw [Category.id_comp]⟩
   have hsnd : pullback.snd (J.subschemeι ≫ W.ι) W.ι =
@@ -326,14 +328,14 @@ contains a finite-type ideal sheaf with the same restriction to `W`
 (`Scheme.IdealSheafData.exists_finiteType_le_comap_eq`).
 
 The proof follows the blueprint (§1.2.B–C of
-`blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md`): a binary gluing step
+`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`): a binary gluing step
 (`exists_le_finiteTypeOn_sup`) enlarges the open of finite-typeness by one affine open at a
 time, using the affine clearing-denominators lemma `Ideal.exists_fg_le_map_localization_eq`
 on a finite basic-open cover of the overlap, and a finite induction over an affine cover
 concludes. The gluing itself is order-theoretic: the glued ideal sheaf is the intersection
 of the pushforwards (maximal quasi-coherent extensions) of the two local pieces with the
 ambient ideal sheaf, and its restrictions are computed via the flat base change of
-scheme-theoretic images (`Nagata.schemeImageRestrictOpen`). -/
+scheme-theoretic images (`Scheme.Hom.ker_pullback_snd`). -/
 
 open CategoryTheory Limits
 
@@ -424,7 +426,7 @@ theorem Scheme.IdealSheafData.comap_map_ι (W : X.Opens) [QuasiCompact W.ι]
 /-- **Base change of ideal sheaf pushforwards to open subschemes**: for a quasi-compact
 morphism `g`, the restriction of the pushforward `g_* B` to an open `O` is the pushforward
 of the restriction of `B` to `g ⁻¹ᵁ O` along the restricted morphism. This is the flat
-base change of scheme-theoretic images (`Nagata.schemeImageRestrictOpen`) in ideal sheaf
+base change of scheme-theoretic images (`Scheme.Hom.ker_pullback_snd`) in ideal sheaf
 form. -/
 theorem Scheme.IdealSheafData.map_comap_opens {Y : Scheme.{u}} (g : Y ⟶ X) [QuasiCompact g]
     (B : Y.IdealSheafData) (O : X.Opens) :
@@ -435,7 +437,7 @@ theorem Scheme.IdealSheafData.map_comap_opens {Y : Scheme.{u}} (g : Y ⟶ X) [Qu
   have H := ((IsPullback.of_hasPullback (g ⁻¹ᵁ O).ι B.subschemeι).paste_horiz
     (isPullback_morphismRestrict g O)).flip
   rw [hker B g, hker (B.comap (g ⁻¹ᵁ O).ι) (g ∣_ O),
-    ← Nagata.schemeImageRestrictOpen (B.subschemeι ≫ g) O.ι]
+    ← Scheme.Hom.ker_pullback_snd (B.subschemeι ≫ g) O.ι]
   have hsub : (B.comap (g ⁻¹ᵁ O).ι).subschemeι =
       (B.comapIso (g ⁻¹ᵁ O).ι).hom ≫ pullback.fst (g ⁻¹ᵁ O).ι B.subschemeι :=
     (Scheme.IdealSheafData.comapIso_hom_fst _ _).symm

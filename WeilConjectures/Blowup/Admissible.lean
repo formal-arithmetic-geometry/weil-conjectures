@@ -18,15 +18,29 @@ public import WeilConjectures.Compactification.StrictTransform
 
 This file records the admissible blow-up vocabulary and the boundary-separation
 interface of the proof of Nagata's compactification theorem, following the *revised*
-blueprint (`blueprint/src/macros/nagata_new revised(1).tex`). The revised blueprint
-replaces the flattening route of the original blueprint (Stacks Tags 0815/081R and
-081P/081L) by the boundary-separation route: the two-open compactification theorem
-uses blow-ups of sums of ideals to separate boundary pieces (Stacks Tag 0F3V), common
-modifications, and the dense-source valuative criterion — no module flattening is
-needed. Accordingly, the flattening statements previously recorded here
-(`exists_admissibleBlowup_flatStrictTransform`, `exists_flatteningIdeal_openStrictTransform`,
-`flatStrictTransform_isOpenImmersion`, `flat_denseOpen_dimensionPackage`) have been
-removed: they are not part of the revised proof.
+blueprint (`blueprint/src/version/detailed/nagata/nagata_new.tex`).
+
+## Route
+
+The development follows the Stacks Project route (Tags 080A/0807/080B/080L/0F3V,
+then 081S/0F3X–0F3Z). The revision of the blueprint recorded there concerns the
+*comparison* step only: the comparison of blow-ups after a boundary separation is
+obtained from blow-ups of sums of ideals (Tag 0F3V) instead of from the module
+flattening of Tags 081P/081L, so none of the results *in this file* needs flattening.
+
+This is not the same thing as a flattening-free proof of Nagata's theorem. The
+elimination of indeterminacy, Stacks Tag 081S
+(`AlgebraicGeometry.exists_admissibleBlowup_strictTransform_open` in
+`WeilConjectures.Compactification.Modification`), is still proved by
+Raynaud–Gruson flattening (Tags 0815 and 081R), and it is the load-bearing input of
+the whole modification layer (Tags 0F3X, 0F3Y, 0F3Z, 0F3W) and hence of the two-open
+theorem. Those flattening theorems are **not yet stated anywhere in this
+development**: Tag 081S is currently the one primitive obligation, and closing it
+requires either formalising Tags 0815/081R or replacing the modification layer
+wholesale by a flattening-free argument (Deligne–Conrad, Lütkebohmert). See the
+module docstring of `WeilConjectures.Compactification.Modification` and the
+"Route revision" note of
+`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`.
 
 ## Definitions
 
@@ -49,17 +63,18 @@ The predicates `Scheme.IdealSheafData.FiniteType` and
   isomorphism over `U` (blueprint: `lemma:nagata-admissible-blowup-over-open`);
 - separatedness, quasi-compactness and local finite type of the strict transform along
   an admissible blow-up, inherited from the transformed morphism;
-- `AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary` and its fully proved
-  locally Noetherian instance
-  `exists_admissibleBlowup_cartierBoundary_of_locallyNoetherian`: preparation of a
-  Cartier boundary (`lemma:nagata-cartier-boundary-preparation`, Stacks Tag 080Y);
+- `AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary` and its locally
+  Noetherian variant `exists_admissibleBlowup_cartierBoundary_of_locallyNoetherian`,
+  both specialisations of `exists_admissibleBlowup_cartierBoundary_of_ideal`:
+  preparation of a Cartier boundary (`lemma:nagata-cartier-boundary-preparation`,
+  Stacks Tag 080Y);
 - `AlgebraicGeometry.separationBlowup` together with its `U`-admissibility
   (`coe_support_sup_subset`);
 - `Scheme.exists_finiteType_ideal_extension`: finite-type ideals extend from
   quasi-compact opens (`def:nagata-finite-type-ideal-extension`, Stacks Tag 01PF),
   from the gluing induction `Scheme.IdealSheafData.exists_finiteType_le_comap_eq` of
-  `WeilConjectures.Compactification.FiniteTypeExtension` (Phase A of the plan
-  `blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md`);
+  `WeilConjectures.Compactification.FiniteTypeExtension` (proof order item 26,
+  `blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`);
 - `Scheme.exists_finiteType_ideal_zeroLocus_compl_qcOpen`: a quasi-compact open of a
   qcqs scheme is the complement of the vanishing locus of a finite-type ideal
   (`def:nagata-qc-open-complement-ideal`, Stacks Tag 01PH), by applying the same
@@ -100,7 +115,7 @@ The predicates `Scheme.IdealSheafData.FiniteType` and
 The finite-degree approximation on the blow-up itself
 (`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks Tag 0803,
 `lemma:nagata-proj-closed-center-finite-degree-exists`) is proved in
-`WeilConjectures.Compactification.FiniteDegree`; its transport to an abstractly
+`WeilConjectures.Blowup.FiniteDegree`; its transport to an abstractly
 identified total space (`exists_finiteDegree_center_le`) and the support formula of
 the full finite-degree statement (`coe_support_eq_of_comap_pow_mul`) are proved here.
 
@@ -111,8 +126,6 @@ by `WeilConjectures.Blowup.BlowupUniversal`.
 
 The affine-chart algebra of module strict transforms (Stacks Tag 080W) is proved in
 `WeilConjectures.Compactification.PowerTorsion`.
-
-This file is `sorry`-free.
 
 -/
 
@@ -402,7 +415,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_cente
 blowing up a product `I * L` is the same over `X` as first blowing up `I` and then the
 inverse image ideal of `L` on the blow-up.
 
-The proof follows `blueprint/blowup_product_ideal_proof.tex` and runs entirely
+The proof follows `blueprint/src/version/detailed/nagata/nagata_new.tex` and runs entirely
 through the universal property of blowing up
 (`Scheme.IdealSheafData.existsUnique_lift_blowup`, Stacks Project Tag 0806): on the
 iterated blow-up the pullback of `I * L` is invertible, giving `α`; on the blow-up of

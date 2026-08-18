@@ -5,8 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.Flattening
-public import WeilConjectures.Compactification.SchemeTheoreticallyDense
+public import WeilConjectures.Blowup.Admissible
+public import WeilConjectures.Compactification.Defs
 
 /-!
 
@@ -42,7 +42,7 @@ theorem, following the blueprint chapter "Nagata compactification", sections
 
 The proof of `exists_admissibleBlowup_disjoint_closures` combines the boundary
 separation theorem `separationBlowup_disjoint_strictTransforms` of
-`WeilConjectures.Compactification.Flattening` (Stacks Tag 0F3V) with the two range
+`WeilConjectures.Blowup.Admissible` (Stacks Tag 0F3V) with the two range
 comparisons proved here: the strict transform of a closed center contains the whole
 inverse image of its `U`-part (`mem_range_strictTransformMap`), and is contained in
 the full inverse image of the center (`range_strictTransformMap_subset_preimage`).

@@ -5,7 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Submodule
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Localization.Defs
 
 /-!
 

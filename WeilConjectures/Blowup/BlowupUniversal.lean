@@ -50,7 +50,7 @@ On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
   universal lift (Stacks Project Tag 0806).
 
 Elaboration-performance conventions follow
-`WeilConjectures.Compactification.FiniteDegree`: chart probes keep their section
+`WeilConjectures.Blowup.FiniteDegree`: chart probes keep their section
 ring abstract, no `rw`/`▸` on goals mentioning chart rings, and equalities of
 morphisms are assembled by `congrArg`/explicit `calc` steps.
 

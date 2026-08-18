@@ -6,7 +6,8 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Complement
-public import WeilConjectures.Compactification.SchemeTheoreticImage
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
@@ -77,7 +78,7 @@ theorem ker_comap_self {W P : Scheme.{u}} (j : W ⟶ P) [QuasiCompact j] [Flat j
     rw [e]; infer_instance
   have h : IsIso (pullback.snd j j) :=
     IsIso.of_isIso_comp_left (IsKernelPair.id_of_mono j).isoPullback.hom _
-  rw [← schemeImageFlatBaseChange j j]
+  rw [← Scheme.Hom.ker_pullback_snd j j]
   simp
 
 end Nagata

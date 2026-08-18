@@ -49,14 +49,23 @@ not by the shortest source-file path.
 | 28 | lemma:nagata-flattening-ideal-exists | Selects the flattening ideal and records its universal specification. | Previous flattening lemmas -> chosen ideal |
 | 29 | lemma:nagata-dense-open-dimension-package | Extends finite presentation and fibre-dimension bounds from a retrocompact dense open (Stacks Tags 081P and 081L). | Flat lft map + dense open -> lfp and dimension bound |
 
-> **Route revision (formalization, 2026-08).** Items 25-29 (the module-flattening
-> chain, Stacks Tags 0815/081R/081P/081L) are **not on the formalized route**:
-> the Lean development replaces them by the boundary-separation route (item 36's
+> **Route revision (formalization, 2026-08; amended 2026-08-18).** Items 28-29
+> (Stacks Tags 081P/081L) are **not on the formalized route**: the comparison step
+> of the Lean development uses the boundary-separation route instead (item 36's
 > Tag 0F3V separation blow-up, common modifications, and the dense-source
 > valuative criterion, item 42).  Item 23 is formalized only in its affine
-> algebraic layer (`Submodule.powTorsionQuotientMap*`).  In `nagata_new.tex` the
-> flattening chain now survives only as the input to item 30 (Tag 081S), whose
-> Lean statement is still `sorry` and whose formal proof route is still open.
+> algebraic layer (`Submodule.powTorsionQuotientMap*`).
+>
+> Items 25-27 (Raynaud-Gruson module flattening, Stacks Tags 0815/081R) are **still
+> on the route**.  They survive as the input to item 30 (Tag 081S), and item 30 is
+> the load-bearing input of items 31-33 and hence of the whole two-open theorem.
+> They are currently stated nowhere in the Lean development, and item 30 is the one
+> primitive `sorry` of `WeilConjectures/Compactification/Modification.lean`.
+> Closing it requires either formalizing Tags 0815/081R, or replacing items 30-33
+> wholesale by a flattening-free argument (Deligne-Conrad, Luetkebohmert) -- which
+> would mean rewriting this section of the blueprint, not just patching item 30.
+> The earlier wording of this note, which declared the whole flattening chain off
+> the route while item 30 continued to consume it, was inconsistent.
 
 ## 4. Boundary preparation, common modifications, and graphs
 

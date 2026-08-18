@@ -5,7 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
@@ -35,6 +36,12 @@ quasi-compact and quasi-separated). Any `f` satisfying `HasCompactification f` i
 separated and locally of finite type; these are instances.
 A choice of compactification is extracted from `HasCompactification f` by
 `HasCompactification.compactification f`.
+
+A compactification is *scheme-theoretically dense*
+(`Compactification.IsSchemeTheoreticallyDense`, blueprint
+`def:nagata-dense-compactification`) when its open immersion is scheme-theoretically
+dominant, equivalently when the inclusion of the scheme-theoretic image of that open
+immersion is an isomorphism (`Compactification.isSchemeTheoreticallyDense_iff`).
 
 -/
 
@@ -159,5 +166,24 @@ instance isSeparated : IsSeparated f := hf.compactification.isSeparated
 instance locallyOfFiniteType : LocallyOfFiniteType f := hf.compactification.locallyOfFiniteType
 
 end HasCompactification
+
+namespace Compactification
+
+/-- A compactification `X ⟶ Z ⟶ Y` of `f : X ⟶ Y` is scheme-theoretically dense if
+`𝒪_Z ⟶ i_* 𝒪_X` is injective, i.e. if the open immersion `i : X ⟶ Z` into the
+compactification is scheme-theoretically dominant.
+(Blueprint: `def:nagata-dense-compactification`.) -/
+abbrev IsSchemeTheoreticallyDense {f : X ⟶ Y} (c : Compactification f) : Prop :=
+  IsSchemeTheoreticallyDominant c.i
+
+/-- A compactification is scheme-theoretically dense if and only if the inclusion of
+the scheme-theoretic image of its open immersion is an isomorphism.
+(Blueprint: `lemma:nagata-dense-compactification-characterization`.) -/
+theorem isSchemeTheoreticallyDense_iff {f : X ⟶ Y} (c : Compactification f) :
+    c.IsSchemeTheoreticallyDense ↔ IsIso c.i.imageι :=
+  (isSchemeTheoreticallyDominant_iff c.i).trans
+    (Scheme.isIso_subschemeι_iff_eq_bot c.i.ker).symm
+
+end Compactification
 
 end AlgebraicGeometry

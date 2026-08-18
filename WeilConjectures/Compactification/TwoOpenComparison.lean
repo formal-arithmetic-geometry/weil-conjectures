@@ -42,11 +42,11 @@ Given two sides `σ₁ : TwoOpenSide u O₁ O₂` and `σ₂ : TwoOpenSide u O�
   (`lemma:nagata-comparison-restrict-proper-open`,
   `def:nagata-two-open-improved-comparison` via Stacks Project Tags 0F3W and 0F3Y,
   `lemma:nagata-comparison-boundary-density`,
-  `lemma:nagata-key-boundary-disjointness`); it is currently `sorry` since it consumes
-  the sorried modification inputs
-  (`exists_admissibleBlowup_strictTransform_isIso_near_closure`,
-  `Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`), see the module docstring
-  of `WeilConjectures.Compactification.Modification`.
+  `lemma:nagata-key-boundary-disjointness`); it consumes the modification inputs
+  `exists_admissibleBlowup_strictTransform_isIso_near_closure` and
+  `Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`, and therefore, through
+  them, Stacks Tag 081S — see the "Dependency structure" section of the module
+  docstring of `WeilConjectures.Compactification.Modification`.
 
 -/
 

@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 /-!
 # Complements on the subscheme cut out by an ideal sheaf
 
-This file adds two independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
+This file adds three independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
 
 ## Base change of the subscheme cut out by an ideal sheaf
 
@@ -42,11 +42,20 @@ preimage of an affine open of `Y` (`AlgebraicGeometry.Scheme.Hom.toImage_app_inj
 preimages are affine because `f.imageι` is a closed immersion, and they cover the image, so
 the kernel ideal vanishes on a cover by affine opens.
 
+## The universal property of the scheme-theoretic image
+
+The scheme-theoretic image is the smallest closed subscheme of the target through which a
+morphism factors. Concretely, every factorization `g = h ≫ z` through a closed immersion
+`z : Z ⟶ Y` is received by a unique morphism `g.image ⟶ Z` over `Y`
+(`AlgebraicGeometry.Scheme.Hom.image.existsUnique_comp_eq_imageι`), and that morphism is
+itself a closed immersion.
+
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
+- `AlgebraicGeometry.Scheme.Hom.image.existsUnique_comp_eq_imageι`
 -/
 
 @[expose] public section
@@ -82,6 +91,13 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
     (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
       (I.isPullback_subschemeCover_map U)
 
+/-- The inclusions of the subschemes attached to equal ideal sheaves agree up to
+`eqToHom`. -/
+lemma subschemeι_eqToHom {I J : X.IdealSheafData} (e : I = J) :
+    eqToHom (congrArg Scheme.IdealSheafData.subscheme e) ≫ J.subschemeι = I.subschemeι := by
+  subst e
+  simp
+
 end AlgebraicGeometry.Scheme.IdealSheafData
 
 namespace AlgebraicGeometry.Scheme.Hom
@@ -98,5 +114,50 @@ lemma ker_toImage [QuasiCompact f] : f.toImage.ker = ⊥ := by
     exact (RingHom.injective_iff_ker_eq_bot _).mp (f.toImage_app_injective V)
 
 instance [QuasiCompact f] : IsSchemeTheoreticallyDominant f.toImage := ⟨f.ker_toImage⟩
+
+section UniversalProperty
+
+variable {Z : Scheme.{u}} (g : X ⟶ Y) (h : X ⟶ Z) (z : Z ⟶ Y)
+
+/-- If `g` factors through a closed immersion `z`, the kernel of `z` is contained in the
+kernel of `g`. -/
+lemma ker_le_ker_of_comp_eq (w : h ≫ z = g) : z.ker ≤ g.ker := by
+  rw [← w]
+  exact le_ker_comp h z
+
+/-- Given a factorization `g = h ≫ z` with `z : Z ⟶ Y` a closed immersion, the canonical
+comparison morphism from the scheme-theoretic image of `g` to `Z`. -/
+noncomputable def image.compare [IsClosedImmersion z] (w : h ≫ z = g) : g.image ⟶ Z :=
+  IsClosedImmersion.lift z g.imageι (by simpa using ker_le_ker_of_comp_eq g h z w)
+
+@[reassoc (attr := simp)]
+lemma image.compare_comp [IsClosedImmersion z] (w : h ≫ z = g) :
+    image.compare g h z w ≫ z = g.imageι :=
+  IsClosedImmersion.lift_fac _ _ _
+
+/-- The comparison morphism to a closed factorization is itself a closed immersion. -/
+lemma image.isClosedImmersion_compare [IsClosedImmersion z] (w : h ≫ z = g) :
+    IsClosedImmersion (image.compare g h z w) :=
+  have : IsClosedImmersion (image.compare g h z w ≫ z) := by
+    rw [image.compare_comp]
+    infer_instance
+  IsClosedImmersion.of_comp_isClosedImmersion _ z
+
+/-- The comparison morphism is the unique morphism from the scheme-theoretic image which is
+compatible with the closed immersions into the common target. -/
+lemma image.eq_compare [IsClosedImmersion z] (w : h ≫ z = g) (c : g.image ⟶ Z)
+    (hc : c ≫ z = g.imageι) : c = image.compare g h z w := by
+  rw [← cancel_mono z, hc, image.compare_comp]
+
+/-- **Universal property of the scheme-theoretic image**: for every factorization of `g`
+through a closed immersion `z : Z ⟶ Y` there is a unique morphism from the scheme-theoretic
+image of `g` to `Z` compatible with the morphisms to `Y`. That morphism is the closed
+immersion `AlgebraicGeometry.Scheme.Hom.image.compare`; the factorization of `g` through its
+own scheme-theoretic image is `AlgebraicGeometry.Scheme.Hom.toImage_imageι`. -/
+theorem image.existsUnique_comp_eq_imageι [IsClosedImmersion z] (w : h ≫ z = g) :
+    ∃! c : g.image ⟶ Z, c ≫ z = g.imageι :=
+  ⟨image.compare g h z w, image.compare_comp g h z w, fun c hc ↦ image.eq_compare g h z w c hc⟩
+
+end UniversalProperty
 
 end AlgebraicGeometry.Scheme.Hom

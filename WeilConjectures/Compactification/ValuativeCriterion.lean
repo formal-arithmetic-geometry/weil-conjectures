@@ -5,7 +5,11 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.MvPolynomial.Monad
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
@@ -46,7 +50,7 @@ files:
   `AlgebraicGeometry.exists_specializes_of_mem_closure_range`, in
   `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact`.
 
-All of items 38–42 are fully proved. The proof of the dense-source valuative
+The proof of the dense-source valuative
 criterion (item 42, Stacks Tag 0894) reduces an arbitrary valuative square to one
 through the dense source. Two reductions differ from the Stacks Project text: instead
 of replacing the schemes by their reductions, `h` is factored through its

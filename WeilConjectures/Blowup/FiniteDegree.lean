@@ -18,7 +18,7 @@ This file proves the finite-degree approximation of a finite-type center on a bl
 for finite-type centers `I` on a qcqs scheme `X` and `J` on the blow-up of `I`, there
 are `d ≥ 1` and a finite-type `L ≤ I^d` whose inverse image ideal on the blow-up is
 `I_E^d · J` (`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks
-Project Tag 0803; blueprint: `blueprint/finite_degree_approximation_blowup.tex`,
+Project Tag 0803; blueprint: `blueprint/src/version/detailed/nagata/nagata_new.tex`,
 `lemma:nagata-proj-closed-center-finite-degree-exists`).
 
 The proof is organized around the maximal degree-`d` candidate

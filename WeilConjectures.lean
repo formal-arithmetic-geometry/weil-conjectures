@@ -1,6 +1,7 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.AnalyticAux
+public import WeilConjectures.Blowup.Admissible
 public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.Affine.Localization
@@ -14,7 +15,6 @@ public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.FiniteDegree
-public import WeilConjectures.Blowup.Flattening
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.Principalization
@@ -27,8 +27,6 @@ public import WeilConjectures.Compactification.Modification
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.PartialSection
 public import WeilConjectures.Compactification.PowerTorsion
-public import WeilConjectures.Compactification.SchemeTheoreticImage
-public import WeilConjectures.Compactification.SchemeTheoreticallyDense
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.TwoOpen
 public import WeilConjectures.Compactification.TwoOpenComparison
