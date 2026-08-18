@@ -1,0 +1,321 @@
+% Section 3.1: finite geometric-Frobenius orbits.
+% This file is a chapter fragment; it is \input from
+% version/detailed/weil_conjectures_chapter3.tex and must not carry a preamble.
+
+\section{Finite geometric-Frobenius orbits}
+\label{sec:weil-finite-orbits}
+
+Throughout this section $\Omega$ is a set and $F\colon\Omega\to\Omega$ is a
+self-map; the case of interest is the geometric Frobenius acting on the
+$\overline{\Fq}$-points of a variety over $\Fq$, but neither bijectivity of
+$F$ nor any geometry is used.  We write $F^{[n]}$ for the $n$-fold iterate of
+$F$, so that $F^{[0]}=\mathrm{id}$ and $F^{[m+n]}=F^{[m]}\circ F^{[n]}$.
+
+The goal is \Cref{prop:weil-fixed-points-orbit-count}: the number of points
+fixed by $F^{[n]}$ is $\sum_{m\mid n}m\,a_m$, where $a_m$ counts the orbits of
+$F$ of exact size $m$; and its Möbius inversion
+\Cref{lemma:weil-orbit-count-mobius-numerator-eq}, which recovers $a_m$ from
+the fixed-point counts.
+
+\subsection{Periodic points and their orbits}
+
+\begin{definition}[Points of period $n$]
+  \label{def:weil-frobenius-fixed-point-set}
+  \lean{Function.ptsOfPeriod}
+  \leanok
+
+  For $n\in\mathbf N$ put
+  \[
+    \operatorname{Fix}_F(n):=\{x\in\Omega \mid F^{[n]}(x)=x\},
+  \]
+  the set of points of period $n$, and write
+  $N_n:=\#\operatorname{Fix}_F(n)$ for its cardinality whenever it is finite.
+  A point is \emph{periodic} if it lies in $\operatorname{Fix}_F(n)$ for some
+  $n\ge 1$; the least such $n$ is the \emph{minimal period} $d_F(x)$.
+\end{definition}
+
+\begin{lemma}[Fixed points from the minimal period]
+  \label{lemma:weil-frobenius-fixed-iff-orbit-length-divides}
+  \uses{def:weil-frobenius-fixed-point-set}
+  \lean{Function.isPeriodicPt_iff_minimalPeriod_dvd}
+  \leanok
+
+  For every $x\in\Omega$ and every $n\in\mathbf N$,
+  \[
+    F^{[n]}(x)=x
+    \quad\Longleftrightarrow\quad
+    d_F(x)\mid n .
+  \]
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  This is the defining property of the minimal period: the set of $n$ with
+  $F^{[n]}(x)=x$ is closed under subtraction and hence is the set of multiples
+  of its least positive element (or all of $\mathbf N$ when $x$ is not
+  periodic, in which case $d_F(x)=0$).
+\end{proof}
+
+\begin{lemma}[Monotonicity of the fixed-point sets]
+  \label{lemma:weil-frobenius-fixed-point-set-monotone}
+  \uses{def:weil-frobenius-fixed-point-set,
+    lemma:weil-frobenius-fixed-iff-orbit-length-divides}
+  \lean{Function.ptsOfPeriod_subset_of_dvd}
+  \leanok
+
+  If $m\mid n$ then $\operatorname{Fix}_F(m)\subseteq\operatorname{Fix}_F(n)$.
+  In particular $\operatorname{Fix}_F(n)$ finite implies
+  $\operatorname{Fix}_F(m)$ finite for every divisor $m$ of $n$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-frobenius-fixed-iff-orbit-length-divides}
+  \leanok
+  By \Cref{lemma:weil-frobenius-fixed-iff-orbit-length-divides} membership in
+  $\operatorname{Fix}_F(m)$ says $d_F(x)\mid m$, and $d_F(x)\mid m\mid n$.
+\end{proof}
+
+\begin{definition}[Orbit of a periodic point]
+  \label{def:weil-frobenius-orbit}
+  \uses{def:weil-frobenius-fixed-point-set}
+  \lean{Function.periodicOrbit}
+  \leanok
+
+  For $x\in\Omega$ let
+  \[
+    \mathcal O(x):=
+      \bigl(x,\;F(x),\;F^{[2]}(x),\;\dots,\;F^{[d_F(x)-1]}(x)\bigr)
+  \]
+  be the orbit of $x$, taken as a cyclic sequence, so that a cyclic shift of
+  the listed points is the same orbit.  Its length is $d_F(x)$, and for a
+  non-periodic $x$ it is the empty orbit.
+\end{definition}
+
+\begin{lemma}[Members of an orbit]
+  \label{lemma:weil-frobenius-orbit-members}
+  \uses{def:weil-frobenius-orbit}
+  \lean{Function.mem_periodicOrbit_iff_exists_lt_minimalPeriod}
+  \leanok
+
+  For all $x,y\in\Omega$,
+  \[
+    y\in\mathcal O(x)
+    \quad\Longleftrightarrow\quad
+    y=F^{[j]}(x)\ \text{for some}\ 0\le j<d_F(x).
+  \]
+  No periodicity hypothesis is needed: for a non-periodic $x$ both sides are
+  false.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  Immediate from \Cref{def:weil-frobenius-orbit}, whose underlying list is
+  $j\mapsto F^{[j]}(x)$ on $\{0,\dots,d_F(x)-1\}$.
+\end{proof}
+
+\begin{lemma}[Orbits are equal or disjoint]
+  \label{lemma:weil-frobenius-orbits-equal-or-disjoint}
+  \uses{def:weil-frobenius-orbit, lemma:weil-frobenius-orbit-members}
+  \lean{Function.periodicOrbit_eq_iff_mem_periodicOrbit}
+  \leanok
+
+  Let $x$ be periodic.  Then for every $y\in\Omega$,
+  \[
+    \mathcal O(y)=\mathcal O(x)
+    \quad\Longleftrightarrow\quad
+    y\in\mathcal O(x).
+  \]
+  Consequently two orbits that share a point are equal.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-frobenius-orbit-members}
+  \leanok
+  If $y\in\mathcal O(x)$ then $y=F^{[j]}(x)$ by
+  \Cref{lemma:weil-frobenius-orbit-members}, and iterating $F$ does not change
+  the orbit of a periodic point, so $\mathcal O(y)=\mathcal O(x)$.
+  Conversely, if $\mathcal O(y)=\mathcal O(x)$ then $y$ is periodic, because
+  $\mathcal O(x)$ is nonempty while the orbit of a non-periodic point is
+  empty; and a periodic point lies on its own orbit, so
+  $y\in\mathcal O(y)=\mathcal O(x)$.
+\end{proof}
+
+\begin{lemma}[Periods are constant along an orbit]
+  \label{lemma:weil-frobenius-orbit-period-invariant}
+  \uses{def:weil-frobenius-fixed-point-set, lemma:weil-frobenius-orbit-members}
+  \lean{Function.IsPeriodicPt.of_mem_periodicOrbit}
+  \leanok
+
+  If $x\in\operatorname{Fix}_F(n)$ and $y\in\mathcal O(x)$ then
+  $y\in\operatorname{Fix}_F(n)$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:weil-frobenius-orbit-members}
+  \leanok
+  Write $y=F^{[j]}(x)$ by \Cref{lemma:weil-frobenius-orbit-members}; then
+  $F^{[n]}(y)=F^{[j]}(F^{[n]}(x))=F^{[j]}(x)=y$.
+\end{proof}
+
+\subsection{Counting orbits}
+
+\begin{definition}[Orbits of a given degree]
+  \label{def:weil-degree-frobenius-orbit-set}
+  \uses{def:weil-frobenius-orbit}
+  \lean{Function.orbitsOfMinimalPeriod}
+  \leanok
+
+  For $m\in\mathbf N$ let
+  \[
+    \mathcal O_m:=
+      \{\mathcal O(x) \mid x\ \text{periodic},\ d_F(x)=m\}
+  \]
+  be the set of orbits of degree $m$, that is, of orbits consisting of exactly
+  $m$ points.
+\end{definition}
+
+\begin{definition}[Orbit counts]
+  \label{def:weil-frobenius-orbit-count}
+  \uses{def:weil-degree-frobenius-orbit-set}
+  \lean{Function.orbitCount}
+  \leanok
+
+  Let $a_m:=\#\mathcal O_m$ be the number of orbits of degree $m$, with the
+  convention that an infinite set has count $0$.
+\end{definition}
+
+\begin{lemma}[No orbits of degree zero]
+  \label{lemma:weil-frobenius-orbit-count-zero}
+  \uses{def:weil-degree-frobenius-orbit-set, def:weil-frobenius-orbit-count}
+  \lean{Function.orbitsOfMinimalPeriod_zero, Function.orbitCount_zero}
+  \leanok
+
+  $\mathcal O_0=\varnothing$ and $a_0=0$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  A periodic point has $d_F(x)\ge 1$.
+\end{proof}
+
+\begin{proposition}[Fixed points counted orbit by orbit]
+  \label{prop:weil-fixed-points-orbit-count}
+  \uses{def:weil-frobenius-fixed-point-set,
+    lemma:weil-frobenius-fixed-iff-orbit-length-divides,
+    lemma:weil-frobenius-orbits-equal-or-disjoint,
+    lemma:weil-frobenius-orbit-period-invariant,
+    def:weil-frobenius-orbit-count}
+  \lean{Function.ncard_ptsOfPeriod_eq_sum_divisors_mul_orbitCount}
+  \leanok
+
+  Let $n\ge 1$ and suppose $\operatorname{Fix}_F(n)$ is finite.  Then
+  \[
+    N_n=\sum_{m\mid n}m\,a_m .
+  \]
+\end{proposition}
+
+\begin{proof}
+  \uses{lemma:weil-frobenius-fixed-iff-orbit-length-divides,
+    lemma:weil-frobenius-orbit-members,
+    lemma:weil-frobenius-orbits-equal-or-disjoint,
+    lemma:weil-frobenius-orbit-period-invariant}
+  \leanok
+  Partition the finite set $\operatorname{Fix}_F(n)$ into the fibres of
+  $x\mapsto\mathcal O(x)$.
+
+  The fibre over $\mathcal O(x)$ is $\mathcal O(x)$ itself: by
+  \Cref{lemma:weil-frobenius-orbits-equal-or-disjoint} a point $y$ has
+  $\mathcal O(y)=\mathcal O(x)$ exactly when $y\in\mathcal O(x)$, and every
+  such $y$ again lies in $\operatorname{Fix}_F(n)$ by
+  \Cref{lemma:weil-frobenius-orbit-period-invariant}.  By
+  \Cref{lemma:weil-frobenius-orbit-members} that fibre is the image of
+  $\{0,\dots,d_F(x)-1\}$ under $j\mapsto F^{[j]}(x)$, and this map is
+  injective below the minimal period, so the fibre has exactly $d_F(x)$
+  elements.
+
+  Every orbit occurring is of degree dividing $n$, because
+  $x\in\operatorname{Fix}_F(n)$ gives $d_F(x)\mid n$ by
+  \Cref{lemma:weil-frobenius-fixed-iff-orbit-length-divides}.  Grouping the
+  fibres by that degree, the orbits of degree $m$ occurring are precisely all
+  of $\mathcal O_m$: conversely, if $d_F(x)=m$ and $m\mid n$ then
+  $x\in\operatorname{Fix}_F(n)$.  Summing $d_F(x)=m$ over the $a_m$ orbits of
+  degree $m$, and then over the divisors $m$ of $n$, gives
+  $N_n=\sum_{m\mid n}m\,a_m$.
+\end{proof}
+
+\subsection{Möbius inversion}
+
+\begin{definition}[Möbius numerator]
+  \label{def:weil-orbit-count-mobius-numerator}
+  \uses{def:weil-frobenius-fixed-point-set}
+  \lean{Function.moebiusPtsOfPeriodSum}
+  \leanok
+
+  For $m\in\mathbf N$ let
+  \[
+    M_m:=\sum_{r\mid m}\mu(r)\,N_{m/r}\in\Z ,
+  \]
+  where $\mu$ is the Möbius function.
+\end{definition}
+
+\begin{lemma}[Möbius inversion of the orbit count]
+  \label{lemma:weil-orbit-count-mobius-numerator-eq}
+  \uses{def:weil-orbit-count-mobius-numerator,
+    prop:weil-fixed-points-orbit-count,
+    lemma:weil-frobenius-fixed-point-set-monotone}
+  \lean{Function.moebiusPtsOfPeriodSum_eq_mul_orbitCount}
+  \leanok
+
+  Let $m\ge 1$ and suppose $\operatorname{Fix}_F(m)$ is finite.  Then
+  \[
+    M_m=m\,a_m .
+  \]
+\end{lemma}
+
+\begin{proof}
+  \uses{prop:weil-fixed-points-orbit-count,
+    lemma:weil-frobenius-fixed-point-set-monotone}
+  \leanok
+  By \Cref{lemma:weil-frobenius-fixed-point-set-monotone} every
+  $\operatorname{Fix}_F(k)$ with $k\mid m$ is finite, so
+  \Cref{prop:weil-fixed-points-orbit-count} gives
+  $\sum_{i\mid k}i\,a_i=N_k$ for every divisor $k$ of $m$.  Möbius inversion
+  on the divisor-closed set of divisors of $m$ turns this into
+  $\sum_{r\mid m}\mu(r)N_{m/r}=m\,a_m$.
+\end{proof}
+
+\begin{corollary}[Integrality]
+  \label{cor:weil-orbit-count-mobius-integrality}
+  \uses{lemma:weil-orbit-count-mobius-numerator-eq}
+  \lean{Function.natCast_dvd_moebiusPtsOfPeriodSum}
+  \leanok
+
+  Let $m\ge 1$ and suppose $\operatorname{Fix}_F(m)$ is finite.  Then
+  $m\mid M_m$ in $\Z$.
+\end{corollary}
+
+\begin{proof}
+  \uses{lemma:weil-orbit-count-mobius-numerator-eq}
+  \leanok
+  Immediate from \Cref{lemma:weil-orbit-count-mobius-numerator-eq}.
+\end{proof}
+
+\begin{corollary}[Recovery of the orbit counts]
+  \label{cor:weil-orbit-count-mobius-recovery}
+  \uses{lemma:weil-orbit-count-mobius-numerator-eq,
+    cor:weil-orbit-count-mobius-integrality}
+  \lean{Function.moebiusPtsOfPeriodSum_div_natCast}
+  \leanok
+
+  Let $m\ge 1$ and suppose $\operatorname{Fix}_F(m)$ is finite.  Then
+  \[
+    a_m=\frac{1}{m}\sum_{r\mid m}\mu(r)\,N_{m/r}.
+  \]
+\end{corollary}
+
+\begin{proof}
+  \uses{lemma:weil-orbit-count-mobius-numerator-eq}
+  \leanok
+  Divide \Cref{lemma:weil-orbit-count-mobius-numerator-eq} by $m$, which is
+  legitimate in $\Z$ by \Cref{cor:weil-orbit-count-mobius-integrality}.
+\end{proof}
