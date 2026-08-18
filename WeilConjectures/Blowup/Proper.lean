@@ -5,98 +5,81 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Gluing
 
 /-!
 
-# Properness of the blow-up
+# Properness of the global blow-up
 
-We prove that the blow-up of a scheme along a finite-type quasi-coherent ideal is
-proper over the base (blueprint: `thm:nagata-global-blowup-proper`; proof order
-item 14).
+We show that the blow-up map `I.blowupMap : I.blowup ⟶ X` of a scheme `X` along a
+quasi-coherent ideal `I : X.IdealSheafData` is proper, provided `I` is of finite type.
 
-The affine case reduces to Mathlib's properness of `Proj` over its degree-zero
-spectrum: the Rees algebra of a finitely generated ideal is of finite type over its
-degree-zero part (`AlgebraicGeometry.algebraFiniteType_reesGradingZero`, from
-`reesAlgebra.fg`), whence `Proj.toSpecZero` of the Rees grading is proper. The global
-case follows because properness is Zariski-local on the target and the blow-up
-restricts to the affine blow-up over every affine open.
+Mathlib has no predicate for a finite-type quasi-coherent ideal sheaf, so the finite-type
+condition of the blueprint is spelled out here as `∀ U : X.affineOpens, (I.ideal U).FG`.
+On a locally Noetherian scheme this is automatic, which is recorded as an instance.
 
 ## Main results
 
-- `AlgebraicGeometry.AffineBlowup.isProper_toSpec`: the affine blow-up of a finitely
-  generated ideal is proper (blueprint: `lemma:nagata-affine-blowup-proper`);
-- `AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap`: the blow-up of a
-  finite-type quasi-coherent ideal is proper
-  (blueprint: `thm:nagata-global-blowup-proper`). The finite-type hypothesis is
-  phrased as finite generation of the ideal of sections on every affine open, which is
-  `Scheme.IdealSheafData.FiniteType` of `WeilConjectures.Blowup.Exceptional`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap_restrict` — the restriction of
+  the blow-up map over an affine open on which the ideal is finitely generated is proper
+  (blueprint: `lemma:nagata-global-blowup-proper-local`).
+- `AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap` — the blow-up map along an
+  ideal that is finitely generated on every affine open is proper
+  (blueprint: `thm:nagata-global-blowup-proper`).
+
+## Blueprint
+
+This file implements `lemma:nagata-global-blowup-proper-local` and
+`thm:nagata-global-blowup-proper` of the Nagata compactification blueprint.
+
+The blueprint deduces properness from projectivity of `b_{X,𝓘}`
+(`thm:nagata-global-blowup-projective`), which in turn goes through the comparison of the
+blow-up with a relative `Proj`. We instead prove properness directly, by locality on the
+target: `IsProper` is Zariski-local on the target, and over an affine open the blow-up map
+is, by `prop:nagata-global-blowup-affine-restrict`, the affine blow-up, which is proper by
+`lemma:nagata-affine-blowup-proper`. Projectivity of the blow-up remains unformalized.
 
 -/
 
 @[expose] public section
 
-noncomputable section
-
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
-namespace AlgebraicGeometry
-
-section Affine
-
-variable {A : Type u} [CommRing A] (I : Ideal A)
-
-/-- The Rees algebra of a finitely generated ideal is of finite type over the
-degree-zero part of its grading. -/
-lemma algebraFiniteType_reesGradingZero (hI : I.FG) :
-    Algebra.FiniteType (reesGrading I 0) (reesAlgebra I) := by
-  have h1 : Algebra.FiniteType A (reesAlgebra I) :=
-    (Subalgebra.fg_iff_finiteType _).mp (reesAlgebra.fg hI)
-  rw [← RingHom.finiteType_algebraMap] at h1 ⊢
-  have hcomp : (algebraMap (reesGrading I 0) (reesAlgebra I)).comp
-      (reesGradingZero I).toRingHom = algebraMap A (reesAlgebra I) := by
-    ext a
-    rfl
-  rw [← hcomp] at h1
-  exact RingHom.FiniteType.of_comp_finiteType h1
-
-/-- **Properness of the affine blow-up**: the blow-up of `Spec A` along a finitely
-generated ideal is proper over `Spec A`.
-(Blueprint: `lemma:nagata-affine-blowup-proper`.) -/
-theorem AffineBlowup.isProper_toSpec (hI : I.FG) : IsProper (AffineBlowup.toSpec I) := by
-  haveI := algebraFiniteType_reesGradingZero I hI
-  haveI : IsIso (Spec.map (CommRingCat.ofHom (reesGradingZero I).toRingHom)) := by
-    rw [isIso_SpecMap_iff]
-    exact (reesGradingZero I).bijective
-  unfold AffineBlowup.toSpec
-  rw [MorphismProperty.cancel_right_of_respectsIso (P := @IsProper)]
-  infer_instance
-
-end Affine
-
-namespace Scheme.IdealSheafData
+namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 variable {X : Scheme.{u}} (I : X.IdealSheafData)
 
-/-- **Properness of the blow-up** (blueprint: `thm:nagata-global-blowup-proper`): the
-blow-up of a scheme along a finite-type quasi-coherent ideal is proper over the
-base. -/
-theorem isProper_blowupMap (hI : ∀ U : X.affineOpens, (I.ideal U).FG) :
-    IsProper I.blowupMap := by
-  refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsProper)
-    (fun U : X.affineOpens ↦ U.1) (iSup_affineOpens_eq_top X) fun U ↦ ?_
+/-- **Local properness of the global blow-up**: the blow-up map is proper over an affine
+open on which the ideal is finitely generated.
+(blueprint: `lemma:nagata-global-blowup-proper-local`) -/
+lemma isProper_blowupMap_restrict {U : X.affineOpens} (h : (I.ideal U).FG) :
+    IsProper (I.blowupMap ∣_ U.1) := by
+  have happ : IsProper (I.blowupNatTrans.app U) := by
+    rw [I.blowupNatTrans_app U, MorphismProperty.cancel_right_of_respectsIso @IsProper]
+    exact AffineBlowup.isProper_toSpec _ h
   have e : Arrow.mk (I.blowupMap ∣_ U.1.ι.opensRange) ≅ Arrow.mk (I.blowupNatTrans.app U) :=
     morphismRestrictArrowIso I.blowupMap (I.blowupNatTrans.app U) (I.blowupι_blowupMap U)
       (by rw [Scheme.Opens.opensRange_ι]; exact I.blowupMap_preimage U)
-  have hres : IsProper (I.blowupMap ∣_ U.1.ι.opensRange) := by
-    rw [MorphismProperty.arrow_mk_iso_iff (P := @IsProper) e, I.blowupNatTrans_app U]
-    haveI := AffineBlowup.isProper_toSpec (I.ideal U) (hI U)
-    rw [MorphismProperty.cancel_right_of_respectsIso (P := @IsProper)]
-    infer_instance
-  rwa [Scheme.Opens.opensRange_ι] at hres
+  have H : IsProper (I.blowupMap ∣_ U.1.ι.opensRange) :=
+    ((MorphismProperty.arrow_mk_iso_iff @IsProper e).mpr happ)
+  rwa [Scheme.Opens.opensRange_ι] at H
 
-end Scheme.IdealSheafData
+/-- **Properness of the global blow-up**: if the ideal is finitely generated on every affine
+open, the blow-up map `Bl_I(X) ⟶ X` is proper.
+(blueprint: `thm:nagata-global-blowup-proper`) -/
+theorem isProper_blowupMap (hI : ∀ U : X.affineOpens, (I.ideal U).FG) :
+    IsProper I.blowupMap :=
+  IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsProper) (fun U : X.affineOpens ↦ U.1)
+    (iSup_affineOpens_eq_top X) fun U ↦ I.isProper_blowupMap_restrict (hI U)
 
-end AlgebraicGeometry
+/-- The blow-up of a locally Noetherian scheme along any quasi-coherent ideal is proper. -/
+instance isProper_blowupMap_of_isLocallyNoetherian [IsLocallyNoetherian X] :
+    IsProper I.blowupMap :=
+  I.isProper_blowupMap fun U ↦
+    have := IsLocallyNoetherian.component_noetherian U
+    IsNoetherian.noetherian (I.ideal U)
+
+end AlgebraicGeometry.Scheme.IdealSheafData
