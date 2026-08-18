@@ -305,8 +305,7 @@ def boundedOrbitFinset (D : FiniteOrbitFrobeniusData) (r : ℕ) :
 
 /-- `lemma:weil-bounded-frobenius-orbit-finset-mem`.  Membership criterion
 for the bounded orbit finsets at positive bounds. -/
-theorem mem_boundedOrbitFinset (D : FiniteOrbitFrobeniusData) {r : ℕ}
-    (_hr : 1 ≤ r) (O : D.Orbit) :
+theorem mem_boundedOrbitFinset (D : FiniteOrbitFrobeniusData) {r : ℕ} (O : D.Orbit) :
     O ∈ D.boundedOrbitFinset r ↔ Orbit.degree O ≤ r := by
   classical
   rw [boundedOrbitFinset, Finset.mem_filter]
@@ -329,13 +328,12 @@ def degreeOrbitFinset (D : FiniteOrbitFrobeniusData) (m : ℕ) :
 
 /-- `lemma:weil-degree-frobenius-orbit-finset-mem`.  Membership criterion for
 the one-degree orbit finsets at positive degrees. -/
-theorem mem_degreeOrbitFinset (D : FiniteOrbitFrobeniusData) {m : ℕ}
-    (hm : 1 ≤ m) (O : D.Orbit) :
+theorem mem_degreeOrbitFinset (D : FiniteOrbitFrobeniusData) {m : ℕ} (O : D.Orbit) :
     O ∈ D.degreeOrbitFinset m ↔ Orbit.degree O = m := by
   rw [degreeOrbitFinset, Finset.mem_filter]
   constructor
   · exact fun hO => hO.2
-  · exact fun hO => ⟨(D.mem_boundedOrbitFinset hm O).mpr hO.le, hO⟩
+  · exact fun hO => ⟨(D.mem_boundedOrbitFinset O).mpr hO.le, hO⟩
 
 /-- `def:weil-frobenius-orbit-count`.  The number `a_m(D) = #𝒪_m` of
 Frobenius orbits of one degree. -/
@@ -359,7 +357,7 @@ theorem mem_relevantOrbitFinset (D : FiniteOrbitFrobeniusData) {n : ℕ}
   constructor
   · exact fun hO => hO.2
   · intro hO
-    exact ⟨(D.mem_boundedOrbitFinset hn O).mpr (Nat.le_of_dvd hn hO), hO⟩
+    exact ⟨(D.mem_boundedOrbitFinset O).mpr (Nat.le_of_dvd hn hO), hO⟩
 
 open scoped Classical in
 /-- `def:weil-fixed-point-orbit-union`.  The orbitwise union
@@ -417,19 +415,19 @@ def relevantOrbitDegreeSigmaEquiv (D : FiniteOrbitFrobeniusData) {n : ℕ}
   toFun O :=
     ⟨⟨Orbit.degree O.1,
         Nat.mem_divisors.mpr ⟨(D.mem_relevantOrbitFinset hn O.1).mp O.2, hn.ne'⟩⟩,
-      ⟨O.1, (D.mem_degreeOrbitFinset O.1.degree_pos O.1).mpr rfl⟩⟩
+      ⟨O.1, (D.mem_degreeOrbitFinset O.1).mpr rfl⟩⟩
   invFun p :=
     ⟨p.2.1, by
       have hm : p.1.1 ∣ n := (Nat.mem_divisors.mp p.1.2).1
       have hm0 : 0 < p.1.1 := Nat.pos_of_dvd_of_pos hm hn
       have hdeg : Orbit.degree p.2.1 = p.1.1 :=
-        (D.mem_degreeOrbitFinset hm0 p.2.1).mp p.2.2
+        (D.mem_degreeOrbitFinset p.2.1).mp p.2.2
       exact (D.mem_relevantOrbitFinset hn p.2.1).mpr (by rw [hdeg]; exact hm)⟩
   left_inv O := Subtype.ext rfl
   right_inv p := by
     obtain ⟨⟨m, hm⟩, ⟨O, hO⟩⟩ := p
     have hm0 : 0 < m := Nat.pos_of_dvd_of_pos (Nat.mem_divisors.mp hm).1 hn
-    have hdeg : Orbit.degree O = m := (D.mem_degreeOrbitFinset hm0 O).mp hO
+    have hdeg : Orbit.degree O = m := (D.mem_degreeOrbitFinset O).mp hO
     subst hdeg
     rfl
 
@@ -447,9 +445,9 @@ theorem sum_degree_eq_sum_divisors_mul_orbitCount (D : FiniteOrbitFrobeniusData)
     constructor
     · intro hdvd
       exact ⟨Orbit.degree O, Nat.mem_divisors.mpr ⟨hdvd, by omega⟩,
-        (D.mem_degreeOrbitFinset O.degree_pos O).mpr rfl⟩
+        (D.mem_degreeOrbitFinset O).mpr rfl⟩
     · rintro ⟨m, hm, hO⟩
-      rw [(D.mem_degreeOrbitFinset (Nat.pos_of_mem_divisors hm) O).mp hO]
+      rw [(D.mem_degreeOrbitFinset O).mp hO]
       exact (Nat.mem_divisors.mp hm).1
   have hdisj : (↑n.divisors : Set ℕ).PairwiseDisjoint
       fun m => D.degreeOrbitFinset m := by
@@ -457,14 +455,14 @@ theorem sum_degree_eq_sum_divisors_mul_orbitCount (D : FiniteOrbitFrobeniusData)
     rw [Function.onFun, Finset.disjoint_left]
     intro O hO hO'
     apply hne
-    rw [← (D.mem_degreeOrbitFinset (Nat.pos_of_mem_divisors hm) O).mp hO,
-      ← (D.mem_degreeOrbitFinset (Nat.pos_of_mem_divisors hm') O).mp hO']
+    rw [← (D.mem_degreeOrbitFinset O).mp hO,
+      ← (D.mem_degreeOrbitFinset O).mp hO']
   rw [hunion, Finset.sum_biUnion hdisj]
   refine Finset.sum_congr rfl fun m hm => ?_
   have hm1 : 1 ≤ m := Nat.pos_of_mem_divisors hm
   calc ∑ O ∈ D.degreeOrbitFinset m, Orbit.degree O
       = ∑ _O ∈ D.degreeOrbitFinset m, m :=
-        Finset.sum_congr rfl fun O hO => (D.mem_degreeOrbitFinset hm1 O).mp hO
+        Finset.sum_congr rfl fun O hO => (D.mem_degreeOrbitFinset O).mp hO
     _ = (D.degreeOrbitFinset m).card * m := by
         rw [Finset.sum_const, smul_eq_mul]
     _ = m * D.orbitCount m := by rw [orbitCount, mul_comm]

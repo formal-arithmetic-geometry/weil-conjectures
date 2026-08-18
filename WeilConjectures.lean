@@ -39,14 +39,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.NumberTheory.ArithmeticFunction.Moebius
-public import WeilConjectures.Mathlib.NumberTheory.Divisors
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.ClosedPointInterfaces
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.EulerFactors
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Exp
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.IntegralEulerFamilies
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.LiteralIntegralRealization
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.OrbitEulerProducts
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.Derived
@@ -60,5 +55,7 @@ public import WeilConjectures.PointCount
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
+public import WeilConjectures.ZetaCounting.ClosedPoints
+public import WeilConjectures.ZetaCounting.EulerProducts
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
