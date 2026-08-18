@@ -29,3 +29,26 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: leanprover/lean-action@v1
+
+      # `lake build` only compiles what the root module transitively reaches, so a
+      # source file that nothing imports is invisible to it and `WeilConjectures.lean`
+      # can fall out of date with CI still green. `.orchestra/validation.sh` runs this
+      # check locally, which so far has been the only way anyone notices.
+      #
+      # Same job rather than a second one: the toolchain and the Mathlib cache are
+      # already in place here, and the check costs a few seconds. `!cancelled()` so a
+      # failing build cannot hide import-list drift — the check does not need the
+      # project to have compiled. Not `always()`, which would also fire on the runs
+      # the `concurrency` block above deliberately cancels.
+      #
+      # `--lib WeilConjectures` is required, and the hint below deliberately does not
+      # repeat the suggestion mk_all prints: bare `lake exe mk_all --git` would also
+      # generate root files for the `Definitions`/`Challenge`/`Solution` comparator
+      # libraries, whose roots are hand-written under `Comparator/Weil/`.
+      - name: Verify every module is listed in the root import file
+        if: ${{ !cancelled() }}
+        run: |
+          lake exe mk_all --lib WeilConjectures --git --check || {
+            echo "::error file=WeilConjectures.lean::Out of date. Run 'lake exe mk_all --lib WeilConjectures --git' and commit the result. That form exits 1 when it updates the file, which means it did the work — only the --check form's exit code means failure."
+            exit 1
+          }
