@@ -176,8 +176,7 @@ lemma _root_.AlgebraicGeometry.AffineBlowup.iSup_basicOpen_reesX_eq_top_of_span
       intro hxy
       have hxI : x ∈ I := hs ▸ hx
       have hyI : y ∈ I := hs ▸ hy
-      rw [show reesX I (x + y) hxy = reesX I x hxI + reesX I y hyI from
-        reesX_add I hxI hyI]
+      rw [reesX_add I hxI hyI]
       exact add_mem (ihx hxI) (ihy hyI)
     | smul a x hx ih =>
       intro hax
@@ -362,8 +361,7 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_specMap_comp
   have hfac : Spec.map β =
       Spec.map ((Scheme.ΓSpecIso S).hom ≫ β) ≫ (isAffineOpen_top (Spec S)).fromSpec := by
     rw [IsAffineOpen.fromSpec_top, Scheme.isoSpec_Spec_inv, ← Spec.map_comp]
-    rw [show (Scheme.ΓSpecIso S).inv ≫ (Scheme.ΓSpecIso S).hom ≫ β = β from
-      Iso.inv_hom_id_assoc _ _]
+    rw [Iso.inv_hom_id_assoc]
   have hpre : (⊤ : (Spec S').Opens) ≤
       (Spec.map ((Scheme.ΓSpecIso S).hom ≫ β) ≫ (isAffineOpen_top (Spec S)).fromSpec) ⁻¹ᵁ
         ((⟨⊤, isAffineOpen_top _⟩ : (Spec S).affineOpens) : (Spec S).Opens) := by
@@ -592,8 +590,9 @@ lemma Scheme.IdealSheafData.quasiCompact_blowupMap {X : Scheme.{u}}
   rw [quasiCompact_iff_forall_isAffineOpen]
   intro U hU
   have h1 : K.blowupMap ⁻¹ᵁ U = (K.blowupι ⟨U, hU⟩).opensRange := K.blowupMap_preimage ⟨U, hU⟩
-  rw [show (K.blowupMap ⁻¹ᵁ U : Set K.blowup) =
-    ((K.blowupι ⟨U, hU⟩).opensRange : Set K.blowup) from congrArg _ h1]
+  have h2 : (K.blowupMap ⁻¹ᵁ U : Set K.blowup) =
+      ((K.blowupι ⟨U, hU⟩).opensRange : Set K.blowup) := congrArg _ h1
+  rw [h2]
   have := AffineBlowup.compactSpace_of_fg (hK ⟨U, hU⟩)
   exact isCompact_range (K.blowupι ⟨U, hU⟩).continuous
 

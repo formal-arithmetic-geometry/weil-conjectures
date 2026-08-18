@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Admissible
-public import WeilConjectures.Compactification.PartialSection
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Compactification.Defs
 
 /-!
@@ -145,12 +145,12 @@ theorem Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup
     (h : V ⟶ pullback x y) [QuasiCompact h] [QuasiSeparated h]
     (hfac : Set.range (h ≫ pullback.fst x y) ⊆ (U : Set X))
     (h' : V ⟶ pullback (B.π ≫ x) y) [QuasiCompact h']
-    (hlift : h' ≫ Nagata.partialSectionOpenι x y B.π = h) :
+    (hlift : h' ≫ partialSectionOpenι x y B.π = h) :
     h'.ker =
       (AlgebraicGeometry.strictTransformι h.imageι
-          (Nagata.partialSectionOpenι x y B.π)
+          (partialSectionOpenι x y B.π)
           (pullback.fst x y ⁻¹ᵁ B.preservedOpen) ≫
-        pullback.snd h.imageι (Nagata.partialSectionOpenι x y B.π)).ker := by
+        pullback.snd h.imageι (partialSectionOpenι x y B.π)).ker := by
   sorry
 
 end ImageTransport
@@ -270,11 +270,11 @@ theorem Compactification.nonempty_properExtension
     Nonempty (Compactification.ProperExtension u V c) := by
   -- The graph construction of the blueprint: `V^gr` is the open strict transform of
   -- the scheme-theoretic image of the graph `V ⟶ c.Z ×_S U`, supplied by the
-  -- partial-section lemma (`Nagata.partialSectionRestrictIso`), the image transport
+  -- partial-section lemma (`partialSectionRestrictIso`), the image transport
   -- lemma (`Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`) and elimination
   -- of indeterminacy (`exists_admissibleBlowup_strictTransform_open`); `ψ` is the
   -- second projection, proper because `c.Z ×_S U ⟶ U` is proper
-  -- (`Nagata.isProper_imageι_fst`).
+  -- (`isProper_imageι_fst`).
   sorry
 
 end GraphExtension

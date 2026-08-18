@@ -106,8 +106,8 @@ lemma appLE_specMap_comp_fromSpec (U : X.affineOpens) {S : CommRingCat.{u}}
   rw [← Scheme.Hom.appLE_comp_appLE (Spec.map φ) U.2.fromSpec U.1 ⊤ ⊤ e₁ e₂]
   have h1 : U.2.fromSpec.appLE U.1 ⊤ e₁ = (Scheme.ΓSpecIso Γ(X, U.1)).inv := by
     rw [Scheme.Hom.appLE, U.2.fromSpec_app_self, Category.assoc, ← Functor.map_comp]
-    rw [show (eqToHom U.2.fromSpec_preimage_self).op ≫ (homOfLE e₁).op = 𝟙 _ from
-      Subsingleton.elim _ _]
+    rw [Subsingleton.elim ((eqToHom U.2.fromSpec_preimage_self).op ≫ (homOfLE e₁).op)
+      (𝟙 _)]
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
   have h2 : (Spec.map φ).appLE ⊤ ⊤ e₂ =
       (Scheme.ΓSpecIso Γ(X, U.1)).hom ≫ φ ≫ (Scheme.ΓSpecIso S).inv := by

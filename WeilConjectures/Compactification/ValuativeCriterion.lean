@@ -234,12 +234,12 @@ private lemma exists_flat_presentation_of_field_point {X : Scheme.{u}} {K : Type
     have : Flat (Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, V) P))) :=
       Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
     infer_instance
+  have hpdef : p = Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, V) P)) ≫
+      hV.isoSpec.inv ≫ V.ι := rfl
+  have hπC : π.comp (algebraMap ↥Γ(X, V) P) = φ.hom := MvPolynomial.eval₂Hom_comp_C _ _
   have hi₁p : Spec.map (CommRingCat.ofHom π) ≫ p = i₁ := by
-    rw [show p = Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, V) P)) ≫
-        hV.isoSpec.inv ≫ V.ι from rfl, ← Category.assoc, ← Spec.map_comp,
-      ← CommRingCat.ofHom_comp,
-      show π.comp (algebraMap ↥Γ(X, V) P) = φ.hom from
-        MvPolynomial.eval₂Hom_comp_C _ _, CommRingCat.ofHom_hom, hφ]
+    rw [hpdef, ← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hπC,
+      CommRingCat.ofHom_hom, hφ]
   exact ⟨CommRingCat.of P, CommRingCat.ofHom π, p, hπ, hpflat, hi₁p⟩
 
 open IsLocalRing in
@@ -273,17 +273,15 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       CommRingCat.ofHom (algebraMap pr.R pr.K) := by
     ext a
     rfl
+  have hαVdef : αV = Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA')) ≫ pr.α := rfl
   have hprobe : pr.η ≫ pullback.snd h p =
       Spec.map (CommRingCat.ofHom (algebraMap ↥VA' pr.K)) ≫ αV := by
-    rw [pr.commSq.w, show αV = Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA')) ≫ pr.α
-      from rfl, ← Category.assoc, ← Spec.map_comp, halg]
+    rw [pr.commSq.w, hαVdef, ← Category.assoc, ← Spec.map_comp, halg]
+  have he'closed : (Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA'))) (closedPoint ↥VA') =
+      closedPoint pr.R := IsLocalRing.comap_closedPoint _
   have hclosed : αV (closedPoint ↥VA') =
       Spec.map π (closedPoint (CommRingCat.of K)) := by
-    rw [show αV = Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA')) ≫ pr.α from rfl,
-      Scheme.Hom.comp_apply,
-      show (Spec.map (CommRingCat.ofHom (e' : pr.R →+* ↥VA'))) (closedPoint ↥VA') =
-        closedPoint pr.R from IsLocalRing.comap_closedPoint _,
-      pr.closedPoint_eq]
+    rw [hαVdef, Scheme.Hom.comp_apply, he'closed, pr.closedPoint_eq]
   -- Step 5: descend the residue map of `VA'` to a field embedding `τ : K → k'`.
   let ρ : P ⟶ CommRingCat.of ↥VA' := Spec.preimage αV
   have hρ : Spec.map ρ = αV := Spec.map_preimage _
@@ -336,8 +334,9 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
     rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
       ← CommRingCat.ofHom_comp]
     congr 1
+  have hθdef : CommRingCat.ofHom θ = pre ≫ ρ := rfl
   have hθspec : Spec.map (CommRingCat.ofHom θ) = αV ≫ (p ≫ f) := by
-    rw [show CommRingCat.ofHom θ = pre ≫ ρ from rfl, Spec.map_comp, hρ, hpre]
+    rw [hθdef, Spec.map_comp, hρ, hpre]
   have hηθ : Spec.map (CommRingCat.ofHom (algebraMap ↥VA' pr.K)) ≫
       Spec.map (CommRingCat.ofHom θ) = (pr.η ≫ pullback.fst h p ≫ h) ≫ f := by
     rw [hθspec, ← reassoc_of% hprobe, ← pullback.condition_assoc]
@@ -364,15 +363,17 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
   have hE : Spec.map (CommRingCat.ofHom ιC) ≫ gC = αV ≫ p := by
     have h1 : αV ≫ p = l' := hl'uniq (αV ≫ p) ⟨by
         rw [← Category.assoc, ← hprobe, Category.assoc, ← pullback.condition], rfl⟩
+    have hιCalg : (algebraMap ↥VA' pr.K).comp ιC = algebraMap ↥C pr.K := rfl
+    have hsqCi₂ : sqC.i₂ = Spec.map (CommRingCat.ofHom γ) := rfl
+    have hιCγ : ιC.comp γ = θ := by
+      ext r
+      rfl
     have h2 : Spec.map (CommRingCat.ofHom ιC) ≫ gC = l' := by
       refine hl'uniq _ ⟨?_, ?_⟩
-      · rw [← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
-          show (algebraMap ↥VA' pr.K).comp ιC = algebraMap ↥C pr.K from rfl]
+      · rw [← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hιCalg]
         exact hgC1
-      · rw [Category.assoc, hgC2,
-          show sqC.i₂ = Spec.map (CommRingCat.ofHom γ) from rfl,
-          ← Spec.map_comp, ← CommRingCat.ofHom_comp,
-          show ιC.comp γ = θ from by ext r; rfl, hθspec]
+      · rw [Category.assoc, hgC2, hsqCi₂, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+          hιCγ, hθspec]
     rw [h2, ← h1]
   -- Step 9: restrict `gC` along the closed immersion `Spec A'' ⟶ Spec C`.
   have : ValuationRing ↥A''.toSubring := inferInstanceAs (ValuationRing ↥A'')
@@ -386,11 +387,11 @@ private lemma existence_core {U X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶
       π ≫ CommRingCat.ofHom τ := by
     apply CommRingCat.hom_ext
     simpa using hτπ.symm
+  have hg''def : g'' = Spec.map (CommRingCat.ofHom rr) ≫ gC := rfl
+  have hsubrr : (A''.toSubring.subtype).comp rr = (residue ↥VA').comp ιC := rfl
   have hI : Spec.map (CommRingCat.ofHom A''.toSubring.subtype) ≫ g'' =
       Spec.map (CommRingCat.ofHom τ) ≫ i₁ := by
-    rw [show g'' = Spec.map (CommRingCat.ofHom rr) ≫ gC from rfl, ← Category.assoc,
-      ← Spec.map_comp, ← CommRingCat.ofHom_comp,
-      show (A''.toSubring.subtype).comp rr = (residue ↥VA').comp ιC from rfl,
+    rw [hg''def, ← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hsubrr,
       CommRingCat.ofHom_comp, Spec.map_comp, Category.assoc, hE,
       ← hρ, ← Category.assoc, ← Spec.map_comp, hcomm, Spec.map_comp, Category.assoc,
       hi₁p]

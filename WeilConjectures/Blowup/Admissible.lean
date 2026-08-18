@@ -873,9 +873,7 @@ lemma Scheme.IdealSheafData.exists_mem_range_chart_sup {X : Scheme.{u}}
   have hb₂K : b₂ ∈ (I₁ ⊔ I₂).ideal U := by
     rw [congrFun (Scheme.IdealSheafData.ideal_sup (I := I₁) (J := I₂)) U, Pi.sup_apply]
     exact Submodule.mem_sup_right hb₂
-  rw [show reesX ((I₁ ⊔ I₂).ideal U) (b₁ + b₂) hav =
-    reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K + reesX ((I₁ ⊔ I₂).ideal U) b₂ hb₂K from
-    reesX_add _ hb₁K hb₂K] at hy
+  rw [reesX_add _ hb₁K hb₂K] at hy
   have hy' : y ∈ Proj.basicOpen (reesGrading ((I₁ ⊔ I₂).ideal U))
         (reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K) ∨
       y ∈ Proj.basicOpen (reesGrading ((I₁ ⊔ I₂).ideal U))

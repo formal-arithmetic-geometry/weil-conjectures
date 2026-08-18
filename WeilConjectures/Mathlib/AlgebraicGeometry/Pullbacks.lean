@@ -13,27 +13,28 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreti
 
 /-!
 
-# Scheme-theoretic images of partial sections
+# Graphs of partial sections of a fibre product
 
-This file proves the partial-section lemma of the Nagata compactification proof
-(revised blueprint: `lemma:nagata-scheme-image-partial-section`): for a partial section
-`γ : U ⟶ X ×_S Y` of the first projection defined on a quasi-compact open `U ⊆ X`,
-with `Y ⟶ S` separated, the scheme-theoretic image `Z` of `γ` restricts over
-`U ×_S Y` to (the graph of) `U` itself. This is the elimination-of-indeterminacy input
-for the graph-extension and common-modification steps of the proof (Stacks Project
-Tags 0F3X–0F3Z; proof order items 30–33).
+For a partial section `γ : U ⟶ X ×_S Y` of the first projection, defined on an open
+`j : U ⟶ X` and with `Y ⟶ S` separated, the graph of `γ` is a closed immersion
+`U ⟶ U ×_S Y`, and the scheme-theoretic image of `γ` restricts over `U ×_S Y` to that
+graph.
+
+This is the elimination-of-indeterminacy input for the graph-extension and
+common-modification steps of the Nagata compactification proof (Stacks Project
+Tags 0F3X–0F3Z; revised blueprint `lemma:nagata-scheme-image-partial-section`).
 
 ## Main definitions and results
 
-- `AlgebraicGeometry.Nagata.partialSection`: the graph `U ⟶ U ×_S Y` of a partial
+- `AlgebraicGeometry.partialSection`: the graph `U ⟶ U ×_S Y` of a partial
   section, a closed immersion since `Y ⟶ S` is separated;
-- `AlgebraicGeometry.Nagata.partialSection_openι`: the factorization of `γ` through
+- `AlgebraicGeometry.partialSection_openι`: the factorization of `γ` through
   the base-changed open immersion `U ×_S Y ⟶ X ×_S Y`;
-- `AlgebraicGeometry.Nagata.isPullback_partialSection`: the graph is the pullback of
+- `AlgebraicGeometry.isPullback_partialSection`: the graph is the pullback of
   `γ` along the base-changed open immersion;
-- `AlgebraicGeometry.Nagata.ker_comap_partialSectionOpenι`: the kernel ideal sheaf of
+- `AlgebraicGeometry.ker_comap_partialSectionOpenι`: the kernel ideal sheaf of
   `γ` restricted to `U ×_S Y` is the kernel of its graph;
-- `AlgebraicGeometry.Nagata.partialSectionRestrictIso`: the induced isomorphism
+- `AlgebraicGeometry.partialSectionRestrictIso`: the induced isomorphism
   `U ≅ (U ×_S Y) ×_{X ×_S Y} Z` of `U` with the restriction of the scheme-theoretic
   image of `γ` over `U ×_S Y`, compatible with the graph
   (`partialSectionRestrictIso_hom_fst`).
@@ -48,7 +49,7 @@ universe u
 
 open CategoryTheory Limits
 
-namespace AlgebraicGeometry.Nagata
+namespace AlgebraicGeometry
 
 variable {S X Y U : Scheme.{u}} (x : X ⟶ S) (y : Y ⟶ S) (j : U ⟶ X)
 variable (γ : U ⟶ pullback x y)
@@ -178,4 +179,4 @@ theorem isProper_imageι_fst [IsProper y] :
   have : IsProper (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
   infer_instance
 
-end AlgebraicGeometry.Nagata
+end AlgebraicGeometry

@@ -88,7 +88,11 @@ def diagonalRestrictChartArrowIso :
           Set.range (pullback.map (j₁ ≫ w) (j₂ ≫ w) w w j₁ j₂ (𝟙 S)
             (by simp) (by simp)) := by
         rw [Scheme.Pullback.range_map]
-        exact ⟨⟨x₁, by rw [hΔfst]; exact hx₁⟩, ⟨x₂, by rw [hΔsnd]; exact hx₂⟩⟩
+        refine ⟨⟨x₁, ?_⟩, ⟨x₂, ?_⟩⟩
+        · rw [hΔfst]
+          exact hx₁
+        · rw [hΔsnd]
+          exact hx₂
       exact hr
 
 variable {j₁ j₂}
