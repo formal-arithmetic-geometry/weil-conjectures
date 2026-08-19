@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 
 /-!
 # Compatibility of the unbounded right derived functor with `rightDerivedFunctorPlus`

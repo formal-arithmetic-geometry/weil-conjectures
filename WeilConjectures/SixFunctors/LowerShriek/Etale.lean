@@ -23,13 +23,15 @@ All site-theoretic inputs of the general definition are discharged here:
 
 - `@IsOpenImmersion ≤ @Etale` holds since open immersions are étale.
 - The Kan extension hypothesis holds by the instance of
-  `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale` for a category `A` with an initial
-  object.
+  `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale`, the abelian `A` having an
+  initial object.
 - The continuity of the base change functor along an *arbitrary* morphism is provided by
   the instance `Etale.isContinuous_overPullback` of
   `WeilConjectures.SixFunctors.UpperLowerStar.Etale`.
+- Sheafification on the small étale sites is provided for the concrete Grothendieck
+  abelian `A` by Mathlib (`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`).
 
-Only sheafification on the small étale sites remains as a hypothesis.
+Hence `f_!` carries no hypotheses beyond the standing assumptions on `A`.
 
 ## Main definitions
 
@@ -48,7 +50,7 @@ Only sheafification on the small étale sites remains as a hypothesis.
 
 @[expose] public section
 
-universe v' u' u
+universe u' u
 
 open CategoryTheory Limits
 
@@ -63,19 +65,20 @@ lemma isOpenImmersion_le_etale : @IsOpenImmersion ≤ @Etale := fun _ _ _ hi =>
 
 section LowerShriek
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-variable [HasInitial A]
-variable [∀ Z : Scheme.{u}, HasWeakSheafify Z.smallEtaleTopology A]
 
 /-- The lower shriek `f_!` along a morphism `f : X ⟶ Y` admitting a compactification on
 sheaves for the small étale sites. -/
 noncomputable def Etale.lowerShriek :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
-  have : ∀ Z : Scheme.{u},
-      HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    fun Z => inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
-  AlgebraicGeometry.lowerShriek A @Etale @Etale f isOpenImmersion_le_etale
+  AlgebraicGeometry.lowerShriek A @Etale @Etale le_rfl f isOpenImmersion_le_etale
 
 /-- The lower shriek `f_!` on étale sheaves is the extension by zero along the open
 immersion of the chosen compactification followed by the pushforward `Etale.lowerStar`
@@ -89,7 +92,7 @@ lemma Etale.lowerShriek_eq :
 /-- The lower shriek `f_!` on étale sheaves with values in a preadditive category is
 additive, being the composition of the extension by zero along the open immersion of the
 chosen compactification with the pushforward along its proper structure morphism. -/
-instance Etale.lowerShriek_additive [Preadditive A] : (Etale.lowerShriek A f).Additive := by
+instance Etale.lowerShriek_additive : (Etale.lowerShriek A f).Additive := by
   rw [Etale.lowerShriek_eq]
   infer_instance
 
@@ -102,8 +105,7 @@ The extension by zero is sheafification composed with a left Kan extension, so l
 exactness of sheafification is needed here; see
 `AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek`. This is why
 `HasSheafify` appears in addition to the `HasWeakSheafify` that defines `f_!`. -/
-instance Etale.preservesFiniteLimits_lowerShriek [Abelian A]
-    [∀ Z : Scheme.{u}, HasSheafify Z.smallEtaleTopology A] :
+instance Etale.preservesFiniteLimits_lowerShriek :
     PreservesFiniteLimits (Etale.lowerShriek A f) := by
   rw [Etale.lowerShriek_eq]
   exact comp_preservesFiniteLimits _ _
