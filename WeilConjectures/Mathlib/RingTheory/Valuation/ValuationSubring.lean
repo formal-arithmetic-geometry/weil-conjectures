@@ -69,9 +69,9 @@ theorem mem_or_inv_mem_comapResidueSubring (x : K) :
       exact hunit.ne_zero rfl
     have hxinvA : x⁻¹ ∈ A := A.toSubring.inv_mem_of_isUnit hxA hunit
     refine Or.inr ((A.mem_comapResidueSubring A'').mpr ⟨hxinvA, ?_⟩)
+    have hmulA : (⟨x, hxA⟩ : A) * ⟨x⁻¹, hxinvA⟩ = 1 := Subtype.ext (mul_inv_cancel₀ hx0)
     have hmul : residue A ⟨x, hxA⟩ * residue A ⟨x⁻¹, hxinvA⟩ = 1 := by
-      rw [← map_mul, show (⟨x, hxA⟩ : A) * ⟨x⁻¹, hxinvA⟩ = 1 from
-        Subtype.ext (mul_inv_cancel₀ hx0), map_one]
+      rw [← map_mul, hmulA, map_one]
     have hinv : residue A ⟨x⁻¹, hxinvA⟩ = (residue A ⟨x, hxA⟩)⁻¹ :=
       (inv_eq_of_mul_eq_one_right hmul).symm
     rcases A''.mem_or_inv_mem (residue A ⟨x, hxA⟩) with h | h

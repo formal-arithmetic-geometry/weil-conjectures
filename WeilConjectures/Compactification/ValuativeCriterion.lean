@@ -172,9 +172,9 @@ theorem RelativeTo.postcomp_iso {S' : Scheme.{u}} {f : X ⟶ S} {h : U ⟶ X}
       commSq := ⟨by rw [← Category.assoc, ← sq.commSq.w, Category.assoc, Category.assoc,
         IsIso.hom_inv_id, Category.comp_id]⟩ } hηU
   have hl₂' : l ≫ f = sq.i₂ ≫ inv e := hl₂
-  have huniq' : ∀ y : Spec (CommRingCat.of sq.R) ⟶ X,
-      Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ∧
-        y ≫ f = sq.i₂ ≫ inv e → y = l := huniq
+  have huniq' (y : Spec (CommRingCat.of sq.R) ⟶ X)
+      (hy : Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ∧
+        y ≫ f = sq.i₂ ≫ inv e) : y = l := huniq y hy
   refine ⟨l, ⟨hl₁, ?_⟩, fun y hy ↦ huniq' y ⟨hy.1, ?_⟩⟩
   · rw [← Category.assoc, hl₂', Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   · rw [← hy.2, Category.assoc, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
@@ -197,9 +197,9 @@ theorem RelativeTo.restrict {f : X ⟶ S} {h : U ⟶ X} (H : RelativeTo f h) (V 
   have hl₁' : Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ l =
       sq.i₁ ≫ (f ⁻¹ᵁ V).ι := hl₁
   have hl₂' : l ≫ f = sq.i₂ ≫ V.ι := hl₂
-  have huniq' : ∀ y : Spec (CommRingCat.of sq.R) ⟶ X,
-      Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ≫ (f ⁻¹ᵁ V).ι ∧
-        y ≫ f = sq.i₂ ≫ V.ι → y = l := huniq
+  have huniq' (y : Spec (CommRingCat.of sq.R) ⟶ X)
+      (hy : Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ≫ (f ⁻¹ᵁ V).ι ∧
+        y ≫ f = sq.i₂ ≫ V.ι) : y = l := huniq y hy
   -- the lift lands in `f ⁻¹ᵁ V`, because its composite with `f` factors through `V`
   have hrange : Set.range l ⊆ ((f ⁻¹ᵁ V) : Set X) := by
     rintro - ⟨y, rfl⟩
@@ -263,9 +263,9 @@ theorem RelativeTo.toImage {f : X ⟶ S} (H : RelativeTo f h) :
   have hl₁' : Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ l =
       sq.i₁ ≫ h.imageι := hl₁
   have hl₂' : l ≫ f = sq.i₂ := hl₂
-  have huniq' : ∀ y : Spec (CommRingCat.of sq.R) ⟶ X,
-      Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ≫ h.imageι ∧
-        y ≫ f = sq.i₂ → y = l := huniq
+  have huniq' (y : Spec (CommRingCat.of sq.R) ⟶ X)
+      (hy : Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ≫ h.imageι ∧
+        y ≫ f = sq.i₂) : y = l := huniq y hy
   let l' := IsClosedImmersion.lift h.imageι l (ker_imageι_le_ker h l)
   have hl' : l' ≫ h.imageι = l := IsClosedImmersion.lift_fac _ _ _
   refine ⟨l', ⟨?_, ?_⟩, fun y hy ↦ ?_⟩

@@ -49,7 +49,7 @@ theorem exists_specializes_of_mem_closure_range_of_isAffine {T P : Scheme.{u}} (
   obtain ⟨q, hq⟩ : ∃ q : Spec R, Spec.map φ q ⤳ P.isoSpec.hom z :=
     PrimeSpectrum.exists_specializes_of_mem_closure_range_comap φ.hom hz'
   -- transport the specialization back along the isomorphism `P ≅ Spec Γ(P, ⊤)`
-  have hinv : ∀ w : P, P.isoSpec.inv (P.isoSpec.hom w) = w := by simp
+  have hinv (w : P) : P.isoSpec.inv (P.isoSpec.hom w) = w := by simp
   have hmap := hq.map P.isoSpec.inv.continuous
   rw [hφ, Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hinv, hinv] at hmap
   exact ⟨g q, hmap⟩
@@ -60,8 +60,7 @@ of a point of the range** (the topological content of Stacks Project Tag 02JQ). 
 theorem exists_specializes_of_mem_closure_range {T P : Scheme.{u}} (h : T ⟶ P)
     [QuasiCompact h] {z : P} (hz : z ∈ closure (Set.range h)) : ∃ t : T, h t ⤳ z := by
   -- both hypothesis and conclusion are local on the target, so we may assume `P` affine
-  obtain ⟨V, hV, hzV, -⟩ :=
-    exists_isAffineOpen_mem_and_subset (show z ∈ (⊤ : P.Opens) from trivial)
+  obtain ⟨V, hV, hzV, -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤) (x := z) trivial
   have : IsAffine V.toScheme := hV
   have : QuasiCompact (h ∣_ V) :=
     IsZariskiLocalAtTarget.restrict (P := @QuasiCompact) inferInstance V
