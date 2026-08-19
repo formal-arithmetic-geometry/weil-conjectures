@@ -18,6 +18,8 @@ small étale sites. This file records the resulting functors
 `g_* : Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A` and
 `g^* : Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A`.
 
+Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
+Grothendieck abelian category with `Hom`-types in the universe `u` of the base schemes.
 The site-theoretic inputs of the general definitions are discharged here:
 
 - The base change functor `MorphismProperty.Over.pullback @Etale ⊤ g` along an *arbitrary*
@@ -27,14 +29,22 @@ The site-theoretic inputs of the general definitions are discharged here:
   `W ×_V (V ×_Y Z) ≅ W ×_Y Z` — and it preserves compatible families since it is
   representably flat, being a finite-limit-preserving functor on the finitely complete
   étale slice. Hence `Etale.lowerStar` carries no hypotheses at all.
-- For `g` étale, base change is right adjoint to the localization functor
-  `MorphismProperty.Over.map ⊤ ‹Etale g›`, so its opposite is a *left* adjoint
-  (`Etale.isLeftAdjoint_op_overPullback`) and all pointwise left Kan extensions along it
-  exist (`Etale.hasPointwiseLeftKanExtension_op_overPullback`). Hence for étale `g` only
-  sheafification remains as a hypothesis of `Etale.upperStar`. Being a left adjoint also
-  makes that left Kan extension precomposition with a functor, hence left exact
-  (`Etale.preservesFiniteLimits_op_lan_overPullback`), which is what makes `g^*` left exact
-  for an arbitrary coefficient category with finite limits.
+- Sheafification on the small étale sites and the left Kan extensions along the
+  opposites of base change (together with their left
+  exactness) exist since `A` is Grothendieck abelian and the small étale sites are
+  essentially small; the latter are the sorried instances of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Hence
+  `Etale.upperStar` and the adjunction
+  `g^* ⊣ g_*` carry no hypotheses either.
+- For `g` étale, no smallness or exactness argument is needed: base change is right
+  adjoint to the localization functor `MorphismProperty.Over.map ⊤ ‹Etale g›`, so its
+  opposite is a *left* adjoint (`Etale.isLeftAdjoint_op_overPullback`), all pointwise
+  left Kan extensions along it exist
+  (`Etale.hasPointwiseLeftKanExtension_op_overPullback`), and that left Kan extension is
+  precomposition with a functor, hence left exact
+  (`Etale.preservesFiniteLimits_op_lan_overPullback`); these instances are proved, not
+  sorried.
 
 ## Main definitions
 
@@ -57,15 +67,15 @@ The site-theoretic inputs of the general definitions are discharged here:
   exact for values in an abelian category.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar`: the pullback `g^*` is left
-  exact, hence exact, being also a left adjoint. For an étale `g` this holds for any
-  coefficient category with finite limits and left exact sheafification; for a general `g`
-  left exactness of the left Kan extension along base change is an extra hypothesis.
+  exact, hence exact, being also a left adjoint. For an étale `g` the left exactness of
+  the Kan extension is proved; for a general `g` it is the sorried instance
+  `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`.
 
 -/
 
 @[expose] public section
 
-universe v' u' u
+universe u' u
 
 open CategoryTheory Limits Opposite
 
@@ -131,7 +141,7 @@ end Continuity
 
 section KanExtension
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [Etale g]
 
 /-- For an étale morphism `g`, base change is right adjoint to the localization functor
@@ -157,7 +167,7 @@ precomposition with the opposite of the localization functor `MorphismProperty.O
 ‹Etale g›`, hence preserves all limits that exist in the coefficient category. This is what
 makes the pullback `g^*` left exact without any smallness or concreteness assumption on `A`;
 compare `CategoryTheory.lan_preservesFiniteLimits_of_flat`. -/
-instance Etale.preservesFiniteLimits_op_lan_overPullback [HasFiniteLimits A] :
+instance Etale.preservesFiniteLimits_op_lan_overPullback :
     PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
       (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A) :=
   inferInstance
@@ -166,21 +176,23 @@ end KanExtension
 
 section Star
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites, given objectwise by `(g_* G)(V → Y) = G(V ×_Y Z → Z)`. -/
 noncomputable def Etale.lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
-  GrothendieckTopology.lowerStar A @Etale @Etale g
+  GrothendieckTopology.lowerStar A @Etale @Etale le_rfl g
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- The sections of `g_* G` over `V → Y` are the sections of `G` over `V ×_Y Z → Z`. -/
 lemma Etale.lowerStar_obj_val_obj (G : Sheaf Z.smallEtaleTopology A) (b : Y.Etale) :
     ((Etale.lowerStar A g).obj G).obj.obj (op b) =
       G.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback @Etale ⊤ g).op`. -/
 lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G ⟶ G')
     (b : Y.Etale) :
@@ -191,25 +203,21 @@ lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G 
 /-- The pushforward `g_*` on étale sheaves with values in a preadditive category is
 additive: it acts on morphisms by whiskering, which is compatible with the objectwise
 addition. -/
-instance Etale.lowerStar_additive [Preadditive A] : (Etale.lowerStar A g).Additive where
+instance Etale.lowerStar_additive : (Etale.lowerStar A g).Additive where
 
 /-- The pushforward `g_*` on étale sheaves preserves limits of any shape that exists in the
 coefficient category. -/
 instance Etale.preservesLimitsOfShape_lowerStar (E : Type*) [Category E]
     [HasLimitsOfShape E A] : PreservesLimitsOfShape E (Etale.lowerStar A g) :=
-  GrothendieckTopology.preservesLimitsOfShape_lowerStar A @Etale @Etale g E
+  GrothendieckTopology.preservesLimitsOfShape_lowerStar A @Etale @Etale le_rfl g E
 
 /-- The pushforward `g_*` on étale sheaves with values in an abelian category is left
 exact. -/
-instance Etale.preservesFiniteLimits_lowerStar [Abelian A] :
+instance Etale.preservesFiniteLimits_lowerStar :
     PreservesFiniteLimits (Etale.lowerStar A g) :=
-  GrothendieckTopology.preservesFiniteLimits_lowerStar A @Etale @Etale g
+  GrothendieckTopology.preservesFiniteLimits_lowerStar A @Etale @Etale le_rfl g
 
 section Adjunction
-
-variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
-variable [HasWeakSheafify Z.smallEtaleTopology A]
 
 /-- The pullback `g^*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites: left Kan extension on presheaves followed by sheafification. For `g` étale the
@@ -218,16 +226,12 @@ Kan extension hypothesis is automatic by
 see `Etale.upperStarIsoOpenImmersionRestriction`. -/
 noncomputable def Etale.upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
-  have : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
   GrothendieckTopology.upperStar A @Etale @Etale g
 
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites. -/
 noncomputable def Etale.upperStarLowerStarAdjunction :
     Etale.upperStar A g ⊣ Etale.lowerStar A g :=
-  have : HasWeakSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasWeakSheafify Z.smallEtaleTopology A)
-  GrothendieckTopology.upperStarLowerStarAdjunction A @Etale @Etale g
+  GrothendieckTopology.upperStarLowerStarAdjunction A @Etale @Etale le_rfl g
 
 instance : (Etale.lowerStar A g).IsRightAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isRightAdjoint
@@ -235,23 +239,16 @@ instance : (Etale.lowerStar A g).IsRightAdjoint :=
 instance : (Etale.upperStar A g).IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
 
-/-- The pullback `g^*` on étale sheaves is left exact, provided sheafification on the small
-étale site of `Z` is and the left Kan extension along the opposite of base change is.
-
-For an étale `g` both hypotheses beyond `HasSheafify` are automatic: the Kan extension one is
-`Etale.preservesFiniteLimits_op_lan_overPullback`, so
-`PreservesFiniteLimits (Etale.upperStar A g)` is then found by instance search. For a general
-`g` the left Kan extension is a filtered colimit and its left exactness is a genuine
-hypothesis, satisfied for instance when `A` is concrete with exact filtered colimits
-(`CategoryTheory.lan_preservesFiniteLimits_of_flat`, which also needs the sites to be
-small). -/
-instance Etale.preservesFiniteLimits_upperStar [HasFiniteLimits A]
-    [HasSheafify Z.smallEtaleTopology A]
-    [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
-      (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)] :
+/-- The pullback `g^*` on étale sheaves is left exact, hence exact, being also a left
+adjoint: sheafification on the small étale site of `Z` is left exact by the sorried
+`HasSheafify` instance for the Grothendieck abelian `A`, and the left Kan
+extension along the opposite of base change is left exact — for an étale `g` by
+`Etale.preservesFiniteLimits_op_lan_overPullback`, in general by the sorried
+`Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`, the Kan
+extension being a filtered colimit and filtered colimits in the Grothendieck abelian `A`
+being exact. -/
+instance Etale.preservesFiniteLimits_upperStar :
     PreservesFiniteLimits (Etale.upperStar A g) :=
-  have : HasSheafify (Z.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasSheafify Z.smallEtaleTopology A)
   inferInstanceAs (PreservesFiniteLimits (GrothendieckTopology.upperStar A @Etale @Etale g))
 
 /-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
@@ -263,35 +260,22 @@ end Star
 
 section Comp
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
 étale sheaves. -/
 noncomputable def Etale.lowerStarComp :
     Etale.lowerStar A h₁ ⋙ Etale.lowerStar A h₂ ≅ Etale.lowerStar A (h₁ ≫ h₂) :=
-  GrothendieckTopology.lowerStarComp A @Etale @Etale h₁ h₂
+  GrothendieckTopology.lowerStarComp A @Etale @Etale le_rfl h₁ h₂
 
 section UpperStar
-
-variable [∀ F : S.Etaleᵒᵖ ⥤ A,
-    (MorphismProperty.Over.pullback @Etale ⊤ h₁).op.HasLeftKanExtension F]
-  [∀ F : R.Etaleᵒᵖ ⥤ A,
-    (MorphismProperty.Over.pullback @Etale ⊤ h₂).op.HasLeftKanExtension F]
-  [∀ F : R.Etaleᵒᵖ ⥤ A,
-    (MorphismProperty.Over.pullback @Etale ⊤ (h₁ ≫ h₂)).op.HasLeftKanExtension F]
-  [HasWeakSheafify S.smallEtaleTopology A]
-  [HasWeakSheafify T.smallEtaleTopology A]
 
 /-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale
 sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
 noncomputable def Etale.upperStarComp :
     Etale.upperStar A (h₁ ≫ h₂) ≅ Etale.upperStar A h₂ ⋙ Etale.upperStar A h₁ :=
-  haveI : HasWeakSheafify (S.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasWeakSheafify S.smallEtaleTopology A)
-  haveI : HasWeakSheafify (T.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasWeakSheafify T.smallEtaleTopology A)
-  GrothendieckTopology.upperStarComp A @Etale @Etale h₁ h₂
+  GrothendieckTopology.upperStarComp A @Etale @Etale le_rfl h₁ h₂
 
 end UpperStar
 

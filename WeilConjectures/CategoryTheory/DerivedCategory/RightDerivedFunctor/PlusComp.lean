@@ -7,12 +7,13 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 
 /-!
 # Composition of right derived functors on bounded below derived categories
 
 This is the bounded below counterpart of
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp`. Let `F : C ⥤ D` and
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`. Let `F : C ⥤ D` and
 `G : D ⥤ E` be additive functors between abelian categories, with `C` and `D` having
 enough injectives. If `F` preserves injective objects, then the canonical comparison
 
@@ -23,13 +24,14 @@ is an isomorphism (`Functor.rightDerivedFunctorPlusCompIso`).
 ## Why this is not a corollary of the unbounded statement
 
 `Functor.rightDerivedFunctorCompIso` in
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp` proves the same theorem for the
-unbounded derived category, but it assumes `HasKInjectiveResolutions` on both `C` and `D`,
-whose only source in this repository is a `sorry`. The bounded below statement needs only
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp` proves the same
+theorem for the unbounded derived category, but it assumes `HasKInjectiveResolutions` on
+both `C` and `D`, whose only source in this repository is a `sorry`. The bounded below
+statement needs only
 enough injectives, so it rests on proved theorems; see
 `WeilConjectures.SixFunctors.Derived` for why that distinction matters here. This file
 therefore deliberately does not import anything from
-`WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian`.
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
 
 ## The proof, and where it differs from the unbounded one
 
@@ -79,49 +81,6 @@ open CategoryTheory Category Limits Abelian
 namespace CategoryTheory
 
 namespace Functor
-
-section MapHomotopyCategoryPlus
-
-variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [Abelian C] [Abelian D]
-
-/-- The natural transformation `F.mapHomotopyCategoryPlus ⟶ G.mapHomotopyCategoryPlus`
-induced by a natural transformation `τ : F ⟶ G` of additive functors. It is the
-transformation `NatTrans.mapHomotopyCategory τ` of the ambient homotopy categories,
-lifted through the fully faithful inclusion of the bounded below subcategory. -/
-noncomputable def _root_.CategoryTheory.NatTrans.mapHomotopyCategoryPlus
-    {F G : C ⥤ D} [F.Additive] [G.Additive] (τ : F ⟶ G) :
-    F.mapHomotopyCategoryPlus ⟶ G.mapHomotopyCategoryPlus :=
-  ((HomotopyCategory.plus D).fullyFaithfulι.whiskeringRight (HomotopyCategory.Plus C)).preimage
-    (Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
-      (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)))
-
-@[simp]
-lemma _root_.CategoryTheory.NatTrans.mapHomotopyCategoryPlus_id (F : C ⥤ D) [F.Additive] :
-    NatTrans.mapHomotopyCategoryPlus (𝟙 F) = 𝟙 F.mapHomotopyCategoryPlus := by
-  rw [NatTrans.mapHomotopyCategoryPlus, NatTrans.mapHomotopyCategory_id (ComplexShape.up ℤ),
-    Functor.whiskerLeft_id']
-  exact ((HomotopyCategory.plus D).fullyFaithfulι.whiskeringRight
-    (HomotopyCategory.Plus C)).preimage_id
-
-@[reassoc, simp]
-lemma _root_.CategoryTheory.NatTrans.mapHomotopyCategoryPlus_comp {F G H : C ⥤ D}
-    [F.Additive] [G.Additive] [H.Additive] (τ : F ⟶ G) (σ : G ⟶ H) :
-    NatTrans.mapHomotopyCategoryPlus (τ ≫ σ) =
-      NatTrans.mapHomotopyCategoryPlus τ ≫ NatTrans.mapHomotopyCategoryPlus σ := by
-  have h : Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
-        (NatTrans.mapHomotopyCategory (τ ≫ σ) (ComplexShape.up ℤ)) =
-      Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
-          (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ)) ≫
-        Functor.whiskerLeft (HomotopyCategory.Plus.ι C)
-          (NatTrans.mapHomotopyCategory σ (ComplexShape.up ℤ)) := by
-    rw [NatTrans.mapHomotopyCategory_comp (ComplexShape.up ℤ)]
-    rfl
-  rw [NatTrans.mapHomotopyCategoryPlus, NatTrans.mapHomotopyCategoryPlus,
-    NatTrans.mapHomotopyCategoryPlus, h]
-  exact ((HomotopyCategory.plus D).fullyFaithfulι.whiskeringRight
-    (HomotopyCategory.Plus C)).preimage_comp (Y := G.mapHomotopyCategoryPlus) _ _
-
-end MapHomotopyCategoryPlus
 
 section NatTrans
 
