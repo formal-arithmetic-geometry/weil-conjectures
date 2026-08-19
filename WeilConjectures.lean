@@ -68,6 +68,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
@@ -98,6 +99,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.UpperLowerStar.LanLeftExact
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
