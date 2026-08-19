@@ -340,6 +340,15 @@ being Grothendieck abelian.
 
 open MonoidalCategory
 
+/- The concreteness of the coefficient category `A`, as in the section
+`DerivedUpperStar`; it is what the monoidal transport instances of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
+variable {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 variable [HasSheafify Z.smallEtaleTopology A]
 variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
