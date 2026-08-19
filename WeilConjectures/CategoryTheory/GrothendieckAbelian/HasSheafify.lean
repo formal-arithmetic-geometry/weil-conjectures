@@ -56,4 +56,14 @@ instance hasSheafify_smallGrothendieckTopology (A : Type u') [Category.{u} A] [A
     HasSheafify (U.smallGrothendieckTopology Q (Q := P)) A :=
   sorry
 
+/-- The instance above specialized to the small étale site and restated for
+`AlgebraicGeometry.Scheme.smallEtaleTopology` itself: `smallEtaleTopology` is a
+non-reducible `def`, so instance search does not see through it to fire
+`hasSheafify_smallGrothendieckTopology` on goals phrased in terms of
+`X.smallEtaleTopology`. -/
+instance hasSheafify_smallEtaleTopology (A : Type u') [Category.{u} A] [Abelian A]
+    [IsGrothendieckAbelian.{u} A] (X : Scheme.{u}) :
+    HasSheafify X.smallEtaleTopology A :=
+  inferInstanceAs (HasSheafify (X.smallGrothendieckTopology (P := @Etale) (Q := @Etale)) A)
+
 end CategoryTheory.GrothendieckTopology

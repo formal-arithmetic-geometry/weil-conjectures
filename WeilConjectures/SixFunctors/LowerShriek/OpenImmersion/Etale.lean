@@ -181,13 +181,7 @@ end Scheme
 
 section KanExtension
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [Etale j]
 
 open Scheme in
@@ -236,13 +230,7 @@ end KanExtension
 
 section LowerShriek
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- The restriction `j^*` along an open immersion `j : U ⟶ X` on sheaves for the small
@@ -313,9 +301,9 @@ abelian category is exact. This is the left exactness half.
 are left exact: the first by
 `AlgebraicGeometry.preservesFiniteLimits_lan_of_etale_and_mono`, the second by the left
 exactness of sheafification, which is the content of `HasSheafify` beyond the
-`HasWeakSheafify` needed to define `j_!`; both are provided for the concrete Grothendieck
-abelian coefficient category `A` by Mathlib
-(`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`). -/
+`HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
+coefficient category `A`, the second by the sorried instance of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (Etale.openImmersionLowerShriek A j) := by
   have heq : Etale.openImmersionLowerShriek A j =
