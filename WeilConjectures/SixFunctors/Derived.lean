@@ -23,14 +23,13 @@ and this file records their total right derived functors
 `Rg_* : D(Z_ét) ⥤ D(Y_ét)` and `Rf_! : D(X_ét) ⥤ D(Y_ét)` on the unbounded
 derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctor`.
 
-Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
-concrete Grothendieck abelian category with objects in `Type u'`, `Hom`-types and
+The sheaf categories are Grothendieck abelian
+(`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`) whenever the
+coefficient category `A` is a concrete Grothendieck abelian category (with hom types and
 underlying types in the universe `u` of the base schemes, and the forgetful functor
-preserving limits and filtered colimits and reflecting isomorphisms; this covers the
-intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The sheaf categories are
-then Grothendieck abelian by Mathlib's
-`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`. The chosen
-localized categories are accordingly fixed once and for all by the instance
+preserving limits and filtered colimits and reflecting isomorphisms); this covers the
+intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
+categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
 installs `HasDerivedCategory.{u}` on every sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`; no auxiliary universe parameters appear.
