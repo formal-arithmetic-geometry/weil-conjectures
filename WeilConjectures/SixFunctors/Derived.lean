@@ -48,8 +48,7 @@ input: Mathlib's `CategoryTheory.Functor.rightDerivedFunctorPlus` requires only
 and `Etale.rightDerivedLowerShriekPlus` need no K-injective hypothesis. Note however that
 the chosen `HasDerivedCategory.{u}` instance is itself built from the sorried K-injective
 statement (through the local `u`-smallness of the derived category), so every derived
-functor in this file — including the `Plus` variants — currently depends on `sorryAx`; the
-`#print axioms` guards at the end of this file record the exact axiom dependencies. Since
+functor in this file — including the `Plus` variants — currently depends on `sorryAx`. Since
 the `ℓ`-adic formalism only needs `Dᵇc`, the `Plus` variants are the versions to build on;
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
 the restriction of the unbounded functors to `DerivedCategory.Plus` with these.
