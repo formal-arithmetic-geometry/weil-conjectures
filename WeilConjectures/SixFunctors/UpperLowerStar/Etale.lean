@@ -28,7 +28,9 @@ The site-theoretic inputs of the general definitions are discharged here:
   under base change — points are lifted through the pullback-pasting isomorphism
   `W ×_V (V ×_Y Z) ≅ W ×_Y Z` — and it preserves compatible families since it is
   representably flat, being a finite-limit-preserving functor on the finitely complete
-  étale slice. Hence `Etale.lowerStar` carries no hypotheses at all.
+  étale slice. Both are the `P = Q = @Etale` case of the general statements of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous`. Hence
+  `Etale.lowerStar` carries no hypotheses at all.
 - Sheafification on the small étale sites and the left Kan extensions along the
   opposites of base change (together with their left
   exactness) exist since `A` is Grothendieck abelian and the small étale sites are
@@ -90,54 +92,21 @@ section Continuity
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- Base change along an arbitrary morphism `g : Z ⟶ Y` preserves covering sieves of the
-small étale topologies. -/
+small étale topologies. This is the `P = Q = @Etale` case of
+`CategoryTheory.GrothendieckTopology.coverPreserving_overPullback_smallGrothendieckTopology`. -/
 lemma Etale.coverPreserving_overPullback :
     CoverPreserving (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)
-      (MorphismProperty.Over.pullback @Etale ⊤ g) where
-  cover_preserve {V S} hS := by
-    rw [smallGrothendieckTopology_eq_toGrothendieck_smallPretopology Y le_rfl] at hS
-    rw [smallGrothendieckTopology_eq_toGrothendieck_smallPretopology Z le_rfl]
-    replace hS := (mem_toGrothendieck_smallPretopology _ _).mp hS
-    refine (mem_toGrothendieck_smallPretopology _ _).mpr fun x => ?_
-    obtain ⟨W, φ, w, hSφ, hφl, hφw⟩ := hS (pullback.fst V.hom g x)
-    -- The base change of `φ` is a morphism between étale `Z`-schemes, hence étale.
-    have hmap : Etale ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ).left := by
-      refine MorphismProperty.of_postcomp (W := @Etale) (W' := @Etale) _
-        ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V).hom
-        (MorphismProperty.Comma.prop _) ?_
-      rw [MorphismProperty.Over.w ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ)]
-      exact MorphismProperty.Comma.prop _
-    -- Lift `x` through the base change of `φ` via `W ×_V (V ×_Y Z) ≅ W ×_Y Z`.
-    obtain ⟨ξ, hξ₁, hξ₂⟩ := Scheme.Pullback.exists_preimage_pullback
-      (f := φ.left) (g := pullback.fst V.hom g) w x hφw
-    have hcomp : (pullbackRightPullbackFstIso V.hom g φ.left ≪≫
-        pullback.congrHom (MorphismProperty.Over.w φ) rfl).hom ≫
-          ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ).left =
-        pullback.snd φ.left (pullback.fst V.hom g) := by
-      apply pullback.hom_ext
-      · simp [pullback.condition]
-      · simp
-    refine ⟨(MorphismProperty.Over.pullback @Etale ⊤ g).obj W,
-      (MorphismProperty.Over.pullback @Etale ⊤ g).map φ,
-      (pullbackRightPullbackFstIso V.hom g φ.left ≪≫
-        pullback.congrHom (MorphismProperty.Over.w φ) rfl).hom ξ,
-      ⟨W, φ, 𝟙 _, hSφ, (Category.id_comp _).symm⟩, hmap, ?_⟩
-    exact ((Scheme.Hom.comp_apply _ _ _).symm.trans (by rw [hcomp]; rfl)).trans hξ₂
-
-/-- Base change along an arbitrary morphism `g : Z ⟶ Y` is representably flat: the small
-étale site of `Y` has finite limits, and base change preserves them. -/
-instance Etale.representablyFlat_overPullback :
-    RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
-  flat_of_preservesFiniteLimits _
+      (MorphismProperty.Over.pullback @Etale ⊤ g) :=
+  GrothendieckTopology.coverPreserving_overPullback_smallGrothendieckTopology @Etale @Etale
+    le_rfl g
 
 /-- Base change along an arbitrary morphism `g : Z ⟶ Y` is continuous for the small étale
-topologies. -/
+topologies. This is the `P = Q = @Etale` case of
+`CategoryTheory.GrothendieckTopology.isContinuous_overPullback`. -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
-  Functor.isContinuous_of_coverPreserving
-    (compatiblePreservingOfFlat _ _)
-    (Etale.coverPreserving_overPullback g)
+  GrothendieckTopology.isContinuous_overPullback @Etale @Etale le_rfl g
 
 end Continuity
 
