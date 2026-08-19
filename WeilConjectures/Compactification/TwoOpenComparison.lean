@@ -48,6 +48,29 @@ Given two sides `σ₁ : TwoOpenSide u O₁ O₂` and `σ₂ : TwoOpenSide u O�
   them, Stacks Tag 081S — see the "Dependency structure" section of the module
   docstring of `WeilConjectures.Compactification.Modification`.
 
+## The one obligation of this file
+
+`AlgebraicGeometry.exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary` is
+the **only** `sorry` here, and everything else in the improved-comparison chain is
+proved around it:
+
+- `TwoOpenSide.comparisonBoundary` names the locus of the comparison space lying over
+  the forbidden boundary of the first side, and `isClosed_comparisonBoundary` records
+  that it is closed;
+- `TwoOpenSide.comparisonBoundary_subset_preimage_selfBoundary` is the density
+  criterion `lemma:nagata-comparison-boundary-density`: controlling the second
+  projection on a subset whose closure swallows the comparison boundary suffices,
+  because the self boundary is itself a closure;
+- `TwoOpenSide.keyDisjoint_of_comparisonBoundary_subset` is
+  `lemma:nagata-key-boundary-disjointness`: a comparison boundary landing in the self
+  boundary `Z̄₂,₂` of a *prepared* second side cannot meet its forbidden boundary
+  `Z̄₂,₁`. This is the final link of the chain and the only one needing neither
+  Tag 0F3W nor Tag 0F3Y;
+- `exists_prepared_keyDisjoint_twoOpenSide` then assembles the pair from
+  `exists_prepared_twoOpenSide` (proved) and `TwoOpenSide.Prepared.admissibleBlowup`
+  (proved), so the obligation carries none of that bookkeeping: what is left is
+  exactly the geometric step that improves the first side.
+
 -/
 
 @[expose] public section
@@ -115,6 +138,60 @@ def KeyDisjoint : Prop :=
   ∀ z : comparisonSpace σ₁ σ₂,
     comparisonFst σ₁ σ₂ z ∈ σ₁.forbiddenBoundary →
     comparisonSnd σ₁ σ₂ z ∉ σ₂.forbiddenBoundary
+
+/-- The **comparison boundary** of the pair `(σ₁, σ₂)`: the locus of the comparison
+space lying over the forbidden boundary `Z̄₁,₂` of the first side. Key boundary
+disjointness is the assertion that its second projection avoids the forbidden boundary
+of the second side. (Blueprint: `lemma:nagata-comparison-boundary-density`.) -/
+def comparisonBoundary : Set (comparisonSpace σ₁ σ₂) :=
+  comparisonFst σ₁ σ₂ ⁻¹' σ₁.forbiddenBoundary
+
+lemma isClosed_comparisonBoundary : IsClosed (comparisonBoundary σ₁ σ₂) :=
+  isClosed_closure.preimage (comparisonFst σ₁ σ₂).continuous
+
+variable {σ₁ σ₂} in
+lemma mem_comparisonBoundary_iff {z : comparisonSpace σ₁ σ₂} :
+    z ∈ comparisonBoundary σ₁ σ₂ ↔
+      comparisonFst σ₁ σ₂ z ∈ σ₁.forbiddenBoundary :=
+  Iff.rfl
+
+variable {σ₁ σ₂} in
+/-- **Key boundary disjointness from the self boundary** (blueprint:
+`lemma:nagata-key-boundary-disjointness`): if the second projection of the comparison
+boundary lands in the self boundary `Z̄₂,₂` of the second side, then key disjointness
+holds, because a prepared side has disjoint self and forbidden boundaries.
+
+This is the final link of the improved-comparison chain, and the only one of its links
+that needs neither Stacks Project Tag 0F3W nor Tag 0F3Y. -/
+theorem keyDisjoint_of_comparisonBoundary_subset (h₂ : σ₂.Prepared)
+    (h : comparisonBoundary σ₁ σ₂ ⊆ comparisonSnd σ₁ σ₂ ⁻¹' σ₂.selfBoundary) :
+    KeyDisjoint σ₁ σ₂ :=
+  fun _ hz ↦ Set.disjoint_left.mp h₂ (h hz)
+
+variable {σ₁ σ₂} in
+/-- **The comparison boundary density criterion** (blueprint:
+`lemma:nagata-comparison-boundary-density`): it suffices to control the second
+projection on a subset `D` in which the comparison boundary is contained after taking
+closures. The locus where the second projection lands in the self boundary is closed,
+since the self boundary is a closure, so it swallows `closure D`. -/
+theorem comparisonBoundary_subset_preimage_selfBoundary {D : Set (comparisonSpace σ₁ σ₂)}
+    (hD : comparisonBoundary σ₁ σ₂ ⊆ closure D)
+    (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary) :
+    comparisonBoundary σ₁ σ₂ ⊆ comparisonSnd σ₁ σ₂ ⁻¹' σ₂.selfBoundary :=
+  hD.trans <| closure_minimal hmem <|
+    isClosed_closure.preimage (comparisonSnd σ₁ σ₂).continuous
+
+variable {σ₁ σ₂} in
+/-- **Key boundary disjointness by density** (blueprint:
+`lemma:nagata-comparison-boundary-density`, `lemma:nagata-key-boundary-disjointness`):
+the combination of the two previous lemmas, which is the shape the improved-comparison
+chain of the blueprint produces. -/
+theorem keyDisjoint_of_dense_comparisonBoundary (h₂ : σ₂.Prepared)
+    {D : Set (comparisonSpace σ₁ σ₂)} (hD : comparisonBoundary σ₁ σ₂ ⊆ closure D)
+    (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary) :
+    KeyDisjoint σ₁ σ₂ :=
+  keyDisjoint_of_comparisonBoundary_subset h₂
+    (comparisonBoundary_subset_preimage_selfBoundary hD hmem)
 
 section Avoids
 
@@ -214,6 +291,39 @@ end Avoids
 end TwoOpenSide
 
 open TwoOpenSide in
+/-- **The improved comparison** (Stacks Project Tags 0F3W and 0F3Y; blueprint:
+`lemma:nagata-comparison-restrict-proper-open`,
+`def:nagata-two-open-improved-comparison`,
+`lemma:nagata-comparison-isIso-near-boundary`,
+`lemma:nagata-comparison-boundary-density`): two prepared sides can be improved, by a
+`V₁`-admissible blow-up of the ambient model of the first side, so that the comparison
+boundary of the improved pair projects into the self boundary of the second side.
+
+This is the geometric core of the comparison layer and the **one remaining obligation**
+of this file. The construction of the blueprint applies the isomorphism-near-closure
+blow-up (Tag 0F3W) to the proper first comparison projection
+(`isProper_comparisonFst`) at the forbidden boundary locus of the first side; under
+that blow-up the comparison space becomes the strict transform of the old one
+(Tag 0F3Y, `Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`), the comparison
+space is isomorphic to a neighbourhood of the boundary, and the comparison boundary is
+dense in the inverse image of the boundary closure — so
+`keyDisjoint_of_dense_comparisonBoundary` reduces the conclusion to the second
+projection of that dense locus, which lands in the self boundary of the second side.
+
+The blow-up shape of the conclusion is the one the surrounding API was built for:
+`TwoOpenSide.admissibleBlowup` and `TwoOpenSide.Prepared.admissibleBlowup` both cite
+`def:nagata-two-open-improved-comparison`, and preparedness of the improved first side
+is exactly what the latter supplies. -/
+theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoetherian S]
+    {u : U ⟶ S} [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
+    {O₁ O₂ : U.Opens} (σ₁ : TwoOpenSide u O₁ O₂) (σ₂ : TwoOpenSide u O₂ O₁)
+    (h₁ : σ₁.Prepared) (h₂ : σ₂.Prepared) (hcov : O₁ ⊔ O₂ = ⊤) :
+    ∃ B : AdmissibleBlowup σ₁.X σ₁.V,
+      comparisonBoundary (σ₁.admissibleBlowup B) σ₂ ⊆
+        comparisonSnd (σ₁.admissibleBlowup B) σ₂ ⁻¹' σ₂.selfBoundary := by
+  sorry
+
+open TwoOpenSide in
 /-- **Existence of a prepared, key-disjoint pair of sides** (blueprint:
 `lemma:nagata-comparison-restrict-proper-open`,
 `def:nagata-two-open-improved-comparison`,
@@ -230,15 +340,21 @@ boundary of the second side, which is disjoint from the forbidden one.
 
 The proof consumes the sorried modification inputs
 (`exists_admissibleBlowup_strictTransform_isIso_near_closure`,
-`Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`); see the module
-docstring. -/
+`Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup`) through
+`exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary`, which is the only
+remaining obligation of this file; see the module docstring. -/
 theorem exists_prepared_keyDisjoint_twoOpenSide [IsNoetherian S] (u : U ⟶ S)
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] (O₁ O₂ : U.Opens)
     (hcov : O₁ ⊔ O₂ = ⊤) [HasCompactification (O₁.ι ≫ u)]
     [HasCompactification (O₂.ι ≫ u)] :
     ∃ (σ₁ : TwoOpenSide u O₁ O₂) (σ₂ : TwoOpenSide u O₂ O₁),
       σ₁.Prepared ∧ σ₂.Prepared ∧ KeyDisjoint σ₁ σ₂ := by
-  sorry
+  obtain ⟨σ₁, h₁⟩ := exists_prepared_twoOpenSide u O₁ O₂ hcov
+  obtain ⟨σ₂, h₂⟩ := exists_prepared_twoOpenSide u O₂ O₁ (by rw [sup_comm]; exact hcov)
+  obtain ⟨B, hB⟩ :=
+    exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary σ₁ σ₂ h₁ h₂ hcov
+  exact ⟨σ₁.admissibleBlowup B, σ₂, TwoOpenSide.Prepared.admissibleBlowup σ₁ B h₁,
+    h₂, keyDisjoint_of_comparisonBoundary_subset h₂ hB⟩
 
 /-- The bundled output of the comparison layer of the two-open compactification
 theorem: two prepared sides satisfying the key boundary disjointness. This is the
