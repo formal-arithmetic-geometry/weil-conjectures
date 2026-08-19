@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Affine
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.NotEssentiallySmall
 
 /-!
 
@@ -20,13 +21,13 @@ schemes.
 
 ## The smallness hypothesis
 
-The small sites are **not** essentially small, not even the small étale site: for
-`X = Spec ℤ` and any type `I : Type u` the fold map `∐_{i : I} X ⟶ X` is étale (it is an
-isomorphism on each component of the coproduct, and `@Etale` is local at the source), and
-for infinite `I` the underlying set of `∐_{i : I} X` has cardinality `#I`, so
-non-equinumerous `I` give non-isomorphic objects of `X.Etale`. Its skeleton therefore
-surjects onto the infinite cardinals of `Cardinal.{u}`, which is not `Small.{u}`
-(`not_small_cardinal`). Only the small *affine* étale site is essentially small
+The small sites are **not** essentially small, not even the small étale site: this is
+proved as `AlgebraicGeometry.Scheme.not_essentiallySmall_etale` in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Sites.NotEssentiallySmall`. For any `I : Type u`
+the fold map `∐_{i : I} X ⟶ X` is étale, and when `X` is a one-point scheme the underlying
+set of `∐_{i : I} X` is in bijection with `I`, so non-equinumerous `I` give non-isomorphic
+objects of `X.Etale` and its skeleton contains a copy of `Cardinal.{u}`, which is not
+`Small.{u}`. Only the small *affine* étale site is essentially small
 (`AlgebraicGeometry.Scheme.AffineEtale`, `Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`),
 because an affine scheme étale over `S` is `Spec` of a ring of bounded cardinality.
 
