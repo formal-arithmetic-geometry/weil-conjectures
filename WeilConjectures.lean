@@ -33,13 +33,6 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
-public import WeilConjectures.DerivedCategory.Constructible
-public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
-public import WeilConjectures.DerivedCategory.HomotopyCategory.GrothendieckAbelian
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.Dynamics.OrbitCount
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
