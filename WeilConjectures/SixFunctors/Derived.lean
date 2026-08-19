@@ -9,11 +9,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.DerivedCategory.Adjunction
-public import WeilConjectures.DerivedCategory.GrothendieckAbelian.KInjectiveResolution
-public import WeilConjectures.DerivedCategory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.SheafCompose
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
@@ -22,8 +22,7 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 # Derived pushforward and derived lower shriek on unbounded derived categories
 
-For an abelian coefficient category `A` admitting sheafification on the small étale sites,
-the categories of `A`-valued étale sheaves are abelian, the pushforward
+The categories of `A`-valued étale sheaves are abelian, the pushforward
 `g_* = Etale.lowerStar` along an arbitrary morphism `g` and the lower shriek
 `f_! = Etale.lowerShriek` along a morphism `f` admitting a compactification are additive,
 and this file records their total right derived functors
@@ -54,19 +53,19 @@ input: Mathlib's `CategoryTheory.Functor.rightDerivedFunctorPlus` requires only
 and `Etale.rightDerivedLowerShriekPlus` need no K-injective hypothesis. Note however that
 the chosen `HasDerivedCategory.{u}` instance is itself built from the sorried K-injective
 statement (through the local `u`-smallness of the derived category), so every derived
-functor in this file — including the `Plus` variants — currently depends on `sorryAx`; the
-`#print axioms` guards at the end of this file record the exact axiom dependencies. Since
+functor in this file — including the `Plus` variants — currently depends on `sorryAx`. Since
 the `ℓ`-adic formalism only needs `Dᵇc`, the `Plus` variants are the versions to build on;
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
 the restriction of the unbounded functors to `DerivedCategory.Plus` with these.
 
 The same asymmetry governs the composition isomorphism. The unbounded
 `CategoryTheory.Functor.rightDerivedFunctorCompIso`
-(`WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp`) takes
+(`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`) takes
 `HasKInjectiveResolutions` on both sheaf categories. Its bounded below counterpart
 `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso` in
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp` asks only that the first
-functor preserve injective objects, which for an étale `g` holds because `g_*` is right
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp` asks only
+that the first functor preserve injective objects, which for an étale `g` holds because
+`g_*` is right
 adjoint to the left exact `g^*`. That is what makes `Etale.rightDerivedLowerStarPlusComp`
 below free of any K-injective hypothesis as well.
 
@@ -368,7 +367,7 @@ section DerivedUpperStar
 ## The derived pullback `Lg^*`
 
 The pullback `g^* = Etale.upperStar` is left derived using the K-flat left
-derivability structure of `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`.
+derivability structure of `WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs`.
 This requires the source sheaf category `Sheaf Y.smallEtaleTopology A` to carry a
 preadditive monoidal structure whose tensor product interacts well with coproducts and
 `ℤ`-indexed colimits, and to admit functorial flat resolutions. These inputs are stated
@@ -559,46 +558,5 @@ noncomputable def Etale.rightDerivedLowerStarPlusComp :
     (Etale.lowerStarComp A h₁ h₂)
 
 end Comp
-
-/-! ### Axiom guards
-
-The `Plus` variants avoid the K-injective hypothesis in the derived functor machinery
-itself, but every derived functor in this file goes through the chosen
-`HasDerivedCategory.{u}` instance, which is built from the sorried
-`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`; hence
-`sorryAx` appears below. These guards pin down the exact axiom dependencies, so that any
-change in them cannot go unnoticed; once the K-injective instance is proved, the `sorryAx`
-entries below should disappear again.
--/
-
-section AxiomChecks
-
-open Etale
-
-/-- info: 'AlgebraicGeometry.Etale.rightDerivedLowerStarPlus' depends on axioms: [propext,
-sorryAx, Classical.choice, Quot.sound] -/
-#guard_msgs in
-#print axioms rightDerivedLowerStarPlus
-
-/-- info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus' depends on axioms: [propext,
- sorryAx,
- Classical.choice,
- Quot.sound] -/
-#guard_msgs in
-#print axioms rightDerivedLowerShriekPlus
-
-/-- info: 'AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar' depends on axioms:
-[propext, Classical.choice, Quot.sound] -/
-#guard_msgs in
-#print axioms preservesInjectiveObjects_lowerStar
-
-/-- info: 'AlgebraicGeometry.Etale.rightDerivedLowerStarPlusComp' depends on axioms: [propext,
- sorryAx,
- Classical.choice,
- Quot.sound] -/
-#guard_msgs in
-#print axioms rightDerivedLowerStarPlusComp
-
-end AxiomChecks
 
 end AlgebraicGeometry
