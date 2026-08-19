@@ -10,6 +10,12 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafCompose
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
@@ -196,170 +202,6 @@ noncomputable def Etale.rightDerivedLowerShriekPlus :
 
 end DerivedLowerShriek
 
-section SheafInstances
-
-/-!
-## Structure on étale sheaf categories induced from the coefficient category
-
-The K-flat left derivability structure used below to derive the pullback `g^*` requires
-the sheaf category `Sheaf Y.smallEtaleTopology A` to carry a preadditive monoidal
-structure whose tensor product interacts well with coproducts and `ℤ`-indexed colimits,
-and to admit functorial flat resolutions. The instances of this section transport each
-of these hypotheses from the coefficient category `A` to the categories of `A`-valued
-étale sheaves, so that the derived pullback only takes hypotheses on `A`:
-
-- the monoidal structure is mathematically provided by
-  `CategoryTheory.Sheaf.monoidalCategory` (sheafification of the objectwise tensor
-  product of presheaves), which is closed by Day's reflection theorem — whence the
-  preadditivity and the colimit-preservation instances. Instantiating these for the
-  small étale site requires transporting along the equivalence with the small affine
-  étale site, since `Y.Etale` is only essentially small and the presheaf-level
-  closed-monoidal infrastructure does not apply verbatim to a large site;
-- the colimit existence and exactness instances hold since the sheaf category is
-  Grothendieck abelian (`Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`);
-- the functorial flat resolutions are provided for module coefficients by the
-  functorial local free covers `⊕ j_{U!} Λ_U` (Stacks Project, Tag 06YL).
-
-The monoidal structure itself is obtained below from `CategoryTheory.Sheaf.monoidalCategory`:
-its inputs are the sheafification (from the concreteness assumptions on `A`) and the
-monoidality of the class `W` of sheafification-inverting morphisms of presheaves, which
-is checked on the stalks at the geometric points of the small étale site and needs the
-tensor product of `A` to commute with filtered colimits in each variable. The remaining
-constructions are not yet formalized, so their instances are recorded with `sorry`.
--/
-
-open MonoidalCategory
-
-variable (Y : Scheme.{u})
-
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
-/-- Postcomposition with a limit-preserving functor preserves sheaves on the small
-étale site. This does not follow from `hasSheafCompose_of_preservesLimitsOfSize`
-directly, since the covering sieves of the small étale site are indexed by a large
-type; it is instead transported from the small affine étale site, which is
-`1`-hypercover dense and essentially small. -/
-lemma Etale.hasSheafCompose_smallEtaleTopology {B : Type u''} [Category.{v''} B]
-    (F : A ⥤ B) [PreservesLimitsOfSize.{u, u} F] :
-    Y.smallEtaleTopology.HasSheafCompose F :=
-  GrothendieckTopology.hasSheafCompose_of_isOneHypercoverDense
-    (Scheme.AffineEtale.Spec Y) (Scheme.AffineEtale.topology Y) _ F
-
-/-- Postcomposition with the forgetful functor of the concrete coefficient category
-preserves étale sheaves. This is the instance of
-`Etale.hasSheafCompose_smallEtaleTopology` needed to check statements about étale
-sheaves on their stalks; it is restricted to `forget A` so that instance search never
-considers it for goals mentioning an unknown functor. -/
-instance Etale.hasSheafCompose_forget_smallEtaleTopology :
-    Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A) :=
-  Etale.hasSheafCompose_smallEtaleTopology A Y _
-
-section Monoidal
-
-/- The monoidal structure on the coefficient category, whose tensor product commutes
-with filtered colimits in each variable. The latter hypothesis makes the tensor product
-of presheaves interact well with the stalks at the points of the small étale site; it
-holds in the intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`, where the
-tensor product commutes with all colimits. -/
-variable [MonoidalCategory A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
-
-/-- The class `Y.smallEtaleTopology.W` of morphisms of `A`-valued étale presheaves
-inverted by sheafification is monoidal: this is checked on the stalks at the geometric
-points of `Y`, which form a conservative family of points of the small étale site. -/
-instance Etale.isMonoidal_W_smallEtaleTopology :
-    (Y.smallEtaleTopology.W (A := A)).IsMonoidal := by
-  obtain ⟨P, _, hP⟩ :=
-    GrothendieckTopology.HasEnoughPoints.exists_objectProperty.{u} Y.smallEtaleTopology
-  exact hP.isMonoidal_W A
-
-/-- The monoidal structure on `A`-valued étale sheaves induced by a monoidal structure
-on the coefficient category `A`: the sheafification of the objectwise tensor product of
-presheaves. -/
-noncomputable instance Etale.sheafMonoidalCategory :
-    MonoidalCategory (Sheaf Y.smallEtaleTopology A) :=
-  Sheaf.monoidalCategory _ _
-
-/-- The monoidal structure on étale sheaves is preadditive when the one on the
-coefficient category is. -/
-instance Etale.sheafMonoidalPreadditive [MonoidalPreadditive A] :
-    MonoidalPreadditive (Sheaf Y.smallEtaleTopology A) :=
-  sorry
-
-/-- Existence of `ℤ`-indexed coproducts of étale sheaves, induced by the corresponding
-condition on the coefficient category. Via
-`ComplexShape.hasColimitsOfShape_discrete_π_up_int`, this provides the coproducts
-defining the tensor product of complexes of étale sheaves, whose indexing fibers
-`(ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}` are in
-bijection with `ℤ`. -/
-instance Etale.sheafHasCoproductsOfShapeInt [HasColimitsOfShape (Discrete ℤ) A] :
-    HasColimitsOfShape (Discrete ℤ) (Sheaf Y.smallEtaleTopology A) :=
-  sorry
-
-/-- Compatibility of the tensor product of graded étale sheaves with coproducts,
-induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafHasTensor₄ObjExt
-    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-    (X₁ X₂ X₃ X₄ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
-  sorry
-
-/-- Compatibility of the tensor product of graded étale sheaves with coproducts,
-induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafHasGoodTensor₁₂Tensor
-    [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-    (X₁ X₂ X₃ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
-  sorry
-
-/-- Compatibility of the tensor product of graded étale sheaves with coproducts,
-induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafHasGoodTensorTensor₂₃
-    [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-    (X₁ X₂ X₃ : GradedObject ℤ (Sheaf Y.smallEtaleTopology A)) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
-  sorry
-
-/-- Existence of `ℤ`-indexed colimits of étale sheaves, induced by the corresponding
-condition on the coefficient category. -/
-instance Etale.sheafHasColimitsOfShapeInt [HasColimitsOfShape ℤ A] :
-    HasColimitsOfShape ℤ (Sheaf Y.smallEtaleTopology A) :=
-  sorry
-
-/-- Exactness of `ℤ`-indexed colimits of étale sheaves, induced by the corresponding
-condition on the coefficient category. -/
-instance Etale.sheafHasExactColimitsOfShapeInt [HasColimitsOfShape ℤ A]
-    [HasExactColimitsOfShape ℤ A] :
-    HasExactColimitsOfShape ℤ (Sheaf Y.smallEtaleTopology A) :=
-  sorry
-
-/-- Preservation of `ℤ`-indexed colimits by the tensor product of étale sheaves in the
-first variable, induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafPreservesColimitsOfShapeCurriedTensorObj
-    [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
-    (X : Sheaf Y.smallEtaleTopology A) :
-    PreservesColimitsOfShape ℤ ((curriedTensor (Sheaf Y.smallEtaleTopology A)).obj X) :=
-  sorry
-
-/-- Preservation of `ℤ`-indexed colimits by the tensor product of étale sheaves in the
-second variable, induced by the corresponding condition on the coefficient category. -/
-instance Etale.sheafPreservesColimitsOfShapeCurriedTensorFlipObj
-    [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
-    (X : Sheaf Y.smallEtaleTopology A) :
-    PreservesColimitsOfShape ℤ
-      ((curriedTensor (Sheaf Y.smallEtaleTopology A)).flip.obj X) :=
-  sorry
-
-/-- Functorial flat resolutions of étale sheaves: for module coefficients these are
-given by the functorial local free covers `⊕ j_{U!} Λ_U` (Stacks Project, Tag 06YL). -/
-instance Etale.sheafHasFunctorialFlatResolution
-    [Abelian.HasFunctorialFlatResolution A] :
-    Abelian.HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A) :=
-  sorry
-
-end Monoidal
-
-end SheafInstances
 
 section DerivedUpperStar
 
@@ -372,7 +214,9 @@ This requires the source sheaf category `Sheaf Y.smallEtaleTopology A` to carry 
 preadditive monoidal structure whose tensor product interacts well with coproducts and
 `ℤ`-indexed colimits, and to admit functorial flat resolutions. These inputs are stated
 as hypotheses on the coefficient category `A` only; they are transported to the sheaf
-categories by the instances of the section `SheafInstances` above.
+categories by the instances of the folder
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`, with the monoidal structure and
+its compatibilities provided by its `Monoidal` subfolder.
 
 The additivity and right exactness of `g^*` are derived here from the adjunction
 `g^* ⊣ g_*`; the left exactness comes from `Etale.preservesFiniteLimits_upperStar`, whose
@@ -411,7 +255,7 @@ variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).o
 product commutes with filtered colimits in each variable (as it does in the intended
 applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`); the latter hypothesis is what
 allows the monoidal structure to descend to the étale sheaf categories via the stalk
-functors, see the section `SheafInstances`. -/
+functors, see `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
