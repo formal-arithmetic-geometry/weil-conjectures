@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 # Composition of right derived functors on bounded below derived categories
 
 This is the bounded below counterpart of
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp`. Let `F : C ⥤ D` and
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`. Let `F : C ⥤ D` and
 `G : D ⥤ E` be additive functors between abelian categories, with `C` and `D` having
 enough injectives. If `F` preserves injective objects, then the canonical comparison
 
@@ -24,13 +24,14 @@ is an isomorphism (`Functor.rightDerivedFunctorPlusCompIso`).
 ## Why this is not a corollary of the unbounded statement
 
 `Functor.rightDerivedFunctorCompIso` in
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp` proves the same theorem for the
-unbounded derived category, but it assumes `HasKInjectiveResolutions` on both `C` and `D`,
-whose only source in this repository is a `sorry`. The bounded below statement needs only
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp` proves the same
+theorem for the unbounded derived category, but it assumes `HasKInjectiveResolutions` on
+both `C` and `D`, whose only source in this repository is a `sorry`. The bounded below
+statement needs only
 enough injectives, so it rests on proved theorems; see
 `WeilConjectures.SixFunctors.Derived` for why that distinction matters here. This file
 therefore deliberately does not import anything from
-`WeilConjectures.DerivedCategory.GrothendieckAbelian.KInjectiveResolution`.
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
 
 ## The proof, and where it differs from the unbounded one
 

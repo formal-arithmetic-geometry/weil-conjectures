@@ -5,11 +5,11 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.DerivedCategory.GrothendieckAbelian.KInjectiveResolution
-public import WeilConjectures.DerivedCategory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
@@ -51,16 +51,17 @@ statement (through the local `u`-smallness of the derived category), so every de
 functor in this file — including the `Plus` variants — currently depends on `sorryAx`; the
 `#print axioms` guards at the end of this file record the exact axiom dependencies. Since
 the `ℓ`-adic formalism only needs `Dᵇc`, the `Plus` variants are the versions to build on;
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
 the restriction of the unbounded functors to `DerivedCategory.Plus` with these.
 
 The same asymmetry governs the composition isomorphism. The unbounded
 `CategoryTheory.Functor.rightDerivedFunctorCompIso`
-(`WeilConjectures.DerivedCategory.RightDerivedFunctor.Comp`) takes
+(`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`) takes
 `HasKInjectiveResolutions` on both sheaf categories. Its bounded below counterpart
 `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso` in
-`WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusComp` asks only that the first
-functor preserve injective objects, which for an étale `g` holds because `g_*` is right
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp` asks only
+that the first functor preserve injective objects, which for an étale `g` holds because
+`g_*` is right
 adjoint to the left exact `g^*`. That is what makes `Etale.rightDerivedLowerStarPlusComp`
 below free of any K-injective hypothesis as well.
 
