@@ -5,10 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 
 /-!

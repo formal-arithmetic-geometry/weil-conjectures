@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
@@ -19,6 +20,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.SheafCompose
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
@@ -34,11 +37,11 @@ and this file records their total right derived functors
 `Rg_* : D(Z_ét) ⥤ D(Y_ét)` and `Rf_! : D(X_ét) ⥤ D(Y_ét)` on the unbounded
 derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctor`.
 
-The sheaf categories are Grothendieck abelian
-(`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`) whenever the
-coefficient category `A` is a concrete Grothendieck abelian category (with hom types and
-underlying types in the universe `u` of the base schemes, and the forgetful functor
-preserving limits and filtered colimits and reflecting isomorphisms); this covers the
+The sheaf categories are Grothendieck abelian (the sorried instance
+`CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallGrothendieckTopology`
+of `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`) whenever the
+coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
+universe `u` of the base schemes; this covers the
 intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
 categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
@@ -135,13 +138,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 
 /-- The chosen localized category `D(X_ét)` of `A`-valued étale sheaves, with `Hom`-types in
 `Type u`, obtained from the Grothendieck abelian structure of the sheaf category via

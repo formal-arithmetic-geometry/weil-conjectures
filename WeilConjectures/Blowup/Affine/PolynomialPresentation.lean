@@ -5,6 +5,8 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.RingTheory.GradedAlgebra.RingHom
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 public import WeilConjectures.Blowup.Affine.ReesGrading
 
 /-!
