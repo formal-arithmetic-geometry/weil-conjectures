@@ -54,10 +54,12 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
 
 - The pullback `Etale.upperStar` is defined by left Kan extension along base change
   followed by sheafification, and the Kan extensions in question are not known to exist
-  for an arbitrary `f` with current mathlib: the full small étale site is not known to be
+  for an arbitrary `f` with current mathlib: the full small étale site is *not*
   essentially small (only the small affine étale site
-  `AlgebraicGeometry.Scheme.AffineEtale` is). Mathematically they always exist; they are
-  provided by the sorried instance
+  `AlgebraicGeometry.Scheme.AffineEtale` is; see the module docstring of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`), so the indexing comma
+  categories have to be reduced to the affine slice. Mathematically the Kan extensions
+  always exist; they are provided by the sorried instance
   `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`. What remains
   assumed as an instance hypothesis

@@ -99,6 +99,12 @@ assumptions on `P` and `Q` and the inequality `hQP : Q ≤ P`; all of them hold 
 variable (P Q : MorphismProperty Scheme.{u})
 variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
   [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
+/- The left Kan extensions and the sheafification also need the essentially small dense
+affine subsite of `Mathlib.AlgebraicGeometry.Sites.Affine`; see the module docstring of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Both hypotheses hold for
+`P = @Etale`. -/
+variable [IsZariskiLocalAtSource P]
+  [∀ T : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec T)]
 variable (hQP : Q ≤ P)
 variable {X Y : Scheme.{u}}
 

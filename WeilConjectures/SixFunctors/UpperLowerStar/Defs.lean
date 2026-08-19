@@ -85,6 +85,12 @@ namespace GrothendieckTopology
 variable (P Q : MorphismProperty Scheme.{u})
 variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
   [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
+/- The sheafification and the left Kan extensions entering the definitions below need the
+essentially small dense affine subsite of `Mathlib.AlgebraicGeometry.Sites.Affine`; see the
+module docstring of `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Both
+hypotheses hold for `P = @Etale`. -/
+variable [IsZariskiLocalAtSource P]
+  [∀ V : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec V)]
 variable (hQP : Q ≤ P)
 
 variable {W U : Scheme.{u}} (g : W ⟶ U)
@@ -100,7 +106,8 @@ noncomputable def lowerStar :
   (MorphismProperty.Over.pullback P ⊤ g).sheafPushforwardContinuous A
     (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P]
+  [∀ V : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec V)] in
 /-- The sections of `g_* G` over `V → U` are the sections of `G` over `V ×_U W → W`. -/
 lemma lowerStar_obj_val_obj
     (G : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
@@ -108,7 +115,8 @@ lemma lowerStar_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P]
+  [∀ V : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec V)] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback P ⊤ g).op`. -/
 lemma lowerStar_map_hom_app
     {G G' : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ U) :

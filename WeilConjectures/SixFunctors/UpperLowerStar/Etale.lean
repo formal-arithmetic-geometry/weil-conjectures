@@ -30,8 +30,11 @@ The site-theoretic inputs of the general definitions are discharged here:
   étale slice. Hence `Etale.lowerStar` carries no hypotheses at all.
 - Sheafification on the small étale sites and the left Kan extensions along the
   opposites of base change (together with their left
-  exactness) exist since `A` is Grothendieck abelian and the small étale sites are
-  essentially small; the latter are the sorried instances of
+  exactness) exist since `A` is Grothendieck abelian and the small étale sites admit an
+  essentially small dense subsite, namely their affine slice — the small étale sites
+  themselves are *not* essentially small, see the module docstring of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`; the statements in
+  question are the sorried instances of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Hence
   `Etale.upperStar` and the adjunction
