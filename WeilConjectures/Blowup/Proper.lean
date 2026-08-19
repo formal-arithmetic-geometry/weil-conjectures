@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Gluing
 
