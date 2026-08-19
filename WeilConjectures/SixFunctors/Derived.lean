@@ -225,6 +225,20 @@ derivability-structure machinery.
 
 open MonoidalCategory
 
+/- The concreteness of the coefficient category `A` (with the forgetful functor
+preserving limits and filtered colimits and reflecting isomorphisms), as in the
+intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The instances of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian` transporting the monoidal
+structure and its compatibilities to the étale sheaf categories are stated under
+these hypotheses — the monoidality of the sheafification-inverting morphisms is
+checked on stalks — which is why this section assumes them while the rest of the
+file does not. -/
+variable {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /- The sheafification needed by `g^*` is stated as a hypothesis (although it is
