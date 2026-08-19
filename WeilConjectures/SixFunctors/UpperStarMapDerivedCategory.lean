@@ -73,8 +73,8 @@ variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
 
 /- The K-flat resolution package on the coefficient category `A`, as in the section
 `DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`; it is transported to the
-étale sheaf categories of all schemes at once by the instances of the section
-`SheafInstances` there. -/
+étale sheaf categories of all schemes at once by the instances of the `Monoidal`
+subfolder of `WeilConjectures.CategoryTheory.GrothendieckAbelian`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
