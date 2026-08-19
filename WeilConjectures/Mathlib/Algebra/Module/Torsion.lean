@@ -35,8 +35,9 @@ the strict transform of a module on an affine chart.
 - `Submodule.torsion'QuotientMap_injective`,
   `Submodule.torsion'QuotientMap_surjective` and `Submodule.torsion'QuotientMap_exact`: a
   short exact sequence induces a short exact sequence of torsion quotients, provided it
-  stays exact modulo `s • ⊤`; `Submodule.comap_smul_top_le_of_isSMulRegular` supplies that
-  hypothesis when `S` acts regularly on the third term.
+  stays exact modulo `s • ⊤`; `Submodule.comap_smul_top_le_of_isSMulRegular` (in
+  `WeilConjectures.Mathlib.Algebra.Exact.Basic`) supplies that hypothesis when `S` acts
+  regularly on the third term.
 -/
 
 @[expose] public section
@@ -202,23 +203,6 @@ theorem torsion'QuotientMap_surjective {g : M₂ →ₗ[R] M₃} (hg : Function.
   exact ⟨Submodule.Quotient.mk y, torsion'QuotientMap_mk _ _ _⟩
 
 variable {S}
-
-/-- If `s` acts regularly on the third term of an exact sequence whose first map is
-injective, then an element of `M₁` whose image lies in `s • M₂` already lies in `s • M₁`.
-This is the hypothesis of `Submodule.torsion'QuotientMap_exact`. -/
-theorem comap_smul_top_le_of_isSMulRegular {f : M₁ →ₗ[R] M₂} {g : M₂ →ₗ[R] M₃}
-    (hf : Function.Injective f) (hfg : Function.Exact f g) {s : R}
-    (hs : IsSMulRegular M₃ s) :
-    Submodule.comap f (s • (⊤ : Submodule R M₂)) ≤ s • (⊤ : Submodule R M₁) := by
-  intro y hy
-  rw [Submodule.mem_comap, mem_smul_pointwise_iff_exists] at hy
-  obtain ⟨x, -, hx⟩ := hy
-  have hgx : g x = 0 := by
-    refine hs (?_ : s • g x = s • 0)
-    rw [smul_zero, ← map_smul, hx, hfg.apply_apply_eq_zero]
-  obtain ⟨z, rfl⟩ := (hfg x).mp hgx
-  rw [mem_smul_pointwise_iff_exists]
-  exact ⟨z, mem_top, hf (by rw [map_smul, hx])⟩
 
 /-- Torsion quotients preserve exactness of a sequence which stays exact modulo `s • ⊤`
 for every `s ∈ S` (Stacks Project Tag 080W). Together with

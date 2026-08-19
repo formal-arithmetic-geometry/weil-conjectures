@@ -59,7 +59,7 @@ namespace AlgebraicGeometry
 variable {X Y X' : Scheme.{u}} (f : Y ⟶ X) (π : X' ⟶ X) (U : X.Opens)
 
 /-- The open locus of the fibre product `Y ×_X X'` lying over the open `U ⊆ X`. -/
-abbrev strictTransformOpen : (pullback f π).Opens :=
+def strictTransformOpen : (pullback f π).Opens :=
   pullback.snd f π ⁻¹ᵁ (π ⁻¹ᵁ U)
 
 /-- The open locus over `U` is the preimage of `U` under the structure morphism of the
