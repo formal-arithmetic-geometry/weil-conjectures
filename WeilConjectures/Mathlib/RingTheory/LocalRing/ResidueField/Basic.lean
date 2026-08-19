@@ -20,7 +20,7 @@ ideal of a local ring `V`, then the residue map of `ρ` factors through `π`
 namespace IsLocalRing
 
 /-- If `π : P →+* K` is surjective and `ρ : P →+* V` carries `RingHom.ker π` into the
-maximal ideal of the local ring `V`, then `residue V ∘ ρ` factors uniquely through `π`. -/
+maximal ideal of the local ring `V`, then `residue V ∘ ρ` factors through `π`. -/
 theorem exists_comp_eq_residue_comp {P K V : Type*} [CommRing P] [CommRing K] [CommRing V]
     [IsLocalRing V] {π : P →+* K} (hπ : Function.Surjective π) (ρ : P →+* V)
     (hker : ∀ a ∈ RingHom.ker π, ρ a ∈ maximalIdeal V) :

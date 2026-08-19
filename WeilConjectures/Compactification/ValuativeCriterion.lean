@@ -416,8 +416,7 @@ theorem RelativeTo.existence_of_isSchemeTheoreticallyDominant_of_isAffine
   -- Step 4: descend the residue map of `VA'` to a field embedding `τ : K → κ(VA')`
   let ρ : P ⟶ CommRingCat.of ↥VA' := Spec.preimage αV
   have hρ : Spec.map ρ = αV := Spec.map_preimage _
-  have hker : ∀ a ∈ RingHom.ker π.hom, ρ.hom a ∈ maximalIdeal ↥VA' := by
-    intro a ha
+  have hker (a : P) (ha : a ∈ RingHom.ker π.hom) : ρ.hom a ∈ maximalIdeal ↥VA' := by
     have hmem : Spec.map π (closedPoint (CommRingCat.of K)) ∈
         PrimeSpectrum.zeroLocus {a} := by
       rw [PrimeSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
@@ -443,8 +442,7 @@ theorem RelativeTo.existence_of_isSchemeTheoreticallyDominant_of_isAffine
   have hπpre : pre ≫ π = ψ ≫ CommRingCat.ofHom (algebraMap A K) := by
     apply Spec.map_injective
     rw [Spec.map_comp, Spec.map_comp, hpre, hψ, ← Category.assoc, hi₁p, w]
-  have hθmem : ∀ r : ↥R, residue ↥VA' (θ r) ∈ A'' := by
-    intro r
+  have hθmem (r : ↥R) : residue ↥VA' (θ r) ∈ A'' := by
     have hres : residue ↥VA' (θ r) = τ (π.hom (pre.hom r)) := by
       have hτ := congrArg (fun u : ↑P →+* ResidueField ↥VA' ↦ u (pre.hom r)) hτπ
       simpa [θ] using hτ.symm
@@ -516,6 +514,8 @@ theorem RelativeTo.existence_of_isSchemeTheoreticallyDominant_of_isAffine
   clear_value g'' rr ιC C γ θ pre ψ ρ αV e' VA'
   -- Step 9: the stalk comparison produces a map `𝒪_{X, g''(𝔪)} ⟶ K` landing in `A`
   obtain ⟨κ, hκSpec, hκmem⟩ := exists_stalkClosedPointTo_of_generic_eq A'' τ i₁ g'' hI
+  -- `VA` is by definition the valuation subring of `valuation A K`, but bridging to
+  -- `.integer` pointwise rather than at the `∀` is a prohibitively expensive defeq check
   have hκVA : ∀ s, κ.hom s ∈ VA := fun s ↦ by
     rw [← hA'']
     exact hκmem s
@@ -621,9 +621,9 @@ theorem IsSeparated.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f 
         commSq := ⟨by
           rw [← hfst]
           simp only [Category.assoc]⟩ } hηU
-    have hl₀uniq' : ∀ y : Spec (CommRingCat.of sq.R) ⟶ X,
-        Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ∧
-          y ≫ f = sq.i₂ ≫ pullback.fst f f ≫ f → y = l₀ := hl₀uniq
+    have hl₀uniq' (y : Spec (CommRingCat.of sq.R) ⟶ X)
+        (hy : Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K)) ≫ y = sq.i₁ ∧
+          y ≫ f = sq.i₂ ≫ pullback.fst f f ≫ f) : y = l₀ := hl₀uniq y hy
     have hfst' : sq.i₂ ≫ pullback.fst f f = l₀ := hl₀uniq' _ ⟨hfst, Category.assoc _ _ _⟩
     have hsnd' : sq.i₂ ≫ pullback.snd f f = l₀ := by
       refine hl₀uniq' _ ⟨hsnd, ?_⟩
