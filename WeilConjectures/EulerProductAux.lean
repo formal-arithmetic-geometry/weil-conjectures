@@ -5,7 +5,11 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Data.Rat.Star
+public import Mathlib.RingTheory.PowerSeries.Derivative
+public import Mathlib.Topology.Connected.Separation
+public import Mathlib.Topology.Separation.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 
 @[expose] public section

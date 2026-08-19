@@ -5,8 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Weil.Definitions
-public import WeilConjectures
+public import WeilConjectures.Statement
 
 @[expose] public section
 
