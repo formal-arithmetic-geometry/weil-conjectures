@@ -6,7 +6,9 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Complement
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
@@ -48,7 +50,13 @@ recovers the classical strict transform; the specialization is
   (blueprint: `lemma:nagata-strict-transform-over-complement`, first half);
 - `AlgebraicGeometry.isPullback_strictTransformOpen`: if `π` is an isomorphism over
   `U`, the open locus is canonically `Y ×_X U`, compatibly with the projection to `Y`
-  (blueprint: `lemma:nagata-strict-transform-over-complement`, second half).
+  (blueprint: `lemma:nagata-strict-transform-over-complement`, second half);
+- `AlgebraicGeometry.ker_strictTransformMap`: the strict transform and its open locus
+  have the same scheme-theoretic image in `X'`, since the factorization of the open
+  locus through the strict transform is scheme-theoretically dominant;
+- `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι`: the standing
+  quasi-compactness assumption below, discharged from `U` quasi-compact and the fibre
+  product quasi-separated.
 
 Combining the last two statements identifies the strict transform over `U` with the
 ordinary pullback `Y ×_X U`, which is the full statement of
@@ -142,9 +150,39 @@ lemma ker_strictTransformι :
     (strictTransformι f π U).ker = ((strictTransformOpen f π U).ι).ker :=
   Scheme.IdealSheafData.ker_subschemeι _
 
+/-- **The standing quasi-compactness assumption, discharged from finiteness data**: if
+the fibre product `Y ×_X X'` is quasi-separated, `f` and `π` are quasi-compact and `U`
+is a quasi-compact open of `X`, then the inclusion of the open locus over `U` is a
+quasi-compact morphism, so the whole comparison API below applies. This is the general
+form of `AlgebraicGeometry.Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι`. -/
+theorem quasiCompact_strictTransformOpen_ι [QuasiSeparatedSpace ↥(pullback f π)]
+    [QuasiCompact f] [QuasiCompact π] (hU : IsCompact (U : Set X)) :
+    QuasiCompact (strictTransformOpen f π U).ι := by
+  refine Scheme.Opens.quasiCompact_ι _ ?_
+  rw [strictTransformOpen_eq_preimage]
+  exact QuasiCompact.isCompact_preimage (f := pullback.fst f π ≫ f) _ U.isOpen hU
+
 section OverComplement
 
 variable [QuasiCompact (strictTransformOpen f π U).ι]
+
+/-- The factorization of the open locus through the strict transform is
+scheme-theoretically dominant: the strict transform is by definition the
+scheme-theoretic image of that inclusion. -/
+instance : IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
+  inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
+
+/-- **The strict transform and its open locus have the same scheme-theoretic image in
+`X'`**: precomposing the projection `StrictTransform f π U ⟶ X'` with the
+scheme-theoretically dominant factorization of the open locus does not change the
+kernel ideal sheaf. This is the half of the transport of scheme-theoretic images along
+an admissible blow-up (Stacks Project Tag 0F3Y) that is pure strict-transform theory.
+(Blueprint: `lemma:nagata-scheme-image-transport-strict-transform`.) -/
+theorem ker_strictTransformMap :
+    (strictTransformMap f π U).ker =
+      ((strictTransformOpen f π U).ι ≫ pullback.snd f π).ker := by
+  rw [← strictTransformFactor_ι, Category.assoc, strictTransformMap]
+  exact (Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _).symm
 
 /-- Over the preserved open locus, the ideal sheaf cutting out the strict transform
 vanishes: nothing is lost over `U`.

@@ -134,24 +134,93 @@ of `X`. For every lift `h' : V ⟶ X' ×_S Y` of `h` along the base-changed blow
 scheme-theoretic image of `h`, as closed subschemes of `X' ×_S Y`.
 
 The statement is in kernel ideal sheaf form: both closed subschemes of `X' ×_S Y` are
-recorded by the kernels of the corresponding closed immersions. The proof is the
-affine saturation computation of the blueprint
-(`lemma:nagata-scheme-image-affine-saturation`,
-`lemma:nagata-scheme-image-transport-strict-transform`), currently awaiting the
-strict-transform chart algebra.
-(Blueprint: `lemma:nagata-scheme-image-strict-transform`; proof order item 31.) -/
+recorded by the kernels of the corresponding closed immersions.
+
+**Hypotheses.** The right-hand side is a strict transform, so the theorem carries the
+standing quasi-compactness assumption of
+`WeilConjectures.Compactification.StrictTransform`: the inclusion of the open locus
+over the preserved open must be a quasi-compact morphism, which is exactly what every
+comparison lemma about the strict transform requires. It is discharged from finiteness
+data by `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι`, and it is not implied
+by the remaining hypotheses — nothing here makes `U`, `B.preservedOpen` or `X`
+quasi-compact.
+
+**Proof.** The blow-up is an isomorphism over the complement of its center, hence so is
+its base change `X' ×_S Y ⟶ X ×_S Y` over the preimage of that complement
+(`AlgebraicGeometry.isIso_partialSectionOpenι_restrict`); so the open locus of
+`SIm(h) ×_{X ×_S Y} (X' ×_S Y)` over the preserved open is the restriction of `SIm(h)`
+itself (`AlgebraicGeometry.isPullback_strictTransformOpen`). Since `h`'s first
+projection lands in `U ≤ B.preservedOpen`, the lift `h'` factors through that open
+locus, and the factorization is scheme-theoretically dominant because `h ⟶ SIm(h)` is
+and dominance descends along a flat base change. So `h'` and the open locus have the
+same scheme-theoretic image in `X' ×_S Y`; the open locus and the strict transform have
+the same one by `AlgebraicGeometry.ker_strictTransformMap`.
+(Blueprint: `lemma:nagata-scheme-image-strict-transform`,
+`lemma:nagata-scheme-image-transport-strict-transform`; proof order item 31.) -/
 theorem Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup
     {U : X.Opens} (B : AdmissibleBlowup X U)
     (h : V ⟶ pullback x y) [QuasiCompact h] [QuasiSeparated h]
     (hfac : Set.range (h ≫ pullback.fst x y) ⊆ (U : Set X))
     (h' : V ⟶ pullback (B.π ≫ x) y) [QuasiCompact h']
-    (hlift : h' ≫ partialSectionOpenι x y B.π = h) :
+    (hlift : h' ≫ partialSectionOpenι x y B.π = h)
+    [QuasiCompact (strictTransformOpen h.imageι (partialSectionOpenι x y B.π)
+      (pullback.fst x y ⁻¹ᵁ B.preservedOpen)).ι] :
     h'.ker =
       (AlgebraicGeometry.strictTransformι h.imageι
           (partialSectionOpenι x y B.π)
           (pullback.fst x y ⁻¹ᵁ B.preservedOpen) ≫
         pullback.snd h.imageι (partialSectionOpenι x y B.π)).ker := by
-  sorry
+  set ρ := partialSectionOpenι x y B.π
+  set W : (pullback x y).Opens := pullback.fst x y ⁻¹ᵁ B.preservedOpen
+  set L := strictTransformOpen h.imageι ρ W with hL
+  -- `h` lands over the preserved open, because it lands over `U ≤ B.preservedOpen`.
+  have hrange : Set.range h ⊆ (W : Set ↥(pullback x y)) := by
+    rintro _ ⟨v, rfl⟩
+    have : (h ≫ pullback.fst x y) v ∈ (U : Set X) := hfac ⟨v, rfl⟩
+    exact B.le_preservedOpen (by simpa [Scheme.Hom.comp_apply] using this)
+  -- The blow-up is an isomorphism over its own preserved open, ...
+  have hπiso : IsIso (B.π ∣_ B.preservedOpen) := by
+    rw [← B.iso_π, morphismRestrict_comp]
+    have h1 : IsIso (B.iso.hom ∣_ B.I.blowupMap ⁻¹ᵁ B.preservedOpen) := inferInstance
+    have h2 : IsIso (B.I.blowupMap ∣_ B.preservedOpen) :=
+      B.I.isIso_blowupMap_restrict_support_compl
+    exact IsIso.comp_isIso' h1 h2
+  -- ... hence so is its base change, over the preimage of the preserved open.
+  have hρiso : IsIso (ρ ∣_ W) := isIso_partialSectionOpenι_restrict x y B.π B.preservedOpen
+  -- So the open locus is the restriction of `SIm(h)` over the preserved open.
+  have hPB := isPullback_strictTransformOpen h.imageι ρ W
+  -- The lift of `h` to `SIm(h) ×_(X ×_S Y) (X' ×_S Y)`.
+  have hcond : h.toImage ≫ h.imageι = h' ≫ ρ := by
+    rw [Scheme.Hom.toImage_imageι, hlift]
+  set k := pullback.lift h.toImage h' hcond
+  have hkfst : k ≫ pullback.fst h.imageι ρ = h.toImage := pullback.lift_fst _ _ _
+  have hksnd : k ≫ pullback.snd h.imageι ρ = h' := pullback.lift_snd _ _ _
+  -- It lands in the open locus, again because `h` lands over the preserved open.
+  have hkrange : Set.range k ⊆ Set.range L.ι := by
+    rw [Scheme.Opens.range_ι, hL, strictTransformOpen_eq_preimage]
+    rintro _ ⟨v, rfl⟩
+    have : (k ≫ pullback.fst h.imageι ρ ≫ h.imageι) v ∈ (W : Set ↥(pullback x y)) := by
+      rw [← Category.assoc, hkfst, Scheme.Hom.toImage_imageι]
+      exact hrange ⟨v, rfl⟩
+    simpa [Scheme.Hom.comp_apply] using this
+  set m := IsOpenImmersion.lift L.ι k hkrange
+  have hmfac : m ≫ L.ι = k := IsOpenImmersion.lift_fac _ _ _
+  -- The projection of the open locus to `SIm(h)` is a base change of the open immersion
+  -- `W ⟶ X ×_S Y`, so `V` sits inside the open locus as a flat base change of
+  -- `V ⟶ SIm(h)`, and scheme-theoretic dominance descends.
+  have hp₁ : IsOpenImmersion (L.ι ≫ pullback.fst h.imageι ρ) :=
+    IsOpenImmersion.of_isPullback hPB.flip inferInstance
+  have hsq : IsPullback (𝟙 V) m h.toImage (L.ι ≫ pullback.fst h.imageι ρ) :=
+    IsPullback.of_horiz_isIso_mono ⟨by rw [Category.id_comp, ← Category.assoc, hmfac, hkfst]⟩
+  have hmker : m.ker = ⊥ := by
+    rw [h.toImage.ker_of_isPullback (L.ι ≫ pullback.fst h.imageι ρ) hsq,
+      Scheme.Hom.ker_eq_bot, Scheme.IdealSheafData.comap_bot]
+  have : IsSchemeTheoreticallyDominant m := (isSchemeTheoreticallyDominant_iff m).mpr hmker
+  calc h'.ker = (m ≫ (L.ι ≫ pullback.snd h.imageι ρ)).ker := by
+        rw [← Category.assoc, hmfac, hksnd]
+    _ = (L.ι ≫ pullback.snd h.imageι ρ).ker :=
+        Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _
+    _ = _ := (ker_strictTransformMap h.imageι ρ W).symm
 
 end ImageTransport
 
