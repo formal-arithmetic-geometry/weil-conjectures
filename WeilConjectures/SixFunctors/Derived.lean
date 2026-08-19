@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
-public import WeilConjectures.DerivedCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
@@ -471,7 +471,7 @@ The adjunction `g^* ⊣ g_*` between the pullback and the pushforward of étale 
 induces an adjunction `Lg^* ⊣ Rg_*` between their total derived functors on the
 unbounded derived categories, by
 `CategoryTheory.Adjunction.derivedAdjunction`
-(`WeilConjectures.DerivedCategory.Adjunction`): the left adjoint is
+(`WeilConjectures.CategoryTheory.DerivedCategory.Adjunction`): the left adjoint is
 derived via the K-flat left derivability structure on `D(Y_ét)` and the right adjoint
 via the K-injective right derivability structure on `D(Z_ét)`, and the two
 "absoluteness" hypotheses of mathlib's abstract theorem `Adjunction.derived` hold
