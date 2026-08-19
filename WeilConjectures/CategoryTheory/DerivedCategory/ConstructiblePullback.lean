@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.DerivedCategory.Constructible
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
