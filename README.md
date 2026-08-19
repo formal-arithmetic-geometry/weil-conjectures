@@ -8,6 +8,27 @@ target statements live in `WeilConjectures/Statement.lean`
 `AlgebraicGeometry.Scheme.zetaSeries_rational`), formulated purely
 arithmetically in terms of integer polynomials and their complex roots.
 
+## The `sorry` inventory
+
+`lakefile.toml` sets `warn.sorry = false`, so a `sorry` produces no warning and
+`lake build` says nothing about it. The set of `sorry`s is instead tracked as a
+committed file, `scripts/sorry_inventory.txt`, and CI fails if it disagrees with
+the tree:
+
+```bash
+scripts/sorry_inventory.sh --check          # what CI runs
+scripts/sorry_inventory.sh > scripts/sorry_inventory.txt   # regenerate
+```
+
+Discharging a `sorry` therefore also means regenerating the inventory and
+committing it with the proof, which is what makes progress visible in review.
+The two entries in `Comparator/Weil/Challenge.lean` are **permanent and
+correct** — a comparator challenge file states its theorems with `sorry` by
+construction — and must not be discharged.
+
+The inventory is textual, so it cannot see a declaration that inherits `sorryAx`
+through a sorried *instance*. For that, use `#print axioms <name>`.
+
 ## Blueprint
 
 A browsable blueprint (chapters, statement/proof dependencies, dependency

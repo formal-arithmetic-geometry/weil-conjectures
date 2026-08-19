@@ -29,3 +29,17 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: leanprover/lean-action@v1
+
+  # `lakefile.toml` sets `warn.sorry = false`, so a `sorry` produces no warning
+  # and the build above passes regardless. This job is the repository's only CI
+  # signal that the set of `sorry`s has changed. It needs no Lean toolchain and
+  # runs in about a second, so it is kept separate from the build in order to
+  # give an independent status check rather than masking or being masked by a
+  # build failure.
+  sorry-inventory:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check that the committed sorry inventory matches the tree
+        run: ./scripts/sorry_inventory.sh --check
