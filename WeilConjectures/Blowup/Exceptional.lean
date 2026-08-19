@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Blowup.Affine.Principalization
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
@@ -67,11 +68,6 @@ def chartDiv (a b : A) (ha : a ∈ I) (hb : b ∈ I) :
     HomogeneousLocalization.Away (reesGrading I) (reesX I a ha) :=
   HomogeneousLocalization.mk
     ⟨1, ⟨reesX I b hb, reesX_mem I b hb⟩, ⟨reesX I a ha, reesX_mem I a ha⟩, 1, pow_one _⟩
-
-lemma val_awayAlgebraMap (x : reesAlgebra I) (b : A) :
-    (awayAlgebraMap I x b).val =
-      Localization.mk (reesGradingZero I b : reesAlgebra I) 1 :=
-  rfl
 
 /-- The chart fraction `b/a` multiplied by `a` recovers `b`: division by `a` is possible
 in the `a`-chart for every element of `I`. -/

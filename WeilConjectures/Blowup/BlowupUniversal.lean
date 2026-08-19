@@ -210,7 +210,7 @@ lemma chartLiftLoc_awayAlgebraMap (ha : a ∈ I₀) (x : A) :
       algebraMap R (Localization.Away (φ a)) (φ x) := by
   have h1 : (awayAlgebraMap I₀ (reesX I₀ a ha) x).val =
       Localization.mk ((reesGradingZero I₀ x : reesGrading I₀ 0) : reesAlgebra I₀) 1 :=
-    val_awayAlgebraMap I₀ _ x
+    val_awayAlgebraMap _ x
   calc chartLiftLoc I₀ φ ha (awayAlgebraMap I₀ (reesX I₀ a ha) x)
       = Localization.awayLift (chartLiftEval I₀ φ a) (reesX I₀ a ha)
           (isUnit_chartLiftEval_reesX I₀ φ ha)
