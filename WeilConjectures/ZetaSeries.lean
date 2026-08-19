@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Weil.Definitions
+public import WeilConjectures.ZetaCounting.Defs
 public import WeilConjectures.ZetaFunction
 
 @[expose] public section
@@ -170,43 +171,24 @@ theorem Hom.nat_card_fieldPoints_congr (f : X.Hom (Spec (.of k))) {K L : Type u}
 
 variable (f : X ⟶ Spec (.of k))
 
-private lemma hasSubst_pointCount :
-    PowerSeries.HasSubst
-      (PowerSeries.mk fun n ↦ if n = 0 then 0 else (Hom.pointCount f n : ℚ) / n) :=
-  PowerSeries.HasSubst.of_constantCoeff_zero' (by simp)
+/-- The zeta function of a scheme over a finite field is the zeta series of its point
+counting function. -/
+theorem Hom.zetaSeries_eq_countingZetaSeries :
+    f.zetaSeries = PowerSeries.countingZetaSeries f.pointCount :=
+  rfl
 
 /-- The zeta function of a scheme over a finite field has constant coefficient `1`. -/
 theorem Hom.constantCoeff_zetaSeries :
-    PowerSeries.constantCoeff f.zetaSeries = 1 := by
-  have h0 : PowerSeries.coeff 0 f.zetaSeries = 1 := by
-    unfold Hom.zetaSeries
-    rw [PowerSeries.coeff_subst' (hb := hasSubst_pointCount f), finsum_eq_single _ 0
-      fun d hd ↦ by simp [PowerSeries.coeff_zero_eq_constantCoeff, map_pow, zero_pow hd]]
-    simp [PowerSeries.coeff_exp]
-  simpa using h0
+    PowerSeries.constantCoeff f.zetaSeries = 1 :=
+  PowerSeries.constantCoeff_countingZetaSeries f.pointCount
 
 /-- The logarithmic derivative of the zeta function of `X` over `k` is the generating
 function of the point counts of `X`: `t * Z'(X, t) = (∑ N_n * t ^ n) * Z(X, t)`. -/
 theorem Hom.X_mul_derivative_zetaSeries :
     PowerSeries.X * PowerSeries.derivative ℚ f.zetaSeries =
       PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) *
-        f.zetaSeries := by
-  have hXF : PowerSeries.X * PowerSeries.derivative ℚ
-      (PowerSeries.mk fun n ↦ if n = 0 then 0 else (f.pointCount n : ℚ) / n) =
-      PowerSeries.mk fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n := by
-    ext n
-    match n with
-    | 0 => simp
-    | m + 1 =>
-      rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative,
-        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
-      have hm : ((m : ℚ) + 1) ≠ 0 := by positivity
-      push_cast
-      rw [div_mul_cancel₀ _ hm]
-  unfold Hom.zetaSeries
-  rw [PowerSeries.derivative_subst (hg := hasSubst_pointCount f), PowerSeries.derivative_exp,
-    mul_comm (PowerSeries.subst _ (PowerSeries.exp ℚ)), ← mul_assoc, hXF]
+        f.zetaSeries :=
+  PowerSeries.X_mul_derivative_countingZetaSeries f.pointCount
 
 /-- The canonical embedding of the base field of `X` into the residue field of a point,
 induced by the structure morphism via functoriality of residue fields. See
