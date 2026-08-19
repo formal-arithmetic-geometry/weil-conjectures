@@ -62,8 +62,11 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   assumed as an instance hypothesis
   of `IsConstructibleSheaf` is `HasWeakSheafify` for the localizations of the small étale
   sites of all schemes, quantified because the stratification is existentially
-  quantified; for concrete `A`, `HasWeakSheafify` for the (unlocalized) small étale sites
-  already holds by mathlib's `HasSheafify` instance for `smallEtaleTopology`.
+  quantified; for the (unlocalized) small étale sites, `HasWeakSheafify` already holds for
+  a Grothendieck abelian `A` by the sorried instance
+  `CategoryTheory.GrothendieckTopology.hasSheafify_smallGrothendieckTopology` of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, and for concrete `A`
+  by mathlib's `HasSheafify` instance for `smallEtaleTopology`.
 - Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the
   existence of the right Kan extensions along `(Over.forget U).op` needed to compare
   sheafification on the small étale site with sheafification on its localizations.
