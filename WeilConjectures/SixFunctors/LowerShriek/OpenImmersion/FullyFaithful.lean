@@ -55,23 +55,20 @@ is fully faithful", and none is needed here.
 
 @[expose] public section
 
-universe v' u' u
+universe u' u
 
 open CategoryTheory Category Limits Opposite
 
 namespace AlgebraicGeometry
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-variable [HasInitial A] [HasWeakSheafify X.smallEtaleTopology A]
 
 /-- The adjoint triple `j_! ⊣ j^* ⊣ j_*` on small étale sites along an open immersion. -/
 noncomputable def Etale.openImmersionAdjunctionTriple :
     Adjunction.Triple (Etale.openImmersionLowerShriek A j)
       (Etale.openImmersionRestriction A j) (Etale.lowerStar A j) :=
-  have : HasWeakSheafify (X.smallGrothendieckTopology (Q := @Etale) @Etale) A :=
-    inferInstanceAs (HasWeakSheafify X.smallEtaleTopology A)
-  GrothendieckTopology.localizationAdjunctionTriple A @Etale @Etale j inferInstance
+  GrothendieckTopology.localizationAdjunctionTriple A @Etale @Etale le_rfl j inferInstance
 
 /-- **The unit of `j_! ⊣ j^*` is an isomorphism for an open immersion `j`**, i.e.
 `j^* j_! F ≅ F` naturally in `F`.

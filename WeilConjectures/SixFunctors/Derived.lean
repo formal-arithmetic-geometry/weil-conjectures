@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
@@ -16,19 +17,18 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 # Derived pushforward and derived lower shriek on unbounded derived categories
 
-For an abelian coefficient category `A` admitting sheafification on the small étale sites,
-the categories of `A`-valued étale sheaves are abelian, the pushforward
+The categories of `A`-valued étale sheaves are abelian, the pushforward
 `g_* = Etale.lowerStar` along an arbitrary morphism `g` and the lower shriek
 `f_! = Etale.lowerShriek` along a morphism `f` admitting a compactification are additive,
 and this file records their total right derived functors
 `Rg_* : D(Z_ét) ⥤ D(Y_ét)` and `Rf_! : D(X_ét) ⥤ D(Y_ét)` on the unbounded
 derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctor`.
 
-The sheaf categories are Grothendieck abelian
-(`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`) whenever the
-coefficient category `A` is a concrete Grothendieck abelian category (with hom types and
-underlying types in the universe `u` of the base schemes, and the forgetful functor
-preserving limits and filtered colimits and reflecting isomorphisms); this covers the
+The sheaf categories are Grothendieck abelian (the sorried instance
+`CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallGrothendieckTopology`
+of `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`) whenever the
+coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
+universe `u` of the base schemes; this covers the
 intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
 categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
@@ -48,8 +48,7 @@ input: Mathlib's `CategoryTheory.Functor.rightDerivedFunctorPlus` requires only
 and `Etale.rightDerivedLowerShriekPlus` need no K-injective hypothesis. Note however that
 the chosen `HasDerivedCategory.{u}` instance is itself built from the sorried K-injective
 statement (through the local `u`-smallness of the derived category), so every derived
-functor in this file — including the `Plus` variants — currently depends on `sorryAx`; the
-`#print axioms` guards at the end of this file record the exact axiom dependencies. Since
+functor in this file — including the `Plus` variants — currently depends on `sorryAx`. Since
 the `ℓ`-adic formalism only needs `Dᵇc`, the `Plus` variants are the versions to build on;
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
 the restriction of the unbounded functors to `DerivedCategory.Plus` with these.
@@ -92,13 +91,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 
 /-- The chosen localized category `D(X_ét)` of `A`-valued étale sheaves, with `Hom`-types in
 `Type u`, obtained from the Grothendieck abelian structure of the sheaf category via
