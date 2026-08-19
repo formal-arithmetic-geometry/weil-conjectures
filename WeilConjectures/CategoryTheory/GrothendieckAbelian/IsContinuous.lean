@@ -19,19 +19,10 @@ families of `Q`-morphisms and `Q` is stable under base change, and it preserves
 compatible families because it is representably flat, the small site being finitely
 complete.
 
-## No smallness hypothesis
-
-Unlike the sorried statements of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`,
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf` and
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`, this one needs
-no smallness input: both halves of `Functor.IsContinuous` are conditions on individual
-covering sieves and individual compatible families. Cover-preservation only uses that
-covers are jointly surjective families of `Q`-morphisms and that `Q` is stable under base
-change, and compatible-family-preservation only uses representable flatness of base
-change, which holds because the small site is finitely complete. Neither quantifies over
-the objects of the site, so the statement is correct as it stands for an arbitrary `P`
-satisfying the multiplicativity-type hypotheses below.
+Unlike the other sorried statements of `WeilConjectures.CategoryTheory.GrothendieckAbelian`,
+this one needs no smallness input, and so carries none: both halves of
+`Functor.IsContinuous` are conditions on individual covering sieves and individual
+compatible families, and neither quantifies over the objects of the site.
 
 -/
 
