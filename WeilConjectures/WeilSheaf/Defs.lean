@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.DerivedCategory.ConstructiblePullback
+public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructiblePullback
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.WeilSheaf.GeometricFrobenius
 
@@ -268,11 +268,14 @@ open Scheme
 
 section WeilSheaf
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A]
+  {FA : A → A → Type*} {CD : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+  [PreservesLimits (CategoryTheory.forget A)]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+  [IsGrothendieckAbelian.{u} A]
 variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
-variable [∀ F : (f.geometricFiber).Etaleᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback @Etale ⊤ f.geometricFrobenius.hom).op.HasLeftKanExtension F]
-variable [HasWeakSheafify (f.geometricFiber).smallEtaleTopology A]
 
 /-- The Frobenius pullback endofunctor `G_X := g_X^*` on étale sheaves on the geometric
 fiber `X` of a scheme over a finite field, the pullback along the geometric Frobenius
@@ -311,8 +314,6 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [IsGrothendieckAbelian.{u} A]
 
 variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
-variable [∀ F : (f.geometricFiber).Etaleᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback @Etale ⊤ f.geometricFrobenius.hom).op.HasLeftKanExtension F]
 variable [HasDerivedCategory.{w} (Sheaf (f.geometricFiber).smallEtaleTopology A)]
 
 /-- The Frobenius pullback endofunctor `G_X` on the derived category of étale sheaves
@@ -365,9 +366,6 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
 
 variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
-variable [∀ (T : Scheme.{u}) (φ : T ⟶ f.geometricFiber)
-    (P : (f.geometricFiber).Etaleᵒᵖ ⥤ A),
-  (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension P]
 variable [HasDerivedCategory.{w} (Sheaf (f.geometricFiber).smallEtaleTopology A)]
 
 /-- The Frobenius pullback endofunctor `G_X` on the bounded constructible derived
