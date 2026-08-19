@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
