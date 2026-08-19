@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
 

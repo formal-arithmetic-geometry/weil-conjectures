@@ -5,9 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.Algebra.Ring.NonZeroDivisors
 public import Mathlib.RingTheory.Flat.TorsionFree
-public import Mathlib.RingTheory.Ideal.Maps
 public import Mathlib.RingTheory.RingHom.Flat
 
 /-!

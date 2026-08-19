@@ -8,9 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.Analysis.CStarAlgebra.Classes
 public import Mathlib.Analysis.SpecialFunctions.Pow.Complex
-public import Mathlib.RingTheory.Henselian
-public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import Mathlib.RingTheory.SimpleRing.Principal
 
 @[expose] public section
 

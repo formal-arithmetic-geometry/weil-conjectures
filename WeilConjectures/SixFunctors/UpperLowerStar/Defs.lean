@@ -5,11 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 

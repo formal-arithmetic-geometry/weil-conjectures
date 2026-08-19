@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import WeilConjectures.ClosedPoints
 public import WeilConjectures.ZetaSeries
 
 @[expose] public section

@@ -5,11 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
 
