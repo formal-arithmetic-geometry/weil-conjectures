@@ -58,7 +58,8 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   `AlgebraicGeometry.Scheme.AffineEtale` is). Mathematically they always exist; they are
   provided by the sorried instance
   `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
-  `WeilConjectures.SixFunctors.Instances`. What remains assumed as an instance hypothesis
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`. What remains
+  assumed as an instance hypothesis
   of `IsConstructibleSheaf` is `HasWeakSheafify` for the localizations of the small étale
   sites of all schemes, quantified because the stratification is existentially
   quantified; for concrete `A`, `HasWeakSheafify` for the (unlocalized) small étale sites
@@ -231,8 +232,9 @@ condition does not depend on this choice.
 The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
 provided by the sorried instance
 `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
-`WeilConjectures.SixFunctors.Instances`. Stating `IsFiniteLocallyConstantSheaf` needs
-sheafification for the localizations of the small étale sites of the strata; since the
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`. Stating
+`IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
+étale sites of the strata; since the
 stratification is existentially quantified, this is a hypothesis of the definition,
 quantified over all schemes. It always holds mathematically but is not known to hold
 with current mathlib (see the module implementation notes).

@@ -83,7 +83,8 @@ namespace GrothendieckTopology
 
 /- The left Kan extensions on presheaves, the sheafification and the continuity of the
 base change functor entering the definitions below are provided by the sorried results of
-`WeilConjectures.SixFunctors.Instances`, under the following multiplicativity-type
+the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the following
+multiplicativity-type
 assumptions on `P` and `Q` and the inequality `hQP : Q ≤ P`; all of them hold for
 `P = Q = @Etale`. -/
 variable (P Q : MorphismProperty Scheme.{u})

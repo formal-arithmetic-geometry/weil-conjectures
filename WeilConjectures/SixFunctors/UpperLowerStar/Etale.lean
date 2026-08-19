@@ -35,7 +35,9 @@ are discharged here:
   left Kan extensions along the opposites of base change (together with their left
   exactness) exist since `A` is Grothendieck abelian and the small étale sites are
   essentially small; the latter are the sorried instances of
-  `WeilConjectures.SixFunctors.Instances`. Hence `Etale.upperStar` and the adjunction
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Hence
+  `Etale.upperStar` and the adjunction
   `g^* ⊣ g_*` carry no hypotheses either.
 - For `g` étale, no smallness or exactness argument is needed: base change is right
   adjoint to the localization functor `MorphismProperty.Over.map ⊤ ‹Etale g›`, so its

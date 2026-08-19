@@ -40,7 +40,8 @@ extension by zero along `i` with the pushforward `GrothendieckTopology.lowerStar
 - The continuity of the base change functor along a general `g` (in particular the proper
   structure morphism of a compactification), the left Kan extensions and the
   sheafification entering the extension by zero are provided, for `Q ≤ P`, by the sorried
-  results of `WeilConjectures.SixFunctors.Instances`; the inequality `hQP : Q ≤ P` they
+  results of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`; the
+  inequality `hQP : Q ≤ P` they
   require is an explicit argument of the definitions. For `g` satisfying `P` the
   continuity is proved as `GrothendieckTopology.isContinuous_overPullback_of_le` below,
   via the adjunction with the cocontinuous localization functor.
@@ -92,8 +93,9 @@ namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 /- The left Kan extensions, the sheafification and the continuity of the base change
-functor entering the definitions below are provided by the sorried results of
-`WeilConjectures.SixFunctors.Instances`, under the following multiplicativity-type
+functor entering the definitions below are provided by the sorried results of the folder
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the following
+multiplicativity-type
 assumptions on `P` and `Q` and the inequality `hQP : Q ≤ P`; all of them hold for
 `P = Q = @Etale`. -/
 variable (P Q : MorphismProperty Scheme.{u})

@@ -8,7 +8,9 @@ module
 public import Mathlib
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-public import WeilConjectures.SixFunctors.Instances
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous
 
 /-!
 
@@ -58,8 +60,9 @@ sheafification.
   general does not satisfy `P`.
 - The continuity of the base change functor along an arbitrary morphism, the left Kan
   extensions on presheaves and the sheafification entering the definitions are provided,
-  for `Q ≤ P`, by the sorried results of `WeilConjectures.SixFunctors.Instances`, under
-  the multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of them
+  for `Q ≤ P`, by the sorried results of the folder
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the multiplicativity-type
+  assumptions on `P` and `Q` assumed throughout; all of them
   hold for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of the
   definitions using continuity. For `g` satisfying `P` the continuity is proved as
   `CategoryTheory.GrothendieckTopology.isContinuous_overPullback_of_le` in
@@ -91,7 +94,7 @@ variable {W U : Scheme.{u}} (g : W ⟶ U)
 /-- The pushforward `g_*` along `g : W ⟶ U`, given objectwise by
 `(g_* G)(V → U) = G(V ×_U W → W)`. The continuity of the base change functor is provided
 by the sorried `CategoryTheory.GrothendieckTopology.isContinuous_overPullback` of
-`WeilConjectures.SixFunctors.Instances`. -/
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous`. -/
 noncomputable def lowerStar :
     Sheaf (W.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (U.smallGrothendieckTopology Q (Q := P)) A :=
@@ -138,7 +141,9 @@ section Adjunction
 
 /-- The pullback `g^*` along `g : W ⟶ U`: left Kan extension on presheaves followed by
 sheafification, left adjoint to `lowerStar`. The Kan extensions and the sheafification
-are provided by the sorried instances of `WeilConjectures.SixFunctors.Instances`. -/
+are provided by the sorried instances of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
 noncomputable def upperStar :
     Sheaf (U.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (W.smallGrothendieckTopology Q (Q := P)) A :=
