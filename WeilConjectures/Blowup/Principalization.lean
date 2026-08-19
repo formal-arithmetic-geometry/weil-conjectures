@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Blowup.Affine.Principalization
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 

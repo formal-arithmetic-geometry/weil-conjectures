@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 

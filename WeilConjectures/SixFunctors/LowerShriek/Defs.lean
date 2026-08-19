@@ -5,9 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.Compactification.Defs
-public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 
 /-!
