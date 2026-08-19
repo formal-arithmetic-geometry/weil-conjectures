@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
@@ -366,7 +366,7 @@ section DerivedUpperStar
 ## The derived pullback `Lg^*`
 
 The pullback `g^* = Etale.upperStar` is left derived using the K-flat left
-derivability structure of `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`.
+derivability structure of `WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs`.
 This requires the source sheaf category `Sheaf Y.smallEtaleTopology A` to carry a
 preadditive monoidal structure whose tensor product interacts well with coproducts and
 `ℤ`-indexed colimits, and to admit functorial flat resolutions. These inputs are stated
