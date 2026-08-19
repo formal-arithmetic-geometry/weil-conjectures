@@ -192,45 +192,4 @@ noncomputable def Etale.rightDerivedLowerStarPlusComp :
 
 end Comp
 
-/-! ### Axiom guards
-
-The `Plus` variants avoid the K-injective hypothesis in the derived functor machinery
-itself, but every derived functor in this file goes through the chosen
-`HasDerivedCategory.{u}` instance, which is built from the sorried
-`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`; hence
-`sorryAx` appears below. These guards pin down the exact axiom dependencies, so that any
-change in them cannot go unnoticed; once the K-injective instance is proved, the `sorryAx`
-entries below should disappear again.
--/
-
-section AxiomChecks
-
-open Etale
-
-/-- info: 'AlgebraicGeometry.Etale.rightDerivedLowerStarPlus' depends on axioms: [propext,
-sorryAx, Classical.choice, Quot.sound] -/
-#guard_msgs in
-#print axioms rightDerivedLowerStarPlus
-
-/-- info: 'AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus' depends on axioms: [propext,
- sorryAx,
- Classical.choice,
- Quot.sound] -/
-#guard_msgs in
-#print axioms rightDerivedLowerShriekPlus
-
-/-- info: 'AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar' depends on axioms:
-[propext, Classical.choice, Quot.sound] -/
-#guard_msgs in
-#print axioms preservesInjectiveObjects_lowerStar
-
-/-- info: 'AlgebraicGeometry.Etale.rightDerivedLowerStarPlusComp' depends on axioms: [propext,
- sorryAx,
- Classical.choice,
- Quot.sound] -/
-#guard_msgs in
-#print axioms rightDerivedLowerStarPlusComp
-
-end AxiomChecks
-
 end AlgebraicGeometry
