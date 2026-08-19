@@ -38,6 +38,30 @@ name = "WeilConjectures"
 # definitions shared by challenge and solution.
 # The modules are rooted at `Weil.*` so that they do not clash with the identically
 # named comparator modules of the `proetale` dependency.
+#
+# TRAP -- `Weil.Challenge` and `Weil.Solution` declare the SAME two qualified names,
+# `WeilConjectures.zetaSeries_rational` and `WeilConjectures.weil_conjectures`, which
+# are the `theorem_names` of Comparator/config.json. The comparator format requires
+# that: the solution restates the challenge. Do NOT "de-duplicate" them.
+#
+# The consequence is not local to Comparator/. `lake exe checkdecls`, and any tool
+# that copies its import discovery -- `ws.root.leanLibs.flatMap (·.config.roots.map
+# ...)` fed to a single `importModules` -- loads EVERY `lean_lib` root declared here
+# into ONE environment, and so imports the challenge and the solution together. The
+# comparator itself never does this; it compares the two in separate sandboxed
+# environments.
+#
+# While the two statements elaborate to the same type the collision is silent: the
+# first import wins (that is `Challenge`, in the order below) and the other copy is
+# discarded. The moment they diverge -- any restatement or strengthening of the
+# solution -- those tools stop loading at all:
+#
+#     import Weil.Solution failed, environment already contains
+#     'WeilConjectures.zetaSeries_rational' from Weil.Challenge
+#
+# and `lake build --wfail` stays green throughout, because no module in the build
+# ever imports both. So: keep the two statements elaborated-type-equal, or narrow the
+# root set those tools import.
 [[lean_lib]]
 name = "Definitions"
 srcDir = "Comparator"
