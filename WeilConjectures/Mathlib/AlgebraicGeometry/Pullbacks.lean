@@ -30,6 +30,10 @@ Tags 0F3X–0F3Z; revised blueprint `lemma:nagata-scheme-image-partial-section`)
   section, a closed immersion since `Y ⟶ S` is separated;
 - `AlgebraicGeometry.partialSection_openι`: the factorization of `γ` through
   the base-changed open immersion `U ×_S Y ⟶ X ×_S Y`;
+- `AlgebraicGeometry.isPullback_partialSectionOpenι` and
+  `AlgebraicGeometry.isIso_partialSectionOpenι_restrict`: the base-changed open
+  immersion square is cartesian, so `j` being an isomorphism over an open `V ⊆ X`
+  makes `U ×_S Y ⟶ X ×_S Y` an isomorphism over the preimage of `V`;
 - `AlgebraicGeometry.isPullback_partialSection`: the graph is the pullback of
   `γ` along the base-changed open immersion;
 - `AlgebraicGeometry.ker_comap_partialSectionOpenι`: the kernel ideal sheaf of
@@ -73,6 +77,39 @@ instance [IsOpenImmersion j] : IsOpenImmersion (partialSectionOpenι x y j) :=
 
 instance [QuasiCompact j] : QuasiCompact (partialSectionOpenι x y j) :=
   MorphismProperty.pullbackMap (P := @QuasiCompact) ‹_› inferInstance rfl (by simp)
+
+/-- **The base-changed open immersion square is cartesian**: `U ×_S Y` is the fibre
+product of `j : U ⟶ X` and the first projection `X ×_S Y ⟶ X`. -/
+lemma isPullback_partialSectionOpenι :
+    IsPullback (partialSectionOpenι x y j) (pullback.fst (j ≫ x) y)
+      (pullback.fst x y) j :=
+  IsPullback.of_right (by simpa using (IsPullback.of_hasPullback (j ≫ x) y).flip)
+    (partialSectionOpenι_fst x y j) (IsPullback.of_hasPullback x y).flip
+
+/-- **The base change of an isomorphism over an open stays an isomorphism**: if
+`j : U ⟶ X` restricts to an isomorphism over an open `V ⊆ X` — in the application `j`
+is an admissible blow-up and `V` the complement of its center — then the base-changed
+morphism `U ×_S Y ⟶ X ×_S Y` restricts to an isomorphism over the preimage of `V`
+under the first projection. -/
+lemma isIso_partialSectionOpenι_restrict (V : X.Opens) [IsIso (j ∣_ V)] :
+    IsIso (partialSectionOpenι x y j ∣_ (pullback.fst x y ⁻¹ᵁ V)) := by
+  -- `(U ×_S Y)|_{ρ⁻¹V}` is `U ×_X (X ×_S Y)|_V` by pasting the restriction square onto
+  -- the cartesian square above, ...
+  have hA : IsPullback (partialSectionOpenι x y j ∣_ (pullback.fst x y ⁻¹ᵁ V))
+      (partialSectionOpenι x y j ⁻¹ᵁ (pullback.fst x y ⁻¹ᵁ V)).ι
+      (pullback.fst x y ⁻¹ᵁ V).ι (partialSectionOpenι x y j) :=
+    isPullback_morphismRestrict _ _
+  have hpaste := hA.paste_vert (isPullback_partialSectionOpenι x y j)
+  -- ... and `(X ×_S Y)|_V ⟶ X` factors through `V`, so it is `j|_V` base-changed.
+  have ht : IsPullback (j ⁻¹ᵁ V).ι (j ∣_ V) j V.ι :=
+    (isPullback_morphismRestrict j V).flip
+  have hs : IsPullback ((partialSectionOpenι x y j ⁻¹ᵁ (pullback.fst x y ⁻¹ᵁ V)).ι ≫
+        pullback.fst (j ≫ x) y)
+      (partialSectionOpenι x y j ∣_ (pullback.fst x y ⁻¹ᵁ V)) j
+      ((pullback.fst x y ∣_ V) ≫ V.ι) := by
+    rw [morphismRestrict_ι]
+    exact hpaste.flip
+  exact (IsPullback.of_right' hs ht).flip.isIso_fst_of_isIso
 
 variable (hγ : γ ≫ pullback.fst x y = j)
 
