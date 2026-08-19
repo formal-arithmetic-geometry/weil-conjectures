@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Push- and pullback of ideal sheaves on affine opens

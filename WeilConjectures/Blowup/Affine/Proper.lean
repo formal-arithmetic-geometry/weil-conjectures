@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
 public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra

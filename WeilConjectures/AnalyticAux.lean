@@ -5,6 +5,11 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Analysis.Complex.Exponential
+public import Mathlib.Analysis.Normed.Group.Tannery
+public import Mathlib.Analysis.SpecificLimits.Normed
 public import WeilConjectures.EulerProductAux
 
 @[expose] public section

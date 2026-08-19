@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Functor.Category
 
 /-!
 # Invertibility of a natural transformation at an object is invariant under isomorphism

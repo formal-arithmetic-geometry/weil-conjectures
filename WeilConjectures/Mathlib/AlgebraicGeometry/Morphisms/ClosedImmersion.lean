@@ -5,8 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 
 /-!
 # Complements on closed immersions
@@ -25,7 +24,9 @@ the two remaining clauses of the universal property: that the lift is itself a c
 immersion when both morphisms are, and that it is the *unique* morphism over the target.
 Together with `Scheme.Hom.toImage_imageι` these give the universal property of the
 scheme-theoretic image in the form stated in the Nagata blueprint
-(`lemma:nagata-scheme-image-universal`).
+(`lemma:nagata-scheme-image-universal`), and its packaging as a minimality statement:
+the scheme-theoretic image is the smallest closed subscheme of the target through which
+the morphism factors.
 
 ## Main results
 
@@ -33,13 +34,16 @@ scheme-theoretic image in the form stated in the Nagata blueprint
   range is a closed immersion;
 - `AlgebraicGeometry.Scheme.Hom.isClopen_range` — an open immersion that is universally
   closed has clopen range;
-- `AlgebraicGeometry.IsClosedImmersion.isClosedImmersion_lift` — the lift of a closed
-  immersion through a closed immersion is a closed immersion;
+- `AlgebraicGeometry.isClosedImmersion_lift` — the lift of a closed immersion through a
+  closed immersion is a closed immersion;
 - `AlgebraicGeometry.IsClosedImmersion.eq_lift` — the lift is the unique morphism over the
   target;
 - `AlgebraicGeometry.Scheme.Hom.toImage_lift` — a morphism factoring through a closed
   immersion `z` also factors through `z` after passing to its scheme-theoretic image, with
-  `AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp` supplying its hypothesis.
+  `AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp` supplying its hypothesis;
+- `AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac` — a closed subscheme
+  contains the scheme-theoretic image of `g` if and only if `g` factors through it, and
+  then uniquely.
 -/
 
 @[expose] public section
@@ -76,11 +80,12 @@ variable {Z : Scheme.{u}}
 /-- The lift of a closed immersion `g` through a closed immersion `f` is again a closed
 immersion: it composes with `f` to give `g`, and `IsClosedImmersion.of_comp_isClosedImmersion`
 applies. -/
-instance IsClosedImmersion.isClosedImmersion_lift (f : X ⟶ Z) (g : Y ⟶ Z)
-    [IsClosedImmersion f] [IsClosedImmersion g] (H : f.ker ≤ g.ker) :
+instance isClosedImmersion_lift (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f]
+    [IsClosedImmersion g] (H : f.ker ≤ g.ker) :
     IsClosedImmersion (IsClosedImmersion.lift f g H) :=
   have : IsClosedImmersion (IsClosedImmersion.lift f g H ≫ f) := by
-    rw [IsClosedImmersion.lift_fac]; infer_instance
+    rw [IsClosedImmersion.lift_fac]
+    infer_instance
   .of_comp_isClosedImmersion _ f
 
 /-- `IsClosedImmersion.lift f g H` is the **unique** morphism composing with `f` to give `g`,
@@ -90,16 +95,18 @@ lemma IsClosedImmersion.eq_lift (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f
     c = IsClosedImmersion.lift f g H := by
   rw [← cancel_mono f, hc, IsClosedImmersion.lift_fac]
 
-/-- If `h ≫ z` factors through the closed immersion `z`, then so does its scheme-theoretic
-image, compatibly: the comparison `IsClosedImmersion.lift z (h ≫ z).imageι` composed with the
-factor `(h ≫ z).toImage` recovers `h`.
+/-- If `g` factors as `h ≫ z` through the closed immersion `z`, then so does its
+scheme-theoretic image, compatibly: the comparison `IsClosedImmersion.lift z g.imageι`
+composed with the factor `g.toImage` recovers `h`.
 
 This is the third equality of the universal property of the scheme-theoretic image; the other
-two are `Scheme.Hom.toImage_imageι` and `IsClosedImmersion.lift_fac`. -/
-lemma Scheme.Hom.toImage_lift (h : X ⟶ Z) (z : Z ⟶ Y) [IsClosedImmersion z]
-    (H : z.ker ≤ (h ≫ z).imageι.ker) :
-    (h ≫ z).toImage ≫ IsClosedImmersion.lift z (h ≫ z).imageι H = h := by
-  rw [← cancel_mono z, Category.assoc, IsClosedImmersion.lift_fac, Scheme.Hom.toImage_imageι]
+two are `Scheme.Hom.toImage_imageι` and `IsClosedImmersion.lift_fac`. The factorization is
+taken as a propositional hypothesis rather than by forcing the target to be syntactically
+`h ≫ z`, so that the lemma rewrites at an arbitrary `g`. -/
+lemma Scheme.Hom.toImage_lift {g : X ⟶ Y} (h : X ⟶ Z) (z : Z ⟶ Y) [IsClosedImmersion z]
+    (w : h ≫ z = g) (H : z.ker ≤ g.imageι.ker) :
+    g.toImage ≫ IsClosedImmersion.lift z g.imageι H = h := by
+  rw [← cancel_mono z, Category.assoc, IsClosedImmersion.lift_fac, Scheme.Hom.toImage_imageι, w]
 
 /-- The hypothesis of `AlgebraicGeometry.Scheme.Hom.toImage_lift`: the ideal sheaf of a closed
 immersion `z` is contained in that of the scheme-theoretic image of any morphism factoring
@@ -108,6 +115,19 @@ lemma Scheme.Hom.ker_le_ker_imageι_comp (h : X ⟶ Z) (z : Z ⟶ Y) :
     z.ker ≤ (h ≫ z).imageι.ker := by
   rw [Scheme.IdealSheafData.ker_subschemeι]
   exact Scheme.Hom.le_ker_comp h z
+
+/-- The scheme-theoretic image is the smallest closed subscheme of `Y` through which `g`
+factors: a closed subscheme `z : Z ⟶ Y` contains the scheme-theoretic image of `g` (i.e.
+`z.ker ≤ g.ker`) if and only if `g` factors through `z`, and the factorization is then
+unique because `z` is a monomorphism. -/
+theorem Scheme.Hom.ker_le_ker_iff_existsUnique_fac (g : X ⟶ Y) (z : Z ⟶ Y)
+    [IsClosedImmersion z] : z.ker ≤ g.ker ↔ ∃! h : X ⟶ Z, h ≫ z = g := by
+  refine ⟨fun H ↦ ?_, fun ⟨h, w, _⟩ ↦ ?_⟩
+  · have hz : z.ker ≤ g.imageι.ker := by rwa [Scheme.IdealSheafData.ker_subschemeι]
+    have hfac : (g.toImage ≫ IsClosedImmersion.lift z g.imageι hz) ≫ z = g := by simp
+    exact ⟨_, hfac, fun h' hh' ↦ by rw [← cancel_mono z, hh', hfac]⟩
+  · rw [← w]
+    exact Scheme.Hom.le_ker_comp h z
 
 end Lift
 

@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
-public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
