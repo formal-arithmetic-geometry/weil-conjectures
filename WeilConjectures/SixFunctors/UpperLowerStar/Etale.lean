@@ -5,7 +5,6 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!

@@ -5,7 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs

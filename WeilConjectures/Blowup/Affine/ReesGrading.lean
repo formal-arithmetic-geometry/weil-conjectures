@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.GroupTheory.GroupAction.Ring
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 

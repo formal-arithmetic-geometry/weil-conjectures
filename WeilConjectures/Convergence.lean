@@ -5,6 +5,13 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.Analysis.PSeries
+public import Mathlib.Analysis.SpecialFunctions.Log.Summable
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.FieldTheory.Finite.GaloisField
 public import WeilConjectures.ZetaFunction
 
 @[expose] public section

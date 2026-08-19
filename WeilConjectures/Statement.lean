@@ -5,6 +5,10 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Weil.Definitions
 public import WeilConjectures.ZetaSeries
 
 @[expose] public section
