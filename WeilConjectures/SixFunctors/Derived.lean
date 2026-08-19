@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.IsGrothendieckAbelian
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
@@ -26,7 +26,7 @@ derived categories, implemented via `CategoryTheory.Functor.rightDerivedFunctor`
 
 The sheaf categories are Grothendieck abelian (the sorried instance
 `CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallGrothendieckTopology`
-of `WeilConjectures.CategoryTheory.GrothendieckAbelian.IsGrothendieckAbelian`) whenever the
+of `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`) whenever the
 coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
 universe `u` of the base schemes; this covers the
 intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
