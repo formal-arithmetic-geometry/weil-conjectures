@@ -55,14 +55,29 @@ The finite-type helper lemmas of the blueprint
 
 ## Dependency structure
 
-`exists_admissibleBlowup_strictTransform_open` (Tag 081S) is the only *primitive*
-obligation of this file: `schemeTheoreticImage_after_admissibleBlowup` (0F3Y),
-`exists_commonModification` (0F3X), `Compactification.nonempty_properExtension` (0F3Z)
-and `exists_admissibleBlowup_strictTransform_isIso_near_closure` (0F3W) are all
-consumers of it, and the two-open compactification theorem (proof order items 43–48)
-consumes those. Tag 081S in turn is the application of Raynaud–Gruson flattening,
-Stacks Tags 0815 and 081R, which this development does not yet state; see the
-"Route" section of the module docstring of `WeilConjectures.Blowup.Admissible`.
+This file has *two* primitive obligations, not one.
+
+`exists_admissibleBlowup_strictTransform_open` (Tag 081S) is the first. It is the
+application of Raynaud–Gruson flattening, Stacks Tags 0815 and 081R, which this
+development does not yet state; see the "Route" section of the module docstring of
+`WeilConjectures.Blowup.Admissible`. `exists_commonModification` (0F3X),
+`Compactification.nonempty_properExtension` (0F3Z) and
+`exists_admissibleBlowup_strictTransform_isIso_near_closure` (0F3W) are consumers of
+it.
+
+`schemeTheoreticImage_after_admissibleBlowup` (0F3Y) is the second, and it is *not* a
+consumer of 081S: it takes the `U`-admissible blow-up `B` as a hypothesis, so it
+cannot consume a theorem whose entire content is that some such `B` exists. Its own
+content is the affine saturation computation of the blueprint, awaiting the
+strict-transform chart algebra, and it can be attempted before any flattening theory
+is available. `Compactification.nonempty_properExtension` (0F3Z) consumes 0F3Y as
+well as 081S, and the two-open compactification theorem (proof order items 43–48,
+`exists_prepared_keyDisjoint_twoOpenSide` in
+`WeilConjectures.Compactification.TwoOpenComparison`) consumes 0F3Y and 0F3W.
+
+So a complete flattening development discharges 081S and leaves 0F3X and 0F3W as the
+only remaining inputs of their proofs; 0F3Y, 0F3Z and the two-open comparison stay
+blocked on 0F3Y.
 
 -/
 
