@@ -1,55 +1,66 @@
-\documentclass[10pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[a4paper,margin=0.88in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,amscd,mathtools,booktabs,enumitem,xcolor,hyperref}
-\hypersetup{colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black}
-\setlength{\emergencystretch}{3em}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.55em}
-\setlist{leftmargin=1.7em,itemsep=0.25em,topsep=0.3em}
-\sloppy
+\newcommand{\sorryleaf}[1]{%
+  \par\smallskip\noindent\textcolor{red!68!black}{%
+  \textsf{Proof status: statement-only leaf; proof deferred.}}%
+  \par\noindent\textcolor{red!68!black}{\textsf{Mathematical source:} }#1\par}
 
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{lemma}[theorem]{Lemma}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{convention}[theorem]{Convention}
-\newtheorem{remark}[theorem]{Remark}
+\newcommand{\BlueprintLocalDeclarationRegistry}[4]{%
+  \par\smallskip
+  {%
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}%
+  \renewcommand{\arraystretch}{1.08}%
+  \noindent
+  \begin{tabular}{@{}%
+    p{0.22\linewidth}%
+    p{0.38\linewidth}%
+    p{\dimexpr0.40\linewidth-12pt\relax}@{}}
+    \toprule
+    \textbf{#1} & \textbf{Direct uses} & \textbf{Exact source}\\
+    \midrule
+    \hyperref[#2]{#1~\ref*{#2}}\newline\hyperref[#2]{\nolinkurl{#2}} &
+    \UseLinks{#3} &
+    #4\\
+    \bottomrule
+  \end{tabular}
+  }%
+  \par\smallskip
+}
 
-\newenvironment{prerequisites}
-  {\par\smallskip\noindent\textit{Immediate mathematical prerequisites.}\begin{itemize}}
-  {\end{itemize}\smallskip}
+\newcommand{\sketchslot}[1]{%
+  \par\smallskip
+  {%
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}%
+  \renewcommand{\arraystretch}{1.05}%
+  \noindent
+  \begin{tabular}{@{}p{0.24\linewidth}%
+    p{\dimexpr0.76\linewidth-8pt\relax}@{}}
+    \textcolor{black!65}{\textbf{Future detailed sketch}} &
+    \if\relax\detokenize{#1}\relax
+      \textcolor{black!45}{\rule{0.94\linewidth}{0.35pt}}
+    \else
+      #1
+    \fi
+  \end{tabular}
+  }%
+  \par\smallskip
+}
 
-\newcommand{\Fq}{\mathbf F_q}
 \newcommand{\Fbar}{\overline{\mathbf F}_q}
-\newcommand{\Ql}{\mathbf Q_\ell}
 \newcommand{\Qlb}{\overline{\mathbf Q}_\ell}
 \newcommand{\Zl}{\mathbf Z_\ell}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\Spec}{\operatorname{Spec}}
 \newcommand{\RGamma}{R\Gamma}
 \newcommand{\RGammac}{R\Gamma_c}
 \newcommand{\Sh}{\operatorname{Sh}}
 \newcommand{\Kar}{\operatorname{Kar}}
-\newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\Wt}{\operatorname{Wt}}
 
-\begin{document}
-
-\begin{center}
-{\large\bfseries The Weil Conjectures: Cohomological and Arithmetic Statements\par}
-\medskip
-{\normalsize Pro-etale coefficients, weights, and zeta functions\par}
-\end{center}
-
-\tableofcontents
+\chapter{Global Sketch}
 
 \section{Arithmetic and geometric conventions}
 
 \begin{definition}[Finite field and geometric fiber]
+\label{def:weil-base-field}
 Let \(p\) be a prime, let \(a\geq1\), and put \(q=p^a\).  Set
 \[
  k_0=\Fq,
@@ -66,16 +77,23 @@ write
 for its geometric fiber and structure morphism.
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-base-field}{none}{Exact local declaration (Definition~\ref{def:weil-base-field}).}
+
 \begin{definition}[Geometric hypotheses]
+\label{def:weil-geometric-hypotheses}
 A finite-type \(k_0\)-scheme \(Y_0\) is \emph{smooth of pure dimension
 \(d\)} if \(Y_0\to\Spec k_0\) is smooth and every irreducible component of
 its geometric fiber has Krull dimension \(d\).  It is \emph{proper} if its
 structure morphism is separated, of finite type, and universally closed.  It
 is \emph{geometrically connected} if \(Y_0\times_{k_0}k'\) is connected for
 every field extension \(k'/k_0\), equivalently if \(Y\) is connected.
+\uses{def:weil-base-field}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-geometric-hypotheses}{def:weil-base-field}{Exact local declaration (Definition~\ref{def:weil-geometric-hypotheses}).}
+
 \begin{definition}[Arithmetic and geometric Frobenius]
+\label{def:weil-frobenius-convention}
 The arithmetic Frobenius of \(k\) is
 \[
  \varphi_q:k\longrightarrow k,
@@ -89,18 +107,25 @@ The geometric Frobenius element is
 \]
 It is distinct from the absolute \(q\)-power morphism of the scheme \(Y\).
 Every Frobenius operator below is induced by \(g_Y\) and is geometric.
+\uses{def:weil-base-field}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-frobenius-convention}{def:weil-base-field}{Lecture 46, Definition 2.1.}
 
 \section{Triangulated coefficient categories}
 
 \begin{convention}[Size]
+\label{conv:weil-size}
 Fix Grothendieck universes \(\mathcal U\in\mathcal V\) containing the
 schemes and coefficient rings under consideration.  Replace every site by a
 \(\mathcal V\)-small skeleton within the chosen bound.  Derived categories,
 filtered colimits, and Karoubi completions are formed in \(\mathcal V\).
 \end{convention}
 
+\BlueprintLocalDeclarationRegistry{Convention}{conv:weil-size}{none}{Exact local convention (Convention~\ref{conv:weil-size}).}
+
 \begin{definition}[Small pro-etale site]
+\label{def:weil-small-proetale-site}
 For a scheme \(Y\), the site \(Y_{\mathrm{proet}}\) has as objects the
 \(\mathcal U\)-bounded weakly etale morphisms \(U\to Y\).  A morphism is
 weakly etale when it is flat and its diagonal is flat.  A family
@@ -114,9 +139,13 @@ category of sheaves of \(A_Y\)-modules.  Its derived category
 \(D(Y_{\mathrm{proet}},A)\) is the localization of the category of complexes
 at quasi-isomorphisms; it is used only through its ordinary triangulated
 structure.
+\uses{conv:weil-size}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-small-proetale-site}{conv:weil-size}{Lecture 40, Definition 2.3.}
+
 \begin{definition}[Finite-torsion constructibility]
+\label{def:weil-finite-torsion-constructible}
 Let \(E/\Ql\) be a finite extension, let \(\mathcal O_E\) be its valuation
 ring, choose a uniformizer \(\varpi_E\), and put
 \[
@@ -132,9 +161,13 @@ closed subschemes on each of which the sheaf is locally constant with finite
 \]
 is the full triangulated subcategory of complexes with finitely many nonzero
 cohomology sheaves, all constructible.
+\uses{def:weil-small-proetale-site}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-finite-torsion-constructible}{def:weil-small-proetale-site}{Lecture 40, Definitions 3.5 and 7.4.}
+
 \begin{definition}[Derived-complete integral coefficients]
+\label{def:weil-derived-complete-integral}
 The completed coefficient sheaf is
 \[
  \widehat{\mathcal O}_{E,Y}=\varprojlim_n(A_{E,n})_Y
@@ -192,9 +225,13 @@ triangulated subcategory of derived-complete \(K\) such that
 \]
 for every \(n\), and one interval \([r,s]\subset\mathbf Z\), independent of
 \(n\), contains the cohomological support of every \(K_n\).
+\uses{def:weil-small-proetale-site,def:weil-finite-torsion-constructible}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-derived-complete-integral}{def:weil-small-proetale-site,def:weil-finite-torsion-constructible}{Lecture 41, Definitions 4.6 and 5.1 and Theorem 4.16.}
+
 \begin{definition}[Rationalization and Karoubi completion]
+\label{def:weil-rational-karoubi}
 If \(\mathcal C\) is an \(\mathcal O_E\)-linear triangulated category, then
 \(\mathcal C[1/\varpi_E]\) has the same objects and
 \[
@@ -222,30 +259,208 @@ then from rationalization and Karoubi completion.  Since
 \(\mathcal O_L\) is finite free over \(\mathcal O_E\), this construction is
 independent of an integral representative and is compatible with composition
 of finite extensions.
+\uses{def:weil-derived-complete-integral}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-rational-karoubi}{def:weil-derived-complete-integral}{Lecture 41, Definitions 6.1, 6.4, and 6.6 and Theorems 6.3 and 6.5.}
+
+\begin{definition}[Finite coefficient index and transition diagram]
+\label{def:qbar-finext-diagram}
+Let \(\mathcal E_\ell\) be the poset category whose objects are the finite
+extensions \(\Ql\subset E\subset\Qlb\), with one arrow \(E\to L\) exactly
+when \(E\subset L\).  The compositum of finitely many objects is a common
+upper bound, so \(\mathcal E_\ell\) is filtered.  Put
+\[
+ \mathcal C_E(Y)=D^b_c(Y,E),
+ \qquad
+ T_{L/E}(K)=K\otimes_E L.
+\]
+The transition datum includes exact natural isomorphisms
+\[
+ \eta_E:T_{E/E}\xrightarrow{\sim}\operatorname{id},
+ \qquad
+ a_{M,L,E}:T_{M/L}T_{L/E}\xrightarrow{\sim}T_{M/E}
+\]
+for \(E\subset L\subset M\).  The unit equations, the tower pentagon, and
+the shift comparisons are part of this datum.
+\uses{conv:weil-size,def:weil-rational-karoubi}
+\end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:qbar-finext-diagram}{conv:weil-size,def:weil-rational-karoubi}{Lecture 41, Definitions 6.6 and 7.11 and Theorem 7.12; Lecture 42, Definition 1.3 and Theorem 1.4.}
+
+\begin{definition}[Common-stage pair category and the symbol \(2\)-colimit]
+\label{def:filtered-two-colimit}
+An object is a pair \((E,K)\), where \(E\in\mathcal E_\ell\) and
+\(K\in\mathcal C_E(Y)\).  A morphism representative
+\[
+ (M,u):(E,K)\longrightarrow(F,L)
+\]
+consists of a finite coefficient field \(M\) containing \(E\) and \(F\)
+and a morphism
+\[
+ u:T_{M/E}K\longrightarrow T_{M/F}L
+ \quad\text{in }\mathcal C_M(Y).
+\]
+If \(M\subset N\), its transport \(u_N\) is
+\[
+ T_{N/E}K\xrightarrow[\sim]{a^{-1}_{N,M,E}}
+ T_{N/M}T_{M/E}K\xrightarrow{T_{N/M}(u)}
+ T_{N/M}T_{M/F}L\xrightarrow[\sim]{a_{N,M,F}}T_{N/F}L.
+\]
+Representatives \((M,u)\) and \((N,v)\) are equivalent when a finite
+coefficient field \(P\supset M,N\) satisfies \(u_P=v_P\).  Thus
+\[
+ \Hom((E,K),(F,L))=
+ \varinjlim_{M\supset E,F}
+ \Hom_{\mathcal C_M(Y)}(T_{M/E}K,T_{M/F}L),
+\]
+where the filtered colimit is taken in abelian groups and the displayed
+equivalence relation is its representative description.
+
+The identity is represented by the identity at stage \(E\), with the unit
+isomorphism inserted.  Given \([M,u]:(E,K)\to(F,L)\) and
+\([N,v]:(F,L)\to(G,Q)\), choose \(P\supset M,N\) and define
+\[
+ [N,v]\circ[M,u]=[P,v_P\circ u_P].
+\]
+Addition is defined by transporting two representatives to one common
+stage and adding them there.  The zero object is \((\Ql,0)\); a biproduct of
+\((E,K)\) and \((F,L)\) is represented over a common \(M\) by
+\((M,T_{M/E}K\oplus T_{M/F}L)\).
+
+The resulting additive category is denoted
+\[
+ \underset{E\in\mathcal E_\ell}{\operatorname{2-colim}^{\mathrm{pair}}}
+ \mathcal C_E(Y).
+\]
+In this lecture the symbol \(\operatorname{2-colim}\) denotes this explicit
+ordinary common-stage category, characterized by its pseudocone universal
+property.  It is not an infinity-categorical colimit and it is not a union
+of the object sets of the finite-stage categories.
+\uses{def:qbar-finext-diagram}
+\end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:filtered-two-colimit}{def:qbar-finext-diagram}{Lecture 42, Definitions 2.1--2.11, Theorem 2.15, and Proposition 2.18.}
+
+\begin{definition}[Common-stage shifts and distinguished triangles]
+\label{def:qbar-pair-triangulation}
+Define \((E,K)[1]=(E,K[1])\), with the transition shift isomorphisms used
+on morphisms.  A triangle in the pair category is distinguished exactly
+when it is isomorphic to the image of a distinguished triangle in
+\(\mathcal C_M(Y)\) for one finite common stage \(M\).  For a representative
+\((M,u)\), a cone triangle means the image of a chosen cone triangle for
+\(u\) in \(\mathcal C_M(Y)\); no functorial choice of cones in a bare
+triangulated category is asserted.  For \(\alpha\in\Qlb\), scalar
+multiplication on a morphism is defined after enlarging to a common stage
+containing \(\alpha\).
+\uses{def:filtered-two-colimit}
+\end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:qbar-pair-triangulation}{def:filtered-two-colimit}{Lecture 42, Definitions 3.1, 3.3, 3.7, and 4.1 and Theorems 3.12 and 4.5.}
 
 \begin{definition}[Algebraically closed coefficient category]
-Let \(\mathcal E_\ell\) be the directed set of finite extensions
-\(E/\Ql\) contained in \(\Qlb\).  For \(E\subset L\), the transition functor
-is \(K\mapsto K\otimes_E L\).  Form a triangulated category
-\(\mathcal C_Y\) whose objects are pairs \((E,K)\) with
-\(K\in D^b_c(Y,E)\) and whose morphisms are
+\label{def:qbar-coefficient-category}
+For an additive category \(\mathcal C\), the Karoubi envelope has objects
+\((A,e)\) with \(e^2=e\), morphisms
 \[
- \Hom_{\mathcal C_Y}((E,K),(E',K'))
- =\varinjlim_{L\supset E,E'}
- \Hom_{D^b_c(Y,L)}
- \bigl(K\otimes_E L,K'\otimes_{E'}L\bigr).
+ \Hom_{\Kar(\mathcal C)}((A,e),(B,d))
+ =\{f:A\to B:f=dfe\},
 \]
-Composition and distinguished triangles are represented over one common
-finite extension.  Define
+and identity \(e\) on \((A,e)\).  Shifts are \((A,e)[1]=(A[1],e[1])\),
+and distinguished triangles are the triangles isomorphic to direct summands
+of distinguished triangles in \(\mathcal C\).  Define
 \[
- D^b_c(Y,\Qlb)=\Kar(\mathcal C_Y).
+ D^b_c(Y,\Qlb)=
+ \Kar\left(
+ \underset{E\in\mathcal E_\ell}{\operatorname{2-colim}^{\mathrm{pair}}}
+ D^b_c(Y,E)\right).
 \]
-Every object, morphism, and distinguished triangle has a finite
-coefficient field of definition, after enlarging that field if necessary.
+\uses{def:filtered-two-colimit,def:qbar-pair-triangulation}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:qbar-coefficient-category}{def:filtered-two-colimit,def:qbar-pair-triangulation}{Lecture 42, Definitions 5.1 and 5.3 and Theorem 5.4.}
+
+\begin{theorem}[Correctness and universal property of the \(2\)-colimit]
+\label{thm:qbar-two-colimit-model}
+\uses{def:qbar-finext-diagram,def:filtered-two-colimit,
+  def:qbar-pair-triangulation,def:qbar-coefficient-category}
+The representative relation, addition, identities, and composition are
+well defined.  The pair category is a \(\Qlb\)-linear ordinary triangulated
+category with the stated shifts and distinguished triangles.  Its Karoubi
+envelope is idempotent-complete and triangulated.
+
+For every ordinary triangulated category \(\mathcal T\), exact functors from
+the pair category to \(\mathcal T\) are equivalent to families of exact
+functors \(F_E:\mathcal C_E(Y)\to\mathcal T\) equipped with unit-, tower-,
+and shift-compatible isomorphisms
+\(F_LT_{L/E}\xrightarrow{\sim}F_E\).  When \(\mathcal T\) is
+idempotent-complete, the same universal property holds after Karoubi
+completion.  Every object, morphism, finite diagram, and distinguished
+triangle in \(D^b_c(Y,\Qlb)\) is isomorphic to one defined over a single
+finite coefficient extension after enlarging that extension.
+\sorryleaf{Lecture 42, Theorems 3.12, 4.5, 5.4, 6.4, and 6.5.}
+\end{theorem}
+
+\sketchslot{}
+
+\begin{theorem}[Descent of compatible exact functors]
+\label{thm:qbar-functor-descent}
+\uses{thm:qbar-two-colimit-model}
+Suppose exact functors \(\Phi_E:\mathcal C_E(X)\to\mathcal D_E(Y)\) are
+equipped, for every \(E\subset L\), with exact natural isomorphisms
+\[
+ T^Y_{L/E}\Phi_E\xrightarrow{\sim}\Phi_LT^X_{L/E}
+\]
+satisfying the unit, tower, and shift equations.  Then they induce an exact
+functor on pair categories and, after applying the idempotents, an exact
+functor on their Karoubi envelopes.  Compatible natural transformations,
+adjunction units and counits, base-change maps, projection maps, purity maps,
+and duality maps descend by the same common-stage construction.  For
+\(Rf^!\), the coefficient comparison is the mate of the comparison for
+\(Rf_!\), and its tower coherence is part of the hypotheses.
+\sorryleaf{Lecture 42, Definition 8.1 and Theorem 8.2.}
+\end{theorem}
+
+\sketchslot{}
+
+\begin{longtable}{@{}
+p{0.25\textwidth}
+p{0.24\textwidth}
+p{0.43\textwidth}@{}}
+\caption{Components of the \(\Qlb\)-coefficient construction.}
+\label{tab:qbar-two-colimit-sources}\\
+\toprule
+Component & Local declaration & Exact mathematical source\\
+\midrule
+\endfirsthead
+\toprule
+Component & Local declaration & Exact mathematical source\\
+\midrule
+\endhead
+Filtered index and scalar diagram &
+Definition~\ref{def:qbar-finext-diagram} &
+Lecture 41, Definitions 6.6 and 7.11 and Theorem 7.12; Lecture 42,
+Definition 1.3 and Theorem 1.4.\\
+Objects, Hom representatives, equality, and composition &
+Definition~\ref{def:filtered-two-colimit} &
+Lecture 42, Definitions 2.1--2.11, Theorem 2.15, and Proposition 2.18.\\
+Shifts, cones, triangles, and scalars &
+Definition~\ref{def:qbar-pair-triangulation} &
+Lecture 42, Definitions 3.1, 3.3, 3.7, and 4.1 and Theorems 3.12 and 4.5.\\
+Karoubi triples &
+Definition~\ref{def:qbar-coefficient-category} &
+Lecture 42, Definitions 5.1 and 5.3 and Theorem 5.4.\\
+Pseudocone universal property &
+Theorem~\ref{thm:qbar-two-colimit-model} &
+Lecture 42, Theorems 6.4 and 6.5.\\
+Compatible exact functor descent &
+Theorem~\ref{thm:qbar-functor-descent} &
+Lecture 42, Definition 8.1 and Theorem 8.2.\\
+\bottomrule
+\end{longtable}
+
 \begin{definition}[Finite Tor amplitude]
+\label{def:finite-tor-amplitude}
 For \(\Lambda=A_{E,n}\), an object
 \(K\in D^b_c(Y,\Lambda)\) has \emph{finite Tor amplitude} if there are
 integers \(a\leq b\) such that, for every sheaf \(M\) of
@@ -264,19 +479,27 @@ For field coefficients, define instead
  \qquad
  D^b_{ctf}(Y,\Qlb)=D^b_c(Y,\Qlb).
 \]
-The last equality is taken in the displayed finite-stage triangulated
-2-colimit.
+The last equality is interpreted in the Karoubi-completed common-stage
+category of Definition~\ref{def:qbar-coefficient-category}.
 For \(\mathcal O_E\) and \(A_{E,n}\), finite Tor amplitude is an additional
 condition and is never inferred merely from bounded constructibility.
+\uses{def:weil-finite-torsion-constructible,def:weil-derived-complete-integral,
+  def:weil-rational-karoubi,def:qbar-coefficient-category}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:finite-tor-amplitude}{def:weil-finite-torsion-constructible,def:weil-derived-complete-integral,def:weil-rational-karoubi,def:qbar-coefficient-category}{Lecture 40, Definition 9.6; Lecture 41, Proposition 3.8 and Corollary 5.2.}
+
 \begin{definition}[Constructible cohomological intervals]
+\label{def:constructible-interval}
 For integers \(a\leq b\) and \(A=A_{E,n}\), let
 \[
  D_c^{[a,b]}(Y,A)=
  \{K\in D^b_c(Y,A):\mathcal H^r(K)=0\text{ for }r\notin[a,b]\}.
 \]
+\uses{def:weil-finite-torsion-constructible}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:constructible-interval}{def:weil-finite-torsion-constructible}{Lecture 40, Definition 7.4; exact interval notation is local.}
 
 \begin{definition}[Coefficient Tate twists]
 \label{def:coefficient-twists}
@@ -306,11 +529,17 @@ coefficient ring \(\Lambda\), put
 and \(K(m)=K\otimes^L_\Lambda\Lambda(m)\).  Each \(\Lambda(m)\) is an
 invertible locally constant rank-one sheaf, so twisting preserves
 bounded constructibility and finite Tor amplitude.
+\uses{def:weil-small-proetale-site,def:weil-finite-torsion-constructible,
+  def:weil-derived-complete-integral,def:weil-rational-karoubi,
+  def:qbar-coefficient-category,def:finite-tor-amplitude}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:coefficient-twists}{def:weil-small-proetale-site,def:weil-finite-torsion-constructible,def:weil-derived-complete-integral,def:weil-rational-karoubi,def:qbar-coefficient-category,def:finite-tor-amplitude}{Lecture 35, Definitions 2.1--2.4 and Proposition 2.5.}
 
 \section{The six operations in triangulated form}
 
 \begin{definition}[Derived pullback, tensor product, and internal Hom]
+\label{def:derived-pullback-tensor-hom}
 For a morphism \(f:X\to Y\) and a coefficient ring \(A=A_{E,n}\), define
 \[
  Lf^*K=f^{-1}K\otimes^L_{f^{-1}A}A,
@@ -330,9 +559,15 @@ For every \(n\), let \(f_n\) denote the morphism \(f\) equipped with
 For \(\mathcal O_E\), \(E\), and \(\Qlb\), they are obtained by compatible
 finite reductions, derived inverse limit, rationalization, finite
 coefficient extension, and Karoubi completion.
+\uses{def:weil-small-proetale-site,def:weil-derived-complete-integral,
+  def:weil-rational-karoubi,def:qbar-coefficient-category,
+  thm:qbar-functor-descent}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:derived-pullback-tensor-hom}{def:weil-small-proetale-site,def:weil-derived-complete-integral,def:weil-rational-karoubi,def:qbar-coefficient-category,thm:qbar-functor-descent}{Lecture 40, Definitions 9.4 and 10.1 and Theorem 10.4; Lecture 41, Definitions 5.3 and 6.13.}
+
 \begin{definition}[Derived direct image]
+\label{def:derived-direct-image}
 For \(f:X\to Y\), the direct-image functor on sheaves is left exact.  At a
 finite level, its total right-derived functor is
 \[
@@ -356,9 +591,15 @@ where the tower maps are induced by
 The rational and \(\Qlb\)-valued ambient functors are induced at a finite
 coefficient stage and then passed through rationalization and Karoubi
 completion.
+\uses{def:weil-small-proetale-site,def:weil-derived-complete-integral,
+  def:weil-rational-karoubi,def:qbar-coefficient-category,
+  thm:qbar-functor-descent}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:derived-direct-image}{def:weil-small-proetale-site,def:weil-derived-complete-integral,def:weil-rational-karoubi,def:qbar-coefficient-category,thm:qbar-functor-descent}{Lecture 30, Definition 2.5; Lecture 43, Definition 3.1.}
+
 \begin{definition}[Extension by zero]
+\label{def:extension-by-zero}
 Let \(A=A_{E,n}\).  For an open immersion
 \(j:U\hookrightarrow\overline X\), extension by zero is the exact functor
 \[
@@ -378,9 +619,13 @@ Exactness gives, by degreewise application, an exact triangulated functor
  j_!:D(U_{\mathrm{proet}},A)
  \longrightarrow D(\overline X_{\mathrm{proet}},A).
 \]
+\uses{def:weil-small-proetale-site,def:weil-finite-torsion-constructible}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:extension-by-zero}{def:weil-small-proetale-site,def:weil-finite-torsion-constructible}{Lecture 40, Definition 5.11; Lecture 43, Definitions 2.4 and 2.13.}
+
 \begin{definition}[Compactifications and refinements]
+\label{def:compactification-category}
 Let \(f:X\to Y\) be separated and of finite type.  A
 \emph{compactification} \(c=(j,\bar f)\) of \(f\) is a factorization
 \[
@@ -394,23 +639,25 @@ with \(j\) an open immersion, \(\bar f\) proper, and
 \]
 such that \(u\circ j_1=j_2\).  Compactifications and refinements form a
 category \(\operatorname{Comp}(f)\).
+\uses{def:weil-geometric-hypotheses}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:compactification-category}{def:weil-geometric-hypotheses}{Lecture 43, Definitions 4.1 and 4.3.}
 
 \begin{proposition}[Existence and common refinement]
 \label{prop:compactification-refinement}
+\uses{def:compactification-category}
 The category \(\operatorname{Comp}(f)\) is nonempty.  Given finitely many
 compactifications of \(f\), there is a compactification refining all of
 them.  Given two parallel refinements, there is a further refinement after
 which they agree.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Nagata Compactification}.
-\item \emph{Schematic Closure of the Diagonal Map into a Fiber Product}.
-\item \emph{Cofilteredness of the Category of Compactifications}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Compact-support candidate attached to a compactification]
+\label{def:compact-support-candidate}
 Let \(A=A_{E,n}\), let \(c=(j,\bar f)\in\operatorname{Comp}(f)\), and set
 \[
  Rf_{!,n}^{c}=R\bar f_{*,n}\,j_!:
@@ -419,10 +666,15 @@ Let \(A=A_{E,n}\), let \(c=(j,\bar f)\in\operatorname{Comp}(f)\), and set
 \]
 Here \(R\bar f_{*,n}\) is the K-injective derived direct image and \(j_!\)
 is the exact derived functor of extension by zero.
+\uses{def:derived-direct-image,def:extension-by-zero,
+  def:compactification-category}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:compact-support-candidate}{def:derived-direct-image,def:extension-by-zero,def:compactification-category}{Lecture 43, Definition 4.11.}
 
 \begin{proposition}[Compactification coherence]
 \label{prop:compactification-coherence}
+\uses{prop:compactification-refinement,def:compact-support-candidate}
 For every refinement \(u:c_1\to c_2\), the canonical transformation
 \[
  R\bar f_{1*,n}j_{1!}
@@ -444,12 +696,8 @@ It is independent of the common refinement and satisfies the cocycle
 condition for triples of compactifications.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Existence and Common Refinement},
-      Proposition~\ref{prop:compactification-refinement}.
-\item \emph{Proper Base Change for a Proper Refinement}.
-\item \emph{Extension by Zero along an Open Immersion}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Compactification-independent finite-level direct image]
 \label{def:compact-support-direct-image}
@@ -463,10 +711,14 @@ equipped with the canonical comparison isomorphisms of
 Proposition~\ref{prop:compactification-coherence}.  The cocycle condition
 makes this an exact triangulated functor independent of \(c\) up to the
 specified unique coherent isomorphism.
+\uses{def:compact-support-candidate,prop:compactification-coherence}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:compact-support-direct-image}{def:compact-support-candidate,prop:compactification-coherence}{Lecture 43, Definition 5.7 and Theorem 5.8.}
 
 \begin{proposition}[Finite-level bounded constructibility for proper support]
 \label{prop:finite-compact-support-constructibility}
+\uses{def:compact-support-direct-image,def:constructible-interval}
 For every separated finite-type \(f:X\to Y\), the ambient functor
 \(Rf_{!,n}\) restricts to an exact triangulated functor
 \[
@@ -485,16 +737,12 @@ The restriction and its amplitude bound commute with finite coefficient
 reduction.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Finite-Torsion Constructibility and Boundedness of Proper
-      Direct Image}.
-\item \emph{Constructibility and Exactness of Extension by Zero}.
-\item \emph{Compactification Coherence},
-      Proposition~\ref{prop:compactification-coherence}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Integral, rational, and algebraically closed
 compact-support functors]
+\label{def:all-coefficient-compact-support}
 For \(K\in D^b_c(X,\mathcal O_E)\), put
 \(K_n=K\otimes^L_{\mathcal O_E}A_{E,n}\) and define
 \[
@@ -507,11 +755,18 @@ L\), its scalar-extension comparison is represented by the finite-level
 comparisons over \(\mathcal O_E\subset\mathcal O_L\).  Passing to the
 common finite coefficient stage and then taking the Karoubi completion
 defines the \(\Qlb\)-coefficient functor.
+\uses{def:weil-derived-complete-integral,def:weil-rational-karoubi,
+  def:qbar-coefficient-category,def:compact-support-direct-image,
+  thm:qbar-functor-descent}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:all-coefficient-compact-support}{def:weil-derived-complete-integral,def:weil-rational-karoubi,def:qbar-coefficient-category,def:compact-support-direct-image,thm:qbar-functor-descent}{Exact local packaging; constructible realization is Lecture 43, Theorem 9.17.}
 
 \begin{proposition}[Coefficient passage and constructible landing for
 proper support]
 \label{prop:compact-support-coefficient-passage}
+\uses{prop:finite-compact-support-constructibility,
+  def:all-coefficient-compact-support,thm:qbar-functor-descent}
 For \(\Lambda\in\{\mathcal O_E,E,\Qlb\}\), the preceding construction is
 an exact triangulated functor
 \[
@@ -527,14 +782,11 @@ compatible with reduction, rationalization, finite scalar extension, and
 the \(\Qlb\)-valued common-stage construction.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Finite-Level Bounded Constructibility for Proper Support},
-      Proposition~\ref{prop:finite-compact-support-constructibility}.
-\item \emph{Derived Completeness and Uniform Cohomological Bounds}.
-\item \emph{Rationalization and the \(\Qlb\) Triangulated 2-Colimit}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Full cohomological dimension]
+\label{def:full-cohomological-dimension}
 Let \(A=A_{E,n}\), and let \(p:\overline X\to Y\) be proper.  Write
 \(\operatorname{FullCD}(p,A;c)\) if an integer
 \(c\geq0\) satisfies
@@ -543,10 +795,15 @@ Let \(A=A_{E,n}\), and let \(p:\overline X\to Y\) be proper.  Write
 \]
 for every sheaf \(\mathcal F\) of \(A\)-modules, with the same bound after
 restriction over every object of the small pro-etale site of \(Y\).
+\uses{def:weil-small-proetale-site,def:derived-direct-image}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:full-cohomological-dimension}{def:weil-small-proetale-site,def:derived-direct-image}{Lecture 44, Definition 3.7.}
 
 \begin{proposition}[Ambient exceptional right adjoint]
 \label{prop:ambient-exceptional-adjoint}
+\uses{def:full-cohomological-dimension,def:compact-support-direct-image,
+  prop:compactification-coherence}
 Let \(A=A_{E,n}\).  Let \(f:X\to Y\) be separated and of finite type, and
 choose a compactification
 \(X\xrightarrow{j}\overline X\xrightarrow{p}Y\), and suppose that
@@ -564,29 +821,27 @@ The adjunction is independent of the compactification under the coherent
 comparisons of Proposition~\ref{prop:compactification-coherence}.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Full Cohomological Dimension for Proper Direct Image}.
-\item \emph{Preservation of Coproducts by Bounded Proper Direct Image}.
-\item \emph{Brown Representability for the Ambient Derived Categories}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Exceptional-adjoint admissibility]
+\label{def:exceptional-adjoint-admissible}
 Let \(A=A_{E,n}\), let \(f:X\to Y\) be separated and of finite type, and
 choose a compactification
 \(X\xrightarrow{j}\overline X\xrightarrow{p}Y\).  Say that \(f\) is
 \emph{exceptional-adjoint admissible at \(A\)} if:
-\begin{enumerate}[label=\textup{(\alph*)}]
-\item \(\operatorname{FullCD}(p,A;c)\) holds for some \(c\), and
+\begin{enumerate}
+\item[\textup{(a)}] \(\operatorname{FullCD}(p,A;c)\) holds for some \(c\), and
 \(Rf_n^{\times}\) is the ambient right adjoint furnished by
 Proposition~\ref{prop:ambient-exceptional-adjoint};
-\item there is an integer \(c_f\) such
+\item[\textup{(b)}] there is an integer \(c_f\) such
 that
 \[
  L\in D_c^{[a,b]}(Y,A)\Longrightarrow
  Rf_n^{\times}L\in D_c^{[a-c_f,b]}(X,A)
 \]
 for all \(a\leq b\);
-\item one has
+\item[\textup{(c)}] one has
 \[
  L\in D^b_{ctf}(Y,A)\Longrightarrow
  Rf_n^{\times}L\in D^b_{ctf}(X,A).
@@ -597,9 +852,16 @@ these hypotheses hold at the finite stages with uniform bounds and that the
 finite-reduction and scalar-extension comparisons for the representing
 objects are isomorphisms.  Admissibility is always an explicit hypothesis;
 it is not inferred from separated finite type alone.
+\uses{def:full-cohomological-dimension,prop:ambient-exceptional-adjoint,
+  def:constructible-interval,def:finite-tor-amplitude,
+  def:weil-derived-complete-integral,def:weil-rational-karoubi,
+  def:qbar-coefficient-category}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:exceptional-adjoint-admissible}{def:full-cohomological-dimension,prop:ambient-exceptional-adjoint,def:constructible-interval,def:finite-tor-amplitude,def:weil-derived-complete-integral,def:weil-rational-karoubi,def:qbar-coefficient-category}{Exact local admissibility package; the resulting formalism is Lecture 44, Theorem 6.20.}
+
 \begin{definition}[Exceptional inverse image notation]
+\label{def:exceptional-inverse-image}
 At a finite stage at which \(f\) is exceptional-adjoint admissible, set
 \[
  Rf_n^!=Rf_n^{\times}|_{D^b_c(Y,A_{E,n})}:
@@ -620,17 +882,21 @@ In every case this is right adjoint to the previously defined restriction of
 Its restriction to finite-Tor objects is part of admissibility.  Smooth
 purity and Poincare duality for smooth proper structure morphisms are stated
 independently below.
+\uses{def:exceptional-adjoint-admissible,prop:ambient-exceptional-adjoint,
+  def:all-coefficient-compact-support,thm:qbar-functor-descent}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:exceptional-inverse-image}{def:exceptional-adjoint-admissible,prop:ambient-exceptional-adjoint,def:all-coefficient-compact-support,thm:qbar-functor-descent}{Lecture 44, Definition 6.19 and Theorem 6.20.}
 
 \begin{definition}[Exchange and projection transformations]
 \label{def:exchange-projection}
 Consider a Cartesian square
 \[
-\begin{CD}
-X' @>{g'}>> X\\
-@V{f'}VV @VV{f}V\\
-Y' @>{g}>> Y.
-\end{CD}
+\begin{array}{ccc}
+X' & \xrightarrow{g'} & X\\
+{\scriptstyle f'}\downarrow && \downarrow{\scriptstyle f}\\
+Y' & \xrightarrow{g} & Y.
+\end{array}
 \]
 The direct-image exchange transformation
 \[
@@ -662,15 +928,21 @@ For a compactification it is the direct-image projection transformation for
 \(j_!K\otimes^LL\bar f^*L\cong
 j_!(K\otimes^LLf^*L)\).  These are natural transformations with the
 displayed sources and targets.
+\uses{def:derived-pullback-tensor-hom,def:derived-direct-image,
+  def:all-coefficient-compact-support,def:compactification-category,
+  prop:compactification-coherence}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:exchange-projection}{def:derived-pullback-tensor-hom,def:derived-direct-image,def:all-coefficient-compact-support,def:compactification-category,prop:compactification-coherence}{Lecture 31, Definitions 1.13 and 11.12; Lecture 33, Definitions 2.1 and 5.4.}
 
 \begin{proposition}[Geometric fibers and algebraically closed extension]
 \label{prop:proper-fibers}
+\uses{def:derived-direct-image,def:exchange-projection}
 Let \(A=A_{E,n}\).  Let \(f:X\to Y\) be proper between finite-type schemes
 over an algebraically closed field of characteristic different from \(\ell\),
 and let \(K\in D^b_c(X,A)\).
-\begin{enumerate}[label=\textup{(\alph*)}]
-\item If \(\Omega\subset\Omega'\) is an extension of algebraically closed
+\begin{enumerate}
+\item[\textup{(a)}] If \(\Omega\subset\Omega'\) is an extension of algebraically closed
 fields, \(Z/\Omega\) is proper, and \(L\in D^b_c(Z,A)\), then base extension
 induces an isomorphism
 \[
@@ -678,7 +950,7 @@ induces an isomorphism
  R(a_{Z_{\Omega'}})_*Lg'^*L
 \]
 in \(D^b_c(\Spec\Omega',A)\).
-\item For every geometric point \(\bar y\to Y\), with geometric fiber
+\item[\textup{(b)}] For every geometric point \(\bar y\to Y\), with geometric fiber
 \(X_{\bar y}=X\times_Y\bar y\), the exchange morphism is the fiber
 isomorphism
 \[
@@ -688,13 +960,13 @@ isomorphism
 \end{enumerate}
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Invariance under Algebraically Closed Field Extension}.
-\item \emph{Geometric-Fiber Formula for Proper Morphisms}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{proposition}[Finite-torsion proper base change and constructibility]
 \label{prop:finite-proper-base-change}
+\uses{def:exchange-projection,prop:proper-fibers,
+  def:constructible-interval}
 Let \(A=A_{E,n}\), and let the square in
 Definition~\ref{def:exchange-projection} be an arbitrary Cartesian
 square of finite-type schemes on which \(\ell\) is invertible.  If \(f\) is
@@ -711,16 +983,14 @@ squares and specializes at every geometric point to
 Proposition~\ref{prop:proper-fibers}.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Geometric Fibers and Algebraically Closed Extension},
-      Proposition~\ref{prop:proper-fibers}.
-\item \emph{Finite-Torsion Finiteness of Proper Direct Image}.
-\item \emph{Finite-Torsion Cohomological-Dimension Bound}.
-\item \emph{Proper Base Change}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{proposition}[Adic, rational, and algebraically closed passage]
 \label{prop:coefficient-passage}
+\uses{prop:finite-proper-base-change,def:derived-direct-image,
+  def:weil-derived-complete-integral,def:weil-rational-karoubi,
+  thm:qbar-functor-descent}
 Let \(f:X\to Y\) be proper and let
 \(K\in D^b_c(X,\mathcal O_E)\).  Put
 \(K_n=K\otimes^L_{\mathcal O_E}A_{E,n}\).  Then
@@ -743,15 +1013,15 @@ is a well-defined exact triangulated functor and \(\operatorname{Ex}_*\) is
 an isomorphism for proper \(f\).
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Finite-Torsion Proper Base Change and Constructibility},
-      Proposition~\ref{prop:finite-proper-base-change}.
-\item \emph{Adic Derived Completeness and Uniform Boundedness}.
-\item \emph{Rationalization and the \(\Qlb\) Triangulated 2-Colimit}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{proposition}[Coefficient and functor package]
 \label{prop:functor-package}
+\uses{def:derived-pullback-tensor-hom,def:derived-direct-image,
+  def:all-coefficient-compact-support,def:exceptional-inverse-image,
+  def:exchange-projection,prop:compact-support-coefficient-passage,
+  prop:coefficient-passage,thm:qbar-functor-descent}
 Let \(f:X\to Y\) be a separated morphism of finite type between schemes of
 finite type over \(k\).  Let
 \[
@@ -781,18 +1051,18 @@ and the adjunction \(Rf_!\dashv Rf^!\) restricts to
  \rightleftarrows D^b_{ctf}(Y,\Lambda):Rf^!.
 \]
 They satisfy the following statements.
-\begin{enumerate}[label=\textup{(\alph*)}]
-\item The scalar-extension functors between finite coefficient fields are
+\begin{enumerate}
+\item[\textup{(a)}] The scalar-extension functors between finite coefficient fields are
 exact and preserve shifts and distinguished triangles.
 The common-stage construction of \(\mathcal C_Y\) satisfies the triangulated
 axioms, and its Karoubi completion is triangulated.  Every finite-stage exact
 functor and natural isomorphism compatible with scalar extension descends to
 \(D^b_c(Y,\Qlb)\).
-\item The functor \(Rf_!\) and its canonical comparison maps are those of
+\item[\textup{(b)}] The functor \(Rf_!\) and its canonical comparison maps are those of
 Definition~\ref{def:compact-support-direct-image},
 Proposition~\ref{prop:compactification-coherence}, and
 Proposition~\ref{prop:compact-support-coefficient-passage}.
-\item For composable separated finite-type morphisms,
+\item[\textup{(c)}] For composable separated finite-type morphisms,
 \[
  R(g\circ f)_!\xrightarrow{\sim}Rg_!Rf_!,
 \]
@@ -804,13 +1074,13 @@ For a closed immersion \(i:Z\hookrightarrow X\) with open complement
  R(fj)_!j^*K\longrightarrow Rf_!K\longrightarrow
  R(fi)_!i^*K\longrightarrow R(fj)_!j^*K[1].
 \]
-\item In a Cartesian square
+\item[\textup{(d)}] In a Cartesian square
 \[
-\begin{CD}
-X' @>{g'}>> X\\
-@V{f'}VV @VV{f}V\\
-Y' @>{g}>> Y,
-\end{CD}
+\begin{array}{ccc}
+X' & \xrightarrow{g'} & X\\
+{\scriptstyle f'}\downarrow && \downarrow{\scriptstyle f}\\
+Y' & \xrightarrow{g} & Y,
+\end{array}
 \]
  the exchange map of Definition~\ref{def:exchange-projection}
 \(Lg^*Rf_*\to Rf'_*Lg'^*\) is an isomorphism if \(f\) is proper or if
@@ -818,19 +1088,19 @@ Y' @>{g}>> Y,
 \[
  Lg^*Rf_!\xrightarrow{\sim}Rf'_!Lg'^*.
 \]
-\item The projection transformation is an isomorphism:
+\item[\textup{(e)}] The projection transformation is an isomorphism:
 \[
  Rf_!K\otimes^L L\xrightarrow{\sim}Rf_!(K\otimes^L Lf^*L).
 \]
 Here \(K\in D^b_c(X,\Lambda)\) and
 \(L\in D^b_{ctf}(Y,\Lambda)\).
-\item Assume \(f\) is exceptional-adjoint admissible.  If \(f\) is smooth
+\item[\textup{(f)}] Assume \(f\) is exceptional-adjoint admissible.  If \(f\) is smooth
 of pure relative dimension \(r\) and
 \(L\in D^b_{ctf}(Y,\Lambda)\), then
 \[
  Rf^!L\xrightarrow{\sim}Lf^*L(r)[2r].
 \]
-\item Assume the structure morphisms and \(f\) are exceptional-adjoint
+\item[\textup{(g)}] Assume the structure morphisms and \(f\) are exceptional-adjoint
 admissible.  Put \(\omega_Y=Ra_Y^!\Lambda\) and
 \(D_YK=R\mathcal Hom(K,\omega_Y)\).  On
 \(D^b_{ctf}(Y,\Lambda)\), for the stated finite-type \(Y/k\) and
@@ -887,24 +1157,14 @@ with extension between finite coefficient fields and induce the
 stated \(\Qlb\)-valued operations.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Finite-Torsion Pro-etale Theory}.
-\item \emph{Finiteness of Derived Direct Image}.
-\item \emph{Adic and Rational Coefficients}.
-\item \emph{The \(\Qlb\) Triangulated 2-Colimit}.
-\item \emph{Adic, Rational, and Algebraically Closed Passage},
-      Proposition~\ref{prop:coefficient-passage}.
-\item \emph{Compactification and Coherence of \(Rf_!\)}.
-\item \emph{Proper Base Change}, \emph{Smooth Base Change}, and
-      \emph{Base Change for Compact Support}.
-\item \emph{Exceptional Adjoint \(Rf^!\)}, \emph{Smooth Purity}, and
-      \emph{Verdier and Poincare Duality}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \section{Weil structures, cohomology, and Frobenius factors}
 
 \begin{proposition}[Construction of constructible truncations]
 \label{prop:constructible-truncations}
+\uses{def:qbar-coefficient-category,thm:qbar-two-colimit-model}
 There are truncation functors
 \[
  \tau^{\leq m},\tau^{\geq m}:D^b_c(Y,\Qlb)
@@ -923,12 +1183,11 @@ Pullback by a scheme automorphism commutes with the truncations and with
 \(\mathcal H^i\).
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Adic and Rational Coefficients}.
-\item \emph{The \(\Qlb\) Triangulated 2-Colimit}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Constructible heart]
+\label{def:constructible-heart}
 For \(\Lambda=E\) or \(\Qlb\), define
 \[
 \begin{aligned}
@@ -941,9 +1200,13 @@ For \(\Lambda=E\) or \(\Qlb\), define
 Their intersection is the abelian category \(\Sh_c(Y,\Lambda)\), called the
 constructible heart.  Its objects are the constructible \(\Lambda\)-adic
 sheaves.
+\uses{prop:constructible-truncations,def:qbar-coefficient-category}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:constructible-heart}{prop:constructible-truncations,def:qbar-coefficient-category}{Lecture 40, Theorem 7.7; Lecture 42, Theorem 5.8.}
+
 \begin{definition}[Weil sheaf and Weil complex]
+\label{def:strict-weil-complex}
 Let \(Y_0\) be of finite type over \(k_0\), with geometric fiber \(Y\).  A
 constructible \(E\)-Weil sheaf is an object
 \(\mathcal F\in\Sh_c(Y,E)\) together with an isomorphism
@@ -972,10 +1235,18 @@ derived Frobenius isomorphism
  \xrightarrow{\sim}\operatorname{For}(K),
 \]
 represented termwise at a finite coefficient stage.
+\uses{def:weil-base-field,def:weil-frobenius-convention,
+  def:constructible-heart,def:qbar-finext-diagram,
+  def:filtered-two-colimit,def:qbar-coefficient-category,
+  thm:qbar-two-colimit-model}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:strict-weil-complex}{def:weil-base-field,def:weil-frobenius-convention,def:constructible-heart,def:qbar-finext-diagram,def:filtered-two-colimit,def:qbar-coefficient-category,thm:qbar-two-colimit-model}{Lecture 42, Definitions 9.1, 9.3, 10.1, and 10.26 and Theorem 10.29.}
 
 \begin{proposition}[Six operations on Weil complexes]
 \label{prop:weil-operations}
+\uses{prop:functor-package,prop:constructible-truncations,
+  def:strict-weil-complex,thm:qbar-functor-descent}
 Let \(f_0:X_0\to Y_0\) be separated and of finite type, and let
 \(f:X\to Y\) be its geometric fiber.  The exact functors
 \[
@@ -983,7 +1254,7 @@ Let \(f_0:X_0\to Y_0\) be separated and of finite type, and let
 \]
 on the domains in Proposition~\ref{prop:functor-package} lift to Weil
 complexes.  If \(f\) is exceptional-adjoint admissible, the same holds for
-\(Rf^!\).  For example, the Weil isomorphism on \(Rf_*K\) is
+\(Rf^!\).  Explicitly, the Weil isomorphism on \(Rf_*K\) is
 \[
  Lg_Y^*Rf_*\operatorname{For}(K)
  \xrightarrow{\operatorname{Ex}_*}
@@ -996,14 +1267,11 @@ base change, projection, purity, and duality isomorphisms are morphisms of
 Weil complexes and induce Frobenius-equivariant maps on cohomology.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Coefficient and Functor Package},
-      Proposition~\ref{prop:functor-package}.
-\item \emph{Construction of Constructible Truncations},
-      Proposition~\ref{prop:constructible-truncations}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Frobenius on coefficient twists]
+\label{def:frobenius-on-twists}
 The coefficient twists of Definition~\ref{def:coefficient-twists} on
 \(\Spec k_0\), pulled back to a
 geometric fiber, have their natural Weil isomorphisms.  Geometric Frobenius
@@ -1011,9 +1279,14 @@ acts on \(E(1)\) by \(q^{-1}\), on \(E(m)\) by \(q^{-m}\), and on
 \(E(-m)\) by \(q^m\).  These assertions commute with finite reduction and
 extension to \(\Qlb\); in particular, geometric Frobenius acts on
 \(E(-d)\) by \(q^d\).
+\uses{def:weil-frobenius-convention,def:coefficient-twists,
+  def:strict-weil-complex}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:frobenius-on-twists}{def:weil-frobenius-convention,def:coefficient-twists,def:strict-weil-complex}{Lecture 46, Definitions 4.1 and 4.2 and Theorem 4.3.}
+
 \begin{definition}[Finite coefficient categories over a point]
+\label{def:point-coefficient-categories}
 Let \(D^b_{\mathrm{fin}}(A_{E,n})\) be the full subcategory of
 \(D(A_{E,n})\) consisting of bounded complexes with finite cohomology
 modules.  Let \(D^b_{\mathrm{fg}}(\mathcal O_E)\) be the full subcategory of
@@ -1025,9 +1298,14 @@ the bounded derived category of finite-dimensional \(E\)-vector spaces.  Put
  \Kar\left(\underset{E\in\mathcal E_\ell}{\operatorname{2-colim}}
  D^b_{\mathrm{fd}}(E)\right).
 \]
+\uses{def:weil-derived-complete-integral,def:qbar-finext-diagram,
+  def:filtered-two-colimit,def:qbar-coefficient-category}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:point-coefficient-categories}{def:weil-derived-complete-integral,def:qbar-finext-diagram,def:filtered-two-colimit,def:qbar-coefficient-category}{Lecture 36, Definitions 1.1, 1.5, and 1.6.}
+
 \begin{definition}[Ordinary and compactly supported cohomology]
+\label{def:cohomology-complexes}
 Let \(Y\) be separated and of finite type over \(k\).  For
 \(s=\Spec k\), evaluation at its geometric point gives equivalences
 \[
@@ -1059,9 +1337,15 @@ finite-dimensional for field coefficients; their dimensions, traces, and
 determinants have their ordinary linear-algebraic meanings.
 If \(Y\) is proper, \(Ra_{Y!}\cong Ra_{Y*}\), so
 \(H_c^i(Y,K)\cong H^i(Y,K)\).
+\uses{def:point-coefficient-categories,def:derived-direct-image,
+  def:all-coefficient-compact-support,def:strict-weil-complex,
+  prop:constructible-truncations}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:cohomology-complexes}{def:point-coefficient-categories,def:derived-direct-image,def:all-coefficient-compact-support,def:strict-weil-complex,prop:constructible-truncations}{Lecture 36, Definitions 2.1 and 2.2 and Theorems 2.3--2.6.}
+
 \begin{definition}[Global geometric Frobenius]
+\label{def:global-geometric-frobenius}
 For a Weil complex \((K,\theta)\), the geometric Frobenius endomorphism of
 ordinary cohomology is induced by
 \[
@@ -1071,9 +1355,14 @@ ordinary cohomology is induced by
 \]
 The compactly supported operator is defined analogously using \(Ra_{Y!}\).
 Both operators, and their actions on cohomology, are denoted \(F\).
+\uses{def:weil-frobenius-convention,def:strict-weil-complex,
+  def:cohomology-complexes,prop:weil-operations}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:global-geometric-frobenius}{def:weil-frobenius-convention,def:strict-weil-complex,def:cohomology-complexes,prop:weil-operations}{Lecture 34, Definition 3.3.}
+
 \begin{definition}[Local Frobenius and local alternating trace]
+\label{def:local-frobenius-trace}
 Let \(y\in|Y_0|\) be a closed point of degree
 \(r=[\kappa(y):\Fq]\).  Choose an embedding
 \(\kappa(y)\hookrightarrow k\) and the associated geometric point
@@ -1091,10 +1380,16 @@ at the associated geometric point defines \(F_x^{(n)}\).  Put
  \Tr\bigl(F_x^{(n)}\mid
  \mathcal H^j(\operatorname{For}K)_{\bar x}\bigr).
 \]
+\uses{def:weil-base-field,def:strict-weil-complex,
+  prop:constructible-truncations,def:weil-frobenius-convention}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:local-frobenius-trace}{def:weil-base-field,def:strict-weil-complex,prop:constructible-truncations,def:weil-frobenius-convention}{Lecture 34, Definition 3.4; Lecture 46, Definition 2.5.}
 
 \begin{proposition}[Compact-support finiteness and Frobenius]
 \label{prop:cohomological-finiteness}
+\uses{prop:compact-support-coefficient-passage,prop:weil-operations,
+  def:cohomology-complexes,def:global-geometric-frobenius}
 Let \(Y_0/\Fq\) be separated and of finite type, let \(Y\) be its geometric
 fiber, and let \(K\in D^b_{c,\mathrm W}(Y,E)\), with the same assertion for
 \(\Qlb\) after choosing a finite field of definition.  Then
@@ -1111,23 +1406,19 @@ If \(Y\) has dimension \(e\) and \(K=E_Y\) is the constant Weil sheaf, then
  H_c^i(Y,E)=0\qquad\text{for }i<0\text{ or }i>2e.
 \]
 For proper \(Y\), the same range holds for ordinary cohomology.  In
-particular,
-\[
- H^i(X,\Ql)=0\qquad\text{for }i\notin[0,2d].
-\]
+particular, if \(Y\) is proper of pure dimension \(e\), then
+\(H^i(Y,E)=0\) for \(i\notin[0,2e]\).
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Finiteness of Derived Direct Image}.
-\item \emph{Finite-Torsion Cohomological-Dimension Bound}.
-\item \emph{Base Change for Compact Support}.
-\item \emph{Six Operations on Weil Complexes},
-      Proposition~\ref{prop:weil-operations}.
-\end{prerequisites}
+\sketchslot{}
 
-\begin{definition}[The smooth-proper cohomological family]
-From now on, let \(X_0/\Fq\) be smooth, proper, geometrically connected, and
-of pure dimension \(d\), and put \(X=X_0\times_{\Fq}k\).  For every prime
+
+\begin{definition}[Smooth-proper datum and its cohomological family]
+\label{def:smooth-proper-cohomological-family}
+A \emph{smooth-proper datum} \(\mathscr X\) consists of a smooth, proper,
+geometrically connected \(\Fq\)-scheme \(X_0\), an integer \(d\geq0\), an
+identification of \(d\) with the pure dimension of \(X_0\), and the
+geometric fiber \(X=X_0\times_{\Fq}k\).  For every prime
 \(\ell\neq p\), define
 \[
  V_{i,\ell}=H^i(X,\Ql),
@@ -1146,9 +1437,30 @@ Define
 It has constant coefficient \(1\), degree
 \(\dim_{\Ql}V_{i,\ell}\), and leading coefficient
 \((-1)^{\dim V_{i,\ell}}\det(F_{i,\ell})\).
+Every displayed symbol is a function of \(\mathscr X\), even when the
+argument is suppressed in mathematical notation.
+\uses{def:weil-base-field,def:weil-geometric-hypotheses,
+  def:cohomology-complexes,def:global-geometric-frobenius,
+  prop:cohomological-finiteness}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:smooth-proper-cohomological-family}{def:weil-base-field,def:weil-geometric-hypotheses,def:cohomology-complexes,def:global-geometric-frobenius,prop:cohomological-finiteness}{Exact local declaration (Definition~\ref{def:smooth-proper-cohomological-family}).}
+
+\begin{convention}[Fixed smooth-proper datum]
+\label{conv:fixed-smooth-proper-datum}
+In Sections 5--9 fix one smooth-proper datum \(\mathscr X\).  The symbols
+\(X_0,d,X,V_{i,\ell},F_{i,\ell},P_{i,\ell}\) always mean the components or
+functions attached to this datum by
+Definition~\ref{def:smooth-proper-cohomological-family}.  Every declaration
+in these sections has \(\mathscr X\) as an explicit first parameter; the
+suppressed argument is only a typesetting convention.
+\uses{def:smooth-proper-cohomological-family}
+\end{convention}
+
+\BlueprintLocalDeclarationRegistry{Convention}{conv:fixed-smooth-proper-datum}{def:smooth-proper-cohomological-family}{Exact local convention (Convention~\ref{conv:fixed-smooth-proper-datum}).}
+
 \begin{definition}[Ordinary roots and reciprocal roots]
+\label{def:ordinary-reciprocal-roots}
 Let \(P(T)\) be a polynomial with \(P(0)=1\).  An \emph{ordinary root} is a
 scalar \(\beta\) satisfying \(P(\beta)=0\).  It is nonzero.  A
 \emph{reciprocal root} is a scalar \(\alpha\) satisfying
@@ -1159,11 +1471,15 @@ scalar \(\beta\) satisfying \(P(\beta)=0\).  It is nonzero.  A
 where the \(\alpha_j\), counted with algebraic multiplicity, are the
 reciprocal roots.  For \(P_{i,\ell}\), they are exactly the eigenvalues of
 \(F_{i,\ell}\) after scalar extension to \(\Qlb\).
+\uses{conv:fixed-smooth-proper-datum}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:ordinary-reciprocal-roots}{conv:fixed-smooth-proper-datum}{Lecture 49, Definitions 5.1 and 8.13.}
 
 \section{Point counting and the trace-to-determinant step}
 
 \begin{definition}[Point counts and zeta function]
+\label{def:point-count-zeta}
 For every finite-type \(\Fq\)-scheme \(Y_0\) and \(n\geq1\), put
 \[
  N_n(Y_0)=\#Y_0(\mathbf F_{q^n}).
@@ -1176,10 +1492,14 @@ For a closed point \(x\in|Y_0|\), set
  \in1+T\mathbf Q[[T]].
 \]
 The exponential is the formal power-series exponential.
+\uses{def:weil-base-field}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:point-count-zeta}{def:weil-base-field}{Lecture 49, Definitions 4.1, 4.2, and 4.4.}
 
 \begin{proposition}[Closed-point and integral-series identity]
 \label{prop:euler-product}
+\uses{def:point-count-zeta}
 For every finite-type \(\Fq\)-scheme \(Y_0\), the closed points of degree
 dividing \(n\) and the geometric Frobenius orbits give
 \[
@@ -1196,12 +1516,14 @@ The product is coefficientwise locally finite: modulo \(T^{m+1}\), only
 closed points of degree at most \(m\) occur.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Zeta Functions and Linear Algebra}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{proposition}[Every-iterate Grothendieck--Lefschetz identity]
 \label{prop:every-iterate-trace}
+\uses{def:point-count-zeta,def:local-frobenius-trace,
+  def:global-geometric-frobenius,prop:cohomological-finiteness,
+  conv:fixed-smooth-proper-datum}
 Let \(Y_0/\Fq\) be separated and of finite type, let \(Y\) be its geometric
 fiber, and let \(K\in D^b_{c,\mathrm W}(Y,E)\).  For every \(n\geq1\),
 \[
@@ -1224,14 +1546,13 @@ ordinary cohomology.  In particular, for the fixed smooth proper \(X_0\),
 \]
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Compact-Support Finiteness and Frobenius},
-      Proposition~\ref{prop:cohomological-finiteness}.
-\item \emph{Grothendieck--Lefschetz Trace Formula}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{proposition}[Trace-to-determinant factorization]
 \label{prop:trace-determinant}
+\uses{prop:every-iterate-trace,def:smooth-proper-cohomological-family,
+  def:point-count-zeta}
 Let \((V_i,u_i)\) be a finite graded family of finite-dimensional vector
 spaces and endomorphisms over a characteristic-zero field.  Put
 \[
@@ -1260,15 +1581,13 @@ identity is equivalent, after coefficient extension
 This identity belongs to \(\Ql(T)\cap\Ql[[T]]\).
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Every-Iterate Grothendieck--Lefschetz Identity},
-      Proposition~\ref{prop:every-iterate-trace}.
-\item \emph{Zeta Functions and Linear Algebra}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \section{Weights before arithmetic recovery}
 
 \begin{definition}[Punctual weights]
+\label{def:punctual-weights}
 Fix an abstract field isomorphism \(\iota:\Qlb\xrightarrow{\sim}\mathbf C\).
 Let \(\mathcal F\) be a constructible \(\Qlb\)-Weil sheaf on the geometric
 fiber of \(Y_0/\Fq\).  It is \emph{punctually \(\iota\)-pure of weight
@@ -1282,9 +1601,13 @@ It is \emph{\(\iota\)-mixed of weights at most \(w\)} if it has a finite
 filtration by constructible Weil subsheaves whose graded pieces are
 punctually \(\iota\)-pure of respective weights \(w_\nu\) with
 \(w_\nu\leq w\).
+\uses{def:strict-weil-complex,def:local-frobenius-trace}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:punctual-weights}{def:strict-weil-complex,def:local-frobenius-trace}{Lecture 46, Definitions 7.1--7.3; Lecture 47, Definition 2.1.}
+
 \begin{definition}[Weights of a Weil complex]
+\label{def:weights-of-complex}
 Assume that the Verdier duality functor \(D_Y\) is available on
 \(D^b_{ctf}(Y,\Qlb)=D^b_c(Y,\Qlb)\), as in
 Proposition~\ref{prop:functor-package}.  For
@@ -1295,9 +1618,14 @@ Proposition~\ref{prop:functor-package}.  For
 \(\Wt_{\iota,\geq w}(K)\) if
 \(\Wt_{\iota,\leq-w}(D_YK)\) holds.  The complex is
 \emph{\(\iota\)-pure of weight \(w\)} if both bounds hold.
+\uses{def:punctual-weights,def:strict-weil-complex,
+  prop:constructible-truncations,prop:functor-package}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:weights-of-complex}{def:punctual-weights,def:strict-weil-complex,prop:constructible-truncations,prop:functor-package}{Lecture 46, Definitions 8.1 and 8.2; Lecture 47, Definition 2.2.}
+
 \begin{definition}[Weil numbers]
+\label{def:weil-numbers}
 For a number field \(L/\mathbf Q\), define
 \[
  \operatorname{Emb}_{\mathbf Q}(L,\mathbf C)=
@@ -1319,55 +1647,65 @@ integers \(a_0,\ldots,a_{m-1}\) such that
 \[
  \alpha^m+a_{m-1}\alpha^{m-1}+\cdots+a_1\alpha+a_0=0.
 \]
+\uses{def:weil-base-field}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:weil-numbers}{def:weil-base-field}{Lecture 46, Definition 6.1.}
 
 \begin{proposition}[Smooth-proper weight purity]
 \label{prop:weight-purity}
+\uses{conv:fixed-smooth-proper-datum,def:weights-of-complex,
+  def:ordinary-reciprocal-roots,prop:functor-package}
 For every abstract field isomorphism
 \(\iota:\Qlb\xrightarrow{\sim}\mathbf C\), the following statements hold.
-\begin{enumerate}[label=\textup{(\alph*)}]
-\item The constant Weil sheaf \((\Qlb)_X\) is \(\iota\)-pure of weight \(0\).
-\item The Frobenius module \(H_c^i(X,\Qlb)\) is \(\iota\)-mixed of weights
+\begin{enumerate}
+\item[\textup{(a)}] The constant Weil sheaf \((\Qlb)_X\) is \(\iota\)-pure of weight \(0\).
+\item[\textup{(b)}] The Frobenius module \(H_c^i(X,\Qlb)\) is \(\iota\)-mixed of weights
 at most \(i\).
-\item There is a Frobenius-equivariant isomorphism
+\item[\textup{(c)}] There is a Frobenius-equivariant isomorphism
 \(H_c^i(X,\Qlb)\xrightarrow{\sim}H^i(X,\Qlb)\).
-\item There is a Frobenius-equivariant perfect duality
+\item[\textup{(d)}] There is a Frobenius-equivariant perfect duality
 \[
  H^i(X,\Qlb)^\vee\xrightarrow{\sim}
  H^{2d-i}(X,\Qlb)(d).
 \]
-\item The Frobenius module \(H^i(X,\Qlb)\) is \(\iota\)-pure of weight \(i\).
-\item Every reciprocal root \(\alpha\in\Qlb\) of \(P_{i,\ell}\) satisfies
+\item[\textup{(e)}] The Frobenius module \(H^i(X,\Qlb)\) is \(\iota\)-pure of weight \(i\).
+\item[\textup{(f)}] Every reciprocal root \(\alpha\in\Qlb\) of \(P_{i,\ell}\) satisfies
 \[
  |\iota(\alpha)|=q^{i/2}.
 \]
 \end{enumerate}
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Weil Structures and Weights}.
-\item \emph{Weight Functoriality}.
-\item \emph{Fourier--Deligne Transform} and
-      \emph{Laumon's Local Fourier Theory}.
-\item \emph{Affine-Line Weight Estimate}.
-\item \emph{Deligne's Global Weight Theorem}.
-\item \emph{Verdier and Poincare Duality} and
-      \emph{Poincare Duality Pairing}.
-\end{prerequisites}
+\sketchslot{}
 
-\begin{proposition}[Weight separation]
-\label{prop:weight-separation}
-Fix \(\ell\neq p\).  If \(i\neq j\), then \(P_{i,\ell}\) and
-\(P_{j,\ell}\) have no common ordinary root in \(\Qlb\) and are coprime
-in \(\Qlb[T]\).  The two normalized parity products
+
+\begin{definition}[Parity products at a finite realization]
+\label{def:realization-parity-products}
+For a prime \(\ell\neq p\), define
 \[
  N_\ell(T)=\prod_{\substack{0\leq i\leq2d\\ i\text{ odd}}}
  P_{i,\ell}(T),
  \qquad
  D_\ell(T)=\prod_{\substack{0\leq i\leq2d\\ i\text{ even}}}
- P_{i,\ell}(T)
+ P_{i,\ell}(T).
 \]
-are coprime, have constant coefficient \(1\), and satisfy
+Both products are functions of the fixed smooth-proper datum
+\(\mathscr X\).
+\uses{conv:fixed-smooth-proper-datum}
+\end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:realization-parity-products}{conv:fixed-smooth-proper-datum}{Exact local declaration; separation properties are Lecture 49, Lemma 10.1 and Corollary 10.2.}
+
+\begin{proposition}[Weight separation]
+\label{prop:weight-separation}
+\uses{prop:weight-purity,prop:trace-determinant,
+  def:realization-parity-products}
+Fix \(\ell\neq p\).  If \(i\neq j\), then \(P_{i,\ell}\) and
+\(P_{j,\ell}\) have no common ordinary root in \(\Qlb\) and are coprime
+in \(\Qlb[T]\).  The parity products of
+Definition~\ref{def:realization-parity-products} are coprime, have constant
+coefficient \(1\), and satisfy
 \[
  Z(X_0,T)=\frac{N_\ell(T)}{D_\ell(T)}
 \]
@@ -1381,17 +1719,13 @@ for every abstract field isomorphism
 \(\iota:\Qlb\xrightarrow{\sim}\mathbf C\).
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Smooth-Proper Weight Purity},
-      Proposition~\ref{prop:weight-purity}.
-\item \emph{Trace-to-Determinant Factorization},
-      Proposition~\ref{prop:trace-determinant}.
-\item \emph{Zeta Functions and Linear Algebra}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \section{Integral factors and realization independence}
 
 \begin{definition}[Normalized reduced integral fraction]
+\label{def:normalized-integral-fraction}
 A normalized reduced integral presentation of a series
 \(Z(T)\in1+T\mathbf Z[[T]]\cap\mathbf Q(T)\) is a pair
 \(A,B\in\mathbf Z[T]\) such that
@@ -1403,9 +1737,13 @@ A normalized reduced integral presentation of a series
  Z(T)=\frac{A(T)}{B(T)}
 \]
 as a Taylor series at \(T=0\).  Such a pair is unique.
+\uses{def:point-count-zeta}
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:normalized-integral-fraction}{def:point-count-zeta}{Lecture 49, Definitions 7.1 and 8.9 and Lemma 8.11.}
+
 \begin{definition}[Hankel matrix of a power series]
+\label{def:hankel-matrix}
 For \(C(T)=\sum_{n\geq0}c_nT^n\in K[[T]]\), its Hankel matrix is the
 infinite matrix
 \[
@@ -1417,19 +1755,23 @@ equivalently, the sequence \((c_n)\) satisfies a linear recurrence over
 \(K\) from some index onward.
 \end{definition}
 
+\BlueprintLocalDeclarationRegistry{Definition}{def:hankel-matrix}{none}{Lecture 49, Definition 7.3 and Proposition 7.8.}
+
 \begin{proposition}[Rational descent and normalized integral fraction]
 \label{prop:rational-descent}
+\uses{prop:euler-product,prop:trace-determinant,
+  def:normalized-integral-fraction,def:hankel-matrix}
 The zeta function has the following properties:
-\begin{enumerate}[label=\textup{(\alph*)}]
-\item
+\begin{enumerate}
+\item[\textup{(a)}]
 \[
  Z(X_0,T)\in\mathbf Q(T).
 \]
-\item
+\item[\textup{(b)}]
 \[
  Z(X_0,T)\in1+T\mathbf Z[[T]]\cap\mathbf Q(T).
 \]
-\item There is a unique normalized reduced integral presentation
+\item[\textup{(c)}] There is a unique normalized reduced integral presentation
 \[
  Z(X_0,T)=\frac{A(T)}{B(T)},
  \qquad A,B\in\mathbf Z[T],
@@ -1439,16 +1781,24 @@ The zeta function has the following properties:
 \end{enumerate}
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Closed-Point and Integral-Series Identity},
-      Proposition~\ref{prop:euler-product}.
-\item \emph{Trace-to-Determinant Factorization},
-      Proposition~\ref{prop:trace-determinant}.
-\item \emph{Fatou's Integrality Lemma for Rational Power Series}.
-\item \emph{Zeta Functions and Linear Algebra}.
-\end{prerequisites}
+\sketchslot{}
+
+
+\begin{definition}[Canonical numerator and denominator]
+\label{def:canonical-integral-fraction}
+Let \((A_{\mathscr X},B_{\mathscr X})\) be the unique normalized reduced
+integral presentation of \(Z(X_0,T)\) furnished by
+Proposition~\ref{prop:rational-descent}.  In Sections 7--9 write these
+polynomials as \(A\) and \(B\).  Thus \(A\) and \(B\) are functions of
+\(\mathscr X\), not new existentially chosen variables.
+\uses{conv:fixed-smooth-proper-datum,def:normalized-integral-fraction,
+  prop:rational-descent}
+\end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:canonical-integral-fraction}{conv:fixed-smooth-proper-datum,def:normalized-integral-fraction,prop:rational-descent}{Exact local canonical choice; existence and uniqueness are Lecture 49, Theorem 8.12.}
 
 \begin{definition}[Integral realization of a Frobenius factor]
+\label{def:integral-realization-factor}
 For \(P(T)=\sum_ra_rT^r\in\mathbf Z[T]\), write
 \[
  P^{(\ell)}(T)=\sum_r(a_r\cdot1_{\Ql})T^r\in\Ql[T].
@@ -1459,10 +1809,14 @@ An integral realization-independent factor in degree \(i\) is a polynomial
  P_i^{(\ell)}=P_{i,\ell}
 \]
 for every prime \(\ell\neq p\).
+\uses{conv:fixed-smooth-proper-datum}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:integral-realization-factor}{conv:fixed-smooth-proper-datum}{Exact local declaration; realization-family input is Lecture 49, Definition 12.1.}
 
 \begin{definition}[The algebraic closure of \(\mathbf Q\) inside
 \(\Qlb\)]
+\label{def:algebraic-numbers-in-qbarl}
 Set
 \[
  \overline{\mathbf Q}^{(\ell)}=
@@ -1471,13 +1825,22 @@ Set
 This is an algebraically closed subfield of \(\Qlb\).  After choosing an
 algebraic closure \(\overline{\mathbf Q}\) of \(\mathbf Q\), a
 \(\mathbf Q\)-embedding
-\(\jmath:\overline{\mathbf Q}\xrightarrow{\sim}
+\(\eta:\overline{\mathbf Q}\xrightarrow{\sim}
 \overline{\mathbf Q}^{(\ell)}\) is called an ell-adic realization of
 algebraic numbers.
+\uses{def:weil-base-field}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:algebraic-numbers-in-qbarl}{def:weil-base-field}{Lecture 49, Definition 9.1 and Proposition 9.2.}
 
 \begin{lemma}[Extension of embeddings and intrinsic weights]
 \label{lem:embedding-extension}
+\uses{def:algebraic-numbers-in-qbarl,def:weil-numbers}
+There exists a \(\mathbf Q\)-isomorphism
+\[
+ \eta:\overline{\mathbf Q}\xrightarrow{\sim}
+ \overline{\mathbf Q}^{(\ell)}.
+\]
 Let \(L\subset\Qlb\) be a number field and let
 \(\sigma:L\hookrightarrow\mathbf C\) be a field embedding.  There is an
 abstract field isomorphism
@@ -1487,10 +1850,10 @@ abstract field isomorphism
 whose restriction to \(L\) is \(\sigma\).  If
 \(\alpha\in\overline{\mathbf Q}\) satisfies
 \[
- |\iota(\jmath(\alpha))|=q^{i/2}
+ |\iota(\eta(\alpha))|=q^{i/2}
 \]
 for every ell-adic realization
-\(\jmath:\overline{\mathbf Q}\xrightarrow{\sim}
+\(\eta:\overline{\mathbf Q}\xrightarrow{\sim}
 \overline{\mathbf Q}^{(\ell)}\) and every abstract field isomorphism
 \(\iota:\Qlb\xrightarrow{\sim}\mathbf C\), then
 \[
@@ -1501,34 +1864,48 @@ The set of \(q\)-Weil numbers of weight \(i\) is stable under
 \(\operatorname{Gal}(\overline{\mathbf Q}/\mathbf Q)\).
 \end{lemma}
 
-\begin{prerequisites}
-\item \emph{Extension of Isomorphisms between Algebraically Closed Fields}.
-\item \emph{Transcendence-Basis Cardinality for \(\Qlb\) and
-      \(\mathbf C\)}.
-\end{prerequisites}
+\sketchslot{}
+
+
+\begin{definition}[Weight-stratum multisets and polynomials]
+\label{def:weight-stratum-factors}
+Let \(A,B\) be the canonical numerator and denominator of
+Definition~\ref{def:canonical-integral-fraction}.  For a polynomial
+\(C\in\{A,B\}\) of degree \(r\), put
+\[
+ C^\#(U)=U^rC(U^{-1}).
+\]
+For odd \(i\), let \(R_i\) be the multiset of roots of \(A^\#\) that are
+\(q\)-Weil numbers of weight \(i\); for even \(i\), use the roots of
+\(B^\#\).  Multiplicities are inherited from the corresponding reciprocal
+polynomial.  Define
+\[
+ Q_i(T)=\prod_{\alpha\in R_i}(1-\alpha T).
+\]
+The symbols \(R_i\) and \(Q_i\) are functions of \(\mathscr X\).
+\uses{def:canonical-integral-fraction,def:weil-numbers}
+\end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:weight-stratum-factors}{def:canonical-integral-fraction,def:weil-numbers}{Exact local declaration; Lecture 49, Definition 9.8 and Proposition 9.9.}
 
 \begin{proposition}[Galois-stable weight-stratum factors]
 \label{prop:galois-weight-strata}
-Let \(A,B\in\mathbf Z[T]\) be the normalized reduced fraction of
-Proposition~\ref{prop:rational-descent}.  For a polynomial
-\(C\in\{A,B\}\) of degree \(r\), its reciprocal polynomial
-\[
- C^\#(U)=U^rC(U^{-1})
-\]
-is monic.  Its roots, with multiplicity, are algebraic integers and are the
-reciprocal roots of \(C\).  For odd \(i\), let \(R_i\) be the
-submultiset of roots of \(A^\#\) that are \(q\)-Weil numbers of weight \(i\).
-For even \(i\), define \(R_i\) in the same way using \(B^\#\).  Then:
-\begin{enumerate}[label=\textup{(\alph*)}]
-\item each \(R_i\) is stable, with multiplicities, under
+\uses{def:weight-stratum-factors,prop:weight-separation,
+  lem:embedding-extension}
+The reciprocal polynomials \(A^\#\) and \(B^\#\) are monic, and their
+roots, with multiplicity, are algebraic integers and are the reciprocal
+roots of \(A\) and \(B\).  The multisets and polynomials of
+Definition~\ref{def:weight-stratum-factors} satisfy:
+\begin{enumerate}
+\item[\textup{(a)}] each \(R_i\) is stable, with multiplicities, under
 \(\operatorname{Gal}(\overline{\mathbf Q}/\mathbf Q)\);
-\item the normalized stratum polynomial
+\item[\textup{(b)}] the normalized stratum polynomial
 \[
  Q_i(T)=\prod_{\alpha\in R_i}(1-\alpha T)
 \]
 has coefficients in \(\mathbf Q\), has algebraic-integer coefficients, and
 belongs to \(\mathbf Z[T]\);
-\item for every \(\ell\neq p\) and every ell-adic realization \(\jmath\),
+\item[\textup{(c)}] for every \(\ell\neq p\) and every ell-adic realization \(\eta\),
 scalar extension sends the multiset \(R_i\) to the reciprocal-root multiset
 of \(P_{i,\ell}\), and
 \[
@@ -1537,17 +1914,30 @@ of \(P_{i,\ell}\), and
 \end{enumerate}
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Weight Separation}, Proposition~\ref{prop:weight-separation}.
-\item \emph{Rational Descent and Normalized Integral Fraction},
-      Proposition~\ref{prop:rational-descent}.
-\item \emph{Extension of Embeddings and Intrinsic Weights},
-      Lemma~\ref{lem:embedding-extension}.
-\item \emph{Galois Descent for Polynomial Factors}.
-\end{prerequisites}
+\sketchslot{}
+
+
+\begin{definition}[Canonical integral cohomological factors]
+\label{def:canonical-cohomological-factors}
+For \(0\leq i\leq2d\), define
+\[
+ P_i=P_i(\mathscr X):=Q_i,
+\]
+where \(Q_i\) is the weight-stratum polynomial of
+Definition~\ref{def:weight-stratum-factors}.  Proposition
+~\ref{prop:galois-weight-strata} supplies the theorem that
+\(P_i\in\mathbf Z[T]\), that \(P_i(0)=1\), and that every finite
+realization is \(P_{i,\ell}\).
+\uses{def:weight-stratum-factors,prop:galois-weight-strata}
+\end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:canonical-cohomological-factors}{def:weight-stratum-factors,prop:galois-weight-strata}{Exact local canonical choice; Lecture 49, Theorem 12.3 and Corollary 12.5.}
 
 \begin{proposition}[Integral factor recovery]
 \label{prop:integral-recovery}
+\uses{def:canonical-integral-fraction,def:realization-parity-products,
+  prop:weight-separation,prop:galois-weight-strata,
+  def:integral-realization-factor}
 There are unique polynomials
 \[
  P_i(T)\in\mathbf Z[T]
@@ -1574,17 +1964,13 @@ and
 for every \(\ell\neq p\).
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Rational Descent and Normalized Integral Fraction},
-      Proposition~\ref{prop:rational-descent}.
-\item \emph{Weight Separation}, Proposition~\ref{prop:weight-separation}.
-\item \emph{Galois-Stable Weight-Stratum Factors},
-      Proposition~\ref{prop:galois-weight-strata}.
-\item \emph{Zeta Functions and Linear Algebra}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{proposition}[Arithmetic roots and realization-independent degrees]
 \label{prop:arithmetic-roots}
+\uses{def:canonical-cohomological-factors,prop:weight-purity,
+  prop:galois-weight-strata,lem:embedding-extension}
 Let \(r_i=\deg P_i\).  The reciprocal polynomial
 \[
  P_i^\#(U)=U^{r_i}P_i(U^{-1})\in\mathbf Z[U]
@@ -1596,8 +1982,8 @@ integer.  For every embedding
  |\tau(\alpha)|=q^{i/2};
 \]
 and \(\alpha\) is a \(q\)-Weil number of weight \(i\).  For every field
-embedding \(\jmath:\overline{\mathbf Q}\hookrightarrow\Qlb\), the scalar
-\(\jmath(\alpha)\) occurs as an eigenvalue of geometric Frobenius on
+embedding \(\eta:\overline{\mathbf Q}\hookrightarrow\Qlb\), the scalar
+\(\eta(\alpha)\) occurs as an eigenvalue of geometric Frobenius on
 \(H^i(X,\Qlb)\).  Every ordinary root \(\beta=\alpha^{-1}\) satisfies,
 for every \(\tau:\mathbf Q(\beta)\hookrightarrow\mathbf C\),
 \[
@@ -1611,42 +1997,52 @@ for every \(\ell\neq p\); both the factor and its degree are independent of
 the chosen ell-adic realization.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Smooth-Proper Weight Purity},
-      Proposition~\ref{prop:weight-purity}.
-\item \emph{Integral Factor Recovery},
-      Proposition~\ref{prop:integral-recovery}.
-\item \emph{Extension of Embeddings and Intrinsic Weights},
-      Lemma~\ref{lem:embedding-extension}.
-\item \emph{Galois-Stable Weight-Stratum Factors},
-      Proposition~\ref{prop:galois-weight-strata}.
-\item \emph{Zeta Functions and Linear Algebra}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Betti numbers]
+\label{def:betti-numbers}
 For \(0\leq i\leq2d\), define
 \[
  b_i=\deg P_i.
 \]
-For \(i\notin[0,2d]\), put \(b_i=0\).  Integral factor recovery gives the
-following equality in the displayed range, while the cohomological-range
-statement in Proposition~\ref{prop:cohomological-finiteness} gives it outside
-that range:
-\[
- b_i=\dim_{\Ql}H^i(X,\Ql)
-\]
-for every \(i\in\mathbf Z\) and every \(\ell\neq p\).  The integer \(b_i\)
-is independent of \(\ell\).
+For \(i\notin[0,2d]\), put \(b_i=0\).  Thus \(b_i\) is defined solely from
+the canonical integral factor and is independent of a realization by
+definition; its cohomological interpretation is
+Proposition~\ref{prop:arithmetic-roots}.
+\uses{def:canonical-cohomological-factors}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:betti-numbers}{def:canonical-cohomological-factors}{Exact local declaration; independence is Lecture 49, Corollary 12.4.}
 
 \section{Duality, endpoints, reciprocity, and the functional equation}
 
+\begin{theorem}[Exceptional admissibility of a smooth-proper structure map]
+\label{thm:smooth-proper-structure-admissible}
+\uses{def:exceptional-adjoint-admissible,conv:fixed-smooth-proper-datum}
+For the fixed smooth-proper datum, the structure morphism
+\(a_X:X\to\Spec k\) is exceptional-adjoint admissible at every finite
+coefficient stage, at \(\mathcal O_E\), at \(E\), and at \(\Qlb\), with the
+uniform amplitude and coefficient-comparison data required by
+Definition~\ref{def:exceptional-adjoint-admissible}.
+\sorryleaf{Lecture 44, Theorem 6.20, together with the smooth-proper
+amplitude and finite-Tor admissibility input made explicit there.}
+\end{theorem}
+
+\sketchslot{}
+
 \begin{convention}[Exceptional admissibility for the structure morphism]
+\label{conv:structure-map-admissibility}
 Throughout this section, the smooth proper structure morphism
-\(a_X:X\to\Spec k\) is exceptional-adjoint admissible at \(\Ql\).
+\(a_X:X\to\Spec k\) is equipped with the admissibility datum of
+Theorem~\ref{thm:smooth-proper-structure-admissible}.
+\uses{thm:smooth-proper-structure-admissible}
 \end{convention}
 
+\BlueprintLocalDeclarationRegistry{Convention}{conv:structure-map-admissibility}{thm:smooth-proper-structure-admissible}{Exact local convention, discharged by Theorem~\ref{thm:smooth-proper-structure-admissible}.}
+
 \begin{definition}[Poincare trace and cup-product pairing]
+\label{def:poincare-trace-pairing}
 For the smooth structure morphism \(a_X:X\to\Spec k\), smooth purity gives
 \[
  Ra_X^!\Ql\cong\Ql(d)[2d].
@@ -1674,10 +2070,17 @@ For every \(i\), define
  H^i(X,\Ql)\times H^{2d-i}(X,\Ql)
  \longrightarrow\Ql(-d).
 \]
+\uses{conv:fixed-smooth-proper-datum,conv:structure-map-admissibility,
+  def:exceptional-inverse-image,def:coefficient-twists,
+  def:derived-pullback-tensor-hom,def:cohomology-complexes}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:poincare-trace-pairing}{conv:fixed-smooth-proper-datum,conv:structure-map-admissibility,def:exceptional-inverse-image,def:coefficient-twists,def:derived-pullback-tensor-hom,def:cohomology-complexes}{Lecture 36, Definitions 4.3 and 4.5.}
 
 \begin{proposition}[Poincare duality and Frobenius similitude]
 \label{prop:poincare-pairing}
+\uses{def:poincare-trace-pairing,def:frobenius-on-twists,
+  prop:weil-operations}
 The trace map is an isomorphism, and for every \(i\) the cup-product pairing
 \(\langle-,-\rangle_i\) is perfect.  Equivalently, it induces a
 Frobenius-equivariant isomorphism
@@ -1696,16 +2099,13 @@ Graded commutativity gives
 in middle degree the pairing is \((-1)^d\)-symmetric.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Smooth Purity for the Structure Morphism}.
-\item \emph{Verdier and Poincare Duality}.
-\item \emph{Cup Products and the Trace Counit}.
-\item \emph{Six Operations on Weil Complexes},
-      Proposition~\ref{prop:weil-operations}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{proposition}[Endpoint cohomology and endpoint factors]
 \label{prop:endpoints}
+\uses{prop:poincare-pairing,def:canonical-cohomological-factors,
+  def:betti-numbers,prop:cohomological-finiteness}
 There are Frobenius-equivariant isomorphisms
 \[
  H^0(X,\Ql)\cong\Ql,
@@ -1723,16 +2123,11 @@ second.  Consequently
 \]
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Coefficient and Functor Package},
-      Proposition~\ref{prop:functor-package}.
-\item \emph{Poincare Duality and Frobenius Similitude},
-      Proposition~\ref{prop:poincare-pairing}.
-\item \emph{Integral Factor Recovery},
-      Proposition~\ref{prop:integral-recovery}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Determinant constants and Euler characteristic]
+\label{def:determinant-constants}
 For \(0\leq i\leq2d\), set
 \[
  D_i=(-1)^{b_i}[T^{b_i}]P_i(T)\in\mathbf Z\setminus\{0\}.
@@ -1746,10 +2141,16 @@ Define also the alternating determinant scalar
 \[
  \Delta=\prod_{i=0}^{2d}D_i^{(-1)^i}\in\mathbf Q^\times.
 \]
+\uses{def:canonical-cohomological-factors,def:betti-numbers,
+  conv:fixed-smooth-proper-datum}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:determinant-constants}{def:canonical-cohomological-factors,def:betti-numbers,conv:fixed-smooth-proper-datum}{Exact local packaging; common determinants are Lecture 49, Definition 17.1.}
 
 \begin{proposition}[Duality reciprocity]
 \label{prop:duality-reciprocity}
+\uses{prop:poincare-pairing,def:canonical-cohomological-factors,
+  def:betti-numbers,def:determinant-constants}
 For every \(0\leq i\leq2d\), Poincare duality identifies the multiset of
 Frobenius eigenvalues in degree \(2d-i\) with
 \[
@@ -1772,14 +2173,11 @@ For \(i=d\), the middle pairing is \((-1)^d\)-symmetric.  In particular,
 if \(d\) is odd, then \(b_d\) is even.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Poincare Duality and Frobenius Similitude},
-      Proposition~\ref{prop:poincare-pairing}.
-\item \emph{Integral Factor Recovery},
-      Proposition~\ref{prop:integral-recovery}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \begin{definition}[Normalized functional-equation sign]
+\label{def:functional-equation-sign}
 Duality reciprocity implies that \(d\chi\) is even.  Define
 \[
  h=\frac{d\chi}{2}\in\mathbf Z
@@ -1792,10 +2190,15 @@ and
 \]
 Negative exponents in \(\Delta\) denote multiplicative inverses in
 \(\mathbf Q^\times\).
+\uses{def:determinant-constants,prop:duality-reciprocity}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:functional-equation-sign}{def:determinant-constants,prop:duality-reciprocity}{Lecture 49, Definition 17.4 and Theorem 17.6.}
 
 \begin{proposition}[Functional equation]
 \label{prop:functional-equation}
+\uses{prop:trace-determinant,prop:integral-recovery,
+  prop:duality-reciprocity,def:functional-equation-sign}
 The alternating determinant scalar satisfies
 \[
  \Delta^2=q^{d\chi}.
@@ -1818,69 +2221,135 @@ The same identity in terms of the determinant constants is
 \]
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Trace-to-Determinant Factorization},
-      Proposition~\ref{prop:trace-determinant}.
-\item \emph{Integral Factor Recovery},
-      Proposition~\ref{prop:integral-recovery}.
-\item \emph{Duality Reciprocity},
-      Proposition~\ref{prop:duality-reciprocity}.
-\item \emph{Zeta Functions and Linear Algebra}.
-\end{prerequisites}
+\sketchslot{}
+
 
 \section{Optional characteristic-zero comparison}
 
 \begin{definition}[Smooth proper lift]
+\label{def:smooth-proper-lift}
 A smooth proper lift of \(X_0\) consists of a mixed-characteristic discrete
 valuation ring \(R\) with residue field \(\Fq\), fraction field \(K\), and a
 smooth proper \(R\)-scheme \(\mathcal X\) together with an identification
 \[
  \mathcal X\times_R\Fq\cong X_0.
 \]
-Choose an embedding \(K\hookrightarrow\mathbf C\), an algebraic closure
-\(\overline K\), an extension \(\overline K\hookrightarrow\mathbf C\), and
-compatible geometric generic and special points of \(\Spec R\).  Put
+A lift datum also includes an embedding \(K\hookrightarrow\mathbf C\), an
+algebraic closure \(\overline K\), an extension
+\(\overline K\hookrightarrow\mathbf C\), and compatible geometric generic
+and special points of \(\Spec R\).  For such a datum \(\mathscr L\), put
 \[
- X_{\mathbf C}=\mathcal X_K\times_K\mathbf C.
+ X_{\mathbf C}(\mathscr L)=\mathcal X_K\times_K\mathbf C.
 \]
+\uses{conv:fixed-smooth-proper-datum}
 \end{definition}
+
+\BlueprintLocalDeclarationRegistry{Definition}{def:smooth-proper-lift}{conv:fixed-smooth-proper-datum}{Exact local declaration (Definition~\ref{def:smooth-proper-lift}).}
 
 \begin{proposition}[Betti comparison for a supplied lift]
 \label{prop:betti-comparison}
-For every smooth proper lift as above and every \(i\), smooth proper base
+\uses{def:smooth-proper-lift,def:betti-numbers,
+  prop:coefficient-passage}
+For every smooth proper lift datum \(\mathscr L\) as above and every \(i\),
+smooth proper base
 change and comparison with complex topology give isomorphisms
 \[
  H^i(X,\Ql)
  \cong H^i_{\mathrm{et}}(\mathcal X_{\overline K},\Ql)
  \cong H^i_{\mathrm{sing}}
- \bigl(X_{\mathbf C}(\mathbf C),\mathbf Q\bigr)
+ \bigl(X_{\mathbf C}(\mathscr L)(\mathbf C),\mathbf Q\bigr)
  \otimes_{\mathbf Q}\Ql.
 \]
 Consequently
 \[
  b_i=\dim_{\mathbf Q}H^i_{\mathrm{sing}}
- \bigl(X_{\mathbf C}(\mathbf C),\mathbf Q\bigr).
+ \bigl(X_{\mathbf C}(\mathscr L)(\mathbf C),\mathbf Q\bigr).
 \]
 This statement is conditional on the existence of the displayed lift; no
 lifting hypothesis is needed for the other propositions.
 \end{proposition}
 
-\begin{prerequisites}
-\item \emph{Proper Base Change}.
-\item \emph{Smooth-Proper Specialization}.
-\item \emph{Artin Comparison Theorem}.
-\item \emph{Integral Factor Recovery},
-      Proposition~\ref{prop:integral-recovery}.
-\end{prerequisites}
+\sketchslot{}
+
+
+\section{Statement-only leaves used by the terminal assembly}
+
+The terminal proof is the only proof expanded in this blueprint.  Each row
+below is a statement boundary whose proof is not repeated here.  Its exact
+mathematical source and deferred status are recorded explicitly.  The table
+includes the principal infrastructure leaves as well as the arithmetic and
+duality leaves called by the final proof.
+
+{%
+\small
+\setlength{\tabcolsep}{3pt}
+\setlength\LTleft{\fill}
+\setlength\LTright{\fill}
+\newcommand{\BlueprintLeafRow}[3]{%
+  \hyperref[#1]{\nolinkurl{#1}~(\ref*{#1})} & #2 & \textit{#3}\\}
+\begin{longtable}{@{}
+  p{0.27\textwidth}
+  p{0.58\textwidth}
+  p{0.09\textwidth}@{}}
+\caption{Statement-only leaves for the terminal assembly.}
+\label{tab:terminal-proof-leaves}\\
+\toprule
+Local label & Exact source & Proof status\\
+\midrule
+\endfirsthead
+\toprule
+Local label & Exact source & Proof status\\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\emph{Continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\BlueprintLeafRow{thm:qbar-two-colimit-model}{Lecture 42, Theorems 3.12, 4.5, 5.4, 6.4, and 6.5.}{Deferred}
+\BlueprintLeafRow{thm:qbar-functor-descent}{Lecture 42, Definition 8.1 and Theorem 8.2.}{Deferred}
+\BlueprintLeafRow{prop:functor-package}{Lecture 40, Theorem 11.1; Lecture 30, Theorem 9.3; Lecture 31, Theorems 9.6 and 12.25; Lecture 33, Theorem 11.24; Lecture 43, Theorem 9.17; Lecture 41, Corollary 7.13; Lecture 42, Theorems 5.4, 6.5, and 10.29; Lecture 44, Theorem 6.20; Lecture 45, Theorem 7.5.}{Deferred}
+\BlueprintLeafRow{prop:cohomological-finiteness}{Lecture 30, Theorem 9.3; Lecture 33, Theorem 11.24; Lecture 43, Theorem 9.17.}{Deferred}
+\BlueprintLeafRow{prop:euler-product}{Lecture 49, Corollary 4.5.}{Deferred}
+\BlueprintLeafRow{prop:every-iterate-trace}{Lecture 34, Theorem 11.5 and Corollary 11.6.}{Deferred}
+\BlueprintLeafRow{prop:trace-determinant}{Lecture 49, Theorem 5.6, Proposition 6.3, and Corollary 6.4.}{Deferred}
+\BlueprintLeafRow{prop:weight-purity}{Lecture 47, Corollary 10.6; Lecture 35, Theorems 7.3 and 7.8; Lecture 36, Theorem 8.9 and Corollary 8.10.}{Deferred}
+\BlueprintLeafRow{prop:weight-separation}{Lecture 49, Lemma 10.1, Corollary 10.2, and Proposition 10.4.}{Deferred}
+\BlueprintLeafRow{prop:rational-descent}{Lecture 49, Theorem 7.11, Corollary 7.12, and Theorem 8.12.}{Deferred}
+\BlueprintLeafRow{lem:embedding-extension}{Lecture 49, Proposition 9.2 and Lemma 9.7.}{Deferred}
+\BlueprintLeafRow{prop:galois-weight-strata}{Lecture 49, Proposition 9.9, Proposition 10.4, and Propositions 11.3--11.4.}{Deferred}
+\BlueprintLeafRow{thm:smooth-proper-structure-admissible}{Lecture 44, Theorem 6.20, together with the explicit smooth-proper amplitude and finite-Tor admissibility input.}{Deferred}
+\BlueprintLeafRow{prop:poincare-pairing}{Lecture 35, Theorems 7.3 and 7.8; Lecture 36, Theorem 8.9 and Corollary 8.10.}{Deferred}
+\BlueprintLeafRow{prop:endpoints}{Exact local leaf from geometric connectedness, cohomological finiteness, and Proposition~\ref{prop:poincare-pairing}.}{Deferred}
+\BlueprintLeafRow{prop:duality-reciprocity}{Lecture 49, Theorem 13.5.}{Deferred}
+\BlueprintLeafRow{prop:betti-comparison}{Exact local conditional leaf invoking proper base change, smooth-proper specialization, and Artin comparison for the supplied lift.}{Deferred}
+\end{longtable}
+}%
 
 \section{Terminal theorem}
 
 \begin{theorem}[Weil conjectures for a smooth proper variety]
 \label{thm:weil-final}
+\uses{def:smooth-proper-cohomological-family,def:point-count-zeta,
+  prop:cohomological-finiteness,prop:euler-product,
+  prop:every-iterate-trace,prop:trace-determinant,prop:weight-purity,
+  prop:weight-separation,prop:rational-descent,
+  prop:galois-weight-strata,lem:embedding-extension,
+  def:ordinary-reciprocal-roots,def:weil-numbers,
+  def:integral-realization-factor,def:realization-parity-products,
+  def:canonical-integral-fraction,def:determinant-constants,
+  def:canonical-cohomological-factors,def:betti-numbers,
+  prop:poincare-pairing,prop:endpoints,prop:duality-reciprocity,
+  def:functional-equation-sign,def:smooth-proper-lift,
+  prop:betti-comparison}
 Let \(X_0\) be a smooth, proper, geometrically connected scheme of pure
-dimension \(d\) over \(\Fq\).  Then the following statements hold.
-\begin{enumerate}[label=\textup{(\roman*)}]
-\item The zeta series has both point-counting descriptions
+dimension \(d\) over \(\Fq\).  Put \(X=X_0\times_{\Fq}k\), let
+\(\mathscr X\) be the resulting smooth-proper datum, and let
+\(P_i=P_i(\mathscr X)\) be the canonical factors of
+Definition~\ref{def:canonical-cohomological-factors}.  Then the following
+statements hold.
+\begin{enumerate}
+\item[\textup{(i)}] The zeta series has both point-counting descriptions
 \[
  Z(X_0,T)=
  \exp\left(\sum_{n\geq1}
@@ -1889,7 +2358,7 @@ dimension \(d\) over \(\Fq\).  Then the following statements hold.
 \]
 and belongs to \(1+T\mathbf Z[[T]]\cap\mathbf Q(T)\).
 
-\item There are unique polynomials
+\item[\textup{(ii)}] The polynomials \(P_i\) are the unique polynomials
 \[
  P_i(T)\in\mathbf Z[T]
  \qquad(0\leq i\leq2d)
@@ -1905,16 +2374,24 @@ They give the rational factorization
  \prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}.
 \]
 
-\item Every reciprocal root \(\alpha\) of \(P_i\) is an algebraic integer
+\item[\textup{(iii)}] For every \(0\leq i\leq2d\), every reciprocal root \(\alpha\) of
+\(P_i\) is an algebraic integer
 and a \(q\)-Weil number of weight \(i\):
 \[
  |\tau(\alpha)|=q^{i/2}
 \]
 for every embedding
-\(\tau:\mathbf Q(\alpha)\hookrightarrow\mathbf C\).  Every ordinary root
-has absolute value \(q^{-i/2}\) under every complex embedding.
+\(\tau:\mathbf Q(\alpha)\hookrightarrow\mathbf C\).  For every ordinary
+root \(\beta\) of \(P_i\) and every embedding
+\(\tau:\mathbf Q(\beta)\hookrightarrow\mathbf C\), one has
+\(|\tau(\beta)|=q^{-i/2}\).
 
-\item With \(b_i=\deg P_i\),
+\item[\textup{(iv)}] For every \(0\leq i\leq2d\), Poincare duality supplies a
+Frobenius-equivariant isomorphism
+\[
+ H^{2d-i}(X,\Ql)\xrightarrow{\sim}H^i(X,\Ql)^\vee(-d).
+\]
+Consequently, with \(b_i=\deg P_i\),
 \[
  b_i=\dim_{\Ql}H^i(X,\Ql),
  \qquad b_i=b_{2d-i},
@@ -1927,13 +2404,16 @@ independently of \(\ell\).  Moreover
  P_{2d}(T)=1-q^dT.
 \]
 
-\item If
+\item[\textup{(v)}] For every \(0\leq i\leq2d\), under the Poincare-duality
+isomorphism, an eigenvalue \(\alpha\) of geometric Frobenius in degree
+\(i\) corresponds, with algebraic multiplicity, to the eigenvalue
+\(q^d/\alpha\) in degree \(2d-i\).  If
 \[
  D_i=(-1)^{b_i}[T^{b_i}]P_i(T),
  \qquad
  \chi=\sum_{i=0}^{2d}(-1)^ib_i,
 \]
-then \(d\chi\) is even,
+then \(d\chi\) is even and, for every \(0\leq i\leq2d\),
 \[
  P_{2d-i}(q^{-d}T^{-1})
  =(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T),
@@ -1951,36 +2431,272 @@ for the sign
  \in\{1,-1\}.
 \]
 
-\item If \(X_0\) has a smooth proper lift to characteristic zero as in
-Proposition~\ref{prop:betti-comparison}, then
+\item[\textup{(vi)}] For every smooth proper lift \(\mathscr L\) of \(X_0\) to
+characteristic zero as in Definition~\ref{def:smooth-proper-lift}, with
+associated complex fiber \(X_{\mathbf C}(\mathscr L)\), and for every
+\(0\leq i\leq2d\),
 \[
  b_i=\dim_{\mathbf Q}H^i_{\mathrm{sing}}
- \bigl(X_{\mathbf C}(\mathbf C),\mathbf Q\bigr).
+ \bigl(X_{\mathbf C}(\mathscr L)(\mathbf C),\mathbf Q\bigr).
 \]
 \end{enumerate}
 \end{theorem}
 
-\begin{prerequisites}
-\item \emph{Closed-Point and Integral-Series Identity},
-      Proposition~\ref{prop:euler-product}.
-\item \emph{Trace-to-Determinant Factorization},
-      Proposition~\ref{prop:trace-determinant}.
-\item \emph{Smooth-Proper Weight Purity} and \emph{Weight Separation},
-      Propositions~\ref{prop:weight-purity} and
-      \ref{prop:weight-separation}.
-\item \emph{Integral Factor Recovery},
-      Proposition~\ref{prop:integral-recovery}.
-\item \emph{Rational Descent and Normalized Integral Fraction} and
-      \emph{Arithmetic Roots and Realization-Independent Degrees},
-      Propositions~\ref{prop:rational-descent} and
-      \ref{prop:arithmetic-roots}.
-\item \emph{Endpoint Cohomology and Endpoint Factors},
-      Proposition~\ref{prop:endpoints}.
-\item \emph{Duality Reciprocity} and \emph{Functional Equation},
-      Propositions~\ref{prop:duality-reciprocity} and
-      \ref{prop:functional-equation}.
-\item \emph{Betti Comparison for a Supplied Lift},
-      Proposition~\ref{prop:betti-comparison}, for clause \textup{(vi)}.
-\end{prerequisites}
+\sketchslot{Expanded in the terminal proof immediately below.}
 
-\end{document}
+\begin{proof}
+\uses{def:smooth-proper-cohomological-family,def:point-count-zeta,
+  prop:cohomological-finiteness,prop:euler-product,
+  prop:every-iterate-trace,prop:trace-determinant,
+  prop:weight-purity,prop:weight-separation,prop:rational-descent,
+  def:canonical-integral-fraction,prop:galois-weight-strata,
+  lem:embedding-extension,def:ordinary-reciprocal-roots,
+  def:weil-numbers,def:integral-realization-factor,
+  def:realization-parity-products,def:canonical-cohomological-factors,
+  def:betti-numbers,prop:poincare-pairing,prop:endpoints,
+  def:determinant-constants,
+  prop:duality-reciprocity,def:functional-equation-sign,
+  def:smooth-proper-lift,prop:betti-comparison}
+
+Fix a prime \(\ell\neq p\).  Proposition
+~\ref{prop:cohomological-finiteness} makes
+\(V_{i,\ell}=H^i(X,\Ql)\) finite-dimensional, zero for
+\(i\notin[0,2d]\), and equipped with the geometric-Frobenius automorphism
+\(F_{i,\ell}\).  Definition
+~\ref{def:smooth-proper-cohomological-family} therefore gives
+\[
+ P_{i,\ell}(T)=
+ \det(1-TF_{i,\ell}\mid V_{i,\ell})\in\Ql[T].
+\]
+For every \(n\geq1\), Proposition~\ref{prop:every-iterate-trace} gives
+\[
+ \#X_0(\mathbf F_{q^n})
+ =\sum_{i=0}^{2d}(-1)^i
+   \Tr(F_{i,\ell}^n\mid V_{i,\ell}).
+\]
+Using this equality coefficient by coefficient in \(\Ql[[T]]\) and then
+using Proposition~\ref{prop:trace-determinant}, we obtain
+\begin{equation}
+\begin{aligned}
+ \log Z(X_0,T)
+ &=\sum_{n\geq1}\#X_0(\mathbf F_{q^n})\frac{T^n}{n}\\
+ &=\sum_{i=0}^{2d}(-1)^i
+   \sum_{n\geq1}\Tr(F_{i,\ell}^n\mid V_{i,\ell})\frac{T^n}{n}\\
+ &=\sum_{i=0}^{2d}(-1)^{i+1}\log P_{i,\ell}(T).
+\end{aligned}
+\label{eq:weil-final-log-determinant}
+\end{equation}
+The formal logarithm is injective on \(1+T\Ql[[T]]\), so
+\begin{equation}
+ Z(X_0,T)=
+ \prod_{i=0}^{2d}P_{i,\ell}(T)^{(-1)^{i+1}}
+ \quad\text{in }\Ql[[T]].
+ \label{eq:weil-final-fixed-ell-factorization}
+\end{equation}
+
+\smallskip
+\noindent\emph{Clause \textup{(i)}.}
+The exponential expression is Definition~\ref{def:point-count-zeta}.
+Proposition~\ref{prop:euler-product}, applied to \(X_0\), gives
+\[
+ Z(X_0,T)=\prod_{x\in|X_0|}(1-T^{\deg(x)})^{-1}
+ \quad\text{and}\quad
+ Z(X_0,T)\in1+T\mathbf Z[[T]].
+\]
+Proposition~\ref{prop:rational-descent}, using
+Equation~\ref{eq:weil-final-fixed-ell-factorization}, gives
+\(Z(X_0,T)\in\mathbf Q(T)\).  This proves \textup{(i)}.
+
+\smallskip
+\noindent\emph{Clause \textup{(ii)}.}
+Proposition~\ref{prop:weight-purity} says that every reciprocal root of
+\(P_{i,\ell}\) has absolute value \(q^{i/2}\) under every abstract
+isomorphism \(\Qlb\simeq\mathbf C\).  Proposition
+~\ref{prop:weight-separation} therefore gives the coprime normalized
+products
+\[
+ N_\ell=\prod_{\substack{0\leq i\leq2d\\i\text{ odd}}}P_{i,\ell},
+ \qquad
+ D_\ell=\prod_{\substack{0\leq i\leq2d\\i\text{ even}}}P_{i,\ell},
+ \qquad
+ Z=\frac{N_\ell}{D_\ell}.
+\]
+Let \((A,B)\) be the canonical normalized reduced integral fraction of
+Definition~\ref{def:canonical-integral-fraction}.  Scalar extension to
+\(\Ql[T]\) is again normalized and reduced.  Since
+\(\Ql(T)\hookrightarrow\Ql((T))\) is injective, uniqueness of normalized
+reduced fractions gives
+\begin{equation}
+ A^{(\ell)}=N_\ell,
+ \qquad
+ B^{(\ell)}=D_\ell.
+ \label{eq:weil-final-parity-comparison}
+\end{equation}
+Proposition~\ref{prop:galois-weight-strata} and Definition
+~\ref{def:canonical-cohomological-factors} give
+\[
+ P_i(T)\in\mathbf Z[T],
+ \qquad P_i(0)=1,
+ \qquad P_i^{(\ell)}(T)=P_{i,\ell}(T)
+\]
+for every \(\ell\neq p\).  Equation
+Equation~\ref{eq:weil-final-parity-comparison}, followed by injectivity of
+\(\mathbf Z[T]\to\Ql[T]\), identifies \(A\) with the product of the odd
+\(P_i\)'s and \(B\) with the product of the even \(P_i\)'s.  Hence
+\[
+ Z(X_0,T)=\frac{A(T)}{B(T)}
+ =\prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}
+ \quad\text{in }\mathbf Q(T).
+\]
+If \(\widetilde P_i\in\mathbf Z[T]\) is another normalized family with
+the same realization property, then for one fixed \(\ell\neq p\) its
+image equals \(P_{i,\ell}=P_i^{(\ell)}\).  Injectivity of
+\(\mathbf Z[T]\to\Ql[T]\) gives \(\widetilde P_i=P_i\).  This proves
+existence, factorization, and uniqueness in \textup{(ii)}.
+
+\smallskip
+\noindent\emph{Clause \textup{(iii)}.}
+Fix \(0\leq i\leq2d\).  Let \(\alpha\) be a reciprocal root of \(P_i\),
+and put
+\(r=\deg P_i\).  Since \(P_i(0)=1\),
+\[
+ P_i^\#(U)=U^rP_i(U^{-1})\in\mathbf Z[U]
+\]
+is monic and has \(\alpha\) as a root; hence \(\alpha\) is an algebraic
+integer.  By Lemma~\ref{lem:embedding-extension}, choose a
+\(\mathbf Q\)-isomorphism
+\(\eta:\overline{\mathbf Q}\xrightarrow{\sim}
+\overline{\mathbf Q}^{(\ell)}\subset\Qlb\).  Clause
+\textup{(ii)} makes \(\eta(\alpha)\) a reciprocal root of
+\(P_{i,\ell}\), hence an eigenvalue of \(F_{i,\ell}\).
+
+Let \(\tau:\mathbf Q(\alpha)\hookrightarrow\mathbf C\).  Lemma
+~\ref{lem:embedding-extension}, applied to
+\(\eta(\mathbf Q(\alpha))\) and \(\tau\circ\eta^{-1}\), supplies an
+isomorphism \(\iota:\Qlb\xrightarrow{\sim}\mathbf C\) with
+\(\iota(\eta(\alpha))=\tau(\alpha)\).  Proposition
+~\ref{prop:weight-purity} gives
+\[
+ |\tau(\alpha)|=|\iota(\eta(\alpha))|=q^{i/2}.
+\]
+Thus \(\alpha\) is a \(q\)-Weil number of weight \(i\).  Let \(\beta\) be
+an ordinary root of \(P_i\), and let
+\(\tau:\mathbf Q(\beta)\hookrightarrow\mathbf C\).  Apply the preceding
+reciprocal-root conclusion to \(\alpha=\beta^{-1}\); since
+\(\mathbf Q(\alpha)=\mathbf Q(\beta)\), it gives
+\(|\tau(\beta)|=q^{-i/2}\).  This proves \textup{(iii)}.
+
+\smallskip
+\noindent\emph{Clause \textup{(iv)}.}
+Fix \(0\leq i\leq2d\).
+Scalar extension preserves the degree of the nonzero integral polynomial
+\(P_i\).  Since \(F_{i,\ell}\) is invertible, the leading coefficient of
+\(P_{i,\ell}\) is nonzero, and therefore
+\[
+ b_i=\deg P_i=\deg P_{i,\ell}
+ =\dim_{\Ql}H^i(X,\Ql).
+\]
+The left side is independent of \(\ell\).  Proposition
+~\ref{prop:poincare-pairing} gives the Frobenius-equivariant isomorphism
+\[
+ H^{2d-i}(X,\Ql)\xrightarrow{\sim}H^i(X,\Ql)^\vee(-d).
+\]
+Taking dimensions and using the preceding degree formula in degrees \(i\) and
+\(2d-i\) gives \(b_i=b_{2d-i}\).  Proposition~\ref{prop:endpoints} gives
+\[
+ b_0=b_{2d}=1,
+ \qquad P_0(T)=1-T,
+ \qquad P_{2d}(T)=1-q^dT.
+\]
+This proves \textup{(iv)}.
+
+\smallskip
+\noindent\emph{Clause \textup{(v)}.}
+Use Definition~\ref{def:determinant-constants} to write
+\[
+ D_i=(-1)^{b_i}[T^{b_i}]P_i(T),
+ \qquad
+ \chi=\sum_{i=0}^{2d}(-1)^ib_i,
+ \qquad
+ \Delta=\prod_{i=0}^{2d}D_i^{(-1)^i}.
+\]
+Proposition~\ref{prop:poincare-pairing} supplies a perfect pairing
+\[
+ H^i(X,\Ql)\times H^{2d-i}(X,\Ql)\longrightarrow\Ql(-d)
+\]
+for which \(\langle Fx,Fy\rangle=q^d\langle x,y\rangle\).  Thus an
+eigenvalue \(\alpha\) in degree \(i\) corresponds, including multiplicity,
+to \(q^d/\alpha\) in degree \(2d-i\).  In middle degree the pairing is
+\((-1)^d\)-symmetric; if \(d\) is odd it is a nondegenerate alternating
+pairing, so \(b_d\) is even.
+
+For every \(0\leq i\leq2d\), Proposition
+~\ref{prop:duality-reciprocity} translates this eigenvalue relation to the
+canonical integral factors and gives
+\begin{equation}
+ P_{2d-i}(q^{-d}T^{-1})
+ =(-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T),
+ \qquad
+ D_iD_{2d-i}=q^{db_i}.
+ \label{eq:weil-final-reciprocity-data}
+\end{equation}
+Using the middle-degree parity supplied by the Poincare pairing, we have
+\[
+ \chi=2\sum_{0\leq i<d}(-1)^ib_i+(-1)^db_d,
+\]
+the integer \(d\chi\) is even: this is immediate if \(d\) is even, and
+if \(d\) is odd, write \(b_d=2m\); then
+\(\chi=2(\sum_{0\leq i<d}(-1)^ib_i-m)\), so \(d\chi\) is again even.
+Thus \(h=d\chi/2\in\mathbf Z\).
+
+Reindexing \(i\mapsto2d-i\) and using
+Equation~\ref{eq:weil-final-reciprocity-data} gives
+\[
+ \Delta^2
+ =\prod_{i=0}^{2d}(D_iD_{2d-i})^{(-1)^i}
+ =\prod_{i=0}^{2d}q^{d(-1)^ib_i}
+ =q^{d\chi}.
+\]
+Definition~\ref{def:functional-equation-sign} sets
+\(\varepsilon=(-1)^\chi q^{-h}\Delta\).  Hence
+\(\varepsilon^2=q^{-2h}\Delta^2=1\), so
+\(\varepsilon\in\{1,-1\}\).
+
+Finally, use the factorization from \textup{(ii)}, reindex, and apply the
+first identity of Equation~\ref{eq:weil-final-reciprocity-data}:
+\[
+\begin{aligned}
+ Z(X_0,q^{-d}T^{-1})
+ &=\prod_{i=0}^{2d}
+   P_{2d-i}(q^{-d}T^{-1})^{(-1)^{i+1}}\\
+ &=\prod_{i=0}^{2d}
+   \bigl((-1)^{b_i}T^{-b_i}D_i^{-1}P_i(T)\bigr)^{(-1)^{i+1}}\\
+ &=(-1)^\chi T^\chi\Delta
+   \prod_{i=0}^{2d}P_i(T)^{(-1)^{i+1}}\\
+ &=\varepsilon q^{d\chi/2}T^\chi Z(X_0,T).
+\end{aligned}
+\]
+In the third line we used
+\(\sum_i b_i\equiv\sum_i(-1)^ib_i=\chi\pmod2\).  This proves
+\textup{(v)} in \(\mathbf Q(T)\).
+
+\smallskip
+\noindent\emph{Clause \textup{(vi)}.}
+Let \(\mathscr L\) be an arbitrary smooth proper lift of \(X_0\) with
+associated complex fiber \(X_{\mathbf C}(\mathscr L)\), and fix
+\(0\leq i\leq2d\).  Proposition
+~\ref{prop:betti-comparison} gives
+\[
+ H^i(X,\Ql)\cong
+ H^i_{\mathrm{sing}}
+ \bigl(X_{\mathbf C}(\mathscr L)(\mathbf C),\mathbf Q\bigr)
+ \otimes_{\mathbf Q}\Ql.
+\]
+Taking dimensions and using \textup{(iv)} gives
+\[
+ b_i=\dim_{\mathbf Q}H^i_{\mathrm{sing}}
+ \bigl(X_{\mathbf C}(\mathscr L)(\mathbf C),\mathbf Q\bigr).
+\]
+Because \(\mathscr L\) and \(i\) were arbitrary, this proves \textup{(vi)}.  No
+lifting hypothesis was used in \textup{(i)}--\textup{(v)}.
+\end{proof}
