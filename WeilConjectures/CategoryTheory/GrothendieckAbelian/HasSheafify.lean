@@ -51,7 +51,17 @@ for `P = @Etale` (the latter by
 fails for `P = ⊤`, which is what rules out the reading of the statement under which it is
 false.
 
-The remaining mathematical content of the sorry is then: for an essentially small site and
+Note that the two mathlib results above are stated for the topology whose *covering*
+property is `P` itself, whereas the site here carries the coarser topology
+`U.smallGrothendieckTopology Q (Q := P)`, whose covers are the jointly surjective families
+of `Q`-morphisms. Cover-density of the affine slice for that topology needs the Zariski
+affine covers to be `Q`-covers, i.e. `Q` to hold of open immersions; hence the instance
+below also carries `[IsZariskiLocalAtSource Q]`, which supplies exactly that through
+`AlgebraicGeometry.IsZariskiLocalAtSource.of_isOpenImmersion`. Without it the statement is
+strictly weaker than its justification: at `Q = P = @Etale`, the only instantiation used in
+this repository, both binders are discharged automatically.
+
+The remaining mathematical content of the `sorry` is then: for an essentially small site and
 a Grothendieck abelian `A`, the plus-construction sheafifies and is left exact. Mathlib
 proves this only for a *concrete* `A` with the forgetful functor preserving limits and
 filtered colimits and reflecting isomorphisms; see
@@ -76,7 +86,7 @@ filtered colimits, so the plus-construction applies there and is left exact. -/
 instance (priority := high) hasSheafify_smallGrothendieckTopology (A : Type u')
     [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A] (P Q : MorphismProperty Scheme.{u})
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
-    [IsZariskiLocalAtSource P]
+    [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
     (U : Scheme.{u})
     [EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec U)] :
     HasSheafify (U.smallGrothendieckTopology Q (Q := P)) A :=

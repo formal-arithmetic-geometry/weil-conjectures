@@ -25,6 +25,10 @@ resulting equivalence of sheaf categories one transports mathlib's
 `AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology` does for a
 concrete coefficient category.
 
+As there, the density input is available for the topology whose covering property is `P`,
+so the instance below also carries `[IsZariskiLocalAtSource Q]` to make the Zariski affine
+covers into `Q`-covers of the coarser `Q`-topology the site actually carries.
+
 -/
 
 @[expose] public section
@@ -44,7 +48,7 @@ instance (priority := high) isGrothendieckAbelian_sheaf_smallGrothendieckTopolog
     [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
     (P Q : MorphismProperty Scheme.{u})
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
-    [IsZariskiLocalAtSource P]
+    [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
     (U : Scheme.{u})
     [EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec U)] :
     IsGrothendieckAbelian.{u} (Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) :=

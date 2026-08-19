@@ -89,7 +89,7 @@ variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProper
 essentially small dense affine subsite of `Mathlib.AlgebraicGeometry.Sites.Affine`; see the
 module docstring of `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Both
 hypotheses hold for `P = @Etale`. -/
-variable [IsZariskiLocalAtSource P]
+variable [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ V : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec V)]
 variable (hQP : Q ≤ P)
 
@@ -106,7 +106,7 @@ noncomputable def lowerStar :
   (MorphismProperty.Over.pullback P ⊤ g).sheafPushforwardContinuous A
     (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P]
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ V : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec V)] in
 /-- The sections of `g_* G` over `V → U` are the sections of `G` over `V ×_U W → W`. -/
 lemma lowerStar_obj_val_obj
@@ -115,7 +115,7 @@ lemma lowerStar_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P]
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ V : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec V)] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback P ⊤ g).op`. -/
 lemma lowerStar_map_hom_app

@@ -100,7 +100,7 @@ section LowerShriek
 essentially small dense affine subsite of `Mathlib.AlgebraicGeometry.Sites.Affine`; see the
 module docstring of `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Both
 hypotheses hold for `P = @Etale`. -/
-variable [IsZariskiLocalAtSource P]
+variable [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ T : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec T)]
 
 /-- The lower shriek `j_{f!}` along `f : V ⟶ U` with `h : P f`: left Kan extension on
@@ -248,7 +248,7 @@ section Restriction
 essentially small dense affine subsite of `Mathlib.AlgebraicGeometry.Sites.Affine`; see the
 module docstring of `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Both
 hypotheses hold for `P = @Etale`. -/
-variable [IsZariskiLocalAtSource P]
+variable [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ T : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec T)]
 
 /-- The restriction functor `j_f^*` along `f : V ⟶ U` with `h : P f`, given objectwise by
@@ -261,7 +261,7 @@ def localizationRestriction :
   (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
     (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P]
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ T : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec T)] in
 /-- The sections of `j_f^* G` over `T → V` are the sections of `G` over `T → V → U`. -/
 lemma localizationRestriction_obj_val_obj
@@ -270,7 +270,7 @@ lemma localizationRestriction_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.map ⊤ h).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P]
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ T : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec T)] in
 /-- `j_f^*` acts on morphisms by whiskering along `(MorphismProperty.Over.map ⊤ h).op`. -/
 lemma localizationRestriction_map_hom_app
@@ -393,7 +393,7 @@ namespace GrothendieckTopology
 
 variable (P Q : MorphismProperty Scheme.{u})
   [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
-  [IsZariskiLocalAtSource P]
+  [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ T : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec T)]
 variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f)
 

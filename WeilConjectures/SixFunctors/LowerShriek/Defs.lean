@@ -103,7 +103,7 @@ variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProper
 affine subsite of `Mathlib.AlgebraicGeometry.Sites.Affine`; see the module docstring of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Both hypotheses hold for
 `P = @Etale`. -/
-variable [IsZariskiLocalAtSource P]
+variable [IsZariskiLocalAtSource P] [IsZariskiLocalAtSource Q]
   [∀ T : Scheme.{u}, EssentiallySmall.{u} (MorphismProperty.CostructuredArrow P ⊤ Scheme.Spec T)]
 variable (hQP : Q ≤ P)
 variable {X Y : Scheme.{u}}
