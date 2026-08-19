@@ -49,7 +49,10 @@ intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen locali
 categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
 installs `HasDerivedCategory.{u}` on every sheaf category via
-`HasDerivedCategory.ofIsGrothendieckAbelian`; no auxiliary universe parameters appear.
+`HasDerivedCategory.ofIsGrothendieckAbelian`; no auxiliary universe parameters appear. The
+coefficient category `A` itself receives its chosen `D(A)` in the same way
+(`AlgebraicGeometry.hasDerivedCategory_coefficient`), so the derived global sections
+functors below carry no `HasDerivedCategory` inputs either.
 
 The construction of the unbounded right derived functor requires the source abelian
 category to have K-injective resolutions (`CategoryTheory.Abelian.HasKInjectiveResolutions`).
@@ -107,7 +110,7 @@ below free of any K-injective hypothesis as well.
 
 @[expose] public section
 
-universe w w' w'' u' u
+universe u' u
 
 open CategoryTheory Abelian Limits
 
@@ -140,6 +143,13 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
 `HasDerivedCategory.ofIsGrothendieckAbelian`. -/
 noncomputable instance Scheme.hasDerivedCategory_sheaf_smallEtaleTopology (X : Scheme.{u}) :
     HasDerivedCategory.{u} (Sheaf X.smallEtaleTopology A) :=
+  HasDerivedCategory.ofIsGrothendieckAbelian.{u} _
+
+/-- The chosen localized category `D(A)` of the concrete Grothendieck abelian coefficient
+category `A` itself, with `Hom`-types in `Type u`, again obtained via
+`HasDerivedCategory.ofIsGrothendieckAbelian`; the derived global sections functors below
+land in it. -/
+noncomputable instance hasDerivedCategory_coefficient : HasDerivedCategory.{u} A :=
   HasDerivedCategory.ofIsGrothendieckAbelian.{u} _
 
 section DerivedLowerStar
@@ -196,8 +206,6 @@ end DerivedLowerShriek
 section DerivedGlobalSections
 
 variable (X : Scheme.{u})
-variable [HasDerivedCategory.{w} (Sheaf X.smallEtaleTopology A)]
-variable [HasDerivedCategory.{w''} A]
 
 /-- The derived global sections `RΓ(X, -) : D(X_ét) ⥤ D(A)`: the total right derived
 functor of the global sections functor on étale sheaves, which exists since the small
@@ -211,9 +219,6 @@ end DerivedGlobalSections
 section CompactlySupportedCohomology
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-variable [HasDerivedCategory.{w} (Sheaf X.smallEtaleTopology A)]
-variable [HasDerivedCategory.{w'} (Sheaf Y.smallEtaleTopology A)]
-variable [HasDerivedCategory.{w''} A]
 
 /-- The compactly supported derived global sections along a morphism `f : X ⟶ Y`
 admitting a compactification, *defined* as the composite
