@@ -76,6 +76,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.IsIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafifyGrothendieckAbelian
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
