@@ -528,7 +528,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_pow_mul_comap_b
       (· ^ d * (J'.comap (I.blowupChart V ha)).ideal ⟨⊤, isAffineOpen_top _⟩)
       (I.ideal_comap_comap_blowupChart_self V ha))
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **The chart probes at a generating set cover the blow-up over `V`.** -/
@@ -561,7 +560,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.preimage_le_iSup_opensRange
     (I.preimage_subset_iUnion_range_blowupChart V hs hx)
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨a, ha⟩
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- Precomposing the `a`-chart of the blow-up over `V` with the localization
