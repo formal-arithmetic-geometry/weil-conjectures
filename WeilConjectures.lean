@@ -1,6 +1,7 @@
 module
 
 public import WeilConjectures.AnalyticAux
+public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.Affine.Localization
