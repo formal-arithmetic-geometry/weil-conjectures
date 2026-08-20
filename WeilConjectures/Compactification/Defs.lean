@@ -5,7 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 
@@ -22,6 +25,9 @@ We derive the properties of the morphisms involved in a compactification:
 - `Compactification.locallyOfFiniteType`: `f` is locally of finite type;
 - `Compactification.quasiCompact_openImmersion_iff`: `i` is quasi-compact if and only
   if `f` is;
+- `Compactification.isProper_openImmersion`, `Compactification.isClosedImmersion_openImmersion`
+  and `Compactification.isClopen_range_openImmersion`: if `f` is proper, then `i` is proper,
+  hence a closed immersion with clopen range;
 - `Compactification.ofIsProper`: a proper morphism is a compactification of itself.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
@@ -99,6 +105,25 @@ theorem quasiCompact_openImmersion (hf : QuasiCompact f) : QuasiCompact c.i := b
 compactified morphism is. -/
 theorem quasiCompact_openImmersion_iff : QuasiCompact c.i ↔ QuasiCompact f :=
   ⟨c.quasiCompact, c.quasiCompact_openImmersion⟩
+
+/-- The open immersion into a compactification of a **proper** morphism is itself proper:
+`c.i` is proper as soon as `c.i ≫ c.g` is, because `c.g` is separated. -/
+theorem isProper_openImmersion (hf : IsProper f) : IsProper c.i :=
+  have : IsProper (c.i ≫ c.g) := c.comm ▸ hf
+  .of_comp c.i c.g
+
+/-- The open immersion into a compactification of a proper morphism is also a **closed**
+immersion. -/
+theorem isClosedImmersion_openImmersion (hf : IsProper f) : IsClosedImmersion c.i :=
+  have := c.isProper_openImmersion hf
+  .of_isOpenImmersion_of_universallyClosed c.i
+
+/-- The open immersion into a compactification of a proper morphism identifies `X` with a
+**clopen** subscheme of the compactification: its range is open, being an open immersion,
+and closed, being universally closed. -/
+theorem isClopen_range_openImmersion (hf : IsProper f) : IsClopen (Set.range c.i) :=
+  have := c.isProper_openImmersion hf
+  Scheme.Hom.isClopen_range c.i
 
 end Compactification
 

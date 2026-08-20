@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 

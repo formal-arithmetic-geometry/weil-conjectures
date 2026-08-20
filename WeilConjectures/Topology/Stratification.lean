@@ -5,7 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.Topology.LocallyClosed
+public import Mathlib.Order.ConditionallyCompleteLattice.Basic
+public import Mathlib.Topology.Defs.Basic
 
 /-!
 # Stratifications of topological spaces
