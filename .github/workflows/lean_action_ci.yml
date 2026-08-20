@@ -29,3 +29,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: leanprover/lean-action@v1
+
+      # Same check as `.orchestra/validation.sh`: every tracked `.lean` file
+      # under `WeilConjectures/` must be imported by `WeilConjectures.lean`,
+      # otherwise it is silently never built. Runs after `lean-action` so that
+      # the toolchain and mathlib (which provides `mk_all`) are already in
+      # place; `--check` only reports, it does not rewrite the file.
+      - name: Check all files are imported
+        run: lake exe mk_all --lib WeilConjectures --git --check
