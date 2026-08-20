@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Homology.Precylinder
 public import Mathlib.CategoryTheory.Abelian.Monomorphisms
 public import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Constructor
 public import Mathlib.CategoryTheory.Localization.OfQuotient
-public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
+public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-!
 # The K-injective derivability structure

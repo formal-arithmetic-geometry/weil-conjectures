@@ -77,16 +77,21 @@ open Scheme
 
 variable (Λ : Type u) [CommRing Λ]
 
-/- Pointwise left Kan extensions and chosen localized derived categories for the small
-étale sites of all schemes at once, with coefficients in the ring `Λ`, following the
-convention of `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`;
-sheafification for the small étale sites is provided by mathlib's `HasSheafify` instance
-for the concrete category `ModuleCat Λ`. -/
+/- Pointwise left Kan extensions and their left exactness for the small étale sites of
+all schemes at once, with coefficients in the ring `Λ`, following the convention of
+`WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`; sheafification for the
+small étale sites is provided by
+`CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology`, and the localized
+derived categories are the chosen `Scheme.hasDerivedCategory_sheaf_smallEtaleTopology`
+instances of `WeilConjectures.SixFunctors.Derived`. -/
 instance (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ ModuleCat.{u} Λ) :
     (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F :=
   sorry
 
-attribute [local instance] HasDerivedCategory.standard
+instance (T S : Scheme.{u}) (φ : T ⟶ S) :
+    PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ φ).op.lan :
+      (S.Etaleᵒᵖ ⥤ ModuleCat.{u} Λ) ⥤ T.Etaleᵒᵖ ⥤ ModuleCat.{u} Λ) :=
+  sorry
 
 /- The K-flat resolution package on the coefficient category `ModuleCat Λ`, as in
 `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`; the monoidal structure,
