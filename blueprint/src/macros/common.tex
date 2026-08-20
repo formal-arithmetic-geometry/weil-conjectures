@@ -25,6 +25,42 @@
 \newtheorem{warning}[theorem]{Warning}
 
 \newcounter{importedinterface}
+\crefname{convention}{Convention}{Conventions}
+
+\newcommand{\BlueprintResultSource}[1]{%
+  \par\smallskip\noindent\textcolor{black!72}{\textsf{Mathematical source:} }%
+  \nolinkurl{#1}\par}
+
+\newcommand{\BlueprintLocalDeclarationRegistry}[4]{%
+  \par\smallskip
+  {%
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}%
+  \renewcommand{\arraystretch}{1.08}%
+  \noindent
+  \begin{tabular}{@{}%
+    p{0.22\linewidth}%
+    p{0.38\linewidth}%
+    p{\dimexpr0.40\linewidth-12pt\relax}@{}}
+    \toprule
+    \textbf{#1} & \textbf{Direct uses} & \textbf{Exact source}\\
+    \midrule
+    \hyperref[#2]{#1~\ref*{#2}}\newline\hyperref[#2]{\nolinkurl{#2}} &
+    \UseLinks{#3} &
+    #4\\
+    \bottomrule
+  \end{tabular}
+  }%
+  \par\smallskip
+}
+
+\newcommand{\deepresult}[1]{%
+  \par\smallskip\noindent\textcolor{orange!45!black}{%
+  \textsf{Blueprint role: named deep theorem node; see the cluster proof architecture.}}%
+  \par\noindent\textcolor{orange!45!black}{\textsf{Mathematical source:} }#1\par}
+
+\newcommand{\DeclarationLink}[1]{%
+  \hyperref[#1]{\ref*{#1}}}
 
 \newcommand{\statusnote}[1]{%
   \begin{quote}\small\raggedright\textbf{Status.} #1\end{quote}}
