@@ -59,7 +59,7 @@ stalkwise statement recorded separately
 
 @[expose] public section
 
-universe w u
+universe u
 
 open CategoryTheory Limits MonoidalCategory Abelian
 
@@ -69,13 +69,11 @@ open Scheme
 
 variable (Λ : Type u) [CommRing Λ]
 
-/- Pointwise left Kan extensions and chosen localized derived categories for the small
-étale sites of all schemes at once, with coefficients in the ring `Λ`, following the
-convention of `WeilConjectures.SixFunctors.BaseChangeTheorems.Proper`; sheafification
-for the small étale sites is provided by mathlib's `HasSheafify` instance for the
-concrete category `ModuleCat Λ`. -/
-variable [∀ (T : Scheme.{u}),
-    HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology (ModuleCat.{u} Λ))]
+/- Sheafification, pointwise left Kan extensions and their left exactness for the small
+étale sites of all schemes at once, with coefficients in the ring `Λ`, are provided by
+the instances of `WeilConjectures.SixFunctors.BaseChangeTheorems.Proper`; the localized
+derived categories are the chosen `Scheme.hasDerivedCategory_sheaf_smallEtaleTopology`
+instances of `WeilConjectures.SixFunctors.Derived`. -/
 
 /-- Extension by zero along an open immersion preserves torsion cohomology: since `j_!`
 is exact, the cohomology sheaves of `j_! K` are the extensions by zero of the cohomology
