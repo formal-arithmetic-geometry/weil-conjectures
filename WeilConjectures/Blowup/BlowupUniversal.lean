@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.FiniteDegree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 
@@ -13,7 +14,7 @@ public import WeilConjectures.Blowup.FiniteDegree
 
 This file proves the universal property of the chart-glued blow-up
 `Scheme.IdealSheafData.blowup`: a morphism `t : T ⟶ X` such that the inverse image
-ideal sheaf `I.comap t` is an effective Cartier ideal factors uniquely through the
+ideal sheaf `I.comap t` is invertible factors uniquely through the
 blow-up of `I` (`Scheme.IdealSheafData.existsUnique_lift_blowup`, Stacks Project
 Tag 0806; blueprint `thm:nagata-blowup-universal-property`).
 
@@ -31,19 +32,16 @@ The proof is chart-local, with the algebraic core the universal property of the
 
 On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
 
-- `Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le`: the affine-local
-  description of the inverse image ideal sheaf along an arbitrary morphism;
 - `Scheme.IdealSheafData.comap_mul`: inverse images commute with products of ideal
   sheaves (for arbitrary morphisms);
-- the effective Cartier lemma kit: local presentations on a basis
-  (`IsEffectiveCartier.exists_presentation_le`), stability under pullback along open
-  immersions, products, factors of products
-  (`IsEffectiveCartier.of_mul_left/right`, the "factor of an invertible product
+- the invertible-ideal lemma kit: local presentations on a basis
+  (`IsInvertible.exists_presentation_le`), stability under products, factors of
+  products (`IsInvertible.of_mul_left/right`, the "factor of an invertible product
   ideal" lemma of Stacks Tag 080A), and pullback along blow-up maps
-  (`IsEffectiveCartier.comap_blowupMap`);
-- `Scheme.IdealSheafData.hom_ext_of_isEffectiveCartier`: uniqueness of lifts along
+  (`IsInvertible.comap_blowupMap`);
+- `Scheme.IdealSheafData.hom_ext_of_isInvertible_comap`: uniqueness of lifts along
   the blow-up map (two morphisms to the blow-up over the same base map with
-  effective Cartier inverse image ideal agree), via the chart-overlap localization
+  invertible inverse image ideal agree), via the chart-overlap localization
   `HomogeneousLocalization.Away.isLocalization_mul`;
 - `Scheme.IdealSheafData.exists_lift_blowup` and
   `Scheme.IdealSheafData.existsUnique_lift_blowup`: existence and uniqueness of the
@@ -99,6 +97,17 @@ lemma left_mem_nonZeroDivisors_of_mul {x y : R} (h : x * y ∈ nonZeroDivisors R
   refine mem_nonZeroDivisors_iff.mpr ⟨fun z hz ↦ ?_, fun z hz ↦ ?_⟩
   · exact h1 z (by rw [show x * y * z = x * z * y by ring, hz, zero_mul])
   · exact h2 z (by rw [show z * (x * y) = z * x * y by ring, hz, zero_mul])
+
+/-- Nonzerodivisors map to nonzerodivisors under bijective ring homomorphisms. -/
+lemma map_mem_nonZeroDivisors_of_bijective {A B : Type*} [CommRing A] [CommRing B]
+    (f : A →+* B) (hf : Function.Bijective f) {c : A} (hc : c ∈ nonZeroDivisors A) :
+    f c ∈ nonZeroDivisors B := by
+  rw [mem_nonZeroDivisors_iff] at hc ⊢
+  refine ⟨fun z hz ↦ ?_, fun z hz ↦ ?_⟩ <;> obtain ⟨z, rfl⟩ := hf.2 z
+  · have h0 : c * z = 0 := hf.1 (by rw [map_mul, map_zero]; exact hz)
+    rw [hc.1 z h0, map_zero]
+  · have h0 : z * c = 0 := hf.1 (by rw [map_mul, map_zero]; exact hz)
+    rw [hc.2 z h0, map_zero]
 
 /-- The image of a nonzerodivisor in a localization away from an element is a
 nonzerodivisor. -/
@@ -213,7 +222,7 @@ lemma chartLiftLoc_awayAlgebraMap (ha : a ∈ I₀) (x : A) :
       algebraMap R (Localization.Away (φ a)) (φ x) := by
   have h1 : (awayAlgebraMap I₀ (reesX I₀ a ha) x).val =
       Localization.mk ((reesGradingZero I₀ x : reesGrading I₀ 0) : reesAlgebra I₀) 1 :=
-    val_awayAlgebraMap I₀ _ x
+    val_awayAlgebraMap _ x
   calc chartLiftLoc I₀ φ ha (awayAlgebraMap I₀ (reesX I₀ a ha) x)
       = Localization.awayLift (chartLiftEval I₀ φ a) (reesX I₀ a ha)
           (isUnit_chartLiftEval_reesX I₀ φ ha)
@@ -371,7 +380,7 @@ variable {A : Type u} [CommRing A] (I₀ : Ideal A)
 
 /-- **The chart section map preserves nonzerodivisors**: the image in the `a`-chart
 ring of a nonzerodivisor of the base is a nonzerodivisor. Generalizes
-`awayAlgebraMap_mem_nonZeroDivisors` (the case `s = a`). -/
+`isRegular_awayAlgebraMap_reesX` (the case `s = a`). -/
 theorem awayAlgebraMap_mem_nonZeroDivisors_of_mem {a : A} (ha : a ∈ I₀) {s : A}
     (hs : s ∈ nonZeroDivisors A) :
     awayAlgebraMap I₀ (reesX I₀ a ha) s ∈
@@ -407,56 +416,14 @@ end NonZeroDivisorTransfer
 
 section ComapAffineLocality
 
-/-! ### The affine-local description of the inverse image ideal sheaf
+/-! ### Multiplicativity of the inverse image ideal sheaf
 
 For an arbitrary morphism `f : Y ⟶ X` and affine opens `W ≤ f ⁻¹ᵁ V`, the pullback
-ideal `(I.comap f)(W)` is the extension of `I(V)` along the section map
-`f.appLE V W`. This extends `Scheme.IdealSheafData.ideal_comap_eq_map_appLE` (the
-open immersion case) to arbitrary morphisms, and yields multiplicativity of `comap`. -/
-
-/-- Pushforward of ideals along the inverse of an isomorphism of commutative rings is
-injective. -/
-lemma CommRingCat.ideal_map_inv_injective {R S : CommRingCat.{u}} (e : R ≅ S) :
-    Function.Injective (fun J : Ideal S ↦ J.map e.inv.hom) := by
-  intro J₁ J₂ hJ
-  have h := congrArg (Ideal.map e.hom.hom) hJ
-  simp only [Ideal.map_map, ← CommRingCat.hom_comp, Iso.inv_hom_id, CommRingCat.hom_id,
-    Ideal.map_id] at h
-  exact h
+ideal `(I.comap f)(W)` is the extension of `I(V)` along the section map `f.appLE V W`
+(`Scheme.IdealSheafData.ideal_comap_appLE`); this yields multiplicativity of
+`comap`. -/
 
 variable {Y X : Scheme.{u}}
-
-/-- **The affine-local description of the inverse image ideal sheaf** along an
-arbitrary morphism: on an affine open `W` mapping into an affine open `V`, the
-pullback of `I` is the extension of `I(V)` along the induced map on sections. -/
-theorem Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le (f : Y ⟶ X)
-    (I : X.IdealSheafData) (V : X.affineOpens) (W : Y.affineOpens)
-    (h : W.1 ≤ f ⁻¹ᵁ V.1) :
-    (I.comap f).ideal W = (I.ideal V).map (f.appLE V.1 W.1 h).hom := by
-  have h1 : ((I.comap f).comap W.2.fromSpec).ideal ⟨⊤, isAffineOpen_top _⟩ =
-      ((I.comap f).ideal W).map (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom := by
-    have e1 := (I.comap f).ideal_comap_specMap_fromSpec W (𝟙 Γ(Y, W.1))
-      (specMap_comp_fromSpec_preimage_le W _)
-    rw [appLE_specMap_comp_fromSpec W (𝟙 _) (specMap_comp_fromSpec_preimage_le W _),
-      Category.id_comp, Spec.map_id, Category.id_comp] at e1
-    exact e1
-  have h3 : (I.comap f).comap W.2.fromSpec =
-      I.comap (Spec.map (f.appLE V.1 W.1 h) ≫ V.2.fromSpec) := by
-    rw [← Scheme.IdealSheafData.comap_comp,
-      IsAffineOpen.SpecMap_appLE_fromSpec f V.2 W.2 h]
-  have h4 : (I.comap (Spec.map (f.appLE V.1 W.1 h) ≫ V.2.fromSpec)).ideal
-      ⟨⊤, isAffineOpen_top _⟩ =
-      (I.ideal V).map ((f.appLE V.1 W.1 h) ≫ (Scheme.ΓSpecIso Γ(Y, W.1)).inv).hom := by
-    rw [I.ideal_comap_specMap_fromSpec V _ (specMap_comp_fromSpec_preimage_le V _),
-      appLE_specMap_comp_fromSpec V _ (specMap_comp_fromSpec_preimage_le V _)]
-  apply CommRingCat.ideal_map_inv_injective (Scheme.ΓSpecIso Γ(Y, W.1))
-  calc ((I.comap f).ideal W).map (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom
-      = ((I.comap f).comap W.2.fromSpec).ideal ⟨⊤, isAffineOpen_top _⟩ := h1.symm
-    _ = (I.ideal V).map ((f.appLE V.1 W.1 h) ≫ (Scheme.ΓSpecIso Γ(Y, W.1)).inv).hom := by
-        rw [h3]; exact h4
-    _ = ((I.ideal V).map (f.appLE V.1 W.1 h).hom).map
-          (Scheme.ΓSpecIso Γ(Y, W.1)).inv.hom := by
-        rw [CommRingCat.hom_comp, Ideal.map_map]
 
 /-- Every point of `Y` lies in an affine open contained in the preimage of an affine
 open of `X`. -/
@@ -486,23 +453,23 @@ theorem Scheme.IdealSheafData.comap_mul (f : Y ⟶ X) (I J : X.IdealSheafData) :
     have hmul' : (I.comap f * J.comap f).ideal W =
         (I.comap f).ideal W * (J.comap f).ideal W := by
       rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
-    rw [Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le f (I * J) V W hle, hmul, hmul',
-      Ideal.map_mul, Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le f I V W hle,
-      Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le f J V W hle]
+    rw [Scheme.IdealSheafData.ideal_comap_appLE (I * J) f V W hle, hmul, hmul',
+      Ideal.map_mul, Scheme.IdealSheafData.ideal_comap_appLE I f V W hle,
+      Scheme.IdealSheafData.ideal_comap_appLE J f V W hle]
 
 end ComapAffineLocality
 
-section EffectiveCartierKit
+section InvertibleKit
 
-/-! ### The effective Cartier lemma kit
+/-! ### The invertible-ideal lemma kit
 
-Local presentations of effective Cartier ideals on a basis of affine opens, and
-stability of the effective Cartier property under pullback along open immersions,
-products, factors of products, and pullback along blow-up maps. -/
+Local presentations of invertible ideal sheaves on a basis of affine opens, and
+stability of invertibility under products, factors of products, and pullback along
+blow-up maps. -/
 
 variable {Y : Scheme.{u}}
 
-namespace Scheme.IdealSheafData.IsEffectiveCartier
+namespace Scheme.IdealSheafData.IsInvertible
 
 /-- A span-nonzerodivisor presentation of an ideal sheaf on an affine open restricts to
 a span-nonzerodivisor presentation on any of its affine basic opens. -/
@@ -528,10 +495,10 @@ theorem presentation_restrict_basicOpen {K : Y.IdealSheafData} {U : Y.affineOpen
   rw [← hres, hgen, Ideal.map_span, Set.image_singleton, halg]
   rfl
 
-/-- **Presentations of an effective Cartier ideal exist on a basis**: near any point
+/-- **Presentations of an invertible ideal exist on a basis**: near any point
 and inside any open neighbourhood of it, there is an affine open on which the ideal is
 generated by a single nonzerodivisor. -/
-theorem exists_presentation_le {K : Y.IdealSheafData} (hK : K.IsEffectiveCartier)
+theorem exists_presentation_le {K : Y.IdealSheafData} (hK : K.IsInvertible)
     {y : Y} {O : Y.Opens} (hy : y ∈ O) :
     ∃ W : Y.affineOpens, y ∈ W.1 ∧ W.1 ≤ O ∧
       ∃ c ∈ nonZeroDivisors Γ(Y, W.1), K.ideal W = Ideal.span {c} := by
@@ -541,28 +508,9 @@ theorem exists_presentation_le {K : Y.IdealSheafData} (hK : K.IsEffectiveCartier
     (Y.affineBasicOpen g) rfl
   exact ⟨Y.affineBasicOpen g, hyg, hgle, c', hc', hgen'⟩
 
-/-- The pullback of an effective Cartier ideal along an open immersion is effective
-Cartier. -/
-theorem comap_of_isOpenImmersion {K : Y.IdealSheafData} (hK : K.IsEffectiveCartier)
-    {T : Scheme.{u}} (j : T ⟶ Y) [IsOpenImmersion j] :
-    (K.comap j).IsEffectiveCartier := by
-  intro z
-  have hjz : j z ∈ j.opensRange := ⟨z, rfl⟩
-  obtain ⟨W, hjW, hWle, c, hc, hgen⟩ := hK.exists_presentation_le hjz
-  have haff : IsAffineOpen (j ⁻¹ᵁ W.1) := W.2.preimage_of_isOpenImmersion j hWle
-  have hle : (⟨j ⁻¹ᵁ W.1, haff⟩ : T.affineOpens).1 ≤ j ⁻¹ᵁ W.1 := le_rfl
-  haveI hiso : IsIso (j.appLE W.1 (j ⁻¹ᵁ W.1) hle) := by
-    rw [← Scheme.Hom.app_eq_appLE]
-    exact j.isIso_app W.1 hWle
-  refine ⟨⟨j ⁻¹ᵁ W.1, haff⟩, hjW, (j.appLE W.1 (j ⁻¹ᵁ W.1) hle).hom c,
-    AlgebraicGeometry.map_mem_nonZeroDivisors _
-      (ConcreteCategory.bijective_of_isIso (j.appLE W.1 (j ⁻¹ᵁ W.1) hle)) hc, ?_⟩
-  rw [Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le j K W ⟨j ⁻¹ᵁ W.1, haff⟩ hle,
-    hgen, Ideal.map_span, Set.image_singleton]
-
-/-- Products of effective Cartier ideals are effective Cartier. -/
-theorem mul {K₁ K₂ : Y.IdealSheafData} (h₁ : K₁.IsEffectiveCartier)
-    (h₂ : K₂.IsEffectiveCartier) : (K₁ * K₂).IsEffectiveCartier := by
+/-- Products of invertible ideals are invertible. -/
+theorem mul {K₁ K₂ : Y.IdealSheafData} (h₁ : K₁.IsInvertible)
+    (h₂ : K₂.IsInvertible) : (K₁ * K₂).IsInvertible := by
   intro y
   obtain ⟨W₁, hyW₁, -, c₁, hc₁, hgen₁⟩ :=
     h₁.exists_presentation_le (O := ⊤) (trivial : y ∈ (⊤ : Y.Opens))
@@ -666,10 +614,10 @@ theorem _root_.AlgebraicGeometry.exists_span_eq_top_localization_factor_span
     · rw [Ideal.span_le, Set.singleton_subset_iff]
       exact Ideal.mem_map_of_mem _ (hxJ i)
 
-/-- **A factor of an effective Cartier product ideal is effective Cartier** (the
-"factor of an invertible product ideal" lemma of Stacks Project Tag 080A). -/
-theorem of_mul_left {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsEffectiveCartier) :
-    K₁.IsEffectiveCartier := by
+/-- **A factor of an invertible product ideal is invertible** (Stacks Project
+Tag 080A). -/
+theorem of_mul_left {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsInvertible) :
+    K₁.IsInvertible := by
   intro y
   obtain ⟨U, hyU, c, hc, hgen⟩ := h y
   have hmulU : K₁.ideal U * K₂.ideal U = Ideal.span {c} := by
@@ -698,10 +646,9 @@ theorem of_mul_left {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsEffectiv
   rw [← hres, ← halg, hspan]
   rfl
 
-/-- A factor of an effective Cartier product ideal is effective Cartier, right
-version. -/
-theorem of_mul_right {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsEffectiveCartier) :
-    K₂.IsEffectiveCartier :=
+/-- A factor of an invertible product ideal is invertible, right version. -/
+theorem of_mul_right {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsInvertible) :
+    K₂.IsInvertible :=
   of_mul_left (K₂ := K₁) (by rwa [mul_comm] at h)
 
 /-- Membership in the nonzerodivisors transported along an equality of elements. -/
@@ -723,7 +670,7 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChartSection_mem_nonZ
         (reesGrading (K.ideal V)) (reesX (K.ideal V) a ha)))).inv.hom
         (AffineBlowup.awayAlgebraMap (K.ideal V) (reesX (K.ideal V) a ha) s) := rfl
   refine mem_nonZeroDivisors_of_eq hbridge ?_
-  exact AlgebraicGeometry.map_mem_nonZeroDivisors _
+  exact map_mem_nonZeroDivisors_of_bijective _
     (ConcreteCategory.bijective_of_isIso _)
     (AffineBlowup.awayAlgebraMap_mem_nonZeroDivisors_of_mem (K.ideal V) ha hs)
 
@@ -739,14 +686,38 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart_apply
         (reesX_mem (K.ideal V) a ha) z) :=
   Scheme.Hom.comp_apply _ _ z
 
-/-- **The pullback of an effective Cartier ideal along a blow-up map is effective
-Cartier**: on the `a`-chart of the blow-up, a local equation of the pulled-back ideal
-is the image of a local equation downstairs, which stays a nonzerodivisor by
+/-- Criterion for invertibility at a point through an affine open immersion probe: if
+`w : Spec R ⟶ Y` is an open immersion whose range contains `x` and the pullback of `I'`
+to `Spec R` is generated by a single nonzerodivisor, then `I'` is generated by a single
+nonzerodivisor on an affine neighbourhood of `x`. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_isRegularPrincipal_ideal_of_comap
+    (I' : Y.IdealSheafData) {R : CommRingCat.{u}} (w : Spec R ⟶ Y) [IsOpenImmersion w]
+    {x : Y} (hx : x ∈ Set.range w) (c : Γ(Spec R, ⊤))
+    (hc : c ∈ nonZeroDivisors Γ(Spec R, ⊤))
+    (hspan : (I'.comap w).ideal ⟨⊤, isAffineOpen_top _⟩ = Ideal.span {c}) :
+    ∃ V : Y.affineOpens, x ∈ V.1 ∧ (I'.ideal V).IsRegularPrincipal := by
+  refine ⟨⟨w ''ᵁ ⊤, (isAffineOpen_top (Spec R)).image_of_isOpenImmersion w⟩, ?_, ?_⟩
+  · obtain ⟨z, rfl⟩ := hx
+    exact ⟨z, trivial, rfl⟩
+  · have h1 := Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion I' w
+      ⟨⊤, isAffineOpen_top _⟩
+    rw [hspan] at h1
+    have hbij : Function.Bijective (w.appIso ⊤).inv.hom :=
+      ConcreteCategory.bijective_of_isIso _
+    refine ⟨(w.appIso ⊤).inv c, map_mem_nonZeroDivisors_of_bijective _ hbij hc, ?_⟩
+    have h2 := Ideal.map_comap_of_surjective (w.appIso ⊤).inv.hom hbij.2
+      (I'.ideal ⟨w ''ᵁ ⊤, (isAffineOpen_top (Spec R)).image_of_isOpenImmersion w⟩)
+    rw [← h1] at h2
+    rw [← h2, Ideal.map_span, Set.image_singleton]
+
+/-- **The pullback of an invertible ideal along a blow-up map is invertible**: on the
+`a`-chart of the blow-up, a local equation of the pulled-back ideal is the image of a
+local equation downstairs, which stays a nonzerodivisor by
 `AffineBlowup.awayAlgebraMap_mem_nonZeroDivisors_of_mem`. The chart rings of the
 blow-up are large `HomogeneousLocalization` types, whence the raised heartbeat
 limit. -/
-theorem comap_blowupMap {C : Y.IdealSheafData} (hC : C.IsEffectiveCartier)
-    (K : Y.IdealSheafData) : (C.comap K.blowupMap).IsEffectiveCartier := by
+theorem comap_blowupMap {C : Y.IdealSheafData} (hC : C.IsInvertible)
+    (K : Y.IdealSheafData) : (C.comap K.blowupMap).IsInvertible := by
   intro ξ
   obtain ⟨V, hV, -, s, hs, hgen⟩ :=
     hC.exists_presentation_le (O := ⊤) (trivial : K.blowupMap ξ ∈ (⊤ : Y.Opens))
@@ -759,7 +730,7 @@ theorem comap_blowupMap {C : Y.IdealSheafData} (hC : C.IsEffectiveCartier)
   rw [← AffineBlowup.opensRange_chart (K.ideal V) (reesX (K.ideal V) a.1 a.2)
     (reesX_mem (K.ideal V) a.1 a.2)] at hy
   obtain ⟨z, rfl⟩ := hy
-  refine exists_effectiveCartier_generator_of_comap (C.comap K.blowupMap)
+  refine exists_isRegularPrincipal_ideal_of_comap (C.comap K.blowupMap)
     (K.blowupChart V a.2) ⟨z, K.blowupChart_apply V a.2 z⟩
     ((K.blowupChartSection V a.2).hom s) ?_ ?_
   · exact K.blowupChartSection_mem_nonZeroDivisors V a.2 hs
@@ -768,9 +739,9 @@ theorem comap_blowupMap {C : Y.IdealSheafData} (hC : C.IsEffectiveCartier)
       J.map (K.blowupChartSection V a.2).hom) hgen).trans ?_
     exact (Ideal.map_span _ _).trans (congrArg Ideal.span Set.image_singleton)
 
-end Scheme.IdealSheafData.IsEffectiveCartier
+end Scheme.IdealSheafData.IsInvertible
 
-end EffectiveCartierKit
+end InvertibleKit
 
 section UniversalPropertyPreparation
 
@@ -843,7 +814,7 @@ lemma span_map_eq_of_comp_awayAlgebraMap {R : Type u} [CommRing R] {a : A} (ha :
       = (I₀.map (awayAlgebraMap I₀ (reesX I₀ a ha))).map ψ := by
         rw [Ideal.map_map, hcomp]
     _ = (Ideal.span {awayAlgebraMap I₀ (reesX I₀ a ha) a}).map ψ :=
-        congrArg (Ideal.map ψ) (map_awayAlgebraMap_eq_span I₀ a ha)
+        congrArg (Ideal.map ψ) (map_awayAlgebraMap_reesX_eq_span_singleton I₀ a ha)
     _ = Ideal.span {ψ (awayAlgebraMap I₀ (reesX I₀ a ha) a)} := by
         rw [Ideal.map_span, Set.image_singleton]
     _ = Ideal.span {φ a} := by
@@ -854,7 +825,6 @@ end AffineBlowup
 
 variable {X T : Scheme.{u}}
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Chart capture**: a point of the blow-up over an affine open `V` of the base lies
@@ -872,7 +842,6 @@ lemma Scheme.IdealSheafData.exists_mem_opensRange_blowupChart (I : X.IdealSheafD
   obtain ⟨z, rfl⟩ := hy
   exact ⟨a.1, a.2, ⟨z, I.blowupChart_apply V a.2 z⟩⟩
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Chart-ring extraction of a probe of the blow-up**: an affine probe of `T` on
@@ -944,11 +913,10 @@ section Uniqueness
 
 /-! ### Uniqueness of lifts along the blow-up map (Stacks Project Tag 0806, uniqueness)
 
-Two lifts of `t : T ⟶ X` to the blow-up of `I` agree when `I.comap t` is an effective
-Cartier ideal: locally both land in charts of the blow-up over a common affine open of
-the base, the extracted chart ring maps are determined by division by the
-nonzerodivisor local equation, and the two charts are compared in the chart-overlap
-localization. -/
+Two lifts of `t : T ⟶ X` to the blow-up of `I` agree when `I.comap t` is invertible:
+locally both land in charts of the blow-up over a common affine open of the base, the
+extracted chart ring maps are determined by division by the nonzerodivisor local
+equation, and the two charts are compared in the chart-overlap localization. -/
 
 variable {X T : Scheme.{u}}
 
@@ -970,7 +938,7 @@ lemma Scheme.IdealSheafData.probe_comp_eq_of_charts (I : X.IdealSheafData)
   obtain ⟨ψ₂, hψ₂, hψ₂c⟩ := I.exists_chartRingHom_of_probe e₂ V hb W hWt hW₂
   -- the extension of `I(V)` on the probe is principal on the images of `a`, `b`, `c`
   have hIφ : (I.ideal V).map (t.appLE V.1 W.1 hWt).hom = Ideal.span {c} := by
-    rw [← Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le t I V W hWt]
+    rw [← Scheme.IdealSheafData.ideal_comap_appLE I t V W hWt]
     exact hgen
   have hspan_a : (I.ideal V).map (t.appLE V.1 W.1 hWt).hom =
       Ideal.span {(t.appLE V.1 W.1 hWt).hom a} :=
@@ -1078,7 +1046,7 @@ lemma Scheme.IdealSheafData.probe_comp_eq_of_charts (I : X.IdealSheafData)
     · push_cast [coe_reesX]
       rw [Polynomial.monomial_mul_monomial]
     · rw [hcomp₁, hcomp₂, hψ₁c, hψ₂c]
-    · refine Scheme.IdealSheafData.IsEffectiveCartier.mem_nonZeroDivisors_of_eq
+    · refine Scheme.IdealSheafData.IsInvertible.mem_nonZeroDivisors_of_eq
         (RingHom.congr_fun (hcomp₁.trans hψ₁c) (a * b)) ?_
       rw [map_mul]
       exact mul_mem_nonZeroDivisors.mpr ⟨hanzd, hbnzd⟩
@@ -1115,14 +1083,13 @@ lemma Scheme.IdealSheafData.probe_comp_eq_of_charts (I : X.IdealSheafData)
         congrArg (fun ρ ↦ Spec.map (CommRingCat.ofHom ρ) ≫ I.blowupChart V hb) hfac₂
     _ = W.2.fromSpec ≫ h₂ := hψ₂
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Uniqueness of lifts along the blow-up map** (Stacks Project Tag 0806,
 uniqueness): two morphisms to the blow-up of `I` over the same base morphism `t` with
-`I.comap t` an effective Cartier ideal agree. -/
-theorem Scheme.IdealSheafData.hom_ext_of_isEffectiveCartier_comap (I : X.IdealSheafData)
-    {t : T ⟶ X} (hEC : (I.comap t).IsEffectiveCartier)
+`I.comap t` invertible agree. -/
+theorem Scheme.IdealSheafData.hom_ext_of_isInvertible_comap (I : X.IdealSheafData)
+    {t : T ⟶ X} (hEC : (I.comap t).IsInvertible)
     {h₁ h₂ : T ⟶ I.blowup} (e₁ : h₁ ≫ I.blowupMap = t) (e₂ : h₂ ≫ I.blowupMap = t) :
     h₁ = h₂ := by
   have key : ∀ z : T, ∃ W : T.affineOpens, z ∈ W.1 ∧
@@ -1239,7 +1206,7 @@ lemma exists_span_eq_top_localization_span_of_map_eq_span {A R : Type u} [CommRi
     have hφx' : algebraMap R S (φ (x j)) = algebraMap R S (q j) * algebraMap R S c := by
       rw [← map_mul, hq j]
     constructor
-    · refine Scheme.IdealSheafData.IsEffectiveCartier.mem_nonZeroDivisors_of_eq hφx' ?_
+    · refine Scheme.IdealSheafData.IsInvertible.mem_nonZeroDivisors_of_eq hφx' ?_
       exact mul_mem_nonZeroDivisors.mpr ⟨hqunit.mem_nonZeroDivisors, hcnzd⟩
     · calc (J.map φ).map (algebraMap R S)
           = (Ideal.span {c}).map (algebraMap R S) := by rw [hspan]
@@ -1250,13 +1217,12 @@ lemma exists_span_eq_top_localization_span_of_map_eq_span {A R : Type u} [CommRi
 
 variable {X T : Scheme.{u}}
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit.
 /-- **Local existence of lifts to the blow-up**: near every point of `T` there is an
 affine probe carrying a lift of `t` to the blow-up of `I`. -/
 lemma Scheme.IdealSheafData.exists_probe_lift (I : X.IdealSheafData)
-    {t : T ⟶ X} (hEC : (I.comap t).IsEffectiveCartier) (z : T) :
+    {t : T ⟶ X} (hEC : (I.comap t).IsInvertible) (z : T) :
     ∃ O : T.affineOpens, z ∈ O.1 ∧
       ∃ l : Spec Γ(T, O.1) ⟶ I.blowup, l ≫ I.blowupMap = O.2.fromSpec ≫ t := by
   have htz : t z ∈ (⊤ : X.Opens) := trivial
@@ -1265,7 +1231,7 @@ lemma Scheme.IdealSheafData.exists_probe_lift (I : X.IdealSheafData)
   have hztV : z ∈ t ⁻¹ᵁ V.1 := hV
   obtain ⟨W, hzW, hWle, c, hc, hgen⟩ := hEC.exists_presentation_le hztV
   have hφspan : (I.ideal V).map (t.appLE V.1 W.1 hWle).hom = Ideal.span {c} := by
-    rw [← Scheme.IdealSheafData.ideal_comap_eq_map_appLE_of_le t I V W hWle]
+    rw [← Scheme.IdealSheafData.ideal_comap_appLE I t V W hWle]
     exact hgen
   obtain ⟨n, x, tt, hxJ, htop, hloc⟩ :=
     exists_span_eq_top_localization_span_of_map_eq_span hc hφspan
@@ -1295,7 +1261,7 @@ lemma Scheme.IdealSheafData.exists_probe_lift (I : X.IdealSheafData)
             (t.appLE V.1 W.1 hWle).hom := by rw [halg]
   have hnzd' : (t.appLE V.1 (T.affineBasicOpen (tt j)).1 hOle).hom (x j) ∈
       nonZeroDivisors Γ(T, T.basicOpen (tt j)) := by
-    refine Scheme.IdealSheafData.IsEffectiveCartier.mem_nonZeroDivisors_of_eq
+    refine Scheme.IdealSheafData.IsInvertible.mem_nonZeroDivisors_of_eq
       (RingHom.congr_fun happ (x j)) hnzd
   have hspan' : (I.ideal V).map (t.appLE V.1 (T.affineBasicOpen (tt j)).1 hOle).hom ≤
       Ideal.span {(t.appLE V.1 (T.affineBasicOpen (tt j)).1 hOle).hom (x j)} := by
@@ -1341,17 +1307,16 @@ lemma Scheme.IdealSheafData.exists_probe_lift (I : X.IdealSheafData)
         IsAffineOpen.SpecMap_appLE_fromSpec t V.2 (T.affineBasicOpen (tt j)).2 hOle
 
 /-- **Existence of lifts along the blow-up map** (Stacks Project Tag 0806, existence):
-a morphism `t : T ⟶ X` with `I.comap t` an effective Cartier ideal lifts to the
-blow-up of `I`. -/
+a morphism `t : T ⟶ X` with `I.comap t` invertible lifts to the blow-up of `I`. -/
 theorem Scheme.IdealSheafData.exists_lift_blowup (I : X.IdealSheafData)
-    {t : T ⟶ X} (hEC : (I.comap t).IsEffectiveCartier) :
+    {t : T ⟶ X} (hEC : (I.comap t).IsInvertible) :
     ∃ h : T ⟶ I.blowup, h ≫ I.blowupMap = t := by
   choose O hzO l hl using fun z : T ↦ I.exists_probe_lift hEC z
   have hglue : ∀ z z' : T,
       pullback.fst ((O z).2.fromSpec) ((O z').2.fromSpec) ≫ l z =
       pullback.snd ((O z).2.fromSpec) ((O z').2.fromSpec) ≫ l z' := by
     intro z z'
-    refine I.hom_ext_of_isEffectiveCartier_comap
+    refine I.hom_ext_of_isInvertible_comap
       (t := (pullback.fst ((O z).2.fromSpec) ((O z').2.fromSpec) ≫ (O z).2.fromSpec) ≫ t)
       ?_ ?_ ?_
     · rw [Scheme.IdealSheafData.comap_comp]
@@ -1373,13 +1338,13 @@ theorem Scheme.IdealSheafData.exists_lift_blowup (I : X.IdealSheafData)
 
 /-- **The universal property of blowing up** (Stacks Project Tag 0806; blueprint
 `thm:nagata-blowup-universal-property`): a morphism `t : T ⟶ X` such that the inverse
-image ideal sheaf `I.comap t` is an effective Cartier ideal factors uniquely through
-the blow-up of `I`. -/
+image ideal sheaf `I.comap t` is invertible factors uniquely through the blow-up of
+`I`. -/
 theorem Scheme.IdealSheafData.existsUnique_lift_blowup (I : X.IdealSheafData)
-    {t : T ⟶ X} (hEC : (I.comap t).IsEffectiveCartier) :
+    {t : T ⟶ X} (hEC : (I.comap t).IsInvertible) :
     ∃! h : T ⟶ I.blowup, h ≫ I.blowupMap = t := by
   obtain ⟨h, hh⟩ := I.exists_lift_blowup hEC
-  exact ⟨h, hh, fun h' hh' ↦ I.hom_ext_of_isEffectiveCartier_comap hEC hh' hh⟩
+  exact ⟨h, hh, fun h' hh' ↦ I.hom_ext_of_isInvertible_comap hEC hh' hh⟩
 
 end Existence
 

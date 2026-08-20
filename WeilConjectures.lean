@@ -1,4 +1,4 @@
-module  -- shake: keep-all --deprecated_module: ignore
+module
 
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.Affine.Defs
