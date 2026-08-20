@@ -5,6 +5,11 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.RingTheory.IntegralDomain
 public import WeilConjectures.ZetaFunction
 
 @[expose] public section
@@ -53,8 +58,7 @@ private instance : IsJacobsonRing ℤ := by
     rw [Int.isUnit_iff] at h1 h2
     rw [Ideal.mem_bot]
     omega
-  · haveI := hP
-    haveI := IsPrime.to_maximal_ideal hbot
+  · have := IsPrime.to_maximal_ideal hbot
     exact Ideal.jacobson_eq_self_of_isMaximal
 
 /-- A field which is a finitely generated `ℤ`-module is finite. -/
@@ -62,13 +66,13 @@ private lemma finite_of_field_of_moduleFinite_int (K : Type*) [Field K] [Module.
     Finite K := by
   have hint : Algebra.IsIntegral ℤ K := Algebra.IsIntegral.of_finite ℤ K
   rcases CharP.char_is_prime_or_zero K (ringChar K) with hp | h0
-  · haveI : Fact (ringChar K).Prime := ⟨hp⟩
-    letI : Algebra (ZMod (ringChar K)) K := ZMod.algebra K (ringChar K)
+  · have : Fact (ringChar K).Prime := ⟨hp⟩
+    let : Algebra (ZMod (ringChar K)) K := ZMod.algebra K (ringChar K)
     have : Module.Finite (ZMod (ringChar K)) K :=
       Module.Finite.of_restrictScalars_finite ℤ (ZMod (ringChar K)) K
     exact Module.finite_of_finite (ZMod (ringChar K))
-  · haveI : CharP K 0 := h0 ▸ ringChar.charP K
-    haveI : CharZero K := CharP.charP_to_charZero K
+  · have : CharP K 0 := h0 ▸ ringChar.charP K
+    have : CharZero K := CharP.charP_to_charZero K
     have hinj : Function.Injective (algebraMap ℤ K) := by
       rw [algebraMap_int_eq]
       exact Int.cast_injective
@@ -79,8 +83,8 @@ residue field of the corresponding prime ideal of `Γ(X, U)`. -/
 private noncomputable def residueFieldEquivPrimeIdealOf {U : X.Opens} (hU : IsAffineOpen U)
     (x : U) :
     (hU.primeIdealOf x).asIdeal.ResidueField ≃+* X.residueField x.1 :=
-  letI := X.presheaf.algebra_section_stalk x
-  haveI := hU.isLocalization_stalk x
+  let := X.presheaf.algebra_section_stalk x
+  have := hU.isLocalization_stalk x
   IsLocalRing.ResidueField.mapEquiv
     (IsLocalization.algEquiv (hU.primeIdealOf x).asIdeal.primeCompl
       (Localization.AtPrime (hU.primeIdealOf x).asIdeal)
@@ -153,12 +157,12 @@ theorem finitePoints_eq_closedPoints (f : X ⟶ Spec (.of (ULift.{u} ℤ)))
     have hx' : x ∈ (⊤ : X.Opens) := trivial
     rw [← iSup_affineOpens_eq_top X] at hx'
     exact TopologicalSpace.Opens.mem_iSup.mp hx'
-  haveI hmax : (U.2.primeIdealOf ⟨x, hxU⟩).asIdeal.IsMaximal :=
+  have hmax : (U.2.primeIdealOf ⟨x, hxU⟩).asIdeal.IsMaximal :=
     U.2.primeIdealOf_isMaximal_of_isClosed ⟨x, hxU⟩ hx
   rw [mem_finitePoints]
   refine (finite_residueField_iff_primeIdealOf U.2 ⟨x, hxU⟩).mpr ?_
   set m : Ideal Γ(X, U.1) := (U.2.primeIdealOf ⟨x, hxU⟩).asIdeal with hm
-  letI : Field (Γ(X, U.1) ⧸ m) := Ideal.Quotient.field m
+  let : Field (Γ(X, U.1) ⧸ m) := Ideal.Quotient.field m
   have e : (U : X.Opens) ≤ f ⁻¹ᵁ ⊤ := le_top
   have h1 : (Int.castRingHom (ULift.{u} ℤ)).FiniteType :=
     RingHom.FiniteType.of_surjective _ fun a => ⟨a.down, rfl⟩

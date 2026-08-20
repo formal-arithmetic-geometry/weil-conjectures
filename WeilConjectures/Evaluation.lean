@@ -57,9 +57,9 @@ variable {X : Scheme.{u}} {k : Type u} [Field k]
 theorem Hom.pointNorm_eq_pow_degreeOver [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
     (hx : x ∈ X.finitePoints) :
     X.pointNorm x = Nat.card k ^ f.degreeOver x := by
-  letI := (f.residueFieldAlgebraMap x).toAlgebra
-  haveI : Finite (X.residueField x) := X.mem_finitePoints.mp hx
-  haveI : Module.Finite k (X.residueField x) := Module.Finite.of_finite
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have : Finite (X.residueField x) := X.mem_finitePoints.mp hx
+  have : Module.Finite k (X.residueField x) := Module.Finite.of_finite
   unfold Scheme.pointNorm Hom.degreeOver
   exact Module.natCard_eq_pow_finrank
 
