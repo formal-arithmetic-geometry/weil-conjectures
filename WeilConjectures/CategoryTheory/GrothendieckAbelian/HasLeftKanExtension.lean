@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 
@@ -23,7 +25,12 @@ governed by the type `CategoryTheory.GrothendieckTopology.LiftIndex` of factoriz
 the structure morphism of `W` through `f`. For a monomorphism `f` a lift induces a
 terminal object of the comma category, and if no lift exists the comma category is empty;
 hence all pointwise left Kan extensions with values in a category with an initial object
-exist. This generalizes the étale-specific argument of
+exist. The same dichotomy — every `W : P.Over ⊤ U` either lies in the essential image of
+the localization functor or has empty indexing comma category
+(`essImage_or_isEmpty_costructuredArrow_op_overMap`) — shows that the left Kan extension
+is left exact for a Grothendieck abelian coefficient category
+(`preservesFiniteLimits_op_lan_overMap`): pointwise it is either an evaluation or a zero
+object. This generalizes the étale-specific arguments of
 `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale` to an arbitrary morphism
 property `P` satisfying `[P.HasOfPostcompProperty P]`, which supplies the cancellation
 `P (α ≫ f) → P f → P α`. All uses of the localization lower shriek in the `SixFunctors`
@@ -80,6 +87,20 @@ underlying morphism is the identity. -/
 private def homToComp (h : P f) (α : LiftIndex f W) :
     W ⟶ (MorphismProperty.Over.map ⊤ h).obj (α.toOver h) :=
   MorphismProperty.Over.homMk (𝟙 W.left) ((Category.id_comp _).trans α.2)
+
+/-- A lift of `W` through `f` identifies `W` with the image of a `P`-scheme over `V` under
+the localization functor: the comparison morphism `LiftIndex.homToComp` is the identity on
+underlying schemes. -/
+private def isoComp (h : P f) (α : LiftIndex f W) :
+    W ≅ (MorphismProperty.Over.map ⊤ h).obj (α.toOver h) where
+  hom := α.homToComp h
+  inv := MorphismProperty.Over.homMk (𝟙 W.left) ((Category.id_comp _).trans α.2.symm)
+  hom_inv_id := by
+    apply MorphismProperty.Over.Hom.ext
+    exact Category.id_comp _
+  inv_hom_id := by
+    apply MorphismProperty.Over.Hom.ext
+    exact Category.id_comp _
 
 /-- The object of the comma category indexing the pointwise left Kan extension at `W`
 associated with a lift `α`; for a monomorphism `f` it is terminal, see
@@ -182,6 +203,35 @@ instance hasLeftKanExtension_op_overMap (A : Type u') [Category.{u} A] [Abelian 
     {V U : Scheme.{u}} {f : V ⟶ U} (h : P f) [Mono f] (F : (P.Over ⊤ V)ᵒᵖ ⥤ A) :
     (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F :=
   inferInstance
+
+/-- Every `P`-scheme over `U` either lies in the essential image of the localization
+functor of `h : P f`, or has empty indexing comma category: a lift of `W` through `f`
+identifies `W` with the image of a `P`-scheme over `V`, and if no lift exists the comma
+category is empty. This is the dichotomy underlying the left exactness of the
+presheaf-level lower shriek. -/
+lemma essImage_or_isEmpty_costructuredArrow_op_overMap (P : MorphismProperty Scheme.{u})
+    [P.IsMultiplicative] [P.HasOfPostcompProperty P]
+    {V U : Scheme.{u}} {f : V ⟶ U} (h : P f) (W : (P.Over ⊤ U)ᵒᵖ) :
+    (∃ W' : (P.Over ⊤ V)ᵒᵖ,
+        Nonempty ((MorphismProperty.Over.map ⊤ h).op.obj W' ≅ W)) ∨
+      IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op W) := by
+  by_cases hn : Nonempty (LiftIndex f W.unop)
+  · obtain ⟨α⟩ := hn
+    exact Or.inl ⟨op (α.toOver h), ⟨(α.isoComp h).op⟩⟩
+  · exact Or.inr (LiftIndex.isEmpty_costructuredArrow h W.unop (not_nonempty_iff.mp hn))
+
+/-- The presheaf-level left Kan extension along the opposite of the localization functor
+of `h : P f` with `f` a monomorphism is left exact: by the dichotomy
+`essImage_or_isEmpty_costructuredArrow_op_overMap` it is pointwise either an evaluation or
+a zero object. -/
+instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u} A] [Abelian A]
+    [IsGrothendieckAbelian.{u} A] (P : MorphismProperty Scheme.{u})
+    [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
+    {V U : Scheme.{u}} {f : V ⟶ U} (h : P f) [Mono f] :
+    PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
+      ((P.Over ⊤ V)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ U)ᵒᵖ ⥤ A) :=
+  Functor.preservesFiniteLimits_lan_of_essImage_or_isEmpty _
+    (essImage_or_isEmpty_costructuredArrow_op_overMap P h)
 
 end CategoryTheory.GrothendieckTopology
 
