@@ -7,7 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.Derived
-public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
@@ -20,8 +20,8 @@ since `g^*` is a left adjoint), so it induces a functor
 `(Etale.upperStar A g).mapDerivedCategory` on derived categories by applying `g^*`
 levelwise. This file records the compatibility of the total left derived functor
 `Lg^* = Etale.leftDerivedUpperStar` (defined via K-flat resolutions in
-`WeilConjectures.SixFunctors.Derived`) with this levelwise functor, by
-instantiating `WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory`,
+`WeilConjectures.SixFunctors.Derived`) with this levelwise functor, by instantiating
+`WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory`,
 and derives the consequences needed by the base-change package:
 
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`: the canonical
@@ -73,8 +73,8 @@ variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
 
 /- The K-flat resolution package on the coefficient category `A`, as in the section
 `DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`; it is transported to the
-étale sheaf categories of all schemes at once by the instances of the section
-`SheafInstances` there. -/
+étale sheaf categories of all schemes at once by the instances of the `Monoidal`
+subfolder of `WeilConjectures.CategoryTheory.GrothendieckAbelian`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
   [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]

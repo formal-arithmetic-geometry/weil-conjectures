@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.CategoryTheory.Adjunction.Triple
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
@@ -56,9 +56,9 @@ the restriction functor `j_f^*`.
   `upperStarIsoLocalizationRestriction`. Consequently
   `localizationLowerShriekUpperStarAdjunction` carries the hypotheses of both
   constructions, whereas `localizationLowerShriekAdjunction` does not.
-- The sections on `j_f^*` and the adjunction assume the continuity of the localization
-  functor as an instance hypothesis; it holds for `Q ≤ P` by `isContinuous_overMap_of_le`
-  and is found automatically for `Q = P`.
+- The continuity of the localization functor is derived from the inequality `hQP : Q ≤ P`
+  via `isContinuous_overMap_of_le`; since `Q ≤ P` is not a class, `hQP` is an explicit
+  argument of the definitions using it, and instances are provided for `Q = P`.
 
 When `f` is an open immersion (in particular a monomorphism), `j_{f!}` is the *extension by
 zero* functor. It is then fully faithful; for the small étale sites this is
@@ -71,24 +71,32 @@ zero* functor. It is then fully faithful; for the small étale sites this is
 
 set_option linter.style.show false
 
-universe w v' u' u
+universe w u' u
 
 open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace CategoryTheory
 
-variable (A : Type u') [Category.{v'} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 
 namespace GrothendieckTopology
 
-variable (P Q : MorphismProperty Scheme.{u}) [P.IsStableUnderComposition]
+/- The left Kan extensions on presheaves, the sheafification and the continuity of the
+base change functor entering the definitions below are provided by the sorried results of
+the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the following
+multiplicativity-type
+assumptions on `P` and `Q` and the inequality `hQP : Q ≤ P`; all of them hold for
+`P = Q = @Etale`. -/
+variable (P Q : MorphismProperty Scheme.{u})
+variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
+  [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
+variable (hQP : Q ≤ P)
 
 variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f)
 
 section LowerShriek
 
-variable [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A, (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F]
-variable [HasWeakSheafify (U.smallGrothendieckTopology Q (Q := P)) A]
+variable [Mono f]
 
 /-- The lower shriek `j_{f!}` along `f : V ⟶ U` with `h : P f`: left Kan extension on
 presheaves followed by sheafification, left adjoint to `localizationRestriction`. -/
@@ -102,9 +110,6 @@ end LowerShriek
 /-! ### Continuity and cocontinuity of the localization functor -/
 
 section SiteInstances
-
-variable [Q.IsStableUnderBaseChange] [Q.IsMultiplicative] [Q.RespectsIso]
-variable [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
 
 variable {P Q f}
 
@@ -163,8 +168,7 @@ lemma coverPreserving_overMap_of_le (hQP : Q ≤ P) :
     exact ⟨(MorphismProperty.Over.map ⊤ h).obj Z, (MorphismProperty.Over.map ⊤ h).map g, z,
       ⟨Z, g, 𝟙 _, hSg, (Category.id_comp _).symm⟩, hgl, hgz⟩
 
-omit [Q.IsStableUnderBaseChange] [Q.IsMultiplicative] [Q.RespectsIso]
-  [P.IsStableUnderBaseChange] in
+omit [Q.IsMultiplicative] [Q.IsStableUnderBaseChange] [P.IsStableUnderBaseChange] in
 /-- The localization functor preserves compatible families of elements. -/
 lemma compatiblePreserving_overMap :
     CompatiblePreserving.{w} (U.smallGrothendieckTopology Q (Q := P))
@@ -220,13 +224,13 @@ lemma isContinuous_overMap_of_le (hQP : Q ≤ P) :
     (coverPreserving_overMap_of_le h hQP)
 
 instance {P : MorphismProperty Scheme} {V U : Scheme} {f : V ⟶ U} (h : P f)
-    [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative] [P.RespectsIso] :
+    [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative] :
     (MorphismProperty.Over.map ⊤ h).IsCocontinuous
       (V.smallGrothendieckTopology P) (U.smallGrothendieckTopology P) :=
   isCocontinuous_overMap_of_le h le_rfl
 
 instance {P : MorphismProperty Scheme} {V U : Scheme} {f : V ⟶ U} (h : P f)
-    [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative] [P.RespectsIso] :
+    [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative] :
     (MorphismProperty.Over.map ⊤ h).IsContinuous
       (V.smallGrothendieckTopology P) (U.smallGrothendieckTopology P) :=
   isContinuous_overMap_of_le h le_rfl
@@ -235,54 +239,62 @@ end SiteInstances
 
 section Restriction
 
-variable [(MorphismProperty.Over.map ⊤ h).IsContinuous
-    (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))]
-
 /-- The restriction functor `j_f^*` along `f : V ⟶ U` with `h : P f`, given objectwise by
-`(j_f^* G)(T → V) = G(T → V → U)`. -/
+`(j_f^* G)(T → V) = G(T → V → U)`. The continuity of the localization functor is proved,
+for `Q ≤ P`, as `isContinuous_overMap_of_le` above. -/
 def localizationRestriction :
     Sheaf (U.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (V.smallGrothendieckTopology Q (Q := P)) A :=
+  have := isContinuous_overMap_of_le h hQP
   (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
     (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- The sections of `j_f^* G` over `T → V` are the sections of `G` over `T → V → U`. -/
 lemma localizationRestriction_obj_val_obj
     (G : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ V) :
-    ((localizationRestriction A P Q f h).obj G).obj.obj (op b) =
+    ((localizationRestriction A P Q hQP f h).obj G).obj.obj (op b) =
       G.obj.obj (op ((MorphismProperty.Over.map ⊤ h).obj b)) :=
   rfl
 
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
 /-- `j_f^*` acts on morphisms by whiskering along `(MorphismProperty.Over.map ⊤ h).op`. -/
 lemma localizationRestriction_map_hom_app
     {G G' : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ V) :
-    (((localizationRestriction A P Q f h).map φ).hom).app (op b) =
+    (((localizationRestriction A P Q hQP f h).map φ).hom).app (op b) =
       φ.hom.app (op ((MorphismProperty.Over.map ⊤ h).obj b)) :=
   rfl
 
 section Adjunction
 
-variable [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A, (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F]
-variable [HasWeakSheafify (U.smallGrothendieckTopology Q (Q := P)) A]
+variable [Mono f]
 
 /-- The adjunction `j_{f!} ⊣ j_f^*`. -/
 noncomputable def localizationLowerShriekAdjunction :
-    localizationLowerShriek A P Q f h ⊣ localizationRestriction A P Q f h :=
+    localizationLowerShriek A P Q f h ⊣ localizationRestriction A P Q hQP f h :=
+  have := isContinuous_overMap_of_le h hQP
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.map ⊤ h)
     A (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))
 
-instance : (localizationLowerShriek A P Q f h).IsLeftAdjoint :=
-  (localizationLowerShriekAdjunction A P Q f h).isLeftAdjoint
+include hQP in
+/-- `j_{f!}` is a left adjoint. Not an instance, since its statement does not determine
+the inequality `hQP : Q ≤ P` entering the adjunction `j_{f!} ⊣ j_f^*`; for the small
+étale sites the corresponding instance is registered in
+`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale`. -/
+lemma isLeftAdjoint_localizationLowerShriek : (localizationLowerShriek A P Q f h).IsLeftAdjoint :=
+  (localizationLowerShriekAdjunction A P Q hQP f h).isLeftAdjoint
 
-instance : (localizationRestriction A P Q f h).IsRightAdjoint :=
-  (localizationLowerShriekAdjunction A P Q f h).isRightAdjoint
+instance : (localizationRestriction A P Q hQP f h).IsRightAdjoint :=
+  (localizationLowerShriekAdjunction A P Q hQP f h).isRightAdjoint
 
 /-- The lower shriek agrees with mathlib's abstract left adjoint
 `(MorphismProperty.Over.map ⊤ h).sheafPullback` of the restriction functor. -/
 noncomputable def localizationLowerShriekIsoSheafPullback :
+    have := isContinuous_overMap_of_le h hQP
     (MorphismProperty.Over.map ⊤ h).sheafPullback A
         (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P)) ≅
       localizationLowerShriek A P Q f h :=
+  have := isContinuous_overMap_of_le h hQP
   Functor.sheafPullbackConstruction.sheafPullbackIso (MorphismProperty.Over.map ⊤ h) A
     (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))
 
@@ -292,52 +304,45 @@ end Adjunction
 
 section UpperStar
 
-variable [P.IsStableUnderBaseChange]
-variable [(MorphismProperty.Over.pullback P ⊤ f).IsContinuous
-    (U.smallGrothendieckTopology Q (Q := P)) (V.smallGrothendieckTopology Q (Q := P))]
-
 /-- Restriction along the localization functor is left adjoint to the pushforward `f_*`:
 this is the right half of the triple `j_{f!} ⊣ j_f^* ⊣ f_*`. It is induced by the
 adjunction `MorphismProperty.Over.mapPullbackAdj` between the two site functors, and in
 particular requires neither Kan extensions nor sheafification. -/
 noncomputable def localizationRestrictionLowerStarAdjunction :
-    localizationRestriction A P Q f h ⊣ lowerStar A P Q f :=
+    localizationRestriction A P Q hQP f h ⊣ lowerStar A P Q hQP f :=
+  have := isContinuous_overMap_of_le h hQP
+  have := isContinuous_overPullback P Q hQP f
   (MorphismProperty.Over.mapPullbackAdj P ⊤ f h _root_.trivial).sheafPushforwardContinuous
     (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))
 
 section
-
-variable [∀ F : (P.Over ⊤ U)ᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback P ⊤ f).op.HasLeftKanExtension F]
-variable [HasWeakSheafify (V.smallGrothendieckTopology Q (Q := P)) A]
 
 /-- For `f` satisfying `P`, the pullback `f^*` is computed by restriction along the
 localization functor: both are left adjoint to `f_*`. In particular `f^*` needs no
 sheafification in this case, and its sections are given by
 `localizationRestriction_obj_val_obj`. -/
 noncomputable def upperStarIsoLocalizationRestriction :
-    upperStar A P Q f ≅ localizationRestriction A P Q f h :=
-  (upperStarLowerStarAdjunction A P Q f).leftAdjointUniq
-    (localizationRestrictionLowerStarAdjunction A P Q f h)
+    upperStar A P Q f ≅ localizationRestriction A P Q hQP f h :=
+  (upperStarLowerStarAdjunction A P Q hQP f).leftAdjointUniq
+    (localizationRestrictionLowerStarAdjunction A P Q hQP f h)
 
-variable [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A, (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F]
-variable [HasWeakSheafify (U.smallGrothendieckTopology Q (Q := P)) A]
+variable [Mono f]
 
 /-- The adjunction `j_{f!} ⊣ f^*` between the lower shriek and the pullback, obtained from
 `localizationLowerShriekAdjunction` by transporting along
 `upperStarIsoLocalizationRestriction`. -/
 noncomputable def localizationLowerShriekUpperStarAdjunction :
     localizationLowerShriek A P Q f h ⊣ upperStar A P Q f :=
-  (localizationLowerShriekAdjunction A P Q f h).ofNatIsoRight
-    (upperStarIsoLocalizationRestriction A P Q f h).symm
+  (localizationLowerShriekAdjunction A P Q hQP f h).ofNatIsoRight
+    (upperStarIsoLocalizationRestriction A P Q hQP f h).symm
 
 /-- The adjoint triple `j_{f!} ⊣ j_f^* ⊣ f_*` on sheaves, bundling
 `localizationLowerShriekAdjunction` and `localizationRestrictionLowerStarAdjunction`. -/
 noncomputable def localizationAdjunctionTriple :
-    Adjunction.Triple (localizationLowerShriek A P Q f h) (localizationRestriction A P Q f h)
-      (lowerStar A P Q f) where
-  adj₁ := localizationLowerShriekAdjunction A P Q f h
-  adj₂ := localizationRestrictionLowerStarAdjunction A P Q f h
+    Adjunction.Triple (localizationLowerShriek A P Q f h)
+      (localizationRestriction A P Q hQP f h) (lowerStar A P Q hQP f) where
+  adj₁ := localizationLowerShriekAdjunction A P Q hQP f h
+  adj₂ := localizationRestrictionLowerStarAdjunction A P Q hQP f h
 
 end
 
@@ -349,9 +354,9 @@ end GrothendieckTopology
 
 section Presheaf
 
-variable (P : MorphismProperty Scheme.{u}) [P.IsStableUnderComposition]
-variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f)
-variable [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A, (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F]
+variable (P : MorphismProperty Scheme.{u})
+  [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
+variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f) [Mono f]
 
 /-- The presheaf-level lower shriek `j_{f,!}^{pre}`: left Kan extension along
 `(MorphismProperty.Over.map ⊤ h).op`. -/
@@ -370,10 +375,9 @@ end Presheaf
 
 namespace GrothendieckTopology
 
-variable (P Q : MorphismProperty Scheme.{u}) [P.IsStableUnderComposition]
-variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f)
-variable [∀ F : (P.Over ⊤ V)ᵒᵖ ⥤ A, (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F]
-variable [HasWeakSheafify (U.smallGrothendieckTopology Q (Q := P)) A]
+variable (P Q : MorphismProperty Scheme.{u})
+  [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
+variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f) [Mono f]
 
 /-- The lower shriek is definitionally the left Kan extension on presheaves followed by
 sheafification. -/

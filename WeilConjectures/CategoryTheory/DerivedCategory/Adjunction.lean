@@ -11,11 +11,11 @@ public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction
-public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs
-public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs
-public import WeilConjectures.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # Adjunctions of derived functors
@@ -29,7 +29,7 @@ file lifts `adj` through the stages of the derived formalism:
   respect to homotopy equivalences (which holds, in particular, for the complex shapes
   `ComplexShape.up ℤ` and `ComplexShape.down ι`); it is obtained from the adjunction
   `Adjunction.mapHomologicalComplex` between the categories of homological complexes
-  (`WeilConjectures.DerivedCategory.HomotopyCategory.Adjunction`) by descent along the
+  (`WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction`) by descent along the
   localization functors, using `Adjunction.localization`.
 * `Adjunction.derivedAdjunction`: the derived adjunction
 
@@ -40,9 +40,10 @@ file lifts `adj` through the stages of the derived formalism:
   - the source category is monoidal and admits functorial flat resolutions, and `f`
     preserves K-flat quasi-isomorphisms (`f.PreservesKFlatQuasiIso`), so that the total
     left derived functor is defined
-    (see `WeilConjectures.DerivedCategory.LeftDerivedFunctor.Defs`);
+    (see `WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs`);
   - the target category has K-injective resolutions, so that the total right derived
-    functor is defined (see `WeilConjectures.DerivedCategory.RightDerivedFunctor.Defs`).
+    functor is defined
+    (see `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs`).
 
   It is constructed by applying the abstract theorem `Adjunction.derived` to the
   adjunction `adj.mapHomotopyCategory (.up ℤ)`. The two "absoluteness" hypotheses of
