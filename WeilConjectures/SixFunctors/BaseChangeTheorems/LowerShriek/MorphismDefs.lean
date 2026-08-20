@@ -75,7 +75,7 @@ compactification `c`.
 
 @[expose] public section
 
-universe w v' u' u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Abelian
 
@@ -87,14 +87,12 @@ open Scheme
 
 section OpenImmersionExchange
 
-variable (A : Type u') [Category.{v'} A]
-
-/- Pointwise left Kan extensions and sheafification for the small étale sites of all
-schemes at once, as in `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`;
-they provide the pullback functors `Etale.upperStar` along arbitrary morphisms. -/
-variable [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
+/- For a Grothendieck abelian coefficient category `A` the pullback functors
+`Etale.upperStar` along arbitrary morphisms and the extensions by zero along open
+immersions are available without further hypotheses: sheafification and the pointwise
+left Kan extensions for the small étale sites are provided by the instances of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`. -/
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 
 section SquareComparison
 
@@ -115,7 +113,6 @@ end SquareComparison
 
 section OpenImmersionSquare
 
-variable [HasInitial A]
 variable {X Z X' Z' : Scheme.{u}}
   {j : X ⟶ Z} {ρ : Z' ⟶ Z} {j' : X' ⟶ Z'} {ρ' : X' ⟶ X}
   [IsOpenImmersion j] [IsOpenImmersion j']
@@ -179,13 +176,17 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
 
-/- Sheafification, pointwise left Kan extensions and chosen localized derived categories
-for the small étale sites of all schemes at once, following the convention of
-`WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`. -/
-variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
+/- Sheafification and pointwise left Kan extensions for the small étale sites of all
+schemes at once, following the convention of
+`WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`. The localized derived
+categories are the chosen `Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` instances
+of `WeilConjectures.SixFunctors.Derived`. -/
+variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
   [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
     (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T : Scheme.{u}), HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology A)]
+  [∀ (T S : Scheme.{u}) (φ : T ⟶ S),
+    PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ φ).op.lan :
+      (S.Etaleᵒᵖ ⥤ A) ⥤ T.Etaleᵒᵖ ⥤ A)]
 
 /- The K-flat resolution package on the coefficient category `A`, entering through the
 derived adjunctions used by the direct-image exchange `Etale.baseChange`, as in
