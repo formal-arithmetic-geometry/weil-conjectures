@@ -15,7 +15,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 This file proves the universal property of the chart-glued blow-up
 `Scheme.IdealSheafData.blowup`: a morphism `t : T ⟶ X` such that the inverse image
 ideal sheaf `I.comap t` is invertible factors uniquely through the
-blow-up of `I` (`Scheme.IdealSheafData.existsUnique_lift_blowup`, Stacks Project
+blow-up of `I` (existence: `Scheme.IdealSheafData.exists_lift_blowup`; uniqueness:
+`Scheme.IdealSheafData.hom_ext_of_isInvertible_comap`; Stacks Project
 Tag 0806; blueprint `thm:nagata-blowup-universal-property`).
 
 The proof is chart-local, with the algebraic core the universal property of the
@@ -43,9 +44,9 @@ On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
   the blow-up map (two morphisms to the blow-up over the same base map with
   invertible inverse image ideal agree), via the chart-overlap localization
   `HomogeneousLocalization.Away.isLocalization_mul`;
-- `Scheme.IdealSheafData.exists_lift_blowup` and
-  `Scheme.IdealSheafData.existsUnique_lift_blowup`: existence and uniqueness of the
-  universal lift (Stacks Project Tag 0806).
+- `Scheme.IdealSheafData.exists_lift_blowup`: existence of the universal lift
+  (Stacks Project Tag 0806); together with `hom_ext_of_isInvertible_comap` above
+  this is the universal property of blowing up.
 
 Elaboration-performance conventions follow
 `WeilConjectures.Compactification.FiniteDegree`: chart probes keep their section
@@ -1335,16 +1336,6 @@ theorem Scheme.IdealSheafData.exists_lift_blowup (I : X.IdealSheafData)
   refine ⟨𝒰.glueMorphisms l hglue, 𝒰.hom_ext _ _ fun z ↦ ?_⟩
   rw [← Category.assoc, 𝒰.ι_glueMorphisms l hglue z, hl z]
   rfl
-
-/-- **The universal property of blowing up** (Stacks Project Tag 0806; blueprint
-`thm:nagata-blowup-universal-property`): a morphism `t : T ⟶ X` such that the inverse
-image ideal sheaf `I.comap t` is invertible factors uniquely through the blow-up of
-`I`. -/
-theorem Scheme.IdealSheafData.existsUnique_lift_blowup (I : X.IdealSheafData)
-    {t : T ⟶ X} (hEC : (I.comap t).IsInvertible) :
-    ∃! h : T ⟶ I.blowup, h ≫ I.blowupMap = t := by
-  obtain ⟨h, hh⟩ := I.exists_lift_blowup hEC
-  exact ⟨h, hh, fun h' hh' ↦ I.hom_ext_of_isInvertible_comap hEC hh' hh⟩
 
 end Existence
 
