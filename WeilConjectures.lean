@@ -10,7 +10,6 @@ public import WeilConjectures.Blowup.Affine.Projective
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Complement
-public import WeilConjectures.Blowup.Exceptional
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.InvertibleCenter
@@ -32,8 +31,6 @@ public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.Compactification.SchemeTheoreticImage
-public import WeilConjectures.Compactification.SchemeTheoreticallyDense
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
