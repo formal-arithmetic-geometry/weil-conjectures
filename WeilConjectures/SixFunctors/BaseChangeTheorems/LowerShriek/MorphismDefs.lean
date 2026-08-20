@@ -176,18 +176,6 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
 
-/- Sheafification and pointwise left Kan extensions for the small étale sites of all
-schemes at once, following the convention of
-`WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`. The localized derived
-categories are the chosen `Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` instances
-of `WeilConjectures.SixFunctors.Derived`. -/
-variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
-  [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T S : Scheme.{u}) (φ : T ⟶ S),
-    PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ φ).op.lan :
-      (S.Etaleᵒᵖ ⥤ A) ⥤ T.Etaleᵒᵖ ⥤ A)]
-
 /- The K-flat resolution package on the coefficient category `A`, entering through the
 derived adjunctions used by the direct-image exchange `Etale.baseChange`, as in
 `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`. -/
