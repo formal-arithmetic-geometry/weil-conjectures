@@ -27,7 +27,7 @@ terminal object of the comma category, and if no lift exists the comma category 
 hence all pointwise left Kan extensions with values in a category with an initial object
 exist. The same dichotomy — every `W : P.Over ⊤ U` either lies in the essential image of
 the localization functor or has empty indexing comma category
-(`essImage_or_isEmpty_costructuredArrow_op_overMap`) — shows that the left Kan extension
+(`mem_essImage_or_isEmpty_costructuredArrow_op_overMap`) — shows that the left Kan extension
 is left exact for a Grothendieck abelian coefficient category
 (`preservesFiniteLimits_op_lan_overMap`): pointwise it is either an evaluation or a zero
 object. This generalizes the étale-specific arguments of
@@ -209,11 +209,10 @@ functor of `h : P f`, or has empty indexing comma category: a lift of `W` throug
 identifies `W` with the image of a `P`-scheme over `V`, and if no lift exists the comma
 category is empty. This is the dichotomy underlying the left exactness of the
 presheaf-level lower shriek. -/
-lemma essImage_or_isEmpty_costructuredArrow_op_overMap (P : MorphismProperty Scheme.{u})
+lemma mem_essImage_or_isEmpty_costructuredArrow_op_overMap (P : MorphismProperty Scheme.{u})
     [P.IsMultiplicative] [P.HasOfPostcompProperty P]
     {V U : Scheme.{u}} {f : V ⟶ U} (h : P f) (W : (P.Over ⊤ U)ᵒᵖ) :
-    (∃ W' : (P.Over ⊤ V)ᵒᵖ,
-        Nonempty ((MorphismProperty.Over.map ⊤ h).op.obj W' ≅ W)) ∨
+    (MorphismProperty.Over.map ⊤ h).op.essImage W ∨
       IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op W) := by
   by_cases hn : Nonempty (LiftIndex f W.unop)
   · obtain ⟨α⟩ := hn
@@ -222,7 +221,8 @@ lemma essImage_or_isEmpty_costructuredArrow_op_overMap (P : MorphismProperty Sch
 
 /-- The presheaf-level left Kan extension along the opposite of the localization functor
 of `h : P f` with `f` a monomorphism is left exact: by the dichotomy
-`essImage_or_isEmpty_costructuredArrow_op_overMap` it is pointwise either an evaluation or
+`mem_essImage_or_isEmpty_costructuredArrow_op_overMap` it is pointwise either an evaluation
+or
 a zero object. -/
 instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u} A] [Abelian A]
     [IsGrothendieckAbelian.{u} A] (P : MorphismProperty Scheme.{u})
@@ -231,7 +231,7 @@ instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u} A] [Ab
     PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
       ((P.Over ⊤ V)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ U)ᵒᵖ ⥤ A) :=
   Functor.preservesFiniteLimits_lan_of_essImage_or_isEmpty _
-    (essImage_or_isEmpty_costructuredArrow_op_overMap P h)
+    (mem_essImage_or_isEmpty_costructuredArrow_op_overMap P h)
 
 end CategoryTheory.GrothendieckTopology
 
