@@ -5,7 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.ReesAlgebra
 
 /-!
 
@@ -186,6 +187,14 @@ noncomputable def reesGradingZero : A ≃+* reesGrading I 0 where
 lemma coe_reesGradingZero_apply (a : A) :
     ((reesGradingZero I a : reesAlgebra I) : A[X]) = Polynomial.C a := by
   simp [reesGradingZero, Polynomial.monomial_zero_left]
+
+/-- The image of the base ring in the Rees algebra lies in the degree-zero piece. -/
+lemma algebraMap_mem_reesGrading_zero (a : A) :
+    algebraMap A (reesAlgebra I) a ∈ reesGrading I 0 := by
+  have h : algebraMap A (reesAlgebra I) a = (reesGradingZero I a : reesAlgebra I) :=
+    Subtype.ext <| by simp [Polynomial.C_eq_algebraMap]
+  rw [h]
+  exact (reesGradingZero I a).2
 
 @[simp]
 lemma coeff_zero_coe_reesGradingZero_symm (F : reesGrading I 0) :

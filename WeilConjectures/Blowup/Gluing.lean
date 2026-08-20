@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.RelativeGluing
 public import WeilConjectures.Blowup.Affine.Localization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 

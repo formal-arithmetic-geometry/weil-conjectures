@@ -9,7 +9,7 @@ public import Mathlib
 public import WeilConjectures.SixFunctors.Derived
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 
 /-!
 
@@ -58,7 +58,7 @@ compositions and its compatibility with the single functors are provided by
 
 @[expose] public section
 
-universe w u' u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Abelian
 
@@ -74,13 +74,17 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
 
-/- Sheafification, pointwise left Kan extensions and chosen localized derived categories
-for the small étale sites of all schemes at once, following the convention of
-`WeilConjectures.ConstructibleSheaf.Defs`. -/
-variable [∀ (T : Scheme.{u}), HasWeakSheafify T.smallEtaleTopology A]
+/- Sheafification and pointwise left Kan extensions for the small étale sites of all
+schemes at once, following the convention of `WeilConjectures.ConstructibleSheaf.Defs`.
+The localized derived categories are the chosen
+`Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` instances of
+`WeilConjectures.SixFunctors.Derived`. -/
+variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
   [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
     (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T : Scheme.{u}), HasDerivedCategory.{w} (Sheaf T.smallEtaleTopology A)]
+  [∀ (T S : Scheme.{u}) (φ : T ⟶ S),
+    PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ φ).op.lan :
+      (S.Etaleᵒᵖ ⥤ A) ⥤ T.Etaleᵒᵖ ⥤ A)]
 
 /- The K-flat resolution package on the coefficient category `A`, as in the sections
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of

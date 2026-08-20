@@ -5,6 +5,10 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Data.ZMod.QuotientRing
+public import Mathlib.NumberTheory.EulerProduct.DirichletLSeries
+public import Mathlib.RingTheory.Ideal.NatInt
+public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.ZetaFunction
 
 @[expose] public section
