@@ -145,8 +145,8 @@ lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
     IsOpenImmersion (I.blowupFunctor.map (homOfLE hUV)) := by
   have H : ∀ i : {W : X.affineOpens // W ≤ U ∧ ∃ g : Γ(X, V.1), W.1 = X.basicOpen g},
       IsOpenImmersion (I.blowupFunctor.map (homOfLE (i.2.1.trans hUV))) := fun i ↦
-    IsOpenImmersion.of_isPullback (I.isPullback_blowupNatTrans_of_basicOpen _ i.2.2.choose
-      i.2.2.choose_spec).flip inferInstance
+    (I.isPullback_blowupNatTrans_of_basicOpen _ i.2.2.choose
+      i.2.2.choose_spec).isOpenImmersion_fst
   apply IsZariskiLocalAtTarget.of_range_subset_iSup (P := @IsOpenImmersion)
     (fun i : {W : X.affineOpens // W ≤ U ∧ ∃ g : Γ(X, V.1), W.1 = X.basicOpen g} ↦
       (I.blowupFunctor.map (homOfLE (i.2.1.trans hUV))).opensRange)
@@ -160,8 +160,7 @@ lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
         X.basicOpen ((X.presheaf.map (homOfLE (X := X.Opens) hUV).op) g) := by
       rw [X.basicOpen_res, inf_eq_right.mpr hgU]
       rfl
-    have := IsOpenImmersion.of_isPullback
-      (I.isPullback_blowupNatTrans_of_basicOpen hWU _ hWgU).flip inferInstance
+    have := (I.isPullback_blowupNatTrans_of_basicOpen hWU _ hWgU).isOpenImmersion_fst
     have hzW : z ∈ (I.blowupFunctor.map (homOfLE hWU)).opensRange := by
       rw [(I.isPullback_blowupNatTrans_of_basicOpen hWU _ hWgU).opensRange_fst,
         Scheme.Hom.mem_preimage, mem_opensRange_homOfLE]
@@ -175,8 +174,8 @@ lemma isOpenImmersion_blowupFunctor_map {U V : X.affineOpens} (hUV : U ≤ V) :
     have hWgU : i.1.1 =
         X.basicOpen ((X.presheaf.map (homOfLE (X := X.Opens) hUV).op) g) := by
       rw [X.basicOpen_res, ← hWg, inf_eq_right.mpr (i.2.1 : i.1.1 ≤ U.1)]
-    have h1 : IsOpenImmersion (I.blowupFunctor.map (homOfLE i.2.1)) := IsOpenImmersion.of_isPullback
-      (I.isPullback_blowupNatTrans_of_basicOpen i.2.1 _ hWgU).flip inferInstance
+    have h1 : IsOpenImmersion (I.blowupFunctor.map (homOfLE i.2.1)) :=
+      (I.isPullback_blowupNatTrans_of_basicOpen i.2.1 _ hWgU).isOpenImmersion_fst
     have hcomp : homOfLE i.2.1 ≫ homOfLE hUV = homOfLE (i.2.1.trans hUV) :=
       Subsingleton.elim _ _
     have w : I.blowupFunctor.map (homOfLE i.2.1) ≫ I.blowupFunctor.map (homOfLE hUV) =
