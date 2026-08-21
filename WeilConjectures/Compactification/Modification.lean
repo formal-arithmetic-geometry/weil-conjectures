@@ -5,9 +5,9 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.Flattening
+public import WeilConjectures.Blowup.AdmissibleBlowup
+public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.PartialSection
-public import WeilConjectures.Compactification.SchemeTheoreticallyDense
 
 /-!
 
@@ -49,7 +49,7 @@ The finite-type helper lemmas of the blueprint
 
 The three existence theorems marked `sorry` await the flattening input of Stacks
 Project Tag 081S (see the module docstring of
-`WeilConjectures.Compactification.Flattening` for the status of the blow-up
+`WeilConjectures.Blowup.AdmissibleBlowup` for the status of the blow-up
 universal-property chapter they reduce to); their statements are the interfaces
 consumed by the two-open compactification theorem (proof order items 43–48).
 

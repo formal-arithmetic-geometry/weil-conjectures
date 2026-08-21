@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.SchemeTheoreticImage
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
@@ -132,12 +132,8 @@ immersion) graph of `γ`.
 theorem ker_comap_partialSectionOpenι :
     γ.ker.comap (partialSectionOpenι x y j) = (partialSection x y j γ hγ).ker := by
   haveI := quasiCompact_of_partialSection x y j γ hγ
-  rw [← Nagata.schemeImageRestrictOpen γ (partialSectionOpenι x y j)]
-  have H := isPullback_partialSection x y j γ hγ
-  have hsnd : pullback.snd γ (partialSectionOpenι x y j) =
-      H.isoPullback.inv ≫ partialSection x y j γ hγ :=
-    ((Iso.inv_comp_eq _).mpr H.isoPullback_hom_snd.symm).symm
-  rw [hsnd, Scheme.Hom.ker_comp_of_isIso]
+  exact (γ.ker_of_isPullback (partialSectionOpenι x y j)
+    (isPullback_partialSection x y j γ hγ)).symm
 
 /-- The isomorphism of `U` with the restriction of the scheme-theoretic image of a
 partial section over `U ×_S Y`: the composite of the identification of `U` with the
@@ -158,7 +154,8 @@ lemma partialSectionRestrictIso_hom_fst :
       partialSection x y j γ hγ := by
   simp only [partialSectionRestrictIso, Iso.trans_hom, asIso_hom, eqToIso.hom,
     Category.assoc, Scheme.IdealSheafData.comapIso_hom_fst]
-  rw [Nagata.subschemeι_eqToHom ((ker_comap_partialSectionOpenι x y j γ hγ).symm)]
+  rw [Scheme.IdealSheafData.subschemeι_eqToHom
+    ((ker_comap_partialSectionOpenι x y j γ hγ).symm)]
   exact (partialSection x y j γ hγ).toImage_imageι
 
 end KernelIdentity

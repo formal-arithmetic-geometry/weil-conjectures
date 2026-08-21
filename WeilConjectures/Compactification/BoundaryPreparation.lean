@@ -5,8 +5,9 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.Flattening
-public import WeilConjectures.Compactification.SchemeTheoreticallyDense
+public import WeilConjectures.Blowup.AdmissibleBlowup
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
@@ -42,7 +43,7 @@ theorem, following the blueprint chapter "Nagata compactification", sections
 
 The proof of `exists_admissibleBlowup_disjoint_closures` combines the boundary
 separation theorem `separationBlowup_disjoint_strictTransforms` of
-`WeilConjectures.Compactification.Flattening` (Stacks Tag 0F3V) with the two range
+`WeilConjectures.Blowup.AdmissibleBlowup` (Stacks Tag 0F3V) with the two range
 comparisons proved here: the strict transform of a closed center contains the whole
 inverse image of its `U`-part (`mem_range_strictTransformMap`), and is contained in
 the full inverse image of the center (`range_strictTransformMap_subset_preimage`).
@@ -62,6 +63,20 @@ namespace AlgebraicGeometry
 section DenseRefinement
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
+
+/-- A compactification `X ⟶ Z ⟶ Y` of `f : X ⟶ Y` is scheme-theoretically dense if
+`𝒪_Z ⟶ i_* 𝒪_X` is injective, i.e. if the open immersion `i : X ⟶ Z` into the
+compactification is scheme-theoretically dominant.
+(Blueprint: `def:nagata-dense-compactification`.) -/
+def Compactification.IsSchemeTheoreticallyDense (c : Compactification f) : Prop :=
+  IsSchemeTheoreticallyDominant c.i
+
+/-- A compactification is scheme-theoretically dense if and only if the inclusion of
+the scheme-theoretic image of its open immersion is an isomorphism.
+(Blueprint: `lemma:nagata-dense-compactification-characterization`.) -/
+theorem Compactification.isSchemeTheoreticallyDense_iff (c : Compactification f) :
+    c.IsSchemeTheoreticallyDense ↔ IsIso c.i.imageι :=
+  isSchemeTheoreticallyDominant_iff_isIso_imageι c.i
 
 /-- The **scheme-theoretically dense refinement** of a compactification of a
 quasi-compact morphism: replace the ambient scheme by the scheme-theoretic image of
@@ -290,8 +305,10 @@ theorem exists_admissibleBlowup_disjoint_closures
   obtain ⟨J₂, hJ₂ft, hJ₂supp⟩ := U.toScheme.exists_finiteType_ideal_zeroLocus_compl_qcOpen
     ⟨T₂ᶜ, hT₂.isOpen_compl⟩ hc₂
   -- extend them to finite-type ideals on `X`
-  obtain ⟨I₁, hI₁ft, hI₁comap⟩ := X.exists_finiteType_ideal_extension U hU J₁ hJ₁ft
-  obtain ⟨I₂, hI₂ft, hI₂comap⟩ := X.exists_finiteType_ideal_extension U hU J₂ hJ₂ft
+  obtain ⟨I₁, hI₁ft, hI₁comap⟩ :=
+    Scheme.IdealSheafData.exists_finiteType_comap_eq U hU J₁ hJ₁ft
+  obtain ⟨I₂, hI₂ft, hI₂comap⟩ :=
+    Scheme.IdealSheafData.exists_finiteType_comap_eq U hU J₂ hJ₂ft
   -- the supports of the extensions restrict to `T₁`, `T₂` on `U`
   have hpre₁ : U.ι ⁻¹' (I₁.support : Set X) = T₁ := by
     have h1 : ((I₁.comap U.ι).support : Set U.toScheme) =
