@@ -16,6 +16,12 @@ The tensor unit and tensor products of constant functors are computed objectwise
 constant functor `Functor.const C : D ⥤ C ⥤ D` is a monoidal functor, with structure
 isomorphisms whose components are identities. We record this as an instance
 `(Functor.const C).Monoidal`.
+
+When `D` is moreover braided, the braiding on `C ⥤ D` is computed objectwise as well
+(`CategoryTheory.Monoidal.functorCategoryBraided`), so the constant functor is a braided
+functor; this is the instance `(Functor.const C).Braided`. Since a symmetric monoidal
+functor is by definition a braided functor between symmetric monoidal categories, this
+also covers the symmetric case.
 -/
 
 @[expose] public section
@@ -67,5 +73,14 @@ lemma const_μ_app (X Y : D) (c : C) : (μ (const C : D ⥤ C ⥤ D) X Y).app c 
 
 @[simp]
 lemma const_δ_app (X Y : D) (c : C) : (δ (const C : D ⥤ C ⥤ D) X Y).app c = 𝟙 (X ⊗ Y) := rfl
+
+/-- The constant functor `D ⥤ C ⥤ D` into a functor category over a braided monoidal
+category is braided: the braiding on the functor category is computed objectwise, and
+the structure morphisms of `Functor.const C` have identity components. -/
+instance [BraidedCategory D] : (const C : D ⥤ C ⥤ D).Braided where
+  braided X Y := by
+    ext c
+    change 𝟙 _ ≫ (β_ X Y).hom = (β_ X Y).hom ≫ 𝟙 _
+    simp
 
 end CategoryTheory.Functor

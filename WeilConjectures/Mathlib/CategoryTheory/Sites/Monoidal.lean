@@ -20,6 +20,11 @@ see `WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory`) with the
 sheafification functor `presheafToSheaf J A` (monoidal by the monoidal localization
 theory, see `Mathlib.CategoryTheory.Sites.Monoidal`).
 
+When `A` is moreover braided and `Sheaf J A` carries the braided structure
+`Sheaf.braidedCategory`, the constant sheaf functor is braided, by the same composition.
+Since a symmetric monoidal functor is by definition a braided functor between symmetric
+monoidal categories, this also covers the symmetric case.
+
 This file imports both `Mathlib.CategoryTheory.Sites.ConstantSheaf` and
 `Mathlib.CategoryTheory.Sites.Monoidal` since neither imports the other.
 -/
@@ -38,5 +43,16 @@ attribute [local instance] Sheaf.monoidalCategory
 
 noncomputable instance : (constantSheaf J A).Monoidal :=
   inferInstanceAs (Functor.const Cᵒᵖ ⋙ presheafToSheaf J A).Monoidal
+
+section BraidedCategory
+
+variable [BraidedCategory A]
+
+attribute [local instance] Sheaf.braidedCategory
+
+noncomputable instance : (constantSheaf J A).Braided :=
+  inferInstanceAs (Functor.const Cᵒᵖ ⋙ presheafToSheaf J A).Braided
+
+end BraidedCategory
 
 end CategoryTheory
