@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
@@ -33,6 +34,11 @@ Moreover, if `F G : C ⥤ D` are functors between monoidal categories, `F` is la
 and `i : F ≅ G`, then with respect to the transported lax monoidal structure
 `CategoryTheory.Functor.LaxMonoidal.transport i` on `G`, the natural transformation
 `i.hom` is monoidal (`CategoryTheory.Functor.LaxMonoidal.transport_isMonoidal_hom`).
+
+We also prove the uniqueness half of doctrinal adjunction: if two monoidal functors are
+left adjoint to the same lax monoidal functor via monoidal adjunctions, then the canonical
+isomorphism between them is a monoidal natural isomorphism
+(`CategoryTheory.Adjunction.isMonoidal_leftAdjointUniq_hom`).
 -/
 
 @[expose] public section
@@ -113,5 +119,39 @@ lemma transport_isMonoidal_hom {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) :
   simp [transport_μ, tensorHom_comp_tensorHom_assoc]
 
 end Functor.LaxMonoidal
+
+/-! ### Uniqueness of monoidal left adjoints -/
+
+namespace Adjunction
+
+variable {F F' : C ⥤ D} {G : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F' ⊣ G)
+
+omit [MonoidalCategory C] [MonoidalCategory D] in
+/-- `Adjunction.leftAdjointUniq` is (definitionally) the inverse conjugate of the identity
+natural transformation. -/
+lemma leftAdjointUniq_hom_eq_conjugateEquiv_symm_id :
+    (adj1.leftAdjointUniq adj2).hom = (conjugateEquiv adj2 adj1).symm (𝟙 G) :=
+  rfl
+
+variable [F.Monoidal] [F'.Monoidal] [G.LaxMonoidal] [adj1.IsMonoidal] [adj2.IsMonoidal]
+
+/-- Uniqueness of monoidal left adjoints: if two monoidal functors `F` and `F'` are left
+adjoint to the same lax monoidal functor `G` via monoidal adjunctions, then the canonical
+isomorphism `adj1.leftAdjointUniq adj2 : F ≅ F'` is a monoidal natural isomorphism. -/
+instance isMonoidal_leftAdjointUniq_hom :
+    NatTrans.IsMonoidal (adj1.leftAdjointUniq adj2).hom where
+  unit := by
+    rw [← cancel_mono (η F'), Category.assoc, leftAdjointUniq_hom_eq_conjugateEquiv_symm_id,
+      conjugateEquiv_symm_app_unit_comp_η, Functor.Monoidal.ε_η, Functor.Monoidal.ε_η]
+  tensor X Y := by
+    rw [← cancel_mono (δ F' X Y), Category.assoc, Category.assoc,
+      leftAdjointUniq_hom_eq_conjugateEquiv_symm_id, conjugateEquiv_symm_app_tensor_comp_δ,
+      Functor.Monoidal.μ_δ_assoc, Functor.Monoidal.μ_δ, Category.comp_id]
+
+/-- The inverse of the canonical isomorphism between two monoidal left adjoints is monoidal
+as well, by the general instance for inverses of monoidal natural isomorphisms. -/
+example : NatTrans.IsMonoidal (adj1.leftAdjointUniq adj2).inv := inferInstance
+
+end Adjunction
 
 end CategoryTheory
