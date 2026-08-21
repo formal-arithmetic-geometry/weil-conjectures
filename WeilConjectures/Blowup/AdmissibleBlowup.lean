@@ -28,9 +28,10 @@ module flattening is needed, so no flattening statements are formalized here.
 
 ## Definitions
 
-- `AlgebraicGeometry.AdmissibleBlowup`: a `U`-admissible blow-up datum: a finite-type
-  quasi-coherent ideal whose support is disjoint from `U`, together with a morphism
-  identified with the blow-up of that ideal (blueprint: `def:nagata-admissible-blowup`);
+- `AlgebraicGeometry.IsAdmissible`: a `U`-admissible blow-up center: a finite-type
+  quasi-coherent ideal whose support is disjoint from `U`; the associated
+  `U`-admissible blow-up is the blow-up of that ideal
+  (blueprint: `def:nagata-admissible-blowup`);
 - `AlgebraicGeometry.separationBlowup`: the boundary-separation blow-up of the sum of
   two center ideals (revised blueprint: `def:nagata-separate-closed-subschemes`).
 
@@ -44,8 +45,8 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap`
 
 ## Proved results
 
-- `AlgebraicGeometry.AdmissibleBlowup.isIso_π_restrict`: a `U`-admissible blow-up is an
-  isomorphism over `U` (blueprint: `lemma:nagata-admissible-blowup-over-open`);
+- `AlgebraicGeometry.IsAdmissible.isIso_blowupMap_restrict`: a `U`-admissible blow-up
+  is an isomorphism over `U` (blueprint: `lemma:nagata-admissible-blowup-over-open`);
 - `AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary` and its fully proved
   locally Noetherian instance
   `exists_admissibleBlowup_cartierBoundary_of_isLocallyNoetherian`: preparation of a
@@ -59,7 +60,7 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap`
   induction `Scheme.IdealSheafData.exists_finiteType_le_comap_eq` of
   `WeilConjectures.Compactification.FiniteTypeExtension` (Stacks Tag 01PF) inside the
   vanishing ideal of the reduced boundary;
-- `AdmissibleBlowup.exists_comp`: a composite of admissible blow-ups is an admissible
+- `IsAdmissible.exists_comp`: a composite of admissible blow-ups is an admissible
   blow-up (`lemma:nagata-admissible-blowup-comp`, Stacks Tag 080L), derived — via the
   image/preimage disjointness of the composite center — from the composition theorem
   for arbitrary blow-ups `Scheme.IdealSheafData.exists_blowup_comp` below;
@@ -95,9 +96,8 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap`
 The finite-degree approximation on the blow-up itself
 (`Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup`, Stacks Tag 0803,
 `lemma:nagata-proj-closed-center-finite-degree-exists`) is proved in
-`WeilConjectures.Blowup.FiniteDegree`; its transport to an abstractly
-identified total space (`exists_finiteDegree_center_le`) and the support formula of
-the full finite-degree statement (`coe_support_eq_of_comap_pow_mul`) are proved here.
+`WeilConjectures.Blowup.FiniteDegree`; the support formula of the full finite-degree
+statement (`coe_support_eq_of_comap_pow_mul`) is proved here.
 
 The universal property of blowing up (Stacks Tag 0806) and the invertibility
 kit (`exists_lift_blowup`, `hom_ext_of_isInvertible_comap`,
@@ -121,13 +121,12 @@ namespace AlgebraicGeometry
 
 variable (X : Scheme.{u}) (U : X.Opens)
 
-/-- A `U`-admissible blow-up datum on `X`: a finite-type quasi-coherent ideal sheaf `I`
-whose support is disjoint from `U` (equivalently, `I` restricts to the unit ideal on
-`U`), together with a morphism `π : X' ⟶ X` satisfying the universal property of
-blowing up `I` (Stacks Project Tag 0806); in particular `π` is identified with the
-blow-up of `I` over `X` by `Scheme.IdealSheafData.IsBlowup.isoBlowup`.
+/-- A `U`-admissible blow-up center on `X`: a finite-type quasi-coherent ideal sheaf
+`I` whose support is disjoint from `U` (equivalently, `I` restricts to the unit ideal
+on `U`). The associated `U`-admissible blow-up is the blow-up `I.blowup` of the center,
+with structure morphism `I.blowupMap`.
 (Blueprint: `def:nagata-admissible-blowup`.) -/
-structure AdmissibleBlowup where
+structure IsAdmissible where
   /-- The center ideal of the blow-up. -/
   I : X.IdealSheafData
   /-- The center is a finite-type ideal sheaf. -/
@@ -135,31 +134,10 @@ structure AdmissibleBlowup where
   /-- The center is disjoint from the preserved open `U`; equivalently `I` restricts to
   the unit ideal on `U`. -/
   disjoint_support : Disjoint (U : Set X) (I.support : Set X)
-  /-- The total space of the admissible blow-up. -/
-  X' : Scheme.{u}
-  /-- The structure morphism of the admissible blow-up. -/
-  π : X' ⟶ X
-  /-- The structure morphism satisfies the universal property of blowing up the
-  center. -/
-  isBlowup : I.IsBlowup π
 
-namespace AdmissibleBlowup
+namespace IsAdmissible
 
-variable {X U}
-
-/-- The tautological `U`-admissible blow-up attached to a finite-type ideal sheaf whose
-support is disjoint from `U`: the blow-up of the ideal itself. -/
-@[simps I X' π]
-def ofIdeal (I : X.IdealSheafData) (hft : I.ofFiniteType)
-    (hdisj : Disjoint (U : Set X) (I.support : Set X)) : AdmissibleBlowup X U where
-  I := I
-  finiteType := hft
-  disjoint_support := hdisj
-  X' := I.blowup
-  π := I.blowupMap
-  isBlowup := I.isBlowup_blowupMap
-
-variable (B : AdmissibleBlowup X U)
+variable {X U} (B : IsAdmissible X U)
 
 /-- The complement of the center of an admissible blow-up, i.e. the open locus over
 which the blow-up is tautologically an isomorphism. The preserved open `U` is contained
@@ -170,71 +148,19 @@ lemma le_preservedOpen : U ≤ B.preservedOpen := by
   intro x hx
   exact Set.disjoint_left.mp B.disjoint_support hx
 
-/-- **A `U`-admissible blow-up is proper**: transport of the properness of the blow-up
-(`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
-`thm:nagata-global-blowup-proper`) across the identification with the blow-up of the
-center supplied by the universal property. -/
-theorem isProper_π : IsProper B.π := by
-  rw [← B.isBlowup.isoBlowup_hom_comp_blowupMap,
-    MorphismProperty.cancel_left_of_respectsIso (P := @IsProper)]
-  exact B.I.isProper_blowupMap fun U ↦ B.finiteType U le_top
+/-- **A `U`-admissible blow-up is proper**: the properness of the blow-up of the
+center (`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
+`thm:nagata-global-blowup-proper`), the finite-typeness input being supplied by
+admissibility. -/
+theorem isProper_blowupMap : IsProper B.I.blowupMap :=
+  B.I.isProper_blowupMap fun U ↦ B.finiteType U le_top
 
-/-- Pullback of an ideal sheaf along a morphism identified with a blow-up factors
-through pullback along the blow-up structure morphism. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.comap_eq_comap_comap_of_comp_eq
-    {X X₁ : Scheme.{u}} {I : X.IdealSheafData} {π : X₁ ⟶ X} {g : X₁ ≅ I.blowup}
-    (hg : g.hom ≫ I.blowupMap = π) (J : X.IdealSheafData) :
-    J.comap π = (J.comap I.blowupMap).comap g.hom := by
-  rw [← Scheme.IdealSheafData.comap_comp, hg]
-
-/-- Transport of the principalization theorem
-(`Scheme.IdealSheafData.isInvertible_comap_blowupMap`): the inverse image of the center
-along a morphism identified with its blow-up is invertible. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_comap_of_comp_eq
-    {X X₁ : Scheme.{u}} {I : X.IdealSheafData} {π : X₁ ⟶ X} {g : X₁ ≅ I.blowup}
-    (hg : g.hom ≫ I.blowupMap = π) : (I.comap π).IsInvertible := by
-  rw [Scheme.IdealSheafData.comap_eq_comap_comap_of_comp_eq hg]
-  exact I.isInvertible_comap_blowupMap.comap_of_isOpenImmersion g.hom
-
-/-- Transport of the blow-up complement theorem
-(`thm:nagata-global-blowup-complement`): a morphism identified with the blow-up of `I`
-is an isomorphism over every open disjoint from the support of `I`. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.isIso_restrict_of_comp_eq
-    {X X₁ : Scheme.{u}} {I : X.IdealSheafData} {π : X₁ ⟶ X} {g : X₁ ≅ I.blowup}
-    (hg : g.hom ≫ I.blowupMap = π) {V : X.Opens}
-    (hV : Disjoint (V : Set X) (I.support : Set X)) : IsIso (π ∣_ V) := by
-  rw [← hg, morphismRestrict_comp]
-  have h1 : IsIso (g.hom ∣_ I.blowupMap ⁻¹ᵁ V) := inferInstance
-  have h2 : IsIso (I.blowupMap ∣_ V) := I.isIso_blowupMap_restrict hV
-  exact IsIso.comp_isIso' h1 h2
-
-/-- A `U`-admissible blow-up is an isomorphism over `U`. This transports the blow-up
-complement theorem (`thm:nagata-global-blowup-complement`) across the identification
-with the blow-up of the center supplied by the universal property.
+/-- A `U`-admissible blow-up is an isomorphism over `U`: the blow-up complement
+theorem (`thm:nagata-global-blowup-complement`) applied to the disjointness of the
+center from `U`.
 (Blueprint: `lemma:nagata-admissible-blowup-over-open`.) -/
-theorem isIso_π_restrict : IsIso (B.π ∣_ U) :=
-  Scheme.IdealSheafData.isIso_restrict_of_comp_eq
-    B.isBlowup.isoBlowup_hom_comp_blowupMap B.disjoint_support
-
-/-- **Finite-degree approximation of a second blow-up center** (the core of Stacks
-Project Tag 0803): transport of `exists_finiteDegree_center_le_blowup` along the chosen
-identification of the total space with the blow-up. -/
-theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_center_le
-    {X X₁ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    (I : X.IdealSheafData) (hI : I.ofFiniteType) {π : X₁ ⟶ X} (g : X₁ ≅ I.blowup)
-    (hg : g.hom ≫ I.blowupMap = π) (J : X₁.IdealSheafData) (hJ : J.ofFiniteType) :
-    ∃ (d : ℕ) (L : X.IdealSheafData), 0 < d ∧ L.ofFiniteType ∧ L ≤ I ^ d ∧
-      L.comap π = (I.comap π) ^ d * J := by
-  obtain ⟨d, L, hd, hLft, hLle, hLcomap⟩ :=
-    Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup I hI (J.comap g.inv)
-      (hJ.comap_of_isOpenImmersion g.inv)
-  refine ⟨d, L, hd, hLft, hLle, ?_⟩
-  rw [Scheme.IdealSheafData.comap_eq_comap_comap_of_comp_eq hg L,
-    Scheme.IdealSheafData.comap_eq_comap_comap_of_comp_eq hg I, hLcomap,
-    Scheme.IdealSheafData.comap_mul_of_isOpenImmersion,
-    Scheme.IdealSheafData.comap_pow_of_isOpenImmersion]
-  congr 1
-  rw [← Scheme.IdealSheafData.comap_comp, Iso.hom_inv_id, Scheme.IdealSheafData.comap_id]
+theorem isIso_blowupMap_restrict : IsIso (B.I.blowupMap ∣_ U) :=
+  B.I.isIso_blowupMap_restrict B.disjoint_support
 
 /-- **The support of a finite-degree center** (the support computation in the proofs of
 Stacks Project Tags 0803/080B): if `L ≤ I^d` (`d ≥ 1`) is an ideal sheaf whose inverse
@@ -244,23 +170,23 @@ inverse image ideal is `π⁻¹(supp I) ∪ supp J`, which gives `π(supp J) ⊆
 away from `supp I` the blow-up is an isomorphism, under which `L` cuts out exactly
 `supp J`. -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_of_comap_pow_mul
-    {X X₁ : Scheme.{u}} (I : X.IdealSheafData) {π : X₁ ⟶ X} (g : X₁ ≅ I.blowup)
-    (hg : g.hom ≫ I.blowupMap = π) (J : X₁.IdealSheafData) {d : ℕ} (hd : d ≠ 0)
-    {L : X.IdealSheafData} (hle : L ≤ I ^ d)
-    (hcomap : L.comap π = (I.comap π) ^ d * J) :
-    (L.support : Set X) = (I.support : Set X) ∪ π '' (J.support : Set X₁) := by
+    {X : Scheme.{u}} (I : X.IdealSheafData) (J : I.blowup.IdealSheafData) {d : ℕ}
+    (hd : d ≠ 0) {L : X.IdealSheafData} (hle : L ≤ I ^ d)
+    (hcomap : L.comap I.blowupMap = (I.comap I.blowupMap) ^ d * J) :
+    (L.support : Set X) =
+      (I.support : Set X) ∪ I.blowupMap '' (J.support : Set I.blowup) := by
   set U₀ : X.Opens := I.support.compl with hU₀def
+  set π := I.blowupMap with hπdef
   -- the blow-up is an isomorphism over the complement of the support of `I`
   haveI hiso : IsIso (π ∣_ U₀) :=
-    Scheme.IdealSheafData.isIso_restrict_of_comp_eq hg
-      (by rw [hU₀def]; simpa using disjoint_compl_left)
+    I.isIso_blowupMap_restrict (by rw [hU₀def]; simpa using disjoint_compl_left)
   -- the support identity upstairs
-  have hsupp₁ : (π ⁻¹' (L.support : Set X) : Set X₁) =
-      π ⁻¹' (I.support : Set X) ∪ (J.support : Set X₁) := by
-    have h1 : ((L.comap π).support : Set X₁) = π ⁻¹' (L.support : Set X) := by
+  have hsupp₁ : (π ⁻¹' (L.support : Set X) : Set I.blowup) =
+      π ⁻¹' (I.support : Set X) ∪ (J.support : Set I.blowup) := by
+    have h1 : ((L.comap π).support : Set I.blowup) = π ⁻¹' (L.support : Set X) := by
       rw [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage]
-    have h2 : ((((I.comap π) ^ d) * J).support : Set X₁) =
-        π ⁻¹' (I.support : Set X) ∪ (J.support : Set X₁) := by
+    have h2 : ((((I.comap π) ^ d) * J).support : Set I.blowup) =
+        π ⁻¹' (I.support : Set X) ∪ (J.support : Set I.blowup) := by
       rw [Scheme.IdealSheafData.support_mul, TopologicalSpace.Closeds.coe_sup,
         Scheme.IdealSheafData.support_pow _ _ hd, Scheme.IdealSheafData.support_comap,
         TopologicalSpace.Closeds.coe_preimage]
@@ -306,23 +232,25 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_of_comap_p
 together with the support computation of the proof of Tag 080B; blueprint
 `lemma:nagata-proj-closed-center-finite-degree-exists`,
 `lemma:nagata-composition-center-ideal`): given a finite-type center `I` on a qcqs
-scheme `X` with blow-up `π : X₁ ⟶ X` and a finite-type center `J` on `X₁`, there are a
-positive degree `d` and a finite-type ideal `L ≤ I ^ d` on `X` such that the support of
-`L` is `supp I ∪ π(supp J)` and the inverse image ideal of `L` on `X₁` is `I_E^d · J`.
+scheme `X` with blow-up `π = I.blowupMap` and a finite-type center `J` on `I.blowup`,
+there are a positive degree `d` and a finite-type ideal `L ≤ I ^ d` on `X` such that
+the support of `L` is `supp I ∪ π(supp J)` and the inverse image ideal of `L` on the
+blow-up is `I_E^d · J`.
 
-This combines the finite-degree approximation `exists_finiteDegree_center_le`
+This combines the finite-degree approximation `exists_finiteDegree_center_le_blowup`
 (Tag 0803) with the support computation `coe_support_eq_of_comap_pow_mul`. -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_center
-    {X X₁ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    (I : X.IdealSheafData) (hI : I.ofFiniteType) {π : X₁ ⟶ X} (g : X₁ ≅ I.blowup)
-    (hg : g.hom ≫ I.blowupMap = π) (J : X₁.IdealSheafData) (hJ : J.ofFiniteType) :
+    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    (I : X.IdealSheafData) (hI : I.ofFiniteType) (J : I.blowup.IdealSheafData)
+    (hJ : J.ofFiniteType) :
     ∃ (d : ℕ) (L : X.IdealSheafData), 0 < d ∧ L.ofFiniteType ∧ L ≤ I ^ d ∧
-      (L.support : Set X) = (I.support : Set X) ∪ π '' (J.support : Set X₁) ∧
-      L.comap π = (I.comap π) ^ d * J := by
+      (L.support : Set X) =
+        (I.support : Set X) ∪ I.blowupMap '' (J.support : Set I.blowup) ∧
+      L.comap I.blowupMap = (I.comap I.blowupMap) ^ d * J := by
   obtain ⟨d, L, hd, hLft, hLle, hLcomap⟩ :=
-    Scheme.IdealSheafData.exists_finiteDegree_center_le I hI g hg J hJ
+    Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup I hI J hJ
   exact ⟨d, L, hd, hLft, hLle,
-    Scheme.IdealSheafData.coe_support_eq_of_comap_pow_mul I g hg J hd.ne' hLle hLcomap,
+    Scheme.IdealSheafData.coe_support_eq_of_comap_pow_mul I J hd.ne' hLle hLcomap,
     hLcomap⟩
 
 /-- **Blow-up of a product ideal** (Stacks Project Tag 080A; blueprint
@@ -337,20 +265,19 @@ through the universal property of blowing up
 `Scheme.IdealSheafData.hom_ext_of_isInvertible_comap`, Stacks Project Tag 0806): on the
 iterated blow-up the pullback of `I * L` is invertible, giving `α`; on the blow-up of
 `I * L` the pullbacks of `I` and of `L` are invertible by the factor lemma
-(`IsInvertible.of_mul_left/right`), giving the lift `β` to `X₁` and then
+(`IsInvertible.of_mul_left/right`), giving the lift `β` to `I.blowup` and then
 `γ` to the iterated blow-up; the two composites are identities by the uniqueness of
 lifts. -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
-    {X X₁ : Scheme.{u}} (I : X.IdealSheafData) {π : X₁ ⟶ X} (g : X₁ ≅ I.blowup)
-    (hg : g.hom ≫ I.blowupMap = π) (L : X.IdealSheafData) :
-    ∃ e : (I * L).blowup ≅ (L.comap π).blowup,
-      e.hom ≫ (L.comap π).blowupMap ≫ π = (I * L).blowupMap := by
-  -- notation: the second blow-up `q`, the iterated map `ρ` and the product blow-up `c`
+    {X : Scheme.{u}} (I L : X.IdealSheafData) :
+    ∃ e : (I * L).blowup ≅ (L.comap I.blowupMap).blowup,
+      e.hom ≫ (L.comap I.blowupMap).blowupMap ≫ I.blowupMap = (I * L).blowupMap := by
+  -- notation: the first blow-up `π`, the second blow-up `q` and the product blow-up `c`
+  set π := I.blowupMap with hπ
   set q := (L.comap π).blowupMap with hq
   set c := (I * L).blowupMap with hc
-  -- the pullback of `I` to `X₁` is invertible
-  have hE1 : (I.comap π).IsInvertible :=
-    Scheme.IdealSheafData.isInvertible_comap_of_comp_eq hg
+  -- the pullback of `I` to the blow-up is invertible
+  have hE1 : (I.comap π).IsInvertible := I.isInvertible_comap_blowupMap
   -- hence so is its further pullback along the second blow-up
   have hE3 : ((I.comap π).comap q).IsInvertible :=
     hE1.comap_blowupMap (L.comap π)
@@ -376,35 +303,32 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
     Scheme.IdealSheafData.IsInvertible.of_mul_left hprod
   have hLc : (L.comap c).IsInvertible :=
     Scheme.IdealSheafData.IsInvertible.of_mul_right hprod
-  obtain ⟨β₀, hβ₀⟩ := I.exists_lift_blowup hIc
-  -- the lift `β` of the product blow-up to `X₁`
-  have hβπ : (β₀ ≫ g.inv) ≫ π = c := by
-    rw [Category.assoc, ← hg, Iso.inv_hom_id_assoc, hβ₀]
+  -- the lift `β` of the product blow-up to the blow-up of `I`
+  obtain ⟨β, hβ⟩ := I.exists_lift_blowup hIc
   -- Step 3: the pullback of `L.comap π` along `β` is invertible
-  have hLβ : ((L.comap π).comap (β₀ ≫ g.inv)).IsInvertible := by
-    have h6 : (L.comap π).comap (β₀ ≫ g.inv) = L.comap c := by
-      rw [← Scheme.IdealSheafData.comap_comp, hβπ]
+  have hLβ : ((L.comap π).comap β).IsInvertible := by
+    have h6 : (L.comap π).comap β = L.comap c := by
+      rw [← Scheme.IdealSheafData.comap_comp, hβ]
     rw [h6]
     exact hLc
   obtain ⟨γ, hγ⟩ := (L.comap π).exists_lift_blowup hLβ
   -- Step 4: the two composites are identities, by uniqueness of lifts
   have hγα : γ ≫ α = 𝟙 (I * L).blowup := by
     refine (I * L).hom_ext_of_isInvertible_comap hECc ?_ (Category.id_comp c)
-    rw [Category.assoc, hα, ← Category.assoc, hγ, hβπ]
-  have hαβ₀ : α ≫ β₀ = q ≫ g.hom := by
+    rw [Category.assoc, hα, ← Category.assoc, hγ, hβ]
+  have hαβ : α ≫ β = q := by
     have hEρ : (I.comap (q ≫ π)).IsInvertible := by
       rw [Scheme.IdealSheafData.comap_comp]
       exact hE3
     refine I.hom_ext_of_isInvertible_comap hEρ ?_ ?_
-    · rw [Category.assoc, hβ₀, hα]
-    · rw [Category.assoc, hg]
+    · rw [Category.assoc, hβ, hα]
+    · exact congrArg (CategoryStruct.comp q) hπ.symm
   have hαγ : α ≫ γ = 𝟙 (L.comap π).blowup := by
     refine (L.comap π).hom_ext_of_isInvertible_comap hE2 ?_ (Category.id_comp q)
-    rw [Category.assoc, hγ, ← Category.assoc, hαβ₀, Category.assoc, Iso.hom_inv_id,
-      Category.comp_id]
+    rw [Category.assoc, hγ, hαβ]
   refine ⟨⟨γ, α, hγα, hαγ⟩, ?_⟩
   change γ ≫ q ≫ π = c
-  rw [← Category.assoc, hγ, hβπ]
+  rw [← Category.assoc, hγ, hβ]
 
 /-- **Multiplying a center by an invertible ideal does not change the blow-up**
 (consequence of Stacks Project Tags 0807 and 080A; blueprint
@@ -448,11 +372,10 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_isInver
   exact ⟨⟨β, α, hβα, hαβ⟩, hβ⟩
 
 /-- **Composition of blow-ups** (Stacks Project Tag 080B), interface form: on a qcqs
-scheme `X`, given a finite-type center `I` with blow-up `π : X₁ ⟶ X` (identified with
-`I.blowup` by `g`) and a finite-type center `J` on the total space `X₁`, there is a
-single finite-type center `K` on `X` whose support is the union of the support of `I`
-and the image of the support of `J`, and whose blow-up is isomorphic over `X` to the
-blow-up of `J`.
+scheme `X`, given a finite-type center `I` with blow-up `π = I.blowupMap` and a
+finite-type center `J` on the total space `I.blowup`, there is a single finite-type
+center `K` on `X` whose support is the union of the support of `I` and the image of
+the support of `J`, and whose blow-up is isomorphic over `X` to the blow-up of `J`.
 
 The composite center is `K = I * L` with `L` the finite-degree descent of `J`
 (`Scheme.IdealSheafData.exists_finiteDegree_center`, Stacks Tag 0803): `K` is finite
@@ -461,68 +384,66 @@ type as a product of finite-type ideals, its support is
 the product comparison (`exists_blowup_mul_iso`, Tag 080A) followed by removal of the
 invertible exceptional factor `(I.comap π)^d` of the inverse image ideal
 `L.comap π = (I.comap π)^d * J` (`exists_blowup_mul_isInvertible_iso`, Tag 0807),
-the exceptional ideal being invertible by the principalization theorem
-transported along `g`.
+the exceptional ideal being invertible by the principalization theorem.
 (Blueprint: `thm:nagata-composition-of-blowups`.) -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp
-    {X X₁ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    (I : X.IdealSheafData) (hI : I.ofFiniteType) {π : X₁ ⟶ X} (g : X₁ ≅ I.blowup)
-    (hg : g.hom ≫ I.blowupMap = π) (J : X₁.IdealSheafData) (hJ : J.ofFiniteType) :
+    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    (I : X.IdealSheafData) (hI : I.ofFiniteType) (J : I.blowup.IdealSheafData)
+    (hJ : J.ofFiniteType) :
     ∃ K : X.IdealSheafData, K.ofFiniteType ∧
-      (K.support : Set X) = (I.support : Set X) ∪ π '' (J.support : Set X₁) ∧
-      ∃ e : K.blowup ≅ J.blowup, e.hom ≫ J.blowupMap ≫ π = K.blowupMap := by
+      (K.support : Set X) =
+        (I.support : Set X) ∪ I.blowupMap '' (J.support : Set I.blowup) ∧
+      ∃ e : K.blowup ≅ J.blowup,
+        e.hom ≫ J.blowupMap ≫ I.blowupMap = K.blowupMap := by
   obtain ⟨d, L, -, hLft, -, hLsupp, hLpull⟩ :=
-    Scheme.IdealSheafData.exists_finiteDegree_center I hI g hg J hJ
+    Scheme.IdealSheafData.exists_finiteDegree_center I hI J hJ
   refine ⟨I * L, hI.mul hLft, ?_, ?_⟩
   · -- support of the product center
     rw [Scheme.IdealSheafData.support_mul, TopologicalSpace.Closeds.coe_sup, hLsupp,
       ← Set.union_assoc, Set.union_self]
   · -- comparison of the blow-ups
-    obtain ⟨e₁, he₁⟩ := Scheme.IdealSheafData.exists_blowup_mul_iso I g hg L
+    obtain ⟨e₁, he₁⟩ := Scheme.IdealSheafData.exists_blowup_mul_iso I L
     -- the exceptional ideal is invertible, hence so is its `d`-th power
-    have hEC : ((I.comap π) ^ d).IsInvertible :=
-      (Scheme.IdealSheafData.isInvertible_comap_of_comp_eq hg).pow d
+    have hEC : ((I.comap I.blowupMap) ^ d).IsInvertible :=
+      I.isInvertible_comap_blowupMap.pow d
     obtain ⟨e₂, he₂⟩ :=
       Scheme.IdealSheafData.exists_blowup_mul_isInvertible_iso hEC J
     refine ⟨e₁ ≪≫ eqToIso (congrArg Scheme.IdealSheafData.blowup hLpull) ≪≫ e₂, ?_⟩
     calc (e₁ ≪≫ eqToIso (congrArg Scheme.IdealSheafData.blowup hLpull) ≪≫ e₂).hom ≫
-          J.blowupMap ≫ π
+          J.blowupMap ≫ I.blowupMap
         = e₁.hom ≫ eqToHom (congrArg Scheme.IdealSheafData.blowup hLpull) ≫
-            (e₂.hom ≫ J.blowupMap) ≫ π := by
+            (e₂.hom ≫ J.blowupMap) ≫ I.blowupMap := by
           simp only [Iso.trans_hom, eqToIso.hom, Category.assoc]
       _ = e₁.hom ≫ (eqToHom (congrArg Scheme.IdealSheafData.blowup hLpull) ≫
-            ((I.comap π) ^ d * J).blowupMap) ≫ π := by
+            ((I.comap I.blowupMap) ^ d * J).blowupMap) ≫ I.blowupMap := by
           rw [he₂, Category.assoc]
-      _ = e₁.hom ≫ (L.comap π).blowupMap ≫ π := by
+      _ = e₁.hom ≫ (L.comap I.blowupMap).blowupMap ≫ I.blowupMap := by
           rw [Scheme.IdealSheafData.eqToHom_comp_blowupMap hLpull]
       _ = (I * L).blowupMap := he₁
 
 /-- **Composition of admissible blow-ups** (Stacks Project Tag 080L): for `X` qcqs,
 the composite of a `U`-admissible blow-up of `X` with a `π⁻¹(U)`-admissible blow-up of
 its total space is again a `U`-admissible blow-up of `X`: there is a `U`-admissible
-center `K` on `X` and an identification `iso` of `B₂.X'` with the blow-up of `K` under
-which the blow-up structure morphism is the composite `B₂.π ≫ B₁.π`. In particular
-`⟨K, hft, hdisj, B₂.X', B₂.π ≫ B₁.π, K.isBlowup_blowupMap.of_comp_eq iso hiso⟩ :
-AdmissibleBlowup X U` exhibits the composite morphism itself as a `U`-admissible
-blow-up. Stacks Tag 080L assumes `U` quasi-compact; the formal proof needs no such
-hypothesis.
+center `K` on `X` and an identification `iso` of the total space `B₂.I.blowup` of the
+second blow-up with the blow-up of `K`, under which the blow-up structure morphism of
+`K` is the composite `B₂.I.blowupMap ≫ B₁.I.blowupMap`. Stacks Tag 080L assumes `U`
+quasi-compact; the formal proof needs no such hypothesis.
 
 The proof applies the composition theorem for arbitrary blow-ups
 (`Scheme.IdealSheafData.exists_blowup_comp`, Stacks Tag 080B): the composite center
 `K` has support `|Z| ∪ π₁(|Z'|)`; the first part misses `U` by admissibility of `B₁`,
 and the second part misses `U` because a point of `π₁(|Z'|) ∩ U` would lift to a point
 of `|Z'| ∩ π₁⁻¹(U)`, contradicting admissibility of `B₂`. Hence `K` is a `U`-admissible
-center, and the over-`X` isomorphism supplied by the composition theorem, composed with
-the identification of `B₂` supplied by the universal property, identifies `B₂.X'` with
-the blow-up of `K` over `X`.
+center, and the over-`X` isomorphism supplied by the composition theorem identifies
+`B₂.I.blowup` with the blow-up of `K` over `X`.
 (Blueprint: `lemma:nagata-admissible-blowup-comp`.) -/
 theorem exists_comp [CompactSpace X] [QuasiSeparatedSpace X]
-    (B₁ : AdmissibleBlowup X U) (B₂ : AdmissibleBlowup B₁.X' (B₁.π ⁻¹ᵁ U)) :
+    (B₁ : IsAdmissible X U) (B₂ : IsAdmissible B₁.I.blowup (B₁.I.blowupMap ⁻¹ᵁ U)) :
     ∃ K : X.IdealSheafData, K.ofFiniteType ∧ Disjoint (U : Set X) (K.support : Set X) ∧
-      ∃ iso : B₂.X' ≅ K.blowup, iso.hom ≫ K.blowupMap = B₂.π ≫ B₁.π := by
+      ∃ iso : B₂.I.blowup ≅ K.blowup,
+        iso.hom ≫ K.blowupMap = B₂.I.blowupMap ≫ B₁.I.blowupMap := by
   obtain ⟨K, hKft, hKsupp, e', he'⟩ :=
-    Scheme.IdealSheafData.exists_blowup_comp B₁.I B₁.finiteType B₁.isBlowup.isoBlowup
-      B₁.isBlowup.isoBlowup_hom_comp_blowupMap B₂.I B₂.finiteType
+    Scheme.IdealSheafData.exists_blowup_comp B₁.I B₁.finiteType B₂.I B₂.finiteType
   -- admissibility of the composite center: `(|Z| ∪ π₁(|Z'|)) ∩ U = ∅`
   have hdisj : Disjoint (U : Set X) (K.support : Set X) := by
     rw [Set.disjoint_left]
@@ -531,14 +452,12 @@ theorem exists_comp [CompactSpace X] [QuasiSeparatedSpace X]
     rcases hxK with hxI | ⟨x', hx', rfl⟩
     · exact Set.disjoint_left.mp B₁.disjoint_support hxU hxI
     · exact Set.disjoint_left.mp B₂.disjoint_support
-        (show x' ∈ ((B₁.π ⁻¹ᵁ U : B₁.X'.Opens) : Set B₁.X') from hxU) hx'
-  refine ⟨K, hKft, hdisj, B₂.isBlowup.isoBlowup ≪≫ e'.symm, ?_⟩
-  have h2 : e'.inv ≫ K.blowupMap = B₂.I.blowupMap ≫ B₁.π := by
-    rw [← he', Iso.inv_hom_id_assoc]
-  rw [Iso.trans_hom, Iso.symm_hom, Category.assoc, h2, ← Category.assoc,
-    B₂.isBlowup.isoBlowup_hom_comp_blowupMap]
+        (show x' ∈ ((B₁.I.blowupMap ⁻¹ᵁ U : B₁.I.blowup.Opens) :
+          Set B₁.I.blowup) from hxU) hx'
+  refine ⟨K, hKft, hdisj, e'.symm, ?_⟩
+  rw [Iso.symm_hom, ← he', Iso.inv_hom_id_assoc]
 
-end AdmissibleBlowup
+end IsAdmissible
 
 variable {X U}
 
@@ -603,12 +522,12 @@ exactly on the boundary — the complement of the preimage of `U`. -/
 theorem exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl
     (I : X.IdealSheafData) (hft : I.ofFiniteType)
     (hsupp : (I.support : Set X) = (U : Set X)ᶜ) :
-    ∃ (B : AdmissibleBlowup X U) (J : B.X'.IdealSheafData), J.IsInvertible ∧
-      (J.support : Set B.X') = ((B.π ⁻¹ᵁ U) : Set B.X')ᶜ := by
+    ∃ (B : IsAdmissible X U) (J : B.I.blowup.IdealSheafData), J.IsInvertible ∧
+      (J.support : Set B.I.blowup) = ((B.I.blowupMap ⁻¹ᵁ U) : Set B.I.blowup)ᶜ := by
   have hdisj : Disjoint (U : Set X) (I.support : Set X) := by
     rw [hsupp]
     exact disjoint_compl_right
-  refine ⟨.ofIdeal I hft hdisj, I.comap I.blowupMap,
+  refine ⟨⟨I, hft, hdisj⟩, I.comap I.blowupMap,
     I.isInvertible_comap_blowupMap, ?_⟩
   change ((I.comap I.blowupMap).support : Set I.blowup) =
     ((I.blowupMap ⁻¹ᵁ U : I.blowup.Opens) : Set I.blowup)ᶜ
@@ -623,8 +542,8 @@ support of an effective Cartier ideal.
 (Blueprint: `lemma:nagata-cartier-boundary-preparation`; proof order item 24.) -/
 theorem exists_admissibleBlowup_cartierBoundary [CompactSpace X] [QuasiSeparatedSpace X]
     (hU : IsCompact (U : Set X)) :
-    ∃ (B : AdmissibleBlowup X U) (J : B.X'.IdealSheafData), J.IsInvertible ∧
-      (J.support : Set B.X') = ((B.π ⁻¹ᵁ U) : Set B.X')ᶜ := by
+    ∃ (B : IsAdmissible X U) (J : B.I.blowup.IdealSheafData), J.IsInvertible ∧
+      (J.support : Set B.I.blowup) = ((B.I.blowupMap ⁻¹ᵁ U) : Set B.I.blowup)ᶜ := by
   obtain ⟨I, hft, hsupp⟩ := X.exists_finiteType_ideal_coe_support_eq_compl U hU
   exact exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl I hft hsupp
 
@@ -638,8 +557,8 @@ This is the instance needed for the Noetherian compactification theorem
 (Blueprint: `lemma:nagata-cartier-boundary-preparation`; proof order item 24.) -/
 theorem exists_admissibleBlowup_cartierBoundary_of_isLocallyNoetherian
     [IsLocallyNoetherian X] :
-    ∃ (B : AdmissibleBlowup X U) (J : B.X'.IdealSheafData), J.IsInvertible ∧
-      (J.support : Set B.X') = ((B.π ⁻¹ᵁ U) : Set B.X')ᶜ := by
+    ∃ (B : IsAdmissible X U) (J : B.I.blowup.IdealSheafData), J.IsInvertible ∧
+      (J.support : Set B.I.blowup) = ((B.I.blowupMap ⁻¹ᵁ U) : Set B.I.blowup)ᶜ := by
   obtain ⟨I, hft, hsupp⟩ :=
     X.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetherian U
   exact exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl I hft hsupp
@@ -659,9 +578,9 @@ over `U` acquire disjoint strict transforms after blowing up the sum of their id
 ideals of two finite-type centers whose common support is disjoint from `U`. -/
 def separationBlowup (I₁ I₂ : X.IdealSheafData) (h₁ : I₁.ofFiniteType) (h₂ : I₂.ofFiniteType)
     (hdisj : Disjoint (U : Set X) ((I₁.support : Set X) ∩ (I₂.support : Set X))) :
-    AdmissibleBlowup X U :=
-  .ofIdeal (I₁ ⊔ I₂) (h₁.sup h₂)
-    (hdisj.mono_right (Scheme.IdealSheafData.coe_support_sup I₁ I₂).subset)
+    IsAdmissible X U :=
+  ⟨I₁ ⊔ I₂, h₁.sup h₂,
+    hdisj.mono_right (Scheme.IdealSheafData.coe_support_sup I₁ I₂).subset⟩
 
 /-- **Compactness of the complement of the support** of a finite-type ideal sheaf on a
 quasi-compact scheme: on each member of a finite affine cover the complement is the
