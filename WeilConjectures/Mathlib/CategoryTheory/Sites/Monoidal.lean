@@ -5,15 +5,30 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
-# Lax monoidal structure on the pushforward of sheaves
+# Monoidal properties of categories of sheaves
 
-Let `F : C ⥤ D` be a functor which is continuous with respect to Grothendieck topologies
-`J` on `C` and `K` on `D`, and let `A` be a monoidal category such that the monoidal
-category structures on `Sheaf J A` and `Sheaf K A` obtained by localization
+If `A` is a closed symmetric monoidal category with suitable limits and `J` is a
+Grothendieck topology with `HasWeakSheafify J A`, the category of presheaves `Cᵒᵖ ⥤ A`
+is closed symmetric monoidal, sheafification `presheafToSheaf J A` is monoidal for the
+localized monoidal structure `Sheaf.monoidalCategory`, and `sheafToPresheaf J A` is fully
+faithful. Day's reflection theorem (`Monoidal.Reflective.monoidalClosed`) then shows that
+the localized monoidal structure on `Sheaf J A` is closed.
+
+## Main definitions
+
+- `CategoryTheory.Sheaf.monoidalClosed`: the monoidal category structure on `Sheaf J A`
+  obtained in `Sheaf.monoidalCategory` is closed.
+
+Like `Sheaf.monoidalCategory` itself, this is not made a global instance.
+
+Moreover, let `F : C ⥤ D` be a functor which is continuous with respect to Grothendieck
+topologies `J` on `C` and `K` on `D`, and let `A` be a monoidal category such that the
+monoidal category structures on `Sheaf J A` and `Sheaf K A` obtained by localization
 (`CategoryTheory.Sheaf.monoidalCategory`) are available.
 
 We show:
@@ -40,6 +55,27 @@ structure, which is strong under suitable hypotheses) are the subject of future 
 @[expose] public section
 
 universe v₁ v₂ v₃ u₁ u₂ u₃
+
+namespace CategoryTheory.Sheaf
+
+open Enriched.FunctorCategory MonoidalClosed MonoidalClosed.FunctorCategory
+
+variable {C : Type u₁} [Category.{v₁} C] (J : GrothendieckTopology C)
+  (A : Type u₃) [Category.{v₃} A] [MonoidalCategory A] [SymmetricCategory A]
+  [MonoidalClosed A] [HasWeakSheafify J A]
+  [∀ (F₁ F₂ : Cᵒᵖ ⥤ A), HasFunctorEnrichedHom A F₁ F₂]
+  [∀ (F₁ F₂ : Cᵒᵖ ⥤ A), HasEnrichedHom A F₁ F₂]
+
+attribute [local instance] monoidalCategory
+
+/-- The monoidal category structure on `Sheaf J A` obtained in `Sheaf.monoidalCategory`
+is closed, by Day's reflection theorem applied to the reflective adjunction
+`sheafificationAdjunction J A`. -/
+@[implicit_reducible]
+noncomputable def monoidalClosed : MonoidalClosed (Sheaf J A) :=
+  Monoidal.Reflective.monoidalClosed (sheafificationAdjunction J A)
+
+end CategoryTheory.Sheaf
 
 namespace CategoryTheory
 
