@@ -47,13 +47,7 @@ On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
   `HomogeneousLocalization.Away.isLocalization_mul`;
 - `Scheme.IdealSheafData.exists_lift_blowup`: existence of the universal lift
   (Stacks Project Tag 0806); together with `hom_ext_of_isInvertible_comap` above
-  this is the universal property of blowing up;
-- `Scheme.IdealSheafData.IsBlowup`: the universal property as a predicate on a
-  morphism `π : X₁ ⟶ X`, satisfied by the blow-up structure morphism
-  (`Scheme.IdealSheafData.isBlowup_blowupMap`), invariant under isomorphisms over `X`
-  (`Scheme.IdealSheafData.IsBlowup.of_comp_eq`), and conversely identifying any
-  morphism satisfying it with the chart-glued blow-up over `X`
-  (`Scheme.IdealSheafData.IsBlowup.isoBlowup`).
+  this is the universal property of blowing up.
 
 Elaboration-performance conventions follow
 `WeilConjectures.Compactification.FiniteDegree`: chart probes keep their section
