@@ -15,17 +15,25 @@ compatible with given (lax) monoidal structures on `F` and `G` (`adj.IsMonoidal`
 This is an instance of doctrinal adjunction: braidedness on one side of the adjunction
 transposes to the other side.
 
+We also prove that braidedness descends along an essentially surjective braided functor:
+if `H : C ⥤ D` is braided and essentially surjective, `F : D ⥤ E` is lax monoidal and the
+composite `H ⋙ F` is lax braided (with respect to the composite lax monoidal structure),
+then `F` is lax braided.
+
 ## Main definitions
 
 - `CategoryTheory.Adjunction.leftAdjointBraided`: if `F` is monoidal and `G` is lax
   braided, then `F` is braided.
 - `CategoryTheory.Adjunction.rightAdjointLaxBraided`: if `F` is braided and `G` is lax
   monoidal, then `G` is lax braided.
+- `CategoryTheory.Functor.LaxBraided.ofPrecompEssSurj` (and the strong version
+  `CategoryTheory.Functor.Braided.ofPrecompEssSurj`): braidedness descends along an
+  essentially surjective braided functor.
 -/
 
 @[expose] public section
 
-universe v₁ v₂ u₁ u₂
+universe v₁ v₂ v₃ u₁ u₂ u₃
 
 namespace CategoryTheory.Adjunction
 
@@ -77,3 +85,53 @@ def rightAdjointLaxBraided : G.LaxBraided where
 end RightAdjoint
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Functor
+
+open MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] [BraidedCategory D]
+  {E : Type u₃} [Category.{v₃} E] [MonoidalCategory E] [BraidedCategory E]
+
+/-- Braidedness descends along an essentially surjective braided functor: if `H : C ⥤ D`
+is braided and essentially surjective, `F : D ⥤ E` is lax monoidal, and the composite
+`H ⋙ F` satisfies the lax braided axiom with respect to the composite lax monoidal
+structure, then `F` is lax braided. -/
+@[implicit_reducible]
+def LaxBraided.ofPrecompEssSurj (H : C ⥤ D) (F : D ⥤ E) [H.Braided] [H.EssSurj]
+    [F.LaxMonoidal]
+    (h : ∀ X Y : C, μ (H ⋙ F) X Y ≫ (H ⋙ F).map (β_ X Y).hom =
+      (β_ ((H ⋙ F).obj X) ((H ⋙ F).obj Y)).hom ≫ μ (H ⋙ F) Y X) :
+    F.LaxBraided where
+  braided X Y := by
+    -- the braided axiom for `F` at objects in the image of `H`
+    have key : ∀ X' Y' : C,
+        μ F (H.obj X') (H.obj Y') ≫ F.map (β_ (H.obj X') (H.obj Y')).hom =
+          (β_ (F.obj (H.obj X')) (F.obj (H.obj Y'))).hom ≫ μ F (H.obj Y') (H.obj X') := by
+      intro X' Y'
+      have h' := h X' Y'
+      simp only [comp_map, comp_μ, Category.assoc] at h'
+      rw [← F.map_comp, Functor.LaxBraided.braided, F.map_comp] at h'
+      rw [← cancel_mono (F.map (μ H Y' X'))]
+      simp only [Category.assoc]
+      exact h'
+    -- transport along the isomorphisms `H.obj (H.objPreimage _) ≅ _`
+    rw [← cancel_epi
+      (F.map (H.objObjPreimageIso X).hom ⊗ₘ F.map (H.objObjPreimageIso Y).hom),
+      μ_natural_assoc, ← F.map_comp, BraidedCategory.braiding_naturality, F.map_comp,
+      reassoc_of% key (H.objPreimage X) (H.objPreimage Y),
+      BraidedCategory.braiding_naturality_assoc, μ_natural]
+
+/-- Braidedness descends along an essentially surjective braided functor: if `H : C ⥤ D`
+is braided and essentially surjective, `F : D ⥤ E` is monoidal, and the composite `H ⋙ F`
+satisfies the lax braided axiom with respect to the composite lax monoidal structure,
+then `F` is braided. -/
+@[implicit_reducible]
+def Braided.ofPrecompEssSurj (H : C ⥤ D) (F : D ⥤ E) [H.Braided] [H.EssSurj] [F.Monoidal]
+    (h : ∀ X Y : C, μ (H ⋙ F) X Y ≫ (H ⋙ F).map (β_ X Y).hom =
+      (β_ ((H ⋙ F).obj X) ((H ⋙ F).obj Y)).hom ≫ μ (H ⋙ F) Y X) :
+    F.Braided where
+  braided := (LaxBraided.ofPrecompEssSurj H F h).braided
+
+end CategoryTheory.Functor
