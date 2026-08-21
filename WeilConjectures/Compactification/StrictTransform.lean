@@ -46,7 +46,12 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
   `U`, the open locus is canonically `Y ×_X U`;
 - `AlgebraicGeometry.isPullback_strictTransform_over`: the combination of the previous
   two, identifying the part of the strict transform lying over `U` with the ordinary base
-  change `Y ×_X U` (blueprint: `lemma:nagata-strict-transform-over-complement`).
+  change `Y ×_X U` (blueprint: `lemma:nagata-strict-transform-over-complement`);
+- `AlgebraicGeometry.ker_strictTransformMap`: when the inclusion of the open locus is
+  quasi-compact, the strict transform and its open locus have the same scheme-theoretic
+  image in `X'`, since the factorization of the open locus through the strict transform
+  is scheme-theoretically dominant
+  (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`).
 
 -/
 
@@ -121,6 +126,30 @@ instance [LocallyOfFiniteType f] : LocallyOfFiniteType (strictTransformMap f π 
 lemma ker_strictTransformι :
     (strictTransformι f π U).ker = ((strictTransformOpen f π U).ι).ker :=
   Scheme.IdealSheafData.ker_subschemeι _
+
+section SchemeTheoreticImage
+
+variable [QuasiCompact (strictTransformOpen f π U).ι]
+
+/-- The factorization of the open locus through the strict transform is
+scheme-theoretically dominant: the strict transform is by definition the
+scheme-theoretic image of that inclusion. -/
+instance : IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
+  inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
+
+/-- **The strict transform and its open locus have the same scheme-theoretic image in
+`X'`**: precomposing the projection `strictTransform f π U ⟶ X'` with the
+scheme-theoretically dominant factorization of the open locus does not change the
+kernel ideal sheaf. This is the half of the transport of scheme-theoretic images along
+an admissible blow-up (Stacks Project Tag 0F3Y) that is pure strict-transform theory.
+(Blueprint: `lemma:nagata-scheme-image-transport-strict-transform`.) -/
+theorem ker_strictTransformMap :
+    (strictTransformMap f π U).ker =
+      ((strictTransformOpen f π U).ι ≫ pullback.snd f π).ker := by
+  rw [← strictTransformFactor_ι, Category.assoc, strictTransformMap]
+  exact (Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _).symm
+
+end SchemeTheoreticImage
 
 section OverComplement
 
