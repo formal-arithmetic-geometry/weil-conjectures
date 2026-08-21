@@ -13,8 +13,10 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 
 /-!
 # Monoidal properties of categories of sheaves
@@ -99,7 +101,9 @@ localization theory, see `Mathlib.CategoryTheory.Sites.Monoidal`).
 
 For an abelian monoidal category `A` whose tensor product is additive in each variable and
 `HasSheafify J A`, the localized monoidal structure is moreover compatible with the
-preadditive structure on `Sheaf J A` (`CategoryTheory.Sheaf.monoidalPreadditive`): tensoring
+preadditive structure on `Sheaf J A` (`CategoryTheory.Sheaf.monoidalPreadditive`) — and,
+when `A` is moreover `R`-linear with `R`-linear tensor product, with the `R`-linear
+structure (`CategoryTheory.Sheaf.monoidalLinear`): tensoring
 with a fixed sheaf `X` is, up to a natural isomorphism, computed by tensoring the underlying
 presheaves and sheafifying (`Sheaf.tensorLeftIso`/`Sheaf.tensorRightIso`), so additivity
 transfers from the pointwise tensor product of presheaves.
@@ -400,5 +404,24 @@ instance monoidalPreadditive : MonoidalPreadditive (Sheaf J A) where
   zero_whiskerRight {X Y Z} := (tensorRight X).map_zero Y Z
   whiskerLeft_add {X _ _} _ _ := (tensorLeft X).map_add
   add_whiskerRight {X _ _} _ _ := (tensorRight X).map_add
+
+section Linear
+
+variable (R : Type*) [Semiring R] [Linear R A] [MonoidalLinear R A]
+
+noncomputable instance (X : Sheaf J A) : (tensorLeft X).Linear R :=
+  Functor.linear_of_iso R (tensorLeftIso X).symm
+
+noncomputable instance (X : Sheaf J A) : (tensorRight X).Linear R :=
+  Functor.linear_of_iso R (tensorRightIso X).symm
+
+/-- The monoidal category structure on `Sheaf J A` obtained in `Sheaf.monoidalCategory`
+is `R`-linear when `A` is an abelian `R`-linear monoidal category with `R`-linear tensor
+product. -/
+instance monoidalLinear : MonoidalLinear R (Sheaf J A) where
+  whiskerLeft_smul X {_ _} r f := (tensorLeft X).map_smul r f
+  smul_whiskerRight r {_ _} f X := (tensorRight X).map_smul r f
+
+end Linear
 
 end CategoryTheory.Sheaf
