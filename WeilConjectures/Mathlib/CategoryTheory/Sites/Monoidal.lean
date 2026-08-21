@@ -5,8 +5,10 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-!
 # Lax monoidal structure on the pushforward of sheaves
@@ -35,6 +37,16 @@ isomorphism.
 
 The dual statements for the pullback functor `F.sheafPullback A J K` (an oplax monoidal
 structure, which is strong under suitable hypotheses) are the subject of future work.
+
+Moreover, when `F` exhibits `(C, J)` as a dense subsite of `(D, K)` and `A` is a
+concrete category for which `J.W` and `K.W` agree with the classes of locally bijective
+morphisms of presheaves, we upgrade the lax monoidal structure on the restriction
+functor `F.sheafPushforwardContinuous A J K` to a strong monoidal one
+(`CategoryTheory.Functor.IsDenseSubsite.sheafPushforwardContinuousMonoidal`) and record
+two transport results: monoidality of `W` ascends from the dense subsite to the big site
+(`CategoryTheory.Functor.IsDenseSubsite.isMonoidal_W`), and monoidal closedness
+transports across the restriction functor whenever it is an equivalence
+(`CategoryTheory.Functor.IsDenseSubsite.monoidalClosed`).
 -/
 
 @[expose] public section
@@ -91,5 +103,107 @@ noncomputable instance sheafPushforwardContinuousLaxMonoidal :
     (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A)
 
 end Functor
+
+section
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
+
+/-- The unit of the lax monoidal structure on `sheafToPresheaf J A` becomes an
+isomorphism after sheafification. -/
+lemma GrothendieckTopology.W_ε_sheafToPresheaf : J.W (ε (sheafToPresheaf J A)) := by
+  rw [J.W_iff]
+  exact IsIso.of_isIso_fac_right
+    ((sheafificationAdjunction J A).map_ε_comp_counit_app_unit)
+
+/-- The tensorator of the lax monoidal structure on `sheafToPresheaf J A` becomes an
+isomorphism after sheafification. -/
+lemma GrothendieckTopology.W_μ_sheafToPresheaf (F₁ F₂ : Sheaf J A) :
+    J.W (μ (sheafToPresheaf J A) F₁ F₂) := by
+  rw [J.W_iff]
+  exact IsIso.of_isIso_fac_right
+    ((sheafificationAdjunction J A).map_μ_comp_counit_app_tensor F₁ F₂)
+
+end
+
+namespace Functor.IsDenseSubsite
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal
+
+universe w'
+
+variable {FA : A → A → Type*} {CA : A → Type w'}
+variable [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{w'} A FA]
+variable [hFd : F.IsDenseSubsite J K]
+variable [hJW : J.WEqualsLocallyBijective A] [hKW : K.WEqualsLocallyBijective A]
+
+include F hFd hJW hKW in
+/-- If `F` exhibits `(C, J)` as a dense subsite of `(D, K)` and the class `J.W` of
+morphisms of presheaves on `C` inverted by sheafification is monoidal, then so is
+the corresponding class `K.W` on `D`. -/
+lemma isMonoidal_W [(J.W (A := A)).IsMonoidal] : (K.W (A := A)).IsMonoidal := by
+  rw [← GrothendieckTopology.W_inverseImage_whiskeringLeft_of_isDenseSubsite F J K A]
+  infer_instance
+
+variable [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
+  [(K.W (A := A)).IsMonoidal] [HasWeakSheafify K A]
+
+instance : IsIso (ε (F.sheafPushforwardContinuous A J K)) := by
+  have e : ε (F.sheafPushforwardContinuous A J K) =
+      ε ((sheafToPresheaf K A ⋙ (whiskeringLeft Cᵒᵖ Dᵒᵖ A).obj F.op) ⋙ presheafToSheaf J A) ≫
+        (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A).hom.app (𝟙_ (Sheaf K A)) :=
+    rfl
+  rw [e, Functor.LaxMonoidal.comp_ε, Functor.LaxMonoidal.comp_ε, Functor.map_comp]
+  haveI : IsIso ((presheafToSheaf J A).map
+      (((whiskeringLeft Cᵒᵖ Dᵒᵖ A).obj F.op).map (ε (sheafToPresheaf K A)))) :=
+    (J.W_iff _).1 ((GrothendieckTopology.W_whiskerLeft_iff_of_isDenseSubsite F J K _).2
+      (K.W_ε_sheafToPresheaf A))
+  infer_instance
+
+instance (F₁ F₂ : Sheaf K A) : IsIso (μ (F.sheafPushforwardContinuous A J K) F₁ F₂) := by
+  have e : μ (F.sheafPushforwardContinuous A J K) F₁ F₂ =
+      ((F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A).inv.app F₁ ⊗ₘ
+        (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A).inv.app F₂) ≫
+      μ ((sheafToPresheaf K A ⋙ (whiskeringLeft Cᵒᵖ Dᵒᵖ A).obj F.op) ⋙ presheafToSheaf J A)
+        F₁ F₂ ≫
+      (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A).hom.app (F₁ ⊗ F₂) :=
+    rfl
+  rw [e, Functor.LaxMonoidal.comp_μ, Functor.LaxMonoidal.comp_μ, Functor.map_comp]
+  haveI : IsIso ((presheafToSheaf J A).map
+      (((whiskeringLeft Cᵒᵖ Dᵒᵖ A).obj F.op).map (μ (sheafToPresheaf K A) F₁ F₂))) :=
+    (J.W_iff _).1 ((GrothendieckTopology.W_whiskerLeft_iff_of_isDenseSubsite F J K _).2
+      (K.W_μ_sheafToPresheaf A F₁ F₂))
+  infer_instance
+
+/-- The restriction functor to a dense subsite is strong monoidal with respect to the
+monoidal category structures on sheaves obtained by localization: the unit and the
+tensorator of its lax monoidal structure
+(`CategoryTheory.Functor.sheafPushforwardContinuousLaxMonoidal`) are isomorphisms.
+
+This is not made a global instance in order not to compete with the lax monoidal
+structure it refines; its underlying lax monoidal structure is definitionally the
+existing instance. -/
+@[implicit_reducible]
+noncomputable def sheafPushforwardContinuousMonoidal :
+    (F.sheafPushforwardContinuous A J K).Monoidal :=
+  Functor.Monoidal.ofLaxMonoidal _
+
+example : (sheafPushforwardContinuousMonoidal F J K A).toLaxMonoidal =
+    F.sheafPushforwardContinuousLaxMonoidal J K A :=
+  rfl
+
+/-- Monoidal closedness transports along the restriction to a dense subsite whenever
+the restriction functor is an equivalence (which holds for instance for
+one-hypercover-dense functors, see
+`CategoryTheory.Functor.isEquivalence_of_isOneHypercoverDense`). -/
+@[implicit_reducible]
+noncomputable def monoidalClosed [(F.sheafPushforwardContinuous A J K).IsEquivalence]
+    [MonoidalClosed (Sheaf J A)] : MonoidalClosed (Sheaf K A) :=
+  letI := sheafPushforwardContinuousMonoidal F J K A
+  MonoidalClosed.ofEquiv (F.sheafPushforwardContinuous A J K)
+    (F.sheafPushforwardContinuous A J K).asEquivalence.toAdjunction
+
+end Functor.IsDenseSubsite
 
 end CategoryTheory
