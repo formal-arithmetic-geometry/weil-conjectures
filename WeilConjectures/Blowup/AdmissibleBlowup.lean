@@ -123,8 +123,9 @@ variable (X : Scheme.{u}) (U : X.Opens)
 
 /-- A `U`-admissible blow-up datum on `X`: a finite-type quasi-coherent ideal sheaf `I`
 whose support is disjoint from `U` (equivalently, `I` restricts to the unit ideal on
-`U`), together with a morphism `π : X' ⟶ X` and an identification of `π` with the
-blow-up of `I` over `X`.
+`U`), together with a morphism `π : X' ⟶ X` satisfying the universal property of
+blowing up `I` (Stacks Project Tag 0806); in particular `π` is identified with the
+blow-up of `I` over `X` by `Scheme.IdealSheafData.IsBlowup.isoBlowup`.
 (Blueprint: `def:nagata-admissible-blowup`.) -/
 structure AdmissibleBlowup where
   /-- The center ideal of the blow-up. -/
@@ -138,10 +139,9 @@ structure AdmissibleBlowup where
   X' : Scheme.{u}
   /-- The structure morphism of the admissible blow-up. -/
   π : X' ⟶ X
-  /-- The identification of the total space with the blow-up of the center. -/
-  iso : X' ≅ I.blowup
-  /-- The identification is a morphism over `X`. -/
-  iso_π : iso.hom ≫ I.blowupMap = π
+  /-- The structure morphism satisfies the universal property of blowing up the
+  center. -/
+  isBlowup : I.IsBlowup π
 
 namespace AdmissibleBlowup
 
@@ -157,8 +157,7 @@ def ofIdeal (I : X.IdealSheafData) (hft : I.ofFiniteType)
   disjoint_support := hdisj
   X' := I.blowup
   π := I.blowupMap
-  iso := Iso.refl _
-  iso_π := Category.id_comp _
+  isBlowup := I.isBlowup_blowupMap
 
 variable (B : AdmissibleBlowup X U)
 
@@ -173,10 +172,11 @@ lemma le_preservedOpen : U ≤ B.preservedOpen := by
 
 /-- **A `U`-admissible blow-up is proper**: transport of the properness of the blow-up
 (`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
-`thm:nagata-global-blowup-proper`) across the chosen identification with the blow-up
-of the center. -/
+`thm:nagata-global-blowup-proper`) across the identification with the blow-up of the
+center supplied by the universal property. -/
 theorem isProper_π : IsProper B.π := by
-  rw [← B.iso_π, MorphismProperty.cancel_left_of_respectsIso (P := @IsProper)]
+  rw [← B.isBlowup.isoBlowup_hom_comp_blowupMap,
+    MorphismProperty.cancel_left_of_respectsIso (P := @IsProper)]
   exact B.I.isProper_blowupMap fun U ↦ B.finiteType U le_top
 
 /-- Pullback of an ideal sheaf along a morphism identified with a blow-up factors
@@ -209,11 +209,12 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.isIso_restrict_of_comp_eq
   exact IsIso.comp_isIso' h1 h2
 
 /-- A `U`-admissible blow-up is an isomorphism over `U`. This transports the blow-up
-complement theorem (`thm:nagata-global-blowup-complement`) across the chosen
-identification with the blow-up of the center.
+complement theorem (`thm:nagata-global-blowup-complement`) across the identification
+with the blow-up of the center supplied by the universal property.
 (Blueprint: `lemma:nagata-admissible-blowup-over-open`.) -/
 theorem isIso_π_restrict : IsIso (B.π ∣_ U) :=
-  Scheme.IdealSheafData.isIso_restrict_of_comp_eq B.iso_π B.disjoint_support
+  Scheme.IdealSheafData.isIso_restrict_of_comp_eq
+    B.isBlowup.isoBlowup_hom_comp_blowupMap B.disjoint_support
 
 /-- **Finite-degree approximation of a second blow-up center** (the core of Stacks
 Project Tag 0803): transport of `exists_finiteDegree_center_le_blowup` along the chosen
@@ -501,9 +502,10 @@ the composite of a `U`-admissible blow-up of `X` with a `π⁻¹(U)`-admissible 
 its total space is again a `U`-admissible blow-up of `X`: there is a `U`-admissible
 center `K` on `X` and an identification `iso` of `B₂.X'` with the blow-up of `K` under
 which the blow-up structure morphism is the composite `B₂.π ≫ B₁.π`. In particular
-`⟨K, hft, hdisj, B₂.X', B₂.π ≫ B₁.π, iso, hiso⟩ : AdmissibleBlowup X U` exhibits the
-composite morphism itself as a `U`-admissible blow-up. Stacks Tag 080L assumes `U`
-quasi-compact; the formal proof needs no such hypothesis.
+`⟨K, hft, hdisj, B₂.X', B₂.π ≫ B₁.π, K.isBlowup_blowupMap.of_comp_eq iso hiso⟩ :
+AdmissibleBlowup X U` exhibits the composite morphism itself as a `U`-admissible
+blow-up. Stacks Tag 080L assumes `U` quasi-compact; the formal proof needs no such
+hypothesis.
 
 The proof applies the composition theorem for arbitrary blow-ups
 (`Scheme.IdealSheafData.exists_blowup_comp`, Stacks Tag 080B): the composite center
@@ -511,15 +513,16 @@ The proof applies the composition theorem for arbitrary blow-ups
 and the second part misses `U` because a point of `π₁(|Z'|) ∩ U` would lift to a point
 of `|Z'| ∩ π₁⁻¹(U)`, contradicting admissibility of `B₂`. Hence `K` is a `U`-admissible
 center, and the over-`X` isomorphism supplied by the composition theorem, composed with
-the chosen identification of `B₂`, identifies `B₂.X'` with the blow-up of `K` over `X`.
+the identification of `B₂` supplied by the universal property, identifies `B₂.X'` with
+the blow-up of `K` over `X`.
 (Blueprint: `lemma:nagata-admissible-blowup-comp`.) -/
 theorem exists_comp [CompactSpace X] [QuasiSeparatedSpace X]
     (B₁ : AdmissibleBlowup X U) (B₂ : AdmissibleBlowup B₁.X' (B₁.π ⁻¹ᵁ U)) :
     ∃ K : X.IdealSheafData, K.ofFiniteType ∧ Disjoint (U : Set X) (K.support : Set X) ∧
       ∃ iso : B₂.X' ≅ K.blowup, iso.hom ≫ K.blowupMap = B₂.π ≫ B₁.π := by
   obtain ⟨K, hKft, hKsupp, e', he'⟩ :=
-    Scheme.IdealSheafData.exists_blowup_comp B₁.I B₁.finiteType B₁.iso B₁.iso_π
-      B₂.I B₂.finiteType
+    Scheme.IdealSheafData.exists_blowup_comp B₁.I B₁.finiteType B₁.isBlowup.isoBlowup
+      B₁.isBlowup.isoBlowup_hom_comp_blowupMap B₂.I B₂.finiteType
   -- admissibility of the composite center: `(|Z| ∪ π₁(|Z'|)) ∩ U = ∅`
   have hdisj : Disjoint (U : Set X) (K.support : Set X) := by
     rw [Set.disjoint_left]
@@ -529,10 +532,11 @@ theorem exists_comp [CompactSpace X] [QuasiSeparatedSpace X]
     · exact Set.disjoint_left.mp B₁.disjoint_support hxU hxI
     · exact Set.disjoint_left.mp B₂.disjoint_support
         (show x' ∈ ((B₁.π ⁻¹ᵁ U : B₁.X'.Opens) : Set B₁.X') from hxU) hx'
-  refine ⟨K, hKft, hdisj, B₂.iso ≪≫ e'.symm, ?_⟩
+  refine ⟨K, hKft, hdisj, B₂.isBlowup.isoBlowup ≪≫ e'.symm, ?_⟩
   have h2 : e'.inv ≫ K.blowupMap = B₂.I.blowupMap ≫ B₁.π := by
     rw [← he', Iso.inv_hom_id_assoc]
-  rw [Iso.trans_hom, Iso.symm_hom, Category.assoc, h2, ← Category.assoc, B₂.iso_π]
+  rw [Iso.trans_hom, Iso.symm_hom, Category.assoc, h2, ← Category.assoc,
+    B₂.isBlowup.isoBlowup_hom_comp_blowupMap]
 
 end AdmissibleBlowup
 
