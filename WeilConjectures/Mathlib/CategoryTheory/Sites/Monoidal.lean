@@ -6,8 +6,10 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 
 /-!
 # Monoidal properties of categories of sheaves
@@ -61,6 +63,12 @@ isomorphism.
 
 The dual statements for the pullback functor `F.sheafPullback A J K` (an oplax monoidal
 structure, which is strong under suitable hypotheses) are the subject of future work.
+
+Finally, the constant sheaf functor `constantSheaf J A : A ⥤ Sheaf J A` is monoidal: it
+is the composition of the constant presheaf functor (monoidal for the pointwise monoidal
+structure on presheaves, see `WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory`)
+with the sheafification functor `presheafToSheaf J A` (monoidal by the monoidal
+localization theory, see `Mathlib.CategoryTheory.Sites.Monoidal`).
 -/
 
 @[expose] public section
@@ -194,5 +202,14 @@ noncomputable instance sheafPushforwardContinuousLaxMonoidal :
     (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A)
 
 end Functor
+
+section
+
+variable [HasWeakSheafify J A] [(J.W (A := A)).IsMonoidal]
+
+noncomputable instance : (constantSheaf J A).Monoidal :=
+  inferInstanceAs (Functor.const Cᵒᵖ ⋙ presheafToSheaf J A).Monoidal
+
+end
 
 end CategoryTheory
