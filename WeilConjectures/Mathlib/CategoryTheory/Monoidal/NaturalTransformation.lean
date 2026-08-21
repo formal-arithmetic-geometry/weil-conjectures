@@ -33,6 +33,13 @@ We also prove the uniqueness half of doctrinal adjunction: if two monoidal funct
 left adjoint to the same lax monoidal functor via monoidal adjunctions, then the canonical
 isomorphism between them is a monoidal natural isomorphism
 (`CategoryTheory.Adjunction.isMonoidal_leftAdjointUniq_hom`).
+
+Dually, the conjugate of a transformation between the left adjoints that is compatible with
+their oplax monoidal structures is a monoidal natural transformation
+(`CategoryTheory.isMonoidal_conjugateEquiv`); consequently, if two lax monoidal functors are
+right adjoint to the same oplax monoidal functor via monoidal adjunctions, then the canonical
+isomorphism between them is a monoidal natural isomorphism
+(`CategoryTheory.Adjunction.isMonoidal_rightAdjointUniq_hom`).
 -/
 
 @[expose] public section
@@ -101,6 +108,30 @@ lemma isIso_δ_of_conjugateIso (e : R₁ ≅ R₂) [NatTrans.IsMonoidal e.hom] (
     infer_instance
   exact IsIso.of_isIso_comp_left (((conjugateEquiv adj₁ adj₂).symm e.hom).app (X ⊗ Y)) _
 
+/-- Dual monoidal mates: if a natural transformation `τ : L₂ ⟶ L₁` between the left adjoints
+of two monoidal adjunctions is compatible with the oplax monoidal structure maps of the left
+adjoints, then its conjugate `conjugateEquiv adj₁ adj₂ τ : R₁ ⟶ R₂` is a monoidal natural
+transformation. The compatibility hypotheses are exactly the two equations produced by
+`conjugateEquiv_symm_app_unit_comp_η` and `conjugateEquiv_symm_app_tensor_comp_δ`; they are
+spelled out since Mathlib has no notion of monoidal transformation between oplax monoidal
+functors. -/
+lemma isMonoidal_conjugateEquiv (τ : L₂ ⟶ L₁) (hη : τ.app (𝟙_ C) ≫ η L₁ = η L₂)
+    (hδ : ∀ X Y, τ.app (X ⊗ Y) ≫ δ L₁ X Y = δ L₂ X Y ≫ (τ.app X ⊗ₘ τ.app Y)) :
+    NatTrans.IsMonoidal (conjugateEquiv adj₁ adj₂ τ) where
+  unit := by
+    apply (adj₂.homEquiv _ _).symm.injective
+    rw [homEquiv_counit, homEquiv_counit, Functor.map_comp, Category.assoc,
+      conjugateEquiv_counit, τ.naturality_assoc, map_ε_comp_counit_app_unit, hη,
+      map_ε_comp_counit_app_unit]
+  tensor X Y := by
+    apply (adj₂.homEquiv _ _).symm.injective
+    rw [homEquiv_counit, homEquiv_counit, Functor.map_comp, Functor.map_comp,
+      Category.assoc, Category.assoc, conjugateEquiv_counit, τ.naturality_assoc,
+      map_μ_comp_counit_app_tensor, ← Category.assoc, hδ, Category.assoc,
+      tensorHom_comp_tensorHom, map_μ_comp_counit_app_tensor, ← δ_natural_assoc,
+      tensorHom_comp_tensorHom, conjugateEquiv_counit adj₁ adj₂ τ X,
+      conjugateEquiv_counit adj₁ adj₂ τ Y]
+
 /-! ### Uniqueness of monoidal left adjoints -/
 
 namespace Adjunction
@@ -132,6 +163,41 @@ instance isMonoidal_leftAdjointUniq_hom :
 /-- The inverse of the canonical isomorphism between two monoidal left adjoints is monoidal
 as well, by the general instance for inverses of monoidal natural isomorphisms. -/
 example : NatTrans.IsMonoidal (adj1.leftAdjointUniq adj2).inv := inferInstance
+
+end Adjunction
+
+/-! ### Uniqueness of lax monoidal right adjoints -/
+
+namespace Adjunction
+
+section RightAdjointUniq
+
+variable {F : C ⥤ D} {G G' : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F ⊣ G')
+
+omit [MonoidalCategory C] [MonoidalCategory D] in
+/-- `Adjunction.rightAdjointUniq` is (definitionally) the conjugate of the identity
+natural transformation. -/
+lemma rightAdjointUniq_hom_eq_conjugateEquiv_id :
+    (adj1.rightAdjointUniq adj2).hom = conjugateEquiv adj1 adj2 (𝟙 F) :=
+  rfl
+
+variable [F.OplaxMonoidal] [G.LaxMonoidal] [G'.LaxMonoidal] [adj1.IsMonoidal]
+  [adj2.IsMonoidal]
+
+/-- Uniqueness of lax monoidal right adjoints: if two lax monoidal functors `G` and `G'` are
+right adjoint to the same oplax monoidal functor `F` via monoidal adjunctions, then the
+canonical isomorphism `adj1.rightAdjointUniq adj2 : G ≅ G'` is a monoidal natural
+isomorphism. -/
+instance isMonoidal_rightAdjointUniq_hom :
+    NatTrans.IsMonoidal (adj1.rightAdjointUniq adj2).hom := by
+  rw [rightAdjointUniq_hom_eq_conjugateEquiv_id]
+  exact isMonoidal_conjugateEquiv adj1 adj2 (𝟙 F) (by simp) (fun X Y ↦ by simp)
+
+/-- The inverse of the canonical isomorphism between two lax monoidal right adjoints is
+monoidal as well, by the general instance for inverses of monoidal natural isomorphisms. -/
+example : NatTrans.IsMonoidal (adj1.rightAdjointUniq adj2).inv := inferInstance
+
+end RightAdjointUniq
 
 end Adjunction
 
