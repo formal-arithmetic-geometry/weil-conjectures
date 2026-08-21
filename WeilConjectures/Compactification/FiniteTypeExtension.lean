@@ -5,61 +5,47 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.SchemeTheoreticImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
+public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 
 /-!
 
-# Finite-type extension of ideals: the affine algebra layer
+# Finite-type extension of quasi-coherent ideal sheaves
 
-This file begins Phase A of the formalization plan
-`blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md` for the Stacks
-Project tags 01PF (finite-type extension of quasi-coherent submodules) and 01PH
-(quasi-compact opens are complements of finite-type vanishing loci), which are the
-remaining leaves of `WeilConjectures.Compactification.Flattening`.
+This file proves the ideal-sheaf form of Stacks Project Tag 01PF: on a quasi-compact
+quasi-separated scheme, a finite-type ideal sheaf on a quasi-compact open `W` extends to a
+finite-type ideal sheaf on the whole scheme, and the extension can be taken inside any
+prescribed ambient ideal sheaf restricting to it
+(blueprint: `lemma:nagata-extend-finite-type-ideal`).
 
-We prove the affine finite-generation core of Tag 01PF (blueprint §1.2.B): if an ideal
-`N` of a ring `R` has finitely generated localizations at each element of a finite set
-`s`, then a single finitely generated subideal `N' ≤ N` realizes all those
-localizations simultaneously. The proof clears the finitely many localization
-denominators, replacing each generator `x/fᵏ` of a localized ideal by its numerator.
+The proof enlarges the open on which the ideal sheaf is of finite type one affine open at a
+time (`Scheme.IdealSheafData.exists_le_ofFiniteTypeOn_sup`), and a finite induction over an
+affine cover concludes. The binary gluing step is order-theoretic: the glued ideal sheaf is
+the intersection of the maximal quasi-coherent extensions
+(`Scheme.IdealSheafData.map` along the two inclusions) of the current ideal sheaf and of a
+finitely generated approximation on the new affine piece, intersected with the ambient
+ideal sheaf. Its restrictions are computed by flat base change of scheme-theoretic images
+(`Scheme.IdealSheafData.map_comap_of_isPullback`). The approximation on the new affine
+piece is produced by clearing denominators on a finite basic-open cover of the overlap
+(`Ideal.exists_fg_le_map_eq`).
 
-We also prove the compactness micro-lemma of blueprint §2.4: the complement of the
-vanishing locus of a finitely generated ideal in the prime spectrum is quasi-compact,
-being the finite union of the basic opens at the generators.
+## Main definitions
+
+- `Scheme.IdealSheafData.ofFiniteTypeOn I O`: the ideals of sections on the affine opens
+  contained in `O` are finitely generated;
+- `Scheme.IdealSheafData.ofFiniteType`: `I` is of finite type on the whole scheme.
 
 ## Main results
 
-- `Ideal.exists_fg_le_map_localization_eq`: the affine clearing-denominators lemma
-  (blueprint §1.2.B, `Submodule.exists_fg_eq_localization_on_finset`);
-- `Ideal.FG.isCompact_compl_zeroLocus`: quasi-compactness of the complement of the
-  vanishing locus of a finitely generated ideal (blueprint §2.4);
-- `Scheme.Opens.quasiCompact_ι`: the inclusion of a quasi-compact open of a
-  quasi-separated scheme is a quasi-compact morphism (blueprint §2.2,
-  retrocompactness);
-- `Scheme.IdealSheafData.openExtension` and
-  `Scheme.IdealSheafData.comap_openExtension`: the canonical quasi-coherent extension
-  of an ideal sheaf from a retrocompact open, with its restriction identity
-  (Stacks Project Tag 01PE, ideal form; blueprint §1.2.A), realized as the kernel of
-  `Z_J ↪ W ↪ X` and computed by flat base change of scheme-theoretic images;
-- `Scheme.IdealSheafData.exists_finiteType_le_comap_eq`: the finite-type refinement
-  (Stacks Project Tag 01PF, blueprint §1.2.B–C): every ideal sheaf on a qcqs scheme
-  whose restriction to a quasi-compact open `W` is of finite type contains a
-  finite-type ideal sheaf with the same restriction to `W`. The binary gluing step is
-  `Scheme.IdealSheafData.exists_le_finiteTypeOn_sup`: the glued ideal sheaf is the
-  intersection of the maximal quasi-coherent extensions (`IdealSheafData.map` along
-  the two inclusions) of the current ideal sheaf and of the clearing-denominators
-  approximation `Ideal.exists_fg_le_map_localization_eq` on the new affine piece,
-  intersected with the ambient ideal sheaf; a finite induction over an affine cover
-  concludes. The supporting interface comprises the base-change lemma
-  `Scheme.IdealSheafData.map_comap_opens`, the `appLE` ideal computation
-  `Scheme.IdealSheafData.ideal_comap_ι_eq_map_appLE`, the covering comparison lemma
-  `Scheme.IdealSheafData.comap_le_comap_of_ideal_le` and the finite-typeness locality
-  `Scheme.IdealSheafData.FiniteTypeOn.sup`.
-
-These provide the inputs for the Stacks Tags 01PF and 01PH statements
-(`Scheme.exists_finiteType_ideal_extension`,
-`Scheme.exists_finiteType_ideal_zeroLocus_compl_qcOpen`) proved in
-`WeilConjectures.Compactification.Flattening`.
+- `Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap`: finite-typeness on `O` is
+  finite-typeness of the restriction to `O`;
+- `Scheme.IdealSheafData.ofFiniteTypeOn.sup`: finite-typeness is local on the target;
+- `Scheme.IdealSheafData.exists_le_ofFiniteTypeOn_sup`: the binary gluing step;
+- `Scheme.IdealSheafData.exists_finiteType_le_comap_eq` and
+  `Scheme.IdealSheafData.exists_finiteType_comap_eq`: the two forms of Tag 01PF.
 
 -/
 
@@ -67,418 +53,55 @@ These provide the inputs for the Stacks Tags 01PF and 01PH statements
 
 universe u
 
-section ClearingDenominators
-
-variable {R : Type u} [CommRing R]
-
-/-- One localization at a time: if the localization of `N` away from `f` is finitely
-generated, there is a finite set of elements of `N` whose images generate it. The
-generators of the localized ideal are multiplied by their denominators, which are
-units in the localization. -/
-lemma Ideal.exists_finset_span_image_eq_map_localization (N : Ideal R) (f : R)
-    (H : (N.map (algebraMap R (Localization.Away f))).FG) :
-    ∃ T : Finset R, (T : Set R) ⊆ (N : Set R) ∧
-      Ideal.span (algebraMap R (Localization.Away f) '' T) =
-        N.map (algebraMap R (Localization.Away f)) := by
-  classical
-  obtain ⟨G, hG⟩ := H
-  have hmem : ∀ y ∈ G, y ∈ N.map (algebraMap R (Localization.Away f)) := by
-    intro y hy
-    rw [← hG]
-    exact Ideal.subset_span hy
-  choose nm hnm using fun (y : G) ↦
-    (IsLocalization.mem_map_algebraMap_iff (Submonoid.powers f)
-      (Localization.Away f)).mp (hmem y y.2)
-  refine ⟨G.attach.image (fun y ↦ ((nm y).1 : R)), ?_, le_antisymm ?_ ?_⟩
-  · intro x hx
-    rw [Finset.mem_coe, Finset.mem_image] at hx
-    obtain ⟨y, -, rfl⟩ := hx
-    exact (nm y).1.2
-  · rw [Ideal.span_le]
-    rintro z ⟨x, hx, rfl⟩
-    rw [Finset.mem_coe, Finset.mem_image] at hx
-    obtain ⟨y, -, rfl⟩ := hx
-    exact Ideal.mem_map_of_mem _ (nm y).1.2
-  · rw [← hG, Ideal.span_le]
-    intro y hy
-    have h1 : y * algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).2 : R) =
-        algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).1 : R) := hnm ⟨y, hy⟩
-    obtain ⟨u, hu⟩ : IsUnit (algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).2 : R)) :=
-      IsLocalization.map_units (Localization.Away f) (nm ⟨y, hy⟩).2
-    have hy2 : y = algebraMap R (Localization.Away f) ((nm ⟨y, hy⟩).1 : R) * ↑u⁻¹ := by
-      rw [← h1, ← hu, mul_assoc, Units.mul_inv, mul_one]
-    rw [hy2]
-    refine Ideal.mul_mem_right _ _ (Ideal.subset_span ?_)
-    refine Set.mem_image_of_mem _ ?_
-    rw [Finset.mem_coe, Finset.mem_image]
-    exact ⟨⟨y, hy⟩, Finset.mem_attach _ _, rfl⟩
-
-/-- **The affine clearing-denominators lemma** (Stacks Project Tag 01PF, affine core;
-blueprint §1.2.B): if the localizations of an ideal `N` away from each member of a
-finite set `s` are finitely generated, then there is a single finitely generated
-subideal `N' ≤ N` whose localization away from each `f ∈ s` agrees with that of
-`N`. -/
-theorem Ideal.exists_fg_le_map_localization_eq (N : Ideal R) (s : Finset R)
-    (H : ∀ f ∈ s, (N.map (algebraMap R (Localization.Away f))).FG) :
-    ∃ N' : Ideal R, N' ≤ N ∧ N'.FG ∧ ∀ f ∈ s,
-      N'.map (algebraMap R (Localization.Away f)) =
-        N.map (algebraMap R (Localization.Away f)) := by
-  classical
-  choose T hTsub hTspan using fun (f : s) ↦
-    N.exists_finset_span_image_eq_map_localization f (H f f.2)
-  refine ⟨Ideal.span (s.attach.biUnion T : Finset R), ?_, ⟨_, rfl⟩, ?_⟩
-  · rw [Ideal.span_le]
-    intro x hx
-    rw [Finset.mem_coe, Finset.mem_biUnion] at hx
-    obtain ⟨f, -, hf⟩ := hx
-    exact hTsub f (Finset.mem_coe.mpr hf)
-  · intro f hf
-    refine le_antisymm (Ideal.map_mono ?_) ?_
-    · rw [Ideal.span_le]
-      intro x hx
-      rw [Finset.mem_coe, Finset.mem_biUnion] at hx
-      obtain ⟨g, -, hg⟩ := hx
-      exact hTsub g (Finset.mem_coe.mpr hg)
-    · rw [← hTspan ⟨f, hf⟩]
-      refine Ideal.span_le.mpr ?_
-      rintro z ⟨x, hx, rfl⟩
-      refine Ideal.mem_map_of_mem _ (Ideal.subset_span ?_)
-      rw [Finset.mem_coe, Finset.mem_biUnion]
-      exact ⟨⟨f, hf⟩, Finset.mem_attach _ _, Finset.mem_coe.mp hx⟩
-
-/-- **Transfer of finite generation to the abstract localization**: if the extension of `N`
-to some localization of `R` away from `f` is finitely generated, so is its extension to
-`Localization.Away f`. This bridges the scheme-theoretic sections rings (which are
-localizations via `IsAffineOpen.isLocalization_basicOpen`) and the abstract localizations
-used by the clearing-denominators lemma. -/
-lemma Ideal.FG.map_localizationAway {S : Type u} [CommRing S] [Algebra R S] {f : R}
-    [IsLocalization.Away f S] {N : Ideal R} (H : (N.map (algebraMap R S)).FG) :
-    (N.map (algebraMap R (Localization.Away f))).FG := by
-  let e : S ≃ₐ[R] Localization.Away f :=
-    IsLocalization.algEquiv (Submonoid.powers f) S (Localization.Away f)
-  have h1 : N.map (algebraMap R (Localization.Away f)) =
-      (N.map (algebraMap R S)).map (e.toAlgHom : S →+* Localization.Away f) := by
-    rw [Ideal.map_map, AlgHom.comp_algebraMap]
-  rw [h1]
-  exact H.map _
-
-/-- **Transfer of an equality of localized ideals along an `f`-inverting homomorphism**: if
-two ideals of `R` have the same extension to `Localization.Away f`, they have the same
-extension along every ring homomorphism inverting `f`. The homomorphism factors through the
-localization by `IsLocalization.Away.lift`. -/
-lemma Ideal.map_eq_map_of_localizationAway {T : Type u} [CommRing T] {χ : R →+* T} {f : R}
-    (hf : IsUnit (χ f)) {N N' : Ideal R}
-    (H : N.map (algebraMap R (Localization.Away f)) =
-      N'.map (algebraMap R (Localization.Away f))) :
-    N.map χ = N'.map χ := by
-  have hχ : (IsLocalization.Away.lift (S := Localization.Away f) f hf).comp
-      (algebraMap R (Localization.Away f)) = χ := IsLocalization.Away.lift_comp f hf
-  rw [← hχ, ← Ideal.map_map, ← Ideal.map_map, H]
-
-/-- **Quasi-compactness of the complement of a finitely generated vanishing locus**
-(blueprint §2.4): the complement of `V(I)` in the prime spectrum of `R` is
-quasi-compact for a finitely generated ideal `I`, being the finite union of the basic
-opens at the generators. -/
-theorem Ideal.FG.isCompact_compl_zeroLocus {I : Ideal R} (hI : I.FG) :
-    IsCompact (PrimeSpectrum.zeroLocus (I : Set R))ᶜ := by
-  obtain ⟨s, rfl⟩ := hI
-  have h1 : (PrimeSpectrum.zeroLocus ((Ideal.span (s : Set R) : Ideal R) : Set R))ᶜ =
-      ⋃ f ∈ s, (PrimeSpectrum.basicOpen f : Set (PrimeSpectrum R)) := by
-    ext x
-    simp [PrimeSpectrum.mem_zeroLocus, Set.not_subset]
-  rw [h1]
-  exact s.finite_toSet.isCompact_biUnion fun f _ ↦ PrimeSpectrum.isCompact_basicOpen f
-
-end ClearingDenominators
-
-namespace AlgebraicGeometry
-
-section OpenExtension
-
 open CategoryTheory Limits
 
-variable {X : Scheme.{u}} (W : X.Opens)
-
-/-- **Retrocompactness** (blueprint §2.2): the inclusion of a quasi-compact open of a
-quasi-separated scheme is a quasi-compact morphism. -/
-theorem Scheme.Opens.quasiCompact_ι [QuasiSeparatedSpace X]
-    (hW : IsCompact (W : Set X)) : QuasiCompact W.ι := by
-  constructor
-  intro U hU hU'
-  rw [W.ι.isEmbedding.isCompact_iff, Set.image_preimage_eq_inter_range,
-    Scheme.Opens.range_ι]
-  exact QuasiSeparatedSpace.inter_isCompact U W hU hU' W.isOpen hW
-
-variable (J : W.toScheme.IdealSheafData)
-
-/-- **The canonical quasi-coherent extension of an ideal sheaf from an open**
-(Stacks Project Tag 01PE, ideal form; blueprint §1.2.A): the kernel of the composite
-of the closed subscheme of `J` with the open immersion `W.ι`. Its restriction back to
-`W` is `J` (`Scheme.IdealSheafData.comap_openExtension`); it is quasi-coherent by
-construction, but not finite type in general — the finite-type refinement is
-Tag 01PF. -/
-noncomputable def Scheme.IdealSheafData.openExtension : X.IdealSheafData :=
-  (J.subschemeι ≫ W.ι).ker
-
-/-- **The canonical extension restricts to the original ideal** (Stacks Project
-Tag 01PE): pulling the extension back along the quasi-compact open immersion recovers
-`J`. The proof identifies the restriction of the kernel with the kernel of the closed
-immersion of `J` via flat base change of scheme-theoretic images
-(`Nagata.schemeImageRestrictOpen`). -/
-theorem Scheme.IdealSheafData.comap_openExtension [QuasiCompact W.ι] :
-    (Scheme.IdealSheafData.openExtension W J).comap W.ι = J := by
-  rw [Scheme.IdealSheafData.openExtension,
-    ← AlgebraicGeometry.Nagata.schemeImageRestrictOpen (J.subschemeι ≫ W.ι) W.ι]
-  have H : IsPullback (𝟙 J.subscheme) J.subschemeι (J.subschemeι ≫ W.ι) W.ι :=
-    IsPullback.of_horiz_isIso_mono ⟨by rw [Category.id_comp]⟩
-  have hsnd : pullback.snd (J.subschemeι ≫ W.ι) W.ι =
-      H.isoPullback.inv ≫ J.subschemeι :=
-    ((Iso.inv_comp_eq _).mpr H.isoPullback_hom_snd.symm).symm
-  rw [hsnd, Scheme.Hom.ker_comp_of_isIso, Scheme.IdealSheafData.ker_subschemeι]
-
-/-- The canonical extension is monotone in the ideal sheaf. -/
-theorem Scheme.IdealSheafData.openExtension_mono {K K' : W.toScheme.IdealSheafData}
-    (h : K ≤ K') :
-    Scheme.IdealSheafData.openExtension W K ≤ Scheme.IdealSheafData.openExtension W K' := by
-  have hfac : K'.subschemeι ≫ W.ι =
-      Scheme.IdealSheafData.inclusion h ≫ (K.subschemeι ≫ W.ι) := by
-    rw [← Category.assoc, Scheme.IdealSheafData.inclusion_subschemeι]
-  calc Scheme.IdealSheafData.openExtension W K = (K.subschemeι ≫ W.ι).ker := rfl
-    _ ≤ (Scheme.IdealSheafData.inclusion h ≫ (K.subschemeι ≫ W.ι)).ker :=
-        Scheme.Hom.le_ker_comp _ _
-    _ = Scheme.IdealSheafData.openExtension W K' := by
-        rw [← hfac]; rfl
-
-/-- Every ideal sheaf is contained in the canonical extension of its own restriction:
-sections of `I₀` pull back to sections vanishing on the subscheme of the
-restriction. -/
-theorem Scheme.IdealSheafData.le_openExtension_comap (I₀ : X.IdealSheafData) :
-    I₀ ≤ Scheme.IdealSheafData.openExtension W (I₀.comap W.ι) := by
-  have hfac : (I₀.comap W.ι).subschemeι ≫ W.ι =
-      (I₀.comapIso W.ι).hom ≫ (pullback.snd W.ι I₀.subschemeι ≫ I₀.subschemeι) := by
-    rw [← Scheme.IdealSheafData.comapIso_hom_fst, Category.assoc, pullback.condition]
-  calc I₀ = I₀.subschemeι.ker := (Scheme.IdealSheafData.ker_subschemeι I₀).symm
-    _ ≤ (pullback.snd W.ι I₀.subschemeι ≫ I₀.subschemeι).ker := Scheme.Hom.le_ker_comp _ _
-    _ = ((I₀.comapIso W.ι).hom ≫ (pullback.snd W.ι I₀.subschemeι ≫ I₀.subschemeι)).ker :=
-        (Scheme.Hom.ker_comp_of_isIso _ _).symm
-    _ = Scheme.IdealSheafData.openExtension W (I₀.comap W.ι) := by
-        rw [← hfac]; rfl
-
-/-- **The extension adjunction**: an ideal sheaf is contained in the canonical
-extension of `K` if and only if its restriction is contained in `K`. This is the
-order-theoretic form of the gluing argument: containment in the extension is exactly a
-condition on the restriction. -/
-theorem Scheme.IdealSheafData.le_openExtension_iff [QuasiCompact W.ι]
-    (I₀ : X.IdealSheafData) (K : W.toScheme.IdealSheafData) :
-    I₀ ≤ Scheme.IdealSheafData.openExtension W K ↔ I₀.comap W.ι ≤ K := by
-  constructor
-  · intro h
-    have h2 : I₀.comap W.ι ≤ (Scheme.IdealSheafData.openExtension W K).comap W.ι :=
-      Scheme.IdealSheafData.comap_mono W.ι h
-    rwa [Scheme.IdealSheafData.comap_openExtension] at h2
-  · intro h
-    exact (Scheme.IdealSheafData.le_openExtension_comap W I₀).trans
-      (Scheme.IdealSheafData.openExtension_mono W h)
-
-/-- Finite-typeness of an ideal sheaf on the affine opens contained in a given open.
-`FiniteTypeOn ⊤` is finite-typeness (`Scheme.IdealSheafData.FiniteType` of
-`WeilConjectures.Blowup.Exceptional`). -/
-def Scheme.IdealSheafData.FiniteTypeOn (O : X.Opens) (I : X.IdealSheafData) : Prop :=
-  ∀ U : X.affineOpens, ↑U ≤ O → (I.ideal U).FG
-
-/-- **The canonical extension is finite type on the open it extends from**: if `J` is
-a finite-type ideal sheaf on `W`, then `openExtension W J` has finitely generated
-ideals of sections on every affine open contained in `W`. -/
-theorem Scheme.IdealSheafData.finiteTypeOn_openExtension [QuasiCompact W.ι]
-    (hJ : ∀ U' : W.toScheme.affineOpens, (J.ideal U').FG) :
-    (Scheme.IdealSheafData.openExtension W J).FiniteTypeOn W := by
-  intro U hU
-  have hle : U.1 ≤ W.ι.opensRange := by
-    rw [Scheme.Opens.opensRange_ι]; exact hU
-  set U' : W.toScheme.affineOpens := ⟨W.ι ⁻¹ᵁ U.1, U.2.preimage_of_isOpenImmersion W.ι hle⟩
-    with hU'def
-  have himg : W.ι ''ᵁ (U' : W.toScheme.Opens) = U.1 := by
-    rw [hU'def, Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
-      inf_eq_right.mpr hU]
-  have h1 := Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion
-    (Scheme.IdealSheafData.openExtension W J) W.ι U'
-  rw [Scheme.IdealSheafData.comap_openExtension] at h1
-  have hbij : Function.Bijective ((W.ι.appIso (U' : W.toScheme.Opens)).inv.hom) :=
-    ConcreteCategory.bijective_of_isIso _
-  have h2 := congrArg (Ideal.map ((W.ι.appIso (U' : W.toScheme.Opens)).inv.hom)) h1
-  rw [Ideal.map_comap_of_surjective _ hbij.2] at h2
-  have hcongr : (⟨W.ι ''ᵁ (U' : W.toScheme.Opens),
-      U'.2.image_of_isOpenImmersion W.ι⟩ : X.affineOpens) = U := Subtype.ext himg
-  rw [← hcongr, ← h2]
-  exact (hJ U').map _
-
-end OpenExtension
-
-section FiniteTypeGluing
-
-/-! ### The finite-type refinement (Stacks Project Tag 01PF)
-
-This section proves the finite-type refinement of the quasi-coherent extension: on a qcqs
-scheme, every ideal sheaf whose restriction to a quasi-compact open `W` is of finite type
-contains a finite-type ideal sheaf with the same restriction to `W`
-(`Scheme.IdealSheafData.exists_finiteType_le_comap_eq`).
-
-The proof follows the blueprint (§1.2.B–C of
-`blueprint/stacks_01PH_01PF_080L_0F3V_formalization_blueprint.md`): a binary gluing step
-(`exists_le_finiteTypeOn_sup`) enlarges the open of finite-typeness by one affine open at a
-time, using the affine clearing-denominators lemma `Ideal.exists_fg_le_map_localization_eq`
-on a finite basic-open cover of the overlap, and a finite induction over an affine cover
-concludes. The gluing itself is order-theoretic: the glued ideal sheaf is the intersection
-of the pushforwards (maximal quasi-coherent extensions) of the two local pieces with the
-ambient ideal sheaf, and its restrictions are computed via the flat base change of
-scheme-theoretic images (`Nagata.schemeImageRestrictOpen`). -/
-
-open CategoryTheory Limits
+namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 variable {X : Scheme.{u}}
 
-/-- Pullback of ideals along the inverse of an isomorphism of commutative rings is
-pushforward along the isomorphism. -/
-lemma _root_.CommRingCat.ideal_comap_inv_hom {R S : CommRingCat.{u}} (e : R ≅ S)
-    (I : Ideal R) : I.comap e.inv.hom = I.map e.hom.hom := by
-  refine le_antisymm (fun x hx ↦ ?_) (Ideal.map_le_iff_le_comap.mpr fun x hx ↦ ?_)
-  · have hxeq : e.hom.hom (e.inv.hom x) = x :=
-      DFunLike.congr_fun (congrArg CommRingCat.Hom.hom e.inv_hom_id) x
-    exact hxeq ▸ Ideal.mem_map_of_mem _ hx
-  · have hxeq : e.inv.hom (e.hom.hom x) = x :=
-      DFunLike.congr_fun (congrArg CommRingCat.Hom.hom e.hom_inv_id) x
-    simpa only [Ideal.mem_comap, hxeq] using hx
+section FiniteType
 
-/-- Pullback of ideal sheaves along an open immersion commutes with intersections. -/
-lemma Scheme.IdealSheafData.comap_inf_of_isOpenImmersion {Z T : Scheme.{u}} (j : Z ⟶ T)
-    [IsOpenImmersion j] (I K : T.IdealSheafData) :
-    (I ⊓ K).comap j = I.comap j ⊓ K.comap j := by
-  ext U : 2
-  simp only [Scheme.IdealSheafData.ideal_inf, Pi.inf_apply,
-    Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion, Ideal.comap_inf]
+/-- An ideal sheaf is of finite type on an open `O` if its ideal of sections on every
+affine open contained in `O` is finitely generated. -/
+def ofFiniteTypeOn (I : X.IdealSheafData) (O : X.Opens) : Prop :=
+  ∀ U : X.affineOpens, ↑U ≤ O → (I.ideal U).FG
 
-/-- The ideal of sections of the pullback of an ideal sheaf along an open immersion,
-computed on an affine open of the source lying over an affine open `V` of the target: it
-is the extension of the ideal of sections on `V` along the restriction map `appLE`. -/
-lemma Scheme.IdealSheafData.ideal_comap_eq_map_appLE {Y Z : Scheme.{u}} (f : Y ⟶ Z)
-    [IsOpenImmersion f] (C : Z.IdealSheafData) (V : Z.affineOpens) (U' : Y.affineOpens)
-    (h : U'.1 ≤ f ⁻¹ᵁ V.1) :
-    (C.comap f).ideal U' = (C.ideal V).map (f.appLE V.1 U'.1 h).hom := by
-  rw [Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion]
-  have himg : (⟨f ''ᵁ U'.1, U'.2.image_of_isOpenImmersion f⟩ : Z.affineOpens) ≤ V := by
-    change f ''ᵁ U'.1 ≤ V.1
-    refine (f.image_mono h).trans ?_
-    rw [Scheme.Hom.image_preimage_eq_opensRange_inf]
-    exact inf_le_right
-  rw [← Scheme.IdealSheafData.map_ideal C himg, CommRingCat.ideal_comap_inv_hom,
-    Ideal.map_map]
-  congr 1
-  rw [← CommRingCat.hom_comp]
-  congr 1
-  rw [Scheme.Hom.appIso_hom', Scheme.Hom.map_appLE]
+/-- An ideal sheaf is of finite type if its ideal of sections on every affine open is
+finitely generated. -/
+def ofFiniteType (I : X.IdealSheafData) : Prop :=
+  I.ofFiniteTypeOn ⊤
 
-/-- The special case of `Scheme.IdealSheafData.ideal_comap_eq_map_appLE` for the
-inclusion of an affine open. -/
-lemma Scheme.IdealSheafData.ideal_comap_ι_eq_map_appLE (I : X.IdealSheafData)
-    (V : X.affineOpens) (U' : V.1.toScheme.affineOpens) (h : U'.1 ≤ V.1.ι ⁻¹ᵁ V.1) :
-    (I.comap V.1.ι).ideal U' = (I.ideal V).map (V.1.ι.appLE V.1 U'.1 h).hom :=
-  Scheme.IdealSheafData.ideal_comap_eq_map_appLE V.1.ι I V U' h
+lemma ofFiniteType_iff (I : X.IdealSheafData) :
+    I.ofFiniteType ↔ ∀ U : X.affineOpens, (I.ideal U).FG :=
+  ⟨fun h U ↦ h U le_top, fun h U _ ↦ h U⟩
 
-/-- To compare two pullbacks of ideal sheaves along an open immersion, it suffices to
-compare the ideals of sections on a family of affine opens contained in the range whose
-preimages cover the source. -/
-lemma Scheme.IdealSheafData.comap_le_comap_of_ideal_le {Z T : Scheme.{u}} (j : Z ⟶ T)
-    [IsOpenImmersion j] {I K : T.IdealSheafData} {ι : Type*} (U : ι → T.affineOpens)
-    (hran : ∀ i, (U i).1 ≤ j.opensRange) (hcov : j.opensRange ≤ ⨆ i, (U i).1)
-    (H : ∀ i, I.ideal (U i) ≤ K.ideal (U i)) :
-    I.comap j ≤ K.comap j := by
-  refine Scheme.IdealSheafData.le_of_iSup_eq_top
-    (fun i ↦ ⟨j ⁻¹ᵁ (U i).1, (U i).2.preimage_of_isOpenImmersion j (hran i)⟩) ?_ (fun i ↦ ?_)
-  · rw [eq_top_iff]
-    intro x _
-    have hx : j x ∈ j.opensRange := ⟨x, rfl⟩
-    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (hcov hx)
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hi⟩
-  · rw [Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion,
-      Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion]
-    refine Ideal.comap_mono ?_
-    have hcongr : (⟨j ''ᵁ (j ⁻¹ᵁ (U i).1),
-        ((U i).2.preimage_of_isOpenImmersion j (hran i)).image_of_isOpenImmersion j⟩ :
-        T.affineOpens) = U i :=
-      Subtype.ext (by
-        change j ''ᵁ (j ⁻¹ᵁ (U i).1) = (U i).1
-        rw [Scheme.Hom.image_preimage_eq_opensRange_inf, inf_eq_right.mpr (hran i)])
-    have h := H i
-    rw [← hcongr] at h
-    exact h
+/-- Finite-typeness on an open `O` is finite-typeness of the restriction to `O`. -/
+theorem ofFiniteTypeOn_iff_comap (I : X.IdealSheafData) (O : X.Opens) :
+    I.ofFiniteTypeOn O ↔ (I.comap O.ι).ofFiniteType := by
+  constructor
+  · intro h U' _
+    rw [fg_ideal_comap_iff]
+    exact h _ (O.ι_image_le U'.1)
+  · intro h U hU
+    have hle : U.1 ≤ O.ι.opensRange := by rwa [Scheme.Opens.opensRange_ι]
+    have himg : O.ι ''ᵁ (O.ι ⁻¹ᵁ U.1) = U.1 := by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+        inf_eq_right.mpr hU]
+    have hcongr : (⟨O.ι ''ᵁ (O.ι ⁻¹ᵁ U.1),
+        (U.2.preimage_of_isOpenImmersion O.ι hle).image_of_isOpenImmersion O.ι⟩ :
+        X.affineOpens) = U := Subtype.ext himg
+    have hfg := (fg_ideal_comap_iff O.ι I
+      ⟨O.ι ⁻¹ᵁ U.1, U.2.preimage_of_isOpenImmersion O.ι hle⟩).mp (h _ le_top)
+    rwa [hcongr] at hfg
 
-/-- The pushforward of an ideal sheaf along the inclusion of a quasi-compact open
-restricts back to the original ideal sheaf. This is
-`Scheme.IdealSheafData.comap_openExtension` in `map`/`comap` language. -/
-theorem Scheme.IdealSheafData.comap_map_ι (W : X.Opens) [QuasiCompact W.ι]
-    (J : W.toScheme.IdealSheafData) : (J.map W.ι).comap W.ι = J :=
-  Scheme.IdealSheafData.comap_openExtension W J
-
-/-- **Base change of ideal sheaf pushforwards to open subschemes**: for a quasi-compact
-morphism `g`, the restriction of the pushforward `g_* B` to an open `O` is the pushforward
-of the restriction of `B` to `g ⁻¹ᵁ O` along the restricted morphism. This is the flat
-base change of scheme-theoretic images (`Nagata.schemeImageRestrictOpen`) in ideal sheaf
-form. -/
-theorem Scheme.IdealSheafData.map_comap_opens {Y : Scheme.{u}} (g : Y ⟶ X) [QuasiCompact g]
-    (B : Y.IdealSheafData) (O : X.Opens) :
-    (B.map g).comap O.ι = (B.comap (g ⁻¹ᵁ O).ι).map (g ∣_ O) := by
-  have hker : ∀ {Z W : Scheme.{u}} (C : Z.IdealSheafData) (φ : Z ⟶ W),
-      C.map φ = (C.subschemeι ≫ φ).ker := fun C φ ↦ by
-    rw [Scheme.Hom.ker_comp, Scheme.IdealSheafData.ker_subschemeι]
-  have H := ((IsPullback.of_hasPullback (g ⁻¹ᵁ O).ι B.subschemeι).paste_horiz
-    (isPullback_morphismRestrict g O)).flip
-  rw [hker B g, hker (B.comap (g ⁻¹ᵁ O).ι) (g ∣_ O),
-    ← Nagata.schemeImageRestrictOpen (B.subschemeι ≫ g) O.ι]
-  have hsub : (B.comap (g ⁻¹ᵁ O).ι).subschemeι =
-      (B.comapIso (g ⁻¹ᵁ O).ι).hom ≫ pullback.fst (g ⁻¹ᵁ O).ι B.subschemeι :=
-    (Scheme.IdealSheafData.comapIso_hom_fst _ _).symm
-  rw [hsub, Category.assoc, Scheme.Hom.ker_comp_of_isIso, ← H.isoPullback_hom_snd,
-    Scheme.Hom.ker_comp_of_isIso]
-
-/-- An ideal sheaf whose restriction to `W` is of finite type is of finite type on the
-affine opens contained in `W`. -/
-theorem Scheme.IdealSheafData.finiteTypeOn_of_comap {W : X.Opens} {I : X.IdealSheafData}
-    (hJ : ∀ U' : W.toScheme.affineOpens, ((I.comap W.ι).ideal U').FG) :
-    I.FiniteTypeOn W := by
+/-- Locality of finite-typeness: an ideal sheaf which is of finite type on two opens is
+of finite type on their union. -/
+theorem ofFiniteTypeOn.sup {I : X.IdealSheafData} {O₁ O₂ : X.Opens}
+    (h₁ : I.ofFiniteTypeOn O₁) (h₂ : I.ofFiniteTypeOn O₂) :
+    I.ofFiniteTypeOn (O₁ ⊔ O₂) := by
   intro U hU
-  have hle : U.1 ≤ W.ι.opensRange := by
-    rw [Scheme.Opens.opensRange_ι]; exact hU
-  set U' : W.toScheme.affineOpens := ⟨W.ι ⁻¹ᵁ U.1, U.2.preimage_of_isOpenImmersion W.ι hle⟩
-    with hU'def
-  have himg : W.ι ''ᵁ (U' : W.toScheme.Opens) = U.1 := by
-    rw [hU'def, Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
-      inf_eq_right.mpr hU]
-  have h1 := Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion I W.ι U'
-  have hbij : Function.Bijective ((W.ι.appIso (U' : W.toScheme.Opens)).inv.hom) :=
-    ConcreteCategory.bijective_of_isIso _
-  have h2 := congrArg (Ideal.map ((W.ι.appIso (U' : W.toScheme.Opens)).inv.hom)) h1
-  rw [Ideal.map_comap_of_surjective _ hbij.2] at h2
-  have hcongr : (⟨W.ι ''ᵁ (U' : W.toScheme.Opens),
-      U'.2.image_of_isOpenImmersion W.ι⟩ : X.affineOpens) = U := Subtype.ext himg
-  rw [← hcongr, ← h2]
-  exact (hJ U').map _
-
-/-- Conversely, the restriction to `W` of an ideal sheaf which is of finite type on the
-affine opens contained in `W` is of finite type. -/
-theorem Scheme.IdealSheafData.fg_ideal_comap_of_finiteTypeOn {W : X.Opens}
-    {I : X.IdealSheafData} (h : I.FiniteTypeOn W) (U' : W.toScheme.affineOpens) :
-    ((I.comap W.ι).ideal U').FG := by
-  rw [Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion, CommRingCat.ideal_comap_inv_hom]
-  exact (h ⟨W.ι ''ᵁ U'.1, U'.2.image_of_isOpenImmersion W.ι⟩ (W.ι_image_le U'.1)).map _
-
-/-- **Locality of finite-typeness**: an ideal sheaf which is of finite type on two opens is
-of finite type on their union. On a straddling affine open, the ideal of sections is
-finitely generated because its localizations at a spanning family of sections are
-(`Ideal.fg_of_localizationSpan`). -/
-theorem Scheme.IdealSheafData.FiniteTypeOn.sup {I : X.IdealSheafData} {O₁ O₂ : X.Opens}
-    (h₁ : I.FiniteTypeOn O₁) (h₂ : I.FiniteTypeOn O₂) :
-    I.FiniteTypeOn (O₁ ⊔ O₂) := by
-  intro U hU
+  -- on a straddling affine open, the ideal of sections is finitely generated because its
+  -- localizations at a spanning family of sections are
   have hspan : Ideal.span {f : Γ(X, U.1) | X.basicOpen f ≤ O₁ ∨ X.basicOpen f ≤ O₂} = ⊤ := by
     rw [← U.2.self_le_iSup_basicOpen_iff]
     intro x hxU
@@ -492,32 +115,42 @@ theorem Scheme.IdealSheafData.FiniteTypeOn.sup {I : X.IdealSheafData} {O₁ O₂
     rcases g.2 with hg | hg
     · exact h₁ (X.affineBasicOpen g.1) ((X.affineBasicOpen_coe g.1).trans_le hg)
     · exact h₂ (X.affineBasicOpen g.1) ((X.affineBasicOpen_coe g.1).trans_le hg)
-  haveI := U.2.isLocalization_basicOpen g.1
+  have := U.2.isLocalization_basicOpen g.1
   refine Ideal.FG.map_localizationAway (S := Γ(X, X.basicOpen g.1)) ?_
-  rw [show algebraMap Γ(X, U.1) Γ(X, X.basicOpen g.1) =
-      (X.presheaf.map (homOfLE <| X.basicOpen_le g.1).op).hom from rfl,
-    I.map_ideal_basicOpen U g.1]
-  exact hfg
+  rwa [algebraMap_basicOpen_eq, I.map_ideal_basicOpen U g.1]
 
-/-- **The binary gluing step of the finite-type extension theorem** (Stacks Project
-Tag 01PF; blueprint §1.2.C): if `I₀ ≤ H₀` is of finite type on the affine opens contained
-in a quasi-compact open `O`, there is an `I ≤ H₀` of finite type on the affine opens
-contained in `O ⊔ V`, for `V` affine, with the same restriction to `O`.
+end FiniteType
 
-The new ideal sheaf is `((I₀|_O)_* ) ⊓ ((Ñ')_*) ⊓ H₀` where `N' ≤ N = I₀(V)` is the
-finitely generated subideal produced by the affine clearing-denominators lemma on a finite
-basic-open cover of the overlap `O ⊓ V`, and the pushforwards are the maximal
-quasi-coherent extensions from `O` resp. `V`. -/
-theorem Scheme.IdealSheafData.exists_le_finiteTypeOn_sup [QuasiSeparatedSpace X]
-    {H₀ I₀ : X.IdealSheafData} {O : X.Opens} (hO : IsCompact (O : Set X))
-    (V : X.affineOpens) (hle : I₀ ≤ H₀) (hft : I₀.FiniteTypeOn O) :
-    ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.FiniteTypeOn (O ⊔ V.1) ∧
+/-- The union of a quasi-compact open with the supremum of a finite family of affine opens
+is quasi-compact. -/
+theorem isCompact_sup_finsetSup {O : X.Opens} (hO : IsCompact (O : Set X))
+    (t : Finset X.affineOpens) :
+    IsCompact (((O ⊔ t.sup fun V ↦ V.1 : X.Opens) : X.Opens) : Set X) := by
+  classical
+  induction t using Finset.induction_on with
+  | empty => simpa using hO
+  | insert V t hV IH =>
+    have hsup : O ⊔ (insert V t).sup (fun V ↦ V.1) = (O ⊔ t.sup fun V ↦ V.1) ⊔ V.1 := by
+      rw [Finset.sup_insert, sup_comm V.1 (t.sup fun V ↦ V.1), ← sup_assoc]
+    rw [hsup, TopologicalSpace.Opens.coe_sup]
+    exact IH.union V.2.isCompact
+
+section Gluing
+
+variable [QuasiSeparatedSpace X]
+
+/-- The binary gluing step of the finite-type extension theorem (Stacks Project
+Tag 01PF): if `I₀ ≤ H₀` is of finite type on a quasi-compact open `O`, there is an
+`I ≤ H₀` of finite type on `O ⊔ V`, for `V` affine, with the same restriction to `O`. -/
+theorem exists_le_ofFiniteTypeOn_sup {H₀ I₀ : X.IdealSheafData} {O : X.Opens}
+    (hO : IsCompact (O : Set X)) (V : X.affineOpens) (hle : I₀ ≤ H₀)
+    (hft : I₀.ofFiniteTypeOn O) :
+    ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteTypeOn (O ⊔ V.1) ∧
       I.comap O.ι = I₀.comap O.ι := by
   classical
-  haveI hOι : QuasiCompact O.ι := Scheme.Opens.quasiCompact_ι O hO
-  haveI hVι : QuasiCompact V.1.ι := Scheme.Opens.quasiCompact_ι V.1 V.2.isCompact
-  haveI : IsAffine V.1.toScheme := V.2
-  set N : Ideal Γ(X, V.1) := I₀.ideal V with hNdef
+  have : CompactSpace O.toScheme := isCompact_iff_compactSpace.mp hO
+  have : CompactSpace V.1.toScheme := isCompact_iff_compactSpace.mp V.2.isCompact
+  have : IsAffine V.1.toScheme := V.2
   -- a finite basic-open cover of the overlap `O ⊓ V`
   have hOV : IsCompact ((O ⊓ V.1 : X.Opens) : Set X) := by
     rw [TopologicalSpace.Opens.coe_inf]
@@ -530,56 +163,66 @@ theorem Scheme.IdealSheafData.exists_le_finiteTypeOn_sup [QuasiSeparatedSpace X]
       obtain ⟨f, hf, hxf⟩ := V.2.exists_basicOpen_le (⟨x, hx⟩ : (O ⊓ V.1 : X.Opens))
         (TopologicalSpace.Opens.mem_inf.mp hx).2
       exact Set.mem_iUnion.mpr ⟨⟨f, hf⟩, hxf⟩)
-  set s : Finset Γ(X, V.1) := s0.image (·.1) with hsdef
+  set s : Finset Γ(X, V.1) := s0.image (·.1)
   have hsub : ∀ f ∈ s, X.basicOpen f ≤ O ⊓ V.1 := by
     intro f hf
     obtain ⟨g, -, rfl⟩ := Finset.mem_image.mp hf
     exact g.2
-  -- clearing denominators: a finitely generated `N' ≤ N` with the same localizations
-  have hlocfg : ∀ f ∈ s, (N.map (algebraMap Γ(X, V.1) (Localization.Away f))).FG := by
+  -- clearing denominators: a finitely generated `N' ≤ I₀(V)` with the same restriction to
+  -- every basic open of the cover
+  have hlocfg : ∀ f ∈ s,
+      ((I₀.ideal V).map (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom).FG := by
     intro f hf
-    haveI := V.2.isLocalization_basicOpen f
-    have hfg : (I₀.ideal (X.affineBasicOpen f)).FG :=
-      hft (X.affineBasicOpen f)
-        ((X.affineBasicOpen_coe f).trans_le ((hsub f hf).trans inf_le_left))
-    refine Ideal.FG.map_localizationAway (S := Γ(X, X.basicOpen f)) ?_
-    rw [show algebraMap Γ(X, V.1) Γ(X, X.basicOpen f) =
-        (X.presheaf.map (homOfLE <| X.basicOpen_le f).op).hom from rfl,
-      I₀.map_ideal_basicOpen V f]
-    exact hfg
-  obtain ⟨N', hN'le, hN'fg, hN'loc⟩ := N.exists_fg_le_map_localization_eq s hlocfg
+    rw [I₀.map_ideal_basicOpen V f]
+    exact hft (X.affineBasicOpen f)
+      ((X.affineBasicOpen_coe f).trans_le ((hsub f hf).trans inf_le_left))
+  obtain ⟨N', hN'le, hN'fg, hN'loc⟩ :=
+    Ideal.exists_fg_le_map_eq (I₀.ideal V) s (fun f ↦ Γ(X, X.basicOpen f))
+      (fun f ↦ (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom) hlocfg
   -- the finite-type ideal sheaf on `V` generated by `N'`
   have htop : (⊤ : V.1.toScheme.Opens) ≤ V.1.ι ⁻¹ᵁ V.1 := V.1.ι_preimage_self.ge
-  set K' : V.1.toScheme.IdealSheafData :=
-    Scheme.IdealSheafData.ofIdealTop (N'.map (V.1.ι.appLE V.1 ⊤ htop).hom) with hK'def
   have hK'ideal : ∀ U'' : V.1.toScheme.affineOpens,
-      K'.ideal U'' = N'.map (V.1.ι.appLE V.1 U''.1 (le_top.trans htop)).hom := by
+      (ofIdealTop (N'.map (V.1.ι.appLE V.1 ⊤ htop).hom)).ideal U'' =
+        N'.map (V.1.ι.appLE V.1 U''.1 (le_top.trans htop)).hom := by
     intro U''
-    rw [hK'def, Scheme.IdealSheafData.ofIdealTop_ideal, Ideal.map_map]
+    rw [ofIdealTop_ideal, Ideal.map_map]
     congr 1
     rw [← CommRingCat.hom_comp]
     congr 1
     rw [Scheme.Hom.appLE_map]
+  set K' : V.1.toScheme.IdealSheafData :=
+    ofIdealTop (N'.map (V.1.ι.appLE V.1 ⊤ htop).hom)
   have hIdealV : ∀ (L : X.IdealSheafData) (U'' : V.1.toScheme.affineOpens),
       (L.comap V.1.ι).ideal U'' =
         (L.ideal V).map (V.1.ι.appLE V.1 U''.1 (le_top.trans htop)).hom :=
-    fun L U'' ↦ L.ideal_comap_ι_eq_map_appLE V U'' _
+    fun L U'' ↦ ideal_comap_eq_map_appLE V.1.ι L V U'' (le_top.trans htop)
   have hK'le : K' ≤ I₀.comap V.1.ι := by
-    refine Scheme.IdealSheafData.le_of_isAffine ?_
+    refine le_of_isAffine ?_
     rw [hK'ideal ⟨⊤, isAffineOpen_top _⟩, hIdealV I₀ ⟨⊤, isAffineOpen_top _⟩]
     exact Ideal.map_mono hN'le
   -- the comparison on the overlap: `I₀` and `K'` restrict to the same ideal sheaf
   have hpre : IsAffineOpen (V.1.ι ⁻¹ᵁ V.1) :=
     V.2.preimage_of_isOpenImmersion V.1.ι (by rw [Scheme.Opens.opensRange_ι])
+  -- the restriction to a basic open of `V` factors through the restriction to the
+  -- corresponding basic open of `X`
+  have hcomp : ∀ f : Γ(X, V.1),
+      (V.1.ι.appLE V.1 (V.1.toScheme.basicOpen (V.1.ι.app V.1 f))
+          (le_top.trans htop)).hom =
+        (V.1.ι.appLE (X.basicOpen f) (V.1.toScheme.basicOpen (V.1.ι.app V.1 f))
+            (Scheme.preimage_basicOpen V.1.ι f).ge).hom.comp
+          (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom := by
+    intro f
+    rw [← CommRingCat.hom_comp, Scheme.Hom.map_appLE]
   have hoverlap : (I₀.comap V.1.ι).comap (V.1.ι ⁻¹ᵁ O).ι ≤ K'.comap (V.1.ι ⁻¹ᵁ O).ι := by
-    refine Scheme.IdealSheafData.comap_le_comap_of_ideal_le _
+    refine comap_le_comap_of_ideal_le _
       (fun f : s ↦ ⟨V.1.toScheme.basicOpen (V.1.ι.app V.1 f.1),
-        hpre.basicOpen (V.1.ι.app V.1 f.1)⟩) (fun f ↦ ?_) ?_ (fun f ↦ ?_)
-    · rw [Scheme.Opens.opensRange_ι]
-      change V.1.toScheme.basicOpen (V.1.ι.app V.1 f.1) ≤ V.1.ι ⁻¹ᵁ O
-      rw [← Scheme.preimage_basicOpen]
-      intro x hx
-      exact ((hsub f.1 f.2).trans inf_le_left) hx
+        hpre.basicOpen (V.1.ι.app V.1 f.1)⟩) (fun f ↦ ?_) ?_ fun f ↦ ?_
+    · have hf : V.1.toScheme.basicOpen (V.1.ι.app V.1 f.1) ≤ V.1.ι ⁻¹ᵁ O := by
+        rw [← Scheme.preimage_basicOpen]
+        intro x hx
+        exact ((hsub f.1 f.2).trans inf_le_left) hx
+      rw [Scheme.Opens.opensRange_ι]
+      exact hf
     · rw [Scheme.Opens.opensRange_ι]
       intro x hx
       have hxV : V.1.ι x ∈ (V.1 : Set X) := by
@@ -587,96 +230,70 @@ theorem Scheme.IdealSheafData.exists_le_finiteTypeOn_sup [QuasiSeparatedSpace X]
         exact Set.mem_range_self x
       obtain ⟨g, hg0, hxg⟩ := Set.mem_iUnion₂.mp (hs0 ⟨hx, hxV⟩)
       refine TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨g.1, Finset.mem_image_of_mem _ hg0⟩, ?_⟩
-      change x ∈ V.1.toScheme.basicOpen (V.1.ι.app V.1 g.1)
-      rw [← Scheme.preimage_basicOpen]
-      exact hxg
+      have hmem : x ∈ V.1.ι ⁻¹ᵁ X.basicOpen g.1 := hxg
+      rw [Scheme.preimage_basicOpen] at hmem
+      exact hmem
     · rw [hIdealV I₀, hK'ideal]
       refine le_of_eq ?_
-      have hunit : IsUnit ((V.1.ι.appLE V.1
-          (V.1.toScheme.basicOpen (V.1.ι.app V.1 f.1)) (le_top.trans htop)).hom f.1) := by
-        haveI := hpre.isLocalization_basicOpen (V.1.ι.app V.1 f.1)
-        have heq : (V.1.ι.appLE V.1
-            (V.1.toScheme.basicOpen (V.1.ι.app V.1 f.1)) (le_top.trans htop)).hom f.1 =
-            algebraMap Γ(V.1.toScheme, V.1.ι ⁻¹ᵁ V.1)
-              Γ(V.1.toScheme, V.1.toScheme.basicOpen (V.1.ι.app V.1 f.1))
-              (V.1.ι.app V.1 f.1) := rfl
-        rw [heq]
-        exact IsLocalization.map_units _ ⟨_, Submonoid.mem_powers (V.1.ι.app V.1 f.1)⟩
-      exact Ideal.map_eq_map_of_localizationAway hunit ((hN'loc f.1 f.2).symm)
+      rw [hcomp f.1, ← Ideal.map_map, ← Ideal.map_map, hN'loc f.1 f.2]
   -- the two maximal extensions and the candidate ideal sheaf
-  set F₁ : X.IdealSheafData := (I₀.comap O.ι).map O.ι with hF₁def
-  set F₂ : X.IdealSheafData := K'.map V.1.ι with hF₂def
+  set F₁ : X.IdealSheafData := (I₀.comap O.ι).map O.ι
+  set F₂ : X.IdealSheafData := K'.map V.1.ι
   have hAleF₂ : I₀.comap O.ι ≤ F₂.comap O.ι := by
-    rw [hF₂def, Scheme.IdealSheafData.map_comap_opens V.1.ι K' O,
-      Scheme.IdealSheafData.le_map_iff_comap_le]
     have hcomp : (I₀.comap O.ι).comap (V.1.ι ∣_ O) =
         (I₀.comap V.1.ι).comap (V.1.ι ⁻¹ᵁ O).ι := by
-      rw [← Scheme.IdealSheafData.comap_comp, ← Scheme.IdealSheafData.comap_comp,
-        morphismRestrict_ι]
-    rw [hcomp]
+      rw [← comap_comp, ← comap_comp, morphismRestrict_ι]
+    rw [map_comap_opens V.1.ι K' O, le_map_iff_comap_le, hcomp]
     exact hoverlap
   have hcomapO : (F₁ ⊓ F₂ ⊓ H₀).comap O.ι = I₀.comap O.ι := by
-    rw [Scheme.IdealSheafData.comap_inf_of_isOpenImmersion,
-      Scheme.IdealSheafData.comap_inf_of_isOpenImmersion, hF₁def,
-      Scheme.IdealSheafData.comap_map_ι, inf_eq_left.mpr hAleF₂,
-      inf_eq_left.mpr (Scheme.IdealSheafData.comap_mono O.ι hle)]
+    rw [comap_inf_of_isOpenImmersion, comap_inf_of_isOpenImmersion, comap_map,
+      inf_eq_left.mpr hAleF₂, inf_eq_left.mpr (comap_mono O.ι hle)]
   have hcomapV : (F₁ ⊓ F₂ ⊓ H₀).comap V.1.ι = K' := by
-    rw [Scheme.IdealSheafData.comap_inf_of_isOpenImmersion,
-      Scheme.IdealSheafData.comap_inf_of_isOpenImmersion, hF₂def,
-      Scheme.IdealSheafData.comap_map_ι]
-    have h1 : K' ≤ F₁.comap V.1.ι :=
-      hK'le.trans (Scheme.IdealSheafData.comap_mono V.1.ι
-        (Scheme.IdealSheafData.le_map_comap I₀ O.ι))
-    have h2 : K' ≤ H₀.comap V.1.ι :=
-      hK'le.trans (Scheme.IdealSheafData.comap_mono V.1.ι hle)
-    rw [inf_eq_right.mpr h1, inf_eq_left.mpr h2]
-  refine ⟨F₁ ⊓ F₂ ⊓ H₀, inf_le_right, Scheme.IdealSheafData.FiniteTypeOn.sup ?_ ?_, hcomapO⟩
-  · refine Scheme.IdealSheafData.finiteTypeOn_of_comap fun U'' ↦ ?_
-    rw [hcomapO]
-    exact Scheme.IdealSheafData.fg_ideal_comap_of_finiteTypeOn hft U''
-  · refine Scheme.IdealSheafData.finiteTypeOn_of_comap fun U'' ↦ ?_
-    rw [hcomapV, hK'ideal U'']
-    exact hN'fg.map _
+    rw [comap_inf_of_isOpenImmersion, comap_inf_of_isOpenImmersion, comap_map]
+    have h₁ : K' ≤ F₁.comap V.1.ι :=
+      hK'le.trans (comap_mono V.1.ι (le_map_comap I₀ O.ι))
+    have h₂ : K' ≤ H₀.comap V.1.ι := hK'le.trans (comap_mono V.1.ι hle)
+    rw [inf_eq_right.mpr h₁, inf_eq_left.mpr h₂]
+  refine ⟨F₁ ⊓ F₂ ⊓ H₀, inf_le_right, ofFiniteTypeOn.sup ?_ ?_, hcomapO⟩
+  · rw [ofFiniteTypeOn_iff_comap, hcomapO, ← ofFiniteTypeOn_iff_comap]
+    exact hft
+  · rw [ofFiniteTypeOn_iff_comap, hcomapV]
+    intro U'' _
+    rw [hK'ideal U'']
+    exact Ideal.FG.map hN'fg _
 
-/-- **Existence of a finite-type ideal sheaf with prescribed restriction** (Stacks Project
-Tag 01PF, order-theoretic form; blueprint §1.2): on a quasi-compact quasi-separated scheme,
-every ideal sheaf `H₀` whose restriction to a quasi-compact open `W` is of finite type
-contains a finite-type ideal sheaf with the same restriction to `W`. -/
-theorem Scheme.IdealSheafData.exists_finiteType_le_comap_eq [CompactSpace X]
-    [QuasiSeparatedSpace X] (H₀ : X.IdealSheafData) (W : X.Opens)
-    (hW : IsCompact (W : Set X))
-    (hJ : ∀ U' : W.toScheme.affineOpens, ((H₀.comap W.ι).ideal U').FG) :
-    ∃ I : X.IdealSheafData, I ≤ H₀ ∧ (∀ U : X.affineOpens, (I.ideal U).FG) ∧
-      I.comap W.ι = H₀.comap W.ι := by
+/-- Existence of a finite-type ideal sheaf with prescribed restriction (Stacks Project
+Tag 01PF, order-theoretic form): on a quasi-compact quasi-separated scheme, every ideal
+sheaf `H₀` whose restriction to a quasi-compact open `W` is of finite type contains a
+finite-type ideal sheaf with the same restriction to `W`.
+(Blueprint: `lemma:nagata-extend-finite-type-ideal`.) -/
+theorem exists_finiteType_le_comap_eq [CompactSpace X] (H₀ : X.IdealSheafData) (W : X.Opens)
+    (hW : IsCompact (W : Set X)) (hJ : H₀.ofFiniteTypeOn W) :
+    ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteType ∧ I.comap W.ι = H₀.comap W.ι := by
   classical
+  -- enlarge the open of finite-typeness one affine open at a time
   have key : ∀ t : Finset X.affineOpens,
-      IsCompact ((W ⊔ t.sup (fun V ↦ V.1) : X.Opens) : Set X) ∧
-      ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.FiniteTypeOn (W ⊔ t.sup (fun V ↦ V.1)) ∧
+      ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteTypeOn (W ⊔ t.sup fun V ↦ V.1) ∧
         I.comap W.ι = H₀.comap W.ι := by
     intro t
     induction t using Finset.induction_on with
     | empty =>
       rw [Finset.sup_empty, sup_bot_eq]
-      exact ⟨hW, H₀, le_rfl, Scheme.IdealSheafData.finiteTypeOn_of_comap hJ, rfl⟩
+      exact ⟨H₀, le_rfl, hJ, rfl⟩
     | insert V t hV IH =>
-      obtain ⟨hO, I₀, hle, hft, hcomap⟩ := IH
-      have hsup : W ⊔ (insert V t).sup (fun V ↦ V.1) =
-          (W ⊔ t.sup (fun V ↦ V.1)) ⊔ V.1 := by
+      obtain ⟨I₀, hle, hft, hcomap⟩ := IH
+      have hsup : W ⊔ (insert V t).sup (fun V ↦ V.1) = (W ⊔ t.sup fun V ↦ V.1) ⊔ V.1 := by
         rw [Finset.sup_insert, sup_comm V.1 (t.sup fun V ↦ V.1), ← sup_assoc]
-      constructor
-      · rw [hsup, TopologicalSpace.Opens.coe_sup]
-        exact hO.union V.2.isCompact
       obtain ⟨I, hIle, hIft, hIcomap⟩ :=
-        Scheme.IdealSheafData.exists_le_finiteTypeOn_sup hO V hle hft
+        exists_le_ofFiniteTypeOn_sup (isCompact_sup_finsetSup hW t) V hle hft
       refine ⟨I, hIle, by rwa [hsup], ?_⟩
-      have hWle : W ≤ W ⊔ t.sup (fun V ↦ V.1) := le_sup_left
-      have h1 : I.comap W.ι =
-          (I.comap (W ⊔ t.sup (fun V ↦ V.1)).ι).comap (X.homOfLE hWle) := by
-        rw [← Scheme.IdealSheafData.comap_comp, Scheme.homOfLE_ι]
-      have h2 : I₀.comap W.ι =
-          (I₀.comap (W ⊔ t.sup (fun V ↦ V.1)).ι).comap (X.homOfLE hWle) := by
-        rw [← Scheme.IdealSheafData.comap_comp, Scheme.homOfLE_ι]
-      rw [h1, hIcomap, ← h2, hcomap]
+      have hWle : W ≤ W ⊔ t.sup fun V ↦ V.1 := le_sup_left
+      have h₁ : I.comap W.ι = (I.comap (W ⊔ t.sup fun V ↦ V.1).ι).comap (X.homOfLE hWle) := by
+        rw [← comap_comp, Scheme.homOfLE_ι]
+      have h₂ : I₀.comap W.ι =
+          (I₀.comap (W ⊔ t.sup fun V ↦ V.1).ι).comap (X.homOfLE hWle) := by
+        rw [← comap_comp, Scheme.homOfLE_ι]
+      rw [h₁, hIcomap, ← h₂, hcomap]
   have hcov : (Set.univ : Set X) ⊆ ⋃ V : X.affineOpens, (V.1 : Set X) := by
     intro x _
     have hx : x ∈ (⊤ : X.Opens) := trivial
@@ -685,12 +302,27 @@ theorem Scheme.IdealSheafData.exists_finiteType_le_comap_eq [CompactSpace X]
     exact Set.mem_iUnion.mpr ⟨V, hV⟩
   obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
     (fun V : X.affineOpens ↦ (V.1 : Set X)) (fun V ↦ V.1.isOpen) hcov
-  obtain ⟨-, I, hle, hft, hcomap⟩ := key t
-  refine ⟨I, hle, fun U ↦ hft U fun x _ ↦ ?_, hcomap⟩
+  obtain ⟨I, hle, hft, hcomap⟩ := key t
+  refine ⟨I, hle, ?_, hcomap⟩
+  refine fun U _ ↦ hft U fun x _ ↦ ?_
   obtain ⟨V, hVt, hxV⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
-  exact (le_sup_right : t.sup (fun V ↦ V.1) ≤ W ⊔ t.sup (fun V ↦ V.1))
+  exact (le_sup_right : (t.sup fun V ↦ V.1) ≤ W ⊔ t.sup fun V ↦ V.1)
     ((Finset.le_sup (f := fun V ↦ V.1) hVt) hxV)
 
-end FiniteTypeGluing
+/-- Extension of a finite-type ideal sheaf from a quasi-compact open (Stacks Project
+Tag 01PF): on a quasi-compact quasi-separated scheme, every finite-type ideal sheaf on a
+quasi-compact open extends to a finite-type ideal sheaf on the whole scheme.
+(Blueprint: `lemma:nagata-extend-finite-type-ideal`.) -/
+theorem exists_finiteType_comap_eq [CompactSpace X] (W : X.Opens)
+    (hW : IsCompact (W : Set X)) (J : W.toScheme.IdealSheafData) (hJ : J.ofFiniteType) :
+    ∃ I : X.IdealSheafData, I.ofFiniteType ∧ I.comap W.ι = J := by
+  have : CompactSpace W.toScheme := isCompact_iff_compactSpace.mp hW
+  have hJ' : (J.map W.ι).ofFiniteTypeOn W := by
+    rw [ofFiniteTypeOn_iff_comap, comap_map]
+    exact hJ
+  obtain ⟨I, -, hft, hcomap⟩ := exists_finiteType_le_comap_eq (J.map W.ι) W hW hJ'
+  exact ⟨I, hft, by rw [hcomap, comap_map]⟩
 
-end AlgebraicGeometry
+end Gluing
+
+end AlgebraicGeometry.Scheme.IdealSheafData

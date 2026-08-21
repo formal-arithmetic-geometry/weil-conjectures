@@ -5,7 +5,13 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.FieldTheory.SplittingField.Construction
+public import Mathlib.RingTheory.PowerSeries.Exp
+public import Mathlib.RingTheory.SimpleRing.Principal
 
 @[expose] public section
 
