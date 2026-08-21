@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 
 /-!
 # Transport of a lax monoidal structure along a natural isomorphism
@@ -16,6 +17,13 @@ with unit `ε F ≫ i.hom.app (𝟙_ C)` and tensorator
 `(i.inv.app X ⊗ₘ i.inv.app Y) ≫ μ F X Y ≫ i.hom.app (X ⊗ Y)`.
 
 This is the lax analogue of `CategoryTheory.Functor.Monoidal.transport`.
+
+We also show that the property of being a monoidal adjunction is stable under replacing
+the right adjoint along a monoidal natural isomorphism: if `adj : L ⊣ R` satisfies
+`adj.IsMonoidal` and `e : R ≅ R'` is a natural isomorphism of lax monoidal functors with
+`NatTrans.IsMonoidal e.hom`, then `(adj.ofNatIsoRight e).IsMonoidal`
+(`CategoryTheory.Adjunction.isMonoidal_ofNatIsoRight`). This complements the existing
+stability instances for `Adjunction.id` and `Adjunction.comp`.
 -/
 
 @[expose] public section
@@ -81,3 +89,33 @@ lemma transport_μ {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) (X Y : C) : let
   rfl
 
 end CategoryTheory.Functor.LaxMonoidal
+
+namespace CategoryTheory.Adjunction
+
+open MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+  [MonoidalCategory C] [MonoidalCategory D]
+  {L : C ⥤ D} {R R' : D ⥤ C} (adj : L ⊣ R) (e : R ≅ R')
+  [L.OplaxMonoidal] [R.LaxMonoidal] [R'.LaxMonoidal] [adj.IsMonoidal]
+  [NatTrans.IsMonoidal e.hom]
+
+/-- The property of being a monoidal adjunction is stable under replacing the right adjoint
+along a monoidal natural isomorphism. -/
+instance isMonoidal_ofNatIsoRight : (adj.ofNatIsoRight e).IsMonoidal where
+  leftAdjoint_ε := by
+    simp only [ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.id_obj, Category.assoc]
+    rw [← e.hom.naturality (η L), unit_app_unit_comp_map_η_assoc,
+      NatTrans.IsMonoidal.unit (τ := e.hom)]
+  leftAdjoint_μ X Y := by
+    simp only [ofNatIsoRight_unit, ofNatIsoRight_counit, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.id_obj,
+      Category.assoc, ← tensorHom_comp_tensorHom]
+    rw [δ_natural_assoc, ← e.hom.naturality, Functor.map_comp, Category.assoc,
+      adj.unit_naturality_assoc, ← Category.assoc (adj.unit.app _),
+      ← IsMonoidal.leftAdjoint_μ (adj := adj), NatTrans.IsMonoidal.tensor (τ := e.hom),
+      tensorHom_comp_tensorHom_assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_app,
+      tensorHom_id, id_whiskerRight, Category.id_comp]
+
+end CategoryTheory.Adjunction
