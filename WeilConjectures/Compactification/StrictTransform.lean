@@ -106,19 +106,16 @@ def strictTransformToSource : strictTransform f π U ⟶ Y :=
 /-! The strict transform of a morphism is a closed subscheme of the base change, so
 separatedness, quasi-compactness and local finite type are inherited from `f`. -/
 
-instance [IsSeparated f] : IsSeparated (strictTransformMap f π U) := by
+instance [IsSeparated f] : IsSeparated (strictTransformMap f π U) :=
   have : IsSeparated (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
-  unfold strictTransformMap
-  infer_instance
+  inferInstanceAs (IsSeparated (strictTransformι f π U ≫ pullback.snd f π))
 
-instance [QuasiCompact f] : QuasiCompact (strictTransformMap f π U) := by
-  unfold strictTransformMap
-  infer_instance
+instance [QuasiCompact f] : QuasiCompact (strictTransformMap f π U) :=
+  inferInstanceAs (QuasiCompact (strictTransformι f π U ≫ pullback.snd f π))
 
-instance [LocallyOfFiniteType f] : LocallyOfFiniteType (strictTransformMap f π U) := by
+instance [LocallyOfFiniteType f] : LocallyOfFiniteType (strictTransformMap f π U) :=
   have : LocallyOfFiniteType (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
-  unfold strictTransformMap
-  infer_instance
+  inferInstanceAs (LocallyOfFiniteType (strictTransformι f π U ≫ pullback.snd f π))
 
 /-- The ideal sheaf cutting out the strict transform is the kernel of the open locus. -/
 lemma ker_strictTransformι :

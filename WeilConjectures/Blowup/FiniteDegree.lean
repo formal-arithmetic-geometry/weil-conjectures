@@ -87,6 +87,14 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.sup
   rw [h]
   exact Submodule.FG.sup (hI U le_top) (hK U le_top)
 
+/-- Finite-type ideal sheaves are stable under products. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
+    {X : Scheme.{u}} {I K : X.IdealSheafData}
+    (hI : I.ofFiniteType) (hK : K.ofFiniteType) : (I * K).ofFiniteType := by
+  intro U _
+  rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
+  exact (hI U le_top).mul (hK U le_top)
+
 /-- The ideal of sections on `⊤` of `ofIdealTop`. -/
 private lemma ideal_top_ofIdealTop {Y : Scheme.{u}} [IsAffine Y] (K : Ideal Γ(Y, ⊤)) :
     (Scheme.IdealSheafData.ofIdealTop K).ideal ⟨⊤, isAffineOpen_top _⟩ = K := by

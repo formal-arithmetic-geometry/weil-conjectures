@@ -17,7 +17,7 @@ sections is the unit ideal.
 We also record `AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support`:
 an ideal sheaf is contained in the kernel of a morphism from a reduced scheme if and only
 if the range of the morphism lies in its support; and
-`AlgebraicGeometry.Scheme.IdealSheafData.coe_support_sup_subset`, the set-level form of
+`AlgebraicGeometry.Scheme.IdealSheafData.coe_support_sup`, the set-level form of
 `support_sup`.
 -/
 
@@ -48,10 +48,10 @@ lemma le_ker_iff_range_subset_support {W : Scheme.{u}} (g : W ⟶ X) [IsReduced 
   rw [← map_bot, le_map_iff_comap_le, le_bot_iff, ← support_eq_top_iff, support_comap]
   simp [TopologicalSpace.Closeds.ext_iff, Set.preimage_eq_univ_iff]
 
-/-- The support of a sum of ideal sheaves is contained in the intersection of the
-supports. -/
-lemma coe_support_sup_subset (I₁ I₂ : X.IdealSheafData) :
-    ((I₁ ⊔ I₂).support : Set X) ⊆ (I₁.support : Set X) ∩ (I₂.support : Set X) := by
+/-- The support of a sum of ideal sheaves is the intersection of the supports: the
+set-level form of `support_sup`. -/
+lemma coe_support_sup (I₁ I₂ : X.IdealSheafData) :
+    ((I₁ ⊔ I₂).support : Set X) = (I₁.support : Set X) ∩ (I₂.support : Set X) := by
   rw [support_sup, TopologicalSpace.Closeds.coe_inf]
 
 end AlgebraicGeometry.Scheme.IdealSheafData

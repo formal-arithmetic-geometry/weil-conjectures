@@ -92,9 +92,7 @@ lemma IsInvertible.pow {C : X.IdealSheafData} (hC : C.IsInvertible) (d : ℕ) :
   intro x
   obtain ⟨U, hxU, a, ha, hgen⟩ := hC x
   refine ⟨U, hxU, a ^ d, pow_mem ha d, ?_⟩
-  have h1 : (C ^ d).ideal U = C.ideal U ^ d := by
-    rw [ideal_pow, Pi.pow_apply]
-  rw [h1, hgen, Ideal.span_singleton_pow]
+  rw [ideal_pow, Pi.pow_apply, hgen, Ideal.span_singleton_pow]
 
 /-- Invertibility on an affine chart: if a morphism `Spec R ⟶ X` is `Spec` of a ring map `ψ`
 followed by the canonical morphism of an affine open `U`, and the extension of `J.ideal U`
