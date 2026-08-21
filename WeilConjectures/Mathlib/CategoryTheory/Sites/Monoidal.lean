@@ -7,7 +7,10 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Sites.Pullback
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 
 /-!
 # Monoidal structures on the pushforward and pullback of sheaves
@@ -46,6 +49,20 @@ The oplax monoidal structure on the pullback functor is obtained from the lax mo
 structure on the pushforward by the doctrinal adjunction construction
 `CategoryTheory.Adjunction.leftAdjointOplaxMonoidal`. Showing that it is strong monoidal
 under suitable hypotheses (a conservative family of points) is the subject of future work.
+When `A` is moreover braided and the sheaf categories carry the braided structure
+`Sheaf.braidedCategory`, these lax monoidal structures preserve the braidings:
+
+- `CategoryTheory.sheafToPresheafLaxBraided`: the inclusion of sheaves into presheaves is
+  lax braided, being the right adjoint of the braided sheafification functor.
+- `CategoryTheory.Functor.sheafPushforwardContinuousLaxBraided`: the pushforward functor
+  is lax braided, by transporting the lax braided structure of the composite above along
+  the same isomorphism.
+
+Since a symmetric monoidal functor is by definition a braided functor between symmetric
+monoidal categories, this also covers the symmetric case.
+
+The dual statements for the pullback functor `F.sheafPullback A J K` (an oplax monoidal
+structure, which is strong under suitable hypotheses) are the subject of future work.
 -/
 
 @[expose] public section
@@ -143,5 +160,45 @@ lemma sheafPullback_δ (F₁ F₂ : Sheaf J A) :
 end
 
 end Functor
+
+section BraidedCategory
+
+variable [BraidedCategory A]
+
+attribute [local instance] Sheaf.braidedCategory
+
+section
+
+variable [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
+
+/-- The inclusion of sheaves into presheaves is lax braided with respect to the braided
+category structure on sheaves obtained by localization, as the right adjoint of the
+braided functor `presheafToSheaf J A`. -/
+noncomputable instance sheafToPresheafLaxBraided :
+    (sheafToPresheaf J A).LaxBraided :=
+  (sheafificationAdjunction J A).rightAdjointLaxBraided
+
+end
+
+namespace Functor
+
+variable [F.IsContinuous J K]
+  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
+  [(K.W (A := A)).IsMonoidal] [HasWeakSheafify K A]
+
+/-- The pushforward of sheaves along a continuous functor is lax braided with respect to
+the braided category structures on sheaves obtained by localization: its lax monoidal
+structure is transported along an isomorphism from a composite of three lax braided
+functors. Since a symmetric monoidal functor is by definition a braided functor between
+symmetric monoidal categories, this also covers the symmetric case. -/
+noncomputable instance sheafPushforwardContinuousLaxBraided :
+    (F.sheafPushforwardContinuous A J K).LaxBraided :=
+  letI := Functor.LaxMonoidal.transport_isMonoidal_hom
+    (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A)
+  Functor.LaxBraided.ofNatIso (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A)
+
+end Functor
+
+end BraidedCategory
 
 end CategoryTheory
