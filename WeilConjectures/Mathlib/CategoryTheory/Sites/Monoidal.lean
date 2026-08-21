@@ -6,10 +6,11 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
-# Lax monoidal structure on the pushforward of sheaves
+# Monoidal structures on the pushforward and pullback of sheaves
 
 Let `F : C ⥤ D` be a functor which is continuous with respect to Grothendieck topologies
 `J` on `C` and `K` on `D`, and let `A` be a monoidal category such that the monoidal
@@ -23,6 +24,14 @@ We show:
   sheafification functor `presheafToSheaf J A`.
 - `CategoryTheory.Functor.sheafPushforwardContinuousLaxMonoidal`: the pushforward functor
   `F.sheafPushforwardContinuous A J K : Sheaf K A ⥤ Sheaf J A` is lax monoidal.
+- `CategoryTheory.Functor.sheafPullbackOplaxMonoidal`: the pullback functor
+  `F.sheafPullback A J K : Sheaf J A ⥤ Sheaf K A` is oplax monoidal, being the left
+  adjoint of the lax monoidal pushforward functor.
+- `CategoryTheory.Functor.sheafAdjunctionContinuousIsMonoidal`: the adjunction
+  `F.sheafAdjunctionContinuous A J K` between pullback and pushforward of sheaves is
+  compatible with these (op)lax monoidal structures. This gives access to the
+  compatibility lemmas of `CategoryTheory.Adjunction.IsMonoidal`, which express the
+  structure morphisms of each of the two functors as mates of those of the other.
 
 For the latter, observe that the pushforward is isomorphic to the composite
 `sheafToPresheaf K A ⋙ (whiskeringLeft Cᵒᵖ Dᵒᵖ A).obj F.op ⋙ presheafToSheaf J A`
@@ -33,8 +42,10 @@ for the pointwise monoidal structures on the presheaf categories, and the two ou
 are lax monoidal, so the lax monoidal structure is obtained by transport along the
 isomorphism.
 
-The dual statements for the pullback functor `F.sheafPullback A J K` (an oplax monoidal
-structure, which is strong under suitable hypotheses) are the subject of future work.
+The oplax monoidal structure on the pullback functor is obtained from the lax monoidal
+structure on the pushforward by the doctrinal adjunction construction
+`CategoryTheory.Adjunction.leftAdjointOplaxMonoidal`. Showing that it is strong monoidal
+under suitable hypotheses (a conservative family of points) is the subject of future work.
 -/
 
 @[expose] public section
@@ -89,6 +100,47 @@ noncomputable instance sheafPushforwardContinuousLaxMonoidal :
     (F.sheafPushforwardContinuous A J K).LaxMonoidal :=
   Functor.LaxMonoidal.transport
     (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A)
+
+section
+
+variable [(F.sheafPushforwardContinuous A J K).IsRightAdjoint]
+
+/-- The pullback of sheaves along a continuous functor is oplax monoidal with respect
+to the monoidal category structures on sheaves obtained by localization: it is the left
+adjoint of the lax monoidal pushforward functor, so the structure morphisms are obtained
+as mates by doctrinal adjunction. -/
+noncomputable instance sheafPullbackOplaxMonoidal :
+    (F.sheafPullback A J K).OplaxMonoidal :=
+  (F.sheafAdjunctionContinuous A J K).leftAdjointOplaxMonoidal
+
+/-- The adjunction between the pullback and the pushforward of sheaves along a
+continuous functor is compatible with the oplax monoidal structure on the pullback and
+the lax monoidal structure on the pushforward. In particular the compatibility lemmas
+of `CategoryTheory.Adjunction.IsMonoidal` (such as
+`Adjunction.unit_app_tensor_comp_map_δ` and `Adjunction.map_μ_comp_counit_app_tensor`)
+apply, expressing the structure morphisms of each of the two functors as mates of those
+of the other. -/
+instance sheafAdjunctionContinuousIsMonoidal :
+    (F.sheafAdjunctionContinuous A J K).IsMonoidal :=
+  inferInstance
+
+@[reassoc]
+lemma sheafPullback_η :
+    OplaxMonoidal.η (F.sheafPullback A J K) =
+      ((F.sheafAdjunctionContinuous A J K).homEquiv _ _).symm
+        (LaxMonoidal.ε (F.sheafPushforwardContinuous A J K)) :=
+  (F.sheafAdjunctionContinuous A J K).leftAdjointOplaxMonoidal_η
+
+@[reassoc]
+lemma sheafPullback_δ (F₁ F₂ : Sheaf J A) :
+    OplaxMonoidal.δ (F.sheafPullback A J K) F₁ F₂ =
+      ((F.sheafAdjunctionContinuous A J K).homEquiv _ _).symm
+        (((F.sheafAdjunctionContinuous A J K).unit.app F₁ ⊗ₘ
+            (F.sheafAdjunctionContinuous A J K).unit.app F₂) ≫
+          LaxMonoidal.μ (F.sheafPushforwardContinuous A J K) _ _) :=
+  (F.sheafAdjunctionContinuous A J K).leftAdjointOplaxMonoidal_δ F₁ F₂
+
+end
 
 end Functor
 
