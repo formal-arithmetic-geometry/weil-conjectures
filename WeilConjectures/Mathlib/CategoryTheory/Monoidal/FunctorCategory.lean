@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.FunctorCategory
 
 /-!
-# The constant functor into a functor category is monoidal
+# The constant functor is monoidal and the precomposition functor is braided
 
 When `C` is any category and `D` is a monoidal category, the functor category `C ⥤ D`
 carries the pointwise monoidal structure (`CategoryTheory.Monoidal.functorCategoryMonoidal`).
@@ -16,13 +16,26 @@ The tensor unit and tensor products of constant functors are computed objectwise
 constant functor `Functor.const C : D ⥤ C ⥤ D` is a monoidal functor, with structure
 isomorphisms whose components are identities. We record this as an instance
 `(Functor.const C).Monoidal`.
+
+Moreover, when `E` is a braided monoidal category, the functor categories `C ⥤ E` and
+`D ⥤ E` carry the pointwise braiding `Monoidal.functorCategoryBraided`, and precomposition
+with any functor `F : C ⥤ D` is strong monoidal with identity structure maps
+(`Functor.Monoidal.whiskeringLeft`). We record that this monoidal structure preserves the
+pointwise braiding: `((whiskeringLeft C D E).obj F).Braided`.
+
+Similarly, whiskering on the right with a (lax) braided functor `L : D ⥤ E` is (lax)
+braided for the pointwise braidings.
 -/
 
 @[expose] public section
 
-universe v₁ v₂ u₁ u₂
+universe v₁ v₂ v₃ u₁ u₂ u₃
 
-namespace CategoryTheory.Functor
+namespace CategoryTheory
+
+section Const
+
+namespace Functor
 
 open MonoidalCategory LaxMonoidal OplaxMonoidal
 
@@ -68,4 +81,59 @@ lemma const_μ_app (X Y : D) (c : C) : (μ (const C : D ⥤ C ⥤ D) X Y).app c 
 @[simp]
 lemma const_δ_app (X Y : D) (c : C) : (δ (const C : D ⥤ C ⥤ D) X Y).app c = 𝟙 (X ⊗ Y) := rfl
 
-end CategoryTheory.Functor
+end Functor
+
+end Const
+
+section WhiskeringBraided
+
+open MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+
+namespace Monoidal
+
+variable [MonoidalCategory.{v₂} D] [BraidedCategory.{v₂} D]
+
+@[simp]
+theorem braiding_hom_app {F G : C ⥤ D} {X : C} :
+    (β_ F G).hom.app X = (β_ (F.obj X) (G.obj X)).hom :=
+  rfl
+
+@[simp]
+theorem braiding_inv_app {F G : C ⥤ D} {X : C} :
+    (β_ F G).inv.app X = (β_ (F.obj X) (G.obj X)).inv :=
+  rfl
+
+end Monoidal
+
+namespace Functor
+
+/-- Precomposition with a functor is braided for the pointwise braidings on the
+functor categories. -/
+instance Braided.whiskeringLeft (E : Type u₃) [Category.{v₃} E] [MonoidalCategory E]
+    [BraidedCategory E] (F : C ⥤ D) :
+    ((whiskeringLeft C D E).obj F).Braided where
+  braided G H := by
+    ext X
+    exact (Category.id_comp _).trans (Category.comp_id _).symm
+
+/-- Whiskering on the right with a lax braided functor is lax braided for the pointwise
+braidings on the functor categories. -/
+instance LaxBraided.whiskeringRight (E : Type u₃) [Category.{v₃} E] [MonoidalCategory D]
+    [MonoidalCategory E] [BraidedCategory D] [BraidedCategory E] (L : D ⥤ E) [L.LaxBraided] :
+    ((whiskeringRight C D E).obj L).LaxBraided where
+  braided G H := by ext X; exact Functor.LaxBraided.braided _ _
+
+/-- Whiskering on the right with a braided functor is braided for the pointwise braidings
+on the functor categories. -/
+instance Braided.whiskeringRight (E : Type u₃) [Category.{v₃} E] [MonoidalCategory D]
+    [MonoidalCategory E] [BraidedCategory D] [BraidedCategory E] (L : D ⥤ E) [L.Braided] :
+    ((whiskeringRight C D E).obj L).Braided where
+  braided G H := by ext X; exact Functor.LaxBraided.braided _ _
+
+end Functor
+
+end WhiskeringBraided
+
+end CategoryTheory
