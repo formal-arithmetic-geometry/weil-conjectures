@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.CategoryTheory.Adjunction.Triple
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
@@ -95,6 +95,8 @@ variable (hQP : Q ≤ P)
 variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f)
 
 section LowerShriek
+
+variable [Mono f]
 
 /-- The lower shriek `j_{f!}` along `f : V ⟶ U` with `h : P f`: left Kan extension on
 presheaves followed by sheafification, left adjoint to `localizationRestriction`. -/
@@ -265,6 +267,8 @@ lemma localizationRestriction_map_hom_app
 
 section Adjunction
 
+variable [Mono f]
+
 /-- The adjunction `j_{f!} ⊣ j_f^*`. -/
 noncomputable def localizationLowerShriekAdjunction :
     localizationLowerShriek A P Q f h ⊣ localizationRestriction A P Q hQP f h :=
@@ -322,6 +326,8 @@ noncomputable def upperStarIsoLocalizationRestriction :
   (upperStarLowerStarAdjunction A P Q hQP f).leftAdjointUniq
     (localizationRestrictionLowerStarAdjunction A P Q hQP f h)
 
+variable [Mono f]
+
 /-- The adjunction `j_{f!} ⊣ f^*` between the lower shriek and the pullback, obtained from
 `localizationLowerShriekAdjunction` by transporting along
 `upperStarIsoLocalizationRestriction`. -/
@@ -350,7 +356,7 @@ section Presheaf
 
 variable (P : MorphismProperty Scheme.{u})
   [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
-variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f)
+variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f) [Mono f]
 
 /-- The presheaf-level lower shriek `j_{f,!}^{pre}`: left Kan extension along
 `(MorphismProperty.Over.map ⊤ h).op`. -/
@@ -371,7 +377,7 @@ namespace GrothendieckTopology
 
 variable (P Q : MorphismProperty Scheme.{u})
   [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
-variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f)
+variable {V U : Scheme.{u}} (f : V ⟶ U) (h : P f) [Mono f]
 
 /-- The lower shriek is definitionally the left Kan extension on presheaves followed by
 sheafification. -/

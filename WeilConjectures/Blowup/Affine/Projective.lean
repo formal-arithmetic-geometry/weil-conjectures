@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.PolynomialPresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 
 /-!
 

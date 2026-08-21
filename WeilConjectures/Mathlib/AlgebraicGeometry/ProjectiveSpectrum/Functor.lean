@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
-public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
@@ -42,7 +41,7 @@ lemma Proj.map_congr {f g : 𝒜 →+*ᵍ ℬ} (e : f = g)
     (hf : HomogeneousIdeal.irrelevant ℬ ≤ (HomogeneousIdeal.irrelevant 𝒜).map f)
     (hg : HomogeneousIdeal.irrelevant ℬ ≤ (HomogeneousIdeal.irrelevant 𝒜).map g) :
     Proj.map f hf = Proj.map g hg := by
-  congr
+  subst e; rfl
 
 /-- Naturality of `Proj.toSpecZero` with respect to `Proj.map`: the square
 

@@ -5,6 +5,11 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.RingTheory.IntegralDomain
 public import WeilConjectures.ZetaFunction
 
 @[expose] public section

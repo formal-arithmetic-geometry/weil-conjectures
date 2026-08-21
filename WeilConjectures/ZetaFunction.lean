@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Analysis.SpecialFunctions.Pow.Complex
 
 @[expose] public section
 

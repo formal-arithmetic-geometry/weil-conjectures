@@ -5,10 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
 
@@ -28,8 +26,8 @@ All site-theoretic inputs of the general definition are discharged here:
 - The continuity of the base change functor along an *arbitrary* morphism is provided by
   the instance `Etale.isContinuous_overPullback` of
   `WeilConjectures.SixFunctors.UpperLowerStar.Etale`.
-- Sheafification on the small étale sites is provided for the concrete Grothendieck
-  abelian `A` by Mathlib (`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`).
+- Sheafification on the small étale sites is provided by the sorried instance of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`.
 
 Hence `f_!` carries no hypotheses beyond the standing assumptions on `A`.
 
@@ -65,13 +63,7 @@ lemma isOpenImmersion_le_etale : @IsOpenImmersion ≤ @Etale := fun _ _ _ hi =>
 
 section LowerShriek
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- The lower shriek `f_!` along a morphism `f : X ⟶ Y` admitting a compactification on
