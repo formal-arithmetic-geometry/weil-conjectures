@@ -5,8 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+public import Mathlib.Algebra.Homology.GrothendieckAbelian
+public import Mathlib.CategoryTheory.Localization.LocallySmall
+public import Mathlib.CategoryTheory.Quotient.LocallySmall
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-!
@@ -18,8 +20,7 @@ at the quasi-isomorphisms whose `Hom`-types live in `Type w`.
 
 The construction is purely formal from the existence of K-injective resolutions
 (`CategoryTheory.Abelian.HasKInjectiveResolutions`, whose Grothendieck abelian instance is
-the only mathematical gap, in
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`):
+the only mathematical gap):
 
 * the homotopy category of complexes is locally `w`-small because the category of
   complexes is (`HomologicalComplex.locallySmall`) and quotients preserve local smallness;

@@ -5,7 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.LocalSite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
@@ -62,8 +63,11 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   assumed as an instance hypothesis
   of `IsConstructibleSheaf` is `HasWeakSheafify` for the localizations of the small étale
   sites of all schemes, quantified because the stratification is existentially
-  quantified; for concrete `A`, `HasWeakSheafify` for the (unlocalized) small étale sites
-  already holds by mathlib's `HasSheafify` instance for `smallEtaleTopology`.
+  quantified; for the (unlocalized) small étale sites, `HasWeakSheafify` already holds for
+  a Grothendieck abelian `A` by the sorried instance
+  `CategoryTheory.GrothendieckTopology.hasSheafify_smallGrothendieckTopology` of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, and for concrete `A`
+  by mathlib's `HasSheafify` instance for `smallEtaleTopology`.
 - Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the
   existence of the right Kan extensions along `(Over.forget U).op` needed to compare
   sheafification on the small étale site with sheafification on its localizations.
@@ -83,13 +87,7 @@ variable {X Y : Scheme.{u}}
 
 section PullbackFunctor
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 
 /-- The pullback of étale sheaves along `f : X ⟶ Y` sends constant sheaves to constant
 sheaves: `constantSheaf ⋙ f^*` and `constantSheaf` are both left adjoint to global
@@ -214,9 +212,6 @@ section Constructible
 variable {A : Type u'} [Category.{u} A] [Abelian A]
   {FA : A → A → Type*} {CD : A → Type u}
   [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
   [HasColimitsOfSize.{u, u} A]
   [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]

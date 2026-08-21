@@ -5,7 +5,6 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
@@ -19,9 +18,8 @@ small étale sites. This file records the resulting functors
 `g^* : Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A`.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
-concrete Grothendieck abelian category with `Hom`-types and underlying types in the
-universe `u` of the base schemes. The site-theoretic inputs of the general definitions
-are discharged here:
+Grothendieck abelian category with `Hom`-types in the universe `u` of the base schemes.
+The site-theoretic inputs of the general definitions are discharged here:
 
 - The base change functor `MorphismProperty.Over.pullback @Etale ⊤ g` along an *arbitrary*
   morphism `g` is continuous for the small étale topologies
@@ -30,9 +28,8 @@ are discharged here:
   `W ×_V (V ×_Y Z) ≅ W ×_Y Z` — and it preserves compatible families since it is
   representably flat, being a finite-limit-preserving functor on the finitely complete
   étale slice. Hence `Etale.lowerStar` carries no hypotheses at all.
-- Sheafification on the small étale sites is provided by Mathlib for the concrete
-  Grothendieck abelian `A` (`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`), and the
-  left Kan extensions along the opposites of base change (together with their left
+- Sheafification on the small étale sites and the left Kan extensions along the
+  opposites of base change (together with their left
   exactness) exist since `A` is Grothendieck abelian and the small étale sites are
   essentially small; the latter are the sorried instances of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
@@ -143,13 +140,7 @@ end Continuity
 
 section KanExtension
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [Etale g]
 
 /-- For an étale morphism `g`, base change is right adjoint to the localization functor
@@ -184,13 +175,7 @@ end KanExtension
 
 section Star
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
@@ -259,8 +244,8 @@ instance Etale.upperStar_additive : (Etale.upperStar A g).Additive :=
   (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive
 
 /-- The pullback `g^*` on étale sheaves is left exact, hence exact, being also a left
-adjoint: sheafification on the small étale site of `Z` is left exact by Mathlib's
-`HasSheafify` instance for the concrete Grothendieck abelian `A`, and the left Kan
+adjoint: sheafification on the small étale site of `Z` is left exact by the sorried
+`HasSheafify` instance for the Grothendieck abelian `A`, and the left Kan
 extension along the opposite of base change is left exact — for an étale `g` by
 `Etale.preservesFiniteLimits_op_lan_overPullback`, in general by the sorried
 `Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`, the Kan
@@ -279,13 +264,7 @@ end Star
 
 section Comp
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on

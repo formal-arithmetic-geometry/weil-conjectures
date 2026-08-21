@@ -5,7 +5,6 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!

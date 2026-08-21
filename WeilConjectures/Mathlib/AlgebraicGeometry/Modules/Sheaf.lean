@@ -5,8 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Kernels
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 
 /-!
 # Sections of a kernel of `𝒪_X`-modules

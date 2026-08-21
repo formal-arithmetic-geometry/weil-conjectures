@@ -8463,7 +8463,12 @@ closed subscheme of the first blow-up.
   \label{def:nagata-strict-transform}
   \uses{def:nagata-scheme-image-factor,
     def:nagata-scheme-theoretic-image}
-  \lean{}
+  \lean{AlgebraicGeometry.strictTransformOpen,
+    AlgebraicGeometry.strictTransform,
+    AlgebraicGeometry.strictTransformι,
+    AlgebraicGeometry.strictTransformFactor,
+    AlgebraicGeometry.Scheme.IdealSheafData.strictTransform,
+    AlgebraicGeometry.Scheme.IdealSheafData.strictTransformι}
 
   Let $f\colon Z\to X$, let $\pi\colon X'\to X$, let
   $j\colon U\hookrightarrow X$ be a quasi-compact open immersion, and fix
@@ -8624,6 +8629,33 @@ closed subscheme of the first blow-up.
   \texttt{\detokenize{Scheme.Hom.toImage}}.  Mathlib does not currently
   package the data depending on $(U,\alpha_U)$ as a strict-transform
   construction; this definition specializes its scheme-image API.
+
+  \paragraph{Formalization.}
+  The Lean definition takes a shorter route which does not mention $\alpha_U$ at all.
+  Put
+  \[
+    P_U^{\mathrm{op}}
+      :=\operatorname{pr}_{X'}^{-1}\bigl(\pi^{-1}(U)\bigr)\subseteq P
+      =Z\times_XX',
+  \]
+  an \emph{open subscheme} of $P$
+  (\texttt{\detokenize{AlgebraicGeometry.strictTransformOpen}}), and define
+  \[
+    \operatorname{ST}_\pi(Z)
+      :=\operatorname{SIm}\bigl(P_U^{\mathrm{op}}\hookrightarrow P\bigr)
+  \]
+  (\texttt{\detokenize{AlgebraicGeometry.strictTransform}}), with
+  $\iota_{f,\pi}$ and $\lambda_{f,\pi}^{\mathrm{im}}$ the corresponding
+  \texttt{\detokenize{imageι}} and \texttt{\detokenize{toImage}}
+  (\texttt{\detokenize{AlgebraicGeometry.strictTransformι}},
+  \texttt{\detokenize{AlgebraicGeometry.strictTransformFactor}}).  Whenever
+  $\alpha_U$ exists, $\lambda_{f,\pi}$ is an isomorphism of $Z_U$ onto
+  $P_U^{\mathrm{op}}$, so the two descriptions of $\operatorname{ST}_\pi(Z)$
+  agree; all dependence on $\alpha_U$ has been moved to
+  \Cref{lemma:nagata-strict-transform-over-complement}, where it is the hypothesis
+  that $\pi$ restricts to an isomorphism over $U$.  The blow-up specialization
+  $\pi=b_{X,\mathcal I}$, $U=X\setminus V(\mathcal I)$ is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.strictTransform}}.
 \end{definition}
 
 \begin{lemma}[Strict transform as an image in the modified space]
@@ -8683,7 +8715,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{definition}[Power-torsion submodule]
   \label{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion}
+  \leanok
 
   Let $R$ be a commutative ring, let $M$ be an $R$-module, and let $a\in R$.
   Put $S_a=\{a^n\mid n\in\mathbf N\}$ and define
@@ -8700,7 +8733,8 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Power torsion is a submodule]
   \label{lemma:nagata-power-torsion-submodule}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion}
+  \leanok
 
   The subset $\Gamma_{(a)}(M)$ contains zero and is closed under addition and
   scalar multiplication.
@@ -8742,10 +8776,19 @@ correction explicit before it is sheafified and glued.
   submodule axioms.
 \end{proof}
 
+\begin{remark}
+  \leanok
+  In Lean these closure properties are discharged by the definition:
+  \texttt{\detokenize{Submodule.powTorsion}} is defined as
+  \texttt{\detokenize{Submodule.torsion'}} at
+  \texttt{\detokenize{Submonoid.powers}}, which is already submodule-valued.
+\end{remark}
+
 \begin{lemma}[Membership in power torsion]
   \label{lemma:nagata-mem-power-torsion}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.mem_powTorsion_iff}
+  \leanok
 
   One has
   \[
@@ -8761,6 +8804,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   By the set-builder equality in \Cref{def:nagata-power-torsion}, the
   membership predicate is
   \[
@@ -8777,7 +8821,9 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Power torsion as a localization kernel]
   \label{lemma:nagata-power-torsion-kernel-localization}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion_eq_ker_localization,
+    Submodule.torsion'_eq_ker}
+  \leanok
 
   Put $M_a:=S_a^{-1}M$ and let
   $\ell_{M,a}\colon M\to M_a$, $m\mapsto m/1$, be the localization map.
@@ -8794,6 +8840,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   For $m\in M$, the zero criterion for the localization $S_a^{-1}M$ is
   \[
   \begin{aligned}
@@ -8820,7 +8867,9 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Localization of power torsion]
   \label{lemma:nagata-power-torsion-localization}
-  \lean{}
+  \lean{Submodule.localized'_powTorsion,
+    Submodule.localized'_torsion'}
+  \leanok
 
   Let $s\in R$, put $S_s=\{s^n\mid n\in\mathbf N\}$, and write
   $M_s=S_s^{-1}M$.  For a submodule $N\subseteq M$, write
@@ -8833,6 +8882,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-power-torsion-kernel-localization}
+  \leanok
   Let
   \[
     \ell_{M,a}\colon M\to M_a,
@@ -8902,13 +8952,16 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[The power-torsion quotient has no exceptional torsion]
   \label{lemma:nagata-power-torsion-quotient-torsionfree}
   \uses{def:nagata-power-torsion}
-  \lean{}
+  \lean{Submodule.powTorsion_quotient_eq_bot,
+    Submodule.isSMulRegular_quotient_powTorsion}
+  \leanok
 
   Multiplication by $a$ on $M/\Gamma_{(a)}(M)$ is injective.  More generally,
   no nonzero class in the quotient is killed by a power of $a$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let
   $q\colon M\to\overline M:=M/\Gamma_{(a)}(M)$ be the quotient map.  Its
   defining identities are
@@ -11061,7 +11114,10 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Strict transform on the preserved open]
   \label{lemma:nagata-strict-transform-over-complement}
-  \lean{}
+  \lean{AlgebraicGeometry.isIso_pullback_fst_strictTransformι,
+    AlgebraicGeometry.isPullback_strictTransformOpen,
+    AlgebraicGeometry.isPullback_strictTransform_over,
+    AlgebraicGeometry.Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap}
 
   Let $f\colon Y\to X$, let
   $\mathcal I\subseteq\mathcal O_X$ be a finite-type quasi-coherent ideal,
@@ -11103,6 +11159,26 @@ correction explicit before it is sheafified and glued.
   \]
   where $\alpha_U\colon X'_U\xrightarrow{\sim}U$ is the isomorphism of
   \Cref{thm:nagata-global-blowup-complement}.
+
+  \paragraph{Formalization.}
+  The Lean side proves the two halves separately.  That nothing is lost over $U$,
+  i.e.\ that the base change of $\iota_{f,\pi}$ to $P_U^{\mathrm{op}}$ is an
+  isomorphism, is
+  \texttt{\detokenize{AlgebraicGeometry.isIso_pullback_fst_strictTransformι}}; it needs
+  no hypothesis at all, since
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.comap_ker_self}} holds for every
+  morphism.  That $P_U^{\mathrm{op}}$ is $Y\times_XU$ is
+  \texttt{\detokenize{AlgebraicGeometry.isPullback_strictTransformOpen}}, under the
+  hypothesis \texttt{\detokenize{IsIso (π ∣_ U)}} replacing the chosen $\alpha_U$.
+  Their combination
+  \texttt{\detokenize{AlgebraicGeometry.isPullback_strictTransform_over}} states the
+  conclusion as a cartesian square over $f$ and $j_U$ rather than as a unique
+  isomorphism $\alpha^{\mathrm{st}}_U$; the two formulations are interchangeable by the
+  universal property of the fibre product, but the identification of
+  $\operatorname{ST}_\pi(Y)\times_{X'}X'_U$ with
+  $\operatorname{ST}_\pi(Y)\times_PP_U^{\mathrm{op}}$ is not carried out in Lean, so this
+  statement is not marked as formalized.  The blow-up specialization is
+  \texttt{\detokenize{Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap}}.
 \end{lemma}
 
 \begin{proof}
@@ -12025,7 +12101,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{definition}[Finite-type extension of an ideal from a quasi-compact open]
   \label{def:nagata-finite-type-ideal-extension}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType,
+    AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn}
 
   Let $X$ be quasi-compact and quasi-separated, let
   $\iota\colon W\hookrightarrow X$ be a quasi-compact open immersion, and let
@@ -12053,17 +12130,44 @@ correction explicit before it is sheafified and glued.
       :=\operatorname{ch}(\mathscr E_{X,W}(\mathcal J))
       \subseteq\mathcal O_X.
   \]
+
+  \paragraph{Formalization.}
+  Finite-typeness of an ideal sheaf on an open $W$ is
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn}} (the
+  ideals of sections on the affine opens contained in $W$ are finitely generated), and
+  the absolute form is \texttt{\detokenize{...IdealSheafData.ofFiniteType}}, the case
+  $W=X$.  No choice operator is applied on the Lean side:
+  the extension is produced in existential form by
+  \texttt{\detokenize{...IdealSheafData.exists_finiteType_comap_eq}}, since
+  $\mathscr E_{X,W}(\mathcal J)$ has no canonical minimal element and every consumer of
+  $\operatorname{Ext}_{X,W}(\mathcal J)$ below only uses the two defining properties.
 \end{definition}
 
 \begin{lemma}[Finite-type ideal extension,
   {\cite[\href{https://stacks.math.columbia.edu/tag/01PF}{Tag 01PF}]{stacks-project}}]
   \label{lemma:nagata-extend-finite-type-ideal}
   \uses{def:nagata-finite-type-ideal-extension}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq,
+    AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq}
 
   The sheaf $\operatorname{Ext}_{X,W}(\mathcal J)$ is a finite type
   quasi-coherent ideal on $X$, and its restriction to $W$ is
   $\mathcal J$.
+
+  \paragraph{Formalization.}
+  The content of the statement, namely
+  $\mathscr E_{X,W}(\mathcal J)\neq\varnothing$, is
+  \texttt{\detokenize{...IdealSheafData.exists_finiteType_comap_eq}}: for $X$
+  quasi-compact and quasi-separated, $W$ a quasi-compact open and
+  $\mathcal J$ of finite type, there exists a finite-type
+  $\mathcal I\subseteq\mathcal O_X$ with
+  $\iota^{-1}\mathcal I\cdot\mathcal O_W=\mathcal J$.  The Lean proof establishes the
+  sharper form \texttt{\detokenize{...IdealSheafData.exists_finiteType_le_comap_eq}},
+  in which $\mathcal I$ is moreover contained in any prescribed ambient ideal sheaf
+  $\mathcal H_0$ restricting to $\mathcal J$ on $W$; this is what the gluing induction
+  needs and what \Cref{def:nagata-extended-admissible-blowup} uses.  Since no choice
+  operator is applied in Lean, the statement is formalized in existential rather than in
+  $\operatorname{Ext}$ form.
 \end{lemma}
 
 \begin{proof}
@@ -16465,7 +16569,9 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-closed-subscheme-class,
     def:nagata-scheme-theoretic-image,
     lemma:nagata-morphism-property-calculus}
-  \lean{}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.pullbackSnd,
+    CategoryTheory.MorphismProperty.pullback_snd}
+  \leanok
 
   Let $h\colon U\to X$ satisfy $\operatorname{IsQCQS}(h)$ and
   \[
@@ -16641,7 +16747,8 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-dense-valuation-probe}
   \uses{def:nagata-choice-notation,def:nagata-closed-subscheme-class,
     def:nagata-scheme-theoretic-image}
-  \lean{}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt}
+  \leanok
 
   Let $h\colon T\to P$ satisfy $\operatorname{IsQCQS}(h)$, assume
   \[
@@ -16689,7 +16796,9 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-valuation-probe}
   \uses{def:nagata-closed-subscheme-class,
     def:nagata-dense-valuation-probe}
-  \lean{}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant,
+    AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes}
+  \leanok
 
   Let $h\colon T\to P$ satisfy $\operatorname{IsQCQS}(h)$ and
   \[
@@ -16706,6 +16815,22 @@ correction explicit before it is sheafified and glued.
     \qquad
     \alpha_{h,z}(c_{A'_{h,z}})=z.
   \]
+
+  \paragraph{Formalization.}
+  The Lean statement is the definition
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}}, which builds
+  the bundled record \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt}}
+  directly, so the tuple $\mathsf{VP}(h,z)$ is that record and the three displayed
+  properties are its fields.  The formalized hypotheses are weaker
+  than the ones stated above: quasi-compactness of $h$ together with topological dominance
+  ($\overline{|h|(|T|)}=|P|$, the Mathlib class
+  \texttt{\detokenize{AlgebraicGeometry.IsDominant}}) suffices, and no affineness of $P$
+  is required.  The probe is produced from a specialization $h(t)\rightsquigarrow z$ by
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes}}, and such
+  a specialization exists by
+  \texttt{\detokenize{AlgebraicGeometry.exists_specializes_of_mem_closure_range}}, which in
+  turn comes from the statement about prime spectra
+  \texttt{\detokenize{PrimeSpectrum.exists_specializes_of_mem_closure_range_comap}}.
 \end{lemma}
 
 \begin{proof}
@@ -16721,7 +16846,10 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Composite of two valuation rings]
   \label{lemma:nagata-composite-valuation-ring}
-  \lean{}
+  \lean{ValuationSubring.comapResidue,
+    ValuationSubring.mem_comapResidue_of_not_isUnit,
+    ValuationSubring.residueRestrictEquiv}
+  \leanok
 
   Let $A'$ be a valuation ring, put
   $K'=\operatorname{Frac}(A')$, let $\mathfrak m'$ be its maximal ideal, and
@@ -16740,6 +16868,18 @@ correction explicit before it is sheafified and glued.
     C/\mathfrak m'\xrightarrow{\sim}A'',\quad
     c+\mathfrak m'\longmapsto\rho(c).
   \]
+
+  \paragraph{Formalization.}
+  $A'$ is a \texttt{\detokenize{ValuationSubring K'}} and $A''$ a
+  \texttt{\detokenize{ValuationSubring (IsLocalRing.ResidueField A')}}; the composite $C$
+  is \texttt{\detokenize{ValuationSubring.comapResidue}}, so
+  $\operatorname{Frac}(C)=K'$ holds by construction, as for every valuation subring of
+  $K'$.  The inclusion $\mathfrak m'\subseteq C$ is
+  \texttt{\detokenize{ValuationSubring.mem_comapResidue_of_not_isUnit}} and the
+  isomorphism $C/\mathfrak m'\xrightarrow{\sim}A''$ is
+  \texttt{\detokenize{ValuationSubring.residueRestrictEquiv}}, built from the surjection
+  \texttt{\detokenize{ValuationSubring.residueRestrict}} and its kernel
+  \texttt{\detokenize{ValuationSubring.ker_residueRestrict}}.
 \end{lemma}
 
 \begin{proof}
@@ -16782,7 +16922,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Intersection with a dominating valuation ring]
   \label{lemma:nagata-valuation-intersection}
-  \lean{}
+  \lean{ValuationSubring.comap_eq_of_toLocalSubring_le}
+  \leanok
 
   Let $A$ be a valuation ring, put $K=\operatorname{Frac}(A)$, let
   $\iota\colon K\hookrightarrow L$ be a field embedding, and let
@@ -16797,6 +16938,15 @@ correction explicit before it is sheafified and glued.
     \iota(K)\cap B=\iota(A)
   \]
   inside \(L\).
+
+  \paragraph{Formalization.}
+  The intersection $\iota(K)\cap B$ is \texttt{\detokenize{ValuationSubring.comap}} of $B$
+  along $\iota$, and the two displayed domination conditions together are exactly the
+  inequality $A\le B.\mathrm{comap}\,\iota$ in the domination order on
+  \texttt{\detokenize{LocalSubring K}}, whence the Lean name
+  \texttt{\detokenize{ValuationSubring.comap_eq_of_toLocalSubring_le}}.  A dominating $B$
+  always exists, by \texttt{\detokenize{ValuationSubring.exists_comap_eq}}
+  (\cite[\href{https://stacks.math.columbia.edu/tag/00IA}{Tag 00IA}]{stacks-project}).
 \end{lemma}
 
 \begin{proof}
@@ -16820,10 +16970,14 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0894}{Tag 0894}]{stacks-project}}]
   \label{lemma:nagata-dense-source-valuative}
-  \lean{}
+  \lean{AlgebraicGeometry.ValuativeCriterion.RelativeTo,
+    AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant,
+    AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant,
+    AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}
+  \leanok
 
-  Let $f\colon X\to S$ be quasi-compact, let $h\colon U\to X$ satisfy
-  $\operatorname{IsQCQS}(h)$, and assume
+  Let $f\colon X\to S$ be quasi-compact, let $h\colon U\to X$ be quasi-compact,
+  and assume
   $\overline{|h|(|U|)}=|X|$.  Suppose that for every valuation ring $A$,
   with $K=\operatorname{Frac}(A)$ and
   $\nu_A\colon\operatorname{Spec}(K)\to\operatorname{Spec}(A)$, every pair
@@ -16846,15 +17000,40 @@ correction explicit before it is sheafified and glued.
   Then $f$ is universally closed.  If $f$ is quasi-separated, then $f$ is
   separated.
 
-  \paragraph{Mathlib relation.}
-  The quantified square is represented by
-  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSq}}.  Its existence
-  and uniqueness predicates are the exact morphism properties
+  \paragraph{Formalization.}
+  The quantified square is
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCommSq}}, and the whole
+  displayed hypothesis --- unique lifting against those squares whose generic
+  point factors through $h$ --- is the project definition
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.RelativeTo}}, phrased with
+  Mathlib's \texttt{\detokenize{CategoryTheory.CommSq.LiftStruct}} exactly as
   \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Existence}} and
-  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Uniqueness}}.
-  The lemma's dense-source reduction to those predicates is a
-  blueprint-local theorem, not an existing declaration with the proposed
-  name above.
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Uniqueness}} are.
+
+  The conclusion is formalized in the sharper form
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant}},
+  which produces the morphism property
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Existence}} and needs no
+  quasi-compactness of $f$ at all; universal closedness and separatedness are read off
+  from it as
+  \texttt{\detokenize{AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant}}
+  (which uses $\operatorname{QuasiCompact}(f)$) and
+  \texttt{\detokenize{AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}}
+  (which uses only $\operatorname{QuasiSeparated}(f)$).
+
+  The formalized hypotheses on $h$ are quasi-compactness together with topological
+  dominance; quasi-separatedness of $h$ is never used, and the statement above has been
+  relaxed accordingly.  The Lean proof also takes two routes different from the informal
+  proof below: instead of passing to the reductions of $U$, $X$ and $S$ it factors $h$
+  through its scheme-theoretic image, which is scheme-theoretically dominant with no
+  reducedness hypothesis
+  (\texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.ker_toImage}}) and through which every
+  morphism from a reduced scheme factors
+  (\texttt{\detokenize{AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support}});
+  and instead of choosing a single affine chart of $S$ it uses that
+  \texttt{\detokenize{AlgebraicGeometry.ValuativeCriterion.Existence}} is local at the
+  target.  The extension of a valuation ring along a field extension used in the argument
+  is \texttt{\detokenize{ValuationSubring.exists_comap_eq}} (Tag 00IA).
 \end{lemma}
 
 \begin{proof}

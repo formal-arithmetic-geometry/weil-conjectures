@@ -5,6 +5,10 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.IsIso
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Order.CompletePartialOrder
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 

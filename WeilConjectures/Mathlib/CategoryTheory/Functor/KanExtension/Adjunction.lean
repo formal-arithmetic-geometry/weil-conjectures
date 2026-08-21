@@ -7,7 +7,6 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
-public import Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-!
