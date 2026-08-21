@@ -292,4 +292,10 @@ theorem isPullback_blowupι (U : X.affineOpens) :
     IsPullback (I.blowupNatTrans.app U) (I.blowupι U) U.1.ι I.blowupMap :=
   I.blowupGluingData.isPullback_natTrans_ι_toBase U
 
+/-- Transport of the blow-up structure morphism along an equality of centers. -/
+lemma eqToHom_comp_blowupMap {I J : X.IdealSheafData} (h : I = J) :
+    eqToHom (congrArg blowup h) ≫ J.blowupMap = I.blowupMap := by
+  subst h
+  simp
+
 end AlgebraicGeometry.Scheme.IdealSheafData

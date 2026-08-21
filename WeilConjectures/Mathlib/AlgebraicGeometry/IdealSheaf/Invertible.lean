@@ -31,6 +31,7 @@ a family of open immersions covering `X`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.comap_of_flat`
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.comap_of_isOpenImmersion`
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.of_iSup_opensRange_eq_top`
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.pow`
 
 ## Blueprint
 
@@ -83,6 +84,15 @@ restriction to an open subscheme and by isomorphism. This is the special case of
 lemma IsInvertible.comap_of_isOpenImmersion {J : Y.IdealSheafData} (hJ : J.IsInvertible)
     (f : X ⟶ Y) [IsOpenImmersion f] : (J.comap f).IsInvertible :=
   hJ.comap_of_flat f
+
+/-- Powers of an invertible ideal are invertible: a power of a local single
+nonzerodivisor generator generates the power. -/
+lemma IsInvertible.pow {C : X.IdealSheafData} (hC : C.IsInvertible) (d : ℕ) :
+    (C ^ d).IsInvertible := by
+  intro x
+  obtain ⟨U, hxU, a, ha, hgen⟩ := hC x
+  refine ⟨U, hxU, a ^ d, pow_mem ha d, ?_⟩
+  rw [ideal_pow, Pi.pow_apply, hgen, Ideal.span_singleton_pow]
 
 /-- Invertibility on an affine chart: if a morphism `Spec R ⟶ X` is `Spec` of a ring map `ψ`
 followed by the canonical morphism of an affine open `U`, and the extension of `J.ideal U`
