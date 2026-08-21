@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.FiniteDegree
-public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
