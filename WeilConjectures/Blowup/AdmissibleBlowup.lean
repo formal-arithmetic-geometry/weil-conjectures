@@ -48,8 +48,6 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap`
 
 - `AlgebraicGeometry.AdmissibleBlowup.isIso_π_restrict`: a `U`-admissible blow-up is an
   isomorphism over `U` (blueprint: `lemma:nagata-admissible-blowup-over-open`);
-- separatedness, quasi-compactness and local finite type of the strict transform along
-  an admissible blow-up, inherited from the transformed morphism;
 - `AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary` and its fully proved
   locally Noetherian instance
   `exists_admissibleBlowup_cartierBoundary_of_locallyNoetherian`: preparation of a
@@ -195,42 +193,6 @@ theorem isIso_π_restrict : IsIso (B.π ∣_ U) := by
   haveI h2 : IsIso (B.I.blowupMap ∣_ U) :=
     B.I.isIso_blowupMap_restrict B.disjoint_support
   exact IsIso.comp_isIso' h1 h2
-
-/-- The strict transform of a morphism `q : Z ⟶ X` along a `U`-admissible blow-up: the
-scheme-theoretic closure, inside `Z ×_X X'`, of the locus over the complement of the
-center. (Blueprint: `def:nagata-strict-transform`.) -/
-abbrev strictTransform {Z : Scheme.{u}} (q : Z ⟶ X) : Scheme.{u} :=
-  _root_.AlgebraicGeometry.strictTransform q B.π B.preservedOpen
-
-/-- The projection of the strict transform along an admissible blow-up to the total
-space of the blow-up. -/
-def strictTransformMap {Z : Scheme.{u}} (q : Z ⟶ X) : B.strictTransform q ⟶ B.X' :=
-  AlgebraicGeometry.strictTransformMap q B.π B.preservedOpen
-
-section Permanence
-
-/-! The strict transform of a morphism along an admissible blow-up is a closed
-subscheme of the base change, so separatedness, quasi-compactness and local finite
-type are inherited from `q`. These permanence instances feed the inductive
-applications of the flattening theorems. -/
-
-variable {Z : Scheme.{u}} (q : Z ⟶ X)
-
-instance [IsSeparated q] : IsSeparated (B.strictTransformMap q) := by
-  have : IsSeparated (pullback.snd q B.π) := MorphismProperty.pullback_snd _ _ ‹_›
-  unfold strictTransformMap AlgebraicGeometry.strictTransformMap
-  infer_instance
-
-instance [QuasiCompact q] : QuasiCompact (B.strictTransformMap q) := by
-  unfold strictTransformMap AlgebraicGeometry.strictTransformMap
-  infer_instance
-
-instance [LocallyOfFiniteType q] : LocallyOfFiniteType (B.strictTransformMap q) := by
-  have : LocallyOfFiniteType (pullback.snd q B.π) := MorphismProperty.pullback_snd _ _ ‹_›
-  unfold strictTransformMap AlgebraicGeometry.strictTransformMap
-  infer_instance
-
-end Permanence
 
 /-- Finite-type ideal sheaves are stable under products. -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
@@ -756,7 +718,6 @@ lemma Scheme.IdealSheafData.isCompact_coe_compl_support {X : Scheme.{u}} [Compac
   exact ((PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr
     ⟨K.ideal V, hK V le_top, rfl⟩).1).image V.2.fromSpec.continuous
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit (as in
 -- `Scheme.IdealSheafData.isInvertible_comap_blowupMap`).
@@ -927,7 +888,6 @@ lemma Scheme.IdealSheafData.quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
     isCompact_iff_compactSpace.mp hcpt
   infer_instance
 
-set_option maxHeartbeats 1600000 in
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
 -- them exceeds the default heartbeat limit (as in
 -- `Scheme.IdealSheafData.isInvertible_comap_blowupMap`).
@@ -947,9 +907,10 @@ theorem separationBlowup_disjoint_strictTransforms [CompactSpace X]
     (h₁ : I₁.ofFiniteType) (h₂ : I₂.ofFiniteType)
     (hdisj : Disjoint (U : Set X) ((I₁.support : Set X) ∩ (I₂.support : Set X))) :
     Disjoint
-      (Set.range ((separationBlowup I₁ I₂ h₁ h₂ hdisj).strictTransformMap I₁.subschemeι))
-      (Set.range ((separationBlowup I₁ I₂ h₁ h₂ hdisj).strictTransformMap
-        I₂.subschemeι)) := by
+      (Set.range (strictTransformMap I₁.subschemeι (separationBlowup I₁ I₂ h₁ h₂ hdisj).π
+        (separationBlowup I₁ I₂ h₁ h₂ hdisj).preservedOpen))
+      (Set.range (strictTransformMap I₂.subschemeι (separationBlowup I₁ I₂ h₁ h₂ hdisj).π
+        (separationBlowup I₁ I₂ h₁ h₂ hdisj).preservedOpen)) := by
   have hKft : (I₁ ⊔ I₂).ofFiniteType := h₁.sup h₂
   have hU₀ : IsCompact (((I₁ ⊔ I₂).support.compl : X.Opens) : Set X) :=
     Scheme.IdealSheafData.isCompact_coe_compl_support hKft
