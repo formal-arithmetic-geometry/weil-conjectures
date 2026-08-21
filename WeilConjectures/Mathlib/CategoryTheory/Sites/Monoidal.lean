@@ -103,6 +103,11 @@ preadditive structure on `Sheaf J A` (`CategoryTheory.Sheaf.monoidalPreadditive`
 with a fixed sheaf `X` is, up to a natural isomorphism, computed by tensoring the underlying
 presheaves and sheafifying (`Sheaf.tensorLeftIso`/`Sheaf.tensorRightIso`), so additivity
 transfers from the pointwise tensor product of presheaves.
+
+When `A` is moreover braided and `Sheaf J A` carries the braided structure
+`Sheaf.braidedCategory`, the constant sheaf functor is braided, by the same composition;
+since a symmetric monoidal functor is by definition a braided functor between symmetric
+monoidal categories, this also covers the symmetric case.
 -/
 
 @[expose] public section
@@ -296,6 +301,9 @@ attribute [local instance] Sheaf.braidedCategory
 section
 
 variable [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
+
+noncomputable instance : (constantSheaf J A).Braided :=
+  inferInstanceAs (Functor.const Cᵒᵖ ⋙ presheafToSheaf J A).Braided
 
 /-- The inclusion of sheaves into presheaves is lax braided with respect to the braided
 category structure on sheaves obtained by localization, as the right adjoint of the
