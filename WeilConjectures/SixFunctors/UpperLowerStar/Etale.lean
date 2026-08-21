@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
