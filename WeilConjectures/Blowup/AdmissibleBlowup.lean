@@ -78,8 +78,7 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap`
   (`lemma:nagata-blowup-invertible-factor`, Stacks Tag 0807); both are proved from
   the universal property of blowing up (Tag 0806) and the invertibility kit of
   `WeilConjectures.Blowup.BlowupUniversal`;
-- `disjoint_range_strictTransformMap_sup` (with the `separationBlowup`-phrased
-  corollary `disjoint_range_strictTransformMap_separationBlowup`): disjointness of
+- `disjoint_range_strictTransformMap_sup`: disjointness of
   strict transforms after blowing up a sum of ideals
   (`lemma:nagata-separate-closed-subschemes`, Stacks Tag 0F3V), by the chart-level
   argument of the revised blueprint: the charts of `Bl_{I₁ ⊔ I₂}` at degree-one
@@ -913,22 +912,6 @@ theorem disjoint_range_strictTransformMap_sup [CompactSpace X]
   · exact Set.disjoint_left.mp
       (disjoint_range_strictTransformMap_of_probe
         (I₁ ⊔ I₂) I₂ U' b hb _ hspan _ hcomp) hx₂ hxc
-
-/-- **Boundary separation for the separation blow-up** (Stacks Project Tag 0F3V;
-revised blueprint `lemma:nagata-separate-closed-subschemes`): the special case of
-`disjoint_range_strictTransformMap_sup` phrased for the `U`-admissible blow-up
-`separationBlowup I₁ I₂ h₁ h₂ hdisj`: the strict transforms of the two centers along
-it are disjoint. -/
-theorem disjoint_range_strictTransformMap_separationBlowup [CompactSpace X]
-    [QuasiSeparatedSpace X] (I₁ I₂ : X.IdealSheafData)
-    (h₁ : I₁.ofFiniteType) (h₂ : I₂.ofFiniteType)
-    (hdisj : Disjoint (U : Set X) ((I₁.support : Set X) ∩ (I₂.support : Set X))) :
-    Disjoint
-      (Set.range (strictTransformMap I₁.subschemeι (separationBlowup I₁ I₂ h₁ h₂ hdisj).π
-        (separationBlowup I₁ I₂ h₁ h₂ hdisj).preservedOpen))
-      (Set.range (strictTransformMap I₂.subschemeι (separationBlowup I₁ I₂ h₁ h₂ hdisj).π
-        (separationBlowup I₁ I₂ h₁ h₂ hdisj).preservedOpen)) :=
-  disjoint_range_strictTransformMap_sup I₁ I₂ h₁ h₂
 
 end BoundarySeparation
 
