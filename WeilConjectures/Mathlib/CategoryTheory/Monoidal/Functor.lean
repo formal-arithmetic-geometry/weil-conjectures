@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
@@ -32,9 +33,21 @@ dualizable coefficients". The inverse is obtained by bending the `Y`-strand with
 coevaluation of `ᘁY` and evaluating `F.obj Y` against `F.obj (ᘁY)` inside `G`, using that
 a strong monoidal functor preserves exact pairings (`CategoryTheory.ExactPairing.map`).
 
+We also define the mirrored ("left-handed") projection morphism
+
+`adj.projectionMap' X Y : Y ⊗ G.obj X ⟶ G.obj (F.obj Y ⊗ X)`
+
+with its naturality and mate description (`CategoryTheory.Adjunction.homEquiv_symm_projectionMap'`).
+When the categories are braided and `G` is lax braided, the mirrored projection morphism is
+conjugate to the projection morphism by braidings
+(`CategoryTheory.Adjunction.projectionMap'_eq_braiding`), so it is again an isomorphism at
+every object with a left dual when `F` is strong monoidal
+(`CategoryTheory.Adjunction.isIso_projectionMap'`).
+
 Instantiated at a pushforward/pullback adjunction between monoidal sheaf categories, the
 projection morphism is the underived projection formula map `g_* M ⊗ N ⟶ g_* (M ⊗ g^* N)`
-of the six-functor formalism.
+of the six-functor formalism, and the mirrored projection morphism is its companion
+`N ⊗ g_* M ⟶ g_* (g^* N ⊗ M)`.
 -/
 
 @[expose] public section
@@ -73,6 +86,30 @@ lemma projectionMap_natural_right (X : D) {Y Y' : C} (g : Y ⟶ Y') :
   rw [← MonoidalCategory.whiskerLeft_comp_assoc, ← adj.unit_naturality g,
     MonoidalCategory.whiskerLeft_comp_assoc, μ_natural_right, assoc]
 
+/-- The mirrored ("left-handed") projection morphism of an adjunction `adj : F ⊣ G` with
+`G` lax monoidal. Instantiated at a pushforward/pullback adjunction between monoidal sheaf
+categories, this is the underived projection formula map `N ⊗ g_* M ⟶ g_* (g^* N ⊗ M)`. -/
+def projectionMap' (X : D) (Y : C) : Y ⊗ G.obj X ⟶ G.obj (F.obj Y ⊗ X) :=
+  (adj.unit.app Y ▷ G.obj X) ≫ μ G (F.obj Y) X
+
+@[reassoc]
+lemma projectionMap'_natural_left (X : D) {Y Y' : C} (g : Y ⟶ Y') :
+    g ▷ G.obj X ≫ adj.projectionMap' X Y' =
+      adj.projectionMap' X Y ≫ G.map (F.map g ▷ X) := by
+  dsimp only [projectionMap']
+  rw [← comp_whiskerRight_assoc, ← adj.unit_naturality g, comp_whiskerRight_assoc,
+    μ_natural_left, assoc]
+
+@[reassoc]
+lemma projectionMap'_natural_right {X X' : D} (f : X ⟶ X') (Y : C) :
+    Y ◁ G.map f ≫ adj.projectionMap' X' Y =
+      adj.projectionMap' X Y ≫ G.map (F.obj Y ◁ f) := by
+  dsimp only [projectionMap']
+  rw [assoc, ← μ_natural_right]
+  -- `erw` because the codomain of `adj.unit.app Y` is `(F ⋙ G).obj Y`, not `G.obj (F.obj Y)`
+  erw [← whisker_exchange_assoc]
+  rfl
+
 section IsMonoidal
 
 variable [F.OplaxMonoidal] [adj.IsMonoidal]
@@ -96,6 +133,28 @@ lemma projectionMap_eq_homEquiv (X : D) (Y : C) :
     adj.projectionMap X Y =
       adj.homEquiv _ _ (δ F (G.obj X) Y ≫ adj.counit.app X ▷ F.obj Y) :=
   (Equiv.symm_apply_eq _).mp (adj.homEquiv_symm_projectionMap X Y)
+
+/-- The transpose of the mirrored projection morphism along the adjunction is the composite
+of the oplax structure morphism of the left adjoint with the counit. -/
+@[reassoc]
+lemma homEquiv_symm_projectionMap' (X : D) (Y : C) :
+    (adj.homEquiv _ _).symm (adj.projectionMap' X Y) =
+      δ F Y (G.obj X) ≫ F.obj Y ◁ adj.counit.app X := by
+  dsimp only [projectionMap']
+  rw [homEquiv_counit, Functor.map_comp, assoc, map_μ_comp_counit_app_tensor]
+  -- `erw` because the (co)domain of `adj.unit.app Y` is `(𝟭 C).obj Y`/`(F ⋙ G).obj Y`
+  erw [← δ_natural_left_assoc]
+  rw [← tensorHom_id, tensorHom_comp_tensorHom, id_comp]
+  erw [left_triangle_components]
+  rw [id_tensorHom]
+  rfl
+
+/-- The mirrored projection morphism is the transpose of
+`δ F Y (G.obj X) ≫ F.obj Y ◁ adj.counit.app X` along the adjunction. -/
+lemma projectionMap'_eq_homEquiv (X : D) (Y : C) :
+    adj.projectionMap' X Y =
+      adj.homEquiv _ _ (δ F Y (G.obj X) ≫ F.obj Y ◁ adj.counit.app X) :=
+  (Equiv.symm_apply_eq _).mp (adj.homEquiv_symm_projectionMap' X Y)
 
 /-- Compatibility of the projection morphism with the unit objects: at `Y = 𝟙_ C` the
 projection morphism degenerates to the right unitors. -/
@@ -209,5 +268,50 @@ instance isIso_projectionMap (X : D) (Y : C) [HasLeftDual Y] :
   (adj.projectionMapIso X Y).isIso_hom
 
 end Dualizable
+
+end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Adjunction
+
+section Braided
+
+open Category MonoidalCategory Functor.LaxMonoidal BraidedCategory
+
+/- We do not carry a `[G.LaxMonoidal]` variable here: it would clash with the lax monoidal
+structure underlying `[G.LaxBraided]` (an instance diamond), so all statements in this
+section take the lax monoidal structure of `G` from `Functor.LaxBraided.toLaxMonoidal`. -/
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+  [MonoidalCategory C] [MonoidalCategory D] [BraidedCategory C] [BraidedCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [G.LaxBraided]
+
+/-- In the braided setting the mirrored projection morphism is conjugate to the projection
+morphism by braidings. This lets all coherence properties of the projection morphism be
+transported to the mirrored one instead of being proved twice. -/
+lemma projectionMap'_eq_braiding (X : D) (Y : C) :
+    adj.projectionMap' X Y =
+      (β_ (G.obj X) Y).inv ≫ adj.projectionMap X Y ≫ G.map (β_ X (F.obj Y)).hom := by
+  rw [Iso.eq_inv_comp]
+  dsimp only [projectionMap, projectionMap']
+  simp only [assoc]
+  rw [Functor.LaxBraided.braided, ← braiding_naturality_right_assoc]
+  rfl
+
+/-- The mirrored projection morphism of a monoidal adjunction between braided categories
+whose right adjoint is lax braided and whose left adjoint is strong monoidal is an
+isomorphism at every object with a left dual. -/
+instance isIso_projectionMap' [F.Monoidal] [adj.IsMonoidal] (X : D) (Y : C)
+    [HasLeftDual Y] : IsIso (adj.projectionMap' X Y) := by
+  rw [adj.projectionMap'_eq_braiding]
+  infer_instance
+
+/-- The mirrored projection morphism of a monoidal adjunction between braided categories
+whose right adjoint is lax braided and whose left adjoint is strong monoidal, as an
+isomorphism at objects with a left dual: the mirrored "projection formula for dualizable
+coefficients". -/
+noncomputable def projectionMap'Iso [F.Monoidal] [adj.IsMonoidal] (X : D)
+    (Y : C) [HasLeftDual Y] : Y ⊗ G.obj X ≅ G.obj (F.obj Y ⊗ X) :=
+  asIso (adj.projectionMap' X Y)
+
+end Braided
 
 end CategoryTheory.Adjunction
