@@ -16,6 +16,7 @@ public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
 # The symmetric monoidal category of étale sheaves of `Λ`-modules
@@ -37,6 +38,15 @@ Once these instances are available, mathlib's instances make the sheafification 
 `presheafToSheaf` and the stalk functors `(Scheme.pointSmallEtale s).sheafFiber` at
 geometric points of `X` monoidal functors; this is recorded in the `example`s at the
 end of this file.
+
+Moreover, this monoidal structure is preadditive and `Λ`-linear: the site-level
+instances `CategoryTheory.Sheaf.monoidalPreadditive` and
+`CategoryTheory.Sheaf.monoidalLinear` (from
+`WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal`, imported here to make them
+available at the étale level) apply to it, so that
+`MonoidalPreadditive (Sheaf X.smallEtaleTopology (ModuleCat Λ))` and
+`MonoidalLinear Λ (Sheaf X.smallEtaleTopology (ModuleCat Λ))` hold by instance search;
+this is also recorded in the `example`s at the end of this file.
 
 ## Implementation notes
 
@@ -111,6 +121,31 @@ noncomputable example :
 noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (CommRingCat.of Ω) ⟶ X) :
     ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).Monoidal :=
+  inferInstance
+
+/-!
+### Preadditivity and `Λ`-linearity of the tensor product
+
+The monoidal structure on étale sheaves of `Λ`-modules is preadditive and `Λ`-linear.
+These facts are found by instance search once the site-level instances
+`CategoryTheory.Sheaf.monoidalPreadditive` and `CategoryTheory.Sheaf.monoidalLinear` of
+`WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal` are imported: the monoidal
+structure `monoidalCategory_sheaf_smallEtaleTopology` is `Sheaf.monoidalCategory`, so
+the site-level instances apply to it, and `Λ`-linearity of the sheaf category itself
+holds since sheaves form a full subcategory of presheaves. We record these facts as
+`example`s.
+-/
+
+-- The tensor product of étale sheaves of `Λ`-modules is additive in each variable.
+noncomputable example : MonoidalPreadditive (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :=
+  inferInstance
+
+-- The category of étale sheaves of `Λ`-modules is `Λ`-linear.
+noncomputable example : Linear Λ (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :=
+  inferInstance
+
+-- The tensor product of étale sheaves of `Λ`-modules is `Λ`-linear in each variable.
+noncomputable example : MonoidalLinear Λ (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :=
   inferInstance
 
 end AlgebraicGeometry.Scheme
