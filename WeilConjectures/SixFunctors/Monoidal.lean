@@ -20,6 +20,7 @@ public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -53,7 +54,10 @@ sheaf of a finite free `Λ`-module `M` is dualizable, with dual the constant she
 dual module (`AlgebraicGeometry.Scheme.hasRightDual_constantSheaf_smallEtaleTopology`
 and the companions below), and the monoidal stalk functors send dualizable sheaves to
 dualizable modules. These are the coefficient objects for which the projection formula
-of the six-functor formalism holds.
+of the six-functor formalism holds. Consequently the internal hom out of such a constant
+sheaf is tensoring with the constant sheaf of the dual module
+(`AlgebraicGeometry.Scheme.ihomConstantSheafIso`), reducing internal-hom computations at
+finite free coefficients to the tensor side.
 
 ## Implementation notes
 
@@ -245,5 +249,17 @@ noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj (Fᘁ) ≅
       (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj F)ᘁ :=
   Functor.Monoidal.mapRightDualIso _ F
+
+/-- The internal hom out of the constant étale sheaf of a finite free `Λ`-module `M` is
+tensoring with the constant sheaf of the dual module: `[Λ_M, F] ≅ Λ_{ᘁM} ⊗ F`. This
+reduces internal-hom computations at finite free (later: constructible) coefficients to
+the tensor side, where the projection formula applies. -/
+noncomputable def ihomConstantSheafIso (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :
+    (ihom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M)).obj F ≅
+      (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj (ᘁM) ⊗ F :=
+  (leftDualTensorIsoIhom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M)
+    F).symm ≪≫
+    whiskerRightIso (Functor.Monoidal.mapLeftDualIso
+      (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) M).symm F
 
 end AlgebraicGeometry.Scheme
