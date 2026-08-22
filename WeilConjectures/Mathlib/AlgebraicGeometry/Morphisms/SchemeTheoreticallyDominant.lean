@@ -51,9 +51,6 @@ inclusion `U.ι` is scheme-theoretically dominant:
 - `AlgebraicGeometry.IsSchemeTheoreticallyDominant.homOfLE`: if `U ≤ W` and `U` is
   scheme-theoretically dense in `X`, then the inclusion `U ⟶ W` of the intermediate
   open subscheme is scheme-theoretically dominant;
-- `AlgebraicGeometry.IsSchemeTheoreticallyDominant.preimage_ι_of_isIso`: the preimage
-  of a scheme-theoretically dense open under an isomorphism is scheme-theoretically
-  dense;
 - `AlgebraicGeometry.IsSchemeTheoreticallyDominant.preimage_ι_of_le`: if `f : X' ⟶ X`
   restricts to an isomorphism over `W`, the open `f ⁻¹ᵁ W` is scheme-theoretically
   dense in `X'` and `U ≤ W` is scheme-theoretically dense in `X`, then `f ⁻¹ᵁ U` is
@@ -210,17 +207,6 @@ theorem IsSchemeTheoreticallyDominant.homOfLE {U W : X.Opens} (h : U ≤ W)
       (X.isoOfEq (inf_eq_left.mpr h)).inv ≫ X.homOfLE (inf_le_right : U ⊓ W ≤ W) := by
     rw [← cancel_mono W.ι, Category.assoc, Scheme.homOfLE_ι, Scheme.homOfLE_ι,
       Scheme.isoOfEq_inv_ι]
-  rw [he]
-  infer_instance
-
-/-- The preimage of a scheme-theoretically dense open subscheme under an isomorphism is
-scheme-theoretically dense. -/
-theorem IsSchemeTheoreticallyDominant.preimage_ι_of_isIso (f : X' ⟶ X) [IsIso f]
-    (O : X.Opens) [IsSchemeTheoreticallyDominant O.ι] :
-    IsSchemeTheoreticallyDominant (f ⁻¹ᵁ O).ι := by
-  have he : (f ⁻¹ᵁ O).ι = (f ∣_ O) ≫ O.ι ≫ inv f := by
-    rw [← Category.assoc, morphismRestrict_ι, Category.assoc, IsIso.hom_inv_id,
-      Category.comp_id]
   rw [he]
   infer_instance
 
