@@ -15,7 +15,9 @@ public import Mathlib.CategoryTheory.Limits.Yoneda
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
 # The symmetric monoidal category of étale sheaves of `Λ`-modules
@@ -37,6 +39,13 @@ Once these instances are available, mathlib's instances make the sheafification 
 `presheafToSheaf` and the stalk functors `(Scheme.pointSmallEtale s).sheafFiber` at
 geometric points of `X` monoidal functors; this is recorded in the `example`s at the
 end of this file.
+
+We moreover record the basic supply of dualizable objects of this category: the constant
+sheaf of a finite free `Λ`-module `M` is dualizable, with dual the constant sheaf of the
+dual module (`AlgebraicGeometry.Scheme.hasRightDual_constantSheaf_smallEtaleTopology`
+and the companions below), and the monoidal stalk functors send dualizable sheaves to
+dualizable modules. These are the coefficient objects for which the projection formula
+of the six-functor formalism holds.
 
 ## Implementation notes
 
@@ -112,5 +121,53 @@ noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (CommRingCat.of Ω) ⟶ X) :
     ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).Monoidal :=
   inferInstance
+
+/-! ### Dualizable constant sheaves
+
+The constant sheaf of a finite free `Λ`-module is a dualizable object of the symmetric
+monoidal category of étale sheaves of `Λ`-modules, with dual the constant sheaf of the
+dual module. These are the coefficient objects for which the projection formula of the
+six-functor formalism holds. -/
+
+variable (M : ModuleCat.{u} Λ) [Module.Free Λ M] [Module.Finite Λ M]
+
+/-- The constant étale sheaf of a finite free `Λ`-module has a right dual, given by the
+constant sheaf of the dual module. -/
+noncomputable instance hasRightDual_constantSheaf_smallEtaleTopology :
+    HasRightDual ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M) :=
+  constantSheafObjHasRightDual X.smallEtaleTopology (ModuleCat.{u} Λ) M
+
+/-- The constant étale sheaf of a finite free `Λ`-module has a left dual, given by the
+constant sheaf of the dual module, since the category of étale sheaves of `Λ`-modules is
+symmetric monoidal. -/
+noncomputable instance hasLeftDual_constantSheaf_smallEtaleTopology :
+    HasLeftDual ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M) :=
+  constantSheafObjHasLeftDual X.smallEtaleTopology (ModuleCat.{u} Λ) M
+
+/-- The dual of the constant étale sheaf of a finite free `Λ`-module is the constant
+sheaf of the dual module (definitionally, for the chosen duals). -/
+theorem rightDual_constantSheaf_smallEtaleTopology :
+    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M)ᘁ =
+      (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj
+        (ModuleCat.of Λ (Module.Dual Λ M)) :=
+  rfl
+
+-- The stalk functor at a geometric point of `X` sends a sheaf with a right dual to a
+-- module with a right dual, given by the stalk of the dual.
+noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (CommRingCat.of Ω) ⟶ X)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) [HasRightDual F] :
+    HasRightDual (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj F) :=
+  HasRightDual.map _ F
+
+-- For a dualizable sheaf whose stalk is also equipped with a dual, the stalk of the dual
+-- is canonically isomorphic to the dual of the stalk.
+noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (CommRingCat.of Ω) ⟶ X)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) [HasRightDual F]
+    [HasRightDual (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj F)] :
+    ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj (Fᘁ) ≅
+      (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj F)ᘁ :=
+  Functor.Monoidal.mapRightDualIso _ F
 
 end AlgebraicGeometry.Scheme

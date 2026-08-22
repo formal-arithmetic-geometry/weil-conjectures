@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-!
 # The constant sheaf functor is monoidal
@@ -19,6 +20,11 @@ constant presheaf functor (monoidal for the pointwise monoidal structure on pres
 see `WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory`) with the
 sheafification functor `presheafToSheaf J A` (monoidal by the monoidal localization
 theory, see `Mathlib.CategoryTheory.Sites.Monoidal`).
+
+Consequently the constant sheaf of an object with a (left/right) dual has a (left/right)
+dual, given by the constant sheaf of the dual
+(`CategoryTheory.constantSheafObjHasRightDual`,
+`CategoryTheory.constantSheafObjHasLeftDual`).
 
 This file imports both `Mathlib.CategoryTheory.Sites.ConstantSheaf` and
 `Mathlib.CategoryTheory.Sites.Monoidal` since neither imports the other.
@@ -38,5 +44,19 @@ attribute [local instance] Sheaf.monoidalCategory
 
 noncomputable instance : (constantSheaf J A).Monoidal :=
   inferInstanceAs (Functor.const Cᵒᵖ ⋙ presheafToSheaf J A).Monoidal
+
+/-- The constant sheaf of an object with a right dual has a right dual, given by the
+constant sheaf of the dual, since the constant sheaf functor is monoidal. -/
+@[implicit_reducible]
+noncomputable def constantSheafObjHasRightDual (X : A) [HasRightDual X] :
+    HasRightDual ((constantSheaf J A).obj X) :=
+  HasRightDual.map (constantSheaf J A) X
+
+/-- The constant sheaf of an object with a left dual has a left dual, given by the
+constant sheaf of the dual, since the constant sheaf functor is monoidal. -/
+@[implicit_reducible]
+noncomputable def constantSheafObjHasLeftDual (Y : A) [HasLeftDual Y] :
+    HasLeftDual ((constantSheaf J A).obj Y) :=
+  HasLeftDual.map (constantSheaf J A) Y
 
 end CategoryTheory
