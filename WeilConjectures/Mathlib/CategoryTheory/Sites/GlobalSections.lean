@@ -5,8 +5,10 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -27,6 +29,12 @@ When `A` is moreover braided and `Sheaf J A` carries the braided structure
 sheaf functor is braided. Since a symmetric monoidal functor is by definition a braided
 functor between symmetric monoidal categories, this also covers the symmetric case: for
 symmetric `A`, the global sections functor is lax symmetric monoidal.
+
+Finally, we record the projection formula for global sections: since the constant sheaf
+functor is strong monoidal, the projection morphism of the constant-sheaf/global-sections
+adjunction is an isomorphism at every dualizable coefficient object
+(`CategoryTheory.Adjunction.isIso_projectionMap`), giving a natural isomorphism
+`Γ(F) ⊗ M ≅ Γ(F ⊗ M̲)` for `M` with a left dual (`CategoryTheory.Sheaf.ΓProjectionIso`).
 -/
 
 @[expose] public section
@@ -63,5 +71,35 @@ noncomputable instance Sheaf.ΓLaxBraided : (Sheaf.Γ J A).LaxBraided :=
   (constantSheafΓAdj J A).rightAdjointLaxBraided
 
 end BraidedCategory
+
+section ProjectionFormula
+
+open MonoidalCategory
+
+variable {J A}
+
+/-- The projection morphism of the constant-sheaf/global-sections adjunction is an
+isomorphism at coefficients admitting a left dual. This is an instance of
+`CategoryTheory.Adjunction.isIso_projectionMap`; we record it so that it is found
+directly at the `constantSheafΓAdj` head symbol. -/
+instance isIso_projectionMap_constantSheafΓAdj (F : Sheaf J A) (M : A) [HasLeftDual M] :
+    IsIso ((constantSheafΓAdj J A).projectionMap F M) :=
+  inferInstance
+
+/-- The projection formula for global sections: for a dualizable object `M` of the
+coefficient category, the projection morphism of the constant-sheaf/global-sections
+adjunction gives an isomorphism `Γ(F) ⊗ M ≅ Γ(F ⊗ M̲)`, where `M̲` denotes the constant
+sheaf at `M`. It is natural in the sheaf `F` by
+`CategoryTheory.Adjunction.projectionMap_natural_left`. -/
+noncomputable def Sheaf.ΓProjectionIso (F : Sheaf J A) (M : A) [HasLeftDual M] :
+    (Γ J A).obj F ⊗ M ≅ (Γ J A).obj (F ⊗ (constantSheaf J A).obj M) :=
+  asIso ((constantSheafΓAdj J A).projectionMap F M)
+
+@[simp]
+lemma Sheaf.ΓProjectionIso_hom (F : Sheaf J A) (M : A) [HasLeftDual M] :
+    (ΓProjectionIso F M).hom = (constantSheafΓAdj J A).projectionMap F M :=
+  rfl
+
+end ProjectionFormula
 
 end CategoryTheory

@@ -15,7 +15,9 @@ public import Mathlib.CategoryTheory.Limits.Yoneda
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 
 /-!
 # The symmetric monoidal category of étale sheaves of `Λ`-modules
@@ -31,7 +33,12 @@ structure of the category `𝖠_τ(X, Λ)` of the blueprint — available as glo
   `AlgebraicGeometry.Scheme.symmetricCategory_sheaf_smallEtaleTopology`: the (symmetric)
   monoidal category structure on `Sheaf X.smallEtaleTopology (ModuleCat Λ)` obtained by
   monoidal localization of the objectwise tensor product of presheaves,
-  via `CategoryTheory.Sheaf.monoidalCategory` / `Sheaf.symmetricCategory`.
+  via `CategoryTheory.Sheaf.monoidalCategory` / `Sheaf.symmetricCategory`;
+- `AlgebraicGeometry.Scheme.ΓProjectionIso_sheaf_smallEtaleTopology`: the projection
+  formula for global sections at finite free coefficients, `Γ(F ⊗ M̲) ≅ Γ(F) ⊗ M` —
+  étale sheaves of `Λ`-modules admit a global sections functor since the small étale
+  site has a terminal object, and the projection morphism of the
+  constant-sheaf/global-sections adjunction is an isomorphism at dualizable objects.
 
 Once these instances are available, mathlib's instances make the sheafification functor
 `presheafToSheaf` and the stalk functors `(Scheme.pointSmallEtale s).sheafFiber` at
@@ -112,5 +119,39 @@ noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (CommRingCat.of Ω) ⟶ X) :
     ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).Monoidal :=
   inferInstance
+
+/-!
+### The projection formula for global sections
+
+Étale sheaves of `Λ`-modules admit a global sections functor: the small étale site
+`X.Etale` has finite limits (as the category of objects of a multiplicative morphism
+property over `X`), in particular a terminal object (the identity of `X`), so
+`CategoryTheory.hasGlobalSectionsFunctor_of_hasTerminal` applies. Both facts are found
+by instance search; we record them as `example`s.
+
+Since the constant sheaf functor is strong monoidal and finite free `Λ`-modules are
+dualizable, the projection morphism of the constant-sheaf/global-sections adjunction is
+an isomorphism at finite free coefficients: `Γ(F) ⊗ M ≅ Γ(F ⊗ M̲)`.
+-/
+
+-- The small étale site of a scheme has a terminal object.
+example : Limits.HasTerminal X.Etale := inferInstance
+
+-- Étale sheaves of `Λ`-modules admit a global sections functor.
+example : HasGlobalSectionsFunctor X.smallEtaleTopology (ModuleCat.{u} Λ) :=
+  inferInstance
+
+/-- The projection formula for étale global sections with finite free coefficients:
+for a sheaf `F` of `Λ`-modules on the small étale site of `X` and a finite free
+`Λ`-module `M`, global sections of `F ⊗ M̲` are the global sections of `F` tensored
+with `M`, via the projection morphism of the constant-sheaf/global-sections
+adjunction. -/
+noncomputable def ΓProjectionIso_sheaf_smallEtaleTopology
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) (M : ModuleCat.{u} Λ)
+    [Module.Free Λ M] [Module.Finite Λ M] :
+    (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u} Λ)).obj F ⊗ M ≅
+      (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u} Λ)).obj
+        (F ⊗ (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M) :=
+  Sheaf.ΓProjectionIso F M
 
 end AlgebraicGeometry.Scheme
