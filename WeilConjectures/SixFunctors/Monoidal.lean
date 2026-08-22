@@ -20,6 +20,7 @@ public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -54,6 +55,13 @@ dual module (`AlgebraicGeometry.Scheme.hasRightDual_constantSheaf_smallEtaleTopo
 and the companions below), and the monoidal stalk functors send dualizable sheaves to
 dualizable modules. These are the coefficient objects for which the projection formula
 of the six-functor formalism holds.
+
+Since the monoidal structure is closed and the constant sheaf of a finite free module is
+dualizable, the internal hom out of such a constant sheaf is tensoring with the constant
+sheaf of the dual module: `[Λ_M, F] ≅ Λ_{ᘁM} ⊗ F`
+(`AlgebraicGeometry.Scheme.ihomConstantSheafIso_smallEtaleTopology`). This is the
+underived form of the standard reduction of `RHom` at dualizable coefficients to a
+tensor computation.
 
 ## Implementation notes
 
@@ -245,5 +253,25 @@ noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj (Fᘁ) ≅
       (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj F)ᘁ :=
   Functor.Monoidal.mapRightDualIso _ F
+
+/-! ### Internal homs out of constant sheaves
+
+The internal hom of étale sheaves of `Λ`-modules out of the constant sheaf of a finite
+free `Λ`-module is tensoring with the constant sheaf of the dual module: since the
+constant sheaf is dualizable, both functors are right adjoint to tensoring with it. -/
+
+/-- The internal hom of étale sheaves of `Λ`-modules out of the constant sheaf of a
+finite free `Λ`-module `M` is tensoring with the constant sheaf of the dual module:
+`[Λ_M, F] ≅ Λ_{ᘁM} ⊗ F`. This reduces internal homs at finite free constant coefficients
+to tensor computations, where the projection formula and the dualizable-object machinery
+apply. -/
+noncomputable def ihomConstantSheafIso_smallEtaleTopology
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :
+    (ihom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M)).obj F ≅
+      (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj (ᘁM) ⊗ F :=
+  (MonoidalClosed.leftDualTensorIsoIhom _ F).symm ≪≫
+    whiskerRightIso
+      (Functor.Monoidal.mapLeftDualIso
+        (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) M).symm F
 
 end AlgebraicGeometry.Scheme
