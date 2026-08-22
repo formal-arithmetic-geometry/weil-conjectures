@@ -180,7 +180,7 @@ abbrev IsSchemeTheoreticallyDense {f : X ⟶ Y} (c : Compactification f) : Prop 
 /-- A compactification is scheme-theoretically dense if and only if the inclusion of
 the scheme-theoretic image of its open immersion is an isomorphism.
 (Blueprint: `lemma:nagata-dense-compactification-characterization`.) -/
-theorem isSchemeTheoreticallyDense_iff {f : X ⟶ Y} (c : Compactification f) :
+theorem isSchemeTheoreticallyDense_iff_isIso_imageι {f : X ⟶ Y} (c : Compactification f) :
     c.IsSchemeTheoreticallyDense ↔ IsIso c.i.imageι :=
   isSchemeTheoreticallyDominant_iff_isIso_imageι c.i
 
