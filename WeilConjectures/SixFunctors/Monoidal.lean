@@ -19,6 +19,7 @@ public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -41,6 +42,10 @@ structure of the category `𝖠_τ(X, Λ)` of the blueprint — available as glo
   Day's reflection theorem does not apply to the (large) small étale site directly;
   monoidal closedness is established on the `u`-small small model of the affine étale
   site and transported up along two dense-subsite restrictions.
+- `AlgebraicGeometry.Scheme.ΓIhomEquivSheafHom_sheaf_smallEtaleTopology`: the elements
+  of the `Λ`-module of global sections of the internal hom `[F, G]` are the morphisms
+  of sheaves `F ⟶ G`; the small étale site has a terminal object, so étale sheaves of
+  `Λ`-modules admit a global sections functor.
 
 Once these instances are available, mathlib's instances make the sheafification functor
 `presheafToSheaf` and the stalk functors `(Scheme.pointSmallEtale s).sheafFiber` at
@@ -189,5 +194,29 @@ noncomputable instance monoidalClosed_sheaf_smallEtaleTopology :
   letI := monoidalClosed_sheaf_affineEtaleTopology X Λ
   Functor.IsDenseSubsite.monoidalClosed (AffineEtale.Spec X) (AffineEtale.topology X)
     X.smallEtaleTopology (ModuleCat.{u} Λ)
+
+/-! ### Global sections of the internal hom compute sheaf homs
+
+The small étale site has a terminal object (the scheme itself), so étale sheaves of
+`Λ`-modules admit a global sections functor; this is found by instance search. The
+`Λ`-module of global sections of the internal hom `[F, G]` then computes the morphisms
+of sheaves `F ⟶ G`, elementwise. -/
+
+-- Étale sheaves of `Λ`-modules admit a global sections functor: the small étale site
+-- has a terminal object.
+example : HasGlobalSectionsFunctor X.smallEtaleTopology (ModuleCat.{u} Λ) :=
+  inferInstance
+
+/-- The elements of the `Λ`-module of global sections of the internal hom `[F, G]` of
+étale sheaves of `Λ`-modules are the morphisms of sheaves `F ⟶ G`. This identifies
+mapping into an étale sheaf `G` with taking sections of the corresponding internal hom
+sheaf. -/
+noncomputable def ΓIhomEquivSheafHom_sheaf_smallEtaleTopology
+    (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :
+    ((Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u} Λ)).obj ((ihom F).obj G) : Type u) ≃
+      (F ⟶ G) :=
+  (ModuleCat.homLinearEquiv.trans
+    (LinearMap.ringLmapEquivSelf Λ Λ _)).toEquiv.symm.trans
+    (Sheaf.unitHomΓIhomEquiv X.smallEtaleTopology (ModuleCat.{u} Λ) F G)
 
 end AlgebraicGeometry.Scheme
