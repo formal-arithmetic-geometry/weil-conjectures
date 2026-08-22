@@ -21,6 +21,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -62,6 +63,12 @@ sheaf of the dual module: `[Λ_M, F] ≅ Λ_{ᘁM} ⊗ F`
 (`AlgebraicGeometry.Scheme.ihomConstantSheafIso_smallEtaleTopology`). This is the
 underived form of the standard reduction of `RHom` at dualizable coefficients to a
 tensor computation.
+
+For the same reason internal homs out of dualizable sheaves are computed stalkwise: the
+monoidal stalk functor at a geometric point sends the internal hom out of a dualizable
+sheaf to the internal hom of the stalks
+(`AlgebraicGeometry.Scheme.sheafFiberIhomIso_smallEtaleTopology`), the underived form of
+"pullback commutes with `RHom` at dualizable coefficients" for geometric points.
 
 ## Implementation notes
 
@@ -273,5 +280,36 @@ noncomputable def ihomConstantSheafIso_smallEtaleTopology
     whiskerRightIso
       (Functor.Monoidal.mapLeftDualIso
         (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) M).symm F
+
+/-! ### Stalks of internal homs
+
+The monoidal stalk functor at a geometric point sends the internal hom out of a
+dualizable sheaf to the internal hom of the stalks: internal homs out of dualizable
+étale sheaves are computed stalkwise. -/
+
+/-- The stalk at a geometric point of the internal hom of étale sheaves of `Λ`-modules
+out of a dualizable sheaf `G` is the internal hom of the stalks:
+`[G, F]ₛ ≅ [Gₛ, Fₛ]`. This is the underived form, for geometric points, of "pullback
+commutes with `RHom` at dualizable coefficients". -/
+noncomputable def sheafFiberIhomIso_smallEtaleTopology {Ω : Type u} [Field Ω]
+    [IsSepClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ X)
+    (G F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) [HasLeftDual G] :
+    ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj ((ihom G).obj F) ≅
+      (ihom (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj G)).obj
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj F) :=
+  letI := HasLeftDual.map ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)) G
+  Functor.Monoidal.ihomIsoOfHasLeftDual _ G F
+
+-- In particular the stalk of the internal hom out of the constant sheaf of a finite
+-- free `Λ`-module is the internal hom of the stalks.
+noncomputable example {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (CommRingCat.of Ω) ⟶ X)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :
+    ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj
+        ((ihom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M)).obj F) ≅
+      (ihom (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj
+          ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M))).obj
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} Λ)).obj F) :=
+  sheafFiberIhomIso_smallEtaleTopology X Λ s _ F
 
 end AlgebraicGeometry.Scheme
