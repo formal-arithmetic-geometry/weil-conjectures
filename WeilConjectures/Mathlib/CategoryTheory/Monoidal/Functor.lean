@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-!
 # The projection morphism of a monoidal adjunction
@@ -22,6 +24,13 @@ and prove its naturality and coherence properties:
   is `δ F (G.obj X) Y ≫ adj.counit.app X ▷ F.obj Y`;
 * `CategoryTheory.Adjunction.projectionMap_unit`: compatibility with the right unitors;
 * `CategoryTheory.Adjunction.projectionMap_assoc`: compatibility with the associators.
+
+When moreover `F` is strong monoidal, the projection morphism is an isomorphism at every
+object `Y` with a left dual (`CategoryTheory.Adjunction.projectionMapIso` and the instance
+`CategoryTheory.Adjunction.isIso_projectionMap`): this is the "projection formula for
+dualizable coefficients". The inverse is obtained by bending the `Y`-strand with the
+coevaluation of `ᘁY` and evaluating `F.obj Y` against `F.obj (ᘁY)` inside `G`, using that
+a strong monoidal functor preserves exact pairings (`CategoryTheory.ExactPairing.map`).
 
 Instantiated at a pushforward/pullback adjunction between monoidal sheaf categories, the
 projection morphism is the underived projection formula map `g_* M ⊗ N ⟶ g_* (M ⊗ g^* N)`
@@ -117,5 +126,88 @@ lemma projectionMap_assoc (X : D) (Y Y' : C) :
   rfl
 
 end IsMonoidal
+
+section Dualizable
+
+variable [F.Monoidal] [adj.IsMonoidal]
+
+/-- Projecting in twice and evaluating upstairs is evaluation downstairs: composing the
+projection morphisms at `Y` and at `ᘁY` with the image under `G` of the evaluation of the
+pairing of `F.obj (ᘁY)` with `F.obj Y` recovers the evaluation of the pairing of `ᘁY` with
+`Y`. This is the key computation showing that the projection morphism is an isomorphism at
+dualizable objects. -/
+@[reassoc]
+lemma projectionMap_evaluation (X : D) (Y : C) [HasLeftDual Y] :
+    adj.projectionMap X Y ▷ (ᘁY) ≫ adj.projectionMap (X ⊗ F.obj Y) (ᘁY) ≫
+      G.map ((α_ X (F.obj Y) (F.obj (ᘁY))).hom ≫
+        X ◁ (μ F Y (ᘁY) ≫ F.map (ε_ (ᘁY) Y) ≫ η F) ≫ (ρ_ X).hom) =
+      (α_ (G.obj X) Y (ᘁY)).hom ≫ G.obj X ◁ ε_ (ᘁY) Y ≫ (ρ_ (G.obj X)).hom := by
+  have h : adj.projectionMap X Y ▷ (ᘁY) ≫ adj.projectionMap (X ⊗ F.obj Y) (ᘁY) =
+      (α_ (G.obj X) Y (ᘁY)).hom ≫ adj.projectionMap X (Y ⊗ ᘁY) ≫
+        G.map (X ◁ δ F Y (ᘁY)) ≫ G.map (α_ X (F.obj Y) (F.obj (ᘁY))).inv := by
+    rw [adj.projectionMap_assoc, Iso.hom_inv_id_assoc]
+  rw [← Category.assoc, h]
+  simp only [Category.assoc, ← Functor.map_comp]
+  rw [Iso.inv_hom_id_assoc, MonoidalCategory.whiskerLeft_comp,
+    MonoidalCategory.whiskerLeft_comp]
+  simp only [Category.assoc]
+  rw [Functor.Monoidal.whiskerLeft_δ_μ_assoc, Functor.map_comp, Functor.map_comp,
+    ← adj.projectionMap_natural_right_assoc, adj.projectionMap_unit_assoc,
+    ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id, Category.comp_id]
+
+/-- The projection morphism of a monoidal adjunction whose left adjoint is strong monoidal
+is an isomorphism at every object `Y` admitting a left dual: the "projection formula for
+dualizable coefficients". The inverse is obtained by bending the `Y`-strand with the
+coevaluation of the pairing of `ᘁY` with `Y` and evaluating `F.obj Y` against
+`F.obj (ᘁY)` inside `G`. -/
+@[simps hom]
+noncomputable def projectionMapIso (X : D) (Y : C) [HasLeftDual Y] :
+    G.obj X ⊗ Y ≅ G.obj (X ⊗ F.obj Y) where
+  hom := adj.projectionMap X Y
+  inv := tensorRightHomEquiv _ (ᘁY) Y _
+    (adj.projectionMap (X ⊗ F.obj Y) (ᘁY) ≫
+      G.map ((α_ X (F.obj Y) (F.obj (ᘁY))).hom ≫
+        X ◁ (μ F Y (ᘁY) ≫ F.map (ε_ (ᘁY) Y) ≫ η F) ≫ (ρ_ X).hom))
+  hom_inv_id := by
+    apply (tensorRightHomEquiv (G.obj X ⊗ Y) (ᘁY) Y (G.obj X)).symm.injective
+    rw [tensorRightHomEquiv_symm_naturality, Equiv.symm_apply_apply,
+      adj.projectionMap_evaluation]
+    simp [tensorRightHomEquiv]
+  inv_hom_id := by
+    letI : ExactPairing (F.obj (ᘁY)) (F.obj Y) := ExactPairing.map F (ᘁY) Y
+    have hε : (ε_ (F.obj (ᘁY)) (F.obj Y) : F.obj Y ⊗ F.obj (ᘁY) ⟶ 𝟙_ D) =
+        μ F Y (ᘁY) ≫ F.map (ε_ (ᘁY) Y) ≫ η F := rfl
+    have hzig : (tensorRightHomEquiv (X ⊗ F.obj Y) (F.obj (ᘁY)) (F.obj Y) X)
+        ((α_ X (F.obj Y) (F.obj (ᘁY))).hom ≫
+          X ◁ (μ F Y (ᘁY) ≫ F.map (ε_ (ᘁY) Y) ≫ η F) ≫ (ρ_ X).hom) = 𝟙 (X ⊗ F.obj Y) := by
+      rw [show (α_ X (F.obj Y) (F.obj (ᘁY))).hom ≫
+            X ◁ (μ F Y (ᘁY) ≫ F.map (ε_ (ᘁY) Y) ≫ η F) ≫ (ρ_ X).hom =
+          (tensorRightHomEquiv (X ⊗ F.obj Y) (F.obj (ᘁY)) (F.obj Y) X).symm
+            (𝟙 (X ⊗ F.obj Y)) by simp [tensorRightHomEquiv, hε],
+        Equiv.apply_symm_apply]
+    dsimp only [tensorRightHomEquiv, Equiv.coe_fn_mk] at hzig ⊢
+    rw [show (η_ (F.obj (ᘁY)) (F.obj Y) : 𝟙_ D ⟶ _) =
+        ε F ≫ F.map (η_ (ᘁY) Y) ≫ δ F (ᘁY) Y from rfl] at hzig
+    have hG := congrArg G.map hzig
+    simp only [Category.assoc, MonoidalCategory.comp_whiskerRight]
+    rw [adj.projectionMap_natural_left, ← adj.projectionMap_assoc_assoc,
+      adj.projectionMap_natural_right_assoc,
+      show (X ⊗ F.obj Y) ◁ F.map (η_ (ᘁY) Y) =
+          (X ⊗ F.obj Y) ◁ η F ≫ (X ⊗ F.obj Y) ◁ (ε F ≫ F.map (η_ (ᘁY) Y)) by
+        rw [← MonoidalCategory.whiskerLeft_comp, Functor.Monoidal.η_ε_assoc],
+      Functor.map_comp]
+    simp only [Category.assoc]
+    rw [adj.projectionMap_unit_assoc, Iso.inv_hom_id_assoc]
+    simp only [Functor.map_comp, Functor.map_id, MonoidalCategory.whiskerLeft_comp,
+      Category.assoc] at hG ⊢
+    exact hG
+
+/-- The projection morphism of a monoidal adjunction whose left adjoint is strong monoidal
+is an isomorphism at every object with a left dual. -/
+instance isIso_projectionMap (X : D) (Y : C) [HasLeftDual Y] :
+    IsIso (adj.projectionMap X Y) :=
+  (adj.projectionMapIso X Y).isIso_hom
+
+end Dualizable
 
 end CategoryTheory.Adjunction
