@@ -47,7 +47,11 @@ structure of the category `𝖠_τ(X, Λ)` of the blueprint — available as glo
   formula for global sections at finite free coefficients, `Γ(F ⊗ M̲) ≅ Γ(F) ⊗ M` —
   étale sheaves of `Λ`-modules admit a global sections functor since the small étale
   site has a terminal object, and the projection morphism of the
-  constant-sheaf/global-sections adjunction is an isomorphism at dualizable objects.
+  constant-sheaf/global-sections adjunction is an isomorphism at dualizable objects;
+- `AlgebraicGeometry.Scheme.ΓIhomIso_sheaf_smallEtaleTopology`: its internal hom
+  companion, `Γ [M̲, F] ≅ Hom_Λ(M, Γ F)` for an arbitrary `Λ`-module `M` — global
+  sections of the sheaf hom out of a constant sheaf are the homomorphisms of the
+  coefficients into global sections.
 
 Once these instances are available, mathlib's instances make the sheafification functor
 `presheafToSheaf` and the stalk functors `(Scheme.pointSmallEtale s).sheafFiber` at
@@ -230,5 +234,28 @@ noncomputable def ΓProjectionIso_sheaf_smallEtaleTopology
       (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u} Λ)).obj
         (F ⊗ (constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M) :=
   Sheaf.ΓProjectionIso F M
+
+/-!
+### Global sections of internal homs out of constant sheaves
+
+The companion of the projection formula on the internal hom side: since étale sheaves
+of `Λ`-modules are monoidal closed and the constant sheaf functor is strong monoidal,
+global sections of the sheaf hom out of a constant sheaf are the `Λ`-module of
+homomorphisms of the coefficients into global sections, `Γ [M̲, F] ≅ Hom_Λ(M, Γ F)`.
+In contrast to the projection formula, no finiteness or freeness hypothesis on the
+coefficient module is needed.
+-/
+
+/-- Global sections of the internal hom of étale sheaves of `Λ`-modules out of the
+constant sheaf of a `Λ`-module `M` are the internal hom of `M` into global sections:
+`Γ [M̲, F] ≅ [M, Γ F]`, where the right-hand side is the honest `Λ`-module of
+`Λ`-linear maps `Hom_Λ(M, Γ F)`. This is the internal hom adjunction formula at the
+constant-sheaf/global-sections adjunction; no dualizability of `M` is needed. -/
+noncomputable def ΓIhomIso_sheaf_smallEtaleTopology
+    (M : ModuleCat.{u} Λ) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :
+    (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u} Λ)).obj
+        ((ihom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u} Λ)).obj M)).obj F) ≅
+      (ihom M).obj ((Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u} Λ)).obj F) :=
+  Sheaf.ΓIhomIso M F
 
 end AlgebraicGeometry.Scheme

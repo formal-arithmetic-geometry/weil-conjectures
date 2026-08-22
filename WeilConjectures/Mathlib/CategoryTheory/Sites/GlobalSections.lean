@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
@@ -35,6 +36,14 @@ functor is strong monoidal, the projection morphism of the constant-sheaf/global
 adjunction is an isomorphism at every dualizable coefficient object
 (`CategoryTheory.Adjunction.isIso_projectionMap`), giving a natural isomorphism
 `Γ(F) ⊗ M ≅ Γ(F ⊗ M̲)` for `M` with a left dual (`CategoryTheory.Sheaf.ΓProjectionIso`).
+
+When both `A` and `Sheaf J A` are monoidal closed, we also record the companion formula
+for internal homs: global sections of the sheaf hom out of a constant sheaf are the
+internal hom of the coefficients into global sections, `Γ [M̲, F] ≅ [M, Γ F]`
+(`CategoryTheory.Sheaf.ΓIhomIso`, natural in `F` by `CategoryTheory.Sheaf.ΓIhomNatIso`).
+This is the instantiation at `constantSheafΓAdj` of the internal hom adjunction formula
+`CategoryTheory.Adjunction.ihomNatIso`; in contrast to the projection formula, no
+dualizability hypothesis on `M` is needed.
 -/
 
 @[expose] public section
@@ -101,5 +110,45 @@ lemma Sheaf.ΓProjectionIso_hom (F : Sheaf J A) (M : A) [HasLeftDual M] :
   rfl
 
 end ProjectionFormula
+
+section IhomFormula
+
+open MonoidalCategory Functor.LaxMonoidal
+
+variable {A} [MonoidalClosed A] [MonoidalClosed (Sheaf J A)]
+
+/-- Global sections of the sheaf hom out of a constant sheaf are the internal hom of
+the coefficients into global sections: the natural isomorphism
+`Γ [M̲, −] ≅ [M, Γ −]` of functors `Sheaf J A ⥤ A`, where `M̲` denotes the constant
+sheaf at `M`. This is the internal hom adjunction formula
+`CategoryTheory.Adjunction.ihomNatIso` at the constant-sheaf/global-sections
+adjunction; no dualizability hypothesis on `M` is needed. -/
+noncomputable def Sheaf.ΓIhomNatIso (M : A) :
+    ihom ((constantSheaf J A).obj M) ⋙ Γ J A ≅ Γ J A ⋙ ihom M :=
+  (constantSheafΓAdj J A).ihomNatIso M
+
+variable {J}
+
+/-- Global sections of the sheaf hom out of a constant sheaf are the internal hom of
+the coefficients into global sections: `Γ [M̲, F] ≅ [M, Γ F]`, where `M̲` denotes the
+constant sheaf at `M`. It is natural in `F` by `CategoryTheory.Sheaf.ΓIhomNatIso`. -/
+noncomputable def Sheaf.ΓIhomIso (M : A) (F : Sheaf J A) :
+    (Γ J A).obj ((ihom ((constantSheaf J A).obj M)).obj F) ≅
+      (ihom M).obj ((Γ J A).obj F) :=
+  (constantSheafΓAdj J A).ihomIso M F
+
+/-- The forward map of `CategoryTheory.Sheaf.ΓIhomIso` is, after uncurrying, the
+composite of the unit of the constant-sheaf/global-sections adjunction, the lax monoidal
+structure of the global sections functor and the evaluation of the sheaf hom. -/
+lemma Sheaf.uncurry_ΓIhomIso_hom (M : A) (F : Sheaf J A) :
+    MonoidalClosed.uncurry (ΓIhomIso M F).hom =
+      (constantSheafΓAdj J A).unit.app M ▷
+          (Γ J A).obj ((ihom ((constantSheaf J A).obj M)).obj F) ≫
+        μ (Γ J A) ((constantSheaf J A).obj M)
+          ((ihom ((constantSheaf J A).obj M)).obj F) ≫
+        (Γ J A).map ((ihom.ev ((constantSheaf J A).obj M)).app F) :=
+  (constantSheafΓAdj J A).uncurry_ihomIso_hom M F
+
+end IhomFormula
 
 end CategoryTheory
