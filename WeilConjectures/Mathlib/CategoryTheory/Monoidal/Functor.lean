@@ -21,7 +21,11 @@ and prove its naturality and coherence properties:
   and the adjunction is monoidal, the transpose of the projection morphism along the adjunction
   is `δ F (G.obj X) Y ≫ adj.counit.app X ▷ F.obj Y`;
 * `CategoryTheory.Adjunction.projectionMap_unit`: compatibility with the right unitors;
-* `CategoryTheory.Adjunction.projectionMap_assoc`: compatibility with the associators.
+* `CategoryTheory.Adjunction.projectionMap_assoc`: compatibility with the associators;
+* `CategoryTheory.Adjunction.id_projectionMap` and `CategoryTheory.Adjunction.comp_projectionMap`:
+  pseudofunctoriality in the adjunction — the projection morphism of the identity adjunction is
+  the identity, and the projection morphism of a composite adjunction is the composite of the
+  projection morphisms of the two factors.
 
 Instantiated at a pushforward/pullback adjunction between monoidal sheaf categories, the
 projection morphism is the underived projection formula map `g_* M ⊗ N ⟶ g_* (M ⊗ g^* N)`
@@ -30,7 +34,7 @@ of the six-functor formalism.
 
 @[expose] public section
 
-universe v₁ v₂ u₁ u₂
+universe v₁ v₂ v₃ u₁ u₂ u₃
 
 namespace CategoryTheory.Adjunction
 
@@ -117,5 +121,43 @@ lemma projectionMap_assoc (X : D) (Y Y' : C) :
   rfl
 
 end IsMonoidal
+
+section Pseudofunctoriality
+
+/-- The projection morphism of the identity adjunction is the identity. -/
+@[simp]
+lemma id_projectionMap (X Y : C) :
+    (Adjunction.id (C := C)).projectionMap X Y = 𝟙 (X ⊗ Y) := by
+  simp [projectionMap]
+
+/-- The projection morphism of a composite adjunction is the composite of the projection
+morphisms of the two factors: first project `Y` through `adj`, then project `F.obj Y`
+through `adj'` inside `G`. For pushforward/pullback adjunctions this is the compatibility
+of the projection formula map with composition, `(g ∘ f)_*` versus `g_* ∘ f_*`. -/
+@[reassoc]
+lemma comp_projectionMap {E : Type u₃} [Category.{v₃} E] [MonoidalCategory E]
+    {F' : D ⥤ E} {G' : E ⥤ D} (adj' : F' ⊣ G') [G'.LaxMonoidal] (X : E) (Y : C) :
+    (adj.comp adj').projectionMap X Y =
+      adj.projectionMap (G'.obj X) Y ≫ G.map (adj'.projectionMap X (F.obj Y)) := by
+  -- The `calc` steps are stated with all functor applications unfolded, so that every
+  -- composition elaborates with coherent implicit arguments; keyed rewriting cannot see
+  -- through `(G' ⋙ G).obj X` otherwise.
+  calc (adj.comp adj').projectionMap X Y
+      = (G.obj (G'.obj X) ◁ adj.unit.app Y) ≫
+          (G.obj (G'.obj X) ◁ G.map (adj'.unit.app (F.obj Y))) ≫
+          μ G (G'.obj X) (G'.obj (F'.obj (F.obj Y))) ≫ G.map (μ G' X (F'.obj (F.obj Y))) := by
+        simp only [projectionMap, comp_unit_app, MonoidalCategory.whiskerLeft_comp_assoc,
+          comp_μ]
+        rfl
+    _ = (G.obj (G'.obj X) ◁ adj.unit.app Y) ≫
+          μ G (G'.obj X) (F.obj Y) ≫ (G.map (G'.obj X ◁ adj'.unit.app (F.obj Y)) ≫
+          G.map (μ G' X (F'.obj (F.obj Y)))) :=
+        congrArg (G.obj (G'.obj X) ◁ adj.unit.app Y ≫ ·)
+          (μ_natural_right_assoc G (G'.obj X) (adj'.unit.app (F.obj Y))
+            (G.map (μ G' X (F'.obj (F.obj Y)))))
+    _ = adj.projectionMap (G'.obj X) Y ≫ G.map (adj'.projectionMap X (F.obj Y)) := by
+        simp only [projectionMap, Functor.map_comp, assoc]
+
+end Pseudofunctoriality
 
 end CategoryTheory.Adjunction
