@@ -44,6 +44,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Derivabi
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
@@ -76,6 +77,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
@@ -106,6 +108,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.Monoidal
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.SpecialValues
