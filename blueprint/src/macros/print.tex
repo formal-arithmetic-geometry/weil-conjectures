@@ -9,7 +9,6 @@
 % sense only for the web version, such as dependency graph
 % macros.
 
-
 % Dummy macros that make sense only for web version.
 \newcommand{\lean}[1]{}
 \newcommand{\discussion}[1]{}
@@ -20,40 +19,10 @@
 % latex prints a warning if the label is not defined, but nothing is shown in the pdf file.
 % It uses LaTeX3 programming, this is why we use the expl3 package.
 \ExplSyntaxOn
-\cs_new_protected:Npn \__weil_checked_ref:n #1
-  {
-    \tl_set:Nn \l_tmpa_tl {#1}
-    \tl_trim_spaces:N \l_tmpa_tl
-    \str_if_eq:VnF \l_tmpa_tl {none}
-      {\exp_args:NV \__weil_phantom_ref:n \l_tmpa_tl}
-  }
-\cs_new_protected:Npn \__weil_phantom_ref:n #1
-  {\vphantom{\ref{#1}}}
-\cs_new_protected:Npn \__weil_uses_link:n #1
-  {\hyperref[#1]{\nolinkurl{#1}\nobreakspace(\ref*{#1})}}
-\cs_new_protected:Npn \__weil_uses_item:n #1
-  {
-    \tl_set:Nn \l_tmpa_tl {#1}
-    \tl_trim_spaces:N \l_tmpa_tl
-    \str_if_eq:VnTF \l_tmpa_tl {none}
-      {\texttt{none}}
-      {\exp_args:NV \__weil_uses_link:n \l_tmpa_tl}
-  }
-\ProvideDocumentCommand{\UseLinks}{m}
-  {
-    \int_zero:N \l_tmpa_int
-    \clist_map_inline:nn {#1}
-      {
-        \int_incr:N \l_tmpa_int
-        \int_compare:nNnF {\l_tmpa_int} = {1}
-          {,\penalty0\hskip.35em\relax}
-        \__weil_uses_item:n {##1}
-      }
-  }
 \NewDocumentCommand{\uses}{m}
- {\clist_map_inline:nn{#1}{\__weil_checked_ref:n{##1}}%
+ {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
   \ignorespaces}
 \NewDocumentCommand{\proves}{m}
- {\clist_map_inline:nn{#1}{\__weil_checked_ref:n{##1}}%
+ {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
   \ignorespaces}
 \ExplSyntaxOff

@@ -27,55 +27,70 @@
 \newcounter{importedinterface}
 \crefname{convention}{Convention}{Conventions}
 
-\newcommand{\BlueprintResultSource}[1]{%
-  \par\smallskip\noindent\textcolor{black!72}{\textsf{Mathematical source:} }%
-  \nolinkurl{#1}\par}
+% \makeatletter
+% \newcommand{\BlueprintUsesLink}[1]{%
+%   \hyperref[#1]{\ref*{#1}:\nobreakspace\nameref*{#1}}}
+% \newcommand{\BlueprintUsesItem}[1]{%
+%   \edef\BlueprintUsesToken{\zap@space#1 \@empty}%
+%   \edef\BlueprintUsesNone{none}%
+%   \ifx\BlueprintUsesToken\BlueprintUsesNone
+%     \textit{None (foundational declaration)}%
+%   \else
+%     \BlueprintUsesLink{\BlueprintUsesToken}%
+%   \fi}
+% \newif\ifBlueprintUsesFirst
+% \newcommand{\uses}[1]{%
+%   \par\smallskip\noindent\textcolor{purple!60!black}{\textsf{Direct mathematical dependencies:} }%
+%   \begingroup
+%     \footnotesize
+%     \rightskip=0pt plus 1fil\relax
+%     \parfillskip=0pt\relax
+%     \BlueprintUsesFirsttrue
+%     \@for\BlueprintUsesEntry:=#1\do{%
+%       \ifBlueprintUsesFirst
+%         \BlueprintUsesFirstfalse
+%       \else
+%         ,\penalty0\hskip.35em\relax
+%       \fi
+%       \BlueprintUsesItem{\BlueprintUsesEntry}%
+%     }%
+%     \par
+%   \endgroup}
+% \let\proves\uses
+% \makeatother
 
-\newcommand{\BlueprintLocalDeclarationRegistry}[4]{%
-  \par\smallskip
-  {%
-  \scriptsize
-  \setlength{\tabcolsep}{3pt}%
-  \renewcommand{\arraystretch}{1.08}%
-  \noindent
-  \begin{tabular}{@{}%
-    p{0.22\linewidth}%
-    p{0.38\linewidth}%
-    p{\dimexpr0.40\linewidth-12pt\relax}@{}}
-    \toprule
-    \textbf{#1} & \textbf{Direct uses} & \textbf{Exact source}\\
-    \midrule
-    \hyperref[#2]{#1~\ref*{#2}}\newline\hyperref[#2]{\nolinkurl{#2}} &
-    \UseLinks{#3} &
-    #4\\
-    \bottomrule
-  \end{tabular}
-  }%
-  \par\smallskip
-}
+% \newcommand{\BlueprintResultSource}[1]{%
+%   \par\smallskip\noindent\textcolor{black!72}{\textsf{Mathematical source:} }%
+%   \nolinkurl{#1}\par}
+
+% \newcommand{\BlueprintLocalDeclarationRegistry}[4]{%
+%   \par\smallskip
+%   {%
+%   \scriptsize
+%   \setlength{\tabcolsep}{3pt}%
+%   \renewcommand{\arraystretch}{1.08}%
+%   \noindent
+%   \begin{tabular}{@{}%
+%     p{0.22\linewidth}%
+%     p{0.38\linewidth}%
+%     p{\dimexpr0.40\linewidth-12pt\relax}@{}}
+%     \toprule
+%     \textbf{#1} & \textbf{Direct uses} & \textbf{Exact source}\\
+%     \midrule
+%     \hyperref[#2]{#1~\ref*{#2}}\newline\hyperref[#2]{\nolinkurl{#2}} &
+%     \UseLinks{#3} &
+%     #4\\
+%     \bottomrule
+%   \end{tabular}
+%   }%
+%   \par\smallskip
+% }
 
 \newcommand{\deepresult}[1]{%
   \par\smallskip\noindent\textcolor{orange!45!black}{%
   \textsf{Blueprint role: named deep theorem node; see the cluster proof architecture.}}%
   \par\noindent\textcolor{orange!45!black}{\textsf{Mathematical source:} }#1\par}
 
-\newcommand{\DeclarationLink}[1]{%
-  \hyperref[#1]{\ref*{#1}}}
-
-\newcommand{\statusnote}[1]{%
-  \begin{quote}\small\raggedright\textbf{Status.} #1\end{quote}}
-\newcommand{\formalizationnote}[1]{%
-  \begin{quote}\small\raggedright\textbf{Formalization note.} #1\end{quote}}
-\newcommand{\constructedby}[1]{%
-  \par\smallskip\noindent\textcolor{purple!60!black}{\textsf{Constructed by:} }%
-  \footnotesize\sloppy\nolinkurl{#1}\par}
-\newcommand{\openobligation}[1]{%
-  \par\smallskip\noindent\textcolor{red!65!black}{\textsf{Open obligation:} }%
-  \footnotesize\sloppy\nolinkurl{#1}\par}
-\newcommand{\retiredobligation}[1]{%
-  \par\smallskip\noindent\textcolor{red!75!black}{\textsf{Retired invalid route:} }%
-  \footnotesize\sloppy\nolinkurl{#1}\par}
-\newcommand{\Needspace}[1]{\par}
 
 \newcommand{\Qell}{\mathbf{Q}_{\ell}}
 \newcommand{\Zell}{\mathbf{Z}_{\ell}}
