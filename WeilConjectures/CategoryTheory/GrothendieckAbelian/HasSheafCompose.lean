@@ -33,17 +33,17 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
+  {FA : A → A → Type*} {CA : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u} A FA]
   [PreservesLimits (CategoryTheory.forget A)]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+  [IsGrothendieckAbelian.{u + 1} A]
 
 variable (Y : Scheme.{u})
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- Postcomposition with a limit-preserving functor preserves sheaves on the small
 étale site. This does not follow from `hasSheafCompose_of_preservesLimitsOfSize`
 directly, since the covering sieves of the small étale site are indexed by a large

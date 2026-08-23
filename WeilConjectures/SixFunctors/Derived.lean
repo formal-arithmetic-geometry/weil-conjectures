@@ -42,11 +42,11 @@ The sheaf categories are Grothendieck abelian (the sorried instance
 `CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallGrothendieckTopology`
 of `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`) whenever the
 coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
-universe `u` of the base schemes; this covers the
-intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
+universe `u + 1`, one above the universe `u` of the base schemes; this covers the
+intended applications `A = Ab.{u + 1}` and `A = ModuleCat.{u + 1} Λ`. The chosen localized
 categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
-installs `HasDerivedCategory.{u}` on every sheaf category via
+installs `HasDerivedCategory.{u + 1}` on every sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`; no auxiliary universe parameters appear.
 
 The construction of the unbounded right derived functor requires the source abelian
@@ -60,8 +60,8 @@ input: Mathlib's `CategoryTheory.Functor.rightDerivedFunctorPlus` requires only
 `EnoughInjectives` on the source, and a Grothendieck abelian category has enough injectives
 (`CategoryTheory.IsGrothendieckAbelian.enoughInjectives`). So `Etale.rightDerivedLowerStarPlus`
 and `Etale.rightDerivedLowerShriekPlus` need no K-injective hypothesis. Note however that
-the chosen `HasDerivedCategory.{u}` instance is itself built from the sorried K-injective
-statement (through the local `u`-smallness of the derived category), so every derived
+the chosen `HasDerivedCategory.{u + 1}` instance is itself built from the sorried K-injective
+statement (through the local `u + 1`-smallness of the derived category), so every derived
 functor in this file — including the `Plus` variants — currently depends on `sorryAx`. Since
 the `ℓ`-adic formalism only needs `Dᵇc`, the `Plus` variants are the versions to build on;
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
@@ -139,14 +139,14 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /-- The chosen localized category `D(X_ét)` of `A`-valued étale sheaves, with `Hom`-types in
-`Type u`, obtained from the Grothendieck abelian structure of the sheaf category via
+`Type (u + 1)`, obtained from the Grothendieck abelian structure of the sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`. -/
 noncomputable instance Scheme.hasDerivedCategory_sheaf_smallEtaleTopology (X : Scheme.{u}) :
-    HasDerivedCategory.{u} (Sheaf X.smallEtaleTopology A) :=
-  HasDerivedCategory.ofIsGrothendieckAbelian.{u} _
+    HasDerivedCategory.{u + 1} (Sheaf X.smallEtaleTopology A) :=
+  HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _
 
 section DerivedLowerStar
 
@@ -167,7 +167,7 @@ Unlike `Etale.rightDerivedLowerStar` this needs no K-injective hypothesis:
 `Functor.rightDerivedFunctorPlus` needs only `EnoughInjectives` on the source, which
 Mathlib provides for every Grothendieck abelian category. The only dependence on the
 sorried `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` is
-through the chosen `HasDerivedCategory.{u}` instance. -/
+through the chosen `HasDerivedCategory.{u + 1}` instance. -/
 noncomputable def Etale.rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
@@ -234,8 +234,8 @@ structure and its compatibilities to the étale sheaf categories are stated unde
 these hypotheses — the monoidality of the sheafification-inverting morphisms is
 checked on stalks — which is why this section assumes them while the rest of the
 file does not. -/
-variable {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+variable {FA : A → A → Type*} {CA : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u} A FA]
   [PreservesLimits (CategoryTheory.forget A)]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
@@ -343,8 +343,8 @@ open MonoidalCategory
 /- The concreteness of the coefficient category `A`, as in the section
 `DerivedUpperStar`; it is what the monoidal transport instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
-variable {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+variable {FA : A → A → Type*} {CA : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u} A FA]
   [PreservesLimits (CategoryTheory.forget A)]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
