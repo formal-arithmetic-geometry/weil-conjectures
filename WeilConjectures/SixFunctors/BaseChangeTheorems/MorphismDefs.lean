@@ -134,39 +134,49 @@ derived adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def Etale.baseChangeUnitStep :
     (Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
       (Etale.upperStar A g).mapDerivedCategoryPlus ⟶
-    ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
-      (Etale.lowerStar A g').rightDerivedFunctorPlus) ⋙
-        (Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-          (Etale.upperStar A g).mapDerivedCategoryPlus :=
-  (Functor.leftUnitor _).inv ≫ Functor.whiskerRight
-  (Etale.derivedUpperStarLowerStarAdjunctionPlus A g').unit
-  ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙  (Etale.upperStar A g).mapDerivedCategoryPlus)
+    ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
+        ((Etale.upperStar A f').mapDerivedCategoryPlus ⋙
+          (Etale.lowerStar A f').rightDerivedFunctorPlus) :=
+  (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft
+  ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙ (Etale.upperStar A g).mapDerivedCategoryPlus)
+  (Etale.derivedUpperStarLowerStarAdjunctionPlus A f').unit
 
 /-- The *square transport* step `s_sq` of the base-change morphism on the bounded
 below derived categories: the natural transformation obtained by transporting along the
-pullback comparison `θ_sq` of the square under `Rf'_*`. -/
+pullback comparison `θ_sq` of the square under `Rf_*` on the left and `Rf'_*` on the
+right; the reassociations are the only other ingredient. -/
 noncomputable def Etale.baseChangeSquareStep (sq : CommSq g' f' f g) :
-    ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
-      (Etale.lowerStar A g').rightDerivedFunctorPlus) ⋙
-        (Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-          (Etale.upperStar A g).mapDerivedCategoryPlus ≅
-    ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
-      (Etale.lowerStar A f').rightDerivedFunctorPlus) ⋙
-        (Etale.lowerStar A g).rightDerivedFunctorPlus ⋙
-          (Etale.upperStar A g).mapDerivedCategoryPlus :=
-  sorry
+    ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
+        ((Etale.upperStar A f').mapDerivedCategoryPlus ⋙
+          (Etale.lowerStar A f').rightDerivedFunctorPlus) ≅
+    ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A f).mapDerivedCategoryPlus) ⋙
+        ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+          (Etale.lowerStar A f').rightDerivedFunctorPlus) :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (Etale.lowerStar A f).rightDerivedFunctorPlus
+      ((Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (Etale.pullbackSquareComparison A sq)
+          (Etale.lowerStar A f').rightDerivedFunctorPlus ≪≫
+        Functor.associator _ _ _) ≪≫
+    (Functor.associator _ _ _).symm
 
+/-- The *counit contraction* step `c_sq` of the base-change morphism on the bounded
+below derived categories: the natural transformation obtained by contracting the
+counit of the derived adjunction `Lf^* ⊣ Rf_*`. -/
 noncomputable def Etale.baseChangeCounitStep :
-    ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
-      (Etale.lowerStar A f').rightDerivedFunctorPlus) ⋙
-        (Etale.lowerStar A g).rightDerivedFunctorPlus ⋙
-          (Etale.upperStar A g).mapDerivedCategoryPlus ⟶
+    ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A f).mapDerivedCategoryPlus) ⋙
+        ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+          (Etale.lowerStar A f').rightDerivedFunctorPlus) ⟶
     (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
       (Etale.lowerStar A f').rightDerivedFunctorPlus :=
-  Functor.whiskerLeft
+  Functor.whiskerRight
+  (Etale.derivedUpperStarLowerStarAdjunctionPlus A f).counit
   ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙ (Etale.lowerStar A f').rightDerivedFunctorPlus)
-  (Etale.derivedUpperStarLowerStarAdjunctionPlus A g).counit
-  ≫ (Functor.rightUnitor _).hom
+  ≫ (Functor.leftUnitor _).hom
 
 /-- The *derived base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a
 commutative square `g' ≫ f = f' ≫ g` of schemes on the bounded below derived
