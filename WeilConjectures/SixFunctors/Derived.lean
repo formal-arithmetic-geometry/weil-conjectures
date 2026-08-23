@@ -59,8 +59,8 @@ input: Mathlib's `CategoryTheory.Functor.rightDerivedFunctorPlus` requires only
 `EnoughInjectives` on the source, and a Grothendieck abelian category has enough injectives
 (`CategoryTheory.IsGrothendieckAbelian.enoughInjectives`). So `Etale.rightDerivedLowerStarPlus`
 and `Etale.rightDerivedLowerShriekPlus` need no K-injective hypothesis. Note however that
-the chosen `HasDerivedCategory.{u}` instance is itself built from the sorried K-injective
-statement (through the local `u`-smallness of the derived category), so every derived
+the chosen `HasDerivedCategory.{u + 1}` instance is itself built from the sorried K-injective
+statement (through the local `u + 1`-smallness of the derived category), so every derived
 functor in this file — including the `Plus` variants — currently depends on `sorryAx`. Since
 the `ℓ`-adic formalism only needs `Dᵇc`, the `Plus` variants are the versions to build on;
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
@@ -166,7 +166,7 @@ Unlike `Etale.rightDerivedLowerStar` this needs no K-injective hypothesis:
 `Functor.rightDerivedFunctorPlus` needs only `EnoughInjectives` on the source, which
 Mathlib provides for every Grothendieck abelian category. The only dependence on the
 sorried `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` is
-through the chosen `HasDerivedCategory.{u}` instance. -/
+through the chosen `HasDerivedCategory.{u + 1}` instance. -/
 noncomputable def Etale.rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
@@ -233,8 +233,8 @@ structure and its compatibilities to the étale sheaf categories are stated unde
 these hypotheses — the monoidality of the sheafification-inverting morphisms is
 checked on stalks — which is why this section assumes them while the rest of the
 file does not. -/
-variable {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+variable {FA : A → A → Type*} {CA : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u} A FA]
   [PreservesLimits (CategoryTheory.forget A)]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]

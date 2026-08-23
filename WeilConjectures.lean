@@ -50,7 +50,6 @@ public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
-public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
 public import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
@@ -62,6 +61,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorShift
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated
 public import WeilConjectures.FromJoel.Algebra.Homology.CochainComplexMinus
+public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 public import WeilConjectures.FromJoel.Algebra.Homology.Double
 public import WeilConjectures.FromJoel.Algebra.Homology.DoubleHomology
@@ -80,6 +80,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
+public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.MonoidalTriangulated
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.PreservesQuasiIso
@@ -91,6 +92,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainCo
 public import WeilConjectures.FromJoel.Algebra.Homology.Monoidal
 public import WeilConjectures.FromJoel.Algebra.Homology.ObjectProperty
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
+public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.FromJoel.Algebra.Homology.Single
 public import WeilConjectures.FromJoel.Algebra.Homology.TotalComplex
 public import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
@@ -124,13 +126,11 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Derived
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Pentagon
+public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.Retract
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
-public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
-public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
-public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal

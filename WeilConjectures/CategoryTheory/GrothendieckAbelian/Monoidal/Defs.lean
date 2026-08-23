@@ -6,7 +6,9 @@ Authors: Christian Merten
 module
 
 public import Mathlib
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafCompose
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 /-!
 
@@ -44,13 +46,13 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
+  {FA : A → A → Type*} {CA : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u} A FA]
   [PreservesLimits (CategoryTheory.forget A)]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+  [IsGrothendieckAbelian.{u + 1} A]
 
 variable (Y : Scheme.{u})
 

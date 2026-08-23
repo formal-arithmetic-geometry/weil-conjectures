@@ -50,13 +50,13 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
+  {FA : A → A → Type*} {CA : A → Type u}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u} A FA]
   [PreservesLimits (CategoryTheory.forget A)]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+  [IsGrothendieckAbelian.{u + 1} A]
 
 /- Sheafification and pointwise left Kan extensions for the small étale sites of all
 schemes at once, together with the left exactness of the left Kan extensions along the
