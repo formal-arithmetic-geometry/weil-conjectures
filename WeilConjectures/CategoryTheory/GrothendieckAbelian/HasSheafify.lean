@@ -48,12 +48,12 @@ instance (priority := high) hasSheafify_smallGrothendieckTopology (A : Type u')
     HasSheafify (U.smallGrothendieckTopology Q (Q := P)) A :=
   sorry
 
-/-- Sheafification for `A`-valued presheaves on the small étale site: the instance above
-specialized to `P = Q = @Etale`. -/
+/-- Sheafification for `A`-valued presheaves on the small étale site, the case
+`P = Q = @Etale` of the above. -/
 instance (priority := high) hasSheafify_smallEtaleTopology (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
     HasSheafify X.smallEtaleTopology A :=
-  inferInstanceAs (HasSheafify (X.smallGrothendieckTopology (P := @Etale) (Q := @Etale)) A)
+  sorry
 
 /-- Sheafification for `A`-valued presheaves on the localization at `V` of the small
 `Q`-site of `P`-schemes over `U`: the site is essentially small for the étale-like
@@ -69,14 +69,13 @@ instance (priority := high) hasSheafify_over_smallGrothendieckTopology (A : Type
   sorry
 
 /-- Sheafification for `A`-valued presheaves on the localization of the small étale site
-at an étale `U ⟶ X`: the instance above specialized to `P = Q = @Etale`. This is what
-lets a sheaf be restricted to a member of an étale cover without assuming
-`HasWeakSheafify` for the localized site. -/
+at an étale `U ⟶ X`, the case `P = Q = @Etale` of the above. This is what lets a sheaf be
+restricted to a member of an étale cover without assuming `HasWeakSheafify` for the
+localized site. -/
 instance (priority := high) hasSheafify_over_smallEtaleTopology (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u})
     (U : X.Etale) :
     HasSheafify (X.smallEtaleTopology.over U) A :=
-  inferInstanceAs (HasSheafify
-    ((X.smallGrothendieckTopology (P := @Etale) (Q := @Etale)).over U) A)
+  sorry
 
 end CategoryTheory.GrothendieckTopology
