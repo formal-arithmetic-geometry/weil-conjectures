@@ -204,6 +204,7 @@ lemma Etale.baseChangeCounitStep_app (K : DerivedCategory.Plus (Sheaf X.smallEta
     Functor.comp_map, Functor.leftUnitor_hom_app]
   exact Category.comp_id _
 
+variable {f g f' g'} in
 /-- The *derived base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a
 commutative square `g' ≫ f = f' ≫ g` of schemes on the bounded below derived
 categories, assembled as the composite of the unit insertion, the square transport, and
