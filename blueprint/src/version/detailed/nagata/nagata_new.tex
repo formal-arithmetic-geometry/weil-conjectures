@@ -7709,22 +7709,25 @@ coefficients and relations and all later stages inherit the recorded data.
   identity and composition laws hold chartwise and therefore globally.
 \end{proof}
 
-\begin{definition}[Selected Noetherian inverse system]
+\begin{definition}[Noetherian approximation]
   \label{def:nagata-noetherian-inverse-system}
-  \uses{def:nagata-noetherian-stage,
-    lemma:nagata-valid-refinements-directed}
   \lean{AlgebraicGeometry.Scheme.NoetherianApproximation}
 
-  Order all valid finite coefficient refinements by inclusion.  For
-  $\lambda\leq\mu$, define
-  $S_\mu\to S_\lambda$ by gluing the affine morphisms induced by the
-  inclusions of finite coefficient algebras, after refining the indexing data
-  so inverse images of the selected affine charts remain affine.  Denote this
-  inverse system by
+  A \emph{Noetherian approximation} of a scheme $S$ consists of a cofiltered
+  index category $I_S$, a diagram $\lambda\mapsto S_\lambda$ of schemes of
+  finite type over $\mathbf Z$ whose transition morphisms
+  $t_{\mu\lambda}\colon S_\mu\to S_\lambda$ are affine, together with a limit
+  cone over that diagram with vertex $S$, so that
   \[
-    \mathsf N(S)=(I_S,(S_\lambda)_\lambda,
-      (t_{\mu\lambda})_{\lambda\leq\mu}).
+    S=\varprojlim_{\lambda\in I_S}S_\lambda .
   \]
+  We write $\mathsf N(S)=(I_S,(S_\lambda)_\lambda,
+  (t_{\mu\lambda})_{\lambda\leq\mu})$ for such a system.  Each stage
+  $S_\lambda$ is then a Noetherian scheme, by the Hilbert basis theorem.  The
+  construction of the following subsection produces such a system for every
+  quasi-compact quasi-separated $S$, by gluing the affine case
+  (\Cref{lemma:nagata-noetherian-inverse-system-affine}) over a finite affine
+  cover.
 \end{definition}
 
 \begin{lemma}[Properties of the finite-type stages]
@@ -7807,9 +7810,10 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{def:nagata-glued-limit-comparison,def:nagata-noetherian-inverse-system}
   \lean{AlgebraicGeometry.Scheme.nonempty_noetherianApproximation}
 
-  The constructed system $\mathsf N(S)$ consists of Noetherian schemes with
-  affine transition morphisms, every term is of finite type over
-  $\mathbf Z$, and $\kappa_S$ identifies $S$ with its inverse limit.
+  Every quasi-compact quasi-separated scheme $S$ admits a Noetherian
+  approximation.  Concretely, the constructed system $\mathsf N(S)$ has affine
+  transition morphisms, every term is of finite type over $\mathbf Z$, and
+  $\kappa_S$ identifies $S$ with its inverse limit.
 \end{proposition}
 
 \begin{proof}
