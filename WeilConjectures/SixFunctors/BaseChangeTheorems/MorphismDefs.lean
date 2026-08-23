@@ -74,18 +74,6 @@ variable (A : Type u') [Category.{u} A] [Abelian A]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [IsGrothendieckAbelian.{u} A]
 
-/- Sheafification and pointwise left Kan extensions for the small étale sites of all
-schemes at once, following the convention of `WeilConjectures.ConstructibleSheaf.Defs`.
-The localized derived categories are the chosen
-`Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` instances of
-`WeilConjectures.SixFunctors.Derived`. -/
-variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
-  [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T S : Scheme.{u}) (φ : T ⟶ S),
-    PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ φ).op.lan :
-      (S.Etaleᵒᵖ ⥤ A) ⥤ T.Etaleᵒᵖ ⥤ A)]
-
 /- The K-flat resolution package on the coefficient category `A`, as in the sections
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
 `WeilConjectures.SixFunctors.Derived`; it enters here through the bounded below derived
@@ -145,52 +133,50 @@ derived categories: the natural transformation
 derived adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def Etale.baseChangeUnitStep :
     (Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-        (Etale.upperStar A g).mapDerivedCategoryPlus ⟶
-      ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-          (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus ⟶
+    ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
         ((Etale.upperStar A f').mapDerivedCategoryPlus ⋙
           (Etale.lowerStar A f').rightDerivedFunctorPlus) :=
-  (Functor.rightUnitor _).inv ≫
-    Functor.whiskerLeft ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-        (Etale.upperStar A g).mapDerivedCategoryPlus)
-      (Etale.derivedUpperStarLowerStarAdjunctionPlus A f').unit
+  (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft
+  ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙ (Etale.upperStar A g).mapDerivedCategoryPlus)
+  (Etale.derivedUpperStarLowerStarAdjunctionPlus A f').unit
 
 /-- The *square transport* step `s_sq` of the base-change morphism on the bounded
 below derived categories: the natural transformation obtained by transporting along the
-pullback comparison `θ_sq` of the square under `Rf'_*`. -/
+pullback comparison `θ_sq` of the square under `Rf_*` on the left and `Rf'_*` on the
+right; the reassociations are the only other ingredient. -/
 noncomputable def Etale.baseChangeSquareStep (sq : CommSq g' f' f g) :
     ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-          (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
         ((Etale.upperStar A f').mapDerivedCategoryPlus ⋙
-          (Etale.lowerStar A f').rightDerivedFunctorPlus) ⟶
-      (Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-        (((Etale.upperStar A f).mapDerivedCategoryPlus ⋙
-            (Etale.upperStar A g').mapDerivedCategoryPlus) ⋙
+          (Etale.lowerStar A f').rightDerivedFunctorPlus) ≅
+    ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A f).mapDerivedCategoryPlus) ⋙
+        ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
           (Etale.lowerStar A f').rightDerivedFunctorPlus) :=
-  (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft ((Etale.lowerStar A f).rightDerivedFunctorPlus)
-      ((Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (Etale.pullbackSquareComparison A sq).hom
-          ((Etale.lowerStar A f').rightDerivedFunctorPlus))
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (Etale.lowerStar A f).rightDerivedFunctorPlus
+      ((Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (Etale.pullbackSquareComparison A sq)
+          (Etale.lowerStar A f').rightDerivedFunctorPlus ≪≫
+        Functor.associator _ _ _) ≪≫
+    (Functor.associator _ _ _).symm
 
 /-- The *counit contraction* step `c_sq` of the base-change morphism on the bounded
-below derived categories: the natural transformation
-`Rf'_* ∘ Lg'^* ∘ Lf^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` obtained by contracting with the counit
-of the derived adjunction `Lf^* ⊣ Rf_*`. -/
+below derived categories: the natural transformation obtained by contracting the
+counit of the derived adjunction `Lf^* ⊣ Rf_*`. -/
 noncomputable def Etale.baseChangeCounitStep :
-    (Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
-        (((Etale.upperStar A f).mapDerivedCategoryPlus ⋙
-            (Etale.upperStar A g').mapDerivedCategoryPlus) ⋙
+    ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A f).mapDerivedCategoryPlus) ⋙
+        ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
           (Etale.lowerStar A f').rightDerivedFunctorPlus) ⟶
-      (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
-        (Etale.lowerStar A f').rightDerivedFunctorPlus :=
-  Functor.whiskerLeft ((Etale.lowerStar A f).rightDerivedFunctorPlus)
-      (Functor.associator _ _ _).hom ≫
-    (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight (Etale.derivedUpperStarLowerStarAdjunctionPlus A f).counit
-      ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
-        (Etale.lowerStar A f').rightDerivedFunctorPlus) ≫
-    (Functor.leftUnitor _).hom
+    (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+      (Etale.lowerStar A f').rightDerivedFunctorPlus :=
+  Functor.whiskerRight
+  (Etale.derivedUpperStarLowerStarAdjunctionPlus A f).counit
+  ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙ (Etale.lowerStar A f').rightDerivedFunctorPlus)
+  ≫ (Functor.leftUnitor _).hom
 
 /-- The *derived base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a
 commutative square `g' ≫ f = f' ≫ g` of schemes on the bounded below derived
@@ -205,7 +191,7 @@ noncomputable def Etale.baseChange (sq : CommSq g' f' f g) :
         (Etale.upperStar A g).mapDerivedCategoryPlus ⟶
       (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
         (Etale.lowerStar A f').rightDerivedFunctorPlus :=
-  Etale.baseChangeUnitStep A ≫ Etale.baseChangeSquareStep A sq ≫
+  Etale.baseChangeUnitStep A ≫ (Etale.baseChangeSquareStep A sq).hom ≫
     Etale.baseChangeCounitStep A
 
 end BaseChangeTransformation
