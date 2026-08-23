@@ -1927,7 +1927,8 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-global-blowup-map,
     def:nagata-admissible-blowup,
     def:nagata-scheme-theoretically-dense-open}
-  \lean{Scheme.IdealSheafData.schemeDense_preimage_compl_support}
+  \lean{AlgebraicGeometry.IsAdmissible.isSchemeTheoreticallyDominant_preimage_ι,
+    AlgebraicGeometry.Scheme.IdealSheafData.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support}
 
   Let $U\hookrightarrow X$ be a quasi-compact scheme-theoretically dense open
   immersion, and let $\mathcal I$ be a finite type quasi-coherent ideal with
@@ -1938,25 +1939,30 @@ all its coherence maps are checked on basic affine refinements.
 \end{lemma}
 
 \begin{proof}
-  \uses{prop:nagata-affine-blowup-chart-cover,
-    lemma:nagata-chart-ring-normal-form,
+  \uses{thm:nagata-blowup-principalizes-center,
+    def:nagata-invertible-ideal,
     thm:nagata-global-blowup-complement,
     def:nagata-admissible-blowup}
-  The assertion is local on $X$.  Write $X=\operatorname{Spec}(A)$ and choose
-  generators $a_0,\ldots,a_r$ of $I$.  On the $a_i$-chart the coordinate ring
-  is the subring $A[I/a_i]\subseteq A_{a_i}$.  Scheme-theoretic density of
-  $U\subseteq X$ remains true after restriction to $D(a_i)$, so
-  $A_{a_i}$ injects into the sections on $U\cap D(a_i)$.  Composing with the
-  injective inclusion $A[I/a_i]\hookrightarrow A_{a_i}$ shows that the
-  structure sheaf of the chart injects into its direct image from the
-  preserved open.  The
-  charts cover by \Cref{prop:nagata-affine-blowup-chart-cover}, so the open is
-  scheme-theoretically dense globally.  For a finite composite, take the
-  explicitly selected sequence of admissible blow-up data and identify the
-  preserved open at each step using
-  \Cref{def:nagata-admissible-blowup} and
-  \Cref{thm:nagata-global-blowup-complement}.  Induction on the length of this
-  sequence applies the one-step argument at each stage.
+  First, the complement of the support of an invertible ideal is
+  scheme-theoretically dense: on an affine open where the ideal is generated
+  by a single non-zero-divisor $a$, the restriction map to the complement of
+  the support is the localization away from $a$, which is injective.
+  Applying this on $\operatorname{Bl}_{\mathcal I}(X)$ to the extended ideal
+  $\mathcal I\mathcal O_{\operatorname{Bl}_{\mathcal I}(X)}$, which is
+  invertible by \Cref{thm:nagata-blowup-principalizes-center}, shows that the
+  inverse image of the complement $W$ of the center is scheme-theoretically
+  dense in the blow-up.  Density now descends along the partial isomorphism:
+  the blow-up map $\pi$ is an isomorphism over $W$ by
+  \Cref{thm:nagata-global-blowup-complement}, hence also over the smaller
+  open $U\subseteq W$; since $U$ is quasi-compact and scheme-theoretically
+  dense in $X$, the inclusion $U\hookrightarrow W$ is scheme-theoretically
+  dominant, and transporting it across the isomorphism over $W$ and composing
+  with the dense open immersion $\pi^{-1}(W)\hookrightarrow
+  \operatorname{Bl}_{\mathcal I}(X)$ shows that $\pi^{-1}(U)$ is
+  scheme-theoretically dense.  For a finite composite, the inverse image of
+  $U$ at each stage is again a quasi-compact scheme-theoretically dense open,
+  so induction on the length of the composite applies the one-step lemma at
+  each stage.
 \end{proof}
 
 \begin{definition}[Homogeneous polynomial map to the Rees algebra]
@@ -2684,7 +2690,8 @@ all its coherence maps are checked on basic affine refinements.
 \begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0806}{Tag 0806}]{stacks-project}}]
   \label{thm:nagata-blowup-universal-property}
   \uses{def:nagata-blowup-universal-lift}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.existsUnique_lift_blowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup,
+    AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap}
 
   Under the data of \Cref{def:nagata-blowup-universal-lift}, the constructed
   map $\widetilde f$ is the unique $X$-morphism from $Y$ to
@@ -2703,7 +2710,8 @@ all its coherence maps are checked on basic affine refinements.
 \end{proof}
 
 \begin{remark}[Formalization route]
-  The formal proof (\texttt{existsUnique\_lift\_blowup}) takes the
+  The formal proof (\texttt{exists\_lift\_blowup} together with
+  \texttt{hom\_ext\_of\_isInvertible\_comap}) takes the
   Stacks-style hypothesis that the inverse image ideal sheaf of the center is
   effective Cartier, and is entirely chart-local: existence is glued from the
   universal property of the chart ring $A[\mathcal I/a]$
@@ -4420,7 +4428,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Existence of an ideal defining the complement of a qc open]
   \label{lemma:nagata-qc-open-complement-ideal-exists}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
-  \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_zeroLocus_compl_qcOpen}
+  \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
 
   Let $W\subseteq Y$ be a quasi-compact open in a qcqs scheme.  There exists
   a finite type quasi-coherent ideal $\mathcal I\subseteq\mathcal O_Y$ such
@@ -5149,7 +5157,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/0F3V}{Tag 0F3V}]{stacks-project}}]
   \label{lemma:nagata-separate-closed-subschemes}
   \uses{def:nagata-separate-closed-subschemes}
-  \lean{AlgebraicGeometry.separationBlowup_disjoint_strictTransforms}
+  \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_separationBlowup}
 
   The morphism $\mathsf{SepBl}_U(Z_1,Z_2)\to X$ is $U$-admissible, and the
   strict transforms of $Z_1$ and $Z_2$ in it are disjoint.
