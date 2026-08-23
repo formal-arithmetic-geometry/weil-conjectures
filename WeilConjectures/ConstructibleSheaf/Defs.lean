@@ -82,7 +82,7 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
 
 @[expose] public section
 
-universe v u u'
+universe u u'
 
 open CategoryTheory Limits Opposite
 
@@ -160,9 +160,9 @@ end LocallyConstant
 
 section FiniteSheaf
 
-variable {A : Type u'} [Category.{v} A]
-  {FA : A → A → Type*} {CA : A → Type*}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
+variable {A : Type u'} [Category.{u + 1} A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasColimitsOfSize.{u, u} A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
@@ -179,8 +179,8 @@ end FiniteSheaf
 section FiniteLocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  {FA : A → A → Type*} {CA : A → Type*}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
 *finite locally constant* if it is locally constant and finite. For sheaves of sets,
@@ -214,8 +214,8 @@ end Stratification
 section Constructible
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type*} {CA : A → Type*}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [IsGrothendieckAbelian.{u + 1} A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
