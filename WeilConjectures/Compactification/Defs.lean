@@ -9,7 +9,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
@@ -38,11 +37,6 @@ quasi-compact and quasi-separated). Any `f` satisfying `HasCompactification f` i
 separated and locally of finite type; these are instances.
 A choice of compactification is extracted from `HasCompactification f` by
 `HasCompactification.compactification f`.
-
-We also define scheme-theoretic density of a compactification
-(`Compactification.IsSchemeTheoreticallyDense`, blueprint
-`def:nagata-dense-compactification`): the open immersion `i` is scheme-theoretically
-dominant.
 
 -/
 
@@ -167,23 +161,5 @@ instance isSeparated : IsSeparated f := hf.compactification.isSeparated
 instance locallyOfFiniteType : LocallyOfFiniteType f := hf.compactification.locallyOfFiniteType
 
 end HasCompactification
-
-namespace Compactification
-
-/-- A compactification `X ⟶ Z ⟶ Y` of `f : X ⟶ Y` is scheme-theoretically dense if
-`𝒪_Z ⟶ i_* 𝒪_X` is injective, i.e. if the open immersion `i : X ⟶ Z` into the
-compactification is scheme-theoretically dominant.
-(Blueprint: `def:nagata-dense-compactification`.) -/
-abbrev IsSchemeTheoreticallyDense {f : X ⟶ Y} (c : Compactification f) : Prop :=
-  IsSchemeTheoreticallyDominant c.i
-
-/-- A compactification is scheme-theoretically dense if and only if the inclusion of
-the scheme-theoretic image of its open immersion is an isomorphism.
-(Blueprint: `lemma:nagata-dense-compactification-characterization`.) -/
-theorem isSchemeTheoreticallyDense_iff_isIso_imageι {f : X ⟶ Y} (c : Compactification f) :
-    c.IsSchemeTheoreticallyDense ↔ IsIso c.i.imageι :=
-  isSchemeTheoreticallyDominant_iff_isIso_imageι c.i
-
-end Compactification
 
 end AlgebraicGeometry

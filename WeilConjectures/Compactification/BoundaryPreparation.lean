@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 
@@ -22,7 +23,7 @@ theorem, following the blueprint chapter "Nagata compactification", sections
   refinement of a compactification, replacing the ambient scheme by the
   scheme-theoretic image of the open immersion (blueprint:
   `def:nagata-dense-refinement`, `prop:nagata-dense-refinement`), together with
-  `AlgebraicGeometry.HasCompactification.exists_isSchemeTheoreticallyDense`
+  `AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant`
   (blueprint: `def:nagata-two-open-dense-compactifications`,
   `lemma:nagata-two-open-dense-compactifications`; proof order item 34);
 - `AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures`: the
@@ -87,24 +88,25 @@ def Compactification.denseRefinement (c : Compactification f) [QuasiCompact f] :
     have : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
     infer_instance
 
-/-- The dense refinement of a compactification is scheme-theoretically dense: the
-factor map through the scheme-theoretic image is scheme-theoretically dominant.
-(Blueprint: `prop:nagata-dense-refinement`.) -/
-theorem Compactification.isSchemeTheoreticallyDense_denseRefinement
+/-- The open immersion into the dense refinement of a compactification is
+scheme-theoretically dominant: it is the factor map through the scheme-theoretic
+image. (Blueprint: `prop:nagata-dense-refinement`.) -/
+theorem Compactification.isSchemeTheoreticallyDominant_denseRefinement_i
     (c : Compactification f) [QuasiCompact f] :
-    c.denseRefinement.IsSchemeTheoreticallyDense :=
+    IsSchemeTheoreticallyDominant c.denseRefinement.i :=
   have : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
   inferInstanceAs (IsSchemeTheoreticallyDominant c.i.toImage)
 
 /-- **Choice of dense compactifications** (blueprint:
 `def:nagata-two-open-dense-compactifications`,
 `lemma:nagata-two-open-dense-compactifications`; proof order item 34): every
-compactifiable quasi-compact morphism admits a scheme-theoretically dense
-compactification, namely the dense refinement of any chosen compactification. -/
-theorem HasCompactification.exists_isSchemeTheoreticallyDense
+compactifiable quasi-compact morphism admits a compactification whose open immersion
+is scheme-theoretically dominant, namely the dense refinement of any chosen
+compactification. -/
+theorem exists_compactification_isSchemeTheoreticallyDominant
     (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] :
-    ∃ c : Compactification f, c.IsSchemeTheoreticallyDense :=
-  ⟨_, (HasCompactification.compactification f).isSchemeTheoreticallyDense_denseRefinement⟩
+    ∃ c : Compactification f, IsSchemeTheoreticallyDominant c.i :=
+  ⟨_, (HasCompactification.compactification f).isSchemeTheoreticallyDominant_denseRefinement_i⟩
 
 end DenseRefinement
 
