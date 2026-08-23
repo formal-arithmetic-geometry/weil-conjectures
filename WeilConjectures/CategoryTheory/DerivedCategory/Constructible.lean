@@ -42,11 +42,11 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [IsGrothendieckAbelian.{u} A]
-  [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
+  {FA : A → A → Type*} {CA : A → Type*}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
+  [IsGrothendieckAbelian.{u + 1} A]
+  [HasColimitsOfSize.{u, u} A]
 
 variable (X : Scheme.{u})
   [∀ (T : Scheme.{u}) (f : T ⟶ X) (P : X.Etaleᵒᵖ ⥤ A),
