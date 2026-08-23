@@ -9,6 +9,7 @@ public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.PolynomialPresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 
@@ -74,25 +75,6 @@ namespace AlgebraicGeometry
 
 variable (σ : Type u) (A : Type u) [CommRing A]
 
-/-- The base ring is isomorphic to the degree-zero piece of `A[T]` for the total-degree
-grading, via `a ↦ C a`. -/
-noncomputable def mvPolynomialGradingZero :
-    A ≃+* MvPolynomial.homogeneousSubmodule σ A 0 where
-  toFun a := ⟨MvPolynomial.C a, MvPolynomial.isHomogeneous_C σ a⟩
-  invFun p := MvPolynomial.coeff 0 (p : MvPolynomial σ A)
-  left_inv a := by simp
-  right_inv p := Subtype.ext <| by
-    have h : (p : MvPolynomial σ A).totalDegree = 0 :=
-      (MvPolynomial.totalDegree_zero_iff_isHomogeneous _).mpr p.2
-    exact (MvPolynomial.totalDegree_eq_zero_iff_eq_C.mp h).symm
-  map_mul' a b := Subtype.ext (by simp)
-  map_add' a b := Subtype.ext (by simp)
-
-@[simp]
-lemma coe_mvPolynomialGradingZero (a : A) :
-    (mvPolynomialGradingZero σ A a : MvPolynomial σ A) = MvPolynomial.C a :=
-  rfl
-
 /-- The relative projective space `ℙ^σ_A`, defined as `Proj` of the polynomial ring `A[T]`
 in the variables `σ` with its total-degree grading.
 (blueprint: `def:nagata-affine-blowup-projective-embedding`) -/
@@ -102,7 +84,8 @@ noncomputable def ProjectiveSpace : Scheme.{u} :=
 /-- The structure morphism `ℙ^σ_A ⟶ Spec A` of the relative projective space. -/
 noncomputable def ProjectiveSpace.toSpec : ProjectiveSpace σ A ⟶ Spec (.of A) :=
   Proj.toSpecZero (MvPolynomial.homogeneousSubmodule σ A) ≫
-    Spec.map (CommRingCat.ofHom (mvPolynomialGradingZero σ A).toRingHom)
+    Spec.map (CommRingCat.ofHom
+      (MvPolynomial.homogeneousSubmoduleZeroEquiv (σ := σ) (R := A)).toRingHom)
 
 namespace AffineBlowup
 
@@ -134,7 +117,8 @@ theorem isClosedImmersion_toProjectiveSpace :
 identifications of `A` with the degree-zero parts of `A[T]` and of `𝓡_A(I)`. -/
 lemma gradeZeroRingHom_reesGradedPresentation_comp :
     (reesGradedPresentation f hf).gradeZeroRingHom.comp
-        (mvPolynomialGradingZero σ A).toRingHom = (reesGradingZero I).toRingHom :=
+        (MvPolynomial.homogeneousSubmoduleZeroEquiv (σ := σ) (R := A)).toRingHom =
+      (reesGradingZero I).toRingHom :=
   RingHom.ext fun a ↦ Subtype.ext <| Subtype.ext <| by simp
 
 /-- **The projective embedding is a morphism over `Spec A`**: composing `e_I` with the
