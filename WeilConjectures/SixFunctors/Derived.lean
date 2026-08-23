@@ -228,15 +228,15 @@ open MonoidalCategory
 
 /- The concreteness of the coefficient category `A` (with the forgetful functor
 preserving limits and filtered colimits and reflecting isomorphisms), as in the
-intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The instances of
+intended applications `A = Ab.{u + 1}` and `A = ModuleCat.{u + 1} Λ`. The instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` transporting the monoidal
 structure and its compatibilities to the étale sheaf categories are stated under
 these hypotheses — the monoidality of the sheafification-inverting morphisms is
 checked on stalks — which is why this section assumes them while the rest of the
 file does not. -/
-variable {FA : A → A → Type*} {CA : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
+variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [PreservesLimitsOfSize.{u, u} (CategoryTheory.forget A)]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
 
@@ -264,7 +264,7 @@ variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).o
 
 /- The preadditive monoidal structure on the coefficient category, whose tensor
 product commutes with filtered colimits in each variable (as it does in the intended
-applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`); the latter hypothesis is what
+applications `A = Ab.{u + 1}` and `A = ModuleCat.{u + 1} Λ`); the latter hypothesis is what
 allows the monoidal structure to descend to the étale sheaf categories via the stalk
 functors, see `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A]
