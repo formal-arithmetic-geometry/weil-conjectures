@@ -81,7 +81,7 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
 
 /-- The inclusions of the subschemes attached to equal ideal sheaves agree up to
 `eqToHom`. -/
-lemma subschemeι_eqToHom {I J : X.IdealSheafData} (e : I = J) :
+lemma eqToHom_comp_subschemeι {I J : X.IdealSheafData} (e : I = J) :
     eqToHom (congrArg Scheme.IdealSheafData.subscheme e) ≫ J.subschemeι = I.subschemeι := by
   subst e
   simp

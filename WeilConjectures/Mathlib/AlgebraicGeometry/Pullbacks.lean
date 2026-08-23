@@ -139,7 +139,7 @@ lemma partialSection_openι :
 
 /-- The graph of a partial section of a separated projection is a closed immersion. -/
 instance [IsSeparated y] : IsClosedImmersion (partialSection x y j γ hγ) := by
-  have hsep : IsSeparated (pullback.fst (j ≫ x) y) :=
+  have : IsSeparated (pullback.fst (j ≫ x) y) :=
     MorphismProperty.pullback_fst _ _ ‹_›
   have : IsClosedImmersion
       (partialSection x y j γ hγ ≫ pullback.fst (j ≫ x) y) := by
@@ -147,14 +147,14 @@ instance [IsSeparated y] : IsClosedImmersion (partialSection x y j γ hγ) := by
     infer_instance
   exact IsClosedImmersion.of_comp (partialSection x y j γ hγ) (pullback.fst (j ≫ x) y)
 
-include hγ in
-/-- A partial section over a quasi-compact open immersion is quasi-compact. -/
-lemma quasiCompact_of_partialSection [IsSeparated y] [IsOpenImmersion j] [QuasiCompact j] :
-    QuasiCompact γ := by
-  have : QuasiCompact (partialSection x y j γ hγ ≫ partialSectionOpenι x y j) :=
-    inferInstance
-  rw [partialSection_openι x y j γ hγ] at this
-  exact this
+/-- A partial section of the first projection over a quasi-compact `j` is itself
+quasi-compact: it becomes `j` after composing with the (quasi-separated) first
+projection. -/
+lemma quasiCompact_of_partialSection [QuasiSeparated y] [QuasiCompact j]
+    (hγ : γ ≫ pullback.fst x y = j) : QuasiCompact γ := by
+  have : QuasiCompact (γ ≫ pullback.fst x y) := by rw [hγ]; infer_instance
+  have : QuasiSeparated (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
+  exact .of_comp γ (pullback.fst x y)
 
 /-- The graph square: the graph of a partial section is the pullback of `γ` along the
 base-changed open immersion `U ×_S Y ⟶ X ×_S Y`. -/
@@ -200,7 +200,8 @@ lemma partialSectionRestrictIso_hom_fst :
       partialSection x y j γ hγ := by
   simp only [partialSectionRestrictIso, Iso.trans_hom, asIso_hom, eqToIso.hom,
     Category.assoc, Scheme.IdealSheafData.comapIso_hom_fst]
-  rw [Scheme.IdealSheafData.subschemeι_eqToHom ((ker_comap_partialSectionOpenι x y j γ hγ).symm)]
+  rw [Scheme.IdealSheafData.eqToHom_comp_subschemeι
+    (ker_comap_partialSectionOpenι x y j γ hγ).symm]
   exact (partialSection x y j γ hγ).toImage_imageι
 
 end KernelIdentity
@@ -211,7 +212,7 @@ proper. This is the properness half of the graph-extension lemma: together with
 `partialSectionRestrictIso` (the image restricts to `U` over `U ×_S Y`) it yields the
 proper extension `SIm(γ) ⟶ X` of the partial section
 (Stacks Project Tag 0F3Z; revised blueprint `lemma:nagata-graph-extension`). -/
-theorem isProper_imageι_fst [IsProper y] :
+theorem isProper_imageι_comp_fst [IsProper y] :
     IsProper (γ.imageι ≫ pullback.fst x y) := by
   have : IsProper (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
   infer_instance

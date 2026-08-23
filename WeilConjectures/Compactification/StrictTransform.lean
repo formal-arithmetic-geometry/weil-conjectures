@@ -28,6 +28,8 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 ## Main definitions
 
 - `AlgebraicGeometry.strictTransformOpen f π U`: the open locus of `Y ×_X X'` over `U`;
+- `AlgebraicGeometry.strictTransformOpenLift`: the factorization through the open locus
+  of a morphism to `Y ×_X X'` whose composite to the base lands in `U`;
 - `AlgebraicGeometry.strictTransform f π U`: the strict transform, i.e. the
   scheme-theoretic image of the open locus in `Y ×_X X'`
   (blueprint: `def:nagata-strict-transform`);
@@ -47,6 +49,8 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 - `AlgebraicGeometry.isPullback_strictTransform_over`: the combination of the previous
   two, identifying the part of the strict transform lying over `U` with the ordinary base
   change `Y ×_X U` (blueprint: `lemma:nagata-strict-transform-over-complement`);
+- `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι_of_isCompact`: the standing
+  quasi-compactness assumption of the comparison API, discharged from finiteness data;
 - `AlgebraicGeometry.ker_strictTransformMap`: when the inclusion of the open locus is
   quasi-compact, the strict transform and its open locus have the same scheme-theoretic
   image in `X'`, since the factorization of the open locus through the strict transform
@@ -76,6 +80,52 @@ fibre product to the base. -/
 lemma strictTransformOpen_eq_preimage :
     strictTransformOpen f π U = (pullback.fst f π ≫ f) ⁻¹ᵁ U := by
   rw [strictTransformOpen, ← Scheme.Hom.comp_preimage, pullback.condition]
+
+/-- **The standing quasi-compactness assumption, discharged from finiteness data**: if
+the fibre product `Y ×_X X'` is quasi-separated, `f` and `π` are quasi-compact and `U`
+is a quasi-compact open of `X`, then the inclusion of the open locus over `U` is a
+quasi-compact morphism, so the whole comparison API below applies.
+
+This is the general form of
+`AlgebraicGeometry.quasiCompact_strictTransformOpen_ι`, which is stated for the
+blow-up of an ideal sheaf along the complement of its support. -/
+theorem quasiCompact_strictTransformOpen_ι_of_isCompact [QuasiSeparatedSpace ↥(pullback f π)]
+    [QuasiCompact f] [QuasiCompact π] (hU : IsCompact (U : Set X)) :
+    QuasiCompact (strictTransformOpen f π U).ι := by
+  have : QuasiCompact (pullback.fst f π) := MorphismProperty.pullback_fst _ _ ‹_›
+  have hcpt : IsCompact ((strictTransformOpen f π U : Set ↥(pullback f π))) := by
+    rw [strictTransformOpen_eq_preimage]
+    exact QuasiCompact.isCompact_preimage (f := pullback.fst f π ≫ f) _ U.isOpen hU
+  have : CompactSpace (strictTransformOpen f π U).toScheme :=
+    isCompact_iff_compactSpace.mp hcpt
+  infer_instance
+
+section Lift
+
+variable {T : Scheme.{u}} (k : T ⟶ pullback f π)
+    (hk : Set.range (k ≫ pullback.fst f π ≫ f) ⊆ (U : Set X))
+
+include hk in
+/-- A morphism to the fibre product whose composite to the base lands in `U` has range
+inside the open locus over `U`. -/
+lemma range_subset_range_strictTransformOpen_ι :
+    Set.range k ⊆ Set.range (strictTransformOpen f π U).ι := by
+  rw [Scheme.Opens.range_ι, strictTransformOpen_eq_preimage]
+  rintro _ ⟨v, rfl⟩
+  simpa [Scheme.Hom.comp_apply] using hk ⟨v, rfl⟩
+
+/-- **The lift into the open locus**: a morphism to the fibre product whose composite to
+the base lands in `U` factors through the open locus over `U`. -/
+def strictTransformOpenLift : T ⟶ (strictTransformOpen f π U).toScheme :=
+  IsOpenImmersion.lift (strictTransformOpen f π U).ι k
+    (range_subset_range_strictTransformOpen_ι f π U k hk)
+
+@[reassoc (attr := simp)]
+lemma strictTransformOpenLift_ι :
+    strictTransformOpenLift f π U k hk ≫ (strictTransformOpen f π U).ι = k :=
+  IsOpenImmersion.lift_fac _ _ _
+
+end Lift
 
 /-- The strict transform of `f : Y ⟶ X` along `π : X' ⟶ X` relative to the open
 `U ⊆ X`: the scheme-theoretic image of the open locus of `Y ×_X X'` lying over `U`.

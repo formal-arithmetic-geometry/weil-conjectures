@@ -63,13 +63,6 @@ theorem _root_.AlgebraicGeometry.Scheme.Hom.comap_ker_self (j : X ⟶ Y) : j.ker
     rw [← comap_comp, j.toImage_imageι]
   rw [hfac, comap_subschemeι, comap_bot]
 
-/-- Precomposition with a scheme-theoretically dominant morphism does not change the
-kernel ideal sheaf. -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant
-    {T : Scheme.{u}} (d : T ⟶ X) (γ : X ⟶ Y) [IsSchemeTheoreticallyDominant d] :
-    (d ≫ γ).ker = γ.ker := by
-  rw [Scheme.Hom.ker_comp, d.ker_eq_bot, Scheme.IdealSheafData.map_bot]
-
 end Subscheme
 
 section OpenImmersion
