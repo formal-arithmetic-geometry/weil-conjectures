@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
@@ -74,6 +75,13 @@ def ofFiniteType (I : X.IdealSheafData) : Prop :=
 lemma ofFiniteType_iff (I : X.IdealSheafData) :
     I.ofFiniteType ↔ ∀ U : X.affineOpens, (I.ideal U).FG :=
   ⟨fun h U ↦ h U le_top, fun h U _ ↦ h U⟩
+
+/-- On a locally Noetherian scheme, every quasi-coherent ideal sheaf is of finite
+type. -/
+lemma ofFiniteType_of_isLocallyNoetherian [IsLocallyNoetherian X] (I : X.IdealSheafData) :
+    I.ofFiniteType := fun U _ ↦
+  have := IsLocallyNoetherian.component_noetherian (X := X) U
+  IsNoetherian.noetherian (I.ideal U)
 
 /-- Finite-typeness on an open `O` is finite-typeness of the restriction to `O`. -/
 theorem ofFiniteTypeOn_iff_comap (I : X.IdealSheafData) (O : X.Opens) :

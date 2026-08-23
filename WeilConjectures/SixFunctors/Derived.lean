@@ -41,11 +41,11 @@ The sheaf categories are Grothendieck abelian (the sorried instance
 `CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallGrothendieckTopology`
 of `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`) whenever the
 coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
-universe `u` of the base schemes; this covers the
-intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
+universe `u + 1`, one above the universe `u` of the base schemes; this covers the
+intended applications `A = Ab.{u + 1}` and `A = ModuleCat.{u + 1} Λ`. The chosen localized
 categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
-installs `HasDerivedCategory.{u}` on every sheaf category via
+installs `HasDerivedCategory.{u + 1}` on every sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`; no auxiliary universe parameters appear.
 
 The construction of the unbounded right derived functor requires the source abelian
@@ -138,14 +138,14 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /-- The chosen localized category `D(X_ét)` of `A`-valued étale sheaves, with `Hom`-types in
-`Type u`, obtained from the Grothendieck abelian structure of the sheaf category via
+`Type (u + 1)`, obtained from the Grothendieck abelian structure of the sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`. -/
 noncomputable instance Scheme.hasDerivedCategory_sheaf_smallEtaleTopology (X : Scheme.{u}) :
-    HasDerivedCategory.{u} (Sheaf X.smallEtaleTopology A) :=
-  HasDerivedCategory.ofIsGrothendieckAbelian.{u} _
+    HasDerivedCategory.{u + 1} (Sheaf X.smallEtaleTopology A) :=
+  HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _
 
 section DerivedLowerStar
 

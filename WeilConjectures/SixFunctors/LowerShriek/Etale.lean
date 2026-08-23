@@ -63,7 +63,7 @@ lemma isOpenImmersion_le_etale : @IsOpenImmersion ≤ @Etale := fun _ _ _ hi =>
 
 section LowerShriek
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- The lower shriek `f_!` along a morphism `f : X ⟶ Y` admitting a compactification on

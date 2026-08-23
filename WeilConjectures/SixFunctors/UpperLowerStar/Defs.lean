@@ -53,7 +53,8 @@ sheafification.
 ## Implementation notes
 
 - The coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
-  universe `u` of the base schemes, following the convention of the `SixFunctors` folder.
+  universe `u + 1`, one above the universe `u` of the base schemes, following the
+  convention of the `SixFunctors` folder.
 - Both functors are defined along the base change functor, which exists for an *arbitrary*
   morphism `g` — in contrast to the localization functor `MorphismProperty.Over.map ⊤ h`
   of `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs`, which requires `P g`.
@@ -81,7 +82,7 @@ open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry
 
 namespace CategoryTheory
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 namespace GrothendieckTopology
 
@@ -103,7 +104,7 @@ noncomputable def lowerStar :
   (MorphismProperty.Over.pullback P ⊤ g).sheafPushforwardContinuous A
     (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The sections of `g_* G` over `V → U` are the sections of `G` over `V ×_U W → W`. -/
 lemma lowerStar_obj_val_obj
     (G : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
@@ -111,7 +112,7 @@ lemma lowerStar_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback P ⊤ g).op`. -/
 lemma lowerStar_map_hom_app
     {G G' : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ U) :

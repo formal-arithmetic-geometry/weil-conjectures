@@ -56,7 +56,7 @@ open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry
 
 namespace CategoryTheory
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 namespace GrothendieckTopology
 
@@ -89,7 +89,7 @@ end CategoryTheory
 
 namespace AlgebraicGeometry
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 /- The left Kan extensions, the sheafification and the continuity of the base change
 functor entering the definitions below are provided by the sorried results of the folder
 `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the following
