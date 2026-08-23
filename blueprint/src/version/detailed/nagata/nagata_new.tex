@@ -7515,7 +7515,7 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[A ring is the filtered colimit of its finite-type
   $\mathbf Z$-subalgebras]
   \label{lemma:nagata-ring-finite-type-subalgebras}
-  \lean{Algebra.filteredColimit_fgSubalgebra_int}
+  \lean{CommRingCat.isColimitFgSubalgebraCocone}
 
   For every ring $A$, its finitely generated $\mathbf Z$-subalgebras form a
   directed system and the canonical map
@@ -7775,6 +7775,31 @@ coefficients and relations and all later stages inherit the recorded data.
   chart ring.  These chartwise isomorphisms agree on the chosen basic
   overlaps because all transition maps came from the original gluing maps.
   They glue to an inverse for $\kappa_S$.
+\end{proof}
+
+\begin{lemma}[Noetherian approximation of an affine scheme]
+  \label{lemma:nagata-noetherian-inverse-system-affine}
+  \uses{def:nagata-noetherian-inverse-system,
+    lemma:nagata-ring-finite-type-subalgebras}
+  \lean{AlgebraicGeometry.Scheme.NoetherianApproximation.ofIsAffine}
+
+  Let $S=\operatorname{Spec}(A)$ be an affine scheme.  Order the finitely
+  generated $\mathbf Z$-subalgebras $A_0\subseteq A$ by inclusion.  Then the
+  spectra $\operatorname{Spec}(A_0)$ form a cofiltered system of schemes of
+  finite type over $\mathbf Z$ with affine transition morphisms, and $S$ is
+  its inverse limit.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-ring-finite-type-subalgebras}
+  Finitely generated $\mathbf Z$-subalgebras are directed by
+  \Cref{lemma:nagata-ring-finite-type-subalgebras}, and each
+  $\operatorname{Spec}(A_0)$ is of finite type over $\mathbf Z$, hence
+  Noetherian by the Hilbert basis theorem.  Every transition morphism is
+  $\operatorname{Spec}$ of a ring map and therefore affine.  By the same
+  lemma, $A$ is the filtered colimit of the $A_0$; since $\operatorname{Spec}$
+  is a right adjoint it takes this colimit of rings to a limit of schemes, so
+  $S=\varprojlim\operatorname{Spec}(A_0)$.
 \end{proof}
 
 \begin{proposition}[{\cite[\href{https://stacks.math.columbia.edu/tag/01ZA}{Tag 01ZA}]{stacks-project}}]
