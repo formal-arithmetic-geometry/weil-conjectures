@@ -37,25 +37,17 @@ not yet formalized and are recorded with `sorry`.
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory
+open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
 namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [PreservesLimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u + 1} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 variable (Y : Scheme.{u})
 
-variable [MonoidalCategory A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+variable [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
 
 /-- Compatibility of the tensor product of graded étale sheaves with coproducts,
 induced by the corresponding condition on the coefficient category. -/
