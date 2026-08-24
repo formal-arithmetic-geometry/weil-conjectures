@@ -225,24 +225,9 @@ open MonoidalCategory MonoidalClosed
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/- The sheafification needed by `g^*`, stated as a hypothesis although it also follows
-from the Grothendieck abelian hypothesis on `A` via the sorried instance
-`CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology`. -/
-variable [HasSheafify Z.smallEtaleTopology A]
-
-/- The pointwise left Kan extensions defining `g^*` exist; for étale `g` this is
-automatic (`Etale.hasPointwiseLeftKanExtension_op_overPullback`), and in general it
-follows from the essential smallness of the étale sites and cocompleteness of `A`. -/
-variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
-
-/- Left exactness of the left Kan extension along the opposite of base change, the
-remaining hypothesis of `Etale.preservesFiniteLimits_upperStar`. For an étale `g` it is
-automatic (`Etale.preservesFiniteLimits_op_lan_overPullback`); in general the left Kan
-extension is a filtered colimit and its left exactness holds e.g. when `A` is concrete
-with exact filtered colimits. -/
-variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
-  (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
+instance : HasExactColimitsOfShape ℤ A := by
+  have := AB5OfSize_of_univLE.{0, 0} A
+  infer_instance
 
 /- The preadditive monoidal structure on the coefficient category. It is assumed closed
 and braided (as is the intended application `A = ModuleCat.{u + 1} Λ` for a commutative
@@ -256,15 +241,13 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [Monoi
 fibers of the total degree map are in bijection with `ℤ`, see
 `ComplexShape.hasColimitsOfShape_discrete_π_up_int`), and its compatibility with the
 tensor product, on the coefficient category. -/
-variable [HasColimitsOfShape (Discrete ℤ) A]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+variable [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
 
 /- Existence and exactness of `ℤ`-indexed colimits, and their preservation by the
 tensor product in each variable, on the coefficient category. -/
-variable [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
+variable [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
 
 instance : (Etale.upperStar A g).Additive :=
@@ -322,20 +305,13 @@ being Grothendieck abelian.
 open MonoidalCategory MonoidalClosed
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-variable [HasSheafify Z.smallEtaleTopology A]
-variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
-variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
-  (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
 /- The closed braided preadditive monoidal structure on the coefficient category, as in
 the section `DerivedUpperStar`; it is what the monoidal transport instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-variable [HasColimitsOfShape (Discrete ℤ) A]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+variable [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-variable [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
 variable [Abelian.HasFunctorialFlatResolution A]
@@ -398,11 +374,9 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction`; it is what makes the total left
 derived functor of `j_!` available. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-  [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution A]
