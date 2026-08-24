@@ -44,19 +44,13 @@ morphism construction in the proper base change package
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory Abelian
+open CategoryTheory Limits MonoidalCategory MonoidalClosed Abelian
 
 namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [PreservesLimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u + 1} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /- Sheafification and pointwise left Kan extensions for the small étale sites of all
 schemes at once, together with the left exactness of the left Kan extensions along the
@@ -75,9 +69,7 @@ variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
 `DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`; it is transported to the
 étale sheaf categories of all schemes at once by the instances of the `Monoidal`
 subfolder of `WeilConjectures.CategoryTheory.GrothendieckAbelian`. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
   [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
