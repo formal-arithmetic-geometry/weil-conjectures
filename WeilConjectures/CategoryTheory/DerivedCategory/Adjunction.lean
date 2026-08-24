@@ -15,6 +15,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
@@ -60,6 +61,18 @@ file lifts `adj` through the stages of the derived formalism:
   categories, using the identification of the left derived functor of the exact functor
   `f` with `f.mapDerivedCategory` and the compatibility of `g.rightDerivedFunctorPlus`
   with the unbounded right derived functor.
+* `Adjunction.mapDerivedCategoryAdjunction` and
+  `Adjunction.mapDerivedCategoryPlusAdjunction`: for `f` *and* `g` exact, the levelwise
+  adjunctions `f.mapDerivedCategory ⊣ g.mapDerivedCategory` on the unbounded derived
+  categories and `f.mapDerivedCategoryPlus ⊣ g.mapDerivedCategoryPlus` on the bounded
+  below ones. These are `Adjunction.derivedAdjunction` transported along the two
+  identifications of a derived functor of an exact functor with the levelwise functor,
+  `Functor.leftDerivedFunctorIsoMapDerivedCategory` and
+  `Functor.rightDerivedFunctorIsoMapDerivedCategory`, and then restricted along the
+  inclusions of the bounded below derived categories. Note that `g` being exact does not
+  make the identification of `g.rightDerivedFunctor` with `g.mapDerivedCategory`
+  hypothesis-free: it still goes through the K-injective resolutions used to define the
+  total right derived functor.
 -/
 
 @[expose] public section
@@ -190,8 +203,7 @@ below derived categories as `f.mapDerivedCategoryPlus`; on the right adjoint sid
 restriction of `g.rightDerivedFunctor` identifies with `g.rightDerivedFunctorPlus` by
 `Functor.rightDerivedFunctorPlusCompatibility`. -/
 noncomputable def Adjunction.derivedAdjunctionPlus {f : C ⥤ D} {g : D ⥤ C} (adj : f ⊣ g)
-    [f.Additive] [g.Additive] [f.PreservesKFlatQuasiIso]
-    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [f.Additive] [g.Additive] [PreservesFiniteLimits f] [PreservesFiniteColimits f]
     [EnoughInjectives D] :
     f.mapDerivedCategoryPlus ⊣ g.rightDerivedFunctorPlus :=
   Adjunction.restrictFullyFaithful
@@ -199,6 +211,44 @@ noncomputable def Adjunction.derivedAdjunctionPlus {f : C ⥤ D} {g : D ⥤ C} (
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     f.mapDerivedCategoryPlusCompatibility.symm
     g.rightDerivedFunctorPlusCompatibility.symm
+
+/-- The levelwise derived adjunction of an adjoint pair `adj : f ⊣ g` of *exact*
+functors between abelian categories:
+
+`f.mapDerivedCategory ⊣ g.mapDerivedCategory`
+
+between the functors induced on the unbounded derived categories by applying `f` and `g`
+levelwise. It is the unbounded derived adjunction `Adjunction.derivedAdjunction`
+transported along the identifications of the total derived functors of the exact `f` and
+`g` with the levelwise functors,
+`Functor.leftDerivedFunctorIsoMapDerivedCategory` and
+`Functor.rightDerivedFunctorIsoMapDerivedCategory`. -/
+noncomputable def Adjunction.mapDerivedCategoryAdjunction {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive] [f.PreservesKFlatQuasiIso]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g] :
+    f.mapDerivedCategory ⊣ g.mapDerivedCategory :=
+  (adj.derivedAdjunction.ofNatIsoLeft f.leftDerivedFunctorIsoMapDerivedCategory).ofNatIsoRight
+    g.rightDerivedFunctorIsoMapDerivedCategory
+
+/-- The bounded below levelwise derived adjunction of an adjoint pair `adj : f ⊣ g` of
+*exact* functors between abelian categories:
+
+`f.mapDerivedCategoryPlus ⊣ g.mapDerivedCategoryPlus`
+
+obtained from `Adjunction.mapDerivedCategoryAdjunction` by restriction along the fully
+faithful inclusions of the bounded below derived categories, which is legitimate since an
+exact functor preserves bounded below objects
+(`Functor.mapDerivedCategoryPlusCompatibility`). -/
+noncomputable def Adjunction.mapDerivedCategoryPlusAdjunction {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g] :
+    f.mapDerivedCategoryPlus ⊣ g.mapDerivedCategoryPlus :=
+  Adjunction.restrictFullyFaithful adj.mapDerivedCategoryAdjunction
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    f.mapDerivedCategoryPlusCompatibility.symm
+    g.mapDerivedCategoryPlusCompatibility.symm
 
 end DerivedAdjunction
 
