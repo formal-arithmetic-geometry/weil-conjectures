@@ -305,20 +305,13 @@ being Grothendieck abelian.
 open MonoidalCategory MonoidalClosed
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-variable [HasSheafify Z.smallEtaleTopology A]
-variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
-  (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
-variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
-  (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
 /- The closed braided preadditive monoidal structure on the coefficient category, as in
 the section `DerivedUpperStar`; it is what the monoidal transport instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-variable [HasColimitsOfShape (Discrete ℤ) A]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+variable [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-variable [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
 variable [Abelian.HasFunctorialFlatResolution A]
@@ -381,11 +374,9 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction`; it is what makes the total left
 derived functor of `j_!` available. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-  [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution A]
