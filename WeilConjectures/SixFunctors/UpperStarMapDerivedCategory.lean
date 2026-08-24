@@ -52,29 +52,14 @@ open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-/- Sheafification and pointwise left Kan extensions for the small étale sites of all
-schemes at once, together with the left exactness of the left Kan extensions along the
-opposites of base change (the hypotheses of `Etale.preservesFiniteLimits_upperStar`, as
-in the section `DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`); the chosen
-localized derived categories are provided by the instance
-`Scheme.hasDerivedCategory_sheaf_smallEtaleTopology`. -/
-variable [∀ (T : Scheme.{u}), HasSheafify T.smallEtaleTopology A]
-  [∀ (T S : Scheme.{u}) (φ : T ⟶ S) (F : S.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension F]
-  [∀ (T S : Scheme.{u}) (φ : T ⟶ S),
-    PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ φ).op.lan :
-      (S.Etaleᵒᵖ ⥤ A) ⥤ T.Etaleᵒᵖ ⥤ A)]
-
 /- The K-flat resolution package on the coefficient category `A`, as in the section
 `DerivedUpperStar` of `WeilConjectures.SixFunctors.Derived`; it is transported to the
 étale sheaf categories of all schemes at once by the instances of the `Monoidal`
 subfolder of `WeilConjectures.CategoryTheory.GrothendieckAbelian`. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-  [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution A]
