@@ -8,10 +8,8 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafCompose
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
@@ -23,7 +21,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
-public import WeilConjectures.SixFunctors.SheafCompose
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
@@ -223,28 +220,13 @@ particular all K-flat quasi-isomorphisms, which is the input needed by the
 derivability-structure machinery.
 -/
 
-open MonoidalCategory
-
-/- The concreteness of the coefficient category `A` (with the forgetful functor
-preserving limits and filtered colimits and reflecting isomorphisms), as in the
-intended applications `A = Ab.{u + 1}` and `A = ModuleCat.{u + 1} Λ`. The instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian` transporting the monoidal
-structure and its compatibilities to the étale sheaf categories are stated under
-these hypotheses — the monoidality of the sheafification-inverting morphisms is
-checked on stalks — which is why this section assumes them while the rest of the
-file does not. -/
-variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [PreservesLimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+open MonoidalCategory MonoidalClosed
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/- The sheafification needed by `g^*` is stated as a hypothesis (although it is
-derivable from the concreteness assumptions on `A`) so that the instances declared in
-this section do not depend on the concrete-category data of `A`; this keeps instance
-resolution fast. -/
+/- The sheafification needed by `g^*`, stated as a hypothesis although it also follows
+from the Grothendieck abelian hypothesis on `A` via the sorried instance
+`CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology`. -/
 variable [HasSheafify Z.smallEtaleTopology A]
 
 /- The pointwise left Kan extensions defining `g^*` exist; for étale `g` this is
@@ -261,14 +243,13 @@ with exact filtered colimits. -/
 variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
   (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
 
-/- The preadditive monoidal structure on the coefficient category, whose tensor
-product commutes with filtered colimits in each variable (as it does in the intended
-applications `A = Ab.{u + 1}` and `A = ModuleCat.{u + 1} Λ`); the latter hypothesis is what
-allows the monoidal structure to descend to the étale sheaf categories via the stalk
-functors, see `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+/- The preadditive monoidal structure on the coefficient category. It is assumed closed
+and braided (as is the intended application `A = ModuleCat.{u + 1} Λ` for a commutative
+ring `Λ`, which is even symmetric monoidal closed): that is what makes the class of
+sheafification-inverting morphisms of presheaves monoidal, hence what lets the monoidal
+structure descend to the étale sheaf categories, see
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
 
 /- Existence of the coproducts defining the tensor product of complexes (the indexing
 fibers of the total degree map are in bijection with `ℤ`, see
