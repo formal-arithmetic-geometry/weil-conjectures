@@ -17,7 +17,10 @@ base change of a scheme of finite presentation over one of the `Dᵢ`.
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`
+- `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`:
+  an affine scheme that is locally of finite presentation over the limit of a cofiltered
+  inverse system of affine schemes is the base change of a scheme that is locally of finite
+  presentation over a finite stage of the system.
 
 ## References
 
