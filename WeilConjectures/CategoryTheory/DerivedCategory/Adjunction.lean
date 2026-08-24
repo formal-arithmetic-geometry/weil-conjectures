@@ -224,7 +224,7 @@ transported along the identifications of the total derived functors of the exact
 `Functor.leftDerivedFunctorIsoMapDerivedCategory` and
 `Functor.rightDerivedFunctorIsoMapDerivedCategory`. -/
 noncomputable def Adjunction.mapDerivedCategoryAdjunction {f : C ⥤ D} {g : D ⥤ C}
-    (adj : f ⊣ g) [f.Additive] [g.Additive] [f.PreservesKFlatQuasiIso]
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
     [PreservesFiniteLimits f] [PreservesFiniteColimits f]
     [PreservesFiniteLimits g] [PreservesFiniteColimits g] :
     f.mapDerivedCategory ⊣ g.mapDerivedCategory :=
