@@ -85,72 +85,79 @@ open Scheme
 
 /-! ### The extension-by-zero exchange morphism on underived sheaf categories -/
 
-section OpenImmersionExchange
+section OpenImmersion
 
-/- For a Grothendieck abelian coefficient category `A` the pullback functors
-`Etale.upperStar` along arbitrary morphisms and the extensions by zero along open
-immersions are available without further hypotheses: sheafification and the pointwise
-left Kan extensions for the small étale sites are provided by the instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian`. -/
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-section SquareComparison
-
-variable {X Y X' Y' : Scheme.{u}}
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-/-- The pullback comparison `θ_sq : f'^* ∘ g^* ≅ g'^* ∘ f^*` of a commutative square
-`g' ≫ f = f' ≫ g` of schemes on the underived étale sheaf categories, obtained from the
-composition isomorphisms `Etale.upperStarComp` and the commutativity of the square. This
-is the underived form of `Etale.pullbackSquareComparison`. -/
-noncomputable def Etale.upperStarSquareComparison (sq : CommSq g' f' f g) :
-    Etale.upperStar A g ⋙ Etale.upperStar A f' ≅
-      Etale.upperStar A f ⋙ Etale.upperStar A g' :=
-  (Etale.upperStarComp A f' g).symm ≪≫ eqToIso (by rw [← sq.w]) ≪≫
-    Etale.upperStarComp A g' f
-
-end SquareComparison
-
-section OpenImmersionSquare
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+  [HasColimitsOfShape (Discrete ℤ) A]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution A]
 
 variable {X Z X' Z' : Scheme.{u}}
-  {j : X ⟶ Z} {ρ : Z' ⟶ Z} {j' : X' ⟶ Z'} {ρ' : X' ⟶ X}
+  (j : X ⟶ Z) (g : Z' ⟶ Z) (j' : X' ⟶ Z') (g' : X' ⟶ X)
   [IsOpenImmersion j] [IsOpenImmersion j']
 
-/-- The canonical exchange morphism `ρ'^* ⋙ j'_! ⟶ j_! ⋙ ρ^*` for a commutative square
+noncomputable def Etale.openImmersionLowerShriekBaseChangeUnitStep :
+    (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+      (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus ⟶
+    ((Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+      (Etale.upperStar A j).mapDerivedCategoryPlus) ⋙
+        (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+          (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus :=
+  (Functor.leftUnitor _).inv ≫ Functor.whiskerRight
+  (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j).unit
+  ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+    (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus)
 
+noncomputable def Etale.openImmersionLowerShriekBaseChangeCounitStep :
+    ((Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
+        (Etale.upperStar A j').mapDerivedCategoryPlus ⋙
+          (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus ⟶
+    (Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus :=
+  Functor.whiskerLeft
+  ((Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+    (Etale.upperStar A g).mapDerivedCategoryPlus)
+  (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j').counit
+    ≫ (Functor.rightUnitor _).hom
+
+variable {j g j' g'}
+
+noncomputable def Etale.openImmersionLowerShriekBaseChangeSquareStep (sq : CommSq g' j' j g) :
+    ((Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+      (Etale.upperStar A j).mapDerivedCategoryPlus) ⋙
+        (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+          (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus ≅
+    ((Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus) ⋙
+        (Etale.upperStar A j').mapDerivedCategoryPlus ⋙
+          (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus :=
+  sorry
+
+/-- The canonical exchange morphism `g'^* ⋙ j'_! ⟶ j_! ⋙ g^*` for a commutative square
 ```
-X' --ρ'--> X
+X' --g'--> X
 |          |
 j'         j
 v          v
-Z' --ρ---> Z
+Z' --g---> Z
 ```
-
-of schemes with `j` and `j'` open immersions, on the underived étale sheaf categories:
-the mate of the pullback comparison `Etale.upperStarSquareComparison` with respect to
-the adjunctions `j_! ⊣ j^*` and `j'_! ⊣ j'^*` — insert the unit of `j_! ⊣ j^*`,
-transport along the pullback comparison of the square, and contract with the counit of
-`j'_! ⊣ j'^*`.
-
-Note the direction: the mate calculus produces a morphism *out of* the extension by
-zero of the pullback; for a *Cartesian* square it is an isomorphism, see
-`Etale.isIso_openImmersionShriekBaseChange`. -/
-noncomputable def Etale.openImmersionShriekBaseChange (sq : CommSq ρ' j' j ρ) :
-    Etale.upperStar A ρ' ⋙ Etale.openImmersionLowerShriek A j' ⟶
-      Etale.openImmersionLowerShriek A j ⋙ Etale.upperStar A ρ :=
-  (Functor.leftUnitor _).inv ≫
-    Functor.whiskerRight (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit
-      (Etale.upperStar A ρ' ⋙ Etale.openImmersionLowerShriek A j') ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (Etale.openImmersionLowerShriek A j)
-      ((Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (Etale.upperStarSquareComparison A sq.flip).hom
-          (Etale.openImmersionLowerShriek A j') ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft (Etale.upperStar A ρ)
-          (Etale.openImmersionLowerShriekUpperStarAdjunction A j').counit ≫
-        (Functor.rightUnitor _).hom)
+of schemes with `j` and `j'` open immersions. -/
+noncomputable def Etale.openImmersionLowerShriekBaseChange (sq : CommSq g' j' j g) :
+    (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+      (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus ⟶
+        (Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+          (Etale.upperStar A g).mapDerivedCategoryPlus :=
+  (Etale.openImmersionLowerShriekBaseChangeUnitStep A j j' g') ≫
+    (Etale.openImmersionLowerShriekBaseChangeSquareStep A sq).hom ≫
+      (Etale.openImmersionLowerShriekBaseChangeCounitStep A j g j')
 
 /-- **Base change for extension by zero**: for a *Cartesian* square with `j` and `j'`
 open immersions, the exchange morphism `ρ'^* ⋙ j'_! ⟶ j_! ⋙ ρ^*` is an isomorphism.
@@ -158,12 +165,13 @@ open immersions, the exchange morphism `ρ'^* ⋙ j'_! ⟶ j_! ⋙ ρ^*` is an i
 Mathematically, since the square is Cartesian, `X'` is the preimage of the open
 subscheme `X ⊆ Z` under `ρ`, and on geometric stalks both sides are the pulled-back
 stalk at points of `X'` and vanish outside `X'`. -/
-theorem Etale.isIso_openImmersionShriekBaseChange (sq : IsPullback ρ' j' j ρ) :
-    IsIso (Etale.openImmersionShriekBaseChange A sq.toCommSq) :=
+theorem Etale.isIso_openImmersionShriekBaseChange (sq : IsPullback g' j' j g) :
+    IsIso (Etale.openImmersionLowerShriekBaseChange A sq.toCommSq) :=
   sorry
 
-end OpenImmersionSquare
+end OpenImmersion
 
+/-
 end OpenImmersionExchange
 
 /-! ### The derived lower shriek of a compactification and the base-change morphism -/
@@ -277,6 +285,8 @@ noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
       ((Etale.lowerStar A (c.baseChange sq).g).rightDerivedFunctorPlus) ≫
     (Functor.associator _ _ _).hom
 
+
 end LowerShriekBaseChange
+-/
 
 end AlgebraicGeometry
