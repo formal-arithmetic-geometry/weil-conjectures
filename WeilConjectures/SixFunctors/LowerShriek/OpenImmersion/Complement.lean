@@ -124,7 +124,7 @@ end Geometry
 
 section Disjoint
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {U W X : Scheme.{u}} (j : U ⟶ X) (k : W ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -152,7 +152,7 @@ noncomputable def Etale.isTerminalSections_openImmersionRestriction_lowerStar
       ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ k)).obj T))
 
 set_option backward.isDefEq.respectTransparency false in
-omit [IsGrothendieckAbelian.{u} A] in
+omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. -/
 lemma Etale.isZero_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :

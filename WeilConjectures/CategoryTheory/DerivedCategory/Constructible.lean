@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Derived
 
@@ -19,6 +20,21 @@ subcategory `Dᵇc(X, A)` of the derived category
 bounded complexes all of whose homology sheaves are constructible
 (`AlgebraicGeometry.Scheme.IsConstructibleSheaf`). Boundedness refers to the canonical
 t-structure `DerivedCategory.TStructure.t`.
+
+Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
+concrete Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above
+the universe `u` of the base schemes. Nothing beyond that is assumed:
+
+- the left Kan extensions along base change, needed by the pullback `Etale.upperStar`
+  entering `IsConstructibleSheaf`, come from the sorried instance
+  `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`;
+- the chosen localized category `D(X_ét)` comes from the instance
+  `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` of
+  `WeilConjectures.SixFunctors.Derived`, which installs `HasDerivedCategory.{u + 1}` on
+  every sheaf category out of the Grothendieck abelian structure supplied by
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`. In particular the derived
+  category is no longer taken at an auxiliary universe `w`.
 
 ## Main definitions
 
@@ -43,15 +59,12 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [IsGrothendieckAbelian.{u} A]
-  [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [IsGrothendieckAbelian.{u + 1} A]
 
 variable (X : Scheme.{u})
-  [∀ (T : Scheme.{u}) (f : T ⟶ X) (P : X.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ f).op.HasLeftKanExtension P]
 
 section ConstructibleHomology
 

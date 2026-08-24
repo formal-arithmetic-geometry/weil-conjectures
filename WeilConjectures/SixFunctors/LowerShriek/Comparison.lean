@@ -85,7 +85,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 section OpenImmersion
 

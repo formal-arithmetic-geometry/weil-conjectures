@@ -25,25 +25,17 @@ formalized and is recorded with `sorry`.
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory
+open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
 namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 variable (Y : Scheme.{u})
 
-variable [MonoidalCategory A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+variable [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
 
 /-- The monoidal structure on étale sheaves is preadditive when the one on the
 coefficient category is. -/

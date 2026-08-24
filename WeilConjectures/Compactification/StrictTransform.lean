@@ -5,6 +5,8 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
@@ -36,6 +38,8 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 
 ## Main results
 
+- separatedness, quasi-compactness and local finite type of
+  `AlgebraicGeometry.strictTransformMap`, inherited from the transformed morphism;
 - `AlgebraicGeometry.isIso_pullback_fst_strictTransformι`: the strict transform
   contains the whole open locus over `U`;
 - `AlgebraicGeometry.isPullback_strictTransformOpen`: if `π` is an isomorphism over
@@ -98,6 +102,20 @@ def strictTransformMap : strictTransform f π U ⟶ X' :=
 /-- The projection of the strict transform to the original source `Y`. -/
 def strictTransformToSource : strictTransform f π U ⟶ Y :=
   strictTransformι f π U ≫ pullback.fst f π
+
+/-! The strict transform of a morphism is a closed subscheme of the base change, so
+separatedness, quasi-compactness and local finite type are inherited from `f`. -/
+
+instance [IsSeparated f] : IsSeparated (strictTransformMap f π U) :=
+  have : IsSeparated (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
+  inferInstanceAs (IsSeparated (strictTransformι f π U ≫ pullback.snd f π))
+
+instance [QuasiCompact f] : QuasiCompact (strictTransformMap f π U) :=
+  inferInstanceAs (QuasiCompact (strictTransformι f π U ≫ pullback.snd f π))
+
+instance [LocallyOfFiniteType f] : LocallyOfFiniteType (strictTransformMap f π U) :=
+  have : LocallyOfFiniteType (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
+  inferInstanceAs (LocallyOfFiniteType (strictTransformι f π U ≫ pullback.snd f π))
 
 /-- The ideal sheaf cutting out the strict transform is the kernel of the open locus. -/
 lemma ker_strictTransformι :

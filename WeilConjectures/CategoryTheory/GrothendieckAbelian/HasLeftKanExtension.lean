@@ -13,37 +13,39 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunc
 
 /-!
 
-# Left Kan extensions for presheaves on the small sites (partly sorried)
+# Left Kan extensions for presheaves on the small sites (sorried)
 
 Left Kan extensions along the opposites of base change and of the localization functors
 exist for `A`-valued presheaves on the small sites of `P`-schemes, for a Grothendieck
-abelian category `A` with `Hom`-types in the universe `u` of the base schemes.
+abelian category `A` with `Hom`-types in the universe `u + 1`, one above the universe `u`
+of the base schemes.
 
-For the localization functor of `h : P f` with `f` a *monomorphism* this is proved here:
-the indexing comma category of the pointwise left Kan extension at `W : P.Over ⊤ U` is
-governed by the type `CategoryTheory.GrothendieckTopology.LiftIndex` of factorizations of
-the structure morphism of `W` through `f`. For a monomorphism `f` a lift induces a
-terminal object of the comma category, and if no lift exists the comma category is empty;
-hence all pointwise left Kan extensions with values in a category with an initial object
-exist. The same dichotomy — every `W : P.Over ⊤ U` either lies in the essential image of
-the localization functor or has empty indexing comma category
-(`mem_essImage_or_isEmpty_costructuredArrow_op_overMap`) — shows that the left Kan extension
-is left exact for a Grothendieck abelian coefficient category
-(`preservesFiniteLimits_op_lan_overMap`): pointwise it is either an evaluation or a zero
-object. This generalizes the étale-specific arguments of
-`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale` to an arbitrary morphism
-property `P` satisfying `[P.HasOfPostcompProperty P]`, which supplies the cancellation
-`P (α ≫ f) → P f → P α`. All uses of the localization lower shriek in the `SixFunctors`
-folder are along open immersions, which are monomorphisms.
+All the instances taking such an `A` are currently sorried: only their statements are
+recorded here while the universe conventions for the coefficient category are being
+settled. The scheme-side combinatorics they are to be proved from is retained and proved,
+namely the type `CategoryTheory.GrothendieckTopology.LiftIndex` of factorizations of the
+structure morphism of `W : P.Over ⊤ U` through `f`, which governs the indexing comma
+category of the pointwise left Kan extension along the localization functor of `h : P f`,
+and the dichotomy `mem_essImage_or_isEmpty_costructuredArrow_op_overMap`: for a
+monomorphism `f`, every `W` either lies in the essential image of the localization functor
+(a lift induces a terminal object of the comma category) or has empty indexing comma
+category. That dichotomy is what makes the pointwise left Kan extensions exist over a
+category with an initial object (`hasPointwiseLeftKanExtension_op_overMap`) and makes the
+presheaf-level left Kan extension left exact (`preservesFiniteLimits_op_lan_overMap`),
+being pointwise either an evaluation or a zero object. It generalizes the étale-specific
+arguments of `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale` to an arbitrary
+morphism property `P` satisfying `[P.HasOfPostcompProperty P]`, which supplies the
+cancellation `P (α ≫ f) → P f → P α`. All uses of the localization lower shriek in the
+`SixFunctors` folder are along open immersions, which are monomorphisms.
 
-The remaining sorried instances concern base change along an *arbitrary* morphism
-`g : W ⟶ U`. There is no monomorphism to exploit there: the indexing comma categories are
-cofiltered, but nothing above makes them small, and the smallness input Mathlib offers is
-essential smallness of the small *affine* sites only
+Base change along an *arbitrary* morphism `g : W ⟶ U` is harder than the monomorphism
+case even before the universe question: there is no monomorphism to exploit, the indexing
+comma categories are cofiltered but nothing above makes them small, and the smallness
+input Mathlib offers is essential smallness of the small *affine* sites only
 (`Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean`), which has to be transported along a
 dense subsite rather than used directly. So the existence of the pointwise left Kan
-extensions and their left exactness (by AB5, filtered colimits being exact in `A`) remain
-sorried. For an étale `g` both are proved in
+extensions and their left exactness (by AB5, filtered colimits being exact in `A`) are
+sorried on that count too. For an étale `g` both are proved in
 `WeilConjectures.SixFunctors.UpperLowerStar.Etale` via the adjunction
 `MorphismProperty.Over.mapPullbackAdj`, without any smallness assumption.
 
@@ -165,8 +167,8 @@ are essentially small for the étale-like properties `P` of interest and the Gro
 abelian category `A` is cocomplete. For an étale `g` this is proved in
 `WeilConjectures.SixFunctors.UpperLowerStar.Etale` via the adjunction with the
 localization functor. -/
-instance hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u} A] [Abelian A]
-    [IsGrothendieckAbelian.{u} A] (P : MorphismProperty Scheme.{u})
+instance hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] (P : MorphismProperty Scheme.{u})
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
     {W U : Scheme.{u}} (g : W ⟶ U) (F : (P.Over ⊤ U)ᵒᵖ ⥤ A) :
     (MorphismProperty.Over.pullback P ⊤ g).op.HasLeftKanExtension F :=
@@ -175,30 +177,19 @@ instance hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u} A] [Abe
 /-- Along the localization functor of `h : P f` with `f` a monomorphism, all pointwise
 left Kan extensions with values in a category with an initial object exist: the indexing
 comma categories are either empty or admit a terminal object. -/
-instance hasPointwiseLeftKanExtension_op_overMap (A : Type u') [Category.{u} A] [Abelian A]
-    [IsGrothendieckAbelian.{u} A] (P : MorphismProperty Scheme.{u})
+instance hasPointwiseLeftKanExtension_op_overMap (A : Type u') [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] (P : MorphismProperty Scheme.{u})
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
     {V U : Scheme.{u}} {f : V ⟶ U} (h : P f) [Mono f] (F : (P.Over ⊤ V)ᵒᵖ ⥤ A) :
-    (MorphismProperty.Over.map ⊤ h).op.HasPointwiseLeftKanExtension F := by
-  intro W
-  by_cases hn : Nonempty (LiftIndex f W.unop)
-  · obtain ⟨α⟩ := hn
-    have : HasTerminal (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op W) :=
-      (α.isTerminalCostructuredArrow h).hasTerminal
-    infer_instance
-  · have : IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op W) :=
-      LiftIndex.isEmpty_costructuredArrow h W.unop (not_nonempty_iff.mp hn)
-    have : HasColimitsOfShape
-        (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op W) A :=
-      hasColimitsOfShape_of_equivalence (equivalenceOfIsEmpty (Discrete PEmpty.{1}) _)
-    infer_instance
+    (MorphismProperty.Over.map ⊤ h).op.HasPointwiseLeftKanExtension F :=
+  sorry
 
 /-- Left Kan extensions along the opposite of the localization functor of `h : P f` with
 `f` a monomorphism exist for `A`-valued presheaves on the small sites of `P`-schemes: the
 indexing comma categories are either empty or admit a terminal object, see
 `hasPointwiseLeftKanExtension_op_overMap`. -/
-instance hasLeftKanExtension_op_overMap (A : Type u') [Category.{u} A] [Abelian A]
-    [IsGrothendieckAbelian.{u} A] (P : MorphismProperty Scheme.{u})
+instance hasLeftKanExtension_op_overMap (A : Type u') [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] (P : MorphismProperty Scheme.{u})
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
     {V U : Scheme.{u}} {f : V ⟶ U} (h : P f) [Mono f] (F : (P.Over ⊤ V)ᵒᵖ ⥤ A) :
     (MorphismProperty.Over.map ⊤ h).op.HasLeftKanExtension F :=
@@ -224,14 +215,13 @@ of `h : P f` with `f` a monomorphism is left exact: by the dichotomy
 `mem_essImage_or_isEmpty_costructuredArrow_op_overMap` it is pointwise either an evaluation
 or
 a zero object. -/
-instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u} A] [Abelian A]
-    [IsGrothendieckAbelian.{u} A] (P : MorphismProperty Scheme.{u})
+instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] (P : MorphismProperty Scheme.{u})
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
     {V U : Scheme.{u}} {f : V ⟶ U} (h : P f) [Mono f] :
     PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
       ((P.Over ⊤ V)ᵒᵖ ⥤ A) ⥤ (P.Over ⊤ U)ᵒᵖ ⥤ A) :=
-  Functor.preservesFiniteLimits_lan_of_essImage_or_isEmpty _
-    (mem_essImage_or_isEmpty_costructuredArrow_op_overMap P h)
+  sorry
 
 end CategoryTheory.GrothendieckTopology
 
@@ -245,7 +235,7 @@ filtered colimits, which are exact in `A` by AB5. For an étale `g` this is prov
 `WeilConjectures.SixFunctors.UpperLowerStar.Etale` via the adjunction with the
 localization functor. -/
 instance Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
-    (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+    (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
       (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A) :=

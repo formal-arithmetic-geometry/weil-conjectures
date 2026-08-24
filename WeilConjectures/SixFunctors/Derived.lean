@@ -8,11 +8,9 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafCompose
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
@@ -24,7 +22,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
-public import WeilConjectures.SixFunctors.SheafCompose
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
@@ -42,11 +39,11 @@ The sheaf categories are Grothendieck abelian (the sorried instance
 `CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallGrothendieckTopology`
 of `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`) whenever the
 coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
-universe `u` of the base schemes; this covers the
-intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The chosen localized
+universe `u + 1`, one above the universe `u` of the base schemes; this covers the
+intended applications `A = Ab.{u + 1}` and `A = ModuleCat.{u + 1} Λ`. The chosen localized
 categories are accordingly fixed once and for all by the instance
 `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` below, which
-installs `HasDerivedCategory.{u}` on every sheaf category via
+installs `HasDerivedCategory.{u + 1}` on every sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`; no auxiliary universe parameters appear.
 
 The construction of the unbounded right derived functor requires the source abelian
@@ -60,8 +57,8 @@ input: Mathlib's `CategoryTheory.Functor.rightDerivedFunctorPlus` requires only
 `EnoughInjectives` on the source, and a Grothendieck abelian category has enough injectives
 (`CategoryTheory.IsGrothendieckAbelian.enoughInjectives`). So `Etale.rightDerivedLowerStarPlus`
 and `Etale.rightDerivedLowerShriekPlus` need no K-injective hypothesis. Note however that
-the chosen `HasDerivedCategory.{u}` instance is itself built from the sorried K-injective
-statement (through the local `u`-smallness of the derived category), so every derived
+the chosen `HasDerivedCategory.{u + 1}` instance is itself built from the sorried K-injective
+statement (through the local `u + 1`-smallness of the derived category), so every derived
 functor in this file — including the `Plus` variants — currently depends on `sorryAx`. Since
 the `ℓ`-adic formalism only needs `Dᵇc`, the `Plus` variants are the versions to build on;
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility` identifies
@@ -139,14 +136,14 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /-- The chosen localized category `D(X_ét)` of `A`-valued étale sheaves, with `Hom`-types in
-`Type u`, obtained from the Grothendieck abelian structure of the sheaf category via
+`Type (u + 1)`, obtained from the Grothendieck abelian structure of the sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`. -/
 noncomputable instance Scheme.hasDerivedCategory_sheaf_smallEtaleTopology (X : Scheme.{u}) :
-    HasDerivedCategory.{u} (Sheaf X.smallEtaleTopology A) :=
-  HasDerivedCategory.ofIsGrothendieckAbelian.{u} _
+    HasDerivedCategory.{u + 1} (Sheaf X.smallEtaleTopology A) :=
+  HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _
 
 section DerivedLowerStar
 
@@ -167,7 +164,7 @@ Unlike `Etale.rightDerivedLowerStar` this needs no K-injective hypothesis:
 `Functor.rightDerivedFunctorPlus` needs only `EnoughInjectives` on the source, which
 Mathlib provides for every Grothendieck abelian category. The only dependence on the
 sorried `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` is
-through the chosen `HasDerivedCategory.{u}` instance. -/
+through the chosen `HasDerivedCategory.{u + 1}` instance. -/
 noncomputable def Etale.rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
@@ -224,28 +221,13 @@ particular all K-flat quasi-isomorphisms, which is the input needed by the
 derivability-structure machinery.
 -/
 
-open MonoidalCategory
-
-/- The concreteness of the coefficient category `A` (with the forgetful functor
-preserving limits and filtered colimits and reflecting isomorphisms), as in the
-intended applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`. The instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian` transporting the monoidal
-structure and its compatibilities to the étale sheaf categories are stated under
-these hypotheses — the monoidality of the sheafification-inverting morphisms is
-checked on stalks — which is why this section assumes them while the rest of the
-file does not. -/
-variable {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+open MonoidalCategory MonoidalClosed
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/- The sheafification needed by `g^*` is stated as a hypothesis (although it is
-derivable from the concreteness assumptions on `A`) so that the instances declared in
-this section do not depend on the concrete-category data of `A`; this keeps instance
-resolution fast. -/
+/- The sheafification needed by `g^*`, stated as a hypothesis although it also follows
+from the Grothendieck abelian hypothesis on `A` via the sorried instance
+`CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology`. -/
 variable [HasSheafify Z.smallEtaleTopology A]
 
 /- The pointwise left Kan extensions defining `g^*` exist; for étale `g` this is
@@ -262,14 +244,13 @@ with exact filtered colimits. -/
 variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
   (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
 
-/- The preadditive monoidal structure on the coefficient category, whose tensor
-product commutes with filtered colimits in each variable (as it does in the intended
-applications `A = Ab.{u}` and `A = ModuleCat.{u} Λ`); the latter hypothesis is what
-allows the monoidal structure to descend to the étale sheaf categories via the stalk
-functors, see `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+/- The preadditive monoidal structure on the coefficient category. It is assumed closed
+and braided (as is the intended application `A = ModuleCat.{u + 1} Λ` for a commutative
+ring `Λ`, which is even symmetric monoidal closed): that is what makes the class of
+sheafification-inverting morphisms of presheaves monoidal, hence what lets the monoidal
+structure descend to the étale sheaf categories, see
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
 
 /- Existence of the coproducts defining the tensor product of complexes (the indexing
 fibers of the total degree map are in bijection with `ℤ`, see
@@ -338,16 +319,7 @@ K-injective resolutions on the pushforward side are supplied by the sheaf catego
 being Grothendieck abelian.
 -/
 
-open MonoidalCategory
-
-/- The concreteness of the coefficient category `A`, as in the section
-`DerivedUpperStar`; it is what the monoidal transport instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
-variable {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+open MonoidalCategory MonoidalClosed
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 variable [HasSheafify Z.smallEtaleTopology A]
@@ -355,9 +327,10 @@ variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
   (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
 variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
   (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
-variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+/- The closed braided preadditive monoidal structure on the coefficient category, as in
+the section `DerivedUpperStar`; it is what the monoidal transport instances of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
 variable [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
@@ -387,6 +360,75 @@ noncomputable def Etale.derivedUpperStarLowerStarAdjunctionPlus :
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
 
 end DerivedUpperLowerStarAdjunction
+
+section DerivedOpenImmersionLowerShriekUpperStarAdjunction
+
+/-!
+## The derived adjunction `j_! ⊣ j^*` along an open immersion
+
+For an open immersion `j : U ⟶ X` both halves of the adjunction
+`Etale.openImmersionLowerShriekUpperStarAdjunction` are *exact*: the extension by zero
+`j_!` by `Etale.preservesFiniteLimits_openImmersionLowerShriek` together with its being a
+left adjoint, and the pullback `j^*` by `Etale.preservesFiniteLimits_upperStar` together
+with its being a left adjoint. So each of them induces a functor on derived categories by
+applying it levelwise, and the two levelwise functors are again adjoint.
+
+The adjunction is obtained where the derived formalism provides it, namely between the
+*total* derived functors: `Adjunction.derivedAdjunction` gives
+`(j_!).leftDerivedFunctor ⊣ (j^*).rightDerivedFunctor`, the left one computed by K-flat
+resolutions and the right one by K-injective resolutions. Exactness then identifies each
+with the corresponding levelwise functor
+(`Functor.leftDerivedFunctorIsoMapDerivedCategory` and
+`Functor.rightDerivedFunctorIsoMapDerivedCategory`), and the resulting adjunction on the
+unbounded derived categories restricts along the fully faithful inclusions of the bounded
+below ones. Both steps are the general
+`Adjunction.mapDerivedCategoryAdjunction` and `Adjunction.mapDerivedCategoryPlusAdjunction`
+of `WeilConjectures.CategoryTheory.DerivedCategory.Adjunction`.
+
+In particular the K-flat and K-injective machinery, and with it the coefficient
+hypotheses of the section `DerivedUpperStar`, are still needed even though the final
+statement mentions only levelwise functors.
+-/
+
+open MonoidalCategory MonoidalClosed
+
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/- The K-flat resolution package on the coefficient category `A`, as in the sections
+`DerivedUpperStar` and `DerivedUpperLowerStarAdjunction`; it is what makes the total left
+derived functor of `j_!` available. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+  [HasColimitsOfShape (Discrete ℤ) A]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- The derived adjunction `j_! ⊣ j^*` along an open immersion `j : U ⟶ X` on the
+unbounded derived categories of étale sheaves: since both `j_!` and `j^*` are exact, their
+total derived functors are the levelwise functors, and the adjunction between the total
+left derived functor of `j_!` and the total right derived functor of `j^*` becomes an
+adjunction between the levelwise functors. -/
+noncomputable def Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction :
+    (Etale.openImmersionLowerShriek A j).mapDerivedCategory ⊣
+      (Etale.upperStar A j).mapDerivedCategory :=
+  (Etale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryAdjunction
+
+/-- The bounded below version of
+`Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`: the derived adjunction
+`j_! ⊣ j^*` along an open immersion on the bounded below derived categories of étale
+sheaves, obtained by restricting the unbounded one along the fully faithful inclusions,
+which is legitimate since the exact functors `j_!` and `j^*` preserve bounded below
+objects. -/
+noncomputable def Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus :
+    (Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⊣
+      (Etale.upperStar A j).mapDerivedCategoryPlus :=
+  (Etale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryPlusAdjunction
+
+end DerivedOpenImmersionLowerShriekUpperStarAdjunction
 
 section Comp
 

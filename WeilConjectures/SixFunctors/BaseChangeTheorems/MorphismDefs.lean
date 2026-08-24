@@ -60,21 +60,25 @@ compositions and its compatibility with the single functors are provided by
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory Abelian
+open CategoryTheory Limits MonoidalCategory MonoidalClosed Abelian
 
 namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 section PullbackComposition
+
+/-- The pullback comparison `θ_sq : f'^* ∘ g^* ≅ g'^* ∘ f^*` of a commutative square
+`g' ≫ f = f' ≫ g` of schemes on the underived étale sheaf categories, obtained from the
+composition isomorphisms `Etale.upperStarComp` and the commutativity of the square. This
+is the underived form of `Etale.pullbackSquareComparison`. -/
+noncomputable def Etale.upperStarSquareComparison (sq : CommSq g' f' f g) :
+    Etale.upperStar A g ⋙ Etale.upperStar A f' ≅
+      Etale.upperStar A f ⋙ Etale.upperStar A g' :=
+  (Etale.upperStarComp A f' g).symm ≪≫ eqToIso (by rw [← sq.w]) ≪≫
+    Etale.upperStarComp A g' f
 
 /-- The composition isomorphism `L(h₁ ≫ h₂)^* ≅ Lh₂^* ⋙ Lh₁^*` of derived pullbacks on
 the bounded below derived categories: since the pullbacks are exact, the derived
@@ -86,6 +90,8 @@ noncomputable def Etale.upperStarPlusComp {T S R : Scheme.{u}} (h₁ : T ⟶ S) 
         (Etale.upperStar A h₁).mapDerivedCategoryPlus :=
   Functor.mapDerivedCategoryPlusNatIso (Etale.upperStarComp A h₁ h₂) ≪≫
     Functor.mapDerivedCategoryPlusCompIso (Etale.upperStar A h₂) (Etale.upperStar A h₁)
+
+--TODO : add compatibility of the above two
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -142,9 +148,7 @@ section BaseChangeTransformation
 `WeilConjectures.SixFunctors.Derived`; it enters here through the bounded below derived
 adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is obtained by
 restriction of the unbounded derived adjunction. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
   [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
