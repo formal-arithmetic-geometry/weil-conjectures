@@ -43,9 +43,9 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 - `AlgebraicGeometry.isIso_pullback_fst_strictTransformι`: the strict transform
   contains the whole open locus over `U`;
 - the underlying set of the strict transform is squeezed between the inverse image of
-  the `U`-part of the image (`mem_range_strictTransformMap_of_mem_of_mem_range`,
-  `closure_preimage_subset_range_strictTransformMap`) and the full inverse image of
-  the image (`range_strictTransformMap_subset_preimage_range`); consequently
+  the `U`-part of the image (`mem_range_strictTransformMap_of_mem_of_mem_range`) and
+  the full inverse image of the image
+  (`range_strictTransformMap_subset_preimage_range`); consequently
   disjointness of closed subschemes persists along strict transforms
   (`disjoint_range_strictTransformMap_of_disjoint`; blueprint:
   `lemma:nagata-boundary-disjoint-persists`; proof order item 37);
@@ -78,12 +78,6 @@ fibre product to the base. -/
 lemma strictTransformOpen_eq_preimage :
     strictTransformOpen f π U = (pullback.fst f π ≫ f) ⁻¹ᵁ U := by
   rw [strictTransformOpen, ← Scheme.Hom.comp_preimage, pullback.condition]
-
-/-- Membership in the open locus over `U`: a point of the fibre product lies in it if
-and only if its image in the base lies in `U`. -/
-lemma mem_strictTransformOpen {w : ↑(pullback f π)} :
-    w ∈ strictTransformOpen f π U ↔ π (pullback.snd f π w) ∈ U :=
-  Iff.rfl
 
 /-- The strict transform of `f : Y ⟶ X` along `π : X' ⟶ X` relative to the open
 `U ⊆ X`: the scheme-theoretic image of the open locus of `Y ×_X X'` lying over `U`.
@@ -193,7 +187,8 @@ theorem mem_range_strictTransformMap_of_mem_of_mem_range {x' : X'} (hU : π x' �
   obtain ⟨y, hy⟩ := hf
   obtain ⟨w, hw1, hw2⟩ := Scheme.Pullback.exists_preimage_pullback y x' hy
   have hwU : w ∈ strictTransformOpen f π U := by
-    rw [mem_strictTransformOpen, hw2]
+    change π (pullback.snd f π w) ∈ U
+    rw [hw2]
     exact hU
   obtain ⟨w₀, rfl⟩ : w ∈ Set.range (strictTransformOpen f π U).ι := by
     rwa [Scheme.Opens.range_ι]
@@ -218,25 +213,6 @@ theorem disjoint_range_strictTransformMap_of_disjoint {Y₁ Y₂ : Scheme.{u}}
   (hdisj.preimage π).mono
     (range_strictTransformMap_subset_preimage_range f₁ π U)
     (range_strictTransformMap_subset_preimage_range f₂ π U)
-
-/-- The closure of the inverse image of the part of a closed center lying over an
-open `U` is contained in the range of the strict transform relative to any larger
-open `V`: the locus over `U ≤ V` is dense in the strict transform's contribution,
-which is closed. -/
-theorem closure_preimage_subset_range_strictTransformMap [IsClosedImmersion f]
-    {U V : X.Opens} (hUV : U ≤ V) {T : Set U.toScheme}
-    (hT : T ⊆ U.ι ⁻¹' Set.range f) :
-    closure (π ⁻¹' (U.ι '' T)) ⊆ Set.range (strictTransformMap f π V) := by
-  refine closure_minimal ?_ (strictTransformMap f π V).isClosedEmbedding.isClosed_range
-  intro x' hx'
-  obtain ⟨t, htT, heq⟩ := hx'
-  have hmemU : π x' ∈ U := by
-    rw [← heq]
-    have : U.ι t ∈ Set.range U.ι := ⟨t, rfl⟩
-    rwa [Scheme.Opens.range_ι] at this
-  refine mem_range_strictTransformMap_of_mem_of_mem_range f π V (hUV hmemU) ?_
-  rw [← heq]
-  exact hT htT
 
 end Range
 

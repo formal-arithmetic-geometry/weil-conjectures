@@ -39,7 +39,7 @@ separation theorem `disjoint_range_strictTransformMap_sup` of
 `WeilConjectures.Blowup.AdmissibleBlowup` (Stacks Tag 0F3V) with the range
 comparisons of `WeilConjectures.Compactification.StrictTransform`: the closure of
 the inverse image of the `U`-part of a closed center is contained in the strict
-transform (`closure_preimage_subset_range_strictTransformMap`).
+transform (`IsAdmissible.closure_preimage_subset_range_strictTransformMap`).
 
 -/
 
@@ -115,17 +115,27 @@ section BoundarySeparation
 variable {X : Scheme.{u}} {U : X.Opens}
 
 /-- The closure of the inverse image of the `U`-part of a closed center is contained
-in the range of its strict transform along a `U`-admissible blow-up: the case of
-`AlgebraicGeometry.closure_preimage_subset_range_strictTransformMap` for the closed
-subscheme of an ideal sheaf and the blow-up of an admissible center. -/
+in the range of its strict transform along a `U`-admissible blow-up: the locus over
+`U` is dense in the closure and lands in the strict transform of the closed subscheme
+of the center, whose range is closed. -/
 theorem IsAdmissible.closure_preimage_subset_range_strictTransformMap
     (B : IsAdmissible X U) (I : X.IdealSheafData) {T : Set U.toScheme}
     (hT : T ⊆ U.ι ⁻¹' (I.support : Set X)) :
     closure (B.I.blowupMap ⁻¹' (U.ι '' T)) ⊆
-      Set.range (strictTransformMap I.subschemeι B.I.blowupMap B.preservedOpen) :=
-  AlgebraicGeometry.closure_preimage_subset_range_strictTransformMap I.subschemeι
-    B.I.blowupMap B.le_preservedOpen
-    (by rwa [Scheme.IdealSheafData.range_subschemeι])
+      Set.range (strictTransformMap I.subschemeι B.I.blowupMap B.preservedOpen) := by
+  refine closure_minimal ?_
+    (strictTransformMap I.subschemeι B.I.blowupMap
+      B.preservedOpen).isClosedEmbedding.isClosed_range
+  intro x' hx'
+  obtain ⟨t, htT, heq⟩ := hx'
+  have hmemU : B.I.blowupMap x' ∈ U := by
+    rw [← heq]
+    have : U.ι t ∈ Set.range U.ι := ⟨t, rfl⟩
+    rwa [Scheme.Opens.range_ι] at this
+  refine mem_range_strictTransformMap_of_mem_of_mem_range _ _ _
+    (B.le_preservedOpen hmemU) ?_
+  rw [Scheme.IdealSheafData.range_subschemeι, ← heq]
+  exact hT htT
 
 /-- **The constructible-boundary separation blow-up** (Stacks Project Tags 080P and
 0F3V): let `X` be qcqs, `U ⊆ X` a quasi-compact open, and let `T₁`, `T₂` be disjoint
@@ -137,7 +147,8 @@ The blow-up is the boundary-separation blow-up of the sum of two finite-type ide
 `I₁`, `I₂` extending the vanishing ideals of `T₁`, `T₂` from `U` (Stacks Tags 01PH
 and 01PF, `Scheme.IdealSheafData.exists_finiteType_preimage_coe_support_eq`); the
 closure of the inverse image of `Tᵢ` is contained in the strict transform of `V(Iᵢ)`
-(`closure_preimage_subset_range_strictTransformMap`), and these strict transforms are
+(`IsAdmissible.closure_preimage_subset_range_strictTransformMap`), and these strict
+transforms are
 disjoint by `disjoint_range_strictTransformMap_sup`.
 (Blueprint: `def:nagata-separate-constructible-closed`,
 `lemma:nagata-separate-constructible-closed`,
