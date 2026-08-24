@@ -149,8 +149,8 @@ transition maps. -/
 lemma range_map_ι_app_subset {j k : J} (α : j ⟶ k) :
     Set.range (MvPolynomial.map (σ := σ) (c.ι.app j).hom) ⊆
       Set.range (MvPolynomial.map (σ := σ) (c.ι.app k).hom) := by
-  have h : (c.ι.app k).hom.comp (F.map α).hom = (c.ι.app j).hom := by
-    rw [← CommRingCat.hom_comp, c.w]
+  have h : (c.ι.app k).hom.comp (F.map α).hom = (c.ι.app j).hom :=
+    congrArg CommRingCat.Hom.hom (c.w α)
   rintro _ ⟨p, rfl⟩
   exact ⟨MvPolynomial.map (F.map α).hom p, by rw [MvPolynomial.map_map, h]; rfl⟩
 
@@ -171,10 +171,12 @@ lemma exists_mem_range_map_ι_app (p : MvPolynomial σ c.pt) :
     obtain ⟨k, q, rfl⟩ := hq
     obtain ⟨p', hp'⟩ := range_map_ι_app_subset F c (IsFiltered.leftToMax j k) ⟨p, rfl⟩
     obtain ⟨q', hq'⟩ := range_map_ι_app_subset F c (IsFiltered.rightToMax j k) ⟨q, rfl⟩
-    exact ⟨IsFiltered.max j k, p' + q', by rw [map_add, hp', hq']⟩
+    exact ⟨IsFiltered.max j k, p' + q', by rw [map_add]; exact congrArg₂ (· + ·) hp' hq'⟩
   | mul_X p n hp =>
     obtain ⟨j, p, rfl⟩ := hp
-    exact ⟨j, p * MvPolynomial.X n, by rw [map_mul, MvPolynomial.map_X]⟩
+    exact ⟨j, p * MvPolynomial.X n, by
+      rw [map_mul]
+      exact congrArg (MvPolynomial.map (c.ι.app j).hom p * ·) (MvPolynomial.map_X _ _)⟩
 
 include hc in
 /-- Finitely many polynomials over a filtered colimit of rings are all defined over a common
@@ -213,7 +215,9 @@ theorem exists_isPushout_of_finitePresentation {S : CommRingCat.{u}} (f : c.pt �
   choose lift hlift using fun p : s ↦ hi p p.2
   have hrange : (↑s : Set (MvPolynomial (Fin n) c.pt)) =
       Set.range fun x ↦ MvPolynomial.map (c.ι.app i).hom (lift x) := by
-    rw [funext hlift, Subtype.range_coe_subtype, Finset.setOf_mem]
+    refine Set.ext fun p ↦ ⟨fun hp ↦ ⟨⟨p, hp⟩, hlift ⟨p, hp⟩⟩, ?_⟩
+    rintro ⟨x, hx⟩
+    exact Set.mem_of_eq_of_mem (hx.symm.trans (hlift x)) (Finset.mem_coe.mpr x.2)
   obtain ⟨h, hpush⟩ := exists_isPushout_quotient_span (R := c.pt) (c.ι.app i) lift π hπ
     (by rw [← hs, hrange]; rfl)
   refine ⟨i, _, _, ?_, h, hpush⟩

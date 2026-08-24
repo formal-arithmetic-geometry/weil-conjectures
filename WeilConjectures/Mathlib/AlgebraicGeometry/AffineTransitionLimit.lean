@@ -63,13 +63,18 @@ lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCof
       inferInstanceAs (IsAffine (Spec _))
     have inst : ∀ {i j : I} (f : i ⟶ j),
         IsAffineHom ((D ⋙ Scheme.Γ.rightOp ⋙ Scheme.Spec).map f) := fun f ↦ inferInstance
+    haveI hg : @LocallyOfFinitePresentation (Spec A)
+        ((Cone.postcompose (asIso e).hom).obj c).pt g := ‹_›
     obtain ⟨i, Y, p, hp, h, hsq⟩ := this _ _ ((IsLimit.postcomposeHomEquiv (asIso e) c).symm hc)
       hcpt g ⟨D ⋙ Scheme.Γ.rightOp, rfl⟩
     have : LocallyOfFinitePresentation (p ≫ inv (e.app i)) := by
       have := hp; infer_instance
     refine ⟨i, Y, p ≫ inv (e.app i), this, h, ?_⟩
-    exact hsq.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) (asIso (e.app i)).symm
-      (by simp) (by simp) (by simp) (by simp)
+    refine hsq.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) (asIso (e.app i)).symm
+      (by simp) (Category.comp_id g) (by simp) ?_
+    change (c.π.app i ≫ e.app i) ≫ inv (e.app i) = 𝟙 _ ≫ c.π.app i
+    rw [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+    exact (Category.id_comp (c.π.app i)).symm
   obtain ⟨D, rfl⟩ := hD
   -- Reduce to the case where the limit cone is the spectrum of a colimit cocone of rings.
   wlog hc' : ∃ c' : Cocone D.leftOp, c = Scheme.Spec.mapCone (coneOfCoconeLeftOp c')
@@ -87,14 +92,13 @@ lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCof
             apply Quiver.Hom.op_inj
             apply Scheme.Spec.map_injective
             change Spec.map (D.leftOp.map f ≫ φ j) = Spec.map (φ i ≫ 𝟙 _)
-            rw [Spec.map_comp, Spec.map_comp, hφ, hφ, Spec.map_id, Category.id_comp,
-              Category.assoc]
-            exact congrArg (β.inv ≫ ·) (c.w f.unop) } }
+            rw [Spec.map_comp, Spec.map_comp, hφ, hφ, Spec.map_id, Category.id_comp]
+            exact (Category.assoc _ _ _).trans (congrArg (β.inv ≫ ·) (c.w f.unop)) } }
     have hcc : c ≅ Scheme.Spec.mapCone (coneOfCoconeLeftOp c') :=
       Cone.ext β fun i ↦ by
         change c.π.app i = β.hom ≫ Spec.map (φ (Opposite.op i))
         rw [hφ]
-        simp
+        exact (Iso.hom_inv_id_assoc β (c.π.app i)).symm
     obtain ⟨i, Y, p, hp, h, hsq⟩ := this (Scheme.Spec.mapCone (coneOfCoconeLeftOp c'))
       (IsLimit.ofIsoLimit hc hcc) (inferInstanceAs (IsAffine (Spec Γ(c.pt, ⊤))))
       (g ≫ β.hom) ⟨c', rfl⟩
@@ -110,6 +114,6 @@ lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCof
   obtain ⟨i, T, γ, hγ, h, hpush⟩ := CommRingCat.exists_isPushout_of_finitePresentation
     D.leftOp c' hc ψ (HasRingHomProperty.Spec_iff.mp ‹LocallyOfFinitePresentation (Spec.map ψ)›)
   refine ⟨i.unop, Spec T, Spec.map γ, HasRingHomProperty.Spec_iff.mpr hγ, Spec.map h, ?_⟩
-  simpa using (isPullback_SpecMap_of_isPushout _ _ _ _ hpush).flip
+  exact (isPullback_SpecMap_of_isPushout _ _ _ _ hpush).flip
 
 end AlgebraicGeometry
