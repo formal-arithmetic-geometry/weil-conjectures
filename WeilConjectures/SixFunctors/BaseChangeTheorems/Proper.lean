@@ -75,37 +75,37 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (Λ : Type u) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/- The K-flat resolution package on the coefficient category `ModuleCat Λ`, as in
-`WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`; the monoidal structure,
-its preadditivity and the existence of colimits are provided by mathlib's instances for
-`ModuleCat`. -/
-instance (X : ModuleCat.{u} Λ) : PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X) := sorry
+/- The K-flat resolution package on the coefficient category `ModuleCat.{u + 1} Λ`, as
+in `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`. Most of it is covered
+by mathlib and by instance search:
 
-instance (X : ModuleCat.{u} Λ) : PreservesFilteredColimitsOfSize.{u, u} (tensorRight X) := sorry
+- `ModuleCat.{u + 1} Λ` is Grothendieck abelian and symmetric monoidal closed over the
+  commutative ring `Λ`, hence in particular braided and preadditive; mathlib insists
+  that the ring and the modules live in the same universe, which is why `Λ` is taken in
+  `Type (u + 1)`;
+- it has all colimits of size `u + 1`, hence — being `Category.{u + 1}` — of size `u` as
+  well, by `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize`;
+- since the category is monoidal *closed*, tensoring is a left adjoint in each variable
+  and therefore preserves all colimits; this gives the `ℤ`-indexed preservation and the
+  compatibilities `GradedObject.HasTensor₄ObjExt`,
+  `GradedObject.HasGoodTensor₁₂Tensor` and `GradedObject.HasGoodTensorTensor₂₃` of the
+  tensor product of graded objects with coproducts.
 
-instance (X₁ X₂ X₃ X₄ : GradedObject ℤ (ModuleCat.{u} Λ)) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := sorry
-
-instance (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := sorry
-
-instance (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} Λ)) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := sorry
-
-instance : HasExactColimitsOfShape ℤ (ModuleCat.{u} Λ) := sorry
-
-instance (X : ModuleCat.{u} Λ) :
-    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).obj X) :=
+What remains is the functorial flat resolutions, recorded here with `sorry`. -/
+instance : Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} Λ) :=
   sorry
 
-instance (X : ModuleCat.{u} Λ) :
-    PreservesColimitsOfShape ℤ ((curriedTensor (ModuleCat.{u} Λ)).flip.obj X) :=
-  sorry
-
-instance : Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ) :=
-  sorry
+/-- `ℤ`-indexed colimits of `Λ`-modules are exact: `ℤ` is a filtered category, and
+`ModuleCat.{u + 1} Λ` is Grothendieck abelian, hence satisfies `AB5` for shapes of size
+`u + 1`; `AB5OfSize_of_univLE` brings that down to the shapes of size `0` in which `ℤ`
+lives. It is not an instance in mathlib because in that generality instance search would
+climb the universes. -/
+instance : HasExactColimitsOfShape ℤ (ModuleCat.{u + 1} Λ) := by
+  have : AB5OfSize.{0, 0} (ModuleCat.{u + 1} Λ) :=
+    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} (ModuleCat.{u + 1} Λ)
+  infer_instance
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -130,9 +130,9 @@ is an isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is imposed on `g`. For `�
 is [SGA 4, Exp. XII, Thm 5.1] and Stacks Project, Tag 0DDE; the case of a general
 coefficient ring follows by restriction of scalars. -/
 theorem Etale.properBaseChange [IsProper f] (sq : IsPullback g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)))
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
-    IsIso ((Etale.baseChange (ModuleCat.{u} Λ) sq.toCommSq).app K) :=
+    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
   sorry
 
 /-- **Proper base change as an isomorphism of functors**: if the coefficient ring `Λ` is
@@ -145,8 +145,8 @@ on the bounded below derived categories is an isomorphism: every complex of shea
 `Λ`-modules automatically has torsion cohomology. -/
 theorem Etale.isIso_baseChange_of_isProper (hΛ : AddMonoid.IsTorsion Λ) [IsProper f]
     (sq : IsPullback g' f' f g) :
-    IsIso (Etale.baseChange (ModuleCat.{u} Λ) sq.toCommSq) :=
-  have : ∀ K, IsIso ((Etale.baseChange (ModuleCat.{u} Λ) sq.toCommSq).app K) := fun K ↦
+    IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
+  have : ∀ K, IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := fun K ↦
     Etale.properBaseChange Λ sq K
       (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ K)
   NatIso.isIso_of_isIso_app _

@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 
 /-!
 
@@ -39,6 +40,15 @@ The design follows `AlgebraicGeometry.Scheme.IsFiniteSheaf` of
 `WeilConjectures.DerivedCategory.Constructible` (homologywise `ObjectProperty` on a
 derived category).
 
+Following the convention of the `SixFunctors` folder, the coefficient category has
+`Hom`-types in the universe `u + 1`, one above the universe `u` of the base schemes: it
+is `ModuleCat.{u + 1} Λ` for a commutative ring `Λ : Type (u + 1)`, mathlib insisting
+that the ring and the modules live in the same universe. The `Type u`-valued geometric
+points of the small étale site nevertheless have fibers in `ModuleCat.{u + 1} Λ`, the
+`u`-indexed filtered colimits computing them being obtained by shrinking from the
+`u + 1`-indexed ones, see
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize`.
+
 -/
 
 @[expose] public section
@@ -58,8 +68,8 @@ of `F` at every geometric point of `X` is a torsion abelian group, i.e. every el
 every geometric stalk is killed by a positive integer. Torsion refers to the underlying
 abelian group of the stalk, not to its `Λ`-module structure; for `Λ = ℤ` this is the
 classical notion of a torsion abelian sheaf [Stacks 03SA]. -/
-class Scheme.IsTorsionSheaf {Λ : Type u} [CommRing Λ] {X : Scheme.{u}}
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) : Prop where
+class Scheme.IsTorsionSheaf {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
   isTorsion_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
     AddMonoid.IsTorsion (↥((pointSmallEtale s).sheafFiber.obj F))
 
@@ -67,38 +77,39 @@ class Scheme.IsTorsionSheaf {Λ : Type u} [CommRing Λ] {X : Scheme.{u}}
 is finite, e.g. `Λ = ℤ/ℓⁿℤ` — then every sheaf of `Λ`-modules on the small étale site is
 torsion: every stalk is a `Λ`-module, and is killed elementwise by the additive order of
 `1 : Λ`. -/
-lemma Scheme.IsTorsionSheaf.of_isTorsion {Λ : Type u} [CommRing Λ]
+lemma Scheme.IsTorsionSheaf.of_isTorsion {Λ : Type (u + 1)} [CommRing Λ]
     (hΛ : AddMonoid.IsTorsion Λ) {X : Scheme.{u}}
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) :
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsTorsionSheaf F where
   isTorsion_sheafFiber _ _ _ _ := AddMonoid.IsTorsion.module_of_torsion Λ _ hΛ
 
 /-- Every sheaf of modules over a finite coefficient ring is torsion. -/
-instance {Λ : Type u} [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) : IsTorsionSheaf F :=
+instance {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsTorsionSheaf F :=
   .of_isTorsion is_add_torsion_of_finite F
 
 end TorsionSheaf
 
 section TorsionHomology
 
-variable (Λ : Type u) [CommRing Λ] (X : Scheme.{u})
-  [HasDerivedCategory.{w} (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ))]
+variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+  [HasDerivedCategory.{w} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))]
 
 /-- An object of the bounded below derived category of étale sheaves of `Λ`-modules has
 *torsion cohomology* if all its cohomology sheaves are torsion
 (`AlgebraicGeometry.Scheme.IsTorsionSheaf`). This is the hypothesis on the coefficient
 complex in the general proper base change theorem. -/
 noncomputable def Etale.DerivedCategory.Plus.torsionHomology :
-    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ))) :=
+    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   fun K ↦ ∀ n : ℤ, IsTorsionSheaf
-    ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ)) n).obj K)
+    ((DerivedCategory.Plus.homologyFunctor
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) n).obj K)
 
 /-- If the coefficient ring `Λ` is torsion as an additive group — in particular if `Λ`
 is finite — then every object of the bounded below derived category of étale sheaves of
 `Λ`-modules has torsion cohomology. -/
 lemma Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion (hΛ : AddMonoid.IsTorsion Λ)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u} Λ))) :
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Etale.DerivedCategory.Plus.torsionHomology Λ X K :=
   fun _ ↦ .of_isTorsion hΛ _
 
