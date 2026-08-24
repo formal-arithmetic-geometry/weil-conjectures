@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
+public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 
 /-!
 # Functoriality of `mapDerivedCategory`
@@ -19,6 +20,9 @@ For exact functors between abelian categories, the induced functor
   functors induces an isomorphism `F.mapDerivedCategory ≅ G.mapDerivedCategory`.
 - `CategoryTheory.Functor.mapDerivedCategoryCompIso`: the composition isomorphism
   `(F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory`.
+- `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: the commutation
+  `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` with the homology functors, with the
+  bounded below variant `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
 - `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
   `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
   isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility`.
@@ -83,6 +87,37 @@ noncomputable def mapDerivedCategoryCompIso (F : C ⥤ D) (G : D ⥤ E)
     (F ⋙ G).mapDerivedCategory (F.mapDerivedCategory ⋙ G.mapDerivedCategory)
     (Iso.refl _)
 
+/-- An exact functor commutes with the homology functors of the derived categories:
+the canonical isomorphism
+`H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` of functors
+`DerivedCategory C ⥤ D`, induced by the commutation of `F` with homology of complexes. -/
+noncomputable def mapDerivedCategoryHomologyFunctorIso (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) :
+    DerivedCategory.homologyFunctor C n ⋙ F ≅
+      F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n :=
+  letI : Localization.Lifting DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n ⋙ F)
+      (DerivedCategory.homologyFunctor C n ⋙ F) :=
+    ⟨(Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight (DerivedCategory.homologyFunctorFactors C n) F⟩
+  letI : Localization.Lifting DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n ⋙ F)
+      (F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n) :=
+    ⟨(Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight F.mapDerivedCategoryFactors (DerivedCategory.homologyFunctor D n) ≪≫
+      Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft (F.mapHomologicalComplex (ComplexShape.up ℤ))
+        (DerivedCategory.homologyFunctorFactors D n) ≪≫
+      F.mapHomologicalComplexHomologyIso (ComplexShape.up ℤ) n⟩
+  Localization.liftNatIso DerivedCategory.Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+    (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n ⋙ F)
+    (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n ⋙ F)
+    (DerivedCategory.homologyFunctor C n ⋙ F)
+    (F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n)
+    (Iso.refl _)
+
 section Plus
 
 variable (F : C ⥤ D) [F.Additive]
@@ -118,6 +153,19 @@ noncomputable def mapDerivedCategoryPlusCompatibility :
     F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ≅
       DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory :=
   Iso.refl _
+
+/-- An exact functor commutes with the homology functors of the bounded below derived
+categories: the restriction of `Functor.mapDerivedCategoryHomologyFunctorIso` along the
+inclusion `DerivedCategory.Plus.ι`. -/
+noncomputable def mapDerivedCategoryPlusHomologyFunctorIso (n : ℤ) :
+    DerivedCategory.Plus.homologyFunctor C n ⋙ F ≅
+      F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.homologyFunctor D n :=
+  Functor.associator DerivedCategory.Plus.ι (DerivedCategory.homologyFunctor C n) F ≪≫
+    isoWhiskerLeft DerivedCategory.Plus.ι (F.mapDerivedCategoryHomologyFunctorIso n) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    isoWhiskerRight F.mapDerivedCategoryPlusCompatibility.symm
+      (DerivedCategory.homologyFunctor D n) ≪≫
+    Functor.associator _ _ _
 
 /-- An isomorphism `F ≅ G` of exact functors between abelian categories induces an
 isomorphism `F.mapDerivedCategoryPlus ≅ G.mapDerivedCategoryPlus` of the functors
