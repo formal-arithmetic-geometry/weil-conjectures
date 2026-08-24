@@ -214,64 +214,17 @@ theorem Etale.isIso_openImmersionShriekBaseChange (sq : IsPullback g' j' j g) :
     IsIso (Etale.openImmersionLowerShriekBaseChange A sq.toCommSq) :=
   sorry
 
+noncomputable def Etale.openImmersionLowerShriekBaseChangeIso (sq : IsPullback g' j' j g) :
+    (Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus ≅
+        (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+          (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus :=
+  have := Etale.isIso_openImmersionShriekBaseChange A sq
+  (asIso (Etale.openImmersionLowerShriekBaseChange A sq.toCommSq)).symm
+
 end OpenImmersion
 
 /-
-end OpenImmersionExchange
-
-/-! ### The derived lower shriek of a compactification and the base-change morphism -/
-
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
-
-/- The K-flat resolution package on the coefficient category `A`, entering through the
-derived adjunctions used by the direct-image exchange `Etale.baseChange`, as in
-`WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
-  [HasColimitsOfShape (Discrete ℤ) A]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution A]
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
-section OpenImmersionSquarePlus
-
-variable {X Z X' Z' : Scheme.{u}}
-  {j : X ⟶ Z} {ρ : Z' ⟶ Z} {j' : X' ⟶ Z'} {ρ' : X' ⟶ X}
-  [IsOpenImmersion j] [IsOpenImmersion j']
-
-/-- The extension-by-zero exchange isomorphism of a Cartesian square with `j` and `j'`
-open immersions on the bounded below derived categories,
-
-`Lρ'^* ⋙ j'_! ≅ j_! ⋙ Lρ^*`,
-
-obtained from the underived exchange isomorphism by the functoriality of
-`Functor.mapDerivedCategoryPlus`: all four functors are exact, so no resolutions
-enter. -/
-noncomputable def Etale.openImmersionShriekBaseChangePlus (sq : IsPullback ρ' j' j ρ) :
-    (Etale.upperStar A ρ').mapDerivedCategoryPlus ⋙
-        (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus ≅
-      (Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⋙
-        (Etale.upperStar A ρ).mapDerivedCategoryPlus :=
-  have := Etale.isIso_openImmersionShriekBaseChange A sq
-  (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryPlusNatIso
-      (asIso (Etale.openImmersionShriekBaseChange A sq.toCommSq)) ≪≫
-    Functor.mapDerivedCategoryPlusCompIso _ _
-
-end OpenImmersionSquarePlus
 
 section DerivedLowerShriek
 
@@ -329,7 +282,6 @@ noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
       (Etale.openImmersionShriekBaseChangePlus A (c.baseChange_isPullback_i sq)).inv
       ((Etale.lowerStar A (c.baseChange sq).g).rightDerivedFunctorPlus) ≫
     (Functor.associator _ _ _).hom
-
 
 end LowerShriekBaseChange
 -/
