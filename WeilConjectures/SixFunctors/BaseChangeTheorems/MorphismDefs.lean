@@ -70,16 +70,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 section PullbackComposition
 
-/-- The pullback comparison `θ_sq : f'^* ∘ g^* ≅ g'^* ∘ f^*` of a commutative square
-`g' ≫ f = f' ≫ g` of schemes on the underived étale sheaf categories, obtained from the
-composition isomorphisms `Etale.upperStarComp` and the commutativity of the square. This
-is the underived form of `Etale.pullbackSquareComparison`. -/
-noncomputable def Etale.upperStarSquareComparison (sq : CommSq g' f' f g) :
-    Etale.upperStar A g ⋙ Etale.upperStar A f' ≅
-      Etale.upperStar A f ⋙ Etale.upperStar A g' :=
-  (Etale.upperStarComp A f' g).symm ≪≫ eqToIso (by rw [← sq.w]) ≪≫
-    Etale.upperStarComp A g' f
-
 /-- The composition isomorphism `L(h₁ ≫ h₂)^* ≅ Lh₂^* ⋙ Lh₁^*` of derived pullbacks on
 the bounded below derived categories: since the pullbacks are exact, the derived
 pullbacks are the levelwise functors `mapDerivedCategoryPlus`, and the isomorphism is
@@ -90,8 +80,6 @@ noncomputable def Etale.upperStarPlusComp {T S R : Scheme.{u}} (h₁ : T ⟶ S) 
         (Etale.upperStar A h₁).mapDerivedCategoryPlus :=
   Functor.mapDerivedCategoryPlusNatIso (Etale.upperStarComp A h₁ h₂) ≪≫
     Functor.mapDerivedCategoryPlusCompIso (Etale.upperStar A h₂) (Etale.upperStar A h₁)
-
---TODO : add compatibility of the above two
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
