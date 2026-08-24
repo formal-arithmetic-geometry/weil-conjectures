@@ -129,11 +129,9 @@ lemma Etale.openImmersionLowerShriekBaseChangeSquareStep_app (sq : CommSq g' j' 
   exact (Category.id_comp _).trans (Category.comp_id _)
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-  [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
   [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution A]
