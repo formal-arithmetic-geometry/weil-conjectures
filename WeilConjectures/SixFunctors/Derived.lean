@@ -319,16 +319,7 @@ K-injective resolutions on the pushforward side are supplied by the sheaf catego
 being Grothendieck abelian.
 -/
 
-open MonoidalCategory
-
-/- The concreteness of the coefficient category `A`, as in the section
-`DerivedUpperStar`; it is what the monoidal transport instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
-variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [PreservesLimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
+open MonoidalCategory MonoidalClosed
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 variable [HasSheafify Z.smallEtaleTopology A]
@@ -336,9 +327,10 @@ variable [∀ F : Y.Etaleᵒᵖ ⥤ A,
   (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F]
 variable [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
   (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)]
-variable [MonoidalCategory A] [MonoidalPreadditive A]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorLeft X)]
-  [∀ (X : A), PreservesFilteredColimitsOfSize.{u, u} (tensorRight X)]
+/- The closed braided preadditive monoidal structure on the coefficient category, as in
+the section `DerivedUpperStar`; it is what the monoidal transport instances of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
 variable [HasColimitsOfShape (Discrete ℤ) A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
