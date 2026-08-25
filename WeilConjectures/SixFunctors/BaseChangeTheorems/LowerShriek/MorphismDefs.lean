@@ -235,6 +235,26 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [Monoi
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+/-
+variable (c : Compactification f) (sq : IsPullback g' f' f g)
+
+noncomputable def Etale.lowerShriekBaseChangeProperStep :=
+  Functor.whiskerLeft (Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus
+  (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq)
+
+--set_option maxHeartbeats 500000 in
+lemma Etale.lowerShriekBaseChangeProperStep_app (c : Compactification f)
+    (sq : IsPullback g' f' f g) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.lowerShriekBaseChangeProperStep A c sq).app K =
+    (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq).app
+      ((openImmersionLowerShriek A c.i).mapDerivedCategoryPlus.obj K) := by
+  simp only [Etale.lowerShriekBaseChangeProperStep]
+  let sb := (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq)
+  have : (Functor.whiskerLeft (Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus sb).app
+    K = sb.app ((openImmersionLowerShriek A c.i).mapDerivedCategoryPlus.obj K) := sorry
+  exact this
+-/
+
 noncomputable def Etale.lowerShriekBaseChangeAux (c : Compactification f)
     (sq : IsPullback g' f' f g) :
     ((Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus ⋙
