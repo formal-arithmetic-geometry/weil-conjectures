@@ -166,7 +166,7 @@ equality has explicitly been fixed.
   \label{def:nagata-dense-compactification}
   \uses{def:nagata-compactification,
     def:nagata-scheme-theoretically-dense-open}
-  \lean{AlgebraicGeometry.Compactification.IsSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant}
 
   A compactification $X\xrightarrow{j}\overline X\to S$ is
   \emph{scheme-theoretically dense} when its first map has the predicate
@@ -182,9 +182,10 @@ equality has explicitly been fixed.
   \label{lemma:nagata-dense-compactification-characterization}
   \uses{def:nagata-dense-compactification,
     def:nagata-scheme-theoretic-image,lemma:nagata-scheme-image-ideal-qc}
-  \lean{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDense_iff}
+  \lean{AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι}
 
-  For a quasi-compact open immersion $j$, the density condition in
+  For an open immersion $j$ (no quasi-compactness is needed), the density
+  condition in
   \Cref{def:nagata-dense-compactification} is equivalent to the assertion that
   the image inclusion
   $j_{\mathrm{im}}\colon\operatorname{SIm}(j)\to\overline X$ is an
@@ -562,7 +563,7 @@ equality has explicitly been fixed.
 \begin{proposition}[Properties of the dense-refinement construction]
   \label{prop:nagata-dense-refinement}
   \uses{def:nagata-dense-compactification,def:nagata-dense-refinement}
-  \lean{AlgebraicGeometry.Compactification.denseRefinement_isSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_denseRefinement_i}
 
   The object $\mathsf{Dense}(C)$ is a scheme-theoretically dense
   compactification of the same morphism as $C$.
@@ -5223,7 +5224,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-constructible-closed-support,
     def:nagata-finite-type-ideal-extension,
     def:nagata-separate-closed-subschemes}
-  \lean{AlgebraicGeometry.constructibleBoundarySeparationBlowup}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $T_1,T_2\subseteq U$ be disjoint constructible subsets closed in $U$.
@@ -5253,19 +5254,18 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-constructible-closed-support,
     lemma:nagata-extend-finite-type-ideal,
-    lemma:nagata-separate-closed-subschemes,
-    lemma:nagata-strict-transform-closure-characterization}
+    lemma:nagata-separate-closed-subschemes}
   By \Cref{lemma:nagata-constructible-closed-support},
   $V(\mathcal J_i)=T_i$ in $U$.  The restriction equality from
   \Cref{lemma:nagata-extend-finite-type-ideal} consequently gives
   $|Z_i\cap U|=T_i$, so $Z_1\cap Z_2\cap U=\varnothing$.  Apply
   \Cref{lemma:nagata-separate-closed-subschemes}.  In the resulting
-  $U$-admissible blow-up, the strict transform of $Z_i$ is, by
-  \Cref{lemma:nagata-strict-transform-closure-characterization}, the
-  scheme-theoretic closure of its inverse image over $Z_i\cap U$.  Its
-  underlying closed set is therefore exactly the closure of the inverse image
-  of $T_i$.  The two strict transforms are disjoint, so these two closures
-  are disjoint as claimed.
+  $U$-admissible blow-up $\pi\colon X'\to X$, the closure of
+  $\pi^{-1}(T_i)$ is contained in the underlying set of the strict transform
+  of $Z_i$: the strict transform is closed in $X'$, and it contains every
+  point lying both over the preserved open and over $Z_i$ — in particular
+  every point of $\pi^{-1}(T_i)$.  The two strict transforms are disjoint,
+  so these two closures are disjoint as claimed.
 \end{proof}
 
 \begin{lemma}[Existence of constructible closed separators in a spectral space]
@@ -6155,7 +6155,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{definition}[Chosen dense compactifications of the two opens]
   \label{def:nagata-two-open-dense-compactifications}
   \uses{def:nagata-compactifiable,def:nagata-dense-refinement}
-  \lean{AlgebraicGeometry.HasCompactification.exists_isSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
 
   Let $C_i^0$ be the compactification selected by classical choice from the
   nonempty type witnessing compactifiability of $U_i\to S$.  Define
@@ -6168,7 +6168,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Properties of the chosen dense compactifications]
   \label{lemma:nagata-two-open-dense-compactifications}
   \uses{def:nagata-two-open-dense-compactifications}
-  \lean{AlgebraicGeometry.HasCompactification.exists_isSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
 
   For $i=1,2$, the constructed $C_i$ is a scheme-theoretically dense
   compactification of $U_i\to S$; in particular $X_i\to S$ is proper and
@@ -6309,7 +6309,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Disjoint boundary closures persist]
   \label{lemma:nagata-boundary-disjoint-persists}
-  \lean{AlgebraicGeometry.StrictTransform.disjoint_of_disjoint}
+  \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_of_disjoint}
 
   If $\overline Z_{i,i}$ and $\overline Z_{i,j}$ are disjoint, then their
   strict transforms remain disjoint after every further $V_i$-admissible
