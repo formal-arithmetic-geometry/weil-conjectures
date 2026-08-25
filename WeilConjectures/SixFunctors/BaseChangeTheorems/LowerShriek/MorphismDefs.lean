@@ -81,13 +81,13 @@ open CategoryTheory Limits MonoidalCategory Abelian
 
 namespace AlgebraicGeometry
 
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
 open Scheme
 
 /-! ### The extension-by-zero exchange morphism on underived sheaf categories -/
 
 section OpenImmersion
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 variable {X Z X' Z' : Scheme.{u}}
   {j : X ⟶ Z} {g : Z' ⟶ Z} {j' : X' ⟶ Z'} {g' : X' ⟶ X}
@@ -224,66 +224,32 @@ noncomputable def Etale.openImmersionLowerShriekBaseChangeIso (sq : IsPullback g
 
 end OpenImmersion
 
-/-
-
-section DerivedLowerShriek
-
-variable {X Y : Scheme.{u}} {f : X ⟶ Y}
-
-/-- The derived lower shriek `Rf_!^c : D^+(X_ét) ⥤ D^+(Y_ét)` associated with a
-compactification `c : X ⟶[i] Z ⟶[p] Y` of `f` on the bounded below derived categories
-of étale sheaves: the extension by zero `i_!` applied levelwise (it is exact, so no
-resolutions are needed), followed by the right derived pushforward `Rp_*`.
-
-This is the bounded below derived incarnation of the lower shriek
-`Compactification.lowerShriek` (`f_!^c = i_! ⋙ p_*`) associated with `c`, following
-the definition `Rf_! K := Rp_* i_! K` of the reference; it depends on the chosen
-compactification, the comparison between different choices being the independence-of-
-compactification theorem, which is not treated here. -/
-noncomputable def Compactification.rightDerivedLowerShriekPlus (c : Compactification f) :
-    DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
-      DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  (Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus ⋙
-    (Etale.lowerStar A c.g).rightDerivedFunctorPlus
-
-end DerivedLowerShriek
-
-section LowerShriekBaseChange
+variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
+  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution A]
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- The *compact-support base-change morphism*
-`Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}` of a Cartesian square
-`sq : IsPullback g' f' f g` for a compactification `c : X ⟶[i] Z ⟶[p] Y` of `f`, where
-`c' = c.baseChange sq` is the base-changed compactification of `f'`, on the bounded
-below derived categories of étale sheaves.
-
-Following the reference, it is the composite of the direct-image exchange
-`Ex_* : Rp_* ⋙ Lg^* ⟶ Lḡ^* ⋙ Rp'_*` (`Etale.baseChange`) for the proper square of
-the base-changed compactification, whiskered with `i_!`, and the inverse of the
-extension-by-zero exchange isomorphism `Lg'^* ⋙ i'_! ≅ i_! ⋙ Lḡ^*`
-(`Etale.openImmersionShriekBaseChangePlus`) for its open-immersion square, whiskered
-with `Rp'_*`.
-
-Proper base change asserts that this morphism is an isomorphism (the direct-image
-exchange is one by proper base change for the proper morphism `p`); no such assertion is
-built into the definition. -/
-noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
+noncomputable def Etale.lowerShriekBaseChangeAux (c : Compactification f)
     (sq : IsPullback g' f' f g) :
-    c.rightDerivedLowerShriekPlus A ⋙ (Etale.upperStar A g).mapDerivedCategoryPlus ⟶
-      (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
-        (c.baseChange sq).rightDerivedLowerShriekPlus A :=
+    ((Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus ⋙
+      (Etale.lowerStar A c.g).rightDerivedFunctorPlus) ⋙
+        (Etale.upperStar A g).mapDerivedCategoryPlus ⟶
+    (Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+      ((Etale.openImmersionLowerShriek A (c.baseChange sq).i).mapDerivedCategoryPlus ⋙
+        (Etale.lowerStar A (c.baseChange sq).g).rightDerivedFunctorPlus) :=
   (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus
-      (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq) ≫
-    (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight
-      (Etale.openImmersionShriekBaseChangePlus A (c.baseChange_isPullback_i sq)).inv
-      ((Etale.lowerStar A (c.baseChange sq).g).rightDerivedFunctorPlus) ≫
-    (Functor.associator _ _ _).hom
-
-end LowerShriekBaseChange
--/
+  Functor.whiskerLeft (Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus
+  (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq)
+  ≫ (Functor.associator _ _ _).inv ≫
+  (Functor.whiskerRight
+  (Etale.openImmersionLowerShriekBaseChangeIso A (c.baseChange_isPullback_i sq)).hom
+  (Etale.lowerStar A (c.baseChange sq).g).rightDerivedFunctorPlus)
+  ≫ (Functor.associator _ _ _).hom
 
 end AlgebraicGeometry
