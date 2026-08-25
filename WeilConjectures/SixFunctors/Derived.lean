@@ -72,6 +72,10 @@ below free of any K-injective hypothesis as well.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus` and
   `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus`: the same two functors on the
   bounded below derived categories, free of the K-injective hypothesis.
+- `AlgebraicGeometry.Compactification.rightDerivedLowerShriek` and
+  `AlgebraicGeometry.Compactification.rightDerivedLowerShriekPlus`: the derived lower
+  shriek attached to a *given* compactification of `f`, rather than to the chosen one; for
+  the chosen compactification they are definitionally the two functors above.
 - `AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar`: for étale `g`, the
   pushforward `g_*` preserves injective objects, being right adjoint to the left exact `g^*`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarPlusComp`: the composition isomorphism
@@ -128,7 +132,42 @@ end DerivedLowerStar
 
 section DerivedLowerShriek
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+variable {X Y : Scheme.{u}}
+
+section OfCompactification
+
+variable {f : X ⟶ Y} (c : Compactification f)
+
+/-- The total right derived functor `D(X_ét) ⥤ D(Y_ét)` of the lower shriek `i_! ⋙ g_*`
+attached to a *given* compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded
+derived categories of étale sheaves.
+
+The functor being derived is `AlgebraicGeometry.Compactification.lowerShriek` for
+`P = Q = @Etale`, spelled out as the composition of the extension by zero along `c.i` with
+the pushforward along `c.g`; in that form its additivity is found by instance search. For
+`c = HasCompactification.compactification f` this is definitionally
+`Etale.rightDerivedLowerShriek A f`. -/
+noncomputable def Compactification.rightDerivedLowerShriek :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
+  (Etale.openImmersionLowerShriek A c.i ⋙ Etale.lowerStar A c.g).rightDerivedFunctor
+
+/-- The right derived functor `D⁺(X_ét) ⥤ D⁺(Y_ét)` of the lower shriek `i_! ⋙ g_*`
+attached to a *given* compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the *bounded
+below* derived categories of étale sheaves.
+
+Unlike `Compactification.rightDerivedLowerShriek` this needs no K-injective
+hypothesis; see `Etale.rightDerivedLowerStarPlus`. For
+`c = HasCompactification.compactification f` this is definitionally
+`Etale.rightDerivedLowerShriekPlus A f`. -/
+noncomputable def Compactification.rightDerivedLowerShriekPlus :
+    DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
+  (Etale.openImmersionLowerShriek A c.i ⋙ Etale.lowerStar A c.g).rightDerivedFunctorPlus
+
+end OfCompactification
+
+variable (f : X ⟶ Y) [HasCompactification f]
 
 /-- The total right derived functor `Rf_! : D(X_ét) ⥤ D(Y_ét)` of the lower shriek
 `f_!` along a morphism `f : X ⟶ Y` admitting a compactification on the unbounded
@@ -147,6 +186,12 @@ noncomputable def Etale.rightDerivedLowerShriekPlus :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
   (Etale.lowerShriek A f).rightDerivedFunctorPlus
+
+lemma Etale.rightDerivedLowerShriek_eq : Etale.rightDerivedLowerShriek A f =
+    (HasCompactification.compactification f).rightDerivedLowerShriek A := rfl
+
+lemma Etale.rightDerivedLowerShriekPlus_eq : Etale.rightDerivedLowerShriekPlus A f =
+    (HasCompactification.compactification f).rightDerivedLowerShriekPlus A := rfl
 
 end DerivedLowerShriek
 
