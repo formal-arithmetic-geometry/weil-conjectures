@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 
@@ -802,6 +803,393 @@ lemma exists_mem_fiberProduct_res_eq_mul_pow (E : ExtensionData.{u}) {j : Over E
         ((E.WD.obj j).presheaf.map (homOfLE le_top).op) rl ^ m₀ * z := hy
     rw [hy', pow_add, pow_add]
     ring
+
+/-!
+#### The category of stages
+
+Following `lemma:nagata-valid-refinements-directed`, the stages form a nonempty cofiltered
+category: any finitely generated subalgebra of the fiber product can be enlarged to satisfy
+the generation condition (Stacks 01Z7), lifts of the generators exist at a common index by
+the section-descent lemmas for the limit `W = lim Wⱼ`, and the covering and affineness
+conditions descend from the limit by Stacks 01Z4.
+-/
+
+instance (j : Over E.i₀) : IsNoetherian (E.WD.obj j) := ⟨⟩
+
+/-- (Implementation) The identity on the `V`-component times restriction on the section
+component, as a morphism of `ℤ`-algebras. It maps the fiber product at `j` into the fiber
+product at `j'`. -/
+noncomputable def resAlgHom {j j' : Over E.i₀} (k : j' ⟶ j) :
+    (Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)) →ₐ[ℤ] Γ(E.X, E.V) × Γ(E.WD.obj j', ⊤) :=
+  ((RingHom.id Γ(E.X, E.V)).prodMap (E.res k).hom).toIntAlgHom
+
+@[simp] lemma resAlgHom_apply {j j' : Over E.i₀} (k : j' ⟶ j)
+    (p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)) :
+    resAlgHom k p = (p.1, E.res k p.2) := rfl
+
+lemma resAlgHom_mem_fiberProduct {j j' : Over E.i₀} (k : j' ⟶ j)
+    {p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)} (hp : p ∈ E.fiberProduct j) :
+    resAlgHom k p ∈ E.fiberProduct j' := by
+  rw [E.mem_fiberProduct_iff] at hp ⊢
+  rw [resAlgHom_apply, E.t_res]
+  exact hp
+
+lemma Stage.A_le_fiberProduct (T : E.Stage) : T.A ≤ E.fiberProduct T.j :=
+  fun p hp ↦ (E.mem_fiberProduct_iff p).mpr (T.hA p hp)
+
+variable (E)
+
+/-- (Implementation) The data of a stage without its coefficient algebra: an index `j` and
+lifts `r` of the generators of the intersection such that the basic opens of the `r l` form
+an affine cover of `Wⱼ`. -/
+structure PreStage where
+  /-- The underlying index. -/
+  j : Over E.i₀
+  /-- The lifts of the generators of the intersection. -/
+  r : Fin E.n → Γ(E.WD.obj j, ⊤)
+  hr (l : Fin E.n) : E.t j (r l) = E.sV (E.b l)
+  hcov : ⨆ l, (E.WD.obj j).basicOpen (r l) = ⊤
+  haff (l : Fin E.n) : IsAffineOpen ((E.WD.obj j).basicOpen (r l))
+
+variable {E}
+
+/-- (Implementation) The pre-stage underlying a stage. -/
+def Stage.toPreStage (T : E.Stage) : E.PreStage :=
+  ⟨T.j, T.r, T.hr, T.hcov, T.haff⟩
+
+/-- (Implementation) Pre-stages restrict along morphisms of indices. -/
+noncomputable def PreStage.restrict (P : E.PreStage) {j' : Over E.i₀} (k : j' ⟶ P.j) :
+    E.PreStage where
+  j := j'
+  r l := E.res k (P.r l)
+  hr l := by rw [E.t_res, P.hr]
+  hcov := by
+    have h : ∀ l, (E.WD.obj j').basicOpen (E.res k (P.r l)) =
+        E.WD.map k ⁻¹ᵁ ((E.WD.obj P.j).basicOpen (P.r l)) :=
+      fun l ↦ (Scheme.preimage_basicOpen_top (E.WD.map k) (P.r l)).symm
+    simp_rw [h, ← Scheme.Hom.preimage_iSup, P.hcov, Scheme.Hom.preimage_top]
+  haff l := by
+    rw [show (E.WD.obj j').basicOpen (E.res k (P.r l)) =
+        E.WD.map k ⁻¹ᵁ ((E.WD.obj P.j).basicOpen (P.r l)) from
+      (Scheme.preimage_basicOpen_top (E.WD.map k) (P.r l)).symm]
+    exact (P.haff l).preimage _
+
+/-- (Implementation, Stacks 01Z7) For every pre-stage and every generator index `l`, there
+is a finite subset of the fiber product such that every subalgebra containing it and the
+tautological pair `(b l, r l)` satisfies the generation condition of a stage at `l`: the
+sections over the affine basic open `Wⱼ(r l)` form a finitely generated `ℤ`-algebra, and
+every generator is, up to a power of `r l`, the section component of an element of the
+fiber product. -/
+lemma PreStage.exists_finset_hgen (P : E.PreStage) (l : Fin E.n) :
+    ∃ s : Finset (Γ(E.X, E.V) × Γ(E.WD.obj P.j, ⊤)),
+      (∀ q ∈ s, q ∈ E.fiberProduct P.j) ∧
+      ∀ A : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj P.j, ⊤)),
+        (E.b l, P.r l) ∈ A → (∀ q ∈ s, q ∈ A) →
+        ∀ z : Γ(E.WD.obj P.j, (E.WD.obj P.j).basicOpen (P.r l)),
+          ∃ (m : ℕ) (p : Γ(E.X, E.V) × Γ(E.WD.obj P.j, ⊤)), p ∈ A ∧
+            ((E.WD.obj P.j).presheaf.map (homOfLE le_top).op).hom p.2 =
+              z * ((E.WD.obj P.j).presheaf.map (homOfLE le_top).op).hom (P.r l) ^ m := by
+  classical
+  have hft : Algebra.FiniteType ℤ Γ(E.WD.obj P.j, (E.WD.obj P.j).basicOpen (P.r l)) :=
+    IsAffineOpen.algebra_finiteType_of_locallyOfFiniteType
+      (f := specULiftZIsTerminal.from (E.WD.obj P.j)) (P.haff l)
+  obtain ⟨s₀, hs₀⟩ := hft.1
+  choose m p hp₁ hp₂ using fun z : s₀ ↦
+    E.exists_mem_fiberProduct_res_eq_mul_pow (P.hr l) (z : _)
+  refine ⟨s₀.attach.image p, fun q hq ↦ ?_, ?_⟩
+  · obtain ⟨z, -, rfl⟩ := Finset.mem_image.mp hq
+    exact hp₁ z
+  · intro A hbr hsub z
+    set ρ := ((E.WD.obj P.j).presheaf.map
+      (homOfLE (le_top : (E.WD.obj P.j).basicOpen (P.r l) ≤ ⊤)).op).hom with hρ
+    let S : Subalgebra ℤ Γ(E.WD.obj P.j, (E.WD.obj P.j).basicOpen (P.r l)) :=
+      { carrier := {z | ∃ (m : ℕ) (p : Γ(E.X, E.V) × Γ(E.WD.obj P.j, ⊤)), p ∈ A ∧
+          ρ p.2 = z * ρ (P.r l) ^ m}
+        one_mem' := ⟨0, 1, one_mem A, by simp⟩
+        zero_mem' := ⟨0, 0, zero_mem A, by simp⟩
+        mul_mem' := by
+          rintro z₁ z₂ ⟨m₁, p₁, h₁, e₁⟩ ⟨m₂, p₂, h₂, e₂⟩
+          refine ⟨m₁ + m₂, p₁ * p₂, mul_mem h₁ h₂, ?_⟩
+          change ρ (p₁.2 * p₂.2) = _
+          rw [map_mul, e₁, e₂]
+          ring
+        add_mem' := by
+          rintro z₁ z₂ ⟨m₁, p₁, h₁, e₁⟩ ⟨m₂, p₂, h₂, e₂⟩
+          refine ⟨m₁ + m₂, p₁ * (E.b l, P.r l) ^ m₂ + p₂ * (E.b l, P.r l) ^ m₁,
+            add_mem (mul_mem h₁ (pow_mem hbr m₂)) (mul_mem h₂ (pow_mem hbr m₁)), ?_⟩
+          change ρ (p₁.2 * P.r l ^ m₂ + p₂.2 * P.r l ^ m₁) = _
+          rw [map_add, map_mul, map_mul, map_pow, map_pow, e₁, e₂]
+          ring
+        algebraMap_mem' := fun c ↦ ⟨0, algebraMap ℤ _ c, A.algebraMap_mem c, by
+          change ρ (algebraMap ℤ _ c) = _
+          rw [pow_zero, mul_one]
+          exact map_intCast ρ c⟩ }
+    have hS : Algebra.adjoin ℤ (↑s₀ : Set _) ≤ S := by
+      refine Algebra.adjoin_le fun z hz ↦ ?_
+      exact ⟨m ⟨z, hz⟩, p ⟨z, hz⟩,
+        hsub _ (Finset.mem_image.mpr ⟨⟨z, hz⟩, Finset.mem_attach _ _, rfl⟩), hp₂ ⟨z, hz⟩⟩
+    have := hS (hs₀ ▸ Algebra.mem_top (R := ℤ) (x := z))
+    exact this
+
+/-- (Implementation, Stacks 01Z7) Enlarge a finitely generated subalgebra of the fiber
+product containing the tautological pairs to the coefficient algebra of a stage over a
+given pre-stage. -/
+noncomputable def PreStage.mkStage (P : E.PreStage)
+    (A₀ : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj P.j, ⊤)))
+    (hA₀ : A₀ ≤ E.fiberProduct P.j) (hfg : A₀.FG)
+    (hmem : ∀ l, (E.b l, P.r l) ∈ A₀) : E.Stage where
+  j := P.j
+  r := P.r
+  hr := P.hr
+  hcov := P.hcov
+  haff := P.haff
+  A := A₀ ⊔ Algebra.adjoin ℤ (⋃ l, ↑(P.exists_finset_hgen l).choose)
+  hA p hp := by
+    have h : A₀ ⊔ Algebra.adjoin ℤ (⋃ l, ↑(P.exists_finset_hgen l).choose) ≤
+        E.fiberProduct P.j := by
+      refine sup_le hA₀ (Algebra.adjoin_le fun q hq ↦ ?_)
+      obtain ⟨l, hql⟩ := Set.mem_iUnion.mp hq
+      exact (P.exists_finset_hgen l).choose_spec.1 q hql
+    exact (E.mem_fiberProduct_iff p).mp (h hp)
+  hAfg := hfg.sup (Subalgebra.fg_def.mpr
+    ⟨_, Set.finite_iUnion fun l ↦ (P.exists_finset_hgen l).choose.finite_toSet, rfl⟩)
+  hmem l := Algebra.mem_sup_left (hmem l)
+  hgen l z :=
+    (P.exists_finset_hgen l).choose_spec.2 _
+      (Algebra.mem_sup_left (hmem l))
+      (fun q hq ↦ Algebra.mem_sup_right
+        (Algebra.subset_adjoin (Set.mem_iUnion.mpr ⟨l, hq⟩))) z
+
+@[simp] lemma PreStage.mkStage_j (P : E.PreStage) (A₀) (hA₀) (hfg) (hmem) :
+    (P.mkStage A₀ hA₀ hfg hmem).j = P.j := rfl
+
+@[simp] lemma PreStage.mkStage_r (P : E.PreStage) (A₀) (hA₀) (hfg) (hmem) :
+    (P.mkStage A₀ hA₀ hfg hmem).r = P.r := rfl
+
+lemma PreStage.le_mkStage_A (P : E.PreStage) (A₀) (hA₀) (hfg) (hmem) :
+    A₀ ≤ (P.mkStage A₀ hA₀ hfg hmem).A := le_sup_left
+
+/-- (Implementation) The minimal stage over a pre-stage: adjoin the tautological pairs and
+close up under the generation condition. -/
+noncomputable def PreStage.stage (P : E.PreStage) : E.Stage :=
+  P.mkStage (Algebra.adjoin ℤ (Set.range fun l ↦ (E.b l, P.r l)))
+    (Algebra.adjoin_le (by rintro p ⟨l, rfl⟩; exact (E.mem_fiberProduct_iff _).mpr (P.hr l).symm))
+    (Subalgebra.fg_def.mpr ⟨_, Set.finite_range _, rfl⟩)
+    (fun l ↦ Algebra.subset_adjoin ⟨l, rfl⟩)
+
+@[simp] lemma PreStage.stage_j (P : E.PreStage) : P.stage.j = P.j := rfl
+
+/-- (Implementation) Restrict a stage along a morphism of indices, adjoining an extra
+finitely generated subalgebra of the fiber product. -/
+noncomputable def Stage.restrict (T : E.Stage) {j' : Over E.i₀} (k : j' ⟶ T.j)
+    (A' : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j', ⊤)))
+    (hA' : A' ≤ E.fiberProduct j') (hfg : A'.FG) : E.Stage :=
+  (T.toPreStage.restrict k).mkStage (T.A.map (resAlgHom k) ⊔ A')
+    (sup_le (by rintro p ⟨q, hq, rfl⟩; exact resAlgHom_mem_fiberProduct k (T.A_le_fiberProduct hq))
+      hA')
+    ((T.hAfg.map _).sup hfg)
+    (fun l ↦ Algebra.mem_sup_left ⟨(E.b l, T.r l), T.hmem l, rfl⟩)
+
+@[simp] lemma Stage.restrict_j (T : E.Stage) {j' : Over E.i₀} (k : j' ⟶ T.j)
+    (A') (hA') (hfg) : (T.restrict k A' hA' hfg).j = j' := rfl
+
+@[simp] lemma Stage.restrict_r (T : E.Stage) {j' : Over E.i₀} (k : j' ⟶ T.j)
+    (A') (hA') (hfg) (l : Fin E.n) :
+    (T.restrict k A' hA' hfg).r l = E.res k (T.r l) := rfl
+
+lemma Stage.le_restrict_A (T : E.Stage) {j' : Over E.i₀} (k : j' ⟶ T.j)
+    (A') (hA') (hfg) : A' ≤ (T.restrict k A' hA' hfg).A :=
+  le_trans le_sup_right ((T.toPreStage.restrict k).le_mkStage_A _ _ _ _)
+
+/-- (Implementation) The canonical morphism from a restricted stage. -/
+noncomputable def Stage.restrictHom (T : E.Stage) {j' : Over E.i₀} (k : j' ⟶ T.j)
+    (A') (hA') (hfg) : T.restrict k A' hA' hfg ⟶ T where
+  base := k
+  res_r _ := rfl
+  map_mem p hp := (T.toPreStage.restrict k).le_mkStage_A _ _ _ _
+    (Algebra.mem_sup_left ⟨p, hp, rfl⟩)
+
+@[simp] lemma Stage.restrictHom_base (T : E.Stage) {j' : Over E.i₀} (k : j' ⟶ T.j)
+    (A') (hA') (hfg) : (T.restrictHom k A' hA' hfg).base = k := rfl
+
+variable (E)
+
+/-- (Implementation) A finite-conjunction helper: a family of index-stable properties, each
+attainable below any index, is attained jointly below any index. -/
+private lemma exists_hom_forall {j₂ : Over E.i₀}
+    (P : ∀ (j' : Over E.i₀), (j' ⟶ j₂) → Fin E.n → Prop)
+    (hstab : ∀ {j j' : Over E.i₀} (k' : j' ⟶ j) (k : j ⟶ j₂) (l : Fin E.n),
+      P j k l → P j' (k' ≫ k) l)
+    (hex : ∀ (j : Over E.i₀) (k : j ⟶ j₂) (l : Fin E.n),
+      ∃ (j' : Over E.i₀) (k' : j' ⟶ j), P j' (k' ≫ k) l) :
+    ∃ (j : Over E.i₀) (k : j ⟶ j₂), ∀ l, P j k l := by
+  classical
+  suffices h : ∀ s : Finset (Fin E.n), ∃ (j : Over E.i₀) (k : j ⟶ j₂), ∀ l ∈ s, P j k l by
+    obtain ⟨j, k, hj⟩ := h Finset.univ
+    exact ⟨j, k, fun l ↦ hj l (Finset.mem_univ l)⟩
+  intro s
+  induction s using Finset.induction with
+  | empty => exact ⟨j₂, 𝟙 j₂, by simp⟩
+  | insert a s ha ih =>
+    obtain ⟨j, k, hj⟩ := ih
+    obtain ⟨j', k', hj'⟩ := hex j k a
+    refine ⟨j', k' ≫ k, fun l hl ↦ ?_⟩
+    rcases Finset.mem_insert.mp hl with rfl | hl
+    · exact hj'
+    · exact hstab k' k l (hj l hl)
+
+/-- (Implementation) The lifts of the generators of the intersection exist at a common
+index below any given index. -/
+lemma exists_r (j₀ : Over E.i₀) :
+    ∃ (j : Over E.i₀) (_ : j ⟶ j₀) (r : Fin E.n → Γ(E.WD.obj j, ⊤)),
+      ∀ l, E.t j (r l) = E.sV (E.b l) := by
+  have hex : ∀ (j : Over E.i₀) (l : Fin E.n),
+      ∃ (j' : Over E.i₀) (_ : j' ⟶ j) (r : Γ(E.WD.obj j', ⊤)), E.t j' r = E.sV (E.b l) := by
+    intro j l
+    obtain ⟨i, r₀, hr₀⟩ := exists_appTop_π_eq_of_isLimit E.WD E.Wc E.isLimitWc (E.sV (E.b l))
+    obtain ⟨j', kj, ki, -⟩ := IsCofilteredOrEmpty.cone_objs j i
+    exact ⟨j', kj, E.res ki r₀, by rw [E.t_res]; exact hr₀.symm⟩
+  obtain ⟨j, k, h⟩ := E.exists_hom_forall (j₂ := j₀)
+    (fun j' _ l ↦ ∃ r, E.t j' r = E.sV (E.b l))
+    (fun {j j'} k' k l hl ↦ by
+      obtain ⟨r, hr⟩ := hl
+      exact ⟨E.res k' r, by rw [E.t_res]; exact hr⟩)
+    (fun j k l ↦ by
+      obtain ⟨j', k', r, hr⟩ := hex j l
+      exact ⟨j', k', r, hr⟩)
+  choose r hr using h
+  exact ⟨j, k, r, hr⟩
+
+/-- (Implementation) The basic opens of the limit lifts of the generators are affine: they
+are the basic opens of the affine `V`, transported into the limit `W`. -/
+lemma isAffineOpen_basicOpen_sV (l : Fin E.n) :
+    IsAffineOpen (E.Wc.pt.basicOpen (E.sV (E.b l))) := by
+  rw [E.basicOpen_sV]
+  exact (E.hV.basicOpen (E.b l)).preimage_of_isOpenImmersion _
+    (by rw [E.opensRange_WUι_comp_Uι]; exact E.hb l)
+
+/-- (Implementation) Below any index, there is a pre-stage: lifts of the generators whose
+basic opens are affine and cover. The covering condition descends from the limit by
+`exists_map_eq_top`, and affineness by descending the affine limit basic open
+(Stacks 01Z4). -/
+lemma exists_preStage_hom (j₀ : Over E.i₀) :
+    ∃ (P : E.PreStage), Nonempty (P.j ⟶ j₀) := by
+  -- Step 1: lifts with the covering condition.
+  obtain ⟨j₁, k₁, r, hr⟩ := E.exists_r j₀
+  have hU : E.Wc.π.app j₁ ⁻¹ᵁ (⨆ l, (E.WD.obj j₁).basicOpen (r l)) = ⊤ := by
+    rw [Scheme.Hom.preimage_iSup]
+    simp_rw [Scheme.preimage_basicOpen_top]
+    have h : ∀ l, (E.Wc.π.app j₁).appTop (r l) = E.sV (E.b l) := hr
+    simp_rw [h]
+    exact E.iSup_basicOpen_sV
+  obtain ⟨j₂, k₂, hk₂⟩ := exists_map_eq_top E.WD E.Wc E.isLimitWc _ hU
+  set r₂ : Fin E.n → Γ(E.WD.obj j₂, ⊤) := fun l ↦ E.res k₂ (r l) with hr₂def
+  have hr₂ : ∀ l, E.t j₂ (r₂ l) = E.sV (E.b l) := fun l ↦ by rw [hr₂def, E.t_res, hr]
+  have hcov₂ : ⨆ l, (E.WD.obj j₂).basicOpen (r₂ l) = ⊤ := by
+    have hb : ∀ l, (E.WD.obj j₂).basicOpen (r₂ l) =
+        E.WD.map k₂ ⁻¹ᵁ ((E.WD.obj j₁).basicOpen (r l)) :=
+      fun l ↦ (Scheme.preimage_basicOpen_top (E.WD.map k₂) (r l)).symm
+    simp_rw [hb, ← Scheme.Hom.preimage_iSup, hk₂]
+  -- Step 2: affineness of the basic opens, by descending the affine limit basic open
+  -- and equalizing (Stacks 01Z4).
+  have hex : ∀ (j : Over E.i₀) (k : j ⟶ j₂) (l : Fin E.n),
+      ∃ (ja : Over E.i₀) (ka : ja ⟶ j),
+        IsAffineOpen ((E.WD.obj ja).basicOpen (E.res (ka ≫ k) (r₂ l))) := by
+    intro j k l
+    obtain ⟨i, O, hO, hOeq⟩ := exists_isAffineOpen_preimage_eq E.WD E.Wc E.isLimitWc _
+      (E.isAffineOpen_basicOpen_sV l)
+    obtain ⟨j', kj, ki, -⟩ := IsCofilteredOrEmpty.cone_objs j i
+    have hpre : E.Wc.π.app j' ⁻¹ᵁ ((E.WD.obj j').basicOpen (E.res (kj ≫ k) (r₂ l))) =
+        E.Wc.π.app j' ⁻¹ᵁ (E.WD.map ki ⁻¹ᵁ O) := by
+      rw [Scheme.preimage_basicOpen_top, ← Scheme.Hom.comp_preimage, E.Wc.w ki, hOeq]
+      congr 1
+      exact (E.t_res (kj ≫ k) (r₂ l)).trans (hr₂ l)
+    obtain ⟨j'', k'', heq⟩ := exists_map_preimage_eq_map_preimage E.WD E.Wc E.isLimitWc
+      (TopologicalSpace.NoetherianSpace.isCompact _)
+      (TopologicalSpace.NoetherianSpace.isCompact _) hpre
+    refine ⟨j'', k'' ≫ kj, ?_⟩
+    have e : (E.WD.obj j'').basicOpen (E.res ((k'' ≫ kj) ≫ k) (r₂ l)) =
+        E.WD.map k'' ⁻¹ᵁ ((E.WD.obj j').basicOpen (E.res (kj ≫ k) (r₂ l))) := by
+      rw [Scheme.preimage_basicOpen_top]
+      congr 1
+      rw [Category.assoc]
+      exact (E.res_res (kj ≫ k) k'' _).symm
+    rw [e, heq]
+    exact (hO.preimage (E.WD.map ki)).preimage (E.WD.map k'')
+  obtain ⟨j₃, k₃, h₃⟩ := E.exists_hom_forall (j₂ := j₂)
+    (fun j' k l ↦ IsAffineOpen ((E.WD.obj j').basicOpen (E.res k (r₂ l))))
+    (fun {j j'} k' k l hl ↦ by
+      have e : (E.WD.obj j').basicOpen (E.res (k' ≫ k) (r₂ l)) =
+          E.WD.map k' ⁻¹ᵁ ((E.WD.obj j).basicOpen (E.res k (r₂ l))) := by
+        rw [Scheme.preimage_basicOpen_top]
+        congr 1
+        exact (E.res_res k k' _).symm
+      rw [e]
+      exact hl.preimage _)
+    hex
+  have hcov₃ : ⨆ l, (E.WD.obj j₃).basicOpen (E.res k₃ (r₂ l)) = ⊤ := by
+    have hb : ∀ l, (E.WD.obj j₃).basicOpen (E.res k₃ (r₂ l)) =
+        E.WD.map k₃ ⁻¹ᵁ ((E.WD.obj j₂).basicOpen (r₂ l)) :=
+      fun l ↦ (Scheme.preimage_basicOpen_top (E.WD.map k₃) (r₂ l)).symm
+    simp_rw [hb, ← Scheme.Hom.preimage_iSup, hcov₂, Scheme.Hom.preimage_top]
+  exact ⟨⟨j₃, fun l ↦ E.res k₃ (r₂ l), fun l ↦ by rw [E.t_res, hr₂], hcov₃, h₃⟩,
+    ⟨(k₃ ≫ k₂) ≫ k₁⟩⟩
+
+/-- (Implementation) Equalize two families of sections with equal limit restrictions at a
+common finer index. -/
+lemma exists_hom_res_eq {j₂ : Over E.i₀} (x y : Fin E.n → Γ(E.WD.obj j₂, ⊤))
+    (h : ∀ l, E.t j₂ (x l) = E.t j₂ (y l)) :
+    ∃ (j : Over E.i₀) (k : j ⟶ j₂), ∀ l, E.res k (x l) = E.res k (y l) := by
+  apply E.exists_hom_forall (fun j k l ↦ E.res k (x l) = E.res k (y l))
+  · intro j j' k' k l hl
+    exact (E.res_res k k' _).symm.trans
+      ((congrArg (fun z ↦ E.res k' z) hl).trans (E.res_res k k' _))
+  · intro j k l
+    have hcpt : IsCompact ((⊤ : (E.WD.obj j).Opens) : Set (E.WD.obj j)) := isCompact_univ
+    obtain ⟨j', k', hk'⟩ := exists_app_map_eq_map_of_isLimit E.WD E.Wc E.isLimitWc hcpt
+      (E.res k (x l)) (E.res k (y l))
+      (show E.t j (E.res k (x l)) = E.t j (E.res k (y l)) by rw [E.t_res, E.t_res, h])
+    refine ⟨j', k', ?_⟩
+    exact (E.res_res k k' _).symm.trans (hk'.trans (E.res_res k k' _))
+
+instance : Nonempty E.Stage := by
+  obtain ⟨P, -⟩ := E.exists_preStage_hom (Over.mk (𝟙 E.i₀))
+  exact ⟨P.stage⟩
+
+instance : IsCofilteredOrEmpty E.Stage where
+  cone_objs T₁ T₂ := by
+    obtain ⟨j', k₁, k₂, -⟩ := IsCofilteredOrEmpty.cone_objs T₁.j T₂.j
+    obtain ⟨j, k, hk⟩ := E.exists_hom_res_eq (fun l ↦ E.res k₁ (T₁.r l))
+      (fun l ↦ E.res k₂ (T₂.r l)) (fun l ↦ by rw [E.t_res, E.t_res, T₁.hr, T₂.hr])
+    have hmap : T₂.A.map (resAlgHom (k ≫ k₂)) ≤ E.fiberProduct j := by
+      rintro p ⟨q, hq, rfl⟩
+      exact resAlgHom_mem_fiberProduct _ (T₂.A_le_fiberProduct hq)
+    refine ⟨T₁.restrict (k ≫ k₁) (T₂.A.map (resAlgHom (k ≫ k₂))) hmap (T₂.hAfg.map _),
+      T₁.restrictHom _ _ _ _, ⟨k ≫ k₂, fun l ↦ ?_, fun p hp ↦ ?_⟩, trivial⟩
+    · exact (E.res_res k₂ k _).symm.trans ((hk l).symm.trans (E.res_res k₁ k _))
+    · exact T₁.le_restrict_A _ _ _ _ ⟨p, hp, rfl⟩
+  cone_maps T₁ T₂ f g := by
+    obtain ⟨j', k, hk⟩ := IsCofilteredOrEmpty.cone_maps f.base g.base
+    refine ⟨T₁.restrict k ⊥ bot_le Subalgebra.fg_bot, T₁.restrictHom _ _ _ _, ?_⟩
+    exact E.stageHom_ext (by simpa using hk)
+
+instance : IsCofiltered E.Stage where
+
+/-- (Implementation) The index functor from stages to the base indices. By
+`exists_preStage_hom` and the restriction construction it is initial: limits over the
+system of the `Wⱼ` may be computed over the category of stages. -/
+@[simps] def stageIndex : E.Stage ⥤ Over E.i₀ where
+  obj T := T.j
+  map f := f.base
+
+instance : E.stageIndex.Initial := by
+  apply Functor.initial_of_exists_of_isCofiltered
+  · intro j
+    obtain ⟨P, ⟨k⟩⟩ := E.exists_preStage_hom j
+    exact ⟨P.stage, ⟨k⟩⟩
+  · intro j T s s'
+    obtain ⟨j', k, hk⟩ := IsCofilteredOrEmpty.cone_maps s s'
+    exact ⟨T.restrict k ⊥ bot_le Subalgebra.fg_bot, T.restrictHom _ _ _ _, by simpa using hk⟩
 
 end ExtensionData
 
