@@ -133,6 +133,36 @@ instance isNoetherian_obj (N : S.NoetherianApproximation) (i : N.I) : IsNoetheri
   have := LocallyOfFiniteType.isLocallyNoetherian (specULiftZIsTerminal.from (N.D.obj i))
   ⟨⟩
 
+/-- Transport a Noetherian approximation along an isomorphism of schemes. -/
+noncomputable def ofIso {S' : Scheme.{u}} (e : S ≅ S') (N : S.NoetherianApproximation) :
+    S'.NoetherianApproximation where
+  I := N.I
+  D := N.D
+  locallyOfFiniteType_obj := N.locallyOfFiniteType_obj
+  compactSpace_obj := N.compactSpace_obj
+  isAffineHom_map := N.isAffineHom_map
+  π := (Functor.const N.I).map e.inv ≫ N.π
+  isLimit := N.isLimit.ofIsoLimit <| Cone.ext e fun i ↦ by simp
+
+/-- Restrict a Noetherian approximation to the over category of one of its indices. -/
+noncomputable def over (N : S.NoetherianApproximation) (i : N.I) :
+    S.NoetherianApproximation where
+  I := Over i
+  D := Over.forget i ⋙ N.D
+  locallyOfFiniteType_obj _ := N.locallyOfFiniteType_obj _
+  compactSpace_obj _ := N.compactSpace_obj _
+  isAffineHom_map _ := N.isAffineHom_map _
+  π := Functor.whiskerLeft (Over.forget i) N.π
+  isLimit := (Functor.Initial.isLimitWhiskerEquiv (Over.forget i) (Cone.mk S N.π)).symm N.isLimit
+
+@[simp] lemma over_I (N : S.NoetherianApproximation) (i : N.I) : (N.over i).I = Over i := rfl
+
+@[simp] lemma over_D (N : S.NoetherianApproximation) (i : N.I) :
+    (N.over i).D = Over.forget i ⋙ N.D := rfl
+
+@[simp] lemma over_π_app (N : S.NoetherianApproximation) (i : N.I) (j : Over i) :
+    (N.over i).π.app j = N.π.app j.left := rfl
+
 variable (S : Scheme.{u}) [IsAffine S]
 
 /-- **Noetherian approximation of an affine scheme**: the spectra of the finitely
@@ -299,6 +329,187 @@ noncomputable def isLimitOfIsLimitOpensCone [IsCofiltered I] (i₀ : I) {σ : Ty
     rw [← hma, IsOpenImmersion.lift_fac]
 
 end IsLimitOfOpensCone
+
+namespace Scheme.NoetherianApproximation
+
+/-!
+### The induction step of absolute Noetherian approximation
+
+Following the proof of Stacks Project Tag 07RN, we extend a Noetherian approximation of a
+quasi-compact open `U` of a quasi-separated scheme `X` to a Noetherian approximation of
+`U ∪ V` for an affine open `V`. The extension is built from *stages*: a stage consists of an
+index `j` of (the restriction to a coslice of) the approximation of `U`, a lift `r` of the
+generators of `W = U ⊓ V` to sections at the stage `j`, and a finitely generated
+`ℤ`-subalgebra `A` of `Γ(X, V) × Γ(Wⱼ, ⊤)` — an algebraic incarnation of the fiber product
+`Γ(V) ×_{Γ(W)} Γ(Wⱼ)` of Stacks 07RN. The scheme attached to a stage is the pushout of
+`Dⱼ ⟵ Wⱼ ⟶ Spec A` along open immersions.
+-/
+
+/-- (Implementation) The setup for the induction step of absolute Noetherian approximation
+(Stacks Project Tag 07RN): a quasi-separated scheme `X` covered by a quasi-compact open `U`
+carrying a Noetherian approximation `N` and an affine open `V`; the intersection `U ⊓ V`
+is descended to a quasi-compact open `W₀` at a stage `i₀` of `N`, and is exhibited as a
+finite union of basic opens of sections `b l` of `V`. -/
+structure ExtensionData where
+  /-- The ambient scheme. -/
+  X : Scheme.{u}
+  /-- The ambient scheme is quasi-separated. -/
+  [qs : QuasiSeparatedSpace X]
+  /-- The already approximated quasi-compact open. -/
+  U : X.Opens
+  /-- The new affine open. -/
+  V : X.Opens
+  hUV : U ⊔ V = ⊤
+  hV : IsAffineOpen V
+  /-- A Noetherian approximation of `U`. -/
+  N : U.toScheme.NoetherianApproximation
+  /-- The stage of `N` at which `U ⊓ V` is descended. -/
+  i₀ : N.I
+  /-- The descended intersection. -/
+  W₀ : (N.D.obj i₀).Opens
+  hW₀c : IsCompact (W₀ : Set (N.D.obj i₀))
+  hW₀ : N.π.app i₀ ⁻¹ᵁ W₀ = U.ι ⁻¹ᵁ V
+  /-- The number of chosen generators of the intersection. -/
+  n : ℕ
+  /-- The chosen generators of the intersection: sections of `V` whose basic opens
+  cover `U ⊓ V`. -/
+  b : Fin n → Γ(X, V)
+  hb (l : Fin n) : X.basicOpen (b l) ≤ U ⊓ V
+  hb' : U ⊓ V = ⨆ l, X.basicOpen (b l)
+
+namespace ExtensionData
+
+attribute [instance] qs
+
+variable (E : ExtensionData.{u})
+
+/-- (Implementation) The limit cone of the approximation of `U`. -/
+abbrev cone : Cone E.N.D := Cone.mk _ E.N.π
+
+/-- (Implementation) `W = U ⊓ V` as an open of `U`. -/
+abbrev WU : E.U.toScheme.Opens := E.N.π.app E.i₀ ⁻¹ᵁ E.W₀
+
+/-- (Implementation) The system of the descended intersections `Wⱼ`. -/
+noncomputable abbrev WD : Over E.i₀ ⥤ Scheme.{u} := opensDiagram E.N.D E.i₀ E.W₀
+
+/-- (Implementation) The cone exhibiting `W` as the limit of the `Wⱼ`. -/
+noncomputable abbrev Wc : Cone E.WD := opensCone E.N.D E.cone E.i₀ E.W₀
+
+/-- (Implementation) `W` is the limit of the `Wⱼ`. -/
+noncomputable def isLimitWc : IsLimit E.Wc :=
+  isLimitOpensCone E.N.D E.cone E.N.isLimit E.i₀ E.W₀
+
+instance (j : Over E.i₀) : CompactSpace (E.WD.obj j) :=
+  isCompact_iff_compactSpace.mp
+    (QuasiCompact.isCompact_preimage (f := E.N.D.map j.hom) _ E.W₀.2 E.hW₀c)
+
+instance (j : Over E.i₀) : IsLocallyNoetherian (E.WD.obj j) := by
+  have : IsLocallyNoetherian (E.N.D.obj j.left) := (E.N.isNoetherian_obj j.left).1
+  exact isLocallyNoetherian_of_isOpenImmersion (Scheme.Opens.ι _)
+
+/-- (Implementation) The restriction of a section of `V` to `W`, viewed inside the limit of
+the `Wⱼ`. -/
+noncomputable def sV : Γ(E.X, E.V) ⟶ Γ(E.Wc.pt, ⊤) :=
+  (E.WU.ι ≫ E.U.ι).appLE E.V ⊤ (by
+    rw [Scheme.Hom.comp_preimage, ← E.hW₀, Scheme.Opens.ι_preimage_self])
+
+/-- (Implementation) The restriction of a section at the stage `j` to the limit `W`. -/
+noncomputable abbrev t (j : Over E.i₀) : Γ(E.WD.obj j, ⊤) ⟶ Γ(E.Wc.pt, ⊤) :=
+  (E.Wc.π.app j).appTop
+
+/-- (Implementation) The transition map on sections of the system `Wⱼ`. -/
+noncomputable abbrev res {j j' : Over E.i₀} (f : j' ⟶ j) :
+    Γ(E.WD.obj j, ⊤) ⟶ Γ(E.WD.obj j', ⊤) :=
+  (E.WD.map f).appTop
+
+lemma t_res {j j' : Over E.i₀} (f : j' ⟶ j) (x : Γ(E.WD.obj j, ⊤)) :
+    E.t j' (E.res f x) = E.t j x := by
+  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, E.Wc.w f]
+
+lemma res_res {j j' j'' : Over E.i₀} (f : j' ⟶ j) (g : j'' ⟶ j') (x : Γ(E.WD.obj j, ⊤)) :
+    E.res g (E.res f x) = E.res (g ≫ f) x := by
+  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← Functor.map_comp]
+
+/-- (Implementation) A stage of the extended system: an index `j`, a lift `r` of the
+generators of `W` to `Wⱼ` such that the basic opens of the `r l` form an affine cover of
+`Wⱼ`, and a finitely generated `ℤ`-subalgebra `A` of `Γ(X, V) × Γ(Wⱼ, ⊤)` contained in the
+fiber product over `Γ(W, ⊤)`, containing the tautological elements `(b l, r l)` and
+generating all the local rings of the cover (condition `hgen`, ensuring that `Wⱼ ⟶ Spec A`
+is an open immersion). -/
+structure Stage where
+  /-- The underlying index. -/
+  j : Over E.i₀
+  /-- The lifts of the generators of the intersection. -/
+  r : Fin E.n → Γ(E.WD.obj j, ⊤)
+  hr (l : Fin E.n) : E.t j (r l) = E.sV (E.b l)
+  hcov : ⨆ l, (E.WD.obj j).basicOpen (r l) = ⊤
+  haff (l : Fin E.n) : IsAffineOpen ((E.WD.obj j).basicOpen (r l))
+  /-- The finite-stage coefficient algebra. -/
+  A : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤))
+  hA : ∀ p ∈ A, E.sV p.1 = E.t j p.2
+  hAfg : A.FG
+  hmem (l : Fin E.n) : (E.b l, r l) ∈ A
+  hgen (l : Fin E.n) (z : Γ(E.WD.obj j, (E.WD.obj j).basicOpen (r l))) :
+    ∃ (m : ℕ) (p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)), p ∈ A ∧
+      ((E.WD.obj j).presheaf.map (homOfLE le_top).op).hom p.2 =
+        z * ((E.WD.obj j).presheaf.map (homOfLE le_top).op).hom (r l) ^ m
+
+/-- (Implementation) A morphism of stages over a morphism of underlying indices: the lifts
+`r` are compatible, and the coefficient algebra of the target maps into that of the
+source. -/
+@[ext] structure Stage.Hom (T T' : E.Stage) where
+  /-- The underlying index morphism. -/
+  base : T.j ⟶ T'.j
+  res_r (l : Fin E.n) : E.res base (T'.r l) = T.r l
+  map_mem (p : Γ(E.X, E.V) × Γ(E.WD.obj T'.j, ⊤)) (hp : p ∈ T'.A) :
+    (p.1, E.res base p.2) ∈ T.A
+
+lemma res_id (j : Over E.i₀) (x : Γ(E.WD.obj j, ⊤)) : E.res (𝟙 j) x = x := by
+  change ((E.WD.map (𝟙 j)).appTop).hom x = x
+  rw [CategoryTheory.Functor.map_id]
+  simp
+
+instance : Category E.Stage where
+  Hom := Stage.Hom E
+  id T := ⟨𝟙 T.j, fun l ↦ E.res_id _ _, fun p hp ↦ by simpa [E.res_id] using hp⟩
+  comp {T T' T''} f g := ⟨f.base ≫ g.base,
+    fun l ↦ by rw [← E.res_res g.base f.base, g.res_r, f.res_r],
+    fun p hp ↦ by
+      have := f.map_mem _ (g.map_mem p hp)
+      rwa [E.res_res] at this⟩
+  id_comp f := Stage.Hom.ext (Category.id_comp f.base)
+  comp_id f := Stage.Hom.ext (Category.comp_id f.base)
+  assoc f g h := Stage.Hom.ext (Category.assoc f.base g.base h.base)
+
+@[simp] lemma id_base (T : E.Stage) : (𝟙 T : T ⟶ T).base = 𝟙 T.j := rfl
+
+@[simp] lemma comp_base {T T' T'' : E.Stage} (f : T ⟶ T') (g : T' ⟶ T'') :
+    (f ≫ g).base = f.base ≫ g.base := rfl
+
+@[ext] lemma stageHom_ext {T T' : E.Stage} {f g : T ⟶ T'} (h : f.base = g.base) : f = g :=
+  Stage.Hom.ext h
+
+variable {E}
+
+/-- (Implementation) The ring map from the coefficient algebra of a stage to the sections
+of `Wⱼ`. -/
+noncomputable def Stage.ρ (T : E.Stage) : CommRingCat.of ↥T.A ⟶ Γ(E.WD.obj T.j, ⊤) :=
+  CommRingCat.ofHom ((RingHom.snd _ _).comp (Subalgebra.val T.A).toRingHom)
+
+/-- (Implementation) The morphism from `Wⱼ` to the spectrum of the coefficient algebra of a
+stage. By `Stage.isOpenImmersion_toSpec` this is an open immersion. -/
+noncomputable def Stage.toSpec (T : E.Stage) :
+    E.WD.obj T.j ⟶ Spec (CommRingCat.of ↥T.A) :=
+  (E.WD.obj T.j).toSpecΓ ≫ Spec.map T.ρ
+
+/-- (Implementation) The heart of Stacks 07RN (via Tags 01Z7 and 01Z9): the morphism from
+`Wⱼ` to the spectrum of the coefficient algebra of a stage is an open immersion. -/
+instance Stage.isOpenImmersion_toSpec (T : E.Stage) : IsOpenImmersion T.toSpec := by
+  sorry
+
+end ExtensionData
+
+end Scheme.NoetherianApproximation
 
 /-- **Absolute Noetherian approximation** (Stacks Project Tag 01ZA): every quasi-compact
 quasi-separated scheme is the limit of a cofiltered system of schemes of finite type over
