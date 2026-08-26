@@ -254,11 +254,11 @@ lemma preimage_opensRange_pushout_inl_of_isPullback (H : IsPullback γ g' g β) 
       obtain ⟨y, hy⟩ := hp
       obtain ⟨u, -, hu⟩ := (pushout_inl_eq_inr_iff f g y (β z')).mp
         (by rwa [Scheme.Hom.comp_apply] at hy)
-      obtain ⟨u', -, rfl⟩ := exists_preimage_of_isPullback H u z' hu
-      show pushout.inr f' g' (g' u') ∈ (pushout.inl f' g').opensRange
+      obtain ⟨u', -, rfl⟩ := Scheme.exists_preimage_of_isPullback H u z' hu
+      change pushout.inr f' g' (g' u') ∈ (pushout.inl f' g').opensRange
       exact ⟨f' u', (pushout_inl_eq_inr_iff f' g' _ _).mpr ⟨u', rfl, rfl⟩⟩
   · rintro p ⟨y', rfl⟩
-    show (pushout.inl f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) y' ∈
+    change (pushout.inl f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) y' ∈
       (pushout.inl f g).opensRange
     rw [pushout.inl_desc, Scheme.Hom.comp_apply]
     exact ⟨α y', rfl⟩
@@ -287,12 +287,12 @@ lemma preimage_opensRange_pushout_inr_of_isPullback (H : IsPullback γ f' f α) 
       obtain ⟨z, hz⟩ := hp
       obtain ⟨u, hu, -⟩ := (pushout_inl_eq_inr_iff f g (α y') z).mp
         (by rw [Scheme.Hom.comp_apply] at hz; exact hz.symm)
-      obtain ⟨u', -, rfl⟩ := exists_preimage_of_isPullback H u y' hu
-      show pushout.inl f' g' (f' u') ∈ (pushout.inr f' g').opensRange
+      obtain ⟨u', -, rfl⟩ := Scheme.exists_preimage_of_isPullback H u y' hu
+      change pushout.inl f' g' (f' u') ∈ (pushout.inr f' g').opensRange
       exact ⟨g' u', ((pushout_inl_eq_inr_iff f' g' _ _).mpr ⟨u', rfl, rfl⟩).symm⟩
     · exact hmem
   · rintro p ⟨z', rfl⟩
-    show (pushout.inr f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) z' ∈
+    change (pushout.inr f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) z' ∈
       (pushout.inr f g).opensRange
     rw [pushout.inr_desc, Scheme.Hom.comp_apply]
     exact ⟨β z', rfl⟩
