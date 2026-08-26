@@ -2,6 +2,8 @@ module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
+public import WeilConjectures.Blowup.Affine.BaseChange
+public import WeilConjectures.Blowup.Affine.BaseChangeSurjectivity
 public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.Affine.Localization
@@ -10,6 +12,7 @@ public import WeilConjectures.Blowup.Affine.Principalization
 public import WeilConjectures.Blowup.Affine.Projective
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
+public import WeilConjectures.Blowup.BaseChange
 public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Density
@@ -41,6 +44,7 @@ public import WeilConjectures.Compactification.Modification
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Compactification.StrictTransformBlowup
 public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
