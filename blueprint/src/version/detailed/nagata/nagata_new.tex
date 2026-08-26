@@ -166,7 +166,7 @@ equality has explicitly been fixed.
   \label{def:nagata-dense-compactification}
   \uses{def:nagata-compactification,
     def:nagata-scheme-theoretically-dense-open}
-  \lean{AlgebraicGeometry.Compactification.IsSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant}
 
   A compactification $X\xrightarrow{j}\overline X\to S$ is
   \emph{scheme-theoretically dense} when its first map has the predicate
@@ -182,9 +182,10 @@ equality has explicitly been fixed.
   \label{lemma:nagata-dense-compactification-characterization}
   \uses{def:nagata-dense-compactification,
     def:nagata-scheme-theoretic-image,lemma:nagata-scheme-image-ideal-qc}
-  \lean{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDense_iff}
+  \lean{AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι}
 
-  For a quasi-compact open immersion $j$, the density condition in
+  For an open immersion $j$ (no quasi-compactness is needed), the density
+  condition in
   \Cref{def:nagata-dense-compactification} is equivalent to the assertion that
   the image inclusion
   $j_{\mathrm{im}}\colon\operatorname{SIm}(j)\to\overline X$ is an
@@ -562,7 +563,7 @@ equality has explicitly been fixed.
 \begin{proposition}[Properties of the dense-refinement construction]
   \label{prop:nagata-dense-refinement}
   \uses{def:nagata-dense-compactification,def:nagata-dense-refinement}
-  \lean{AlgebraicGeometry.Compactification.denseRefinement_isSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_denseRefinement_i}
 
   The object $\mathsf{Dense}(C)$ is a scheme-theoretically dense
   compactification of the same morphism as $C$.
@@ -839,7 +840,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Relative projective space]
   \label{def:nagata-relative-projective-space}
   \uses{def:nagata-relative-proj,lemma:nagata-relative-proj-exists}
-  \lean{AlgebraicGeometry.ProjectiveSpace}
+  \lean{AlgebraicGeometry.RelativeProjectiveSpace}
 
   For $r\in\mathbb N$, define the relative projective-space interface by
   \[
@@ -867,7 +868,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Projective morphisms are proper]
   \label{lemma:nagata-projective-is-proper}
   \uses{def:nagata-projective-morphism}
-  \lean{AlgebraicGeometry.IsProjective.isProper}
+  \lean{AlgebraicGeometry.RelativeProjectiveSpace.isProper_over}
 
   Every projective morphism of schemes is proper.
 \end{lemma}
@@ -4978,13 +4979,20 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/081S}{Tag 081S}]{stacks-project}}]
   \label{lemma:nagata-elimination-indeterminacy}
   \uses{def:nagata-elimination-indeterminacy}
-  \lean{AlgebraicGeometry.exists_admissibleBlowup_strictTransform_open}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap}
 
   The morphism $X^{\mathrm{el}}(q,U)\to X$ is $U$-admissible, and the
   constructed strict-transform projection
   $q^{\mathrm{el}}\colon Z^{\mathrm{el}}(q,U)\to X^{\mathrm{el}}(q,U)$ is
-  an open immersion.  Its restriction over $U$ is the original chosen
-  isomorphism $q^{-1}(U)\cong U$.
+  an open immersion.
+
+  This is exactly the formalised statement: the identification of the
+  restriction of $q^{\mathrm{el}}$ over $U$ with the original chosen
+  isomorphism $q^{-1}(U)\cong U$ is \emph{not} asserted here, because it is
+  already supplied to every consumer by
+  \Cref{lemma:nagata-strict-transform-over-complement}, which identifies the
+  part of any strict transform lying over the preserved open with the ordinary
+  base change.
 \end{lemma}
 
 \begin{proof}
@@ -5223,7 +5231,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-constructible-closed-support,
     def:nagata-finite-type-ideal-extension,
     def:nagata-separate-closed-subschemes}
-  \lean{AlgebraicGeometry.constructibleBoundarySeparationBlowup}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $T_1,T_2\subseteq U$ be disjoint constructible subsets closed in $U$.
@@ -5253,19 +5261,18 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-constructible-closed-support,
     lemma:nagata-extend-finite-type-ideal,
-    lemma:nagata-separate-closed-subschemes,
-    lemma:nagata-strict-transform-closure-characterization}
+    lemma:nagata-separate-closed-subschemes}
   By \Cref{lemma:nagata-constructible-closed-support},
   $V(\mathcal J_i)=T_i$ in $U$.  The restriction equality from
   \Cref{lemma:nagata-extend-finite-type-ideal} consequently gives
   $|Z_i\cap U|=T_i$, so $Z_1\cap Z_2\cap U=\varnothing$.  Apply
   \Cref{lemma:nagata-separate-closed-subschemes}.  In the resulting
-  $U$-admissible blow-up, the strict transform of $Z_i$ is, by
-  \Cref{lemma:nagata-strict-transform-closure-characterization}, the
-  scheme-theoretic closure of its inverse image over $Z_i\cap U$.  Its
-  underlying closed set is therefore exactly the closure of the inverse image
-  of $T_i$.  The two strict transforms are disjoint, so these two closures
-  are disjoint as claimed.
+  $U$-admissible blow-up $\pi\colon X'\to X$, the closure of
+  $\pi^{-1}(T_i)$ is contained in the underlying set of the strict transform
+  of $Z_i$: the strict transform is closed in $X'$, and it contains every
+  point lying both over the preserved open and over $Z_i$ — in particular
+  every point of $\pi^{-1}(T_i)$.  The two strict transforms are disjoint,
+  so these two closures are disjoint as claimed.
 \end{proof}
 
 \begin{lemma}[Existence of constructible closed separators in a spectral space]
@@ -5362,7 +5369,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-elimination-indeterminacy,
     def:nagata-extended-admissible-blowup,
     def:nagata-maximal-isomorphism-open}
-  \lean{AlgebraicGeometry.exists_admissibleBlowup_strictTransform_isIso_near_closure}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
 
   Let $X$ be qcqs, let $q\colon Z\to X$ be proper, let $V\subseteq X$ be a
   quasi-compact open, set
@@ -5424,8 +5431,12 @@ correction explicit before it is sheafified and glued.
     prop:nagata-strict-transform-closed-fiber-product,
     lemma:nagata-strict-transform-closure-characterization,
     thm:nagata-global-blowup-complement}
-  Let $h\colon T\to X\times_SY$ be quasi-compact and quasi-separated, with
+  Let $h\colon T\to X\times_SY$ be quasi-compact, with
   first projection factoring through a quasi-compact open $U\subseteq X$.
+  (The Stacks Project assumes $h$ quasi-separated as well; the formalised
+  statement drops it, since the kernel ideal sheaf theory used here only needs
+  quasi-compactness, exactly as recorded for
+  \Cref{lemma:nagata-scheme-image-flat-base-change}.)
   Let $Z=\operatorname{SIm}(h)$ and let $\pi\colon X'\to X$ be a
   $U$-admissible blow-up.  Via the canonical identity
   $X'\times_XU\cong U$, let $h'$ be the lifted map to $X'\times_SY$.  Then
@@ -5459,7 +5470,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/0F3W}{Tag 0F3W}]{stacks-project}}]
   \label{lemma:nagata-isomorphism-near-closure}
   \uses{def:nagata-isomorphism-near-closure}
-  \lean{AlgebraicGeometry.exists_admissibleBlowup_strictTransform_isIso_near_closure}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
 
   If $U\to V$ is an isomorphism over an open neighbourhood of $T$, then
   $\mathsf{IsoBl}_{V,T}(q)\to X$ is $V$-admissible and the strict transform
@@ -5630,13 +5641,31 @@ correction explicit before it is sheafified and glued.
   \end{enumerate}
   The construction includes the maps $X'_i\to X_i$, the two open maps
   $X'_i\to\mathsf{CM}(X_1,X_2;U)$, and the identified copy of $U$.
+
+  \emph{Packaged interface.}  What is recorded as data — and what the
+  formalised structure \texttt{CommonModification} carries — is only: the two
+  $U$-admissible blow-ups $X'_i\to X_i$, the two open immersions
+  $X'_i\to\mathsf{CM}(X_1,X_2;U)$ together with the fact that they cover
+  $\mathsf{CM}(X_1,X_2;U)$, the two lifted copies of $U$ and their agreement in
+  the glued scheme, and separatedness and finite type of
+  $\mathsf{CM}(X_1,X_2;U)\to S$.  The stronger overlap identification of step~5
+  — that the two opens glue along \emph{exactly} $X'_{12}$ and not merely along
+  their topological intersection — is an internal step of the construction: it is
+  used in the proof of \Cref{lemma:nagata-common-modification} to obtain
+  separatedness of the glued scheme, and separatedness is part of the packaged
+  interface.  The downstream consumers
+  (\Cref{def:nagata-two-open-final-modification} and
+  \Cref{lemma:nagata-two-open-density-transport}) use only the packaged
+  interface: density transport needs the two charts to cover and the copies of
+  $U$ to agree, and the valuative lifting argument needs only separatedness of
+  $\mathsf{CM}(X_1,X_2;U)\to S$.
 \end{definition}
 
 \begin{lemma}[Properties of the common modification,
   {\cite[\href{https://stacks.math.columbia.edu/tag/0F3X}{Tag 0F3X}]{stacks-project}}]
   \label{lemma:nagata-common-modification}
   \uses{def:nagata-common-modification}
-  \lean{AlgebraicGeometry.exists_commonModification}
+  \lean{AlgebraicGeometry.nonempty_commonModification}
 
   Each constructed map $X'_i\to X_i$ is a $U$-admissible blow-up.  Each
   $X'_i\to\mathsf{CM}(X_1,X_2;U)$ is an open immersion, their two copies of
@@ -5686,7 +5715,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-scheme-image-strict-transform}
   \uses{def:nagata-scheme-theoretic-image,def:nagata-strict-transform,
     def:nagata-admissible-blowup,thm:nagata-global-blowup-complement}
-  \lean{AlgebraicGeometry.Scheme.Hom.schemeTheoreticImage_after_admissibleBlowup}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup}
 
   Let $V\to X\times_SY$ be quasi-compact and quasi-separated, and assume its
   projection to $X$ factors through an open $U\subseteq X$.  Let $Z$ be its
@@ -6155,7 +6184,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{definition}[Chosen dense compactifications of the two opens]
   \label{def:nagata-two-open-dense-compactifications}
   \uses{def:nagata-compactifiable,def:nagata-dense-refinement}
-  \lean{AlgebraicGeometry.HasCompactification.exists_isSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
 
   Let $C_i^0$ be the compactification selected by classical choice from the
   nonempty type witnessing compactifiability of $U_i\to S$.  Define
@@ -6168,7 +6197,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Properties of the chosen dense compactifications]
   \label{lemma:nagata-two-open-dense-compactifications}
   \uses{def:nagata-two-open-dense-compactifications}
-  \lean{AlgebraicGeometry.HasCompactification.exists_isSchemeTheoreticallyDense}
+  \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
 
   For $i=1,2$, the constructed $C_i$ is a scheme-theoretically dense
   compactification of $U_i\to S$; in particular $X_i\to S$ is proper and
@@ -6309,7 +6338,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{lemma}[Disjoint boundary closures persist]
   \label{lemma:nagata-boundary-disjoint-persists}
-  \lean{AlgebraicGeometry.StrictTransform.disjoint_of_disjoint}
+  \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_of_disjoint}
 
   If $\overline Z_{i,i}$ and $\overline Z_{i,j}$ are disjoint, then their
   strict transforms remain disjoint after every further $V_i$-admissible
@@ -6902,7 +6931,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Structural properties of the final common modification]
   \label{lemma:nagata-two-open-final-modification}
   \uses{def:nagata-two-open-final-modification}
-  \lean{AlgebraicGeometry.exists_commonModification}
+  \lean{AlgebraicGeometry.nonempty_commonModification}
 
   Each $W'_i\to W_i$ is $U$-admissible; the maps $W'_i\hookrightarrow W$
   are open immersions covering $W$; their copies of $U$ agree; and $W\to S$
@@ -7112,7 +7141,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-relative-projective-space,
     lemma:nagata-relative-proj-exists,
     lemma:nagata-relative-affine-space-charts}
-  \lean{AlgebraicGeometry.AffineSpace.openImmersion_into_projectiveSpace}
+  \lean{AlgebraicGeometry.AffineSpace.isOpenImmersion_toRelativeProjectiveSpace}
 
   For every $n$ and $S$, the map induced by
   $T_i\mapsto T_i/T_0$ identifies $\mathbb A^n_S$ with the standard open

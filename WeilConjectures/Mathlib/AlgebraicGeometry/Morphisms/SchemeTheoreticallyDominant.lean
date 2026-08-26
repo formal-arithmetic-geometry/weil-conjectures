@@ -12,16 +12,21 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Scheme-theoretically dominant morphisms
 
-Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in two independent groups.
+Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in three independent groups.
+
+## Basic characterizations
+
+- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
+  scheme-theoretically dominant if and only if the inclusion of its scheme-theoretic
+  image is an isomorphism;
+- `AlgebraicGeometry.Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant`: precomposing
+  with a scheme-theoretically dominant morphism does not change the kernel ideal sheaf.
 
 ## Flat base change for scheme-theoretic images
 
 Formation of scheme-theoretic images commutes with flat base change (blueprint:
 `lemma:nagata-scheme-image-flat-base-change`; Stacks Project Tag 081I):
 
-- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
-  scheme-theoretically dominant if and only if the inclusion of its scheme-theoretic
-  image is an isomorphism;
 - `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` and
   `AlgebraicGeometry.Scheme.Hom.ker_of_isPullback`: for `q : Y' ⟶ Y` flat, the kernel of
   the base change `T ×_Y Y' ⟶ Y'` is the pullback of the kernel of `g`;
@@ -75,6 +80,12 @@ theorem isSchemeTheoreticallyDominant_iff_isIso_imageι (g : T ⟶ Y) :
     IsSchemeTheoreticallyDominant g ↔ IsIso g.imageι :=
   (isSchemeTheoreticallyDominant_iff g).trans
     (Scheme.isIso_subschemeι_iff_eq_bot g.ker).symm
+
+/-- Precomposition with a scheme-theoretically dominant morphism does not change the
+kernel ideal sheaf. -/
+lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
+    (γ : T ⟶ Y) [IsSchemeTheoreticallyDominant d] : (d ≫ γ).ker = γ.ker := by
+  rw [Scheme.Hom.ker_comp, d.ker_eq_bot, Scheme.IdealSheafData.map_bot]
 
 variable (g : T ⟶ Y) [QuasiCompact g] {Y' : Scheme.{u}} (q : Y' ⟶ Y) [Flat q]
 

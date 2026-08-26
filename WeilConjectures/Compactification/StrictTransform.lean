@@ -28,6 +28,8 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 ## Main definitions
 
 - `AlgebraicGeometry.strictTransformOpen f π U`: the open locus of `Y ×_X X'` over `U`;
+- `AlgebraicGeometry.strictTransformOpenLift`: the factorization through the open locus
+  of a morphism to `Y ×_X X'` whose composite to the base lands in `U`;
 - `AlgebraicGeometry.strictTransform f π U`: the strict transform, i.e. the
   scheme-theoretic image of the open locus in `Y ×_X X'`
   (blueprint: `def:nagata-strict-transform`);
@@ -38,15 +40,29 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 
 ## Main results
 
-- separatedness, quasi-compactness and local finite type of
+- separatedness, quasi-compactness, local finite type and being a closed immersion of
   `AlgebraicGeometry.strictTransformMap`, inherited from the transformed morphism;
 - `AlgebraicGeometry.isIso_pullback_fst_strictTransformι`: the strict transform
   contains the whole open locus over `U`;
+- the underlying set of the strict transform is squeezed between the inverse image of
+  the `U`-part of the image (`mem_range_strictTransformMap_of_mem_of_mem_range`) and
+  the full inverse image of the image
+  (`range_strictTransformMap_subset_preimage_range`); consequently
+  disjointness of closed subschemes persists along strict transforms
+  (`disjoint_range_strictTransformMap_of_disjoint`; blueprint:
+  `lemma:nagata-boundary-disjoint-persists`; proof order item 37);
 - `AlgebraicGeometry.isPullback_strictTransformOpen`: if `π` is an isomorphism over
   `U`, the open locus is canonically `Y ×_X U`;
 - `AlgebraicGeometry.isPullback_strictTransform_over`: the combination of the previous
   two, identifying the part of the strict transform lying over `U` with the ordinary base
-  change `Y ×_X U` (blueprint: `lemma:nagata-strict-transform-over-complement`).
+  change `Y ×_X U` (blueprint: `lemma:nagata-strict-transform-over-complement`);
+- `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι_of_isCompact`: the standing
+  quasi-compactness assumption of the comparison API, discharged from finiteness data;
+- `AlgebraicGeometry.ker_strictTransformMap`: when the inclusion of the open locus is
+  quasi-compact, the strict transform and its open locus have the same scheme-theoretic
+  image in `X'`, since the factorization of the open locus through the strict transform
+  is scheme-theoretically dominant
+  (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`).
 
 -/
 
@@ -71,6 +87,52 @@ fibre product to the base. -/
 lemma strictTransformOpen_eq_preimage :
     strictTransformOpen f π U = (pullback.fst f π ≫ f) ⁻¹ᵁ U := by
   rw [strictTransformOpen, ← Scheme.Hom.comp_preimage, pullback.condition]
+
+/-- **The standing quasi-compactness assumption, discharged from finiteness data**: if
+the fibre product `Y ×_X X'` is quasi-separated, `f` and `π` are quasi-compact and `U`
+is a quasi-compact open of `X`, then the inclusion of the open locus over `U` is a
+quasi-compact morphism, so the whole comparison API below applies.
+
+This is the general form of
+`AlgebraicGeometry.quasiCompact_strictTransformOpen_ι`, which is stated for the
+blow-up of an ideal sheaf along the complement of its support. -/
+theorem quasiCompact_strictTransformOpen_ι_of_isCompact [QuasiSeparatedSpace ↥(pullback f π)]
+    [QuasiCompact f] [QuasiCompact π] (hU : IsCompact (U : Set X)) :
+    QuasiCompact (strictTransformOpen f π U).ι := by
+  have : QuasiCompact (pullback.fst f π) := MorphismProperty.pullback_fst _ _ ‹_›
+  have hcpt : IsCompact ((strictTransformOpen f π U : Set ↥(pullback f π))) := by
+    rw [strictTransformOpen_eq_preimage]
+    exact QuasiCompact.isCompact_preimage (f := pullback.fst f π ≫ f) _ U.isOpen hU
+  have : CompactSpace (strictTransformOpen f π U).toScheme :=
+    isCompact_iff_compactSpace.mp hcpt
+  infer_instance
+
+section Lift
+
+variable {T : Scheme.{u}} (k : T ⟶ pullback f π)
+    (hk : Set.range (k ≫ pullback.fst f π ≫ f) ⊆ (U : Set X))
+
+include hk in
+/-- A morphism to the fibre product whose composite to the base lands in `U` has range
+inside the open locus over `U`. -/
+lemma range_subset_range_strictTransformOpen_ι :
+    Set.range k ⊆ Set.range (strictTransformOpen f π U).ι := by
+  rw [Scheme.Opens.range_ι, strictTransformOpen_eq_preimage]
+  rintro _ ⟨v, rfl⟩
+  simpa [Scheme.Hom.comp_apply] using hk ⟨v, rfl⟩
+
+/-- **The lift into the open locus**: a morphism to the fibre product whose composite to
+the base lands in `U` factors through the open locus over `U`. -/
+def strictTransformOpenLift : T ⟶ (strictTransformOpen f π U).toScheme :=
+  IsOpenImmersion.lift (strictTransformOpen f π U).ι k
+    (range_subset_range_strictTransformOpen_ι f π U k hk)
+
+@[reassoc (attr := simp)]
+lemma strictTransformOpenLift_ι :
+    strictTransformOpenLift f π U k hk ≫ (strictTransformOpen f π U).ι = k :=
+  IsOpenImmersion.lift_fac _ _ _
+
+end Lift
 
 /-- The strict transform of `f : Y ⟶ X` along `π : X' ⟶ X` relative to the open
 `U ⊆ X`: the scheme-theoretic image of the open locus of `Y ×_X X'` lying over `U`.
@@ -103,8 +165,34 @@ def strictTransformMap : strictTransform f π U ⟶ X' :=
 def strictTransformToSource : strictTransform f π U ⟶ Y :=
   strictTransformι f π U ≫ pullback.fst f π
 
+/-- The factorization of the open locus through the strict transform covers the
+projection of the fibre product to the modified scheme. -/
+@[reassoc (attr := simp)]
+lemma strictTransformFactor_strictTransformMap :
+    strictTransformFactor f π U ≫ strictTransformMap f π U =
+      (strictTransformOpen f π U).ι ≫ pullback.snd f π := by
+  simp only [strictTransformMap, strictTransformFactor_ι_assoc]
+
+/-- The strict-transform projection and the projection to the source cover the same
+morphism to the base: the square
+
+```
+strictTransform f π U --strictTransformMap--> X'
+        |                                     |
+strictTransformToSource                       π
+        ↓                                     ↓
+        Y ----------------- f --------------> X
+```
+
+commutes. -/
+@[reassoc]
+lemma strictTransform_condition :
+    strictTransformToSource f π U ≫ f = strictTransformMap f π U ≫ π := by
+  simp only [strictTransformToSource, strictTransformMap, Category.assoc, pullback.condition]
+
 /-! The strict transform of a morphism is a closed subscheme of the base change, so
-separatedness, quasi-compactness and local finite type are inherited from `f`. -/
+separatedness, quasi-compactness, local finite type and being a closed immersion are
+inherited from `f`. -/
 
 instance [IsSeparated f] : IsSeparated (strictTransformMap f π U) :=
   have : IsSeparated (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
@@ -117,10 +205,94 @@ instance [LocallyOfFiniteType f] : LocallyOfFiniteType (strictTransformMap f π 
   have : LocallyOfFiniteType (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
   inferInstanceAs (LocallyOfFiniteType (strictTransformι f π U ≫ pullback.snd f π))
 
+instance [IsClosedImmersion f] : IsClosedImmersion (strictTransformMap f π U) :=
+  have : IsClosedImmersion (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
+  inferInstanceAs (IsClosedImmersion (strictTransformι f π U ≫ pullback.snd f π))
+
 /-- The ideal sheaf cutting out the strict transform is the kernel of the open locus. -/
 lemma ker_strictTransformι :
     (strictTransformι f π U).ker = ((strictTransformOpen f π U).ι).ker :=
   Scheme.IdealSheafData.ker_subschemeι _
+
+section SchemeTheoreticImage
+
+variable [QuasiCompact (strictTransformOpen f π U).ι]
+
+/-- The factorization of the open locus through the strict transform is
+scheme-theoretically dominant: the strict transform is by definition the
+scheme-theoretic image of that inclusion. -/
+instance : IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
+  inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
+
+/-- **The strict transform and its open locus have the same scheme-theoretic image in
+`X'`**: precomposing the projection `strictTransform f π U ⟶ X'` with the
+scheme-theoretically dominant factorization of the open locus does not change the
+kernel ideal sheaf. This is the half of the transport of scheme-theoretic images along
+an admissible blow-up (Stacks Project Tag 0F3Y) that is pure strict-transform theory.
+(Blueprint: `lemma:nagata-scheme-image-transport-strict-transform`.) -/
+theorem ker_strictTransformMap :
+    (strictTransformMap f π U).ker =
+      ((strictTransformOpen f π U).ι ≫ pullback.snd f π).ker := by
+  rw [← strictTransformFactor_ι, Category.assoc, strictTransformMap]
+  exact (Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _).symm
+
+end SchemeTheoreticImage
+section Range
+
+/-! ### The underlying set of the strict transform
+
+The strict transform of `f` is squeezed between the inverse image of the `U`-part of
+the image of `f` and the full inverse image of the image of `f`; consequently
+disjointness of images persists along strict transforms. -/
+
+/-- The strict transform of `f` lies inside the full inverse image of the image of
+`f`: the range of the strict-transform projection is contained in `π ⁻¹ (range f)`. -/
+theorem range_strictTransformMap_subset_preimage_range :
+    Set.range (strictTransformMap f π U) ⊆ π ⁻¹' Set.range f := by
+  rintro _ ⟨t, rfl⟩
+  refine ⟨strictTransformToSource f π U t, ?_⟩
+  calc f (strictTransformToSource f π U t)
+      = (strictTransformToSource f π U ≫ f) t := (Scheme.Hom.comp_apply _ _ _).symm
+    _ = (strictTransformMap f π U ≫ π) t := by rw [strictTransform_condition]
+    _ = π (strictTransformMap f π U t) := Scheme.Hom.comp_apply _ _ _
+
+/-- The strict transform of `f` contains the whole locus over the preserved open: a
+point of `X'` lying over `U` and over the image of `f` is in the range of the
+strict-transform projection. -/
+theorem mem_range_strictTransformMap_of_mem_of_mem_range {x' : X'} (hU : π x' ∈ U)
+    (hf : π x' ∈ Set.range f) :
+    x' ∈ Set.range (strictTransformMap f π U) := by
+  obtain ⟨y, hy⟩ := hf
+  obtain ⟨w, hw1, hw2⟩ := Scheme.Pullback.exists_preimage_pullback y x' hy
+  have hwU : w ∈ strictTransformOpen f π U := by
+    change π (pullback.snd f π w) ∈ U
+    rw [hw2]
+    exact hU
+  obtain ⟨w₀, rfl⟩ : w ∈ Set.range (strictTransformOpen f π U).ι := by
+    rwa [Scheme.Opens.range_ι]
+  refine ⟨strictTransformFactor f π U w₀, ?_⟩
+  calc strictTransformMap f π U (strictTransformFactor f π U w₀)
+      = (strictTransformFactor f π U ≫ strictTransformMap f π U) w₀ :=
+        (Scheme.Hom.comp_apply _ _ _).symm
+    _ = ((strictTransformOpen f π U).ι ≫ pullback.snd f π) w₀ := by
+        rw [strictTransformFactor_strictTransformMap]
+    _ = pullback.snd f π ((strictTransformOpen f π U).ι w₀) := Scheme.Hom.comp_apply _ _ _
+    _ = x' := hw2
+
+/-- **Disjointness of boundary closures persists along strict transforms**
+(blueprint: `lemma:nagata-boundary-disjoint-persists`; proof order item 37): if two
+closed subschemes have disjoint images, their strict transforms along an arbitrary
+morphism `π : X' ⟶ X` remain disjoint, because each strict transform is contained
+in the full inverse image of the corresponding closed subscheme. -/
+theorem disjoint_range_strictTransformMap_of_disjoint {Y₁ Y₂ : Scheme.{u}}
+    (f₁ : Y₁ ⟶ X) (f₂ : Y₂ ⟶ X) (hdisj : Disjoint (Set.range f₁) (Set.range f₂)) :
+    Disjoint (Set.range (strictTransformMap f₁ π U))
+      (Set.range (strictTransformMap f₂ π U)) :=
+  (hdisj.preimage π).mono
+    (range_strictTransformMap_subset_preimage_range f₁ π U)
+    (range_strictTransformMap_subset_preimage_range f₂ π U)
+
+end Range
 
 section OverComplement
 

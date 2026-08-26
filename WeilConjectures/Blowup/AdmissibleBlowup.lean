@@ -515,6 +515,26 @@ theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetheri
     Scheme.IdealSheafData.ofFiniteType_of_isLocallyNoetherian _,
     by simp [Scheme.IdealSheafData.coe_support_vanishingIdeal]⟩
 
+/-- **Extension of a constructible closed subset to a finite-type center** (Stacks
+Project Tags 01PH and 01PF): on a quasi-compact quasi-separated scheme `X`, every
+closed subset of a quasi-compact open `U` with quasi-compact complement — i.e. every
+constructible closed subset of `U` — is the trace on `U` of the support of a
+finite-type quasi-coherent ideal on `X`. -/
+theorem Scheme.IdealSheafData.exists_finiteType_preimage_coe_support_eq
+    [CompactSpace X] [QuasiSeparatedSpace X] (hU : IsCompact (U : Set X))
+    {T : Set U.toScheme} (hT : IsClosed T) (hc : IsCompact Tᶜ) :
+    ∃ I : X.IdealSheafData, I.ofFiniteType ∧ U.ι ⁻¹' (I.support : Set X) = T := by
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  have : QuasiSeparatedSpace U.toScheme := quasiSeparatedSpace_of_quasiSeparated U.ι
+  -- the finite-type vanishing ideal of `T` on `U` (Stacks Tag 01PH)
+  obtain ⟨J, hJft, hJsupp⟩ :=
+    U.toScheme.exists_finiteType_ideal_coe_support_eq_compl ⟨Tᶜ, hT.isOpen_compl⟩ hc
+  -- extend it to a finite-type ideal on `X` (Stacks Tag 01PF)
+  obtain ⟨I, hIft, hIcomap⟩ := Scheme.IdealSheafData.exists_finiteType_comap_eq U hU J hJft
+  refine ⟨I, hIft, ?_⟩
+  rw [← Scheme.IdealSheafData.coe_support_comap, hIcomap, hJsupp]
+  exact compl_compl T
+
 /-- **Preparation of a Cartier boundary, from a boundary ideal**: the blow-up of a
 finite-type ideal whose support is exactly the complement of `U` is a `U`-admissible
 blow-up on which the inverse image of the center is an invertible ideal supported
