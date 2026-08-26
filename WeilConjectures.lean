@@ -39,6 +39,7 @@ public import WeilConjectures.Compactification.Modification
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
