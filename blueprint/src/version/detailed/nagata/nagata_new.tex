@@ -7197,43 +7197,47 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   $D_+(T_0)$.  Standard Proj charts are open, proving the assertion.
 \end{proof}
 
-\begin{lemma}[Existence of an affine-space immersion for a quasi-affine morphism,
+\begin{lemma}[Existence of an affine-space immersion for a quasi-affine scheme,
   {\cite[\href{https://stacks.math.columbia.edu/tag/04II}{Tag 04II}]{stacks-project}}]
   \label{lemma:nagata-quasi-affine-immersion-affine-space-exists}
   \uses{def:nagata-relative-affine-space}
   \lean{AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine}
 
-  Let $X\to S$ be a quasi-affine morphism of finite type, with $S$
-  quasi-compact.  There is an integer $n$ and an immersion
+  Let $X$ be a quasi-affine scheme and let $X\to S$ be a morphism that is
+  locally of finite type.  There is an integer $n$ and an immersion
   $X\to\mathbb A^n_S$ over $S$.
 \end{lemma}
 
 \begin{proof}
-  Choose a finite affine cover $S=\bigcup_{j=1}^mS_j$.  Since $X\to S$ is of
-  finite type and quasi-affine, each $X_j=X\times_SS_j$ has a finite affine
-  cover by principal opens $D(g_{j\ell})$ in an affine $S_j$-scheme containing
-  $X_j$.  On each $D(g_{j\ell})$ choose finitely many functions generating its
-  coordinate algebra over $\Gamma(S_j,\mathcal O_S)$.  Adjoin the functions
-  $g_{j\ell}$ themselves; the resulting finite tuple gives an immersion of
-  $X_j$ into an affine space over $S_j$, because the principal opens are
-  exactly the loci on which the chosen denominators are invertible and the
-  coordinate maps are closed immersions there.  On $S_j\cap S_k$, replace the
-  two tuples by their concatenation.  The induced maps agree after this
-  replacement, since both are obtained from the same restriction maps on
-  coordinate rings.  Taking the maximum tuple length and padding by zero
-  coordinates gives a single integer $n$; the chartwise immersions glue to
-  $X\to\mathbb A^n_S$.
+  Write $A=\Gamma(X,\mathcal O_X)$, so that $X$ is quasi-compact and
+  separated and $X\to\operatorname{Spec}(A)$ is an open immersion.  The
+  affine basic opens $X_f$, $f\in A$, form a basis of the topology of $X$,
+  so every point of $X$ has an affine basic open neighbourhood whose image
+  in $S$ is contained in an affine open of $S$.  By quasi-compactness choose
+  finitely many $f_1,\ldots,f_m\in A$ and affine opens
+  $V_1,\ldots,V_m\subseteq S$ such that $X=\bigcup_jX_{f_j}$, each
+  $X_{f_j}$ is affine and $X_{f_j}\subseteq\pi^{-1}(V_j)$.  Since $\pi$ is
+  locally of finite type, each $\Gamma(X_{f_j},\mathcal O_X)$ is an algebra
+  of finite type over $\Gamma(V_j,\mathcal O_S)$; choose finitely many
+  generators.  Since $X$ is quasi-compact and quasi-separated,
+  $\Gamma(X_{f_j},\mathcal O_X)$ is the localization $A_{f_j}$, so after
+  multiplying by a power of $f_j$ each generator is the restriction of a
+  global section of $X$; collect these numerators $a_{jk}\in A$.  Let
+  $n=m+\sum_jN_j$ and let $i\colon X\to\mathbb A^n_S$ be the morphism over
+  $S$ determined by the global sections
+  $f_1,\ldots,f_m,a_{11},\ldots,a_{mN_m}$.
 
-  On every affine chart, the induced ring map is a localization of a
-  surjection from a polynomial ring, hence gives a closed immersion into the
-  corresponding principal open of affine space.  The principal opens cover
-  $X_j$, so the chartwise map is an immersion.  On an overlap $S_j\cap S_k$,
-  each coordinate is the restriction of the same chosen function on $X$;
-  after concatenation and padding, the two polynomial-ring maps are therefore
-  literally equal.  The affine-space gluing theorem then produces a global
-  morphism, and the local immersion criterion proves that it is an immersion.
-  This verifies both the coordinate construction and its overlap
-  compatibility.
+  Being an immersion is Zariski-local on the target, so it suffices to
+  exhibit, around every point of $X$, an open $W\subseteq\mathbb A^n_S$
+  whose full preimage under $i$ maps to $W$ by an immersion.  For each $j$
+  let $W_j\subseteq\mathbb A^n_S$ be the affine open of points lying over
+  $V_j$ at which the $j$-th coordinate is invertible.  Then
+  $i^{-1}(W_j)=X_{f_j}$, and the restriction $X_{f_j}\to W_j$ is a morphism
+  of affine schemes whose ring map is surjective: its image contains the
+  image of $\Gamma(V_j,\mathcal O_S)$, the restrictions of the chosen global
+  sections, and the inverse of the unit $f_j|_{X_{f_j}}$, and these generate
+  $A_{f_j}$.  Hence $X_{f_j}\to W_j$ is a closed immersion and
+  $X_{f_j}\to\mathbb A^n_S$ is an immersion, as required.
 \end{proof}
 
 \begin{definition}[Affine-space immersion attached to a quasi-affine scheme]
@@ -7267,20 +7271,22 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   specification field is precisely that $\iota_X$ is an immersion over $S$.
 \end{proof}
 
-\begin{lemma}[Affine finite-type morphisms are quasi-affine]
+\begin{lemma}[Affine schemes are quasi-affine]
   \label{lemma:nagata-affine-finite-type-is-quasi-affine}
   \uses{lemma:nagata-quasi-affine-immersion-affine-space-exists}
-  \lean{AlgebraicGeometry.IsQuasiAffine.of_isAffine}
+  \lean{AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine}
 
-  If $U\to S$ is affine and of finite type, then it is quasi-affine of finite
-  type in the sense used in
-  \Cref{lemma:nagata-quasi-affine-immersion-affine-space-exists}.
+  If $U$ is affine, then $U$ is quasi-affine in the sense used in
+  \Cref{lemma:nagata-quasi-affine-immersion-affine-space-exists}; in
+  particular that lemma applies to any $U\to S$ of finite type with $U$
+  affine.
 \end{lemma}
 
 \begin{proof}
-  An affine morphism is itself an affine scheme over $S$; the identity map of
-  $U$ is an open immersion into that affine $S$-scheme.  This is the defining
-  quasi-affine factorization, and the finite-type hypothesis is unchanged.
+  The identity of $U$ realizes the canonical map
+  $U\to\operatorname{Spec}\Gamma(U,\mathcal O_U)$ as an open immersion, and
+  $U$ is quasi-compact.  This is the defining quasi-affine property, and a
+  finite-type structure morphism is in particular locally of finite type.
 \end{proof}
 
 \begin{definition}[Affine compactification construction]

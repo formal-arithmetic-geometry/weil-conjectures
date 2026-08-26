@@ -69,6 +69,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalC
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
@@ -84,8 +85,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
@@ -95,6 +98,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Funct
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
