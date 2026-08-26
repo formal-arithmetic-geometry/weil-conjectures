@@ -13,6 +13,7 @@ public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Density
+public import WeilConjectures.Blowup.Extension
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.InvertibleCenter
@@ -64,6 +65,7 @@ public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
