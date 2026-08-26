@@ -96,4 +96,48 @@ theorem range_eq_preimage_of_comp_of_isIso_restrict (hq : q ≫ π = j)
 
 end LiftAlongPartialIso
 
+section RestrictOfSection
+
+variable {T X : Scheme.{u}} (ψ : T ⟶ X) (V : X.Opens) (v : V.toScheme ⟶ T)
+
+/-- **A morphism with an open section covering the inverse image is an isomorphism over
+the open**: if `v` is an open immersion lifting the inclusion of `V` along `ψ` whose
+range is the whole inverse image of `V`, then `ψ` restricts to an isomorphism over `V`.
+This produces the isomorphism over `V` of the graph extension of a compactification
+(Stacks Project Tag 0F3Z; revised blueprint
+`lemma:nagata-scheme-image-partial-section`). -/
+theorem isIso_morphismRestrict_of_range_eq [IsOpenImmersion v] (hv : v ≫ ψ = V.ι)
+    (hrange : ((ψ ⁻¹ᵁ V : T.Opens) : Set T) = Set.range v) : IsIso (ψ ∣_ V) := by
+  -- lift `v` to the inverse image of `V`
+  have hsub : Set.range v ⊆ Set.range (ψ ⁻¹ᵁ V).ι := by
+    rw [Scheme.Opens.range_ι]
+    exact hrange.ge
+  obtain ⟨v', hv'⟩ : ∃ v' : V.toScheme ⟶ (ψ ⁻¹ᵁ V).toScheme, v' ≫ (ψ ⁻¹ᵁ V).ι = v :=
+    ⟨IsOpenImmersion.lift (ψ ⁻¹ᵁ V).ι v hsub, IsOpenImmersion.lift_fac _ _ _⟩
+  have hOI : IsOpenImmersion (v' ≫ (ψ ⁻¹ᵁ V).ι) := by
+    rw [hv']
+    infer_instance
+  have hOIv' : IsOpenImmersion v' := IsOpenImmersion.of_comp v' (ψ ⁻¹ᵁ V).ι
+  -- the lift is surjective, since the range of `v` is the whole inverse image
+  have hsurj : Function.Surjective v' := by
+    intro w
+    have hw : (ψ ⁻¹ᵁ V).ι w ∈ Set.range v := by
+      rw [← hrange, ← Scheme.Opens.range_ι]
+      exact ⟨w, rfl⟩
+    obtain ⟨t, ht⟩ := hw
+    refine ⟨t, (ψ ⁻¹ᵁ V).ι.isOpenEmbedding.injective ?_⟩
+    rw [← Scheme.Hom.comp_apply, hv', ht]
+  -- a surjective open immersion is an isomorphism, and it inverts `ψ ∣_ V`
+  have hepi : Epi v'.base := (TopCat.epi_iff_surjective _).mpr hsurj
+  have hIsov' : IsIso v' := IsOpenImmersion.isIso v'
+  have hcomp : v' ≫ (ψ ∣_ V) = 𝟙 V.toScheme := by
+    rw [← cancel_mono V.ι, Category.assoc, morphismRestrict_ι, ← Category.assoc, hv', hv,
+      Category.id_comp]
+  have : IsIso (v' ≫ (ψ ∣_ V)) := by
+    rw [hcomp]
+    infer_instance
+  exact IsIso.of_isIso_comp_left v' (ψ ∣_ V)
+
+end RestrictOfSection
+
 end AlgebraicGeometry
