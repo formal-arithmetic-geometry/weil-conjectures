@@ -7544,7 +7544,7 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[A ring is the filtered colimit of its finite-type
   $\mathbf Z$-subalgebras]
   \label{lemma:nagata-ring-finite-type-subalgebras}
-  \lean{Algebra.filteredColimit_fgSubalgebra_int}
+  \lean{CommRingCat.isColimitFgSubalgebraCocone}
 
   For every ring $A$, its finitely generated $\mathbf Z$-subalgebras form a
   directed system and the canonical map
@@ -7738,22 +7738,25 @@ coefficients and relations and all later stages inherit the recorded data.
   identity and composition laws hold chartwise and therefore globally.
 \end{proof}
 
-\begin{definition}[Selected Noetherian inverse system]
+\begin{definition}[Noetherian approximation]
   \label{def:nagata-noetherian-inverse-system}
-  \uses{def:nagata-noetherian-stage,
-    lemma:nagata-valid-refinements-directed}
-  \lean{AlgebraicGeometry.noetherianInverseSystem}
+  \lean{AlgebraicGeometry.Scheme.NoetherianApproximation}
 
-  Order all valid finite coefficient refinements by inclusion.  For
-  $\lambda\leq\mu$, define
-  $S_\mu\to S_\lambda$ by gluing the affine morphisms induced by the
-  inclusions of finite coefficient algebras, after refining the indexing data
-  so inverse images of the selected affine charts remain affine.  Denote this
-  inverse system by
+  A \emph{Noetherian approximation} of a scheme $S$ consists of a cofiltered
+  index category $I_S$, a diagram $\lambda\mapsto S_\lambda$ of schemes of
+  finite type over $\mathbf Z$ whose transition morphisms
+  $t_{\mu\lambda}\colon S_\mu\to S_\lambda$ are affine, together with a limit
+  cone over that diagram with vertex $S$, so that
   \[
-    \mathsf N(S)=(I_S,(S_\lambda)_\lambda,
-      (t_{\mu\lambda})_{\lambda\leq\mu}).
+    S=\varprojlim_{\lambda\in I_S}S_\lambda .
   \]
+  We write $\mathsf N(S)=(I_S,(S_\lambda)_\lambda,
+  (t_{\mu\lambda})_{\lambda\leq\mu})$ for such a system.  Each stage
+  $S_\lambda$ is then a Noetherian scheme, by the Hilbert basis theorem.  The
+  construction of the following subsection produces such a system for every
+  quasi-compact quasi-separated $S$, by gluing the affine case
+  (\Cref{lemma:nagata-noetherian-inverse-system-affine}) over a finite affine
+  cover.
 \end{definition}
 
 \begin{lemma}[Properties of the finite-type stages]
@@ -7806,14 +7809,40 @@ coefficients and relations and all later stages inherit the recorded data.
   They glue to an inverse for $\kappa_S$.
 \end{proof}
 
+\begin{lemma}[Noetherian approximation of an affine scheme]
+  \label{lemma:nagata-noetherian-inverse-system-affine}
+  \uses{def:nagata-noetherian-inverse-system,
+    lemma:nagata-ring-finite-type-subalgebras}
+  \lean{AlgebraicGeometry.Scheme.NoetherianApproximation.ofIsAffine}
+
+  Let $S=\operatorname{Spec}(A)$ be an affine scheme.  Order the finitely
+  generated $\mathbf Z$-subalgebras $A_0\subseteq A$ by inclusion.  Then the
+  spectra $\operatorname{Spec}(A_0)$ form a cofiltered system of schemes of
+  finite type over $\mathbf Z$ with affine transition morphisms, and $S$ is
+  its inverse limit.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-ring-finite-type-subalgebras}
+  Finitely generated $\mathbf Z$-subalgebras are directed by
+  \Cref{lemma:nagata-ring-finite-type-subalgebras}, and each
+  $\operatorname{Spec}(A_0)$ is of finite type over $\mathbf Z$, hence
+  Noetherian by the Hilbert basis theorem.  Every transition morphism is
+  $\operatorname{Spec}$ of a ring map and therefore affine.  By the same
+  lemma, $A$ is the filtered colimit of the $A_0$; since $\operatorname{Spec}$
+  is a right adjoint it takes this colimit of rings to a limit of schemes, so
+  $S=\varprojlim\operatorname{Spec}(A_0)$.
+\end{proof}
+
 \begin{proposition}[{\cite[\href{https://stacks.math.columbia.edu/tag/01ZA}{Tag 01ZA}]{stacks-project}}]
   \label{prop:nagata-noetherian-inverse-system}
   \uses{def:nagata-glued-limit-comparison,def:nagata-noetherian-inverse-system}
-  \lean{AlgebraicGeometry.exists_noetherian_inverseSystem}
+  \lean{AlgebraicGeometry.Scheme.nonempty_noetherianApproximation}
 
-  The constructed system $\mathsf N(S)$ consists of Noetherian schemes with
-  affine transition morphisms, every term is of finite type over
-  $\mathbf Z$, and $\kappa_S$ identifies $S$ with its inverse limit.
+  Every quasi-compact quasi-separated scheme $S$ admits a Noetherian
+  approximation.  Concretely, the constructed system $\mathsf N(S)$ has affine
+  transition morphisms, every term is of finite type over $\mathbf Z$, and
+  $\kappa_S$ identifies $S$ with its inverse limit.
 \end{proposition}
 
 \begin{proof}
