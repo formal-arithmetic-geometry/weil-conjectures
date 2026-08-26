@@ -3472,9 +3472,21 @@ closed subscheme of the first blow-up.
   (\texttt{Nagata.ker\_comap\_self}), not through the torsion-quotient chart
   model.  The chart-by-chart infrastructure below
   (\Cref{def:nagata-strict-transform-chart-ring} through
-  \Cref{thm:nagata-strict-transform-is-blowup}) is accordingly not
-  formalized; of the power-torsion material only the affine algebraic layer
+  \Cref{prop:nagata-strict-transform-closed-fiber-product}) is accordingly
+  not formalized — with the exception of the chart surjectivity
+  (\Cref{lemma:nagata-strict-chart-map-surjective}), which is proved in the
+  subring-generation form used by the formalized Tag 080E route; of the
+  power-torsion material only the affine algebraic layer
   (\texttt{Submodule.powTorsion} and its localization/exactness lemmas) is.
+  The identification of the strict transform with the blow-up of the
+  extended ideal (\Cref{thm:nagata-strict-transform-is-blowup},
+  Stacks Tag 080E) \emph{is} formalized, but by the universal-property route
+  recorded in \Cref{def:nagata-strict-transform-blowup-comparison} and the
+  revised proof of \Cref{thm:nagata-strict-transform-is-blowup} — a
+  comparison morphism into the fibre product which is a closed immersion by
+  a chart-wise surjectivity computation, together with schematic density of
+  the exceptional complement — rather than by gluing the chart-ring
+  isomorphisms.
 \end{remark}
 
 \subsection{Power torsion and strict-transform charts}
@@ -3693,7 +3705,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Surjectivity onto the extended-ideal chart]
   \label{lemma:nagata-strict-chart-map-surjective}
   \uses{def:nagata-strict-chart-to-extended-blowup-chart}
-  \lean{AlgebraicGeometry.strictTransformChartToExtended_surjective}
+  \lean{AlgebraicGeometry.AffineBlowup.closure_range_awayAlgebraMap_union_range_awayMap}
 
   The constructed homomorphism $\sigma_a$ is surjective.
 \end{lemma}
@@ -3994,58 +4006,82 @@ correction explicit before it is sheafified and glued.
   hence is the strict transform.
 \end{proof}
 
-\begin{definition}[Comparison from the strict transform to the extended-ideal blow-up]
+\begin{definition}[Comparison from the extended-ideal blow-up to the base change]
   \label{def:nagata-strict-transform-blowup-comparison}
-  \uses{def:nagata-strict-transform-closed-chart-model,
-    def:nagata-strict-transform-chart-comparison,
-    def:nagata-global-blowup}
-  \lean{AlgebraicGeometry.Hom.strictTransformToBlowup}
+  \uses{def:nagata-strict-transform,
+    def:nagata-global-blowup,
+    thm:nagata-blowup-universal-property,
+    lemma:nagata-strict-chart-map-surjective}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion_pullbackLift_blowup_comap}
 
-  Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
-  ideal on $X$, and put $X'=\operatorname{Bl}_{\mathcal I}(X)$.  Define
+  Let $f\colon Y\to X$, let $\mathcal I$ be a quasi-coherent ideal on $X$,
+  and put $X'=\operatorname{Bl}_{\mathcal I}(X)$.  The pullback of
+  $\mathcal I$ to $\operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)$ is the
+  invertible exceptional ideal of $\mathcal I\mathcal O_Y$, so the universal
+  property of the blow-up (\Cref{thm:nagata-blowup-universal-property},
+  Stacks Tag 0806) provides a unique lift
+  $\rho\colon\operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)\to X'$ of the
+  composite to $X$.  Define the \emph{comparison morphism}
   \[
-    \Theta_{f,\mathcal I}\colon
-      Y^{\mathrm{st}}\longrightarrow
-      \operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)
+    \psi_{f,\mathcal I}\colon
+      \operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)\longrightarrow
+      Y\times_XX'
   \]
-  by gluing the affine morphisms
-  $\operatorname{Spec}(\overline\sigma_a^{-1})$ on the standard blow-up
-  charts.
+  with components the structure morphism of
+  $\operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)$ and the lift $\rho$.
+  The morphism $\psi_{f,\mathcal I}$ is a closed immersion: this is
+  Zariski-local on $Y\times_XX'$, and over an affine open
+  $V=\operatorname{Spec}(B)\subseteq Y$ lying over an affine open
+  $\operatorname{Spec}(A)\subseteq X$ and a standard chart of $X'$ at
+  $a\in I$, it is the $\operatorname{Spec}$ of the canonical ring map
+  $B\otimes_AA[I/a]\to B[IB/\varphi(a)]$, which is surjective because a
+  fraction $y/\varphi(a)^n$ with $y\in I^nB$ is a $B$-linear combination of
+  fractions $\varphi(z)/\varphi(a)^n$ with $z\in I^n$.
 \end{definition}
 
 \begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/080E}{Tag 080E}]{stacks-project}}]
   \label{thm:nagata-strict-transform-is-blowup}
   \uses{def:nagata-strict-transform-blowup-comparison}
-  \lean{AlgebraicGeometry.Hom.strictTransformIsoBlowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform}
 
-  Under the preceding hypotheses, the constructed morphism
-  $\Theta_{f,\mathcal I}$ is an isomorphism over
-  $Y$ and identifies the strict transform with the blow-up of $Y$ in the
-  extended ideal $\mathcal I\mathcal O_Y$.
+  Under the preceding hypotheses, the comparison morphism
+  $\psi_{f,\mathcal I}$ identifies the blow-up of $Y$ in the extended ideal
+  $\mathcal I\mathcal O_Y$ with the strict transform of $Y$: there is an
+  isomorphism
+  $\operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)\cong Y^{\mathrm{st}}$
+  compatible with the projections to $Y$ and with the structure morphisms
+  to $X$.  No finiteness hypotheses on $\mathcal I$ are needed.
 \end{theorem}
 
 \begin{proof}
-  \uses{prop:nagata-strict-transform-chart-iso,
-    prop:nagata-strict-transform-closed-fiber-product,
-    prop:nagata-global-blowup-affine-restrict,
-    lemma:nagata-strict-transform-chart-cocycle,
-    lemma:nagata-strict-transform-chart-localization-data}
-  On every standard affine chart, $\Theta_{f,\mathcal I}$ is induced by the
-  ring equivalence $\overline\sigma_a$ of
-  \Cref{prop:nagata-strict-transform-chart-iso}; hence it is an isomorphism
-  there.  The charts cover the target by
-  \Cref{prop:nagata-global-blowup-affine-restrict}, and their comparison maps
-  agree on overlaps by \Cref{lemma:nagata-strict-transform-chart-cocycle}.
-  More explicitly, on every basic refinement the inverse is the localization
-  of $\overline\sigma_a^{-1}$; the equality of the two possible localized
-  inverses follows from
-  \Cref{lemma:nagata-strict-transform-chart-localization-data}.  The
-  morphism-gluing theorem therefore gives a morphism in the reverse direction.
-  Its composites with $\Theta_{f,\mathcal I}$ restrict to the identity on
-  every member of the affine cover, and so are identities globally.  The
-  chart maps commute with the maps to $Y$, since all are induced by the
-  structural map $B\to B[IB/b]$; this equality also glues.  Hence the
-  resulting isomorphism is over $Y$.
+  \uses{thm:nagata-global-blowup-complement,
+    thm:nagata-blowup-universal-property,
+    lemma:nagata-admissible-blowup-preserves-density,
+    def:nagata-scheme-theoretic-closure}
+  Write $U=X\setminus V(\mathcal I)$ and let
+  $\Omega\subseteq Y\times_XX'$ be the open locus over $U$, whose
+  scheme-theoretic closure is the strict transform
+  (\Cref{def:nagata-strict-transform}).  Both $\psi_{f,\mathcal I}$ and the
+  inclusion of $\Omega$ are cut out by quasi-coherent kernels, and it
+  suffices to identify the two kernels.  The blow-up of
+  $\mathcal I\mathcal O_Y$ is an isomorphism over the preimage of $U$
+  (\Cref{thm:nagata-global-blowup-complement}), which identifies $\Omega$
+  with the preimage $\Omega'$ of $f^{-1}(U)$ in
+  $\operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)$, compatibly with
+  $\psi_{f,\mathcal I}$ — the two composites into $X'$ agree by the
+  uniqueness part of \Cref{thm:nagata-blowup-universal-property}, since both
+  lie over $U$ where the pulled-back ideal is the unit ideal.  The
+  exceptional ideal is invertible, i.e.\ locally generated by a
+  nonzerodivisor, so $\Omega'$ is schematically dense in
+  $\operatorname{Bl}_{\mathcal I\mathcal O_Y}(Y)$ (the blow-up part of
+  \Cref{lemma:nagata-admissible-blowup-preserves-density}).  Hence
+  precomposing $\psi_{f,\mathcal I}$ with the schematically dense open
+  $\Omega'\cong\Omega$ does not change the kernel, and the kernel of
+  $\psi_{f,\mathcal I}$ equals the kernel of the inclusion of $\Omega$.
+  Since $\psi_{f,\mathcal I}$ is a closed immersion
+  (\Cref{def:nagata-strict-transform-blowup-comparison}), it factors as an
+  isomorphism onto the strict transform, and the stated compatibilities
+  hold by construction.
 \end{proof}
 
 

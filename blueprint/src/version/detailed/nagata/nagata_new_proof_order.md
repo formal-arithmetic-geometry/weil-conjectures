@@ -57,6 +57,28 @@ not by the shortest source-file path.
 > algebraic layer (`Submodule.powTorsionQuotientMap*`).  In `nagata_new.tex` the
 > flattening chain now survives only as the input to item 30 (Tag 081S), whose
 > Lean statement is still `sorry` and whose formal proof route is still open.
+>
+> **Route revision (formalization, 2026-08-26): Tag 080E.** The identification
+> of the strict transform with the blow-up of the pulled-back ideal
+> (`thm:nagata-strict-transform-is-blowup`, Stacks Tag 080E — a prerequisite
+> for the common-modification construction of item 32/Tag 0F3X, where it
+> identifies the strict transforms of the two projections with blow-ups of
+> the graph image) is formalized as
+> `Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform`
+> (`Compactification/StrictTransformBlowup.lean`), **not** via the blueprint's
+> original chart-cocycle gluing but via a comparison morphism
+> `Bl_{I·O_Y}(Y) ⟶ Y ×_X Bl_I(X)` (components: the structure morphism and the
+> Tag 0806 lift) which is a closed immersion by a chart-wise surjectivity
+> computation (`AffineBlowup.closure_range_awayAlgebraMap_union_range_awayMap`,
+> `AffineBlowup.isClosedImmersion_pullbackLift`,
+> `Scheme.IdealSheafData.isClosedImmersion_pullbackLift_blowup_comap`) and has
+> the kernel of the open `U`-locus because the exceptional complement is
+> schematically dense in the `Y`-blow-up
+> (`Scheme.IdealSheafData.ker_pullbackLift_blowup_comap`).  No finiteness
+> hypotheses are needed.  `nagata_new.tex` was updated in step
+> (`def:nagata-strict-transform-blowup-comparison`,
+> `thm:nagata-strict-transform-is-blowup`, and the formalization-route remark
+> after `def:nagata-strict-transform`).
 
 ## 4. Boundary preparation, common modifications, and graphs
 
@@ -136,6 +158,7 @@ the Lean proof deviates from the written route.
 | #24 | 18 (080A), 19 (080K), 24 (080Y), Tags 080B/080L/01PH/01PF, 0F3V (`disjoint_range_strictTransformMap_separationBlowup`) | proved; the one remaining `sorry`, Tag 0807 (`exists_blowup_mul_isEffectiveCartier_iso`), is closed in PR #26 via the Tag 0806 universal-property kit; 0F3V by direct sum-ideal chart argument, 080P bypassed |
 | #25 | 34, 36, 37 + partial-section lemma, dense refinement | proved; items 30-33 (Tags 081S/0F3Y/0F3X/0F3Z) stated with `sorry`; 0F3W not yet stated |
 | #26 | 38-41 (Tags 02JQ/052K/00IA) + Tag 0807 | proved; item 42 (Tag 0894) stated with `sorry`, split into `universallyClosed_of_isDominant` and `isSeparated_of_isDominant`; the valuation-theoretic items 39-41 (`comapResidue`, `comap_eq_of_le_comap`, `exists_comap_eq`) and the topological core of 02JQ (`exists_specializes_of_mem_closure_range`) live in `WeilConjectures/Mathlib/` helper files |
+| (2026-08-26, integration branch) | Tag 080E (`thm:nagata-strict-transform-is-blowup`): strict transform = blow-up of the pulled-back ideal | `exists_blowup_comap_iso_strictTransform` proved from four obligations (affine chart generation, affine + global closed immersion, kernel identity via schematic density of the exceptional complement); universal-property route, chart-cocycle gluing of the blueprint bypassed |
 | (2026-08-16) | 34-48 (two-open theorem; Stacks 0F3U/0F40) | **items 43-48 proved**: `HasCompactification.of_two_open_cover` (`Compactification/TwoOpen.lean`) assembles the two-open theorem from `TwoOpenSide`/`TwoOpenPreparation` (`TwoOpenSetup.lean`, `TwoOpenComparison.lean`); the intermediate schemes are pushouts of open immersions (`Mathlib/AlgebraicGeometry/Gluing.lean`), separatedness via Tag 0F3U (`IsSeparated.pushoutDesc`), overlap-closedness without the constructibility detour (`isClosedImmersion_intermediateGraph`), density via `AdmissibleBlowup.dense_preimage`, properness via Tag 0894. Item 35-37 packaging `exists_prepared_twoOpenSide` proved from the (sorried) Tag 0F3Z. Tag 0F3W newly stated (`exists_admissibleBlowup_strictTransform_isIso_near_closure`, `sorry`). One new `sorry`: `exists_prepared_keyDisjoint_twoOpenSide` (the improved-comparison chain, items comparison-restriction/0F3W/0F3Y/boundary-density/key-disjointness), blocked on Tags 0F3W/0F3Y |
 
 ## Remaining implementation notes
