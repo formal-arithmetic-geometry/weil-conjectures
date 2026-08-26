@@ -28,6 +28,8 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
 
 ## Main results
 
+- `AlgebraicGeometry.Scheme.IdealSheafData.coe_support_comap`: the set-level form of
+  `support_comap`, `(I.comap f).support = f ⁻¹' I.support` as sets;
 - `AlgebraicGeometry.Scheme.Hom.comap_ker_self`: `j.ker.comap j = ⊥` for every `j`;
 - `AlgebraicGeometry.Scheme.IdealSheafData.fg_ideal_comap_iff`: finite generation of the
   ideal of sections transfers across an open immersion;
@@ -48,6 +50,17 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 variable {X Y : Scheme.{u}}
+
+section Support
+
+/-- The underlying set of the support of the pullback of an ideal sheaf is the preimage
+of the underlying set of its support: the set-level form of
+`AlgebraicGeometry.Scheme.IdealSheafData.support_comap`. -/
+lemma coe_support_comap (I : Y.IdealSheafData) (f : X ⟶ Y) :
+    ((I.comap f).support : Set X) = f ⁻¹' (I.support : Set Y) := by
+  rw [support_comap, TopologicalSpace.Closeds.coe_preimage]
+
+end Support
 
 section Subscheme
 

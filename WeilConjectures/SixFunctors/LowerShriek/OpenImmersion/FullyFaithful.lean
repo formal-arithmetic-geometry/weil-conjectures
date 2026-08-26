@@ -61,7 +61,7 @@ open CategoryTheory Category Limits Opposite
 
 namespace AlgebraicGeometry
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- The adjoint triple `j_! ⊣ j^* ⊣ j_*` on small étale sites along an open immersion. -/

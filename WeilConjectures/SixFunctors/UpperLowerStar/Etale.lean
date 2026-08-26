@@ -19,7 +19,8 @@ small étale sites. This file records the resulting functors
 `g^* : Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A`.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
-Grothendieck abelian category with `Hom`-types in the universe `u` of the base schemes.
+Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above the
+universe `u` of the base schemes.
 The site-theoretic inputs of the general definitions are discharged here:
 
 - The base change functor `MorphismProperty.Over.pullback @Etale ⊤ g` along an *arbitrary*
@@ -141,7 +142,7 @@ end Continuity
 
 section KanExtension
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [Etale g]
 
 /-- For an étale morphism `g`, base change is right adjoint to the localization functor
@@ -176,7 +177,7 @@ end KanExtension
 
 section Star
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
@@ -185,14 +186,14 @@ noncomputable def Etale.lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
   GrothendieckTopology.lowerStar A @Etale @Etale le_rfl g
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The sections of `g_* G` over `V → Y` are the sections of `G` over `V ×_Y Z → Z`. -/
 lemma Etale.lowerStar_obj_val_obj (G : Sheaf Z.smallEtaleTopology A) (b : Y.Etale) :
     ((Etale.lowerStar A g).obj G).obj.obj (op b) =
       G.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback @Etale ⊤ g).op`. -/
 lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G ⟶ G')
     (b : Y.Etale) :
@@ -265,7 +266,7 @@ end Star
 
 section Comp
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on

@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Gluing
+public import WeilConjectures.Compactification.FiniteTypeExtension
 
 /-!
 
@@ -79,8 +80,6 @@ theorem isProper_blowupMap (hI : ∀ U : X.affineOpens, (I.ideal U).FG) :
 /-- The blow-up of a locally Noetherian scheme along any quasi-coherent ideal is proper. -/
 instance isProper_blowupMap_of_isLocallyNoetherian [IsLocallyNoetherian X] :
     IsProper I.blowupMap :=
-  I.isProper_blowupMap fun U ↦
-    have := IsLocallyNoetherian.component_noetherian U
-    IsNoetherian.noetherian (I.ideal U)
+  I.isProper_blowupMap fun U ↦ I.ofFiniteType_of_isLocallyNoetherian U le_top
 
 end AlgebraicGeometry.Scheme.IdealSheafData
