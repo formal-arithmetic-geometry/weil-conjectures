@@ -35,7 +35,7 @@ constructible subcategory in `WeilConjectures.WeilSheaf.Defs`.
 
 @[expose] public section
 
-universe w u' u
+universe u' u
 
 open CategoryTheory Limits
 
@@ -43,22 +43,12 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u} A] [Abelian A]
-  {FA : A → A → Type*} {CD : A → Type u}
-  [∀ X Y, FunLike (FA X Y) (CD X) (CD Y)] [ConcreteCategory.{u} A FA]
-  [PreservesLimits (CategoryTheory.forget A)]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A)]
-  [IsGrothendieckAbelian.{u} A]
-  [∀ (T : Scheme.{u}) (U : T.Etale), HasWeakSheafify (T.smallEtaleTopology.over U) A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [IsGrothendieckAbelian.{u + 1} A]
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-  [∀ (T : Scheme.{u}) (φ : T ⟶ Y) (P : Y.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension P]
-  [∀ (T : Scheme.{u}) (φ : T ⟶ Z) (P : Z.Etaleᵒᵖ ⥤ A),
-    (MorphismProperty.Over.pullback @Etale ⊤ φ).op.HasLeftKanExtension P]
-  [HasDerivedCategory.{w} (Sheaf Y.smallEtaleTopology A)]
-  [HasDerivedCategory.{w} (Sheaf Z.smallEtaleTopology A)]
 
 /-- The derived pullback along `g : Z ⟶ Y` preserves boundedness for the canonical
 t-structures: the pullback on sheaves is exact, so the derived pullback is t-exact. -/
