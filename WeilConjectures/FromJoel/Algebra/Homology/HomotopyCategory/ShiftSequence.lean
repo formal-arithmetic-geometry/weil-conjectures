@@ -13,7 +13,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 
 Supplement to `Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
