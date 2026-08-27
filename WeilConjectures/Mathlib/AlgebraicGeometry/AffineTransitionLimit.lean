@@ -26,11 +26,10 @@ over `ℤ` with affine transition morphisms, together with a limit cone over the
 point `S` (`AlgebraicGeometry.Scheme.NoetherianApproximation`). The stages of such a system
 are Noetherian schemes (`AlgebraicGeometry.Scheme.NoetherianApproximation.isNoetherian_obj`).
 
-Absolute Noetherian approximation (Stacks Project Tag 01ZA) asserts that every
-quasi-compact quasi-separated scheme admits a Noetherian approximation
-(`AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`).
-
-In this file we prove the affine case: for an affine scheme `S`, the spectra of the
+Absolute Noetherian approximation (Stacks Project Tag 01ZA), proved in this file as
+`AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, asserts that every quasi-compact
+quasi-separated scheme admits a Noetherian approximation. It is proved by induction over a
+finite affine cover, starting from the affine case: for an affine scheme `S`, the spectra of the
 finitely generated `ℤ`-subalgebras of `Γ(S, ⊤)` form a Noetherian approximation
 (`AlgebraicGeometry.Scheme.NoetherianApproximation.ofIsAffine`). The key algebraic input
 is that `Γ(S, ⊤)` is the filtered colimit of its finitely generated `ℤ`-subalgebras
