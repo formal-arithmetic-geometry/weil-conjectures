@@ -28,7 +28,8 @@ We derive the properties of the morphisms involved in a compactification:
 - `Compactification.isProper_openImmersion`, `Compactification.isClosedImmersion_openImmersion`
   and `Compactification.isClopen_range_openImmersion`: if `f` is proper, then `i` is proper,
   hence a closed immersion with clopen range;
-- `Compactification.ofIsProper`: a proper morphism is a compactification of itself.
+- `Compactification.ofIsProper`: a proper morphism is a compactification of itself;
+- `Compactification.copy`: a compactification of `f` is one of any morphism equal to `f`.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
 `Nonempty (Compactification f)`. Nagata's compactification theorem asserts
@@ -76,7 +77,20 @@ def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
   isProper := inferInstance
   isOpenImmersion := inferInstance
 
-variable {f : X ⟶ Y} (c : Compactification f)
+variable {f : X ⟶ Y}
+
+/-- Transport a compactification along an equality of morphisms: if `f' = f`, then a
+compactification of `f` is one of `f'`, with the same data. -/
+@[simps]
+def copy (c : Compactification f) {f' : X ⟶ Y} (h : f' = f) : Compactification f' where
+  Z := c.Z
+  g := c.g
+  i := c.i
+  comm := h.trans c.comm
+  isProper := c.isProper
+  isOpenImmersion := c.isOpenImmersion
+
+variable (c : Compactification f)
 include c
 
 /-- A morphism admitting a compactification is separated. -/
