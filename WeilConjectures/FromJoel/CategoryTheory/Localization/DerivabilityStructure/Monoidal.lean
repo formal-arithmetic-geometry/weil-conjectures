@@ -13,7 +13,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Derived
 
 Migrated from `Mathlib/CategoryTheory/Localization/DerivabilityStructure/Monoidal.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -21,7 +21,7 @@ on the branch `jriou_localization` of Joël Riou's mathlib fork
 
 namespace CategoryTheory
 
-open Functor
+open _root_.CategoryTheory.Functor
 
 namespace NatTrans
 

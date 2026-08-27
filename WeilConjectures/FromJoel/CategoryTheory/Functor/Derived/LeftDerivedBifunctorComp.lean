@@ -12,7 +12,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerive
 
 Migrated from `Mathlib/CategoryTheory/Functor/Derived/LeftDerivedBifunctorComp.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -20,7 +20,7 @@ on the branch `jriou_localization` of Joël Riou's mathlib fork
 
 namespace CategoryTheory
 
-open Functor
+open _root_.CategoryTheory.Functor
 
 variable {C₁ C₂ C₃ C₁₂ C₂₃ C D₁ D₂ D₃ D₁₂ D₂₃ D : Type*}
   [Category C₁] [Category C₂] [Category C₃] [Category C₁₂] [Category C₂₃] [Category C]

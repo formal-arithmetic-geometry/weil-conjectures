@@ -13,14 +13,14 @@ public import WeilConjectures.FromJoel.CategoryTheory.Functor.Quadrifunctor
 
 Migrated from `Mathlib/CategoryTheory/Functor/Derived/LeftDerivedTrifunctorComp.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 -/
 
 @[expose] public section
 
 namespace CategoryTheory
 
-open Functor
+open _root_.CategoryTheory.Functor
 
 variable {C₁ C₂ C₃ C₄ C₂₃₄ C D₁ D₂ D₃ D₄ D₂₃₄ D : Type*}
   [Category C₁] [Category C₂] [Category C₃] [Category C₄] [Category C₂₃₄] [Category C]

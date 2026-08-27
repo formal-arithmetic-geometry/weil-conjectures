@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Localization.Opposite
 
 Supplement to `Mathlib.CategoryTheory.Functor.Derived.LeftDerived`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 This file contains material from the PR files
 `Mathlib/CategoryTheory/Functor/KanExtension/Opposite.lean` and
