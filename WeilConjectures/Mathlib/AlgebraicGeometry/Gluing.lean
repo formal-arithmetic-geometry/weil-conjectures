@@ -25,7 +25,10 @@ records the basic geometry of this pushout:
   pullback square, i.e. the two charts intersect in exactly the glued copy of `U`;
 - `CompactSpace` transfers from the two charts to the pushout;
 - `AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`: a source-local property holds
-  for `pushout.desc h k w` as soon as it holds for `h` and `k`.
+  for `pushout.desc h k w` as soon as it holds for `h` and `k`;
+- `AlgebraicGeometry.QuasiCompact.pushout_desc` and
+  `AlgebraicGeometry.IsSeparated.pushout_desc`: quasi-compactness and (given that the
+  graph `U ⟶ X ×_S Y` is a closed immersion) separatedness of the glued morphism.
 
 These are the raw ingredients for the intermediate schemes `Wᵢ = U ⊔_{Uᵢ} Xᵢ°` of the
 two-open compactification theorem (blueprint chapter "Nagata compactification",
@@ -143,6 +146,41 @@ lemma IsZariskiLocalAtSource.pushout_desc {P : MorphismProperty Scheme.{u}}
   cases i with
   | left => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inl_desc] using hh
   | right => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inr_desc] using hk
+
+/-- **Quasi-compactness of a gluing of two schemes along a common open**: the inverse
+image of a quasi-compact open under the glued morphism is the union of the images of the
+two inverse images under `h` and `k`, hence quasi-compact. (Quasi-compactness of morphisms
+is not Zariski-local on the source, so this does not follow from
+`AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`; what makes it work is that the
+cover of the pushout has only two members.) -/
+theorem QuasiCompact.pushout_desc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
+    (w : f ≫ h = g ≫ k) [QuasiCompact h] [QuasiCompact k] :
+    QuasiCompact (pushout.desc h k w) := by
+  constructor
+  intro V hVopen hVcompact
+  have hl : IsCompact (⇑h ⁻¹' V) := QuasiCompact.isCompact_preimage _ hVopen hVcompact
+  have hr : IsCompact (⇑k ⁻¹' V) := QuasiCompact.isCompact_preimage _ hVopen hVcompact
+  have hcov : ⇑(pushout.desc h k w) ⁻¹' V =
+      ⇑(pushout.inl f g) '' (⇑h ⁻¹' V) ∪ ⇑(pushout.inr f g) '' (⇑k ⁻¹' V) := by
+    apply subset_antisymm
+    · intro p hp
+      have hmem : p ∈ Set.range ⇑(pushout.inl f g) ∪ Set.range ⇑(pushout.inr f g) := by
+        rw [range_pushout_inl_union_range_pushout_inr f g]
+        trivial
+      rcases hmem with ⟨t, rfl⟩ | ⟨t, rfl⟩
+      · refine Or.inl ⟨t, ?_, rfl⟩
+        rwa [Set.mem_preimage, ← pushout.inl_desc (f := f) (g := g) h k w,
+          Scheme.Hom.comp_apply]
+      · refine Or.inr ⟨t, ?_, rfl⟩
+        rwa [Set.mem_preimage, ← pushout.inr_desc (f := f) (g := g) h k w,
+          Scheme.Hom.comp_apply]
+    · rintro - (⟨t, ht, rfl⟩ | ⟨t, ht, rfl⟩)
+      · rw [Set.mem_preimage, ← Scheme.Hom.comp_apply, pushout.inl_desc]
+        exact ht
+      · rw [Set.mem_preimage, ← Scheme.Hom.comp_apply, pushout.inr_desc]
+        exact ht
+  rw [hcov]
+  exact (hl.image (pushout.inl f g).continuous).union (hr.image (pushout.inr f g).continuous)
 
 /-- **Separatedness of a gluing of two schemes along a common open**: let `h : X ⟶ S`
 and `k : Y ⟶ S` be separated morphisms restricting to the same morphism on a common
