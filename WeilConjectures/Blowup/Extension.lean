@@ -34,8 +34,10 @@ Third, the product of two `U`-admissible centers is `U`-admissible
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_isPullback_blowup_comap` — the
-  blow-up of the restriction of an ideal to an open is the restriction of the blow-up
-  (blueprint: `thm:nagata-blowup-flat-base-change`, open-immersion case);
+  blow-up of the restriction of an ideal along an open immersion is the restriction of the
+  blow-up (blueprint: `thm:nagata-blowup-flat-base-change`, open-immersion case), and its
+  corollary `AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso` for
+  isomorphisms;
 - `AlgebraicGeometry.IsAdmissible.exists_extend` — extension of admissible centers
   across a quasi-compact open (blueprint: `def:nagata-extended-admissible-blowup`,
   `lemma:nagata-extend-admissible-blowup`);
@@ -54,32 +56,32 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **Blow-ups restrict to opens** (the open-immersion case of the blow-up flat base
-change theorem, blueprint `thm:nagata-blowup-flat-base-change`): the blow-up of the
-restriction `I.comap W.ι` of an ideal sheaf `I` to an open `W` fits into a cartesian
-square over the blow-up of `I`, via the canonical lift of
-`(I.comap W.ι).blowupMap ≫ W.ι` through the universal property of `I.blowup`. -/
+/-- **Blow-ups restrict along open immersions** (the open-immersion case of the blow-up
+flat base change theorem, blueprint `thm:nagata-blowup-flat-base-change`): the blow-up of
+the restriction `I.comap q` of an ideal sheaf `I` along an open immersion `q : Y ⟶ X` fits
+into a cartesian square over the blow-up of `I`, via the canonical lift of
+`(I.comap q).blowupMap ≫ q` through the universal property of `I.blowup`. -/
 theorem Scheme.IdealSheafData.exists_isPullback_blowup_comap
-    {X : Scheme.{u}} (I : X.IdealSheafData) (W : X.Opens) :
-    ∃ h : (I.comap W.ι).blowup ⟶ I.blowup,
-      h ≫ I.blowupMap = (I.comap W.ι).blowupMap ≫ W.ι ∧
-      IsPullback (I.comap W.ι).blowupMap h W.ι I.blowupMap := by
+    {X Y : Scheme.{u}} (I : X.IdealSheafData) (q : Y ⟶ X) [IsOpenImmersion q] :
+    ∃ h : (I.comap q).blowup ⟶ I.blowup,
+      h ≫ I.blowupMap = (I.comap q).blowupMap ≫ q ∧
+      IsPullback (I.comap q).blowupMap h q I.blowupMap := by
   -- the composite to `X` pulls `I` back to an invertible ideal, hence lifts
-  obtain ⟨h, hh⟩ := I.exists_lift_blowup (t := (I.comap W.ι).blowupMap ≫ W.ι) (by
+  obtain ⟨h, hh⟩ := I.exists_lift_blowup (t := (I.comap q).blowupMap ≫ q) (by
     rw [Scheme.IdealSheafData.comap_comp]
-    exact (I.comap W.ι).isInvertible_comap_blowupMap)
-  -- the first projection of the pullback lifts through the blow-up of `I.comap W.ι`
-  obtain ⟨k, hk⟩ := (I.comap W.ι).exists_lift_blowup
-    (t := pullback.fst W.ι I.blowupMap) (by
+    exact (I.comap q).isInvertible_comap_blowupMap)
+  -- the first projection of the pullback lifts through the blow-up of `I.comap q`
+  obtain ⟨k, hk⟩ := (I.comap q).exists_lift_blowup
+    (t := pullback.fst q I.blowupMap) (by
       rw [← Scheme.IdealSheafData.comap_comp, pullback.condition,
         Scheme.IdealSheafData.comap_comp]
       exact I.isInvertible_comap_blowupMap.comap_of_isOpenImmersion _)
   refine ⟨h, hh, IsPullback.of_iso_pullback ⟨hh.symm⟩
-    ⟨pullback.lift (I.comap W.ι).blowupMap h hh.symm, k, ?_, ?_⟩
+    ⟨pullback.lift (I.comap q).blowupMap h hh.symm, k, ?_, ?_⟩
     (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)⟩
-  · -- `lift ≫ k = 𝟙`: both sides are lifts of the blow-up map of `I.comap W.ι`
-    refine (I.comap W.ι).hom_ext_of_isInvertible_comap
-      (I.comap W.ι).isInvertible_comap_blowupMap ?_ (Category.id_comp _)
+  · -- `lift ≫ k = 𝟙`: both sides are lifts of the blow-up map of `I.comap q`
+    refine (I.comap q).hom_ext_of_isInvertible_comap
+      (I.comap q).isInvertible_comap_blowupMap ?_ (Category.id_comp _)
     rw [Category.assoc, hk, pullback.lift_fst]
   · -- `k ≫ lift = 𝟙`: compare both projections out of the pullback
     refine pullback.hom_ext ?_ ?_
@@ -87,10 +89,21 @@ theorem Scheme.IdealSheafData.exists_isPullback_blowup_comap
     · rw [Category.assoc, pullback.lift_snd, Category.id_comp]
       -- `k ≫ h = pullback.snd`: both sides are lifts of `pullback.snd ≫ I.blowupMap`
       refine I.hom_ext_of_isInvertible_comap
-        (t := pullback.snd W.ι I.blowupMap ≫ I.blowupMap) ?_ ?_ rfl
+        (t := pullback.snd q I.blowupMap ≫ I.blowupMap) ?_ ?_ rfl
       · rw [Scheme.IdealSheafData.comap_comp]
         exact I.isInvertible_comap_blowupMap.comap_of_isOpenImmersion _
       · rw [Category.assoc, hh, ← Category.assoc, hk, pullback.condition]
+
+/-- **Blow-ups are invariant under isomorphisms of the base**: for an isomorphism
+`e : Y ≅ X` and an ideal sheaf `I` on `X`, the blow-up of `I.comap e.hom` is the blow-up
+of `I`, compatibly with the structure morphisms. -/
+theorem Scheme.IdealSheafData.exists_blowup_comap_iso {X Y : Scheme.{u}}
+    (I : X.IdealSheafData) (e : Y ≅ X) :
+    ∃ f : (I.comap e.hom).blowup ≅ I.blowup,
+      f.hom ≫ I.blowupMap = (I.comap e.hom).blowupMap ≫ e.hom := by
+  obtain ⟨h, hh, hpb⟩ := I.exists_isPullback_blowup_comap e.hom
+  have : IsIso h := hpb.isIso_snd_of_isIso
+  exact ⟨asIso h, hh⟩
 
 /-- **Extension of admissible blow-up centers across a quasi-compact open** (in the
 style of Stacks Project Tag 080M; blueprint `def:nagata-extended-admissible-blowup`,
@@ -147,7 +160,7 @@ theorem IsAdmissible.exists_extend {X : Scheme.{u}} [CompactSpace X]
       Scheme.IdealSheafData.mul_top]
   -- the restriction theorem for the product center concludes
   obtain rfl := hcomap
-  obtain ⟨h, hh, hpb⟩ := (I₁ * I₀).exists_isPullback_blowup_comap W
+  obtain ⟨h, hh, hpb⟩ := (I₁ * I₀).exists_isPullback_blowup_comap W.ι
   exact ⟨⟨I₁ * I₀, hI₁ft.mul hI₀ft, hdisjK⟩, h, hh, hpb⟩
 
 /-- **The product of two `U`-admissible centers is `U`-admissible** (bookkeeping for

@@ -341,6 +341,31 @@ theorem closure_range_inter_preimage_range_snd_subset (j' : U ⟶ Y)
   rw [Scheme.coe_homeoOfIso, ← Scheme.Hom.comp_apply]
   exact ht
 
+/-- **The graph of a partial section of the second projection is the whole part of its
+scheme-theoretic image lying over the open part**: the inverse image in `SIm(γ)` of the
+range of `j'` under the second projection is exactly the range of `γ.toImage`. Indeed the
+image is the closure of the graph, and over the range of `j'` the graph is already closed
+(`closure_range_inter_preimage_range_snd_subset`).
+(Revised blueprint: `lemma:nagata-scheme-image-partial-section`.) -/
+theorem preimage_range_snd_eq_range_toImage (j' : U ⟶ Y) [IsSeparated x] [IsOpenImmersion j']
+    [QuasiCompact γ] (hγsnd : γ ≫ pullback.snd x y = j') :
+    ⇑(γ.imageι ≫ pullback.snd x y) ⁻¹' Set.range ⇑j' = Set.range ⇑γ.toImage := by
+  apply subset_antisymm
+  · intro t ht
+    -- the point of `X ×_S Y` under `t` is a limit point of the graph lying over `j'`
+    have hcl : γ.imageι t ∈ closure (Set.range ⇑γ) := by
+      rw [← Scheme.Hom.support_ker γ, ← Scheme.IdealSheafData.range_subschemeι]
+      exact ⟨t, rfl⟩
+    have hsnd : pullback.snd x y (γ.imageι t) ∈ Set.range ⇑j' := by
+      rw [← Scheme.Hom.comp_apply]
+      exact ht
+    obtain ⟨u, hu⟩ := closure_range_inter_preimage_range_snd_subset x y γ j' hγsnd ⟨hcl, hsnd⟩
+    refine ⟨u, γ.imageι.isClosedEmbedding.injective ?_⟩
+    rw [← Scheme.Hom.comp_apply, Scheme.Hom.toImage_imageι, hu]
+  · rintro - ⟨u, rfl⟩
+    refine Set.mem_preimage.mpr ⟨u, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Category.assoc, Scheme.Hom.toImage_imageι, hγsnd]
+
 end GraphClosure
 
 /-- **The graph image is proper over the base**: if `Y ⟶ S` is proper, the

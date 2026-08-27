@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
@@ -43,7 +44,10 @@ piece is produced by clearing denominators on a finite basic-open cover of the o
 
 - `Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap`: finite-typeness on `O` is
   finite-typeness of the restriction to `O`;
-- `Scheme.IdealSheafData.ofFiniteTypeOn.sup`: finite-typeness is local on the target;
+- `Scheme.IdealSheafData.ofFiniteTypeOn.sup` and
+  `Scheme.IdealSheafData.ofFiniteTypeOn.iSup`: finite-typeness is local on the target;
+- `Scheme.IdealSheafData.ofFiniteType.comap`: finite-typeness is stable under pullback
+  along an arbitrary morphism of schemes;
 - `Scheme.IdealSheafData.exists_le_ofFiniteTypeOn_sup`: the binary gluing step;
 - `Scheme.IdealSheafData.exists_finiteType_le_comap_eq` and
   `Scheme.IdealSheafData.exists_finiteType_comap_eq`: the two forms of Tag 01PF.
@@ -126,6 +130,41 @@ theorem ofFiniteTypeOn.sup {I : X.IdealSheafData} {O₁ O₂ : X.Opens}
   have := U.2.isLocalization_basicOpen g.1
   refine Ideal.FG.map_localizationAway (S := Γ(X, X.basicOpen g.1)) ?_
   rwa [algebraMap_basicOpen_eq, I.map_ideal_basicOpen U g.1]
+
+/-- Locality of finite-typeness: an ideal sheaf which is of finite type on every member of
+a family of opens is of finite type on their supremum. -/
+theorem ofFiniteTypeOn.iSup {I : X.IdealSheafData} {ι : Type*} {O : ι → X.Opens}
+    (h : ∀ i, I.ofFiniteTypeOn (O i)) : I.ofFiniteTypeOn (⨆ i, O i) := by
+  intro U hU
+  -- on a straddling affine open, the ideal of sections is finitely generated because its
+  -- localizations at a spanning family of sections are
+  have hspan : Ideal.span {f : Γ(X, U.1) | ∃ i, X.basicOpen f ≤ O i} = ⊤ := by
+    rw [← U.2.self_le_iSup_basicOpen_iff]
+    intro x hxU
+    obtain ⟨i, hx⟩ := TopologicalSpace.Opens.mem_iSup.mp (hU hxU)
+    obtain ⟨f, hf, hxf⟩ := U.2.exists_basicOpen_le (⟨x, hx⟩ : O i) hxU
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨f, i, hf⟩, hxf⟩
+  refine Ideal.fg_of_localizationSpan _ hspan fun g ↦ ?_
+  obtain ⟨i, hg⟩ := g.2
+  have hfg : (I.ideal (X.affineBasicOpen g.1)).FG :=
+    h i (X.affineBasicOpen g.1) ((X.affineBasicOpen_coe g.1).trans_le hg)
+  have := U.2.isLocalization_basicOpen g.1
+  refine Ideal.FG.map_localizationAway (S := Γ(X, X.basicOpen g.1)) ?_
+  rwa [algebraMap_basicOpen_eq, I.map_ideal_basicOpen U g.1]
+
+/-- **Finite-typeness is stable under pullback**: the inverse image of a finite-type ideal
+sheaf along an arbitrary morphism of schemes is of finite type. Over an affine open `V` of
+the source lying over an affine open `U` of the target, the inverse image ideal is the
+extension of `I.ideal U` along `f.appLE U V`, and the opens `f ⁻¹ᵁ U` cover the source. -/
+theorem ofFiniteType.comap {Z : Scheme.{u}} {I : X.IdealSheafData} (hI : I.ofFiniteType)
+    (f : Z ⟶ X) : (I.comap f).ofFiniteType := by
+  have hOn : ∀ U : X.affineOpens, (I.comap f).ofFiniteTypeOn (f ⁻¹ᵁ U.1) := by
+    intro U V hV
+    rw [ideal_comap_appLE I f U V hV]
+    exact (hI U le_top).map _
+  have htop : ⨆ U : X.affineOpens, f ⁻¹ᵁ (U : X.Opens) = ⊤ :=
+    f.iSup_preimage_eq_top (iSup_affineOpens_eq_top X)
+  simpa only [ofFiniteType, htop] using ofFiniteTypeOn.iSup hOn
 
 end FiniteType
 
