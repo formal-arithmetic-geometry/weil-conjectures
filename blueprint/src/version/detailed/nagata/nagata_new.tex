@@ -2,16 +2,15 @@
 % It is intended to be included by the main blueprint document.
 %
 % Status convention:
-%   \lean{...} records a proposed declaration name.  It is not a claim that
-%   the name already exists.  Exact names verified in the current Mathlib
-%   documentation are recorded in implementation notes immediately below the
-%   relevant block.  For statements already realized in the WeilConjectures
-%   Lean development (the nagata-01 ... nagata-09 PR stack, 2026-08), the
-%   \lean{...} names have been synced to the actual declarations, and
-%   "Formalization route" remarks record where the Lean proof deviates from
-%   the route written here.  A \nagataGap paragraph is an intentional, unresolved
-%   formalization obligation; it must be closed before a completion marker is
-%   added.
+%   A non-empty \lean{...} names a declaration that exists, either in Mathlib
+%   or in the WeilConjectures Lean development; the names are kept in sync with
+%   the declarations and are checked with `lake exe checkdecls`.  An empty
+%   \lean{} means the statement has not been formalized yet -- do not record a
+%   proposed name there, since a name that resolves to nothing misleads a reader
+%   looking for where the result lives.  "Formalization route" remarks record
+%   where the Lean proof deviates from the route written here.  A \nagataGap
+%   paragraph is an intentional, unresolved formalization obligation; it must be
+%   closed before a completion marker is added.
 
 \newcommand{\nagataGap}[1]{%
   \par\noindent\textbf{Formalization gap.} #1\par}
@@ -97,7 +96,7 @@ equality has explicitly been fixed.
 \begin{definition}[Compactifiability]
   \label{def:nagata-compactifiable}
   \uses{def:nagata-compactification}
-  \lean{}
+  \lean{AlgebraicGeometry.HasCompactification}
 
   A morphism $f\colon X\to S$ is \emph{compactifiable} if the type of
   compactifications of $f$ is nonempty.
@@ -632,7 +631,7 @@ equality has explicitly been fixed.
 
 \begin{lemma}[The diagonal on a mixed open]
   \label{lemma:nagata-diagonal-mixed-open}
-  \lean{}
+  \lean{AlgebraicGeometry.diagonalRestrictChartArrowIso}
 
   Let $X=U\cup V$ be an open cover over $S$.  The pullback of
   $\Delta_{X/S}$ to $U\times_SV$ is canonically the map
@@ -5314,7 +5313,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Existence of constructible closed separators in a spectral space]
   \label{lemma:nagata-spectral-constructible-separation-exists}
-  \lean{}
+  \lean{PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ}
 
   If $T,T'$ are disjoint closed subsets of a spectral space $V$, there exist
   quasi-compact opens $W,W'\subseteq V$ such that
@@ -6031,7 +6030,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Valuation domination of a local domain]
   \label{lemma:nagata-local-domain-valuation-dominates}
-  \lean{}
+  \lean{LocalSubring.exists_le_valuationSubring}
 
   If $B$ is a local domain with fraction field $L$, there is a valuation ring
   $C\subseteq L$ whose maximal ideal contracts to the maximal ideal of $B$.
