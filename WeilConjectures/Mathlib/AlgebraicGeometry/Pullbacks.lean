@@ -41,7 +41,11 @@ Tags 0F3X–0F3Z; revised blueprint `lemma:nagata-scheme-image-partial-section`)
 - `AlgebraicGeometry.partialSectionRestrictIso`: the induced isomorphism
   `U ≅ (U ×_S Y) ×_{X ×_S Y} Z` of `U` with the restriction of the scheme-theoretic
   image of `γ` over `U ×_S Y`, compatible with the graph
-  (`partialSectionRestrictIso_hom_fst`).
+  (`partialSectionRestrictIso_hom_fst`);
+- `AlgebraicGeometry.isIso_morphismRestrict_pullback_fst`: unrelated to partial
+  sections, the base change of a partial isomorphism is a partial isomorphism — if
+  `g : B ⟶ C` is an isomorphism over an open `O ⊆ C`, then `A ×_C B ⟶ A` is an
+  isomorphism over the inverse image of `O`.
 
 -/
 
@@ -378,5 +382,27 @@ theorem isProper_imageι_comp_fst [IsProper y] :
     IsProper (γ.imageι ≫ pullback.fst x y) := by
   have : IsProper (pullback.fst x y) := MorphismProperty.pullback_fst _ _ ‹_›
   infer_instance
+
+section RestrictBaseChange
+
+variable {A B C : Scheme.{u}}
+
+/-- **A base change of a partial isomorphism is a partial isomorphism**: if `g : B ⟶ C`
+restricts to an isomorphism over an open `O ⊆ C`, then the first projection of the fibre
+product `A ×_C B` restricts to an isomorphism over the inverse image of `O` in `A`. -/
+lemma isIso_morphismRestrict_pullback_fst (f : A ⟶ C) (g : B ⟶ C) (O : C.Opens)
+    [IsIso (g ∣_ O)] : IsIso (pullback.fst f g ∣_ (f ⁻¹ᵁ O)) := by
+  have hA : IsPullback (pullback.fst f g ∣_ (f ⁻¹ᵁ O))
+      (pullback.fst f g ⁻¹ᵁ (f ⁻¹ᵁ O)).ι (f ⁻¹ᵁ O).ι (pullback.fst f g) :=
+    isPullback_morphismRestrict _ _
+  have hpaste := hA.paste_vert (IsPullback.of_hasPullback f g)
+  have hs : IsPullback ((pullback.fst f g ⁻¹ᵁ (f ⁻¹ᵁ O)).ι ≫ pullback.snd f g)
+      (pullback.fst f g ∣_ (f ⁻¹ᵁ O)) g ((f ∣_ O) ≫ O.ι) := by
+    rw [morphismRestrict_ι]
+    exact hpaste.flip
+  have ht : IsPullback (g ⁻¹ᵁ O).ι (g ∣_ O) g O.ι := (isPullback_morphismRestrict g O).flip
+  exact (IsPullback.of_right' hs ht).flip.isIso_fst_of_isIso
+
+end RestrictBaseChange
 
 end AlgebraicGeometry

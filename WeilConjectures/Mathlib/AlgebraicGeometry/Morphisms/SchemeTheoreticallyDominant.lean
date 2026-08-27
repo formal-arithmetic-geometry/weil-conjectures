@@ -45,7 +45,10 @@ Formation of scheme-theoretic images commutes with flat base change (blueprint:
   form of a cartesian square;
 - `AlgebraicGeometry.Scheme.Hom.ker_morphismRestrict`: the special case of the
   restriction to an open subscheme of the target
-  (blueprint: `lemma:nagata-scheme-image-restrict-open`).
+  (blueprint: `lemma:nagata-scheme-image-restrict-open`);
+- `AlgebraicGeometry.Scheme.Hom.preimage_subset_range_toImage_of_isClosed`: the
+  set-theoretic form of the same statement over an open in which the range of the
+  morphism is already closed — there the scheme-theoretic image adds no points.
 
 The proof factors the base-changed morphism through the pullback of the
 scheme-theoretic image: the comparison map is the flat base change of the
@@ -300,5 +303,34 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
   infer_instance
 
 end Opens
+
+section ImageOverOpen
+
+/-- **The scheme-theoretic image over an open in which the range is already closed**: if
+the range of a quasi-compact morphism `g` is closed in an open `W` of the target, then
+every point of the scheme-theoretic image of `g` lying over `W` is in the range of the
+canonical morphism `g.toImage`, so over `W` the scheme-theoretic image adds nothing to the
+range. In the application `g` is proper over an open of the base, so its range is closed
+there. (blueprint: `lemma:nagata-scheme-image-restrict-open`.) -/
+theorem Scheme.Hom.preimage_subset_range_toImage_of_isClosed {V Y : Scheme.{u}} (g : V ⟶ Y)
+    [QuasiCompact g] {W : Y.Opens} (hW : IsClosed (⇑W.ι ⁻¹' Set.range ⇑g)) :
+    ⇑g.imageι ⁻¹' (W : Set Y) ⊆ Set.range ⇑g.toImage := by
+  intro t ht
+  have hcl : g.imageι t ∈ closure (Set.range ⇑g) := by
+    rw [← Scheme.Hom.support_ker g, ← Scheme.IdealSheafData.range_subschemeι]
+    exact ⟨t, rfl⟩
+  obtain ⟨w, hw⟩ : g.imageι t ∈ Set.range ⇑W.ι := by
+    rw [Scheme.Opens.range_ι]
+    exact ht
+  have hw' : w ∈ ⇑W.ι ⁻¹' closure (Set.range ⇑g) := by
+    rw [Set.mem_preimage, hw]
+    exact hcl
+  have hmem := W.ι.isOpenEmbedding.isOpenMap.preimage_closure_subset_closure_preimage hw'
+  rw [hW.closure_eq, Set.mem_preimage, hw] at hmem
+  obtain ⟨v, hv⟩ := hmem
+  exact ⟨v, g.imageι.isClosedEmbedding.injective
+    (by rw [← Scheme.Hom.comp_apply, Scheme.Hom.toImage_imageι, hv])⟩
+
+end ImageOverOpen
 
 end AlgebraicGeometry
