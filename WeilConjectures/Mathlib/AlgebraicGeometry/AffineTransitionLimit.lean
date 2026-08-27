@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 
@@ -27,8 +28,7 @@ are Noetherian schemes (`AlgebraicGeometry.Scheme.NoetherianApproximation.isNoet
 
 Absolute Noetherian approximation (Stacks Project Tag 01ZA) asserts that every
 quasi-compact quasi-separated scheme admits a Noetherian approximation
-(`AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, currently a stated
-obligation, see below).
+(`AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`).
 
 In this file we prove the affine case: for an affine scheme `S`, the spectra of the
 finitely generated `ℤ`-subalgebras of `Γ(S, ⊤)` form a Noetherian approximation
@@ -72,10 +72,18 @@ initial; so limits over the system of the `Wⱼ` may be computed over the catego
 
 ## Descending schemes of finite presentation along an inverse limit of affine schemes
 
-If `X ⟶ lim Dᵢ` is an affine morphism that is locally of finite presentation, where `{Dᵢ}` is
-a cofiltered inverse system of affine schemes with affine transition maps, then `X` is the
-base change of a scheme of finite presentation over one of the `Dᵢ`
+Let `{Dᵢ}` be a cofiltered inverse system of affine schemes with affine transition maps. If `X`
+is an affine scheme that is locally of finite presentation over `lim Dᵢ`, then `X` is the base
+change of an affine scheme that is locally of finite presentation over one of the `Dᵢ`
 (`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`).
+
+The same holds for an arbitrary scheme `X` of finite presentation over `lim Dᵢ`
+(`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`, Stacks Project Tag 01ZM):
+one covers `X` by finitely many affine opens and glues the finite-stage models of the charts
+over a common stage. The two auxiliary steps are that a quasi-compact open of `X` descends to a
+stage (`AlgebraicGeometry.exists_descendsAtWithOpen`) and that two finite-stage models of the
+same scheme become isomorphic at a later stage
+(`AlgebraicGeometry.exists_iso_of_isPullback`).
 
 ## References
 
@@ -2081,6 +2089,104 @@ theorem Scheme.nonempty_noetherianApproximation (S : Scheme.{u})
   rw [Finset.sup_id_eq_sSup, hUsfin.coe_toFinset, ← hUs] at N
   exact ⟨N.ofIso S.topIso⟩
 
+section BaseChangeLimit
+
+/-!
+### Base change of a cofiltered limit
+
+A cofiltered limit `lim Dⱼ` of schemes stays a limit after base change along a morphism
+`p : Y ⟶ Dᵢ` to one of the stages: `Y ×_{Dᵢ} lim Dⱼ` is the limit of the system
+`{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}`. This is `AlgebraicGeometry.isLimitBaseChangeCone`; it is what
+makes the results on cofiltered limits of schemes available for the descent of a scheme
+over `lim Dⱼ` to a finite stage.
+-/
+
+variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) (c : Cone D)
+variable {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i)
+
+set_option backward.defeqAttrib.useBackward true in
+/-- (Implementation) The base change `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}` of the diagram `{ Dⱼ }` along a
+morphism `p : Y ⟶ Dᵢ`. -/
+@[simps] noncomputable def baseChangeDiagram : Over i ⥤ Scheme.{u} where
+  obj j := pullback p (D.map j.hom)
+  map {j k} f := pullback.map _ _ _ _ (𝟙 Y) (D.map f.left) (𝟙 _)
+    (by simp) (by simp [← D.map_comp, Over.w f])
+  map_id j := by apply pullback.hom_ext <;> simp
+  map_comp f g := by apply pullback.hom_ext <;> simp
+
+set_option backward.defeqAttrib.useBackward true in
+/-- (Implementation) The projection from the base changed diagram to the original diagram. -/
+@[simps] noncomputable def baseChangeDiagramπ :
+    baseChangeDiagram D p ⟶ Over.forget i ⋙ D where
+  app j := pullback.snd _ _
+
+set_option backward.defeqAttrib.useBackward true in
+/-- (Implementation) The cone with point `Y ×_{Dᵢ} lim Dⱼ` over the base changed diagram. -/
+@[simps] noncomputable def baseChangeCone : Cone (baseChangeDiagram D p) where
+  pt := pullback p (c.π.app i)
+  π.app j := pullback.map _ _ _ _ (𝟙 Y) (c.π.app j.left) (𝟙 _) (by simp) (by simp)
+  π.naturality {j k} f := by apply pullback.hom_ext <;> simp
+
+set_option backward.defeqAttrib.useBackward true in
+@[reassoc (attr := simp)]
+lemma baseChangeDiagram_map_fst {j k : Over i} (f : j ⟶ k) :
+    (baseChangeDiagram D p).map f ≫ pullback.fst p (D.map k.hom) =
+      pullback.fst p (D.map j.hom) := by
+  simp [baseChangeDiagram]
+
+set_option backward.defeqAttrib.useBackward true in
+@[reassoc (attr := simp)]
+lemma baseChangeDiagram_map_snd {j k : Over i} (f : j ⟶ k) :
+    (baseChangeDiagram D p).map f ≫ pullback.snd p (D.map k.hom) =
+      pullback.snd p (D.map j.hom) ≫ D.map f.left := by
+  simp [baseChangeDiagram]
+
+set_option backward.defeqAttrib.useBackward true in
+@[reassoc (attr := simp)]
+lemma baseChangeCone_π_app_fst (j : Over i) :
+    (baseChangeCone D c p).π.app j ≫ pullback.fst p (D.map j.hom) =
+      pullback.fst p (c.π.app i) := by
+  simp [baseChangeCone]
+
+set_option backward.defeqAttrib.useBackward true in
+@[reassoc (attr := simp)]
+lemma baseChangeCone_π_app_snd (j : Over i) :
+    (baseChangeCone D c p).π.app j ≫ pullback.snd p (D.map j.hom) =
+      pullback.snd p (c.π.app i) ≫ c.π.app j.left := by
+  simp [baseChangeCone]
+
+set_option backward.defeqAttrib.useBackward true in
+lemma isPullback_baseChangeDiagram_map {j k : Over i} (f : j ⟶ k) :
+    IsPullback ((baseChangeDiagram D p).map f) (pullback.snd p (D.map j.hom))
+      (pullback.snd p (D.map k.hom)) (D.map f.left) :=
+  isPullback_pullback_map _ _ _ _ (by rw [← D.map_comp, Over.w f])
+
+set_option backward.defeqAttrib.useBackward true in
+lemma isPullback_baseChangeCone_π (j : Over i) :
+    IsPullback ((baseChangeCone D c p).π.app j) (pullback.snd p (c.π.app i))
+      ((baseChangeDiagramπ D p).app j) (c.π.app j.left) :=
+  isPullback_pullback_map _ _ _ _ (c.w j.hom)
+
+attribute [local instance] CategoryTheory.isConnected_of_hasTerminal
+
+include c in
+/-- **Base change of a cofiltered limit of schemes.** If `lim Dⱼ` is a cofiltered limit and
+`p : Y ⟶ Dᵢ`, then `Y ×_{Dᵢ} lim Dⱼ` is the limit of the system `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}`. -/
+noncomputable def isLimitBaseChangeCone [IsCofiltered I] (hc : IsLimit c) :
+    IsLimit (baseChangeCone D c p) :=
+  isLimitOfIsPullbackOfIsConnected (baseChangeDiagramπ D p) _ (c.whisker (Over.forget i))
+    { hom := pullback.snd p (c.π.app i)
+      w := fun j ↦ by simp }
+    (isPullback_baseChangeCone_π D c p)
+    ((Functor.Initial.isLimitWhiskerEquiv (Over.forget i) c).symm hc)
+
+instance [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] {j k : Over i} (f : j ⟶ k) :
+    IsAffineHom ((baseChangeDiagram D p).map f) :=
+  MorphismProperty.of_isPullback (P := @IsAffineHom) (isPullback_baseChangeDiagram_map D p f).flip
+    inferInstance
+
+end BaseChangeLimit
+
 section FinitePresentation
 
 variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
@@ -2090,18 +2196,19 @@ include hc in
 
 Let `{Dᵢ}` be a cofiltered inverse system of affine schemes with affine transition maps and
 let `X` be an affine scheme that is locally of finite presentation over `lim Dᵢ`. Then `X` is
-the base change of a scheme `Y` that is locally of finite presentation over some `Dᵢ`. -/
+the base change of an affine scheme `Y` that is locally of finite presentation over some
+`Dᵢ`. -/
 @[stacks 01ZM]
 lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCofiltered I]
     [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, IsAffine (D.obj i)]
     {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt) [LocallyOfFinitePresentation g] :
-    ∃ (i : I) (Y : Scheme.{u}) (p : Y ⟶ D.obj i) (_ : LocallyOfFinitePresentation p)
-      (h : X ⟶ Y), IsPullback h g p (c.π.app i) := by
+    ∃ (i : I) (Y : Scheme.{u}) (_ : IsAffine Y) (p : Y ⟶ D.obj i)
+      (_ : LocallyOfFinitePresentation p) (h : X ⟶ Y), IsPullback h g p (c.π.app i) := by
   have hcpt : IsAffine c.pt := Scheme.isAffine_of_isLimit c hc
   -- Reduce to the case where `X` is the spectrum of a ring.
   wlog hX : ∃ A, X = Spec A generalizing X
-  · obtain ⟨i, Y, p, hp, h, hsq⟩ := this (X := Spec Γ(X, ⊤)) (X.isoSpec.inv ≫ g) ⟨_, rfl⟩
-    refine ⟨i, Y, p, hp, X.isoSpec.hom ≫ h, ?_⟩
+  · obtain ⟨i, Y, hYaff, p, hp, h, hsq⟩ := this (X := Spec Γ(X, ⊤)) (X.isoSpec.inv ≫ g) ⟨_, rfl⟩
+    refine ⟨i, Y, hYaff, p, hp, X.isoSpec.hom ≫ h, ?_⟩
     simpa using (IsPullback.of_horiz_isIso (fst := X.isoSpec.hom) (snd := g)
       (f := X.isoSpec.inv ≫ g) (g := 𝟙 c.pt) ⟨by simp⟩).paste_horiz hsq
   obtain ⟨A, rfl⟩ := hX
@@ -2116,11 +2223,12 @@ lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCof
         IsAffineHom ((D ⋙ Scheme.Γ.rightOp ⋙ Scheme.Spec).map f) := fun f ↦ inferInstance
     haveI hg : @LocallyOfFinitePresentation (Spec A)
         ((Cone.postcompose (asIso e).hom).obj c).pt g := ‹_›
-    obtain ⟨i, Y, p, hp, h, hsq⟩ := this _ _ ((IsLimit.postcomposeHomEquiv (asIso e) c).symm hc)
+    obtain ⟨i, Y, hYaff, p, hp, h, hsq⟩ :=
+      this _ _ ((IsLimit.postcomposeHomEquiv (asIso e) c).symm hc)
       hcpt g ⟨D ⋙ Scheme.Γ.rightOp, rfl⟩
     have : LocallyOfFinitePresentation (p ≫ inv (e.app i)) := by
       have := hp; infer_instance
-    refine ⟨i, Y, p ≫ inv (e.app i), this, h, ?_⟩
+    refine ⟨i, Y, hYaff, p ≫ inv (e.app i), this, h, ?_⟩
     refine hsq.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) (asIso (e.app i)).symm
       (by simp) (Category.comp_id g) (by simp) ?_
     change (c.π.app i ≫ e.app i) ≫ inv (e.app i) = 𝟙 _ ≫ c.π.app i
@@ -2150,10 +2258,10 @@ lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCof
         change c.π.app i = β.hom ≫ Spec.map (φ (Opposite.op i))
         rw [hφ]
         exact (Iso.hom_inv_id_assoc β (c.π.app i)).symm
-    obtain ⟨i, Y, p, hp, h, hsq⟩ := this (Scheme.Spec.mapCone (coneOfCoconeLeftOp c'))
+    obtain ⟨i, Y, hYaff, p, hp, h, hsq⟩ := this (Scheme.Spec.mapCone (coneOfCoconeLeftOp c'))
       (IsLimit.ofIsoLimit hc hcc) (inferInstanceAs (IsAffine (Spec Γ(c.pt, ⊤))))
       (g ≫ β.hom) ⟨c', rfl⟩
-    refine ⟨i, Y, p, hp, h, ?_⟩
+    refine ⟨i, Y, hYaff, p, hp, h, ?_⟩
     refine hsq.of_iso (Iso.refl _) (Iso.refl _) β.symm (Iso.refl _) (by simp) (by simp)
       (by simp) ?_
     change Spec.map (φ (Opposite.op i)) ≫ 𝟙 _ = β.inv ≫ c.π.app i
@@ -2164,9 +2272,709 @@ lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCof
   replace hc := isColimitOfConeOfCoconeLeftOp _ (isLimitOfReflects Scheme.Spec hc)
   obtain ⟨i, T, γ, hγ, h, hpush⟩ := CommRingCat.exists_isPushout_of_finitePresentation
     D.leftOp c' hc ψ (HasRingHomProperty.Spec_iff.mp ‹LocallyOfFinitePresentation (Spec.map ψ)›)
-  refine ⟨i.unop, Spec T, Spec.map γ, HasRingHomProperty.Spec_iff.mpr hγ, Spec.map h, ?_⟩
+  refine ⟨i.unop, Spec T, inferInstance, Spec.map γ, HasRingHomProperty.Spec_iff.mpr hγ,
+    Spec.map h, ?_⟩
   exact (isPullback_SpecMap_of_isPushout _ _ _ _ hpush).flip
 
 end FinitePresentation
+
+section FinitePresentationDescent
+
+/-!
+### Descending a scheme of finite presentation to a finite stage
+
+Let `{Dⱼ}` be a cofiltered inverse system of affine schemes with affine transition maps and let
+`X` be of finite presentation over `lim Dⱼ`. Then `X` is the base change of a scheme of finite
+presentation over one of the stages (Stacks Project Tag 01ZM,
+`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`).
+
+The affine case is
+`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`. The
+general case is an induction over a finite affine cover of `X`: at each step one has to glue two
+finite-stage models along a descent of their intersection. The gluing data is produced by
+`AlgebraicGeometry.exists_descendsAtWithOpen` (a quasi-compact open descends) and
+`AlgebraicGeometry.exists_iso_of_isPullback` (two finite-stage models of the same scheme become
+isomorphic at a later stage), the gluing itself is the pushout of two open immersions of
+`AlgebraicGeometry.pushoutOpensDesc`, and that the glued morphism is again cartesian is
+`AlgebraicGeometry.isPullback_of_opensRange_sup_eq_top`.
+-/
+
+section Helpers
+
+lemma quasiCompact_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
+    [CompactSpace X] : QuasiCompact f := by
+  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)]; infer_instance
+
+lemma compactSpace_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
+    [QuasiCompact f] : CompactSpace X := by
+  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)] at *; infer_instance
+
+lemma quasiSeparated_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
+    [QuasiSeparatedSpace X] : QuasiSeparated f := by
+  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)]; infer_instance
+
+lemma quasiSeparatedSpace_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
+    [QuasiSeparated f] : QuasiSeparatedSpace X := by
+  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)] at *; infer_instance
+
+end Helpers
+
+section Descent
+
+set_option backward.defeqAttrib.useBackward true
+
+variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc : IsLimit c)
+  [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, IsAffine (D.obj i)]
+
+instance baseChange_compactSpace {k k' : I} (f : k' ⟶ k) {Y : Scheme.{u}} (p : Y ⟶ D.obj k)
+    [CompactSpace Y] : CompactSpace ↥(pullback p (D.map f)) := by
+  have : QuasiCompact p := quasiCompact_of_isAffine_target p
+  have : QuasiCompact (pullback.snd p (D.map f)) := MorphismProperty.pullback_snd _ _ ‹_›
+  exact compactSpace_of_isAffine_target (pullback.snd p (D.map f))
+
+instance baseChange_quasiSeparatedSpace {k k' : I} (f : k' ⟶ k) {Y : Scheme.{u}} (p : Y ⟶ D.obj k)
+    [QuasiSeparatedSpace Y] : QuasiSeparatedSpace ↥(pullback p (D.map f)) := by
+  have : QuasiSeparated p := quasiSeparated_of_isAffine_target p
+  have : QuasiSeparated (pullback.snd p (D.map f)) := MorphismProperty.pullback_snd _ _ ‹_›
+  exact quasiSeparatedSpace_of_isAffine_target (pullback.snd p (D.map f))
+
+instance baseChangeDiagram_compactSpace {k : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj k)
+    [CompactSpace Y] (j : Over k) : CompactSpace ↥((baseChangeDiagram D p).obj j) :=
+  inferInstanceAs (CompactSpace ↥(pullback p (D.map j.hom)))
+
+instance baseChangeDiagram_quasiSeparatedSpace {k : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj k)
+    [QuasiSeparatedSpace Y] (j : Over k) : QuasiSeparatedSpace ↥((baseChangeDiagram D p).obj j) :=
+  inferInstanceAs (QuasiSeparatedSpace ↥(pullback p (D.map j.hom)))
+
+variable (D) in
+/-- (Implementation) The structure morphism of the base changed diagram to the stage `i`. -/
+@[simps] noncomputable def baseChangeDiagramStructure {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i) :
+    baseChangeDiagram D p ⟶ (Functor.const (Over i)).obj (D.obj i) where
+  app j := pullback.fst _ _ ≫ p
+
+include hc in
+/-- (Implementation) **Two finite-stage models of a scheme over the limit become isomorphic at
+a later stage.** -/
+lemma exists_iso_of_isPullback {X : Scheme.{u}} {g : X ⟶ c.pt} {k : I}
+    {Y₁ Y₂ : Scheme.{u}} {p₁ : Y₁ ⟶ D.obj k} {p₂ : Y₂ ⟶ D.obj k} {h₁ : X ⟶ Y₁} {h₂ : X ⟶ Y₂}
+    [LocallyOfFinitePresentation p₁] [LocallyOfFinitePresentation p₂]
+    [CompactSpace Y₁] [QuasiSeparatedSpace Y₁] [CompactSpace Y₂] [QuasiSeparatedSpace Y₂]
+    (H₁ : IsPullback h₁ g p₁ (c.π.app k)) (H₂ : IsPullback h₂ g p₂ (c.π.app k)) :
+    ∃ (k' : I) (f : k' ⟶ k), ∀ {Y₁' Y₂' : Scheme.{u}} {p₁' : Y₁' ⟶ D.obj k'} {q₁ : Y₁' ⟶ Y₁}
+      {p₂' : Y₂' ⟶ D.obj k'} {q₂ : Y₂' ⟶ Y₂} {h₁' : X ⟶ Y₁'} {h₂' : X ⟶ Y₂'},
+      IsPullback q₁ p₁' p₁ (D.map f) → h₁' ≫ q₁ = h₁ → h₁' ≫ p₁' = g ≫ c.π.app k' →
+      IsPullback q₂ p₂' p₂ (D.map f) → h₂' ≫ q₂ = h₂ → h₂' ≫ p₂' = g ≫ c.π.app k' →
+      ∃ e : Y₁' ≅ Y₂', e.hom ≫ p₂' = p₁' ∧ h₁' ≫ e.hom = h₂' := by
+  classical
+  have hi₁fst : H₁.isoPullback.hom ≫ pullback.fst p₁ (c.π.app k) = h₁ :=
+    IsPullback.isoPullback_hom_fst _
+  have hi₁snd : H₁.isoPullback.hom ≫ pullback.snd p₁ (c.π.app k) = g :=
+    IsPullback.isoPullback_hom_snd _
+  have hi₂fst : H₂.isoPullback.hom ≫ pullback.fst p₂ (c.π.app k) = h₂ :=
+    IsPullback.isoPullback_hom_fst _
+  have hi₂snd : H₂.isoPullback.hom ≫ pullback.snd p₂ (c.π.app k) = g :=
+    IsPullback.isoPullback_hom_snd _
+  have hinvg₁ : H₁.isoPullback.inv ≫ g = pullback.snd p₁ (c.π.app k) := by
+    rw [Iso.inv_comp_eq, hi₁snd]
+  have hinvg₂ : H₂.isoPullback.inv ≫ g = pullback.snd p₂ (c.π.app k) := by
+    rw [Iso.inv_comp_eq, hi₂snd]
+  -- descend the two comparison morphisms
+  obtain ⟨j₁, u₁, hu₁a, hu₁t⟩ := Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation
+      (baseChangeDiagram D p₁) (baseChangeDiagramStructure D p₁) p₂ (baseChangeCone D c p₁)
+      (isLimitBaseChangeCone D c p₁ hc) (H₁.isoPullback.inv ≫ h₂) (by
+    ext j
+    change ((baseChangeCone D c p₁).π.app j ≫ pullback.fst p₁ (D.map j.hom)) ≫ p₁ =
+      (H₁.isoPullback.inv ≫ h₂) ≫ p₂
+    rw [baseChangeCone_π_app_fst, Category.assoc, H₂.w, ← Category.assoc, hinvg₁]
+    exact pullback.condition)
+  obtain ⟨j₂, u₂, hu₂a, hu₂t⟩ := Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation
+      (baseChangeDiagram D p₂) (baseChangeDiagramStructure D p₂) p₁ (baseChangeCone D c p₂)
+      (isLimitBaseChangeCone D c p₂ hc) (H₂.isoPullback.inv ≫ h₁) (by
+    ext j
+    change ((baseChangeCone D c p₂).π.app j ≫ pullback.fst p₂ (D.map j.hom)) ≫ p₂ =
+      (H₂.isoPullback.inv ≫ h₁) ≫ p₁
+    rw [baseChangeCone_π_app_fst, Category.assoc, H₁.w, ← Category.assoc, hinvg₂]
+    exact pullback.condition)
+  -- move them to a common stage
+  set j₃ := IsCofiltered.min j₁ j₂ with hj₃
+  set m₁ : j₃ ⟶ j₁ := IsCofiltered.minToLeft j₁ j₂ with hm₁
+  set m₂ : j₃ ⟶ j₂ := IsCofiltered.minToRight j₁ j₂ with hm₂
+  have hu₁t' : u₁ ≫ p₂ = pullback.fst p₁ (D.map j₁.hom) ≫ p₁ := hu₁t
+  have hu₂t' : u₂ ≫ p₁ = pullback.fst p₂ (D.map j₂.hom) ≫ p₂ := hu₂t
+  set v₁ : (baseChangeDiagram D p₁).obj j₃ ⟶ (baseChangeDiagram D p₂).obj j₃ :=
+    pullback.lift ((baseChangeDiagram D p₁).map m₁ ≫ u₁) (pullback.snd p₁ (D.map j₃.hom))
+      (by rw [Category.assoc, hu₁t', baseChangeDiagram_map_fst_assoc]
+          exact pullback.condition) with hv₁def
+  set v₂ : (baseChangeDiagram D p₂).obj j₃ ⟶ (baseChangeDiagram D p₁).obj j₃ :=
+    pullback.lift ((baseChangeDiagram D p₂).map m₂ ≫ u₂) (pullback.snd p₂ (D.map j₃.hom))
+      (by rw [Category.assoc, hu₂t', baseChangeDiagram_map_fst_assoc]
+          exact pullback.condition) with hv₂def
+  have hv₁fst : v₁ ≫ pullback.fst p₂ (D.map j₃.hom) = (baseChangeDiagram D p₁).map m₁ ≫ u₁ :=
+    pullback.lift_fst ..
+  have hv₁snd : v₁ ≫ pullback.snd p₂ (D.map j₃.hom) = pullback.snd p₁ (D.map j₃.hom) :=
+    pullback.lift_snd ..
+  have hv₂fst : v₂ ≫ pullback.fst p₁ (D.map j₃.hom) = (baseChangeDiagram D p₂).map m₂ ≫ u₂ :=
+    pullback.lift_fst ..
+  have hv₂snd : v₂ ≫ pullback.snd p₁ (D.map j₃.hom) = pullback.snd p₂ (D.map j₃.hom) :=
+    pullback.lift_snd ..
+  -- after base change to the limit they are the identifications with `X`
+  have key₁ : (baseChangeCone D c p₁).π.app j₃ ≫ v₁ =
+      H₁.isoPullback.inv ≫ H₂.isoPullback.hom ≫ (baseChangeCone D c p₂).π.app j₃ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hv₁fst, ← Category.assoc, (baseChangeCone D c p₁).w m₁, hu₁a,
+        Category.assoc, Category.assoc, baseChangeCone_π_app_fst, hi₂fst]
+    · rw [Category.assoc, hv₁snd, baseChangeCone_π_app_snd, Category.assoc, Category.assoc,
+        baseChangeCone_π_app_snd, ← Category.assoc H₂.isoPullback.hom, hi₂snd,
+        ← Category.assoc, hinvg₁]
+  have key₂ : (baseChangeCone D c p₂).π.app j₃ ≫ v₂ =
+      H₂.isoPullback.inv ≫ H₁.isoPullback.hom ≫ (baseChangeCone D c p₁).π.app j₃ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hv₂fst, ← Category.assoc, (baseChangeCone D c p₂).w m₂, hu₂a,
+        Category.assoc, Category.assoc, baseChangeCone_π_app_fst, hi₁fst]
+    · rw [Category.assoc, hv₂snd, baseChangeCone_π_app_snd, Category.assoc, Category.assoc,
+        baseChangeCone_π_app_snd, ← Category.assoc H₁.isoPullback.hom, hi₁snd,
+        ← Category.assoc, hinvg₂]
+  have hw₁ : (baseChangeCone D c p₁).π.app j₃ ≫ v₁ ≫ v₂ = (baseChangeCone D c p₁).π.app j₃ := by
+    rw [← Category.assoc, key₁, Category.assoc, Category.assoc, key₂, Iso.hom_inv_id_assoc,
+      Iso.inv_hom_id_assoc]
+  have hw₂ : (baseChangeCone D c p₂).π.app j₃ ≫ v₂ ≫ v₁ = (baseChangeCone D c p₂).π.app j₃ := by
+    rw [← Category.assoc, key₂, Category.assoc, Category.assoc, key₁, Iso.hom_inv_id_assoc,
+      Iso.inv_hom_id_assoc]
+  -- the two composites become the identity at a later stage
+  obtain ⟨j₄, n₁, hn₁⟩ := Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType
+      (baseChangeDiagram D p₁) (baseChangeDiagramStructure D p₁) p₁ (baseChangeCone D c p₁)
+      (isLimitBaseChangeCone D c p₁ hc)
+      (v₁ ≫ v₂ ≫ pullback.fst p₁ (D.map j₃.hom)) (pullback.fst p₁ (D.map j₃.hom))
+      (by
+        change pullback.fst p₁ (D.map j₃.hom) ≫ p₁ = _
+        rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc v₂, hv₂snd,
+          ← Category.assoc, hv₁snd, ← pullback.condition])
+      rfl
+      (by
+        have h := congrArg (· ≫ pullback.fst p₁ (D.map j₃.hom)) hw₁
+        simp only [Category.assoc] at h ⊢
+        exact h)
+  obtain ⟨j₅, n₂, hn₂⟩ := Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType
+      (baseChangeDiagram D p₂) (baseChangeDiagramStructure D p₂) p₂ (baseChangeCone D c p₂)
+      (isLimitBaseChangeCone D c p₂ hc)
+      (v₂ ≫ v₁ ≫ pullback.fst p₂ (D.map j₃.hom)) (pullback.fst p₂ (D.map j₃.hom))
+      (by
+        change pullback.fst p₂ (D.map j₃.hom) ≫ p₂ = _
+        rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc v₁, hv₁snd,
+          ← Category.assoc, hv₂snd, ← pullback.condition])
+      rfl
+      (by
+        have h := congrArg (· ≫ pullback.fst p₂ (D.map j₃.hom)) hw₂
+        simp only [Category.assoc] at h ⊢
+        exact h)
+  obtain ⟨j₇, e, he⟩ := IsCofilteredOrEmpty.cone_maps
+    (IsCofiltered.minToLeft j₄ j₅ ≫ n₁) (IsCofiltered.minToRight j₄ j₅ ≫ n₂)
+  obtain ⟨t, ht₁, ht₂⟩ : ∃ t : j₇ ⟶ j₃, t = (e ≫ IsCofiltered.minToLeft j₄ j₅) ≫ n₁ ∧
+      t = (e ≫ IsCofiltered.minToRight j₄ j₅) ≫ n₂ :=
+    ⟨_, rfl, by rw [Category.assoc, he, Category.assoc]⟩
+  have hcomp₁ : (baseChangeDiagram D p₁).map t ≫ v₁ ≫ v₂ ≫ pullback.fst p₁ (D.map j₃.hom) =
+      (baseChangeDiagram D p₁).map t ≫ pullback.fst p₁ (D.map j₃.hom) := by
+    rw [ht₁]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hn₁]
+  have hcomp₂ : (baseChangeDiagram D p₂).map t ≫ v₂ ≫ v₁ ≫ pullback.fst p₂ (D.map j₃.hom) =
+      (baseChangeDiagram D p₂).map t ≫ pullback.fst p₂ (D.map j₃.hom) := by
+    rw [ht₂]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hn₂]
+  -- the isomorphism at the stage `j₇`
+  set V₁ : (baseChangeDiagram D p₁).obj j₇ ⟶ (baseChangeDiagram D p₂).obj j₇ :=
+    pullback.lift ((baseChangeDiagram D p₁).map t ≫ v₁ ≫ pullback.fst p₂ (D.map j₃.hom))
+      (pullback.snd p₁ (D.map j₇.hom))
+      (by rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc v₁, hv₁snd,
+            ← Category.assoc, baseChangeDiagram_map_snd, Category.assoc, ← D.map_comp,
+            Over.w t]) with hV₁def
+  set V₂ : (baseChangeDiagram D p₂).obj j₇ ⟶ (baseChangeDiagram D p₁).obj j₇ :=
+    pullback.lift ((baseChangeDiagram D p₂).map t ≫ v₂ ≫ pullback.fst p₁ (D.map j₃.hom))
+      (pullback.snd p₂ (D.map j₇.hom))
+      (by rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc v₂, hv₂snd,
+            ← Category.assoc, baseChangeDiagram_map_snd, Category.assoc, ← D.map_comp,
+            Over.w t]) with hV₂def
+  have hV₁fst : V₁ ≫ pullback.fst p₂ (D.map j₇.hom) =
+      (baseChangeDiagram D p₁).map t ≫ v₁ ≫ pullback.fst p₂ (D.map j₃.hom) := pullback.lift_fst ..
+  have hV₁snd : V₁ ≫ pullback.snd p₂ (D.map j₇.hom) = pullback.snd p₁ (D.map j₇.hom) :=
+    pullback.lift_snd ..
+  have hV₂fst : V₂ ≫ pullback.fst p₁ (D.map j₇.hom) =
+      (baseChangeDiagram D p₂).map t ≫ v₂ ≫ pullback.fst p₁ (D.map j₃.hom) := pullback.lift_fst ..
+  have hV₂snd : V₂ ≫ pullback.snd p₁ (D.map j₇.hom) = pullback.snd p₂ (D.map j₇.hom) :=
+    pullback.lift_snd ..
+  have hnat₁ : V₁ ≫ (baseChangeDiagram D p₂).map t = (baseChangeDiagram D p₁).map t ≫ v₁ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, baseChangeDiagram_map_fst, hV₁fst, Category.assoc]
+    · rw [Category.assoc, baseChangeDiagram_map_snd, ← Category.assoc, hV₁snd,
+        Category.assoc, hv₁snd, baseChangeDiagram_map_snd]
+  have hnat₂ : V₂ ≫ (baseChangeDiagram D p₁).map t = (baseChangeDiagram D p₂).map t ≫ v₂ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, baseChangeDiagram_map_fst, hV₂fst, Category.assoc]
+    · rw [Category.assoc, baseChangeDiagram_map_snd, ← Category.assoc, hV₂snd,
+        Category.assoc, hv₂snd, baseChangeDiagram_map_snd]
+  have hVV₁ : V₁ ≫ V₂ = 𝟙 _ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hV₂fst, ← Category.assoc, hnat₁]
+      simp only [Category.assoc]
+      rw [hcomp₁, baseChangeDiagram_map_fst, Category.id_comp]
+    · rw [Category.assoc, hV₂snd, hV₁snd, Category.id_comp]
+  have hVV₂ : V₂ ≫ V₁ = 𝟙 _ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hV₁fst, ← Category.assoc, hnat₂]
+      simp only [Category.assoc]
+      rw [hcomp₂, baseChangeDiagram_map_fst, Category.id_comp]
+    · rw [Category.assoc, hV₁snd, hV₂snd, Category.id_comp]
+  have key₁' : (baseChangeCone D c p₁).π.app j₃ ≫ v₁ ≫ pullback.fst p₂ (D.map j₃.hom) =
+      H₁.isoPullback.inv ≫ h₂ := by
+    rw [← Category.assoc, key₁, Category.assoc, Category.assoc, baseChangeCone_π_app_fst, hi₂fst]
+  have hcompat : (H₁.isoPullback.hom ≫ (baseChangeCone D c p₁).π.app j₇) ≫ V₁ =
+      H₂.isoPullback.hom ≫ (baseChangeCone D c p₂).π.app j₇ := by
+    apply pullback.hom_ext
+    · have hlhs : ((H₁.isoPullback.hom ≫ (baseChangeCone D c p₁).π.app j₇) ≫ V₁) ≫
+          pullback.fst p₂ (D.map j₇.hom) = h₂ := by
+        simp only [Category.assoc, hV₁fst]
+        rw [← Category.assoc ((baseChangeCone D c p₁).π.app j₇), (baseChangeCone D c p₁).w t,
+          key₁', Iso.hom_inv_id_assoc]
+      have hrhs : (H₂.isoPullback.hom ≫ (baseChangeCone D c p₂).π.app j₇) ≫
+          pullback.fst p₂ (D.map j₇.hom) = h₂ := by
+        rw [Category.assoc, baseChangeCone_π_app_fst, hi₂fst]
+      rw [hlhs, hrhs]
+    · rw [Category.assoc, Category.assoc, hV₁snd, baseChangeCone_π_app_snd, ← Category.assoc,
+        hi₁snd, Category.assoc, baseChangeCone_π_app_snd, ← Category.assoc, hi₂snd]
+  -- transport to arbitrary models of the base changes
+  refine ⟨j₇.left, j₇.hom, ?_⟩
+  intro Y₁' Y₂' p₁' q₁ p₂' q₂ h₁' h₂' HH₁ hh₁ hh₁' HH₂ hh₂ hh₂'
+  have hα₁fst : HH₁.isoPullback.hom ≫ pullback.fst p₁ (D.map j₇.hom) = q₁ :=
+    IsPullback.isoPullback_hom_fst _
+  have hα₁snd : HH₁.isoPullback.hom ≫ pullback.snd p₁ (D.map j₇.hom) = p₁' :=
+    IsPullback.isoPullback_hom_snd _
+  have hα₂fst : HH₂.isoPullback.hom ≫ pullback.fst p₂ (D.map j₇.hom) = q₂ :=
+    IsPullback.isoPullback_hom_fst _
+  have hα₂snd : HH₂.isoPullback.hom ≫ pullback.snd p₂ (D.map j₇.hom) = p₂' :=
+    IsPullback.isoPullback_hom_snd _
+  have hh₁α : h₁' ≫ HH₁.isoPullback.hom =
+      H₁.isoPullback.hom ≫ (baseChangeCone D c p₁).π.app j₇ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hα₁fst, hh₁, Category.assoc, baseChangeCone_π_app_fst, hi₁fst]
+    · rw [Category.assoc, hα₁snd, hh₁', Category.assoc, baseChangeCone_π_app_snd,
+        ← Category.assoc, hi₁snd]
+  have hh₂α : h₂' ≫ HH₂.isoPullback.hom =
+      H₂.isoPullback.hom ≫ (baseChangeCone D c p₂).π.app j₇ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hα₂fst, hh₂, Category.assoc, baseChangeCone_π_app_fst, hi₂fst]
+    · rw [Category.assoc, hα₂snd, hh₂', Category.assoc, baseChangeCone_π_app_snd,
+        ← Category.assoc, hi₂snd]
+  refine ⟨HH₁.isoPullback ≪≫ ⟨V₁, V₂, hVV₁, hVV₂⟩ ≪≫ HH₂.isoPullback.symm, ?_, ?_⟩
+  · change HH₁.isoPullback.hom ≫ V₁ ≫ HH₂.isoPullback.inv ≫ p₂' = p₁'
+    rw [show HH₂.isoPullback.inv ≫ p₂' = pullback.snd p₂ (D.map j₇.hom) by
+      rw [Iso.inv_comp_eq, hα₂snd], hV₁snd, hα₁snd]
+  · change h₁' ≫ HH₁.isoPullback.hom ≫ V₁ ≫ HH₂.isoPullback.inv = h₂'
+    rw [← Category.assoc, ← Category.assoc, hh₁α, hcompat, ← hh₂α, Category.assoc,
+      Iso.hom_inv_id, Category.comp_id]
+
+variable (D c) in
+/-- (Implementation) The comparison morphism to the base change of a finite-stage model. -/
+noncomputable def isPullbackLift {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g : X ⟶ c.pt}
+    {p : Y ⟶ D.obj k} {h : X ⟶ Y} (H : IsPullback h g p (c.π.app k)) :
+    X ⟶ pullback p (D.map f) :=
+  pullback.lift h (g ≫ c.π.app k') (by rw [H.w, ← c.w f, Category.assoc])
+
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ i, IsAffine (D.obj i)] in
+@[reassoc (attr := simp)]
+lemma isPullbackLift_fst {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g : X ⟶ c.pt}
+    {p : Y ⟶ D.obj k} {h : X ⟶ Y} (H : IsPullback h g p (c.π.app k)) :
+    isPullbackLift D c f H ≫ pullback.fst p (D.map f) = h := pullback.lift_fst ..
+
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ i, IsAffine (D.obj i)] in
+@[reassoc (attr := simp)]
+lemma isPullbackLift_snd {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g : X ⟶ c.pt}
+    {p : Y ⟶ D.obj k} {h : X ⟶ Y} (H : IsPullback h g p (c.π.app k)) :
+    isPullbackLift D c f H ≫ pullback.snd p (D.map f) = g ≫ c.π.app k' := pullback.lift_snd ..
+
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ i, IsAffine (D.obj i)] in
+lemma isPullback_isPullbackLift {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g : X ⟶ c.pt}
+    {p : Y ⟶ D.obj k} {h : X ⟶ Y} (H : IsPullback h g p (c.π.app k)) :
+    IsPullback (isPullbackLift D c f H) g (pullback.snd p (D.map f)) (c.π.app k') := by
+  refine IsPullback.of_right ?_ (by simp) (IsPullback.of_hasPullback p (D.map f))
+  rw [isPullbackLift_fst, c.w f]
+  exact H
+
+
+variable (D c) in
+/-- (Implementation) The property that `g : X ⟶ lim Dⱼ` is the base change along
+`lim Dⱼ ⟶ D_k` of a scheme of finite presentation over the stage `D_k`. -/
+def DescendsAt (k : I) {X : Scheme.{u}} (g : X ⟶ c.pt) : Prop :=
+  ∃ (Y : Scheme.{u}) (p : Y ⟶ D.obj k) (h : X ⟶ Y), LocallyOfFinitePresentation p ∧
+    CompactSpace Y ∧ QuasiSeparatedSpace Y ∧ IsPullback h g p (c.π.app k)
+
+variable (D c) in
+/-- (Implementation) Refinement of `AlgebraicGeometry.DescendsAt` remembering a descent of a
+quasi-compact open `W ⊆ X` to a quasi-compact open of the finite-stage model. -/
+def DescendsAtWithOpen (k : I) {X : Scheme.{u}} (g : X ⟶ c.pt) (W : X.Opens) : Prop :=
+  ∃ (Y : Scheme.{u}) (p : Y ⟶ D.obj k) (h : X ⟶ Y) (O : Y.Opens),
+    LocallyOfFinitePresentation p ∧ CompactSpace Y ∧ QuasiSeparatedSpace Y ∧
+      IsPullback h g p (c.π.app k) ∧ IsCompact (O : Set Y) ∧ h ⁻¹ᵁ O = W
+
+variable (D c) in
+/-- (Implementation) The property that `g : X ⟶ lim Dⱼ` is the base change of a scheme of
+finite presentation over one of the stages. -/
+def DescendsToStage {X : Scheme.{u}} (g : X ⟶ c.pt) : Prop := ∃ k, DescendsAt D c k g
+
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
+lemma DescendsAt.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
+    (H : DescendsAt D c k g) : DescendsAt D c k' g := by
+  obtain ⟨Y, p, h, hp, hcpt, hqs, hsq⟩ := H
+  haveI := hp; haveI := hcpt; haveI := hqs
+  exact ⟨pullback p (D.map f), pullback.snd _ _, isPullbackLift D c f hsq, inferInstance,
+    inferInstance, inferInstance, isPullback_isPullbackLift f hsq⟩
+
+omit [IsCofiltered I] in
+lemma DescendsAtWithOpen.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
+    {W : X.Opens} (H : DescendsAtWithOpen D c k g W) : DescendsAtWithOpen D c k' g W := by
+  obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, hOc, hO⟩ := H
+  haveI := hp; haveI := hcpt; haveI := hqs
+  haveI : QuasiCompact (pullback.fst p (D.map f)) :=
+    MorphismProperty.pullback_fst _ _ inferInstance
+  refine ⟨pullback p (D.map f), pullback.snd _ _, isPullbackLift D c f hsq,
+    pullback.fst p (D.map f) ⁻¹ᵁ O, inferInstance, inferInstance, inferInstance,
+    isPullback_isPullbackLift f hsq,
+    QuasiCompact.isCompact_preimage _ O.isOpen hOc, ?_⟩
+  rw [← Scheme.Hom.comp_preimage, isPullbackLift_fst, hO]
+
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ i, IsAffine (D.obj i)] in
+lemma DescendsAtWithOpen.descendsAt {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt} {W : X.Opens}
+    (H : DescendsAtWithOpen D c k g W) : DescendsAt D c k g := by
+  obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, -, -⟩ := H
+  exact ⟨Y, p, h, hp, hcpt, hqs, hsq⟩
+
+include hc in
+/-- (Implementation) A quasi-compact open of a scheme over the limit descends to a
+finite stage (Stacks Project Tag 01ZB). -/
+lemma exists_descendsAtWithOpen {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt}
+    (H : DescendsAt D c k g) (W : X.Opens) (hW : IsCompact (W : Set X)) :
+    ∃ k' : I, DescendsAtWithOpen D c k' g W := by
+  obtain ⟨Y, p, h, hp, hcpt, hqs, hsq⟩ := H
+  haveI := hp; haveI := hcpt; haveI := hqs
+  have hlim : IsLimit ((baseChangeCone D c p).extend hsq.isoPullback.hom) :=
+    (isLimitBaseChangeCone D c p hc).ofIsoLimit
+      (Cone.ext hsq.isoPullback.symm (fun j ↦ by simp))
+  obtain ⟨j, O, hOc, hO⟩ := exists_preimage_eq (baseChangeDiagram D p) _ hlim W hW
+  refine ⟨j.left, pullback p (D.map j.hom), pullback.snd _ _, isPullbackLift D c j.hom hsq, O,
+    inferInstance, inferInstance, inferInstance, isPullback_isPullbackLift j.hom hsq, hOc, ?_⟩
+  have hmap : isPullbackLift D c j.hom hsq =
+      ((baseChangeCone D c p).extend hsq.isoPullback.hom).π.app j := by
+    apply pullback.hom_ext <;>
+      simp [Cone.extend, IsPullback.isoPullback_hom_fst]
+  rw [← hO, hmap]
+
+include hc in
+/-- (Implementation) An affine scheme of finite presentation over the limit descends to a
+finite stage. -/
+lemma DescendsToStage.of_isAffine {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt)
+    [LocallyOfFinitePresentation g] : DescendsToStage D c g := by
+  obtain ⟨i, Y, hYaff, p, hp, h, hsq⟩ :=
+    Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine D c hc g
+  haveI := hYaff
+  exact ⟨i, Y, p, h, hp, inferInstance, inferInstance, hsq⟩
+
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ i, IsAffine (D.obj i)] in
+lemma DescendsToStage.comp_iso {X X' : Scheme.{u}} (e : X' ≅ X) {g : X ⟶ c.pt}
+    (H : DescendsToStage D c g) : DescendsToStage D c (e.hom ≫ g) := by
+  obtain ⟨k, Y, p, h, hp, hcpt, hqs, hsq⟩ := H
+  refine ⟨k, Y, p, e.hom ≫ h, hp, hcpt, hqs, ?_⟩
+  have hiso : IsPullback e.hom (e.hom ≫ g) g (𝟙 c.pt) := IsPullback.of_horiz_isIso ⟨by simp⟩
+  simpa using hiso.paste_horiz hsq
+
+
+include hc in
+/-- (Implementation) **The two-open gluing step**: if a scheme over the limit is covered by
+two opens with quasi-compact intersection, each of which descends to a finite stage, then it
+descends to a finite stage. -/
+lemma DescendsToStage.of_sup_eq_top {Z : Scheme.{u}} (gZ : Z ⟶ c.pt) (U V : Z.Opens)
+    (hUV : U ⊔ V = ⊤) (hWc : IsCompact ((U ⊓ V : Z.Opens) : Set Z))
+    (hU : DescendsToStage D c (U.ι ≫ gZ)) (hV : DescendsToStage D c (V.ι ≫ gZ)) :
+    DescendsToStage D c gZ := by
+  obtain ⟨k₁, hU⟩ := hU
+  obtain ⟨k₂, hV⟩ := hV
+  -- the intersection is quasi-compact in each of the two charts
+  have hWU : IsCompact ((U.ι ⁻¹ᵁ V : U.toScheme.Opens) : Set U.toScheme) := by
+    have he : (U.ι ⁻¹ᵁ V : U.toScheme.Opens) = U.ι ⁻¹ᵁ (U ⊓ V) := by
+      rw [Scheme.Hom.preimage_inf, Scheme.Opens.ι_preimage_self, top_inf_eq]
+    rw [he]
+    refine U.ι.isOpenEmbedding.isInducing.isCompact_preimage' hWc ?_
+    rw [Scheme.Opens.range_ι]
+    exact inf_le_left
+  have hWV : IsCompact ((V.ι ⁻¹ᵁ U : V.toScheme.Opens) : Set V.toScheme) := by
+    have he : (V.ι ⁻¹ᵁ U : V.toScheme.Opens) = V.ι ⁻¹ᵁ (U ⊓ V) := by
+      rw [Scheme.Hom.preimage_inf, Scheme.Opens.ι_preimage_self, inf_top_eq]
+    rw [he]
+    refine V.ι.isOpenEmbedding.isInducing.isCompact_preimage' hWc ?_
+    rw [Scheme.Opens.range_ι]
+    exact inf_le_right
+  -- descend the intersection inside both charts, over a common stage
+  obtain ⟨k₃, hU⟩ := exists_descendsAtWithOpen hc hU _ hWU
+  obtain ⟨k₄, hV⟩ := exists_descendsAtWithOpen hc hV _ hWV
+  replace hU := hU.mono (IsCofiltered.minToLeft k₃ k₄)
+  replace hV := hV.mono (IsCofiltered.minToRight k₃ k₄)
+  set k := IsCofiltered.min k₃ k₄ with hk
+  obtain ⟨YU, pU, hUh, OU, hpU, hcU, hqU, HU, hOUc, hOU⟩ := hU
+  obtain ⟨YV, pV, hVh, OV, hpV, hcV, hqV, HV, hOVc, hOV⟩ := hV
+  haveI := hpU; haveI := hcU; haveI := hqU; haveI := hpV; haveI := hcV; haveI := hqV
+  haveI : CompactSpace OU.toScheme := isCompact_iff_compactSpace.mp hOUc
+  haveI : CompactSpace OV.toScheme := isCompact_iff_compactSpace.mp hOVc
+  haveI : QuasiSeparatedSpace OU.toScheme :=
+    QuasiSeparatedSpace.of_isOpenEmbedding OU.ι.isOpenEmbedding
+  haveI : QuasiSeparatedSpace OV.toScheme :=
+    QuasiSeparatedSpace.of_isOpenEmbedding OV.ι.isOpenEmbedding
+  -- the two descended models of the intersection
+  have hrangeU : (Scheme.Opens.infHomLeft U V).opensRange = U.ι ⁻¹ᵁ V := by
+    rw [Scheme.opensRange_homOfLE, Scheme.Hom.preimage_inf, Scheme.Opens.ι_preimage_self,
+      top_inf_eq]
+  have hrangeV : (Scheme.Opens.infHomRight U V).opensRange = V.ι ⁻¹ᵁ U := by
+    rw [Scheme.opensRange_homOfLE, Scheme.Hom.preimage_inf, Scheme.Opens.ι_preimage_self,
+      inf_top_eq]
+  have hsubU : Set.range (Scheme.Opens.infHomLeft U V ≫ hUh) ⊆ Set.range OU.ι := by
+    rintro - ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    change hUh ((Scheme.Opens.infHomLeft U V) x) ∈ OU
+    have : (Scheme.Opens.infHomLeft U V) x ∈ hUh ⁻¹ᵁ OU := by
+      rw [hOU, ← hrangeU]
+      exact ⟨x, rfl⟩
+    exact this
+  have hsubV : Set.range (Scheme.Opens.infHomRight U V ≫ hVh) ⊆ Set.range OV.ι := by
+    rintro - ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    change hVh ((Scheme.Opens.infHomRight U V) x) ∈ OV
+    have : (Scheme.Opens.infHomRight U V) x ∈ hVh ⁻¹ᵁ OV := by
+      rw [hOV, ← hrangeV]
+      exact ⟨x, rfl⟩
+    exact this
+  set aU₀ : (U ⊓ V : Z.Opens).toScheme ⟶ OU.toScheme :=
+    IsOpenImmersion.lift OU.ι (Scheme.Opens.infHomLeft U V ≫ hUh) hsubU with haU₀
+  set aV₀ : (U ⊓ V : Z.Opens).toScheme ⟶ OV.toScheme :=
+    IsOpenImmersion.lift OV.ι (Scheme.Opens.infHomRight U V ≫ hVh) hsubV with haV₀
+  have HaU : IsPullback aU₀ (Scheme.Opens.infHomLeft U V) OU.ι hUh :=
+    IsOpenImmersion.isPullback _ _ _ _ (IsOpenImmersion.lift_fac _ _ hsubU).symm
+      (by rw [Scheme.Opens.opensRange_ι, hOU, hrangeU])
+  have HaV : IsPullback aV₀ (Scheme.Opens.infHomRight U V) OV.ι hVh :=
+    IsOpenImmersion.isPullback _ _ _ _ (IsOpenImmersion.lift_fac _ _ hsubV).symm
+      (by rw [Scheme.Opens.opensRange_ι, hOV, hrangeV])
+  have HWU : IsPullback aU₀ ((U ⊓ V : Z.Opens).ι ≫ gZ) (OU.ι ≫ pU) (c.π.app k) := by
+    have h := HaU.paste_vert HU
+    rwa [← Category.assoc, Scheme.homOfLE_ι] at h
+  have HWV : IsPullback aV₀ ((U ⊓ V : Z.Opens).ι ≫ gZ) (OV.ι ≫ pV) (c.π.app k) := by
+    have h := HaV.paste_vert HV
+    rwa [← Category.assoc, Scheme.homOfLE_ι] at h
+  -- the two models of the intersection agree at a later stage
+  obtain ⟨k', f', hiso⟩ := exists_iso_of_isPullback hc HWU HWV
+  -- base change everything to that stage
+  set YU' := pullback pU (D.map f') with hYU'
+  set YV' := pullback pV (D.map f') with hYV'
+  set pU' : YU' ⟶ D.obj k' := pullback.snd pU (D.map f') with hpU'
+  set pV' : YV' ⟶ D.obj k' := pullback.snd pV (D.map f') with hpV'
+  set hU' : U.toScheme ⟶ YU' := isPullbackLift D c f' HU with hhU'
+  set hV' : V.toScheme ⟶ YV' := isPullbackLift D c f' HV with hhV'
+  have HU' : IsPullback hU' (U.ι ≫ gZ) pU' (c.π.app k') := isPullback_isPullbackLift f' HU
+  have HV' : IsPullback hV' (V.ι ≫ gZ) pV' (c.π.app k') := isPullback_isPullbackLift f' HV
+  set OU' : YU'.Opens := pullback.fst pU (D.map f') ⁻¹ᵁ OU with hOU'
+  set OV' : YV'.Opens := pullback.fst pV (D.map f') ⁻¹ᵁ OV with hOV'
+  have HqU : IsPullback (pullback.fst pU (D.map f') ∣_ OU) (OU'.ι ≫ pU') (OU.ι ≫ pU)
+      (D.map f') :=
+    (isPullback_morphismRestrict (pullback.fst pU (D.map f')) OU).paste_vert
+      (IsPullback.of_hasPullback pU (D.map f'))
+  have HqV : IsPullback (pullback.fst pV (D.map f') ∣_ OV) (OV'.ι ≫ pV') (OV.ι ≫ pV)
+      (D.map f') :=
+    (isPullback_morphismRestrict (pullback.fst pV (D.map f')) OV).paste_vert
+      (IsPullback.of_hasPullback pV (D.map f'))
+  set h₁' : (U ⊓ V : Z.Opens).toScheme ⟶ OU'.toScheme :=
+    HqU.lift aU₀ ((U ⊓ V : Z.Opens).ι ≫ gZ ≫ c.π.app k')
+      (by rw [HWU.w]; simp only [Category.assoc]; rw [c.w f']) with hh₁'
+  set h₂' : (U ⊓ V : Z.Opens).toScheme ⟶ OV'.toScheme :=
+    HqV.lift aV₀ ((U ⊓ V : Z.Opens).ι ≫ gZ ≫ c.π.app k')
+      (by rw [HWV.w]; simp only [Category.assoc]; rw [c.w f']) with hh₂'
+  obtain ⟨e, he₁, he₂⟩ := hiso (h₁' := h₁') (h₂' := h₂') HqU
+    (by rw [hh₁']; exact IsPullback.lift_fst ..)
+    (by rw [hh₁', IsPullback.lift_snd, Category.assoc]) HqV
+    (by rw [hh₂']; exact IsPullback.lift_fst ..)
+    (by rw [hh₂', IsPullback.lift_snd, Category.assoc])
+  -- glue the two charts along the descended intersection
+  have hOU'c : IsCompact ((OU' : YU'.Opens) : Set YU') := by
+    haveI : QuasiCompact (pullback.fst pU (D.map f')) :=
+      MorphismProperty.pullback_fst _ _ inferInstance
+    rw [hOU']
+    exact QuasiCompact.isCompact_preimage _ OU.isOpen hOUc
+  haveI : CompactSpace ↥(OU'.toScheme) := isCompact_iff_compactSpace.mp hOU'c
+  have hcomm : OU'.ι ≫ pU' = (e.hom ≫ OV'.ι) ≫ pV' := by rw [Category.assoc, he₁]
+  have hpreU : hU' ⁻¹ᵁ OU' = U.ι ⁻¹ᵁ V := by
+    rw [hOU', ← Scheme.Hom.comp_preimage, hhU', isPullbackLift_fst, hOU]
+  have hpreV : hV' ⁻¹ᵁ OV' = V.ι ⁻¹ᵁ U := by
+    rw [hOV', ← Scheme.Hom.comp_preimage, hhV', isPullbackLift_fst, hOV]
+  have hcommU : Scheme.Opens.infHomLeft U V ≫ hU' = h₁' ≫ OU'.ι := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hhU', isPullbackLift_fst, Category.assoc,
+        ← morphismRestrict_ι (pullback.fst pU (D.map f')) OU, ← Category.assoc, hh₁',
+        IsPullback.lift_fst, haU₀, IsOpenImmersion.lift_fac]
+    · rw [Category.assoc, hhU', isPullbackLift_snd, Category.assoc]
+      change _ = h₁' ≫ OU'.ι ≫ pU'
+      rw [← Category.assoc, hh₁', IsPullback.lift_snd, Category.assoc,
+        ← Category.assoc (Scheme.Opens.infHomLeft U V), Scheme.homOfLE_ι]
+  have hcommV' : Scheme.Opens.infHomRight U V ≫ hV' = h₂' ≫ OV'.ι := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hhV', isPullbackLift_fst, Category.assoc,
+        ← morphismRestrict_ι (pullback.fst pV (D.map f')) OV, ← Category.assoc, hh₂',
+        IsPullback.lift_fst, haV₀, IsOpenImmersion.lift_fac]
+    · rw [Category.assoc, hhV', isPullbackLift_snd, Category.assoc]
+      change _ = h₂' ≫ OV'.ι ≫ pV'
+      rw [← Category.assoc, hh₂', IsPullback.lift_snd, Category.assoc,
+        ← Category.assoc (Scheme.Opens.infHomRight U V), Scheme.homOfLE_ι]
+  have hcommV : Scheme.Opens.infHomRight U V ≫ hV' = h₁' ≫ e.hom ≫ OV'.ι := by
+    rw [← Category.assoc, he₂, hcommV']
+  have HsqU : IsPullback h₁' (Scheme.Opens.infHomLeft U V) OU'.ι hU' :=
+    IsOpenImmersion.isPullback _ _ _ _ hcommU
+      (by rw [Scheme.Opens.opensRange_ι, hpreU, hrangeU])
+  have HsqV : IsPullback h₁' (Scheme.Opens.infHomRight U V) (e.hom ≫ OV'.ι) hV' :=
+    IsOpenImmersion.isPullback _ _ _ _ hcommV
+      (by
+        rw [Scheme.Hom.opensRange_comp_of_isIso, Scheme.Opens.opensRange_ι, hpreV, hrangeV])
+  -- the glued finite-stage model
+  have hf : h₁' ≫ OU'.ι = Scheme.Opens.infHomLeft U V ≫ hU' := hcommU.symm
+  have hg : h₁' ≫ (e.hom ≫ OV'.ι) = Scheme.Opens.infHomRight U V ≫ hV' := hcommV.symm
+  set p : pushout OU'.ι (e.hom ≫ OV'.ι) ⟶ D.obj k' := pushout.desc pU' pV' hcomm with hp
+  set ρ := pushout.map (Scheme.Opens.infHomLeft U V)
+    (Scheme.Opens.infHomRight U V) OU'.ι (e.hom ≫ OV'.ι) hU' hV' h₁'
+    hf.symm hg.symm with hρ
+  have hchartU := isPullback_pushout_map_inl_of_isPullback OU'.ι (e.hom ≫ OV'.ι)
+    (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)
+    hU' hV' h₁' hf hg HsqV
+  have hchartV := isPullback_pushout_map_inr_of_isPullback OU'.ι (e.hom ≫ OV'.ι)
+    (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)
+    hU' hV' h₁' hf hg HsqU
+  have hw : ρ ≫ p = (pushoutOpensDesc U V ≫ gZ) ≫ c.π.app k' := by
+    apply pushout.hom_ext
+    · rw [← Category.assoc, hρ, pushout.inl_desc, Category.assoc, hp, pushout.inl_desc]
+      have hw' := HU'.w
+      simp only [Category.assoc] at hw' ⊢
+      rw [inl_pushoutOpensDesc_assoc]
+      exact hw'
+    · rw [← Category.assoc, hρ, pushout.inr_desc, Category.assoc, hp, pushout.inr_desc]
+      have hw' := HV'.w
+      simp only [Category.assoc] at hw' ⊢
+      rw [inr_pushoutOpensDesc_assoc]
+      exact hw'
+  have hmain : IsPullback ρ (pushoutOpensDesc U V ≫ gZ) p (c.π.app k') := by
+    refine isPullback_of_opensRange_sup_eq_top hw (pushout.inl OU'.ι (e.hom ≫ OV'.ι))
+      (pushout.inr OU'.ι (e.hom ≫ OV'.ι))
+      (opensRange_pushout_inl_sup_opensRange_pushout_inr OU'.ι (e.hom ≫ OV'.ι))
+      hchartU hchartV ?_ ?_
+    · rw [inl_pushoutOpensDesc_assoc, hp, pushout.inl_desc]
+      exact HU'
+    · rw [inr_pushoutOpensDesc_assoc, hp, pushout.inr_desc]
+      exact HV'
+  haveI := isIso_pushoutOpensDesc U V hUV
+  refine ⟨k', pushout OU'.ι (e.hom ≫ OV'.ι), p, inv (pushoutOpensDesc U V) ≫ ρ,
+    IsZariskiLocalAtSource.pushout_desc OU'.ι (e.hom ≫ OV'.ι) hcomm inferInstance inferInstance,
+    inferInstance,
+    quasiSeparatedSpace_pushout OU'.ι (e.hom ≫ OV'.ι), ?_⟩
+  have hiso : IsPullback (inv (pushoutOpensDesc U V)) gZ (pushoutOpensDesc U V ≫ gZ)
+      (𝟙 c.pt) := IsPullback.of_horiz_isIso ⟨by simp⟩
+  simpa using hiso.paste_horiz hmain
+
+include hc in
+/-- (Implementation) **Descent to a finite stage for a finite union of affine opens.** -/
+lemma descendsToStage_finsetSup {X : Scheme.{u}} [QuasiSeparatedSpace X] (g : X ⟶ c.pt)
+    [LocallyOfFinitePresentation g] (s : Finset X.Opens) (hs : ∀ W ∈ s, IsAffineOpen W) :
+    DescendsToStage D c ((s.sup id : X.Opens).ι ≫ g) := by
+  classical
+  induction s using Finset.induction with
+  | empty =>
+      rw [Finset.sup_empty]
+      haveI : IsAffine ((⊥ : X.Opens).toScheme) := isAffineOpen_bot X
+      exact DescendsToStage.of_isAffine hc _
+  | insert a s ha ih =>
+      have haff : IsAffineOpen a := hs a (Finset.mem_insert_self a s)
+      have hsaff : ∀ W ∈ s, IsAffineOpen W := fun W hW ↦ hs W (Finset.mem_insert_of_mem hW)
+      rw [Finset.sup_insert, id]
+      set Z : X.Opens := a ⊔ s.sup id with hZ
+      haveI : QuasiSeparatedSpace Z.toScheme :=
+        QuasiSeparatedSpace.of_isOpenEmbedding Z.ι.isOpenEmbedding
+      set U : Z.toScheme.Opens := Z.ι ⁻¹ᵁ (s.sup id) with hUdef
+      set V : Z.toScheme.Opens := Z.ι ⁻¹ᵁ a with hVdef
+      have hUV : U ⊔ V = ⊤ := by
+        rw [hUdef, hVdef, ← Scheme.Hom.preimage_sup, sup_comm, ← hZ,
+          Scheme.Opens.ι_preimage_self]
+      -- the intersection is quasi-compact
+      have hsc : IsCompact ((s.sup id : X.Opens) : Set X) :=
+        isCompact_finset_sup s fun W hW ↦ (hsaff W hW).isCompact
+      have hinfc : IsCompact (((s.sup id ⊓ a : X.Opens)) : Set X) := by
+        rw [TopologicalSpace.Opens.coe_inf]
+        exact QuasiSeparatedSpace.inter_isCompact _ _ (s.sup id).2 hsc a.2 haff.isCompact
+      have hUVc : IsCompact ((U ⊓ V : Z.toScheme.Opens) : Set Z.toScheme) := by
+        have he : (U ⊓ V : Z.toScheme.Opens) = Z.ι ⁻¹ᵁ (s.sup id ⊓ a) := by
+          rw [hUdef, hVdef, Scheme.Hom.preimage_inf]
+        rw [he]
+        refine Z.ι.isOpenEmbedding.isInducing.isCompact_preimage' hinfc ?_
+        rw [Scheme.Opens.range_ι]
+        exact le_trans inf_le_left le_sup_right
+      refine DescendsToStage.of_sup_eq_top hc (Z.ι ≫ g) U V hUV hUVc ?_ ?_
+      · -- the first open is the union over `s`, which descends by the induction hypothesis
+        have hrange : Set.range (U.ι ≫ Z.ι) = Set.range (s.sup id : X.Opens).ι := by
+          rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange]
+          congr 1
+          simp only [Scheme.Hom.opensRange_comp, Scheme.Opens.opensRange_ι, hUdef,
+            Scheme.Hom.image_preimage_eq_opensRange_inf, hZ]
+          exact inf_eq_right.mpr (le_sup_right : (s.sup id : X.Opens) ≤ a ⊔ s.sup id)
+        have := DescendsToStage.comp_iso
+          (IsOpenImmersion.isoOfRangeEq (U.ι ≫ Z.ι) (s.sup id : X.Opens).ι hrange) (ih hsaff)
+        rwa [← Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac, Category.assoc] at this
+      · -- the second open is affine
+        haveI : IsAffine V.toScheme := by
+          refine (haff.preimage_of_isOpenImmersion Z.ι ?_)
+          rw [Scheme.Opens.opensRange_ι, hZ]
+          exact le_sup_left
+        exact DescendsToStage.of_isAffine hc _
+
+include hc in
+/-- **Schemes of finite presentation over a cofiltered limit of affine schemes descend to a
+finite stage** (Stacks Project Tag 01ZM). Let `{Dⱼ}` be a cofiltered inverse system of affine
+schemes with affine transition maps and let `X` be of finite presentation over `lim Dⱼ`. Then
+`X` is the base change of a scheme `Y` of finite presentation over one of the `Dⱼ`.
+
+The affine case is
+`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
+general case follows by induction over a finite affine cover of `X`, gluing the descended
+charts over a common stage.
+(Blueprint: `lemma:nagata-finite-presentation-descends`.) -/
+@[stacks 01ZM]
+theorem Scheme.exists_isPullback_of_finitePresentation {X : Scheme.{u}} (g : X ⟶ c.pt)
+    [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] :
+    ∃ (i : I) (Y : Scheme.{u}) (p : Y ⟶ D.obj i) (_ : LocallyOfFinitePresentation p)
+      (_ : QuasiCompact p) (_ : QuasiSeparated p) (h : X ⟶ Y),
+      IsPullback h g p (c.π.app i) := by
+  classical
+  haveI : IsAffine c.pt := Scheme.isAffine_of_isLimit c hc
+  haveI : CompactSpace X := compactSpace_of_isAffine_target g
+  haveI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_isAffine_target g
+  obtain ⟨Us, hUsB, hUsfin, hUs⟩ :=
+    X.isBasis_affineOpens.exists_finite_of_isCompact (U := ⊤) (by simpa using isCompact_univ)
+  have H := descendsToStage_finsetSup hc g hUsfin.toFinset
+    (fun W hW ↦ hUsB (hUsfin.mem_toFinset.mp hW))
+  rw [Finset.sup_id_eq_sSup, hUsfin.coe_toFinset, ← hUs] at H
+  replace H := DescendsToStage.comp_iso X.topIso.symm H
+  rw [Iso.symm_hom, ← Category.assoc, Scheme.toIso_inv_ι, Category.id_comp] at H
+  obtain ⟨i, Y, p, h, hp, hcpt, hqs, hsq⟩ := H
+  haveI := hp; haveI := hcpt; haveI := hqs
+  exact ⟨i, Y, p, hp, quasiCompact_of_isAffine_target p, quasiSeparated_of_isAffine_target p,
+    h, hsq⟩
+
+end Descent
+
+end FinitePresentationDescent
+
 
 end AlgebraicGeometry

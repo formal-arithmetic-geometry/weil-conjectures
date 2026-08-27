@@ -26,6 +26,10 @@ records the basic geometry of this pushout:
 - `CompactSpace` transfers from the two charts to the pushout;
 - `AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`: a source-local property holds
   for `pushout.desc h k w` as soon as it holds for `h` and `k`;
+- `AlgebraicGeometry.quasiSeparatedSpace_pushout`: the pushout of two quasi-separated
+  schemes along a quasi-compact common open is quasi-separated;
+- `AlgebraicGeometry.pushoutOpensDesc` and `AlgebraicGeometry.isIso_pushoutOpensDesc`: a scheme
+  covered by two opens is the pushout of the two along their intersection;
 - `AlgebraicGeometry.QuasiCompact.pushout_desc` and
   `AlgebraicGeometry.IsSeparated.pushout_desc`: quasi-compactness and (given that the
   graph `U ⟶ X ×_S Y` is a closed immersion) separatedness of the glued morphism.
@@ -345,5 +349,193 @@ lemma isPullback_pushout_map_inr_of_isPullback (H : IsPullback γ f' f α) :
     (preimage_opensRange_pushout_inr_of_isPullback f g f' g' α β γ hf hg H)
 
 end PointsAndMap
+
+section QuasiSeparated
+
+lemma image_inl_inter_image_inr (A : Set X) (B : Set Y) :
+    (pushout.inl f g '' A) ∩ (pushout.inr f g '' B) = pushout.inl f g '' (A ∩ f '' (g ⁻¹' B)) := by
+  apply subset_antisymm
+  · rintro - ⟨⟨x, hx, rfl⟩, ⟨y, hy, hxy⟩⟩
+    obtain ⟨u, hu, rfl⟩ := (pushout_inl_eq_inr_iff f g x y).mp hxy.symm
+    exact ⟨x, ⟨hx, ⟨u, hy, hu⟩⟩, rfl⟩
+  · rintro - ⟨x, ⟨hx, ⟨u, hu, rfl⟩⟩, rfl⟩
+    exact ⟨⟨f u, hx, rfl⟩, ⟨g u, hu, ((pushout_inl_eq_inr_iff f g _ _).mpr ⟨u, rfl, rfl⟩).symm⟩⟩
+
+/-- **The pushout of two quasi-separated schemes along a quasi-compact common open is
+quasi-separated.** -/
+lemma quasiSeparatedSpace_pushout [QuasiSeparatedSpace X] [QuasiSeparatedSpace Y]
+    [CompactSpace U] : QuasiSeparatedSpace ↑(pushout f g) := by
+  have hgc : IsCompact (Set.range g) := isCompact_range g.continuous
+  -- the intersection of a compact open of `X` with a compact open of `Y` inside the pushout
+  have key : ∀ (A : Set X) (B : Set Y), IsOpen A → IsCompact A → IsOpen B → IsCompact B →
+      IsCompact ((pushout.inl f g '' A) ∩ (pushout.inr f g '' B)) := by
+    intro A B hAo hAc hBo hBc
+    rw [image_inl_inter_image_inr]
+    refine IsCompact.image ?_ (pushout.inl f g).continuous
+    have h₁ : IsCompact (g ⁻¹' B) := by
+      have he : g ⁻¹' B = g ⁻¹' (B ∩ Set.range g) := by
+        rw [Set.preimage_inter, Set.preimage_range, Set.inter_univ]
+      rw [he]
+      exact g.isOpenEmbedding.isInducing.isCompact_preimage'
+        (hBc.inter_of_isOpen hgc hBo g.isOpenEmbedding.isOpen_range) Set.inter_subset_right
+    exact hAc.inter_of_isOpen (h₁.image f.continuous) hAo
+      (f.isOpenEmbedding.isOpenMap _ (hBo.preimage g.continuous))
+  refine QuasiSeparatedSpace.of_isTopologicalBasis
+    (b := fun i : {A : X.Opens // IsCompact (A : Set X)} ⊕ {B : Y.Opens // IsCompact (B : Set Y)} ↦
+      match i with
+      | Sum.inl A => pushout.inl f g '' (A.1 : Set X)
+      | Sum.inr B => pushout.inr f g '' (B.1 : Set Y))
+    ?_ ?_
+  · refine TopologicalSpace.isTopologicalBasis_of_isOpen_of_nhds ?_ ?_
+    · rintro - ⟨(⟨A, hA⟩ | ⟨B, hB⟩), rfl⟩
+      · exact (pushout.inl f g).isOpenEmbedding.isOpenMap _ A.2
+      · exact (pushout.inr f g).isOpenEmbedding.isOpenMap _ B.2
+    · intro p O hp hO
+      have hcov : p ∈ Set.range (pushout.inl f g) ∪ Set.range (pushout.inr f g) := by
+        rw [range_pushout_inl_union_range_pushout_inr f g]; trivial
+      obtain (⟨x, rfl⟩ | ⟨y, rfl⟩) := hcov
+      · have hmem : x ∈ (⟨_, hO.preimage (pushout.inl f g).continuous⟩ : X.Opens) := hp
+        obtain ⟨A₀, hA₀, hxA, hAO⟩ :=
+          TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens hmem
+        exact ⟨_, ⟨Sum.inl ⟨A₀, hA₀.isCompact⟩, rfl⟩, ⟨x, hxA, rfl⟩,
+          Set.image_subset_iff.mpr hAO⟩
+      · have hmem : y ∈ (⟨_, hO.preimage (pushout.inr f g).continuous⟩ : Y.Opens) := hp
+        obtain ⟨B₀, hB₀, hyB, hBO⟩ :=
+          TopologicalSpace.Opens.isBasis_iff_nbhd.mp Y.isBasis_affineOpens hmem
+        exact ⟨_, ⟨Sum.inr ⟨B₀, hB₀.isCompact⟩, rfl⟩, ⟨y, hyB, rfl⟩,
+          Set.image_subset_iff.mpr hBO⟩
+  · rintro (⟨A, hA⟩ | ⟨B, hB⟩) (⟨A', hA'⟩ | ⟨B', hB'⟩)
+    · rw [← Set.image_inter (pushout.inl f g).isOpenEmbedding.injective]
+      exact (hA.inter_of_isOpen hA' A.2 A'.2).image (pushout.inl f g).continuous
+    · exact key _ _ A.2 hA B'.2 hB'
+    · rw [Set.inter_comm]
+      exact key _ _ A'.2 hA' B.2 hB
+    · rw [← Set.image_inter (pushout.inr f g).isOpenEmbedding.injective]
+      exact (hB.inter_of_isOpen hB' B.2 B'.2).image (pushout.inr f g).continuous
+
+end QuasiSeparated
+
+section TwoOpens
+
+variable {Z : Scheme.{u}} (U V : Z.Opens)
+
+/-- (Implementation) The inclusion of the intersection of two opens into the first one. -/
+abbrev Scheme.Opens.infHomLeft : (U ⊓ V : Z.Opens).toScheme ⟶ U.toScheme :=
+  Z.homOfLE inf_le_left
+
+/-- (Implementation) The inclusion of the intersection of two opens into the second one. -/
+abbrev Scheme.Opens.infHomRight : (U ⊓ V : Z.Opens).toScheme ⟶ V.toScheme :=
+  Z.homOfLE inf_le_right
+
+/-- The morphism from the pushout of two opens of `Z` along their intersection to `Z`. -/
+def pushoutOpensDesc :
+    pushout (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ⟶ Z :=
+  pushout.desc U.ι V.ι (by simp)
+
+@[reassoc (attr := simp)]
+lemma inl_pushoutOpensDesc :
+    pushout.inl (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ≫
+      pushoutOpensDesc U V = U.ι :=
+  pushout.inl_desc ..
+
+@[reassoc (attr := simp)]
+lemma inr_pushoutOpensDesc :
+    pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ≫
+      pushoutOpensDesc U V = V.ι :=
+  pushout.inr_desc ..
+
+lemma preimage_opensRange_inl_pushoutOpensDesc :
+    pushoutOpensDesc U V ⁻¹ᵁ U.ι.opensRange =
+      (pushout.inl (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)).opensRange := by
+  apply le_antisymm
+  · intro x hx
+    have hcov : x ∈ (pushout.inl (Scheme.Opens.infHomLeft U V)
+        (Scheme.Opens.infHomRight U V)).opensRange ⊔
+        (pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)).opensRange := by
+      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]; trivial
+    obtain (hmem | ⟨v, rfl⟩) := hcov
+    · exact hmem
+    · replace hx : (pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ≫
+          pushoutOpensDesc U V) v ∈ U.ι.opensRange := hx
+      rw [inr_pushoutOpensDesc] at hx
+      obtain ⟨u, hu⟩ := hx
+      change v ∈ pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ⁻¹ᵁ
+        (pushout.inl (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)).opensRange
+      rw [preimage_opensRange_pushout_inl, Scheme.opensRange_homOfLE]
+      exact ⟨show V.ι v ∈ U from hu ▸ u.2, v.2⟩
+  · rintro x ⟨u, rfl⟩
+    change (pushout.inl (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ≫
+      pushoutOpensDesc U V) u ∈ U.ι.opensRange
+    rw [inl_pushoutOpensDesc]
+    exact ⟨u, rfl⟩
+
+lemma preimage_opensRange_inr_pushoutOpensDesc :
+    pushoutOpensDesc U V ⁻¹ᵁ V.ι.opensRange =
+      (pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)).opensRange := by
+  apply le_antisymm
+  · intro x hx
+    have hcov : x ∈ (pushout.inl (Scheme.Opens.infHomLeft U V)
+        (Scheme.Opens.infHomRight U V)).opensRange ⊔
+        (pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)).opensRange := by
+      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]; trivial
+    obtain (⟨u, rfl⟩ | hmem) := hcov
+    · replace hx : (pushout.inl (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ≫
+          pushoutOpensDesc U V) u ∈ V.ι.opensRange := hx
+      rw [inl_pushoutOpensDesc] at hx
+      obtain ⟨v, hv⟩ := hx
+      change u ∈ pushout.inl (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ⁻¹ᵁ
+        (pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)).opensRange
+      rw [preimage_opensRange_pushout_inr, Scheme.opensRange_homOfLE]
+      exact ⟨u.2, show U.ι u ∈ V from hv ▸ v.2⟩
+    · exact hmem
+  · rintro x ⟨v, rfl⟩
+    change (pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V) ≫
+      pushoutOpensDesc U V) v ∈ V.ι.opensRange
+    rw [inr_pushoutOpensDesc]
+    exact ⟨v, rfl⟩
+
+/-- The first chart of the pushout presentation of a two-open cover is cartesian. -/
+lemma isPullback_inl_pushoutOpensDesc :
+    IsPullback (𝟙 U.toScheme)
+      (pushout.inl (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)) U.ι
+      (pushoutOpensDesc U V) :=
+  IsOpenImmersion.isPullback _ _ _ _ (by simp) (preimage_opensRange_inl_pushoutOpensDesc U V)
+
+/-- The second chart of the pushout presentation of a two-open cover is cartesian. -/
+lemma isPullback_inr_pushoutOpensDesc :
+    IsPullback (𝟙 V.toScheme)
+      (pushout.inr (Scheme.Opens.infHomLeft U V) (Scheme.Opens.infHomRight U V)) V.ι
+      (pushoutOpensDesc U V) :=
+  IsOpenImmersion.isPullback _ _ _ _ (by simp) (preimage_opensRange_inr_pushoutOpensDesc U V)
+
+/-- **A scheme covered by two open subschemes is the pushout of the two along their
+intersection.** -/
+lemma isIso_pushoutOpensDesc (hUV : U ⊔ V = ⊤) : IsIso (pushoutOpensDesc U V) := by
+  rw [← MorphismProperty.isomorphisms.iff]
+  refine IsZariskiLocalAtTarget.of_openCover
+    (Z.openCoverOfIsOpenCover (fun b : Bool ↦ cond b U V) ?_) fun b ↦ ?_
+  · change iSup _ = ⊤
+    rw [iSup_bool_eq]
+    exact hUV
+  · rw [MorphismProperty.isomorphisms.iff]
+    match b with
+    | true =>
+      change IsIso (pullback.snd (pushoutOpensDesc U V) U.ι)
+      have h := (isPullback_inl_pushoutOpensDesc U V).flip
+      have e : pullback.snd (pushoutOpensDesc U V) U.ι = h.isoPullback.inv := by
+        rw [← Category.id_comp (pullback.snd (pushoutOpensDesc U V) U.ι),
+          ← h.isoPullback.inv_hom_id, Category.assoc, IsPullback.isoPullback_hom_snd,
+          Category.comp_id]
+      rw [e]; infer_instance
+    | false =>
+      change IsIso (pullback.snd (pushoutOpensDesc U V) V.ι)
+      have h := (isPullback_inr_pushoutOpensDesc U V).flip
+      have e : pullback.snd (pushoutOpensDesc U V) V.ι = h.isoPullback.inv := by
+        rw [← Category.id_comp (pullback.snd (pushoutOpensDesc U V) V.ι),
+          ← h.isoPullback.inv_hom_id, Category.assoc, IsPullback.isoPullback_hom_snd,
+          Category.comp_id]
+      rw [e]; infer_instance
+
+end TwoOpens
 
 end AlgebraicGeometry
