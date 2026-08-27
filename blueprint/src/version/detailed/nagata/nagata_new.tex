@@ -7295,11 +7295,13 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-quasi-affine-immersion-affine-space,
     def:nagata-immersion-compactification,
     def:nagata-relative-projective-space}
-  \lean{AlgebraicGeometry.Compactification.ofAffineConstruction}
+  \lean{AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace}
 
-  Let $U\to S$ be separated and of finite type, with $U$ affine.  Compose
-  the constructed map $\iota_U\colon U\to\mathbb A^n_S$ with the standard
-  open immersion $\mathbb A^n_S\hookrightarrow\mathbb P^n_S$, and define
+  Let $U\to S$ be quasi-compact and of finite type and let
+  $\iota_U\colon U\to\mathbb A^n_S$ be an immersion over $S$, as supplied by
+  \Cref{def:nagata-quasi-affine-immersion-affine-space} when $U$ is
+  quasi-affine.  Compose $\iota_U$ with the standard open immersion
+  $\mathbb A^n_S\hookrightarrow\mathbb P^n_S$ and define
   \[
     \mathsf C_{\mathrm{aff}}(U/S)
       =\mathsf C\bigl(U\longrightarrow\mathbb P^n_S\bigr)
@@ -7310,10 +7312,12 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proposition}[Property of the affine compactification construction]
   \label{prop:nagata-affine-compactification}
   \uses{def:nagata-affine-compactification}
-  \lean{AlgebraicGeometry.Compactifiable.of_isAffine}
+  \lean{AlgebraicGeometry.HasCompactification.of_isQuasiAffine}
 
   The constructed factorization $\mathsf C_{\mathrm{aff}}(U/S)$ is a
-  compactification of $U\to S$.
+  compactification of $U\to S$.  Consequently, if $U$ is a quasi-affine
+  scheme and $U\to S$ is quasi-compact and locally of finite type, then
+  $U\to S$ is compactifiable; this applies in particular when $U$ is affine.
 \end{proposition}
 
 \begin{proof}
@@ -7322,7 +7326,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-relative-affine-space-open-immersion,
     lemma:nagata-immersion-into-proper,
     lemma:nagata-projective-is-proper}
-  Since $U\to S$ is affine and of finite type, it is quasi-affine by
+  Since $U$ is affine, it is quasi-affine by
   \Cref{lemma:nagata-affine-finite-type-is-quasi-affine}.  Apply
   \Cref{lemma:nagata-quasi-affine-immersion-affine-space} to obtain an
   immersion $\iota_U\colon U\to\mathbb A^n_S$.  Its composite with the
