@@ -83,7 +83,7 @@ This is mathlib's instance, restated here for the small étale site to record th
 hypotheses are met: the enriched homs it asks for are ends indexed by the (large) étale
 site, i.e. limits of size `u + 1`, which `A` has as a Grothendieck abelian category with
 `Hom`-types in `Type (u + 1)`. -/
-lemma Etale.isMonoidal_W_smallEtaleTopology :
+instance Etale.isMonoidal_W_smallEtaleTopology :
     (Y.smallEtaleTopology.W (A := A)).IsMonoidal :=
   GrothendieckTopology.W.monoidal
 
@@ -93,5 +93,8 @@ presheaves. -/
 noncomputable instance Etale.sheafMonoidalCategory :
     MonoidalCategory (Sheaf Y.smallEtaleTopology A) :=
   Sheaf.monoidalCategory _ _
+
+--# tech debt :
+--figure out why we need `Etale.isMonoidal_W_smallEtaleTopology` instead of synth directly
 
 end AlgebraicGeometry
