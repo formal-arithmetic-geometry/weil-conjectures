@@ -5,11 +5,9 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.ColimitInt
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
-public import WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerived
-public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # The total left derived functor of an exact functor is `mapDerivedCategory`
@@ -54,28 +52,6 @@ functor, and to obtain its composition, homology, and single-degree compatibilit
 universe wC wD wE vC vD vE uC uD uE
 
 open CategoryTheory Limits
-
-namespace CategoryTheory
-
-/-- The fiber over `j` of the total degree map `(p, q) ↦ p + q` on `ℤ × ℤ` is in
-bijection with `ℤ`, via `p ↦ (p, j - p)`. -/
-def ComplexShape.πUpIntFiberEquiv (j : ℤ) :
-    ℤ ≃ ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}) where
-  toFun p := ⟨(p, j - p), show p + (j - p) = j by omega⟩
-  invFun x := x.1.1
-  left_inv p := rfl
-  right_inv := fun ⟨⟨p, q⟩, h⟩ => by
-    have h' : p + q = j := h
-    obtain rfl : q = j - p := by omega
-    rfl
-
-instance hasColimitsOfShape_discrete_π_up_int {C : Type u''} [Category.{v''} C]
-    [HasColimitsOfShape (Discrete ℤ) C] (j : ℤ) :
-    HasColimitsOfShape
-      (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) C :=
-  hasColimitsOfShape_of_equivalence (Discrete.equivalence (ComplexShape.πUpIntFiberEquiv j))
-
-end CategoryTheory
 
 namespace CategoryTheory.Functor
 
