@@ -29,7 +29,9 @@ We derive the properties of the morphisms involved in a compactification:
   and `Compactification.isClopen_range_openImmersion`: if `f` is proper, then `i` is proper,
   hence a closed immersion with clopen range;
 - `Compactification.ofIsProper`: a proper morphism is a compactification of itself;
-- `Compactification.copy`: a compactification of `f` is one of any morphism equal to `f`.
+- `Compactification.copy`: a compactification of `f` is one of any morphism equal to `f`;
+- `Compactification.precomp` and `HasCompactification.comp_of_isOpenImmersion`:
+  compactifiability is inherited by open subschemes of the source.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
 `Nonempty (Compactification f)`. Nagata's compactification theorem asserts
@@ -89,6 +91,19 @@ def copy (c : Compactification f) {f' : X ⟶ Y} (h : f' = f) : Compactification
   comm := h.trans c.comm
   isProper := c.isProper
   isOpenImmersion := c.isOpenImmersion
+
+/-- **Compactifications restrict to open subschemes**: if `c` is a compactification of
+`f : X ⟶ Y` and `e : X' ⟶ X` is an open immersion, then composing `e` with the open
+immersion of `c` exhibits a compactification of `e ≫ f`, with the same ambient scheme. -/
+@[simps]
+def precomp {X' : Scheme.{u}} (c : Compactification f) (e : X' ⟶ X) [IsOpenImmersion e] :
+    Compactification (e ≫ f) where
+  Z := c.Z
+  g := c.g
+  i := e ≫ c.i
+  comm := by rw [Category.assoc, ← c.comm]
+  isProper := c.isProper
+  isOpenImmersion := inferInstance
 
 variable (c : Compactification f)
 include c
@@ -173,6 +188,13 @@ instance isSeparated : IsSeparated f := hf.compactification.isSeparated
 
 /-- A morphism admitting a compactification is locally of finite type. -/
 instance locallyOfFiniteType : LocallyOfFiniteType f := hf.compactification.locallyOfFiniteType
+
+/-- **Compactifiability is inherited by open subschemes**: if `f : X ⟶ Y` admits a
+compactification, then so does its restriction `e ≫ f` along any open immersion
+`e : X' ⟶ X`. -/
+theorem comp_of_isOpenImmersion {X' : Scheme.{u}} (e : X' ⟶ X) [IsOpenImmersion e] :
+    HasCompactification (e ≫ f) :=
+  ((compactification f).precomp e).hasCompactification
 
 end HasCompactification
 

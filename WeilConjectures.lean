@@ -43,6 +43,7 @@ public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.Modification
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformBlowup

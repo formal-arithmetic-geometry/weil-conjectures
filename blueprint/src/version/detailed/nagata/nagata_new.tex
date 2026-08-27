@@ -7429,7 +7429,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{definition}[Finite affine cover with selected dense intersection]
   \label{def:nagata-dense-affine-cover}
   \uses{lemma:nagata-dense-affine-cover-exists}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter}
 
   Under the hypotheses of
   \Cref{lemma:nagata-dense-affine-cover-exists}, choose one witness and denote
@@ -7444,7 +7444,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-dense-affine-cover}
   \uses{def:nagata-dense-affine-cover,
     lemma:nagata-dense-affine-cover-exists}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter_spec}
 
   The $U_i$ form a finite affine open cover of $X$, and $D_X$ is dense in
   $X$.
@@ -7460,12 +7460,13 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{definition}[Partial unions of the selected affine cover]
   \label{def:nagata-partial-affine-unions}
   \uses{def:nagata-dense-affine-cover}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.partialAffineOpenUnions}
 
-  For $1\leq r\leq n$, define
+  For $0\leq r\leq n$, define
   \[
-    X_r=U_1\cup\cdots\cup U_r.
+    X_r=U_1\cup\cdots\cup U_r,
   \]
+  so that $X_0=\emptyset$ and $X_n=X$.
 \end{definition}
 
 \begin{lemma}[Density needed for induction on the affine cover]
@@ -7491,38 +7492,36 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-two-open-compactification-candidate,
     prop:nagata-affine-compactification,thm:nagata-two-open,
     lemma:nagata-partial-union-overlap-dense}
-  \lean{}
+  \lean{AlgebraicGeometry.noetherianCompactificationConstruction}
 
   Let $S$ be Noetherian and let $X\to S$ be separated and of finite type.
   Then $X$ is Noetherian, hence qcqs, and the finite generic-point argument
   supplies the selected dense affine cover
   $\mathcal U_X=(U_1,\ldots,U_n)$ from
-  \Cref{def:nagata-dense-affine-cover}.  If $X$ is empty,
-  let $\mathsf C_{\emptyset}(X/S)$ be the explicit factorization
-  $\emptyset\hookrightarrow\emptyset\to S$ and set
-  $\mathsf C_{\mathrm{Noeth}}(X/S)=\mathsf C_{\emptyset}(X/S)$.  Otherwise
-  choose the cover with $n\geq1$ and define pairs
-  $(\mathsf C_r,h_r)$ recursively, where $h_r$ is an explicit proof that
-  $\mathsf C_r$ is a compactification of $X_r\to S$.  Set
+  \Cref{def:nagata-dense-affine-cover}.  Define pairs $(\mathsf C_r,h_r)$
+  recursively along the partial unions of
+  \Cref{def:nagata-partial-affine-unions}, where $h_r$ is an explicit proof
+  that $\mathsf C_r$ is a compactification of $X_r\to S$.  Since
+  $X_0=\emptyset$, the morphism $X_0\to S$ is proper, so set
   \[
-    (\mathsf C_1,h_1)
-      =\bigl(\mathsf C_{\mathrm{aff}}(U_1/S),
-        \text{the witness supplied by }
-        \Cref{prop:nagata-affine-compactification}\bigr).
+    (\mathsf C_0,h_0)
+      =\bigl(\emptyset\hookrightarrow\emptyset\to S,
+        \text{the witness that a proper morphism compactifies itself}\bigr).
   \]
-  Given $(\mathsf C_{r-1},h_{r-1})$, apply
-  \Cref{thm:nagata-two-open} to the open cover
+  Given $(\mathsf C_{r-1},h_{r-1})$, the next stage is $X_r=X_{r-1}\cup U_r$.
+  If $r>n$ there is nothing to add and $X_r=X_{r-1}$.  If $r=1$ then
+  $X_1=U_1$ is affine and
+  \Cref{prop:nagata-affine-compactification} supplies $(\mathsf C_1,h_1)$.
+  Otherwise apply \Cref{thm:nagata-two-open} to the open cover
   $X_r=X_{r-1}\cup U_r$, using $h_{r-1}$, the affine compactification witness
   for $U_r$ from \Cref{prop:nagata-affine-compactification}, and the dense
   overlap from \Cref{lemma:nagata-partial-union-overlap-dense}.  Choose the
   resulting candidate and its compactification proof as
-  $(\mathsf C_r,h_r)$.  In the nonempty branch finally define
+  $(\mathsf C_r,h_r)$, and finally define
   \[
     \mathsf C_{\mathrm{Noeth}}(X/S)=\mathsf C_n,
     \qquad h_{\mathrm{Noeth}}=h_n.
   \]
-  In the empty branch set $h_{\mathrm{Noeth}}$ to be the explicit
-  compactification proof for $\mathsf C_{\emptyset}(X/S)$.
   The recursive datum is therefore a dependent finite sequence of pairs, not
   an unproved sequence of candidates.  At every stage also record that
   $X_r\to S$ is separated and of finite type, as follows by restricting the
@@ -7533,7 +7532,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{theorem}[Nagata compactification over a Noetherian base]
   \label{thm:nagata-noetherian}
   \uses{def:nagata-compactification,def:nagata-noetherian-compactification}
-  \lean{}
+  \lean{AlgebraicGeometry.nagataCompactification_of_isNoetherian}
 
   The recursively constructed factorization
   $\mathsf C_{\mathrm{Noeth}}(X/S)$ is a compactification of $X\to S$.
@@ -7542,13 +7541,11 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{def:nagata-noetherian-compactification}
-  In the empty branch, the explicitly chosen empty factorization has the
-  three fields required by \Cref{def:nagata-compactification}.  In the
-  nonempty branch, the final component $h_n$ of the dependent recursive datum
-  in \Cref{def:nagata-noetherian-compactification} has those fields, and
-  $X_n=X$.  Thus the selected branch of
-  $\mathsf C_{\mathrm{Noeth}}(X/S)$ is a compactification.  No later induction
-  theorem is used to define any earlier $\mathsf C_r$.
+  The final component $h_n$ of the dependent recursive datum in
+  \Cref{def:nagata-noetherian-compactification} has the three fields required
+  by \Cref{def:nagata-compactification}, and $X_n=X$.  Thus
+  $\mathsf C_{\mathrm{Noeth}}(X/S)$ is a compactification of $X\to S$.  No
+  later induction theorem is used to define any earlier $\mathsf C_r$.
 \end{proof}
 
 
