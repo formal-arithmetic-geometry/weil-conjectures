@@ -163,7 +163,6 @@ instance isRightDerivedFunctor_rightDerivedFunctorPlus_comp [F.PreservesInjectiv
     have := hFinj
     infer_instance
   dsimp [rightDerivedFunctorPlusCompUnit]
-  simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app]
   infer_instance
 
 /-- **Composition of bounded below right derived functors**: for additive functors

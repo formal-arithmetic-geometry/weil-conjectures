@@ -13,7 +13,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerive
 
 Supplement to `Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives`,
 migrated from the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 When `h : Φ.Derives F` holds and `Φ` is a left derivability structure,
 we show that `F` has a left derived functor with respect to `W₂`.

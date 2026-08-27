@@ -32,7 +32,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.Retract
 
 Migrated from `Mathlib/CategoryTheory/Abelian/Flat/KFlat.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 

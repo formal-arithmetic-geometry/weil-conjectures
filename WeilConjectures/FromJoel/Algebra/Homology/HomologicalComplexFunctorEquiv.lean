@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.Additive
 
 Migrated from `Mathlib/Algebra/Homology/HomologicalComplexFunctorEquiv.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 -/
 
 @[expose] public section

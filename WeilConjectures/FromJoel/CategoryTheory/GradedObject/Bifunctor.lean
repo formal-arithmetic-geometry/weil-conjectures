@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.GradedObject.Bifunctor
 
 Supplement to `Mathlib.CategoryTheory.GradedObject.Bifunctor`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -38,8 +38,7 @@ noncomputable def mapBifunctorMapIso
   NatIso.ofComponents
     (fun X ↦ NatIso.ofComponents (fun Y ↦ Iso.refl _) (fun ψ ↦ by
       ext k
-      simp [mapBifunctorMapMap]
-      rfl))
+      simp [mapBifunctorMapMap]))
     (fun φ ↦ by
       ext Y k
       simp [mapBifunctorMapMap])

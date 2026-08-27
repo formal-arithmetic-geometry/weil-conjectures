@@ -14,7 +14,7 @@ public import Mathlib.Tactic.SuppressCompilation
 
 Migrated from `Mathlib/CategoryTheory/QuotientThree.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -22,7 +22,7 @@ on the branch `jriou_localization` of Joël Riou's mathlib fork
 
 namespace CategoryTheory.Quotient
 
-open Functor
+open _root_.CategoryTheory.Functor
 
 variable {C₁ C₂ C₃ C₁₂ C₂₃ C : Type*}
   [Category C₁] [Category C₂] [Category C₃] [Category C₁₂] [Category C₂₃] [Category C]

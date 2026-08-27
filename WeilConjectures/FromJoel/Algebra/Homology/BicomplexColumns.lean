@@ -19,7 +19,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Idempotents.Basic
 
 Migrated from `Mathlib/Algebra/Homology/BicomplexColumns.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 -/
 
 @[expose] public section
@@ -41,7 +41,7 @@ instance {I : Type*} (i : I) [HasZeroMorphisms C] :
 
 /-! The following section is migrated from the additions that the PR #25848 made to
 `Mathlib/CategoryTheory/GradedObject.lean` (preadditive structure on categories of
-graded objects), which are not available in mathlib `v4.32.0`. -/
+graded objects), which are not available in mathlib `v4.33.1`. -/
 
 section Preadditive
 
@@ -73,7 +73,7 @@ instance : Preadditive (GradedObject I C) where
 end Preadditive
 
 /-! The following lemmas are migrated from the additions that the PR #25848 made to
-`Mathlib/CategoryTheory/GradedObject.lean`, which are not available in mathlib `v4.32.0`. -/
+`Mathlib/CategoryTheory/GradedObject.lean`, which are not available in mathlib `v4.33.1`. -/
 
 section
 
@@ -285,7 +285,7 @@ end Limits
 end CategoryTheory
 
 /-! The following lemma is migrated from the addition that the PR #25848 made to
-`Mathlib/Algebra/Homology/QuasiIso.lean`, which is not available in mathlib `v4.32.0`. -/
+`Mathlib/Algebra/Homology/QuasiIso.lean`, which is not available in mathlib `v4.33.1`. -/
 
 section
 
@@ -303,7 +303,7 @@ end
 
 /-! The following lemmas are migrated from the additions that the PR #25848 made to
 `Mathlib/Algebra/Homology/HomologySequenceLemmas.lean`, which are not available
-in mathlib `v4.32.0`. -/
+in mathlib `v4.33.1`. -/
 
 namespace HomologicalComplex
 

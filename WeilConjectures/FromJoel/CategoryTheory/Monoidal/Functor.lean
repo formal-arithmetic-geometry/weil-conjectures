@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Whiskering
 
 Supplement to `Mathlib.CategoryTheory.Monoidal.Functor`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -23,7 +23,7 @@ universe v₁ v₂ u₁ u₂
 
 namespace CategoryTheory
 
-open Category Functor MonoidalCategory
+open Category _root_.CategoryTheory.Functor MonoidalCategory
 
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
