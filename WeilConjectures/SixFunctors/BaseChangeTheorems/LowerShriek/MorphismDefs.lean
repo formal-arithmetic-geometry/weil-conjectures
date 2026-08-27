@@ -113,7 +113,7 @@ noncomputable def Etale.openImmersionLowerShriekBaseChangeSquareStep (sq : CommS
         (Etale.pullbackSquareComparison A sq.flip)
           (Etale.openImmersionLowerShriek A j').mapDerivedCategoryPlus ≪≫
             Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm
-
+/-
 lemma Etale.openImmersionLowerShriekBaseChangeSquareStep_app (sq : CommSq g' j' j g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
     ((Etale.openImmersionLowerShriekBaseChangeSquareStep A sq).app K) =
@@ -127,7 +127,7 @@ lemma Etale.openImmersionLowerShriekBaseChangeSquareStep_app (sq : CommSq g' j' 
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.comp_id, Category.id_comp,
     Functor.mapIso_hom]
   exact (Category.id_comp _).trans (Category.comp_id _)
-
+-/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
