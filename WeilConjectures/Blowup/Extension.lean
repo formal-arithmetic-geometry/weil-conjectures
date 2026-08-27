@@ -322,6 +322,29 @@ theorem IsAdmissible.exists_extend {X : Scheme.{u}} [CompactSpace X]
   obtain ⟨h, hh, hpb⟩ := (I₁ * I₀).exists_isPullback_blowup_comap W.ι
   exact ⟨⟨I₁ * I₀, hI₁ft.mul hI₀ft, hdisjK⟩, h, hh, hpb⟩
 
+/-- **Extension of an admissible blow-up center across a second quasi-compact open**
+(Stacks Project Tag 080M, blueprint `lemma:nagata-extend-admissible-blowup`): a
+finite-type center `J` on a quasi-compact open `A` of a quasi-compact quasi-separated
+scheme `X`, whose support avoids the overlap `A ⊓ B` with a quasi-compact open `B`,
+extends to a `B`-admissible center on `X` whose blow-up restricts over `A` to the
+blow-up of `J`. This is `AlgebraicGeometry.IsAdmissible.exists_extend` with the
+inclusion `B ≤ A` of the preserved open in the ambient open dropped; the center is
+produced by
+`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint`. -/
+theorem IsAdmissible.exists_extend_of_disjoint {X : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] {A B : X.Opens} (hA : IsCompact (A : Set X))
+    (hB : IsCompact (B : Set X)) (J : A.toScheme.IdealSheafData) (hJ : J.ofFiniteType)
+    (hd : Disjoint ((A.ι ⁻¹ᵁ B : A.toScheme.Opens) : Set A.toScheme)
+      (J.support : Set A.toScheme)) :
+    ∃ (C : IsAdmissible X B) (h : J.blowup ⟶ C.I.blowup),
+      h ≫ C.I.blowupMap = J.blowupMap ≫ A.ι ∧
+      IsPullback J.blowupMap h A.ι C.I.blowupMap := by
+  obtain ⟨K, hKft, hKcomap, hKdisj⟩ :=
+    Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint hA hB J hJ hd
+  obtain rfl := hKcomap
+  obtain ⟨h, hh, hpb⟩ := K.exists_isPullback_blowup_comap A.ι
+  exact ⟨⟨K, hKft, hKdisj⟩, h, hh, hpb⟩
+
 /-- **The canonical lift of a blow-up localizes on the base**: for `f : Y ⟶ X`, an
 ideal `D` on `X` and an open `O ≤ X`, the canonical lift `l : Bl_{D·𝒪_Y}(Y) ⟶ Bl_D(X)`
 restricted over the locus `D.blowupMap ⁻¹ᵁ O` above `O` is, as an arrow, the canonical
