@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ColimitInt
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
@@ -63,7 +62,9 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelia
   [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
 
 variable [MonoidalCategory C] [MonoidalPreadditive C]
-  [HasColimitsOfShape (Discrete ℤ) C] [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+  [∀ (j : ℤ), HasColimitsOfShape
+    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) C]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
@@ -135,7 +136,9 @@ open MonoidalCategory
 variable {E : Type uE} [Category.{vE} E] [Abelian E] [HasDerivedCategory.{wE} E]
 
 variable [MonoidalCategory D] [MonoidalPreadditive D]
-  [HasColimitsOfShape (Discrete ℤ) D] [HasColimitsOfShape ℤ D] [HasExactColimitsOfShape ℤ D]
+  [∀ (j : ℤ), HasColimitsOfShape
+    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) D]
+  [HasColimitsOfShape ℤ D] [HasExactColimitsOfShape ℤ D]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
