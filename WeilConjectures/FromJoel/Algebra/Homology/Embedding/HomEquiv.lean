@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.Embedding.HomEquiv
 
 Supplement to `Mathlib.Algebra.Homology.Embedding.HomEquiv`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 Given an embedding `e : Embedding c c'` of complex shapes satisfying `e.IsRelIff`,
 we obtain a bijection `e.homEquiv'` between the type of morphisms

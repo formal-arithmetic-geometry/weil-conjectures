@@ -16,13 +16,17 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.ColimitInt
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 
 /-!
 
@@ -97,40 +101,6 @@ below free of any K-injective hypothesis as well.
 universe v'' u'' u' u
 
 open CategoryTheory Abelian Limits
-
-namespace ComplexShape
-
-/-!
-The coproducts appearing in the definition of the tensor product of cochain complexes
-are indexed by the discrete categories on the fibers of the total degree map
-`(p, q) ↦ p + q` on `ℤ × ℤ`. The fiber over `j` is the antidiagonal
-`{(p, q) | p + q = j}`, which is in bijection with `ℤ` via `p ↦ (p, j - p)`, so the
-hypotheses on these shapes reduce to a single condition of shape `Discrete ℤ`.
--/
-
-/-- The fiber over `j` of the total degree map `(p, q) ↦ p + q` on `ℤ × ℤ` is in
-bijection with `ℤ`, via `p ↦ (p, j - p)`. -/
-def πUpIntFiberEquiv (j : ℤ) :
-    ℤ ≃ ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}) where
-  toFun p := ⟨(p, j - p), show p + (j - p) = j by omega⟩
-  invFun x := x.1.1
-  left_inv p := rfl
-  right_inv := fun ⟨⟨p, q⟩, h⟩ => by
-    have h' : p + q = j := h
-    obtain rfl : q = j - p := by omega
-    rfl
-
-/-- A category with `ℤ`-indexed coproducts admits the coproducts indexed by the
-fibers of the total degree map on `ℤ × ℤ` which define the tensor product of cochain
-complexes. -/
-instance hasColimitsOfShape_discrete_π_up_int {C : Type u''} [Category.{v''} C]
-    [HasColimitsOfShape (Discrete ℤ) C] (j : ℤ) :
-    HasColimitsOfShape
-      (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}))
-      C :=
-  hasColimitsOfShape_of_equivalence (Discrete.equivalence (πUpIntFiberEquiv j))
-
-end ComplexShape
 
 namespace AlgebraicGeometry
 
