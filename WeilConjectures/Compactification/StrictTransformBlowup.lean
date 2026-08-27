@@ -30,7 +30,8 @@ locus factors through `ψ` as the preimage of the complement of the support of
 `I.comap f` in the blow-up of `I.comap f`, which is *schematically dense* there
 because the exceptional ideal is invertible
 (`Scheme.IdealSheafData.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support`),
-so precomposing `ψ` with it does not change the kernel. Since the strict transform is
+so precomposing `ψ` with it does not change the kernel — this is
+`AlgebraicGeometry.ker_eq_ker_strictTransformOpen_ι`. Since the strict transform is
 by definition the closed subscheme cut out by the kernel of the open locus, the two
 closed subschemes of `Y ×_X Bl_I(X)` coincide.
 
@@ -59,7 +60,9 @@ universe u
 
 open CategoryTheory Limits
 
-namespace AlgebraicGeometry.Scheme.IdealSheafData
+namespace AlgebraicGeometry
+
+namespace Scheme.IdealSheafData
 
 variable {X Y : Scheme.{u}}
 
@@ -76,7 +79,18 @@ theorem ker_pullbackLift_blowup_comap (I : X.IdealSheafData) (f : Y ⟶ X)
     (hρ : (I.comap f).blowupMap ≫ f = ρ ≫ I.blowupMap) :
     (pullback.lift (I.comap f).blowupMap ρ hρ).ker =
       ((strictTransformOpen f I.blowupMap I.support.compl).ι).ker := by
-  sorry
+  have hsupp : (I.comap f).support.compl = f ⁻¹ᵁ I.support.compl := by
+    ext y
+    simp [support_comap]
+  haveI : IsIso (I.blowupMap ∣_ I.support.compl) := I.isIso_blowupMap_restrict_support_compl
+  haveI : IsSchemeTheoreticallyDominant
+      ((I.comap f).blowupMap ⁻¹ᵁ (f ⁻¹ᵁ I.support.compl)).ι := by
+    have := (I.comap f).isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
+    rwa [hsupp] at this
+  haveI : IsIso ((I.comap f).blowupMap ∣_ (f ⁻¹ᵁ I.support.compl)) := by
+    have := (I.comap f).isIso_blowupMap_restrict_support_compl
+    rwa [hsupp] at this
+  exact ker_eq_ker_strictTransformOpen_ι f I.blowupMap I.support.compl (pullback.lift_fst ..)
 
 /-- **The strict transform is the blow-up of the pulled-back ideal** (Stacks Project
 Tag 080E; blueprint: `thm:nagata-strict-transform-is-blowup`): for a morphism of
@@ -114,4 +128,6 @@ theorem exists_blowup_comap_iso_strictTransform (I : X.IdealSheafData) (f : Y �
   · rw [asIso_hom, hMap, ← Category.assoc, hfac, hψdef, Category.assoc,
       pullback.lift_snd_assoc, hρ]
 
-end AlgebraicGeometry.Scheme.IdealSheafData
+end Scheme.IdealSheafData
+
+end AlgebraicGeometry

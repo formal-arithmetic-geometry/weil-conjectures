@@ -61,6 +61,78 @@ theorem closure_range_awayAlgebraMap_union_range_awayMap
     Subring.closure
         (Set.range (awayAlgebraMap J (reesGrading.hom φ h x)) ∪
           Set.range (HomogeneousLocalization.Away.map (reesGrading.hom φ h) x)) = ⊤ := by
-  sorry
+  set g := reesGrading.hom φ h with hgdef
+  have hy : g x ∈ reesGrading J 1 := g.map_mem hx
+  set S : Subring (HomogeneousLocalization.Away (reesGrading J) (g x)) :=
+    Subring.closure (Set.range (awayAlgebraMap J (g x)) ∪
+      Set.range (HomogeneousLocalization.Away.map g x))
+  have key : ∀ (n : ℕ) (b : B), b ∈ (I ^ n).map φ → ∀ (hb : b ∈ J ^ n)
+      (hw : reesMonomial J b hb ∈ reesGrading J (n • 1)),
+      HomogeneousLocalization.Away.mk (reesGrading J) hy n (reesMonomial J b hb) hw ∈ S := by
+    intro n b hb'
+    have hJn : ∀ {z : B}, z ∈ (I ^ n).map φ → z ∈ J ^ n := fun {z} hz => by
+      rwa [Ideal.map_pow, h] at hz
+    rw [Ideal.map] at hb'
+    induction hb' using Submodule.span_induction with
+    | mem b hbmem =>
+      obtain ⟨a, ha, rfl⟩ := hbmem
+      have ha' : a ∈ I ^ n := ha
+      intro hb hw
+      refine Subring.subset_closure (Or.inr ⟨HomogeneousLocalization.Away.mk (reesGrading I) hx n
+        (reesMonomial I a ha') (by simpa using reesMonomial_mem I a ha'), ?_⟩)
+      rw [HomogeneousLocalization.Away.map_mk, HomogeneousLocalization.ext_iff_val,
+        HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.val_mk, hgdef,
+        reesGrading.hom_reesMonomial]
+    | zero =>
+      intro hb hw
+      have e : HomogeneousLocalization.Away.mk (reesGrading J) hy n
+          (reesMonomial J 0 hb) hw = 0 := by
+        have e0 : reesMonomial J (0 : B) hb = 0 := Subtype.ext (by simp)
+        rw [HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.Away.val_mk,
+          HomogeneousLocalization.val_zero, e0, Localization.mk_zero]
+      rw [e]
+      exact zero_mem S
+    | add u v hu hv ihu ihv =>
+      intro hb hw
+      have huJ : u ∈ J ^ n := hJn hu
+      have hvJ : v ∈ J ^ n := hJn hv
+      have hwu : reesMonomial J u huJ ∈ reesGrading J (n • 1) := by
+        simpa using reesMonomial_mem J u huJ
+      have hwv : reesMonomial J v hvJ ∈ reesGrading J (n • 1) := by
+        simpa using reesMonomial_mem J v hvJ
+      have e : HomogeneousLocalization.Away.mk (reesGrading J) hy n (reesMonomial J (u + v) hb) hw =
+          HomogeneousLocalization.Away.mk (reesGrading J) hy n (reesMonomial J u huJ) hwu +
+            HomogeneousLocalization.Away.mk (reesGrading J) hy n (reesMonomial J v hvJ) hwv := by
+        have euv : reesMonomial J (u + v) hb =
+            reesMonomial J u huJ + reesMonomial J v hvJ := Subtype.ext (by simp)
+        rw [HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_add,
+          HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.val_mk,
+          HomogeneousLocalization.Away.val_mk, Localization.add_mk_self, euv]
+      rw [e]
+      exact add_mem (ihu huJ hwu) (ihv hvJ hwv)
+    | smul c u hu ih =>
+      intro hb hw
+      have huJ : u ∈ J ^ n := hJn hu
+      have hwu : reesMonomial J u huJ ∈ reesGrading J (n • 1) := by
+        simpa using reesMonomial_mem J u huJ
+      have e : HomogeneousLocalization.Away.mk (reesGrading J) hy n
+            (reesMonomial J (c • u) hb) hw =
+          awayAlgebraMap J (g x) c *
+            HomogeneousLocalization.Away.mk (reesGrading J) hy n (reesMonomial J u huJ) hwu := by
+        have hval : (awayAlgebraMap J (g x) c).val =
+            Localization.mk (reesGradingZero J c : reesAlgebra J) 1 := rfl
+        have ecu : (reesGradingZero J c : reesAlgebra J) * reesMonomial J u huJ =
+            reesMonomial J (c • u) hb := Subtype.ext (by simp)
+        rw [HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_mul, hval,
+          HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.val_mk,
+          Localization.mk_mul, ecu, one_mul]
+      rw [e]
+      exact mul_mem (Subring.subset_closure (Or.inl ⟨c, rfl⟩)) (ih huJ hwu)
+  rw [eq_top_iff]
+  rintro z -
+  obtain ⟨n, w, hw, rfl⟩ := HomogeneousLocalization.Away.mk_surjective (reesGrading J) hy z
+  have hw' : w ∈ reesGrading J n := by simpa using hw
+  obtain ⟨b, hb, rfl⟩ := (mem_reesGrading_iff_exists J).mp hw'
+  exact key n b (by rw [Ideal.map_pow, h]; exact hb) hb hw
 
 end AlgebraicGeometry.AffineBlowup

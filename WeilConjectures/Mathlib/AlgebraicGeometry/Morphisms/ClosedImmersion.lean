@@ -6,11 +6,12 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Complements on closed immersions
 
-Two unrelated groups of small results.
+Three unrelated groups of small results.
 
 The first is about **open immersions that are universally closed**. An open immersion whose
 underlying map is closed — for instance a proper one — is also a closed immersion, and its
@@ -28,6 +29,11 @@ scheme-theoretic image in the form stated in the Nagata blueprint
 the scheme-theoretic image is the smallest closed subscheme of the target through which
 the morphism factors.
 
+The third is an **affine descent criterion**: a morphism into a fibre product of affine
+schemes is a closed immersion as soon as the target ring is generated, as a ring, by the
+images of the two structure maps.  It is stated ring-theoretically, in terms of a
+`Subring.closure`, so that it can be applied without providing algebra instances.
+
 ## Main results
 
 - `AlgebraicGeometry.IsClosedImmersion.of_isOpenImmersion` — an open immersion with closed
@@ -43,7 +49,10 @@ the morphism factors.
   `AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp` supplying its hypothesis;
 - `AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac` — a closed subscheme
   contains the scheme-theoretic image of `g` if and only if `g` factors through it, and
-  then uniquely.
+  then uniquely;
+- `AlgebraicGeometry.isClosedImmersion_pullbackLift_spec` — a morphism
+  `Spec W ⟶ Spec S ×_{Spec R} Spec T` is a closed immersion if `W` is generated as a ring
+  by the images of `S` and `T`.
 -/
 
 @[expose] public section
@@ -130,5 +139,55 @@ theorem Scheme.Hom.ker_le_ker_iff_existsUnique_fac (g : X ⟶ Y) (z : Z ⟶ Y)
     exact Scheme.Hom.le_ker_comp h z
 
 end Lift
+
+section AffineDescent
+
+open Limits
+
+/-- **Affine descent of closed immersions along a pushout of rings**: if a ring `W`
+receives maps `u : S →+* W` and `v : T →+* W` agreeing on `R` and is generated as a ring by
+their images, then the induced morphism `Spec W ⟶ Spec S ×_{Spec R} Spec T` is a closed
+immersion. -/
+lemma isClosedImmersion_pullbackLift_spec {R S T W : Type u} [CommRing R] [CommRing S]
+    [CommRing T] [CommRing W] (f : R →+* S) (g : R →+* T) (u : S →+* W) (v : T →+* W)
+    (hcomm : u.comp f = v.comp g)
+    (hgen : Subring.closure (Set.range u ∪ Set.range v) = ⊤) :
+    IsClosedImmersion
+      (pullback.lift (Spec.map (CommRingCat.ofHom u)) (Spec.map (CommRingCat.ofHom v))
+        (by rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+          ← CommRingCat.ofHom_comp, hcomm]) :
+        Spec (.of W) ⟶
+          pullback (Spec.map (CommRingCat.ofHom f)) (Spec.map (CommRingCat.ofHom g))) := by
+  have hw : CommRingCat.ofHom f ≫ CommRingCat.ofHom u =
+      CommRingCat.ofHom g ≫ CommRingCat.ofHom v := by
+    rw [← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp, hcomm]
+  set d : pushout (CommRingCat.ofHom f) (CommRingCat.ofHom g) ⟶ CommRingCat.of W :=
+    pushout.desc (CommRingCat.ofHom u) (CommRingCat.ofHom v) hw with hd
+  have hsurj : Function.Surjective d.hom := by
+    rw [← RingHom.range_eq_top, eq_top_iff, ← hgen, Subring.closure_le]
+    rintro z (⟨b, rfl⟩ | ⟨c, rfl⟩)
+    · refine ⟨(pushout.inl (CommRingCat.ofHom f) (CommRingCat.ofHom g)).hom b, ?_⟩
+      rw [hd, ← CommRingCat.comp_apply, pushout.inl_desc]
+      rfl
+    · refine ⟨(pushout.inr (CommRingCat.ofHom f) (CommRingCat.ofHom g)).hom c, ?_⟩
+      rw [hd, ← CommRingCat.comp_apply, pushout.inr_desc]
+      rfl
+  have hsq := isPullback_SpecMap_pushout (CommRingCat.ofHom f) (CommRingCat.ofHom g)
+  have heq : (pullback.lift (Spec.map (CommRingCat.ofHom u)) (Spec.map (CommRingCat.ofHom v))
+      (by rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+        ← CommRingCat.ofHom_comp, hcomm]) :
+      Spec (.of W) ⟶
+        pullback (Spec.map (CommRingCat.ofHom f)) (Spec.map (CommRingCat.ofHom g))) =
+      Spec.map d ≫ hsq.isoPullback.hom := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [pullback.lift_fst, Category.assoc, IsPullback.isoPullback_hom_fst, ← Spec.map_comp,
+        hd, pushout.inl_desc]
+    · rw [pullback.lift_snd, Category.assoc, IsPullback.isoPullback_hom_snd, ← Spec.map_comp,
+        hd, pushout.inr_desc]
+  rw [heq]
+  have : IsClosedImmersion (Spec.map d) := IsClosedImmersion.spec_of_surjective d hsurj
+  infer_instance
+
+end AffineDescent
 
 end AlgebraicGeometry
