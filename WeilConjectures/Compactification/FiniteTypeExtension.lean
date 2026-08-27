@@ -87,6 +87,12 @@ lemma ofFiniteType_of_isLocallyNoetherian [IsLocallyNoetherian X] (I : X.IdealSh
   have := IsLocallyNoetherian.component_noetherian (X := X) U
   IsNoetherian.noetherian (I.ideal U)
 
+/-- The unit ideal sheaf is of finite type. -/
+lemma ofFiniteType_top : (⊤ : X.IdealSheafData).ofFiniteType := fun U _ ↦ by
+  have h : (⊤ : X.IdealSheafData).ideal U = ⊤ := rfl
+  rw [h]
+  exact ⟨{1}, by simp⟩
+
 /-- Finite-typeness on an open `O` is finite-typeness of the restriction to `O`. -/
 theorem ofFiniteTypeOn_iff_comap (I : X.IdealSheafData) (O : X.Opens) :
     I.ofFiniteTypeOn O ↔ (I.comap O.ι).ofFiniteType := by

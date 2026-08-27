@@ -21,6 +21,14 @@ range of `j`; in particular `q` is an open immersion
 image of the range of `j`
 (`AlgebraicGeometry.range_eq_preimage_of_comp_of_isIso_restrict`). These describe the
 embedded copies of preserved opens in admissible blow-ups.
+
+Finally we record the range of the base change of an open immersion
+(`AlgebraicGeometry.range_snd_of_isPullback`) and the form of
+`AlgebraicGeometry.isIso_morphismRestrict_of_range_eq` in which the modification layer
+produces its data: a partial section `m` of `ψ` whose composite `m ≫ ψ` is an open
+immersion and whose range is the full inverse image of the range of `m ≫ ψ` exhibits
+`ψ` as an isomorphism over that range
+(`AlgebraicGeometry.isIso_morphismRestrict_opensRange_of_range_eq`).
 -/
 
 @[expose] public section
@@ -139,5 +147,48 @@ theorem isIso_morphismRestrict_of_range_eq [IsOpenImmersion v] (hv : v ≫ ψ = 
   exact IsIso.of_isIso_comp_left v' (ψ ∣_ V)
 
 end RestrictOfSection
+
+section PullbackRange
+
+/-- **The range of the base change of an open immersion**: in a cartesian square whose
+left vertical leg `f` is an open immersion, the parallel leg `snd` has range the inverse
+image of the range of `f`. -/
+theorem range_snd_of_isPullback {P X Y Z : Scheme.{u}} {fst : P ⟶ X} {snd : P ⟶ Y}
+    {f : X ⟶ Z} {g : Y ⟶ Z} [IsOpenImmersion f] (h : IsPullback fst snd f g) :
+    Set.range snd = g ⁻¹' Set.range f := by
+  have hsurj : Function.Surjective ⇑h.isoPullback.hom := by
+    have := (Scheme.homeoOfIso h.isoPullback).surjective
+    rwa [Scheme.coe_homeoOfIso] at this
+  have hcomp : snd = h.isoPullback.hom ≫ Limits.pullback.snd f g :=
+    (h.isoPullback_hom_snd).symm
+  rw [hcomp, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+    Set.range_eq_univ.mpr hsurj, Set.image_univ, IsOpenImmersion.range_pullbackSnd]
+  rfl
+
+end PullbackRange
+
+section RestrictOfSectionRange
+
+/-- **A partial section identifies an isomorphism locus**: if `m` is an open immersion
+whose composite `j := m ≫ ψ` is again an open immersion and whose range is the full
+inverse image of the range of `j`, then `ψ` restricts to an isomorphism over the range
+of `j`. This is `AlgebraicGeometry.isIso_morphismRestrict_of_range_eq` in the form in
+which the modification layer produces its data. -/
+theorem isIso_morphismRestrict_opensRange_of_range_eq {W T X : Scheme.{u}} (ψ : T ⟶ X)
+    (m : W ⟶ T) [IsOpenImmersion m] [IsOpenImmersion (m ≫ ψ)]
+    (hrange : Set.range m = ψ ⁻¹' Set.range (m ≫ ψ)) :
+    IsIso (ψ ∣_ (m ≫ ψ).opensRange) := by
+  have hsurj : Function.Surjective ⇑(m ≫ ψ).isoOpensRange.inv := by
+    have := (Scheme.homeoOfIso (m ≫ ψ).isoOpensRange.symm).surjective
+    rwa [Scheme.coe_homeoOfIso] at this
+  refine isIso_morphismRestrict_of_range_eq ψ (m ≫ ψ).opensRange
+    ((m ≫ ψ).isoOpensRange.inv ≫ m) ?_ ?_
+  · rw [Category.assoc]
+    exact (Iso.inv_comp_eq _).mpr (Scheme.Hom.isoOpensRange_hom_ι (m ≫ ψ)).symm
+  · rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+      Set.range_eq_univ.mpr hsurj, Set.image_univ, hrange]
+    rfl
+
+end RestrictOfSectionRange
 
 end AlgebraicGeometry

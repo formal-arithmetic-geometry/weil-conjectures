@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
@@ -365,6 +366,18 @@ noncomputable def isLimitOfIsLimitOpensCone [IsCofiltered I] (i₀ : I) {σ : Ty
       rw [← Category.assoc, IsOpenImmersion.lift_fac, Category.assoc, hm j.left]
       exact (lift_opensCone_ι_comp D (h a) s j).symm
     rw [← hma, IsOpenImmersion.lift_fac]
+
+@[reassoc]
+lemma opensDiagram_map_ι (i : I) (U : (D.obj i).Opens) {j j' : Over i} (k : j ⟶ j') :
+    (opensDiagram D i U).map k ≫ Scheme.Opens.ι (D.map j'.hom ⁻¹ᵁ U) =
+      Scheme.Opens.ι (D.map j.hom ⁻¹ᵁ U) ≫ D.map k.left :=
+  (opensDiagramι D i U).naturality k
+
+@[reassoc]
+lemma opensCone_π_ι (c : Cone D) (i : I) (U : (D.obj i).Opens) (j : Over i) :
+    (opensCone D c i U).π.app j ≫ Scheme.Opens.ι (D.map j.hom ⁻¹ᵁ U) =
+      Scheme.Opens.ι (c.π.app i ⁻¹ᵁ U) ≫ c.π.app j.left :=
+  Scheme.Hom.resLE_comp_ι _ _
 
 end IsLimitOfOpensCone
 
@@ -1227,25 +1240,846 @@ instance : E.stageIndex.Initial := by
     obtain ⟨j', k, hk⟩ := IsCofilteredOrEmpty.cone_maps s s'
     exact ⟨T.restrict k ⊥ bot_le Subalgebra.fg_bot, T.restrictHom _ _ _ _, by simpa using hk⟩
 
+variable {E}
+
+/-- (Implementation) The open immersion of `Wⱼ` into the stage `Dⱼ`. -/
+noncomputable abbrev Wι (E : ExtensionData.{u}) (j : Over E.i₀) :
+    E.WD.obj j ⟶ E.N.D.obj j.left :=
+  (opensDiagramι E.N.D E.i₀ E.W₀).app j
+
+instance (E : ExtensionData.{u}) (j : Over E.i₀) : IsOpenImmersion (E.Wι j) :=
+  inferInstanceAs (IsOpenImmersion ((opensDiagramι E.N.D E.i₀ E.W₀).app j))
+
+@[reassoc]
+lemma WD_map_Wι {j j' : Over E.i₀} (k : j ⟶ j') :
+    E.WD.map k ≫ E.Wι j' = E.Wι j ≫ E.N.D.map k.left :=
+  (opensDiagramι E.N.D E.i₀ E.W₀).naturality k
+
+/-- (Implementation) The first projection from the coefficient algebra of a stage to the
+sections of `V`. -/
+noncomputable def Stage.φ (T : E.Stage) : CommRingCat.of ↥T.A ⟶ Γ(E.X, E.V) :=
+  CommRingCat.ofHom ((RingHom.fst _ _).comp (Subalgebra.val T.A).toRingHom)
+
+@[simp] lemma Stage.φ_apply (T : E.Stage) (a : ↥T.A) :
+    T.φ a = (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1 := rfl
+
+/-- (Implementation) The map of coefficient algebras attached to a morphism of stages. -/
+noncomputable def Stage.Hom.algHom {T T' : E.Stage} (f : T ⟶ T') :
+    CommRingCat.of ↥T'.A ⟶ CommRingCat.of ↥T.A :=
+  CommRingCat.ofHom
+    ((AlgHom.codRestrict ((resAlgHom f.base).comp T'.A.val) T.A
+      (fun a ↦ f.map_mem _ a.2)).toRingHom)
+
+@[simp] lemma Stage.Hom.algHom_coe {T T' : E.Stage} (f : T ⟶ T') (a : ↥T'.A) :
+    ((f.algHom a : ↥T.A) : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)) =
+      ((a : Γ(E.X, E.V) × Γ(E.WD.obj T'.j, ⊤)).1,
+        E.res f.base (a : Γ(E.X, E.V) × Γ(E.WD.obj T'.j, ⊤)).2) := rfl
+
+lemma Stage.Hom.algHom_ρ {T T' : E.Stage} (f : T ⟶ T') :
+    f.algHom ≫ T.ρ = T'.ρ ≫ E.res f.base := rfl
+
+lemma Stage.Hom.algHom_φ {T T' : E.Stage} (f : T ⟶ T') :
+    f.algHom ≫ T.φ = T'.φ := rfl
+
+@[simp] lemma Stage.Hom.algHom_id (T : E.Stage) : (𝟙 T : T ⟶ T).algHom = 𝟙 _ := by
+  ext a
+  · rfl
+  · rw [Stage.Hom.algHom_coe]
+    exact E.res_id _ _
+
+@[simp] lemma Stage.Hom.algHom_comp {T T' T'' : E.Stage} (f : T ⟶ T') (g : T' ⟶ T'') :
+    (f ≫ g).algHom = g.algHom ≫ f.algHom := by
+  ext a
+  · rfl
+  · rw [Stage.Hom.algHom_coe]
+    exact (E.res_res g.base f.base _).symm
+
+@[reassoc (attr := simp)]
+lemma Stage.Hom.SpecMap_φ {T T' : E.Stage} (f : T ⟶ T') :
+    Spec.map T.φ ≫ Spec.map f.algHom = Spec.map T'.φ := by
+  rw [← Spec.map_comp, Stage.Hom.algHom_φ]
+
+lemma Stage.toSpec_comp_SpecMap_algHom {T T' : E.Stage} (f : T ⟶ T') :
+    T.toSpec ≫ Spec.map f.algHom = E.WD.map f.base ≫ T'.toSpec := by
+  rw [Stage.toSpec, Stage.toSpec, Category.assoc, ← Spec.map_comp, Stage.Hom.algHom_ρ,
+    Spec.map_comp, ← Category.assoc, ← Scheme.toSpecΓ_naturality, Category.assoc]
+
+set_option maxHeartbeats 1600000 in
+-- Elaborating the pushout functor forces repeated defeq checks between the two
+-- `Algebra` structures on the coefficient algebra of a stage.
+/-- (Implementation) The system of stage schemes: the scheme attached to a stage is the
+gluing of the Noetherian stage `Dⱼ` and the affine scheme `Spec A` along `Wⱼ`. -/
+noncomputable def stageDiagram (E : ExtensionData.{u}) : E.Stage ⥤ Scheme.{u} where
+  obj T := pushout (E.Wι T.j) T.toSpec
+  map {T T'} f := pushout.map _ _ _ _ (E.N.D.map f.base.left) (Spec.map f.algHom)
+    (E.WD.map f.base) (WD_map_Wι f.base).symm (Stage.toSpec_comp_SpecMap_algHom f)
+  map_id T := by
+    have hb : (𝟙 T : T ⟶ T).base.left = 𝟙 T.j.left := rfl
+    have h2 := Stage.Hom.algHom_id T
+    refine pushout.hom_ext ?_ ?_
+    · rw [pushout.inl_desc, hb, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+    · rw [pushout.inr_desc, h2, Spec.map_id, Category.id_comp, Category.comp_id]
+  map_comp {T T' T''} f g := by
+    have hb : (f ≫ g).base.left = f.base.left ≫ g.base.left := rfl
+    have h2 := Stage.Hom.algHom_comp f g
+    refine pushout.hom_ext ?_ ?_
+    · simp only [pushout.inl_desc, pushout.inl_desc_assoc, hb, CategoryTheory.Functor.map_comp,
+        Category.assoc]
+    · simp only [pushout.inr_desc, pushout.inr_desc_assoc, h2, Spec.map_comp, Category.assoc]
+
+@[simp] lemma stageDiagram_obj (T : E.Stage) :
+    E.stageDiagram.obj T = pushout (E.Wι T.j) T.toSpec := rfl
+
+@[reassoc (attr := simp)]
+lemma inl_stageDiagram_map {T T' : E.Stage} (f : T ⟶ T') :
+    pushout.inl (E.Wι T.j) T.toSpec ≫ E.stageDiagram.map f =
+      E.N.D.map f.base.left ≫ pushout.inl (E.Wι T'.j) T'.toSpec :=
+  pushout.inl_desc _ _ _
+
+@[reassoc (attr := simp)]
+lemma inr_stageDiagram_map {T T' : E.Stage} (f : T ⟶ T') :
+    pushout.inr (E.Wι T.j) T.toSpec ≫ E.stageDiagram.map f =
+      Spec.map f.algHom ≫ pushout.inr (E.Wι T'.j) T'.toSpec :=
+  pushout.inr_desc _ _ _
+
+
+@[simp] lemma opensRange_Wι (E : ExtensionData.{u}) (j : Over E.i₀) :
+    (E.Wι j).opensRange = E.N.D.map j.hom ⁻¹ᵁ E.W₀ :=
+  Scheme.Opens.opensRange_ι _
+
+/-- (Implementation) The `Wⱼ`-squares of the system of stages are cartesian. -/
+lemma isPullback_Wι {T T' : E.Stage} (f : T ⟶ T') :
+    IsPullback (E.WD.map f.base) (E.Wι T.j) (E.Wι T'.j) (E.N.D.map f.base.left) := by
+  refine IsOpenImmersion.isPullback _ _ _ _ (WD_map_Wι f.base).symm ?_
+  rw [opensRange_Wι, opensRange_Wι, ← Scheme.Hom.comp_preimage, ← E.N.D.map_comp, Over.w f.base]
+
+set_option maxHeartbeats 1600000 in
+-- The basic opens of the tautological elements have to be compared through
+-- `Spec.map` of the coefficient algebra map, which unfolds the stage structure.
+/-- (Implementation) The `Spec A`-squares of the system of stages are cartesian. -/
+lemma isPullback_toSpec {T T' : E.Stage} (f : T ⟶ T') :
+    IsPullback (E.WD.map f.base) T.toSpec T'.toSpec (Spec.map f.algHom) := by
+  refine IsOpenImmersion.isPullback _ _ _ _ (Stage.toSpec_comp_SpecMap_algHom f) ?_
+  rw [T.opensRange_toSpec, T'.opensRange_toSpec, Scheme.Hom.preimage_iSup]
+  refine iSup_congr fun l ↦ ?_
+  rw [SpecMap_preimage_basicOpen]
+  congr 1
+  refine Subtype.ext ?_
+  rw [Stage.Hom.algHom_coe, Stage.coe_h, Stage.coe_h, f.res_r]
+
+lemma isPullback_pushout_inl {T T' : E.Stage} (f : T ⟶ T') :
+    IsPullback (E.N.D.map f.base.left) (pushout.inl (E.Wι T.j) T.toSpec)
+      (pushout.inl (E.Wι T'.j) T'.toSpec) (E.stageDiagram.map f) :=
+  isPullback_pushout_map_inl_of_isPullback (E.Wι T'.j) T'.toSpec (E.Wι T.j) T.toSpec
+    (E.N.D.map f.base.left) (Spec.map f.algHom) (E.WD.map f.base) (WD_map_Wι f.base)
+    (Stage.toSpec_comp_SpecMap_algHom f).symm (isPullback_toSpec f)
+
+lemma isPullback_pushout_inr {T T' : E.Stage} (f : T ⟶ T') :
+    IsPullback (Spec.map f.algHom) (pushout.inr (E.Wι T.j) T.toSpec)
+      (pushout.inr (E.Wι T'.j) T'.toSpec) (E.stageDiagram.map f) :=
+  isPullback_pushout_map_inr_of_isPullback (E.Wι T'.j) T'.toSpec (E.Wι T.j) T.toSpec
+    (E.N.D.map f.base.left) (Spec.map f.algHom) (E.WD.map f.base) (WD_map_Wι f.base)
+    (Stage.toSpec_comp_SpecMap_algHom f).symm (isPullback_Wι f)
+
+instance (T : E.Stage) : CompactSpace (E.stageDiagram.obj T) :=
+  inferInstanceAs (CompactSpace ↑(pushout (E.Wι T.j) T.toSpec))
+
+instance (T : E.Stage) :
+    LocallyOfFiniteType (specULiftZIsTerminal.from (Spec (CommRingCat.of ↥T.A))) :=
+  have : Algebra.FiniteType ℤ ↥T.A := (Subalgebra.fg_iff_finiteType _).mp T.hAfg
+  inferInstanceAs (LocallyOfFiniteType (specULiftZIsTerminal.from (Spec (.of ↥T.A))))
+
+instance (T : E.Stage) :
+    LocallyOfFiniteType (specULiftZIsTerminal.from (E.stageDiagram.obj T)) := by
+  rw [specULiftZIsTerminal.hom_ext (specULiftZIsTerminal.from (E.stageDiagram.obj T))
+    (pushout.desc (specULiftZIsTerminal.from (E.N.D.obj T.j.left))
+      (specULiftZIsTerminal.from (Spec (CommRingCat.of ↥T.A)))
+      (specULiftZIsTerminal.hom_ext _ _))]
+  exact IsZariskiLocalAtSource.pushout_desc (E.Wι T.j) T.toSpec _ inferInstance inferInstance
+
+instance isAffineHom_stageDiagram_map {T T' : E.Stage} (f : T ⟶ T') :
+    IsAffineHom (E.stageDiagram.map f) := by
+  apply IsZariskiLocalAtTarget.of_openCover (P := @IsAffineHom)
+    (IsOpenImmersion.pushoutCover (E.Wι T'.j) T'.toSpec)
+  rintro (_ | _)
+  · change IsAffineHom (pullback.snd (E.stageDiagram.map f) (pushout.inl (E.Wι T'.j) T'.toSpec))
+    refine (MorphismProperty.cancel_left_of_respectsIso (@IsAffineHom)
+      (isPullback_pushout_inl f).flip.isoPullback.hom _).mp ?_
+    rw [(isPullback_pushout_inl f).flip.isoPullback_hom_snd]
+    infer_instance
+  · change IsAffineHom (pullback.snd (E.stageDiagram.map f) (pushout.inr (E.Wι T'.j) T'.toSpec))
+    refine (MorphismProperty.cancel_left_of_respectsIso (@IsAffineHom)
+      (isPullback_pushout_inr f).flip.isoPullback.hom _).mp ?_
+    rw [(isPullback_pushout_inr f).flip.isoPullback_hom_snd]
+    infer_instance
+
+
+/-! ### The cone -/
+
+lemma sVle (E : ExtensionData.{u}) : (⊤ : E.Wc.pt.Opens) ≤ (E.WU.ι ≫ E.U.ι) ⁻¹ᵁ E.V := by
+  rw [Scheme.Hom.comp_preimage, ← E.hW₀, Scheme.Opens.ι_preimage_self]
+
+lemma sV_eq (E : ExtensionData.{u}) :
+    E.sV = (E.WU.ι ≫ E.U.ι).appLE E.V ⊤ E.sVle := rfl
+
+lemma range_WUι_comp_Uι_subset (E : ExtensionData.{u}) :
+    Set.range (E.WU.ι ≫ E.U.ι) ⊆ Set.range E.V.ι := by
+  rw [Scheme.Opens.range_ι]
+  rintro - ⟨x, rfl⟩
+  have hx : (E.WU.ι ≫ E.U.ι) x ∈ (E.WU.ι ≫ E.U.ι).opensRange := ⟨x, rfl⟩
+  rw [E.opensRange_WUι_comp_Uι] at hx
+  exact hx.2
+
+/-- (Implementation) The canonical morphism from the intersection `W = U ⊓ V` to `V`. -/
+noncomputable def ζ (E : ExtensionData.{u}) : E.Wc.pt ⟶ E.V.toScheme :=
+  IsOpenImmersion.lift E.V.ι (E.WU.ι ≫ E.U.ι) E.range_WUι_comp_Uι_subset
+
+@[reassoc (attr := simp)]
+lemma ζ_ι (E : ExtensionData.{u}) : E.ζ ≫ E.V.ι = E.WU.ι ≫ E.U.ι :=
+  IsOpenImmersion.lift_fac _ _ _
+
+@[reassoc]
+lemma Wc_π_Wι (E : ExtensionData.{u}) (j : Over E.i₀) :
+    E.Wc.π.app j ≫ E.Wι j = E.WU.ι ≫ E.N.π.app j.left :=
+  Scheme.Hom.resLE_comp_ι _ _
+
+lemma toSpecΓ_ζ (E : ExtensionData.{u}) :
+    E.ζ ≫ E.V.toSpecΓ = E.Wc.pt.toSpecΓ ≫ Spec.map E.sV := by
+  haveI : IsIso ((⊤ : E.Wc.pt.Opens).ι) := by
+    rw [← Scheme.topIso_hom]; infer_instance
+  have hres : (E.WU.ι ≫ E.U.ι).resLE E.V ⊤ E.sVle = (⊤ : E.Wc.pt.Opens).ι ≫ E.ζ := by
+    rw [← cancel_mono E.V.ι, Scheme.Hom.resLE_comp_ι, Category.assoc, E.ζ_ι]
+  have h := Scheme.Opens.toSpecΓ_SpecMap_appLE (E.WU.ι ≫ E.U.ι) E.V (⊤ : E.Wc.pt.Opens) E.sVle
+  rw [← E.sV_eq, hres, Scheme.Opens.toSpecΓ_top, Category.assoc, Category.assoc] at h
+  exact ((cancel_epi ((⊤ : E.Wc.pt.Opens).ι)).mp h).symm
+
+/-- (Implementation) Comparing `W` with `Spec A` via `V` and via `Wⱼ` gives the same
+morphism: this is where the fiber product condition on the coefficient algebra enters. -/
+@[reassoc]
+lemma Stage.ζ_toSpecΓ_SpecMap_φ (T : E.Stage) :
+    E.ζ ≫ E.V.toSpecΓ ≫ Spec.map T.φ = E.Wc.π.app T.j ≫ T.toSpec := by
+  rw [Stage.toSpec, ← Category.assoc E.ζ, E.toSpecΓ_ζ, Category.assoc, ← Spec.map_comp,
+    ← Category.assoc (E.Wc.π.app T.j), Scheme.toSpecΓ_naturality, Category.assoc,
+    ← Spec.map_comp]
+  congr 2
+  ext a
+  rw [CommRingCat.comp_apply, CommRingCat.comp_apply]
+  exact T.hA _ a.2
+
+/-- (Implementation) The open cover of `X` by `U` and `V`. -/
+noncomputable def cover (E : ExtensionData.{u}) : E.X.OpenCover :=
+  Scheme.Cover.mkOfCovers Bool (fun b ↦ (bif b then E.U else E.V).toScheme)
+    (fun b ↦ (bif b then E.U else E.V).ι)
+    (fun x ↦ by
+      have hx : x ∈ E.U ⊔ E.V := by rw [E.hUV]; trivial
+      rcases TopologicalSpace.Opens.mem_sup.mp hx with h | h
+      · exact ⟨true, ⟨x, h⟩, rfl⟩
+      · exact ⟨false, ⟨x, h⟩, rfl⟩)
+    (fun b ↦ by cases b <;> exact inferInstanceAs (IsOpenImmersion (Scheme.Opens.ι _)))
+
+@[simp] lemma cover_f_true (E : ExtensionData.{u}) : E.cover.f true = E.U.ι := rfl
+
+@[simp] lemma cover_f_false (E : ExtensionData.{u}) : E.cover.f false = E.V.ι := rfl
+
+/-- (Implementation) The morphism `U ⟶ Sₜ` of the cone. -/
+noncomputable def Stage.fromU (T : E.Stage) : E.U.toScheme ⟶ E.stageDiagram.obj T :=
+  E.N.π.app T.j.left ≫ pushout.inl (E.Wι T.j) T.toSpec
+
+/-- (Implementation) The morphism `V ⟶ Sₜ` of the cone. -/
+noncomputable def Stage.fromV (T : E.Stage) : E.V.toScheme ⟶ E.stageDiagram.obj T :=
+  E.V.toSpecΓ ≫ Spec.map T.φ ≫ pushout.inr (E.Wι T.j) T.toSpec
+
+lemma Stage.WUι_fromU (T : E.Stage) : E.WU.ι ≫ T.fromU = E.ζ ≫ T.fromV := by
+  rw [Stage.fromU, Stage.fromV, ← E.Wc_π_Wι_assoc T.j, pushout.condition,
+    T.ζ_toSpecΓ_SpecMap_φ_assoc]
+
+/-- (Implementation) The isomorphism between `U ⊓ V` and the intersection `W`. -/
+noncomputable def θ (E : ExtensionData.{u}) : (E.U ⊓ E.V).toScheme ≅ E.Wc.pt :=
+  IsOpenImmersion.isoOfRangeEq (E.X.homOfLE (inf_le_left : E.U ⊓ E.V ≤ E.U)) E.WU.ι (by
+    rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange, Scheme.opensRange_homOfLE,
+      Scheme.Opens.opensRange_ι, ExtensionData.WU, E.hW₀]
+    congr 1
+    rw [Scheme.Hom.preimage_inf, Scheme.Opens.ι_preimage_self, top_inf_eq])
+
+@[reassoc (attr := simp)]
+lemma θ_hom_WUι (E : ExtensionData.{u}) :
+    E.θ.hom ≫ E.WU.ι = E.X.homOfLE (inf_le_left : E.U ⊓ E.V ≤ E.U) :=
+  IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
+
+@[reassoc (attr := simp)]
+lemma θ_hom_ζ (E : ExtensionData.{u}) :
+    E.θ.hom ≫ E.ζ = E.X.homOfLE (inf_le_right : E.U ⊓ E.V ≤ E.V) := by
+  rw [← cancel_mono E.V.ι, Category.assoc, E.ζ_ι, ← Category.assoc, E.θ_hom_WUι,
+    Scheme.homOfLE_ι, Scheme.homOfLE_ι]
+
+@[reassoc (attr := simp)]
+lemma θ_inv_homOfLE (E : ExtensionData.{u}) :
+    E.θ.inv ≫ E.X.homOfLE (inf_le_left : E.U ⊓ E.V ≤ E.U) = E.WU.ι := by
+  rw [← E.θ_hom_WUι, Iso.inv_hom_id_assoc]
+
+@[reassoc (attr := simp)]
+lemma θ_inv_infι (E : ExtensionData.{u}) : E.θ.inv ≫ (E.U ⊓ E.V).ι = E.WU.ι ≫ E.U.ι := by
+  rw [← Scheme.homOfLE_ι E.X (inf_le_left : E.U ⊓ E.V ≤ E.U), ← Category.assoc,
+    θ_inv_homOfLE]
+
+lemma Stage.homOfLE_fromU (T : E.Stage) {W : E.X.Opens} (h₁ : W ≤ E.U) (h₂ : W ≤ E.V) :
+    E.X.homOfLE h₁ ≫ T.fromU = E.X.homOfLE h₂ ≫ T.fromV := by
+  rw [← E.X.homOfLE_homOfLE (le_inf h₁ h₂) (inf_le_left : E.U ⊓ E.V ≤ E.U),
+    ← E.X.homOfLE_homOfLE (le_inf h₁ h₂) (inf_le_right : E.U ⊓ E.V ≤ E.V), Category.assoc,
+    Category.assoc, ← E.θ_hom_WUι, ← E.θ_hom_ζ, Category.assoc, Category.assoc, T.WUι_fromU]
+
+/-- (Implementation) The morphism from `X` to the stage scheme of a stage: it restricts to
+the projection of the approximation of `U` on `U`, and to the map induced by the first
+projection of the coefficient algebra on `V`. -/
+noncomputable def Stage.fromX (T : E.Stage) : E.X ⟶ E.stageDiagram.obj T :=
+  E.cover.glueMorphisms (fun b ↦ match b with | true => T.fromU | false => T.fromV) (by
+    rintro (_ | _) (_ | _)
+    · change pullback.fst E.V.ι E.V.ι ≫ T.fromV = pullback.snd E.V.ι E.V.ι ≫ T.fromV
+      rw [(cancel_mono E.V.ι).mp
+        (pullback.condition : pullback.fst E.V.ι E.V.ι ≫ _ = pullback.snd _ _ ≫ _)]
+    · change pullback.fst E.V.ι E.U.ι ≫ T.fromV = pullback.snd E.V.ι E.U.ι ≫ T.fromU
+      rw [← cancel_epi (isPullback_opens_inf E.V E.U).isoPullback.hom, ← Category.assoc,
+        ← Category.assoc, IsPullback.isoPullback_hom_fst, IsPullback.isoPullback_hom_snd]
+      exact (T.homOfLE_fromU inf_le_right inf_le_left).symm
+    · change pullback.fst E.U.ι E.V.ι ≫ T.fromU = pullback.snd E.U.ι E.V.ι ≫ T.fromV
+      rw [← cancel_epi (isPullback_opens_inf E.U E.V).isoPullback.hom, ← Category.assoc,
+        ← Category.assoc, IsPullback.isoPullback_hom_fst, IsPullback.isoPullback_hom_snd]
+      exact T.homOfLE_fromU inf_le_left inf_le_right
+    · change pullback.fst E.U.ι E.U.ι ≫ T.fromU = pullback.snd E.U.ι E.U.ι ≫ T.fromU
+      rw [(cancel_mono E.U.ι).mp
+        (pullback.condition : pullback.fst E.U.ι E.U.ι ≫ _ = pullback.snd _ _ ≫ _)])
+
+
+@[reassoc (attr := simp)]
+lemma Stage.Uι_fromX (T : E.Stage) : E.U.ι ≫ T.fromX = T.fromU :=
+  E.cover.ι_glueMorphisms _ _ true
+
+@[reassoc (attr := simp)]
+lemma Stage.Vι_fromX (T : E.Stage) : E.V.ι ≫ T.fromX = T.fromV :=
+  E.cover.ι_glueMorphisms _ _ false
+
+@[reassoc]
+lemma N_π_naturality (E : ExtensionData.{u}) {i i' : E.N.I} (g : i ⟶ i') :
+    E.N.π.app i ≫ E.N.D.map g = E.N.π.app i' :=
+  E.cone.w g
+
+/-- (Implementation) The cone with point `X` over the system of stage schemes. -/
+noncomputable def stageCone (E : ExtensionData.{u}) : Cone E.stageDiagram where
+  pt := E.X
+  π :=
+    { app := fun T ↦ T.fromX
+      naturality := fun T T' f ↦ by
+        change 𝟙 E.X ≫ T'.fromX = T.fromX ≫ E.stageDiagram.map f
+        rw [Category.id_comp]
+        refine E.cover.hom_ext _ _ fun b ↦ ?_
+        cases b
+        · simp only [cover_f_false, Stage.Vι_fromX, Stage.Vι_fromX_assoc, Stage.fromV,
+            Category.assoc, inr_stageDiagram_map, Stage.Hom.SpecMap_φ_assoc]
+        · simp only [cover_f_true, Stage.Uι_fromX, Stage.Uι_fromX_assoc, Stage.fromU,
+            Category.assoc, inl_stageDiagram_map, E.N_π_naturality_assoc] }
+
+@[simp] lemma stageCone_pt (E : ExtensionData.{u}) : E.stageCone.pt = E.X := rfl
+
+@[simp] lemma stageCone_π_app (E : ExtensionData.{u}) (T : E.Stage) :
+    E.stageCone.π.app T = T.fromX := rfl
+
+
+/-! ### The two charts of a stage scheme -/
+
+/-- (Implementation) The chart of a stage scheme coming from the Noetherian stage `Dⱼ`. -/
+noncomputable abbrev Stage.chartU (T : E.Stage) : (E.stageDiagram.obj T).Opens :=
+  (pushout.inl (E.Wι T.j) T.toSpec).opensRange
+
+/-- (Implementation) The chart of a stage scheme coming from `Spec A`. -/
+noncomputable abbrev Stage.chartV (T : E.Stage) : (E.stageDiagram.obj T).Opens :=
+  (pushout.inr (E.Wι T.j) T.toSpec).opensRange
+
+lemma Stage.chartU_sup_chartV (T : E.Stage) : T.chartU ⊔ T.chartV = ⊤ :=
+  opensRange_pushout_inl_sup_opensRange_pushout_inr _ _
+
+lemma Stage.preimage_chartU {T T' : E.Stage} (f : T ⟶ T') :
+    E.stageDiagram.map f ⁻¹ᵁ T'.chartU = T.chartU :=
+  preimage_opensRange_pushout_inl_of_isPullback _ _ _ _ _ _ _ (WD_map_Wι f.base)
+    (Stage.toSpec_comp_SpecMap_algHom f).symm (isPullback_toSpec f)
+
+lemma Stage.preimage_chartV {T T' : E.Stage} (f : T ⟶ T') :
+    E.stageDiagram.map f ⁻¹ᵁ T'.chartV = T.chartV :=
+  preimage_opensRange_pushout_inr_of_isPullback _ _ _ _ _ _ _ (WD_map_Wι f.base)
+    (Stage.toSpec_comp_SpecMap_algHom f).symm (isPullback_Wι f)
+
+lemma Stage.chartU_inf_chartV (T : E.Stage) :
+    T.chartU ⊓ T.chartV = (E.Wι T.j ≫ pushout.inl (E.Wι T.j) T.toSpec).opensRange := by
+  rw [Scheme.Hom.opensRange_comp (E.Wι T.j) (pushout.inl (E.Wι T.j) T.toSpec),
+    ← preimage_opensRange_pushout_inr (E.Wι T.j) T.toSpec,
+    Scheme.Hom.image_preimage_eq_opensRange_inf]
+
+lemma Stage.fromX_preimage_chartU (T : E.Stage) : T.fromX ⁻¹ᵁ T.chartU = E.U := by
+  refine le_antisymm (fun x hx ↦ ?_) (fun x hx ↦ ?_)
+  · have hmem : x ∈ E.U ⊔ E.V := by rw [E.hUV]; trivial
+    rcases TopologicalSpace.Opens.mem_sup.mp hmem with h | h
+    · exact h
+    · -- `x` lies in `V`; its image in `Spec A` lies in the image of `Wⱼ`, hence in one of
+      -- the basic opens of the generators, which are contained in `U`.
+      obtain ⟨y, hy⟩ : ∃ y, pushout.inl (E.Wι T.j) T.toSpec y = T.fromX x := hx
+      set x' : E.V.toScheme := ⟨x, h⟩ with hx'
+      have hfV : T.fromX x = pushout.inr (E.Wι T.j) T.toSpec
+          (Spec.map T.φ (E.V.toSpecΓ x')) :=
+        calc T.fromX x = (E.V.ι ≫ T.fromX) x' := rfl
+          _ = T.fromV x' := by rw [Stage.Vι_fromX]
+          _ = _ := rfl
+      rw [hfV] at hy
+      obtain ⟨w, -, hw⟩ := (pushout_inl_eq_inr_iff (E.Wι T.j) T.toSpec _ _).mp hy
+      have hq : Spec.map T.φ (E.V.toSpecΓ x') ∈ T.toSpec.opensRange := ⟨w, hw⟩
+      rw [T.opensRange_toSpec] at hq
+      obtain ⟨l, hl⟩ := TopologicalSpace.Opens.mem_iSup.mp hq
+      have hl' : E.V.toSpecΓ x' ∈ Spec.map T.φ ⁻¹ᵁ PrimeSpectrum.basicOpen (T.h l) := hl
+      rw [SpecMap_preimage_basicOpen] at hl'
+      have hb : (T.φ (T.h l) : Γ(E.X, E.V)) = E.b l := rfl
+      rw [hb] at hl'
+      have : x' ∈ E.V.toSpecΓ ⁻¹ᵁ PrimeSpectrum.basicOpen (E.b l) := hl'
+      rw [Scheme.Opens.toSpecΓ_preimage_basicOpen] at this
+      exact ((E.hb l) this).1
+  · change T.fromX x ∈ T.chartU
+    have h1 : T.fromX x = pushout.inl (E.Wι T.j) T.toSpec
+        (E.N.π.app T.j.left (⟨x, hx⟩ : E.U.toScheme)) :=
+      calc T.fromX x = (E.U.ι ≫ T.fromX) (⟨x, hx⟩ : E.U.toScheme) := rfl
+        _ = T.fromU (⟨x, hx⟩ : E.U.toScheme) := by rw [Stage.Uι_fromX]
+        _ = _ := rfl
+    rw [h1]
+    exact ⟨_, rfl⟩
+
+lemma Stage.fromX_preimage_chartV (T : E.Stage) : T.fromX ⁻¹ᵁ T.chartV = E.V := by
+  refine le_antisymm (fun x hx ↦ ?_) (fun x hx ↦ ?_)
+  · have hmem : x ∈ E.U ⊔ E.V := by rw [E.hUV]; trivial
+    rcases TopologicalSpace.Opens.mem_sup.mp hmem with h | h
+    · obtain ⟨y, hy⟩ : ∃ y, pushout.inr (E.Wι T.j) T.toSpec y = T.fromX x := hx
+      set x' : E.U.toScheme := ⟨x, h⟩ with hx'
+      have hfU : T.fromX x = pushout.inl (E.Wι T.j) T.toSpec (E.N.π.app T.j.left x') :=
+        calc T.fromX x = (E.U.ι ≫ T.fromX) x' := rfl
+          _ = T.fromU x' := by rw [Stage.Uι_fromX]
+          _ = _ := rfl
+      rw [hfU] at hy
+      obtain ⟨w, hw, -⟩ := (pushout_inl_eq_inr_iff (E.Wι T.j) T.toSpec _ _).mp hy.symm
+      have hp : E.N.π.app T.j.left x' ∈ (E.Wι T.j).opensRange := ⟨w, hw⟩
+      rw [opensRange_Wι] at hp
+      have hp' : E.N.π.app E.i₀ x' ∈ E.W₀ := by
+        rw [← E.N_π_naturality T.j.hom, Scheme.Hom.comp_apply]
+        exact hp
+      have : x' ∈ E.N.π.app E.i₀ ⁻¹ᵁ E.W₀ := hp'
+      rw [E.hW₀] at this
+      exact this
+    · exact h
+  · change T.fromX x ∈ T.chartV
+    have h1 : T.fromX x = pushout.inr (E.Wι T.j) T.toSpec
+        (Spec.map T.φ (E.V.toSpecΓ (⟨x, hx⟩ : E.V.toScheme))) :=
+      calc T.fromX x = (E.V.ι ≫ T.fromX) (⟨x, hx⟩ : E.V.toScheme) := rfl
+        _ = T.fromV (⟨x, hx⟩ : E.V.toScheme) := by rw [Stage.Vι_fromX]
+        _ = _ := rfl
+    rw [h1]
+    exact ⟨_, rfl⟩
+
+lemma Stage.fromX_preimage_chartU_inf_chartV (T : E.Stage) :
+    T.fromX ⁻¹ᵁ (T.chartU ⊓ T.chartV) = E.U ⊓ E.V := by
+  rw [Scheme.Hom.preimage_inf, T.fromX_preimage_chartU, T.fromX_preimage_chartV]
+
+
+/-! ### The limit property, chart by chart -/
+
+/-- (Implementation) The system of Noetherian stages `Dⱼ`, indexed by the stages below a
+fixed stage. -/
+noncomputable abbrev baseDiagram (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    Over T₀ ⥤ Scheme.{u} :=
+  Over.forget T₀ ⋙ E.stageIndex ⋙ Over.forget E.i₀ ⋙ E.N.D
+
+/-- (Implementation) `U` is the limit of the Noetherian stages `Dⱼ` indexed by the stages
+below a fixed stage: the index functor is initial. -/
+noncomputable def isLimitBaseCone (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    IsLimit (E.cone.whisker (Over.forget T₀ ⋙ E.stageIndex ⋙ Over.forget E.i₀)) :=
+  (Functor.Initial.isLimitWhiskerEquiv _ E.cone).symm E.N.isLimit
+
+set_option maxHeartbeats 1600000 in
+-- Naturality of the chart isomorphism unfolds the pushout of every stage below `T₀`.
+/-- (Implementation) The `U`-chart of a stage scheme is `Dⱼ`, compatibly with the
+transition morphisms. -/
+noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    E.baseDiagram T₀ ≅ opensDiagram E.stageDiagram T₀ T₀.chartU :=
+  NatIso.ofComponents
+    (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inl (E.Wι S.left.j) S.left.toSpec)
+      (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartU))
+      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
+        Scheme.Opens.opensRange_ι, Stage.preimage_chartU S.hom]))
+    (fun {S S'} k ↦ by
+      rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartU))]
+      simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
+        opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inl_stageDiagram_map]
+      rfl)
+
+set_option maxHeartbeats 1600000 in
+-- Transporting the limit along the chart isomorphism compares two cones on the
+-- opens diagram of the pushout.
+/-- (Implementation) The restriction of the stage cone to the `U`-chart is a limit cone. -/
+noncomputable def isLimitOpensConeChartU (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    IsLimit (opensCone E.stageDiagram E.stageCone T₀ T₀.chartU) :=
+  IsLimit.equivOfNatIsoOfIso (E.chartUIso T₀)
+    (E.cone.whisker (Over.forget T₀ ⋙ E.stageIndex ⋙ Over.forget E.i₀))
+    (opensCone E.stageDiagram E.stageCone T₀ T₀.chartU)
+    (Cone.ext (E.X.isoOfEq T₀.fromX_preimage_chartU.symm) (fun S ↦ by
+      rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartU))]
+      simp only [Cone.postcompose_obj_π, NatTrans.comp_app, Cone.whisker_π,
+        Category.assoc, chartUIso, NatIso.ofComponents_hom_app,
+        IsOpenImmersion.isoOfRangeEq_hom_fac, opensCone_π_ι, Scheme.isoOfEq_hom_ι_assoc]
+      exact (Stage.Uι_fromX S.left).symm))
+    (E.isLimitBaseCone T₀)
+
+
+/-- (Implementation) The system of intersections `Wⱼ`, indexed by the stages below a fixed
+stage. -/
+noncomputable abbrev interDiagram (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    Over T₀ ⥤ Scheme.{u} :=
+  Over.forget T₀ ⋙ E.stageIndex ⋙ E.WD
+
+/-- (Implementation) `W = U ⊓ V` is the limit of the `Wⱼ` indexed by the stages below a
+fixed stage. -/
+noncomputable def isLimitInterCone (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    IsLimit (E.Wc.whisker (Over.forget T₀ ⋙ E.stageIndex)) :=
+  (Functor.Initial.isLimitWhiskerEquiv _ E.Wc).symm E.isLimitWc
+
+set_option maxHeartbeats 1600000 in
+-- Naturality of the overlap isomorphism unfolds the pushout of every stage below `T₀`.
+/-- (Implementation) The overlap of the two charts of a stage scheme is `Wⱼ`, compatibly
+with the transition morphisms. -/
+noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    E.interDiagram T₀ ≅ opensDiagram E.stageDiagram T₀ (T₀.chartU ⊓ T₀.chartV) :=
+  NatIso.ofComponents
+    (fun S ↦ IsOpenImmersion.isoOfRangeEq
+      (E.Wι S.left.j ≫ pushout.inl (E.Wι S.left.j) S.left.toSpec)
+      (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ (T₀.chartU ⊓ T₀.chartV)))
+      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
+        Scheme.Opens.opensRange_ι, Scheme.Hom.preimage_inf, Stage.preimage_chartU S.hom,
+        Stage.preimage_chartV S.hom, Stage.chartU_inf_chartV]))
+    (fun {S S'} k ↦ by
+      rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ
+        (T₀.chartU ⊓ T₀.chartV)))]
+      have h : (E.interDiagram T₀).map k = E.WD.map k.left.base := rfl
+      simp only [h, Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
+        opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inl_stageDiagram_map,
+        WD_map_Wι_assoc])
+
+set_option maxHeartbeats 1600000 in
+-- Transporting the limit along the overlap isomorphism compares two cones on the
+-- opens diagram of the pushout.
+/-- (Implementation) The restriction of the stage cone to the overlap of the two charts is a
+limit cone. -/
+noncomputable def isLimitOpensConeInter (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    IsLimit (opensCone E.stageDiagram E.stageCone T₀ (T₀.chartU ⊓ T₀.chartV)) :=
+  IsLimit.equivOfNatIsoOfIso (E.interIso T₀)
+    (E.Wc.whisker (Over.forget T₀ ⋙ E.stageIndex))
+    (opensCone E.stageDiagram E.stageCone T₀ (T₀.chartU ⊓ T₀.chartV))
+    (Cone.ext (E.θ.symm ≪≫ E.X.isoOfEq T₀.fromX_preimage_chartU_inf_chartV.symm) (fun S ↦ by
+      rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ
+        (T₀.chartU ⊓ T₀.chartV)))]
+      simp only [Cone.postcompose_obj_π, NatTrans.comp_app, Cone.whisker_π,
+        Functor.whiskerLeft_app, Category.assoc, interIso, NatIso.ofComponents_hom_app,
+        IsOpenImmersion.isoOfRangeEq_hom_fac, opensCone_π_ι, Iso.trans_hom,
+        Scheme.isoOfEq_hom_ι_assoc, Iso.symm_hom, θ_inv_infι_assoc, stageCone_π_app]
+      exact (E.Wc_π_Wι_assoc S.left.j _).trans (by rw [Stage.Uι_fromX, Stage.fromU])))
+    (E.isLimitInterCone T₀)
+/-! ### The `Spec A`-chart: the sections of `V` are the colimit of the coefficient algebras -/
+
+/-- (Implementation) Every section of `V` occurs in the coefficient algebra of some stage. -/
+lemma exists_stage_mem_A (E : ExtensionData.{u}) (β : Γ(E.X, E.V)) :
+    ∃ (T : E.Stage) (a : ↥T.A), (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1 = β := by
+  obtain ⟨T₁⟩ := (inferInstance : Nonempty E.Stage)
+  obtain ⟨j₁, x₁, hx₁⟩ := exists_appTop_π_eq_of_isLimit E.WD E.Wc E.isLimitWc (E.sV β)
+  obtain ⟨j₂, k₁, k₂, -⟩ := IsCofilteredOrEmpty.cone_objs T₁.j j₁
+  have hxt : E.t j₂ (E.res k₂ x₁) = E.sV β := by rw [E.t_res]; exact hx₁.symm
+  have hle : Algebra.adjoin ℤ {(β, E.res k₂ x₁)} ≤ E.fiberProduct j₂ :=
+    Algebra.adjoin_le (by rintro p rfl; exact (E.mem_fiberProduct_iff _).mpr hxt.symm)
+  have hfg : (Algebra.adjoin ℤ {(β, E.res k₂ x₁)}).FG :=
+    Subalgebra.fg_def.mpr ⟨_, Set.finite_singleton _, rfl⟩
+  exact ⟨T₁.restrict k₁ _ hle hfg,
+    ⟨(β, E.res k₂ x₁), T₁.le_restrict_A k₁ _ hle hfg (Algebra.subset_adjoin rfl)⟩, rfl⟩
+
+/-- (Implementation) Two elements of a coefficient algebra whose components agree are
+equal. -/
+lemma Stage.Hom.algHom_eq_of {T T' : E.Stage} (f : T' ⟶ T) (a b : ↥T.A)
+    (h1 : (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1 =
+      (b : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1)
+    (h2 : E.res f.base (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 =
+      E.res f.base (b : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2) :
+    f.algHom a = f.algHom b :=
+  Subtype.ext (by rw [Stage.Hom.algHom_coe, Stage.Hom.algHom_coe, h1, h2])
+
+/-- (Implementation) Two elements of a coefficient algebra with the same `V`-component become
+equal at a later stage: their `Wⱼ`-components agree on the intersection `W`, hence already at
+a finite stage. -/
+lemma exists_hom_algHom_eq (E : ExtensionData.{u}) (T : E.Stage) (a b : ↥T.A)
+    (h : (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1 =
+      (b : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1) :
+    ∃ (T' : E.Stage) (f : T' ⟶ T), f.algHom a = f.algHom b := by
+  have ht : E.t T.j (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 =
+      E.t T.j (b : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 := by
+    rw [← T.hA _ a.2, ← T.hA _ b.2, h]
+  have hcpt : IsCompact ((⊤ : (E.WD.obj T.j).Opens) : Set (E.WD.obj T.j)) := isCompact_univ
+  obtain ⟨j', k, hk⟩ := exists_app_map_eq_map_of_isLimit E.WD E.Wc E.isLimitWc hcpt _ _ ht
+  exact ⟨T.restrict k ⊥ bot_le Subalgebra.fg_bot,
+    T.restrictHom k ⊥ bot_le Subalgebra.fg_bot, Stage.Hom.algHom_eq_of _ a b h hk⟩
+
+/-- (Implementation) The system of coefficient algebras of the stages, as a diagram in the
+opposite category of commutative rings. -/
+noncomputable def algOp (E : ExtensionData.{u}) : E.Stage ⥤ CommRingCatᵒᵖ where
+  obj T := Opposite.op (CommRingCat.of ↥T.A)
+  map f := (f.algHom).op
+  map_id T := Quiver.Hom.unop_inj (Stage.Hom.algHom_id T)
+  map_comp f g := Quiver.Hom.unop_inj (Stage.Hom.algHom_comp f g)
+
+/-- (Implementation) `Γ(X, V)` as a cocone on the system of coefficient algebras. -/
+noncomputable def algCocone (E : ExtensionData.{u}) : Cocone E.algOp.leftOp where
+  pt := Γ(E.X, E.V)
+  ι :=
+    { app := fun T ↦ T.unop.φ
+      naturality := fun _ _ f ↦
+        (Stage.Hom.algHom_φ f.unop).trans (Category.comp_id _).symm }
+
+set_option maxHeartbeats 1600000 in
+-- Reflecting the colimit through the forgetful functor unfolds the subalgebra
+-- coercions of every stage.
+/-- (Implementation) `Γ(X, V)` is the filtered colimit of the coefficient algebras of the
+stages: every section of `V` occurs at some stage, and two elements with the same
+`V`-component become equal at a later stage. -/
+noncomputable def isColimitAlgCocone (E : ExtensionData.{u}) : IsColimit E.algCocone := by
+  have : ReflectsColimit E.algOp.leftOp (CategoryTheory.forget CommRingCat.{u}) :=
+    reflectsColimit_of_reflectsIsomorphisms _ _
+  refine isColimitOfReflects (CategoryTheory.forget CommRingCat.{u}) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ (fun β ↦ ?_) (fun T a b hab ↦ ?_)
+  · obtain ⟨T, a, ha⟩ := E.exists_stage_mem_A β
+    exact ⟨Opposite.op T, a, ha.symm⟩
+  · obtain ⟨T', f, hf⟩ := E.exists_hom_algHom_eq T.unop a b hab
+    exact ⟨Opposite.op T', f.op, hf⟩
+
+/-- (Implementation) The system of the spectra of the coefficient algebras. -/
+noncomputable abbrev specDiagram (E : ExtensionData.{u}) : E.Stage ⥤ Scheme.{u} :=
+  E.algOp ⋙ Scheme.Spec
+
+/-- (Implementation) `V ≅ Spec Γ(X, V)` as a cone on the spectra of the coefficient
+algebras. -/
+noncomputable def specCone (E : ExtensionData.{u}) : Cone E.specDiagram :=
+  Scheme.Spec.mapCone (Limits.coneOfCoconeLeftOp E.algCocone)
+
+lemma specCone_pt (E : ExtensionData.{u}) : E.specCone.pt = Spec Γ(E.X, E.V) := rfl
+
+lemma specCone_π_app (E : ExtensionData.{u}) (T : E.Stage) :
+    E.specCone.π.app T = Spec.map T.φ := rfl
+
+/-- (Implementation) `Spec Γ(X, V)` is the limit of the spectra of the coefficient
+algebras. -/
+noncomputable def isLimitSpecCone (E : ExtensionData.{u}) : IsLimit E.specCone :=
+  isLimitOfPreserves Scheme.Spec
+    (Limits.isLimitConeOfCoconeLeftOp E.algOp E.isColimitAlgCocone)
+
+@[reassoc (attr := simp)]
+lemma isoSpec_inv_toSpecΓ (E : ExtensionData.{u}) :
+    E.hV.isoSpec.inv ≫ E.V.toSpecΓ = 𝟙 _ := by
+  rw [← IsAffineOpen.isoSpec_hom E.hV, Iso.inv_hom_id]
+
+set_option maxHeartbeats 1600000 in
+-- Naturality of the chart isomorphism unfolds the pushout of every stage below `T₀`.
+/-- (Implementation) The `Spec A`-chart of a stage scheme is `Spec A`, compatibly with the
+transition morphisms. -/
+noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    Over.forget T₀ ⋙ E.specDiagram ≅ opensDiagram E.stageDiagram T₀ T₀.chartV :=
+  NatIso.ofComponents
+    (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inr (E.Wι S.left.j) S.left.toSpec)
+      (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartV))
+      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
+        Scheme.Opens.opensRange_ι, Stage.preimage_chartV S.hom]))
+    (fun {S S'} k ↦ by
+      rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartV))]
+      simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
+        opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inr_stageDiagram_map]
+      rfl)
+
+set_option maxHeartbeats 1600000 in
+-- Transporting the limit along the chart isomorphism compares two cones on the
+-- opens diagram of the pushout.
+/-- (Implementation) The restriction of the stage cone to the `Spec A`-chart is a limit
+cone. -/
+noncomputable def isLimitOpensConeChartV (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    IsLimit (opensCone E.stageDiagram E.stageCone T₀ T₀.chartV) :=
+  IsLimit.equivOfNatIsoOfIso (E.chartVIso T₀)
+    (E.specCone.whisker (Over.forget T₀))
+    (opensCone E.stageDiagram E.stageCone T₀ T₀.chartV)
+    (Cone.ext (E.hV.isoSpec.symm ≪≫ E.X.isoOfEq T₀.fromX_preimage_chartV.symm) (fun S ↦ by
+      rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartV))]
+      simp only [Cone.postcompose_obj_π, NatTrans.comp_app, Cone.whisker_π,
+        Functor.whiskerLeft_app, Category.assoc, chartVIso, NatIso.ofComponents_hom_app,
+        IsOpenImmersion.isoOfRangeEq_hom_fac, opensCone_π_ι, Iso.trans_hom,
+        Scheme.isoOfEq_hom_ι_assoc, Iso.symm_hom, stageCone_π_app]
+      rw [Stage.Vι_fromX, Stage.fromV, isoSpec_inv_toSpecΓ_assoc]
+      exact congrArg (fun g ↦ g ≫ pushout.inr (E.Wι S.left.j) S.left.toSpec)
+        (specCone_π_app E S.left)))
+    ((Functor.Initial.isLimitWhiskerEquiv _ E.specCone).symm E.isLimitSpecCone)
+
+/-- (Implementation) The two charts of a stage scheme, as a family indexed by `Bool`. -/
+noncomputable def charts (E : ExtensionData.{u}) (T₀ : E.Stage) (b : Bool) :
+    (E.stageDiagram.obj T₀).Opens :=
+  bif b then T₀.chartU else T₀.chartV
+
+set_option maxHeartbeats 1600000 in
+-- Each of the four cases unfolds the pushout defining the stage scheme.
+/-- (Implementation) The stage cone is a limit cone: its restrictions to the two charts of a
+stage scheme and to their overlap are limit cones. -/
+noncomputable def isLimitStageConeOfStage (E : ExtensionData.{u}) (T₀ : E.Stage) :
+    IsLimit E.stageCone := by
+  refine isLimitOfIsLimitOpensCone E.stageDiagram E.stageCone T₀ (E.charts T₀) ?_
+    (fun b ↦ ?_) (fun b b' ↦ ?_)
+  · rw [iSup_bool_eq]
+    exact T₀.chartU_sup_chartV
+  · cases b
+    exacts [E.isLimitOpensConeChartV T₀, E.isLimitOpensConeChartU T₀]
+  · cases b <;> cases b'
+    · change IsLimit (opensCone E.stageDiagram E.stageCone T₀ (T₀.chartV ⊓ T₀.chartV))
+      rw [inf_idem]
+      exact E.isLimitOpensConeChartV T₀
+    · change IsLimit (opensCone E.stageDiagram E.stageCone T₀ (T₀.chartV ⊓ T₀.chartU))
+      rw [inf_comm]
+      exact E.isLimitOpensConeInter T₀
+    · exact E.isLimitOpensConeInter T₀
+    · change IsLimit (opensCone E.stageDiagram E.stageCone T₀ (T₀.chartU ⊓ T₀.chartU))
+      rw [inf_idem]
+      exact E.isLimitOpensConeChartU T₀
+
+/-- (Implementation) The stage cone is a limit cone. -/
+noncomputable def isLimitStageCone (E : ExtensionData.{u}) : IsLimit E.stageCone :=
+  E.isLimitStageConeOfStage (Classical.arbitrary E.Stage)
+
+/-- (Implementation) The Noetherian approximation of `X = U ∪ V` extending a given
+approximation of `U` across the affine open `V`. This is the induction step of
+Stacks Project Tag 07RN. -/
+noncomputable def approximation (E : ExtensionData.{u}) : E.X.NoetherianApproximation where
+  I := E.Stage
+  D := E.stageDiagram
+  locallyOfFiniteType_obj _ := inferInstance
+  compactSpace_obj _ := inferInstance
+  isAffineHom_map _ := inferInstance
+  π := E.stageCone.π
+  isLimit := E.isLimitStageCone
+
 end ExtensionData
 
 end Scheme.NoetherianApproximation
+
+/-- (Implementation) A finite supremum of quasi-compact opens is quasi-compact. -/
+private lemma isCompact_finset_sup {X : Scheme.{u}} (s : Finset X.Opens)
+    (hs : ∀ V ∈ s, IsCompact (V : Set X)) : IsCompact ((s.sup id : X.Opens) : Set X) := by
+  classical
+  induction s using Finset.induction with
+  | empty => simp
+  | insert a s ha ih =>
+      rw [Finset.sup_insert]
+      refine IsCompact.union (hs a (Finset.mem_insert_self a s)) ?_
+      exact ih fun V hV ↦ hs V (Finset.mem_insert_of_mem hV)
+
+open Scheme.NoetherianApproximation in
+/-- (Implementation) **Absolute Noetherian approximation** for a finite union of affine
+opens of a quasi-separated scheme, by induction on the number of members of the union
+(Stacks Project Tag 07RN). -/
+private lemma nonempty_noetherianApproximation_finsetSup {X : Scheme.{u}}
+    [QuasiSeparatedSpace X] (s : Finset X.Opens) (hs : ∀ V ∈ s, IsAffineOpen V) :
+    Nonempty ((s.sup id : X.Opens).toScheme.NoetherianApproximation) := by
+  classical
+  induction s using Finset.induction with
+  | empty =>
+      rw [Finset.sup_empty]
+      have h : IsAffine ((⊥ : X.Opens).toScheme) := isAffineOpen_bot X
+      exact ⟨Scheme.NoetherianApproximation.ofIsAffine _⟩
+  | insert a s ha ih =>
+      obtain ⟨N₀⟩ := ih fun V hV ↦ hs V (Finset.mem_insert_of_mem hV)
+      have haff : IsAffineOpen a := hs a (Finset.mem_insert_self a s)
+      have hsaff : ∀ V ∈ s, IsAffineOpen V := fun V hV ↦ hs V (Finset.mem_insert_of_mem hV)
+      rw [Finset.sup_insert, id]
+      set Y : X.Opens := a ⊔ s.sup id with hYdef
+      haveI : QuasiSeparatedSpace Y.toScheme :=
+        (isQuasiSeparated_iff_quasiSeparatedSpace _ Y.2).mp (.of_quasiSeparatedSpace _)
+      set U : Y.toScheme.Opens := Y.ι ⁻¹ᵁ (s.sup id) with hUdef
+      set V : Y.toScheme.Opens := Y.ι ⁻¹ᵁ a with hVdef
+      have hUV : U ⊔ V = ⊤ := by
+        rw [hUdef, hVdef, ← Scheme.Hom.preimage_sup, sup_comm, ← hYdef,
+          Scheme.Opens.ι_preimage_self]
+      have hVaff : IsAffineOpen V := by
+        refine haff.preimage_of_isOpenImmersion Y.ι ?_
+        rw [Scheme.Opens.opensRange_ι]
+        exact le_sup_left
+      -- the approximation of `U`, transported from the induction hypothesis
+      have hrange : Set.range (X.homOfLE (le_sup_right : s.sup id ≤ Y)) =
+          Set.range (Scheme.Opens.ι U) := by
+        rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
+          Scheme.opensRange_homOfLE, Scheme.Opens.opensRange_ι]
+      have N : U.toScheme.NoetherianApproximation :=
+        N₀.ofIso (IsOpenImmersion.isoOfRangeEq _ _ hrange)
+      -- the intersection `U ⊓ V` is quasi-compact
+      have hsc : IsCompact ((s.sup id : X.Opens) : Set X) :=
+        isCompact_finset_sup s fun V hV ↦ (hsaff V hV).isCompact
+      have hinfc : IsCompact (((s.sup id ⊓ a : X.Opens)) : Set X) := by
+        rw [TopologicalSpace.Opens.coe_inf]
+        exact QuasiSeparatedSpace.inter_isCompact _ _ (s.sup id).2 hsc a.2 haff.isCompact
+      have hUVc : IsCompact ((U ⊓ V : Y.toScheme.Opens) : Set Y.toScheme) := by
+        have he : (U ⊓ V : Y.toScheme.Opens) = Y.ι ⁻¹ᵁ (s.sup id ⊓ a) := by
+          rw [hUdef, hVdef, Scheme.Hom.preimage_inf]
+        rw [he]
+        refine Y.ι.isOpenEmbedding.isInducing.isCompact_preimage' hinfc ?_
+        rw [Scheme.Opens.range_ι]
+        exact le_trans inf_le_left le_sup_right
+      have hUVc' : IsCompact ((U.ι ⁻¹ᵁ V : U.toScheme.Opens) : Set U.toScheme) := by
+        have he : (U.ι ⁻¹ᵁ V : U.toScheme.Opens) = U.ι ⁻¹ᵁ (U ⊓ V) := by
+          rw [Scheme.Hom.preimage_inf, Scheme.Opens.ι_preimage_self, top_inf_eq]
+        rw [he]
+        refine U.ι.isOpenEmbedding.isInducing.isCompact_preimage' hUVc ?_
+        rw [Scheme.Opens.range_ι]
+        exact inf_le_left
+      obtain ⟨i₀, W₀, hW₀c, hW₀⟩ :=
+        exists_preimage_eq N.D (Cone.mk _ N.π) N.isLimit _ hUVc'
+      -- the generators of the intersection
+      obtain ⟨t, ht⟩ := hVaff.exists_finset_basicOpen_eq hUVc inf_le_right
+      obtain ⟨m, eq⟩ : ∃ m, Nonempty ({x // x ∈ t} ≃ Fin m) := ⟨t.card, ⟨t.equivFin⟩⟩
+      obtain ⟨eq⟩ := eq
+      have hcov : (U ⊓ V : Y.toScheme.Opens) =
+          ⨆ l : Fin m, Y.toScheme.basicOpen ((eq.symm l : {x // x ∈ t}) :
+            Γ(Y.toScheme, V)) := by
+        have h1 : (⨆ f ∈ t, Y.toScheme.basicOpen f) =
+            ⨆ x : {x // x ∈ t}, Y.toScheme.basicOpen (x : Γ(Y.toScheme, V)) :=
+          iSup_subtype' (p := fun x : Γ(Y.toScheme, V) ↦ x ∈ t)
+            (f := fun x _ ↦ Y.toScheme.basicOpen x)
+        rw [ht, h1, ← Equiv.iSup_comp (g := fun x : {x // x ∈ t} ↦
+          Y.toScheme.basicOpen (x : Γ(Y.toScheme, V))) eq.symm]
+      exact ⟨Scheme.NoetherianApproximation.ExtensionData.approximation
+        { X := Y.toScheme, U := U, V := V, hUV := hUV, hV := hVaff, N := N, i₀ := i₀,
+          W₀ := W₀, hW₀c := hW₀c, hW₀ := hW₀, n := m,
+          b := fun l ↦ ((eq.symm l : {x // x ∈ t}) : Γ(Y.toScheme, V)),
+          hb := fun l ↦ hcov ▸ le_iSup (fun l : Fin m ↦ Y.toScheme.basicOpen
+            ((eq.symm l : {x // x ∈ t}) : Γ(Y.toScheme, V))) l,
+          hb' := hcov }⟩
 
 /-- **Absolute Noetherian approximation** (Stacks Project Tag 01ZA): every quasi-compact
 quasi-separated scheme is the limit of a cofiltered system of schemes of finite type over
 `ℤ` with affine transition morphisms.
 
 The affine case is `AlgebraicGeometry.Scheme.NoetherianApproximation.ofIsAffine`. The
-general case glues stage systems over a finite affine cover; its proof is a stated
-obligation of the Nagata compactification chapter.
+general case follows by induction over a finite affine cover: each step extends an
+approximation of a quasi-compact open across one more affine open, see
+`AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData.approximation`.
 (Blueprint: `prop:nagata-noetherian-inverse-system`.) -/
--- TODO(taxis issue 190): prove the general case. Until it is proved, do not use this theorem
--- to derive instances.
 @[stacks 01ZA]
 theorem Scheme.nonempty_noetherianApproximation (S : Scheme.{u})
     [CompactSpace S] [QuasiSeparatedSpace S] :
     Nonempty S.NoetherianApproximation := by
-  sorry
+  classical
+  obtain ⟨Us, hUsB, hUsfin, hUs⟩ :=
+    S.isBasis_affineOpens.exists_finite_of_isCompact (U := ⊤) (by simpa using isCompact_univ)
+  obtain ⟨N⟩ := nonempty_noetherianApproximation_finsetSup hUsfin.toFinset
+    (fun V hV ↦ hUsB (hUsfin.mem_toFinset.mp hV))
+  rw [Finset.sup_id_eq_sSup, hUsfin.coe_toFinset, ← hUs] at N
+  exact ⟨N.ofIso S.topIso⟩
 
 section FinitePresentation
 

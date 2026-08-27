@@ -479,7 +479,6 @@ blow-up maps. -/
 variable {Y : Scheme.{u}}
 
 namespace Scheme.IdealSheafData.IsInvertible
-
 /-- A span-nonzerodivisor presentation of an ideal sheaf on an affine open restricts to
 a span-nonzerodivisor presentation on any of its affine basic opens. -/
 theorem presentation_restrict_basicOpen {K : Y.IdealSheafData} {U : Y.affineOpens}

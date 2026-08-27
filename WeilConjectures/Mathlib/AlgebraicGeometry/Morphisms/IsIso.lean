@@ -23,6 +23,11 @@ layer of the Nagata compactification proof
 (blueprint: `def:nagata-maximal-isomorphism-open`,
 `lemma:nagata-maximal-isomorphism-open`); other instances of interest are the flat
 locus and the open-immersion locus.
+
+We also record that a target-local property restricts to smaller opens
+(`AlgebraicGeometry.Scheme.Hom.restrict_of_le`, and its isomorphism instance
+`AlgebraicGeometry.Scheme.Hom.isIso_restrict_of_le`), and that a partial isomorphism
+can be cancelled on the right (`AlgebraicGeometry.isIso_morphismRestrict_of_comp`).
 -/
 
 @[expose] public section
@@ -92,5 +97,42 @@ isomorphism over `q.maximalIsomorphismOpen`. This is
 lemma Scheme.Hom.isIso_restrict_maximalIsomorphismOpen :
     IsIso (q ∣_ q.maximalIsomorphismOpen) :=
   q.restrict_maximalOpen (MorphismProperty.isomorphisms Scheme)
+
+set_option maxHeartbeats 400000 in
+-- Unfolding the double restriction `q ∣_ W ∣_ (W.ι ⁻¹ᵁ V)` against `q ∣_ V` exceeds the
+-- default heartbeat limit.
+/-- **A target-local property restricts to smaller opens**: if `q ∣_ W` satisfies a
+property which is Zariski-local on the target and `V ≤ W`, then `q ∣_ V` satisfies it
+too. -/
+lemma Scheme.Hom.restrict_of_le [IsZariskiLocalAtTarget P] {V W : X.Opens} (hVW : V ≤ W)
+    (hW : P (q ∣_ W)) : P (q ∣_ V) := by
+  have himg : W.ι ''ᵁ (W.ι ⁻¹ᵁ V) = V := by
+    rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+      inf_eq_right.mpr hVW]
+  have hres : P (q ∣_ W ∣_ (W.ι ⁻¹ᵁ V)) :=
+    IsZariskiLocalAtTarget.restrict hW (W.ι ⁻¹ᵁ V)
+  exact (MorphismProperty.arrow_mk_iso_iff P
+    (morphismRestrictRestrict q W (W.ι ⁻¹ᵁ V) ≪≫ morphismRestrictEq q himg)).mp hres
+
+variable {q P}
+
+/-- **An isomorphism over an open is an isomorphism over every smaller open.** -/
+lemma Scheme.Hom.isIso_restrict_of_le {V W : X.Opens} (hVW : V ≤ W) (hW : IsIso (q ∣_ W)) :
+    IsIso (q ∣_ V) :=
+  Scheme.Hom.restrict_of_le q (MorphismProperty.isomorphisms Scheme) hVW hW
+
+/-- **Cancelling a partial isomorphism on the right**: if `f ≫ π = g` and both `π` and
+`g` restrict to isomorphisms over an open `V` of the common target, then `f` restricts
+to an isomorphism over the inverse image of `V` in the intermediate scheme. -/
+lemma isIso_morphismRestrict_of_comp {Y X' X : Scheme.{u}} (f : Y ⟶ X') (π : X' ⟶ X)
+    {g : Y ⟶ X} (hg : f ≫ π = g) (V : X.Opens) (hπ : IsIso (π ∣_ V))
+    (hgV : IsIso (g ∣_ V)) : IsIso (f ∣_ (π ⁻¹ᵁ V)) := by
+  subst hg
+  haveI := hπ
+  haveI := hgV
+  haveI : IsIso ((f ∣_ (π ⁻¹ᵁ V)) ≫ (π ∣_ V)) := by
+    rw [← morphismRestrict_comp]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ (π ∣_ V)
 
 end AlgebraicGeometry
