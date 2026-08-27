@@ -77,11 +77,13 @@ is an affine scheme that is locally of finite presentation over `lim Dᵢ`, then
 change of an affine scheme that is locally of finite presentation over one of the `Dᵢ`
 (`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`).
 
-The same holds for an arbitrary scheme `X` of finite presentation over `lim Dᵢ`
+The same holds for an arbitrary scheme `X` of finite presentation over `lim Dᵢ`, and more
+generally over a limit of quasi-compact quasi-separated schemes
 (`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`, Stacks Project Tag 01ZM):
-one covers `X` by finitely many affine opens and glues the finite-stage models of the charts
-over a common stage. The two auxiliary steps are that a quasi-compact open of `X` descends to a
-stage (`AlgebraicGeometry.exists_descendsAtWithOpen`) and that two finite-stage models of the
+one covers `X` by finitely many affine opens, each lying over an affine open of a fixed stage,
+and glues the finite-stage models of the charts over a common stage. The two auxiliary steps
+are that a quasi-compact open of `X` descends to a stage
+(`AlgebraicGeometry.exists_descendsAtWithOpen`) and that two finite-stage models of the
 same scheme become isomorphic at a later stage
 (`AlgebraicGeometry.exists_iso_of_isPullback`).
 
@@ -2283,14 +2285,16 @@ section FinitePresentationDescent
 /-!
 ### Descending a scheme of finite presentation to a finite stage
 
-Let `{Dⱼ}` be a cofiltered inverse system of affine schemes with affine transition maps and let
-`X` be of finite presentation over `lim Dⱼ`. Then `X` is the base change of a scheme of finite
-presentation over one of the stages (Stacks Project Tag 01ZM,
+Let `{Dⱼ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
+transition maps and let `X` be of finite presentation over `lim Dⱼ`. Then `X` is the base change
+of a scheme of finite presentation over one of the stages (Stacks Project Tag 01ZM,
 `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`).
 
 The affine case is
-`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`. The
-general case is an induction over a finite affine cover of `X`: at each step one has to glue two
+`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`. It
+covers an affine `X` lying over an affine open `V` of a stage, by base changing the whole system
+to `V` (`AlgebraicGeometry.DescendsToStage.of_isAffine`). The general case is an induction over
+a finite cover of `X` by such affine opens: at each step one has to glue two
 finite-stage models along a descent of their intersection. The gluing data is produced by
 `AlgebraicGeometry.exists_descendsAtWithOpen` (a quasi-compact open descends) and
 `AlgebraicGeometry.exists_iso_of_isPullback` (two finite-stage models of the same scheme become
@@ -2299,44 +2303,24 @@ isomorphic at a later stage), the gluing itself is the pushout of two open immer
 `AlgebraicGeometry.isPullback_of_opensRange_sup_eq_top`.
 -/
 
-section Helpers
-
-lemma quasiCompact_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
-    [CompactSpace X] : QuasiCompact f := by
-  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)]; infer_instance
-
-lemma compactSpace_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
-    [QuasiCompact f] : CompactSpace X := by
-  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)] at *; infer_instance
-
-lemma quasiSeparated_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
-    [QuasiSeparatedSpace X] : QuasiSeparated f := by
-  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)]; infer_instance
-
-lemma quasiSeparatedSpace_of_isAffine_target {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y]
-    [QuasiSeparated f] : QuasiSeparatedSpace X := by
-  rw [HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)] at *; infer_instance
-
-end Helpers
-
 section Descent
 
 set_option backward.defeqAttrib.useBackward true
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc : IsLimit c)
-  [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, IsAffine (D.obj i)]
+  [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
 
 instance baseChange_compactSpace {k k' : I} (f : k' ⟶ k) {Y : Scheme.{u}} (p : Y ⟶ D.obj k)
-    [CompactSpace Y] : CompactSpace ↥(pullback p (D.map f)) := by
-  have : QuasiCompact p := quasiCompact_of_isAffine_target p
-  have : QuasiCompact (pullback.snd p (D.map f)) := MorphismProperty.pullback_snd _ _ ‹_›
-  exact compactSpace_of_isAffine_target (pullback.snd p (D.map f))
+    [CompactSpace Y] : CompactSpace ↥(pullback p (D.map f)) :=
+  have : IsAffineHom (pullback.fst p (D.map f)) := MorphismProperty.pullback_fst _ _ inferInstance
+  have : QuasiCompact (pullback.fst p (D.map f)) := inferInstance
+  QuasiCompact.compactSpace_of_compactSpace (pullback.fst p (D.map f))
 
 instance baseChange_quasiSeparatedSpace {k k' : I} (f : k' ⟶ k) {Y : Scheme.{u}} (p : Y ⟶ D.obj k)
-    [QuasiSeparatedSpace Y] : QuasiSeparatedSpace ↥(pullback p (D.map f)) := by
-  have : QuasiSeparated p := quasiSeparated_of_isAffine_target p
-  have : QuasiSeparated (pullback.snd p (D.map f)) := MorphismProperty.pullback_snd _ _ ‹_›
-  exact quasiSeparatedSpace_of_isAffine_target (pullback.snd p (D.map f))
+    [QuasiSeparatedSpace Y] : QuasiSeparatedSpace ↥(pullback p (D.map f)) :=
+  have : IsAffineHom (pullback.fst p (D.map f)) := MorphismProperty.pullback_fst _ _ inferInstance
+  have : QuasiSeparated (pullback.fst p (D.map f)) := inferInstance
+  quasiSeparatedSpace_of_quasiSeparated (pullback.fst p (D.map f))
 
 instance baseChangeDiagram_compactSpace {k : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj k)
     [CompactSpace Y] (j : Over k) : CompactSpace ↥((baseChangeDiagram D p).obj j) :=
@@ -2580,22 +2564,19 @@ noncomputable def isPullbackLift {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g
     X ⟶ pullback p (D.map f) :=
   pullback.lift h (g ≫ c.π.app k') (by rw [H.w, ← c.w f, Category.assoc])
 
-omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
-  [∀ i, IsAffine (D.obj i)] in
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 @[reassoc (attr := simp)]
 lemma isPullbackLift_fst {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g : X ⟶ c.pt}
     {p : Y ⟶ D.obj k} {h : X ⟶ Y} (H : IsPullback h g p (c.π.app k)) :
     isPullbackLift D c f H ≫ pullback.fst p (D.map f) = h := pullback.lift_fst ..
 
-omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
-  [∀ i, IsAffine (D.obj i)] in
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 @[reassoc (attr := simp)]
 lemma isPullbackLift_snd {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g : X ⟶ c.pt}
     {p : Y ⟶ D.obj k} {h : X ⟶ Y} (H : IsPullback h g p (c.π.app k)) :
     isPullbackLift D c f H ≫ pullback.snd p (D.map f) = g ≫ c.π.app k' := pullback.lift_snd ..
 
-omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
-  [∀ i, IsAffine (D.obj i)] in
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma isPullback_isPullbackLift {k k' : I} (f : k' ⟶ k) {X Y : Scheme.{u}} {g : X ⟶ c.pt}
     {p : Y ⟶ D.obj k} {h : X ⟶ Y} (H : IsPullback h g p (c.π.app k)) :
     IsPullback (isPullbackLift D c f H) g (pullback.snd p (D.map f)) (c.π.app k') := by
@@ -2624,7 +2605,7 @@ variable (D c) in
 finite presentation over one of the stages. -/
 def DescendsToStage {X : Scheme.{u}} (g : X ⟶ c.pt) : Prop := ∃ k, DescendsAt D c k g
 
-omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
+omit [IsCofiltered I] in
 lemma DescendsAt.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
     (H : DescendsAt D c k g) : DescendsAt D c k' g := by
   obtain ⟨Y, p, h, hp, hcpt, hqs, hsq⟩ := H
@@ -2645,8 +2626,7 @@ lemma DescendsAtWithOpen.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X 
     QuasiCompact.isCompact_preimage _ O.isOpen hOc, ?_⟩
   rw [← Scheme.Hom.comp_preimage, isPullbackLift_fst, hO]
 
-omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
-  [∀ i, IsAffine (D.obj i)] in
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma DescendsAtWithOpen.descendsAt {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt} {W : X.Opens}
     (H : DescendsAtWithOpen D c k g W) : DescendsAt D c k g := by
   obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, -, -⟩ := H
@@ -2673,17 +2653,56 @@ lemma exists_descendsAtWithOpen {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt}
   rw [← hO, hmap]
 
 include hc in
-/-- (Implementation) An affine scheme of finite presentation over the limit descends to a
-finite stage. -/
-lemma DescendsToStage.of_isAffine {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt)
-    [LocallyOfFinitePresentation g] : DescendsToStage D c g := by
-  obtain ⟨i, Y, hYaff, p, hp, h, hsq⟩ :=
-    Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine D c hc g
-  haveI := hYaff
-  exact ⟨i, Y, p, h, hp, inferInstance, inferInstance, hsq⟩
+/-- (Implementation) **An affine scheme of finite presentation over the limit that lies over an
+affine open of one of the stages descends to a finite stage.**
 
-omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
-  [∀ i, IsAffine (D.obj i)] in
+The system is base changed to the affine open `V ⊆ Dᵢ₀`: the base changed system has affine
+stages, so the affine case
+`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`
+applies to it. -/
+lemma DescendsToStage.of_isAffine {i₀ : I} {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt)
+    [LocallyOfFinitePresentation g] {V : (D.obj i₀).Opens} (hV : IsAffineOpen V)
+    (q : X ⟶ V.toScheme) (hq : q ≫ V.ι = g ≫ c.π.app i₀) : DescendsToStage D c g := by
+  haveI : IsAffine V.toScheme := hV
+  haveI : ∀ j : Over i₀, IsAffine ((baseChangeDiagram D V.ι).obj j) := fun j ↦
+    inferInstanceAs (IsAffine (pullback V.ι (D.map j.hom)))
+  have hsnd : pullback.lift q g hq ≫ pullback.snd V.ι (c.π.app i₀) = g := pullback.lift_snd ..
+  have hmono : MorphismProperty.monomorphisms Scheme.{u} (pullback.snd V.ι (c.π.app i₀)) :=
+    inferInstanceAs (Mono _)
+  have hcomp : LocallyOfFinitePresentation
+      (pullback.lift q g hq ≫ pullback.snd V.ι (c.π.app i₀)) := by
+    rw [hsnd]
+    exact ‹LocallyOfFinitePresentation g›
+  haveI : @LocallyOfFinitePresentation X (baseChangeCone D c V.ι).pt (pullback.lift q g hq) :=
+    MorphismProperty.of_postcomp (W := @LocallyOfFinitePresentation)
+      (W' := MorphismProperty.monomorphisms Scheme.{u}) _ (pullback.snd V.ι (c.π.app i₀))
+      hmono hcomp
+  obtain ⟨j, Y, hYaff, p, hp, h, hsq⟩ :=
+    Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine
+      (baseChangeDiagram D V.ι) (baseChangeCone D c V.ι)
+      (isLimitBaseChangeCone D c V.ι hc) (pullback.lift q g hq)
+  haveI := hYaff
+  haveI := hp
+  haveI : IsOpenImmersion ((baseChangeDiagramπ D V.ι).app j) :=
+    inferInstanceAs (IsOpenImmersion (pullback.snd V.ι (D.map j.hom)))
+  have hP : LocallyOfFinitePresentation (p ≫ (baseChangeDiagramπ D V.ι).app j) := inferInstance
+  refine ⟨j.left, Y, p ≫ (baseChangeDiagramπ D V.ι).app j, h, hP, inferInstance,
+    inferInstance, ?_⟩
+  rw [← hsnd]
+  exact hsq.paste_vert (isPullback_baseChangeCone_π D c V.ι j)
+
+include hc in
+/-- (Implementation) An affine open of a scheme over the limit that lies over an affine open of
+one of the stages descends to a finite stage. -/
+lemma DescendsToStage.of_isAffineOpen {i₀ : I} {X : Scheme.{u}} (g : X ⟶ c.pt)
+    [LocallyOfFinitePresentation g] {W : X.Opens} (hW : IsAffineOpen W)
+    {V : (D.obj i₀).Opens} (hV : IsAffineOpen V) (hle : W ≤ (g ≫ c.π.app i₀) ⁻¹ᵁ V) :
+    DescendsToStage D c (W.ι ≫ g) := by
+  haveI : IsAffine W.toScheme := hW
+  refine DescendsToStage.of_isAffine hc _ hV ((g ≫ c.π.app i₀).resLE V W hle) ?_
+  rw [Scheme.Hom.resLE_comp_ι, Category.assoc]
+
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma DescendsToStage.comp_iso {X X' : Scheme.{u}} (e : X' ≅ X) {g : X ⟶ c.pt}
     (H : DescendsToStage D c g) : DescendsToStage D c (e.hom ≫ g) := by
   obtain ⟨k, Y, p, h, hp, hcpt, hqs, hsq⟩ := H
@@ -2886,19 +2905,24 @@ lemma DescendsToStage.of_sup_eq_top {Z : Scheme.{u}} (gZ : Z ⟶ c.pt) (U V : Z.
   simpa using hiso.paste_horiz hmain
 
 include hc in
-/-- (Implementation) **Descent to a finite stage for a finite union of affine opens.** -/
-lemma descendsToStage_finsetSup {X : Scheme.{u}} [QuasiSeparatedSpace X] (g : X ⟶ c.pt)
-    [LocallyOfFinitePresentation g] (s : Finset X.Opens) (hs : ∀ W ∈ s, IsAffineOpen W) :
+/-- (Implementation) **Descent to a finite stage for a finite union of affine opens**, each of
+which lies over an affine open of the stage `i₀`. -/
+lemma descendsToStage_finsetSup {X : Scheme.{u}} [QuasiSeparatedSpace X] {i₀ : I} (g : X ⟶ c.pt)
+    [LocallyOfFinitePresentation g] (s : Finset X.Opens)
+    (hs : ∀ W ∈ s, IsAffineOpen W ∧
+      ∃ V : (D.obj i₀).Opens, IsAffineOpen V ∧ W ≤ (g ≫ c.π.app i₀) ⁻¹ᵁ V) :
     DescendsToStage D c ((s.sup id : X.Opens).ι ≫ g) := by
   classical
   induction s using Finset.induction with
   | empty =>
       rw [Finset.sup_empty]
-      haveI : IsAffine ((⊥ : X.Opens).toScheme) := isAffineOpen_bot X
-      exact DescendsToStage.of_isAffine hc _
+      exact DescendsToStage.of_isAffineOpen hc g (isAffineOpen_bot X)
+        (isAffineOpen_bot (D.obj i₀)) bot_le
   | insert a s ha ih =>
-      have haff : IsAffineOpen a := hs a (Finset.mem_insert_self a s)
-      have hsaff : ∀ W ∈ s, IsAffineOpen W := fun W hW ↦ hs W (Finset.mem_insert_of_mem hW)
+      obtain ⟨haff, Va, hVa, hale⟩ := hs a (Finset.mem_insert_self a s)
+      have hsaff : ∀ W ∈ s, IsAffineOpen W ∧
+          ∃ V : (D.obj i₀).Opens, IsAffineOpen V ∧ W ≤ (g ≫ c.π.app i₀) ⁻¹ᵁ V :=
+        fun W hW ↦ hs W (Finset.mem_insert_of_mem hW)
       rw [Finset.sup_insert, id]
       set Z : X.Opens := a ⊔ s.sup id with hZ
       haveI : QuasiSeparatedSpace Z.toScheme :=
@@ -2910,7 +2934,7 @@ lemma descendsToStage_finsetSup {X : Scheme.{u}} [QuasiSeparatedSpace X] (g : X 
           Scheme.Opens.ι_preimage_self]
       -- the intersection is quasi-compact
       have hsc : IsCompact ((s.sup id : X.Opens) : Set X) :=
-        isCompact_finset_sup s fun W hW ↦ (hsaff W hW).isCompact
+        isCompact_finset_sup s fun W hW ↦ (hsaff W hW).1.isCompact
       have hinfc : IsCompact (((s.sup id ⊓ a : X.Opens)) : Set X) := by
         rw [TopologicalSpace.Opens.coe_inf]
         exact QuasiSeparatedSpace.inter_isCompact _ _ (s.sup id).2 hsc a.2 haff.isCompact
@@ -2932,45 +2956,52 @@ lemma descendsToStage_finsetSup {X : Scheme.{u}} [QuasiSeparatedSpace X] (g : X 
         have := DescendsToStage.comp_iso
           (IsOpenImmersion.isoOfRangeEq (U.ι ≫ Z.ι) (s.sup id : X.Opens).ι hrange) (ih hsaff)
         rwa [← Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac, Category.assoc] at this
-      · -- the second open is affine
-        haveI : IsAffine V.toScheme := by
-          refine (haff.preimage_of_isOpenImmersion Z.ι ?_)
+      · -- the second open is affine and lies over an affine open of the stage `i₀`
+        refine DescendsToStage.of_isAffineOpen hc (Z.ι ≫ g) ?_ hVa ?_
+        · refine haff.preimage_of_isOpenImmersion Z.ι ?_
           rw [Scheme.Opens.opensRange_ι, hZ]
           exact le_sup_left
-        exact DescendsToStage.of_isAffine hc _
+        · rw [Category.assoc, Scheme.Hom.comp_preimage]
+          exact Z.ι.preimage_mono hale
 
+set_option backward.isDefEq.respectTransparency false in
 include hc in
-/-- **Schemes of finite presentation over a cofiltered limit of affine schemes descend to a
-finite stage** (Stacks Project Tag 01ZM). Let `{Dⱼ}` be a cofiltered inverse system of affine
-schemes with affine transition maps and let `X` be of finite presentation over `lim Dⱼ`. Then
-`X` is the base change of a scheme `Y` of finite presentation over one of the `Dⱼ`.
+/-- **Schemes of finite presentation over a cofiltered limit of quasi-compact quasi-separated
+schemes descend to a finite stage** (Stacks Project Tag 01ZM). Let `{Dⱼ}` be a cofiltered
+inverse system of quasi-compact quasi-separated schemes with affine transition maps and let
+`X` be of finite presentation over `lim Dⱼ`. Then `X` is the base change of a scheme `Y` of
+finite presentation over one of the `Dⱼ`.
 
 The affine case is
 `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
-general case follows by induction over a finite affine cover of `X`, gluing the descended
-charts over a common stage.
+general case follows by induction over a finite cover of `X` by affine opens each of which
+lies over an affine open of a fixed stage, gluing the descended charts over a common stage.
 (Blueprint: `lemma:nagata-finite-presentation-descends`.) -/
 @[stacks 01ZM]
-theorem Scheme.exists_isPullback_of_finitePresentation {X : Scheme.{u}} (g : X ⟶ c.pt)
+theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.obj i)]
+    [∀ i, QuasiSeparatedSpace (D.obj i)] {X : Scheme.{u}} (g : X ⟶ c.pt)
     [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] :
     ∃ (i : I) (Y : Scheme.{u}) (p : Y ⟶ D.obj i) (_ : LocallyOfFinitePresentation p)
       (_ : QuasiCompact p) (_ : QuasiSeparated p) (h : X ⟶ Y),
       IsPullback h g p (c.π.app i) := by
   classical
-  haveI : IsAffine c.pt := Scheme.isAffine_of_isLimit c hc
-  haveI : CompactSpace X := compactSpace_of_isAffine_target g
-  haveI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_isAffine_target g
+  obtain ⟨i₀⟩ : Nonempty I := IsCofiltered.nonempty
+  have := isAffineHom_π_app _ _ hc
+  haveI : CompactSpace c.pt := QuasiCompact.compactSpace_of_compactSpace (c.π.app i₀)
+  haveI : QuasiSeparatedSpace c.pt := quasiSeparatedSpace_of_quasiSeparated (c.π.app i₀)
+  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace g
+  haveI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated g
   obtain ⟨Us, hUsB, hUsfin, hUs⟩ :=
-    X.isBasis_affineOpens.exists_finite_of_isCompact (U := ⊤) (by simpa using isCompact_univ)
-  have H := descendsToStage_finsetSup hc g hUsfin.toFinset
+    (isBasis_affineOpens_le_preimage (g ≫ c.π.app i₀)).exists_finite_of_isCompact
+      (U := ⊤) (by simpa using isCompact_univ)
+  have H := descendsToStage_finsetSup hc (i₀ := i₀) g hUsfin.toFinset
     (fun W hW ↦ hUsB (hUsfin.mem_toFinset.mp hW))
   rw [Finset.sup_id_eq_sSup, hUsfin.coe_toFinset, ← hUs] at H
   replace H := DescendsToStage.comp_iso X.topIso.symm H
   rw [Iso.symm_hom, ← Category.assoc, Scheme.toIso_inv_ι, Category.id_comp] at H
   obtain ⟨i, Y, p, h, hp, hcpt, hqs, hsq⟩ := H
   haveI := hp; haveI := hcpt; haveI := hqs
-  exact ⟨i, Y, p, hp, quasiCompact_of_isAffine_target p, quasiSeparated_of_isAffine_target p,
-    h, hsq⟩
+  exact ⟨i, Y, p, hp, inferInstance, inferInstance, h, hsq⟩
 
 end Descent
 
