@@ -868,7 +868,7 @@ indeterminacy (`exists_admissibleBlowup_isOpenImmersion_strictTransformMap`, Tag
 gives a finite-type centre whose support misses the locus above `V₂`, hence also
 `A ∩ π₁⁻¹(U)`. Gluing that centre across `A` and the locus above `U`
 (`Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint`, Tag 080M) and composing
-with the first blow-up (`Scheme.IdealSheafData.exists_blowup_comp_comap`, Tag 080B)
+with the first blow-up (`Scheme.IdealSheafData.exists_blowup_comp_base_change`, Tag 080B)
 produces a single `U`-admissible centre `K` on `X`, together with identifications of
 both `K.blowup` and `(K.comap q).blowup` with their counterparts upstairs.
 
@@ -1022,8 +1022,9 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint hA₂c
       (B₁.I.blowupMap.isCompact_preimage hU) JA hJAft hJAdisj
   -- Step 7: composition of the two blow-ups, compatibly with base change along `q`.
-  obtain ⟨K, hKft, hKsupp, ⟨al, hal⟩, ⟨be, hbe⟩⟩ :=
-    Scheme.IdealSheafData.exists_blowup_comp_comap B₁.I B₁.finiteType D hDft q hlam₁
+  obtain ⟨K, hKft, hKsupp, al, hal, hbc⟩ :=
+    Scheme.IdealSheafData.exists_blowup_comp_base_change B₁.I B₁.finiteType D hDft
+  obtain ⟨be, hbe, -⟩ := hbc q lam₁ hlam₁
   have hKdisj : Disjoint (U : Set X) (K.support : Set X) := by
     rw [Set.disjoint_left]
     intro x hxU hxK
