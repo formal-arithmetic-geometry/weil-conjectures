@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 # Open restriction and extension of blow-ups
 
 Four pieces of infrastructure for the common-modification theorem (Stacks Project
-Tag 0F3X).
+Tag 0F3X) and for the isomorphism-near-the-boundary theorem (Stacks Project Tag 0F3W).
 
 First, blow-up formation commutes with restriction to an open subscheme: the blow-up
 of the restricted ideal is the pullback of the blow-up along the open immersion. This
@@ -29,12 +29,11 @@ Project Tag 01PF) and multiply by a finite-type ideal cutting out the boundary o
 (blueprint: `def:nagata-extended-admissible-blowup`,
 `lemma:nagata-extend-admissible-blowup`).
 
-Third, the general form of Stacks Project Tag 080M, where the two opens merely overlap:
-a finite-type center on a quasi-compact open `A` whose support avoids the overlap with a
-quasi-compact open `B` extends to a `B`-admissible center on the ambient scheme, glued
-with the unit ideal on `B`. Here the extension has to be performed on `A ⊔ B` first,
-since the pushforward of the center to the ambient scheme has the closure of the image of
-the support as its support, and that can meet `B`.
+Third, the canonical lift `Bl_{I·𝒪_Y}(Y) ⟶ Bl_I(X)` of a morphism `f : Y ⟶ X` through
+the universal property of blowing up localizes on the base: over the locus above an
+open `O ≤ X` it is the canonical lift attached to the restricted center `I.comap O.ι`
+and the restricted morphism `f ∣_ O`. In particular two centers agreeing over `O` have
+isomorphic lifts over `O`.
 
 Fourth, the product of two `U`-admissible centers is `U`-admissible
 (bookkeeping for blueprint `lemma:nagata-product-ideal-common-blowup`).
@@ -49,10 +48,10 @@ Fourth, the product of two `U`-admissible centers is `U`-admissible
 - `AlgebraicGeometry.IsAdmissible.exists_extend` — extension of admissible centers
   across a quasi-compact open (blueprint: `def:nagata-extended-admissible-blowup`,
   `lemma:nagata-extend-admissible-blowup`);
-- `AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint` and
-  `AlgebraicGeometry.IsAdmissible.exists_extend_of_disjoint` — gluing a center with the
-  unit ideal across two overlapping quasi-compact opens (Stacks Project Tag 080M,
-  blueprint: `lemma:nagata-extend-admissible-blowup`);
+- `AlgebraicGeometry.Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup`
+  — the canonical lift of a blow-up localizes on the base, and its consequence
+  `AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_morphismRestrict_lift_blowup_congr`
+  for two centers agreeing over an open;
 - `AlgebraicGeometry.IsAdmissible.mul` — the product of two admissible centers
   (blueprint: `lemma:nagata-product-ideal-common-blowup`, bookkeeping).
 
@@ -323,128 +322,122 @@ theorem IsAdmissible.exists_extend {X : Scheme.{u}} [CompactSpace X]
   obtain ⟨h, hh, hpb⟩ := (I₁ * I₀).exists_isPullback_blowup_comap W.ι
   exact ⟨⟨I₁ * I₀, hI₁ft.mul hI₀ft, hdisjK⟩, h, hh, hpb⟩
 
-/-- **Gluing a finite-type center with the unit ideal across two overlapping
-quasi-compact opens** (Stacks Project Tag 080M): let `A` and `B` be quasi-compact opens
-of a quasi-compact quasi-separated scheme `X`, and let `J` be a finite-type ideal sheaf
-on `A` whose support avoids the overlap `A ⊓ B`. Then `J` extends to a finite-type ideal
-sheaf `K` on `X` restricting to `J` on `A` and whose support avoids `B`, that is, which
-restricts to the unit ideal on `B`.
+/-- **The canonical lift of a blow-up localizes on the base**: for `f : Y ⟶ X`, an
+ideal `D` on `X` and an open `O ≤ X`, the canonical lift `l : Bl_{D·𝒪_Y}(Y) ⟶ Bl_D(X)`
+restricted over the locus `D.blowupMap ⁻¹ᵁ O` above `O` is, as an arrow, the canonical
+lift for the restricted center `D.comap O.ι` and the restricted morphism `f ∣_ O`.
 
-No inclusion between the two opens is assumed, unlike in
-`AlgebraicGeometry.IsAdmissible.exists_extend`. The extension is built in two steps: `J`
-is first pushed forward to `A ⊔ B`, where the pushforward is still of finite type
-because its support avoids `B`, and only then extended to `X` by the finite-type
-extension theorem (Stacks Project Tag 01PF). Pushing `J` forward to `X` directly would
-not do: its support there is the closure of the image of the support of `J`, which can
-meet `B`. -/
-theorem Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint
-    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {A B : X.Opens}
-    (hA : IsCompact (A : Set X)) (hB : IsCompact (B : Set X))
-    (J : A.toScheme.IdealSheafData) (hJ : J.ofFiniteType)
-    (hd : Disjoint ((A.ι ⁻¹ᵁ B : A.toScheme.Opens) : Set A.toScheme)
-      (J.support : Set A.toScheme)) :
-    ∃ K : X.IdealSheafData, K.ofFiniteType ∧
-      Disjoint (B : Set X) (K.support : Set X) ∧ K.comap A.ι = J := by
-  have hAW : A ≤ A ⊔ B := le_sup_left
-  have hBW : B ≤ A ⊔ B := le_sup_right
-  have hW : IsCompact ((A ⊔ B : X.Opens) : Set X) := by
-    rw [TopologicalSpace.Opens.coe_sup]
-    exact hA.union hB
-  have : CompactSpace A.toScheme := isCompact_iff_compactSpace.mp hA
-  have : QuasiSeparatedSpace (A ⊔ B : X.Opens).toScheme :=
-    quasiSeparatedSpace_of_quasiSeparated (A ⊔ B : X.Opens).ι
-  -- the pushforward `H` of `J` to `A ⊔ B` restricts back to `J`
-  have hHcomap : (J.map (X.homOfLE hAW)).comap (X.homOfLE hAW) = J :=
-    Scheme.IdealSheafData.comap_map _ J
-  -- the support of `H` avoids the trace of `B`: it is the closure of the image of the
-  -- support of `J`, which avoids `A ⊓ B`, and the trace of `B` is open
-  have hHsupp : Disjoint (((A ⊔ B : X.Opens).ι ⁻¹ᵁ B :
-        (A ⊔ B : X.Opens).toScheme.Opens) : Set (A ⊔ B : X.Opens).toScheme)
-      ((J.map (X.homOfLE hAW)).support : Set (A ⊔ B : X.Opens).toScheme) := by
-    have hcoe : ((J.map (X.homOfLE hAW)).support : Set (A ⊔ B : X.Opens).toScheme) =
-        closure (X.homOfLE hAW '' (J.support : Set A.toScheme)) := by
-      rw [Scheme.IdealSheafData.support_map]
-      rfl
-    rw [hcoe]
-    refine Disjoint.closure_right ?_ ((A ⊔ B : X.Opens).ι ⁻¹ᵁ B).isOpen
-    rw [Set.disjoint_right]
-    rintro x ⟨y, hy, rfl⟩ hx
-    refine Set.disjoint_right.mp hd hy ?_
-    simpa [Scheme.Opens.ι_apply, Scheme.homOfLE_apply] using hx
-  -- `H` is of finite type: on the trace of `A` it is `J`, on the trace of `B` it is the
-  -- unit ideal, and the two traces cover `A ⊔ B`
-  have hHft : (J.map (X.homOfLE hAW)).ofFiniteType := by
-    have htop : ((A ⊔ B : X.Opens).ι ⁻¹ᵁ A) ⊔ ((A ⊔ B : X.Opens).ι ⁻¹ᵁ B) = ⊤ := by
-      ext x
-      have hx := TopologicalSpace.Opens.mem_sup.mp x.2
-      simpa using hx
-    have hftA : (J.map (X.homOfLE hAW)).ofFiniteTypeOn ((A ⊔ B : X.Opens).ι ⁻¹ᵁ A) := by
-      rw [Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap]
-      -- transport `hHcomap` along the isomorphism between `A` and the trace of `A`
-      have hrange : Set.range (X.homOfLE hAW).base =
-          Set.range ((A ⊔ B : X.Opens).ι ⁻¹ᵁ A).ι := by
-        rw [Scheme.Opens.range_ι, ← Scheme.opensRange_homOfLE hAW]
-        rfl
-      set e := IsOpenImmersion.isoOfRangeEq (X.homOfLE hAW)
-        ((A ⊔ B : X.Opens).ι ⁻¹ᵁ A).ι hrange with he
-      have hcomapA : ((J.map (X.homOfLE hAW)).comap
-          ((A ⊔ B : X.Opens).ι ⁻¹ᵁ A).ι).comap e.hom = J := by
-        rw [← Scheme.IdealSheafData.comap_comp, he,
-          IsOpenImmersion.isoOfRangeEq_hom_fac, hHcomap]
-      have hft := hJ.comap e.inv
-      rwa [← hcomapA, ← Scheme.IdealSheafData.comap_comp, e.inv_hom_id,
-        Scheme.IdealSheafData.comap_id] at hft
-    have hftB : (J.map (X.homOfLE hAW)).ofFiniteTypeOn ((A ⊔ B : X.Opens).ι ⁻¹ᵁ B) := by
-      rw [Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap]
-      have hunit : (J.map (X.homOfLE hAW)).comap
-          ((A ⊔ B : X.Opens).ι ⁻¹ᵁ B).ι = ⊤ := by
-        rw [← Scheme.IdealSheafData.support_eq_bot_iff]
-        ext1
-        rw [Scheme.IdealSheafData.coe_support_comap]
-        refine Set.eq_empty_of_forall_notMem fun z hz ↦ ?_
-        exact Set.disjoint_right.mp hHsupp hz z.2
-      rw [hunit]
-      exact Scheme.IdealSheafData.ofFiniteType_top
-    simpa only [Scheme.IdealSheafData.ofFiniteType, htop] using hftA.sup hftB
-  -- extend `H` from `A ⊔ B` to `X` (Stacks Tag 01PF)
-  obtain ⟨K, hKft, hKcomap⟩ := Scheme.IdealSheafData.exists_finiteType_comap_eq
-    (A ⊔ B : X.Opens) hW _ hHft
-  refine ⟨K, hKft, ?_, ?_⟩
-  · -- the support of `K` avoids `B`, since its trace on `A ⊔ B` is the support of `H`
-    rw [Set.disjoint_left]
-    intro x hxB hxK
-    refine Set.disjoint_left.mp hHsupp
-      (show (⟨x, hBW hxB⟩ : (A ⊔ B : X.Opens).toScheme) ∈
-        ((A ⊔ B : X.Opens).ι ⁻¹ᵁ B) from hxB) ?_
-    rw [show ((J.map (X.homOfLE hAW)).support : Set (A ⊔ B : X.Opens).toScheme) =
-      (A ⊔ B : X.Opens).ι ⁻¹' (K.support : Set X) by
-        rw [← hKcomap, Scheme.IdealSheafData.coe_support_comap]]
-    exact hxK
-  · -- the restriction of `K` to `A` is the restriction of `H` along `A ≤ A ⊔ B`
-    rw [← X.homOfLE_ι hAW, Scheme.IdealSheafData.comap_comp, hKcomap, hHcomap]
+The ideals `E` and `F` are the restrictions of `D` to `O` and of `D.comap f` to
+`f ⁻¹ᵁ O`; they are taken as parameters, so that two centers agreeing over `O` can be
+compared through the *same* restricted lift `m` (see
+`Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup_of_comap_eq`).
 
-/-- **Extension of an admissible blow-up center across a second quasi-compact open**
-(Stacks Project Tag 080M, blueprint `lemma:nagata-extend-admissible-blowup`): a
-finite-type center `J` on a quasi-compact open `A` of a quasi-compact quasi-separated
-scheme `X`, whose support avoids the overlap `A ⊓ B` with a quasi-compact open `B`,
-extends to a `B`-admissible center on `X` whose blow-up restricts over `A` to the
-blow-up of `J`. This is `AlgebraicGeometry.IsAdmissible.exists_extend` with the
-inclusion `B ≤ A` of the preserved open in the ambient open dropped; the center is
-produced by
-`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint`. -/
-theorem IsAdmissible.exists_extend_of_disjoint {X : Scheme.{u}} [CompactSpace X]
-    [QuasiSeparatedSpace X] {A B : X.Opens} (hA : IsCompact (A : Set X))
-    (hB : IsCompact (B : Set X)) (J : A.toScheme.IdealSheafData) (hJ : J.ofFiniteType)
-    (hd : Disjoint ((A.ι ⁻¹ᵁ B : A.toScheme.Opens) : Set A.toScheme)
-      (J.support : Set A.toScheme)) :
-    ∃ (C : IsAdmissible X B) (h : J.blowup ⟶ C.I.blowup),
-      h ≫ C.I.blowupMap = J.blowupMap ≫ A.ι ∧
-      IsPullback J.blowupMap h A.ι C.I.blowupMap := by
-  obtain ⟨K, hKft, hKdisj, hKcomap⟩ :=
-    Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint hA hB J hJ hd
-  obtain rfl := hKcomap
-  obtain ⟨h, hh, hpb⟩ := K.exists_isPullback_blowup_comap A.ι
-  exact ⟨⟨K, hKft, hKdisj⟩, h, hh, hpb⟩
+Both cartesian squares come from `Scheme.IdealSheafData.exists_isPullback_blowup_comap`
+(for `O.ι` on `X` and for `(f ⁻¹ᵁ O).ι` on `Y`); pasting them with the cartesian square
+of `f ∣_ O` exhibits `m` as a base change of `l` along `O.ι`, and the identification of
+the two squares is uniqueness of lifts
+(`Scheme.IdealSheafData.hom_ext_comap_blowup`, Stacks Project Tag 0806). -/
+theorem Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup
+    {X Y : Scheme.{u}} {D : X.IdealSheafData} {f : Y ⟶ X} {O : X.Opens}
+    {E : O.toScheme.IdealSheafData} (hE : D.comap O.ι = E)
+    {F : (f ⁻¹ᵁ O).toScheme.IdealSheafData} (hF : (D.comap f).comap (f ⁻¹ᵁ O).ι = F)
+    {l : (D.comap f).blowup ⟶ D.blowup}
+    (hl : l ≫ D.blowupMap = (D.comap f).blowupMap ≫ f)
+    {m : F.blowup ⟶ E.blowup}
+    (hm : m ≫ E.blowupMap = F.blowupMap ≫ (f ∣_ O)) :
+    Nonempty (Arrow.mk (l ∣_ (D.blowupMap ⁻¹ᵁ O)) ≅ Arrow.mk m) := by
+  subst hE
+  subst hF
+  -- the two open-restriction squares of the blow-up
+  obtain ⟨h, hh, hhpb⟩ := D.exists_isPullback_blowup_comap O.ι
+  obtain ⟨k, hk, hkpb⟩ := (D.comap f).exists_isPullback_blowup_comap (f ⁻¹ᵁ O).ι
+  -- the square `k, m, l, h` commutes, both composites being lifts along `D.blowupMap`
+  have hcomm : k ≫ l = m ≫ h := by
+    refine D.hom_ext_of_isInvertible_comap
+      (t := ((D.comap f).comap (f ⁻¹ᵁ O).ι).blowupMap ≫ (f ⁻¹ᵁ O).ι ≫ f) ?_ ?_ ?_
+    · rw [Scheme.IdealSheafData.comap_comp, Scheme.IdealSheafData.comap_comp]
+      exact ((D.comap f).comap (f ⁻¹ᵁ O).ι).isInvertible_comap_blowupMap
+    · rw [Category.assoc, hl, ← Category.assoc, hk, Category.assoc]
+    · rw [Category.assoc, hh, ← Category.assoc, hm, Category.assoc, morphismRestrict_ι]
+  -- and it is cartesian: paste the two squares below it and cancel the bottom one
+  have hsq : IsPullback k m l h := by
+    refine IsPullback.of_bot ?_ hcomm hhpb.flip
+    rw [hm, hl]
+    exact hkpb.flip.paste_vert (isPullback_morphismRestrict f O).flip
+  -- the blow-up of the restricted center is the locus above `O`
+  let φ : (D.comap O.ι).blowup ≅ (D.blowupMap ⁻¹ᵁ O).toScheme :=
+    hhpb.flip.isoIsPullback _ _ (isPullback_morphismRestrict D.blowupMap O).flip
+  have hφ : φ.hom ≫ (D.blowupMap ⁻¹ᵁ O).ι = h :=
+    hhpb.flip.isoIsPullback_hom_fst _ _ (isPullback_morphismRestrict D.blowupMap O).flip
+  -- hence `m` and the restriction of `l` are two base changes of `l` along the same
+  -- open immersion
+  have hsq' : IsPullback (m ≫ φ.hom) k (D.blowupMap ⁻¹ᵁ O).ι l := by
+    have := hsq.flip.paste_horiz
+      (IsPullback.of_horiz_isIso (P := (D.comap O.ι).blowup) ⟨by rw [hφ, Category.comp_id]⟩)
+    simpa using this
+  let ψ : ((D.comap f).comap (f ⁻¹ᵁ O).ι).blowup ≅
+      (l ⁻¹ᵁ (D.blowupMap ⁻¹ᵁ O)).toScheme :=
+    hsq'.isoIsPullback _ _ (isPullback_morphismRestrict l (D.blowupMap ⁻¹ᵁ O))
+  have hψ : ψ.hom ≫ (l ∣_ (D.blowupMap ⁻¹ᵁ O)) = m ≫ φ.hom :=
+    hsq'.isoIsPullback_hom_fst _ _ (isPullback_morphismRestrict l (D.blowupMap ⁻¹ᵁ O))
+  have hw : ψ.inv ≫ m = (l ∣_ (D.blowupMap ⁻¹ᵁ O)) ≫ φ.inv := by
+    rw [Iso.inv_comp_eq, ← Category.assoc, hψ, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  exact ⟨Arrow.isoMk ψ.symm φ.symm hw⟩
+
+/-- **Two centers agreeing over an open have the same canonical lift over that open**:
+if `D₁` and `D₂` restrict to the same ideal on an open `O ≤ X`, then the canonical
+lifts `lᵢ : Bl_{Dᵢ·𝒪_Y}(Y) ⟶ Bl_{Dᵢ}(X)` of a morphism `f : Y ⟶ X`, restricted over
+the loci `Dᵢ.blowupMap ⁻¹ᵁ O` above `O`, are isomorphic as arrows.
+
+Both are identified with the canonical lift of `f ∣_ O` for the common restricted
+center, by
+`Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup`. -/
+theorem Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup_of_comap_eq
+    {X Y : Scheme.{u}} {O : X.Opens} {D₁ D₂ : X.IdealSheafData}
+    (hD : D₁.comap O.ι = D₂.comap O.ι) {f : Y ⟶ X}
+    {l₁ : (D₁.comap f).blowup ⟶ D₁.blowup}
+    (hl₁ : l₁ ≫ D₁.blowupMap = (D₁.comap f).blowupMap ≫ f)
+    {l₂ : (D₂.comap f).blowup ⟶ D₂.blowup}
+    (hl₂ : l₂ ≫ D₂.blowupMap = (D₂.comap f).blowupMap ≫ f) :
+    Nonempty (Arrow.mk (l₁ ∣_ (D₁.blowupMap ⁻¹ᵁ O)) ≅
+      Arrow.mk (l₂ ∣_ (D₂.blowupMap ⁻¹ᵁ O))) := by
+  -- restricting to `f ⁻¹ᵁ O` is restricting to `O` and then base changing along `f ∣_ O`
+  have hEF : (D₁.comap O.ι).comap (f ∣_ O) = (D₁.comap f).comap (f ⁻¹ᵁ O).ι := by
+    rw [← Scheme.IdealSheafData.comap_comp, ← Scheme.IdealSheafData.comap_comp,
+      morphismRestrict_ι]
+  have hF : (D₂.comap f).comap (f ⁻¹ᵁ O).ι = (D₁.comap f).comap (f ⁻¹ᵁ O).ι := by
+    rw [← Scheme.IdealSheafData.comap_comp, ← Scheme.IdealSheafData.comap_comp,
+      ← morphismRestrict_ι f O, Scheme.IdealSheafData.comap_comp,
+      Scheme.IdealSheafData.comap_comp, hD]
+  -- the canonical lift of `f ∣_ O` for the common restricted center
+  obtain ⟨m, hm⟩ := (D₁.comap O.ι).exists_lift_blowup
+    (t := ((D₁.comap f).comap (f ⁻¹ᵁ O).ι).blowupMap ≫ (f ∣_ O))
+    (by rw [Scheme.IdealSheafData.comap_comp, hEF]
+        exact ((D₁.comap f).comap (f ⁻¹ᵁ O).ι).isInvertible_comap_blowupMap)
+  obtain ⟨e₁⟩ :=
+    Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup rfl rfl hl₁ hm
+  obtain ⟨e₂⟩ :=
+    Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup hD.symm hF hl₂ hm
+  exact ⟨e₁ ≪≫ e₂.symm⟩
+
+/-- **Being an open immersion over an open of the base only depends on the center
+there**: if `D₁` and `D₂` restrict to the same ideal on an open `O ≤ X`, then the
+canonical lift of `f : Y ⟶ X` to the blow-up of `D₁` is an open immersion over `O`
+exactly when the canonical lift to the blow-up of `D₂` is. -/
+theorem Scheme.IdealSheafData.isOpenImmersion_morphismRestrict_lift_blowup_congr
+    {X Y : Scheme.{u}} {O : X.Opens} {D₁ D₂ : X.IdealSheafData}
+    (hD : D₁.comap O.ι = D₂.comap O.ι) {f : Y ⟶ X}
+    {l₁ : (D₁.comap f).blowup ⟶ D₁.blowup}
+    (hl₁ : l₁ ≫ D₁.blowupMap = (D₁.comap f).blowupMap ≫ f)
+    {l₂ : (D₂.comap f).blowup ⟶ D₂.blowup}
+    (hl₂ : l₂ ≫ D₂.blowupMap = (D₂.comap f).blowupMap ≫ f) :
+    IsOpenImmersion (l₁ ∣_ (D₁.blowupMap ⁻¹ᵁ O)) ↔
+      IsOpenImmersion (l₂ ∣_ (D₂.blowupMap ⁻¹ᵁ O)) := by
+  obtain ⟨e⟩ :=
+    Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup_of_comap_eq
+      hD hl₁ hl₂
+  exact MorphismProperty.arrow_mk_iso_iff (P := @IsOpenImmersion) e
 
 /-- **The product of two `U`-admissible centers is `U`-admissible** (bookkeeping for
 blueprint `lemma:nagata-product-ideal-common-blowup`): finite-typeness is stable under
