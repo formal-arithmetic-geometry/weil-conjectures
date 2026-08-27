@@ -14,7 +14,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerive
 
 Migrated from `Mathlib/CategoryTheory/Localization/DerivabilityStructure/DerivesTwo.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 
 -/
@@ -25,7 +25,7 @@ universe v₁₀ v₂₀ v₁ v₂ v₃ u₁₀ u₂₀ u₁ u₂ u₃
 
 namespace CategoryTheory
 
-open Limits Category Functor
+open Limits Category _root_.CategoryTheory.Functor
 
 -- to be moved
 namespace MorphismProperty

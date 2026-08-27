@@ -31,7 +31,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSh
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafCompose
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
@@ -192,7 +191,6 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
-public import WeilConjectures.SixFunctors.SheafCompose
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.SixFunctors.UpperStarMapDerivedCategory

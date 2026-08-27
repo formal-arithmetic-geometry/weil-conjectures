@@ -151,7 +151,7 @@ theorem finitePoints_eq_closedPoints (f : X ⟶ Spec (.of (ULift.{u} ℤ)))
     [LocallyOfFiniteType f] :
     X.finitePoints = {x | IsClosed ({x} : Set X)} := by
   ext x
-  simp only [Set.mem_setOf_eq]
+  simp only [Set.mem_ofPred_eq]
   refine ⟨fun hx => X.isClosed_singleton_of_mem_finitePoints hx, fun hx => ?_⟩
   obtain ⟨U, hxU⟩ : ∃ U : X.affineOpens, x ∈ (U : X.Opens) := by
     have hx' : x ∈ (⊤ : X.Opens) := trivial

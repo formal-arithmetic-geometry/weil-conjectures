@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 Migrated from `Mathlib/Algebra/Homology/CochainComplexMinus.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 

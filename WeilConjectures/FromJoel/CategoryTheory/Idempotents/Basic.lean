@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Retract
 
 Supplement to `Mathlib.CategoryTheory.Idempotents.Basic`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 

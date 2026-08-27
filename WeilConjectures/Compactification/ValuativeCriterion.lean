@@ -292,7 +292,7 @@ theorem exists_flat_polynomial_presentation {X : Scheme.{u}} {K : Type u} [Field
       Function.Surjective π.hom ∧ Flat p ∧ Spec.map π ≫ p = i₁ := by
   -- the field structure on the bundled ring is needed for `closedPoint` and for
   -- `Subsingleton (Spec (CommRingCat.of K))`
-  letI : Field (CommRingCat.of K) := inferInstanceAs (Field K)
+  let : Field (CommRingCat.of K) := inferInstanceAs (Field K)
   obtain ⟨V, hV, hx₀V, -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤)
     (x := i₁ (closedPoint (CommRingCat.of K))) trivial
   have hrange : Set.range i₁ ⊆ (V : Set X) := by
@@ -333,8 +333,8 @@ theorem exists_stalkClosedPointTo_of_generic_eq {X : Scheme.{u}} {K L : Type u} 
     ∃ κ : X.presheaf.stalk (g (closedPoint ↥B)) ⟶ CommRingCat.of K,
       Spec.map κ ≫ X.fromSpecStalk (g (closedPoint ↥B)) = i₁ ∧ ∀ s, τ (κ.hom s) ∈ B := by
   -- the field structures on the bundled rings are needed for `closedPoint`
-  letI : Field (CommRingCat.of K) := inferInstanceAs (Field K)
-  letI : Field (CommRingCat.of L) := inferInstanceAs (Field L)
+  let : Field (CommRingCat.of K) := inferInstanceAs (Field K)
+  let : Field (CommRingCat.of L) := inferInstanceAs (Field L)
   have : IsLocalHom (CommRingCat.ofHom τ).hom := inferInstanceAs (IsLocalHom τ)
   -- the generic point of `Spec B` is carried by `g` to the `K`-point
   have hgen : g (Spec.map (CommRingCat.ofHom B.subtype) (closedPoint (CommRingCat.of L))) =
@@ -385,7 +385,7 @@ theorem RelativeTo.existence_of_isSchemeTheoreticallyDominant_of_isAffine
   intro sqf
   obtain ⟨A, K, i₁, i₂, ⟨w⟩⟩ := sqf
   -- `obtain` loses the field instance on the bundled ring, which `closedPoint` needs
-  letI : Field (CommRingCat.of K) := inferInstanceAs (Field K)
+  let : Field (CommRingCat.of K) := inferInstanceAs (Field K)
   -- Step 1: a flat polynomial presentation `p : Spec P ⟶ X` of the `K`-point `i₁`
   obtain ⟨P, π, p, hπ, hpflat, hi₁p⟩ := exists_flat_polynomial_presentation i₁
   have : Flat p := hpflat

@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Localization.LocalizerMorphism
 
 Supplement to `Mathlib.CategoryTheory.Localization.LocalizerMorphism`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -22,7 +22,7 @@ universe v₁ v₂ v₃ u₁ u₂ u₃
 
 namespace CategoryTheory
 
-open Localization Functor
+open Localization _root_.CategoryTheory.Functor
 
 variable {C₁ : Type u₁} {C₂ : Type u₂} {C₃ : Type u₃}
   [Category.{v₁} C₁] [Category.{v₂} C₂] [Category.{v₃} C₃]
