@@ -139,7 +139,7 @@ equality has explicitly been fixed.
 \begin{definition}[Scheme-theoretic image]
   \label{def:nagata-scheme-theoretic-image}
   \uses{lemma:nagata-scheme-image-ideal-qc}
-  \lean{AlgebraicGeometry.Nagata.schemeTheoreticImage}
+  \lean{AlgebraicGeometry.Scheme.Hom.image}
 
   Let $g\colon T\to Y$ be a morphism.  Define
   $\operatorname{SIm}(g)$ to mean the Mathlib scheme-theoretic image
@@ -240,7 +240,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Universal property of the scheme-theoretic image]
   \label{lemma:nagata-scheme-image-universal}
   \uses{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison}
-  \lean{AlgebraicGeometry.Nagata.schemeImageUniversal}
+  \lean{AlgebraicGeometry.IsClosedImmersion.lift}
 
   The composite of $g^{\mathrm{im}}$ with
   $\operatorname{SIm}(g)\hookrightarrow Y$ is $g$.  For every closed
@@ -288,7 +288,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Localization of the affine image kernel]
   \label{lemma:nagata-affine-image-kernel-localization}
   \uses{def:nagata-scheme-theoretic-image}
-  \lean{AlgebraicGeometry.Nagata.affineImageKernelLocalization}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
 
   Let $A$ be a ring, let $T\to\operatorname{Spec}(A)$ be quasi-compact and
   quasi-separated, and let $s\in A$.  Put
@@ -318,7 +318,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Flat base change of the affine image kernel]
   \label{lemma:nagata-affine-image-kernel-flat}
   \uses{lemma:nagata-affine-image-kernel-localization}
-  \lean{AlgebraicGeometry.Nagata.affineImageKernelFlatBaseChange}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
 
   Let $A\to B$ be flat, let $T\to\operatorname{Spec}(A)$ be quasi-compact
   and quasi-separated, and put
@@ -350,7 +350,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-scheme-image-restrict-open}
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-affine-image-kernel-localization}
-  \lean{AlgebraicGeometry.Nagata.schemeImageRestrictOpen}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_morphismRestrict}
 
   Let $g\colon T\to Y$ be quasi-compact and quasi-separated, let
   $W\subseteq Y$ be open, let $T_W=T\times_YW$, and let
@@ -384,7 +384,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-scheme-image-flat-base-change}
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-affine-image-kernel-flat}
-  \lean{AlgebraicGeometry.Nagata.schemeImageFlatBaseChange}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
 
   Let $g\colon T\to Y$ be quasi-compact and quasi-separated and let
   $q\colon Y'\to Y$ be flat.  For the base change
@@ -429,7 +429,7 @@ equality has explicitly been fixed.
 \begin{definition}[Scheme-theoretic closure]
   \label{def:nagata-scheme-theoretic-closure}
   \uses{def:nagata-scheme-theoretic-image}
-  \lean{Scheme.Hom.schemeTheoreticClosure}
+  \lean{AlgebraicGeometry.Scheme.Hom.image}
 
   Let $a\colon T\to Y$ be a quasi-compact and quasi-separated immersion.
   Define the scheme-theoretic closure of $T$ in $Y$ to be the closed
@@ -439,7 +439,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Minimality of the scheme-theoretic closure]
   \label{lemma:nagata-scheme-theoretic-closure-minimal}
   \uses{def:nagata-scheme-theoretic-closure}
-  \lean{Scheme.Hom.schemeTheoreticClosure_minimal}
+  \lean{AlgebraicGeometry.IsClosedImmersion.lift}
 
   The scheme-theoretic closure is the smallest closed subscheme of $Y$
   through which $a$ factors: it factors through every such closed subscheme,
@@ -650,7 +650,7 @@ equality has explicitly been fixed.
 
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0F3U}{Tag 0F3U}]{stacks-project}}]
   \label{lemma:nagata-separated-two-open-cover}
-  \lean{Scheme.IsSeparated.of_two_open_cover}
+  \lean{AlgebraicGeometry.IsSeparated.of_two_open_cover}
 
   Let $X=U\cup V$ be an open cover over $S$.  Assume that $U\to S$ and
   $V\to S$ are separated and that
@@ -690,7 +690,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{definition}[Degree-zero homogeneous localization]
   \label{def:nagata-homogeneous-localization-degree-zero}
-  \lean{GradedAlgebra.HomogeneousLocalization.Away}
+  \lean{HomogeneousLocalization.Away}
 
   Let $R=\bigoplus_{n\geq0}R_n$ be an $\mathbb N$-graded commutative ring and
   let $f\in R_d$ be homogeneous with $d>0$.  Write $R_{(f),0}$ for the
@@ -992,7 +992,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Homogeneous piece of the Rees algebra]
   \label{def:nagata-rees-piece}
   \uses{def:nagata-rees-algebra}
-  \lean{ReesAlgebra.piece}
+  \lean{AlgebraicGeometry.reesGrading}
 
   For $n\in\mathbb N$, let $\mathcal R_A(I)_n$ be the $A$-submodule of Rees
   elements whose underlying polynomial is supported in degree $n$.
@@ -1001,7 +1001,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Membership in one Rees piece]
   \label{lemma:nagata-rees-piece-membership}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.mem_piece_iff}
+  \lean{AlgebraicGeometry.mem_reesGrading_iff_exists}
 
   An element $F\in\mathcal R_A(I)$ lies in $\mathcal R_A(I)_n$ if and only if
   there is $a\in I^n$ such that the underlying polynomial of $F$ is
@@ -1020,7 +1020,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Multiplication of Rees pieces]
   \label{lemma:nagata-rees-piece-mul}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.piece_mul_piece}
+  \lean{AlgebraicGeometry.reesGrading.instGradedMonoid}
 
   Multiplication maps
   \[
@@ -1039,7 +1039,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Finite support of the homogeneous decomposition]
   \label{lemma:nagata-rees-component-finite-support}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.component_finiteSupport}
+  \lean{AlgebraicGeometry.reesGrading_isInternal}
 
   For $F\in\mathcal R_A(I)$, only finitely many homogeneous components
   $F_nt^n$ are nonzero.
@@ -1053,7 +1053,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Reconstruction from homogeneous components]
   \label{lemma:nagata-rees-sum-components}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.sum_components}
+  \lean{AlgebraicGeometry.reesGrading_isInternal}
 
   Every $F\in\mathcal R_A(I)$ is the finite sum of the monomials
   $F_nt^n$ regarded as elements of $\mathcal R_A(I)_n$.
@@ -1069,7 +1069,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Uniqueness of the homogeneous decomposition]
   \label{lemma:nagata-rees-components-unique}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.components_unique}
+  \lean{AlgebraicGeometry.reesGrading_isInternal}
 
   Let $E$ be a finite set of pairwise distinct degrees and choose one element
   $F_n\in\mathcal R_A(I)_n$ for each $n\in E$.  If
@@ -1086,7 +1086,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Graded-ring structure on the Rees algebra]
   \label{prop:nagata-rees-graded}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.instGradedRingPiece}
+  \lean{AlgebraicGeometry.reesGrading.instGradedRing}
 
   The family $n\mapsto\mathcal R_A(I)_n$ defines an
   $\mathbb N$-graded-ring structure on $\mathcal R_A(I)$.
@@ -1104,7 +1104,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[The degree-zero piece]
   \label{lemma:nagata-rees-degree-zero}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.pieceZeroEquiv}
+  \lean{AlgebraicGeometry.reesGradingZero}
 
   Taking the constant coefficient gives a ring equivalence
   \[
@@ -1122,7 +1122,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Degree-one element associated to an ideal element]
   \label{lemma:nagata-rees-degree-one-element}
   \uses{def:nagata-rees-piece}
-  \lean{ReesAlgebra.degreeOneElement}
+  \lean{AlgebraicGeometry.reesX}
 
   Every $a\in I$ determines a homogeneous element $at$ of degree one.  Its
   underlying polynomial and its coefficient in degree one are recorded by
@@ -1140,7 +1140,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Finite generation over degree zero]
   \label{prop:nagata-rees-finite-generation}
   \uses{def:nagata-rees-algebra,def:nagata-rees-piece}
-  \lean{AlgebraicGeometry.algebraFiniteType_reesGradingZero}
+  \lean{AlgebraicGeometry.finiteType_reesGrading_zero}
 
   If $I=(f_0,\ldots,f_r)$, then $\mathcal R_A(I)$ is generated as an algebra
   over its degree-zero piece by $f_0t,\ldots,f_rt$.  In particular it is of
@@ -1163,7 +1163,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Affine blow-up]
   \label{def:nagata-affine-blowup}
   \uses{def:nagata-rees-algebra,def:nagata-affine-proj}
-  \lean{AlgebraicGeometry.affineBlowup}
+  \lean{AlgebraicGeometry.AffineBlowup}
 
   For an ideal $I\subseteq A$, define
   \[
@@ -1280,7 +1280,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \uses{def:nagata-affine-blowup,
     def:nagata-homogeneous-away-to-chart,
     prop:nagata-proj-standard-open}
-  \lean{AlgebraicGeometry.affineBlowup_basicOpenToSpec}
+  \lean{AlgebraicGeometry.AffineBlowup.chart}
 
   Define
   \[
@@ -1294,7 +1294,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Affine chart identification]
   \label{prop:nagata-affine-blowup-chart}
   \uses{def:nagata-affine-blowup-chart-map}
-  \lean{AlgebraicGeometry.affineBlowup_basicOpenIsoSpec}
+  \lean{AlgebraicGeometry.AffineBlowup.chart}
 
   The constructed morphism $\chi_a$ is an isomorphism over
   $\operatorname{Spec}(A)$.
@@ -1327,7 +1327,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{proposition}[Finite affine chart cover]
   \label{prop:nagata-affine-blowup-chart-cover}
-  \lean{AlgebraicGeometry.affineBlowup_affineOpenCover}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.iSup_opensRange_blowupι_eq_top}
 
   If $I=(f_0,\ldots,f_r)$, the affine opens
   \[
@@ -1349,7 +1349,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Blow-up of the unit ideal]
   \label{lemma:nagata-affine-blowup-top}
   \uses{def:nagata-affine-blowup}
-  \lean{AlgebraicGeometry.affineBlowup_top_iso}
+  \lean{AlgebraicGeometry.AffineBlowup.isIso_toSpec_of_eq_top}
 
   The blow-up of $\operatorname{Spec}(A)$ in the unit ideal is canonically
   isomorphic to $\operatorname{Spec}(A)$ over $\operatorname{Spec}(A)$.
@@ -1381,7 +1381,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Localization commutes with powers of an ideal]
   \label{lemma:nagata-localization-ideal-pow}
-  \lean{Ideal.map_localization_pow}
+  \lean{Ideal.map_pow}
 
   Let $s\in A$.  For every $n$ there is a canonical equality
   \[
@@ -1416,7 +1416,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Coefficientwise Rees-localization map]
   \label{def:nagata-rees-localization-map}
   \uses{def:nagata-rees-algebra}
-  \lean{ReesAlgebra.localizationHom}
+  \lean{AlgebraicGeometry.reesGrading.hom}
 
   Define
   \[
@@ -1429,7 +1429,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Graded localization of the Rees algebra]
   \label{prop:nagata-rees-localization}
   \uses{def:nagata-rees-localization-map}
-  \lean{ReesAlgebra.localizationEquiv}
+  \lean{AlgebraicGeometry.AffineBlowup.isLocalization_away_map}
 
   The map $\rho_s$ is a graded ring equivalence.
 \end{proposition}
@@ -1531,7 +1531,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \uses{def:nagata-affine-blowup,
     def:nagata-rees-localization-map,
     prop:nagata-relative-proj-functoriality}
-  \lean{AlgebraicGeometry.affineBlowup_localizationMap}
+  \lean{AlgebraicGeometry.AffineBlowup.hom}
 
   Define
   \[
@@ -1549,7 +1549,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Restriction of an affine blow-up]
   \label{prop:nagata-affine-blowup-restrict}
   \uses{def:nagata-affine-blowup-restriction-map}
-  \lean{AlgebraicGeometry.affineBlowup_localizationIso}
+  \lean{AlgebraicGeometry.AffineBlowup.isPullback_hom_of_isLocalization}
 
   The constructed morphism $r_s$ is an isomorphism over
   $\operatorname{Spec}(A_s)$.
@@ -1570,7 +1570,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Identity and cocycle laws for affine restriction]
   \label{lemma:nagata-affine-blowup-restrict-cocycle}
-  \lean{AlgebraicGeometry.affineBlowup_localizationIso_cocycle}
+  \lean{AlgebraicGeometry.AffineBlowup.hom_comp}
 
   The restriction isomorphism is the identity for $s=1$, and its two possible
   composites on an iterated basic open $D(st)$ agree literally after the
@@ -1597,7 +1597,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[Local blow-up model on an affine open]
   \label{def:nagata-global-blowup-local-model}
   \uses{def:nagata-affine-blowup}
-  \lean{Scheme.IdealSheafData.localBlowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}
 
   Let $\mathcal I\subseteq\mathcal O_X$ be quasi-coherent and let
   $V=\operatorname{Spec}(A)\subseteq X$ be affine.  Put
@@ -1612,7 +1612,7 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-global-blowup-local-model,
     def:nagata-affine-blowup-restriction-map,
     prop:nagata-affine-blowup-restrict}
-  \lean{Scheme.IdealSheafData.localBlowup_overlapBasicMap}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupNatTrans_of_basicOpen}
 
   If a basic affine open $D(s)$ lies in $V_i\cap V_j$, define
   \[
@@ -1631,7 +1631,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[The basic-overlap comparison is an isomorphism]
   \label{lemma:nagata-global-blowup-overlap-basic}
   \uses{def:nagata-global-blowup-overlap-basic-map}
-  \lean{Scheme.IdealSheafData.localBlowup_overlapBasicIso}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupNatTrans_of_basicOpen}
 
   The constructed map $\omega_{ij,s}$ is an isomorphism over $D(s)$.
 \end{lemma}
@@ -1646,7 +1646,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[Independence of the basic refinement]
   \label{lemma:nagata-global-blowup-overlap-independent}
-  \lean{Scheme.IdealSheafData.localBlowup_overlapBasicIso_independent}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
 
   On the intersection of two chosen basic refinements, the two overlap
   constructed maps $\omega_{ij,s}$ agree.
@@ -1664,7 +1664,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[Identity and symmetry of overlap isomorphisms]
   \label{lemma:nagata-global-blowup-overlap-id-symm}
-  \lean{Scheme.IdealSheafData.localBlowup_overlapIso_refl_symm}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
 
   The overlap isomorphism of a chart with itself is the identity, and the
   overlap isomorphism from chart $i$ to chart $j$ is inverse to the one from
@@ -1680,7 +1680,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[Triple-overlap cocycle]
   \label{lemma:nagata-global-blowup-overlap-cocycle}
-  \lean{Scheme.IdealSheafData.localBlowup_overlapIso_cocycle}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
 
   On every triple overlap, the composite of the $(i,j)$ and $(j,k)$ overlap
   isomorphisms equals the $(i,k)$ overlap isomorphism.
@@ -1700,7 +1700,7 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-global-blowup-local-model,
     def:nagata-global-blowup-overlap-basic-map,
     lemma:nagata-global-blowup-overlap-independent}
-  \lean{Scheme.IdealSheafData.blowupRawGlueData}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupGluingData}
 
   Fix an affine cover $(V_i)_i$ of $X$.  Define
   $\mathsf G(X,\mathcal I,(V_i))$ to consist of the local schemes
@@ -1714,7 +1714,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Validity of the global blow-up gluing datum]
   \label{lemma:nagata-global-blowup-glue-data-valid}
   \uses{def:nagata-global-blowup-glue-data}
-  \lean{Scheme.IdealSheafData.blowupRawGlueData_isGlueData}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
 
   The raw datum $\mathsf G(X,\mathcal I,(V_i))$ has isomorphism-valued
   overlap maps satisfying the identity, symmetry, and triple-overlap cocycle
@@ -1736,7 +1736,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{def:nagata-global-blowup}
   \uses{def:nagata-global-blowup-glue-data,
     lemma:nagata-global-blowup-glue-data-valid}
-  \lean{Scheme.IdealSheafData.blowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowup}
 
   Let $\operatorname{Bl}_{\mathcal I}(X)$ be the scheme produced by applying
   \texttt{AlgebraicGeometry.Scheme.GlueData.glued} to the valid datum of
@@ -1746,7 +1746,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Compatibility of the local structure maps]
   \label{lemma:nagata-global-blowup-local-maps-agree}
   \uses{def:nagata-global-blowup-overlap-basic-map}
-  \lean{Scheme.IdealSheafData.localBlowupMap_compatible}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupι_blowupMap}
 
   On every overlap, the two local structure maps to $X$ agree after applying
   the constructed overlap map $\omega_{ij}$.
@@ -1765,7 +1765,7 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-global-blowup,
     def:nagata-global-blowup-local-model,
     lemma:nagata-global-blowup-local-maps-agree}
-  \lean{Scheme.IdealSheafData.blowupMap}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupMap}
 
   Define
   \[
@@ -1781,7 +1781,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{def:nagata-global-blowup-affine-restriction-map}
   \uses{def:nagata-global-blowup-map,
     def:nagata-global-blowup-local-model}
-  \lean{Scheme.IdealSheafData.preimageAffineMap}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupMap_preimage}
 
   If $V=\operatorname{Spec}(A)\subseteq X$ and $I_V$ represents
   $\mathcal I|_V$, define
@@ -1796,7 +1796,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{proposition}[Affine restriction of the global blow-up]
   \label{prop:nagata-global-blowup-affine-restrict}
   \uses{def:nagata-global-blowup-affine-restriction-map}
-  \lean{Scheme.IdealSheafData.preimageAffineIso}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupι}
 
   The constructed comparison $q_V$ is an isomorphism over $V$.
 \end{proposition}
@@ -1817,7 +1817,7 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-global-blowup,
     def:nagata-global-blowup-affine-restriction-map,
     lemma:nagata-global-blowup-overlap-cocycle}
-  \lean{Scheme.IdealSheafData.blowupCoverComparison}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowup}
 
   Given two affine covers of $X$, choose their intersection refinement.  On
   every refined affine chart use the two affine-restriction isomorphisms to
@@ -1832,7 +1832,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{proposition}[Independence of the affine cover]
   \label{prop:nagata-global-blowup-cover-independent}
   \uses{def:nagata-global-blowup-cover-comparison}
-  \lean{Scheme.IdealSheafData.blowupIso_of_cover}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowup}
 
   The constructed comparison is the unique isomorphism over $X$ restricting
   to the identity comparison on every common affine refinement.
@@ -1852,7 +1852,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[The center ideal is the unit ideal off its support]
   \label{lemma:nagata-ideal-unit-off-support}
-  \lean{Scheme.IdealSheafData.restrict_compl_support_eq_top}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.ideal_eq_top_of_disjoint_support}
 
   If $Z=V(\mathcal I)$ and $U=X\setminus Z$, then
   $\mathcal I|_U=\mathcal O_U$.
@@ -1868,7 +1868,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Affine complement-of-center isomorphism]
   \label{lemma:nagata-affine-blowup-complement}
   \uses{def:nagata-affine-blowup}
-  \lean{AlgebraicGeometry.affineBlowup_compl_zeroLocus_iso}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict_of_ideal_eq_top}
 
   For $Z=V(I)\subseteq\operatorname{Spec}(A)$, the affine blow-up morphism
   restricts to an isomorphism over $\operatorname{Spec}(A)\setminus Z$.
@@ -1887,7 +1887,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{theorem}[Complement of the center]
   \label{thm:nagata-global-blowup-complement}
-  \lean{Scheme.IdealSheafData.blowup_compl_support_iso}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict_support_compl}
 
   Let $U=X\setminus V(\mathcal I)$.  The restriction
   \[
@@ -1909,7 +1909,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[$U$-admissible blow-up, {\cite[\href{https://stacks.math.columbia.edu/tag/080K}{Tag 080K}]{stacks-project}}]
   \label{def:nagata-admissible-blowup}
   \uses{def:nagata-global-blowup}
-  \lean{AlgebraicGeometry.AdmissibleBlowup}
+  \lean{AlgebraicGeometry.IsAdmissible}
 
   Let $U\hookrightarrow X$ be a quasi-compact open immersion.  A
   \emph{$U$-admissible blow-up datum} consists of a finite type
@@ -1969,7 +1969,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[Homogeneous polynomial map to the Rees algebra]
   \label{def:nagata-rees-polynomial-map}
   \uses{def:nagata-rees-algebra}
-  \lean{ReesAlgebra.gradedPolynomialMap}
+  \lean{AlgebraicGeometry.reesGradedPresentation}
 
   Let $A$ be a ring, let $I\subseteq A$ be an ideal, and fix generators
   $I=(f_0,\ldots,f_r)$.  Define the $A$-algebra map
@@ -1982,7 +1982,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Properties of the homogeneous polynomial map]
   \label{lemma:nagata-rees-polynomial-surjection}
   \uses{def:nagata-rees-polynomial-map}
-  \lean{ReesAlgebra.gradedPolynomial_surjective}
+  \lean{AlgebraicGeometry.reesGradedPresentation_surjective}
 
   The constructed map $\rho_I$ is graded and surjective.
 \end{lemma}
@@ -2003,7 +2003,7 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-affine-blowup,def:nagata-rees-polynomial-map,
     def:nagata-relative-projective-space,def:nagata-relative-proj,
     prop:nagata-relative-proj-functoriality}
-  \lean{AlgebraicGeometry.affineBlowupToProjectiveSpace}
+  \lean{AlgebraicGeometry.AffineBlowup.toProjectiveSpace}
 
   Under the data of \Cref{def:nagata-rees-polynomial-map}, define
   \[
@@ -2017,7 +2017,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Closed immersion into relative projective space]
   \label{lemma:nagata-affine-blowup-projective-embedding}
   \uses{def:nagata-affine-blowup-projective-embedding}
-  \lean{AlgebraicGeometry.affineBlowup_to_projectiveSpace_isClosedImmersion}
+  \lean{AlgebraicGeometry.AffineBlowup.isClosedImmersion_toProjectiveSpace}
 
   The constructed morphism $e_I$ is a closed immersion over
   $\operatorname{Spec}(A)$.
@@ -2036,7 +2036,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{proposition}[Projectivity of the affine blow-up]
   \label{prop:nagata-affine-blowup-projective}
   \uses{def:nagata-projective-morphism}
-  \lean{AlgebraicGeometry.affineBlowup_isProjective}
+  \lean{AlgebraicGeometry.AffineBlowup.exists_isClosedImmersion_comp_projectiveSpaceToSpec}
 
   If \(I\) is finitely generated, the affine blow-up morphism
   \[
@@ -2071,7 +2071,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[Local properness of the global blow-up]
   \label{lemma:nagata-global-blowup-proper-local}
-  \lean{Scheme.IdealSheafData.blowupMap_restrict_isProper}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap_restrict}
 
   If $\mathcal I$ is of finite type, the restriction of
   $b_{X,\mathcal I}$ over every affine open of $X$ is proper.
@@ -2212,7 +2212,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Principalization on one affine chart]
   \label{lemma:nagata-chart-extended-ideal-principal}
   \uses{def:nagata-blowup-chart-ring}
-  \lean{AlgebraicGeometry.AffineBlowup.map_awayAlgebraMap_eq_span}
+  \lean{AlgebraicGeometry.AffineBlowup.map_awayAlgebraMap_eq_span_singleton}
 
   In $A[I/a]$, the extended ideal satisfies
   \[
@@ -2230,7 +2230,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Regularity of the chart generator]
   \label{lemma:nagata-chart-generator-regular}
   \uses{def:nagata-blowup-chart-ring}
-  \lean{AlgebraicGeometry.AffineBlowup.awayAlgebraMap_mem_nonZeroDivisors}
+  \lean{AlgebraicGeometry.AffineBlowup.isRegular_awayAlgebraMap}
 
   Multiplication by $a$ on $A[I/a]$ is injective.
 \end{lemma}
@@ -2242,7 +2242,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[Transition between local exceptional generators]
   \label{lemma:nagata-chart-generators-associated}
-  \lean{ReesAlgebra.chartGenerators_associated_on_overlap}
+  \lean{AlgebraicGeometry.AffineBlowup.exists_units_awayAlgebraMap_eq_mul}
 
   On the overlap of the $a$-chart and the $b$-chart, the two generators $a$
   and $b$ of the extended ideal differ by a unit.
@@ -2256,7 +2256,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{definition}[Invertible ideal]
   \label{def:nagata-invertible-ideal}
-  \lean{Scheme.IdealSheafData.IsInvertible}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible}
 
   A quasi-coherent ideal $\mathcal I\subseteq\mathcal O_X$ is
   \emph{invertible} if it is locally free of rank one as an
@@ -2267,7 +2267,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{definition}[Effective Cartier ideal]
   \label{def:nagata-effective-cartier-ideal}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsEffectiveCartier}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible}
 
   A quasi-coherent ideal $\mathcal I\subseteq\mathcal O_X$ is an
   \emph{effective Cartier ideal} if, on an open cover, it has a generator
@@ -2278,7 +2278,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[An effective Cartier ideal is invertible]
   \label{lemma:nagata-effective-cartier-is-invertible}
   \uses{def:nagata-effective-cartier-ideal,def:nagata-invertible-ideal}
-  \lean{Scheme.IdealSheafData.IsEffectiveCartier.isInvertible}
+  \lean{AlgebraicGeometry.isEffectiveCartierCenter_iff_isInvertible_ker}
 
   Every effective Cartier ideal is invertible as an ideal sheaf.
 \end{lemma}
@@ -2292,7 +2292,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[An invertible ideal is effective Cartier]
   \label{lemma:nagata-invertible-ideal-is-effective-cartier}
   \uses{def:nagata-invertible-ideal,def:nagata-effective-cartier-ideal}
-  \lean{Scheme.IdealSheafData.IsInvertible.isEffectiveCartier}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isEffectiveCartierCenter}
 
   An invertible ideal sheaf, viewed as an ideal by its specified inclusion into
   the structure sheaf, is an effective Cartier ideal.
@@ -2312,7 +2312,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{thm:nagata-blowup-principalizes-center}
   \uses{def:nagata-global-blowup,def:nagata-effective-cartier-ideal,
     def:nagata-invertible-ideal}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.extendedToBlowup_isEffectiveCartier}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_comap_blowupMap}
 
   If $\mathcal I$ is a finite type quasi-coherent ideal on $X$, then on
   $\operatorname{Bl}_{\mathcal I}(X)$ the extended ideal
@@ -2391,7 +2391,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{definition}[Extended ideal along a morphism]
   \label{def:nagata-extended-ideal}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.extendedToBlowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.comap}
 
   For $f\colon Y\to X$ and a quasi-coherent ideal
   $\mathcal I\subseteq\mathcal O_X$, define
@@ -2406,7 +2406,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-extended-ideal-affine-chart}
   \uses{def:nagata-extended-ideal,
     lemma:nagata-chart-extended-ideal-principal}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_specMap_fromSpec}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_comap_specMap_fromSpec}
 
   On an affine chart $\operatorname{Spec}(A[I/a])$ of the affine blow-up, the
   extended ideal of $I$ is the ideal generated by the image of $I$ in
@@ -2423,7 +2423,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-invertible-ideal-tensor-power}
   \uses{def:nagata-invertible-ideal,
     lemma:nagata-invertible-ideal-is-effective-cartier}
-  \lean{Scheme.IdealSheafData.IsInvertible.tensorPowerIsoPow}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.pow}
 
   If $\mathcal L\subseteq\mathcal O_Y$ is an invertible ideal, then for every
   $n\geq0$ the multiplication map
@@ -2500,7 +2500,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{def:nagata-blowup-universal-graded-map}
   \uses{def:nagata-sheaf-rees-algebra,def:nagata-extended-ideal,
     def:nagata-invertible-ideal}
-  \lean{Scheme.IdealSheafData.reesToTensorPowersConstruction}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup}
 
   Let $f\colon Y\to X$, let $\mathcal I\subseteq\mathcal O_X$ be a
   quasi-coherent ideal, and let
@@ -2522,7 +2522,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-blowup-universal-graded-map}
   \uses{def:nagata-blowup-universal-graded-map,
     lemma:nagata-invertible-ideal-tensor-power}
-  \lean{Scheme.IdealSheafData.reesToTensorPowers}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup}
 
   The degreewise map $\alpha_f$ respects the unit and multiplication and is a
   graded algebra morphism.
@@ -2612,7 +2612,7 @@ all its coherence maps are checked on basic affine refinements.
     def:nagata-relative-proj,
     lemma:nagata-relative-proj-invertible-tensor-powers,
     lemma:nagata-relative-proj-base-change-arbitrary}
-  \lean{Scheme.IdealSheafData.liftToBlowupConstruction}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup}
 
   Under the data of
   \Cref{def:nagata-blowup-universal-graded-map}, use the inverse of the canonical isomorphism in
@@ -2665,7 +2665,7 @@ all its coherence maps are checked on basic affine refinements.
     lemma:nagata-relative-proj-invertible-tensor-powers,
     lemma:nagata-proj-chart-ring-cocycle,
     prop:nagata-proj-standard-open}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isEffectiveCartier_comap}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap}
 
   Under the data of \Cref{def:nagata-blowup-universal-lift}, every $X$-morphism
   $h\colon Y\to\operatorname{Bl}_{\mathcal I}(X)$ inducing the chosen
@@ -2728,7 +2728,7 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{corollary}[Blow-up of an effective Cartier center]
   \label{cor:nagata-blowup-cartier-iso}
-  \lean{Scheme.IdealSheafData.blowupMap_isIso_of_isInvertible}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_of_isInvertible}
 
   Let $X$ be a scheme.  If $\mathcal I$ is an invertible ideal on $X$, then
   $b_{X,\mathcal I}$ is an isomorphism.
@@ -2842,7 +2842,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-invertible-ideal-mul}
   \uses{def:nagata-invertible-ideal,
     lemma:nagata-invertible-ideal-is-effective-cartier}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsEffectiveCartier.mul}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.mul}
 
   The product of two invertible ideal sheaves is invertible.
 \end{lemma}
@@ -2857,7 +2857,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Factors of a finite-type effective Cartier product]
   \label{lemma:nagata-ideal-invertible-product-factor}
   \uses{def:nagata-effective-cartier-ideal}
-  \lean{Ideal.isInvertible_of_mul_isInvertible}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.of_mul_left}
 
   Let $R$ be a ring and let $I,J\subseteq R$ be ideals.  If $IJ$
   is an effective Cartier ideal, then $I$ and $J$ are effective Cartier ideals.
@@ -2880,7 +2880,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-invertible-product-factor}
   \uses{lemma:nagata-ideal-invertible-product-factor,
     def:nagata-effective-cartier-ideal}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsEffectiveCartier.of_mul_left}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.of_mul_left}
 
   Let $X$ be a scheme and let $\mathcal I,\mathcal J$ be quasi-coherent
   ideals on $X$.  If the product
@@ -2900,7 +2900,7 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-cartier-total-transform-blowup}
   \uses{def:nagata-effective-cartier-ideal,
     def:nagata-blowup-chart-ring}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsEffectiveCartier.comap_blowupMap}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.comap_blowupMap}
 
   Let $\mathcal L\subseteq\mathcal O_T$ be an effective Cartier ideal and let
   $T'\to T$ be a blow-up.  Then the extended ideal
@@ -2927,7 +2927,7 @@ all its coherence maps are checked on basic affine refinements.
     lemma:nagata-invertible-ideal-mul,
     lemma:nagata-invertible-product-factor,
     lemma:nagata-effective-cartier-is-invertible}
-  \lean{Scheme.IdealSheafData.iteratedBlowupComparison}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso}
 
   Let $X$ be a scheme and let $\mathcal I,\mathcal J$ be finite-type
   quasi-coherent ideals on $X$.  Let $X_{\mathcal I,\mathcal J}$ be the
@@ -3004,7 +3004,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[Domination maps from the product blow-up]
   \label{def:nagata-blowup-product-domination-maps}
   \uses{def:nagata-blowup-product-comparison}
-  \lean{Scheme.IdealSheafData.blowupMulDominationMaps}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso}
 
   Define
   \[
@@ -3019,7 +3019,7 @@ all its coherence maps are checked on basic affine refinements.
 \begin{corollary}[Common refinement by the product ideal]
   \label{cor:nagata-blowup-product-common-refinement}
   \uses{def:nagata-blowup-product-domination-maps}
-  \lean{Scheme.IdealSheafData.blowupMulToLeft}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso}
 
   The constructed $d_{\mathcal I}$ and $d_{\mathcal J}$ are morphisms over
   $X$.  If both ideals restrict to the unit ideal on an open $U$, the product
@@ -3177,7 +3177,7 @@ closed subscheme of the first blow-up.
   \label{def:nagata-proj-closed-center-finite-degree}
   \uses{lemma:nagata-proj-closed-center-finite-degree-exists,
     def:nagata-relative-proj}
-  \lean{AlgebraicGeometry.Proj.finiteDegreeCenterData}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_center}
 
   Let $\mathcal I$ be a finite type quasi-coherent ideal on a qcqs scheme
   $X$, let $\mathcal A=\bigoplus_{n\geq0}\mathcal I^n$, let
@@ -3193,7 +3193,7 @@ closed subscheme of the first blow-up.
 \begin{lemma}[Properties of the finite-degree center data]
   \label{lemma:nagata-proj-closed-center-finite-degree}
   \uses{def:nagata-proj-closed-center-finite-degree}
-  \lean{AlgebraicGeometry.Proj.exists_finiteDegree_submodule_defining_closed}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup}
 
   The selected integer $d(Z')$ is positive, $\mathcal F(Z')$ is a finite
   type submodule of $\mathcal I^{d(Z')}$, and
@@ -3217,7 +3217,7 @@ closed subscheme of the first blow-up.
 \begin{definition}[Center ideal representing a second blow-up]
   \label{def:nagata-composition-center-ideal}
   \uses{def:nagata-proj-closed-center-finite-degree}
-  \lean{AlgebraicGeometry.Blowup.compositionCenterIdealConstruction}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp}
 
   Let $X$ be qcqs, let $\mathcal I\subseteq\mathcal O_X$ be a finite-type
   quasi-coherent ideal, put
@@ -3238,7 +3238,7 @@ closed subscheme of the first blow-up.
 \begin{lemma}[Support of the constructed composition center]
   \label{lemma:nagata-composition-center-ideal}
   \uses{def:nagata-composition-center-ideal}
-  \lean{AlgebraicGeometry.Blowup.compositionCenterIdeal}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_center}
 
   Under the hypotheses of
   \Cref{def:nagata-composition-center-ideal}, the ideal $\mathcal K(Z')$ is
@@ -3278,7 +3278,7 @@ closed subscheme of the first blow-up.
 \begin{lemma}[Comparison of the two second-center ideals]
   \label{lemma:nagata-composition-extended-ideal-equality}
   \uses{def:nagata-composition-center-ideal}
-  \lean{AlgebraicGeometry.Blowup.extended_compositionCenterIdeal}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp}
 
   Under the hypotheses of
   \Cref{def:nagata-composition-center-ideal}, let $E$ be the exceptional
@@ -3319,7 +3319,7 @@ closed subscheme of the first blow-up.
   \label{lemma:nagata-blowup-invertible-factor}
   \uses{def:nagata-invertible-ideal,
     thm:nagata-blowup-universal-property}
-  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_isEffectiveCartier_iso}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_isInvertible_iso}
 
   Let $X$ be a scheme, let $\mathcal L$ be an invertible ideal on $X$, and
   let $\mathcal J$ be a quasi-coherent ideal (finite-typeness is not needed).
@@ -3349,7 +3349,7 @@ closed subscheme of the first blow-up.
     def:nagata-blowup-product-comparison,
     def:nagata-global-blowup,
     lemma:nagata-blowup-invertible-factor}
-  \lean{AlgebraicGeometry.Blowup.compComparisonBlowup}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp}
 
   Let $X$, $\mathcal I$, $X'$, $b$, $Z'$, $d$, and $\mathcal J(Z')$ be as in
   \Cref{def:nagata-composition-center-ideal}, and let the second blow-up be
@@ -3427,7 +3427,7 @@ closed subscheme of the first blow-up.
   \label{lemma:nagata-admissible-blowup-over-open}
   \uses{def:nagata-admissible-blowup,
     thm:nagata-global-blowup-complement}
-  \lean{AlgebraicGeometry.AdmissibleBlowup.isIso_π_restrict}
+  \lean{AlgebraicGeometry.IsAdmissible.isIso_blowupMap_restrict}
 
   If $\pi\colon X'\to X$ is $U$-admissible, then its center ideal restricts to
   the unit ideal on $U$, and the induced morphism
@@ -3448,7 +3448,7 @@ closed subscheme of the first blow-up.
   \label{def:nagata-strict-transform}
   \uses{def:nagata-scheme-theoretic-closure,
     def:nagata-global-blowup}
-  \lean{AlgebraicGeometry.StrictTransform}
+  \lean{AlgebraicGeometry.strictTransform}
 
   Let $Z\to X$ be a morphism and let $X'\to X$ be the blow-up of a
   finite-presentation center $C\subseteq X$.  Put $U=X\setminus C$; then
@@ -3515,7 +3515,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Power torsion is a submodule]
   \label{lemma:nagata-power-torsion-submodule}
   \uses{def:nagata-power-torsion}
-  \lean{Submodule.powTorsion_isSubmodule}
+  \lean{Submodule.powTorsion}
 
   The subset $\Gamma_{(a)}(M)$ contains zero and is closed under addition and
   scalar multiplication.
@@ -3584,7 +3584,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[The power-torsion quotient has no exceptional torsion]
   \label{lemma:nagata-power-torsion-quotient-torsionfree}
   \uses{def:nagata-power-torsion}
-  \lean{Submodule.powTorsion_quotient_torsionfree}
+  \lean{Submodule.powTorsion_quotient_eq_bot}
 
   Multiplication by $a$ on $M/\Gamma_{(a)}(M)$ is injective.  More generally,
   no nonzero class in the quotient is killed by a power of $a$.
@@ -4087,7 +4087,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Scheme-theoretic closure characterization]
   \label{lemma:nagata-strict-transform-closure-characterization}
-  \lean{AlgebraicGeometry.Hom.strictTransform_eq_schemeTheoreticClosure}
+  \lean{AlgebraicGeometry.strictTransform}
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$, put $X'=\operatorname{Bl}_{\mathcal I}(X)$, and let
@@ -4234,7 +4234,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Composition of admissible blow-ups, {\cite[\href{https://stacks.math.columbia.edu/tag/080L}{Tag 080L}]{stacks-project}}]
   \label{lemma:nagata-admissible-blowup-comp}
   \uses{def:nagata-admissible-blowup}
-  \lean{AlgebraicGeometry.AdmissibleBlowup.exists_comp}
+  \lean{AlgebraicGeometry.IsAdmissible.exists_comp}
 
   Let $X$ be quasi-compact and quasi-separated and let $U\subseteq X$ be
   quasi-compact.  A composition of two $U$-admissible blow-ups is a
@@ -4263,7 +4263,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-blowup-proper}
   \uses{def:nagata-global-blowup,
     thm:nagata-global-blowup-proper}
-  \lean{AlgebraicGeometry.IsBlowup.isProper}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap}
 
   Let $X$ be a scheme and let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$.  Its blow-up is proper over $X$.  In particular,
@@ -4281,7 +4281,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Strict transform over the complement of the center]
   \label{lemma:nagata-strict-transform-restrict}
   \uses{def:nagata-strict-transform}
-  \lean{AlgebraicGeometry.StrictTransform.restrict_isIso_locus}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap}
 
   Let $X'\to X$ be the blow-up of a center $C\hookrightarrow X$.  Over
   $X\setminus C$, the strict transform is canonically the ordinary pullback.
@@ -4351,7 +4351,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Finite-type extension of an ideal from a quasi-compact open]
   \label{def:nagata-finite-type-ideal-extension}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
-  \lean{Scheme.QuasiCoherent.finiteTypeIdealExtension}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq}
 
   Let $X$ be quasi-compact and quasi-separated, let $W\subseteq X$ be a
   quasi-compact open, and let
@@ -4369,7 +4369,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/01PF}{Tag 01PF}]{stacks-project}}]
   \label{lemma:nagata-extend-finite-type-ideal}
   \uses{def:nagata-finite-type-ideal-extension}
-  \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_extension}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq}
 
   The sheaf $\operatorname{Ext}_{X,W}(\mathcal J)$ is a finite type
   quasi-coherent ideal on $X$, and its restriction to $W$ is
@@ -4389,7 +4389,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-finite-type-ideal-extension,
     def:nagata-global-blowup,
     lemma:nagata-glue-finite-type-ideals}
-  \lean{AlgebraicGeometry.AdmissibleBlowup.extensionConstruction}
+  \lean{AlgebraicGeometry.IsAdmissible.exists_extend}
 
   Let $X$ be quasi-compact and quasi-separated and let $U,W\subseteq X$ be
   quasi-compact opens.  Write a given $(U\cap W)$-admissible blow-up of $W$
@@ -4412,7 +4412,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/080M}{Tag 080M}]{stacks-project}}]
   \label{lemma:nagata-extend-admissible-blowup}
   \uses{def:nagata-extended-admissible-blowup}
-  \lean{AlgebraicGeometry.AdmissibleBlowup.extend_from_open}
+  \lean{AlgebraicGeometry.IsAdmissible.exists_extend}
 
   The constructed morphism
   $\mathsf{ExtBl}_{X,W,U}(\mathcal J)\to X$ is $U$-admissible, and its
@@ -4441,7 +4441,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/080A}{Tag 080A}]{stacks-project}}]
   \label{lemma:nagata-product-ideal-common-blowup}
-  \lean{AlgebraicGeometry.Blowup.productIdeal_dominates}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso,
+    AlgebraicGeometry.IsAdmissible.mul}
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $\mathcal I_1,\mathcal I_2$ be finite-type quasi-coherent ideals on $X$ with
@@ -4991,7 +4992,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-elimination-indeterminacy}
   \uses{def:nagata-admissible-blowup,def:nagata-strict-transform,
     def:nagata-flattening-ideal}
-  \lean{AlgebraicGeometry.eliminationIndeterminacyConstruction}
+  \lean{AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap}
 
   Let $q\colon Z\to X$ be separated and of finite type, let $X$ be qcqs, and
   let $U\subseteq X$ be quasi-compact.  Fix an isomorphism
@@ -5077,7 +5078,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Finite-type ideal attached to a quasi-compact open]
   \label{def:nagata-qc-open-complement-ideal}
   \uses{lemma:nagata-qc-open-complement-ideal-exists}
-  \lean{Scheme.qcOpenComplementIdeal}
+  \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
 
   Let $W\subseteq Y$ be a quasi-compact open in a qcqs scheme.  Choose one
   witness supplied by
@@ -5090,7 +5091,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Vanishing set of the open-complement ideal]
   \label{lemma:nagata-qc-open-complement-ideal}
   \uses{def:nagata-qc-open-complement-ideal}
-  \lean{Scheme.zeroLocus_qcOpenComplementIdeal}
+  \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
 
   The ideal $\mathcal I_Y(W)$ is finite type and quasi-coherent, and
   \[
@@ -5201,7 +5202,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/0F3V}{Tag 0F3V}]{stacks-project}}]
   \label{lemma:nagata-separate-closed-subschemes}
   \uses{def:nagata-separate-closed-subschemes}
-  \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_separationBlowup}
+  \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_sup}
 
   The morphism $\mathsf{SepBl}_U(Z_1,Z_2)\to X$ is $U$-admissible, and the
   strict transforms of $Z_1$ and $Z_2$ in it are disjoint.
@@ -5236,7 +5237,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Ideal whose support is a constructible closed subset]
   \label{def:nagata-constructible-closed-support}
   \uses{def:nagata-qc-open-complement-ideal}
-  \lean{Scheme.constructibleClosedSupportIdeal}
+  \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
 
   Let $T\subseteq U$ be constructible and closed, with $U$ qcqs.  Its
   complement $W=U\setminus T$ is a quasi-compact open.  Define
@@ -5249,7 +5250,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/01PH}{Tag 01PH}]{stacks-project}}]
   \label{lemma:nagata-constructible-closed-support}
   \uses{def:nagata-constructible-closed-support}
-  \lean{Scheme.exists_finiteType_ideal_zeroLocus_eq}
+  \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
 
   The ideal $\mathcal J_U(T)$ is finite type and quasi-coherent, and its
   vanishing set is exactly $T$.
@@ -5561,7 +5562,8 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-scheme-image-partial-section}
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-scheme-image-of-closed-immersion}
-  \lean{AlgebraicGeometry.Nagata.ker_comap_partialSectionOpenι}
+  \lean{AlgebraicGeometry.isPullback_toImage_partialSection,
+    AlgebraicGeometry.isIso_restrict_imageι_comp_fst}
 
   Let \(U\hookrightarrow X\) be a quasi-compact open immersion, let
   \(Y\to S\) be separated, and let
@@ -5601,7 +5603,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Finite type over a separated target]
   \label{lemma:nagata-finite-type-to-separated-target}
-  \lean{AlgebraicGeometry.Nagata.locallyOfFiniteType_of_comp_of_isSeparated}
+  \lean{AlgebraicGeometry.locallyOfFiniteType_of_comp}
 
   In a commutative triangle \(T\to Y\to B\), if \(T\to B\) is of finite
   type and \(Y\to B\) is separated, then \(T\to Y\) is of finite type.
@@ -5619,7 +5621,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Quasi-compactness of an open map to a separated target]
   \label{lemma:nagata-open-immersion-qc-over-separated-target}
-  \lean{AlgebraicGeometry.Nagata.quasiCompact_of_comp_of_isSeparated}
+  \lean{AlgebraicGeometry.QuasiCompact.of_comp}
 
   Let \(T\to Y\to B\) be a commutative triangle.  Assume that \(T\to B\) is
   of finite type, that \(Y\to B\) is separated, and that \(T\to Y\) is an
@@ -5777,7 +5779,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-graph-extension}
   \uses{def:nagata-scheme-theoretic-image,
     def:nagata-elimination-indeterminacy}
-  \lean{AlgebraicGeometry.Compactification.properExtensionConstruction}
+  \lean{AlgebraicGeometry.Compactification.ProperExtension}
 
   Let $U\to S$ be separated and of finite type, let $V\subseteq U$ be
   quasi-compact, and fix a compactification
@@ -5804,7 +5806,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/0F3Z}{Tag 0F3Z}]{stacks-project}}]
   \label{lemma:nagata-graph-extension}
   \uses{def:nagata-graph-extension}
-  \lean{AlgebraicGeometry.Compactification.exists_properExtension}
+  \lean{AlgebraicGeometry.Compactification.nonempty_properExtension}
 
   The map $Y^{\mathrm{gr}}\to Y$ is $V$-admissible,
   $V\subseteq V^{\mathrm{gr}}\subseteq Y^{\mathrm{gr}}$ is open, and
@@ -5869,7 +5871,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Existence of a valuation probe through a dense source]
   \label{lemma:nagata-dense-valuation-probe-exists}
   \uses{def:nagata-scheme-theoretic-image}
-  \lean{AlgebraicGeometry.nonempty_valuationProbe}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}
 
   Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
@@ -5895,7 +5897,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Valuation probe through a schematically dense source]
   \label{def:nagata-dense-valuation-probe}
   \uses{lemma:nagata-dense-valuation-probe-exists}
-  \lean{AlgebraicGeometry.ValuationProbe}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt}
 
   Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
@@ -5916,8 +5918,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Properties of the valuation probe]
   \label{lemma:nagata-dense-valuation-probe}
   \uses{def:nagata-dense-valuation-probe}
-  \lean{AlgebraicGeometry.ValuationProbe.commSq,
-    AlgebraicGeometry.ValuationProbe.closedPoint_eq}
+  \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}
 
   The maps in $\mathsf{VP}(h,z)$ form a commutative diagram
   \[
@@ -5971,7 +5972,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Intersection with a dominating valuation ring]
   \label{lemma:nagata-valuation-intersection}
-  \lean{ValuationSubring.comap_eq_of_le_comap}
+  \lean{ValuationSubring.comap_eq_of_toLocalSubring_le}
 
   Let \(A\) be a valuation ring with fraction field \(K\), let
   \(K\hookrightarrow L\) be a field extension, and let \(B\subseteq L\) be a
@@ -6079,8 +6080,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0894}{Tag 0894}]{stacks-project}}]
   \label{lemma:nagata-dense-source-valuative}
-  \lean{AlgebraicGeometry.ValuativeCriterion.universallyClosed_of_isDominant,
-    AlgebraicGeometry.ValuativeCriterion.isSeparated_of_isDominant}
+  \lean{AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant,
+    AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}
 
   Let \(f\colon X\to S\) be quasi-compact and let
   \(h\colon U\to X\) be quasi-compact and quasi-separated,
@@ -6527,7 +6528,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-isomorphism-near-closure,
     def:nagata-strict-transform,
     def:nagata-maximal-isomorphism-open}
-  \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \lean{AlgebraicGeometry.TwoOpenSide.admissibleBlowup}
 
   Let $N_2=\operatorname{IsoOpen}(\psi_2)\subseteq U$.  Apply
   $\mathsf{IsoBl}_{V_1,Z_{1,2}}(p_1)$ to the proper projection
@@ -6634,7 +6635,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-intermediate-schemes}
   \uses{def:nagata-two-open-improved-comparison,
     def:nagata-two-open-prepared-boundaries}
-  \lean{AlgebraicGeometry.TwoOpenSide.intermediate}
+  \lean{AlgebraicGeometry.TwoOpenSide.interior}
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -7408,7 +7409,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Existence of a finite affine cover with dense total intersection]
   \label{lemma:nagata-dense-affine-cover-exists}
   \uses{lemma:nagata-affine-neighbourhood-generic-points}
-  \lean{Scheme.exists_finite_affineOpen_cover_dense_iInter}
+  \lean{AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter}
 
   Let $X$ be quasi-compact and quasi-separated and assume that it has finitely
   many irreducible components, with generic points
@@ -7469,7 +7470,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Density needed for induction on the affine cover]
   \label{lemma:nagata-partial-union-overlap-dense}
   \uses{def:nagata-partial-affine-unions}
-  \lean{TopologicalSpace.dense_inter_of_dense_total_inter}
+  \lean{Dense.preimage_val_inter}
 
   For $r>1$, the overlap $X_{r-1}\cap U_r$ is dense in $X_r$.
 \end{lemma}
@@ -8136,7 +8137,7 @@ coefficients and relations and all later stages inherit the recorded data.
 
 \begin{lemma}[Diagonal of a finite-presentation morphism]
   \label{lemma:nagata-diagonal-finite-presentation}
-  \lean{Scheme.Hom.diagonal_finitePresentation}
+  \lean{AlgebraicGeometry.Scheme.Hom.diagonal_finitePresentation}
 
   If $f\colon X\to S$ is of finite presentation, then the diagonal
   $\Delta_{X/S}\colon X\to X\times_S X$ is of finite presentation.
@@ -9351,7 +9352,7 @@ made inside the final theorem.
 {\cite[\href{https://stacks.math.columbia.edu/tag/0F3T}{Tag 0F3T}]{stacks-project}}]
   \label{thm:nagata-compactification}
   \uses{def:nagata-compactification,def:nagata-final-compactification}
-  \lean{AlgebraicGeometry.nagataCompactification}
+  \lean{AlgebraicGeometry.NagataCompactification}
 
   The explicitly constructed factorization
   $\mathsf C_{\mathrm{Nag}}(f)$ is a compactification of $f$.  In particular,
