@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Whiskering
 
 Migrated from `Mathlib/CategoryTheory/Functor/Quadrifunctor.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -22,7 +22,7 @@ on the branch `jriou_localization` of Joël Riou's mathlib fork
 
 namespace CategoryTheory
 
-open Functor
+open _root_.CategoryTheory.Functor
 
 variable {C₁ C₂ C₃ C₄ C₁₂₃ C₂₃₄ C D₁ D₂ D₃ D₄ E : Type*}
   [Category C₁] [Category C₂] [Category C₃] [Category C₁₂₃]

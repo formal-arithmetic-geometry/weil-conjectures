@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Localization.Prod
 
 Migrated from `Mathlib/CategoryTheory/Functor/Derived/LeftDerivedTwo.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 

@@ -17,7 +17,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 Migrated from `Mathlib/CategoryTheory/Monoidal/Derived.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -25,7 +25,7 @@ on the branch `jriou_localization` of Joël Riou's mathlib fork
 
 namespace CategoryTheory
 
-open MonoidalCategory Functor
+open MonoidalCategory _root_.CategoryTheory.Functor
 
 variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
     (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W]

@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.Shift.Quotient
 
 Migrated from `Mathlib/Algebra/Homology/BifunctorCommShift.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -28,7 +28,7 @@ namespace CategoryTheory.Quotient
 /- The following declarations are adapted from the end of
 `Mathlib/CategoryTheory/Shift/Quotient.lean` on the branch `jriou_localization`
 of Joël Riou's mathlib fork (leanprover-community/mathlib4#25848): this final
-block of that file is not yet in the pinned mathlib `v4.32.0`. -/
+block of that file is not yet in the pinned mathlib `v4.33.1`. -/
 
 variable {C : Type*} [Category C] {D : Type*} [Category D]
   {r : HomRel C} (A : Type*) [AddMonoid A] [HasShift C A] [HasShift D A]

@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.MorphismProperty.Composition
 
 Migrated from `Mathlib/CategoryTheory/Monoidal/KFlat.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 -/
 
@@ -25,7 +25,7 @@ namespace CategoryTheory
 
 variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D]
 
-open MonoidalCategory Functor
+open MonoidalCategory _root_.CategoryTheory.Functor
 
 namespace MorphismProperty
 

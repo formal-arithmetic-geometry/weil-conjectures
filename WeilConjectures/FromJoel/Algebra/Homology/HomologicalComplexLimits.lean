@@ -13,7 +13,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.GradedObject.Colimits
 
 Supplement to `Mathlib.Algebra.Homology.HomologicalComplexLimits`, migrated from
 the branch `jriou_localization` of Joël Riou's mathlib fork
-(leanprover-community/mathlib4#25848), adapted to mathlib `v4.32.0`.
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
 
 This provides the instances saying that the forgetful functor
 `HomologicalComplex.forget C c` to graded objects preserves and reflects
