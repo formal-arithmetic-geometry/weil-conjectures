@@ -30,7 +30,9 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.coe_support_comap`: the set-level form of
   `support_comap`, `(I.comap f).support = f ⁻¹' I.support` as sets;
-- `AlgebraicGeometry.Scheme.Hom.comap_ker_self`: `j.ker.comap j = ⊥` for every `j`;
+- `AlgebraicGeometry.Scheme.Hom.comap_ker_self`: `j.ker.comap j = ⊥` for every `j`, and its
+  converse `AlgebraicGeometry.Scheme.IdealSheafData.le_ker_of_comap_eq_bot`: an ideal sheaf
+  pulling back to zero is contained in the kernel;
 - `AlgebraicGeometry.Scheme.IdealSheafData.fg_ideal_comap_iff`: finite generation of the
   ideal of sections transfers across an open immersion;
 - `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_of_isPullback`: flat base change, with
@@ -75,6 +77,15 @@ theorem _root_.AlgebraicGeometry.Scheme.Hom.comap_ker_self (j : X ⟶ Y) : j.ker
   have hfac : j.ker.comap j = (j.ker.comap j.imageι).comap j.toImage := by
     rw [← comap_comp, j.toImage_imageι]
   rw [hfac, comap_subschemeι, comap_bot]
+
+/-- **The kernel is the largest ideal sheaf pulling back to zero**: an ideal sheaf whose
+inverse image along a morphism vanishes is contained in the kernel of that morphism. This
+is the Galois connection `le_map_iff_comap_le` at the zero ideal sheaf, whose pushforward
+is the kernel. -/
+theorem le_ker_of_comap_eq_bot {J : Y.IdealSheafData} (g : X ⟶ Y) (h : J.comap g = ⊥) :
+    J ≤ g.ker := by
+  rw [← map_bot g]
+  exact le_map_iff_comap_le.mpr h.le
 
 end Subscheme
 
