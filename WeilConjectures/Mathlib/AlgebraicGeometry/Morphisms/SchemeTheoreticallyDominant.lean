@@ -312,7 +312,7 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_isIso (f : X' ⟶ X) [IsIso
     (U : X.Opens) [IsSchemeTheoreticallyDominant U.ι] :
     IsSchemeTheoreticallyDominant (f ⁻¹ᵁ U).ι := by
   have : IsIso (f ∣_ U) :=
-    MorphismProperty.IsLocalAtTarget.restrict (P := .isomorphisms Scheme) inferInstance U
+    IsZariskiLocalAtTarget.restrict (P := .isomorphisms Scheme) (inferInstanceAs (IsIso f)) U
   have he : (f ⁻¹ᵁ U).ι = (f ∣_ U) ≫ U.ι ≫ inv f := by
     rw [← Category.assoc, morphismRestrict_ι, Category.assoc, IsIso.hom_inv_id,
       Category.comp_id]

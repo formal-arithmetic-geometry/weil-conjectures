@@ -251,7 +251,7 @@ theorem exists_comp_isSchemeTheoreticallyDominant_preimage
   have hK : K.blowupMap = iso.inv ≫ B₂.I.blowupMap ≫ B.I.blowupMap := by
     rw [← hiso, iso.inv_hom_id_assoc]
   refine ⟨⟨K, hKft, hKdisj⟩, iso.inv ≫ B₂.I.blowupMap, by rw [Category.assoc, ← hK], ?_⟩
-  show IsSchemeTheoreticallyDominant (K.blowupMap ⁻¹ᵁ U).ι
+  change IsSchemeTheoreticallyDominant (K.blowupMap ⁻¹ᵁ U).ι
   have hpre : K.blowupMap ⁻¹ᵁ U = iso.inv ⁻¹ᵁ (B₂.I.blowupMap ⁻¹ᵁ V) := by rw [hK]; rfl
   rw [hpre]
   exact .preimage_ι_of_isIso iso.inv _
