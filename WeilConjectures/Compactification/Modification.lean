@@ -78,11 +78,13 @@ quasi-separated, which separatedness supplies).
 and `exists_admissibleBlowup_isIso_strictTransformMap_near_closure` (0F3W) are all
 consumers of it, and the two-open compactification theorem (proof order items 43–48)
 consumes those. The Stacks Project proves Tag 081S by Raynaud–Gruson flattening
-(Stacks Tags 0815 and 081R), which the revised blueprint deliberately does not
-formalize (see the route revision note in
-`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md` and the module
-docstring of `WeilConjectures.Blowup.AdmissibleBlowup`); the formalized route to
-Tag 081S is an open obligation.
+(Stacks Tags 0815 and 081R, together with 081P and 081L), and that is the route the
+blueprint takes: the flattening chain (proof order items 25–29) is the intended proof
+of Tag 081S, none of it is formalized yet (see the route revision note in
+`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`). Note that the
+two-open compactification theorem itself does not go through flattening — it uses the
+boundary-separation route of `WeilConjectures.Blowup.AdmissibleBlowup` — so flattening
+is needed only for Tag 081S.
 
 -/
 
@@ -113,9 +115,9 @@ theorem exists_admissibleBlowup_isOpenImmersion_strictTransformMap
   -- The Stacks proof flattens the (finite type, flat over `U`) structure sheaf datum
   -- of `q` by a `U`-admissible blow-up (Tags 0815 and 081R) and observes that a flat,
   -- finitely presented strict transform which is a monomorphism over `U` is an open
-  -- immersion. The revised blueprint drops the flattening chain from the formalized
-  -- route, so this is the one primitive obligation of the modification layer, and the
-  -- route to it is genuinely open.
+  -- immersion. That flattening chain (proof order items 25–29) is the blueprint's
+  -- route to this statement, but none of it is formalized yet, so this remains the one
+  -- primitive obligation of the modification layer.
   sorry
 
 section ImageTransport

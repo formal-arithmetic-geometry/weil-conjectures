@@ -19,12 +19,14 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 This file records the admissible blow-up vocabulary and the boundary-separation
 interface of the proof of Nagata's compactification theorem, following the revised
-blueprint (`blueprint/src/version/detailed/nagata/nagata_new.tex`). The revised
-blueprint replaces the flattening route of the original blueprint (Stacks Tags
-0815/081R and 081P/081L) by the boundary-separation route: the two-open
-compactification theorem uses blow-ups of sums of ideals to separate boundary pieces
-(Stacks Tag 0F3V), common modifications, and the dense-source valuative criterion — no
-module flattening is needed, so no flattening statements are formalized here.
+blueprint (`blueprint/src/version/detailed/nagata/nagata_new.tex`). The two-open
+compactification theorem reaches its target by the boundary-separation route rather
+than by module flattening: it uses blow-ups of sums of ideals to separate boundary
+pieces (Stacks Tag 0F3V), common modifications, and the dense-source valuative
+criterion. Module flattening (Stacks Tags 0815/081R and 081P/081L) is on the
+formalized route too, but only as the blueprint's proof of Tag 081S, which lives in
+`WeilConjectures.Compactification.Modification`; hence no flattening statements appear
+in this file.
 
 ## Definitions
 
@@ -695,9 +697,9 @@ section BoundarySeparation
 
 /-! ### Boundary separation
 
-The revised blueprint replaces the flattening route of the original blueprint by the
-boundary-separation route: two finite-presentation closed subschemes which are disjoint
-over `U` acquire disjoint strict transforms after blowing up the sum of their ideals
+This is the route the two-open compactification theorem takes instead of module
+flattening: two finite-presentation closed subschemes which are disjoint over `U`
+acquire disjoint strict transforms after blowing up the sum of their ideals
 (Stacks Project Tag 0F3V; revised blueprint `def:nagata-separate-closed-subschemes`,
 `lemma:nagata-separate-closed-subschemes`). -/
 

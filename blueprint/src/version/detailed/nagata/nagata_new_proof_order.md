@@ -49,14 +49,20 @@ not by the shortest source-file path.
 | 28 | lemma:nagata-flattening-ideal-exists | Selects the flattening ideal and records its universal specification. | Previous flattening lemmas -> chosen ideal |
 | 29 | lemma:nagata-dense-open-dimension-package | Extends finite presentation and fibre-dimension bounds from a retrocompact dense open (Stacks Tags 081P and 081L). | Flat lft map + dense open -> lfp and dimension bound |
 
-> **Route revision (formalization, 2026-08).** Items 25-29 (the module-flattening
-> chain, Stacks Tags 0815/081R/081P/081L) are **not on the formalized route**:
-> the Lean development replaces them by the boundary-separation route (item 36's
-> Tag 0F3V separation blow-up, common modifications, and the dense-source
-> valuative criterion, item 42).  Item 23 is formalized only in its affine
-> algebraic layer (`Submodule.powTorsionQuotientMap*`).  In `nagata_new.tex` the
-> flattening chain now survives only as the input to item 30 (Tag 081S), whose
-> Lean statement is still `sorry` and whose formal proof route is still open.
+> **Route revision (formalization, 2026-08-28).** Items 25-29 (the
+> module-flattening chain, Stacks Tags 0815/081R/081P/081L) **are on the
+> formalized route**: they are the route to item 30 (Tag 081S), which is the
+> single primitive obligation of the modification layer and is still `sorry` in
+> Lean.  This supersedes the earlier (2026-08) decision to leave the flattening
+> chain off the formalized route.  Item 23 is so far formalized only in its
+> affine algebraic layer (`Submodule.powTorsion` and
+> `Submodule.torsion'QuotientMap` in
+> `WeilConjectures/Mathlib/Algebra/Module/Torsion.lean`).
+>
+> What is unchanged: the **two-open** theorem (items 43-48) does not go through
+> flattening.  It uses the boundary-separation route — item 36's Tag 0F3V
+> separation blow-up, common modifications, and the dense-source valuative
+> criterion (item 42).  Flattening enters only below item 30.
 >
 > **Route revision (formalization, 2026-08-26): Tag 080E.** The identification
 > of the strict transform with the blow-up of the pulled-back ideal
