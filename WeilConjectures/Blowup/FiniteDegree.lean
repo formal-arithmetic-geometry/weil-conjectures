@@ -41,6 +41,22 @@ variable types, chart probes keep their ring abstract
 (`Scheme.IdealSheafData.ideal_comap_comap_of_probe`), and memberships are transported
 along morphism equalities by `mem_of_ringHom_eq` instead of `▸`-rewrites.
 
+Three further conventions keep the heartbeat count of the proofs down, each measured
+with `#count_heartbeats` on this file:
+* rewriting over the chart types is done by `simp only`, not `rw` — `rw` has to
+  `kabstract` the large terms, which typically costs two to three times as much;
+  likewise `push_cast` over `reesAlgebra` coercions is spelled out as a `simp only`
+  with `MulMemClass.coe_mul`, `SubmonoidClass.coe_pow`, `OneMemClass.coe_one`;
+* a large term is never elaborated against an unknown expected type: `obtain ⟨..⟩ := e`
+  is split into `have h := e` followed by `obtain ⟨..⟩ := h`, and nested arguments of
+  `exact`/`refine` are hoisted into `have`s (this is worth an order of magnitude in
+  `Scheme.IdealSheafData.mem_ideal_map_pow_mul_of_chartFrac_mem`);
+* rewriting steps that would otherwise happen at the chart types are packaged as
+  lemmas over variable rings (`mem_map_of_eq_mul_of_map_eq`,
+  `CommRingCat.mem_ideal_map_iso_iff`, `map_ideal_comap_congr`, and the
+  `∀ k' ≥ k` form of `Ideal.exists_pow_mul_mem_of_algebraMap_mem_map`) and only
+  instantiated here.
+
 -/
 
 @[expose] public section
