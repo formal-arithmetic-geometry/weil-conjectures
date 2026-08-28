@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
@@ -38,6 +39,17 @@ morphism is the closed-immersion diagonal of `𝒰ᵢ ⟶ S`
 (`AlgebraicGeometry.isClosedImmersion_pullback_map_self`), and the two mixed charts of
 a two-element cover are exchanged by the symmetry isomorphism
 (`AlgebraicGeometry.pullback_map_symmetry`).
+
+## Morphisms agreeing on a scheme-theoretically dominant subscheme
+
+Two morphisms into a separated target that agree after precomposition with a
+scheme-theoretically dominant morphism are equal
+(`AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant_of_isSeparated` and its
+version for morphisms over a base
+`AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant_of_isSeparated'`). This is
+the scheme-theoretic analogue of Mathlib's
+`AlgebraicGeometry.ext_of_isDominant_of_isSeparated`, with the reducedness assumption
+on the source dropped.
 -/
 
 @[expose] public section
@@ -209,5 +221,52 @@ theorem IsSeparated.of_two_open_cover
       isClosedImmersion_pullback_map_self w j₂]
 
 end TwoOpenCover
+
+section SchemeTheoreticallyDominant
+
+/-- **Morphisms into a separated target agreeing on a scheme-theoretically dominant
+subscheme are equal.** Suppose `f g : T ⟶ Y` agree over some separated `s : Y ⟶ Z`.
+Then `f = g` as soon as `ι ≫ f = ι ≫ g` for some scheme-theoretically dominant
+`ι : W ⟶ T`.
+
+This is `AlgebraicGeometry.ext_of_isDominant_of_isSeparated` with dominance of `ι`
+strengthened to scheme-theoretic dominance and, in exchange, the reducedness assumption
+on `T` dropped. -/
+theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated {W T Y Z : Scheme.{u}}
+    {f g : T ⟶ Y} (s : Y ⟶ Z) [IsSeparated s] (h : f ≫ s = g ≫ s)
+    (ι : W ⟶ T) [IsSchemeTheoreticallyDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g := by
+  let T' : Over Z := Over.mk (f ≫ s)
+  let Y' : Over Z := Over.mk s
+  let W' : Over Z := Over.mk (ι ≫ f ≫ s)
+  let f' : T' ⟶ Y' := Over.homMk f
+  let g' : T' ⟶ Y' := Over.homMk g
+  let ι' : W' ⟶ T' := Over.homMk ι
+  have : IsSeparated Y'.hom := ‹_›
+  -- `ι` factors through the equalizer of `f` and `g`, which is a closed immersion
+  have hfac : (equalizer.lift ι' (by ext1; exact hU)).left ≫ (equalizer.ι f' g').left = ι := by
+    rw [← Over.comp_left, equalizer.lift_ι]
+    rfl
+  -- hence the equalizer has trivial kernel, so it is an isomorphism
+  have : IsIso (equalizer.ι f' g').left := by
+    rw [IsClosedImmersion.isIso_iff_ker_eq_bot, ← le_bot_iff, ← ι.ker_eq_bot, ← hfac]
+    exact Scheme.Hom.le_ker_comp _ _
+  rw [← cancel_epi (equalizer.ι f' g').left]
+  exact congr($(equalizer.condition f' g').left)
+
+/-- **Morphisms of `S`-schemes into a separated `S`-scheme agreeing on a
+scheme-theoretically dominant subscheme are equal.** For `S`-morphisms `f g : T ⟶ Y`
+into a separated `S`-scheme `Y`, `f = g` as soon as `ι ≫ f = ι ≫ g` for some
+scheme-theoretically dominant `ι : W ⟶ T`.
+
+This is `AlgebraicGeometry.ext_of_isDominant_of_isSeparated'` with dominance of `ι`
+strengthened to scheme-theoretic dominance and, in exchange, the reducedness assumption
+on `T` dropped. -/
+theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated' (S : Scheme.{u})
+    {T Y : Scheme.{u}} [T.Over S] [Y.Over S] [IsSeparated (Y ↘ S)] {f g : T ⟶ Y}
+    [f.IsOver S] [g.IsOver S] {W : Scheme.{u}} (ι : W ⟶ T)
+    [IsSchemeTheoreticallyDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g :=
+  ext_of_isSchemeTheoreticallyDominant_of_isSeparated (Y ↘ S) (by simp) ι hU
+
+end SchemeTheoreticallyDominant
 
 end AlgebraicGeometry
