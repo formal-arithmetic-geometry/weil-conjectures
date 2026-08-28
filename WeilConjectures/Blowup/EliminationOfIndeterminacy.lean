@@ -7,7 +7,10 @@ module
 
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.Functoriality
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
 public import Mathlib.RingTheory.MvPolynomial.Localization
 
@@ -661,65 +664,6 @@ section Gluing
 
 /-! ### Gluing the chart-local extensions to relative affine space -/
 
-/-- Composing both legs of a commutative square with a monomorphism does not change whether
-it is a pullback square. -/
-lemma _root_.CategoryTheory.IsPullback.comp_mono_iff {C : Type*} [Category C]
-    {P S T Z Z' : C} {p : P ⟶ S} {q : P ⟶ T} {α : S ⟶ Z} {β : T ⟶ Z} (j : Z ⟶ Z')
-    [Mono j] :
-    IsPullback p q (α ≫ j) (β ≫ j) ↔ IsPullback p q α β := by
-  have hw : ∀ {D : C} (a : D ⟶ S) (b : D ⟶ T), a ≫ α ≫ j = b ≫ β ≫ j ↔ a ≫ α = b ≫ β := by
-    intro D a b
-    rw [← Category.assoc, ← Category.assoc, cancel_mono]
-  constructor
-  · intro h
-    refine IsPullback.of_isLimit' ⟨(hw p q).mp h.w⟩
-      (Limits.PullbackCone.IsLimit.mk _ (fun s ↦ h.lift s.fst s.snd
-        ((hw s.fst s.snd).mpr s.condition)) (fun s ↦ h.lift_fst _ _ _)
-        (fun s ↦ h.lift_snd _ _ _) fun s m h₁ h₂ ↦ h.hom_ext ?_ ?_)
-    · rw [h₁, h.lift_fst]
-    · rw [h₂, h.lift_snd]
-  · intro h
-    refine IsPullback.of_isLimit' ⟨(hw p q).mpr h.w⟩
-      (Limits.PullbackCone.IsLimit.mk _ (fun s ↦ h.lift s.fst s.snd
-        ((hw s.fst s.snd).mp s.condition)) (fun s ↦ h.lift_fst _ _ _)
-        (fun s ↦ h.lift_snd _ _ _) fun s m h₁ h₂ ↦ h.hom_ext ?_ ?_)
-    · rw [h₁, h.lift_fst]
-    · rw [h₂, h.lift_snd]
-
-/-- Two morphisms out of the two legs of a pullback square which agree on a scheme realizing
-the square agree on the chosen pullback. -/
-lemma _root_.CategoryTheory.IsPullback.fst_comp_eq_snd_comp {C : Type*} [Category C]
-    {P S T Z : C} {p : P ⟶ S} {q : P ⟶ T} {α : S ⟶ Z} {β : T ⟶ Z} (h : IsPullback p q α β)
-    [Limits.HasPullback α β] {Y : C} (v : S ⟶ Y) (w : T ⟶ Y) (hvw : p ≫ v = q ≫ w) :
-    Limits.pullback.fst α β ≫ v = Limits.pullback.snd α β ≫ w := by
-  rw [← cancel_epi h.isoPullback.hom, ← Category.assoc, ← Category.assoc,
-    h.isoPullback_hom_fst, h.isoPullback_hom_snd, hvw]
-
-/-- The `j`-th coordinate of a morphism to relative affine space precomposed with `m` is the
-pullback along `m` of the `j`-th defining section. -/
-lemma AffineSpace.comp_homOfVector_appTop_coord {n : Type u} {S T Y : Scheme.{u}} (m : T ⟶ Y)
-    (h : Y ⟶ S) (v : n → Γ(Y, ⊤)) (j : n) :
-    (m ≫ AffineSpace.homOfVector h v).appTop (AffineSpace.coord S j) = m.appTop (v j) := by
-  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.homOfVector_appTop_coord]
-
-/-- Two morphisms from `Spec T` to a relative affine space, given by ring maps out of `R` and
-`S` together with defining vectors of sections of `R` and `S`, agree as soon as the underlying
-morphisms to the base agree and the defining sections have the same image in `T`. -/
-lemma AffineSpace.specMap_comp_homOfVector_eq {X : Scheme.{u}} {σ : Type u}
-    {R S T : CommRingCat.{u}} (φ : R ⟶ T) (ψ : S ⟶ T) (pR : Spec R ⟶ X) (pS : Spec S ⟶ X)
-    (hp : Spec.map φ ≫ pR = Spec.map ψ ≫ pS) (vR : σ → R) (vS : σ → S)
-    (hv : ∀ j, φ (vR j) = ψ (vS j)) :
-    Spec.map φ ≫ AffineSpace.homOfVector pR (fun j ↦ (Scheme.ΓSpecIso R).inv (vR j)) =
-      Spec.map ψ ≫ AffineSpace.homOfVector pS (fun j ↦ (Scheme.ΓSpecIso S).inv (vS j)) := by
-  refine AffineSpace.hom_ext ?_ ?_
-  · rw [Category.assoc, Category.assoc, AffineSpace.homOfVector_over,
-      AffineSpace.homOfVector_over, hp]
-  · intro j
-    rw [AffineSpace.comp_homOfVector_appTop_coord, AffineSpace.comp_homOfVector_appTop_coord,
-      ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
-      ← Scheme.ΓSpecIso_inv_naturality, ← Scheme.ΓSpecIso_inv_naturality,
-      CommRingCat.comp_apply, CommRingCat.comp_apply, hv j]
-
 variable {A : Type u} [CommRing A] {I : Ideal A}
 
 /-- The product of two slopes on the same chart depends only on the product of the
@@ -872,21 +816,6 @@ lemma Scheme.IdealSheafData.exists_hom_affineSpace_of_awaySlope {X : Scheme.{u}}
   rw [← Category.assoc, ← Category.assoc, 𝒰.ι_glueMorphisms _ hcompat' i,
     AffineSpace.homOfVector_over, h2]
 
-/-- Two morphisms to a relative affine space with the same structure morphism agree if their
-coordinates agree after multiplication by a unit. -/
-lemma AffineSpace.hom_ext_of_mul_unit {S T : Scheme.{u}} {σ : Type u} {F G : T ⟶ 𝔸(σ; S)}
-    (h₁ : F ≫ 𝔸(σ; S) ↘ S = G ≫ 𝔸(σ; S) ↘ S) {w : Γ(T, ⊤)} (hw : IsUnit w)
-    (h₂ : ∀ j, w * F.appTop (AffineSpace.coord S j) = w * G.appTop (AffineSpace.coord S j)) :
-    F = G :=
-  AffineSpace.hom_ext h₁ fun j ↦ hw.mul_left_cancel (h₂ j)
-
-variable {X : Scheme.{u}}
-
-/-- The `appLE` of a morphism between the top opens is its `appTop`. -/
-lemma Scheme.Hom.appLE_top_top {T T' : Scheme.{u}} (q : T ⟶ T')
-    (h : (⊤ : T.Opens) ≤ q ⁻¹ᵁ ⊤) : q.appLE ⊤ ⊤ h = q.appTop := by
-  simp [Scheme.Hom.appLE]
-
 set_option maxHeartbeats 4000000 in
 -- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- The global sections of the blow-up chart over an affine scheme pull sections of `X` back
@@ -988,25 +917,6 @@ The graph of the extension is checked to be closed one chart of the blow-up at a
 the chart at a generator `c` of the centre, the graph is cut out by the equations
 `(d/c) · tⱼ = (bⱼ/c)` of `isClosed_range_of_basicOpen_fractions`. -/
 
-/-- A set is closed as soon as its preimage under each member of a jointly surjective family
-of open embeddings is closed. -/
-lemma isClosed_of_isOpenEmbedding_cover {Q : Type*} [TopologicalSpace Q] {κ : Type*}
-    {Z : κ → Type*} [∀ k, TopologicalSpace (Z k)] (q : ∀ k, Z k → Q)
-    (hq : ∀ k, Topology.IsOpenEmbedding (q k)) (hcov : ∀ x : Q, ∃ k y, q k y = x)
-    {s : Set Q} (hs : ∀ k, IsClosed (q k ⁻¹' s)) : IsClosed s := by
-  rw [← isOpen_compl_iff]
-  have hcompl : sᶜ = ⋃ k, q k '' ((q k ⁻¹' s)ᶜ) := by
-    ext x
-    constructor
-    · intro hx
-      obtain ⟨k, y, rfl⟩ := hcov x
-      exact Set.mem_iUnion.mpr ⟨k, y, hx, rfl⟩
-    · rintro hx
-      obtain ⟨k, y, hy, rfl⟩ := Set.mem_iUnion.mp hx
-      exact hy
-  rw [hcompl]
-  exact isOpen_iUnion fun k ↦ (hq k).isOpenMap _ (hs k).isOpen_compl
-
 variable {A : Type u} [CommRing A] {I : Ideal A}
 
 /-- **Composing the slopes across two charts**: on the chart at `a · d` the slope `b / d`
@@ -1073,27 +983,6 @@ lemma Scheme.IdealSheafData.blowupChart_preimage_opensRange (K : X.IdealSheafDat
     rw [Scheme.IdealSheafData.blowupChart, Scheme.IdealSheafData.blowupChart,
       Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hz]
 
-/-- A set in a scheme is closed as soon as its preimage under each member of a jointly
-surjective family of open immersions is closed. -/
-lemma Scheme.isClosed_of_openCover {Q : Scheme.{u}} {κ : Type*} {Z : κ → Scheme.{u}}
-    (q : ∀ k, Z k ⟶ Q) [∀ k, IsOpenImmersion (q k)] (hcov : ∀ x : Q, ∃ k y, q k y = x)
-    {s : Set Q} (hs : ∀ k, IsClosed ((q k).base ⁻¹' s)) : IsClosed s :=
-  isClosed_of_isOpenEmbedding_cover (fun k ↦ (q k).base)
-    (fun k ↦ (q k).isOpenEmbedding) hcov hs
-
-
-/-- If the coordinates of `G` are used as the defining vector, `homOfVector` composed with the
-base-change map recovers `G`. -/
-lemma AffineSpace.homOfVector_comp_map {σ : Type u} {S T Z : Scheme.{u}} (p : Z ⟶ S)
-    (h : S ⟶ T) (G : Z ⟶ 𝔸(σ; T)) (hG : G ≫ 𝔸(σ; T) ↘ T = p ≫ h) :
-    AffineSpace.homOfVector p (fun j ↦ G.appTop (AffineSpace.coord T j)) ≫
-      AffineSpace.map σ h = G := by
-  refine AffineSpace.hom_ext ?_ fun j ↦ ?_
-  · rw [Category.assoc, AffineSpace.map_over, ← Category.assoc,
-      AffineSpace.homOfVector_over, hG]
-  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
-      AffineSpace.homOfVector_appTop_coord]
-
 /-- **The graph of the extension, seen on one chart.** On the base change of a chart of the
 blow-up, the graph of the extension is the graph of the chart-local morphism defined by the
 coordinates of the extension. -/
@@ -1144,37 +1033,6 @@ lemma Scheme.isClosed_preimage_range_pullbackLift {X Bl : Scheme.{u}} {σ : Type
   rw [hpre]
   exact hcl
 
-
-/-- `Spec` of a ring map acts on global sections by the ring map. -/
-lemma Scheme.specMap_appTop_ΓSpecIso_inv {R S : CommRingCat.{u}} (φ : R ⟶ S) (r : R) :
-    (Spec.map φ).appTop ((Scheme.ΓSpecIso R).inv r) = (Scheme.ΓSpecIso S).inv (φ r) := by
-  rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
-
-/-- Multiplicativity of the inverse of `ΓSpecIso`. -/
-lemma Scheme.ΓSpecIso_inv_mul {R : CommRingCat.{u}} (r s : R) :
-    (Scheme.ΓSpecIso R).inv r * (Scheme.ΓSpecIso R).inv s = (Scheme.ΓSpecIso R).inv (r * s) :=
-  (map_mul _ _ _).symm
-
-/-- An open immersion whose range is an open `B` is an isomorphism onto `B`. -/
-lemma exists_isIso_lift_of_mem_iff {Y Z : Scheme.{u}} (m : Z ⟶ Y)
-    (hm : IsOpenImmersion m) {B : Y.Opens} (hB : ∀ y, (∃ z, m z = y) ↔ y ∈ B) :
-    ∃ m' : Z ⟶ B.toScheme, IsIso m' ∧ m' ≫ B.ι = m := by
-  haveI := hm
-  have hsub : Set.range m.base ⊆ Set.range B.ι.base := by
-    rintro - ⟨z, rfl⟩
-    exact ⟨⟨m z, (hB _).mp ⟨z, rfl⟩⟩, rfl⟩
-  refine ⟨IsOpenImmersion.lift B.ι m hsub, ?_, IsOpenImmersion.lift_fac _ _ _⟩
-  have hfac : IsOpenImmersion.lift B.ι m hsub ≫ B.ι = m := IsOpenImmersion.lift_fac _ _ _
-  haveI : IsOpenImmersion (IsOpenImmersion.lift B.ι m hsub) := by
-    have h1 : IsOpenImmersion (IsOpenImmersion.lift B.ι m hsub ≫ B.ι) := by
-      rw [hfac]; infer_instance
-    exact IsOpenImmersion.of_comp _ B.ι
-  refine isIso_of_isOpenImmersion_of_opensRange_eq_top _ ?_
-  refine TopologicalSpace.Opens.ext (Set.eq_univ_of_forall fun t ↦ ?_)
-  obtain ⟨z, hz⟩ := (hB t.1).mpr t.2
-  refine ⟨z, B.ι.isOpenEmbedding.injective ?_⟩
-  rw [← Scheme.Hom.comp_apply, hfac]
-  exact hz
 
 set_option maxHeartbeats 1000000 in
 -- The chart rings are large; unification exceeds the default heartbeat limit.
@@ -1406,25 +1264,6 @@ On a quasi-compact open `U` of an affine scheme the coordinates of a morphism to
 relative affine space are fractions with a common denominator over a finite cover of `U`
 by basic opens, and after enlarging the exponent the numerators satisfy the transition
 identities exactly in the global sections of `X`. -/
-
-open AffineSpace in
-/-- A quasi-compact open of an affine scheme is a finite union of basic opens. -/
-lemma exists_finite_basicOpen_cover {X : Scheme.{u}} [IsAffine X] {U : X.Opens}
-    (hU : IsCompact (U : Set X)) :
-    ∃ (ι : Type u) (_ : Finite ι) (u : ι → Γ(X, ⊤)) (_ : ∀ i, X.basicOpen (u i) ≤ U),
-      U = ⨆ i, X.basicOpen (u i) := by
-  classical
-  obtain ⟨t, ht⟩ := hU.elim_finite_subcover
-    (fun a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} ↦ (X.basicOpen a.1 : Set X))
-    (fun a ↦ (X.basicOpen a.1).2) (by
-      intro x hx
-      obtain ⟨a, ha1, ha2⟩ := (isAffineOpen_top X).exists_basicOpen_le (V := U) ⟨x, hx⟩ trivial
-      exact Set.mem_iUnion.mpr ⟨⟨a, ha1⟩, ha2⟩)
-  refine ⟨{a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} // a ∈ t}, inferInstance,
-    fun a ↦ a.1.1, fun a ↦ a.1.2, le_antisymm ?_ (iSup_le fun a ↦ a.1.2)⟩
-  intro x hx
-  obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (ht hx)
-  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨a, ha⟩, hxa⟩
 
 open AffineSpace in
 /-- **Common denominators for a partial map to affine space.** If `U` is a quasi-compact

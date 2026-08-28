@@ -311,4 +311,51 @@ theorem exists_immersion_affineSpace_of_quasiAffine {X S : Scheme.{u}} (π : X �
   · haveI := himm
     infer_instance
 
+/-- The `j`-th coordinate of a morphism to relative affine space precomposed with `m` is the
+pullback along `m` of the `j`-th defining section. -/
+lemma AffineSpace.comp_homOfVector_appTop_coord {n : Type u} {S T Y : Scheme.{u}} (m : T ⟶ Y)
+    (h : Y ⟶ S) (v : n → Γ(Y, ⊤)) (j : n) :
+    (m ≫ AffineSpace.homOfVector h v).appTop (AffineSpace.coord S j) = m.appTop (v j) := by
+  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.homOfVector_appTop_coord]
+
+/-- Two morphisms from `Spec T` to a relative affine space, given by ring maps out of `R` and
+`S` together with defining vectors of sections of `R` and `S`, agree as soon as the underlying
+morphisms to the base agree and the defining sections have the same image in `T`. -/
+lemma AffineSpace.specMap_comp_homOfVector_eq {X : Scheme.{u}} {σ : Type u}
+    {R S T : CommRingCat.{u}} (φ : R ⟶ T) (ψ : S ⟶ T) (pR : Spec R ⟶ X) (pS : Spec S ⟶ X)
+    (hp : Spec.map φ ≫ pR = Spec.map ψ ≫ pS) (vR : σ → R) (vS : σ → S)
+    (hv : ∀ j, φ (vR j) = ψ (vS j)) :
+    Spec.map φ ≫ AffineSpace.homOfVector pR (fun j ↦ (Scheme.ΓSpecIso R).inv (vR j)) =
+      Spec.map ψ ≫ AffineSpace.homOfVector pS (fun j ↦ (Scheme.ΓSpecIso S).inv (vS j)) := by
+  refine AffineSpace.hom_ext ?_ ?_
+  · rw [Category.assoc, Category.assoc, AffineSpace.homOfVector_over,
+      AffineSpace.homOfVector_over, hp]
+  · intro j
+    rw [AffineSpace.comp_homOfVector_appTop_coord, AffineSpace.comp_homOfVector_appTop_coord,
+      ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
+      ← Scheme.ΓSpecIso_inv_naturality, ← Scheme.ΓSpecIso_inv_naturality,
+      CommRingCat.comp_apply, CommRingCat.comp_apply, hv j]
+
+/-- Two morphisms to a relative affine space with the same structure morphism agree if their
+coordinates agree after multiplication by a unit. -/
+lemma AffineSpace.hom_ext_of_mul_unit {S T : Scheme.{u}} {σ : Type u} {F G : T ⟶ 𝔸(σ; S)}
+    (h₁ : F ≫ 𝔸(σ; S) ↘ S = G ≫ 𝔸(σ; S) ↘ S) {w : Γ(T, ⊤)} (hw : IsUnit w)
+    (h₂ : ∀ j, w * F.appTop (AffineSpace.coord S j) = w * G.appTop (AffineSpace.coord S j)) :
+    F = G :=
+  AffineSpace.hom_ext h₁ fun j ↦ hw.mul_left_cancel (h₂ j)
+
+variable {X : Scheme.{u}}
+
+/-- If the coordinates of `G` are used as the defining vector, `homOfVector` composed with the
+base-change map recovers `G`. -/
+lemma AffineSpace.homOfVector_comp_map {σ : Type u} {S T Z : Scheme.{u}} (p : Z ⟶ S)
+    (h : S ⟶ T) (G : Z ⟶ 𝔸(σ; T)) (hG : G ≫ 𝔸(σ; T) ↘ T = p ≫ h) :
+    AffineSpace.homOfVector p (fun j ↦ G.appTop (AffineSpace.coord T j)) ≫
+      AffineSpace.map σ h = G := by
+  refine AffineSpace.hom_ext ?_ fun j ↦ ?_
+  · rw [Category.assoc, AffineSpace.map_over, ← Category.assoc,
+      AffineSpace.homOfVector_over, hG]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
+      AffineSpace.homOfVector_appTop_coord]
+
 end AlgebraicGeometry
