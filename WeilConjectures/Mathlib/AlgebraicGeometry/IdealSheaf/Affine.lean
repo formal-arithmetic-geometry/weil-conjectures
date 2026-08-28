@@ -69,7 +69,7 @@ lemma map_topIso_ideal_top_comap_ι (J : X.IdealSheafData) (U : X.affineOpens) :
     haveI : IsAffine U.1.toScheme := U.2
     ((J.comap U.1.ι).ideal ⟨⊤, isAffineOpen_top U.1.toScheme⟩).map U.1.topIso.hom.hom =
       J.ideal U := by
-  haveI : IsAffine U.1.toScheme := U.2
+  have : IsAffine U.1.toScheme := U.2
   rw [ideal_comap_of_isOpenImmersion, Scheme.Opens.ι_appIso]
   simp only [Iso.refl_inv]
   rw [Scheme.Opens.topIso_hom]
@@ -83,8 +83,8 @@ lying over the affine open `U` of `X`, then the ideal of `J.comap f` on `V` is t
 lemma ideal_comap_appLE {Z : Scheme.{u}} (J : X.IdealSheafData) (f : Z ⟶ X)
     (U : X.affineOpens) (V : Z.affineOpens) (e : V.1 ≤ f ⁻¹ᵁ U.1) :
     (J.comap f).ideal V = (J.ideal U).map (f.appLE U.1 V.1 e).hom := by
-  haveI : IsAffine U.1.toScheme := U.2
-  haveI : IsAffine V.1.toScheme := V.2
+  have : IsAffine U.1.toScheme := U.2
+  have : IsAffine V.1.toScheme := V.2
   have hres : (J.comap f).comap V.1.ι = (J.comap U.1.ι).comap (f.resLE U.1 V.1 e) := by
     rw [← comap_comp, ← comap_comp, Scheme.Hom.resLE_comp_ι]
   rw [← map_topIso_ideal_top_comap_ι (J.comap f) V, hres,
