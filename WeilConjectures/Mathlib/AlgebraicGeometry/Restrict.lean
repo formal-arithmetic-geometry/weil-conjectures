@@ -17,7 +17,9 @@ We record:
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
   — membership and preimage formulas for the ranges of inclusions of opens;
 - `AlgebraicGeometry.isPullback_resLE_homOfLE` — the restriction of a morphism to a smaller open
-  of the target is the base change of its restriction to a larger one.
+  of the target is the base change of its restriction to a larger one;
+- `AlgebraicGeometry.Scheme.Hom.surjective_resLE_appTop` — surjectivity of `appLE` implies
+  surjectivity of the induced map on global sections of the restrictions.
 -/
 
 @[expose] public section
@@ -75,5 +77,18 @@ lemma isPullback_resLE_homOfLE {X Y : Scheme.{u}} (f : X ⟶ Y) {U W : Y.Opens} 
   · rw [Scheme.opensRange_homOfLE, Scheme.opensRange_homOfLE, ← Scheme.Hom.comp_preimage,
       Scheme.Hom.resLE_comp_ι, Scheme.Hom.comp_preimage]
     refine le_antisymm (fun x hx ↦ hpb ⟨x.2, hx⟩) (fun x hx ↦ e' hx)
+
+/-- If `f.appLE U V e` is surjective, so is the map induced by the restriction `f.resLE U V e`
+on global sections. -/
+lemma Scheme.Hom.surjective_resLE_appTop {X Y : Scheme.{u}} (f : X ⟶ Y) {U : Y.Opens}
+    {V : X.Opens} (e : V ≤ f ⁻¹ᵁ U) (h : Function.Surjective (f.appLE U V e)) :
+    Function.Surjective ((f.resLE U V e).appTop) := by
+  intro z
+  obtain ⟨y, hy⟩ := h (V.topIso.hom z)
+  refine ⟨U.topIso.inv y, ?_⟩
+  rw [Scheme.Hom.appTop, Scheme.Hom.resLE_app_top]
+  simp only [CommRingCat.comp_apply]
+  rw [← CommRingCat.comp_apply U.topIso.inv, Iso.inv_hom_id, CommRingCat.id_apply, hy,
+    ← CommRingCat.comp_apply, Iso.hom_inv_id, CommRingCat.id_apply]
 
 end AlgebraicGeometry

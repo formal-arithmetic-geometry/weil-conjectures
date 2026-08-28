@@ -17,7 +17,9 @@ immersion with range the preimage of the range of the bottom.
 
 We also show that being a cartesian square is local on the target
 (`AlgebraicGeometry.isPullback_of_iSup_opensRange_eq_top`, with the two-chart version
-`AlgebraicGeometry.isPullback_of_opensRange_sup_eq_top`).
+`AlgebraicGeometry.isPullback_of_opensRange_sup_eq_top`), and that the intersection of the
+preimages of two affine opens in a pullback over an affine scheme is affine
+(`AlgebraicGeometry.isAffineOpen_preimage_inf_preimage_pullback`).
 -/
 
 @[expose] public section
@@ -137,5 +139,27 @@ lemma isPullback_of_opensRange_sup_eq_top {X Y S T : Scheme.{u}} {h : X ⟶ Y} {
     · exact H₁
 
 end IsPullbackLocal
+
+/-- If `A` is an affine open of `X` and `B` is an affine open of `Y`, then the intersection of
+their preimages in `X ×[T] Y` is an affine open, provided `T` is affine. -/
+lemma isAffineOpen_preimage_inf_preimage_pullback {X Y T : Scheme.{u}} [IsAffine T]
+    (f : X ⟶ T) (g : Y ⟶ T) {A : X.Opens} {B : Y.Opens} (hA : IsAffineOpen A)
+    (hB : IsAffineOpen B) :
+    IsAffineOpen (pullback.fst f g ⁻¹ᵁ A ⊓ pullback.snd f g ⁻¹ᵁ B) := by
+  haveI : IsAffine A.toScheme := hA
+  haveI : IsAffine B.toScheme := hB
+  obtain ⟨m, hm₁, hm₂⟩ : ∃ m : pullback (A.ι ≫ f) (B.ι ≫ g) ⟶ pullback f g,
+      IsOpenImmersion m ∧ Set.range m =
+        pullback.fst f g ⁻¹' (A : Set X) ∩ pullback.snd f g ⁻¹' (B : Set Y) := by
+    refine ⟨pullback.map (A.ι ≫ f) (B.ι ≫ g) f g A.ι B.ι (𝟙 _) (by simp) (by simp), ?_, ?_⟩
+    · exact MorphismProperty.pullbackMap (P := @IsOpenImmersion) inferInstance inferInstance
+        rfl rfl
+    · rw [Scheme.Pullback.range_map]
+      simp
+  haveI := hm₁
+  have hr : pullback.fst f g ⁻¹ᵁ A ⊓ pullback.snd f g ⁻¹ᵁ B = m.opensRange :=
+    TopologicalSpace.Opens.ext (by rw [Scheme.Hom.coe_opensRange, hm₂]; rfl)
+  rw [hr]
+  exact isAffineOpen_opensRange _
 
 end AlgebraicGeometry
