@@ -10217,13 +10217,56 @@ function used in the proof.
   Finally, $\overline{F(U)}\to\widetilde X$ is separated because $Y\to X$ is.
 \end{proof}
 
+\begin{lemma}[Zariski's Main Theorem as a factorization]
+  \label{lemma:nagata-zmt-open-immersion-affine-factorization}
+  \lean{AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isAffineHom_of_locallyQuasiFinite}
+
+  Let $f\colon X\to Y$ be separated, quasi-compact, locally quasi-finite and
+  locally of finite type.  Then $f$ factors as
+  \[
+    X\xrightarrow{\;j\;}W\xrightarrow{\;g\;}Y,\qquad g\circ j=f,
+  \]
+  with $j$ an open immersion and $g$ an affine morphism.
+\end{lemma}
+
+\begin{proof}
+  This is Grothendieck's form of Zariski's Main Theorem, available in Mathlib
+  as \texttt{Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean}.  Take $W$ to
+  be the relative normalization of $Y$ in $X$, $j$ the canonical morphism
+  $X\to W$ and $g$ the structure morphism $W\to Y$.  Zariski's Main Theorem
+  says that $j$ is an open immersion under exactly these hypotheses, and $g$ is
+  integral, hence affine, by construction of the relative normalization.
+\end{proof}
+
+\begin{lemma}[A quasi-finite scheme over a quasi-affine base is quasi-affine]
+  \label{lemma:nagata-zmt-quasi-affine-source}
+  \uses{lemma:nagata-zmt-open-immersion-affine-factorization}
+  \lean{AlgebraicGeometry.Scheme.IsQuasiAffine.of_locallyQuasiFinite}
+
+  Let $f\colon X\to Y$ be separated, quasi-compact, locally quasi-finite and
+  locally of finite type, and suppose $Y$ is quasi-affine.  Then $X$ is
+  quasi-affine.
+\end{lemma}
+
+\begin{proof}
+  Write $f=g\circ j$ with $j\colon X\to W$ an open immersion and $g\colon W\to
+  Y$ affine, using
+  \Cref{lemma:nagata-zmt-open-immersion-affine-factorization}.  An affine
+  morphism to a quasi-affine scheme has quasi-affine source, so $W$ is
+  quasi-affine.  Moreover $X$ is quasi-compact, since $f$ is quasi-compact and
+  $Y$ is quasi-compact.  So $X$ is a quasi-compact locally closed subscheme of
+  the quasi-affine scheme $W$, and such a subscheme is quasi-affine (Stacks Tag
+  0BCK).
+\end{proof}
+
 \begin{theorem}[Elimination of indeterminacy for quasi-dominations,
   {\cite[Thm.~2.4]{ConradNagata}}]
   \label{thm:nagata-conrad-elimination}
   \uses{def:nagata-conrad-quasi-domination,
     def:nagata-admissible-blowup,
     lemma:nagata-conrad-quasi-affine-general,
-    lemma:nagata-conrad-graph-closure-quasi-finite}
+    lemma:nagata-conrad-graph-closure-quasi-finite,
+    lemma:nagata-zmt-quasi-affine-source}
   \lean{}
 
   Let $S$ be qcqs and let $X$ and $Y$ be qcqs $S$-schemes with $Y\to S$
@@ -10250,8 +10293,8 @@ function used in the proof.
   \Cref{lemma:nagata-conrad-graph-closure-quasi-finite} and let
   $\overline{F(U)}\subseteq\widetilde X\times_XY$ be the scheme-theoretic image
   of $F=(\sigma,f)$.  That lemma makes
-  $\overline{F(U)}\to\widetilde X$ quasi-finite and separated, so Zariski's
-  Main Theorem makes it quasi-affine.
+  $\overline{F(U)}\to\widetilde X$ quasi-finite and separated, so
+  \Cref{lemma:nagata-zmt-quasi-affine-source} makes it quasi-affine.
 
   By \Cref{lemma:nagata-admissible-blowup-comp} we may base change along the
   $V$-admissible blow-up $q$ without leaving the statement of the theorem;
