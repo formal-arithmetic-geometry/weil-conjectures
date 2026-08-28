@@ -105,12 +105,6 @@ lemma ofFiniteType_of_isLocallyNoetherian [IsLocallyNoetherian X] (I : X.IdealSh
   have := IsLocallyNoetherian.component_noetherian (X := X) U
   IsNoetherian.noetherian (I.ideal U)
 
-/-- The zero ideal sheaf is of finite type. -/
-lemma ofFiniteType_bot : (⊥ : X.IdealSheafData).ofFiniteType := fun U _ ↦ by
-  have h : (⊥ : X.IdealSheafData).ideal U = ⊥ := congrFun ideal_bot U
-  rw [h]
-  exact Submodule.fg_bot
-
 /-- The unit ideal sheaf is of finite type. -/
 lemma ofFiniteType_top : (⊤ : X.IdealSheafData).ofFiniteType := fun U _ ↦ by
   have h : (⊤ : X.IdealSheafData).ideal U = ⊤ := rfl
