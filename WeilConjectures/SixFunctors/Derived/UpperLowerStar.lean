@@ -16,6 +16,13 @@ public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
 
 # Derived Upper Star and Lower Star
 
+# Main Results
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star.
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus` : total right derived of lower star on
+  bounded below derived category.
+
 -/
 
 @[expose] public section
