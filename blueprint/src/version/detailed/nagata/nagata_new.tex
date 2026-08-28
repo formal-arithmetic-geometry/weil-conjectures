@@ -9928,6 +9928,22 @@ function used in the proof.
 
 \section{Cases 1 and 2: quasi-affine targets with $U=V$}
 
+\begin{definition}[Quasi-affine morphism]
+  \label{def:nagata-quasi-affine-morphism}
+  \lean{AlgebraicGeometry.IsQuasiAffineHom}
+
+  A morphism of schemes $p\colon Y\to X$ is \emph{quasi-affine} if for every
+  affine open $X'\subseteq X$ the open subscheme $p^{-1}(X')\subseteq Y$ is a
+  quasi-affine scheme.
+\end{definition}
+
+This is the relative form of quasi-affineness, and it is the hypothesis Cases
+1--3 below actually use.  Over an affine base it says exactly that $Y$ is a
+quasi-affine scheme, so the reduction in Case 1 to an absolutely quasi-affine
+$Y$ loses nothing.  Conversely a quasi-compact morphism whose source is a
+quasi-affine scheme is quasi-affine, since a quasi-compact open subscheme of a
+quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
+
 \begin{lemma}[Quasi-affine target over an affine base,
   {\cite[Thm.~2.4, Case 1, pp.~13--15]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-affine-affine-base}
@@ -9993,7 +10009,8 @@ function used in the proof.
 \begin{lemma}[Quasi-affine target over a qcqs base, $U=V$,
   {\cite[Thm.~2.4, Case 2, pp.~15--16]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-affine-equal-opens}
-  \uses{lemma:nagata-conrad-quasi-affine-affine-base,
+  \uses{def:nagata-quasi-affine-morphism,
+    lemma:nagata-conrad-quasi-affine-affine-base,
     lemma:nagata-extend-finite-type-ideal,
     cor:nagata-blowup-product-common-refinement,
     def:nagata-conrad-quasi-domination}
@@ -10104,7 +10121,8 @@ function used in the proof.
 \begin{lemma}[Quasi-affine target, $U\subseteq V$,
   {\cite[Thm.~2.4, Case 3, pp.~16--17]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-affine-general}
-  \uses{lemma:nagata-conrad-disjointness-blowup,
+  \uses{def:nagata-quasi-affine-morphism,
+    lemma:nagata-conrad-disjointness-blowup,
     lemma:nagata-conrad-quasi-affine-equal-opens,
     lemma:nagata-qc-open-complement-ideal-exists,
     lemma:nagata-admissible-blowup-comp,
@@ -10379,6 +10397,26 @@ function used in the proof.
   0BCK).
 \end{proof}
 
+\begin{lemma}[A quasi-finite morphism is quasi-affine]
+  \label{lemma:nagata-quasi-affine-morphism-of-quasi-finite}
+  \uses{lemma:nagata-zmt-quasi-affine-source,
+    def:nagata-quasi-affine-morphism}
+  \lean{AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite}
+
+  Let $f\colon X\to Y$ be separated, quasi-compact, locally quasi-finite and
+  locally of finite type.  Then $f$ is quasi-affine in the sense of
+  \Cref{def:nagata-quasi-affine-morphism}.  No hypothesis on $Y$ is needed.
+\end{lemma}
+
+\begin{proof}
+  Let $Y'\subseteq Y$ be an affine open.  All four hypotheses are stable under
+  restricting the base to an open subscheme, so $f^{-1}(Y')\to Y'$ is again
+  separated, quasi-compact, locally quasi-finite and locally of finite type.
+  Its target $Y'$ is affine, hence quasi-affine, so
+  \Cref{lemma:nagata-zmt-quasi-affine-source} makes $f^{-1}(Y')$ a quasi-affine
+  scheme.
+\end{proof}
+
 \begin{theorem}[Elimination of indeterminacy for quasi-dominations,
   {\cite[Thm.~2.4]{ConradNagata}}]
   \label{thm:nagata-conrad-elimination}
@@ -10386,7 +10424,7 @@ function used in the proof.
     def:nagata-admissible-blowup,
     lemma:nagata-conrad-quasi-affine-general,
     lemma:nagata-conrad-graph-closure-quasi-finite,
-    lemma:nagata-zmt-quasi-affine-source}
+    lemma:nagata-quasi-affine-morphism-of-quasi-finite}
   \lean{}
 
   Let $S$ be qcqs and let $X$ and $Y$ be qcqs $S$-schemes with $Y\to S$
@@ -10414,7 +10452,10 @@ function used in the proof.
   $\overline{F(U)}\subseteq\widetilde X\times_XY$ be the scheme-theoretic image
   of $F=(\sigma,f)$.  That lemma makes
   $\overline{F(U)}\to\widetilde X$ quasi-finite and separated, so
-  \Cref{lemma:nagata-zmt-quasi-affine-source} makes it quasi-affine.
+  \Cref{lemma:nagata-quasi-affine-morphism-of-quasi-finite} makes it
+  quasi-affine as a morphism to $\widetilde X$.  (Note that $\widetilde X$ is a
+  blow-up of a qcqs scheme and is not itself quasi-affine, so the absolute form
+  of quasi-affineness is not available here.)
 
   By \Cref{lemma:nagata-admissible-blowup-comp} we may base change along the
   $V$-admissible blow-up $q$ without leaving the statement of the theorem;
