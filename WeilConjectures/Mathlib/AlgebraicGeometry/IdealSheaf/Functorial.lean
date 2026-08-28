@@ -60,6 +60,13 @@ lemma coe_support_comap (I : Y.IdealSheafData) (f : X ⟶ Y) :
     ((I.comap f).support : Set X) = f ⁻¹' (I.support : Set Y) := by
   rw [support_comap, TopologicalSpace.Closeds.coe_preimage]
 
+/-- An ideal sheaf has support disjoint from an open exactly when it restricts to the unit
+ideal sheaf on that open. -/
+lemma disjoint_support_iff_comap_ι_eq_top (I : X.IdealSheafData) (V : X.Opens) :
+    Disjoint (V : Set X) (I.support : Set X) ↔ I.comap V.ι = ⊤ := by
+  rw [← support_eq_bot_iff, TopologicalSpace.Closeds.ext_iff, coe_support_comap]
+  simp [Set.preimage_eq_empty_iff, Scheme.Opens.range_ι, disjoint_comm]
+
 end Support
 
 section Subscheme
