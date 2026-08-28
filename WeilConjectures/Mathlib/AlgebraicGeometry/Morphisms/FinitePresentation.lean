@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 
 /-!
@@ -20,6 +22,13 @@ finite presentation is again locally of finite presentation
 (`AlgebraicGeometry.locallyOfFinitePresentation_diagonal`). Since a diagonal is a monomorphism,
 it is automatically quasi-separated, so it is of finite presentation as soon as it is
 quasi-compact, that is, as soon as `f` is quasi-separated.
+
+# Finite-type ideal sheaves and closed immersions of finite presentation
+
+We also record the two directions of the correspondence between finite-type ideal sheaves and
+closed immersions locally of finite presentation:
+`AlgebraicGeometry.Scheme.IdealSheafData.FiniteType.locallyOfFinitePresentation_subschemeι`
+and `AlgebraicGeometry.Scheme.Hom.finiteType_ker`.
 -/
 
 @[expose] public section
@@ -64,5 +73,42 @@ theorem Scheme.Hom.diagonal_finitePresentation [LocallyOfFinitePresentation f]
   ⟨inferInstance, inferInstance, inferInstance⟩
 
 end Diagonal
+
+section IdealSheaf
+
+variable {X Y : Scheme.{u}}
+
+/-- The closed subscheme cut out by a finite-type ideal sheaf is locally of finite
+presentation over the ambient scheme. -/
+lemma Scheme.IdealSheafData.FiniteType.locallyOfFinitePresentation_subschemeι
+    {I : X.IdealSheafData} (hI : I.FiniteType) :
+    LocallyOfFinitePresentation I.subschemeι := by
+  refine IsZariskiLocalAtSource.of_openCover I.subschemeCover.openCover fun U : X.affineOpens ↦ ?_
+  change LocallyOfFinitePresentation (I.subschemeCover.f U ≫ I.subschemeι)
+  rw [(I.isPullback_subschemeCover_map U).w]
+  have : LocallyOfFinitePresentation
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U)))) := by
+    rw [LocallyOfFinitePresentation.SpecMap_iff]
+    exact RingHom.FinitePresentation.of_surjective _ Ideal.Quotient.mk_surjective
+      (by simpa only [CommRingCat.hom_ofHom, Ideal.mk_ker] using hI U)
+  infer_instance
+
+/-- The ideal sheaf cut out by a closed immersion locally of finite presentation is of
+finite type. -/
+lemma Scheme.Hom.finiteType_ker (f : X ⟶ Y) [IsClosedImmersion f]
+    [LocallyOfFinitePresentation f] : f.ker.FiniteType := by
+  intro U
+  rw [Scheme.Hom.ker_apply]
+  have hU : IsAffineOpen (f ⁻¹ᵁ U.1) := U.2.preimage f
+  have hfp : (f.app U.1).hom.FinitePresentation := by
+    rw [f.app_eq_appLE]
+    exact f.finitePresentation_appLE U.2 hU le_rfl
+  letI := (f.app U.1).hom.toAlgebra
+  haveI : Algebra.FinitePresentation Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1) := hfp
+  haveI : Algebra.FinitePresentation Γ(Y, U.1) Γ(Y, U.1) := Algebra.FinitePresentation.self _
+  exact Algebra.FinitePresentation.ker_fG_of_surjective
+    (Algebra.ofId Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1)) (f.app_surjective U.1 U.2)
+
+end IdealSheaf
 
 end AlgebraicGeometry
