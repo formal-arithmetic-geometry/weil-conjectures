@@ -44,7 +44,10 @@ No finiteness or quasi-compactness hypotheses are needed.
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform`:
   **Stacks Project Tag 080E** — the blow-up of `I.comap f` is isomorphic to the strict
   transform of `f`, compatibly with the projection to `Y` and with the structure
-  morphisms to `X`.
+  morphisms to `X`;
+- `AlgebraicGeometry.Scheme.IdealSheafData.exists_isClosedImmersion_blowup_comap`: for a
+  closed immersion `j`, the blow-up of the pulled-back centre is a closed subscheme of the
+  blow-up.
 
 ## Blueprint
 
@@ -127,6 +130,21 @@ theorem exists_blowup_comap_iso_strictTransform (I : X.IdealSheafData) (f : Y �
   · rw [asIso_hom, hToSource, ← Category.assoc, hfac, hψdef, pullback.lift_fst]
   · rw [asIso_hom, hMap, ← Category.assoc, hfac, hψdef, Category.assoc,
       pullback.lift_snd_assoc, hρ]
+
+/-- **Tag 080E for a closed immersion**: for a closed immersion `j : Z ⟶ X` and an ideal
+sheaf `I` on `X`, the blow-up of `Z` at the pulled-back centre `I.comap j` is a closed
+subscheme of the blow-up of `X` at `I`, compatibly with the two blow-up morphisms.
+
+This is the specialisation of `exists_blowup_comap_iso_strictTransform` to a closed
+immersion: the strict transform is a closed subscheme of `Z ×_X Bl_I(X)`, which in turn is
+a closed subscheme of `Bl_I(X)` because `j` is.
+(Blueprint: `lemma:nagata-strict-transform-ambient-closed`.) -/
+theorem exists_isClosedImmersion_blowup_comap {Z : Scheme.{u}} (I : X.IdealSheafData)
+    (j : Z ⟶ X) [IsClosedImmersion j] :
+    ∃ k : (I.comap j).blowup ⟶ I.blowup, IsClosedImmersion k ∧
+      k ≫ I.blowupMap = (I.comap j).blowupMap ≫ j := by
+  obtain ⟨e, -, hmap⟩ := I.exists_blowup_comap_iso_strictTransform j
+  exact ⟨e.hom ≫ strictTransformMap j I.blowupMap I.support.compl, inferInstance, hmap⟩
 
 end Scheme.IdealSheafData
 
