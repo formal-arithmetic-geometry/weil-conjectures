@@ -140,3 +140,5 @@ noncomputable def Etale.leftDerivedUpperStar :
   (Etale.upperStar A g).leftDerivedFunctor
 
 end DerivedUpperStar
+
+end AlgebraicGeometry
