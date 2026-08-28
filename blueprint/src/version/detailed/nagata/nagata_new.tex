@@ -8234,7 +8234,9 @@ coefficients and relations and all later stages inherit the recorded data.
 
 \begin{definition}[Finite-presentation closed-subscheme system]
   \label{def:nagata-closed-subscheme-fp-system}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.FGSub,
+    AlgebraicGeometry.Scheme.IdealSheafData.fgSubDiagram,
+    AlgebraicGeometry.Scheme.IdealSheafData.fgSubCone}
 
   Let $X=V(\mathcal I)\hookrightarrow Y$ be closed with $Y$ qcqs.  Let
   $A_{X/Y}$ be the directed set of finite type quasi-coherent subideals
@@ -8251,7 +8253,10 @@ coefficients and relations and all later stages inherit the recorded data.
   {\cite[\href{https://stacks.math.columbia.edu/tag/09ZP}{Tag 09ZP}]{stacks-project}}]
   \label{lemma:nagata-closed-subscheme-fp-system}
   \uses{def:nagata-closed-subscheme-fp-system}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isLimitFgSubCone,
+    AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_of_mem,
+    AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion_fgSubDiagram_map,
+    AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation_fgSub_subschemeι}
 
   Every $X_\alpha\hookrightarrow Y$ is of finite presentation, all
   transitions are closed immersions, and the canonical map
@@ -8259,12 +8264,31 @@ coefficients and relations and all later stages inherit the recorded data.
 \end{lemma}
 
 \begin{proof}
-  A quasi-coherent ideal on a qcqs scheme is the filtered union of its finite
-  type quasi-coherent subideals.  Finite type of $\mathcal I_\alpha$ is
-  equivalent to finite presentation of $X_\alpha\hookrightarrow Y$.  On an
-  affine open, the coordinate ring of the limit is the quotient by
-  $\varinjlim\mathcal I_\alpha=\mathcal I$, so the limit is $X$; these affine
-  identifications glue.
+  Finite type of $\mathcal I_\alpha$ is equivalent to finite presentation of
+  $X_\alpha\hookrightarrow Y$, and each transition $X_\beta\to X_\alpha$ is a
+  closed immersion because its composite with the closed immersion
+  $X_\alpha\hookrightarrow Y$ is the closed immersion
+  $X_\beta\hookrightarrow Y$.
+
+  For the limit, the content is that $\mathcal I$ is the union of its finite
+  type subideals.  We prove this by absolute Noetherian approximation of $Y$
+  rather than by the quasi-coherent extension theorem
+  (\href{https://stacks.math.columbia.edu/tag/01PF}{Tag 01PF}): write
+  $Y=\varprojlim_j Y_j$ with $Y_j$ Noetherian and affine transition maps.  An
+  affine open of $Y$ is the preimage of an affine open $V$ of some stage $Y_j$,
+  and a section of $\mathcal I$ over it comes from a section over $V$ at a
+  later stage; so we may assume it comes from $Y_j$.  The ideal
+  $\mathcal K_j\subseteq\mathcal O_{Y_j}$ cutting out the scheme-theoretic
+  image of $X$ in $Y_j$ is of finite type, because a closed immersion into a
+  Noetherian scheme is of finite presentation, and its inverse image
+  $\mathcal K_j\cdot\mathcal O_Y$ is a finite type subideal of $\mathcal I$
+  containing the given section.
+
+  Finally, if $T$ is any scheme with compatible maps $T\to X_\alpha$, then the
+  induced map $T\to Y$ has $\mathcal I_\alpha$ in its kernel ideal for every
+  $\alpha$, hence has $\mathcal I$ in its kernel ideal by the exhaustion just
+  proved; so it factors uniquely through $X=V(\mathcal I)$ by the universal
+  property of closed immersions.  This is exactly the limit property.
 \end{proof}
 
 \begin{definition}[Finite-presentation model system of a finite-type morphism]

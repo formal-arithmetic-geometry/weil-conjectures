@@ -39,6 +39,11 @@ preimage of an affine open of `Y` (`AlgebraicGeometry.Scheme.Hom.toImage_app_inj
 preimages are affine because `f.imageι` is a closed immersion, and they cover the image, so
 the kernel ideal vanishes on a cover by affine opens.
 
+## The subscheme cut out by an ideal sheaf inherits quasi-compactness and quasi-separatedness
+
+The inclusion `I.subschemeι` is a closed immersion, hence affine, so `V(I)` is quasi-compact
+(resp. quasi-separated) as soon as the ambient scheme is.
+
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
@@ -78,6 +83,13 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
   (isPullback_SpecMap_of_isPushout _ _ _ _
     (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
       (I.isPullback_subschemeCover_map U)
+
+instance compactSpace_subscheme [CompactSpace X] : CompactSpace I.subscheme :=
+  QuasiCompact.compactSpace_of_compactSpace I.subschemeι
+
+instance quasiSeparatedSpace_subscheme [QuasiSeparatedSpace X] :
+    QuasiSeparatedSpace I.subscheme :=
+  quasiSeparatedSpace_of_quasiSeparated I.subschemeι
 
 /-- The inclusions of the subschemes attached to equal ideal sheaves agree up to
 `eqToHom`. -/
