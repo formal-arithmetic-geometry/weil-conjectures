@@ -77,16 +77,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.comap_of_isOpe
     [IsOpenImmersion f] : (K.comap f).ofFiniteType := fun U' _ ↦
   (Scheme.IdealSheafData.fg_ideal_comap_iff f K U').mpr (hK _ le_top)
 
-/-- Finite-type ideal sheaves are stable under sums. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.sup
-    {X : Scheme.{u}} {I K : X.IdealSheafData}
-    (hI : I.ofFiniteType) (hK : K.ofFiniteType) : (I ⊔ K).ofFiniteType := by
-  intro U _
-  have h := congrFun (Scheme.IdealSheafData.ideal_sup (I := I) (J := K)) U
-  rw [Pi.sup_apply] at h
-  rw [h]
-  exact Submodule.FG.sup (hI U le_top) (hK U le_top)
-
 /-- Finite-type ideal sheaves are stable under products. -/
 lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
     {X : Scheme.{u}} {I K : X.IdealSheafData}
