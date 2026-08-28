@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 
@@ -25,10 +24,12 @@ quasi-compact, that is, as soon as `f` is quasi-separated.
 
 # Finite-type ideal sheaves and closed immersions of finite presentation
 
-We also record the two directions of the correspondence between finite-type ideal sheaves and
+We also record the two directions of the correspondence between ideal sheaves whose ideal of
+sections on every affine open is finitely generated (in the terminology of
+`AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType`, the finite-type ideal sheaves) and
 closed immersions locally of finite presentation:
-`AlgebraicGeometry.Scheme.IdealSheafData.FiniteType.locallyOfFinitePresentation_subschemeι`
-and `AlgebraicGeometry.Scheme.Hom.finiteType_ker`.
+`AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation_subschemeι` and
+`AlgebraicGeometry.Scheme.Hom.fg_ideal_ker`.
 -/
 
 @[expose] public section
@@ -80,8 +81,8 @@ variable {X Y : Scheme.{u}}
 
 /-- The closed subscheme cut out by a finite-type ideal sheaf is locally of finite
 presentation over the ambient scheme. -/
-lemma Scheme.IdealSheafData.FiniteType.locallyOfFinitePresentation_subschemeι
-    {I : X.IdealSheafData} (hI : I.FiniteType) :
+lemma Scheme.IdealSheafData.locallyOfFinitePresentation_subschemeι {I : X.IdealSheafData}
+    (hI : ∀ U : X.affineOpens, (I.ideal U).FG) :
     LocallyOfFinitePresentation I.subschemeι := by
   refine IsZariskiLocalAtSource.of_openCover I.subschemeCover.openCover fun U : X.affineOpens ↦ ?_
   change LocallyOfFinitePresentation (I.subschemeCover.f U ≫ I.subschemeι)
@@ -95,9 +96,8 @@ lemma Scheme.IdealSheafData.FiniteType.locallyOfFinitePresentation_subschemeι
 
 /-- The ideal sheaf cut out by a closed immersion locally of finite presentation is of
 finite type. -/
-lemma Scheme.Hom.finiteType_ker (f : X ⟶ Y) [IsClosedImmersion f]
-    [LocallyOfFinitePresentation f] : f.ker.FiniteType := by
-  intro U
+lemma Scheme.Hom.fg_ideal_ker (f : X ⟶ Y) [IsClosedImmersion f]
+    [LocallyOfFinitePresentation f] (U : Y.affineOpens) : (f.ker.ideal U).FG := by
   rw [Scheme.Hom.ker_apply]
   have hU : IsAffineOpen (f ⁻¹ᵁ U.1) := U.2.preimage f
   have hfp : (f.app U.1).hom.FinitePresentation := by

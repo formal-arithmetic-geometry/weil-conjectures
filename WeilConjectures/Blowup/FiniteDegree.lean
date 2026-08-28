@@ -1279,13 +1279,6 @@ private lemma comap_finset_sup {Y : Scheme.{u}} {α : Type*} (T : Finset α)
   | insert a T' ha ih =>
     rw [Finset.sup_insert, Finset.sup_insert, Scheme.IdealSheafData.comap_sup, ih]
 
-/-- The bottom ideal sheaf is of finite type. -/
-private lemma finiteType_bot : (⊥ : X.IdealSheafData).ofFiniteType := fun U _ ↦ by
-  have h : (⊥ : X.IdealSheafData).ideal U = ⊥ :=
-    congrFun Scheme.IdealSheafData.ideal_bot U
-  rw [h]
-  exact Submodule.fg_bot
-
 /-- **Membership of a numerator in the maximal candidate** (pushforward part): if all
 chart fractions of a section `m ∈ I(V)ᵈ` lie in the chart models of `J`, then `m` is a
 section of the pushforward of `I_Eᵈ · J`. -/
@@ -1398,7 +1391,7 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
   refine ⟨t.attach.sup fun V ↦ LV V.1 V.2,
     Nat.lt_of_lt_of_le Nat.zero_lt_one (Nat.le_add_right 1 _), ?_, ?_, ?_⟩
   · -- finite type: finite supremum of finite-type subsheaves
-    exact Finset.sup_induction finiteType_bot
+    exact Finset.sup_induction Scheme.IdealSheafData.ofFiniteType_bot
       (fun _ ha _ hb ↦ Scheme.IdealSheafData.ofFiniteType.sup ha hb)
       fun V _ ↦ hLVft V.1 V.2
   · -- contained in `I ^ D`
