@@ -166,12 +166,14 @@ charts through the localization `B_a → B_{a·b}` of `HomogeneousLocalization.a
 open HomogeneousLocalization Polynomial
 
 /-- **Clearing denominators in a localization**: if the image of `x` under the
-localization map away from `t` lies in the extension of an ideal `K`, then some power
-of `t` multiplies `x` into `K`. -/
+localization map away from `t` lies in the extension of an ideal `K`, then every large
+enough power of `t` multiplies `x` into `K`. The "every large enough" form is stated
+here, over the variable ring `R`, so that the use site on the blow-up charts does not
+have to `rw` with `pow_sub_mul_pow` inside a `HomogeneousLocalization`. -/
 lemma _root_.Ideal.exists_pow_mul_mem_of_algebraMap_mem_map {R S : Type u} [CommRing R]
     [CommRing S] [Algebra R S] (t : R) [IsLocalization.Away t S] {K : Ideal R} {x : R}
     (hx : algebraMap R S x ∈ K.map (algebraMap R S)) :
-    ∃ k : ℕ, t ^ k * x ∈ K := by
+    ∃ k : ℕ, ∀ k' ≥ k, t ^ k' * x ∈ K := by
   obtain ⟨⟨j, u⟩, hju⟩ :=
     (IsLocalization.mem_map_algebraMap_iff (Submonoid.powers t) S).mp hx
   obtain ⟨k₁, hk₁⟩ := u.2
@@ -181,21 +183,42 @@ lemma _root_.Ideal.exists_pow_mul_mem_of_algebraMap_mem_map {R S : Type u} [Comm
     exact hju
   obtain ⟨⟨-, k₂, rfl⟩, hk₂⟩ :=
     (IsLocalization.map_eq_zero_iff (Submonoid.powers t) S _).mp h0
-  refine ⟨k₂ + k₁, ?_⟩
-  have h1 : t ^ (k₂ + k₁) * x = t ^ k₂ * (j : R) := by
-    have h2 : t ^ k₂ * (x * t ^ k₁ - (j : R)) = 0 := hk₂
-    rw [pow_add]
-    linear_combination h2
-  rw [h1]
-  exact K.mul_mem_left _ j.2
+  have hk : t ^ (k₂ + k₁) * x ∈ K := by
+    have h1 : t ^ (k₂ + k₁) * x = t ^ k₂ * (j : R) := by
+      have h2 : t ^ k₂ * (x * t ^ k₁ - (j : R)) = 0 := hk₂
+      rw [pow_add]
+      linear_combination h2
+    rw [h1]
+    exact K.mul_mem_left _ j.2
+  refine ⟨k₂ + k₁, fun k' hk' ↦ ?_⟩
+  rw [← pow_sub_mul_pow t hk', mul_assoc]
+  exact Ideal.mul_mem_left _ _ hk
 
-/-- Membership in the image of an ideal under an isomorphism of commutative rings. -/
-lemma _root_.CommRingCat.hom_mem_ideal_map_iso_iff {R S : CommRingCat.{u}} (e : R ≅ S)
-    (P : Ideal R) (x : R) : e.hom.hom x ∈ P.map e.hom.hom ↔ x ∈ P := by
-  conv_rhs =>
-    rw [← Ideal.comap_map_of_bijective _ (ConcreteCategory.bijective_of_isIso e.hom)
-      (I := P)]
-  exact Iff.rfl
+/-- **Transport of a membership across two agreeing ideal extensions**: if `Ja` and `Jb`
+extend to the same ideal along `f` and `g`, then anything of the shape `f x · z` with
+`x ∈ Ja` lies in the extension of `Jb`. Stated over variable rings, so that the two
+`rw`s it packages never have to `kabstract` the large chart rings at the use site. -/
+private lemma mem_map_of_eq_mul_of_map_eq {R₁ R₂ R₃ : Type u} [CommRing R₁] [CommRing R₂]
+    [CommRing R₃] {f : R₁ →+* R₃} {g : R₂ →+* R₃} {Ja : Ideal R₁} {Jb : Ideal R₂}
+    (hab : Ja.map f = Jb.map g) {x : R₁} (hx : x ∈ Ja) {y z : R₃} (hy : y = f x * z) :
+    y ∈ Jb.map g := by
+  rw [hy, ← hab]
+  exact Ideal.mul_mem_right _ _ (Ideal.mem_map_of_mem _ hx)
+
+/-- Membership in the image of an ideal under an isomorphism of commutative rings, in
+the form that directly reads off a membership in the source: everything is stated over
+the variables `R`, `S`, so instantiating this at the large chart rings of the blow-up
+costs nothing beyond the instantiation itself. -/
+lemma _root_.CommRingCat.mem_ideal_map_iso_iff {R S : CommRingCat.{u}} (e : R ≅ S)
+    (P : Ideal R) (y : S) : y ∈ P.map e.hom.hom ↔ e.inv.hom y ∈ P := by
+  constructor
+  · intro hy
+    have h := Ideal.mem_map_of_mem e.inv.hom hy
+    rwa [Ideal.map_map, ← CommRingCat.hom_comp, e.hom_inv_id, CommRingCat.hom_id,
+      Ideal.map_id] at h
+  · intro hy
+    have h := Ideal.mem_map_of_mem e.hom.hom hy
+    rwa [← CommRingCat.comp_apply, e.inv_hom_id, CommRingCat.id_apply] at h
 
 /-- The degree-one Rees elements are additive in the section. -/
 lemma _root_.AlgebraicGeometry.reesX_add {A : Type u} [CommRing A] (I : Ideal A)
@@ -274,14 +297,14 @@ lemma _root_.AlgebraicGeometry.AffineBlowup.chartFrac_mul_awayAlgebraMap_pow
     AffineBlowup.chartFrac I₀ ha hg *
         AffineBlowup.awayAlgebraMap I₀ (reesX I₀ a ha) a ^ n =
       AffineBlowup.awayAlgebraMap I₀ (reesX I₀ a ha) g := by
-  rw [HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_mul,
+  simp only [HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_mul,
     HomogeneousLocalization.val_pow, AffineBlowup.val_awayAlgebraMap,
-    AffineBlowup.val_awayAlgebraMap, AffineBlowup.chartFrac,
-    HomogeneousLocalization.Away.val_mk, Localization.mk_pow, Localization.mk_mul,
-    Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+    AffineBlowup.chartFrac, HomogeneousLocalization.Away.val_mk, Localization.mk_pow,
+    Localization.mk_mul, Localization.mk_eq_mk_iff, Localization.r_iff_exists]
   refine ⟨1, ?_⟩
   apply Subtype.ext
-  push_cast [coe_reesMonomial, coe_reesGradingZero_apply, coe_reesX]
+  simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, OneMemClass.coe_one,
+    coe_reesMonomial, coe_reesGradingZero_apply, coe_reesX]
   rw [Polynomial.monomial_pow, one_pow, ← Polynomial.C_pow]
   simp only [Polynomial.monomial_mul_C, one_mul, mul_one]
   rw [mul_comm g]
@@ -295,13 +318,14 @@ lemma _root_.AlgebraicGeometry.AffineBlowup.isLocalizationElem_mul_awayAlgebraMa
         (reesX_mem I₀ b hb) *
         AffineBlowup.awayAlgebraMap I₀ (reesX I₀ a ha) a =
       AffineBlowup.awayAlgebraMap I₀ (reesX I₀ a ha) b := by
-  rw [HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_mul,
-    AffineBlowup.val_awayAlgebraMap, AffineBlowup.val_awayAlgebraMap,
-    HomogeneousLocalization.Away.isLocalizationElem, HomogeneousLocalization.Away.val_mk,
-    Localization.mk_mul, Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+  simp only [HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_mul,
+    AffineBlowup.val_awayAlgebraMap, HomogeneousLocalization.Away.isLocalizationElem,
+    HomogeneousLocalization.Away.val_mk, Localization.mk_mul, Localization.mk_eq_mk_iff,
+    Localization.r_iff_exists]
   refine ⟨1, ?_⟩
   apply Subtype.ext
-  push_cast [coe_reesX, coe_reesGradingZero_apply]
+  simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, OneMemClass.coe_one,
+    coe_reesX, coe_reesGradingZero_apply]
   simp only [pow_one, one_mul, mul_one, Polynomial.monomial_mul_C]
   rw [mul_comm b]
 
@@ -322,17 +346,15 @@ lemma _root_.AlgebraicGeometry.AffineBlowup.awayMap_chartFrac
           (rfl : reesX I₀ a ha * reesX I₀ b hb = reesX I₀ a ha * reesX I₀ b hb)
           (HomogeneousLocalization.Away.isLocalizationElem (reesX_mem I₀ a ha)
             (reesX_mem I₀ b hb)) ^ n := by
-  simp only [AffineBlowup.chartFrac, AffineBlowup.chartFrac,
-    HomogeneousLocalization.Away.isLocalizationElem, HomogeneousLocalization.awayMap_mk,
-    HomogeneousLocalization.awayMap_mk, HomogeneousLocalization.awayMap_mk,
-    HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_mul,
-    HomogeneousLocalization.val_pow, HomogeneousLocalization.Away.val_mk,
-    HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.val_mk,
-    Localization.mk_pow, Localization.mk_mul, Localization.mk_eq_mk_iff,
-    Localization.r_iff_exists]
+  simp only [AffineBlowup.chartFrac, HomogeneousLocalization.Away.isLocalizationElem,
+    HomogeneousLocalization.awayMap_mk, HomogeneousLocalization.ext_iff_val,
+    HomogeneousLocalization.val_mul, HomogeneousLocalization.val_pow,
+    HomogeneousLocalization.Away.val_mk, Localization.mk_pow, Localization.mk_mul,
+    Localization.mk_eq_mk_iff, Localization.r_iff_exists]
   refine ⟨1, ?_⟩
   apply Subtype.ext
-  push_cast [coe_reesMonomial, coe_reesX]
+  simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, OneMemClass.coe_one,
+    coe_reesMonomial, coe_reesX]
   ring
 
 end FiniteDegreeAlgebra
@@ -565,16 +587,20 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.preimage_subset_iUnion_rang
     (I.blowupMap ⁻¹ᵁ V.1 : Set I.blowup) ⊆
       ⋃ a : s, Set.range (I.blowupChart V (hs ▸ Ideal.subset_span a.2)) := by
   intro x hx
-  have hx2 : x ∈ I.blowupMap ⁻¹ᵁ V.1 := hx
-  rw [I.blowupMap_preimage V] at hx2
+  -- Every step transports a membership along an equality of opens (`.le`/`.ge`) and
+  -- destructs it in a *separate* `obtain`: `obtain ⟨..⟩ := <term>` elaborates the term
+  -- against an unknown expected type, which over the chart types costs an order of
+  -- magnitude more than the same proof written in two steps.
+  have hx2 := (I.blowupMap_preimage V).le hx
   obtain ⟨y, rfl⟩ := hx2
-  have hy : y ∈ (⊤ : (AffineBlowup (I.ideal V)).Opens) := trivial
-  rw [← AffineBlowup.iSup_basicOpen_reesX_eq_top_of_span hs] at hy
-  obtain ⟨a, hy⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
-  rw [← AffineBlowup.opensRange_chart (I.ideal V)
+  have hy := (AffineBlowup.iSup_basicOpen_reesX_eq_top_of_span hs).ge
+    (show y ∈ (⊤ : (AffineBlowup (I.ideal V)).Opens) from trivial)
+  have hy2 := TopologicalSpace.Opens.mem_iSup.mp hy
+  obtain ⟨a, hy⟩ := hy2
+  have hy3 := (AffineBlowup.opensRange_chart (I.ideal V)
     (reesX (I.ideal V) a.1 (hs ▸ Ideal.subset_span a.2))
-    (reesX_mem (I.ideal V) a.1 (hs ▸ Ideal.subset_span a.2))] at hy
-  obtain ⟨z, rfl⟩ := hy
+    (reesX_mem (I.ideal V) a.1 (hs ▸ Ideal.subset_span a.2))).ge hy
+  obtain ⟨z, rfl⟩ := hy3
   exact Set.mem_iUnion.mpr ⟨a, z, (Scheme.Hom.comp_apply _ _ _).symm⟩
 
 /-- The `Opens`-level form of `preimage_subset_iUnion_range_blowupChart`. -/
@@ -584,8 +610,8 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.preimage_le_iSup_opensRange
     I.blowupMap ⁻¹ᵁ V.1 ≤
       ⨆ a : s, (I.blowupChart V (hs ▸ Ideal.subset_span a.2)).opensRange := by
   intro x hx
-  obtain ⟨a, ha⟩ := Set.mem_iUnion.mp
-    (I.preimage_subset_iUnion_range_blowupChart V hs hx)
+  have hx2 := Set.mem_iUnion.mp (I.preimage_subset_iUnion_range_blowupChart V hs hx)
+  obtain ⟨a, ha⟩ := hx2
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨a, ha⟩
 
 -- The chart rings of the blow-up are large `HomogeneousLocalization` types; unifying
@@ -657,8 +683,7 @@ lemma AffineBlowup.compactSpace_of_fg {A : Type u} [CommRing A] {I : Ideal A}
   change IsCompact (Set.univ : Set (Proj (reesGrading I)))
   have huniv : (Set.univ : Set (Proj (reesGrading I))) =
       ⋃ a : s, (Proj.basicOpen (reesGrading I) (reesX I a.1 (hmem a.1 a.2)) : Set _) := by
-    rw [← TopologicalSpace.Opens.coe_top, ← hcov]
-    simp
+    rw [← TopologicalSpace.Opens.coe_top, ← hcov, TopologicalSpace.Opens.coe_iSup]
   rw [huniv]
   refine isCompact_iUnion fun a ↦ ?_
   rw [← AffineBlowup.opensRange_chart I (reesX I a.1 (hmem a.1 a.2))
@@ -695,10 +720,12 @@ variable {A : Type u} [CommRing A] (I₀ : Ideal A)
 lemma AffineBlowup.chartFrac_surjective {a : A} (ha : a ∈ I₀)
     (x : HomogeneousLocalization.Away (reesGrading I₀) (reesX I₀ a ha)) :
     ∃ (n : ℕ) (g : A) (hg : g ∈ I₀ ^ n), AffineBlowup.chartFrac I₀ ha hg = x := by
-  obtain ⟨n, s, hsmem, rfl⟩ :=
-    HomogeneousLocalization.Away.mk_surjective (reesGrading I₀) (reesX_mem I₀ a ha) x
+  have hx := HomogeneousLocalization.Away.mk_surjective (reesGrading I₀)
+    (reesX_mem I₀ a ha) x
+  obtain ⟨n, s, hsmem, rfl⟩ := hx
   have hs' : s ∈ reesGrading I₀ n := by simpa using hsmem
-  obtain ⟨g, hg, hrepr⟩ := (mem_reesGrading_iff_exists I₀).mp hs'
+  have hs'' := (mem_reesGrading_iff_exists I₀).mp hs'
+  obtain ⟨g, hg, hrepr⟩ := hs''
   subst hrepr
   exact ⟨n, g, hg, rfl⟩
 
@@ -716,15 +743,15 @@ lemma AffineBlowup.chartFrac_pow_mul {a b : A} (ha : a ∈ I₀) (hb : b ∈ I�
       HomogeneousLocalization.Away.isLocalizationElem (reesX_mem I₀ b hb)
           (reesX_mem I₀ a ha) ^ k *
         AffineBlowup.chartFrac I₀ hb hx := by
-  rw [AffineBlowup.chartFrac, AffineBlowup.chartFrac, HomogeneousLocalization.ext_iff_val,
+  simp only [AffineBlowup.chartFrac, HomogeneousLocalization.ext_iff_val,
     HomogeneousLocalization.val_mul, HomogeneousLocalization.val_pow,
-    HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.isLocalizationElem,
-    HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.val_mk,
+    HomogeneousLocalization.Away.isLocalizationElem, HomogeneousLocalization.Away.val_mk,
     Localization.mk_pow, Localization.mk_mul, Localization.mk_eq_mk_iff,
     Localization.r_iff_exists]
   refine ⟨1, ?_⟩
   apply Subtype.ext
-  push_cast [coe_reesMonomial, coe_reesX]
+  simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, OneMemClass.coe_one,
+    coe_reesMonomial, coe_reesX]
   simp only [Polynomial.monomial_pow, Polynomial.monomial_mul_monomial, one_mul, pow_one]
   exact monomial_congr (by ring) (by ring)
 
@@ -732,12 +759,13 @@ lemma AffineBlowup.chartFrac_pow_mul {a b : A} (ha : a ∈ I₀) (hb : b ∈ I�
 lemma AffineBlowup.chartFrac_self_pow_mul {a : A} (ha : a ∈ I₀)
     {k n : ℕ} {x : A} (hx : x ∈ I₀ ^ n) (hax : a ^ k * x ∈ I₀ ^ (k + n)) :
     AffineBlowup.chartFrac I₀ ha hax = AffineBlowup.chartFrac I₀ ha hx := by
-  rw [AffineBlowup.chartFrac, AffineBlowup.chartFrac, HomogeneousLocalization.ext_iff_val,
-    HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.val_mk,
-    Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+  simp only [AffineBlowup.chartFrac, HomogeneousLocalization.ext_iff_val,
+    HomogeneousLocalization.Away.val_mk, Localization.mk_eq_mk_iff,
+    Localization.r_iff_exists]
   refine ⟨1, ?_⟩
   apply Subtype.ext
-  push_cast [coe_reesMonomial, coe_reesX]
+  simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, OneMemClass.coe_one,
+    coe_reesMonomial, coe_reesX]
   simp only [Polynomial.monomial_pow, Polynomial.monomial_mul_monomial, one_mul]
   exact monomial_congr (by ring) (by ring)
 
@@ -763,29 +791,25 @@ lemma AffineBlowup.exists_isLocalizationElem_pow_mul_chartFrac_mem
     (rfl : reesX I₀ b hb * reesX I₀ a ha = reesX I₀ b hb * reesX I₀ a ha)
   let t := HomogeneousLocalization.Away.isLocalizationElem
     (reesX_mem I₀ b hb) (reesX_mem I₀ a ha)
-  -- the image of `g/bᵉ` lies in the extension of `Jb` to the overlap
-  have hmem : ρb (AffineBlowup.chartFrac I₀ hb hg) ∈ Jb.map ρb := by
-    rw [AffineBlowup.awayMap_chartFrac I₀ hb ha hg, ← hab]
-    exact Ideal.mul_mem_right _ _ (Ideal.mem_map_of_mem _ hμ)
+  -- the image of `g/bᵉ` lies in the extension of `Jb` to the overlap; the type is left
+  -- to be read off from `mem_map_of_eq_mul_of_map_eq`, an ascription would re-elaborate
+  -- it against the chart types
+  have hmem := mem_map_of_eq_mul_of_map_eq hab hμ
+    (AffineBlowup.awayMap_chartFrac I₀ hb ha hg)
   -- the overlap ring is the localization of the `b`-chart at `a/b`
   let : Algebra
       (HomogeneousLocalization.Away (reesGrading I₀) (reesX I₀ b hb))
       (HomogeneousLocalization.Away (reesGrading I₀)
         (reesX I₀ b hb * reesX I₀ a ha)) := ρb.toAlgebra
-  have hloc : IsLocalization.Away t (HomogeneousLocalization.Away (reesGrading I₀)
-      (reesX I₀ b hb * reesX I₀ a ha)) :=
-    HomogeneousLocalization.Away.isLocalization_mul (reesX_mem I₀ b hb)
-      (reesX_mem I₀ a ha) rfl one_ne_zero
-  have halg : algebraMap
-      (HomogeneousLocalization.Away (reesGrading I₀) (reesX I₀ b hb))
-      (HomogeneousLocalization.Away (reesGrading I₀)
-        (reesX I₀ b hb * reesX I₀ a ha)) = ρb :=
-    RingHom.algebraMap_toAlgebra ρb
-  obtain ⟨N, hN⟩ := Ideal.exists_pow_mul_mem_of_algebraMap_mem_map t
-    (K := Jb) (x := AffineBlowup.chartFrac I₀ hb hg) (by rw [halg]; exact hmem)
-  refine ⟨N, fun N' hN' ↦ ?_⟩
-  rw [← pow_sub_mul_pow t hN', mul_assoc]
-  exact Ideal.mul_mem_left _ _ hN
+  have hloc := HomogeneousLocalization.Away.isLocalization_mul (reesX_mem I₀ b hb)
+    (reesX_mem I₀ a ha) (rfl : reesX I₀ b hb * reesX I₀ a ha
+      = reesX I₀ b hb * reesX I₀ a ha) one_ne_zero
+  -- `algebraMap` for the instance just introduced is `ρb` by definition, so `hmem` is
+  -- already the hypothesis of the denominator-clearing lemma
+  have hclear := Ideal.exists_pow_mul_mem_of_algebraMap_mem_map t
+    (K := Jb) (x := AffineBlowup.chartFrac I₀ hb hg) hmem
+  obtain ⟨N, hN⟩ := hclear
+  exact ⟨N, hN⟩
 
 end LocalAlgebra
 
@@ -843,6 +867,15 @@ private lemma mem_of_ringHom_eq {R S : CommRingCat.{u}} {f g : R ⟶ S} (h : f =
   rw [h]
   exact hx
 
+/-- Congruence of the transported ideal of sections of a pullback along an equality of
+affine probes. Keeping the probe ring `S` a variable makes this cheaper to instantiate
+than the `congrArg` at an explicitly written lambda over the chart probes. -/
+private lemma map_ideal_comap_congr {Y : Scheme.{u}} (K : Y.IdealSheafData)
+    {S : CommRingCat.{u}} {q q' : Spec S ⟶ Y} (h : q = q') :
+    ((K.comap q).ideal ⟨⊤, isAffineOpen_top _⟩).map (Scheme.ΓSpecIso S).hom.hom =
+      ((K.comap q').ideal ⟨⊤, isAffineOpen_top _⟩).map (Scheme.ΓSpecIso S).hom.hom := by
+  rw [h]
+
 end Combinators
 
 section ChartIdeal
@@ -868,14 +901,9 @@ lemma Scheme.IdealSheafData.mem_chartIdeal_iff (I : X.IdealSheafData)
     (ha : a ∈ I.ideal V)
     {z : HomogeneousLocalization.Away (reesGrading (I.ideal V)) (reesX (I.ideal V) a ha)} :
     z ∈ I.chartIdeal J V ha ↔ (Scheme.ΓSpecIso _).inv.hom z ∈
-      (J.comap (I.blowupChart V ha)).ideal ⟨⊤, isAffineOpen_top _⟩ := by
-  have hx : (Scheme.ΓSpecIso (CommRingCat.of (HomogeneousLocalization.Away
-      (reesGrading (I.ideal V)) (reesX (I.ideal V) a ha)))).hom.hom
-      ((Scheme.ΓSpecIso (CommRingCat.of (HomogeneousLocalization.Away
-        (reesGrading (I.ideal V)) (reesX (I.ideal V) a ha)))).inv.hom z) = z := by
-    rw [← CommRingCat.comp_apply, Iso.inv_hom_id, CommRingCat.id_apply]
-  conv_lhs => rw [← hx]
-  exact CommRingCat.hom_mem_ideal_map_iso_iff _ _ _
+      (J.comap (I.blowupChart V ha)).ideal ⟨⊤, isAffineOpen_top _⟩ :=
+  CommRingCat.mem_ideal_map_iso_iff (Scheme.ΓSpecIso _)
+    ((J.comap (I.blowupChart V ha)).ideal ⟨⊤, isAffineOpen_top _⟩) z
 
 /-- The chart model of a finite-type ideal sheaf is finitely generated. -/
 lemma Scheme.IdealSheafData.chartIdeal_fg (I : X.IdealSheafData)
@@ -907,12 +935,10 @@ lemma Scheme.IdealSheafData.chartIdeal_map_awayMap (I : X.IdealSheafData)
       (rfl : reesX (I.ideal V) b hb * reesX (I.ideal V) a ha
         = reesX (I.ideal V) b hb * reesX (I.ideal V) a ha)))
   -- the two overlap probes agree
-  have hmid := congrArg
-    (fun q : Spec (CommRingCat.of (HomogeneousLocalization.Away (reesGrading (I.ideal V))
-        (reesX (I.ideal V) b hb * reesX (I.ideal V) a ha))) ⟶ I.blowup ↦
-      ((J.comap q).ideal ⟨⊤, isAffineOpen_top _⟩).map (Scheme.ΓSpecIso _).hom.hom)
-    (I.specMap_awayMap_blowupChart V hb ha)
-  exact (h1.symm.trans (hmid.symm.trans h2) :)
+  have hmid := map_ideal_comap_congr J (I.specMap_awayMap_blowupChart V hb ha)
+  have h3 := hmid.symm.trans h2
+  have h4 := h1.symm.trans h3
+  exact h4
 
 end ChartIdeal
 
@@ -968,21 +994,22 @@ lemma Scheme.IdealSheafData.mem_ideal_map_of_probes (K : Y.IdealSheafData)
   · change pullback.snd (c i) K.subschemeι q ∈ (K.subschemeι ≫ g) ⁻¹ᵁ V.1
     rw [hq]
     exact hp
-  -- both restrictions are computed by pulling back to the probe
-  rw [map_zero]
+  -- both restrictions are computed by pulling back to the probe; every rewriting step
+  -- below is a `simp only`, which is markedly cheaper than `rw` on these terms
+  simp only [map_zero]
   apply ((pullback.snd (c i) K.subschemeι).appIso
     (pullback.snd (c i) K.subschemeι ⁻¹ᵁ ((K.subschemeι ≫ g) ⁻¹ᵁ V.1))
       ).commRingCatIsoToRingEquiv.injective
-  rw [map_zero, ← RingEquiv.coe_toRingHom, Iso.commRingCatIsoToRingEquiv_toRingHom,
-    Scheme.Hom.appIso_hom']
-  simp only [homOfLE_leOfHom, Scheme.Hom.app_eq_appLE, ← RingHom.comp_apply,
-    ← CommRingCat.hom_comp, Scheme.Hom.appLE_map, Scheme.Hom.appLE_comp_appLE]
+  simp only [map_zero, ← RingEquiv.coe_toRingHom,
+    Iso.commRingCatIsoToRingEquiv_toRingHom, Scheme.Hom.appIso_hom', homOfLE_leOfHom,
+    Scheme.Hom.app_eq_appLE, ← RingHom.comp_apply, ← CommRingCat.hom_comp,
+    Scheme.Hom.appLE_map, Scheme.Hom.appLE_comp_appLE]
   -- exchange the composite for the probe composite and split off the probe map
-  rw [Scheme.Hom.appLE_eq_of_eq hcomp]
-  rw [← Scheme.Hom.appLE_comp_appLE (pullback.fst (c i) K.subschemeι) (c i ≫ g)
+  simp only [Scheme.Hom.appLE_eq_of_eq hcomp]
+  simp only [← Scheme.Hom.appLE_comp_appLE (pullback.fst (c i) K.subschemeι) (c i ≫ g)
     V.1 ⊤ (pullback.snd (c i) K.subschemeι ⁻¹ᵁ ((K.subschemeι ≫ g) ⁻¹ᵁ V.1))
     (hle i) le_top]
-  rw [CommRingCat.comp_apply]
+  simp only [CommRingCat.comp_apply]
   -- the probe image of `x` is killed by the closed immersion from the subscheme part
   have h0 : ((pullback.fst (c i) K.subschemeι).app ⊤).hom
       (((c i ≫ g).appLE V.1 ⊤ (hle i)).hom x) = 0 := by
@@ -994,7 +1021,7 @@ lemma Scheme.IdealSheafData.mem_ideal_map_of_probes (K : Y.IdealSheafData)
       (pullback.snd (c i) K.subschemeι ⁻¹ᵁ ((K.subschemeι ≫ g) ⁻¹ᵁ V.1)) le_top =
       (pullback.fst (c i) K.subschemeι).app ⊤ ≫
         (Limits.pullback (c i) K.subschemeι).presheaf.map (homOfLE le_top).op := rfl
-  rw [hexp, CommRingCat.comp_apply, h0, map_zero]
+  simp only [hexp, CommRingCat.comp_apply, h0, map_zero]
 
 end MapMembership
 
@@ -1101,18 +1128,18 @@ lemma AffineBlowup.exists_uniform_numerator_finset
           AffineBlowup.chartFrac I₀ (hs ▸ Ideal.subset_span hbs') hm ∈
             Jc b' (hs ▸ Ideal.subset_span hbs') := by
     intro b hbs μ hμG
-    obtain ⟨e, g, hg, rfl⟩ := AffineBlowup.chartFrac_surjective I₀
-      (hs ▸ Ideal.subset_span hbs) μ
+    have hμ := AffineBlowup.chartFrac_surjective I₀ (hs ▸ Ideal.subset_span hbs) μ
+    obtain ⟨e, g, hg, rfl⟩ := hμ
     exact AffineBlowup.exists_uniform_numerator I₀ s hs Jc hJc hbs hg
       ((hG b (hs ▸ Ideal.subset_span hbs)) ▸ Ideal.subset_span hμG)
   -- one uniform threshold, by the abstract double-sup combinator
-  obtain ⟨d₀, hd₀⟩ := exists_uniform_ge₂ s
-    (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) hnum
+  have hunif := exists_uniform_ge₂ s (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) hnum
+  obtain ⟨d₀, hd₀⟩ := hunif
   refine ⟨d₀, fun d hd ↦ ?_⟩
   -- the numerators at degree `d`, collected into a finite set
   choose mf hmI hrest using hd₀ d hd
-  obtain ⟨M, hM₁, hM₂⟩ := exists_finset_forall_mem s
-    (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) mf
+  have hMex := exists_finset_forall_mem s (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) mf
+  obtain ⟨M, hM₁, hM₂⟩ := hMex
   refine ⟨M, ?_, ?_⟩
   · intro m hmM
     obtain ⟨b, hbs, μ, hμG, rfl⟩ := hM₁ m hmM
@@ -1331,11 +1358,14 @@ lemma Scheme.IdealSheafData.mem_ideal_map_pow_mul_of_chartFrac_mem
     (I.preimage_subset_iUnion_range_blowupChart V hs)
     (fun b' ↦ I.blowupChart_comp_blowupMap_preimage V (hs ▸ Ideal.subset_span b'.2)) ?_
   intro b'
-  exact mem_of_ringHom_eq
-    (I.appLE_blowupChart_comp_blowupMap V (hs ▸ Ideal.subset_span b'.2)
-      (I.blowupChart_comp_blowupMap_preimage V (hs ▸ Ideal.subset_span b'.2)))
-    (I.blowupChartSection_mem_of_chartFrac_mem J V (hs ▸ Ideal.subset_span b'.2) hm
-      (hchart b'.1 b'.2))
+  -- hoisting the two arguments into `have`s elaborates them against their own (known)
+  -- types instead of against the metavariables of `mem_of_ringHom_eq`, which over the
+  -- chart rings is an order of magnitude cheaper
+  have hA := I.appLE_blowupChart_comp_blowupMap V (hs ▸ Ideal.subset_span b'.2)
+    (I.blowupChart_comp_blowupMap_preimage V (hs ▸ Ideal.subset_span b'.2))
+  have hB := I.blowupChartSection_mem_of_chartFrac_mem J V
+    (hs ▸ Ideal.subset_span b'.2) hm (hchart b'.1 b'.2)
+  exact mem_of_ringHom_eq hA hB
 
 /-- **The chart images at a finite affine cover of the base cover the blow-up.** -/
 lemma Scheme.IdealSheafData.iSup_blowupChart_image_top_eq_top
@@ -1374,13 +1404,14 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
   classical
   have : QuasiCompact I.blowupMap := Scheme.IdealSheafData.quasiCompact_blowupMap hI
   -- a finite affine cover of `X`
-  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
+  have hcov := isCompact_univ.elim_finite_subcover
     (fun V : X.affineOpens ↦ (V.1 : Set X)) (fun V ↦ V.1.isOpen) (by
       intro x _
       have hx : x ∈ (⊤ : X.Opens) := trivial
       rw [← iSup_affineOpens_eq_top X] at hx
       obtain ⟨V, hV⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
       exact Set.mem_iUnion.mpr ⟨V, hV⟩)
+  obtain ⟨t, ht⟩ := hcov
   -- generators of the center over each affine open
   choose s hs using fun V : X.affineOpens ↦ hI V le_top
   -- generators of the chart models of `J`
@@ -1414,13 +1445,14 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
       LV.ofFiniteType ∧ ∀ (hVt : V ∈ t),
         LV.ideal V = Ideal.span (M V hVt : Set Γ(X, V.1)) := by
     intro V hVt
-    obtain ⟨LV, h1, h2, h3⟩ := Scheme.IdealSheafData.exists_finiteType_le_ideal_eq
+    have hLVex := Scheme.IdealSheafData.exists_finiteType_le_ideal_eq
       (I ^ D ⊓ (((I.comap I.blowupMap) ^ D * J).map I.blowupMap)) V
       (F := Ideal.span (M V hVt : Set Γ(X, V.1)))
       ⟨_, rfl⟩ (by
         rw [Ideal.span_le]
         intro x hx
         exact hmC V hVt x (Finset.mem_coe.mp hx))
+    obtain ⟨LV, h1, h2, h3⟩ := hLVex
     exact ⟨LV, h1, h2, fun _ ↦ h3⟩
   choose LV hLVle hLVft hLVid using hLV
   refine ⟨t.attach.sup fun V ↦ LV V.1 V.2,
@@ -1449,6 +1481,9 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
         exact I.iSup_blowupChart_image_top_eq_top ht s hs
       · -- the generation inequality on each chart
         rintro ⟨⟨V, hVt⟩, b'⟩
+        -- the three `hs V ▸ Ideal.subset_span b'.2` are deliberately *not* shared in a
+        -- `have`: sharing saves ~2000 heartbeats but costs ~7s of elaboration time
+        -- here, in the longest declaration of the file
         refine Scheme.IdealSheafData.ideal_pow_mul_le_comap_of_numerators I J _ V
           ((hs V) ▸ Ideal.subset_span b'.2) D
           (G V b'.1 ((hs V) ▸ Ideal.subset_span b'.2))
