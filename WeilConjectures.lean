@@ -42,6 +42,7 @@ public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.FinitePresentation
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.Modification
 public import WeilConjectures.Compactification.NagataCompactification
