@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructiblePullback
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.WeilSheaf.GeometricFrobenius
 
@@ -74,8 +75,6 @@ structures through `Rf_!` are subsequent layers built on top of these definition
   `Φ^[n+1] = Φ ∘ G(Φ^[n])`.
 - `CategoryTheory.WeilObject.map`: transport of Weil objects along a functor equipped
   with a commutation isomorphism with the endofunctors.
-- `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: an exact functor of
-  abelian categories commutes with the homology functors of the derived categories.
 - `AlgebraicGeometry.Etale.frobeniusPullback`: the Frobenius pullback endofunctor
   `G_X = g_X^*` on étale sheaves on the geometric fiber.
 - `AlgebraicGeometry.WeilSheaf`: the category of Weil sheaves on the geometric fiber.
@@ -95,7 +94,7 @@ structures through `Rf_!` are subsequent layers built on top of these definition
 
 @[expose] public section
 
-universe w w' v v' u u'
+universe v v' u u'
 
 open CategoryTheory Limits
 
@@ -220,46 +219,6 @@ end Map
 
 end WeilObject
 
-section MapDerivedCategoryHomology
-
-variable {C₁ : Type u} [Category.{v} C₁] [Abelian C₁]
-  {C₂ : Type u'} [Category.{v'} C₂] [Abelian C₂]
-  (F : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-
-/-- An exact functor `F` between abelian categories commutes with the homology functors
-of homological complexes: the natural isomorphism
-`F.mapHomologicalComplex c ⋙ homologyFunctor ≅ homologyFunctor ⋙ F`, given objectwise
-by `ShortComplex.mapHomologyIso`. -/
-noncomputable def Functor.mapHomologicalComplexHomologyFunctorIso
-    {ι : Type*} (c : ComplexShape ι) (i : ι) :
-    F.mapHomologicalComplex c ⋙ HomologicalComplex.homologyFunctor C₂ c i ≅
-      HomologicalComplex.homologyFunctor C₁ c i ⋙ F :=
-  NatIso.ofComponents (fun K ↦ (K.sc i).mapHomologyIso F)
-    (fun φ ↦ ShortComplex.mapHomologyIso_hom_naturality
-      (φ := (HomologicalComplex.shortComplexFunctor C₁ c i).map φ) (F := F))
-
-/-- An exact functor `F` between abelian categories commutes with the homology functors
-of the derived categories: the natural isomorphism
-`F.mapDerivedCategory ⋙ homologyFunctor ≅ homologyFunctor ⋙ F`, obtained by descending
-the commutation isomorphism for homological complexes through the localization. For the
-Frobenius pullback on étale sheaves this expresses its t-exactness and induces the Weil
-sheaf structures on the homology of Weil complexes. -/
-noncomputable def Functor.mapDerivedCategoryHomologyFunctorIso
-    [HasDerivedCategory.{w} C₁] [HasDerivedCategory.{w'} C₂] (n : ℤ) :
-    F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor C₂ n ≅
-      DerivedCategory.homologyFunctor C₁ n ⋙ F :=
-  Localization.liftNatIso DerivedCategory.Q
-    (HomologicalComplex.quasiIso C₁ (ComplexShape.up ℤ))
-    ((F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ⋙
-      DerivedCategory.homologyFunctor C₂ n)
-    ((DerivedCategory.Q ⋙ DerivedCategory.homologyFunctor C₁ n) ⋙ F) _ _
-    (Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (DerivedCategory.homologyFunctorFactors C₂ n) ≪≫
-      F.mapHomologicalComplexHomologyFunctorIso (ComplexShape.up ℤ) n ≪≫
-      Functor.isoWhiskerRight (DerivedCategory.homologyFunctorFactors C₁ n).symm F)
-
-end MapDerivedCategoryHomology
-
 end CategoryTheory
 
 namespace AlgebraicGeometry
@@ -343,7 +302,7 @@ homology functor via the commutation isomorphism
 noncomputable def WeilComplex.homologyFunctor (n : ℤ) :
     WeilComplex A f ⥤ WeilSheaf A f :=
   WeilObject.map
-    ((Etale.frobeniusPullback A f).mapDerivedCategoryHomologyFunctorIso n).symm
+    ((Etale.frobeniusPullback A f).mapDerivedCategoryHomologyFunctorIso n)
 
 end WeilComplex
 

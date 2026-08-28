@@ -77,7 +77,7 @@ def geometricFrobenius : K ≃ₐ[k] K :=
 @[simp]
 theorem geometricFrobenius_pow_card (x : K) :
     geometricFrobenius k K x ^ Nat.card k = x := by
-  letI : Fintype k := Fintype.ofFinite k
+  let _ : Fintype k := Fintype.ofFinite k
   rw [Nat.card_eq_fintype_card]
   have h : geometricFrobenius k K x ^ Fintype.card k =
       frobeniusAlgEquivOfAlgebraic k K (geometricFrobenius k K x) := by
