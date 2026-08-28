@@ -186,6 +186,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
