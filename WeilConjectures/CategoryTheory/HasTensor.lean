@@ -1,21 +1,12 @@
-/-
-Copyright (c) 2026 Nailin Guan. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Nailin Guan
--/
 module
 
 public import Mathlib.Algebra.Homology.ComplexShapeSigns
+public import Mathlib.CategoryTheory.GradedObject.Monoidal
 public import Mathlib.Data.Int.ConditionallyCompleteOrder
-
-/-!
-# Stupid Colimit Instance Needed for Total Complex
-
--/
 
 @[expose] public section
 
-universe u v
+universe u v w
 
 open CategoryTheory Limits
 
@@ -38,5 +29,12 @@ instance hasColimitsOfShape_discrete_π_up_int {C : Type u} [Category.{v} C]
     HasColimitsOfShape
       (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) C :=
   hasColimitsOfShape_of_equivalence (Discrete.equivalence (ComplexShape.πUpIntFiberEquiv j))
+
+instance {C : Type u} [Category.{v} C] [HasColimitsOfShape (Discrete ℤ) C]
+    [MonoidalCategory C] (X₁ X₂ : CategoryTheory.GradedObject ℤ C) :
+    X₁.HasTensor X₂ := by
+  have (j : ℤ) : HasColimitsOfShape (Discrete ↑((ComplexShape.up ℤ).π (ComplexShape.up ℤ)
+    (ComplexShape.up ℤ) ⁻¹' {j})) C:= hasColimitsOfShape_discrete_π_up_int j
+  infer_instance
 
 end CategoryTheory
