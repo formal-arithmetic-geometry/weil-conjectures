@@ -26,6 +26,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.CategoryTheory.HasTensor
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
