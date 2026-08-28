@@ -10000,6 +10000,26 @@ function used in the proof.
 
 \section{Case 3: quasi-affine targets in general}
 
+\begin{lemma}[A power of a finite type ideal inside an ideal with larger zero set]
+  \label{lemma:nagata-finite-type-ideal-power-in-ideal}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_pow_le}
+
+  Let $X$ be quasi-compact and let $\mathcal A,\mathcal B\subseteq\mathcal O_X$ be
+  quasi-coherent ideals with $\mathcal B$ of finite type and
+  $V(\mathcal A)\subseteq V(\mathcal B)$.  Then $\mathcal B^n\subseteq\mathcal A$ for
+  some $n\geq 0$.
+\end{lemma}
+
+\begin{proof}
+  The inclusion $V(\mathcal A)\subseteq V(\mathcal B)$ says exactly that
+  $\mathcal B\subseteq\sqrt{\mathcal A}$.  On an affine open $\operatorname{Spec}(R)$ the
+  two ideals are ideals $\mathfrak b\subseteq\sqrt{\mathfrak a}$ of $R$ with
+  $\mathfrak b$ finitely generated, so $\mathfrak b^n\subseteq\mathfrak a$ for some $n$.
+  Since $X$ is quasi-compact it is covered by finitely many affine opens, and the maximum
+  of the exponents obtained there works on each member of the cover; containment of
+  quasi-coherent ideals may be checked on an affine cover.
+\end{proof}
+
 \begin{lemma}[Quasi-affine target, $U\subseteq V$,
   {\cite[Thm.~2.4, Case 3, pp.~16--17]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-affine-general}
@@ -10021,6 +10041,7 @@ function used in the proof.
 \begin{proof}
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-finite-type-ideal-extension-exists,
+    lemma:nagata-finite-type-ideal-power-in-ideal,
     lemma:nagata-conrad-dense-in-admissible-blowup}
   Because a $V$-admissible blow-up of $X$ preserves the density of $U$ and of
   $V$ (\Cref{lemma:nagata-conrad-dense-in-admissible-blowup}) and composites of
