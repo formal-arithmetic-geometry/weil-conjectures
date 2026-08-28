@@ -23,9 +23,14 @@ blueprint (`blueprint/src/version/detailed/nagata/nagata_new.tex`). The two-open
 compactification theorem reaches its target by the boundary-separation route rather
 than by module flattening: it uses blow-ups of sums of ideals to separate boundary
 pieces (Stacks Tag 0F3V), common modifications, and the dense-source valuative
-criterion. Module flattening (Stacks Tags 0815/081R and 081P/081L) is on the
-formalized route too, but only as the blueprint's proof of Tag 081S, which lives in
-`WeilConjectures.Compactification.Modification`; hence no flattening statements appear
+criterion. Module flattening (Stacks Tags 0815/081R and 081P/081L) is not on the
+formalized route at all: it is the Stacks Project's proof of Tag 081S, but that chain
+bottoms out in the dévissage sections of Stacks §§38.4–38.10, which exist neither in
+Mathlib nor in the blueprint. Tag 081S — which lives in
+`WeilConjectures.Compactification.Modification` — is formalized instead via Conrad's
+Theorem 2.4 and Zariski's Main Theorem (`Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`,
+together with Stacks Tag 04II, already available as
+`exists_immersion_affineSpace_of_quasiAffine`). Hence no flattening statements appear
 in this file.
 
 ## Definitions

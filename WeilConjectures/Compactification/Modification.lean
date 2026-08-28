@@ -78,13 +78,26 @@ quasi-separated, which separatedness supplies).
 and `exists_admissibleBlowup_isIso_strictTransformMap_near_closure` (0F3W) are all
 consumers of it, and the two-open compactification theorem (proof order items 43–48)
 consumes those. The Stacks Project proves Tag 081S by Raynaud–Gruson flattening
-(Stacks Tags 0815 and 081R, together with 081P and 081L), and that is the route the
-blueprint takes: the flattening chain (proof order items 25–29) is the intended proof
-of Tag 081S, none of it is formalized yet (see the route revision note in
-`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`). Note that the
-two-open compactification theorem itself does not go through flattening — it uses the
-boundary-separation route of `WeilConjectures.Blowup.AdmissibleBlowup` — so flattening
-is needed only for Tag 081S.
+(Stacks Tags 0815 and 081R, together with 081P and 081L), but that chain — proof order
+items 25–29 — is *not* the route taken here: it bottoms out in the dévissage sections
+of Stacks §§38.4–38.10, which exist neither in Mathlib nor in the blueprint.
+
+Tag 081S is formalized instead via **Conrad's Theorem 2.4 and Zariski's Main
+Theorem**, written up in the blueprint chapter "Elimination of indeterminacy after
+Deligne and Conrad" (`blueprint/src/version/detailed/nagata/nagata_new.tex`, proof
+order items 61–75): a rational map to a separated finite-type target becomes defined,
+as a quasi-domination, after one admissible blow-up of the source, and an arbitrary
+target is reduced to a quasi-affine one by Zariski's Main Theorem. Both external
+inputs are available — ZMT is Mathlib's `Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`,
+and Stacks Tag 04II is already formalized here as
+`exists_immersion_affineSpace_of_quasiAffine`
+(`WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean`). None of that chapter is
+formalized yet; see the route revision note in
+`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`.
+
+Note that the two-open compactification theorem itself does not go through flattening
+either way — it uses the boundary-separation route of
+`WeilConjectures.Blowup.AdmissibleBlowup`.
 
 -/
 
@@ -115,9 +128,9 @@ theorem exists_admissibleBlowup_isOpenImmersion_strictTransformMap
   -- The Stacks proof flattens the (finite type, flat over `U`) structure sheaf datum
   -- of `q` by a `U`-admissible blow-up (Tags 0815 and 081R) and observes that a flat,
   -- finitely presented strict transform which is a monomorphism over `U` is an open
-  -- immersion. That flattening chain (proof order items 25–29) is the blueprint's
-  -- route to this statement, but none of it is formalized yet, so this remains the one
-  -- primitive obligation of the modification layer.
+  -- immersion. That flattening chain (proof order items 25–29) is not the route taken
+  -- here; see the module docstring for the Conrad/ZMT route (proof order items 61–75).
+  -- Either way this remains the one primitive obligation of the modification layer.
   sorry
 
 section ImageTransport
