@@ -980,6 +980,424 @@ lemma Scheme.IdealSheafData.homOfLE_comp_eq_of_chart {X : Scheme.{u}} {σ : Type
 
 end Gluing
 
+section Closedness
+
+/-! ### Closedness of the graph of the glued extension
+
+The graph of the extension is checked to be closed one chart of the blow-up at a time: on
+the chart at a generator `c` of the centre, the graph is cut out by the equations
+`(d/c) · tⱼ = (bⱼ/c)` of `isClosed_range_of_basicOpen_fractions`. -/
+
+/-- A set is closed as soon as its preimage under each member of a jointly surjective family
+of open embeddings is closed. -/
+lemma isClosed_of_isOpenEmbedding_cover {Q : Type*} [TopologicalSpace Q] {κ : Type*}
+    {Z : κ → Type*} [∀ k, TopologicalSpace (Z k)] (q : ∀ k, Z k → Q)
+    (hq : ∀ k, Topology.IsOpenEmbedding (q k)) (hcov : ∀ x : Q, ∃ k y, q k y = x)
+    {s : Set Q} (hs : ∀ k, IsClosed (q k ⁻¹' s)) : IsClosed s := by
+  rw [← isOpen_compl_iff]
+  have hcompl : sᶜ = ⋃ k, q k '' ((q k ⁻¹' s)ᶜ) := by
+    ext x
+    constructor
+    · intro hx
+      obtain ⟨k, y, rfl⟩ := hcov x
+      exact Set.mem_iUnion.mpr ⟨k, y, hx, rfl⟩
+    · rintro hx
+      obtain ⟨k, y, hy, rfl⟩ := Set.mem_iUnion.mp hx
+      exact hy
+  rw [hcompl]
+  exact isOpen_iUnion fun k ↦ (hq k).isOpenMap _ (hs k).isOpen_compl
+
+variable {A : Type u} [CommRing A] {I : Ideal A}
+
+/-- **Composing the slopes across two charts**: on the chart at `a · d` the slope `b / d`
+times the slope `d / a` is the slope `b / a`. -/
+lemma AffineBlowup.awayMap_awaySlope_mul {a d b : A} (ha : a ∈ I) (hd : d ∈ I) (hb : b ∈ I) :
+    HomogeneousLocalization.awayMap (reesGrading I) (reesX_mem I a ha)
+        (mul_comm (reesX I a ha) (reesX I d hd)) (AffineBlowup.awaySlope I hd hb) *
+      HomogeneousLocalization.awayMap (reesGrading I) (reesX_mem I d hd) rfl
+        (AffineBlowup.awaySlope I ha hd) =
+      HomogeneousLocalization.awayMap (reesGrading I) (reesX_mem I d hd) rfl
+        (AffineBlowup.awaySlope I ha hb) := by
+  rw [AffineBlowup.awayMap_awaySlope hd ha hb (mul_comm (reesX I a ha) (reesX I d hd)),
+    AffineBlowup.awayMap_awaySlope ha hd hd rfl, AffineBlowup.awayMap_awaySlope ha hd hb rfl,
+    HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.val_mul,
+    HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.Away.val_mk,
+    HomogeneousLocalization.Away.val_mk, Localization.mk_mul, Localization.mk_eq_mk_iff,
+    Localization.r_iff_exists]
+  refine ⟨1, ?_⟩
+  simp only [OneMemClass.coe_one, one_mul, pow_one, Submonoid.coe_mul]
+  ring
+
+/-- The transition map into the chart at `a · b` has range the basic open of the slope
+`b / a`. -/
+lemma AffineBlowup.mem_range_specMap_awayMap_iff {a b : A} (ha : a ∈ I) (hb : b ∈ I)
+    (y : Spec (.of (HomogeneousLocalization.Away (reesGrading I) (reesX I a ha)))) :
+    (∃ z, Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap (reesGrading I)
+      (reesX_mem I b hb) (rfl : reesX I a ha * reesX I b hb = _))) z = y) ↔
+      y ∈ PrimeSpectrum.basicOpen (AffineBlowup.awaySlope I ha hb) := by
+  letI := (HomogeneousLocalization.awayMap (reesGrading I) (reesX_mem I b hb)
+    (rfl : reesX I a ha * reesX I b hb = _)).toAlgebra
+  haveI := HomogeneousLocalization.Away.isLocalization_mul (reesX_mem I a ha)
+    (reesX_mem I b hb) rfl one_ne_zero
+  rw [← AffineBlowup.isLocalizationElem_eq_awaySlope]
+  exact Set.ext_iff.mp (PrimeSpectrum.localization_away_comap_range _ _) y
+
+/-- The `a`-chart of the blow-up meets the `b`-chart in the basic open of the slope `b / a`. -/
+lemma AffineBlowup.chart_preimage_opensRange {a b : A} (ha : a ∈ I) (hb : b ∈ I) :
+    AffineBlowup.chart I (reesX I a ha) (reesX_mem I a ha) ⁻¹ᵁ
+        (AffineBlowup.chart I (reesX I b hb) (reesX_mem I b hb)).opensRange =
+      PrimeSpectrum.basicOpen (AffineBlowup.awaySlope I ha hb) := by
+  rw [AffineBlowup.opensRange_chart, AffineBlowup.chart,
+    Proj.awayι_preimage_basicOpen (𝒜 := reesGrading I) (reesX_mem I a ha) one_pos
+      (reesX_mem I b hb) one_pos, AffineBlowup.isLocalizationElem_eq_awaySlope]
+
+variable {X : Scheme.{u}}
+
+set_option maxHeartbeats 1000000 in
+-- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
+/-- The `a`-chart of the blow-up over an affine open meets the `b`-chart in the basic open of
+the slope `b / a`. -/
+lemma Scheme.IdealSheafData.blowupChart_preimage_opensRange (K : X.IdealSheafData)
+    (V : X.affineOpens) {a b : Γ(X, V.1)} (ha : a ∈ K.ideal V) (hb : b ∈ K.ideal V) :
+    K.blowupChart V ha ⁻¹ᵁ (K.blowupChart V hb).opensRange =
+      PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) ha hb) := by
+  rw [← AffineBlowup.chart_preimage_opensRange ha hb]
+  refine TopologicalSpace.Opens.ext (Set.ext fun y ↦ ?_)
+  constructor
+  · rintro ⟨z, hz⟩
+    refine ⟨z, (K.blowupι V).isOpenEmbedding.injective ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]
+    exact hz
+  · rintro ⟨z, hz⟩
+    refine ⟨z, ?_⟩
+    rw [Scheme.IdealSheafData.blowupChart, Scheme.IdealSheafData.blowupChart,
+      Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hz]
+
+/-- A set in a scheme is closed as soon as its preimage under each member of a jointly
+surjective family of open immersions is closed. -/
+lemma Scheme.isClosed_of_openCover {Q : Scheme.{u}} {κ : Type*} {Z : κ → Scheme.{u}}
+    (q : ∀ k, Z k ⟶ Q) [∀ k, IsOpenImmersion (q k)] (hcov : ∀ x : Q, ∃ k y, q k y = x)
+    {s : Set Q} (hs : ∀ k, IsClosed ((q k).base ⁻¹' s)) : IsClosed s :=
+  isClosed_of_isOpenEmbedding_cover (fun k ↦ (q k).base)
+    (fun k ↦ (q k).isOpenEmbedding) hcov hs
+
+
+/-- If the coordinates of `G` are used as the defining vector, `homOfVector` composed with the
+base-change map recovers `G`. -/
+lemma AffineSpace.homOfVector_comp_map {σ : Type u} {S T Z : Scheme.{u}} (p : Z ⟶ S)
+    (h : S ⟶ T) (G : Z ⟶ 𝔸(σ; T)) (hG : G ≫ 𝔸(σ; T) ↘ T = p ≫ h) :
+    AffineSpace.homOfVector p (fun j ↦ G.appTop (AffineSpace.coord T j)) ≫
+      AffineSpace.map σ h = G := by
+  refine AffineSpace.hom_ext ?_ fun j ↦ ?_
+  · rw [Category.assoc, AffineSpace.map_over, ← Category.assoc,
+      AffineSpace.homOfVector_over, hG]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
+      AffineSpace.homOfVector_appTop_coord]
+
+/-- **The graph of the extension, seen on one chart.** On the base change of a chart of the
+blow-up, the graph of the extension is the graph of the chart-local morphism defined by the
+coordinates of the extension. -/
+lemma Scheme.isClosed_preimage_range_pullbackLift {X Bl : Scheme.{u}} {σ : Type u}
+    (π : Bl ⟶ X) {W : Bl.Opens} (g : W.toScheme ⟶ 𝔸(σ; X))
+    (hg : g ≫ 𝔸(σ; X) ↘ X = W.ι ≫ π)
+    {R : CommRingCat.{u}} (chart : Spec R ⟶ Bl)
+    (q : 𝔸(σ; Spec R) ⟶ pullback π (𝔸(σ; X) ↘ X)) [IsOpenImmersion q]
+    (hq_fst : q ≫ pullback.fst π (𝔸(σ; X) ↘ X) = (𝔸(σ; Spec R) ↘ Spec R) ≫ chart)
+    (hq_snd : q ≫ pullback.snd π (𝔸(σ; X) ↘ X) = AffineSpace.map σ (chart ≫ π))
+    (lam : (chart ⁻¹ᵁ W).toScheme ⟶ W.toScheme)
+    (hlam : lam ≫ W.ι = (chart ⁻¹ᵁ W).ι ≫ chart)
+    (hcl : IsClosed (Set.range (AffineSpace.homOfVector (chart ⁻¹ᵁ W).ι
+      (fun j ↦ (lam ≫ g).appTop (AffineSpace.coord X j))))) :
+    IsClosed (q.base ⁻¹' Set.range (pullback.lift W.ι g hg.symm)) := by
+  set del : (chart ⁻¹ᵁ W).toScheme ⟶ 𝔸(σ; Spec R) :=
+    AffineSpace.homOfVector (chart ⁻¹ᵁ W).ι
+      (fun j ↦ (lam ≫ g).appTop (AffineSpace.coord X j)) with hdeldef
+  have hdel_over : del ≫ (𝔸(σ; Spec R) ↘ Spec R) = (chart ⁻¹ᵁ W).ι :=
+    AffineSpace.homOfVector_over _ _
+  have hdel_map : del ≫ AffineSpace.map σ (chart ≫ π) = lam ≫ g := by
+    refine AffineSpace.homOfVector_comp_map _ _ _ ?_
+    rw [Category.assoc, hg, ← Category.assoc, hlam, Category.assoc]
+  have hdelq : del ≫ q = lam ≫ pullback.lift W.ι g hg.symm := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [Category.assoc, hq_fst, ← Category.assoc, hdel_over, Category.assoc,
+        pullback.lift_fst, hlam]
+    · rw [Category.assoc, hq_snd, hdel_map, Category.assoc, pullback.lift_snd]
+  have hpre : q.base ⁻¹' Set.range (pullback.lift W.ι g hg.symm) = Set.range del.base := by
+    ext y
+    constructor
+    · rintro ⟨w, hw⟩
+      have hfst : chart ((𝔸(σ; Spec R) ↘ Spec R) y) = W.ι w := by
+        rw [← Scheme.Hom.comp_apply, ← hq_fst, Scheme.Hom.comp_apply, ← hw,
+          ← Scheme.Hom.comp_apply, pullback.lift_fst]
+      have hmemO : (𝔸(σ; Spec R) ↘ Spec R) y ∈ chart ⁻¹ᵁ W := by
+        have hmem : chart ((𝔸(σ; Spec R) ↘ Spec R) y) ∈ W := by rw [hfst]; exact w.2
+        exact hmem
+      refine ⟨⟨(𝔸(σ; Spec R) ↘ Spec R) y, hmemO⟩, ?_⟩
+      have hlw : lam ⟨(𝔸(σ; Spec R) ↘ Spec R) y, hmemO⟩ = w := by
+        refine W.ι.isOpenEmbedding.injective ?_
+        rw [← Scheme.Hom.comp_apply, hlam, Scheme.Hom.comp_apply]
+        exact hfst
+      refine q.isOpenEmbedding.injective ?_
+      rw [← Scheme.Hom.comp_apply, hdelq, Scheme.Hom.comp_apply, hlw, hw]
+    · rintro ⟨z, rfl⟩
+      exact ⟨lam z, by rw [← Scheme.Hom.comp_apply, ← hdelq, Scheme.Hom.comp_apply]⟩
+  rw [hpre]
+  exact hcl
+
+
+/-- `Spec` of a ring map acts on global sections by the ring map. -/
+lemma Scheme.specMap_appTop_ΓSpecIso_inv {R S : CommRingCat.{u}} (φ : R ⟶ S) (r : R) :
+    (Spec.map φ).appTop ((Scheme.ΓSpecIso R).inv r) = (Scheme.ΓSpecIso S).inv (φ r) := by
+  rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+
+/-- Multiplicativity of the inverse of `ΓSpecIso`. -/
+lemma Scheme.ΓSpecIso_inv_mul {R : CommRingCat.{u}} (r s : R) :
+    (Scheme.ΓSpecIso R).inv r * (Scheme.ΓSpecIso R).inv s = (Scheme.ΓSpecIso R).inv (r * s) :=
+  (map_mul _ _ _).symm
+
+/-- An open immersion whose range is an open `B` is an isomorphism onto `B`. -/
+lemma exists_isIso_lift_of_mem_iff {Y Z : Scheme.{u}} (m : Z ⟶ Y)
+    (hm : IsOpenImmersion m) {B : Y.Opens} (hB : ∀ y, (∃ z, m z = y) ↔ y ∈ B) :
+    ∃ m' : Z ⟶ B.toScheme, IsIso m' ∧ m' ≫ B.ι = m := by
+  haveI := hm
+  have hsub : Set.range m.base ⊆ Set.range B.ι.base := by
+    rintro - ⟨z, rfl⟩
+    exact ⟨⟨m z, (hB _).mp ⟨z, rfl⟩⟩, rfl⟩
+  refine ⟨IsOpenImmersion.lift B.ι m hsub, ?_, IsOpenImmersion.lift_fac _ _ _⟩
+  have hfac : IsOpenImmersion.lift B.ι m hsub ≫ B.ι = m := IsOpenImmersion.lift_fac _ _ _
+  haveI : IsOpenImmersion (IsOpenImmersion.lift B.ι m hsub) := by
+    have h1 : IsOpenImmersion (IsOpenImmersion.lift B.ι m hsub ≫ B.ι) := by
+      rw [hfac]; infer_instance
+    exact IsOpenImmersion.of_comp _ B.ι
+  refine isIso_of_isOpenImmersion_of_opensRange_eq_top _ ?_
+  refine TopologicalSpace.Opens.ext (Set.eq_univ_of_forall fun t ↦ ?_)
+  obtain ⟨z, hz⟩ := (hB t.1).mpr t.2
+  refine ⟨z, B.ι.isOpenEmbedding.injective ?_⟩
+  rw [← Scheme.Hom.comp_apply, hfac]
+  exact hz
+
+set_option maxHeartbeats 1000000 in
+-- The chart rings are large; unification exceeds the default heartbeat limit.
+/-- **The chart-local coordinate identity for the graph of the extension.** On the overlap of
+the `S`-chart with the `Ri`-chart, the `j`-th coordinate of the graph is the fraction
+`si j / vS`. -/
+lemma AffineSpace.mul_appTop_coord_eq_of_chartOverlap {σ : Type u} {X Bl : Scheme.{u}}
+    (π : Bl ⟶ X) {W : Bl.Opens} (g : W.toScheme ⟶ 𝔸(σ; X))
+    {S : CommRingCat.{u}} (chart : Spec S ⟶ Bl)
+    (lam : (chart ⁻¹ᵁ W).toScheme ⟶ W.toScheme)
+    (hlam : lam ≫ W.ι = (chart ⁻¹ᵁ W).ι ≫ chart)
+    {Ri : CommRingCat.{u}} (charti : Spec Ri ⟶ Bl) (cii : Spec Ri ⟶ W.toScheme)
+    (hcii : cii ≫ W.ι = charti) (si : σ → Ri)
+    (hgii : cii ≫ g = AffineSpace.homOfVector (charti ≫ π)
+      (fun j ↦ (Scheme.ΓSpecIso Ri).inv (si j)))
+    {B : (Spec S).Opens} (hB : B ≤ chart ⁻¹ᵁ W)
+    {T : CommRingCat.{u}} (m₁ : Spec T ⟶ Spec S) (m₂ : Spec T ⟶ Spec Ri)
+    (hm : m₁ ≫ chart = m₂ ≫ charti)
+    (m₁' : Spec T ⟶ B.toScheme) [IsIso m₁'] (hm₁' : m₁' ≫ B.ι = m₁)
+    (vS wS : S) (j : σ)
+    (hval : m₂.appTop ((Scheme.ΓSpecIso Ri).inv (si j)) *
+      m₁.appTop ((Scheme.ΓSpecIso S).inv vS) = m₁.appTop ((Scheme.ΓSpecIso S).inv wS)) :
+    ((Spec S).homOfLE hB ≫ AffineSpace.homOfVector (chart ⁻¹ᵁ W).ι
+        (fun j ↦ (lam ≫ g).appTop (AffineSpace.coord X j))).appTop
+        (AffineSpace.coord (Spec S) j) *
+      ((Scheme.ΓSpecIso S).inv ≫ B.ι.appTop) vS =
+      ((Scheme.ΓSpecIso S).inv ≫ B.ι.appTop) wS := by
+  -- `m₁'` is an isomorphism, so its action on global sections is injective
+  have hidcomp : m₁'.appTop ≫ (inv m₁').appTop = 𝟙 _ := by
+    rw [← Scheme.Hom.comp_appTop]
+    simp
+  have hinj : Function.Injective (m₁'.appTop) := by
+    intro x y hxy
+    have h1 : (inv m₁').appTop (m₁'.appTop x) = (inv m₁').appTop (m₁'.appTop y) := by rw [hxy]
+    rwa [← CommRingCat.comp_apply, ← CommRingCat.comp_apply, hidcomp,
+      CommRingCat.id_apply, CommRingCat.id_apply] at h1
+  -- the restriction maps of the overlap
+  have hres : ∀ r : S, m₁'.appTop (((Scheme.ΓSpecIso S).inv ≫ B.ι.appTop) r) =
+      m₁.appTop ((Scheme.ΓSpecIso S).inv r) := by
+    intro r
+    rw [CommRingCat.comp_apply, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, hm₁']
+  -- the overlap maps into the `Ri`-chart
+  have hlift : m₁' ≫ (Spec S).homOfLE hB ≫ lam = m₂ ≫ cii := by
+    rw [← cancel_mono W.ι]
+    simp only [Category.assoc]
+    rw [hlam, hcii, ← Category.assoc ((Spec S).homOfLE hB), Scheme.homOfLE_ι,
+      ← Category.assoc, hm₁', hm]
+  have hstep : ((Spec S).homOfLE hB ≫ AffineSpace.homOfVector (chart ⁻¹ᵁ W).ι
+        (fun j ↦ (lam ≫ g).appTop (AffineSpace.coord X j))).appTop
+        (AffineSpace.coord (Spec S) j) =
+      ((Spec S).homOfLE hB ≫ lam ≫ g).appTop (AffineSpace.coord X j) := by
+    rw [AffineSpace.comp_homOfVector_appTop_coord]
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
+  have hstep2 : m₁'.appTop (((Spec S).homOfLE hB ≫ lam ≫ g).appTop
+      (AffineSpace.coord X j)) = m₂.appTop ((Scheme.ΓSpecIso Ri).inv (si j)) := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, reassoc_of% hlift, hgii,
+      AffineSpace.comp_homOfVector_appTop_coord]
+  apply hinj
+  rw [map_mul, hres, hres, ← hval, hstep, hstep2]
+
+
+set_option maxHeartbeats 16000000 in
+-- The chart rings are large; unification exceeds the default heartbeat limit.
+/-- **The chart-local coordinate identity for the glued extension.** On the overlap of the
+`c`-chart with the `d`-chart of the blow-up, the `j`-th coordinate of the extension is the
+fraction `(b j / c) / (d / c)`. -/
+lemma Scheme.IdealSheafData.mul_appTop_coord_awaySlope (K : X.IdealSheafData)
+    (V : X.affineOpens) {σ : Type u} {W : K.blowup.Opens} (g : W.toScheme ⟶ 𝔸(σ; X))
+    {c : Γ(X, V.1)} (hc : c ∈ K.ideal V)
+    (lam : (K.blowupChart V hc ⁻¹ᵁ W).toScheme ⟶ W.toScheme)
+    (hlam : lam ≫ W.ι = (K.blowupChart V hc ⁻¹ᵁ W).ι ≫ K.blowupChart V hc)
+    {d : Γ(X, V.1)} (hd : d ∈ K.ideal V)
+    {b : σ → Γ(X, V.1)} (hb : ∀ j, b j ∈ K.ideal V)
+    (cid : Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+      (reesX (K.ideal V) d hd))) ⟶ W.toScheme)
+    (hcid : cid ≫ W.ι = K.blowupChart V hd)
+    (hgid : cid ≫ g = AffineSpace.homOfVector (K.blowupChart V hd ≫ K.blowupMap)
+      (fun j ↦ (Scheme.ΓSpecIso _).inv (AffineBlowup.awaySlope (K.ideal V) hd (hb j))))
+    {B : (Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+      (reesX (K.ideal V) c hc)))).Opens}
+    (hBdef : B = PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) hc hd))
+    (hBle : B ≤ K.blowupChart V hc ⁻¹ᵁ W) (j : σ) :
+    ((Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+        (reesX (K.ideal V) c hc)))).homOfLE hBle ≫
+        AffineSpace.homOfVector (K.blowupChart V hc ⁻¹ᵁ W).ι
+          (fun j ↦ (lam ≫ g).appTop (AffineSpace.coord X j))).appTop
+        (AffineSpace.coord (Spec (.of (HomogeneousLocalization.Away
+          (reesGrading (K.ideal V)) (reesX (K.ideal V) c hc)))) j) *
+      ((Scheme.ΓSpecIso _).inv ≫ B.ι.appTop)
+        (AffineBlowup.awaySlope (K.ideal V) hc hd) =
+      ((Scheme.ΓSpecIso _).inv ≫ B.ι.appTop)
+        (AffineBlowup.awaySlope (K.ideal V) hc (hb j)) := by
+  subst hBdef
+  have hpbi := K.isPullback_blowupChart V hc hd
+  obtain ⟨m₁', hm₁'iso, hm₁'⟩ := exists_isIso_lift_of_mem_iff
+    (Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap
+      (reesGrading (K.ideal V)) (reesX_mem (K.ideal V) d hd) rfl)))
+    hpbi.isOpenImmersion_fst (AffineBlowup.mem_range_specMap_awayMap_iff hc hd)
+  haveI := hm₁'iso
+  refine AffineSpace.mul_appTop_coord_eq_of_chartOverlap K.blowupMap g
+    (K.blowupChart V hc) lam hlam (K.blowupChart V hd) cid hcid _ hgid hBle _ _ hpbi.w
+    m₁' hm₁' _ _ j ?_
+  rw [Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.specMap_appTop_ΓSpecIso_inv,
+    Scheme.specMap_appTop_ΓSpecIso_inv, Scheme.ΓSpecIso_inv_mul]
+  congr 1
+  exact AffineBlowup.awayMap_awaySlope_mul hc hd (hb j)
+
+set_option maxHeartbeats 8000000 in
+-- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
+/-- **Closedness of the graph of the glued extension.** -/
+lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
+    (K : X.IdealSheafData) (V : X.affineOpens) {σ ι : Type u}
+    {a : ι → Γ(X, V.1)} (ha : ∀ i, a i ∈ K.ideal V)
+    {b : ι → σ → Γ(X, V.1)} (hb : ∀ i j, b i j ∈ K.ideal V)
+    (hrel : ∀ i i' j, b i j * a i' = b i' j * a i)
+    (hspan : Ideal.span (Set.range (Sum.elim a fun p : ι × σ ↦ b p.1 p.2)) = K.ideal V)
+    (hcover : ∀ z : K.blowup, z ∈ K.blowupMap ⁻¹ᵁ V.1)
+    {W : K.blowup.Opens} (hW : W = ⨆ i, (K.blowupChart V (ha i)).opensRange)
+    (ci : ∀ i : ι, Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+      (reesX (K.ideal V) (a i) (ha i)))) ⟶ W.toScheme)
+    (hci : ∀ i, ci i ≫ W.ι = K.blowupChart V (ha i))
+    (g : W.toScheme ⟶ 𝔸(σ; X)) (hg : g ≫ 𝔸(σ; X) ↘ X = W.ι ≫ K.blowupMap)
+    (hgi : ∀ i, ci i ≫ g = AffineSpace.homOfVector (K.blowupChart V (ha i) ≫ K.blowupMap)
+      (fun j ↦ (Scheme.ΓSpecIso _).inv
+        (AffineBlowup.awaySlope (K.ideal V) (ha i) (hb i j)))) :
+    IsClosed (Set.range (pullback.lift W.ι g hg.symm)) := by
+  classical
+  set gen : ι ⊕ ι × σ → Γ(X, V.1) := Sum.elim a fun p ↦ b p.1 p.2 with hgendef
+  have hgen : ∀ k, gen k ∈ K.ideal V := by
+    rintro (i | ⟨i, j⟩)
+    · exact ha i
+    · exact hb i j
+  -- the base change of the `k`-th chart to the graph space
+  have hlift : ∀ k, ((𝔸(σ; Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+        (reesX (K.ideal V) (gen k) (hgen k))))) ↘ _) ≫ K.blowupChart V (hgen k)) ≫
+        K.blowupMap =
+      AffineSpace.map σ (K.blowupChart V (hgen k) ≫ K.blowupMap) ≫ 𝔸(σ; X) ↘ X := by
+    intro k
+    rw [Category.assoc, AffineSpace.map_over]
+  set qk : ∀ k, 𝔸(σ; Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
+      (reesX (K.ideal V) (gen k) (hgen k))))) ⟶ pullback K.blowupMap (𝔸(σ; X) ↘ X) :=
+    fun k ↦ pullback.lift _ _ (hlift k) with hqkdef
+  have hqk_fst : ∀ k, qk k ≫ pullback.fst K.blowupMap (𝔸(σ; X) ↘ X) =
+      (𝔸(σ; _) ↘ _) ≫ K.blowupChart V (hgen k) := fun k ↦ pullback.lift_fst _ _ _
+  have hqk_snd : ∀ k, qk k ≫ pullback.snd K.blowupMap (𝔸(σ; X) ↘ X) =
+      AffineSpace.map σ (K.blowupChart V (hgen k) ≫ K.blowupMap) :=
+    fun k ↦ pullback.lift_snd _ _ _
+  have hpb : ∀ k, IsPullback (qk k) (𝔸(σ; _) ↘ _)
+      (pullback.fst K.blowupMap (𝔸(σ; X) ↘ X)) (K.blowupChart V (hgen k)) := by
+    intro k
+    refine IsPullback.of_right ?_ (hqk_fst k)
+      (IsPullback.of_hasPullback K.blowupMap (𝔸(σ; X) ↘ X)).flip
+    rw [hqk_snd k]
+    exact AffineSpace.isPullback_map (K.blowupChart V (hgen k) ≫ K.blowupMap)
+  haveI : ∀ k, IsOpenImmersion (qk k) := fun k ↦ (hpb k).isOpenImmersion_fst
+  refine Scheme.isClosed_of_openCover qk ?_ ?_
+  · intro x
+    have hx : pullback.fst K.blowupMap (𝔸(σ; X) ↘ X) x ∈ K.blowupMap ⁻¹ᵁ V.1 :=
+      hcover _
+    obtain ⟨k, y, hy⟩ := K.exists_mem_range_blowupChart_of_span V hgen hspan hx
+    have hmem : x ∈ (qk k).opensRange := by
+      rw [(hpb k).opensRange_fst]
+      exact ⟨y, hy.symm⟩
+    exact ⟨k, hmem.choose, hmem.choose_spec⟩
+  · intro k
+    have hsubO : Set.range ((K.blowupChart V (hgen k) ⁻¹ᵁ W).ι ≫
+        K.blowupChart V (hgen k)).base ⊆ Set.range W.ι.base := by
+      rintro - ⟨z, rfl⟩
+      exact ⟨⟨_, z.2⟩, rfl⟩
+    obtain ⟨lam, hlam⟩ : ∃ lam : (K.blowupChart V (hgen k) ⁻¹ᵁ W).toScheme ⟶ W.toScheme,
+        lam ≫ W.ι = (K.blowupChart V (hgen k) ⁻¹ᵁ W).ι ≫ K.blowupChart V (hgen k) :=
+      ⟨IsOpenImmersion.lift W.ι _ hsubO, IsOpenImmersion.lift_fac _ _ _⟩
+    refine Scheme.isClosed_preimage_range_pullbackLift K.blowupMap g hg
+      (K.blowupChart V (hgen k)) (qk k) (hqk_fst k) (hqk_snd k) lam hlam ?_
+    -- the chart overlaps
+    have hpre : ∀ i, K.blowupChart V (hgen k) ⁻¹ᵁ (K.blowupChart V (ha i)).opensRange =
+        PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)) :=
+      fun i ↦ K.blowupChart_preimage_opensRange V (hgen k) (ha i)
+    have hO : K.blowupChart V (hgen k) ⁻¹ᵁ W =
+        ⨆ i, PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)) := by
+      refine TopologicalSpace.Opens.ext (Set.ext fun y ↦ ?_)
+      constructor
+      · intro hy
+        have hy' : K.blowupChart V (hgen k) y ∈
+            ⨆ i, (K.blowupChart V (ha i)).opensRange := hW ▸ hy
+        obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hy'
+        refine TopologicalSpace.Opens.mem_iSup.mpr ⟨i, ?_⟩
+        rw [← hpre i]
+        exact hi
+      · intro hy
+        obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
+        rw [← hpre i] at hi
+        have hi' : K.blowupChart V (hgen k) y ∈ (K.blowupChart V (ha i)).opensRange := hi
+        exact hW ▸ TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hi'⟩
+    have hBle : ∀ i, PrimeSpectrum.basicOpen
+        (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i)) ≤
+        K.blowupChart V (hgen k) ⁻¹ᵁ W := by
+      intro i
+      rw [hO]
+      exact le_iSup (fun i ↦ PrimeSpectrum.basicOpen
+        (AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))) i
+    refine AffineSpace.isClosed_range_of_basicOpen_fractions
+      (fun i ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (ha i))
+      (fun i j ↦ AffineBlowup.awaySlope (K.ideal V) (hgen k) (hb i j)) ?_ ?_
+      (fun i ↦ rfl) hO _ (AffineSpace.homOfVector_over _ _) hBle ?_
+    · -- the slopes of the generators generate the unit ideal
+      refine Ideal.span_mono ?_
+        (AffineBlowup.one_mem_span_awaySlope gen hgen hspan (hgen k))
+      rintro - ⟨(i | ⟨i, j⟩), rfl⟩
+      · exact Or.inl ⟨i, rfl⟩
+      · exact Or.inr (Set.mem_iUnion.mpr ⟨i, j, rfl⟩)
+    · -- the compatibility of the fractions
+      intro i i' j
+      refine AffineBlowup.awaySlope_mul_awaySlope (hgen k) (ha i) (hb i' j) (ha i')
+        (hb i j) ?_
+      rw [mul_comm (a i), hrel i' i j, mul_comm]
+    · -- the coordinate identity on each piece
+      intro i j
+      exact K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i)
+        (hci i) (hgi i) rfl (hBle i) j
+
+end Closedness
+
 section CommonDenominator
 
 /-! ### Common denominators for the coordinates of a partial map
@@ -1223,8 +1641,8 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
     (a := fun i ↦ gen (Sum.inl i)) (ha := fun i ↦ hgen (Sum.inl i))
     (b := fun i j ↦ gen (Sum.inr (i, j))) (hb := fun i j ↦ hgen (Sum.inr (i, j)))
     (fun i i' j ↦ hrel i i' j) W hWdef ci hci
-  refine ⟨⟨K, hFT, hdisj⟩, W, hWmem, g, hg, ?_, ?_⟩
-  · -- agreement over `U`
+  -- the extension agrees with `f` over `U`
+  have hagree : K.blowup.homOfLE hWmem ≫ g = (K.blowupMap ∣_ U) ≫ f := by
     have hPle : ∀ i : ι, K.blowupMap ⁻¹ᵁ X.basicOpen (u i) ≤ K.blowupMap ⁻¹ᵁ U :=
       fun i ↦ K.blowupMap.preimage_mono (hle i)
     have hcov2 : ∀ x : (K.blowupMap ⁻¹ᵁ U).toScheme,
@@ -1253,7 +1671,12 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
           (hgen (Sum.inr (i, j))))
       (Scheme.basicOpen_pow (X := X) (f := u i) hNpos) (hle i)
       (hcoord i) (ci i) (hci i) (hgi i) (hPchart i)
-  · sorry
+  -- the graph of the extension is closed
+  have hclosed : IsClosed (Set.range (pullback.lift W.ι g hg.symm)) :=
+    K.isClosed_range_pullbackLift_of_awaySlope V₀ (fun i ↦ hgen (Sum.inl i))
+      (fun i j ↦ hgen (Sum.inr (i, j))) (fun i i' j ↦ hrel i i' j) hspan
+      (fun _ ↦ trivial) hWdef ci hci g hg hgi
+  exact ⟨⟨K, hFT, hdisj⟩, W, hWmem, g, hg, hagree, hclosed⟩
 
 end Statement
 
