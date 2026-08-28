@@ -18,6 +18,20 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 # Derived Lower Shriek
 
+# Main Results
+
+- `AlgebraicGeometry.Compactification.rightDerivedLowerShriek` : `Rf_!` with respect to a
+  compcatification.
+
+- `AlgebraicGeometry.Compactification.rightDerivedLowerShriekPlus` : `Rf_!`
+  on bounded below derived category with respect to a compcatification.
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriek` : `Rf_!`
+  specifying to the chosen compcatification `HasCompactification.compactification`.
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriek` : `Rf_!` on bounded below derived category
+  specifying to the chosen compcatification `HasCompactification.compactification`.
+
 -/
 
 @[expose] public section

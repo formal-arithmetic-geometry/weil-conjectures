@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
@@ -15,6 +17,18 @@ public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
 /-!
 
 # Derived Upper Star and Lower Star
+
+# Main Results
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star.
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus` : total right derived of lower star on
+  bounded below derived category.
+
+- `AlgebraicGeometry.Etale.leftDerivedUpperStar` : total left derivation of upper star.
+
+- `AlgebraicGeometry.Etale.homologyLeftDerivedUpperStarIso` : compatibility of
+  `AlgebraicGeometry.Etale.leftDerivedUpperStar` and map derived category.
 
 -/
 
@@ -138,6 +152,44 @@ noncomputable def Etale.leftDerivedUpperStar :
     DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
   (Etale.upperStar A g).leftDerivedFunctor
+
+/-- The compatibility of the derived pullback with the levelwise functor: the total left
+derived functor `Lh^*`, computed via K-flat resolutions, is canonically isomorphic to
+the functor induced by the exact functor `h^*` on the derived categories. -/
+noncomputable def Etale.leftDerivedUpperStarIsoMapDerivedCategory {T S : Scheme.{u}}
+    (h : T ⟶ S) :
+    Etale.leftDerivedUpperStar A h ≅ (Etale.upperStar A h).mapDerivedCategory :=
+  (Etale.upperStar A h).leftDerivedFunctorIsoMapDerivedCategory
+
+/-- The composition isomorphism `L(h₁ ≫ h₂)^* ≅ Lh₁^* ∘ Lh₂^*` of derived pullbacks,
+obtained from the underived composition isomorphism `Etale.upperStarComp` and the
+compatibility of left derivation with `mapDerivedCategory` for exact functors. -/
+noncomputable def Etale.leftDerivedUpperStarComp {T S R : Scheme.{u}}
+    (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    Etale.leftDerivedUpperStar A (h₁ ≫ h₂) ≅
+      Etale.leftDerivedUpperStar A h₂ ⋙ Etale.leftDerivedUpperStar A h₁ :=
+  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarComp A h₁ h₂) ≪≫
+    Functor.leftDerivedFunctorCompIso (Etale.upperStar A h₂) (Etale.upperStar A h₁)
+
+/-- The exactness comparison `κ : h^* ∘ H^n ≅ H^n ∘ Lh^*`: since the underived pullback
+`h^*` on étale sheaves is exact, applying it to the `n`-th homology sheaf of an object
+of the derived category computes the `n`-th homology sheaf of the derived pullback. -/
+noncomputable def Etale.homologyLeftDerivedUpperStarIso {T S : Scheme.{u}}
+    (h : T ⟶ S) (n : ℤ) :
+    DerivedCategory.homologyFunctor (Sheaf S.smallEtaleTopology A) n ⋙ Etale.upperStar A h ≅
+      Etale.leftDerivedUpperStar A h ⋙
+        DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology A) n :=
+  (Etale.upperStar A h).leftDerivedFunctorHomologyFunctorIso n
+
+/-- The single-degree comparison for the derived pullback: since the underived pullback
+`h^*` on étale sheaves is exact, the derived pullback of a sheaf placed in degree `0` is
+the pullback of the sheaf placed in degree `0`, `Lh^*(F[0]) ≅ (h^* F)[0]`. -/
+noncomputable def Etale.singleCompLeftDerivedUpperStarIso {T S : Scheme.{u}} (h : T ⟶ S) :
+    DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology A) 0 ⋙
+        Etale.leftDerivedUpperStar A h ≅
+      Etale.upperStar A h ⋙
+        DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology A) 0 :=
+  (Etale.upperStar A h).singleFunctorCompLeftDerivedFunctorIso
 
 end DerivedUpperStar
 
