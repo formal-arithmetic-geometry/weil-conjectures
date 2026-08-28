@@ -39,6 +39,10 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
   `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_opens` (restriction to an open) and
   `AlgebraicGeometry.Scheme.IdealSheafData.comap_map` (a quasi-compact flat monomorphism)
   as special cases.
+
+The last section computes sections of the inverse image ideal sheaf:
+`AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_appLE_le_ideal_comap` and
+`AlgebraicGeometry.Scheme.Hom.mem_ker_comp`.
 -/
 
 @[expose] public section
@@ -204,5 +208,37 @@ theorem comap_map (f : X ⟶ Y) [QuasiCompact f] [Flat f] [Mono f] (J : X.IdealS
   rw [map_comap_of_isPullback J (IsKernelPair.id_of_mono f), comap_id, map_id]
 
 end FlatBaseChange
+
+section Sections
+
+/-- Sections of an ideal sheaf `K` over an affine open `V` restrict into the ideal of the
+pullback `K.comap g` over every affine open `U ≤ g ⁻¹ᵁ V`. -/
+lemma ideal_map_appLE_le_ideal_comap (K : Y.IdealSheafData) (g : X ⟶ Y) (V : Y.affineOpens)
+    (U : X.affineOpens) (h : U.1 ≤ g ⁻¹ᵁ V.1) :
+    (K.ideal V).map (g.appLE V.1 U.1 h).hom ≤ (K.comap g).ideal U := by
+  have hK : K ≤ ((K.comap g).subschemeι ≫ g).ker := by
+    rw [← subschemeMap_subschemeι (K.comap g) K g (K.le_map_comap g)]
+    exact le_of_eq_of_le K.ker_subschemeι.symm (Scheme.Hom.le_ker_comp _ K.subschemeι)
+  rw [Ideal.map_le_iff_le_comap]
+  intro s hs
+  have h1 : ((((K.comap g).subschemeι ≫ g).app V.1)).hom s = 0 :=
+    RingHom.mem_ker.mp (Scheme.Hom.ideal_ker_le _ V (le_def.mp hK V hs))
+  have key := Scheme.Hom.appLE_comp_appLE (K.comap g).subschemeι g V.1 U.1
+    ((K.comap g).subschemeι ⁻¹ᵁ U.1) h le_rfl
+  rw [Ideal.mem_comap, ← ker_subschemeι_app, RingHom.mem_ker, ← CommRingCat.comp_apply,
+    Scheme.Hom.app_eq_appLE, key]
+  simp only [Scheme.Hom.appLE, CommRingCat.comp_apply, h1, map_zero]
+
+/-- Membership in the kernel ideal of a composite `w ≫ g` over an affine open `V` is
+detected on the preimage `g ⁻¹ᵁ V`, provided the latter is affine. -/
+lemma _root_.AlgebraicGeometry.Scheme.Hom.mem_ker_comp {W : Scheme.{u}} (w : W ⟶ X) (g : X ⟶ Y)
+    [QuasiCompact w] [QuasiCompact g] (V : Y.affineOpens) (hV : IsAffineOpen (g ⁻¹ᵁ V.1))
+    (s : Γ(Y, V.1)) :
+    s ∈ (w ≫ g).ker.ideal V ↔ (g.app V.1).hom s ∈ w.ker.ideal ⟨g ⁻¹ᵁ V.1, hV⟩ := by
+  rw [Scheme.Hom.ker_apply, Scheme.Hom.ker_apply, RingHom.mem_ker, RingHom.mem_ker,
+    Scheme.Hom.comp_app, CommRingCat.hom_comp, RingHom.comp_apply]
+  exact Iff.rfl
+
+end Sections
 
 end AlgebraicGeometry.Scheme.IdealSheafData

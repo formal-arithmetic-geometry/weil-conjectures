@@ -42,6 +42,9 @@ piece is produced by clearing denominators on a finite basic-open cover of the o
   contained in `O` are finitely generated;
 - `Scheme.IdealSheafData.ofFiniteType`: `I` is of finite type on the whole scheme.
 
+The zero and unit ideal sheaves are of finite type (`Scheme.IdealSheafData.ofFiniteType_bot`
+and `Scheme.IdealSheafData.ofFiniteType_top`).
+
 ## Main results
 
 - `Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap`: finite-typeness on `O` is
@@ -101,6 +104,12 @@ lemma ofFiniteType_of_isLocallyNoetherian [IsLocallyNoetherian X] (I : X.IdealSh
     I.ofFiniteType := fun U _ ↦
   have := IsLocallyNoetherian.component_noetherian (X := X) U
   IsNoetherian.noetherian (I.ideal U)
+
+/-- The zero ideal sheaf is of finite type. -/
+lemma ofFiniteType_bot : (⊥ : X.IdealSheafData).ofFiniteType := fun U _ ↦ by
+  have h : (⊥ : X.IdealSheafData).ideal U = ⊥ := congrFun ideal_bot U
+  rw [h]
+  exact Submodule.fg_bot
 
 /-- The unit ideal sheaf is of finite type. -/
 lemma ofFiniteType_top : (⊤ : X.IdealSheafData).ofFiniteType := fun U _ ↦ by
