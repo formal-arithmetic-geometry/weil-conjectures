@@ -26,6 +26,19 @@ This file proves the density-preservation lemma for admissible blow-ups
   is a quasi-compact scheme-theoretically dense open of `X`, its inverse image under a
   `U`-admissible blow-up is scheme-theoretically dense in the total space.
 
+It also proves the existence statement of the blueprint's
+`lemma:nagata-conrad-schematically-dense-blowup`, in its absolute and relative forms:
+
+- `AlgebraicGeometry.exists_isAdmissible_isSchemeTheoreticallyDominant_preimage`: for a
+  quasi-compact open `U` of a qcqs scheme `X` there is a `U`-admissible blow-up in which
+  the inverse image of `U` is scheme-theoretically dense — blow up a finite-type center
+  supported exactly on the boundary `Uᶜ` (`Scheme.exists_finiteType_ideal_coe_support_eq_compl`,
+  Stacks Tag 01PH);
+- `AlgebraicGeometry.IsAdmissible.exists_comp_isSchemeTheoreticallyDominant_preimage`: the
+  same, dominating a given `U`-admissible blow-up `B` — apply the absolute form on the
+  total space of `B` and compose the two blow-ups (`IsAdmissible.exists_comp`, Stacks
+  Tag 080L).
+
 -/
 
 @[expose] public section
@@ -176,6 +189,72 @@ theorem dense_preimage_blowupMap [IsNoetherian X] {D : Set X} (hD : Dense D) :
     rw [← h1]
     congr 1
   exact Set.mem_preimage.mpr (hcomm ▸ hdD)
+
+end IsAdmissible
+
+/-- **A `U`-admissible blow-up in which `U` becomes scheme-theoretically dense**
+(blueprint: `lemma:nagata-conrad-schematically-dense-blowup`, absolute form): for a
+quasi-compact open `U` of a qcqs scheme `X` there is a `U`-admissible blow-up
+`B.I.blowupMap` whose restriction over `U` is scheme-theoretically dense in the total
+space.
+
+Blow up a finite-type center supported exactly on the boundary `Uᶜ`
+(`Scheme.exists_finiteType_ideal_coe_support_eq_compl`, Stacks Tag 01PH). Such a center
+is `U`-admissible and its preserved open is `U` on the nose, so the density of the
+inverse image of the complement of the center
+(`Scheme.IdealSheafData.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support`)
+is the assertion. -/
+theorem exists_isAdmissible_isSchemeTheoreticallyDominant_preimage
+    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) :
+    ∃ B : IsAdmissible X U, IsSchemeTheoreticallyDominant (B.I.blowupMap ⁻¹ᵁ U).ι := by
+  obtain ⟨I, hIft, hIsupp⟩ := X.exists_finiteType_ideal_coe_support_eq_compl U hU
+  have hdisj : Disjoint (U : Set X) (I.support : Set X) := by
+    rw [hIsupp]; exact disjoint_compl_right
+  have hcompl : I.support.compl = U := by
+    apply TopologicalSpace.Opens.ext
+    change (I.support : Set X)ᶜ = (U : Set X)
+    rw [hIsupp, compl_compl]
+  refine ⟨⟨I, hIft, hdisj⟩, ?_⟩
+  have h := I.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
+  rwa [hcompl] at h
+
+namespace IsAdmissible
+
+/-- **A further `U`-admissible blow-up in which `U` becomes scheme-theoretically dense**
+(blueprint: `lemma:nagata-conrad-schematically-dense-blowup`, relative form): given a
+`U`-admissible blow-up `B` of a qcqs scheme `X` along a quasi-compact open `U`, there is
+a `U`-admissible blow-up `B'` of `X` dominating it — a morphism `h : B'.I.blowup ⟶
+B.I.blowup` over `X` — in which the inverse image of `U` is scheme-theoretically dense.
+
+The total space of `B` is again qcqs and `B.I.blowupMap ⁻¹ᵁ U` is again quasi-compact
+(`IsAdmissible.isProper_blowupMap`), so the absolute form
+`exists_isAdmissible_isSchemeTheoreticallyDominant_preimage` applies to it; composing the
+two blow-ups (`IsAdmissible.exists_comp`, Stacks Tag 080L) gives a `U`-admissible center
+`K` on `X` together with an identification of the two total spaces over `X`, along which
+the density transports. -/
+theorem exists_comp_isSchemeTheoreticallyDominant_preimage
+    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) (B : IsAdmissible X U) :
+    ∃ (B' : IsAdmissible X U) (h : B'.I.blowup ⟶ B.I.blowup),
+      h ≫ B.I.blowupMap = B'.I.blowupMap ∧
+      IsSchemeTheoreticallyDominant (B'.I.blowupMap ⁻¹ᵁ U).ι := by
+  have := B.isProper_blowupMap
+  have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
+  have : QuasiSeparatedSpace B.I.blowup :=
+    quasiSeparatedSpace_of_quasiSeparated B.I.blowupMap
+  set V : B.I.blowup.Opens := B.I.blowupMap ⁻¹ᵁ U with hVdef
+  have hV : IsCompact (V : Set B.I.blowup) :=
+    QuasiCompact.isCompact_preimage (f := B.I.blowupMap) _ U.isOpen hU
+  obtain ⟨B₂, hB₂⟩ := exists_isAdmissible_isSchemeTheoreticallyDominant_preimage hV
+  obtain ⟨K, hKft, hKdisj, iso, hiso⟩ := B.exists_comp B₂
+  have hK : K.blowupMap = iso.inv ≫ B₂.I.blowupMap ≫ B.I.blowupMap := by
+    rw [← hiso, iso.inv_hom_id_assoc]
+  refine ⟨⟨K, hKft, hKdisj⟩, iso.inv ≫ B₂.I.blowupMap, by rw [Category.assoc, ← hK], ?_⟩
+  show IsSchemeTheoreticallyDominant (K.blowupMap ⁻¹ᵁ U).ι
+  have hpre : K.blowupMap ⁻¹ᵁ U = iso.inv ⁻¹ᵁ (B₂.I.blowupMap ⁻¹ᵁ V) := by rw [hK]; rfl
+  rw [hpre]
+  exact .preimage_ι_of_isIso iso.inv _
 
 end IsAdmissible
 
