@@ -206,6 +206,33 @@ lemma awayMap_awayAlgebraMap_apply {a : A} (ha : a ∈ I) {g : reesAlgebra I}
       awayAlgebraMap I x r :=
   awayMap_fromZeroRingHom (reesGrading I) hg hx ((reesGradingZero I) r)
 
+/-- The `Away.isLocalizationElem` of two degree-one Rees elements is the slope. -/
+lemma isLocalizationElem_eq_awaySlope {a b : A} (ha : a ∈ I) (hb : b ∈ I) :
+    HomogeneousLocalization.Away.isLocalizationElem (reesX_mem I a ha) (reesX_mem I b hb) =
+      awaySlope I ha hb := by
+  rw [HomogeneousLocalization.ext_iff_val, awaySlope, HomogeneousLocalization.Away.val_mk,
+    HomogeneousLocalization.Away.val_mk, pow_one]
+
+/-- **Passing between blow-up charts**: if the image of `b` is invertible at a point of the
+`a`-chart, that point lies in the `b`-chart. -/
+lemma mem_range_chart_of_mem_basicOpen {a b : A} (ha : a ∈ I) (hb : b ∈ I)
+    (y : Spec (.of (HomogeneousLocalization.Away (reesGrading I) (reesX I a ha))))
+    (hy : y ∈ PrimeSpectrum.basicOpen (awayAlgebraMap I (reesX I a ha) b)) :
+    chart I (reesX I a ha) (reesX_mem I a ha) y ∈
+      Set.range (chart I (reesX I b hb) (reesX_mem I b hb)) := by
+  have hmem : y ∈ chart I (reesX I a ha) (reesX_mem I a ha) ⁻¹ᵁ
+      Proj.basicOpen (reesGrading I) (reesX I b hb) := by
+    rw [chart, Proj.awayι_preimage_basicOpen (𝒜 := reesGrading I)
+      (reesX_mem I a ha) one_pos (reesX_mem I b hb) one_pos,
+      isLocalizationElem_eq_awaySlope ha hb]
+    have hfac : awayAlgebraMap I (reesX I a ha) b =
+        awaySlope I ha hb * awayAlgebraMap I (reesX I a ha) a :=
+      (awaySlope_mul_awayAlgebraMap ha hb).symm
+    rw [hfac, PrimeSpectrum.basicOpen_mul] at hy
+    exact hy.1
+  rw [← opensRange_chart I (reesX I b hb) (reesX_mem I b hb)] at hmem
+  exact hmem
+
 end AffineBlowup
 
 end Slope
@@ -257,6 +284,22 @@ lemma iSup_basicOpen_reesX_gen_eq_top {κ : Type*} (gen : κ → A) (hgen : ∀ 
     ((irrelevant_le_span_range_reesX I).trans (Ideal.span_le.mpr (by
       rintro - ⟨b, rfl⟩
       exact reesX_mem_span_reesX I gen hgen hspan b.2)))
+
+/-- **The charts at a generating family cover the blow-up over an affine open.** -/
+lemma Scheme.IdealSheafData.exists_mem_range_blowupChart_of_span (I : X.IdealSheafData)
+    (V : X.affineOpens) {κ : Type*} {gen : κ → Γ(X, V.1)} (hgen : ∀ k, gen k ∈ I.ideal V)
+    (hspan : Ideal.span (Set.range gen) = I.ideal V) {x : I.blowup}
+    (hx : x ∈ I.blowupMap ⁻¹ᵁ V.1) :
+    ∃ (k : κ) (y : _), x = I.blowupChart V (hgen k) y := by
+  rw [I.blowupMap_preimage V] at hx
+  obtain ⟨y, rfl⟩ := hx
+  have hy : y ∈ (⊤ : (AffineBlowup (I.ideal V)).Opens) := trivial
+  rw [← iSup_basicOpen_reesX_gen_eq_top (I.ideal V) gen hgen hspan] at hy
+  obtain ⟨k, hyk⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
+  rw [← AffineBlowup.opensRange_chart (I.ideal V) (reesX (I.ideal V) (gen k) (hgen k))
+    (reesX_mem (I.ideal V) (gen k) (hgen k))] at hyk
+  obtain ⟨z, hz⟩ := hyk
+  exact ⟨k, z, by rw [Scheme.IdealSheafData.blowupChart, Scheme.Hom.comp_apply, hz]⟩
 
 end ChartCover
 
@@ -613,6 +656,129 @@ theorem isClosed_range_of_basicOpen_fractions {S : CommRingCat.{u}} {ι : Type*}
 end AffineSpace
 
 end GraphClosedness
+
+section CommonDenominator
+
+/-! ### Common denominators for the coordinates of a partial map
+
+On a quasi-compact open `U` of an affine scheme the coordinates of a morphism to a
+relative affine space are fractions with a common denominator over a finite cover of `U`
+by basic opens, and after enlarging the exponent the numerators satisfy the transition
+identities exactly in the global sections of `X`. -/
+
+open AffineSpace in
+/-- A quasi-compact open of an affine scheme is a finite union of basic opens. -/
+lemma exists_finite_basicOpen_cover {X : Scheme.{u}} [IsAffine X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) :
+    ∃ (ι : Type u) (_ : Finite ι) (u : ι → Γ(X, ⊤)) (_ : ∀ i, X.basicOpen (u i) ≤ U),
+      U = ⨆ i, X.basicOpen (u i) := by
+  classical
+  obtain ⟨t, ht⟩ := hU.elim_finite_subcover
+    (fun a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} ↦ (X.basicOpen a.1 : Set X))
+    (fun a ↦ (X.basicOpen a.1).2) (by
+      intro x hx
+      obtain ⟨a, ha1, ha2⟩ := (isAffineOpen_top X).exists_basicOpen_le (V := U) ⟨x, hx⟩ trivial
+      exact Set.mem_iUnion.mpr ⟨⟨a, ha1⟩, ha2⟩)
+  refine ⟨{a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} // a ∈ t}, inferInstance,
+    fun a ↦ a.1.1, fun a ↦ a.1.2, le_antisymm ?_ (iSup_le fun a ↦ a.1.2)⟩
+  intro x hx
+  obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (ht hx)
+  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨a, ha⟩, hxa⟩
+
+open AffineSpace in
+/-- **Common denominators for a partial map to affine space.** If `U` is a quasi-compact
+open of an affine scheme `X` and `f : U ⟶ 𝔸(σ; X)`, then `U` is covered by finitely many
+basic opens `D(uᵢ)` on which the coordinates of `f` are the fractions `cᵢⱼ / uᵢ ^ N` for a
+single exponent `N`, and the numerators satisfy the compatibilities
+`cᵢⱼ · uᵢ'^N = cᵢ'ⱼ · uᵢ^N` *exactly* in `Γ(X, ⊤)`. -/
+lemma exists_uniform_denominator {X : Scheme.{u}} [IsAffine X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) {σ : Type u} [Finite σ] (f : U.toScheme ⟶ 𝔸(σ; X)) :
+    ∃ (ι : Type u) (_ : Finite ι) (u : ι → Γ(X, ⊤)) (hle : ∀ i, X.basicOpen (u i) ≤ U)
+      (N : ℕ) (c : ι → σ → Γ(X, ⊤)),
+      U = ⨆ i, X.basicOpen (u i) ∧
+      (∀ i i' j, c i j * u i' ^ N = c i' j * u i ^ N) ∧
+      (∀ i j, (X.homOfLE (hle i) ≫ f).appTop (coord X j) *
+          (X.basicOpen (u i)).ι.appTop (u i ^ N) = (X.basicOpen (u i)).ι.appTop (c i j)) := by
+  classical
+  obtain ⟨ι, hι, u, hle, hUeq⟩ := exists_finite_basicOpen_cover hU
+  haveI : Fintype ι := Fintype.ofFinite ι
+  haveI : Fintype σ := Fintype.ofFinite σ
+  set t : ∀ i : ι, σ → Γ((X.basicOpen (u i)).toScheme, ⊤) :=
+    fun i j ↦ (X.homOfLE (hle i) ≫ f).appTop (coord X j) with ht
+  -- the coordinates are fractions with a power of `u i` as denominator
+  have hfrac : ∀ i j, ∃ (a : Γ(X, ⊤)) (k : ℕ),
+      t i j * (X.basicOpen (u i)).ι.appTop (u i ^ k) =
+        (X.basicOpen (u i)).ι.appTop a := by
+    intro i j
+    obtain ⟨⟨aa, s⟩, hh⟩ := IsLocalization.surj (Submonoid.powers (u i)) (t i j)
+    obtain ⟨k, hk⟩ := s.2
+    have hk' : u i ^ k = (s : Γ(X, ⊤)) := hk
+    exact ⟨aa, k, by rw [hk']; exact hh⟩
+  choose a k hak using hfrac
+  -- one exponent works for all coordinates
+  set N : ℕ := Finset.univ.sup (fun p : ι × σ ↦ k p.1 p.2) with hN
+  have hkN : ∀ i j, k i j ≤ N := fun i j ↦ Finset.le_sup (f := fun p : ι × σ ↦ k p.1 p.2)
+    (Finset.mem_univ (i, j))
+  have hfrac2 : ∀ i j, ∃ bb : Γ(X, ⊤),
+      t i j * (X.basicOpen (u i)).ι.appTop (u i ^ N) = (X.basicOpen (u i)).ι.appTop bb := by
+    intro i j
+    refine ⟨a i j * u i ^ (N - k i j), ?_⟩
+    have hpow : u i ^ N = u i ^ k i j * u i ^ (N - k i j) := by
+      rw [← pow_add, Nat.add_sub_cancel' (hkN i j)]
+    rw [hpow, map_mul, map_mul, ← mul_assoc, hak i j]
+  choose b hbN using hfrac2
+  -- the numerators agree on the overlaps after multiplying by a power of the denominators
+  have hover : ∀ i i' j, ∃ m : ℕ,
+      (u i * u i') ^ m * (b i j * u i' ^ N - b i' j * u i ^ N) = 0 := by
+    intro i i' j
+    have hii' : X.basicOpen (u i * u i') ≤ X.basicOpen (u i) := by
+      rw [Scheme.basicOpen_mul]; exact inf_le_left
+    have hi'i : X.basicOpen (u i * u i') ≤ X.basicOpen (u i') := by
+      rw [Scheme.basicOpen_mul]; exact inf_le_right
+    -- the two local coordinates restrict to the same section on the overlap
+    have hres : ∀ (i₀ : ι) (h : X.basicOpen (u i * u i') ≤ X.basicOpen (u i₀))
+        (x : Γ(X, ⊤)), (X.homOfLE h).appTop ((X.basicOpen (u i₀)).ι.appTop x) =
+          (X.basicOpen (u i * u i')).ι.appTop x := by
+      intro i₀ h x
+      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Scheme.homOfLE_ι]
+    have hcommon : (X.homOfLE hii').appTop (t i j) = (X.homOfLE hi'i).appTop (t i' j) := by
+      simp only [ht]
+      rw [← CommRingCat.comp_apply, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+        ← Scheme.Hom.comp_appTop, ← Category.assoc, ← Category.assoc,
+        Scheme.homOfLE_homOfLE, Scheme.homOfLE_homOfLE]
+    have h1 := congrArg (X.homOfLE hii').appTop (hbN i j)
+    have h2 := congrArg (X.homOfLE hi'i).appTop (hbN i' j)
+    rw [map_mul, hres i hii', hres i hii'] at h1
+    rw [map_mul, hres i' hi'i, hres i' hi'i, ← hcommon] at h2
+    have h3 : (X.basicOpen (u i * u i')).ι.appTop (b i j * u i' ^ N) =
+        (X.basicOpen (u i * u i')).ι.appTop (b i' j * u i ^ N) := by
+      rw [map_mul, map_mul, ← h1, ← h2]; ring
+    obtain ⟨cc, hcm⟩ := IsLocalization.exists_of_eq
+      (M := Submonoid.powers (u i * u i')) (S := Γ((X.basicOpen (u i * u i')).toScheme, ⊤)) h3
+    obtain ⟨mm, hmc⟩ := cc.2
+    have hmc' : (u i * u i') ^ mm = (cc : Γ(X, ⊤)) := hmc
+    exact ⟨mm, by rw [hmc', mul_sub, hcm, sub_self]⟩
+  choose m hm using hover
+  set M : ℕ := Finset.univ.sup (fun p : ι × ι × σ ↦ m p.1 p.2.1 p.2.2) with hM
+  have hmM : ∀ i i' j, m i i' j ≤ M := fun i i' j ↦
+    Finset.le_sup (f := fun p : ι × ι × σ ↦ m p.1 p.2.1 p.2.2) (Finset.mem_univ (i, i', j))
+  have hmM' : ∀ i i' j, (u i * u i') ^ M * (b i j * u i' ^ N - b i' j * u i ^ N) = 0 := by
+    intro i i' j
+    have : (u i * u i') ^ M = (u i * u i') ^ (M - m i i' j) * (u i * u i') ^ m i i' j := by
+      rw [← pow_add, Nat.sub_add_cancel (hmM i i' j)]
+    rw [this, mul_assoc, hm i i' j, mul_zero]
+  refine ⟨ι, inferInstance, u, hle, N + M, fun i j ↦ b i j * u i ^ M, hUeq, ?_, ?_⟩
+  · intro i i' j
+    have := hmM' i i' j
+    rw [mul_pow, mul_sub, sub_eq_zero] at this
+    calc b i j * u i ^ M * u i' ^ (N + M)
+        = u i ^ M * u i' ^ M * (b i j * u i' ^ N) := by ring
+      _ = u i ^ M * u i' ^ M * (b i' j * u i ^ N) := this
+      _ = b i' j * u i' ^ M * u i ^ (N + M) := by ring
+  · intro i j
+    rw [pow_add, map_mul, ← mul_assoc, hbN i j, ← map_mul]
+
+end CommonDenominator
 
 section Statement
 
