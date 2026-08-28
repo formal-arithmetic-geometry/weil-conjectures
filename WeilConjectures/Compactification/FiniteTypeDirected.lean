@@ -66,7 +66,7 @@ open `U` are directed: the family is closed under `⊔`. -/
 theorem directedOn_ofFiniteType_le_comap_eq_top (H : X.IdealSheafData) (U : X.Opens) :
     DirectedOn (· ≤ ·)
       {K : X.IdealSheafData | K ≤ H ∧ K.ofFiniteType ∧ K.comap U.ι = ⊤} := by
-  rintro K₁ ⟨h₁, hf₁, ht₁⟩ K₂ ⟨h₂, hf₂, ht₂⟩
+  rintro K₁ ⟨h₁, hf₁, ht₁⟩ K₂ ⟨h₂, hf₂, -⟩
   refine ⟨K₁ ⊔ K₂, ⟨sup_le h₁ h₂, hf₁.sup hf₂, top_le_iff.mp ?_⟩, le_sup_left, le_sup_right⟩
   rw [← ht₁]
   exact comap_mono U.ι le_sup_left
