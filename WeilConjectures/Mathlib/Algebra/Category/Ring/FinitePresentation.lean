@@ -21,6 +21,8 @@ index `i` and an `Rᵢ`-algebra `T` of finite presentation with `S ≅ T ⊗[R�
   over `R` by relations that are defined over an `R`-algebra `A`, then `S` is the base change
   of the corresponding quotient over `A`.
 - `CommRingCat.exists_isPushout_of_finitePresentation`: the descent statement above.
+- `CommRingCat.exists_isPushout_of_finitePresentation_of_surjective`: if moreover `S` is a
+  quotient of `R`, then `T` can be chosen to be a quotient of `Rᵢ`.
 
 ## References
 
@@ -191,6 +193,26 @@ lemma exists_forall_mem_range_map_ι_app (s : Finset (MvPolynomial σ c.pt)) :
   exact range_map_ι_app_subset F c α (hj ⟨p, hp⟩)
 
 include hc in
+/-- Finitely many elements of a filtered colimit of rings all lift to a common finite
+stage. -/
+lemma exists_forall_mem_range_ι_app (s : Finset c.pt) :
+    ∃ j, ∀ x ∈ s, x ∈ Set.range (c.ι.app j) := by
+  classical
+  have key : ∀ x : s, ∃ (j : J) (y : F.obj j), (c.ι.app j).hom y = (x : c.pt) := by
+    intro x
+    obtain ⟨j, y, hy⟩ :=
+      Types.jointly_surjective_of_isColimit (isColimitOfPreserves (forget _) hc)
+        (show ((forget CommRingCat).mapCocone c).pt from (x : c.pt))
+    exact ⟨j, y, hy⟩
+  choose j y hy using key
+  obtain ⟨k, hk⟩ := IsFiltered.sup_objs_exists (Finset.univ.image j)
+  refine ⟨k, fun x hx ↦ ?_⟩
+  obtain ⟨α⟩ := hk (Finset.mem_image_of_mem j (Finset.mem_univ (⟨x, hx⟩ : s)))
+  have hw : ∀ a, (c.ι.app k).hom ((F.map α).hom a) = (c.ι.app (j ⟨x, hx⟩)).hom a := fun a ↦
+    DFunLike.congr_fun (congrArg CommRingCat.Hom.hom (c.w α)) a
+  exact ⟨(F.map α).hom (y ⟨x, hx⟩), (hw (y ⟨x, hx⟩)).trans (hy ⟨x, hx⟩)⟩
+
+include hc in
 /-- **Finitely presented algebras descend along filtered colimits of rings.**
 
 If `S` is an algebra of finite presentation over the colimit `c.pt` of a filtered diagram `F`
@@ -230,5 +252,93 @@ theorem exists_isPushout_of_finitePresentation {S : CommRingCat.{u}} (f : c.pt �
       (A := (F.obj i : Type u)) (B := MvPolynomial (Fin n) (F.obj i))
     rw [MvPolynomial.algebraMap_eq] at this
     exact this.mpr inferInstance
+
+include hc in
+/-- **Finitely presented quotients descend along filtered colimits of rings.**
+
+If `S` is the quotient of the colimit `c.pt` of a filtered diagram `F` of commutative rings
+by a finitely generated ideal — equivalently, `f : c.pt ⟶ S` is surjective and of finite
+presentation — then `S` is the base change of a finitely presented quotient of one of the
+`F.obj j`. -/
+theorem exists_isPushout_of_finitePresentation_of_surjective {S : CommRingCat.{u}}
+    (f : c.pt ⟶ S) (hf : f.hom.FinitePresentation) (hsurj : Function.Surjective f) :
+    ∃ (j : J) (T : CommRingCat.{u}) (g : F.obj j ⟶ T) (_ : g.hom.FinitePresentation)
+      (_ : Function.Surjective g) (h : T ⟶ S), IsPushout (c.ι.app j) g f h := by
+  classical
+  have hsurj' : Function.Surjective f.hom := hsurj
+  -- The kernel of `f` is finitely generated.
+  obtain ⟨s, hs⟩ : (RingHom.ker f.hom).FG := by
+    letI := f.hom.toAlgebra
+    haveI : Algebra.FinitePresentation c.pt S := hf
+    exact Algebra.FinitePresentation.ker_fG_of_surjective (Algebra.ofId c.pt S) hsurj'
+  -- Lift the generators of the kernel to a common stage `j`.
+  obtain ⟨j, hj⟩ := exists_forall_mem_range_ι_app F c hc s
+  choose lift hlift₀ using fun x : s ↦ hj x x.2
+  have hlift : ∀ x : s, (c.ι.app j).hom (lift x) = (x : c.pt) := fun x ↦ hlift₀ x
+  set I : Ideal (F.obj j) := Ideal.span (Set.range lift) with hI
+  -- The quotient by the lifted generators is a finitely presented quotient.
+  have hmkfp : (Ideal.Quotient.mk I).FinitePresentation := by
+    refine RingHom.FinitePresentation.of_surjective _ Ideal.Quotient.mk_surjective ?_
+    rw [Ideal.mk_ker]
+    exact ⟨s.attach.image lift, by rw [hI]; simp⟩
+  -- The generators die in `S`, so the quotient maps to `S`.
+  have hmem : ∀ x : s, f.hom (x : c.pt) = 0 := fun x ↦ by
+    have hx : (x : c.pt) ∈ RingHom.ker f.hom := by rw [← hs]; exact Ideal.subset_span x.2
+    exact RingHom.mem_ker.mp hx
+  have hIle : I ≤ RingHom.ker (f.hom.comp (c.ι.app j).hom) := by
+    rw [hI, Ideal.span_le]
+    rintro - ⟨x, rfl⟩
+    refine RingHom.mem_ker.mpr ?_
+    change f.hom ((c.ι.app j).hom (lift x)) = 0
+    rw [hlift x]
+    exact hmem x
+  set h : CommRingCat.of (F.obj j ⧸ I) ⟶ S :=
+    ofHom (Ideal.Quotient.lift I (f.hom.comp (c.ι.app j).hom)
+      fun a ha ↦ RingHom.mem_ker.mp (hIle ha)) with hhdef
+  have hcomp : ∀ a : F.obj j, h.hom (Ideal.Quotient.mk I a) = f.hom ((c.ι.app j).hom a) :=
+    fun a ↦ rfl
+  -- The maps out of `S` induced by a pushout cocone, and their defining property.
+  have hker_le : ∀ (W : CommRingCat.{u}) (u : c.pt ⟶ W) (v : CommRingCat.of (F.obj j ⧸ I) ⟶ W),
+      c.ι.app j ≫ u = ofHom (Ideal.Quotient.mk I) ≫ v →
+        RingHom.ker f.hom ≤ RingHom.ker u.hom := by
+    intro W u v huv
+    rw [← hs, Ideal.span_le]
+    intro x hx
+    refine RingHom.mem_ker.mpr ?_
+    have h1 : u.hom ((c.ι.app j).hom (lift ⟨x, hx⟩)) =
+        v.hom (Ideal.Quotient.mk I (lift ⟨x, hx⟩)) :=
+      DFunLike.congr_fun (congrArg CommRingCat.Hom.hom huv) (lift ⟨x, hx⟩)
+    have h2 : Ideal.Quotient.mk I (lift ⟨x, hx⟩) = 0 :=
+      Ideal.Quotient.eq_zero_iff_mem.mpr (hI ▸ Ideal.subset_span ⟨⟨x, hx⟩, rfl⟩)
+    change u.hom x = 0
+    calc u.hom x = u.hom ((c.ι.app j).hom (lift ⟨x, hx⟩)) := by rw [hlift ⟨x, hx⟩]
+      _ = v.hom (Ideal.Quotient.mk I (lift ⟨x, hx⟩)) := h1
+      _ = 0 := by rw [h2, map_zero]
+  set desc : ∀ (W : CommRingCat.{u}) (u : c.pt ⟶ W) (v : CommRingCat.of (F.obj j ⧸ I) ⟶ W),
+      c.ι.app j ≫ u = ofHom (Ideal.Quotient.mk I) ≫ v → (S ⟶ W) :=
+    fun W u v huv ↦ ofHom (RingHom.liftOfSurjective f.hom hsurj'
+      ⟨u.hom, hker_le W u v huv⟩) with hdescdef
+  have hdesc : ∀ (W : CommRingCat.{u}) (u : c.pt ⟶ W) (v : CommRingCat.of (F.obj j ⧸ I) ⟶ W)
+      (huv : c.ι.app j ≫ u = ofHom (Ideal.Quotient.mk I) ≫ v) (a : c.pt),
+      (desc W u v huv).hom (f.hom a) = u.hom a :=
+    fun W u v huv a ↦ RingHom.liftOfSurjective_comp_apply f.hom hsurj' _ a
+  refine ⟨j, CommRingCat.of (F.obj j ⧸ I), ofHom (Ideal.Quotient.mk I),
+    (by simpa using hmkfp), Ideal.Quotient.mk_surjective, h, ⟨?_⟩,
+    ⟨PushoutCocone.IsColimit.mk _ (fun t ↦ desc _ t.inl t.inr t.condition) ?_ ?_ ?_⟩⟩
+  · exact CommRingCat.hom_ext (RingHom.ext fun a ↦ (hcomp a).symm)
+  · intro t
+    exact CommRingCat.hom_ext (RingHom.ext fun a ↦ hdesc _ t.inl t.inr t.condition a)
+  · intro t
+    refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective (I := I) x
+    change (desc _ t.inl t.inr t.condition).hom (h.hom (Ideal.Quotient.mk I a)) =
+      t.inr.hom (Ideal.Quotient.mk I a)
+    rw [hcomp a, hdesc _ t.inl t.inr t.condition]
+    exact DFunLike.congr_fun (congrArg CommRingCat.Hom.hom t.condition) a
+  · intro t m hm₁ hm₂
+    refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
+    obtain ⟨a, rfl⟩ := hsurj' x
+    rw [hdesc _ t.inl t.inr t.condition]
+    exact DFunLike.congr_fun (congrArg CommRingCat.Hom.hom hm₁) a
 
 end CommRingCat
