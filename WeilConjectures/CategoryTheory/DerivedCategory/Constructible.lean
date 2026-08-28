@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
 
 /-!
 
