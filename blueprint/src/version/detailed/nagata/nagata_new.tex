@@ -4574,26 +4574,42 @@ correction explicit before it is sheafified and glued.
   by localization compatibility of module strict transform.
 \end{proof}
 
-\begin{remark}[Formalization route: the flattening chain is the route to
-  Tag 081S]
+\begin{remark}[Formalization route: the flattening chain is \emph{not} the
+  route to Tag 081S]
   The module-flattening route below
   (\Cref{lemma:nagata-finite-data-flattening-package},
   \Cref{thm:nagata-module-flattening-by-blowup},
   \Cref{lemma:nagata-flattening-after-cartier-boundary},
   \Cref{lemma:nagata-flattening-ideal-exists},
   \Cref{lemma:nagata-dense-open-dimension-package}; Stacks Tags
-  0815/081R/081P/081L) \emph{is} on the formalized route: it is the route to
-  \Cref{lemma:nagata-elimination-indeterminacy} (Tag 081S), the single
-  primitive obligation of the modification layer, which is currently stated
-  with \texttt{sorry} in Lean.  This supersedes an earlier decision to leave
-  the flattening chain off the formalized route.
+  0815/081R/081P/081L) is the Stacks Project's proof of
+  \Cref{lemma:nagata-elimination-indeterminacy} (Tag 081S), but it is
+  \emph{not} the formalized route.  The reason is that the chain bottoms out
+  in the d\'evissage sections of Stacks \S\S38.4--38.10, which exist neither
+  in Mathlib nor in this blueprint.
+
+  Tag 081S is instead formalized along Conrad's Theorem 2.4 and Zariski's Main
+  Theorem: see the chapter ``Elimination of indeterminacy after Deligne and
+  Conrad'', whose main results are
+  \Cref{thm:nagata-conrad-elimination} and
+  \Cref{cor:nagata-conrad-proper-target-extension}, and the route remark that
+  closes it.  Both external inputs are available: Zariski's Main Theorem is in
+  Mathlib (\texttt{Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean}), and
+  Stacks Tag 04II is already formalized here as
+  \texttt{AlgebraicGeometry.exists\_immersion\_affineSpace\_of\_quasiAffine}
+  (\Cref{lemma:nagata-quasi-affine-immersion-affine-space-exists}).  The
+  affine algebraic layer of
+  \Cref{lemma:nagata-module-strict-transform-exact} is nonetheless formalized
+  (\texttt{Submodule.powTorsion} and \texttt{Submodule.torsion'QuotientMap} in
+  \texttt{WeilConjectures/Mathlib/Algebra/Module/Torsion.lean}); the rest of
+  the flattening chain is not.
 
   What is unchanged is the route to the two-open compactification theorem
-  (\Cref{thm:nagata-two-open}): it does not go through flattening, but uses
-  the separation blow-up of \Cref{lemma:nagata-separate-closed-subschemes}
+  (\Cref{thm:nagata-two-open}): it does not go through flattening either way,
+  but uses the separation blow-up of
+  \Cref{lemma:nagata-separate-closed-subschemes}
   (Tag 0F3V), common modifications, and the dense-source valuative criterion
-  (\Cref{lemma:nagata-dense-source-valuative}).  Flattening enters only below
-  \Cref{lemma:nagata-elimination-indeterminacy}.
+  (\Cref{lemma:nagata-dense-source-valuative}).
 \end{remark}
 
 \begin{lemma}[Finite-data flattening induction package]
@@ -9372,3 +9388,970 @@ made inside the final theorem.
   \Cref{def:nagata-compactification}.  Hence the named construction is a
   compactification, and its existence witnesses compactifiability.
 \end{proof}
+
+\chapter{Elimination of indeterminacy after Deligne and Conrad}
+
+This chapter is the formalized route to
+\Cref{lemma:nagata-elimination-indeterminacy} (Stacks Tag 081S), the single
+primitive obligation of the modification layer.  It follows Deligne's notes as
+written up by Conrad
+\cite[\S\S1--2, pp.~10--19]{ConradNagata}: two blow-up lemmas of Deligne
+(\emph{Lemme} 0.2 and \emph{Lemme} 0.3, which are Lemmas 1.4 and 1.5 of
+\emph{loc.\ cit.}), and then Conrad's Theorem 2.4 (Deligne's
+\emph{Th\'eor\`eme} 1.2, Nagata's Theorem 3.2): a rational map to a separated
+finite-type target becomes defined, in the precise sense of a quasi-domination,
+after a single admissible blow-up of the source.  The proof is a chain of four
+special cases, the last of which uses Zariski's Main Theorem to replace an
+arbitrary target by a quasi-affine one.
+
+The route written in the previous chapter --- Raynaud--Gruson flattening by
+blow-up (Stacks Tags 0815, 081R, 081P, 081L) --- is not the formalized one;
+see the remark after \Cref{lemma:nagata-module-strict-transform-exact} and the
+route remark closing this chapter.  Nothing in this chapter is formalized yet,
+so every \verb|\lean| field below is empty.
+
+Throughout, $S$ is a quasi-compact and quasi-separated base scheme and all
+fibre products of $S$-schemes are taken over $S$ unless another base is
+displayed.  We freely use the affine blow-up charts of
+\Cref{def:nagata-blowup-chart-ring}: for an ideal $I\subseteq A$ and $s\in I$
+we write
+\[
+  U(s)=\operatorname{Spec}\bigl(A[I/s]\bigr)
+    \subseteq\operatorname{Bl}_I(\operatorname{Spec}A),
+\]
+the open locus on which the extended ideal $I\cdot\mathcal O$ is invertible
+with global basis $s$; by
+\Cref{prop:nagata-affine-blowup-chart-cover} these charts, taken over a
+generating set of $I$, cover the blow-up.
+
+\section{Quasi-dominations}
+
+\begin{definition}[Quasi-domination,
+  {\cite[Def.~2.1]{ConradNagata}}]
+  \label{def:nagata-conrad-quasi-domination}
+  \lean{}
+
+  Let $X$ and $Y$ be $S$-schemes with $Y\to S$ separated.  A
+  \emph{quasi-domination of $X$ over $Y$} is a pair $(U,f)$ consisting of a
+  dense open subscheme $U\subseteq X$ and an $S$-morphism $f\colon U\to Y$
+  whose graph subscheme
+  \[
+    \Gamma_f\hookrightarrow U\times_SY
+  \]
+  is closed when viewed as a subscheme of $X\times_SY$.  If $U'\subseteq X$ is
+  an open subscheme and $f'\colon U'\to Y$ an $S$-morphism, a
+  \emph{quasi-domination of $X$ over $Y$ extending $f'$} is a quasi-domination
+  $(U,f)$ with $U'\subseteq U\subseteq X$ and $f|_{U'}=f'$.
+\end{definition}
+
+Since $Y\to S$ is separated, $\Gamma_f$ is automatically closed in
+$U\times_SY$; the condition above is the stronger requirement that it stay
+closed after enlarging $U$ to $X$.  The subscheme $\Gamma_f$ maps
+isomorphically to $U$, so it carries exactly the data of the pair $(U,f)$.
+This is the closedness property that will be needed when separated $S$-schemes
+are glued along isomorphic open subschemes.
+
+\begin{lemma}[A morphism on a dense open of a separated target is a
+  quasi-domination of that open, {\cite[Rem.~2.5]{ConradNagata}}]
+  \label{lemma:nagata-conrad-morphism-is-quasi-domination}
+  \uses{def:nagata-conrad-quasi-domination}
+  \lean{}
+
+  Let $Y\to S$ be separated and let $f\colon U\to Y$ be any $S$-morphism.
+  Then $(U,f)$ is a quasi-domination of $U$ over $Y$.
+\end{lemma}
+
+\begin{proof}
+  Take $X=U$ in \Cref{def:nagata-conrad-quasi-domination}.  The open
+  subscheme $U\subseteq U$ is dense, and the closedness condition asks that
+  $\Gamma_f$ be closed in $U\times_SY$, which is the separatedness of
+  $Y\to S$.
+\end{proof}
+
+\begin{lemma}[A quasi-domination over a proper target is everywhere defined,
+  {\cite[\S2, p.~12]{ConradNagata}}]
+  \label{lemma:nagata-conrad-quasi-domination-proper-target}
+  \uses{def:nagata-conrad-quasi-domination}
+  \lean{}
+
+  Let $Y\to S$ be proper and let $(U,f)$ be a quasi-domination of $X$ over
+  $Y$.  Then $U=X$; that is, $f$ extends to an $S$-morphism $X\to Y$.
+\end{lemma}
+
+\begin{proof}
+  The projection $X\times_SY\to X$ is proper, being a base change of
+  $Y\to S$.  The graph $\Gamma_f$ is a closed subscheme of $X\times_SY$ by
+  hypothesis, so its image in $X$ is closed.  That image is $U$, because
+  $\Gamma_f\to U$ is an isomorphism.  Thus $U$ is a closed subset of $X$
+  which is also dense and open, so $U=X$.  Under the resulting isomorphism
+  $\Gamma_f\cong X$ the second projection is the desired extension.
+\end{proof}
+
+\begin{lemma}[Density in an admissible blow-up]
+  \label{lemma:nagata-conrad-dense-in-admissible-blowup}
+  \uses{def:nagata-admissible-blowup,
+    thm:nagata-global-blowup-complement,
+    def:nagata-scheme-theoretically-dense-open}
+  \lean{}
+
+  Let $X$ be qcqs, let $U\subseteq X$ be a dense quasi-compact open and let
+  $\pi\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ be a
+  $U$-admissible blow-up.  Then $U$, viewed as an open subscheme of
+  $\widetilde X$ via \Cref{thm:nagata-global-blowup-complement}, is
+  topologically dense in $\widetilde X$.  If moreover
+  $V(\mathcal I)=X\setminus U$, then $U$ is scheme-theoretically dense in
+  $\widetilde X$.
+\end{lemma}
+
+\begin{proof}
+  \uses{thm:nagata-blowup-principalizes-center}
+  Write $\mathcal I'=\mathcal I\cdot\mathcal O_{\widetilde X}$, a finite type
+  invertible ideal by \Cref{thm:nagata-blowup-principalizes-center}.  Its
+  complement $\widetilde X\setminus V(\mathcal I')$ is a quasi-compact open
+  subscheme, and $\pi$ restricts over it to an isomorphism onto
+  $X\setminus V(\mathcal I)$ by \Cref{thm:nagata-global-blowup-complement}.
+  An invertible ideal is locally generated by a nonzerodivisor, so
+  $\mathcal O_{\widetilde X}\to j_*\mathcal O_{\widetilde X\setminus
+  V(\mathcal I')}$ is injective for the inclusion $j$ of that complement:
+  the complement is scheme-theoretically dense, hence topologically dense.
+  Since $\mathcal I$ is the unit ideal on $U$ we have
+  $U\subseteq X\setminus V(\mathcal I)$, and $U$ is dense there because it is
+  dense in $X$.  Density is transitive along the two displayed inclusions, so
+  $U$ is dense in $\widetilde X$.
+
+  If $V(\mathcal I)=X\setminus U$ then $X\setminus V(\mathcal I)=U$, so the
+  displayed scheme-theoretically dense complement \emph{is} $U$.
+\end{proof}
+
+\begin{lemma}[An admissible blow-up making the open scheme-theoretically
+  dense]
+  \label{lemma:nagata-conrad-schematically-dense-blowup}
+  \uses{def:nagata-admissible-blowup,
+    lemma:nagata-qc-open-complement-ideal-exists,
+    lemma:nagata-conrad-dense-in-admissible-blowup}
+  \lean{}
+
+  Let $X$ be qcqs and let $U\subseteq X$ be a quasi-compact open.  There is a
+  $U$-admissible blow-up $X_1\to X$ in which $U$ is scheme-theoretically
+  dense.  If $U$ is dense in $X$ and $\widetilde X\to X$ is any $U$-admissible
+  blow-up, the same applies to $\widetilde X$, and the composite
+  $X_1\to\widetilde X\to X$ is again a $U$-admissible blow-up of $X$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-admissible-blowup-comp}
+  By \Cref{lemma:nagata-qc-open-complement-ideal-exists} there is a finite
+  type quasi-coherent ideal $\mathcal I_0\subseteq\mathcal O_X$ with
+  $V(\mathcal I_0)=X\setminus U$.  Its blow-up is $U$-admissible, and $U$ is
+  scheme-theoretically dense in it by the second assertion of
+  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup}.  Applying this to
+  $\widetilde X$ in place of $X$ --- legitimate because the preserved open of
+  a $U$-admissible blow-up is again quasi-compact --- and composing,
+  \Cref{lemma:nagata-admissible-blowup-comp} identifies the composite with a
+  single $U$-admissible blow-up of $X$.
+\end{proof}
+
+\section{Two blow-up lemmas of Deligne}
+
+\begin{lemma}[Strict transforms live in the charts of the other centre
+  (Deligne, \emph{Lemme} 0.2), {\cite[Lem.~1.4]{ConradNagata}}]
+  \label{lemma:nagata-conrad-strict-transform-in-charts}
+  \uses{def:nagata-strict-transform,
+    def:nagata-blowup-chart-ring,
+    prop:nagata-affine-blowup-chart-cover}
+  \lean{}
+
+  Let $X$ be a scheme and let $Y,Y'\subseteq X$ be closed subschemes with
+  quasi-coherent ideals $\mathcal I_Y,\mathcal I_{Y'}$.  In
+  $\widetilde X=\operatorname{Bl}_{\mathcal I_Y+\mathcal I_{Y'}}(X)$ the strict
+  transform $\widetilde Y$ of $Y$ is contained in the union of the charts
+  $U(s)$, taken over all local sections $s$ of $\mathcal I_{Y'}$ on all affine
+  opens of $X$.
+
+  Consequently, if $Y_1,\ldots,Y_n$ are closed subschemes of $X$ and
+  $\widetilde X=\operatorname{Bl}_{\sum_j\mathcal I_{Y_j}}(X)$, then the strict
+  transforms satisfy $\bigcap_j\widetilde Y_j=\varnothing$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-strict-transform-chart-closed}
+  Both assertions are local on $X$, so let $X=\operatorname{Spec}(A)$ and put
+  $I=\Gamma(X,\mathcal I_Y)$ and $J=\Gamma(X,\mathcal I_{Y'})$.  The charts
+  $U(s)$ for $s\in I\cup J$ cover $\widetilde X$ by
+  \Cref{prop:nagata-affine-blowup-chart-cover}, since such elements generate
+  $I+J$.  It therefore suffices to prove that $U(s)$ is disjoint from
+  $\widetilde Y$ for every $s\in I$.  On the chart $U(s)$ the strict transform
+  of $Y=V(I)$ is cut out by the saturation of $I\cdot A[(I+J)/s]$ with respect
+  to $s$, that is, by
+  \[
+    I_s\cap A[(I+J)/s]
+  \]
+  formed inside $A_s$
+  (\Cref{lemma:nagata-strict-transform-chart-closed}).  Because $s\in I$ the
+  element $1=s/s$ lies in that ideal, so the ideal is the unit ideal and the
+  overlap of $U(s)$ with $\widetilde Y$ is empty.
+
+  For the second assertion put $I_j=\Gamma(X,\mathcal I_{Y_j})$.  The centre
+  is $\sum_jI_j$, so the charts $U(s)$ for $s\in\bigcup_jI_j$ cover
+  $\widetilde X$.  Fix such an $s$, say $s\in I_1$.  The computation just made,
+  with $I=I_1$ and $J=I_2+\cdots+I_n$, shows $U(s)\cap\widetilde Y_1
+  =\varnothing$.  Hence every point of $\widetilde X$ misses at least one
+  $\widetilde Y_j$, and the intersection of all of them is empty.
+\end{proof}
+
+\begin{definition}[The disjointness situation,
+  {\cite[\S1, pp.~10--11]{ConradNagata}}]
+  \label{def:nagata-conrad-disjointness-setup}
+  \uses{def:nagata-scheme-theoretic-image,
+    def:nagata-global-blowup}
+  \lean{}
+
+  Consider open immersions $i\colon U\to V$ and $j\colon V\to X$, a morphism
+  $p\colon Z\to X$, a scheme $Y$ over $U$, and a quasi-compact immersion
+  $f\colon Y\to Z$ over $X$, so that the square
+  \[
+    (Y\xrightarrow{f}Z\xrightarrow{p}X)
+      \;=\;(Y\to U\xrightarrow{j\circ i}X)
+  \]
+  commutes; in particular $Y$ lies over $U$.  Write $\overline Y$ for the scheme-theoretic image of $Y$ in $Z$
+  under $f$.  Fix the following data.
+  \begin{enumerate}
+    \item A quasi-coherent ideal $\mathcal I_1$ on $X$ with
+      $\overline{V\setminus U}\subseteq V(\mathcal I_1)\subseteq X\setminus U$
+      as sets, and $T_1=V(\mathcal I_1^2)$, a square-zero thickening of
+      $V(\mathcal I_1)$.
+    \item A quasi-coherent ideal $\mathcal I_2$ on $X$ whose zero scheme
+      $T_2=V(\mathcal I_2)$ satisfies $T_2\subseteq T_1\cap(X\setminus V)$ as
+      sets.
+    \item The hypothesis that the closed subscheme
+      $p^{-1}(T_1)\cap\overline Y$ of $Z$ factors through the closed
+      subscheme $p^{-1}(T_2)$.  Loosely: $p(p^{-1}(T_1)\cap\overline Y)
+      \subseteq T_2\subseteq T_1\cap(X\setminus V)$, the first inclusion as
+      schemes and the second as sets.
+  \end{enumerate}
+  Let $q\colon X'\to X$ be the blow-up of $X$ along $\mathcal I_1+\mathcal I_2$
+  and let $Y',Z',p'$ denote the base changes of $Y,Z,p$ along $q$.
+\end{definition}
+
+Note that $q$ is an isomorphism over $V$, since
+$V(\mathcal I_1+\mathcal I_2)\subseteq V(\mathcal I_2)=T_2$ is disjoint from
+$V$; so if $\mathcal I_1$ and $\mathcal I_2$ are of finite type then $q$ is a
+$V$-admissible blow-up.  The set-theoretic inclusion
+$p^{-1}(T_1)\cap\overline Y\subseteq p^{-1}(T_2)$ is not enough for what
+follows: it is the scheme-theoretic factorization in item~(3) that produces the
+function used in the proof.
+
+\begin{lemma}[Deligne's disjointness blow-up (Deligne, \emph{Lemme} 0.3),
+  {\cite[Lem.~1.5]{ConradNagata}}]
+  \label{lemma:nagata-conrad-disjointness-blowup}
+  \uses{def:nagata-conrad-disjointness-setup,
+    lemma:nagata-conrad-strict-transform-in-charts}
+  \lean{}
+
+  In the situation of \Cref{def:nagata-conrad-disjointness-setup}, the two
+  closed subsets
+  \[
+    \overline{Y'},\qquad
+    p'^{-1}\bigl(\overline{q^{-1}(V\setminus U)}\bigr)
+  \]
+  of $Z'$ are disjoint.  In words: after the base change by $q$, the closure
+  of the image of $Y$ in $Z$ no longer meets the part of $Z$ lying over the
+  closure of $V\setminus U$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:nagata-scheme-theoretic-closure,
+    lemma:nagata-scheme-image-restrict-open}
+  Formation of topological closures commutes with restriction to an open
+  subspace, and by \Cref{lemma:nagata-scheme-image-restrict-open} the same
+  holds for scheme-theoretic images of quasi-compact immersions.  The
+  assertion is therefore local on $X$ and on $Z$, so we may assume
+  $X=\operatorname{Spec}(A)$ and $Z=\operatorname{Spec}(B)$.  Put
+  $I_j=\Gamma(X,\mathcal I_j)$.  We construct, locally on $X'$, a function on
+  $Z'$ which vanishes on $p'^{-1}(\overline{q^{-1}(V\setminus U)})$ and equals
+  $1$ on $\overline{Y'}$.
+
+  \emph{Step 1: the charts $U(s_2)$, $s_2\in I_2$, cover
+  $\overline{q^{-1}(V\setminus U)}$.}  The strict transform of $V(\mathcal I_1)$
+  is a closed subscheme of $X'$.  Since $q$ is an isomorphism over $V$ we have
+  $q^{-1}(V\setminus U)\cong V\setminus U$ as topological spaces, and the
+  underlying space of $V(\mathcal I_1)$ contains $\overline{V\setminus U}$; so
+  $\overline{q^{-1}(V\setminus U)}$ lies inside the strict transform of
+  $V(\mathcal I_1)$.  By
+  \Cref{lemma:nagata-conrad-strict-transform-in-charts}, applied to the two
+  centres $V(\mathcal I_1)$ and $V(\mathcal I_2)$, that strict transform is
+  covered by the charts $U(s_2)$ with $s_2\in I_2$.
+
+  \emph{Step 2: reduction.}  By Step 1 the opens $p'^{-1}(U(s_2))$, for
+  $s_2\in I_2$, cover $p'^{-1}(\overline{q^{-1}(V\setminus U)})$, and
+  \[
+    p'^{-1}\bigl(\overline{q^{-1}(V\setminus U)}\bigr)
+      \subseteq p'^{-1}\bigl(q^{-1}(T_1)\bigr)
+  \]
+  because $\overline{V\setminus U}\subseteq V(\mathcal I_1)=T_1$ as sets.  So
+  it suffices to prove, for every $s_2\in I_2$,
+  \begin{equation}
+    \label{eq:nagata-conrad-disjointness-local}
+    p'^{-1}\bigl(q^{-1}(T_1)\bigr)\cap p'^{-1}(U(s_2))\cap\overline{Y'}
+      =\varnothing .
+  \end{equation}
+
+  \emph{Step 3: an equation for $s_2$ on $\overline Y$.}  By hypothesis~(3) of
+  \Cref{def:nagata-conrad-disjointness-setup}, $p^{-1}(T_1)\cap\overline Y$ is
+  a closed subscheme of $p^{-1}(T_2)$, so $p^{\#}(s_2)\in B$ vanishes on it.
+  Hence $p^{\#}(s_2)=t_1+g$ with $t_1$ vanishing on the closed subscheme
+  $p^{-1}(T_1)$, which is cut out by $I_1^2B$, and $g$ vanishing on
+  $\overline Y$.  Write $t_1=\sum_ib_is_{1i}r_{1i}$ with $s_{1i},r_{1i}\in I_1$
+  and $b_i\in B$.  Since $Y\hookrightarrow\overline Y$ is a schematically dense
+  open immersion, we get on $\overline Y$ the identity
+  $s_2=\sum_ib_is_{1i}r_{1i}$.
+
+  \emph{Step 4: $s_2$ is a unit where it matters.}  The scheme $Y$ lies over
+  $U\subseteq V$ and $V$ does not meet $T_2$, so
+  \[
+    Y'\cap p'^{-1}(U(s_2))
+      \subseteq p'^{-1}\bigl(U(s_2)\cap(X'\setminus q^{-1}(T_2))\bigr).
+  \]
+  On $U(s_2)\setminus q^{-1}(T_2)$ the section $s_2$ vanishes nowhere, hence is
+  a unit.  Dividing the identity of Step 3 by $s_2$ therefore gives
+  \[
+    h:=\sum_ib_i\Bigl(\frac{s_{1i}}{s_2}\Bigr)r_{1i}=1
+    \qquad\text{on }Y'\cap p'^{-1}(U(s_2)).
+  \]
+  Each $s_{1i}/s_2$ is a global section of $\mathcal O$ on the chart $U(s_2)$,
+  by the very definition of the chart algebra
+  (\Cref{def:nagata-blowup-chart-ring}), so $h$ is a global function on the
+  open subscheme $p'^{-1}(U(s_2))$ of $Z'$.
+
+  \emph{Step 5: passing to the closure.}  The immersion
+  $Y'\cap p'^{-1}(U(s_2))\to p'^{-1}(U(s_2))$ is quasi-compact, so $h=1$ on the
+  scheme-theoretic image $\overline{Y'\cap p'^{-1}(U(s_2))}$ as well
+  (\Cref{def:nagata-scheme-theoretic-closure}); and that image is
+  $\overline{Y'}\cap p'^{-1}(U(s_2))$, because closures commute with
+  restriction to an open subscheme.
+
+  \emph{Step 6: conclusion.}  All the $r_{1i}$ lie in $I_1$, so $h$ vanishes on
+  $p'^{-1}(q^{-1}(V(\mathcal I_1)))\cap p'^{-1}(U(s_2))$.  Thus the single
+  function $h$ takes the value $1$ on
+  $\overline{Y'}\cap p'^{-1}(U(s_2))$ and the value $0$ on
+  $p'^{-1}(q^{-1}(V(\mathcal I_1)))\cap p'^{-1}(U(s_2))$, so these two subsets
+  are disjoint.  Since $V(\mathcal I_1)=V(\mathcal I_1^2)=T_1$ as sets, this is
+  exactly \eqref{eq:nagata-conrad-disjointness-local}.
+\end{proof}
+
+\section{Case 1: extending a map to relative affine space}
+
+\begin{lemma}[Extension to $\mathbb A^n$ after one admissible blow-up,
+  {\cite[Thm.~2.4, Case 1, pp.~14--15]{ConradNagata}}]
+  \label{lemma:nagata-conrad-affine-space-extension}
+  \uses{def:nagata-relative-affine-space,
+    def:nagata-relative-projective-space,
+    def:nagata-admissible-blowup,
+    def:nagata-conrad-quasi-domination,
+    lemma:nagata-conrad-dense-in-admissible-blowup}
+  \lean{}
+
+  Let $X=\operatorname{Spec}(A)$ be affine, let $U\subseteq X$ be a dense
+  quasi-compact open and let $f\colon U\to\mathbb A^n_X$ be an $X$-morphism.
+  There is a finite type quasi-coherent ideal $\mathcal I$ on $X$ with
+  $V(\mathcal I)\subseteq X\setminus U$ and an $X$-morphism
+  \[
+    \widetilde f\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)
+      \longrightarrow\mathbb P^n_X
+  \]
+  extending $f$, where $\mathbb A^n_X\subseteq\mathbb P^n_X$ is the standard
+  complement of the hyperplane $\{T_n=0\}$.  Consequently
+  $W=\widetilde f^{-1}(\mathbb A^n_X)$ is a dense open subscheme of
+  $\widetilde X$ containing $U$, and $(W,\widetilde f|_W)$ is a
+  quasi-domination of $\widetilde X$ over $\mathbb A^n_X$ extending $f$.
+\end{lemma}
+
+\begin{proof}
+  Since $U\hookrightarrow X$ is quasi-compact we may cover $U$ by finitely
+  many basic opens $\operatorname{Spec}(A_{u_i})$, $1\le i\le m$; then the
+  finitely generated ideal $(u_1,\ldots,u_m)$ cuts out $X\setminus U$.  The
+  $X$-morphism $\operatorname{Spec}(A_{u_i})\to\mathbb A^n_X$ corresponds to
+  an $A$-algebra map
+  \[
+    A[t_0,\ldots,t_{n-1}]\to A_{u_i},\qquad t_j\mapsto g_{ij}/u_i^N
+  \]
+  with $g_{ij}\in A$ and $N$ large (one $N$ for all $i,j$).  Agreement on the
+  overlaps $\operatorname{Spec}(A_{u_iu_{i'}})$ says that for some large $M$,
+  $(u_iu_{i'})^M(u_i^Ng_{i'j}-u_{i'}^Ng_{ij})=0$ in $A$.  Replacing $g_{ij}$ by
+  $u_i^Mg_{ij}$ and $N$ by $N+M$ we may assume
+  \[
+    u_i^Ng_{i'j}=u_{i'}^Ng_{ij}\quad\text{for all }i,i',j,
+  \]
+  and we call this common element $g_{i,i',j}=g_{i',i,j}\in A$; note
+  $g_{i,i,j}=u_i^Ng_{ij}$.
+
+  Let $I\subseteq A$ be the ideal generated by all $u_i^N$ and all
+  $g_{i,i',j}$, and let $\mathcal I$ be the associated quasi-coherent ideal
+  sheaf; it is of finite type.  Since $I\subseteq(u_1,\ldots,u_m)$ we get
+  $V(\mathcal I)\subseteq X\setminus U$, and $\mathcal I$ restricts to the unit
+  ideal on $U$ because $u_i^N$ is invertible on
+  $\operatorname{Spec}(A_{u_i})$; so $\widetilde X=\operatorname{Bl}_{\mathcal
+  I}(X)\to X$ is a $U$-admissible blow-up.
+
+  Write $\mathbb P^n_X=\operatorname{Proj}(A[T_0,\ldots,T_n])$.  The affine
+  charts $\operatorname{Spec}(A[I/u_i^N])$ and
+  $\operatorname{Spec}(A[I/g_{i,i',j}])$ cover $\widetilde X$ by
+  \Cref{prop:nagata-affine-blowup-chart-cover}.  Define $X$-morphisms on them
+  by
+  \[
+    \operatorname{Spec}\bigl(A[I/u_i^N]\bigr)\to
+      \mathbb A^n_X=D_+(T_n),\qquad
+      T_j/T_n\mapsto g_{i,i,j}/(u_i^N)^2,
+  \]
+  \[
+    \operatorname{Spec}\bigl(A[I/g_{i,i',j}]\bigr)\to D_+(T_j),\qquad
+      T_r/T_j\mapsto g_{i,i',r}/g_{i,i',j}\ (r\le n-1),\quad
+      T_n/T_j\mapsto u_i^Nu_{i'}^N/g_{i,i',j}.
+  \]
+  All displayed fractions lie in the relevant chart algebra because their
+  numerators lie in $I$.  Repeated use of the relation
+  $u_i^Ng_{i'j}=u_{i'}^Ng_{ij}$ checks that these maps agree on overlaps, so
+  they glue to an $X$-morphism $\widetilde f\colon\widetilde X\to
+  \mathbb P^n_X$.  On $\operatorname{Spec}(A_{u_i})\subseteq U$ the first
+  formula reads $T_j/T_n\mapsto g_{ij}/u_i^N$, so $\widetilde f$ extends $f$.
+
+  For the last sentence: $\mathbb P^n_X\to X$ is separated, so the graph
+  $\Gamma_{\widetilde f}\subseteq\widetilde X\times_X\mathbb P^n_X$ is closed.
+  The open subscheme $W=\widetilde f^{-1}(\mathbb A^n_X)$ contains $U$ and is
+  therefore dense in $\widetilde X$ by
+  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup}.  Finally
+  $\Gamma_{\widetilde f|_W}=\Gamma_{\widetilde f}\cap(\widetilde X\times_X
+  \mathbb A^n_X)$ is closed in $\widetilde X\times_X\mathbb A^n_X$, which is
+  the quasi-domination condition of
+  \Cref{def:nagata-conrad-quasi-domination}.
+\end{proof}
+
+\section{Cases 1 and 2: quasi-affine targets with $U=V$}
+
+\begin{lemma}[Quasi-affine target over an affine base,
+  {\cite[Thm.~2.4, Case 1, pp.~13--15]{ConradNagata}}]
+  \label{lemma:nagata-conrad-quasi-affine-affine-base}
+  \uses{lemma:nagata-conrad-affine-space-extension,
+    lemma:nagata-quasi-affine-immersion-affine-space-exists,
+    lemma:nagata-conrad-schematically-dense-blowup,
+    def:nagata-conrad-quasi-domination}
+  \lean{}
+
+  Let $X$ be affine, let $U\subseteq X$ be a dense quasi-compact open, let
+  $p\colon Y\to X$ be quasi-affine and of finite type, and let $f\colon U\to Y$
+  be an $X$-morphism.  There is a $U$-admissible blow-up
+  $\widetilde X\to X$ in which $U$ is scheme-theoretically dense, together with
+  a quasi-domination $(W,\widetilde f)$ of $\widetilde X$ over $Y$ extending
+  $f$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-admissible-blowup-comp,
+    lemma:nagata-conrad-dense-in-admissible-blowup}
+  By \Cref{lemma:nagata-quasi-affine-immersion-affine-space-exists} there are
+  an $n$ and a quasi-compact immersion $i\colon Y\to\mathbb A^n_X$ over $X$.
+  Put $F=i\circ f\colon U\to\mathbb A^n_X$.  By
+  \Cref{lemma:nagata-conrad-affine-space-extension} there is a $U$-admissible
+  blow-up $\widetilde X_0\to X$ carrying a quasi-domination
+  $(\widetilde W_0,\widetilde F_0)$ of $\widetilde X_0$ over $\mathbb A^n_X$
+  extending $F$.
+
+  Next make $U$ scheme-theoretically dense.  By
+  \Cref{lemma:nagata-conrad-schematically-dense-blowup} there is a
+  $U$-admissible blow-up $\widetilde X\to\widetilde X_0$ in which $U$ is
+  scheme-theoretically dense, and by
+  \Cref{lemma:nagata-admissible-blowup-comp} the composite
+  $\widetilde X\to X$ is again a $U$-admissible blow-up.  Let $\widetilde W$ be
+  the preimage of $\widetilde W_0$ and $\widetilde F$ the composite; the graph
+  $\Gamma_{\widetilde F}$ is the base change of $\Gamma_{\widetilde F_0}$ and
+  hence still closed in $\widetilde X\times_X\mathbb A^n_X$.
+
+  Because $i$ is an immersion there is an open subscheme
+  $U'\subseteq\mathbb A^n_X$ such that $i$ factors as a closed immersion
+  $j\colon Y\hookrightarrow U'$.  Put $W=\widetilde F^{-1}(U')$.  It is an open
+  subscheme of $\widetilde X$ containing $U$, hence scheme-theoretically dense
+  in $\widetilde X$ and containing $U$ as a scheme-theoretically dense open.
+  Moreover $\Gamma_{\widetilde F|_W}
+  =\Gamma_{\widetilde F}\cap(\widetilde X\times_XU')$ is closed in
+  $\widetilde X\times_XU'$.
+
+  We claim that $\widetilde F|_W$ factors as $j\circ\widetilde f$ for a
+  (necessarily unique) $\widetilde f\colon W\to Y$.  Indeed, the pullback of
+  the closed immersion $j$ along $\widetilde F|_W$ is a closed subscheme of
+  $W$; it contains $U$ as an open subscheme, because
+  $\widetilde F|_U=F=j\circ f$ factors through $Y$.  Since $U$ is
+  scheme-theoretically dense in $W$, the only closed subscheme of $W$
+  containing $U$ as an open subscheme is $W$ itself, so the pullback is $W$
+  and the factorization exists.
+
+  Then $\widetilde f|_U=f$, and $\Gamma_{\widetilde f}
+  =(1_{\widetilde X}\times j)^{-1}(\Gamma_{\widetilde F|_W})$ is closed in
+  $\widetilde X\times_XY$.  Thus $(W,\widetilde f)$ is the required
+  quasi-domination.
+\end{proof}
+
+\begin{lemma}[Quasi-affine target over a qcqs base, $U=V$,
+  {\cite[Thm.~2.4, Case 2, pp.~15--16]{ConradNagata}}]
+  \label{lemma:nagata-conrad-quasi-affine-equal-opens}
+  \uses{lemma:nagata-conrad-quasi-affine-affine-base,
+    lemma:nagata-extend-finite-type-ideal,
+    cor:nagata-blowup-product-common-refinement,
+    def:nagata-conrad-quasi-domination}
+  \lean{}
+
+  Let $X$ be qcqs, let $U\subseteq X$ be a dense quasi-compact open, let
+  $p\colon Y\to X$ be quasi-affine and of finite type, and let $f\colon U\to Y$
+  be an $X$-morphism.  There is a finite type quasi-coherent ideal
+  $\mathcal I$ on $X$ with $V(\mathcal I)\subseteq X\setminus U$ such that
+  $\widetilde X=\operatorname{Bl}_{\mathcal I}(X)$ carries a quasi-domination
+  of $\widetilde X$ over $Y$ extending $f$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-conrad-dense-in-admissible-blowup,
+    lemma:nagata-scheme-image-universal}
+  Choose a finite affine open cover $X=\bigcup_{i=0}^nW_i$ and put
+  $U_i=U\cap W_i$, a dense quasi-compact open of $W_i$, and
+  $Y_i=p^{-1}(W_i)$, quasi-affine and of finite type over $W_i$.  Let
+  $f_i\colon U_i\to Y_i$ be the restriction of $f$.
+
+  By \Cref{lemma:nagata-conrad-quasi-affine-affine-base} there is, for each
+  $i$, a finite type quasi-coherent ideal $\mathcal I_i$ on $W_i$ with
+  $V(\mathcal I_i)\subseteq W_i\setminus U_i$ such that
+  $\operatorname{Bl}_{\mathcal I_i}(W_i)$ quasi-dominates $Y_i$ in a manner
+  extending $f_i$, and such that $U_i$ is scheme-theoretically dense in
+  $\operatorname{Bl}_{\mathcal I_i}(W_i)$.
+
+  \emph{Extending the centres.}  We claim each $\mathcal I_i$ extends to a
+  finite type quasi-coherent ideal $\mathcal J_i$ on $X$ with
+  $\mathcal J_i|_{W_i}=\mathcal I_i$ and $V(\mathcal J_i)\cap U=\varnothing$.
+  Let $V(\mathcal K_i)$ be the scheme-theoretic closure of $V(\mathcal I_i)$ in
+  $X$ along the quasi-compact immersion $W_i\hookrightarrow X$ (available since
+  $X$ is quasi-separated); then $\mathcal K_i|_{W_i}=\mathcal I_i$ and
+  $V(\mathcal K_i)\subseteq X\setminus U$ as sets, because
+  $W_i\setminus U_i=(X\setminus U)\cap W_i$.  Write $\mathcal K_i$ as the
+  filtered union of its finite type quasi-coherent subideals
+  $\mathcal K_{i,\alpha}$ restricting to $\mathcal I_i$ on $W_i$
+  (\Cref{lemma:nagata-extend-finite-type-ideal}).  The sets
+  $V(\mathcal K_{i,\alpha})\cap U$ form a decreasing inverse system of closed
+  subsets of the quasi-compact space $U$ with empty intersection, so
+  $V(\mathcal K_{i,\alpha_0})\cap U=\varnothing$ for some $\alpha_0$; put
+  $\mathcal J_i=\mathcal K_{i,\alpha_0}$.
+
+  \emph{The blow-up.}  Set $\mathcal I=\prod_i\mathcal J_i$, a finite type
+  ideal with $V(\mathcal I)=\bigcup_iV(\mathcal J_i)$ disjoint from $U$, and
+  put $\widetilde X=\operatorname{Bl}_{\mathcal I}(X)$ and
+  $\widetilde X_i=\operatorname{Bl}_{\mathcal J_i}(X)$.  By
+  \Cref{cor:nagata-blowup-product-common-refinement} there are canonical
+  $X$-morphisms $\pi_i\colon\widetilde X\to\widetilde X_i$, each of them a
+  blow-up along a finite type ideal whose zero scheme misses $U$.  In
+  particular $U$ is an open subscheme of $\widetilde X$ and of each
+  $\widetilde X_i$.
+
+  By construction, $\widetilde X_i|_{W_i}=\operatorname{Bl}_{\mathcal
+  I_i}(W_i)$ carries a dense open $T_i\supseteq U_i$ and an $X$-morphism
+  $f_i\colon T_i\to Y_i\hookrightarrow Y$ extending $f|_{U_i}$ whose graph is
+  closed in $(\widetilde X_i|_{W_i})\times_{W_i}Y_i$; and $U_i$ is
+  scheme-theoretically dense in $T_i$.
+
+  Put $T_i'=\pi_i^{-1}(T_i)\subseteq\widetilde X$, an open subscheme containing
+  $U_i$.  We claim $U_i$ is scheme-theoretically dense in $T_i'$.  The
+  complement of the centre of the blow-up $\pi_i$ is scheme-theoretically dense
+  in $\widetilde X$, hence its overlap with $T_i'$ is scheme-theoretically
+  dense in $T_i'$; that overlap is an open subscheme of $T_i$ containing
+  $U_i$, and $U_i$ is scheme-theoretically dense in $T_i$.  Density is
+  transitive, giving the claim.
+
+  \emph{Gluing.}  Let $T=\bigcup_iT_i'$, an open subscheme of $\widetilde X$
+  containing $\bigcup_iU_i=U$, hence dense in $\widetilde X$ by
+  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup}.  The $X$-morphisms
+  $f_i\circ\pi_i\colon T_i'\to Y$ agree on overlaps: $U_i\cap U_j$ is
+  scheme-theoretically dense in $T_i'\cap T_j'$, the two morphisms agree on it,
+  and $Y\to X$ is separated, so they agree on $T_i'\cap T_j'$.  They therefore
+  glue to an $X$-morphism $\overline f\colon T\to Y$ extending $f$.
+
+  \emph{Closedness of the graph.}  This may be checked locally on $X$.  Over
+  $W_i$ we have $\Gamma_{\overline f}|_{W_i}=\pi_{i,Y}^{-1}(\Gamma_{f_i})$,
+  where $\pi_{i,Y}\colon(\widetilde X\times_XY)|_{W_i}\to
+  (\widetilde X_i|_{W_i})\times_{W_i}Y_i$ is induced by $\pi_i$ on the first
+  factor.  Since $\Gamma_{f_i}$ is closed, so is
+  $\Gamma_{\overline f}|_{W_i}$.  Hence $(T,\overline f)$ is a
+  quasi-domination of $\widetilde X$ over $Y$ extending $f$.
+\end{proof}
+
+\section{Case 3: quasi-affine targets in general}
+
+\begin{lemma}[Quasi-affine target, $U\subseteq V$,
+  {\cite[Thm.~2.4, Case 3, pp.~16--17]{ConradNagata}}]
+  \label{lemma:nagata-conrad-quasi-affine-general}
+  \uses{lemma:nagata-conrad-disjointness-blowup,
+    lemma:nagata-conrad-quasi-affine-equal-opens,
+    lemma:nagata-qc-open-complement-ideal-exists,
+    lemma:nagata-admissible-blowup-comp,
+    def:nagata-conrad-quasi-domination}
+  \lean{}
+
+  Let $X$ be qcqs, let $U\subseteq V\subseteq X$ be dense quasi-compact open
+  subschemes, let $p\colon Y\to X$ be quasi-affine and of finite type, and let
+  $(U,f)$ be a quasi-domination of $V$ over $Y$.  There is a finite type
+  quasi-coherent ideal $\mathcal I$ on $X$ with $V(\mathcal I)\subseteq
+  X\setminus V$ such that $\operatorname{Bl}_{\mathcal I}(X)$ quasi-dominates
+  $Y$ in a manner extending $f$.
+\end{lemma}
+
+\begin{proof}
+  \uses{def:nagata-scheme-theoretic-image,
+    lemma:nagata-finite-type-ideal-extension-exists,
+    lemma:nagata-conrad-dense-in-admissible-blowup}
+  Because a $V$-admissible blow-up of $X$ preserves the density of $U$ and of
+  $V$ (\Cref{lemma:nagata-conrad-dense-in-admissible-blowup}) and composites of
+  $V$-admissible blow-ups are $V$-admissible
+  (\Cref{lemma:nagata-admissible-blowup-comp}), we are free to replace $X$ by
+  such a blow-up at any point of the argument.
+
+  \emph{Step 1: separating $p(\overline{f(U)})$ from
+  $\overline{V\setminus U}$.}  We apply
+  \Cref{lemma:nagata-conrad-disjointness-blowup} to the situation of
+  \Cref{def:nagata-conrad-disjointness-setup} in which $Z$ is $Y$, the
+  morphism $p$ is $p$, the open immersions are $U\subseteq V\subseteq X$, and
+  the scheme called $Y$ there is $f(U)=\Gamma_f$, the quasi-compact subscheme
+  of $Y$ cut out by the section $f$, mapping to $U$ by the canonical
+  isomorphism and to $Y$ by the canonical quasi-compact immersion.  Take for $\mathcal I_1$ the
+  ideal of the reduced structure on the closed subset $\overline{V\setminus U}$
+  and put $T_1=V(\mathcal I_1^2)$; give $X\setminus V$ a finitely presented
+  closed subscheme structure using
+  \Cref{lemma:nagata-qc-open-complement-ideal-exists}, and put
+  $T_2=T_1\cap(X\setminus V)$.
+
+  We first check $p\bigl(p^{-1}(T_1)\cap\overline{f(U)}\bigr)\subseteq T_2$ as
+  sets.  It is contained in $T_1$, and its intersection with $V$ is empty:
+  since $f(U)$ is closed in $p^{-1}(V)$ by the quasi-domination hypothesis,
+  \[
+    p\bigl(p^{-1}(T_1)\cap\overline{f(U)}\bigr)\cap V
+      =p\bigl(p^{-1}(T_1)\cap f(U)\bigr)\subseteq T_1\cap U=\varnothing .
+  \]
+  Now give $\overline{f(U)}$ its scheme structure as the scheme-theoretic image
+  of the quasi-compact quasi-separated morphism $f\colon U\to Y$.  We thicken
+  the closed subscheme structure on $X\setminus V$ nilpotently so that
+  $p^{-1}(T_1)\cap\overline{f(U)}\subseteq p^{-1}(T_2)$ becomes an inclusion of
+  \emph{closed subschemes}; this is possible because
+  $\mathcal I_{T_2}=\mathcal I_{T_1}+\mathcal I_{X\setminus V}$ with
+  $\mathcal I_{X\setminus V}$ of finite type and the inclusion already holds on
+  underlying sets.
+
+  The ideal $\mathcal I_1$ need not be of finite type.  Since
+  $\mathcal I_1|_U=\mathcal O_U$, write $\mathcal I_1$ as the filtered union of
+  its finite type quasi-coherent subideals $\mathcal I_{1,\alpha}$ with
+  $\mathcal I_{1,\alpha}|_U=\mathcal O_U$
+  (\Cref{lemma:nagata-finite-type-ideal-extension-exists}); then
+  $\mathcal I_{T_1}=\mathcal I_1^2$ is the filtered union of the
+  $\mathcal I_{1,\alpha}^2$.  From
+  $\mathcal I_{X\setminus V}\cdot\mathcal O_Y\subseteq
+  \mathcal I_{T_2}\cdot\mathcal O_Y\subseteq
+  \mathcal I_{T_1}\cdot\mathcal O_Y+\mathcal I_{\overline{f(U)}}$ and finite
+  typeness of $\mathcal I_{X\setminus V}$ we get, for large $\alpha$,
+  $\mathcal I_{X\setminus V}\cdot\mathcal O_Y\subseteq
+  \mathcal I_{1,\alpha}^2\cdot\mathcal O_Y+\mathcal I_{\overline{f(U)}}$.
+  Putting $T_{1,\alpha}=V(\mathcal I_{1,\alpha}^2)$ and
+  $T_{2,\alpha}=T_{1,\alpha}\cap(X\setminus V)$ we have
+  $\overline{V\setminus U}\subseteq T_{1,\alpha}\subseteq X\setminus U$ as sets
+  and $p^{-1}(T_{1,\alpha})\cap\overline{f(U)}\subseteq
+  p^{-1}(T_{2,\alpha})$ as closed subschemes.  So
+  \Cref{lemma:nagata-conrad-disjointness-blowup} applies to the
+  $V$-admissible blow-up of $X$ along
+  $\mathcal I_{1,\alpha}+\mathcal I_{X\setminus V}$, and after that base change
+  \[
+    p\bigl(\overline{f(U)}\bigr)\cap\overline{V\setminus U}=\varnothing .
+  \]
+  We assume this from now on.
+
+  \emph{Step 2: passing to a smaller base.}  Put
+  $X^{\circ}=X\setminus\overline{V\setminus U}$, an open subscheme of $X$.  By
+  Step 1 we have $p(\overline{f(U)})\subseteq X^{\circ}$.  Moreover
+  $V\setminus U$ is closed in $V$, so
+  $\overline{V\setminus U}\cap V=V\setminus U$ and hence
+  \[
+    X^{\circ}\cap V=V\setminus(V\setminus U)=U .
+  \]
+  Writing $\mathcal I_{\overline{V\setminus U}}$ as a filtered union of finite
+  type quasi-coherent subideals we may shrink $X^{\circ}$ to a quasi-compact
+  open subscheme still satisfying $p(\overline{f(U)})\subseteq X^{\circ}$ and
+  $X^{\circ}\cap V=U$; this is possible because $\overline{f(U)}$, $U$ and $V$
+  are quasi-compact.  Note $U$ is dense in $X^{\circ}$, being dense in $X$.
+
+  \emph{Step 3: applying Case 2.}  Give $\overline{f(U)}$ its closed subscheme
+  structure inside $p^{-1}(X^{\circ})$ as the scheme-theoretic image of
+  $f\colon U\to p^{-1}(X^{\circ})$.  It is quasi-affine over $X^{\circ}$,
+  being a closed subscheme of the quasi-affine $X^{\circ}$-scheme
+  $p^{-1}(X^{\circ})$, and it is of finite type.  Since $X^{\circ}\cap V=U$,
+  \Cref{lemma:nagata-conrad-quasi-affine-equal-opens} applies with
+  $\overline{f(U)}\to X^{\circ}$ in the role of $Y\to X$: there is a finite type
+  quasi-coherent ideal $\mathcal I^{\circ}$ on $X^{\circ}$ with
+  $V(\mathcal I^{\circ})\subseteq X^{\circ}\setminus U\subseteq X\setminus V$
+  as sets, and a quasi-domination $(W^{\circ},f^{\circ})$ of
+  $\widetilde X^{\circ}=\operatorname{Bl}_{\mathcal I^{\circ}}(X^{\circ})$ over
+  $\overline{f(U)}$ extending $f$.
+
+  \emph{Step 4: descending the centre to $X$.}  As in Case 2, extend
+  $\mathcal I^{\circ}$ to a finite type quasi-coherent ideal $\mathcal I$ on
+  $X$ with $\mathcal I|_{X^{\circ}}=\mathcal I^{\circ}$ and $V(\mathcal I)$
+  disjoint from $V$: take the scheme-theoretic closure of
+  $V(\mathcal I^{\circ})$ in $X$ and shrink it by the limit argument of
+  \Cref{lemma:nagata-finite-type-ideal-extension-exists}.  Put
+  $\widetilde X=\operatorname{Bl}_{\mathcal I}(X)$, a $V$-admissible blow-up.
+  Blowing up commutes with restriction to the open $X^{\circ}$, so
+  $\widetilde X^{\circ}$ is an open subscheme of $\widetilde X$, and $U$ is
+  dense in $\widetilde X$; hence $W^{\circ}$ is a dense open subscheme of
+  $\widetilde X$.
+
+  \emph{Step 5: the graph is closed.}  It remains to see that
+  $\Gamma_{f^{\circ}}$ is closed in $\widetilde X\times_XY$.  The subscheme
+  $\widetilde X\times_X\overline{f(U)}\subseteq\widetilde X\times_XY$ is
+  closed, so it suffices to observe that
+  $\widetilde X^{\circ}\times_{X^{\circ}}\overline{f(U)}\cong
+  \widetilde X\times_X\overline{f(U)}$, which holds because
+  $p(\overline{f(U)})\subseteq X^{\circ}$.  Thus $(W^{\circ},f^{\circ})$ is the
+  required quasi-domination.
+\end{proof}
+
+\section{The general case, via Zariski's Main Theorem}
+
+\begin{lemma}[The closed graph is quasi-finite over the blow-up,
+  {\cite[Thm.~2.4, General Case, pp.~17--19]{ConradNagata}}]
+  \label{lemma:nagata-conrad-graph-closure-quasi-finite}
+  \uses{lemma:nagata-conrad-quasi-affine-general,
+    def:nagata-scheme-theoretic-image,
+    def:nagata-strict-transform,
+    cor:nagata-blowup-product-common-refinement}
+  \lean{}
+
+  Let $X$ be qcqs, let $U\subseteq V\subseteq X$ be dense quasi-compact opens,
+  let $p\colon Y\to X$ be separated and of finite type with $Y$ qcqs, and let
+  $(U,f)$ be a quasi-domination of $V$ over $Y$.  There is a $V$-admissible
+  blow-up $q\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ with the
+  following property.  Let $\sigma\colon U\hookrightarrow\widetilde X$ be the
+  canonical open immersion, let
+  $F=(\sigma,f)\colon U\to\widetilde X\times_XY$ be the induced quasi-compact
+  immersion, and let $\overline{F(U)}$ be its scheme-theoretic image.  Then
+  \[
+    \overline{F(U)}\longrightarrow\widetilde X
+  \]
+  is quasi-finite and separated.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-finite-type-ideal-extension-exists,
+    lemma:nagata-strict-transform-ambient-closed}
+  Choose a finite affine open cover $\{Y_i\}$ of $Y$, small enough that each
+  composite $Y_i\hookrightarrow Y\xrightarrow{p}X$ factors through an affine
+  open of $X$; then each $Y_i\to X$ is quasi-affine.  Put
+  $U_i=f^{-1}(Y_i)\subseteq U$, let $X_i=\overline{U_i}$ be the
+  scheme-theoretic image of the quasi-compact open immersion $U_i\to X$, and
+  put $V_i=X_i\cap V$.  Then $U_i$ is dense in $X_i$, the induced morphism
+  $p_i\colon Y_i\cap p^{-1}(X_i)\to X_i$ is quasi-affine and of finite type,
+  and $(U_i,f_i)$ is a quasi-domination of $V_i$ over $Y_i\cap p^{-1}(X_i)$.
+  So \Cref{lemma:nagata-conrad-quasi-affine-general} applies: there is a finite
+  type quasi-coherent ideal $\mathcal I_i$ on $X_i$ with
+  $V(\mathcal I_i)\subseteq X_i\setminus V_i=(X\setminus V)\cap X_i$ as sets
+  such that $\widetilde X_i=\operatorname{Bl}_{\mathcal I_i}(X_i)$
+  quasi-dominates $Y_i\cap p^{-1}(X_i)$ over $X_i$ in a manner extending
+  $f_i$.  Concretely this supplies an open subscheme
+  $\widetilde V_i\subseteq\widetilde X_i$ containing $U_i$ and an
+  $\widetilde X_i$-section
+  \[
+    F_i\colon\widetilde V_i\longrightarrow
+      \widetilde X_i\times_{X_i}\bigl(Y_i\cap p^{-1}(X_i)\bigr)
+  \]
+  extending the graph of $f_i$ and having closed image, hence a closed
+  immersion.
+
+  As in Case 2 there is a finite type quasi-coherent ideal $\mathcal J_i$ on
+  $X$ with $V(\mathcal J_i)$ disjoint from $V$ and
+  $\mathcal J_i\cdot\mathcal O_{X_i}=\mathcal I_i$
+  (\Cref{lemma:nagata-finite-type-ideal-extension-exists} applied to the
+  preimage of $\mathcal I_i$ under $\mathcal O_X\twoheadrightarrow
+  \mathcal O_{X_i}$).  Put $\mathcal I=\prod_i\mathcal J_i$, so
+  $q\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ is a
+  $V$-admissible blow-up.
+
+  We check that $\overline{F(U)}\to\widetilde X$ has finite fibres; being of
+  finite type, it is then quasi-finite.  By
+  \Cref{lemma:nagata-strict-transform-ambient-closed} the $U_i$-admissible
+  blow-up $\widetilde X_i=\operatorname{Bl}_{\mathcal I_i}(X_i)$ is, as a
+  strict transform, a closed subscheme of
+  $\operatorname{Bl}_{\mathcal J_i}(X)$ over the closed immersion
+  $X_i\hookrightarrow X$.  Let
+  \[
+    X_i'=\widetilde X\times_{\operatorname{Bl}_{\mathcal J_i}(X)}\widetilde X_i,
+  \]
+  the fibre product taken along the comparison morphism
+  $\widetilde X\to\operatorname{Bl}_{\mathcal J_i}(X)$ of
+  \Cref{cor:nagata-blowup-product-common-refinement} and along the closed
+  immersion $\widetilde X_i\hookrightarrow\operatorname{Bl}_{\mathcal J_i}(X)$;
+  so $X_i'\to\widetilde X$ is a closed immersion and the composite
+  $X_i'\to\widetilde X\to X$ is the restriction of $q$.  Since
+  $U_i\subseteq V$, the morphism $X_i'\to\widetilde X_i$ is an isomorphism over
+  $U_i$.
+
+  Base-changing the closed immersion $F_i$ along $X_i'\to\widetilde X_i$ gives
+  an open subscheme $U_i'\subseteq X_i'$ containing $q^{-1}(U_i)\cong U_i$ and
+  a closed immersion of $X_i'$-schemes
+  \[
+    \varphi_i\colon U_i'\hookrightarrow
+      X_i'\times_{X_i}\bigl(Y_i\cap p^{-1}(X_i)\bigr),
+  \]
+  whose image contains the closure of $F(U_i)$ in the target.  Now
+  $U_i=f^{-1}(Y_i)$, so the underlying space of $\overline{F(U)}$ meets
+  $\widetilde X\times_XY_i$ in the relative closure of $F(U_i)$.  Using the
+  closed immersion
+  \[
+    X_i'\times_{X_i}\bigl(Y_i\cap p^{-1}(X_i)\bigr)\cong X_i'\times_XY_i
+      \hookrightarrow\widetilde X\times_XY_i
+  \]
+  we conclude $\overline{F(U)}\cap(\widetilde X\times_XY_i)
+  \subseteq\varphi_i(U_i')$ as sets, whence
+  $\overline{F(U)}\subseteq\bigcup_i\varphi_i(U_i')$.  Each composite
+  $\varphi_i(U_i')\hookrightarrow X_i'\to\widetilde X$ is set-theoretically
+  injective, so the fibres of $\overline{F(U)}\to\widetilde X$ are finite.
+  Finally, $\overline{F(U)}\to\widetilde X$ is separated because $Y\to X$ is.
+\end{proof}
+
+\begin{theorem}[Elimination of indeterminacy for quasi-dominations,
+  {\cite[Thm.~2.4]{ConradNagata}}]
+  \label{thm:nagata-conrad-elimination}
+  \uses{def:nagata-conrad-quasi-domination,
+    def:nagata-admissible-blowup,
+    lemma:nagata-conrad-quasi-affine-general,
+    lemma:nagata-conrad-graph-closure-quasi-finite}
+  \lean{}
+
+  Let $S$ be qcqs and let $X$ and $Y$ be qcqs $S$-schemes with $Y\to S$
+  separated and of finite type.  Let $U\subseteq V\subseteq X$ be dense open
+  subschemes whose open immersions into $X$ are quasi-compact, and let $(U,f)$
+  be a quasi-domination of $V$ over $Y$ in the sense of
+  \Cref{def:nagata-conrad-quasi-domination}.  There exists a $V$-admissible
+  blow-up $\widetilde X\to X$ such that $\widetilde X$ quasi-dominates $Y$ in a
+  manner extending $f\colon U\to Y$.
+\end{theorem}
+
+\begin{proof}
+  \uses{lemma:nagata-admissible-blowup-comp,
+    lemma:nagata-conrad-dense-in-admissible-blowup,
+    def:nagata-scheme-theoretic-image}
+  The morphism $f$ is automatically quasi-compact and quasi-separated.
+  Replacing $Y$ by $Y\times_SX$ we may assume $X=S$; thus $p\colon Y\to X$ is
+  separated and of finite type and $f\colon U\to Y$ is a section of $p$ over
+  $U$ whose image is closed in the part of $Y$ lying over $V$.
+
+  If $p$ is quasi-affine, this is
+  \Cref{lemma:nagata-conrad-quasi-affine-general}.  In general, let
+  $q\colon\widetilde X\to X$ be the $V$-admissible blow-up produced by
+  \Cref{lemma:nagata-conrad-graph-closure-quasi-finite} and let
+  $\overline{F(U)}\subseteq\widetilde X\times_XY$ be the scheme-theoretic image
+  of $F=(\sigma,f)$.  That lemma makes
+  $\overline{F(U)}\to\widetilde X$ quasi-finite and separated, so Zariski's
+  Main Theorem makes it quasi-affine.
+
+  By \Cref{lemma:nagata-admissible-blowup-comp} we may base change along the
+  $V$-admissible blow-up $q$ without leaving the statement of the theorem;
+  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup} keeps $U$ and $V$
+  dense.  After that base change the scheme-theoretic image $\overline{f(U)}$
+  of $U$ in $Y$ is quasi-affine over the base.  Since a quasi-domination
+  extending $f$ into $\overline{f(U)}$ is one into $Y$ --- the graph of the
+  former is the preimage of the graph of the latter under the closed immersion
+  $\overline{f(U)}\hookrightarrow Y$ --- we may replace $Y$ by
+  $\overline{f(U)}$ and are reduced to the quasi-affine case already treated.
+\end{proof}
+
+\begin{corollary}[Extension of a rational map to a proper target,
+  {\cite[Rem.~2.5]{ConradNagata}}]
+  \label{cor:nagata-conrad-proper-target-extension}
+  \uses{thm:nagata-conrad-elimination,
+    lemma:nagata-conrad-morphism-is-quasi-domination,
+    lemma:nagata-conrad-quasi-domination-proper-target}
+  \lean{}
+
+  Let $S$ be qcqs, let $X$ be a qcqs $S$-scheme, let $U\subseteq X$ be a dense
+  quasi-compact open subscheme, and let $Y\to S$ be proper and of finite type.
+  Every $S$-morphism $f\colon U\to Y$ extends to an $S$-morphism
+  $\widetilde f\colon\widetilde X\to Y$ on some $U$-admissible blow-up
+  $\widetilde X\to X$.
+\end{corollary}
+
+\begin{proof}
+  Take $V=U$.  By
+  \Cref{lemma:nagata-conrad-morphism-is-quasi-domination}, $(U,f)$ is a
+  quasi-domination of $U$ over $Y$, because a proper morphism is separated.
+  \Cref{thm:nagata-conrad-elimination} gives a $U$-admissible blow-up
+  $\widetilde X\to X$ and a quasi-domination $(W,\widetilde f)$ of
+  $\widetilde X$ over $Y$ extending $f$.  Since $Y\to S$ is proper,
+  \Cref{lemma:nagata-conrad-quasi-domination-proper-target} forces $W$ to be
+  all of $\widetilde X$.
+\end{proof}
+
+\begin{remark}[Why the theorem must allow $U\neq V$]
+  The case $U=V$ is the only one used in the applications, but the proof does
+  not go through if $U=V$ is imposed throughout.  The extra flexibility is
+  needed in the general case of the proof of
+  \Cref{thm:nagata-conrad-elimination}: there one restricts to
+  $X_i=\overline{U_i}$ for a piece $U_i=f^{-1}(Y_i)$ of $U$, and even when
+  $U=V$ to begin with, the open $V_i=X_i\cap V$ can be strictly larger than
+  $U_i$.  This is why
+  \Cref{lemma:nagata-conrad-quasi-affine-general} (Case 3) is stated for
+  $U\subseteq V$ and not only for $U=V$, and why
+  \Cref{lemma:nagata-conrad-disjointness-blowup} is needed to reduce Case 3 to
+  Case 2.
+\end{remark}
+
+\begin{remark}[Formalization route: Tag 081S from Theorem 2.4 and Zariski's
+  Main Theorem]
+  \Cref{lemma:nagata-elimination-indeterminacy} (Stacks Tag 081S) is
+  formalized along this chapter, not along the module-flattening chain
+  (\Cref{lemma:nagata-finite-data-flattening-package} to
+  \Cref{lemma:nagata-dense-open-dimension-package}).  The bridge is the
+  following argument, which uses no further input.
+
+  Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open and let
+  $q\colon Z\to X$ be separated and of finite type with a chosen isomorphism
+  $q^{-1}(U)\cong U$ over $U$.
+  \begin{enumerate}
+    \item By \Cref{lemma:nagata-conrad-schematically-dense-blowup}, replace $X$
+      by the $U$-admissible blow-up along a finite type ideal with zero scheme
+      exactly $X\setminus U$, and $Z$ by its strict transform.  The new $q$ is
+      still separated and of finite type and is still an isomorphism over $U$,
+      and now $U$ is scheme-theoretically dense in $X$; in particular the
+      density hypothesis of \Cref{thm:nagata-conrad-elimination} holds.  The
+      final centre is recombined with this one by
+      \Cref{lemma:nagata-admissible-blowup-comp}.
+    \item Apply \Cref{thm:nagata-conrad-elimination} with $V=U$ and with $f$
+      the section $U\cong q^{-1}(U)\hookrightarrow Z$: it produces a
+      $U$-admissible blow-up $\operatorname{Bl}_{\mathcal I}(X)$ and a
+      quasi-domination $(W,\widetilde f)$ of it over $Z$ extending $f$.
+    \item Enlarge the centre from $\mathcal I$ to $\mathcal I\cdot\mathcal I_0$
+      with $V(\mathcal I_0)=X\setminus U$, and let
+      $X'=\operatorname{Bl}_{\mathcal I\mathcal I_0}(X)$.  By
+      \Cref{cor:nagata-blowup-product-common-refinement} it dominates
+      $\operatorname{Bl}_{\mathcal I}(X)$, so $W$ pulls back to an open
+      $W'\subseteq X'$ containing $U$ and $\widetilde f$ pulls back to
+      $f'\colon W'\to Z$ with $\Gamma_{f'}$ closed in $X'\times_XZ$.  Now
+      $X'\setminus V(\mathcal I\mathcal I_0)=U$, so $U$ is
+      scheme-theoretically dense in $X'$ and hence in $W'$.
+    \item The strict transform $Z'$ of $Z$ in $X'$ is, by
+      \Cref{lemma:nagata-strict-transform-closure-characterization}, the
+      scheme-theoretic closure of the part of $X'\times_XZ$ lying over
+      $X'\setminus V(\mathcal I\mathcal I_0)=U$, that is, the
+      scheme-theoretic closure of $\Gamma_f$.  It is therefore contained in
+      the closed subscheme $\Gamma_{f'}\cong W'$.  So $Z'$ is a closed
+      subscheme of $W'$ containing $U$ as a scheme-theoretically dense open
+      subscheme, whence $Z'=W'$ and $Z'\to X'$ is an open immersion.
+  \end{enumerate}
+  This is exactly the conclusion of
+  \Cref{lemma:nagata-elimination-indeterminacy}.  The two external inputs are
+  Zariski's Main Theorem, used once in the proof of
+  \Cref{thm:nagata-conrad-elimination} and available in Mathlib as
+  \texttt{Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean}, and the
+  immersion of a quasi-affine scheme into relative affine space (Stacks Tag
+  04II), used in \Cref{lemma:nagata-conrad-quasi-affine-affine-base} and
+  already formalized as
+  \texttt{AlgebraicGeometry.exists\_immersion\_affineSpace\_of\_quasiAffine}.
+\end{remark}

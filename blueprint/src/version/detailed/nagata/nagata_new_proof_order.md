@@ -49,20 +49,28 @@ not by the shortest source-file path.
 | 28 | lemma:nagata-flattening-ideal-exists | Selects the flattening ideal and records its universal specification. | Previous flattening lemmas -> chosen ideal |
 | 29 | lemma:nagata-dense-open-dimension-package | Extends finite presentation and fibre-dimension bounds from a retrocompact dense open (Stacks Tags 081P and 081L). | Flat lft map + dense open -> lfp and dimension bound |
 
-> **Route revision (formalization, 2026-08-28).** Items 25-29 (the
-> module-flattening chain, Stacks Tags 0815/081R/081P/081L) **are on the
-> formalized route**: they are the route to item 30 (Tag 081S), which is the
-> single primitive obligation of the modification layer and is still `sorry` in
-> Lean.  This supersedes the earlier (2026-08) decision to leave the flattening
-> chain off the formalized route.  Item 23 is so far formalized only in its
-> affine algebraic layer (`Submodule.powTorsion` and
-> `Submodule.torsion'QuotientMap` in
-> `WeilConjectures/Mathlib/Algebra/Module/Torsion.lean`).
+> **Route revision (formalization, 2026-08-28, superseding the earlier note of
+> the same day).** Items 25-29 (the module-flattening chain, Stacks Tags
+> 0815/081R/081P/081L) are **not** on the formalized route.  They are the
+> Stacks Project's proof of item 30 (Tag 081S), but that chain bottoms out in
+> the dévissage sections of Stacks §§38.4-38.10, which exist neither in Mathlib
+> nor in this blueprint.
+>
+> Item 30 (Tag 081S) is formalized instead via **Conrad's Theorem 2.4 and
+> Zariski's Main Theorem** — items 61-75 below, the chapter "Elimination of
+> indeterminacy after Deligne and Conrad" of `nagata_new.tex`.  Both external
+> inputs are available: ZMT is in Mathlib
+> (`Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`), and Stacks Tag 04II
+> is already formalized here as `exists_immersion_affineSpace_of_quasiAffine`
+> (`WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean:291`).  Item 30
+> is still `sorry` in Lean.  Item 23 is so far formalized only in its affine
+> algebraic layer (`Submodule.powTorsion` and `Submodule.torsion'QuotientMap`
+> in `WeilConjectures/Mathlib/Algebra/Module/Torsion.lean`).
 >
 > What is unchanged: the **two-open** theorem (items 43-48) does not go through
-> flattening.  It uses the boundary-separation route — item 36's Tag 0F3V
-> separation blow-up, common modifications, and the dense-source valuative
-> criterion (item 42).  Flattening enters only below item 30.
+> flattening either way.  It uses the boundary-separation route — item 36's Tag
+> 0F3V separation blow-up, common modifications, and the dense-source valuative
+> criterion (item 42).
 >
 > **Route revision (formalization, 2026-08-26): Tag 080E.** The identification
 > of the strict transform with the blow-up of the pulled-back ideal
@@ -146,6 +154,41 @@ not by the shortest source-file path.
 |---:|---|---|---|
 | 59 | def:nagata-final-compactification | Packages the selected descended Noetherian compactification. | Descended model + Noetherian compactification -> final candidate |
 | 60 | thm:nagata-compactification | Main theorem: every separated finite-type morphism in scope is compactifiable. | Final candidate data -> Compactification f |
+
+## 10. Elimination of indeterminacy: the Conrad/ZMT route to Tag 081S
+
+The chapter "Elimination of indeterminacy after Deligne and Conrad" of
+`nagata_new.tex`, following Conrad, *Deligne's notes on Nagata
+compactifications*, §§1-2 (pp. 10-19).  These items are numbered after item 60
+so that the numbering above is unchanged, but logically they all precede item
+30: they are the formalized route to it, replacing items 25-29.  Nothing here
+is formalized yet.
+
+| Order | Label | Role | Main inputs -> output |
+|---:|---|---|---|
+| 61 | def:nagata-conrad-quasi-domination | Defines a quasi-domination: a map on a dense open whose graph stays closed in the ambient product (Conrad Def. 2.1). | Dense open + map to a separated target -> closed-graph datum |
+| 62 | lemma:nagata-conrad-morphism-is-quasi-domination | Any map on `U` to a separated target is a quasi-domination of `U` (the `U = V` case of Remark 2.5). | Separated target -> quasi-domination |
+| 63 | lemma:nagata-conrad-quasi-domination-proper-target | A quasi-domination over a proper target is defined everywhere. | Proper target + closed graph -> domain is all of `X` |
+| 64 | lemma:nagata-conrad-dense-in-admissible-blowup | A dense quasi-compact open stays dense in any admissible blow-up, and is schematically dense when the centre is its exact complement. | Invertible exceptional ideal -> density transport |
+| 65 | lemma:nagata-conrad-schematically-dense-blowup | One admissible blow-up makes the preserved open schematically dense (Stacks Tag 01PH + Tag 080L). | qc open -> blow-up with schematically dense `U` |
+| 66 | lemma:nagata-conrad-strict-transform-in-charts | Deligne's Lemme 0.2 / Conrad Lem. 1.4: the strict transform of one centre lives in the charts of the other; strict transforms of `n` centres are mutually disjoint. | Blow-up chart algebras -> chart-wise disjointness |
+| 67 | def:nagata-conrad-disjointness-setup | Records the hypotheses of Conrad Lem. 1.5: the square, the thickening `T₁ = V(I₁²)`, the auxiliary `T₂`, and the scheme-theoretic factorization hypothesis. | Diagram + two centres -> disjointness situation |
+| 68 | lemma:nagata-conrad-disjointness-blowup | Deligne's Lemme 0.3 / Conrad Lem. 1.5: after blowing up `I₁ + I₂`, the closure of the image of `Y` no longer meets the part over the closure of `V ∖ U`. | Disjointness situation -> separating function `h` on each chart |
+| 69 | lemma:nagata-conrad-affine-space-extension | Case 1 with `Y = 𝔸ⁿ_X` (pp. 14-15): a map `U -> 𝔸ⁿ_X` over an affine base extends to `Bl_I(X) -> ℙⁿ_X` for an explicit centre built from the transition data. | Affine cover of `U` + homogeneous coordinate formulas -> extension |
+| 70 | lemma:nagata-conrad-quasi-affine-affine-base | Case 1 in full: quasi-affine finite-type target over an affine base, `U = V`. | Tag 04II immersion + item 69 + schematic density -> quasi-domination |
+| 71 | lemma:nagata-conrad-quasi-affine-equal-opens | Case 2 (pp. 15-16): quasi-affine target over a qcqs base with `U = V`, by gluing the affine-base solutions along a product centre. | Item 70 on an affine cover + finite-type ideal extension + product blow-up -> glued quasi-domination |
+| 72 | lemma:nagata-conrad-quasi-affine-general | Case 3 (pp. 16-17): quasi-affine target with `U ⊆ V`, by first separating `p(im f)` from the closure of `V ∖ U`. | Item 68 + item 71 on the shrunken base `X ∖ closure(V ∖ U)` -> quasi-domination |
+| 73 | lemma:nagata-conrad-graph-closure-quasi-finite | The general case, first half (pp. 17-19): after one `V`-admissible blow-up the scheme-theoretic image of the graph is quasi-finite and separated over the blow-up. | Affine cover of `Y` + item 72 on each `closure(U_i)` -> finite fibres |
+| 74 | thm:nagata-conrad-elimination | **Conrad Thm. 2.4** (Deligne Thm. 1.2, Nagata Thm. 3.2): a quasi-domination of `V` over a separated finite-type `Y` extends to a quasi-domination of a `V`-admissible blow-up of `X`. | Item 73 + Zariski's Main Theorem (quasi-finite separated => quasi-affine) + item 72 -> the theorem |
+| 75 | cor:nagata-conrad-proper-target-extension | **Conrad Rem. 2.5**: for `U = V` and `Y` proper, a map `U -> Y` extends to a morphism on a `U`-admissible blow-up. | Items 62, 63, 74 -> everywhere-defined extension |
+
+> **Route to item 30.** The remark closing the chapter records the derivation of
+> item 30 (Tag 081S) from item 74: make `U` schematically dense (item 65), apply
+> item 74 with `V = U` to the section `U ≅ q⁻¹(U) ↪ Z`, enlarge the centre so
+> that its complement is exactly `U`, and observe that the strict transform of
+> `Z` — the scheme-theoretic closure of the graph — is a closed subscheme of the
+> closed graph `Γ` containing `U` as a schematically dense open, hence equals
+> it.  No `\leanok` is claimed for any item in this section.
 
 ## Formalization status by PR (stack nagata-01 … nagata-09, 2026-08)
 
