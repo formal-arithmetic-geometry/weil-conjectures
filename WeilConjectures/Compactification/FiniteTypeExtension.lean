@@ -51,8 +51,9 @@ piece is produced by clearing denominators on a finite basic-open cover of the o
 - `Scheme.IdealSheafData.ofFiniteType.comap`: finite-typeness is stable under pullback
   along an arbitrary morphism of schemes;
 - `Scheme.IdealSheafData.exists_le_ofFiniteTypeOn_sup`: the binary gluing step;
-- `Scheme.IdealSheafData.exists_finiteType_le_comap_eq` and
-  `Scheme.IdealSheafData.exists_finiteType_comap_eq`: the two forms of Tag 01PF;
+- `Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_le`,
+  `Scheme.IdealSheafData.exists_finiteType_le_comap_eq` and
+  `Scheme.IdealSheafData.exists_finiteType_comap_eq`: the three forms of Tag 01PF;
 - `Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_isAffineHom`: the variant of
   Tag 01PF prescribing the pullback along an affine morphism instead of the restriction to
   a quasi-compact open;
@@ -338,35 +339,35 @@ theorem exists_le_ofFiniteTypeOn_sup {H₀ I₀ : X.IdealSheafData} {O : X.Opens
     exact Ideal.FG.map hN'fg _
 
 /-- Existence of a finite-type ideal sheaf with prescribed restriction (Stacks Project
-Tag 01PF, order-theoretic form): on a quasi-compact quasi-separated scheme, every ideal
-sheaf `H₀` whose restriction to a quasi-compact open `W` is of finite type contains a
-finite-type ideal sheaf with the same restriction to `W`.
+Tag 01PF, relative order-theoretic form): on a quasi-compact quasi-separated scheme, if a
+subsheaf `I₀` of an ideal sheaf `H₀` is of finite type on a quasi-compact open `W`, then
+`H₀` contains a finite-type ideal sheaf with the same restriction to `W` as `I₀`.
 (Blueprint: `lemma:nagata-extend-finite-type-ideal`.) -/
-theorem exists_finiteType_le_comap_eq [CompactSpace X] (H₀ : X.IdealSheafData) (W : X.Opens)
-    (hW : IsCompact (W : Set X)) (hJ : H₀.ofFiniteTypeOn W) :
-    ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteType ∧ I.comap W.ι = H₀.comap W.ι := by
+theorem exists_finiteType_le_comap_eq_of_le [CompactSpace X] {H₀ I₀ : X.IdealSheafData}
+    (hle : I₀ ≤ H₀) (W : X.Opens) (hW : IsCompact (W : Set X)) (hJ : I₀.ofFiniteTypeOn W) :
+    ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteType ∧ I.comap W.ι = I₀.comap W.ι := by
   classical
   -- enlarge the open of finite-typeness one affine open at a time
   have key : ∀ t : Finset X.affineOpens,
       ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteTypeOn (W ⊔ t.sup fun V ↦ V.1) ∧
-        I.comap W.ι = H₀.comap W.ι := by
+        I.comap W.ι = I₀.comap W.ι := by
     intro t
     induction t using Finset.induction_on with
     | empty =>
       rw [Finset.sup_empty, sup_bot_eq]
-      exact ⟨H₀, le_rfl, hJ, rfl⟩
+      exact ⟨I₀, hle, hJ, rfl⟩
     | insert V t hV IH =>
-      obtain ⟨I₀, hle, hft, hcomap⟩ := IH
+      obtain ⟨I₁, hle₁, hft₁, hcomap⟩ := IH
       have hsup : W ⊔ (insert V t).sup (fun V ↦ V.1) = (W ⊔ t.sup fun V ↦ V.1) ⊔ V.1 := by
         rw [Finset.sup_insert, sup_comm V.1 (t.sup fun V ↦ V.1), ← sup_assoc]
       obtain ⟨I, hIle, hIft, hIcomap⟩ :=
-        exists_le_ofFiniteTypeOn_sup (isCompact_sup_finsetSup hW t) V hle hft
+        exists_le_ofFiniteTypeOn_sup (isCompact_sup_finsetSup hW t) V hle₁ hft₁
       refine ⟨I, hIle, by rwa [hsup], ?_⟩
       have hWle : W ≤ W ⊔ t.sup fun V ↦ V.1 := le_sup_left
       have h₁ : I.comap W.ι = (I.comap (W ⊔ t.sup fun V ↦ V.1).ι).comap (X.homOfLE hWle) := by
         rw [← comap_comp, Scheme.homOfLE_ι]
-      have h₂ : I₀.comap W.ι =
-          (I₀.comap (W ⊔ t.sup fun V ↦ V.1).ι).comap (X.homOfLE hWle) := by
+      have h₂ : I₁.comap W.ι =
+          (I₁.comap (W ⊔ t.sup fun V ↦ V.1).ι).comap (X.homOfLE hWle) := by
         rw [← comap_comp, Scheme.homOfLE_ι]
       rw [h₁, hIcomap, ← h₂, hcomap]
   have hcov : (Set.univ : Set X) ⊆ ⋃ V : X.affineOpens, (V.1 : Set X) := by
@@ -383,6 +384,16 @@ theorem exists_finiteType_le_comap_eq [CompactSpace X] (H₀ : X.IdealSheafData)
   obtain ⟨V, hVt, hxV⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
   exact (le_sup_right : (t.sup fun V ↦ V.1) ≤ W ⊔ t.sup fun V ↦ V.1)
     ((Finset.le_sup (f := fun V ↦ V.1) hVt) hxV)
+
+/-- Existence of a finite-type ideal sheaf with prescribed restriction (Stacks Project
+Tag 01PF, order-theoretic form): on a quasi-compact quasi-separated scheme, every ideal
+sheaf `H₀` whose restriction to a quasi-compact open `W` is of finite type contains a
+finite-type ideal sheaf with the same restriction to `W`.
+(Blueprint: `lemma:nagata-extend-finite-type-ideal`.) -/
+theorem exists_finiteType_le_comap_eq [CompactSpace X] (H₀ : X.IdealSheafData) (W : X.Opens)
+    (hW : IsCompact (W : Set X)) (hJ : H₀.ofFiniteTypeOn W) :
+    ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteType ∧ I.comap W.ι = H₀.comap W.ι :=
+  exists_finiteType_le_comap_eq_of_le le_rfl W hW hJ
 
 /-- Extension of a finite-type ideal sheaf from a quasi-compact open (Stacks Project
 Tag 01PF): on a quasi-compact quasi-separated scheme, every finite-type ideal sheaf on a
