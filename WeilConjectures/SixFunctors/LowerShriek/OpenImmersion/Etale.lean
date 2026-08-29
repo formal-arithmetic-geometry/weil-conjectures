@@ -107,13 +107,17 @@ noncomputable def Etale.openImmersionLowerShriek :
     Sheaf U.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
   GrothendieckTopology.localizationLowerShriek A @Etale @Etale j inferInstance
 
+@[inherit_doc Etale.openImmersionLowerShriek]
+scoped notation "(" j ")_!Imm[" A "]" =>
+  Etale.openImmersionLowerShriek A j
+
 /-- The adjunction `j_! ⊣ j^*` between the extension by zero and the restriction along an
 open immersion. -/
 noncomputable def Etale.openImmersionLowerShriekAdjunction :
-    Etale.openImmersionLowerShriek A j ⊣ Etale.openImmersionRestriction A j :=
+    (j)_!Imm[A] ⊣ Etale.openImmersionRestriction A j :=
   GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale le_rfl j inferInstance
 
-instance : (Etale.openImmersionLowerShriek A j).IsLeftAdjoint :=
+instance : (j)_!Imm[A].IsLeftAdjoint :=
   (Etale.openImmersionLowerShriekAdjunction A j).isLeftAdjoint
 
 instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
@@ -121,8 +125,7 @@ instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in a
 preadditive category is additive, being left adjoint to the additive restriction `j^*`. -/
-instance Etale.openImmersionLowerShriek_additive :
-    (Etale.openImmersionLowerShriek A j).Additive :=
+instance Etale.openImmersionLowerShriek_additive : (j)_!Imm[A].Additive :=
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
