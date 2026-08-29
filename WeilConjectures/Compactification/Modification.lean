@@ -1474,4 +1474,17 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
 
 end IsomorphismNearClosure
 
+/-! ### Axiom census
+
+Elimination of indeterminacy is unconditional: the check below is run by the build, so a
+`sorry` reappearing anywhere beneath Stacks Project Tag 081S breaks compilation rather than
+going unnoticed. -/
+
+/--
+info: 'AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap
+
 end AlgebraicGeometry
