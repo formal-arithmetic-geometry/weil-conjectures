@@ -212,10 +212,8 @@ noncomputable def Etale.homologyLeftDerivedUpperStarIso {T S : Scheme.{u}}
 `h^*` on étale sheaves is exact, the derived pullback of a sheaf placed in degree `0` is
 the pullback of the sheaf placed in degree `0`, `Lh^*(F[0]) ≅ (h^* F)[0]`. -/
 noncomputable def Etale.singleCompLeftDerivedUpperStarIso {T S : Scheme.{u}} (h : T ⟶ S) :
-    DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology A) 0 ⋙
-        Etale.leftDerivedUpperStar A h ≅
-      Etale.upperStar A h ⋙
-        DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology A) 0 :=
+    DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology A) 0 ⋙ L(h)^*[A] ≅
+      Etale.upperStar A h ⋙ DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology A) 0 :=
   (Etale.upperStar A h).singleFunctorCompLeftDerivedFunctorIso
 
 end DerivedUpperStar
