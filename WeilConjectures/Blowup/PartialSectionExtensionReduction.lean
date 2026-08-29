@@ -135,11 +135,8 @@ lemma exists_extend_partialSection_of_iso {X' X'' : Scheme.{u}} {f : U.toScheme 
       infer_instance
     have hcomp : pullback.lift ((ε.hom ∣_ W) ≫ g) (ε.hom ⁻¹ᵁ W).ι hg' ≫ c
         = (ε.hom ∣_ W) ≫ pullback.lift g W.ι hg := by
-      refine pullback.hom_ext ?_ ?_
-      · rw [Category.assoc, hc, pullback.lift_fst, ← Category.assoc, pullback.lift_fst,
-          Category.assoc, pullback.lift_fst, Category.comp_id]
-      · rw [Category.assoc, hc, pullback.lift_snd, ← Category.assoc, pullback.lift_snd,
-          Category.assoc, pullback.lift_snd, morphismRestrict_ι]
+      refine pullback.hom_ext ?_ ?_ <;>
+        simp [hc, Category.assoc, morphismRestrict_ι]
     refine isClosed_range_of_comp_isIso _ c ?_
     rw [hcomp, range_isIso_comp]
     exact hcl
@@ -170,32 +167,39 @@ theorem exists_isAdmissible_extend_partialSection_of_blowup
       B.I.blowup.homOfLE hUW ≫ g = (B.I.blowupMap ∣_ U) ≫ f ∧
         IsClosed (Set.range (pullback.lift g W.ι hg)) := by
   obtain ⟨B₂, W, hUW, g, hg, hext, hcl⟩ := H
-  set π := B₁.I.blowupMap with hπ
-  set ρ := B₂.I.blowupMap with hρ
   obtain ⟨K, hKft, hdisj, iso, hiso⟩ := B₁.exists_comp B₂
-  -- the conclusion for the composite `ρ ≫ π`
-  have Hcomp : ∃ (W' : B₂.I.blowup.Opens) (hUW' : (ρ ≫ π) ⁻¹ᵁ U ≤ W')
-      (g' : W'.toScheme ⟶ Y) (hg' : g' ≫ p = W'.ι ≫ (ρ ≫ π)),
-      B₂.I.blowup.homOfLE hUW' ≫ g' = ((ρ ≫ π) ∣_ U) ≫ f ∧
+  -- the conclusion for the composite blow-up `B₂.I.blowupMap ≫ B₁.I.blowupMap`
+  have Hcomp : ∃ (W' : B₂.I.blowup.Opens)
+      (hUW' : (B₂.I.blowupMap ≫ B₁.I.blowupMap) ⁻¹ᵁ U ≤ W') (g' : W'.toScheme ⟶ Y)
+      (hg' : g' ≫ p = W'.ι ≫ (B₂.I.blowupMap ≫ B₁.I.blowupMap)),
+      B₂.I.blowup.homOfLE hUW' ≫ g' = ((B₂.I.blowupMap ≫ B₁.I.blowupMap) ∣_ U) ≫ f ∧
         IsClosed (Set.range (pullback.lift g' W'.ι hg')) := by
-    have hg' : (g ≫ pullback.snd π p) ≫ p = W.ι ≫ (ρ ≫ π) := by
+    have hg' : (g ≫ pullback.snd B₁.I.blowupMap p) ≫ p
+        = W.ι ≫ (B₂.I.blowupMap ≫ B₁.I.blowupMap) := by
       rw [Category.assoc, ← pullback.condition, ← Category.assoc, hg, Category.assoc]
-    refine ⟨W, hUW, g ≫ pullback.snd π p, hg', ?_, ?_⟩
+    refine ⟨W, hUW, g ≫ pullback.snd B₁.I.blowupMap p, hg', ?_, ?_⟩
     · rw [← Category.assoc, hext, Category.assoc, baseChangeSection_comp_snd,
         morphismRestrict_comp, Category.assoc]
     · -- the pasting square identifying `Y ×_X X''` with `(Y ×_X X') ×_{X'} X''`
-      have hw : (pullback.snd p (ρ ≫ π) ≫ ρ) ≫ π = pullback.fst p (ρ ≫ π) ≫ p := by
+      have hw : (pullback.snd p (B₂.I.blowupMap ≫ B₁.I.blowupMap) ≫ B₂.I.blowupMap)
+            ≫ B₁.I.blowupMap
+          = pullback.fst p (B₂.I.blowupMap ≫ B₁.I.blowupMap) ≫ p := by
         rw [Category.assoc, ← pullback.condition]
-      set t : (pullback p (ρ ≫ π) : Scheme.{u}) ⟶ pullback π p :=
-        pullback.lift (pullback.snd p (ρ ≫ π) ≫ ρ) (pullback.fst p (ρ ≫ π)) hw with ht
-      have hsq : IsPullback t (pullback.snd p (ρ ≫ π)) (pullback.fst π p) ρ := by
+      set t : (pullback p (B₂.I.blowupMap ≫ B₁.I.blowupMap) : Scheme.{u})
+            ⟶ pullback B₁.I.blowupMap p :=
+        pullback.lift (pullback.snd p (B₂.I.blowupMap ≫ B₁.I.blowupMap) ≫ B₂.I.blowupMap)
+          (pullback.fst p (B₂.I.blowupMap ≫ B₁.I.blowupMap)) hw with ht
+      have hsq : IsPullback t (pullback.snd p (B₂.I.blowupMap ≫ B₁.I.blowupMap))
+          (pullback.fst B₁.I.blowupMap p) B₂.I.blowupMap := by
         refine IsPullback.of_right ?_ (by rw [ht, pullback.lift_fst])
-          (IsPullback.of_hasPullback π p).flip
-        have h1 : t ≫ pullback.snd π p = pullback.fst p (ρ ≫ π) := by
+          (IsPullback.of_hasPullback B₁.I.blowupMap p).flip
+        have h1 : t ≫ pullback.snd B₁.I.blowupMap p
+            = pullback.fst p (B₂.I.blowupMap ≫ B₁.I.blowupMap) := by
           rw [ht, pullback.lift_snd]
         rw [h1]
-        exact IsPullback.of_hasPullback p (ρ ≫ π)
-      have hlift : pullback.lift (g ≫ pullback.snd π p) W.ι hg' ≫ hsq.isoPullback.hom
+        exact IsPullback.of_hasPullback p (B₂.I.blowupMap ≫ B₁.I.blowupMap)
+      have hlift : pullback.lift (g ≫ pullback.snd B₁.I.blowupMap p) W.ι hg'
+            ≫ hsq.isoPullback.hom
           = pullback.lift g W.ι hg := by
         refine pullback.hom_ext ?_ ?_
         · rw [Category.assoc, IsPullback.isoPullback_hom_fst, pullback.lift_fst]
@@ -239,7 +243,7 @@ theorem exists_isAdmissible_extend_partialSection_of_isClosedImmersion {Y' : Sch
     have : IsClosedImmersion c := by
       rw [hc]
       exact MorphismProperty.of_isPullback (P := @IsClosedImmersion)
-        (isPullback_pullback_map_left i p π).flip inferInstance
+        (isPullback_pullback_map_left i p π) inferInstance
     have hcomp : pullback.lift (g ≫ i) W.ι hg' = pullback.lift g W.ι hg ≫ c := by
       refine pullback.hom_ext ?_ ?_
       · rw [pullback.lift_fst, Category.assoc, hc, pullback.lift_fst, ← Category.assoc,
@@ -275,27 +279,27 @@ lemma compactSpace_pullback_blowupMap [CompactSpace Y] :
 lemma isSeparated_pullback_snd_blowupMap : IsSeparated (pullback.snd B₁.I.blowupMap p) :=
   have : IsSeparated B₁.I.blowupMap := B₁.isProper_blowupMap.toIsSeparated
   MorphismProperty.of_isPullback (P := @IsSeparated)
-    (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
+    (IsPullback.of_hasPullback B₁.I.blowupMap p) inferInstance
 
 lemma quasiSeparatedSpace_pullback_blowupMap [QuasiSeparatedSpace Y] :
-    QuasiSeparatedSpace (pullback B₁.I.blowupMap p : Scheme.{u}) :=
-  have := B₁.isSeparated_pullback_snd_blowupMap
-  quasiSeparatedSpace_of_quasiSeparated (pullback.snd B₁.I.blowupMap p)
+    QuasiSeparatedSpace (pullback B₁.I.blowupMap p : Scheme.{u}) := by
+  have := B₁.isSeparated_pullback_snd_blowupMap (p := p)
+  exact quasiSeparatedSpace_of_quasiSeparated (pullback.snd B₁.I.blowupMap p)
 
 lemma isSeparated_pullback_fst_blowupMap [IsSeparated p] :
     IsSeparated (pullback.fst B₁.I.blowupMap p) :=
   MorphismProperty.of_isPullback (P := @IsSeparated)
-    (IsPullback.of_hasPullback B₁.I.blowupMap p) inferInstance
+    (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
 
 lemma locallyOfFiniteType_pullback_fst_blowupMap [LocallyOfFiniteType p] :
     LocallyOfFiniteType (pullback.fst B₁.I.blowupMap p) :=
   MorphismProperty.of_isPullback (P := @LocallyOfFiniteType)
-    (IsPullback.of_hasPullback B₁.I.blowupMap p) inferInstance
+    (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
 
 lemma quasiCompact_pullback_fst_blowupMap [QuasiCompact p] :
     QuasiCompact (pullback.fst B₁.I.blowupMap p) :=
   MorphismProperty.of_isPullback (P := @QuasiCompact)
-    (IsPullback.of_hasPullback B₁.I.blowupMap p) inferInstance
+    (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
 
 /-- The closed-image hypothesis of Conrad's Theorem 2.4 transports to the base-changed
 section: the range of `AlgebraicGeometry.baseChangeSection` is closed in the preimage of
