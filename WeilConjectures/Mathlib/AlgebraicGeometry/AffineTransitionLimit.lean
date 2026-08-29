@@ -4494,6 +4494,30 @@ example {X S : Scheme.{u}} {f : X ⟶ S} (F : f.FinitePresentationApproximation)
     ∃ j : F.I, ∀ {i : F.I} (_ : i ⟶ j), IsSeparated (F.p.app i) :=
   Scheme.exists_isSeparated_app_of_isLimit F.isLimit F.p i₀
 
+/-- **The separated finite presentation envelope of a morphism of finite type** (Stacks Project
+Tag 01ZJ): a separated morphism `f : X ⟶ S` locally of finite type between quasi-compact
+quasi-separated schemes factors as a closed immersion `i : X ⟶ X'` followed by a separated,
+quasi-compact morphism `f' : X' ⟶ S` locally of finite presentation.
+
+Take a finite presentation approximation of `f` (Stacks Project Tag 09ZQ) and descend the
+separatedness of `f` to a stage of the system (Stacks Project Tag 01ZH); that stage is the
+required envelope. (Blueprint: `prop:nagata-finite-type-closed-in-fp`.) -/
+@[stacks 01ZJ]
+theorem Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation
+    {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S]
+    [QuasiSeparatedSpace S] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] :
+    ∃ (X' : Scheme.{u}) (i : X ⟶ X') (f' : X' ⟶ S), IsClosedImmersion i ∧
+      LocallyOfFinitePresentation f' ∧ QuasiCompact f' ∧ IsSeparated f' ∧ i ≫ f' = f := by
+  obtain ⟨F⟩ := f.nonempty_finitePresentationApproximation
+  obtain ⟨i₀⟩ := IsCofiltered.nonempty (C := F.I)
+  haveI : IsSeparated ((Cone.mk X F.π).π.app i₀ ≫ F.p.app i₀) := by
+    change IsSeparated (F.π.app i₀ ≫ F.p.app i₀)
+    rw [F.w i₀]
+    infer_instance
+  obtain ⟨j, hj⟩ := Scheme.exists_isSeparated_app_of_isLimit F.isLimit F.p i₀
+  exact ⟨F.D.obj j, F.π.app j, F.p.app j, inferInstance, inferInstance, inferInstance,
+    hj (𝟙 j), F.w j⟩
+
 end FinitePresentationApproximation
 
 end AlgebraicGeometry
