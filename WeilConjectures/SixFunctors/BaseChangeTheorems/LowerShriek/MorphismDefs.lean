@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -239,11 +240,8 @@ lemma Etale.lowerShriekBaseChangeProperStep_app (c : Compactification f)
 
 noncomputable def Etale.lowerShriekBaseChangeAux (c : Compactification f)
     (sq : IsPullback g' f' f g) :
-    ((c.i)_!Imm[A].mapDerivedCategoryPlus ⋙ R(c.g)_*[A]+) ⋙
-        (g)^*[A].mapDerivedCategoryPlus ⟶
-    (g')^*[A].mapDerivedCategoryPlus ⋙
-      (((c.baseChange sq).i)_!Imm[A].mapDerivedCategoryPlus ⋙
-        R((c.baseChange sq).g)_*[A]+) :=
+    Rf_!(c)[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
+    (g')^*[A].mapDerivedCategoryPlus ⋙ Rf_!(c.baseChange sq)[A]+ :=
   (Functor.associator _ _ _).hom ≫
   Functor.whiskerLeft (c.i)_!Imm[A].mapDerivedCategoryPlus
   (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq)
