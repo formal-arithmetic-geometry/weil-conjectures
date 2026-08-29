@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
@@ -34,6 +34,9 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus` : `Rf_!` on bounded below derived
   category specifying to the chosen compcatification `HasCompactification.compactification`,
   with scoped notation `R(f)_![A]+`.
+
+- `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`, with scoped notation
+  `H_c(f)[A](i)`.
 
 -/
 
@@ -133,5 +136,63 @@ lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
 end Etale
 
 end DerivedLowerShriek
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+section DerivedGlobalSections
+
+namespace Etale
+
+variable (X : Scheme.{u})
+
+/-- The derived global sections `RΓ(X, -) : D(X_ét) ⥤ D(A)`: the total right derived
+functor of the global sections functor on étale sheaves, which exists since the small
+étale site has a terminal object. -/
+noncomputable def rightDerivedGlobalSections :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
+  (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor
+
+end Etale
+
+end DerivedGlobalSections
+
+section CompactlySupportedCohomology
+
+namespace Etale
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+
+/-- The compactly supported derived global sections along a morphism `f : X ⟶ Y`
+admitting a compactification, *defined* as the composite
+
+`RΓc(X/Y, -) := RΓ(Y, Rf_! -) : D(X_ét) ⥤ D(A)`.
+
+The intermediate object `Rf_! K ∈ D(Y_ét)` and the coefficient complex
+`RΓc(X/Y, K) ∈ D(A)` are not definitionally the same. For the structure morphism of the
+geometric fiber of a scheme separated of finite type over a finite field this is the
+`RΓc(X, K) = RΓ(s, Ra_{X!} K)` of the trace-formula interface. -/
+noncomputable def compactlySupportedGlobalSections :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
+  R(f)_![A] ⋙ rightDerivedGlobalSections A Y
+
+/-- The compactly supported cohomology along a morphism `f : X ⟶ Y` admitting a
+compactification, `Hᶜⁱ(X/Y, K) := Hⁱ(RΓc(X/Y, K))`: the `i`-th homology object of the
+compactly supported derived global sections. Finiteness is a theorem, not part of the
+definition. -/
+noncomputable def compactlySupportedCohomology (i : ℤ) :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ A :=
+  compactlySupportedGlobalSections A f ⋙ DerivedCategory.homologyFunctor A i
+
+@[inherit_doc compactlySupportedCohomology]
+scoped notation "H_c(" f ")[" A "](" i ")" =>
+  compactlySupportedCohomology A f i
+
+end Etale
+
+end CompactlySupportedCohomology
 
 end AlgebraicGeometry
