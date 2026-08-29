@@ -81,12 +81,12 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace GrothendieckTopology
 
-/- The left Kan extensions on presheaves, the sheafification and the continuity of the
-base change functor entering the definitions below are provided by the sorried results of
-the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the following
-multiplicativity-type
-assumptions on `P` and `Q` and the inequality `hQP : Q ≤ P`; all of them hold for
-`P = Q = @Etale`. -/
+/- The left Kan extensions on presheaves and the sheafification entering the definitions
+below are provided by the sorried results of the folder
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`, and the continuity of the base
+change functor by `AlgebraicGeometry.Scheme.isContinuous_overPullback`, under the
+following multiplicativity-type assumptions on `P` and `Q` and the inequality
+`hQP : Q ≤ P`; all of them hold for `P = Q = @Etale`. -/
 variable (P Q : MorphismProperty Scheme.{u})
 variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
   [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
