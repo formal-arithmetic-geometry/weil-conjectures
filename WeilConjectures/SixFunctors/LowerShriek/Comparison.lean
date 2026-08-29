@@ -87,6 +87,8 @@ open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
+open Etale
+
 section OpenImmersion
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
@@ -96,12 +98,12 @@ pushforward along an open immersion, obtained from the adjoint triple `i_! ⊣ i
 insert the inverse of the counit of `i^* ⊣ i_*` and contract with the counit of
 `i_! ⊣ i^*`. -/
 noncomputable def Etale.openImmersionLowerShriekToLowerStar :
-    Etale.openImmersionLowerShriek A j ⟶ Etale.lowerStar A j :=
+    (j)_!open[A] ⟶ (j)_*[A] :=
   (Functor.leftUnitor _).inv ≫
     Functor.whiskerRight (inv (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit)
-      (Etale.openImmersionLowerShriek A j) ≫
+      (j)_!open[A] ≫
     (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (Etale.lowerStar A j)
+    Functor.whiskerLeft (j)_*[A]
       (Etale.openImmersionLowerShriekAdjunction A j).counit ≫
     (Functor.rightUnitor _).hom
 
@@ -111,10 +113,9 @@ definition are identities, so at `F` it is `j_!` of the inverted counit of `j^* 
 followed by the counit of `j_! ⊣ j^*` at `j_* F`. -/
 lemma Etale.openImmersionLowerShriekToLowerStar_app (F : Sheaf U.smallEtaleTopology A) :
     (Etale.openImmersionLowerShriekToLowerStar A j).app F =
-      (Etale.openImmersionLowerShriek A j).map
+      (j)_!open[A].map
           ((inv (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit).app F) ≫
-        (Etale.openImmersionLowerShriekAdjunction A j).counit.app
-          ((Etale.lowerStar A j).obj F) := by
+        (Etale.openImmersionLowerShriekAdjunction A j).counit.app ((j)_*[A].obj F) := by
   simp only [Etale.openImmersionLowerShriekToLowerStar, NatTrans.comp_app,
     Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.id_obj,
     NatIso.isIso_inv_app, Functor.map_inv, Functor.associator_hom_app, Functor.whiskerLeft_app,
@@ -147,10 +148,10 @@ along a morphism `f` admitting a compactification `X --i--> Z --g--> Y`: it is i
 the canonical map `i_! ⟶ i_*` for the open immersion `i`, using `f_! = g_* ∘ i_!` and the
 composition isomorphism `g_* ∘ i_* ≅ (i ≫ g)_* = f_*`. -/
 noncomputable def Etale.lowerShriekToLowerStar :
-    Etale.lowerShriek A f ⟶ Etale.lowerStar A f :=
+    Etale.lowerShriek A f ⟶ (f)_*[A] :=
   Functor.whiskerRight
       (Etale.openImmersionLowerShriekToLowerStar A (HasCompactification.compactification f).i)
-      (Etale.lowerStar A (HasCompactification.compactification f).g) ≫
+      ((HasCompactification.compactification f).g)_*[A] ≫
     (Etale.lowerStarComp A (HasCompactification.compactification f).i
       (HasCompactification.compactification f).g).hom ≫
     eqToHom (by rw [← (HasCompactification.compactification f).comm])
