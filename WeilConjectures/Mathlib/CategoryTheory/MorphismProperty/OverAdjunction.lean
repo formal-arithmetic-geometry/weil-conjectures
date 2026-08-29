@@ -63,11 +63,11 @@ variable [Q.IsStableUnderBaseChange] (f : X ⟶ Y) [P.HasPullbacksAlong f]
 cartesian square: it exhibits `A ×_Y X` as the fibre product of `A` and `B ×_Y X` over `B`.
 
 ```
-  A ×_Y X ──(Over.pullback P Q f).map φ──→ B ×_Y X
-     │                                        │
-     │ pullback.fst A.hom f                   │ pullback.fst B.hom f
-     ↓                                        ↓
-     A ──────────────── φ.left ─────────────→ B
+  A ×_Y X ─(Over.pullback P Q f).map φ──→ B ×_Y X
+     │                                       │
+     │ pullback.fst A.hom f                  │ pullback.fst B.hom f
+     ↓                                       ↓
+     A    ────────────φ.left────────────→    B
 ```
 -/
 lemma MorphismProperty.Over.isPullback_map_left {A B : P.Over Q Y} (φ : A ⟶ B) :

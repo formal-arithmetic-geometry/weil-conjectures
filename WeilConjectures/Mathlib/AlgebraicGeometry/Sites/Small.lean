@@ -49,11 +49,11 @@ Both squares below are cartesian, so a point `x` of `V ×_U W` and a preimage `w
 image in `V` under a covering morphism `φ.left` are jointly a point of `V' ×_U W`:
 
 ```
-  V' ×_U W ──(Over.pullback P ⊤ g).map φ──→ V ×_U W ──────→ W
-      │                                        │            │
-      │ pullback.fst V'.hom g                  │ fst V.hom g│ g
-      ↓                                        ↓            ↓
-      V' ───────────── φ.left ──────────────→ V ──V.hom──→ U
+  V' ×_U W ─(Over.pullback P ⊤ g).map φ──→ V ×_U W ─pullback.snd V.hom g──→ W
+      │                                       │                             │
+      │ fst V'.hom g                          │ fst V.hom g                 │ g
+      ↓                                       ↓                             ↓
+     V'    ────────────φ.left────────────→    V    ─────────V.hom─────────→ U
 ```
 -/
 lemma coverPreserving_overPullback (hQP : Q ≤ P) {W U : Scheme.{u}} (g : W ⟶ U) :
@@ -66,7 +66,7 @@ lemma coverPreserving_overPullback (hQP : Q ≤ P) {W U : Scheme.{u}} (g : W ⟶
     refine (mem_toGrothendieck_smallPretopology _ _).mpr fun x ↦ ?_
     obtain ⟨V', φ, w, hSφ, hφl, hφw⟩ := hS (pullback.fst V.hom g x)
     have h := MorphismProperty.Over.isPullback_map_left g φ
-    obtain ⟨ξ, -, hξ⟩ := Scheme.exists_preimage_of_isPullback h w x hφw
+    obtain ⟨ξ, -, hξ⟩ := exists_preimage_of_isPullback h w x hφw
     exact ⟨_, (MorphismProperty.Over.pullback P ⊤ g).map φ, ξ,
       ⟨V', φ, 𝟙 _, hSφ, (Category.id_comp _).symm⟩, Q.of_isPullback h hφl, hξ⟩
 
