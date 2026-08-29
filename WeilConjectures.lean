@@ -23,6 +23,7 @@ public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.PartialSectionExtension
+public import WeilConjectures.Blowup.PartialSectionExtensionReduction
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible

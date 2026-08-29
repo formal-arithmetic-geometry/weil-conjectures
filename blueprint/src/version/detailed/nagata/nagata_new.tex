@@ -10603,6 +10603,60 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   scheme.
 \end{proof}
 
+\begin{lemma}[Reduction by base change along an admissible blow-up]
+  \label{lemma:nagata-conrad-blowup-base-change-reduction}
+  \uses{def:nagata-conrad-quasi-domination,
+    def:nagata-admissible-blowup,
+    lemma:nagata-admissible-blowup-comp}
+  \lean{AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup}
+
+  Let $X$ be qcqs, let $U,V\subseteq X$ be open, let $p\colon Y\to X$ be a
+  morphism and let $f\colon U\to Y$ be a section of $p$ over $U$.  Let
+  $q\colon X'\to X$ be a $V$-admissible blow-up, write $p'\colon Y\times_XX'\to
+  X'$ for the base change of $p$ and $f'\colon q^{-1}(U)\to Y\times_XX'$ for the
+  base change of $f$.  If the conclusion of
+  \Cref{thm:nagata-conrad-elimination} holds for the data
+  $(X',q^{-1}(U),q^{-1}(V),p',f')$, then it holds for $(X,U,V,p,f)$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-admissible-blowup-comp}
+  Let $X''\to X'$ be a $q^{-1}(V)$-admissible blow-up solving the problem
+  upstairs.  By \Cref{lemma:nagata-admissible-blowup-comp} the composite
+  $X''\to X'\to X$ is again a $V$-admissible blow-up of $X$: there is a
+  $V$-admissible centre $K$ on $X$ and an isomorphism
+  $X''\cong\operatorname{Bl}_K(X)$ over $X$.  The conclusion of the theorem
+  depends on the blow-up only through its total space over $X$, so it suffices
+  to produce it for $X''\to X$.  The extension of $f$ is the extension of $f'$
+  followed by the projection $Y\times_XX'\to Y$; that it is a section of $p$ and
+  extends $f$ follows from the two projection formulas defining $f'$.  For the
+  closedness of the graph, the square exhibiting $Y\times_XX''$ as
+  $(Y\times_XX')\times_{X'}X''$ is cartesian, and the two graphs correspond
+  under the resulting isomorphism.
+\end{proof}
+
+\begin{lemma}[Reduction to a closed subscheme of the target]
+  \label{lemma:nagata-conrad-closed-target-reduction}
+  \uses{def:nagata-conrad-quasi-domination,
+    def:nagata-admissible-blowup}
+  \lean{AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_isClosedImmersion}
+
+  Let $i\colon Y'\hookrightarrow Y$ be a closed immersion of $X$-schemes and
+  suppose the section $f\colon U\to Y$ factors as $f=i\circ f'$ through $Y'$.
+  If the conclusion of \Cref{thm:nagata-conrad-elimination} holds for the data
+  $(X,U,V,Y'\to X,f')$, then it holds for $(X,U,V,p,f)$, with the same
+  admissible blow-up and the same open subscheme of it.
+\end{lemma}
+
+\begin{proof}
+  The extension of $f$ is the extension $g\colon W\to Y'$ of $f'$ followed by
+  $i$; it is a section of $p$ over $W$ and extends $f$ because $i$ is a
+  morphism over $X$.  The comparison morphism
+  $Y'\times_XX'\to Y\times_XX'$ is a base change of $i$, hence again a closed
+  immersion, and the graph of $i\circ g$ is the image of the graph of $g$ under
+  it.  A closed immersion is a closed map, so that image is closed.
+\end{proof}
+
 \begin{theorem}[Elimination of indeterminacy for quasi-dominations,
   {\cite[Thm.~2.4]{ConradNagata}}]
   \label{thm:nagata-conrad-elimination}
@@ -10625,6 +10679,8 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
 \begin{proof}
   \uses{lemma:nagata-admissible-blowup-comp,
     lemma:nagata-conrad-dense-in-admissible-blowup,
+    lemma:nagata-conrad-blowup-base-change-reduction,
+    lemma:nagata-conrad-closed-target-reduction,
     def:nagata-scheme-theoretic-image}
   The morphism $f$ is automatically quasi-compact and quasi-separated.
   Replacing $Y$ by $Y\times_SX$ we may assume $X=S$; thus $p\colon Y\to X$ is
@@ -10643,15 +10699,14 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   blow-up of a qcqs scheme and is not itself quasi-affine, so the absolute form
   of quasi-affineness is not available here.)
 
-  By \Cref{lemma:nagata-admissible-blowup-comp} we may base change along the
-  $V$-admissible blow-up $q$ without leaving the statement of the theorem;
-  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup} keeps $U$ and $V$
-  dense.  After that base change the scheme-theoretic image $\overline{f(U)}$
-  of $U$ in $Y$ is quasi-affine over the base.  Since a quasi-domination
-  extending $f$ into $\overline{f(U)}$ is one into $Y$ --- the graph of the
-  former is the preimage of the graph of the latter under the closed immersion
-  $\overline{f(U)}\hookrightarrow Y$ --- we may replace $Y$ by
-  $\overline{f(U)}$ and are reduced to the quasi-affine case already treated.
+  By \Cref{lemma:nagata-conrad-blowup-base-change-reduction} we may base change
+  along the $V$-admissible blow-up $q$ without leaving the statement of the
+  theorem; \Cref{lemma:nagata-conrad-dense-in-admissible-blowup} keeps $U$ and
+  $V$ dense.  After that base change the scheme-theoretic image
+  $\overline{f(U)}$ of $U$ in $Y$ is quasi-affine over the base, so
+  \Cref{lemma:nagata-conrad-closed-target-reduction} lets us replace $Y$ by
+  $\overline{f(U)}$, and we are reduced to the quasi-affine case already
+  treated.
 \end{proof}
 
 \begin{corollary}[Extension of a rational map to a proper target,
