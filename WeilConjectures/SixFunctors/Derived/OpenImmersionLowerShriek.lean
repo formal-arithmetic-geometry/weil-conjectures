@@ -46,7 +46,7 @@ open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-open MonoidalCategory MonoidalClosed
+open MonoidalCategory MonoidalClosed Etale
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
@@ -67,8 +67,7 @@ total derived functors are the levelwise functors, and the adjunction between th
 left derived functor of `j_!` and the total right derived functor of `j^*` becomes an
 adjunction between the levelwise functors. -/
 noncomputable def Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction :
-    (Etale.openImmersionLowerShriek A j).mapDerivedCategory ⊣
-      (Etale.upperStar A j).mapDerivedCategory :=
+    (j)_!Imm[A].mapDerivedCategory ⊣ (j)^*[A].mapDerivedCategory :=
   (Etale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryAdjunction
 
 /-- The bounded below version of
@@ -78,8 +77,7 @@ sheaves, obtained by restricting the unbounded one along the fully faithful incl
 which is legitimate since the exact functors `j_!` and `j^*` preserve bounded below
 objects. -/
 noncomputable def Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus :
-    (Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus ⊣
-      (Etale.upperStar A j).mapDerivedCategoryPlus :=
+    (j)_!Imm[A].mapDerivedCategoryPlus ⊣ (j)^*[A].mapDerivedCategoryPlus :=
   (Etale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryPlusAdjunction
 
 end AlgebraicGeometry
