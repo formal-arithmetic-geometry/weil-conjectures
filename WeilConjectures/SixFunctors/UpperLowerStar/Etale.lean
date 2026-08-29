@@ -55,8 +55,10 @@ The site-theoretic inputs of the general definitions are discharged here:
   `AlgebraicGeometry.Etale.hasPointwiseLeftKanExtension_op_overPullback`: the opposite of
   base change by an étale morphism is a left adjoint, and all pointwise left Kan extensions
   along it exist.
-- `AlgebraicGeometry.Etale.lowerStar`: the pushforward `g_*` on étale sheaves.
-- `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves.
+- `AlgebraicGeometry.Etale.lowerStar`: the pushforward `g_*` on étale sheaves, with scoped
+  notation `(g)_*[A]`.
+- `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves, with scoped
+  notation `(g)^*[A]`.
 - `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
 - `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
   the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and

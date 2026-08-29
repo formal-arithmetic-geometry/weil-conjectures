@@ -19,10 +19,12 @@ public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
 
 # Main Results
 
-- `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star.
+- `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star, with
+  scoped notation `R(g)_*[A]`, prefixing the notation `(g)_*[A]` of the underived
+  pushforward by `R`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus` : total right derived of lower star on
-  bounded below derived category.
+  bounded below derived category, with scoped notation `R(g)_*[A]+`.
 
 - `AlgebraicGeometry.Etale.leftDerivedUpperStar` : total left derivation of upper star.
 
@@ -55,7 +57,7 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 noncomputable def rightDerivedLowerStar :
     DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  (Etale.lowerStar A g).rightDerivedFunctor
+  (g)_*[A].rightDerivedFunctor
 
 @[inherit_doc rightDerivedLowerStar]
 scoped notation "R(" g ")_*[" A "]" =>
@@ -72,7 +74,7 @@ through the chosen `HasDerivedCategory.{u}` instance. -/
 noncomputable def rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  (Etale.lowerStar A g).rightDerivedFunctorPlus
+  (g)_*[A].rightDerivedFunctorPlus
 
 @[inherit_doc rightDerivedLowerStarPlus]
 scoped notation "R(" g ")_*[" A "]+" =>

@@ -20,17 +20,20 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 # Main Results
 
-- `AlgebraicGeometry.rightDerivedLowerShriekOfCompactification` : `Rf_!` with respect to a
-  compcatification.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification` : `Rf_!` with respect
+  to a compcatification `c`, with scoped notation `Rf_!(c)[A]`.
 
-- `AlgebraicGeometry.rightDerivedLowerShriekOfCompactificationPlus` : `Rf_!`
-  on bounded below derived category with respect to a compcatification.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlus` : `Rf_!`
+  on bounded below derived category with respect to a compcatification `c`, with scoped
+  notation `Rf_!(c)[A]+`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriek` : `Rf_!`
-  specifying to the chosen compcatification `HasCompactification.compactification`.
+  specifying to the chosen compcatification `HasCompactification.compactification`, with
+  scoped notation `R(f)_![A]`.
 
-- `AlgebraicGeometry.Etale.rightDerivedLowerShriek` : `Rf_!` on bounded below derived category
-  specifying to the chosen compcatification `HasCompactification.compactification`.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus` : `Rf_!` on bounded below derived
+  category specifying to the chosen compcatification `HasCompactification.compactification`,
+  with scoped notation `R(f)_![A]+`.
 
 -/
 
@@ -72,8 +75,7 @@ It is deliberately *not* the total right derived functor of the composite
 noncomputable def rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  (Etale.openImmersionLowerShriek A c.i).mapDerivedCategory ⋙
-    (Etale.lowerStar A c.g).rightDerivedFunctor
+  (c.i)_!Imm[A].mapDerivedCategory ⋙ (c.g)_*[A].rightDerivedFunctor
 
 /-- The derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the *bounded below* derived categories of étale sheaves:
@@ -83,8 +85,7 @@ below right derived pushforward. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationPlus :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  (Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus ⋙
-    (Etale.lowerStar A c.g).rightDerivedFunctorPlus
+  (c.i)_!Imm[A].mapDerivedCategoryPlus ⋙ (c.g)_*[A].rightDerivedFunctorPlus
 
 @[inherit_doc rightDerivedLowerShriekOfCompactification]
 scoped notation "Rf_!("c")[" A "]" =>
@@ -109,7 +110,7 @@ functor `rightDerivedLowerShriekOfCompactification` attached to the chosen compa
 noncomputable def rightDerivedLowerShriek :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  Etale.rightDerivedLowerShriekOfCompactification A (HasCompactification.compactification f)
+  Rf_!(HasCompactification.compactification f)[A]
 
 @[inherit_doc rightDerivedLowerShriek]
 scoped notation "R(" f ")_![" A "]" =>
@@ -121,7 +122,7 @@ attached to the chosen compactification `HasCompactification.compactification f`
 noncomputable def rightDerivedLowerShriekPlus :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  Etale.rightDerivedLowerShriekOfCompactificationPlus A (HasCompactification.compactification f)
+  Rf_!(HasCompactification.compactification f)[A]+
 
 @[inherit_doc rightDerivedLowerShriekPlus]
 scoped notation "R(" f ")_![" A "]+" =>
