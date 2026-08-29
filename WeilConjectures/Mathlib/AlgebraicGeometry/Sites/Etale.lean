@@ -28,9 +28,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
   sheaf condition for the empty covering.
 - `AlgebraicGeometry.Scheme.Etale.part`: the part `V ×_X Z` of an étale `X`-scheme `V` lying
   over an open `Z ⊆ X`, again as an étale `X`-scheme.
-- `AlgebraicGeometry.Scheme.Etale.ofArrows_clopenι_mem_smallEtaleTopology`: for a
-  decomposition `X = Z ⊔ W` into two opens, the two parts of `V` lying over `Z` and over `W`
-  cover `V`.
+- `AlgebraicGeometry.Scheme.Etale.ofArrows_partι_mem_smallEtaleTopology`: the parts of `V`
+  lying over the members of an open cover of `X` cover `V`.
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
@@ -41,10 +40,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 `X`-scheme whose codomain is literally `X`. The field `V.hom` has codomain
 `(Functor.fromPUnit X).obj V.right`, which is definitionally but not syntactically `X`; every
 `rw` along an open of `X` fails against the latter, so the abbreviation is not cosmetic.
-
-The decomposition of `V` along `X = Z ⊔ W` is indexed by `Bool` rather than by a two-element
-inductive type, so that it can be fed to the `Sieve.ofArrows` API, which takes a family of
-arrows indexed by an arbitrary type.
 -/
 
 @[expose] public section
@@ -240,43 +235,19 @@ lemma Etale.range_part_hom_base_subset (V : X.Etale) (Z : X.Opens) :
   rintro _ ⟨x, rfl⟩
   exact x.2
 
-end Part
-
-section ClopenCover
-
-variable (Z W : X.Opens) (V : X.Etale)
-
-/-- The two pieces into which a decomposition `X = Z ⊔ W` into opens cuts an étale
-`X`-scheme `V`. The index `false` is the piece over `Z`, the index `true` the piece
-over `W`. -/
-def Etale.clopenObj (b : Bool) : X.Etale := V.part (bif b then W else Z)
-
-/-- The inclusion of the `b`-th piece of the decomposition of `V` into `V`. -/
-def Etale.clopenι (b : Bool) : Etale.clopenObj Z W V b ⟶ V := V.partι _
-
-lemma Etale.range_clopenι (b : Bool) :
-    Set.range (Etale.clopenι Z W V b).left =
-      ((V.str ⁻¹ᵁ (bif b then W else Z) : V.left.Opens) : Set V.left) :=
-  Etale.range_partι V _
-
-variable {Z W}
-
-/-- If `Z` and `W` cover `X`, the two pieces of the decomposition cover `V`. -/
-lemma Etale.ofArrows_clopenι_mem_smallEtaleTopology (hu : Z ⊔ W = ⊤) :
-    Sieve.ofArrows _ (Etale.clopenι Z W V) ∈ X.smallEtaleTopology V := by
+/-- The parts of `V` lying over the members of an open cover of `X` cover `V`. -/
+lemma Etale.ofArrows_partι_mem_smallEtaleTopology {ι : Type*} (V : X.Etale) (Z : ι → X.Opens)
+    (hZ : ⨆ i, Z i = ⊤) :
+    Sieve.ofArrows _ (fun i ↦ V.partι (Z i)) ∈ X.smallEtaleTopology V := by
   refine (Scheme.ofArrows_mem_smallEtaleTopology_iff _).mpr ?_
-  have hV : (V.str ⁻¹ᵁ Z) ⊔ (V.str ⁻¹ᵁ W) = ⊤ := by
-    rw [← Scheme.Hom.preimage_sup, hu, Scheme.Hom.preimage_top]
   ext v
-  simp only [Etale.range_clopenι, Set.mem_iUnion, Set.mem_univ, iff_true]
-  have hv : v ∈ (⊤ : V.left.Opens) := trivial
-  rw [← hV] at hv
-  rcases hv with h | h
-  · exact ⟨false, h⟩
-  · exact ⟨true, h⟩
+  simp only [Etale.range_partι, Set.mem_iUnion, Set.mem_univ, iff_true]
+  have hv : v ∈ ⨆ i, V.str ⁻¹ᵁ Z i := by
+    rw [V.str.iSup_preimage_eq_top hZ]
+    trivial
+  exact TopologicalSpace.Opens.mem_iSup.mp hv
 
-end ClopenCover
-
+end Part
 section Sheafify
 
 variable [∀ U : X.Etale, HasWeakSheafify (X.smallEtaleTopology.over U) A]
