@@ -33,7 +33,7 @@ and is computed by restriction along the localization functor. This yields the a
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.openImmersionLowerShriek`: the lower shriek `j_!` on étale
-  sheaves along an open immersion `j`, with scoped notation `(j)_!Imm[A]`, whose `Imm`
+  sheaves along an open immersion `j`, with scoped notation `(j)_!open[A]`, whose `open`
   keeps it apart from `AlgebraicGeometry.Etale.lowerShriek` along a morphism admitting a
   compactification.
 - `AlgebraicGeometry.Etale.openImmersionRestriction`: the restriction `j^*` along an open
@@ -114,7 +114,7 @@ noncomputable def openImmersionLowerShriek :
   GrothendieckTopology.localizationLowerShriek A @Etale @Etale j inferInstance
 
 @[inherit_doc openImmersionLowerShriek]
-scoped notation "(" j ")_!Imm[" A "]" =>
+scoped notation "(" j ")_!open[" A "]" =>
   openImmersionLowerShriek A j
 
 end Etale
@@ -122,10 +122,10 @@ end Etale
 /-- The adjunction `j_! ⊣ j^*` between the extension by zero and the restriction along an
 open immersion. -/
 noncomputable def Etale.openImmersionLowerShriekAdjunction :
-    (j)_!Imm[A] ⊣ Etale.openImmersionRestriction A j :=
+    (j)_!open[A] ⊣ Etale.openImmersionRestriction A j :=
   GrothendieckTopology.localizationLowerShriekAdjunction A @Etale @Etale le_rfl j inferInstance
 
-instance : (j)_!Imm[A].IsLeftAdjoint :=
+instance : (j)_!open[A].IsLeftAdjoint :=
   (Etale.openImmersionLowerShriekAdjunction A j).isLeftAdjoint
 
 instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
@@ -133,7 +133,7 @@ instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in a
 preadditive category is additive, being left adjoint to the additive restriction `j^*`. -/
-instance Etale.openImmersionLowerShriek_additive : (j)_!Imm[A].Additive :=
+instance Etale.openImmersionLowerShriek_additive : (j)_!open[A].Additive :=
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
@@ -147,8 +147,8 @@ the left exactness of sheafification, which is the content of `HasSheafify` beyo
 coefficient category `A`, the second by the sorried instance of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
-    PreservesFiniteLimits (j)_!Imm[A] := by
-  have heq : (j)_!Imm[A] =
+    PreservesFiniteLimits (j)_!open[A] := by
+  have heq : (j)_!open[A] =
       sheafToPresheaf U.smallEtaleTopology A ⋙
         localizationLowerShriekPresheaf A @Etale j inferInstance ⋙
           presheafToSheaf X.smallEtaleTopology A :=
@@ -160,7 +160,7 @@ instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
 
 /-- Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
 makes `j_!` exact. -/
-example : PreservesFiniteColimits (j)_!Imm[A] :=
+example : PreservesFiniteColimits (j)_!open[A] :=
   inferInstance
 
 section UpperStar
@@ -177,7 +177,7 @@ noncomputable def Etale.upperStarIsoOpenImmersionRestriction :
 /-- The adjunction `j_! ⊣ j^*` between the lower shriek along an open immersion and the
 pullback `Etale.upperStar`. -/
 noncomputable def Etale.openImmersionLowerShriekUpperStarAdjunction :
-    (j)_!Imm[A] ⊣ (j)^*[A] :=
+    (j)_!open[A] ⊣ (j)^*[A] :=
   (Etale.openImmersionLowerShriekAdjunction A j).ofNatIsoRight
     (Etale.upperStarIsoOpenImmersionRestriction A j).symm
 
