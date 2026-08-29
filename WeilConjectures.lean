@@ -30,7 +30,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSi
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
@@ -156,9 +155,11 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf

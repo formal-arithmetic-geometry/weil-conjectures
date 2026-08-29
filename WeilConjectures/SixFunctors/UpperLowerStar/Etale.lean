@@ -25,12 +25,11 @@ The site-theoretic inputs of the general definitions are discharged here:
 - The base change functor `MorphismProperty.Over.pullback @Etale ⊤ g` along an *arbitrary*
   morphism `g` is continuous for the small étale topologies
   (`Etale.isContinuous_overPullback`): it preserves covers since étale covers are stable
-  under base change — points are lifted through the pullback-pasting isomorphism
-  `W ×_V (V ×_Y Z) ≅ W ×_Y Z` — and it preserves compatible families since it is
-  representably flat, being a finite-limit-preserving functor on the finitely complete
-  étale slice. Both are the `P = Q = @Etale` case of the general statements of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous`. Hence
-  `Etale.lowerStar` carries no hypotheses at all.
+  under base change, and it preserves compatible families since it is representably flat,
+  being a finite-limit-preserving functor on the finitely complete étale slice. This is
+  the `P = Q = @Etale` case of `AlgebraicGeometry.Scheme.isContinuous_overPullback` of
+  `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. Hence `Etale.lowerStar`
+  carries no hypotheses at all.
 - Sheafification on the small étale sites and the left Kan extensions along the
   opposites of base change (together with their left
   exactness) exist since `A` is Grothendieck abelian and the small étale sites are
@@ -50,9 +49,8 @@ The site-theoretic inputs of the general definitions are discharged here:
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.coverPreserving_overPullback` and
-  `AlgebraicGeometry.Etale.isContinuous_overPullback`: base change along an arbitrary
-  morphism is cover-preserving and continuous for the small étale topologies.
+- `AlgebraicGeometry.Etale.isContinuous_overPullback`: base change along an arbitrary
+  morphism is continuous for the small étale topologies.
 - `AlgebraicGeometry.Etale.isLeftAdjoint_op_overPullback` and
   `AlgebraicGeometry.Etale.hasPointwiseLeftKanExtension_op_overPullback`: the opposite of
   base change by an étale morphism is a left adjoint, and all pointwise left Kan extensions
@@ -91,22 +89,13 @@ section Continuity
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/-- Base change along an arbitrary morphism `g : Z ⟶ Y` preserves covering sieves of the
-small étale topologies. This is the `P = Q = @Etale` case of
-`CategoryTheory.GrothendieckTopology.coverPreserving_overPullback_smallGrothendieckTopology`. -/
-lemma Etale.coverPreserving_overPullback :
-    CoverPreserving (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)
-      (MorphismProperty.Over.pullback @Etale ⊤ g) :=
-  GrothendieckTopology.coverPreserving_overPullback_smallGrothendieckTopology @Etale @Etale
-    le_rfl g
-
 /-- Base change along an arbitrary morphism `g : Z ⟶ Y` is continuous for the small étale
 topologies. This is the `P = Q = @Etale` case of
-`CategoryTheory.GrothendieckTopology.isContinuous_overPullback`. -/
+`AlgebraicGeometry.Scheme.isContinuous_overPullback`. -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
-  GrothendieckTopology.isContinuous_overPullback @Etale @Etale le_rfl g
+  Scheme.isContinuous_overPullback @Etale @Etale le_rfl g
 
 end Continuity
 
