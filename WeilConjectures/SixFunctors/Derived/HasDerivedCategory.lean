@@ -32,7 +32,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- The chosen localized category `D(X_ét)` of `A`-valued étale sheaves, with `Hom`-types in
 `Type (u + 1)`, obtained from the Grothendieck abelian structure of the sheaf category via
 `HasDerivedCategory.ofIsGrothendieckAbelian`. -/
-noncomputable instance Scheme.hasDerivedCategory_sheaf_smallEtaleTopology''' (X : Scheme.{u}) :
+noncomputable instance Scheme.hasDerivedCategory_sheaf_smallEtaleTopology (X : Scheme.{u}) :
     HasDerivedCategory.{u + 1} (Sheaf X.smallEtaleTopology A) :=
   HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _
 

@@ -20,10 +20,12 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 # Main Results
 
-- `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star.
+- `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star, with
+  scoped notation `R(g)_*[A]`, prefixing the notation `(g)_*[A]` of the underived
+  pushforward by `R`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus` : total right derived of lower star on
-  bounded below derived category.
+  bounded below derived category, with scoped notation `R(g)_*[A]+`.
 
 -/
 
@@ -41,28 +43,34 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 section DerivedLowerStar
 
+namespace Etale
+
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The total right derived functor `Rg_* : D(Z_ét) ⥤ D(Y_ét)` of the pushforward
 `g_*` along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of
 étale sheaves. -/
-noncomputable def Etale.rightDerivedLowerStar :
+noncomputable def rightDerivedLowerStar :
     DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  (Etale.lowerStar A g).rightDerivedFunctor
+  (g)_*[A].rightDerivedFunctor
+
+@[inherit_doc rightDerivedLowerStar]
+scoped notation "R(" g ")_*[" A "]" =>
+  rightDerivedLowerStar A g
 
 /-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on the
-*bounded below* derived categories of étale sheaves.
-
-Unlike `Etale.rightDerivedLowerStar` this needs no K-injective hypothesis:
-`Functor.rightDerivedFunctorPlus` needs only `EnoughInjectives` on the source, which
-Mathlib provides for every Grothendieck abelian category. The only dependence on the
-sorried `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` is
-through the chosen `HasDerivedCategory.{u}` instance. -/
-noncomputable def Etale.rightDerivedLowerStarPlus :
+*bounded below* derived categories of étale sheaves. -/
+noncomputable def rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  (Etale.lowerStar A g).rightDerivedFunctorPlus
+  (g)_*[A].rightDerivedFunctorPlus
+
+@[inherit_doc rightDerivedLowerStarPlus]
+scoped notation "R(" g ")_*[" A "]+" =>
+  rightDerivedLowerStarPlus A g
+
+end Etale
 
 end DerivedLowerStar
 
