@@ -87,7 +87,7 @@ variable [HasWeakSheafify J A] [HasWeakSheafify K A]
 /-- The constant sheaf functor commutes with the pullback of sheaves along a continuous
 functor of sites which preserves a terminal object: the pullback of the constant sheaf
 at `a : A` is the constant sheaf at `a`. -/
-def Functor.sheafPullbackCommuteConstant {T : C} (hT : IsTerminal T)
+def Functor.constantSheafsheafPullbackIso {T : C} (hT : IsTerminal T)
     (hGT : IsTerminal (G.obj T)) :
     constantSheaf J A ⋙ G.sheafPullback A J K ≅ constantSheaf K A :=
   (((constantSheafAdj J A hT).comp (G.sheafAdjunctionContinuous A J K)).ofNatIsoRight
@@ -103,7 +103,7 @@ lemma Sheaf.isConstant_sheafPullback {T : C} (hT : IsTerminal T)
   obtain ⟨a, ⟨e⟩⟩ := F.mem_essImage_of_isConstant
   exact Sheaf.isConstant_of_iso _
     ((G.sheafPullback A J K).mapIso e.symm ≪≫
-      (G.sheafPullbackCommuteConstant A J K hT hGT).app a)
+      (G.constantSheafsheafPullbackIso A J K hT hGT).app a)
 
 end Pullback
 
