@@ -73,6 +73,10 @@ noncomputable def Compactification.rightDerivedLowerShriek :
   (Etale.openImmersionLowerShriek A c.i).mapDerivedCategory ⋙
     (Etale.lowerStar A c.g).rightDerivedFunctor
 
+@[inherit_doc Compactification.rightDerivedLowerShriek]
+scoped notation "Rf_!("c")[" A "]" =>
+  Compactification.rightDerivedLowerShriek A c
+
 /-- The derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the *bounded below* derived categories of étale sheaves:
 the bounded below counterpart of `Compactification.rightDerivedLowerShriek`, with `Di_!` the
@@ -83,6 +87,10 @@ noncomputable def Compactification.rightDerivedLowerShriekPlus :
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
   (Etale.openImmersionLowerShriek A c.i).mapDerivedCategoryPlus ⋙
     (Etale.lowerStar A c.g).rightDerivedFunctorPlus
+
+@[inherit_doc Compactification.rightDerivedLowerShriekPlus]
+scoped notation "Rf_!("c")[" A "]+" =>
+  Compactification.rightDerivedLowerShriekPlus A c
 
 end OfCompactification
 
@@ -97,6 +105,10 @@ noncomputable def Etale.rightDerivedLowerShriek :
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
   (HasCompactification.compactification f).rightDerivedLowerShriek A
 
+@[inherit_doc Etale.rightDerivedLowerShriek]
+scoped notation "R(" f ")_![" A "]" =>
+  Etale.rightDerivedLowerShriek A f
+
 /-- The derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` on the *bounded below* derived
 categories of étale sheaves: the functor `Compactification.rightDerivedLowerShriekPlus`
 attached to the chosen compactification `HasCompactification.compactification f`. -/
@@ -105,11 +117,15 @@ noncomputable def Etale.rightDerivedLowerShriekPlus :
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
   (HasCompactification.compactification f).rightDerivedLowerShriekPlus A
 
-lemma Etale.rightDerivedLowerShriek_eq : Etale.rightDerivedLowerShriek A f =
-    (HasCompactification.compactification f).rightDerivedLowerShriek A := rfl
+@[inherit_doc Etale.rightDerivedLowerShriekPlus]
+scoped notation "R(" f ")_![" A "]+" =>
+  Etale.rightDerivedLowerShriekPlus A f
 
-lemma Etale.rightDerivedLowerShriekPlus_eq : Etale.rightDerivedLowerShriekPlus A f =
-    (HasCompactification.compactification f).rightDerivedLowerShriekPlus A := rfl
+lemma Etale.rightDerivedLowerShriek_eq : R(f)_![A] =
+    Rf_!(HasCompactification.compactification f)[A] := rfl
+
+lemma Etale.rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
+    Rf_!(HasCompactification.compactification f)[A]+ := rfl
 
 end DerivedLowerShriek
 
