@@ -204,15 +204,50 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
   obtain ⟨D, hmap, hmapw, hpbD⟩ :=
     IsAdmissible.exists_extend_of_disjoint (X := X₁) (A := X₀) (B := π₁ ⁻¹ᵁ V) hX₀c hV₁c
       C.I C.finiteType (by rw [hV₀]; exact C.disjoint_support)
-  set ρ : (D.I.blowupMap ⁻¹ᵁ X₀).toScheme ⟶ C.I.blowup :=
-    hpbD.lift (D.I.blowupMap ∣_ X₀) (D.I.blowupMap ⁻¹ᵁ X₀).ι
-      (morphismRestrict_ι D.I.blowupMap X₀) with hρdef
-  have hρ : ρ ≫ C.I.blowupMap = D.I.blowupMap ∣_ X₀ := hpbD.lift_fst _ _ _
-  have hρι : ρ ≫ hmap = (D.I.blowupMap ⁻¹ᵁ X₀).ι := hpbD.lift_snd _ _ _
+  set ρiso : (D.I.blowupMap ⁻¹ᵁ X₀).toScheme ≅ C.I.blowup :=
+    (isPullback_morphismRestrict D.I.blowupMap X₀).isoIsPullback _ _ hpbD
+    with hρisodef
+  have hρ : ρiso.hom ≫ C.I.blowupMap = D.I.blowupMap ∣_ X₀ :=
+    (isPullback_morphismRestrict D.I.blowupMap X₀).isoIsPullback_hom_fst _ _ hpbD
   obtain ⟨W', hW'X₀, G, hG, hUW', hagreeG, hclosedG⟩ :=
     exists_extend_of_lift (p := p₁) (π := D.I.blowupMap) (U := π₁ ⁻¹ᵁ U) (V := X₀) (f := f₁)
-      (b := C.I.blowupMap) (ρ := ρ) hρ hUW₀ hg₀ hf₀ι hagree₀ hclosed₀
-  sorry
+      (b := C.I.blowupMap) (ρ := ρiso.hom) hρ hUW₀ hg₀ hf₀ι hagree₀ hclosed₀
+  -- Step 5: compose the two admissible blow-ups
+  obtain ⟨K, hKft, hKdisj, iso, hiso⟩ := IsAdmissible.exists_comp B₁ D
+  have hUW'' : D.I.blowupMap ⁻¹ᵁ (π₁ ⁻¹ᵁ U) ≤ W' :=
+    le_trans (le_inf le_rfl (D.I.blowupMap.preimage_mono hU₁X₀)) hUW'
+  have hKbm : iso.inv ≫ D.I.blowupMap ≫ π₁ = K.blowupMap := by
+    rw [← hiso, ← Category.assoc, iso.inv_hom_id, Category.id_comp]
+  have hUW : K.blowupMap ⁻¹ᵁ U ≤ iso.inv ⁻¹ᵁ W' := by
+    rw [← hKbm]
+    simp only [Scheme.Hom.comp_preimage]
+    exact iso.inv.preimage_mono hUW''
+  have hg : ((iso.inv ∣_ W') ≫ G ≫ r) ≫ p = (iso.inv ⁻¹ᵁ W').ι ≫ K.blowupMap := by
+    simp only [Category.assoc]
+    rw [hpb₁.w, ← Category.assoc G, hG]
+    simp only [Category.assoc]
+    rw [← Category.assoc (iso.inv ∣_ W'), morphismRestrict_ι]
+    simp only [Category.assoc]
+    rw [hKbm]
+  refine ⟨⟨K, hKft, hKdisj⟩, iso.inv ⁻¹ᵁ W', hUW, (iso.inv ∣_ W') ≫ G ≫ r, hg, ?_, ?_⟩
+  · -- the extension agrees with `f` over `U`
+    have hmcond : (K.blowupMap ∣_ U) ≫ U.ι =
+        ((K.blowup.homOfLE hUW ≫ (iso.inv ∣_ W')) ≫ W'.ι ≫ D.I.blowupMap) ≫ π₁ := by
+      rw [morphismRestrict_ι]
+      simp only [Category.assoc]
+      rw [← Category.assoc (iso.inv ∣_ W'), morphismRestrict_ι]
+      simp only [Category.assoc]
+      rw [hKbm, ← Category.assoc, Scheme.homOfLE_ι]
+    have hm1 := (isPullback_morphismRestrict π₁ U).lift_fst (K.blowupMap ∣_ U)
+      ((K.blowup.homOfLE hUW ≫ (iso.inv ∣_ W')) ≫ W'.ι ≫ D.I.blowupMap) hmcond
+    have hm2 := (isPullback_morphismRestrict π₁ U).lift_snd (K.blowupMap ∣_ U)
+      ((K.blowup.homOfLE hUW ≫ (iso.inv ∣_ W')) ≫ W'.ι ≫ D.I.blowupMap) hmcond
+    have hagr := hagreeG (K.blowup.homOfLE hUW ≫ (iso.inv ∣_ W')) _ hm2
+    calc K.blowup.homOfLE hUW ≫ (iso.inv ∣_ W') ≫ G ≫ r
+        = ((K.blowup.homOfLE hUW ≫ (iso.inv ∣_ W')) ≫ G) ≫ r := by
+          simp only [Category.assoc]
+      _ = _ ≫ f := by rw [hagr, Category.assoc, hf₁r, ← Category.assoc, hm1]
+  · sorry
 
 end Case3
 
