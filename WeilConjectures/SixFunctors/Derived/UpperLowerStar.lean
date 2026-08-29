@@ -55,6 +55,10 @@ noncomputable def Etale.rightDerivedLowerStar :
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
   (Etale.lowerStar A g).rightDerivedFunctor
 
+@[inherit_doc Etale.rightDerivedLowerStar]
+scoped notation "R(" g ")_*[" A "]" =>
+  Etale.rightDerivedLowerStar A g
+
 /-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on the
 *bounded below* derived categories of étale sheaves.
 
@@ -67,6 +71,10 @@ noncomputable def Etale.rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
   (Etale.lowerStar A g).rightDerivedFunctorPlus
+
+@[inherit_doc Etale.rightDerivedLowerStarPlus]
+scoped notation "R(" g ")_*[" A "]+" =>
+  Etale.rightDerivedLowerStarPlus A g
 
 end DerivedLowerStar
 
