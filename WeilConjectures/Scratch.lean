@@ -240,7 +240,6 @@ theorem exists_isAdmissible_extend_of_isAffineOpen
   exact ⟨C, _, _, h, hpb, W, hUW, g, hg, hagree, hclosed⟩
 
 
-set_option maxHeartbeats 1000000 in
 /-- **Conrad's Theorem 2.4, Case 2: a quasi-affine target over a qcqs base** (Conrad,
 *Deligne's notes on Nagata compactifications*, proof of Theorem 2.4, Case 2, pp. 15–16).
 Let `X` be quasi-compact and quasi-separated, `U` a quasi-compact open of `X`,
@@ -297,6 +296,7 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
     Set.subset_compl_iff_disjoint_left.mpr (Cs i).disjoint_support
   have hprod : ∀ s : Finset ιV, (∏ i ∈ s, (Cs i).I).ofFiniteType ∧
       ((∏ i ∈ s, (Cs i).I).support : Set X) ⊆ (U : Set X)ᶜ := by
+    classical
     intro s
     induction s using Finset.induction with
     | empty =>
@@ -314,10 +314,10 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
   obtain ⟨B, hBI⟩ : ∃ B : IsAdmissible X U, B.I = (∏ i, (Cs i).I) * K :=
     ⟨⟨(∏ i, (Cs i).I) * K, (hprod _).1.mul hKft,
       by rw [hJsupp]; exact disjoint_compl_right⟩, rfl⟩
-  have hpres : B.I.support.compl = U := by
-    apply TopologicalSpace.Opens.ext
-    show (B.I.support : Set X)ᶜ = (U : Set X)
-    rw [hBI, hJsupp, compl_compl]
+  have hpres : B.I.support.compl = U :=
+    TopologicalSpace.Opens.ext (by
+      have h : (B.I.support : Set X)ᶜ = (U : Set X) := by rw [hBI, hJsupp, compl_compl]
+      exact h)
   -- properness of the blow-up, and density of the inverse image of `U`
   have hproper := B.isProper_blowupMap
   have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
@@ -341,8 +341,9 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
     obtain ⟨R, hR⟩ : (Cs i).I ∣ B.I := by
       rw [hBI]
       exact (Finset.dvd_prod_of_mem (fun j ↦ (Cs j).I) (Finset.mem_univ i)).mul_right K
-    have h := B.I.isInvertible_comap_blowupMap
-    rw [hR, Scheme.IdealSheafData.comap_mul] at h
+    have h : ((Cs i).I.comap B.I.blowupMap * R.comap B.I.blowupMap).IsInvertible := by
+      rw [← Scheme.IdealSheafData.comap_mul, ← hR]
+      exact B.I.isInvertible_comap_blowupMap
     exact Scheme.IdealSheafData.IsInvertible.of_mul_left h
   choose πs hπs using hlift
   have hρex : ∀ i, ∃ ρ : (B.I.blowupMap ⁻¹ᵁ (Vs i)).toScheme ⟶ Bls i,
@@ -374,7 +375,9 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
     have hdomN : IsSchemeTheoreticallyDominant (B.I.blowup.homOfLE
         (inf_le_right : (B.I.blowupMap ⁻¹ᵁ U) ⊓ (Ws i ⊓ Ws j) ≤ Ws i ⊓ Ws j)) :=
       .of_isPullback (isPullback_opens_inf (B.I.blowupMap ⁻¹ᵁ U) (Ws i ⊓ Ws j))
-    refine ext_of_isSchemeTheoreticallyDominant_of_isSeparated p ?_ _ ?_
+    refine ext_of_isSchemeTheoreticallyDominant_of_isSeparated p ?_
+      (B.I.blowup.homOfLE
+        (inf_le_right : (B.I.blowupMap ⁻¹ᵁ U) ⊓ (Ws i ⊓ Ws j) ≤ Ws i ⊓ Ws j)) ?_
     · rw [Category.assoc, Category.assoc, hGs i, hGs j, ← Category.assoc, ← Category.assoc,
         Scheme.homOfLE_ι, Scheme.homOfLE_ι]
     · have hNi : (B.I.blowupMap ⁻¹ᵁ U) ⊓ (Ws i ⊓ Ws j) ≤ Ws i :=
@@ -408,6 +411,7 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
       fun i ↦ (Scheme.Opens.iSupOpenCover Ws).ι_glueMorphisms _ _ i⟩
   have hgp : g ≫ p = (⨆ i, Ws i).ι ≫ B.I.blowupMap := by
     refine (Scheme.Opens.iSupOpenCover Ws).hom_ext _ _ (fun i ↦ ?_)
+    dsimp only [Scheme.Opens.iSupOpenCover]
     rw [← Category.assoc, ← Category.assoc, hgi i, hGs i, Scheme.homOfLE_ι]
   have hΓi : ∀ i, B.I.blowup.homOfLE (le_iSup Ws i) ≫ pullback.lift g (⨆ i, Ws i).ι hgp =
       pullback.lift (Gs i) (Ws i).ι (hGs i) := by
@@ -419,12 +423,12 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
   -- the glued extension agrees with `f` over `U`
   · have hcov' : TopologicalSpace.IsOpenCover
         (fun i ↦ (B.I.blowupMap ⁻¹ᵁ U).ι ⁻¹ᵁ Ws i) := by
-      refine TopologicalSpace.IsOpenCover.mk (TopologicalSpace.Opens.ext ?_)
-      refine Set.eq_univ_of_forall (fun x ↦ ?_)
+      refine TopologicalSpace.IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ ?_)
       obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (hUW x.2)
-      exact TopologicalSpace.Opens.coe_iSup _ ▸ Set.mem_iUnion.mpr ⟨i, hi⟩
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hi⟩
     refine ((B.I.blowupMap ⁻¹ᵁ U).toScheme.openCoverOfIsOpenCover _ hcov').hom_ext _ _
       (fun i ↦ ?_)
+    dsimp only [Scheme.openCoverOfIsOpenCover]
     have hMι : ((B.I.blowupMap ⁻¹ᵁ U).ι ⁻¹ᵁ Ws i).ι ≫ B.I.blowup.homOfLE hUW =
         ((B.I.blowupMap ⁻¹ᵁ U).ι ∣_ (Ws i)) ≫ B.I.blowup.homOfLE (le_iSup Ws i) := by
       rw [← cancel_mono (⨆ i, Ws i).ι, Category.assoc, Category.assoc, Scheme.homOfLE_ι,
@@ -433,8 +437,8 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
       hagr i ((B.I.blowupMap ⁻¹ᵁ U).ι ∣_ (Ws i))
         (((B.I.blowupMap ⁻¹ᵁ U).ι ⁻¹ᵁ Ws i).ι ≫ (B.I.blowupMap ∣_ U)) ?_]
     · simp only [Category.assoc]
-    · rw [Category.assoc, morphismRestrict_ι, ← Category.assoc, morphismRestrict_ι]
-      simp only [Category.assoc]
+    · rw [Category.assoc, morphismRestrict_ι, ← Category.assoc,
+        ← Category.assoc ((B.I.blowupMap ⁻¹ᵁ U).ι ∣_ (Ws i)), morphismRestrict_ι]
   -- the graph of the glued extension is closed
   · -- the range of the glued graph is the union of the ranges of the local graphs
     have hrangeU : Set.range ⇑(pullback.lift g (⨆ i, Ws i).ι hgp) =
@@ -488,9 +492,7 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
               Set (Ws j).toScheme) ∩
             (⇑(Ws j).ι ⁻¹' ((B.I.blowupMap ⁻¹ᵁ U : B.I.blowup.Opens) : Set B.I.blowup)) := by
         ext y
-        rw [show Set.range ⇑(B.I.blowup.homOfLE hNj) =
-            ((B.I.blowup.homOfLE hNj).opensRange : Set (Ws j).toScheme) from rfl,
-          TopologicalSpace.Opens.mem_coe, mem_opensRange_homOfLE hNj]
+        refine Iff.trans (mem_opensRange_homOfLE hNj y) ?_
         exact ⟨fun h ↦ ⟨h.1.2, h.1.1⟩, fun h ↦ ⟨⟨h.2, h.1⟩, y.2⟩⟩
       intro z hz
       obtain ⟨y, hy⟩ := hz
@@ -516,13 +518,13 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
           closure (Set.range ⇑(B.I.blowup.homOfLE hNj ≫
             pullback.lift (Gs j) (Ws j).ι (hGs j))) := by
         rw [← hy, himg]
-        exact (pullback.lift (Gs j) (Ws j).ι (hGs j)).continuous.image_closure ⟨y, hyclos, rfl⟩
+        exact image_closure_subset_closure_image
+          (pullback.lift (Gs j) (Ws j).ι (hGs j)).continuous ⟨y, hyclos, rfl⟩
       have hfin : z ∈ closure (⇑((pullback.snd p B.I.blowupMap) ⁻¹ᵁ
           (B.I.blowupMap ⁻¹ᵁ Vs i)).ι ⁻¹' Set.range ⇑(pullback.lift (Gs i) (Ws i).ι (hGs i))) :=
         closure_mono (Set.preimage_mono hDsub)
-          (((pullback.snd p B.I.blowupMap) ⁻¹ᵁ
-            (B.I.blowupMap ⁻¹ᵁ Vs i)).ι.isOpenEmbedding.isOpenMap.preimage_closure_subset_closure_preimage
-              hzclos)
+          (((pullback.snd p B.I.blowupMap) ⁻¹ᵁ (B.I.blowupMap ⁻¹ᵁ Vs i)).ι.isOpenEmbedding.isOpenMap
+            |>.preimage_closure_subset_closure_preimage hzclos)
       rwa [(hclos i).closure_eq] at hfin
     -- assemble
     have hOcov : TopologicalSpace.IsOpenCover
@@ -534,8 +536,13 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
       exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hi⟩
     rw [hOcov.isClosed_iff_coe_preimage]
     intro i
-    rw [hrangeU, Set.preimage_iUnion,
-      (Set.iUnion_subset (hstepG i)).antisymm (Set.subset_iUnion _ i)]
+    have hval : ⇑((pullback.snd p B.I.blowupMap) ⁻¹ᵁ (B.I.blowupMap ⁻¹ᵁ Vs i)).ι =
+        Subtype.val := rfl
+    rw [← hval, hrangeU, Set.preimage_iUnion,
+      Set.Subset.antisymm (Set.iUnion_subset (hstepG i))
+        (Set.subset_iUnion (fun j ↦ ⇑((pullback.snd p B.I.blowupMap) ⁻¹ᵁ
+          (B.I.blowupMap ⁻¹ᵁ Vs i)).ι ⁻¹'
+          Set.range ⇑(pullback.lift (Gs j) (Ws j).ι (hGs j))) i)]
     exact hclos i
 
 end AlgebraicGeometry
