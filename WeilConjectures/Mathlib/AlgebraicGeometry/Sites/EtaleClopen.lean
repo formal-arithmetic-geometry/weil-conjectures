@@ -33,6 +33,8 @@ statement back to an arbitrary `V`.
   the product of the sections over the two pieces.
 - `AlgebraicGeometry.Scheme.Etale.isIso_app_of_isIso_clopen`: a morphism of sheaves which is
   an isomorphism on both pieces is an isomorphism over `V`.
+- `AlgebraicGeometry.Scheme.Etale.isCompl_clopenComplOpens`: the range of an open immersion
+  with clopen range and its complement are complementary opens of `X`.
 
 ## Implementation notes
 
@@ -116,6 +118,13 @@ noncomputable def partι (V : X.Etale) (Z : X.Opens) : V.part Z ⟶ V :=
 lemma range_partι (V : X.Etale) (Z : X.Opens) :
     Set.range (V.partι Z).left = ((V.str ⁻¹ᵁ Z : V.left.Opens) : Set V.left) :=
   Scheme.Opens.range_ι (V.str ⁻¹ᵁ Z)
+
+/-- The part of `V` lying over `Z` maps into `Z`: a point of `V ×_X Z` is by construction a
+point of `V` whose image lies in `Z`. -/
+lemma range_part_hom_base_subset (V : X.Etale) (Z : X.Opens) :
+    Set.range (V.part Z).hom.base ⊆ (Z : Set X) := by
+  rintro _ ⟨x, rfl⟩
+  exact x.2
 
 /-! ### The decomposition along a clopen -/
 
@@ -250,6 +259,14 @@ lemma inf_clopenComplOpens : j.opensRange ⊓ clopenComplOpens j hj = ⊥ := by
 lemma sup_clopenComplOpens : j.opensRange ⊔ clopenComplOpens j hj = ⊤ := by
   ext x
   simp [clopenComplOpens, Scheme.Hom.opensRange]
+
+lemma isCompl_clopenComplOpens : IsCompl j.opensRange (clopenComplOpens j hj) :=
+  ⟨disjoint_iff.mpr (inf_clopenComplOpens j hj), codisjoint_iff.mpr (sup_clopenComplOpens j hj)⟩
+
+omit [IsOpenImmersion j] in
+lemma range_ι_clopenComplOpens :
+    Set.range (clopenComplOpens j hj).ι.base = (Set.range j.base)ᶜ :=
+  Scheme.Opens.range_ι (clopenComplOpens j hj)
 
 end OpenImmersion
 

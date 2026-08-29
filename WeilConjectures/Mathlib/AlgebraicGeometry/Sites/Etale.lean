@@ -19,6 +19,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
   projection to `V`.
 - `AlgebraicGeometry.Scheme.Etale.ofArrows_baseChange_mem_smallEtaleTopology`: these base
   changes cover `V` as soon as the open immersions are jointly surjective.
+- `AlgebraicGeometry.Scheme.Etale.liftOfRangeSubset` and
+  `AlgebraicGeometry.Scheme.Etale.isoMapLiftOfRangeSubset`: an étale `X`-scheme whose image
+  lies in the range of an open immersion `j : U ⟶ X` is the image of an étale `U`-scheme
+  under the localization functor along `j`.
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
@@ -88,6 +92,63 @@ lemma Etale.ofArrows_baseChange_mem_smallEtaleTopology
   rw [← Set.preimage_iUnion, hg, Set.preimage_univ]
 
 end BaseChangeCover
+
+section Lift
+
+variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (V : X.Etale)
+  (hV : Set.range V.hom.base ⊆ Set.range j.base)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- An étale `X`-scheme `V` whose structure morphism has image in the range of an open
+immersion `j : U ⟶ X` lifts through `j`, by the universal property of open immersions; the
+lift is étale because `j` is.
+
+```
+         V.left
+        ╱    │
+  lift ╱     │ V.hom
+      ↙      ↓
+     U ────→ X
+         j
+```
+-/
+def Etale.liftOfRangeSubset : U.Etale :=
+  have h : AlgebraicGeometry.Etale (IsOpenImmersion.lift j V.hom hV ≫ j) := by
+    rw [IsOpenImmersion.lift_fac]
+    infer_instance
+  have : AlgebraicGeometry.Etale (IsOpenImmersion.lift j V.hom hV) :=
+    AlgebraicGeometry.Etale.of_comp _ j
+  Etale.mk (IsOpenImmersion.lift j V.hom hV)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The lift of `Etale.liftOfRangeSubset` identifies `V` with the image of an étale
+`U`-scheme under the localization functor along `j`: the comparison morphism is the identity
+on underlying schemes.
+
+```
+              ≅
+   V ────────────────→ (Over.map j).obj (Etale.liftOfRangeSubset j V hV)
+    ╲                 ╱
+     ╲ V.hom         ╱ lift ≫ j
+      ↘             ↙
+              X
+```
+-/
+def Etale.isoMapLiftOfRangeSubset :
+    V ≅ (MorphismProperty.Over.map ⊤
+      (inferInstance : @AlgebraicGeometry.Etale _ _ j)).obj (Etale.liftOfRangeSubset j V hV) where
+  hom := MorphismProperty.Over.homMk (𝟙 V.left)
+    ((Category.id_comp _).trans (IsOpenImmersion.lift_fac j V.hom hV))
+  inv := MorphismProperty.Over.homMk (𝟙 V.left)
+    ((Category.id_comp _).trans (IsOpenImmersion.lift_fac j V.hom hV).symm)
+  hom_inv_id := by
+    apply MorphismProperty.Over.Hom.ext
+    exact Category.id_comp _
+  inv_hom_id := by
+    apply MorphismProperty.Over.Hom.ext
+    exact Category.id_comp _
+
+end Lift
 
 section Sheafify
 
