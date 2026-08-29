@@ -45,19 +45,21 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 section DerivedLowerStar
 
+namespace Etale
+
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The total right derived functor `Rg_* : D(Z_ét) ⥤ D(Y_ét)` of the pushforward
 `g_*` along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of
 étale sheaves. -/
-noncomputable def Etale.rightDerivedLowerStar :
+noncomputable def rightDerivedLowerStar :
     DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
   (Etale.lowerStar A g).rightDerivedFunctor
 
-@[inherit_doc Etale.rightDerivedLowerStar]
+@[inherit_doc rightDerivedLowerStar]
 scoped notation "R(" g ")_*[" A "]" =>
-  Etale.rightDerivedLowerStar A g
+  rightDerivedLowerStar A g
 
 /-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on the
 *bounded below* derived categories of étale sheaves.
@@ -67,14 +69,16 @@ Unlike `Etale.rightDerivedLowerStar` this needs no K-injective hypothesis:
 Mathlib provides for every Grothendieck abelian category. The only dependence on the
 sorried `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` is
 through the chosen `HasDerivedCategory.{u}` instance. -/
-noncomputable def Etale.rightDerivedLowerStarPlus :
+noncomputable def rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
   (Etale.lowerStar A g).rightDerivedFunctorPlus
 
-@[inherit_doc Etale.rightDerivedLowerStarPlus]
+@[inherit_doc rightDerivedLowerStarPlus]
 scoped notation "R(" g ")_*[" A "]+" =>
-  Etale.rightDerivedLowerStarPlus A g
+  rightDerivedLowerStarPlus A g
+
+end Etale
 
 end DerivedLowerStar
 
