@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
@@ -33,8 +33,8 @@ sheaves the derived pullback along `g` is the functor
 `(Etale.lowerStar A f).rightDerivedFunctorPlus` computed via injective resolutions, and
 they are related by the derived adjunction
 `Etale.derivedUpperStarLowerStarAdjunctionPlus` of
-`WeilConjectures.SixFunctors.Derived`. This file constructs the *derived base-change
-morphism*
+`WeilConjectures.SixFunctors.Derived.UpperLowerStar`. This file constructs the *derived
+base-change morphism*
 
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` (in diagrammatic `⋙`-order)
 
@@ -115,6 +115,7 @@ noncomputable def Etale.baseChangeSquareStep (sq : CommSq g' f' f g) :
       (Etale.pullbackSquareComparison A sq) (Etale.lowerStar A f').rightDerivedFunctorPlus ≪≫
         Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm
 
+/-
 lemma Etale.baseChangeSquareStep_app (sq : CommSq g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
     ((Etale.baseChangeSquareStep A sq).app K) =
@@ -126,6 +127,7 @@ lemma Etale.baseChangeSquareStep_app (sq : CommSq g' f' f g)
     Iso.symm_hom, Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, Category.comp_id, Category.id_comp, Functor.mapIso_hom]
   exact (Category.id_comp _).trans (Category.comp_id _)
+-/
 
 end PullbackComposition
 
@@ -133,9 +135,9 @@ section BaseChangeTransformation
 
 /- The K-flat resolution package on the coefficient category `A`, as in the sections
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
-`WeilConjectures.SixFunctors.Derived`; it enters here through the bounded below derived
-adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is obtained by
-restriction of the unbounded derived adjunction. -/
+`WeilConjectures.SixFunctors.Derived.UpperLowerStar`; it enters here through the bounded
+below derived adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is
+obtained by restriction of the unbounded derived adjunction. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
