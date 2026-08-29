@@ -10093,6 +10093,32 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   quasi-domination.
 \end{proof}
 
+\begin{lemma}[Morphisms into a separated target agreeing on a
+  scheme-theoretically dominant subscheme]
+  \label{lemma:nagata-ext-scheme-theoretically-dominant-separated}
+  \uses{def:nagata-scheme-theoretically-dense-open}
+  \lean{AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant_of_isSeparated,
+    AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant_of_isSeparated'}
+
+  Let $s\colon Y\to Z$ be separated and let $f,g\colon T\to Y$ satisfy
+  $s\circ f=s\circ g$.  If $\iota\colon W\to T$ is scheme-theoretically
+  dominant and $f\circ\iota=g\circ\iota$, then $f=g$.  In particular two
+  $Z$-morphisms $T\to Y$ into a separated $Z$-scheme $Y$ that agree on a
+  scheme-theoretically dense open of $T$ are equal.
+
+  No reducedness of $T$ is needed: this is the scheme-theoretic analogue of the
+  classical statement for a dominant $\iota$ and reduced $T$.
+\end{lemma}
+
+\begin{proof}
+  Passing to $Z$-schemes, the equalizer $E$ of $f$ and $g$ maps to $T$ by a
+  closed immersion $e$ because $s$ is separated.  As $f\circ\iota=g\circ\iota$,
+  the morphism $\iota$ factors as $\iota=e\circ l$, so the kernel ideal of $e$
+  is contained in that of $\iota$, which is trivial by scheme-theoretic
+  dominance.  A closed immersion with trivial kernel is an isomorphism, hence
+  $e$ is an epimorphism and $f=g$ follows from $f\circ e=g\circ e$.
+\end{proof}
+
 \begin{lemma}[Quasi-affine target over a qcqs base, $U=V$,
   {\cite[Thm.~2.4, Case 2, pp.~15--16]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-affine-equal-opens}
@@ -10115,7 +10141,8 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   \uses{lemma:nagata-conrad-dense-in-admissible-blowup,
     lemma:nagata-scheme-image-universal,
     lemma:nagata-ideal-directed-union-finite-type,
-    lemma:nagata-finite-type-ideal-compact}
+    lemma:nagata-finite-type-ideal-compact,
+    lemma:nagata-ext-scheme-theoretically-dominant-separated}
   Choose a finite affine open cover $X=\bigcup_{i=0}^nW_i$ and put
   $U_i=U\cap W_i$, a dense quasi-compact open of $W_i$, and
   $Y_i=p^{-1}(W_i)$, quasi-affine and of finite type over $W_i$.  Let
