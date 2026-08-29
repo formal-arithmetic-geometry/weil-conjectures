@@ -9974,23 +9974,27 @@ function used in the proof.
   \uses{def:nagata-relative-affine-space,
     def:nagata-relative-projective-space,
     def:nagata-admissible-blowup,
-    def:nagata-conrad-quasi-domination,
-    lemma:nagata-conrad-dense-in-admissible-blowup}
-  \lean{}
+    def:nagata-conrad-quasi-domination}
+  \lean{AlgebraicGeometry.exists_isAdmissible_extend_affineSpace}
 
-  Let $X=\operatorname{Spec}(A)$ be affine, let $U\subseteq X$ be a dense
+  Let $X=\operatorname{Spec}(A)$ be affine, let $U\subseteq X$ be a
   quasi-compact open and let $f\colon U\to\mathbb A^n_X$ be an $X$-morphism.
   There is a finite type quasi-coherent ideal $\mathcal I$ on $X$ with
-  $V(\mathcal I)\subseteq X\setminus U$ and an $X$-morphism
+  $V(\mathcal I)\subseteq X\setminus U$, so that
+  $\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ is a $U$-admissible
+  blow-up, together with an open subscheme $W\subseteq\widetilde X$ containing
+  the inverse image of $U$ and an $X$-morphism
+  $\widetilde f\colon W\to\mathbb A^n_X$ extending $f$, whose graph
   \[
-    \widetilde f\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)
-      \longrightarrow\mathbb P^n_X
+    \Gamma_{\widetilde f}\hookrightarrow
+      \widetilde X\times_X\mathbb A^n_X
   \]
-  extending $f$, where $\mathbb A^n_X\subseteq\mathbb P^n_X$ is the standard
-  complement of the hyperplane $\{T_n=0\}$.  Consequently
-  $W=\widetilde f^{-1}(\mathbb A^n_X)$ is a dense open subscheme of
-  $\widetilde X$ containing $U$, and $(W,\widetilde f|_W)$ is a
-  quasi-domination of $\widetilde X$ over $\mathbb A^n_X$ extending $f$.
+  is closed.  That is, $(W,\widetilde f)$ is a quasi-domination of
+  $\widetilde X$ over $\mathbb A^n_X$ extending $f$.
+
+  No density hypothesis on $U$ is needed here; when $U$ is dense in $X$, the
+  open $W$ is automatically dense in $\widetilde X$ by
+  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup}.
 \end{lemma}
 
 \begin{proof}
@@ -10044,9 +10048,8 @@ function used in the proof.
 
   For the last sentence: $\mathbb P^n_X\to X$ is separated, so the graph
   $\Gamma_{\widetilde f}\subseteq\widetilde X\times_X\mathbb P^n_X$ is closed.
-  The open subscheme $W=\widetilde f^{-1}(\mathbb A^n_X)$ contains $U$ and is
-  therefore dense in $\widetilde X$ by
-  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup}.  Finally
+  Taking $W=\widetilde f^{-1}(\mathbb A^n_X)$, which is an open subscheme of
+  $\widetilde X$ containing the inverse image of $U$, the intersection
   $\Gamma_{\widetilde f|_W}=\Gamma_{\widetilde f}\cap(\widetilde X\times_X
   \mathbb A^n_X)$ is closed in $\widetilde X\times_X\mathbb A^n_X$, which is
   the quasi-domination condition of
@@ -10078,9 +10081,9 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
     lemma:nagata-quasi-affine-immersion-affine-space-exists,
     lemma:nagata-conrad-schematically-dense-blowup,
     def:nagata-conrad-quasi-domination}
-  \lean{}
+  \lean{AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine}
 
-  Let $X$ be affine, let $U\subseteq X$ be a dense quasi-compact open, let
+  Let $X$ be affine, let $U\subseteq X$ be a quasi-compact open, let
   $p\colon Y\to X$ be quasi-affine and of finite type, and let $f\colon U\to Y$
   be an $X$-morphism.  There is a $U$-admissible blow-up
   $\widetilde X\to X$ in which $U$ is scheme-theoretically dense, together with
