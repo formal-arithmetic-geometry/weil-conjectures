@@ -17,6 +17,7 @@ public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Blowup.DisjointnessBlowup
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy
 public import WeilConjectures.Blowup.Extension
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
@@ -129,6 +130,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring

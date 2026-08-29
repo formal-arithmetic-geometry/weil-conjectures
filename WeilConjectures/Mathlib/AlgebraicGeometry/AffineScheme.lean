@@ -86,4 +86,22 @@ lemma isBasis_affineOpens_le_preimage {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (U := U ⊓ f ⁻¹ᵁ V) ⟨hxU, hxV⟩
   exact ⟨W, ⟨hW, V, hV, hWU.trans inf_le_right⟩, hxW, hWU.trans inf_le_left⟩
 
+/-- A quasi-compact open of an affine scheme is a finite union of basic opens. -/
+lemma exists_finite_basicOpen_cover [IsAffine X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) :
+    ∃ (ι : Type u) (_ : Finite ι) (u : ι → Γ(X, ⊤)) (_ : ∀ i, X.basicOpen (u i) ≤ U),
+      U = ⨆ i, X.basicOpen (u i) := by
+  classical
+  obtain ⟨t, ht⟩ := hU.elim_finite_subcover
+    (fun a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} ↦ (X.basicOpen a.1 : Set X))
+    (fun a ↦ (X.basicOpen a.1).2) (by
+      intro x hx
+      obtain ⟨a, ha1, ha2⟩ := (isAffineOpen_top X).exists_basicOpen_le (V := U) ⟨x, hx⟩ trivial
+      exact Set.mem_iUnion.mpr ⟨⟨a, ha1⟩, ha2⟩)
+  refine ⟨{a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} // a ∈ t}, inferInstance,
+    fun a ↦ a.1.1, fun a ↦ a.1.2, le_antisymm ?_ (iSup_le fun a ↦ a.1.2)⟩
+  intro x hx
+  obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (ht hx)
+  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨a, ha⟩, hxa⟩
+
 end AlgebraicGeometry
