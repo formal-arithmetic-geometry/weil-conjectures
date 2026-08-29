@@ -10167,92 +10167,116 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   \label{lemma:nagata-conrad-quasi-affine-equal-opens}
   \uses{def:nagata-quasi-affine-morphism,
     lemma:nagata-conrad-quasi-affine-affine-base,
-    lemma:nagata-extend-finite-type-ideal,
-    cor:nagata-blowup-product-common-refinement,
+    lemma:nagata-extend-admissible-blowup,
+    lemma:nagata-qc-open-complement-ideal-exists,
+    thm:nagata-blowup-product-ideal,
     def:nagata-conrad-quasi-domination}
-  \lean{}
+  \lean{AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom}
 
-  Let $X$ be qcqs, let $U\subseteq X$ be a dense quasi-compact open, let
-  $p\colon Y\to X$ be quasi-affine and of finite type, and let $f\colon U\to Y$
-  be an $X$-morphism.  There is a finite type quasi-coherent ideal
-  $\mathcal I$ on $X$ with $V(\mathcal I)\subseteq X\setminus U$ such that
+  Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, let
+  $p\colon Y\to X$ be separated, quasi-affine and locally of finite type, and
+  let $f\colon U\to Y$ be an $X$-morphism.  There is a finite type
+  quasi-coherent ideal $\mathcal I$ on $X$ with
+  $V(\mathcal I)\subseteq X\setminus U$ such that
   $\widetilde X=\operatorname{Bl}_{\mathcal I}(X)$ carries a quasi-domination
-  of $\widetilde X$ over $Y$ extending $f$.
+  of $\widetilde X$ over $Y$ extending $f$, and such that the inverse image of
+  $U$ in $\widetilde X$ is scheme-theoretically dense.
+
+  As in \Cref{lemma:nagata-conrad-quasi-affine-affine-base}, $U$ need not be
+  assumed dense in $X$: the centre constructed below cuts out exactly the
+  boundary $X\setminus U$, so the inverse image of $U$ becomes
+  scheme-theoretically dense in $\widetilde X$ in any case.
 \end{lemma}
 
 \begin{proof}
   \uses{lemma:nagata-conrad-dense-in-admissible-blowup,
-    lemma:nagata-scheme-image-universal,
-    lemma:nagata-ideal-directed-union-finite-type,
-    lemma:nagata-finite-type-ideal-compact,
+    thm:nagata-blowup-universal-property,
     lemma:nagata-ext-scheme-theoretically-dominant-separated}
   Choose a finite affine open cover $X=\bigcup_{i=0}^nW_i$ and put
-  $U_i=U\cap W_i$, a dense quasi-compact open of $W_i$, and
-  $Y_i=p^{-1}(W_i)$, quasi-affine and of finite type over $W_i$.  Let
+  $U_i=U\cap W_i$, a quasi-compact open of $W_i$, and $Y_i=p^{-1}(W_i)$,
+  quasi-affine and locally of finite type over $W_i$.  Let
   $f_i\colon U_i\to Y_i$ be the restriction of $f$.
 
   By \Cref{lemma:nagata-conrad-quasi-affine-affine-base} there is, for each
   $i$, a finite type quasi-coherent ideal $\mathcal I_i$ on $W_i$ with
-  $V(\mathcal I_i)\subseteq W_i\setminus U_i$ such that
-  $\operatorname{Bl}_{\mathcal I_i}(W_i)$ quasi-dominates $Y_i$ in a manner
-  extending $f_i$, and such that $U_i$ is scheme-theoretically dense in
-  $\operatorname{Bl}_{\mathcal I_i}(W_i)$.
+  $V(\mathcal I_i)\subseteq W_i\setminus U_i$, an open
+  $T_i\subseteq\operatorname{Bl}_{\mathcal I_i}(W_i)$ containing the inverse
+  image of $U_i$, and a $W_i$-morphism $g_i\colon T_i\to Y_i$ extending $f_i$
+  whose graph is closed in
+  $Y_i\times_{W_i}\operatorname{Bl}_{\mathcal I_i}(W_i)$.
 
-  \emph{Extending the centres.}  We claim each $\mathcal I_i$ extends to a
+  \emph{Extending the centres.}  By
+  \Cref{lemma:nagata-extend-admissible-blowup} each $\mathcal I_i$ extends to a
   finite type quasi-coherent ideal $\mathcal J_i$ on $X$ with
-  $\mathcal J_i|_{W_i}=\mathcal I_i$ and $V(\mathcal J_i)\cap U=\varnothing$.
-  Let $V(\mathcal K_i)$ be the scheme-theoretic closure of $V(\mathcal I_i)$ in
-  $X$ along the quasi-compact immersion $W_i\hookrightarrow X$ (available since
-  $X$ is quasi-separated); then $\mathcal K_i|_{W_i}=\mathcal I_i$ and
-  $V(\mathcal K_i)\subseteq X\setminus U$ as sets, because
-  $W_i\setminus U_i=(X\setminus U)\cap W_i$.  Write $\mathcal K_i$ as the
-  filtered union of its finite type quasi-coherent subideals
-  $\mathcal K_{i,\alpha}$ restricting to $\mathcal I_i$ on $W_i$
-  (\Cref{lemma:nagata-ideal-directed-union-finite-type}).  The sets
-  $V(\mathcal K_{i,\alpha})\cap U$ form a decreasing inverse system of closed
-  subsets of the quasi-compact space $U$ with empty intersection, so
-  $V(\mathcal K_{i,\alpha_0})\cap U=\varnothing$ for some $\alpha_0$; put
-  $\mathcal J_i=\mathcal K_{i,\alpha_0}$.
+  $V(\mathcal J_i)\cap U=\varnothing$ whose blow-up restricts over $W_i$ to
+  $\operatorname{Bl}_{\mathcal I_i}(W_i)$, and does so as a cartesian square.
 
-  \emph{The blow-up.}  Set $\mathcal I=\prod_i\mathcal J_i$, a finite type
-  ideal with $V(\mathcal I)=\bigcup_iV(\mathcal J_i)$ disjoint from $U$, and
-  put $\widetilde X=\operatorname{Bl}_{\mathcal I}(X)$ and
-  $\widetilde X_i=\operatorname{Bl}_{\mathcal J_i}(X)$.  By
-  \Cref{cor:nagata-blowup-product-common-refinement} there are canonical
-  $X$-morphisms $\pi_i\colon\widetilde X\to\widetilde X_i$, each of them a
-  blow-up along a finite type ideal whose zero scheme misses $U$.  In
-  particular $U$ is an open subscheme of $\widetilde X$ and of each
-  $\widetilde X_i$.
+  \emph{The blow-up.}  By
+  \Cref{lemma:nagata-qc-open-complement-ideal-exists} there is a finite type
+  quasi-coherent ideal $\mathcal K$ on $X$ with $V(\mathcal K)=X\setminus U$.
+  Set $\mathcal I=\mathcal K\cdot\prod_i\mathcal J_i$, a finite type ideal with
+  $V(\mathcal I)=X\setminus U$ \emph{exactly}, and let
+  $\pi\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ be its
+  blow-up.  Since $V(\mathcal I)=X\setminus U$, the second assertion of
+  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup} makes $\pi^{-1}(U)$
+  scheme-theoretically dense in $\widetilde X$, hence also topologically
+  dense; this is the last assertion of the lemma.
 
-  By construction, $\widetilde X_i|_{W_i}=\operatorname{Bl}_{\mathcal
-  I_i}(W_i)$ carries a dense open $T_i\supseteq U_i$ and an $X$-morphism
-  $f_i\colon T_i\to Y_i\hookrightarrow Y$ extending $f|_{U_i}$ whose graph is
-  closed in $(\widetilde X_i|_{W_i})\times_{W_i}Y_i$; and $U_i$ is
-  scheme-theoretically dense in $T_i$.
+  Each $\mathcal J_i$ divides $\mathcal I$, so its inverse image on
+  $\widetilde X$ is an invertible factor of the invertible ideal
+  $\mathcal I\cdot\mathcal O_{\widetilde X}$ and is therefore itself
+  invertible.  The universal property of blowing up
+  (\Cref{thm:nagata-blowup-universal-property}) then gives a canonical
+  $X$-morphism $\pi_i\colon\widetilde X\to\operatorname{Bl}_{\mathcal J_i}(X)$.
+  Restricting $\pi_i$ over $W_i$ and using the cartesian square of the
+  previous paragraph, we obtain a $W_i$-morphism
+  $\rho_i\colon\pi^{-1}(W_i)\to\operatorname{Bl}_{\mathcal I_i}(W_i)$.
 
-  Put $T_i'=\pi_i^{-1}(T_i)\subseteq\widetilde X$, an open subscheme containing
-  $U_i$.  We claim $U_i$ is scheme-theoretically dense in $T_i'$.  The
-  complement of the centre of the blow-up $\pi_i$ is scheme-theoretically dense
-  in $\widetilde X$, hence its overlap with $T_i'$ is scheme-theoretically
-  dense in $T_i'$; that overlap is an open subscheme of $T_i$ containing
-  $U_i$, and $U_i$ is scheme-theoretically dense in $T_i$.  Density is
-  transitive, giving the claim.
+  Put $T_i'=\rho_i^{-1}(T_i)\subseteq\pi^{-1}(W_i)$, an open subscheme of
+  $\widetilde X$ containing $\pi^{-1}(U\cap W_i)$, and let
+  $\overline f_i\colon T_i'\to Y$ be the composite of $\rho_i|_{T_i'}$, $g_i$
+  and $Y_i\hookrightarrow Y$.  The graph $\Gamma_i$ of $\overline f_i$ is a
+  base change of the graph of $g_i$ along the comparison morphism of the two
+  fibre products, hence a closed immersion; so $\Gamma_i$ is closed in the part
+  $(Y\times_X\widetilde X)|_{W_i}$ of $Y\times_X\widetilde X$ lying over
+  $W_i$.
 
   \emph{Gluing.}  Let $T=\bigcup_iT_i'$, an open subscheme of $\widetilde X$
-  containing $\bigcup_iU_i=U$, hence dense in $\widetilde X$ by
-  \Cref{lemma:nagata-conrad-dense-in-admissible-blowup}.  The $X$-morphisms
-  $f_i\circ\pi_i\colon T_i'\to Y$ agree on overlaps: $U_i\cap U_j$ is
-  scheme-theoretically dense in $T_i'\cap T_j'$, the two morphisms agree on it,
-  and $Y\to X$ is separated, so they agree on $T_i'\cap T_j'$.  They therefore
-  glue to an $X$-morphism $\overline f\colon T\to Y$ extending $f$.
+  containing $\bigcup_i\pi^{-1}(U\cap W_i)=\pi^{-1}(U)$.  The $X$-morphisms
+  $\overline f_i$ agree on overlaps: the open $\pi^{-1}(U)\cap T_i'\cap T_j'$
+  is scheme-theoretically dense in $T_i'\cap T_j'$, both morphisms agree with
+  $f$ on it, and $Y\to X$ is separated, so
+  \Cref{lemma:nagata-ext-scheme-theoretically-dominant-separated} makes them
+  agree on $T_i'\cap T_j'$.  They therefore glue to an $X$-morphism
+  $\overline f\colon T\to Y$ extending $f$.
 
-  \emph{Closedness of the graph.}  This may be checked locally on $X$.  Over
-  $W_i$ we have $\Gamma_{\overline f}|_{W_i}=\pi_{i,Y}^{-1}(\Gamma_{f_i})$,
-  where $\pi_{i,Y}\colon(\widetilde X\times_XY)|_{W_i}\to
-  (\widetilde X_i|_{W_i})\times_{W_i}Y_i$ is induced by $\pi_i$ on the first
-  factor.  Since $\Gamma_{f_i}$ is closed, so is
-  $\Gamma_{\overline f}|_{W_i}$.  Hence $(T,\overline f)$ is a
-  quasi-domination of $\widetilde X$ over $Y$ extending $f$.
+  \emph{Closedness of the graph.}  The graph $\Gamma_{\overline f}$ is the
+  union of the $\Gamma_i$, and closedness may be checked on the open cover of
+  $Y\times_X\widetilde X$ by the parts lying over the $W_i$.  So it suffices to
+  prove that the local extension loci are pairwise compatible:
+  \[
+    T_j'\cap\pi^{-1}(W_i)\subseteq T_i'\qquad\text{for all }i,j,
+  \]
+  for then $\Gamma_{\overline f}\cap(Y\times_X\widetilde X)|_{W_i}=\Gamma_i$,
+  which is closed there.  (This step is not formal: a priori
+  $\overline f_j$ could be defined at points of $\pi^{-1}(W_i)$ where
+  $\overline f_i$ is not.)
+
+  Fix $i$ and $j$ and put $N=\pi^{-1}(U\cap W_i)\cap T_j'$.  The two morphisms
+  $\overline f_i$ and $\overline f_j$ agree on $N$, both being restrictions of
+  $f$ there, so $\Gamma_j|_N=\Gamma_i|_N$ and in particular
+  $\Gamma_j(N)\subseteq\Gamma_i$.  Since $\pi^{-1}(U)$ is topologically dense
+  in $\widetilde X$ and $T_j'\cap\pi^{-1}(W_i)$ is open, $N$ is dense in
+  $T_j'\cap\pi^{-1}(W_i)$; as $\Gamma_j$ is continuous,
+  $\Gamma_j\bigl(T_j'\cap\pi^{-1}(W_i)\bigr)$ lies in the closure of
+  $\Gamma_j(N)$.  Intersecting with the open
+  $(Y\times_X\widetilde X)|_{W_i}$, in which $\Gamma_i$ is closed, gives
+  $\Gamma_j\bigl(T_j'\cap\pi^{-1}(W_i)\bigr)\subseteq\Gamma_i$.  Projecting to
+  $\widetilde X$ and using that a graph maps isomorphically to its domain
+  yields $T_j'\cap\pi^{-1}(W_i)\subseteq T_i'$, as claimed.
+
+  Hence $(T,\overline f)$ is a quasi-domination of $\widetilde X$ over $Y$
+  extending $f$.
 \end{proof}
 
 \section{Case 3: quasi-affine targets in general}
