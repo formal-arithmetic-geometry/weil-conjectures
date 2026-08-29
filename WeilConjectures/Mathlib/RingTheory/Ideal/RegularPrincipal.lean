@@ -77,8 +77,8 @@ lemma IsRegularPrincipal.comap_of_bijective {J : Ideal S} (hJ : J.IsRegularPrinc
 multiplication by it is scalar multiplication on a flat module. -/
 lemma _root_.RingHom.Flat.map_mem_nonZeroDivisors {f : R →+* S} (hf : f.Flat) {s : R}
     (hs : s ∈ nonZeroDivisors R) : f s ∈ nonZeroDivisors S := by
-  letI := f.toAlgebra
-  haveI : Module.Flat R S := hf
+  let := f.toAlgebra
+  have : Module.Flat R S := hf
   have hreg : IsSMulRegular S s := Module.Flat.isSMulRegular_of_nonZeroDivisors hs
   have key : ∀ x : S, f s * x = 0 → x = 0 := fun x hx ↦
     hreg (by simpa [Algebra.smul_def, RingHom.algebraMap_toAlgebra] using hx)

@@ -42,7 +42,7 @@ universe v₁ v₃ u₁ u₃
 
 namespace CategoryTheory.Sheaf
 
-open MonoidalCategory Functor
+open MonoidalCategory CategoryTheory.Functor
 
 variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
   {A : Type u₃} [Category.{v₃} A] [MonoidalCategory A] [Abelian A] [MonoidalPreadditive A]
