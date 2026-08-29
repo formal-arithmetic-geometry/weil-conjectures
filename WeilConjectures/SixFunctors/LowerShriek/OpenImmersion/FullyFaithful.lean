@@ -61,13 +61,14 @@ open CategoryTheory Category Limits Opposite
 
 namespace AlgebraicGeometry
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+open Etale
 
 /-- The adjoint triple `j_! ⊣ j^* ⊣ j_*` on small étale sites along an open immersion. -/
 noncomputable def Etale.openImmersionAdjunctionTriple :
-    Adjunction.Triple (Etale.openImmersionLowerShriek A j)
-      (Etale.openImmersionRestriction A j) (Etale.lowerStar A j) :=
+    Adjunction.Triple (j)_!open[A] (Etale.openImmersionRestriction A j) (j)_*[A] :=
   GrothendieckTopology.localizationAdjunctionTriple A @Etale @Etale le_rfl j inferInstance
 
 /-- **The unit of `j_! ⊣ j^*` is an isomorphism for an open immersion `j`**, i.e.
@@ -83,14 +84,13 @@ instance Etale.isIso_openImmersionLowerShriekAdjunction_unit :
 
 /-- **The extension by zero along an open immersion is fully faithful.** -/
 noncomputable def Etale.fullyFaithfulOpenImmersionLowerShriek :
-    (Etale.openImmersionLowerShriek A j).FullyFaithful :=
+    (j)_!open[A].FullyFaithful :=
   (Etale.openImmersionLowerShriekAdjunction A j).fullyFaithfulLOfIsIsoUnit
 
-instance Etale.full_openImmersionLowerShriek : (Etale.openImmersionLowerShriek A j).Full :=
+instance Etale.full_openImmersionLowerShriek : (j)_!open[A].Full :=
   (Etale.fullyFaithfulOpenImmersionLowerShriek A j).full
 
-instance Etale.faithful_openImmersionLowerShriek :
-    (Etale.openImmersionLowerShriek A j).Faithful :=
+instance Etale.faithful_openImmersionLowerShriek : (j)_!open[A].Faithful :=
   (Etale.fullyFaithfulOpenImmersionLowerShriek A j).faithful
 
 set_option backward.isDefEq.respectTransparency false in

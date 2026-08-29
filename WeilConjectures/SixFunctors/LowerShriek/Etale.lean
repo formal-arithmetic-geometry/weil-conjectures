@@ -63,8 +63,10 @@ lemma isOpenImmersion_le_etale : @IsOpenImmersion ≤ @Etale := fun _ _ _ hi =>
 
 section LowerShriek
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+
+open Etale
 
 /-- The lower shriek `f_!` along a morphism `f : X ⟶ Y` admitting a compactification on
 sheaves for the small étale sites. -/
@@ -77,8 +79,8 @@ immersion of the chosen compactification followed by the pushforward `Etale.lowe
 along its proper structure morphism. -/
 lemma Etale.lowerShriek_eq :
     Etale.lowerShriek A f =
-      Etale.openImmersionLowerShriek A (HasCompactification.compactification f).i ⋙
-        Etale.lowerStar A (HasCompactification.compactification f).g :=
+      ((HasCompactification.compactification f).i)_!open[A] ⋙
+        ((HasCompactification.compactification f).g)_*[A] :=
   rfl
 
 /-- The lower shriek `f_!` on étale sheaves with values in a preadditive category is

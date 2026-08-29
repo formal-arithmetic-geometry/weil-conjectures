@@ -203,7 +203,6 @@ instance isRightDerivedFunctor_rightDerivedFunctor_comp [F.PreservesKInjectiveCo
       ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
         ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))) := h₂
   dsimp [rightDerivedFunctorCompUnit]
-  simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app]
   infer_instance
 
 /-- **Composition of total right derived functors**: for additive functors `F : C ⥤ D`
