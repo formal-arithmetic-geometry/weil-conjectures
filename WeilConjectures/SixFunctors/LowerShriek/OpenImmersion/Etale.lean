@@ -101,15 +101,21 @@ instance Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit :
 instance Etale.openImmersionRestriction_additive :
     (Etale.openImmersionRestriction A j).Additive where
 
+namespace Etale
+
 /-- The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
 étale sites. -/
-noncomputable def Etale.openImmersionLowerShriek :
+noncomputable def openImmersionLowerShriek :
     Sheaf U.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A :=
   GrothendieckTopology.localizationLowerShriek A @Etale @Etale j inferInstance
 
-@[inherit_doc Etale.openImmersionLowerShriek]
+@[inherit_doc openImmersionLowerShriek]
 scoped notation "(" j ")_!Imm[" A "]" =>
-  Etale.openImmersionLowerShriek A j
+  openImmersionLowerShriek A j
+
+end Etale
+
+open Etale
 
 /-- The adjunction `j_! ⊣ j^*` between the extension by zero and the restriction along an
 open immersion. -/
