@@ -79,7 +79,7 @@ immersion of the chosen compactification followed by the pushforward `Etale.lowe
 along its proper structure morphism. -/
 lemma Etale.lowerShriek_eq :
     Etale.lowerShriek A f =
-      ((HasCompactification.compactification f).i)_!Imm[A] ⋙
+      ((HasCompactification.compactification f).i)_!open[A] ⋙
         ((HasCompactification.compactification f).g)_*[A] :=
   rfl
 

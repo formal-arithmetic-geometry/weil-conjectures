@@ -64,18 +64,14 @@ variable {f : X ⟶ Y} (c : Compactification f)
 functor `Di_!` induced on derived categories by the *exact* extension by zero `i_!`, followed
 by the total right derived pushforward `Rg_*`.
 
-This is how `Rf_!` is defined in the six functor formalism: `i_!` is exact
-(`Etale.preservesFiniteLimits_openImmersionLowerShriek` and the fact that it is a left
-adjoint), so it needs no derivation and induces `Di_! = Functor.mapDerivedCategory` termwise;
-only the pushforward is derived.
-
-It is deliberately *not* the total right derived functor of the composite
-`i_! ⋙ g_* = Etale.lowerShriek`. The two agree exactly when `i_!` sends injective sheaves to
-`g_*`-acyclic ones, which is a theorem, not a definitional matter, and is not proved here. -/
+Warning: It is deliberately *not* the total right derived functor of the composite
+`i_! ⋙ g_* = Etale.lowerShriek`. In general, `i_!` does not sends injective sheaves to
+`g_*`-acyclic ones, and `Rf_!` is not the derived functor of `f_!`, through its zeroth
+homology is `f_!`. Deligne made explicit calculations on $A^1$, see SGA. -/
 noncomputable def rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  (c.i)_!Imm[A].mapDerivedCategory ⋙ (c.g)_*[A].rightDerivedFunctor
+  (c.i)_!open[A].mapDerivedCategory ⋙ (c.g)_*[A].rightDerivedFunctor
 
 /-- The derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the *bounded below* derived categories of étale sheaves:
@@ -85,7 +81,7 @@ below right derived pushforward. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationPlus :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  (c.i)_!Imm[A].mapDerivedCategoryPlus ⋙ (c.g)_*[A].rightDerivedFunctorPlus
+  (c.i)_!open[A].mapDerivedCategoryPlus ⋙ (c.g)_*[A].rightDerivedFunctorPlus
 
 @[inherit_doc rightDerivedLowerShriekOfCompactification]
 scoped notation "Rf_!("c")[" A "]" =>

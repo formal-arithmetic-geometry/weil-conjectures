@@ -60,13 +60,7 @@ scoped notation "R(" g ")_*[" A "]" =>
   rightDerivedLowerStar A g
 
 /-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on the
-*bounded below* derived categories of étale sheaves.
-
-Unlike `Etale.rightDerivedLowerStar` this needs no K-injective hypothesis:
-`Functor.rightDerivedFunctorPlus` needs only `EnoughInjectives` on the source, which
-Mathlib provides for every Grothendieck abelian category. The only dependence on the
-sorried `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` is
-through the chosen `HasDerivedCategory.{u}` instance. -/
+*bounded below* derived categories of étale sheaves. -/
 noncomputable def rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
