@@ -28,7 +28,7 @@ The blow-up is produced by Deligne's disjointness lemma
 `lemma:nagata-conrad-disjointness-blowup`) applied to the two centres
 
 * `I₁`, a finite-type quasi-coherent subideal of the vanishing ideal of the reduced closed
-  subscheme `closure (V ∖ U)` which still restricts to the unit ideal on `U`, and
+  subscheme `closure (V ∖ U)`, and
 * `I₂ = I₁ * I₁ ⊔ K ^ n`, where `K` is a finite-type ideal sheaf cutting out `X ∖ V` and
   `n` is large enough that `K ^ n` pulls back into `I₁ ^ 2 · 𝒪_Y + I_{closure f(U)}`.
 
@@ -47,43 +47,11 @@ directed supremum of the finite-type subideals
 
 @[expose] public section
 
-noncomputable section
-
 universe u
 
 open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry
-
-namespace Scheme.IdealSheafData
-
-variable {X : Scheme.{u}}
-
-/-- Products of quasi-coherent ideal sheaves are monotone in both arguments. -/
-lemma mul_mono {I₁ I₂ J₁ J₂ : X.IdealSheafData} (hI : I₁ ≤ I₂) (hJ : J₁ ≤ J₂) :
-    I₁ * J₁ ≤ I₂ * J₂ :=
-  fun U ↦ Ideal.mul_mono (hI U) (hJ U)
-
-/-- Products of quasi-coherent ideal sheaves distribute over suprema. -/
-lemma iSup_mul {ι : Type*} (I : ι → X.IdealSheafData) (J : X.IdealSheafData) :
-    (⨆ i, I i) * J = ⨆ i, I i * J :=
-  Scheme.IdealSheafData.ext <| funext fun U ↦ by
-    simp only [ideal_mul, Pi.mul_apply, ideal_iSup, iSup_apply, Submodule.iSup_mul]
-
-/-- A finite-type quasi-coherent ideal sheaf has finite-type powers. -/
-lemma ofFiniteType.pow {I : X.IdealSheafData} (hI : I.ofFiniteType) (n : ℕ) :
-    (I ^ n).ofFiniteType := by
-  induction n with
-  | zero => simpa using ofFiniteType_top
-  | succ n ih => rw [pow_succ]; exact ih.mul hI
-
-/-- The support of a power of a quasi-coherent ideal sheaf is contained in its support. -/
-lemma support_pow_le {I : X.IdealSheafData} (n : ℕ) : (I ^ n).support ≤ I.support := by
-  cases n with
-  | zero => simp
-  | succ n => simp
-
-end Scheme.IdealSheafData
 
 variable {X : Scheme.{u}}
 
@@ -122,14 +90,6 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
   have hHsupp : (H.support : Set X) = closure ((V : Set X) \ (U : Set X)) := by
     rw [hHdef, Scheme.IdealSheafData.coe_support_vanishingIdeal]
     rfl
-  -- `H` restricts to the unit ideal on `U`
-  have hHU : H.comap U.ι = ⊤ := by
-    rw [← Scheme.IdealSheafData.support_eq_bot_iff]
-    ext1
-    rw [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage, hHsupp]
-    refine Set.eq_empty_iff_forall_notMem.mpr fun x hx ↦ hcl hx ?_
-    rw [← Scheme.Opens.range_ι]
-    exact Set.mem_range_self x
   -- a finite-type closed subscheme structure on `X ∖ V`
   obtain ⟨K, hKft, hKsupp⟩ := X.exists_finiteType_ideal_coe_support_eq_compl V hV
   -- the graph lies over `U`
@@ -161,15 +121,11 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
     rw [Scheme.Hom.comp_base, TopCat.coe_comp, Function.comp_apply] at hu
     exact hcl hy₁ hu
   obtain ⟨n, hn⟩ := Scheme.IdealSheafData.exists_pow_le (hKft.comap p) hsupp
-  -- the directed family of the finite-type subideals of `H` which are the unit ideal on `U`
-  set S : Set X.IdealSheafData :=
-    {J : X.IdealSheafData | J ≤ H ∧ J.ofFiniteType ∧ J.comap U.ι = ⊤} with hSdef
-  have hSdir : DirectedOn (· ≤ ·) S :=
-    Scheme.IdealSheafData.directedOn_ofFiniteType_le_comap_eq_top H U
-  have hSsup : sSup S = H :=
-    Scheme.IdealSheafData.sSup_ofFiniteType_le_comap_eq_top_eq H hU hHU
-  obtain ⟨J₀, hJ₀⟩ := Scheme.IdealSheafData.exists_ofFiniteType_le_comap_eq_top H hU hHU
-  haveI : Nonempty S := ⟨⟨J₀, hJ₀⟩⟩
+  -- the directed family of the finite-type quasi-coherent subideals of `H`
+  set S : Set X.IdealSheafData := {J : X.IdealSheafData | J ≤ H ∧ J.ofFiniteType}
+  have hSdir : DirectedOn (· ≤ ·) S := Scheme.IdealSheafData.directedOn_ofFiniteType_le H
+  have hSsup : sSup S = H := Scheme.IdealSheafData.sSup_ofFiniteType_le_eq H
+  haveI : Nonempty S := ⟨⟨⊥, bot_le, Scheme.IdealSheafData.ofFiniteType_bot⟩⟩
   -- the square of `H` is the supremum of the squares of the members of the family
   have hsq : H * H ≤ ⨆ J : S, (J.1 * J.1) := by
     conv_lhs => rw [← hSsup, sSup_eq_iSup']
@@ -200,8 +156,8 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
     exact le_iSup (fun J : S ↦ (J.1 * J.1).comap p) J
   obtain ⟨i, hi⟩ := Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup
     ((hKft.comap p).pow n) hBdir hAle
-  obtain ⟨hJle, hJft, hJtop⟩ : i.1 ≤ H ∧ i.1.ofFiniteType ∧ i.1.comap U.ι = ⊤ := i.2
-  set J : X.IdealSheafData := i.1 with hJdef
+  obtain ⟨hJle, hJft⟩ : i.1 ≤ H ∧ i.1.ofFiniteType := i.2
+  set J : X.IdealSheafData := i.1
   -- the second centre `I₂ = I₁ ^ 2 ⊓ (X ∖ V)`
   have hI₂V : ((J * J ⊔ K ^ n : X.IdealSheafData).support : Set X) ⊆ (V : Set X)ᶜ := by
     rw [Scheme.IdealSheafData.coe_support_sup]
@@ -224,4 +180,3 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
     exact disjoint_closure_range_of_blowupMap_sup hUV hI₂V hVU hYU hfac hw hcomm
 
 end AlgebraicGeometry
-

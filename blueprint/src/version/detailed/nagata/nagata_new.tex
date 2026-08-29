@@ -8296,7 +8296,7 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{def:nagata-immersion-into-fp-model,
     def:nagata-immersion-shrink-to-closed,
     def:nagata-closed-subscheme-fp-system}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.FinitePresentationApproximation}
 
   For $X\to S$ locally of finite type with $X$ qcqs and $S$ qcqs, form
   $i^{\mathrm{imm}}\colon X\to Y^{\mathrm{imm}}$, set
@@ -8313,7 +8313,8 @@ coefficients and relations and all later stages inherit the recorded data.
   {\cite[\href{https://stacks.math.columbia.edu/tag/09ZQ}{Tag 09ZQ}]{stacks-project}}]
   \label{lemma:nagata-finite-type-fp-model-system}
   \uses{def:nagata-finite-type-fp-model-system}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_locallyOfFinitePresentation,
+    AlgebraicGeometry.Scheme.Hom.nonempty_finitePresentationApproximation}
 
   Every $X_\alpha\to S$ is of finite presentation, every transition map is a
   closed immersion, every $i_\alpha$ is a closed immersion, and
@@ -8479,7 +8480,7 @@ coefficients and relations and all later stages inherit the recorded data.
   {\cite[\href{https://stacks.math.columbia.edu/tag/01ZJ}{Tag 01ZJ}]{stacks-project}}]
   \label{prop:nagata-finite-type-closed-in-fp}
   \uses{def:nagata-finite-type-closed-in-fp}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation}
 
   The constructed morphism $X^{\mathrm{fp}}\to S$ is separated and of
   finite presentation, and the constructed map
@@ -10301,11 +10302,113 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   quasi-coherent ideals may be checked on an affine cover.
 \end{proof}
 
+\begin{lemma}[The disjointness reduction in Case 3,
+  {\cite[Thm.~2.4, Case 3, Step 1, pp.~16--17]{ConradNagata}}]
+  \label{lemma:nagata-conrad-case3-disjointness-reduction}
+  \uses{def:nagata-admissible-blowup,
+    def:nagata-global-blowup,
+    def:nagata-scheme-theoretic-image,
+    lemma:nagata-conrad-disjointness-blowup}
+  \lean{AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le}
+
+  Let $X$ be qcqs, let $U\subseteq V\subseteq X$ be quasi-compact open
+  subschemes, let $p\colon Y\to X$ be a morphism with $Y$ qcqs, and let
+  $f\colon U\to Y$ be a section of $p$ over $U$ whose image is closed in
+  $p^{-1}(V)$.  There is a $V$-admissible blow-up
+  $q\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ such that, after
+  base change along $q$, the closure of the image of $f$ is disjoint from the
+  part lying over $\overline{q^{-1}(V\setminus U)}$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-qc-open-complement-ideal-exists,
+    lemma:nagata-finite-type-ideal-power-in-ideal,
+    lemma:nagata-ideal-directed-union-finite-type,
+    lemma:nagata-finite-type-ideal-compact}
+  We produce the two centres required by
+  \Cref{lemma:nagata-conrad-disjointness-blowup}, applied with $Z=Y$, with the
+  open immersions $U\subseteq V\subseteq X$, and with $f(U)=\Gamma_f$ in the
+  role of the scheme lying over $U$.
+
+  Let $\mathcal H$ be the ideal of the reduced structure on the closed subset
+  $\overline{V\setminus U}$, so $V(\mathcal H)=\overline{V\setminus U}$; since
+  $V\setminus U$ is closed in $V$, its closure misses $U$.  Give $X\setminus V$
+  a finite type closed subscheme structure $V(\mathcal K)$ using
+  \Cref{lemma:nagata-qc-open-complement-ideal-exists}.
+
+  We first check $p\bigl(p^{-1}(V(\mathcal H^2))\cap\overline{f(U)}\bigr)
+  \subseteq X\setminus V$ as sets.  Indeed a point of the left-hand side lies
+  in $\overline{V\setminus U}$, and if it lay in $V$ then, $f(U)$ being closed
+  in $p^{-1}(V)$, the point of $\overline{f(U)}$ above it would lie in $f(U)$
+  and so map into $U$, which is disjoint from $\overline{V\setminus U}$.  As
+  $\mathcal K$ is of finite type,
+  \Cref{lemma:nagata-finite-type-ideal-power-in-ideal} gives an $n$ with
+  \[
+    \mathcal K^n\cdot\mathcal O_Y\subseteq
+      \mathcal H^2\cdot\mathcal O_Y+\mathcal I_{\overline{f(U)}} .
+  \]
+
+  The ideal $\mathcal H$ need not be of finite type.  By
+  \Cref{lemma:nagata-ideal-directed-union-finite-type} it is the directed
+  supremum of its finite type quasi-coherent subideals $\mathcal I_{1,\alpha}$;
+  products and inverse images of ideals commute with directed suprema, so
+  $\mathcal H^2\cdot\mathcal O_Y+\mathcal I_{\overline{f(U)}}$ is the directed
+  supremum of the $\mathcal I_{1,\alpha}^2\cdot\mathcal O_Y+
+  \mathcal I_{\overline{f(U)}}$, and
+  \Cref{lemma:nagata-finite-type-ideal-compact} applied to the finite type
+  ideal $(\mathcal K\cdot\mathcal O_Y)^n$ produces an $\alpha$ with
+  \[
+    \mathcal K^n\cdot\mathcal O_Y\subseteq
+      \mathcal I_{1,\alpha}^2\cdot\mathcal O_Y+\mathcal I_{\overline{f(U)}} .
+  \]
+
+  Now take $\mathcal I_1=\mathcal I_{1,\alpha}$ and
+  $\mathcal I_2=\mathcal I_{1,\alpha}^2+\mathcal K^n$, so that
+  $T_2=V(\mathcal I_2)=T_1\cap V(\mathcal K^n)$ is disjoint from $V$, and
+  $\mathcal I=\mathcal I_1+\mathcal I_2$.  The centre $\mathcal I$ is of finite
+  type and $V(\mathcal I)\subseteq V(\mathcal I_2)\subseteq X\setminus V$, so
+  the blow-up is $V$-admissible; the containment
+  $\overline{V\setminus U}=V(\mathcal H)\subseteq V(\mathcal I_{1,\alpha})$
+  holds because $\mathcal I_{1,\alpha}\subseteq\mathcal H$, the scheme $f(U)$
+  lies over $U$ because $f$ is a section of $p$, and the displayed containment
+  is hypothesis~(3) of \Cref{def:nagata-conrad-disjointness-setup}.  So
+  \Cref{lemma:nagata-conrad-disjointness-blowup} applies and gives the
+  assertion.
+
+  (Conrad additionally arranges $\mathcal I_{1,\alpha}|_U=\mathcal O_U$; this
+  is not needed here, because $V(\mathcal I)\subseteq V(\mathcal K^n)$ is
+  already disjoint from $V$, hence from $U$.)
+\end{proof}
+
+\begin{lemma}[The smaller base in Case 3,
+  {\cite[Thm.~2.4, Case 3, Step 2, pp.~16--17]{ConradNagata}}]
+  \label{lemma:nagata-conrad-case3-smaller-base}
+  \lean{AlgebraicGeometry.exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff}
+
+  Let $U\subseteq V$ be open subschemes of a scheme $X$ with $U$ quasi-compact,
+  and let $S\subseteq X$ be a quasi-compact subset disjoint from
+  $\overline{V\setminus U}$.  There is a quasi-compact open subscheme
+  $X^{\circ}\subseteq X$ with $S\subseteq X^{\circ}$, $U\subseteq X^{\circ}$
+  and $X^{\circ}\cap V=U$.
+\end{lemma}
+
+\begin{proof}
+  Since $V\setminus U$ is closed in $V$ we have
+  $\overline{V\setminus U}\cap V=V\setminus U$; in particular the open set
+  $W=X\setminus\overline{V\setminus U}$ contains $U$ and satisfies
+  $W\cap V=U$.  It contains $S$ by hypothesis, so $S\cup U$ is a quasi-compact
+  subset of $W$.  The underlying space of a scheme has a basis of quasi-compact
+  opens, so $S\cup U$ is contained in a quasi-compact open
+  $X^{\circ}\subseteq W$.  Then $X^{\circ}\cap V\subseteq W\cap V=U$ and
+  $U\subseteq X^{\circ}\cap V$, so $X^{\circ}\cap V=U$.
+\end{proof}
+
 \begin{lemma}[Quasi-affine target, $U\subseteq V$,
   {\cite[Thm.~2.4, Case 3, pp.~16--17]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-affine-general}
   \uses{def:nagata-quasi-affine-morphism,
-    lemma:nagata-conrad-disjointness-blowup,
+    lemma:nagata-conrad-case3-disjointness-reduction,
+    lemma:nagata-conrad-case3-smaller-base,
     lemma:nagata-conrad-quasi-affine-equal-opens,
     lemma:nagata-extend-admissible-blowup,
     lemma:nagata-admissible-blowup-comp,
@@ -10332,39 +10435,25 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
 \end{lemma}
 
 \begin{proof}
-  \uses{def:nagata-scheme-theoretic-image,
-    lemma:nagata-finite-type-ideal-power-in-ideal,
-    lemma:nagata-qc-open-complement-ideal-exists,
-    lemma:nagata-conrad-dense-in-admissible-blowup}
+  \uses{lemma:nagata-conrad-dense-in-admissible-blowup}
   \emph{Step 1: separating $p(\overline{f(U)})$ from $\overline{V\setminus U}$.}
-  This is the disjointness blow-up, formalized as
-  \texttt{AlgebraicGeometry.exists\_isAdmissible\_disjoint\_closure\_range\_of\_le}:
-  there is a $V$-admissible blow-up $\pi_1\colon X_1\to X$ such that, writing
+  \Cref{lemma:nagata-conrad-case3-disjointness-reduction} gives a $V$-admissible
+  blow-up $\pi_1\colon X_1\to X$ such that, writing
   $p_1\colon Y_1=Y\times_XX_1\to X_1$ for the base change of $p$ and
   $f_1\colon\pi_1^{-1}(U)\to Y_1$ for the induced section, the closure of
   $f_1\bigl(\pi_1^{-1}(U)\bigr)$ is disjoint from
-  $p_1^{-1}\bigl(\overline{\pi_1^{-1}(V\setminus U)}\bigr)$.  Its proof applies
-  \Cref{lemma:nagata-conrad-disjointness-blowup} to $Z=Y$, to the open
-  immersions $U\subseteq V\subseteq X$ and to the graph of $f$, with
-  $\mathcal I_1$ a finite type subideal of the ideal of the reduced structure
-  on $\overline{V\setminus U}$ which is still the unit ideal on $U$, and with
-  $\mathcal I_2=\mathcal I_1^2+\mathcal I_{X\setminus V}^n$ for an exponent $n$
-  supplied by \Cref{lemma:nagata-finite-type-ideal-power-in-ideal}.  From now
-  on we work over $X_1$, and we replace $U$, $V$, $Y$, $p$ and $f$ by their
-  inverse images and base changes there.
+  $p_1^{-1}\bigl(\overline{\pi_1^{-1}(V\setminus U)}\bigr)$.
 
-  \emph{Step 2: passing to a smaller base.}  This is
-  \texttt{AlgebraicGeometry.exists\_isCompact\_opens\_inf\_eq\_of\_disjoint\_closure\_sdiff}:
-  a compact set disjoint from $\overline{V\setminus U}$ is contained in a
-  quasi-compact open $X^{\circ}$ with $U\subseteq X^{\circ}$ and
-  $X^{\circ}\cap V=U$.  Applied to the compact set
-  $p_1\bigl(\overline{f_1(U)}\bigr)$, which Step 1 made disjoint from
-  $\overline{V\setminus U}$, it gives such an $X^{\circ}\subseteq X_1$
-  containing $p_1\bigl(\overline{f_1(U)}\bigr)$.  Contrary to what an earlier
-  version of this proof said, this needs no filtered-union argument on ideals:
-  it is purely topological, and follows from the fact that the underlying space
-  of a scheme is a prespectral space, so that a compact set inside an open set
-  is contained in a quasi-compact open inside it.
+  \emph{Step 2: passing to a smaller base.}  The closure of
+  $f_1\bigl(\pi_1^{-1}(U)\bigr)$ is quasi-compact, so its image under $p_1$ is a
+  quasi-compact subset of $X_1$, and Step 1 makes it disjoint from
+  $\overline{\pi_1^{-1}(V\setminus U)}$.  So
+  \Cref{lemma:nagata-conrad-case3-smaller-base} applies over $X_1$ and produces a
+  quasi-compact open $X^{\circ}\subseteq X_1$ containing both
+  $p_1\bigl(\overline{f_1(U)}\bigr)$ and $\pi_1^{-1}(U)$, with
+  $X^{\circ}\cap\pi_1^{-1}(V)=\pi_1^{-1}(U)$.  From now on we work over $X_1$
+  and write $U$, $V$, $Y$, $p$, $f$ for their inverse images and base changes
+  there.
 
   \emph{Step 3: applying Case 2.}  Put $Y^{\circ}=p_1^{-1}(X^{\circ})$.  The
   morphism $Y^{\circ}\to X^{\circ}$ is separated, locally of finite type and
