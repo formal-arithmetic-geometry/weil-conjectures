@@ -26,6 +26,7 @@ public import WeilConjectures.Blowup.PartialSectionExtension
 public import WeilConjectures.Blowup.PartialSectionExtensionReduction
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
+public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
@@ -106,6 +107,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
