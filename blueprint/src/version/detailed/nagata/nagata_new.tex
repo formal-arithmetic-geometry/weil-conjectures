@@ -8234,7 +8234,9 @@ coefficients and relations and all later stages inherit the recorded data.
 
 \begin{definition}[Finite-presentation closed-subscheme system]
   \label{def:nagata-closed-subscheme-fp-system}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.FGSub,
+    AlgebraicGeometry.Scheme.IdealSheafData.fgSubDiagram,
+    AlgebraicGeometry.Scheme.IdealSheafData.fgSubCone}
 
   Let $X=V(\mathcal I)\hookrightarrow Y$ be closed with $Y$ qcqs.  Let
   $A_{X/Y}$ be the directed set of finite type quasi-coherent subideals
@@ -8251,7 +8253,10 @@ coefficients and relations and all later stages inherit the recorded data.
   {\cite[\href{https://stacks.math.columbia.edu/tag/09ZP}{Tag 09ZP}]{stacks-project}}]
   \label{lemma:nagata-closed-subscheme-fp-system}
   \uses{def:nagata-closed-subscheme-fp-system}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.isLimitFgSubCone,
+    AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_of_mem,
+    AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion_fgSubDiagram_map,
+    AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation_fgSub_subschemeι}
 
   Every $X_\alpha\hookrightarrow Y$ is of finite presentation, all
   transitions are closed immersions, and the canonical map
@@ -8259,12 +8264,31 @@ coefficients and relations and all later stages inherit the recorded data.
 \end{lemma}
 
 \begin{proof}
-  A quasi-coherent ideal on a qcqs scheme is the filtered union of its finite
-  type quasi-coherent subideals.  Finite type of $\mathcal I_\alpha$ is
-  equivalent to finite presentation of $X_\alpha\hookrightarrow Y$.  On an
-  affine open, the coordinate ring of the limit is the quotient by
-  $\varinjlim\mathcal I_\alpha=\mathcal I$, so the limit is $X$; these affine
-  identifications glue.
+  Finite type of $\mathcal I_\alpha$ is equivalent to finite presentation of
+  $X_\alpha\hookrightarrow Y$, and each transition $X_\beta\to X_\alpha$ is a
+  closed immersion because its composite with the closed immersion
+  $X_\alpha\hookrightarrow Y$ is the closed immersion
+  $X_\beta\hookrightarrow Y$.
+
+  For the limit, the content is that $\mathcal I$ is the union of its finite
+  type subideals.  We prove this by absolute Noetherian approximation of $Y$
+  rather than by the quasi-coherent extension theorem
+  (\href{https://stacks.math.columbia.edu/tag/01PF}{Tag 01PF}): write
+  $Y=\varprojlim_j Y_j$ with $Y_j$ Noetherian and affine transition maps.  An
+  affine open of $Y$ is the preimage of an affine open $V$ of some stage $Y_j$,
+  and a section of $\mathcal I$ over it comes from a section over $V$ at a
+  later stage; so we may assume it comes from $Y_j$.  The ideal
+  $\mathcal K_j\subseteq\mathcal O_{Y_j}$ cutting out the scheme-theoretic
+  image of $X$ in $Y_j$ is of finite type, because a closed immersion into a
+  Noetherian scheme is of finite presentation, and its inverse image
+  $\mathcal K_j\cdot\mathcal O_Y$ is a finite type subideal of $\mathcal I$
+  containing the given section.
+
+  Finally, if $T$ is any scheme with compatible maps $T\to X_\alpha$, then the
+  induced map $T\to Y$ has $\mathcal I_\alpha$ in its kernel ideal for every
+  $\alpha$, hence has $\mathcal I$ in its kernel ideal by the exhaustion just
+  proved; so it factors uniquely through $X=V(\mathcal I)$ by the universal
+  property of closed immersions.  This is exactly the limit property.
 \end{proof}
 
 \begin{definition}[Finite-presentation model system of a finite-type morphism]
@@ -8335,38 +8359,24 @@ coefficients and relations and all later stages inherit the recorded data.
   glues these chart calculations to $\Delta_{X/S}$.
 \end{proof}
 
-\begin{lemma}[Existence of a separated stage over a fixed base]
-  \label{lemma:nagata-fixed-base-separated-stage-exists}
-  \uses{lemma:nagata-diagonal-finite-presentation}
-  \lean{AlgebraicGeometry.Scheme.exists_isSeparated_app_of_isLimit}
+\begin{lemma}[Existence of a separated stage, absolute case,
+  {\cite[\href{https://stacks.math.columbia.edu/tag/086Q}{Tag 086Q}]{stacks-project}}]
+  \label{lemma:nagata-separated-stage-exists-absolute}
+  \lean{AlgebraicGeometry.Scheme.exists_isSeparated_of_isLimit}
 
-  Let $X=\varprojlim_\alpha X_\alpha$ over a quasi-separated base $S$, where
-  every $X_\alpha\to S$ is of finite presentation, the terms are qcqs, and
-  the transition maps are affine.  If $X\to S$ is separated, then there is an
-  index $\alpha_0$ such that $X_\alpha\to S$ is separated for every
-  $\alpha\geq\alpha_0$.
+  Let $Y=\varprojlim_\alpha Y_\alpha$ be a cofiltered limit of qcqs schemes with
+  affine transition maps.  If $Y$ is separated, then there is an index
+  $\alpha_0$ such that $Y_\alpha$ is separated for every $\alpha\geq\alpha_0$.
 \end{lemma}
 
 \begin{proof}
-  \uses{lemma:nagata-filtered-colimit-finite-data,
-    lemma:nagata-directed-finite-upper-bound}
-  Since $X_{\alpha_1}$ is quasi-compact for one fixed index $\alpha_1$, its
-  image meets only finitely many affine opens $V_1,\dots,V_n$ of $S$ covering
-  it, and every $X_\alpha$ with $\alpha\ge\alpha_1$ maps into
-  $V_1\cup\dots\cup V_n$.  Separatedness is local on the target, so it suffices
-  to treat each $V_k$ separately, that is, to prove the \emph{absolute}
-  statement: if $Y=\varprojlim_\alpha Y_\alpha$ is a cofiltered limit of qcqs
-  schemes with affine transition maps and $Y$ is separated, then $Y_\alpha$ is
-  separated for all $\alpha$ past some stage (Stacks
-  \href{https://stacks.math.columbia.edu/tag/086Q}{Tag 086Q}; in Lean,
-  \texttt{AlgebraicGeometry.Scheme.exists\_isSeparated\_of\_isLimit}).
-
-  For the absolute statement, choose a finite affine open cover
-  $U_1,\dots,U_m$ of one stage $Y_0$ and let $U_{\alpha,k}$, $U_k$ denote the
-  inverse images in $Y_\alpha$ and in $Y$; these are affine because the
-  transition maps are affine.  A scheme covered by affine opens whose pairwise
-  intersections are affine, and over which the sections are generated by the
-  sections of the two members, is separated; so two things must be descended.
+  Choose a finite affine open cover $U_1,\dots,U_m$ of one stage
+  $Y_{\alpha_1}$ and let $U_{\alpha,k}$, $U_k$ denote the inverse images in
+  $Y_\alpha$ and in $Y$; these are affine because the transition maps are
+  affine.  A scheme covered by affine opens whose pairwise intersections are
+  affine, and for which the sections over such an intersection are generated by
+  the sections of the two members, is separated; so two things must be
+  descended.
   First, $U_{k_1}\cap U_{k_2}$ is affine because $Y$ is separated, hence
   $U_{\alpha,k_1}\cap U_{\alpha,k_2}$ is affine for all $\alpha$ past some
   stage by Stacks \href{https://stacks.math.columbia.edu/tag/01Z6}{Tag 01Z6}.
@@ -8380,6 +8390,35 @@ coefficients and relations and all later stages inherit the recorded data.
   persists at every later stage because the sections over the intersection at a
   later stage are generated by those of the earlier stage together with those of
   the corresponding member of the cover.
+\end{proof}
+
+\begin{lemma}[Existence of a separated stage over a fixed base]
+  \label{lemma:nagata-fixed-base-separated-stage-exists}
+  \uses{lemma:nagata-separated-stage-exists-absolute}
+  \lean{AlgebraicGeometry.Scheme.exists_isSeparated_app_of_isLimit}
+
+  Let $X=\varprojlim_\alpha X_\alpha$ over a base $S$, where the terms are
+  qcqs, the transition maps are affine, and every $X_\alpha\to S$ is
+  quasi-compact --- which is automatic when $S$ is quasi-separated.  If
+  $X\to S$ is separated, then there is an index $\alpha_0$ such that
+  $X_\alpha\to S$ is separated for every $\alpha\geq\alpha_0$.  No
+  finite-presentation hypothesis on the $X_\alpha\to S$ is needed.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-separated-stage-exists-absolute}
+  Since $X_{\alpha_1}$ is quasi-compact for one fixed index $\alpha_1$, its
+  image meets only finitely many affine opens $V_1,\dots,V_n$ of $S$ covering
+  it, and every $X_\alpha$ with $\alpha\ge\alpha_1$ maps into
+  $V_1\cup\dots\cup V_n$.  Separatedness is local on the target, so it suffices
+  to treat each $V_k$ separately: it is enough that the preimage of $V_k$ in
+  $X_\alpha$ is a separated scheme, since $V_k$ is affine.  That preimage in
+  $X$ is separated, because $X\to S$ is separated and $V_k$ is affine, and it
+  is the limit of the preimages of $V_k$ in the $X_\alpha$, a cofiltered system
+  of qcqs schemes with affine transition maps.  So
+  \Cref{lemma:nagata-separated-stage-exists-absolute} applies to each of the
+  finitely many $k$, and a common lower bound of the resulting indices is the
+  required $\alpha_0$.
 \end{proof}
 
 \begin{definition}[Selected stage for fixed-base separatedness]
@@ -9716,7 +9755,8 @@ are glued along isomorphic open subschemes.
   \uses{def:nagata-admissible-blowup,
     lemma:nagata-qc-open-complement-ideal-exists,
     lemma:nagata-conrad-dense-in-admissible-blowup}
-  \lean{}
+  \lean{AlgebraicGeometry.exists_isAdmissible_isSchemeTheoreticallyDominant_preimage,
+    AlgebraicGeometry.IsAdmissible.exists_comp_isSchemeTheoreticallyDominant_preimage}
 
   Let $X$ be qcqs and let $U\subseteq X$ be a quasi-compact open.  There is a
   $U$-admissible blow-up $X_1\to X$ in which $U$ is scheme-theoretically
@@ -10093,6 +10133,32 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   quasi-domination.
 \end{proof}
 
+\begin{lemma}[Morphisms into a separated target agreeing on a
+  scheme-theoretically dominant subscheme]
+  \label{lemma:nagata-ext-scheme-theoretically-dominant-separated}
+  \uses{def:nagata-scheme-theoretically-dense-open}
+  \lean{AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant_of_isSeparated,
+    AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant_of_isSeparated'}
+
+  Let $s\colon Y\to Z$ be separated and let $f,g\colon T\to Y$ satisfy
+  $s\circ f=s\circ g$.  If $\iota\colon W\to T$ is scheme-theoretically
+  dominant and $f\circ\iota=g\circ\iota$, then $f=g$.  In particular two
+  $Z$-morphisms $T\to Y$ into a separated $Z$-scheme $Y$ that agree on a
+  scheme-theoretically dense open of $T$ are equal.
+
+  No reducedness of $T$ is needed: this is the scheme-theoretic analogue of the
+  classical statement for a dominant $\iota$ and reduced $T$.
+\end{lemma}
+
+\begin{proof}
+  Passing to $Z$-schemes, the equalizer $E$ of $f$ and $g$ maps to $T$ by a
+  closed immersion $e$ because $s$ is separated.  As $f\circ\iota=g\circ\iota$,
+  the morphism $\iota$ factors as $\iota=e\circ l$, so the kernel ideal of $e$
+  is contained in that of $\iota$, which is trivial by scheme-theoretic
+  dominance.  A closed immersion with trivial kernel is an isomorphism, hence
+  $e$ is an epimorphism and $f=g$ follows from $f\circ e=g\circ e$.
+\end{proof}
+
 \begin{lemma}[Quasi-affine target over a qcqs base, $U=V$,
   {\cite[Thm.~2.4, Case 2, pp.~15--16]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-affine-equal-opens}
@@ -10115,7 +10181,8 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   \uses{lemma:nagata-conrad-dense-in-admissible-blowup,
     lemma:nagata-scheme-image-universal,
     lemma:nagata-ideal-directed-union-finite-type,
-    lemma:nagata-finite-type-ideal-compact}
+    lemma:nagata-finite-type-ideal-compact,
+    lemma:nagata-ext-scheme-theoretically-dominant-separated}
   Choose a finite affine open cover $X=\bigcup_{i=0}^nW_i$ and put
   $U_i=U\cap W_i$, a dense quasi-compact open of $W_i$, and
   $Y_i=p^{-1}(W_i)$, quasi-affine and of finite type over $W_i$.  Let

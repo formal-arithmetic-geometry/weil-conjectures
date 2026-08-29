@@ -68,6 +68,9 @@ inclusion `U.ι` is scheme-theoretically dominant:
   restricts to an isomorphism over `W`, the open `f ⁻¹ᵁ W` is scheme-theoretically
   dense in `X'` and `U ≤ W` is scheme-theoretically dense in `X`, then `f ⁻¹ᵁ U` is
   scheme-theoretically dense in `X'`.
+- `AlgebraicGeometry.IsSchemeTheoreticallyDominant.preimage_ι_of_isIso`: the inverse
+  image of a scheme-theoretically dense open under an isomorphism is
+  scheme-theoretically dense.
 -/
 
 @[expose] public section
@@ -299,6 +302,20 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
     rw [hsq]
     infer_instance
   have he : (f ⁻¹ᵁ U).ι = X'.homOfLE hpre ≫ (f ⁻¹ᵁ W).ι := (Scheme.homOfLE_ι _ _).symm
+  rw [he]
+  infer_instance
+
+/-- **Scheme-theoretic density of an open transports along an isomorphism**: if `f` is an
+isomorphism and `U` is a scheme-theoretically dense open of its target, then `f ⁻¹ᵁ U` is
+scheme-theoretically dense in the source. -/
+theorem IsSchemeTheoreticallyDominant.preimage_ι_of_isIso (f : X' ⟶ X) [IsIso f]
+    (U : X.Opens) [IsSchemeTheoreticallyDominant U.ι] :
+    IsSchemeTheoreticallyDominant (f ⁻¹ᵁ U).ι := by
+  have : IsIso (f ∣_ U) :=
+    IsZariskiLocalAtTarget.restrict (P := .isomorphisms Scheme) (inferInstanceAs (IsIso f)) U
+  have he : (f ⁻¹ᵁ U).ι = (f ∣_ U) ≫ U.ι ≫ inv f := by
+    rw [← Category.assoc, morphismRestrict_ι, Category.assoc, IsIso.hom_inv_id,
+      Category.comp_id]
   rw [he]
   infer_instance
 
