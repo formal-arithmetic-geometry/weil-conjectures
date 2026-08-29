@@ -85,6 +85,14 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
   rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
   exact (hI U le_top).mul (hK U le_top)
 
+/-- Finite-type ideal sheaves are stable under powers. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.pow
+    {X : Scheme.{u}} {I : X.IdealSheafData} (hI : I.ofFiniteType) (n : ℕ) :
+    (I ^ n).ofFiniteType := by
+  induction n with
+  | zero => simpa using Scheme.IdealSheafData.ofFiniteType_top
+  | succ n ih => rw [pow_succ]; exact ih.mul hI
+
 /-- **Finite-type subsheaves through prescribed sections** (a corollary of the
 finite-type extension theorem, Stacks Project Tag 01PF): if `F` is a finitely generated
 subideal of the sections of an ideal sheaf `H` over an affine open `V` of a qcqs
