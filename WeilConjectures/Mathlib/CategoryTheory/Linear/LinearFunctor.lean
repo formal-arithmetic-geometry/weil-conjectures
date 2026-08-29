@@ -22,7 +22,7 @@ universe u₁ u₂ v₁ v₂
 
 namespace CategoryTheory.Adjunction
 
-open Functor
+open CategoryTheory.Functor
 
 variable {R : Type*} [Semiring R] {C : Type u₁} {D : Type u₂} [Category.{v₁} C]
   [Category.{v₂} D] [Preadditive C] [Preadditive D] [Linear R C] [Linear R D]
