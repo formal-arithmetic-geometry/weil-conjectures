@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 
 /-!

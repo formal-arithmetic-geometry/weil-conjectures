@@ -57,12 +57,12 @@ both sides vanish there, and the two restrictions are jointly conservative. -/
 theorem Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClopen_range
     (hj : IsClopen (Set.range j.base)) :
     IsIso (Etale.openImmersionLowerShriekToLowerStar A j) := by
-  let W := Scheme.Etale.clopenComplOpens j hj
+  let W := Scheme.Hom.complOpensRange j hj.isClosed
   have hcompl : IsCompl j.opensRange W.ι.opensRange := by
     rw [Scheme.Opens.opensRange_ι]
-    exact Scheme.Etale.isCompl_clopenComplOpens j hj
+    exact Scheme.Hom.isCompl_complOpensRange j hj.isClosed
   have hjk : Set.range j.base ∩ Set.range W.ι.base = ∅ := by
-    rw [Scheme.Etale.range_ι_clopenComplOpens]
+    rw [Scheme.Hom.range_ι_complOpensRange]
     exact Set.inter_compl_self _
   have happ : ∀ F, IsIso ((Etale.openImmersionLowerShriekToLowerStar A j).app F) := fun F ↦
     Etale.isIso_of_isCompl_of_isIso_openImmersionRestriction A j W.ι _ hcompl inferInstance
