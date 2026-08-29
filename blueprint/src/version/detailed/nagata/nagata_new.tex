@@ -10523,99 +10523,97 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   \label{lemma:nagata-conrad-graph-closure-quasi-finite}
   \uses{lemma:nagata-conrad-quasi-affine-general,
     def:nagata-scheme-theoretic-image,
-    def:nagata-strict-transform,
-    cor:nagata-blowup-product-common-refinement}
-  \lean{}
+    def:nagata-admissible-blowup}
+  \lean{AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph}
 
-  Let $X$ be qcqs, let $U\subseteq V\subseteq X$ be dense quasi-compact opens,
-  let $p\colon Y\to X$ be separated and of finite type with $Y$ qcqs, and let
-  $(U,f)$ be a quasi-domination of $V$ over $Y$.  There is a $V$-admissible
-  blow-up $q\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ with the
+  Let $X$ be qcqs, let $U\subseteq V\subseteq X$ be quasi-compact opens, let
+  $p\colon Y\to X$ be separated and locally of finite type with $Y$ qcqs, and
+  let $f\colon U\to Y$ be a section of $p$ over $U$ whose image is closed in
+  $p^{-1}(V)$.  There is a $V$-admissible blow-up
+  $q\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ with the
   following property.  Let $\sigma\colon U\hookrightarrow\widetilde X$ be the
-  canonical open immersion, let
-  $F=(\sigma,f)\colon U\to\widetilde X\times_XY$ be the induced quasi-compact
+  canonical section of $q$ over $U$, let
+  $F=(f,\sigma)\colon U\to Y\times_X\widetilde X$ be the induced quasi-compact
   immersion, and let $\overline{F(U)}$ be its scheme-theoretic image.  Then
   \[
     \overline{F(U)}\longrightarrow\widetilde X
   \]
-  is quasi-finite and separated.
+  is quasi-finite (locally quasi-finite, locally of finite type and
+  quasi-compact) and separated.
+
+  Neither $U$ nor $V$ is assumed dense in $X$.
 \end{lemma}
 
 \begin{proof}
-  \uses{lemma:nagata-finite-type-ideal-extension-closed,
-    lemma:nagata-strict-transform-ambient-closed}
-  Choose a finite affine open cover $\{Y_i\}$ of $Y$, small enough that each
-  composite $Y_i\hookrightarrow Y\xrightarrow{p}X$ factors through an affine
-  open of $X$; then each $Y_i\to X$ is quasi-affine.  Put
-  $U_i=f^{-1}(Y_i)\subseteq U$, let $X_i=\overline{U_i}$ be the
-  scheme-theoretic image of the quasi-compact open immersion $U_i\to X$, and
-  put $V_i=X_i\cap V$.  Then $U_i$ is dense in $X_i$, the induced morphism
-  $p_i\colon Y_i\cap p^{-1}(X_i)\to X_i$ is quasi-affine and of finite type,
-  and $(U_i,f_i)$ is a quasi-domination of $V_i$ over $Y_i\cap p^{-1}(X_i)$.
-  So \Cref{lemma:nagata-conrad-quasi-affine-general} applies: there is a finite
-  type quasi-coherent ideal $\mathcal I_i$ on $X_i$ with
-  $V(\mathcal I_i)\subseteq X_i\setminus V_i=(X\setminus V)\cap X_i$ as sets
-  such that $\widetilde X_i=\operatorname{Bl}_{\mathcal I_i}(X_i)$
-  quasi-dominates $Y_i\cap p^{-1}(X_i)$ over $X_i$ in a manner extending
-  $f_i$.  Concretely this supplies an open subscheme
-  $\widetilde V_i\subseteq\widetilde X_i$ containing $U_i$ and an
-  $\widetilde X_i$-section
-  \[
-    F_i\colon\widetilde V_i\longrightarrow
-      \widetilde X_i\times_{X_i}\bigl(Y_i\cap p^{-1}(X_i)\bigr)
-  \]
-  extending the graph of $f_i$ and having closed image, hence a closed
-  immersion.
+  \uses{thm:nagata-blowup-universal-property,
+    lemma:nagata-invertible-product-factor,
+    def:nagata-quasi-affine-morphism}
+  Choose a finite affine open cover $\{Z\}_{Z\in S}$ of $Y$ and fix one of its
+  members $Z$.  Since $Z$ is affine it is quasi-affine, and the composite
+  $p_Z\colon Z\hookrightarrow Y\xrightarrow{p}X$ is quasi-compact because $Z$
+  is quasi-compact and $X$ is quasi-separated; so $p_Z$ is quasi-affine as a
+  morphism (\Cref{def:nagata-quasi-affine-morphism}).  Put
+  $U_Z=U\cap f^{-1}(Z)$, an open of $X$ contained in $U$, hence in $V$, and
+  quasi-compact because $f$ is quasi-compact.  The restriction
+  $f_Z\colon U_Z\to Z$ of $f$ is a section of $p_Z$ over $U_Z$, and its image
+  is the trace of $f(U)$ on $Z$, hence closed in $p_Z^{-1}(V)=Z\cap p^{-1}(V)$.
 
-  As in Case 2 there is a finite type quasi-coherent ideal $\mathcal J_i$ on
-  $X$ with $V(\mathcal J_i)$ disjoint from $V$ and
-  $\mathcal J_i\cdot\mathcal O_{X_i}=\mathcal I_i$
-  (\Cref{lemma:nagata-finite-type-ideal-extension-closed} applied to the
-  preimage of $\mathcal I_i$ under $\mathcal O_X\twoheadrightarrow
-  \mathcal O_{X_i}$).  Put $\mathcal I=\prod_i\mathcal J_i$, so
+  So \Cref{lemma:nagata-conrad-quasi-affine-general} applies to
+  $(U_Z\subseteq V, f_Z, p_Z)$ and produces a finite type quasi-coherent ideal
+  $\mathcal I_Z$ on $X$ with $V(\mathcal I_Z)\cap V=\varnothing$, an open
+  $W_Z\subseteq\operatorname{Bl}_{\mathcal I_Z}(X)$ containing the preimage of
+  $U_Z$, and an $X$-morphism $g_Z\colon W_Z\to Z$ extending $f_Z$ whose graph is
+  closed in $Z\times_X\operatorname{Bl}_{\mathcal I_Z}(X)$.
+
+  \emph{Unlike Conrad we do not replace $X$ by the scheme-theoretic image
+  $\overline{U_Z}$.}  Conrad does so in order to make $U_Z$ dense, which his
+  quasi-affine case requires; the form of that case proved here
+  (\Cref{lemma:nagata-conrad-quasi-affine-general}) carries no density
+  hypothesis, so the reduction to the smaller base --- and with it the
+  extension of $\mathcal I_Z$ from $\overline{U_Z}$ back to $X$ and the
+  ambient closedness of the strict transform --- is unnecessary.
+
+  Put $\mathcal I=\prod_{Z\in S}\mathcal I_Z$; it is of finite type and
+  $V(\mathcal I)=\bigcup_ZV(\mathcal I_Z)$ misses $V$, so
   $q\colon\widetilde X=\operatorname{Bl}_{\mathcal I}(X)\to X$ is a
-  $V$-admissible blow-up.
+  $V$-admissible blow-up.  For each $Z\in S$ the inverse image of
+  $\mathcal I_Z$ on $\widetilde X$ is a factor of the invertible ideal
+  $\mathcal I\cdot\mathcal O_{\widetilde X}$, hence invertible
+  (\Cref{lemma:nagata-invertible-product-factor}), so the universal property of
+  blowing up (\Cref{thm:nagata-blowup-universal-property}) provides a
+  comparison $c_Z\colon\widetilde X\to\operatorname{Bl}_{\mathcal I_Z}(X)$ over
+  $X$.
 
-  We check that $\overline{F(U)}\to\widetilde X$ has finite fibres; being of
-  finite type, it is then quasi-finite.  By
-  \Cref{lemma:nagata-strict-transform-ambient-closed} the $U_i$-admissible
-  blow-up $\widetilde X_i=\operatorname{Bl}_{\mathcal I_i}(X_i)$ is, as a
-  strict transform, a closed subscheme of
-  $\operatorname{Bl}_{\mathcal J_i}(X)$ over the closed immersion
-  $X_i\hookrightarrow X$.  Let
-  \[
-    X_i'=\widetilde X\times_{\operatorname{Bl}_{\mathcal J_i}(X)}\widetilde X_i,
-  \]
-  the fibre product taken along the comparison morphism
-  $\widetilde X\to\operatorname{Bl}_{\mathcal J_i}(X)$ of
-  \Cref{cor:nagata-blowup-product-common-refinement} and along the closed
-  immersion $\widetilde X_i\hookrightarrow\operatorname{Bl}_{\mathcal J_i}(X)$;
-  so $X_i'\to\widetilde X$ is a closed immersion and the composite
-  $X_i'\to\widetilde X\to X$ is the restriction of $q$.  Since
-  $U_i\subseteq V$, the morphism $X_i'\to\widetilde X_i$ is an isomorphism over
-  $U_i$.
+  Write $\Omega_Z=\mathrm{pr}_Y^{-1}(Z)\subseteq Y\times_X\widetilde X$, an open
+  subscheme, and let $\Phi_Z$ be the graph of
+  $c_Z^{-1}(W_Z)\to W_Z\xrightarrow{g_Z}Z$, a morphism
+  $c_Z^{-1}(W_Z)\to Y\times_X\widetilde X$ landing in $\Omega_Z$ and satisfying
+  $\mathrm{pr}_{\widetilde X}\circ\Phi_Z=\iota_{c_Z^{-1}(W_Z)}$.  Two things
+  hold.
+  \begin{enumerate}
+    \item \emph{$\Phi_Z$ is injective over $\widetilde X$}: this is immediate
+      from $\mathrm{pr}_{\widetilde X}\circ\Phi_Z=\iota_{c_Z^{-1}(W_Z)}$.
+    \item \emph{The range of $\Phi_Z$ is closed in $\Omega_Z$}: indeed
+      $\Omega_Z=Z\times_X\widetilde X$ and
+      $c_Z^{-1}(W_Z)=W_Z\times_{\operatorname{Bl}_{\mathcal I_Z}(X)}\widetilde X$,
+      so $\Phi_Z$ is the base change of the closed graph of $g_Z$ along
+      $\Omega_Z\to Z\times_X\operatorname{Bl}_{\mathcal I_Z}(X)$, and the range
+      of a base change is the inverse image of the range.
+  \end{enumerate}
 
-  Base-changing the closed immersion $F_i$ along $X_i'\to\widetilde X_i$ gives
-  an open subscheme $U_i'\subseteq X_i'$ containing $q^{-1}(U_i)\cong U_i$ and
-  a closed immersion of $X_i'$-schemes
-  \[
-    \varphi_i\colon U_i'\hookrightarrow
-      X_i'\times_{X_i}\bigl(Y_i\cap p^{-1}(X_i)\bigr),
-  \]
-  whose image contains the closure of $F(U_i)$ in the target.  Now
-  $U_i=f^{-1}(Y_i)$, so the underlying space of $\overline{F(U)}$ meets
-  $\widetilde X\times_XY_i$ in the relative closure of $F(U_i)$.  Using the
-  closed immersion
-  \[
-    X_i'\times_{X_i}\bigl(Y_i\cap p^{-1}(X_i)\bigr)\cong X_i'\times_XY_i
-      \hookrightarrow\widetilde X\times_XY_i
-  \]
-  we conclude $\overline{F(U)}\cap(\widetilde X\times_XY_i)
-  \subseteq\varphi_i(U_i')$ as sets, whence
-  $\overline{F(U)}\subseteq\bigcup_i\varphi_i(U_i')$.  Each composite
-  $\varphi_i(U_i')\hookrightarrow X_i'\to\widetilde X$ is set-theoretically
-  injective, so the fibres of $\overline{F(U)}\to\widetilde X$ are finite.
-  Finally, $\overline{F(U)}\to\widetilde X$ is separated because $Y\to X$ is.
+  Finally, $F(U)\cap\Omega_Z$ is contained in the range of $\Phi_Z$: a point of
+  it is $F(u)$ with $f(u)\in Z$, so $u\in U_Z$, and there $\sigma$ lands in
+  $c_Z^{-1}(W_Z)$ and $g_Z$ agrees with $f$.  As $\Omega_Z$ is open,
+  $\overline{F(U)}\cap\Omega_Z$ is the closure of $F(U)\cap\Omega_Z$ inside
+  $\Omega_Z$, which by (2) is again contained in the range of $\Phi_Z$.  The
+  $\Omega_Z$ cover $Y\times_X\widetilde X$, so the underlying space of
+  $\overline{F(U)}$ is covered by the finitely many sets $\Phi_Z(c_Z^{-1}(W_Z))$,
+  each injective over $\widetilde X$ by (1); hence the fibres of
+  $\overline{F(U)}\to\widetilde X$ are finite.  Being locally of finite type
+  (as a closed immersion followed by a base change of $p$), the morphism is
+  therefore locally quasi-finite.  It is quasi-compact because
+  $\overline{F(U)}$ is quasi-compact and $\widetilde X$ quasi-separated, and
+  separated because $p$ is.
 \end{proof}
 
 \begin{lemma}[Zariski's Main Theorem as a factorization]

@@ -21,6 +21,7 @@ public import WeilConjectures.Blowup.EliminationOfIndeterminacy
 public import WeilConjectures.Blowup.Extension
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
+public import WeilConjectures.Blowup.GraphQuasiFinite
 public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.PartialSectionExtension
 public import WeilConjectures.Blowup.PartialSectionExtensionReduction
