@@ -307,7 +307,8 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
         exact hGrange ⟨w, rfl⟩
     -- transport along the comparison isomorphism
     rw [hΓ]
-    have he : Function.Surjective ⇑(iso.inv ∣_ W') := Scheme.Hom.surjective_of_isIso _
+    have he : Function.Surjective ⇑(iso.inv ∣_ W') :=
+      (Scheme.homeoOfIso (asIso (iso.inv ∣_ W'))).surjective
     have hrange : Set.range ⇑((iso.inv ∣_ W') ≫ pullback.lift G W'.ι hG ≫ Φ.hom) =
         ⇑Φ.hom '' Set.range ⇑(pullback.lift G W'.ι hG) := by
       simp only [Scheme.Hom.comp_base, TopCat.coe_comp]
