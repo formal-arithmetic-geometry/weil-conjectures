@@ -120,7 +120,7 @@ lemma isPullback_blowupNatTrans_of_basicOpen {U V : X.affineOpens} (hUV : U ≤ 
     (f : Γ(X, V.1)) (hU : U.1 = X.basicOpen f) :
     IsPullback (I.blowupFunctor.map (homOfLE hUV)) (I.blowupNatTrans.app U)
       (I.blowupNatTrans.app V) (X.homOfLE hUV) := by
-  letI := (X.presheaf.map (homOfLE (X := X.Opens) hUV).op).hom.toAlgebra
+  let := (X.presheaf.map (homOfLE (X := X.Opens) hUV).op).hom.toAlgebra
   have : IsLocalization.Away f Γ(X, U.1) :=
     V.2.isLocalization_of_eq_basicOpen f (homOfLE hUV) hU
   have halg : algebraMap Γ(X, V.1) Γ(X, U.1) =

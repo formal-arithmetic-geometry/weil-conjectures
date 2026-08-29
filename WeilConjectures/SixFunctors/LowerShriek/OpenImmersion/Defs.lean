@@ -77,7 +77,7 @@ open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry
 
 namespace CategoryTheory
 
-variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 namespace GrothendieckTopology
 
@@ -249,7 +249,7 @@ def localizationRestriction :
   (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
     (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The sections of `j_f^* G` over `T → V` are the sections of `G` over `T → V → U`. -/
 lemma localizationRestriction_obj_val_obj
     (G : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ V) :
@@ -257,7 +257,7 @@ lemma localizationRestriction_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.map ⊤ h).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `j_f^*` acts on morphisms by whiskering along `(MorphismProperty.Over.map ⊤ h).op`. -/
 lemma localizationRestriction_map_hom_app
     {G G' : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ V) :
