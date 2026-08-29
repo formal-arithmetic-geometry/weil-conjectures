@@ -8,7 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
-public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.SixFunctors.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -65,8 +65,8 @@ compactification `c`.
   morphism `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*` for a square of open immersions, with
   `Etale.isIso_openImmersionShriekBaseChange` (base change for extension by zero) and
   its bounded below derived form `Etale.openImmersionShriekBaseChangePlus`.
-- `AlgebraicGeometry.Compactification.rightDerivedLowerShriekPlus`: the derived lower
-  shriek `Rf_!^c = i_! ⋙ Rp_*` of a compactification on the bounded below derived
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlus`: the derived
+  lower shriek `Rf_!^c = i_! ⋙ Rp_*` of a compactification on the bounded below derived
   categories.
 - `AlgebraicGeometry.Etale.lowerShriekBaseChange`: the compact-support base-change
   morphism `Ex_!^c`.
