@@ -117,7 +117,19 @@ theorem Etale.lowerShriekProperBaseChange (c : Compactification f)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
     IsIso ((Etale.lowerShriekBaseChange (ModuleCat.{u + 1} Λ) c sq).app K) := by
-  sorry
+  simp only [Functor.comp_obj, lowerShriekBaseChange, NatTrans.comp_app]
+  apply IsIso.comp_isIso'
+  · apply NatIso.hom_app_isIso
+  · apply IsIso.comp_isIso'
+    · --simp time out again
+      sorry
+    · apply IsIso.comp_isIso'
+      · apply NatIso.inv_app_isIso
+      · apply IsIso.comp_isIso'
+        · simp only [Compactification.baseChange_g, Compactification.baseChange_Z,
+            Compactification.baseChange_i, Functor.whiskerRight_app, Functor.comp_obj]
+          apply Functor.map_isIso
+        · apply NatIso.hom_app_isIso
 
 /-- **The base change theorem for the lower shriek as an isomorphism of functors**: if
 the coefficient ring `Λ` is torsion as an additive group — in particular if `Λ` is
