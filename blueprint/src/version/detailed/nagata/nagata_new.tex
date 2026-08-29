@@ -10307,136 +10307,124 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
   \uses{def:nagata-quasi-affine-morphism,
     lemma:nagata-conrad-disjointness-blowup,
     lemma:nagata-conrad-quasi-affine-equal-opens,
-    lemma:nagata-qc-open-complement-ideal-exists,
+    lemma:nagata-extend-admissible-blowup,
     lemma:nagata-admissible-blowup-comp,
     def:nagata-conrad-quasi-domination}
-  \lean{}
+  \lean{AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom_of_le}
 
-  Let $X$ be qcqs, let $U\subseteq V\subseteq X$ be dense quasi-compact open
-  subschemes, let $p\colon Y\to X$ be quasi-affine and of finite type, and let
-  $(U,f)$ be a quasi-domination of $V$ over $Y$.  There is a finite type
-  quasi-coherent ideal $\mathcal I$ on $X$ with $V(\mathcal I)\subseteq
-  X\setminus V$ such that $\operatorname{Bl}_{\mathcal I}(X)$ quasi-dominates
-  $Y$ in a manner extending $f$.
+  Let $X$ be qcqs, let $U\subseteq V\subseteq X$ be quasi-compact open
+  subschemes, let $Y$ be qcqs and let $p\colon Y\to X$ be separated,
+  quasi-affine and locally of finite type.  Let $f\colon U\to Y$ be an
+  $X$-morphism whose image is closed in $p^{-1}(V)$.  There is a finite type
+  quasi-coherent ideal $\mathcal I$ on $X$ with
+  $V(\mathcal I)\subseteq X\setminus V$ such that
+  $\operatorname{Bl}_{\mathcal I}(X)$ carries a quasi-domination over $Y$
+  extending $f$.
+
+  Neither $U$ nor $V$ needs to be assumed dense in $X$.  The only density used
+  below is that of the inverse image of $U$ in the blow-up of the smaller base
+  $X^{\circ}$ of Step 2, and that is exactly the scheme-theoretic density which
+  \Cref{lemma:nagata-conrad-quasi-affine-equal-opens} hands back.  Note also
+  that the centre is only required to avoid the \emph{larger} open $V$, which
+  is what makes this statement stronger than
+  \Cref{lemma:nagata-conrad-quasi-affine-equal-opens} rather than a special
+  case of it.
 \end{lemma}
 
 \begin{proof}
   \uses{def:nagata-scheme-theoretic-image,
-    lemma:nagata-finite-type-ideal-extension-exists,
     lemma:nagata-finite-type-ideal-power-in-ideal,
-    lemma:nagata-conrad-dense-in-admissible-blowup,
-    lemma:nagata-ideal-directed-union-finite-type,
-    lemma:nagata-finite-type-ideal-compact}
-  Because a $V$-admissible blow-up of $X$ preserves the density of $U$ and of
-  $V$ (\Cref{lemma:nagata-conrad-dense-in-admissible-blowup}) and composites of
-  $V$-admissible blow-ups are $V$-admissible
-  (\Cref{lemma:nagata-admissible-blowup-comp}), we are free to replace $X$ by
-  such a blow-up at any point of the argument.
+    lemma:nagata-qc-open-complement-ideal-exists,
+    lemma:nagata-conrad-dense-in-admissible-blowup}
+  \emph{Step 1: separating $p(\overline{f(U)})$ from $\overline{V\setminus U}$.}
+  This is the disjointness blow-up, formalized as
+  \texttt{AlgebraicGeometry.exists\_isAdmissible\_disjoint\_closure\_range\_of\_le}:
+  there is a $V$-admissible blow-up $\pi_1\colon X_1\to X$ such that, writing
+  $p_1\colon Y_1=Y\times_XX_1\to X_1$ for the base change of $p$ and
+  $f_1\colon\pi_1^{-1}(U)\to Y_1$ for the induced section, the closure of
+  $f_1\bigl(\pi_1^{-1}(U)\bigr)$ is disjoint from
+  $p_1^{-1}\bigl(\overline{\pi_1^{-1}(V\setminus U)}\bigr)$.  Its proof applies
+  \Cref{lemma:nagata-conrad-disjointness-blowup} to $Z=Y$, to the open
+  immersions $U\subseteq V\subseteq X$ and to the graph of $f$, with
+  $\mathcal I_1$ a finite type subideal of the ideal of the reduced structure
+  on $\overline{V\setminus U}$ which is still the unit ideal on $U$, and with
+  $\mathcal I_2=\mathcal I_1^2+\mathcal I_{X\setminus V}^n$ for an exponent $n$
+  supplied by \Cref{lemma:nagata-finite-type-ideal-power-in-ideal}.  From now
+  on we work over $X_1$, and we replace $U$, $V$, $Y$, $p$ and $f$ by their
+  inverse images and base changes there.
 
-  \emph{Step 1: separating $p(\overline{f(U)})$ from
-  $\overline{V\setminus U}$.}  We apply
-  \Cref{lemma:nagata-conrad-disjointness-blowup} to the situation of
-  \Cref{def:nagata-conrad-disjointness-setup} in which $Z$ is $Y$, the
-  morphism $p$ is $p$, the open immersions are $U\subseteq V\subseteq X$, and
-  the scheme called $Y$ there is $f(U)=\Gamma_f$, the quasi-compact subscheme
-  of $Y$ cut out by the section $f$, mapping to $U$ by the canonical
-  isomorphism and to $Y$ by the canonical quasi-compact immersion.  Take for $\mathcal I_1$ the
-  ideal of the reduced structure on the closed subset $\overline{V\setminus U}$
-  and put $T_1=V(\mathcal I_1^2)$; give $X\setminus V$ a finitely presented
-  closed subscheme structure using
-  \Cref{lemma:nagata-qc-open-complement-ideal-exists}, and put
-  $T_2=T_1\cap(X\setminus V)$.
+  \emph{Step 2: passing to a smaller base.}  This is
+  \texttt{AlgebraicGeometry.exists\_isCompact\_opens\_inf\_eq\_of\_disjoint\_closure\_sdiff}:
+  a compact set disjoint from $\overline{V\setminus U}$ is contained in a
+  quasi-compact open $X^{\circ}$ with $U\subseteq X^{\circ}$ and
+  $X^{\circ}\cap V=U$.  Applied to the compact set
+  $p_1\bigl(\overline{f_1(U)}\bigr)$, which Step 1 made disjoint from
+  $\overline{V\setminus U}$, it gives such an $X^{\circ}\subseteq X_1$
+  containing $p_1\bigl(\overline{f_1(U)}\bigr)$.  Contrary to what an earlier
+  version of this proof said, this needs no filtered-union argument on ideals:
+  it is purely topological, and follows from the fact that the underlying space
+  of a scheme is a prespectral space, so that a compact set inside an open set
+  is contained in a quasi-compact open inside it.
 
-  We first check $p\bigl(p^{-1}(T_1)\cap\overline{f(U)}\bigr)\subseteq T_2$ as
-  sets.  It is contained in $T_1$, and its intersection with $V$ is empty:
-  since $f(U)$ is closed in $p^{-1}(V)$ by the quasi-domination hypothesis,
-  \[
-    p\bigl(p^{-1}(T_1)\cap\overline{f(U)}\bigr)\cap V
-      =p\bigl(p^{-1}(T_1)\cap f(U)\bigr)\subseteq T_1\cap U=\varnothing .
-  \]
-  Now give $\overline{f(U)}$ its scheme structure as the scheme-theoretic image
-  of the quasi-compact quasi-separated morphism $f\colon U\to Y$.  We thicken
-  the closed subscheme structure on $X\setminus V$ nilpotently so that
-  $p^{-1}(T_1)\cap\overline{f(U)}\subseteq p^{-1}(T_2)$ becomes an inclusion of
-  \emph{closed subschemes}; this is possible because
-  $\mathcal I_{T_2}=\mathcal I_{T_1}+\mathcal I_{X\setminus V}$ with
-  $\mathcal I_{X\setminus V}$ of finite type and the inclusion already holds on
-  underlying sets.
+  \emph{Step 3: applying Case 2.}  Put $Y^{\circ}=p_1^{-1}(X^{\circ})$.  The
+  morphism $Y^{\circ}\to X^{\circ}$ is separated, locally of finite type and
+  quasi-affine: quasi-affineness of a morphism is stable under base change
+  (\texttt{AlgebraicGeometry.IsQuasiAffineHom.of\_isPullback}) and under
+  restricting the base to an open subscheme.  Since $X^{\circ}\cap V=U$,
+  \Cref{lemma:nagata-conrad-quasi-affine-equal-opens} applies over $X^{\circ}$
+  with the single open $U$: there is a finite type quasi-coherent ideal
+  $\mathcal I^{\circ}$ on $X^{\circ}$ with
+  $V(\mathcal I^{\circ})\subseteq X^{\circ}\setminus U$, an open
+  $W^{\circ}\subseteq\widetilde X^{\circ}=
+  \operatorname{Bl}_{\mathcal I^{\circ}}(X^{\circ})$ containing the inverse
+  image of $U$, and an $X^{\circ}$-morphism $g^{\circ}\colon W^{\circ}\to
+  Y^{\circ}$ extending $f$ whose graph is closed in
+  $Y^{\circ}\times_{X^{\circ}}\widetilde X^{\circ}$; moreover the inverse image
+  of $U$ in $\widetilde X^{\circ}$ is scheme-theoretically dense.
 
-  The ideal $\mathcal I_1$ need not be of finite type.  Since
-  $\mathcal I_1|_U=\mathcal O_U$, write $\mathcal I_1$ as the filtered union of
-  its finite type quasi-coherent subideals $\mathcal I_{1,\alpha}$ with
-  $\mathcal I_{1,\alpha}|_U=\mathcal O_U$
-  (\Cref{lemma:nagata-ideal-directed-union-finite-type}); then
-  $\mathcal I_{T_1}=\mathcal I_1^2$ is the filtered union of the
-  $\mathcal I_{1,\alpha}^2$.  From
-  $\mathcal I_{X\setminus V}\cdot\mathcal O_Y\subseteq
-  \mathcal I_{T_2}\cdot\mathcal O_Y\subseteq
-  \mathcal I_{T_1}\cdot\mathcal O_Y+\mathcal I_{\overline{f(U)}}$ and finite
-  typeness of $\mathcal I_{X\setminus V}$ we get, for large $\alpha$,
-  $\mathcal I_{X\setminus V}\cdot\mathcal O_Y\subseteq
-  \mathcal I_{1,\alpha}^2\cdot\mathcal O_Y+\mathcal I_{\overline{f(U)}}$.
-  Putting $T_{1,\alpha}=V(\mathcal I_{1,\alpha}^2)$ and
-  $T_{2,\alpha}=T_{1,\alpha}\cap(X\setminus V)$ we have
-  $\overline{V\setminus U}\subseteq T_{1,\alpha}\subseteq X\setminus U$ as sets
-  and $p^{-1}(T_{1,\alpha})\cap\overline{f(U)}\subseteq
-  p^{-1}(T_{2,\alpha})$ as closed subschemes.  So
-  \Cref{lemma:nagata-conrad-disjointness-blowup} applies to the
-  $V$-admissible blow-up of $X$ along
-  $\mathcal I_{1,\alpha}+\mathcal I_{X\setminus V}$, and after that base change
-  \[
-    p\bigl(\overline{f(U)}\bigr)\cap\overline{V\setminus U}=\varnothing .
-  \]
-  We assume this from now on.
+  Note that it is \emph{not} necessary to replace $Y^{\circ}$ by the
+  scheme-theoretic image of $f$ here, as \cite{ConradNagata} does.  That
+  replacement is only used to make the graph closed in Step 5, and for that
+  purpose the closed \emph{subset} $\overline{f_1(U)}$ of $Y_1$ suffices.
 
-  \emph{Step 2: passing to a smaller base.}  Put
-  $X^{\circ}=X\setminus\overline{V\setminus U}$, an open subscheme of $X$.  By
-  Step 1 we have $p(\overline{f(U)})\subseteq X^{\circ}$.  Moreover
-  $V\setminus U$ is closed in $V$, so
-  $\overline{V\setminus U}\cap V=V\setminus U$ and hence
-  \[
-    X^{\circ}\cap V=V\setminus(V\setminus U)=U .
-  \]
-  Writing $\mathcal I_{\overline{V\setminus U}}$ as a filtered union of finite
-  type quasi-coherent subideals
-  (\Cref{lemma:nagata-ideal-directed-union-finite-type}) we may shrink $X^{\circ}$ to a quasi-compact
-  open subscheme still satisfying $p(\overline{f(U)})\subseteq X^{\circ}$ and
-  $X^{\circ}\cap V=U$; this is possible because $\overline{f(U)}$, $U$ and $V$
-  are quasi-compact.  Note $U$ is dense in $X^{\circ}$, being dense in $X$.
+  \emph{Step 4: descending the centre to $X_1$.}  Since
+  $V(\mathcal I^{\circ})\subseteq X^{\circ}\setminus U=
+  X^{\circ}\setminus(X^{\circ}\cap V)$, the centre $\mathcal I^{\circ}$ is
+  disjoint from $X^{\circ}\cap V$, so
+  \Cref{lemma:nagata-extend-admissible-blowup} extends it to a $V$-admissible
+  finite type quasi-coherent ideal $\mathcal I_2$ on $X_1$ whose blow-up
+  $\pi_2\colon\widetilde X_1\to X_1$ restricts over $X^{\circ}$ to
+  $\widetilde X^{\circ}$, cartesianly.  Transporting $(W^{\circ},g^{\circ})$
+  along that cartesian square — this is the same transport lemma as in the
+  proof of \Cref{lemma:nagata-conrad-quasi-affine-equal-opens} — gives an open
+  $W\subseteq\pi_2^{-1}(X^{\circ})\subseteq\widetilde X_1$ containing
+  $\pi_2^{-1}\bigl(\pi_1^{-1}(U)\bigr)$ and an $X_1$-morphism $G\colon W\to
+  Y_1$ extending $f_1$, whose graph is closed in the part of
+  $Y_1\times_{X_1}\widetilde X_1$ lying over $X^{\circ}$.
 
-  \emph{Step 3: applying Case 2.}  Give $\overline{f(U)}$ its closed subscheme
-  structure inside $p^{-1}(X^{\circ})$ as the scheme-theoretic image of
-  $f\colon U\to p^{-1}(X^{\circ})$.  It is quasi-affine over $X^{\circ}$,
-  being a closed subscheme of the quasi-affine $X^{\circ}$-scheme
-  $p^{-1}(X^{\circ})$, and it is of finite type.  Since $X^{\circ}\cap V=U$,
-  \Cref{lemma:nagata-conrad-quasi-affine-equal-opens} applies with
-  $\overline{f(U)}\to X^{\circ}$ in the role of $Y\to X$: there is a finite type
-  quasi-coherent ideal $\mathcal I^{\circ}$ on $X^{\circ}$ with
-  $V(\mathcal I^{\circ})\subseteq X^{\circ}\setminus U\subseteq X\setminus V$
-  as sets, and a quasi-domination $(W^{\circ},f^{\circ})$ of
-  $\widetilde X^{\circ}=\operatorname{Bl}_{\mathcal I^{\circ}}(X^{\circ})$ over
-  $\overline{f(U)}$ extending $f$.
+  \emph{Step 5: the graph is closed.}  Write $\Gamma\subseteq
+  Y_1\times_{X_1}\widetilde X_1$ for the graph of $G$ and put
+  $N=\mathrm{pr}_{Y_1}^{-1}\bigl(\overline{f_1(U)}\bigr)$, a closed subset.
+  The inverse image of $U$ is topologically dense in $\widetilde X^{\circ}$,
+  by the scheme-theoretic density of Step 3, hence also in the open subscheme
+  $W$; as $G$ agrees with $f_1$ there, continuity gives
+  $G(W)\subseteq\overline{f_1(U)}$ and therefore $\Gamma\subseteq N$.  On the
+  other hand $p_1\bigl(\overline{f_1(U)}\bigr)\subseteq X^{\circ}$ by the
+  choice of $X^{\circ}$, so $N$ is contained in the open part of
+  $Y_1\times_{X_1}\widetilde X_1$ lying over $X^{\circ}$.  A subset of a closed
+  set contained in an open set is closed as soon as it is closed in that open
+  set; so $\Gamma$ is closed in $Y_1\times_{X_1}\widetilde X_1$.
 
-  \emph{Step 4: descending the centre to $X$.}  As in Case 2, extend
-  $\mathcal I^{\circ}$ to a finite type quasi-coherent ideal $\mathcal I$ on
-  $X$ with $\mathcal I|_{X^{\circ}}=\mathcal I^{\circ}$ and $V(\mathcal I)$
-  disjoint from $V$: take the scheme-theoretic closure of
-  $V(\mathcal I^{\circ})$ in $X$ and shrink it by the limit argument of
-  \Cref{lemma:nagata-ideal-directed-union-finite-type}.  Put
-  $\widetilde X=\operatorname{Bl}_{\mathcal I}(X)$, a $V$-admissible blow-up.
-  Blowing up commutes with restriction to the open $X^{\circ}$, so
-  $\widetilde X^{\circ}$ is an open subscheme of $\widetilde X$, and $U$ is
-  dense in $\widetilde X$; hence $W^{\circ}$ is a dense open subscheme of
-  $\widetilde X$.
-
-  \emph{Step 5: the graph is closed.}  It remains to see that
-  $\Gamma_{f^{\circ}}$ is closed in $\widetilde X\times_XY$.  The subscheme
-  $\widetilde X\times_X\overline{f(U)}\subseteq\widetilde X\times_XY$ is
-  closed, so it suffices to observe that
-  $\widetilde X^{\circ}\times_{X^{\circ}}\overline{f(U)}\cong
-  \widetilde X\times_X\overline{f(U)}$, which holds because
-  $p(\overline{f(U)})\subseteq X^{\circ}$.  Thus $(W^{\circ},f^{\circ})$ is the
-  required quasi-domination.
+  \emph{Conclusion.}  The composite of the $V$-admissible blow-up
+  $\pi_1$ of $X$ and the $\pi_1^{-1}(V)$-admissible blow-up $\pi_2$ of $X_1$ is
+  a $V$-admissible blow-up of $X$ by
+  \Cref{lemma:nagata-admissible-blowup-comp}: there is a finite type
+  quasi-coherent ideal $\mathcal I$ on $X$ with
+  $V(\mathcal I)\cap V=\varnothing$ and an $X$-isomorphism
+  $\widetilde X_1\cong\operatorname{Bl}_{\mathcal I}(X)$.  Transporting $(W,G)$
+  along it, and composing $G$ with $Y_1\to Y$, gives the required
+  quasi-domination of $\operatorname{Bl}_{\mathcal I}(X)$ over $Y$ extending
+  $f$.
 \end{proof}
 
 \section{The general case, via Zariski's Main Theorem}
