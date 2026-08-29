@@ -172,13 +172,6 @@ continuous functor are isomorphisms, the pullback is strong monoidal. -/
 noncomputable def sheafPullbackMonoidal : (F.sheafPullback A J K).Monoidal :=
   Functor.Monoidal.ofOplaxMonoidal _
 
-attribute [local instance] sheafPullbackMonoidal
-
-/-- With respect to the strong monoidal structure of `sheafPullbackMonoidal`, the
-adjunction between the pullback and the pushforward of sheaves is still monoidal. -/
-instance : (F.sheafAdjunctionContinuous A J K).IsMonoidal :=
-  inferInstance
-
 end
 
 end
