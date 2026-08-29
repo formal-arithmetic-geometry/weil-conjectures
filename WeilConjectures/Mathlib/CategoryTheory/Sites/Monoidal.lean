@@ -5,14 +5,17 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 
 /-!
-# The tensor product of sheaves is preadditive and linear
+
+# The tensor product of sheaves is preadditive and linear,
+  the pushforward of sheaves is lax braided
 
 Let `A` be an abelian monoidal category whose tensor product is additive in each variable
 and `J` a Grothendieck topology with `HasSheafify J A` such that the localized monoidal
@@ -22,11 +25,15 @@ We show that this monoidal structure is compatible with the preadditive structur
 with `R`-linear tensor product, that it is compatible with the `R`-linear structure,
 i.e. `MonoidalLinear R (Sheaf J A)`.
 
-The key observation is that tensoring with a fixed sheaf `X` is, up to a natural
-isomorphism, computed by tensoring the underlying presheaves and sheafifying
-(`Sheaf.tensorLeftIso`/`Sheaf.tensorRightIso`); additivity and linearity then transfer
-from the pointwise tensor product of presheaves and the additivity and linearity of
-sheafification.
+The sheafification functor `presheafToSheaf J A` is braided, hence its right adjoint
+`sheafToPresheaf J A` is lax braided.
+
+If `F : C ⥤ D` is a continuous functor of sites, the pushforward
+`F.sheafPushforwardContinuous A J K : Sheaf K A ⥤ Sheaf J A` is obtained by sheafifying the
+restriction along `F.op` of the underlying presheaf. As restriction is a braided functor
+between the (pointwise monoidal) categories of presheaves, the pushforward is lax braided.
+When `A` is symmetric this says that `F.sheafPushforwardContinuous A J K` is lax symmetric
+monoidal.
 
 ## Main results
 
@@ -34,11 +41,17 @@ sheafification.
   `Sheaf J A` obtained in `Sheaf.monoidalCategory` is preadditive.
 - `CategoryTheory.Sheaf.monoidalLinear`: the monoidal category structure on
   `Sheaf J A` obtained in `Sheaf.monoidalCategory` is `R`-linear.
+- `CategoryTheory.sheafToPresheafLaxBraided`: the underlying presheaf functor is lax braided.
+- `CategoryTheory.Functor.sheafPushforwardContinuousLaxBraided`: the pushforward of sheaves
+  along a continuous functor of sites is lax braided.
 -/
+
+
+
 
 @[expose] public section
 
-universe v₁ v₃ u₁ u₃
+universe v₁ v₂ v₃ u₁ u₂ u₃
 
 namespace CategoryTheory.Sheaf
 
@@ -124,3 +137,52 @@ instance monoidalLinear : MonoidalLinear R (Sheaf J A) where
 end Linear
 
 end CategoryTheory.Sheaf
+
+namespace CategoryTheory
+
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (F : C ⥤ D)
+  (A : Type u₃) [Category.{v₃} A] [MonoidalCategory A] [BraidedCategory A]
+  (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
+
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+
+/-- The functor sending a sheaf to its underlying presheaf is lax monoidal, being the right
+adjoint of the (strong) monoidal sheafification functor. -/
+noncomputable instance sheafToPresheafLaxMonoidal : (sheafToPresheaf J A).LaxMonoidal :=
+  (sheafificationAdjunction J A).rightAdjointLaxMonoidal
+
+/-- The functor sending a sheaf to its underlying presheaf is lax braided, being the right
+adjoint of the braided sheafification functor. -/
+noncomputable instance sheafToPresheafLaxBraided : (sheafToPresheaf J A).LaxBraided :=
+  (sheafificationAdjunction J A).rightAdjointLaxBraided
+
+namespace Functor
+
+variable [F.IsContinuous J K] [(K.W (A := A)).IsMonoidal] [HasWeakSheafify K A]
+
+/-- The pushforward of sheaves along a continuous functor `F : C ⥤ D` is the sheafification of
+the restriction along `F.op` of the underlying presheaf. -/
+noncomputable def sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso :
+    sheafToPresheaf K A ⋙ (whiskeringLeft _ _ A).obj F.op ⋙ presheafToSheaf J A ≅
+      F.sheafPushforwardContinuous A J K :=
+  isoWhiskerLeft (F.sheafPushforwardContinuous A J K)
+      (asIso (sheafificationAdjunction J A).counit) ≪≫
+    (F.sheafPushforwardContinuous A J K).rightUnitor
+
+/-- The pushforward of sheaves along a continuous functor of sites is lax monoidal. -/
+noncomputable instance sheafPushforwardContinuousLaxMonoidal :
+    (F.sheafPushforwardContinuous A J K).LaxMonoidal :=
+  LaxMonoidal.transport (sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso F A J K)
+
+/-- The pushforward of sheaves along a continuous functor of sites is lax braided. When `A` is
+symmetric, this says that the pushforward is lax symmetric monoidal. -/
+noncomputable instance sheafPushforwardContinuousLaxBraided :
+    (F.sheafPushforwardContinuous A J K).LaxBraided :=
+  have := LaxMonoidal.natTransIsMonoidal_of_transport
+    (sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso F A J K)
+  LaxBraided.ofNatIso (sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso F A J K)
+
+end Functor
+
+end CategoryTheory
