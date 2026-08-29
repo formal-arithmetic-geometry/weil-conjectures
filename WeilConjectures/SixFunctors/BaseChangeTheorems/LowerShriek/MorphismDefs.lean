@@ -238,7 +238,7 @@ lemma Etale.lowerShriekBaseChangeProperStep_app (c : Compactification f)
   exact this
 -/
 
-noncomputable def Etale.lowerShriekBaseChangeAux (c : Compactification f)
+noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g) :
     Rf_!(c)[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
     (g')^*[A].mapDerivedCategoryPlus ⋙ Rf_!(c.baseChange sq)[A]+ :=
