@@ -13,16 +13,20 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- **Transporting an extension along a lift of a blow-up over an open of the base.** -/
-theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' ⟶ X} {V : X.Opens}
+theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' ⟶ X}
+    {U V : X.Opens} {f : U.toScheme ⟶ Y}
     {b : Bl ⟶ V.toScheme} {ρ : (π ⁻¹ᵁ V).toScheme ⟶ Bl} (hρ : ρ ≫ b = π ∣_ V)
-    {W : Bl.Opens} {g : W.toScheme ⟶ (p ⁻¹ᵁ V).toScheme}
-    (hg : g ≫ (p ∣_ V) = W.ι ≫ b)
+    {W : Bl.Opens} (hUW : b ⁻¹ᵁ (V.ι ⁻¹ᵁ U) ≤ W)
+    {g : W.toScheme ⟶ (p ⁻¹ᵁ V).toScheme} (hg : g ≫ (p ∣_ V) = W.ι ≫ b)
+    {fV : (V.ι ⁻¹ᵁ U).toScheme ⟶ (p ⁻¹ᵁ V).toScheme}
+    (hfV : fV ≫ (p ⁻¹ᵁ V).ι = (V.ι ∣_ U) ≫ f)
+    (hagree : Bl.homOfLE hUW ≫ g = (b ∣_ (V.ι ⁻¹ᵁ U)) ≫ fV)
     (hclosed : IsClosed (Set.range (pullback.lift g W.ι hg))) :
-    ∃ (W' : X'.Opens) (hW' : W' ≤ π ⁻¹ᵁ V) (G : W'.toScheme ⟶ Y)
-      (hG : G ≫ p = W'.ι ≫ π) (e : W'.toScheme ⟶ W.toScheme),
-      (∀ x : (π ⁻¹ᵁ V).toScheme, x.1 ∈ W' ↔ ρ x ∈ W) ∧
-      e ≫ W.ι = X'.homOfLE hW' ≫ ρ ∧
-      G = e ≫ g ≫ (p ⁻¹ᵁ V).ι ∧
+    ∃ (W' : X'.Opens) (_ : W' ≤ π ⁻¹ᵁ V) (G : W'.toScheme ⟶ Y)
+      (hG : G ≫ p = W'.ι ≫ π),
+      π ⁻¹ᵁ U ⊓ π ⁻¹ᵁ V ≤ W' ∧
+      (∀ {T : Scheme.{u}} (t : T ⟶ W'.toScheme) (m : T ⟶ U.toScheme),
+          m ≫ U.ι = t ≫ W'.ι ≫ π → t ≫ G = m ≫ f) ∧
       IsClosed (⇑((pullback.snd p π) ⁻¹ᵁ (π ⁻¹ᵁ V)).ι ⁻¹'
         Set.range (pullback.lift G W'.ι hG)) := by
   have hW' : (π ⁻¹ᵁ V).ι ''ᵁ (ρ ⁻¹ᵁ W) ≤ π ⁻¹ᵁ V := (π ⁻¹ᵁ V).ι_image_le _
@@ -33,6 +37,10 @@ theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' �
     rw [Category.assoc, morphismRestrict_ι, ← Category.assoc, hεinv]
   have key : ρ ≫ b ≫ V.ι = (π ⁻¹ᵁ V).ι ≫ π := by
     rw [← Category.assoc, hρ, morphismRestrict_ι]
+  have hpt : ∀ y : (π ⁻¹ᵁ V).toScheme, V.ι (b (ρ y)) = π y.1 := by
+    intro y
+    have h := congr($key y)
+    simpa [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply] using h
   have hg' : g ≫ (p ⁻¹ᵁ V).ι ≫ p = W.ι ≫ b ≫ V.ι := by
     rw [← morphismRestrict_ι p V, ← Category.assoc, hg, Category.assoc]
   have hG'' : ((ρ ∣_ W) ≫ g ≫ (p ⁻¹ᵁ V).ι) ≫ p = ((ρ ⁻¹ᵁ W).ι ≫ (π ⁻¹ᵁ V).ι) ≫ π := by
@@ -51,9 +59,49 @@ theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' �
           rw [hG'']; simp only [Category.assoc]
       _ = ((π ⁻¹ᵁ V).ι ''ᵁ (ρ ⁻¹ᵁ W)).ι ≫ π := by
           rw [hεinv, ← Category.assoc, Scheme.homOfLE_ι]
-  refine ⟨_, hW', _, hG, _, fun x ↦ ?_, he, rfl, ?_⟩
-  · rw [Scheme.Opens.mem_ι_image_iff]
-    exact Iff.rfl
+  refine ⟨_, hW', _, hG, ?_, ?_, ?_⟩
+  -- the inverse image of `U ⊓ V` is contained in the extension locus
+  · intro z hz
+    have hzV : z ∈ π ⁻¹ᵁ V := hz.2
+    have h1 : V.ι (b (ρ (⟨z, hzV⟩ : (π ⁻¹ᵁ V).toScheme))) ∈ U := by
+      rw [hpt ⟨z, hzV⟩]
+      exact hz.1
+    have hmem : (⟨z, hzV⟩ : (π ⁻¹ᵁ V).toScheme) ∈ ρ ⁻¹ᵁ W := hUW h1
+    exact (Scheme.Opens.mem_ι_image_iff (x := (⟨z, hzV⟩ : (π ⁻¹ᵁ V).toScheme))).mpr hmem
+  -- the extension agrees with `f` wherever both are defined
+  · intro T t m hmt
+    have hw' : m ≫ U.ι = (t ≫ X'.homOfLE hW' ≫ ρ ≫ b) ≫ V.ι := by
+      rw [hmt]
+      calc t ≫ ((π ⁻¹ᵁ V).ι ''ᵁ (ρ ⁻¹ᵁ W)).ι ≫ π
+          = t ≫ (X'.homOfLE hW' ≫ (π ⁻¹ᵁ V).ι) ≫ π := by
+            rw [Scheme.homOfLE_ι]
+        _ = t ≫ X'.homOfLE hW' ≫ (ρ ≫ b ≫ V.ι) := by
+            rw [key]; simp only [Category.assoc]
+        _ = (t ≫ X'.homOfLE hW' ≫ ρ ≫ b) ≫ V.ι := by simp only [Category.assoc]
+    obtain ⟨k, hkfst, hksnd⟩ :
+        ∃ k : T ⟶ (V.ι ⁻¹ᵁ U).toScheme, k ≫ (V.ι ∣_ U) = m ∧
+          k ≫ (V.ι ⁻¹ᵁ U).ι = t ≫ X'.homOfLE hW' ≫ ρ ≫ b :=
+      ⟨(isPullback_morphismRestrict V.ι U).lift _ _ hw',
+        (isPullback_morphismRestrict V.ι U).lift_fst _ _ hw',
+        (isPullback_morphismRestrict V.ι U).lift_snd _ _ hw'⟩
+    obtain ⟨c, hcfst, hcsnd⟩ :
+        ∃ c : T ⟶ (b ⁻¹ᵁ (V.ι ⁻¹ᵁ U)).toScheme, c ≫ (b ∣_ (V.ι ⁻¹ᵁ U)) = k ∧
+          c ≫ (b ⁻¹ᵁ (V.ι ⁻¹ᵁ U)).ι = t ≫ X'.homOfLE hW' ≫ ρ :=
+      ⟨(isPullback_morphismRestrict b (V.ι ⁻¹ᵁ U)).lift _ _
+          (by rw [hksnd]; simp only [Category.assoc]),
+        (isPullback_morphismRestrict b (V.ι ⁻¹ᵁ U)).lift_fst _ _ _,
+        (isPullback_morphismRestrict b (V.ι ⁻¹ᵁ U)).lift_snd _ _ _⟩
+    have hcW : c ≫ Bl.homOfLE hUW =
+        t ≫ (((π ⁻¹ᵁ V).ι.isoImage (ρ ⁻¹ᵁ W)).inv ≫ (ρ ∣_ W)) := by
+      rw [← cancel_mono W.ι, Category.assoc, Scheme.homOfLE_ι, hcsnd, Category.assoc, he]
+    calc t ≫ ((((π ⁻¹ᵁ V).ι.isoImage (ρ ⁻¹ᵁ W)).inv ≫ (ρ ∣_ W)) ≫ g ≫ (p ⁻¹ᵁ V).ι)
+        = (c ≫ Bl.homOfLE hUW) ≫ g ≫ (p ⁻¹ᵁ V).ι := by
+          rw [hcW]; simp only [Category.assoc]
+      _ = c ≫ ((b ∣_ (V.ι ⁻¹ᵁ U)) ≫ fV) ≫ (p ⁻¹ᵁ V).ι := by
+          rw [← hagree]; simp only [Category.assoc]
+      _ = k ≫ (fV ≫ (p ⁻¹ᵁ V).ι) := by rw [← hcfst]; simp only [Category.assoc]
+      _ = (k ≫ (V.ι ∣_ U)) ≫ f := by rw [hfV]; simp only [Category.assoc]
+      _ = m ≫ f := by rw [hkfst]
   -- the graph is closed over `V`
   · -- the local graph is a closed immersion
     have hpreΓl : IsPreimmersion (pullback.lift g W.ι hg) := by
