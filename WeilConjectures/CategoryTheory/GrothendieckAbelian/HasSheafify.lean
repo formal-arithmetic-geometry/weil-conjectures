@@ -53,7 +53,7 @@ instance (priority := high) hasSheafify_smallGrothendieckTopology (A : Type u')
 instance (priority := high) hasSheafify_smallEtaleTopology (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
     HasSheafify X.smallEtaleTopology A :=
-  sorry
+  inferInstanceAs (HasSheafify (X.smallGrothendieckTopology (P := @Etale) (Q := @Etale)) A)
 
 /-- Sheafification for `A`-valued presheaves on the localization at `V` of the small
 `Q`-site of `P`-schemes over `U`: the site is essentially small for the étale-like
@@ -76,6 +76,7 @@ instance (priority := high) hasSheafify_over_smallEtaleTopology (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u})
     (U : X.Etale) :
     HasSheafify (X.smallEtaleTopology.over U) A :=
-  sorry
+  inferInstanceAs
+    (HasSheafify ((X.smallGrothendieckTopology (P := @Etale) (Q := @Etale)).over U) A)
 
 end CategoryTheory.GrothendieckTopology
