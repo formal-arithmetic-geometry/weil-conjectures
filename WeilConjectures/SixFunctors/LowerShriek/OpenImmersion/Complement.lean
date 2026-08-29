@@ -127,6 +127,8 @@ section Disjoint
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {U W X : Scheme.{u}} (j : U ⟶ X) (k : W ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k]
 
+open Etale
+
 set_option backward.isDefEq.respectTransparency false in
 /-- For `T` étale over `W`, the fibre product `T ×_X U` is empty when the ranges of `j` and `k`
 are disjoint: `T` maps into the range of `k`, which misses the range of `j`. -/
@@ -145,7 +147,7 @@ noncomputable def Etale.isTerminalSections_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅)
     (F : Sheaf U.smallEtaleTopology A) (T : W.Etale) :
     IsTerminal ((((Etale.openImmersionRestriction A k).obj
-      ((Etale.lowerStar A j).obj F))).obj.obj (op T)) :=
+      ((j)_*[A].obj F))).obj.obj (op T)) :=
   letI := Scheme.Etale.isEmpty_left_pullback_map j k hjk T
   Scheme.Etale.isTerminalSectionsOfIsEmpty F
     ((MorphismProperty.Over.pullback @Etale ⊤ j).obj
@@ -156,7 +158,7 @@ omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. -/
 lemma Etale.isZero_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
-    IsZero ((Etale.openImmersionRestriction A k).obj ((Etale.lowerStar A j).obj F)) := by
+    IsZero ((Etale.openImmersionRestriction A k).obj ((j)_*[A].obj F)) := by
   refine Sheaf.isZero_of_isZero_obj _ ?_
   rintro ⟨T⟩
   exact IsZero.of_iso (isZero_zero A)
@@ -170,10 +172,9 @@ adjunctions turn `Hom(k^* j_! F, H)` into `Hom(F, j^* k_* H)`, and `j^* k_* H` v
 `k` exchanged. -/
 noncomputable def Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
-    IsInitial ((Etale.openImmersionRestriction A k).obj
-      ((Etale.openImmersionLowerShriek A j).obj F)) := by
+    IsInitial ((Etale.openImmersionRestriction A k).obj ((j)_!Imm[A].obj F)) := by
   refine IsInitial.ofUnique (h := fun H => ?_)
-  haveI : Unique (F ⟶ (Etale.openImmersionRestriction A j).obj ((Etale.lowerStar A k).obj H)) := by
+  haveI : Unique (F ⟶ (Etale.openImmersionRestriction A j).obj ((k)_*[A].obj H)) := by
     have hz := Etale.isZero_openImmersionRestriction_lowerStar A k j
       (by rw [Set.inter_comm]; exact hjk) H
     exact ⟨⟨hz.isTerminal.from F⟩, fun a => hz.isTerminal.hom_ext _ _⟩

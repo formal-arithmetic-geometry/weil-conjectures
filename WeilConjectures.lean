@@ -187,7 +187,10 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.LowerShriek.MorphismDefs
-public import WeilConjectures.SixFunctors.Derived
+public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
+public import WeilConjectures.SixFunctors.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
@@ -197,7 +200,6 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
-public import WeilConjectures.SixFunctors.UpperStarMapDerivedCategory
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
