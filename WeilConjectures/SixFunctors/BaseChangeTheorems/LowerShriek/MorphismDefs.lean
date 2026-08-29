@@ -104,26 +104,33 @@ noncomputable def Etale.openImmersionLowerShriekBaseChangeSquareStep (sq : CommS
         (g')^*[A].mapDerivedCategoryPlus ⋙ (j')_!Imm[A].mapDerivedCategoryPlus ≅
     ((j)_!Imm[A].mapDerivedCategoryPlus ⋙ (g)^*[A].mapDerivedCategoryPlus) ⋙
         (j')^*[A].mapDerivedCategoryPlus ⋙ (j')_!Imm[A].mapDerivedCategoryPlus :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (j)_!Imm[A].mapDerivedCategoryPlus
-      ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight
-        (Etale.pullbackSquareComparison A sq.flip) (j')_!Imm[A].mapDerivedCategoryPlus ≪≫
-            Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm
-/-
+    Functor.squareTransport (j)_!Imm[A].mapDerivedCategoryPlus (j')_!Imm[A].mapDerivedCategoryPlus
+      (Etale.pullbackSquareComparison A sq.flip)
+
 lemma Etale.openImmersionLowerShriekBaseChangeSquareStep_app (sq : CommSq g' j' j g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    ((Etale.openImmersionLowerShriekBaseChangeSquareStep A sq).app K) =
+    (Etale.openImmersionLowerShriekBaseChangeSquareStep A sq).app K =
       (j')_!Imm[A].mapDerivedCategoryPlus.mapIso
         ((pullbackSquareComparison A sq.flip).app
           ((j)_!Imm[A].mapDerivedCategoryPlus.obj K)) := by
-  apply Iso.ext
-  simp only [openImmersionLowerShriekBaseChangeSquareStep, Functor.isoWhiskerLeft_trans,
-    Iso.trans_assoc, NatIso.trans_app, Iso.trans_hom, Iso.app_hom, Functor.associator_hom_app,
-    Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.whiskerLeft_app, Functor.associator_inv_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.comp_id, Category.id_comp,
-    Functor.mapIso_hom]
-  exact (Category.id_comp _).trans (Category.comp_id _)
--/
+  simp [openImmersionLowerShriekBaseChangeSquareStep]
+
+lemma Etale.openImmersionLowerShriekBaseChangeSquareStep_hom_app (sq : CommSq g' j' j g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.openImmersionLowerShriekBaseChangeSquareStep A sq).hom.app K =
+      (j')_!Imm[A].mapDerivedCategoryPlus.map
+        ((pullbackSquareComparison A sq.flip).hom.app
+          ((j)_!Imm[A].mapDerivedCategoryPlus.obj K)) :=
+  congrArg Iso.hom (Etale.openImmersionLowerShriekBaseChangeSquareStep_app A sq K)
+
+lemma Etale.openImmersionLowerShriekBaseChangeSquareStep_inv_app (sq : CommSq g' j' j g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.openImmersionLowerShriekBaseChangeSquareStep A sq).inv.app K =
+      (j')_!Imm[A].mapDerivedCategoryPlus.map
+        ((pullbackSquareComparison A sq.flip).inv.app
+          ((j)_!Imm[A].mapDerivedCategoryPlus.obj K)) :=
+  congr(Iso.inv $(Etale.openImmersionLowerShriekBaseChangeSquareStep_app A sq K))
+
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
@@ -150,8 +157,7 @@ lemma Etale.openImmersionLowerShriekBaseChangeUnitStep_app
       (j')_!Imm[A].mapDerivedCategoryPlus.map
         ((g')^*[A].mapDerivedCategoryPlus.map
           ((derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j).unit.app K)) := by
-  simp only [openImmersionLowerShriekBaseChangeUnitStep, NatTrans.comp_app,
-    Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.comp_map, Category.id_comp]
+  simp [openImmersionLowerShriekBaseChangeUnitStep]
 
 noncomputable def Etale.openImmersionLowerShriekBaseChangeCounitStep :
     ((j)_!Imm[A].mapDerivedCategoryPlus ⋙ (g)^*[A].mapDerivedCategoryPlus) ⋙
@@ -167,9 +173,7 @@ lemma Etale.openImmersionLowerShriekBaseChangeCounitStep_app
     (Etale.openImmersionLowerShriekBaseChangeCounitStep A j g j').app K =
       (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j').counit.app
         (((j)_!Imm[A].mapDerivedCategoryPlus ⋙ (g)^*[A].mapDerivedCategoryPlus).obj K) := by
-  simp only [openImmersionLowerShriekBaseChangeCounitStep, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app]
-  exact Category.comp_id _
+  simp [openImmersionLowerShriekBaseChangeCounitStep]
 
 variable {j g j' g'}
 
@@ -217,26 +221,6 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [Monoi
 
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-/-
-variable (c : Compactification f) (sq : IsPullback g' f' f g)
-
-noncomputable def Etale.lowerShriekBaseChangeProperStep :=
-  Functor.whiskerLeft (c.i)_!Imm[A].mapDerivedCategoryPlus
-  (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq)
-
---set_option maxHeartbeats 500000 in
-lemma Etale.lowerShriekBaseChangeProperStep_app (c : Compactification f)
-    (sq : IsPullback g' f' f g) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    (Etale.lowerShriekBaseChangeProperStep A c sq).app K =
-    (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq).app
-      ((c.i)_!Imm[A].mapDerivedCategoryPlus.obj K) := by
-  simp only [Etale.lowerShriekBaseChangeProperStep]
-  let sb := (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq)
-  have : (Functor.whiskerLeft (c.i)_!Imm[A].mapDerivedCategoryPlus sb).app
-    K = sb.app ((c.i)_!Imm[A].mapDerivedCategoryPlus.obj K) := sorry
-  exact this
--/
 
 noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g) :

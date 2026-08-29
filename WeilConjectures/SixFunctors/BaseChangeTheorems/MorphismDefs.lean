@@ -1,11 +1,13 @@
 /-
 Copyright (c) 2026 Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Nailin Guan
+Authors: Edison Xie, Nailin Guan
 -/
 module
 
 public import Mathlib
+public import WeilConjectures.SixFunctors.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -26,15 +28,8 @@ v          v
 Y' --g---> Y
 ```
 
-recorded as `sq : CommSq g' f' f g`. On the bounded below derived categories of étale
-sheaves the derived pullback along `g` is the functor
-`(Etale.upperStar A g).mapDerivedCategoryPlus`, written `(g)^*[A].mapDerivedCategoryPlus`,
-induced levelwise by the exact `g^*` (no resolutions are needed), the derived pushforward
-along `f` is `Etale.rightDerivedLowerStarPlus A f`, written `R(f)_*[A]+`, computed via
-injective resolutions, and they are related by the derived adjunction
-`Etale.derivedUpperStarLowerStarAdjunctionPlus` of
-`WeilConjectures.SixFunctors.Derived.UpperLowerStar`. This file constructs the *derived
-base-change morphism*
+recorded as `sq : CommSq g' f' f g`.
+This file constructs the *derived base-change morphism*
 
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` (in diagrammatic `⋙`-order)
 
@@ -42,17 +37,42 @@ on the bounded below derived categories, as the composite of three named
 transformations: unit insertion, square transport along the pullback comparison
 `θ_sq : Lf'^* ∘ Lg^* ≅ Lg'^* ∘ Lf^*`, and counit contraction.
 
-The functoriality of `Functor.mapDerivedCategoryPlus` in natural isomorphisms and
-compositions and its compatibility with the single functors are provided by
-`WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`.
+The square transport is an instance of the purely categorical construction
+`CategoryTheory.Functor.squareTransport`: a natural isomorphism `θ : G₁ ⋙ G₂ ≅ G₃ ⋙ G₄`
+is transported under `R` on the left and `R'` on the right (with the reassociations) to
+`(R ⋙ G₁) ⋙ (G₂ ⋙ R') ≅ (R ⋙ G₃) ⋙ (G₄ ⋙ R')`, whose component at `K` is
+`R'.mapIso (θ.app (R.obj K))`.
 
 ## Main definitions
 
+- `CategoryTheory.Functor.squareTransport`: transport of a natural isomorphism under an
+  outer functor on each side, with its component lemmas `squareTransport_hom_app`,
+  `squareTransport_inv_app` and `squareTransport_app`.
 - `AlgebraicGeometry.Etale.pullbackSquareComparison`: the pullback comparison `θ_sq`
   of a commutative square on the bounded below derived categories.
 - `AlgebraicGeometry.Etale.baseChangeUnitStep`, `Etale.baseChangeSquareStep`,
   `Etale.baseChangeCounitStep`: the three steps of the construction.
 - `AlgebraicGeometry.Etale.baseChange`: the derived base-change morphism `BC_sq`.
+
+## Implementation notes (@Edison Xie)
+
+The component lemmas of `Etale.baseChangeSquareStep` are obtained from the component lemmas
+of `Functor.squareTransport`, which are stated for arbitrary functors. A direct `simp` proof
+on the unfolded concrete transformation elaborates quickly but produces a proof term whose
+kernel check does not terminate in practice, because the kernel normalises the composite
+transformation through the concrete derived functors `rightDerivedFunctorPlus` and
+`mapDerivedCategoryPlus` into the localised category.
+
+The isomorphism-level lemma `Etale.baseChangeSquareStep_app` is proved by `simp`: its
+left-hand side is headed by the ordinary definition `Iso.app`, for which the kernel compares
+arguments first, so nothing is unfolded. The morphism-level lemmas
+`Etale.baseChangeSquareStep_hom_app` and `Etale.baseChangeSquareStep_inv_app` are instead
+derived from it by `congrArg`. Instantiating `Functor.squareTransport_hom_app` at the
+concrete functors directly (by `simp`, `rw` or `exact`) produces a syntactically matching
+equation, but its kernel check was observed not to terminate: its left-hand side is headed by
+the projection functions `NatTrans.app` and `Iso.hom`, which the kernel reduces by fully
+normalising the underlying structure `squareTransport …` rather than by comparing
+arguments.
 
 -/
 
@@ -61,6 +81,43 @@ compositions and its compatibility with the single functors are provided by
 universe u' u
 
 open CategoryTheory Limits MonoidalCategory MonoidalClosed Abelian
+
+namespace CategoryTheory.Functor
+
+variable {C₁ C₂ C₃ C₃' C₄ C₅ : Type*} [Category* C₁] [Category* C₂] [Category* C₃]
+  [Category* C₃'] [Category* C₄] [Category* C₅]
+  {G₁ : C₂ ⥤ C₃} {G₂ : C₃ ⥤ C₄} {G₃ : C₂ ⥤ C₃'} {G₄ : C₃' ⥤ C₄}
+
+/-- Transport of a natural isomorphism `θ : G₁ ⋙ G₂ ≅ G₃ ⋙ G₄` under `R` on the left and
+`R'` on the right: the natural isomorphism
+`(R ⋙ G₁) ⋙ (G₂ ⋙ R') ≅ (R ⋙ G₃) ⋙ (G₄ ⋙ R')` obtained by whiskering `θ` and
+reassociating. Its component at `K` is `R'.mapIso (θ.app (R.obj K))`, see
+`Functor.squareTransport_app`. -/
+def squareTransport (R : C₁ ⥤ C₂) (R' : C₄ ⥤ C₅) (θ : G₁ ⋙ G₂ ≅ G₃ ⋙ G₄) :
+    (R ⋙ G₁) ⋙ (G₂ ⋙ R') ≅ (R ⋙ G₃) ⋙ (G₄ ⋙ R') :=
+  associator R G₁ (G₂ ⋙ R') ≪≫ isoWhiskerLeft R
+    ((associator G₁ G₂ R').symm ≪≫ isoWhiskerRight θ R' ≪≫ associator G₃ G₄ R') ≪≫
+      (associator R G₃ (G₄ ⋙ R')).symm
+
+variable (R : C₁ ⥤ C₂) (R' : C₄ ⥤ C₅) (θ : G₁ ⋙ G₂ ≅ G₃ ⋙ G₄) (K : C₁)
+
+@[simp]
+lemma squareTransport_hom_app :
+    (squareTransport R R' θ).hom.app K = R'.map (θ.hom.app (R.obj K)) := by
+  simp [squareTransport]
+
+@[simp]
+lemma squareTransport_inv_app :
+    (squareTransport R R' θ).inv.app K = R'.map (θ.inv.app (R.obj K)) := by
+  simp [squareTransport]
+
+@[simp]
+lemma squareTransport_app :
+    (squareTransport R R' θ).app K = R'.mapIso (θ.app (R.obj K)) := by
+  ext
+  simp
+
+end CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -97,30 +154,33 @@ noncomputable def Etale.pullbackSquareComparison (sq : CommSq g' f' f g) :
 /-- The *square transport* step `s_sq` of the base-change morphism on the bounded
 below derived categories: the natural transformation obtained by transporting along the
 pullback comparison `θ_sq` of the square under `Rf_*` on the left and `Rf'_*` on the
-right; the reassociations are the only other ingredient. -/
+right; the reassociations are the only other ingredient. This is
+`Functor.squareTransport` applied to `θ_sq`. -/
 noncomputable def Etale.baseChangeSquareStep (sq : CommSq g' f' f g) :
     (R(f)_*[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus) ⋙
         ((f')^*[A].mapDerivedCategoryPlus ⋙ R(f')_*[A]+) ≅
     (R(f)_*[A]+ ⋙ (f)^*[A].mapDerivedCategoryPlus) ⋙
         ((g')^*[A].mapDerivedCategoryPlus ⋙ R(f')_*[A]+) :=
-  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft R(f)_*[A]+
-    ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight
-      (Etale.pullbackSquareComparison A sq) R(f')_*[A]+ ≪≫
-        Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm
+  Functor.squareTransport R(f)_*[A]+ R(f')_*[A]+
+    (Etale.pullbackSquareComparison A sq)
 
-/-
 lemma Etale.baseChangeSquareStep_app (sq : CommSq g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
     ((Etale.baseChangeSquareStep A sq).app K) =
-      R(f')_*[A]+.mapIso
-        ((pullbackSquareComparison A sq).app (R(f)_*[A]+.obj K)) := by
-  apply Iso.ext
-  simp only [baseChangeSquareStep, Functor.isoWhiskerLeft_trans, Iso.trans_assoc, NatIso.trans_app,
-    Iso.trans_hom, Iso.app_hom, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
-    Iso.symm_hom, Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Category.comp_id, Category.id_comp, Functor.mapIso_hom]
-  exact (Category.id_comp _).trans (Category.comp_id _)
--/
+      R(f')_*[A]+.mapIso ((pullbackSquareComparison A sq).app (R(f)_*[A]+.obj K)) := by
+  simp [baseChangeSquareStep]
+
+lemma Etale.baseChangeSquareStep_hom_app (sq : CommSq g' f' f g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.baseChangeSquareStep A sq).hom.app K =
+      R(f')_*[A]+.map ((pullbackSquareComparison A sq).hom.app (R(f)_*[A]+.obj K)) :=
+  congrArg Iso.hom (Etale.baseChangeSquareStep_app A sq K)
+
+lemma Etale.baseChangeSquareStep_inv_app (sq : CommSq g' f' f g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.baseChangeSquareStep A sq).inv.app K =
+      R(f')_*[A]+.map ((pullbackSquareComparison A sq).inv.app (R(f)_*[A]+.obj K)) :=
+  congr(Iso.inv $(Etale.baseChangeSquareStep_app A sq K))
 
 end PullbackComposition
 
@@ -128,9 +188,9 @@ section BaseChangeTransformation
 
 /- The K-flat resolution package on the coefficient category `A`, as in the sections
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
-`WeilConjectures.SixFunctors.Derived.UpperLowerStar`; it enters here through the bounded
-below derived adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is
-obtained by restriction of the unbounded derived adjunction. -/
+`WeilConjectures.SixFunctors.Derived`; it enters here through the bounded below derived
+adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is obtained by
+restriction of the unbounded derived adjunction. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
@@ -148,7 +208,7 @@ derived categories: the natural transformation
 derived adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def Etale.baseChangeUnitStep :
     R(f)_*[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
-    (R(f)_*[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus) ⋙
+      (R(f)_*[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus) ⋙
         ((f')^*[A].mapDerivedCategoryPlus ⋙ R(f')_*[A]+) :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft
   (R(f)_*[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus)
@@ -158,8 +218,7 @@ lemma Etale.baseChangeUnitStep_app (K : DerivedCategory.Plus (Sheaf X.smallEtale
     (Etale.baseChangeUnitStep A f g f').app K =
       (derivedUpperStarLowerStarAdjunctionPlus A f').unit.app
         ((R(f)_*[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus).obj K) := by
-  simp only [baseChangeUnitStep, NatTrans.comp_app, Functor.rightUnitor_inv_app,
-    Functor.whiskerLeft_app, Category.id_comp]
+  simp [baseChangeUnitStep]
 
 /-- The *counit contraction* step `c_sq` of the base-change morphism on the bounded
 below derived categories: the natural transformation obtained by contracting the
@@ -175,12 +234,9 @@ noncomputable def Etale.baseChangeCounitStep :
 
 lemma Etale.baseChangeCounitStep_app (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
     (Etale.baseChangeCounitStep A f f' g').app K =
-      R(f')_*[A]+.map
-        ((g')^*[A].mapDerivedCategoryPlus.map
-          ((derivedUpperStarLowerStarAdjunctionPlus A f).counit.app K)) := by
-  simp only [baseChangeCounitStep, NatTrans.comp_app, Functor.whiskerRight_app, Functor.id_obj,
-    Functor.comp_map, Functor.leftUnitor_hom_app]
-  exact Category.comp_id _
+      R(f')_*[A]+.map ((g')^*[A].mapDerivedCategoryPlus.map
+        ((derivedUpperStarLowerStarAdjunctionPlus A f).counit.app K)) := by
+  simp [baseChangeCounitStep]
 
 variable {f g f' g'} in
 /-- The *derived base-change morphism* `BC_sq : Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` of a
