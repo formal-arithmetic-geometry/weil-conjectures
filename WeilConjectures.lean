@@ -35,7 +35,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.HasTensor
@@ -186,7 +185,6 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.PointCount
-public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison

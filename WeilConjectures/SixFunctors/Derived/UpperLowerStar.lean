@@ -13,11 +13,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
@@ -100,7 +99,8 @@ preadditive monoidal structure whose tensor product interacts well with coproduc
 as hypotheses on the coefficient category `A` only; they are transported to the sheaf
 categories by the instances of the folder
 `WeilConjectures.CategoryTheory.GrothendieckAbelian`, with the monoidal structure and
-its compatibilities provided by its `Monoidal` subfolder.
+its compatibilities provided by its `Monoidal` subfolder; its preadditivity is
+`CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
 
 The additivity and right exactness of `g^*` are derived here from the adjunction
 `g^* ⊣ g_*`; the left exactness comes from `Etale.preservesFiniteLimits_upperStar`, whose

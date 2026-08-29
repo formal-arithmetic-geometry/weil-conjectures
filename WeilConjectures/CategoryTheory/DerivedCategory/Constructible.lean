@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
 
 /-!
 
