@@ -15,7 +15,21 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **Transporting an extension along a lift of a blow-up over an open of the base.** -/
+/-- **Transporting a partial extension along a lift over an open of the base.** Let
+`p : Y ⟶ X` and `π : X' ⟶ X` be morphisms, let `V` be an open of `X` and let
+`b : Bl ⟶ V` be a scheme over `V` receiving a lift `ρ` of `π` over `V`. An extension
+`g : W ⟶ p ⁻¹ᵁ V` of the restriction `fV` of `f : U ⟶ Y`, defined on an open `W` of `Bl`
+containing the inverse image of `U`, pulls back along `ρ` to an open `W'` of `X'`
+contained in `π ⁻¹ᵁ V` and containing `π ⁻¹ᵁ U ⊓ π ⁻¹ᵁ V`, together with a morphism
+`G : W' ⟶ Y` over `X` which agrees with `f` wherever both are defined and whose graph,
+seen inside `Y ×_X X'`, is closed above `V`.
+
+This is the transport step in the proof of Conrad's Theorem 2.4, Case 2: `X'` is the
+blow-up of the global center, `Bl` the blow-up of the local center over the affine open
+`V`, and `ρ` the canonical comparison morphism. The closedness of the graph above `V` is
+obtained by exhibiting the graph of `G` above `V` as a base change of the graph of `g`
+along the comparison morphism of the two pullbacks, so that it is again a closed
+immersion. -/
 theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' ⟶ X}
     {U V : X.Opens} {f : U.toScheme ⟶ Y}
     {b : Bl ⟶ V.toScheme} {ρ : (π ⁻¹ᵁ V).toScheme ⟶ Bl} (hρ : ρ ≫ b = π ∣_ V)
@@ -195,8 +209,17 @@ theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' �
     exact hclosed₀
 
 /-- **Conrad's Theorem 2.4, Case 1 over an affine open of a qcqs base**, with the center
-extended to the whole base. -/
-theorem exists_isAdmissible_isPullback_of_isQuasiAffine
+extended to the whole base. Let `X` be qcqs, `U` a quasi-compact open of `X`, `V` an
+affine open of `X` and `q : Z ⟶ V` a morphism locally of finite type with `Z`
+quasi-affine, and let `fV : V ⊓ U ⟶ Z` be a morphism over `V`. Then there is a
+`U`-admissible center `C` on `X` whose blow-up restricts over `V` to the blow-up `Bl` of
+a center on `V` — as a cartesian square — carrying an extension of `fV` with closed graph.
+
+This is `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine` (Case 1, applied
+over the affine base `V`) followed by
+`AlgebraicGeometry.IsAdmissible.exists_extend_of_disjoint` (Stacks Project Tag 080M),
+which extends the center found over `V` to a `U`-admissible center on `X`. -/
+theorem exists_isAdmissible_extend_of_isAffineOpen
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) {V : X.Opens} (hV : IsAffineOpen V)
     {Z : Scheme.{u}} [Z.IsQuasiAffine] {q : Z ⟶ V.toScheme} [LocallyOfFiniteType q]
@@ -266,7 +289,7 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom
         IsClosed (Set.range (pullback.lift g W.ι hg)) := by
     intro i
     have := (hVsaff i).isQuasiAffine_preimage p
-    exact exists_isAdmissible_isPullback_of_isQuasiAffine hU (hVsaff i) (fV i) (hfV₁ i)
+    exact exists_isAdmissible_extend_of_isAffineOpen hU (hVsaff i) (fV i) (hfV₁ i)
   choose Cs Bls bs hs hpbs Ws' hUWs gs hgs hagrees hcloseds using hloc
   -- Step 4: the global center: the product of the local ones times a boundary center
   obtain ⟨K, hKft, hKsupp⟩ := X.exists_finiteType_ideal_coe_support_eq_compl U hU
