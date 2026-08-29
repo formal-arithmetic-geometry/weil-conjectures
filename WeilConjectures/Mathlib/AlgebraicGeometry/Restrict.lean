@@ -19,7 +19,9 @@ We record:
 - `AlgebraicGeometry.isPullback_resLE_homOfLE` — the restriction of a morphism to a smaller open
   of the target is the base change of its restriction to a larger one;
 - `AlgebraicGeometry.Scheme.Hom.surjective_resLE_appTop` — surjectivity of `appLE` implies
-  surjectivity of the induced map on global sections of the restrictions.
+  surjectivity of the induced map on global sections of the restrictions;
+- `AlgebraicGeometry.exists_opens_restrict_preimage` — a morphism defined on an open subscheme
+  restricts to the open subscheme of points mapping into a given open of the target.
 -/
 
 @[expose] public section
@@ -90,5 +92,27 @@ lemma Scheme.Hom.surjective_resLE_appTop {X Y : Scheme.{u}} (f : X ⟶ Y) {U : Y
   simp only [CommRingCat.comp_apply]
   rw [← CommRingCat.comp_apply U.topIso.inv, Iso.inv_hom_id, CommRingCat.id_apply, hy,
     ← CommRingCat.comp_apply, Iso.hom_inv_id, CommRingCat.id_apply]
+
+/-- **Restricting a morphism defined on an open subscheme to the preimage of an open of the
+target.** For `F : W₁ ⟶ Z` with `W₁` an open subscheme of `X` and `V` an open of `Z`, the set
+of points of `W₁` mapping into `V` is an open `W ≤ W₁` of `X`, and `F` restricts to a morphism
+`W ⟶ V`. -/
+lemma exists_opens_restrict_preimage {X Z : Scheme.{u}} (W₁ : X.Opens)
+    (F : W₁.toScheme ⟶ Z) (V : Z.Opens) :
+    ∃ (W : X.Opens) (hW : W ≤ W₁) (F' : W.toScheme ⟶ V.toScheme),
+      F' ≫ V.ι = X.homOfLE hW ≫ F ∧ ∀ x : W₁.toScheme, x.1 ∈ W ↔ F x ∈ V := by
+  have hle : W₁.ι ''ᵁ (F ⁻¹ᵁ V) ≤ W₁ := W₁.ι_image_le _
+  have hsub : Set.range (W₁.ι ''ᵁ (F ⁻¹ᵁ V)).ι.base ⊆
+      Set.range ((F ⁻¹ᵁ V).ι ≫ W₁.ι).base := by
+    simp [Scheme.Opens.range_ι, Set.range_comp]
+  set e := IsOpenImmersion.lift ((F ⁻¹ᵁ V).ι ≫ W₁.ι) (W₁.ι ''ᵁ (F ⁻¹ᵁ V)).ι hsub with he
+  have hefac : e ≫ ((F ⁻¹ᵁ V).ι ≫ W₁.ι) = (W₁.ι ''ᵁ (F ⁻¹ᵁ V)).ι :=
+    IsOpenImmersion.lift_fac _ _ _
+  have hhom : X.homOfLE hle = e ≫ (F ⁻¹ᵁ V).ι := by
+    rw [← cancel_mono W₁.ι, Scheme.homOfLE_ι, Category.assoc, hefac]
+  refine ⟨W₁.ι ''ᵁ (F ⁻¹ᵁ V), hle, e ≫ (F ∣_ V), ?_, ?_⟩
+  · rw [hhom, Category.assoc, Category.assoc, morphismRestrict_ι]
+  · intro x
+    exact Scheme.Opens.mem_ι_image_iff W₁
 
 end AlgebraicGeometry
