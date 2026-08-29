@@ -47,22 +47,26 @@ isomorphism.
 
 The oplax monoidal structure on the pullback functor is obtained from the lax monoidal
 structure on the pushforward by the doctrinal adjunction construction
-`CategoryTheory.Adjunction.leftAdjointOplaxMonoidal`. Showing that it is strong monoidal
-under suitable hypotheses (a conservative family of points) is the subject of future work.
+`CategoryTheory.Adjunction.leftAdjointOplaxMonoidal`.
+
 When `A` is moreover braided and the sheaf categories carry the braided structure
-`Sheaf.braidedCategory`, these lax monoidal structures preserve the braidings:
+`Sheaf.braidedCategory`, all of this is compatible with the braidings:
 
 - `CategoryTheory.sheafToPresheafLaxBraided`: the inclusion of sheaves into presheaves is
   lax braided, being the right adjoint of the braided sheafification functor.
 - `CategoryTheory.Functor.sheafPushforwardContinuousLaxBraided`: the pushforward functor
   is lax braided, by transporting the lax braided structure of the composite above along
   the same isomorphism.
+- `CategoryTheory.Functor.sheafPullbackBraided`: as soon as the oplax structure morphisms
+  of the pullback functor are isomorphisms, the pullback functor is braided, i.e. strong
+  monoidal and compatible with the braidings. This is again doctrinal adjunction: the
+  braided axiom for the pullback is the transpose of the braided axiom for the
+  pushforward (`CategoryTheory.Adjunction.leftAdjointBraided`).
 
 Since a symmetric monoidal functor is by definition a braided functor between symmetric
-monoidal categories, this also covers the symmetric case.
-
-The dual statements for the pullback functor `F.sheafPullback A J K` (an oplax monoidal
-structure, which is strong under suitable hypotheses) are the subject of future work.
+monoidal categories, this also covers the symmetric case: for a morphism of sites between
+sites with symmetric coefficients, `f_*` is lax symmetric monoidal and `f^*` is strong
+symmetric monoidal as soon as its comparison morphisms are invertible.
 -/
 
 @[expose] public section
@@ -157,6 +161,26 @@ lemma sheafPullback_δ (F₁ F₂ : Sheaf J A) :
           LaxMonoidal.μ (F.sheafPushforwardContinuous A J K) _ _) :=
   (F.sheafAdjunctionContinuous A J K).leftAdjointOplaxMonoidal_δ F₁ F₂
 
+section
+
+variable [IsIso (OplaxMonoidal.η (F.sheafPullback A J K))]
+  [∀ F₁ F₂, IsIso (OplaxMonoidal.δ (F.sheafPullback A J K) F₁ F₂)]
+
+/-- If the oplax monoidal structure morphisms of the pullback of sheaves along a
+continuous functor are isomorphisms, the pullback is strong monoidal. -/
+@[implicit_reducible]
+noncomputable def sheafPullbackMonoidal : (F.sheafPullback A J K).Monoidal :=
+  Functor.Monoidal.ofOplaxMonoidal _
+
+attribute [local instance] sheafPullbackMonoidal
+
+/-- With respect to the strong monoidal structure of `sheafPullbackMonoidal`, the
+adjunction between the pullback and the pushforward of sheaves is still monoidal. -/
+instance : (F.sheafAdjunctionContinuous A J K).IsMonoidal :=
+  inferInstance
+
+end
+
 end
 
 end Functor
@@ -196,6 +220,26 @@ noncomputable instance sheafPushforwardContinuousLaxBraided :
   letI := Functor.LaxMonoidal.transport_isMonoidal_hom
     (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A)
   Functor.LaxBraided.ofNatIso (F.sheafPushforwardContinuousIsoCompPresheafToSheaf J K A)
+
+section
+
+variable [(F.sheafPushforwardContinuous A J K).IsRightAdjoint]
+  [IsIso (OplaxMonoidal.η (F.sheafPullback A J K))]
+  [∀ F₁ F₂, IsIso (OplaxMonoidal.δ (F.sheafPullback A J K) F₁ F₂)]
+
+attribute [local instance] sheafPullbackMonoidal
+
+/-- The pullback of sheaves along a continuous functor is braided, as soon as its oplax
+monoidal structure morphisms are isomorphisms: it is then a strong monoidal left adjoint
+of the lax braided pushforward functor, so the braided axiom is obtained by transposing
+the braided axiom of the pushforward through the adjunction. Since a symmetric monoidal
+functor is by definition a braided functor between symmetric monoidal categories, this
+also covers the symmetric case. -/
+@[implicit_reducible]
+noncomputable def sheafPullbackBraided : (F.sheafPullback A J K).Braided :=
+  (F.sheafAdjunctionContinuous A J K).leftAdjointBraided
+
+end
 
 end Functor
 

@@ -33,7 +33,7 @@ the natural transformation `i.hom` is monoidal. -/
 lemma transport_isMonoidal_hom {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) :
     letI := transport i
     NatTrans.IsMonoidal i.hom := by
-  letI := transport i
+  let := transport i
   refine ⟨rfl, fun X Y ↦ ?_⟩
   simp [transport_μ, tensorHom_comp_tensorHom_assoc]
 

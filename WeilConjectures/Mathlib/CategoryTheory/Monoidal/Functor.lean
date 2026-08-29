@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
-# Transport of a lax monoidal structure along a natural isomorphism
+# Transport of a lax monoidal structure, and strong monoidality of a left adjoint
 
 If `F G : C ⥤ D` are functors between monoidal categories, `F` is lax monoidal and
 `i : F ≅ G`, then `G` is lax monoidal (`CategoryTheory.Functor.LaxMonoidal.transport`),
@@ -16,6 +16,11 @@ with unit `ε F ≫ i.hom.app (𝟙_ C)` and tensorator
 `(i.inv.app X ⊗ₘ i.inv.app Y) ≫ μ F X Y ≫ i.hom.app (X ⊗ Y)`.
 
 This is the lax analogue of `CategoryTheory.Functor.Monoidal.transport`.
+
+We also record that if `adj : F ⊣ G` is a monoidal adjunction whose oplax structure
+morphisms on `F` are isomorphisms, then the strong monoidal structure
+`CategoryTheory.Functor.Monoidal.ofOplaxMonoidal F` on `F` is again compatible with the
+adjunction (`CategoryTheory.Adjunction.isMonoidal_ofOplaxMonoidal`).
 -/
 
 @[expose] public section
@@ -81,3 +86,26 @@ lemma transport_μ {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) (X Y : C) : let
   rfl
 
 end CategoryTheory.Functor.LaxMonoidal
+
+
+namespace CategoryTheory.Adjunction
+
+open MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.OplaxMonoidal] [G.LaxMonoidal] [adj.IsMonoidal]
+  [IsIso (η F)] [∀ X Y, IsIso (δ F X Y)]
+
+include adj in
+/-- If the oplax monoidal structure morphisms of the left adjoint of a monoidal adjunction
+are isomorphisms, the resulting strong monoidal structure on the left adjoint is still
+compatible with the adjunction. -/
+instance isMonoidal_ofOplaxMonoidal :
+    letI := Functor.Monoidal.ofOplaxMonoidal F
+    adj.IsMonoidal := by
+  let := Functor.Monoidal.ofOplaxMonoidal F
+  have h := ‹adj.IsMonoidal›
+  exact ⟨h.leftAdjoint_ε, h.leftAdjoint_μ⟩
+
+end CategoryTheory.Adjunction
