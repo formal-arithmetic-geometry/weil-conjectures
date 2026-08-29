@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 
 /-!
 # Quotients by extended ideals are pushouts
@@ -18,6 +20,9 @@ maps `R ⟶ R ⧸ K`, `S ⟶ S ⧸ K·S` and the induced map `R ⧸ K ⟶ S ⧸ 
 This is not proved by exhibiting the colimit cocone by hand: it is the tensor-product
 pushout `CommRingCat.isPushout_tensorProduct` transported along the isomorphism
 `Algebra.TensorProduct.quotIdealMapEquivTensorQuot : S ⧸ K·S ≃ₐ[S] S ⊗[R] (R ⧸ K)`.
+
+We also record that the statement "the ranges of two ring maps into `R` generate `R`" is
+invariant under an isomorphism of `R` (`CommRingCat.closure_range_union_eq_top_iff_of_iso`).
 
 ## Main results
 
@@ -54,5 +59,23 @@ lemma isPushout_quotient {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R) :
     exact (Algebra.TensorProduct.tmul_one_eq_one_tmul r).symm
   · ext r
     exact (Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk S K r).symm
+
+/-- Transporting "the ranges of `a` and `b` generate" along an isomorphism of the target. -/
+lemma closure_range_union_eq_top_of_iso {A B R R' : CommRingCat.{u}}
+    {a : A ⟶ R} {b : B ⟶ R} (e : R ⟶ R') [IsIso e]
+    (h : Subring.closure (Set.range ⇑a.hom ∪ Set.range ⇑b.hom) = ⊤) :
+    Subring.closure (Set.range ⇑(a ≫ e).hom ∪ Set.range ⇑(b ≫ e).hom) = ⊤ := by
+  have he : Function.Surjective ⇑e.hom := (ConcreteCategory.bijective_of_isIso e).2
+  have := _root_.Subring.closure_image_eq_top e.hom he h
+  rwa [Set.image_union, ← Set.range_comp, ← Set.range_comp] at this
+
+/-- "The ranges of `a` and `b` generate" is invariant under an isomorphism of the target. -/
+lemma closure_range_union_eq_top_iff_of_iso {A B R R' : CommRingCat.{u}}
+    {a : A ⟶ R} {b : B ⟶ R} (e : R ⟶ R') [IsIso e] :
+    Subring.closure (Set.range ⇑(a ≫ e).hom ∪ Set.range ⇑(b ≫ e).hom) = ⊤ ↔
+      Subring.closure (Set.range ⇑a.hom ∪ Set.range ⇑b.hom) = ⊤ := by
+  refine ⟨fun h ↦ ?_, closure_range_union_eq_top_of_iso e⟩
+  have := closure_range_union_eq_top_of_iso (a := a ≫ e) (b := b ≫ e) (inv e) h
+  simpa using this
 
 end CommRingCat

@@ -890,12 +890,8 @@ lemma disjoint_range_strictTransformMap_of_probe
     rw [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage]
     exact fun hmem ↦ hzK (hz1 ▸ Set.mem_preimage.mp hmem)
   -- the pulled-back center is contained in the pulled-back ideal of `J`
-  have hle : K.comap (Spec.map φ ≫ U.2.fromSpec) ≤ J.comap (Spec.map φ ≫ U.2.fromSpec) := by
-    refine Scheme.IdealSheafData.le_of_isAffine ?_
-    rw [Scheme.IdealSheafData.ideal_top_comap_specMap_fromSpec K U φ,
-      Scheme.IdealSheafData.ideal_top_comap_specMap_fromSpec J U φ,
-      hspan, Ideal.map_span, Set.image_singleton, Ideal.span_singleton_le_iff_mem]
-    exact Ideal.mem_map_of_mem _ (Ideal.mem_map_of_mem _ hbJ)
+  have hle : K.comap (Spec.map φ ≫ U.2.fromSpec) ≤ J.comap (Spec.map φ ≫ U.2.fromSpec) :=
+    Scheme.IdealSheafData.comap_le_comap_of_ideal_map_eq_span K J U hbJ φ hspan
   exact hy'K (Scheme.IdealSheafData.support_antitone hle hy'J)
 
 /-- **Quasi-compactness of the inclusion of the open locus of a strict transform** over

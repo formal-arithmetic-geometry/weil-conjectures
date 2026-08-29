@@ -17,6 +17,7 @@ public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy
+public import WeilConjectures.Blowup.DisjointnessBlowup
 public import WeilConjectures.Blowup.Extension
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Blowup.Gluing
@@ -43,7 +44,10 @@ public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.FinitePresentation
+public import WeilConjectures.Compactification.FiniteTypeDirected
 public import WeilConjectures.Compactification.FiniteTypeExtension
+public import WeilConjectures.Compactification.IdealSheafPower
 public import WeilConjectures.Compactification.Modification
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
@@ -102,6 +106,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
+public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale

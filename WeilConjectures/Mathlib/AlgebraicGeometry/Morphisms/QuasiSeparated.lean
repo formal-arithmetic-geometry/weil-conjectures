@@ -16,6 +16,9 @@ are the localization of `Γ(X, ⊤)` away from `f`. This is the analogue of
 `AlgebraicGeometry.Γ_restrict_isLocalization` with the affineness hypothesis relaxed to
 quasi-compact quasi-separated, deduced from the qcqs lemma
 `AlgebraicGeometry.isLocalization_basicOpen_of_qcqs`.
+
+We also record `AlgebraicGeometry.Scheme.Opens.quasiCompact_ι`: the inclusion of a
+quasi-compact open of a quasi-separated scheme is a quasi-compact morphism.
 -/
 
 @[expose] public section
@@ -43,5 +46,12 @@ theorem Γ_restrict_isLocalization_of_qcqs (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (f : Γ(X, ⊤)) :
     IsLocalization.Away f Γ(X.basicOpen f, ⊤) :=
   isLocalization_of_eq_basicOpen_of_qcqs f _ (Opens.isOpenEmbedding_obj_top _)
+
+/-- The inclusion of a quasi-compact open of a quasi-separated scheme is a quasi-compact
+morphism. -/
+lemma Scheme.Opens.quasiCompact_ι {X : Scheme.{u}} [QuasiSeparatedSpace X] (U : X.Opens)
+    (hU : IsCompact (U : Set X)) : QuasiCompact U.ι :=
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  inferInstance
 
 end AlgebraicGeometry
