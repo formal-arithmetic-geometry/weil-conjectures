@@ -2,6 +2,8 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy
+public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 
 @[expose] public section
 
@@ -70,7 +72,7 @@ theorem Scheme.IsQuasiAffine.of_isPullback_of_isAffine {S Y W T : Scheme.{u}} {p
     have hw : (q ≫ h).base t = (u ≫ p).base t := by rw [H.w]
     simpa only [Scheme.Hom.comp_base, TopCat.coe_comp, Function.comp_apply] using hw
   have htV : q t ∈ h ⁻¹ᵁ V := by
-    show h.base (q.base t) ∈ V
+    change h.base (q.base t) ∈ V
     rw [hb]
     exact hxV
   obtain ⟨_, ⟨r₀, rfl⟩, htr, hrV⟩ :=
@@ -116,6 +118,103 @@ instance {S Y Z : Scheme.{u}} (p : Y ⟶ S) (g : Z ⟶ S)
     [IsQuasiAffineHom p] [QuasiCompact p] [QuasiSeparated p] :
     IsQuasiAffineHom (pullback.snd p g) :=
   .of_isPullback (IsPullback.of_hasPullback p g)
+
+
+section Case3
+
+variable {X : Scheme.{u}}
+
+theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
+    [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
+    (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
+    {Y : Scheme.{u}} [CompactSpace Y] [QuasiSeparatedSpace Y] {p : Y ⟶ X}
+    [IsSeparated p] [LocallyOfFiniteType p] [IsQuasiAffineHom p]
+    (f : U.toScheme ⟶ Y) (hf : f ≫ p = U.ι)
+    (hfc : IsClosed ((p ⁻¹ᵁ V).ι ⁻¹' Set.range f)) :
+    ∃ (B : IsAdmissible X V) (W : B.I.blowup.Opens) (hUW : B.I.blowupMap ⁻¹ᵁ U ≤ W)
+      (g : W.toScheme ⟶ Y) (hg : g ≫ p = W.ι ≫ B.I.blowupMap),
+      B.I.blowup.homOfLE hUW ≫ g = (B.I.blowupMap ∣_ U) ≫ f ∧
+        IsClosed (Set.range (pullback.lift g W.ι hg)) := by
+  classical
+  haveI : QuasiCompact p := quasiCompact_of_compactSpace p
+  -- Step 1: the disjointness blow-up
+  obtain ⟨B₁, hB₁⟩ := exists_isAdmissible_disjoint_closure_range_of_le hUV hU hV f hf hfc
+  set X₁ : Scheme.{u} := B₁.I.blowup with hX₁
+  set π₁ : X₁ ⟶ X := B₁.I.blowupMap with hπ₁
+  haveI : IsProper π₁ := B₁.isProper_blowupMap
+  haveI : CompactSpace X₁ := QuasiCompact.compactSpace_of_compactSpace π₁
+  haveI : QuasiSeparatedSpace X₁ := quasiSeparatedSpace_of_quasiSeparated π₁
+  -- the base change of `p` along the blow-up
+  obtain ⟨Y₁, r, p₁, hpb₁⟩ :
+      ∃ (Y₁ : Scheme.{u}) (r : Y₁ ⟶ Y) (p₁ : Y₁ ⟶ X₁), IsPullback r p₁ p π₁ :=
+    ⟨_, _, _, IsPullback.of_hasPullback p π₁⟩
+  haveI : IsSeparated p₁ := MorphismProperty.of_isPullback hpb₁ ‹IsSeparated p›
+  haveI : LocallyOfFiniteType p₁ := MorphismProperty.of_isPullback hpb₁ ‹LocallyOfFiniteType p›
+  haveI : QuasiCompact p₁ := MorphismProperty.of_isPullback hpb₁ ‹QuasiCompact p›
+  haveI : IsQuasiAffineHom p₁ := .of_isPullback hpb₁
+  haveI : CompactSpace Y₁ := QuasiCompact.compactSpace_of_compactSpace p₁
+  haveI : QuasiSeparatedSpace Y₁ := quasiSeparatedSpace_of_quasiSeparated p₁
+  -- the section over the preimage of `U`
+  have hfcond : ((π₁ ∣_ U) ≫ f) ≫ p = (π₁ ⁻¹ᵁ U).ι ≫ π₁ := by
+    rw [Category.assoc, hf, morphismRestrict_ι]
+  set f₁ : (π₁ ⁻¹ᵁ U).toScheme ⟶ Y₁ := hpb₁.lift ((π₁ ∣_ U) ≫ f) (π₁ ⁻¹ᵁ U).ι hfcond with hf₁
+  have hf₁r : f₁ ≫ r = (π₁ ∣_ U) ≫ f := hpb₁.lift_fst _ _ _
+  have hf₁p : f₁ ≫ p₁ = (π₁ ⁻¹ᵁ U).ι := hpb₁.lift_snd _ _ _
+  have hU₁c : IsCompact ((π₁ ⁻¹ᵁ U : X₁.Opens) : Set X₁) := π₁.isCompact_preimage hU
+  have hV₁c : IsCompact ((π₁ ⁻¹ᵁ V : X₁.Opens) : Set X₁) := π₁.isCompact_preimage hV
+  haveI : CompactSpace (π₁ ⁻¹ᵁ U).toScheme := isCompact_iff_compactSpace.mp hU₁c
+  haveI : QuasiCompact f₁ := quasiCompact_of_compactSpace f₁
+  have hdisj := hB₁ hpb₁.w hf₁r
+  -- Step 2: a quasi-compact open of the blow-up meeting the preimage of `V` in that of `U`
+  have hScpt : IsCompact (p₁ '' closure (Set.range f₁)) :=
+    (isClosed_closure.isCompact).image p₁.continuous
+  have hSdisj : Disjoint (p₁ '' closure (Set.range f₁))
+      (closure (((π₁ ⁻¹ᵁ V : X₁.Opens) : Set X₁) \ ((π₁ ⁻¹ᵁ U : X₁.Opens) : Set X₁))) := by
+    rw [Set.disjoint_left]
+    rintro _ ⟨y, hy, rfl⟩ hmem
+    exact Set.disjoint_left.mp hdisj hy hmem
+  obtain ⟨X₀, hX₀c, hSX₀, hU₁X₀, hX₀V⟩ :=
+    exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff
+      (π₁.preimage_mono hUV) hU₁c hScpt hSdisj
+  -- Step 3: Case 2 over the smaller base `X₀`
+  haveI : CompactSpace X₀.toScheme := isCompact_iff_compactSpace.mp hX₀c
+  haveI : QuasiSeparatedSpace X₀.toScheme := quasiSeparatedSpace_of_quasiSeparated X₀.ι
+  haveI : QuasiCompact X₀.ι := quasiCompact_of_compactSpace X₀.ι
+  set U₀ : X₀.toScheme.Opens := X₀.ι ⁻¹ᵁ (π₁ ⁻¹ᵁ U) with hU₀
+  have hU₀c : IsCompact ((U₀ : X₀.toScheme.Opens) : Set X₀.toScheme) :=
+    X₀.ι.isCompact_preimage hU₁c
+  have hf₀cond : U₀.ι ≫ X₀.ι = ((X₀.ι ∣_ (π₁ ⁻¹ᵁ U)) ≫ f₁) ≫ p₁ := by
+    rw [Category.assoc, hf₁p, morphismRestrict_ι]
+  set f₀ : U₀.toScheme ⟶ (p₁ ⁻¹ᵁ X₀).toScheme :=
+    (isPullback_morphismRestrict p₁ X₀).lift U₀.ι ((X₀.ι ∣_ (π₁ ⁻¹ᵁ U)) ≫ f₁) hf₀cond with hf₀
+  have hf₀q : f₀ ≫ (p₁ ∣_ X₀) = U₀.ι := (isPullback_morphismRestrict p₁ X₀).lift_fst _ _ _
+  have hf₀ι : f₀ ≫ (p₁ ⁻¹ᵁ X₀).ι = (X₀.ι ∣_ (π₁ ⁻¹ᵁ U)) ≫ f₁ :=
+    (isPullback_morphismRestrict p₁ X₀).lift_snd _ _ _
+  obtain ⟨C, W₀, hUW₀, g₀, hg₀, hagree₀, hclosed₀, hdom₀⟩ :=
+    exists_isAdmissible_extend_of_isQuasiAffineHom hU₀c f₀ hf₀q
+  -- Step 4: extend the centre from `X₀` to the blow-up `X₁`
+  have hV₀ : X₀.ι ⁻¹ᵁ (π₁ ⁻¹ᵁ V) = U₀ := by
+    refine le_antisymm (fun x hx ↦ ?_) (X₀.ι.preimage_mono (π₁.preimage_mono hUV))
+    have h1 : X₀.ι x ∈ (X₀ : Set X₁) := by
+      rw [← Scheme.Opens.range_ι]
+      exact Set.mem_range_self x
+    have h2 : X₀.ι x ∈ ((X₀ ⊓ (π₁ ⁻¹ᵁ V) : X₁.Opens) : Set X₁) := ⟨h1, hx⟩
+    rw [hX₀V] at h2
+    exact h2
+  obtain ⟨D, hmap, hmapw, hpbD⟩ :=
+    IsAdmissible.exists_extend_of_disjoint (X := X₁) (A := X₀) (B := π₁ ⁻¹ᵁ V) hX₀c hV₁c
+      C.I C.finiteType (by rw [hV₀]; exact C.disjoint_support)
+  set ρ : (D.I.blowupMap ⁻¹ᵁ X₀).toScheme ⟶ C.I.blowup :=
+    hpbD.lift (D.I.blowupMap ∣_ X₀) (D.I.blowupMap ⁻¹ᵁ X₀).ι
+      (morphismRestrict_ι D.I.blowupMap X₀) with hρdef
+  have hρ : ρ ≫ C.I.blowupMap = D.I.blowupMap ∣_ X₀ := hpbD.lift_fst _ _ _
+  have hρι : ρ ≫ hmap = (D.I.blowupMap ⁻¹ᵁ X₀).ι := hpbD.lift_snd _ _ _
+  obtain ⟨W', hW'X₀, G, hG, hUW', hagreeG, hclosedG⟩ :=
+    exists_extend_of_lift (p := p₁) (π := D.I.blowupMap) (U := π₁ ⁻¹ᵁ U) (V := X₀) (f := f₁)
+      (b := C.I.blowupMap) (ρ := ρ) hρ hUW₀ hg₀ hf₀ι hagree₀ hclosed₀
+  sorry
+
+end Case3
 
 
 end AlgebraicGeometry
