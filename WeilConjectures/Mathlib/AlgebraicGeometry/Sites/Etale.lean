@@ -98,7 +98,6 @@ section Lift
 variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (V : X.Etale)
   (hV : Set.range V.hom.base ⊆ Set.range j.base)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- An étale `X`-scheme `V` whose structure morphism has image in the range of an open
 immersion `j : U ⟶ X` lifts through `j`, by the universal property of open immersions; the
 lift is étale because `j` is.
@@ -120,7 +119,6 @@ def Etale.liftOfRangeSubset : U.Etale :=
     AlgebraicGeometry.Etale.of_comp _ j
   Etale.mk (IsOpenImmersion.lift j V.hom hV)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The lift of `Etale.liftOfRangeSubset` identifies `V` with the image of an étale
 `U`-scheme under the localization functor along `j`: the comparison morphism is the identity
 on underlying schemes.
