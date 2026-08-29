@@ -6,13 +6,12 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
@@ -36,7 +35,8 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
   category specifying to the chosen compcatification `HasCompactification.compactification`,
   with scoped notation `R(f)_![A]+`.
 
-- `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`
+- `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`, with scoped notation
+  `H_c(f)[A](i)`.
 
 -/
 
@@ -139,44 +139,30 @@ end DerivedLowerShriek
 
 end AlgebraicGeometry
 
-namespace CategoryTheory
-
-variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
-  (B : Type*) [Category* B] [Abelian B] [HasSheafify J B]
-
-/-- The global sections functor on sheaves with values in an abelian category is
-additive, being right adjoint to the additive constant sheaf functor. -/
-instance Sheaf.Γ_additive [HasGlobalSectionsFunctor J B] : (Sheaf.Γ J B).Additive :=
-  (constantSheafΓAdj J B).right_adjoint_additive
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-@[instance_reducible]
-noncomputable def hasDerivedCategory_coefficient : HasDerivedCategory.{u + 1} A :=
-  HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _
-
-end CategoryTheory
-
 namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-attribute [local instance] CategoryTheory.hasDerivedCategory_coefficient
-
 section DerivedGlobalSections
+
+namespace Etale
 
 variable (X : Scheme.{u})
 
 /-- The derived global sections `RΓ(X, -) : D(X_ét) ⥤ D(A)`: the total right derived
 functor of the global sections functor on étale sheaves, which exists since the small
 étale site has a terminal object. -/
-noncomputable def Etale.rightDerivedGlobalSections :
+noncomputable def rightDerivedGlobalSections :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
   (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor
+
+end Etale
 
 end DerivedGlobalSections
 
 section CompactlySupportedCohomology
+
+namespace Etale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
@@ -189,17 +175,23 @@ The intermediate object `Rf_! K ∈ D(Y_ét)` and the coefficient complex
 `RΓc(X/Y, K) ∈ D(A)` are not definitionally the same. For the structure morphism of the
 geometric fiber of a scheme separated of finite type over a finite field this is the
 `RΓc(X, K) = RΓ(s, Ra_{X!} K)` of the trace-formula interface. -/
-noncomputable def Etale.compactlySupportedGlobalSections :
+noncomputable def compactlySupportedGlobalSections :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
-  Etale.rightDerivedLowerShriek A f ⋙ Etale.rightDerivedGlobalSections A Y
+  R(f)_![A] ⋙ rightDerivedGlobalSections A Y
 
 /-- The compactly supported cohomology along a morphism `f : X ⟶ Y` admitting a
 compactification, `Hᶜⁱ(X/Y, K) := Hⁱ(RΓc(X/Y, K))`: the `i`-th homology object of the
 compactly supported derived global sections. Finiteness is a theorem, not part of the
 definition. -/
-noncomputable def Etale.compactlySupportedCohomology (i : ℤ) :
+noncomputable def compactlySupportedCohomology (i : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ A :=
-  Etale.compactlySupportedGlobalSections A f ⋙ DerivedCategory.homologyFunctor A i
+  compactlySupportedGlobalSections A f ⋙ DerivedCategory.homologyFunctor A i
+
+@[inherit_doc compactlySupportedCohomology]
+scoped notation "H_c(" f ")[" A "](" i ")" =>
+  compactlySupportedCohomology A f i
+
+end Etale
 
 end CompactlySupportedCohomology
 
