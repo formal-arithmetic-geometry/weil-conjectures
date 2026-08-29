@@ -225,7 +225,3 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
 
 end AlgebraicGeometry
 
-#find_home AlgebraicGeometry.Scheme.IdealSheafData.mul_mono
-#find_home AlgebraicGeometry.Scheme.IdealSheafData.iSup_mul
-#find_home AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.pow
-#find_home AlgebraicGeometry.Scheme.IdealSheafData.support_pow_le
