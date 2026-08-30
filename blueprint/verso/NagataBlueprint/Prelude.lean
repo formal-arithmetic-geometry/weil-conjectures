@@ -29,6 +29,7 @@ import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.QuasiAffineGeneral
 import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 import WeilConjectures.Blowup.Affine.Defs
+import WeilConjectures.Blowup.Affine.Projective
 import WeilConjectures.Blowup.Affine.Proper
 import WeilConjectures.Compactification.Affine
 import WeilConjectures.Compactification.BaseChange

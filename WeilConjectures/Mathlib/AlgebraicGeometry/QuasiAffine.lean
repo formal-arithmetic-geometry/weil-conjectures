@@ -80,6 +80,7 @@ theorem Scheme.IsQuasiAffine.of_locallyQuasiFinite [Y.IsQuasiAffine]
 quasi-affine scheme. -/
 @[mk_iff]
 class IsQuasiAffineHom {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop where
+  /-- The preimage of an affine open of the target is a quasi-affine scheme. -/
   isQuasiAffine_preimage (U : Y.Opens) (hU : IsAffineOpen U) : (f ⁻¹ᵁ U).toScheme.IsQuasiAffine
 
 lemma IsAffineOpen.isQuasiAffine_preimage {U : Y.Opens} (hU : IsAffineOpen U)

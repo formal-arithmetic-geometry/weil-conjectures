@@ -465,7 +465,9 @@ structure ExtensionData where
   U : X.Opens
   /-- The new affine open. -/
   V : X.Opens
+  /-- The two opens cover the ambient scheme. -/
   hUV : U ⊔ V = ⊤
+  /-- The new open is affine. -/
   hV : IsAffineOpen V
   /-- A Noetherian approximation of `U`. -/
   N : U.toScheme.NoetherianApproximation
@@ -473,14 +475,18 @@ structure ExtensionData where
   i₀ : N.I
   /-- The descended intersection. -/
   W₀ : (N.D.obj i₀).Opens
+  /-- The descended intersection is quasi-compact. -/
   hW₀c : IsCompact (W₀ : Set (N.D.obj i₀))
+  /-- The descended intersection pulls back to `U ⊓ V`. -/
   hW₀ : N.π.app i₀ ⁻¹ᵁ W₀ = U.ι ⁻¹ᵁ V
   /-- The number of chosen generators of the intersection. -/
   n : ℕ
   /-- The chosen generators of the intersection: sections of `V` whose basic opens
   cover `U ⊓ V`. -/
   b : Fin n → Γ(X, V)
+  /-- Each chosen generator has its basic open inside the intersection. -/
   hb (l : Fin n) : X.basicOpen (b l) ≤ U ⊓ V
+  /-- The basic opens of the chosen generators cover the intersection. -/
   hb' : U ⊓ V = ⨆ l, X.basicOpen (b l)
 
 namespace ExtensionData

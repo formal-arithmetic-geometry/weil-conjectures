@@ -75,19 +75,28 @@ structure TwoOpenSide (u : U ⟶ S) (O O' : U.Opens) where
   X : Scheme.{u}
   /-- The structure morphism of the ambient model. -/
   s : X ⟶ S
+  /-- The ambient model is proper over `S`. -/
   isProper_s : IsProper s
   /-- The open on which the proper extension of the inclusion of `O` is defined. -/
   V : X.Opens
   /-- The proper extension `ψ : V ⟶ U` of the inclusion of `O`. -/
   ψ : V.toScheme ⟶ U
+  /-- The extension `ψ` is proper. -/
   isProper_ψ : IsProper ψ
+  /-- `ψ` is a morphism over `S`, for the structure morphism `s` of the ambient model. -/
   ψ_u : ψ ≫ u = V.ι ≫ s
   /-- The embedded copy of `O` inside `V`. -/
   υ : O.toScheme ⟶ V.toScheme
+  /-- The embedding of `O` into `V` is an open immersion. -/
   isOpenImmersion_υ : IsOpenImmersion υ
+  /-- The embedding of `O` into `V` is compatible with `ψ`, i.e. `ψ` extends the inclusion
+  of `O` into `U`. -/
   υ_ψ : υ ≫ ψ = O.ι
+  /-- The embedded copy of `O` is exactly the part of `V` lying over `O`. -/
   range_υ : Set.range υ = ψ ⁻¹' (O : Set U)
+  /-- Over `O`, the extension `ψ` is an isomorphism. -/
   isIso_ψ_restrict : IsIso (ψ ∣_ O)
+  /-- The embedded copy of `O` is dense in the ambient model. -/
   dense_range : Dense (Set.range (υ ≫ V.ι))
 
 namespace TwoOpenSide

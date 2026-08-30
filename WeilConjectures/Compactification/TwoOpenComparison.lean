@@ -997,8 +997,11 @@ structure TwoOpenPreparation (u : U ⟶ S) (O₁ O₂ : U.Opens) where
   side₁ : TwoOpenSide u O₁ O₂
   /-- The prepared side over the second open. -/
   side₂ : TwoOpenSide u O₂ O₁
+  /-- The first side is prepared. -/
   prepared₁ : side₁.Prepared
+  /-- The second side is prepared. -/
   prepared₂ : side₂.Prepared
+  /-- The two sides satisfy the key boundary disjointness. -/
   keyDisjoint : TwoOpenSide.KeyDisjoint side₁ side₂
 
 /-- Existence of the comparison-layer data of the two-open compactification

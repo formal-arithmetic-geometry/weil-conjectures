@@ -60,8 +60,11 @@ structure Compactification {X Y : Scheme.{u}} (f : X ⟶ Y) where
   g : Z ⟶ Y
   /-- The open immersion of `X` into the compactification. -/
   i : X ⟶ Z
+  /-- `f` factors as the open immersion `i` followed by the structure morphism `g`. -/
   comm : f = i ≫ g
+  /-- The structure morphism `g` is proper. -/
   isProper : IsProper g
+  /-- The morphism `i` is an open immersion. -/
   isOpenImmersion : IsOpenImmersion i
 
 attribute [instance] Compactification.isProper Compactification.isOpenImmersion
@@ -161,6 +164,7 @@ variable {X Y : Scheme.{u}}
 /-- A morphism `f : X ⟶ Y` has a compactification if it factors as an open
 immersion followed by a proper morphism. -/
 class HasCompactification (f : X ⟶ Y) : Prop where
+  /-- Some compactification of `f` exists. -/
   nonempty_compactification : Nonempty (Compactification f)
 
 attribute [instance low] HasCompactification.nonempty_compactification
