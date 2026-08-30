@@ -41,21 +41,21 @@ variable types, chart probes keep their ring abstract
 (`Scheme.IdealSheafData.ideal_comap_comap_of_probe`), and memberships are transported
 along morphism equalities by `mem_of_ringHom_eq` instead of `▸`-rewrites.
 
-Three further conventions keep the heartbeat count of the proofs down, each measured
-with `#count_heartbeats` on this file:
-* rewriting over the chart types is done by `simp only`, not `rw` — `rw` has to
-  `kabstract` the large terms, which typically costs two to three times as much;
-  likewise `push_cast` over `reesAlgebra` coercions is spelled out as a `simp only`
-  with `MulMemClass.coe_mul`, `SubmonoidClass.coe_pow`, `OneMemClass.coe_one`;
+Three further conventions keep the elaboration of the proofs cheap:
+* chart-level rewrite chains that had to repeat the same lemma two or three times are
+  replaced by a single `simp only`, and `push_cast` over `reesAlgebra` coercions is
+  spelled out as a `simp only` with `MulMemClass.coe_mul`, `SubmonoidClass.coe_pow`,
+  `OneMemClass.coe_one`;
 * a large term is never elaborated against an unknown expected type: `obtain ⟨..⟩ := e`
   is split into `have h := e` followed by `obtain ⟨..⟩ := h`, and nested arguments of
-  `exact`/`refine` are hoisted into `have`s (this is worth an order of magnitude in
-  `Scheme.IdealSheafData.mem_ideal_map_pow_mul_of_chartFrac_mem`);
+  `exact`/`refine` are hoisted into `have`s;
 * rewriting steps that would otherwise happen at the chart types are packaged as
-  lemmas over variable rings (`mem_map_of_eq_mul_of_map_eq`,
-  `CommRingCat.mem_ideal_map_iso_iff`, `map_ideal_comap_congr`, and the
-  `∀ k' ≥ k` form of `Ideal.exists_pow_mul_mem_of_algebraMap_mem_map`) and only
-  instantiated here.
+  lemmas over variable rings or variable schemes
+  (`Ideal.mem_map_of_map_eq_of_eq_mul`,
+  `Scheme.IdealSheafData.blowupι_blowupMap_fromSpec`, the private
+  `Scheme.IdealSheafData.map_ideal_comap_congr`, and the `∀ k' ≥ k` form of
+  `Ideal.exists_forall_ge_pow_mul_mem_of_algebraMap_mem_map`) and only instantiated
+  here.
 
 -/
 
@@ -183,58 +183,16 @@ open HomogeneousLocalization Polynomial
 
 /-- **Clearing denominators in a localization**: if the image of `x` under the
 localization map away from `t` lies in the extension of an ideal `K`, then every large
-enough power of `t` multiplies `x` into `K`. The "every large enough" form is stated
-here, over the variable ring `R`, so that the use site on the blow-up charts does not
-have to `rw` with `pow_sub_mul_pow` inside a `HomogeneousLocalization`. -/
-lemma _root_.Ideal.exists_pow_mul_mem_of_algebraMap_mem_map {R S : Type u} [CommRing R]
-    [CommRing S] [Algebra R S] (t : R) [IsLocalization.Away t S] {K : Ideal R} {x : R}
-    (hx : algebraMap R S x ∈ K.map (algebraMap R S)) :
+enough power of `t` multiplies `x` into `K`. -/
+lemma _root_.Ideal.exists_forall_ge_pow_mul_mem_of_algebraMap_mem_map {R S : Type u}
+    [CommRing R] [CommRing S] [Algebra R S] (t : R) [IsLocalization.Away t S]
+    {K : Ideal R} {x : R} (hx : algebraMap R S x ∈ K.map (algebraMap R S)) :
     ∃ k : ℕ, ∀ k' ≥ k, t ^ k' * x ∈ K := by
-  obtain ⟨⟨j, u⟩, hju⟩ :=
-    (IsLocalization.mem_map_algebraMap_iff (Submonoid.powers t) S).mp hx
-  obtain ⟨k₁, hk₁⟩ := u.2
-  have hu : (u : R) = t ^ k₁ := hk₁.symm
-  have h0 : algebraMap R S (x * t ^ k₁ - j) = 0 := by
-    rw [map_sub, map_mul, sub_eq_zero, ← hu]
-    exact hju
-  obtain ⟨⟨-, k₂, rfl⟩, hk₂⟩ :=
-    (IsLocalization.map_eq_zero_iff (Submonoid.powers t) S _).mp h0
-  have hk : t ^ (k₂ + k₁) * x ∈ K := by
-    have h1 : t ^ (k₂ + k₁) * x = t ^ k₂ * (j : R) := by
-      have h2 : t ^ k₂ * (x * t ^ k₁ - (j : R)) = 0 := hk₂
-      rw [pow_add]
-      linear_combination h2
-    rw [h1]
-    exact K.mul_mem_left _ j.2
-  refine ⟨k₂ + k₁, fun k' hk' ↦ ?_⟩
+  obtain ⟨s, ⟨k, rfl⟩, hs⟩ :=
+    (IsLocalization.algebraMap_mem_map_algebraMap_iff (Submonoid.powers t) S K x).mp hx
+  refine ⟨k, fun k' hk' ↦ ?_⟩
   rw [← pow_sub_mul_pow t hk', mul_assoc]
-  exact Ideal.mul_mem_left _ _ hk
-
-/-- **Transport of a membership across two agreeing ideal extensions**: if `Ja` and `Jb`
-extend to the same ideal along `f` and `g`, then anything of the shape `f x · z` with
-`x ∈ Ja` lies in the extension of `Jb`. Stated over variable rings, so that the two
-`rw`s it packages never have to `kabstract` the large chart rings at the use site. -/
-private lemma mem_map_of_eq_mul_of_map_eq {R₁ R₂ R₃ : Type u} [CommRing R₁] [CommRing R₂]
-    [CommRing R₃] {f : R₁ →+* R₃} {g : R₂ →+* R₃} {Ja : Ideal R₁} {Jb : Ideal R₂}
-    (hab : Ja.map f = Jb.map g) {x : R₁} (hx : x ∈ Ja) {y z : R₃} (hy : y = f x * z) :
-    y ∈ Jb.map g := by
-  rw [hy, ← hab]
-  exact Ideal.mul_mem_right _ _ (Ideal.mem_map_of_mem _ hx)
-
-/-- Membership in the image of an ideal under an isomorphism of commutative rings, in
-the form that directly reads off a membership in the source: everything is stated over
-the variables `R`, `S`, so instantiating this at the large chart rings of the blow-up
-costs nothing beyond the instantiation itself. -/
-lemma _root_.CommRingCat.mem_ideal_map_iso_iff {R S : CommRingCat.{u}} (e : R ≅ S)
-    (P : Ideal R) (y : S) : y ∈ P.map e.hom.hom ↔ e.inv.hom y ∈ P := by
-  constructor
-  · intro hy
-    have h := Ideal.mem_map_of_mem e.inv.hom hy
-    rwa [Ideal.map_map, ← CommRingCat.hom_comp, e.hom_inv_id, CommRingCat.hom_id,
-      Ideal.map_id] at h
-  · intro hy
-    have h := Ideal.mem_map_of_mem e.hom.hom hy
-    rwa [← CommRingCat.comp_apply, e.inv_hom_id, CommRingCat.id_apply] at h
+  exact Ideal.mul_mem_left _ _ hs
 
 /-- The degree-one Rees elements are additive in the section. -/
 lemma _root_.AlgebraicGeometry.reesX_add {A : Type u} [CommRing A] (I : Ideal A)
@@ -319,6 +277,9 @@ lemma _root_.AlgebraicGeometry.AffineBlowup.chartFrac_mul_awayAlgebraMap_pow
     Localization.mk_mul, Localization.mk_eq_mk_iff, Localization.r_iff_exists]
   refine ⟨1, ?_⟩
   apply Subtype.ext
+  -- the three `…MemClass` coercion lemmas stand in for `push_cast` here and in the
+  -- chart-fraction lemmas below; running the whole `push_cast` simp set on these terms
+  -- is markedly more expensive
   simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, OneMemClass.coe_one,
     coe_reesMonomial, coe_reesGradingZero_apply, coe_reesX]
   rw [Polynomial.monomial_pow, one_pow, ← Polynomial.C_pow]
@@ -419,32 +380,38 @@ noncomputable def _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChartSect
   CommRingCat.ofHom (AffineBlowup.awayAlgebraMap (I.ideal V)
     (reesX (I.ideal V) a ha)) ≫ (Scheme.ΓSpecIso _).inv
 
-/-- **The chart embedding over `V` composed with the blow-up map**, with the source
-scheme `W` kept abstract: this is where the `Category.assoc`/`blowupι_blowupMap`
-rewriting happens, so that every rewrite motive is type-checked over the variable `W`
-instead of over the large `HomogeneousLocalization` chart ring. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.comp_blowupι_blowupMap
-    {W : Scheme.{u}} (I : X.IdealSheafData) (V : X.affineOpens)
-    (f : W ⟶ AffineBlowup (I.ideal V)) :
-    (f ≫ I.blowupι V) ≫ I.blowupMap =
-      (f ≫ AffineBlowup.toSpec (I.ideal V)) ≫ V.2.fromSpec := by
-  simp only [Category.assoc, Scheme.IdealSheafData.blowupι_blowupMap,
-    Scheme.IdealSheafData.blowupNatTrans_app, IsAffineOpen.isoSpec_inv_ι]
+/-- **The chart embedding over `V` composed with the blow-up map** factors through the
+canonical affine probe of `V`:
+```
+   AffineBlowup (I.ideal V) --- blowupι V ---> I.blowup
+              |                                   |
+    toSpec (I.ideal V)                        blowupMap
+              v                                   v
+      Spec Γ(X, V) --------- V.2.fromSpec ------> X
+```
+-/
+@[reassoc]
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupι_blowupMap_fromSpec
+    (I : X.IdealSheafData) (V : X.affineOpens) :
+    I.blowupι V ≫ I.blowupMap = AffineBlowup.toSpec (I.ideal V) ≫ V.2.fromSpec := by
+  simp only [Scheme.IdealSheafData.blowupι_blowupMap,
+    Scheme.IdealSheafData.blowupNatTrans_app, Category.assoc,
+    IsAffineOpen.isoSpec_inv_ι]
 
 /-- The chart probe composed with the blow-up map is the affine probe of the chart
-ring. Instantiating `comp_blowupι_blowupMap` in term mode keeps the chart ring out of
-every rewrite motive; a direct `rw`-chain on this statement costs 25× more. -/
+ring. -/
 lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart_comp_blowupMap
     (I : X.IdealSheafData) (V : X.affineOpens) {a : Γ(X, V.1)} (ha : a ∈ I.ideal V) :
     I.blowupChart V ha ≫ I.blowupMap =
       Spec.map (CommRingCat.ofHom (AffineBlowup.awayAlgebraMap (I.ideal V)
         (reesX (I.ideal V) a ha))) ≫ V.2.fromSpec :=
-  (Scheme.IdealSheafData.comp_blowupι_blowupMap I V
-      (AffineBlowup.chart (I.ideal V) (reesX (I.ideal V) a ha)
-        (reesX_mem (I.ideal V) a ha))).trans
-    (congrArg (· ≫ V.2.fromSpec)
-      (AffineBlowup.chart_toSpec (I.ideal V) (reesX (I.ideal V) a ha)
-        (reesX_mem (I.ideal V) a ha)))
+  -- instantiating the two square lemmas in term mode keeps the chart ring out of every
+  -- rewrite motive
+  (Category.assoc _ _ _).trans
+    ((congrArg (AffineBlowup.chart (I.ideal V) (reesX (I.ideal V) a ha)
+          (reesX_mem (I.ideal V) a ha) ≫ ·) (I.blowupι_blowupMap_fromSpec V)).trans
+      (AffineBlowup.chart_toSpec_assoc (I.ideal V) (reesX (I.ideal V) a ha)
+        (reesX_mem (I.ideal V) a ha) V.2.fromSpec))
 
 /-- The chart probe lies over the affine open `V`. Derived from the abstract-probe
 form `top_le_preimage_specMap_fromSpec`, which keeps the chart ring out of the
@@ -471,12 +438,7 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.appLE_blowupChart_comp_blow
     (h : (⊤ : (Spec (.of (HomogeneousLocalization.Away (reesGrading (I.ideal V))
         (reesX (I.ideal V) a ha)))).Opens) ≤ (I.blowupChart V ha ≫ I.blowupMap) ⁻¹ᵁ V.1) :
     (I.blowupChart V ha ≫ I.blowupMap).appLE V.1 ⊤ h = I.blowupChartSection V ha := by
-  let f := I.blowupChart V ha ≫ I.blowupMap
-  change (⊤ : _) ≤ f ⁻¹ᵁ V.1 at h
-  change f.appLE V.1 ⊤ h = I.blowupChartSection V ha
-  have hfg : f = _ := I.blowupChart_comp_blowupMap V ha
-  clear_value (hf : f = _)
-  subst hfg
+  rw [Scheme.Hom.appLE_eq_of_eq (I.blowupChart_comp_blowupMap V ha)]
   exact appLE_top_specMap_fromSpec V (CommRingCat.ofHom (AffineBlowup.awayAlgebraMap
     (I.ideal V) (reesX (I.ideal V) a ha))) _
 
@@ -605,8 +567,8 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.preimage_subset_iUnion_rang
   intro x hx
   -- Every step transports a membership along an equality of opens (`.le`/`.ge`) and
   -- destructs it in a *separate* `obtain`: `obtain ⟨..⟩ := <term>` elaborates the term
-  -- against an unknown expected type, which over the chart types costs an order of
-  -- magnitude more than the same proof written in two steps.
+  -- against an unknown expected type, which over the chart types is markedly more
+  -- expensive than the same proof written in two steps.
   have hx2 := (I.blowupMap_preimage V).le hx
   obtain ⟨y, rfl⟩ := hx2
   have hy := (AffineBlowup.iSup_basicOpen_reesX_eq_top_of_span hs).ge
@@ -646,7 +608,7 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.specMap_awayMap_blowupChart
         (mul_comm (reesX (I.ideal V) a ha) (reesX (I.ideal V) b hb)))) ≫
         I.blowupChart V hb := by
   unfold Scheme.IdealSheafData.blowupChart AffineBlowup.chart
-  simp only [Proj.SpecMap_awayMap_awayι_assoc, Proj.SpecMap_awayMap_awayι_assoc]
+  simp only [Proj.SpecMap_awayMap_awayι_assoc]
 
 /-- Comparing the ideals of two ideal sheaves on the image of an affine probe through
 the pullbacks of global sections. -/
@@ -740,8 +702,7 @@ lemma AffineBlowup.chartFrac_surjective {a : A} (ha : a ∈ I₀)
     (reesX_mem I₀ a ha) x
   obtain ⟨n, s, hsmem, rfl⟩ := hx
   have hs' : s ∈ reesGrading I₀ n := by simpa using hsmem
-  have hs'' := (mem_reesGrading_iff_exists I₀).mp hs'
-  obtain ⟨g, hg, hrepr⟩ := hs''
+  obtain ⟨g, hg, hrepr⟩ := (mem_reesGrading_iff_exists I₀).mp hs'
   subst hrepr
   exact ⟨n, g, hg, rfl⟩
 
@@ -808,9 +769,9 @@ lemma AffineBlowup.exists_isLocalizationElem_pow_mul_chartFrac_mem
   let t := HomogeneousLocalization.Away.isLocalizationElem
     (reesX_mem I₀ b hb) (reesX_mem I₀ a ha)
   -- the image of `g/bᵉ` lies in the extension of `Jb` to the overlap; the type is left
-  -- to be read off from `mem_map_of_eq_mul_of_map_eq`, an ascription would re-elaborate
-  -- it against the chart types
-  have hmem := mem_map_of_eq_mul_of_map_eq hab hμ
+  -- to be read off from `Ideal.mem_map_of_map_eq_of_eq_mul`, an ascription would
+  -- re-elaborate it against the chart types
+  have hmem := Ideal.mem_map_of_map_eq_of_eq_mul hab hμ
     (AffineBlowup.awayMap_chartFrac I₀ hb ha hg)
   -- the overlap ring is the localization of the `b`-chart at `a/b`
   let : Algebra
@@ -822,10 +783,8 @@ lemma AffineBlowup.exists_isLocalizationElem_pow_mul_chartFrac_mem
       = reesX I₀ b hb * reesX I₀ a ha) one_ne_zero
   -- `algebraMap` for the instance just introduced is `ρb` by definition, so `hmem` is
   -- already the hypothesis of the denominator-clearing lemma
-  have hclear := Ideal.exists_pow_mul_mem_of_algebraMap_mem_map t
+  exact Ideal.exists_forall_ge_pow_mul_mem_of_algebraMap_mem_map t
     (K := Jb) (x := AffineBlowup.chartFrac I₀ hb hg) hmem
-  obtain ⟨N, hN⟩ := hclear
-  exact ⟨N, hN⟩
 
 end LocalAlgebra
 
@@ -884,9 +843,9 @@ private lemma mem_of_ringHom_eq {R S : CommRingCat.{u}} {f g : R ⟶ S} (h : f =
   exact hx
 
 /-- Congruence of the transported ideal of sections of a pullback along an equality of
-affine probes. Keeping the probe ring `S` a variable makes this cheaper to instantiate
-than the `congrArg` at an explicitly written lambda over the chart probes. -/
-private lemma map_ideal_comap_congr {Y : Scheme.{u}} (K : Y.IdealSheafData)
+affine probes. -/
+private lemma Scheme.IdealSheafData.map_ideal_comap_congr {Y : Scheme.{u}}
+    (K : Y.IdealSheafData)
     {S : CommRingCat.{u}} {q q' : Spec S ⟶ Y} (h : q = q') :
     ((K.comap q).ideal ⟨⊤, isAffineOpen_top _⟩).map (Scheme.ΓSpecIso S).hom.hom =
       ((K.comap q').ideal ⟨⊤, isAffineOpen_top _⟩).map (Scheme.ΓSpecIso S).hom.hom := by
@@ -918,8 +877,9 @@ lemma Scheme.IdealSheafData.mem_chartIdeal_iff (I : X.IdealSheafData)
     {z : HomogeneousLocalization.Away (reesGrading (I.ideal V)) (reesX (I.ideal V) a ha)} :
     z ∈ I.chartIdeal J V ha ↔ (Scheme.ΓSpecIso _).inv.hom z ∈
       (J.comap (I.blowupChart V ha)).ideal ⟨⊤, isAffineOpen_top _⟩ :=
-  CommRingCat.mem_ideal_map_iso_iff (Scheme.ΓSpecIso _)
-    ((J.comap (I.blowupChart V ha)).ideal ⟨⊤, isAffineOpen_top _⟩) z
+  (Ideal.symm_apply_mem_of_equiv_iff
+    (I := (J.comap (I.blowupChart V ha)).ideal ⟨⊤, isAffineOpen_top _⟩)
+    (f := (Scheme.ΓSpecIso _).commRingCatIsoToRingEquiv)).symm
 
 /-- The chart model of a finite-type ideal sheaf is finitely generated. -/
 lemma Scheme.IdealSheafData.chartIdeal_fg (I : X.IdealSheafData)
@@ -951,10 +911,8 @@ lemma Scheme.IdealSheafData.chartIdeal_map_awayMap (I : X.IdealSheafData)
       (rfl : reesX (I.ideal V) b hb * reesX (I.ideal V) a ha
         = reesX (I.ideal V) b hb * reesX (I.ideal V) a ha)))
   -- the two overlap probes agree
-  have hmid := map_ideal_comap_congr J (I.specMap_awayMap_blowupChart V hb ha)
-  have h3 := hmid.symm.trans h2
-  have h4 := h1.symm.trans h3
-  exact h4
+  have hmid := J.map_ideal_comap_congr (I.specMap_awayMap_blowupChart V hb ha)
+  exact h1.symm.trans (hmid.symm.trans h2)
 
 end ChartIdeal
 
@@ -1021,11 +979,11 @@ lemma Scheme.IdealSheafData.mem_ideal_map_of_probes (K : Y.IdealSheafData)
     Scheme.Hom.app_eq_appLE, ← RingHom.comp_apply, ← CommRingCat.hom_comp,
     Scheme.Hom.appLE_map, Scheme.Hom.appLE_comp_appLE]
   -- exchange the composite for the probe composite and split off the probe map
-  simp only [Scheme.Hom.appLE_eq_of_eq hcomp]
-  simp only [← Scheme.Hom.appLE_comp_appLE (pullback.fst (c i) K.subschemeι) (c i ≫ g)
-    V.1 ⊤ (pullback.snd (c i) K.subschemeι ⁻¹ᵁ ((K.subschemeι ≫ g) ⁻¹ᵁ V.1))
-    (hle i) le_top]
-  simp only [CommRingCat.comp_apply]
+  simp only [Scheme.Hom.appLE_eq_of_eq hcomp,
+    ← Scheme.Hom.appLE_comp_appLE (pullback.fst (c i) K.subschemeι) (c i ≫ g)
+      V.1 ⊤ (pullback.snd (c i) K.subschemeι ⁻¹ᵁ ((K.subschemeι ≫ g) ⁻¹ᵁ V.1))
+      (hle i) le_top,
+    CommRingCat.comp_apply]
   -- the probe image of `x` is killed by the closed immersion from the subscheme part
   have h0 : ((pullback.fst (c i) K.subschemeι).app ⊤).hom
       (((c i ≫ g).appLE V.1 ⊤ (hle i)).hom x) = 0 := by
@@ -1149,13 +1107,13 @@ lemma AffineBlowup.exists_uniform_numerator_finset
     exact AffineBlowup.exists_uniform_numerator I₀ s hs Jc hJc hbs hg
       ((hG b (hs ▸ Ideal.subset_span hbs)) ▸ Ideal.subset_span hμG)
   -- one uniform threshold, by the abstract double-sup combinator
-  have hunif := exists_uniform_ge₂ s (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) hnum
-  obtain ⟨d₀, hd₀⟩ := hunif
+  obtain ⟨d₀, hd₀⟩ :=
+    exists_uniform_ge₂ s (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) hnum
   refine ⟨d₀, fun d hd ↦ ?_⟩
   -- the numerators at degree `d`, collected into a finite set
   choose mf hmI hrest using hd₀ d hd
-  have hMex := exists_finset_forall_mem s (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) mf
-  obtain ⟨M, hM₁, hM₂⟩ := hMex
+  obtain ⟨M, hM₁, hM₂⟩ :=
+    exists_finset_forall_mem s (fun b hbs ↦ G b (hs ▸ Ideal.subset_span hbs)) mf
   refine ⟨M, ?_, ?_⟩
   · intro m hmM
     obtain ⟨b, hbs, μ, hμG, rfl⟩ := hM₁ m hmM
@@ -1376,7 +1334,7 @@ lemma Scheme.IdealSheafData.mem_ideal_map_pow_mul_of_chartFrac_mem
   intro b'
   -- hoisting the two arguments into `have`s elaborates them against their own (known)
   -- types instead of against the metavariables of `mem_of_ringHom_eq`, which over the
-  -- chart rings is an order of magnitude cheaper
+  -- chart rings is markedly cheaper
   have hA := I.appLE_blowupChart_comp_blowupMap V (hs ▸ Ideal.subset_span b'.2)
     (I.blowupChart_comp_blowupMap_preimage V (hs ▸ Ideal.subset_span b'.2))
   have hB := I.blowupChartSection_mem_of_chartFrac_mem J V
@@ -1420,14 +1378,13 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
   classical
   have : QuasiCompact I.blowupMap := Scheme.IdealSheafData.quasiCompact_blowupMap hI
   -- a finite affine cover of `X`
-  have hcov := isCompact_univ.elim_finite_subcover
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
     (fun V : X.affineOpens ↦ (V.1 : Set X)) (fun V ↦ V.1.isOpen) (by
       intro x _
       have hx : x ∈ (⊤ : X.Opens) := trivial
       rw [← iSup_affineOpens_eq_top X] at hx
       obtain ⟨V, hV⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
       exact Set.mem_iUnion.mpr ⟨V, hV⟩)
-  obtain ⟨t, ht⟩ := hcov
   -- generators of the center over each affine open
   choose s hs using fun V : X.affineOpens ↦ hI V le_top
   -- generators of the chart models of `J`
@@ -1440,8 +1397,8 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
       (fun a b ha hb ↦ I.chartIdeal_map_awayMap J V ha hb)
       (G V) (fun b hb ↦ hG V b hb)
   -- one global degree dominating all thresholds
-  refine ⟨1 + t.sup d₀f, ?_⟩
   let D : ℕ := 1 + t.sup d₀f
+  refine ⟨D, ?_⟩
   -- the numerator finsets at the global degree
   choose M hM₁ hM₂ using fun (V : X.affineOpens) (hVt : V ∈ t) ↦
     hd₀f V D (le_trans (Finset.le_sup hVt) (Nat.le_add_left _ 1))
@@ -1498,8 +1455,8 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
       · -- the generation inequality on each chart
         rintro ⟨⟨V, hVt⟩, b'⟩
         -- the three `hs V ▸ Ideal.subset_span b'.2` are deliberately *not* shared in a
-        -- `have`: sharing saves ~2000 heartbeats but costs ~7s of elaboration time
-        -- here, in the longest declaration of the file
+        -- `have`: sharing them was measured to make this declaration, the longest of
+        -- the file, noticeably slower to elaborate (Lean 4.33.1)
         refine Scheme.IdealSheafData.ideal_pow_mul_le_comap_of_numerators I J _ V
           ((hs V) ▸ Ideal.subset_span b'.2) D
           (G V b'.1 ((hs V) ▸ Ideal.subset_span b'.2))
