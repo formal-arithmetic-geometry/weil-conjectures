@@ -1,9 +1,8 @@
 % This file is a chapter fragment.  It is included by version/detailed.tex.
 %
-% Status: everything up to and including lemma:openclosed-etale-lifts-locally is
-% formalised; lemma:openclosed-stalk-lowerStar,
-% prop:openclosed-lowerStar-fully-faithful, prop:openclosed-conservative and
-% thm:openclosed-exact are still in progress and carry an empty \lean{} field.
+% Status: the chapter is fully formalised; all twelve statements carry a
+% \lean{} field naming the Lean declarations that prove them, and a \leanok
+% on both the statement and its proof.
 
 \chapter{The open--closed exact sequence}\label{chap:openclosed}
 
@@ -362,7 +361,9 @@ which is an open subscheme of $W$ containing $w$.
 \begin{lemma}[Stalks of $i_*$ on $Z$]
 \label{lemma:openclosed-stalk-lowerStar}
 \uses{lemma:openclosed-etale-lifts-locally}
-\lean{}
+\lean{AlgebraicGeometry.Etale.lowerStarCompSheafFiberIso,
+      AlgebraicGeometry.Etale.lowerStarCompUliftSheafFiberIso}
+\leanok
 Let $i\colon Z\to X$ be a closed immersion, let $\bar z$ be a geometric point
 of $Z$ and write $\bar x:=i\circ\bar z$ for the corresponding geometric point
 of $X$.  Then for every $\mathcal H\in\shv{\et Z}$,
@@ -372,6 +373,7 @@ of $X$.  Then for every $\mathcal H\in\shv{\et Z}$,
 naturally in $\mathcal H$.
 \end{lemma}
 \begin{proof}
+\leanok
 Write $\mathrm N(\bar x)$ for the cofiltered category of \'etale
 neighbourhoods $(V,\bar v)$ of $\bar x$ in $\et X$ and $\mathrm N(\bar z)$
 for that of $\bar z$ in $\et Z$.  By the formula for $i_*$,
@@ -431,7 +433,9 @@ allowed to pass to $\Omega'$.
 \begin{proposition}[$i_*$ is fully faithful]
 \label{prop:openclosed-lowerStar-fully-faithful}
 \uses{lemma:openclosed-stalk-lowerStar,lemma:openclosed-stalk-upperStar,lemma:openclosed-point-ulift}
-\lean{}
+\lean{AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit,
+      AlgebraicGeometry.Etale.fullyFaithfulLowerStar}
+\leanok
 Let $i\colon Z\to X$ be a closed immersion.  Then the counit
 \[
   \varepsilon\colon i^*i_*\Longrightarrow\mathrm{id}_{\shv{\et Z}}
@@ -439,6 +443,7 @@ Let $i\colon Z\to X$ be a closed immersion.  Then the counit
 is an isomorphism; equivalently, $i_*$ is fully faithful.
 \end{proposition}
 \begin{proof}
+\leanok
 Fix $\mathcal H\in\shv{\et Z}$.  By \ref{lemma:openclosed-point-ulift} it is
 enough to show that $\varepsilon_{\mathcal H}$ is an isomorphism on the stalk
 at every geometric point $\bar z$ of $Z$.  By
@@ -462,13 +467,15 @@ isomorphism.
 \begin{proposition}[$j^*$ and $i^*$ jointly reflect isomorphisms]
 \label{prop:openclosed-conservative}
 \uses{lemma:openclosed-point-factors,lemma:openclosed-stalk-upperStar,lemma:openclosed-point-ulift}
-\lean{}
+\lean{AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar}
+\leanok
 Let $(j,i)$ be a complementary pair on $X$ and let
 $\varphi\colon\mathcal F\to\mathcal F'$ be a morphism in $\shv{\et X}$ such
 that $j^*\varphi$ and $i^*\varphi$ are isomorphisms.  Then $\varphi$ is an
 isomorphism.
 \end{proposition}
 \begin{proof}
+\leanok
 By \ref{lemma:openclosed-point-ulift} it suffices to prove that
 $\varphi_{\bar x}$ is an isomorphism for every geometric point $\bar x$ of
 $X$.  By \ref{lemma:openclosed-point-factors}, $\bar x$ factors as
@@ -483,7 +490,8 @@ isomorphism.
 \begin{theorem}[The open--closed exact sequence]
 \label{thm:openclosed-exact}
 \uses{lemma:openclosed-vanishing-lowerStar,lemma:openclosed-vanishing-lowerShriek,prop:openclosed-lowerStar-fully-faithful,prop:openclosed-conservative}
-\lean{}
+\lean{AlgebraicGeometry.Etale.shortExact_openClosedShortComplex}
+\leanok
 Let $(j,i)$ be a complementary pair on $X$ and let
 $\mathcal F\in\shv{\et X}$.  Then
 \[
@@ -494,6 +502,7 @@ $\mathcal F\in\shv{\et X}$.  Then
 is a short exact sequence in $\shv{\et X}$, naturally in $\mathcal F$.
 \end{theorem}
 \begin{proof}
+\leanok
 \emph{It is a complex.}  By the adjunction $j_!\dashv j^*$ and
 \ref{lemma:openclosed-vanishing-lowerStar},
 \[
