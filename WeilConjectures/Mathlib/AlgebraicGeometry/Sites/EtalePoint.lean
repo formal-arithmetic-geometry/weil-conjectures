@@ -54,6 +54,9 @@ through `CategoryTheory.Adjunction.compCoyonedaIso`.
 - `AlgebraicGeometry.Scheme.pointSmallEtaleComapIso`: the point of the small étale site of
   `Y` obtained from `s` by `CategoryTheory.GrothendieckTopology.Point.comap` along base
   change *is* the geometric point `s ≫ f`, as an isomorphism of points.
+- `AlgebraicGeometry.Scheme.pointSmallEtaleElementsBaseChange`: base change as a functor
+  between the categories of elements of the two fibre functors, that is, between the
+  categories of pointed étale neighbourhoods of `s ≫ f` in `Y` and of `s` in `X`.
 
 -/
 
@@ -146,6 +149,68 @@ noncomputable def pointSmallEtaleComapIso :
     (pointSmallEtale s).comap f.Etale (Hom.coverPreserving_etale f) ≅
       pointSmallEtale (s ≫ f) :=
   GrothendieckTopology.Point.isoMk (pointSmallEtaleFiberEtaleIso f s)
+
+/-- A morphism `Spec Ω ⟶ V ×_Y X` over `X` is carried by
+`AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso` to its composite with the first
+projection, a morphism `Spec Ω ⟶ V` over `Y`. -/
+@[simp]
+lemma pointSmallEtaleFiberEtaleIso_hom_app_left (V : Y.Etale)
+    (x : (f.Etale ⋙ (pointSmallEtale s).fiber).obj V) :
+    ((pointSmallEtaleFiberEtaleIso f s).hom.app V x).left =
+      x.left ≫ Limits.pullback.fst V.hom f :=
+  rfl
+
+/-- The morphism `Spec Ω ⟶ V ×_Y X` attached to a morphism `v : Spec Ω ⟶ V` over `Y` by
+`AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso` has first component `v`. -/
+@[reassoc (attr := simp)]
+lemma pointSmallEtaleFiberEtaleIso_inv_app_left_fst (V : Y.Etale)
+    (v : (pointSmallEtale (s ≫ f)).fiber.obj V) :
+    ((pointSmallEtaleFiberEtaleIso f s).inv.app V v).left ≫ Limits.pullback.fst V.hom f =
+      v.left := by
+  rw [← pointSmallEtaleFiberEtaleIso_hom_app_left f s V
+    ((pointSmallEtaleFiberEtaleIso f s).inv.app V v),
+    (pointSmallEtaleFiberEtaleIso f s).inv_hom_id_app_apply]
+
+/-- The morphism `Spec Ω ⟶ V ×_Y X` attached to a morphism `v : Spec Ω ⟶ V` over `Y` by
+`AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso` has second component `s`; it is a
+morphism over `X`. -/
+@[reassoc (attr := simp)]
+lemma pointSmallEtaleFiberEtaleIso_inv_app_left_snd (V : Y.Etale)
+    (v : (pointSmallEtale (s ≫ f)).fiber.obj V) :
+    ((pointSmallEtaleFiberEtaleIso f s).inv.app V v).left ≫ Limits.pullback.snd V.hom f =
+      s :=
+  CategoryTheory.Over.w ((pointSmallEtaleFiberEtaleIso f s).inv.app V v)
+
+/-- Base change along `f : X ⟶ Y` as a functor between the categories of elements of the
+fibre functors of the geometric points `s ≫ f` of `Y` and `s` of `X`: a pointed étale
+neighbourhood `(V, v)` of `s ≫ f` in `Y` is sent to the pointed étale neighbourhood
+`(V ×_Y X, (v, s))` of `s` in `X`.
+
+Over `Y.Etale` this is nothing but base change, see
+`AlgebraicGeometry.Scheme.pointSmallEtaleElementsBaseChange_comp_π`. -/
+noncomputable def pointSmallEtaleElementsBaseChange :
+    (pointSmallEtale (s ≫ f)).fiber.Elements ⥤ (pointSmallEtale s).fiber.Elements :=
+  NatTrans.mapElements (pointSmallEtaleFiberEtaleIso f s).inv ⋙
+    Functor.Elements.precomp f.Etale (pointSmallEtale s).fiber
+
+@[simp]
+lemma pointSmallEtaleElementsBaseChange_obj_fst
+    (c : (pointSmallEtale (s ≫ f)).fiber.Elements) :
+    ((pointSmallEtaleElementsBaseChange f s).obj c).fst = f.Etale.obj c.fst :=
+  rfl
+
+@[simp]
+lemma pointSmallEtaleElementsBaseChange_map_val
+    {c c' : (pointSmallEtale (s ≫ f)).fiber.Elements} (t : c ⟶ c') :
+    ((pointSmallEtaleElementsBaseChange f s).map t).val = f.Etale.map t.val :=
+  rfl
+
+/-- `AlgebraicGeometry.Scheme.pointSmallEtaleElementsBaseChange` lies over base change. -/
+lemma pointSmallEtaleElementsBaseChange_comp_π :
+    pointSmallEtaleElementsBaseChange f s ⋙
+        CategoryOfElements.π (pointSmallEtale s).fiber =
+      CategoryOfElements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
+  rfl
 
 end BaseChange
 
