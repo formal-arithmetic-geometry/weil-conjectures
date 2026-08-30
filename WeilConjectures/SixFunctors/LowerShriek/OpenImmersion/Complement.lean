@@ -27,7 +27,7 @@ isomorphism there.
 
 Everything rests on one geometric fact: for `T` étale over `W`, the fibre product `T ×_X U` is
 **empty**, because the ranges of `j` and `k` are disjoint
-(`AlgebraicGeometry.isEmpty_pullback_of_disjoint_range`). A sheaf has terminal sections over an
+(`AlgebraicGeometry.Scheme.isEmpty_pullback`). A sheaf has terminal sections over an
 object with empty underlying scheme (`AlgebraicGeometry.Scheme.Etale.isTerminalSectionsOfIsEmpty`,
 itself the sheaf condition for the empty covering), and with a zero object in `A` terminal means
 zero. Hence:
@@ -45,7 +45,7 @@ isomorphism.
 
 ## Main results
 
-- `AlgebraicGeometry.isEmpty_pullback_of_disjoint_range`: the geometric input.
+- `AlgebraicGeometry.Scheme.Etale.isEmpty_left_pullback_map`: the geometric input.
 - `AlgebraicGeometry.Etale.isZero_openImmersionRestriction_lowerStar` and
   `AlgebraicGeometry.Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek`: the two
   vanishing statements.
@@ -96,30 +96,6 @@ end CategoryTheory.Sheaf
 
 namespace AlgebraicGeometry
 
-/-! ### Emptiness of a fibre product over disjoint opens -/
-
-section Geometry
-
-variable {U X : Scheme.{u}}
-
-set_option backward.isDefEq.respectTransparency false in
-/-- If `j` is an open immersion whose range is disjoint from the range of `f`, the fibre
-product `V ×_X U` is empty. -/
-lemma isEmpty_pullback_of_disjoint_range {V : Scheme.{u}} (f : V ⟶ X) (j : U ⟶ X)
-    [IsOpenImmersion j] (h : Set.range f.base ∩ Set.range j.base = ∅) :
-    IsEmpty ↥(Limits.pullback f j) := by
-  have hr : Set.range (Limits.pullback.fst f j).base = ∅ := by
-    rw [IsOpenImmersion.range_pullbackFst]
-    ext x
-    simp only [Set.mem_empty_iff_false, iff_false]
-    intro hx
-    have hmem : f.base x ∈ Set.range f.base ∩ Set.range j.base := ⟨⟨x, rfl⟩, hx⟩
-    rw [h] at hmem
-    exact hmem
-  exact Set.range_eq_empty_iff.mp hr
-
-end Geometry
-
 /-! ### The sections of `k^* j_*` and of `j^* k_*` -/
 
 section Disjoint
@@ -129,14 +105,17 @@ variable {U W X : Scheme.{u}} (j : U ⟶ X) (k : W ⟶ X) [IsOpenImmersion j] [I
 
 open Etale
 
+omit [IsOpenImmersion j] in
 set_option backward.isDefEq.respectTransparency false in
 /-- For `T` étale over `W`, the fibre product `T ×_X U` is empty when the ranges of `j` and `k`
-are disjoint: `T` maps into the range of `k`, which misses the range of `j`. -/
+are disjoint: `T` maps into the range of `k`, which misses the range of `j`. Only `k` is used
+as an open immersion here; `j` may be an arbitrary morphism. -/
 lemma Scheme.Etale.isEmpty_left_pullback_map
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (T : W.Etale) :
     IsEmpty ((MorphismProperty.Over.pullback @Etale ⊤ j).obj
       ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ k)).obj T)).left := by
-  refine isEmpty_pullback_of_disjoint_range (T.hom ≫ k) j (Set.eq_empty_of_subset_empty ?_)
+  refine Scheme.isEmpty_pullback (T.hom ≫ k) j
+    (Set.disjoint_iff_inter_eq_empty.mpr (Set.eq_empty_of_subset_empty ?_))
   rintro x ⟨⟨t, rfl⟩, hx⟩
   rw [← hjk]
   exact ⟨hx, ⟨T.hom.base t, rfl⟩⟩
@@ -154,8 +133,10 @@ noncomputable def Etale.isTerminalSections_openImmersionRestriction_lowerStar
       ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ k)).obj T))
 
 set_option backward.isDefEq.respectTransparency false in
-omit [IsGrothendieckAbelian.{u + 1} A] in
-/-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. -/
+omit [IsGrothendieckAbelian.{u + 1} A] [IsOpenImmersion j] in
+/-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. Like
+`AlgebraicGeometry.Scheme.Etale.isEmpty_left_pullback_map` this does not use that `j` is an
+open immersion. -/
 lemma Etale.isZero_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
     IsZero ((Etale.openImmersionRestriction A k).obj ((j)_*[A].obj F)) := by
