@@ -187,7 +187,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_of_comap_p
   set U₀ : X.Opens := I.support.compl with hU₀def
   set π := I.blowupMap with hπdef
   -- the blow-up is an isomorphism over the complement of the support of `I`
-  haveI hiso : IsIso (π ∣_ U₀) :=
+  have hiso : IsIso (π ∣_ U₀) :=
     I.isIso_blowupMap_restrict (by rw [hU₀def]; simpa using disjoint_compl_left)
   -- the support identity upstairs
   have hsupp₁ : (π ⁻¹' (L.support : Set X) : Set I.blowup) =
@@ -902,15 +902,15 @@ lemma quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
     [QuasiSeparatedSpace X] {K : X.IdealSheafData} (hK : K.ofFiniteType)
     (hU₀ : IsCompact ((K.support.compl : X.Opens) : Set X)) (J : X.IdealSheafData) :
     QuasiCompact (strictTransformOpen J.subschemeι K.blowupMap K.support.compl).ι := by
-  haveI hπqc : QuasiCompact K.blowupMap :=
+  have hπqc : QuasiCompact K.blowupMap :=
     Scheme.IdealSheafData.quasiCompact_blowupMap hK
-  haveI hproper : IsProper K.blowupMap := K.isProper_blowupMap fun U ↦ hK U le_top
-  haveI hfstQS : QuasiSeparated (pullback.fst J.subschemeι K.blowupMap) :=
+  have hproper : IsProper K.blowupMap := K.isProper_blowupMap fun U ↦ hK U le_top
+  have hfstQS : QuasiSeparated (pullback.fst J.subschemeι K.blowupMap) :=
     MorphismProperty.pullback_fst _ _ inferInstance
-  haveI hPqs : QuasiSeparatedSpace ↥(Limits.pullback J.subschemeι K.blowupMap) :=
+  have hPqs : QuasiSeparatedSpace ↥(Limits.pullback J.subschemeι K.blowupMap) :=
     quasiSeparatedSpace_of_quasiSeparated
       (pullback.fst J.subschemeι K.blowupMap ≫ J.subschemeι)
-  haveI hfstQC : QuasiCompact (pullback.fst J.subschemeι K.blowupMap) :=
+  have hfstQC : QuasiCompact (pullback.fst J.subschemeι K.blowupMap) :=
     MorphismProperty.pullback_fst _ _ inferInstance
   have hcpt : IsCompact
       ((strictTransformOpen J.subschemeι K.blowupMap K.support.compl :
@@ -919,7 +919,7 @@ lemma quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
     exact QuasiCompact.isCompact_preimage
       (f := pullback.fst J.subschemeι K.blowupMap ≫ J.subschemeι) _
       (K.support.compl).isOpen hU₀
-  haveI : CompactSpace
+  have : CompactSpace
       (strictTransformOpen J.subschemeι K.blowupMap K.support.compl).toScheme :=
     isCompact_iff_compactSpace.mp hcpt
   infer_instance
@@ -945,8 +945,8 @@ theorem disjoint_range_strictTransformMap_sup [CompactSpace X]
   have hKft : (I₁ ⊔ I₂).ofFiniteType := h₁.sup h₂
   have hU₀ : IsCompact (((I₁ ⊔ I₂).support.compl : X.Opens) : Set X) :=
     Scheme.IdealSheafData.isCompact_coe_compl_support hKft
-  haveI := quasiCompact_strictTransformOpen_ι hKft hU₀ I₁
-  haveI := quasiCompact_strictTransformOpen_ι hKft hU₀ I₂
+  have := quasiCompact_strictTransformOpen_ι hKft hU₀ I₁
+  have := quasiCompact_strictTransformOpen_ι hKft hU₀ I₂
   rw [Set.disjoint_left]
   intro x hx₁ hx₂
   obtain ⟨U', b, hbK, hb12, hxc⟩ :=

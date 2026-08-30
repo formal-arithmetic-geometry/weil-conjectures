@@ -489,7 +489,7 @@ theorem presentation_restrict_basicOpen {K : Y.IdealSheafData} {U : Y.affineOpen
   subst hW
   change ∃ c' ∈ nonZeroDivisors Γ(Y, Y.basicOpen g),
     K.ideal (Y.affineBasicOpen g) = Ideal.span {c'}
-  haveI : IsLocalization.Away g Γ(Y, Y.basicOpen g) := U.2.isLocalization_basicOpen g
+  have : IsLocalization.Away g Γ(Y, Y.basicOpen g) := U.2.isLocalization_basicOpen g
   have halg : algebraMap Γ(Y, U.1) Γ(Y, Y.basicOpen g) =
       (Y.presheaf.map (homOfLE (Y.basicOpen_le g)).op).hom :=
     RingHom.algebraMap_toAlgebra _
@@ -637,7 +637,7 @@ theorem of_mul_left {K₁ K₂ : Y.IdealSheafData} (h : (K₁ * K₂).IsInvertib
   have hcov : U.1 ≤ ⨆ f : Set.range t, Y.basicOpen f.1 :=
     (U.2.self_le_iSup_basicOpen_iff (s := Set.range t)).mpr htop
   obtain ⟨⟨v, i, rfl⟩, hyi⟩ := TopologicalSpace.Opens.mem_iSup.mp (hcov hyU)
-  haveI : IsLocalization.Away (t i) Γ(Y, Y.basicOpen (t i)) :=
+  have : IsLocalization.Away (t i) Γ(Y, Y.basicOpen (t i)) :=
     U.2.isLocalization_basicOpen (t i)
   obtain ⟨hnzd, hspan⟩ := hloc i Γ(Y, Y.basicOpen (t i))
   refine ⟨Y.affineBasicOpen (t i), hyi,
@@ -778,8 +778,8 @@ lemma _root_.HomogeneousLocalization.Away.exists_factor_of_isUnit {B : Type u} [
     (hu : IsUnit (ψ (HomogeneousLocalization.Away.isLocalizationElem hf hg))) :
     ∃ ψ' : HomogeneousLocalization.Away 𝒜 x →+* R,
       ψ'.comp (HomogeneousLocalization.awayMap 𝒜 hg hx) = ψ := by
-  letI := (HomogeneousLocalization.awayMap 𝒜 hg hx).toAlgebra
-  haveI : IsLocalization.Away (HomogeneousLocalization.Away.isLocalizationElem hf hg)
+  let := (HomogeneousLocalization.awayMap 𝒜 hg hx).toAlgebra
+  have : IsLocalization.Away (HomogeneousLocalization.Away.isLocalizationElem hf hg)
       (HomogeneousLocalization.Away 𝒜 x) :=
     HomogeneousLocalization.Away.isLocalization_mul hf hg hx hd
   refine ⟨IsLocalization.Away.lift (S := HomogeneousLocalization.Away 𝒜 x)
@@ -1246,7 +1246,7 @@ lemma Scheme.IdealSheafData.exists_probe_lift (I : X.IdealSheafData)
   have hcov : W.1 ≤ ⨆ f : Set.range tt, T.basicOpen f.1 :=
     (W.2.self_le_iSup_basicOpen_iff (s := Set.range tt)).mpr htop
   obtain ⟨⟨v, j, rfl⟩, hzj⟩ := TopologicalSpace.Opens.mem_iSup.mp (hcov hzW)
-  haveI : IsLocalization.Away (tt j) Γ(T, T.basicOpen (tt j)) :=
+  have : IsLocalization.Away (tt j) Γ(T, T.basicOpen (tt j)) :=
     W.2.isLocalization_basicOpen (tt j)
   obtain ⟨hnzd, hspan⟩ := hloc j Γ(T, T.basicOpen (tt j))
   have hOle : (T.affineBasicOpen (tt j) : T.Opens) ≤ t ⁻¹ᵁ V.1 :=

@@ -93,24 +93,24 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
       B.I.blowup.homOfLE hUW ≫ g = (B.I.blowupMap ∣_ U) ≫ f ∧
         IsClosed (Set.range (pullback.lift g W.ι hg)) := by
   classical
-  haveI : QuasiCompact p := quasiCompact_of_compactSpace p
+  have : QuasiCompact p := quasiCompact_of_compactSpace p
   -- Step 1: the disjointness blow-up
   obtain ⟨B₁, hB₁⟩ := exists_isAdmissible_disjoint_closure_range_of_le hUV hU hV f hf hfc
   set X₁ : Scheme.{u} := B₁.I.blowup with hX₁
   set π₁ : X₁ ⟶ X := B₁.I.blowupMap with hπ₁
-  haveI : IsProper π₁ := B₁.isProper_blowupMap
-  haveI : CompactSpace X₁ := QuasiCompact.compactSpace_of_compactSpace π₁
-  haveI : QuasiSeparatedSpace X₁ := quasiSeparatedSpace_of_quasiSeparated π₁
+  have : IsProper π₁ := B₁.isProper_blowupMap
+  have : CompactSpace X₁ := QuasiCompact.compactSpace_of_compactSpace π₁
+  have : QuasiSeparatedSpace X₁ := quasiSeparatedSpace_of_quasiSeparated π₁
   -- the base change of `p` along the blow-up
   obtain ⟨Y₁, r, p₁, hpb₁⟩ :
       ∃ (Y₁ : Scheme.{u}) (r : Y₁ ⟶ Y) (p₁ : Y₁ ⟶ X₁), IsPullback r p₁ p π₁ :=
     ⟨_, _, _, IsPullback.of_hasPullback p π₁⟩
-  haveI : IsSeparated p₁ := MorphismProperty.of_isPullback hpb₁ ‹IsSeparated p›
-  haveI : LocallyOfFiniteType p₁ := MorphismProperty.of_isPullback hpb₁ ‹LocallyOfFiniteType p›
-  haveI : QuasiCompact p₁ := MorphismProperty.of_isPullback hpb₁ ‹QuasiCompact p›
-  haveI : IsQuasiAffineHom p₁ := .of_isPullback hpb₁
-  haveI : CompactSpace Y₁ := QuasiCompact.compactSpace_of_compactSpace p₁
-  haveI : QuasiSeparatedSpace Y₁ := quasiSeparatedSpace_of_quasiSeparated p₁
+  have : IsSeparated p₁ := MorphismProperty.of_isPullback hpb₁ ‹IsSeparated p›
+  have : LocallyOfFiniteType p₁ := MorphismProperty.of_isPullback hpb₁ ‹LocallyOfFiniteType p›
+  have : QuasiCompact p₁ := MorphismProperty.of_isPullback hpb₁ ‹QuasiCompact p›
+  have : IsQuasiAffineHom p₁ := .of_isPullback hpb₁
+  have : CompactSpace Y₁ := QuasiCompact.compactSpace_of_compactSpace p₁
+  have : QuasiSeparatedSpace Y₁ := quasiSeparatedSpace_of_quasiSeparated p₁
   -- the section over the preimage of `U`
   have hfcond : ((π₁ ∣_ U) ≫ f) ≫ p = (π₁ ⁻¹ᵁ U).ι ≫ π₁ := by
     rw [Category.assoc, hf, morphismRestrict_ι]
@@ -119,8 +119,8 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
   have hf₁p : f₁ ≫ p₁ = (π₁ ⁻¹ᵁ U).ι := hpb₁.lift_snd _ _ _
   have hU₁c : IsCompact ((π₁ ⁻¹ᵁ U : X₁.Opens) : Set X₁) := π₁.isCompact_preimage hU
   have hV₁c : IsCompact ((π₁ ⁻¹ᵁ V : X₁.Opens) : Set X₁) := π₁.isCompact_preimage hV
-  haveI : CompactSpace (π₁ ⁻¹ᵁ U).toScheme := isCompact_iff_compactSpace.mp hU₁c
-  haveI : QuasiCompact f₁ := quasiCompact_of_compactSpace f₁
+  have : CompactSpace (π₁ ⁻¹ᵁ U).toScheme := isCompact_iff_compactSpace.mp hU₁c
+  have : QuasiCompact f₁ := quasiCompact_of_compactSpace f₁
   have hdisj := hB₁ hpb₁.w hf₁r
   -- Step 2: a quasi-compact open of the blow-up meeting the preimage of `V` in that of `U`
   have hScpt : IsCompact (p₁ '' closure (Set.range f₁)) :=
@@ -134,9 +134,9 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
     exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff
       (π₁.preimage_mono hUV) hU₁c hScpt hSdisj
   -- Step 3: Case 2 over the smaller base `X₀`
-  haveI : CompactSpace X₀.toScheme := isCompact_iff_compactSpace.mp hX₀c
-  haveI : QuasiSeparatedSpace X₀.toScheme := quasiSeparatedSpace_of_quasiSeparated X₀.ι
-  haveI : QuasiCompact X₀.ι := quasiCompact_of_compactSpace X₀.ι
+  have : CompactSpace X₀.toScheme := isCompact_iff_compactSpace.mp hX₀c
+  have : QuasiSeparatedSpace X₀.toScheme := quasiSeparatedSpace_of_quasiSeparated X₀.ι
+  have : QuasiCompact X₀.ι := quasiCompact_of_compactSpace X₀.ι
   set U₀ : X₀.toScheme.Opens := X₀.ι ⁻¹ᵁ (π₁ ⁻¹ᵁ U) with hU₀
   have hU₀c : IsCompact ((U₀ : X₀.toScheme.Opens) : Set X₀.toScheme) :=
     X₀.ι.isCompact_preimage hU₁c
@@ -208,14 +208,14 @@ theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
     have hGrange : Set.range G ⊆ closure (Set.range f₁) := by
       -- the preimage of `U` is scheme-theoretically, hence topologically, dense in the
       -- blow-up of `X₀`
-      haveI : IsProper C.I.blowupMap := C.isProper_blowupMap
-      haveI : CompactSpace C.I.blowup := QuasiCompact.compactSpace_of_compactSpace C.I.blowupMap
-      haveI : QuasiSeparatedSpace C.I.blowup :=
+      have : IsProper C.I.blowupMap := C.isProper_blowupMap
+      have : CompactSpace C.I.blowup := QuasiCompact.compactSpace_of_compactSpace C.I.blowupMap
+      have : QuasiSeparatedSpace C.I.blowup :=
         quasiSeparatedSpace_of_quasiSeparated C.I.blowupMap
-      haveI : CompactSpace (C.I.blowupMap ⁻¹ᵁ U₀).toScheme :=
+      have : CompactSpace (C.I.blowupMap ⁻¹ᵁ U₀).toScheme :=
         isCompact_iff_compactSpace.mp (C.I.blowupMap.isCompact_preimage hU₀c)
-      haveI : QuasiCompact (C.I.blowupMap ⁻¹ᵁ U₀).ι := quasiCompact_of_compactSpace _
-      haveI := hdom₀
+      have : QuasiCompact (C.I.blowupMap ⁻¹ᵁ U₀).ι := quasiCompact_of_compactSpace _
+      have := hdom₀
       have hdense₀ : Dense ((C.I.blowupMap ⁻¹ᵁ U₀ : C.I.blowup.Opens) : Set C.I.blowup) := by
         have hdr : DenseRange (C.I.blowupMap ⁻¹ᵁ U₀).ι := Scheme.Hom.denseRange _
         rwa [DenseRange, Scheme.Opens.range_ι] at hdr

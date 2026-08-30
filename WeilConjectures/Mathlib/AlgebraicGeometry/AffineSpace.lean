@@ -77,7 +77,7 @@ theorem isImmersion_homOfVector {Y V : Scheme.{u}} [IsAffine Y] [IsAffine V]
     (hgen : Subring.closure
       (Set.range g.appTop ∪ Set.range w ∪ {(↑hu.unit⁻¹ : Γ(Y, ⊤))}) = ⊤) :
     IsImmersion (homOfVector g w) := by
-  haveI hB : IsAffine (𝔸(n; V).basicOpen (coord V j)).toScheme :=
+  have hB : IsAffine (𝔸(n; V).basicOpen (coord V j)).toScheme :=
     (isAffineOpen_top 𝔸(n; V)).basicOpen (coord V j)
   -- the morphism factors through the basic open of the `j`-th coordinate
   have hpre : homOfVector g w ⁻¹ᵁ 𝔸(n; V).basicOpen (coord V j) = ⊤ := by
@@ -151,7 +151,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
     ∃ (σ : Type u) (_ : Finite σ) (i : X ⟶ 𝔸(σ; S)),
       i ≫ 𝔸(σ; S) ↘ S = π ∧ IsImmersion i := by
   classical
-  haveI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated X.toSpecΓ
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated X.toSpecΓ
   -- Step 1: at every point, choose an affine basic open mapping into an affine open of `S`
   have hchart : ∀ x : X, ∃ r : Γ(X, ⊤), IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r ∧
       ∃ V : S.Opens, IsAffineOpen V ∧ X.basicOpen r ≤ π ⁻¹ᵁ V := by
@@ -170,7 +170,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
   have hnum : ∀ (x : X) (g : Γ(X.basicOpen (r x), ⊤)), ∃ (b : Γ(X, ⊤)) (m : ℕ),
       g * (X.basicOpen (r x)).ι.appTop (r x) ^ m = (X.basicOpen (r x)).ι.appTop b := by
     intro x g
-    haveI := Γ_restrict_isLocalization_of_qcqs X (r x)
+    have := Γ_restrict_isLocalization_of_qcqs X (r x)
     obtain ⟨⟨b, q⟩, hq⟩ := IsLocalization.surj (M := Submonoid.powers (r x)) g
     obtain ⟨m, hm⟩ := q.2
     refine ⟨b, m, ?_⟩
@@ -186,12 +186,12 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
       ∀ y : Γ(X.basicOpen (r x), ⊤), y ∈ Subring.closure
         (Set.range (π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop ∪ ↑s) := by
     intro x
-    haveI : IsAffine (X.basicOpen (r x)).toScheme := hraff x
-    haveI : IsAffine (V x).toScheme := hVaff x
+    have : IsAffine (X.basicOpen (r x)).toScheme := hraff x
+    have : IsAffine (V x).toScheme := hVaff x
     have hft : RingHom.FiniteType ((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom :=
       HasRingHomProperty.appTop (P := @LocallyOfFiniteType)
         (π.resLE (V x) (X.basicOpen (r x)) (hrV x)) inferInstance
-    letI := ((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom.toAlgebra
+    let := ((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom.toAlgebra
     have hFT : Algebra.FiniteType Γ(V x, ⊤) Γ(X.basicOpen (r x), ⊤) := hft
     obtain ⟨s, hs⟩ := hFT.out
     refine ⟨s, fun y ↦ ?_⟩
@@ -237,8 +237,8 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
       rw [hUeq]; exact hxj
     exact this
   · rw [hUeq, comp_homOfVector, ← Scheme.Hom.resLE_comp_ι π (hrV j), ← homOfVector_map]
-    haveI : IsAffine (X.basicOpen (r j)).toScheme := hraff j
-    haveI : IsAffine (V j).toScheme := hVaff j
+    have : IsAffine (X.basicOpen (r j)).toScheme := hraff j
+    have : IsAffine (V j).toScheme := hVaff j
     -- the restriction of `r j` to its own basic open is a unit
     have hu : IsUnit (((X.basicOpen (r j)).ι.appTop ∘ v) (Sum.inl ⟨j, hjt⟩)) := by
       change IsUnit ((X.basicOpen (r j)).ι.appTop (r j))
@@ -278,7 +278,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
                 (↑hu.unit⁻¹ : Γ(X.basicOpen (r j), ⊤)) ^ m j z := by rw [hbm j z]
         rw [hzeq]
         exact mul_mem hres (pow_mem hinv _)
-    haveI h1 : IsImmersion (homOfVector (π.resLE (V j) (X.basicOpen (r j)) (hrV j))
+    have h1 : IsImmersion (homOfVector (π.resLE (V j) (X.basicOpen (r j)) (hrV j))
         ((X.basicOpen (r j)).ι.appTop ∘ v)) :=
       isImmersion_homOfVector _ _ (Sum.inl ⟨j, hjt⟩) hu hgen
     infer_instance
@@ -305,10 +305,10 @@ theorem exists_immersion_affineSpace_of_quasiAffine {X S : Scheme.{u}} (π : X �
     · simp
     · intro s
       simp [reindex_appTop_coord]
-  haveI : IsIso (reindex (⇑e) S) := ⟨reindex (⇑e.symm) S, h1, h2⟩
+  have : IsIso (reindex (⇑e) S) := ⟨reindex (⇑e.symm) S, h1, h2⟩
   refine ⟨k, i ≫ reindex (⇑e) S, ?_, ?_⟩
   · rw [Category.assoc, reindex_over, hover]
-  · haveI := himm
+  · have := himm
     infer_instance
 
 /-- The `j`-th coordinate of a morphism to relative affine space precomposed with `m` is the

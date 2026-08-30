@@ -559,22 +559,22 @@ theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSp
       (M.support : Set (B.I.comap p).blowup)) :
     ∃ (C : IsAdmissible X U) (m : M.blowup ⟶ C.I.blowup), IsOpenImmersion m ∧
       m ≫ C.I.blowupMap = M.blowupMap ≫ (B.I.comap p).blowupMap ≫ p := by
-  haveI : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace p
-  haveI := B.isProper_blowupMap
-  haveI : QuasiCompact B.I.blowupMap :=
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace p
+  have := B.isProper_blowupMap
+  have : QuasiCompact B.I.blowupMap :=
     Scheme.IdealSheafData.quasiCompact_blowupMap B.finiteType
-  haveI : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
-  haveI : QuasiSeparatedSpace B.I.blowup := quasiSeparatedSpace_of_quasiSeparated B.I.blowupMap
-  haveI : QuasiCompact (B.I.comap p).blowupMap :=
+  have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
+  have : QuasiSeparatedSpace B.I.blowup := quasiSeparatedSpace_of_quasiSeparated B.I.blowupMap
+  have : QuasiCompact (B.I.comap p).blowupMap :=
     Scheme.IdealSheafData.quasiCompact_blowupMap (B.finiteType.comap p)
-  haveI : CompactSpace (B.I.comap p).blowup :=
+  have : CompactSpace (B.I.comap p).blowup :=
     QuasiCompact.compactSpace_of_compactSpace (B.I.comap p).blowupMap
   -- Tag 080E: the strict transform of `p` is the blow-up of the pulled-back centre, and it
   -- is an open subscheme of `X'` containing the whole locus over `U`.
   obtain ⟨q, hqOI, hq, hqrange⟩ : ∃ q : (B.I.comap p).blowup ⟶ B.I.blowup,
       IsOpenImmersion q ∧ q ≫ B.I.blowupMap = (B.I.comap p).blowupMap ≫ p ∧
       ∀ x' : B.I.blowup, B.I.blowupMap x' ∈ U → x' ∈ Set.range ⇑q := by
-    haveI := hB
+    have := hB
     obtain ⟨e, -, he⟩ := B.I.exists_blowup_comap_iso_strictTransform p
     refine ⟨e.hom ≫ strictTransformMap p B.I.blowupMap B.preservedOpen, inferInstance, he,
       fun x' hx' ↦ ?_⟩
@@ -585,7 +585,7 @@ theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSp
       rwa [Scheme.coe_homeoOfIso] at h
     obtain ⟨t', rfl⟩ := hsurj t
     exact ⟨t', by rw [Scheme.Hom.comp_apply]; exact ht⟩
-  haveI := hqOI
+  have := hqOI
   -- the strict transform as an open subscheme `T` of `X'`
   set T : B.I.blowup.Opens := q.opensRange with hTdef
   set φ : (B.I.comap p).blowup ≅ T.toScheme := q.isoOpensRange with hφdef
@@ -618,7 +618,7 @@ theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSp
     exact hmem
   -- extend the centre across `T` and compose the two admissible blow-ups
   obtain ⟨C', h, hh, hpb⟩ := IsAdmissible.exists_extend hTcpt hUT N hNft hdisjN
-  haveI : IsOpenImmersion h := IsOpenImmersion.of_isPullback hpb inferInstance
+  have : IsOpenImmersion h := IsOpenImmersion.of_isPullback hpb inferInstance
   obtain ⟨K, hKft, hKdisj, iso, hiso⟩ := IsAdmissible.exists_comp B C'
   refine ⟨⟨K, hKft, hKdisj⟩, f.inv ≫ h ≫ iso.hom, inferInstance, ?_⟩
   have hfinv : f.inv ≫ N.blowupMap = M.blowupMap ≫ φ.hom := by
@@ -653,31 +653,31 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
     [IsSeparated s₂] [LocallyOfFiniteType s₂] [QuasiCompact s₂] :
     Nonempty (CommonModification s₁ s₂ j₁ j₂) := by
   -- Step 0: finiteness of the ambient schemes.
-  haveI : CompactSpace X₁ := QuasiCompact.compactSpace_of_compactSpace s₁
-  haveI : CompactSpace X₂ := QuasiCompact.compactSpace_of_compactSpace s₂
-  haveI : QuasiSeparatedSpace X₁ := quasiSeparatedSpace_of_quasiSeparated s₁
-  haveI : QuasiSeparatedSpace X₂ := quasiSeparatedSpace_of_quasiSeparated s₂
-  haveI : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace j₁
-  haveI : IsSeparated (pullback.fst s₁ s₂) := MorphismProperty.pullback_fst _ _ ‹_›
-  haveI : LocallyOfFiniteType (pullback.fst s₁ s₂) := MorphismProperty.pullback_fst _ _ ‹_›
-  haveI : QuasiCompact (pullback.fst s₁ s₂) := MorphismProperty.pullback_fst _ _ ‹_›
-  haveI : IsSeparated (pullback.snd s₁ s₂) := MorphismProperty.pullback_snd _ _ ‹_›
-  haveI : LocallyOfFiniteType (pullback.snd s₁ s₂) := MorphismProperty.pullback_snd _ _ ‹_›
-  haveI : QuasiCompact (pullback.snd s₁ s₂) := MorphismProperty.pullback_snd _ _ ‹_›
+  have : CompactSpace X₁ := QuasiCompact.compactSpace_of_compactSpace s₁
+  have : CompactSpace X₂ := QuasiCompact.compactSpace_of_compactSpace s₂
+  have : QuasiSeparatedSpace X₁ := quasiSeparatedSpace_of_quasiSeparated s₁
+  have : QuasiSeparatedSpace X₂ := quasiSeparatedSpace_of_quasiSeparated s₂
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace j₁
+  have : IsSeparated (pullback.fst s₁ s₂) := MorphismProperty.pullback_fst _ _ ‹_›
+  have : LocallyOfFiniteType (pullback.fst s₁ s₂) := MorphismProperty.pullback_fst _ _ ‹_›
+  have : QuasiCompact (pullback.fst s₁ s₂) := MorphismProperty.pullback_fst _ _ ‹_›
+  have : IsSeparated (pullback.snd s₁ s₂) := MorphismProperty.pullback_snd _ _ ‹_›
+  have : LocallyOfFiniteType (pullback.snd s₁ s₂) := MorphismProperty.pullback_snd _ _ ‹_›
+  have : QuasiCompact (pullback.snd s₁ s₂) := MorphismProperty.pullback_snd _ _ ‹_›
   -- Step 1: the graph `γ = (j₁, j₂) : U ⟶ X₁ ×_S X₂`, its scheme-theoretic image `X₁₂`
   -- and the two projections `p₁`, `p₂` of the latter.
   obtain ⟨γ, hγdef⟩ : ∃ g : U ⟶ pullback s₁ s₂, g = pullback.lift j₁ j₂ hj := ⟨_, rfl⟩
   have hγ₁ : γ ≫ pullback.fst s₁ s₂ = j₁ := by rw [hγdef]; exact pullback.lift_fst _ _ _
   have hγ₂ : γ ≫ pullback.snd s₁ s₂ = j₂ := by rw [hγdef]; exact pullback.lift_snd _ _ _
-  haveI : QuasiCompact γ := quasiCompact_of_partialSection s₁ s₂ j₁ γ hγ₁
+  have : QuasiCompact γ := quasiCompact_of_partialSection s₁ s₂ j₁ γ hγ₁
   obtain ⟨p₁, hp₁def⟩ : ∃ f : γ.image ⟶ X₁, f = γ.imageι ≫ pullback.fst s₁ s₂ := ⟨_, rfl⟩
   obtain ⟨p₂, hp₂def⟩ : ∃ f : γ.image ⟶ X₂, f = γ.imageι ≫ pullback.snd s₁ s₂ := ⟨_, rfl⟩
-  haveI : IsSeparated p₁ := by rw [hp₁def]; infer_instance
-  haveI : LocallyOfFiniteType p₁ := by rw [hp₁def]; infer_instance
-  haveI : QuasiCompact p₁ := by rw [hp₁def]; infer_instance
-  haveI : IsSeparated p₂ := by rw [hp₂def]; infer_instance
-  haveI : LocallyOfFiniteType p₂ := by rw [hp₂def]; infer_instance
-  haveI : QuasiCompact p₂ := by rw [hp₂def]; infer_instance
+  have : IsSeparated p₁ := by rw [hp₁def]; infer_instance
+  have : LocallyOfFiniteType p₁ := by rw [hp₁def]; infer_instance
+  have : QuasiCompact p₁ := by rw [hp₁def]; infer_instance
+  have : IsSeparated p₂ := by rw [hp₂def]; infer_instance
+  have : LocallyOfFiniteType p₂ := by rw [hp₂def]; infer_instance
+  have : QuasiCompact p₂ := by rw [hp₂def]; infer_instance
   have hcomm : p₁ ≫ s₁ = p₂ ≫ s₂ := by
     rw [hp₁def, hp₂def, Category.assoc, Category.assoc, pullback.condition]
   have htoIm₁ : γ.toImage ≫ p₁ = j₁ := by
@@ -686,15 +686,15 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
     rw [hp₂def, ← Category.assoc, Scheme.Hom.toImage_imageι, hγ₂]
   -- Step 2: both projections are isomorphisms over the copies of `U`, whose inverse images
   -- in `X₁₂` are both the range of `γ.toImage`.
-  haveI hiso₁ : IsIso (p₁ ∣_ j₁.opensRange) := by
+  have hiso₁ : IsIso (p₁ ∣_ j₁.opensRange) := by
     rw [hp₁def]; exact isIso_restrict_imageι_comp_fst s₁ s₂ j₁ γ hγ₁
-  haveI hOItoIm : IsOpenImmersion γ.toImage :=
+  have hOItoIm : IsOpenImmersion γ.toImage :=
     isOpenImmersion_of_comp_of_isIso_restrict γ.toImage p₁ j₁ htoIm₁ hiso₁
   have hr₁ : Set.range ⇑γ.toImage = ⇑p₁ ⁻¹' Set.range ⇑j₁ :=
     range_eq_preimage_of_comp_of_isIso_restrict γ.toImage p₁ j₁ htoIm₁ hiso₁
   have hr₂ : ⇑p₂ ⁻¹' Set.range ⇑j₂ = Set.range ⇑γ.toImage := by
     rw [hp₂def]; exact preimage_range_snd_eq_range_toImage s₁ s₂ γ j₂ hγ₂
-  haveI hiso₂ : IsIso (p₂ ∣_ j₂.opensRange) := by
+  have hiso₂ : IsIso (p₂ ∣_ j₂.opensRange) := by
     have hinv : j₂.isoOpensRange.inv ≫ j₂ = j₂.opensRange.ι := by
       rw [Iso.inv_comp_eq]
       exact (Scheme.Hom.isoOpensRange_hom_ι j₂).symm
@@ -776,12 +776,12 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
     ((B₂.I.comap p₂).comap (B₁.I.comap p₁).blowupMap) (hK₂ft.comap _) hdisj₁
   obtain ⟨C₂, m₂, hm₂OI, hm₂⟩ := IsAdmissible.exists_isOpenImmersion_blowup p₂ hpU₂ B₂ hB₂
     ((B₁.I.comap p₁).comap (B₂.I.comap p₂).blowupMap) (hK₁ft.comap _) hdisj₂
-  haveI := hm₁OI
-  haveI := hm₂OI
+  have := hm₁OI
+  have := hm₂OI
   obtain ⟨n₁, hn₁def⟩ : ∃ n : L.blowup ⟶ C₁.I.blowup, n = a₁.hom ≫ m₁ := ⟨_, rfl⟩
   obtain ⟨n₂, hn₂def⟩ : ∃ n : L.blowup ⟶ C₂.I.blowup, n = a₂.hom ≫ m₂ := ⟨_, rfl⟩
-  haveI : IsOpenImmersion n₁ := by rw [hn₁def]; infer_instance
-  haveI : IsOpenImmersion n₂ := by rw [hn₂def]; infer_instance
+  have : IsOpenImmersion n₁ := by rw [hn₁def]; infer_instance
+  have : IsOpenImmersion n₂ := by rw [hn₂def]; infer_instance
   have hn₁ : n₁ ≫ C₁.I.blowupMap = L.blowupMap ≫ p₁ := by
     rw [hn₁def, Category.assoc, hm₁, ← ha₁]
     simp only [Category.assoc]
@@ -801,7 +801,7 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
     · rw [hK₂supp] at h
       rw [← hr₂] at ht
       exact Set.disjoint_left.mp B₂.disjoint_support ht h
-  haveI : IsIso (L.blowupMap ∣_ γ.toImage.opensRange) := L.isIso_blowupMap_restrict hdisjU
+  have : IsIso (L.blowupMap ∣_ γ.toImage.opensRange) := L.isIso_blowupMap_restrict hdisjU
   obtain ⟨u, hu⟩ : ∃ u : U ⟶ L.blowup, u ≫ L.blowupMap = γ.toImage :=
     ⟨(γ.toImage.isoOpensRange.hom ≫ inv (L.blowupMap ∣_ γ.toImage.opensRange)) ≫
       (L.blowupMap ⁻¹ᵁ γ.toImage.opensRange).ι, by
@@ -812,11 +812,11 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
   have hu₂ : (u ≫ n₂) ≫ C₂.I.blowupMap = j₂ := by
     rw [Category.assoc, hn₂, ← Category.assoc, hu, htoIm₂]
   -- Step 7: glue `C₁.I.blowup` and `C₂.I.blowup` along the common modification.
-  haveI := C₁.isProper_blowupMap
-  haveI := C₂.isProper_blowupMap
-  haveI : QuasiCompact C₁.I.blowupMap :=
+  have := C₁.isProper_blowupMap
+  have := C₂.isProper_blowupMap
+  have : QuasiCompact C₁.I.blowupMap :=
     Scheme.IdealSheafData.quasiCompact_blowupMap C₁.finiteType
-  haveI : QuasiCompact C₂.I.blowupMap :=
+  have : QuasiCompact C₂.I.blowupMap :=
     Scheme.IdealSheafData.quasiCompact_blowupMap C₂.finiteType
   have hw : n₁ ≫ C₁.I.blowupMap ≫ s₁ = n₂ ≫ C₂.I.blowupMap ≫ s₂ :=
     calc n₁ ≫ C₁.I.blowupMap ≫ s₁ = (n₁ ≫ C₁.I.blowupMap) ≫ s₁ := (Category.assoc _ _ _).symm
@@ -834,16 +834,16 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
     have hδ₂ : δ ≫ pullback.snd (C₁.I.blowupMap ≫ s₁) (C₂.I.blowupMap ≫ s₂) = n₂ := by
       rw [hδdef]; exact pullback.lift_snd _ _ _
     -- `δ` is a preimmersion: it is a closed immersion into the open locus over `n₁`
-    haveI : IsPreimmersion δ := by
+    have : IsPreimmersion δ := by
       rw [← partialSection_openι (C₁.I.blowupMap ≫ s₁) (C₂.I.blowupMap ≫ s₂) n₁ δ hδ₁]
       infer_instance
     -- `δ` has closed range: it is universally closed, being universally closed over the
     -- separated comparison morphism to `X₁ ×_S X₂`
-    haveI : IsProper L.blowupMap := L.isProper_blowupMap fun V ↦ hLft V le_top
+    have : IsProper L.blowupMap := L.isProper_blowupMap fun V ↦ hLft V le_top
     obtain ⟨θ, hθdef⟩ : ∃ t : pullback (C₁.I.blowupMap ≫ s₁) (C₂.I.blowupMap ≫ s₂) ⟶
         pullback s₁ s₂, t = pullback.map (C₁.I.blowupMap ≫ s₁) (C₂.I.blowupMap ≫ s₂) s₁ s₂
           C₁.I.blowupMap C₂.I.blowupMap (𝟙 S) (by simp) (by simp) := ⟨_, rfl⟩
-    haveI : IsSeparated θ := by
+    have : IsSeparated θ := by
       rw [hθdef]
       exact MorphismProperty.pullbackMap (P := @IsSeparated) inferInstance inferInstance rfl rfl
     have hθ : δ ≫ θ = L.blowupMap ≫ γ.imageι := by
@@ -852,8 +852,8 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
           Category.assoc, hp₁def]
       · rw [Category.assoc, hθdef, pullback.lift_snd, ← Category.assoc, hδ₂, hn₂,
           Category.assoc, hp₂def]
-    haveI : UniversallyClosed (δ ≫ θ) := by rw [hθ]; infer_instance
-    haveI : UniversallyClosed δ := UniversallyClosed.of_comp_of_isSeparated δ θ
+    have : UniversallyClosed (δ ≫ θ) := by rw [hθ]; infer_instance
+    have : UniversallyClosed δ := UniversallyClosed.of_comp_of_isSeparated δ θ
     refine IsClosedImmersion.of_isPreimmersion δ ?_
     rw [← Set.image_univ]
     exact δ.isClosedMap _ isClosed_univ
@@ -960,7 +960,7 @@ theorem Compactification.nonempty_properExtension
   obtain ⟨B, hB⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hV₀ p hpV₀
   let π : B.I.blowup ⟶ c.Z := B.I.blowupMap
   let W : c.Z.Opens := B.preservedOpen
-  haveI hOIst : IsOpenImmersion (strictTransformMap p π W) := hB
+  have hOIst : IsOpenImmersion (strictTransformMap p π W) := hB
   -- `V^gr` is the open strict transform, and `ψ` the projection to `U` through the
   -- scheme-theoretic image of the graph.
   let Vgr : B.I.blowup.Opens := (strictTransformMap p π W).opensRange
@@ -973,7 +973,7 @@ theorem Compactification.nonempty_properExtension
   have hψdef : ψ = e.inv ≫ strictTransformToSource p π W ≫ ψ₀ := rfl
   -- Step 3: the canonical lift `ℓ` of `c.i` along the blow-up, an open immersion with
   -- range the full preimage of `c.i(V)`.
-  haveI hπV₀ : IsIso (π ∣_ c.i.opensRange) := B.isIso_blowupMap_restrict
+  have hπV₀ : IsIso (π ∣_ c.i.opensRange) := B.isIso_blowupMap_restrict
   obtain ⟨ℓ, hℓπ⟩ : ∃ ℓ : V.toScheme ⟶ B.I.blowup, ℓ ≫ π = c.i :=
     ⟨(c.i.isoOpensRange.hom ≫ inv (π ∣_ c.i.opensRange)) ≫ (π ⁻¹ᵁ c.i.opensRange).ι, by
       simp only [Category.assoc]
@@ -1169,7 +1169,7 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     ∃ (B : IsAdmissible X U) (N' : B.I.blowup.Opens),
       closure (B.I.blowupMap ⁻¹' T) ⊆ (N' : Set B.I.blowup) ∧
       IsIso (strictTransformMap q B.I.blowupMap B.preservedOpen ∣_ N') := by
-  haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
   -- Step 0: `T` lies in the maximal isomorphism open `M` of `q`, and `M` lies in the
   -- image of `q`.
   set M : X.Opens := q.maximalIsomorphismOpen with hMdef
@@ -1177,7 +1177,7 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
   have hTM : T ⊆ (M : Set X) := hTN.trans fun _ hx ↦ q.le_maximalIsomorphismOpen hN hx
   have hMrange : (M : Set X) ⊆ Set.range q := by
     intro x hx
-    haveI := hqM
+    have := hqM
     obtain ⟨z, hz⟩ := (Scheme.homeoOfIso (asIso (q ∣_ M))).surjective ⟨x, hx⟩
     refine ⟨(q ⁻¹ᵁ M).ι z, ?_⟩
     calc q ((q ⁻¹ᵁ M).ι z) = ((q ⁻¹ᵁ M).ι ≫ q) z := (Scheme.Hom.comp_apply _ _ _).symm
@@ -1218,12 +1218,12 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
   -- Step 2: the boundary-separation blow-up (Tag 0F3V).
   obtain ⟨B₁, hB₁disj⟩ := exists_admissibleBlowup_disjoint_closures hU hTcl hEcl
     (by rwa [compl_compl]) (by rwa [compl_compl]) hTEdisj
-  haveI : IsProper B₁.I.blowupMap := B₁.isProper_blowupMap
-  haveI : QuasiCompact B₁.I.blowupMap :=
+  have : IsProper B₁.I.blowupMap := B₁.isProper_blowupMap
+  have : QuasiCompact B₁.I.blowupMap :=
     Scheme.IdealSheafData.quasiCompact_blowupMap B₁.finiteType
-  haveI : CompactSpace B₁.I.blowup :=
+  have : CompactSpace B₁.I.blowup :=
     QuasiCompact.compactSpace_of_compactSpace B₁.I.blowupMap
-  haveI : QuasiSeparatedSpace B₁.I.blowup :=
+  have : QuasiSeparatedSpace B₁.I.blowup :=
     quasiSeparatedSpace_of_quasiSeparated B₁.I.blowupMap
   -- Step 3: a quasi-compact open of the blow-up around the closure of the inverse
   -- image of `T`, disjoint from the closure of the inverse image of the boundary.
@@ -1248,14 +1248,14 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
       (subset_closure (Set.mem_preimage.mpr ⟨y, hyE, hy⟩))
   -- Step 4: the canonical lift of `q` to the first blow-up, and its properness.
   have hcqft : (B₁.I.comap q).ofFiniteType := B₁.finiteType.comap q
-  haveI : IsProper (B₁.I.comap q).blowupMap :=
+  have : IsProper (B₁.I.comap q).blowupMap :=
     (B₁.I.comap q).isProper_blowupMap fun V ↦ hcqft V le_top
   obtain ⟨lam₁, hlam₁⟩ := B₁.I.exists_lift_blowup
     (t := (B₁.I.comap q).blowupMap ≫ q)
     (by rw [Scheme.IdealSheafData.comap_comp]
         exact (B₁.I.comap q).isInvertible_comap_blowupMap)
-  haveI : IsProper (lam₁ ≫ B₁.I.blowupMap) := by rw [hlam₁]; infer_instance
-  haveI : IsProper lam₁ := IsProper.of_comp lam₁ B₁.I.blowupMap
+  have : IsProper (lam₁ ≫ B₁.I.blowupMap) := by rw [hlam₁]; infer_instance
+  have : IsProper lam₁ := IsProper.of_comp lam₁ B₁.I.blowupMap
   -- `lam₁` is an isomorphism over the locus above `V₂`
   have hdisjV₂ : Disjoint (V₂ : Set X) (B₁.I.support : Set X) :=
     B₁.disjoint_support.mono_left fun _ hx ↦ hV₂U hx
@@ -1269,8 +1269,8 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     exact Set.disjoint_left.mp hdisjV₂ hz hzs
   have hlam₁iso : IsIso (lam₁ ∣_ (B₁.I.blowupMap ⁻¹ᵁ V₂)) := by
     refine isIso_morphismRestrict_of_comp lam₁ B₁.I.blowupMap hlam₁ V₂ hπ₁V₂ ?_
-    haveI := hπZV₂
-    haveI := hqV₂
+    have := hπZV₂
+    have := hqV₂
     rw [morphismRestrict_comp]
     infer_instance
   -- Step 5: elimination of indeterminacy on the blow-up, over the locus above `V₂`.
@@ -1279,8 +1279,8 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
   obtain ⟨eC, -, heC⟩ := B'.I.exists_blowup_comap_iso_strictTransform lam₁
   set lamC : (B'.I.comap lam₁).blowup ⟶ B'.I.blowup :=
     eC.hom ≫ strictTransformMap lam₁ B'.I.blowupMap B'.I.support.compl with hlamCdef
-  haveI : IsOpenImmersion lamC := by
-    haveI := hB'
+  have : IsOpenImmersion lamC := by
+    have := hB'
     rw [hlamCdef]
     infer_instance
   -- Step 6: glue the centre across `A` and the locus above `U` (Tag 080M).
@@ -1311,8 +1311,8 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     · exact Set.disjoint_left.mp B₁.disjoint_support hxU hx
     · exact Set.disjoint_left.mp hDdisj hxU hx'
   have hKcqft : (K.comap q).ofFiniteType := hKft.comap q
-  haveI : IsProper K.blowupMap := K.isProper_blowupMap fun V ↦ hKft V le_top
-  haveI : IsProper (K.comap q).blowupMap :=
+  have : IsProper K.blowupMap := K.isProper_blowupMap fun V ↦ hKft V le_top
+  have : IsProper (K.comap q).blowupMap :=
     (K.comap q).isProper_blowupMap fun V ↦ hKcqft V le_top
   -- Step 8: the canonical lifts on the composite blow-up and their comparison.
   obtain ⟨eK, -, heK⟩ := K.exists_blowup_comap_iso_strictTransform q
@@ -1320,8 +1320,8 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     strictTransformMap q K.blowupMap K.support.compl with hstdef
   set lamK : (K.comap q).blowup ⟶ K.blowup := eK.hom ≫ st with hlamKdef
   have hlamK : lamK ≫ K.blowupMap = (K.comap q).blowupMap ≫ q := heK
-  haveI : IsProper (lamK ≫ K.blowupMap) := by rw [hlamK]; infer_instance
-  haveI : IsProper lamK := IsProper.of_comp lamK K.blowupMap
+  have : IsProper (lamK ≫ K.blowupMap) := by rw [hlamK]; infer_instance
+  have : IsProper lamK := IsProper.of_comp lamK K.blowupMap
   obtain ⟨lamD, hlamD⟩ := D.exists_lift_blowup (t := (D.comap lam₁).blowupMap ≫ lam₁)
     (by rw [Scheme.IdealSheafData.comap_comp]
         exact (D.comap lam₁).isInvertible_comap_blowupMap)
@@ -1351,23 +1351,23 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
         exact (JA.comap (lam₁ ∣_ A)).isInvertible_comap_blowupMap)
   obtain ⟨hC, hC', hCOI, hC'OI, hCsq, -, -⟩ :=
     Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens B'.I lam₁ A rfl heC hmu
-  haveI := hCOI
-  haveI := hC'OI
-  haveI : IsOpenImmersion mu := by
-    haveI : IsOpenImmersion (mu ≫ hC) := by
+  have := hCOI
+  have := hC'OI
+  have : IsOpenImmersion mu := by
+    have : IsOpenImmersion (mu ≫ hC) := by
       rw [← hCsq]
       infer_instance
     exact IsOpenImmersion.of_comp mu hC
   obtain ⟨hD, hD', hDOI, hD'OI, hDsq, hDrange, hD'range⟩ :=
     Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens D lam₁ A hDA hlamD hmu
-  haveI := hDOI
-  haveI := hD'OI
+  have := hDOI
+  have := hD'OI
   -- Step 9: the partial section of the strict transform over the copy of `A`.
   set m : (JA.comap (lam₁ ∣_ A)).blowup ⟶ (K.comap q).blowup := hD' ≫ be.inv with hmdef
-  haveI : IsOpenImmersion m := by rw [hmdef]; infer_instance
+  have : IsOpenImmersion m := by rw [hmdef]; infer_instance
   have hjeq : m ≫ lamK = mu ≫ hD ≫ al.inv := by
     rw [hmdef, Category.assoc, hcompat, ← Category.assoc, hDsq, Category.assoc]
-  haveI : IsOpenImmersion (m ≫ lamK) := by rw [hjeq]; infer_instance
+  have : IsOpenImmersion (m ≫ lamK) := by rw [hjeq]; infer_instance
   have hD'pre : Set.range hD' = lamD ⁻¹' Set.range hD := by
     rw [hD'range, hDrange, Scheme.Hom.comp_base, TopCat.coe_comp, Set.preimage_comp]
   have hD'pre' : Set.range hD' = lamD ⁻¹' Set.range (mu ≫ hD) := by
@@ -1450,7 +1450,7 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
       _ = lamK y₀ := by rw [hbeinvhom]
   -- Step 10: conclude.
   have hmst : (m ≫ eK.hom) ≫ st = m ≫ lamK := by rw [hlamKdef, Category.assoc]
-  haveI : IsOpenImmersion ((m ≫ eK.hom) ≫ st) := by rw [hmst]; infer_instance
+  have : IsOpenImmersion ((m ≫ eK.hom) ≫ st) := by rw [hmst]; infer_instance
   refine ⟨⟨K, hKft, hKdisj⟩, ((m ≫ eK.hom) ≫ st).opensRange, ?_, ?_⟩
   · change closure (K.blowupMap ⁻¹' T) ⊆ Set.range ((m ≫ eK.hom) ≫ st)
     rw [hmst]

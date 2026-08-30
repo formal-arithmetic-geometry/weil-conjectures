@@ -147,7 +147,7 @@ finite-type ideal sheaf inside the ambient one by Tag 01PF. -/
 theorem exists_ofFiniteType_le_mem_ideal (H : X.IdealSheafData) (V : X.affineOpens)
     {a : Γ(X, V.1)} (ha : a ∈ H.ideal V) :
     ∃ K : X.IdealSheafData, K ≤ H ∧ K.ofFiniteType ∧ a ∈ K.ideal V := by
-  haveI : IsAffine V.1.toScheme := V.2
+  have : IsAffine V.1.toScheme := V.2
   set N : Ideal Γ(X, V.1) := Ideal.span {a} with hN
   have hNfg : N.FG := ⟨{a}, by simp [hN]⟩
   have hNle : N ≤ H.ideal V := by rw [hN, Ideal.span_le, Set.singleton_subset_iff]; exact ha

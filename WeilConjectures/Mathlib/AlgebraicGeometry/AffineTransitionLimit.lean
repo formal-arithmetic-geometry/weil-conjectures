@@ -659,7 +659,7 @@ the localization `Γ(X, V) ⟶ Γ(X, X.basicOpen (b l))` because `X.basicOpen (b
 This is the key cancellation step in the proof of Stacks 01Z9. -/
 lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : Fin E.n) {y : Γ(E.X, E.V)}
     (hy : E.sV y = 0) : ∃ K, E.b l ^ K * y = 0 := by
-  haveI := E.hV.isLocalization_basicOpen (E.b l)
+  have := E.hV.isLocalization_basicOpen (E.b l)
   suffices h0 : (E.X.presheaf.map (homOfLE (E.X.basicOpen_le (E.b l))).op) y = 0 by
     obtain ⟨⟨_, K, rfl⟩, hK⟩ := (IsLocalization.map_eq_zero_iff
       (Submonoid.powers (E.b l)) Γ(E.X, E.X.basicOpen (E.b l)) y).mp h0
@@ -681,8 +681,8 @@ lemma Stage.isLocalization_away (T : E.Stage) (l : Fin E.n) :
     letI := (T.ρRes l).hom.toAlgebra
     IsLocalization.Away (T.h l)
       Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := by
-  letI := (T.ρRes l).hom.toAlgebra
-  haveI := isLocalization_basicOpen_of_qcqs (X := E.WD.obj T.j) (U := ⊤)
+  let := (T.ρRes l).hom.toAlgebra
+  have := isLocalization_basicOpen_of_qcqs (X := E.WD.obj T.j) (U := ⊤)
     isCompact_univ isQuasiSeparated_univ (T.r l)
   refine ⟨fun ⟨_, m, rfl⟩ ↦ ?_, fun z ↦ ?_, fun {a a'} hd ↦ ?_⟩
   · simp only [RingHom.algebraMap_toAlgebra, map_pow]
@@ -729,8 +729,8 @@ instance Stage.isOpenImmersion_toSpec (T : E.Stage) : IsOpenImmersion T.toSpec :
     rw [Stage.toSpec, ← Category.assoc, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top,
       Category.assoc, ← Spec.map_comp, Stage.ρRes]
   rw [e]
-  letI := (T.ρRes l).hom.toAlgebra
-  haveI : IsLocalization.Away (T.h l)
+  let := (T.ρRes l).hom.toAlgebra
+  have : IsLocalization.Away (T.h l)
       Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := T.isLocalization_away l
   exact MorphismProperty.comp_mem _ (T.haff l).isoSpec.hom _ inferInstance
     (IsOpenImmersion.of_isLocalization (T.h l))
@@ -748,10 +748,10 @@ lemma Stage.opensRange_toSpec (T : E.Stage) :
         ((E.WD.obj T.j).basicOpen (T.r l)).toSpecΓ ≫ Spec.map (T.ρRes l) := by
       rw [Stage.toSpec, ← Category.assoc, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top,
         Category.assoc, ← Spec.map_comp, Stage.ρRes]
-    letI := (T.ρRes l).hom.toAlgebra
-    haveI : IsLocalization.Away (T.h l)
+    let := (T.ρRes l).hom.toAlgebra
+    have : IsLocalization.Away (T.h l)
         Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := T.isLocalization_away l
-    haveI : IsIso (((E.WD.obj T.j).basicOpen (T.r l)).toSpecΓ) := by
+    have : IsIso (((E.WD.obj T.j).basicOpen (T.r l)).toSpecΓ) := by
       rw [← IsAffineOpen.isoSpec_hom (T.haff l)]
       infer_instance
     rintro p hp
@@ -863,7 +863,7 @@ lemma exists_mem_fiberProduct_res_eq_mul_pow (E : ExtensionData.{u}) {j : Over E
     ((E.WU.ι ≫ E.U.ι).app (E.X.basicOpen (E.b l)))).2
     ((E.WU.toScheme.presheaf.map (homOfLE le_top).op) (E.t j y))
   -- Write `zV` as `v₀ / (b l) ^ K` using that `V` is affine.
-  haveI := E.hV.isLocalization_basicOpen (E.b l)
+  have := E.hV.isLocalization_basicOpen (E.b l)
   obtain ⟨⟨v₀, ⟨_, K, rfl⟩⟩, hv⟩ := IsLocalization.surj (M := Submonoid.powers (E.b l)) zV
   rw [map_pow] at hv
   -- Restricting sections of `V` to `X.basicOpen (b l)` and pulling back to `W` agrees with
@@ -1500,7 +1500,7 @@ lemma Wc_π_Wι (E : ExtensionData.{u}) (j : Over E.i₀) :
 
 lemma toSpecΓ_ζ (E : ExtensionData.{u}) :
     E.ζ ≫ E.V.toSpecΓ = E.Wc.pt.toSpecΓ ≫ Spec.map E.sV := by
-  haveI : IsIso ((⊤ : E.Wc.pt.Opens).ι) := by
+  have : IsIso ((⊤ : E.Wc.pt.Opens).ι) := by
     rw [← Scheme.topIso_hom]; infer_instance
   have hres : (E.WU.ι ≫ E.U.ι).resLE E.V ⊤ E.sVle = (⊤ : E.Wc.pt.Opens).ι ≫ E.ζ := by
     rw [← cancel_mono E.V.ι, Scheme.Hom.resLE_comp_ι, Category.assoc, E.ζ_ι]
@@ -2054,7 +2054,7 @@ private lemma nonempty_noetherianApproximation_finsetSup {X : Scheme.{u}}
       have hsaff : ∀ V ∈ s, IsAffineOpen V := fun V hV ↦ hs V (Finset.mem_insert_of_mem hV)
       rw [Finset.sup_insert, id]
       set Y : X.Opens := a ⊔ s.sup id with hYdef
-      haveI : QuasiSeparatedSpace Y.toScheme :=
+      have : QuasiSeparatedSpace Y.toScheme :=
         (isQuasiSeparated_iff_quasiSeparatedSpace _ Y.2).mp (.of_quasiSeparatedSpace _)
       set U : Y.toScheme.Opens := Y.ι ⁻¹ᵁ (s.sup id) with hUdef
       set V : Y.toScheme.Opens := Y.ι ⁻¹ᵁ a with hVdef
@@ -2268,7 +2268,7 @@ lemma Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine [IsCof
       inferInstanceAs (IsAffine (Spec _))
     have inst : ∀ {i j : I} (f : i ⟶ j),
         IsAffineHom ((D ⋙ Scheme.Γ.rightOp ⋙ Scheme.Spec).map f) := fun f ↦ inferInstance
-    haveI hg : @LocallyOfFinitePresentation (Spec A)
+    have hg : @LocallyOfFinitePresentation (Spec A)
         ((Cone.postcompose (asIso e).hom).obj c).pt g := ‹_›
     obtain ⟨i, Y, hYaff, p, hp, h, hsq⟩ :=
       this _ _ ((IsLimit.postcomposeHomEquiv (asIso e) c).symm hc)
@@ -2338,7 +2338,7 @@ lemma Scheme.exists_isPullback_of_isClosedImmersion_of_isAffine [IsCofiltered I]
   have hcpt : IsAffine c.pt := Scheme.isAffine_of_isLimit c hc
   -- Reduce to the case where `X` is the spectrum of a ring.
   wlog hX : ∃ A, X = Spec A generalizing X
-  · haveI hXaff : IsAffine X := isAffine_of_isAffineHom g
+  · have hXaff : IsAffine X := isAffine_of_isAffineHom g
     obtain ⟨i, Y, hYaff, p, hp, hpc, h, hsq⟩ :=
       this (X.isoSpec.inv ≫ g) ⟨_, rfl⟩
     refine ⟨i, Y, hYaff, p, hp, hpc, X.isoSpec.hom ≫ h, ?_⟩
@@ -2354,9 +2354,9 @@ lemma Scheme.exists_isPullback_of_isClosedImmersion_of_isAffine [IsCofiltered I]
       inferInstanceAs (IsAffine (Spec _))
     have inst : ∀ {i j : I} (f : i ⟶ j),
         IsAffineHom ((D ⋙ Scheme.Γ.rightOp ⋙ Scheme.Spec).map f) := fun f ↦ inferInstance
-    haveI hg : @LocallyOfFinitePresentation (Spec A)
+    have hg : @LocallyOfFinitePresentation (Spec A)
         ((Cone.postcompose (asIso e).hom).obj c).pt g := ‹_›
-    haveI hg' : @IsClosedImmersion (Spec A)
+    have hg' : @IsClosedImmersion (Spec A)
         ((Cone.postcompose (asIso e).hom).obj c).pt g := ‹_›
     obtain ⟨i, Y, hYaff, p, hp, hpc, h, hsq⟩ :=
       this _ _ ((IsLimit.postcomposeHomEquiv (asIso e) c).symm hc)
@@ -2408,7 +2408,7 @@ lemma Scheme.exists_isPullback_of_isClosedImmersion_of_isAffine [IsCofiltered I]
   obtain ⟨ψ, rfl⟩ := Spec.map_surjective g
   replace hc := isColimitOfConeOfCoconeLeftOp _ (isLimitOfReflects Scheme.Spec hc)
   -- The map of global sections of a closed immersion of affine schemes is surjective.
-  haveI : IsClosedImmersion (Spec.map ψ) := ‹_›
+  have : IsClosedImmersion (Spec.map ψ) := ‹_›
   have hψs : Function.Surjective ψ.hom := by
     obtain ⟨-, hsurj⟩ := IsClosedImmersion.isAffine_surjective_of_isAffine (Spec.map ψ)
     intro a
@@ -2764,7 +2764,7 @@ omit [IsCofiltered I] in
 lemma DescendsAt.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
     (H : DescendsAt D c k g) : DescendsAt D c k' g := by
   obtain ⟨Y, p, h, hp, hcpt, hqs, hsq⟩ := H
-  haveI := hp; haveI := hcpt; haveI := hqs
+  have := hp; have := hcpt; have := hqs
   exact ⟨pullback p (D.map f), pullback.snd _ _, isPullbackLift D c f hsq, inferInstance,
     inferInstance, inferInstance, isPullback_isPullbackLift f hsq⟩
 
@@ -2772,8 +2772,8 @@ omit [IsCofiltered I] in
 lemma DescendsAtWithOpen.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
     {W : X.Opens} (H : DescendsAtWithOpen D c k g W) : DescendsAtWithOpen D c k' g W := by
   obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, hOc, hO⟩ := H
-  haveI := hp; haveI := hcpt; haveI := hqs
-  haveI : QuasiCompact (pullback.fst p (D.map f)) :=
+  have := hp; have := hcpt; have := hqs
+  have : QuasiCompact (pullback.fst p (D.map f)) :=
     MorphismProperty.pullback_fst _ _ inferInstance
   refine ⟨pullback p (D.map f), pullback.snd _ _, isPullbackLift D c f hsq,
     pullback.fst p (D.map f) ⁻¹ᵁ O, inferInstance, inferInstance, inferInstance,
@@ -2794,7 +2794,7 @@ lemma exists_descendsAtWithOpen {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt}
     (H : DescendsAt D c k g) (W : X.Opens) (hW : IsCompact (W : Set X)) :
     ∃ k' : I, DescendsAtWithOpen D c k' g W := by
   obtain ⟨Y, p, h, hp, hcpt, hqs, hsq⟩ := H
-  haveI := hp; haveI := hcpt; haveI := hqs
+  have := hp; have := hcpt; have := hqs
   have hlim : IsLimit ((baseChangeCone D c p).extend hsq.isoPullback.hom) :=
     (isLimitBaseChangeCone D c p hc).ofIsoLimit
       (Cone.ext hsq.isoPullback.symm (fun j ↦ by simp))
@@ -2818,8 +2818,8 @@ applies to it. -/
 lemma DescendsToStage.of_isAffine {i₀ : I} {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt)
     [LocallyOfFinitePresentation g] {V : (D.obj i₀).Opens} (hV : IsAffineOpen V)
     (q : X ⟶ V.toScheme) (hq : q ≫ V.ι = g ≫ c.π.app i₀) : DescendsToStage D c g := by
-  haveI : IsAffine V.toScheme := hV
-  haveI : ∀ j : Over i₀, IsAffine ((baseChangeDiagram D V.ι).obj j) := fun j ↦
+  have : IsAffine V.toScheme := hV
+  have : ∀ j : Over i₀, IsAffine ((baseChangeDiagram D V.ι).obj j) := fun j ↦
     inferInstanceAs (IsAffine (pullback V.ι (D.map j.hom)))
   have hsnd : pullback.lift q g hq ≫ pullback.snd V.ι (c.π.app i₀) = g := pullback.lift_snd ..
   have hmono : MorphismProperty.monomorphisms Scheme.{u} (pullback.snd V.ι (c.π.app i₀)) :=
@@ -2828,7 +2828,7 @@ lemma DescendsToStage.of_isAffine {i₀ : I} {X : Scheme.{u}} [IsAffine X] (g : 
       (pullback.lift q g hq ≫ pullback.snd V.ι (c.π.app i₀)) := by
     rw [hsnd]
     exact ‹LocallyOfFinitePresentation g›
-  haveI : @LocallyOfFinitePresentation X (baseChangeCone D c V.ι).pt (pullback.lift q g hq) :=
+  have : @LocallyOfFinitePresentation X (baseChangeCone D c V.ι).pt (pullback.lift q g hq) :=
     MorphismProperty.of_postcomp (W := @LocallyOfFinitePresentation)
       (W' := MorphismProperty.monomorphisms Scheme.{u}) _ (pullback.snd V.ι (c.π.app i₀))
       hmono hcomp
@@ -2836,9 +2836,9 @@ lemma DescendsToStage.of_isAffine {i₀ : I} {X : Scheme.{u}} [IsAffine X] (g : 
     Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine
       (baseChangeDiagram D V.ι) (baseChangeCone D c V.ι)
       (isLimitBaseChangeCone D c V.ι hc) (pullback.lift q g hq)
-  haveI := hYaff
-  haveI := hp
-  haveI : IsOpenImmersion ((baseChangeDiagramπ D V.ι).app j) :=
+  have := hYaff
+  have := hp
+  have : IsOpenImmersion ((baseChangeDiagramπ D V.ι).app j) :=
     inferInstanceAs (IsOpenImmersion (pullback.snd V.ι (D.map j.hom)))
   have hP : LocallyOfFinitePresentation (p ≫ (baseChangeDiagramπ D V.ι).app j) := inferInstance
   refine ⟨j.left, Y, p ≫ (baseChangeDiagramπ D V.ι).app j, h, hP, inferInstance,
@@ -2853,7 +2853,7 @@ lemma DescendsToStage.of_isAffineOpen {i₀ : I} {X : Scheme.{u}} (g : X ⟶ c.p
     [LocallyOfFinitePresentation g] {W : X.Opens} (hW : IsAffineOpen W)
     {V : (D.obj i₀).Opens} (hV : IsAffineOpen V) (hle : W ≤ (g ≫ c.π.app i₀) ⁻¹ᵁ V) :
     DescendsToStage D c (W.ι ≫ g) := by
-  haveI : IsAffine W.toScheme := hW
+  have : IsAffine W.toScheme := hW
   refine DescendsToStage.of_isAffine hc _ hV ((g ≫ c.π.app i₀).resLE V W hle) ?_
   rw [Scheme.Hom.resLE_comp_ι, Category.assoc]
 
@@ -2899,12 +2899,12 @@ lemma DescendsToStage.of_sup_eq_top {Z : Scheme.{u}} (gZ : Z ⟶ c.pt) (U V : Z.
   set k := IsCofiltered.min k₃ k₄ with hk
   obtain ⟨YU, pU, hUh, OU, hpU, hcU, hqU, HU, hOUc, hOU⟩ := hU
   obtain ⟨YV, pV, hVh, OV, hpV, hcV, hqV, HV, hOVc, hOV⟩ := hV
-  haveI := hpU; haveI := hcU; haveI := hqU; haveI := hpV; haveI := hcV; haveI := hqV
-  haveI : CompactSpace OU.toScheme := isCompact_iff_compactSpace.mp hOUc
-  haveI : CompactSpace OV.toScheme := isCompact_iff_compactSpace.mp hOVc
-  haveI : QuasiSeparatedSpace OU.toScheme :=
+  have := hpU; have := hcU; have := hqU; have := hpV; have := hcV; have := hqV
+  have : CompactSpace OU.toScheme := isCompact_iff_compactSpace.mp hOUc
+  have : CompactSpace OV.toScheme := isCompact_iff_compactSpace.mp hOVc
+  have : QuasiSeparatedSpace OU.toScheme :=
     QuasiSeparatedSpace.of_isOpenEmbedding OU.ι.isOpenEmbedding
-  haveI : QuasiSeparatedSpace OV.toScheme :=
+  have : QuasiSeparatedSpace OV.toScheme :=
     QuasiSeparatedSpace.of_isOpenEmbedding OV.ι.isOpenEmbedding
   -- the two descended models of the intersection
   have hrangeU : (Scheme.Opens.infHomLeft U V).opensRange = U.ι ⁻¹ᵁ V := by
@@ -2979,11 +2979,11 @@ lemma DescendsToStage.of_sup_eq_top {Z : Scheme.{u}} (gZ : Z ⟶ c.pt) (U V : Z.
     (by rw [hh₂', IsPullback.lift_snd, Category.assoc])
   -- glue the two charts along the descended intersection
   have hOU'c : IsCompact ((OU' : YU'.Opens) : Set YU') := by
-    haveI : QuasiCompact (pullback.fst pU (D.map f')) :=
+    have : QuasiCompact (pullback.fst pU (D.map f')) :=
       MorphismProperty.pullback_fst _ _ inferInstance
     rw [hOU']
     exact QuasiCompact.isCompact_preimage _ OU.isOpen hOUc
-  haveI : CompactSpace ↥(OU'.toScheme) := isCompact_iff_compactSpace.mp hOU'c
+  have : CompactSpace ↥(OU'.toScheme) := isCompact_iff_compactSpace.mp hOU'c
   have hcomm : OU'.ι ≫ pU' = (e.hom ≫ OV'.ι) ≫ pV' := by rw [Category.assoc, he₁]
   have hpreU : hU' ⁻¹ᵁ OU' = U.ι ⁻¹ᵁ V := by
     rw [hOU', ← Scheme.Hom.comp_preimage, hhU', isPullbackLift_fst, hOU]
@@ -3050,7 +3050,7 @@ lemma DescendsToStage.of_sup_eq_top {Z : Scheme.{u}} (gZ : Z ⟶ c.pt) (U V : Z.
       exact HU'
     · rw [inr_pushoutOpensDesc_assoc, hp, pushout.inr_desc]
       exact HV'
-  haveI := isIso_pushoutOpensDesc U V hUV
+  have := isIso_pushoutOpensDesc U V hUV
   refine ⟨k', pushout OU'.ι (e.hom ≫ OV'.ι), p, inv (pushoutOpensDesc U V) ≫ ρ,
     IsZariskiLocalAtSource.pushout_desc OU'.ι (e.hom ≫ OV'.ι) hcomm inferInstance inferInstance,
     inferInstance,
@@ -3080,7 +3080,7 @@ lemma descendsToStage_finsetSup {X : Scheme.{u}} [QuasiSeparatedSpace X] {i₀ :
         fun W hW ↦ hs W (Finset.mem_insert_of_mem hW)
       rw [Finset.sup_insert, id]
       set Z : X.Opens := a ⊔ s.sup id with hZ
-      haveI : QuasiSeparatedSpace Z.toScheme :=
+      have : QuasiSeparatedSpace Z.toScheme :=
         QuasiSeparatedSpace.of_isOpenEmbedding Z.ι.isOpenEmbedding
       set U : Z.toScheme.Opens := Z.ι ⁻¹ᵁ (s.sup id) with hUdef
       set V : Z.toScheme.Opens := Z.ι ⁻¹ᵁ a with hVdef
@@ -3142,10 +3142,10 @@ theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.o
   classical
   obtain ⟨i₀⟩ : Nonempty I := IsCofiltered.nonempty
   have := isAffineHom_π_app _ _ hc
-  haveI : CompactSpace c.pt := QuasiCompact.compactSpace_of_compactSpace (c.π.app i₀)
-  haveI : QuasiSeparatedSpace c.pt := quasiSeparatedSpace_of_quasiSeparated (c.π.app i₀)
-  haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace g
-  haveI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated g
+  have : CompactSpace c.pt := QuasiCompact.compactSpace_of_compactSpace (c.π.app i₀)
+  have : QuasiSeparatedSpace c.pt := quasiSeparatedSpace_of_quasiSeparated (c.π.app i₀)
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace g
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated g
   obtain ⟨Us, hUsB, hUsfin, hUs⟩ :=
     (isBasis_affineOpens_le_preimage (g ≫ c.π.app i₀)).exists_finite_of_isCompact
       (U := ⊤) (by simpa using isCompact_univ)
@@ -3155,7 +3155,7 @@ theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.o
   replace H := DescendsToStage.comp_iso X.topIso.symm H
   rw [Iso.symm_hom, ← Category.assoc, Scheme.toIso_inv_ι, Category.id_comp] at H
   obtain ⟨i, Y, p, h, hp, hcpt, hqs, hsq⟩ := H
-  haveI := hp; haveI := hcpt; haveI := hqs
+  have := hp; have := hcpt; have := hqs
   exact ⟨i, Y, p, hp, inferInstance, inferInstance, h, hsq⟩
 
 
@@ -3175,7 +3175,7 @@ lemma Scheme.exists_isClosedImmersion_pullback_snd {k : I} [CompactSpace (D.obj 
     ∃ (k' : I) (f : k' ⟶ k), ∀ {k'' : I} (f' : k'' ⟶ k'),
       IsClosedImmersion (pullback.snd q (D.map (f' ≫ f))) := by
   classical
-  haveI : LocallyOfFinitePresentation w := MorphismProperty.of_isPullback H inferInstance
+  have : LocallyOfFinitePresentation w := MorphismProperty.of_isPullback H inferInstance
   set 𝒰 := (D.obj k).affineCover.finiteSubcover with h𝒰
   -- For every affine chart of the base stage, the canonical chart-restricted model of `Z`
   -- becomes a closed immersion at some later stage.
@@ -3183,7 +3183,7 @@ lemma Scheme.exists_isClosedImmersion_pullback_snd {k : I} [CompactSpace (D.obj 
       IsClosedImmersion (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) := by
     intro a
     -- The system base changed to the chart has affine stages.
-    haveI : ∀ j : Over k, IsAffine ((baseChangeDiagram D (𝒰.f a)).obj j) := fun j ↦
+    have : ∀ j : Over k, IsAffine ((baseChangeDiagram D (𝒰.f a)).obj j) := fun j ↦
       inferInstanceAs (IsAffine (pullback (𝒰.f a) (D.map j.hom)))
     -- The base change of `w` to the chart-restricted limit is a finitely presented closed
     -- immersion.
@@ -3192,9 +3192,9 @@ lemma Scheme.exists_isClosedImmersion_pullback_snd {k : I} [CompactSpace (D.obj 
         IsPullback wA (pullback.snd (𝒰.f a) (h ≫ q))
           (pullback.snd (𝒰.f a) (c.π.app k)) w :=
       ⟨_, isPullback_pullback_map (𝒰.f a) (h ≫ q) (c.π.app k) w H.w.symm⟩
-    haveI hwA₁ : IsClosedImmersion wA :=
+    have hwA₁ : IsClosedImmersion wA :=
       MorphismProperty.of_isPullback hwsq.flip ‹IsClosedImmersion w›
-    haveI hwA₂ : LocallyOfFinitePresentation wA :=
+    have hwA₂ : LocallyOfFinitePresentation wA :=
       MorphismProperty.of_isPullback hwsq.flip ‹LocallyOfFinitePresentation w›
     -- Apply the affine case to obtain a closed immersion model at a stage `ja`.
     obtain ⟨ja, Ya, hYaff, pa, hpa, hpac, ha, Ha⟩ :=
@@ -3215,26 +3215,26 @@ lemma Scheme.exists_isClosedImmersion_pullback_snd {k : I} [CompactSpace (D.obj 
     have hMsq := BIG.of_right'
       (IsPullback.of_hasPullback q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a))
     -- Instances for the comparison of the two models.
-    haveI := hYaff
-    haveI := hpa
-    haveI : CompactSpace Ya := inferInstance
-    haveI : QuasiSeparatedSpace Ya := inferInstance
-    haveI : QuasiCompact (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
+    have := hYaff
+    have := hpa
+    have : CompactSpace Ya := inferInstance
+    have : QuasiSeparatedSpace Ya := inferInstance
+    have : QuasiCompact (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
       MorphismProperty.pullback_snd (P := @QuasiCompact) _ _ ‹QuasiCompact q›
-    haveI : QuasiSeparated (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
+    have : QuasiSeparated (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
       MorphismProperty.pullback_snd (P := @QuasiSeparated) _ _ ‹QuasiSeparated q›
-    haveI : LocallyOfFinitePresentation
+    have : LocallyOfFinitePresentation
         (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
       MorphismProperty.pullback_snd (P := @LocallyOfFinitePresentation) _ _
         ‹LocallyOfFinitePresentation q›
-    haveI : @LocallyOfFinitePresentation
+    have : @LocallyOfFinitePresentation
         (pullback q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a))
         ((baseChangeDiagram D (𝒰.f a)).obj ja)
         (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) := ‹_›
-    haveI : CompactSpace ↥(pullback q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
+    have : CompactSpace ↥(pullback q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
       QuasiCompact.compactSpace_of_compactSpace
         (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a))
-    haveI : QuasiSeparatedSpace ↥(pullback q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
+    have : QuasiSeparatedSpace ↥(pullback q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a)) :=
       quasiSeparatedSpace_of_quasiSeparated
         (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a))
     -- The two models agree at a later stage `ka`, so the chart model becomes closed there.
@@ -3246,7 +3246,7 @@ lemma Scheme.exists_isClosedImmersion_pullback_snd {k : I} [CompactSpace (D.obj 
       (IsPullback.of_hasPullback (pullback.snd q (pullback.fst (𝒰.f a) (D.map ja.hom) ≫ 𝒰.f a))
         ((baseChangeDiagram D (𝒰.f a)).map fa))
       (isPullbackLift_fst fa hMsq) (isPullbackLift_snd fa hMsq)
-    haveI hclosed₁ :
+    have hclosed₁ :
         IsClosedImmersion (pullback.snd pa ((baseChangeDiagram D (𝒰.f a)).map fa)) :=
       MorphismProperty.pullback_snd _ _ hpac
     have hclosed₂ : IsClosedImmersion
@@ -3342,23 +3342,23 @@ lemma Scheme.exists_isClosedImmersion_overPullbackMap {k : I}
     rw [Over.w γ, D.map_id, Category.comp_id]
   have he : (𝟙 Y.left) ≫ Y.hom = Y.hom ≫ D.map (𝟙 k) := by
     rw [Category.id_comp, D.map_id, Category.comp_id]
-  haveI : IsIso (D.map (𝟙 k)) := by rw [D.map_id]; infer_instance
-  haveI hfst : IsIso (pullback.fst Y.hom (D.map (𝟙 k))) := inferInstance
+  have : IsIso (D.map (𝟙 k)) := by rw [D.map_id]; infer_instance
+  have hfst : IsIso (pullback.fst Y.hom (D.map (𝟙 k))) := inferInstance
   have hfl : pullback.fst Y.hom (D.map (𝟙 k)) ≫ pullback.lift (𝟙 Y.left) Y.hom he = 𝟙 _ := by
     apply pullback.hom_ext
     · simp
     · rw [Category.assoc, pullback.lift_snd, Category.id_comp, pullback.condition, D.map_id,
         Category.comp_id]
-  haveI he₀ : IsIso (pullback.lift (𝟙 Y.left) Y.hom he) := by
+  have he₀ : IsIso (pullback.lift (𝟙 Y.left) Y.hom he) := by
     rw [show pullback.lift (𝟙 Y.left) Y.hom he = inv (pullback.fst Y.hom (D.map (𝟙 k))) from
       IsIso.eq_inv_of_hom_inv_id hfl]
     infer_instance
   have hq₀ : pullback.lift γ.left Z.hom hw = γ.left ≫ pullback.lift (𝟙 Y.left) Y.hom he := by
     apply pullback.hom_ext <;> simp
-  haveI : LocallyOfFinitePresentation (pullback.lift γ.left Z.hom hw) := by
+  have : LocallyOfFinitePresentation (pullback.lift γ.left Z.hom hw) := by
     rw [hq₀]; infer_instance
-  haveI : QuasiCompact (pullback.lift γ.left Z.hom hw) := by rw [hq₀]; infer_instance
-  haveI : QuasiSeparated (pullback.lift γ.left Z.hom hw) := by rw [hq₀]; infer_instance
+  have : QuasiCompact (pullback.lift γ.left Z.hom hw) := by rw [hq₀]; infer_instance
+  have : QuasiSeparated (pullback.lift γ.left Z.hom hw) := by rw [hq₀]; infer_instance
   -- The base change of `γ` to the limit is the base change of the identity-stage model.
   have hsq : IsPullback (pullback.fst Z.hom (c.π.app k))
       ((Over.pullback (c.π.app k)).map γ).left (pullback.lift γ.left Z.hom hw)
@@ -3433,23 +3433,23 @@ lemma Scheme.exists_isSeparated_pullback_snd {k : I} [CompactSpace (D.obj k)]
     {X : Scheme.{u}} {g : X ⟶ c.pt} [IsSeparated g] {h : X ⟶ Y}
     (H : IsPullback h g p (c.π.app k)) :
     ∃ (k' : I) (f : k' ⟶ k), IsSeparated (pullback.snd p (D.map f)) := by
-  haveI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
-  haveI : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated p
-  haveI : QuasiCompact (pullback.snd p p) := MorphismProperty.pullback_snd _ _ ‹_›
-  haveI : QuasiSeparated (pullback.snd p p) := MorphismProperty.pullback_snd _ _ ‹_›
-  haveI : CompactSpace ↥(pullback p p) :=
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated p
+  have : QuasiCompact (pullback.snd p p) := MorphismProperty.pullback_snd _ _ ‹_›
+  have : QuasiSeparated (pullback.snd p p) := MorphismProperty.pullback_snd _ _ ‹_›
+  have : CompactSpace ↥(pullback p p) :=
     QuasiCompact.compactSpace_of_compactSpace (pullback.snd p p)
-  haveI : QuasiSeparatedSpace ↥(pullback p p) :=
+  have : QuasiSeparatedSpace ↥(pullback p p) :=
     quasiSeparatedSpace_of_quasiSeparated (pullback.snd p p)
   -- The diagonal of the model, as a morphism of schemes over the stage.
   let γ : Over.mk p ⟶ Over.mk (pullback.snd p p ≫ p) :=
     Over.homMk (pullback.diagonal p) (by simp)
-  haveI : LocallyOfFinitePresentation γ.left :=
+  have : LocallyOfFinitePresentation γ.left :=
     inferInstanceAs (LocallyOfFinitePresentation (pullback.diagonal p))
-  haveI : QuasiCompact γ.left := inferInstanceAs (QuasiCompact (pullback.diagonal p))
-  haveI : QuasiSeparated γ.left := inferInstanceAs (QuasiSeparated (pullback.diagonal p))
+  have : QuasiCompact γ.left := inferInstanceAs (QuasiCompact (pullback.diagonal p))
+  have : QuasiSeparated γ.left := inferInstanceAs (QuasiSeparated (pullback.diagonal p))
   -- The base change of the model to the limit is separated, being isomorphic to `g`.
-  haveI hsep : IsSeparated (pullback.fst (c.π.app k) p) := by
+  have hsep : IsSeparated (pullback.fst (c.π.app k) p) := by
     refine (MorphismProperty.arrow_mk_iso_iff @IsSeparated
       (Arrow.isoMk (H.isoPullback ≪≫ pullbackSymmetry p (c.π.app k)) (Iso.refl _) ?_)).mp
       ‹IsSeparated g›
@@ -3461,9 +3461,9 @@ lemma Scheme.exists_isSeparated_pullback_snd {k : I} [CompactSpace (D.obj k)]
   have hS : IsClosedImmersion ((Over.pullback (c.π.app k)).map γ).left :=
     (MorphismProperty.cancel_right_of_respectsIso @IsClosedImmersion _ _).mp
       ((MorphismProperty.cancel_left_of_respectsIso @IsClosedImmersion _ _).mp hlim)
-  haveI : CompactSpace ↥((Over.mk (pullback.snd p p ≫ p) : Over (D.obj k)).left) :=
+  have : CompactSpace ↥((Over.mk (pullback.snd p p ≫ p) : Over (D.obj k)).left) :=
     ‹CompactSpace ↥(pullback p p)›
-  haveI : QuasiSeparatedSpace ↥((Over.mk (pullback.snd p p ≫ p) : Over (D.obj k)).left) :=
+  have : QuasiSeparatedSpace ↥((Over.mk (pullback.snd p p ≫ p) : Over (D.obj k)).left) :=
     ‹QuasiSeparatedSpace ↥(pullback p p)›
   obtain ⟨k', f, tail⟩ := Scheme.exists_isClosedImmersion_overPullbackMap hc γ hS
   have htail := tail (𝟙 k')
@@ -3474,7 +3474,7 @@ lemma Scheme.exists_isSeparated_pullback_snd {k : I} [CompactSpace (D.obj k)]
     exact (MorphismProperty.cancel_left_of_respectsIso @IsClosedImmersion _ _).mpr
       ((MorphismProperty.cancel_right_of_respectsIso @IsClosedImmersion _ _).mpr htail)
   refine ⟨k', f, ?_⟩
-  haveI : IsSeparated (pullback.fst (D.map f) p) := ⟨hdiag⟩
+  have : IsSeparated (pullback.fst (D.map f) p) := ⟨hdiag⟩
   rw [← MorphismProperty.cancel_left_of_respectsIso @IsSeparated
     (pullbackSymmetry (D.map f) p).hom, pullbackSymmetry_hom_comp_snd]
   infer_instance
@@ -3496,7 +3496,7 @@ theorem Scheme.exists_isPullback_of_finitePresentation_of_isSeparated
       (_ : QuasiCompact p) (_ : IsSeparated p) (h : X ⟶ Y),
       IsPullback h g p (c.π.app i) := by
   obtain ⟨i, Y, p, hp₁, hp₂, hp₃, h, H⟩ := Scheme.exists_isPullback_of_finitePresentation hc g
-  haveI := hp₁; haveI := hp₂; haveI := hp₃
+  have := hp₁; have := hp₂; have := hp₃
   obtain ⟨i', f, hsep⟩ := Scheme.exists_isSeparated_pullback_snd hc H
   exact ⟨i', pullback p (D.map f), pullback.snd p (D.map f), inferInstance, inferInstance,
     hsep, isPullbackLift D c f H, isPullback_isPullbackLift f H⟩
@@ -3613,9 +3613,9 @@ lemma exists_isSeparatingPair_of_isLimit
   have hgen : ∀ {j k : Over i₀} (g : k ⟶ j),
       Subring.closure (Set.range ⇑(E.map g).appTop.hom ∪ Set.range ⇑(a k).appTop.hom) = ⊤ := by
     intro j k g
-    haveI := hEaff j
-    haveI := hAaff j
-    haveI := hAaff k
+    have := hEaff j
+    have := hAaff j
+    have := hAaff k
     exact CommRingCat.closure_range_union_range_eq_top_of_isPushout
       (isPushout_appTop_of_isPullback (sqA g))
   -- the transition maps respect the subrings `R`
@@ -3692,9 +3692,9 @@ lemma exists_isSeparatingPair_of_isLimit
     exact hS z (h.ge (Subring.mem_top z))
   -- finitely many generators at the initial stage
   set j₀ : Over i₀ := Over.mk (𝟙 i₀) with hj₀
-  haveI : IsAffine (E.obj j₀) := hEaff j₀
-  haveI : IsAffine (A.obj j₀) := hAaff j₀
-  haveI : LocallyOfFiniteType (a j₀) := by rw [ha]; infer_instance
+  have : IsAffine (E.obj j₀) := hEaff j₀
+  have : IsAffine (A.obj j₀) := hAaff j₀
+  have : LocallyOfFiniteType (a j₀) := by rw [ha]; infer_instance
   obtain ⟨s, hs⟩ := exists_finset_closure_range_appTop_union_eq_top (a j₀)
   -- every generator lies in `R` at a late enough stage
   have key : ∀ x : Γ(E.obj j₀, ⊤), ∃ (j : Over i₀) (g : j ⟶ j₀),
@@ -3704,7 +3704,7 @@ lemma exists_isSeparatingPair_of_isLimit
     obtain ⟨g₁⟩ : Nonempty (j₁ ⟶ j₀) := ⟨Over.homMk j₁.hom (Category.comp_id j₁.hom)⟩
     have h1 : (cE.π.app j₁).appTop.hom ((E.map g₁).appTop.hom x - w) = 0 := by
       rw [map_sub, hcone g₁ x, hwz, sub_self]
-    haveI : IsAffine (E.obj j₁) := hEaff j₁
+    have : IsAffine (E.obj j₁) := hEaff j₁
     obtain ⟨j₂, g₂, h2⟩ := exists_appTop_map_eq_zero_of_isLimit E cE hlimE
       ((E.map g₁).appTop.hom x - w) h1
     refine ⟨j₂, g₂ ≫ g₁, ?_⟩
@@ -3765,7 +3765,7 @@ theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
     ∃ i₀ : I, ∀ {i : I} (_ : i ⟶ i₀), (D.obj i).IsSeparated := by
   classical
   obtain ⟨i₀⟩ := IsCofiltered.nonempty (C := I)
-  haveI : ∀ i, IsAffineHom (c.π.app i) := isAffineHom_π_app D c hc
+  have : ∀ i, IsAffineHom (c.π.app i) := isAffineHom_π_app D c hc
   set 𝒰 := (D.obj i₀).affineCover.finiteSubcover with h𝒰
   have h𝒰aff : ∀ a : 𝒰.I₀, IsAffine (𝒰.X a) := fun a ↦ inferInstanceAs (IsAffine (Spec _))
   set U : 𝒰.I₀ → (D.obj i₀).Opens := fun a ↦ (𝒰.f a).opensRange with hU
@@ -3853,14 +3853,14 @@ theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
     have hVaff : IsAffine (V : S.Opens).toScheme := V.2
     have hWc : IsCompact ((t.app i₀ ⁻¹ᵁ (V : S.Opens) : (D.obj i₀).Opens) : Set (D.obj i₀)) :=
       QuasiCompact.isCompact_preimage _ (V : S.Opens).2 V.2.isCompact
-    haveI : ∀ j : Over i₀,
+    have : ∀ j : Over i₀,
         CompactSpace ((opensDiagram D i₀ (t.app i₀ ⁻¹ᵁ (V : S.Opens))).obj j) := fun j ↦
       isCompact_iff_compactSpace.mp
         (QuasiCompact.isCompact_preimage _ (t.app i₀ ⁻¹ᵁ (V : S.Opens)).2 hWc)
-    haveI : ∀ j : Over i₀,
+    have : ∀ j : Over i₀,
         QuasiSeparatedSpace ((opensDiagram D i₀ (t.app i₀ ⁻¹ᵁ (V : S.Opens))).obj j) := fun j ↦
       (isQuasiSeparated_iff_quasiSeparatedSpace _ (D.map _ ⁻¹ᵁ _).2).mp (.of_quasiSeparatedSpace _)
-    haveI : Scheme.IsSeparated (opensCone D c i₀ (t.app i₀ ⁻¹ᵁ (V : S.Opens))).pt := by
+    have : Scheme.IsSeparated (opensCone D c i₀ (t.app i₀ ⁻¹ᵁ (V : S.Opens))).pt := by
       constructor
       have he : terminal.from ((f ⁻¹ᵁ (V : S.Opens)).toScheme)
           = (f ∣_ (V : S.Opens)) ≫ terminal.from _ := Subsingleton.elim _ _
@@ -3906,7 +3906,7 @@ theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
       have h2 := hjj V.1 (gk ≫ m)
       have h1 : lift ⁻¹ᵁ (U.ι ⁻¹ᵁ (V.1 : S.Opens)) = D.map k.hom ⁻¹ᵁ (t.app i₀ ⁻¹ᵁ (V.1 : S.Opens))
           := by rw [← Scheme.Hom.comp_preimage, hfac, ← hnat, Scheme.Hom.comp_preimage]
-      haveI : Scheme.IsSeparated ((lift ⁻¹ᵁ (U.ι ⁻¹ᵁ (V.1 : S.Opens))).toScheme) := by
+      have : Scheme.IsSeparated ((lift ⁻¹ᵁ (U.ι ⁻¹ᵁ (V.1 : S.Opens))).toScheme) := by
         rw [h1]; exact h2
       infer_instance
   infer_instance
@@ -4005,7 +4005,7 @@ theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.
       QuasiSeparated p ∧ IsImmersion i ∧ i ≫ p = f := by
   classical
   obtain ⟨N⟩ := X.nonempty_noetherianApproximation
-  haveI hπaff : ∀ j : N.I, IsAffineHom (N.π.app j) :=
+  have hπaff : ∀ j : N.I, IsAffineHom (N.π.app j) :=
     fun j ↦ isAffineHom_π_app N.D (Cone.mk X N.π) N.isLimit j
   -- an affine open cover of `X`, each member mapping into an affine open of `S`
   have key : ∀ x : X, ∃ (Wx : X.Opens) (Vx : S.Opens), IsAffineOpen Wx ∧ IsAffineOpen Vx ∧
@@ -4038,7 +4038,7 @@ theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.
         (∀ r, (f.appLE (V a.1) (N.π.app i ⁻¹ᵁ U a) (hle a)).hom r ∈ T) →
         (∀ x ∈ gens, x ∈ T) → ∀ z, z ∈ T := by
     intro a
-    letI := (f.appLE (V a.1) (N.π.app i ⁻¹ᵁ U a) (hle a)).hom.toAlgebra
+    let := (f.appLE (V a.1) (N.π.app i ⁻¹ᵁ U a) (hle a)).hom.toAlgebra
     obtain ⟨gens, hgens⟩ := (hft a).out
     refine ⟨gens, fun T h1 h2 z ↦ ?_⟩
     have hT : (⊤ : Subalgebra Γ(S, V a.1) Γ(X, N.π.app i ⁻¹ᵁ U a)) ≤
@@ -4052,10 +4052,10 @@ theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.
     N.isLimit i (σ := Σ a : τ, {x // x ∈ gens a}) (U := fun q ↦ U q.1)
     (fun q ↦ (hU q.1).1) (fun q ↦ q.2.1)
   -- the finite presentation model
-  haveI : LocallyOfFinitePresentation (specULiftZIsTerminal.from (N.D.obj k)) := inferInstance
-  haveI : QuasiCompact (specULiftZIsTerminal.from (N.D.obj k)) :=
+  have : LocallyOfFinitePresentation (specULiftZIsTerminal.from (N.D.obj k)) := inferInstance
+  have : QuasiCompact (specULiftZIsTerminal.from (N.D.obj k)) :=
     (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).mpr inferInstance
-  haveI : QuasiSeparated (specULiftZIsTerminal.from (N.D.obj k)) :=
+  have : QuasiSeparated (specULiftZIsTerminal.from (N.D.obj k)) :=
     (HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)).mpr inferInstance
   refine ⟨pullback (specULiftZIsTerminal.from (N.D.obj k)) (specULiftZIsTerminal.from S),
     pullback.snd _ _, pullback.lift (N.π.app k) f (specULiftZIsTerminal.hom_ext _ _),
@@ -4092,7 +4092,7 @@ theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.
   · intro a
     have hOaff : IsAffineOpen (O a) :=
       isAffineOpen_preimage_inf_preimage_pullback tZ tS ((hU a).1.preimage (N.D.map gk)) (hV a.1)
-    haveI : IsAffine (O a).toScheme := hOaff
+    have : IsAffine (O a).toScheme := hOaff
     have hsurj : ∀ (e : (N.π.app i ⁻¹ᵁ U a : X.Opens) ≤ u ⁻¹ᵁ O a),
         Function.Surjective (u.appLE (O a) (N.π.app i ⁻¹ᵁ U a) e) := by
       intro e z
@@ -4111,7 +4111,7 @@ theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.
       exact ⟨haff a, Scheme.Hom.surjective_resLE_appTop u e (hsurj e)⟩
     rw [← Scheme.Hom.resLE_eq_morphismRestrict,
       Scheme.Hom.resLE_congr u _ rfl (hupre a) @IsImmersion]
-    haveI := hcl (le_of_eq (hupre a).symm)
+    have := hcl (le_of_eq (hupre a).symm)
     infer_instance
 
 end FinitePresentationModel
@@ -4170,7 +4170,7 @@ private lemma exists_finiteType_le_of_appLE_eq [IsLocallyNoetherian Z]
     (hts : π.appLE V.1 U.1 h t = s) (hs : s ∈ I.ideal U) :
     ∃ J : Y.IdealSheafData, J ≤ I ∧ (∀ W : Y.affineOpens, (J.ideal W).FG) ∧ s ∈ J.ideal U := by
   refine ⟨(I.map π).comap π, le_map_iff_comap_le.mp le_rfl, ?_, ?_⟩
-  · haveI : LocallyOfFinitePresentation ((I.map π).comap π).subschemeι := by
+  · have : LocallyOfFinitePresentation ((I.map π).comap π).subschemeι := by
       rw [← comapIso_hom_fst (I.map π) π]
       exact MorphismProperty.comp_mem _ _ _ inferInstance
         (MorphismProperty.pullback_fst _ _ inferInstance)
@@ -4208,7 +4208,7 @@ theorem exists_finiteType_le_of_mem [CompactSpace Y] [QuasiSeparatedSpace Y]
   have hwm : N.π.app m ≫ N.D.map g = N.π.app k := (Cone.mk Y N.π).w g
   have hmk : N.π.app m ⁻¹ᵁ (N.D.map g ⁻¹ᵁ V) = N.π.app k ⁻¹ᵁ V := by
     rw [← Scheme.Hom.comp_preimage, hwm]
-  haveI : IsAffineHom (N.π.app m) := isAffineHom_π_app N.D (Cone.mk Y N.π) N.isLimit m
+  have : IsAffineHom (N.π.app m) := isAffineHom_π_app N.D (Cone.mk Y N.π) N.isLimit m
   exact exists_finiteType_le_of_appLE_eq I (N.π.app m) ⟨N.D.map g ⁻¹ᵁ V, hV.preimage _⟩
     ⟨N.π.app k ⁻¹ᵁ V, hU⟩ hmk hmk.ge t (ht' hmk.ge) hs
 
@@ -4347,11 +4347,11 @@ theorem Scheme.Hom.exists_isClosedImmersion_locallyOfFinitePresentation {X S : S
       QuasiSeparated p ∧ IsClosedImmersion i ∧ i ≫ p = f := by
   obtain ⟨Y, p, i, hp, hpc, hpqs, hi, hcomp⟩ :=
     f.exists_isImmersion_locallyOfFinitePresentation
-  haveI := hp; haveI := hpc; haveI := hpqs; haveI := hi
-  haveI : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated p
+  have := hp; have := hpc; have := hpqs; have := hi
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated p
   obtain ⟨W, g, hWc, hg, hgW⟩ := i.exists_isCompact_isClosedImmersion
-  haveI := hg
-  haveI : QuasiCompact W.ι := W.quasiCompact_ι hWc
+  have := hg
+  have : QuasiCompact W.ι := W.quasiCompact_ι hWc
   refine ⟨W.toScheme, W.ι ≫ p, g, inferInstance, inferInstance, inferInstance, hg, ?_⟩
   rw [← Category.assoc, hgW, hcomp]
 
@@ -4440,9 +4440,9 @@ theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (
     Nonempty f.FinitePresentationApproximation := by
   obtain ⟨Y, q, i, hq, hqc, hqs, hi, hcomp⟩ :=
     f.exists_isClosedImmersion_locallyOfFinitePresentation
-  haveI := hq; haveI := hqc; haveI := hqs; haveI := hi
-  haveI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace q
-  haveI : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated q
+  have := hq; have := hqc; have := hqs; have := hi
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace q
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated q
   refine ⟨{
     I := (i.ker.FGSub)ᵒᵖ
     D := i.ker.fgSubDiagram
@@ -4510,7 +4510,7 @@ theorem Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentat
       LocallyOfFinitePresentation f' ∧ QuasiCompact f' ∧ IsSeparated f' ∧ i ≫ f' = f := by
   obtain ⟨F⟩ := f.nonempty_finitePresentationApproximation
   obtain ⟨i₀⟩ := IsCofiltered.nonempty (C := F.I)
-  haveI : IsSeparated ((Cone.mk X F.π).π.app i₀ ≫ F.p.app i₀) := by
+  have : IsSeparated ((Cone.mk X F.π).π.app i₀ ≫ F.p.app i₀) := by
     change IsSeparated (F.π.app i₀ ≫ F.p.app i₀)
     rw [F.w i₀]
     infer_instance

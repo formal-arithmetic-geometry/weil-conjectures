@@ -121,7 +121,7 @@ lemma isPullback_of_opensRange_sup_eq_top {X Y S T : Scheme.{u}} {h : X ⟶ Y} {
     (hchart₁ : IsPullback k₁ n₁ m₁ h) (hchart₂ : IsPullback k₂ n₂ m₂ h)
     (H₁ : IsPullback k₁ (n₁ ≫ g) (m₁ ≫ p) π) (H₂ : IsPullback k₂ (n₂ ≫ g) (m₂ ≫ p) π) :
     IsPullback h g p π := by
-  haveI : ∀ b : Bool, IsOpenImmersion (Bool.rec (motive := fun b ↦ (cond b Y₁ Y₂) ⟶ Y) m₂ m₁ b) :=
+  have : ∀ b : Bool, IsOpenImmersion (Bool.rec (motive := fun b ↦ (cond b Y₁ Y₂) ⟶ Y) m₂ m₁ b) :=
     fun b ↦ by cases b <;> assumption
   refine isPullback_of_iSup_opensRange_eq_top w (ι := Bool) (Ya := fun b ↦ cond b Y₁ Y₂)
     (Xa := fun b ↦ cond b X₁ X₂)
@@ -146,8 +146,8 @@ lemma isAffineOpen_preimage_inf_preimage_pullback {X Y T : Scheme.{u}} [IsAffine
     (f : X ⟶ T) (g : Y ⟶ T) {A : X.Opens} {B : Y.Opens} (hA : IsAffineOpen A)
     (hB : IsAffineOpen B) :
     IsAffineOpen (pullback.fst f g ⁻¹ᵁ A ⊓ pullback.snd f g ⁻¹ᵁ B) := by
-  haveI : IsAffine A.toScheme := hA
-  haveI : IsAffine B.toScheme := hB
+  have : IsAffine A.toScheme := hA
+  have : IsAffine B.toScheme := hB
   obtain ⟨m, hm₁, hm₂⟩ : ∃ m : pullback (A.ι ≫ f) (B.ι ≫ g) ⟶ pullback f g,
       IsOpenImmersion m ∧ Set.range m =
         pullback.fst f g ⁻¹' (A : Set X) ∩ pullback.snd f g ⁻¹' (B : Set Y) := by
@@ -156,7 +156,7 @@ lemma isAffineOpen_preimage_inf_preimage_pullback {X Y T : Scheme.{u}} [IsAffine
         rfl rfl
     · rw [Scheme.Pullback.range_map]
       simp
-  haveI := hm₁
+  have := hm₁
   have hr : pullback.fst f g ⁻¹ᵁ A ⊓ pullback.snd f g ⁻¹ᵁ B = m.opensRange :=
     TopologicalSpace.Opens.ext (by rw [Scheme.Hom.coe_opensRange, hm₂]; rfl)
   rw [hr]

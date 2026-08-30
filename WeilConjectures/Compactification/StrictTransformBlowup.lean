@@ -85,12 +85,12 @@ theorem ker_pullbackLift_blowup_comap (I : X.IdealSheafData) (f : Y ⟶ X)
   have hsupp : (I.comap f).support.compl = f ⁻¹ᵁ I.support.compl := by
     ext y
     simp [support_comap]
-  haveI : IsIso (I.blowupMap ∣_ I.support.compl) := I.isIso_blowupMap_restrict_support_compl
-  haveI : IsSchemeTheoreticallyDominant
+  have : IsIso (I.blowupMap ∣_ I.support.compl) := I.isIso_blowupMap_restrict_support_compl
+  have : IsSchemeTheoreticallyDominant
       ((I.comap f).blowupMap ⁻¹ᵁ (f ⁻¹ᵁ I.support.compl)).ι := by
     have := (I.comap f).isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
     rwa [hsupp] at this
-  haveI : IsIso ((I.comap f).blowupMap ∣_ (f ⁻¹ᵁ I.support.compl)) := by
+  have : IsIso ((I.comap f).blowupMap ∣_ (f ⁻¹ᵁ I.support.compl)) := by
     have := (I.comap f).isIso_blowupMap_restrict_support_compl
     rwa [hsupp] at this
   exact ker_eq_ker_strictTransformOpen_ι f I.blowupMap I.support.compl (pullback.lift_fst ..)
@@ -111,11 +111,11 @@ theorem exists_blowup_comap_iso_strictTransform (I : X.IdealSheafData) (f : Y �
     exact (I.comap f).isInvertible_comap_blowupMap)
   set ψ : (I.comap f).blowup ⟶ pullback f I.blowupMap :=
     pullback.lift (I.comap f).blowupMap ρ hρ.symm with hψdef
-  haveI hci : IsClosedImmersion ψ := isClosedImmersion_pullbackLift_blowup_comap I f hρ.symm
+  have hci : IsClosedImmersion ψ := isClosedImmersion_pullbackLift_blowup_comap I f hρ.symm
   have hker : (I.strictTransformι f).ker = ψ.ker := by
     rw [hψdef, ker_pullbackLift_blowup_comap I f hρ.symm]
     exact _root_.AlgebraicGeometry.ker_strictTransformι f I.blowupMap I.support.compl
-  haveI hiso : IsIso (IsClosedImmersion.lift (I.strictTransformι f) ψ hker.le) :=
+  have hiso : IsIso (IsClosedImmersion.lift (I.strictTransformι f) ψ hker.le) :=
     IsClosedImmersion.isIso_lift _ _ hker
   have hfac : IsClosedImmersion.lift (I.strictTransformι f) ψ hker.le ≫
       _root_.AlgebraicGeometry.strictTransformι f I.blowupMap I.support.compl = ψ :=

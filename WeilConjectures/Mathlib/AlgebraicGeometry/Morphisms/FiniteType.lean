@@ -51,7 +51,7 @@ lemma exists_finset_closure_range_appTop_union_eq_top {X Y : Scheme.{u}} (f : X 
       Subring.closure (Set.range ⇑f.appTop.hom ∪ (s : Set Γ(X, ⊤))) = ⊤ := by
   have hft : RingHom.FiniteType f.appTop.hom :=
     HasRingHomProperty.iff_of_isAffine (P := @LocallyOfFiniteType).mp inferInstance
-  letI := f.appTop.hom.toAlgebra
+  let := f.appTop.hom.toAlgebra
   obtain ⟨s, hs⟩ := hft.out
   refine ⟨s, ?_⟩
   have h2 : (algebraMap Γ(Y, ⊤) Γ(X, ⊤)) = f.appTop.hom := RingHom.algebraMap_toAlgebra _

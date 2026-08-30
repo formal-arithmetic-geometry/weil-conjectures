@@ -61,7 +61,7 @@ private lemma isClosedImmersion_pullbackLift_restrict (φ : A →+* B) (h : I.ma
       pullback (Spec.map (CommRingCat.ofHom φ)) (toSpec I) :=
     pullback.map _ _ _ _ (𝟙 _) (chart I x hx) (𝟙 _) (by simp)
       (by simpa using (chart_toSpec I x hx).symm) with hκ
-  haveI : IsOpenImmersion κ := by
+  have : IsOpenImmersion κ := by
     rw [hκ]
     infer_instance
   set Θ : Spec (.of (Away (reesGrading J) (reesGrading.hom φ h x))) ⟶

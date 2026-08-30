@@ -452,7 +452,7 @@ lemma zeroLocus_subset_range_homOfVector {Z : Scheme.{u}} [IsAffine Z] (t : σ �
     rw [htL, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Iso.hom_inv_id]
     simp
   set α := map σ Z.isoSpec.hom with hα
-  haveI : IsIso α := by
+  have : IsIso α := by
     refine ⟨map σ Z.isoSpec.inv, ?_, ?_⟩ <;>
       rw [hα, ← map_comp] <;> simp [map_id]
   have hcomm : homOfVector (𝟙 Z) t ≫ α = Z.isoSpec.hom ≫
@@ -622,7 +622,7 @@ theorem isClosed_range_of_basicOpen_fractions {S : CommRingCat.{u}} {ι : Type*}
       simp only [hpl] at hi₀
       rwa [← Scheme.preimage_basicOpen_top, basicOpen_eq_of_affine] at hi₀
     obtain ⟨x', rfl⟩ := hrange
-    haveI : IsAffine (B i₀).toScheme := by
+    have : IsAffine (B i₀).toScheme := by
       have h := (isAffineOpen_top (Spec S)).basicOpen ((Scheme.ΓSpecIso S).inv (v i₀))
       rwa [basicOpen_eq_of_affine, ← hBv i₀] at h
     -- the graph section over the basic piece
@@ -800,7 +800,7 @@ lemma Scheme.IdealSheafData.exists_hom_affineSpace_of_awaySlope {X : Scheme.{u}}
       ∀ i, ci i ≫ g = AffineSpace.homOfVector (K.blowupChart V (ha i) ≫ K.blowupMap)
         (fun j ↦ (Scheme.ΓSpecIso _).inv
           (AffineBlowup.awaySlope (K.ideal V) (ha i) (hb i j))) := by
-  haveI : ∀ i, IsOpenImmersion (ci i) := by
+  have : ∀ i, IsOpenImmersion (ci i) := by
     intro i
     have h1 : IsOpenImmersion (ci i ≫ W.ι) := by rw [hci i]; infer_instance
     exact IsOpenImmersion.of_comp _ W.ι
@@ -978,9 +978,9 @@ lemma AffineBlowup.mem_range_specMap_awayMap_iff {a b : A} (ha : a ∈ I) (hb : 
     (∃ z, Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap (reesGrading I)
       (reesX_mem I b hb) (rfl : reesX I a ha * reesX I b hb = _))) z = y) ↔
       y ∈ PrimeSpectrum.basicOpen (AffineBlowup.awaySlope I ha hb) := by
-  letI := (HomogeneousLocalization.awayMap (reesGrading I) (reesX_mem I b hb)
+  let := (HomogeneousLocalization.awayMap (reesGrading I) (reesX_mem I b hb)
     (rfl : reesX I a ha * reesX I b hb = _)).toAlgebra
-  haveI := HomogeneousLocalization.Away.isLocalization_mul (reesX_mem I a ha)
+  have := HomogeneousLocalization.Away.isLocalization_mul (reesX_mem I a ha)
     (reesX_mem I b hb) rfl one_ne_zero
   rw [← AffineBlowup.isLocalizationElem_eq_awaySlope]
   exact Set.ext_iff.mp (PrimeSpectrum.localization_away_comap_range _ _) y
@@ -1164,7 +1164,7 @@ lemma Scheme.IdealSheafData.mul_appTop_coord_awaySlope (K : X.IdealSheafData)
     (Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap
       (reesGrading (K.ideal V)) (reesX_mem (K.ideal V) d hd) rfl)))
     hpbi.isOpenImmersion_fst (AffineBlowup.mem_range_specMap_awayMap_iff hc hd)
-  haveI := hm₁'iso
+  have := hm₁'iso
   refine AffineSpace.mul_appTop_coord_eq_of_chartOverlap K.blowupMap g
     (K.blowupChart V hc) lam hlam (K.blowupChart V hd) cid hcid _ hgid hBle _ _ hpbi.w
     m₁' hm₁' _ _ j ?_
@@ -1220,7 +1220,7 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       (IsPullback.of_hasPullback K.blowupMap (𝔸(σ; X) ↘ X)).flip
     rw [hqk_snd k]
     exact AffineSpace.isPullback_map (K.blowupChart V (hgen k) ≫ K.blowupMap)
-  haveI : ∀ k, IsOpenImmersion (qk k) := fun k ↦ (hpb k).isOpenImmersion_fst
+  have : ∀ k, IsOpenImmersion (qk k) := fun k ↦ (hpb k).isOpenImmersion_fst
   refine Scheme.isClosed_of_openCover qk ?_ ?_
   · intro x
     have hx : pullback.fst K.blowupMap (𝔸(σ; X) ↘ X) x ∈ K.blowupMap ⁻¹ᵁ V.1 :=
@@ -1314,8 +1314,8 @@ lemma exists_uniform_denominator {X : Scheme.{u}} [IsAffine X] {U : X.Opens}
           (X.basicOpen (u i)).ι.appTop (u i ^ N) = (X.basicOpen (u i)).ι.appTop (c i j)) := by
   classical
   obtain ⟨ι, hι, u, hle, hUeq⟩ := exists_finite_basicOpen_cover hU
-  haveI : Fintype ι := Fintype.ofFinite ι
-  haveI : Fintype σ := Fintype.ofFinite σ
+  have : Fintype ι := Fintype.ofFinite ι
+  have : Fintype σ := Fintype.ofFinite σ
   set t : ∀ i : ι, σ → Γ((X.basicOpen (u i)).toScheme, ⊤) :=
     fun i j ↦ (X.homOfLE (hle i) ≫ f).appTop (coord X j) with ht
   -- the coordinates are fractions with a power of `u i` as denominator
@@ -1432,12 +1432,12 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
     rw [h1, CategoryTheory.Functor.map_id, CommRingCat.hom_id, Ideal.map_id]
   have hgen : ∀ k, gen k ∈ K.ideal V₀ := fun k ↦ hKV₀ ▸ Ideal.subset_span ⟨k, rfl⟩
   have hspan : Ideal.span (Set.range gen) = K.ideal V₀ := hKV₀.symm
-  haveI : Finite (ι ⊕ ι × σ) := by
-    haveI := hιfin
+  have : Finite (ι ⊕ ι × σ) := by
+    have := hιfin
     infer_instance
   have hFG : I₀.FG := by
-    haveI := hιfin
-    haveI : Fintype (ι ⊕ ι × σ) := Fintype.ofFinite _
+    have := hιfin
+    have : Fintype (ι ⊕ ι × σ) := Fintype.ofFinite _
     exact ⟨Finset.image gen Finset.univ, by rw [hI₀def]; congr 1; simp [Set.image_univ]⟩
   have hFT : K.ofFiniteType := by
     intro V _

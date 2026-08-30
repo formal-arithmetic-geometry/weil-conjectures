@@ -165,10 +165,10 @@ lemma Scheme.IsQuasiAffine.pullback_of_isAffine {A B C : Scheme.{u}}
     ⟨Spec.map α.appTop ≫ (Scheme.isoSpec B).inv, inferInstance, by
       rw [← Category.assoc, ← Scheme.toSpecΓ_naturality, Category.assoc,
         show B.toSpecΓ = (Scheme.isoSpec B).hom from rfl, Iso.hom_inv_id, Category.comp_id]⟩
-  haveI : IsAffine (pullback γ β) := isAffine_of_isAffineHom (pullback.snd γ β)
-  haveI : QuasiCompact (A.toSpecΓ ≫ γ) := quasiCompact_of_compactSpace _
-  haveI := QuasiCompact.compactSpace_of_compactSpace (pullback.snd (A.toSpecΓ ≫ γ) β)
-  haveI : IsOpenImmersion (pullback.map (A.toSpecΓ ≫ γ) β γ β A.toSpecΓ (𝟙 C) (𝟙 B)
+  have : IsAffine (pullback γ β) := isAffine_of_isAffineHom (pullback.snd γ β)
+  have : QuasiCompact (A.toSpecΓ ≫ γ) := quasiCompact_of_compactSpace _
+  have := QuasiCompact.compactSpace_of_compactSpace (pullback.snd (A.toSpecΓ ≫ γ) β)
+  have : IsOpenImmersion (pullback.map (A.toSpecΓ ≫ γ) β γ β A.toSpecΓ (𝟙 C) (𝟙 B)
       (by simp) (by simp)) :=
     MorphismProperty.of_isPullback (isPullback_pullback_map_left A.toSpecΓ γ β) inferInstance
   exact .of_isImmersion (pullback.map (A.toSpecΓ ≫ γ) β γ β A.toSpecΓ (𝟙 C) (𝟙 B)
@@ -179,10 +179,10 @@ quasi-affine source. -/
 theorem Scheme.IsQuasiAffine.of_isPullback_of_isAffine {S Y W T : Scheme.{u}} {p : Y ⟶ S}
     [IsQuasiAffineHom p] [QuasiCompact p] [QuasiSeparated p] [IsAffine W]
     {h : W ⟶ S} {u : T ⟶ Y} {q : T ⟶ W} (H : IsPullback u q p h) : T.IsQuasiAffine := by
-  haveI : QuasiCompact q := MorphismProperty.of_isPullback H ‹QuasiCompact p›
-  haveI : QuasiSeparated q := MorphismProperty.of_isPullback H ‹QuasiSeparated p›
-  haveI := QuasiCompact.compactSpace_of_compactSpace q
-  haveI := quasiSeparatedSpace_of_quasiSeparated q
+  have : QuasiCompact q := MorphismProperty.of_isPullback H ‹QuasiCompact p›
+  have : QuasiSeparated q := MorphismProperty.of_isPullback H ‹QuasiSeparated p›
+  have := QuasiCompact.compactSpace_of_compactSpace q
+  have := quasiSeparatedSpace_of_quasiSeparated q
   refine .of_forall_exists_isQuasiAffine_basicOpen _ fun t ↦ ?_
   -- an affine open `V` of `S` around the image of `t`
   obtain ⟨V, hV, hxV, -⟩ :=
@@ -200,9 +200,9 @@ theorem Scheme.IsQuasiAffine.of_isPullback_of_isAffine {S Y W T : Scheme.{u}} {p
   refine ⟨q.appTop r₀, ?_, by rwa [← Scheme.preimage_basicOpen_top]⟩
   rw [← Scheme.preimage_basicOpen_top]
   -- the preimage of `O` in `T` is the fibre product of `p ⁻¹ V` and `O` over `V`
-  haveI : IsAffine (W.basicOpen r₀).toScheme := (isAffineOpen_top W).basicOpen r₀
-  haveI : IsAffine V.toScheme := hV
-  haveI : (p ⁻¹ᵁ V).toScheme.IsQuasiAffine := hV.isQuasiAffine_preimage p
+  have : IsAffine (W.basicOpen r₀).toScheme := (isAffineOpen_top W).basicOpen r₀
+  have : IsAffine V.toScheme := hV
+  have : (p ⁻¹ᵁ V).toScheme.IsQuasiAffine := hV.isQuasiAffine_preimage p
   set O : W.Opens := W.basicOpen r₀ with hO
   set k : O.toScheme ⟶ V.toScheme := W.homOfLE hrV ≫ (h ∣_ V) with hk
   have hkV : k ≫ V.ι = O.ι ≫ h := by
@@ -220,7 +220,7 @@ theorem Scheme.IsQuasiAffine.of_isPullback_of_isAffine {S Y W T : Scheme.{u}} {p
     · rw [ha, hmr.lift_snd, hkV]
       exact hbig
     · rw [ha, hmr.lift_fst]
-  haveI : (pullback (p ∣_ V) k).IsQuasiAffine :=
+  have : (pullback (p ∣_ V) k).IsQuasiAffine :=
     Scheme.IsQuasiAffine.pullback_of_isAffine (p ∣_ V) k
   exact .of_isIso hsq.flip.isoPullback.hom
 
@@ -230,7 +230,7 @@ theorem IsQuasiAffineHom.of_isPullback {S Y Z T : Scheme.{u}} {p : Y ⟶ S} {g :
     [IsQuasiAffineHom p] [QuasiCompact p] [QuasiSeparated p]
     {u : T ⟶ Y} {q : T ⟶ Z} (H : IsPullback u q p g) : IsQuasiAffineHom q where
   isQuasiAffine_preimage W hW := by
-    haveI : IsAffine W.toScheme := hW
+    have : IsAffine W.toScheme := hW
     exact Scheme.IsQuasiAffine.of_isPullback_of_isAffine
       ((isPullback_morphismRestrict q W).paste_vert H.flip).flip
 

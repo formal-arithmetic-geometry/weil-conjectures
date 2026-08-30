@@ -55,12 +55,12 @@ noncomputable def NagataCompactification [IsSeparated f] [LocallyOfFiniteType f]
     [CompactSpace Y] [QuasiSeparatedSpace Y] :
     Compactification f :=
   have : HasCompactification f := by
-    haveI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-    haveI : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+    have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+    have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
     obtain ⟨X', i, f', hi, hf'fp, hf'qc, hf'sep, hcomm⟩ :=
       f.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation
-    haveI := hi; haveI := hf'fp; haveI := hf'qc; haveI := hf'sep
-    haveI : HasCompactification f' := nagataCompactification_of_locallyOfFinitePresentation f'
+    have := hi; have := hf'fp; have := hf'qc; have := hf'sep
+    have : HasCompactification f' := nagataCompactification_of_locallyOfFinitePresentation f'
     rw [← hcomm]
     exact HasCompactification.of_isClosedImmersion i f'
   HasCompactification.compactification f

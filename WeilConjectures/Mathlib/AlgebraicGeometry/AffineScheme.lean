@@ -52,13 +52,13 @@ theorem IsAffineOpen.exists_finset_basicOpen_eq {X : Scheme.{u}} {V : X.Opens}
     (hV : IsAffineOpen V) {W : X.Opens} (hW : IsCompact (W : Set X)) (hWV : W ≤ V) :
     ∃ s : Finset Γ(X, V), W = ⨆ f ∈ s, X.basicOpen f := by
   classical
-  haveI : IsAffine V.toScheme := hV
+  have : IsAffine V.toScheme := hV
   have hW' : IsCompact ((V.ι ⁻¹ᵁ W : V.toScheme.Opens) : Set V.toScheme) :=
     V.ι.isOpenEmbedding.isInducing.isCompact_preimage' hW
       (by rw [Scheme.Opens.range_ι]; exact hWV)
   obtain ⟨Us, hUsB, hUsfin, hUs⟩ :=
     (isBasis_basicOpen V.toScheme).exists_finite_of_isCompact hW'
-  haveI := hUsfin.fintype
+  have := hUsfin.fintype
   choose g hg using fun u : Us ↦ hUsB u.2
   refine ⟨Finset.univ.image fun u : Us ↦ V.topIso.hom (g u), ?_⟩
   calc W = V.ι ''ᵁ (V.ι ⁻¹ᵁ W) := by

@@ -145,10 +145,10 @@ theorem Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens {X Y : Scheme.
     rw [← Scheme.IdealSheafData.comap_comp, hfO, Scheme.IdealSheafData.comap_comp]
   -- the locus over `O` in the blow-up of `I`
   obtain ⟨h, hh, hpb⟩ := I.exists_isPullback_blowup_comap O.ι
-  haveI : IsOpenImmersion h := IsOpenImmersion.of_isPullback hpb inferInstance
+  have : IsOpenImmersion h := IsOpenImmersion.of_isPullback hpb inferInstance
   -- the locus over `f ⁻¹ᵁ O` in the blow-up of `I.comap f`
   obtain ⟨h₀, hh₀, hpb₀⟩ := (I.comap f).exists_isPullback_blowup_comap (f ⁻¹ᵁ O).ι
-  haveI : IsOpenImmersion h₀ := IsOpenImmersion.of_isPullback hpb₀ inferInstance
+  have : IsOpenImmersion h₀ := IsOpenImmersion.of_isPullback hpb₀ inferInstance
   obtain ⟨h', hOI', hh'blow, hh'range⟩ :
       ∃ h' : ((I.comap O.ι).comap (f ∣_ O)).blowup ⟶ (I.comap f).blowup,
         IsOpenImmersion h' ∧
@@ -170,7 +170,7 @@ theorem Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens {X Y : Scheme.
         Scheme.IdealSheafData.eqToHom_comp_blowupMap hcomap]
     · rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
         Set.range_eq_univ.mpr hsurj, Set.image_univ]
-  haveI := hOI'
+  have := hOI'
   refine ⟨h, h', inferInstance, inferInstance, ?_, ?_, ?_⟩
   · -- the square commutes, by uniqueness of lifts along `I.blowupMap`
     refine I.hom_ext_of_isInvertible_comap
@@ -208,7 +208,7 @@ theorem Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint {X : Scheme
       (J.support : Set A.toScheme)) :
     ∃ K : X.IdealSheafData, K.ofFiniteType ∧ K.comap A.ι = J ∧
       Disjoint (B : Set X) (K.support : Set X) := by
-  haveI : CompactSpace A.toScheme := isCompact_iff_compactSpace.mp hA
+  have : CompactSpace A.toScheme := isCompact_iff_compactSpace.mp hA
   -- the naive extension by zero
   set G : X.IdealSheafData := J.map A.ι with hGdef
   have hGA : G.comap A.ι = J := Scheme.IdealSheafData.comap_map A.ι J

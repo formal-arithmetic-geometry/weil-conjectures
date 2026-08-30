@@ -419,7 +419,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     refine UniversallyClosed.of_valuativeCriterion_of_isDominant cm.w h
       (ValuativeCriterion.RelativeTo.of_existsUnique ?_)
     rintro ⟨R, K, i₁, i₂, ⟨wsq⟩⟩ ηU hηU
-    letI : Field (CommRingCat.of K) := ‹_›
+    let : Field (CommRingCat.of K) := ‹_›
     replace hηU : ηU ≫ h = i₁ := hηU
     -- extend the generic point to the two proper ambient models
     have hexist : ∀ {O O' : U.Opens} (σ : TwoOpenSide u O O') (hle : O₁ ⊓ O₂ ≤ O),

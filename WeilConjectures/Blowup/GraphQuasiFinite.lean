@@ -176,11 +176,11 @@ theorem exists_isAdmissible_extend_of_isAffineOpen_of_le
           m ≫ W.ι ≫ B.I.blowupMap = (f ⁻¹ᵁ Z).ι ≫ U.ι →
             m ≫ g ≫ Z.ι = (f ⁻¹ᵁ Z).ι ≫ f := by
   classical
-  haveI : QuasiCompact p := quasiCompact_of_compactSpace p
-  haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
-  haveI : QuasiCompact f := quasiCompact_of_compactSpace f
-  haveI : IsAffine Z.toScheme := hZ
-  haveI : QuasiCompact (Z.ι ≫ p) := quasiCompact_of_compactSpace _
+  have : QuasiCompact p := quasiCompact_of_compactSpace p
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  have : QuasiCompact f := quasiCompact_of_compactSpace f
+  have : IsAffine Z.toScheme := hZ
+  have : QuasiCompact (Z.ι ≫ p) := quasiCompact_of_compactSpace _
   have hUZU : U.ι ''ᵁ f ⁻¹ᵁ Z ≤ U :=
     (Scheme.Hom.image_le_opensRange U.ι _).trans (le_of_eq U.opensRange_ι)
   have hUZV : U.ι ''ᵁ f ⁻¹ᵁ Z ≤ V := hUZU.trans hUV
@@ -283,9 +283,9 @@ theorem exists_isAdmissible_locallyQuasiFinite_image_graph
           IsSeparated (F.imageι ≫ pullback.snd p B.I.blowupMap) ∧
           QuasiCompact (F.imageι ≫ pullback.snd p B.I.blowupMap) := by
   classical
-  haveI : QuasiCompact p := quasiCompact_of_compactSpace p
-  haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
-  haveI : QuasiCompact f := quasiCompact_of_compactSpace f
+  have : QuasiCompact p := quasiCompact_of_compactSpace p
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  have : QuasiCompact f := quasiCompact_of_compactSpace f
   -- a finite affine open cover of `Y`
   have hcov : (Set.univ : Set Y) ⊆ ⋃ Z : Y.affineOpens, ((Z : Y.Opens) : Set Y) := by
     intro y _
@@ -323,7 +323,7 @@ theorem exists_isAdmissible_locallyQuasiFinite_image_graph
   choose cm hcm using hcex
   have hIU : Disjoint (U : Set X) (I.support : Set X) :=
     Set.disjoint_of_subset_left (fun x hx ↦ hUV hx) hIdisj
-  haveI hisoU : IsIso (I.blowupMap ∣_ U) := I.isIso_blowupMap_restrict hIU
+  have hisoU : IsIso (I.blowupMap ∣_ U) := I.isIso_blowupMap_restrict hIU
   obtain ⟨σ, hσiso, hσq⟩ : ∃ σ : U.toScheme ⟶ I.blowup,
       IsOpenImmersion σ ∧ σ ≫ I.blowupMap = U.ι := by
     refine ⟨inv (I.blowupMap ∣_ U) ≫ (I.blowupMap ⁻¹ᵁ U).ι, inferInstance, ?_⟩
@@ -337,15 +337,15 @@ theorem exists_isAdmissible_locallyQuasiFinite_image_graph
         IsSeparated (F.imageι ≫ pullback.snd p I.blowupMap) ∧
         QuasiCompact (F.imageι ≫ pullback.snd p I.blowupMap) := by
     intro F hFfst hFsnd
-    haveI : IsProper I.blowupMap := (⟨I, hIft, hIdisj⟩ : IsAdmissible X V).isProper_blowupMap
-    haveI : CompactSpace I.blowup := QuasiCompact.compactSpace_of_compactSpace I.blowupMap
-    haveI : QuasiSeparatedSpace I.blowup := quasiSeparatedSpace_of_quasiSeparated I.blowupMap
-    haveI : CompactSpace (pullback p I.blowupMap : Scheme.{u}) :=
+    have : IsProper I.blowupMap := (⟨I, hIft, hIdisj⟩ : IsAdmissible X V).isProper_blowupMap
+    have : CompactSpace I.blowup := QuasiCompact.compactSpace_of_compactSpace I.blowupMap
+    have : QuasiSeparatedSpace I.blowup := quasiSeparatedSpace_of_quasiSeparated I.blowupMap
+    have : CompactSpace (pullback p I.blowupMap : Scheme.{u}) :=
       QuasiCompact.compactSpace_of_compactSpace (pullback.snd p I.blowupMap)
-    haveI : QuasiSeparatedSpace (pullback p I.blowupMap : Scheme.{u}) :=
+    have : QuasiSeparatedSpace (pullback p I.blowupMap : Scheme.{u}) :=
       quasiSeparatedSpace_of_quasiSeparated (pullback.snd p I.blowupMap)
-    haveI : QuasiCompact F := quasiCompact_of_compactSpace F
-    haveI : CompactSpace F.image := QuasiCompact.compactSpace_of_compactSpace F.imageι
+    have : QuasiCompact F := quasiCompact_of_compactSpace F
+    have : CompactSpace F.image := QuasiCompact.compactSpace_of_compactSpace F.imageι
     have hkerrange : Set.range F.imageι = closure (Set.range F) := by
       rw [Scheme.IdealSheafData.range_subschemeι]
       exact Scheme.Hom.support_ker F

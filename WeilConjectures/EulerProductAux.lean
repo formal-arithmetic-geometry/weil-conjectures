@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Order.Ring.Star
 public import Mathlib.Data.Rat.Star
 public import Mathlib.RingTheory.PowerSeries.Derivative
+public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.Topology.Connected.Separation
 public import Mathlib.Topology.Separation.Lemmas
 
@@ -233,7 +234,7 @@ theorem multipliable_inv_one_sub_X_pow (hd : ∀ i, d i ≠ 0)
     intro j hj
     rw [Set.Finite.mem_toFinset]
     by_contra hjn
-    rw [Set.mem_setOf_eq, not_le] at hjn
+    rw [Set.mem_ofPred_eq, not_le] at hjn
     apply hs
     have h1 : (X : ℚ⟦X⟧) ^ (n + 1) ∣ ((1 - X ^ d j)⁻¹ : ℚ⟦X⟧) - 1 := by
       rw [inv_one_sub_X_pow_sub_one (hd j)]

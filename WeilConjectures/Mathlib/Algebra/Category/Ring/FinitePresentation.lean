@@ -224,7 +224,7 @@ theorem exists_isPushout_of_finitePresentation {S : CommRingCat.{u}} (f : c.pt �
     ∃ (j : J) (T : CommRingCat.{u}) (g : F.obj j ⟶ T) (_ : g.hom.FinitePresentation)
       (h : T ⟶ S), IsPushout (c.ι.app j) g f h := by
   classical
-  letI := f.hom.toAlgebra
+  let := f.hom.toAlgebra
   obtain ⟨n, hn⟩ := hf
   -- Present `S` as a quotient of a polynomial ring over `c.pt` by a finitely generated ideal.
   obtain ⟨π, rfl, hπ, s, hs⟩ :
@@ -268,8 +268,8 @@ theorem exists_isPushout_of_finitePresentation_of_surjective {S : CommRingCat.{u
   have hsurj' : Function.Surjective f.hom := hsurj
   -- The kernel of `f` is finitely generated.
   obtain ⟨s, hs⟩ : (RingHom.ker f.hom).FG := by
-    letI := f.hom.toAlgebra
-    haveI : Algebra.FinitePresentation c.pt S := hf
+    let := f.hom.toAlgebra
+    have : Algebra.FinitePresentation c.pt S := hf
     exact Algebra.FinitePresentation.ker_fG_of_surjective (Algebra.ofId c.pt S) hsurj'
   -- Lift the generators of the kernel to a common stage `j`.
   obtain ⟨j, hj⟩ := exists_forall_mem_range_ι_app F c hc s

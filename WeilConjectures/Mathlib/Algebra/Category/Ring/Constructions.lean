@@ -43,7 +43,7 @@ lemma isPushout_quotient {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R) :
     IsPushout (ofHom (Ideal.Quotient.mk K)) φ
       (ofHom (Ideal.quotientMap (K.map φ.hom) φ.hom Ideal.le_comap_map))
       (ofHom (Ideal.Quotient.mk (K.map φ.hom))) := by
-  letI := φ.hom.toAlgebra
+  let := φ.hom.toAlgebra
   let e : of (S ⧸ K.map φ.hom) ≅ of (S ⊗[R] (R ⧸ K)) :=
     (Algebra.TensorProduct.quotIdealMapEquivTensorQuot S K).toRingEquiv.toCommRingCatIso
   refine (isPushout_tensorProduct R S (R ⧸ K)).flip.of_iso' (Iso.refl _) (Iso.refl _)

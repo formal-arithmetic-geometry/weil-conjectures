@@ -405,7 +405,7 @@ theorem ker_eq_ker_strictTransformOpen_ι {Z : Scheme.{u}} {ψ : Z ⟶ pullback 
   have hfac : θ ≫ (strictTransformOpenIso f π U).hom = g ∣_ (f ⁻¹ᵁ U) := by
     rw [← cancel_mono (f ⁻¹ᵁ U).ι, Category.assoc, strictTransformOpenIso_hom_ι,
       ← Category.assoc, hθ, morphismRestrict_ι, Category.assoc, hg]
-  haveI : IsIso θ := by
+  have : IsIso θ := by
     rw [(Iso.eq_comp_inv _).mpr hfac]
     infer_instance
   rw [← Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant (g ⁻¹ᵁ (f ⁻¹ᵁ U)).ι ψ,

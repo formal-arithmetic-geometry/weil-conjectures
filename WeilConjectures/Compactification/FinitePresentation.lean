@@ -60,8 +60,8 @@ theorem nagataCompactification_of_locallyOfFinitePresentation {X S : Scheme.{u}}
   obtain ⟨N⟩ := S.nonempty_noetherianApproximation
   obtain ⟨i, Y, p, hp₁, hp₂, hp₃, h, H⟩ :=
     Scheme.exists_isPullback_of_finitePresentation_of_isSeparated N.isLimit f
-  haveI := hp₁; haveI := hp₂; haveI := hp₃
-  haveI : HasCompactification p := nagataCompactification_of_isNoetherian p
+  have := hp₁; have := hp₂; have := hp₃
+  have : HasCompactification p := nagataCompactification_of_isNoetherian p
   exact HasCompactification.of_isPullback H
 
 end AlgebraicGeometry

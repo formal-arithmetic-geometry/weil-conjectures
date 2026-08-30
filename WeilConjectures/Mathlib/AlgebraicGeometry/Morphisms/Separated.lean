@@ -322,8 +322,8 @@ lemma Scheme.isSeparated_of_isSeparatingPair {ι : Type*} (U : ι → X.Opens)
     (hinf : ∀ a b, IsAffineOpen (U a ⊓ U b))
     (h : ∀ a b, IsSeparatingPair X (U a) (U b)) : Scheme.IsSeparated X := by
   have (a : ι) : IsAffine (U a).toScheme := hU a
-  haveI (i : ι) : IsAffine ((X.openCoverOfIsOpenCover U hcov).X i) := hU i
-  letI := HasAffineProperty.isLocal_affineProperty @IsClosedImmersion
+  have (i : ι) : IsAffine ((X.openCoverOfIsOpenCover U hcov).X i) := hU i
+  let := HasAffineProperty.isLocal_affineProperty @IsClosedImmersion
   constructor
   rw [IsSeparated.isSeparated_eq_diagonal_isClosedImmersion]
   refine HasAffineProperty.iff_of_isAffine.mpr

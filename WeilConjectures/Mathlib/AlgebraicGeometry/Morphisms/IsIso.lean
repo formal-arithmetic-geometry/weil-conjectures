@@ -128,9 +128,9 @@ lemma isIso_morphismRestrict_of_comp {Y X' X : Scheme.{u}} (f : Y ⟶ X') (π : 
     {g : Y ⟶ X} (hg : f ≫ π = g) (V : X.Opens) (hπ : IsIso (π ∣_ V))
     (hgV : IsIso (g ∣_ V)) : IsIso (f ∣_ (π ⁻¹ᵁ V)) := by
   subst hg
-  haveI := hπ
-  haveI := hgV
-  haveI : IsIso ((f ∣_ (π ⁻¹ᵁ V)) ≫ (π ∣_ V)) := by
+  have := hπ
+  have := hgV
+  have : IsIso ((f ∣_ (π ⁻¹ᵁ V)) ≫ (π ∣_ V)) := by
     rw [← morphismRestrict_comp]
     infer_instance
   exact IsIso.of_isIso_comp_right _ (π ∣_ V)

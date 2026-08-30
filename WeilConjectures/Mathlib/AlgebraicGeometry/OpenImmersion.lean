@@ -196,13 +196,13 @@ end RestrictOfSectionRange
 lemma exists_isIso_lift_of_mem_iff {Y Z : Scheme.{u}} (m : Z ⟶ Y)
     (hm : IsOpenImmersion m) {B : Y.Opens} (hB : ∀ y, (∃ z, m z = y) ↔ y ∈ B) :
     ∃ m' : Z ⟶ B.toScheme, IsIso m' ∧ m' ≫ B.ι = m := by
-  haveI := hm
+  have := hm
   have hsub : Set.range m.base ⊆ Set.range B.ι.base := by
     rintro - ⟨z, rfl⟩
     exact ⟨⟨m z, (hB _).mp ⟨z, rfl⟩⟩, rfl⟩
   refine ⟨IsOpenImmersion.lift B.ι m hsub, ?_, IsOpenImmersion.lift_fac _ _ _⟩
   have hfac : IsOpenImmersion.lift B.ι m hsub ≫ B.ι = m := IsOpenImmersion.lift_fac _ _ _
-  haveI : IsOpenImmersion (IsOpenImmersion.lift B.ι m hsub) := by
+  have : IsOpenImmersion (IsOpenImmersion.lift B.ι m hsub) := by
     have h1 : IsOpenImmersion (IsOpenImmersion.lift B.ι m hsub ≫ B.ι) := by
       rw [hfac]; infer_instance
     exact IsOpenImmersion.of_comp _ B.ι

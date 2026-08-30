@@ -79,7 +79,7 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
         (_ : f' ≫ r = fY ≫ f),
         Disjoint (closure (Set.range f'))
           (p' ⁻¹' closure (B.I.blowupMap ⁻¹' ((V : Set X) \ (U : Set X)))) := by
-  haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
   -- `V ∖ U` is closed in `V`, so its closure misses `U`
   have hcl : closure ((V : Set X) \ (U : Set X)) ⊆ (U : Set X)ᶜ :=
     closure_minimal (fun _ hx ↦ hx.2) U.isOpen.isClosed_compl
@@ -125,7 +125,7 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
   set S : Set X.IdealSheafData := {J : X.IdealSheafData | J ≤ H ∧ J.ofFiniteType}
   have hSdir : DirectedOn (· ≤ ·) S := Scheme.IdealSheafData.directedOn_ofFiniteType_le H
   have hSsup : sSup S = H := Scheme.IdealSheafData.sSup_ofFiniteType_le_eq H
-  haveI : Nonempty S := ⟨⟨⊥, bot_le, Scheme.IdealSheafData.ofFiniteType_bot⟩⟩
+  have : Nonempty S := ⟨⟨⊥, bot_le, Scheme.IdealSheafData.ofFiniteType_bot⟩⟩
   -- the square of `H` is the supremum of the squares of the members of the family
   have hsq : H * H ≤ ⨆ J : S, (J.1 * J.1) := by
     conv_lhs => rw [← hSsup, sSup_eq_iSup']
@@ -176,7 +176,7 @@ theorem exists_isAdmissible_disjoint_closure_range_of_le
   · rw [Scheme.IdealSheafData.coe_support_sup]
     exact Set.disjoint_left.mpr fun x hxV hx ↦ hI₂V hx.2 hxV
   · intro Z' Y' r p' hw fY f' hqc hcomm
-    haveI := hqc
+    have := hqc
     exact disjoint_closure_range_of_blowupMap_sup hUV hI₂V hVU hYU hfac hw hcomm
 
 end AlgebraicGeometry

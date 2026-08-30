@@ -103,9 +103,9 @@ lemma Scheme.Hom.fg_ideal_ker (f : X ⟶ Y) [IsClosedImmersion f]
   have hfp : (f.app U.1).hom.FinitePresentation := by
     rw [f.app_eq_appLE]
     exact f.finitePresentation_appLE U.2 hU le_rfl
-  letI := (f.app U.1).hom.toAlgebra
-  haveI : Algebra.FinitePresentation Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1) := hfp
-  haveI : Algebra.FinitePresentation Γ(Y, U.1) Γ(Y, U.1) := Algebra.FinitePresentation.self _
+  let := (f.app U.1).hom.toAlgebra
+  have : Algebra.FinitePresentation Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1) := hfp
+  have : Algebra.FinitePresentation Γ(Y, U.1) Γ(Y, U.1) := Algebra.FinitePresentation.self _
   exact Algebra.FinitePresentation.ker_fG_of_surjective
     (Algebra.ofId Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1)) (f.app_surjective U.1 U.2)
 

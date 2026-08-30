@@ -130,10 +130,10 @@ theorem exists_admissibleBlowup_extend_partialSection
           F ≫ pullback.snd p B₁.I.blowupMap = σ :=
     ⟨pullback.lift f σ (by rw [hf, hσ]), pullback.lift_fst _ _ _, pullback.lift_snd _ _ _⟩
   obtain ⟨hqf, hft, hsep, hqc⟩ := hQF F hFfst hFsnd
-  haveI : LocallyQuasiFinite (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hqf
-  haveI : LocallyOfFiniteType (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hft
-  haveI : IsSeparated (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hsep
-  haveI : QuasiCompact (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hqc
+  have : LocallyQuasiFinite (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hqf
+  have : LocallyOfFiniteType (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hft
+  have : IsSeparated (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hsep
+  have : QuasiCompact (F.imageι ≫ pullback.snd p B₁.I.blowupMap) := hqc
   -- the section `σ` is the canonical isomorphism onto the preimage of `U`
   have hrange : Set.range σ ⊆ Set.range (B₁.I.blowupMap ⁻¹ᵁ U).ι := by
     rw [Scheme.Opens.range_ι]
@@ -145,12 +145,12 @@ theorem exists_admissibleBlowup_extend_partialSection
     IsOpenImmersion.lift (B₁.I.blowupMap ⁻¹ᵁ U).ι σ hrange with hsdef
   have hsι : s ≫ (B₁.I.blowupMap ⁻¹ᵁ U).ι = σ := IsOpenImmersion.lift_fac _ _ _
   have hUVset : (U : Set X) ≤ (V : Set X) := fun _ hx ↦ hUV hx
-  haveI : IsIso (B₁.I.blowupMap ∣_ U) :=
+  have : IsIso (B₁.I.blowupMap ∣_ U) :=
     B₁.I.isIso_blowupMap_restrict (B₁.disjoint_support.mono_left hUVset)
   have hsid : s ≫ (B₁.I.blowupMap ∣_ U) = 𝟙 U.toScheme := by
     rw [← cancel_mono U.ι, Category.assoc, morphismRestrict_ι, ← Category.assoc, hsι, hσ,
       Category.id_comp]
-  haveI : IsIso s := by
+  have : IsIso s := by
     have hs : s = inv (B₁.I.blowupMap ∣_ U) := by
       rw [← Category.comp_id s, ← IsIso.hom_inv_id (B₁.I.blowupMap ∣_ U), ← Category.assoc,
         hsid, Category.id_comp]
@@ -168,11 +168,11 @@ theorem exists_admissibleBlowup_extend_partialSection
     · rw [Category.assoc, baseChangeSection_comp_snd, ← Category.assoc, hsid, Category.id_comp,
         Category.assoc, hτsnd, hFfst]
   -- **Step 3**: Zariski's Main Theorem makes the image quasi-affine over the blow-up.
-  haveI : IsQuasiAffineHom (F.imageι ≫ pullback.snd p B₁.I.blowupMap) :=
+  have : IsQuasiAffineHom (F.imageι ≫ pullback.snd p B₁.I.blowupMap) :=
     IsQuasiAffineHom.of_locallyQuasiFinite _
   set i : F.image ⟶ pullback B₁.I.blowupMap p :=
     F.imageι ≫ (pullbackSymmetry p B₁.I.blowupMap).hom with hidef
-  haveI : IsClosedImmersion i := by rw [hidef]; infer_instance
+  have : IsClosedImmersion i := by rw [hidef]; infer_instance
   have hi : i ≫ pullback.fst B₁.I.blowupMap p
       = F.imageι ≫ pullback.snd p B₁.I.blowupMap := by
     rw [hidef, Category.assoc, hτfst]
@@ -181,15 +181,15 @@ theorem exists_admissibleBlowup_extend_partialSection
     simp only [hf'def, hidef, Category.assoc, Scheme.Hom.toImage_imageι_assoc, ← hbcs,
       IsIso.inv_hom_id_assoc]
   -- the hypotheses of Case 3 over the blow-up
-  haveI : QuasiCompact B₁.I.blowupMap := B₁.quasiCompact_blowupMap
-  haveI : CompactSpace B₁.I.blowup :=
+  have : QuasiCompact B₁.I.blowupMap := B₁.quasiCompact_blowupMap
+  have : CompactSpace B₁.I.blowup :=
     QuasiCompact.compactSpace_of_compactSpace B₁.I.blowupMap
-  haveI : IsSeparated B₁.I.blowupMap := B₁.isProper_blowupMap.toIsSeparated
-  haveI : QuasiSeparatedSpace B₁.I.blowup :=
+  have : IsSeparated B₁.I.blowupMap := B₁.isProper_blowupMap.toIsSeparated
+  have : QuasiSeparatedSpace B₁.I.blowup :=
     quasiSeparatedSpace_of_quasiSeparated B₁.I.blowupMap
-  haveI : CompactSpace F.image :=
+  have : CompactSpace F.image :=
     QuasiCompact.compactSpace_of_compactSpace (F.imageι ≫ pullback.snd p B₁.I.blowupMap)
-  haveI : QuasiSeparatedSpace F.image :=
+  have : QuasiSeparatedSpace F.image :=
     quasiSeparatedSpace_of_quasiSeparated (F.imageι ≫ pullback.snd p B₁.I.blowupMap)
   have hf'p : f' ≫ (F.imageι ≫ pullback.snd p B₁.I.blowupMap) = (B₁.I.blowupMap ⁻¹ᵁ U).ι := by
     rw [← hi, ← Category.assoc, hf'i, baseChangeSection_comp_fst]
