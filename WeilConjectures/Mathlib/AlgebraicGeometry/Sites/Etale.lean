@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 
 /-!
@@ -19,27 +20,15 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
   projection to `V`.
 - `AlgebraicGeometry.Scheme.Etale.ofArrows_baseChange_mem_smallEtaleTopology`: these base
   changes cover `V` as soon as the open immersions are jointly surjective.
-- `AlgebraicGeometry.Scheme.Etale.liftOfRangeSubset` and
-  `AlgebraicGeometry.Scheme.Etale.isoMapLiftOfRangeSubset`: an étale `X`-scheme whose image
-  lies in the range of an open immersion `j : U ⟶ X` is the image of an étale `U`-scheme
-  under the localization functor along `j`.
+- `AlgebraicGeometry.Scheme.Etale.isoMapEtaleObj`: an étale `X`-scheme whose image lies in
+  the range of an open immersion `j : U ⟶ X` is isomorphic to the image of its base change
+  `V ×_X U` under the localization functor along `j`.
 - `AlgebraicGeometry.Scheme.Etale.isTerminalSectionsOfIsEmpty`: a sheaf on the small étale
   site has terminal sections over an object whose underlying scheme is empty. This is the
   sheaf condition for the empty covering.
-- `AlgebraicGeometry.Scheme.Etale.part`: the part `V ×_X Z` of an étale `X`-scheme `V` lying
-  over an open `Z ⊆ X`, again as an étale `X`-scheme.
-- `AlgebraicGeometry.Scheme.Etale.ofArrows_partι_mem_smallEtaleTopology`: the parts of `V`
-  lying over the members of an open cover of `X` cover `V`.
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
-
-## Implementation notes
-
-`AlgebraicGeometry.Scheme.Etale.str` is a spelling of the structure morphism of an étale
-`X`-scheme whose codomain is literally `X`. The field `V.hom` has codomain
-`(Functor.fromPUnit X).obj V.right`, which is definitionally but not syntactically `X`; every
-`rw` along an open of `X` fails against the latter, so the abbreviation is not cosmetic.
 -/
 
 @[expose] public section
@@ -68,6 +57,12 @@ instance (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
 
 end Functoriality
 
+/-- A morphism of étale `X`-schemes does not enlarge the image of the structure morphism. -/
+lemma Etale.range_hom_base_subset {T V : X.Etale} (a : T ⟶ V) :
+    Set.range T.hom.base ⊆ Set.range V.hom.base := by
+  rintro _ ⟨t, rfl⟩
+  exact ⟨a.left.base t, congrArg (fun g : T.left ⟶ X ↦ g.base t) (MorphismProperty.Over.w a)⟩
+
 section BaseChangeCover
 
 variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (V : X.Etale)
@@ -90,6 +85,12 @@ lemma Etale.range_baseChangeHom_left :
     Set.range (Etale.baseChangeHom j V).left.base = V.hom.base ⁻¹' Set.range j.base :=
   IsOpenImmersion.range_pullbackFst j V.hom
 
+set_option backward.isDefEq.respectTransparency false in
+/-- The base change `V ×_X U` maps into the range of `j`. -/
+lemma Etale.range_baseChange_hom_base_subset :
+    Set.range (Etale.baseChange j V).hom.base ⊆ Set.range j.base :=
+  (IsOpenImmersion.range_pullback_to_base_of_right j V.hom).subset.trans Set.inter_subset_right
+
 variable {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X) [∀ i, IsOpenImmersion (g i)]
 
 set_option backward.isDefEq.respectTransparency false in
@@ -110,55 +111,28 @@ end BaseChangeCover
 section Lift
 
 variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (V : X.Etale)
-  (hV : Set.range V.hom.base ⊆ Set.range j.base)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- An étale `X`-scheme `V` whose structure morphism has image in the range of an open
-immersion `j : U ⟶ X` lifts through `j`, by the universal property of open immersions; the
-lift is étale because `j` is.
+immersion `j : U ⟶ X` is the image, under the localization functor along `j`, of the étale
+`U`-scheme `V ×_X U`.
 
 ```
-         V.left
-        ╱    │
-  lift ╱     │ V.hom
-      ↙      ↓
-     U ────→ X
-         j
+          ≅
+   V ←───────── V ×_X U
+    ╲             │
+     ╲ V.hom      │
+      ↘           ↓
+        X ←────── U
+             j
 ```
 -/
-def Etale.liftOfRangeSubset : U.Etale :=
-  have h : AlgebraicGeometry.Etale (IsOpenImmersion.lift j V.hom hV ≫ j) := by
-    rw [IsOpenImmersion.lift_fac]
-    infer_instance
-  have : AlgebraicGeometry.Etale (IsOpenImmersion.lift j V.hom hV) :=
-    AlgebraicGeometry.Etale.of_comp _ j
-  Etale.mk (IsOpenImmersion.lift j V.hom hV)
-
-/-- The lift of `Etale.liftOfRangeSubset` identifies `V` with the image of an étale
-`U`-scheme under the localization functor along `j`: the comparison morphism is the identity
-on underlying schemes.
-
-```
-              ≅
-   V ────────────────→ (Over.map j).obj (Etale.liftOfRangeSubset j V hV)
-    ╲                 ╱
-     ╲ V.hom         ╱ lift ≫ j
-      ↘             ↙
-              X
-```
--/
-def Etale.isoMapLiftOfRangeSubset :
+def Etale.isoMapEtaleObj (hV : Set.range V.hom.base ⊆ Set.range j.base) :
     V ≅ (MorphismProperty.Over.map ⊤
-      (inferInstance : @AlgebraicGeometry.Etale _ _ j)).obj (Etale.liftOfRangeSubset j V hV) where
-  hom := MorphismProperty.Over.homMk (𝟙 V.left)
-    ((Category.id_comp _).trans (IsOpenImmersion.lift_fac j V.hom hV))
-  inv := MorphismProperty.Over.homMk (𝟙 V.left)
-    ((Category.id_comp _).trans (IsOpenImmersion.lift_fac j V.hom hV).symm)
-  hom_inv_id := by
-    apply MorphismProperty.Over.Hom.ext
-    exact Category.id_comp _
-  inv_hom_id := by
-    apply MorphismProperty.Over.Hom.ext
-    exact Category.id_comp _
+      (inferInstance : @AlgebraicGeometry.Etale _ _ j)).obj (j.Etale.obj V) :=
+  have := IsOpenImmersion.isIso_pullbackFst_of_range_subset V.hom j hV
+  MorphismProperty.Over.isoMk (asIso (pullback.fst V.hom j)).symm (by
+    simp [Hom.Etale, pullback.condition])
 
 end Lift
 
@@ -192,62 +166,6 @@ def Etale.isTerminalSectionsOfIsEmpty
 
 end EmptyObject
 
-section Part
-
-/-- The structure morphism of an étale `X`-scheme, with codomain spelled as `X`. This is
-definitionally `V.hom`, whose codomain is `(Functor.fromPUnit X).obj V.right`; the difference
-is invisible to `exact` but fatal to `rw` along opens of `X`. -/
-abbrev Etale.str (V : X.Etale) : V.left ⟶ X := V.hom
-
-/-- A morphism of étale `X`-schemes does not enlarge the image of the structure morphism. -/
-lemma Etale.range_hom_base_subset {T V : X.Etale} (a : T ⟶ V) :
-    Set.range T.hom.base ⊆ Set.range V.hom.base := by
-  rintro _ ⟨t, rfl⟩
-  exact ⟨a.left.base t, congrArg (fun g : T.left ⟶ X ↦ g.base t) (MorphismProperty.Over.w a)⟩
-
-/-- The part of an étale `X`-scheme `V` lying over an open `Z ⊆ X`, that is, the open
-subscheme `V ×_X Z` of `V`, again as an étale `X`-scheme. -/
-def Etale.part (V : X.Etale) (Z : X.Opens) : X.Etale :=
-  MorphismProperty.Over.mk ⊤ ((V.str ⁻¹ᵁ Z).ι ≫ V.hom)
-    (MorphismProperty.comp_mem _ _ _ inferInstance V.prop)
-
-@[simp] lemma Etale.part_left (V : X.Etale) (Z : X.Opens) :
-    (V.part Z).left = ((V.str ⁻¹ᵁ Z : V.left.Opens) : Scheme.{u}) := rfl
-
-@[simp] lemma Etale.part_hom (V : X.Etale) (Z : X.Opens) :
-    (V.part Z).hom = (V.str ⁻¹ᵁ Z).ι ≫ V.hom := rfl
-
-/-- The inclusion of the part of `V` lying over `Z` into `V`. -/
-def Etale.partι (V : X.Etale) (Z : X.Opens) : V.part Z ⟶ V :=
-  MorphismProperty.Over.homMk (V.str ⁻¹ᵁ Z).ι rfl
-
-@[simp] lemma Etale.partι_left (V : X.Etale) (Z : X.Opens) :
-    (V.partι Z).left = (V.str ⁻¹ᵁ Z).ι := rfl
-
-lemma Etale.range_partι (V : X.Etale) (Z : X.Opens) :
-    Set.range (V.partι Z).left = ((V.str ⁻¹ᵁ Z : V.left.Opens) : Set V.left) :=
-  Scheme.Opens.range_ι (V.str ⁻¹ᵁ Z)
-
-/-- The part of `V` lying over `Z` maps into `Z`: a point of `V ×_X Z` is by construction a
-point of `V` whose image lies in `Z`. -/
-lemma Etale.range_part_hom_base_subset (V : X.Etale) (Z : X.Opens) :
-    Set.range (V.part Z).hom.base ⊆ (Z : Set X) := by
-  rintro _ ⟨x, rfl⟩
-  exact x.2
-
-/-- The parts of `V` lying over the members of an open cover of `X` cover `V`. -/
-lemma Etale.ofArrows_partι_mem_smallEtaleTopology {ι : Type*} (V : X.Etale) (Z : ι → X.Opens)
-    (hZ : ⨆ i, Z i = ⊤) :
-    Sieve.ofArrows _ (fun i ↦ V.partι (Z i)) ∈ X.smallEtaleTopology V := by
-  refine (Scheme.ofArrows_mem_smallEtaleTopology_iff _).mpr ?_
-  ext v
-  simp only [Etale.range_partι, Set.mem_iUnion, Set.mem_univ, iff_true]
-  have hv : v ∈ ⨆ i, V.str ⁻¹ᵁ Z i := by
-    rw [V.str.iSup_preimage_eq_top hZ]
-    trivial
-  exact TopologicalSpace.Opens.mem_iSup.mp hv
-
-end Part
 section Sheafify
 
 variable [∀ U : X.Etale, HasWeakSheafify (X.smallEtaleTopology.over U) A]
