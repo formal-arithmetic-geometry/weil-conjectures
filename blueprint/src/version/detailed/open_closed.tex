@@ -1,11 +1,9 @@
 % This file is a chapter fragment.  It is included by version/detailed.tex.
 %
-% Status convention: every \lean{} field in this chapter is deliberately left
-% empty and no leanok marker is set.  The chapter is a plan, written before the Lean
-% declarations exist; a separate integration step fills the names in once the
-% implementation pull requests have landed.  Until then the labels below are
-% the stable citation points: they are referred to from the Lean sources and
-% from the implementation issues, so they must not be renamed.
+% Status: everything up to and including lemma:openclosed-etale-lifts-locally is
+% formalised; lemma:openclosed-stalk-lowerStar,
+% prop:openclosed-lowerStar-fully-faithful, prop:openclosed-conservative and
+% thm:openclosed-exact are still in progress and carry an empty \lean{} field.
 
 \chapter{The open--closed exact sequence}\label{chap:openclosed}
 
@@ -96,11 +94,13 @@ sections over $U$, and that everything formal follows from this.
 \begin{lemma}[Disjoint ranges give an empty fibre product]
 \label{lemma:openclosed-empty-pullback}
 \uses{}
-\lean{}
+\lean{AlgebraicGeometry.Scheme.isEmpty_pullback}
+\leanok
 Let $f\colon V\to X$ and $g\colon W\to X$ be morphisms of schemes whose
 ranges are disjoint.  Then the scheme $V\times_XW$ is empty.
 \end{lemma}
 \begin{proof}
+\leanok
 A point $t$ of $V\times_XW$ has images $v\in V$ and $w\in W$ with
 $f(v)=g(w)$, because the two projections are morphisms over $X$.  That point
 of $X$ lies in both ranges, contradicting disjointness.
@@ -109,12 +109,14 @@ of $X$ lies in both ranges, contradicting disjointness.
 \begin{lemma}[$j^*i_*$ vanishes]
 \label{lemma:openclosed-vanishing-lowerStar}
 \uses{lemma:openclosed-empty-pullback}
-\lean{}
+\lean{AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range}
+\leanok
 Let $j\colon U\to X$ and $i\colon Z\to X$ have disjoint ranges, with $j$ an
 open immersion.  Then $j^*i_*\mathcal H=0$ for every
 $\mathcal H\in\shv{\et Z}$.
 \end{lemma}
 \begin{proof}
+\leanok
 For an open immersion $j$ the functor $j^*$ is restriction along the
 base-change functor $\et X\to\et U$, so for $T\in\et U$, regarded as an
 object of $\et X$ through $j$,
@@ -133,11 +135,13 @@ a zero object of $\shv{\et U}$.
 \begin{lemma}[$i^*j_!$ vanishes]
 \label{lemma:openclosed-vanishing-lowerShriek}
 \uses{lemma:openclosed-vanishing-lowerStar}
-\lean{}
+\lean{AlgebraicGeometry.Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range}
+\leanok
 In the situation of \ref{lemma:openclosed-vanishing-lowerStar},
 $i^*j_!\mathcal G=0$ for every $\mathcal G\in\shv{\et U}$.
 \end{lemma}
 \begin{proof}
+\leanok
 The point of the argument is that no section of $j_!\mathcal G$ is computed:
 $j_!$ is a sheafification and its sections are not accessible.  Instead one
 uses only adjunctions.  For every $\mathcal H\in\shv{\et Z}$,
@@ -156,7 +160,9 @@ $i^*j_!\mathcal G$ is zero, that is, $i^*j_!\mathcal G=0$.
 \begin{lemma}[A point in the closed part factors through it]
 \label{lemma:openclosed-point-factors}
 \uses{}
-\lean{}
+\lean{AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_field,
+      AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl}
+\leanok
 Let $i\colon Z\to X$ be a closed immersion, let $K$ be a field and let
 $x\colon\Spec K\to X$ be a morphism whose image point lies in the range of
 $i$.  Then there is a unique $\tilde x\colon\Spec K\to Z$ with
@@ -168,6 +174,7 @@ the geometric points of $X$ are the geometric points of $U$ together with the
 geometric points of $Z$.
 \end{lemma}
 \begin{proof}
+\leanok
 Uniqueness holds because a closed immersion is a monomorphism.  For
 existence, let $p\in X$ be the image point and choose an affine open
 $\Spec R\subseteq X$ containing $p$; the closed subscheme $Z$ meets it in
@@ -188,7 +195,9 @@ range of $i$.  The two cases are exclusive because the ranges are disjoint.
 \begin{lemma}[Raising a point a universe]
 \label{lemma:openclosed-point-ulift}
 \uses{}
-\lean{}
+\lean{CategoryTheory.GrothendieckTopology.Point.ulift,
+      AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale}
+\leanok
 Let $(\mathcal C,J)$ be a site and let $p$ be a point of it: a stalk functor
 $\shv{\mathcal C}\to\mathrm{Type}\,w$ that preserves finite limits and all
 colimits.  Then composing the fibre functor with the universe-raising
@@ -202,6 +211,7 @@ isomorphism as soon as it is an isomorphism on the stalk at every geometric
 point of $X$.
 \end{lemma}
 \begin{proof}
+\leanok
 Universe raising is an equivalence of categories which preserves and reflects
 all limits and colimits, so composing with it preserves every property in the
 definition of a point.  The stalk functors of the raised point are the old
@@ -223,7 +233,9 @@ enough geometric points on the small \'etale site.
 \begin{lemma}[Stalks of a pullback]
 \label{lemma:openclosed-stalk-upperStar}
 \uses{}
-\lean{}
+\lean{AlgebraicGeometry.Etale.upperStarCompSheafFiberIso,
+      AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso}
+\leanok
 Let $f\colon Y\to X$ be a morphism of schemes, let $\bar y$ be a geometric
 point of $Y$ and let $\mathcal F\in\shv{\et X}$.  Then
 \[
@@ -232,6 +244,7 @@ point of $Y$ and let $\mathcal F\in\shv{\et X}$.  Then
 naturally in $\mathcal F$.
 \end{lemma}
 \begin{proof}
+\leanok
 The functor $f^*$ is the pullback of sheaves along the morphism of sites
 given by base change $\et X\to\et Y$, $V\mapsto V\times_XY$.  Pulling a point
 of $\et Y$ back along a morphism of sites gives a point of $\et X$, and the
@@ -270,7 +283,8 @@ allowed to shrink, because a stalk is a colimit over neighbourhoods.
 \begin{lemma}[Lifting a standard \'etale algebra along a quotient]
 \label{lemma:openclosed-standard-etale-lift}
 \uses{}
-\lean{}
+\lean{Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor}
+\leanok
 Let $R$ be a commutative ring and $I\subseteq R$ an ideal.  Recall that a
 \emph{standard \'etale pair} over a ring $S$ is a pair of polynomials
 $(f,g)$ in $S[T]$ with $f$ monic and $g^n\in(f',f)$ for some $n$, and that
@@ -286,6 +300,7 @@ In words: every standard \'etale algebra over $R/I$ is the base change of a
 standard \'etale algebra over $R$.
 \end{lemma}
 \begin{proof}
+\leanok
 Lift $\bar f$ to a monic $f\in R[T]$ of the same degree, and lift the witness
 of the standard-\'etale condition: choose $p_1,p_2\in R[T]$ reducing to
 $\bar p_1,\bar p_2$ with
@@ -311,7 +326,9 @@ which is the asserted isomorphism.
 \begin{lemma}[\'Etale morphisms lift locally along a closed immersion]
 \label{lemma:openclosed-etale-lifts-locally}
 \uses{lemma:openclosed-standard-etale-lift}
-\lean{}
+\lean{AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion,
+      AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion}
+\leanok
 Let $i\colon Z\to X$ be a closed immersion, let $q\colon W\to Z$ be \'etale
 and let $w\in W$.  Then there are an open subscheme $W_0\subseteq W$
 containing $w$, a scheme $V$ \'etale over $X$, and an isomorphism of
@@ -321,6 +338,7 @@ $Z$-schemes
 \]
 \end{lemma}
 \begin{proof}
+\leanok
 The assertion is local at $w$, so we may shrink $X$, $Z$ and $W$ around
 $i(q(w))$ and $w$.  Choose an affine open $\Spec R\subseteq X$ containing
 $i(q(w))$; then $Z$ meets it in $\Spec R/I$, and we may choose an affine open
