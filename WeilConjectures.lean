@@ -29,6 +29,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
@@ -180,6 +181,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Conservative
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
@@ -208,6 +210,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithfu
 public import WeilConjectures.SixFunctors.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.OpenClosed.Complex
 public import WeilConjectures.SixFunctors.OpenClosed.Points
+public import WeilConjectures.SixFunctors.OpenClosed.Stalk
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
