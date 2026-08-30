@@ -273,6 +273,21 @@ noncomputable def Etale.lowerStarCompPresheafFiberIso :
     ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π (pointSmallEtale s).fiber).op)
     (Functor.Final.colimIso (pointSmallEtaleElementsBaseChange i s).op)
 
+/-- The comparison `AlgebraicGeometry.Etale.lowerStarCompPresheafFiberIso` on the canonical
+maps from the sections over a pointed étale neighbourhood: the section of `P` over
+`V ×_X Z` attached to a point `y` of `V` above `s ≫ i` has the same image in the fibre of
+`P` at `s` whether it is seen as a section of the restriction of `P` over `(V, y)` or as a
+section of `P` over the pointed étale neighbourhood `(V ×_X Z, y)` of `s`. -/
+lemma Etale.toPresheafFiber_lowerStarCompPresheafFiberIso_hom_app (P : Z.Etaleᵒᵖ ⥤ A)
+    (V : X.Etale) (y : (pointSmallEtale (s ≫ i)).fiber.obj V) :
+    (pointSmallEtale (s ≫ i)).toPresheafFiber V y (i.Etale.op ⋙ P) ≫
+        (Etale.lowerStarCompPresheafFiberIso A i s).hom.app P =
+      (pointSmallEtale s).toPresheafFiber (i.Etale.obj V)
+        ((pointSmallEtaleFiberEtaleIso i s).inv.app V y) P :=
+  have := Scheme.initial_pointSmallEtaleElementsBaseChange i s
+  Functor.Final.ι_colimitIso_hom (pointSmallEtaleElementsBaseChange i s).op
+    ((CategoryOfElements.π (pointSmallEtale s).fiber).op ⋙ P) (op ⟨V, y⟩)
+
 /-- **The stalk of a pushforward along a closed immersion.** For a closed immersion
 `i : Z ⟶ X` and a geometric point `s : Spec Ω ⟶ Z`, the stalk of `i_* H` at the geometric
 point `s ≫ i` of `X` is the stalk of `H` at `s`, naturally in the sheaf `H`.
