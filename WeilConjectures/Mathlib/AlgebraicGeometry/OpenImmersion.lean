@@ -8,18 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
-# Complements on open immersions of schemes
+# Open immersions respect open immersions on the right
 
-- the `MorphismProperty.RespectsRight` instance for open immersions of schemes;
-- `AlgebraicGeometry.IsOpenImmersion.isIso_pullbackFst_of_range_subset`: base changing along
-  an open immersion whose range contains the range of `f` does not change `f`.
+The `MorphismProperty.RespectsRight` instance for open immersions of schemes.
 -/
 
 @[expose] public section
 
-universe u
-
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
@@ -28,16 +24,5 @@ instance : MorphismProperty.RespectsRight @IsOpenImmersion @IsOpenImmersion :=
     have : IsOpenImmersion i := hi
     have : IsOpenImmersion f := hf
     infer_instance⟩
-
-/-- If the range of `f` is contained in the range of an open immersion `g`, the projection
-`X ×_Z Y ⟶ X` is an isomorphism: it is an open immersion whose range is the preimage of the
-range of `g`, hence all of `X`. -/
-lemma IsOpenImmersion.isIso_pullbackFst_of_range_subset {X Y Z : Scheme.{u}} (f : X ⟶ Z)
-    (g : Y ⟶ Z) [IsOpenImmersion g] (h : Set.range f.base ⊆ Set.range g.base) :
-    IsIso (pullback.fst f g) := by
-  refine isIso_of_isOpenImmersion_of_opensRange_eq_top _ ?_
-  rw [Scheme.Hom.opensRange_pullbackFst]
-  ext x
-  simpa using h ⟨x, rfl⟩
 
 end AlgebraicGeometry

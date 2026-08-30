@@ -83,14 +83,6 @@ lemma Etale.openImmersionRestriction_obj_val_obj (G : Sheaf X.smallEtaleTopology
       G.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ j)).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The morphism `j^* φ` at `T → U` is `φ` at `T → U → X`. -/
-lemma Etale.openImmersionRestriction_map_hom_app {G G' : Sheaf X.smallEtaleTopology A}
-    (φ : G ⟶ G') (b : U.Etale) :
-    ((Etale.openImmersionRestriction A j).map φ).hom.app (op b) =
-      φ.hom.app (op ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ j)).obj b)) :=
-  rfl
-
 /-- Restriction along an open immersion is left adjoint to the pushforward `j_*`: this is
 the right half of the triple `j_! ⊣ j^* ⊣ j_*`. -/
 noncomputable def Etale.openImmersionRestrictionLowerStarAdjunction :

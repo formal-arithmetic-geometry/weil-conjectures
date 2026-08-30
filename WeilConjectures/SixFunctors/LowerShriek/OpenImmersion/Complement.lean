@@ -18,7 +18,7 @@ and deduces that `k^*` of the comparison `j_! ⟶ j_*` is an isomorphism.
 Together with the `j^*` half (`j_!` fully faithful for an open immersion, proved in
 `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful`), this is the
 sheaf-theoretic input to the comparison `j_! ⟶ j_*` being an isomorphism for an open
-immersion with clopen range. It is the one place where the zero object of the abelian `A`
+immersion with closed range. It is the one place where the zero object of the abelian `A`
 is consumed, and genuinely so: for `A = Type` and `k` with nonempty source, `k^* j_* F` has
 singleton sections `F(∅)` while `k^* j_! F` is empty, so the comparison is not an
 isomorphism there.
