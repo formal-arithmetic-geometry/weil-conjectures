@@ -1139,6 +1139,35 @@ $Y'$), because geometric stalks form a conservative family.  The section
 description is the content located at Tag \texttt{03Q8}.
 \end{proof}
 
+\begin{lemma}[Chow's lemma over a noetherian base]
+\label{lemma:weil-pbc-chow-noetherian}
+\uses{def:nagata-projective-space-base-change}
+\lean{AlgebraicGeometry.chow_lemma}
+
+Let $S$ be a noetherian scheme and let $f:X\to S$ be separated and of finite
+type.  Then there are a finite index set $n$, a scheme $X'$, a proper
+surjective morphism $\pi:X'\to X$ and an immersion $i:X'\to\mathbf P(n;S)$ with
+$i$ followed by the structural morphism equal to $\pi$ followed by $f$, such
+that $\pi$ restricts to an isomorphism over a dense open subset of $X$.  This
+is the form located at Tag \texttt{0200}.
+\end{lemma}
+\begin{proof}
+\uses{lemma:nagata-projective-space-base-change-proper}
+
+Not formalized; only the statement is available.  The route of Tag
+\texttt{0200}: reduce to $X$ irreducible, cover $X$ by finitely many affine
+opens $U_1,\dots,U_m$ of finite type over $S$, so that each $U_a$ admits an
+immersion into some $\mathbf P(n_a;S)$, and let $U=\bigcap_aU_a$, which is
+dense.  Take for $X'$ the closure of the image of $U$ under
+$U\to X\times_S\mathbf P(n_1;S)\times_S\cdots\times_S\mathbf P(n_m;S)$.  The
+projection to $X$ is proper and surjective and restricts to an isomorphism
+over $U$; the projection to the product of projective spaces followed by the
+Segre embedding is an immersion into a single $\mathbf P(n;S)$.  The
+immersions of the $U_a$ require the standard affine charts of
+$\mathbf P(n;S)$, which \Cref{def:nagata-projective-space-base-change} does
+not supply.
+\end{proof}
+
 \begin{lemma}[Chow and projective factorization]
 \label{lemma:weil-pbc-chow-factorization}
 \uses{}
@@ -1151,7 +1180,9 @@ $X'\to Y$ factors as that closed immersion followed by
 $\mathbf P^n_Y\to Y$.
 \end{lemma}
 \begin{proof}
-\uses{lemma:weil-pbc-target-locality,lemma:weil-pbc-cancellation}
+\uses{lemma:weil-pbc-target-locality,lemma:weil-pbc-cancellation,
+lemma:weil-pbc-chow-noetherian,
+lemma:nagata-projective-space-base-change-proper}
 
 Chow's lemma in the form located at Tag \texttt{0202} supplies a proper
 surjective $\pi$ for which $X'\to Y$ is projective.  To make the source
