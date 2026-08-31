@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
@@ -57,17 +57,14 @@ sheafification.
   of `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs`, which requires `P g`.
   This is essential for compactifications, whose structure morphism is proper and in
   general does not satisfy `P`.
-- The continuity of the base change functor along an arbitrary morphism, the left Kan
-  extensions on presheaves and the sheafification entering the definitions are provided,
-  for `Q ≤ P`, by the sorried results of the folder
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the multiplicativity-type
-  assumptions on `P` and `Q` assumed throughout; all of them
-  hold for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of the
-  definitions using continuity. For `g` satisfying `P` the continuity is proved as
-  `CategoryTheory.GrothendieckTopology.isContinuous_overPullback_of_le` in
-  `WeilConjectures.SixFunctors.LowerShriek.Defs`, and for the small étale sites along an
-  arbitrary morphism as `AlgebraicGeometry.Etale.isContinuous_overPullback` in
-  `WeilConjectures.SixFunctors.UpperLowerStar.Etale`.
+- The continuity of the base change functor along an arbitrary morphism is proved, for
+  `Q ≤ P`, as `AlgebraicGeometry.Scheme.isContinuous_overPullback` in
+  `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. The left Kan extensions on
+  presheaves and the sheafification entering the definitions are provided, for `Q ≤ P`, by
+  the sorried results of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`,
+  under the multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of
+  them hold for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of
+  the definitions using continuity.
 
 -/
 
@@ -91,9 +88,8 @@ variable (hQP : Q ≤ P)
 variable {W U : Scheme.{u}} (g : W ⟶ U)
 
 /-- The pushforward `g_*` along `g : W ⟶ U`, given objectwise by
-`(g_* G)(V → U) = G(V ×_U W → W)`. The continuity of the base change functor is provided
-by the sorried `CategoryTheory.GrothendieckTopology.isContinuous_overPullback` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.IsContinuous`. -/
+`(g_* G)(V → U) = G(V ×_U W → W)`. The continuity of the base change functor is
+`AlgebraicGeometry.Scheme.isContinuous_overPullback`. -/
 noncomputable def lowerStar :
     Sheaf (W.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (U.smallGrothendieckTopology Q (Q := P)) A :=
