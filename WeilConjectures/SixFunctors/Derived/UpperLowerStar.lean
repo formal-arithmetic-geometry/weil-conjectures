@@ -5,14 +5,20 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Preadditive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-public import WeilConjectures.SixFunctors.Derived.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 /-!
 
@@ -67,13 +73,7 @@ scoped notation "R(" g ")_*[" A "]" =>
   rightDerivedLowerStar A g
 
 /-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on the
-*bounded below* derived categories of étale sheaves.
-
-Unlike `Etale.rightDerivedLowerStar` this needs no K-injective hypothesis:
-`Functor.rightDerivedFunctorPlus` needs only `EnoughInjectives` on the source, which
-Mathlib provides for every Grothendieck abelian category. The only dependence on the
-sorried `CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` is
-through the chosen `HasDerivedCategory.{u}` instance. -/
+*bounded below* derived categories of étale sheaves. -/
 noncomputable def rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
@@ -100,7 +100,8 @@ preadditive monoidal structure whose tensor product interacts well with coproduc
 as hypotheses on the coefficient category `A` only; they are transported to the sheaf
 categories by the instances of the folder
 `WeilConjectures.CategoryTheory.GrothendieckAbelian`, with the monoidal structure and
-its compatibilities provided by its `Monoidal` subfolder.
+its compatibilities provided by its `Monoidal` subfolder; its preadditivity is
+`CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
 
 The additivity and right exactness of `g^*` are derived here from the adjunction
 `g^* ⊣ g_*`; the left exactness comes from `Etale.preservesFiniteLimits_upperStar`, whose
