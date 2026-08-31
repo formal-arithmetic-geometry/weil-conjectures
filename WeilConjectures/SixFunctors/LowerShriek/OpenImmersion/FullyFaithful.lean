@@ -68,7 +68,7 @@ open Etale
 
 /-- The adjoint triple `j_! ⊣ j^* ⊣ j_*` on small étale sites along an open immersion. -/
 noncomputable def Etale.openImmersionAdjunctionTriple :
-    Adjunction.Triple (j)_!Imm[A] (Etale.openImmersionRestriction A j) (j)_*[A] :=
+    Adjunction.Triple (j)_!open[A] (Etale.openImmersionRestriction A j) (j)_*[A] :=
   GrothendieckTopology.localizationAdjunctionTriple A @Etale @Etale le_rfl j inferInstance
 
 /-- **The unit of `j_! ⊣ j^*` is an isomorphism for an open immersion `j`**, i.e.
@@ -84,13 +84,13 @@ instance Etale.isIso_openImmersionLowerShriekAdjunction_unit :
 
 /-- **The extension by zero along an open immersion is fully faithful.** -/
 noncomputable def Etale.fullyFaithfulOpenImmersionLowerShriek :
-    (j)_!Imm[A].FullyFaithful :=
+    (j)_!open[A].FullyFaithful :=
   (Etale.openImmersionLowerShriekAdjunction A j).fullyFaithfulLOfIsIsoUnit
 
-instance Etale.full_openImmersionLowerShriek : (j)_!Imm[A].Full :=
+instance Etale.full_openImmersionLowerShriek : (j)_!open[A].Full :=
   (Etale.fullyFaithfulOpenImmersionLowerShriek A j).full
 
-instance Etale.faithful_openImmersionLowerShriek : (j)_!Imm[A].Faithful :=
+instance Etale.faithful_openImmersionLowerShriek : (j)_!open[A].Faithful :=
   (Etale.fullyFaithfulOpenImmersionLowerShriek A j).faithful
 
 set_option backward.isDefEq.respectTransparency false in
