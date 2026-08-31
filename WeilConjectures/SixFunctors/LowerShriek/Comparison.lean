@@ -35,9 +35,10 @@ immersion `i`:
   `Etale.lowerStarComp` gives `ι_f : f_! = g_* ∘ i_! ⟶ g_* ∘ i_* ≅ f_*`
   (`Etale.lowerShriekToLowerStar`).
 
-For a proper morphism `f`, the comparison `ι_f` is an isomorphism
-(`Etale.isIso_lowerShriekToLowerStar`); this is the sorried statement of the file, see the
-"Remaining `sorry`" section below.
+For a proper morphism `f`, the comparison `ι_f` is an isomorphism; that statement needs the
+vanishing of both sides off the range of `i`, which is where closedness of that range and
+`HasZeroObject A` enter, and is proved downstream in
+`WeilConjectures.SixFunctors.LowerShriek.Proper`.
 
 ## Main definitions
 
@@ -52,26 +53,6 @@ For a proper morphism `f`, the comparison `ι_f` is an isomorphism
   restriction `i^*` of the comparison is an isomorphism, for *any* open immersion `i`.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
   the comparison for `f` to the comparison for the open immersion of its compactification.
-- `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`: for proper `f`, the comparison
-  `ι_f` is an isomorphism.
-
-## Remaining `sorry`
-
-`Etale.isIso_lowerShriekToLowerStar` — the comparison for a proper `f` — is the one
-statement in this file that is still `sorry`ed. By the proved
-`Etale.isIso_lowerShriekToLowerStar_of_isIso` it reduces to the comparison `i_! ⟶ i_*` for
-the open immersion `i` of a compactification of `f`, whose range is clopen since `f` is
-proper (`AlgebraicGeometry.Compactification.isClopen_range_openImmersion`). The `i^*`
-restriction of that comparison is proved to be invertible below
-(`Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar`); the remaining
-mathematical content is that both sides of the comparison vanish on the complement of the
-range of `i`, which is where the clopen hypothesis and `HasZeroObject A` enter. The
-site-theoretic input for this is available in
-`WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen`
-(`Scheme.Etale.isLimitClopenFan` and `Scheme.Etale.isTerminalSectionsOfIsEmpty`), and the
-vanishing of both sides on the complement is proved in
-`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement`, which imports this
-module.
 
 -/
 
@@ -167,20 +148,6 @@ lemma Etale.isIso_lowerShriekToLowerStar_of_isIso
     IsIso (Etale.lowerShriekToLowerStar A f) := by
   rw [Etale.lowerShriekToLowerStar]
   infer_instance
-
-/-- For a **proper** morphism `f`, the canonical comparison `ι_f : f_! ⟶ f_*` is an
-isomorphism.
-
-Since `f` is proper and the structure morphism `g` of the compactification is separated, the
-open immersion `i` is proper as well
-(`AlgebraicGeometry.Compactification.isProper_openImmersion`), hence a closed immersion with
-clopen range (`AlgebraicGeometry.Compactification.isClopen_range_openImmersion`). By
-`AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso` the statement reduces to
-`i_! ≅ i_*` for the open immersion `i` with clopen range; see the "Remaining `sorry`"
-section of the module docstring for the status of that input. -/
-theorem Etale.isIso_lowerShriekToLowerStar [IsProper f] :
-    IsIso (Etale.lowerShriekToLowerStar A f) :=
-  sorry
 
 end Comparison
 
