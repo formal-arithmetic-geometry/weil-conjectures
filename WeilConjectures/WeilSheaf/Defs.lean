@@ -225,13 +225,13 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-section WeilSheaf
-
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [IsGrothendieckAbelian.{u + 1} A]
 variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
+
+section WeilSheaf
 
 /-- The Frobenius pullback endofunctor `G_X := g_X^*` on étale sheaves on the geometric
 fiber `X` of a scheme over a finite field, the pullback along the geometric Frobenius
@@ -260,13 +260,6 @@ noncomputable def WeilSheaf.forget :
 end WeilSheaf
 
 section WeilComplex
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A]
-
-variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
 /-- The Frobenius pullback endofunctor `G_X` on the derived category of étale sheaves
 on the geometric fiber `X` of a scheme over a finite field, induced by the exact
@@ -306,14 +299,39 @@ noncomputable def WeilComplex.homologyFunctor (n : ℤ) :
 
 end WeilComplex
 
+section WeilComplexPlus
+
+/-- A *bounded below Weil complex* on the geometric fiber `X` of a scheme over a finite
+field is an object `K` of `D⁺(X_ét, A)` together with an isomorphism `Φ : G_X K ≅ K`
+along the Frobenius pullback `G_X = g_X^*`, which on `D⁺(X_ét, A)` is
+`(Etale.frobeniusPullback A a).mapDerivedCategoryPlus`, the restriction of
+`Etale.derivedFrobeniusPullback` along the inclusion `DerivedCategory.Plus.ι`. The
+isomorphism `Φ` is structure data. This is the level at which the compact-support base
+change of this project, hence the transport of Weil structures through `Rf_!`, is
+available. -/
+def WeilComplexPlus : Type _ :=
+  WeilObject (Etale.frobeniusPullback A f).mapDerivedCategoryPlus
+
+noncomputable instance : Category (WeilComplexPlus A f) :=
+  inferInstanceAs (Category (WeilObject (Etale.frobeniusPullback A f).mapDerivedCategoryPlus))
+
+/-- The forgetful functor from bounded below Weil complexes to `D⁺(X_ét, A)`, discarding
+the Frobenius structure isomorphisms. -/
+noncomputable def WeilComplexPlus.forget :
+    WeilComplexPlus A f ⥤
+      DerivedCategory.Plus (Sheaf (f.geometricFiber).smallEtaleTopology A) :=
+  WeilObject.forget (Etale.frobeniusPullback A f).mapDerivedCategoryPlus
+
+/-- A bounded below Weil complex is in particular a Weil complex: the inclusion
+`DerivedCategory.Plus.ι` commutes with the two Frobenius pullbacks by
+`Functor.mapDerivedCategoryPlusCompatibility` and transports the Weil structure. -/
+noncomputable def WeilComplexPlus.toWeilComplex : WeilComplexPlus A f ⥤ WeilComplex A f :=
+  WeilObject.map (F := DerivedCategory.Plus.ι)
+    (Etale.frobeniusPullback A f).mapDerivedCategoryPlusCompatibility.symm
+
+end WeilComplexPlus
+
 section WeilComplexBoundedConstructible
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A]
-
-variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
 /-- The Frobenius pullback endofunctor `G_X` on the bounded constructible derived
 category `Dᵇc(X, A)` of the geometric fiber: the restriction of
