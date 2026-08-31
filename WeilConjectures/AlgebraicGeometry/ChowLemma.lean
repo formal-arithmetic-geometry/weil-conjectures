@@ -67,7 +67,7 @@ isomorphism. Chow's lemma is then the assertion that `ChowModification f` is non
 
 ## Blueprint
 
-`chow_lemma` implements `lemma:weil-pbc-chow-noetherian` of the proper-base-change blueprint.
+`chow_lemma` implements `thm:chow-lemma` of the proper-base-change blueprint.
 -/
 
 @[expose] public section
@@ -124,7 +124,7 @@ over `S` such that `π` restricts to an isomorphism over some dense open subset 
 
 Finite type is spelled as `LocallyOfFiniteType f` together with `QuasiCompact f`, and the
 immersion `i` is a locally closed immersion, as in Stacks.
-(blueprint: `lemma:weil-pbc-chow-noetherian`) -/
+(blueprint: `thm:chow-lemma`) -/
 @[stacks 0200]
 theorem chow_lemma [IsNoetherian S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
     Nonempty (ChowModification f) :=
