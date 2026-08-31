@@ -45,8 +45,12 @@ the small étale site — are not assumed: they are limits of size `u + 1`, whic
 Grothendieck abelian category with `Hom`-types in `Type (u + 1)` has by
 `CategoryTheory.IsGrothendieckAbelian.hasLimits`.
 
-The remaining transports are not yet formalized; they are recorded with `sorry` in the
-sibling files `Preadditive`, `TensorColimits` and `FlatResolution` of this folder, and in
+The preadditivity of this monoidal structure needs no transport of its own: it is
+`CategoryTheory.Sheaf.monoidalPreadditive` of
+`WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal`, which applies to any sheaf
+category, with `Etale.isMonoidal_W_smallEtaleTopology` supplying its `(W).IsMonoidal`
+hypothesis. The remaining transports are not yet formalized; they are recorded with
+`sorry` in the sibling files `TensorColimits` and `FlatResolution` of this folder, and in
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape`.
 
 -/

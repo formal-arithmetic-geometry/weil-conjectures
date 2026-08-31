@@ -19,8 +19,6 @@ extension by zero along `i` with the pushforward `GrothendieckTopology.lowerStar
 
 ## Main definitions
 
-- `GrothendieckTopology.isContinuous_overPullback_of_le`: for `g` satisfying `P` and
-  `Q ≤ P`, the base change functor is continuous for the small `Q`-topologies.
 - `AlgebraicGeometry.Compactification.lowerShriek`: the lower shriek `i_! ⋙ g_*`
   associated with a compactification `X ⟶[i] Z ⟶[g] Y` of `f`.
 - `AlgebraicGeometry.lowerShriek`: the lower shriek `f_!` of a morphism `f` satisfying
@@ -36,13 +34,11 @@ extension by zero along `i` with the pushforward `GrothendieckTopology.lowerStar
   is essential for compactifications, whose structure morphism is proper and in general
   does not satisfy `P`.
 - The continuity of the base change functor along a general `g` (in particular the proper
-  structure morphism of a compactification), the left Kan extensions and the
+  structure morphism of a compactification) is proved, for `Q ≤ P`, as
+  `AlgebraicGeometry.Scheme.isContinuous_overPullback`. The left Kan extensions and the
   sheafification entering the extension by zero are provided, for `Q ≤ P`, by the sorried
   results of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`; the
-  inequality `hQP : Q ≤ P` they
-  require is an explicit argument of the definitions. For `g` satisfying `P` the
-  continuity is proved as `GrothendieckTopology.isContinuous_overPullback_of_le` below,
-  via the adjunction with the cocontinuous localization functor.
+  inequality `hQP : Q ≤ P` they require is an explicit argument of the definitions.
 - The hypothesis `@IsOpenImmersion ≤ P` provides `P` for the open immersion of the chosen
   compactification.
 
@@ -54,48 +50,15 @@ universe u' u
 
 open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
-namespace CategoryTheory
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-namespace GrothendieckTopology
-
-variable (P Q : MorphismProperty Scheme.{u})
-variable [P.IsStableUnderBaseChange]
-
-variable {W U : Scheme.{u}} (g : W ⟶ U)
-
-section SiteInstances
-
-variable [Q.IsStableUnderBaseChange] [Q.IsMultiplicative]
-variable [P.IsMultiplicative] [P.HasOfPostcompProperty P]
-
-variable {P Q g}
-
-/-- For `g` satisfying `P` and `Q ≤ P`, the base change functor is continuous for the
-small `Q`-topologies, by adjunction with the cocontinuous localization functor. -/
-lemma isContinuous_overPullback_of_le (hg : P g) (hQP : Q ≤ P) :
-    (MorphismProperty.Over.pullback P ⊤ g).IsContinuous
-      (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P)) :=
-  have := isCocontinuous_overMap_of_le hg hQP
-  (MorphismProperty.Over.mapPullbackAdj P ⊤ g hg _root_.trivial).isContinuous_of_isCocontinuous
-    _ _
-
-end SiteInstances
-
-end GrothendieckTopology
-
-end CategoryTheory
-
 namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-/- The left Kan extensions, the sheafification and the continuity of the base change
-functor entering the definitions below are provided by the sorried results of the folder
-`WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the following
-multiplicativity-type
-assumptions on `P` and `Q` and the inequality `hQP : Q ≤ P`; all of them hold for
-`P = Q = @Etale`. -/
+/- The left Kan extensions and the sheafification entering the definitions below are
+provided by the sorried results of the folder
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`, and the continuity of the base
+change functor by `AlgebraicGeometry.Scheme.isContinuous_overPullback`, under the
+following multiplicativity-type assumptions on `P` and `Q` and the inequality
+`hQP : Q ≤ P`; all of them hold for `P = Q = @Etale`. -/
 variable (P Q : MorphismProperty Scheme.{u})
 variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
   [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
