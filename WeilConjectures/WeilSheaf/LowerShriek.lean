@@ -73,17 +73,6 @@ Z  -- g_Z -->  Z            Y  -- g_Y -->  Y
 Cartesian. This is the geometric input of the Frobenius compatibility
 `AlgebraicGeometry.Etale.frobeniusLowerShriekCompatibility`.
 
-## Bounded below Weil complexes
-
-The compact-support base change of this project lives on the *bounded below* derived
-categories, so the Weil complexes transported here are those of
-`AlgebraicGeometry.WeilComplexPlus`, the Weil objects for the Frobenius pullback
-`(AlgebraicGeometry.Etale.frobeniusPullback A a).mapDerivedCategoryPlus` on
-`D⁺(X_ét, A)`. A bounded below Weil complex is a Weil complex through
-`AlgebraicGeometry.WeilComplexPlus.toWeilComplex`, the transport along the inclusion
-`DerivedCategory.Plus.ι`, which commutes with the two Frobenius pullbacks by
-`CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility`.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.geometricFiberMap`: the morphism `f : X ⟶ Y` of
@@ -94,10 +83,6 @@ categories, so the Weil complexes transported here are those of
   compactification of `f₀`, a compactification of `f`, with the two Cartesian Frobenius
   squares `isPullback_geometricFrobenius_geometricFiber_i` and
   `isPullback_geometricFrobenius_geometricFiber_g`.
-- `AlgebraicGeometry.WeilComplexPlus`: the category of bounded below Weil complexes, the
-  Weil objects for the Frobenius pullback on the bounded below derived category of étale
-  sheaves on the geometric fiber, with its forgetful functor `forget` and its comparison
-  `toWeilComplex` with `AlgebraicGeometry.WeilComplex`.
 - `AlgebraicGeometry.Etale.frobeniusLowerShriekCompatibility`: the Frobenius
   compatibility `β_{Rf_!} : G_Y Rf_! ≅ Rf_! G_X` of the derived lower shriek, the
   compact-support base-change isomorphism of the Frobenius square.
@@ -308,47 +293,6 @@ theorem isPullback_geometricFrobenius_geometricFiber_g (c₀ : Compactification 
   isPullback_geometricFrobenius_geometricFiberMap (aX := c₀.g ≫ aY) rfl
 
 end Compactification
-
-/-! ### Bounded below Weil complexes -/
-
-section WeilComplexPlus
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A]
-
-variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (a : X₀ ⟶ Spec (.of k))
-
-/-- A *bounded below Weil complex* on the geometric fiber `X` of a scheme over a finite
-field is an object `K` of `D⁺(X_ét, A)` together with an isomorphism `Φ : G_X K ≅ K`
-along the Frobenius pullback `G_X = g_X^*`, which on `D⁺(X_ét, A)` is
-`(Etale.frobeniusPullback A a).mapDerivedCategoryPlus`, the restriction of
-`Etale.derivedFrobeniusPullback` along the inclusion `DerivedCategory.Plus.ι`. The
-isomorphism `Φ` is structure data. This is the level at which the compact-support base
-change of this project, hence the transport of Weil structures through `Rf_!`, is
-available. -/
-def WeilComplexPlus : Type _ :=
-  WeilObject (Etale.frobeniusPullback A a).mapDerivedCategoryPlus
-
-instance : Category (WeilComplexPlus A a) :=
-  inferInstanceAs (Category (WeilObject (Etale.frobeniusPullback A a).mapDerivedCategoryPlus))
-
-/-- The forgetful functor from bounded below Weil complexes to `D⁺(X_ét, A)`, discarding
-the Frobenius structure isomorphisms. -/
-def WeilComplexPlus.forget :
-    WeilComplexPlus A a ⥤
-      DerivedCategory.Plus (Sheaf (a.geometricFiber).smallEtaleTopology A) :=
-  WeilObject.forget (Etale.frobeniusPullback A a).mapDerivedCategoryPlus
-
-/-- A bounded below Weil complex is in particular a Weil complex: the inclusion
-`DerivedCategory.Plus.ι` commutes with the two Frobenius pullbacks by
-`Functor.mapDerivedCategoryPlusCompatibility` and transports the Weil structure. -/
-def WeilComplexPlus.toWeilComplex : WeilComplexPlus A a ⥤ WeilComplex A a :=
-  WeilObject.map (F := DerivedCategory.Plus.ι)
-    (Etale.frobeniusPullback A a).mapDerivedCategoryPlusCompatibility.symm
-
-end WeilComplexPlus
 
 /-! ### The Frobenius compatibility of `Rf_!` -/
 
