@@ -1,0 +1,674 @@
+﻿% ============================================================================
+%  Chow's lemma (proper case over an affine base) -- full self-contained proof
+%
+%  This file is a NEW standalone document.  It does not modify, and is not
+%  wired into, any other file of the project.
+%
+%  Build with:  pdflatex 04_chow_lemma_proof.tex   (twice, for refs)
+%
+%  References (all verified against the online Stacks Project and EGA):
+%    Stacks Project, Properties,     Tag 01ZV = Lemma 28.30.1  (disjoint affine opens)
+%    Stacks Project, Properties,     Tag 01ZX = Lemma 28.30.4  (affine open around generic points)
+%    Stacks Project, Algebra,        Tag 00EV = Lemma 10.26.4  (avoid a quasi-compact open)
+%    Stacks Project, Schemes,        Tag 01I5 = Lemma 26.6.8   (disjoint union of affines is affine)
+%    Stacks Project, Morphisms,      Tag 01RG = Lemma 29.7.7   (closure of an immersion)
+%    Stacks Project, Morphisms,      Tag 01R9 = Lemma 29.6.6   (factor through the image)
+%    Stacks Project, Morphisms,      Tag 01RH = Lemma 29.7.10  (density + separated => equal)
+%    Stacks Project, Morphisms,      Tag 01W5 = Lemma 29.42.6  (closed immersion proper)
+%    Stacks Project, Morphisms,      Tag 01W4 = Lemma 29.42.5  (base change of proper)
+%    Stacks Project, Morphisms,      Tag 01W2 = Lemma 29.42.3  (proper is local on target)
+%    Stacks Project, Morphisms,      Tag 01W6 = Lemma 29.42.7  (proper into a separated target)
+%    Stacks Project, Morphisms,      Tag 01WC = Lemma 29.44.5  (projective => proper)
+%    Stacks Project, Morphisms,      Tag 01VS = Lemma 29.40.3  (ample => immersion into P)
+%    Stacks Project, Constructions,  Tag 01WD = Lemma 27.13.6  (Segre embedding)
+%    Stacks Project, Schemes,        Tag 01IQ = Lemma 26.10.4  (immersion closed iff image closed)
+%    Stacks Project, Morphisms,      Tag 01T6 = Lemma 29.15.6  (finite type over noetherian)
+%    Stacks Project, Properties,     Tag 0BA8 = Lemma 28.5.7   (noetherian scheme: finitely many comps)
+%    Stacks Project, Limits,         Tag 01ZM = Lemma 32.10.1  (finite presentation descends)
+%    Stacks Project, Limits,         Tag 01ZJ = Prop. 32.9.6   (finite type => closed in f.p. scheme)
+%    Stacks Project, Limits,         Tag 01ZA = Prop. 32.5.4   (absolute noetherian approximation)
+%    EGA II, Theo. 5.6.1 (a)  ;  EGA IV, 搂8.5  (spreading out / limit descent)
+%
+%  Report of the decomposition:  \uses{} sets are omitted, but the logical
+%  dependency order is respected (auxiliary facts are stated before they
+%  are used).
+% ============================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[unicode,colorlinks=true,linkcolor=blue,urlcolor=magenta,citecolor=blue]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+\usepackage{xcolor}
+
+% ------------------------------------------------------------------ theorems
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem} [section]
+\newtheorem{lemma}{Lemma}    [section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+% ------------------------------------------------------------------- macros
+\newcommand{\Am}{\mathbf A}      % affine space
+\newcommand{\PP}{\mathbf P}      % projective space
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\ZZ}{\mathbf Z}
+
+% ------------------------------------------------------------------- title
+\begin{document}
+
+\title{\bfseries Chow's Lemma\\[2pt]
+\large The proper case over an affine base: statement and full proof}
+\author{}
+\date{}
+\maketitle
+
+\noindent\textbf{Conventions.}
+All schemes are over a fixed base; products and projective spaces are taken
+over the base unless indicated otherwise.  A morphism of schemes is
+\emph{proper} if it is separated, of finite type and universally closed;
+\emph{quasi-separated} if its diagonal is quasi-compact; a scheme
+$\Spec A$ is \emph{affine}; a \emph{closed immersion} is an affine morphism
+induced locally by a surjective ring homomorphism; an \emph{immersion} is a
+composite of a closed immersion followed by an open immersion.  If
+$u:W\to X$ is a morphism, the \emph{scheme-theoretic image} of $u$ is the
+largest closed subscheme $X'$ of $X$ through which $u$ factors (the closed
+subscheme defined by $\ker(\mathcal O_X\to u_*\mathcal O_W)$); a subscheme
+$U\subseteq X$ is \emph{scheme-theoretically dense in $X$} if its
+scheme-theoretic image in $X$ is $X$ itself.  Recall also that a projective
+morphism is proper, that a closed immersion is proper, and that properness
+and surjectivity are stable under base change.
+
+\section{The statement}
+
+\begin{theorem}[Chow lemma, proper case over an affine base]\label{thm:chow}
+Let $f:X\to Y$ be a proper morphism with $Y$ affine.
+Then there exist
+\begin{itemize}
+  \item a proper surjective morphism $\pi:\widetilde X\to X$,
+  \item an integer $n\geq 0$,
+  \item a closed immersion $i_Y:\widetilde X\hookrightarrow\PP^n_Y$,
+\end{itemize}
+such that $f\circ\pi$ is the composite of $i_Y$ with the structure
+morphism $\PP^n_Y\to Y$:
+\[
+\begin{array}{ccc}
+ X & \xleftarrow{\ \pi\ } & \widetilde X
+   \xrightarrow{\ i_Y\ } \PP^n_Y \\
+ f\!\searrow & & \swarrow\! p \\
+ & Y &
+\end{array}
+\]
+(the arrow $\PP^n_Y\to Y$ being the structure morphism $p$).  Moreover, the
+assertion is stable under base change on $Y$: if
+$g:Y'\to Y$ is any morphism and $f':X'=X\times_YY'\to Y'$ is the pullback,
+then $\pi'=\pi\times\id$, the same $n$, and
+$i_Y'=i_Y\times\id$ satisfy the analogous assertions for $f'$.
+\end{theorem}
+
+\noindent This is EGA II, Theorem 5.6.1 (a); the noetherian version is
+Stacks Project, Cohomology of Schemes, Lemma 30.18.1
+(Tag \texttt{0200}), the non-noetherian variant Stacks Project, Limits of
+Schemes, Lemma 32.12.3 (Tag \texttt{0203}).
+
+\begin{remark*}[Why the general case must be reduced to the noetherian one]
+The classical proofs of \Cref{thm:chow} use an affine open cover
+$X=\bigcup_iU_i$ in which every $U_i$ contains the generic point of \emph{every}
+irreducible component of $X$.  This requires $X$ to have only finitely many
+irreducible components, which is the case when $X$ is noetherian (e.g.\ when
+$Y$ is affine noetherian and $X\to Y$ is of finite type).  For an arbitrary
+affine $Y$, a scheme proper over $Y$ may well have infinitely many
+irreducible components; one therefore first spreads the situation out to a
+noetherian base (Lemma~\ref{lem:spread}) and then pulls the constructed
+factorization back.
+\end{remark*}
+
+\section{Auxiliary facts}
+
+\begin{lemma}[Disjoint affine neighbourhoods of generic points]\label{lem:disjoint}
+Let $X$ be quasi-separated, let $Z_1,\dots,Z_n$ be pairwise distinct
+irreducible components of $X$, and let $\eta_i\in Z_i$ be their generic
+points.  Then for every $i$ there is an affine open $V_i\subseteq X$ with
+$\eta_i\in V_i$ and $V_i\cap Z_k=\emptyset$ for all $k\neq i$; in
+particular the $V_i$ are pairwise disjoint.
+\emph{(Stacks Project, Properties, Tag \texttt{01ZV} = Lemma 28.30.1.)}
+\end{lemma}
+\begin{proof}
+For $k\neq i$ the point $\eta_i$ does not lie in the closed set $Z_k$
+(since the $Z_l$ are pairwise distinct irreducible components and
+$\eta_i\in Z_i$); hence $X\setminus Z_k$ is an open neighbourhood of
+$\eta_i$, and so is the finite intersection
+\[
+ W_i:=\bigcap_{k\neq i}(X\setminus Z_k),
+\]
+which satisfies $W_i\cap Z_k=\emptyset$ for all $k\neq i$.  The affine open
+subschemes of a scheme form a basis for its topology, so there is an affine
+open $V_i$ with $\eta_i\in V_i\subseteq W_i$; then
+$V_i\cap Z_k=\emptyset$ for $k\neq i$.  For $i\neq j$, the open $V_i$
+avoids $Z_j$, whereas $V_j\ni\eta_j\in Z_j$; hence $V_i\cap V_j=\emptyset$,
+i.e.\ the $V_i$ are pairwise disjoint.
+\end{proof}
+
+\begin{lemma}[Affine opens containing prescribed generic points]\label{lem:around}
+Let $X$ be quasi-separated, let $Z_1,\dots,Z_n$ be pairwise distinct
+irreducible components of $X$ with generic points $\eta_i$, and let
+$x\in X$.  Then there is an affine open $U\subseteq X$ containing $x$ and
+all the $\eta_i$.
+\emph{(Stacks Project, Properties, Tag \texttt{01ZX} = Lemma 28.30.4.)}
+\end{lemma}
+\begin{proof}
+After renumbering, let $x\in Z_i$ precisely for $i\leq r$, so that
+$x\notin Z_k$ for $k>r$.
+
+\emph{Step 1: an affine open $W$ around $x$ avoiding the components not
+through $x$.}  For $k>r$, $X\setminus Z_k$ is an open neighbourhood of
+$x$, hence so is $O:=\bigcap_{k>r}(X\setminus Z_k)$.  Since affine opens
+form a basis, choose an affine open $W$ with $x\in W\subseteq O$; then
+$W\cap Z_k=\emptyset$ for $k>r$.
+
+\emph{Step 2: the $\eta_i$ with $i\leq r$ lie in $W$.}  For $i\leq r$ the
+set $W\cap Z_i$ is nonempty (it contains $x$) and is an open subset of the
+irreducible space $Z_i$; every nonempty open subset of an irreducible
+space contains its generic point, so $\eta_i\in W\cap Z_i\subseteq W$.
+
+\emph{Step 3: disjoint affine opens around $\eta_{r+1},\dots,\eta_n$.}
+Apply Lemma~\ref{lem:disjoint} to $Z_{r+1},\dots,Z_n$: for every $k>r$
+there is an affine open $V_k\ni\eta_k$ with
+$V_k\cap Z_l=\emptyset$ for $l>r,\ l\neq k$, and the $V_k$ are pairwise
+disjoint.
+
+\emph{Step 4: shrink the $V_k$ away from $W$.}  Let $k>r$.  Since $X$ is
+quasi-separated, the diagonal $X\to X\times_{\ZZ}X$ is quasi-compact;
+$W\cap V_k$ is the base change of this diagonal along
+$W\times_{\ZZ}V_k\to X\times_{\ZZ}X$, so $W\cap V_k\to W\times_{\ZZ}V_k$
+is quasi-compact, and the target is affine, whence $W\cap V_k$ is
+quasi-compact.  Write $V_k=\Spec R_k$; the point $\eta_k$ corresponds to
+a minimal prime $\mathfrak p_k$ of $R_k$, because $Z_k\cap V_k$ is an
+irreducible component of $V_k$ (otherwise its closure in $X$ would
+contain a closed irreducible subset strictly larger than $Z_k$) and is the
+closure of $\{\eta_k\}$.  By Stacks Project, Algebra, Lemma 10.26.4
+(Tag \texttt{00EV}), applied to $R:=R_k$, the minimal prime
+$\mathfrak p_k$, and the quasi-compact open $W\cap V_k
+\subseteq\Spec R_k$ (which does not contain $\mathfrak p_k$ because
+$W\cap Z_k=\emptyset$), there is $f_k\in R_k\setminus\mathfrak p_k$ with
+$D(f_k)\cap(W\cap V_k)=\emptyset$.  Put $V_k':=D(f_k)$: this is an affine
+open containing $\eta_k$ and disjoint from $W$.
+
+\emph{Step 5: the union.}  The opens $W$ and $V_k'$ ($k>r$) are pairwise
+disjoint and each is affine, so their union
+\[
+ U:=W\cup\bigcup_{k>r}V_k'
+\]
+is affine, by Stacks Project, Schemes, Lemma 26.6.8 (Tag \texttt{01I5}),
+iterated.  It contains $x$ and all $\eta_1,\dots,\eta_n$.
+\end{proof}
+
+\begin{lemma}[Finite cover by affines containing the generic points]\label{lem:cover}
+Let $X$ be quasi-compact and quasi-separated, and suppose that $X$ has
+only finitely many irreducible components $Z_1,\dots,Z_r$ with generic
+points $\eta_j$.  Then there is a finite affine open cover
+\[
+ X=U_1\cup\dots\cup U_m
+\]
+such that $\eta_j\in U_i$ for every $i,j$.  If moreover $X\to Y$ is of
+finite type with $Y$ affine, one may take each $U_i$ affine and of finite
+type over $Y$.  The open $U:=U_1\cap\dots\cap U_m$ is dense in $X$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:around} applied to the finite list
+$\eta_1,\dots,\eta_r$, for every $x\in X$ there is an affine open $U_x$
+containing $x$ and all the $\eta_j$.  Quasi-compactness of $X$ gives a
+finite subcover $U_1,\dots,U_m$.  If $X\to Y$ is of finite type, an open
+subscheme of $X$ is again of finite type over $Y$, so each $U_i$ is affine
+of finite type over $Y$.  Finally $U\cap Z_j$ is a nonempty open subset
+of the irreducible space $Z_j$ (it contains $\eta_j$), hence dense in
+$Z_j$; since this holds for all $j$ and
+$X=Z_1\cup\dots\cup Z_r$, $U$ is dense in $X$.
+\end{proof}
+
+\begin{lemma}[Reduction to scheme-theoretically dense opens]\label{lem:densered}
+Let $X$ be quasi-compact and let $U\subseteq X$ be a dense open
+subscheme.  Let $X^{*}\subseteq X$ be the scheme-theoretic closure of
+$U\to X$.  Then $X^{*}\to X$ is a surjective closed immersion, an
+isomorphism over $U$, and $U$ is scheme-theoretically dense in $X^{*}$.
+If moreover $X=U_1\cup\dots\cup U_m$ is a finite affine open cover and
+$U_i^{*}:=X^{*}\cap U_i$, then each $U_i^{*}$ is affine and
+$U_1^{*}\cap\dots\cap U_m^{*}=U$.
+\end{lemma}
+\begin{proof}
+By definition, $X^{*}\to X$ is a closed immersion.  Its image is a closed
+subset containing $U$, which is dense in $X$; hence the image is all of
+$X$, so $X^{*}\to X$ is surjective.  The ideal sheaf of $X^{*}$ is
+$\ker(\mathcal O_X\to u_*\mathcal O_U)$; restricted to the open $U$ it is
+$\ker(\mathcal O_U\to\mathcal O_U)=0$, so $X^{*}\cap U=U$, i.e.\ the
+closed immersion is an isomorphism over $U$.  The scheme-theoretic image
+of $U\to X^{*}$ is $X^{*}$ by construction, so $U$ is scheme-theoretically
+dense in $X^{*}$.  Each $U_i^{*}$ is a closed subscheme of the affine
+scheme $U_i$, hence affine; and
+$U_1^{*}\cap\dots\cap U_m^{*}=X^{*}\cap U_1\cap\dots\cap U_m=U$, the last
+equality because $U\subseteq X^{*}$.
+\end{proof}
+
+\begin{lemma}[Affine opens of finite type sit in a projective space]\label{lem:affproj}
+Let $Y=\Spec A$ be affine and let $U$ be an affine scheme of finite type
+over $Y$, say $U=\Spec B$ with $B$ generated as an $A$-algebra by
+$b_1,\dots,b_m$.  Then the $A$-algebra surjection
+$A[x_1,\dots,x_m]\twoheadrightarrow B$, $x_j\mapsto b_j$, defines a
+closed immersion
+\[
+ U\hookrightarrow\Am^m_Y,
+\]
+and composing with the open immersion
+$\Am^m_Y=D_+(x_0)\hookrightarrow\PP^m_Y$ gives an immersion
+$j:U\hookrightarrow\PP^m_Y$.
+\end{lemma}
+\begin{proof}
+A surjective ring homomorphism between the coordinate rings of affine
+schemes induces a closed immersion of affine schemes.  Its composite with
+the open immersion $\Am^m_Y\hookrightarrow\PP^m_Y$ is an immersion, being
+the composite of a closed and an open immersion.
+\end{proof}
+
+\begin{lemma}[Closed model of an immersion into projective space]\label{lem:closedmodel}
+Let $Y$ be affine and let $j:U\hookrightarrow\PP^n_Y$ be an immersion of a
+quasi-compact scheme $U$.  Let $Z\subseteq\PP^n_Y$ be the scheme-theoretic
+closure of the image of $j$.  Then $j$ factors as
+\[
+ U\hookrightarrow Z\hookrightarrow\PP^n_Y,
+\]
+where $U\hookrightarrow Z$ is a scheme-theoretically dense open immersion
+and $Z\hookrightarrow\PP^n_Y$ is a closed immersion; in particular
+$Z\to Y$ is proper.
+\end{lemma}
+\begin{proof}
+$Z$ is the largest closed subscheme of $\PP^n_Y$ through which $j$
+factors, so the factorization into the closed immersion
+$Z\hookrightarrow\PP^n_Y$ and the induced morphism $U\to Z$ exists.  The
+latter is an open immersion with $U$ scheme-theoretically dense in $Z$:
+this is Stacks Project, Morphisms, Lemma 29.7.7 (Tag \texttt{01RG}),
+applied to the immersion $j$ (which is quasi-compact because $U$ is
+quasi-compact).  Finally: a closed immersion is proper (Stacks Project,
+Morphisms, Lemma 29.42.6, Tag \texttt{01W5}); a projective morphism is
+proper (Stacks Project, Morphisms, Lemma 29.44.5, Tag \texttt{01WC},
+applied to $\PP^n_Y\to Y$); composites of proper morphisms are proper.
+Hence $Z\to Y$ is the composite of two proper morphisms, so it is proper.
+\end{proof}
+
+\begin{definition}[Segre embedding]\label{def:segre}
+For integers $n_1,\dots,n_m\geq 0$, let
+$N=\prod_{i=1}^m(n_i+1)-1$ and let the homogeneous coordinates of
+$\PP^N_Y$ be $X_e$, indexed by multi-indices
+$e=(e_1,\dots,e_m)$ with $0\leq e_i\leq n_i$.  The \emph{Segre embedding}
+is the morphism of $Y$-schemes
+\[
+ s:\prod_{i=1}^m\PP^{n_i}_Y\to\PP^N_Y,
+\qquad
+(x_{i,0}:\cdots:x_{i,n_i})_{i=1}^m
+\;\longmapsto\;
+\Bigl[\textstyle\prod_{i=1}^m x_{i,e_i}\Bigr]_{e}.
+\]
+\end{definition}
+
+\begin{lemma}[The Segre embedding is a closed immersion]\label{lem:segre}
+The Segre embedding $s$ of Definition~\ref{def:segre} is a closed
+immersion.
+\end{lemma}
+\begin{proof}
+Check on the standard affine charts of the target, which cover
+$\PP^N_Y$.  For a multi-index $e$ the chart
+$D_+(X_e)\subseteq\PP^N_Y$ is affine, and its preimage under $s$ is
+\[
+ s^{-1}(D_+(X_e))=\prod_{i=1}^m D_+(x_{i,e_i}),
+\]
+which is affine (a finite product of affine schemes over an affine base).
+On these charts, after normalizing $X_e=1$ and $x_{i,e_i}=1$, the
+morphism is given by the ring homomorphism
+\[
+ \mathcal O_{\PP^N_Y}(D_+(X_e))
+ \to\bigotimes_{i=1}^m\mathcal O_{\PP^{n_i}_Y}(D_+(x_{i,e_i})),
+ \qquad
+ \frac{X_f}{X_e}\mapsto\prod_{i=1}^m\frac{x_{i,f_i}}{x_{i,e_i}}.
+\]
+This map is surjective: for each $i$ and each $0\leq f_i\leq n_i$, the
+multi-index $f=(e_1,\dots,e_{i-1},f_i,e_{i+1},\dots,e_m)$ gives the single
+ratio $x_{i,f_i}/x_{i,e_i}$, so every generator of the target polynomial
+ring lies in the image.  Hence $s$ is affine-locally (on the target) the
+morphism of affine schemes induced by a surjective ring homomorphism,
+i.e.\ a closed immersion; being a closed immersion is local on the
+target, so $s$ is a closed immersion (cf.\ Stacks Project, Constructions,
+Tag \texttt{01WD} = Lemma 27.13.6).
+\end{proof}
+
+\begin{lemma}[Agreement on a dense open for a separated target]\label{lem:denschineq}
+Let $Z$ be a scheme, $U\subseteq Z$ a scheme-theoretically dense open
+subscheme, and $f,g:Z\to X$ two morphisms into a separated scheme $X$
+with $f|_U=g|_U$.  Then $f=g$.
+\end{lemma}
+\begin{proof}
+The equalizer $E$ of $f$ and $g$ is the inverse image of the diagonal of
+$X$ under $(f,g):Z\to X\times X$; as $X$ is separated, the diagonal is a
+closed immersion, and closed immersions are stable under base change, so
+$E\subseteq Z$ is a closed subscheme.  It contains $U$, which is
+scheme-theoretically dense in $Z$; hence $E=Z$, i.e.\ $f=g$.  (This is
+Stacks Project, Morphisms, Lemma 29.7.10, Tag \texttt{01RH}.)
+\end{proof}
+
+\begin{lemma}[Diagonal model and its projections]\label{lem:diagmodel}
+Let $Y=\Spec A$ be affine, let $X\to Y$ be of finite type, and let
+$X=U_1\cup\dots\cup U_m$ be the affine open cover of
+Lemma~\ref{lem:cover}, with dense open $U=\cap_iU_i$.  Replacing $X$ by
+$X^{*}$ (Lemma~\ref{lem:densered}), assume that $U$ is
+scheme-theoretically dense in $X$.  For each $i$, let
+$U_i\hookrightarrow\PP^{n_i}_Y$ be the immersion of
+Lemma~\ref{lem:affproj}, and let $Z_i\subseteq\PP^{n_i}_Y$ be the closed
+model of Lemma~\ref{lem:closedmodel}, so that
+$U_i\hookrightarrow Z_i$ is a scheme-theoretically dense open immersion.
+Put $Z:=\prod_{i=1}^m Z_i$ and let $\widetilde X\subseteq Z$ be the
+scheme-theoretic image of the diagonal morphism
+\[
+ j=(j_1|_U,\dots,j_m|_U):U\to Z.
+\]
+Then:
+\begin{enumerate}
+  \item[(i)] $U\hookrightarrow\widetilde X$ is a scheme-theoretically
+  dense open immersion, and $\widetilde X\to Y$ is proper;
+  \item[(ii)] the projections $\pr_i|_{\widetilde X}
+  :\widetilde X\to\PP^{n_i}_Y$ factor through $Z_i$, giving proper
+  morphisms $p_i:\widetilde X\to Z_i$;
+  \item[(iii)] the composite
+  $\widetilde X\hookrightarrow Z\hookrightarrow\prod_i\PP^{n_i}_Y
+  \xrightarrow{\ s\ }\PP^N_Y$, $N=\prod_i(n_i+1)-1$, is a closed
+  immersion.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\emph{The reduction step.}  By Lemma~\ref{lem:densered}, $X^{*}\to X$ is
+a surjective closed immersion and $U\subseteq X^{*}$ is
+scheme-theoretically dense; $\pi:X^{*}\to X$ is proper whenever $X\to Y$
+is.  The $U_i^{*}=X^{*}\cap U_i$ are affine, of finite type over $Y$,
+with $U=\cap_iU_i^{*}$.  Hence we may replace $X$ by $X^{*}$ and $U_i$ by
+$U_i^{*}$.
+
+\emph{$j$ is an immersion.}  By Lemma~\ref{lem:affproj}, each $j_i|_U$
+factors as the closed immersion $U\hookrightarrow\Am^{n_i}_Y$ followed by
+the open immersion $\Am^{n_i}_Y\hookrightarrow\PP^{n_i}_Y$.  The induced
+morphism $U\to\prod_i\Am^{n_i}_Y$ is a closed immersion: the target is
+affine with coordinate ring the tensor product over $A$ of the coordinate
+rings of the $\Am^{n_i}_Y$, each of whose maps onto $B=\mathcal O_U(U)$ is
+surjective, hence so is the tensor product map.  Composing with the open
+immersion $\prod_i\Am^{n_i}_Y\hookrightarrow\prod_i\PP^{n_i}_Y$ and using
+that $\prod_iZ_i\subseteq\prod_i\PP^{n_i}_Y$ is closed, $j$ is an
+immersion.
+
+\emph{Proof of (i).}  Stacks Project, Morphisms, Lemma 29.7.7 (Tag
+\texttt{01RG}), applied to the quasi-compact immersion $j$, shows that
+its scheme-theoretic image $\widetilde X$ contains $U$ as a
+scheme-theoretically dense open subscheme.  For properness: each
+$Z_i\to Y$ is proper by Lemma~\ref{lem:closedmodel}; $Z=\prod_iZ_i$ is
+closed in $\prod_i\PP^{n_i}_Y$ (a product of closed immersions is a
+closed immersion), and $\prod_i\PP^{n_i}_Y\to Y$ is proper by
+Lemma~\ref{lem:segre} (its structure morphism is the Segre closed
+immersion followed by the proper $\PP^N_Y\to Y$); hence $Z\to Y$ is
+proper and the closed subscheme $\widetilde X\subseteq Z$ is proper over
+$Y$ too.
+
+\emph{Proof of (ii).}  The morphism $\pr_i\circ j$ equals
+$j_i|_U:U\to Z_i\subseteq\PP^{n_i}_Y$, which factors through the closed
+subscheme $Z_i$; by the universal property of the scheme-theoretic image
+(equivalently Stacks Project, Morphisms, Lemma 29.6.6, Tag
+\texttt{01R9}), the induced morphism
+$\pr_i|_{\widetilde X}:\widetilde X\to\PP^{n_i}_Y$ factors through
+$Z_i$, giving $p_i$.  The morphism $p_i$ is proper by Stacks Project,
+Morphisms, Lemma 29.42.7 (Tag \texttt{01W6}): $\widetilde X\to Y$ is
+proper by (i), the target $Z_i$ is separated over $Y$ (it is a closed
+subscheme of the projective $Y$-scheme $\PP^{n_i}_Y$), and a morphism
+from a $Y$-proper scheme to a $Y$-separated scheme is proper.
+
+\emph{Proof of (iii).}  $\widetilde X\hookrightarrow Z$ is a closed
+immersion (definition of the scheme-theoretic image); the product of the
+closed immersions $Z_i\hookrightarrow\PP^{n_i}_Y$ is a closed immersion;
+$s$ is a closed immersion by Lemma~\ref{lem:segre}.  Composites of closed
+immersions are closed immersions, which gives (iii).
+\end{proof}
+
+\begin{lemma}[Gluing the projections along the cover]\label{lem:glue}
+In the situation of Lemma~\ref{lem:diagmodel}, put
+$V_i:=p_i^{-1}(U_i)\subseteq\widetilde X$ and
+$X':=V_1\cup\dots\cup V_m$.  Then for all $i,j$,
+$U\subseteq V_i\cap V_j$ is scheme-theoretically dense, and the morphisms
+$p_i|_{V_i}:V_i\to U_i$ glue to a morphism
+\[
+ \pi:X'\to X
+\]
+over $Y$ (here $X$ is identified with the separated scheme in which the
+affine opens $U_i\subseteq X$ sit; $X$ is separated over $Y$ since $X\to
+Y$ is proper).  One has $\pi|_U=\id_U$.
+\end{lemma}
+\begin{proof}
+Since $U\subseteq\widetilde X$ is scheme-theoretically dense by
+Lemma~\ref{lem:diagmodel}\;(i), and $V_i\cap V_j$ is an open subscheme of
+$\widetilde X$, the open $U\subseteq V_i\cap V_j$ is
+scheme-theoretically dense in $V_i\cap V_j$.  The two morphisms
+$p_i|_{V_i\cap V_j}$ and $p_j|_{V_i\cap V_j}$ take values in
+$U_i\cap U_j\subseteq X$ and agree on $U$; by Lemma~\ref{lem:denschineq}
+(whose hypotheses hold, $X$ being separated over $Y$ because it is proper
+over $Y$), they agree.  Hence the $p_i|_{V_i}$ are compatible on overlaps
+and glue to $\pi:X'\to X$.  To see $\pi|_U=\id_U$: each $p_i|_{V_i}$
+restricts on $U\subseteq V_i$ to the identity on $U$, because the open
+immersion $U\hookrightarrow U_i$ and the composite
+$U\hookrightarrow\widetilde X\to Z_i$ coincide by construction of the
+diagonal morphism $j$.
+\end{proof}
+
+\begin{lemma}[The fibres of the glued morphism]\label{lem:fibres}
+In the situation of Lemma~\ref{lem:glue},
+\[
+ \pi^{-1}(U_i)=V_i
+\]
+for every $i$; consequently the restriction
+$\pi^{-1}(U_i)\to U_i$ is the proper morphism $p_i|_{V_i}$ of
+Lemma~\ref{lem:diagmodel}\;(ii).
+\end{lemma}
+\begin{proof}
+The inclusion $V_i\subseteq\pi^{-1}(U_i)$ holds because
+$\pi|_{V_i}=p_i|_{V_i}$ maps $V_i$ into $U_i$.
+
+\emph{Step 1: $\pi$ is separated.}  Each $p_i|_{V_i}:V_i\to U_i$ is
+proper by Lemma~\ref{lem:diagmodel}\;(ii) (its properness is stable under
+the base change along the open immersion $U_i\to Z_i$, Stacks Project,
+Morphisms, Lemma 29.42.5, Tag \texttt{01W4}), hence separated; since
+separatedness is local on the source and the $V_i$ cover $X'$, $\pi$ is
+separated.  Hence its base change
+$\pi^{-1}(U_i)=X'\times_XU_i\to U_i$ along the open immersion
+$U_i\to X$ is separated.
+
+\emph{Step 2: $V_i$ is closed in $\pi^{-1}(U_i)$.}  Apply Stacks Project,
+Morphisms, Lemma 29.42.7 (Tag \texttt{01W6}) to the diagram whose
+composite $V_i\to\pi^{-1}(U_i)\to U_i$ is the proper morphism
+$p_i|_{V_i}$ and whose second member $\pi^{-1}(U_i)\to U_i$ is separated:
+the lemma says that the morphism $V_i\to\pi^{-1}(U_i)$ is proper, hence
+closed, so its image (which is $V_i$ itself) is closed in
+$\pi^{-1}(U_i)$.
+
+\emph{Step 3: $V_i$ is dense in $\pi^{-1}(U_i)$.}  By
+Lemma~\ref{lem:diagmodel}\;(i), $U$ is scheme-theoretically dense in
+$\widetilde X$; since $U\subseteq V_i$ and
+$\pi^{-1}(U_i)\subseteq\widetilde X$ is open, the closure of $V_i$ in
+$\pi^{-1}(U_i)$ is all of $\pi^{-1}(U_i)$.  Steps 2 and 3 give
+$V_i=\pi^{-1}(U_i)$.
+\end{proof}
+
+\section{Proof of the theorem}
+
+\begin{lemma}[Spreading out to a noetherian base]\label{lem:spread}
+Let $Y=\Spec A$ be affine and let $f:X\to Y$ be proper.  Then there exist
+a finitely generated $\ZZ$-subalgebra $A_0\subseteq A$ (so
+$Y_0=\Spec A_0$ is noetherian, and $Y$ is the limit of the affine schemes
+$Y_0$ indexed by the directed set of finitely generated
+$\ZZ$-subalgebras of $A$) and a proper morphism $X_0\to Y_0$ with
+\[
+ X=X_0\times_{Y_0}Y.
+\]
+The assertion is stable under further base change along
+$A_0\subseteq A_1\subseteq A$.
+\end{lemma}
+\begin{proof}
+The directed set $\mathcal S$ of finitely generated
+$\ZZ$-subalgebras of $A$ satisfies
+$A=\operatorname{colim}_{A_0\in\mathcal S}A_0$ and
+$Y=\lim_{A_0}Y_0$ with affine transition morphisms.  This is the standard
+spreading-out (limit-descent) statement for proper morphisms over an
+affine limit (EGA IV, \S8.5); for the finite-presentation constituent see
+Stacks Project, Limits of Schemes, Tag \texttt{01ZM} (Lemma 32.10.1), with
+the reductions Tag \texttt{01ZJ} (Proposition 32.9.6) and Tag
+\texttt{01ZA} (Proposition 32.5.4).  Concretely, $X$ is glued from
+finitely many affine schemes $\Spec B_j$ with $B_j$ a finitely generated
+$A$-algebra, using finitely many glue data; all the finitely many elements
+of $A$ occurring in generators, relations and glue data lie in some
+$A_0\in\mathcal S$, and gluing the corresponding $A_0$-algebras gives an
+$X_0\to Y_0$ of finite type with $X=X_0\times_{Y_0}Y$.  For properness of
+$X_0\to Y_0$ use the valuative criterion: a diagram
+$\Spec K\to X_0$, $\Spec V\to Y_0$ with $V$ a valuation ring and
+$K=\operatorname{Frac}V$ compatible base changes to a compatible diagram
+for the proper morphism $X\to Y$, which admits a unique lift
+$\Spec V\to X=X_0\times_{Y_0}Y$; projecting to $X_0$ gives the required
+lift (two morphisms $\Spec V\rightrightarrows Y_0$ agreeing on the dense
+$\Spec K$ agree, since $Y_0$ is affine, hence separated).  Properness of
+the base change along $A_0\subseteq A_1$ is the stability of properness
+under base change.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:chow}]
+\emph{Reduction to the noetherian case.}  By Lemma~\ref{lem:spread} write
+$X=X_0\times_{Y_0}Y$ with $Y_0=\Spec A_0$, $A_0$ a finitely generated
+$\ZZ$-subalgebra of $A$, and $X_0\to Y_0$ proper.  If the assertion holds
+for $f_0:X_0\to Y_0$ with data $(\pi_0,n,i_0)$, then
+\[
+ \pi:=\pi_0\times_{Y_0}\id_Y:\ 
+ \widetilde X:=\widetilde X_0\times_{Y_0}Y\longrightarrow X,
+ \qquad
+ i_Y:=i_0\times_{Y_0}\id_Y:\ 
+ \widetilde X\hookrightarrow\PP^n_{Y_0}\times_{Y_0}Y=\PP^n_Y
+\]
+have the required properties: proper surjections and closed immersions
+are stable under base change, and
+$f\pi=(f_0\pi_0)\times\id=(p_0i_0)\times\id=p\circ i_Y$, where
+$p:\PP^n_Y\to Y$.
+
+\emph{The noetherian case.}  Let $X$ be proper over the noetherian affine
+scheme $Y=\Spec A$; then $X$ is noetherian (Stacks Project, Morphisms,
+Lemma 29.15.6, Tag \texttt{01T6}), hence has finitely many irreducible
+components (Stacks Project, Properties, Lemma 28.5.7, Tag \texttt{0BA8}).
+Choose the finite affine cover $X=U_1\cup\dots\cup U_m$ of
+Lemma~\ref{lem:cover}, with dense $U=\cap_iU_i$, and apply
+Lemma~\ref{lem:densered}: replacing $X$ by the surjective closed immersion
+$X^{*}\to X$ does not change the conclusion, since data
+$(\pi^{*},n,i)$ over $f^{*}:X^{*}\to Y$ push forward to
+$(X^{*}\to X)\circ\pi^{*}$ over $f:X\to Y$.  Assume therefore that $U$ is
+scheme-theoretically dense in $X$, with the $U_i$ affine of finite type
+over $Y$.  Now:
+\begin{itemize}
+  \item Lemma~\ref{lem:affproj} gives immersions
+  $j_i:U_i\hookrightarrow\PP^{n_i}_Y$;
+  \item Lemma~\ref{lem:closedmodel} gives closed models
+  $Z_i\subseteq\PP^{n_i}_Y$ with $U_i\hookrightarrow Z_i$
+  scheme-theoretically dense open immersions, and $Z_i\to Y$ proper;
+  \item Lemma~\ref{lem:diagmodel} gives the diagonal model
+  $Z=\prod_{i=1}^mZ_i$, the scheme-theoretic image $W\subseteq Z$ of
+  $j=(j_1|_U,\dots,j_m|_U):U\to Z$, the proper projections
+  $p_i:W\to Z_i$, and the closed immersion
+  $W\hookrightarrow Z\hookrightarrow\prod_i\PP^{n_i}_Y
+  \xrightarrow{\ s\ }\PP^N_Y$ with $N=\prod_{i=1}^m(n_i+1)-1$;
+  \item Lemma~\ref{lem:glue} glues, for
+  $V_i:=p_i^{-1}(U_i)\subseteq W$ and $X':=\bigcup_{i=1}^mV_i$, the
+  morphisms $p_i|_{V_i}:V_i\to U_i$ into $\pi:X'\to X$ with
+  $\pi|_U=\id_U$;
+  \item Lemma~\ref{lem:fibres} identifies $\pi^{-1}(U_i)=V_i$, and
+  Lemma~\ref{lem:diagmodel}\;(ii) that $\pi^{-1}(U_i)\to U_i$ is proper.
+\end{itemize}
+It remains to conclude that $\pi$ is proper and surjective, that
+$\pi^{-1}(U)\xrightarrow{\sim}U$, and that the immersion
+$X'\hookrightarrow\PP^N_Y$ is closed.
+
+\emph{Properness of $\pi$.}  By Lemma~\ref{lem:fibres} the restrictions
+$\pi^{-1}(U_i)\to U_i$ are proper for every member of the finite affine
+open cover $X=U_1\cup\dots\cup U_m$.  Properness is local on the target
+(Stacks Project, Morphisms, Lemma 29.42.3, Tag \texttt{01W2}: a morphism
+$g:W\to S$ is proper as soon as there is an open cover
+$S=\bigcup_jS_j$ with $g^{-1}(S_j)\to S_j$ proper for all $j$); applying
+this to $g=\pi$, $S=X$, $S_j=U_j$ shows that $\pi$ is proper.
+
+\emph{Surjectivity of $\pi$.}  A proper morphism has closed image
+(the statement of Stacks Project, Morphisms, Lemma 29.42.7, Tag
+\texttt{01W6}).  Hence $\pi(X')\subseteq X$ is closed; it contains $U$
+(since $\pi|_U=\id_U$ by Lemma~\ref{lem:glue}), and $U$ is dense in $X$.
+Thus $\pi(X')=X$, i.e.\ $\pi$ is surjective.
+
+\emph{The isomorphism over $U$.}  Identify $U$ with an open subscheme of
+$\pi^{-1}(U)\subseteq X'$ via the inclusion of the dense open.  Apply
+Stacks Project, Morphisms, Lemma 29.42.7 (Tag \texttt{01W6}) to the
+diagram whose composite $U\to\pi^{-1}(U)\to U$ is the identity (hence
+proper) and whose second member $\pi^{-1}(U)\to U$ is separated (the base
+change of the separated morphism $\pi$, cf.\ Step 1 of
+Lemma~\ref{lem:fibres}): the lemma yields that $U\to\pi^{-1}(U)$ is
+proper, hence closed, so $U$ is closed in $\pi^{-1}(U)$.  On the other
+hand $U$ is scheme-theoretically dense in $W$ (by
+Lemma~\ref{lem:diagmodel}\;(i)), and $\pi^{-1}(U)\subseteq W$ is open, so
+$U$ is dense in $\pi^{-1}(U)$.  A closed and dense subscheme of a scheme
+coincides with it, so $U=\pi^{-1}(U)$ and
+$\pi^{-1}(U)\to U$ is the isomorphism inverse to the inclusion.
+
+\emph{The closed immersion.}  The composed morphism
+\[
+ i:X'\hookrightarrow W\hookrightarrow Z\hookrightarrow\prod_i\PP^{n_i}_Y
+ \xrightarrow{\ s\ }\PP^N_Y
+\]
+is an immersion: $X'\subseteq W$ is open, and the remaining factors are
+closed immersions by Lemma~\ref{lem:diagmodel}\;(iii) and
+Lemma~\ref{lem:segre}.  Its source is proper over $Y$: $\pi$ is proper and
+$f:X\to Y$ is proper, so $f\circ\pi:X'\to Y$ is a composite of proper
+morphisms, hence proper.  By Stacks Project, Morphisms, Lemma 29.42.7
+(Tag \texttt{01W6}) once more, now with source $X'$, base $Y$ and target
+$\PP^N_Y$ (separated over $Y$, being projective), the morphism
+$X'\to\PP^N_Y$ is proper.  A proper immersion is a closed immersion
+(Stacks Project, Schemes, Lemma 26.10.4, Tag \texttt{01IQ}: an immersion
+is a closed immersion iff its image is closed, and here the image is
+closed by properness).  Hence $i$ is a closed immersion.
+
+\emph{The factorization.}  Both $f\circ\pi$ and the composite
+$X'\xrightarrow{i}\PP^N_Y\to Y$ are equal to the structure morphism of the
+$Y$-scheme $X'$: every scheme and morphism involved is defined/composed
+over $Y$.  Hence $f\circ\pi=p\circ i$ with $p:\PP^N_Y\to Y$.
+
+This proves the assertion for $X_0\to Y_0$ with $\widetilde X:=X'$,
+$n:=N$, $i_Y:=i$; the general case follows by base change as in the
+first paragraph.
+
+\emph{Base-change stability.}  Given data $(\pi,n,i_Y)$ for $f:X\to Y$
+and any morphism $Y'\to Y$, the pullbacks as in the first paragraph give a
+proper surjection $X\times_YY'\to X\times_YY'$ and a closed immersion
+$X\times_YY'\hookrightarrow\PP^n_{Y'}$ satisfying the factorization,
+because the properties used are stable under base change and the equality
+$f\pi=p\circ i_Y$ is an identity of morphisms over $Y$, which base changes
+to the corresponding identity over $Y'$.  This completes the proof.
+\end{proof}
+
+\begin{remark*}
+In the classical form of Chow's lemma, $X\to Y$ is only assumed of finite
+type, and the constructed $X'\to\PP^N_Y$ is only an immersion; replacing
+$X'$ by its closure in $\PP^N_Y$ and extending $\pi$ by means of the
+closure of the graph of $\pi$ (a ``proper extension'' step) then gives a
+\emph{closed} immersion.  Since here $f:X\to Y$ is proper, the immersion
+is automatically closed (as shown above), so that extension step is
+unnecessary.
+\end{remark*}
+
+\end{document}
