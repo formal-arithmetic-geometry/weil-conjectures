@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
@@ -59,7 +60,8 @@ The site-theoretic inputs of the general definitions are discharged here:
   notation `(g)_*[A]`.
 - `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves, with scoped
   notation `(g)^*[A]`.
-- `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
+- `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`. Both
+  functors are additive.
 - `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
   the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
   `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`.
@@ -226,6 +228,11 @@ being exact. -/
 instance Etale.preservesFiniteLimits_upperStar :
     PreservesFiniteLimits (g)^*[A] :=
   inferInstanceAs (PreservesFiniteLimits (GrothendieckTopology.upperStar A @Etale @Etale g))
+
+/-- The pullback `g^*` on étale sheaves with values in a preadditive category is additive,
+being a left adjoint of the additive pushforward `g_*`. -/
+instance Etale.upperStar_additive : (g)^*[A].Additive :=
+  (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive
 
 /-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
 example : PreservesFiniteColimits (g)^*[A] := inferInstance

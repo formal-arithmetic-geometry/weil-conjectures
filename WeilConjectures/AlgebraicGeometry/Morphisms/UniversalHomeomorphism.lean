@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Constructors
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 public import Mathlib.Topology.Homeomorph.Lemmas
@@ -20,15 +21,26 @@ changes is not.
 
 ## Main definitions
 
-- `AlgebraicGeometry.UniversalHomeomorphism`: the class of universal homeomorphisms.
+- `AlgebraicGeometry.IsUniversalHomeomorphism`: the class of universal homeomorphisms.
+- `AlgebraicGeometry.IsUniversalHomeomorphism.homeomorph`: the homeomorphism of underlying
+  topological spaces induced by a universal homeomorphism.
 
 ## Main statements
 
-- `AlgebraicGeometry.universalHomeomorphism_eq`: the `MorphismProperty` description of the
-  class, through which the stability properties are proved.
+- `AlgebraicGeometry.isUniversalHomeomorphism_eq`: the `MorphismProperty` description of
+  the class as the infimum of being integral, universally injective and surjective.
 - `AlgebraicGeometry.Scheme.Hom.isHomeomorph`: a universal homeomorphism is in particular a
-  homeomorphism on underlying spaces;
-  `AlgebraicGeometry.UniversalHomeomorphism.homeomorph` is the bundled form.
+  homeomorphism on underlying spaces.
+- `AlgebraicGeometry.isUniversalHomeomorphism_le_universally_isHomeomorph`: a universal
+  homeomorphism stays a homeomorphism after an arbitrary base change. This is the direction
+  of [Stacks 04DF] that the definition does not make trivial; the converse, that a morphism
+  all of whose base changes are homeomorphisms is integral, is not formalised here.
+
+## Implementation notes
+
+The stability properties (composition, base change, isomorphisms) are all proved by
+rewriting along `AlgebraicGeometry.isUniversalHomeomorphism_eq` and appealing to the
+corresponding properties of the three defining classes.
 -/
 
 @[expose] public section
@@ -43,65 +55,75 @@ variable {X Y Z S : Scheme.{u}}
 
 /-- A morphism of schemes is a universal homeomorphism if it is integral, universally
 injective and surjective; equivalently, if every base change of it is a homeomorphism
-on underlying spaces. See https://stacks.math.columbia.edu/tag/04DF. -/
+on underlying spaces. -/
 @[mk_iff, stacks 04DF]
-class UniversalHomeomorphism (f : X ⟶ Y) : Prop
+class IsUniversalHomeomorphism (f : X ⟶ Y) : Prop
     extends IsIntegralHom f, UniversallyInjective f, Surjective f
 
-theorem universalHomeomorphism_eq :
-    @UniversalHomeomorphism = (@IsIntegralHom ⊓ @UniversallyInjective ⊓ @Surjective :
+theorem isUniversalHomeomorphism_eq :
+    @IsUniversalHomeomorphism = (@IsIntegralHom ⊓ @UniversallyInjective ⊓ @Surjective :
       MorphismProperty Scheme.{u}) := by
   ext X Y f
-  rw [universalHomeomorphism_iff]
-  exact ⟨fun ⟨h₁, h₂, h₃⟩ ↦ ⟨⟨h₁, h₂⟩, h₃⟩, fun ⟨⟨h₁, h₂⟩, h₃⟩ ↦ ⟨h₁, h₂, h₃⟩⟩
+  rw [isUniversalHomeomorphism_iff]
+  exact and_assoc.symm
 
-namespace UniversalHomeomorphism
+namespace IsUniversalHomeomorphism
 
-instance : IsMultiplicative @UniversalHomeomorphism.{u} :=
-  universalHomeomorphism_eq ▸ inferInstance
+instance : IsStableUnderComposition @IsUniversalHomeomorphism.{u} :=
+  isUniversalHomeomorphism_eq ▸ inferInstance
 
-instance : IsStableUnderComposition @UniversalHomeomorphism.{u} :=
-  universalHomeomorphism_eq ▸ inferInstance
+instance : IsStableUnderBaseChange @IsUniversalHomeomorphism.{u} :=
+  isUniversalHomeomorphism_eq ▸ inferInstance
 
-instance : IsStableUnderBaseChange @UniversalHomeomorphism.{u} :=
-  universalHomeomorphism_eq ▸ inferInstance
+instance (f : X ⟶ Y) [IsIso f] : IsUniversalHomeomorphism f where
 
-instance : RespectsIso @UniversalHomeomorphism.{u} :=
-  universalHomeomorphism_eq ▸ inferInstance
+instance : IsMultiplicative @IsUniversalHomeomorphism.{u} where
+  id_mem _ := inferInstance
 
-instance comp (f : X ⟶ Y) (g : Y ⟶ Z) [UniversalHomeomorphism f] [UniversalHomeomorphism g] :
-    UniversalHomeomorphism (f ≫ g) :=
-  MorphismProperty.comp_mem _ _ _ ‹_› ‹_›
+instance comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsUniversalHomeomorphism f]
+    [IsUniversalHomeomorphism g] : IsUniversalHomeomorphism (f ≫ g) :=
+  MorphismProperty.comp_mem _ _ _ inferInstance inferInstance
 
-instance (f : X ⟶ S) (g : Y ⟶ S) [UniversalHomeomorphism g] :
-    UniversalHomeomorphism (pullback.fst f g) :=
+instance (f : X ⟶ S) (g : Y ⟶ S) [IsUniversalHomeomorphism g] :
+    IsUniversalHomeomorphism (pullback.fst f g) :=
   MorphismProperty.pullback_fst f g inferInstance
 
-instance (f : X ⟶ S) (g : Y ⟶ S) [UniversalHomeomorphism f] :
-    UniversalHomeomorphism (pullback.snd f g) :=
+instance (f : X ⟶ S) (g : Y ⟶ S) [IsUniversalHomeomorphism f] :
+    IsUniversalHomeomorphism (pullback.snd f g) :=
   MorphismProperty.pullback_snd f g inferInstance
 
-instance (f : X ⟶ Y) [IsIso f] : UniversalHomeomorphism f where
+/-- A surjective closed immersion is a universal homeomorphism. In particular a nilpotent
+thickening is a universal homeomorphism, which is the case of [Stacks 03SI] usually quoted
+as invariance of the étale site under nilpotent thickenings. -/
+instance (f : X ⟶ Y) [IsClosedImmersion f] [Surjective f] : IsUniversalHomeomorphism f where
 
-/-- A surjective closed immersion is a universal homeomorphism. This covers the case of a
-closed immersion cut out by a nilpotent sheaf of ideals, see [Stacks 03SI]. -/
-instance (f : X ⟶ Y) [IsClosedImmersion f] [Surjective f] : UniversalHomeomorphism f where
-
-end UniversalHomeomorphism
+end IsUniversalHomeomorphism
 
 /-- A universal homeomorphism is a homeomorphism on underlying topological spaces. -/
-theorem Scheme.Hom.isHomeomorph (f : X ⟶ Y) [UniversalHomeomorphism f] :
+theorem Scheme.Hom.isHomeomorph (f : X ⟶ Y) [IsUniversalHomeomorphism f] :
     IsHomeomorph f.base :=
   isHomeomorph_iff_continuous_isClosedMap_bijective.mpr
-    ⟨f.base.hom.continuous, f.isClosedMap, f.injective, f.surjective⟩
+    ⟨f.continuous, f.isClosedMap, f.injective, f.surjective⟩
+
+/-- **A universal homeomorphism stays a homeomorphism after an arbitrary base change**: this
+is the nontrivial direction of [Stacks 04DF] for the definition of
+`AlgebraicGeometry.IsUniversalHomeomorphism` used here. -/
+@[stacks 04DF]
+theorem isUniversalHomeomorphism_le_universally_isHomeomorph :
+    @IsUniversalHomeomorphism.{u} ≤
+      (topologically @IsHomeomorph : MorphismProperty Scheme.{u}).universally := by
+  rw [← IsStableUnderBaseChange.universally_eq (P := @IsUniversalHomeomorphism.{u})]
+  refine universally_mono ?_
+  intro X Y f hf
+  exact @Scheme.Hom.isHomeomorph X Y f hf
 
 /-- The homeomorphism of underlying topological spaces induced by a universal
 homeomorphism.
 
 This is not called `Scheme.Hom.homeomorph`, since that name is taken by the homeomorphism
 attached to an isomorphism of schemes. -/
-noncomputable def UniversalHomeomorphism.homeomorph (f : X ⟶ Y) [UniversalHomeomorphism f] :
-    X ≃ₜ Y :=
-  IsHomeomorph.homeomorph _ f.isHomeomorph
+noncomputable def IsUniversalHomeomorphism.homeomorph (f : X ⟶ Y)
+    [IsUniversalHomeomorphism f] : X ≃ₜ Y :=
+  f.isHomeomorph.homeomorph
 
 end AlgebraicGeometry
