@@ -57,7 +57,7 @@ variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Z)
 
 /-- The presheaf form of `AlgebraicGeometry.Etale.lowerStarCompSheafFiberIso`: restricting an
-`A`-valued presheaf on the small étale site of `Z` along base change along a closed immersion
+`A`-valued presheaf on the small étale site of `Z` along base change by a closed immersion
 `i : Z ⟶ X` and taking the fibre at the geometric point `s ≫ i` of `X` gives the fibre at
 `s`. Both sides are colimits over categories of pointed étale neighbourhoods, and the
 comparison is `AlgebraicGeometry.Scheme.initial_pointSmallEtaleElementsBaseChange` read
