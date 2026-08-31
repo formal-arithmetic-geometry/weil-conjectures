@@ -1,0 +1,492 @@
+% This file is a chapter fragment, in the same style as the other files under
+% version/detailed/.  It is included by version/detailed.tex and must not
+% contain a preamble of its own.
+%
+% Contents: Chow's lemma in the form of the Stacks Project, Cohomology of
+% Schemes, Lemma 30.18.1 (Tag 0200) = EGA II, Theorem 5.6.1 (a), together with
+% the corollary used in the projective reduction step of proper base change.
+
+\chapter{Chow's lemma}\label{chap:chow-lemma}
+
+The goal of this chapter is Chow's lemma in its general form: for a separated
+morphism of finite type $f\colon X\to S$ with $S$ noetherian there is a proper
+surjective morphism $\pi\colon X'\to X$, an isomorphism over a dense open
+subscheme of $X$, such that $X'$ admits an immersion into some
+$\mathbf P^n_S$.  This is \Cref{thm:chow-lemma}.  The form in which it enters
+the projective reduction step of proper base change is
+\Cref{cor:chow-lemma-proper}: a proper $S$-scheme is dominated by a projective
+one.
+
+The chapter follows the proof of \stacksproject{0200}.  The auxiliary
+statements are collected first, so that every theorem-like environment is
+immediately followed by its own proof; the main statement and its proof are in
+\Cref{sec:chow-lemma-proof}.
+
+\section{Conventions and standing facts}\label{sec:chow-conventions}
+
+Throughout, $S$ is a noetherian scheme.  All schemes occurring in the proof are
+of finite type over $S$, hence noetherian by \stacksproject{01T6}; in
+particular each of them has finitely many irreducible components by
+\stacksproject{0BA8}, and each of them is quasi-compact and quasi-separated.
+All morphisms between such schemes are of finite type by \stacksproject{01T8},
+hence quasi-compact.  Finally, if $T\to T'$ is a morphism of $S$-schemes and
+$T\to S$ is separated, then $T\to T'$ is separated by \stacksproject{01KV}.
+These facts are used below without further mention.
+
+For a morphism $u\colon W\to T$ the \emph{scheme-theoretic image} of $u$ is the
+smallest closed subscheme of $T$ through which $u$ factors; when $u$ is
+quasi-compact and quasi-separated it is the closed subscheme cut out by
+$\ker(\mathcal O_T\to u_*\mathcal O_W)$, and its formation commutes with
+restriction to opens of $T$.  An open subscheme $V\subseteq T$ is
+\emph{scheme-theoretically dense} if the scheme-theoretic image of $V\to T$ is
+$T$ itself.
+
+\section{Affine opens through the generic points}\label{sec:chow-affine-opens}
+
+\begin{lemma}[Disjoint affine neighbourhoods of generic points]
+\label{lem:chow-disjoint-affines}
+Let $X$ be a quasi-separated scheme, let $Z_1,\dots,Z_n$ be pairwise distinct
+irreducible components of $X$ and let $\eta_i\in Z_i$ be their generic points.
+Then there are affine opens $U_i\subseteq X$ with $\eta_i\in U_i$ and
+$U_i\cap U_j=\emptyset$ for $i\neq j$.  Consequently
+$U_1\cup\dots\cup U_n$ is an affine open containing all the $\eta_i$.
+\end{lemma}
+\begin{proof}
+For $k\neq i$ we have $\eta_i\notin Z_k$: otherwise
+$Z_i=\overline{\{\eta_i\}}\subseteq Z_k$, contradicting that $Z_i$ and $Z_k$
+are distinct irreducible components.  Hence
+$\bigcap_{k\neq i}(X\setminus Z_k)$ is an open neighbourhood of $\eta_i$, and
+since the affine opens form a basis of the topology we may choose an affine
+open $V_i$ with
+\[
+  \eta_i\in V_i\subseteq\bigcap_{k\neq i}(X\setminus Z_k).
+\]
+In particular $V_i\cap Z_k=\emptyset$, and a fortiori $\eta_k\notin V_i$, for
+all $k\neq i$.
+
+Fix $i$ and put $W_i:=\bigcup_{j\neq i}(V_i\cap V_j)$.  Each $V_i\cap V_j$ is
+quasi-compact because $X$ is quasi-separated, so $W_i$ is a quasi-compact open
+subset of $V_i$, and $\eta_i\notin W_i$ because $\eta_i\notin V_j$ for
+$j\neq i$.  Write $V_i=\Spec R_i$.  The irreducible components of the open
+subscheme $V_i$ are the nonempty intersections $C\cap V_i$ with $C$ an
+irreducible component of $X$, so $Z_i\cap V_i$ is an irreducible component of
+$V_i$ with generic point $\eta_i$; equivalently $\eta_i$ corresponds to a
+minimal prime $\mathfrak p_i\subseteq R_i$.  By \stacksproject{00EV} applied to
+$R_i$, the minimal prime $\mathfrak p_i$ and the quasi-compact open
+$W_i\subseteq\Spec R_i$, there is $f_i\in R_i\setminus\mathfrak p_i$ with
+$D(f_i)\cap W_i=\emptyset$.  Put $U_i:=D(f_i)$.  Then $U_i$ is an affine open
+containing $\eta_i$, and for $j\neq i$ we have
+$U_i\cap V_j\subseteq V_i\cap V_j\subseteq W_i$, whence
+$U_i\cap V_j=\emptyset$ and in particular $U_i\cap U_j=\emptyset$.
+
+Finally, a scheme that is the disjoint union of two affine opens is affine by
+\stacksproject{01I5}; iterating, $U_1\cup\dots\cup U_n$ is affine.
+\end{proof}
+
+\begin{lemma}[An affine open containing a point and all generic points]
+\label{lem:chow-affine-through-generic-points}
+Let $X$ be a quasi-separated scheme, let $Z_1,\dots,Z_n$ be pairwise distinct
+irreducible components of $X$ with generic points $\eta_i$, and let $x\in X$.
+Then there is an affine open $U\subseteq X$ containing $x$ and all the
+$\eta_i$.
+\end{lemma}
+\begin{proof}
+\uses{lem:chow-disjoint-affines}
+After renumbering we may assume $x\in Z_i$ for $i\leq r$ and $x\notin Z_k$ for
+$k>r$.  Then $\bigcap_{k>r}(X\setminus Z_k)$ is an open neighbourhood of $x$,
+so there is an affine open $W$ with
+$x\in W\subseteq\bigcap_{k>r}(X\setminus Z_k)$; thus $W\cap Z_k=\emptyset$ for
+$k>r$.  For $i\leq r$ the set $W\cap Z_i$ is a nonempty open subset of the
+irreducible space $Z_i$, hence contains its generic point, so $\eta_i\in W$.
+
+By \Cref{lem:chow-disjoint-affines} applied to $Z_{r+1},\dots,Z_n$ there are
+pairwise disjoint affine opens $U_k\ni\eta_k$ for $k>r$.  Fix $k>r$.  Since $X$
+is quasi-separated, $W\cap U_k$ is a quasi-compact open of $U_k$, and it does
+not contain $\eta_k$ because $\eta_k\in Z_k$ while $W\cap Z_k=\emptyset$.  As
+in the proof of \Cref{lem:chow-disjoint-affines}, $\eta_k$ is a minimal prime
+of the affine scheme $U_k$, so \stacksproject{00EV} provides a standard affine
+open $U_k'\subseteq U_k$ with $\eta_k\in U_k'$ and $U_k'\cap W=\emptyset$.
+
+The opens $W$ and $U_k'$ for $k>r$ are pairwise disjoint and affine, so
+\[
+  U:=W\cup\bigcup_{k>r}U_k'
+\]
+is affine by \stacksproject{01I5}, and it contains $x$ and all the $\eta_i$.
+\end{proof}
+
+\begin{lemma}[Affine cover through the generic points]\label{lem:chow-affine-cover}
+Let $X$ be a quasi-compact and quasi-separated scheme with finitely many
+irreducible components $Z_1,\dots,Z_r$, with generic points $\eta_j$.  Then
+there is a finite affine open covering $X=U_1\cup\dots\cup U_m$ such that
+$\eta_j\in U_i$ for all $i$ and $j$.  For any such covering the open
+\[
+  U:=U_1\cap\dots\cap U_m
+\]
+is dense in $X$.
+\end{lemma}
+\begin{proof}
+\uses{lem:chow-affine-through-generic-points}
+By \Cref{lem:chow-affine-through-generic-points} every $x\in X$ has an affine
+open neighbourhood containing all the $\eta_j$; since $X$ is quasi-compact,
+finitely many of them cover $X$.  For the density statement note that
+$U\cap Z_j$ is an open subset of $Z_j$ containing $\eta_j$, hence is dense in
+the irreducible space $Z_j$; as $X=Z_1\cup\dots\cup Z_r$, the closure of $U$
+contains every $Z_j$ and therefore equals $X$.
+\end{proof}
+
+\section{Reduction to a scheme-theoretically dense open}\label{sec:chow-dense}
+
+\begin{lemma}[Scheme-theoretic closure of a dense open]
+\label{lem:chow-scheme-theoretic-closure}
+Let $X$ be a scheme and let $U\subseteq X$ be a dense open subscheme such that
+the inclusion $u\colon U\to X$ is quasi-compact and quasi-separated.  Let
+$X^{*}\subseteq X$ be the scheme-theoretic image of $u$.  Then:
+\begin{enumerate}
+  \item $X^{*}\to X$ is a surjective closed immersion which is an isomorphism
+  over $U$;
+  \item $U\subseteq X^{*}$ is a scheme-theoretically dense open subscheme;
+  \item if $X=U_1\cup\dots\cup U_m$ is a finite affine open covering, then the
+  opens $U_i^{*}:=X^{*}\cap U_i$ are affine, cover $X^{*}$, and satisfy
+  $U_1^{*}\cap\dots\cap U_m^{*}=U$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+By construction $X^{*}\to X$ is a closed immersion, and $U$ factors through it.
+Its image is a closed subset containing the dense subset $U$, hence is all of
+$X$, so $X^{*}\to X$ is surjective.  The quasi-coherent ideal sheaf of $X^{*}$
+is $\ker(\mathcal O_X\to u_*\mathcal O_U)$, whose restriction to $U$ is
+$\ker(\mathcal O_U\to\mathcal O_U)=0$; hence $X^{*}\cap U=U$ and $X^{*}\to X$
+is an isomorphism over $U$.  This proves (1).  Since formation of the
+scheme-theoretic image commutes with restriction to opens, the
+scheme-theoretic image of $U\to X^{*}$ is $X^{*}$, which is (2).  For (3), each
+$U_i^{*}$ is a closed subscheme of the affine scheme $U_i$, hence affine, and
+$U_1^{*}\cap\dots\cap U_m^{*}=X^{*}\cap U=U$.
+\end{proof}
+
+\section{Immersions into projective space}\label{sec:chow-immersions}
+
+\begin{lemma}[An affine scheme of finite type immerses into projective space]
+\label{lem:chow-affine-immersion}
+Let $S$ be a scheme and let $V$ be an affine scheme equipped with a morphism
+$V\to S$ that is locally of finite type.  Then there are an integer $n\geq0$
+and an immersion $V\to\mathbf P^n_S$ of $S$-schemes.
+\end{lemma}
+\begin{proof}
+An affine scheme is quasi-affine, so $\mathcal O_V$ is an ample invertible
+sheaf on $V$ by \stacksproject{01QE}.  Now apply \stacksproject{01VS} to the
+morphism $V\to S$, which is locally of finite type, and to the ample invertible
+sheaf $\mathcal O_V$.
+\end{proof}
+
+\begin{lemma}[Closed model of a quasi-compact immersion]\label{lem:chow-closed-model}
+Let $S$ be a scheme and let $j\colon V\to\mathbf P^n_S$ be a quasi-compact
+immersion.  Let $Z\subseteq\mathbf P^n_S$ be the scheme-theoretic image of $j$.
+Then $Z$ is a closed subscheme of $\mathbf P^n_S$, the induced morphism
+$V\to Z$ is an open immersion identifying $V$ with a scheme-theoretically dense
+open subscheme of $Z$, and $Z\to S$ is proper.
+\end{lemma}
+\begin{proof}
+The first two assertions are \stacksproject{01RG} applied to the quasi-compact
+immersion $j$.  For the last one, $\mathbf P^n_S\to S$ is proper by
+\stacksproject{01WC}, a closed immersion is proper by \stacksproject{01W5}, and
+a composition of proper morphisms is proper; hence $Z\to S$ is proper.
+\end{proof}
+
+\begin{definition}[Segre embedding]\label{def:chow-segre}
+Let $S$ be a scheme and let $n_1,\dots,n_m\geq0$ be integers.  Put
+$N=\prod_{i=1}^m(n_i+1)-1$ and index the homogeneous coordinates of
+$\mathbf P^N_S$ by the multi-indices $e=(e_1,\dots,e_m)$ with
+$0\leq e_i\leq n_i$.  The \emph{Segre embedding} is the morphism of
+$S$-schemes
+\[
+  s\colon\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S
+  \longrightarrow\mathbf P^N_S,
+  \qquad
+  \bigl((x_{i,0}:\dots:x_{i,n_i})\bigr)_{i=1}^m
+  \longmapsto
+  \Bigl[\textstyle\prod_{i=1}^m x_{i,e_i}\Bigr]_e .
+\]
+\end{definition}
+
+\begin{lemma}[The Segre embedding is a closed immersion]\label{lem:chow-segre}
+The morphism $s$ of \Cref{def:chow-segre} is a closed immersion.  Consequently
+$\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S\to S$ is proper.
+\end{lemma}
+\begin{proof}
+\uses{def:chow-segre}
+Being a closed immersion is local on the target and on $S$, so we may assume
+$S=\Spec A$ is affine and check the assertion on the standard affine charts
+$D_+(X_e)\subseteq\mathbf P^N_S$, which cover $\mathbf P^N_S$.  For a
+multi-index $e$ one has
+\[
+  s^{-1}\bigl(D_+(X_e)\bigr)=\prod_{i=1}^m D_+(x_{i,e_i}),
+\]
+which is affine, being a finite fibre product of affine schemes over the affine
+base.  On these charts $s$ is induced by the $A$-algebra homomorphism
+\[
+  \mathcal O_{\mathbf P^N_S}\bigl(D_+(X_e)\bigr)
+  \longrightarrow
+  \mathcal O_{\mathbf P^{n_1}_S}\bigl(D_+(x_{1,e_1})\bigr)\otimes_A\dots
+  \otimes_A\mathcal O_{\mathbf P^{n_m}_S}\bigl(D_+(x_{m,e_m})\bigr),
+  \qquad
+  \frac{X_f}{X_e}\longmapsto\prod_{i=1}^m\frac{x_{i,f_i}}{x_{i,e_i}}.
+\]
+This homomorphism is surjective: for each $i$ and each $0\leq f_i\leq n_i$ the
+multi-index $f=(e_1,\dots,e_{i-1},f_i,e_{i+1},\dots,e_m)$ satisfies
+$X_f/X_e\mapsto x_{i,f_i}/x_{i,e_i}$, and these ratios generate the target as
+an $A$-algebra.  Hence $s$ is, locally on the target, the morphism of affine
+schemes attached to a surjective ring homomorphism, i.e.\ a closed immersion.
+Compare \stacksproject{01WD}.
+
+For the last assertion combine this with \stacksproject{01WC} and
+\stacksproject{01W5}: the composition of the closed immersion $s$ with the
+proper morphism $\mathbf P^N_S\to S$ is proper.
+\end{proof}
+
+\begin{lemma}[Tuples of morphisms with one immersion]\label{lem:chow-tuple-immersion}
+Let $S$ be a scheme, let $Y_1,\dots,Y_m$ be schemes separated over $S$ and let
+$f_i\colon T\to Y_i$ be morphisms of $S$-schemes.  If $f_1$ is an immersion,
+then
+\[
+  (f_1,\dots,f_m)\colon T\longrightarrow Y_1\times_S\dots\times_S Y_m
+\]
+is an immersion.
+\end{lemma}
+\begin{proof}
+Write $P=Y_2\times_S\dots\times_S Y_m$ and $g=(f_2,\dots,f_m)\colon T\to P$.
+Then $(f_1,\dots,f_m)$ is the composition
+\[
+  T\xrightarrow{\ (\mathrm{id}_T,g)\ }T\times_S P
+  \xrightarrow{\ f_1\times_S\mathrm{id}_P\ }Y_1\times_S P .
+\]
+The first morphism is the canonical morphism
+$T\times_P P\to T\times_S P$ attached to $g\colon T\to P$,
+$\mathrm{id}\colon P\to P$ and $P\to S$, hence an immersion by
+\stacksproject{01KR}.  The second morphism is a base change of the immersion
+$f_1$, hence an immersion.  A composition of immersions is an immersion.
+\end{proof}
+
+\section{The graph construction}\label{sec:chow-graph}
+
+\begin{lemma}[Two morphisms agreeing on a scheme-theoretically dense open]
+\label{lem:chow-agree-on-dense-open}
+Let $T$ and $Y$ be schemes over $S$ with $Y\to S$ separated, let
+$a,b\colon T\to Y$ be morphisms of $S$-schemes and let $V\subseteq T$ be a
+scheme-theoretically dense open subscheme with $a|_V=b|_V$.  Then $a=b$.
+\end{lemma}
+\begin{proof}
+This is \stacksproject{01RH}.  Concretely, the equaliser of $a$ and $b$ is the
+base change of the diagonal $Y\to Y\times_S Y$ along
+$(a,b)\colon T\to Y\times_S Y$, hence a closed subscheme of $T$ because
+$Y\to S$ is separated; it contains $V$, which is scheme-theoretically dense, so
+it is all of $T$.
+\end{proof}
+
+\begin{lemma}[The graph of the cover]\label{lem:chow-graph}
+Let $S$ be noetherian, let $X\to S$ be separated of finite type and let
+$X=U_1\cup\dots\cup U_m$ be a finite affine open covering such that
+$U:=U_1\cap\dots\cap U_m$ is scheme-theoretically dense in $X$.  Choose, by
+\Cref{lem:chow-affine-immersion}, immersions
+$j_i\colon U_i\to\mathbf P^{n_i}_S$ and, by \Cref{lem:chow-closed-model},
+closed subschemes $Z_i\subseteq\mathbf P^{n_i}_S$ with $U_i\to Z_i$ a
+scheme-theoretically dense open immersion and $Z_i\to S$ proper.  Let
+$Z\subseteq\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ be the
+scheme-theoretic image of
+\[
+  j=(j_1|_U,\dots,j_m|_U)\colon U
+  \longrightarrow\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S .
+\]
+Then:
+\begin{enumerate}
+  \item $j$ induces an open immersion $U\to Z$ identifying $U$ with a
+  scheme-theoretically dense open subscheme of $Z$, and $Z\to S$ is proper;
+  \item for every $i$ the projection $\mathrm{pr}_i|_Z\colon
+  Z\to\mathbf P^{n_i}_S$ factors through $Z_i$, and the induced morphism
+  $p_i\colon Z\to Z_i$ is proper;
+  \item with $N=\prod_{i=1}^m(n_i+1)-1$, the composition of the closed
+  immersion $Z\to\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ with
+  the Segre embedding is a closed immersion $Z\to\mathbf P^N_S$;
+  \item $p_i|_U$ is the open immersion $U\to U_i\to Z_i$; in particular
+  $U\subseteq p_i^{-1}(U_i)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\uses{lem:chow-affine-immersion,lem:chow-closed-model,lem:chow-segre,lem:chow-tuple-immersion}
+Each $j_i|_U$ is an immersion, being the composition of the open immersion
+$U\to U_i$ with the immersion $j_i$, and each $\mathbf P^{n_i}_S$ is separated
+over $S$.  Hence $j$ is an immersion by \Cref{lem:chow-tuple-immersion}, and it
+is quasi-compact because $U$ is noetherian.  Part (1) now follows from
+\stacksproject{01RG} for the first assertion and from \Cref{lem:chow-segre}
+together with \stacksproject{01W5} for the second: $Z$ is a closed subscheme of
+the scheme $\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$, which is
+proper over $S$.
+
+For (2) note first that $Z_i$ is the scheme-theoretic image of
+$j_i|_U\colon U\to\mathbf P^{n_i}_S$: formation of the scheme-theoretic image
+commutes with restriction to the open $U_i\subseteq X$, so $U$ is
+scheme-theoretically dense in $U_i$, and $U_i$ is scheme-theoretically dense in
+$Z_i$ by the choice of $Z_i$.  Since $\mathrm{pr}_i\circ j=j_i|_U$, applying
+\stacksproject{01R9} to the commutative square with rows
+$U\to\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ and
+$U\to\mathbf P^{n_i}_S$ and right-hand vertical map $\mathrm{pr}_i$ yields the
+morphism $p_i\colon Z\to Z_i$ between the scheme-theoretic images.  It is
+proper: $Z\to S$ is proper by (1) and $Z_i\to S$ is separated, so $p_i$ is
+universally closed by \stacksproject{01W6}; moreover $p_i$ is separated and of
+finite type by the standing facts of \Cref{sec:chow-conventions}.
+
+Part (3) holds because $Z\to\mathbf P^{n_1}_S\times_S\dots\times_S
+\mathbf P^{n_m}_S$ is a closed immersion by construction, the Segre embedding
+is a closed immersion by \Cref{lem:chow-segre}, and compositions of closed
+immersions are closed immersions.
+
+Part (4) is immediate from $\mathrm{pr}_i\circ j=j_i|_U$ and the fact that
+$j_i$ identifies $U_i$ with an open subscheme of $Z_i$.
+\end{proof}
+
+\begin{lemma}[Gluing the projections]\label{lem:chow-glue}
+In the situation of \Cref{lem:chow-graph} put $V_i:=p_i^{-1}(U_i)$ and
+$X':=V_1\cup\dots\cup V_m$, an open subscheme of $Z$.  Then the morphisms
+$p_i|_{V_i}\colon V_i\to U_i\subseteq X$ glue to a morphism of $S$-schemes
+\[
+  \pi\colon X'\longrightarrow X
+\]
+with $\pi|_{V_i}=p_i|_{V_i}$, and $\pi|_U=\mathrm{id}_U$.
+\end{lemma}
+\begin{proof}
+\uses{lem:chow-graph,lem:chow-agree-on-dense-open}
+By \Cref{lem:chow-graph}\,(4) we have $U\subseteq V_i$ for every $i$, and
+$p_i|_U\colon U\to U_i\subseteq X$ is the inclusion.  Since $U$ is
+scheme-theoretically dense in $Z$ and $V_i\cap V_j\subseteq Z$ is open, $U$ is
+scheme-theoretically dense in $V_i\cap V_j$.  The two morphisms
+$p_i|_{V_i\cap V_j}$ and $p_j|_{V_i\cap V_j}$ into $X$ agree on $U$, and
+$X\to S$ is separated, so they are equal by
+\Cref{lem:chow-agree-on-dense-open}.  Hence the $p_i|_{V_i}$ glue to
+$\pi\colon X'\to X$, and $\pi|_U=\mathrm{id}_U$.
+\end{proof}
+
+\begin{lemma}[The preimages of the members of the cover]\label{lem:chow-preimage}
+In the situation of \Cref{lem:chow-glue} one has $\pi^{-1}(U_i)=V_i$ for every
+$i$.  Consequently $\pi^{-1}(U_i)\to U_i$ is the proper morphism
+$p_i|_{V_i}$.
+\end{lemma}
+\begin{proof}
+\uses{lem:chow-glue}
+The inclusion $V_i\subseteq\pi^{-1}(U_i)$ holds because $\pi|_{V_i}=p_i|_{V_i}$
+takes values in $U_i$.  The morphism $p_i|_{V_i}\colon V_i\to U_i$ is proper,
+being the base change of the proper morphism $p_i$ along the open immersion
+$U_i\to Z_i$.  The open subscheme $\pi^{-1}(U_i)\subseteq Z$ is separated over
+$S$, hence $\pi^{-1}(U_i)\to U_i$ is separated.  Applying \stacksproject{01W6}
+to the commutative triangle formed by $V_i\to\pi^{-1}(U_i)$ and the two
+morphisms to $U_i$, we conclude that $V_i\to\pi^{-1}(U_i)$ is universally
+closed; in particular $V_i$ is closed in $\pi^{-1}(U_i)$.  On the other hand
+$U\subseteq V_i$ and $U$ is dense in the open subscheme
+$\pi^{-1}(U_i)\subseteq Z$, so $V_i$ is dense in $\pi^{-1}(U_i)$.  Being closed
+and dense, $V_i=\pi^{-1}(U_i)$.
+\end{proof}
+
+\section{Proof of Chow's lemma}\label{sec:chow-lemma-proof}
+
+\begin{theorem}[Chow's lemma]\label{thm:chow-lemma}
+Let $S$ be a noetherian scheme and let $f\colon X\to S$ be a separated morphism
+of finite type.  Then there are an integer $n\geq0$, a scheme $X'$ over $S$, a
+morphism $\pi\colon X'\to X$ and an immersion $i\colon X'\to\mathbf P^n_S$ of
+$S$-schemes such that
+\begin{enumerate}
+  \item $\pi$ is proper and surjective, and
+  \item there is a dense open subscheme $U\subseteq X$ such that
+  $\pi^{-1}(U)\to U$ is an isomorphism.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\uses{lem:chow-affine-cover,lem:chow-scheme-theoretic-closure,lem:chow-graph,lem:chow-glue,lem:chow-preimage}
+By the standing facts of \Cref{sec:chow-conventions} the scheme $X$ is
+noetherian and has finitely many irreducible components, and it is
+quasi-compact and quasi-separated.
+
+\emph{Step 1: the cover.}  By \Cref{lem:chow-affine-cover} there is a finite
+affine open covering $X=U_1\cup\dots\cup U_m$ whose members all contain the
+generic points of the irreducible components of $X$, and
+$U:=U_1\cap\dots\cap U_m$ is a dense open subscheme of $X$.
+
+\emph{Step 2: reduction to $U$ scheme-theoretically dense.}  Let
+$X^{*}\subseteq X$ be the scheme-theoretic image of $U\to X$, as in
+\Cref{lem:chow-scheme-theoretic-closure}.  Then $X^{*}\to S$ is again separated
+of finite type, $X^{*}=\bigcup_iU_i^{*}$ is a finite affine open covering with
+$\bigcap_iU_i^{*}=U$, and $U$ is scheme-theoretically dense in $X^{*}$.
+It suffices to produce, for $X^{*}$ with the covering $\{U_i^{*}\}$ and the
+same open $U$, a proper surjective morphism $\pi^{*}\colon X'\to X^{*}$ and an
+immersion $X'\to\mathbf P^n_S$ such that $(\pi^{*})^{-1}(U)\to U$ is an
+isomorphism; this is exactly what Steps 3--7 below construct.  Indeed,
+$X^{*}\to X$ is a surjective closed immersion, hence proper and surjective, and
+it is an isomorphism over $U$; so $\pi:=(X^{*}\to X)\circ\pi^{*}$ is proper and
+surjective, $U$ is a dense open subscheme of $X$, and
+$\pi^{-1}(U)=(\pi^{*})^{-1}(U)\to U$ is an isomorphism.  We may therefore
+replace $X$ by $X^{*}$ and $U_i$ by $U_i^{*}$, and assume from now on that $U$
+is scheme-theoretically dense in $X$.
+
+\emph{Step 3: the graph.}  Apply \Cref{lem:chow-graph} to obtain immersions
+$j_i\colon U_i\to\mathbf P^{n_i}_S$, their closed models $Z_i$, the
+scheme-theoretic image $Z$ of $j=(j_1|_U,\dots,j_m|_U)$, the proper
+projections $p_i\colon Z\to Z_i$, and the closed immersion
+$Z\to\mathbf P^N_S$ with $N=\prod_i(n_i+1)-1$.
+
+\emph{Step 4: the modification.}  Put $V_i:=p_i^{-1}(U_i)$ and
+$X':=V_1\cup\dots\cup V_m$.  By \Cref{lem:chow-glue} the morphisms
+$p_i|_{V_i}$ glue to $\pi\colon X'\to X$ with $\pi|_U=\mathrm{id}_U$, and by
+\Cref{lem:chow-preimage} we have $\pi^{-1}(U_i)=V_i$ with
+$\pi^{-1}(U_i)\to U_i$ proper.
+
+\emph{Step 5: $\pi$ is proper and surjective.}  Properness is local on the
+target by \stacksproject{01W2}, and $X=\bigcup_iU_i$ is an open covering with
+$\pi^{-1}(U_i)\to U_i$ proper; hence $\pi$ is proper.  In particular
+$\pi(X')\subseteq X$ is closed.  It contains $U$ because
+$\pi|_U=\mathrm{id}_U$, and $U$ is dense in $X$; therefore $\pi(X')=X$.
+
+\emph{Step 6: $\pi$ is an isomorphism over $U$.}  Repeat the argument of
+\Cref{lem:chow-preimage} with $U_i$ replaced by $U$: the identity
+$U\to U$ is proper, $\pi^{-1}(U)\to U$ is separated, so
+\stacksproject{01W6} shows that $U\to\pi^{-1}(U)$ is universally closed and
+hence $U$ is closed in $\pi^{-1}(U)$; and $U$ is dense in the open subscheme
+$\pi^{-1}(U)\subseteq Z$.  Thus $U=\pi^{-1}(U)$ and $\pi^{-1}(U)\to U$ is the
+identity.
+
+\emph{Step 7: the immersion.}  The subscheme $X'\subseteq Z$ is open and
+$Z\to\mathbf P^N_S$ is a closed immersion by \Cref{lem:chow-graph}\,(3), so the
+composition $i\colon X'\to\mathbf P^N_S$ is an immersion.  Taking $n:=N$
+completes the proof.
+\end{proof}
+
+\begin{corollary}[Chow's lemma for proper morphisms]\label{cor:chow-lemma-proper}
+Let $S$ be a noetherian scheme and let $f\colon X\to S$ be a proper morphism.
+Then there are an integer $n\geq0$, a proper surjective morphism
+$\pi\colon X'\to X$ and a \emph{closed} immersion
+$i\colon X'\to\mathbf P^n_S$ of $S$-schemes; moreover $\pi$ is an isomorphism
+over a dense open subscheme of $X$.  In particular every proper $S$-scheme is
+dominated by a projective $S$-scheme through a proper surjective morphism.
+\end{corollary}
+\begin{proof}
+\uses{thm:chow-lemma}
+A proper morphism is separated and of finite type, so \Cref{thm:chow-lemma}
+applies and yields $\pi\colon X'\to X$ and an immersion
+$i\colon X'\to\mathbf P^n_S$ with the stated properties.  Both $f$ and $\pi$
+are proper, hence so is $f\circ\pi\colon X'\to S$.  Since $\mathbf P^n_S\to S$
+is separated, \stacksproject{01W6} shows that $i$ is universally closed; in
+particular $i(X')\subseteq\mathbf P^n_S$ is closed, and an immersion with
+closed image is a closed immersion by \stacksproject{01IQ}.  Thus $f\circ\pi$
+is the composition of the closed immersion $i$ with the structure morphism
+$\mathbf P^n_S\to S$, so $X'$ is projective over $S$.
+\end{proof}
+
+\begin{remark}[The non-noetherian variant]\label{rem:chow-lemma-non-noetherian}
+\uses{thm:chow-lemma}
+Noetherianness of $S$ is used only through the finiteness of the set of
+irreducible components of $X$ and through the quasi-compactness and
+quasi-separatedness assertions of \Cref{sec:chow-conventions}.  Accordingly,
+\Cref{thm:chow-lemma} remains true for a quasi-compact and quasi-separated
+scheme $S$ and a separated morphism $f\colon X\to S$ of finite type such that
+$X$ has finitely many irreducible components; see \stacksproject{0203}.  The
+proof of that variant proceeds by absolute noetherian approximation, writing
+$S$ as a limit of noetherian schemes and descending the data constructed
+above; it is not needed for the applications in this blueprint, where the base
+is always noetherian.
+\end{remark}
