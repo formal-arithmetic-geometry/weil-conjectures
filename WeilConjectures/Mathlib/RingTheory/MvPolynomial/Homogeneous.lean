@@ -9,21 +9,28 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
-# The degree-zero part of the total-degree grading on `MvPolynomial`
+# The total-degree grading on `MvPolynomial`
 
 For the total-degree grading `MvPolynomial.gradedAlgebra` on `MvPolynomial σ R`, the
 degree-zero part is the ring of constants. We record the resulting ring isomorphism and, for
 a finite index type, that `MvPolynomial σ R` is of finite type over its degree-zero part.
 
+We also record dehomogenization at a variable, i.e. substituting `1` for `X i`, and the
+behaviour of a homogeneous polynomial under rescaling all the variables by a common factor.
+
 ## Main definitions
 
 - `MvPolynomial.homogeneousSubmoduleZeroEquiv` — the isomorphism
   `R ≃+* MvPolynomial.homogeneousSubmodule σ R 0`, given by `r ↦ C r`.
+- `MvPolynomial.dehomogenize` — the ring homomorphism
+  `MvPolynomial σ R →+* MvPolynomial {j // j ≠ i} R` substituting `1` for the variable `X i`.
 
 ## Main results
 
 - `MvPolynomial.instFiniteTypeHomogeneousSubmoduleZero` — for `Finite σ`, the ring
   `MvPolynomial σ R` is of finite type over `MvPolynomial.homogeneousSubmodule σ R 0`.
+- `MvPolynomial.IsHomogeneous.eval₂_mul_left` — evaluating a homogeneous polynomial of
+  degree `n` at `t * g j` gives `t ^ n` times the evaluation at `g`.
 
 ## Implementation notes
 
@@ -68,5 +75,50 @@ instance [Finite σ] : Algebra.FiniteType (homogeneousSubmodule σ R 0) (MvPolyn
   | C r => exact Subalgebra.algebraMap_mem _ (homogeneousSubmoduleZeroEquiv σ R r)
   | add p q hp hq => exact add_mem hp hq
   | mul_X p i hp => exact mul_mem hp (Algebra.subset_adjoin (by simp))
+
+variable {σ R}
+
+/-- The variables are homogeneous of degree one. -/
+lemma X_mem_homogeneousSubmodule (i : σ) :
+    (X i : MvPolynomial σ R) ∈ homogeneousSubmodule σ R 1 :=
+  (mem_homogeneousSubmodule _ _).mpr (isHomogeneous_X R i)
+
+open scoped Classical in
+/-- Dehomogenization at the variable `i`: the ring homomorphism substituting `1` for `X i`
+and keeping the remaining variables. -/
+noncomputable def dehomogenize (i : σ) :
+    MvPolynomial σ R →+* MvPolynomial {j // j ≠ i} R :=
+  eval₂Hom C fun j ↦ if h : j = i then 1 else X ⟨j, h⟩
+
+@[simp]
+lemma dehomogenize_C (i : σ) (r : R) : dehomogenize i (C r) = C r := by
+  simp [dehomogenize]
+
+@[simp]
+lemma dehomogenize_X_self (i : σ) : dehomogenize (R := R) i (X i) = 1 := by
+  simp [dehomogenize]
+
+@[simp]
+lemma dehomogenize_X_of_ne (i : σ) (j : {j // j ≠ i}) :
+    dehomogenize (R := R) i (X j.1) = X j := by
+  simp [dehomogenize, j.2]
+
+/-- Evaluating a homogeneous polynomial of degree `n` at a rescaled family of elements
+`fun j ↦ t * g j` gives `t ^ n` times the evaluation at `g`. -/
+lemma IsHomogeneous.eval₂_mul_left {S : Type*} [CommSemiring S] {p : MvPolynomial σ R} {n : ℕ}
+    (hp : p.IsHomogeneous n) (f : R →+* S) (t : S) (g : σ → S) :
+    MvPolynomial.eval₂ f (fun j ↦ t * g j) p = t ^ n * MvPolynomial.eval₂ f g p := by
+  classical
+  conv_lhs => rw [p.as_sum]
+  conv_rhs => rw [p.as_sum]
+  rw [← coe_eval₂Hom, ← coe_eval₂Hom, map_sum, map_sum, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun m hm ↦ ?_
+  have hdeg : m.degree = n := by
+    rw [Finsupp.degree_eq_weight_one]
+    exact hp (mem_support_iff.mp hm)
+  simp only [coe_eval₂Hom, eval₂_monomial, mul_pow, Finsupp.prod]
+  rw [Finset.prod_mul_distrib, Finset.prod_pow_eq_pow_sum]
+  rw [show ∑ j ∈ m.support, m j = n from hdeg]
+  ring
 
 end MvPolynomial
