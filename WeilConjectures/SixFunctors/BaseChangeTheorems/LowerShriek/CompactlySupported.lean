@@ -50,9 +50,13 @@ stalkwise statement recorded separately
 
 - `AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology_openImmersionLowerShriek`:
   extension by zero along an open immersion preserves torsion cohomology.
-- `AlgebraicGeometry.Etale.lowerShriekProperBaseChange`: the base change theorem for the
-  lower shriek, for a bounded below complex with torsion cohomology.
-- `AlgebraicGeometry.Etale.isIso_lowerShriekBaseChange`: for a torsion coefficient ring,
+- `AlgebraicGeometry.Etale.lowerShriekProperBaseChangeOfSquares` and
+  `AlgebraicGeometry.Etale.lowerShriekProperBaseChange`: the base change theorem for the
+  lower shriek, for a bounded below complex with torsion cohomology, stated for a
+  morphism of compactifications over the square and specialized to the base-changed
+  compactification.
+- `AlgebraicGeometry.Etale.isIso_lowerShriekBaseChangeOfSquares` and
+  `AlgebraicGeometry.Etale.isIso_lowerShriekBaseChange`: for a torsion coefficient ring,
   the compact-support base-change transformation is an isomorphism of functors.
 
 -/
@@ -112,6 +116,30 @@ defining composite is an isomorphism by proper base change for the proper struct
 morphism `p`, applied to `i_! K`, whose cohomology is torsion since extension by zero
 preserves torsion cohomology; the extension-by-zero exchange is an isomorphism by
 construction. -/
+theorem Etale.lowerShriekProperBaseChangeOfSquares (c : Compactification f)
+    (c' : Compactification f') {w : c'.Z ⟶ c.Z}
+    (sqi : IsPullback g' c'.i c.i w) (sqg : IsPullback w c'.g c.g g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
+    IsIso ((Etale.lowerShriekBaseChangeOfSquares (ModuleCat.{u + 1} Λ) c c' sqi sqg).app K) := by
+  simp only [Functor.comp_obj, lowerShriekBaseChangeOfSquares, NatTrans.comp_app]
+  apply IsIso.comp_isIso'
+  · apply NatIso.hom_app_isIso
+  · apply IsIso.comp_isIso'
+    · --simp time out again
+      sorry
+    · apply IsIso.comp_isIso'
+      · apply NatIso.inv_app_isIso
+      · apply IsIso.comp_isIso'
+        · simp only [Functor.whiskerRight_app, Functor.comp_obj]
+          apply Functor.map_isIso
+        · apply NatIso.hom_app_isIso
+
+/-- **The base change theorem for the lower shriek**, for the base-changed
+compactification `c' = c.baseChange sq`: the case of
+`Etale.lowerShriekProperBaseChangeOfSquares` in which the morphism of compactifications
+is the projection `pullback.fst`, proved again rather than delegated for the reason
+recorded on `Etale.lowerShriekBaseChange`. -/
 theorem Etale.lowerShriekProperBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -141,6 +169,16 @@ finite, e.g. `Λ = ℤ/ℓⁿℤ` — then for a cartesian square and a compacti
 on the bounded below derived categories is an isomorphism: the direct-image exchange is
 an isomorphism of functors by proper base change for the proper structure morphism of
 the compactification, every complex automatically having torsion cohomology. -/
+theorem Etale.isIso_lowerShriekBaseChangeOfSquares (hΛ : IsAddTorsion Λ)
+    (c : Compactification f) (c' : Compactification f') {w : c'.Z ⟶ c.Z}
+    (sqi : IsPullback g' c'.i c.i w) (sqg : IsPullback w c'.g c.g g) :
+    IsIso (Etale.lowerShriekBaseChangeOfSquares (ModuleCat.{u + 1} Λ) c c' sqi sqg) := by
+  sorry
+
+/-- **The base change theorem for the lower shriek as an isomorphism of functors**, for
+the base-changed compactification `c' = c.baseChange sq`: the case of
+`Etale.isIso_lowerShriekBaseChangeOfSquares` in which the morphism of compactifications
+is the projection `pullback.fst`. -/
 theorem Etale.isIso_lowerShriekBaseChange (hΛ : IsAddTorsion Λ)
     (c : Compactification f) (sq : IsPullback g' f' f g) :
     IsIso (Etale.lowerShriekBaseChange (ModuleCat.{u + 1} Λ) c sq) := by

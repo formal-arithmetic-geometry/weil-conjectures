@@ -69,8 +69,12 @@ compactification `c`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlus`: the derived
   lower shriek `Rf_!^c = i_! ⋙ Rp_*` of a compactification on the bounded below derived
   categories.
+- `AlgebraicGeometry.Etale.lowerShriekBaseChangeOfSquares`: the compact-support
+  base-change morphism attached to a morphism of compactifications over a Cartesian
+  square.
 - `AlgebraicGeometry.Etale.lowerShriekBaseChange`: the compact-support base-change
-  morphism `Ex_!^c`.
+  morphism `Ex_!^c`, the special case of `Etale.lowerShriekBaseChangeOfSquares` for the
+  base-changed compactification `c.baseChange sq`.
 
 -/
 
@@ -222,6 +226,50 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [Monoi
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+/-- The compact-support base-change morphism `Ex_!` attached to a *morphism of
+compactifications over a Cartesian square*: compactifications `c = (X ⟶[i] Z ⟶[p] Y)` of
+`f` and `c' = (X' ⟶[i'] Z' ⟶[p'] Y')` of `f'`, together with a morphism `w : Z' ⟶ Z`
+making both
+
+```
+X' --g'--> X            Z' --w---> Z
+|          |            |          |
+i'         i            p'         p
+v          v            v          v
+Z' --w---> Z            Y' --g---> Y
+```
+
+Cartesian. It is assembled exactly as in the reference, from the direct-image exchange
+`Ex_*` of the right square (`Etale.baseChange`, no properness entering) and the inverse
+of the extension-by-zero exchange of the left square
+(`Etale.openImmersionLowerShriekBaseChangeIso`).
+
+The base-changed compactification `c.baseChange sq` of `Compactification.baseChange` is
+the universal such `c'`, giving back `Etale.lowerShriekBaseChange`; the extra generality
+is what allows a *Frobenius-equivariant* compactification, where `c' = c` and `w` is the
+geometric Frobenius of the compactifying scheme, to produce an exchange isomorphism
+between the *same* two functors, see `WeilConjectures.WeilSheaf.LowerShriek`. -/
+noncomputable def Etale.lowerShriekBaseChangeOfSquares (c : Compactification f)
+    (c' : Compactification f') {w : c'.Z ⟶ c.Z}
+    (sqi : IsPullback g' c'.i c.i w) (sqg : IsPullback w c'.g c.g g) :
+    Rf_!(c)[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
+    (g')^*[A].mapDerivedCategoryPlus ⋙ Rf_!(c')[A]+ :=
+  (Functor.associator _ _ _).hom ≫
+  Functor.whiskerLeft (c.i)_!open[A].mapDerivedCategoryPlus
+  (Etale.baseChange A sqg.toCommSq)
+  ≫ (Functor.associator _ _ _).inv ≫
+  (Functor.whiskerRight
+  (Etale.openImmersionLowerShriekBaseChangeIso A sqi).hom
+  R(c'.g)_*[A]+)
+  ≫ (Functor.associator _ _ _).hom
+
+/-- The compact-support base-change morphism `Ex_!^c` of a Cartesian square and a
+compactification `c` of `f`, targeting the base-changed compactification
+`c' = c.baseChange sq` of `f'`. It is the case of
+`Etale.lowerShriekBaseChangeOfSquares` in which the morphism of compactifications is the
+projection `pullback.fst : Z ×_Y Y' ⟶ Z`, spelled out again rather than delegated: the
+two are definitionally equal, but the kernel does not check that identification within
+its budget. -/
 noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g) :
     Rf_!(c)[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
