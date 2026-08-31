@@ -21,6 +21,11 @@ complement of the range of `j`. This file shows that the short complex
 of `WeilConjectures.SixFunctors.OpenClosed.Complex` is short exact, for every sheaf `F` on the
 small étale site of `X`.
 
+This is the excision sequence of étale cohomology; it is classical, see Milne, *Étale
+Cohomology*, II.3, or SGA 4. The proof below is organised so that the one step which is not
+formal — the stalks of `i_*` — is isolated in
+`WeilConjectures.SixFunctors.OpenClosed.Stalk`.
+
 ## The argument
 
 The two restrictions `j^*` and `i^*` are exact and jointly reflect isomorphisms
