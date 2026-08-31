@@ -172,7 +172,7 @@ adjunctions turn `Hom(k^* j_! F, H)` into `Hom(F, j^* k_* H)`, and `j^* k_* H` v
 `k` exchanged. -/
 noncomputable def Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
-    IsInitial ((Etale.openImmersionRestriction A k).obj ((j)_!Imm[A].obj F)) := by
+    IsInitial ((Etale.openImmersionRestriction A k).obj ((j)_!open[A].obj F)) := by
   refine IsInitial.ofUnique (h := fun H => ?_)
   haveI : Unique (F ⟶ (Etale.openImmersionRestriction A j).obj ((k)_*[A].obj H)) := by
     have hz := Etale.isZero_openImmersionRestriction_lowerStar A k j

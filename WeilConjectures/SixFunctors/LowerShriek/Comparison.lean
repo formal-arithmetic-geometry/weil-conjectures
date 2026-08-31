@@ -98,10 +98,10 @@ pushforward along an open immersion, obtained from the adjoint triple `i_! ⊣ i
 insert the inverse of the counit of `i^* ⊣ i_*` and contract with the counit of
 `i_! ⊣ i^*`. -/
 noncomputable def Etale.openImmersionLowerShriekToLowerStar :
-    (j)_!Imm[A] ⟶ (j)_*[A] :=
+    (j)_!open[A] ⟶ (j)_*[A] :=
   (Functor.leftUnitor _).inv ≫
     Functor.whiskerRight (inv (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit)
-      (j)_!Imm[A] ≫
+      (j)_!open[A] ≫
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (j)_*[A]
       (Etale.openImmersionLowerShriekAdjunction A j).counit ≫
@@ -113,7 +113,7 @@ definition are identities, so at `F` it is `j_!` of the inverted counit of `j^* 
 followed by the counit of `j_! ⊣ j^*` at `j_* F`. -/
 lemma Etale.openImmersionLowerShriekToLowerStar_app (F : Sheaf U.smallEtaleTopology A) :
     (Etale.openImmersionLowerShriekToLowerStar A j).app F =
-      (j)_!Imm[A].map
+      (j)_!open[A].map
           ((inv (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit).app F) ≫
         (Etale.openImmersionLowerShriekAdjunction A j).counit.app ((j)_*[A].obj F) := by
   simp only [Etale.openImmersionLowerShriekToLowerStar, NatTrans.comp_app,
