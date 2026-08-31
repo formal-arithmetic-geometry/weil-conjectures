@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-!
 # Compatibility of the unbounded right derived functor with `rightDerivedFunctorPlus`
@@ -22,6 +23,10 @@ derived category with the right derived functor
   DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor`
 
 (`Functor.rightDerivedFunctorPlusCompatibility`).
+
+For an *exact* `F` this identifies `F.rightDerivedFunctorPlus` with the levelwise functor
+`F.mapDerivedCategoryPlus` (`Functor.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus`),
+the bounded below counterpart of `Functor.rightDerivedFunctorIsoMapDerivedCategory`.
 -/
 
 @[expose] public section
@@ -87,6 +92,22 @@ noncomputable def rightDerivedFunctorPlusCompatibility :
       DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor :=
   Functor.rightDerivedUnique _ _ F.rightDerivedFunctorPlusιUnit F.ιRightDerivedFunctorUnit
     (HomotopyCategory.Plus.quasiIso C)
+
+/-- For an *exact* functor the bounded below right derived functor is the functor induced
+by applying the functor levelwise: both restrict the unbounded total right derived
+functor, which is `F.mapDerivedCategory` by
+`Functor.rightDerivedFunctorIsoMapDerivedCategory`, along the fully faithful inclusion
+`DerivedCategory.Plus.ι`. This is the bounded below counterpart of
+`Functor.rightDerivedFunctorIsoMapDerivedCategory`; no resolution is needed to compute
+the right derived functor of an exact functor. -/
+noncomputable def rightDerivedFunctorPlusIsoMapDerivedCategoryPlus
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    F.rightDerivedFunctorPlus ≅ F.mapDerivedCategoryPlus :=
+  Functor.fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    (F.rightDerivedFunctorPlusCompatibility ≪≫
+      Functor.isoWhiskerLeft DerivedCategory.Plus.ι
+        F.rightDerivedFunctorIsoMapDerivedCategory ≪≫
+      F.mapDerivedCategoryPlusCompatibility.symm)
 
 end Functor
 

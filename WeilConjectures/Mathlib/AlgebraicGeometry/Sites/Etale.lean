@@ -12,6 +12,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 /-!
 # Complements on the small étale site
 
+- `AlgebraicGeometry.Scheme.isTerminalEtaleMkIso`: an object of the small étale site whose
+  structure morphism is an isomorphism is terminal.
 - `AlgebraicGeometry.Scheme.Hom.Etale`: the base change functor `Y.Etale ⥤ X.Etale`
   along a morphism `f : X ⟶ Y`; it preserves finite limits.
 - `AlgebraicGeometry.Scheme.Etale.baseChange` and
@@ -39,6 +41,21 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme
 
 variable {A : Type u'} [Category.{v} A] {X Y : Scheme.{u}}
+
+section Terminal
+
+/-- An object of the small étale site of `X` whose structure morphism is an *isomorphism*
+`e : W ≅ X` is terminal: the unique morphism from `V ⟶ X` is `e⁻¹` composed with the
+structure morphism of `V`. For `e = Iso.refl X` this is the terminal object `𝟙 X`. -/
+def isTerminalEtaleMkIso {W : Scheme.{u}} (e : W ≅ X) [AlgebraicGeometry.Etale e.hom] :
+    IsTerminal (Etale.mk e.hom) :=
+  IsTerminal.ofUniqueHom
+    (fun V => MorphismProperty.Over.homMk (V.hom ≫ e.inv)
+      (show (V.hom ≫ e.inv) ≫ e.hom = V.hom by simp) trivial)
+    (fun _ f => MorphismProperty.Over.Hom.ext
+      ((Iso.eq_comp_inv e).2 (MorphismProperty.Over.w f)))
+
+end Terminal
 
 section Functoriality
 
