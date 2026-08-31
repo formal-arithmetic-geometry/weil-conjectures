@@ -24,6 +24,9 @@ conservativity is proved by evaluating at such points, each of which lives on `U
 - `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl` — a morphism from the spectrum
   of a field to `X` factors uniquely through `j` or uniquely through `i`
   (blueprint: `lemma:openclosed-point-factors`).
+- `AlgebraicGeometry.disjoint_range_of_range_eq_compl` — the two ranges of a complementary
+  pair are disjoint. This is the half of the complementarity condition that the formal part
+  of the argument uses.
 -/
 
 @[expose] public section
@@ -54,10 +57,19 @@ theorem existsUnique_fac_or_fac_of_range_eq_compl {X U Z : Scheme.{u}} (j : U �
     (∃! t : Spec (CommRingCat.of K) ⟶ U, t ≫ j = s) ∨
       (∃! t : Spec (CommRingCat.of K) ⟶ Z, t ≫ i = s) := by
   by_cases hs : s.base (IsLocalRing.closedPoint K) ∈ Set.range j.base
-  · refine .inl ⟨IsOpenImmersion.lift j s ?_, IsOpenImmersion.lift_fac _ _ _,
+  · exact .inl ⟨IsOpenImmersion.lift j s (Scheme.range_base_subset_of_closedPoint_mem s hs),
+      IsOpenImmersion.lift_fac _ _ _,
       fun t ht ↦ by rw [← cancel_mono j, ht, IsOpenImmersion.lift_fac]⟩
-    rintro _ ⟨p, rfl⟩
-    rwa [Subsingleton.elim p (IsLocalRing.closedPoint K)]
   · exact .inr (IsClosedImmersion.existsUnique_fac_of_field i s (hij ▸ hs))
+
+/-- **The ranges of a complementary pair are disjoint.** This is the half of the
+complementarity condition `Set.range i.base = (Set.range j.base)ᶜ` that the formal part of
+the open--closed argument uses; the other half, that the two ranges cover `X`, enters only
+through `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl`. -/
+lemma disjoint_range_of_range_eq_compl {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    Disjoint (Set.range j.base) (Set.range i.base) := by
+  rw [hij]
+  exact disjoint_compl_right
 
 end AlgebraicGeometry

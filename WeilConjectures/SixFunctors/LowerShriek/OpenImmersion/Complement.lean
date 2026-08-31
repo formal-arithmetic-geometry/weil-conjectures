@@ -111,19 +111,17 @@ set_option backward.isDefEq.respectTransparency false in
 are disjoint: `T` maps into the range of `k`, which misses the range of `j`. Only `k` is used
 as an open immersion here; `j` may be an arbitrary morphism. -/
 lemma Scheme.Etale.isEmpty_left_pullback_map
-    (hjk : Set.range j.base ∩ Set.range k.base = ∅) (T : W.Etale) :
+    (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (T : W.Etale) :
     IsEmpty ((MorphismProperty.Over.pullback @Etale ⊤ j).obj
       ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ k)).obj T)).left := by
-  refine Scheme.isEmpty_pullback (T.hom ≫ k) j
-    (Set.disjoint_iff_inter_eq_empty.mpr (Set.eq_empty_of_subset_empty ?_))
-  rintro x ⟨⟨t, rfl⟩, hx⟩
-  rw [← hjk]
-  exact ⟨hx, ⟨T.hom.base t, rfl⟩⟩
+  refine Scheme.isEmpty_pullback (T.hom ≫ k) j (Set.disjoint_left.mpr ?_)
+  rintro x ⟨t, rfl⟩ hx
+  exact Set.disjoint_left.mp hjk hx ⟨T.hom.base t, rfl⟩
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The sections of `k^* j_* F` over `T : W.Etale` are `F(T ×_X U) = F(∅)`, hence terminal. -/
 noncomputable def Etale.isTerminalSections_openImmersionRestriction_lowerStar
-    (hjk : Set.range j.base ∩ Set.range k.base = ∅)
+    (hjk : Disjoint (Set.range j.base) (Set.range k.base))
     (F : Sheaf U.smallEtaleTopology A) (T : W.Etale) :
     IsTerminal ((((Etale.openImmersionRestriction A k).obj
       ((j)_*[A].obj F))).obj.obj (op T)) :=
@@ -138,7 +136,7 @@ omit [IsGrothendieckAbelian.{u + 1} A] [IsOpenImmersion j] in
 `AlgebraicGeometry.Scheme.Etale.isEmpty_left_pullback_map` this does not use that `j` is an
 open immersion. -/
 lemma Etale.isZero_openImmersionRestriction_lowerStar
-    (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
+    (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (F : Sheaf U.smallEtaleTopology A) :
     IsZero ((Etale.openImmersionRestriction A k).obj ((j)_*[A].obj F)) := by
   refine Sheaf.isZero_of_isZero_obj _ ?_
   rintro ⟨T⟩
@@ -152,13 +150,12 @@ adjunctions turn `Hom(k^* j_! F, H)` into `Hom(F, j^* k_* H)`, and `j^* k_* H` v
 `AlgebraicGeometry.Etale.isZero_openImmersionRestriction_lowerStar` with the roles of `j` and
 `k` exchanged. -/
 noncomputable def Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek
-    (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
+    (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (F : Sheaf U.smallEtaleTopology A) :
     IsInitial ((Etale.openImmersionRestriction A k).obj ((j)_!open[A].obj F)) := by
-  refine IsInitial.ofUnique (h := fun H => ?_)
-  haveI : Unique (F ⟶ (Etale.openImmersionRestriction A j).obj ((k)_*[A].obj H)) := by
-    have hz := Etale.isZero_openImmersionRestriction_lowerStar A k j
-      (by rw [Set.inter_comm]; exact hjk) H
-    exact ⟨⟨hz.isTerminal.from F⟩, fun a => hz.isTerminal.hom_ext _ _⟩
+  refine IsInitial.ofUnique (h := fun H ↦ ?_)
+  have : Unique (F ⟶ (Etale.openImmersionRestriction A j).obj ((k)_*[A].obj H)) := by
+    have hz := Etale.isZero_openImmersionRestriction_lowerStar A k j hjk.symm H
+    exact ⟨⟨hz.isTerminal.from F⟩, fun _ ↦ hz.isTerminal.hom_ext _ _⟩
   exact Equiv.unique
     (((Etale.openImmersionRestrictionLowerStarAdjunction A k).homEquiv _ H).trans
       ((Etale.openImmersionLowerShriekAdjunction A j).homEquiv F _))
@@ -168,7 +165,7 @@ set_option backward.isDefEq.respectTransparency false in
 are initial, and a morphism out of an initial object is unique, so it agrees with the canonical
 isomorphism between the two. -/
 lemma Etale.isIso_openImmersionRestriction_openImmersionLowerShriekToLowerStar
-    (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf U.smallEtaleTopology A) :
+    (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (F : Sheaf U.smallEtaleTopology A) :
     IsIso ((Etale.openImmersionRestriction A k).map
       ((Etale.openImmersionLowerShriekToLowerStar A j).app F)) := by
   have hS := Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek A j k hjk F

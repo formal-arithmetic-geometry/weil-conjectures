@@ -12,24 +12,24 @@ public import Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 
 /-!
-# Etale morphisms lift locally along a closed immersion
+# Étale morphisms lift locally along a closed immersion
 
-Let `i : Z ⟶ X` be a closed immersion of schemes and `p : W ⟶ Z` an etale morphism. Then `W` is,
-in a neighbourhood of any of its points, the base change along `i` of a scheme etale over `X`.
+Let `i : Z ⟶ X` be a closed immersion of schemes and `p : W ⟶ Z` an étale morphism. Then `W` is,
+in a neighbourhood of any of its points, the base change along `i` of a scheme étale over `X`.
 
-This is the geometric counterpart of the ring theoretic statement that a standard etale algebra
-over a quotient `R ⧸ I` is the base change of a standard etale algebra over `R`
+This is the geometric counterpart of the ring theoretic statement that a standard étale algebra
+over a quotient `R ⧸ I` is the base change of a standard étale algebra over `R`
 (`Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor`): everything is local on `X` and on
 `W`, so the lift is produced inside a single affine chart and no gluing is involved.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: for every point `w` of `W`
-  there is an open neighbourhood `W₀` of `w` in `W` and an etale morphism `q : V ⟶ X` such that
+  there is an open neighbourhood `W₀` of `w` in `W` and an étale morphism `q : V ⟶ X` such that
   `W₀` is the fibre product `V ×[X] Z`, compatibly with `p`.
 - `AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`: the pointed form. Given a
   morphism `s : Spec Ω ⟶ W` with `Ω` a field — in the application a geometric point of `W` — there
-  is an etale `q : V ⟶ X` and a morphism `V ×[X] Z ⟶ W` over `Z` through which `s` factors.
+  is an étale `q : V ⟶ X` and a morphism `V ×[X] Z ⟶ W` over `Z` through which `s` factors.
 -/
 
 @[expose] public section
@@ -40,9 +40,9 @@ open CategoryTheory Limits TensorProduct
 
 namespace AlgebraicGeometry
 
-/-- **Etale morphisms lift locally along a closed immersion.** If `i : Z ⟶ X` is a closed
-immersion and `p : W ⟶ Z` is etale, then every point `w` of `W` has an open neighbourhood `W₀`
-which is the base change along `i` of a scheme `V` etale over `X`, in a way compatible with `p`:
+/-- **Étale morphisms lift locally along a closed immersion.** If `i : Z ⟶ X` is a closed
+immersion and `p : W ⟶ Z` is étale, then every point `w` of `W` has an open neighbourhood `W₀`
+which is the base change along `i` of a scheme `V` étale over `X`, in a way compatible with `p`:
 the square
 ```
 W₀ ------- a -------> V
@@ -71,18 +71,20 @@ theorem Etale.exists_isPullback_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z
     Spec.preimage (hW'.isoSpec.inv ≫ p.resLE (i ⁻¹ᵁ U) W' hW'le ≫ e.hom)
   have hψ : Spec.map ψ = hW'.isoSpec.inv ≫ p.resLE (i ⁻¹ᵁ U) W' hW'le ≫ e.hom :=
     Spec.map_preimage _
-  have hψet : Etale (Spec.map ψ) := by rw [hψ]; infer_instance
+  have hψet : Etale (Spec.map ψ) := by
+    rw [hψ]
+    infer_instance
   let _ : Algebra (↥Γ(X, U) ⧸ I) ↥Γ(W, W') := ψ.hom.toAlgebra
   have : Algebra.Etale (↥Γ(X, U) ⧸ I) ↥Γ(W, W') := HasRingHomProperty.Spec_iff.mp hψet
-  -- shrink `W'` to a basic open on which `Γ(W, -)` is standard etale over `Γ(X, U) ⧸ I`, and
-  -- lift that standard etale algebra to `Γ(X, U)`
+  -- shrink `W'` to a basic open on which `Γ(W, -)` is standard étale over `Γ(X, U) ⧸ I`, and
+  -- lift that standard étale algebra to `Γ(X, U)`
   obtain ⟨a, ha, hst⟩ := Algebra.IsEtaleAt.exists_isStandardEtale
     (R := ↥Γ(X, U) ⧸ I) (hW'.primeIdealOf ⟨w, hwW'⟩).asIdeal
   obtain ⟨T, _, _, hT, ⟨E⟩⟩ := Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor
     (R := ↥Γ(X, U)) (Localization.Away a) I
   have hw₀ : w ∈ W.basicOpen a := by
     have : hW'.primeIdealOf ⟨w, hwW'⟩ ∈ hW'.fromSpec ⁻¹ᵁ W.basicOpen a := by
-      rw [hW'.fromSpec_preimage_basicOpen a]; exact ha
+      rwa [hW'.fromSpec_preimage_basicOpen a]
     rwa [Scheme.Hom.mem_preimage, hW'.fromSpec_primeIdealOf ⟨w, hwW'⟩] at this
   have hloc : IsLocalization.Away a ↥Γ(W, W.basicOpen a) := hW'.isLocalization_basicOpen a
   -- `Γ(W, W.basicOpen a)` is the base change of `T` along `Γ(X, U) ⟶ Γ(X, U) ⧸ I`
@@ -151,8 +153,8 @@ theorem Etale.exists_isPullback_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z
   exact ⟨W.basicOpen a, hw₀, Spec (CommRingCat.of T), _, inferInstance, _, hpaste⟩
 
 /-- The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
-`i : Z ⟶ X` is a closed immersion, `p : W ⟶ Z` is etale and `s : Spec Ω ⟶ W` is a point of `W`
-with values in a field `Ω`, then there is an etale morphism `q : V ⟶ X` together with a morphism
+`i : Z ⟶ X` is a closed immersion, `p : W ⟶ Z` is étale and `s : Spec Ω ⟶ W` is a point of `W`
+with values in a field `Ω`, then there is an étale morphism `q : V ⟶ X` together with a morphism
 `g : V ×[X] Z ⟶ W` over `Z` through which `s` factors. -/
 theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (p : W ⟶ Z) [Etale p] {Ω : Type u} [Field Ω]

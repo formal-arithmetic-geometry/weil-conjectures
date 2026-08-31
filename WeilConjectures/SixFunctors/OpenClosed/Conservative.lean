@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.SixFunctors.OpenClosed.Points
-public import WeilConjectures.SixFunctors.OpenClosed.Stalk
+public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
 
 /-!
 
@@ -34,6 +34,8 @@ by assumption; likewise for `i`.
   and `i^*` at `false` (blueprint: `prop:openclosed-conservative`).
 - `AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map`: the same statement in the
   two-hypothesis form, for a human caller.
+- `AlgebraicGeometry.Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map`: the step
+  both cases of the proof use, for an arbitrary morphism `f : W ⟶ X`.
 
 ## Implementation notes
 
@@ -65,12 +67,24 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
+/-- The fibre at a geometric point of the form `t ≫ f` of a morphism of étale sheaves whose
+restriction along `f` is invertible is invertible: by
+`AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso` that fibre is the fibre at `t` of
+the restriction `f^* φ`. -/
+lemma Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map {W : Scheme.{u}} (f : W ⟶ X)
+    {F G : Sheaf X.smallEtaleTopology A} (φ : F ⟶ G) (hf : IsIso ((f)^*[A].map φ))
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ W) :
+    IsIso (((pointSmallEtale (t ≫ f)).ulift.{u + 1}).sheafFiber.map φ) := by
+  have := hf
+  refine (NatIso.isIso_map_iff (Etale.upperStarCompUliftSheafFiberIso A f t) φ).1 ?_
+  rw [Functor.comp_map]
+  infer_instance
+
 include hij in
 /-- The fibre at a geometric point `s : Spec Ω ⟶ X` of a morphism of étale sheaves whose
 restrictions along `j` and along `i` are invertible is invertible: `s` factors through `j` or
-through `i` by `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl`, and the fibre
-at `s` is then the fibre of the corresponding restriction of the morphism by
-`AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso`. -/
+through `i` by `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl`, and either case
+is `AlgebraicGeometry.Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map`. -/
 lemma Etale.isIso_uliftSheafFiber_map_of_isIso_upperStar_map
     {F G : Sheaf X.smallEtaleTopology A} (φ : F ⟶ G)
     (hj : IsIso ((j)^*[A].map φ)) (hi : IsIso ((i)^*[A].map φ))
@@ -78,15 +92,9 @@ lemma Etale.isIso_uliftSheafFiber_map_of_isIso_upperStar_map
     IsIso (((pointSmallEtale s).ulift.{u + 1}).sheafFiber.map φ) := by
   obtain ⟨t, ht, -⟩ | ⟨t, ht, -⟩ := existsUnique_fac_or_fac_of_range_eq_compl j i hij s
   · subst ht
-    have := hj
-    refine (NatIso.isIso_map_iff (Etale.upperStarCompUliftSheafFiberIso A j t) φ).1 ?_
-    rw [Functor.comp_map]
-    infer_instance
+    exact Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map A j φ hj t
   · subst ht
-    have := hi
-    refine (NatIso.isIso_map_iff (Etale.upperStarCompUliftSheafFiberIso A i t) φ).1 ?_
-    rw [Functor.comp_map]
-    infer_instance
+    exact Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map A i φ hi t
 
 variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]

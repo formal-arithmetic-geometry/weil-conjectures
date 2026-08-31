@@ -37,15 +37,25 @@ namespace CategoryTheory
 
 variable {C : Type u} [Category.{v} C] {D₁ D₂ : Type u₁} [Category.{v₁} D₁] [Category.{v₁} D₂]
 
-/-- The two-element family of categories with value `D₁` at `true` and `D₂` at `false`. -/
-instance instCategoryCond (b : Bool) : Category.{v₁} (cond b D₁ D₂) :=
+/-- The two-element family of categories with value `D₁` at `true` and `D₂` at `false`.
+
+This is a `scoped instance`: its head is `cond b D₁ D₂` with `D₁` and `D₂` implicit, so as a
+global instance it would be tried on every goal of that shape and then have to solve two
+side goals. -/
+scoped instance instCategoryCond (b : Bool) : Category.{v₁} (cond b D₁ D₂) :=
   Bool.rec (motive := fun b ↦ Category.{v₁} (cond b D₁ D₂)) ‹Category D₂› ‹Category D₁› b
 
 variable (F₁ : C ⥤ D₁) (F₂ : C ⥤ D₂)
 
 /-- The two-element family of functors with value `F₁ : C ⥤ D₁` at `true` and `F₂ : C ⥤ D₂`
 at `false`. This is the shape in which a pair of functors is fed to
-`CategoryTheory.JointlyReflectIsomorphisms` and to the lemmas about it. -/
+`CategoryTheory.JointlyReflectIsomorphisms` and to the lemmas about it.
+
+The index type is `Bool` and the family of target categories is `fun b ↦ cond b D₁ D₂`,
+rather than `Fin 2` with a `Matrix.cons` or a `Sum`: `cond` is the eliminator of `Bool`, so
+`cond true D₁ D₂` and `cond false D₁ D₂` reduce to `D₁` and `D₂` by `rfl`, and every
+statement about the family therefore splits into two goals about `F₁` and `F₂` with no
+transport. -/
 def pairFunctor (b : Bool) : C ⥤ cond b D₁ D₂ :=
   Bool.rec (motive := fun b ↦ C ⥤ cond b D₁ D₂) F₂ F₁ b
 
@@ -71,6 +81,8 @@ functors: a morphism sent to an isomorphism by both `F₁` and `F₂` is an isom
 lemma JointlyReflectIsomorphisms.isIso_of_pairFunctor
     (hP : JointlyReflectIsomorphisms (pairFunctor F₁ F₂)) {X Y : C} (f : X ⟶ Y)
     (h₁ : IsIso (F₁.map f)) (h₂ : IsIso (F₂.map f)) : IsIso f :=
-  (hP.isIso_iff f).2 fun b ↦ by cases b; exacts [h₂, h₁]
+  (hP.isIso_iff f).2 fun b ↦ by
+    cases b
+    exacts [h₂, h₁]
 
 end CategoryTheory

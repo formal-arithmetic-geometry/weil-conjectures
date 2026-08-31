@@ -65,8 +65,8 @@ lemma ulift_fiber_map {X Y : C} (f : X ⟶ Y) (x : (Φ.ulift.{w'}).fiber.obj X) 
 
 variable (A : Type u') [Category.{v'} A] [HasColimitsOfSize.{max w w', max w w'} A]
 
-/-- Auxiliary instance: the colimits needed by `Φ.presheafFiber` exist as soon as those
-needed by `(Φ.ulift).presheafFiber` do. -/
+-- the colimits needed by `Φ.presheafFiber` exist as soon as those needed by
+-- `(Φ.ulift).presheafFiber` do
 local instance : HasColimitsOfSize.{w, w} A := hasColimitsOfSizeShrink.{w, w, w', w'} A
 
 /-- Taking the fibre of an `A`-valued presheaf at a point of a site does not depend on the

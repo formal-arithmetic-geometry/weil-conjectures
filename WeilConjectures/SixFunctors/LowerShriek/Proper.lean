@@ -63,8 +63,9 @@ theorem Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range
     by_cases hx : x ∈ Set.range j.base
     · exact ⟨0, hx⟩
     · exact ⟨1, hW.ge hx⟩
-  have hjk : Set.range j.base ∩ Set.range W.ι.base = ∅ := by
-    rw [hW, Set.inter_compl_self]
+  have hjk : Disjoint (Set.range j.base) (Set.range W.ι.base) := by
+    rw [hW]
+    exact disjoint_compl_right
   have happ : ∀ F, IsIso ((Etale.openImmersionLowerShriekToLowerStar A j).app F) := fun F ↦ by
     refine Etale.isIso_of_isIso_localizationRestriction A _ g hcover
       (Fin.cases ?_ (Fin.cases ?_ fun i ↦ i.elim0))

@@ -49,10 +49,12 @@ variable {R : Type u} {S : Type v} [CommRing R] [CommRing S]
 
 namespace StandardEtalePair
 
+/-- Two standard etale pairs over `R` with the same `f` and the same `g` are equal: the
+remaining fields of `StandardEtalePair` are proofs. -/
 @[ext]
 protected lemma ext {P Q : StandardEtalePair R} (hf : P.f = Q.f) (hg : P.g = Q.g) : P = Q := by
-  obtain ⟨f₁, hm₁, g₁, hc₁⟩ := P
-  obtain ⟨f₂, hm₂, g₂, hc₂⟩ := Q
+  obtain ⟨f₁, _, g₁, _⟩ := P
+  obtain ⟨f₂, _, g₂, _⟩ := Q
   obtain rfl : f₁ = f₂ := hf
   obtain rfl : g₁ = g₂ := hg
   rfl
@@ -89,7 +91,12 @@ def mulDerivativeRingEquiv (P : StandardEtalePair R) : P.mulDerivative.Ring ≃�
     simp only [mulDerivative_g, map_mul] at h
     exact isUnit_of_mul_isUnit_left h
   exact .ofAlgHom (P.mulDerivative.lift P.X h₁) (P.lift P.mulDerivative.X h₂)
-    (by ext; simp) (by ext; simp)
+    (by
+      ext
+      simp)
+    (by
+      ext
+      simp)
 
 /-- `P.Ring` as a standard etale presentation of itself. -/
 def presentation (P : StandardEtalePair R) : StandardEtalePresentation R P.Ring where

@@ -67,10 +67,10 @@ open Etale
 `AlgebraicGeometry.Etale.isZero_openImmersionRestriction_lowerStar` transported along
 `AlgebraicGeometry.Etale.upperStarIsoOpenImmersionRestriction`. -/
 lemma Etale.isZero_upperStar_lowerStar_of_disjoint_range
-    (hji : Set.range j.base ∩ Set.range i.base = ∅) (H : Sheaf Z.smallEtaleTopology A) :
+    (hji : Disjoint (Set.range j.base) (Set.range i.base))
+    (H : Sheaf Z.smallEtaleTopology A) :
     IsZero ((j)^*[A].obj ((i)_*[A].obj H)) :=
-  (Etale.isZero_openImmersionRestriction_lowerStar A i j
-      (by rw [Set.inter_comm]; exact hji) H).of_iso
+  (Etale.isZero_openImmersionRestriction_lowerStar A i j hji.symm H).of_iso
     ((Etale.upperStarIsoOpenImmersionRestriction A j).app ((i)_*[A].obj H))
 
 /-- **`i^* j_! G` vanishes** when the ranges of `j` and `i` are disjoint. No section of
@@ -79,17 +79,16 @@ lemma Etale.isZero_upperStar_lowerStar_of_disjoint_range
 `AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range`. So `i^* j_! G` is
 initial, and an initial object of a category with zero morphisms is a zero object. -/
 lemma Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range
-    (hji : Set.range j.base ∩ Set.range i.base = ∅) (G : Sheaf U.smallEtaleTopology A) :
+    (hji : Disjoint (Set.range j.base) (Set.range i.base))
+    (G : Sheaf U.smallEtaleTopology A) :
     IsZero ((i)^*[A].obj ((j)_!open[A].obj G)) := by
-  have hinit : IsInitial ((i)^*[A].obj ((j)_!open[A].obj G)) := by
-    refine IsInitial.ofUnique (h := fun H => ?_)
-    haveI : Unique (G ⟶ (j)^*[A].obj ((i)_*[A].obj H)) :=
-      have hz := Etale.isZero_upperStar_lowerStar_of_disjoint_range A j i hji H
-      ⟨⟨hz.isTerminal.from G⟩, fun _ => hz.isTerminal.hom_ext _ _⟩
-    exact Equiv.unique
-      (((Etale.upperStarLowerStarAdjunction A i).homEquiv ((j)_!open[A].obj G) H).trans
-        ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).homEquiv G ((i)_*[A].obj H)))
-  exact hinit.isZero
+  refine IsInitial.isZero (IsInitial.ofUnique (h := fun H ↦ ?_))
+  have : Unique (G ⟶ (j)^*[A].obj ((i)_*[A].obj H)) :=
+    have hz := Etale.isZero_upperStar_lowerStar_of_disjoint_range A j i hji H
+    ⟨⟨hz.isTerminal.from G⟩, fun _ ↦ hz.isTerminal.hom_ext _ _⟩
+  exact Equiv.unique
+    (((Etale.upperStarLowerStarAdjunction A i).homEquiv ((j)_!open[A].obj G) H).trans
+      ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).homEquiv G ((i)_*[A].obj H)))
 
 end Vanishing
 

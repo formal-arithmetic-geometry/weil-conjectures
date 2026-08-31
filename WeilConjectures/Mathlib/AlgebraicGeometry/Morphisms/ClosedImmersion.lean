@@ -52,7 +52,11 @@ uniquely through it. The case that gets used is a morphism from the spectrum of 
 - `AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_range_subset_range` — a morphism
   from a reduced scheme whose range is contained in the range of a closed immersion factors
   uniquely through it, with `AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_field`
-  the special case of a morphism from the spectrum of a field.
+  the special case of a morphism from the spectrum of a field;
+- `AlgebraicGeometry.Scheme.range_base_subset_of_closedPoint_mem` — a morphism from the
+  spectrum of a field has its whole range inside any set containing the image of the closed
+  point, the observation which turns the pointwise hypothesis of the previous statement into
+  a hypothesis on ranges.
 -/
 
 @[expose] public section
@@ -156,6 +160,14 @@ theorem IsClosedImmersion.existsUnique_fac_of_range_subset_range [IsReduced X] (
     ((Scheme.IdealSheafData.le_ker_iff_range_subset_support i.ker s).mpr
       (hs.trans (Scheme.Hom.range_subset_ker_support i)))
 
+/-- The spectrum of a field has a single point, so a morphism `s : Spec K ⟶ Y` has its whole
+range inside any set containing the image of the closed point. -/
+lemma Scheme.range_base_subset_of_closedPoint_mem {K : Type u} [Field K]
+    (s : Spec (CommRingCat.of K) ⟶ Y) {S : Set Y}
+    (hs : s.base (IsLocalRing.closedPoint K) ∈ S) : Set.range s.base ⊆ S := by
+  rintro _ ⟨p, rfl⟩
+  rwa [Subsingleton.elim p (IsLocalRing.closedPoint K)]
+
 /-- A morphism from the spectrum of a field whose unique point lies in the range of a closed
 immersion `i` factors uniquely through `i`.
 (blueprint: `lemma:openclosed-point-factors`) -/
@@ -163,9 +175,8 @@ theorem IsClosedImmersion.existsUnique_fac_of_field {K : Type u} [Field K] (i : 
     [IsClosedImmersion i] (s : Spec (CommRingCat.of K) ⟶ Y)
     (hs : s.base (IsLocalRing.closedPoint K) ∈ Set.range i.base) :
     ∃! t : Spec (CommRingCat.of K) ⟶ Z, t ≫ i = s :=
-  IsClosedImmersion.existsUnique_fac_of_range_subset_range i s <| by
-    rintro _ ⟨p, rfl⟩
-    rwa [Subsingleton.elim p (IsLocalRing.closedPoint K)]
+  IsClosedImmersion.existsUnique_fac_of_range_subset_range i s
+    (Scheme.range_base_subset_of_closedPoint_mem s hs)
 
 end Point
 

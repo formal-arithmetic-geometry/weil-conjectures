@@ -49,11 +49,6 @@ def uliftEquivalence (F : C ⥤ Type w) :
   unitIso := Iso.refl _
   counitIso := Iso.refl _
 
-lemma uliftEquivalence_functor_comp_π (F : C ⥤ Type w) :
-    (uliftEquivalence.{w'} F).functor ⋙ CategoryOfElements.π F =
-      CategoryOfElements.π (F ⋙ uliftFunctor.{w', w}) :=
-  rfl
-
 end Functor.Elements
 
 /-- A natural isomorphism of functors to types induces an equivalence between the categories

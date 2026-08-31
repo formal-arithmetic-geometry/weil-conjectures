@@ -30,7 +30,7 @@ of the two images. In both cases the image complex is a zero object next to an i
 
 - over `U` the third term `j^* i_* i^* F` vanishes and the first map is invertible because the
   unit of `j_! ⊣ j^*` is; this is
-  `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex`, proved in
+  `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_open`, proved in
   `WeilConjectures.SixFunctors.OpenClosed.Complex`;
 - over `Z` the first term `i^* j_! j^* F` vanishes by
   `AlgebraicGeometry.Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range` and the
@@ -48,8 +48,8 @@ small étale site of `Z` and on that of `X` respectively. This is not a defect: 
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex'`: the `i^*`-image
-  of the open–closed short complex is short exact.
+- `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_closed`: the
+  `i^*`-image of the open–closed short complex is short exact.
 - `AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`: **the open–closed short complex
   is short exact** (blueprint: `thm:openclosed-exact`).
 
@@ -86,7 +86,8 @@ instance Etale.isIso_upperStar_map_upperStarLowerStarAdjunction_unit
     ((Etale.upperStarLowerStarAdjunction A i).left_triangle_components G)]
   infer_instance
 
-variable (hji : Set.range j.base ∩ Set.range i.base = ∅) (F : Sheaf X.smallEtaleTopology A)
+variable (hji : Disjoint (Set.range j.base) (Set.range i.base))
+  (F : Sheaf X.smallEtaleTopology A)
 
 include hJZ in
 /-- **The `i^*`-image of the open–closed short complex is short exact**, i.e.
@@ -100,20 +101,20 @@ second map `i^*(η_F)` is an isomorphism, being the inverse of the counit of `i^
 
 This is one of the two halves of the reflection argument proving that
 `AlgebraicGeometry.Etale.openClosedShortComplex` is itself short exact; the other half is
-`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex`. -/
-lemma Etale.shortExact_map_upperStar_openClosedShortComplex' :
+`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_open`. -/
+lemma Etale.shortExact_map_upperStar_openClosedShortComplex_closed :
     ((Etale.openClosedShortComplex A j i hji F).map (i)^*[A]).ShortExact := by
   have hz := Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range A j i hji
     ((j)^*[A].obj F)
-  have _ : HasZeroObject (Sheaf Z.smallEtaleTopology A) := ⟨_, hz⟩
+  have : HasZeroObject (Sheaf Z.smallEtaleTopology A) := ⟨_, hz⟩
   have hf : ((Etale.openClosedShortComplex A j i hji F).map (i)^*[A]).f = 0 :=
     hz.eq_of_src _ _
-  have _ : IsIso ((Etale.openClosedShortComplex A j i hji F).map (i)^*[A]).g :=
+  have : IsIso ((Etale.openClosedShortComplex A j i hji F).map (i)^*[A]).g :=
     inferInstanceAs (IsIso ((i)^*[A].map
       ((Etale.upperStarLowerStarAdjunction A i).unit.app F)))
   exact
     { exact := (ShortComplex.exact_iff_mono _ hf).2 inferInstance
-      mono_f := ⟨fun _ _ _ => hz.eq_of_tgt _ _⟩
+      mono_f := ⟨fun _ _ _ ↦ hz.eq_of_tgt _ _⟩
       epi_g := inferInstance }
 
 variable [hJX : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
@@ -126,15 +127,17 @@ closed immersion `i : Z ⟶ X` whose range is the complement of the range of `j`
 `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`
 
 is exact. Both restrictions `j^*` and `i^*` are exact and they jointly reflect isomorphisms, so
-this follows from `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex` and
-`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex'`.
+this follows from
+`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_open` and
+`AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_closed`.
 (blueprint: `thm:openclosed-exact`) -/
 theorem Etale.shortExact_openClosedShortComplex
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
-    (Etale.openClosedShortComplex A j i (by rw [hij, Set.inter_compl_self]) F).ShortExact := by
+    (Etale.openClosedShortComplex A j i
+      (disjoint_range_of_range_eq_compl j i hij) F).ShortExact := by
   rw [(Etale.jointlyReflectIsomorphisms_upperStar A j i hij).shortExact_iff]
   rintro (_ | _)
-  · exact Etale.shortExact_map_upperStar_openClosedShortComplex' A j i _ F
-  · exact Etale.shortExact_map_upperStar_openClosedShortComplex A j i _ F
+  · exact Etale.shortExact_map_upperStar_openClosedShortComplex_closed A j i _ F
+  · exact Etale.shortExact_map_upperStar_openClosedShortComplex_open A j i _ F
 
 end AlgebraicGeometry

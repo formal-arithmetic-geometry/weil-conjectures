@@ -17,6 +17,10 @@ builds the short complex
 `j_! j^* F ⟶ F ⟶ i_* i^* F`,
 
 whose first map is the counit of `j_! ⊣ j^*` and whose second map is the unit of `i^* ⊣ i_*`.
+Both maps are the components of natural transformations, so the complex is built once and for
+all as a complex of endofunctors `j_! j^* ⟶ 𝟭 ⟶ i_* i^*` of the category of sheaves on `X`,
+and the complex at `F` is its evaluation at `F`; this is what "naturally in `F`" means.
+
 That it *is* a complex needs no computation: the vanishing `j^* i_* = 0` of
 `WeilConjectures.SixFunctors.OpenClosed.Vanishing` makes the whole Hom-set
 `Hom(j_! j^* F, i_* i^* F) ≃ Hom(j^* F, j^* i_* i^* F)` a singleton, so the composite and `0`
@@ -33,11 +37,18 @@ whose third term vanishes and whose first map is an isomorphism, the latter beca
 `j_! ⊣ j^*` is an isomorphism. The `i^*` half — which does need `i^* i_* ≅ 𝟙` — and the
 conclusion are in `WeilConjectures.SixFunctors.OpenClosed.Exact`.
 
+## Main definitions
+
+- `AlgebraicGeometry.Etale.openClosedShortComplex`: the short complex
+  `j_! j^* F ⟶ F ⟶ i_* i^* F`.
+- `AlgebraicGeometry.Etale.openClosedShortComplexFunctor`: the same as a short complex of
+  *endofunctors* `j_! j^* ⟶ 𝟭 ⟶ i_* i^*`, which is the naturality of the construction in `F`;
+  the previous one is its evaluation at `F`.
+
 ## Main results
 
-- `AlgebraicGeometry.Etale.openClosedShortComplex`: the short complex `j_! j^* F ⟶ F ⟶ i_* i^* F`.
-- `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex`: its image under
-  `j^*` is short exact.
+- `AlgebraicGeometry.Etale.shortExact_map_upperStar_openClosedShortComplex_open`: the image of
+  the short complex under `j^*` is short exact.
 -/
 
 @[expose] public section
@@ -76,7 +87,9 @@ instance Etale.isIso_upperStar_map_openImmersionLowerShriekUpperStarAdjunction_c
   rw [← IsIso.inv_eq_of_hom_inv_id h]
   infer_instance
 
-variable (hji : Set.range j.base ∩ Set.range i.base = ∅) (F : Sheaf X.smallEtaleTopology A)
+variable (hji : Disjoint (Set.range j.base) (Set.range i.base))
+
+variable (F : Sheaf X.smallEtaleTopology A)
 
 /-- **The open–closed short complex** `j_! j^* F ⟶ F ⟶ i_* i^* F` attached to an open
 immersion `j` and a morphism `i` whose range is disjoint from the range of `j`.
@@ -84,8 +97,11 @@ immersion `j` and a morphism `i` whose range is disjoint from the range of `j`.
 The first map is the counit of `j_! ⊣ j^*` at `F` and the second is the unit of `i^* ⊣ i_*` at
 `F`. Their composite is zero because `Hom(j_! j^* F, i_* i^* F) ≃ Hom(j^* F, j^* i_* i^* F)` is
 a singleton, `j^* i_* i^* F` being zero by
-`Etale.isZero_upperStar_lowerStar_of_disjoint_range`. -/
-@[simps X₁ X₂ X₃]
+`Etale.isZero_upperStar_lowerStar_of_disjoint_range`.
+
+Both maps are components of natural transformations, so the whole complex is natural in `F`;
+that is `Etale.openClosedShortComplexFunctor` below. -/
+@[simps]
 noncomputable def Etale.openClosedShortComplex :
     ShortComplex (Sheaf X.smallEtaleTopology A) where
   X₁ := (j)_!open[A].obj ((j)^*[A].obj F)
@@ -95,24 +111,36 @@ noncomputable def Etale.openClosedShortComplex :
   g := (Etale.upperStarLowerStarAdjunction A i).unit.app F
   zero := by
     have hz := Etale.isZero_upperStar_lowerStar_of_disjoint_range A j i hji ((i)^*[A].obj F)
-    have _ : Subsingleton ((j)^*[A].obj F ⟶ (j)^*[A].obj ((i)_*[A].obj ((i)^*[A].obj F))) :=
-      ⟨fun _ _ => hz.eq_of_tgt _ _⟩
-    have _ : Subsingleton
+    have : Subsingleton ((j)^*[A].obj F ⟶ (j)^*[A].obj ((i)_*[A].obj ((i)^*[A].obj F))) :=
+      ⟨fun _ _ ↦ hz.eq_of_tgt _ _⟩
+    have : Subsingleton
         ((j)_!open[A].obj ((j)^*[A].obj F) ⟶ (i)_*[A].obj ((i)^*[A].obj F)) :=
       Equiv.subsingleton
         ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).homEquiv _ _)
     exact Subsingleton.elim _ _
 
-@[simp]
-lemma Etale.openClosedShortComplex_f :
-    (Etale.openClosedShortComplex A j i hji F).f =
-      (Etale.openImmersionLowerShriekUpperStarAdjunction A j).counit.app F :=
-  rfl
+/-- **The open–closed short complex, as a complex of endofunctors** `j_! j^* ⟶ 𝟭 ⟶ i_* i^*`,
+attached to an open immersion `j` and a morphism `i` whose range is disjoint from the range of
+`j`.
 
-@[simp]
-lemma Etale.openClosedShortComplex_g :
-    (Etale.openClosedShortComplex A j i hji F).g =
-      (Etale.upperStarLowerStarAdjunction A i).unit.app F :=
+The two maps are the counit of `j_! ⊣ j^*` and the unit of `i^* ⊣ i_*` as natural
+transformations, so this is `Etale.openClosedShortComplex` made natural in `F`; that it is a
+complex is the statement for a fixed `F`, read componentwise. -/
+@[simps]
+noncomputable def Etale.openClosedShortComplexFunctor :
+    ShortComplex (Sheaf X.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology A) where
+  X₁ := (j)^*[A] ⋙ (j)_!open[A]
+  X₂ := 𝟭 _
+  X₃ := (i)^*[A] ⋙ (i)_*[A]
+  f := (Etale.openImmersionLowerShriekUpperStarAdjunction A j).counit
+  g := (Etale.upperStarLowerStarAdjunction A i).unit
+  zero := NatTrans.ext (funext fun F ↦ (Etale.openClosedShortComplex A j i hji F).zero)
+
+/-- The open–closed short complex at `F` is the complex of endofunctors evaluated at `F`; this
+is what "naturally in `F`" means. -/
+lemma Etale.openClosedShortComplexFunctor_map_evaluation (F : Sheaf X.smallEtaleTopology A) :
+    (Etale.openClosedShortComplexFunctor A j i hji).map ((evaluation _ _).obj F) =
+      Etale.openClosedShortComplex A j i hji F :=
   rfl
 
 /-- **The `j^*`-image of the open–closed short complex is short exact**, i.e.
@@ -125,20 +153,21 @@ its first map is an isomorphism by
 
 This is one of the two halves of the reflection argument proving that
 `Etale.openClosedShortComplex` is itself short exact; it is the half that does not use that `i`
-is a closed immersion. -/
-lemma Etale.shortExact_map_upperStar_openClosedShortComplex :
+is a closed immersion. The other half is
+`Etale.shortExact_map_upperStar_openClosedShortComplex_closed`. -/
+lemma Etale.shortExact_map_upperStar_openClosedShortComplex_open :
     ((Etale.openClosedShortComplex A j i hji F).map (j)^*[A]).ShortExact := by
   have hz := Etale.isZero_upperStar_lowerStar_of_disjoint_range A j i hji ((i)^*[A].obj F)
-  have _ : HasZeroObject (Sheaf U.smallEtaleTopology A) := ⟨_, hz⟩
+  have : HasZeroObject (Sheaf U.smallEtaleTopology A) := ⟨_, hz⟩
   have hg : ((Etale.openClosedShortComplex A j i hji F).map (j)^*[A]).g = 0 :=
     hz.eq_of_tgt _ _
-  have _ : IsIso ((Etale.openClosedShortComplex A j i hji F).map (j)^*[A]).f :=
+  have : IsIso ((Etale.openClosedShortComplex A j i hji F).map (j)^*[A]).f :=
     inferInstanceAs (IsIso ((j)^*[A].map
       ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).counit.app F)))
   exact
     { exact := (ShortComplex.exact_iff_epi _ hg).2 inferInstance
       mono_f := inferInstance
-      epi_g := ⟨fun _ _ _ => hz.eq_of_src _ _⟩ }
+      epi_g := ⟨fun _ _ _ ↦ hz.eq_of_src _ _⟩ }
 
 end OpenClosed
 

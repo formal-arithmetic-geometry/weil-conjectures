@@ -29,8 +29,12 @@ open Limits
 
 variable {C : Type u} [Category.{v} C] {D₁ D₂ : Type u₁} [Category.{v₁} D₁] [Category.{v₁} D₂]
 
-/-- The two-element family of categories `fun b ↦ cond b D₁ D₂` is abelian. -/
-instance instAbelianCond [Abelian D₁] [Abelian D₂] (b : Bool) : Abelian (cond b D₁ D₂) :=
+/-- The two-element family of categories `fun b ↦ cond b D₁ D₂` is abelian.
+
+Like `CategoryTheory.instCategoryCond` this is `scoped`, so that it is not tried on
+unrelated goals whose head happens to be `cond`. -/
+scoped instance instAbelianCond [Abelian D₁] [Abelian D₂] (b : Bool) :
+    Abelian (cond b D₁ D₂) :=
   Bool.rec (motive := fun b ↦ Abelian (cond b D₁ D₂)) ‹Abelian D₂› ‹Abelian D₁› b
 
 variable (F₁ : C ⥤ D₁) (F₂ : C ⥤ D₂)
