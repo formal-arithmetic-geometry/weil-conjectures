@@ -879,13 +879,57 @@ it is not silently identified with an unavailable Mathlib primitive.
 
   This is the same scheme over $S$ as
   \Cref{def:nagata-relative-projective-space}, but obtained without any
-  gluing, so it does not come with the standard-chart interface required
-  there; only the properties of $\mathbf P(n;S)$ as a scheme over $S$ are
-  available from it.  In particular it gives no way to construct morphisms
-  \emph{into} $\mathbf P(n;S)$, which is what
-  \Cref{lemma:nagata-global-blowup-relative-projective-embedding} needs; the
-  comparison of the two nodes is left to whoever builds relative Proj.
+  gluing.  Its standard charts are not part of the definition; they are
+  obtained by base change from the standard charts of
+  $\mathbf P^n_{\mathbf Z}$ in
+  \Cref{def:nagata-projective-space-standard-charts}, which is what makes it
+  possible to construct morphisms \emph{into} $\mathbf P(n;S)$, as
+  \Cref{lemma:nagata-global-blowup-relative-projective-embedding} needs.  The
+  comparison with relative Proj of a graded quasi-coherent algebra is left to
+  whoever builds relative Proj.
 \end{definition}
+
+\begin{definition}[Standard charts of projective space]
+  \label{def:nagata-projective-space-standard-charts}
+  \uses{def:nagata-projective-space-base-change,def:nagata-affine-proj}
+  \lean{AlgebraicGeometry.ProjectiveSpace.chart}
+
+  Let $n$ be an index set, $S$ a scheme and $i\in n$.  Dehomogenizing at
+  $T_i$, i.e.\ substituting $T_i=1$, identifies the degree-zero part of the
+  localization of $\mathbf Z[T_j:j\in n]$ away from $T_i$ with the polynomial
+  ring $\mathbf Z[T_j:j\neq i]$, so the standard open
+  $D_+(T_i)\subseteq\mathbf P^n_{\mathbf Z}$ is the affine space
+  $\mathbf A^{n\setminus\{i\}}_{\mathbf Z}$.  Base changing this open
+  immersion along $\mathbf P(n;S)\to\mathbf P^n_{\mathbf Z}$ gives the
+  standard chart
+  \[
+    \mathbf A(\{j\in n: j\neq i\};S)\longrightarrow\mathbf P(n;S),
+  \]
+  an open immersion of schemes over $S$.
+\end{definition}
+
+\begin{lemma}[The standard charts cover projective space]
+  \label{lemma:nagata-projective-space-standard-charts-cover}
+  \uses{def:nagata-projective-space-standard-charts}
+  \lean{AlgebraicGeometry.ProjectiveSpace.chartCover}
+
+  For every index set $n$ and every scheme $S$, the standard charts
+  $\mathbf A(\{j\in n: j\neq i\};S)\to\mathbf P(n;S)$, for $i\in n$, form an
+  open cover of $\mathbf P(n;S)$.  Consequently a morphism
+  $X\to\mathbf P(n;S)$ over $S$ may be built by gluing morphisms into the
+  affine spaces $\mathbf A(\{j\in n: j\neq i\};S)$, i.e.\ from
+  coordinates.
+\end{lemma}
+
+\begin{proof}
+  The variables $T_i$ generate the irrelevant ideal of
+  $\mathbf Z[T_j:j\in n]$, so the standard opens $D_+(T_i)$ cover
+  $\mathbf P^n_{\mathbf Z}$.  Each chart of $\mathbf P(n;S)$ is the base
+  change of the corresponding $D_+(T_i)$ along
+  $\mathbf P(n;S)\to\mathbf P^n_{\mathbf Z}$, and the image of a base change
+  of an open immersion is the preimage of its image, so the charts cover
+  $\mathbf P(n;S)$.
+\end{proof}
 
 \begin{lemma}[Projective space is proper over its base]
   \label{lemma:nagata-projective-space-base-change-proper}

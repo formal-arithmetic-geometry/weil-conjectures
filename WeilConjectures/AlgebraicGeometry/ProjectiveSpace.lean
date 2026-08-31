@@ -5,12 +5,13 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
-public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
 # Projective space over a base scheme
@@ -32,13 +33,31 @@ so everything below is new; the integral model itself is `Proj.mvPolynomial n (U
 - `AlgebraicGeometry.ProjectiveSpace` — `ℙ(n; S)` is the projective `n`-space over `S`, with
   structure morphism `ℙ(n; S) ↘ S`.
 - `AlgebraicGeometry.ProjectiveSpace.map` — functoriality of `ℙ(n; S)` in the base `S`.
+- `AlgebraicGeometry.Proj.mvPolynomialChart` — the standard affine chart
+  `𝔸^{σ ∖ {i}}_A ⟶ ℙ^σ_A` at a coordinate `i`, i.e. the standard open `D₊(X i)`.
+- `AlgebraicGeometry.ProjectiveSpace.chart` — the standard affine chart
+  `𝔸({j // j ≠ i}; S) ⟶ ℙ(n; S)` of `ℙ(n; S)`, obtained from the chart of the integral model
+  by base change.
 
 ## Main results
 
 - `AlgebraicGeometry.ProjectiveSpace.instIsProper` — for a finite index type, the structure
   morphism `ℙ(n; S) ↘ S` is proper.
+- `AlgebraicGeometry.Proj.mvPolynomialAffineOpenCover` — the standard charts form an affine
+  open cover of `ℙ^σ_A`, and `AlgebraicGeometry.ProjectiveSpace.chartCover` — the standard
+  charts form an open cover of `ℙ(n; S)`. Together with
+  `AlgebraicGeometry.ProjectiveSpace.isPullback_chart`, which exhibits each chart of
+  `ℙ(n; S)` as the base change of a chart of `ℙⁿ_ℤ`, this is the chart interface of relative
+  `Proj`: a morphism `X ⟶ ℙ(n; S)` can be built by gluing morphisms into the affine
+  spaces `𝔸({j // j ≠ i}; S)`, which is what `AlgebraicGeometry.AffineSpace.homOfVector`
+  provides.
 
 ## Implementation notes
+
+Relative `Proj` over an *affine* base is Mathlib's `Proj.toSpecZero : Proj 𝒜 ⟶ Spec (𝒜 0)`,
+for `𝒜` a graded ring; `Proj.mvPolynomialToSpec σ A : ℙ^σ_A ⟶ Spec A` is its projective-space
+case, for `𝒜` the polynomial ring with its total-degree grading, and the charts below are the
+`Spec (𝒜_f)₀` of that interface for `f` a variable.
 
 Mathlib does not make the total-degree grading of `MvPolynomial σ A` a global instance, since
 one may want to grade by another weight function; it is enabled here as a local instance. To
@@ -50,21 +69,22 @@ Defining `ℙ(n; S)` by base change is the cheap route: it needs no gluing, and 
 `ℙ(n; S) ↘ S` follows from properness of the integral model by base change. The blueprint's
 `def:nagata-relative-projective-space` instead constructs `ℙ^r_X` as the relative `Proj` of
 a symmetric algebra, and requires its standard opens to be the relative spectra of the
-degree-zero homogeneous localizations. The definition here is intended to be canonical for
-everything that only needs `ℙ(n; S)` as a scheme over `S`; the chart interface is what
-relative `Proj` would add on top, and the comparison of the two is left to the file that
-builds relative `Proj`.
+degree-zero homogeneous localizations. Those standard opens are supplied here directly:
+`ProjectiveSpace.chart` is the base change of the standard open `D₊(X i)` of the integral
+model, and `ProjectiveSpace.chartCover` says that the charts cover, so `ℙ(n; S)` *is* glued
+from the affine spaces `𝔸({j // j ≠ i}; S)` in the sense that matters for constructing
+morphisms into it.
 
 ## TODO
 
+- Relative `Proj` of a graded quasi-coherent algebra over an arbitrary base scheme, and the
+  comparison `ℙ(n; S) ≅ Proj_S(Sym O_S^n)`. Mathlib has neither quasi-coherent sheaves of
+  algebras nor relative `Spec`, and the gluing needs `Proj` to commute with base change, so
+  this is a development of its own; the charts provided here are the part of its interface
+  that the Nagata blueprint uses.
 - `ℙ(n; Spec A) ≅ Proj.mvPolynomial n A` over `Spec A`, the analogue of
-  `AlgebraicGeometry.AffineSpace.SpecIso`. This needs `Proj` to commute with base change,
-  which Mathlib does not have, so `Proj.mvPolynomial` and `ProjectiveSpace` are for now two
-  unrelated definitions.
-- The standard affine charts of `ℙ(n; S)`, i.e. morphisms `𝔸(n; S) ⟶ ℙ(n ⊕ Unit; S)` glued
-  from `Proj.awayι`. Mathlib has no universal property of `Proj`, so these charts are
-  currently the only way to construct morphisms *into* a projective space, and they are a
-  prerequisite for proving Chow's lemma.
+  `AlgebraicGeometry.AffineSpace.SpecIso`. This too needs `Proj` to commute with base change,
+  so `Proj.mvPolynomial` and `ProjectiveSpace` are related here only through their charts.
 
 ## Blueprint
 
@@ -108,6 +128,76 @@ instance Proj.instIsProperMvPolynomialToSpec [Finite σ] :
     IsProper (Proj.mvPolynomialToSpec σ A) := by
   rw [Proj.mvPolynomialToSpec]
   infer_instance
+
+section Charts
+
+variable {σ A}
+
+/-- The standard affine chart of `ℙ^σ_A` at the coordinate `i`, an open immersion
+`𝔸^{σ ∖ {i}}_A = Spec A[X_j : j ≠ i] ⟶ ℙ^σ_A` with image the standard open `D₊(X i)`. -/
+def Proj.mvPolynomialChart (i : σ) :
+    Spec (.of (MvPolynomial {j // j ≠ i} A)) ⟶ Proj.mvPolynomial σ A :=
+  Spec.map (CommRingCat.ofHom (MvPolynomial.awayXEquiv i).toRingHom) ≫
+    Proj.awayι (MvPolynomial.homogeneousSubmodule σ A) (MvPolynomial.X i)
+      (MvPolynomial.X_mem_homogeneousSubmodule i) Nat.one_pos
+
+instance (i : σ) : IsOpenImmersion (Proj.mvPolynomialChart (A := A) i) :=
+  inferInstanceAs (IsOpenImmersion
+    (Spec.map (CommRingCat.ofHom (MvPolynomial.awayXEquiv (R := A) i).toRingHom) ≫
+      Proj.awayι (MvPolynomial.homogeneousSubmodule σ A) (MvPolynomial.X i)
+        (MvPolynomial.X_mem_homogeneousSubmodule i) Nat.one_pos))
+
+open MvPolynomial in
+/-- The standard chart `𝔸^{σ ∖ {i}}_A ⟶ ℙ^σ_A` has image the standard open `D₊(X i)`. -/
+lemma Proj.opensRange_mvPolynomialChart (i : σ) :
+    (Proj.mvPolynomialChart (A := A) i).opensRange =
+      Proj.basicOpen (homogeneousSubmodule σ A) (X i) := by
+  rw [← Proj.opensRange_awayι (homogeneousSubmodule σ A) (X i)
+    (X_mem_homogeneousSubmodule (R := A) i) Nat.one_pos]
+  exact Scheme.Hom.opensRange_comp_of_isIso
+    (Spec.map (CommRingCat.ofHom (awayXEquiv (R := A) i).toRingHom))
+    (Proj.awayι (homogeneousSubmodule σ A) (X i)
+      (X_mem_homogeneousSubmodule (R := A) i) Nat.one_pos)
+
+open MvPolynomial in
+/-- The standard chart `𝔸^{σ ∖ {i}}_A ⟶ ℙ^σ_A` is a morphism over `Spec A`, given on rings
+by the inclusion of the constants `A ⟶ A[X_j : j ≠ i]`. -/
+@[reassoc]
+lemma Proj.mvPolynomialChart_mvPolynomialToSpec (i : σ) :
+    Proj.mvPolynomialChart (A := A) i ≫ Proj.mvPolynomialToSpec σ A =
+      Spec.map (CommRingCat.ofHom (C : A →+* MvPolynomial {j // j ≠ i} A)) := by
+  have key : (Spec.map (CommRingCat.ofHom (awayXEquiv (R := A) i).toRingHom) ≫
+      Proj.awayι (homogeneousSubmodule σ A) (X i)
+        (X_mem_homogeneousSubmodule (R := A) i) Nat.one_pos) ≫
+      Proj.toSpecZero (homogeneousSubmodule σ A) ≫
+        Spec.map (CommRingCat.ofHom (homogeneousSubmoduleZeroEquiv σ A).toRingHom) =
+      Spec.map (CommRingCat.ofHom (C : A →+* MvPolynomial {j // j ≠ i} A)) := by
+    rw [Category.assoc, Proj.awayι_toSpecZero_assoc (homogeneousSubmodule σ A) (X i)
+        (X_mem_homogeneousSubmodule (R := A) i) Nat.one_pos,
+      ← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp]
+    congr 1
+    ext r : 2
+    simpa using awayXDehomogenize_fromZeroRingHom i (homogeneousSubmoduleZeroEquiv σ A r)
+  -- `key` is the statement with `Proj.mvPolynomial` unfolded, which is what `rw` needs
+  exact key
+
+open MvPolynomial TopologicalSpace in
+/-- **The standard charts cover projective space over an affine base**: the charts
+`𝔸^{σ ∖ {i}}_A ⟶ ℙ^σ_A` form an affine open cover of `ℙ^σ_A`. -/
+def Proj.mvPolynomialAffineOpenCover (σ A : Type u) [CommRing A] :
+    (Proj.mvPolynomial σ A).AffineOpenCover where
+  I₀ := σ
+  X i := .of (MvPolynomial {j // j ≠ i} A)
+  f i := Proj.mvPolynomialChart i
+  idx x := (Opens.mem_iSup.mp ((Proj.iSup_basicOpen_eq_top (homogeneousSubmodule σ A) X
+    (MvPolynomial.irrelevant_le_span_X σ A)).ge (Set.mem_univ x))).choose
+  covers x := by
+    change x ∈ (Proj.mvPolynomialChart (A := A) _).opensRange
+    rw [Proj.opensRange_mvPolynomialChart]
+    exact (Opens.mem_iSup.mp ((Proj.iSup_basicOpen_eq_top (homogeneousSubmodule σ A) X
+      (MvPolynomial.irrelevant_le_span_X σ A)).ge (Set.mem_univ x))).choose_spec
+
+end Charts
 
 end Affine
 
@@ -220,6 +310,76 @@ lemma map_id : map n (𝟙 S) = 𝟙 ℙ(n; S) := by
 lemma map_comp {S S' S'' : Scheme.{u}} (f : S ⟶ S') (g : S' ⟶ S'') :
     map n (f ≫ g) = map n f ≫ map n g := by
   ext1 <;> simp
+
+section Charts
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+/-- The standard affine chart of `ℙ(n; S)` at the coordinate `i`, an open immersion
+`𝔸({j // j ≠ i}; S) ⟶ ℙ(n; S)` over `S`, obtained by base change from the standard chart
+`D₊(X i)` of the integral model `ℙⁿ_ℤ`. -/
+def chart (i : n) : 𝔸({j // j ≠ i}; S) ⟶ ℙ(n; S) :=
+  pullback.lift (𝔸({j // j ≠ i}; S) ↘ S)
+    (AffineSpace.toSpecMvPoly _ S ≫ Proj.mvPolynomialChart i) (terminal.hom_ext _ _)
+
+/-- The chart `𝔸({j // j ≠ i}; S) ⟶ ℙ(n; S)` is a morphism over `S`. -/
+@[reassoc (attr := simp)]
+lemma chart_over (i : n) : chart n S i ≫ ℙ(n; S) ↘ S = 𝔸({j // j ≠ i}; S) ↘ S :=
+  pullback.lift_fst _ _ _
+
+/-- The chart `𝔸({j // j ≠ i}; S) ⟶ ℙ(n; S)` is compatible with the maps to the integral
+model. -/
+@[reassoc (attr := simp)]
+lemma chart_toProjMvPoly (i : n) :
+    chart n S i ≫ toProjMvPoly n S =
+      AffineSpace.toSpecMvPoly _ S ≫ Proj.mvPolynomialChart i :=
+  pullback.lift_snd _ _ _
+
+/-- **The charts of `ℙ(n; S)` are base changes of the charts of `ℙⁿ_ℤ`**: the square
+
+```
+                      chart n S i
+  𝔸({j // j ≠ i}; S) ------------> ℙ(n; S)
+          |                            |
+          | toSpecMvPoly               | toProjMvPoly
+          ↓                            ↓
+  Spec ℤ[j : j ≠ i] ------------> ℙⁿ_ℤ
+                  mvPolynomialChart i
+```
+
+is a pullback square. -/
+lemma isPullback_chart (i : n) :
+    IsPullback (chart n S i) (AffineSpace.toSpecMvPoly _ S) (toProjMvPoly n S)
+      (Proj.mvPolynomialChart i) := by
+  refine IsPullback.of_right (h₁₂ := ℙ(n; S) ↘ S) (X₂₃ := ⊤_ Scheme)
+    (h₂₂ := terminal.from (Proj.mvPolynomial n (ULift.{u} ℤ))) (v₁₃ := terminal.from S)
+    ?_ (chart_toProjMvPoly n S i) ?_
+  · rw [chart_over, terminal.hom_ext (Proj.mvPolynomialChart (A := ULift.{u} ℤ) i ≫
+      terminal.from (Proj.mvPolynomial n (ULift.{u} ℤ))) (terminal.from _)]
+    exact IsPullback.of_hasPullback _ _
+  · exact IsPullback.of_hasPullback _ _
+
+instance (i : n) : IsOpenImmersion (chart n S i) := by
+  apply MorphismProperty.of_isPullback (isPullback_chart n S i).flip
+  infer_instance
+
+/-- **The standard charts cover `ℙ(n; S)`**: the charts `𝔸({j // j ≠ i}; S) ⟶ ℙ(n; S)` form
+an open cover of `ℙ(n; S)`. -/
+def chartCover : ℙ(n; S).OpenCover :=
+  Scheme.Cover.mkOfCovers n (fun i ↦ 𝔸({j // j ≠ i}; S)) (chart n S) fun x ↦ by
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      ((Proj.iSup_basicOpen_eq_top (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ))
+        MvPolynomial.X (MvPolynomial.irrelevant_le_span_X n (ULift.{u} ℤ))).ge
+        (Set.mem_univ ((toProjMvPoly n S).base x)))
+    rw [← Proj.opensRange_mvPolynomialChart (A := ULift.{u} ℤ) i] at hi
+    obtain ⟨z, hz⟩ := hi
+    obtain ⟨w, hw₁, -⟩ := Scheme.Pullback.exists_preimage_pullback
+      (f := toProjMvPoly n S) (g := Proj.mvPolynomialChart (A := ULift.{u} ℤ) i) x z hz.symm
+    refine ⟨i, (isPullback_chart n S i).isoPullback.inv.base w, ?_⟩
+    rw [← Scheme.Hom.comp_apply, (isPullback_chart n S i).isoPullback_inv_fst]
+    exact hw₁
+
+end Charts
 
 end ProjectiveSpace
 

@@ -54,8 +54,9 @@ isomorphism. Chow's lemma is then the assertion that `ChowModification f` is non
   `U ⟶ X ×_S ℙ(n₁; S) ×_S ⋯ ×_S ℙ(nₘ; S)`; the projection to `X` is proper and surjective and
   is an isomorphism over `U`, while the projection to the product of projective spaces
   followed by the Segre embedding is an immersion into a single `ℙ(n; S)`. The immersions of
-  the `Uᵢ` need the standard affine charts of `ℙ(n; S)`, which are a `TODO` of
-  `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`.
+  the `Uᵢ` are built from the standard affine charts
+  `AlgebraicGeometry.ProjectiveSpace.chart` of `ℙ(n; S)`; what is still missing is the Segre
+  embedding.
 * The closed-immersion form of Chow's lemma, [Stacks, Tag 0202]: for proper `f`, the induced
   morphism `X' ⟶ X ×_S ℙ(n; S)` is an immersion by `IsImmersion.of_comp`, and a proper
   immersion is a closed immersion. This is what
