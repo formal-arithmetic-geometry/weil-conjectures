@@ -26,10 +26,11 @@ The site-theoretic inputs of the general definitions are discharged here:
 - The base change functor `MorphismProperty.Over.pullback @Etale ⊤ g` along an *arbitrary*
   morphism `g` is continuous for the small étale topologies
   (`Etale.isContinuous_overPullback`): it preserves covers since étale covers are stable
-  under base change — points are lifted through the pullback-pasting isomorphism
-  `W ×_V (V ×_Y Z) ≅ W ×_Y Z` — and it preserves compatible families since it is
-  representably flat, being a finite-limit-preserving functor on the finitely complete
-  étale slice. Hence `Etale.lowerStar` carries no hypotheses at all.
+  under base change, and it preserves compatible families since it is representably flat,
+  being a finite-limit-preserving functor on the finitely complete étale slice. This is
+  the `P = Q = @Etale` case of `AlgebraicGeometry.Scheme.isContinuous_overPullback` of
+  `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. Hence `Etale.lowerStar`
+  carries no hypotheses at all.
 - Sheafification on the small étale sites and the left Kan extensions along the
   opposites of base change (together with their left
   exactness) exist since `A` is Grothendieck abelian and the small étale sites are
@@ -49,15 +50,16 @@ The site-theoretic inputs of the general definitions are discharged here:
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.coverPreserving_overPullback` and
-  `AlgebraicGeometry.Etale.isContinuous_overPullback`: base change along an arbitrary
-  morphism is cover-preserving and continuous for the small étale topologies.
+- `AlgebraicGeometry.Etale.isContinuous_overPullback`: base change along an arbitrary
+  morphism is continuous for the small étale topologies.
 - `AlgebraicGeometry.Etale.isLeftAdjoint_op_overPullback` and
   `AlgebraicGeometry.Etale.hasPointwiseLeftKanExtension_op_overPullback`: the opposite of
   base change by an étale morphism is a left adjoint, and all pointwise left Kan extensions
   along it exist.
-- `AlgebraicGeometry.Etale.lowerStar`: the pushforward `g_*` on étale sheaves.
-- `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves.
+- `AlgebraicGeometry.Etale.lowerStar`: the pushforward `g_*` on étale sheaves, with scoped
+  notation `(g)_*[A]`.
+- `AlgebraicGeometry.Etale.upperStar`: the pullback `g^*` on étale sheaves, with scoped
+  notation `(g)^*[A]`.
 - `AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`: the adjunction `g^* ⊣ g_*`.
 - `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
   the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
@@ -88,55 +90,13 @@ section Continuity
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/-- Base change along an arbitrary morphism `g : Z ⟶ Y` preserves covering sieves of the
-small étale topologies. -/
-lemma Etale.coverPreserving_overPullback :
-    CoverPreserving (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)
-      (MorphismProperty.Over.pullback @Etale ⊤ g) where
-  cover_preserve {V S} hS := by
-    rw [smallGrothendieckTopology_eq_toGrothendieck_smallPretopology Y le_rfl] at hS
-    rw [smallGrothendieckTopology_eq_toGrothendieck_smallPretopology Z le_rfl]
-    replace hS := (mem_toGrothendieck_smallPretopology _ _).mp hS
-    refine (mem_toGrothendieck_smallPretopology _ _).mpr fun x => ?_
-    obtain ⟨W, φ, w, hSφ, hφl, hφw⟩ := hS (pullback.fst V.hom g x)
-    -- The base change of `φ` is a morphism between étale `Z`-schemes, hence étale.
-    have hmap : Etale ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ).left := by
-      refine MorphismProperty.of_postcomp (W := @Etale) (W' := @Etale) _
-        ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V).hom
-        (MorphismProperty.Comma.prop _) ?_
-      rw [MorphismProperty.Over.w ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ)]
-      exact MorphismProperty.Comma.prop _
-    -- Lift `x` through the base change of `φ` via `W ×_V (V ×_Y Z) ≅ W ×_Y Z`.
-    obtain ⟨ξ, hξ₁, hξ₂⟩ := Scheme.Pullback.exists_preimage_pullback
-      (f := φ.left) (g := pullback.fst V.hom g) w x hφw
-    have hcomp : (pullbackRightPullbackFstIso V.hom g φ.left ≪≫
-        pullback.congrHom (MorphismProperty.Over.w φ) rfl).hom ≫
-          ((MorphismProperty.Over.pullback @Etale ⊤ g).map φ).left =
-        pullback.snd φ.left (pullback.fst V.hom g) := by
-      apply pullback.hom_ext
-      · simp [pullback.condition]
-      · simp
-    refine ⟨(MorphismProperty.Over.pullback @Etale ⊤ g).obj W,
-      (MorphismProperty.Over.pullback @Etale ⊤ g).map φ,
-      (pullbackRightPullbackFstIso V.hom g φ.left ≪≫
-        pullback.congrHom (MorphismProperty.Over.w φ) rfl).hom ξ,
-      ⟨W, φ, 𝟙 _, hSφ, (Category.id_comp _).symm⟩, hmap, ?_⟩
-    exact ((Scheme.Hom.comp_apply _ _ _).symm.trans (by rw [hcomp]; rfl)).trans hξ₂
-
-/-- Base change along an arbitrary morphism `g : Z ⟶ Y` is representably flat: the small
-étale site of `Y` has finite limits, and base change preserves them. -/
-instance Etale.representablyFlat_overPullback :
-    RepresentablyFlat (MorphismProperty.Over.pullback @Etale ⊤ g) :=
-  flat_of_preservesFiniteLimits _
-
 /-- Base change along an arbitrary morphism `g : Z ⟶ Y` is continuous for the small étale
-topologies. -/
+topologies. This is the `P = Q = @Etale` case of
+`AlgebraicGeometry.Scheme.isContinuous_overPullback`. -/
 instance Etale.isContinuous_overPullback :
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
-  Functor.isContinuous_of_coverPreserving
-    (compatiblePreservingOfFlat _ _)
-    (Etale.coverPreserving_overPullback g)
+  Scheme.isContinuous_overPullback @Etale @Etale le_rfl g
 
 end Continuity
 
@@ -180,16 +140,26 @@ section Star
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
+namespace Etale
+
 /-- The pushforward `g_*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites, given objectwise by `(g_* G)(V → Y) = G(V ×_Y Z → Z)`. -/
-noncomputable def Etale.lowerStar :
+noncomputable def lowerStar :
     Sheaf Z.smallEtaleTopology A ⥤ Sheaf Y.smallEtaleTopology A :=
   GrothendieckTopology.lowerStar A @Etale @Etale le_rfl g
+
+@[inherit_doc Etale.lowerStar]
+scoped notation "(" g ")_*[" A "]" =>
+  lowerStar A g
+
+end Etale
+
+open Etale
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The sections of `g_* G` over `V → Y` are the sections of `G` over `V ×_Y Z → Z`. -/
 lemma Etale.lowerStar_obj_val_obj (G : Sheaf Z.smallEtaleTopology A) (b : Y.Etale) :
-    ((Etale.lowerStar A g).obj G).obj.obj (op b) =
+    ((g)_*[A].obj G).obj.obj (op b) =
       G.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
 
@@ -197,47 +167,53 @@ omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback @Etale ⊤ g).op`. -/
 lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G ⟶ G')
     (b : Y.Etale) :
-    (((Etale.lowerStar A g).map φ).hom).app (op b) =
+    (((g)_*[A].map φ).hom).app (op b) =
       φ.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
 
 /-- The pushforward `g_*` on étale sheaves with values in a preadditive category is
 additive: it acts on morphisms by whiskering, which is compatible with the objectwise
 addition. -/
-instance Etale.lowerStar_additive : (Etale.lowerStar A g).Additive where
+instance Etale.lowerStar_additive : (g)_*[A].Additive where
 
 /-- The pushforward `g_*` on étale sheaves preserves limits of any shape that exists in the
 coefficient category. -/
 instance Etale.preservesLimitsOfShape_lowerStar (E : Type*) [Category E]
-    [HasLimitsOfShape E A] : PreservesLimitsOfShape E (Etale.lowerStar A g) :=
+    [HasLimitsOfShape E A] : PreservesLimitsOfShape E (g)_*[A] :=
   GrothendieckTopology.preservesLimitsOfShape_lowerStar A @Etale @Etale le_rfl g E
 
 /-- The pushforward `g_*` on étale sheaves with values in an abelian category is left
 exact. -/
-instance Etale.preservesFiniteLimits_lowerStar :
-    PreservesFiniteLimits (Etale.lowerStar A g) :=
+instance Etale.preservesFiniteLimits_lowerStar : PreservesFiniteLimits (g)_*[A] :=
   GrothendieckTopology.preservesFiniteLimits_lowerStar A @Etale @Etale le_rfl g
 
 section Adjunction
+
+namespace Etale
 
 /-- The pullback `g^*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites: left Kan extension on presheaves followed by sheafification. For `g` étale the
 Kan extension hypothesis is automatic by
 `Etale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by restriction,
 see `Etale.upperStarIsoOpenImmersionRestriction`. -/
-noncomputable def Etale.upperStar :
+noncomputable def upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
   GrothendieckTopology.upperStar A @Etale @Etale g
 
+@[inherit_doc Etale.upperStar]
+scoped notation "(" g ")^*[" A "]" =>
+  upperStar A g
+
+end Etale
+
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites. -/
-noncomputable def Etale.upperStarLowerStarAdjunction :
-    Etale.upperStar A g ⊣ Etale.lowerStar A g :=
+noncomputable def Etale.upperStarLowerStarAdjunction : (g)^*[A] ⊣ (g)_*[A] :=
   GrothendieckTopology.upperStarLowerStarAdjunction A @Etale @Etale le_rfl g
 
-instance : (Etale.lowerStar A g).IsRightAdjoint :=
+instance : (g)_*[A].IsRightAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isRightAdjoint
 
-instance : (Etale.upperStar A g).IsLeftAdjoint :=
+instance : (g)^*[A].IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
 
 /-- The pullback `g^*` on étale sheaves is additive, being left adjoint to the additive
@@ -254,11 +230,11 @@ extension along the opposite of base change is left exact — for an étale `g` 
 extension being a filtered colimit and filtered colimits in the Grothendieck abelian `A`
 being exact. -/
 instance Etale.preservesFiniteLimits_upperStar :
-    PreservesFiniteLimits (Etale.upperStar A g) :=
+    PreservesFiniteLimits (g)^*[A] :=
   inferInstanceAs (PreservesFiniteLimits (GrothendieckTopology.upperStar A @Etale @Etale g))
 
 /-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
-example : PreservesFiniteColimits (Etale.upperStar A g) := inferInstance
+example : PreservesFiniteColimits (g)^*[A] := inferInstance
 
 end Adjunction
 
@@ -269,18 +245,18 @@ section Comp
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
+open Etale
+
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
 étale sheaves. -/
-noncomputable def Etale.lowerStarComp :
-    Etale.lowerStar A h₁ ⋙ Etale.lowerStar A h₂ ≅ Etale.lowerStar A (h₁ ≫ h₂) :=
+noncomputable def Etale.lowerStarComp : (h₁)_*[A] ⋙ (h₂)_*[A] ≅ (h₁ ≫ h₂)_*[A] :=
   GrothendieckTopology.lowerStarComp A @Etale @Etale le_rfl h₁ h₂
 
 section UpperStar
 
 /-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale
 sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
-noncomputable def Etale.upperStarComp :
-    Etale.upperStar A (h₁ ≫ h₂) ≅ Etale.upperStar A h₂ ⋙ Etale.upperStar A h₁ :=
+noncomputable def Etale.upperStarComp : (h₁ ≫ h₂)^*[A] ≅ (h₂)^*[A] ⋙ (h₁)^*[A] :=
   GrothendieckTopology.upperStarComp A @Etale @Etale le_rfl h₁ h₂
 
 end UpperStar

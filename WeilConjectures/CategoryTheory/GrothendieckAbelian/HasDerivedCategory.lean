@@ -80,6 +80,6 @@ noncomputable def HasDerivedCategory.ofHasKInjectiveResolutions [LocallySmall.{w
 /-- A Grothendieck abelian category `C` (relative to the universe `w`) has a derived
 category with `Hom`-types in `Type w`. -/
 @[implicit_reducible]
-noncomputable def HasDerivedCategory.ofIsGrothendieckAbelian [IsGrothendieckAbelian.{w} C] :
+noncomputable instance HasDerivedCategory.ofIsGrothendieckAbelian [IsGrothendieckAbelian.{w} C] :
     HasDerivedCategory.{w} C :=
   HasDerivedCategory.ofHasKInjectiveResolutions.{w} C

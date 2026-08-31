@@ -7,28 +7,37 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.Pullback
 
 /-!
-# Constant sheaves and localization of sites
+# Constant sheaves, localization of sites and pullback
 
 The constant sheaf functor commutes with localization of a site at an object
 (`CategoryTheory.GrothendieckTopology.overPullbackConstantSheafIso`); in particular the
 restriction of a constant sheaf to a localized site is constant
 (`CategoryTheory.Sheaf.isConstant_over`).
 
+More generally, the constant sheaf functor commutes with the pullback of sheaves along
+a continuous functor of sites which preserves a terminal object
+(`CategoryTheory.Functor.sheafPullbackCommuteConstant`); in particular the pullback of a
+constant sheaf is constant (`CategoryTheory.Sheaf.isConstant_sheafPullback`).
+
 This file imports both `Mathlib.CategoryTheory.Sites.ConstantSheaf` and
-`Mathlib.CategoryTheory.Sites.Over` since neither imports the other.
+`Mathlib.CategoryTheory.Sites.Over` since neither imports the other, and additionally
+`Mathlib.CategoryTheory.Sites.Pullback` for the pullback of sheaves.
 -/
 
 @[expose] public section
 
 universe v u'
 
-open CategoryTheory Limits
+open CategoryTheory Limits Opposite
 
 noncomputable section
 
 namespace CategoryTheory
+
+section Over
 
 variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
   (A : Type u') [Category.{v} A] (W : C)
@@ -55,5 +64,47 @@ lemma Sheaf.isConstant_over (F : Sheaf J A) [F.IsConstant J] :
   obtain ⟨a, ⟨e⟩⟩ := F.mem_essImage_of_isConstant
   exact Sheaf.isConstant_of_iso _
     ((J.overPullback A W).mapIso e.symm ≪≫ (J.overPullbackConstantSheafIso A W).app a)
+
+end Over
+
+section Pullback
+
+variable {C : Type*} [Category* C] {D : Type*} [Category* D] (G : C ⥤ D)
+  (A : Type u') [Category.{v} A]
+  (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+  [G.IsContinuous J K]
+
+/-- Sections of the pushforward of a sheaf along `G` over an object `X` are sections of
+the sheaf over `G.obj X`. -/
+def Functor.sheafPushforwardContinuousCompSheafSectionsObjIso (X : Cᵒᵖ) :
+    G.sheafPushforwardContinuous A J K ⋙ (sheafSections J A).obj X ≅
+      (sheafSections K A).obj (G.op.obj X) :=
+  NatIso.ofComponents (fun F ↦ Iso.refl _)
+
+variable [HasWeakSheafify J A] [HasWeakSheafify K A]
+  [(G.sheafPushforwardContinuous A J K).IsRightAdjoint]
+
+/-- The constant sheaf functor commutes with the pullback of sheaves along a continuous
+functor of sites which preserves a terminal object: the pullback of the constant sheaf
+at `a : A` is the constant sheaf at `a`. -/
+def Functor.constantSheafsheafPullbackIso {T : C} (hT : IsTerminal T)
+    (hGT : IsTerminal (G.obj T)) :
+    constantSheaf J A ⋙ G.sheafPullback A J K ≅ constantSheaf K A :=
+  (((constantSheafAdj J A hT).comp (G.sheafAdjunctionContinuous A J K)).ofNatIsoRight
+    (G.sheafPushforwardContinuousCompSheafSectionsObjIso A J K (op T))).leftAdjointUniq
+    (constantSheafAdj K A hGT)
+
+variable {A J K} in
+/-- The pullback of a constant sheaf along a continuous functor of sites which preserves
+a terminal object is constant. -/
+lemma Sheaf.isConstant_sheafPullback {T : C} (hT : IsTerminal T)
+    (hGT : IsTerminal (G.obj T)) (F : Sheaf J A) [F.IsConstant J] :
+    ((G.sheafPullback A J K).obj F).IsConstant K := by
+  obtain ⟨a, ⟨e⟩⟩ := F.mem_essImage_of_isConstant
+  exact Sheaf.isConstant_of_iso _
+    ((G.sheafPullback A J K).mapIso e.symm ≪≫
+      (G.constantSheafsheafPullbackIso A J K hT hGT).app a)
+
+end Pullback
 
 end CategoryTheory

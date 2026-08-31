@@ -6,9 +6,10 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.SixFunctors.Derived
 
 /-!
 
@@ -30,11 +31,11 @@ the universe `u` of the base schemes. Nothing beyond that is assumed:
   `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`;
 - the chosen localized category `D(X_ét)` comes from the instance
-  `AlgebraicGeometry.Scheme.hasDerivedCategory_sheaf_smallEtaleTopology` of
-  `WeilConjectures.SixFunctors.Derived`, which installs `HasDerivedCategory.{u + 1}` on
-  every sheaf category out of the Grothendieck abelian structure supplied by
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`. In particular the derived
-  category is no longer taken at an auxiliary universe `w`.
+  `HasDerivedCategory.ofIsGrothendieckAbelian` of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory`, which installs
+  `HasDerivedCategory.{u + 1}` on every sheaf category out of the Grothendieck abelian
+  structure supplied by `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`. In
+  particular the derived category is no longer taken at an auxiliary universe `w`.
 
 ## Main definitions
 
