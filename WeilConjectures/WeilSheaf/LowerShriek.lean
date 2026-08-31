@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.SixFunctors.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.WeilSheaf.Defs
 
@@ -57,10 +56,11 @@ compatible with those of `X` and `Y`.
 
 Such a compactification is exactly what a compactification of `f₀` over the finite field
 provides: if `c₀ = (X₀ ⟶[i₀] Z₀ ⟶[p₀] Y₀)` is a compactification of `f₀`, then its
-geometric fiber `Compactification.geometricFiber` — the compactification
-`X ⟶[i] Z ⟶[p] Y` of `f` obtained by base change to `k̄`, where `Z` is the geometric fiber
-of `Z₀` for the structure morphism `p₀ ≫ a_{Y₀}` — is a compactification of `f` whose
-geometric Frobenius `g_Z` makes both
+geometric fiber `Compactification.geometricFiber` — the base change
+`Compactification.baseChange` of `c₀` along the Cartesian square exhibiting `f` as the
+base change of `f₀` along `p_Y : Y ⟶ Y₀`, so `Z = Z₀ ×_{Y₀} Y` — is a compactification of
+`f` whose geometric Frobenius `g_Z = 𝟙 × g_Y`
+(`Compactification.geometricFiberFrobenius`) makes both
 
 ```
 X  -- g_X -->  X            Z  -- g_Z -->  Z
@@ -80,8 +80,9 @@ Cartesian. This is the geometric input of the Frobenius compatibility
 - `AlgebraicGeometry.Scheme.Hom.isPullback_geometricFrobenius_geometricFiberMap`: the
   Frobenius square of `f` is Cartesian.
 - `AlgebraicGeometry.Compactification.geometricFiber`: the geometric fiber of a
-  compactification of `f₀`, a compactification of `f`, with the two Cartesian Frobenius
-  squares `isPullback_geometricFrobenius_geometricFiber_i` and
+  compactification of `f₀`, a compactification of `f`, with its geometric Frobenius
+  `Compactification.geometricFiberFrobenius` and the two Cartesian Frobenius squares
+  `isPullback_geometricFrobenius_geometricFiber_i` and
   `isPullback_geometricFrobenius_geometricFiber_g`.
 - `AlgebraicGeometry.Etale.frobeniusLowerShriekCompatibility`: the Frobenius
   compatibility `β_{Rf_!} : G_Y Rf_! ≅ Rf_! G_X` of the derived lower shriek, the
@@ -218,44 +219,39 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}}
   {aX : X₀ ⟶ Spec (.of k)} {aY : Y₀ ⟶ Spec (.of k)} {u : X₀ ⟶ Y₀}
 
 /-- The geometric fiber of a compactification `c₀ = (X₀ ⟶[i₀] Z₀ ⟶[p₀] Y₀)` of a morphism
-`u : X₀ ⟶ Y₀` over the finite base field: the compactification `X ⟶[i] Z ⟶[p] Y` of the
-geometric fiber of `u`, where `Z` is the geometric fiber of `Z₀` for the structure
-morphism `p₀ ≫ a_{Y₀}`. Properness of `p` and the open-immersion property of `i` hold
-since both are stable under base change, the geometric fibers being base changes along
-the projections to the models. -/
+`u : X₀ ⟶ Y₀` over the finite base field: the base change `Compactification.baseChange` of
+`c₀` along the Cartesian square `Scheme.Hom.isPullback_geometricFiberProj` exhibiting the
+geometric fiber of `u` as the base change of `u` along `p_Y : Y ⟶ Y₀`. It is the
+compactification `X ⟶[i] Z ×_{Y₀} Y ⟶[snd] Y` of the geometric fiber of `u`. -/
 def geometricFiber (c₀ : Compactification u) (h : u ≫ aY = aX) :
-    Compactification (geometricFiberMap h) where
-  Z := (c₀.g ≫ aY).geometricFiber
-  g := geometricFiberMap (aX := c₀.g ≫ aY) rfl
-  i := geometricFiberMap (show c₀.i ≫ c₀.g ≫ aY = aX by rw [← Category.assoc, ← c₀.comm, h])
-  comm := by
-    rw [geometricFiberMap_comp]
-    exact geometricFiberMap_congr _ _ c₀.comm
-  isProper :=
-    MorphismProperty.of_isPullback (isPullback_geometricFiberProj (aX := c₀.g ≫ aY) rfl)
-      c₀.isProper
-  isOpenImmersion :=
-    MorphismProperty.of_isPullback (isPullback_geometricFiberProj
-      (show c₀.i ≫ c₀.g ≫ aY = aX by rw [← Category.assoc, ← c₀.comm, h])) c₀.isOpenImmersion
+    Compactification (geometricFiberMap h) :=
+  c₀.baseChange (isPullback_geometricFiberProj h)
 
-omit [Finite k] in
-@[simp]
-lemma geometricFiber_Z (c₀ : Compactification u) (h : u ≫ aY = aX) :
-    (c₀.geometricFiber h).Z = (c₀.g ≫ aY).geometricFiber :=
-  rfl
+/-- The geometric Frobenius `g_Z = 𝟙 × g_Y` of the compactifying scheme `Z ×_{Y₀} Y` of
+`Compactification.geometricFiber`, acting through the geometric Frobenius of the
+geometric fiber `Y` only. It is an isomorphism, being a base change of isomorphisms. -/
+def geometricFiberFrobenius (c₀ : Compactification u) (h : u ≫ aY = aX) :
+    (c₀.geometricFiber h).Z ≅ (c₀.geometricFiber h).Z :=
+  asIso (pullback.map c₀.g aY.geometricFiberProj c₀.g aY.geometricFiberProj (𝟙 c₀.Z)
+    aY.geometricFrobenius.hom (𝟙 Y₀) (by simp) (by simp))
 
-omit [Finite k] in
-@[simp]
-lemma geometricFiber_g (c₀ : Compactification u) (h : u ≫ aY = aX) :
-    (c₀.geometricFiber h).g = geometricFiberMap (aX := c₀.g ≫ aY) rfl :=
-  rfl
+/-- The geometric Frobenius of the compactifying scheme commutes with the structure
+morphism to `Y` up to the geometric Frobenius of `Y`: `p ∘ g_Z = g_Y ∘ p`. -/
+@[reassoc (attr := simp)]
+theorem geometricFiberFrobenius_hom_g (c₀ : Compactification u) (h : u ≫ aY = aX) :
+    (c₀.geometricFiberFrobenius h).hom ≫ (c₀.geometricFiber h).g =
+      (c₀.geometricFiber h).g ≫ aY.geometricFrobenius.hom := by
+  simp [geometricFiberFrobenius, geometricFiber]
 
-omit [Finite k] in
-@[simp]
-lemma geometricFiber_i (c₀ : Compactification u) (h : u ≫ aY = aX) :
-    (c₀.geometricFiber h).i =
-      geometricFiberMap (show c₀.i ≫ c₀.g ≫ aY = aX by rw [← Category.assoc, ← c₀.comm, h]) :=
-  rfl
+/-- The geometric Frobenius of the compactifying scheme commutes with the open immersion
+of the geometric fiber of the compactification: `i ∘ g_X = g_Z ∘ i`. -/
+@[reassoc (attr := simp)]
+theorem geometricFrobenius_hom_geometricFiber_i (c₀ : Compactification u) (h : u ≫ aY = aX) :
+    aX.geometricFrobenius.hom ≫ (c₀.geometricFiber h).i =
+      (c₀.geometricFiber h).i ≫ (c₀.geometricFiberFrobenius h).hom := by
+  apply pullback.hom_ext <;>
+    simp [geometricFiberFrobenius, geometricFiber, Compactification.baseChange,
+      Compactification.baseChangeOpenImmersion]
 
 /-- The open-immersion square of the geometric fiber of a compactification is Frobenius
 equivariant, with Cartesian square
@@ -267,13 +263,13 @@ i              i
 v              v
 Z  -- g_Z -->  Z
 ```
--/
+
+Both horizontal maps being isomorphisms, only its commutativity is at issue. -/
 theorem isPullback_geometricFrobenius_geometricFiber_i (c₀ : Compactification u)
     (h : u ≫ aY = aX) :
     IsPullback aX.geometricFrobenius.hom (c₀.geometricFiber h).i (c₀.geometricFiber h).i
-      (c₀.g ≫ aY).geometricFrobenius.hom :=
-  isPullback_geometricFrobenius_geometricFiberMap
-    (show c₀.i ≫ c₀.g ≫ aY = aX by rw [← Category.assoc, ← c₀.comm, h])
+      (c₀.geometricFiberFrobenius h).hom :=
+  IsPullback.of_horiz_isIso ⟨geometricFrobenius_hom_geometricFiber_i c₀ h⟩
 
 /-- The proper square of the geometric fiber of a compactification is Frobenius
 equivariant, with Cartesian square
@@ -285,12 +281,13 @@ p              p
 v              v
 Y  -- g_Y -->  Y
 ```
--/
+
+Both horizontal maps being isomorphisms, only its commutativity is at issue. -/
 theorem isPullback_geometricFrobenius_geometricFiber_g (c₀ : Compactification u)
     (h : u ≫ aY = aX) :
-    IsPullback (c₀.g ≫ aY).geometricFrobenius.hom (c₀.geometricFiber h).g
+    IsPullback (c₀.geometricFiberFrobenius h).hom (c₀.geometricFiber h).g
       (c₀.geometricFiber h).g aY.geometricFrobenius.hom :=
-  isPullback_geometricFrobenius_geometricFiberMap (aX := c₀.g ≫ aY) rfl
+  IsPullback.of_horiz_isIso ⟨geometricFiberFrobenius_hom_g c₀ h⟩
 
 end Compactification
 
