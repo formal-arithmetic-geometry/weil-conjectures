@@ -34,7 +34,7 @@ isomorphism. Chow's lemma is then the assertion that `ChowModification f` is non
 * `n` is the index type of the *homogeneous* coordinates of `ℙ(n; S)`, so the space Stacks
   writes `ℙⁿ_S` is `ℙ(Fin (n + 1); S)`. Matching `AlgebraicGeometry.ProjectiveSpace` and
   Mathlib's affine space `𝔸(n; S)`, and matching
-  `AlgebraicGeometry.AffineBlowup.exists_isClosedImmersion_comp_projMvPolynomialToSpec`, a
+  `AlgebraicGeometry.AffineBlowup.exists_isClosedImmersion_comp_projectiveSpaceToSpec`, a
   Chow modification carries a finite type `n : Type u` rather than a natural number.
 * Mathlib has no bundled `IsFiniteType` for morphisms of schemes, so Stacks' "of finite type"
   is spelled out as the two hypotheses `LocallyOfFiniteType f` and `QuasiCompact f`.
