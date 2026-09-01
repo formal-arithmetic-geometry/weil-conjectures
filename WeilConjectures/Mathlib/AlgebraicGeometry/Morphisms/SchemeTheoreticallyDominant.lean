@@ -6,13 +6,14 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # Scheme-theoretically dominant morphisms
 
-Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in two independent groups.
+Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in three independent groups.
 
 ## Flat base change for scheme-theoretic images
 
@@ -55,6 +56,18 @@ inclusion `U.ι` is scheme-theoretically dominant:
   restricts to an isomorphism over `W`, the open `f ⁻¹ᵁ W` is scheme-theoretically
   dense in `X'` and `U ≤ W` is scheme-theoretically dense in `X`, then `f ⁻¹ᵁ U` is
   scheme-theoretically dense in `X'`.
+
+## Rigidity of morphisms into a separated scheme
+
+`AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant`: two `S`-morphisms `a b : T ⟶ Y`
+into a scheme `Y` separated over `S` are equal as soon as they agree after composing with
+a scheme-theoretically dominant morphism `v : V ⟶ T` (blueprint:
+`lem:chow-agree-on-dense-open`; Stacks Project Tag 01RH). Taking `v = V.ι` for a
+scheme-theoretically dense open `V ⊆ T` gives the form in which the statement is usually
+quoted, and combining it with
+`AlgebraicGeometry.IsSchemeTheoreticallyDominant.homOfLE` lets one test equality of
+morphisms defined on an intermediate open `W` on a scheme-theoretically dense open
+`V ≤ W`.
 -/
 
 @[expose] public section
@@ -246,5 +259,53 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
   infer_instance
 
 end Opens
+
+section Separated
+
+/-- **Rigidity of morphisms into a separated scheme**: if `Y` is separated over `S`, then
+two `S`-morphisms `a b : T ⟶ Y` that agree after composing with a scheme-theoretically
+dominant morphism `v : V ⟶ T` are equal. The classical case is `v = V.ι` for a
+scheme-theoretically dense open subscheme `V ⊆ T`.
+
+The equaliser of `a` and `b` is the base change of the diagonal `Y ⟶ Y ×[S] Y` along
+`(a, b) : T ⟶ Y ×[S] Y`, hence a *closed* subscheme of `T` because `Y ⟶ S` is separated.
+As `v` factors through it, its kernel ideal sheaf is contained in the kernel of `v`, which
+is trivial; so the closed immersion is an isomorphism, in particular an epimorphism, and
+`a = b`. (blueprint: `lem:chow-agree-on-dense-open`) -/
+@[stacks 01RH]
+theorem ext_of_isSchemeTheoreticallyDominant {V T Y S : Scheme.{u}} (g : Y ⟶ S)
+    [IsSeparated g] {a b : T ⟶ Y} (h : a ≫ g = b ≫ g) (v : V ⟶ T)
+    [IsSchemeTheoreticallyDominant v] (hab : v ≫ a = v ≫ b) : a = b := by
+  -- `p = (a, b) : T ⟶ Y ×[S] Y` and `z` is the equaliser of `a` and `b`, realised as the
+  -- base change of the diagonal of `g` along `p`.
+  set p : T ⟶ pullback g g := pullback.lift a b h with hp
+  set z : pullback p (pullback.diagonal g) ⟶ T := pullback.fst p (pullback.diagonal g) with hz
+  have : IsClosedImmersion z := by rw [hz]; infer_instance
+  -- `a` and `b` agree after composing with `z`, both projections being the second
+  -- projection of the defining square.
+  have hza : z ≫ a = pullback.snd p (pullback.diagonal g) := by
+    rw [show a = p ≫ pullback.fst g g from (pullback.lift_fst _ _ _).symm, ← Category.assoc,
+      hz, pullback.condition, Category.assoc, pullback.diagonal_fst, Category.comp_id]
+  have hzb : z ≫ b = pullback.snd p (pullback.diagonal g) := by
+    rw [show b = p ≫ pullback.snd g g from (pullback.lift_snd _ _ _).symm, ← Category.assoc,
+      hz, pullback.condition, Category.assoc, pullback.diagonal_snd, Category.comp_id]
+  -- `v` factors through `z`, because `a` and `b` agree after composing with `v`.
+  have hcomm : v ≫ p = (v ≫ a) ≫ pullback.diagonal g :=
+    pullback.hom_ext
+      (by rw [hp, Category.assoc, pullback.lift_fst, Category.assoc,
+        pullback.diagonal_fst, Category.comp_id])
+      (by rw [hp, Category.assoc, pullback.lift_snd, Category.assoc,
+        pullback.diagonal_snd, Category.comp_id, hab])
+  have hfac : pullback.lift _ _ hcomm ≫ z = v := pullback.lift_fst _ _ _
+  -- Hence the kernel of `z` is contained in the trivial kernel of `v`, so `z` is an
+  -- isomorphism.
+  have : IsIso z := by
+    rw [IsClosedImmersion.isIso_iff_ker_eq_bot]
+    refine le_bot_iff.mp ?_
+    rw [← v.ker_eq_bot, ← hfac]
+    exact Scheme.Hom.le_ker_comp _ _
+  rw [← cancel_epi z, hza, hzb]
+
+end Separated
 
 end AlgebraicGeometry

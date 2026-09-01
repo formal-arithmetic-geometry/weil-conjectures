@@ -2,6 +2,7 @@ module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.Defs
@@ -155,6 +156,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
@@ -182,6 +184,7 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocali
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
