@@ -295,27 +295,44 @@ a composition of proper morphisms is proper; hence $Z\to S$ is proper.
 \end{proof}
 
 \begin{definition}[Segre embedding]\label{def:chow-segre}
-Let $S$ be a scheme and let $n_1,\dots,n_m\geq0$ be integers.  Put
-$N=\prod_{i=1}^m(n_i+1)-1$ and index the homogeneous coordinates of
-$\mathbf P^N_S$ by the multi-indices $e=(e_1,\dots,e_m)$ with
-$0\leq e_i\leq n_i$.  The \emph{Segre embedding} is the morphism of
-$S$-schemes
+\lean{AlgebraicGeometry.ProjectiveSpace.segre}
+\leanok
+Let $S$ be a scheme and let $n$ and $m$ be index sets for the homogeneous
+coordinates of $\mathbf P^{n}_S$ and $\mathbf P^{m}_S$.  The \emph{Segre
+embedding} is the morphism of $S$-schemes
 \[
-  s\colon\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S
-  \longrightarrow\mathbf P^N_S,
+  s\colon\mathbf P^{n}_S\times_S\mathbf P^{m}_S
+  \longrightarrow\mathbf P^{n\times m}_S,
   \qquad
-  \bigl((x_{i,0}:\dots:x_{i,n_i})\bigr)_{i=1}^m
+  \bigl((x_k)_{k\in n},(y_l)_{l\in m}\bigr)
   \longmapsto
-  \Bigl[\textstyle\prod_{i=1}^m x_{i,e_i}\Bigr]_e .
+  \bigl[x_k\,y_l\bigr]_{(k,l)\in n\times m} .
 \]
+In the classical indexing this is
+$\mathbf P^{n_1}_S\times_S\mathbf P^{n_2}_S\to\mathbf P^{N}_S$ with
+$N=(n_1+1)(n_2+1)-1$; iterating it $m-1$ times embeds an $m$-fold product
+into $\mathbf P^{N}_S$ with $N=\prod_{i=1}^m(n_i+1)-1$.
 \end{definition}
 
 \begin{lemma}[The Segre embedding is a closed immersion]\label{lem:chow-segre}
-The morphism $s$ of \Cref{def:chow-segre} is a closed immersion.  Consequently
-$\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S\to S$ is proper.
+\lean{AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_segre,
+AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi,
+AlgebraicGeometry.ProjectiveSpace.isProper_pi_hom}
+\leanok
+The morphism $s$ of \Cref{def:chow-segre} is a closed immersion.  Consequently,
+for index sets $n_1,\dots,n_m$ there are an index set $N$ and a closed
+immersion of $S$-schemes
+\[
+  \mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S
+  \longrightarrow\mathbf P^{N}_S ;
+\]
+one may take $N=n_1\times\dots\times n_m$.  Moreover, if all the $n_i$ are
+finite, then $\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S\to S$ is
+proper.
 \end{lemma}
 \begin{proof}
 \uses{def:chow-segre}
+\leanok
 Being a closed immersion is local on the target and on $S$, so we may assume
 $S=\Spec A$ is affine and check the assertion on the standard affine charts
 $D_+(X_e)\subseteq\mathbf P^N_S$, which cover $\mathbf P^N_S$.  For a
@@ -338,11 +355,29 @@ multi-index $f=(e_1,\dots,e_{i-1},f_i,e_{i+1},\dots,e_m)$ satisfies
 $X_f/X_e\mapsto x_{i,f_i}/x_{i,e_i}$, and these ratios generate the target as
 an $A$-algebra.  Hence $s$ is, locally on the target, the morphism of affine
 schemes attached to a surjective ring homomorphism, i.e.\ a closed immersion.
-Compare \stacksproject{01WD}.
+Compare \stacksproject{01WD}.  (The argument above is written for a general
+$m$; the formalisation carries it out for the binary case $m=2$ over
+$\Spec\mathbf Z$, obtains a general base $S$ by base change, and reduces the
+general $m$ to the binary case by the induction below.)
 
-For the last assertion combine this with \stacksproject{01WC} and
-\stacksproject{01W5}: the composition of the closed immersion $s$ with the
-proper morphism $\mathbf P^N_S\to S$ is proper.
+The $m$-fold statement follows by induction on the index set of the product.
+For the empty product the fibre product is $S$ itself, which is
+$\mathbf P^{N}_S$ for a one-element index set $N$; and if
+$\mathbf P^{n_2}_S\times_S\dots\times_S\mathbf P^{n_m}_S\to\mathbf P^{N}_S$ is
+a closed immersion, then so is
+\[
+  \mathbf P^{n_1}_S\times_S\bigl(\mathbf P^{n_2}_S\times_S\dots\times_S
+  \mathbf P^{n_m}_S\bigr)
+  \longrightarrow\mathbf P^{n_1}_S\times_S\mathbf P^{N}_S
+  \longrightarrow\mathbf P^{n_1\times N}_S,
+\]
+the first morphism because closed immersions are stable under base change and
+the second by the binary case.
+
+The last assertion does not use the Segre embedding: a finite fibre product of
+proper $S$-schemes is proper over $S$, because properness is stable under base
+change and under composition, and $\mathbf P^{n_i}_S\to S$ is proper by
+\stacksproject{01WC}.
 \end{proof}
 
 \begin{lemma}[Tuples of morphisms with one immersion]\label{lem:chow-tuple-immersion}
