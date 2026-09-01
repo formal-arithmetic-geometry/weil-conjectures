@@ -270,13 +270,24 @@ $D_+(T_\lambda)$ is an immersion.
 \end{proof}
 
 \begin{lemma}[Closed model of a quasi-compact immersion]\label{lem:chow-closed-model}
+\lean{AlgebraicGeometry.ProperClosedModel,
+AlgebraicGeometry.nonempty_properClosedModel}
+\leanok
 Let $S$ be a scheme and let $j\colon V\to\mathbf P^n_S$ be a quasi-compact
 immersion.  Let $Z\subseteq\mathbf P^n_S$ be the scheme-theoretic image of $j$.
 Then $Z$ is a closed subscheme of $\mathbf P^n_S$, the induced morphism
 $V\to Z$ is an open immersion identifying $V$ with a scheme-theoretically dense
 open subscheme of $Z$, and $Z\to S$ is proper.
+
+The formalisation packages this data as a structure
+\texttt{ProperClosedModel}, in the case in which it is used below: $S$ is
+noetherian and $g\colon V\to S$ is locally of finite type with $V$ affine, so
+that $j$ is supplied by \Cref{lem:chow-affine-immersion} and is automatically
+quasi-compact because $V$ is then noetherian.
 \end{lemma}
 \begin{proof}
+\uses{lem:chow-affine-immersion}
+\leanok
 The first two assertions are \stacksproject{01RG} applied to the quasi-compact
 immersion $j$.  For the last one, $\mathbf P^n_S\to S$ is proper by
 \stacksproject{01WC}, a closed immersion is proper by \stacksproject{01W5}, and
