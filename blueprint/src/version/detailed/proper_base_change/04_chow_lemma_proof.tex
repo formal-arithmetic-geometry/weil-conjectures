@@ -138,6 +138,13 @@ contains every $Z_j$ and therefore equals $X$.
 
 \begin{lemma}[Scheme-theoretic closure of a dense open]
 \label{lem:chow-scheme-theoretic-closure}
+\lean{AlgebraicGeometry.Scheme.Opens.surjective_imageι_ι,
+AlgebraicGeometry.Scheme.Opens.isIso_morphismRestrict_imageι,
+AlgebraicGeometry.Scheme.Opens.isSchemeTheoreticallyDominant_preimage_imageι,
+AlgebraicGeometry.Scheme.Opens.isAffineOpen_preimage_imageι,
+AlgebraicGeometry.Scheme.Opens.iSup_preimage_imageι_eq_top,
+AlgebraicGeometry.Scheme.Opens.iInf_preimage_imageι}
+\leanok
 Let $X$ be a scheme and let $U\subseteq X$ be a dense open subscheme such that
 the inclusion $u\colon U\to X$ is quasi-compact and quasi-separated.  Let
 $X^{*}\subseteq X$ be the scheme-theoretic image of $u$.  Then:
@@ -151,6 +158,7 @@ $X^{*}\subseteq X$ be the scheme-theoretic image of $u$.  Then:
 \end{enumerate}
 \end{lemma}
 \begin{proof}
+\leanok
 By construction $X^{*}\to X$ is a closed immersion, and $U$ factors through it.
 Its image is a closed subset containing the dense subset $U$, hence is all of
 $X$, so $X^{*}\to X$ is surjective.  The quasi-coherent ideal sheaf of $X^{*}$
@@ -161,6 +169,16 @@ scheme-theoretic image commutes with restriction to opens, the
 scheme-theoretic image of $U\to X^{*}$ is $X^{*}$, which is (2).  For (3), each
 $U_i^{*}$ is a closed subscheme of the affine scheme $U_i$, hence affine, and
 $U_1^{*}\cap\dots\cap U_m^{*}=X^{*}\cap U=U$.
+
+In Lean, $X^{*}$ is \texttt{\detokenize{U.ι.image}}, the scheme-theoretic image of the
+inclusion \texttt{\detokenize{U.ι}}, and $U_i^{*}$ is the open
+\texttt{\detokenize{U.ι.imageι ⁻¹ᵁ Uᵢ}} of $X^{*}$; the copy of $U$ in $X^{*}$ is
+\texttt{\detokenize{U.ι.imageι ⁻¹ᵁ U}}.  Surjectivity comes from the identification of the
+underlying set of a scheme-theoretic image with the closure of the set-theoretic image
+(\texttt{\detokenize{AlgebraicGeometry.Scheme.Hom.range_imageι}}), and being an isomorphism
+over $U$ is expressed as \texttt{\detokenize{IsIso (U.ι.imageι ∣_ U)}}.  Only
+quasi-compactness of $u$ is used: quasi-separatedness is automatic for an open immersion, and
+Mathlib's kernel ideal sheaf theory needs only quasi-compactness.
 \end{proof}
 
 \section{Immersions into projective space}\label{sec:chow-immersions}
