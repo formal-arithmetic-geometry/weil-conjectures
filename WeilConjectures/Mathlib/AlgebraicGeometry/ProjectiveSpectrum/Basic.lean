@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
@@ -28,6 +30,10 @@ homomorphism `f : A →+* Γ(X, ⊤)` whose image of the irrelevant ideal genera
 standard charts `Spec (A_f)₀` and `Spec (A_g)₀` of `Proj 𝒜` to a scheme mapping compatibly to
 both of them, and `AlgebraicGeometry.Proj.isUnit_appTop_awayMk` records that the transition
 function `f / g` becomes a unit there.
+
+`AlgebraicGeometry.Proj.exists_isClosedImmersion_of_fromOfGlobalSections` is a criterion for
+the morphism induced by `f` to factor as a closed immersion into a standard affine chart of
+`Proj 𝒜`.
 
 Finally, we record `AlgebraicGeometry.Proj.isIso_toSpecZero`, a criterion for the structure
 morphism `Proj 𝒜 ⟶ Spec 𝒜₀` to be an isomorphism.
@@ -311,6 +317,71 @@ lemma isUnit_appTop_awayMk (hf' : f ∈ 𝒜 (1 • d)) (hg' : g ∈ 𝒜 (1 •
   exact ⟨⟨_, _, h1, by rw [mul_comm]; exact h1⟩, rfl⟩
 
 end Cocycle
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **A criterion for a morphism into `Proj 𝒜` to factor as a closed immersion into an affine
+chart.** If `X` is affine and the homogeneous element `t` of positive degree pulls back to `1`
+under `f : A →+* Γ(X, ⊤)`, the morphism `X ⟶ Proj 𝒜` attached to `f` factors through
+`Spec (A_t)₀`, and the factorization is a closed immersion as soon as `Γ(X, ⊤)` is generated as
+a ring by the images under `f` of the homogeneous elements of degree a multiple of `deg t`. -/
+theorem exists_isClosedImmersion_of_fromOfGlobalSections {X : Scheme.{u}} [IsAffine X]
+    (f : A →+* Γ(X, ⊤)) (hf : (HomogeneousIdeal.irrelevant 𝒜).toIdeal.map f = ⊤)
+    {t : A} {d : ℕ} (h0d : 0 < d) (hd : t ∈ 𝒜 d) (ht : f t = 1)
+    (hgen : Subring.closure {y : Γ(X, ⊤) | ∃ e : ℕ, ∃ a ∈ 𝒜 (e • d), f a = y} = ⊤) :
+    ∃ q : X ⟶ Spec (.of (Away 𝒜 t)), IsClosedImmersion q ∧
+      q ≫ awayι 𝒜 t hd h0d = fromOfGlobalSections 𝒜 f hf := by
+  have hbo : X.basicOpen (f t) = ⊤ := by rw [ht]; exact X.basicOpen_one
+  have hι : IsIso (X.basicOpen (f t)).ι :=
+    isIso_of_isOpenImmersion_of_opensRange_eq_top _ ((Scheme.Opens.opensRange_ι _).trans hbo)
+  have hxle : Submonoid.powers t ≤ (Submonoid.powers (f t)).comap f :=
+    Submonoid.powers_le.mpr (Submonoid.mem_powers _)
+  set Θ : Away 𝒜 t →+* Localization.Away (f t) :=
+    (IsLocalization.map (S := Localization.Away t) (Localization.Away (f t)) f hxle).comp
+      (algebraMap (Away 𝒜 t) (Localization.Away t)) with hΘdef
+  have hu : IsUnit (f t) := ht ▸ isUnit_one
+  have hbij : Function.Bijective (algebraMap Γ(X, ⊤) (Localization.Away (f t))) := by
+    have hle : Submonoid.powers (f t) ≤ IsUnit.submonoid Γ(X, ⊤) := by
+      rintro _ ⟨e, rfl⟩
+      exact hu.pow e
+    exact (IsLocalization.atUnits Γ(X, ⊤) (Submonoid.powers (f t))
+      (S := Localization.Away (f t)) hle).bijective
+  have hisoalg : IsIso (CommRingCat.ofHom (algebraMap Γ(X, ⊤) (Localization.Away (f t)))) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr hbij
+  have hcomp : IsIso (X.toSpecAway (f t) ≫ Spec.map (CommRingCat.ofHom
+      (algebraMap Γ(X, ⊤) (Localization.Away (f t))))) := by
+    rw [Scheme.toSpecAway_SpecMap_algebraMap]
+    infer_instance
+  have hisoaway : IsIso (X.toSpecAway (f t)) :=
+    IsIso.of_isIso_comp_right (X.toSpecAway (f t)) (Spec.map (CommRingCat.ofHom
+      (algebraMap Γ(X, ⊤) (Localization.Away (f t)))))
+  have hΘmk : ∀ (e : ℕ) (a : A) (ha : a ∈ 𝒜 (e • d)),
+      Θ (Away.mk 𝒜 hd e a ha) = algebraMap Γ(X, ⊤) (Localization.Away (f t)) (f a) := by
+    intro e a ha
+    rw [hΘdef, RingHom.comp_apply, HomogeneousLocalization.algebraMap_apply,
+      HomogeneousLocalization.Away.val_mk, Localization.mk_eq_mk', IsLocalization.map_mk',
+      IsLocalization.mk'_eq_iff_eq_mul]
+    simp [ht]
+  have hΘsurj : Function.Surjective Θ := by
+    intro y
+    obtain ⟨γ, rfl⟩ := hbij.2 y
+    have hmem : γ ∈ Subring.comap (algebraMap Γ(X, ⊤) (Localization.Away (f t))) Θ.range := by
+      refine Subring.closure_le.mpr ?_ (hgen ▸ Subring.mem_top γ)
+      rintro _ ⟨e, a, ha, rfl⟩
+      exact ⟨Away.mk 𝒜 hd e a ha, hΘmk e a ha⟩
+    exact hmem
+  refine ⟨inv (X.basicOpen (f t)).ι ≫ X.toSpecAway (f t) ≫
+    Spec.map (CommRingCat.ofHom Θ), ?_, ?_⟩
+  · have : IsClosedImmersion (Spec.map (CommRingCat.ofHom Θ)) :=
+      IsClosedImmersion.spec_of_surjective _ hΘsurj
+    infer_instance
+  · have key : X.toSpecAway (f t) ≫ Spec.map (CommRingCat.ofHom Θ) =
+        toBasicOpenOfGlobalSections 𝒜 f rfl h0d hd ≫ (basicOpenIsoSpec 𝒜 t hd h0d).hom := by
+      rw [toBasicOpenOfGlobalSections_comp_basicOpenIsoSpec_hom 𝒜 f rfl h0d hd hxle,
+        Scheme.toSpecAway, Category.assoc]
+    have hbi : (basicOpenIsoSpec 𝒜 t hd h0d).hom ≫ awayι 𝒜 t hd h0d = (basicOpen 𝒜 t).ι := by
+      rw [← basicOpenIsoSpec_inv_ι, Iso.hom_inv_id_assoc]
+    rw [key, Category.assoc, Category.assoc, hbi,
+      ← ι_comp_fromOfGlobalSections 𝒜 f hf h0d hd, IsIso.inv_hom_id_assoc]
 
 end Proj
 
