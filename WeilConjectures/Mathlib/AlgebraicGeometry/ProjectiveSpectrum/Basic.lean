@@ -22,6 +22,9 @@ homomorphism `f : A →+* Γ(X, ⊤)` whose image of the irrelevant ideal genera
   with `g : Y ⟶ X` gives the morphism induced by `Γ(g) ∘ f`;
 - `AlgebraicGeometry.Proj.fromOfGlobalSections_eq_of_unit_pow_mul`: rescaling `f` in degree
   `i` by the `i`-th power of a unit of `Γ(X, ⊤)` does not change the induced morphism.
+
+Finally, we record `AlgebraicGeometry.Proj.isIso_toSpecZero`, a criterion for the structure
+morphism `Proj 𝒜 ⟶ Spec 𝒜₀` to be an isomorphism.
 -/
 
 @[expose] public section
@@ -31,6 +34,8 @@ universe u
 open HomogeneousLocalization CategoryTheory
 
 namespace AlgebraicGeometry
+
+open CategoryTheory HomogeneousLocalization
 
 variable {σ : Type u} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
   (𝒜 : ℕ → σ) [GradedRing 𝒜]
@@ -255,5 +260,22 @@ end unitPowMul
 end fromOfGlobalSections
 
 end Proj
+
+/-- **A criterion for `Proj 𝒜 ⟶ Spec 𝒜₀` to be an isomorphism**: it suffices that a single
+homogeneous element `f` of positive degree has `D₊(f) = Proj 𝒜` and that the canonical map
+`𝒜₀ ⟶ (𝒜_f)₀` is bijective. Indeed `Proj 𝒜 = D₊(f) ≅ Spec (𝒜_f)₀ ≅ Spec 𝒜₀`. -/
+lemma Proj.isIso_toSpecZero {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)
+    (htop : Proj.basicOpen 𝒜 f = ⊤)
+    (hbij : Function.Bijective (fromZeroRingHom 𝒜 (Submonoid.powers f))) :
+    IsIso (Proj.toSpecZero 𝒜) := by
+  have : IsIso (Proj.awayι 𝒜 f f_deg hm) :=
+    isIso_of_isOpenImmersion_of_opensRange_eq_top _
+      ((Proj.opensRange_awayι 𝒜 f f_deg hm).trans htop)
+  have : IsIso (CommRingCat.ofHom (fromZeroRingHom 𝒜 (Submonoid.powers f))) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr hbij
+  have : IsIso (Proj.awayι 𝒜 f f_deg hm ≫ Proj.toSpecZero 𝒜) := by
+    rw [Proj.awayι_toSpecZero]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (Proj.awayι 𝒜 f f_deg hm) _
 
 end AlgebraicGeometry
