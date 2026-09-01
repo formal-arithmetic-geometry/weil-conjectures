@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
@@ -202,9 +203,11 @@ lemma homOfSections_resLE_standardOpenIso_hom_toSpecMvPoly (i : n) :
   exact (Category.assoc _ _ _).symm.trans
     ((congrArg (fun t ↦ t ≫ Spec.map (CommRingCat.ofHom
         (homogeneousLocalizationAwayXEquiv (ULift.{u} ℤ) i).symm.toRingHom))
-      (Proj.toBasicOpenOfGlobalSections_basicOpenIsoSpec_hom
-        (homogeneousSubmodule n (ULift.{u} ℤ)) (evalSections s) (evalSections_X s i) _ _)).trans
-      (Category.assoc _ _ _))
+      ((Proj.toBasicOpenOfGlobalSections_comp_basicOpenIsoSpec_hom
+          (homogeneousSubmodule n (ULift.{u} ℤ)) (evalSections s) (evalSections_X s i)
+          Nat.one_pos (X_mem_homogeneousSubmodule_one _ i)
+          (powers_X_le_comap_powers s i)).trans
+        (Category.assoc _ _ _).symm)).trans (Category.assoc _ _ _))
 
 variable {n S} in
 /-- **The computation rule for the standard charts**: for a morphism `g : X ⟶ S` and a family
