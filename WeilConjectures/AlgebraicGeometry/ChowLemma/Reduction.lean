@@ -1,0 +1,122 @@
+/-
+Copyright (c) 2026 Christian Merten. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Christian Merten
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
+
+/-!
+# The reduction step of Chow's lemma
+
+Let `S` be a Noetherian scheme and let `f : X ⟶ S` be separated, locally of finite type and
+quasi-compact. The first two steps of the proof of Chow's lemma replace `X` by a closed
+subscheme `X*` carrying a finite affine open cover whose intersection is not merely dense but
+*scheme-theoretically* dense. This file packages the outcome of those two steps as a structure
+`AlgebraicGeometry.ChowReduction f` and proves that it is nonempty
+(`AlgebraicGeometry.nonempty_chowReduction`), so that the proof of Chow's lemma itself can
+`obtain` such a package and start from step 3.
+
+Both ingredients are already available: the cover is
+`AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset` (step 1) and the passage to
+the scheme-theoretic closure `X*` of the intersection is the material around
+`AlgebraicGeometry.Scheme.Opens.surjective_imageι_ι` (step 2). What this file adds is the
+assembly, together with the deduction that `X` is Noetherian, which is what makes both
+ingredients applicable.
+
+## Main definitions
+
+- `AlgebraicGeometry.ChowReduction` — the data produced by steps 1 and 2 of the proof of
+  Chow's lemma.
+
+## Main statements
+
+- `AlgebraicGeometry.nonempty_chowReduction` — steps 1 and 2 of the proof of Chow's lemma.
+
+## References
+
+* [Stacks, Tag 0200](https://stacks.math.columbia.edu/tag/0200), steps 1 and 2 of the proof.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+/-- **The reduction step of Chow's lemma** for a morphism `f : X ⟶ S`: a surjective closed
+immersion `c : X* ⟶ X` together with a finite affine open cover `X* = ⋃ i, Uᵢ` whose
+intersection `⋂ i, Uᵢ` is scheme-theoretically dense in `X*`, and which is the preimage under
+`c` of a dense open `V ⊆ X` over which `c` is an isomorphism.
+
+Since `c` is a closed immersion, `X*` is again separated, locally of finite type and
+quasi-compact over `S`, so the remaining steps of the proof of Chow's lemma may be run on `X*`
+in place of `X`. -/
+structure ChowReduction {X S : Scheme.{u}} (f : X ⟶ S) where
+  /-- the number of members of the cover -/
+  n : ℕ
+  /-- the closed model `X*` of `X` -/
+  Y : Scheme.{u}
+  /-- the surjective closed immersion `X* ⟶ X` -/
+  c : Y ⟶ X
+  [isClosedImmersion_c : IsClosedImmersion c]
+  [surjective_c : Surjective c]
+  /-- the finite affine open cover of `X*` -/
+  U : Fin n → Y.Opens
+  isAffineOpen_U : ∀ i, IsAffineOpen (U i)
+  iSup_U : ⨆ i, U i = ⊤
+  /-- the dense open of `X` the closed model is an isomorphism over -/
+  V : X.Opens
+  dense_V : Dense (V : Set X)
+  preimage_V : c ⁻¹ᵁ V = ⨅ i, U i
+  [isIso_morphismRestrict_c : IsIso (c ∣_ V)]
+  [isSchemeTheoreticallyDominant_iInf : IsSchemeTheoreticallyDominant (⨅ i, U i).ι]
+
+attribute [instance] ChowReduction.isClosedImmersion_c ChowReduction.surjective_c
+  ChowReduction.isIso_morphismRestrict_c ChowReduction.isSchemeTheoreticallyDominant_iInf
+
+/-- **Steps 1 and 2 of the proof of Chow's lemma.** A scheme `X` that is separated and of finite
+type over a Noetherian scheme `S` admits a surjective closed model `X*` with a finite affine
+open cover whose intersection is scheme-theoretically dense in `X*` and lies over a dense open
+of `X` over which `X* ⟶ X` is an isomorphism.
+
+Step 1 covers `X` by finitely many affine opens `Wᵢ` all containing the generic points of the
+irreducible components of `X`; their intersection `V` is then dense. Step 2 replaces `X` by the
+scheme-theoretic image `X*` of `V ⟶ X`, in which the copy of `V` is scheme-theoretically
+dense. -/
+@[stacks 0200 "Steps 1 and 2 of the proof"]
+theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] :
+    Nonempty (ChowReduction f) := by
+  -- `X` is Noetherian, hence quasi-compact, quasi-separated and with finitely many components.
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  -- Step 1: a finite affine cover through the generic points, with dense intersection.
+  obtain ⟨n, W, hWaff, hWgen, hWcov⟩ :=
+    exists_isAffineOpen_cover_genericPoints_subset
+      (finite_irreducibleComponents_of_isNoetherian (X := X))
+  set V : X.Opens := ⨅ i, W i with hV
+  have hVdense : Dense (V : Set X) := dense_iInf_of_genericPoints_subset hWgen
+  -- Step 2: replace `X` by the scheme-theoretic image of `V ⟶ X`.
+  have hVU : ⨅ i, V.ι.imageι ⁻¹ᵁ W i = V.ι.imageι ⁻¹ᵁ V := V.iInf_preimage_imageι hV.symm
+  exact ⟨{ n := n
+           Y := V.ι.image
+           c := V.ι.imageι
+           surjective_c := V.surjective_imageι_ι hVdense
+           U i := V.ι.imageι ⁻¹ᵁ W i
+           isAffineOpen_U i := V.isAffineOpen_preimage_imageι (hWaff i)
+           iSup_U := V.iSup_preimage_imageι_eq_top hWcov
+           V := V
+           dense_V := hVdense
+           preimage_V := hVU.symm
+           isSchemeTheoreticallyDominant_iInf := hVU ▸ inferInstance }⟩
+
+end AlgebraicGeometry
