@@ -146,6 +146,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
