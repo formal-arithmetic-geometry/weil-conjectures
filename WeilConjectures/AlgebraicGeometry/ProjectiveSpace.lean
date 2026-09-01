@@ -63,10 +63,11 @@ builds relative `Proj`.
   `AlgebraicGeometry.AffineSpace.SpecIso`. This needs `Proj` to commute with base change,
   which Mathlib does not have, so `Proj.projectiveSpaceOverAffine` and `ProjectiveSpace` are
   for now two unrelated definitions.
-- The standard affine charts of `ℙ(n; S)`, i.e. morphisms `𝔸(n; S) ⟶ ℙ(n ⊕ Unit; S)` glued
-  from `Proj.awayι`. Mathlib has no universal property of `Proj`, so these charts are
-  currently the only way to construct morphisms *into* a projective space, and they are a
-  prerequisite for proving Chow's lemma.
+- The standard affine charts of `ℙ(n; S)`, i.e. isomorphisms
+  `ProjectiveSpace.standardOpen (n ⊕ Unit) S i ≅ 𝔸(n; S)` obtained from `Proj.awayι`. They are
+  a prerequisite for proving Chow's lemma. Morphisms *into* a projective space are constructed
+  from families of global sections generating the unit ideal, see
+  `AlgebraicGeometry.ProjectiveSpace.homOfSections`.
 
 ## Blueprint
 
