@@ -33,8 +33,9 @@ transition cocycle relating the two charts `Away 𝒜 f` and `Away 𝒜 g` insid
 
 - `HomogeneousLocalization.Away.map_surjective` — `Away.map` of a surjective graded ring
   homomorphism is surjective.
-- `HomogeneousLocalization.Away.mk_one` and `HomogeneousLocalization.Away.mk_pow_self` — the
-  fractions `1 / f ^ 0` and `f ^ n / f ^ n` are the unit of `Away 𝒜 f`.
+- `HomogeneousLocalization.Away.mk_one`, `HomogeneousLocalization.Away.mk_self` and
+  `HomogeneousLocalization.Away.mk_pow_self` — the fractions `1 / f ^ 0`, `f / f` and
+  `f ^ n / f ^ n` are the unit of `Away 𝒜 f`.
 - `HomogeneousLocalization.Away.mk_mul` and `HomogeneousLocalization.Away.mk_pow` — products and
   powers of fractions.
 - `HomogeneousLocalization.Away.mk_mul_pow_cancel` and
@@ -133,6 +134,12 @@ lemma Away.mk_pow_self (hf : f ∈ 𝒜 d) (n : ℕ) (h : f ^ n ∈ 𝒜 (n • 
   apply val_injective
   rw [Away.val_mk, val_one]
   exact Localization.mk_self (⟨f ^ n, n, rfl⟩ : Submonoid.powers f)
+
+/-- The fraction `f / f` is `1` in `Away 𝒜 f`. -/
+@[simp]
+lemma Away.mk_self (hf : f ∈ 𝒜 d) (h : f ∈ 𝒜 (1 • d)) :
+    Away.mk 𝒜 hf 1 f h = 1 := by
+  simpa using Away.mk_pow_self 𝒜 hf 1 (by simpa using h)
 
 /-- The fraction `1 / f ^ 0` is `1` in `Away 𝒜 f`. -/
 @[simp]

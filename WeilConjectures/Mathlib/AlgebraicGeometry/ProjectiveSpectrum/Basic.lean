@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
 # Basic opens of `Proj` and the morphisms induced by global sections
@@ -22,6 +23,11 @@ homomorphism `f : A →+* Γ(X, ⊤)` whose image of the irrelevant ideal genera
   with `g : Y ⟶ X` gives the morphism induced by `Γ(g) ∘ f`;
 - `AlgebraicGeometry.Proj.fromOfGlobalSections_eq_of_unit_pow_mul`: rescaling `f` in degree
   `i` by the `i`-th power of a unit of `Γ(X, ⊤)` does not change the induced morphism.
+
+`AlgebraicGeometry.Proj.appTop_awayMk_eq_mul` transports the transition cocycle between two
+standard charts `Spec (A_f)₀` and `Spec (A_g)₀` of `Proj 𝒜` to a scheme mapping compatibly to
+both of them, and `AlgebraicGeometry.Proj.isUnit_appTop_awayMk` records that the transition
+function `f / g` becomes a unit there.
 
 Finally, we record `AlgebraicGeometry.Proj.isIso_toSpecZero`, a criterion for the structure
 morphism `Proj 𝒜 ⟶ Spec 𝒜₀` to be an isomorphism.
@@ -258,6 +264,53 @@ lemma fromOfGlobalSections_eq_of_unit_pow_mul (u : Γ(X, ⊤)ˣ) (f f' : A →+*
 end unitPowMul
 
 end fromOfGlobalSections
+
+section Cocycle
+
+variable {d : ℕ} (hd : 0 < d) {f g : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 d) {V : Scheme.{u}}
+  (a : V ⟶ Spec (.of <| Away 𝒜 f)) (b : V ⟶ Spec (.of <| Away 𝒜 g))
+  (hab : a ≫ awayι 𝒜 f hf hd = b ≫ awayι 𝒜 g hg hd)
+
+include hab
+
+/-- **The transition cocycle between two standard charts of `Proj 𝒜`.** If a scheme `V` maps
+to the charts `Spec (A_f)₀` and `Spec (A_g)₀` compatibly over `Proj 𝒜`, then the section
+`x / g` of the second chart pulls back to the product of the pullback of `x / f` from the
+first chart with the pullback of the transition function `f / g`. -/
+lemma appTop_awayMk_eq_mul (hf' : f ∈ 𝒜 (1 • d)) (x : A) (hx : x ∈ 𝒜 (1 • d)) :
+    ((Scheme.ΓSpecIso _).inv ≫ b.appTop).hom (Away.mk 𝒜 hg 1 x hx) =
+      ((Scheme.ΓSpecIso _).inv ≫ a.appTop).hom (Away.mk 𝒜 hf 1 x hx) *
+        ((Scheme.ΓSpecIso _).inv ≫ b.appTop).hom (Away.mk 𝒜 hg 1 f hf') := by
+  set w : V ⟶ Spec (.of <| Away 𝒜 (f * g)) :=
+    Limits.pullback.lift a b hab ≫ (pullbackAwayιIso 𝒜 hf hd hg hd rfl).hom with hw
+  have key : ∀ {R : CommRingCat.{u}} (φ : R ⟶ .of (Away 𝒜 (f * g))) (c : V ⟶ Spec R),
+      w ≫ Spec.map φ = c → ∀ z, ((Scheme.ΓSpecIso R).inv ≫ c.appTop).hom z =
+        ((Scheme.ΓSpecIso _).inv ≫ w.appTop).hom (φ.hom z) := by
+    rintro R φ c rfl z
+    have hφ : (Scheme.ΓSpecIso R).inv ≫ (w ≫ Spec.map φ).appTop =
+        φ ≫ (Scheme.ΓSpecIso _).inv ≫ w.appTop := by
+      rw [Scheme.Hom.comp_appTop, ← Category.assoc, ← Scheme.ΓSpecIso_inv_naturality,
+        Category.assoc]
+    rw [hφ]
+    rfl
+  have ha := key (CommRingCat.ofHom (awayMap 𝒜 hg rfl)) a <| by
+    rw [hw, Category.assoc, pullbackAwayιIso_hom_SpecMap_awayMap_left, Limits.pullback.lift_fst]
+  have hb := key (CommRingCat.ofHom (awayMap 𝒜 hf (mul_comm f g))) b <| by
+    rw [hw, Category.assoc, pullbackAwayιIso_hom_SpecMap_awayMap_right, Limits.pullback.lift_snd]
+  rw [hb _, hb _, ha _, ← map_mul]
+  exact congrArg _ (awayMap_mk_one_eq_mul 𝒜 hf hg hx)
+
+/-- The transition function `f / g` between two standard charts of `Proj 𝒜` becomes a unit on
+any scheme mapping to both charts compatibly over `Proj 𝒜`. -/
+lemma isUnit_appTop_awayMk (hf' : f ∈ 𝒜 (1 • d)) (hg' : g ∈ 𝒜 (1 • d)) :
+    IsUnit (((Scheme.ΓSpecIso _).inv ≫ b.appTop).hom (Away.mk 𝒜 hg 1 f hf')) := by
+  have h1 : ((Scheme.ΓSpecIso _).inv ≫ b.appTop).hom (Away.mk 𝒜 hg 1 f hf') *
+      ((Scheme.ΓSpecIso _).inv ≫ a.appTop).hom (Away.mk 𝒜 hf 1 g hg') = 1 := by
+    rw [mul_comm, ← appTop_awayMk_eq_mul 𝒜 hd hf hg a b hab hf' g hg']
+    simp
+  exact ⟨⟨_, _, h1, by rw [mul_comm]; exact h1⟩, rfl⟩
+
+end Cocycle
 
 end Proj
 
