@@ -346,26 +346,25 @@ proper morphism $\mathbf P^N_S\to S$ is proper.
 \end{proof}
 
 \begin{lemma}[Tuples of morphisms with one immersion]\label{lem:chow-tuple-immersion}
-Let $S$ be a scheme, let $Y_1,\dots,Y_m$ be schemes separated over $S$ and let
-$f_i\colon T\to Y_i$ be morphisms of $S$-schemes.  If $f_1$ is an immersion,
-then
+\lean{AlgebraicGeometry.isImmersion_left_pi_lift}
+\leanok
+Let $S$ be a scheme, let $Y_1,\dots,Y_m$ be schemes over $S$ and let
+$f_i\colon T\to Y_i$ be morphisms of $S$-schemes.  If some $f_k$ is an
+immersion, then
 \[
   (f_1,\dots,f_m)\colon T\longrightarrow Y_1\times_S\dots\times_S Y_m
 \]
 is an immersion.
 \end{lemma}
 \begin{proof}
-Write $P=Y_2\times_S\dots\times_S Y_m$ and $g=(f_2,\dots,f_m)\colon T\to P$.
-Then $(f_1,\dots,f_m)$ is the composition
-\[
-  T\xrightarrow{\ (\mathrm{id}_T,g)\ }T\times_S P
-  \xrightarrow{\ f_1\times_S\mathrm{id}_P\ }Y_1\times_S P .
-\]
-The first morphism is the canonical morphism
-$T\times_P P\to T\times_S P$ attached to $g\colon T\to P$,
-$\mathrm{id}\colon P\to P$ and $P\to S$, hence an immersion by
-\stacksproject{01KR}.  The second morphism is a base change of the immersion
-$f_1$, hence an immersion.  A composition of immersions is an immersion.
+\leanok
+Composing $(f_1,\dots,f_m)$ with the projection $\mathrm{pr}_k$ gives back
+$f_k$, which is an immersion; hence $(f_1,\dots,f_m)$ is an immersion, because
+if a composition $h\circ g$ is an immersion then so is $g$.
+
+(The blueprint originally deduced this from \stacksproject{01KR} by factoring
+$(f_1,\dots,f_m)$ through $T\times_S Y_2\times_S\dots\times_S Y_m$, which also
+requires the $Y_i$ to be separated over $S$.  The argument above needs neither.)
 \end{proof}
 
 \section{The graph construction}\label{sec:chow-graph}
@@ -386,6 +385,11 @@ it is all of $T$.
 \end{proof}
 
 \begin{lemma}[The graph of the cover]\label{lem:chow-graph}
+\lean{AlgebraicGeometry.ChowGraph,
+AlgebraicGeometry.ChowGraph.emb,
+AlgebraicGeometry.ChowGraph.toGraph,
+AlgebraicGeometry.ChowGraph.proj}
+\leanok
 Let $S$ be noetherian, let $X\to S$ be separated of finite type and let
 $X=U_1\cup\dots\cup U_m$ be a finite affine open covering such that
 $U:=U_1\cap\dots\cap U_m$ is scheme-theoretically dense in $X$.  Choose, by
@@ -401,48 +405,50 @@ scheme-theoretic image of
 \]
 Then:
 \begin{enumerate}
-  \item $j$ induces an open immersion $U\to Z$ identifying $U$ with a
-  scheme-theoretically dense open subscheme of $Z$, and $Z\to S$ is proper;
+  \item $Z\to\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ is a
+  closed immersion, $j$ induces an open immersion $U\to Z$ identifying $U$ with
+  a scheme-theoretically dense open subscheme of $Z$, and $Z\to S$ is proper;
   \item for every $i$ the projection $\mathrm{pr}_i|_Z\colon
   Z\to\mathbf P^{n_i}_S$ factors through $Z_i$, and the induced morphism
   $p_i\colon Z\to Z_i$ is proper;
-  \item with $N=\prod_{i=1}^m(n_i+1)-1$, the composition of the closed
-  immersion $Z\to\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ with
-  the Segre embedding is a closed immersion $Z\to\mathbf P^N_S$;
   \item $p_i|_U$ is the open immersion $U\to U_i\to Z_i$; in particular
   $U\subseteq p_i^{-1}(U_i)$.
 \end{enumerate}
+
+The formalisation takes the $m$-fold fibre product
+$\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ to be the categorical
+product in the category of $S$-schemes, and does not compose the closed
+immersion of (1) with a Segre embedding; that is done in the proof of
+\Cref{thm:chow-lemma}.  It also weakens the hypotheses to what the proof uses:
+the members of the cover need not be affine and need not cover $X$, only $X$
+needs to be a noetherian space, and $U$ need not be dense in $X$.
 \end{lemma}
 \begin{proof}
-\uses{lem:chow-affine-immersion,lem:chow-closed-model,lem:chow-segre,lem:chow-tuple-immersion}
+\uses{lem:chow-affine-immersion,lem:chow-closed-model,lem:chow-tuple-immersion}
+\leanok
 Each $j_i|_U$ is an immersion, being the composition of the open immersion
-$U\to U_i$ with the immersion $j_i$, and each $\mathbf P^{n_i}_S$ is separated
-over $S$.  Hence $j$ is an immersion by \Cref{lem:chow-tuple-immersion}, and it
-is quasi-compact because $U$ is noetherian.  Part (1) now follows from
-\stacksproject{01RG} for the first assertion and from \Cref{lem:chow-segre}
-together with \stacksproject{01W5} for the second: $Z$ is a closed subscheme of
-the scheme $\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$, which is
-proper over $S$.
+$U\to U_i$ with the immersion $j_i$.  Hence $j$ is an immersion by
+\Cref{lem:chow-tuple-immersion}, and it is quasi-compact because $U$ is
+noetherian.  Part (1) now follows from \stacksproject{01RG} for the first two
+assertions; for the third, $\mathbf P^{n_1}_S\times_S\dots\times_S
+\mathbf P^{n_m}_S\to S$ is proper, being a finite fibre product of proper
+$S$-schemes, and $Z$ is a closed subscheme of it, so $Z\to S$ is proper by
+\stacksproject{01W5}.
 
-For (2) note first that $Z_i$ is the scheme-theoretic image of
-$j_i|_U\colon U\to\mathbf P^{n_i}_S$: formation of the scheme-theoretic image
-commutes with restriction to the open $U_i\subseteq X$, so $U$ is
-scheme-theoretically dense in $U_i$, and $U_i$ is scheme-theoretically dense in
-$Z_i$ by the choice of $Z_i$.  Since $\mathrm{pr}_i\circ j=j_i|_U$, applying
-\stacksproject{01R9} to the commutative square with rows
-$U\to\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ and
-$U\to\mathbf P^{n_i}_S$ and right-hand vertical map $\mathrm{pr}_i$ yields the
-morphism $p_i\colon Z\to Z_i$ between the scheme-theoretic images.  It is
-proper: $Z\to S$ is proper by (1) and $Z_i\to S$ is separated, so $p_i$ is
-universally closed by \stacksproject{01W6}; moreover $p_i$ is separated and of
-finite type by the standing facts of \Cref{sec:chow-conventions}.
+For (2), the open immersion $U\to Z$ is quasi-compact and scheme-theoretically
+dominant, so $\mathrm{pr}_i|_Z\colon Z\to\mathbf P^{n_i}_S$ and its restriction
+$\mathrm{pr}_i\circ j=j_i|_U$ to $U$ have the same kernel.  That kernel
+contains the ideal sheaf of $Z_i$, because $j_i|_U$ factors through $Z_i$ by
+construction; so the universal property of the closed immersion
+$Z_i\to\mathbf P^{n_i}_S$ produces the morphism $p_i\colon Z\to Z_i$ with
+$p_i$ followed by $Z_i\to\mathbf P^{n_i}_S$ equal to $\mathrm{pr}_i|_Z$.  (This
+is \stacksproject{01R9} in the case in which $Z_i$ is presented as the
+scheme-theoretic image of $j_i|_U$, which it is: formation of the
+scheme-theoretic image commutes with restriction to the open $U_i\subseteq X$.)
+It is proper: $Z\to S$ is proper by (1) and $Z_i\to S$ is separated, so $p_i$
+is proper by \stacksproject{01W6}.
 
-Part (3) holds because $Z\to\mathbf P^{n_1}_S\times_S\dots\times_S
-\mathbf P^{n_m}_S$ is a closed immersion by construction, the Segre embedding
-is a closed immersion by \Cref{lem:chow-segre}, and compositions of closed
-immersions are closed immersions.
-
-Part (4) is immediate from $\mathrm{pr}_i\circ j=j_i|_U$ and the fact that
+Part (3) is immediate from $\mathrm{pr}_i\circ j=j_i|_U$ and the fact that
 $j_i$ identifies $U_i$ with an open subscheme of $Z_i$.
 \end{proof}
 
@@ -507,7 +513,7 @@ $S$-schemes such that
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-\uses{lem:chow-affine-cover,lem:chow-scheme-theoretic-closure,lem:chow-graph,lem:chow-glue,lem:chow-preimage}
+\uses{lem:chow-affine-cover,lem:chow-scheme-theoretic-closure,lem:chow-graph,lem:chow-glue,lem:chow-preimage,lem:chow-segre}
 By the standing facts of \Cref{sec:chow-conventions} the scheme $X$ is
 noetherian and has finitely many irreducible components, and it is
 quasi-compact and quasi-separated.
@@ -537,7 +543,7 @@ is scheme-theoretically dense in $X$.
 $j_i\colon U_i\to\mathbf P^{n_i}_S$, their closed models $Z_i$, the
 scheme-theoretic image $Z$ of $j=(j_1|_U,\dots,j_m|_U)$, the proper
 projections $p_i\colon Z\to Z_i$, and the closed immersion
-$Z\to\mathbf P^N_S$ with $N=\prod_i(n_i+1)-1$.
+$Z\to\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$.
 
 \emph{Step 4: the modification.}  Put $V_i:=p_i^{-1}(U_i)$ and
 $X':=V_1\cup\dots\cup V_m$.  By \Cref{lem:chow-glue} the morphisms
@@ -559,10 +565,13 @@ hence $U$ is closed in $\pi^{-1}(U)$; and $U$ is dense in the open subscheme
 $\pi^{-1}(U)\subseteq Z$.  Thus $U=\pi^{-1}(U)$ and $\pi^{-1}(U)\to U$ is the
 identity.
 
-\emph{Step 7: the immersion.}  The subscheme $X'\subseteq Z$ is open and
-$Z\to\mathbf P^N_S$ is a closed immersion by \Cref{lem:chow-graph}\,(3), so the
-composition $i\colon X'\to\mathbf P^N_S$ is an immersion.  Taking $n:=N$
-completes the proof.
+\emph{Step 7: the immersion.}  Put $N=\prod_i(n_i+1)-1$.  Composing the closed
+immersion $Z\to\mathbf P^{n_1}_S\times_S\dots\times_S\mathbf P^{n_m}_S$ of
+\Cref{lem:chow-graph}\,(1) with the Segre embedding, which is a closed
+immersion by \Cref{lem:chow-segre}, gives a closed immersion
+$Z\to\mathbf P^N_S$.  The subscheme $X'\subseteq Z$ is open, so the composition
+$i\colon X'\to\mathbf P^N_S$ is an immersion.  Taking $n:=N$ completes the
+proof.
 \end{proof}
 
 \begin{corollary}[Chow's lemma for proper morphisms]\label{cor:chow-lemma-proper}
