@@ -13,16 +13,27 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Scheme-theoretically dominant morphisms
 
-Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in four independent groups.
+Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in several independent groups.
+
+
+## Basic characterizations
+
+- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
+  scheme-theoretically dominant if and only if the inclusion of its scheme-theoretic
+  image is an isomorphism;
+- `AlgebraicGeometry.Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant`: precomposing
+  with a scheme-theoretically dominant morphism does not change the kernel ideal sheaf.
+- the inclusion of the generic point `Spec K ⟶ Spec A` of the spectrum of a domain with
+  fraction field `K` is scheme-theoretically dominant, hence
+  `AlgebraicGeometry.IsClosedImmersion.exists_lift_of_isFractionRing`: a morphism
+  `Spec A ⟶ Y` factors through a closed subscheme as soon as its restriction to the
+  generic point does.
 
 ## Flat base change for scheme-theoretic images
 
 Formation of scheme-theoretic images commutes with flat base change (blueprint:
 `lemma:nagata-scheme-image-flat-base-change`; Stacks Project Tag 081I):
 
-- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
-  scheme-theoretically dominant if and only if the inclusion of its scheme-theoretic
-  image is an isomorphism;
 - `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` and
   `AlgebraicGeometry.Scheme.Hom.ker_of_isPullback`: for `q : Y' ⟶ Y` flat, the kernel of
   the base change `T ×_Y Y' ⟶ Y'` is the pullback of the kernel of `g`;
@@ -36,7 +47,10 @@ Formation of scheme-theoretic images commutes with flat base change (blueprint:
   form of a cartesian square;
 - `AlgebraicGeometry.Scheme.Hom.ker_morphismRestrict`: the special case of the
   restriction to an open subscheme of the target
-  (blueprint: `lemma:nagata-scheme-image-restrict-open`).
+  (blueprint: `lemma:nagata-scheme-image-restrict-open`);
+- `AlgebraicGeometry.Scheme.Hom.preimage_subset_range_toImage_of_isClosed`: the
+  set-theoretic form of the same statement over an open in which the range of the
+  morphism is already closed — there the scheme-theoretic image adds no points.
 
 The proof factors the base-changed morphism through the pullback of the
 scheme-theoretic image: the comparison map is the flat base change of the
@@ -84,6 +98,10 @@ horizontal sides (Stacks Project Tag 01R9):
   (`AlgebraicGeometry.Scheme.Hom.toImage_imageMap`) and functorial in the square
   (`AlgebraicGeometry.Scheme.Hom.imageMap_id` and
   `AlgebraicGeometry.Scheme.Hom.imageMap_comp`).
+
+- `AlgebraicGeometry.IsSchemeTheoreticallyDominant.preimage_ι_of_isIso`: the inverse
+  image of a scheme-theoretically dense open under an isomorphism is
+  scheme-theoretically dense.
 -/
 
 @[expose] public section
@@ -104,6 +122,50 @@ theorem isSchemeTheoreticallyDominant_iff_isIso_imageι (g : T ⟶ Y) :
     IsSchemeTheoreticallyDominant g ↔ IsIso g.imageι :=
   (isSchemeTheoreticallyDominant_iff g).trans
     (Scheme.isIso_subschemeι_iff_eq_bot g.ker).symm
+
+/-- Precomposition with a scheme-theoretically dominant morphism does not change the
+kernel ideal sheaf. -/
+lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
+    (γ : T ⟶ Y) [IsSchemeTheoreticallyDominant d] : (d ≫ γ).ker = γ.ker := by
+  rw [Scheme.Hom.ker_comp, d.ker_eq_bot, Scheme.IdealSheafData.map_bot]
+
+section FractionRing
+
+variable (A K : Type u) [CommRing A] [IsDomain A] [Field K] [Algebra A K]
+  [IsFractionRing A K]
+
+/-- The inclusion of the generic point of the spectrum of a domain is
+scheme-theoretically dominant. -/
+instance : IsSchemeTheoreticallyDominant
+    (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
+  have : IsDominant (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
+    constructor
+    change DenseRange (PrimeSpectrum.comap (algebraMap A K))
+    rw [PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical,
+      (RingHom.injective_iff_ker_eq_bot _).mp (IsFractionRing.injective A K)]
+    exact bot_le
+  exact .of_isDominant _
+
+variable {A K} {Z : Scheme.{u}}
+
+/-- **Factorization through a closed subscheme over the spectrum of a domain**
+(blueprint: `lemma:nagata-valuation-factor-closed`): let `A` be a domain with fraction
+field `K`, let `ι : Z ⟶ Y` be a closed immersion and `γ : Spec A ⟶ Y` a morphism whose
+restriction to the generic point `Spec K` factors through `Z`. Then `γ` factors
+through `Z`. -/
+theorem IsClosedImmersion.exists_lift_of_isFractionRing (ι : Z ⟶ Y) [IsClosedImmersion ι]
+    (γ : Spec (CommRingCat.of A) ⟶ Y) (η : Spec (CommRingCat.of K) ⟶ Z)
+    (hcomm : η ≫ ι = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ γ) :
+    ∃ l : Spec (CommRingCat.of A) ⟶ Z, l ≫ ι = γ := by
+  have hker : ι.ker ≤ γ.ker := by
+    refine le_trans ?_ (le_of_eq
+      ((Spec.map
+        (CommRingCat.ofHom (algebraMap A K))).ker_comp_of_isSchemeTheoreticallyDominant γ))
+    rw [← hcomm]
+    exact Scheme.Hom.le_ker_comp η ι
+  exact ⟨IsClosedImmersion.lift ι γ hker, IsClosedImmersion.lift_fac ι γ hker⟩
+
+end FractionRing
 
 variable (g : T ⟶ Y) [QuasiCompact g] {Y' : Scheme.{u}} (q : Y' ⟶ Y) [Flat q]
 
@@ -274,6 +336,20 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
   rw [he]
   infer_instance
 
+/-- **Scheme-theoretic density of an open transports along an isomorphism**: if `f` is an
+isomorphism and `U` is a scheme-theoretically dense open of its target, then `f ⁻¹ᵁ U` is
+scheme-theoretically dense in the source. -/
+theorem IsSchemeTheoreticallyDominant.preimage_ι_of_isIso (f : X' ⟶ X) [IsIso f]
+    (U : X.Opens) [IsSchemeTheoreticallyDominant U.ι] :
+    IsSchemeTheoreticallyDominant (f ⁻¹ᵁ U).ι := by
+  have : IsIso (f ∣_ U) :=
+    IsZariskiLocalAtTarget.restrict (P := .isomorphisms Scheme) (inferInstanceAs (IsIso f)) U
+  have he : (f ⁻¹ᵁ U).ι = (f ∣_ U) ≫ U.ι ≫ inv f := by
+    rw [← Category.assoc, morphismRestrict_ι, Category.assoc, IsIso.hom_inv_id,
+      Category.comp_id]
+  rw [he]
+  infer_instance
+
 end Opens
 
 section Separated
@@ -327,22 +403,6 @@ end Separated
 section Image
 
 variable {X X' Y Y' Z : Scheme.{u}}
-
-/-- Precomposing with a quasi-compact scheme-theoretically dominant morphism does not
-change the kernel: if `d : X ⟶ Y` is scheme-theoretically dominant and quasi-compact,
-then `(d ≫ h).ker = h.ker` for every `h : Y ⟶ Z`.
-
-Only the inequality `(d ≫ h).ker ≤ h.ker` is content, the other one being
-`AlgebraicGeometry.Scheme.Hom.le_ker_comp`: sections of `𝒪_Z` killed by `d ≫ h` are
-already killed by `h`, since each `d.app` is injective. -/
-lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant (d : X ⟶ Y) (h : Y ⟶ Z)
-    [IsSchemeTheoreticallyDominant d] [QuasiCompact d] :
-    (d ≫ h).ker = h.ker := by
-  have key (U : Z.affineOpens) :
-      RingHom.ker ((d ≫ h).app U).hom = RingHom.ker ((h.app U).hom) := by
-    rw [Scheme.Hom.comp_app, CommRingCat.hom_comp,
-      RingHom.ker_comp_of_injective _ (d.app_injective _)]
-  simp only [Scheme.Hom.ker, key]
 
 variable (g : X ⟶ Y) (g' : X' ⟶ Y') (u : X ⟶ X') (v : Y ⟶ Y') (w : g ≫ v = u ≫ g')
   [QuasiCompact g]
@@ -401,5 +461,34 @@ lemma Scheme.Hom.imageMap_comp {X'' Y'' : Scheme.{u}} (g'' : X'' ⟶ Y'') (u' : 
   (eq_imageMap g g'' (u ≫ u') (v ≫ v') _ _ (by simp)).symm
 
 end Image
+
+section ImageOverOpen
+
+/-- **The scheme-theoretic image over an open in which the range is already closed**: if
+the range of a quasi-compact morphism `g` is closed in an open `W` of the target, then
+every point of the scheme-theoretic image of `g` lying over `W` is in the range of the
+canonical morphism `g.toImage`, so over `W` the scheme-theoretic image adds nothing to the
+range. In the application `g` is proper over an open of the base, so its range is closed
+there. (blueprint: `lemma:nagata-scheme-image-restrict-open`.) -/
+theorem Scheme.Hom.preimage_subset_range_toImage_of_isClosed {V Y : Scheme.{u}} (g : V ⟶ Y)
+    [QuasiCompact g] {W : Y.Opens} (hW : IsClosed (⇑W.ι ⁻¹' Set.range ⇑g)) :
+    ⇑g.imageι ⁻¹' (W : Set Y) ⊆ Set.range ⇑g.toImage := by
+  intro t ht
+  have hcl : g.imageι t ∈ closure (Set.range ⇑g) := by
+    rw [← Scheme.Hom.support_ker g, ← Scheme.IdealSheafData.range_subschemeι]
+    exact ⟨t, rfl⟩
+  obtain ⟨w, hw⟩ : g.imageι t ∈ Set.range ⇑W.ι := by
+    rw [Scheme.Opens.range_ι]
+    exact ht
+  have hw' : w ∈ ⇑W.ι ⁻¹' closure (Set.range ⇑g) := by
+    rw [Set.mem_preimage, hw]
+    exact hcl
+  have hmem := W.ι.isOpenEmbedding.isOpenMap.preimage_closure_subset_closure_preimage hw'
+  rw [hW.closure_eq, Set.mem_preimage, hw] at hmem
+  obtain ⟨v, hv⟩ := hmem
+  exact ⟨v, g.imageι.isClosedEmbedding.injective
+    (by rw [← Scheme.Hom.comp_apply, Scheme.Hom.toImage_imageι, hv])⟩
+
+end ImageOverOpen
 
 end AlgebraicGeometry

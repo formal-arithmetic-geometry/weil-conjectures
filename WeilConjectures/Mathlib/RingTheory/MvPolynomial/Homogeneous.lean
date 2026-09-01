@@ -144,6 +144,13 @@ lemma IsHomogeneous.eval₂Hom_const_mul {σ R S : Type*} [CommSemiring R]
     Finset.prod_pow_eq_pow_sum, ← hφ.degree_eq_sum_deg_support hs]
   ring
 
+/-- Evaluating a polynomial that is homogeneous of degree `n` at `c • g` gives `c ^ n` times
+its value at `g`. The `eval₂` form of `MvPolynomial.IsHomogeneous.eval₂Hom_const_mul`. -/
+theorem IsHomogeneous.eval₂_const_mul {σ R S : Type*} [CommSemiring R] [CommSemiring S]
+    {φ : MvPolynomial σ R} {n : ℕ} (hφ : φ.IsHomogeneous n) (f : R →+* S) (c : S) (g : σ → S) :
+    eval₂ f (fun i ↦ c * g i) φ = c ^ n * eval₂ f g φ :=
+  hφ.eval₂Hom_const_mul f c g
+
 /-- Every variable is homogeneous of degree one for the total-degree grading. -/
 lemma X_mem_homogeneousSubmodule_one (R : Type*) [CommSemiring R] {σ : Type*} (j : σ) :
     X j ∈ homogeneousSubmodule σ R 1 :=

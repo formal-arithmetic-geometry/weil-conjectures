@@ -77,16 +77,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.comap_of_isOpe
     [IsOpenImmersion f] : (K.comap f).ofFiniteType := fun U' _ ↦
   (Scheme.IdealSheafData.fg_ideal_comap_iff f K U').mpr (hK _ le_top)
 
-/-- Finite-type ideal sheaves are stable under sums. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.sup
-    {X : Scheme.{u}} {I K : X.IdealSheafData}
-    (hI : I.ofFiniteType) (hK : K.ofFiniteType) : (I ⊔ K).ofFiniteType := by
-  intro U _
-  have h := congrFun (Scheme.IdealSheafData.ideal_sup (I := I) (J := K)) U
-  rw [Pi.sup_apply] at h
-  rw [h]
-  exact Submodule.FG.sup (hI U le_top) (hK U le_top)
-
 /-- Finite-type ideal sheaves are stable under products. -/
 lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
     {X : Scheme.{u}} {I K : X.IdealSheafData}
@@ -95,13 +85,13 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
   rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
   exact (hI U le_top).mul (hK U le_top)
 
-/-- The ideal of sections on `⊤` of `ofIdealTop`. -/
-private lemma ideal_top_ofIdealTop {Y : Scheme.{u}} [IsAffine Y] (K : Ideal Γ(Y, ⊤)) :
-    (Scheme.IdealSheafData.ofIdealTop K).ideal ⟨⊤, isAffineOpen_top _⟩ = K := by
-  have h1 : Y.presheaf.map ((homOfLE le_top).op :
-      Opposite.op (⊤ : Y.Opens) ⟶ Opposite.op (((⟨⊤, isAffineOpen_top Y⟩ :
-        Y.affineOpens) : Y.Opens))) = 𝟙 _ := Y.presheaf.map_id _
-  rw [Scheme.IdealSheafData.ofIdealTop_ideal, h1, CommRingCat.hom_id, Ideal.map_id]
+/-- Finite-type ideal sheaves are stable under powers. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.pow
+    {X : Scheme.{u}} {I : X.IdealSheafData} (hI : I.ofFiniteType) (n : ℕ) :
+    (I ^ n).ofFiniteType := by
+  induction n with
+  | zero => simpa using Scheme.IdealSheafData.ofFiniteType_top
+  | succ n ih => rw [pow_succ]; exact ih.mul hI
 
 /-- **Finite-type subsheaves through prescribed sections** (a corollary of the
 finite-type extension theorem, Stacks Project Tag 01PF): if `F` is a finitely generated
@@ -120,7 +110,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_idea
   set K : V.1.toScheme.IdealSheafData :=
     Scheme.IdealSheafData.ofIdealTop (F.map (V.1.ι.appLE V.1 ⊤ htop).hom) with hKdef
   have hKtop : K.ideal ⟨⊤, isAffineOpen_top _⟩ = F.map (V.1.ι.appLE V.1 ⊤ htop).hom :=
-    ideal_top_ofIdealTop _
+    Scheme.IdealSheafData.ideal_top_ofIdealTop _
   have hKle : K ≤ H.comap V.1.ι := by
     refine Scheme.IdealSheafData.le_of_isAffine ?_
     rw [hKtop, Scheme.IdealSheafData.ideal_comap_eq_map_appLE V.1.ι H V
@@ -1287,13 +1277,6 @@ private lemma comap_finset_sup {Y : Scheme.{u}} {α : Type*} (T : Finset α)
   | insert a T' ha ih =>
     rw [Finset.sup_insert, Finset.sup_insert, Scheme.IdealSheafData.comap_sup, ih]
 
-/-- The bottom ideal sheaf is of finite type. -/
-private lemma finiteType_bot : (⊥ : X.IdealSheafData).ofFiniteType := fun U _ ↦ by
-  have h : (⊥ : X.IdealSheafData).ideal U = ⊥ :=
-    congrFun Scheme.IdealSheafData.ideal_bot U
-  rw [h]
-  exact Submodule.fg_bot
-
 /-- **Membership of a numerator in the maximal candidate** (pushforward part): if all
 chart fractions of a section `m ∈ I(V)ᵈ` lie in the chart models of `J`, then `m` is a
 section of the pushforward of `I_Eᵈ · J`. -/
@@ -1337,14 +1320,13 @@ lemma Scheme.IdealSheafData.iSup_blowupChart_image_top_eq_top
   obtain ⟨z, hz⟩ := hx
   exact ⟨z, trivial, hz⟩
 
-/-- **Finite-degree approximation on the blow-up itself** (Stacks Project Tag 0803):
-for finite-type centers `I` on a qcqs scheme `X` and `J` on the blow-up of `I`, there
-are `d ≥ 1` and a finite-type `L ≤ I^d` whose inverse image ideal on the blow-up is
-`I_E^d · J`. The candidate for `L` at degree `d` is a finite-type subsheaf of
+/-- **Finite-degree approximation on the blow-up itself** (Stacks Project Tag 0803;
+blueprint: `lemma:nagata-proj-closed-center-finite-degree-exists`).
+
+The candidate for `L` at degree `d` is a finite-type subsheaf of
 `(I^d) ⊓ ((I_E^d * J).map I.blowupMap)` through the finitely many chart numerators of
 `AffineBlowup.exists_uniform_numerator_finset`, which generate `I_E^d · J` chart by
-chart for `d` large.
-(Blueprint: `lemma:nagata-proj-closed-center-finite-degree-exists`.) -/
+chart for `d` large. -/
 theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (I : X.IdealSheafData) (hI : I.ofFiniteType) (J : I.blowup.IdealSheafData)
@@ -1406,7 +1388,7 @@ theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
   refine ⟨t.attach.sup fun V ↦ LV V.1 V.2,
     Nat.lt_of_lt_of_le Nat.zero_lt_one (Nat.le_add_right 1 _), ?_, ?_, ?_⟩
   · -- finite type: finite supremum of finite-type subsheaves
-    exact Finset.sup_induction finiteType_bot
+    exact Finset.sup_induction Scheme.IdealSheafData.ofFiniteType_bot
       (fun _ ha _ hb ↦ Scheme.IdealSheafData.ofFiniteType.sup ha hb)
       fun V _ ↦ hLVft V.1 V.2
   · -- contained in `I ^ D`

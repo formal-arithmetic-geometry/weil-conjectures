@@ -10,6 +10,7 @@ public import Mathlib.Data.Rat.Star
 public import Mathlib.RingTheory.PowerSeries.Derivative
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.Tactic.LinearCombination
+
 public import Mathlib.Topology.Connected.Separation
 public import Mathlib.Topology.Separation.Lemmas
 

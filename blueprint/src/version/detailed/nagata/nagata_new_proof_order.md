@@ -49,14 +49,50 @@ not by the shortest source-file path.
 | 28 | lemma:nagata-flattening-ideal-exists | Selects the flattening ideal and records its universal specification. | Previous flattening lemmas -> chosen ideal |
 | 29 | lemma:nagata-dense-open-dimension-package | Extends finite presentation and fibre-dimension bounds from a retrocompact dense open (Stacks Tags 081P and 081L). | Flat lft map + dense open -> lfp and dimension bound |
 
-> **Route revision (formalization, 2026-08).** Items 25-29 (the module-flattening
-> chain, Stacks Tags 0815/081R/081P/081L) are **not on the formalized route**:
-> the Lean development replaces them by the boundary-separation route (item 36's
-> Tag 0F3V separation blow-up, common modifications, and the dense-source
-> valuative criterion, item 42).  Item 23 is formalized only in its affine
-> algebraic layer (`Submodule.powTorsionQuotientMap*`).  In `nagata_new.tex` the
-> flattening chain now survives only as the input to item 30 (Tag 081S), whose
-> Lean statement is still `sorry` and whose formal proof route is still open.
+> **Route revision (formalization, 2026-08-28, superseding the earlier note of
+> the same day).** Items 25-29 (the module-flattening chain, Stacks Tags
+> 0815/081R/081P/081L) are **not** on the formalized route.  They are the
+> Stacks Project's proof of item 30 (Tag 081S), but that chain bottoms out in
+> the dévissage sections of Stacks §§38.4-38.10, which exist neither in Mathlib
+> nor in this blueprint.
+>
+> Item 30 (Tag 081S) is formalized instead via **Conrad's Theorem 2.4 and
+> Zariski's Main Theorem** — items 61-75 below, the chapter "Elimination of
+> indeterminacy after Deligne and Conrad" of `nagata_new.tex`.  Both external
+> inputs are available: ZMT is in Mathlib
+> (`Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`), and Stacks Tag 04II
+> is already formalized here as `exists_immersion_affineSpace_of_quasiAffine`
+> (`WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean:291`).  Item 30
+> is still `sorry` in Lean.  Item 23 is so far formalized only in its affine
+> algebraic layer (`Submodule.powTorsion` and `Submodule.torsion'QuotientMap`
+> in `WeilConjectures/Mathlib/Algebra/Module/Torsion.lean`).
+>
+> What is unchanged: the **two-open** theorem (items 43-48) does not go through
+> flattening either way.  It uses the boundary-separation route — item 36's Tag
+> 0F3V separation blow-up, common modifications, and the dense-source valuative
+> criterion (item 42).
+>
+> **Route revision (formalization, 2026-08-26): Tag 080E.** The identification
+> of the strict transform with the blow-up of the pulled-back ideal
+> (`thm:nagata-strict-transform-is-blowup`, Stacks Tag 080E — a prerequisite
+> for the common-modification construction of item 32/Tag 0F3X, where it
+> identifies the strict transforms of the two projections with blow-ups of
+> the graph image) is formalized as
+> `Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform`
+> (`Compactification/StrictTransformBlowup.lean`), **not** via the blueprint's
+> original chart-cocycle gluing but via a comparison morphism
+> `Bl_{I·O_Y}(Y) ⟶ Y ×_X Bl_I(X)` (components: the structure morphism and the
+> Tag 0806 lift) which is a closed immersion by a chart-wise surjectivity
+> computation (`AffineBlowup.closure_range_awayAlgebraMap_union_range_awayMap`,
+> `AffineBlowup.isClosedImmersion_pullbackLift`,
+> `Scheme.IdealSheafData.isClosedImmersion_pullbackLift_blowup_comap`) and has
+> the kernel of the open `U`-locus because the exceptional complement is
+> schematically dense in the `Y`-blow-up
+> (`Scheme.IdealSheafData.ker_pullbackLift_blowup_comap`).  No finiteness
+> hypotheses are needed.  `nagata_new.tex` was updated in step
+> (`def:nagata-strict-transform-blowup-comparison`,
+> `thm:nagata-strict-transform-is-blowup`, and the formalization-route remark
+> after `def:nagata-strict-transform`).
 
 ## 4. Boundary preparation, common modifications, and graphs
 
@@ -119,6 +155,41 @@ not by the shortest source-file path.
 | 59 | def:nagata-final-compactification | Packages the selected descended Noetherian compactification. | Descended model + Noetherian compactification -> final candidate |
 | 60 | thm:nagata-compactification | Main theorem: every separated finite-type morphism in scope is compactifiable. | Final candidate data -> Compactification f |
 
+## 10. Elimination of indeterminacy: the Conrad/ZMT route to Tag 081S
+
+The chapter "Elimination of indeterminacy after Deligne and Conrad" of
+`nagata_new.tex`, following Conrad, *Deligne's notes on Nagata
+compactifications*, §§1-2 (pp. 10-19).  These items are numbered after item 60
+so that the numbering above is unchanged, but logically they all precede item
+30: they are the formalized route to it, replacing items 25-29.  Nothing here
+is formalized yet.
+
+| Order | Label | Role | Main inputs -> output |
+|---:|---|---|---|
+| 61 | def:nagata-conrad-quasi-domination | Defines a quasi-domination: a map on a dense open whose graph stays closed in the ambient product (Conrad Def. 2.1). | Dense open + map to a separated target -> closed-graph datum |
+| 62 | lemma:nagata-conrad-morphism-is-quasi-domination | Any map on `U` to a separated target is a quasi-domination of `U` (the `U = V` case of Remark 2.5). | Separated target -> quasi-domination |
+| 63 | lemma:nagata-conrad-quasi-domination-proper-target | A quasi-domination over a proper target is defined everywhere. | Proper target + closed graph -> domain is all of `X` |
+| 64 | lemma:nagata-conrad-dense-in-admissible-blowup | A dense quasi-compact open stays dense in any admissible blow-up, and is schematically dense when the centre is its exact complement. | Invertible exceptional ideal -> density transport |
+| 65 | lemma:nagata-conrad-schematically-dense-blowup | One admissible blow-up makes the preserved open schematically dense (Stacks Tag 01PH + Tag 080L). | qc open -> blow-up with schematically dense `U` |
+| 66 | lemma:nagata-conrad-strict-transform-in-charts | Deligne's Lemme 0.2 / Conrad Lem. 1.4: the strict transform of one centre lives in the charts of the other; strict transforms of `n` centres are mutually disjoint. | Blow-up chart algebras -> chart-wise disjointness |
+| 67 | def:nagata-conrad-disjointness-setup | Records the hypotheses of Conrad Lem. 1.5: the square, the thickening `T₁ = V(I₁²)`, the auxiliary `T₂`, and the scheme-theoretic factorization hypothesis. | Diagram + two centres -> disjointness situation |
+| 68 | lemma:nagata-conrad-disjointness-blowup | Deligne's Lemme 0.3 / Conrad Lem. 1.5: after blowing up `I₁ + I₂`, the closure of the image of `Y` no longer meets the part over the closure of `V ∖ U`. | Disjointness situation -> separating function `h` on each chart |
+| 69 | lemma:nagata-conrad-affine-space-extension | Case 1 with `Y = 𝔸ⁿ_X` (pp. 14-15): a map `U -> 𝔸ⁿ_X` over an affine base extends to `Bl_I(X) -> ℙⁿ_X` for an explicit centre built from the transition data. | Affine cover of `U` + homogeneous coordinate formulas -> extension |
+| 70 | lemma:nagata-conrad-quasi-affine-affine-base | Case 1 in full: quasi-affine finite-type target over an affine base, `U = V`. | Tag 04II immersion + item 69 + schematic density -> quasi-domination |
+| 71 | lemma:nagata-conrad-quasi-affine-equal-opens | Case 2 (pp. 15-16): quasi-affine target over a qcqs base with `U = V`, by gluing the affine-base solutions along a product centre. | Item 70 on an affine cover + finite-type ideal extension + product blow-up -> glued quasi-domination |
+| 72 | lemma:nagata-conrad-quasi-affine-general | Case 3 (pp. 16-17): quasi-affine target with `U ⊆ V`, by first separating `p(im f)` from the closure of `V ∖ U`. | Item 68 + item 71 on the shrunken base `X ∖ closure(V ∖ U)` -> quasi-domination |
+| 73 | lemma:nagata-conrad-graph-closure-quasi-finite | The general case, first half (pp. 17-19): after one `V`-admissible blow-up the scheme-theoretic image of the graph is quasi-finite and separated over the blow-up. | Affine cover of `Y` + item 72 on each `closure(U_i)` -> finite fibres |
+| 74 | thm:nagata-conrad-elimination | **Conrad Thm. 2.4** (Deligne Thm. 1.2, Nagata Thm. 3.2): a quasi-domination of `V` over a separated finite-type `Y` extends to a quasi-domination of a `V`-admissible blow-up of `X`. | Item 73 + Zariski's Main Theorem (quasi-finite separated => quasi-affine) + item 72 -> the theorem |
+| 75 | cor:nagata-conrad-proper-target-extension | **Conrad Rem. 2.5**: for `U = V` and `Y` proper, a map `U -> Y` extends to a morphism on a `U`-admissible blow-up. | Items 62, 63, 74 -> everywhere-defined extension |
+
+> **Route to item 30.** The remark closing the chapter records the derivation of
+> item 30 (Tag 081S) from item 74: make `U` schematically dense (item 65), apply
+> item 74 with `V = U` to the section `U ≅ q⁻¹(U) ↪ Z`, enlarge the centre so
+> that its complement is exactly `U`, and observe that the strict transform of
+> `Z` — the scheme-theoretic closure of the graph — is a closed subscheme of the
+> closed graph `Γ` containing `U` as a schematically dense open, hence equals
+> it.  No `\leanok` is claimed for any item in this section.
+
 ## Formalization status by PR (stack nagata-01 … nagata-09, 2026-08)
 
 Where each core node (and its Stacks tag) is realized in the Lean development;
@@ -136,6 +207,9 @@ the Lean proof deviates from the written route.
 | #24 | 18 (080A), 19 (080K), 24 (080Y), Tags 080B/080L/01PH/01PF, 0F3V (`disjoint_range_strictTransformMap_separationBlowup`) | proved; the one remaining `sorry`, Tag 0807 (`exists_blowup_mul_isEffectiveCartier_iso`), is closed in PR #26 via the Tag 0806 universal-property kit; 0F3V by direct sum-ideal chart argument, 080P bypassed |
 | #25 | 34, 36, 37 + partial-section lemma, dense refinement | proved; items 30-33 (Tags 081S/0F3Y/0F3X/0F3Z) stated with `sorry`; 0F3W not yet stated |
 | #26 | 38-41 (Tags 02JQ/052K/00IA) + Tag 0807 | proved; item 42 (Tag 0894) stated with `sorry`, split into `universallyClosed_of_isDominant` and `isSeparated_of_isDominant`; the valuation-theoretic items 39-41 (`comapResidue`, `comap_eq_of_le_comap`, `exists_comap_eq`) and the topological core of 02JQ (`exists_specializes_of_mem_closure_range`) live in `WeilConjectures/Mathlib/` helper files |
+| (2026-08-26, integration branch) | Tag 080E (`thm:nagata-strict-transform-is-blowup`): strict transform = blow-up of the pulled-back ideal | `exists_blowup_comap_iso_strictTransform` proved from four obligations (affine chart generation, affine + global closed immersion, kernel identity via schematic density of the exceptional complement); universal-property route, chart-cocycle gluing of the blueprint bypassed |
+| (2026-08-27, integration branch) | 32, Tag 0F3X (`lemma:nagata-common-modification`): existence of a common modification | `nonempty_commonModification` proved along the blueprint route (scheme-theoretic image of the graph; Tag 081S on both projections; Tag 080E to identify the two strict transforms with blow-ups of the pulled-back centres; the product centre `K₁ * K₂` to dominate both; `IsAdmissible.exists_extend`/`exists_comp` to extend it, packaged as `IsAdmissible.exists_isOpenImmersion_blowup`; gluing along the common open). Depends on `sorryAx` only through the still-open Tag 081S (item 30) |
+| (2026-08-27, integration branch) | 43-48, Tag 0F40 (`thm:nagata-two-open`): the two-open compactification theorem | `HasCompactification.of_two_open_cover` (`Compactification/TwoOpen.lean`) proved on top of the comparison layer (`Compactification/TwoOpenComparison.lean`, support for items 43-46). The intermediate schemes `Wᵢ = U ⊔_{Oᵢ} Xᵢ°` (item 43) are pushouts of open immersions (`TwoOpenSide.intermediate`); their overlap is a closed immersion by the exact range description `range υ = ψ⁻¹(O)` (`isClosedImmersion_intermediateGraph`, the constructibility detour of the blueprint bypassed), whence separatedness by Tag 0F3U (`IsSeparated.pushout_desc`); density of the copy of `U` is `dense_range_intermediateU`. The final model is the common modification of the two intermediate schemes (Tag 0F3X, `nonempty_commonModification`; item 45), density transports through it by `IsAdmissible.dense_preimage_blowupMap` (items 46-47), and properness is the dense-source valuative criterion Tag 0894 (`UniversallyClosed.of_valuativeCriterion_of_isDominant`; item 48). Depends on `sorryAx` only through Tag 081S (item 30); the improved-comparison obligation `exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary` is now proved, from Tag 0F3W alone (Tag 0F3Y is not needed: the improved comparison space is a closed subscheme of the strict transform, which is all the argument uses), and the intermediate-scheme layer itself is sorry-free |
 | (2026-08-16) | 34-48 (two-open theorem; Stacks 0F3U/0F40) | **items 43-48 proved**: `HasCompactification.of_two_open_cover` (`Compactification/TwoOpen.lean`) assembles the two-open theorem from `TwoOpenSide`/`TwoOpenPreparation` (`TwoOpenSetup.lean`, `TwoOpenComparison.lean`); the intermediate schemes are pushouts of open immersions (`Mathlib/AlgebraicGeometry/Gluing.lean`), separatedness via Tag 0F3U (`IsSeparated.pushoutDesc`), overlap-closedness without the constructibility detour (`isClosedImmersion_intermediateGraph`), density via `AdmissibleBlowup.dense_preimage`, properness via Tag 0894. Item 35-37 packaging `exists_prepared_twoOpenSide` proved from the (sorried) Tag 0F3Z. Tag 0F3W newly stated (`exists_admissibleBlowup_strictTransform_isIso_near_closure`, `sorry`). One new `sorry`: `exists_prepared_keyDisjoint_twoOpenSide` (the improved-comparison chain, items comparison-restriction/0F3W/0F3Y/boundary-density/key-disjointness), blocked on Tags 0F3W/0F3Y |
 
 ## Remaining implementation notes
