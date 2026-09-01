@@ -25,6 +25,11 @@ Mathlib has no relative projective space to reuse, only the absolute `Proj` of a
 so everything below is new; the integral model itself is
 `Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)`.
 
+Morphisms *into* `ℙ(n; S)` are constructed from families of global sections generating the
+unit ideal in `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections`, and the standard
+affine charts `standardOpen n S i ≅ 𝔸({j : n // j ≠ i}; S)` are in
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts`.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Proj.projectiveSpaceOverAffine` — the projective space `ℙ^σ_A` over an
@@ -63,10 +68,6 @@ builds relative `Proj`.
   `AlgebraicGeometry.AffineSpace.SpecIso`. This needs `Proj` to commute with base change,
   which Mathlib does not have, so `Proj.projectiveSpaceOverAffine` and `ProjectiveSpace` are
   for now two unrelated definitions.
-- The standard affine charts of `ℙ(n; S)`, i.e. morphisms `𝔸(n; S) ⟶ ℙ(n ⊕ Unit; S)` glued
-  from `Proj.awayι`. Mathlib has no universal property of `Proj`, so these charts are
-  currently the only way to construct morphisms *into* a projective space, and they are a
-  prerequisite for proving Chow's lemma.
 
 ## Blueprint
 
@@ -142,6 +143,13 @@ lemma hom_ext {X : Scheme.{u}} {f g : X ⟶ ℙ(n; S)}
     (h₁ : f ≫ ℙ(n; S) ↘ S = g ≫ ℙ(n; S) ↘ S)
     (h₂ : f ≫ toProjInt n S = g ≫ toProjInt n S) : f = g :=
   pullback.hom_ext h₁ h₂
+
+/-- The defining pullback square of `ℙ(n; S)`: it is the base change of the integral model
+`ℙⁿ_ℤ` along the structure morphism of `S`. -/
+lemma isPullback_over_toProjInt :
+    IsPullback (ℙ(n; S) ↘ S) (toProjInt n S) (terminal.from S)
+      (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) :=
+  IsPullback.of_hasPullback _ _
 
 /-- **`ℙ(n; S)` is proper over `S`**: for a finite index type `n`, the structure morphism
 `ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`. -/

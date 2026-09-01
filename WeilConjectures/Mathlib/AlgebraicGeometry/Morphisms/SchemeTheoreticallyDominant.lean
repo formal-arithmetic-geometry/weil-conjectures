@@ -6,13 +6,14 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # Scheme-theoretically dominant morphisms
 
-Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in two independent groups.
+Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in four independent groups.
 
 ## Flat base change for scheme-theoretic images
 
@@ -55,6 +56,34 @@ inclusion `U.ι` is scheme-theoretically dominant:
   restricts to an isomorphism over `W`, the open `f ⁻¹ᵁ W` is scheme-theoretically
   dense in `X'` and `U ≤ W` is scheme-theoretically dense in `X`, then `f ⁻¹ᵁ U` is
   scheme-theoretically dense in `X'`.
+
+## Rigidity of morphisms into a separated scheme
+
+`AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant`: two `S`-morphisms `a b : T ⟶ Y`
+into a scheme `Y` separated over `S` are equal as soon as they agree after composing with
+a scheme-theoretically dominant morphism `v : V ⟶ T` (blueprint:
+`lem:chow-agree-on-dense-open`; Stacks Project Tag 01RH). Taking `v = V.ι` for a
+scheme-theoretically dense open `V ⊆ T` gives the form in which the statement is usually
+quoted, and combining it with
+`AlgebraicGeometry.IsSchemeTheoreticallyDominant.homOfLE` lets one test equality of
+morphisms defined on an intermediate open `W` on a scheme-theoretically dense open
+`V ≤ W`.
+
+## Functoriality of the scheme-theoretic image
+
+A commutative square induces a morphism between the scheme-theoretic images of its two
+horizontal sides (Stacks Project Tag 01R9):
+
+- `AlgebraicGeometry.Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant`: precomposing
+  with a quasi-compact scheme-theoretically dominant morphism does not change the kernel;
+- `AlgebraicGeometry.Scheme.Hom.imageMap`: the induced morphism `g.image ⟶ g'.image`
+  attached to a square `g ≫ v = u ≫ g'` with `g` quasi-compact, characterised by
+  compatibility with the closed immersions into the targets
+  (`AlgebraicGeometry.Scheme.Hom.imageMap_imageι` and
+  `AlgebraicGeometry.Scheme.Hom.eq_imageMap`), also compatible with the factor maps
+  (`AlgebraicGeometry.Scheme.Hom.toImage_imageMap`) and functorial in the square
+  (`AlgebraicGeometry.Scheme.Hom.imageMap_id` and
+  `AlgebraicGeometry.Scheme.Hom.imageMap_comp`).
 -/
 
 @[expose] public section
@@ -246,5 +275,131 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
   infer_instance
 
 end Opens
+
+section Separated
+
+/-- **Rigidity of morphisms into a separated scheme**: if `Y` is separated over `S`, then
+two `S`-morphisms `a b : T ⟶ Y` that agree after composing with a scheme-theoretically
+dominant morphism `v : V ⟶ T` are equal. The classical case is `v = V.ι` for a
+scheme-theoretically dense open subscheme `V ⊆ T`.
+
+The equaliser of `a` and `b` is the base change of the diagonal `Y ⟶ Y ×[S] Y` along
+`(a, b) : T ⟶ Y ×[S] Y`, hence a *closed* subscheme of `T` because `Y ⟶ S` is separated.
+As `v` factors through it, its kernel ideal sheaf is contained in the kernel of `v`, which
+is trivial; so the closed immersion is an isomorphism, in particular an epimorphism, and
+`a = b`. (blueprint: `lem:chow-agree-on-dense-open`) -/
+@[stacks 01RH]
+theorem ext_of_isSchemeTheoreticallyDominant {V T Y S : Scheme.{u}} (g : Y ⟶ S)
+    [IsSeparated g] {a b : T ⟶ Y} (h : a ≫ g = b ≫ g) (v : V ⟶ T)
+    [IsSchemeTheoreticallyDominant v] (hab : v ≫ a = v ≫ b) : a = b := by
+  -- `p = (a, b) : T ⟶ Y ×[S] Y` and `z` is the equaliser of `a` and `b`, realised as the
+  -- base change of the diagonal of `g` along `p`.
+  set p : T ⟶ pullback g g := pullback.lift a b h with hp
+  set z : pullback p (pullback.diagonal g) ⟶ T := pullback.fst p (pullback.diagonal g) with hz
+  have : IsClosedImmersion z := by rw [hz]; infer_instance
+  -- `a` and `b` agree after composing with `z`, both projections being the second
+  -- projection of the defining square.
+  have hza : z ≫ a = pullback.snd p (pullback.diagonal g) := by
+    rw [show a = p ≫ pullback.fst g g from (pullback.lift_fst _ _ _).symm, ← Category.assoc,
+      hz, pullback.condition, Category.assoc, pullback.diagonal_fst, Category.comp_id]
+  have hzb : z ≫ b = pullback.snd p (pullback.diagonal g) := by
+    rw [show b = p ≫ pullback.snd g g from (pullback.lift_snd _ _ _).symm, ← Category.assoc,
+      hz, pullback.condition, Category.assoc, pullback.diagonal_snd, Category.comp_id]
+  -- `v` factors through `z`, because `a` and `b` agree after composing with `v`.
+  have hcomm : v ≫ p = (v ≫ a) ≫ pullback.diagonal g :=
+    pullback.hom_ext
+      (by rw [hp, Category.assoc, pullback.lift_fst, Category.assoc,
+        pullback.diagonal_fst, Category.comp_id])
+      (by rw [hp, Category.assoc, pullback.lift_snd, Category.assoc,
+        pullback.diagonal_snd, Category.comp_id, hab])
+  have hfac : pullback.lift _ _ hcomm ≫ z = v := pullback.lift_fst _ _ _
+  -- Hence the kernel of `z` is contained in the trivial kernel of `v`, so `z` is an
+  -- isomorphism.
+  have : IsIso z := by
+    rw [IsClosedImmersion.isIso_iff_ker_eq_bot]
+    refine le_bot_iff.mp ?_
+    rw [← v.ker_eq_bot, ← hfac]
+    exact Scheme.Hom.le_ker_comp _ _
+  rw [← cancel_epi z, hza, hzb]
+
+end Separated
+
+section Image
+
+variable {X X' Y Y' Z : Scheme.{u}}
+
+/-- Precomposing with a quasi-compact scheme-theoretically dominant morphism does not
+change the kernel: if `d : X ⟶ Y` is scheme-theoretically dominant and quasi-compact,
+then `(d ≫ h).ker = h.ker` for every `h : Y ⟶ Z`.
+
+Only the inequality `(d ≫ h).ker ≤ h.ker` is content, the other one being
+`AlgebraicGeometry.Scheme.Hom.le_ker_comp`: sections of `𝒪_Z` killed by `d ≫ h` are
+already killed by `h`, since each `d.app` is injective. -/
+lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant (d : X ⟶ Y) (h : Y ⟶ Z)
+    [IsSchemeTheoreticallyDominant d] [QuasiCompact d] :
+    (d ≫ h).ker = h.ker := by
+  have key (U : Z.affineOpens) :
+      RingHom.ker ((d ≫ h).app U).hom = RingHom.ker ((h.app U).hom) := by
+    rw [Scheme.Hom.comp_app, CommRingCat.hom_comp,
+      RingHom.ker_comp_of_injective _ (d.app_injective _)]
+  simp only [Scheme.Hom.ker, key]
+
+variable (g : X ⟶ Y) (g' : X' ⟶ Y') (u : X ⟶ X') (v : Y ⟶ Y') (w : g ≫ v = u ≫ g')
+  [QuasiCompact g]
+
+/-- **Functoriality of the scheme-theoretic image**: a commutative square
+`g ≫ v = u ≫ g'` with `g` quasi-compact induces a morphism `g.image ⟶ g'.image` between
+the scheme-theoretic images of its two horizontal sides, compatible with the closed
+immersions into `Y` and `Y'` (`AlgebraicGeometry.Scheme.Hom.imageMap_imageι`) and with
+the factor maps (`AlgebraicGeometry.Scheme.Hom.toImage_imageMap`).
+
+The kernel comparison needed for the universal property of the closed immersion
+`g'.imageι` is `g'.ker ≤ (u ≫ g').ker = (g ≫ v).ker = (g.imageι ≫ v).ker`, the last
+step because `g.toImage` is scheme-theoretically dominant and quasi-compact. -/
+@[stacks 01R9]
+noncomputable def Scheme.Hom.imageMap : g.image ⟶ g'.image :=
+  IsClosedImmersion.lift g'.imageι (g.imageι ≫ v) <| by
+    have key : (g.imageι ≫ v).ker = (g ≫ v).ker := by
+      conv_rhs => rw [← g.toImage_imageι, Category.assoc]
+      exact (Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant g.toImage
+        (g.imageι ≫ v)).symm
+    rw [Scheme.IdealSheafData.ker_subschemeι, key, w]
+    exact Scheme.Hom.le_ker_comp u g'
+
+/-- The morphism induced on scheme-theoretic images lies over `v`. -/
+@[reassoc (attr := simp)]
+lemma Scheme.Hom.imageMap_imageι : imageMap g g' u v w ≫ g'.imageι = g.imageι ≫ v :=
+  IsClosedImmersion.lift_fac _ _ _
+
+/-- The morphism induced on scheme-theoretic images is compatible with the factor maps
+through the scheme-theoretic images. -/
+@[reassoc (attr := simp)]
+lemma Scheme.Hom.toImage_imageMap : g.toImage ≫ imageMap g g' u v w = u ≫ g'.toImage := by
+  rw [← cancel_mono g'.imageι, Category.assoc, imageMap_imageι, ← Category.assoc,
+    g.toImage_imageι, w, Category.assoc, g'.toImage_imageι]
+
+/-- The induced morphism between the scheme-theoretic images is the unique morphism
+compatible with the closed immersions into `Y` and `Y'`, since `g'.imageι` is a
+monomorphism. -/
+lemma Scheme.Hom.eq_imageMap (c : g.image ⟶ g'.image)
+    (hc : c ≫ g'.imageι = g.imageι ≫ v) :
+    c = imageMap g g' u v w := by
+  rw [← cancel_mono g'.imageι, hc, imageMap_imageι]
+
+/-- The morphism induced by the identity square is the identity. -/
+@[simp]
+lemma Scheme.Hom.imageMap_id : imageMap g g (𝟙 X) (𝟙 Y) (by simp) = 𝟙 g.image :=
+  (eq_imageMap g g (𝟙 X) (𝟙 Y) _ _ (by simp)).symm
+
+/-- The morphism induced by a horizontally pasted pair of squares is the composite of the
+induced morphisms. -/
+lemma Scheme.Hom.imageMap_comp {X'' Y'' : Scheme.{u}} (g'' : X'' ⟶ Y'') (u' : X' ⟶ X'')
+    (v' : Y' ⟶ Y'') (w' : g' ≫ v' = u' ≫ g'') [QuasiCompact g'] :
+    imageMap g g'' (u ≫ u') (v ≫ v')
+        (by rw [← Category.assoc, w, Category.assoc, w', Category.assoc]) =
+      imageMap g g' u v w ≫ imageMap g' g'' u' v' w' :=
+  (eq_imageMap g g'' (u ≫ u') (v ≫ v') _ _ (by simp)).symm
+
+end Image
 
 end AlgebraicGeometry
