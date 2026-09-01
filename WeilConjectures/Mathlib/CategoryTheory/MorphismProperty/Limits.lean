@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 
 /-!
 # Morphism properties and binary products in over categories
@@ -16,6 +17,10 @@ fibre product `A.left ×[S] B.left`. Hence, for a morphism `g : B ⟶ B'` in `Ov
 morphism of `prod.map (𝟙 A) g` is a base change of `g.left`. We deduce that any morphism property
 that is stable under base change is stable under taking the product with the identity of a fixed
 object of `Over S`.
+
+Along the same lines, the structure morphism of a finite product in `Over S` satisfies any
+multiplicative morphism property that is stable under base change, as soon as the structure
+morphisms of all factors do.
 -/
 
 @[expose] public section
@@ -77,5 +82,43 @@ theorem left_prod_map_id' (g : B ⟶ B') (hg : P g.left) : P (prod.map g (𝟙 A
   rw [h, Over.comp_left, Over.comp_left, P.cancel_left_of_respectsIso,
     P.cancel_right_of_respectsIso]
   exact P.left_prod_map_id g hg
+
+omit [HasPullbacks C] in
+/-- Isomorphic objects of `Over S` have structure morphisms with the same properties. -/
+lemma hom_of_iso (e : A ≅ B) (hB : P B.hom) : P A.hom := by
+  have : IsIso e.hom.left := inferInstanceAs (IsIso ((Over.forget S).map e.hom))
+  rw [← Over.w e.hom, P.cancel_left_of_respectsIso]
+  exact hB
+
+variable [P.IsStableUnderComposition]
+
+/-- The structure morphism of a binary product in `Over S` satisfies a multiplicative morphism
+property that is stable under base change, as soon as the structure morphisms of both factors
+do. -/
+theorem left_prod_hom (A B : Over S) (hA : P A.hom) (hB : P B.hom) : P (A ⨯ B).hom := by
+  have h : (Over.prodLeftIsoPullback A B).hom ≫ pullback.fst A.hom B.hom ≫ A.hom = (A ⨯ B).hom := by
+    rw [Over.prodLeftIsoPullback_hom_fst_assoc, Over.w]
+  rw [← h, P.cancel_left_of_respectsIso]
+  exact P.comp_mem _ _ (P.of_isPullback (IsPullback.of_hasPullback A.hom B.hom).flip hB) hA
+
+/-- The structure morphism of a finite product in `Over S` satisfies a multiplicative morphism
+property that is stable under base change, as soon as the structure morphisms of all factors do. -/
+theorem pi_hom [P.ContainsIdentities] [HasFiniteProducts (Over S)] {ι : Type*} [Finite ι]
+    (F : ι → Over S) (hF : ∀ i, P (F i).hom) : P (∏ᶜ F).hom := by
+  refine Finite.induction_empty_option
+    (P := fun ι ↦ ∀ [Finite ι] (F : ι → Over S), (∀ i, P (F i).hom) → P (∏ᶜ F).hom)
+    ?_ ?_ ?_ ι F hF
+  · intro α β e hα _ F hF
+    have : Finite α := Finite.of_equiv _ e.symm
+    exact P.hom_of_iso (Pi.whiskerEquiv e fun j ↦ Iso.refl (F (e j))).symm
+      (hα (fun j ↦ F (e j)) fun j ↦ hF (e j))
+  · intro _ F _
+    have hT : IsTerminal (∏ᶜ F) :=
+      IsTerminal.ofUniqueHom (fun _ ↦ Pi.lift fun i ↦ i.elim)
+        fun _ _ ↦ Pi.hom_ext _ _ fun i ↦ i.elim
+    exact P.hom_of_iso (hT.uniqueUpToIso Over.mkIdTerminal) (by simpa using P.id_mem S)
+  · intro α _ hα _ F hF
+    exact P.hom_of_iso (piOptionIso F)
+      (P.left_prod_hom _ _ (hF none) (hα _ fun i ↦ hF (some i)))
 
 end CategoryTheory.MorphismProperty
