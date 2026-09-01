@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Blowup.Density
 public import WeilConjectures.Compactification.BoundaryPreparation
-public import WeilConjectures.Compactification.Modification
+public import WeilConjectures.Compactification.GraphExtension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
@@ -18,16 +18,19 @@ This file sets up the per-side data of the two-open compactification theorem,
 following the blueprint chapter "Nagata compactification", section "The two-open
 compactification theorem" (proof order items 34–37 applied to the two opens):
 
-Let `u : U ⟶ S` be separated and of finite type over a Noetherian scheme `S` and let
-`O`, `O'` be two opens of `U`. The structure `AlgebraicGeometry.TwoOpenSide u O O'`
-records the state of one side of the construction: a proper ambient scheme `X ⟶ S`, an
-open `V ⊆ X` with a proper morphism `ψ : V ⟶ U` extending the inclusion of an embedded
-copy of `O`, density of the copy of `O` in `X`, and the two boundary loci
+Let `u : U ⟶ S` be separated and of finite type over a Noetherian scheme `S` and let `O`
+be an open of `U`. The structure `AlgebraicGeometry.TwoOpenSide u O` records the state of
+one side of the construction: a proper ambient scheme `X ⟶ S`, an open `V ⊆ X` with a
+proper morphism `ψ : V ⟶ U` extending the inclusion of an embedded copy of `O`, and
+density of the copy of `O` in `X`.
 
-* `TwoOpenSide.selfBoundary` — the closure in `X` of `ψ ⁻¹ (U ∖ O')`;
+The other open `O'` of the two-open construction enters only through the boundary loci,
+so it is a parameter of those and not of the structure itself:
+
+* `TwoOpenSide.selfBoundary O'` — the closure in `X` of `ψ ⁻¹ (U ∖ O')`;
 * `TwoOpenSide.forbiddenBoundary` — the closure in `X` of `ψ ⁻¹ (U ∖ O)`.
 
-The predicate `TwoOpenSide.Prepared` states that the two boundary closures are
+The predicate `TwoOpenSide.Prepared O'` states that the two boundary closures are
 disjoint (blueprint: `def:nagata-two-open-prepared-boundaries`,
 `lemma:nagata-prepared-boundaries`). The complement of the forbidden boundary is the
 open `TwoOpenSide.interior` (the `Xᵢ°` of the blueprint), which contains the embedded
@@ -64,10 +67,14 @@ namespace AlgebraicGeometry
 
 variable {U S : Scheme.{u}}
 
-/-- The data of one **prepared side of the two-open compactification theorem** for a
-morphism `u : U ⟶ S` and a pair of opens `O`, `O'` of `U` (blueprint:
-`def:nagata-two-open-graph-extensions`, `def:nagata-two-open-boundary-loci`). -/
-structure TwoOpenSide (u : U ⟶ S) (O O' : U.Opens) where
+/-- The data of one **side of the two-open compactification theorem** for a morphism
+`u : U ⟶ S` and an open `O` of `U` (blueprint:
+`def:nagata-two-open-graph-extensions`, `def:nagata-two-open-boundary-loci`).
+
+The second open of the two-open construction plays no role in this data; it enters only
+as a parameter of the boundary loci `TwoOpenSide.selfBoundary` and of the preparedness
+predicate `TwoOpenSide.Prepared`. -/
+structure TwoOpenSide (u : U ⟶ S) (O : U.Opens) where
   /-- The proper ambient model. -/
   X : Scheme.{u}
   /-- The structure morphism of the ambient model. -/
@@ -100,7 +107,7 @@ namespace TwoOpenSide
 
 attribute [instance] isProper_s isProper_ψ isOpenImmersion_υ isIso_ψ_restrict
 
-variable {u : U ⟶ S} {O O' : U.Opens} (σ : TwoOpenSide u O O')
+variable {u : U ⟶ S} {O : U.Opens} (σ : TwoOpenSide u O)
 
 /-- The embedded copy of `O` in the ambient scheme. -/
 def embX : O.toScheme ⟶ σ.X := σ.υ ≫ σ.V.ι
@@ -123,10 +130,10 @@ lemma isNoetherian_X [IsNoetherian S] : IsNoetherian σ.X := by
 
 section Boundary
 
-/-- The **self boundary** of a side: the closure in the ambient scheme of the inverse
-image under `ψ` of the closed complement `U ∖ O'` of the other open.
+/-- The **self boundary** of a side, relative to the other open `O'`: the closure in the
+ambient scheme of the inverse image under `ψ` of the closed complement `U ∖ O'`.
 (Blueprint: `Z̄_{i,i}` in `def:nagata-two-open-prepared-boundaries`.) -/
-def selfBoundary : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O' : Set U)ᶜ)))
+def selfBoundary (O' : U.Opens) : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O' : Set U)ᶜ)))
 
 /-- The **forbidden boundary** of a side: the closure in the ambient scheme of the
 inverse image under `ψ` of the closed complement `U ∖ O` of its own open. Removing it
@@ -134,9 +141,9 @@ yields the intermediate locus `Xᵢ°` of the blueprint.
 (Blueprint: `Z̄_{i,j}` in `def:nagata-two-open-prepared-boundaries`.) -/
 def forbiddenBoundary : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O : Set U)ᶜ)))
 
-/-- A side is **prepared** if its two boundary closures are disjoint.
-(Blueprint: `lemma:nagata-prepared-boundaries`.) -/
-def Prepared : Prop := Disjoint σ.selfBoundary σ.forbiddenBoundary
+/-- A side is **prepared** relative to the other open `O'` if its two boundary closures
+are disjoint. (Blueprint: `lemma:nagata-prepared-boundaries`.) -/
+def Prepared (O' : U.Opens) : Prop := Disjoint (σ.selfBoundary O') σ.forbiddenBoundary
 
 /-- The image in the ambient scheme of a closed boundary locus of `V` meets `V` in
 exactly itself: boundary loci are closed in `V`. -/
@@ -210,7 +217,7 @@ variable [IsNoetherian S] (B : IsAdmissible σ.X σ.V)
 The open `V`, the proper extension `ψ` and the embedded copy of `O` transport along the
 isomorphism over `V`; density transports because the complement of the center is dense in
 the blow-up. -/
-def admissibleBlowup : TwoOpenSide u O O' :=
+def admissibleBlowup : TwoOpenSide u O :=
   have : IsIso (B.I.blowupMap ∣_ σ.V) := B.isIso_blowupMap_restrict
   have := B.isProper_blowupMap
   have := σ.isProper_s
@@ -309,8 +316,8 @@ lemma admissibleBlowup_image_preimage (A : Set U) :
       Scheme.Hom.comp_apply _ _ _
     rwa [Set.mem_preimage, this, hwv]
 
-lemma admissibleBlowup_selfBoundary :
-    (σ.admissibleBlowup B).selfBoundary =
+lemma admissibleBlowup_selfBoundary (O' : U.Opens) :
+    (σ.admissibleBlowup B).selfBoundary O' =
       closure (B.I.blowupMap ⁻¹' (σ.V.ι '' (σ.ψ ⁻¹' ((O' : Set U)ᶜ)))) := by
   change closure ((σ.admissibleBlowup B).V.ι ''
     ((σ.admissibleBlowup B).ψ ⁻¹' ((O' : Set U)ᶜ))) = _
@@ -327,13 +334,15 @@ lemma admissibleBlowup_forbiddenBoundary :
 closures are contained in the preimages of the original ones, so disjointness is
 preserved. (Blueprint: `lemma:nagata-boundary-disjoint-persists`; proof order
 item 37.) -/
-lemma Prepared.admissibleBlowup (hσ : σ.Prepared) : (σ.admissibleBlowup B).Prepared := by
+lemma Prepared.admissibleBlowup {O' : U.Opens} (hσ : σ.Prepared O') :
+    (σ.admissibleBlowup B).Prepared O' := by
   have hsub : ∀ A : Set σ.X,
       closure (B.I.blowupMap ⁻¹' A) ⊆ B.I.blowupMap ⁻¹' (closure A) := fun A ↦
     closure_minimal (Set.preimage_mono subset_closure)
       (isClosed_closure.preimage B.I.blowupMap.continuous)
-  change Disjoint (σ.admissibleBlowup B).selfBoundary (σ.admissibleBlowup B).forbiddenBoundary
-  rw [σ.admissibleBlowup_selfBoundary, σ.admissibleBlowup_forbiddenBoundary]
+  change Disjoint ((σ.admissibleBlowup B).selfBoundary O')
+    (σ.admissibleBlowup B).forbiddenBoundary
+  rw [σ.admissibleBlowup_selfBoundary B O', σ.admissibleBlowup_forbiddenBoundary]
   exact ((hσ.preimage B.I.blowupMap).mono (hsub _) (hsub _))
 
 end AdmissibleBlowup
@@ -350,7 +359,7 @@ closures by the boundary-separation blow-up (Stacks Project Tag 0F3V). -/
 theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated u]
     [LocallyOfFiniteType u] [QuasiCompact u] (O O' : U.Opens) (hcov : O ⊔ O' = ⊤)
     [HasCompactification (O.ι ≫ u)] :
-    ∃ σ : TwoOpenSide u O O', σ.Prepared := by
+    ∃ σ : TwoOpenSide u O, σ.Prepared O' := by
   have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian u
   have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
   have : IsNoetherian U := ⟨⟩
@@ -377,7 +386,7 @@ theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated 
     have : QuasiCompact c.i := inferInstance
     have := Scheme.Hom.denseRange c.i
     exact this
-  let σ₀ : TwoOpenSide u O O' :=
+  let σ₀ : TwoOpenSide u O :=
     { X := B.I.blowup
       s := B.I.blowupMap ≫ c.g
       isProper_s := inferInstance
@@ -413,7 +422,7 @@ theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated 
     (TopologicalSpace.NoetherianSpace.isCompact _)
     (TopologicalSpace.NoetherianSpace.isCompact _) hdisj
   refine ⟨σ₀.admissibleBlowup B₁, ?_⟩
-  rw [TwoOpenSide.Prepared, σ₀.admissibleBlowup_selfBoundary,
+  rw [TwoOpenSide.Prepared, σ₀.admissibleBlowup_selfBoundary B₁ O',
     σ₀.admissibleBlowup_forbiddenBoundary]
   exact hB₁
 

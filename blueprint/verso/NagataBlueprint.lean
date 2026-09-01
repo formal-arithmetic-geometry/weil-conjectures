@@ -34,7 +34,8 @@ opens; the construction of the blow-up of a quasi-coherent ideal sheaf; admissib
 centres, their composition, extension, and density properties; the identification of the
 strict transform with the blow-up of a pulled-back centre; elimination of indeterminacy for
 partial sections, proved along the route of Deligne and Conrad through Zariski's Main
-Theorem; the resulting modification theorems (common modifications, graph extensions,
+Theorem, and the elimination of indeterminacy for separated finite-type morphisms deduced
+from it; the resulting modification theorems (common modifications, graph extensions,
 isomorphism near a boundary closure); and finally the two-open compactification theorem.
 Induction over a finite affine open cover with dense total intersection gives the theorem
 over a Noetherian base, absolute Noetherian approximation removes the Noetherian hypothesis

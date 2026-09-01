@@ -9,8 +9,9 @@ open Informal
 :::group "grp:conrad"
 Extension of a partial section after an admissible blow-up, along the route of Deligne and
 Conrad: the disjointness blow-up, the three cases of a target quasi-affine over the base,
-the quasi-finiteness of the closed graph, and the general theorem obtained from Zariski's
-Main Theorem.
+the quasi-finiteness of the closed graph, the general theorem obtained from Zariski's
+Main Theorem, and the elimination of indeterminacy for separated finite-type morphisms
+(Stacks Project Tag 081S) deduced from it.
 :::
 
 Throughout, $`X` is a quasi-compact quasi-separated scheme and $`U \le V` are quasi-compact
@@ -242,4 +243,26 @@ the blow-up containing the preimage of $`U`, with closed graph.
 :::proof "cor:conrad25" (uses := "thm:conrad24")
 No closedness hypothesis is needed: over $`U` the morphism $`f` is a section of the separated
 morphism $`p|_U`, hence a closed immersion, so its range is closed in $`p^{-1}U`.
+:::
+
+# Elimination of indeterminacy for separated finite-type morphisms
+
+:::theorem "thm:081S" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap")
+Let $`X` be quasi-compact quasi-separated, let $`U \subseteq X` be a quasi-compact open and
+let $`q \colon Z \to X` be separated, locally of finite type and quasi-compact. Assume $`q`
+restricts to an isomorphism over $`U`. Then there is a $`U`-admissible centre $`\sI` on $`X`
+such that the strict transform of $`q` along $`\pi_\sI`, preserving $`\mathrm{pr}(\sI)`, is
+an open immersion into $`\Bl_\sI(X)`.
+:::
+
+:::proof "thm:081S" (uses := "thm:01PH, thm:admissible-density, cor:conrad25, cor:080L, def:strict-transform, lem:kernel-criterion")
+First prepare the boundary: blow up a finite-type ideal whose support is exactly
+$`X \setminus U`, so that $`U` becomes scheme-theoretically dense. Next extend the inverse of
+$`q` over $`U` to a section over an open $`W` of a second admissible blow-up. Compose the two
+blow-ups. Finally, the graph of the extension is closed and contains the schematically dense
+$`U`-graph, so it cuts out the strict transform, which is therefore isomorphic to the open
+$`W`.
+
+This route replaces the classical derivation from module flattening: the surveyed material
+contains no flattening theorem, and none is needed.
 :::

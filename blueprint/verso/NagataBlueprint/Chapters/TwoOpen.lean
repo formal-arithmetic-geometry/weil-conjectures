@@ -18,18 +18,19 @@ finite type and quasi-compact. Let $`O, O'` be opens of $`U`.
 # Prepared sides
 
 :::definition "def:two-open-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide")
-A _side_ for $`(u, O, O')` consists of a proper morphism $`s \colon X \to S`, an open
+A _side_ for $`(u, O)` consists of a proper morphism $`s \colon X \to S`, an open
 $`V \subseteq X`, a proper morphism $`\psi \colon V \to U` over $`S`, and an open immersion
 $`\upsilon \colon O \to V` with $`\psi \circ \upsilon = \iota_O`, such that the range of
 $`\upsilon` is exactly $`\psi^{-1}O`, $`\psi` is an isomorphism over $`O`, and the composite
-$`O \to V \to X` has dense range.
+$`O \to V \to X` has dense range. The second open $`O'` does not enter this data; it is a
+parameter of the boundary loci below.
 :::
 
 :::definition "def:boundaries" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.selfBoundary, AlgebraicGeometry.TwoOpenSide.forbiddenBoundary, AlgebraicGeometry.TwoOpenSide.Prepared, AlgebraicGeometry.TwoOpenSide.interior")
-For a side $`\sigma` put
+For a side $`\sigma` and an open $`O'` of $`U` put
 $$`\overline{Z}_{\mathrm{self}} = \overline{\,\iota_V\bigl(\psi^{-1}(U \setminus O')\bigr)\,}, \qquad \overline{Z}_{\mathrm{forb}} = \overline{\,\iota_V\bigl(\psi^{-1}(U \setminus O)\bigr)\,},`
-the _self boundary_ and the _forbidden boundary_, both closed in $`X`. The side is
-_prepared_ if
+the _self boundary_ relative to $`O'` and the _forbidden boundary_, both closed in $`X`.
+Only the self boundary depends on $`O'`. The side is _prepared_ relative to $`O'` if
 $`\overline{Z}_{\mathrm{self}} \cap \overline{Z}_{\mathrm{forb}} = \emptyset`. The open
 complement $`X^{\circ} = X \setminus \overline{Z}_{\mathrm{forb}}` is the _interior_ of the
 side {uses "def:two-open-side"}[].
@@ -48,14 +49,15 @@ forbidden boundary.
 
 :::proposition "prop:side-transport" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.admissibleBlowup, AlgebraicGeometry.TwoOpenSide.Prepared.admissibleBlowup")
 Let $`S` be Noetherian. A side may be transported along a $`V`-admissible blow-up of its
-ambient scheme; boundary loci transport to their preimages, so preparedness persists
+ambient scheme; boundary loci transport to their preimages, so preparedness relative to
+any $`O'` persists
 {uses "def:boundaries"}[].
 :::
 
 :::theorem "thm:prepared-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_twoOpenSide")
 Let $`S` be Noetherian, let $`u \colon U \to S` be separated, locally of finite type and
 quasi-compact, let $`O \sqcup O' = U` and assume $`u \circ \iota_O` is compactifiable. Then a
-prepared side for $`(u, O, O')` exists.
+side for $`(u, O)` which is prepared relative to $`O'` exists.
 :::
 
 :::proof "thm:prepared-side" (uses := "thm:dense-compactification, thm:0F3Z, thm:boundary-separation, def:boundaries")
@@ -66,9 +68,10 @@ separation blow-up.
 
 # The comparison space
 
-Let $`\sigma_1` be a side for $`(u, O_1, O_2)` and $`\sigma_2` a side for
-$`(u, O_2, O_1)`, with ambient schemes $`X_1, X_2` and proper extensions
-$`\psi_1, \psi_2`.
+Let $`\sigma_1` be a side for $`(u, O_1)` and $`\sigma_2` a side for $`(u, O_2)`, with
+ambient schemes $`X_1, X_2` and proper extensions $`\psi_1, \psi_2`. Self boundaries are
+taken relative to the other open: $`\overline{Z}_{1,\mathrm{self}}` relative to $`O_2` and
+$`\overline{Z}_{2,\mathrm{self}}` relative to $`O_1`.
 
 :::definition "def:comparison-space" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.comparisonMap, AlgebraicGeometry.TwoOpenSide.comparisonSpace, AlgebraicGeometry.TwoOpenSide.comparisonFst, AlgebraicGeometry.TwoOpenSide.comparisonSnd")
 The _comparison morphism_ is the canonical morphism $`V_1 \times_U V_2 \to X_1 \times_S X_2`.
@@ -107,8 +110,8 @@ forbidden boundary.
 
 :::theorem "thm:improved-comparison" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary")
 Let $`S` be Noetherian and let $`u \colon U \to S` be separated, locally of finite type and
-quasi-compact. Given sides $`\sigma_1` for $`(u, O_1, O_2)` and $`\sigma_2` for
-$`(u, O_2, O_1)` with $`O_1 \sqcup O_2 = U`, there is a $`V_1`-admissible blow-up of $`X_1`
+quasi-compact. Given sides $`\sigma_1` for $`(u, O_1)` and $`\sigma_2` for $`(u, O_2)`
+with $`O_1 \sqcup O_2 = U`, there is a $`V_1`-admissible blow-up of $`X_1`
 after which the comparison boundary of the improved pair is contained in the preimage of the
 self boundary of $`\sigma_2`. No preparedness of the two sides is needed.
 :::
@@ -133,8 +136,9 @@ a closure.
 :::theorem "thm:two-open-preparation" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide")
 Let $`S` be Noetherian, let $`u \colon U \to S` be separated, locally of finite type and
 quasi-compact, let $`O_1 \sqcup O_2 = U` and assume both $`u \circ \iota_{O_1}` and
-$`u \circ \iota_{O_2}` are compactifiable. Then there exist prepared sides $`\sigma_1` for
-$`(u, O_1, O_2)` and $`\sigma_2` for $`(u, O_2, O_1)` satisfying key boundary disjointness.
+$`u \circ \iota_{O_2}` are compactifiable. Then there exist sides $`\sigma_1` for
+$`(u, O_1)`, prepared relative to $`O_2`, and $`\sigma_2` for $`(u, O_2)`, prepared relative
+to $`O_1`, satisfying key boundary disjointness.
 :::
 
 :::proof "thm:two-open-preparation" (uses := "thm:prepared-side, thm:improved-comparison, def:key-disjoint")

@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Compactification.IsomorphismNearClosure
 public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
@@ -17,7 +18,7 @@ following the blueprint chapter "Nagata compactification", section "The two-open
 compactification theorem" (`def:nagata-two-open-comparison-space` through
 `lemma:nagata-one-valuation-avoids-boundary`):
 
-Given two sides `σ₁ : TwoOpenSide u O₁ O₂` and `σ₂ : TwoOpenSide u O₂ O₁`,
+Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 
 - `AlgebraicGeometry.TwoOpenSide.comparisonMap`: the canonical morphism
   `V₁ ×_U V₂ ⟶ X₁ ×_S X₂` (blueprint: `def:nagata-two-open-comparison-space`);
@@ -43,8 +44,9 @@ Given two sides `σ₁ : TwoOpenSide u O₁ O₂` and `σ₂ : TwoOpenSide u O�
   `lemma:nagata-comparison-boundary-density`,
   `lemma:nagata-key-boundary-disjointness`); it consumes the modification input
   `exists_admissibleBlowup_isIso_strictTransformMap_near_closure` and therefore,
-  through it, Stacks Tag 081S — see the "Dependency structure" section of the module
-  docstring of `WeilConjectures.Compactification.Modification`.
+  through it, Stacks Tag 081S — see the module docstrings of
+  `WeilConjectures.Compactification.IsomorphismNearClosure` and
+  `WeilConjectures.Compactification.EliminationOfIndeterminacy`.
 
 ## The improved comparison
 
@@ -95,7 +97,7 @@ variable {U S : Scheme.{u}} {u : U ⟶ S} {O₁ O₂ : U.Opens}
 
 namespace TwoOpenSide
 
-variable (σ₁ : TwoOpenSide u O₁ O₂) (σ₂ : TwoOpenSide u O₂ O₁)
+variable (σ₁ : TwoOpenSide u O₁) (σ₂ : TwoOpenSide u O₂)
 
 /-- The canonical morphism `V₁ ×_U V₂ ⟶ X₁ ×_S X₂` from the fibre product of the two
 proper extensions to the product of the two ambient models.
@@ -464,8 +466,8 @@ holds, because a prepared side has disjoint self and forbidden boundaries.
 
 This is the final link of the improved-comparison chain, and the only one of its links
 that needs neither Stacks Project Tag 0F3W nor Tag 0F3Y. -/
-theorem keyDisjoint_of_comparisonBoundary_subset (h₂ : σ₂.Prepared)
-    (h : comparisonBoundary σ₁ σ₂ ⊆ comparisonSnd σ₁ σ₂ ⁻¹' σ₂.selfBoundary) :
+theorem keyDisjoint_of_comparisonBoundary_subset (h₂ : σ₂.Prepared O₁)
+    (h : comparisonBoundary σ₁ σ₂ ⊆ comparisonSnd σ₁ σ₂ ⁻¹' σ₂.selfBoundary O₁) :
     KeyDisjoint σ₁ σ₂ :=
   fun _ hz ↦ Set.disjoint_left.mp h₂ (h hz)
 
@@ -477,8 +479,8 @@ closures. The locus where the second projection lands in the self boundary is cl
 since the self boundary is a closure, so it swallows `closure D`. -/
 theorem comparisonBoundary_subset_preimage_selfBoundary {D : Set (comparisonSpace σ₁ σ₂)}
     (hD : comparisonBoundary σ₁ σ₂ ⊆ closure D)
-    (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary) :
-    comparisonBoundary σ₁ σ₂ ⊆ comparisonSnd σ₁ σ₂ ⁻¹' σ₂.selfBoundary :=
+    (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary O₁) :
+    comparisonBoundary σ₁ σ₂ ⊆ comparisonSnd σ₁ σ₂ ⁻¹' σ₂.selfBoundary O₁ :=
   hD.trans <| closure_minimal hmem <|
     isClosed_closure.preimage (comparisonSnd σ₁ σ₂).continuous
 
@@ -487,9 +489,9 @@ variable {σ₁ σ₂} in
 `lemma:nagata-comparison-boundary-density`, `lemma:nagata-key-boundary-disjointness`):
 the combination of the two previous lemmas, which is the shape the improved-comparison
 chain of the blueprint produces. -/
-theorem keyDisjoint_of_dense_comparisonBoundary (h₂ : σ₂.Prepared)
+theorem keyDisjoint_of_dense_comparisonBoundary (h₂ : σ₂.Prepared O₁)
     {D : Set (comparisonSpace σ₁ σ₂)} (hD : comparisonBoundary σ₁ σ₂ ⊆ closure D)
-    (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary) :
+    (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary O₁) :
     KeyDisjoint σ₁ σ₂ :=
   keyDisjoint_of_comparisonBoundary_subset h₂
     (comparisonBoundary_subset_preimage_selfBoundary hD hmem)
@@ -853,11 +855,11 @@ The blow-up shape of the conclusion is the one the surrounding API was built for
 is exactly what the latter supplies. No preparedness of the two sides is assumed. -/
 theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoetherian S]
     {u : U ⟶ S} [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
-    {O₁ O₂ : U.Opens} (σ₁ : TwoOpenSide u O₁ O₂) (σ₂ : TwoOpenSide u O₂ O₁)
+    {O₁ O₂ : U.Opens} (σ₁ : TwoOpenSide u O₁) (σ₂ : TwoOpenSide u O₂)
     (hcov : O₁ ⊔ O₂ = ⊤) :
     ∃ B : IsAdmissible σ₁.X σ₁.V,
       comparisonBoundary (σ₁.admissibleBlowup B) σ₂ ⊆
-        comparisonSnd (σ₁.admissibleBlowup B) σ₂ ⁻¹' σ₂.selfBoundary := by
+        comparisonSnd (σ₁.admissibleBlowup B) σ₂ ⁻¹' σ₂.selfBoundary O₁ := by
   have hXN := σ₁.isNoetherian_X
   have hqs : QuasiSeparatedSpace σ₁.X :=
     ⟨fun _ _ _ _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
@@ -899,7 +901,7 @@ theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoethe
     ⇑(comparisonFst (σ₁.admissibleBlowup B) σ₂) ⁻¹'
       (⇑B.I.blowupMap ⁻¹' (⇑σ₁.V.ι '' (⇑σ₁.ψ ⁻¹' ((O₁ : Set U)ᶜ)))) with hDdef
   -- (1) the second projection of `D` lands in the self boundary of the second side
-  have hmem : ∀ z ∈ D, comparisonSnd (σ₁.admissibleBlowup B) σ₂ z ∈ σ₂.selfBoundary := by
+  have hmem : ∀ z ∈ D, comparisonSnd (σ₁.admissibleBlowup B) σ₂ z ∈ σ₂.selfBoundary O₁ := by
     intro z hz
     have hz' : comparisonFst (σ₁.admissibleBlowup B) σ₂ z ∈
         ⇑(σ₁.admissibleBlowup B).V.ι ''
@@ -972,8 +974,8 @@ theorem exists_prepared_keyDisjoint_twoOpenSide [IsNoetherian S] (u : U ⟶ S)
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] (O₁ O₂ : U.Opens)
     (hcov : O₁ ⊔ O₂ = ⊤) [HasCompactification (O₁.ι ≫ u)]
     [HasCompactification (O₂.ι ≫ u)] :
-    ∃ (σ₁ : TwoOpenSide u O₁ O₂) (σ₂ : TwoOpenSide u O₂ O₁),
-      σ₁.Prepared ∧ σ₂.Prepared ∧ KeyDisjoint σ₁ σ₂ := by
+    ∃ (σ₁ : TwoOpenSide u O₁) (σ₂ : TwoOpenSide u O₂),
+      σ₁.Prepared O₂ ∧ σ₂.Prepared O₁ ∧ KeyDisjoint σ₁ σ₂ := by
   obtain ⟨σ₁, h₁⟩ := exists_prepared_twoOpenSide u O₁ O₂ hcov
   obtain ⟨σ₂, h₂⟩ := exists_prepared_twoOpenSide u O₂ O₁ (by rw [sup_comm]; exact hcov)
   obtain ⟨B, hB⟩ :=
@@ -986,13 +988,13 @@ theorem: two prepared sides satisfying the key boundary disjointness. This is th
 input of the final assembly. -/
 structure TwoOpenPreparation (u : U ⟶ S) (O₁ O₂ : U.Opens) where
   /-- The prepared side over the first open. -/
-  side₁ : TwoOpenSide u O₁ O₂
+  side₁ : TwoOpenSide u O₁
   /-- The prepared side over the second open. -/
-  side₂ : TwoOpenSide u O₂ O₁
+  side₂ : TwoOpenSide u O₂
   /-- The first side is prepared. -/
-  prepared₁ : side₁.Prepared
+  prepared₁ : side₁.Prepared O₂
   /-- The second side is prepared. -/
-  prepared₂ : side₂.Prepared
+  prepared₂ : side₂.Prepared O₁
   /-- The two sides satisfy the key boundary disjointness. -/
   keyDisjoint : TwoOpenSide.KeyDisjoint side₁ side₂
 

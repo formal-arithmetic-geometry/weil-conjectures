@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Compactification.CommonModification
 public import WeilConjectures.Compactification.TwoOpenComparison
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
@@ -21,7 +22,7 @@ by two compactifiable opens with dense intersection
 (`AlgebraicGeometry.HasCompactification.of_two_open_cover`).
 
 The intermediate schemes of the construction are built from a prepared side
-`σ : TwoOpenSide u O O'`:
+`σ : TwoOpenSide u O`:
 
 - `AlgebraicGeometry.TwoOpenSide.intermediate`: the glued scheme
   `Wᵢ = U ⊔_{O} Xᵢ°` obtained by gluing `U` and the complement `Xᵢ°` of the forbidden
@@ -70,7 +71,7 @@ variable {U S : Scheme.{u}}
 
 namespace TwoOpenSide
 
-variable {u : U ⟶ S} {O O' : U.Opens} (σ : TwoOpenSide u O O')
+variable {u : U ⟶ S} {O : U.Opens} (σ : TwoOpenSide u O)
 
 section Intermediate
 
@@ -421,11 +422,11 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     let : Field (CommRingCat.of K) := ‹_›
     replace hηU : ηU ≫ h = i₁ := hηU
     -- extend the generic point to the two proper ambient models
-    have hexist : ∀ {O O' : U.Opens} (σ : TwoOpenSide u O O') (hle : O₁ ⊓ O₂ ≤ O),
+    have hexist : ∀ {O : U.Opens} (σ : TwoOpenSide u O) (hle : O₁ ⊓ O₂ ≤ O),
         ∃ g : Spec (CommRingCat.of R) ⟶ σ.X,
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ g =
             ηU ≫ U.homOfLE hle ≫ σ.embX ∧ g ≫ σ.s = i₂ := by
-      intro O O' σ hle
+      intro O σ hle
       have := σ.isProper_s
       have hcomm : (ηU ≫ U.homOfLE hle ≫ σ.embX) ≫ σ.s =
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ i₂ := by
@@ -451,7 +452,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     have havoid := P.keyDisjoint.avoids ηU g₁ g₂ hg₁ hg₂ (by rw [hg₁s, hg₂s])
     -- the avoiding extension lifts to the glued scheme through the corresponding
     -- intermediate model and its admissible blow-up
-    have branch : ∀ {O O' : U.Opens} (σ : TwoOpenSide u O O') (hle : O₁ ⊓ O₂ ≤ O)
+    have branch : ∀ {O : U.Opens} (σ : TwoOpenSide u O) (hle : O₁ ⊓ O₂ ≤ O)
         (B : IsAdmissible σ.intermediate σ.intermediateU.opensRange)
         (k : B.I.blowup ⟶ cm.W) (uu : U ⟶ B.I.blowup),
         uu ≫ B.I.blowupMap = σ.intermediateU →
@@ -463,7 +464,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
         g ≫ σ.s = i₂ → Set.range g ⊆ (σ.interior : Set σ.X) →
         ∃ l : Spec (CommRingCat.of R) ⟶ cm.W,
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ l = i₁ ∧ l ≫ cm.w = i₂ := by
-      intro O O' σ hle B k uu huu hkw hglue g hg hgs hrange
+      intro O σ hle B k uu huu hkw hglue g hg hgs hrange
       have := σ.isProper_s
       have := σ.isOpenImmersion_υ
       -- corestrict to the complement of the forbidden boundary

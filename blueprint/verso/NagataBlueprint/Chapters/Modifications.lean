@@ -7,29 +7,10 @@ open Informal
 #doc (Manual) "Modifications" =>
 
 :::group "grp:modifications"
-Elimination of indeterminacy and its consumers: transport of scheme-theoretic images,
-common modifications, graph extensions, isomorphism near a boundary closure, and the
-boundary preparation used by the two-open theorem.
-:::
-
-:::theorem "thm:081S" (parent := "grp:modifications") (lean := "AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap")
-Let $`X` be quasi-compact quasi-separated, let $`U \subseteq X` be a quasi-compact open and
-let $`q \colon Z \to X` be separated, locally of finite type and quasi-compact. Assume $`q`
-restricts to an isomorphism over $`U`. Then there is a $`U`-admissible centre $`\sI` on $`X`
-such that the strict transform of $`q` along $`\pi_\sI`, preserving $`\mathrm{pr}(\sI)`, is
-an open immersion into $`\Bl_\sI(X)`.
-:::
-
-:::proof "thm:081S" (uses := "thm:01PH, thm:admissible-density, cor:conrad25, cor:080L, def:strict-transform, lem:kernel-criterion")
-First prepare the boundary: blow up a finite-type ideal whose support is exactly
-$`X \setminus U`, so that $`U` becomes scheme-theoretically dense. Next extend the inverse of
-$`q` over $`U` to a section over an open $`W` of a second admissible blow-up. Compose the two
-blow-ups. Finally, the graph of the extension is closed and contains the schematically dense
-$`U`-graph, so it cuts out the strict transform, which is therefore isomorphic to the open
-$`W`.
-
-This route replaces the classical derivation from module flattening: the surveyed material
-contains no flattening theorem, and none is needed.
+The consumers of elimination of indeterminacy (Stacks Project Tag 081S, proved in the
+previous chapter): transport of scheme-theoretic images, common modifications, graph
+extensions, isomorphism near a boundary closure, and the boundary preparation used by the
+two-open theorem.
 :::
 
 :::theorem "thm:0F3Y" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup")

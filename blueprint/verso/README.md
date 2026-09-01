@@ -26,8 +26,8 @@ blueprint/verso/
       IdealSheaves.lean               finite-type quasi-coherent ideal sheaves
       Blowups.lean                    the blow-up, admissible centres, density, boundaries
       StrictTransforms.lean           strict transforms; Tag 080E
-      Conrad.lean                     elimination of indeterminacy after Deligne and Conrad
-      Modifications.lean              Tags 081S, 0F3Y, 0F3X, 0F3Z, 0F3W; boundary preparation
+      Conrad.lean                     elimination of indeterminacy after Deligne and Conrad; Tag 081S
+      Modifications.lean              Tags 0F3Y, 0F3X, 0F3Z, 0F3W; boundary preparation
       TwoOpen.lean                    prepared sides, comparison space, the two-open theorem
       Noetherian.lean                 induction over a dense affine cover
       Approximation.lean              Noetherian approximation and finite-presentation descent

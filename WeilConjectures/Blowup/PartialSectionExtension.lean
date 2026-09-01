@@ -38,7 +38,8 @@ and thereby reduces to the case `S = X`. Only that reduced form is stated here:
 
 The first statement is what
 `AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap` (Tag 081S)
-in `WeilConjectures.Compactification.Modification` is deduced from; with its proof here,
+in `WeilConjectures.Compactification.EliminationOfIndeterminacy` is deduced from; with its
+proof here,
 that deduction and the Nagata compactification theorem's dependence on it are
 unconditional.
 
