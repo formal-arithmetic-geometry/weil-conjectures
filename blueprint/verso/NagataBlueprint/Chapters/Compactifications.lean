@@ -24,7 +24,7 @@ such a triple exists is the class `HasCompactification f`, and the two are excha
 `Compactification.hasCompactification` and `HasCompactification.compactification`.
 :::
 
-:::proposition "prop:compactification-basic" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.isSeparated, AlgebraicGeometry.Compactification.locallyOfFiniteType, AlgebraicGeometry.Compactification.quasiCompact, AlgebraicGeometry.Compactification.quasiCompact_openImmersion, AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff, AlgebraicGeometry.Compactification.isProper_openImmersion, AlgebraicGeometry.Compactification.isClosedImmersion_openImmersion, AlgebraicGeometry.Compactification.isClopen_range_openImmersion")
+:::proposition "prop:compactification-basic" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.isSeparated, AlgebraicGeometry.Compactification.locallyOfFiniteType, AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff, AlgebraicGeometry.Compactification.isProper_openImmersion, AlgebraicGeometry.Compactification.isClosedImmersion_openImmersion, AlgebraicGeometry.Compactification.isClopen_range_openImmersion")
 Let $`(Z, g, i)` be a compactification of $`f \colon X \to Y`. Then
 
 * $`f` is separated;

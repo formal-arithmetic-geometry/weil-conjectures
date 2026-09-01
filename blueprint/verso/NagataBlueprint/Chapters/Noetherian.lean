@@ -11,7 +11,7 @@ Induction over a finite affine open cover whose total intersection is dense: the
 the quasi-affine one, the inductive step is the two-open theorem.
 :::
 
-:::theorem "thm:dense-affine-cover" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter, AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter_spec, AlgebraicGeometry.exists_isAffineOpen_mem_and_genericPoints_subset, AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter")
+:::theorem "thm:dense-affine-cover" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter")
 Let $`X` be a quasi-compact scheme with finitely many irreducible components. Then $`X`
 admits a finite affine open cover $`U_0, \dots, U_{n-1}` whose total intersection
 $`\bigcap_i U_i` contains every generic point of $`X`, and is therefore dense in $`X`.
@@ -25,7 +25,7 @@ Quasi-compactness extracts a finite cover from this family, and the total inters
 a cover contains all generic points, hence is dense.
 :::
 
-:::definition "def:partial-unions" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.partialAffineOpenUnions, AlgebraicGeometry.Scheme.partialAffineOpenUnions_zero, AlgebraicGeometry.Scheme.partialAffineOpenUnions_succ, AlgebraicGeometry.Scheme.partialAffineOpenUnions_self, AlgebraicGeometry.Scheme.le_partialAffineOpenUnions")
+:::definition "def:partial-unions" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.partialAffineOpenUnions, AlgebraicGeometry.Scheme.partialAffineOpenUnions_zero, AlgebraicGeometry.Scheme.partialAffineOpenUnions_self")
 For a finite family $`U_0, \dots, U_{n-1}` of opens of $`X` put $`X_r = \bigcup_{i < r} U_i`,
 so $`X_0 = \emptyset` and $`X_n = \bigcup_i U_i`.
 :::
@@ -44,7 +44,7 @@ $`V \cup W` is open in $`X`; the two restrictions inherit compactifiability from
 $`W`; and $`V \cup W` is Noetherian, $`X` being locally Noetherian and quasi-compact.
 :::
 
-:::theorem "thm:noetherian" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.nagataCompactification_of_isNoetherian, AlgebraicGeometry.noetherianCompactificationConstruction")
+:::theorem "thm:noetherian" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.nagataCompactification_of_isNoetherian")
 Let $`S` be a Noetherian scheme and let $`f \colon X \to S` be separated, locally of finite
 type and quasi-compact. Then $`f` admits a compactification.
 :::

@@ -17,7 +17,7 @@ finite type and quasi-compact. Let $`O, O'` be opens of $`U`.
 
 # Prepared sides
 
-:::definition "def:two-open-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide, AlgebraicGeometry.TwoOpenSide.embX, AlgebraicGeometry.TwoOpenSide.isNoetherian_X")
+:::definition "def:two-open-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide")
 A _side_ for $`(u, O, O')` consists of a proper morphism $`s \colon X \to S`, an open
 $`V \subseteq X`, a proper morphism $`\psi \colon V \to U` over $`S`, and an open immersion
 $`\upsilon \colon O \to V` with $`\psi \circ \upsilon = \iota_O`, such that the range of
@@ -25,7 +25,7 @@ $`\upsilon` is exactly $`\psi^{-1}O`, $`\psi` is an isomorphism over $`O`, and t
 $`O \to V \to X` has dense range.
 :::
 
-:::definition "def:boundaries" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.selfBoundary, AlgebraicGeometry.TwoOpenSide.forbiddenBoundary, AlgebraicGeometry.TwoOpenSide.Prepared, AlgebraicGeometry.TwoOpenSide.interior, AlgebraicGeometry.TwoOpenSide.interiorEmb")
+:::definition "def:boundaries" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.selfBoundary, AlgebraicGeometry.TwoOpenSide.forbiddenBoundary, AlgebraicGeometry.TwoOpenSide.Prepared, AlgebraicGeometry.TwoOpenSide.interior")
 For a side $`\sigma` put
 $$`\overline{Z}_{\mathrm{self}} = \overline{\,\iota_V\bigl(\psi^{-1}(U \setminus O')\bigr)\,}, \qquad \overline{Z}_{\mathrm{forb}} = \overline{\,\iota_V\bigl(\psi^{-1}(U \setminus O)\bigr)\,},`
 the _self boundary_ and the _forbidden boundary_, both closed in $`X`. The side is
@@ -64,7 +64,7 @@ $`\mathrm{pr}_1 \colon X_{12} \to X_1` and $`\mathrm{pr}_2 \colon X_{12} \to X_2
 proper {uses "def:two-open-side"}[].
 :::
 
-:::definition "def:key-disjoint" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.KeyDisjoint, AlgebraicGeometry.TwoOpenSide.comparisonBoundary, AlgebraicGeometry.TwoOpenSide.keyDisjoint_of_comparisonBoundary_subset, AlgebraicGeometry.TwoOpenSide.keyDisjoint_of_dense_comparisonBoundary")
+:::definition "def:key-disjoint" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.KeyDisjoint, AlgebraicGeometry.TwoOpenSide.comparisonBoundary")
 The pair $`(\sigma_1, \sigma_2)` satisfies _key boundary disjointness_ if no point of
 $`X_{12}` projects into the forbidden boundary on both sides:
 $$`X_{12} \cap \bigl(\overline{Z}_{1,\mathrm{forb}} \times_S \overline{Z}_{2,\mathrm{forb}}\bigr) = \emptyset.`
@@ -80,7 +80,7 @@ generic point of $`O_1 \cap O_2` to the two ambient models, at least one of the 
 forbidden boundary.
 :::
 
-:::theorem "thm:improved-comparison" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary, AlgebraicGeometry.TwoOpenSide.injOn_comparisonFst_admissibleBlowup, AlgebraicGeometry.TwoOpenSide.blowupComparison, AlgebraicGeometry.TwoOpenSide.improvedToStrictTransform, AlgebraicGeometry.TwoOpenSide.isoOpen, AlgebraicGeometry.TwoOpenSide.isIso_comparisonFst_restrict_isoOpen, AlgebraicGeometry.TwoOpenSide.comparisonBoundary_subset_preimage_selfBoundary")
+:::theorem "thm:improved-comparison" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary")
 Given prepared sides $`\sigma_1, \sigma_2` with $`O_1 \sqcup O_2 = U`, there is a
 $`V_1`-admissible blow-up of $`X_1` after which the comparison boundary of the improved pair
 is contained in the preimage of the self boundary of $`\sigma_1`.
@@ -103,7 +103,7 @@ whose closure swallows the comparison boundary suffices, because the self bounda
 a closure.
 :::
 
-:::theorem "thm:two-open-preparation" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide, AlgebraicGeometry.TwoOpenPreparation, AlgebraicGeometry.nonempty_twoOpenPreparation")
+:::theorem "thm:two-open-preparation" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide")
 Let $`O_1 \sqcup O_2 = U` and assume both $`u \circ \iota_{O_1}` and $`u \circ \iota_{O_2}`
 are compactifiable. Then there exist prepared sides $`\sigma_1` for $`(u, O_1, O_2)` and
 $`\sigma_2` for $`(u, O_2, O_1)` satisfying key boundary disjointness.
@@ -123,7 +123,7 @@ the gluing of $`U` and $`X^{\circ}` along the embedded copy of $`O`, with its tw
 immersions and its structure morphism $`W \to S` {uses "def:boundaries"}[].
 :::
 
-:::proposition "prop:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.graph, AlgebraicGeometry.TwoOpenSide.isProper_graph, AlgebraicGeometry.TwoOpenSide.intermediateGraph, AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph, AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom, AlgebraicGeometry.TwoOpenSide.locallyOfFiniteType_intermediateHom, AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU, AlgebraicGeometry.TwoOpenSide.compactSpace_intermediate, AlgebraicGeometry.TwoOpenSide.isNoetherian_intermediate")
+:::proposition "prop:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.graph, AlgebraicGeometry.TwoOpenSide.isProper_graph, AlgebraicGeometry.TwoOpenSide.intermediateGraph, AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph, AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom, AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU, AlgebraicGeometry.TwoOpenSide.isNoetherian_intermediate")
 * The overlap morphism $`O \to U \times_S X^{\circ}` is a closed immersion: its range is the
   preimage of the closed range of the proper graph $`V \to U \times_S X`, and the range of the
   embedding of $`O` in $`V` is exactly $`\psi^{-1}O`.
@@ -133,13 +133,13 @@ immersions and its structure morphism $`W \to S` {uses "def:boundaries"}[].
 * The copy of $`U` is dense in $`W`, and $`W` is Noetherian over $`S`.
 :::
 
-:::definition "def:dense-valuative" (parent := "grp:two-open") (lean := "AlgebraicGeometry.ValuativeCommSqWithPt, AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes, AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant, AlgebraicGeometry.ValuativeCriterion.RelativeTo, AlgebraicGeometry.ValuativeCriterion.RelativeTo.existsUnique, AlgebraicGeometry.ValuativeCriterion.RelativeTo.of_existsUnique, AlgebraicGeometry.ValuativeCriterion.RelativeTo.restrict, AlgebraicGeometry.ValuativeCriterion.RelativeTo.toImage")
+:::definition "def:dense-valuative" (parent := "grp:two-open") (lean := "AlgebraicGeometry.ValuativeCriterion.RelativeTo")
 The _valuative criterion relative to a morphism_ $`h \colon U \to X` asks for unique lifting
 only in those valuative squares for $`f \colon X \to S` whose generic point factors through
 $`h`.
 :::
 
-:::theorem "thm:dense-valuative-criterion" (parent := "grp:two-open") (lean := "AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant, AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant, AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isSchemeTheoreticallyDominant, AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant, AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isSchemeTheoreticallyDominant_of_isAffine, AlgebraicGeometry.exists_stalkClosedPointTo_of_generic_eq, AlgebraicGeometry.exists_flat_polynomial_presentation")
+:::theorem "thm:dense-valuative-criterion" (parent := "grp:two-open") (lean := "AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant, AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant, AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant")
 Let $`f \colon X \to S` be a morphism and $`h \colon U \to X` quasi-compact and dominant. If
 every valuative square for $`f` whose generic point factors through $`h` admits a unique
 lift, then $`f` is universally closed; the corresponding statement for uniqueness gives

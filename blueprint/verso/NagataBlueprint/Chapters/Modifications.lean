@@ -56,7 +56,7 @@ that $`w` is separated, locally of finite type and quasi-compact
 {uses "def:admissible"}[].
 :::
 
-:::theorem "thm:0F3X" (parent := "grp:modifications") (lean := "AlgebraicGeometry.nonempty_commonModification, AlgebraicGeometry.IsAdmissible.exists_isOpenImmersion_blowup")
+:::theorem "thm:0F3X" (parent := "grp:modifications") (lean := "AlgebraicGeometry.nonempty_commonModification")
 Let $`S` be quasi-compact quasi-separated, let $`s_1 \colon X_1 \to S` and
 $`s_2 \colon X_2 \to S` be separated, locally of finite type and quasi-compact, and let
 $`j_1 \colon U \to X_1`, $`j_2 \colon U \to X_2` be quasi-compact open immersions with
@@ -121,7 +121,7 @@ immersion is scheme-theoretically dominant, namely by passing to the scheme-theo
 of the open immersion inside the ambient scheme {uses "def:compactification"}[].
 :::
 
-:::theorem "thm:boundary-separation" (parent := "grp:modifications") (lean := "AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures, AlgebraicGeometry.IsAdmissible.closure_preimage_subset_range_strictTransformMap")
+:::theorem "thm:boundary-separation" (parent := "grp:modifications") (lean := "AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures")
 If $`T_1, T_2` are disjoint closed subsets of a quasi-compact open $`U` of a quasi-compact
 quasi-separated scheme $`X` with quasi-compact complements in $`U`, then after a
 $`U`-admissible blow-up of $`X` the closures of the inverse images of $`T_1` and $`T_2` are

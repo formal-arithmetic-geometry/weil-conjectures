@@ -34,9 +34,8 @@ change of `Z` lying over the closure of `q ⁻¹ (V ∖ U)`.
 
 - `AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`: the disjointness statement
   itself, with the scheme-theoretic image written as the closure of the range
-  (blueprint: `lemma:nagata-conrad-disjointness-blowup`);
-- `AlgebraicGeometry.disjoint_support_ker_of_blowupMap_sup`: the same statement with the
-  scheme-theoretic image written as the support of the kernel ideal sheaf.
+  (blueprint: `lemma:nagata-conrad-disjointness-blowup`). To read the conclusion in
+  ideal-sheaf language instead, rewrite with `Scheme.Hom.support_ker`.
 
 ## Implementation notes
 
@@ -359,22 +358,5 @@ theorem disjoint_closure_range_of_blowupMap_sup {Z Y Z' Y' : Scheme.{u}} {p : Z 
     simp only [← Category.assoc, hμ]
   · rw [hy]; exact hxI₁
   · rw [hy]; exact hx
-
-/-- **Deligne's disjointness blow-up**, with the scheme-theoretic image written as the
-support of the kernel ideal sheaf rather than as the closure of the range; see
-`AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`. -/
-theorem disjoint_support_ker_of_blowupMap_sup {Z Y Z' Y' : Scheme.{u}} {p : Z ⟶ X}
-    {f : Y ⟶ Z} {U V : X.Opens} (hUV : U ≤ V) {I₁ I₂ : X.IdealSheafData}
-    (hI₂V : (I₂.support : Set X) ⊆ (V : Set X)ᶜ)
-    (hVU : (V : Set X) \ (U : Set X) ⊆ (I₁.support : Set X))
-    (hYU : Set.range (f ≫ p) ⊆ (U : Set X))
-    (hfac : I₂.comap p ≤ (I₁ * I₁).comap p ⊔ f.ker)
-    {r : Z' ⟶ Z} {p' : Z' ⟶ (I₁ ⊔ I₂).blowup}
-    (hw : r ≫ p = p' ≫ (I₁ ⊔ I₂).blowupMap)
-    {fY : Y' ⟶ Y} {f' : Y' ⟶ Z'} [QuasiCompact f'] (hcomm : f' ≫ r = fY ≫ f) :
-    Disjoint ((f'.ker.support : Set Z'))
-      (p' ⁻¹' closure ((I₁ ⊔ I₂).blowupMap ⁻¹' ((V : Set X) \ (U : Set X)))) := by
-  rw [Scheme.Hom.support_ker]
-  exact disjoint_closure_range_of_blowupMap_sup hUV hI₂V hVU hYU hfac hw hcomm
 
 end AlgebraicGeometry

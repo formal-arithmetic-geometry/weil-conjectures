@@ -25,7 +25,7 @@ with its structure morphism $`\Pj(\sigma; S) \to S`; the comparison square with 
 integral model is cartesian.
 :::
 
-:::theorem "thm:proj-proper" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isProper_terminalFrom_projectiveSpaceInt, AlgebraicGeometry.RelativeProjectiveSpace.specGradeZeroIsTerminal")
+:::theorem "thm:proj-proper" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isProper_over")
 For finite $`\sigma` the structure morphism $`\Pj(\sigma; S) \to S` is proper.
 :::
 
@@ -35,7 +35,7 @@ the degree-zero part being terminal, and $`\Pj(\sigma; S) \to S` is one of its b
 properness is stable under base change.
 :::
 
-:::lemma_ "lem:dehomogenization" (parent := "grp:projective") (lean := "MvPolynomial.dehomogenizeEquiv, MvPolynomial.dehomogenize, MvPolynomial.homogenizeAway, MvPolynomial.dehomogenizeAway")
+:::lemma_ "lem:dehomogenization" (parent := "grp:projective") (lean := "MvPolynomial.dehomogenizeEquiv")
 Let $`R` be a commutative ring and let $`R[T_\ast, T_i : i \in \sigma]` carry its
 total-degree grading. The degree-zero part of the localization away from the variable
 $`T_\ast` is canonically isomorphic to the polynomial ring in the remaining variables:
@@ -43,7 +43,7 @@ $$`\bigl(R[T_\ast, T_i]_{T_\ast}\bigr)_0 \;\xrightarrow{\ \sim\ }\; R[T_i : i \i
 for $`a` homogeneous of degree $`k`; the inverse sends $`T_i` to $`T_i / T_\ast`.
 :::
 
-:::lemma_ "lem:affine-chart" (parent := "grp:projective") (lean := "AlgebraicGeometry.AffineSpace.toProjectiveSpaceInt, AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.isPullback_toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace_over")
+:::lemma_ "lem:affine-chart" (parent := "grp:projective") (lean := "AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.isOpenImmersion_toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace_over")
 The morphism $`\Aff(\sigma; S) \to \Pj(\sigma; S)` induced on the integral model by
 $`T_i \mapsto T_i / T_\ast` is an open immersion, and it is a morphism over $`S`.
 :::
@@ -57,7 +57,7 @@ immersions are stable under base change.
 
 # Quasi-affine sources
 
-:::theorem "thm:04II" (parent := "grp:projective") (lean := "AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine, AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine', AlgebraicGeometry.AffineSpace.isImmersion_homOfVector")
+:::theorem "thm:04II" (parent := "grp:projective") (lean := "AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine, AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine'")
 Let $`X` be a quasi-affine scheme and let $`\pi \colon X \to S` be locally of finite type.
 Then there are a finite index type $`\sigma` and an immersion $`i \colon X \to \Aff(\sigma; S)`
 over $`S`, that is, with $`\pi` equal to the composite of $`i` with the structure morphism of

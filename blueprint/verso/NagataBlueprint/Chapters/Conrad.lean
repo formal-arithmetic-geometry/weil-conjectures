@@ -21,7 +21,7 @@ neighbourhood of the preserved open, with _closed graph_ in the fibre product.
 
 # Deligne's disjointness blow-up
 
-:::theorem "thm:disjointness" (parent := "grp:conrad") (lean := "AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup, AlgebraicGeometry.disjoint_support_ker_of_blowupMap_sup")
+:::theorem "thm:disjointness" (parent := "grp:conrad") (lean := "AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup")
 Let $`p \colon Z \to X` be a morphism, let $`f \colon Y \to Z` be a morphism over $`X` whose
 source lies over an open $`U \le V` of $`X`, and let $`\sI_1, \sI_2` be quasi-coherent ideal
 sheaves on $`X` such that
@@ -57,7 +57,7 @@ and the kernel generate the unit ideal on the probe, so their supports do not me
 
 # The case of a target that is quasi-affine over the base
 
-:::theorem "thm:conrad-case1-affine-space" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_affineSpace, AlgebraicGeometry.AffineBlowup.awaySlope, AlgebraicGeometry.AffineSpace.isClosed_range_of_basicOpen_fractions")
+:::theorem "thm:conrad-case1-affine-space" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_affineSpace")
 Let $`X` be affine, let $`U \subseteq X` be a quasi-compact open, let $`\sigma` be finite and
 let $`f \colon U \to \Aff(\sigma; X)` be a morphism over $`X`. Then there are a
 $`U`-admissible centre $`\sI` on $`X`, an open $`W \subseteq \Bl_\sI(X)` containing
@@ -81,7 +81,7 @@ built from the fractions $`(u_i^{N}x)/(ax)` and $`(g_{u_i,j}x)/(ax)`, because th
 fractions generate the unit ideal on the chart.
 :::
 
-:::theorem "thm:conrad-case1" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine, AlgebraicGeometry.exists_extend_of_lift")
+:::theorem "thm:conrad-case1" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine")
 Let $`X` be affine, let $`U \subseteq X` be a quasi-compact open, let $`Y` be a quasi-affine
 scheme and let $`p \colon Y \to X` be locally of finite type. Let $`f \colon U \to Y` satisfy
 $`p \circ f = \iota_U`. Then there are a $`U`-admissible centre $`\sI` on $`X`, an open
@@ -97,7 +97,7 @@ and then compose with one further admissible blow-up making the preserved open s
 dense, transporting the extension along the comparison of the two blow-ups.
 :::
 
-:::theorem "thm:conrad-case2" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_of_isAffineOpen, AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom")
+:::theorem "thm:conrad-case2" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom")
 Let $`X` be quasi-compact quasi-separated, let $`U \subseteq X` be a quasi-compact open, and
 let $`p \colon Y \to X` be separated, locally of finite type and quasi-affine as a morphism.
 Let $`f \colon U \to Y` satisfy $`p \circ f = \iota_U`. Then the conclusion of the previous
@@ -114,7 +114,7 @@ compatible, which in turn makes the graph of the glued extension meet the part o
 $`Y \times_X X'` over each member of the cover in the closed local graph there.
 :::
 
-:::theorem "thm:conrad-case3" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom_of_le, AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le, PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ")
+:::theorem "thm:conrad-case3" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom_of_le")
 Let $`X` be quasi-compact quasi-separated, let $`U \le V` be quasi-compact opens of $`X`, let
 $`Y` be quasi-compact quasi-separated and let $`p \colon Y \to X` be separated, locally of
 finite type and quasi-affine as a morphism. Let $`f \colon U \to Y` satisfy
@@ -143,7 +143,7 @@ $`X_0 \cap \pi_1^{-1}V = \pi_1^{-1}U`, and the two admissible blow-ups are compo
 
 # The general case
 
-:::theorem "thm:graph-quasi-finite" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph, AlgebraicGeometry.exists_isAdmissible_extend_of_isAffineOpen_of_le, AlgebraicGeometry.isClosed_preimage_range_lift_of_comp")
+:::theorem "thm:graph-quasi-finite" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph")
 Let $`X` be quasi-compact quasi-separated, let $`U \le V` be quasi-compact opens, let $`Y` be
 quasi-compact quasi-separated and let $`p \colon Y \to X` be separated and locally of finite
 type. Let $`f \colon U \to Y` satisfy $`p \circ f = \iota_U` and have range closed in
@@ -168,7 +168,7 @@ $`Y \times_X \Bl_\sI(X)`, and the closure of the range of $`F` meets each of the
 corresponding section; hence the fibres of $`\operatorname{im} F \to \Bl_\sI(X)` are finite.
 :::
 
-:::definition "def:quasi-affine-hom" (parent := "grp:conrad") (lean := "AlgebraicGeometry.IsQuasiAffineHom, AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isAffineHom_of_locallyQuasiFinite, AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite, AlgebraicGeometry.Scheme.IsQuasiAffine.of_locallyQuasiFinite, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isQuasiAffineHom, AlgebraicGeometry.IsQuasiAffineHom.of_isPullback")
+:::definition "def:quasi-affine-hom" (parent := "grp:conrad") (lean := "AlgebraicGeometry.IsQuasiAffineHom, AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isAffineHom_of_locallyQuasiFinite, AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite, AlgebraicGeometry.Scheme.IsQuasiAffine.of_locallyQuasiFinite")
 A morphism is _quasi-affine_ if the preimage of every affine open of the target is a
 quasi-affine scheme. The two consequences of Zariski's Main Theorem used below are recorded
 here: a separated, quasi-compact, locally quasi-finite morphism of finite type factors as an
@@ -177,7 +177,7 @@ as a morphism, with no hypothesis on the target, and its source is a quasi-affin
 whenever the target is. Zariski's Main Theorem itself is taken from the ambient library.
 :::
 
-:::theorem "thm:conrad24" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection, AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup, AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_isClosedImmersion, AlgebraicGeometry.baseChangeSection")
+:::theorem "thm:conrad24" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection")
 Let $`X` be quasi-compact quasi-separated, let $`U \le V` be quasi-compact opens of $`X` with
 $`U` dense in $`X`, let $`Y` be quasi-compact quasi-separated and let $`p \colon Y \to X` be
 separated, quasi-compact and locally of finite type. Let $`f \colon U \to Y` satisfy

@@ -18,13 +18,13 @@ zero ideal sheaf and $`\top` the unit ideal sheaf, and with products $`\sI \cdot
 suprema $`\sI \sqcup \sL` computed sectionwise. We write $`V(\sI)` for the support of $`\sI`
 and $`\sI \cdot \sO_Y` for the inverse image ideal sheaf along $`Y \to X`.
 
-:::definition "def:finite-type-ideal" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_iff")
+:::definition "def:finite-type-ideal" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType")
 Let $`\sI` be a quasi-coherent ideal sheaf on $`X` and let $`O \subseteq X` be an open. We say
 $`\sI` is _of finite type_ on $`O` if $`\sI(U)` is a finitely generated ideal for every affine
 open $`U \subseteq O`, and _of finite type_ if this holds for every affine open of $`X`.
 :::
 
-:::proposition "prop:finite-type-stability" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_top, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_bot, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn.sup, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn.iSup, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.sup, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.comap, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_of_isLocallyNoetherian")
+:::proposition "prop:finite-type-stability" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_top, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_bot, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn.sup, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn.iSup, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.comap, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_of_isLocallyNoetherian")
 The zero and unit ideal sheaves are of finite type. Finite-typeness on an open is
 finite-typeness of the restriction to that open; it is local on the target, that is, stable
 under finite suprema and under suprema of families of opens. On a locally Noetherian scheme
@@ -32,7 +32,7 @@ every quasi-coherent ideal sheaf is of finite type. Finite-typeness is stable un
 image along an arbitrary morphism {uses "def:finite-type-ideal"}[].
 :::
 
-:::theorem "thm:01PF" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_le, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq, AlgebraicGeometry.Scheme.IdealSheafData.exists_le_ofFiniteTypeOn_sup")
+:::theorem "thm:01PF" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_le, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq")
 Let $`X` be a quasi-compact scheme.
 
 * Let $`\sI_0 \le \sH_0` be quasi-coherent ideal sheaves on $`X`, let $`W \subseteq X` be a
@@ -70,7 +70,7 @@ extend the ideal sheaf they span to a finite-type ideal sheaf inside $`\sH_0`, a
 the cover.
 :::
 
-:::theorem "thm:finite-type-directed" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup, AlgebraicGeometry.Scheme.IdealSheafData.exists_mem_le_of_ofFiniteType_le_sSup, AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le, AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_eq, AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le_comap_eq_top, AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_comap_eq_top_eq, AlgebraicGeometry.Scheme.IdealSheafData.exists_ofFiniteType_le_comap_eq_top, AlgebraicGeometry.Scheme.IdealSheafData.exists_ofFiniteType_le_mem_ideal, AlgebraicGeometry.Scheme.IdealSheafData.isCompact_sup_finsetSup")
+:::theorem "thm:finite-type-directed" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup, AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le, AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_eq, AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le_comap_eq_top, AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_comap_eq_top_eq")
 Let $`X` be a quasi-compact scheme.
 
 * If $`\mathcal{A}` is of finite type and $`\mathcal{A} \le \bigvee_i \mathcal{B}_i` for a
@@ -89,7 +89,7 @@ is the statement that a finitely generated ideal contained in a directed supremu
 lies in one member.
 :::
 
-:::theorem "thm:01PH" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl, AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetherian, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_preimage_coe_support_eq")
+:::theorem "thm:01PH" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl, AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetherian")
 Let $`X` be quasi-compact quasi-separated and let $`U \subseteq X` be a quasi-compact open.
 Then there is a finite-type quasi-coherent ideal sheaf $`\sI` on $`X` with
 $`V(\sI) = X \setminus U`. On a locally Noetherian scheme the same holds for an arbitrary
