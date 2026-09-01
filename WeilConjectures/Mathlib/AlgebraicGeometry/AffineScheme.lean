@@ -22,7 +22,9 @@ to `Spec Γ(X, ⊤)_x`. We record this morphism and the induced map on global se
 
 - `AlgebraicGeometry.Scheme.toSpecAway` — the morphism `X_x ⟶ Spec Γ(X, ⊤)_x`;
 - `AlgebraicGeometry.Scheme.awayToBasicOpen` — the induced ring map
-  `Γ(X, ⊤)_x ⟶ Γ(X_x, ⊤)`, which sends `a / x` to `AlgebraicGeometry.Scheme.divBasicOpen`.
+  `Γ(X, ⊤)_x ⟶ Γ(X_x, ⊤)`, which sends `a / x` to `AlgebraicGeometry.Scheme.divBasicOpen`;
+- `AlgebraicGeometry.mk'_eq_divBasicOpen_pow` — the fraction `a / x ^ N` in `Γ(X_x, ⊤)`, for
+  affine `X`, written in terms of `AlgebraicGeometry.Scheme.divBasicOpen`.
 
 We also show that an affine scheme `V` equipped with a morphism `g : V ⟶ S` is covered by
 finitely many basic opens, each of which lands in an affine open of `S`.
@@ -105,6 +107,21 @@ lemma Scheme.awayToBasicOpen_mk' (a : Γ(X, ⊤)) (h : x ∈ Submonoid.powers x)
   refine X.eq_divBasicOpen ?_
   rw [← X.awayToBasicOpen_algebraMap x x, ← X.awayToBasicOpen_algebraMap x a, ← map_mul,
     IsLocalization.mk'_spec]
+
+/-- The fraction `a / x ^ N` in the sections over a basic open `X_x` of an affine scheme,
+written in terms of `AlgebraicGeometry.Scheme.divBasicOpen`. -/
+lemma mk'_eq_divBasicOpen_pow [IsAffine X] (a : Γ(X, ⊤)) (N : ℕ)
+    (h : x ^ N ∈ Submonoid.powers x) :
+    IsLocalization.mk' Γ((X.basicOpen x : Scheme.{u}), ⊤) a ⟨x ^ N, h⟩ =
+      X.divBasicOpen 1 x ^ N * X.divBasicOpen (a * x) x := by
+  have e₁ : X.divBasicOpen (a * x) x = (X.basicOpen x).ι.appTop a :=
+    (X.isUnit_ι_appTop_basicOpen x).mul_right_cancel
+      ((X.divBasicOpen_mul_self _ _).trans (map_mul _ _ _))
+  have e₂ : X.divBasicOpen 1 x * (X.basicOpen x).ι.appTop x = 1 :=
+    (X.divBasicOpen_mul_self _ _).trans (map_one _)
+  refine (IsLocalization.eq_mk'_iff_mul_eq.mpr ?_).symm
+  change _ * (X.basicOpen x).ι.appTop (x ^ N) = (X.basicOpen x).ι.appTop a
+  rw [map_pow, e₁, mul_right_comm, ← mul_pow, e₂, one_pow, one_mul]
 
 end Away
 

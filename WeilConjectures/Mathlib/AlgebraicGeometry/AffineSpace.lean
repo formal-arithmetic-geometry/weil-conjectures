@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Morphisms into the integral model of affine space
@@ -15,6 +16,13 @@ with families of global sections of `Y`. We record how it evaluates on a morphis
 factors through the spectrum of a ring:
 
 - `AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp_SpecMap`.
+
+We also record how `AlgebraicGeometry.AffineSpace.homOfVector` interacts with the functoriality
+of affine space in the base, in `AlgebraicGeometry.AffineSpace.homOfVector_comp_map`, and that
+`AlgebraicGeometry.AffineSpace.map` is an open immersion whenever the map of bases is.
+
+Finally, `AlgebraicGeometry.AffineSpace.isClosedImmersion_homOfVector` is the criterion for a
+morphism into an affine space over an affine base to be a closed immersion.
 -/
 
 @[expose] public section
@@ -35,5 +43,41 @@ lemma toSpecMvPolyIntEquiv_comp_SpecMap {m : Type u} {Y : Scheme.{u}} {R : CommR
   congr 1
   rw [toSpecMvPolyIntEquiv_apply, ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality,
     CommRingCat.comp_apply]
+
+section Map
+
+variable {m : Type u} {S T : Scheme.{u}}
+
+/-- Changing the base of `AlgebraicGeometry.AffineSpace.homOfVector` along `f : S ⟶ T` amounts
+to composing the structure morphism with `f`. -/
+@[reassoc]
+lemma homOfVector_comp_map {X : Scheme.{u}} (h : X ⟶ S) (f : S ⟶ T) (v : m → Γ(X, ⊤)) :
+    homOfVector h v ≫ map m f = homOfVector (h ≫ f) v := by
+  refine hom_ext ?_ fun j ↦ ?_
+  · rw [Category.assoc, map_over, homOfVector_over_assoc, homOfVector_over]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, map_appTop_coord,
+      homOfVector_appTop_coord, homOfVector_appTop_coord]
+
+instance isOpenImmersion_map (f : S ⟶ T) [IsOpenImmersion f] : IsOpenImmersion (map m f) :=
+  MorphismProperty.of_isPullback (P := @IsOpenImmersion) (isPullback_map (n := m) f).flip ‹_›
+
+end Map
+
+/-- If the global sections of an affine scheme `X` are generated as a ring by the image of
+`Γ(T, ⊤)` together with a family `v`, the morphism `X ⟶ 𝔸(m; T)` classifying `v` over
+`h : X ⟶ T` is a closed immersion. -/
+lemma isClosedImmersion_homOfVector {m : Type u} {X T : Scheme.{u}} [IsAffine X]
+    [IsAffine T] (h : X ⟶ T) (v : m → Γ(X, ⊤))
+    (hgen : Subring.closure (Set.range h.appTop ∪ Set.range v) = ⊤) :
+    IsClosedImmersion (homOfVector h v) := by
+  refine IsClosedImmersion.of_surjective_of_isAffine _ ?_
+  have hle : Subring.closure (Set.range ⇑h.appTop ∪ Set.range v) ≤
+      RingHom.range (homOfVector h v).appTop.hom := by
+    rw [Subring.closure_le]
+    rintro y (⟨a, rfl⟩ | ⟨i, rfl⟩)
+    · refine ⟨(𝔸(m; T) ↘ T).appTop a, ?_⟩
+      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, homOfVector_over]
+    · exact ⟨coord T i, homOfVector_appTop_coord _ _ _⟩
+  exact fun x ↦ hle ((Subring.eq_top_iff' _).mp hgen x)
 
 end AlgebraicGeometry.AffineSpace
