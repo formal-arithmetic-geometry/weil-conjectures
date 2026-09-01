@@ -222,5 +222,6 @@ public import WeilConjectures.WeilSheaf.CompactlySupported
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.GeometricFrobenius
 public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.WeilSheaf.TraceFormula
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
