@@ -10,9 +10,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
-# The Segre morphism between the integral models of projective spaces
+# The Segre morphism
 
 The Segre morphism `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ ⟶ ℙ^(n×m)_ℤ` sends a pair of points with homogeneous
 coordinates `(xₖ)ₖ` and `(yₗ)ₗ` to the point with homogeneous coordinates `(xₖ · yₗ)_{k,l}`.
@@ -36,7 +37,10 @@ of `D₊(W_{k,l})` is exactly the chart `D₊(Xₖ) ×_ℤ D₊(Yₗ)`, which is
 affine coordinate `W_{r,s} / W_{k,l}` to `(Xᵣ / Xₖ) ⊗ (Yₛ / Yₗ)`, and this ring map is
 surjective because `Xᵣ / Xₖ ⊗ 1` and `1 ⊗ Yₛ / Yₗ` are among its values.
 
-The relative version of the Segre morphism over an arbitrary base scheme is not treated here.
+The relative Segre morphism `ℙ(n; S) ×_S ℙ(m; S) ⟶ ℙ(n × m; S)` over an arbitrary base scheme
+`S` is obtained from this by base change: `ℙ(n; S)` is *defined* as `S ×_ℤ ℙⁿ_ℤ`, so both sides
+are base changes along the structure morphism of `S`, and the relative Segre morphism is a
+closed immersion because closed immersions are stable under base change.
 
 ## Main definitions
 
@@ -44,6 +48,11 @@ The relative version of the Segre morphism over an arbitrary base scheme is not 
 - `AlgebraicGeometry.Proj.segreCover` — the standard open cover of `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ` by the
   products `D₊(Xᵢ) ×_ℤ D₊(Yⱼ)` of standard charts.
 - `AlgebraicGeometry.Proj.segreChartHom` — the Segre morphism on the `(i, j)`-chart.
+- `AlgebraicGeometry.ProjectiveSpace.segre` — the relative Segre morphism
+  `ℙ(n; S) ×_S ℙ(m; S) ⟶ ℙ(n × m; S)` over a base scheme `S`.
+- `AlgebraicGeometry.ProjectiveSpace.prodToProjInt` — the morphism
+  `ℙ(n; S) ×_S ℙ(m; S) ⟶ ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ` along which the relative Segre morphism is the base
+  change of the integral one.
 
 ## Main results
 
@@ -52,11 +61,15 @@ The relative version of the Segre morphism over an arbitrary base scheme is not 
   the locus `D₊(W_{k,l})` is the product of the loci `D₊(Xₖ)` and `D₊(Yₗ)`.
 - `AlgebraicGeometry.Proj.segreCover_f_comp_segre` — on the chart `D₊(Xᵢ) ×_ℤ D₊(Yⱼ)`, the
   Segre morphism is `segreChartHom i j`.
+- `AlgebraicGeometry.ProjectiveSpace.isPullback_segre` — the relative Segre morphism is the
+  base change of the Segre morphism of the integral models.
+- `AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_segre` — the relative Segre morphism is
+  a closed immersion.
 
 ## Blueprint
 
-This is the absolute case of `def:chow-segre`; the relative Segre morphism over a base scheme
-and the multiple product are built from it elsewhere.
+This is `def:chow-segre` and `lem:chow-segre` in the binary case, first for the integral models
+and then over an arbitrary base scheme. The `m`-fold product is built from it elsewhere.
 -/
 
 @[expose] public section
@@ -449,3 +462,89 @@ instance isClosedImmersion_segre : IsClosedImmersion (segre n m) := by
 end ClosedImmersion
 
 end AlgebraicGeometry.Proj
+
+namespace AlgebraicGeometry.ProjectiveSpace
+
+variable (n m : Type u) (S : Scheme.{u})
+
+/-- The morphism `ℙ(n; S) ×_S ℙ(m; S) ⟶ ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ` to the product of the integral models,
+induced by the two maps `ProjectiveSpace.toProjInt` to the integral models. -/
+def prodToProjInt :
+    pullback (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) ⟶
+      pullback (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+        (terminal.from (Proj.projectiveSpaceOverAffine m (ULift.{u} ℤ))) :=
+  pullback.lift (pullback.fst _ _ ≫ toProjInt n S) (pullback.snd _ _ ≫ toProjInt m S)
+    (terminal.hom_ext _ _)
+
+@[reassoc (attr := simp)]
+lemma prodToProjInt_fst :
+    prodToProjInt n m S ≫ pullback.fst _ _ = pullback.fst _ _ ≫ toProjInt n S :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma prodToProjInt_snd :
+    prodToProjInt n m S ≫ pullback.snd _ _ = pullback.snd _ _ ≫ toProjInt m S :=
+  pullback.lift_snd _ _ _
+
+/-- `ℙ(n; S) ×_S ℙ(m; S)` is the base change of `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ` along the structure morphism
+of `S`. -/
+lemma isPullback_prodToProjInt :
+    IsPullback (pullback.fst (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) ≫ (ℙ(n; S) ↘ S))
+      (prodToProjInt n m S) (terminal.from S)
+      (terminal.from (pullback
+        (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+        (terminal.from (Proj.projectiveSpaceOverAffine m (ULift.{u} ℤ))))) := by
+  have h := IsPullback.baseChange_pullback' (isPullback_over_toProjInt n S)
+    (isPullback_over_toProjInt m S)
+    (IsPullback.of_hasPullback (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S))
+    (IsPullback.of_hasPullback _ _) (prodToProjInt_fst n m S) (prodToProjInt_snd n m S)
+  rwa [terminal.hom_ext (pullback.fst
+    (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)))
+    (terminal.from (Proj.projectiveSpaceOverAffine m (ULift.{u} ℤ))) ≫ terminal.from _)
+    (terminal.from _)] at h
+
+/-- **The relative Segre morphism** `ℙ(n; S) ×_S ℙ(m; S) ⟶ ℙ(n × m; S)`, obtained from the
+Segre morphism `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ ⟶ ℙ^(n×m)_ℤ` of the integral models by base change along the
+structure morphism of `S`.
+(blueprint: `def:chow-segre`, binary case) -/
+def segre : pullback (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) ⟶ ℙ(n × m; S) :=
+  pullback.lift (pullback.fst _ _ ≫ (ℙ(n; S) ↘ S))
+    (prodToProjInt n m S ≫ Proj.segre n m) (terminal.hom_ext _ _)
+
+/-- The relative Segre morphism is a morphism over `S`. -/
+@[reassoc (attr := simp)]
+lemma segre_over :
+    segre n m S ≫ (ℙ(n × m; S) ↘ S) = pullback.fst _ _ ≫ (ℙ(n; S) ↘ S) :=
+  pullback.lift_fst _ _ _
+
+/-- The relative Segre morphism is compatible with the Segre morphism of the integral models. -/
+@[reassoc (attr := simp)]
+lemma segre_toProjInt :
+    segre n m S ≫ toProjInt (n × m) S = prodToProjInt n m S ≫ Proj.segre n m :=
+  pullback.lift_snd _ _ _
+
+/-- **The relative Segre morphism is the base change of the Segre morphism of the integral
+models** along the map `ℙ(n × m; S) ⟶ ℙ^(n×m)_ℤ`. -/
+lemma isPullback_segre :
+    IsPullback (prodToProjInt n m S) (segre n m S) (Proj.segre n m) (toProjInt (n × m) S) := by
+  refine IsPullback.of_bot ?_ (segre_toProjInt n m S).symm
+    (isPullback_over_toProjInt (n × m) S).flip
+  rw [segre_over, terminal.hom_ext (Proj.segre n m ≫
+    terminal.from (Proj.projectiveSpaceOverAffine (n × m) (ULift.{u} ℤ))) (terminal.from _)]
+  exact (isPullback_prodToProjInt n m S).flip
+
+/-- **The relative Segre morphism is a closed immersion**, being the base change of the Segre
+morphism of the integral models.
+(blueprint: `lem:chow-segre`, binary case) -/
+instance isClosedImmersion_segre : IsClosedImmersion (segre n m S) :=
+  MorphismProperty.of_isPullback (isPullback_segre n m S) inferInstance
+
+/-- For finite index types, the projection `ℙ(n; S) ×_S ℙ(m; S) ⟶ S` is proper: it factors as
+the relative Segre closed immersion followed by the proper structure morphism of
+`ℙ(n × m; S)`. -/
+instance isProper_pullback_fst_comp_over [Finite n] [Finite m] :
+    IsProper (pullback.fst (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) ≫ (ℙ(n; S) ↘ S)) := by
+  have : IsProper (segre n m S ≫ (ℙ(n × m; S) ↘ S)) := inferInstance
+  rwa [segre_over] at this
+
+end AlgebraicGeometry.ProjectiveSpace
