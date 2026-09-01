@@ -3,6 +3,11 @@
 This directory contains the LaTeX source for the lecture notes and the
 compiled PDF.
 
+This folder is non-normative background: it is kept for reference and is not
+what the Lean development implements.  The coefficient conventions the
+project actually follows are stated in
+`blueprint/src/version/detailed/00_conventions.tex`.
+
 ## Build
 
 Run from this directory:
