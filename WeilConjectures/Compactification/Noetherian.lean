@@ -139,15 +139,13 @@ end Scheme
 
 /-! ### The gluing step -/
 
-/-- **The gluing step of the induction over a dense affine cover**: over a Noetherian base
-`S`, if `D` is a dense subset of `X` contained in two opens `V` and `W` of `X` and both
-`V ⟶ S` and `W ⟶ S` are compactifiable, then so is `V ∪ W ⟶ S`.
+/-- **The gluing step of the induction over a dense affine cover** (blueprint: the
+induction step of `def:nagata-noetherian-compactification`, using
+`lemma:nagata-partial-union-overlap-dense`).
 
 This is the two-open theorem `AlgebraicGeometry.HasCompactification.of_two_open_cover` applied
 to the two opens `V` and `W` of `V ∪ W`: their intersection contains `D`, which is dense in
-`V ∪ W` because `V ∪ W` is open in `X` (`Dense.preimage_val_inter`).
-(blueprint: the induction step of `def:nagata-noetherian-compactification`, using
-`lemma:nagata-partial-union-overlap-dense`) -/
+`V ∪ W` because `V ∪ W` is open in `X` (`Dense.preimage_val_inter`). -/
 theorem HasCompactification.of_sup_of_dense_subset [IsNoetherian S] (f : X ⟶ S)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {D : Set X} (hD : Dense D)
     {V W : X.Opens} (hDV : D ⊆ (V : Set X)) (hDW : D ⊆ (W : Set X))
@@ -222,14 +220,11 @@ noncomputable def noetherianCompactificationConstruction [IsNoetherian S] (f : X
     · rw [iSup_neg hrn, sup_bot_eq]
       exact HasCompactification.compactification _
 
-/-- **Nagata compactification over a Noetherian base**: a separated, quasi-compact morphism
-`f : X ⟶ S` locally of finite type over a Noetherian scheme `S` factors as an open immersion
-followed by a proper morphism.
+/-- **Nagata compactification over a Noetherian base** (blueprint: `thm:nagata-noetherian`).
 
 The last stage `X_n = X` of the recursion
 `AlgebraicGeometry.noetherianCompactificationConstruction` over the selected dense affine
-cover of `X` is a compactification of `f`.
-(blueprint: `thm:nagata-noetherian`) -/
+cover of `X` is a compactification of `f`. -/
 theorem nagataCompactification_of_isNoetherian [IsNoetherian S] (f : X ⟶ S) [IsSeparated f]
     [LocallyOfFiniteType f] [QuasiCompact f] : HasCompactification f := by
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f

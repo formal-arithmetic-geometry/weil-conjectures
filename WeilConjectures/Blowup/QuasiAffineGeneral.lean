@@ -68,19 +68,13 @@ namespace AlgebraicGeometry
 variable {X : Scheme.{u}}
 
 /-- **Conrad's Theorem 2.4, Case 3**: elimination of indeterminacy for a quasi-affine
-morphism and two nested quasi-compact opens.
+morphism and two nested quasi-compact opens (blueprint:
+`lemma:nagata-conrad-quasi-affine-general`).
 
-Let `X` be qcqs, let `U ≤ V` be quasi-compact opens of `X`, let `Y` be qcqs and let
-`p : Y ⟶ X` be separated, locally of finite type and quasi-affine as a morphism. Let
-`f : U ⟶ Y` be a section of `p` over `U` whose image is closed in `p ⁻¹ V`. Then there is a
-`V`-admissible blow-up `π : X' ⟶ X` of `X`, an open `W` of `X'` containing `π ⁻¹ U`, and a
-morphism `g : W ⟶ Y` over `X` extending `f`, whose graph is closed in `Y ×[X] X'`.
-
-Note that the centre of the blow-up is disjoint from the *larger* open `V`; that is what
-makes this statement stronger than
+The centre of the blow-up is disjoint from the *larger* open `V`; that is what makes this
+statement stronger than
 `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom`, which is the case
-`U = V`. Neither `U` nor `V` is assumed dense in `X`.
-(Blueprint: `lemma:nagata-conrad-quasi-affine-general`.) -/
+`U = V`. Neither `U` nor `V` is assumed dense in `X`. -/
 theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

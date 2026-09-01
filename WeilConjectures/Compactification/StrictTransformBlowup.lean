@@ -96,10 +96,7 @@ theorem ker_pullbackLift_blowup_comap (I : X.IdealSheafData) (f : Y ⟶ X)
   exact ker_eq_ker_strictTransformOpen_ι f I.blowupMap I.support.compl (pullback.lift_fst ..)
 
 /-- **The strict transform is the blow-up of the pulled-back ideal** (Stacks Project
-Tag 080E; blueprint: `thm:nagata-strict-transform-is-blowup`): for a morphism of
-schemes `f : Y ⟶ X` and an ideal sheaf `I` on `X`, the blow-up of `Y` at `I.comap f`
-is isomorphic to the strict transform of `f` along the blow-up of `I`, compatibly with
-the projections to `Y` and with the structure morphisms to `X`. -/
+Tag 080E; blueprint: `thm:nagata-strict-transform-is-blowup`). -/
 theorem exists_blowup_comap_iso_strictTransform (I : X.IdealSheafData) (f : Y ⟶ X) :
     ∃ e : (I.comap f).blowup ≅ I.strictTransform f,
       e.hom ≫ strictTransformToSource f I.blowupMap I.support.compl =
@@ -131,14 +128,12 @@ theorem exists_blowup_comap_iso_strictTransform (I : X.IdealSheafData) (f : Y �
   · rw [asIso_hom, hMap, ← Category.assoc, hfac, hψdef, Category.assoc,
       pullback.lift_snd_assoc, hρ]
 
-/-- **Tag 080E for a closed immersion**: for a closed immersion `j : Z ⟶ X` and an ideal
-sheaf `I` on `X`, the blow-up of `Z` at the pulled-back centre `I.comap j` is a closed
-subscheme of the blow-up of `X` at `I`, compatibly with the two blow-up morphisms.
+/-- **Tag 080E for a closed immersion** (blueprint:
+`lemma:nagata-strict-transform-ambient-closed`).
 
 This is the specialisation of `exists_blowup_comap_iso_strictTransform` to a closed
 immersion: the strict transform is a closed subscheme of `Z ×_X Bl_I(X)`, which in turn is
-a closed subscheme of `Bl_I(X)` because `j` is.
-(Blueprint: `lemma:nagata-strict-transform-ambient-closed`.) -/
+a closed subscheme of `Bl_I(X)` because `j` is. -/
 theorem exists_isClosedImmersion_blowup_comap {Z : Scheme.{u}} (I : X.IdealSheafData)
     (j : Z ⟶ X) [IsClosedImmersion j] :
     ∃ k : (I.comap j).blowup ⟶ I.blowup, IsClosedImmersion k ∧

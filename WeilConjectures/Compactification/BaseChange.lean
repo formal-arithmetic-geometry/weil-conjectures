@@ -57,32 +57,20 @@ variable {X Y S T : Scheme.{u}} {u : X ⟶ S} {p : Y ⟶ T} {h : X ⟶ Y} {t : S
 
 namespace Compactification
 
-/-- The open immersion of a base changed compactification is a base change of the original
-open immersion: if `IsPullback h u p t` and `i : X ⟶ c.Z ×_T S` is compatible with both
-projections of the fibre product, then
-```
-X    -  h  ->  Y
-|              |
-i             c.i
-↓              ↓
-c.Z ×_T S - fst -> c.Z
-```
-is a pullback square. It is obtained by cancelling the defining square of `c.Z ×_T S` off
-the bottom of the given square `IsPullback h u p t`. -/
+/-- **The open immersion of a base-changed compactification is a base change of the
+original open immersion.**
+
+The square is obtained by cancelling the defining square of `c.Z ×_T S` off the bottom of
+the given square `IsPullback h u p t`. -/
 theorem isPullback_of_isPullback (hsq : IsPullback h u p t) (c : Compactification p)
     {i : X ⟶ pullback c.g t} (hfst : i ≫ pullback.fst c.g t = h ≫ c.i)
     (hsnd : i ≫ pullback.snd c.g t = u) :
     IsPullback h i c.i (pullback.fst c.g t) :=
   .of_bot (by rw [hsnd, ← c.comm]; exact hsq) hfst.symm (.of_hasPullback c.g t)
 
-/-- **Base change construction for a compactification**: given a pullback square
-`IsPullback h u p t` and a compactification `c` of `p`, the fibre product of `c` with the
-base along `t` is a compactification of `u`, namely
-```
-X ⟶ c.Z ×_T S ⟶ S.
-```
-(blueprint: `def:nagata-compactification-base-change`,
-`lemma:nagata-compactification-base-change`) -/
+/-- **Base change construction for a compactification** (blueprint:
+`def:nagata-compactification-base-change`,
+`lemma:nagata-compactification-base-change`). -/
 @[simps]
 noncomputable def ofIsPullback (hsq : IsPullback h u p t) (c : Compactification p) :
     Compactification u where

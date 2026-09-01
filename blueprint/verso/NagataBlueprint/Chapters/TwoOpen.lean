@@ -32,17 +32,30 @@ the _self boundary_ and the _forbidden boundary_, both closed in $`X`. The side 
 _prepared_ if
 $`\overline{Z}_{\mathrm{self}} \cap \overline{Z}_{\mathrm{forb}} = \emptyset`. The open
 complement $`X^{\circ} = X \setminus \overline{Z}_{\mathrm{forb}}` is the _interior_ of the
-side; it contains the embedded copy of $`O` {uses "def:two-open-side"}[].
+side {uses "def:two-open-side"}[].
+:::
+
+:::lemma_ "lem:interior-contains-copy" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.range_embX_subset_interior")
+The interior of a side contains the embedded copy of $`O` in the ambient scheme
+{uses "def:boundaries"}[].
+:::
+
+:::proof "lem:interior-contains-copy" (uses := "def:boundaries, def:two-open-side")
+The embedded copy of $`O` is the part of $`V` lying over $`O`, which is disjoint from the
+inverse image of $`U \setminus O`; being open, it is also disjoint from its closure, the
+forbidden boundary.
 :::
 
 :::proposition "prop:side-transport" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.admissibleBlowup, AlgebraicGeometry.TwoOpenSide.Prepared.admissibleBlowup")
-A side may be transported along a $`V`-admissible blow-up of its ambient scheme; boundary
-loci transport to their preimages, so preparedness persists {uses "def:boundaries"}[].
+Let $`S` be Noetherian. A side may be transported along a $`V`-admissible blow-up of its
+ambient scheme; boundary loci transport to their preimages, so preparedness persists
+{uses "def:boundaries"}[].
 :::
 
 :::theorem "thm:prepared-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_twoOpenSide")
-Let $`O \sqcup O' = U` and assume $`u \circ \iota_O` is compactifiable. Then a prepared side
-for $`(u, O, O')` exists.
+Let $`S` be Noetherian, let $`u \colon U \to S` be separated, locally of finite type and
+quasi-compact, let $`O \sqcup O' = U` and assume $`u \circ \iota_O` is compactifiable. Then a
+prepared side for $`(u, O, O')` exists.
 :::
 
 :::proof "thm:prepared-side" (uses := "thm:dense-compactification, thm:0F3Z, thm:boundary-separation, def:boundaries")
@@ -57,11 +70,23 @@ Let $`\sigma_1` be a side for $`(u, O_1, O_2)` and $`\sigma_2` a side for
 $`(u, O_2, O_1)`, with ambient schemes $`X_1, X_2` and proper extensions
 $`\psi_1, \psi_2`.
 
-:::definition "def:comparison-space" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.comparisonMap, AlgebraicGeometry.TwoOpenSide.comparisonSpace, AlgebraicGeometry.TwoOpenSide.comparisonFst, AlgebraicGeometry.TwoOpenSide.comparisonSnd, AlgebraicGeometry.TwoOpenSide.isProper_comparisonFst, AlgebraicGeometry.TwoOpenSide.isProper_comparisonSnd")
+:::definition "def:comparison-space" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.comparisonMap, AlgebraicGeometry.TwoOpenSide.comparisonSpace, AlgebraicGeometry.TwoOpenSide.comparisonFst, AlgebraicGeometry.TwoOpenSide.comparisonSnd")
 The _comparison morphism_ is the canonical morphism $`V_1 \times_U V_2 \to X_1 \times_S X_2`.
 The _comparison space_ $`X_{12}` is its scheme-theoretic image, with the two projections
-$`\mathrm{pr}_1 \colon X_{12} \to X_1` and $`\mathrm{pr}_2 \colon X_{12} \to X_2`, both
-proper {uses "def:two-open-side"}[].
+$`\mathrm{pr}_1 \colon X_{12} \to X_1` and $`\mathrm{pr}_2 \colon X_{12} \to X_2`
+{uses "def:two-open-side"}[].
+:::
+
+:::lemma_ "lem:comparison-projections-proper" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.isProper_comparisonFst, AlgebraicGeometry.TwoOpenSide.isProper_comparisonSnd")
+Both projections $`\mathrm{pr}_1 \colon X_{12} \to X_1` and
+$`\mathrm{pr}_2 \colon X_{12} \to X_2` of the comparison space are proper
+{uses "def:comparison-space"}[].
+:::
+
+:::proof "lem:comparison-projections-proper" (uses := "def:comparison-space, def:two-open-side")
+Each projection is the closed immersion of the comparison space into $`X_1 \times_S X_2`
+followed by a projection of the product, which is a base change of the proper structure
+morphism of the other ambient model.
 :::
 
 :::definition "def:key-disjoint" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.KeyDisjoint, AlgebraicGeometry.TwoOpenSide.comparisonBoundary")
@@ -81,9 +106,11 @@ forbidden boundary.
 :::
 
 :::theorem "thm:improved-comparison" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary")
-Given prepared sides $`\sigma_1, \sigma_2` with $`O_1 \sqcup O_2 = U`, there is a
-$`V_1`-admissible blow-up of $`X_1` after which the comparison boundary of the improved pair
-is contained in the preimage of the self boundary of $`\sigma_1`.
+Let $`S` be Noetherian and let $`u \colon U \to S` be separated, locally of finite type and
+quasi-compact. Given sides $`\sigma_1` for $`(u, O_1, O_2)` and $`\sigma_2` for
+$`(u, O_2, O_1)` with $`O_1 \sqcup O_2 = U`, there is a $`V_1`-admissible blow-up of $`X_1`
+after which the comparison boundary of the improved pair is contained in the preimage of the
+self boundary of $`\sigma_2`. No preparedness of the two sides is needed.
 :::
 
 :::proof "thm:improved-comparison" (uses := "def:key-disjoint, prop:side-transport, thm:0F3W, def:strict-transform")
@@ -104,9 +131,10 @@ a closure.
 :::
 
 :::theorem "thm:two-open-preparation" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide")
-Let $`O_1 \sqcup O_2 = U` and assume both $`u \circ \iota_{O_1}` and $`u \circ \iota_{O_2}`
-are compactifiable. Then there exist prepared sides $`\sigma_1` for $`(u, O_1, O_2)` and
-$`\sigma_2` for $`(u, O_2, O_1)` satisfying key boundary disjointness.
+Let $`S` be Noetherian, let $`u \colon U \to S` be separated, locally of finite type and
+quasi-compact, let $`O_1 \sqcup O_2 = U` and assume both $`u \circ \iota_{O_1}` and
+$`u \circ \iota_{O_2}` are compactifiable. Then there exist prepared sides $`\sigma_1` for
+$`(u, O_1, O_2)` and $`\sigma_2` for $`(u, O_2, O_1)` satisfying key boundary disjointness.
 :::
 
 :::proof "thm:two-open-preparation" (uses := "thm:prepared-side, thm:improved-comparison, def:key-disjoint")
@@ -116,21 +144,28 @@ landing in the self boundary of a _prepared_ second side cannot meet its forbidd
 
 # The intermediate schemes and the theorem
 
-:::definition "def:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.intermediate, AlgebraicGeometry.TwoOpenSide.intermediateU, AlgebraicGeometry.TwoOpenSide.intermediateInterior, AlgebraicGeometry.TwoOpenSide.intermediateHom")
+:::definition "def:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.intermediate, AlgebraicGeometry.TwoOpenSide.intermediateU, AlgebraicGeometry.TwoOpenSide.intermediateInterior, AlgebraicGeometry.TwoOpenSide.intermediateHom, AlgebraicGeometry.TwoOpenSide.graph, AlgebraicGeometry.TwoOpenSide.intermediateGraph")
 For a side $`\sigma` with interior $`X^{\circ}`, the _intermediate scheme_ is the pushout
 $$`W \;=\; U \ \sqcup_{O}\ X^{\circ},`
 the gluing of $`U` and $`X^{\circ}` along the embedded copy of $`O`, with its two chart open
-immersions and its structure morphism $`W \to S` {uses "def:boundaries"}[].
+immersions and its structure morphism $`W \to S`. We write $`\gamma \colon V \to U \times_S X`
+for the _graph_ of the proper extension $`\psi` and
+$`O \to U \times_S X^{\circ}` for the _overlap morphism_ of the two charts
+{uses "def:boundaries"}[].
 :::
 
-:::proposition "prop:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.graph, AlgebraicGeometry.TwoOpenSide.isProper_graph, AlgebraicGeometry.TwoOpenSide.intermediateGraph, AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph, AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom, AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU, AlgebraicGeometry.TwoOpenSide.isNoetherian_intermediate")
+:::proposition "prop:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.isProper_graph, AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph, AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom, AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU, AlgebraicGeometry.TwoOpenSide.isNoetherian_intermediate")
+Let $`\sigma` be a side {uses "def:intermediate"}[].
+
+* The graph $`\gamma \colon V \to U \times_S X` is proper; in particular its range is closed.
 * The overlap morphism $`O \to U \times_S X^{\circ}` is a closed immersion: its range is the
-  preimage of the closed range of the proper graph $`V \to U \times_S X`, and the range of the
-  embedding of $`O` in $`V` is exactly $`\psi^{-1}O`.
-* Consequently $`W \to S` is separated: a morphism out of a scheme covered by two opens is
-  separated as soon as the overlap morphism into the product of the two charts over the base
-  is a closed immersion.
-* The copy of $`U` is dense in $`W`, and $`W` is Noetherian over $`S`.
+  preimage of the closed range of $`\gamma`, and the range of the embedding of $`O` in $`V`
+  is exactly $`\psi^{-1}O`.
+* If $`u` is separated, then so is $`W \to S`: a morphism out of a scheme covered by two
+  opens is separated as soon as the overlap morphism into the product of the two charts over
+  the base is a closed immersion.
+* The copy of $`U` is dense in $`W`; and if $`S` is Noetherian and $`u` is locally of finite
+  type and quasi-compact, then $`W` is Noetherian.
 :::
 
 :::definition "def:dense-valuative" (parent := "grp:two-open") (lean := "AlgebraicGeometry.ValuativeCriterion.RelativeTo")
@@ -143,9 +178,9 @@ $`h`.
 Let $`f \colon X \to S` be a morphism and $`h \colon U \to X` quasi-compact and dominant. If
 every valuative square for $`f` whose generic point factors through $`h` admits a unique
 lift, then $`f` is universally closed; the corresponding statement for uniqueness gives
-separatedness. Moreover, for a scheme-theoretically dominant quasi-compact morphism and a
-point of its scheme-theoretic image, a valuation probe centred at that point exists
-{uses "def:dense-valuative"}[].
+separatedness, $`f` being assumed quasi-separated. Moreover, for a quasi-compact dominant
+morphism $`h` and any point $`z` of its target, a valuation probe for $`h` centred at $`z`
+exists {uses "def:dense-valuative"}[].
 :::
 
 :::theorem "thm:two-open" (parent := "grp:two-open") (lean := "AlgebraicGeometry.HasCompactification.of_two_open_cover")

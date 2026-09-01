@@ -22,12 +22,24 @@ The _affine blow-up_ is $`\Proj` of that graded ring, with its structure morphis
 $`\Spec A` and its affine charts at the degree-one Rees elements.
 :::
 
-:::definition "def:blowup" (parent := "grp:blowups") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.blowup, AlgebraicGeometry.Scheme.IdealSheafData.blowupMap, AlgebraicGeometry.Scheme.IdealSheafData.blowupι, AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupι")
+:::definition "def:blowup" (parent := "grp:blowups") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.blowup, AlgebraicGeometry.Scheme.IdealSheafData.blowupMap, AlgebraicGeometry.Scheme.IdealSheafData.blowupι")
 For a quasi-coherent ideal sheaf $`\sI` on a scheme $`X`, the affine blow-ups over the affine
 opens of $`X` glue along the localizations of the Rees algebras
 {uses "def:affine-blowup"}[]. The resulting scheme is the _blow-up_ $`\Bl_\sI(X)`, with its
-structure morphism $`\pi_\sI \colon \Bl_\sI(X) \to X` and its chart open immersions from the
-affine blow-ups, whose comparison squares over the affine opens are cartesian.
+structure morphism $`\pi_\sI \colon \Bl_\sI(X) \to X` and its chart morphisms from the affine
+blow-ups over the affine opens of $`X`.
+:::
+
+:::lemma_ "lem:blowup-affine-restrict" (parent := "grp:blowups") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupι")
+For an affine open $`U \subseteq X` the comparison square formed by the chart morphism
+$`\Bl_{\sI(U)}(U) \to \Bl_\sI(X)`, the two structure morphisms and the inclusion of $`U` is
+cartesian: over $`U` the blow-up of $`X` restricts to the affine blow-up of $`U`
+{uses "def:blowup"}[].
+:::
+
+:::proof "lem:blowup-affine-restrict" (uses := "def:blowup, def:affine-blowup")
+The blow-up is glued from the affine blow-ups along the affine opens of $`X`, and the gluing
+datum is equifibered; the chart square is one of the squares of that datum.
 :::
 
 :::theorem "thm:blowup-proper" (parent := "grp:blowups") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap")
@@ -59,12 +71,13 @@ Let $`X` be a scheme and $`U \subseteq X` an open. A $`U`-admissible _centre_ is
 quasi-coherent ideal sheaf $`\sI` on $`X` which is of finite type and whose support is
 disjoint from $`U`; equivalently, $`\sI` restricts to the unit ideal on $`U`. The associated
 $`U`-admissible _blow-up_ is $`\pi_\sI \colon \Bl_\sI(X) \to X` {uses "def:blowup"}[]. We
-write $`\mathrm{pr}(\sI) = V(\sI)^{c}` for the _preserved open_; it contains $`U`.
+write $`\mathrm{pr}(\sI) = V(\sI)^{c}` for the _preserved open_.
 :::
 
-:::proposition "prop:admissible-basic" (parent := "grp:blowups") (lean := "AlgebraicGeometry.IsAdmissible.isProper_blowupMap, AlgebraicGeometry.IsAdmissible.isIso_blowupMap_restrict")
-A $`U`-admissible blow-up is proper, and it restricts to an isomorphism over the preserved
-open, in particular over $`U` {uses "def:admissible"}[].
+:::proposition "prop:admissible-basic" (parent := "grp:blowups") (lean := "AlgebraicGeometry.IsAdmissible.isProper_blowupMap, AlgebraicGeometry.IsAdmissible.isIso_blowupMap_restrict, AlgebraicGeometry.IsAdmissible.le_preservedOpen")
+A $`U`-admissible blow-up is proper, and it restricts to an isomorphism over $`U`; moreover
+$`U` is contained in the preserved open $`\mathrm{pr}(\sI)`
+{uses "def:admissible"}[].
 :::
 
 :::proof "prop:admissible-basic" (uses := "thm:blowup-proper, thm:blowup-iso-complement")
@@ -208,18 +221,20 @@ a prescribed admissible blow-up when one is given.
 # Separating boundary pieces
 
 :::definition "def:separation-blowup" (parent := "grp:blowups") (lean := "AlgebraicGeometry.separationBlowup")
-For quasi-coherent ideal sheaves $`\sI_1, \sI_2` on $`X`, the _separation blow-up_ is the
-blow-up of the sum $`\sI_1 \sqcup \sI_2` {uses "def:blowup"}[].
+Let $`U \subseteq X` be an open and let $`\sI_1, \sI_2` be finite-type quasi-coherent ideal
+sheaves on $`X` whose supports meet in a set disjoint from $`U`. The _separation blow-up_ is
+the $`U`-admissible centre $`\sI_1 \sqcup \sI_2` and its blow-up
+{uses "def:blowup"}[] {uses "def:admissible"}[].
 :::
 
 :::theorem "thm:0F3V" (parent := "grp:blowups") (lean := "AlgebraicGeometry.disjoint_range_strictTransformMap_sup")
 Let $`X` be quasi-compact quasi-separated and let $`\sI_1, \sI_2` be finite-type
 quasi-coherent ideal sheaves. Then the strict transforms of the closed subschemes
-$`V(\sI_1)` and $`V(\sI_2)` along the separation blow-up of $`\sI_1 \sqcup \sI_2` have
-disjoint ranges.
+$`V(\sI_1)` and $`V(\sI_2)` along the blow-up of the sum $`\sI_1 \sqcup \sI_2`, preserving
+the complement of $`V(\sI_1 \sqcup \sI_2)`, have disjoint ranges.
 :::
 
-:::proof "thm:0F3V" (uses := "def:separation-blowup, def:strict-transform")
+:::proof "thm:0F3V" (uses := "def:blowup, def:strict-transform")
 The charts of $`\Bl_{\sI_1 \sqcup \sI_2}(X)` at degree-one elements coming from local
 sections of $`\sI_1` or of $`\sI_2` cover the blow-up. On a chart attached to a section of
 $`\sI_i` the extended centre is generated by that section, so the strict transform of

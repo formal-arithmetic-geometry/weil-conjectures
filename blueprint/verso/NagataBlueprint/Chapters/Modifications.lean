@@ -35,7 +35,9 @@ contains no flattening theorem, and none is needed.
 :::theorem "thm:0F3Y" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup")
 Let $`\sI` be a $`U`-admissible centre on $`X`. Let $`h` be a quasi-compact morphism into a
 fibre product over $`X` whose first component lands in $`U`, and let $`h'` be a lift of $`h`
-along the base change of $`\pi_\sI`. Then the scheme-theoretic image of $`h'` is the strict
+along the base change of $`\pi_\sI`; assume, as everywhere in the strict-transform theory,
+that the inclusion of the relevant open locus is quasi-compact. Then the scheme-theoretic
+image of $`h'` is the strict
 transform of the scheme-theoretic image of $`h`: the kernel of $`h'` equals the kernel of the
 projection to the blown-up fibre product of the strict transform of $`\iota_{\operatorname{im} h}`
 along the base change of $`\pi_\sI`, preserving the preimage of the preserved open.
@@ -115,10 +117,24 @@ over the resulting neighbourhood.
 
 # Boundary preparation
 
-:::theorem "thm:dense-compactification" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Compactification.denseRefinement, AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_denseRefinement_i, AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant")
-Every compactification of a quasi-compact morphism may be replaced by one whose open
-immersion is scheme-theoretically dominant, namely by passing to the scheme-theoretic image
-of the open immersion inside the ambient scheme {uses "def:compactification"}[].
+:::definition "def:dense-refinement" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Compactification.denseRefinement")
+Let $`c = (Z, g, i)` be a compactification of a quasi-compact morphism $`f`
+{uses "def:compactification"}[]. The _dense refinement_ of $`c` is the compactification
+obtained by replacing $`Z` by the scheme-theoretic image of $`i`: its open immersion is the
+factorization of $`i` through that image, and its proper morphism is the composite of the
+image closed immersion with $`g`.
+:::
+
+:::theorem "thm:dense-compactification" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_denseRefinement_i, AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant")
+The open immersion of the dense refinement {uses "def:dense-refinement"}[] is
+scheme-theoretically dominant. Consequently every compactifiable quasi-compact morphism
+admits a compactification whose open immersion is scheme-theoretically dominant.
+:::
+
+:::proof "thm:dense-compactification" (uses := "def:dense-refinement, def:compactification")
+The refined open immersion is the factorization of $`i` through its scheme-theoretic image,
+which is scheme-theoretically dominant; applying the refinement to any compactification of a
+compactifiable morphism gives the second assertion.
 :::
 
 :::theorem "thm:boundary-separation" (parent := "grp:modifications") (lean := "AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures")

@@ -75,14 +75,12 @@ end Directedness
 
 section Compact
 
-/-- **A finite-type ideal sheaf on a quasi-compact scheme is a compact element**: if it is
-contained in the supremum of a directed family of ideal sheaves, then it is already
-contained in one member.
+/-- **A finite-type ideal sheaf on a quasi-compact scheme is a compact element**
+(blueprint: `lemma:nagata-finite-type-ideal-compact`).
 
 Affine-locally this is the compactness of a finitely generated ideal in a directed supremum
 of ideals; quasi-compactness of `X` provides a finite affine cover, and directedness picks
-a common index above the finitely many local ones.
-(Blueprint: `lemma:nagata-finite-type-ideal-compact`.) -/
+a common index above the finitely many local ones. -/
 theorem exists_le_of_ofFiniteType_le_iSup [CompactSpace X] {A : X.IdealSheafData}
     (hA : A.ofFiniteType) {ι : Type*} [Nonempty ι] {B : ι → X.IdealSheafData}
     (hdir : Directed (· ≤ ·) B) (hle : A ≤ ⨆ i, B i) :
@@ -208,11 +206,8 @@ theorem exists_ofFiniteType_le_comap_eq_top (H : X.IdealSheafData) {U : X.Opens}
   obtain ⟨K, hKle, hKft, hKcomap⟩ := exists_finiteType_le_comap_eq H U hU hft
   exact ⟨K, hKle, hKft, by rw [hKcomap, hHU]⟩
 
-/-- **A quasi-coherent ideal sheaf restricting to the unit ideal on a quasi-compact open `U`
-of a qcqs scheme is the directed supremum of those of its finite-type quasi-coherent
-subsheaves which still restrict to the unit ideal on `U`**: this subfamily is cofinal in the
-family of all finite-type subsheaves.
-(Blueprint: `lemma:nagata-ideal-directed-union-finite-type`.) -/
+/-- **The finite-type subsheaves restricting to the unit ideal on `U` are cofinal**
+(blueprint: `lemma:nagata-ideal-directed-union-finite-type`). -/
 theorem sSup_ofFiniteType_le_comap_eq_top_eq (H : X.IdealSheafData) {U : X.Opens}
     (hU : IsCompact (U : Set X)) (hHU : H.comap U.ι = ⊤) :
     sSup {K : X.IdealSheafData | K ≤ H ∧ K.ofFiniteType ∧ K.comap U.ι = ⊤} = H := by

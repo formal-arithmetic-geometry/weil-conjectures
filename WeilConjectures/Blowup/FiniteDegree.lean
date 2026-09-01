@@ -1320,14 +1320,13 @@ lemma Scheme.IdealSheafData.iSup_blowupChart_image_top_eq_top
   obtain ⟨z, hz⟩ := hx
   exact ⟨z, trivial, hz⟩
 
-/-- **Finite-degree approximation on the blow-up itself** (Stacks Project Tag 0803):
-for finite-type centers `I` on a qcqs scheme `X` and `J` on the blow-up of `I`, there
-are `d ≥ 1` and a finite-type `L ≤ I^d` whose inverse image ideal on the blow-up is
-`I_E^d · J`. The candidate for `L` at degree `d` is a finite-type subsheaf of
+/-- **Finite-degree approximation on the blow-up itself** (Stacks Project Tag 0803;
+blueprint: `lemma:nagata-proj-closed-center-finite-degree-exists`).
+
+The candidate for `L` at degree `d` is a finite-type subsheaf of
 `(I^d) ⊓ ((I_E^d * J).map I.blowupMap)` through the finitely many chart numerators of
 `AffineBlowup.exists_uniform_numerator_finset`, which generate `I_E^d · J` chart by
-chart for `d` large.
-(Blueprint: `lemma:nagata-proj-closed-center-finite-degree-exists`.) -/
+chart for `d` large. -/
 theorem Scheme.IdealSheafData.exists_finiteDegree_center_le_blowup
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (I : X.IdealSheafData) (hI : I.ofFiniteType) (J : I.blowup.IdealSheafData)

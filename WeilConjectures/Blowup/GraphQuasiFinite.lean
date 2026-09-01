@@ -254,18 +254,13 @@ theorem exists_isAdmissible_extend_of_isAffineOpen_of_le
     _ = (f ⁻¹ᵁ Z).ι ≫ f := by rw [hid, Category.id_comp, morphismRestrict_ι]
 
 /-- **Conrad's Theorem 2.4, General Case: the closed graph is quasi-finite over the
-blow-up.** Let `X` be qcqs, let `U ≤ V` be quasi-compact opens of `X`, let `Y` be qcqs and
-let `p : Y ⟶ X` be separated and locally of finite type. Let `f : U ⟶ Y` be a section of
-`p` over `U` whose image is closed in `p ⁻¹ V`. Then there is a `V`-admissible blow-up
-`q : X̃ ⟶ X` and a section `σ : U ⟶ X̃` of `q` such that for the graph
-`F = (f, σ) : U ⟶ Y ×[X] X̃` the scheme-theoretic image `F(U)‾` is quasi-finite and
-separated over `X̃`: the morphism `F(U)‾ ⟶ X̃` is `LocallyQuasiFinite`,
-`LocallyOfFiniteType`, `IsSeparated` and `QuasiCompact`.
+blow-up** (blueprint: `lemma:nagata-conrad-graph-closure-quasi-finite`).
 
-These are exactly the four hypotheses of
+"Quasi-finite and separated over `X̃`" is spelled out as the four properties
+`LocallyQuasiFinite`, `LocallyOfFiniteType`, `IsSeparated` and `QuasiCompact` of
+`F(U)‾ ⟶ X̃`, which are exactly the hypotheses of
 `AlgebraicGeometry.Scheme.IsQuasiAffine.of_locallyQuasiFinite` and of
-`AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite`.
-(Blueprint: `lemma:nagata-conrad-graph-closure-quasi-finite`.) -/
+`AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite`. -/
 theorem exists_isAdmissible_locallyQuasiFinite_image_graph
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

@@ -68,10 +68,10 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- **Blow-ups restrict along open immersions** (the open-immersion case of the blow-up
-flat base change theorem, blueprint `thm:nagata-blowup-flat-base-change`): the blow-up of
-the restriction `I.comap q` of an ideal sheaf `I` along an open immersion `q : Y ⟶ X` fits
-into a cartesian square over the blow-up of `I`, via the canonical lift of
-`(I.comap q).blowupMap ≫ q` through the universal property of `I.blowup`. -/
+flat base change theorem, blueprint `thm:nagata-blowup-flat-base-change`).
+
+The comparison morphism is the canonical lift of `(I.comap q).blowupMap ≫ q` through the
+universal property of `I.blowup`. -/
 theorem Scheme.IdealSheafData.exists_isPullback_blowup_comap
     {X Y : Scheme.{u}} (I : X.IdealSheafData) (q : Y ⟶ X) [IsOpenImmersion q] :
     ∃ h : (I.comap q).blowup ⟶ I.blowup,
@@ -117,12 +117,7 @@ theorem Scheme.IdealSheafData.exists_blowup_comap_iso {X Y : Scheme.{u}}
   exact ⟨asIso h, hh⟩
 
 /-- **The canonical lift of a blow-up localizes on the base** (the local form of Stacks
-Project Tag 0806): let `I` be an ideal sheaf on `X`, `f : Y ⟶ X` a morphism and
-`l : Bl_{I·O_Y}(Y) ⟶ Bl_I(X)` the canonical lift of `f`. For an open `O ⊆ X` on which
-`I` restricts to `JO`, the corresponding lift `μ` for `JO` and the restriction of `f`
-over `O` fits into a commuting square with `l` whose horizontal legs are the open
-immersions cutting out the loci over `O`. In particular the two lifts agree over `O`:
-the square identifies `l` above `O` with `μ`.
+Project Tag 0806).
 
 Both horizontal legs come from the restriction theorem for blow-ups along open
 immersions (`Scheme.IdealSheafData.exists_isPullback_blowup_comap`), and the square
@@ -266,12 +261,11 @@ theorem Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint {X : Scheme
 
 /-- **Extension of admissible blow-up centers across a quasi-compact open** (in the
 style of Stacks Project Tag 080M; blueprint `def:nagata-extended-admissible-blowup`,
-`lemma:nagata-extend-admissible-blowup`): a finite-type center `J` on a quasi-compact
-open `W` of a quasi-compact quasi-separated scheme `X`, whose support is disjoint from
-an open `U ≤ W`, extends to a `U`-admissible center on `X` whose blow-up restricts
-over `W` to the blow-up of `J`. The extended center is the product of a finite-type
-extension of `J` (Stacks Project Tag 01PF) with a finite-type ideal cutting out the
-boundary of `W` (Stacks Project Tag 01PH). -/
+`lemma:nagata-extend-admissible-blowup`).
+
+The extended center is the product of a finite-type extension of `J` (Stacks Project
+Tag 01PF) with a finite-type ideal cutting out the boundary of `W` (Stacks Project
+Tag 01PH). -/
 theorem IsAdmissible.exists_extend {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {W : X.Opens} (hW : IsCompact (W : Set X)) {U : X.Opens}
     (hUW : U ≤ W) (J : W.toScheme.IdealSheafData) (hJ : J.ofFiniteType)
@@ -345,14 +339,11 @@ theorem IsAdmissible.exists_extend_of_disjoint {X : Scheme.{u}} [CompactSpace X]
   obtain ⟨h, hh, hpb⟩ := K.exists_isPullback_blowup_comap A.ι
   exact ⟨⟨K, hKft, hKdisj⟩, h, hh, hpb⟩
 
-/-- **The canonical lift of a blow-up localizes on the base**: for `f : Y ⟶ X`, an
-ideal `D` on `X` and an open `O ≤ X`, the canonical lift `l : Bl_{D·𝒪_Y}(Y) ⟶ Bl_D(X)`
-restricted over the locus `D.blowupMap ⁻¹ᵁ O` above `O` is, as an arrow, the canonical
-lift for the restricted center `D.comap O.ι` and the restricted morphism `f ∣_ O`.
+/-- **The canonical lift of a blow-up localizes on the base**, arrow form.
 
-The ideals `E` and `F` are the restrictions of `D` to `O` and of `D.comap f` to
-`f ⁻¹ᵁ O`; they are taken as parameters, so that two centers agreeing over `O` can be
-compared through the *same* restricted lift `m` (see
+Difference from the informal statement: the ideals `E` and `F`, the restrictions of `D`
+to `O` and of `D.comap f` to `f ⁻¹ᵁ O`, are taken as parameters, so that two centers
+agreeing over `O` can be compared through the *same* restricted lift `m` (see
 `Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup_of_comap_eq`).
 
 Both cartesian squares come from `Scheme.IdealSheafData.exists_isPullback_blowup_comap`
@@ -408,14 +399,10 @@ theorem Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup
       Category.comp_id]
   exact ⟨Arrow.isoMk ψ.symm φ.symm hw⟩
 
-/-- **Two centers agreeing over an open have the same canonical lift over that open**:
-if `D₁` and `D₂` restrict to the same ideal on an open `O ≤ X`, then the canonical
-lifts `lᵢ : Bl_{Dᵢ·𝒪_Y}(Y) ⟶ Bl_{Dᵢ}(X)` of a morphism `f : Y ⟶ X`, restricted over
-the loci `Dᵢ.blowupMap ⁻¹ᵁ O` above `O`, are isomorphic as arrows.
+/-- **Two centers agreeing over an open have the same canonical lift over that open**.
 
-Both are identified with the canonical lift of `f ∣_ O` for the common restricted
-center, by
-`Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup`. -/
+Both lifts are identified with the canonical lift of `f ∣_ O` for the common restricted
+center, by `Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup`. -/
 theorem Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup_of_comap_eq
     {X Y : Scheme.{u}} {O : X.Opens} {D₁ D₂ : X.IdealSheafData}
     (hD : D₁.comap O.ι = D₂.comap O.ι) {f : Y ⟶ X}

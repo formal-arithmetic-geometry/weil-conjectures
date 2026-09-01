@@ -42,15 +42,13 @@ namespace AlgebraicGeometry
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- **Nagata compactification**: a separated, quasi-compact morphism `f : X ⟶ Y` locally of
-finite type over a quasi-compact quasi-separated scheme `Y` factors as an open immersion
-followed by a proper morphism.
+/-- **Nagata compactification** (blueprint: `def:nagata-final-compactification`,
+`thm:nagata-compactification`).
 
 The morphism `f` is written as a closed immersion followed by a morphism of finite
 presentation by the finite-presentation envelope (Stacks Tag 01ZJ), the latter is compactified
 by `AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation` and the
-compactification is cut back to the closed subscheme.
-(blueprint: `def:nagata-final-compactification`, `thm:nagata-compactification`) -/
+compactification is cut back to the closed subscheme. -/
 noncomputable def NagataCompactification [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [CompactSpace Y] [QuasiSeparatedSpace Y] :
     Compactification f :=

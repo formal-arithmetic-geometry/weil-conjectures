@@ -61,11 +61,8 @@ namespace AlgebraicGeometry
 
 variable {X X' Y S : Scheme.{u}}
 
-/-- **Compactification constructed from an immersion**: for a quasi-compact immersion
-`g : X ⟶ Y` and a proper morphism `p : Y ⟶ S`, the factorization of `g ≫ p` through the
-scheme-theoretic image of `g` is a compactification of `g ≫ p`.
-(blueprint: `def:nagata-immersion-compactification`,
-`lemma:nagata-immersion-into-proper`) -/
+/-- **Compactification constructed from an immersion** (blueprint:
+`def:nagata-immersion-compactification`, `lemma:nagata-immersion-into-proper`). -/
 noncomputable def Compactification.ofIsImmersion (g : X ⟶ Y) (p : Y ⟶ S)
     [IsImmersion g] [QuasiCompact g] [IsProper p] : Compactification (g ≫ p) where
   Z := g.image
@@ -85,14 +82,14 @@ theorem HasCompactification.of_isImmersion {u : X ⟶ S} (g : X ⟶ Y) (p : Y �
   have : QuasiCompact g := .of_comp g p
   exact (Compactification.ofIsImmersion g p).hasCompactification
 
-/-- **Closed-subscheme compactification construction**: given a closed immersion
-`i : X ⟶ X'` and a compactification `c` of a quasi-compact morphism `f' : X' ⟶ S`, the
-compactification of `i ≫ f'` obtained by closing up `X` inside `c.Z`. Its ambient scheme
-is the scheme-theoretic image of `i ≫ c.i`, and the factorization is
+/-- **Closed-subscheme compactification construction** (blueprint:
+`def:nagata-closed-subscheme-compactification`).
+
+The ambient scheme is the scheme-theoretic image of `i ≫ c.i`, and the factorization is
 ```
 X ⟶ (i ≫ c.i).image ⟶ c.Z ⟶ S.
 ```
-(blueprint: `def:nagata-closed-subscheme-compactification`) -/
+-/
 noncomputable def Compactification.ofIsClosedImmersion (i : X ⟶ X') {f' : X' ⟶ S}
     (c : Compactification f') [IsClosedImmersion i] [QuasiCompact f'] :
     Compactification (i ≫ f') :=

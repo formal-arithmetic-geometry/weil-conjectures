@@ -123,10 +123,9 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **Elimination of indeterminacy** (Stacks Project Tag 081S): let `X` be a qcqs
-scheme, `U ⊆ X` a quasi-compact open and `q : Z ⟶ X` separated, of finite type and an
-isomorphism over `U`. Then there is a `U`-admissible blow-up `X' ⟶ X` such that the
-strict transform `Z' ⟶ X'` of `q` is an open immersion.
+/-- **Elimination of indeterminacy** (Stacks Project Tag 081S; blueprint:
+`def:nagata-elimination-indeterminacy`, `lemma:nagata-elimination-indeterminacy`;
+proof order item 30).
 
 The proof follows the Conrad/Zariski's-Main-Theorem route: prepare a Cartier boundary
 (`exists_admissibleBlowup_cartierBoundary`, Stacks Project Tag 080Y) so that `U` becomes
@@ -136,10 +135,7 @@ Remark 2.5), compose the two blow-ups (`Scheme.IdealSheafData.exists_blowup_comp
 Project Tag 080B, whose support formula shows that the composite centre is still supported
 exactly on the complement of `U`), and identify the strict transform with `W`: the graph
 of the extension is closed and contains the scheme-theoretically dense `U`-graph, so it
-cuts out the strict transform.
-
-(Blueprint: `def:nagata-elimination-indeterminacy`,
-`lemma:nagata-elimination-indeterminacy`; proof order item 30.) -/
+cuts out the strict transform. -/
 theorem exists_admissibleBlowup_isOpenImmersion_strictTransformMap
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) {Z : Scheme.{u}} (q : Z ⟶ X)
@@ -400,32 +396,25 @@ section ImageTransport
 
 variable {S X Y V : Scheme.{u}} {x : X ⟶ S} {y : Y ⟶ S}
 
-/-- **Scheme-theoretic images and admissible blow-ups** (Stacks Project Tag 0F3Y):
-let `h : V ⟶ X ×_S Y` be quasi-compact whose first projection factors through a
-quasi-compact open `U ⊆ X`, and let `B` be a `U`-admissible blow-up of `X`. For every
-lift `h' : V ⟶ X' ×_S Y` of `h` along the base-changed blow-up `X' ×_S Y ⟶ X ×_S Y`
-(such a lift exists because the blow-up is an isomorphism over `U`), the
-scheme-theoretic image of `h'` is the strict transform of the scheme-theoretic image
-of `h`, as closed subschemes of `X' ×_S Y`.
+/-- **Scheme-theoretic images and admissible blow-ups** (Stacks Project Tag 0F3Y;
+blueprint: `lemma:nagata-scheme-image-strict-transform`,
+`lemma:nagata-scheme-image-transport-strict-transform`; proof order item 31).
 
-The statement is in kernel ideal sheaf form: both closed subschemes of `X' ×_S Y` are
-recorded by the kernels of the corresponding closed immersions. The Stacks Project and
-the blueprint also assume `h` quasi-separated; Mathlib's kernel ideal sheaf theory only
-needs quasi-compactness, so that hypothesis is dropped here.
+Differences from the informal statement. The two closed subschemes of `X' ×_S Y` are
+recorded by the kernels of the corresponding closed immersions, so the statement is in
+kernel ideal sheaf form. The Stacks Project and the blueprint also assume `h`
+quasi-separated; Mathlib's kernel ideal sheaf theory only needs quasi-compactness, so that
+hypothesis is dropped here.
 
-**Hypotheses.** The right-hand side is a strict transform, so the theorem carries the
-standing quasi-compactness assumption of
-`WeilConjectures.Compactification.StrictTransform`: the inclusion of the open locus
-over the preserved open must be a quasi-compact morphism, which is exactly what every
-comparison lemma about the strict transform requires. It is not implied by the
-remaining hypotheses — nothing here makes `U`, `B.preservedOpen` or `X` quasi-compact —
-and is discharged from finiteness data by
+The right-hand side is a strict transform, so the theorem carries the standing
+quasi-compactness assumption of `WeilConjectures.Compactification.StrictTransform`: the
+inclusion of the open locus over the preserved open must be a quasi-compact morphism. It
+is not implied by the remaining hypotheses — nothing here makes `U`, `B.preservedOpen` or
+`X` quasi-compact — and is discharged from finiteness data by
 `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι_of_isCompact`. (The
 specialization `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι` does *not* apply:
 it is stated for a blow-up map of an ideal sheaf, not for the base-changed blow-up
-occurring here.)
-(Blueprint: `lemma:nagata-scheme-image-strict-transform`,
-`lemma:nagata-scheme-image-transport-strict-transform`; proof order item 31.) -/
+occurring here.) -/
 theorem Scheme.Hom.ker_lift_admissibleBlowup
     {U : X.Opens} (B : IsAdmissible X U)
     (h : V ⟶ pullback x y) [QuasiCompact h]
@@ -487,11 +476,8 @@ section CommonModification
 variable {S U X₁ X₂ : Scheme.{u}}
 
 /-- The data of a **common modification** of two separated finite-type models `X₁`,
-`X₂` of a common open `U` over `S` (Stacks Project Tag 0F3X): admissible blow-ups
-`X'ᵢ ⟶ Xᵢ`, open immersions of both `X'ᵢ` into a glued scheme `W`, agreeing lifted
-copies of `U`, such that the two opens cover `W` and `W` is separated and of finite
-type over `S`.
-(Blueprint: `def:nagata-common-modification`.) -/
+`X₂` of a common open `U` over `S` (Stacks Project Tag 0F3X; blueprint:
+`def:nagata-common-modification`). -/
 structure CommonModification (s₁ : X₁ ⟶ S) (s₂ : X₂ ⟶ S) (j₁ : U ⟶ X₁) (j₂ : U ⟶ X₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂] where
   /-- The `U`-admissible blow-up of the first model. -/
@@ -634,17 +620,14 @@ theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSp
         simp only [Category.assoc]
     _ = M.blowupMap ≫ (B.I.comap p).blowupMap ≫ p := by rw [hφι, hq]
 
-/-- **Existence of a common modification** (Stacks Project Tag 0F3X): two separated
-finite-type models `X₁`, `X₂` over a qcqs base `S` of a common quasi-compact open `U`
-admit a common modification: `U`-admissible blow-ups `X'ᵢ ⟶ Xᵢ` which glue along a
-common open copy of the blown-up `U`-locus to a separated finite-type scheme over `S`.
+/-- **Existence of a common modification** (Stacks Project Tag 0F3X; blueprint:
+`lemma:nagata-common-modification`; proof order item 32).
 
 The construction is the one of the blueprint: form the scheme-theoretic image
 `X₁₂ ⊆ X₁ ×_S X₂` of `U`, eliminate the indeterminacy of both projections
 (`exists_admissibleBlowup_isOpenImmersion_strictTransformMap`), dominate the two center
 ideals by their product (`Scheme.IdealSheafData.exists_blowup_mul_iso`) and extend the
-resulting common blow-up of `X₁₂` across the open strict transforms.
-(Blueprint: `lemma:nagata-common-modification`; proof order item 32.) -/
+resulting common blow-up of `X₁₂` across the open strict transforms. -/
 theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
     (s₁ : X₁ ⟶ S) (s₂ : X₂ ⟶ S) (j₁ : U ⟶ X₁) (j₂ : U ⟶ X₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂] [QuasiCompact j₁] [QuasiCompact j₂]
@@ -878,11 +861,7 @@ section GraphExtension
 variable {S U : Scheme.{u}}
 
 /-- The data of a **graph extension** of a compactification `c` of a quasi-compact open
-`V ⊆ U` (Stacks Project Tag 0F3Z): a `V`-admissible blow-up `B : Y^gr ⟶ c.Z` of the
-compactification, an open subscheme `V^gr ⊆ Y^gr` and a proper morphism
-`ψ : V^gr ⟶ U` over `S` extending the inclusion of `V`, such that `V` embeds in `V^gr`
-as the whole inverse image of `V` and `ψ` is an isomorphism over `V`.
-(Blueprint: `def:nagata-graph-extension`.) -/
+`V ⊆ U` (Stacks Project Tag 0F3Z; blueprint: `def:nagata-graph-extension`). -/
 structure Compactification.ProperExtension (u : U ⟶ S) (V : U.Opens)
     (c : Compactification (V.ι ≫ u)) where
   /-- The `V`-admissible blow-up of the compactification. -/
@@ -1124,12 +1103,10 @@ end GraphExtension
 
 section IsomorphismNearClosure
 
-/-- **Isomorphism near the closure of a boundary piece** (Stacks Project Tag 0F3W): let
-`X` be qcqs, `U ⊆ X` a quasi-compact open, `q : Z ⟶ X` proper and `T ⊆ U` a subset
-closed in `U` such that `q` is an isomorphism over an open neighbourhood `N` of `T`.
-Then there is a `U`-admissible blow-up `B` of `X` such that the strict transform of `q`
-is an isomorphism over an open neighbourhood of the closure of `T` in the blown-up
-scheme.
+/-- **Isomorphism near the closure of a boundary piece** (Stacks Project Tag 0F3W;
+blueprint: `def:nagata-isomorphism-near-closure`,
+`lemma:nagata-isomorphism-near-closure`; used for the improved comparison projection of
+the two-open compactification theorem).
 
 The proof runs as follows. Inside `U`, constructible separation
 (`PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ`) separates `T` from
@@ -1157,10 +1134,7 @@ turns the strict transform of `q` along `K.blowupMap` into the canonical lift
 the copy of `A` with the open immersion produced by Tag 081S. The neighbourhood `N'` is
 the range of the resulting partial section; it contains the closure of the inverse
 image of `T` because that closure lies over `A` and inside the (closed, since `q` is
-proper) range of the strict transform. No scheme-theoretic density argument is used.
-(Blueprint: `def:nagata-isomorphism-near-closure`,
-`lemma:nagata-isomorphism-near-closure`; used for the improved comparison projection
-of the two-open compactification theorem.) -/
+proper) range of the strict transform. No scheme-theoretic density argument is used. -/
 theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]

@@ -21,7 +21,7 @@ projections. For $`\pi = \pi_\sI` the blow-up of an ideal sheaf $`\sI` and $`U =
 this is the classical strict transform {uses "def:blowup"}[].
 :::
 
-:::proposition "prop:strict-transform-basic" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.range_strictTransformMap_subset_preimage_range, AlgebraicGeometry.mem_range_strictTransformMap_of_mem_of_mem_range, AlgebraicGeometry.disjoint_range_strictTransformMap_of_disjoint")
+:::proposition "prop:strict-transform-basic" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.isSeparated_strictTransformMap, AlgebraicGeometry.quasiCompact_strictTransformMap, AlgebraicGeometry.locallyOfFiniteType_strictTransformMap, AlgebraicGeometry.isClosedImmersion_strictTransformMap, AlgebraicGeometry.range_strictTransformMap_subset_preimage_range, AlgebraicGeometry.mem_range_strictTransformMap_of_mem_of_mem_range, AlgebraicGeometry.disjoint_range_strictTransformMap_of_disjoint")
 Separatedness, quasi-compactness, being locally of finite type and being a closed immersion
 pass from $`f` to the projection $`\St{f}{\pi}{U} \to X'`. The strict transform contains the
 whole open locus over $`U`. Its underlying set is squeezed between the inverse image of the
@@ -38,10 +38,10 @@ over $`U` is the ordinary base change $`Y \times_X U`.
 
 :::lemma_ "lem:kernel-criterion" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.ker_strictTransformMap, AlgebraicGeometry.ker_eq_ker_strictTransformOpen_ι")
 Assume the inclusion of the open locus $`L` is quasi-compact. Then the strict transform and
-its open locus have the same scheme-theoretic image in $`X'`. Moreover, a morphism to
-$`Y \times_X X'` whose first component is an isomorphism over $`f^{-1}U` on a schematically
-dense preimage of $`f^{-1}U` cuts out the same closed subscheme of $`Y \times_X X'` as the
-open locus over $`U`.
+its open locus have the same scheme-theoretic image in $`X'`. Assume moreover that $`\pi` is
+an isomorphism over $`U`. Then a morphism to $`Y \times_X X'` whose first component is an
+isomorphism over $`f^{-1}U` on a schematically dense preimage of $`f^{-1}U` cuts out the same
+closed subscheme of $`Y \times_X X'` as the open locus over $`U`.
 :::
 
 :::theorem "thm:080E" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform")

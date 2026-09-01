@@ -22,9 +22,10 @@ neighbourhood of the preserved open, with _closed graph_ in the fibre product.
 # Deligne's disjointness blow-up
 
 :::theorem "thm:disjointness" (parent := "grp:conrad") (lean := "AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup")
-Let $`p \colon Z \to X` be a morphism, let $`f \colon Y \to Z` be a morphism over $`X` whose
-source lies over an open $`U \le V` of $`X`, and let $`\sI_1, \sI_2` be quasi-coherent ideal
-sheaves on $`X` such that
+Let $`p \colon Z \to X` be a morphism, let $`U \le V` be opens of $`X`, let
+$`f \colon Y \to Z` be a morphism whose composite $`p \circ f` has range inside $`U`, and let
+$`\sI_1, \sI_2` be quasi-coherent ideal sheaves on $`X` — no finiteness is assumed — such
+that
 
 * $`V \setminus U \subseteq V(\sI_1)` as sets, so that $`T_1 = V(\sI_1^{2})` is a square-zero
   thickening of a closed subscheme containing the boundary of $`U` inside $`V`;
@@ -33,10 +34,16 @@ sheaves on $`X` such that
   where $`\overline{Y}` is the scheme-theoretic image of $`f`; in ideal-sheaf language,
   $`\sI_2 \cdot \sO_Z \le (\sI_1^{2}) \cdot \sO_Z \sqcup \ker f`.
 
-Blow up $`\sI_1 \sqcup \sI_2` {uses "def:separation-blowup"}[] and base change everything
-along the blow-up morphism $`q`. Then the scheme-theoretic image of the base change of $`f`
-no longer meets the part of the base change of $`Z` lying over
-$`\overline{q^{-1}(V \setminus U)}`.
+Let $`q \colon \Bl_{\sI_1 \sqcup \sI_2}(X) \to X` be the blow-up of the sum
+{uses "def:blowup"}[]. Let $`Z'` be a scheme with morphisms $`r \colon Z' \to Z` and
+$`p' \colon Z' \to \Bl_{\sI_1 \sqcup \sI_2}(X)` satisfying $`p \circ r = q \circ p'`, and let
+$`Y'` be a scheme with morphisms $`f_Y \colon Y' \to Y` and a quasi-compact
+$`f' \colon Y' \to Z'` satisfying $`r \circ f' = f \circ f_Y`. Then the closure of the range
+of $`f'` — the underlying set of the scheme-theoretic image of $`f'` — is disjoint from the
+part of $`Z'` lying over $`\overline{q^{-1}(V \setminus U)}`.
+
+The two squares are not required to be cartesian: the conclusion holds for the base changes
+of $`p` and of $`f` along $`q`, and equally for any other model of them.
 :::
 
 :::proof "thm:disjointness" (uses := "thm:0806, def:blowup")
@@ -125,7 +132,7 @@ with $`f` over $`\pi_\sI^{-1}U`, whose graph $`W \to Y \times_X \Bl_\sI(X)` has 
 Density of $`U` in $`X` is not assumed.
 :::
 
-:::proof "thm:conrad-case3" (uses := "thm:disjointness, thm:finite-type-directed, lem:power-in-ideal, thm:conrad-case2, thm:080M, cor:080L")
+:::proof "thm:conrad-case3" (uses := "thm:disjointness, def:separation-blowup, thm:finite-type-directed, lem:power-in-ideal, thm:conrad-case2, thm:080M, cor:080L")
 Two opening reductions bring the situation to Case 2. First, one $`V`-admissible blow-up
 $`\pi_1 \colon X_1 \to X` produced by the disjointness blow-up makes the closure of the image
 of the base change of $`f` disjoint from the part lying over $`\overline{V \setminus U}`;
@@ -168,13 +175,36 @@ $`Y \times_X \Bl_\sI(X)`, and the closure of the range of $`F` meets each of the
 corresponding section; hence the fibres of $`\operatorname{im} F \to \Bl_\sI(X)` are finite.
 :::
 
-:::definition "def:quasi-affine-hom" (parent := "grp:conrad") (lean := "AlgebraicGeometry.IsQuasiAffineHom, AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isAffineHom_of_locallyQuasiFinite, AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite, AlgebraicGeometry.Scheme.IsQuasiAffine.of_locallyQuasiFinite")
+:::definition "def:quasi-affine-hom" (parent := "grp:conrad") (lean := "AlgebraicGeometry.IsQuasiAffineHom")
 A morphism is _quasi-affine_ if the preimage of every affine open of the target is a
-quasi-affine scheme. The two consequences of Zariski's Main Theorem used below are recorded
-here: a separated, quasi-compact, locally quasi-finite morphism of finite type factors as an
-open immersion followed by an affine morphism; consequently such a morphism is quasi-affine
-as a morphism, with no hypothesis on the target, and its source is a quasi-affine scheme
-whenever the target is. Zariski's Main Theorem itself is taken from the ambient library.
+quasi-affine scheme.
+:::
+
+:::theorem "thm:zmt-factorization" (parent := "grp:conrad") (lean := "AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isAffineHom_of_locallyQuasiFinite")
+*Zariski's Main Theorem, factorization form.* A separated, quasi-compact, locally quasi-finite
+morphism of finite type factors as an open immersion followed by an affine morphism.
+:::
+
+:::proof "thm:zmt-factorization"
+Zariski's Main Theorem itself is taken from the ambient library: it factors such a morphism as
+an open immersion into the relative normalization of the target in the source followed by an
+integral morphism, and an integral morphism is affine.
+:::
+
+:::corollary "cor:quasi-affine-of-quasi-finite" (parent := "grp:conrad") (lean := "AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite, AlgebraicGeometry.Scheme.IsQuasiAffine.of_locallyQuasiFinite")
+Let $`f \colon X \to Y` be separated, quasi-compact and locally quasi-finite of finite type.
+Then $`f` is quasi-affine as a morphism {uses "def:quasi-affine-hom"}[], with no hypothesis on
+the target; and if $`Y` is a quasi-affine scheme, then so is $`X`. These are the two
+consequences of Zariski's Main Theorem used below.
+:::
+
+:::proof "cor:quasi-affine-of-quasi-finite" (uses := "def:quasi-affine-hom, thm:zmt-factorization")
+Factor $`f` as an open immersion $`j \colon X \to W` followed by an affine morphism
+$`g \colon W \to Y`. Over an affine open $`V` of $`Y` the scheme $`g^{-1}V` is affine and
+$`f^{-1}V` is a quasi-compact open of it, hence quasi-affine; this holds for every affine open
+of $`Y`, which is quasi-affineness of $`f` as a morphism. If $`Y` is quasi-affine, then $`W`
+is quasi-affine, being affine over a quasi-affine scheme, and $`X` is a quasi-compact open
+subscheme of $`W`.
 :::
 
 :::theorem "thm:conrad24" (parent := "grp:conrad") (lean := "AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection")
@@ -187,7 +217,7 @@ morphism $`g \colon W \to Y` with $`p \circ g = \pi_\sI|_W` which agrees with $`
 $`\pi_\sI^{-1}U`, such that the graph $`W \to Y \times_X \Bl_\sI(X)` has closed range.
 :::
 
-:::proof "thm:conrad24" (uses := "thm:conrad-case3, thm:graph-quasi-finite, def:quasi-affine-hom, cor:080L")
+:::proof "thm:conrad24" (uses := "thm:conrad-case3, thm:graph-quasi-finite, cor:quasi-affine-of-quasi-finite, cor:080L")
 If $`p` is quasi-affine as a morphism this is Case 3. In general the quasi-finiteness of the
 closed graph produces a $`V`-admissible blow-up $`q \colon \widetilde{X} \to X` over which
 the scheme-theoretic image of the graph is quasi-finite, of finite type, separated and

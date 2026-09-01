@@ -39,8 +39,9 @@ not establish.
   immersion. First used in {bpref "def:of-immersion"}[].
 * *Zariski's Main Theorem.* A separated, quasi-compact, locally quasi-finite morphism of
   finite type factors as an open immersion into the relative normalization of the target in
-  the source followed by an integral morphism. Its two consequences used here are proved in
-  this development and recorded as {bpref "def:quasi-affine-hom"}[]; the theorem itself is
+  the source followed by an integral morphism, recorded as {bpref "thm:zmt-factorization"}[].
+  Its two consequences used here are proved in this development and recorded as
+  {bpref "cor:quasi-affine-of-quasi-finite"}[]; the theorem itself is
   taken from the ambient library. Used exactly once, to pass from
   {bpref "thm:graph-quasi-finite"}[] to {bpref "thm:conrad24"}[].
 

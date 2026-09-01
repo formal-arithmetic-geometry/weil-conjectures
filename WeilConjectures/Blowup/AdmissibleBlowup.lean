@@ -130,10 +130,8 @@ namespace AlgebraicGeometry
 
 variable (X : Scheme.{u}) (U : X.Opens)
 
-/-- A `U`-admissible blow-up center on `X`: a finite-type quasi-coherent ideal sheaf
-`I` whose support is disjoint from `U` (equivalently, `I` restricts to the unit ideal
-on `U`). The associated `U`-admissible blow-up is the blow-up `I.blowup` of the center,
-with structure morphism `I.blowupMap`.
+/-- A `U`-admissible blow-up center on `X`; the associated `U`-admissible blow-up is the
+blow-up `I.blowup` of the center, with structure morphism `I.blowupMap`.
 (Blueprint: `def:nagata-admissible-blowup`.) -/
 structure IsAdmissible where
   /-- The center ideal of the blow-up. -/
@@ -263,9 +261,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteDegree_cente
     hLcomap⟩
 
 /-- **Blow-up of a product ideal** (Stacks Project Tag 080A; blueprint
-`thm:nagata-blowup-product-ideal`, `cor:nagata-blowup-product-common-refinement`):
-blowing up a product `I * L` is the same over `X` as first blowing up `I` and then the
-inverse image ideal of `L` on the blow-up.
+`thm:nagata-blowup-product-ideal`, `cor:nagata-blowup-product-common-refinement`).
 
 The proof follows the comparison strategy of `def:nagata-blowup-product-comparison`
 and `thm:nagata-blowup-product-ideal` of the revised blueprint and runs entirely
@@ -341,8 +337,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso
 
 /-- **Multiplying a center by an invertible ideal does not change the blow-up**
 (consequence of Stacks Project Tags 0807 and 080A; blueprint
-`lemma:nagata-blowup-invertible-factor`): the blow-up of `C * M` for an invertible
-ideal `C` is the blow-up of `M`, over the base.
+`lemma:nagata-blowup-invertible-factor`).
 
 The proof runs through the universal property of blowing up
 (`Scheme.IdealSheafData.exists_lift_blowup` and
@@ -512,17 +507,13 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp_base_c
     rw [hinv, ← Category.assoc μ, hμ, Category.assoc, hρ, reassoc_of% he',
       ← Category.assoc, Scheme.IdealSheafData.eqToHom_comp_blowupMap hKf]
 
-/-- **Composition of blow-ups** (Stacks Project Tag 080B), interface form: on a qcqs
-scheme `X`, given a finite-type center `I` with blow-up `π = I.blowupMap` and a
-finite-type center `J` on the total space `I.blowup`, there is a single finite-type
-center `K` on `X` whose support is the union of the support of `I` and the image of
-the support of `J`, and whose blow-up is isomorphic over `X` to the blow-up of `J`.
+/-- **Composition of blow-ups** (Stacks Project Tag 080B), interface form; blueprint
+`thm:nagata-composition-of-blowups`.
 
 This is the `f = 𝟙 X` case of
 `Scheme.IdealSheafData.exists_blowup_comp_base_change`: the composite center is
 `K = I * L` with `L` the finite-degree descent of `J`
-(`Scheme.IdealSheafData.exists_finiteDegree_center`, Stacks Tag 0803).
-(Blueprint: `thm:nagata-composition-of-blowups`.) -/
+(`Scheme.IdealSheafData.exists_finiteDegree_center`, Stacks Tag 0803). -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (I : X.IdealSheafData) (hI : I.ofFiniteType) (J : I.blowup.IdealSheafData)
@@ -536,22 +527,17 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp
     Scheme.IdealSheafData.exists_blowup_comp_base_change I hI J hJ
   exact ⟨K, hKft, hKsupp, e, he⟩
 
-/-- **Composition of admissible blow-ups** (Stacks Project Tag 080L): for `X` qcqs,
-the composite of a `U`-admissible blow-up of `X` with a `π⁻¹(U)`-admissible blow-up of
-its total space is again a `U`-admissible blow-up of `X`: there is a `U`-admissible
-center `K` on `X` and an identification `iso` of the total space `B₂.I.blowup` of the
-second blow-up with the blow-up of `K`, under which the blow-up structure morphism of
-`K` is the composite `B₂.I.blowupMap ≫ B₁.I.blowupMap`. Stacks Tag 080L assumes `U`
-quasi-compact; the formal proof needs no such hypothesis.
+/-- **Composition of admissible blow-ups** (Stacks Project Tag 080L; blueprint
+`lemma:nagata-admissible-blowup-comp`).
+
+Difference from the informal statement: Stacks Tag 080L assumes `U` quasi-compact; the
+formal proof needs no such hypothesis.
 
 The proof applies the composition theorem for arbitrary blow-ups
 (`Scheme.IdealSheafData.exists_blowup_comp`, Stacks Tag 080B): the composite center
 `K` has support `|Z| ∪ π₁(|Z'|)`; the first part misses `U` by admissibility of `B₁`,
 and the second part misses `U` because a point of `π₁(|Z'|) ∩ U` would lift to a point
-of `|Z'| ∩ π₁⁻¹(U)`, contradicting admissibility of `B₂`. Hence `K` is a `U`-admissible
-center, and the over-`X` isomorphism supplied by the composition theorem identifies
-`B₂.I.blowup` with the blow-up of `K` over `X`.
-(Blueprint: `lemma:nagata-admissible-blowup-comp`.) -/
+of `|Z'| ∩ π₁⁻¹(U)`, contradicting admissibility of `B₂`. -/
 theorem exists_comp [CompactSpace X] [QuasiSeparatedSpace X]
     (B₁ : IsAdmissible X U) (B₂ : IsAdmissible B₁.I.blowup (B₁.I.blowupMap ⁻¹ᵁ U)) :
     ∃ K : X.IdealSheafData, K.ofFiniteType ∧ Disjoint (U : Set X) (K.support : Set X) ∧
@@ -576,11 +562,11 @@ end IsAdmissible
 
 variable {X U}
 
-/-- On a quasi-compact quasi-separated scheme, every quasi-compact open is the
-complement of the support of a finite-type quasi-coherent ideal. This is the
-finite-type approximation of the vanishing ideal of the reduced boundary, obtained by
-extending finitely generated pieces over a finite affine cover.
-(Blueprint: `lemma:nagata-qc-open-complement-ideal-exists`; Stacks Project Tag 01PH.) -/
+/-- **A quasi-compact open is the complement of the support of a finite-type ideal**
+(Stacks Project Tag 01PH; blueprint: `lemma:nagata-qc-open-complement-ideal-exists`).
+
+The ideal is the finite-type approximation of the vanishing ideal of the reduced
+boundary, obtained by extending finitely generated pieces over a finite affine cover. -/
 theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U : X.Opens)
     (hU : IsCompact (U : Set X)) :
@@ -618,11 +604,13 @@ theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl
     rw [← h4]
     exact Scheme.IdealSheafData.support_antitone hle
 
-/-- On a locally Noetherian scheme, the finite-type ideal cutting out the complement of
-an open is simply the vanishing ideal of the (reduced) boundary: every ideal sheaf is
-of finite type. This is the Noetherian instance of
-`Scheme.exists_finiteType_ideal_coe_support_eq_compl`, sufficient for the Noetherian
-compactification theorem (`thm:nagata-noetherian`). -/
+/-- **A quasi-compact open is the complement of the support of a finite-type ideal**,
+locally Noetherian case.
+
+Difference from `Scheme.exists_finiteType_ideal_coe_support_eq_compl`: no
+quasi-compactness of `U` is needed, every ideal sheaf being of finite type; the ideal is
+the vanishing ideal of the reduced boundary itself. This is the instance used for the
+Noetherian compactification theorem (`thm:nagata-noetherian`). -/
 theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetherian
     (X : Scheme.{u}) [IsLocallyNoetherian X] (U : X.Opens) :
     ∃ I : X.IdealSheafData, I.ofFiniteType ∧ (I.support : Set X) = (U : Set X)ᶜ :=
@@ -670,11 +658,8 @@ theorem exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl
     Set.preimage_compl]
   rfl
 
-/-- **Preparation of a Cartier boundary** (Stacks Project Tag 080Y): on a
-quasi-compact quasi-separated scheme `X` with a quasi-compact open `U`, there is a
-`U`-admissible blow-up whose boundary — the complement of the preimage of `U` — is the
-support of an effective Cartier ideal.
-(Blueprint: `lemma:nagata-cartier-boundary-preparation`; proof order item 24.) -/
+/-- **Preparation of a Cartier boundary** (Stacks Project Tag 080Y; blueprint:
+`lemma:nagata-cartier-boundary-preparation`; proof order item 24). -/
 theorem exists_admissibleBlowup_cartierBoundary [CompactSpace X] [QuasiSeparatedSpace X]
     (hU : IsCompact (U : Set X)) :
     ∃ (B : IsAdmissible X U) (J : B.I.blowup.IdealSheafData), J.IsInvertible ∧
@@ -682,14 +667,13 @@ theorem exists_admissibleBlowup_cartierBoundary [CompactSpace X] [QuasiSeparated
   obtain ⟨I, hft, hsupp⟩ := X.exists_finiteType_ideal_coe_support_eq_compl U hU
   exact exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl I hft hsupp
 
-/-- **Preparation of a Cartier boundary, locally Noetherian case**: on a locally
-Noetherian scheme every open has a `U`-admissible blow-up with effective Cartier
-boundary. Here, in contrast to `exists_admissibleBlowup_cartierBoundary`, no
-compactness of `U` is needed: the finite-type boundary ideal is the vanishing ideal of
-the reduced boundary itself.
-This is the instance needed for the Noetherian compactification theorem
-(`thm:nagata-noetherian`).
-(Blueprint: `lemma:nagata-cartier-boundary-preparation`; proof order item 24.) -/
+/-- **Preparation of a Cartier boundary**, locally Noetherian case (blueprint:
+`lemma:nagata-cartier-boundary-preparation`; proof order item 24).
+
+Difference from `exists_admissibleBlowup_cartierBoundary`: no compactness of `U` is
+needed, the finite-type boundary ideal being the vanishing ideal of the reduced boundary
+itself. This is the instance needed for the Noetherian compactification theorem
+(`thm:nagata-noetherian`). -/
 theorem exists_admissibleBlowup_cartierBoundary_of_isLocallyNoetherian
     [IsLocallyNoetherian X] :
     ∃ (B : IsAdmissible X U) (J : B.I.blowup.IdealSheafData), J.IsInvertible ∧
@@ -925,8 +909,7 @@ lemma quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
   infer_instance
 
 /-- **Boundary separation** (Stacks Project Tag 0F3V; revised blueprint
-`lemma:nagata-separate-closed-subschemes`): after blowing up the sum of two finite-type
-ideals on a qcqs scheme, the strict transforms of the two centers are disjoint.
+`lemma:nagata-separate-closed-subschemes`).
 
 The proof is the chart argument of the revised blueprint: the charts of
 `Bl_{I₁ ⊔ I₂}(X)` at degree-one elements coming from local sections of `I₁` or of `I₂`

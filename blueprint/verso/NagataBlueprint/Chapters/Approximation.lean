@@ -19,8 +19,18 @@ A _Noetherian approximation_ of a scheme $`S` consists of a small cofiltered ind
 $`I`, a diagram $`D \colon I \to \mathrm{Sch}` whose values are of finite type over
 $`\Spec \mathbb{Z}` (that is, quasi-compact and locally of finite type over
 $`\Spec \mathbb{Z}`) and whose transition morphisms are affine, together with a cone from
-$`S` exhibiting $`S` as the limit $`\varprojlim_i D_i`. Every stage of such a system is a
+$`S` exhibiting $`S` as the limit $`\varprojlim_i D_i`.
+:::
+
+:::lemma_ "lem:approximation-stages-noetherian" (parent := "grp:approximation") (lean := "AlgebraicGeometry.Scheme.NoetherianApproximation.isNoetherian_obj")
+Every stage $`D_i` of a Noetherian approximation {uses "def:noetherian-approximation"}[] is a
 Noetherian scheme.
+:::
+
+:::proof "lem:approximation-stages-noetherian" (uses := "def:noetherian-approximation")
+A stage is quasi-compact and locally of finite type over $`\Spec \mathbb{Z}`, hence of finite
+type over the Noetherian ring $`\mathbb{Z}`; a scheme of finite type over a Noetherian ring is
+Noetherian.
 :::
 
 :::theorem "thm:01ZA" (parent := "grp:approximation") (lean := "AlgebraicGeometry.Scheme.nonempty_noetherianApproximation")
@@ -66,9 +76,9 @@ and the glued morphism is again cartesian.
 :::theorem "thm:086Q" (parent := "grp:approximation") (lean := "AlgebraicGeometry.Scheme.exists_isSeparated_of_isLimit, AlgebraicGeometry.Scheme.exists_isSeparated_app_of_isLimit")
 Let $`(D_i)` be a cofiltered inverse system of quasi-compact quasi-separated schemes with
 affine transition morphisms. If $`\varprojlim_i D_i` is separated, then $`D_i` is separated
-for every $`i` past some stage. If all $`D_i` lie over a fixed base $`S` and
-$`\varprojlim_i D_i \to S` is separated, then $`D_i \to S` is separated for every $`i` past
-some stage.
+for every $`i` past some stage. If all $`D_i` lie over a fixed base $`S` with quasi-compact
+structure morphisms and $`\varprojlim_i D_i \to S` is separated, then $`D_i \to S` is
+separated for every $`i` past some stage.
 :::
 
 :::proof "thm:086Q"
@@ -98,11 +108,18 @@ is a closed immersion at a finite stage.
 
 # From finite presentation to finite type
 
-:::theorem "thm:09ZQ" (parent := "grp:approximation") (lean := "AlgebraicGeometry.Scheme.Hom.FinitePresentationApproximation, AlgebraicGeometry.Scheme.Hom.nonempty_finitePresentationApproximation")
-Let $`S` be quasi-compact quasi-separated and let $`f \colon X \to S` be locally of finite
-type with $`X` quasi-compact quasi-separated. Then $`X` is a cofiltered limit of schemes of
-finite presentation over $`S` whose transition morphisms, and whose morphisms from $`X`, are
-closed immersions.
+:::definition "def:fp-approximation" (parent := "grp:approximation") (lean := "AlgebraicGeometry.Scheme.Hom.FinitePresentationApproximation")
+A _finite-presentation approximation_ of a morphism $`f \colon X \to S` consists of a small
+cofiltered index category $`I`, a diagram $`D \colon I \to \mathrm{Sch}` of quasi-compact
+quasi-separated schemes of finite presentation over $`S` whose transition morphisms are closed
+immersions, and a cone from $`X` exhibiting $`X` as the limit $`\varprojlim_i D_i`, whose
+projections are closed immersions compatible with $`f`.
+:::
+
+:::theorem "thm:09ZQ" (parent := "grp:approximation") (lean := "AlgebraicGeometry.Scheme.Hom.nonempty_finitePresentationApproximation")
+Let $`S` be quasi-compact quasi-separated and let $`f \colon X \to S` be quasi-compact and
+locally of finite type with $`X` quasi-compact quasi-separated. Then $`f` admits a
+finite-presentation approximation {uses "def:fp-approximation"}[].
 :::
 
 :::proof "thm:09ZQ" (uses := "thm:01ZA, thm:01ZM")

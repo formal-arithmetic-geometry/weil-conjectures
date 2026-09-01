@@ -213,8 +213,9 @@ lemma intermediateGraph_openι :
 
 /-- **The overlap of the two charts of the intermediate scheme is a closed immersion**
 (blueprint: `lemma:nagata-intermediate-overlap-constructible` through
-`lemma:nagata-intermediate-overlap-closed`): the range of the overlap map
-`O ⟶ U ×_S Xᵢ°` is the preimage of the closed range of the proper graph
+`lemma:nagata-intermediate-overlap-closed`).
+
+The range of the overlap map is the preimage of the closed range of the proper graph
 `V ⟶ U ×_S X`, because over the complement of the forbidden boundary the graph passes
 through the embedded copy of `O` exactly over `O` (`TwoOpenSide.range_υ`). -/
 theorem isClosedImmersion_intermediateGraph :
@@ -317,9 +318,7 @@ end TwoOpenSide
 open TwoOpenSide in
 /-- **The two-open compactification theorem** (Stacks Project Tag 0F40; blueprint:
 `def:nagata-two-open-final-modification` through `thm:nagata-two-open`; proof order
-items 43–48): let `S` be Noetherian and `u : U ⟶ S` separated and of finite type. If
-`U` is covered by two opens `O₁`, `O₂` with dense intersection such that both
-`O₁ ⟶ S` and `O₂ ⟶ S` are compactifiable, then `u` is compactifiable.
+items 43–48).
 
 The compactification is the common modification `W` (Stacks Project Tag 0F3X) of the
 two intermediate schemes `Wᵢ = U ⊔_{Oᵢ} Xᵢ°`; the intersection `O₁ ∩ O₂` is dense in

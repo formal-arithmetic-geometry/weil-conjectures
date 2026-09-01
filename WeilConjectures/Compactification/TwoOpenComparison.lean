@@ -505,11 +505,7 @@ variable {A K : Type u} [CommRing A] [IsDomain A] [ValuationRing A] [Field K]
 /-- **One valuation extension avoids its forbidden boundary** (blueprint:
 `lemma:nagata-valuation-pair-factors-comparison`,
 `lemma:nagata-valuation-open-closed-point`,
-`lemma:nagata-one-valuation-avoids-boundary`): let `A` be a valuation ring with
-fraction field `K`, let `η : Spec K ⟶ O₁ ∩ O₂` be a generic point, and let `g₁`, `g₂`
-be extensions of `η` to `Spec A` in the two ambient models, lying over the same
-morphism to `S`. If the key boundary disjointness holds, then at least one `gᵢ` factors
-through the complement `Xᵢ°` of the forbidden boundary. -/
+`lemma:nagata-one-valuation-avoids-boundary`). -/
 theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
     (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
       η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)
@@ -831,10 +827,7 @@ open TwoOpenSide in
 `lemma:nagata-comparison-restrict-proper-open`,
 `def:nagata-two-open-improved-comparison`,
 `lemma:nagata-comparison-isIso-near-boundary`,
-`lemma:nagata-comparison-boundary-density`): two sides covering `U` can be improved, by
-a `V₁`-admissible blow-up of the ambient model of the first side, so that the
-comparison boundary of the improved pair projects into the self boundary of the second
-side.
+`lemma:nagata-comparison-boundary-density`).
 
 This is the geometric core of the comparison layer. The forbidden boundary locus
 `Z₁,₂ = ψ₁⁻¹(U ∖ O₁)` is closed in `V₁` and lies in the open `TwoOpenSide.isoOpen`
@@ -857,7 +850,7 @@ criterion `comparisonBoundary_subset_preimage_selfBoundary` then concludes.
 The blow-up shape of the conclusion is the one the surrounding API was built for:
 `TwoOpenSide.admissibleBlowup` and `TwoOpenSide.Prepared.admissibleBlowup` both cite
 `def:nagata-two-open-improved-comparison`, and preparedness of the improved first side
-is exactly what the latter supplies. -/
+is exactly what the latter supplies. No preparedness of the two sides is assumed. -/
 theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoetherian S]
     {u : U ⟶ S} [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     {O₁ O₂ : U.Opens} (σ₁ : TwoOpenSide u O₁ O₂) (σ₂ : TwoOpenSide u O₂ O₁)
@@ -966,11 +959,10 @@ open TwoOpenSide in
 `def:nagata-two-open-improved-comparison`,
 `lemma:nagata-comparison-isIso-near-boundary`,
 `lemma:nagata-comparison-boundary-density`,
-`lemma:nagata-key-boundary-disjointness`): after improving the first side by the
-isomorphism-near-closure blow-up (Stacks Project Tag 0F3W) of the first comparison
-projection at the forbidden boundary locus, the two prepared sides satisfy the key
-boundary disjointness: the comparison boundary of the improved pair projects into the
-self boundary of the second side, which is disjoint from the forbidden one.
+`lemma:nagata-key-boundary-disjointness`).
+
+The first side is improved by the isomorphism-near-closure blow-up (Stacks Project
+Tag 0F3W) of the first comparison projection at the forbidden boundary locus.
 
 The proof consumes the modification layer only through
 `exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary`, and therefore

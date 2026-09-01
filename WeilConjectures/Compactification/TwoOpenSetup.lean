@@ -65,11 +65,8 @@ namespace AlgebraicGeometry
 variable {U S : Scheme.{u}}
 
 /-- The data of one **prepared side of the two-open compactification theorem** for a
-morphism `u : U ⟶ S` and a pair of opens `O`, `O'` of `U`: a proper ambient model
-`X ⟶ S`, an open `V ⊆ X` carrying a proper extension `ψ : V ⟶ U` of the inclusion of
-an embedded, dense copy of `O`.
-(Blueprint: `def:nagata-two-open-graph-extensions`,
-`def:nagata-two-open-boundary-loci`.) -/
+morphism `u : U ⟶ S` and a pair of opens `O`, `O'` of `U` (blueprint:
+`def:nagata-two-open-graph-extensions`, `def:nagata-two-open-boundary-loci`). -/
 structure TwoOpenSide (u : U ⟶ S) (O O' : U.Opens) where
   /-- The proper ambient model. -/
   X : Scheme.{u}
@@ -206,12 +203,13 @@ section AdmissibleBlowup
 
 variable [IsNoetherian S] (B : IsAdmissible σ.X σ.V)
 
-/-- **Transport of a side along a `V`-admissible blow-up** of the ambient scheme: the
-open `V`, the proper extension `ψ` and the embedded copy of `O` transport along the
-isomorphism over `V`; density transports because the complement of the center is
-dense in the blow-up.
-(Blueprint: `def:nagata-two-open-prepared-boundaries`,
-`def:nagata-two-open-improved-comparison`.) -/
+/-- **Transport of a side along a `V`-admissible blow-up** of the ambient scheme
+(blueprint: `def:nagata-two-open-prepared-boundaries`,
+`def:nagata-two-open-improved-comparison`).
+
+The open `V`, the proper extension `ψ` and the embedded copy of `O` transport along the
+isomorphism over `V`; density transports because the complement of the center is dense in
+the blow-up. -/
 def admissibleBlowup : TwoOpenSide u O O' :=
   have : IsIso (B.I.blowupMap ∣_ σ.V) := B.isIso_blowupMap_restrict
   have := B.isProper_blowupMap
@@ -344,10 +342,10 @@ end TwoOpenSide
 
 /-- **Existence of a prepared side** (blueprint:
 `def:nagata-two-open-dense-compactifications` through
-`lemma:nagata-prepared-boundaries`; proof order items 34–36 applied): if `O`, `O'`
-cover `U` and `O ⟶ S` is compactifiable, there is a prepared side over `O`: choose a
-scheme-theoretically dense compactification, extend it to a proper morphism to `U` by
-the graph construction (Stacks Project Tag 0F3Z), and separate the two boundary
+`lemma:nagata-prepared-boundaries`; proof order items 34–36 applied).
+
+Choose a scheme-theoretically dense compactification, extend it to a proper morphism to
+`U` by the graph construction (Stacks Project Tag 0F3Z), and separate the two boundary
 closures by the boundary-separation blow-up (Stacks Project Tag 0F3V). -/
 theorem exists_prepared_twoOpenSide [IsNoetherian S] (u : U ⟶ S) [IsSeparated u]
     [LocallyOfFiniteType u] [QuasiCompact u] (O O' : U.Opens) (hcov : O ⊔ O' = ⊤)

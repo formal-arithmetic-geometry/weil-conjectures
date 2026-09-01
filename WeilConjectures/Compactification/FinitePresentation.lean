@@ -45,15 +45,13 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **Nagata compactification for a morphism of finite presentation**: a separated,
-quasi-compact morphism `f : X ⟶ S` of finite presentation over a quasi-compact
-quasi-separated scheme `S` factors as an open immersion followed by a proper morphism.
+/-- **Nagata compactification for a morphism of finite presentation** (blueprint:
+`lemma:nagata-final-basechanged-compactification`).
 
 The base is written as a cofiltered limit of Noetherian stages by absolute Noetherian
 approximation, `f` is descended to one of the stages, compactified there by
 `AlgebraicGeometry.nagataCompactification_of_isNoetherian` and the compactification is base
-changed back to `S`.
-(blueprint: `lemma:nagata-final-basechanged-compactification`) -/
+changed back to `S`. -/
 theorem nagataCompactification_of_locallyOfFinitePresentation {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace S] [QuasiSeparatedSpace S] [IsSeparated f] [LocallyOfFinitePresentation f]
     [QuasiCompact f] : HasCompactification f := by

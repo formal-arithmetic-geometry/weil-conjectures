@@ -68,11 +68,11 @@ noncomputable def Compactification.ofIsImmersionAffineSpace {n : Type u} [Finite
   (Compactification.ofIsImmersion (i ≫ AffineSpace.toRelativeProjectiveSpace n S)
     (ℙ(n; S) ↘ S)).copy hfac.symm
 
-/-- **A quasi-affine scheme of finite type over `S` is compactifiable over `S`**: if `X` is
-quasi-affine and `f : X ⟶ S` is quasi-compact and locally of finite type, then `f` admits a
-compactification. Since an affine scheme is quasi-affine, this covers the case of an affine
-`X` used in the induction of Nagata's theorem.
-(blueprint: `prop:nagata-affine-compactification`) -/
+/-- **A quasi-affine scheme of finite type over `S` is compactifiable over `S`**
+(blueprint: `prop:nagata-affine-compactification`).
+
+Since an affine scheme is quasi-affine, this covers the case of an affine `X` used in the
+induction of Nagata's theorem. -/
 theorem HasCompactification.of_isQuasiAffine (f : X ⟶ S) [X.IsQuasiAffine]
     [LocallyOfFiniteType f] [QuasiCompact f] : HasCompactification f := by
   obtain ⟨n, i, hi, hii⟩ := exists_immersion_affineSpace_of_quasiAffine f

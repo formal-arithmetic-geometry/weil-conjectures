@@ -274,20 +274,11 @@ end Probes
 /-- **Deligne's disjointness blow-up** (Deligne, *Lemme* 0.3; Conrad, Lemma 1.5; blueprint:
 `lemma:nagata-conrad-disjointness-blowup`).
 
-Let `p : Z ⟶ X` be a morphism, let `U ≤ V` be opens of `X` and let `I₁`, `I₂` be
-quasi-coherent ideals of `X` with `V ∖ U ⊆ V(I₁)` and `V(I₂) ⊆ X ∖ V` as sets. Let
-`f : Y ⟶ Z` be a morphism whose composite to `X` lands in `U`, and assume that the closed
-subscheme `p ⁻¹ V(I₁ * I₁) ⊓ Ȳ` of `Z` factors through `p ⁻¹ V(I₂)`, where `Ȳ` is the
-scheme-theoretic image of `f`; in ideal sheaf language,
-`I₂.comap p ≤ (I₁ * I₁).comap p ⊔ f.ker`.
-
-Then, after base changing `p` and `f` along the blow-up `q` of `I₁ ⊔ I₂`, the
-scheme-theoretic image of the base change `f'` is disjoint from the part of the base change
-of `Z` lying over the closure of `q ⁻¹ (V ∖ U)`.
-
-The base change is not required to be the chosen fibre product: any commutative square
-`hw` for `Z'` and any commutative square `hcomm` for `Y'` will do, so the statement applies
-verbatim to whatever model of the base change the caller has at hand. -/
+Differences from the informal statement: the base change is not required to be the chosen
+fibre product — any commuting squares `hw` for `Z'` and `hcomm` for `Y'` will do, so the
+statement applies to whatever model of the base change the caller has at hand — and the
+scheme-theoretic image of `f'` is expressed as the closure of its range, which is what the
+quasi-compactness of `f'` makes it. -/
 theorem disjoint_closure_range_of_blowupMap_sup {Z Y Z' Y' : Scheme.{u}} {p : Z ⟶ X}
     {f : Y ⟶ Z} {U V : X.Opens} (hUV : U ≤ V) {I₁ I₂ : X.IdealSheafData}
     (hI₂V : (I₂.support : Set X) ⊆ (V : Set X)ᶜ)

@@ -33,7 +33,7 @@ image along an arbitrary morphism {uses "def:finite-type-ideal"}[].
 :::
 
 :::theorem "thm:01PF" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_le, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq")
-Let $`X` be a quasi-compact scheme.
+Let $`X` be a quasi-compact quasi-separated scheme.
 
 * Let $`\sI_0 \le \sH_0` be quasi-coherent ideal sheaves on $`X`, let $`W \subseteq X` be a
   quasi-compact open, and assume $`\sI_0` is of finite type on $`W`. Then there is a
@@ -55,8 +55,9 @@ obtained by clearing denominators on a finite cover of the overlap by basic open
 :::
 
 :::theorem "thm:01PF-affine" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_isAffineHom, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_disjoint_support")
-Let $`X` be quasi-compact, let $`\sH_0` be a quasi-coherent ideal sheaf on $`X` and let
-$`j \colon Z \to X` be an affine morphism such that $`\sH_0 \cdot \sO_Z` is of finite type.
+Let $`X` be quasi-compact quasi-separated, let $`\sH_0` be a quasi-coherent ideal sheaf on
+$`X` and let $`j \colon Z \to X` be an affine morphism such that $`\sH_0 \cdot \sO_Z` is of
+finite type.
 Then there is a finite-type $`\sI \le \sH_0` on $`X` with
 $`\sI \cdot \sO_Z = \sH_0 \cdot \sO_Z`. If moreover $`V \subseteq X` is a quasi-compact open
 with $`V \cap V(\sH_0) = \emptyset`, then $`\sI` may be chosen with
@@ -77,9 +78,10 @@ Let $`X` be a quasi-compact scheme.
   directed family $`(\mathcal{B}_i)_i` of quasi-coherent ideal sheaves, then
   $`\mathcal{A} \le \mathcal{B}_i` for some $`i`.
 * Every quasi-coherent ideal sheaf $`\sH` on a quasi-compact quasi-separated scheme is the
-  supremum of the directed family of its finite-type quasi-coherent subsheaves; the same
-  holds for the cofinal subfamily of those subsheaves which restrict to the unit ideal on a
-  prescribed quasi-compact open.
+  supremum of the directed family of its finite-type quasi-coherent subsheaves. If moreover
+  $`\sH` restricts to the unit ideal on a quasi-compact open $`U`, the same holds for the
+  directed subfamily of those finite-type subsheaves which still restrict to the unit ideal
+  on $`U`.
 :::
 
 :::proof "thm:finite-type-directed" (uses := "thm:01PF, prop:finite-type-stability")

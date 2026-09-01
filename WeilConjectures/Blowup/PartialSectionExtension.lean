@@ -83,21 +83,13 @@ namespace AlgebraicGeometry
 
 variable {X : Scheme.{u}}
 
-/-- **Conrad's Theorem 2.4, reduced to the base `X`**: let `X` be a quasi-compact
-quasi-separated scheme, let `U ≤ V` be quasi-compact opens of `X` with `U` dense in `X`,
-and let `p : Y ⟶ X` be a separated quasi-compact morphism, locally of finite type, from a
-qcqs scheme `Y`. Let `f : U ⟶ Y` be a section of `p` over `U` whose image is closed in
-`p⁻¹(V)`.
-
-Then there is a `V`-admissible blow-up `X' = Bl_I(X) ⟶ X`, an open `W ⊆ X'` containing the
-preimage of `U`, and a section `g : W ⟶ Y` of `p` over `W` extending `f`, whose graph
-`W ⟶ Y ×_X X'` has closed image.
+/-- **Conrad's Theorem 2.4, reduced to the base `X`** (blueprint:
+`thm:nagata-conrad-elimination`, in the form reduced to the base `X`;
+`def:nagata-conrad-quasi-domination`).
 
 Conrad's Theorem 2.4 is stated for a rational map over an auxiliary base `S`; the first
 step of his proof replaces `Y` by `Y ×_S X`, which is the reduction to the form stated
-here.
-
-In the vocabulary of the blueprint the hypothesis says that `(U, f)` is a
+here. In the vocabulary of the blueprint the hypothesis says that `(U, f)` is a
 quasi-domination of `V` over `Y`, and the conclusion that `(W, g)` is a
 quasi-domination of the blow-up over `Y` extending `f`.
 
@@ -106,9 +98,8 @@ Elimination of indeterminacy (Stacks Project Tag 081S,
 deduced from this statement.
 
 Density of `U` is not used: neither Conrad's Case 3 nor the quasi-finiteness of the graph
-needs it. The hypothesis is kept because it is part of the interface consumed downstream.
-(Blueprint: `thm:nagata-conrad-elimination`, in the form reduced to the base `X`;
-`def:nagata-conrad-quasi-domination`.) -/
+needs it. The hypothesis is kept because it is part of the interface consumed
+downstream. -/
 theorem exists_admissibleBlowup_extend_partialSection
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
@@ -225,16 +216,13 @@ theorem exists_admissibleBlowup_extend_partialSection
       (B₁.isCompact_coe_preimage_blowupMap hV) f' hf'p hf'c)
 
 /-- **Conrad's Remark 2.5**: the case `V = U` of
-`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection`. A section of `p` over a
-dense quasi-compact open `U` of a qcqs scheme `X` extends, after a `U`-admissible blow-up,
-to a section over an open `W` of the blow-up containing the preimage of `U`, with closed
-graph.
+`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` (blueprint:
+`thm:nagata-conrad-elimination` with `V = U`, together with
+`lemma:nagata-conrad-morphism-is-quasi-domination`).
 
 No closedness hypothesis is needed: over `U` the morphism `f` is a section of the
 separated morphism `p ∣_ U`, hence a closed immersion, so its image is closed in
-`p⁻¹(U)`.
-(Blueprint: `thm:nagata-conrad-elimination` with `V = U`, together with
-`lemma:nagata-conrad-morphism-is-quasi-domination`.) -/
+`p⁻¹(U)`. -/
 theorem exists_admissibleBlowup_extend_section
     [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) (hUdense : Dense (U : Set X))

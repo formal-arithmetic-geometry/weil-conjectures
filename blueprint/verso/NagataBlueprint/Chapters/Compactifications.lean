@@ -14,14 +14,12 @@ subschemes, base change).
 
 # The notion
 
-:::definition "def:compactification" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification, AlgebraicGeometry.HasCompactification, AlgebraicGeometry.HasCompactification.compactification, AlgebraicGeometry.Compactification.hasCompactification")
+:::definition "def:compactification" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification, AlgebraicGeometry.HasCompactification")
 Let $`f \colon X \to Y` be a morphism of schemes. A _compactification_ of $`f` is a triple
 $`(Z, g, i)` consisting of a scheme $`Z`, a proper morphism $`g \colon Z \to Y` and an open
 immersion $`i \colon X \to Z` such that
 $$`f = g \circ i.`
-The bundled data is the structure `Compactification f`; the propositional statement that
-such a triple exists is the class `HasCompactification f`, and the two are exchanged by
-`Compactification.hasCompactification` and `HasCompactification.compactification`.
+We say that $`f` is _compactifiable_ if a compactification of $`f` exists.
 :::
 
 :::proposition "prop:compactification-basic" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.isSeparated, AlgebraicGeometry.Compactification.locallyOfFiniteType, AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff, AlgebraicGeometry.Compactification.isProper_openImmersion, AlgebraicGeometry.Compactification.isClosedImmersion_openImmersion, AlgebraicGeometry.Compactification.isClopen_range_openImmersion")
@@ -100,7 +98,7 @@ Now close up that immersion, using $`f' \circ i = g \circ (j \circ i)`.
 
 # Base change
 
-:::definition "def:compactification-base-change" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.ofIsPullback, AlgebraicGeometry.Compactification.baseChange")
+:::definition "def:compactification-base-change" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.ofIsPullback")
 Let a cartesian square with horizontal morphisms $`h \colon X \to Y` and $`t \colon S \to T`
 and vertical morphisms $`u \colon X \to S` and $`p \colon Y \to T` be given, and let
 $`(Z, g, i)` be a compactification of $`p` {uses "def:compactification"}[]. Then

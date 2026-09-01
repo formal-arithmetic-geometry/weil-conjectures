@@ -25,9 +25,18 @@ Quasi-compactness extracts a finite cover from this family, and the total inters
 a cover contains all generic points, hence is dense.
 :::
 
-:::definition "def:partial-unions" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.partialAffineOpenUnions, AlgebraicGeometry.Scheme.partialAffineOpenUnions_zero, AlgebraicGeometry.Scheme.partialAffineOpenUnions_self")
-For a finite family $`U_0, \dots, U_{n-1}` of opens of $`X` put $`X_r = \bigcup_{i < r} U_i`,
-so $`X_0 = \emptyset` and $`X_n = \bigcup_i U_i`.
+:::definition "def:partial-unions" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.partialAffineOpenUnions")
+For a finite family $`U_0, \dots, U_{n-1}` of opens of $`X` put $`X_r = \bigcup_{i < r} U_i`.
+:::
+
+:::lemma_ "lem:partial-unions-endpoints" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.partialAffineOpenUnions_zero, AlgebraicGeometry.Scheme.partialAffineOpenUnions_self")
+The two extreme partial unions are $`X_0 = \emptyset` and $`X_n = \bigcup_i U_i`
+{uses "def:partial-unions"}[].
+:::
+
+:::proof "lem:partial-unions-endpoints" (uses := "def:partial-unions")
+Immediate from the definition: the empty supremum is $`\emptyset`, and for $`r = n` the
+condition $`i < r` holds for every index of the family.
 :::
 
 :::lemma_ "lem:gluing-step" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.HasCompactification.of_sup_of_dense_subset")

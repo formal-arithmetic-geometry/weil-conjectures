@@ -17,12 +17,23 @@ type with quasi-affine source is compactifiable.
 Let $`\sigma` be an index type. The polynomial ring
 $`\mathbb{Z}[T_i : i \in \sigma \sqcup \{\ast\}]` carries its total-degree grading.
 
-:::definition "def:relative-projective-space" (parent := "grp:projective") (lean := "AlgebraicGeometry.ProjectiveSpaceInt, AlgebraicGeometry.RelativeProjectiveSpace, AlgebraicGeometry.RelativeProjectiveSpace.toProjectiveSpaceInt, AlgebraicGeometry.RelativeProjectiveSpace.isPullback_over")
+:::definition "def:relative-projective-space" (parent := "grp:projective") (lean := "AlgebraicGeometry.ProjectiveSpaceInt, AlgebraicGeometry.RelativeProjectiveSpace, AlgebraicGeometry.RelativeProjectiveSpace.toProjectiveSpaceInt")
 The _integral model_ is $`\Pj^{\sigma}_{\mathbb{Z}} = \Proj \mathbb{Z}[T_i]` for the
 total-degree grading. For a scheme $`S`, the _relative projective space_ is the base change
 $$`\Pj(\sigma; S) \;=\; \Pj^{\sigma}_{\mathbb{Z}} \times_{\Spec \mathbb{Z}} S,`
-with its structure morphism $`\Pj(\sigma; S) \to S`; the comparison square with the
-integral model is cartesian.
+with its structure morphism $`\Pj(\sigma; S) \to S` and its comparison morphism
+$`\Pj(\sigma; S) \to \Pj^{\sigma}_{\mathbb{Z}}` to the integral model.
+:::
+
+:::lemma_ "lem:projective-space-cartesian" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isPullback_over")
+The square formed by the structure morphism $`\Pj(\sigma; S) \to S`, the comparison morphism
+$`\Pj(\sigma; S) \to \Pj^{\sigma}_{\mathbb{Z}}` and the two morphisms to $`\Spec \mathbb{Z}`
+is cartesian {uses "def:relative-projective-space"}[].
+:::
+
+:::proof "lem:projective-space-cartesian" (uses := "def:relative-projective-space")
+The relative projective space is defined as the fibre product of the integral model and
+$`S` over $`\Spec \mathbb{Z}`, and the two morphisms in question are its projections.
 :::
 
 :::theorem "thm:proj-proper" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isProper_over")
@@ -43,12 +54,18 @@ $$`\bigl(R[T_\ast, T_i]_{T_\ast}\bigr)_0 \;\xrightarrow{\ \sim\ }\; R[T_i : i \i
 for $`a` homogeneous of degree $`k`; the inverse sends $`T_i` to $`T_i / T_\ast`.
 :::
 
-:::lemma_ "lem:affine-chart" (parent := "grp:projective") (lean := "AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.isOpenImmersion_toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace_over")
-The morphism $`\Aff(\sigma; S) \to \Pj(\sigma; S)` induced on the integral model by
-$`T_i \mapsto T_i / T_\ast` is an open immersion, and it is a morphism over $`S`.
+:::definition "def:standard-affine-chart" (parent := "grp:projective") (lean := "AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace")
+The _standard chart_ $`\Aff(\sigma; S) \to \Pj(\sigma; S)` is the morphism obtained by base
+change from the morphism of integral models given by $`T_i \mapsto T_i / T_\ast`
+{uses "def:relative-projective-space"}[].
 :::
 
-:::proof "lem:affine-chart" (uses := "lem:dehomogenization, def:relative-projective-space")
+:::lemma_ "lem:affine-chart" (parent := "grp:projective") (lean := "AlgebraicGeometry.AffineSpace.isOpenImmersion_toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace_over")
+The standard chart $`\Aff(\sigma; S) \to \Pj(\sigma; S)` {uses "def:standard-affine-chart"}[]
+is an open immersion, and it is a morphism over $`S`.
+:::
+
+:::proof "lem:affine-chart" (uses := "lem:dehomogenization, def:standard-affine-chart, lem:projective-space-cartesian")
 On the integral model the chart is the open immersion of the affine chart identified by
 dehomogenization. The relative statement is obtained by base change to $`S`, the square
 exhibiting the relative chart as a base change of the integral one being cartesian; open
@@ -76,7 +93,8 @@ closed immersion into the basic open of one of the coordinates, hence an immersi
 :::definition "def:affine-compactification" (parent := "grp:projective") (lean := "AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace")
 Let $`f \colon X \to S` be quasi-compact and let $`i \colon X \to \Aff(\sigma; S)` be an
 immersion over $`S` with $`\sigma` finite. Composing $`i` with the standard chart
-{uses "lem:affine-chart"}[] exhibits $`f` as an immersion into a scheme proper over $`S`
+{uses "def:standard-affine-chart"}[] {uses "lem:affine-chart"}[] exhibits $`f` as an
+immersion into a scheme proper over $`S`
 {uses "thm:proj-proper"}[]; closing up its image inside $`\Pj(\sigma; S)`
 {uses "def:of-immersion"}[] yields a compactification of $`f`.
 :::

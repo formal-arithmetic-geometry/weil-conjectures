@@ -1404,13 +1404,11 @@ variable {X : Scheme.{u}}
 set_option maxHeartbeats 3200000 in
 -- Unifying the `HomogeneousLocalization` chart rings exceeds the default heartbeat limit.
 /-- **Extension to relative affine space after one admissible blow-up** (Conrad,
-Theorem 2.4, Case 1, the sub-case `Y = 𝔸ⁿ_X`): let `X` be affine, `U` a quasi-compact
-open of `X` and `f : U ⟶ 𝔸(σ; X)` a morphism over `X` (with `σ` finite). Then there
-are a `U`-admissible blow-up `B` of `X`, an open `W` of the blow-up containing the
-preimage of `U`, and a morphism `g : W ⟶ 𝔸(σ; X)` over `X` which agrees with `f` over
-`U` — via the identification of the preimage of `U` with `U` along
-`B.isIso_blowupMap_restrict` — and whose graph `W ⟶ Bl ×_X 𝔸(σ; X)` has closed range.
-(Blueprint: `lemma:nagata-conrad-affine-space-extension`.) -/
+Theorem 2.4, Case 1, the sub-case `Y = 𝔸ⁿ_X`; blueprint:
+`lemma:nagata-conrad-affine-space-extension`).
+
+Difference from the informal statement: "agrees with `f` over `U`" is expressed through
+the identification of the preimage of `U` with `U` along `B.isIso_blowupMap_restrict`. -/
 theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
     {U : X.Opens} (hU : IsCompact (U : Set X)) {σ : Type u} [Finite σ]
     (f : U.toScheme ⟶ 𝔸(σ; X)) (hf : f ≫ 𝔸(σ; X) ↘ X = U.ι) :
@@ -1550,12 +1548,8 @@ theorem exists_isAdmissible_extend_affineSpace [IsAffine X]
       (fun _ ↦ trivial) hWdef ci hci g hg hgi
   exact ⟨⟨K, hFT, hdisj⟩, W, hWmem, g, hg, hagree, hclosed⟩
 
-/-- **Conrad's Theorem 2.4, Case 1: a quasi-affine target over an affine base.** Let `X` be
-affine, `U` a quasi-compact open of `X`, `p : Y ⟶ X` a morphism locally of finite type with
-`Y` quasi-affine, and `f : U ⟶ Y` a morphism over `X`. Then there are a `U`-admissible
-blow-up `B` of `X` in which the preimage of `U` is scheme-theoretically dense, an open `W`
-of the blow-up containing that preimage, and a morphism `g : W ⟶ Y` over `X` agreeing with
-`f` over `U` whose graph `W ⟶ Y ×_X Bl` has closed range.
+/-- **Conrad's Theorem 2.4, Case 1: a quasi-affine target over an affine base**
+(blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`).
 
 Over an affine base, the quasi-affineness of `Y` as a scheme is the same as the
 quasi-affineness of `p` as a morphism, so this is the absolute form of the hypothesis.
@@ -1567,8 +1561,7 @@ dense by one further blow-up
 (`IsAdmissible.exists_comp_isSchemeTheoreticallyDominant_preimage`), and descends the
 extension back to `Y` along the closed-immersion part of the immersion, using that a
 morphism agreeing on a scheme-theoretically dense open with one factoring through a closed
-subscheme factors through it as well.
-(Blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`.) -/
+subscheme factors through it as well. -/
 theorem exists_isAdmissible_extend_of_isQuasiAffine [IsAffine X]
     {U : X.Opens} (hU : IsCompact (U : Set X)) {Y : Scheme.{u}} [Y.IsQuasiAffine]
     {p : Y ⟶ X} [LocallyOfFiniteType p]
@@ -1967,14 +1960,8 @@ theorem exists_isAdmissible_extend_of_isAffineOpen
 
 
 /-- **Conrad's Theorem 2.4, Case 2: a quasi-affine target over a qcqs base** (Conrad,
-*Deligne's notes on Nagata compactifications*, proof of Theorem 2.4, Case 2, pp. 15–16).
-Let `X` be quasi-compact and quasi-separated, `U` a quasi-compact open of `X`,
-`p : Y ⟶ X` a separated, quasi-affine morphism locally of finite type, and
-`f : U ⟶ Y` a morphism over `X`. Then there are a `U`-admissible blow-up `B` of `X` in
-which the inverse image of `U` is scheme-theoretically dense, an open `W` of the blow-up
-containing that inverse image, and a morphism `g : W ⟶ Y` over `X` agreeing with `f`
-over `U` whose graph `W ⟶ Y ×_X Bl` has closed range.
-(Blueprint: `lemma:nagata-conrad-quasi-affine-equal-opens`.) -/
+*Deligne's notes on Nagata compactifications*, proof of Theorem 2.4, Case 2, pp. 15–16;
+blueprint: `lemma:nagata-conrad-quasi-affine-equal-opens`). -/
 theorem exists_isAdmissible_extend_of_isQuasiAffineHom
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {U : X.Opens} (hU : IsCompact (U : Set X))
