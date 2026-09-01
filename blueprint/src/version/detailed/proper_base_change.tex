@@ -2347,15 +2347,14 @@ restriction and hence are equal.  Taking $a$ to be an identity or a
 composite proves the asserted identity and composition compatibilities.
 \end{proof}
 
-\begin{lemma}[Covering compatibility for universal homeomorphisms]
-\label{lemma:weil-pbc-universal-homeomorphism-coverings}
+\begin{lemma}[Base change equivalence for universal homeomorphisms]
+\label{lemma:weil-pbc-universal-homeomorphism-site-equivalence}
 \uses{}
-\lean{conditional-interface:lemma:weil-pbc-universal-homeomorphism-coverings}
+\lean{AlgebraicGeometry.Scheme.Hom.isEquivalence_etale}
+\leanok
 
 Let $u:X_0\to X$ be a universal homeomorphism.  Base change gives an
-equivalence between etale $X$-schemes and etale $X_0$-schemes, and a family
-$\{U_i\to U\}$ is jointly surjective before base change if and only if its
-base change is jointly surjective.
+equivalence between etale $X$-schemes and etale $X_0$-schemes.
 \end{lemma}
 \begin{proof}
 \uses{lemma:weil-pbc-universal-homeomorphism-descent-datum}
@@ -2396,7 +2395,23 @@ $V\times_XX_0\cong V_0$.  The same uniqueness shows that maps descend and
 that the unit and counit of the two functors are identities after pullback.
 Base change is therefore an equivalence.
 
-It remains to check the topology, the omission in Tag \texttt{03SI}.  For a
+\end{proof}
+
+\begin{lemma}[Covering compatibility for universal homeomorphisms]
+\label{lemma:weil-pbc-universal-homeomorphism-coverings}
+\uses{}
+\lean{AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff}
+\leanok
+
+Let $u:X_0\to X$ be a universal homeomorphism.  A family $\{U_i\to U\}$ of
+etale $X$-schemes is jointly surjective if and only if its base change along
+$u$ is jointly surjective.
+\end{lemma}
+\begin{proof}
+\uses{}
+\leanok
+
+This is the topology half, the omission in Tag \texttt{03SI}.  For a
 family $\{U_i\to U\}$ of etale $X$-schemes, set
 $Z=|U|\setminus\bigcup_i\operatorname{im}(|U_i|\to|U|)$.  Base change gives
 a homeomorphism $|U\times_XX_0|\to|U|$, and its inverse image of $Z$ is
@@ -2405,6 +2420,34 @@ $Z=\varnothing$ if and only if that inverse image is empty.  This proves
 joint surjectivity in both directions.  The identity and composition
 compatibilities already proved show that this correspondence of covering
 families respects refinements and composite coverings.
+\end{proof}
+
+\begin{proposition}[Topological invariance of the small etale topos]
+\label{prop:weil-pbc-universal-homeomorphism-topos}
+\uses{}
+\lean{AlgebraicGeometry.Etale.sheafEquivalence,
+  AlgebraicGeometry.Etale.isEquivalence_upperStar,
+  AlgebraicGeometry.Etale.cohomologyEquiv}
+\leanok
+
+Let $u:X_0\to X$ be a universal homeomorphism.  Pullback along $u$ is an
+equivalence between the small etale topos of $X$ and that of $X_0$, and for
+every abelian sheaf $F$ on $X_{\mathrm{et}}$ and every $n$ it induces an
+isomorphism
+\[
+ H^n(X_{\mathrm{et}},F)\xrightarrow{\sim}H^n(X_{0,\mathrm{et}},u^{-1}F).
+\]
+This is Tag \texttt{03SI}.
+\end{proposition}
+\begin{proof}
+\uses{lemma:weil-pbc-universal-homeomorphism-site-equivalence,lemma:weil-pbc-universal-homeomorphism-coverings}
+
+Base change is an equivalence of the underlying categories and matches the
+covering families, hence is an equivalence of sites; so restriction along it
+is an equivalence of the categories of sheaves, and pullback, being its left
+adjoint, is a quasi-inverse.  Cohomology is the $\operatorname{Ext}$-groups
+out of the constant sheaf $\mathbf Z$, and an exact equivalence carrying the
+constant sheaf to the constant sheaf induces an isomorphism on those groups.
 \end{proof}
 
 \begin{definition}[The eight curve-cohomology assertions]
@@ -2530,7 +2573,7 @@ a torsion sheaf $F$, extension-invariance of $H^q(X,F)$ reduces to the case
 where $X$ is reduced and $F$ is a constructible $\mathbf F_\ell$-sheaf.
 \end{lemma}
 \begin{proof}
-\uses{lemma:weil-pbc-universal-homeomorphism-coverings,lemma:weil-pbc-curve-filtered-cohomology,lemma:weil-pbc-eight-curve-devissage}
+\uses{lemma:weil-pbc-universal-homeomorphism-site-equivalence,lemma:weil-pbc-universal-homeomorphism-coverings,lemma:weil-pbc-curve-filtered-cohomology,lemma:weil-pbc-eight-curve-devissage}
 
 The reduction map $r:X_{\mathrm{red}}\to X$ is a universal homeomorphism.
 The site equivalence sends $F$ to $r^{-1}F$, preserves covering families, and
@@ -3138,7 +3181,7 @@ then the specified restriction
 $H^q(C,F)\to H^q(C_{k'},F|)$ is an isomorphism for every $q$.
 \end{lemma}
 \begin{proof}
-\uses{lemma:weil-pbc-universal-homeomorphism-coverings}
+\uses{lemma:weil-pbc-universal-homeomorphism-site-equivalence,lemma:weil-pbc-universal-homeomorphism-coverings}
 
 Choose compatible algebraic closures $\bar k\subseteq\bar k'$.  Since $k$
 and $k'$ are separably closed, $\bar k/k$ and $\bar k'/k'$ are purely
@@ -3207,7 +3250,7 @@ dimension at most one, and $F$ a torsion etale sheaf.  Then
 for every $q$.
 \end{proposition}
 \begin{proof}
-\uses{lemma:weil-pbc-universal-homeomorphism-coverings,lemma:weil-pbc-curve-constructible-primary-reduction,lemma:weil-pbc-curve-dense-open-reduction,lemma:weil-pbc-curve-locally-constant-reduction,lemma:weil-pbc-finite-pushforward-extension-zero,lemma:weil-pbc-curve-normalization-constant,lemma:weil-pbc-curve-separably-closed-passage}
+\uses{lemma:weil-pbc-universal-homeomorphism-site-equivalence,lemma:weil-pbc-universal-homeomorphism-coverings,lemma:weil-pbc-curve-constructible-primary-reduction,lemma:weil-pbc-curve-dense-open-reduction,lemma:weil-pbc-curve-locally-constant-reduction,lemma:weil-pbc-finite-pushforward-extension-zero,lemma:weil-pbc-curve-normalization-constant,lemma:weil-pbc-curve-separably-closed-passage}
 
 First assume both fields algebraically closed.  Apply constructible/primary
 reduction.  The closed immersion $C_{\mathrm{red}}\to C$ is a universal
