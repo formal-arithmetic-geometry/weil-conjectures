@@ -29,8 +29,10 @@ each `i`, a proper morphism `pᵢ : Z ⟶ Mᵢ.Z` restricting on `U∞` to the o
 The `m`-fold fibre product `∏_S ℙ(nᵢ; S)` is taken to be the categorical finite product in the
 category `Over S`; `AlgebraicGeometry.isProper_pi_hom` is what makes it proper over `S`, so no
 Segre embedding is needed here. The composition of the closed immersion
-`Z ⟶ ∏_S ℙ(Mᵢ.n; S)` with a Segre embedding into a single projective space is performed where
-Chow's lemma itself is proved.
+`Z ⟶ ∏_S ℙ(Mᵢ.n; S)` with the Segre embedding of
+`AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi`, giving a closed immersion of `Z`
+into a single projective space `ℙ(N; S)` over `S`, is the separate statement
+`AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over` below.
 
 ## Main definitions
 
