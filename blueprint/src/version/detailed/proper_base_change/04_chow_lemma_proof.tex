@@ -488,6 +488,10 @@ $j_i$ identifies $U_i$ with an open subscheme of $Z_i$.
 \end{proof}
 
 \begin{lemma}[Gluing the projections]\label{lem:chow-glue}
+\lean{AlgebraicGeometry.ChowGraph.projPreimage,
+AlgebraicGeometry.ChowGraph.projRestrict,
+AlgebraicGeometry.ChowGraph.modificationMap}
+\leanok
 In the situation of \Cref{lem:chow-graph} put $V_i:=p_i^{-1}(U_i)$ and
 $X':=V_1\cup\dots\cup V_m$, an open subscheme of $Z$.  Then the morphisms
 $p_i|_{V_i}\colon V_i\to U_i\subseteq X$ glue to a morphism of $S$-schemes
@@ -495,10 +499,16 @@ $p_i|_{V_i}\colon V_i\to U_i\subseteq X$ glue to a morphism of $S$-schemes
   \pi\colon X'\longrightarrow X
 \]
 with $\pi|_{V_i}=p_i|_{V_i}$, and $\pi|_U=\mathrm{id}_U$.
+
+In the formalisation $V_i$ is the preimage under $p_i$ of the image of $U_i$ in
+$Z_i$, and $V_i$, $U$ and $X'$ are all opens of $Z$; the last assertion reads
+that the composition of the open immersion $U\to X'$ with $\pi$ is the inclusion
+$U\to X$.
 \end{lemma}
 \begin{proof}
 \uses{lem:chow-graph,lem:chow-agree-on-dense-open}
-By \Cref{lem:chow-graph}\,(4) we have $U\subseteq V_i$ for every $i$, and
+\leanok
+By \Cref{lem:chow-graph}\,(3) we have $U\subseteq V_i$ for every $i$, and
 $p_i|_U\colon U\to U_i\subseteq X$ is the inclusion.  Since $U$ is
 scheme-theoretically dense in $Z$ and $V_i\cap V_j\subseteq Z$ is open, $U$ is
 scheme-theoretically dense in $V_i\cap V_j$.  The two morphisms
@@ -509,12 +519,16 @@ $\pi\colon X'\to X$, and $\pi|_U=\mathrm{id}_U$.
 \end{proof}
 
 \begin{lemma}[The preimages of the members of the cover]\label{lem:chow-preimage}
+\lean{AlgebraicGeometry.ChowGraph.preimage_modificationMap,
+AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap}
+\leanok
 In the situation of \Cref{lem:chow-glue} one has $\pi^{-1}(U_i)=V_i$ for every
 $i$.  Consequently $\pi^{-1}(U_i)\to U_i$ is the proper morphism
 $p_i|_{V_i}$.
 \end{lemma}
 \begin{proof}
 \uses{lem:chow-glue}
+\leanok
 The inclusion $V_i\subseteq\pi^{-1}(U_i)$ holds because $\pi|_{V_i}=p_i|_{V_i}$
 takes values in $U_i$.  The morphism $p_i|_{V_i}\colon V_i\to U_i$ is proper,
 being the base change of the proper morphism $p_i$ along the open immersion
