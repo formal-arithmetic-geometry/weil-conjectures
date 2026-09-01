@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
@@ -28,8 +29,10 @@ each `i`, a proper morphism `pᵢ : Z ⟶ Mᵢ.Z` restricting on `U∞` to the o
 The `m`-fold fibre product `∏_S ℙ(nᵢ; S)` is taken to be the categorical finite product in the
 category `Over S`; `AlgebraicGeometry.isProper_pi_hom` is what makes it proper over `S`, so no
 Segre embedding is needed here. The composition of the closed immersion
-`Z ⟶ ∏_S ℙ(Mᵢ.n; S)` with a Segre embedding into a single projective space is performed where
-Chow's lemma itself is proved.
+`Z ⟶ ∏_S ℙ(Mᵢ.n; S)` with the Segre embedding of
+`AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi`, giving a closed immersion of `Z`
+into a single projective space `ℙ(N; S)` over `S`, is the separate statement
+`AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over` below.
 
 ## Main definitions
 
@@ -45,6 +48,8 @@ Chow's lemma itself is proved.
 - `AlgebraicGeometry.isImmersion_left_pi_lift` — a tuple of morphisms of `S`-schemes one of
   whose components is an immersion is itself an immersion.
 - `AlgebraicGeometry.ChowGraph.isProper_over` — `Z` is proper over `S`.
+- `AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over` — `Z` admits a closed immersion
+  into a single projective space `ℙ(N; S)` over `S`.
 - `AlgebraicGeometry.ChowGraph.isOpenImmersion_toGraph` and
   `AlgebraicGeometry.ChowGraph.isSchemeTheoreticallyDominant_toGraph` — `U∞` is a
   scheme-theoretically dense open subscheme of `Z`.
@@ -263,6 +268,35 @@ lemma opensRange_toGraph_le_preimage [Nonempty ι] (i : ι) :
     rw [← Scheme.Hom.comp_apply, ← toGraph_proj, Scheme.Hom.comp_apply]⟩
 
 end Noetherian
+
+/-- **The graph is a closed subscheme of a single projective space over `S`.** Composing the
+closed immersion `Z ⟶ ∏_S ℙ(Mᵢ.n; S)` of `AlgebraicGeometry.ChowGraph.emb` with the `m`-fold
+Segre embedding `AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi` yields a closed
+immersion of `Z` into a projective space `ℙ(N; S)` with `N` finite, compatible with the
+structure morphisms over `S`.
+
+The index type `ι` of the cover lives in an arbitrary universe, while the Segre embedding is
+stated for an index type in the universe of the schemes; the two are matched up by reindexing
+the product along an equivalence `ι ≃ ULift.{u} (Fin k)`. -/
+@[stacks 0200 "step 7 of the proof"]
+theorem exists_isClosedImmersion_over :
+    ∃ (N : Type u) (_ : Finite N) (g : ChowGraph M ⟶ ℙ(N; S)),
+      IsClosedImmersion g ∧ g ≫ ℙ(N; S) ↘ S = over M := by
+  obtain ⟨k, ⟨e⟩⟩ := Finite.exists_equiv_fin ι
+  let e' : ι ≃ ULift.{u} (Fin k) := e.trans Equiv.ulift.symm
+  obtain ⟨N, hN, g, hg⟩ :=
+    ProjectiveSpace.exists_isClosedImmersion_pi (fun j ↦ (M (e'.symm j)).n) S
+  let ee : ambient M ≅ ∏ᶜ fun j ↦ Over.mk (ℙ((M (e'.symm j)).n; S) ↘ S) :=
+    Pi.whiskerEquiv (f := fun i ↦ Over.mk (ℙ((M i).n; S) ↘ S))
+      (g := fun j ↦ Over.mk (ℙ((M (e'.symm j)).n; S) ↘ S)) e'
+      fun i ↦ eqToIso (by rw [Equiv.symm_apply_apply])
+  have : IsIso ee.hom.left := inferInstanceAs (IsIso ((Over.forget S).map ee.hom))
+  refine ⟨N, hN, emb M ≫ (ee.hom ≫ g).left, ?_, ?_⟩
+  · rw [Over.comp_left]
+    infer_instance
+  · have h := Over.w (ee.hom ≫ g)
+    simp only [Over.mk_hom] at h
+    rw [Category.assoc, h, over]
 
 end ChowGraph
 
