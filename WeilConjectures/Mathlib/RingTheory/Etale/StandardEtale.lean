@@ -1,0 +1,145 @@
+/-
+Copyright (c) 2026 Christian Merten. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Christian Merten
+-/
+module
+
+public import Mathlib.RingTheory.Etale.StandardEtale
+
+/-!
+# Standard etale algebras lift along quotient maps
+
+Every standard etale algebra over a quotient `R ⧸ I` is the base change of a standard etale
+algebra over `R`. This is the ring theoretic half of the statement that etale morphisms lift
+along closed immersions.
+
+## Main results
+
+- `StandardEtalePair.exists_algEquiv_quotient_tensor_ring`: for every
+  `P : StandardEtalePair (R ⧸ I)` there is a `Q : StandardEtalePair R` together with an
+  `R ⧸ I`-algebra isomorphism `(R ⧸ I) ⊗[R] Q.Ring ≃ₐ[R ⧸ I] P.Ring`.
+- `Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor`: if `S` is a standard etale
+  `R ⧸ I`-algebra, then there is a standard etale `R`-algebra `T` together with an
+  `R ⧸ I`-algebra isomorphism `(R ⧸ I) ⊗[R] T ≃ₐ[R ⧸ I] S`.
+
+## Implementation notes
+
+Lifting `f`, `g` and the witnesses of `StandardEtalePair.cond` naively does not work, since a lift
+of the identity witnessing `cond` only holds modulo `I`. Instead one observes that for a monic
+`f : R[X]` and an *arbitrary* `g : R[X]` the pair `(f, g * f')` is a standard etale pair
+(`StandardEtalePair.ofMonic`), since `f'` trivially divides `g * f'`; and that replacing `g` by
+`g * f'` does not change the associated standard etale algebra
+(`StandardEtalePair.mulDerivativeRingEquiv`), since `f'` is already invertible there. So one lifts
+`f` to a monic `F` of the same degree, lifts `g` to an arbitrary `G`, and takes the pair
+`(F, G * F')` over `R`.
+-/
+
+@[expose] public section
+
+universe u v
+
+open Polynomial
+
+open scoped TensorProduct
+
+noncomputable section
+
+variable {R : Type u} {S : Type v} [CommRing R] [CommRing S]
+
+namespace StandardEtalePair
+
+/-- Two standard etale pairs over `R` with the same `f` and the same `g` are equal: the
+remaining fields of `StandardEtalePair` are proofs. -/
+@[ext]
+protected lemma ext {P Q : StandardEtalePair R} (hf : P.f = Q.f) (hg : P.g = Q.g) : P = Q := by
+  obtain ⟨f₁, _, g₁, _⟩ := P
+  obtain ⟨f₂, _, g₂, _⟩ := Q
+  obtain rfl : f₁ = f₂ := hf
+  obtain rfl : g₁ = g₂ := hg
+  rfl
+
+/-- For a monic `f : R[X]` and an arbitrary `g : R[X]`, the pair `(f, g * f')` is a standard etale
+pair, since `f'` divides `(g * f') ^ 1`. -/
+@[simps]
+def ofMonic {f : R[X]} (hf : f.Monic) (g : R[X]) : StandardEtalePair R where
+  f := f
+  monic_f := hf
+  g := g * derivative f
+  cond := ⟨g, 0, 1, by ring⟩
+
+@[simp]
+lemma map_ofMonic {f : R[X]} (hf : f.Monic) (g : R[X]) (φ : R →+* S) :
+    (ofMonic hf g).map φ = ofMonic (hf.map φ) (g.map φ) :=
+  StandardEtalePair.ext (by simp) (by simp [Polynomial.map_mul])
+
+/-- The standard etale pair `(f, g * f')` associated to the standard etale pair `P = (f, g)`.
+It has the same standard etale algebra as `P`, see
+`StandardEtalePair.mulDerivativeRingEquiv`. -/
+@[simps!]
+def mulDerivative (P : StandardEtalePair R) : StandardEtalePair R := ofMonic P.monic_f P.g
+
+/-- Inverting the derivative `f'` in the standard etale algebra `R[X][1/g]/f` of `(f, g)` does not
+change it, since `f'` is already invertible there: `R[X][1/(g * f')]/f ≃ R[X][1/g]/f`. -/
+def mulDerivativeRingEquiv (P : StandardEtalePair R) : P.mulDerivative.Ring ≃ₐ[R] P.Ring := by
+  have h₁ : P.mulDerivative.HasMap P.X := by
+    refine ⟨by simpa using P.hasMap_X.1, ?_⟩
+    simpa [map_mul] using P.hasMap_X.2.mul P.hasMap_X.isUnit_derivative_f
+  have h₂ : P.HasMap P.mulDerivative.X := by
+    refine ⟨by simpa using P.mulDerivative.hasMap_X.1, ?_⟩
+    have h := P.mulDerivative.hasMap_X.2
+    simp only [mulDerivative_g, map_mul] at h
+    exact isUnit_of_mul_isUnit_left h
+  exact .ofAlgHom (P.mulDerivative.lift P.X h₁) (P.lift P.mulDerivative.X h₂)
+    (by
+      ext
+      simp)
+    (by
+      ext
+      simp)
+
+/-- `P.Ring` as a standard etale presentation of itself. -/
+def presentation (P : StandardEtalePair R) : StandardEtalePresentation R P.Ring where
+  __ := P
+  x := P.X
+  hasMap := P.hasMap_X
+  lift_bijective := by simpa [StandardEtalePair.lift_X_left] using Function.bijective_id
+
+/-- The base change of the standard etale algebra of `P : StandardEtalePair R` along `R → T` is
+the standard etale algebra of the pair obtained from `P` by mapping the coefficients to `T`. -/
+def baseChangeEquiv (P : StandardEtalePair R) (T : Type*) [CommRing T] [Algebra R T] :
+    T ⊗[R] P.Ring ≃ₐ[T] (P.map (algebraMap R T)).Ring :=
+  P.presentation.baseChange.equivRing
+
+/-- Every standard etale pair over a quotient `R ⧸ I` becomes, after passing to the associated
+standard etale algebras, the base change of a standard etale pair over `R`. -/
+theorem exists_algEquiv_quotient_tensor_ring (I : Ideal R) (P : StandardEtalePair (R ⧸ I)) :
+    ∃ Q : StandardEtalePair R, Nonempty ((R ⧸ I) ⊗[R] Q.Ring ≃ₐ[R ⧸ I] P.Ring) := by
+  obtain ⟨F, hF, -, hFm⟩ := Polynomial.lifts_and_natDegree_eq_and_monic
+    ((Polynomial.mem_lifts (f := Ideal.Quotient.mk I) P.f).mpr
+      (Polynomial.map_surjective _ Ideal.Quotient.mk_surjective P.f)) P.monic_f
+  obtain ⟨G, hG⟩ := Polynomial.map_surjective (Ideal.Quotient.mk I)
+    Ideal.Quotient.mk_surjective P.g
+  refine ⟨ofMonic hFm G, ⟨((ofMonic hFm G).baseChangeEquiv (R ⧸ I)).trans ?_⟩⟩
+  have h : (ofMonic hFm G).map (algebraMap R (R ⧸ I)) = P.mulDerivative := by
+    rw [map_ofMonic]
+    refine StandardEtalePair.ext ?_ ?_
+    · simpa [Ideal.Quotient.algebraMap_eq] using hF
+    · simp [Ideal.Quotient.algebraMap_eq, hF, hG]
+  rw [h]
+  exact P.mulDerivativeRingEquiv
+
+end StandardEtalePair
+
+variable (S) in
+/-- Every standard etale algebra over a quotient `R ⧸ I` is the base change of a standard etale
+algebra over `R`. -/
+theorem Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor (I : Ideal R)
+    [Algebra (R ⧸ I) S] [Algebra.IsStandardEtale (R ⧸ I) S] :
+    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T),
+      Algebra.IsStandardEtale R T ∧ Nonempty ((R ⧸ I) ⊗[R] T ≃ₐ[R ⧸ I] S) := by
+  obtain ⟨P⟩ := ‹Algebra.IsStandardEtale (R ⧸ I) S›.nonempty_standardEtalePresentation
+  obtain ⟨Q, ⟨e⟩⟩ := StandardEtalePair.exists_algEquiv_quotient_tensor_ring I P.P
+  exact ⟨Q.Ring, inferInstance, inferInstance, inferInstance, ⟨e.trans P.equivRing.symm⟩⟩
+
+end

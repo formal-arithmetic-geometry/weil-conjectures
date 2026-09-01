@@ -7,13 +7,16 @@ module
 
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 
 /-!
 # Complements on the small étale site
 
 - `AlgebraicGeometry.Scheme.Hom.Etale`: the base change functor `Y.Etale ⥤ X.Etale`
-  along a morphism `f : X ⟶ Y`; it preserves finite limits.
+  along a morphism `f : X ⟶ Y`; it preserves finite limits, is representably flat
+  (`AlgebraicGeometry.Scheme.Hom.representablyFlat_etale`) and is continuous for the small
+  étale topologies (`AlgebraicGeometry.Scheme.Hom.isContinuous_etale`).
 - `AlgebraicGeometry.Scheme.Etale.baseChange` and
   `AlgebraicGeometry.Scheme.Etale.baseChangeHom`: for an étale morphism `g : W ⟶ X`, the
   base change `V ×_X W` of an étale `X`-scheme `V`, again as an étale `X`-scheme, and its
@@ -51,6 +54,24 @@ def Hom.Etale (f : X ⟶ Y) : Y.Etale ⥤ X.Etale :=
 
 instance (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
   inferInstanceAs <| PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f)
+
+/-- The base change functor `f.Etale` is representably flat: the small étale site of `Y`
+has finite limits and base change preserves them. -/
+instance Hom.representablyFlat_etale (f : X ⟶ Y) : RepresentablyFlat f.Etale :=
+  MorphismProperty.Over.representablyFlat_pullback @AlgebraicGeometry.Etale f
+
+/-- The base change functor `f.Etale` preserves the covering sieves of the small étale
+topologies: étale covers are stable under base change. -/
+lemma Hom.coverPreserving_etale (f : X ⟶ Y) :
+    CoverPreserving (smallEtaleTopology Y) (smallEtaleTopology X) f.Etale :=
+  coverPreserving_overPullback @AlgebraicGeometry.Etale @AlgebraicGeometry.Etale le_rfl f
+
+/-- The base change functor `f.Etale` is continuous for the small étale topologies: it
+preserves covers by `AlgebraicGeometry.Scheme.Hom.coverPreserving_etale`, and compatible
+families since it is representably flat. -/
+instance Hom.isContinuous_etale (f : X ⟶ Y) :
+    f.Etale.IsContinuous (smallEtaleTopology Y) (smallEtaleTopology X) :=
+  isContinuous_overPullback @AlgebraicGeometry.Etale @AlgebraicGeometry.Etale le_rfl f
 
 end Functoriality
 

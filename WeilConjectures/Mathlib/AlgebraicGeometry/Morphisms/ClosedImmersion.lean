@@ -6,11 +6,12 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-!
 # Complements on closed immersions
 
-Two unrelated groups of small results.
+Three unrelated groups of small results.
 
 The first is about **immersions that are universally closed**. A preimmersion whose underlying
 map is closed — for instance a proper one — is already a closed immersion. In the special case
@@ -29,6 +30,10 @@ scheme-theoretic image in the form stated in the Nagata blueprint
 the scheme-theoretic image is the smallest closed subscheme of the target through which
 the morphism factors.
 
+The third is the **factorization of a point through a closed immersion**: a morphism from a
+reduced scheme whose set-theoretic image lands in the range of a closed immersion factors
+uniquely through it. The case that gets used is a morphism from the spectrum of a field.
+
 ## Main results
 
 - `AlgebraicGeometry.IsClosedImmersion.of_isOpenImmersion` — an open immersion with closed
@@ -46,7 +51,15 @@ the morphism factors.
   `AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp` supplying its hypothesis;
 - `AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac` — a closed subscheme
   contains the scheme-theoretic image of `g` if and only if `g` factors through it, and
-  then uniquely.
+  then uniquely;
+- `AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_range_subset_range` — a morphism
+  from a reduced scheme whose range is contained in the range of a closed immersion factors
+  uniquely through it, with `AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_field`
+  the special case of a morphism from the spectrum of a field;
+- `AlgebraicGeometry.Scheme.range_base_subset_of_closedPoint_mem` — a morphism from the
+  spectrum of a field has its whole range inside any set containing the image of the closed
+  point, the observation which turns the pointwise hypothesis of the previous statement into
+  a hypothesis on ranges.
 -/
 
 @[expose] public section
@@ -140,5 +153,41 @@ theorem Scheme.Hom.ker_le_ker_iff_existsUnique_fac (g : X ⟶ Y) (z : Z ⟶ Y)
     exact Scheme.Hom.le_ker_comp h z
 
 end Lift
+
+section Point
+
+variable {Z : Scheme.{u}}
+
+/-- A morphism `s : X ⟶ Y` from a **reduced** scheme whose set-theoretic image is contained in
+the range of a closed immersion `i : Z ⟶ Y` factors uniquely through `i`.
+
+Reducedness of the source is needed: for `X = Y = Spec k[ε]` and `Z` the reduced point, the
+identity of `X` has image the single point of `Z` but does not factor through `Z`. -/
+theorem IsClosedImmersion.existsUnique_fac_of_range_subset_range [IsReduced X] (i : Z ⟶ Y)
+    [IsClosedImmersion i] (s : X ⟶ Y) (hs : Set.range s.base ⊆ Set.range i.base) :
+    ∃! t : X ⟶ Z, t ≫ i = s :=
+  (Scheme.Hom.ker_le_ker_iff_existsUnique_fac s i).mp
+    ((Scheme.IdealSheafData.le_ker_iff_range_subset_support i.ker s).mpr
+      (hs.trans (Scheme.Hom.range_subset_ker_support i)))
+
+/-- The spectrum of a field has a single point, so a morphism `s : Spec K ⟶ Y` has its whole
+range inside any set containing the image of the closed point. -/
+lemma Scheme.range_base_subset_of_closedPoint_mem {K : Type u} [Field K]
+    (s : Spec (CommRingCat.of K) ⟶ Y) {S : Set Y}
+    (hs : s.base (IsLocalRing.closedPoint K) ∈ S) : Set.range s.base ⊆ S := by
+  rintro _ ⟨p, rfl⟩
+  rwa [Subsingleton.elim p (IsLocalRing.closedPoint K)]
+
+/-- A morphism from the spectrum of a field whose unique point lies in the range of a closed
+immersion `i` factors uniquely through `i`.
+(blueprint: `lemma:openclosed-point-factors`) -/
+theorem IsClosedImmersion.existsUnique_fac_of_field {K : Type u} [Field K] (i : Z ⟶ Y)
+    [IsClosedImmersion i] (s : Spec (CommRingCat.of K) ⟶ Y)
+    (hs : s.base (IsLocalRing.closedPoint K) ∈ Set.range i.base) :
+    ∃! t : Spec (CommRingCat.of K) ⟶ Z, t ≫ i = s :=
+  IsClosedImmersion.existsUnique_fac_of_range_subset_range i s
+    (Scheme.range_base_subset_of_closedPoint_mem s hs)
+
+end Point
 
 end AlgebraicGeometry
