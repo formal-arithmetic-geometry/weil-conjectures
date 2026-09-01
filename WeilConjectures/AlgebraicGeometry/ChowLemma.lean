@@ -26,7 +26,8 @@ isomorphism. Chow's lemma is then the assertion that `ChowModification f` is non
 
 ## Main statements
 
-- `AlgebraicGeometry.chow_lemma` — **Chow's lemma**: a separated morphism of finite type over
+- `AlgebraicGeometry.ChowModification.nonempty_of_isSeparated_and_ofFiniteType`, aliased as
+  `AlgebraicGeometry.chow_lemma` — **Chow's lemma**: a separated morphism of finite type over
   a Noetherian scheme admits a Chow modification.
 
 ## Implementation notes
@@ -34,7 +35,7 @@ isomorphism. Chow's lemma is then the assertion that `ChowModification f` is non
 * `n` is the index type of the *homogeneous* coordinates of `ℙ(n; S)`, so the space Stacks
   writes `ℙⁿ_S` is `ℙ(Fin (n + 1); S)`. Matching `AlgebraicGeometry.ProjectiveSpace` and
   Mathlib's affine space `𝔸(n; S)`, and matching
-  `AlgebraicGeometry.AffineBlowup.exists_isClosedImmersion_comp_projectiveSpaceToSpec`, a
+  `AlgebraicGeometry.AffineBlowup.exists_isClosedImmersion_comp_projectiveSpaceOverAffineToSpec`, a
   Chow modification carries a finite type `n : Type u` rather than a natural number.
 * Mathlib has no bundled `IsFiniteType` for morphisms of schemes, so Stacks' "of finite type"
   is spelled out as the two hypotheses `LocallyOfFiniteType f` and `QuasiCompact f`.
@@ -126,8 +127,11 @@ Finite type is spelled as `LocallyOfFiniteType f` together with `QuasiCompact f`
 immersion `i` is a locally closed immersion, as in Stacks.
 (blueprint: `thm:chow-lemma`) -/
 @[stacks 0200]
-theorem chow_lemma [IsNoetherian S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
-    Nonempty (ChowModification f) :=
+theorem ChowModification.nonempty_of_isSeparated_and_ofFiniteType [IsNoetherian S]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : Nonempty (ChowModification f) :=
   sorry
+
+@[inherit_doc ChowModification.nonempty_of_isSeparated_and_ofFiniteType]
+alias chow_lemma := ChowModification.nonempty_of_isSeparated_and_ofFiniteType
 
 end AlgebraicGeometry

@@ -22,13 +22,15 @@ Here `n : Type u` is the index type of the *homogeneous* coordinates, so that th
 writes `ℙⁿ_S` is `ℙ(Fin (n + 1); S)`.
 
 Mathlib has no relative projective space to reuse, only the absolute `Proj` of a graded ring,
-so everything below is new; the integral model itself is `Proj.projectiveSpace n (ULift.{u} ℤ)`.
+so everything below is new; the integral model itself is
+`Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Proj.projectiveSpace` — the projective space `ℙ^σ_A` over an affine base,
-  i.e. `Proj` of the polynomial ring `A[T]` with its total-degree grading.
-- `AlgebraicGeometry.Proj.projectiveSpaceToSpec` — its structure morphism `ℙ^σ_A ⟶ Spec A`.
+- `AlgebraicGeometry.Proj.projectiveSpaceOverAffine` — the projective space `ℙ^σ_A` over an
+  affine base, i.e. `Proj` of the polynomial ring `A[T]` with its total-degree grading.
+- `AlgebraicGeometry.Proj.projectiveSpaceOverAffineToSpec` — its structure morphism
+  `ℙ^σ_A ⟶ Spec A`.
 - `AlgebraicGeometry.ProjectiveSpace` — `ℙ(n; S)` is the projective `n`-space over `S`, with
   structure morphism `ℙ(n; S) ↘ S`.
 - `AlgebraicGeometry.ProjectiveSpace.map` — functoriality of `ℙ(n; S)` in the base `S`.
@@ -42,7 +44,7 @@ so everything below is new; the integral model itself is `Proj.projectiveSpace n
 
 Mathlib does not make the total-degree grading of `MvPolynomial σ A` a global instance, since
 one may want to grade by another weight function; it is enabled here as a local instance. To
-keep it out of the statements of the results below, `Proj.projectiveSpace σ A` is a plain
+keep it out of the statements of the results below, `Proj.projectiveSpaceOverAffine σ A` is a plain
 definition rather than an abbreviation, so that downstream files need not re-enable the
 instance.
 
@@ -57,10 +59,10 @@ builds relative `Proj`.
 
 ## TODO
 
-- `ℙ(n; Spec A) ≅ Proj.projectiveSpace n A` over `Spec A`, the analogue of
+- `ℙ(n; Spec A) ≅ Proj.projectiveSpaceOverAffine n A` over `Spec A`, the analogue of
   `AlgebraicGeometry.AffineSpace.SpecIso`. This needs `Proj` to commute with base change,
-  which Mathlib does not have, so `Proj.projectiveSpace` and `ProjectiveSpace` are for now two
-  unrelated definitions.
+  which Mathlib does not have, so `Proj.projectiveSpaceOverAffine` and `ProjectiveSpace` are
+  for now two unrelated definitions.
 - The standard affine charts of `ℙ(n; S)`, i.e. morphisms `𝔸(n; S) ⟶ ℙ(n ⊕ Unit; S)` glued
   from `Proj.awayι`. Mathlib has no universal property of `Proj`, so these charts are
   currently the only way to construct morphisms *into* a projective space, and they are a
@@ -71,7 +73,7 @@ builds relative `Proj`.
 `ProjectiveSpace` implements `def:nagata-projective-space-base-change` of the Nagata
 compactification blueprint, which is the base-change substitute for
 `def:nagata-relative-projective-space` described above, and `ProjectiveSpace.instIsProper`
-implements `lemma:nagata-projective-space-base-change-proper`. `Proj.projectiveSpace` is
+implements `lemma:nagata-projective-space-base-change-proper`. `Proj.projectiveSpaceOverAffine` is
 `def:nagata-affine-proj` for a polynomial ring.
 -/
 
@@ -94,19 +96,19 @@ variable (σ : Type u) (A : Type u) [CommRing A]
 /-- The projective space `ℙ^σ_A` over an affine base, defined as `Proj` of the polynomial
 ring `A[T]` in the variables `σ` with its total-degree grading.
 (blueprint: `def:nagata-affine-proj`, for a polynomial ring) -/
-def Proj.projectiveSpace : Scheme.{u} :=
+def Proj.projectiveSpaceOverAffine : Scheme.{u} :=
   Proj (MvPolynomial.homogeneousSubmodule σ A)
 
 /-- The structure morphism `ℙ^σ_A ⟶ Spec A` of the projective space over an affine base. -/
-def Proj.projectiveSpaceToSpec : Proj.projectiveSpace σ A ⟶ Spec (.of A) :=
+def Proj.projectiveSpaceOverAffineToSpec : Proj.projectiveSpaceOverAffine σ A ⟶ Spec (.of A) :=
   Proj.toSpecZero (MvPolynomial.homogeneousSubmodule σ A) ≫
     Spec.map (CommRingCat.ofHom (MvPolynomial.homogeneousSubmoduleZeroEquiv σ A).toRingHom)
 
 /-- **Projective space over an affine base is proper**: for a finite index type `σ`, the
 structure morphism `ℙ^σ_A ⟶ Spec A` is proper. -/
-instance Proj.instIsProperProjectiveSpaceToSpec [Finite σ] :
-    IsProper (Proj.projectiveSpaceToSpec σ A) := by
-  rw [Proj.projectiveSpaceToSpec]
+instance Proj.instIsProperProjectiveSpaceOverAffineToSpec [Finite σ] :
+    IsProper (Proj.projectiveSpaceOverAffineToSpec σ A) := by
+  rw [Proj.projectiveSpaceOverAffineToSpec]
   infer_instance
 
 end Affine
@@ -117,7 +119,7 @@ Note that `n : Type u` indexes the *homogeneous* coordinates, so that the classi
 `ℙ(Fin (n + 1); S)`.
 (blueprint: `def:nagata-projective-space-base-change`) -/
 def ProjectiveSpace (n : Type u) (S : Scheme.{u}) : Scheme.{u} :=
-  pullback (terminal.from S) (terminal.from (Proj.projectiveSpace n (ULift.{u} ℤ)))
+  pullback (terminal.from S) (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)))
 
 namespace ProjectiveSpace
 
@@ -131,7 +133,7 @@ instance over : ℙ(n; S).CanonicallyOver S where
   hom := pullback.fst _ _
 
 /-- The map from the projective `n`-space over `S` to the integral model `ℙⁿ_ℤ`. -/
-def toProjInt : ℙ(n; S) ⟶ Proj.projectiveSpace n (ULift.{u} ℤ) := pullback.snd _ _
+def toProjInt : ℙ(n; S) ⟶ Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ) := pullback.snd _ _
 
 /-- A morphism into `ℙ(n; S)` is determined by its composites with the structure morphism to
 `S` and with the map to the integral model `ℙⁿ_ℤ`. -/
@@ -146,10 +148,11 @@ lemma hom_ext {X : Scheme.{u}} {f g : X ⟶ ℙ(n; S)}
 instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
   have hZ : terminal.from (Spec (.of (ULift.{u} ℤ))) =
       (specULiftZIsTerminal.uniqueUpToIso terminalIsTerminal).hom := terminal.hom_ext _ _
-  have hP : terminal.from (Proj.projectiveSpace n (ULift.{u} ℤ)) =
-      Proj.projectiveSpaceToSpec n (ULift.{u} ℤ) ≫ terminal.from _ := terminal.hom_ext _ _
+  have hP : terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)) =
+      Proj.projectiveSpaceOverAffineToSpec n (ULift.{u} ℤ) ≫ terminal.from _ := terminal.hom_ext _ _
   have : IsIso (terminal.from (Spec (.of (ULift.{u} ℤ)))) := hZ ▸ inferInstance
-  have : IsProper (terminal.from (Proj.projectiveSpace n (ULift.{u} ℤ))) := hP ▸ inferInstance
+  have : IsProper (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) :=
+    hP ▸ inferInstance
   exact inferInstanceAs (IsProper (pullback.fst _ _))
 
 /-- `ℙ(n; S)` is functorial in the base `S`: `map n f` is the unique morphism making
