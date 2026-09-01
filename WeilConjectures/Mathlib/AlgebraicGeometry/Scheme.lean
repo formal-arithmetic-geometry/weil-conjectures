@@ -15,6 +15,10 @@ Mathlib records that taking preimages of opens commutes with arbitrary suprema
 indexed by a finite type, and in that case preimages commute with them as well:
 
 - `AlgebraicGeometry.Scheme.Hom.preimage_iInf`.
+
+We also record that a global section whose non-vanishing locus is everything is a unit:
+
+- `AlgebraicGeometry.Scheme.isUnit_of_basicOpen_eq_top`.
 -/
 
 @[expose] public section
@@ -34,3 +38,13 @@ lemma preimage_iInf {ι : Type*} [Finite ι] (U : ι → Y.Opens) :
     simp only [coe_preimage, Opens.coe_iInf, Set.preimage_iInter]
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme
+
+/-- A global section that vanishes nowhere is a unit. -/
+lemma isUnit_of_basicOpen_eq_top {X : Scheme.{u}} (f : Γ(X, ⊤)) (h : X.basicOpen f = ⊤) :
+    IsUnit f := by
+  refine X.toRingedSpace.isUnit_of_isUnit_germ ⊤ f fun x _ ↦ ?_
+  exact (X.mem_basicOpen_top f x).mp (h.ge trivial)
+
+end AlgebraicGeometry.Scheme
