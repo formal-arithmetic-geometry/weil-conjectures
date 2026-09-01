@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 - `AlgebraicGeometry.Scheme.Hom.Etale`: the base change functor `Y.Etale ⥤ X.Etale`
   along a morphism `f : X ⟶ Y`; it preserves finite limits, and it is compatible with the
   projections `V ×_Y X ⟶ V` by
-  `AlgebraicGeometry.Scheme.Hom.Etale_map_left_comp_fst`.
+  `AlgebraicGeometry.Scheme.Hom.etale_map_left_comp_fst`.
 - `AlgebraicGeometry.Scheme.mem_smallEtaleTopology_iff`: a sieve on an object of the small
   étale site is a covering exactly when the arrows in it are jointly surjective. This is the
   sieve-level form of
@@ -70,7 +70,7 @@ to the original étale `Y`-schemes:
       V ────────────g.left────────────→  U
 ```
 -/
-lemma Hom.Etale_map_left_comp_fst (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
+lemma Hom.etale_map_left_comp_fst (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
     (f.Etale.map g).left ≫ pullback.fst U.hom f = pullback.fst V.hom f ≫ g.left :=
   pullback.lift_fst _ _ _
 
@@ -85,19 +85,15 @@ the family of all its arrows. -/
 lemma mem_smallEtaleTopology_iff {U : X.Etale} (S : Sieve U) :
     S ∈ X.smallEtaleTopology U ↔
       ∀ x : U.left, ∃ (V : X.Etale) (g : V ⟶ U), S g ∧ x ∈ Set.range g.left := by
-  have hS : Sieve.ofArrows (fun i : Σ V : X.Etale, { g : V ⟶ U // S g } ↦ i.1)
-      (fun i ↦ i.2.1) = S := by
+  let ι := Σ V : X.Etale, { g : V ⟶ U // S g }
+  have hS : Sieve.ofArrows (fun i : ι ↦ i.1) (fun i ↦ i.2.1) = S := by
     apply le_antisymm
     · rw [Sieve.ofArrows, Sieve.generate_le_iff]
       rintro V g ⟨i⟩
       exact i.2.2
     · intro V g hg
-      refine ⟨V, 𝟙 V, g, ?_, by simp⟩
-      exact Presieve.ofArrows.mk (⟨V, g, hg⟩ : Σ V : X.Etale, { g : V ⟶ U // S g })
-  have key := ofArrows_mem_smallEtaleTopology_iff
-    (fun i : Σ V : X.Etale, { g : V ⟶ U // S g } ↦ i.2.1)
-  rw [hS] at key
-  rw [key]
+      exact ⟨V, 𝟙 V, g, Presieve.ofArrows.mk (⟨V, g, hg⟩ : ι), by simp⟩
+  conv_lhs => rw [← hS, ofArrows_mem_smallEtaleTopology_iff]
   simp only [Set.eq_univ_iff_forall, Set.mem_iUnion]
   constructor
   · intro h x

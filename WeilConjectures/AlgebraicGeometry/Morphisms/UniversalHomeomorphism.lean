@@ -47,7 +47,7 @@ corresponding properties of the three defining classes.
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits MorphismProperty
+open CategoryTheory Limits MorphismProperty
 
 namespace AlgebraicGeometry
 
@@ -60,12 +60,20 @@ on underlying spaces. -/
 class IsUniversalHomeomorphism (f : X ⟶ Y) : Prop
     extends IsIntegralHom f, UniversallyInjective f, Surjective f
 
+/-- As a `MorphismProperty`, being a universal homeomorphism is the infimum of being
+integral, universally injective and surjective. -/
 theorem isUniversalHomeomorphism_eq :
     @IsUniversalHomeomorphism = (@IsIntegralHom ⊓ @UniversallyInjective ⊓ @Surjective :
       MorphismProperty Scheme.{u}) := by
   ext X Y f
   rw [isUniversalHomeomorphism_iff]
   exact and_assoc.symm
+
+/-- A universal homeomorphism is a homeomorphism on underlying topological spaces. -/
+theorem Scheme.Hom.isHomeomorph (f : X ⟶ Y) [IsUniversalHomeomorphism f] :
+    IsHomeomorph f.base :=
+  isHomeomorph_iff_continuous_isClosedMap_bijective.mpr
+    ⟨f.continuous, f.isClosedMap, f.injective, f.surjective⟩
 
 namespace IsUniversalHomeomorphism
 
@@ -75,6 +83,9 @@ instance : IsStableUnderComposition @IsUniversalHomeomorphism.{u} :=
 instance : IsStableUnderBaseChange @IsUniversalHomeomorphism.{u} :=
   isUniversalHomeomorphism_eq ▸ inferInstance
 
+/-- An isomorphism is a universal homeomorphism. This is subsumed by the instance for
+surjective closed immersions below, but is kept as a short cut for the instance search
+behind `IsMultiplicative.id_mem`. -/
 instance (f : X ⟶ Y) [IsIso f] : IsUniversalHomeomorphism f where
 
 instance : IsMultiplicative @IsUniversalHomeomorphism.{u} where
@@ -97,13 +108,15 @@ thickening is a universal homeomorphism, which is the case of [Stacks 03SI] usua
 as invariance of the étale site under nilpotent thickenings. -/
 instance (f : X ⟶ Y) [IsClosedImmersion f] [Surjective f] : IsUniversalHomeomorphism f where
 
-end IsUniversalHomeomorphism
+/-- The homeomorphism of underlying topological spaces induced by a universal
+homeomorphism.
 
-/-- A universal homeomorphism is a homeomorphism on underlying topological spaces. -/
-theorem Scheme.Hom.isHomeomorph (f : X ⟶ Y) [IsUniversalHomeomorphism f] :
-    IsHomeomorph f.base :=
-  isHomeomorph_iff_continuous_isClosedMap_bijective.mpr
-    ⟨f.continuous, f.isClosedMap, f.injective, f.surjective⟩
+This is not called `Scheme.Hom.homeomorph`, since that name is taken by the homeomorphism
+attached to an isomorphism of schemes. -/
+noncomputable def homeomorph (f : X ⟶ Y) [IsUniversalHomeomorphism f] : X ≃ₜ Y :=
+  f.isHomeomorph.homeomorph
+
+end IsUniversalHomeomorphism
 
 /-- **A universal homeomorphism stays a homeomorphism after an arbitrary base change**: this
 is the nontrivial direction of [Stacks 04DF] for the definition of
@@ -115,15 +128,6 @@ theorem isUniversalHomeomorphism_le_universally_isHomeomorph :
   rw [← IsStableUnderBaseChange.universally_eq (P := @IsUniversalHomeomorphism.{u})]
   refine universally_mono ?_
   intro X Y f hf
-  exact @Scheme.Hom.isHomeomorph X Y f hf
-
-/-- The homeomorphism of underlying topological spaces induced by a universal
-homeomorphism.
-
-This is not called `Scheme.Hom.homeomorph`, since that name is taken by the homeomorphism
-attached to an isomorphism of schemes. -/
-noncomputable def IsUniversalHomeomorphism.homeomorph (f : X ⟶ Y)
-    [IsUniversalHomeomorphism f] : X ≃ₜ Y :=
-  f.isHomeomorph.homeomorph
+  exact f.isHomeomorph
 
 end AlgebraicGeometry

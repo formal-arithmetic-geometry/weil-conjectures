@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 /-!
 # Precomposition with an isomorphism on `Ext`-groups
 
+## Main definitions
+
 - `CategoryTheory.Abelian.Ext.precompAddEquiv`: an isomorphism `e : X ≅ X'` induces an
   isomorphism `Ext X' Z n ≃+ Ext X Z n` of `Ext`-groups by precomposition.
 -/
@@ -28,7 +30,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] {X X' : C}
 noncomputable def precompAddEquiv (e : X ≅ X') (Z : C) (n : ℕ) : Ext X' Z n ≃+ Ext X Z n where
   __ := (Ext.mk₀ e.hom).precomp Z (zero_add n)
   invFun := (Ext.mk₀ e.inv).precomp Z (zero_add n)
-  left_inv α := by simp [Ext.mk₀_comp_mk₀_assoc]
-  right_inv α := by simp [Ext.mk₀_comp_mk₀_assoc]
+  left_inv _ := by simp [Ext.mk₀_comp_mk₀_assoc]
+  right_inv _ := by simp [Ext.mk₀_comp_mk₀_assoc]
 
 end CategoryTheory.Abelian.Ext
