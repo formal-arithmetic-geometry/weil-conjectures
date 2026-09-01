@@ -144,6 +144,13 @@ lemma hom_ext {X : Scheme.{u}} {f g : X ⟶ ℙ(n; S)}
     (h₂ : f ≫ toProjInt n S = g ≫ toProjInt n S) : f = g :=
   pullback.hom_ext h₁ h₂
 
+/-- The defining pullback square of `ℙ(n; S)`: it is the base change of the integral model
+`ℙⁿ_ℤ` along the structure morphism of `S`. -/
+lemma isPullback_over_toProjInt :
+    IsPullback (ℙ(n; S) ↘ S) (toProjInt n S) (terminal.from S)
+      (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) :=
+  IsPullback.of_hasPullback _ _
+
 /-- **`ℙ(n; S)` is proper over `S`**: for a finite index type `n`, the structure morphism
 `ℙ(n; S) ↘ S` is proper, being a base change of the proper morphism `ℙⁿ_ℤ ⟶ Spec ℤ`. -/
 instance instIsProper [Finite n] : IsProper (ℙ(n; S) ↘ S) := by
