@@ -72,7 +72,7 @@ variable (n R) in
 sending `Tᵢ` to `Tᵢ / T₀`. It is inverse to the map induced by `dehomogenize`, see
 `MvPolynomial.dehomogenizeEquiv`. -/
 noncomputable def homogenizeAway : MvPolynomial n R →+* Away 𝒜 (X none) :=
-  eval₂Hom ((fromZeroRingHom 𝒜 _).comp homogeneousSubmoduleZeroEquiv.toRingHom)
+  eval₂Hom ((fromZeroRingHom 𝒜 _).comp (homogeneousSubmoduleZeroEquiv (Option n) R).toRingHom)
     fun i ↦ Away.mk 𝒜 isHomogeneous_X_none 1 (X (some i))
       (by simpa using isHomogeneous_X R (some i))
 
@@ -90,7 +90,8 @@ lemma homogenizeAway_X (i : n) :
 
 @[simp]
 lemma homogenizeAway_C (r : R) :
-    homogenizeAway n R (C r) = fromZeroRingHom 𝒜 _ (homogeneousSubmoduleZeroEquiv r) := by
+    homogenizeAway n R (C r) =
+      fromZeroRingHom 𝒜 _ (homogeneousSubmoduleZeroEquiv (Option n) R r) := by
   simp [homogenizeAway]
 
 @[simp]

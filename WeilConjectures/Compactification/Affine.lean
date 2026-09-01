@@ -64,7 +64,8 @@ noncomputable def Compactification.ofIsImmersionAffineSpace {n : Type u} [Finite
     rw [Category.assoc, AffineSpace.toRelativeProjectiveSpace_over, hi]
   have : QuasiCompact ((i ≫ AffineSpace.toRelativeProjectiveSpace n S) ≫ ℙ(Option n; S) ↘ S) :=
     hfac ▸ ‹QuasiCompact f›
-  have : QuasiCompact (i ≫ AffineSpace.toRelativeProjectiveSpace n S) := .of_comp _ (ℙ(Option n; S) ↘ S)
+  have : QuasiCompact (i ≫ AffineSpace.toRelativeProjectiveSpace n S) :=
+    .of_comp _ (ℙ(Option n; S) ↘ S)
   (Compactification.ofIsImmersion (i ≫ AffineSpace.toRelativeProjectiveSpace n S)
     (ℙ(Option n; S) ↘ S)).copy hfac.symm
 

@@ -8,6 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+
 /-!
 # Morphisms into the integral model of affine space
 
@@ -24,11 +30,8 @@ of affine space in the base, in `AlgebraicGeometry.AffineSpace.homOfVector_comp_
 Finally, `AlgebraicGeometry.AffineSpace.isClosedImmersion_homOfVector` is the criterion for a
 morphism into an affine space over an affine base to be a closed immersion.
 
-public import Mathlib.AlgebraicGeometry.QuasiAffine
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+
+-/
 
 /-!
 # Immersions of quasi-affine schemes into relative affine space
@@ -121,7 +124,6 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-universe u
 
 namespace AffineSpace
 
@@ -421,7 +423,7 @@ variable {X : Scheme.{u}}
 
 /-- If the coordinates of `G` are used as the defining vector, `homOfVector` composed with the
 base-change map recovers `G`. -/
-lemma AffineSpace.homOfVector_comp_map {σ : Type u} {S T Z : Scheme.{u}} (p : Z ⟶ S)
+lemma AffineSpace.homOfVector_coord_comp_map {σ : Type u} {S T Z : Scheme.{u}} (p : Z ⟶ S)
     (h : S ⟶ T) (G : Z ⟶ 𝔸(σ; T)) (hG : G ≫ 𝔸(σ; T) ↘ T = p ≫ h) :
     AffineSpace.homOfVector p (fun j ↦ G.appTop (AffineSpace.coord T j)) ≫
       AffineSpace.map σ h = G := by

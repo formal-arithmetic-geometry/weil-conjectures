@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Gluing
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
+
 /-!
 # Gluing morphisms defined on a family of opens
 
@@ -38,9 +42,8 @@ scheme-theoretically dense open `D` contained in every `U i`. We record:
   `AlgebraicGeometry.Scheme.Opens.glueMorphismsOfDominant_comp` saying that it restricts to
   `g i` on `U i` and is a morphism over `S`.
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Basic
-public import Mathlib.AlgebraicGeometry.PullbackCarrier
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
+
+-/
 
 /-!
 # Pushouts of open immersions of schemes

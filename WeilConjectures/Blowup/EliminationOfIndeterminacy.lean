@@ -1037,7 +1037,7 @@ lemma Scheme.isClosed_preimage_range_pullbackLift {X Bl : Scheme.{u}} {σ : Type
   have hdel_over : del ≫ (𝔸(σ; Spec R) ↘ Spec R) = (chart ⁻¹ᵁ W).ι :=
     AffineSpace.homOfVector_over _ _
   have hdel_map : del ≫ AffineSpace.map σ (chart ≫ π) = lam ≫ g := by
-    refine AffineSpace.homOfVector_comp_map _ _ _ ?_
+    refine AffineSpace.homOfVector_coord_comp_map _ _ _ ?_
     rw [Category.assoc, hg, ← Category.assoc, hlam, Category.assoc]
   have hdelq : del ≫ q = lam ≫ pullback.lift W.ι g hg.symm := by
     refine pullback.hom_ext ?_ ?_

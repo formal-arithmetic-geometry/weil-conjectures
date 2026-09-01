@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+
 /-!
 # Complements on immersions
 
@@ -19,7 +21,8 @@ Two unrelated additions to Mathlib's `AlgebraicGeometry.IsImmersion`:
   whose components is an immersion is itself an immersion. Here the fibre product over `S` is
   the categorical product in `Over S`.
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+
+-/
 
 /-!
 # Immersions respect open immersions on the right
@@ -69,6 +72,8 @@ lemma isImmersion_left_pi_lift (i : ι) (h : IsImmersion (g i).left) :
   have : IsImmersion ((Pi.lift g).left ≫ (Pi.π Y i).left) := by
     rw [← Over.comp_left, Pi.lift_π]; infer_instance
   exact .of_comp _ (Pi.π Y i).left
+
+end AlgebraicGeometry
 
 open CategoryTheory TopologicalSpace
 

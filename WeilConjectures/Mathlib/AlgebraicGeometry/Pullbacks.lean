@@ -10,6 +10,12 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Tactic.CategoryTheory.Reassoc
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+
 /-!
 # Fibre products of affine schemes over the terminal scheme
 
@@ -41,11 +47,8 @@ already an instance in Mathlib, since `⊤_ Scheme` is affine.
 The `ULift ℤ`-algebra structure on a commutative ring `A : Type u` is `ULift.algebra'`, which is a
 def rather than an instance; it is enabled as a local instance in this file.
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Mathlib.Tactic.CategoryTheory.Reassoc
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+
+-/
 
 /-!
 
@@ -270,11 +273,9 @@ lemma Scheme.Pullback.opensRange_openCoverOfLeftRight_f {X Y Z : Scheme.{u}}
     Scheme.Pullback.openCoverOfLeftRight_f]
   rfl
 
+end AlgebraicGeometry
+
 noncomputable section
-
-universe u
-
-open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 

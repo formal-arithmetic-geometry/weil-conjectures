@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.Topology.Sober
 
+
 /-!
 # Affine opens through the generic points of the irreducible components
 
@@ -37,6 +38,7 @@ The key geometric ingredient is
 `AlgebraicGeometry.IsAffineOpen.exists_mem_basicOpen_and_disjoint`, the scheme-theoretic form of
 Stacks Project Tag 00EV.
 
+-/
 
 /-!
 # Shrinking the base of a pair of quasi-compact opens

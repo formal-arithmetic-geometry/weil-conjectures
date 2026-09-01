@@ -54,7 +54,7 @@ lemma isUnit_of_basicOpen_eq_top {X : Scheme.{u}} (f : Γ(X, ⊤)) (h : X.basicO
   refine X.toRingedSpace.isUnit_of_isUnit_germ ⊤ f fun x _ ↦ ?_
   exact (X.mem_basicOpen_top f x).mp (h.ge trivial)
 
-open CategoryTheory
+end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 

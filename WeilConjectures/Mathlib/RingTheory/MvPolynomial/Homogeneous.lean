@@ -148,7 +148,7 @@ lemma IsHomogeneous.eval₂Hom_const_mul {σ R S : Type*} [CommSemiring R]
 its value at `g`. The `eval₂` form of `MvPolynomial.IsHomogeneous.eval₂Hom_const_mul`. -/
 theorem IsHomogeneous.eval₂_const_mul {σ R S : Type*} [CommSemiring R] [CommSemiring S]
     {φ : MvPolynomial σ R} {n : ℕ} (hφ : φ.IsHomogeneous n) (f : R →+* S) (c : S) (g : σ → S) :
-    eval₂ f (fun i ↦ c * g i) φ = c ^ n * eval₂ f g φ :=
+    _root_.MvPolynomial.eval₂ f (fun i ↦ c * g i) φ = c ^ n * _root_.MvPolynomial.eval₂ f g φ :=
   hφ.eval₂Hom_const_mul f c g
 
 /-- Every variable is homogeneous of degree one for the total-degree grading. -/
