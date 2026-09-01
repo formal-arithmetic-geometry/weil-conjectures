@@ -3551,6 +3551,7 @@ closed subscheme of the first blow-up.
   \uses{def:nagata-admissible-blowup,
     thm:nagata-global-blowup-complement}
   \lean{AlgebraicGeometry.IsAdmissible.isIso_blowupMap_restrict}
+  \leanok
 
   If $\pi\colon X'\to X$ is $U$-admissible, then its center ideal restricts to
   the unit ideal on $U$, and the induced morphism
@@ -3559,6 +3560,7 @@ closed subscheme of the first blow-up.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Choose the ideal and blow-up identification from
   \Cref{def:nagata-admissible-blowup}.  The unit-ideal restriction is the
   disjointness condition on the center.  Apply
@@ -3572,6 +3574,7 @@ closed subscheme of the first blow-up.
   \uses{def:nagata-scheme-theoretic-closure,
     def:nagata-global-blowup}
   \lean{AlgebraicGeometry.strictTransform}
+  \leanok
 
   Let $Z\to X$ be a morphism and let $X'\to X$ be the blow-up of a
   finite-presentation center $C\subseteq X$.  Put $U=X\setminus C$; then
@@ -3627,6 +3630,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Power-torsion submodule]
   \label{def:nagata-power-torsion}
   \lean{Submodule.powTorsion}
+  \leanok
 
   Let $R$ be a ring, let $M$ be an $R$-module, and let $a\in R$.  Define
   \[
@@ -3639,12 +3643,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-power-torsion-submodule}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.powTorsion}
+  \leanok
 
   The subset $\Gamma_{(a)}(M)$ contains zero and is closed under addition and
   scalar multiplication.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Zero is killed by $a^0$.  If $a^mm_1=0$ and $a^nm_2=0$, then
   $a^{m+n}(m_1+m_2)=0$.  If $r\in R$, then
   $a^m(rm_1)=r(a^mm_1)=0$.
@@ -3654,6 +3660,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-mem-power-torsion}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.mem_powTorsion_iff}
+  \leanok
 
   One has
   \[
@@ -3665,6 +3672,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   This is the defining membership condition of
   \Cref{def:nagata-power-torsion}; it should be registered as the simp theorem
   for that definition.
@@ -3674,6 +3682,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-power-torsion-kernel-localization}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.powTorsion_eq_ker_localization}
+  \leanok
 
   The power-torsion submodule is the kernel of the localization map
   \[
@@ -3682,6 +3691,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   An element maps to zero in localization away from the powers of $a$ exactly
   when it is killed by one element of that multiplicative system, namely by a
   power of $a$.
@@ -3690,6 +3700,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Localization of power torsion]
   \label{lemma:nagata-power-torsion-localization}
   \lean{Submodule.localized'_powTorsion}
+  \leanok
 
   Let $s\in R$.  Under localization at $s$, the image of
   $\Gamma_{(a)}(M)$ is
@@ -3698,6 +3709,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-power-torsion-kernel-localization}
+  \leanok
   Localize the kernel description in
   \Cref{lemma:nagata-power-torsion-kernel-localization}.  Localization is flat,
   so it preserves this kernel.  The iterated localization $(M_s)_{a/1}$ is
@@ -3708,12 +3720,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-power-torsion-quotient-torsionfree}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.powTorsion_quotient_eq_bot}
+  \leanok
 
   Multiplication by $a$ on $M/\Gamma_{(a)}(M)$ is injective.  More generally,
   no nonzero class in the quotient is killed by a power of $a$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   If $a^n[m]=0$, then $a^nm$ belongs to the power-torsion submodule, so some
   further power of $a$ kills $m$.  Thus $m$ already represents zero in the
   quotient.
@@ -3829,6 +3843,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-chart-map-surjective}
   \uses{def:nagata-strict-chart-to-extended-blowup-chart}
   \lean{AlgebraicGeometry.AffineBlowup.closure_range_awayAlgebraMap_union_range_awayMap}
+  \leanok
 
   The constructed homomorphism $\sigma_a$ is surjective.
 \end{lemma}
@@ -3836,6 +3851,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-strict-chart-to-extended-blowup-chart,
     lemma:nagata-chart-ring-normal-form}
+  \leanok
   By \Cref{lemma:nagata-chart-ring-normal-form}, the target is generated as a
   $B$-algebra by the fractions $z/b$ with $z\in J$.  Write
   $z=\sum_k y_k\overline{x_k}$ with $x_k\in I$.  Then
@@ -4028,6 +4044,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-power-torsion,
     lemma:nagata-power-torsion-kernel-localization}
   \lean{Submodule.localized'_powTorsion}
+  \leanok
 
   Let $R$ be a ring, $N$ an $R$-module, and $a,s\in R$.  Under the canonical
   localization map one has
@@ -4045,6 +4062,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The power-torsion submodule is the kernel of the map
   $N\to N_a$ by
   \Cref{lemma:nagata-power-torsion-kernel-localization}.  Localization at
@@ -4136,6 +4154,7 @@ correction explicit before it is sheafified and glued.
     thm:nagata-blowup-universal-property,
     lemma:nagata-strict-chart-map-surjective}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion_pullbackLift_blowup_comap}
+  \leanok
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a quasi-coherent ideal on $X$,
   and put $X'=\operatorname{Bl}_{\mathcal I}(X)$.  The pullback of
@@ -4166,6 +4185,7 @@ correction explicit before it is sheafified and glued.
   \label{thm:nagata-strict-transform-is-blowup}
   \uses{def:nagata-strict-transform-blowup-comparison}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform}
+  \leanok
 
   Under the preceding hypotheses, the comparison morphism
   $\psi_{f,\mathcal I}$ identifies the blow-up of $Y$ in the extended ideal
@@ -4181,6 +4201,7 @@ correction explicit before it is sheafified and glued.
     thm:nagata-blowup-universal-property,
     lemma:nagata-admissible-blowup-preserves-density,
     def:nagata-scheme-theoretic-closure}
+  \leanok
   Write $U=X\setminus V(\mathcal I)$ and let
   $\Omega\subseteq Y\times_XX'$ be the open locus over $U$, whose
   scheme-theoretic closure is the strict transform
@@ -4211,6 +4232,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Scheme-theoretic closure characterization]
   \label{lemma:nagata-strict-transform-closure-characterization}
   \lean{AlgebraicGeometry.strictTransform}
+  \leanok
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$, put $X'=\operatorname{Bl}_{\mathcal I}(X)$, and let
@@ -4227,6 +4249,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-power-torsion-quotient-torsionfree,
     lemma:nagata-power-torsion-kernel-localization,
     prop:nagata-strict-transform-closed-fiber-product}
+  \leanok
   On an $a$-chart put $C=C_a(A,B,I)$.  A closed subscheme containing the
   preserved open is given by a quotient $C\twoheadrightarrow C/K$ for which
   $K_a=0$.  By
@@ -4283,6 +4306,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Strict transform on the preserved open]
   \label{lemma:nagata-strict-transform-over-complement}
   \lean{AlgebraicGeometry.isPullback_strictTransformOpen}
+  \leanok
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
   ideal, and put $X'=\operatorname{Bl}_{\mathcal I}(X)$.  Over
@@ -4294,6 +4318,7 @@ correction explicit before it is sheafified and glued.
   \uses{thm:nagata-global-blowup-complement,
     lemma:nagata-strict-transform-closure-characterization,
     prop:nagata-strict-transform-closed-fiber-product}
+  \leanok
   The blow-up is the identity over $U$ by
   \Cref{thm:nagata-global-blowup-complement}.  Under this specified
   isomorphism the open whose closure defines the strict transform is all of
@@ -4358,6 +4383,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-admissible-blowup-comp}
   \uses{def:nagata-admissible-blowup}
   \lean{AlgebraicGeometry.IsAdmissible.exists_comp}
+  \leanok
 
   Let $X$ be quasi-compact and quasi-separated and let $U\subseteq X$ be
   quasi-compact.  A composition of two $U$-admissible blow-ups is a
@@ -4368,6 +4394,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{thm:nagata-composition-of-blowups,
     lemma:nagata-admissible-blowup-over-open}
+  \leanok
   Apply \Cref{thm:nagata-composition-of-blowups}.  It writes the composite as
   the blow-up of a finite-presentation center $Y\hookrightarrow X$ whose
   support is the union of the first center and the image of the second center.
@@ -4387,6 +4414,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-global-blowup,
     thm:nagata-global-blowup-proper}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap}
+  \leanok
 
   Let $X$ be a scheme and let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$.  Its blow-up is proper over $X$.  In particular,
@@ -4395,6 +4423,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{thm:nagata-global-blowup-proper}
+  \leanok
   A finite type quasi-coherent ideal defines the global blow-up of
   \Cref{def:nagata-global-blowup}.  Its structure map is proper by
   \Cref{thm:nagata-global-blowup-proper}.  An admissible blow-up is a blow-up
@@ -4405,6 +4434,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-restrict}
   \uses{def:nagata-strict-transform}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap}
+  \leanok
 
   Let $X'\to X$ be the blow-up of a center $C\hookrightarrow X$.  Over
   $X\setminus C$, the strict transform is canonically the ordinary pullback.
@@ -4414,6 +4444,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-strict-transform-over-complement}
+  \leanok
   This is exactly
   \Cref{lemma:nagata-strict-transform-over-complement}, applied to the ideal
   defining $C$.  The compatibility with the projection is part of that
@@ -4424,6 +4455,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-ambient-closed}
   \uses{def:nagata-strict-transform}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_isClosedImmersion_blowup_comap}
+  \leanok
 
   Let $Z\hookrightarrow X$ be a closed immersion and let $X'\to X$ be a
   blow-up.  Blowing up $Z$ in the pulled-back center gives the strict transform
@@ -4435,6 +4467,7 @@ correction explicit before it is sheafified and glued.
   \uses{thm:nagata-strict-transform-is-blowup,
     prop:nagata-strict-transform-chart-iso,
     prop:nagata-strict-transform-closed-fiber-product}
+  \leanok
   By \Cref{thm:nagata-strict-transform-is-blowup}, the strict transform is the
   blow-up of $Z$ in the extended center ideal.  On an affine chart
   $X=\operatorname{Spec}(A)$ with $Z=\operatorname{Spec}(B)$, the induced
@@ -4475,6 +4508,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-finite-type-ideal-extension}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq}
+  \leanok
 
   Let $X$ be quasi-compact and quasi-separated, let $W\subseteq X$ be a
   quasi-compact open, and let
@@ -4493,6 +4527,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-extend-finite-type-ideal}
   \uses{def:nagata-finite-type-ideal-extension}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq}
+  \leanok
 
   The sheaf $\operatorname{Ext}_{X,W}(\mathcal J)$ is a finite type
   quasi-coherent ideal on $X$, and its restriction to $W$ is
@@ -4501,6 +4536,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
+  \leanok
   The selected ideal is required to have these two properties in
   \Cref{def:nagata-finite-type-ideal-extension}; the witness type is nonempty
   by \Cref{lemma:nagata-finite-type-ideal-extension-exists}.
@@ -4510,6 +4546,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-finite-type-ideal-compact}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup,
     AlgebraicGeometry.Scheme.IdealSheafData.exists_mem_le_of_ofFiniteType_le_sSup}
+  \leanok
 
   Let $X$ be quasi-compact, let $\mathcal A\subseteq\mathcal O_X$ be a finite
   type quasi-coherent ideal, and let $(\mathcal B_\alpha)_\alpha$ be a nonempty
@@ -4519,6 +4556,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   On an affine open $\operatorname{Spec}(R)$ the assertion is that a finitely
   generated ideal of $R$ contained in the union of a directed family of ideals
   is already contained in one member: each of the finitely many generators lies
@@ -4537,6 +4575,7 @@ correction explicit before it is sheafified and glued.
     AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le,
     AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_comap_eq_top_eq,
     AlgebraicGeometry.Scheme.IdealSheafData.exists_ofFiniteType_le_comap_eq_top_of_le}
+  \leanok
 
   Let $X$ be qcqs and let $\mathcal H\subseteq\mathcal O_X$ be a quasi-coherent
   ideal.  The finite type quasi-coherent subideals of $\mathcal H$ form a family
@@ -4551,6 +4590,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
+  \leanok
   The family of finite type subideals is closed under sums, hence directed, and
   its union is contained in $\mathcal H$.  For the reverse inclusion let $V$ be
   an affine open and $a\in\mathcal H(V)$.  The ideal $\mathcal J\subseteq
@@ -4580,6 +4620,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-global-blowup,
     lemma:nagata-glue-finite-type-ideals}
   \lean{AlgebraicGeometry.IsAdmissible.exists_extend}
+  \leanok
 
   Let $X$ be quasi-compact and quasi-separated and let $U,W\subseteq X$ be
   quasi-compact opens.  Write a given $(U\cap W)$-admissible blow-up of $W$
@@ -4605,6 +4646,7 @@ correction explicit before it is sheafified and glued.
   \lean{AlgebraicGeometry.IsAdmissible.exists_extend,
     AlgebraicGeometry.IsAdmissible.exists_extend_of_disjoint,
     AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint}
+  \leanok
 
   The constructed morphism
   $\mathsf{ExtBl}_{X,W,U}(\mathcal J)\to X$ is $U$-admissible, and its
@@ -4615,6 +4657,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-extend-finite-type-ideal,
     thm:nagata-blowup-flat-base-change}
+  \leanok
   By \Cref{lemma:nagata-extend-finite-type-ideal}, the ideal
   $\mathcal I_X(\mathcal J)$ is finite type, restricts to $\mathcal J$ on
   $W$, and restricts to the unit ideal on $U$.  Its blow-up is therefore
@@ -4635,6 +4678,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-product-ideal-common-blowup}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso,
     AlgebraicGeometry.IsAdmissible.mul}
+  \leanok
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $\mathcal I_1,\mathcal I_2$ be finite-type quasi-coherent ideals on $X$ with
@@ -4647,6 +4691,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{cor:nagata-blowup-product-common-refinement,
     thm:nagata-global-blowup-complement}
+  \leanok
   Let $\pi_i\colon\operatorname{Bl}_{\mathcal I_1\mathcal I_2}(X)
   \to\operatorname{Bl}_{\mathcal I_i}(X)$ be the two maps supplied by
   \Cref{cor:nagata-blowup-product-common-refinement}.  The product ideal is
@@ -4659,6 +4704,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-qc-open-complement-ideal-exists}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   Let $W\subseteq Y$ be a quasi-compact open in a qcqs scheme.  There exists
   a finite type quasi-coherent ideal $\mathcal I\subseteq\mathcal O_Y$ such
@@ -4666,6 +4712,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $\mathcal K\subseteq\mathcal O_Y$ be the quasi-coherent ideal defining
   the reduced induced closed subscheme on $Y\setminus W$.  Its restriction to
   $W$ is the unit ideal.  Apply the general submodule form of
@@ -4687,6 +4734,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-effective-cartier-ideal,
     lemma:nagata-qc-open-complement-ideal-exists}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary}
+  \leanok
 
   Let $X$ be qcqs and let $U\subseteq X$ be a quasi-compact open.  There is a
   $U$-admissible blow-up $X_1\to X$ for which the complement of the inverse
@@ -4697,6 +4745,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-qc-open-complement-ideal-exists,
     thm:nagata-blowup-principalizes-center,
     thm:nagata-global-blowup-complement}
+  \leanok
   Choose the finite type quasi-coherent ideal $\mathcal I$ with
   $V(\mathcal I)=X\setminus U$ supplied by
   \Cref{lemma:nagata-qc-open-complement-ideal-exists}.  Its restriction to
@@ -4713,6 +4762,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-flat-pullback}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isPullback}
+  \leanok
 
   Let \(h\colon U\to X\) be quasi-compact and quasi-separated with
   scheme-theoretic image \(X\), and let
@@ -4725,6 +4775,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-scheme-image-flat-base-change}
+  \leanok
   By \Cref{lemma:nagata-scheme-image-flat-base-change}, the scheme-theoretic
   image after pullback is canonically the pullback of the scheme-theoretic
   image of $h$.  By hypothesis that image is $X$, and its pullback along
@@ -5204,6 +5255,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-admissible-blowup,def:nagata-strict-transform,
     def:nagata-flattening-ideal}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap}
+  \leanok
 
   Let $q\colon Z\to X$ be separated and of finite type, let $X$ be qcqs, and
   let $U\subseteq X$ be quasi-compact.  Fix an isomorphism
@@ -5228,6 +5280,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-elimination-indeterminacy}
   \uses{def:nagata-elimination-indeterminacy}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap}
+  \leanok
 
   The morphism $X^{\mathrm{el}}(q,U)\to X$ is $U$-admissible, and the
   constructed strict-transform projection
@@ -5245,6 +5298,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-flattening-ideal}
+  \leanok
   By \Cref{lemma:nagata-flattening-ideal}, the selected ideal is finite type,
   is the unit ideal on $U$, and has open strict-transform projection.  The
   first two properties make its blow-up $U$-admissible; the last property and
@@ -5290,6 +5344,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-qc-open-complement-ideal}
   \uses{lemma:nagata-qc-open-complement-ideal-exists}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   Let $W\subseteq Y$ be a quasi-compact open in a qcqs scheme.  Choose one
   witness supplied by
@@ -5303,6 +5358,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-qc-open-complement-ideal}
   \uses{def:nagata-qc-open-complement-ideal}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   The ideal $\mathcal I_Y(W)$ is finite type and quasi-coherent, and
   \[
@@ -5312,6 +5368,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-qc-open-complement-ideal-exists}
+  \leanok
   The witness supplied by
   \Cref{lemma:nagata-qc-open-complement-ideal-exists} has exactly these
   fields, and the definition selects its ideal component.  Projecting those
@@ -5400,6 +5457,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-separate-closed-data-exists,
     def:nagata-global-blowup,def:nagata-strict-transform}
   \lean{AlgebraicGeometry.separationBlowup}
+  \leanok
 
   Under the hypotheses of
   \Cref{lemma:nagata-separate-closed-data-exists}, choose its center
@@ -5414,6 +5472,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-separate-closed-subschemes}
   \uses{def:nagata-separate-closed-subschemes}
   \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_sup}
+  \leanok
 
   The morphism $\mathsf{SepBl}_U(Z_1,Z_2)\to X$ is $U$-admissible, and the
   strict transforms of $Z_1$ and $Z_2$ in it are disjoint.
@@ -5422,6 +5481,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-separate-closed-data-exists,
     lemma:nagata-strict-transform-ambient-closed}
+  \leanok
   The selected center is disjoint from $U_Z$, hence its image in $X$ is
   disjoint from $U$.  A composite of finite-presentation closed immersions is
   finite presentation, so the ambient center is finite presentation and its
@@ -5449,6 +5509,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-constructible-closed-support}
   \uses{def:nagata-qc-open-complement-ideal}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   Let $T\subseteq U$ be constructible and closed, with $U$ qcqs.  Its
   complement $W=U\setminus T$ is a quasi-compact open.  Define
@@ -5462,6 +5523,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-constructible-closed-support}
   \uses{def:nagata-constructible-closed-support}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   The ideal $\mathcal J_U(T)$ is finite type and quasi-coherent, and its
   vanishing set is exactly $T$.
@@ -5469,6 +5531,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-qc-open-complement-ideal}
+  \leanok
   An open constructible subset of a spectral space is quasi-compact.  Apply
   \Cref{lemma:nagata-qc-open-complement-ideal} to $W=U\setminus T$; its
   vanishing set is $U\setminus W=T$.
@@ -5480,6 +5543,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-finite-type-ideal-extension,
     def:nagata-separate-closed-subschemes}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
+  \leanok
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $T_1,T_2\subseteq U$ be disjoint constructible subsets closed in $U$.
@@ -5500,6 +5564,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-separate-constructible-closed}
   \uses{def:nagata-separate-constructible-closed}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
+  \leanok
 
   The constructed blow-up $\mathsf{CSepBl}_U(T_1,T_2)\to X$ is
   $U$-admissible, and the closures of the inverse images of $T_1$ and $T_2$
@@ -5510,6 +5575,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-constructible-closed-support,
     lemma:nagata-extend-finite-type-ideal,
     lemma:nagata-separate-closed-subschemes}
+  \leanok
   By \Cref{lemma:nagata-constructible-closed-support},
   $V(\mathcal J_i)=T_i$ in $U$.  The restriction equality from
   \Cref{lemma:nagata-extend-finite-type-ideal} consequently gives
@@ -5526,6 +5592,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Existence of constructible closed separators in a spectral space]
   \label{lemma:nagata-spectral-constructible-separation-exists}
   \lean{PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ}
+  \leanok
 
   If $T,T'$ are disjoint closed subsets of a spectral space $V$, there exist
   quasi-compact opens $W,W'\subseteq V$ such that
@@ -5536,6 +5603,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Quasi-compact opens form a basis of a spectral space.  For each $x\in T'$,
   choose a quasi-compact open neighbourhood contained in $V\setminus T$.
   The closed subset $T'$ is quasi-compact, so finitely many suffice; their
@@ -5584,6 +5652,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Maximal isomorphism open]
   \label{def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.Scheme.Hom.maximalIsomorphismOpen}
+  \leanok
 
   For a morphism $q\colon Z\to X$, define $\operatorname{IsoOpen}(q)$ to be
   the union of all open subschemes $W\subseteq X$ for which
@@ -5594,6 +5663,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-maximal-isomorphism-open}
   \uses{def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.Scheme.Hom.isIso_restrict_maximalIsomorphismOpen}
+  \leanok
 
   The subset $\operatorname{IsoOpen}(q)$ is open,
   $q^{-1}(\operatorname{IsoOpen}(q))\to\operatorname{IsoOpen}(q)$ is an
@@ -5602,6 +5672,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   A union of opens is open.  On pairwise intersections, the inverses of the
   restricted morphisms agree because an inverse to a fixed morphism is unique;
   hence the local inverses glue to an inverse over the union.  If an open
@@ -5618,6 +5689,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-extended-admissible-blowup,
     def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
+  \leanok
 
   Let $X$ be qcqs, let $q\colon Z\to X$ be proper, let $V\subseteq X$ be a
   quasi-compact open, set
@@ -5679,6 +5751,8 @@ correction explicit before it is sheafified and glued.
     prop:nagata-strict-transform-closed-fiber-product,
     lemma:nagata-strict-transform-closure-characterization,
     thm:nagata-global-blowup-complement}
+  \lean{AlgebraicGeometry.ker_strictTransformMap}
+  \leanok
   Let $h\colon T\to X\times_SY$ be quasi-compact, with
   first projection factoring through a quasi-compact open $U\subseteq X$.
   (The Stacks Project assumes $h$ quasi-separated as well; the formalised
@@ -5696,6 +5770,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Restriction of scheme-theoretic image to $U\times_SY$ identifies the image
   there with the image of $h|_U$ by
   \Cref{lemma:nagata-scheme-image-restrict-open}.  Work on an affine chart of
@@ -5719,6 +5794,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-isomorphism-near-closure}
   \uses{def:nagata-isomorphism-near-closure}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
+  \leanok
 
   If $U\to V$ is an isomorphism over an open neighbourhood of $T$, then
   $\mathsf{IsoBl}_{V,T}(q)\to X$ is $V$-admissible and the strict transform
@@ -5737,6 +5813,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-admissible-blowup-preserves-density,
     prop:nagata-strict-transform-closed-fiber-product,
     lemma:nagata-strict-transform-over-complement}
+  \leanok
   By \Cref{lemma:nagata-maximal-isomorphism-open}, the assumed isomorphism
   neighbourhood is contained in $\operatorname{IsoOpen}(U\to V)$; hence the
   bad locus $E$ is disjoint from $T$.  The two separation steps make
@@ -5775,6 +5852,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-scheme-image-of-closed-immersion}
   \lean{AlgebraicGeometry.isPullback_toImage_partialSection,
     AlgebraicGeometry.isIso_restrict_imageι_comp_fst}
+  \leanok
 
   Let \(U\hookrightarrow X\) be a quasi-compact open immersion, let
   \(Y\to S\) be separated, and let
@@ -5787,6 +5865,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-scheme-image-of-closed-immersion}
+  \leanok
   By \Cref{lemma:nagata-scheme-image-restrict-open}, restriction to
   \(U\times_SY\) commutes with taking the scheme-theoretic image.  On this
   open target the original map is a section of
@@ -5800,12 +5879,14 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/01W6}{Tag 01W6}]{stacks-project}}]
   \label{lemma:nagata-proper-to-separated-target}
   \lean{AlgebraicGeometry.IsProper.of_comp}
+  \leanok
 
   In a commutative triangle $T\to Y\to B$, if $T\to B$ is proper and
   $Y\to B$ is separated, then $T\to Y$ is proper.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Factor $T\to Y$ through the graph
   $T\to T\times_BY$.  The graph is closed because $Y\to B$ is separated, and
   the projection $T\times_BY\to Y$ is the base change of the proper morphism
@@ -5815,12 +5896,14 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Finite type over a separated target]
   \label{lemma:nagata-finite-type-to-separated-target}
   \lean{AlgebraicGeometry.locallyOfFiniteType_of_comp}
+  \leanok
 
   In a commutative triangle \(T\to Y\to B\), if \(T\to B\) is of finite
   type and \(Y\to B\) is separated, then \(T\to Y\) is of finite type.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Factor \(T\to Y\) as its graph
   \[
     T\longrightarrow T\times_BY\longrightarrow Y.
@@ -5833,6 +5916,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Quasi-compactness of an open map to a separated target]
   \label{lemma:nagata-open-immersion-qc-over-separated-target}
   \lean{AlgebraicGeometry.QuasiCompact.of_comp}
+  \leanok
 
   Let \(T\to Y\to B\) be a commutative triangle.  Assume that \(T\to B\) is
   of finite type, that \(Y\to B\) is separated, and that \(T\to Y\) is an
@@ -5841,6 +5925,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-finite-type-to-separated-target}
+  \leanok
   By \Cref{lemma:nagata-finite-type-to-separated-target}, the open immersion
   is of finite type.  An open immersion is locally of finite type, and it is
   of finite type exactly when it is quasi-compact.
@@ -5853,6 +5938,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-global-blowup,
     def:nagata-extended-admissible-blowup}
   \lean{AlgebraicGeometry.CommonModification}
+  \leanok
 
   Let $U\hookrightarrow X_i$ be open immersions over $S$, with
   $U,X_1,X_2$ separated and of finite type over the qcqs scheme $S$.
@@ -5915,6 +6001,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-common-modification}
   \uses{def:nagata-common-modification}
   \lean{AlgebraicGeometry.nonempty_commonModification}
+  \leanok
 
   Each constructed map $X'_i\to X_i$ is a $U$-admissible blow-up.  Each
   $X'_i\to\mathsf{CM}(X_1,X_2;U)$ is an open immersion, their two copies of
@@ -5930,6 +6017,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-proper-to-separated-target,
     lemma:nagata-separated-two-open-cover,
     lemma:nagata-admissible-blowup-comp}
+  \leanok
   Apply Stacks Project, Tag~0F3X (Lemma~38.33.4), with the qcqs base $S$,
   the common quasi-compact open $U$, and the separated finite-type
   morphisms $X_i\to S$.  The two input maps are open immersions and are
@@ -5965,6 +6053,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-scheme-theoretic-image,def:nagata-strict-transform,
     def:nagata-admissible-blowup,thm:nagata-global-blowup-complement}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup}
+  \leanok
 
   Let $V\to X\times_SY$ be quasi-compact and quasi-separated, and assume its
   projection to $X$ factors through an open $U\subseteq X$.  Let $Z$ be its
@@ -5980,6 +6069,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-scheme-image-transport-strict-transform}
+  \leanok
   Apply \Cref{lemma:nagata-scheme-image-transport-strict-transform} to the
   given map $V\to X\times_SY$.  Its lifted map is exactly the map specified in
   the statement through $\varepsilon^{-1}$, so the resulting image equality is
@@ -5991,6 +6081,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-scheme-theoretic-image,
     def:nagata-elimination-indeterminacy}
   \lean{AlgebraicGeometry.Compactification.ProperExtension}
+  \leanok
 
   Let $U\to S$ be separated and of finite type, let $V\subseteq U$ be
   quasi-compact, and fix a compactification
@@ -6018,6 +6109,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-graph-extension}
   \uses{def:nagata-graph-extension}
   \lean{AlgebraicGeometry.Compactification.nonempty_properExtension}
+  \leanok
 
   The map $Y^{\mathrm{gr}}\to Y$ is $V$-admissible,
   $V\subseteq V^{\mathrm{gr}}\subseteq Y^{\mathrm{gr}}$ is open, and
@@ -6033,6 +6125,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-strict-transform-ambient-closed,
     thm:nagata-global-blowup-proper,
     lemma:nagata-strict-transform-over-complement}
+  \leanok
   Apply Stacks Project, Tag~0F3Z (Lemma~38.33.6), to the separated
   finite-type morphism $U\to S$, the quasi-compact open $V\subseteq U$, and
   the chosen compactification $V\hookrightarrow Y\to S$.  The theorem forms
@@ -6067,6 +6160,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Factorization through a closed subscheme over a valuation ring]
   \label{lemma:nagata-valuation-factor-closed}
   \lean{AlgebraicGeometry.IsClosedImmersion.exists_lift_of_isFractionRing}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$, let $Z\hookrightarrow Y$
   be a closed immersion, and let $g\colon\operatorname{Spec}(A)\to Y$.  If the
@@ -6075,6 +6169,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Pull the defining ideal of $Z$ back to $A$.  It becomes zero after applying
   the injective map $A\hookrightarrow K$, so it was already zero in $A$.
 \end{proof}
@@ -6083,6 +6178,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-valuation-probe-exists}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}
+  \leanok
 
   Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
@@ -6094,6 +6190,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $Z=\operatorname{SIm}(h)$.  The assumed image isomorphism identifies
   $z$ with a point of $Z$.  Stacks Project, Tag~02JQ (Lemma~29.6.5),
   applied to the quasi-compact morphism $h$ and the point $z\in Z$, supplies
@@ -6109,6 +6206,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-dense-valuation-probe}
   \uses{lemma:nagata-dense-valuation-probe-exists}
   \lean{AlgebraicGeometry.ValuativeCommSqWithPt}
+  \leanok
 
   Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
@@ -6130,6 +6228,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-valuation-probe}
   \uses{def:nagata-dense-valuation-probe}
   \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}
+  \leanok
 
   The maps in $\mathsf{VP}(h,z)$ form a commutative diagram
   \[
@@ -6144,6 +6243,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-dense-valuation-probe-exists}
+  \leanok
   These are exactly the fields of the witness selected in
   \Cref{def:nagata-dense-valuation-probe}; nonemptiness is
   \Cref{lemma:nagata-dense-valuation-probe-exists}.
@@ -6153,6 +6253,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Composite of two valuation rings]
   \label{lemma:nagata-composite-valuation-ring}
   \lean{ValuationSubring.comapResidue}
+  \leanok
 
   Let \(A'\) be a valuation ring with maximal ideal \(\mathfrak m'\), and let
   \(A''\) be a valuation subring of the residue field
@@ -6165,6 +6266,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let \(x\) be a nonzero element of \(\operatorname{Frac}(A')\).  Since
   \(A'\) is a valuation ring, either \(x\in A'\) or \(x^{-1}\in A'\).  If
   exactly one lies in \(A'\), that element lies in \(C\) whenever its residue
@@ -6184,6 +6286,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Intersection with a dominating valuation ring]
   \label{lemma:nagata-valuation-intersection}
   \lean{ValuationSubring.comap_eq_of_toLocalSubring_le}
+  \leanok
 
   Let \(A\) be a valuation ring with fraction field \(K\), let
   \(K\hookrightarrow L\) be a field extension, and let \(B\subseteq L\) be a
@@ -6195,6 +6298,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The inclusion \(A\subseteq K\cap B\) follows because $B$ contains the image
   of $A$.  Conversely, let $x\in K\cap B$.  If $x\notin A$, the valuation-ring
   property of $A$ gives $x^{-1}\in A$, and in fact
@@ -6210,6 +6314,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-reduced-dense-image-schematic}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isDominant}
+  \leanok
 
   Let $X$ be reduced and let $h\colon U\to X$ be quasi-compact and
   quasi-separated with dense topological image.  Then the image inclusion
@@ -6217,6 +6322,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   On an affine open $\operatorname{Spec}(A)\subseteq X$, every element of the
   kernel ideal defining the scheme-theoretic image vanishes at every point of
   a dense subset.  It therefore lies in every prime ideal of $A$, hence in
@@ -6243,12 +6349,14 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Valuation domination of a local domain]
   \label{lemma:nagata-local-domain-valuation-dominates}
   \lean{LocalSubring.exists_le_valuationSubring}
+  \leanok
 
   If $B$ is a local domain with fraction field $L$, there is a valuation ring
   $C\subseteq L$ whose maximal ideal contracts to the maximal ideal of $B$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Consider the set of subrings of $L$ containing $B$ and whose units avoid the
   maximal ideal of $B$, ordered by inclusion.  The union of a chain has the
   same property, so Zorn's lemma gives a maximal such ring $C$.  For any
@@ -6264,6 +6372,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/00IA}{Lemma 10.50.2}]{stacks-project}}]
   \label{lemma:nagata-valuation-ring-extension}
   \lean{ValuationSubring.exists_comap_eq}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$, and let
   $K\hookrightarrow L$ be a field extension.  There exists a valuation ring
@@ -6274,6 +6383,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Apply Stacks Project, Tag~00IA (Lemma~10.50.2), to the inclusion
   $K\hookrightarrow L$.  Its proof considers the partially ordered set of
   local subrings of $L$ containing $A$ and dominating $A$; a chain union is
@@ -6293,6 +6403,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-source-valuative}
   \lean{AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant,
     AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}
+  \leanok
 
   Let \(f\colon X\to S\) be quasi-compact and let
   \(h\colon U\to X\) be quasi-compact and quasi-separated,
@@ -6340,6 +6451,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-reduced-dense-image-schematic,
     lemma:nagata-field-point-polynomial-presentation,
     lemma:nagata-valuation-ring-extension}
+  \leanok
   We first verify the existence part of the valuative criterion for \(f\).
   Start with an arbitrary square
   \[
@@ -6433,6 +6545,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-dense-compactifications}
   \uses{def:nagata-compactifiable,def:nagata-dense-refinement}
   \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
+  \leanok
 
   Let $C_i^0$ be the compactification selected by classical choice from the
   nonempty type witnessing compactifiability of $U_i\to S$.  Define
@@ -6446,6 +6559,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-dense-compactifications}
   \uses{def:nagata-two-open-dense-compactifications}
   \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
+  \leanok
 
   For $i=1,2$, the constructed $C_i$ is a scheme-theoretically dense
   compactification of $U_i\to S$; in particular $X_i\to S$ is proper and
@@ -6454,6 +6568,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{prop:nagata-dense-refinement}
+  \leanok
   This is exactly \Cref{prop:nagata-dense-refinement}, applied to each selected
   compactification $C_i^0$.
 \end{proof}
@@ -6463,6 +6578,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-dense-compactifications,
     def:nagata-graph-extension}
   \lean{AlgebraicGeometry.TwoOpenSide}
+  \leanok
 
   Apply the graph-extension construction to
   $U_i\subseteq U$ and $C_i$.  Denote its output by
@@ -6479,6 +6595,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-graph-extensions}
   \uses{def:nagata-two-open-graph-extensions}
   \lean{AlgebraicGeometry.exists_prepared_twoOpenSide}
+  \leanok
 
   Each replacement $X_i\to X_i^{\mathrm{old}}$ is $U_i$-admissible;
   the resulting structural morphism $X_i\to S$ is proper;
@@ -6488,6 +6605,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-graph-extension}
+  \leanok
   For each $i$, \Cref{lemma:nagata-graph-extension} says that the selected
   replacement $X_i\to X_i^{\mathrm{old}}$ is $U_i$-admissible and that its
   associated map $\psi_i$ is proper, extends $U_i\hookrightarrow U$, has
@@ -6501,6 +6619,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-boundary-loci}
   \uses{def:nagata-two-open-graph-extensions}
   \lean{AlgebraicGeometry.TwoOpenSide.forbiddenBoundary}
+  \leanok
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6519,6 +6638,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-boundary-loci}
   \uses{def:nagata-two-open-boundary-loci}
   \lean{AlgebraicGeometry.TwoOpenSide.closure_image_preimage_inter}
+  \leanok
 
   The subschemes $Z_i$ are closed in $U$.  Each $Z_{i,k}$ is closed in
   $V_i$, their underlying closed sets are disjoint, and $\psi_i$ is an
@@ -6527,6 +6647,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-graph-extension}
+  \leanok
   Since the support of $Z_i$ is $U\setminus U_j$, it is closed in $U$ and
   contained in $U_i$.  Base change of this closed immersion along $\psi_i$
   gives each closed immersion $Z_{i,k}\hookrightarrow V_i$.  The supports of
@@ -6543,6 +6664,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-boundary-loci,
     def:nagata-separate-constructible-closed}
   \lean{AlgebraicGeometry.TwoOpenSide.Prepared}
+  \leanok
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6559,6 +6681,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-prepared-boundaries}
   \uses{def:nagata-two-open-prepared-boundaries}
   \lean{AlgebraicGeometry.exists_prepared_twoOpenSide}
+  \leanok
 
   The constructed replacement $X_i^{\mathrm{prep}}\to X_i^{\mathrm{old}}$
   is $V_i$-admissible, the closures
@@ -6571,6 +6694,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-boundary-loci,
     lemma:nagata-separate-constructible-closed,
     lemma:nagata-blowup-proper}
+  \leanok
   By \Cref{lemma:nagata-boundary-loci}, the subsets $Z_{i,i}$ and
   $Z_{i,j}$ are disjoint constructible subsets closed in $V_i$.  Apply the
   property of the explicitly constructed separation blow-up.  It is
@@ -6587,6 +6711,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Disjoint boundary closures persist]
   \label{lemma:nagata-boundary-disjoint-persists}
   \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_of_disjoint}
+  \leanok
 
   If $\overline Z_{i,i}$ and $\overline Z_{i,j}$ are disjoint, then their
   strict transforms remain disjoint after every further $V_i$-admissible
@@ -6595,6 +6720,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-strict-transform-restrict}
+  \leanok
   Let $b\colon X'_i\to X_i$ be a further $V_i$-admissible blow-up.  By
   \Cref{lemma:nagata-strict-transform-restrict}, the strict transform of
   $\overline Z_{i,k}$ is the closure of its restriction over the open on
@@ -6609,6 +6735,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-prepared-boundaries,
     def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.TwoOpenSide.comparisonSpace}
+  \leanok
 
   Define
   \[
@@ -6632,11 +6759,13 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-prepared-boundaries,
     lemma:nagata-scheme-image-universal}
   \lean{AlgebraicGeometry.TwoOpenSide.isProper_comparisonFst}
+  \leanok
 
   Both projections $p_i\colon X_{12}\to X_i$ are proper.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Apply \Cref{lemma:nagata-scheme-image-universal} to
   $V_{12}\to X_1\times_SX_2$.  It gives the canonical closed immersion
   $\iota_{12}\colon X_{12}\hookrightarrow X_1\times_SX_2$ occurring in
@@ -6653,6 +6782,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-boundary-loci,
     def:nagata-two-open-comparison-space}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   Define
   \[
@@ -6665,6 +6795,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-comparison-boundary,
     def:nagata-two-open-comparison-space}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   Inside $V_{12}$ one has
   \[
@@ -6673,6 +6804,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $z=(v_1,v_2)$ be a point of $V_{12}=V_1\times_UV_2$.  The fibre-product
   equality gives $\psi_1(v_1)=\psi_2(v_2)=u\in U$.  Since
   $Z_{1,2}=V_1\times_UZ_2$ and $Z_{2,2}=V_2\times_UZ_2$, membership in either
@@ -6691,6 +6823,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-proper-to-separated-target,
     lemma:nagata-scheme-image-of-closed-immersion}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   For \(\{i,j\}=\{1,2\}\), the canonical morphism
   \[
@@ -6705,6 +6838,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-proper-to-separated-target,
     lemma:nagata-scheme-image-of-closed-immersion}
+  \leanok
   Restrict the scheme-theoretic image defining \(X_{12}\) to the open target
   \(V_i\times_SX_j\subseteq X_i\times_SX_j\).  The inverse image of this
   open in \(V_{12}\) is all of \(V_{12}\), so
@@ -6740,6 +6874,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-strict-transform,
     def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.TwoOpenSide.admissibleBlowup}
+  \leanok
 
   Let $N_2=\operatorname{IsoOpen}(\psi_2)\subseteq U$.  Apply
   $\mathsf{IsoBl}_{V_1,Z_{1,2}}(p_1)$ to the proper projection
@@ -6754,6 +6889,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-comparison-isIso-near-boundary}
   \uses{def:nagata-two-open-improved-comparison}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   The constructed map $X_1^{\mathrm{cmp}}\to X_1^{\mathrm{old}}$ is
   $V_1$-admissible, the transported $p_1$ is an isomorphism over an open
@@ -6769,6 +6905,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-scheme-image-strict-transform,
     lemma:nagata-boundary-disjoint-persists,
     lemma:nagata-maximal-isomorphism-open}
+  \leanok
   By \Cref{lemma:nagata-comparison-restrict-proper-open}, the restriction of
   $p_1$ over $V_1$ is the base change
   $V_1\times_UV_2\to V_1$ of $\psi_2$.  The maximal isomorphism open $N_2$
@@ -6789,6 +6926,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Density over the prepared boundary]
   \label{lemma:nagata-comparison-boundary-density}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   The subset $Z_{12,2}$ is dense in
   $p_1^{-1}(\overline Z_{1,2})$.
@@ -6796,6 +6934,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-comparison-isIso-near-boundary}
+  \leanok
   Choose an open neighbourhood $N\subseteq X_1$ of
   $\overline Z_{1,2}$ over which $p_1$ is an isomorphism, as supplied by
   \Cref{lemma:nagata-comparison-isIso-near-boundary}.  Then
@@ -6812,6 +6951,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Key boundary disjointness]
   \label{lemma:nagata-key-boundary-disjointness}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint}
+  \leanok
 
   Inside $X_1\times_SX_2$ one has
   \[
@@ -6825,6 +6965,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-prepared-boundaries,
     lemma:nagata-comparison-boundary-density,
     lemma:nagata-two-open-comparison-boundary}
+  \leanok
   Put $C=p_1^{-1}(\overline Z_{1,2})$.  By
   \Cref{lemma:nagata-comparison-boundary-density}, $Z_{12,2}$ is dense in
   $C$.  The definition of the comparison boundary and
@@ -6847,6 +6988,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-improved-comparison,
     def:nagata-two-open-prepared-boundaries}
   \lean{AlgebraicGeometry.TwoOpenSide.interior}
+  \leanok
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6868,6 +7010,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-graph-extensions,
     lemma:nagata-proper-to-separated-target}
   \lean{AlgebraicGeometry.TwoOpenSide.isProper_graph}
+  \leanok
 
   The morphism
   \[
@@ -6878,6 +7021,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   By \Cref{def:nagata-two-open-graph-extensions}, the morphism
   $\psi_i\colon V_i\to U$ is proper.  Regard
   $\gamma_i\colon V_i\to U\times_SX_i$ as a morphism over $U$.  The target
@@ -6893,6 +7037,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-intermediate-overlap-constructible}
   \uses{def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   The image of
   \[
@@ -6903,6 +7048,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The source and target are of finite type over the Noetherian scheme $S$.
   The displayed morphism is an immersion and hence of finite type.  Chevalley's
   theorem makes its image constructible.
@@ -6913,6 +7059,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-intermediate-schemes,
     def:nagata-two-open-prepared-boundaries}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   Let a point in the image of $U_i$ specialize in $U\times_SX_i$ to a point
   $(u,x)$.  There is a point $v\in V_i$ with
@@ -6922,6 +7069,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-proper-extension-graph-closed,lemma:nagata-boundary-loci}
+  \leanok
   The image of $U_i$ is contained in the image of
   $\gamma_i\colon V_i\to U\times_SX_i$.  The latter image is closed by
   \Cref{lemma:nagata-proper-extension-graph-closed}; hence the specialization
@@ -6937,6 +7085,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-intermediate-specialization-boundary,
     lemma:nagata-two-open-graph-extensions}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   The image of $U_i$ in
   $U\times_S(X_i\setminus\overline Z_{i,j})$ is stable under specialization.
@@ -6944,6 +7093,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-intermediate-specialization-boundary}
+  \leanok
   Let a point of the image specialize to $(u,x)$ in the displayed target.  If
   $u\notin U_i$, then
   \Cref{lemma:nagata-intermediate-specialization-boundary} gives
@@ -6960,6 +7110,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-intermediate-overlap-closed}
   \uses{def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   The canonical immersion
   \[
@@ -6972,6 +7123,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-intermediate-overlap-constructible,
     lemma:nagata-intermediate-overlap-specialization-closed}
+  \leanok
   By \Cref{lemma:nagata-intermediate-overlap-constructible}, the image is
   constructible.  By
   \Cref{lemma:nagata-intermediate-overlap-specialization-closed}, it is stable
@@ -6990,6 +7142,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-intermediate-separated}
   \uses{def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom}
+  \leanok
 
   Each $W_i\to S$ is separated and of finite type.
 \end{lemma}
@@ -6997,6 +7150,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-intermediate-overlap-closed,
     lemma:nagata-separated-two-open-cover}
+  \leanok
   The opens $U$ and $X_i\setminus\overline Z_{i,j}$ cover $W_i$.  The first
   is separated and of finite type over $S$ by the section hypotheses.  The
   second has those properties because it is open in the proper scheme
@@ -7012,6 +7166,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-comparison-space,
     lemma:nagata-valuation-factor-closed}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$.  Suppose
   $\operatorname{Spec}(K)\to U_1\cap U_2$ is an $S$-morphism and let
@@ -7023,6 +7178,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The two generic maps have the same image in $U$, so their pair lands in
   $V_1\times_UV_2=V_{12}$.  Composing with the canonical image-factor map
   gives a factorization of the generic pair through $X_{12}$.  The map
@@ -7036,6 +7192,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[An open containing the closed point of a valuation spectrum is total]
   \label{lemma:nagata-valuation-open-closed-point}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
+  \leanok
 
   Let $A$ be a valuation ring and let $O\subseteq\operatorname{Spec}(A)$ be
   open.  If the closed point $\mathfrak m_A$ belongs to $O$, then
@@ -7043,6 +7200,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Choose a basic open $D(a)$ with $\mathfrak m_A\in D(a)\subseteq O$.
   Then $a\notin\mathfrak m_A$, hence $a$ is a unit of the local ring $A$ and
   $D(a)=\operatorname{Spec}(A)$.
@@ -7053,6 +7211,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-comparison-space,
     def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$.  Let
   $\operatorname{Spec}(K)\to U_1\cap U_2$ be an $S$-morphism and let
@@ -7065,6 +7224,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-key-boundary-disjointness,
     lemma:nagata-valuation-pair-factors-comparison,
     lemma:nagata-valuation-open-closed-point}
+  \leanok
   Otherwise the closed point would map into $\overline Z_{1,2}$ under $g_1$
   and into $\overline Z_{2,1}$ under $g_2$.  By
   \Cref{lemma:nagata-valuation-pair-factors-comparison}, the pair factors
@@ -7083,6 +7243,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Existence part of the proper valuative criterion]
   \label{lemma:nagata-proper-valuative-criterion-existence-api}
   \lean{AlgebraicGeometry.UniversallyClosed.eq_valuativeCriterion}
+  \leanok
 
   Let $f\colon Y\to S$ be proper.  For every valuation ring $A$ with
   fraction field $K$, every $S$-morphism
@@ -7094,6 +7255,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-local-domain-valuation-dominates,
     lemma:nagata-valuation-intersection}
+  \leanok
   Let $G$ be the closure of the graph of the given generic map in
   $Y\times_S\operatorname{Spec}(A)$.  Properness of $Y\to S$ makes
   $G\to\operatorname{Spec}(A)$ proper, and the generic point of $G$ maps to
@@ -7117,6 +7279,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Uniqueness of a valuation lift for a separated morphism]
   \label{lemma:nagata-separated-valuation-lift-unique}
   \lean{AlgebraicGeometry.IsSeparated.valuativeCriterion}
+  \leanok
 
   Let $f\colon Y\to S$ be separated, let $A$ be a valuation ring with
   fraction field $K$, and let $h_1,h_2\colon\operatorname{Spec}(A)\to Y$ be
@@ -7125,6 +7288,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The equalizer of $h_1$ and $h_2$ is the inverse image of the diagonal
   $\Delta_f\colon Y\hookrightarrow Y\times_S Y$.  Since $f$ is separated,
   this is a closed subscheme of $\operatorname{Spec}(A)$.  It contains the
@@ -7137,6 +7301,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Valuative extension to a proper separated morphism]
   \label{lemma:nagata-proper-separated-valuation-extension}
   \lean{AlgebraicGeometry.IsProper.eq_valuativeCriterion}
+  \leanok
 
   Let $f\colon Y\to S$ be proper and separated.  Every commutative square
   \[
@@ -7151,6 +7316,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-proper-valuative-criterion-existence-api,
     lemma:nagata-separated-valuation-lift-unique}
+  \leanok
   Existence is the output of
   \Cref{lemma:nagata-proper-valuative-criterion-existence-api}.  If $h$ and
   $h'$ are two such lifts, their generic restrictions are the prescribed
@@ -7164,6 +7330,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-intermediate-schemes,
     def:nagata-common-modification}
   \lean{AlgebraicGeometry.CommonModification}
+  \leanok
 
   Apply the common-modification construction to the two open immersions
   $U\hookrightarrow W_1$ and $U\hookrightarrow W_2$.  Denote its output by
@@ -7180,6 +7347,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-final-modification}
   \uses{def:nagata-two-open-final-modification}
   \lean{AlgebraicGeometry.nonempty_commonModification}
+  \leanok
 
   Each $W'_i\to W_i$ is $U$-admissible; the maps $W'_i\hookrightarrow W$
   are open immersions covering $W$; their copies of $U$ agree; and $W\to S$
@@ -7190,6 +7358,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-intermediate-separated,
     lemma:nagata-common-modification}
+  \leanok
   The schemes $W_i$ are separated and of finite type by
   \Cref{lemma:nagata-intermediate-separated}.  Thus all hypotheses of the
   common-modification property apply, and
@@ -7203,6 +7372,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-compactification-candidate}
   \uses{def:nagata-two-open-final-modification}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   Define $\mathsf C_{12}(U/S)$ to be the constructed factorization
   \[
@@ -7213,6 +7383,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Density and quasi-compactness under the finite modification diagram]
   \label{lemma:nagata-two-open-density-transport}
   \lean{AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU}
+  \leanok
 
   In the finite diagram defining $W'_1,W'_2$ and $W$, assume that $U$ is
   scheme-theoretically dense in each initial ambient piece and that every
@@ -7224,6 +7395,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-admissible-blowup-preserves-density,
     lemma:nagata-admissible-blowup-comp,
     lemma:nagata-two-open-final-modification}
+  \leanok
   The initial copies of $U$ are scheme-theoretically dense by hypothesis.
   Every graph, boundary-separation, and final modification in the displayed
   diagram is $U$-admissible, so
@@ -7251,6 +7423,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-final-density}
   \uses{def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   The constructed map $U_1\cap U_2\to W$ is quasi-compact and has dense
   image.
@@ -7258,6 +7431,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-two-open-density-transport}
+  \leanok
   Apply \Cref{lemma:nagata-two-open-density-transport} to the construction of
   $W'_1,W'_2,W$.  Its hypotheses hold because the selected compactifications
   are scheme-theoretically dense and every subsequent center is supported
@@ -7269,6 +7443,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-valuative-lifting}
   \uses{def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$.  Every commutative
   diagram whose generic map
@@ -7282,6 +7457,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-blowup-proper,
     lemma:nagata-separated-valuation-lift-unique,
     lemma:nagata-two-open-final-modification}
+  \leanok
   By
   \Cref{lemma:nagata-proper-separated-valuation-extension}, properness and
   separatedness of $X_i\to S$ extend the generic map to maps
@@ -7302,6 +7478,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-candidate-proper}
   \uses{def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   The constructed structural morphism $W\to S$ is proper.
 \end{lemma}
@@ -7311,6 +7488,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-two-open-valuative-lifting,
     lemma:nagata-two-open-final-modification,
     lemma:nagata-dense-source-valuative}
+  \leanok
   The morphism $U_1\cap U_2\to W$ is quasi-compact and dense by
   \Cref{lemma:nagata-final-density}, and its valuation diagrams admit unique
   lifts by \Cref{lemma:nagata-two-open-valuative-lifting}.  The dense-source
@@ -7323,6 +7501,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{thm:nagata-two-open}
   \uses{def:nagata-compactification,def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   The constructed factorization $\mathsf C_{12}(U/S)$ is a compactification
   of $U\to S$.  Consequently $U\to S$ is compactifiable.
@@ -7332,6 +7511,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-two-open-final-modification,
     lemma:nagata-two-open-candidate-proper,
     lemma:nagata-open-immersion-qc-over-separated-target}
+  \leanok
   By \Cref{lemma:nagata-two-open-final-modification}, the first map
   $j_W\colon U\to W$ is an open immersion and $W\to S$ is separated and of
   finite type.  It is proper by
