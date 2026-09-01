@@ -1,5 +1,28 @@
 # Generate a Pure Mathematics Lecture in English from Lean Source Files: General Prompt
 
+## Status of the Nagata compactification source (2026-09)
+
+The Nagata compactification theorem is **proved and `sorry`-free** on `slopmaster`. There are no
+remaining gaps in it: elimination of indeterminacy (Stacks Project Tag 081S) is unconditional,
+its Conrad Theorem 2.4 input `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection`
+is proved in `WeilConjectures/Blowup/PartialSectionExtension.lean`, and the three main forms of
+the theorem —
+
+* `AlgebraicGeometry.NagataCompactification`
+  (`WeilConjectures/Compactification/NagataCompactification.lean`),
+* `AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation`
+  (`WeilConjectures/Compactification/FinitePresentation.lean`),
+* `AlgebraicGeometry.nagataCompactification_of_isNoetherian`
+  (`WeilConjectures/Compactification/Noetherian.lean`)
+
+— each carry a `#guard_msgs` + `#print axioms` census in the build, checking that they depend on
+`[propext, Classical.choice, Quot.sound]` only. So a lecture generated from this source must not
+list any gap `G1`, `G2`, … in the Nagata material.
+
+Branch `nagata-compactification-main-branch` — GitHub PR #207, still open against `master` — is
+already fully contained in `slopmaster`, so there is nothing left to merge from it; read the
+source at `slopmaster` rather than at the PR head.
+
 ## Fill in before use
 
 * **Source type**: `folder` or `pull request`

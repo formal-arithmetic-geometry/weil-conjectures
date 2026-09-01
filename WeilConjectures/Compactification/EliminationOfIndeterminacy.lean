@@ -45,14 +45,14 @@ written up in the blueprint chapter "Elimination of indeterminacy after Deligne 
 Conrad" (proof order items 61–75). The statement of Conrad's Theorem 2.4 that this file
 consumes is `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` of
 `WeilConjectures.Blowup.PartialSectionExtension`, used here through its `U = V` corollary
-`AlgebraicGeometry.exists_admissibleBlowup_extend_section` (Conrad's Remark 2.5); it is
-the single remaining primitive obligation of the modification layer. The external inputs
-of its proof are available — ZMT is Mathlib's
-`Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`, and Stacks Tag 04II is already
-formalized here as `exists_immersion_affineSpace_of_quasiAffine`
-(`WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean`) — but that proof is not
-formalized yet; see the route revision note in
-`blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`.
+`AlgebraicGeometry.exists_admissibleBlowup_extend_section` (Conrad's Remark 2.5). Both are
+formalized: `exists_admissibleBlowup_extend_partialSection` is proved in
+`WeilConjectures/Blowup/PartialSectionExtension.lean`, with the `U = V` corollary
+`exists_admissibleBlowup_extend_section` in the same file. The external inputs of that
+proof are ZMT, which is Mathlib's `Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`,
+and Stacks Tag 04II, formalized here as `exists_immersion_affineSpace_of_quasiAffine`
+(`WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean`); see the route revision
+note in `blueprint/src/version/detailed/nagata/nagata_new_proof_order.md`.
 
 The deduction of Tag 081S carried out here is: prepare a Cartier boundary
 (`exists_admissibleBlowup_cartierBoundary`, Tag 080Y), so that `U` becomes
