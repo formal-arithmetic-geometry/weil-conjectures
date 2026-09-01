@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # Gluing morphisms defined on a family of opens
@@ -24,6 +26,17 @@ the pairwise intersections. We record this form:
 For a family of opens covering `X`, i.e. with `⨆ i, U i = ⊤`, we also record the corresponding
 `AlgebraicGeometry.Scheme.Opens.glueMorphismsOfTop`, `Scheme.Opens.ι_glueMorphismsOfTop` and
 `AlgebraicGeometry.Scheme.Opens.hom_ext_of_iSup_eq_top`, gluing to a morphism `X ⟶ Y`.
+
+Finally, for morphisms into a scheme `Y` separated over a base `S`, agreement on the pairwise
+intersections need not be assumed: by rigidity it follows from agreement on a single
+scheme-theoretically dense open `D` contained in every `U i`. We record:
+
+- `AlgebraicGeometry.Scheme.Opens.homOfLE_comp_eq_of_le_of_isSchemeTheoreticallyDominant` — the
+  deduction of pairwise agreement from agreement on `D`;
+- `AlgebraicGeometry.Scheme.Opens.glueMorphismsOfDominant` — the resulting glued morphism, with
+  `AlgebraicGeometry.Scheme.Opens.homOfLE_glueMorphismsOfDominant` and
+  `AlgebraicGeometry.Scheme.Opens.glueMorphismsOfDominant_comp` saying that it restricts to
+  `g i` on `U i` and is a morphism over `S`.
 -/
 
 @[expose] public section
@@ -94,5 +107,56 @@ lemma Scheme.Opens.hom_ext_of_iSup_eq_top (hU : ⨆ i, U i = ⊤) (g₁ g₂ : X
   rw [← cancel_epi (X.isoOfEq hU ≪≫ X.topIso).hom]
   refine hom_ext_iSup U _ _ fun i ↦ ?_
   rw [hhom, X.homOfLE_ι_assoc, X.homOfLE_ι_assoc, h]
+
+section Dominant
+
+variable {S : Scheme.{u}} (V : J → X.Opens) (D : X.Opens)
+
+/-- Morphisms out of a family of opens into a scheme separated over `S`, agreeing on a common
+scheme-theoretically dense open `D`, agree on the pairwise intersections. -/
+lemma Scheme.Opens.homOfLE_comp_eq_of_le_of_isSchemeTheoreticallyDominant
+    (hD : ∀ i, D ≤ V i) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
+    (p : Y ⟶ S) [IsSeparated p] (q : X ⟶ S)
+    (g : ∀ i, (V i).toScheme ⟶ Y) (hq : ∀ i, g i ≫ p = (V i).ι ≫ q)
+    (hg : ∀ i j, X.homOfLE (hD i) ≫ g i = X.homOfLE (hD j) ≫ g j) (i j : J) :
+    X.homOfLE (inf_le_left : V i ⊓ V j ≤ V i) ≫ g i =
+      X.homOfLE (inf_le_right : V i ⊓ V j ≤ V j) ≫ g j := by
+  have := IsSchemeTheoreticallyDominant.homOfLE (le_inf (hD i) (hD j))
+  refine ext_of_isSchemeTheoreticallyDominant p ?_ (X.homOfLE (le_inf (hD i) (hD j))) ?_
+  · rw [Category.assoc, Category.assoc, hq i, hq j, X.homOfLE_ι_assoc, X.homOfLE_ι_assoc]
+  · rw [← Category.assoc, ← Category.assoc, X.homOfLE_homOfLE, X.homOfLE_homOfLE]
+    exact hg i j
+
+/-- Glue a family of morphisms `g i : V i ⟶ Y` into a scheme separated over `S` that agree on a
+common scheme-theoretically dense open `D ≤ V i`, into a morphism `(⨆ i, V i) ⟶ Y`. -/
+noncomputable def Scheme.Opens.glueMorphismsOfDominant
+    (hD : ∀ i, D ≤ V i) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
+    (p : Y ⟶ S) [IsSeparated p] (q : X ⟶ S)
+    (g : ∀ i, (V i).toScheme ⟶ Y) (hq : ∀ i, g i ≫ p = (V i).ι ≫ q)
+    (hg : ∀ i j, X.homOfLE (hD i) ≫ g i = X.homOfLE (hD j) ≫ g j) :
+    (⨆ i, V i).toScheme ⟶ Y :=
+  Scheme.Opens.glueMorphisms V g
+    (homOfLE_comp_eq_of_le_of_isSchemeTheoreticallyDominant V D hD p q g hq hg)
+
+@[reassoc (attr := simp)]
+lemma Scheme.Opens.homOfLE_glueMorphismsOfDominant
+    (hD : ∀ i, D ≤ V i) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
+    (p : Y ⟶ S) [IsSeparated p] (q : X ⟶ S)
+    (g : ∀ i, (V i).toScheme ⟶ Y) (hq : ∀ i, g i ≫ p = (V i).ι ≫ q)
+    (hg : ∀ i j, X.homOfLE (hD i) ≫ g i = X.homOfLE (hD j) ≫ g j) (i : J) :
+    X.homOfLE (le_iSup V i) ≫ glueMorphismsOfDominant V D hD p q g hq hg = g i :=
+  homOfLE_glueMorphisms V g _ i
+
+/-- The morphism glued from a family of `S`-morphisms is a morphism over `S`. -/
+lemma Scheme.Opens.glueMorphismsOfDominant_comp
+    (hD : ∀ i, D ≤ V i) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
+    (p : Y ⟶ S) [IsSeparated p] (q : X ⟶ S)
+    (g : ∀ i, (V i).toScheme ⟶ Y) (hq : ∀ i, g i ≫ p = (V i).ι ≫ q)
+    (hg : ∀ i j, X.homOfLE (hD i) ≫ g i = X.homOfLE (hD j) ≫ g j) :
+    glueMorphismsOfDominant V D hD p q g hq hg ≫ p = (⨆ i, V i).ι ≫ q := by
+  refine hom_ext_iSup V _ _ fun i ↦ ?_
+  rw [homOfLE_glueMorphismsOfDominant_assoc, hq i, X.homOfLE_ι_assoc]
+
+end Dominant
 
 end AlgebraicGeometry
