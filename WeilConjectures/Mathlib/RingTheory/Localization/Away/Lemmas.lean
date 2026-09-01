@@ -21,6 +21,10 @@ The point of allowing an arbitrary `L` rather than `Localization.Away b` is that
 situations the localization arrives as the sections `Γ(X, X.basicOpen b)` of a scheme over a
 basic open, which is not `Localization.Away b` on the nose.
 
+Note that `B` is not assumed to be an `A`-algebra: only the composite `A ⟶ L` is needed, and in
+the geometric application `A` is the ring of an affine open of the base that receives the basic
+open `X_b` but not all of `X`.
+
 Note that no monotonicity lemma is provided: if one wants to enlarge the generating family, the
 adjoin form makes this a one-line application of `Algebra.adjoin_mono` combined with
 `Set.image_subset`, and `eq_top_iff` (or `top_le_iff`).
@@ -30,13 +34,10 @@ adjoin form makes this a one-line application of `Algebra.adjoin_mono` combined 
 
 namespace Algebra.FiniteType
 
-variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] (b : B)
-  (L : Type*) [CommRing L] [Algebra B L] [Algebra A L] [IsScalarTower A B L]
+variable {A B : Type*} [CommRing A] [CommRing B] (b : B)
+  (L : Type*) [CommRing L] [Algebra B L] [Algebra A L]
   [IsLocalization.Away b L] [Algebra.FiniteType A L]
 
--- The tower assumptions are not needed for the proof, but they are what makes the statement
--- meaningful, and they are always available in the intended applications.
-set_option linter.unusedSectionVars false in
 /-- If a localization `L` of `B` away from `b : B` is of finite type over `A`, then `L` is
 generated as an `A`-algebra by finitely many fractions `c / b ^ N` sharing the single
 denominator `b ^ N`. -/
