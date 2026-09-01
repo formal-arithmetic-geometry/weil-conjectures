@@ -12,10 +12,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 
 Two unrelated groups of small results.
 
-The first is about **open immersions that are universally closed**. An open immersion whose
-underlying map is closed — for instance a proper one — is also a closed immersion, and its
-range is a clopen subset of the target. Such a morphism is what is classically called a
-*clopen immersion*: it identifies the source with a connected-component union of the target.
+The first is about **immersions that are universally closed**. A preimmersion whose underlying
+map is closed — for instance a proper one — is already a closed immersion. In the special case
+of an open immersion, the range is moreover a clopen subset of the target: such a morphism is
+what is classically called a *clopen immersion*, and it identifies the source with a
+connected-component union of the target.
 
 The second completes the API of `AlgebraicGeometry.IsClosedImmersion.lift`, the comparison
 morphism into a closed subscheme whose ideal sheaf is contained in another. Mathlib supplies
@@ -32,6 +33,8 @@ the morphism factors.
 
 - `AlgebraicGeometry.IsClosedImmersion.of_isOpenImmersion` — an open immersion with closed
   range is a closed immersion;
+- `AlgebraicGeometry.IsClosedImmersion.of_universallyClosed` — a universally closed
+  preimmersion, e.g. a proper immersion, is a closed immersion;
 - `AlgebraicGeometry.Scheme.Hom.isClopen_range` — an open immersion that is universally
   closed has clopen range;
 - `AlgebraicGeometry.isClosedImmersion_lift` — the lift of a closed immersion through a
@@ -60,6 +63,13 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 lemma IsClosedImmersion.of_isOpenImmersion [IsOpenImmersion f] (hf : IsClosed (Set.range f)) :
     IsClosedImmersion f :=
   .of_isPreimmersion f hf
+
+/-- A preimmersion that is universally closed is a closed immersion. In particular this applies
+to a proper immersion, since `IsImmersion` extends `IsPreimmersion`. -/
+@[stacks 01IQ]
+lemma IsClosedImmersion.of_universallyClosed [IsPreimmersion f] [UniversallyClosed f] :
+    IsClosedImmersion f :=
+  .of_isPreimmersion f f.isClosedMap.isClosed_range
 
 /-- An open immersion that is universally closed is a closed immersion. In particular this
 applies to a proper open immersion. -/

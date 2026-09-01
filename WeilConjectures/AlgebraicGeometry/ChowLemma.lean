@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Chow's lemma
@@ -41,6 +42,9 @@ over `S`.
   space is an immersion over `S`.
 - `AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict` — the modification is an
   isomorphism over a dense open subset of `X`.
+- `AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace` — if `f` is proper,
+  the immersion into projective space is a closed immersion, so `X` is dominated by a
+  projective `S`-scheme.
 
 ## Implementation notes
 
@@ -71,10 +75,6 @@ over `S`.
   followed by the Segre embedding is an immersion into a single `ℙ(n; S)`. The immersions of
   the `Uᵢ` need the standard affine charts of `ℙ(n; S)`, which are a `TODO` of
   `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`.
-* The closed-immersion form of Chow's lemma, [Stacks, Tag 0202]: for proper `f`, the induced
-  morphism `ChowModification f ⟶ X ×_S ℙ(index f; S)` is an immersion by `IsImmersion.of_comp`,
-  and a proper immersion is a closed immersion. This is what
-  `lemma:weil-pbc-chow-factorization` of the proper-base-change blueprint asks for.
 
 ## References
 
@@ -171,6 +171,25 @@ open subset of `X`.
 theorem exists_dense_isIso_restrict :
     ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (modificationMap f ∣_ U) :=
   sorry
+
+/-- **Chow's lemma for proper morphisms**: if `f : X ⟶ S` is proper, the immersion of its Chow
+modification into projective space is a *closed* immersion. Together with
+`AlgebraicGeometry.ChowModification.isProper_modificationMap` and
+`AlgebraicGeometry.ChowModification.surjective_modificationMap` this says that a proper scheme
+over a Noetherian base is dominated by a projective one.
+
+Indeed, `toProjectiveSpace f` composed with the structure morphism of `ℙ(index f; S)` is the
+proper morphism `modificationMap f ≫ f`, and the structure morphism is separated, so
+`toProjectiveSpace f` is itself proper, hence universally closed.
+(blueprint: `cor:chow-lemma-proper`) -/
+@[stacks 0202]
+instance isClosedImmersion_toProjectiveSpace {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
+    [IsProper f] : IsClosedImmersion (toProjectiveSpace f) := by
+  have : IsProper (toProjectiveSpace f ≫ ℙ(index f; S) ↘ S) := by
+    rw [toProjectiveSpace_over]
+    infer_instance
+  have : IsProper (toProjectiveSpace f) := .of_comp _ (ℙ(index f; S) ↘ S)
+  exact .of_universallyClosed _
 
 end ChowModification
 
