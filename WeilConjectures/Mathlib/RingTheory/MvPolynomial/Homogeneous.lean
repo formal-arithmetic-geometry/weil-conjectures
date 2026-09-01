@@ -119,7 +119,6 @@ instance [Finite σ] : Algebra.FiniteType (homogeneousSubmodule σ R 0) (MvPolyn
 
 end GradeZero
 
-open MvPolynomial in
 lemma IsHomogeneous.eval₂Hom_const_mul {σ R S : Type*} [CommSemiring R]
     [CommSemiring S] {φ : MvPolynomial σ R} {n : ℕ} (hφ : φ.IsHomogeneous n) (f : R →+* S) (c : S)
     (g : σ → S) : eval₂Hom f (fun j ↦ c * g j) φ = c ^ n * eval₂Hom f g φ := by
