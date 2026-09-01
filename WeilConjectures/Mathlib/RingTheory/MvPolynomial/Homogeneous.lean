@@ -45,6 +45,8 @@ space `Proj R[Xⱼ : j ∈ σ]` is an affine space over `R`.
   `MvPolynomial σ R` is of finite type over `MvPolynomial.homogeneousSubmodule σ R 0`.
 - `MvPolynomial.IsHomogeneous.eval₂Hom_const_mul` — scaling every variable by a constant `c`
   scales the value of a form of degree `n` by `c ^ n`.
+- `MvPolynomial.awayXRatio` — the ratio `Xₖ / Xᵢ` in the degree-zero localization
+  `(R[Xⱼ]_{Xᵢ})₀`, an affine coordinate of the standard chart `D₊(Xᵢ)`.
 
 ## Implementation notes
 
@@ -143,6 +145,26 @@ lemma IsHomogeneous.eval₂Hom_const_mul {σ R S : Type*} [CommSemiring R]
 lemma X_mem_homogeneousSubmodule_one (R : Type*) [CommSemiring R] {σ : Type*} (j : σ) :
     X j ∈ homogeneousSubmodule σ R 1 :=
   isHomogeneous_X R j
+
+section Ratio
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+variable (R : Type*) [CommRing R] {σ : Type*}
+
+/-- The ratio `Xₖ / Xᵢ` of two variables, as an element of the degree-zero part
+`(R[Xⱼ]_{Xᵢ})₀` of the localization of `R[Xⱼ]` at `Xᵢ`. These ratios are the affine
+coordinates of the standard chart `D₊(Xᵢ)` of a projective space. -/
+noncomputable def awayXRatio (i k : σ) :
+    HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X i) :=
+  HomogeneousLocalization.Away.mk _ (X_mem_homogeneousSubmodule_one R i) 1 (X k)
+    (by simpa using X_mem_homogeneousSubmodule_one R k)
+
+@[simp]
+lemma awayXRatio_self (i : σ) : awayXRatio R i i = 1 :=
+  HomogeneousLocalization.Away.mk_self _ _ _
+
+end Ratio
 
 section Chart
 

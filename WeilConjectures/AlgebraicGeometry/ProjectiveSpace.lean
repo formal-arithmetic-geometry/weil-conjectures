@@ -25,6 +25,11 @@ Mathlib has no relative projective space to reuse, only the absolute `Proj` of a
 so everything below is new; the integral model itself is
 `Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)`.
 
+Morphisms *into* `ℙ(n; S)` are constructed from families of global sections generating the
+unit ideal in `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections`, and the standard
+affine charts `standardOpen n S i ≅ 𝔸({j : n // j ≠ i}; S)` are in
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts`.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Proj.projectiveSpaceOverAffine` — the projective space `ℙ^σ_A` over an
@@ -63,11 +68,6 @@ builds relative `Proj`.
   `AlgebraicGeometry.AffineSpace.SpecIso`. This needs `Proj` to commute with base change,
   which Mathlib does not have, so `Proj.projectiveSpaceOverAffine` and `ProjectiveSpace` are
   for now two unrelated definitions.
-- The standard affine charts of `ℙ(n; S)`, i.e. isomorphisms
-  `ProjectiveSpace.standardOpen (n ⊕ Unit) S i ≅ 𝔸(n; S)` obtained from `Proj.awayι`. They are
-  a prerequisite for proving Chow's lemma. Morphisms *into* a projective space are constructed
-  from families of global sections generating the unit ideal, see
-  `AlgebraicGeometry.ProjectiveSpace.homOfSections`.
 
 ## Blueprint
 

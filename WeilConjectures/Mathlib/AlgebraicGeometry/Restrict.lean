@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Restrictions of morphisms of schemes along open immersions
@@ -15,7 +16,9 @@ We record:
 - `AlgebraicGeometry.morphismRestrictArrowIso` — transport of a morphism restriction along
   compatible open immersions;
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
-  — membership and preimage formulas for the ranges of inclusions of opens.
+  — membership and preimage formulas for the ranges of inclusions of opens;
+- `AlgebraicGeometry.Scheme.divBasicOpen` — the quotient `a / b` of two global sections, as a
+  section over the basic open `X_b`, where `b` is invertible.
 -/
 
 @[expose] public section
@@ -58,5 +61,34 @@ lemma homOfLE_preimage_opensRange {X : Scheme.{u}} {U V W : X.Opens} (hWU : W �
       (X.homOfLE hWU).opensRange := by
   rw [Scheme.opensRange_homOfLE, Scheme.opensRange_homOfLE, ← Scheme.Hom.comp_preimage,
     Scheme.homOfLE_ι]
+
+section BasicOpen
+
+variable (X : Scheme.{u})
+
+/-- The restriction of a global section `b` to the basic open `X_b` is a unit. -/
+lemma Scheme.isUnit_ι_appTop_basicOpen (b : Γ(X, ⊤)) :
+    IsUnit ((X.basicOpen b).ι.appTop b) := by
+  refine Scheme.isUnit_of_basicOpen_eq_top _ ?_
+  rw [← Scheme.preimage_basicOpen_top, Scheme.Opens.ι_preimage_self]
+
+/-- The quotient `a / b` of two global sections of `X`, as a section over the basic open
+`X_b`, where `b` becomes invertible. -/
+noncomputable def Scheme.divBasicOpen (a b : Γ(X, ⊤)) : Γ((X.basicOpen b : Scheme.{u}), ⊤) :=
+  Ring.inverse ((X.basicOpen b).ι.appTop b) * (X.basicOpen b).ι.appTop a
+
+@[simp]
+lemma Scheme.divBasicOpen_mul_self (a b : Γ(X, ⊤)) :
+    X.divBasicOpen a b * (X.basicOpen b).ι.appTop b = (X.basicOpen b).ι.appTop a := by
+  rw [Scheme.divBasicOpen, mul_right_comm,
+    Ring.inverse_mul_cancel _ (X.isUnit_ι_appTop_basicOpen b), one_mul]
+
+/-- `a / b` is the unique section over `X_b` whose product with `b` is `a`. -/
+lemma Scheme.eq_divBasicOpen {a b : Γ(X, ⊤)} {v : Γ((X.basicOpen b : Scheme.{u}), ⊤)}
+    (h : v * (X.basicOpen b).ι.appTop b = (X.basicOpen b).ι.appTop a) :
+    v = X.divBasicOpen a b :=
+  (X.isUnit_ι_appTop_basicOpen b).mul_right_cancel (h.trans (X.divBasicOpen_mul_self a b).symm)
+
+end BasicOpen
 
 end AlgebraicGeometry

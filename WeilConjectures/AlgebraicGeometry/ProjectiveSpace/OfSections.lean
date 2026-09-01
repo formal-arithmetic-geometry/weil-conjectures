@@ -67,6 +67,22 @@ lemma map_irrelevant_evalSections_eq_top (s : n → Γ(X, ⊤)) (hs : Ideal.span
   rw [toIdeal_irrelevant_homogeneousSubmodule, Ideal.map_span, ← Set.range_comp]
   simpa [Function.comp_def] using hs
 
+/-- `evalSections` is natural in `X`: restricting along a morphism `h : Y ⟶ X` evaluates the
+homogeneous coordinates at the restricted sections. -/
+lemma comp_evalSections {Y : Scheme.{u}} (h : Y ⟶ X) (s : n → Γ(X, ⊤)) :
+    h.appTop.hom.comp (evalSections s) = evalSections fun i ↦ h.appTop.hom (s i) := by
+  rw [evalSections, evalSections, comp_eval₂Hom]
+  congr 1
+  ext x
+  simp
+
+/-- Scaling all the sections by a global section `u` scales the value of `evalSections` at a
+form of degree `i` by `u ^ i`. -/
+lemma evalSections_const_mul {i : ℕ} (u : Γ(X, ⊤)) (s : n → Γ(X, ⊤))
+    {a : MvPolynomial n (ULift.{u} ℤ)} (ha : a ∈ homogeneousSubmodule n (ULift.{u} ℤ) i) :
+    evalSections (fun k ↦ u * s k) a = u ^ i * evalSections s a :=
+  ((mem_homogeneousSubmodule _ _).mp ha).eval₂Hom_const_mul _ _ _
+
 variable (g : X ⟶ S) (s : n → Γ(X, ⊤)) (hs : Ideal.span (Set.range s) = ⊤)
 
 /-- The morphism `X ⟶ ℙ(n; S)` over `g : X ⟶ S` attached to a family `s : n → Γ(X, ⊤)` of
