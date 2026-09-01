@@ -37,6 +37,7 @@ ingredients applicable.
 ## Main statements
 
 - `AlgebraicGeometry.nonempty_chowReduction` — steps 1 and 2 of the proof of Chow's lemma.
+- `AlgebraicGeometry.exists_chowReduction_n_ne_zero` — the same, with a nonempty cover.
 
 ## References
 
@@ -118,5 +119,41 @@ theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
            dense_V := hVdense
            preimage_V := hVU.symm
            isSchemeTheoreticallyDominant_iInf := hVU ▸ inferInstance }⟩
+
+/-- The cover of a `AlgebraicGeometry.ChowReduction` may always be assumed to be nonempty: if it
+is indexed by `Fin 0`, then `X*` is empty and the one-element cover by `⊤` satisfies all the
+requirements. -/
+theorem ChowReduction.exists_n_ne_zero {X S : Scheme.{u}} {f : X ⟶ S} (R : ChowReduction f) :
+    ∃ R' : ChowReduction f, R'.n ≠ 0 := by
+  rcases eq_or_ne R.n 0 with hn | hn
+  · -- If the cover is indexed by the empty type, `X*` is covered by nothing, hence empty.
+    have : IsEmpty (Fin R.n) := by rw [hn]; infer_instance
+    have hbot : (⊥ : R.Y.Opens) = ⊤ := (iSup_of_empty R.U).symm.trans R.iSup_U
+    have : IsEmpty R.Y := Set.univ_eq_empty_iff.mp
+      (congrArg (fun W : R.Y.Opens ↦ (W : Set R.Y)) hbot.symm)
+    -- In an empty scheme all opens agree, so every field is inherited from `R`.
+    have hopens : ∀ U U' : R.Y.Opens, U = U' := fun U U' ↦ by
+      ext x
+      exact isEmptyElim x
+    refine ⟨{ R with
+      n := 1
+      U := fun _ ↦ ⊤
+      isAffineOpen_U := fun _ ↦ isAffineOpen_top R.Y
+      iSup_U := hopens _ _
+      preimage_V := hopens _ _
+      isSchemeTheoreticallyDominant_iInf := ?_ }, one_ne_zero⟩
+    rw [hopens (⨅ _ : Fin 1, (⊤ : R.Y.Opens)) ⊤]
+    infer_instance
+  · exact ⟨R, hn⟩
+
+/-- **Steps 1 and 2 of the proof of Chow's lemma**, with a nonempty cover. This is
+`AlgebraicGeometry.nonempty_chowReduction` normalised via
+`AlgebraicGeometry.ChowReduction.exists_n_ne_zero`, so that the constructions consuming the cover
+may assume it has at least one member. -/
+@[stacks 0200 "Steps 1 and 2 of the proof"]
+theorem exists_chowReduction_n_ne_zero {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    ∃ R : ChowReduction f, R.n ≠ 0 :=
+  (nonempty_chowReduction f).elim fun R ↦ R.exists_n_ne_zero
 
 end AlgebraicGeometry
