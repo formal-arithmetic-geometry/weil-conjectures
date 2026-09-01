@@ -555,7 +555,12 @@ and dense, $V_i=\pi^{-1}(U_i)$.
 AlgebraicGeometry.ChowModification.index,
 AlgebraicGeometry.ChowModification.modificationMap,
 AlgebraicGeometry.ChowModification.toProjectiveSpace,
+AlgebraicGeometry.ChowModification.isProper_modificationMap,
+AlgebraicGeometry.ChowModification.surjective_modificationMap,
+AlgebraicGeometry.ChowModification.isImmersion_toProjectiveSpace,
+AlgebraicGeometry.ChowModification.toProjectiveSpace_over,
 AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict}
+\leanok
 Let $S$ be a noetherian scheme and let $f\colon X\to S$ be a separated morphism
 of finite type.  Then there are an integer $n\geq0$, a scheme $X'$ over $S$, a
 morphism $\pi\colon X'\to X$ and an immersion $i\colon X'\to\mathbf P^n_S$ of
@@ -565,9 +570,21 @@ $S$-schemes such that
   \item there is a dense open subscheme $U\subseteq X$ such that
   $\pi^{-1}(U)\to U$ is an isomorphism.
 \end{enumerate}
+
+The formalisation makes $X'$, the index set of the homogeneous coordinates of
+the ambient projective space, $\pi$ and $i$ four separate definitions rather
+than existentially bound data, so that a consumer gets properness, surjectivity
+and the immersion property by typeclass inference; all four are read off a
+single auxiliary choice, \texttt{ChowModification.data}.  Following
+\Cref{def:nagata-projective-space-base-change}, $\mathbf P^n_S$ is
+$\mathbf P(N;S)$ for a finite type $N$ of homogeneous coordinates.  Finally,
+\Cref{lem:chow-graph} needs the covering of Step 1 to be nonempty; this costs
+nothing, since $m=0$ happens only for $X$ empty, and one may then replace the
+covering by the one-element covering $\{X^{*}\}$.
 \end{theorem}
 \begin{proof}
 \uses{lem:chow-affine-cover,lem:chow-scheme-theoretic-closure,lem:chow-graph,lem:chow-glue,lem:chow-preimage,lem:chow-segre}
+\leanok
 By the standing facts of \Cref{sec:chow-conventions} the scheme $X$ is
 noetherian and has finitely many irreducible components, and it is
 quasi-compact and quasi-separated.
