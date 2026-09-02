@@ -152,7 +152,11 @@ actually proved.  The historical finite stalk-descent certificate is retired
 and has no edge into this graph.
 
 \section{Detailed S0--S10 proof text}\label{chap:s0-s10}
-\statusnote{The following block preserves the mathematical S0--S10 body and every original \string\uses declaration.  The sole source-level correction is the ill-typed S0 sectionwise formula, replaced in place by the categorical mate and an explicit erratum.  The remaining propositions are conditional reassembly steps whenever their gap-ledger inputs are OPEN.}
+\statusnote{The following block preserves the mathematical S0--S10 body and every original
+\texttt{\textbackslash uses} declaration.  The sole source-level correction is the ill-typed S0
+sectionwise formula, replaced in place by the categorical mate and an explicit erratum.  The
+remaining propositions are conditional reassembly steps whenever their gap-ledger inputs are
+OPEN.}
 % A3/S0--S4: explicit finite-torsion proper base change route.
 % Stacks tags below are source locators only; every mathematical assertion is
 % expanded or named as an OPEN obligation.
@@ -6953,6 +6957,35 @@ dense refinement $E$, set
 Schematic-density uniqueness, common refinement, and the equations for
 $\rho$ must prove independence of $E$ and the $\kappa$ cocycle.
 
+\formalizationnote{The comparison map of \textup{(BA43-RHO)} is now constructed in Lean, in the
+bounded below variant, as
+\texttt{AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison}
+(\texttt{WeilConjectures/SixFunctors/Derived/LowerShriekComparison.lean}), for a refinement
+whose square over the source open is Cartesian.  It is only \emph{defined}: it is not known to
+be an isomorphism.  That is exactly what \texttt{OBL-BA43-REFINEMENT-EXCHANGE} demands, it needs
+proper base change, and it remains open.
+
+\smallskip
+\noindent\textbf{The formalized arrow points the other way.}  It goes from the coarser model to
+the finer one, $Rp_{C*}Rj_{C!}\to R(p_Cq)_*Rj_{D!}$ in the lettering above, that is
+$F_C\to F_D$, the reverse of the $\rho_q$ displayed here.  (In Lean a refinement is written
+\texttt{r : c.Refinement d} with \texttt{c} the finer model, so the declaration reads
+$Rf_!(d)\to Rf_!(c)$, coarse to fine.)  This is deliberate.  Neither direction is formal: the
+available adjunctions produce a \emph{cospan}, both of whose legs point into
+$Rp_{C*}Rq_*Dq^*Rj_{C!}$, so an arrow between $F_C$ and $F_D$ exists only once one leg is
+inverted.  Inverting the leg that yields the direction displayed above is precisely proper base
+change; inverting the other leg, the base change isomorphism
+$Rj_{D!}\xrightarrow{\sim}Dq^*Rj_{C!}$ coming from $q^{-1}(X)=X$, is what the Cartesian
+hypothesis supplies, and it yields the opposite arrow.  So the direction constructible without
+proper base change is the reverse of the blueprint's.  The two maps are mutually inverse as soon
+as both legs are isomorphisms, so the reversal changes no mathematical content.
+
+\smallskip
+\noindent The declaration is the bounded below (\texttt{Plus}) comparison only.  No unbounded
+variant is formalized: there is no unbounded $Dq^*\dashv Rq_*$ adjunction in this repository, and
+the unbounded composition isomorphism for $Rp_*$ rests on the still \texttt{sorry}ed
+\texttt{HasKInjectiveResolutions}.}
+
 For $X\xrightarrow fY\xrightarrow gZ$, a successive witness includes a
 Cartesian square
 \[
@@ -7679,7 +7712,10 @@ integral, and rational exports are outside this finite-level owner.
 \end{openproblem}
 
 \section{Imported dependency registry}
-\statusnote{These labels occur in an original \string\uses or cross-reference but are defined outside the extracted S0--S10 block.  A red status is an additional explicit proof gap; a green status means only that the frozen manifest records the imported declaration as defined or proved.}
+\statusnote{These labels occur in an original \texttt{\textbackslash uses} or cross-reference but
+are defined outside the extracted S0--S10 block.  A red status is an additional explicit proof
+gap; a green status means only that the frozen manifest records the imported declaration as
+defined or proved.}
 \refstepcounter{importedinterface}\label{def:weil-a1-rfshriek-selected}
 \noindent\textbf{Imported interface \theimportedinterface.} \nolinkurl{def:weil-a1-rfshriek-selected}\
 \textbf{Kind. }\texttt{definition}; \textbf{manifest status. }\textcolor{red!65!black}{\texttt{CONDITIONAL-ON-OPEN-ANCESTOR}}.
