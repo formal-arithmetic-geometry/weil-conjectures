@@ -129,11 +129,17 @@ base change along $g$ preserves the terminal object of the site
 \begin{lemma}[Invariance under isomorphism]
 \label{lemma:constructible-iso-invariance}
 \uses{def:constructible-locally-constant,def:constructible-finite,def:constructible-finite-locally-constant,def:constructible-constructible}
+\lean{AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.of_iso,
+  AlgebraicGeometry.Scheme.IsFiniteSheaf.of_iso,
+  AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_iso,
+  AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_iso}
+\leanok
 If $\mathcal F\cong\mathcal F'$ in $\shv{\et X}$, then $\mathcal F$ is
 locally constant (finite, finite locally constant, constructible) if and
 only if $\mathcal F'$ is.
 \end{lemma}
 \begin{proof}
+\leanok
 An isomorphism of sheaves induces isomorphisms of the restrictions to every
 localised site, of all stalks, and of all pullbacks, and each of the four
 notions is a condition on these.  A trivialising datum, respectively a
@@ -143,10 +149,15 @@ stratification, for $\mathcal F$ is therefore one for $\mathcal F'$.
 \begin{lemma}[Pullback of locally constant sheaves]
 \label{lemma:constructible-pullback-locally-constant}
 \uses{def:constructible-locally-constant,lemma:constructible-pullback-constant}
+\lean{AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.upperStar,
+  AlgebraicGeometry.Scheme.isConstant_over_iff_upperStar,
+  AlgebraicGeometry.Scheme.Etale.overEquiv}
+\leanok
 Let $g\colon Y\to X$ be a morphism and let $\mathcal F\in\shv{\et X}$ be
 locally constant.  Then $g^*\mathcal F$ is locally constant.
 \end{lemma}
 \begin{proof}
+\leanok
 Let $(U_i\to X)_i$ be a trivialising datum for $\mathcal F$.  The base
 change $(U_i\times_XY\to Y)_i$ is an \'etale cover of $Y$, since \'etale
 morphisms and jointly surjective families are stable under base change.
@@ -164,10 +175,13 @@ $(U_i\times_XY\to Y)_i$ is a trivialising datum for $g^*\mathcal F$.
 \begin{lemma}[Pullback of finite sheaves]
 \label{lemma:constructible-pullback-finite}
 \uses{def:constructible-finite,lemma:openclosed-stalk-upperStar}
+\lean{AlgebraicGeometry.Scheme.IsFiniteSheaf.upperStar}
+\leanok
 Let $g\colon Y\to X$ be a morphism and let $\mathcal F\in\shv{\et X}$ be
 finite.  Then $g^*\mathcal F$ is finite.
 \end{lemma}
 \begin{proof}
+\leanok
 For a geometric point $\bar y$ of $Y$, the stalk $(g^*\mathcal F)_{\bar y}$
 is the stalk $\mathcal F_{g\circ\bar y}$ by
 \Cref{lemma:openclosed-stalk-upperStar}, which is finite by hypothesis.
@@ -176,12 +190,15 @@ is the stalk $\mathcal F_{g\circ\bar y}$ by
 \begin{lemma}[Pullback of a stratification]
 \label{lemma:constructible-pullback-stratification}
 \uses{def:constructible-stratification}
+\lean{AlgebraicGeometry.Scheme.Stratification.pullback}
+\leanok
 Let $g\colon Y\to X$ be a morphism and let $(\iota_k\colon Z_k\to X)_{k<n}$
 be a stratification of $X$.  Then the base changes
 $(\iota'_k\colon Z_k\times_XY\to Y)_{k<n}$ form a stratification of $Y$,
 with strata $g^{-1}(X_k)$.
 \end{lemma}
 \begin{proof}
+\leanok
 Immersions are stable under base change, and the image of the base change
 $Z_k\times_XY\to Y$ of $\iota_k$ is the preimage $g^{-1}(\iota_k(Z_k))$:
 the underlying set of a fibre product of schemes surjects onto the
@@ -195,12 +212,16 @@ covering $X$.
 \begin{proposition}[Pullback of constructible sheaves]
 \label{prop:constructible-pullback}
 \uses{def:constructible-constructible,lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite,lemma:constructible-pullback-stratification,lemma:constructible-iso-invariance}
+\lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.upperStar,
+  AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar}
+\leanok
 Let $g\colon Y\to X$ be a morphism and let $\mathcal F\in\shv{\et X}$ be
 constructible.  Then $g^*\mathcal F$ is constructible.  In particular
 constructibility is preserved by restriction to an open, to a closed
 subscheme, and to any locally closed subscheme.
 \end{proposition}
 \begin{proof}
+\leanok
 Let $(\iota_k\colon Z_k\to X)_k$ be a stratification of $X$ with all
 $\iota_k^*\mathcal F$ finite locally constant, and let
 $(\iota'_k\colon Z_k\times_XY\to Y)_k$ be its pullback
