@@ -10,6 +10,7 @@ public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Coprime.Lemmas
+public import WeilConjectures.ZetaLinearAlgebra.NormalizedGauss
 
 /-!
 # Purity of a polynomial, and disjointness of distinct weights
@@ -36,6 +37,11 @@ alone, so unlike purity it does not depend on the choice of a complex embedding.
 - `IsUniversallyPureOfWeight.weight_unique` — a scalar is universally pure of at most one weight.
 - `Polynomial.isCoprime_prod_odd_prod_even` — for a family `P i` with `P i` pure of weight `i`,
   the product of the odd-indexed factors and the product of the even-indexed factors are coprime.
+- `Polynomial.prod_odd_eq_map_and_prod_even_eq_map` — identification of the two parity factors:
+  if the parity products cross-multiply against a coprime normalized rational fraction `A / B`,
+  then the odd product is `A` and the even product is `B`.
+- `Polynomial.isAlgebraic_of_mem_roots_of_prod_mul_eq` — in that situation every root of every
+  `P i` is algebraic over `ℚ`.
 -/
 
 @[expose] public section
@@ -138,6 +144,46 @@ theorem coeff_zero_prod_even_eq_one {q r : ℕ} {P : Fin (r + 1) → Polynomial 
     (hP : ∀ i, (P i).IsPureOfWeight q i.1) :
     (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i).coeff 0 = 1 :=
   coeff_zero_prod_eq_one fun i _ ↦ hP i
+
+/-- **Identification of the two parity factors**. If the parity products of a family of pure
+polynomials of distinct weights cross-multiply against a coprime normalized rational fraction
+`A / B`, then the odd-indexed product is `A` and the even-indexed product is `B`: no reciprocal
+root cancels between odd and even indices. -/
+theorem prod_odd_eq_map_and_prod_even_eq_map {q r : ℕ} (hq : 1 < q) {P : Fin (r + 1) → ℂ[X]}
+    (hP : ∀ i, (P i).IsPureOfWeight q i.1) {A B : ℚ[X]} (hAB : IsCoprime A B)
+    (hA : A.coeff 0 = 1)
+    (h : (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i) *
+        B.map (algebraMap ℚ ℂ) =
+      (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i) * A.map (algebraMap ℚ ℂ)) :
+    (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i) = A.map (algebraMap ℚ ℂ) ∧
+      (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i) = B.map (algebraMap ℚ ℂ) :=
+  eq_of_coeff_zero_eq_one_of_isCoprime (by rw [coeff_map, hA, map_one])
+    (coeff_zero_prod_odd_eq_one hP) ((isCoprime_map _).2 hAB)
+    (isCoprime_prod_odd_prod_even hq hP) h
+
+/-- **Algebraicity of every reciprocal root**: under the hypotheses identifying the two parity
+factors, every root of every `P i` is a root of the complex image of `A` or of `B`, hence is
+algebraic over `ℚ`. -/
+theorem isAlgebraic_of_mem_roots_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P : Fin (r + 1) → ℂ[X]}
+    (hP : ∀ i, (P i).IsPureOfWeight q i.1) {A B : ℚ[X]} (hAB : IsCoprime A B)
+    (hA : A.coeff 0 = 1) (hB : B.coeff 0 = 1)
+    (h : (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i) *
+        B.map (algebraMap ℚ ℂ) =
+      (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i) * A.map (algebraMap ℚ ℂ))
+    {i : Fin (r + 1)} {z : ℂ} (hz : z ∈ (P i).roots) : IsAlgebraic ℚ z := by
+  obtain ⟨hO, hE⟩ := prod_odd_eq_map_and_prod_even_eq_map hq hP hAB hA h
+  have hroot : (P i).eval z = 0 := (mem_roots (hP i).ne_zero).1 hz
+  have key : ∀ (s : Finset (Fin (r + 1))) (C : ℚ[X]), C.coeff 0 = 1 → i ∈ s →
+      (∏ j ∈ s, P j) = C.map (algebraMap ℚ ℂ) → IsAlgebraic ℚ z := by
+    intro s C hC his hs
+    refine ⟨C, fun h0 ↦ by simp [h0] at hC, ?_⟩
+    have hzero : (C.map (algebraMap ℚ ℂ)).eval z = 0 := by
+      rw [← hs, eval_prod]
+      exact Finset.prod_eq_zero his hroot
+    rwa [eval_map_algebraMap] at hzero
+  rcases Nat.even_or_odd i.1 with he | ho
+  · exact key _ B hB (by simp [he]) hE
+  · exact key _ A hA (by simp [ho]) hO
 
 end Polynomial
 
