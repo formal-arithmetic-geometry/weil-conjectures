@@ -3562,6 +3562,7 @@ finite and separable is dense in $X$.
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-field-tower,def:pc-smooth-morphism}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-morphism-conventions,def:pc-smooth-morphism,def:pc-field-tower}
 It suffices to show: for every nonempty open $V\subseteq X$ there is a
 closed point of $V$ with finite separable residue field over $k$ (the
 statement is Zariski-local and the assertion is stable under replacing
@@ -3663,6 +3664,7 @@ homeomorphism of underlying topological spaces.
 \uses{def:pc-scheme,def:pc-base-change,def:pc-field-tower}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-base-change,def:pc-field-tower}
 It is enough to prove the statement Zariski-locally: we may assume
 $X=\Spec(A)$, $X_{k'}=\Spec(A\otimes_kk')$.  Let $\varphi:A\to
 A\otimes_kk'$; we verify the hypotheses of Algebra, Lemma 10.46.7,
@@ -3696,6 +3698,32 @@ This proves the claim.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Valuative criterion for properness]
+\label{lem:pc-valuative-criterion-proper}
+Let $f:X\to Y$ be a morphism of schemes which is of finite type and
+quasi-separated.  Then $f$ is proper if and only if the following
+condition holds: for every valuation ring $V$ with fraction field $K$,
+every morphism $\Spec(V)\to Y$ and every morphism $\Spec(K)\to X$ such
+that the two compositions $\Spec(K)\to X\to Y$ and
+$\Spec(K)\to\Spec(V)\to Y$ agree, there is a \emph{unique} morphism
+$\Spec(V)\to X$ over $Y$ whose restriction along
+$\Spec(K)\to\Spec(V)$ is the given morphism $\Spec(K)\to X$.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+% Mathlib: the valuative criterion for proper morphisms exists.
+\mathlibok\ \lean{AlgebraicGeometry.ValuativeCriterion,
+AlgebraicGeometry.IsProper.eq_valuativeCriterion,
+AlgebraicGeometry.IsProper.of_valuativeCriterion}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Lemma~29.43.1
+(\stacksproject{0BX5}), in the section on valuative criteria
+(Morphisms of Schemes, Section~29.43, \stacksproject{0BX4}).  It is
+available in Mathlib in the form named in the statement, so it is not
+decomposed further here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Projective morphisms are proper]
 \label{lem:pc-projective-proper}
@@ -3708,7 +3736,7 @@ extensions are proper.
 \leanok
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-proper-base-change}
+\uses{lem:pc-proper-base-change,lem:pc-valuative-criterion-proper}
 \leanok
 A projective morphism $f:X\to S$ factors as
 $X\xrightarrow{i}\mathbf P^n_S\xrightarrow{\pi}S$ with $i$ a closed
@@ -3718,10 +3746,8 @@ $\pi$ is proper, and properness is stable under composition.  For
 $\pi$: the structure morphism $\mathbf P^n_S\to S$ is of finite type
 and separated (standard: $\mathbf P^n_S$ is a Proj, separated over
 $S$), and it is universally closed: by the valuative criterion for
-properness (Morphisms of Schemes, Section 29.43,
-\stacksproject{0BX4}: $f$ proper
-$\Leftrightarrow$ $f$ is separated, finite type and the valuative
-criterion holds) it suffices to lift: let $V$ be a valuation ring with
+properness (\Cref{lem:pc-valuative-criterion-proper}) it suffices to
+lift: let $V$ be a valuation ring with
 fraction field $K$, let $\Spec V\to S$ and
 $\Spec K\to\mathbf P^n_S$ be morphisms over $S$, and suppose the
 diagram commutes after composing with $\Spec K\to\Spec V$.  The
@@ -3748,6 +3774,55 @@ $\Spec(K)\to\Spec(k)$.
 
 
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Closed subschemes of affine schemes are affine]
+\label{lem:pc-closed-immersion-affine}
+Let $X=\Spec(R)$ be an affine scheme and let $i:Z\to X$ be a closed
+immersion.  Then $Z$ is affine and the ring map
+$R=\Gamma(X,\cO_X)\to\Gamma(Z,\cO_Z)$ is surjective; equivalently, $i$
+is isomorphic over $X$ to the closed immersion
+$\Spec(R/I)\to\Spec(R)$ for the ideal $I=\ker(R\to\Gamma(Z,\cO_Z))$.
+In particular, for an arbitrary scheme $Y$ and a closed immersion
+$i:Z\to Y$, the preimage $i^{-1}(U)$ of an affine open $U\subseteq Y$
+is affine, i.e.\ a closed immersion is an affine morphism.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+% Mathlib: closed immersions are affine morphisms, and an affine
+% morphism to an affine scheme has affine source.
+\mathlibok\ \lean{AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine,
+AlgebraicGeometry.isAffine_of_isAffineHom}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Schemes, Lemma~26.8.2
+(\stacksproject{01IH}), which identifies the closed immersions into an
+affine scheme $\Spec(R)$ with the ideals of $R$.  It is available in
+Mathlib in the form named in the statement, so it is not decomposed
+further here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Ampleness from a basis of affine opens $X_s$]
+\label{lem:pc-ample-basis-criterion}
+Let $X$ be a quasi-compact scheme and let $\cL$ be an invertible
+$\cO_X$-module.  Put
+$S=\Gamma_*(X,\cL)=\bigoplus_{n\ge0}H^0(X,\cL^{\otimes n})$, a graded
+ring, and for a homogeneous $s\in S$ of positive degree let
+$X_s\subseteq X$ be the open locus where $s$ does not vanish.  If the
+affine open subsets among the $X_s$ form a basis for the topology of
+$X$, then $\cL$ is \hyperref[def:pcb-ample]{ample}.
+\uses{def:pc-scheme,def:pcb-ample,def:pcb-invertible-module}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Properties of Schemes,
+Proposition~28.27.13 (\stacksproject{01Q3}), the implication
+(4) $\Rightarrow$ (1) among the equivalent conditions listed there.
+The same proposition is what identifies the notion of ampleness used
+there with the one of \Cref{def:pcb-ample}, as recorded in that
+definition.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Ample line bundles from projective embeddings]
 \label{lem:pc-very-ample-ample}
@@ -3758,17 +3833,16 @@ $\cL\otimes_k K$ is ample on $X_K$ for every field extension $K/k$.
 \uses{def:pcb-ample,def:pcb-invertible-module,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-closed-imm-base-change}
+\uses{lem:pc-closed-imm-base-change,lem:pc-closed-immersion-affine,lem:pc-ample-basis-criterion}
 The scheme $\PP^n_k$ is the union of the affine opens $D_+(x_j)$,
 $j=0,\dots,n$ (as usual via the homogeneous coordinates $x_0,\dots,x_n$);
 hence with $s_j:=i^*x_j\in H^0(X,\cL)$ we have
 $X_{s_j}=X\cap D_+(x_j)$, which is affine (a closed subscheme of an
-affine scheme is affine: closed immersions are affine morphisms, Schemes,
-Lemma~26.8.2, \stacksproject{01IH}),
+affine scheme is affine, \Cref{lem:pc-closed-immersion-affine}),
 and $\bigcup_jX_{s_j}=X$ as the $D_+(x_j)$ cover $\PP^n_k$ and $i$ is
 injective.  Thus the affine open sets $X_s$ form a basis of the topology,
-so $\cL$ is ample by Properties, Proposition~28.27.13 (\stacksproject{01Q3}), condition (4)
-$\Rightarrow$ (1).  The last assertion follows since the same argument
+so $\cL$ is ample by \Cref{lem:pc-ample-basis-criterion}.  The last
+assertion follows since the same argument
 applies to the base-changed closed immersion
 $i_K:X_K\hookrightarrow\PP^n_K$ (base change of a closed immersion, see
 \hyperref[lem:pc-closed-imm-base-change]{Lemma~\ref{lem:pc-closed-imm-base-change}})
@@ -3861,14 +3935,15 @@ proper.  If $f$ is smooth, then $f'$ is smooth.
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,def:pc-smooth-morphism}
 \end{lemma}
 \begin{proof}
+\uses{lem:pc-valuative-criterion-proper,def:pc-smooth-morphism}
 \emph{Properness.}  $f'$ is separated and of finite type (base changes
 of separated and finite type morphisms have these properties: the
 diagonal of $f'$ is the base change of the diagonal of $f$, and the
 base changes of finite type morphisms are of finite type, both by the
 definitions of the properties, being Zariski-local and stable under
 composition with the projections).  For the universal closedness, use
-the valuative criterion for properness (\Cref{lem:pc-projective-proper}
-cites it, Tag 0BX4): a valuation square
+the valuative criterion for properness
+(\Cref{lem:pc-valuative-criterion-proper}): a valuation square
 a valuation square
 \[
 \Spec K \longrightarrow X'
@@ -3921,6 +3996,7 @@ $f\circ g$ is flat.
 \uses{def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-morphism-conventions}
 Flatness is Zariski-local; on affine patches the assertion is: if
 $A\to B$ and $B\to C$ are flat ring maps, then $A\to C$ is flat.  For
 an exact sequence $0\to M'\to M\to M''\to0$ of $A$-modules, its
@@ -3939,10 +4015,32 @@ flat: every $k$-module is free, hence flat.
 \uses{def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-morphism-conventions}
 Affine-locally the structure morphism is given by a ring map
 $k\to A$; as a $k$-vector space $A$ is free.
 \end{proof}
 
+% Cited.
+\begin{lemma}[Going down for flat ring maps]
+\label{lem:pc-going-down-flat}
+Let $R\to R'$ be a flat ring map.  Let $\mathfrak p\subseteq\mathfrak
+p'$ be primes of $R$ and let $\mathfrak q'\subset R'$ be a prime of
+$R'$ lying over $\mathfrak p'$.  Then there is a prime
+$\mathfrak q\subseteq\mathfrak q'$ of $R'$ lying over $\mathfrak p$.
+Consequently a chain of primes of $R$ ending in $\mathfrak p'$ lifts to
+a chain of primes of $R'$ ending in $\mathfrak q'$.
+\uses{def:pc-morphism-conventions}
+% Mathlib: the going-down property, and its validity for flat algebras.
+\mathlibok\ \lean{Algebra.HasGoingDown, Algebra.HasGoingDown.of_flat,
+Ideal.exists_ideal_le_liesOver_of_le, Ideal.exists_ltSeries_of_hasGoingDown}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.39.19
+(\stacksproject{00HS}).  It is available in Mathlib in the form named in
+the statement, so it is not decomposed further here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Dimension is unchanged under base change along field extensions]
 \label{lem:pc-dim-base-change}
@@ -3953,6 +4051,7 @@ $X_K=X\times_{\Spec k}\Spec K$ has dimension $1$.
 \uses{def:pc-morphism-conventions,def:pc-field-tower,def:pc-curve,def:pc-dimension}
 \end{lemma}
 \begin{proof}
+\uses{lem:pc-going-down-flat,def:pc-curve,def:pc-dimension}
 Write $A=k[x_1,\dots,x_n]/I$, so $A\otimes_kK=K[x_1,\dots,x_n]/I\cdot
 K[x]$.  For a Noetherian ring dimension formulas:
 $\dim k[x]/I=n-\operatorname{ht}(I)$ (the classical formula for the
@@ -3967,10 +4066,9 @@ $R/\mathfrak p\to R'/\mathfrak pR'$ is faithfully flat, hence
 injective, so the preimage of $\mathfrak pR'$ is $\mathfrak p$), and
 $\operatorname{ht}(\mathfrak pR')\ge\operatorname{ht}(\mathfrak p)$:
 a chain $\mathfrak p_0\subsetneq\cdots\subsetneq\mathfrak p_r=\mathfrak p$
-of primes of $R$ gives, by going-down for flat ring maps (Algebra,
-Lemma~10.39.5, \stacksproject{00GU}
-(flatness implies going down for the map on spectra): the classical
-statement, which says chains lift,
+of primes of $R$ gives, by going-down for flat ring maps
+(\Cref{lem:pc-going-down-flat}), a chain of primes of $R'$ lying over
+it and contained in a prime above $\mathfrak p$,
 hence the height of the extended ideal is at least that of the source
 ideal); and $\operatorname{ht}(\mathfrak pR')\le\operatorname{ht}(\mathfrak p)$:
 a chain of primes in $R'$ above $\mathfrak pR'$ intersects $R$ in a
