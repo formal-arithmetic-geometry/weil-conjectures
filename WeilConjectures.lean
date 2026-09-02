@@ -87,6 +87,7 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.Compactification.RefinementUniqueness
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformBlowup
