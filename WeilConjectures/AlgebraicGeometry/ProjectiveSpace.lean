@@ -346,6 +346,29 @@ lemma liftBaseChange_toProjInt :
     liftBaseChange a b w ≫ toProjInt n X = b ≫ toProjInt n S := by
   rw [← map_toProjInt n g, liftBaseChange_map_assoc]
 
+/-- If `g : X ⟶ S` is separated, so is `map n g : ℙ(n; X) ⟶ ℙ(n; S)`, being the base change
+of `g` along the structure morphism `ℙ(n; S) ↘ S`. -/
+instance isSeparated_map [IsSeparated g] : IsSeparated (map n g) :=
+  MorphismProperty.of_isPullback (isPullback_map n g).flip inferInstance
+
+/-- The lift of an immersion `b : T ⟶ ℙ(n; S)` is an immersion, since `liftBaseChange a b w ≫
+map n g = b`. -/
+instance isImmersion_liftBaseChange [IsImmersion b] : IsImmersion (liftBaseChange a b w) :=
+  have : IsImmersion (liftBaseChange a b w ≫ map n g) := by
+    rw [liftBaseChange_map]
+    infer_instance
+  .of_comp _ (map n g)
+
+/-- The lift of a closed immersion `b : T ⟶ ℙ(n; S)` along a separated morphism `g` is a
+closed immersion: `map n g` is separated, being a base change of `g`, and closed immersions
+cancel along separated morphisms. -/
+instance isClosedImmersion_liftBaseChange [IsSeparated g] [IsClosedImmersion b] :
+    IsClosedImmersion (liftBaseChange a b w) :=
+  have : IsClosedImmersion (liftBaseChange a b w ≫ map n g) := by
+    rw [liftBaseChange_map]
+    infer_instance
+  .of_comp _ (map n g)
+
 end LiftBaseChange
 
 end ProjectiveSpace
