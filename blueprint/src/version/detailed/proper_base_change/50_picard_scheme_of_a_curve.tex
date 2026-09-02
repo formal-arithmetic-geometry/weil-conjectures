@@ -4264,6 +4264,105 @@ isomorphism in $D(\cO_T)$.  This proves the claim.
 
 
 % Decomposed.
+\begin{lemma}[Finite projective modules]
+\label{lem:pc-finite-projective-module}
+Let $A$ be a ring and $M$ a finite projective $A$-module.  Then $M$ is
+of finite presentation and flat over $A$; and if $A$ is a local ring,
+then $M$ is free of finite rank.
+% Mathlib: a finite projective module is finitely presented; a
+% projective module is flat; a finite flat module over a local ring is
+% free.
+\mathlibok\ \lean{Module.finitePresentation_of_projective,
+Module.Flat.of_projective, Module.free_of_flat_of_isLocalRing}
+\end{lemma}
+\begin{proof}
+All three assertions are in Mathlib: finite presentation is
+\texttt{Module.finitePresentation\_of\_projective}, flatness is
+\texttt{Module.Flat.of\_projective}, and over a local ring a finite
+flat module is free by
+\texttt{Module.free\_of\_flat\_of\_isLocalRing} (Nakayama: lift a
+$\kappa$-basis of $M/\mathfrak mM$ to a surjection
+$A^n\twoheadrightarrow M$; flatness makes its kernel vanish modulo
+$\mathfrak m$, and the kernel is finitely generated because $M$ is of
+finite presentation, so Nakayama again makes it zero).  The rank is
+finite because $M$ is finite.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{lemma}[Freeness spreads to a principal open]
+\label{lem:pc-free-on-principal-open}
+Let $A$ be a ring, $M$ a finitely presented $A$-module and
+$\mathfrak p\subset A$ a prime ideal such that the localization
+$M_{\mathfrak p}$ is a free $A_{\mathfrak p}$-module.  Then there is
+$g\in A\setminus\mathfrak p$ such that $M_g$ is a free $A_g$-module of
+finite rank.
+% Mathlib: if M is a finitely presented A-module and M_S is free over
+% A_S for a submonoid S, then M_g is already free for some g in S.
+\mathlibok\ \lean{Module.FinitePresentation.exists_free_localizedModule_powers}
+\end{lemma}
+\begin{proof}
+This is
+\texttt{Module.FinitePresentation.exists\_free\_localizedModule\_powers}
+of Mathlib, applied to the submonoid $A\setminus\mathfrak p$.  Directly:
+choose a basis
+$\overline e_1,\dots,\overline e_n$ of $M_{\mathfrak p}$, clear
+denominators to obtain $e_1,\dots,e_n\in M$, and let
+$u:A^n\to M$ be the induced map.  Both $\ker u$ and $\operatorname{coker}u$
+are finitely generated ($M$ is of finite presentation) and vanish after
+localizing at $\mathfrak p$, so each of their finitely many generators
+is killed by an element of $A\setminus\mathfrak p$; the product $g$ of
+those elements satisfies $\ker(u)_g=\operatorname{coker}(u)_g=0$, i.e.\
+$u_g:A_g^n\to M_g$ is an isomorphism.  The rank $n$ is finite because
+$M$ is finite.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{lemma}[Local normal form of a perfect complex]
+\label{lem:pc-perfect-local-normal-form}
+Let $X$ be a scheme and let $E\in D(\cO_X)$ be
+\hyperref[def:pc-perfect-complex]{perfect}.  Then every point $x\in X$
+has an affine open neighbourhood $U=\Spec(A)$ such that $E|_U$ is
+isomorphic in $D(\cO_U)$ to a bounded complex of finite \emph{free}
+$A$-modules.
+(Derived Categories of Schemes, Section~36.31,
+\stacksproject{0BDH}.)
+\uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-scheme,lem:pc-finite-projective-module,lem:pc-free-on-principal-open}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-perfect-complex,lem:pc-finite-projective-module,lem:pc-free-on-principal-open}
+By \Cref{def:pc-perfect-complex} there are an affine open
+$V=\Spec(A)\ni x$ and an isomorphism in $D(\cO_V)$ of $E|_V$ with a
+bounded complex $M^{\bullet}$, $M^n=0$ for $n\notin[a,b]$, of finite
+projective $A$-modules.  Let $\mathfrak p\subset A$ be the prime
+corresponding to $x$.
+
+Each $M^n$ is of finite presentation over $A$ by
+\Cref{lem:pc-finite-projective-module}, and its localization
+$M^n_{\mathfrak p}$ is a finite projective $A_{\mathfrak p}$-module
+(localization takes finite projective modules to finite projective
+modules: it preserves the property of being a direct summand of a
+finite free module), hence free over the local ring
+$A_{\mathfrak p}$, again by
+\Cref{lem:pc-finite-projective-module}.  By
+\Cref{lem:pc-free-on-principal-open} there is therefore
+$g_n\in A\setminus\mathfrak p$ with $M^n_{g_n}$ free of finite rank
+over $A_{g_n}$.
+
+The complex is bounded, so only the finitely many indices
+$n\in[a,b]$ occur; put $g:=\prod_{n=a}^{b}g_n$, an element of
+$A\setminus\mathfrak p$.  For each $n$ the module
+$M^n_g=(M^n_{g_n})_{g}$ is a localization of a finite free
+$A_{g_n}$-module, hence finite free over $A_g$.  Let
+$U:=D(g)=\Spec(A_g)$, an affine open neighbourhood of $x$ contained in
+$V$.  Localization at $g$ is exact, so $M^{\bullet}\otimes_AA_g$
+computes the restriction to $U$: $E|_U$ is isomorphic in $D(\cO_U)$ to
+the bounded complex $M^{\bullet}_g$ of finite free $A_g$-modules.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
 \begin{lemma}[The perfect locus with fixed degree]
 \label{lem:pc-perfect-locus}
 Let $X$ be a scheme and let $E\in D(\cO_X)$ be
@@ -4275,16 +4374,21 @@ degree $i$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,lem:pc-perfect-local-normal-form}
 \emph{1. The local normal form.}  Since $E$ is perfect, every point
-$x\in X$ has an affine open neighbourhood $U_x=\Spec(A)$ and an
-isomorphism in $D(\cO_X)$ of $E|_{U_x}$ with a bounded complex
-$M^{\bullet}$ of finite free $A$-modules.  This is the local normal
-form of a perfect complex: an object of $D(\cO_X)$ is perfect if and
-only if it is locally isomorphic to a bounded complex of finite free
-modules [Derived Categories of Schemes, Section 36.31,
-\stacksproject{0BDH}], so after shrinking $U_x$ the terms of
-$M^{\bullet}$ may be taken finite free and not merely finite
-projective.  We may therefore assume $X=\Spec A$ and
+$x\in X$ has, by \Cref{lem:pc-perfect-local-normal-form}, an affine
+open neighbourhood $U_x=\Spec(A)$ together with an isomorphism in
+$D(\cO_{U_x})$ of $E|_{U_x}$ with a bounded complex $M^{\bullet}$ of
+finite free $A$-modules.  The open subscheme $U$ asserted by the lemma
+is unique if it exists -- it is the set of those $x\in X$ for which
+$\Spec(\kappa(x))\to X$ factors through it -- and its defining
+property is local on source and target: if $X=\bigcup_\alpha V_\alpha$
+is an open covering and $U_\alpha\subseteq V_\alpha$ has the property
+for $E|_{V_\alpha}$, then $U=\bigcup_\alpha U_\alpha$ has it for $E$
+(a morphism $f:Y\to X$ factors through $U$ if and only if each
+$f|_{f^{-1}(V_\alpha)}$ factors through $U_\alpha$, and the condition
+on $Lf^*E$ may likewise be checked on the covering
+$\{f^{-1}(V_\alpha)\}$ of $Y$).  So we may assume $X=\Spec A$ and
 $E=M^{\bullet}$ a bounded complex of finite free $A$-modules.
 
 \emph{2. The functions $\beta_j$.}  For a point $x\in X$ with residue
