@@ -1,7 +1,7 @@
 /-
-Copyright (c) 2026 Orchestra Agent. All rights reserved.
+Copyright (c) 2026 Christian Merten. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Orchestra Agent
+Authors: Christian Merten
 -/
 module
 
@@ -27,7 +27,7 @@ relating them.
   `χ(X, ℱ) = ∑ᵢ (-1)ⁱ dim_k Hⁱ(X, ℱ)`.
 - `AlgebraicGeometry.Scheme.Modules.degree f M`: the degree `deg(ℒ) = χ(X, ℒ) - χ(X, 𝒪_X)`
   of an invertible `𝒪_X`-module.
-- `AlgebraicGeometry.genus f`: the genus `g(X) = dim_k H¹(X, 𝒪_X)` of a curve.
+- `AlgebraicGeometry.Scheme.genus f`: the genus `g(X) = dim_k H¹(X, 𝒪_X)` of a curve.
 
 ## Main statements
 
@@ -54,7 +54,9 @@ invariant of the scheme itself.
 
 `eulerCharacteristic` implements `def:pc-euler-characteristic`, `degree` implements
 `def:pc-degree-line-bundle`, `genus` implements `def:pc-genus` and `riemannRoch` implements
-`thm:pc-riemann-roch`.
+`thm:pc-riemann-roch`.  The proof of `riemannRoch` is a `sorry`, and the three definitions
+depend on the `sorry`ed instance `SheafOfModules.isGrothendieckAbelian`, so `#print axioms`
+reports `sorryAx` on all four.
 -/
 
 @[expose] public section
@@ -67,7 +69,11 @@ namespace AlgebraicGeometry
 
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 
-namespace Scheme.Modules
+namespace Scheme
+
+open Modules
+
+namespace Modules
 
 /-- The **Euler characteristic** `χ(X, ℱ) = ∑ᵢ (-1)ⁱ dim_k Hⁱ(X, ℱ)` of an `𝒪_X`-module `ℱ`
 on a scheme `f : X ⟶ Spec k` over a field `k`.
@@ -90,9 +96,8 @@ a proper scheme that it has the expected properties.
 noncomputable def degree (f : X ⟶ Spec (.of k)) (M : X.Modules) : ℤ :=
   eulerCharacteristic f M - eulerCharacteristic f (SheafOfModules.unit _)
 
-end Scheme.Modules
+end Modules
 
-open Scheme.Modules in
 /-- The **genus** `g(X) = dim_k H¹(X, 𝒪_X)` of a curve `f : X ⟶ Spec k` over a field `k`.
 
 The definition is made for an arbitrary scheme over `k`; the blueprint states it for a
@@ -103,7 +108,10 @@ classical sense.
 noncomputable def genus (f : X ⟶ Spec (.of k)) : ℕ :=
   Module.finrank k ((cohomology f 1).obj (SheafOfModules.unit _))
 
-open Scheme.Modules in
+end Scheme
+
+open Scheme Scheme.Modules
+
 /-- **Riemann–Roch for smooth projective curves**: if `X` is a smooth projective curve over an
 algebraically closed field `k` of genus `g` and `ℒ` is an invertible `𝒪_X`-module of degree
 `d`, then `dim_k H⁰(X, ℒ) - dim_k H¹(X, ℒ) = d + 1 - g`.

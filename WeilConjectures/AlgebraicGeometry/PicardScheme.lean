@@ -1,13 +1,14 @@
 /-
-Copyright (c) 2026 Orchestra Agent. All rights reserved.
+Copyright (c) 2026 Christian Merten. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Orchestra Agent
+Authors: Christian Merten
 -/
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Monoidal.Grp
 public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.RepresentedBy
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve
@@ -38,18 +39,23 @@ is representable by a group scheme over `k`.
 
 A group scheme over `k` is a group object in the category of schemes over `Spec k`, that is a
 term of `CategoryTheory.Grp (Over (Spec (.of k)))`, and "representable" is
-`CategoryTheory.Functor.RepresentableBy` applied to the underlying presheaf of the
-sheafification.  Since the Picard presheaf takes values in `Type (u + 1)` (no smallness of
-the Picard group is claimed), the representing object and the represented functor live in
-different universes; `RepresentableBy` is stated with independent universes and accommodates
-this.
+`CategoryTheory.Functor.IsRepresentedBy` applied to the underlying presheaf of the
+sheafification, which is the notion the blueprint cites.  Since the Picard presheaf takes
+values in `Type (u + 1)` (no smallness of the Picard group is claimed), the representing object
+and the represented functor live in different universes; `IsRepresentedBy` is stated with
+independent universes and accommodates this.
+
+The group law on `G` is not asserted to be the one induced by the tensor product of invertible
+modules: the Picard presheaf is `Set`-valued here, since the group law on `Pic` requires the
+monoidal structure on `SheafOfModules`, which Mathlib does not have.  Strengthening the
+statement to representability of a *group*-valued sheaf is what that prerequisite would buy.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
@@ -71,7 +77,8 @@ representing scheme is a group scheme over `k`.
 @[stacks 0B9Z]
 theorem isRepresentable_picardFunctor {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f] :
-    ∃ G : Grp (Over (Spec (.of k))), Nonempty ((picardFunctor f).obj.RepresentableBy G.X) := by
+    ∃ (G : Grp (Over (Spec (.of k)))) (L : (picardFunctor f).obj.obj (op G.X)),
+      (picardFunctor f).obj.IsRepresentedBy L := by
   sorry
 
 end AlgebraicGeometry

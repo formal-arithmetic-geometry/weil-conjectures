@@ -224,6 +224,11 @@ lemma map_comp {S S' S'' : Scheme.{u}} (f : S ⟶ S') (g : S' ⟶ S'') :
     map n (f ≫ g) = map n f ≫ map n g := by
   ext1 <;> simp
 
+/-- An isomorphism of bases induces an isomorphism of the projective spaces over them. -/
+instance isIso_map {S T : Scheme.{u}} (f : S ⟶ T) [IsIso f] : IsIso (map n f) :=
+  ⟨map n (inv f), by rw [← map_comp, IsIso.hom_inv_id, map_id], by
+    rw [← map_comp, IsIso.inv_hom_id, map_id]⟩
+
 end ProjectiveSpace
 
 end AlgebraicGeometry

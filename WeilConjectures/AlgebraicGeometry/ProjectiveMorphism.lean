@@ -56,7 +56,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-variable {X Y S : Scheme.{u}}
+variable {X S : Scheme.{u}}
 
 /-- A morphism of schemes `f : X ⟶ S` is **projective** if it factors as a closed immersion
 into a projective space `ℙ(n; S)` over `S` with finitely many homogeneous coordinates followed
@@ -64,6 +64,8 @@ by the structure morphism `ℙ(n; S) ↘ S`.
 (blueprint: `def:pc-projective-morphism`, Stacks 01W7) -/
 @[stacks 01W7]
 class IsProjective (f : X ⟶ S) : Prop where
+  /-- A projective morphism factors as a closed immersion into some `ℙ(n; S)` followed by the
+  structure morphism of that projective space. -/
   exists_isClosedImmersion : ∃ (n : ℕ) (i : X ⟶ ℙ(ULift.{u} (Fin n); S)),
     IsClosedImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin n); S) ↘ S = f
 
@@ -73,22 +75,15 @@ lemma IsProjective.mk' {f : X ⟶ S} {n : ℕ} (i : X ⟶ ℙ(ULift.{u} (Fin n);
     [IsClosedImmersion i] (hi : i ≫ ℙ(ULift.{u} (Fin n); S) ↘ S = f) : IsProjective f :=
   ⟨n, i, ‹_›, hi⟩
 
-/-- **A projective morphism is proper.** Indeed it factors as a closed immersion, which is
-finite and hence proper, followed by the proper structure morphism of a projective space.
+/-- **A projective morphism is proper.**
 (blueprint: `lem:pc-projective-proper`) -/
 instance (priority := 100) IsProjective.isProper (f : X ⟶ S) [IsProjective f] : IsProper f := by
+  -- `f` factors as a closed immersion, which is finite and hence proper, followed by the
+  -- proper structure morphism of a projective space.
   obtain ⟨n, i, hi, rfl⟩ := IsProjective.exists_isClosedImmersion (f := f)
   infer_instance
 
 section RespectsIso
-
-/-- Projective space over the base is functorial in the base, so an isomorphism of bases
-induces an isomorphism of the projective spaces over them. -/
-private lemma isIso_projectiveSpaceMap (n : Type u) (e : S ⟶ Y) [IsIso e] :
-    IsIso (ProjectiveSpace.map n e) :=
-  ⟨ProjectiveSpace.map n (inv e), by
-    rw [← ProjectiveSpace.map_comp, IsIso.hom_inv_id, ProjectiveSpace.map_id], by
-    rw [← ProjectiveSpace.map_comp, IsIso.inv_hom_id, ProjectiveSpace.map_id]⟩
 
 instance IsProjective.respectsIso : MorphismProperty.RespectsIso @IsProjective.{u} where
   precomp e he f hf := by
@@ -98,7 +93,6 @@ instance IsProjective.respectsIso : MorphismProperty.RespectsIso @IsProjective.{
   postcomp e he f hf := by
     have : IsIso e := he
     obtain ⟨n, i, hi, rfl⟩ := hf.exists_isClosedImmersion
-    have := isIso_projectiveSpaceMap (ULift.{u} (Fin n)) e
     exact ⟨n, i ≫ ProjectiveSpace.map _ e, inferInstance, by
       rw [Category.assoc, ProjectiveSpace.map_over, ← Category.assoc]⟩
 
