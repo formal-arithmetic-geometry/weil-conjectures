@@ -4,6 +4,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Modules.Cohomology
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+public import WeilConjectures.AlgebraicGeometry.PicardScheme
 public import WeilConjectures.AlgebraicGeometry.ProjectiveMorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.RiemannRoch
