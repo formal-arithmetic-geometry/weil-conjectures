@@ -69,6 +69,8 @@ injectives.
 - `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'`: the composition isomorphism
   `R⁺F ⋙ R⁺G ≅ R⁺H` associated with an isomorphism `F ⋙ G ≅ H`. This is the form in which
   the theorem is usually applied, e.g. for the Leray isomorphism.
+- `CategoryTheory.Functor.rightDerivedFunctorPlusIdIso`: the identity isomorphism
+  `R⁺(𝟭 C) ≅ 𝟭`, expressing that the identity functor is its own right derived functor.
 
 Both composition isomorphisms are characterized by their compatibility with the units of the
 right derived functors, in `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_fac` and
@@ -224,6 +226,49 @@ lemma rightDerivedFunctorPlusCompIso'_fac {H : C ⥤ E} [H.Additive]
   exact rightDerivedNatTrans_fac _ _ _ _ (HomotopyCategory.Plus.quasiIso C) _
 
 end Composition
+
+section Identity
+
+variable (C : Type u₁) [Category.{v₁} C] [Abelian C] [HasDerivedCategory C]
+  [EnoughInjectives C]
+
+/-- The unit exhibiting the identity functor of `DerivedCategory.Plus C` as a right derived
+functor of `(𝟭 C).mapHomotopyCategoryPlus ⋙ Qh`. It is an isomorphism: the functor
+`(𝟭 C).mapHomotopyCategoryPlus ⋙ Qh` is `Qh` itself, which already inverts the
+quasi-isomorphisms. -/
+noncomputable def rightDerivedFunctorPlusIdUnit :
+    (𝟭 C).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⟶
+      DerivedCategory.Plus.Qh ⋙ 𝟭 (DerivedCategory.Plus C) :=
+  Functor.whiskerRight (mapHomotopyCategoryPlusIdIso C).hom DerivedCategory.Plus.Qh ≫
+    DerivedCategory.Plus.Qh.leftUnitor.hom ≫ DerivedCategory.Plus.Qh.rightUnitor.inv
+
+instance : IsIso (rightDerivedFunctorPlusIdUnit C) := by
+  dsimp only [rightDerivedFunctorPlusIdUnit]
+  infer_instance
+
+instance isRightDerivedFunctor_id_rightDerivedFunctorPlusIdUnit :
+    (𝟭 (DerivedCategory.Plus C)).IsRightDerivedFunctor (rightDerivedFunctorPlusIdUnit C)
+      (HomotopyCategory.Plus.quasiIso C) :=
+  isRightDerivedFunctor_of_inverts _ _ (asIso (rightDerivedFunctorPlusIdUnit C)).symm
+
+/-- **The identity functor is its own bounded below right derived functor**: the canonical
+comparison `R⁺(𝟭 C) ≅ 𝟭` is an isomorphism. -/
+noncomputable def rightDerivedFunctorPlusIdIso :
+    (𝟭 C).rightDerivedFunctorPlus ≅ 𝟭 (DerivedCategory.Plus C) :=
+  rightDerivedUnique (𝟭 C).rightDerivedFunctorPlus (𝟭 (DerivedCategory.Plus C))
+    (𝟭 C).rightDerivedFunctorPlusUnit (rightDerivedFunctorPlusIdUnit C)
+    (HomotopyCategory.Plus.quasiIso C)
+
+/-- The characterization of `Functor.rightDerivedFunctorPlusIdIso`: it transforms the unit of
+`R⁺(𝟭 C)` into the identity, up to the unitors. -/
+@[reassoc (attr := simp)]
+lemma rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso :
+    (𝟭 C).rightDerivedFunctorPlusUnit ≫
+        Functor.whiskerLeft DerivedCategory.Plus.Qh (rightDerivedFunctorPlusIdIso C).hom =
+      rightDerivedFunctorPlusIdUnit C := by
+  simp [rightDerivedFunctorPlusIdIso]
+
+end Identity
 
 end Functor
 
