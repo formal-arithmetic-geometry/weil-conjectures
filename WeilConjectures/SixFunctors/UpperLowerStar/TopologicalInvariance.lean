@@ -97,8 +97,6 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-attribute [local instance] Scheme.Hom.isEquivalence_etale Scheme.Hom.isDenseSubsite_etale
-
 section General
 
 variable (A : Type u') [Category.{u + 1} A] {X Y : Scheme.{u}} (f : X ⟶ Y)

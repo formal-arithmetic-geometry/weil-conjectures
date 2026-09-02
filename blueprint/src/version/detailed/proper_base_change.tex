@@ -2225,6 +2225,7 @@ it is a quasi-isomorphism.  This expands Tag \texttt{03Q9}.
 \begin{lemma}[Canonical etale descent across a universal homeomorphism]
 \label{lemma:weil-pbc-universal-homeomorphism-descent-datum}
 \uses{}
+\statusnote{Bypassed by the formalized route: Lemma~\ref{lemma:weil-pbc-universal-homeomorphism-site-equivalence} is proved in Lean following the second proof of Tag \texttt{04DZ} (graph descent, the section trick and fibre-degree induction), which does not go through the canonical descent datum.}
 Let $u:X_0\to X$ be a universal homeomorphism.  For every etale
 $V_0\to X_0$, the two pullbacks to $X_0\times_XX_0$ have a unique
 isomorphism whose restriction along the diagonal is the identity.  This
@@ -2284,8 +2285,9 @@ composite proves the asserted identity and composition compatibilities.
 \begin{lemma}[Base change equivalence for universal homeomorphisms]
 \label{lemma:weil-pbc-universal-homeomorphism-site-equivalence}
 \uses{}
-\lean{AlgebraicGeometry.Scheme.Hom.isEquivalence_etale}
-\statusnote{The statement is formalised as \texttt{AlgebraicGeometry.Scheme.Hom.isEquivalence\_etale}, but its proof is \texttt{sorry} (Tag \texttt{04DZ}).}
+\lean{AlgebraicGeometry.Scheme.Hom.isEquivalence_etale,
+  AlgebraicGeometry.Scheme.Hom.etaleEquivalence}
+\leanok
 
 Let $u:X_0\to X$ be a universal homeomorphism.  Base change gives an
 equivalence between etale $X$-schemes and etale $X_0$-schemes.
@@ -2367,8 +2369,9 @@ families respects refinements and composite coverings.
 \uses{}
 \lean{AlgebraicGeometry.Etale.sheafEquivalence,
   AlgebraicGeometry.Etale.isEquivalence_upperStar,
-  AlgebraicGeometry.Etale.cohomologyEquiv}
-\statusnote{The three declarations are formalised, but each is built on \texttt{attribute [local instance] isEquivalence\_etale} and so inherits the \texttt{sorry} in the proof of Lemma~\ref{lemma:weil-pbc-universal-homeomorphism-site-equivalence}.}
+  AlgebraicGeometry.Etale.cohomologyEquiv,
+  AlgebraicGeometry.Etale.cohomologyMap_bijective}
+\leanok
 
 Let $u:X_0\to X$ be a universal homeomorphism.  Pullback along $u$ is an
 equivalence between the small etale topos of $X$ and that of $X_0$, and for
@@ -2381,6 +2384,7 @@ This is Tag \texttt{03SI}.
 \end{proposition}
 \begin{proof}
 \uses{lemma:weil-pbc-universal-homeomorphism-site-equivalence,lemma:weil-pbc-universal-homeomorphism-coverings}
+\leanok
 
 Base change is an equivalence of the underlying categories and matches the
 covering families, hence is an equivalence of sites; so restriction along it
