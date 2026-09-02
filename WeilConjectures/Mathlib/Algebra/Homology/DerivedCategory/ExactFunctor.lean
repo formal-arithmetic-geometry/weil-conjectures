@@ -38,6 +38,11 @@ For exact functors between abelian categories, the induced functor
   `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso_fac`: the composition isomorphisms
   are characterized by their compatibility with the factorizations of the induced functors
   through the localization functors.
+- `CategoryTheory.Functor.mapDerivedCategoryNatIso_fac`,
+  `CategoryTheory.Functor.mapDerivedCategoryNatIso_fach` and
+  `CategoryTheory.Functor.mapDerivedCategoryPlusNatIso_hom_app_factorsh`: likewise, the
+  isomorphism induced by `e : F ≅ G` is characterized by its compatibility with the
+  factorizations; on the image of a complex it is `e` itself.
 - `CategoryTheory.Functor.mapDerivedCategoryPlusSingleFunctor`: the compatibility of
   `mapDerivedCategoryPlus` with the single functors of the bounded below derived
   categories.
@@ -77,6 +82,60 @@ noncomputable def mapDerivedCategoryNatIso {F G : C ⥤ D} [F.Additive] [G.Addit
     (G.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
     F.mapDerivedCategory G.mapDerivedCategory
     (isoWhiskerRight (NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)) DerivedCategory.Q)
+
+/-- The isomorphism `Functor.mapDerivedCategoryNatIso` is characterized by its
+compatibility with the factorizations `Functor.mapDerivedCategoryFactors` through the
+localization functors `DerivedCategory.Q`: on the image of a complex it is the levelwise
+image of `e`. -/
+@[reassoc]
+lemma mapDerivedCategoryNatIso_fac {F G : C ⥤ D} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G)
+    (K : CochainComplex C ℤ) :
+    (mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj K) ≫
+        G.mapDerivedCategoryFactors.hom.app K =
+      F.mapDerivedCategoryFactors.hom.app K ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex e.hom (ComplexShape.up ℤ)).app K) := by
+  have hF : Localization.Lifting.iso DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      (F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
+      F.mapDerivedCategory = F.mapDerivedCategoryFactors := rfl
+  have hG : Localization.Lifting.iso DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      (G.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
+      G.mapDerivedCategory = G.mapDerivedCategoryFactors := rfl
+  simp only [mapDerivedCategoryNatIso, Localization.liftNatIso_hom,
+    Localization.liftNatTrans_app, hF, hG, Category.assoc, Iso.inv_hom_id_app,
+    Category.comp_id, isoWhiskerRight_hom, whiskerRight_app]
+  rfl
+
+/-- The homotopy category counterpart of `Functor.mapDerivedCategoryNatIso_fac`: the
+isomorphism `Functor.mapDerivedCategoryNatIso` is compatible with the factorizations
+`Functor.mapDerivedCategoryFactorsh` through the localization functors
+`DerivedCategory.Qh`. -/
+@[reassoc]
+lemma mapDerivedCategoryNatIso_fach {F G : C ⥤ D} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G)
+    (K : HomotopyCategory C (ComplexShape.up ℤ)) :
+    (mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Qh.obj K) ≫
+        G.mapDerivedCategoryFactorsh.hom.app K =
+      F.mapDerivedCategoryFactorsh.hom.app K ≫
+        DerivedCategory.Qh.map
+          ((NatTrans.mapHomotopyCategory e.hom (ComplexShape.up ℤ)).app K) := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  have hnt : (NatTrans.mapHomotopyCategory e.hom (ComplexShape.up ℤ)).app
+      ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) =
+      (HomotopyCategory.quotient D (ComplexShape.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex e.hom (ComplexShape.up ℤ)).app K) := rfl
+  rw [mapDerivedCategoryFactorsh_hom_app, mapDerivedCategoryFactorsh_hom_app, hnt,
+    ← NatTrans.naturality_assoc, mapDerivedCategoryNatIso_fac_assoc,
+    reassoc_of% (DerivedCategory.quotientCompQhIso_inv_naturality
+      ((NatTrans.mapHomologicalComplex e.hom (ComplexShape.up ℤ)).app K))]
+  simp only [mapHomotopyCategoryFactors, Quotient.lift.isLift_inv, Category.assoc]
+  rw [← DerivedCategory.Qh.map_comp, ← DerivedCategory.Qh.map_comp]
+  simp
 
 /-- The composition isomorphism
 `(F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory` for exact
@@ -293,6 +352,45 @@ noncomputable def mapDerivedCategoryPlusNatIso {F G : C ⥤ D} [F.Additive] [G.A
     (F.mapDerivedCategoryPlusCompatibility ≪≫
       isoWhiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryNatIso e) ≪≫
       G.mapDerivedCategoryPlusCompatibility.symm)
+
+/-- The isomorphism `Functor.mapDerivedCategoryPlusNatIso` is the restriction of
+`Functor.mapDerivedCategoryNatIso` along the fully faithful inclusion
+`DerivedCategory.Plus.ι`. -/
+@[simp]
+lemma ι_map_mapDerivedCategoryPlusNatIso_hom_app {F G : C ⥤ D} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G)
+    (X : DerivedCategory.Plus C) :
+    DerivedCategory.Plus.ι.map ((mapDerivedCategoryPlusNatIso e).hom.app X) =
+      (mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Plus.ι.obj X) := by
+  rw [mapDerivedCategoryPlusNatIso, Functor.fullyFaithfulCancelRight_hom_app,
+    Functor.map_preimage]
+  simp [mapDerivedCategoryPlusCompatibility, mapDerivedCategoryPlus, ObjectProperty.lift]
+
+/-- The isomorphism `Functor.mapDerivedCategoryPlusNatIso` is characterized by its
+compatibility with the factorizations `Functor.mapDerivedCategoryPlusFactorsh` through the
+localization functors `DerivedCategory.Plus.Qh`: on the image of a bounded below complex it
+is the levelwise image of `e`. -/
+@[reassoc]
+lemma mapDerivedCategoryPlusNatIso_hom_app_factorsh {F G : C ⥤ D} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G)
+    (K : HomotopyCategory.Plus C) :
+    (mapDerivedCategoryPlusNatIso e).hom.app (DerivedCategory.Plus.Qh.obj K) ≫
+        G.mapDerivedCategoryPlusFactorsh.hom.app K =
+      F.mapDerivedCategoryPlusFactorsh.hom.app K ≫
+        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e.hom).app K) := by
+  apply DerivedCategory.Plus.ι.map_injective
+  have hqh : ∀ {X Y : HomotopyCategory.Plus D} (g : X ⟶ Y),
+      DerivedCategory.Plus.ι.map (DerivedCategory.Plus.Qh.map g) =
+        DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι D).map g) := fun _ => rfl
+  have hnt : (HomotopyCategory.Plus.ι D).map
+      ((NatTrans.mapHomotopyCategoryPlus e.hom).app K) =
+      (NatTrans.mapHomotopyCategory e.hom (ComplexShape.up ℤ)).app
+        ((HomotopyCategory.Plus.ι C).obj K) := rfl
+  simp only [Functor.map_comp, hqh, hnt, ι_map_mapDerivedCategoryPlusFactorsh_hom_app,
+    ι_map_mapDerivedCategoryPlusNatIso_hom_app]
+  exact mapDerivedCategoryNatIso_fach e ((HomotopyCategory.Plus.ι C).obj K)
 
 /-- The composition isomorphism
 `(F ⋙ G).mapDerivedCategoryPlus ≅ F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus`
