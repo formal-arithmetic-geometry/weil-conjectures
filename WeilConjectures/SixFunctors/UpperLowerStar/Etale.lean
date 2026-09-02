@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Additive
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
@@ -31,14 +32,13 @@ The site-theoretic inputs of the general definitions are discharged here:
   the `P = Q = @Etale` case of `AlgebraicGeometry.Scheme.isContinuous_overPullback` of
   `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. Hence `Etale.lowerStar`
   carries no hypotheses at all.
-- The left Kan extensions along the opposites of base change exist since `A` is
-  Grothendieck abelian, with no smallness assumption on the small étale sites
-  (`CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`). Their left
-  exactness for an arbitrary `g` is still a sorried instance of that file, and
-  sheafification on the small étale sites is a sorried instance of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Hence
-  `Etale.upperStar` and the adjunction `g^* ⊣ g_*` carry no hypotheses either.
+- Sheafification on the small étale sites exists since `A` is Grothendieck abelian and the
+  small étale sites are essentially small; this is the sorried instance of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. The left Kan extensions
+  along the opposites of base change and their left exactness are proved in
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`, from the `u + 1`
+  universe shape of the sites and AB5 in `A`. Hence `Etale.upperStar` and the adjunction
+  `g^* ⊣ g_*` carry no hypotheses either.
 - For `g` étale, no smallness or exactness argument is needed: base change is right
   adjoint to the localization functor `MorphismProperty.Over.map ⊤ ‹Etale g›`, so its
   opposite is a *left* adjoint (`Etale.isLeftAdjoint_op_overPullback`), all pointwise
@@ -79,8 +79,8 @@ The site-theoretic inputs of the general definitions are discharged here:
   exact for values in an abelian category.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar`: the pullback `g^*` is left
-  exact, hence exact, being also a left adjoint. For an étale `g` the left exactness of
-  the Kan extension is proved; for a general `g` it is the sorried instance
+  exact, hence exact, being also a left adjoint. For an étale `g` the left exactness of the
+  Kan extension follows from the adjunction; for a general `g` it is
   `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`.
 
 -/
@@ -135,12 +135,14 @@ instance Etale.hasPointwiseLeftKanExtension_op_overPullback (F : Y.Etaleᵒᵖ �
 /-- For an étale morphism `g`, the left Kan extension along the opposite of base change is
 precomposition with the opposite of the localization functor `MorphismProperty.Over.map ⊤
 ‹Etale g›`, hence preserves all limits that exist in the coefficient category. This is what
-makes the pullback `g^*` left exact without any smallness or concreteness assumption on `A`;
-compare `CategoryTheory.lan_preservesFiniteLimits_of_flat`. -/
+makes the pullback `g^*` left exact without any exactness assumption on the filtered
+colimits of `A`; compare
+`AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`,
+which covers an arbitrary `g` but uses AB5. -/
 instance Etale.preservesFiniteLimits_op_lan_overPullback :
     PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
       (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A) :=
-  inferInstance
+  Functor.preservesFiniteLimits_lan _
 
 end KanExtension
 
@@ -229,7 +231,7 @@ instance : (g)^*[A].IsLeftAdjoint :=
 adjoint: sheafification on the small étale site of `Z` is left exact by the sorried
 `HasSheafify` instance for the Grothendieck abelian `A`, and the left Kan
 extension along the opposite of base change is left exact — for an étale `g` by
-`Etale.preservesFiniteLimits_op_lan_overPullback`, in general by the sorried
+`Etale.preservesFiniteLimits_op_lan_overPullback`, in general by
 `Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`, the Kan
 extension being a filtered colimit and filtered colimits in the Grothendieck abelian `A`
 being exact. -/

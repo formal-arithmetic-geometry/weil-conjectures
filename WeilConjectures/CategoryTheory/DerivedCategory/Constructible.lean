@@ -30,9 +30,9 @@ concrete Grothendieck abelian category with `Hom`-types in the universe `u + 1`,
 the universe `u` of the base schemes. Nothing beyond that is assumed:
 
 - the left Kan extensions along base change, needed by the pullback `Etale.upperStar`
-  entering `IsConstructibleSheaf`, exist for every morphism of schemes by
-  `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`;
+  entering `IsConstructibleSheaf`, come from the instance
+  `CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
+  `WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`;
 - the chosen localized category `D(X_ét)` comes from the instance
   `HasDerivedCategory.ofIsGrothendieckAbelian` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory`, which installs
