@@ -310,8 +310,7 @@ lemma generatingMonoQuasiIsos_rlp [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < �
     (hG : IsSeparator G)
     (hsub : ∀ n : ℕ, HasCardinalLT (Subobject (∐ (fun (_ : Fin n) ↦ G))) κ) :
     (generatingMonoQuasiIsos G κ).rlp =
-      (MorphismProperty.monomorphisms (CochainComplex C ℤ) ⊓
-        HomologicalComplex.quasiIso C (ComplexShape.up ℤ)).rlp := by
+      (HomologicalComplex.monoQuasiIso C (ComplexShape.up ℤ)).rlp := by
   apply le_antisymm
   · intro X Y p hp A' B i hi
     have h₁ : Mono i := hi.1
@@ -327,8 +326,7 @@ generating set if and only if it has the right lifting property with respect to 
 monomorphic quasi-isomorphisms. -/
 lemma serpeGeneratingSet_rlp :
     (serpeGeneratingSet C).rlp =
-      (MorphismProperty.monomorphisms (CochainComplex C ℤ) ⊓
-        HomologicalComplex.quasiIso C (ComplexShape.up ℤ)).rlp := by
+      (HomologicalComplex.monoQuasiIso C (ComplexShape.up ℤ)).rlp := by
   dsimp only [serpeGeneratingSet]
   exact generatingMonoQuasiIsos_rlp _ _ (aleph0_lt_serpeCardinal.{w} C)
     (isSeparator_separator C) (hasCardinalLT_subobject_serpeCardinal.{w} C)

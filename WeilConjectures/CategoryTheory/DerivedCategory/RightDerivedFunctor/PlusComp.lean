@@ -26,10 +26,10 @@ is an isomorphism (`Functor.rightDerivedFunctorPlusCompIso`).
 `Functor.rightDerivedFunctorCompIso` in
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp` proves the same
 theorem for the unbounded derived category, but it assumes `HasKInjectiveResolutions` on
-both `C` and `D`. That hypothesis is available in every Grothendieck abelian category
-(`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`), but it is
-stronger than what is needed here, and so is the hypothesis it forces on `F`, as explained
-below: the bounded below statement needs only enough injectives. This file therefore
+both `C` and `D`. That hypothesis does hold in every Grothendieck abelian category
+(`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`), but it is not
+implied by enough injectives, which is all the bounded below statement needs; the same goes
+for the hypothesis the unbounded statement forces on `F`, see below. This file therefore
 deliberately does not import anything from
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
 
