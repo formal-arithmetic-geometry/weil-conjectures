@@ -75,6 +75,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.AcyclicSwallowing
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGenerated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGeneratedCover
@@ -375,6 +376,8 @@ public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.Dehomogenization
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar

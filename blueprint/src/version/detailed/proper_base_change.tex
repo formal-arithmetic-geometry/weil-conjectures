@@ -173,6 +173,8 @@ source paragraph to be audited; it is never used as an admitted theorem.}
 \begin{definition}[Cartesian square and chosen pullback identification]
 \label{def:weil-pbc-cartesian-square}
 \uses{}
+\lean{AlgebraicGeometry.Etale.squareUpperStarIso}
+\leanok
 For schemes and morphisms
 \[
 \begin{CD}
@@ -190,6 +192,9 @@ $g'^{-1}F$ always means inverse image using this specified identification.
 \begin{definition}[Underived exchange map: corrected categorical construction]
 \label{def:weil-pbc-underived-exchange}
 \uses{def:weil-pbc-cartesian-square}
+\lean{AlgebraicGeometry.Etale.baseChangeMap,
+  AlgebraicGeometry.Etale.upperStar_map_baseChangeMap_app_counit}
+\leanok
 Let $F$ be a sheaf of abelian groups on $X_{\mathrm{et}}$.  The chosen
 Cartesian identification gives a canonical isomorphism of inverse-image
 functors
@@ -224,6 +229,8 @@ used throughout this extraction.  The removed historical block has SHA-256
 \begin{lemma}[Sectionwise exchange is natural]
 \label{lemma:weil-pbc-underived-exchange-naturality}
 \uses{def:weil-pbc-underived-exchange}
+\lean{AlgebraicGeometry.Etale.baseChangeMap_naturality}
+\leanok
 For every morphism $u:F\to G$ the square
 \[
 \begin{CD}
@@ -236,6 +243,7 @@ commutes on every etale object of $Y'$.
 \end{lemma}
 \begin{proof}
 \uses{def:weil-pbc-underived-exchange}
+\leanok
 On a representative section $s_i$, both paths first apply $u$ and then
 pull back along the same two maps.  Since inverse image is a functor, the two
 resulting sections of $g'^{-1}G$ are equal on each $V_i$ and therefore after
@@ -457,6 +465,8 @@ the compatibility omission at Tag \texttt{0A3U}.
 \begin{definition}[Derived exchange map]
 \label{def:weil-pbc-derived-exchange}
 \uses{def:weil-pbc-underived-exchange}
+\lean{AlgebraicGeometry.Etale.derivedBaseChangeMapPlus}
+\leanok
 For $K\in D^+(X_{\mathrm{et}})$ choose an injective resolution
 $K\xrightarrow{\simeq}I^\bullet$.  Apply
 $\operatorname{Ex}_{\square,I^r}$ in every degree and use the naturality
@@ -698,6 +708,9 @@ exchange construction is well-defined with all fields stated in the lemma.
 \begin{lemma}[Derived exchange replacement independence]
 \label{lemma:weil-pbc-derived-exchange-replacement}
 \uses{def:weil-pbc-derived-exchange}
+\lean{AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app,
+  AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext}
+\leanok
 The K-injective replacement used in Definition
 \ref{def:weil-pbc-derived-exchange} gives a well-defined derived exchange
 map, independent of all replacement choices.
@@ -707,6 +720,7 @@ map, independent of all replacement choices.
   lemma:weil-pbc-derived-exchange-target-comparison-exists-v5,
   lemma:weil-pbc-derived-exchange-target-comparison-unique-v5,
   lemma:weil-pbc-derived-exchange-source-comparison-v5}
+\leanok
 Given two K-injective replacements $J^\bullet$ and $J'^\bullet$, the identity
 of $g'^{-1}I^\bullet$ lifts to maps $J^\bullet\to J'^\bullet$ and
 $J'^\bullet\to J^\bullet$ because K-injective complexes are homotopically
@@ -743,6 +757,8 @@ same calculation with the order reversed proves vertical pasting.
 \begin{definition}[Proper base-change property]
 \label{def:weil-pbc-property}
 \uses{def:weil-pbc-derived-exchange}
+\lean{AlgebraicGeometry.Etale.IsBaseChangeIso}
+\leanok
 For a proper morphism $f:X\to Y$, define $\mathsf{PBC}(f)$ to mean that for
 every morphism $g:Y'\to Y$, every associated Cartesian square $\square$, and
 every torsion sheaf $F$ on $X_{\mathrm{et}}$, the map
@@ -1220,7 +1236,7 @@ integer $n$ give the asserted single factorization.
 \begin{lemma}[Projective embedding over $X$]
 \label{lemma:weil-pbc-chow-embedding-over-x}
 \uses{cor:chow-lemma-proper,def:nagata-projective-space-base-change}
-\lean{AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_lift,
+\lean{AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_liftBaseChange,
   AlgebraicGeometry.ChowModification.toProjectiveSpaceSource,
   AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpaceSource}
 \leanok
