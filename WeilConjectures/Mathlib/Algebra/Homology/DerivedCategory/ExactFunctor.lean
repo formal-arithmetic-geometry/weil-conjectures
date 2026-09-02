@@ -23,6 +23,11 @@ For exact functors between abelian categories, the induced functor
 - `CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso`: the commutation
   `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` with the homology functors, with the
   bounded below variant `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
+- `CategoryTheory.Functor.isGE_mapDerivedCategory_obj`,
+  `CategoryTheory.Functor.isLE_mapDerivedCategory_obj` and
+  `CategoryTheory.Functor.bounded_mapDerivedCategory_obj`: an exact functor is t-exact for
+  the canonical t-structures, so `F.mapDerivedCategory` preserves bounded below, bounded
+  above and bounded objects.
 - `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
   `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
   isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility`.
@@ -218,5 +223,35 @@ noncomputable def mapDerivedCategoryPlusSingleFunctor (n : ℤ) :
       (Functor.associator _ _ _).symm)
 
 end Plus
+
+section Bounded
+
+variable (F : C ⥤ D) [F.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+/-- An exact functor between abelian categories preserves bounded above objects of the
+derived categories: an object isomorphic to a complex concentrated in degrees `≤ n` is
+sent to an object with the same property. -/
+lemma isLE_mapDerivedCategory_obj (X : DerivedCategory C) (n : ℤ) [X.IsLE n] :
+    (F.mapDerivedCategory.obj X).IsLE n := by
+  obtain ⟨K, hK, ⟨e⟩⟩ := X.exists_iso_Q_obj_of_isLE n
+  have : DerivedCategory.TStructure.t.IsLE
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q).obj K) n :=
+    inferInstanceAs (DerivedCategory.IsLE (DerivedCategory.Q.obj
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) n)
+  exact DerivedCategory.TStructure.t.isLE_of_iso
+    (F.mapDerivedCategory.mapIso e ≪≫ F.mapDerivedCategoryFactors.app K).symm n
+
+/-- An exact functor between abelian categories preserves bounded objects of the derived
+categories: it is t-exact, so it preserves both boundedness below
+(`Functor.isGE_mapDerivedCategory_obj`) and boundedness above
+(`Functor.isLE_mapDerivedCategory_obj`). -/
+lemma bounded_mapDerivedCategory_obj {X : DerivedCategory C}
+    (hX : DerivedCategory.TStructure.t.bounded X) :
+    DerivedCategory.TStructure.t.bounded (F.mapDerivedCategory.obj X) := by
+  obtain ⟨⟨a, _⟩, ⟨b, _⟩⟩ := hX
+  exact ⟨⟨a, F.isGE_mapDerivedCategory_obj X a⟩, ⟨b, F.isLE_mapDerivedCategory_obj X b⟩⟩
+
+end Bounded
 
 end CategoryTheory.Functor

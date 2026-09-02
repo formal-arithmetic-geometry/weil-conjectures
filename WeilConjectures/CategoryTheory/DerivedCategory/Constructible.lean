@@ -43,10 +43,15 @@ the universe `u` of the base schemes. Nothing beyond that is assumed:
   object of the derived category of étale sheaves that all its homology sheaves are
   constructible.
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible`: the property of being
-  bounded with constructible homology.
+  bounded with constructible homology, with the characterization
+  `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_iff`.
 - `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible`: the subcategory
   `Dᵇc( X, A)` cut out by the property above, the constructible bounded derived
-  category of the `ℓ`-adic formalism.
+  category of the `ℓ`-adic formalism, with its inclusion
+  `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible.ι` into the derived
+  category and its inclusion
+  `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible.toPlus` into the bounded
+  below derived category.
 
 -/
 
@@ -86,6 +91,13 @@ noncomputable def Etale.DerivedCategory.boundedConstructible :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
   DerivedCategory.TStructure.t.bounded ⊓ Etale.DerivedCategory.constructibleHomology A X
 
+lemma Etale.DerivedCategory.boundedConstructible_iff
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Etale.DerivedCategory.boundedConstructible A X M ↔
+      DerivedCategory.TStructure.t.bounded M ∧
+        Etale.DerivedCategory.constructibleHomology A X M :=
+  Iff.rfl
+
 /-- The constructible bounded derived category `Dᵇc( X, A)`, realized as the full
 subcategory of bounded complexes with constructible homology in the derived category of
 étale sheaves. -/
@@ -101,6 +113,17 @@ noncomputable def Etale.DerivedCategoryBoundedConstructible.ι :
     Etale.DerivedCategoryBoundedConstructible A X ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (Etale.DerivedCategory.boundedConstructible A X).ι
+
+lemma Etale.DerivedCategory.boundedConstructible_le_plus :
+    Etale.DerivedCategory.boundedConstructible A X ≤ DerivedCategory.TStructure.t.plus :=
+  le_trans inf_le_left inf_le_left
+
+/-- A bounded constructible complex is in particular bounded below: the inclusion of
+`Dᵇc(X, A)` into the bounded below derived category `D⁺(X_ét, A)`. -/
+noncomputable def Etale.DerivedCategoryBoundedConstructible.toPlus :
+    Etale.DerivedCategoryBoundedConstructible A X ⥤
+      DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) :=
+  ObjectProperty.ιOfLE (Etale.DerivedCategory.boundedConstructible_le_plus A X)
 
 @[inherit_doc Etale.DerivedCategoryBoundedConstructible]
 scoped notation "Dᵇc(" X ", " A ")" =>

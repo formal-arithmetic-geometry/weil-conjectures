@@ -68,6 +68,8 @@ The site-theoretic inputs of the general definitions are discharged here:
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category; in particular it is left
   exact for values in an abelian category.
+- `AlgebraicGeometry.Etale.additive_upperStar`: the pullback `g^*` is additive, being
+  left adjoint to the additive pushforward `g_*`.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar`: the pullback `g^*` is left
   exact, hence exact, being also a left adjoint. For an étale `g` the left exactness of
@@ -218,7 +220,7 @@ instance : (g)^*[A].IsLeftAdjoint :=
 
 /-- The pullback `g^*` on étale sheaves is additive, being left adjoint to the additive
 pushforward `g_*`. -/
-instance Etale.upperStar_additive : (Etale.upperStar A g).Additive :=
+instance Etale.additive_upperStar : (g)^*[A].Additive :=
   (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive
 
 /-- The pullback `g^*` on étale sheaves is left exact, hence exact, being also a left

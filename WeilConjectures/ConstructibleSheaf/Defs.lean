@@ -39,7 +39,11 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
   [Stacks 09XZ] — together with schemes immersed in `X` realizing the strata) such that
   the pullback of `F` to each stratum is finite locally constant.
 
-All four predicates are `Prop`-valued classes.
+All four predicates are `Prop`-valued classes, and all four are invariant under
+isomorphism of sheaves (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.of_iso`,
+`AlgebraicGeometry.Scheme.IsFiniteSheaf.of_iso`,
+`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_iso` and
+`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_iso`).
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
 Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above the
@@ -156,6 +160,16 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
   have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
   ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ F.isConstant_over _⟩⟩⟩
 
+/-- Being locally constant is invariant under isomorphism of sheaves: an isomorphic sheaf
+is trivialized by the same étale cover. -/
+lemma IsLocallyConstantSheaf.of_iso {F G : Sheaf X.smallEtaleTopology A} (e : F ≅ G)
+    [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf G := by
+  obtain ⟨D⟩ := ‹IsLocallyConstantSheaf F›.nonempty_locallyConstantDatum
+  refine ⟨⟨D.cover, fun i ↦ ?_⟩⟩
+  have := D.isConstant i
+  exact Sheaf.isConstant_congr _
+    ((X.smallEtaleTopology.overPullback A (D.cover.etalePrecoverageToEtale i)).mapIso e)
+
 end LocallyConstant
 
 section FiniteSheaf
@@ -174,6 +188,15 @@ class IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   finite_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
     Finite (ToType ((pointSmallEtale s).sheafFiber.obj F))
 
+/-- Being finite is invariant under isomorphism of sheaves: isomorphic sheaves have
+isomorphic stalks. -/
+lemma IsFiniteSheaf.of_iso {F G : Sheaf X.smallEtaleTopology A} (e : F ≅ G)
+    [IsFiniteSheaf F] : IsFiniteSheaf G where
+  finite_sheafFiber Ω _ _ s :=
+    have := ‹IsFiniteSheaf F›.finite_sheafFiber Ω s
+    Finite.of_surjective _
+      (ConcreteCategory.bijective_of_isIso ((pointSmallEtale s).sheafFiber.map e.hom)).surjective
+
 end FiniteSheaf
 
 section FiniteLocallyConstant
@@ -188,6 +211,12 @@ equivalently (not proved here), `F` is representable by a scheme finite étale o
 `X`. -/
 class IsFiniteLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop
     extends IsLocallyConstantSheaf F, IsFiniteSheaf F
+
+/-- Being finite locally constant is invariant under isomorphism of sheaves. -/
+lemma IsFiniteLocallyConstantSheaf.of_iso {F G : Sheaf X.smallEtaleTopology A} (e : F ≅ G)
+    [IsFiniteLocallyConstantSheaf F] : IsFiniteLocallyConstantSheaf G where
+  __ := IsLocallyConstantSheaf.of_iso e
+  __ := IsFiniteSheaf.of_iso e
 
 end FiniteLocallyConstant
 
@@ -242,6 +271,15 @@ affine-local one of [Stacks 03RW]. In the `ℓ`-adic formalism it is applied wit
 class IsConstructibleSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   exists_stratification : ∃ S : Stratification X, ∀ i : Fin S.n,
     IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj F)
+
+/-- Being constructible is invariant under isomorphism of sheaves: an isomorphic sheaf is
+trivialized by the same stratification. -/
+lemma IsConstructibleSheaf.of_iso {F G : Sheaf X.smallEtaleTopology A} (e : F ≅ G)
+    [IsConstructibleSheaf F] : IsConstructibleSheaf G := by
+  obtain ⟨S, hS⟩ := ‹IsConstructibleSheaf F›.exists_stratification
+  refine ⟨S, fun i ↦ ?_⟩
+  have := hS i
+  exact IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStar A (S.immersion i)).mapIso e)
 
 end Constructible
 
