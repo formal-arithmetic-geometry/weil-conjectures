@@ -5350,6 +5350,8 @@ equalities, so
 \begin{definition}[Chosen compactification and compact-support image]
 \label{def:weil-pbc-projection-compactification}
 \uses{}
+\lean{AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification}
+\leanok
 Let $f:X\to Y$ admit a chosen compactification
 \[
  X\xrightarrow{j}\overline X\xrightarrow{p}Y,
@@ -6891,6 +6893,15 @@ additional external hypothesis.
 
 \section{Compact-support continuation}\label{chap:compact-support}
 \statusnote{Ordinary proper base change is used here only as the proper part of the raw compact-support comparison.  Densification, open exchange, refinement independence, and all four displayed coherence diagrams are additional inputs.}
+\formalizationnote{The \emph{geometric} inputs of \S A43 are now formalized: existence of a
+dense compactification of a separated finite-type morphism, refinements together with their
+properness and their uniqueness out of a dense model, common dense refinements of two
+compactifications, and flat base change of a dense compactification.  What remains open in
+\S A43 is the derived-categorical layer: the refinement comparison $\rho$ of
+\textup{(BA43-RHO)} being an isomorphism, the resulting $\kappa$ system and its
+independence, the open--proper exchange \textup{(BA43-OPX)}, and densification after a
+non-flat base change.  Finite presentation of the constructed compactifications is also not
+yet formalized.}
 \subsection*{A43. Dense compactifications and composition}
 
 Let $f:X\to Y$ be separated and finitely presented.  A dense
@@ -6982,6 +6993,16 @@ closure
 \]
 The schematic-closure leaf proves that $d_{C,g}$ is the resulting closed
 proper map and that it restricts to the identity on $X'$.
+
+\formalizationnote{The \emph{flat} case of the base change above is formalized:
+\texttt{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant\_i\_ofIsPullback}
+(\texttt{WeilConjectures/Compactification/BaseChange.lean}) proves that if $g$ is flat and
+the quasi-compact open immersion $j_C$ is scheme-theoretically dominant, then so is the open
+immersion of $\overline X_{C,g}^{\mathrm{raw}}$; that is, for flat $g$ the raw pullback is
+already dense and no densification is needed.  The base changed compactification itself is
+\texttt{AlgebraicGeometry.Compactification.ofIsPullback}.  For a general $g$ the schematic
+closure \textup{(BA43-DEN)} is still required and remains open; see
+\nolinkurl{GEO-BA43-SCHEMATIC-CLOSURE-DENSIFICATION}.}
 
 A raw compactification is data
 \[
@@ -7485,7 +7506,8 @@ integral, and rational exports are outside this finite-level owner.
 \textbf{Status. }\texttt{OPEN}; \textbf{reduction status. }\texttt{LEAF}; \textbf{class. }\texttt{GEO}.
 \uses{}
 \textbf{Exact output required. }A refinement between the typed models is proper because its source is proper and its target separated over the base.
-\openobligation{GEO-BA43-REFINEMENT-PROPER}
+\formalizationnote{Formalized as \texttt{AlgebraicGeometry.Compactification.Refinement.isProper} (\texttt{WeilConjectures/Compactification/Refinement.lean}).  It is an unconditional instance on the ambient morphism of a refinement of compactifications, proved exactly by the stated argument: the composite with the proper structure morphism of the target is proper, and the target is separated over the base.  The full required output is delivered, so the owner is discharged.}
+\constructedby{GEO-BA43-REFINEMENT-PROPER}
 \end{openproblem}
 
 \Needspace{8\baselineskip}
@@ -7495,7 +7517,8 @@ integral, and rational exports are outside this finite-level owner.
 \textbf{Status. }\texttt{OPEN}; \textbf{reduction status. }\texttt{LEAF}; \textbf{class. }\texttt{GEO}.
 \uses{}
 \textbf{Exact output required. }Two refinement maps agreeing on the schematically dense source open agree globally when the target is separated.
-\openobligation{GEO-BA43-DENSE-REFINEMENT-UNIQUENESS}
+\formalizationnote{Formalized as \texttt{AlgebraicGeometry.Compactification.Refinement.ext\_of\_isSchemeTheoreticallyDominant} (\texttt{WeilConjectures/Compactification/RefinementUniqueness.lean}).  Two refinements of a compactification $d$ by a compactification $c$ whose open immersion \texttt{c.i} is scheme-theoretically dominant are equal; both automatically agree on the source open, and separatedness of the target is supplied by properness of \texttt{d.g}.  The full required output is delivered, so the owner is discharged.}
+\constructedby{GEO-BA43-DENSE-REFINEMENT-UNIQUENESS}
 \end{openproblem}
 
 \Needspace{8\baselineskip}
@@ -7505,6 +7528,7 @@ integral, and rational exports are outside this finite-level owner.
 \textbf{Status. }\texttt{OPEN}; \textbf{reduction status. }\texttt{LEAF}; \textbf{class. }\texttt{GEO}.
 \uses{}
 \textbf{Exact output required. }Construct a typed common dense refinement with finitely presented proper structure map.
+\formalizationnote{Partially formalized as \texttt{AlgebraicGeometry.Compactification.exists\_common\_refinement\_isSchemeTheoreticallyDominant}, with the density-free version \texttt{AlgebraicGeometry.Compactification.exists\_common\_refinement} (both in \texttt{WeilConjectures/Compactification/CommonRefinement.lean}).  Delivered: for a quasi-compact $f$, any two compactifications of $f$ are refined by a common one --- the schematic closure of the graph in the fibre product --- in which the source open is scheme-theoretically dense.  Not delivered: the structure morphism of that common refinement is proper but is not shown to be finitely presented, so the owner stays open on that half.  Finite presentation of the constructed models is tracked separately.}
 \openobligation{GEO-BA43-PAIRWISE-COMMON-REFINEMENT}
 \end{openproblem}
 
