@@ -88,6 +88,7 @@ equality has explicitly been fixed.
 \begin{definition}[Compactification] 
   \label{def:nagata-compactification}
   \lean{AlgebraicGeometry.Compactification}
+  \leanok
 
   Let $f\colon X\to S$ be a morphism of schemes.  A \emph{compactification}
   of $f$ consists of a scheme $\overline X$, morphisms
@@ -102,6 +103,7 @@ equality has explicitly been fixed.
   \label{def:nagata-compactifiable}
   \uses{def:nagata-compactification}
   \lean{AlgebraicGeometry.HasCompactification}
+  \leanok
 
   A morphism $f\colon X\to S$ is \emph{compactifiable} if the type of
   compactifications of $f$ is nonempty.
@@ -110,6 +112,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Mathlib scheme-theoretic image interface]
   \label{lemma:nagata-scheme-image-ideal-qc}
   \lean{AlgebraicGeometry.Scheme.Hom.image}
+  \leanok
 
   For a morphism $g\colon T\to Y$, Mathlib defines its scheme-theoretic image
   as the closed subscheme cut out by the ideal sheaf $\operatorname{ker}(g)$.
@@ -131,6 +134,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   This block records the existing Mathlib construction.  The closed
   subscheme is \texttt{Scheme.Hom.image g}, its inclusion is the declaration
   \texttt{Scheme.Hom.imageι g}, and the factor map is
@@ -144,6 +148,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-theoretic-image}
   \uses{lemma:nagata-scheme-image-ideal-qc}
   \lean{AlgebraicGeometry.Scheme.Hom.image}
+  \leanok
 
   Let $g\colon T\to Y$ be a morphism.  Define
   $\operatorname{SIm}(g)$ to mean the Mathlib scheme-theoretic image
@@ -171,6 +176,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification,
     def:nagata-scheme-theoretically-dense-open}
   \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant}
+  \leanok
 
   A compactification $X\xrightarrow{j}\overline X\to S$ is
   \emph{scheme-theoretically dense} when its first map has the predicate
@@ -187,6 +193,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-dense-compactification,
     def:nagata-scheme-theoretic-image,lemma:nagata-scheme-image-ideal-qc}
   \lean{AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι}
+  \leanok
 
   For an open immersion $j$ (no quasi-compactness is needed), the density
   condition in
@@ -200,6 +207,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-scheme-image-ideal-qc}
   The kernel of $\mathcal O_{\overline X}\to j_*\mathcal O_X$ is the ideal
   defining $\operatorname{SIm}(j)$ by
@@ -217,6 +225,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-image-factor}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.Scheme.Hom.toImage}
+  \leanok
 
   Define
   \[
@@ -230,6 +239,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-image-comparison}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \leanok
 
   Suppose $g$ is supplied with a factorization
   $T\xrightarrow{h}Z\xrightarrow{z}Y$, where $z$ is a closed immersion.
@@ -245,6 +255,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-scheme-image-universal}
   \uses{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison}
   \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \leanok
 
   The composite of $g^{\mathrm{im}}$ with
   $\operatorname{SIm}(g)\hookrightarrow Y$ is $g$.  For every closed
@@ -254,6 +265,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The factorization equality is \texttt{Scheme.Hom.toImage_imageι}.
   Let $\mathcal I_Z$ be the ideal of $Z$.  From
   $z\circ h=g$ every local section of $\mathcal I_Z$ maps to zero under $g$,
@@ -273,6 +285,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Scheme-theoretic image of a closed immersion]
   \label{lemma:nagata-scheme-image-of-closed-immersion}
   \lean{AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage}
+  \leanok
 
   If $i\colon Z\hookrightarrow Y$ is a closed immersion, then the factor map
   $i^{\mathrm{im}}\colon Z\to\operatorname{SIm}(i)$ is an isomorphism.  Thus
@@ -281,6 +294,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The current Mathlib instance
   \texttt{AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage}
   supplies the isomorphism for every morphism carrying the
@@ -293,6 +307,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-affine-image-kernel-localization}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
+  \leanok
 
   Let $A$ be a ring, let $T\to\operatorname{Spec}(A)$ be quasi-compact and
   quasi-separated, and let $s\in A$.  Put
@@ -307,6 +322,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Choose a finite affine cover $(T_i)$ of $T$.  Quasi-separatedness makes
   each $T_i\cap T_j$ quasi-compact, so choose a finite affine refinement of
   every such intersection.  The sheaf equalizer for this finite covering
@@ -323,6 +339,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-affine-image-kernel-flat}
   \uses{lemma:nagata-affine-image-kernel-localization}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
+  \leanok
 
   Let $A\to B$ be flat, let $T\to\operatorname{Spec}(A)$ be quasi-compact
   and quasi-separated, and put
@@ -338,6 +355,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Use the finite affine cover and finite affine refinements from
   \Cref{lemma:nagata-affine-image-kernel-localization}.  Tensor its finite
   sheaf equalizer with $B$.  Flatness makes tensoring exact, and tensoring
@@ -355,6 +373,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-affine-image-kernel-localization}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_morphismRestrict}
+  \leanok
 
   Let $g\colon T\to Y$ be quasi-compact and quasi-separated, let
   $W\subseteq Y$ be open, let $T_W=T\times_YW$, and let
@@ -367,6 +386,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   On an affine open $V=\operatorname{Spec}(A)\subseteq Y$, the image ideal is
   the kernel of
   $A\to\Gamma(T\times_YV,\mathcal O)$.  On every principal open
@@ -389,6 +409,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-affine-image-kernel-flat}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
+  \leanok
 
   Let $g\colon T\to Y$ be quasi-compact and quasi-separated and let
   $q\colon Y'\to Y$ be flat.  For the base change
@@ -401,6 +422,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Work over an affine open $V=\operatorname{Spec}(A)\subseteq Y$ and an
   affine open $V'=\operatorname{Spec}(B)\subseteq q^{-1}(V)$.  The ring map
   $A\to B$ is flat.  Apply
@@ -434,6 +456,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-theoretic-closure}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.Scheme.Hom.image}
+  \leanok
 
   Let $a\colon T\to Y$ be a quasi-compact and quasi-separated immersion.
   Define the scheme-theoretic closure of $T$ in $Y$ to be the closed
@@ -444,6 +467,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-scheme-theoretic-closure-minimal}
   \uses{def:nagata-scheme-theoretic-closure}
   \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \leanok
 
   The scheme-theoretic closure is the smallest closed subscheme of $Y$
   through which $a$ factors: it factors through every such closed subscheme,
@@ -451,6 +475,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-scheme-image-universal}
   This is \Cref{lemma:nagata-scheme-image-universal} applied to the immersion
   $a$, together with
@@ -461,6 +486,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-immersion-open-in-scheme-image}
   \uses{def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact}
+  \leanok
 
   Let $g\colon T\to Y$ be a quasi-compact immersion.  The constructed map
   $g^{\mathrm{im}}\colon T\to\operatorname{SIm}(g)$ is a quasi-compact open
@@ -468,6 +494,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Apply the verified instance
   \texttt{AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact}
   to $g$.  It gives that
@@ -494,6 +521,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification,
     def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.Compactification.ofIsImmersion}
+  \leanok
 
   Let $g\colon X\to Y$ be a quasi-compact immersion over $S$, with
   $Y\to S$ proper.  Define $\mathsf C(g)$ to be the factorization
@@ -507,12 +535,14 @@ equality has explicitly been fixed.
   \label{lemma:nagata-immersion-into-proper}
   \uses{def:nagata-immersion-compactification}
   \lean{AlgebraicGeometry.HasCompactification.of_isImmersion}
+  \leanok
 
   The constructed factorization $\mathsf C(g)$ is a compactification of
   $X\to S$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-immersion-open-in-scheme-image}
   The first map is a quasi-compact open immersion by
   \Cref{lemma:nagata-immersion-open-in-scheme-image}.  The second map is the
@@ -531,6 +561,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification}
   \lean{AlgebraicGeometry.Compactification.ofIsPullback,
     AlgebraicGeometry.Compactification.baseChange}
+  \leanok
 
   Given a compactification $C=(X\to\overline X\to S)$ and $S'\to S$, define
   $C_{S'}$ to be
@@ -543,12 +574,14 @@ equality has explicitly been fixed.
   \label{lemma:nagata-compactification-base-change}
   \uses{def:nagata-compactification-base-change}
   \lean{AlgebraicGeometry.HasCompactification.of_isPullback}
+  \leanok
 
   The constructed factorization $C_{S'}$ is a compactification of
   $X\times_SS'\to S'$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Open immersions, quasi-compact morphisms, and proper morphisms are stable
   under arbitrary base change.  The factorization equality follows from the
   universal property of the two fibre products.
@@ -559,6 +592,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification,
     def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.Compactification.denseRefinement}
+  \leanok
 
   For a compactification $C=(X\xrightarrow{j}\overline X\to S)$, define
   $\mathsf{Dense}(C)$ by replacing $\overline X$ with
@@ -569,12 +603,14 @@ equality has explicitly been fixed.
   \label{prop:nagata-dense-refinement}
   \uses{def:nagata-dense-compactification,def:nagata-dense-refinement}
   \lean{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_denseRefinement_i}
+  \leanok
 
   The object $\mathsf{Dense}(C)$ is a scheme-theoretically dense
   compactification of the same morphism as $C$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-immersion-open-in-scheme-image,
     def:nagata-scheme-image-factor}
   The induced map from $X$ is a quasi-compact open immersion and is
@@ -596,6 +632,7 @@ equality has explicitly been fixed.
     def:nagata-scheme-theoretic-image,
     def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.Compactification.ofIsClosedImmersion}
+  \leanok
 
   Let $i\colon X\hookrightarrow X'$ be closed over $S$ and fix a
   compactification $C'=(X'\to\overline X'\to S)$.  Define
@@ -610,12 +647,14 @@ equality has explicitly been fixed.
   \label{prop:nagata-closed-subscheme-compactifiable}
   \uses{def:nagata-closed-subscheme-compactification}
   \lean{AlgebraicGeometry.HasCompactification.of_isClosedImmersion}
+  \leanok
 
   The constructed factorization $\mathsf{Closed}(i,C')$ is a compactification
   of $X\to S$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-scheme-image-of-closed-immersion}
   Its ambient scheme $\overline X$ is closed in the proper scheme
@@ -638,6 +677,7 @@ equality has explicitly been fixed.
 \begin{lemma}[The diagonal on a mixed open]
   \label{lemma:nagata-diagonal-mixed-open}
   \lean{AlgebraicGeometry.diagonalRestrictChartArrowIso}
+  \leanok
 
   Let $X=U\cup V$ be an open cover over $S$.  The pullback of
   $\Delta_{X/S}$ to $U\times_SV$ is canonically the map
@@ -648,6 +688,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Both schemes represent triples consisting of a point of $U$, a point of
   $V$, and an equality of their images in $X$.  The canonical isomorphism is
   obtained from the universal property of the pullback.
@@ -656,6 +697,7 @@ equality has explicitly been fixed.
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0F3U}{Tag 0F3U}]{stacks-project}}]
   \label{lemma:nagata-separated-two-open-cover}
   \lean{AlgebraicGeometry.IsSeparated.of_two_open_cover}
+  \leanok
 
   Let $X=U\cup V$ be an open cover over $S$.  Assume that $U\to S$ and
   $V\to S$ are separated and that
@@ -666,6 +708,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-diagonal-mixed-open}
   The target of $\Delta_{X/S}$ is covered by
   \[
@@ -696,6 +739,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Degree-zero homogeneous localization]
   \label{def:nagata-homogeneous-localization-degree-zero}
   \lean{HomogeneousLocalization.Away}
+  \leanok
 
   Let $R=\bigoplus_{n\geq0}R_n$ be an $\mathbb N$-graded commutative ring and
   let $f\in R_d$ be homogeneous with $d>0$.  Write $R_{(f),0}$ for the
@@ -736,6 +780,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-affine-proj}
   \uses{def:nagata-homogeneous-localization-degree-zero}
   \lean{AlgebraicGeometry.Proj}
+  \leanok
 
   For an $\mathbb N$-graded commutative ring $R$, use the Mathlib scheme
   $\operatorname{Proj}(R)$, with its structural morphism to the degree-zero
@@ -752,6 +797,7 @@ it is not silently identified with an unavailable Mathlib primitive.
     def:nagata-homogeneous-localization-degree-zero}
   \lean{AlgebraicGeometry.Proj.basicOpenIsoSpec,
     AlgebraicGeometry.Proj.iSup_basicOpen_eq_top}
+  \leanok
 
   Each positive-degree homogeneous $f$ determines an open subscheme
   $D_+(f)\subseteq\operatorname{Proj}(R)$ and a canonical isomorphism
@@ -763,6 +809,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-proj-chart-ring-cocycle}
   The standard-open isomorphism is \texttt{Proj.basicOpenIsoSpec}.
   The cover assertion is
@@ -868,6 +915,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-projective-space-base-change}
   \uses{def:nagata-affine-proj}
   \lean{AlgebraicGeometry.ProjectiveSpace}
+  \leanok
 
   Let $n$ be a finite index set and $S$ a scheme.  Put
   \[
@@ -896,12 +944,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-projective-space-base-change-proper}
   \uses{def:nagata-projective-space-base-change,def:nagata-affine-proj}
   \lean{AlgebraicGeometry.ProjectiveSpace.instIsProper}
+  \leanok
 
   For every finite index set $n$ and every scheme $S$, the structural
   morphism $\mathbf P(n;S)\to S$ is proper.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The polynomial ring $\mathbf Z[T_i:i\in n]$ is of finite type over the
   degree-zero part of its total-degree grading, which is $\mathbf Z$, because
   $n$ is finite.  Hence the verified properness instance for
@@ -949,6 +999,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Properness is local on the target]
   \label{lemma:nagata-projective-target-local}
   \lean{AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget}
+  \leanok
 
   Let $f\colon Y\to X$ be a morphism.  If $X$ has an open cover
   $(V_i)$ such that every $f^{-1}(V_i)\to V_i$ is proper, then $f$ is
@@ -956,6 +1007,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Properness is a Zariski-local property on the target.  Apply the verified
   target-locality instance
   \texttt{AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget} to the open
@@ -1030,6 +1082,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Rees algebra]
   \label{def:nagata-rees-algebra}
   \lean{reesAlgebra}
+  \leanok
 
   Let $A$ be a ring and $I\subseteq A$ an ideal.  The Rees algebra is
   \[
@@ -1051,6 +1104,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-rees-piece}
   \uses{def:nagata-rees-algebra}
   \lean{AlgebraicGeometry.reesGrading}
+  \leanok
 
   For $n\in\mathbb N$, let $\mathcal R_A(I)_n$ be the $A$-submodule of Rees
   elements whose underlying polynomial is supported in degree $n$.
@@ -1060,6 +1114,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-piece-membership}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.mem_reesGrading_iff_exists}
+  \leanok
 
   An element $F\in\mathcal R_A(I)$ lies in $\mathcal R_A(I)_n$ if and only if
   there is $a\in I^n$ such that the underlying polynomial of $F$ is
@@ -1067,6 +1122,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   If $F$ is supported in degree $n$, coefficient extensionality gives
   $F=\operatorname{monomial}(n,F_n)$.  Membership in the Rees algebra gives
   $F_n\in I^n$.  Conversely, if the underlying polynomial is $at^n$ with $a\in I^n$, its
@@ -1079,6 +1135,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-piece-mul}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading.instGradedMonoid}
+  \leanok
 
   Multiplication maps
   \[
@@ -1088,6 +1145,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Write the two elements as $at^m$ and $bt^n$ with $a\in I^m$ and
   $b\in I^n$.  Their product is $(ab)t^{m+n}$ and
@@ -1098,12 +1156,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-component-finite-support}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   For $F\in\mathcal R_A(I)$, only finitely many homogeneous components
   $F_nt^n$ are nonzero.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The components are indexed by the support of the underlying polynomial,
   which is finite.
 \end{proof}
@@ -1112,12 +1172,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-sum-components}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   Every $F\in\mathcal R_A(I)$ is the finite sum of the monomials
   $F_nt^n$ regarded as elements of $\mathcal R_A(I)_n$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-component-finite-support,
     lemma:nagata-rees-piece-membership}
   Sum over the finite polynomial support.  Equality follows by comparing the
@@ -1128,6 +1190,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-components-unique}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   Let $E$ be a finite set of pairwise distinct degrees and choose one element
   $F_n\in\mathcal R_A(I)_n$ for each $n\in E$.  If
@@ -1135,6 +1198,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Apply the coefficient projection in a fixed degree $n\in E$.  Every summand
   of degree different from $n$ has zero $n$th component, so the projection of
@@ -1145,12 +1209,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-rees-graded}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading.instGradedRing}
+  \leanok
 
   The family $n\mapsto\mathcal R_A(I)_n$ defines an
   $\mathbb N$-graded-ring structure on $\mathcal R_A(I)$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-mul,lemma:nagata-rees-sum-components,
     lemma:nagata-rees-components-unique}
   Use \Cref{lemma:nagata-rees-piece-mul} for graded multiplication,
@@ -1163,6 +1229,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-degree-zero}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGradingZero}
+  \leanok
 
   Taking the constant coefficient gives a ring equivalence
   \[
@@ -1171,6 +1238,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Since $I^0=A$, a degree-zero Rees element is exactly a constant polynomial.
   The inverse sends $a$ to the constant monomial $at^0$.  The two composites
@@ -1181,6 +1249,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-degree-one-element}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesX}
+  \leanok
 
   Every $a\in I$ determines a homogeneous element $at$ of degree one.  Its
   underlying polynomial and its coefficient in degree one are recorded by
@@ -1188,6 +1257,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Since $a\in I=I^1$, the monomial $at$ belongs to the degree-one piece by
   \Cref{lemma:nagata-rees-piece-membership}.  The underlying-polynomial and
@@ -1199,6 +1269,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-rees-finite-generation}
   \uses{def:nagata-rees-algebra,def:nagata-rees-piece}
   \lean{AlgebraicGeometry.finiteType_reesGrading_zero}
+  \leanok
 
   If $I=(f_0,\ldots,f_r)$, then $\mathcal R_A(I)$ is generated as an algebra
   over its degree-zero piece by $f_0t,\ldots,f_rt$.  In particular it is of
@@ -1206,6 +1277,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-degree-zero,lemma:nagata-rees-degree-one-element,
     lemma:nagata-rees-sum-components}
   A homogeneous coefficient in $I^n$ is a linear combination of degree-$n$
@@ -1222,6 +1294,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-affine-blowup}
   \uses{def:nagata-rees-algebra,def:nagata-affine-proj}
   \lean{AlgebraicGeometry.AffineBlowup}
+  \leanok
 
   For an ideal $I\subseteq A$, define
   \[
@@ -1339,6 +1412,7 @@ it is not silently identified with an unavailable Mathlib primitive.
     def:nagata-homogeneous-away-to-chart,
     prop:nagata-proj-standard-open}
   \lean{AlgebraicGeometry.AffineBlowup.chart}
+  \leanok
 
   Define
   \[
@@ -1353,12 +1427,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-affine-blowup-chart}
   \uses{def:nagata-affine-blowup-chart-map}
   \lean{AlgebraicGeometry.AffineBlowup.chart}
+  \leanok
 
   The constructed morphism $\chi_a$ is an isomorphism over
   $\operatorname{Spec}(A)$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-homogeneous-away-to-chart-surjective,
     lemma:nagata-homogeneous-away-to-chart-injective}
   The ring map $\theta_a$ is bijective by the two cited lemmas.  The induced
@@ -1369,12 +1445,14 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Degree-one generators cover Proj]
   \label{lemma:nagata-rees-generators-cover-proj}
   \lean{AlgebraicGeometry.Proj.iSup_basicOpen_eq_top}
+  \leanok
 
   If $I=(f_0,\ldots,f_r)$, then the standard opens
   $D_+(f_it)$ cover $\operatorname{Proj}(\mathcal R_A(I))$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-rees-finite-generation}
   The elements $f_it$ generate the irrelevant ideal by
   \Cref{prop:nagata-rees-finite-generation}.  Apply
@@ -1386,6 +1464,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Finite affine chart cover]
   \label{prop:nagata-affine-blowup-chart-cover}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.iSup_opensRange_blowupι_eq_top}
+  \leanok
 
   If $I=(f_0,\ldots,f_r)$, the affine opens
   \[
@@ -1396,6 +1475,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-affine-blowup-chart,lemma:nagata-rees-generators-cover-proj}
   The opens $D_+(f_it)$ cover by
   \Cref{lemma:nagata-rees-generators-cover-proj}.  Replace each one by the
@@ -1408,12 +1488,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-affine-blowup-top}
   \uses{def:nagata-affine-blowup}
   \lean{AlgebraicGeometry.AffineBlowup.isIso_toSpec_of_eq_top}
+  \leanok
 
   The blow-up of $\operatorname{Spec}(A)$ in the unit ideal is canonically
   isomorphic to $\operatorname{Spec}(A)$ over $\operatorname{Spec}(A)$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-affine-blowup-chart}
   The Rees algebra of the unit ideal is $A[t]$.  The single standard open
   $D_+(t)$ covers Proj, and its chart algebra $A[A/1]$ is $A$.
@@ -1440,6 +1522,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Localization commutes with powers of an ideal]
   \label{lemma:nagata-localization-ideal-pow}
   \lean{Ideal.map_pow}
+  \leanok
 
   Let $s\in A$.  For every $n$ there is a canonical equality
   \[
@@ -1448,6 +1531,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Extension of ideals along a ring homomorphism preserves products and the
   unit ideal.  Induct on $n$.
 \end{proof}
@@ -1475,6 +1559,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-rees-localization-map}
   \uses{def:nagata-rees-algebra}
   \lean{AlgebraicGeometry.reesGrading.hom}
+  \leanok
 
   Define
   \[
@@ -1488,11 +1573,13 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-rees-localization}
   \uses{def:nagata-rees-localization-map}
   \lean{AlgebraicGeometry.AffineBlowup.isLocalization_away_map}
+  \leanok
 
   The map $\rho_s$ is a graded ring equivalence.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-localization-rees-piece,
     lemma:nagata-localization-ideal-pow}
   For each $n$, let $\rho_{s,n}$ be the equivalence of
@@ -1590,6 +1677,7 @@ it is not silently identified with an unavailable Mathlib primitive.
     def:nagata-rees-localization-map,
     prop:nagata-relative-proj-functoriality}
   \lean{AlgebraicGeometry.AffineBlowup.hom}
+  \leanok
 
   Define
   \[
@@ -1608,12 +1696,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-affine-blowup-restrict}
   \uses{def:nagata-affine-blowup-restriction-map}
   \lean{AlgebraicGeometry.AffineBlowup.isPullback_hom_of_isLocalization}
+  \leanok
 
   The constructed morphism $r_s$ is an isomorphism over
   $\operatorname{Spec}(A_s)$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-rees-localization,
     lemma:nagata-rees-localization-degree-zero,
     prop:nagata-relative-proj-functoriality}
@@ -1629,6 +1719,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Identity and cocycle laws for affine restriction]
   \label{lemma:nagata-affine-blowup-restrict-cocycle}
   \lean{AlgebraicGeometry.AffineBlowup.hom_comp}
+  \leanok
 
   The restriction isomorphism is the identity for $s=1$, and its two possible
   composites on an iterated basic open $D(st)$ agree literally after the
@@ -1636,6 +1727,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-localization-one,lemma:nagata-rees-localization-mul,
     prop:nagata-affine-blowup-restrict}
   On each standard chart, the map for $s=1$ is induced by the identity of the
