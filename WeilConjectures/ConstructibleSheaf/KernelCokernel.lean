@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.Biproduct
+public import WeilConjectures.ConstructibleSheaf.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 

@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Pullback
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Constant sheaves, localization of sites and pullback
@@ -21,6 +22,9 @@ More generally, the constant sheaf functor commutes with the pullback of sheaves
 a continuous functor of sites which preserves a terminal object
 (`CategoryTheory.Functor.sheafPullbackCommuteConstant`); in particular the pullback of a
 constant sheaf is constant (`CategoryTheory.Sheaf.isConstant_sheafPullback`).
+
+Finally, the direct sum of two constant sheaves with values in a preadditive category is
+constant (`CategoryTheory.Sheaf.isConstant_biprod`).
 
 This file imports both `Mathlib.CategoryTheory.Sites.ConstantSheaf` and
 `Mathlib.CategoryTheory.Sites.Over` since neither imports the other, and additionally
@@ -106,5 +110,25 @@ lemma Sheaf.isConstant_sheafPullback {T : C} (hT : IsTerminal T)
       (G.constantSheafsheafPullbackIso A J K hT hGT).app a)
 
 end Pullback
+
+section Biprod
+
+variable {C : Type*} [Category* C] {J : GrothendieckTopology C}
+  {A : Type u'} [Category.{v} A] [HasWeakSheafify J A] [Preadditive A]
+  [HasBinaryBiproducts A] [HasBinaryBiproducts (Sheaf J A)]
+
+/-- The direct sum of two constant sheaves is constant. The constant sheaf functor is a left
+adjoint, so it preserves binary biproducts and the direct sum of the constant sheaves at
+`a` and at `b` is the constant sheaf at `a ⊞ b`. -/
+lemma Sheaf.isConstant_biprod {T : C} (hT : IsTerminal T) {F G : Sheaf J A}
+    [F.IsConstant J] [G.IsConstant J] : (F ⊞ G).IsConstant J := by
+  obtain ⟨a, ⟨e⟩⟩ := F.mem_essImage_of_isConstant
+  obtain ⟨b, ⟨f⟩⟩ := G.mem_essImage_of_isConstant
+  have := (constantSheafAdj J A hT).isLeftAdjoint
+  have := (constantSheaf J A).preservesBinaryBiproducts_of_isLeftAdjoint
+  exact Sheaf.isConstant_of_iso _
+    (biprod.mapIso e.symm f.symm ≪≫ ((constantSheaf J A).mapBiprod a b).symm)
+
+end Biprod
 
 end CategoryTheory

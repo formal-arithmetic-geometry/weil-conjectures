@@ -59,6 +59,27 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.upperStar (g : Y ⟶ X)
   exact Sheaf.isConstant_of_iso _
     ((Etale.upperStar A g).mapIso i.symm ≪≫ (upperStarConstantSheafIso A g).app a)
 
+/-- If the pullback of `F` along `h : Z ⟶ X` is constant and `f : W ⟶ X` factors as
+`f = g ≫ h`, then the pullback of `F` along `f` is constant.
+
+```
+W ──── g ────▶ Z
+ ╲             │
+  ╲     f      │ h
+   ╲           ▼
+    ╲────────▶ X
+```
+-/
+lemma _root_.CategoryTheory.Sheaf.IsConstant.upperStar_of_fac {W Z : Scheme.{u}} {f : W ⟶ X}
+    {h : Z ⟶ X} (g : W ⟶ Z) (hf : f = g ≫ h) (F : Sheaf X.smallEtaleTopology A)
+    [((Etale.upperStar A h).obj F).IsConstant Z.smallEtaleTopology] :
+    ((Etale.upperStar A f).obj F).IsConstant W.smallEtaleTopology := by
+  subst hf
+  -- picked up as an instance by `Sheaf.isConstant_congr` below
+  have : ((Etale.upperStar A h ⋙ Etale.upperStar A g).obj F).IsConstant
+    W.smallEtaleTopology := Sheaf.IsConstant.upperStar A g _
+  exact Sheaf.isConstant_congr _ ((Etale.upperStarComp A g h).app F).symm
+
 /-- The restriction of `F` to the small étale site localized at `U`, transported to the small
 étale site of `U.left`, is the pullback of `F` along `U.hom`. -/
 def overSheafEquivFunctorObjOverIso (U : X.Etale) (F : Sheaf X.smallEtaleTopology A) :
@@ -112,18 +133,13 @@ theorem IsLocallyConstantSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTo
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
   refine ⟨⟨⟨𝒰.pullback₂ g, fun j ↦ ?_⟩⟩⟩
   rw [isConstant_over_iff_upperStar]
-  have h₁ : ((Etale.upperStar A (𝒰.f j)).obj F).IsConstant (𝒰.X j).smallEtaleTopology :=
+  -- both `have`s are stated in the form in which they are found by instance search
+  have : ((Etale.upperStar A (𝒰.f j)).obj F).IsConstant (𝒰.X j).smallEtaleTopology :=
     (isConstant_over_iff_upperStar A (𝒰.etalePrecoverageToEtale j) F).mp (h𝒰 j)
-  have h₂ : ((Etale.upperStar A (pullback.fst (𝒰.f j) g)).obj
-      ((Etale.upperStar A (𝒰.f j)).obj F)).IsConstant
-        (Cover.etalePrecoverageToEtale (𝒰.pullback₂ g) j).left.smallEtaleTopology :=
-    Sheaf.IsConstant.upperStar A _ _
-  let e : (Etale.upperStar A (pullback.fst (𝒰.f j) g)).obj ((Etale.upperStar A (𝒰.f j)).obj F) ≅
-      (Etale.upperStar A (pullback.snd (𝒰.f j) g)).obj ((Etale.upperStar A g).obj F) :=
-    ((Etale.upperStarComp A (pullback.fst (𝒰.f j) g) (𝒰.f j)).app F).symm ≪≫
-      eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition) ≪≫
-      (Etale.upperStarComp A (pullback.snd (𝒰.f j) g) g).app F
-  exact Sheaf.isConstant_congr _ e
+  have : ((Etale.upperStar A (pullback.snd (𝒰.f j) g ≫ g)).obj F).IsConstant
+      (Cover.etalePrecoverageToEtale (𝒰.pullback₂ g) j).left.smallEtaleTopology :=
+    Sheaf.IsConstant.upperStar_of_fac A (pullback.fst (𝒰.f j) g) pullback.condition.symm F
+  exact Sheaf.isConstant_congr _ ((Etale.upperStarComp A (pullback.snd (𝒰.f j) g) g).app F)
 
 end LocallyConstant
 

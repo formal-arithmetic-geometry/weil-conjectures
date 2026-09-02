@@ -64,7 +64,7 @@ lemma IsLocallyConstantSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : 
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [PreservesFiniteLimits (CategoryTheory.forget A)]
+  [PreservesFiniteProducts (CategoryTheory.forget A)]
 
 /-- A zero sheaf is finite: its stalks are zero, whose underlying types are singletons since
 the forgetful functor preserves the terminal object. -/
@@ -200,7 +200,7 @@ theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
       ((Etale.upperStar A i).obj F))
       ((Etale.upperStarComp A (SZ.immersion l) i).app F).symm
 
-variable [PreservesFiniteLimits (CategoryTheory.forget A)]
+variable [PreservesFiniteProducts (CategoryTheory.forget A)]
 
 include hij in
 /-- **The extension by zero of a constructible sheaf along an open immersion is

@@ -405,26 +405,33 @@ containing its image, where the stalk is unchanged.
 
 \section{Finite locally constant sheaves}\label{sec:constructible-flc}
 
-\begin{lemma}[Finite direct sums]\label{lemma:constructible-flc-biproduct}
-\uses{def:constructible-finite-locally-constant,lemma:constructible-common-refinement}
-\lean{CategoryTheory.Sheaf.IsConstant.biprod,
+\begin{lemma}[Direct sums]\label{lemma:constructible-flc-biproduct}
+\uses{def:constructible-finite-locally-constant,lemma:constructible-pullback-locally-constant,prop:constructible-pullback}
+\lean{AlgebraicGeometry.Scheme.LocallyConstantDatum.interLeft,
   AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.biprod,
   AlgebraicGeometry.Scheme.IsFiniteSheaf.biprod,
   AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.biprod}
 \leanok
-Finite direct sums of finite locally constant sheaves are finite locally
-constant; the same holds for locally constant sheaves and for finite
-sheaves.
+Two locally constant sheaves are trivialised by a common \'etale cover.  The
+direct sum $\mathcal F\oplus\mathcal G$ of two finite locally constant
+sheaves is finite locally constant; the same holds for locally constant
+sheaves and for finite sheaves.  (Only the case of two summands is
+formalised; the case of a finite family follows by induction on the number
+of summands, using that the zero sheaf is finite locally constant.)
 \end{lemma}
 \begin{proof}
 \leanok
 For two sheaves with trivialising data $(U_i\to X)_i$ and $(V_j\to X)_j$,
 the family $(U_i\times_XV_j\to X)_{i,j}$ is an \'etale cover trivialising
-both.  Restriction to a localised site is exact and preserves finite direct
-sums, and a finite direct sum $M_X\oplus N_X$ of constant sheaves is the
-constant sheaf $(M\oplus N)_X$, because sheafification and the constant
-presheaf functor are additive.  Stalks commute with finite direct sums,
-and a finite direct sum of finite sets is finite.
+both, since the pullback of a constant sheaf is constant.  On a member of
+that cover, $\mathcal F\oplus\mathcal G$ is the direct sum of two constant
+sheaves, hence constant: the constant sheaf functor is a left adjoint, so
+it commutes with direct sums and $M_U\oplus N_U=(M\oplus N)_U$; and so is
+the pullback $g^*$, so $g^*(\mathcal F\oplus\mathcal G)=g^*\mathcal
+F\oplus g^*\mathcal G$.  Finally the stalk functor at a geometric point is
+a left adjoint, of the skyscraper sheaf functor, so the stalk of
+$\mathcal F\oplus\mathcal G$ is the direct sum of the stalks, whose
+underlying set is the product of the underlying sets and hence finite.
 \end{proof}
 
 \begin{lemma}[Morphisms between constant sheaves]

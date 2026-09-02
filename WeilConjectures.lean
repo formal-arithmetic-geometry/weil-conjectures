@@ -121,7 +121,7 @@ public import WeilConjectures.Compactification.TwoOpen
 public import WeilConjectures.Compactification.TwoOpenComparison
 public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
-public import WeilConjectures.ConstructibleSheaf.Biproduct
+public import WeilConjectures.ConstructibleSheaf.Biproducts
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -284,6 +284,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
@@ -298,6 +299,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FinallySmall
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
