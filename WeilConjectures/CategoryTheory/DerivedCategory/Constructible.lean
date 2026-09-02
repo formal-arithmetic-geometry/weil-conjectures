@@ -6,10 +6,13 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-!
 
@@ -47,6 +50,13 @@ the universe `u` of the base schemes. Nothing beyond that is assumed:
 - `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible`: the subcategory
   `Dᵇc( X, A)` cut out by the property above, the constructible bounded derived
   category of the `ℓ`-adic formalism.
+- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_isTriangulated`: `Dᵇc(X, A)`
+  is a triangulated subcategory of `D(X_ét)`, provided the constructible sheaves are closed
+  under kernels, cokernels and extensions (`Etale.constructibleSheaf`, the property of being
+  constructible as an `ObjectProperty`; the closure properties are the content of the blueprint
+  theorem `thm:constructible-serre`, not yet formalised, and are taken as hypotheses). This is
+  `DerivedCategory.homologyProperty_isTriangulated` of
+  `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty`.
 
 -/
 
@@ -54,7 +64,7 @@ the universe `u` of the base schemes. Nothing beyond that is assumed:
 
 universe u' u
 
-open CategoryTheory Limits
+open CategoryTheory Limits ZeroObject
 
 namespace AlgebraicGeometry
 
@@ -107,5 +117,82 @@ scoped notation "Dᵇc(" X ", " A ")" =>
   Etale.DerivedCategoryBoundedConstructible A X
 
 end BoundedConstructible
+
+section Triangulated
+
+/-- The property of being constructible, as a property of objects of the category of étale
+sheaves; the closure of this property under kernels, cokernels and extensions is the blueprint
+theorem `thm:constructible-serre`. -/
+def Etale.constructibleSheaf : ObjectProperty (Sheaf X.smallEtaleTopology A) :=
+  fun F ↦ IsConstructibleSheaf F
+
+lemma Etale.constructibleSheaf_iff (F : Sheaf X.smallEtaleTopology A) :
+    Etale.constructibleSheaf A X F ↔ IsConstructibleSheaf F :=
+  Iff.rfl
+
+instance : (Etale.constructibleSheaf A X).IsClosedUnderIsomorphisms where
+  of_iso e h := by
+    have := (Etale.constructibleSheaf_iff A X _).mp h
+    exact IsConstructibleSheaf.of_iso e
+
+instance [PreservesFiniteLimits (CategoryTheory.forget A)] :
+    (Etale.constructibleSheaf A X).ContainsZero where
+  exists_zero := ⟨0, isZero_zero _, IsConstructibleSheaf.of_isZero (isZero_zero _)⟩
+
+/-- The constructible-homology property is the homology property of
+`Etale.constructibleSheaf`. -/
+lemma Etale.DerivedCategory.constructibleHomology_eq :
+    Etale.DerivedCategory.constructibleHomology A X =
+      _root_.DerivedCategory.homologyProperty (Etale.constructibleSheaf A X) :=
+  rfl
+
+variable [(Etale.constructibleSheaf A X).IsClosedUnderKernels]
+  [(Etale.constructibleSheaf A X).IsClosedUnderCokernels]
+  [(Etale.constructibleSheaf A X).IsClosedUnderExtensions]
+  [PreservesFiniteLimits (CategoryTheory.forget A)]
+
+/-- **Complexes with constructible homology form a triangulated subcategory**, provided the
+constructible sheaves are closed under kernels, cokernels and extensions
+(blueprint: `thm:constructible-serre`). (blueprint: `prop:constructible-derived-subcategory`) -/
+instance Etale.DerivedCategory.constructibleHomology_isTriangulated :
+    (Etale.DerivedCategory.constructibleHomology A X).IsTriangulated := by
+  rw [Etale.DerivedCategory.constructibleHomology_eq]
+  infer_instance
+
+/-- **`Dᵇc(X, A)` is a triangulated subcategory of `D(X_ét)`**, provided the constructible
+sheaves are closed under kernels, cokernels and extensions (blueprint:
+`thm:constructible-serre`). (blueprint: `prop:constructible-derived-subcategory`) -/
+instance Etale.DerivedCategory.boundedConstructible_isTriangulated :
+    (Etale.DerivedCategory.boundedConstructible A X).IsTriangulated :=
+  inferInstanceAs (DerivedCategory.TStructure.t.bounded ⊓
+    Etale.DerivedCategory.constructibleHomology A X).IsTriangulated
+
+end Triangulated
+
+section ModuleCat
+
+variable {Λ : Type (u + 1)} [Ring Λ]
+
+/-- Constructible sheaves of `Λ`-modules are closed under kernels. -/
+instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderKernels where
+  kernels_le := by
+    rintro _ ⟨f, k, hk, hf⟩
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.1
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.2
+    exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_iso
+      (IsLimit.conePointUniqueUpToIso (kernelIsKernel f) hk)
+      ((Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.kernel f))
+
+/-- Constructible sheaves of `Λ`-modules are closed under cokernels. -/
+instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderCokernels where
+  cokernels_le := by
+    rintro _ ⟨f, k, hk, hf⟩
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.1
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.2
+    exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_iso
+      (IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk)
+      ((Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.cokernel f))
+
+end ModuleCat
 
 end AlgebraicGeometry
