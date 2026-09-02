@@ -95,6 +95,11 @@ lemma Hom.etale_map_left_comp_fst (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
     (f.Etale.map g).left ≫ pullback.fst U.hom f = pullback.fst V.hom f ≫ g.left :=
   pullback.lift_fst _ _ _
 
+/-- Base change along `f : X ⟶ Y` is compatible with the projections to `X`. -/
+lemma Hom.etale_map_left_comp_snd (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
+    (f.Etale.map g).left ≫ pullback.snd U.hom f = pullback.snd V.hom f :=
+  pullback.lift_snd _ _ _
+
 end Functoriality
 
 section Sieves

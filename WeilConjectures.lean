@@ -6,7 +6,13 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceEqualizer
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRing
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSection
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
@@ -212,6 +218,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalC
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineOpenAlgebra
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
@@ -315,6 +322,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
