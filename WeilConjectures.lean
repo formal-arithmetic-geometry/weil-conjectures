@@ -61,6 +61,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeCardinal
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeEnlargement
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeGeneratingSet
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeSmallObject
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Subcomplex
