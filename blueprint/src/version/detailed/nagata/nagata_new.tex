@@ -3661,6 +3661,7 @@ closed subscheme of the first blow-up.
   \uses{def:nagata-admissible-blowup,
     thm:nagata-global-blowup-complement}
   \lean{AlgebraicGeometry.IsAdmissible.isIso_blowupMap_restrict}
+  \leanok
 
   If $\pi\colon X'\to X$ is $U$-admissible, then its center ideal restricts to
   the unit ideal on $U$, and the induced morphism
@@ -3669,6 +3670,7 @@ closed subscheme of the first blow-up.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Choose the ideal and blow-up identification from
   \Cref{def:nagata-admissible-blowup}.  The unit-ideal restriction is the
   disjointness condition on the center.  Apply
@@ -3682,6 +3684,7 @@ closed subscheme of the first blow-up.
   \uses{def:nagata-scheme-theoretic-closure,
     def:nagata-global-blowup}
   \lean{AlgebraicGeometry.strictTransform}
+  \leanok
 
   Let $Z\to X$ be a morphism and let $X'\to X$ be the blow-up of a
   finite-presentation center $C\subseteq X$.  Put $U=X\setminus C$; then
@@ -3737,6 +3740,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Power-torsion submodule]
   \label{def:nagata-power-torsion}
   \lean{Submodule.powTorsion}
+  \leanok
 
   Let $R$ be a ring, let $M$ be an $R$-module, and let $a\in R$.  Define
   \[
@@ -3749,12 +3753,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-power-torsion-submodule}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.powTorsion}
+  \leanok
 
   The subset $\Gamma_{(a)}(M)$ contains zero and is closed under addition and
   scalar multiplication.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Zero is killed by $a^0$.  If $a^mm_1=0$ and $a^nm_2=0$, then
   $a^{m+n}(m_1+m_2)=0$.  If $r\in R$, then
   $a^m(rm_1)=r(a^mm_1)=0$.
@@ -3764,6 +3770,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-mem-power-torsion}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.mem_powTorsion_iff}
+  \leanok
 
   One has
   \[
@@ -3775,6 +3782,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   This is the defining membership condition of
   \Cref{def:nagata-power-torsion}; it should be registered as the simp theorem
   for that definition.
@@ -3784,6 +3792,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-power-torsion-kernel-localization}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.powTorsion_eq_ker_localization}
+  \leanok
 
   The power-torsion submodule is the kernel of the localization map
   \[
@@ -3792,6 +3801,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   An element maps to zero in localization away from the powers of $a$ exactly
   when it is killed by one element of that multiplicative system, namely by a
   power of $a$.
@@ -3800,6 +3810,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Localization of power torsion]
   \label{lemma:nagata-power-torsion-localization}
   \lean{Submodule.localized'_powTorsion}
+  \leanok
 
   Let $s\in R$.  Under localization at $s$, the image of
   $\Gamma_{(a)}(M)$ is
@@ -3808,6 +3819,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-power-torsion-kernel-localization}
+  \leanok
   Localize the kernel description in
   \Cref{lemma:nagata-power-torsion-kernel-localization}.  Localization is flat,
   so it preserves this kernel.  The iterated localization $(M_s)_{a/1}$ is
@@ -3818,12 +3830,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-power-torsion-quotient-torsionfree}
   \uses{def:nagata-power-torsion}
   \lean{Submodule.powTorsion_quotient_eq_bot}
+  \leanok
 
   Multiplication by $a$ on $M/\Gamma_{(a)}(M)$ is injective.  More generally,
   no nonzero class in the quotient is killed by a power of $a$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   If $a^n[m]=0$, then $a^nm$ belongs to the power-torsion submodule, so some
   further power of $a$ kills $m$.  Thus $m$ already represents zero in the
   quotient.
@@ -3939,6 +3953,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-chart-map-surjective}
   \uses{def:nagata-strict-chart-to-extended-blowup-chart}
   \lean{AlgebraicGeometry.AffineBlowup.closure_range_awayAlgebraMap_union_range_awayMap}
+  \leanok
 
   The constructed homomorphism $\sigma_a$ is surjective.
 \end{lemma}
@@ -3946,6 +3961,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-strict-chart-to-extended-blowup-chart,
     lemma:nagata-chart-ring-normal-form}
+  \leanok
   By \Cref{lemma:nagata-chart-ring-normal-form}, the target is generated as a
   $B$-algebra by the fractions $z/b$ with $z\in J$.  Write
   $z=\sum_k y_k\overline{x_k}$ with $x_k\in I$.  Then
@@ -4138,6 +4154,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-power-torsion,
     lemma:nagata-power-torsion-kernel-localization}
   \lean{Submodule.localized'_powTorsion}
+  \leanok
 
   Let $R$ be a ring, $N$ an $R$-module, and $a,s\in R$.  Under the canonical
   localization map one has
@@ -4155,6 +4172,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The power-torsion submodule is the kernel of the map
   $N\to N_a$ by
   \Cref{lemma:nagata-power-torsion-kernel-localization}.  Localization at
@@ -4246,6 +4264,7 @@ correction explicit before it is sheafified and glued.
     thm:nagata-blowup-universal-property,
     lemma:nagata-strict-chart-map-surjective}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion_pullbackLift_blowup_comap}
+  \leanok
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a quasi-coherent ideal on $X$,
   and put $X'=\operatorname{Bl}_{\mathcal I}(X)$.  The pullback of
@@ -4276,6 +4295,7 @@ correction explicit before it is sheafified and glued.
   \label{thm:nagata-strict-transform-is-blowup}
   \uses{def:nagata-strict-transform-blowup-comparison}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform}
+  \leanok
 
   Under the preceding hypotheses, the comparison morphism
   $\psi_{f,\mathcal I}$ identifies the blow-up of $Y$ in the extended ideal
@@ -4291,6 +4311,7 @@ correction explicit before it is sheafified and glued.
     thm:nagata-blowup-universal-property,
     lemma:nagata-admissible-blowup-preserves-density,
     def:nagata-scheme-theoretic-closure}
+  \leanok
   Write $U=X\setminus V(\mathcal I)$ and let
   $\Omega\subseteq Y\times_XX'$ be the open locus over $U$, whose
   scheme-theoretic closure is the strict transform
@@ -4321,6 +4342,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Scheme-theoretic closure characterization]
   \label{lemma:nagata-strict-transform-closure-characterization}
   \lean{AlgebraicGeometry.strictTransform}
+  \leanok
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$, put $X'=\operatorname{Bl}_{\mathcal I}(X)$, and let
@@ -4337,6 +4359,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-power-torsion-quotient-torsionfree,
     lemma:nagata-power-torsion-kernel-localization,
     prop:nagata-strict-transform-closed-fiber-product}
+  \leanok
   On an $a$-chart put $C=C_a(A,B,I)$.  A closed subscheme containing the
   preserved open is given by a quotient $C\twoheadrightarrow C/K$ for which
   $K_a=0$.  By
@@ -4393,6 +4416,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Strict transform on the preserved open]
   \label{lemma:nagata-strict-transform-over-complement}
   \lean{AlgebraicGeometry.isPullback_strictTransformOpen}
+  \leanok
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
   ideal, and put $X'=\operatorname{Bl}_{\mathcal I}(X)$.  Over
@@ -4404,6 +4428,7 @@ correction explicit before it is sheafified and glued.
   \uses{thm:nagata-global-blowup-complement,
     lemma:nagata-strict-transform-closure-characterization,
     prop:nagata-strict-transform-closed-fiber-product}
+  \leanok
   The blow-up is the identity over $U$ by
   \Cref{thm:nagata-global-blowup-complement}.  Under this specified
   isomorphism the open whose closure defines the strict transform is all of
@@ -4468,6 +4493,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-admissible-blowup-comp}
   \uses{def:nagata-admissible-blowup}
   \lean{AlgebraicGeometry.IsAdmissible.exists_comp}
+  \leanok
 
   Let $X$ be quasi-compact and quasi-separated and let $U\subseteq X$ be
   quasi-compact.  A composition of two $U$-admissible blow-ups is a
@@ -4478,6 +4504,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{thm:nagata-composition-of-blowups,
     lemma:nagata-admissible-blowup-over-open}
+  \leanok
   Apply \Cref{thm:nagata-composition-of-blowups}.  It writes the composite as
   the blow-up of a finite-presentation center $Y\hookrightarrow X$ whose
   support is the union of the first center and the image of the second center.
@@ -4497,6 +4524,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-global-blowup,
     thm:nagata-global-blowup-proper}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.isProper_blowupMap}
+  \leanok
 
   Let $X$ be a scheme and let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$.  Its blow-up is proper over $X$.  In particular,
@@ -4505,6 +4533,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{thm:nagata-global-blowup-proper}
+  \leanok
   A finite type quasi-coherent ideal defines the global blow-up of
   \Cref{def:nagata-global-blowup}.  Its structure map is proper by
   \Cref{thm:nagata-global-blowup-proper}.  An admissible blow-up is a blow-up
@@ -4515,6 +4544,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-restrict}
   \uses{def:nagata-strict-transform}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_strictTransform_over_blowupMap}
+  \leanok
 
   Let $X'\to X$ be the blow-up of a center $C\hookrightarrow X$.  Over
   $X\setminus C$, the strict transform is canonically the ordinary pullback.
@@ -4524,6 +4554,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-strict-transform-over-complement}
+  \leanok
   This is exactly
   \Cref{lemma:nagata-strict-transform-over-complement}, applied to the ideal
   defining $C$.  The compatibility with the projection is part of that
@@ -4534,6 +4565,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-ambient-closed}
   \uses{def:nagata-strict-transform}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_isClosedImmersion_blowup_comap}
+  \leanok
 
   Let $Z\hookrightarrow X$ be a closed immersion and let $X'\to X$ be a
   blow-up.  Blowing up $Z$ in the pulled-back center gives the strict transform
@@ -4545,6 +4577,7 @@ correction explicit before it is sheafified and glued.
   \uses{thm:nagata-strict-transform-is-blowup,
     prop:nagata-strict-transform-chart-iso,
     prop:nagata-strict-transform-closed-fiber-product}
+  \leanok
   By \Cref{thm:nagata-strict-transform-is-blowup}, the strict transform is the
   blow-up of $Z$ in the extended center ideal.  On an affine chart
   $X=\operatorname{Spec}(A)$ with $Z=\operatorname{Spec}(B)$, the induced
@@ -4585,6 +4618,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-finite-type-ideal-extension}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq}
+  \leanok
 
   Let $X$ be quasi-compact and quasi-separated, let $W\subseteq X$ be a
   quasi-compact open, and let
@@ -4603,6 +4637,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-extend-finite-type-ideal}
   \uses{def:nagata-finite-type-ideal-extension}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq}
+  \leanok
 
   The sheaf $\operatorname{Ext}_{X,W}(\mathcal J)$ is a finite type
   quasi-coherent ideal on $X$, and its restriction to $W$ is
@@ -4611,6 +4646,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
+  \leanok
   The selected ideal is required to have these two properties in
   \Cref{def:nagata-finite-type-ideal-extension}; the witness type is nonempty
   by \Cref{lemma:nagata-finite-type-ideal-extension-exists}.
@@ -4620,6 +4656,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-finite-type-ideal-compact}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup,
     AlgebraicGeometry.Scheme.IdealSheafData.exists_mem_le_of_ofFiniteType_le_sSup}
+  \leanok
 
   Let $X$ be quasi-compact, let $\mathcal A\subseteq\mathcal O_X$ be a finite
   type quasi-coherent ideal, and let $(\mathcal B_\alpha)_\alpha$ be a nonempty
@@ -4629,6 +4666,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   On an affine open $\operatorname{Spec}(R)$ the assertion is that a finitely
   generated ideal of $R$ contained in the union of a directed family of ideals
   is already contained in one member: each of the finitely many generators lies
@@ -4647,6 +4685,7 @@ correction explicit before it is sheafified and glued.
     AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le,
     AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_comap_eq_top_eq,
     AlgebraicGeometry.Scheme.IdealSheafData.exists_ofFiniteType_le_comap_eq_top_of_le}
+  \leanok
 
   Let $X$ be qcqs and let $\mathcal H\subseteq\mathcal O_X$ be a quasi-coherent
   ideal.  The finite type quasi-coherent subideals of $\mathcal H$ form a family
@@ -4661,6 +4700,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
+  \leanok
   The family of finite type subideals is closed under sums, hence directed, and
   its union is contained in $\mathcal H$.  For the reverse inclusion let $V$ be
   an affine open and $a\in\mathcal H(V)$.  The ideal $\mathcal J\subseteq
@@ -4690,6 +4730,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-global-blowup,
     lemma:nagata-glue-finite-type-ideals}
   \lean{AlgebraicGeometry.IsAdmissible.exists_extend}
+  \leanok
 
   Let $X$ be quasi-compact and quasi-separated and let $U,W\subseteq X$ be
   quasi-compact opens.  Write a given $(U\cap W)$-admissible blow-up of $W$
@@ -4715,6 +4756,7 @@ correction explicit before it is sheafified and glued.
   \lean{AlgebraicGeometry.IsAdmissible.exists_extend,
     AlgebraicGeometry.IsAdmissible.exists_extend_of_disjoint,
     AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint}
+  \leanok
 
   The constructed morphism
   $\mathsf{ExtBl}_{X,W,U}(\mathcal J)\to X$ is $U$-admissible, and its
@@ -4725,6 +4767,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-extend-finite-type-ideal,
     thm:nagata-blowup-flat-base-change}
+  \leanok
   By \Cref{lemma:nagata-extend-finite-type-ideal}, the ideal
   $\mathcal I_X(\mathcal J)$ is finite type, restricts to $\mathcal J$ on
   $W$, and restricts to the unit ideal on $U$.  Its blow-up is therefore
@@ -4745,6 +4788,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-product-ideal-common-blowup}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_mul_iso,
     AlgebraicGeometry.IsAdmissible.mul}
+  \leanok
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $\mathcal I_1,\mathcal I_2$ be finite-type quasi-coherent ideals on $X$ with
@@ -4757,6 +4801,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{cor:nagata-blowup-product-common-refinement,
     thm:nagata-global-blowup-complement}
+  \leanok
   Let $\pi_i\colon\operatorname{Bl}_{\mathcal I_1\mathcal I_2}(X)
   \to\operatorname{Bl}_{\mathcal I_i}(X)$ be the two maps supplied by
   \Cref{cor:nagata-blowup-product-common-refinement}.  The product ideal is
@@ -4769,6 +4814,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-qc-open-complement-ideal-exists}
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   Let $W\subseteq Y$ be a quasi-compact open in a qcqs scheme.  There exists
   a finite type quasi-coherent ideal $\mathcal I\subseteq\mathcal O_Y$ such
@@ -4776,6 +4822,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $\mathcal K\subseteq\mathcal O_Y$ be the quasi-coherent ideal defining
   the reduced induced closed subscheme on $Y\setminus W$.  Its restriction to
   $W$ is the unit ideal.  Apply the general submodule form of
@@ -4797,6 +4844,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-effective-cartier-ideal,
     lemma:nagata-qc-open-complement-ideal-exists}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary}
+  \leanok
 
   Let $X$ be qcqs and let $U\subseteq X$ be a quasi-compact open.  There is a
   $U$-admissible blow-up $X_1\to X$ for which the complement of the inverse
@@ -4807,6 +4855,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-qc-open-complement-ideal-exists,
     thm:nagata-blowup-principalizes-center,
     thm:nagata-global-blowup-complement}
+  \leanok
   Choose the finite type quasi-coherent ideal $\mathcal I$ with
   $V(\mathcal I)=X\setminus U$ supplied by
   \Cref{lemma:nagata-qc-open-complement-ideal-exists}.  Its restriction to
@@ -4823,6 +4872,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-flat-pullback}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isPullback}
+  \leanok
 
   Let \(h\colon U\to X\) be quasi-compact and quasi-separated with
   scheme-theoretic image \(X\), and let
@@ -4835,6 +4885,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-scheme-image-flat-base-change}
+  \leanok
   By \Cref{lemma:nagata-scheme-image-flat-base-change}, the scheme-theoretic
   image after pullback is canonically the pullback of the scheme-theoretic
   image of $h$.  By hypothesis that image is $X$, and its pullback along
@@ -5314,6 +5365,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-admissible-blowup,def:nagata-strict-transform,
     def:nagata-flattening-ideal}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap}
+  \leanok
 
   Let $q\colon Z\to X$ be separated and of finite type, let $X$ be qcqs, and
   let $U\subseteq X$ be quasi-compact.  Fix an isomorphism
@@ -5338,6 +5390,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-elimination-indeterminacy}
   \uses{def:nagata-elimination-indeterminacy}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap}
+  \leanok
 
   The morphism $X^{\mathrm{el}}(q,U)\to X$ is $U$-admissible, and the
   constructed strict-transform projection
@@ -5355,6 +5408,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-flattening-ideal}
+  \leanok
   By \Cref{lemma:nagata-flattening-ideal}, the selected ideal is finite type,
   is the unit ideal on $U$, and has open strict-transform projection.  The
   first two properties make its blow-up $U$-admissible; the last property and
