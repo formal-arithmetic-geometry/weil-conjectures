@@ -368,4 +368,5 @@ public import WeilConjectures.ZetaLinearAlgebra.IntegralRecurrence
 public import WeilConjectures.ZetaLinearAlgebra.NormalizedGauss
 public import WeilConjectures.ZetaLinearAlgebra.Pairing
 public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
+public import WeilConjectures.ZetaLinearAlgebra.Weights
 public import WeilConjectures.ZetaSeries

@@ -1,0 +1,150 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Coprime.Lemmas
+
+/-!
+# Purity of a polynomial, and disjointness of distinct weights
+
+Fix a prime power `q`. A polynomial `P ∈ ℂ[X]` with constant coefficient `1` is *pure of weight
+`w`* if every complex root `z` of `P` satisfies `‖z‖ = q ^ (-w / 2)`, i.e. every reciprocal root
+of `P` has absolute value `q ^ (w / 2)`. This is the shape in which the Riemann hypothesis part
+of the Weil conjectures is stated in `AlgebraicGeometry.WeilRiemannHypothesis`.
+
+A strictly stronger notion is needed downstream: a scalar `z` is *universally pure of weight `w`*
+if it is algebraic over `ℚ` and *every* conjugate of `z` — every complex root of its minimal
+polynomial over `ℚ` — has absolute value `q ^ (-w / 2)`; a polynomial is universally pure of
+weight `w` if all of its roots are. Universal purity is a condition on the minimal polynomial
+alone, so unlike purity it does not depend on the choice of a complex embedding.
+
+## Main results
+
+- `Polynomial.IsPureOfWeight`, `IsUniversallyPureOfWeight`,
+  `Polynomial.IsUniversallyPureOfWeight` — the two purity notions, for a polynomial and for a
+  scalar.
+- `Polynomial.IsUniversallyPureOfWeight.isPureOfWeight` — universal purity implies purity.
+- `Polynomial.IsPureOfWeight.disjoint_roots` — polynomials pure of distinct weights have no
+  common root.
+- `IsUniversallyPureOfWeight.weight_unique` — a scalar is universally pure of at most one weight.
+- `Polynomial.isCoprime_prod_odd_prod_even` — for a family `P i` with `P i` pure of weight `i`,
+  the product of the odd-indexed factors and the product of the even-indexed factors are coprime.
+-/
+
+@[expose] public section
+
+open scoped Polynomial
+
+/-- `P` is pure of weight `w` for `q` if `P (0) = 1` and every complex root `z` of `P`
+satisfies `‖z‖ = q ^ (-w / 2)`; equivalently every reciprocal root has absolute value
+`q ^ (w / 2)`. -/
+def Polynomial.IsPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
+  P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, ‖z‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
+
+/-- `z : ℂ` is *universally* pure of weight `w`: it is algebraic over `ℚ` and every
+conjugate of `z` — every complex root of its minimal polynomial over `ℚ` — has absolute
+value `q ^ (-w/2)`. This is strictly stronger than purity under one embedding. -/
+def IsUniversallyPureOfWeight (q w : ℕ) (z : ℂ) : Prop :=
+  IsAlgebraic ℚ z ∧ ∀ y ∈ ((minpoly ℚ z).map (algebraMap ℚ ℂ)).roots,
+    ‖y‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
+
+/-- Every reciprocal root of `P` is universally pure of weight `w`. -/
+def Polynomial.IsUniversallyPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
+  P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, _root_.IsUniversallyPureOfWeight q w z
+
+/-- Two weights giving the same absolute value are equal: `q ^ (-v / 2) = q ^ (-w / 2)` forces
+`v = w` when `1 < q`. -/
+private theorem weight_eq_of_norm_eq {q v w : ℕ} (hq : 1 < q) {z : ℂ}
+    (hv : ‖z‖ = (q : ℝ) ^ (-(v : ℝ) / 2)) (hw : ‖z‖ = (q : ℝ) ^ (-(w : ℝ) / 2)) : v = w := by
+  have hq0 : (0 : ℝ) < q := by exact_mod_cast Nat.zero_lt_of_lt hq
+  have hq1 : (q : ℝ) ≠ 1 := by exact_mod_cast hq.ne'
+  have h : -(v : ℝ) / 2 = -(w : ℝ) / 2 := (Real.rpow_right_inj hq0 hq1).1 (hv ▸ hw)
+  have : (v : ℝ) = w := by linarith
+  exact_mod_cast this
+
+/-- A complex number algebraic over `ℚ` is a root of (the complex image of) its own minimal
+polynomial, hence one of its own conjugates. -/
+private theorem mem_roots_map_minpoly {z : ℂ} (hz : IsAlgebraic ℚ z) :
+    z ∈ ((minpoly ℚ z).map (algebraMap ℚ ℂ)).roots := by
+  have hne : (minpoly ℚ z).map (algebraMap ℚ ℂ) ≠ 0 :=
+    (Polynomial.map_ne_zero_iff (algebraMap ℚ ℂ).injective).2 (minpoly.ne_zero hz.isIntegral)
+  rw [Polynomial.mem_roots hne]
+  simp [Polynomial.IsRoot, Polynomial.eval_map_algebraMap]
+
+namespace Polynomial
+
+/-- Universal purity of weight `w` implies purity of weight `w`. -/
+theorem IsUniversallyPureOfWeight.isPureOfWeight {q w : ℕ} {P : Polynomial ℂ}
+    (hP : P.IsUniversallyPureOfWeight q w) : P.IsPureOfWeight q w := by
+  refine ⟨hP.1, fun z hz ↦ ?_⟩
+  obtain ⟨halg, hy⟩ := hP.2 z hz
+  exact hy z (mem_roots_map_minpoly halg)
+
+/-- A polynomial that is pure of some weight is nonzero: its constant coefficient is `1`. -/
+theorem IsPureOfWeight.ne_zero {q w : ℕ} {P : Polynomial ℂ} (hP : P.IsPureOfWeight q w) :
+    P ≠ 0 := by
+  rintro rfl
+  simpa using hP.1
+
+/-- Polynomials that are pure of distinct weights have no common root. -/
+theorem IsPureOfWeight.disjoint_roots {q v w : ℕ} (hq : 1 < q) {P Q : Polynomial ℂ}
+    (hP : P.IsPureOfWeight q v) (hQ : Q.IsPureOfWeight q w) (hvw : v ≠ w) :
+    ∀ z ∈ P.roots, z ∉ Q.roots :=
+  fun z hzP hzQ ↦ hvw (weight_eq_of_norm_eq hq (hP.2 z hzP) (hQ.2 z hzQ))
+
+/-- Polynomials that are pure of distinct weights are coprime: over `ℂ` coprimality of the
+two nonzero polynomials is exactly the absence of a common root. -/
+theorem IsPureOfWeight.isCoprime {q v w : ℕ} (hq : 1 < q) {P Q : Polynomial ℂ}
+    (hP : P.IsPureOfWeight q v) (hQ : Q.IsPureOfWeight q w) (hvw : v ≠ w) : IsCoprime P Q := by
+  rw [Polynomial.isCoprime_iff_aeval_ne_zero_of_isAlgClosed (K := ℂ) (p := P) (q := Q)]
+  intro a
+  by_contra hcon
+  simp only [not_or, not_not] at hcon
+  exact hP.disjoint_roots hq hQ hvw a ((mem_roots hP.ne_zero).2 (by simpa using hcon.1))
+    ((mem_roots hQ.ne_zero).2 (by simpa using hcon.2))
+
+/-- The constant coefficient of a product of polynomials that are pure of some weight is `1`. -/
+theorem coeff_zero_prod_eq_one {ι : Type*} {q : ℕ} {w : ι → ℕ} {P : ι → Polynomial ℂ}
+    {s : Finset ι} (hP : ∀ i ∈ s, (P i).IsPureOfWeight q (w i)) :
+    (∏ i ∈ s, P i).coeff 0 = 1 := by
+  rw [coeff_zero_prod]
+  exact Finset.prod_eq_one fun i hi ↦ (hP i hi).1
+
+/-- For a family `P i` with `P i` pure of weight `i`, the product of the odd-indexed factors and
+the product of the even-indexed factors are coprime. -/
+theorem isCoprime_prod_odd_prod_even {q r : ℕ} (hq : 1 < q) {P : Fin (r + 1) → Polynomial ℂ}
+    (hP : ∀ i, (P i).IsPureOfWeight q i.1) :
+    IsCoprime (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i)
+      (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i) := by
+  refine IsCoprime.prod_left fun i hi ↦ IsCoprime.prod_right fun j hj ↦ ?_
+  simp only [Finset.mem_filter] at hi hj
+  exact (hP i).isCoprime hq (hP j) fun h ↦ (Nat.not_odd_iff_even.2 hj.2) (h ▸ hi.2)
+
+/-- The product of the odd-indexed factors has constant coefficient `1`. -/
+theorem coeff_zero_prod_odd_eq_one {q r : ℕ} {P : Fin (r + 1) → Polynomial ℂ}
+    (hP : ∀ i, (P i).IsPureOfWeight q i.1) :
+    (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i).coeff 0 = 1 :=
+  coeff_zero_prod_eq_one fun i _ ↦ hP i
+
+/-- The product of the even-indexed factors has constant coefficient `1`. -/
+theorem coeff_zero_prod_even_eq_one {q r : ℕ} {P : Fin (r + 1) → Polynomial ℂ}
+    (hP : ∀ i, (P i).IsPureOfWeight q i.1) :
+    (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i).coeff 0 = 1 :=
+  coeff_zero_prod_eq_one fun i _ ↦ hP i
+
+end Polynomial
+
+/-- A complex number is universally pure of at most one weight. (No hypothesis `z ≠ 0` is
+needed: `0` is a root of its own minimal polynomial `X` and `‖(0 : ℂ)‖ = 0` is never a power
+of `q`, so `0` is universally pure of no weight at all.) -/
+theorem IsUniversallyPureOfWeight.weight_unique {q v w : ℕ} (hq : 1 < q) {z : ℂ}
+    (hv : IsUniversallyPureOfWeight q v z) (hw : IsUniversallyPureOfWeight q w z) : v = w :=
+  weight_eq_of_norm_eq hq (hv.2 z (mem_roots_map_minpoly hv.1))
+    (hw.2 z (mem_roots_map_minpoly hv.1))
