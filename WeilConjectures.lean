@@ -6,6 +6,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
