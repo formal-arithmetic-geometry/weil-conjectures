@@ -259,6 +259,7 @@ end Star
 section Id
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable (V : Scheme.{u})
 
 open Etale
@@ -401,25 +402,26 @@ end Comp
 section Coherence
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {R S T : Scheme.{u}}
 
 open Etale
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The left unit law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
 lemma Etale.lowerStarComp_id_left (h₂ : S ⟶ R) :
     Etale.lowerStarComp A (𝟙 S) h₂ h₂ (Category.id_comp h₂).symm =
       Functor.isoWhiskerRight (Etale.lowerStarId A S) (h₂)_*[A] ≪≫ ((h₂)_*[A]).leftUnitor :=
   GrothendieckTopology.lowerStarComp_id_left A @Etale @Etale le_rfl h₂
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The right unit law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
 lemma Etale.lowerStarComp_id_right (h₁ : T ⟶ S) :
     Etale.lowerStarComp A h₁ (𝟙 S) h₁ (Category.comp_id h₁).symm =
       Functor.isoWhiskerLeft (h₁)_*[A] (Etale.lowerStarId A S) ≪≫ ((h₁)_*[A]).rightUnitor :=
   GrothendieckTopology.lowerStarComp_id_right A @Etale @Etale le_rfl h₁
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The associativity law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
 lemma Etale.lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)
     (fgh : X ⟶ V := f ≫ g ≫ h) (hfgh : fgh = f ≫ g ≫ h := by cat_disch) :
@@ -430,7 +432,7 @@ lemma Etale.lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
         Etale.lowerStarComp A (f ≫ g) h fgh (by rw [hfgh, Category.assoc]) :=
   GrothendieckTopology.lowerStarComp_assoc A @Etale @Etale le_rfl f g h fgh hfgh
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- Absorbing the transport along an equality `h₁ ≫ h₂ = h₁₂` of morphisms into the
 composition isomorphism `AlgebraicGeometry.Etale.lowerStarComp` at `h₁₂`. -/
 lemma Etale.lowerStarComp_trans_eqToIso {W X' Y' : Scheme.{u}} (k₁ : W ⟶ X') (k₂ : X' ⟶ Y')
@@ -440,7 +442,7 @@ lemma Etale.lowerStarComp_trans_eqToIso {W X' Y' : Scheme.{u}} (k₁ : W ⟶ X')
   subst hk
   simp
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The associativity law for `AlgebraicGeometry.Etale.lowerStarComp` in the form of an
 equality of natural transformations, with all three composites of the morphisms named. -/
 lemma Etale.lowerStarComp_assoc' {W X Y Z : Scheme.{u}} (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)

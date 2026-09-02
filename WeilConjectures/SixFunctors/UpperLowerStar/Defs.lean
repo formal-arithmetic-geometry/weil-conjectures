@@ -287,7 +287,7 @@ section Coherence
 
 variable {R S T : Scheme.{u}}
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The left unit law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the
 composition isomorphism for `𝟙 S ≫ h₂` is `lowerStarId` followed by the left unitor. -/
 lemma lowerStarComp_id_left (h₂ : S ⟶ R) :
@@ -299,7 +299,7 @@ lemma lowerStarComp_id_left (h₂ : S ⟶ R) :
     MorphismProperty.Over.pullbackComp_id_left h₂ h₂ (id_comp h₂).symm]
   simp
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The right unit law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the
 composition isomorphism for `h₁ ≫ 𝟙 S` is `lowerStarId` followed by the right unitor. -/
 lemma lowerStarComp_id_right (h₁ : T ⟶ S) :
@@ -311,7 +311,7 @@ lemma lowerStarComp_id_right (h₁ : T ⟶ S) :
     MorphismProperty.Over.pullbackComp_id_right h₁ h₁ (comp_id h₁).symm]
   simp
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The associativity law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the two
 ways of writing `f_* ⋙ g_* ⋙ h_* ≅ (f ≫ g ≫ h)_*` agree. -/
 lemma lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)
