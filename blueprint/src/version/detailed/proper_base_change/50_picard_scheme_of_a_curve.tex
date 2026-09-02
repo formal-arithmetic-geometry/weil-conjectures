@@ -1,160 +1,16 @@
-% ============================================================================
-%  50_picard_scheme_of_a_curve.tex
+% This file is a chapter fragment, in the same style as the other files under
+% version/detailed/.  It is included by version/detailed.tex and must not
+% contain a preamble of its own.
 %
-%  A complete decomposed proof blueprint for the representability theorem
-%  of the Picard scheme of a curve:
-%
-%     Stacks Project, Proposition 44.6.6 (Tag 0B9Z):
-%        Let k be a separably closed field. Let X be a smooth projective
-%        curve over k. Then the Picard functor Pic_{X/k} is representable.
-%
-%  SINGLE-FILE DOCUMENT: this file compiles on its own with
-%
-%     pdflatex 50_picard_scheme_of_a_curve.tex      (twice, for refs)
-%
-%  It is not wired into version/sketch.tex (the Weil-conjecture chain is
-%  unaffected).  Per the decomposition strategy of readme.txt it follows
-%  the blueprint conventions: fine-grained definitions (a definition never
-%  asserts a provable property -- every property is a separate lemma with a
-%  full proof), full proofs everywhere (no proof is omitted; items already
-%  in Mathlib are marked \mathlibok with proof "Omitted."), statements use
-%  definitions via \hyperref + \uses{...}, proofs cite via \Cref{...} with
-%  the proof \uses{} equal to the \Cref{} set, % Decomposed. markers, and
-%  hyperlinked Stacks Project tags on every Stacks citation.
-%
-%  Because this is a single-file build, the blocks of files 02 and 06 that
-%  this blueprint builds upon (the morphism-theoretic conventions, the
-%  curves/Picard/divisor/genus definitions and their basic facts of 06) are
-%  reproduced below under their original labels (def:weil-pbc-*,
-%  def:sc-*, lem:sc-*) with their full proofs; in the assembled blueprint
-%  these are the same objects as in files 02/06 (labels are shared).
-%
-%  ---------------------------------------------------------------------------
-%  Contents:
-%     \part-like structure:
-%      Section 0    imported basis blocks (files 02/06), with complete proofs
-%      Section 1    definitions (def:pc-*), pure definitions only
-%      Section 1b/c properties of the definitions, with full proofs
-%      Section 2    imported facts (Stacks / classical), with full proofs
-%      Section 3    the decomposition chain (0B9M, 0B9N, 0B9U, 0B9V, 0B9X,
-%                   0B9Y, 0B9Q) with full proofs
-%      Section 4    the target theorem 0B9Z, last, with full proof
-% ----------------------------------------------------------------------------
+% Contents: a decomposed proof blueprint for the representability of the
+% Picard functor of a smooth projective curve over a separably closed field,
+% Stacks Project, Picard Schemes of Curves, Proposition 44.6.6 (Tag 0B9Z).
 
-\documentclass[11pt]{article}
+\chapter{The Picard scheme of a curve}\label{chap:picard-scheme-of-a-curve}
 
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[a4paper,margin=0.9in]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{enumitem}
-\usepackage{array}
-\usepackage[unicode,colorlinks=true,linkcolor=blue,urlcolor=magenta,citecolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-\usepackage{xcolor}
-
-% ------------------------------------------------ theorem environments
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{construction}[theorem]{Construction}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
-
-% ------------------------------------------------ blueprint macros
-\newcommand{\mathlibok}{\textsf{\textbf{[Mathlib]}}}
-\newcommand{\lean}[1]{}
-\ExplSyntaxOn
-\NewDocumentCommand{\uses}{m}
- {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
-  \ignorespaces}
-\NewDocumentCommand{\proves}{m}
- {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
-  \ignorespaces}
-\ExplSyntaxOff
-
-% ------------------------------------------------ notation
-\newcommand{\Spec}{\operatorname{Spec}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\Ob}{\operatorname{Ob}}
-\newcommand{\Pic}{\operatorname{Pic}}
-\newcommand{\Hilb}{\operatorname{Hilb}}
-\newcommand{\Sch}{\mathit{Sch}}
-\newcommand{\cO}{\mathcal{O}}
-\newcommand{\cL}{\mathcal{L}}
-\newcommand{\cN}{\mathcal{N}}
-\newcommand{\cF}{\mathcal{F}}
-\newcommand{\cG}{\mathcal{G}}
-\newcommand{\cI}{\mathcal{I}}
-\newcommand{\cM}{\mathcal{M}}
-\newcommand{\cK}{\mathcal{K}}
-\newcommand{\cD}{\mathcal{D}}
-\newcommand{\ZZ}{\mathbb{Z}}
-\newcommand{\zz}{\mathbb{Z}}
-\newcommand{\PP}{\mathbf P}
-\newcommand{\pr}{\mathrm{pr}}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\Et}{\mathrm{et}}
-\newcommand{\Proet}{\mathrm{proet}}
-\newcommand{\Dbc}{D^b_c}
-\newcommand{\Dplus}{D^+}
-\newcommand{\Ab}{\mathsf{Ab}}
-\newcommand{\Mod}{\mathsf{Mod}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Qell}{\mathbf{Q}_{\ell}}
-\newcommand{\Zell}{\mathbf{Z}_{\ell}}
-\newcommand{\Zar}{\mathrm{zar}}
-\newcommand{\Ex}{\operatorname{Ex}}
-\newcommand{\Rlim}{R\varprojlim}
-\newcommand{\colim}{\ensuremath{\operatorname{colim}}}
-\newcommand{\pro}[1]{\ensuremath{\mathrm{Pro}(#1)}}
-\newcommand{\sep}{\textnormal{sep}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\RGamma}{R\Gamma}
-\newcommand{\RGammac}{R\Gamma_c}
-\newcommand{\Sh}{\operatorname{Sh}}
-\newcommand{\Kar}{\operatorname{Kar}}
-\newcommand{\Wt}{\operatorname{Wt}}
-\newcommand{\Span}{\operatorname{span}}
-\newcommand{\coeff}{\operatorname{coeff}}
-\newcommand{\Gal}{\operatorname{Gal}}
-\newcommand{\Rat}{\operatorname{IsRat}}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\Fq}{\mathbf F_q}
-\newcommand{\Qbar}{\overline{\mathbf Q}}
-\newcommand{\Ql}{\mathbf Q_{\ell}}
-\newcommand{\Qbarl}{\overline{\mathbf Q}_{\ell}}
-\newcommand{\Qlb}{\Qbarl}
-\newcommand{\Zl}{\Zell}
-\newcommand{\m}{{\mathfrak{m}}}
-\newcommand{\n}{{\mathfrak{n}}}
-\newcommand{\p}{{\mathfrak{p}}}
-\newcommand{\q}{{\mathfrak{q}}}
-\newcommand{\Fbar}{\overline{\mathbf F}_q}
-\DeclareMathOperator\AffSch{AffSch}
-\DeclareMathOperator\ProFin{ProFin}
-\DeclareMathOperator\Hens{Hens}
-
-\begin{document}
-
-\title{\bfseries The Picard scheme of a curve\\[2pt]
-\large A decomposed proof blueprint for the representability theorem\\
-(Stacks Project, Proposition 44.6.6, Tag \texttt{0B9Z})}
-\author{}
-\date{}
-\maketitle
-
-
-oindent\textbf{Scope.}
-This document is a self-contained proof blueprint for Stacks Project,
-Picard Schemes of Curves, Proposition 44.6.6 (Tag
-\href{https://stacks.math.columbia.edu/tag/0B9Z}{0B9Z}): for a separably
+\noindent\textbf{Scope.}
+This chapter is a self-contained proof blueprint for Stacks Project,
+Picard Schemes of Curves, Proposition 44.6.6 (\stacksproject{0B9Z}): for a separably
 closed field $k$ and a smooth projective curve $X$ over $k$ the Picard
 functor $\Pic_{X/k}$ is representable.  Every proof is fully decomposed;
 no proof is omitted; no definition asserts a provable property.
@@ -352,7 +208,7 @@ finite because coherent cohomology of a proper scheme over a field
 is finite-dimensional (coherent higher direct images of a proper
 morphism are coherent: \Cref{lem:pc-coherent-hi}; this is the genus of
 Stacks Project, Algebraic Curves, Definition 53.8.1,
-\href{https://stacks.math.columbia.edu/tag/0BY7}{Tag 0BY7}, which
+\stacksproject{0BY7}, which
 defines \(g=\dim_kH^1(X,\mathcal O_X)\) for a proper scheme \(X\) of
 dimension one with \(H^0(X,\mathcal O_X)=k\), the present \(C\)).
 Equivalently, by duality
@@ -377,12 +233,12 @@ gives a closed immersion \(i:X\hookrightarrow\mathbf P^N_k\) with
 \(i^*\mathcal O(1)\cong\mathcal L\) (so that every global section of
 \(\mathcal L\) is pulled back from a linear form on \(\mathbf P^N\))
 (\emph{reference: Stacks Project, Morphisms of Schemes, Definition
-29.39.1, \href{https://stacks.math.columbia.edu/tag/01VM}{Tag 01VM} (very ample) and Properties of Schemes, Section
-28.27, \href{https://stacks.math.columbia.edu/tag/01PR}{Tag 01PR} (ample invertible sheaves)}).  \(\mathcal L\) is
+29.39.1, \stacksproject{01VM} (very ample) and Properties of Schemes, Section
+28.27, \stacksproject{01PR} (ample invertible sheaves)}).  \(\mathcal L\) is
 \emph{ample} if
 \(\mathcal L^{\otimes m}\) is very ample for some \(m\geq1\) (the
 standard characterization for proper schemes; \emph{reference:
-Stacks Project, Properties of Schemes, Proposition 28.27.13, \href{https://stacks.math.columbia.edu/tag/01Q3}{Tag 01Q3}
+Stacks Project, Properties of Schemes, Proposition 28.27.13, \stacksproject{01Q3}
 }).
 \end{definition}
 
@@ -453,7 +309,6 @@ morphism of schemes compatible with the multiplications; the
 A regular local ring \(R\) is a domain.
 \end{lemma}
 \begin{proof}
-\uses{}
 For a regular local ring \((R,\mathfrak m)\), the associated graded
 ring
 \[
@@ -465,7 +320,7 @@ is a polynomial ring over the residue field \(R/\mathfrak m\) in
 \(R\) is regular if and only if
 \(\operatorname{gr}_{\mathfrak m}R\) is a polynomial ring;
 \emph{reference: Stacks Project, Commutative Algebra, Lemma
-10.106.1, \href{https://stacks.math.columbia.edu/tag/00NO}{Tag 00NO}}).  A polynomial ring over a field is a domain.
+10.106.1, \stacksproject{00NO}}).  A polynomial ring over a field is a domain.
 Finally, a ring whose associated graded ring is a domain is a
 domain: if \(ab=0\) with \(a,b\neq0\), let \(\bar a,\bar b\) be
 the leading (lowest-degree nonzero) homogeneous components of
@@ -483,12 +338,11 @@ maximal ideal \(\mathfrak m=(t)\), \(t\neq0\), is a discrete
 valuation ring.
 \end{lemma}
 \begin{proof}
-\uses{}
 First, \(\bigcap_{n\geq0}\mathfrak m^n=0\).  This is the Krull
 intersection theorem, which we derive from the Artin--Rees lemma
 (\emph{reference: Stacks Project, Commutative Algebra, Lemma
-10.51.2, \href{https://stacks.math.columbia.edu/tag/00IN}{Tag 00IN} (Artin--Rees) and Lemma 10.51.4,
-\href{https://stacks.math.columbia.edu/tag/00IP}{Tag 00IP} (Krull's intersection theorem)}): if
+10.51.2, \stacksproject{00IN} (Artin--Rees) and Lemma 10.51.4,
+\stacksproject{00IP} (Krull's intersection theorem)}): if
 \(0\neq x\in E:=\bigcap_n\mathfrak m^n\), Artin--Rees applied to
 the submodule \((x)\subseteq R\) gives a \(c\) with
 \[
@@ -532,7 +386,6 @@ is an isomorphism, and the canonical map
 \uses{def:sc-curves,def:sc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{}
 All assertions are local in the Zariski topology: on an open \(U\)
 with \(\mathcal L|_U\cong\mathcal O_U\), one has
 \(\mathcal L^{\vee}|_U\cong\mathcal O_U\), and the maps in question
@@ -595,7 +448,7 @@ A regular local ring of dimension one is a discrete valuation ring.
 A regular local ring of dimension one has
 \(\dim_R\mathfrak m/\mathfrak m^2=1\), so \(\mathfrak m=(t)\) for
 some \(t\) (Nakayama's lemma: \emph{reference: Stacks Project,
-Algebra, Lemma 10.20.1, \href{https://stacks.math.columbia.edu/tag/00DV}{Tag 00DV}}), and \(R\) is a domain
+Algebra, Lemma 10.20.1, \stacksproject{00DV}}), and \(R\) is a domain
 (\Cref{lem:sc-regular-local-domain}).  Hence \(R\) is a discrete
 valuation ring by \Cref{lem:sc-principal-ideal-dvr}.
 \end{proof}
@@ -644,12 +497,12 @@ and for an affine curve \(C=\operatorname{Spec}A\) one has
 \(C_{k'}=\operatorname{Spec}(A\otimes_kk')\).  For the dimension:
 for an affine open piece \(U=\operatorname{Spec}A\) of \(C\), by
 Noether normalization (\emph{reference: Stacks Project, Commutative
-Algebra, \href{https://stacks.math.columbia.edu/tag/00OY}{Tag 00OY}}) there is a finite injective map
+Algebra, \stacksproject{00OY}}) there is a finite injective map
 \(k[x_1,\dots,x_d]\hookrightarrow A\) with \(d=\dim A\); tensoring
 with \(k'\) gives a finite injective map
 \(k'[x_1,\dots,x_d]\hookrightarrow A\otimes_kk'\), and finite
 morphisms preserve dimension (the going-up theorem:
-\emph{reference: Stacks Project, Commutative Algebra, \href{https://stacks.math.columbia.edu/tag/00GU}{Tag 00GU}}), so
+\emph{reference: Stacks Project, Commutative Algebra, \stacksproject{00GU}}), so
 \(\dim(A\otimes_kk')=d=\dim A\); hence
 \(\dim C_{k'}=\dim C\).
 \end{proof}
@@ -671,7 +524,6 @@ where \(\underline H^q(F)\) is the presheaf
 Cech cohomology with respect to the covering \(\mathfrak U\).
 \end{lemma}
 \begin{proof}
-\uses{}
 Choose an injective resolution \(F\to I^{\bullet}\) and consider the
 double complex \(C^{pq}:=C^p(\mathfrak U,I^q)\), where
 \(C^p(\mathfrak U,-)\) is the (alternating) Cech complex of the
@@ -857,8 +709,8 @@ field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
 We use Riemann--Roch (\Cref{thm:pc-riemann-roch}) for the proper
 smooth curve \(C\) of genus \(g\) (\Cref{def:sc-genus}): first, \(C\) is projective (a
 proper smooth curve over a field is projective: Varieties,
-Lemma~33.43.4, Tag
-\href{https://stacks.math.columbia.edu/tag/0A26}{0A26}; the remaining
+Lemma~33.43.4,
+\stacksproject{0A26}; the remaining
 hypotheses of the theorem hold: the curve is smooth, proper and
 connected, and \(H^0(C,\mathcal O_C)=k\) since the field is
 algebraically closed) and, for a line bundle \(\mathcal N\) of degree
@@ -916,7 +768,7 @@ field, so the dimension is zero and
 \Cref{lem:sc-dim0-finite} applies).  Thus \(\varphi\) is proper
 (a morphism of proper schemes) with finite fibres, hence finite
 (\emph{reference: Stacks Project, Morphisms of Schemes,
-\href{https://stacks.math.columbia.edu/tag/02OG}{Tag 02OG}: proper and quasi-finite implies finite;
+\stacksproject{02OG}: proper and quasi-finite implies finite;
 cf.\ the proof recalled in \Cref{lem:sc-morphism-from-function}}).
 Finally, \(\varphi\) is finite and injective on closed points: its
 image \(\varphi(C)\subset\mathbf P^N\) is closed, and for
@@ -957,7 +809,6 @@ subset \(Z\subseteq X\) of dimension at most zero is a finite set of
 closed points.
 \end{lemma}
 \begin{proof}
-\uses{}
 It suffices to treat \(X=\operatorname{Spec}A\) affine and
 \(Z=V(I)\).  Then \(B:=A/I\) is a finitely generated \(k\)-algebra,
 hence noetherian (Hilbert's basis theorem: \emph{reference: Stacks
@@ -1019,7 +870,7 @@ surjective.  The fibres of \(\pi_f\) are finite: the fibre over
 \(y\in\mathbf P^1\) is a proper closed subscheme of \(C\) not equal
 to \(C\), hence of dimension zero and finite by
 \Cref{lem:sc-dim0-finite}.  A proper morphism with finite fibres is
-finite (\emph{reference: Stacks Project, Morphisms of Schemes, \href{https://stacks.math.columbia.edu/tag/02OG}{Tag 02OG}
+finite (\emph{reference: Stacks Project, Morphisms of Schemes, \stacksproject{02OG}
 : a proper morphism is finite if and only if it is
 quasi-finite}; we
 recall the proof: the Stein factorization
@@ -1074,7 +925,7 @@ type admits a finite injective map
 \(k[x_1,\dots,x_d]\hookrightarrow A\) with \(d=\dim A\), whence
 \(\operatorname{trdeg}_k\operatorname{Frac}(A)=d\) (\emph{reference
 for the Noether normalization theorem: Stacks Project, Commutative
-Algebra, \href{https://stacks.math.columbia.edu/tag/00OY}{Tag 00OY}}); so \(k(C)\neq k\).  Let \(\pi:=\pi_f:C\to\mathbf P^1_k\)
+Algebra, \stacksproject{00OY}}); so \(k(C)\neq k\).  Let \(\pi:=\pi_f:C\to\mathbf P^1_k\)
 be the morphism of \Cref{lem:sc-morphism-from-function}, finite flat
 of degree \(d=[k(C):k(f)]\), with \(\pi^*t=f\).  Pullback of
 divisors is compatible with pullback of functions,
@@ -1232,8 +1083,8 @@ diagonal.  The \emph{sheaf of Kähler differentials} of $X$ over $S$ is
 For $X=\Spec(A)$, $S=\Spec(R)$ this recovers the $A$-module
 $\Omega_{A/R}$ of Kähler differentials of the $R$-algebra $A$ with its
 universal derivation $d:A\to\Omega_{A/R}$ (the standard description;
-Algebra, Section~10.131, Tag
-\href{https://stacks.math.columbia.edu/tag/00RM}{00RM}).
+Algebra, Section~10.131,
+\stacksproject{00RM}).
 \uses{def:pc-scheme,def:pc-base-change,def:pc-morphism-conventions}
 \end{definition}
 
@@ -1256,12 +1107,12 @@ is a line bundle (the \emph{canonical} module).
 The assertion is Zariski-local on $X$, so we may assume
 $X=\Spec(A)$, $S=\Spec(R)$ with $A$ smooth over $R$: by the standard
 local form of a smooth algebra (\\Cref{def:pc-smooth-morphism}, the definition of smoothness,
-Algebra, Definition~10.137.1, Tag
-\href{https://stacks.math.columbia.edu/tag/00T2}{00T2}; the local
+Algebra, Definition~10.137.1,
+\stacksproject{00T2}; the local
 presentation with the Jacobian of rank the number of relations is the
 standard consequence, cf.\ also the Jacobian criterion for
-smoothness, Morphisms of Schemes, Lemma~29.37.21, Tag
-\href{https://stacks.math.columbia.edu/tag/054L}{054L}) there are
+smoothness, Morphisms of Schemes, Lemma~29.37.21,
+\stacksproject{054L}) there are
 $x_1,\dots,x_{n+c}\in A$ and $f_1,\dots,f_c$ with
 $A=R[x_1,\dots,x_{n+c}]/(f_1,\dots,f_c)$ and the Jacobian matrix
 $\bigl(\partial f_i/\partial x_j\bigr)$ of rank $c$.  For such a
@@ -1269,8 +1120,8 @@ presentation the module of Kähler differentials is the quotient
 \[
 \Omega_{A/R}=A^{\oplus(n+c)}\Big/\bigl(df_i:\ i=1,\dots,c\bigr)
 \]
-(the standard computation of Algebra, Section~10.131, Tag
-\href{https://stacks.math.columbia.edu/tag/00RM}{00RM}); the
+(the standard computation of Algebra, Section~10.131,
+\stacksproject{00RM}); the
 $\cO$-span of the differentials $df_i$ in $A^{\oplus(n+c)}$ is a
 direct summand of rank $c$ (the Jacobian matrix has rank $c$), so
 $\Omega_{A/R}\cong A^{\oplus n}$ is free of rank $n$ (a basis being
@@ -1298,8 +1149,8 @@ monomial refinement used below is EGA III$_1$, \,(2.1.12) and its
 top-degree statement EGA III$_1$, \,(2.2.2).  In the case $N=1$ the
 theorem gives $H^1(\mathbf P^1,\cM)^{\vee}\cong
 H^0(\mathbf P^1,\omega\otimes\cM^{-1})$ for line bundles $\cM$,
-which is Algebraic Curves, Lemma~53.4.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0BS2}{0BS2}(5).)
+which is Algebraic Curves, Lemma~53.4.1,
+\stacksproject{0BS2}(5).)
 \uses{def:pc-kahler-differentials,def:pc-scheme,def:pc-ext}
 \end{theorem}
 \begin{proof}
@@ -1564,8 +1415,7 @@ By \Cref{thm:pc-riemann-roch} for $\cM=\omega_X$:
 % Decomposed.
 \begin{definition}[Schemes]\label{def:pc-scheme}
 A \emph{scheme} is a locally ringed space in the sense of Stacks
-Project, Schemes, Section~26.1 (Tag
-\href{https://stacks.math.columbia.edu/tag/01I8}{01I8}); $\Sch$ denotes
+Project, Schemes, Section~26.1 (\stacksproject{01I8}); $\Sch$ denotes
 the category of schemes, and a \emph{morphism of schemes} is a morphism
 in $\Sch$.  A scheme is \emph{affine} if it is isomorphic to
 $\Spec(A)$ for a commutative ring $A$; an \emph{open subscheme} of $X$
@@ -1602,11 +1452,11 @@ $x\in X$ if there are affine open neighbourhoods $\Spec(A)=U\subset X$
 of $x$ and $\Spec(R)=V\subset S$ with $f(U)\subset V$ such that the
 induced ring map $R\to A$ is smooth (i.e.\ of finite presentation with
 naive cotangent complex quasi-isomorphic to a finite projective
-$A$-module placed in degree $0$; Algebra, Definition~10.137.1, Tag
-\href{https://stacks.math.columbia.edu/tag/00T2}{00T2}); $f$ is
+$A$-module placed in degree $0$; Algebra, Definition~10.137.1,
+\stacksproject{00T2}); $f$ is
 \emph{smooth} if it is smooth at every point of $X$ (Morphisms of
-Schemes, Definition~29.35.1, Tag
-\href{https://stacks.math.columbia.edu/tag/01V5}{01V5}).  The equivalent
+Schemes, Definition~29.35.1,
+\stacksproject{01V5}).  The equivalent
 description --- flat, locally of finite presentation, smooth fibres ---
 is \Cref{lem:pc-smooth-characterization}.
 % Mathlib: the corresponding structure exists.
@@ -1621,8 +1471,8 @@ Let $f:X\to S$ be a morphism of schemes.  $f$ is \emph{H-projective}, or
 $i:X\hookrightarrow\mathbf P^n_S$ over $S$ with $f=\pi\circ i$
 ($\pi:\mathbf P^n_S\to S$ the structure morphism); $f$ is
 \emph{projective} if it is H-projective and quasi-compact (Morphisms of
-Schemes, Definition~29.44.1, Tag
-\href{https://stacks.math.columbia.edu/tag/01W7}{01W7}).  A scheme $X$
+Schemes, Definition~29.44.1,
+\stacksproject{01W7}).  A scheme $X$
 over a field $k$ is \emph{projective over $k$} if the structure morphism
 $X\to\Spec(k)$ is projective.
 \uses{def:pc-scheme,def:pc-morphism-conventions}
@@ -1684,7 +1534,7 @@ polynomial $f\in k[T]$ has a root in $k$ (equivalently, $k$ has no
 nontrivial finite separable field extension; the equivalence of the two
 formulations is \Cref{lem:pc-sepclosed-finite-sep-trivial}).
 % Mathlib: IsSepClosed.
-\mathlibok\ \lean{FieldTheory.IsSepClosed, IsSepClosed.splits_of_separable,
+\mathlibok\ \lean{IsSepClosed, IsSepClosed.splits_of_separable,
 IsSepClosed.splits_codomain, IsSepClosed.splits_domain}
 \end{definition}
 
@@ -1694,11 +1544,11 @@ IsSepClosed.splits_codomain, IsSepClosed.splits_domain}
 Let $k$ be a field.  A \emph{variety over $k$} is a scheme $X$ over $k$
 which is integral and whose structure morphism $X\to\Spec(k)$ is
 \hyperref[def:pc-morphism-conventions]{separated and of finite type}
-(Varieties, Definition~33.3.1, Tag
-\href{https://stacks.math.columbia.edu/tag/020D}{020D}).  A
+(Varieties, Definition~33.3.1,
+\stacksproject{020D}).  A
 \emph{curve over $k$} is a scheme over $k$ which is a variety of
 dimension $1$ (\Cref{def:pc-dimension}; Varieties, Definition~33.43.1,
-Tag \href{https://stacks.math.columbia.edu/tag/0A23}{0A23}).
+\stacksproject{0A23}).
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-dimension,def:weil-pbc-scheme-conventions}
 \end{definition}
 
@@ -1784,8 +1634,8 @@ finite unions of closed points) are
 \label{def:pc-relative-effective-cartier}
 Let $f:X\to S$ be a morphism of schemes.  A \emph{relative effective
 Cartier divisor on $X/S$} is an effective Cartier divisor $D\subset X$
-such that $D\to S$ is flat (Divisors, Definition~31.19.2, Tag
-\href{https://stacks.math.columbia.edu/tag/062T}{062T}).
+such that $D\to S$ is flat (Divisors, Definition~31.19.2,
+\stacksproject{062T}).
 \uses{def:sc-effective-cartier-divisor,def:pc-scheme,def:pc-morphism-conventions}
 \end{definition}
 
@@ -1810,8 +1660,8 @@ $\Spec(A/(a))$, compatibility with flat base change, $Z(s)=X
 % Decomposed.
 \begin{definition}[The big fppf site]\label{def:pc-fppf-site}
 Let $S$ be a scheme and $\mathit{Sch}_{fppf}$ a big fppf site containing
-$S$ (Topologies, Definition~34.7.8, Tag
-\href{https://stacks.math.columbia.edu/tag/021S}{021S}).  The
+$S$ (Topologies, Definition~34.7.8,
+\stacksproject{021S}).  The
 \emph{big fppf site of $S$} is $(\mathit{Sch}/S)_{fppf}$, whose coverings
 are the families $\{T_i\to T\}_{i\in I}$ of
 \hyperref[def:pc-morphism-conventions]{flat morphisms} locally of finite
@@ -1829,8 +1679,8 @@ Let $F:(\mathit{Sch})^{\mathrm{op}}\to\textit{Sets}$ be a functor.  $F$
 scheme $T$, every open covering $T=\bigcup_{i\in I}U_i$ and every
 collection $\xi_i\in F(U_i)$ with
 $\xi_i|_{U_i\cap U_j}=\xi_j|_{U_i\cap U_j}$ there is a unique
-$\xi\in F(T)$ with $\xi|_{U_i}=\xi_i$ (Schemes, Definition~26.15.3, Tag
-\href{https://stacks.math.columbia.edu/tag/01JI}{01JI}).
+$\xi\in F(T)$ with $\xi|_{U_i}=\xi_i$ (Schemes, Definition~26.15.3,
+\stacksproject{01JI}).
 \uses{def:pc-scheme}
 \end{definition}
 
@@ -1841,8 +1691,8 @@ Let $F:(\mathit{Sch})^{\mathrm{op}}\to\textit{Sets}$ be a functor.  A
 \emph{subfunctor} $H\subseteq F$ is an assignment
 $T\mapsto H(T)\subseteq F(T)$ such that the maps $F(f):F(T)\to F(T')$
 send $H(T)$ into $H(T')$ for all morphisms $f:T'\to T$ (Schemes,
-Definition~26.15.3, Tag
-\href{https://stacks.math.columbia.edu/tag/01JI}{01JI}).
+Definition~26.15.3,
+\stacksproject{01JI}).
 \uses{def:pc-scheme}
 \end{definition}
 
@@ -1856,8 +1706,8 @@ F$ is \emph{representable by open immersions} if for all pairs
 $(T,\xi)$ with $T$ a scheme and $\xi\in F(T)$ there is an open
 subscheme $U_\xi\subseteq T$ such that a morphism $f:T'\to T$ factors
 through $U_\xi$ if and only if $f^*\xi\in H(T')$ (Schemes,
-Definition~26.15.3, Tag
-\href{https://stacks.math.columbia.edu/tag/01JI}{01JI}).
+Definition~26.15.3,
+\stacksproject{01JI}).
 \uses{def:pc-scheme,def:pc-subfunctor}
 \end{definition}
 
@@ -1869,8 +1719,8 @@ let $(H_i)_{i\in I}$ be a family of
 \hyperref[def:pc-subfunctor]{subfunctors} of $F$.  The family
 \emph{covers} $F$ if for every $\xi\in F(T)$ there is an open covering
 $T=\bigcup_{i\in I}U_i$ with $\xi|_{U_i}\in H_i(U_i)$ (Schemes,
-Definition~26.15.3, Tag
-\href{https://stacks.math.columbia.edu/tag/01JI}{01JI}).
+Definition~26.15.3,
+\stacksproject{01JI}).
 \uses{def:pc-scheme,def:pc-subfunctor}
 \end{definition}
 
@@ -1881,8 +1731,8 @@ Let $F:(\mathit{Sch}/S)^{\mathrm{op}}\to\textit{Sets}$ be a functor.  The
 \emph{functor of points} of a scheme $X$ over $S$ is
 $h_X=\operatorname{Hom}_S(\bullet,X)$; $F$ is \emph{representable by a
 scheme} if $F\cong h_P$ for some scheme $P$ over $S$
-(Schemes, Section~26.15; Categories, Lemma~4.3.5, Tag
-\href{https://stacks.math.columbia.edu/tag/001P}{001P}).  A scheme
+(Schemes, Section~26.15; Categories, Lemma~4.3.5,
+\stacksproject{001P}).  A scheme
 representing a functor is denoted $\underline{\Pic}$,
 $\underline{\Hilb}$ etc.; uniqueness of the representing scheme is
 \Cref{lem:pc-representable-unique}.
@@ -1899,14 +1749,13 @@ the map
 \operatorname{Hom}_{\textit{fun}}(h_X,F)\;\longrightarrow\;F(X),\qquad
 \tau\;\longmapsto\;\tau_X(\mathrm{id}_X)
 \]
-is a bijection, natural in both arguments (Categories, Lemma~4.3.5, Tag
-\href{https://stacks.math.columbia.edu/tag/001P}{001P}).
+is a bijection, natural in both arguments (Categories, Lemma~4.3.5,
+\stacksproject{001P}).
 % Mathlib: the category-theoretic statement already exists.
 \mathlibok\ \lean{CategoryTheory.yoneda, CategoryTheory.Functor.IsRepresentedBy,
-CategoryTheory.Representable}
+CategoryTheory.Functor.IsRepresentable}
 \end{lemma}
 \begin{proof}
-\uses{}
 Omitted.  (Mathlib item.)
 \end{proof}
 
@@ -1934,8 +1783,8 @@ $\Pic_{X/S}$ is the fppf sheafification of the
 $(\mathit{Sch}/S)_{fppf}$ (\Cref{def:pc-fppf-site}); if it is
 representable (\Cref{def:pc-representable-functor}), the representing
 scheme is $\underline{\Pic}_{X/S}$ (Stacks Project, Picard Schemes of
-Curves, Definition~44.4.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9L}{0B9L}).  The relation
+Curves, Definition~44.4.1,
+\stacksproject{0B9L}).  The relation
 with the affine functor $\Pic_{C/k}$ of file~06 is
 \Cref{lem:pc-picard-functor-agrees-sc}.  For $S=\Spec(k)$ we write
 $\Pic_{X/k}$.
@@ -1984,15 +1833,15 @@ is a subfunctor, and the open-immersion property, is
 \label{def:pc-derived-category}
 Let $X$ be a scheme and let $D(\cO_X)$ be the derived category of
 $\cO_X$-modules (quasi-isomorphisms inverted; Stacks Project, Derived
-Categories of Schemes, Chapter~36, Tag
-\href{https://stacks.math.columbia.edu/tag/08CU}{08CU}), and
+Categories of Schemes, Chapter~36,
+\stacksproject{08CU}), and
 $D_{\text{QCoh}}(\cO_X)$ the full subcategory of objects with
 quasi-coherent cohomology sheaves.  Two objects of $D(\cO_X)$ are
 \emph{isomorphic} if they are connected by a zig-zag of
 quasi-isomorphisms of complexes.
 % Mathlib: the derived category of an abelian category exists (as the
 % localization of the category of chain complexes at quasi-isomorphisms).
-\mathlibok\ \lean{Algebra.Homology.DerivedCategory, Algebra.Homology.DerivedCategory.Basic}
+\mathlibok\ \lean{DerivedCategory}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2001,8 +1850,8 @@ quasi-isomorphisms of complexes.
 Let $X$ be a scheme and $E\in D(\cO_X)$.  $E$ is \emph{perfect} if it is
 locally (on an affine open cover of $X$) isomorphic to a bounded complex
 of finite projective modules (Derived Categories of Schemes,
-Section~36.31, Tag
-\href{https://stacks.math.columbia.edu/tag/0BDH}{0BDH}); the subcategory
+Section~36.31,
+\stacksproject{0BDH}); the subcategory
 is $D_{\mathrm{perf}}(\cO_X)$.  The perfectness of an
 \hyperref[def:sc-invertible-module]{invertible} module is
 \Cref{lem:pc-invertible-perfect}.
@@ -2019,8 +1868,8 @@ $H^i(Rf_*E)=R^if_*E$ are the \emph{higher direct images}.  (The
 definition via injective resolutions (or the $K$-injective resolution
 criterion of file~02, the standard $K$-injective-resolution criterion) is the
 standard one; the relevant admissibility statements are in Derived
-Categories of Schemes, Section~36.30, Tag
-\href{https://stacks.math.columbia.edu/tag/0A1G}{0A1G}.)
+Categories of Schemes, Section~36.30,
+\stacksproject{0A1G}.)
 \uses{def:pc-derived-category,def:pc-scheme}
 \end{definition}
 
@@ -2102,8 +1951,8 @@ the assignment is contravariant by base change of closed subschemes
 \Cref{lem:pc-hilb-functorial}).  If it is representable
 (\Cref{def:pc-representable-functor}), the representing scheme is
 $\underline{\Hilb}^d_{X/S}$ (Stacks Project, Picard Schemes of Curves,
-Chapter~44, Section~44.2, Tag
-\href{https://stacks.math.columbia.edu/tag/0B94}{0B94}).
+Chapter~44, Section~44.2,
+\stacksproject{0B94}).
 \uses{def:pc-finite-locally-free,def:pc-base-change,def:pc-representable-functor}
 \end{definition}
 
@@ -2119,8 +1968,7 @@ where $H^i(X,\cF)$ are the
 \hyperref[def:pc-derived-direct-image]{higher direct images} of
 $\cF$ for the structure morphism; the well-definedness (finite support,
 finite dimensions) is \Cref{lem:pc-euler-characteristic-well-defined},
-the definition of Varieties, Definition~33.33.1 (Tag
-\href{https://stacks.math.columbia.edu/tag/0BEJ}{0BEJ}).
+the definition of Varieties, Definition~33.33.1 (\stacksproject{0BEJ}).
 \uses{def:pc-scheme,def:pc-derived-direct-image,def:pc-morphism-conventions}
 \end{definition}
 
@@ -2134,8 +1982,8 @@ Let $k$ be a field, $X$ a proper scheme over $k$ and $\cL$ an
 \[
 \deg(\cL):=\chi(X,\cL)-\chi(X,\cO_X)\in\Z
 \]
-(Varieties, Definition~33.44.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0AYR}{0AYR}).  For an
+(Varieties, Definition~33.44.1,
+\stacksproject{0AYR}).  For an
 effective Cartier divisor $D$ on $X$ the degree of $D$ is
 $\deg(D):=\deg(\cO_X(D))$.  The relation with the degree of
 \Cref{def:sc-pic0} for smooth proper curves over algebraically closed
@@ -2153,8 +2001,8 @@ irreducible}.  The \emph{genus} of $X$ is
 \[
 g(X):=\dim_kH^1(X,\cO_X)\in\Z_{\geq0}
 \]
-(Stacks Project, Picard Schemes of Curves, Definition~44.6.3, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9W}{0B9W}).  Well-definedness
+(Stacks Project, Picard Schemes of Curves, Definition~44.6.3,
+\stacksproject{0B9W}).  Well-definedness
 and agreement with \Cref{def:sc-genus} and its behaviour under base
 change are \Cref{lem:pc-genus-well-defined},
 \Cref{lem:pc-genus-agrees-sc} and \Cref{lem:pc-genus-base-change}.
@@ -2167,11 +2015,11 @@ change are \Cref{lem:pc-genus-well-defined},
 \label{rem:pc-sc-ample}
 The notions of \emph{ample} and \emph{very ample} invertible module are
 those of file~06: \Cref{def:sc-ample} (with the Stacks Project
-references Properties of Schemes, Section~28.27, Tag
-\href{https://stacks.math.columbia.edu/tag/01PR}{01PR}, Proposition
-28.27.13, Tag \href{https://stacks.math.columbia.edu/tag/01Q3}{01Q3},
-and Morphisms of Schemes, Definition~29.39.1, Tag
-\href{https://stacks.math.columbia.edu/tag/01VM}{01VM}).  We use that
+references Properties of Schemes, Section~28.27,
+\stacksproject{01PR}, Proposition
+28.27.13, \stacksproject{01Q3},
+and Morphisms of Schemes, Definition~29.39.1,
+\stacksproject{01VM}).  We use that
 definition in its stated generality (any proper scheme over a field).
 \uses{def:sc-ample}
 \end{remark}
@@ -2247,11 +2095,9 @@ is flat and every fibre $X_s$ is smooth over $\kappa(s)$.
 \uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-\uses{}
-($\Leftarrow$) This is Morphisms of Schemes, Lemma~29.35.3 (Tag
-\href{https://stacks.math.columbia.edu/tag/01V8}{01V8}) (the proof of
-which is the local algebra criterion Algebra, Lemma~10.137.16, Tag
-\href{https://stacks.math.columbia.edu/tag/00TF}{00TF}: after inverting
+($\Leftarrow$) This is Morphisms of Schemes, Lemma~29.35.3 (\stacksproject{01V8}) (the proof of
+which is the local algebra criterion Algebra, Lemma~10.137.16,
+\stacksproject{00TF}: after inverting
 one element, the ring map is a relative global complete intersection
 whose Jacobian is invertible, which is the definition of a standard
 smooth ring map).
@@ -2261,7 +2107,7 @@ $X=\Spec(A)$ with $R\to A$ smooth at a prime $\mathfrak q$; assume
 $A$ is standard smooth over $R$, i.e.\
 $A=R[x_1,\dots,x_n]/(f_1,\dots,f_c)$ with the Jacobian
 $\det(\partial f_j/\partial x_i)_{i,j\le c}$ a unit in $A$ (Algebra,
-Lemma~10.137.6, Tag \href{https://stacks.math.columbia.edu/tag/00T7}{00T7},
+Lemma~10.137.6, \stacksproject{00T7},
 which also gives the Zariski-locality: smooth ring maps are
 Zariski-locally standard smooth).  \emph{Finite presentation} holds by
 definition.  \emph{Flatness:} the elements $f_1,\dots,f_c$ form a
@@ -2275,8 +2121,8 @@ $0\to\wedge^cR[x]^c\to\cdots\to R[x]^c\to R[x]\to A\to0$ is exact
 (hence flat) resolution of $A$; $A$ is flat over $R$.
 \emph{Smooth fibres:} for $\mathfrak p\subset R$ the base change
 $A\otimes_R\kappa(\mathfrak p)$ is standard smooth over
-$\kappa(\mathfrak p)$ (Algebra, Lemma~10.137.3, Tag
-\href{https://stacks.math.columbia.edu/tag/00T4}{00T4}), hence smooth
+$\kappa(\mathfrak p)$ (Algebra, Lemma~10.137.3,
+\stacksproject{00T4}), hence smooth
 (Lemma~10.137.6, Tag 00T7).  The general statement follows by
 Zariski-locality.
 \end{proof}
@@ -2294,7 +2140,6 @@ isomorphisms.
 \uses{def:sc-invertible-module,def:pc-scheme,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{}
 All three assertions are Zariski-local in $X$, and at a point $x$ an
 invertible $\cO_{X,x}$-module is free of rank $1$, hence isomorphic to
 $\cO_{X,x}$: then $\cM^\vee\cong\cO_x$, $\cM\otimes\cN\cong\cO_x$,
@@ -2313,7 +2158,6 @@ every invertible $\cO_k$-module is isomorphic to $\cO_k$.
 \uses{def:sc-invertible-module,def:sc-picard-group,def:pc-scheme}
 \end{lemma}
 \begin{proof}
-\uses{}
 An invertible $\cO_k$-module is locally free of rank $1$; an $\cO_k$-module
 is the same as a $k$-vector space, and a locally free rank $1$ $k$-module
 is free of rank $1$ (a module over a field is free; every nonzero
@@ -2460,7 +2304,6 @@ $\{U_i\to T\}$ is an
 \uses{def:pc-fppf-site,def:pc-morphism-conventions,def:pc-scheme}
 \end{lemma}
 \begin{proof}
-\uses{}
 Each $U_i\to T$ is locally of finite presentation (an open immersion
 $U\to T$ is, on affine patching of $T$ by $\Spec(A)$ and $U$ by
 $\Spec(A_f)$, the map $\Spec(A_f)\to\Spec(A)$; $A_f=A[x]/(fx-1)$ is a
@@ -2506,7 +2349,6 @@ $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
 \uses{def:pc-picard-presheaf,def:pc-base-change,def:sc-invertible-module,lem:pc-tensor-dual-invertible}
 \end{lemma}
 \begin{proof}
-\uses{}
 If $\cL$ is invertible on $X_T$, then $g_X^*\cL$ is invertible on
 $X_{T'}$: local on $X_{T'}$, $g_X^*\cL$ is the base change of a locally
 free rank one module (trivializing by an open cover and using that
@@ -2535,7 +2377,6 @@ the right side is the value of the functor of \Cref{def:sc-picard-functor}.
 \uses{def:pc-picard-functor,def:sc-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme}
 \end{lemma}
 \begin{proof}
-\uses{}
 Both sides are the fppf sheafification of the same presheaf on the
 category of affine $k$-schemes: the left is the restriction of the fppf
 sheafification on $(\mathit{Sch}/k)_{fppf}$, and fppf sheafification
@@ -2552,7 +2393,7 @@ functor to affine schemes; the sheaves that are sheafifications of
 presheaves on the affine site are exactly the fppf sheaves on
 $(\mathit{Aff}/k)_{fppf}$, the two prescriptions agree on affine inputs.
 This is the standard construction of the big sites (see Topologies,
-Section~34.7, Tag \href{https://stacks.math.columbia.edu/tag/021S}{021S}).
+Section~34.7, \stacksproject{021S}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -2585,7 +2426,6 @@ $\cM$, viewed as a complex in degree $0$, is
 \uses{def:pc-perfect-complex,def:sc-invertible-module,def:pc-derived-category}
 \end{lemma}
 \begin{proof}
-\uses{}
 An invertible module is locally free of rank one: Zariski-locally
 $\cM\cong\cO_X$, hence the bounded complex $\cM$ in degree $0$ is
 locally isomorphic to the free module $\cO_X$ in degree zero, which is
@@ -2605,7 +2445,6 @@ then $H^j(M)=0$ for $j\neq i$ and $H^i(M)\cong E$.
 \uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:sc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{}
 By definition of the shift, $H^j(\cN[0])$ is the $j$-th cohomology of
 the complex with $\cN$ in degree $0$, i.e.\ $0$ for $j
 e0$ and $H^0$ is
@@ -2795,11 +2634,9 @@ $g(C)$ of \Cref{def:pc-genus} equals the genus of
 \uses{def:pc-genus,def:sc-genus,def:pc-smooth-projective-curve,def:sc-curves}
 \end{lemma}
 \begin{proof}
-\uses{}
 Both definitions are $g=\dim_kH^1(C,\cO_C)$ (Definition 44.6.3 in the
 first case, specific to the geometric irreducible smooth projective
-curve; Definition 53.8.1 (Tag
-\href{https://stacks.math.columbia.edu/tag/0BY7}{0BY7}) in the second),
+curve; Definition 53.8.1 (\stacksproject{0BY7}) in the second),
 so they agree.
 \end{proof}
 
@@ -2880,7 +2717,6 @@ is exact.
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
-\uses{}
 \emph{Detection over a faithfully flat base.}  For a complex
 $C^\bullet$ of flat $A$-modules, $H^i(C^\bullet\otimes_AB)
 =H^i(C^\bullet)\otimes_AB$ for every $A$-algebra $B$: this is the
@@ -2958,8 +2794,8 @@ $\cO_X$-module.  Then $H^p(X,\cF)=0$ for all $p>0$.
 \begin{proof}
 \uses{lem:pc-affine-cech-complex}
 Apply the standard Čech criterion (Stacks Project, Cohomology,
-Lemma 20.11.9; the section is Cohomology, Section 20.11, Tag
-\href{https://stacks.math.columbia.edu/tag/01EO}{01EO}): let
+Lemma 20.11.9; the section is Cohomology, Section 20.11,
+\stacksproject{01EO}): let
 $\mathcal B$ be the basis of affine opens of $X$ and $\mathrm{Cov}$ the
 set of the standard coverings $\{D(f_i)\}$ of affine opens; then
 (1) the generating open subsets are closed under finite intersections
@@ -3001,8 +2837,8 @@ $\underline H^q(\cF)(U_J)=H^q(U_J,\cF|_{U_J})=0$ by
 spectral sequence degenerates at $E_2$, and the filtration of
 $H^n(X,\cF)$ has only the piece $\operatorname{gr}^0$: thus
 $\check H^p(\mathcal U,\cF)=H^p(X,\cF)$ for all $p$.  (This is the
-argument of Stacks Project, Cohomology of Schemes, Lemma 30.2.6, Tag
-\href{https://stacks.math.columbia.edu/tag/01XD}{01XD}; its two
+argument of Stacks Project, Cohomology of Schemes, Lemma 30.2.6,
+\stacksproject{01XD}; its two
 ingredients, Čech acyclicity of injective sheaves and the spectral
 sequence of the double complex, are exactly the content of
 \Cref{lem:sc-cech-spectral}.)
@@ -3074,7 +2910,7 @@ $H^p(U,\cF)=\check H^p(U,\cF)$ etc.\ (the induction hypothesis applied
 to $U$ ($t=1$) and to $V$ ($t-1$ opens) and the standard equality for
 a two-open cover), gives $H^p(X,\cF)=0$ for $p\ge t$ and the Čech
 identification for lower $p$ (the classical devissage of Cohomology of
-Schemes, Lemma 30.4.5, Tag \href{https://stacks.math.columbia.edu/tag/01XJ}{01XJ},
+Schemes, Lemma 30.4.5, \stacksproject{01XJ},
 which also uses \Cref{lem:pc-cech-computes} for the Čech comparison).
 This proves (1) and the first statement of (2) (the integer $n=t$).
 The base-change uniformity: the same $t$ bounds the coverings obtained
@@ -3102,7 +2938,6 @@ Then every finite separable field extension $K/k$ is trivial: $K=k$.
 \uses{def:pc-separably-closed}
 \end{lemma}
 \begin{proof}
-\uses{}
 The extension is finite and separable, hence simple: $K=k[\alpha]$ for some
 $\alpha$ (primitive element theorem, classical).  Let $m_\alpha\in k[T]$ be
 the minimal polynomial of $\alpha$; it is nonconstant and separable, hence
@@ -3119,7 +2954,6 @@ finite field extension.  Then $K=\Omega$.
 \uses{def:pc-field-tower}
 \end{lemma}
 \begin{proof}
-\uses{}
 Let $\alpha\in K$.  The minimal polynomial $m_\alpha\in\Omega[T]$ is
 irreducible; over the algebraically closed field it has a root, and an
 irreducible polynomial with a root is linear, so $\deg m_\alpha=1$ and
@@ -3352,14 +3186,14 @@ $E_2^{p,q}=H^p(S,R^qf_*\cF)\Rightarrow H^{p+q}(X,\cF)$ has
 $E_2^{p,q}=0$ for $p>0$ by \Cref{lem:pc-affine-vanishing} (affine $S$)
 and the quasi-coherence just noted, so it degenerates at $E_2$, giving
 $H^i(X,\cF)=H^0(S,R^if_*\cF)$; this is Cohomology of Schemes,
-Lemma 30.4.6, Tag \href{https://stacks.math.columbia.edu/tag/01XK}{01XK}).
+Lemma 30.4.6, \stacksproject{01XK}).
 Pullback of quasi-coherent modules corresponds to $\otimes_AB$; by
 (2) the two quasi-coherent $\cO_{S'}$-modules are associated with the
 same $B$-module, so the canonical base change map
-(Cohomology of Schemes, Lemma 30.5.2, Tag
-\href{https://stacks.math.columbia.edu/tag/02KH}{02KH}; the canonical
-map of Cohomology, Lemma 20.17.1, Tag
-\href{https://stacks.math.columbia.edu/tag/02N7}{02N7}) is an
+(Cohomology of Schemes, Lemma 30.5.2,
+\stacksproject{02KH}; the canonical
+map of Cohomology, Lemma 20.17.1,
+\stacksproject{02N7}) is an
 isomorphism.
 \end{proof}
 
@@ -3368,10 +3202,9 @@ isomorphism.
 % Decomposed.
 \begin{lemma}[Coherence and finiteness of higher direct images]
 \label{lem:pc-coherent-hi}
-(Cohomology of Schemes, Proposition~30.19.1 (Tag
-\href{https://stacks.math.columbia.edu/tag/02O5}{02O5}) and Lemma 30.19.2
-(Tag \href{https://stacks.math.columbia.edu/tag/02O6}{02O6}); and Lemma
-30.4.5, Tag \href{https://stacks.math.columbia.edu/tag/01XJ}{01XJ}.)
+(Cohomology of Schemes, Proposition~30.19.1 (\stacksproject{02O5}) and Lemma 30.19.2
+(\stacksproject{02O6}); and Lemma
+30.4.5, \stacksproject{01XJ}.)
 Let $f:X\to S$ be a proper morphism with $S$ locally Noetherian and let
 $\cF$ be a coherent $\cO_X$-module.  Then $R^if_*\cF$ is coherent for all
 $i$ and $R^if_*\cF=0$ for $i\gg0$; if $S=\Spec(A)$ with $A$ Noetherian
@@ -3533,8 +3366,8 @@ $H^i(X,\cF)=0$ for all $i\ge2$.
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Serre vanishing]\label{lem:pc-serre-vanishing}
-(Cohomology of Schemes, Lemma~30.17.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0B5U}{0B5U}, for schemes
+(Cohomology of Schemes, Lemma~30.17.1,
+\stacksproject{0B5U}, for schemes
 proper over a field; EGA III$_1$, Proposition~(2.6.1).)
 Let $k$ be a field, let $X$ be a proper scheme over $k$, let $\cL$ be an
 \hyperref[def:sc-ample]{ample} invertible $\cO_X$-module, and let $\cF$ be a
@@ -3700,12 +3533,12 @@ again such a curve (\Cref{lem:sc-base-change-curve} and
 We use the following two facts of the Stacks Project:
 \begin{itemize}
 \item \emph{regular schemes are normal} (Properties of Schemes,
-Lemma~28.9.4, Tag \href{https://stacks.math.columbia.edu/tag/0569}{0569};
-see also Lemma~28.9.2, Tag \href{https://stacks.math.columbia.edu/tag/02IT}{02IT}),
+Lemma~28.9.4, \stacksproject{0569};
+see also Lemma~28.9.2, \stacksproject{02IT}),
 and
 \item \emph{Noetherian normal schemes decompose}: a Noetherian normal
 scheme is a finite disjoint union of normal integral schemes (Properties
-of Schemes, Lemma~28.7.6, Tag \href{https://stacks.math.columbia.edu/tag/033M}{033M}).
+of Schemes, Lemma~28.7.6, \stacksproject{033M}).
 \end{itemize}
 In particular a regular, connected, Noetherian scheme is irreducible.
 (These are the scheme-level regularity-normal facts, in contrast with
@@ -3718,8 +3551,8 @@ In particular a regular, connected, Noetherian scheme is irreducible.
 \begin{remark}[Closed points of curves are Cartier divisors]\label{rem:pc-closed-point-cartier-sc}
 For the proofs below we use the following consequence of the local
 theory (for smooth curves this is \Cref{lem:sc-point-cartier}; in
-general: Stacks Project, Varieties, Lemma~33.43.8, Tag
-\href{https://stacks.math.columbia.edu/tag/0B8Y}{0B8Y}): a closed point
+general: Stacks Project, Varieties, Lemma~33.43.8,
+\stacksproject{0B8Y}): a closed point
 $P$ of a smooth \hyperref[def:pc-curve]{curve} over a field has
 invertible ideal sheaf, i.e.\ is an effective Cartier divisor, and
 $\cO_{C,P}$ is a discrete valuation ring.
@@ -3727,15 +3560,14 @@ $\cO_{C,P}$ is a discrete valuation ring.
 \end{remark}
 \begin{lemma}[Density of rationally defined closed points]
 \label{lem:pc-dense-separable-points}
-(Varieties, Lemma~33.25.6, Tag
-\href{https://stacks.math.columbia.edu/tag/056U}{056U}.)
+(Varieties, Lemma~33.25.6,
+\stacksproject{056U}.)
 Let $k$ be a field and let $X$ be a scheme over $k$ which is smooth
 over $k$.  Then the set of closed points $x\in X$ with $\kappa(x)/k$
 finite and separable is dense in $X$.
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-field-tower,def:pc-smooth-morphism}
 \end{lemma}
 \begin{proof}
-\uses{}
 It suffices to show: for every nonempty open $V\subseteq X$ there is a
 closed point of $V$ with finite separable residue field over $k$ (the
 statement is Zariski-local and the assertion is stable under replacing
@@ -3751,15 +3583,15 @@ smooth $k$-algebra is Zariski-locally a standard smooth
 $k[x_1,\dots,x_n]/(f_1,\dots,f_c)$ with invertible Jacobian subdeterminant;
 the Jacobian condition says exactly that the projection onto the
 remaining $n-c$ coordinates is \'etale -- this is Morphisms of Schemes,
-Lemma 29.37.21, Tag \href{https://stacks.math.columbia.edu/tag/054L}{054L}
+Lemma 29.37.21, \stacksproject{054L}
 (smooth $=$ locally \'etale over affine space; we replace $X$ by the
 relevant open).
 
 The morphism $\pi$ is open (etale morphisms are open: Morphisms of
-Schemes, Lemma 29.37.13, Tag
-\href{https://stacks.math.columbia.edu/tag/03WT}{03WT}), so
+Schemes, Lemma 29.37.13,
+\stacksproject{03WT}), so
 $\pi(U)\subseteq\mathbf A^d_k$ is a nonempty open.  By Varieties,
-Lemma 33.25.5 (Tag \href{https://stacks.math.columbia.edu/tag/055T}{055T})
+Lemma 33.25.5 (\stacksproject{055T})
 there is a closed point $w\in\pi(U)$ with $\kappa(w)/k$ finite
 separable: the proof of 33.25.5 is the simple argument that a nonempty
 open $W\subseteq\mathbf A^d_k$ contains the point
@@ -3777,10 +3609,10 @@ their minimal polynomials are separable since their roots generate a
 separable extension) is a closed point of $W$: its residue field is
 finite over $k$, and points of a scheme locally of finite type over a
 field with finite residue field are closed (Morphisms of Schemes,
-Lemma 29.21.2, Tag \href{https://stacks.math.columbia.edu/tag/01TE}{01TE}).
+Lemma 29.21.2, \stacksproject{01TE}).
 
 Pick any $x\in U$ with $\pi(x)=w$.  By Morphisms of Schemes,
-Lemma 29.37.7 (Tag \href{https://stacks.math.columbia.edu/tag/02GL}{02GL})
+Lemma 29.37.7 (\stacksproject{02GL})
 the extension $\kappa(x)/\kappa(w)$ is finite separable (for an \'etale
 ring map $R\to S$ over a field, the residue extension is finite
 separable: an \'etale morphism is unramified, so the residue extension
@@ -3837,11 +3669,10 @@ homeomorphism of underlying topological spaces.
 \uses{def:pc-scheme,def:pc-base-change,def:pc-field-tower}
 \end{lemma}
 \begin{proof}
-\uses{}
 It is enough to prove the statement Zariski-locally: we may assume
 $X=\Spec(A)$, $X_{k'}=\Spec(A\otimes_kk')$.  Let $\varphi:A\to
-A\otimes_kk'$; we verify the hypotheses of Algebra, Lemma 10.46.7, Tag
-\href{https://stacks.math.columbia.edu/tag/0BRA}{0BRA}: (a) the
+A\otimes_kk'$; we verify the hypotheses of Algebra, Lemma 10.46.7,
+\stacksproject{0BRA}: (a) the
 $A$-algebra $A\otimes_kk'$ is generated by the elements
 $1\otimes\alpha$ with $\alpha\in k'$; for each such $\alpha$ there is
 $n\ge0$ with $\alpha^{p^n}\in k$ (purely inseparable), hence
@@ -3850,23 +3681,23 @@ $p^n\cdot(1\otimes\alpha)=0\in\varphi(A)$ (characteristic $p$).  (b)
 $\ker(\varphi)=A\otimes_k\ker(k\to k')=0$.
 By Algebra, Lemma 10.46.7 the induced map on spectra is a
 homeomorphism, and the residue fields satisfy the conditions of
-Algebra, Lemma 10.46.6 (Tag \href{https://stacks.math.columbia.edu/tag/0BR9}{0BR9}).
+Algebra, Lemma 10.46.6 (\stacksproject{0BR9}).
 (We used the standard form of 10.46.7: if a ring map satisfies (a) and
 (b), then it induces a homeomorphism of spectra; its proof, in
-Algebra, Section 10.46, Tag \href{https://stacks.math.columbia.edu/tag/0BR5}{0BR5}:
+Algebra, Section 10.46, \stacksproject{0BR5}:
 the set $T=\{x\in S:x^{p^n},p^nx\in\varphi(R)\}$ is an $R$-subalgebra
 (existence of $p^n$-roots structure: given $x,y\in T$ and
 $n,m$ as in the definition, $xy$ and $x+y$ satisfy
 $(xy)^{p^{n+m}}=x^{p^{n+m}}y^{p^{n+m}}\in\varphi(R)$,
 $p^{n+m}xy\in\varphi(R)$, and $x+y$ is handled by the
-summation binomial lemma, Algebra, Lemma 10.46.5, Tag
-\href{https://stacks.math.columbia.edu/tag/0545}{0545}: the elements
+summation binomial lemma, Algebra, Lemma 10.46.5,
+\stacksproject{0545}: the elements
 $x^{p^n},y^{p^m},p^nx,p^my\in\varphi(R)$ force
 $(x+y)^{p^N}\in\varphi(R)$ and $p^N(x+y)\in\varphi(R)$ for $N=n+m$),
 so $T$ is an $R$-subalgebra containing the generators, i.e.\ $T=S$; then
 the conclusion of Lemma 10.46.3 (which is the induced-map-on-spectra
-homeomorphism criterion (1); see Tag
-\href{https://stacks.math.columbia.edu/tag/0BR8}{0BR8}) applies.)
+homeomorphism criterion (1); see
+\stacksproject{0BR8}) applies.)
 This proves the claim.
 \end{proof}
 
@@ -3885,13 +3716,13 @@ extensions are proper.
 A projective morphism $f:X\to S$ factors as
 $X\xrightarrow{i}\mathbf P^n_S\xrightarrow{\pi}S$ with $i$ a closed
 immersion.  Closed immersions are proper (Morphisms of Schemes, Lemma
-29.42.6, Tag \href{https://stacks.math.columbia.edu/tag/01W5}{01W5}),
+29.42.6, \stacksproject{01W5}),
 $\pi$ is proper, and properness is stable under composition.  For
 $\pi$: the structure morphism $\mathbf P^n_S\to S$ is of finite type
 and separated (standard: $\mathbf P^n_S$ is a Proj, separated over
 $S$), and it is universally closed: by the valuative criterion for
-properness (Morphisms of Schemes, Section 29.43, Tag
-\href{https://stacks.math.columbia.edu/tag/0BX4}{0BX4}: $f$ proper
+properness (Morphisms of Schemes, Section 29.43,
+\stacksproject{0BX4}: $f$ proper
 $\Leftrightarrow$ $f$ is separated, finite type and the valuative
 criterion holds) it suffices to lift: let $V$ be a valuation ring with
 fraction field $K$, let $\Spec V\to S$ and
@@ -3936,11 +3767,10 @@ $j=0,\dots,n$ (as usual via the homogeneous coordinates $x_0,\dots,x_n$);
 hence with $s_j:=i^*x_j\in H^0(X,\cL)$ we have
 $X_{s_j}=X\cap D_+(x_j)$, which is affine (a closed subscheme of an
 affine scheme is affine: closed immersions are affine morphisms, Schemes,
-Lemma~26.8.2, Tag \href{https://stacks.math.columbia.edu/tag/01IH}{01IH}),
+Lemma~26.8.2, \stacksproject{01IH}),
 and $\bigcup_jX_{s_j}=X$ as the $D_+(x_j)$ cover $\PP^n_k$ and $i$ is
 injective.  Thus the affine open sets $X_s$ form a basis of the topology,
-so $\cL$ is ample by Properties, Proposition~28.27.13 (Tag
-\href{https://stacks.math.columbia.edu/tag/01Q3}{01Q3}), condition (4)
+so $\cL$ is ample by Properties, Proposition~28.27.13 (\stacksproject{01Q3}), condition (4)
 $\Rightarrow$ (1).  The last assertion follows since the same argument
 applies to the base-changed closed immersion
 $i_K:X_K\hookrightarrow\PP^n_K$ (base change of a closed immersion, see
@@ -3951,8 +3781,8 @@ and the very ample module $\cO_{\PP^n_K}(1)$.
 % Decomposed.
 \begin{lemma}[The ideal sheaf of a base-changed closed immersion]
 \label{lem:pc-closed-imm-base-change}
-(Schemes, Lemma~26.18.2, Tag
-\href{https://stacks.math.columbia.edu/tag/01JY}{01JY}.)  Closed immersions
+(Schemes, Lemma~26.18.2,
+\stacksproject{01JY}.)  Closed immersions
 are stable under arbitrary base change; if $i:Z\to X$ is a closed
 immersion with ideal sheaf $\cI_Z$, and $g:X'\to X$ is a morphism, then
 $Z'=Z\times_XX'$ is a closed subscheme of $X'$ whose ideal sheaf is the
@@ -3962,10 +3792,9 @@ structure this yields the canonical identification $\cI_{x_K}=\cI_x\otimes
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
-\uses{}
 The first assertion is the statement that closed immersions are stable
-under base change (Schemes, Lemma 26.18.2, Tag
-\href{https://stacks.math.columbia.edu/tag/01JY}{01JY}): the pullback
+under base change (Schemes, Lemma 26.18.2,
+\stacksproject{01JY}): the pullback
 $Z\times_XX'\to X'$ is a closed immersion; for the ideal sheaf, the
 pullback $g^*\cI_Z$ is the ideal sheaf of the base change: the
 exactness argument: $g^*$ is right exact, so applying it to the exact
@@ -4000,7 +3829,7 @@ a valuation square
 \Spec K \longrightarrow X'
 \]
 
-oindent over
+\noindent over
 \[
 \Spec V \longrightarrow S'
 \]
@@ -4016,12 +3845,11 @@ for $f$.  Hence $f'$ satisfies the valuative criterion, and is proper.
 
 \emph{Smoothness.}  Smoothness is Zariski-local on the base and the
 target; affine-locally, a smooth ring map $R\to A$ remains smooth
-after base change $R\to R'$: Algebra, Lemma 10.137.3, Tag
-\href{https://stacks.math.columbia.edu/tag/00T4}{00T4} (the proof: the
+after base change $R\to R'$: Algebra, Lemma 10.137.3,
+\stacksproject{00T4} (the proof: the
 naive cotangent complex base changes, and the base change of a finite
 projective module is finite projective, so the defining property of
-Definition 10.137.1 (Tag
-\href{https://stacks.math.columbia.edu/tag/00T2}{00T2}) is preserved;
+Definition 10.137.1 (\stacksproject{00T2}) is preserved;
 the finite presentation property is preserved by base change).
 Hence $f'$ is smooth.
 \end{proof}
@@ -4050,7 +3878,7 @@ a valuation square
 \Spec K \longrightarrow X'
 \]
 
-oindent over
+\noindent over
 \[
 \Spec V \longrightarrow S'
 \]
@@ -4066,12 +3894,11 @@ for $f$.  Hence $f'$ satisfies the valuative criterion, and is proper.
 
 \emph{Smoothness.}  Smoothness is Zariski-local on the base and the
 target; affine-locally, a smooth ring map $R\to A$ remains smooth
-after base change $R\to R'$: Algebra, Lemma 10.137.3, Tag
-\href{https://stacks.math.columbia.edu/tag/00T4}{00T4} (the proof: the
+after base change $R\to R'$: Algebra, Lemma 10.137.3,
+\stacksproject{00T4} (the proof: the
 naive cotangent complex base changes, and the base change of a finite
 projective module is finite projective, so the defining property of
-Definition 10.137.1 (Tag
-\href{https://stacks.math.columbia.edu/tag/00T2}{00T2}) is preserved;
+Definition 10.137.1 (\stacksproject{00T2}) is preserved;
 the finite presentation property is preserved by base change).
 Hence $f'$ is smooth.
 \end{proof}
@@ -4098,7 +3925,6 @@ $f\circ g$ is flat.
 \uses{def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{}
 Flatness is Zariski-local; on affine patches the assertion is: if
 $A\to B$ and $B\to C$ are flat ring maps, then $A\to C$ is flat.  For
 an exact sequence $0\to M'\to M\to M''\to0$ of $A$-modules, its
@@ -4117,7 +3943,6 @@ flat: every $k$-module is free, hence flat.
 \uses{def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{}
 Affine-locally the structure morphism is given by a ring map
 $k\to A$; as a $k$-vector space $A$ is free.
 \end{proof}
@@ -4132,7 +3957,6 @@ $X_K=X\times_{\Spec k}\Spec K$ has dimension $1$.
 \uses{def:pc-morphism-conventions,def:pc-field-tower,def:pc-curve,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-\uses{}
 Write $A=k[x_1,\dots,x_n]/I$, so $A\otimes_kK=K[x_1,\dots,x_n]/I\cdot
 K[x]$.  For a Noetherian ring dimension formulas:
 $\dim k[x]/I=n-\operatorname{ht}(I)$ (the classical formula for the
@@ -4148,7 +3972,7 @@ injective, so the preimage of $\mathfrak pR'$ is $\mathfrak p$), and
 $\operatorname{ht}(\mathfrak pR')\ge\operatorname{ht}(\mathfrak p)$:
 a chain $\mathfrak p_0\subsetneq\cdots\subsetneq\mathfrak p_r=\mathfrak p$
 of primes of $R$ gives, by going-down for flat ring maps (Algebra,
-Lemma~10.39.5, Tag \href{https://stacks.math.columbia.edu/tag/00GU}{00GU}
+Lemma~10.39.5, \stacksproject{00GU}
 (flatness implies going down for the map on spectra): the classical
 statement, which says chains lift,
 hence the height of the extended ideal is at least that of the source
@@ -4187,7 +4011,6 @@ $Rf_*(E)\otimes\cN\cong Rf_*(E\otimes f^*\cN)$.
 \uses{def:pc-derived-category,def:pc-derived-direct-image,def:sc-invertible-module,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-\uses{}
 The map of the statement (defined in Cohomology, Equation 20.54.2.1) is
 natural in $E$ and $K$, so: (1) the assertion is local in $Y$: if
 $Y=\bigcup_{i\in I}V_i$ is an open covering, the objects and the map
@@ -4198,8 +4021,8 @@ $D_{\text{QCoh}}$-identifications can be checked on an open cover; so
 we may assume $Y$ affine, $Y=\Spec(A)$.  (2) For the affine $Y$, the
 functor $D_{\text{QCoh}}(\cO_Y)\to D(A)$ (global sections, with the
 standard equivalence $D_{\text{QCoh}}(\cO_Y)\cong D(A)$, cf.\ Derived
-Categories of Schemes, Lemma 36.3.5, Section 36.3, chapter Tag
-\href{https://stacks.math.columbia.edu/tag/08CU}{08CU}) identifies both
+Categories of Schemes, Lemma 36.3.5, Section 36.3, chapter
+\stacksproject{08CU}) identifies both
 sides: the case $K=A[k]$ is the statement
 $Rf_*(E[k])\cong Rf_*(E)[k]$ (the shift: clear); an object $K$ is a
 retract of a complex which is built up by direct sums and distinguished
@@ -4217,8 +4040,8 @@ the shifts of their quotients $M^i$'-type (the exact triangles
 $M^{[p,q]}\to M^{[p,q+1]}\to M^{q+1}[-q-1]\to$" with
 $M^q$ free after a resolution; this is the standard identical argument
 that one uses for the derived functors' basic properties, as in the
-proof of Lemma 36.22.1, Tag
-\href{https://stacks.math.columbia.edu/tag/08EU}{08EU}).  Hence $P(K)$
+proof of Lemma 36.22.1,
+\stacksproject{08EU}).  Hence $P(K)$
 holds for all $K$.  (3) The last statement: for an invertible $\cN$,
 $\cN$ as an object of $D_{\text{QCoh}}$ and the natural map
 $Rf_*E\otimes\cN\to Rf_*(E\otimes f^*\cN)$ is the
@@ -4428,7 +4251,6 @@ degree $i$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{}
 \emph{1. The local normal form.}  Since $E$ is perfect, every point
 $x\in X$ has an affine open neighbourhood $U_x=\Spec(A)$ and an
 isomorphism in $D(\cO_X)$ of $E|_{U_x}$ with a bounded complex
@@ -4440,8 +4262,8 @@ $D(g)$ -- the standard: a finite projective module over $A$ is free
 over $A_g$ for some $g$? not always, but for the complex: PERFECT
 objects: "$E$ perfect if and only if $E$ is locally isomorphic to a
 bounded complex of finite free modules" is the standard local normal
-form [Derived Categories of Schemes, Section 36.31, Tag
-\href{https://stacks.math.columbia.edu/tag/0BDH}{0BDH}], which we
+form [Derived Categories of Schemes, Section 36.31,
+\stacksproject{0BDH}], which we
 use).  We may therefore assume $X=\Spec A$ and
 $E=M^{\bullet}$ a bounded complex of finite free $A$-modules.
 
@@ -4481,8 +4303,8 @@ elementary consequence of the exactness of the sequences
 $0\to\ker\to M^{i-1}\to\operatorname{im}\to0$ and the freeness of the
 terms; the general case is obtained by iterating; we cite the same
 statement in the form of More on Algebra, Lemma 15.77.7, as used in
-the proof of Lemma 36.31.3, Tag
-\href{https://stacks.math.columbia.edu/tag/0BDK}{0BDK}: "if $E$ is
+the proof of Lemma 36.31.3,
+\stacksproject{0BDK}: "if $E$ is
 perfect and $H^j(E)=0$ for $j\ne i$, then
 $E\cong H^i(E)[-i]$", a standard induction on the length).
 Finally the rank: we need the open locus where
@@ -4528,8 +4350,8 @@ through $U$.  This proves the lemma.
 % Decomposed.
 \begin{lemma}[The open locus of invertible $Rf_*$]
 \label{lem:pc-flat-rf-open}
-(Derived Categories of Schemes, Lemma~36.32.3, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9S}{0B9S}.)  Let
+(Derived Categories of Schemes, Lemma~36.32.3,
+\stacksproject{0B9S}.)  Let
 $f:X\to S$ be a proper morphism of finite presentation and let $\cF$ be an
 $\cO_X$-module of finite presentation, flat over $S$.  Fix $i,r\in\zz$.
 Then there exists an open subscheme $U\subset S$ such that a morphism
@@ -4583,8 +4405,8 @@ alternative signs over the long exact sequence gives
 0=\sum_i(-1)^i\bigl(\dim H^i(\cF_1)-\dim H^i(\cF_2)+\dim H^i(\cF_3)\bigr),
 \]
 which is exactly $\chi(\cF_1)-\chi(\cF_2)+\chi(\cF_3)=0$; this is the
-first statement (Varieties, Lemma 33.33.2, Tag
-\href{https://stacks.math.columbia.edu/tag/08AA}{08AA}).
+first statement (Varieties, Lemma 33.33.2,
+\stacksproject{08AA}).
 
 For the second statement, consider the Leray spectral sequence of $f$
 (Cohomology, Lemma 20.13.4)
@@ -4600,8 +4422,8 @@ $E_r$-page's alternating total sum is invariant under the differentials
 of the spectral sequence, as the pages are finite dimensional and the
 differentials are the quotients with the same alternating total sum:
 the standard invariance of the Euler characteristic in a spectral
-sequence; Varieties, Lemma 33.33.5, Tag
-\href{https://stacks.math.columbia.edu/tag/0BEK}{0BEK}):
+sequence; Varieties, Lemma 33.33.5,
+\stacksproject{0BEK}):
 \[
 \chi(Y,\cG)=\sum_{p,q}(-1)^{p+q}\dim_kE_2^{p,q}
 =\sum_{q\ge0}(-1)^q\Bigl(\sum_p(-1)^p\dim_kH^p(X,R^qf_*\cG)\Bigr)
@@ -4632,8 +4454,8 @@ $0\to\cF_1\to\cF_2\to\cF_3\to0$:
 $\chi(X,\cF_2)=\chi(X,\cF_1)+\chi(X,\cF_3)$
 (\Cref{lem:pc-euler-additive}).
 \end{enumerate}
-(The general formula of Varieties, Lemma~33.44.5, Tag
-\href{https://stacks.math.columbia.edu/tag/0AYV}{0AYV}, is used below
+(The general formula of Varieties, Lemma~33.44.5,
+\stacksproject{0AYV}, is used below
 only through the effective-divisor case (2) and the case of a pullback
 from a point, which is explicit in the base change part (1) and in
 \Cref{lem:pc-degree-agrees-sc}.)
@@ -4810,7 +4632,7 @@ immersion $i:X\to\mathbf P^N_k$ with
 $\cL^{\otimes m}=i^*\cO(1)$.  Since $X$ is proper, the immersion is a
 closed immersion (the image of the proper $X$ is closed, and an
 immersion with closed image is a closed immersion; Schemes, Lemma
-26.10.4, Tag \href{https://stacks.math.columbia.edu/tag/01IQ}{01IQ}).
+26.10.4, \stacksproject{01IQ}).
 Choose $x_0\in X$ and a section $s\in H^0(X,\cL^{\otimes m})$ with
 $s(x_0)\neq0$ (the base locus of a very ample module is empty: the
 linear system $\mathbf P(H^0(X,\cL^{\otimes m}))$ gives the embedding,
@@ -4871,8 +4693,8 @@ $k$, hence $\cL$ is ample.
 
 \begin{lemma}[Effective Cartier divisors from local equations]
 \label{lem:pc-recd-locally-principal}
-(Divisors, Lemma~31.19.9, Tag
-\href{https://stacks.math.columbia.edu/tag/062Y}{062Y}.)  Let
+(Divisors, Lemma~31.19.9,
+\stacksproject{062Y}.)  Let
 $\phi:X\to S$ be a flat morphism of schemes of finite presentation and let
 $Z\subset X$ be a locally principal closed subscheme.  If all fibres
 $Z_s\subset X_s$ are effective Cartier divisors on $X_s$, then $Z$ is a
@@ -4900,8 +4722,8 @@ $D:=V(f)\subseteq\Spec(B_g)$ is a relative effective Cartier divisor
 on $\Spec(B_g)/\Spec(A)$, and that $Z\cap\Spec(B_g)=D$.
 
 To prove the claim, use the Noether approximation
-(Algebra, Lemma~10.168.1, Tag
-\href{https://stacks.math.columbia.edu/tag/02JO}{02JO}): there is a
+(Algebra, Lemma~10.168.1,
+\stacksproject{02JO}): there is a
 flat finite type ring map $A_0\to B_0$ of Noetherian rings, an element
 $f_0\in B_0$ and a ring map $A_0\to A$ with
 $A\otimes_{A_0}B_0\cong B$ and $f_0\mapsto f$.  With
@@ -4913,14 +4735,14 @@ B\otimes_A\kappa(\mathfrak p)
 \]
 so $f_0$ is a nonzerodivisor in
 $B_0\otimes_{A_0}\kappa(\mathfrak p_0)$ as well.  By
-(Algebra, Lemma~10.99.2, Tag
-\href{https://stacks.math.columbia.edu/tag/00MF}{00MF}), $f_0$ is a
+(Algebra, Lemma~10.99.2,
+\stacksproject{00MF}), $f_0$ is a
 nonzerodivisor in $(B_0)_{\mathfrak q_0}$, $\mathfrak
 q_0:=B_0\cap\mathfrak q$, and $(B_0/f_0B_0)_{\mathfrak q_0}$ is flat
-over $A_0$.  By (Algebra, Lemma~10.68.6, Tag
-\href{https://stacks.math.columbia.edu/tag/061L}{061L}) and
-(Algebra, Theorem~10.129.4, Tag
-\href{https://stacks.math.columbia.edu/tag/00RC}{00RC}) there is
+over $A_0$.  By (Algebra, Lemma~10.68.6,
+\stacksproject{061L}) and
+(Algebra, Theorem~10.129.4,
+\stacksproject{00RC}) there is
 $g_0\in B_0$, $g_0\notin\mathfrak q_0$, with $f_0$ a nonzerodivisor
 in $(B_0)_{g_0}$ and $(B_0/f_0B_0)_{g_0}$ flat over $A_0$: $D_0$ is a
 relative effective Cartier divisor on
@@ -4982,14 +4804,14 @@ $\cO_{X_T}(D_T)=(g_X^*\cI_D)^\vee=g_X^*(\cI_D^\vee)=g_X^*\cO_X(D)$
 (the pullback of a dual is the dual of the pullback, i.e.\\
 $g_X^*$ commutes with $\mathcal{H}om$ of the pair $(\cI_D,\cO_X)$ --
 valid for $\cI_D$ invertible by the local trivialization check; see
-also Divisors, Lemma 31.19.1, Tag
-\href{https://stacks.math.columbia.edu/tag/056Q}{056Q}).
+also Divisors, Lemma 31.19.1,
+\stacksproject{056Q}).
 \end{proof}
 
 \begin{lemma}[The Cartier criterion on smooth one-dimensional fibres]
 \label{lem:pc-cartier-criterion}
-(Picard Schemes of Curves, Lemma~44.3.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9D}{0B9D}.)  Let
+(Picard Schemes of Curves, Lemma~44.3.1,
+\stacksproject{0B9D}.)  Let
 $X\to S$ be a smooth morphism of relative dimension $1$ and let
 $D\subset X$ be a closed subscheme.  Consider:
 \begin{enumerate}
@@ -5054,8 +4876,8 @@ effective Cartier divisor.
 
 \emph{$(4)\Rightarrow(3)$ for locally Noetherian $S$.}  A locally
 quasi-finite morphism into a locally Noetherian scheme is locally of
-finite presentation (Morphisms, Lemma~29.22.9, Tag
-\href{https://stacks.math.columbia.edu/tag/01TX}{01TX}), so (4)
+finite presentation (Morphisms, Lemma~29.22.9,
+\stacksproject{01TX}), so (4)
 implies (3) in this case.
 
 \emph{$(1)\Leftrightarrow(2)$ for proper $X\to S$.}  If (1) holds,
@@ -5065,17 +4887,17 @@ proper: $D\to X$ is a closed immersion (hence proper) and $X\to S$ is
 proper (a composition of proper morphisms is proper, the standard
 statement, used through \Cref{def:pc-morphism-conventions}).  A proper
 locally quasi-finite morphism is finite (More on Morphisms,
-Lemma~37.44.1, Tag
-\href{https://stacks.math.columbia.edu/tag/02LS}{02LS}); a finite flat
+Lemma~37.44.1,
+\stacksproject{02LS}); a finite flat
 and finitely presented morphism is finite locally free (Morphisms,
-Lemma~29.49.2, Tag
-\href{https://stacks.math.columbia.edu/tag/02KB}{02KB}):
+Lemma~29.49.2,
+\stacksproject{02KB}):
 $D\to S$ is finite locally free.
 \end{proof}
 
 \begin{lemma}[$\Hilb^d$ is an fppf sheaf]\label{lem:pc-hilb-sheaf}
-(Picard Schemes of Curves, Lemma~44.2.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0B95}{0B95}.)  Let $X\to S$ be
+(Picard Schemes of Curves, Lemma~44.2.1,
+\stacksproject{0B95}.)  Let $X\to S$ be
 a morphism of schemes and $d\geq0$.  The functor
 \hyperref[def:pc-hilb-functor]{$\Hilb^d_{X/S}$} satisfies the sheaf
 property for the fppf topology.
@@ -5097,8 +4919,8 @@ closed subschemes agree).  Note that
 $\{X_{T_i}\to X_T\}_{i\in I}$ is an fpqc covering of $X_T$ (base
 change of an fpqc covering; the standard statement) and that
 $X_{T_i\times_TT_{i'}}=X_{T_i}\times_{X_T}X_{T_{i'}}$.  By effective
-descent for closed immersions (Descent, Lemma~35.37.2, Tag
-\href{https://stacks.math.columbia.edu/tag/03I0}{03I0}; the classical
+descent for closed immersions (Descent, Lemma~35.37.2,
+\stacksproject{03I0}; the classical
 statement: closed subschemes form an fpqc sheaf) there is a closed
 immersion $\varphi:Z\hookrightarrow X_T$ whose base change along
 $X_{T_i}\to X_T$ is $\varphi_i$ for every $i$: this uses exactly the
@@ -5106,8 +4928,8 @@ given compatibility of the $Z_i$'s over the double intersections.
 The morphism $Z\to T$ then has base change $Z_i\to T_i$, which is
 finite locally free of degree $d$ (\Cref{def:pc-finite-locally-free});
 the property of being finite locally free of a given degree descends
-along fpqc coverings (Descent, Lemma~35.23.32, Tag
-\href{https://stacks.math.columbia.edu/tag/02VO}{02VO}: the
+along fpqc coverings (Descent, Lemma~35.23.32,
+\stacksproject{02VO}: the
 classical: finite flat of finite presentation is of fpqc-local nature
 on the target, and the rank is locally constant and can be detected
 on a covering), so $Z\to T$ is finite locally free of degree $d$: thus
@@ -5118,9 +4940,8 @@ satisfies the sheaf property for fppf coverings.
 
 \begin{lemma}[Hilbert schemes of points are representable]
 \label{lem:pc-hilb-representable}
-(Picard Schemes of Curves, Proposition~44.2.6 (Tag
-\href{https://stacks.math.columbia.edu/tag/0B9A}{0B9A}) with Remark 44.2.7,
-Tag \href{https://stacks.math.columbia.edu/tag/0B9B}{0B9B}.)  Let $X\to S$
+(Picard Schemes of Curves, Proposition~44.2.6 (\stacksproject{0B9A}) with Remark 44.2.7,
+\stacksproject{0B9B}.)  Let $X\to S$
 be a morphism of schemes and $d\geq0$.  Assume that for all points
 $s\in S$ and $x_1,\dots,x_d\in X_s$ (a finite set of points of a fibre)
 there exists an affine open $U\subset X$ containing them
@@ -5247,8 +5068,8 @@ T_{\mathrm{univ}}$ with $Z\cong Z_{\mathrm{univ}}\times_{T_{\mathrm{univ}}}T$;
 uniqueness is clear by the same data, so $F_W$ is representable by the
 affine scheme $T_{\mathrm{univ}}$.  (2)(b) \emph{openness}: surjectivity
 of a morphism of finite locally free modules is an open condition
-(Algebra, Lemma~10.79.4, Tag
-\href{https://stacks.math.columbia.edu/tag/00O0}{00O0}), so each
+(Algebra, Lemma~10.79.4,
+\stacksproject{00O0}), so each
 inclusion $F_W\subseteq\Hilb^d_{X/S}$ is representable by open
 immersions.  (2)(c) \emph{covering}: for a field-valued $Z\in
 \Hilb^d_{X/S}(\kappa)$: the map $A\otimes_R\kappa\to\cO_Z$ is
@@ -5256,8 +5077,8 @@ surjective and $\cO_Z$ is a $d$-dimensional $\kappa$-vector space, so
 there is a finite subset $W\subseteq A$ of $d$ elements whose images
 in $\cO_Z$ form a basis; for a general $T$ and $t\in T$ use the same
 argument over $\kappa(t)$ and Nakayama's lemma
-(Algebra, Lemma~10.20.1, Tag
-\href{https://stacks.math.columbia.edu/tag/00DV}{00DV}): $Z_V\in
+(Algebra, Lemma~10.20.1,
+\stacksproject{00DV}): $Z_V\in
 F_W(V)$ on an open neighbourhood $V$ of $t$.  By
 \Cref{lem:pc-schemes-criterion} the functor $\Hilb^d_{Y/S}$ is
 representable, hence so is $\Hilb^d_{X/S}$ for the original affine
@@ -5301,8 +5122,8 @@ it to arbitrary $S$.
 
 \begin{lemma}[The addition morphism on Hilbert schemes]
 \label{lem:pc-hilb-addition}
-(Picard Schemes of Curves, Lemma~44.3.4, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9G}{0B9G}.)  Let $X\to S$ be
+(Picard Schemes of Curves, Lemma~44.3.4,
+\stacksproject{0B9G}.)  Let $X\to S$ be
 a smooth morphism of relative dimension $1$ (or as in Lemma 44.3.4) and
 $d\geq0$.  There is a canonical morphism
 \[
@@ -5343,8 +5164,8 @@ $1$; it is a closed subscheme of $X_T$ because the graph of a morphism
 to a separated scheme over $S$ is closed) are relative effective
 Cartier divisors on $X_T/T$; since $\Gamma_x\subseteq D$, the classical
 difference statement for relative effective Cartier divisors
-(Divisors, Lemma~31.19.4, Tag
-\href{https://stacks.math.columbia.edu/tag/0B8V}{0B8V}: if
+(Divisors, Lemma~31.19.4,
+\stacksproject{0B8V}: if
 $D_1,D_2$ are relative effective Cartier divisors with $D_1\subseteq
 D_2$ there is a relative effective Cartier divisor $D'$ with
 $D_2=D_1+D'$) gives $D=D'+\Gamma_x$ with $D'$ a relative effective
@@ -5410,8 +5231,8 @@ $Z+\Gamma_x$ is the divisor $Z+x$.
 
 \begin{lemma}[Hilbert schemes of curves are smooth]
 \label{lem:pc-hilb-smooth}
-(Picard Schemes of Curves, Lemma~44.3.5, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9H}{0B9H}.)  Let $X\to S$ be
+(Picard Schemes of Curves, Lemma~44.3.5,
+\stacksproject{0B9H}.)  Let $X\to S$ be
 a smooth morphism of relative dimension $1$.  Then
 $\underline{\Hilb}^d_{X/S}$ is smooth over $S$ of relative dimension $d$
 (for a smooth proper curve $X$ over a field $k$,
@@ -5478,8 +5299,8 @@ proves the lemma.
 
 \begin{theorem}[Hilbert schemes of smooth projective curves]
 \label{thm:pc-hilb-curves}
-(Picard Schemes of Curves, Proposition~44.3.6, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9I}{0B9I}.)  Let $X$ be a
+(Picard Schemes of Curves, Proposition~44.3.6,
+\stacksproject{0B9I}.)  Let $X$ be a
 geometrically irreducible smooth proper curve over a field $k$ and let
 $d\geq0$.  Then:
 \begin{enumerate}
@@ -5606,9 +5427,9 @@ condition: if $x\in H_d\setminus I$ then the image point
 $x_{\bar k}$ lies in $H_d\otimes\bar k\setminus I\otimes\bar k$,
 contradiction).  So $\pi_d$ is surjective.
   Then $H_d$ is proper: $X^d$ is proper (finite products of proper schemes over $k$ are proper, the standard statement; and $X\to\Spec k$ is proper by hypothesis), $\pi_d$ is finite hence proper, so
-  $H_d=\pi_d(X^d)$ is the image of a proper scheme under a proper morphism, hence proper (Morphisms, Lemma~29.42.9, Tag
-  \href{https://stacks.math.columbia.edu/tag/03GN}{03GN}: the image of a proper morphism is proper).  Finally $H_d$ is irreducible: $X^d$ is irreducible (geometrically irreducible over $k$: products of geometrically irreducible schemes over $k$ are irreducible: Varieties, Lemma~33.8.4, Tag
-  \href{https://stacks.math.columbia.edu/tag/038F}{038F}), and the image of an irreducible scheme under a continuous surjective map is irreducible; together with smoothness (hence reducedness: smooth over the field $k$ is reduced, the standard statement) $H_d$ is an integral separated scheme of finite type over $k$ of dimension $d$, i.e.\ a variety over $k$ (\Cref{def:pc-curve}: a variety is an integral separated scheme of finite type over $k$).  This proves (1).
+  $H_d=\pi_d(X^d)$ is the image of a proper scheme under a proper morphism, hence proper (Morphisms, Lemma~29.42.9,
+\stacksproject{03GN}: the image of a proper morphism is proper).  Finally $H_d$ is irreducible: $X^d$ is irreducible (geometrically irreducible over $k$: products of geometrically irreducible schemes over $k$ are irreducible: Varieties, Lemma~33.8.4,
+\stacksproject{038F}), and the image of an irreducible scheme under a continuous surjective map is irreducible; together with smoothness (hence reducedness: smooth over the field $k$ is reduced, the standard statement) $H_d$ is an integral separated scheme of finite type over $k$ of dimension $d$, i.e.\ a variety over $k$ (\Cref{def:pc-curve}: a variety is an integral separated scheme of finite type over $k$).  This proves (1).
 
 \emph{Step 2: the points of $H_d$; part (2).}  For a field extension
 $k'/k$: a $k'$-rational point of $H_d$ is, by the representability of
@@ -5675,8 +5496,8 @@ the two schemes), so $N=\binom{d_1+d_2}{d_1}$.  This proves (3).
 
 \begin{lemma}[The universal divisor]
 \label{lem:pc-universal-divisor}
-(Picard Schemes of Curves, Remark~44.3.7, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9J}{0B9J}.)  Let $X$ be as
+(Picard Schemes of Curves, Remark~44.3.7,
+\stacksproject{0B9J}.)  Let $X$ be as
 in \Cref{thm:pc-hilb-curves} and let $d\geq0$.  There is a relative
 effective Cartier divisor
 \[
@@ -5736,8 +5557,8 @@ $\cO(D_{\mathrm{univ}})$ is $\cO_X(D)$.
 
 \begin{lemma}[FPQC descent for invertible modules]
 \label{lem:pc-fpqc-descent}
-(Descent, Proposition~35.5.2, Tag
-\href{https://stacks.math.columbia.edu/tag/023T}{023T}.)  Let
+(Descent, Proposition~35.5.2,
+\stacksproject{023T}.)  Let
 $\{S_i\to S\}_{i\in I}$ be an fpqc covering of schemes.  The functor from
 invertible $\cO_S$-modules to descent data for this covering (invertible
 $\cO_{S_i}$-modules with gluing isomorphisms satisfying the cocycle
@@ -5747,7 +5568,6 @@ module is trivial.
 \uses{def:sc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{}
 \emph{Step 1: the affine case for modules.}  Let $A\to B$ be a faithfully
 flat ring map, and let
 \[
@@ -5771,7 +5591,7 @@ $M\otimes_AB$ with the canonical swap isomorphism) is an equivalence.}
 
 The classical proof (EGA 0$_{IV}$, (2.5.7); Bourbaki, Alg.\ comm.\ V,
 \S1, no.\ 9; this is the argument of Stacks, Descent,
-Lemma~35.3.5, Tag \href{https://stacks.math.columbia.edu/tag/023P}{023P}),
+Lemma~35.3.5, \stacksproject{023P}),
 which we reproduce:  given $(N,\psi)$, put
 \[
 N_0:=\ker\bigl(N\longrightarrow B\otimes_AN\bigr),
@@ -5831,11 +5651,11 @@ an fpqc covering and $\xi=(N_i,\varphi_{ii'})$ a descent datum of
 invertible modules.  The datum and the statement are local on $S$
 (the descent data restrict along morphisms $S'\to S$, i.e.\ along the
 base changed covering; base changes of fpqc coverings are fpqc,
-Topologies, Lemma~34.9.8, Tag
-\href{https://stacks.math.columbia.edu/tag/022D}{022D}), so it suffices
+Topologies, Lemma~34.9.8,
+\stacksproject{022D}), so it suffices
 to treat $S$ affine; by definition of an fpqc covering
-(Topologies, Definition~34.9.1, Tag
-\href{https://stacks.math.columbia.edu/tag/022G}{022G}) the affine
+(Topologies, Definition~34.9.1,
+\stacksproject{022G}) the affine
 $S=\Spec(A)$ is covered by standard fpqc coverings of finite
 subfamilies, and a finite standard fpqc covering
 $\{V_k=\Spec(B_k)\to\Spec(A)\}_k$ is precisely a faithfully flat map
@@ -5864,8 +5684,8 @@ trivial by faithfulness.
 
 \begin{lemma}[A representability criterion via covers]
 \label{lem:pc-schemes-criterion}
-(Schemes, Lemma~26.15.4, Tag
-\href{https://stacks.math.columbia.edu/tag/01JJ}{01JJ}.)  Let
+(Schemes, Lemma~26.15.4,
+\stacksproject{01JJ}.)  Let
 $F:(\Sch/S)^{\mathrm{op}}\to\textit{Sets}$ be a functor and suppose:
 \begin{enumerate}
 \item[(1)] $F$ satisfies the sheaf property for the Zariski topology;
@@ -5879,7 +5699,6 @@ Then $F$ is representable by a scheme over $S$.
 \uses{def:pc-subfunctor,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{}
 For $i\in I$ choose a scheme $X_i$ over $S$ representing $F_i$ and the
 universal element $\xi_i\in F_i(X_i)\subseteq F(X_i)$, and let
 $U_{ij}\subseteq X_i$ be the open subscheme given by (2)(b) for the
@@ -6040,8 +5859,8 @@ hypothesis and \Cref{lem:pc-projective-proper}, so the proposition
 % Decomposed.
 \begin{lemma}[Exactness of the Picard sequence]
 \label{lem:pc-pic-exact}
-(Picard Schemes of Curves, Lemma~44.4.2, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9M}{0B9M}.)
+(Picard Schemes of Curves, Lemma~44.4.2,
+\stacksproject{0B9M}.)
 Let $f:X\to S$ be a morphism of schemes as in
 \hyperref[def:pc-picard-functor]{Definition~\ref{def:pc-picard-functor}}.
 If $\cO_T\to f_{T,*}\cO_{X_T}$ is an isomorphism for all
@@ -6096,8 +5915,7 @@ are trivial).  This proves the lemma.
 % Decomposed.
 \begin{lemma}[The sheaf condition for $\operatorname{Ker}\sigma_T^*$]
 \label{lem:pc-k-sheaf}
-(Picard Schemes of Curves, proof of Lemma~44.4.3 (Tag
-\href{https://stacks.math.columbia.edu/tag/0B9N}{0B9N}).)
+(Picard Schemes of Curves, proof of Lemma~44.4.3 (\stacksproject{0B9N}).)
 Let $f:X\to S$ be a morphism of schemes as in
 \hyperref[def:pc-picard-functor]{Definition~\ref{def:pc-picard-functor}}.
 Assume $f$ has a section $\sigma$ and that
@@ -6154,8 +5972,8 @@ condition.  This proves the lemma.
 % Decomposed.
 \begin{theorem}[The split exact sequence for the Picard functor]
 \label{thm:pc-pic-split}
-(Picard Schemes of Curves, Lemma~44.4.3, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9N}{0B9N}.)
+(Picard Schemes of Curves, Lemma~44.4.3,
+\stacksproject{0B9N}.)
 Let $f:X\to S$ be a morphism of schemes as in
 \hyperref[def:pc-picard-functor]{Definition~\ref{def:pc-picard-functor}}.
 Assume $f$ has a section $\sigma$ and that
@@ -6195,8 +6013,8 @@ Consequently the third map is surjective and the sequence is split.
 % Decomposed.
 \begin{lemma}[Curves with a rational point satisfy the hypotheses]
 \label{lem:pc-rational-hyp}
-(Picard Schemes of Curves, Lemma~44.6.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9U}{0B9U}.)
+(Picard Schemes of Curves, Lemma~44.6.1,
+\stacksproject{0B9U}.)
 Let $k$ be a field and let $X$ be a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} over
 $k$ which has a $k$-rational point $\sigma$.  Then the hypotheses of
@@ -6251,8 +6069,8 @@ Project, Picard Schemes of Curves, Section~44.6, after Lemma 44.6.1.]
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[$F$ is an open subfunctor]\label{lem:pc-f-open-subfunctor}
-(Picard Schemes of Curves, Lemma~44.6.2, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9V}{0B9V}.)
+(Picard Schemes of Curves, Lemma~44.6.2,
+\stacksproject{0B9V}.)
 Let $k$ be a field, let $X$ be a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} over
 $k$ with a $k$-rational point $\sigma$, and let
@@ -6451,8 +6269,8 @@ section of $\cL_H|_W$ in the sense of \Cref{lem:pc-zero-scheme-recd}.
 % Decomposed.
 \begin{theorem}[$F$ is representable by an open subscheme of $\underline{\Hilb}^g_{X/k}$]
 \label{thm:pc-f-representable}
-(Picard Schemes of Curves, Lemma~44.6.4, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9X}{0B9X}.)
+(Picard Schemes of Curves, Lemma~44.6.4,
+\stacksproject{0B9X}.)
 Let $k$ be a \hyperref[def:pc-separably-closed]{separably closed field},
 let $X$ be a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} of
@@ -6578,10 +6396,10 @@ $W$ of $H$, which is a scheme: open subschemes of schemes are schemes).
 % Decomposed.
 \begin{lemma}[The twist lemma]
 \label{lem:pc-twist}
-(Picard Schemes of Curves, Lemma~44.6.5, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9Y}{0B9Y}; the proof is a
-variant of Varieties, Lemma~33.44.16, Tag
-\href{https://stacks.math.columbia.edu/tag/0B8Z}{0B8Z}.)
+(Picard Schemes of Curves, Lemma~44.6.5,
+\stacksproject{0B9Y}; the proof is a
+variant of Varieties, Lemma~33.44.16,
+\stacksproject{0B8Z}.)
 Let $k$ be a \hyperref[def:pc-separably-closed]{separably closed field},
 let $X$ be a smooth projective curve of genus $g$ over $k$, let $K/k$ be
 a field extension and let $\cL$ be an invertible sheaf on $X_K$.  Then
@@ -6688,8 +6506,8 @@ $\dim_KH^0=1$, $H^1=0$.  This proves the lemma.
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{theorem}[The representability criterion]\label{thm:pc-criterion}
-(Picard Schemes of Curves, Lemma~44.5.1, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9Q}{0B9Q}.)
+(Picard Schemes of Curves, Lemma~44.5.1,
+\stacksproject{0B9Q}.)
 Let $k$ be a field and let
 $G:(\Sch/k)^{\mathrm{op}}\to\textit{Groups}$ be a functor.  With the
 terminology of
@@ -6747,8 +6565,8 @@ structure is given; see the usual Yoneda argument, cf.\
 % Decomposed.
 \begin{theorem}[The Picard scheme of a curve is representable]
 \label{thm:pc-picard-representable}
-(Stacks Project, Picard Schemes of Curves, Proposition~44.6.6, Tag
-\href{https://stacks.math.columbia.edu/tag/0B9Z}{0B9Z}.)
+(Stacks Project, Picard Schemes of Curves, Proposition~44.6.6,
+\stacksproject{0B9Z}.)
 Let $k$ be a \hyperref[def:pc-separably-closed]{separably closed field}.
 Let $X$ be a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} over
@@ -6856,5 +6674,3 @@ induced by the corresponding natural transformations of the representable
 functor (the group-valued functor structure of $\Pic_{X/k}$ is part of
 its definition via the groups $\Pic(X_T)$).
 \end{remark}
-
-\end{document}
