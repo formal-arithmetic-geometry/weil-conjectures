@@ -28,7 +28,8 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
   `Scheme.etalePrecoverage`) such that the restriction of `F` to each `Uᵢ` is constant;
   the trivializing data is packaged in `LocallyConstantDatum`. A constant sheaf is
   locally constant, trivialized by the identity cover
-  (`CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf`).
+  (`CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` of
+  `WeilConjectures.ConstructibleSheaf.Pullback`).
 - `F` is *finite* (`IsFiniteSheaf`) if the stalk of `F` at every geometric point of `X`
   (`Scheme.pointSmallEtale`) is finite.
 - `F` is *finite locally constant* (`IsFiniteLocallyConstantSheaf`) if it is locally
@@ -75,9 +76,6 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   essentially small site being again essentially small. This replaces what used to be a
   `HasWeakSheafify` hypothesis quantified over all schemes and all étale `U`, the
   quantification being forced by the existential quantifier over stratifications.
-- Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the
-  existence of the right Kan extensions along `(Over.forget U).op` needed to compare
-  sheafification on the small étale site with sheafification on its localizations.
 -/
 
 @[expose] public section
@@ -144,18 +142,6 @@ abelian groups (`A = Ab.{u + 1}`), of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`),
 class IsLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   nonempty_locallyConstantDatum : Nonempty (LocallyConstantDatum F)
 
-/-- A constant sheaf on the small étale site is locally constant, trivialized by the
-identity cover. The right Kan extension hypothesis compares sheafification on the small
-étale site with sheafification on its localizations; it always holds mathematically, see
-the module implementation notes. -/
-lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
-    [∀ (U : X.Etale) (P : (Over U)ᵒᵖ ⥤ A), (Over.forget U).op.HasPointwiseRightKanExtension P]
-    {F : Sheaf X.smallEtaleTopology A} (h : F.IsConstant X.smallEtaleTopology) :
-    IsLocallyConstantSheaf F :=
-  have := h
-  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
-  ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ F.isConstant_over _⟩⟩⟩
-
 end LocallyConstant
 
 section FiniteSheaf
@@ -208,6 +194,15 @@ structure Stratification (X : Scheme.{u}) extends Topology.Stratification X wher
   range_immersion : ∀ i, Set.range (immersion i) = stratum i
 
 attribute [instance] Stratification.isImmersion
+
+/-- The trivial stratification of `X`, with the single stratum `X` itself, realized by the
+identity immersion. -/
+@[simps! n stratum domain immersion]
+def Stratification.trivial (X : Scheme.{u}) : Stratification X where
+  toStratification := .trivial X
+  domain _ := X
+  immersion _ := 𝟙 X
+  range_immersion _ := Set.range_id'
 
 end Stratification
 

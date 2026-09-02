@@ -17,6 +17,8 @@ The constant sheaf functor commutes with localization of a site at an object
 restriction of a constant sheaf to a localized site is constant
 (`CategoryTheory.Sheaf.isConstant_over`).
 
+A zero sheaf is constant (`CategoryTheory.Sheaf.IsConstant.of_isZero`).
+
 More generally, the constant sheaf functor commutes with the pullback of sheaves along
 a continuous functor of sites which preserves a terminal object
 (`CategoryTheory.Functor.sheafPullbackCommuteConstant`); in particular the pullback of a
@@ -36,6 +38,21 @@ open CategoryTheory Limits Opposite
 noncomputable section
 
 namespace CategoryTheory
+
+section Zero
+
+variable {C : Type*} [Category* C] {J : GrothendieckTopology C}
+  {A : Type u'} [Category.{v} A] [HasWeakSheafify J A]
+  [Limits.HasZeroObject A] [Limits.HasZeroMorphisms A]
+  [Limits.HasZeroMorphisms (Sheaf J A)] [(constantSheaf J A).PreservesZeroMorphisms]
+
+/-- A zero sheaf is constant: it is isomorphic to the constant sheaf at the zero object,
+which is again zero. -/
+lemma Sheaf.IsConstant.of_isZero {F : Sheaf J A} (hF : Limits.IsZero F) : F.IsConstant J :=
+  Sheaf.isConstant_of_iso _
+    (hF.iso ((constantSheaf J A).map_isZero (Limits.isZero_zero A)))
+
+end Zero
 
 section Over
 

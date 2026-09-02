@@ -35,6 +35,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
+
+We also record that `AlgebraicGeometry.Scheme.etalePrecoverage` has isomorphisms and is
+stable under base change, as instances.
 -/
 
 @[expose] public section
@@ -48,6 +51,16 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme
 
 variable {A : Type u'} [Category.{v} A] {X Y : Scheme.{u}}
+
+section Precoverage
+
+instance : etalePrecoverage.{u}.HasIsos :=
+  inferInstanceAs (precoverage @Etale).HasIsos
+
+instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
+  inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
+
+end Precoverage
 
 section Functoriality
 

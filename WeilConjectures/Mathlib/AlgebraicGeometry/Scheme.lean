@@ -26,6 +26,8 @@ We also record that a global section whose non-vanishing locus is everything is 
   `f : Γ(X, U)`, then `f` is a unit. This is the converse of `Scheme.basicOpen_of_isUnit`.
 * `AlgebraicGeometry.Scheme.Hom.range_appLE_subset_of_comp_eq`: sections in the image of
   `appLE` of a composition are in the image of `appLE` of its first factor.
+* `AlgebraicGeometry.disjoint_range_of_range_eq_compl`: two morphisms with complementary
+  ranges have disjoint ranges.
 -/
 
 @[expose] public section
@@ -89,3 +91,17 @@ lemma Hom.range_appLE_subset_of_comp_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
   exact ⟨g.appLE U V e₁ x, by rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]⟩
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry
+
+/-- **The ranges of a complementary pair are disjoint.** This is the half of the
+complementarity condition `Set.range i.base = (Set.range j.base)ᶜ` that the formal part of
+the open--closed argument uses; the other half, that the two ranges cover `X`, enters only
+through `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl`. -/
+lemma disjoint_range_of_range_eq_compl {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    Disjoint (Set.range j.base) (Set.range i.base) := by
+  rw [hij]
+  exact disjoint_compl_right
+
+end AlgebraicGeometry

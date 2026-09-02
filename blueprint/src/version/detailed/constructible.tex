@@ -94,6 +94,22 @@ The scheme structures $Z_k$ on the strata are part of the datum; by
 \Cref{lemma:constructible-immersion-independence} below the condition does
 not depend on them.
 
+\begin{lemma}[Finite locally constant sheaves are constructible]
+\label{lemma:constructible-flc-constructible}
+\uses{def:constructible-constructible,def:constructible-finite-locally-constant}
+\lean{AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf,
+  AlgebraicGeometry.Scheme.Stratification.trivial}
+\leanok
+A finite locally constant sheaf $\mathcal F\in\shv{\et X}$ is constructible.
+\end{lemma}
+\begin{proof}
+\leanok
+Take the trivial stratification of $X$, with the single stratum $X$ immersed
+in $X$ by the identity.  Its only pullback of $\mathcal F$ is
+$\operatorname{id}^*\mathcal F$, which is finite locally constant by
+\Cref{prop:constructible-pullback}.
+\end{proof}
+
 \begin{lemma}[Constant sheaves are locally constant]
 \label{lemma:constructible-constant-locally-constant}
 \uses{def:constructible-constant,def:constructible-locally-constant}
@@ -451,11 +467,30 @@ $\mathcal E$ is locally constant, with finite stalks $M\oplus N$.
 Let $(j\colon U\to X,\ i\colon Z\to X)$ be a complementary pair on $X$
 (\Cref{sec:openclosed-setting}).
 
+\begin{lemma}[Concatenation of stratifications along a complementary pair]
+\label{lemma:constructible-openclosed-stratification}
+\uses{def:constructible-stratification}
+\lean{AlgebraicGeometry.Scheme.Stratification.openClosed, Topology.Stratification.sum}
+\leanok
+Let $(\kappa_l\colon W_l\to U)_{l<m}$ be a stratification of $U$ and let
+$(\lambda_k\colon V_k\to Z)_{k<n}$ be a stratification of $Z$.  Then the
+family of the $m+n$ composites $j\circ\kappa_l$ and $i\circ\lambda_k$ is a
+stratification of $X$.
+\end{lemma}
+\begin{proof}
+\leanok
+Each composite is an immersion.  The images $j(W_l)$ are locally closed in
+$X$, being locally closed in the open $U$; the images $i(V_k)$ are locally
+closed in $X$, being locally closed in the closed $Z$.  They are pairwise
+disjoint and cover $X$ because the $j(W_l)$ partition $j(U)$, the $i(V_k)$
+partition $i(Z)$, and $X=j(U)\sqcup i(Z)$.  Only that $j$ and $i$ are
+immersions with complementary images is used.
+\end{proof}
+
 \begin{proposition}[Open--closed criterion]
 \label{prop:constructible-open-closed}
-\uses{def:constructible-constructible,prop:constructible-pullback,lemma:constructible-iso-invariance}
-\lean{AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_upperStar,
-  AlgebraicGeometry.Scheme.Stratification.openClosed}
+\uses{def:constructible-constructible,prop:constructible-pullback,lemma:constructible-iso-invariance,lemma:constructible-openclosed-stratification}
+\lean{AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_of_range_eq_compl}
 \leanok
 A sheaf $\mathcal F\in\shv{\et X}$ is constructible if and only if
 $j^*\mathcal F$ and $i^*\mathcal F$ are constructible.
@@ -466,21 +501,33 @@ $j^*\mathcal F$ and $i^*\mathcal F$ are constructible.
 $(\kappa_l\colon W_l\to U)_{l<m}$ and $(\lambda_k\colon V_k\to Z)_{k<n}$ be
 stratifications witnessing the constructibility of $j^*\mathcal F$ and
 $i^*\mathcal F$.  The family of the $j\circ\kappa_l$ and the
-$i\circ\lambda_k$ is a stratification of $X$ with $m+n$ strata: each
-composite is an immersion; the images $j(U_l)$ are locally closed in $X$,
-being locally closed in the open $U$; the images $i(Z_k)$ are locally
-closed in $X$, being locally closed in the closed $Z$; and the images are
-pairwise disjoint and cover $X$ because the $U_l$ partition $U$, the $Z_k$
-partition $Z$, and $X=U\sqcup Z$.  Finally
+$i\circ\lambda_k$ is a stratification of $X$ with $m+n$ strata by
+\Cref{lemma:constructible-openclosed-stratification}.  Finally
 $(j\circ\kappa_l)^*\mathcal F\cong\kappa_l^*j^*\mathcal F$ and
 $(i\circ\lambda_k)^*\mathcal F\cong\lambda_k^*i^*\mathcal F$ are finite
 locally constant by construction and \Cref{lemma:constructible-iso-invariance}.
 \end{proof}
 
+\begin{lemma}[The zero sheaf is constructible]
+\label{lemma:constructible-zero}
+\uses{def:constructible-constructible,lemma:constructible-constant-locally-constant,lemma:constructible-flc-constructible}
+\lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_isZero}
+\leanok
+The zero sheaf $0\in\shv{\et X}$ is constructible.
+\end{lemma}
+\begin{proof}
+\leanok
+The zero sheaf is the constant sheaf at the zero object of $\mathcal A$,
+hence constant, hence locally constant by
+\Cref{lemma:constructible-constant-locally-constant}.  Its stalks are zero,
+hence singletons, so it is finite.  Being finite locally constant it is
+constructible by \Cref{lemma:constructible-flc-constructible}.
+\end{proof}
+
 \begin{lemma}[Pushforward along a closed immersion]
 \label{lemma:constructible-lowerStar-closed}
-\uses{prop:constructible-open-closed,lemma:openclosed-vanishing-lowerStar,prop:openclosed-lowerStar-fully-faithful}
-\lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isClosedImmersion}
+\uses{prop:constructible-open-closed,lemma:openclosed-vanishing-lowerStar,prop:openclosed-lowerStar-fully-faithful,lemma:constructible-iso-invariance,lemma:constructible-zero}
+\lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar}
 \leanok
 If $\mathcal G\in\shv{\et Z}$ is constructible, then so is
 $i_*\mathcal G$.
@@ -490,8 +537,8 @@ $i_*\mathcal G$.
 By \Cref{prop:constructible-open-closed} it suffices to see that
 $j^*i_*\mathcal G$ and $i^*i_*\mathcal G$ are constructible.  The first is
 zero by \Cref{lemma:openclosed-vanishing-lowerStar}, and the zero sheaf is
-constructible (the trivial stratification with one stratum; the zero sheaf
-is constant with finite stalks).  The second is isomorphic to $\mathcal G$
+constructible by \Cref{lemma:constructible-zero}.  The second is isomorphic
+to $\mathcal G$
 by the counit isomorphism of
 \Cref{prop:openclosed-lowerStar-fully-faithful}, hence constructible by
 \Cref{lemma:constructible-iso-invariance}.
@@ -499,7 +546,7 @@ by the counit isomorphism of
 
 \begin{lemma}[Extension by zero along an open immersion]
 \label{lemma:constructible-lowerShriek-open}
-\uses{prop:constructible-open-closed,lemma:openclosed-vanishing-lowerShriek}
+\uses{prop:constructible-open-closed,lemma:openclosed-vanishing-lowerShriek,lemma:constructible-iso-invariance,lemma:constructible-zero}
 \lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.openImmersionLowerShriek}
 \leanok
 If $\mathcal G\in\shv{\et U}$ is constructible, then so is
@@ -508,9 +555,11 @@ $j_!\mathcal G$.
 \begin{proof}
 \leanok
 As before: $i^*j_!\mathcal G=0$ by
-\Cref{lemma:openclosed-vanishing-lowerShriek}, and $j^*j_!\mathcal G\cong
+\Cref{lemma:openclosed-vanishing-lowerShriek}, and the zero sheaf is
+constructible by \Cref{lemma:constructible-zero}; and $j^*j_!\mathcal G\cong
 \mathcal G$ by the unit isomorphism of the adjunction $j_!\dashv j^*$
-(\Cref{sec:openclosed-setting}).
+(\Cref{sec:openclosed-setting}), hence constructible by
+\Cref{lemma:constructible-iso-invariance}.
 \end{proof}
 
 \begin{theorem}[Constructible sheaves form a weak Serre subcategory]

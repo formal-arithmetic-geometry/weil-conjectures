@@ -32,6 +32,12 @@ a stratification pulls back to a stratification
 (`AlgebraicGeometry.Scheme.Stratification.pullback`).
 (blueprint: `prop:constructible-pullback`)
 
+The same identification shows that a constant sheaf is locally constant, trivialized by the
+identity cover (`CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf`, blueprint:
+`lemma:constructible-constant-locally-constant`), and that a finite locally constant sheaf is
+constructible, with respect to the trivial stratification
+(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf`).
+
 -/
 
 @[expose] public section
@@ -90,8 +96,17 @@ section LocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
-  inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
+/-- **A constant sheaf on the small étale site is locally constant**, trivialized by the
+identity cover: the restriction of `F` to the site localized at `𝟙 X` is the pullback of `F`
+along `𝟙 X`, which is constant since pullbacks of constant sheaves are constant.
+(blueprint: `lemma:constructible-constant-locally-constant`) -/
+lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
+    {F : Sheaf X.smallEtaleTopology A} (h : F.IsConstant X.smallEtaleTopology) :
+    IsLocallyConstantSheaf F := by
+  have := h
+  refine ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ ?_⟩⟩⟩
+  rw [isConstant_over_iff_upperStar]
+  exact Sheaf.IsConstant.upperStar A _ F
 
 /-- Locally constant sheaves are invariant under isomorphism. -/
 lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
@@ -195,6 +210,12 @@ lemma IsConstructibleSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F �
   exact ⟨S, fun j ↦
     have := hS j
     IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStar A (S.immersion j)).mapIso i)⟩
+
+/-- **A finite locally constant sheaf is constructible**, with respect to the trivial
+stratification of `X`. -/
+lemma IsFiniteLocallyConstantSheaf.isConstructibleSheaf (F : Sheaf X.smallEtaleTopology A)
+    [IsFiniteLocallyConstantSheaf F] : IsConstructibleSheaf F :=
+  ⟨Stratification.trivial X, fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar (𝟙 X) F⟩
 
 /-- **Pullback of a constructible sheaf is constructible**: the stratification pulls back, and
 the pullback of `F` to a pulled-back stratum is the pullback of the pullback of `F` to the
