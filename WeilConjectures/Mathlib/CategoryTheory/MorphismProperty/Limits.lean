@@ -21,15 +21,42 @@ object of `Over S`.
 Along the same lines, the structure morphism of a finite product in `Over S` satisfies any
 multiplicative morphism property that is stable under base change, as soon as the structure
 morphisms of all factors do.
+
+We also record that the intersection of two morphism properties which are stable under
+colimits of shape `J` is again stable under colimits of shape `J`, and the analogous
+statements for filtered colimits and for coproducts.
 -/
 
 @[expose] public section
 
-universe v u
+universe w w' v u
 
 open CategoryTheory.Limits
 
 namespace CategoryTheory.MorphismProperty
+
+section Inf
+
+variable {C : Type u} [Category.{v} C] (P Q : MorphismProperty C)
+
+instance isStableUnderColimitsOfShape_inf (J : Type*) [Category* J]
+    [P.IsStableUnderColimitsOfShape J] [Q.IsStableUnderColimitsOfShape J] :
+    (P ⊓ Q).IsStableUnderColimitsOfShape J where
+  condition X₁ X₂ c₁ c₂ h₁ h₂ f hf φ hφ :=
+    ⟨IsStableUnderColimitsOfShape.condition X₁ X₂ c₁ c₂ h₁ h₂ f (fun j ↦ (hf j).1) φ hφ,
+      IsStableUnderColimitsOfShape.condition X₁ X₂ c₁ c₂ h₁ h₂ f (fun j ↦ (hf j).2) φ hφ⟩
+
+instance isStableUnderFilteredColimits_inf
+    [IsStableUnderFilteredColimits.{w, w'} P] [IsStableUnderFilteredColimits.{w, w'} Q] :
+    IsStableUnderFilteredColimits.{w, w'} (P ⊓ Q) where
+  isStableUnderColimitsOfShape _ := inferInstance
+
+instance isStableUnderCoproducts_inf
+    [IsStableUnderCoproducts.{w} P] [IsStableUnderCoproducts.{w} Q] :
+    IsStableUnderCoproducts.{w} (P ⊓ Q) where
+  isStableUnderCoproductsOfShape _ := inferInstance
+
+end Inf
 
 attribute [local instance] Over.ConstructProducts.over_binaryProduct_of_pullback
 
