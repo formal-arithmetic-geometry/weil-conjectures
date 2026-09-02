@@ -25,7 +25,9 @@ For exact functors between abelian categories, the induced functor
   bounded below variant `CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso`.
 - `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
   `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
-  isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility`.
+  isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility` and the
+  factorization `CategoryTheory.Functor.mapDerivedCategoryPlusFactorsh` through the
+  localization functors from the bounded below homotopy categories.
 - `CategoryTheory.Functor.mapDerivedCategoryPlusNatIso` and
   `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso`: the corresponding
   functoriality of `mapDerivedCategoryPlus`, obtained by cancelling the fully faithful
@@ -153,6 +155,28 @@ noncomputable def mapDerivedCategoryPlusCompatibility :
     F.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ≅
       DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory :=
   Iso.refl _
+
+/-- The functor `F.mapDerivedCategoryPlus` induced on the bounded below derived categories
+by an exact functor `F` factors the functor `F.mapHomotopyCategoryPlus` on the bounded
+below homotopy categories through the localization functors: the bounded below counterpart
+of `Functor.mapDerivedCategoryFactorsh`. -/
+noncomputable def mapDerivedCategoryPlusFactorsh :
+    DerivedCategory.Plus.Qh ⋙ F.mapDerivedCategoryPlus ≅
+      F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh :=
+  fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    (Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft DerivedCategory.Plus.Qh F.mapDerivedCategoryPlusCompatibility ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight (DerivedCategory.Plus.QhCompιIsoιCompQh C) F.mapDerivedCategory ≪≫
+      Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft (HomotopyCategory.Plus.ι C) F.mapDerivedCategoryFactorsh ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight (Iso.refl (HomotopyCategory.Plus.ι C ⋙
+        F.mapHomotopyCategory (ComplexShape.up ℤ))).symm DerivedCategory.Qh ≪≫
+      Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft F.mapHomotopyCategoryPlus
+        (DerivedCategory.Plus.QhCompιIsoιCompQh D).symm ≪≫
+      (Functor.associator _ _ _).symm)
 
 /-- An exact functor commutes with the homology functors of the bounded below derived
 categories: the restriction of `Functor.mapDerivedCategoryHomologyFunctorIso` along the
