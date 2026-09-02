@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.Smooth.NoetherianDescent
 public import WeilConjectures.Mathlib.RingTheory.Etale.PropertyC
+public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Reduction
 
@@ -48,26 +49,6 @@ lemma Spec.residueFieldMap_residueFieldIso_hom :
     ← Scheme.localRingHom_comp_stalkIso]
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   congr 1
-
-/-- A bijective ring homomorphism between fields is purely inseparable. -/
-lemma RingHom.IsPurelyInseparable.of_bijective {K L : Type*} [Field K] [Field L] (e : K →+* L)
-    (he : Function.Bijective e) : e.IsPurelyInseparable := by
-  let _ : Algebra K L := e.toAlgebra
-  change IsPurelyInseparable K L
-  rw [isPurelyInseparable_iff]
-  intro x
-  obtain ⟨y, rfl⟩ := he.2 x
-  exact ⟨isIntegral_algebraMap, fun _ ↦ ⟨y, rfl⟩⟩
-
-/-- Purely inseparable ring homomorphisms of fields are stable under composition with
-isomorphisms. -/
-lemma RingHom.IsPurelyInseparable.comp_of_bijective {K L M N : Type*} [Field K] [Field L]
-    [Field M] [Field N] {e : K →+* L} {f : L →+* M} {e' : M →+* N} (he : Function.Bijective e)
-    (hf : f.IsPurelyInseparable) (he' : Function.Bijective e') :
-    (e'.comp (f.comp e)).IsPurelyInseparable :=
-  RingHom.IsPurelyInseparable.comp
-    (RingHom.IsPurelyInseparable.comp (RingHom.IsPurelyInseparable.of_bijective e he) hf)
-    (RingHom.IsPurelyInseparable.of_bijective e' he')
 
 /-- For a universal homeomorphism of rings, the residue field extensions are purely
 inseparable. -/

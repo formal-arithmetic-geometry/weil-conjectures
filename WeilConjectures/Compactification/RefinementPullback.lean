@@ -35,7 +35,9 @@ along a refinement is stated, and this file is what supplies instances of it.
   the square above is cartesian for a refinement out of a dense compactification;
 - `AlgebraicGeometry.Compactification.Refinement.isPullback_denseRefinement`: the
   specialisation to the dense refinement `c.denseRefinement` of an arbitrary
-  compactification `c`, whose open immersion is scheme-theoretically dominant.
+  compactification `c`, whose open immersion is scheme-theoretically dominant;
+- `AlgebraicGeometry.Compactification.Refinement.isPullback_comp`: cartesianness of these
+  squares pastes along a composite of refinements.
 
 The proof compares `X` with the pullback `P := c.Z ×[d.Z] X` of `r.hom` along `d.i`. The
 canonical morphism `t : X ⟶ P` is a section of the projection `P ⟶ X`, which is proper,
@@ -108,6 +110,14 @@ theorem isPullback_denseRefinement (c : Compactification f) [QuasiCompact f]
   have : QuasiCompact c.denseRefinement.i := QuasiCompact.of_comp c.i.toImage c.i.imageι
   exact r.isPullback_of_isSchemeTheoreticallyDominant
 
+/-- **Cartesianness pastes along a composite of refinements**: if the squares over `X` of
+`r : c.Refinement d` and `s : d.Refinement e` are cartesian, then so is the square of the
+composite refinement `r.comp s`. -/
+theorem isPullback_comp {e : Compactification f} (r : c.Refinement d) (s : d.Refinement e)
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i) (hs : IsPullback d.i (𝟙 X) s.hom e.i) :
+    IsPullback c.i (𝟙 X) (r.comp s).hom e.i := by
+  simpa using hr.paste_vert hs
+
 /-! ### Axiom census
 
 Cartesianness of a refinement out of a dense compactification is unconditional: the check
@@ -121,5 +131,12 @@ info: 'AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheor
 #guard_msgs (whitespace := lax) in
 #print axioms
   AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant
+
+/--
+info: 'AlgebraicGeometry.Compactification.Refinement.isPullback_comp' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.Compactification.Refinement.isPullback_comp
 
 end AlgebraicGeometry.Compactification.Refinement

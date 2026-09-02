@@ -14,6 +14,7 @@ public import Mathlib.RingTheory.Unramified.LocalStructure
 public import Mathlib.RingTheory.RingHom.PurelyInseparable
 public import Mathlib.FieldTheory.SeparableClosure
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueFieldBaseChange
 
@@ -78,16 +79,17 @@ set_option maxHeartbeats 800000 in
 -- the proof assembles many algebra structures on residue fields
 /-- **Trivialising the residue field extension.** Let `C` be an étale `B`-algebra and `q` a prime
 of `C` such that the residue field extension of `B/A` at `q ∩ B` is purely inseparable. Then
-there is an étale `A`-algebra `A'` and a prime `q'` of `(A' ⊗[A] B) ⊗[B] C` lying over `q` whose
-residue field extension over `A' ⊗[A] B` is trivial. -/
-theorem exists_etale_bijective_residueFieldMap [Algebra.Etale B C] (q : Ideal C) [q.IsPrime]
+there is an étale `A`-algebra `A'` and a `B`-algebra map `θ : (A' ⊗[A] B) ⊗[B] C → κ(q)`
+extending `C → κ(q)`, whose kernel `q'` is a prime of `(A' ⊗[A] B) ⊗[B] C` lying over `q` with
+trivial residue field extension over `A' ⊗[A] B`. -/
+theorem exists_etale_bijective_residueFieldMap' [Algebra.Etale B C] (q : Ideal C) [q.IsPrime]
     (hpi : (Ideal.ResidueField.map ((q.under B).under A) (q.under B) (algebraMap A B)
       rfl).IsPurelyInseparable) :
     ∃ (A' : Type u) (_ : CommRing A') (_ : Algebra A A') (_ : Algebra.Etale A A')
-      (q' : Ideal ((A' ⊗[A] B) ⊗[B] C)) (_ : q'.IsPrime)
-      (_ : q = q'.comap Algebra.TensorProduct.includeRight.toRingHom),
-      Function.Bijective (Ideal.ResidueField.map (q'.under (A' ⊗[A] B)) q'
-        (algebraMap (A' ⊗[A] B) _) rfl) := by
+      (θ : (A' ⊗[A] B) ⊗[B] C →ₐ[B] q.ResidueField),
+      (∀ c, θ (Algebra.TensorProduct.includeRight c) = algebraMap C _ c) ∧
+      Function.Bijective (Ideal.ResidueField.map ((RingHom.ker θ.toRingHom).under (A' ⊗[A] B))
+        (RingHom.ker θ.toRingHom) (algebraMap (A' ⊗[A] B) _) rfl) := by
   classical
   set 𝔮 : Ideal B := q.under B with h𝔮
   set p : Ideal A := 𝔮.under A with hp
@@ -146,7 +148,9 @@ theorem exists_etale_bijective_residueFieldMap [Algebra.Etale B C] (q : Ideal C)
     rw [Ideal.mem_comap, RingHom.mem_ker]
     change c ∈ q ↔ θ (Algebra.TensorProduct.includeRight c) = 0
     rw [hθ_right, Ideal.algebraMap_residueField_eq_zero]
-  refine ⟨q', inferInstance, hq', ?_⟩
+  refine ⟨θ, hθ_right, ?_⟩
+  change Function.Bijective (Ideal.ResidueField.map (q'.under (A' ⊗[A] B)) q'
+    (algebraMap (A' ⊗[A] B) _) rfl)
   set 𝔮' := q'.under (A' ⊗[A] B) with h𝔮'
   have : 𝔮'.IsPrime := Ideal.IsPrime.under _ _
   set ψ := Ideal.ResidueField.map 𝔮' q' (algebraMap (A' ⊗[A] B) _) rfl with hψ
@@ -196,6 +200,26 @@ theorem exists_etale_bijective_residueFieldMap [Algebra.Etale B C] (q : Ideal C)
   refine ⟨w, ι₁.injective ?_⟩
   rw [← hz]
   exact hw
+
+/-- **Trivialising the residue field extension.** Let `C` be an étale `B`-algebra and `q` a prime
+of `C` such that the residue field extension of `B/A` at `q ∩ B` is purely inseparable. Then
+there is an étale `A`-algebra `A'` and a prime `q'` of `(A' ⊗[A] B) ⊗[B] C` lying over `q` whose
+residue field extension over `A' ⊗[A] B` is trivial. -/
+theorem exists_etale_bijective_residueFieldMap [Algebra.Etale B C] (q : Ideal C) [q.IsPrime]
+    (hpi : (Ideal.ResidueField.map ((q.under B).under A) (q.under B) (algebraMap A B)
+      rfl).IsPurelyInseparable) :
+    ∃ (A' : Type u) (_ : CommRing A') (_ : Algebra A A') (_ : Algebra.Etale A A')
+      (q' : Ideal ((A' ⊗[A] B) ⊗[B] C)) (_ : q'.IsPrime)
+      (_ : q = q'.comap Algebra.TensorProduct.includeRight.toRingHom),
+      Function.Bijective (Ideal.ResidueField.map (q'.under (A' ⊗[A] B)) q'
+        (algebraMap (A' ⊗[A] B) _) rfl) := by
+  obtain ⟨A', _, _, _, θ, hθ, hres⟩ := exists_etale_bijective_residueFieldMap' (A := A) q hpi
+  refine ⟨A', inferInstance, inferInstance, inferInstance, RingHom.ker θ.toRingHom,
+    RingHom.ker_isPrime _, ?_, hres⟩
+  ext c
+  rw [Ideal.mem_comap, RingHom.mem_ker]
+  change c ∈ q ↔ θ (Algebra.TensorProduct.includeRight c) = 0
+  rw [hθ, Ideal.algebraMap_residueField_eq_zero]
 
 section RankOne
 
@@ -263,20 +287,24 @@ variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [
 
 set_option maxHeartbeats 1600000 in
 -- long proof with many local algebra instances
-/-- **Property (C) for a prime with trivial residue field extension.** Let `A → B` be finite and
-universally injective on spectra, `C` an étale `B`-algebra and `q` a prime of `C` whose residue
-field extension over `B` is trivial. Then there is an étale `A`-algebra `A'` and a `B`-algebra
-map `C → A' ⊗[A] B` whose image on spectra contains `q`. -/
-theorem exists_etale_algHom_comap_eq_of_bijective_residueFieldMap [Module.Finite A B]
-    [Algebra.Etale B C]
-    (hinj : ∀ (A'' : Type u) [CommRing A''] [Algebra A A''],
-      Function.Injective (PrimeSpectrum.comap (algebraMap A'' (A'' ⊗[A] B))))
-    (q : Ideal C) [q.IsPrime]
+/-- **Property (C) for a prime with trivial residue field extension.** Let `A → B` be finite,
+`C` an étale `B`-algebra and `q` a prime of `C` whose residue field extension over `B` is
+trivial and whose restriction to `B` is the only prime of `B` over `p = q ∩ A`. Then there is
+an étale `A`-algebra `A'` and a `B`-algebra map `C → A' ⊗[A] B` whose image on spectra
+contains `q`; more precisely there is a prime `P'` of `A'` over `p` with trivial residue field
+extension and a prime `q'` of `A' ⊗[A] B` over `P'` which is mapped to `q`. -/
+theorem exists_etale_algHom_comap_eq_of_bijective_residueFieldMap' [Module.Finite A B]
+    [Algebra.Etale B C] (q : Ideal C) [q.IsPrime]
+    (huniqB : ∀ (Q : Ideal B) [Q.IsPrime], Q.under A = q.under A → Q = q.under B)
     (hres : Function.Bijective (Ideal.ResidueField.map (q.under B) q (algebraMap B C) rfl)) :
     ∃ (A' : Type u) (_ : CommRing A') (_ : Algebra A A') (_ : Algebra.Etale A A')
       (h : C →ₐ[A] A' ⊗[A] B), h.comp (IsScalarTower.toAlgHom A B C) =
         Algebra.TensorProduct.includeRight ∧
-      ∃ (q' : Ideal (A' ⊗[A] B)) (_ : q'.IsPrime), q = q'.comap h.toRingHom := by
+      ∃ (P' : Ideal A') (_ : P'.IsPrime) (_ : P'.LiesOver (q.under A)),
+        Function.Bijective (Ideal.ResidueField.map (q.under A) P' (algebraMap A A')
+          (P'.over_def (q.under A))) ∧
+        ∃ (q' : Ideal (A' ⊗[A] B)) (_ : q'.IsPrime) (_ : q'.LiesOver P'),
+          q = q'.comap h.toRingHom := by
   classical
   set p : Ideal A := q.under A with hp
   have : q.LiesOver p := ⟨rfl⟩
@@ -416,9 +444,31 @@ theorem exists_etale_algHom_comap_eq_of_bijective_residueFieldMap [Module.Finite
   have h𝔮₂P₂ : 𝔮₂.under A₂ = P₂ := by
     rw [h𝔮₂def, Ideal.under_under, ← Ideal.under_under (B := T), hq₃,
       Ideal.LiesOver.over (P := q₂) (p := P₂)]
+  have hres₂' : Function.Bijective
+      (Ideal.ResidueField.map p P₂ (algebraMap A A₂) (P₂.over_def p)) := hres₂
+  have hB₂ : q.under B = 𝔮₂.comap Algebra.TensorProduct.includeRight.toRingHom := by
+    rw [h𝔮₂, Ideal.comap_comap]
+    change q.under B = q₂.comap ((algebraMap B₂ T).comp (algebraMap B B₂))
+    rw [hBT, ← Ideal.comap_comap, hq₂C]
   have hP₂ : (⟨P₂, inferInstance⟩ : PrimeSpectrum A₂) ∉ Z' := by
     rintro ⟨x, hx, hxP⟩
-    have : x = ⟨𝔮₂, inferInstance⟩ := hinj A₂ (hxP.trans (PrimeSpectrum.ext h𝔮₂P₂.symm))
+    have hx₁ : x.asIdeal.LiesOver P₂ := ⟨(PrimeSpectrum.ext_iff.mp hxP).symm⟩
+    have hx₂ : 𝔮₂.LiesOver P₂ := ⟨h𝔮₂P₂.symm⟩
+    have hx₃ : (x.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom).under A = p := by
+      rw [Ideal.under, Ideal.comap_comap]
+      have : Algebra.TensorProduct.includeRight.toRingHom.comp (algebraMap A B) =
+          (algebraMap A₂ B₂).comp (algebraMap A A₂) := by
+        ext a
+        simp [Algebra.TensorProduct.algebraMap_apply]
+        rfl
+      rw [this, ← Ideal.comap_comap]
+      change (x.asIdeal.under A₂).under A = p
+      rw [← hx₁.over, P₂.over_def p]
+    have : x = ⟨𝔮₂, inferInstance⟩ := by
+      refine PrimeSpectrum.ext ?_
+      refine Ideal.eq_of_comap_eq_comap_of_bijective_residueFieldMap hres₂' x.asIdeal 𝔮₂ ?_
+      rw [← hB₂]
+      exact huniqB _ hx₃
     exact hx (by rw [this]; exact hrank)
   obtain ⟨_, ⟨a, rfl⟩, ha, haZ'⟩ :=
     PrimeSpectrum.isTopologicalBasis_basic_opens.exists_subset_of_mem_open hP₂ hZ'.isOpen_compl
@@ -502,7 +552,30 @@ theorem exists_etale_algHom_comap_eq_of_bijective_residueFieldMap [Module.Finite
       commutes' := fun x ↦ by
         change h₀ (algebraMap A C x) = algebraMap A _ x
         rw [IsScalarTower.algebraMap_apply A B C, hB, Algebra.TensorProduct.includeRight.commutes] }
-  refine ⟨A', inferInstance, inferInstance, inferInstance, h, ?_, ?_⟩
+  -- The prime `P'` of `A' = A₂[1/a]` over `P₂`.
+  have hdisjP : Disjoint (Submonoid.powers a : Set A₂) P₂ :=
+    (Ideal.disjoint_powers_iff_notMem_of_isPrime a).mpr ha
+  let P' : Ideal A' := P₂.map (algebraMap A₂ A')
+  have hP' : P'.IsPrime :=
+    IsLocalization.isPrime_of_isPrime_disjoint (Submonoid.powers a) A' P₂ inferInstance hdisjP
+  have hP'P₂ : P'.under A₂ = P₂ :=
+    IsLocalization.under_map_of_isPrime_disjoint (Submonoid.powers a) A' inferInstance hdisjP
+  have hP'p : P'.LiesOver p := ⟨by
+    rw [Ideal.LiesOver.over (P := P₂) (p := p), ← hP'P₂, Ideal.under_under]⟩
+  have hresP' : Function.Bijective
+      (Ideal.ResidueField.map p P' (algebraMap A A') (P'.over_def p)) := by
+    have h₁ : Function.Bijective (Ideal.ResidueField.map P₂ P' (algebraMap A₂ A') hP'P₂.symm) :=
+      (RingHom.surjectiveOnStalks_of_isLocalization (M := Submonoid.powers a)
+        A').residueFieldMap_bijective P₂ P' hP'P₂.symm
+    have hcomp : Ideal.ResidueField.map p P' (algebraMap A A') (P'.over_def p) =
+        (Ideal.ResidueField.map P₂ P' (algebraMap A₂ A') hP'P₂.symm).comp
+          (Ideal.ResidueField.map p P₂ (algebraMap A A₂) (P₂.over_def p)) := by
+      refine Ideal.ResidueField.ringHom_ext (RingHom.ext fun x ↦ ?_)
+      simp only [RingHom.coe_comp, Function.comp_apply, Ideal.ResidueField.map_algebraMap]
+      rw [IsScalarTower.algebraMap_apply A A₂ A']
+    rw [hcomp]
+    exact h₁.comp hres₂'
+  refine ⟨A', inferInstance, inferInstance, inferInstance, h, ?_, P', hP', hP'p, hresP', ?_⟩
   · ext b
     exact hB b
   · -- The prime `q'`.
@@ -518,7 +591,23 @@ theorem exists_etale_algHom_comap_eq_of_bijective_residueFieldMap [Module.Finite
     have hq₄ : q₄.under C₂ = q₃ := IsLocalization.under_map_of_isPrime_disjoint
       (Submonoid.powers (algebraMap A₂ C₂ a)) C₃ inferInstance hdisj₃
     let σ : A' ⊗[A] B →+* C₃ := (algebraMap B₃ C₃).comp κ.symm.toRingHom
-    refine ⟨q₄.comap σ, Ideal.IsPrime.comap _, ?_⟩
+    -- `q₄` lies over `P'`
+    have hq₄P' : q₄.under A' = P' := by
+      have h₁ : (q₄.under A').under A₂ = P₂ := by
+        rw [Ideal.under_under, ← Ideal.under_under (B := C₂), hq₄, ← h𝔮₂P₂, h𝔮₂def,
+          Ideal.under_under]
+      have h₂ : (q₄.under A').IsPrime := Ideal.IsPrime.under _ _
+      rw [← IsLocalization.map_under (Submonoid.powers a) A' (q₄.under A'), h₁]
+    have hσA' : σ.comp (algebraMap A' (A' ⊗[A] B)) = algebraMap A' C₃ := by
+      ext x
+      change algebraMap B₃ C₃ (κ.symm (algebraMap A' (A' ⊗[A] B) x)) = algebraMap A' C₃ x
+      rw [κ.symm.commutes]
+      change ρ (1 ⊗ₜ x) = 1 ⊗ₜ x
+      rw [Algebra.TensorProduct.map_tmul, map_one]
+      rfl
+    refine ⟨q₄.comap σ, Ideal.IsPrime.comap _, ⟨?_⟩, ?_⟩
+    · rw [Ideal.under, Ideal.comap_comap, hσA']
+      exact hq₄P'.symm
     have hσ : σ.comp h.toRingHom = ρ₂.comp (ρ₁.comp ρ₀) := by
       ext x
       simp only [σ, h, h₀, RingHom.comp_apply]
@@ -528,6 +617,39 @@ theorem exists_etale_algHom_comap_eq_of_bijective_residueFieldMap [Module.Finite
     rw [Ideal.comap_comap, hσ, ← Ideal.comap_comap, ← Ideal.comap_comap]
     change q = ((q₄.under C₂).under T).comap ρ₀
     rw [hq₄, hq₃, hq₂C]
+
+/-- **Property (C) for a prime with trivial residue field extension.** Let `A → B` be finite and
+universally injective on spectra, `C` an étale `B`-algebra and `q` a prime of `C` whose residue
+field extension over `B` is trivial. Then there is an étale `A`-algebra `A'` and a `B`-algebra
+map `C → A' ⊗[A] B` whose image on spectra contains `q`. -/
+theorem exists_etale_algHom_comap_eq_of_bijective_residueFieldMap [Module.Finite A B]
+    [Algebra.Etale B C]
+    (hinj : ∀ (A'' : Type u) [CommRing A''] [Algebra A A''],
+      Function.Injective (PrimeSpectrum.comap (algebraMap A'' (A'' ⊗[A] B))))
+    (q : Ideal C) [q.IsPrime]
+    (hres : Function.Bijective (Ideal.ResidueField.map (q.under B) q (algebraMap B C) rfl)) :
+    ∃ (A' : Type u) (_ : CommRing A') (_ : Algebra A A') (_ : Algebra.Etale A A')
+      (h : C →ₐ[A] A' ⊗[A] B), h.comp (IsScalarTower.toAlgHom A B C) =
+        Algebra.TensorProduct.includeRight ∧
+      ∃ (q' : Ideal (A' ⊗[A] B)) (_ : q'.IsPrime), q = q'.comap h.toRingHom := by
+  -- uniqueness of the prime of `B` over `p`, from universal injectivity at `A'' = A`
+  have huniqB : ∀ (Q : Ideal B) [Q.IsPrime], Q.under A = q.under A → Q = q.under B := by
+    intro Q _ hQ
+    let e : A ⊗[A] B ≃ₐ[A] B := Algebra.TensorProduct.lid A B
+    have he : e.toRingHom.comp (algebraMap A (A ⊗[A] B)) = algebraMap A B :=
+      RingHom.ext fun x ↦ e.commutes x
+    have key : ∀ (I : Ideal B) [I.IsPrime], PrimeSpectrum.comap (algebraMap A (A ⊗[A] B))
+        (PrimeSpectrum.comap e.toRingHom ⟨I, ‹_›⟩) = ⟨I.under A, inferInstance⟩ := fun I _ ↦ by
+      rw [← PrimeSpectrum.comap_comp_apply, he]
+      rfl
+    have := hinj A (a₁ := PrimeSpectrum.comap e.toRingHom ⟨Q, ‹_›⟩)
+      (a₂ := PrimeSpectrum.comap e.toRingHom ⟨q.under B, inferInstance⟩)
+      (by rw [key, key]; exact PrimeSpectrum.ext (hQ.trans (Ideal.under_under q).symm))
+    exact congrArg PrimeSpectrum.asIdeal
+      (PrimeSpectrum.comap_injective_of_surjective _ e.surjective this)
+  obtain ⟨A', _, _, _, h, hh, P', _, _, _, q', _, _, hq'⟩ :=
+    exists_etale_algHom_comap_eq_of_bijective_residueFieldMap' (A := A) (B := B) q huniqB hres
+  exact ⟨A', inferInstance, inferInstance, inferInstance, h, hh, q', inferInstance, hq'⟩
 
 end Main
 

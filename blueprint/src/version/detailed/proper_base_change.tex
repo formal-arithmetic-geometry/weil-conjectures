@@ -6961,9 +6961,23 @@ $\rho$ must prove independence of $E$ and the $\kappa$ cocycle.
 bounded below variant, as
 \texttt{AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison}
 (\texttt{WeilConjectures/SixFunctors/Derived/LowerShriekComparison.lean}), for a refinement
-whose square over the source open is Cartesian.  It is only \emph{defined}: it is not known to
-be an isomorphism.  That is exactly what \texttt{OBL-BA43-REFINEMENT-EXCHANGE} demands, it needs
-proper base change, and it remains open.
+whose square over the source open is Cartesian, and both of its functoriality laws are proved in
+that same file.  The identity law
+\texttt{AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison\_id}
+says that the comparison attached to the identity refinement of a compactification is the
+identity natural transformation; the composition law
+\texttt{AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison\_comp}
+says that for refinements \texttt{r : c.Refinement d} and \texttt{s : d.Refinement e} whose
+squares over the source open are Cartesian, the comparison attached to \texttt{r.comp s}, taken
+for the pasted square
+\texttt{AlgebraicGeometry.Compactification.Refinement.isPullback\_comp} of
+\texttt{WeilConjectures/Compactification/RefinementPullback.lean}, is the comparison of
+\texttt{s} followed by the comparison of \texttt{r} --- in that order and not the reverse, the
+formalized map being contravariant in the refinement, for the reason given next.  It is still
+not known to be an isomorphism, and the further naturality that \textup{(BA43-RHO)} asks for is
+not formalized either.  The isomorphism property is exactly what
+\texttt{OBL-BA43-REFINEMENT-EXCHANGE} demands, it needs proper base change, and it remains open,
+as does the $\kappa$ system built on it.
 
 \smallskip
 \noindent\textbf{The formalized arrow points the other way.}  It goes from the coarser model to
