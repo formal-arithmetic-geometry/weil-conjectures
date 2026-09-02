@@ -2939,6 +2939,11 @@ reciprocal roots.
 
 \begin{definition}[Point counts and zeta function]
 \label{def:point-count-zeta}
+\lean{AlgebraicGeometry.Scheme.Hom.pointCount,
+  AlgebraicGeometry.Scheme.Hom.degreeOver,
+  AlgebraicGeometry.Scheme.Hom.zetaSeries,
+  AlgebraicGeometry.Scheme.Hom.X_mul_derivative_zetaSeries}
+\leanok
 
 
 For every finite-type \(\Fq\)-scheme \(Y_0\) and \(n\geq1\), put
@@ -2961,6 +2966,9 @@ The exponential is the formal power-series exponential.
 \begin{proposition}[Closed-point and integral-series identity]
 \label{prop:euler-product}
 \uses{def:point-count-zeta}
+\lean{AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum,
+  AlgebraicGeometry.Scheme.Hom.zetaSeries_eq_tprod}
+\leanok
 
 
 For every finite-type \(\Fq\)-scheme \(Y_0\) and every \(n\geq1\), the
@@ -2977,6 +2985,9 @@ where \(c_r\) is the number of closed points of degree \(r\).  Consequently
 \]
 The product is coefficientwise locally finite: modulo \(T^{m+1}\), only
 closed points of degree at most \(m\) occur.
+\statusnote{Both displayed identities are formalized and proved in Lean, over
+\(\mathbf Q\).  The integrality assertion
+\(Z(Y_0,T)\in1+T\mathbf Z[[T]]\) is not part of either Lean statement.}
 \end{proposition}
 
 % \BlueprintResultSource{prop:euler-product}
@@ -3553,6 +3564,11 @@ The same identity in terms of the determinant constants is
   prop:euler-product,prop:integral-recovery,
   prop:arithmetic-roots,prop:endpoints,prop:duality-reciprocity,
   prop:functional-equation-parity,prop:functional-equation}
+\lean{AlgebraicGeometry.Scheme.weil_conjectures,
+  AlgebraicGeometry.Scheme.zetaSeries_rational,
+  AlgebraicGeometry.IsWeilFactorization,
+  AlgebraicGeometry.WeilFunctionalEquation,
+  AlgebraicGeometry.WeilRiemannHypothesis}
 
 
 Let \(X_0\) be a smooth, proper, geometrically connected scheme of pure
@@ -3641,6 +3657,14 @@ for the sign
 \]
 
 \end{enumerate}
+\statusnote{Both Lean statements exist and both proofs are \texttt{sorry}.
+\texttt{weil\_conjectures} states clauses \textup{(ii)}, \textup{(iii)} and
+\textup{(v)} for a smooth, proper, geometrically integral \(X_0\), phrased
+through the three predicates \texttt{IsWeilFactorization},
+\texttt{WeilFunctionalEquation} and \texttt{WeilRiemannHypothesis}, which are
+complete definitions; \texttt{zetaSeries\_rational} states the rationality
+assertion of clause \textup{(i)} for an arbitrary scheme of finite type over
+\(\Fq\).}
 \end{theorem}
 
 % \BlueprintResultSource{thm:weil-final}
