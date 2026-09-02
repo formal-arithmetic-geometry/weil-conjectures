@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Instances
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Complex
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
@@ -57,6 +58,9 @@ small étale site of `Z` and on that of `X` respectively. This is not a defect: 
   `i^*`-image of the open–closed short complex is short exact.
 - `AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`: **the open–closed short complex
   is short exact** (blueprint: `thm:openclosed-exact`).
+- `AlgebraicGeometry.Etale.shortExact_openClosedShortComplex_moduleCat`: the same for sheaves
+  of `Λ`-modules, where every hypothesis on the coefficients is inferred; its axiom census is
+  checked by the build.
 
 -/
 
@@ -71,6 +75,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [SmallSiteCoefficients A]
 variable {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
 
 variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
@@ -144,5 +149,28 @@ theorem Etale.shortExact_openClosedShortComplex
   rintro (_ | _)
   · exact Etale.shortExact_map_upperStar_openClosedShortComplex_closed A j i _ F
   · exact Etale.shortExact_map_upperStar_openClosedShortComplex_open A j i _ F
+
+/-! ### Axiom census
+
+For the coefficient category `ModuleCat.{u + 1} Λ` of modules over a ring `Λ : Type (u + 1)`
+all hypotheses on the coefficients are inferred (`CategoryTheory.SmallSiteCoefficients` from
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Instances`, the rest from Mathlib), and
+the open–closed exact sequence is unconditional: the check below is run by the build, so a
+`sorry` reappearing anywhere beneath it breaks compilation rather than going unnoticed. -/
+
+/-- **The open–closed short complex is short exact**, for sheaves of `Λ`-modules. -/
+theorem Etale.shortExact_openClosedShortComplex_moduleCat (Λ : Type (u + 1)) [Ring Λ]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    (Etale.openClosedShortComplex (ModuleCat.{u + 1} Λ) j i
+      (disjoint_range_of_range_eq_compl j i hij) F).ShortExact :=
+  Etale.shortExact_openClosedShortComplex _ j i F hij
+
+/--
+info: 'AlgebraicGeometry.Etale.shortExact_openClosedShortComplex_moduleCat' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.Etale.shortExact_openClosedShortComplex_moduleCat
 
 end AlgebraicGeometry

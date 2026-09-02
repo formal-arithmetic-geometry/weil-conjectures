@@ -64,6 +64,7 @@ namespace AlgebraicGeometry
 section LowerShriek
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [SmallSiteCoefficients A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 open Etale
@@ -75,7 +76,7 @@ def Etale.openImmersionRestriction :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf U.smallEtaleTopology A :=
   GrothendieckTopology.localizationRestriction A @Etale @Etale le_rfl j inferInstance
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A] in
 /-- The sections of `j^* G` over `T → U` are the sections of `G` over `T → U → X`. -/
 lemma Etale.openImmersionRestriction_obj_val_obj (G : Sheaf X.smallEtaleTopology A)
     (b : U.Etale) :

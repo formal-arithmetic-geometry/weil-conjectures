@@ -49,9 +49,10 @@ sheafification.
 
 ## Implementation notes
 
-- The coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
-  universe `u + 1`, one above the universe `u` of the base schemes, following the
-  convention of the `SixFunctors` folder.
+- The coefficient category `A` is a Grothendieck abelian category with small site
+  coefficients (`CategoryTheory.SmallSiteCoefficients`, supplying sheafification on the
+  small sites) and `Hom`-types in the universe `u + 1`, one above the universe `u` of the
+  base schemes, following the convention of the `SixFunctors` folder.
 - Both functors are defined along the base change functor, which exists for an *arbitrary*
   morphism `g` — in contrast to the localization functor `MorphismProperty.Over.map ⊤ h`
   of `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs`, which requires `P g`.
@@ -61,9 +62,9 @@ sheafification.
   `Q ≤ P`, as `AlgebraicGeometry.Scheme.isContinuous_overPullback` in
   `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. The left Kan extensions on
   presheaves and the sheafification entering the definitions are provided, for `Q ≤ P`, by
-  the sorried results of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`,
-  under the multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of
-  them hold for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of
+  the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the
+  multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of them hold
+  for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of
   the definitions using continuity.
 
 -/
@@ -77,6 +78,7 @@ open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry
 namespace CategoryTheory
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [SmallSiteCoefficients A]
 
 namespace GrothendieckTopology
 
@@ -97,7 +99,7 @@ noncomputable def lowerStar :
   (MorphismProperty.Over.pullback P ⊤ g).sheafPushforwardContinuous A
     (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A] in
 /-- The sections of `g_* G` over `V → U` are the sections of `G` over `V ×_U W → W`. -/
 lemma lowerStar_obj_val_obj
     (G : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
@@ -105,7 +107,7 @@ lemma lowerStar_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback P ⊤ g).op`. -/
 lemma lowerStar_map_hom_app
     {G G' : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ U) :

@@ -60,6 +60,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [SmallSiteCoefficients A]
 
 variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Z)
@@ -81,6 +82,7 @@ noncomputable def Etale.lowerStarCompComapSheafFiberIso :
       (GrothendieckTopology.Point.sheafFiberIso (pointSmallEtaleComapIso i s)) ≪≫
     Etale.lowerStarCompSheafFiberIso A i s
 
+omit [SmallSiteCoefficients A] in
 /-- `AlgebraicGeometry.Etale.lowerStarCompComapSheafFiberIso` is compatible with the
 canonical maps from the sections: a section of `H` over `V ×_X Z`, that is a section of
 `i_* H` over `V`, has the same germ at `x` computed in either stalk. In other words the
@@ -121,6 +123,7 @@ lemma Etale.toPresheafFiber_lowerStarCompComapSheafFiberIso_hom_app
       ((pointSmallEtaleFiberEtaleIso i s).hom.app V x),
     (pointSmallEtaleFiberEtaleIso i s).hom_inv_id_app_apply V x]
 
+omit [SmallSiteCoefficients A] in
 /-- Pushing a morphism `H ⟶ Φ.skyscraperSheaf M` forward along `i_*` is, up to the
 adjunction between the stalk at `Φ.comap i.Etale` and its skyscraper sheaf functor, the
 same as composing with the stalk comparison
