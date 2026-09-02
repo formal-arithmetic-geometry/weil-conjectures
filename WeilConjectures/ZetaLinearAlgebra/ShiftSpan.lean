@@ -28,7 +28,8 @@ field extension) and of the integral Fatou theorem; both are developed elsewhere
 ## Main definitions
 
 - `seqShift`: the left shift `a ↦ (n ↦ a (n + 1))` on sequences `ℕ → R`, as a linear map.
-- `shiftSpan`: the span of the iterated left shifts of a sequence.
+- `shiftSpan`: the span of the iterated left shifts of a sequence, with `shiftSpan_le` as its
+  universal property.
 
 ## Main statements
 
@@ -81,16 +82,17 @@ lemma iterate_seqShift_mem_shiftSpan (a : ℕ → R) (m : ℕ) :
 lemma self_mem_shiftSpan (a : ℕ → R) : a ∈ shiftSpan R a :=
   iterate_seqShift_mem_shiftSpan a 0
 
+/-- The shift span of `a` is contained in any submodule containing all the shifts of `a`. -/
+lemma shiftSpan_le {a : ℕ → R} {p : Submodule R (ℕ → R)}
+    (h : ∀ m, (⇑(seqShift R))^[m] a ∈ p) : shiftSpan R a ≤ p :=
+  Submodule.span_le.2 <| by rintro _ ⟨m, rfl⟩; exact h m
+
 /-- The shift span of `a` is stable under the shift. -/
 lemma seqShift_mem_shiftSpan (a : ℕ → R) {x : ℕ → R} (hx : x ∈ shiftSpan R a) :
-    seqShift R x ∈ shiftSpan R a := by
-  have h : Submodule.span R (Set.range fun m : ℕ => (⇑(seqShift R))^[m] a)
-      ≤ (shiftSpan R a).comap (seqShift R) := by
-    rw [Submodule.span_le]
-    rintro _ ⟨m, rfl⟩
-    simpa only [SetLike.mem_coe, Submodule.mem_comap, ← Function.iterate_succ_apply'] using
-      iterate_seqShift_mem_shiftSpan a (m + 1)
-  exact h hx
+    seqShift R x ∈ shiftSpan R a :=
+  shiftSpan_le (p := (shiftSpan R a).comap (seqShift R)) (fun m => by
+    simpa only [Submodule.mem_comap, ← Function.iterate_succ_apply'] using
+      iterate_seqShift_mem_shiftSpan a (m + 1)) hx
 
 end Shift
 
