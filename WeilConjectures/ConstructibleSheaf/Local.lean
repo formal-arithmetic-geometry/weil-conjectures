@@ -25,7 +25,7 @@ under pullback.
 
 Finiteness is stated for *open* covers only, although local constancy is already available
 for étale covers: lifting a geometric point along an étale morphism is not covered by
-`AlgebraicGeometry.Scheme.exists_comp_eq_of_mem_range`, étale morphisms not being surjective
+`AlgebraicGeometry.Scheme.Hom.exists_comp_eq_of_mem_range`, étale morphisms not being surjective
 on stalks. It uses instead that the residue extension at a point of the fibre is finite
 separable, so that a separably closed field receiving the residue field of the image also
 receives the residue field of the point. This is not formalised here; the Zariski statement

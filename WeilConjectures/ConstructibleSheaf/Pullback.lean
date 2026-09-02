@@ -6,8 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
 
@@ -24,7 +23,7 @@ invariant under isomorphism of sheaves.
 The restriction `F.over U` of `F` to the small étale site localized at an étale `X`-scheme `U`
 is identified with the pullback `(U.hom)^* F` on the small étale site of `U.left`
 (`AlgebraicGeometry.Scheme.isConstant_over_iff_upperStar`), through the equivalence of sites
-`WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver`; with this the trivialising
+`AlgebraicGeometry.Scheme.Etale.overEquiv`; with this the trivialising
 cover of `g^* F` is the pullback of a trivialising cover of `F`, and constancy is preserved by
 pullback (`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`). Finiteness is checked on
 stalks, which pullback preserves (`AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`), and
@@ -54,10 +53,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- The pullback of a constant sheaf is constant. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.upperStar (g : Y ⟶ X)
     (F : Sheaf X.smallEtaleTopology A) [F.IsConstant X.smallEtaleTopology] :
-    ((Etale.upperStar A g).obj F).IsConstant Y.smallEtaleTopology := by
-  obtain ⟨a, ⟨i⟩⟩ := F.mem_essImage_of_isConstant
-  exact Sheaf.isConstant_of_iso _
-    ((Etale.upperStar A g).mapIso i.symm ≪≫ (upperStarConstantSheafIso A g).app a)
+    ((Etale.upperStar A g).obj F).IsConstant Y.smallEtaleTopology :=
+  Sheaf.isConstant_of_constantSheafIso (upperStarConstantSheafIso A g) F
 
 /-- The restriction of `F` to the small étale site localized at `U`, transported to the small
 étale site of `U.left`, is the pullback of `F` along `U.hom`. -/
@@ -115,12 +112,7 @@ theorem IsLocallyConstantSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTo
       ((Etale.upperStar A (𝒰.f j)).obj F)).IsConstant
         (Cover.etalePrecoverageToEtale (𝒰.pullback₂ g) j).left.smallEtaleTopology :=
     Sheaf.IsConstant.upperStar A _ _
-  let e : (Etale.upperStar A (pullback.fst (𝒰.f j) g)).obj ((Etale.upperStar A (𝒰.f j)).obj F) ≅
-      (Etale.upperStar A (pullback.snd (𝒰.f j) g)).obj ((Etale.upperStar A g).obj F) :=
-    ((Etale.upperStarComp A (pullback.fst (𝒰.f j) g) (𝒰.f j)).app F).symm ≪≫
-      Etale.upperStarCongr A pullback.condition F ≪≫
-      (Etale.upperStarComp A (pullback.snd (𝒰.f j) g) g).app F
-  exact Sheaf.isConstant_congr _ e
+  exact Sheaf.isConstant_congr _ (Etale.upperStarSquareIso A pullback.condition F)
 
 end LocallyConstant
 
@@ -213,9 +205,7 @@ theorem IsConstructibleSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopo
   refine IsFiniteLocallyConstantSheaf.of_iso
     (F := (Etale.upperStar A (pullback.fst (S.immersion j) g)).obj
       ((Etale.upperStar A (S.immersion j)).obj F)) ?_
-  exact ((Etale.upperStarComp A (pullback.fst (S.immersion j) g) (S.immersion j)).app F).symm ≪≫
-    eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition) ≪≫
-    (Etale.upperStarComp A (pullback.snd (S.immersion j) g) g).app F
+  exact Etale.upperStarSquareIso A pullback.condition F
 
 end Constructible
 

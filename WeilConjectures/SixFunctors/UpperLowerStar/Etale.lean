@@ -77,7 +77,9 @@ The site-theoretic inputs of the general definitions are discharged here:
   `AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app` records the unit form for the
   identity.
 - `AlgebraicGeometry.Etale.upperStarCongr`: the transport `f^* F ≅ g^* F` of the pullback
-  along an equality `f = g` of morphisms.
+  along an equality `f = g` of morphisms, and
+  `AlgebraicGeometry.Etale.upperStarSquareIso`: the comparison `h₁^* h₂^* F ≅ k₁^* k₂^* F`
+  of the pullbacks along the two sides of a commutative square.
 - `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category; in particular it is left
@@ -417,6 +419,33 @@ lemma Etale.upperStarComp_hom_app_unit_app (F : Sheaf R.smallEtaleTopology A)
 end UpperStar
 
 end Comp
+
+section Square
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
+
+open Etale
+
+/-- **The pullbacks along the two sides of a commutative square agree.** For a square
+
+```
+   T ──k₁──→ P
+   │         │
+  h₁         k₂
+   ↓         ↓
+   S ──h₂──→ R
+```
+
+the pullbacks `h₁^* h₂^* F` and `k₁^* k₂^* F` of a sheaf `F` on `R` are canonically
+isomorphic, both being the pullback along the diagonal of the square. -/
+noncomputable def Etale.upperStarSquareIso {P R S T : Scheme.{u}} {h₁ : T ⟶ S} {h₂ : S ⟶ R}
+    {k₁ : T ⟶ P} {k₂ : P ⟶ R} (w : h₁ ≫ h₂ = k₁ ≫ k₂) (F : Sheaf R.smallEtaleTopology A) :
+    ((h₁)^*[A]).obj (((h₂)^*[A]).obj F) ≅ ((k₁)^*[A]).obj (((k₂)^*[A]).obj F) :=
+  ((Etale.upperStarComp A h₁ h₂ (h₁ ≫ h₂) rfl).app F).symm ≪≫
+    (Etale.upperStarComp A k₁ k₂ (h₁ ≫ h₂) w).app F
+
+end Square
 
 section Coherence
 

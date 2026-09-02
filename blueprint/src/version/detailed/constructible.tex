@@ -237,21 +237,20 @@ and \Cref{lemma:constructible-iso-invariance}.
 \section{Independence of the scheme structure on the strata}
 \label{sec:constructible-invariance}
 
-\begin{lemma}[Invariance under universal homeomorphisms]
+\begin{lemma}[Invariance under universal homeomorphisms and surjective closed immersions]
 \label{lemma:constructible-universal-homeomorphism-invariance}
 \uses{def:constructible-finite-locally-constant,lemma:weil-pbc-universal-homeomorphism-site-equivalence,prop:weil-pbc-universal-homeomorphism-topos,lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite}
-\lean{CategoryTheory.Sheaf.isConstant_upperStar_iff,
-  AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.of_upperStar,
-  AlgebraicGeometry.Scheme.exists_comp_eq_of_surjective,
+\lean{AlgebraicGeometry.Scheme.isConstant_upperStar_iff,
+  AlgebraicGeometry.Scheme.isLocallyConstantSheaf_upperStar_iff,
   AlgebraicGeometry.Scheme.IsFiniteSheaf.of_upperStar,
   AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_upperStar,
   AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff}
 \leanok
 Let $u\colon Z'\to Z$ be a universal homeomorphism.  Then
 $\mathcal G\in\shv{\et Z}$ is constant (locally constant) if and only if
-$u^*\mathcal G$ is.  If moreover $u$ is a surjective closed immersion, then
-$\mathcal G$ is finite (finite locally constant) if and only if
-$u^*\mathcal G$ is.
+$u^*\mathcal G$ is.  If moreover $u$ is surjective on stalks, for instance if $u$ is a
+surjective closed immersion, then $\mathcal G$ is finite (finite locally constant) if and
+only if $u^*\mathcal G$ is.
 \end{lemma}
 \begin{proof}
 \leanok
@@ -270,13 +269,29 @@ for an \'etale $V_i\to Z$, and the $V_i$ cover $Z$ since $u$ is
 surjective.  The projection $u_i\colon V_i\times_ZZ'\to V_i$ is a
 universal homeomorphism, and $u_i^*(\mathcal G|_{V_i})\cong
 (u^*\mathcal G)|_{V'_i}$ is constant, so $\mathcal G|_{V_i}$ is constant
-by the first part applied to $u_i$.  Finiteness, for $u$ a surjective closed
-immersion: the residue field maps of a closed immersion are surjective,
-hence isomorphisms, so every geometric point $\bar z$ of $Z$ lifts to a
-geometric point $\bar z'$ of $Z'$ with $u\circ\bar z'=\bar z$, and the
-stalk of $\mathcal G$ at $\bar z$ is the stalk of $u^*\mathcal G$ at
-$\bar z'$.
+by the first part applied to $u_i$.  Finiteness, for $u$ surjective on
+stalks: the residue field maps of such a $u$ are surjective, hence
+isomorphisms, a surjective map of fields being bijective.  A geometric
+point $\bar z\colon\Spec\Omega\to Z$ therefore lifts to a geometric point
+$\bar z'$ of $Z'$ with $u\circ\bar z'=\bar z$ --- surjectivity of $u$
+puts the image of $\bar z$ in the image of $u$, and the isomorphism of
+residue fields lets $\Omega$ receive $\kappa(z')$ --- and the stalk of
+$\mathcal G$ at $\bar z$ is the stalk of $u^*\mathcal G$ at $\bar z'$.
 \end{proof}
+
+\begin{remark}[The finiteness half is weaker than the source]
+\label{rmk:constructible-universal-homeomorphism-finiteness-gap}
+Tag \texttt{03SI} states the finiteness half for an arbitrary universal homeomorphism, while
+the statement above is restricted to those that are surjective on stalks.  The obstruction is
+that a geometric point $\bar z\colon\Spec\Omega\to Z$ with $\Omega$ separably closed need not lift
+to $Z'$: the residue extension $\kappa(z')/\kappa(z)$ is purely inseparable, and $\Omega$ need
+not contain the required $p$-th roots.  The general case is reachable: the fibre
+$Z'\times_Z\Spec\Omega$ is nonempty, and the residue field $\Omega'$ of one of its points is
+purely inseparable over $\Omega$, hence again separably closed, so $\Spec\Omega'\to Z'$ is a
+geometric point of $Z'$.  What is missing is the invariance of the stalk of $\mathcal G$ under
+the universal homeomorphism $\Spec\Omega'\to\Spec\Omega$.  The restricted statement is what
+\Cref{lemma:constructible-immersion-independence} needs.
+\end{remark}
 
 \begin{lemma}[Independence of the scheme structure]
 \label{lemma:constructible-immersion-independence}

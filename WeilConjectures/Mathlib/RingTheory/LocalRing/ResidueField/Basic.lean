@@ -8,11 +8,15 @@ module
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
-# Descending a map to a local ring through a surjection
+# Complements on residue fields of local rings
 
-If `π : P →+* K` is surjective and `ρ : P →+* V` maps `RingHom.ker π` into the maximal
-ideal of a local ring `V`, then the residue map of `ρ` factors through `π`
-(`IsLocalRing.exists_comp_eq_residue_comp`).
+## Main results
+
+- `IsLocalRing.exists_comp_eq_residue_comp`: if `π : P →+* K` is surjective and
+  `ρ : P →+* V` maps `RingHom.ker π` into the maximal ideal of a local ring `V`, then the
+  residue map of `ρ` factors through `π`.
+- `IsLocalRing.ResidueField.map_surjective`: a surjective local homomorphism induces a
+  surjection on residue fields.
 -/
 
 @[expose] public section
@@ -36,5 +40,15 @@ theorem exists_comp_eq_residue_comp {P K V : Type*} [CommRing P] [CommRing K] [C
     exact (RingHom.kerLift_mk π a).symm
   simp only [RingHom.comp_apply]
   rw [hmk, Ideal.Quotient.lift_mk, RingHom.comp_apply]
+
+/-- A surjective local homomorphism of local rings induces a surjection on residue
+fields. -/
+lemma ResidueField.map_surjective {R S : Type*} [CommRing R] [CommRing S] [IsLocalRing R]
+    [IsLocalRing S] (f : R →+* S) [IsLocalHom f] (hf : Function.Surjective f) :
+    Function.Surjective (ResidueField.map f) := by
+  intro y
+  obtain ⟨s, rfl⟩ := residue_surjective y
+  obtain ⟨r, rfl⟩ := hf s
+  exact ⟨residue R r, map_residue f r⟩
 
 end IsLocalRing
