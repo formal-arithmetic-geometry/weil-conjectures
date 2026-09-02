@@ -21,7 +21,8 @@ points induces an isomorphism of the fibre functors on `A`-valued sheaves.
 - `CategoryTheory.GrothendieckTopology.Point.isoMk`: an isomorphism of the fibre functors
   of two points of a site is an isomorphism of the points.
 - `CategoryTheory.GrothendieckTopology.Point.sheafFiberIso`: the isomorphism of the fibre
-  functors on sheaves induced by an isomorphism of points.
+  functors on sheaves induced by an isomorphism of points, described on germs by
+  `CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_sheafFiberIso_inv_app`.
 
 -/
 
@@ -57,6 +58,17 @@ noncomputable def sheafFiberIso {Φ₁ Φ₂ : Point.{w} J} (e : Φ₁ ≅ Φ₂
   inv := e.hom.sheafFiber
   hom_inv_id := by rw [← Hom.sheafFiber_comp, e.hom_inv_id, Hom.sheafFiber_id]
   inv_hom_id := by rw [← Hom.sheafFiber_comp, e.inv_hom_id, Hom.sheafFiber_id]
+
+/-- The germ description of
+`CategoryTheory.GrothendieckTopology.Point.sheafFiberIso`: on the germ at a pointed object
+`(X, x)` of the site, the isomorphism induced by an isomorphism `e` of points is the germ
+map at the transported point `e.hom.hom.app X x`. -/
+@[reassoc (attr := simp)]
+lemma toPresheafFiber_sheafFiberIso_inv_app {Φ₁ Φ₂ : Point.{w} J} (e : Φ₁ ≅ Φ₂)
+    (P : Sheaf J A) (X : C) (x : Φ₂.fiber.obj X) :
+    Φ₂.toPresheafFiber X x P.obj ≫ (sheafFiberIso e (A := A)).inv.app P =
+      Φ₁.toPresheafFiber X (e.hom.hom.app X x) P.obj := by
+  simp [sheafFiberIso]
 
 end GrothendieckTopology.Point
 
