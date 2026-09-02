@@ -941,6 +941,10 @@ This proves PBC for every torsion sheaf and closes the converse implication.
 \begin{lemma}[Geometric stalk formula for finite direct image]
 \label{lemma:weil-pbc-finite-stalk-formula}
 \uses{def:weil-pbc-cartesian-square}
+\lean{AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi,
+  AlgebraicGeometry.Etale.stalkRestrict,
+  AlgebraicGeometry.Scheme.Hom.GeometricFiber}
+\leanok
 Let $h:W\to V$ be finite and $\bar v\to V$ geometric.  For every sheaf $F$
 on $W_{\mathrm{et}}$ there is a canonical bijection
 \[
@@ -953,6 +957,20 @@ same object is canonically the finite direct sum.
 \end{lemma}
 \begin{proof}
 \uses{} 
+\leanok
+
+The formalisation avoids the strict henselisation: it works with the category of
+\emph{split neighbourhoods} of $\bar v$ (pointed etale neighbourhoods $(U,\bar u)$ together
+with a decomposition of $W\times_VU$ into pairwise disjoint clopen pieces indexed by the
+geometric points $\bar w$ over $\bar v$, the $\bar w$-th piece containing $(\bar u,\bar w)$), shows
+that these are cofinal among all pointed etale neighbourhoods (Stacks 00UJ applied to an affine
+chart), that the $\bar w$-th pieces are cofinal among the pointed etale neighbourhoods of
+$\bar w$ (an etale-local section lemma for finite algebras with a unique point), and that a
+sheaf sends the disjoint clopen cover into a product; finite products commute with the
+filtered colimit since the coefficients satisfy AB5.  The formalised statement is for
+geometric points with algebraically closed residue field, which suffices for all uses since
+these form a conservative family (Lemma~\ref{lemma:weil-pbc-geometric-stalk-conservative}).
+
 The strict henselian local scheme $V_{(\bar v)}$ has the property that a
 finite $V$-scheme becomes a finite disjoint union of finite local schemes
 after base change to $V_{(\bar v)}$.  Sections of $F$ over that disjoint union
@@ -967,11 +985,15 @@ the next lemma.
 \begin{lemma}[Exactness of finite direct image]
 \label{lemma:weil-pbc-finite-direct-image-exact}
 \uses{}
+\lean{AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite,
+  AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory}
+\leanok
 
 If $h$ is finite, then $h_*$ on etale abelian sheaves is exact.
 \end{lemma}
 \begin{proof}
-\uses{lemma:weil-pbc-finite-stalk-formula}
+\uses{lemma:weil-pbc-finite-stalk-formula,lemma:weil-pbc-geometric-stalk-conservative}
+\leanok
 
 For a short exact sequence $0\to F_1\to F_2\to F_3\to0$, apply the stalk
 formula at every geometric $\bar v$.  A finite product of short exact
