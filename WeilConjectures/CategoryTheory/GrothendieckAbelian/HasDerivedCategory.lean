@@ -19,8 +19,9 @@ constructs `HasDerivedCategory.{w} C`, i.e. a chosen localization of `CochainCom
 at the quasi-isomorphisms whose `Hom`-types live in `Type w`.
 
 The construction is purely formal from the existence of K-injective resolutions
-(`CategoryTheory.Abelian.HasKInjectiveResolutions`, whose Grothendieck abelian instance is
-the only mathematical gap):
+(`CategoryTheory.Abelian.HasKInjectiveResolutions`, which holds in every Grothendieck
+abelian category by
+`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`):
 
 * the homotopy category of complexes is locally `w`-small because the category of
   complexes is (`HomologicalComplex.locallySmall`) and quotients preserve local smallness;
