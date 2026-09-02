@@ -3256,6 +3256,30 @@ the situation) are finite modules: hence it is coherent.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+\begin{lemma}[Grothendieck vanishing on a Noetherian space]
+\label{lem:pc-grothendieck-vanishing}
+Let $X$ be a Noetherian topological space of dimension $\le d$, where
+the dimension of $X$ is the supremum of the lengths $n$ of the chains
+$Z_0\subsetneq Z_1\subsetneq\dots\subsetneq Z_n$ of irreducible closed
+subsets of $X$ (for a scheme this is the dimension of
+\Cref{def:pc-dimension}).  Then
+\[
+H^i(X,\cF)=0\qquad\text{for all }i>d
+\]
+and every abelian sheaf $\cF$ on $X$.
+\uses{def:pc-scheme,def:pc-dimension}
+\end{lemma}
+\begin{proof}
+This is Grothendieck's vanishing theorem, taken here as cited: Stacks
+Project, Cohomology of Sheaves, Section 20.20 (Vanishing on Noetherian
+topological spaces), Proposition~20.20.7,
+\stacksproject{02UZ}; equivalently
+EGA III$_1$, \,(3.2.1), and originally Grothendieck, Tôhoku,
+Theorem~3.6.5.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
 \begin{lemma}[Vanishing above the dimension of a curve]
 \label{lem:pc-vanishing-above-dim}
 Let $k$ be a field and let $X$ be a
@@ -3270,117 +3294,23 @@ dimension $d$ vanishes above $d$; here $d=1$.)
 \uses{def:pc-curve,def:pc-smooth-projective-curve,def:pc-projective-morphism}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-curve,def:pc-degree-line-bundle,def:pc-dimension,def:pc-divisor-line-bundle,def:pc-morphism-conventions,def:sc-ample,def:sc-effective-cartier-divisor,lem:pc-cech-computes,lem:pc-euler-additive,lem:pc-projective-proper,lem:sc-ample-complement-affine,lem:sc-point-cartier,lem:sc-regular-dim1-dvr,lem:sc-smooth-regular}
-\emph{Step 1: the point $P$ and the first affine open.}  The curve $X$
-is proper (a projective morphism is proper,
-\Cref{lem:pc-projective-proper}), nonempty (an integral scheme,
-\Cref{def:pc-curve}) and of finite
-type over $k$, hence has a closed point: any nonempty open affine
-$\Spec(A)\subseteq X$ has $A$ a nonzero
-\hyperref[def:pc-morphism-conventions]{finite type} $k$-algebra, so
-$A$ has a maximal ideal (the classical Nullstellensatz: a maximal
-ideal exists in a nonzero finitely generated algebra over a field),
-and the closed points of $\Spec(A)$ are exactly its maximal ideals.
-Pick a closed point $P\in X$.
-
-The local ring $\cO_{X,P}$ is a regular local ring of dimension one
-(\Cref{lem:sc-smooth-regular}: smooth over a field; the curve is
-one-dimensional because $\dim\cO_{X,P}=\dim X=1$ for the closed point
-$P$, \Cref{def:pc-dimension}), hence a discrete valuation ring
-(\Cref{lem:sc-regular-dim1-dvr}).  By the argument of
-\Cref{lem:sc-point-cartier} (the same proof works over an arbitrary
-base field: it only uses the two lemmas just cited) the closed point
-$P$ with its reduced structure is an effective Cartier divisor
-(\Cref{def:sc-effective-cartier-divisor}); write
-$D:=[P]$  and $\cL:=\cO_X(D)$
-(\Cref{def:pc-divisor-line-bundle}), so that the support of $D$ is
-$\{P\}$.
-
-The exact sequence
-\[
-0\to\cO_X\to\cO_X(D)\to\cO_X(D)\otimes\cO_P\to0
-\]
-(the first map is multiplication by the canonical section $1_D$;
-$\cO_X(D)\otimes\cO_P\cong k(P)$, the structure sheaf of the closed
-point) is exact, $\cO_X(D)\otimes\cO_P$ is the skyscraper $k(P)$,
-which is flasque, hence has no higher cohomology
-($H^i(X,k(P))=0$ for $i\ge1$), and its $H^0$ is
-$k(P)$, a $[k(P):k]$-dimensional $k$-vector space.  By the additivity
-of the Euler characteristic (\Cref{lem:pc-euler-additive}) and
-\Cref{def:pc-degree-line-bundle},
-\[
-\deg\cL=\deg[\cO_X(D)]=\chi(\cO_X(D))-\chi(\cO_X)
-=[k(P):k]\ge1 .
-\]
-Hence $\cL$ is ample (\Cref{lem:pc-ample-positive-degree}: positive
-degree is equivalent to ampleness), and by
-\Cref{lem:sc-ample-complement-affine} (the complement of an ample
-Cartier divisor is affine, \Cref{def:sc-ample} for the ampleness
-hypothesis) the open subscheme
-\[
-U_1:=X\setminus\{P\}=X\setminus D
-\]
-is affine.
-
-\emph{Step 2: the second affine open.}  By the standard fact that
-every point of a scheme has an affine open neighbourhood, choose an
-affine open $V\subseteq X$ with $P\in V$; write $V=\Spec(A)$ with
-$A:=\cO_X(V)$.  The ring $A$ is a finitely generated $k$-algebra and
-an integral domain (an affine chart of the integral scheme $X$,
-\Cref{def:pc-curve}), of Krull dimension one (a nonempty open
-subscheme of the one-dimensional $X$; \Cref{def:pc-dimension}), and
-$P$ corresponds to a maximal ideal $\mathfrak m\subset A$ (the closed
-points of $\Spec A$ are the maximal ideals).
-
-\emph{Claim: $V\setminus\{P\}$ is affine.}  We show
-$\Spec(A)\setminus\{\mathfrak m\}$ is a principal open: since
-$\dim A=1$, the ideal $\mathfrak m$ is nonzero, so choose
-$0\neq f\in\mathfrak m$.  By Krull's principal ideal theorem every
-minimal prime over $(f)$ has height $\le1$; it is nonzero because
-$(f)\neq0$ and $A$ is a domain; hence it has height exactly $1$, so it
-is maximal ($\dim A=1$).  Let
-$\mathfrak m_1,\dots,\mathfrak m_r$ be the finitely many (Noetherian
-ring) minimal primes over $(f)$; they are maximal ideals and
-$\mathfrak m\in\{\mathfrak m_1,\dots,\mathfrak m_r\}$ because
-$f\in\mathfrak m$.  If $r=1$ put $g:=f$; otherwise
-$\mathfrak m\nsubseteq\mathfrak m_1\cup\cdots\cup\mathfrak m_r$
-(a maximal ideal $\neq\mathfrak m_j$ is not contained in
-$\mathfrak m_j$, and an ideal contained in a finite union of prime
-ideals is contained in one of them: prime avoidance; this applies
-since all $\mathfrak m_j$ are prime), so there is
-$g\in\mathfrak m\setminus(\mathfrak m_1\cup\cdots\cup\mathfrak m_r)$.
-In both cases $V(g)=\{\mathfrak m\}$: a prime
-$\mathfrak p\supseteq(g)$ contains a minimal prime over $(g)$
-(Noetherianity), which has height one, hence is one of the maximal
-ideals $\mathfrak m_1,\dots,\mathfrak m_r$; among them only
-$\mathfrak m$ contains $g$ (for $r\ge2$ by the choice of $g$; for
-$r=1$ because $\mathfrak m_1=\mathfrak m$ since $f\in\mathfrak m$ with
-$V(f)=\{\mathfrak m_1\}$), so $\mathfrak p=\mathfrak m$ as
-$\mathfrak m$ is maximal.  Therefore
-\[
-V\setminus\{P\}=\Spec(A)\setminus\{\mathfrak m\}=D(g)=\Spec(A_g)
-\]
-is affine, as claimed.
-
-\emph{Step 3: the two-member cover computes.}  The open subschemes
-$U_1$ (Step 1) and $U_2:=V$ (Step 2) cover $X$: every point of $X$
-different from $P$ lies in $U_1$, and $P\in V$.  The finite
-intersections of the members are affine: $U_1$ by Step 1, $U_2$ by
-construction, and $U_1\cap U_2=V\setminus\{P\}$ by the claim of Step
-2.  By \Cref{lem:pc-cech-computes} (the Čech complex of an open
-affine covering computes sheaf cohomology of quasi-coherent modules
-whenever all finite intersections are affine),
-\[
-H^i(X,\cF)=\check H^i(\{U_1,U_2\},\cF)\qquad\text{for all }i\ge0 .
-\]
-In the alternating Čech complex of a two-member cover the $i$-th term
-is the product over the $(i+1)$-element subsets of $\{1,2\}$; there
-are none as soon as $i\ge2$:
-\[
-\check C^i(\{U_1,U_2\},\cF)=0\qquad\text{for }i\ge2 ,
-\]
-so $\check H^i(\{U_1,U_2\},\cF)=0$ for all $i\ge2$, and hence
-$H^i(X,\cF)=0$ for all $i\ge2$.
+\uses{def:pc-curve,def:pc-dimension,def:pc-morphism-conventions,lem:pc-grothendieck-vanishing}
+The curve $X$ is \hyperref[def:pc-morphism-conventions]{of finite type}
+over the field $k$ (a curve is a variety over $k$,
+\Cref{def:pc-curve}), hence is covered by finitely many affine opens
+$\Spec(A)$ with $A$ a finitely generated $k$-algebra; each such $A$ is
+Noetherian by Hilbert's basis theorem, so $X$ is a Noetherian scheme
+and its underlying topological space is a Noetherian topological
+space.  Moreover $\dim X=1$, a curve being a variety of dimension $1$
+(\Cref{def:pc-curve}, \Cref{def:pc-dimension}); for a scheme the
+supremum of the Krull dimensions of the local rings is the supremum of
+the lengths of the chains of irreducible closed subsets of the
+underlying space, so the topological space of $X$ has dimension $1$ as
+well.  Finally, a quasi-coherent $\cO_X$-module is in particular an
+abelian sheaf on $X$, and its cohomology $H^i(X,\cF)$ is the sheaf
+cohomology of that abelian sheaf.  So
+\Cref{lem:pc-grothendieck-vanishing} applies with $d=1$ and gives
+$H^i(X,\cF)=0$ for all $i>1$, that is, for all $i\ge2$.
 \end{proof}
 
 % ---------------------------------------------------------------------------
