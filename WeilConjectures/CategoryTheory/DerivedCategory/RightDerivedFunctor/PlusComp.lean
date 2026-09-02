@@ -268,6 +268,19 @@ lemma rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso :
       rightDerivedFunctorPlusIdUnit C := by
   simp [rightDerivedFunctorPlusIdIso]
 
+/-- The pointwise form of
+`Functor.rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso`: the identity
+isomorphism `Functor.rightDerivedFunctorPlusIdIso` turns the unit of `R⁺(𝟭 C)` into
+`Functor.mapHomotopyCategoryPlusIdIso`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusIdIso_fac_app (K : HomotopyCategory.Plus C) :
+    (𝟭 C).rightDerivedFunctorPlusUnit.app K ≫
+        (rightDerivedFunctorPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      DerivedCategory.Plus.Qh.map ((mapHomotopyCategoryPlusIdIso C).hom.app K) := by
+  have := congr_app (rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso C) K
+  simpa [rightDerivedFunctorPlusIdUnit,
+    -rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso] using this
+
 end Identity
 
 end Functor

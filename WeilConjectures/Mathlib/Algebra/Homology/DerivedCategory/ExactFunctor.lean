@@ -468,6 +468,19 @@ lemma mapDerivedCategoryPlusIdIso_factorsh :
     ι_map_mapDerivedCategoryPlusIdIso_hom_app, ι_map_mapDerivedCategoryPlusFactorsh_hom_app] at h ⊢
   exact h
 
+/-- The pointwise form of `Functor.mapDerivedCategoryPlusIdIso_factorsh`: on the image of a
+bounded below homotopy category object, the identity isomorphism
+`Functor.mapDerivedCategoryPlusIdIso` is the factorization
+`Functor.mapDerivedCategoryPlusFactorsh` of `𝟭 C` followed by
+`Functor.mapHomotopyCategoryPlusIdIso`. -/
+@[reassoc]
+lemma mapDerivedCategoryPlusIdIso_fac_app (K : HomotopyCategory.Plus C) :
+    (mapDerivedCategoryPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      (𝟭 C).mapDerivedCategoryPlusFactorsh.hom.app K ≫
+        DerivedCategory.Plus.Qh.map ((mapHomotopyCategoryPlusIdIso C).hom.app K) := by
+  have := congr_app (congr_arg Iso.hom (mapDerivedCategoryPlusIdIso_factorsh C)) K
+  simpa using this
+
 end Identity
 
 end CategoryTheory.Functor
