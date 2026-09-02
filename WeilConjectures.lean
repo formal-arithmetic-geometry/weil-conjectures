@@ -81,6 +81,7 @@ public import WeilConjectures.Compactification.IsomorphismNearClosure
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.ProjectiveSpace
+public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformBlowup
 public import WeilConjectures.Compactification.TwoOpen
