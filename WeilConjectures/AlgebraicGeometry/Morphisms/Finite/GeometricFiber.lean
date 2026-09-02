@@ -29,6 +29,8 @@ results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
 
 - `AlgebraicGeometry.Scheme.Hom.GeometricFiber`: the geometric points of `X` over `y`.
 - `AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsOver`: the affine description.
+- `AlgebraicGeometry.Scheme.Hom.GeometricFiber.baseChangeEquiv`: forming the geometric fibre
+  commutes with base change along a cartesian square.
 
 ## Main results
 
@@ -36,6 +38,8 @@ results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
   morphism is finite.
 - `AlgebraicGeometry.Scheme.Hom.GeometricFiber.exists_apply_default_eq`: every point of the
   fibre of a finite morphism is hit by a geometric point over `y`.
+- `AlgebraicGeometry.Scheme.Hom.GeometricFiber.finite_of_isPullback`: the geometric fibre of a
+  base change of a finite morphism is finite.
 
 -/
 
@@ -230,5 +234,84 @@ lemma GeometricFiber.exists_apply_default_eq [IsAlgClosed Ω] (x : X) (hx : f x 
   exact PrimeSpectrum.ext ht
 
 end Finite
+
+section BaseChange
+
+variable {X' Y' : Scheme.{u}} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y}
+
+namespace GeometricFiber
+
+variable {f}
+
+/-- **Forming the geometric fibre commutes with base change.** If
+
+```
+X' --g'--> X
+|f'        |f
+v          v
+Y' --g---> Y
+```
+
+is a cartesian square and `y' : Spec Ω ⟶ Y'` is a geometric point of `Y'`, then composing with
+`g'` identifies the geometric fibre of `f'` over `y'` with the geometric fibre of `f` over the
+image geometric point `y' ≫ g`. -/
+noncomputable def baseChangeEquiv (h : IsPullback g' f' f g) (y' : Spec (.of Ω) ⟶ Y') :
+    f'.GeometricFiber y' ≃ f.GeometricFiber (y' ≫ g) where
+  toFun x' := ⟨x'.1 ≫ g', by rw [Category.assoc, h.w, ← Category.assoc, x'.2]⟩
+  invFun x := ⟨h.lift x.1 y' x.2, h.lift_snd _ _ _⟩
+  left_inv x' := ext <| h.hom_ext (by rw [h.lift_fst]) (by rw [h.lift_snd, x'.2])
+  right_inv x := ext <| h.lift_fst _ _ _
+
+@[simp]
+lemma baseChangeEquiv_apply_coe (h : IsPullback g' f' f g) (y' : Spec (.of Ω) ⟶ Y')
+    (x' : f'.GeometricFiber y') : (baseChangeEquiv h y' x').1 = x'.1 ≫ g' :=
+  rfl
+
+@[simp]
+lemma baseChangeEquiv_symm_apply_coe_comp (h : IsPullback g' f' f g) (y' : Spec (.of Ω) ⟶ Y')
+    (x : f.GeometricFiber (y' ≫ g)) : ((baseChangeEquiv h y').symm x).1 ≫ g' = x.1 :=
+  h.lift_fst _ _ _
+
+@[simp]
+lemma baseChangeEquiv_symm_apply_coe_comp_snd (h : IsPullback g' f' f g)
+    (y' : Spec (.of Ω) ⟶ Y') (x : f.GeometricFiber (y' ≫ g)) :
+    ((baseChangeEquiv h y').symm x).1 ≫ f' = y' :=
+  ((baseChangeEquiv h y').symm x).2
+
+/-- **The geometric fibre of a base change of a finite morphism is finite.** -/
+lemma finite_of_isPullback [IsFinite f] (h : IsPullback g' f' f g) (y' : Spec (.of Ω) ⟶ Y') :
+    Finite (f'.GeometricFiber y') :=
+  .of_equiv _ (baseChangeEquiv h y').symm
+
+variable (f g)
+
+/-- The geometric fibre of the second projection of `Limits.pullback f g` over `y'` is the
+geometric fibre of `f` over `y' ≫ g`. This is `baseChangeEquiv` for the square given by
+`Limits.pullback f g`. -/
+noncomputable def pullbackEquiv (y' : Spec (.of Ω) ⟶ Y') :
+    (pullback.snd f g).GeometricFiber y' ≃ f.GeometricFiber (y' ≫ g) :=
+  baseChangeEquiv (IsPullback.of_hasPullback f g) y'
+
+@[simp]
+lemma pullbackEquiv_apply_coe (y' : Spec (.of Ω) ⟶ Y')
+    (x' : (pullback.snd f g).GeometricFiber y') :
+    (pullbackEquiv f g y' x').1 = x'.1 ≫ pullback.fst f g :=
+  rfl
+
+@[simp]
+lemma pullbackEquiv_symm_apply_coe_comp (y' : Spec (.of Ω) ⟶ Y')
+    (x : f.GeometricFiber (y' ≫ g)) :
+    ((pullbackEquiv f g y').symm x).1 ≫ pullback.fst f g = x.1 :=
+  baseChangeEquiv_symm_apply_coe_comp _ _ _
+
+@[simp]
+lemma pullbackEquiv_symm_apply_coe_comp_snd (y' : Spec (.of Ω) ⟶ Y')
+    (x : f.GeometricFiber (y' ≫ g)) :
+    ((pullbackEquiv f g y').symm x).1 ≫ pullback.snd f g = y' :=
+  baseChangeEquiv_symm_apply_coe_comp_snd _ _ _
+
+end GeometricFiber
+
+end BaseChange
 
 end AlgebraicGeometry.Scheme.Hom
