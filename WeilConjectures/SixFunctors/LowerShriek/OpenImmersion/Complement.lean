@@ -101,7 +101,7 @@ namespace AlgebraicGeometry
 section Disjoint
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
 variable {U W X : Scheme.{u}} (j : U ⟶ X) (k : W ⟶ X) [IsOpenImmersion j] [IsOpenImmersion k]
 
 open Etale
@@ -132,7 +132,7 @@ noncomputable def Etale.isTerminalSections_openImmersionRestriction_lowerStar
       ((MorphismProperty.Over.map ⊤ (inferInstance : @Etale _ _ k)).obj T))
 
 set_option backward.isDefEq.respectTransparency false in
-omit [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A] [IsOpenImmersion j] in
+omit [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] [IsOpenImmersion j] in
 /-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. Like
 `AlgebraicGeometry.Scheme.Etale.isEmpty_left_pullback_map` this does not use that `j` is an
 open immersion. -/

@@ -42,9 +42,9 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
 All four predicates are `Prop`-valued classes.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
-Grothendieck abelian category with small site coefficients
-(`CategoryTheory.SmallSiteCoefficients`) and `Hom`-types in the universe `u + 1`, one above
-the universe `u` of the base schemes; the latter is what supplies the sheafification used
+Grothendieck abelian category with small-site sheafification
+(`CategoryTheory.HasSmallSiteSheafify`) and `Hom`-types in the universe `u + 1`, one above
+the universe `u` of the base schemes; the class is what supplies the sheafification used
 to restrict a sheaf to a member of an étale cover, see the implementation notes. The notions
 involving finiteness require `A` to be moreover concrete, finiteness referring to the
 underlying type `CategoryTheory.ToType`. This covers sheaves of abelian groups
@@ -66,7 +66,7 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
 - Sheafification is not assumed separately here. Restricting a sheaf to a member of an
   étale cover needs it for the *localizations* of the small étale sites, and for `A` with
-  small site coefficients these are supplied by the instances
+  small-site sheafification these are supplied by the instances
   `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallGrothendieckTopology` and
   `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallEtaleTopology` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, a slice of a site
@@ -94,7 +94,7 @@ variable {X Y : Scheme.{u}}
 section PullbackFunctor
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
 
 /-- The pullback of étale sheaves along `f : X ⟶ Y` sends constant sheaves to constant
 sheaves: `constantSheaf ⋙ f^*` and `constantSheaf` are both left adjoint to global
@@ -119,7 +119,7 @@ end PullbackFunctor
 section LocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
 
 /-- The object of the small étale site of `X` given by a member of an étale cover
 of `X`. -/
@@ -181,7 +181,7 @@ end FiniteSheaf
 section FiniteLocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
@@ -219,7 +219,7 @@ section Constructible
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A]
+  [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
 
 /-- A sheaf `F` on the small étale site of `X` with values in a concrete category is
 *constructible* if there is a stratification of `X` such that the pullback of `F` to each
@@ -236,7 +236,7 @@ provided by the instance
 `IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
 étale sites of the strata; since the stratification is existentially quantified, this has
 to be available for all schemes, which is what the hypothesis
-`CategoryTheory.SmallSiteCoefficients A` provides (see the module implementation notes).
+`CategoryTheory.HasSmallSiteSheafify A` provides (see the module implementation notes).
 
 For `X` quasi-compact and quasi-separated this global definition agrees with the
 affine-local one of [Stacks 03RW]. In the `ℓ`-adic formalism it is applied with

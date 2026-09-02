@@ -33,7 +33,7 @@ open CategoryTheory Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace CategoryTheory.GrothendieckTopology
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
   [MonoidalCategory A] [BraidedCategory A]
 
 variable (P Q : MorphismProperty Scheme.{u})

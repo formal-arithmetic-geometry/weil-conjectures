@@ -26,11 +26,15 @@ Throughout the chapter we fix the following data.
 
 \begin{itemize}
 \item A coefficient category $\mathcal A$, abelian and Grothendieck abelian,
-      on which $\mathcal A$-valued presheaves on the small \'etale sites and
-      their localizations admit a left exact sheafification (in Lean the class
-      \texttt{CategoryTheory.SmallSiteCoefficients}, which holds for every
-      concrete Grothendieck abelian category such as $\mathrm{Mod}_\Lambda$,
-      see \Cref{rmk:openclosed-universes}).
+      on which $\mathcal A$-valued presheaves on every site of size $u+1$ admit
+      a left exact sheafification (in Lean the class
+      \texttt{CategoryTheory.HasSmallSiteSheafify}; the small \'etale sites and
+      their localizations are of that size).  Mathematically this holds for
+      every Grothendieck abelian $\mathcal A$ of size $u+1$; in Lean it is so
+      far available only for those concrete over $\mathrm{Type}\,(u+1)$ whose
+      forgetful functor preserves limits and filtered colimits of that size and
+      reflects isomorphisms, such as $\mathrm{Mod}_\Lambda$, see
+      \Cref{rmk:openclosed-universes}.
       For the two conservativity statements
       \Cref{lemma:openclosed-point-ulift} and
       \Cref{prop:openclosed-conservative} we ask in addition that $\mathcal A$
@@ -80,21 +84,25 @@ Schemes live in a universe $u$ and the coefficient category $\mathcal A$ is
 large relative to it: $\mathcal A$ has morphisms in $\mathrm{Type}\,(u+1)$
 and is concrete over $\mathrm{Type}\,(u+1)$, so that the forgetful functor
 reflects isomorphisms and preserves filtered colimits at that universe.  The
-same concreteness is what provides sheafification of $\mathcal A$-valued
-presheaves on the small \'etale sites (Mathlib's plus construction), that is,
-the hypothesis \texttt{CategoryTheory.SmallSiteCoefficients} carried by every
-statement involving $f^*$ or $j_!$; in Lean it is inferred for
-$\mathcal A=\mathrm{Mod}_\Lambda$, and
+same concreteness is also what makes the second hypothesis on $\mathcal A$,
+namely sheafification of $\mathcal A$-valued presheaves on the small \'etale
+sites (\texttt{CategoryTheory.HasSmallSiteSheafify}, carried by every statement
+involving $f^*$ or $j_!$), available in Lean: it implies it through Mathlib's
+plus construction.  The two are not the same hypothesis --- sheafification is
+the weaker one, and holds for every Grothendieck abelian $\mathcal A$ of size
+$u+1$.  For $\mathcal A=\mathrm{Mod}_\Lambda$ both are inferred, and
 \texttt{AlgebraicGeometry.Etale.shortExact\_openClosedShortComplex\_moduleCat}
-records that \Cref{thm:openclosed-exact} is then free of any axiom beyond the
-standard three.  The
-geometric points of $\et X$, on the other hand, have fibres in
-$\mathrm{Type}\,u$.  The two do not meet, and the standard conservativity
-statement for a family of points is stated at a single universe.
+records that \Cref{thm:openclosed-exact} then depends on no axiom besides
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}; in
+particular not on \texttt{sorryAx}.  The geometric points of $\et X$, on the
+other hand, have fibres in $\mathrm{Type}\,u$.  These two universes do not
+meet, and the standard conservativity statement for a family of points is
+stated at a single universe.
 \Cref{lemma:openclosed-point-ulift} is what repairs the mismatch; every
 stalk argument in this chapter is understood to take place after that
-repair.  The extra concreteness hypotheses on $\mathcal A$ are therefore
-carried by \Cref{prop:openclosed-lowerStar-fully-faithful},
+repair.  The concreteness hypotheses on $\mathcal A$ --- those coming from
+stalks, as opposed to the sheafification hypothesis carried throughout --- are
+therefore carried by \Cref{prop:openclosed-lowerStar-fully-faithful},
 \Cref{prop:openclosed-conservative} and \Cref{thm:openclosed-exact}.  This is
 expected rather than a defect: joint conservativity is a statement about
 stalks, and stalks are sets.

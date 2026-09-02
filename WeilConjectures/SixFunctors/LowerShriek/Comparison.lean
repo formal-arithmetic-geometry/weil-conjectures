@@ -67,7 +67,7 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
 
 open Etale
 

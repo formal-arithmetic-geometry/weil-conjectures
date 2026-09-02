@@ -8,7 +8,8 @@ module
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Instances
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
@@ -78,7 +79,7 @@ instances `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` a
 `CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallEtaleTopology`, which
 are what make `AlgebraicGeometry.Etale.upperStar` and `CategoryTheory.Sheaf.H` available on
 the small étale site at all; these come from the hypothesis
-`CategoryTheory.SmallSiteCoefficients A` on the coefficient category and are found by
+`CategoryTheory.HasSmallSiteSheafify A` on the coefficient category and are found by
 instance search.
 
 ## References
@@ -136,7 +137,7 @@ end General
 section GrothendieckAbelian
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsUniversalHomeomorphism f]
 
 /-- The pullback along a universal homeomorphism is the quasi-inverse of the pushforward, by

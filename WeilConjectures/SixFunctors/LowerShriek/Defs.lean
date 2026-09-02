@@ -43,8 +43,9 @@ without the user having to supply a compactification.
 - The continuity of the base change functor along a general `g` (in particular the proper
   structure morphism of a compactification) is proved, for `Q ≤ P`, as
   `AlgebraicGeometry.Scheme.isContinuous_overPullback`. The left Kan extensions and the
-  sheafification entering the extension by zero are provided, for `Q ≤ P`, by the sorried
-  results of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`; the
+  sheafification entering the extension by zero are provided, for `Q ≤ P`, by the results
+  of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`, the latter for `A`
+  with `CategoryTheory.HasSmallSiteSheafify`; the
   inequality `hQP : Q ≤ P` they require is an explicit argument of the definitions.
 - The hypothesis `@IsOpenImmersion ≤ P` provides `P` for the open immersion of the chosen
   compactification.
@@ -60,10 +61,12 @@ open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry
 namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
+
 /- The left Kan extensions and the sheafification entering the definitions below are
-provided by the sorried results of the folder
-`WeilConjectures.CategoryTheory.GrothendieckAbelian`, and the continuity of the base
+provided by the results of the folder
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`, the latter by the
+`CategoryTheory.HasSmallSiteSheafify` hypothesis on `A`, and the continuity of the base
 change functor by `AlgebraicGeometry.Scheme.isContinuous_overPullback`, under the
 following multiplicativity-type assumptions on `P` and `Q` and the inequality
 `hQP : Q ≤ P`; all of them hold for `P = Q = @Etale`. -/

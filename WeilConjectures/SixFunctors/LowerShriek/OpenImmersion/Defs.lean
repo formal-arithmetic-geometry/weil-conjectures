@@ -78,13 +78,14 @@ open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry
 namespace CategoryTheory
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
 
 namespace GrothendieckTopology
 
 /- The left Kan extensions on presheaves and the sheafification entering the definitions
-below are provided by the sorried results of the folder
-`WeilConjectures.CategoryTheory.GrothendieckAbelian`, and the continuity of the base
+below are provided by the results of the folder
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`, the sheafification by the
+`CategoryTheory.HasSmallSiteSheafify` hypothesis on `A`, and the continuity of the base
 change functor by `AlgebraicGeometry.Scheme.isContinuous_overPullback`, under the
 following multiplicativity-type assumptions on `P` and `Q` and the inequality
 `hQP : Q ≤ P`; all of them hold for `P = Q = @Etale`. -/
@@ -250,7 +251,7 @@ def localizationRestriction :
   (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
     (V.smallGrothendieckTopology Q (Q := P)) (U.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The sections of `j_f^* G` over `T → V` are the sections of `G` over `T → V → U`. -/
 lemma localizationRestriction_obj_val_obj
     (G : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ V) :
@@ -258,7 +259,7 @@ lemma localizationRestriction_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.map ⊤ h).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- `j_f^*` acts on morphisms by whiskering along `(MorphismProperty.Over.map ⊤ h).op`. -/
 lemma localizationRestriction_map_hom_app
     {G G' : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ V) :

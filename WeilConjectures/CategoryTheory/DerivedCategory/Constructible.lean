@@ -23,8 +23,8 @@ bounded complexes all of whose homology sheaves are constructible
 t-structure `DerivedCategory.TStructure.t`.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
-concrete Grothendieck abelian category with small site coefficients
-(`CategoryTheory.SmallSiteCoefficients`) and `Hom`-types in the universe `u + 1`, one above
+concrete Grothendieck abelian category with small-site sheafification
+(`CategoryTheory.HasSmallSiteSheafify`) and `Hom`-types in the universe `u + 1`, one above
 the universe `u` of the base schemes. Nothing beyond that is assumed:
 
 - the left Kan extensions along base change, needed by the pullback `Etale.upperStar`
@@ -64,7 +64,7 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A] [SmallSiteCoefficients A]
+  [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
 
 variable (X : Scheme.{u})
 

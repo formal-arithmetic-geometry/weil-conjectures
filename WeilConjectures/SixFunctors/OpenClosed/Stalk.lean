@@ -52,7 +52,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [SmallSiteCoefficients A]
+  [HasSmallSiteSheafify A]
 
 variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Z)
@@ -71,7 +71,7 @@ noncomputable def Etale.lowerStarCompPresheafFiberIso :
     ((Functor.whiskeringLeft _ _ A).obj (CategoryOfElements.π (pointSmallEtale s).fiber).op)
     (Functor.Final.colimIso (pointSmallEtaleElementsBaseChange i s).op)
 
-omit [SmallSiteCoefficients A] in
+omit [HasSmallSiteSheafify A] in
 /-- The comparison `AlgebraicGeometry.Etale.lowerStarCompPresheafFiberIso` on the canonical
 maps from the sections over a pointed étale neighbourhood: the section of `P` over
 `V ×_X Z` attached to a point `y` of `V` above `s ≫ i` has the same image in the fibre of
