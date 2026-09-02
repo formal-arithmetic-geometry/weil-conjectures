@@ -97,6 +97,7 @@ public import WeilConjectures.Compactification.CommonModification
 public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.Dense
 public import WeilConjectures.Compactification.EliminationOfIndeterminacy
 public import WeilConjectures.Compactification.FinitePresentation
 public import WeilConjectures.Compactification.FiniteTypeDirected
