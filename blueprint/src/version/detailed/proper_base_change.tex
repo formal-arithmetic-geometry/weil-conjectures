@@ -1167,6 +1167,10 @@ integer $n$ give the asserted single factorization.
 \begin{lemma}[Projective embedding over $X$]
 \label{lemma:weil-pbc-chow-embedding-over-x}
 \uses{}
+\lean{AlgebraicGeometry.ChowModification.toProjectiveSpaceOver,
+  AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpaceOver,
+  AlgebraicGeometry.ProjectiveSpace.isPullback_map}
+\leanok
 
 Let $\iota_Y:X'\hookrightarrow\mathbf P^n_Y$ be the closed immersion and
 $\pi:X'\to X$ the Chow modification.  Then
@@ -1178,6 +1182,7 @@ is a closed immersion over $X$.
 \end{lemma}
 \begin{proof}
 \uses{lemma:weil-pbc-chow-factorization}
+\leanok
 
 The product map is an immersion because $\iota_Y$ is an immersion and
 immersions are preserved by base change and composition with a graph.  The
@@ -1188,6 +1193,11 @@ properness makes its image closed after every base change, and an immersion
 identifies the source with a locally closed subscheme of that image; universal
 closedness forces the locally closed subset to be closed.  The equality with
 $\mathbf P^n_X$ is the defining fibre-product identity.
+
+The formalisation (for a noetherian base, as in \Cref{cor:chow-lemma-proper}) argues more
+directly: $\iota_X$ composed with the base change $\mathbf P^n_X\to\mathbf P^n_Y$ of $f$ is
+the closed immersion $\iota_Y$, and that base change is separated since $f$ is, so $\iota_X$
+is a closed immersion by cancellation.
 \end{proof}
 
 \begin{lemma}[Symmetric product map]
