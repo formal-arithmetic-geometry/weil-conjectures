@@ -26,6 +26,8 @@ We also record that a global section whose non-vanishing locus is everything is 
   `f : Γ(X, U)`, then `f` is a unit. This is the converse of `Scheme.basicOpen_of_isUnit`.
 * `AlgebraicGeometry.Scheme.Hom.range_appLE_subset_of_comp_eq`: sections in the image of
   `appLE` of a composition are in the image of `appLE` of its first factor.
+* `AlgebraicGeometry.Spec.map_default_asIdeal`: the image of the unique point of `Spec Ω`, for
+  `Ω` a field, under `Spec` of a ring homomorphism `t` is the prime `ker t`.
 -/
 
 @[expose] public section
@@ -89,3 +91,14 @@ lemma Hom.range_appLE_subset_of_comp_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
   exact ⟨g.appLE U V e₁ x, by rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]⟩
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry
+
+/-- The image of the unique point of `Spec Ω`, for `Ω` a field, under `Spec` of a ring
+homomorphism `t : S →+* Ω` is the prime `ker t`. -/
+@[simp]
+lemma Spec.map_default_asIdeal {S Ω : Type u} [CommRing S] [Field Ω] (t : S →+* Ω) :
+    (Spec.map (CommRingCat.ofHom t) default).asIdeal = RingHom.ker t := by
+  simp [Spec.map_apply, Scheme.default_asIdeal, RingHom.ker_eq_comap_bot]
+
+end AlgebraicGeometry

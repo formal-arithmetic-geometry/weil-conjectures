@@ -32,6 +32,13 @@ finitely many basic opens, each of which lands in an affine open of `S`.
 We also record that, for a morphism `f : X ⟶ Y`, the affine opens of `X` contained in the
 preimage of an affine open of `Y` form a basis of the topology of `X`
 (`AlgebraicGeometry.isBasis_affineOpens_le_preimage`).
+
+Finally, a point `y : Spec Ω ⟶ Y` with values in a field `Ω` landing in an open `Y₀` is the
+same as a ring map `Γ(Y, Y₀) →+* Ω`:
+
+- `AlgebraicGeometry.Scheme.Hom.affinePoint` — the ring map;
+- `AlgebraicGeometry.Scheme.Hom.SpecMap_affinePoint_fromSpec` — for `Y₀` affine, `Spec` of the
+  ring map followed by `Y₀ ⟶ Y` recovers `y`.
 -/
 
 @[expose] public section
@@ -228,3 +235,42 @@ lemma exists_finite_basicOpen_cover [IsAffine X] {U : X.Opens}
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨a, ha⟩, hxa⟩
 
 end AlgebraicGeometry
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] (y : Spec (.of Ω) ⟶ Y) {Y₀ : Y.Opens}
+  (hy : y default ∈ Y₀)
+
+include hy in
+/-- A point `y : Spec Ω ⟶ Y` with values in a field factors through any open containing its
+image. -/
+lemma top_le_preimage_of_default_mem : (⊤ : (Spec (.of Ω)).Opens) ≤ y ⁻¹ᵁ Y₀ := by
+  rintro x -
+  rw [Subsingleton.elim x default]
+  exact hy
+
+/-- The point of `Γ(Y, Y₀)` with values in `Ω` given by a point `y : Spec Ω ⟶ Y`, for `Ω` a
+field, lying in the open `Y₀`: the sections of `Y` over `Y₀` pulled back to the global sections
+`Ω` of `Spec Ω`. -/
+noncomputable def affinePoint : Γ(Y, Y₀) →+* Ω :=
+  (y.appLE Y₀ ⊤ (top_le_preimage_of_default_mem y hy) ≫ (Scheme.ΓSpecIso (.of Ω)).hom).hom
+
+/-- **The point `y` factors through an affine chart `Y₀` it lands in.**
+
+```
+    Spec Ω --Spec.map (affinePoint y hy)--> Spec Γ(Y, Y₀)
+        \                                         |
+          \                                 hY₀.fromSpec
+            y                                     |
+              \                                   v
+                --------------------------------> Y
+```
+-/
+lemma SpecMap_affinePoint_fromSpec (hY₀ : IsAffineOpen Y₀) :
+    Spec.map (CommRingCat.ofHom (affinePoint y hy)) ≫ hY₀.fromSpec = y := by
+  rw [affinePoint, CommRingCat.ofHom_hom, Spec.map_comp, Category.assoc,
+    IsAffineOpen.SpecMap_appLE_fromSpec y hY₀ (isAffineOpen_top _), IsAffineOpen.fromSpec_top,
+    Scheme.isoSpec_Spec_inv, ← Spec.map_comp_assoc, Iso.inv_hom_id, Spec.map_id,
+    Category.id_comp]
+
+end AlgebraicGeometry.Scheme.Hom

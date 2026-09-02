@@ -27,6 +27,9 @@ form of the base change lemma that applies over a terminal base.
   to `S` is the base change to `S` of the fibre product over `T`.
 * `CategoryTheory.IsPullback.baseChange_prod`: the same statement over a terminal base `T`, where
   the legs of the cospans carry no information.
+* `CategoryTheory.IsPullback.subtypeCompEquiv`: the universal property of a cartesian square
+  phrased as a bijection between the morphisms into one leg lifting a fixed morphism to the
+  cospan and the morphisms into the corner lifting a fixed morphism to the other leg.
 
 # Morphisms of pullbacks induced by a morphism of one leg
 
@@ -109,6 +112,33 @@ theorem baseChange_prod {T' : C} (hT : IsTerminal T) (hT' : IsTerminal T')
   (baseChange_pullback hX hY hW hP).of_isTerminal hT hT'
 
 end BaseChange
+
+section HomSubtype
+
+variable {P A B S T : C} {fst : P ⟶ A} {snd : P ⟶ B} {g : A ⟶ S} {f : B ⟶ S}
+
+/-- **The universal property of a cartesian square as a bijection of hom-subtypes.** If
+
+```
+    P --fst--> A
+    |          |
+   snd         g
+    |          |
+    v          v
+    B ---f---> S
+```
+
+is cartesian, then for a fixed `a : T ⟶ A` the morphisms `b : T ⟶ B` with `b ≫ f = a ≫ g` are
+the morphisms `u : T ⟶ P` with `u ≫ fst = a`, via `u ↦ u ≫ snd`. -/
+@[simps]
+noncomputable def subtypeCompEquiv (h : IsPullback fst snd g f) (a : T ⟶ A) :
+    {b : T ⟶ B // b ≫ f = a ≫ g} ≃ {u : T ⟶ P // u ≫ fst = a} where
+  toFun b := ⟨h.lift a b.1 b.2.symm, h.lift_fst ..⟩
+  invFun u := ⟨u.1 ≫ snd, by rw [Category.assoc, ← h.w, ← Category.assoc, u.2]⟩
+  left_inv b := Subtype.ext (h.lift_snd ..)
+  right_inv u := Subtype.ext <| h.hom_ext (by rw [h.lift_fst, u.2]) (h.lift_snd ..)
+
+end HomSubtype
 
 end CategoryTheory.IsPullback
 

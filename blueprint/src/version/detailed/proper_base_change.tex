@@ -942,6 +942,27 @@ This proves PBC for every torsion sheaf and closes the converse implication.
 
 \subsubsection{S1. Finite morphisms}
 
+\begin{lemma}[Finiteness of the geometric fibre of a finite morphism]
+\label{lemma:weil-pbc-finite-geometric-fibre}
+\uses{}
+\lean{AlgebraicGeometry.Scheme.Hom.GeometricFiber.finite}
+\leanok
+Let $h:W\to V$ be finite and let $\bar v:\operatorname{Spec}\Omega\to V$ be a geometric point.
+The geometric fibre of $h$ over $\bar v$, that is the set of $\bar w:\operatorname{Spec}\Omega\to
+W$ with $h\circ\bar w=\bar v$, is finite.
+\end{lemma}
+\begin{proof}
+\uses{}
+\leanok
+Choose an affine open $V_0\subseteq V$ containing the image of $\bar v$ and put
+$W_0=h^{-1}(V_0)$.  The square with corners $\operatorname{Spec}\Gamma(W,W_0)$,
+$\operatorname{Spec}\Gamma(V,V_0)$, $W$ and $V$ is cartesian, so by full faithfulness of
+$\operatorname{Spec}$ the geometric points of $W$ over $\bar v$ are the ring homomorphisms
+$\Gamma(W,W_0)\to\Omega$ extending the point $\Gamma(V,V_0)\to\Omega$ given by $\bar v$.  Since
+$h$ is finite, $\Gamma(W,W_0)$ is a finite $\Gamma(V,V_0)$-module, and a finite module over a
+ring admits only finitely many such points.
+\end{proof}
+
 \begin{lemma}[Geometric stalk formula for finite direct image]
 \label{lemma:weil-pbc-finite-stalk-formula}
 \uses{def:weil-pbc-cartesian-square}
@@ -956,7 +977,7 @@ $W$ above $\bar v$ up to the natural equivalence.  For an abelian sheaf the
 same object is canonically the finite direct sum.
 \end{lemma}
 \begin{proof}
-\uses{} 
+\uses{lemma:weil-pbc-finite-geometric-fibre}
 The strict henselian local scheme $V_{(\bar v)}$ has the property that a
 finite $V$-scheme becomes a finite disjoint union of finite local schemes
 after base change to $V_{(\bar v)}$.  Sections of $F$ over that disjoint union
