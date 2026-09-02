@@ -968,6 +968,41 @@ it is not silently identified with an unavailable Mathlib primitive.
   change, so the first projection $\mathbf P(n;S)\to S$ is proper.
 \end{proof}
 
+\begin{lemma}[Projective space commutes with base change]
+  \label{lemma:nagata-projective-space-base-change-pullback}
+  \uses{def:nagata-projective-space-base-change}
+  \lean{AlgebraicGeometry.ProjectiveSpace.isPullback_map}
+  \leanok
+
+  For every index set $n$ and every morphism of schemes $g\colon X\to S$, the
+  square
+  \[
+    \begin{array}{ccc}
+      \mathbf P(n;X) & \longrightarrow & \mathbf P(n;S)\\
+      \downarrow & & \downarrow\\
+      X & \xrightarrow{\ g\ } & S
+    \end{array}
+  \]
+  is cartesian, that is, $\mathbf P(n;X)\cong X\times_S\mathbf P(n;S)$ over
+  $X$.
+\end{lemma}
+
+\begin{proof}
+  \leanok
+  By \Cref{def:nagata-projective-space-base-change} the square
+  \[
+    \begin{array}{ccc}
+      \mathbf P(n;S) & \longrightarrow & \mathbf P^n_{\mathbf Z}\\
+      \downarrow & & \downarrow\\
+      S & \longrightarrow & \ast
+    \end{array}
+  \]
+  is cartesian, and likewise for $X$ in place of $S$.  The latter is the
+  rectangle obtained by pasting the square of the statement onto the former,
+  so by the pasting lemma for cartesian squares the square of the statement is
+  cartesian.
+\end{proof}
+
 \begin{definition}[Projective morphism]
   \label{def:nagata-projective-morphism}
   \uses{def:nagata-relative-projective-space}
