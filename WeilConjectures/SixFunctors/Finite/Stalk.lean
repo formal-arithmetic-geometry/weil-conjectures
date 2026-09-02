@@ -36,6 +36,15 @@ stalk `G_t`, the pieces being cofinal among the pointed étale neighbourhoods of
   `(f)_*[A] ⋙ (pointSmallEtale y).sheafFiber ≅ ∏ᶜ fun t ↦ (pointSmallEtale t.1).sheafFiber`,
   whose components are the `stalkRestrict`.
 
+## Main results
+
+- `AlgebraicGeometry.Etale.stalkRestrict_eq_counit` and its indexed form
+  `AlgebraicGeometry.Etale.stalkRestrict_eq_counit'`: the map `stalkRestrict` is the stalk of
+  the counit `f^* f_* G ⟶ G`, read through the identification
+  `AlgebraicGeometry.Etale.upperStarCompSheafFiberIso` of the stalk of `f^* f_* G` at a
+  geometric point `t` of `X` with the stalk of `f_* G` at its image. Neither statement is
+  about finite morphisms.
+
 -/
 
 @[expose] public section
@@ -140,6 +149,75 @@ lemma Etale.stalkRestrict_naturality {G G' : Sheaf X.smallEtaleTopology A} (φ :
     GrothendieckTopology.Point.toPresheafFiber_naturality_assoc,
     Etale.toPresheafFiber_stalkRestrict A f y t G' ⟨U, u⟩]
   rfl
+
+omit [IsFinite f] in
+/-- **The stalk restriction is the counit of `f^* ⊣ f_*` on stalks.** For a geometric point
+`s` of `X`, the canonical map `(f_* G)_{s ≫ f} ⟶ G_s` of
+`AlgebraicGeometry.Etale.stalkRestrict` is the stalk at `s` of the counit
+`f^* f_* G ⟶ G`, read through the identification
+`AlgebraicGeometry.Etale.upperStarCompSheafFiberIso` of `(f^* f_* G)_s` with
+`(f_* G)_{s ≫ f}`.
+
+This bridges the concrete description of the stalk of a direct image, as a colimit along
+base change of pointed étale neighbourhoods, with the adjunction-theoretic description that
+the base change map `AlgebraicGeometry.Etale.baseChangeMap` is built from. -/
+lemma Etale.stalkRestrict_eq_counit (s : Spec (.of Ω) ⟶ X)
+    (G : Sheaf X.smallEtaleTopology A) :
+    Etale.stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G =
+      (Etale.upperStarCompSheafFiberIso A f s).inv.app ((f)_*[A].obj G) ≫
+        (pointSmallEtale s).sheafFiber.map
+          ((Etale.upperStarLowerStarAdjunction A f).counit.app G) := by
+  -- both sides are maps out of the filtered colimit defining `(f_* G)_{s ≫ f}`
+  apply (pointSmallEtale (s ≫ f)).presheafFiber_hom_ext
+  intro V u
+  change (pointSmallEtale (s ≫ f)).toPresheafFiber V u ((f)_*[A].obj G).obj ≫
+      Etale.stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G =
+    (pointSmallEtale (s ≫ f)).toPresheafFiber V u ((f)_*[A].obj G).obj ≫
+      (Etale.upperStarCompSheafFiberIso A f s).inv.app ((f)_*[A].obj G) ≫
+        (pointSmallEtale s).sheafFiber.map
+          ((Etale.upperStarLowerStarAdjunction A f).counit.app G)
+  -- on the germ of a section over `(V, u)` the left hand side is the germ at `(V ×_Y X, (u, s))`
+  rw [Etale.toPresheafFiber_stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G ⟨V, u⟩]
+  -- the right hand side is the three steps of `upperStarCompSheafFiberIso`, in reverse
+  simp only [Etale.upperStarCompSheafFiberIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerRight_inv, Functor.whiskerRight_app, Category.assoc, ← Functor.map_comp]
+  -- the comparison of the constructed pullback with the abstract one absorbs into the counit
+  have hc : (Functor.sheafPullbackConstruction.sheafPullbackIso
+        (MorphismProperty.Over.pullback @Etale ⊤ f) A
+        (Y.smallGrothendieckTopology (P := @Etale))
+        (X.smallGrothendieckTopology (P := @Etale))).hom.app ((f)_*[A].obj G) ≫
+      (Etale.upperStarLowerStarAdjunction A f).counit.app G =
+      (Functor.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ f) A
+        (Y.smallGrothendieckTopology (P := @Etale))
+        (X.smallGrothendieckTopology (P := @Etale))).counit.app G :=
+    Adjunction.leftAdjointUniq_hom_app_counit _ _ G
+  rw [hc, GrothendieckTopology.Point.toPresheafFiber_sheafFiberIso_inv_app_assoc]
+  -- what is left is the germ description of `sheafFiberComapIso`, at the transported point
+  refine Eq.trans (congrArg
+    (fun w ↦ (pointSmallEtale s).toPresheafFiber (f.Etale.obj V) w G.obj) ?_)
+    (GrothendieckTopology.Point.toPresheafFiber_sheafFiberComapIso_hom_app_counit
+      (pointSmallEtale s) f.Etale (Hom.coverPreserving_etale f) A G V _).symm
+  -- the transported point is `(u, s)`, since its two components are `u` and `s`
+  refine CategoryTheory.Over.OverMorphism.ext (Limits.pullback.hom_ext ?_ ?_)
+  · exact (basePt_fst f ⟨V, u⟩ ⟨s, rfl⟩).trans
+      (pointSmallEtaleFiberEtaleIso_inv_app_left_fst f s V u).symm
+  · exact (basePt_snd f ⟨V, u⟩ ⟨s, rfl⟩).trans
+      (pointSmallEtaleFiberEtaleIso_inv_app_left_snd f s V u).symm
+
+omit [IsFinite f] in
+/-- **The stalk restriction is the counit of `f^* ⊣ f_*` on stalks**, in the form indexed by
+a geometric point `t` of `X` in the geometric fibre of `f` over `y`. This is
+`AlgebraicGeometry.Etale.stalkRestrict_eq_counit` with `y` in place of `t.1 ≫ f`, the two
+stalks being identified along `t.2 : t.1 ≫ f = y`. -/
+lemma Etale.stalkRestrict_eq_counit' (G : Sheaf X.smallEtaleTopology A) :
+    Etale.stalkRestrict A f y t G =
+      eqToHom (by rw [t.2]) ≫
+        (Etale.upperStarCompSheafFiberIso A f t.1).inv.app ((f)_*[A].obj G) ≫
+          (pointSmallEtale t.1).sheafFiber.map
+            ((Etale.upperStarLowerStarAdjunction A f).counit.app G) := by
+  obtain ⟨t, rfl⟩ := t
+  rw [eqToHom_refl, Category.id_comp]
+  exact Etale.stalkRestrict_eq_counit A f t G
 
 end StalkRestrict
 

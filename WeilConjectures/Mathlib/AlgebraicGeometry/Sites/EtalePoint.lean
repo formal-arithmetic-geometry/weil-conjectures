@@ -6,12 +6,12 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.CategoryTheory.Sites.Point.Comap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Category
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Conservative
 
 /-!
