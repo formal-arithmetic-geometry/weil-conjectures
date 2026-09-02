@@ -276,6 +276,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePointAlgClosure
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
@@ -375,6 +376,7 @@ public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs
