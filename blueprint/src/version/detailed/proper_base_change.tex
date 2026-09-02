@@ -6953,6 +6953,35 @@ dense refinement $E$, set
 Schematic-density uniqueness, common refinement, and the equations for
 $\rho$ must prove independence of $E$ and the $\kappa$ cocycle.
 
+\formalizationnote{The comparison map of \textup{(BA43-RHO)} is now constructed in Lean, in the
+bounded below variant, as
+\texttt{AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison}
+(\texttt{WeilConjectures/SixFunctors/Derived/LowerShriekComparison.lean}), for a refinement
+whose square over the source open is Cartesian.  It is only \emph{defined}: it is not known to
+be an isomorphism.  That is exactly what \texttt{OBL-BA43-REFINEMENT-EXCHANGE} demands, it needs
+proper base change, and it remains open.
+
+\smallskip
+\noindent\textbf{The formalized arrow points the other way.}  It goes from the coarser model to
+the finer one, $Rp_{C*}Rj_{C!}\to R(p_Cq)_*Rj_{D!}$ in the lettering above, that is
+$F_C\to F_D$, the reverse of the $\rho_q$ displayed here.  (In Lean a refinement is written
+\texttt{r : c.Refinement d} with \texttt{c} the finer model, so the declaration reads
+$Rf_!(d)\to Rf_!(c)$, coarse to fine.)  This is deliberate.  Neither direction is formal: the
+available adjunctions produce a \emph{cospan}, both of whose legs point into
+$Rp_{C*}Rq_*Dq^*Rj_{C!}$, so an arrow between $F_C$ and $F_D$ exists only once one leg is
+inverted.  Inverting the leg that yields the direction displayed above is precisely proper base
+change; inverting the other leg, the base change isomorphism
+$Rj_{D!}\xrightarrow{\sim}Dq^*Rj_{C!}$ coming from $q^{-1}(X)=X$, is what the Cartesian
+hypothesis supplies, and it yields the opposite arrow.  So the direction constructible without
+proper base change is the reverse of the blueprint's.  The two maps are mutually inverse as soon
+as both legs are isomorphisms, so the reversal changes no mathematical content.
+
+\smallskip
+\noindent The declaration is the bounded below (\texttt{Plus}) comparison only.  No unbounded
+variant is formalized: there is no unbounded $Dq^*\dashv Rq_*$ adjunction in this repository, and
+the unbounded composition isomorphism for $Rp_*$ rests on the still \texttt{sorry}ed
+\texttt{HasKInjectiveResolutions}.}
+
 For $X\xrightarrow fY\xrightarrow gZ$, a successive witness includes a
 Cartesian square
 \[
