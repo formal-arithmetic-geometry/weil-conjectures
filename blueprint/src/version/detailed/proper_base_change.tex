@@ -942,40 +942,84 @@ This proves PBC for every torsion sheaf and closes the converse implication.
 
 \subsubsection{S1. Finite morphisms}
 
+\begin{definition}[Geometric fibre of a finite morphism]
+\label{def:weil-pbc-geometric-fibre}
+\lean{AlgebraicGeometry.Scheme.Hom.GeometricFiber}
+\leanok
+Let $h:W\to V$ be a morphism and let $\bar v:\operatorname{Spec}\Omega\to V$ be a
+geometric point with $\Omega$ algebraically closed.  The \emph{geometric fibre} of $h$
+over $\bar v$ is the set of morphisms $\bar w:\operatorname{Spec}\Omega\to W$ with
+$h\circ\bar w=\bar v$; equivalently, the set of $\Omega$-points of the scheme-theoretic
+fibre $W\times_V\operatorname{Spec}\Omega$.  It is finite when $h$ is finite.
+\end{definition}
+
 \begin{lemma}[Geometric stalk formula for finite direct image]
 \label{lemma:weil-pbc-finite-stalk-formula}
-\uses{def:weil-pbc-cartesian-square}
-Let $h:W\to V$ be finite and $\bar v\to V$ geometric.  For every sheaf $F$
-on $W_{\mathrm{et}}$ there is a canonical bijection
+\uses{def:weil-pbc-cartesian-square,def:weil-pbc-geometric-fibre}
+\lean{AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi,
+  AlgebraicGeometry.Etale.stalkRestrict}
+\leanok
+Let $h:W\to V$ be finite and let $\bar v:\operatorname{Spec}\Omega\to V$ be a geometric
+point with $\Omega$ algebraically closed.  For every sheaf $F$ on $W_{\mathrm{et}}$ there
+is a canonical bijection
 \[
  (h_*F)_{\bar v}\;\cong\;
  \prod_{\bar w\,|\,\bar v}F_{\bar w},
 \]
-where the product is finite and the index runs over geometric points of
-$W$ above $\bar v$ up to the natural equivalence.  For an abelian sheaf the
-same object is canonically the finite direct sum.
+where the index runs over the finite geometric fibre of $h$ over $\bar v$ and the
+$\bar w$-th component is restriction of stalks.
 \end{lemma}
 \begin{proof}
-\uses{} 
+\uses{lemma:weil-pbc-geometric-stalk-conservative}
+\leanok
+
+The formalisation avoids the strict henselisation: it works with the category of
+\emph{split neighbourhoods} of $\bar v$ (pointed etale neighbourhoods $(U,\bar u)$ together
+with a decomposition of $W\times_VU$ into pairwise disjoint clopen pieces indexed by the
+geometric points $\bar w$ over $\bar v$, the $\bar w$-th piece containing $(\bar u,\bar w)$), shows
+that these are cofinal among all pointed etale neighbourhoods (Stacks 00UJ applied to an affine
+chart), that the $\bar w$-th pieces are cofinal among the pointed etale neighbourhoods of
+$\bar w$ (an etale-local section lemma for finite algebras with a unique point), and that a
+sheaf sends the disjoint clopen cover into a product; finite products commute with the
+filtered colimit since the coefficients satisfy AB5.  The restriction to geometric points
+with algebraically closed residue field suffices for all uses, since these already form a
+conservative family (Lemma~\ref{lemma:weil-pbc-geometric-stalk-conservative}).
+\end{proof}
+
+\begin{remark}[The classical argument, which is not the one formalised]
+\label{rem:weil-pbc-finite-stalk-formula-strict-henselian}
 The strict henselian local scheme $V_{(\bar v)}$ has the property that a
 finite $V$-scheme becomes a finite disjoint union of finite local schemes
 after base change to $V_{(\bar v)}$.  Sections of $F$ over that disjoint union
 are products of the sections over the components.  Passing through the
 cofiltered system of etale neighbourhoods of $\bar v$ identifies the stalk
 with the displayed product.  Finiteness of the fibre makes product and sum
-equal in the abelian category.  This is the stalk calculation located at
-Stacks Proposition 59.55.2, Tag \texttt{03QP}; no exactness is inferred until
-the next lemma.
-\end{proof}
+equal in the abelian category, so for an abelian sheaf the stalk of $h_*F$ is
+canonically the finite direct sum of the stalks of $F$ as well.  This is the stalk
+calculation located at Stacks Proposition 59.55.2, Tag \texttt{03QP}; no exactness is
+inferred until the next lemma.
+\end{remark}
 
 \begin{lemma}[Exactness of finite direct image]
 \label{lemma:weil-pbc-finite-direct-image-exact}
-\uses{}
+\lean{AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite,
+  AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory}
+\leanok
+\statusnote{\texttt{\#print axioms} on the two declarations above reports
+\texttt{sorryAx}.  The Lean proofs of this statement are themselves complete; the
+dependence is inherited from the foundational gaps of the sheaf theory it is stated in,
+namely the \texttt{sorry}s in
+\texttt{WeilConjectures/CategoryTheory/GrothendieckAbelian/HasSheafify.lean} and
+\texttt{.../GrothendieckAbelian/Sheaf.lean}, which are what construct the abelian
+structure on the category of etale sheaves used here.  Those gaps are closed by the
+\texttt{SmallSiteCoefficients} work of issue 517.  The attribution is by inspection of the
+import graph, not by a mechanical reverse-dependency walk.}
 
 If $h$ is finite, then $h_*$ on etale abelian sheaves is exact.
 \end{lemma}
 \begin{proof}
-\uses{lemma:weil-pbc-finite-stalk-formula}
+\uses{lemma:weil-pbc-finite-stalk-formula,lemma:weil-pbc-geometric-stalk-conservative}
+\leanok
 
 For a short exact sequence $0\to F_1\to F_2\to F_3\to0$, apply the stalk
 formula at every geometric $\bar v$.  A finite product of short exact
@@ -983,7 +1027,9 @@ sequences of abelian groups is exact, so the sequence of stalks of the direct
 images is exact.  Geometric stalks are conservative for etale sheaves:
 injectivity and surjectivity can be checked after an etale neighbourhood of
 each geometric point and then sheafified.  Hence the direct-image sequence is
-exact.  Consequently $R^qh_*=0$ for $q>0$.
+exact.  Consequently the total right derived functor $Rh_*$ is $h_*$ applied levelwise to
+complexes, and in particular $R^qh_*=0$ for $q>0$; only the first of these two consequences
+is formalised.
 \end{proof}
 
 \begin{lemma}[Finite exchange isomorphism]

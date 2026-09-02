@@ -9,13 +9,25 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 
 /-!
-# Exactness hypotheses for a pair of functors which jointly reflects isomorphisms
+# Zero morphisms and epimorphisms detected by a family which jointly reflects isomorphisms
 
-`CategoryTheory.JointlyReflectIsomorphisms.isZero_iff`, `.exact_iff` and `.shortExact_iff`
-ask for the target categories `D i` to be abelian and for the functors `F i` to be exact.
-This file discharges those hypotheses for the two-element family
+A family of left exact functors between abelian categories which jointly reflects
+isomorphisms detects the morphisms that are zero, and the epimorphisms: this file proves
+these two criteria, next to the criteria of
+`Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean` for exactness and short exactness.
+
+Those criteria, `CategoryTheory.JointlyReflectIsomorphisms.isZero_iff`, `.exact_iff` and
+`.shortExact_iff`, ask for the target categories `D i` to be abelian and for the functors
+`F i` to be exact. This file also discharges those hypotheses for the two-element family
 `CategoryTheory.pairFunctor` of a pair of exact functors between abelian categories, so that
 the three criteria apply to a pair of functors out of the box.
+
+## Main results
+
+- `CategoryTheory.JointlyReflectIsomorphisms.eq_zero_of_map_eq_zero`: a morphism sent to
+  zero by every member of the family is zero.
+- `CategoryTheory.JointlyReflectIsomorphisms.epi_of_epi_map`: a morphism sent to an
+  epimorphism by every member of the family is an epimorphism.
 
 -/
 
@@ -26,6 +38,59 @@ universe v₁ v u₁ u
 namespace CategoryTheory
 
 open Limits
+
+section
+
+variable {C : Type u} [Category.{v} C] [Abelian C] {I : Type*} {D : I → Type*}
+  [∀ i, Category (D i)] [∀ i, Abelian (D i)] {F : ∀ i, C ⥤ D i}
+  [∀ i, PreservesFiniteLimits (F i)]
+
+namespace JointlyReflectIsomorphisms
+
+/-- **A family of left exact functors which jointly reflects isomorphisms detects the zero
+morphisms.** Indeed, the kernel inclusion of a morphism `φ` killed by every `F i` becomes
+invertible under every `F i`, by the comparison square
+```
+     (F i).obj (kernel φ) --(F i).map (kernel.ι φ)--> (F i).obj X
+              |                                            ‖
+    kernelComparison φ (F i)                               ‖
+              ↓                                            ‖
+     kernel ((F i).map φ) ---------kernel.ι-----------> (F i).obj X
+```
+whose left vertical map is invertible since `F i` is left exact; so `kernel.ι φ` is
+invertible and `φ = 0`. -/
+lemma eq_zero_of_map_eq_zero (hP : JointlyReflectIsomorphisms F) {X Y : C} (φ : X ⟶ Y)
+    (h : ∀ i, (F i).map φ = 0) : φ = 0 := by
+  have : IsIso (kernel.ι φ) := by
+    have (i : I) : IsIso ((F i).map (kernel.ι φ)) := by
+      rw [← kernelComparison_comp_ι φ (F i)]
+      have : IsIso (kernel.ι ((F i).map φ)) := kernel.ι_of_zero (h i)
+      infer_instance
+    exact hP.isIso (kernel.ι φ)
+  rw [← cancel_epi (kernel.ι φ), kernel.condition, comp_zero]
+
+/-- **A family of left exact functors which jointly reflects isomorphisms detects the
+epimorphisms.** Indeed, the cokernel projection of a morphism `φ` sent to an epimorphism by
+every `F i` is killed by every `F i`, by the comparison square
+```
+     (F i).obj Y ----(F i).map (cokernel.π φ)---> (F i).obj (cokernel φ)
+          ‖                                                ↑
+          ‖                                   cokernelComparison φ (F i)
+          ‖                                                |
+     (F i).obj Y --------cokernel.π-----------> cokernel ((F i).map φ)
+```
+whose bottom map is zero; so `cokernel.π φ = 0` by
+`CategoryTheory.JointlyReflectIsomorphisms.eq_zero_of_map_eq_zero` and `φ` is an
+epimorphism. -/
+lemma epi_of_epi_map (hP : JointlyReflectIsomorphisms F) {X Y : C} (φ : X ⟶ Y)
+    (h : ∀ i, Epi ((F i).map φ)) : Epi φ := by
+  refine Abelian.epi_of_cokernel_π_eq_zero φ (hP.eq_zero_of_map_eq_zero _ fun i ↦ ?_)
+  have := h i
+  rw [← π_comp_cokernelComparison φ (F i), cokernel.π_of_epi, zero_comp]
+
+end JointlyReflectIsomorphisms
+
+end
 
 variable {C : Type u} [Category.{v} C] {D₁ D₂ : Type u₁} [Category.{v₁} D₁] [Category.{v₁} D₂]
 

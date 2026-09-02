@@ -288,6 +288,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FinallySmall
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
@@ -366,6 +367,7 @@ public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.LowerShriek.Defs

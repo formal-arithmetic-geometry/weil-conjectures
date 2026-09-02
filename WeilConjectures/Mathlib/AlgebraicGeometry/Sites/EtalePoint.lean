@@ -25,7 +25,10 @@ categories used in the six functor formalism have `Hom`-types in `Type (u + 1)` 
 concrete over `Type (u + 1)` (this is the case of `ModuleCat.{u + 1} Λ`), so the geometric
 points have to be moved up one universe first. This file does that: the family
 `AlgebraicGeometry.Scheme.uliftPointSmallEtale` of geometric points at `Type (u + 1)` is
-conservative, and hence jointly reflects isomorphisms of `A`-valued étale sheaves.
+conservative, and hence jointly reflects isomorphisms of `A`-valued étale sheaves. Its
+members are the points `AlgebraicGeometry.Scheme.algClosurePoint s` given by the *algebraic*
+closures of the residue fields, so that the results which ask for an algebraically closed
+residue field apply to them.
 
 This file also identifies the geometric points of the small étale site under base change.
 Let `f : X ⟶ Y` be a morphism of schemes and let `s : Spec Ω ⟶ X` be a geometric point of
@@ -54,6 +57,10 @@ of an open of `V`.
 
 ## Main definitions
 
+- `AlgebraicGeometry.Scheme.algClosurePoint`: the geometric point of `S` at `s` given by the
+  algebraic closure of the residue field of `s`.
+- `AlgebraicGeometry.Scheme.uliftPointSmallEtale`: the geometric point of the small étale
+  site of `S` at `s`, with its fibre functor taking values in `Type (u + 1)`.
 - `AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso`: the fibre functor of the
   geometric point `s` of `X`, composed with base change along `f`, is the fibre functor of
   the geometric point `s ≫ f` of `Y`.
@@ -67,7 +74,9 @@ of an open of `V`.
 ## Main results
 
 - `AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale`: the
-  universe-lifted geometric points of `S` form a conservative family.
+  universe-lifted geometric points of `S` form a conservative family; the variant
+  `..._of_iUnion_range_eq_univ` says the same for an arbitrary jointly surjective family of
+  geometric points of `S`.
 - `AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map`: a morphism of `A`-valued sheaves
   on the small étale site of `S` which is invertible on all these fibres is invertible.
 - `AlgebraicGeometry.Scheme.initial_pointSmallEtaleElementsBaseChange`: for a closed
@@ -87,20 +96,50 @@ section Ulift
 
 variable (S : Scheme.{u})
 
-/-- The geometric point of the small étale site of `S` at `s`, given by the separable closure
-of the residue field of `s`, with its fibre functor taking values in `Type (u + 1)`. -/
-noncomputable def uliftPointSmallEtale (s : S) : S.smallEtaleTopology.Point.{u + 1} :=
-  (pointSmallEtale ((SpecToEquivOfField (SeparableClosure (S.residueField s)) _).2
-    ⟨s, CommRingCat.ofHom (algebraMap (S.residueField s) _)⟩)).ulift.{u + 1}
+/-- The geometric point of `S` at `s` given by the algebraic closure of the residue field
+of `s`. -/
+noncomputable def algClosurePoint (s : S) :
+    Spec (.of (AlgebraicClosure (S.residueField s))) ⟶ S :=
+  (SpecToEquivOfField (AlgebraicClosure (S.residueField s)) _).2
+    ⟨s, CommRingCat.ofHom (algebraMap (S.residueField s) _)⟩
 
-/-- **The universe-lifted geometric points of `S` form a conservative family.** This is
-`AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_pointSmallEtale'` moved up one
-universe, so that it can be used with coefficients concrete over `Type (u + 1)`. -/
-lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale :
-    (ObjectProperty.ofObj S.uliftPointSmallEtale).IsConservativeFamilyOfPoints :=
+@[simp]
+lemma algClosurePoint_base (s : S) (x : Spec (.of (AlgebraicClosure (S.residueField s)))) :
+    (S.algClosurePoint s).base x = s := by
+  simp [algClosurePoint, SpecToEquivOfField]
+
+lemma iUnion_range_algClosurePoint : ⋃ s : S, Set.range (S.algClosurePoint s) = Set.univ := by
+  ext s
+  simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+  exact ⟨s, default, by simp⟩
+
+/-- The geometric point of the small étale site of `S` at `s`, given by the algebraic closure
+of the residue field of `s`, with its fibre functor taking values in `Type (u + 1)`.
+
+The residue field is replaced by its algebraic closure rather than by its separable closure,
+so that the results which need an algebraically closed residue field, such as the stalk
+formula for a finite direct image, apply to this family as well. -/
+noncomputable def uliftPointSmallEtale (s : S) : S.smallEtaleTopology.Point.{u + 1} :=
+  (pointSmallEtale (S.algClosurePoint s)).ulift.{u + 1}
+
+/-- **The universe-lifted geometric points of a jointly surjective family of geometric points
+of `S` form a conservative family.** This is Mathlib's
+`AlgebraicGeometry.Scheme.isConservative_pointSmallEtale` moved up one universe, so that it
+can be used with coefficients concrete over `Type (u + 1)`. -/
+lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ
+    {ι : Type u} {Ω : ι → Type u} [∀ i, Field (Ω i)] [∀ i, IsSepClosed (Ω i)]
+    (s : ∀ i, Spec (.of (Ω i)) ⟶ S) (hs : ⋃ i, Set.range (s i) = Set.univ) :
+    (ObjectProperty.ofObj fun i ↦
+      (pointSmallEtale (s i)).ulift.{u + 1}).IsConservativeFamilyOfPoints :=
   -- the universes are, in order: the one we lift to, the one of the fibres of
   -- `pointSmallEtale`, and those of the morphisms, the objects and the index type of `S.Etale`
-  (isConservativeFamilyOfPoints_pointSmallEtale' S).ulift.{u + 1, u, u, u + 1, u} _
+  (isConservative_pointSmallEtale s hs).ulift.{u + 1, u, u, u + 1, u} _
+
+/-- **The universe-lifted geometric points of `S` form a conservative family.** -/
+lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale :
+    (ObjectProperty.ofObj S.uliftPointSmallEtale).IsConservativeFamilyOfPoints :=
+  isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ S
+    S.algClosurePoint S.iUnion_range_algClosurePoint
 
 variable (A : Type u') [Category.{u + 1} A] [HasColimitsOfSize.{u + 1, u + 1} A]
   {FC : A → A → Type*} {CC : A → Type (u + 1)} [∀ (X Y : A), FunLike (FC X Y) (CC X) (CC Y)]
