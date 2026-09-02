@@ -49,6 +49,7 @@ variable {X : Scheme.{u}}
 section Independence
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 variable {Z Z' : Scheme.{u}} (a : Z ⟶ X) (b : Z' ⟶ X)
@@ -106,6 +107,7 @@ def Stratification.Refines (T S : Stratification X) : Prop :=
   ∀ l, ∃ k, T.stratum l ⊆ S.stratum k
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 

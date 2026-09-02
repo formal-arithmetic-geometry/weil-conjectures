@@ -45,7 +45,9 @@ variable {X : Scheme.{u}}
 section Zero
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
+omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- A zero sheaf is constant. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.of_isZero {F : Sheaf X.smallEtaleTopology A}
     (hF : IsZero F) : F.IsConstant X.smallEtaleTopology :=
@@ -168,6 +170,7 @@ def Stratification.openClosed (SU : Stratification U) (SZ : Stratification Z) :
       rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, SZ.range_immersion]
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 

@@ -64,6 +64,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
 

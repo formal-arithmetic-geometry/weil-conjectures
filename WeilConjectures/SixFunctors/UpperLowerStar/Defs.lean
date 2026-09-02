@@ -63,9 +63,10 @@ sheafification.
 
 ## Implementation notes
 
-- The coefficient category `A` is a Grothendieck abelian category with `Hom`-types in the
-  universe `u + 1`, one above the universe `u` of the base schemes, following the
-  convention of the `SixFunctors` folder.
+- The coefficient category `A` is a Grothendieck abelian category with small site
+  coefficients (`CategoryTheory.HasSmallSiteSheafify`, supplying sheafification on the
+  small sites) and `Hom`-types in the universe `u + 1`, one above the universe `u` of the
+  base schemes, following the convention of the `SixFunctors` folder.
 - The composition isomorphisms take the composite `h₁ ≫ h₂` as an optional argument,
   exactly as `MorphismProperty.Over.pullbackComp` does. This is what lets the unit laws be
   stated for `𝟙 S ≫ h₂` and `h₁ ≫ 𝟙 S` without an `eqToIso`, and lets a single associativity
@@ -79,9 +80,9 @@ sheafification.
   `Q ≤ P`, as `AlgebraicGeometry.Scheme.isContinuous_overPullback` in
   `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. The left Kan extensions on
   presheaves and the sheafification entering the definitions are provided, for `Q ≤ P`, by
-  the sorried results of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`,
-  under the multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of
-  them hold for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of
+  the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the
+  multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of them hold
+  for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of
   the definitions using continuity.
 
 -/
@@ -95,6 +96,7 @@ open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry
 namespace CategoryTheory
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 namespace GrothendieckTopology
 
@@ -115,7 +117,7 @@ noncomputable def lowerStar :
   (MorphismProperty.Over.pullback P ⊤ g).sheafPushforwardContinuous A
     (U.smallGrothendieckTopology Q (Q := P)) (W.smallGrothendieckTopology Q (Q := P))
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The sections of `g_* G` over `V → U` are the sections of `G` over `V ×_U W → W`. -/
 lemma lowerStar_obj_val_obj
     (G : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
@@ -123,7 +125,7 @@ lemma lowerStar_obj_val_obj
       G.obj.obj (op ((MorphismProperty.Over.pullback P ⊤ g).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback P ⊤ g).op`. -/
 lemma lowerStar_map_hom_app
     {G G' : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A} (φ : G ⟶ G') (b : P.Over ⊤ U) :
@@ -154,9 +156,10 @@ section Adjunction
 
 /-- The pullback `g^*` along `g : W ⟶ U`: left Kan extension on presheaves followed by
 sheafification, left adjoint to `lowerStar`. The Kan extensions and the sheafification
-are provided by the sorried instances of
+are provided by the instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, the latter for `A` with
+`CategoryTheory.HasSmallSiteSheafify`. -/
 noncomputable def upperStar :
     Sheaf (U.smallGrothendieckTopology Q (Q := P)) A ⥤
       Sheaf (W.smallGrothendieckTopology Q (Q := P)) A :=
@@ -284,7 +287,7 @@ section Coherence
 
 variable {R S T : Scheme.{u}}
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The left unit law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the
 composition isomorphism for `𝟙 S ≫ h₂` is `lowerStarId` followed by the left unitor. -/
 lemma lowerStarComp_id_left (h₂ : S ⟶ R) :
@@ -296,7 +299,7 @@ lemma lowerStarComp_id_left (h₂ : S ⟶ R) :
     MorphismProperty.Over.pullbackComp_id_left h₂ h₂ (id_comp h₂).symm]
   simp
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The right unit law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the
 composition isomorphism for `h₁ ≫ 𝟙 S` is `lowerStarId` followed by the right unitor. -/
 lemma lowerStarComp_id_right (h₁ : T ⟶ S) :
@@ -308,7 +311,7 @@ lemma lowerStarComp_id_right (h₁ : T ⟶ S) :
     MorphismProperty.Over.pullbackComp_id_right h₁ h₁ (comp_id h₁).symm]
   simp
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The associativity law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the two
 ways of writing `f_* ⋙ g_* ⋙ h_* ≅ (f ≫ g ≫ h)_*` agree. -/
 lemma lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)

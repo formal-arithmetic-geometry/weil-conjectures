@@ -112,6 +112,7 @@ namespace AlgebraicGeometry
 open Scheme MorphismProperty
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 /-- For an étale morphism the localization functor between the small étale sites is
 continuous. This is `CategoryTheory.GrothendieckTopology.isContinuous_overMap_of_le` for
@@ -215,7 +216,7 @@ noncomputable def Etale.openImmersionRestrictionBaseChange :
     (X.smallGrothendieckTopology @Etale) (C.smallGrothendieckTopology @Etale)
 
 include hk in
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- If the square is cartesian, the base change map on restrictions is an isomorphism,
 being induced by an isomorphism of the site functors. -/
 lemma Etale.isIso_openImmersionRestrictionBaseChange (hcart : IsPullback j (𝟙 X) q k) :
@@ -522,6 +523,7 @@ end Coherence
 section Refinement
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {S Y : Scheme.{u}} {f : S ⟶ Y} {c d : Compactification f} (r : c.Refinement d)
 
 open Etale

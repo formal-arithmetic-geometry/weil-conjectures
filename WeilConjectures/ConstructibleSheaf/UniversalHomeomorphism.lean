@@ -87,6 +87,7 @@ end Points
 section Constant
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {X Y : Scheme.{u}} (u : X ⟶ Y) [IsUniversalHomeomorphism u]
 
 /-- **Constancy descends along a universal homeomorphism**: `u^*` is fully faithful and carries
@@ -105,6 +106,7 @@ end Constant
 section LocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {X Y : Scheme.{u}} (u : X ⟶ Y) [IsUniversalHomeomorphism u]
 
 attribute [local instance] Scheme.Hom.isEquivalence_etale
@@ -167,6 +169,7 @@ end LocallyConstant
 section Finite
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 variable {W Z : Scheme.{u}} (p : W ⟶ Z) [IsClosedImmersion p] [Surjective p]

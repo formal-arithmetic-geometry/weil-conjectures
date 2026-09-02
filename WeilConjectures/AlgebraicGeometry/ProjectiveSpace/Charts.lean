@@ -76,12 +76,6 @@ lemma projIntBasicOpenIso_hom :
           (homogeneousLocalizationAwayXEquiv (ULift.{u} ℤ) i).symm.toRingHom) :=
   rfl
 
-/-- `ℙ(n; S)` is the base change of the integral model `ℙⁿ_ℤ` along `S ⟶ Spec ℤ`. -/
-lemma isPullback_toProjInt :
-    IsPullback (toProjInt n S) (ℙ(n; S) ↘ S)
-      (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) (terminal.from S) :=
-  (IsPullback.of_hasPullback _ _).flip
-
 /-- The standard open `D₊(Tᵢ)` of `ℙ(n; S)` is the base change of the standard open `D₊(Tᵢ)`
 of the integral model `ℙⁿ_ℤ`. -/
 lemma isPullback_standardOpen :
@@ -90,7 +84,7 @@ lemma isPullback_standardOpen :
       (terminal.from _) (terminal.from S) := by
   have h := (isPullback_morphismRestrict (toProjInt n S)
     (Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i))).paste_vert
-      (isPullback_toProjInt n S)
+      (isPullback_over_toProjInt n S).flip
   have hr : (toProjInt n S).resLE
       (Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i))
         (standardOpen n S i) le_rfl =

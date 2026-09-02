@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Additive
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 
 /-!
@@ -19,8 +20,9 @@ small étale sites. This file records the resulting functors
 `g^* : Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A`.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
-Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above the
-universe `u` of the base schemes.
+Grothendieck abelian category with small-site sheafification
+(`CategoryTheory.HasSmallSiteSheafify`) and `Hom`-types in the universe `u + 1`, one above
+the universe `u` of the base schemes.
 The site-theoretic inputs of the general definitions are discharged here:
 
 - The base change functor `MorphismProperty.Over.pullback @Etale ⊤ g` along an *arbitrary*
@@ -33,20 +35,21 @@ The site-theoretic inputs of the general definitions are discharged here:
   carries no hypotheses at all.
 - Sheafification on the small étale sites and the left Kan extensions along the
   opposites of base change (together with their left
-  exactness) exist since `A` is Grothendieck abelian and the small étale sites are
-  essentially small; the latter are the sorried instances of
+  exactness) exist since `A` is Grothendieck abelian with
+  `CategoryTheory.HasSmallSiteSheafify` and the small étale sites are
+  essentially small; these are the instances of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Hence
   `Etale.upperStar` and the adjunction
-  `g^* ⊣ g_*` carry no hypotheses either.
+  `g^* ⊣ g_*` carry no hypotheses beyond the standing assumptions on `A`.
 - For `g` étale, no smallness or exactness argument is needed: base change is right
   adjoint to the localization functor `MorphismProperty.Over.map ⊤ ‹Etale g›`, so its
   opposite is a *left* adjoint (`Etale.isLeftAdjoint_op_overPullback`), all pointwise
   left Kan extensions along it exist
   (`Etale.hasPointwiseLeftKanExtension_op_overPullback`), and that left Kan extension is
   precomposition with a functor, hence left exact
-  (`Etale.preservesFiniteLimits_op_lan_overPullback`); these instances are proved, not
-  sorried.
+  (`Etale.preservesFiniteLimits_op_lan_overPullback`); in particular these instances need
+  neither smallness nor exactness of filtered colimits in `A`.
 
 ## Main definitions
 
@@ -79,8 +82,8 @@ The site-theoretic inputs of the general definitions are discharged here:
   exact for values in an abelian category.
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar`: the pullback `g^*` is left
-  exact, hence exact, being also a left adjoint. For an étale `g` the left exactness of
-  the Kan extension is proved; for a general `g` it is the sorried instance
+  exact, hence exact, being also a left adjoint. For an étale `g` the left exactness of the
+  Kan extension follows from the adjunction; for a general `g` it is
   `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`.
 
 -/
@@ -112,6 +115,7 @@ end Continuity
 section KanExtension
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [Etale g]
 
 /-- For an étale morphism `g`, base change is right adjoint to the localization functor
@@ -135,18 +139,21 @@ instance Etale.hasPointwiseLeftKanExtension_op_overPullback (F : Y.Etaleᵒᵖ �
 /-- For an étale morphism `g`, the left Kan extension along the opposite of base change is
 precomposition with the opposite of the localization functor `MorphismProperty.Over.map ⊤
 ‹Etale g›`, hence preserves all limits that exist in the coefficient category. This is what
-makes the pullback `g^*` left exact without any smallness or concreteness assumption on `A`;
-compare `CategoryTheory.lan_preservesFiniteLimits_of_flat`. -/
+makes the pullback `g^*` left exact without any exactness assumption on the filtered
+colimits of `A`; compare
+`AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`,
+which covers an arbitrary `g` but uses AB5. -/
 instance Etale.preservesFiniteLimits_op_lan_overPullback :
     PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
       (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A) :=
-  inferInstance
+  Functor.preservesFiniteLimits_lan _
 
 end KanExtension
 
 section Star
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 namespace Etale
@@ -165,14 +172,14 @@ end Etale
 
 open Etale
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The sections of `g_* G` over `V → Y` are the sections of `G` over `V ×_Y Z → Z`. -/
 lemma Etale.lowerStar_obj_val_obj (G : Sheaf Z.smallEtaleTopology A) (b : Y.Etale) :
     ((g)_*[A].obj G).obj.obj (op b) =
       G.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj b)) :=
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- `g_*` acts on morphisms by whiskering along `(MorphismProperty.Over.pullback @Etale ⊤ g).op`. -/
 lemma Etale.lowerStar_map_hom_app {G G' : Sheaf Z.smallEtaleTopology A} (φ : G ⟶ G')
     (b : Y.Etale) :
@@ -226,10 +233,10 @@ instance : (g)^*[A].IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
 
 /-- The pullback `g^*` on étale sheaves is left exact, hence exact, being also a left
-adjoint: sheafification on the small étale site of `Z` is left exact by the sorried
-`HasSheafify` instance for the Grothendieck abelian `A`, and the left Kan
+adjoint: sheafification on the small étale site of `Z` is left exact by the
+`HasSheafify` instance for `A` with `CategoryTheory.HasSmallSiteSheafify`, and the left Kan
 extension along the opposite of base change is left exact — for an étale `g` by
-`Etale.preservesFiniteLimits_op_lan_overPullback`, in general by the sorried
+`Etale.preservesFiniteLimits_op_lan_overPullback`, in general by
 `Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`, the Kan
 extension being a filtered colimit and filtered colimits in the Grothendieck abelian `A`
 being exact. -/
@@ -252,6 +259,7 @@ end Star
 section Id
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable (V : Scheme.{u})
 
 open Etale
@@ -309,6 +317,7 @@ end Id
 section Comp
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
 open Etale
@@ -393,25 +402,26 @@ end Comp
 section Coherence
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {R S T : Scheme.{u}}
 
 open Etale
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The left unit law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
 lemma Etale.lowerStarComp_id_left (h₂ : S ⟶ R) :
     Etale.lowerStarComp A (𝟙 S) h₂ h₂ (Category.id_comp h₂).symm =
       Functor.isoWhiskerRight (Etale.lowerStarId A S) (h₂)_*[A] ≪≫ ((h₂)_*[A]).leftUnitor :=
   GrothendieckTopology.lowerStarComp_id_left A @Etale @Etale le_rfl h₂
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The right unit law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
 lemma Etale.lowerStarComp_id_right (h₁ : T ⟶ S) :
     Etale.lowerStarComp A h₁ (𝟙 S) h₁ (Category.comp_id h₁).symm =
       Functor.isoWhiskerLeft (h₁)_*[A] (Etale.lowerStarId A S) ≪≫ ((h₁)_*[A]).rightUnitor :=
   GrothendieckTopology.lowerStarComp_id_right A @Etale @Etale le_rfl h₁
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The associativity law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
 lemma Etale.lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)
     (fgh : X ⟶ V := f ≫ g ≫ h) (hfgh : fgh = f ≫ g ≫ h := by cat_disch) :
@@ -422,7 +432,7 @@ lemma Etale.lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
         Etale.lowerStarComp A (f ≫ g) h fgh (by rw [hfgh, Category.assoc]) :=
   GrothendieckTopology.lowerStarComp_assoc A @Etale @Etale le_rfl f g h fgh hfgh
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- Absorbing the transport along an equality `h₁ ≫ h₂ = h₁₂` of morphisms into the
 composition isomorphism `AlgebraicGeometry.Etale.lowerStarComp` at `h₁₂`. -/
 lemma Etale.lowerStarComp_trans_eqToIso {W X' Y' : Scheme.{u}} (k₁ : W ⟶ X') (k₂ : X' ⟶ Y')
@@ -432,7 +442,7 @@ lemma Etale.lowerStarComp_trans_eqToIso {W X' Y' : Scheme.{u}} (k₁ : W ⟶ X')
   subst hk
   simp
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The associativity law for `AlgebraicGeometry.Etale.lowerStarComp` in the form of an
 equality of natural transformations, with all three composites of the morphisms named. -/
 lemma Etale.lowerStarComp_assoc' {W X Y Z : Scheme.{u}} (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)

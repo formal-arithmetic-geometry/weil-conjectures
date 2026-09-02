@@ -26,8 +26,9 @@ All site-theoretic inputs of the general definition are discharged here:
 - The continuity of the base change functor along an *arbitrary* morphism is provided by
   the instance `Etale.isContinuous_overPullback` of
   `WeilConjectures.SixFunctors.UpperLowerStar.Etale`.
-- Sheafification on the small étale sites is provided by the sorried instance of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`.
+- Sheafification on the small étale sites is provided by the instance of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, for `A` with
+  `CategoryTheory.HasSmallSiteSheafify`.
 
 Hence `f_!` carries no hypotheses beyond the standing assumptions on `A`.
 
@@ -64,6 +65,7 @@ lemma isOpenImmersion_le_etale : @IsOpenImmersion ≤ @Etale := fun _ _ _ hi =>
 section LowerShriek
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 open Etale

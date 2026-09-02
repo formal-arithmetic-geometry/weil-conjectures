@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -73,13 +74,13 @@ being Grothendieck abelian.
 
 `Etale.sheafEquivalence` and `Etale.isEquivalence_lowerStar` depend only on
 `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, which is why they are stated first, for
-arbitrary coefficients. The `upperStar` and cohomology statements additionally inherit the
-`sorry`s behind the instances
-`CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` and
+arbitrary coefficients. The `upperStar` and cohomology statements additionally need the
+instances `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` and
 `CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallEtaleTopology`, which
 are what make `AlgebraicGeometry.Etale.upperStar` and `CategoryTheory.Sheaf.H` available on
-the small étale site at all; those are found by instance search and are not visible in the
-statements.
+the small étale site at all; these come from the hypothesis
+`CategoryTheory.HasSmallSiteSheafify A` on the coefficient category and are found by
+instance search.
 
 ## References
 
@@ -95,8 +96,6 @@ open CategoryTheory Abelian
 namespace AlgebraicGeometry.Etale
 
 open Scheme
-
-attribute [local instance] Scheme.Hom.isEquivalence_etale Scheme.Hom.isDenseSubsite_etale
 
 section General
 
@@ -136,6 +135,7 @@ end General
 section GrothendieckAbelian
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsUniversalHomeomorphism f]
 
 /-- The pullback along a universal homeomorphism is the quasi-inverse of the pushforward, by

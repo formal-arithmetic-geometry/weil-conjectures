@@ -49,6 +49,7 @@ variable {X Y : Scheme.{u}}
 section Constant
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 /-- The pullback of a constant sheaf is constant. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.upperStar (g : Y ⟶ X)
@@ -89,10 +90,12 @@ end Constant
 section LocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
   inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- Locally constant sheaves are invariant under isomorphism. -/
 lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf F' := by
@@ -127,9 +130,11 @@ end LocallyConstant
 section Finite
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
+omit [HasSmallSiteSheafify A] in
 /-- Finite sheaves are invariant under isomorphism. -/
 lemma IsFiniteSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsFiniteSheaf F] : IsFiniteSheaf F' where
@@ -185,6 +190,7 @@ end Stratification
 section Constructible
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
