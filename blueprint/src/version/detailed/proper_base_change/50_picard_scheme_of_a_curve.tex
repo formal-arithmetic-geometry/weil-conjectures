@@ -118,6 +118,8 @@ one for the Zariski topology (equivalently: there is an
  \mathcal L^{\vee}:=\mathcal{H}om_{\mathcal O_C}(\mathcal L,\mathcal O_C).
 \]
 \uses{def:sc-curves}
+\lean{SheafOfModules.IsInvertible}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1351,6 +1353,8 @@ degree $d$ (\Cref{def:pc-degree-line-bundle}).  Then
 \dim_kH^0(X,\cM)-\dim_kH^1(X,\cM)=d+1-g .
 \]
 \uses{def:pc-genus,def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-curve,lem:pc-h0-proper-variety,lem:pc-vanishing-above-dim}
+\lean{AlgebraicGeometry.riemannRoch}
+\leanok
 \end{theorem}
 \begin{proof}
 \uses{def:pc-euler-characteristic,def:pc-genus,def:pc-degree-line-bundle,lem:pc-h0-proper-variety,lem:pc-vanishing-above-dim}
@@ -1476,6 +1480,8 @@ Schemes, Definition~29.44.1,
 over a field $k$ is \emph{projective over $k$} if the structure morphism
 $X\to\Spec(k)$ is projective.
 \uses{def:pc-scheme,def:pc-morphism-conventions}
+\lean{AlgebraicGeometry.IsProjective}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1550,6 +1556,8 @@ which is integral and whose structure morphism $X\to\Spec(k)$ is
 dimension $1$ (\Cref{def:pc-dimension}; Varieties, Definition~33.43.1,
 \stacksproject{0A23}).
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-dimension,def:weil-pbc-scheme-conventions}
+\lean{AlgebraicGeometry.IsCurve}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1563,6 +1571,8 @@ Chapter~44 (Picard Schemes of Curves) the phrase \emph{smooth projective
 curve over $k$} is used in exactly this sense; relation to the curves of
 file~06: \Cref{lem:pc-curves-are-sc}.
 \uses{def:pc-curve,def:pc-projective-morphism,def:pc-smooth-morphism}
+\lean{AlgebraicGeometry.IsSmoothProjectiveCurve}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1668,6 +1678,8 @@ are the families $\{T_i\to T\}_{i\in I}$ of
 presentation; an \emph{fppf covering} is such a family.  (That the fppf
 topology refines the Zariski topology is \Cref{lem:pc-zariski-coverings-are-fppf}.)
 \uses{def:pc-scheme,def:pc-morphism-conventions}
+% Mathlib: AlgebraicGeometry.Scheme.fppfTopology.
+\mathlibok\ \lean{AlgebraicGeometry.Scheme.fppfTopology}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1771,6 +1783,8 @@ with $\Pic$ of \Cref{def:sc-picard-group} (in the generality of
 \Cref{rem:pc-sc-modules}) and $X_T$ of \Cref{def:pc-base-change}; the
 assignment is functorial \Cref{lem:pc-pic-presheaf-functorial}.
 \uses{def:pc-base-change,def:sc-picard-group}
+\lean{AlgebraicGeometry.picardPresheaf}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1789,6 +1803,8 @@ with the affine functor $\Pic_{C/k}$ of file~06 is
 \Cref{lem:pc-picard-functor-agrees-sc}.  For $S=\Spec(k)$ we write
 $\Pic_{X/k}$.
 \uses{def:pc-picard-presheaf,def:pc-fppf-site,def:pc-representable-functor,def:sc-picard-functor,def:sc-pic0}
+\lean{AlgebraicGeometry.picardFunctor}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1970,6 +1986,8 @@ $\cF$ for the structure morphism; the well-definedness (finite support,
 finite dimensions) is \Cref{lem:pc-euler-characteristic-well-defined},
 the definition of Varieties, Definition~33.33.1 (\stacksproject{0BEJ}).
 \uses{def:pc-scheme,def:pc-derived-direct-image,def:pc-morphism-conventions}
+\lean{AlgebraicGeometry.Scheme.Modules.eulerCharacteristic}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1989,6 +2007,8 @@ $\deg(D):=\deg(\cO_X(D))$.  The relation with the degree of
 \Cref{def:sc-pic0} for smooth proper curves over algebraically closed
 fields is \Cref{lem:pc-degree-agrees-sc}.
 \uses{def:pc-euler-characteristic,def:pc-divisor-line-bundle,def:sc-pic0,def:sc-divisor}
+\lean{AlgebraicGeometry.Scheme.Modules.degree}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2007,6 +2027,8 @@ and agreement with \Cref{def:sc-genus} and its behaviour under base
 change are \Cref{lem:pc-genus-well-defined},
 \Cref{lem:pc-genus-agrees-sc} and \Cref{lem:pc-genus-base-change}.
 \uses{def:pc-smooth-projective-curve,def:pc-geometrically-irreducible,def:sc-genus}
+\lean{AlgebraicGeometry.genus}
+\leanok
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -3710,9 +3732,12 @@ A projective morphism of schemes is proper.  In particular a
 over a field is proper over it, and its base changes along field
 extensions are proper.
 \uses{def:pc-projective-morphism,def:pc-morphism-conventions,def:pc-smooth-projective-curve,def:pc-base-change}
+\lean{AlgebraicGeometry.IsProjective.isProper}
+\leanok
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-proper-base-change}
+\leanok
 A projective morphism $f:X\to S$ factors as
 $X\xrightarrow{i}\mathbf P^n_S\xrightarrow{\pi}S$ with $i$ a closed
 immersion.  Closed immersions are proper (Morphisms of Schemes, Lemma
@@ -6575,6 +6600,8 @@ $k$.  Then the
 representable, and the representing scheme
 $\underline{\Pic}_{X/k}$ is a group scheme over $k$.
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor}
+\lean{AlgebraicGeometry.isRepresentable_picardFunctor}
+\leanok
 \end{theorem}
 \begin{proof}
 \uses{cor:pc-sigma-pic-iso,def:pc-genus,def:pc-pic-sigma-functor,def:pc-rational-point,lem:pc-f-open-subfunctor,lem:pc-k-sheaf,lem:pc-rational-hyp,lem:pc-rational-points-dense,lem:pc-twist,lem:pc-vanishing-above-dim,prop:pc-XK-integral,thm:pc-criterion,thm:pc-f-representable,thm:pc-pic-split}
