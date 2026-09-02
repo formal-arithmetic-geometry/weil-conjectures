@@ -239,24 +239,43 @@ and \Cref{lemma:constructible-iso-invariance}.
 
 \begin{lemma}[Invariance under universal homeomorphisms]
 \label{lemma:constructible-universal-homeomorphism-invariance}
-\uses{def:constructible-finite-locally-constant,lemma:weil-pbc-universal-homeomorphism-site-equivalence,lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite}
+\uses{def:constructible-finite-locally-constant,lemma:weil-pbc-universal-homeomorphism-site-equivalence,prop:weil-pbc-universal-homeomorphism-topos,lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite}
+\lean{CategoryTheory.Sheaf.isConstant_upperStar_iff,
+  AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.of_upperStar,
+  AlgebraicGeometry.Scheme.exists_comp_eq_of_surjective,
+  AlgebraicGeometry.Scheme.IsFiniteSheaf.of_upperStar,
+  AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_upperStar,
+  AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff}
+\leanok
 Let $u\colon Z'\to Z$ be a universal homeomorphism.  Then
-$\mathcal G\in\shv{\et Z}$ is locally constant (finite, finite locally
-constant) if and only if $u^*\mathcal G$ is.
+$\mathcal G\in\shv{\et Z}$ is constant (locally constant) if and only if
+$u^*\mathcal G$ is.  If moreover $u$ is a surjective closed immersion, then
+$\mathcal G$ is finite (finite locally constant) if and only if
+$u^*\mathcal G$ is.
 \end{lemma}
 \begin{proof}
+\leanok
 The direction ``only if'' is
 \Cref{lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite}.
 For the converse, base change along $u$ is an equivalence of sites
 $\et Z\simeq\et{Z'}$ by
 \Cref{lemma:weil-pbc-universal-homeomorphism-site-equivalence}
 (Tag \texttt{04DZ}), hence $u^*$ is an equivalence of categories of sheaves
-with quasi-inverse $u_*$, and it matches \'etale covers of $Z$ with \'etale
-covers of $Z'$, the localised sites with each other, and geometric points of
-$Z'$ with geometric points of $Z$ ($u$ being a bijection on points with
-purely inseparable residue field extensions).  A trivialising datum for
-$u^*\mathcal G$ therefore comes from one for $\mathcal G$, and the stalks
-of $\mathcal G$ are among the stalks of $u^*\mathcal G$.
+(\Cref{prop:weil-pbc-universal-homeomorphism-topos}).  Constancy: $u^*$ is
+fully faithful and carries constant sheaves to constant sheaves, so from
+$u^*\mathcal G\cong u^*M_{Z}$ we get $\mathcal G\cong M_Z$.  Local
+constancy: let $(V'_i\to Z')_i$ be a trivialising \'etale cover of
+$u^*\mathcal G$.  Each $V'_i$ is isomorphic over $Z'$ to $V_i\times_ZZ'$
+for an \'etale $V_i\to Z$, and the $V_i$ cover $Z$ since $u$ is
+surjective.  The projection $u_i\colon V_i\times_ZZ'\to V_i$ is a
+universal homeomorphism, and $u_i^*(\mathcal G|_{V_i})\cong
+(u^*\mathcal G)|_{V'_i}$ is constant, so $\mathcal G|_{V_i}$ is constant
+by the first part applied to $u_i$.  Finiteness, for $u$ a surjective closed
+immersion: the residue field maps of a closed immersion are surjective,
+hence isomorphisms, so every geometric point $\bar z$ of $Z$ lifts to a
+geometric point $\bar z'$ of $Z'$ with $u\circ\bar z'=\bar z$, and the
+stalk of $\mathcal G$ at $\bar z$ is the stalk of $u^*\mathcal G$ at
+$\bar z'$.
 \end{proof}
 
 \begin{lemma}[Independence of the scheme structure]
