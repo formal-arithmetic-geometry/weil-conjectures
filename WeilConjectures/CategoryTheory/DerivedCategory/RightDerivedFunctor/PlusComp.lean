@@ -70,6 +70,10 @@ injectives.
   `R⁺F ⋙ R⁺G ≅ R⁺H` associated with an isomorphism `F ⋙ G ≅ H`. This is the form in which
   the theorem is usually applied, e.g. for the Leray isomorphism.
 
+Both composition isomorphisms are characterized by their compatibility with the units of the
+right derived functors, in `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_fac` and
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'_fac`.
+
 -/
 
 @[expose] public section
@@ -177,6 +181,25 @@ noncomputable def rightDerivedFunctorPlusCompIso [F.PreservesInjectiveObjects] :
     (F ⋙ G).rightDerivedFunctorPlusUnit (rightDerivedFunctorPlusCompUnit F G)
     (HomotopyCategory.Plus.quasiIso C)
 
+/-- The composition isomorphism `Functor.rightDerivedFunctorPlusCompIso` is characterized by
+its compatibility with the units: composing the unit of `R⁺(F ⋙ G)` with it gives the
+composite unit `Functor.rightDerivedFunctorPlusCompUnit`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusCompIso_fac [F.PreservesInjectiveObjects] :
+    (F ⋙ G).rightDerivedFunctorPlusUnit ≫ Functor.whiskerLeft DerivedCategory.Plus.Qh
+        (rightDerivedFunctorPlusCompIso F G).hom =
+      rightDerivedFunctorPlusCompUnit F G := by
+  simp [rightDerivedFunctorPlusCompIso]
+
+/-- The pointwise form of `Functor.rightDerivedFunctorPlusCompIso_fac`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusCompIso_fac_app [F.PreservesInjectiveObjects]
+    (K : HomotopyCategory.Plus C) :
+    (F ⋙ G).rightDerivedFunctorPlusUnit.app K ≫
+        (rightDerivedFunctorPlusCompIso F G).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      (rightDerivedFunctorPlusCompUnit F G).app K :=
+  NatTrans.congr_app (rightDerivedFunctorPlusCompIso_fac F G) K
+
 /-- The composition isomorphism `R⁺F ⋙ R⁺G ≅ R⁺H` associated with an isomorphism
 `F ⋙ G ≅ H` of additive functors, for `F` preserving injective objects. This is the form in
 which the composition theorem is usually applied, e.g. for the Leray isomorphism
@@ -185,6 +208,20 @@ noncomputable def rightDerivedFunctorPlusCompIso' {H : C ⥤ E} [H.Additive]
     [F.PreservesInjectiveObjects] (e : F ⋙ G ≅ H) :
     F.rightDerivedFunctorPlus ⋙ G.rightDerivedFunctorPlus ≅ H.rightDerivedFunctorPlus :=
   (rightDerivedFunctorPlusCompIso F G).symm ≪≫ rightDerivedFunctorPlusNatIso e
+
+/-- The composition isomorphism `Functor.rightDerivedFunctorPlusCompIso'` attached to an
+isomorphism `e : F ⋙ G ≅ H` is characterized by its compatibility with the units: composing
+the composite unit with it gives the unit of `R⁺H`, transported along `e`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusCompIso'_fac {H : C ⥤ E} [H.Additive]
+    [F.PreservesInjectiveObjects] (e : F ⋙ G ≅ H) :
+    rightDerivedFunctorPlusCompUnit F G ≫ Functor.whiskerLeft DerivedCategory.Plus.Qh
+        (rightDerivedFunctorPlusCompIso' F G e).hom =
+      Functor.whiskerRight (NatTrans.mapHomotopyCategoryPlus e.hom) DerivedCategory.Plus.Qh ≫
+        H.rightDerivedFunctorPlusUnit := by
+  rw [← rightDerivedFunctorPlusCompIso_fac F G, Category.assoc, ← Functor.whiskerLeft_comp]
+  simp only [rightDerivedFunctorPlusCompIso', Iso.trans_hom, Iso.symm_hom, Iso.hom_inv_id_assoc]
+  exact rightDerivedNatTrans_fac _ _ _ _ (HomotopyCategory.Plus.quasiIso C) _
 
 end Composition
 
