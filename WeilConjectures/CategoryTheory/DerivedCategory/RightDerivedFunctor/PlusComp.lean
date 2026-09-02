@@ -69,6 +69,17 @@ injectives.
 - `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'`: the composition isomorphism
   `R⁺F ⋙ R⁺G ≅ R⁺H` associated with an isomorphism `F ⋙ G ≅ H`. This is the form in which
   the theorem is usually applied, e.g. for the Leray isomorphism.
+- `CategoryTheory.Functor.rightDerivedFunctorPlusIdIso`: the identity isomorphism
+  `R⁺(𝟭 C) ≅ 𝟭`, expressing that the identity functor is its own right derived functor.
+
+Both composition isomorphisms are characterized by their compatibility with the units of the
+right derived functors, in `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_fac` and
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'_fac`.
+
+Finally, `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_id_comp`,
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_comp_id` and
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_assoc` are the unit and associativity
+laws relating `rightDerivedFunctorPlusCompIso` and `rightDerivedFunctorPlusIdIso`.
 
 -/
 
@@ -141,6 +152,16 @@ noncomputable def rightDerivedFunctorPlusCompUnit :
     Functor.whiskerRight F.rightDerivedFunctorPlusUnit G.rightDerivedFunctorPlus ≫
     (Functor.associator _ _ _).hom
 
+/-- The composite unit `Functor.rightDerivedFunctorPlusCompUnit` is simply the composite of
+the units of `R⁺G` and `R⁺F`: the comparison isomorphism of `mapHomotopyCategoryPlus`
+occurring in its definition is the identity. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusCompUnit_app (K : HomotopyCategory.Plus C) :
+    (rightDerivedFunctorPlusCompUnit F G).app K =
+      G.rightDerivedFunctorPlusUnit.app (F.mapHomotopyCategoryPlus.obj K) ≫
+        G.rightDerivedFunctorPlus.map (F.rightDerivedFunctorPlusUnit.app K) := by
+  simp [rightDerivedFunctorPlusCompUnit, mapHomotopyCategoryPlusCompIso_refl_inv_app]
+
 /-- If `F` preserves injective objects, then `R⁺F ⋙ R⁺G`, equipped with the composite unit,
 is a right derived functor of `(F ⋙ G).mapHomotopyCategoryPlus ⋙ Qh`: by the injective
 right derivability structure it suffices that the composite unit is an isomorphism on
@@ -177,6 +198,25 @@ noncomputable def rightDerivedFunctorPlusCompIso [F.PreservesInjectiveObjects] :
     (F ⋙ G).rightDerivedFunctorPlusUnit (rightDerivedFunctorPlusCompUnit F G)
     (HomotopyCategory.Plus.quasiIso C)
 
+/-- The composition isomorphism `Functor.rightDerivedFunctorPlusCompIso` is characterized by
+its compatibility with the units: composing the unit of `R⁺(F ⋙ G)` with it gives the
+composite unit `Functor.rightDerivedFunctorPlusCompUnit`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusCompIso_fac [F.PreservesInjectiveObjects] :
+    (F ⋙ G).rightDerivedFunctorPlusUnit ≫ Functor.whiskerLeft DerivedCategory.Plus.Qh
+        (rightDerivedFunctorPlusCompIso F G).hom =
+      rightDerivedFunctorPlusCompUnit F G := by
+  simp [rightDerivedFunctorPlusCompIso]
+
+/-- The pointwise form of `Functor.rightDerivedFunctorPlusCompIso_fac`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusCompIso_fac_app [F.PreservesInjectiveObjects]
+    (K : HomotopyCategory.Plus C) :
+    (F ⋙ G).rightDerivedFunctorPlusUnit.app K ≫
+        (rightDerivedFunctorPlusCompIso F G).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      (rightDerivedFunctorPlusCompUnit F G).app K :=
+  NatTrans.congr_app (rightDerivedFunctorPlusCompIso_fac F G) K
+
 /-- The composition isomorphism `R⁺F ⋙ R⁺G ≅ R⁺H` associated with an isomorphism
 `F ⋙ G ≅ H` of additive functors, for `F` preserving injective objects. This is the form in
 which the composition theorem is usually applied, e.g. for the Leray isomorphism
@@ -186,7 +226,193 @@ noncomputable def rightDerivedFunctorPlusCompIso' {H : C ⥤ E} [H.Additive]
     F.rightDerivedFunctorPlus ⋙ G.rightDerivedFunctorPlus ≅ H.rightDerivedFunctorPlus :=
   (rightDerivedFunctorPlusCompIso F G).symm ≪≫ rightDerivedFunctorPlusNatIso e
 
+/-- The composition isomorphism `Functor.rightDerivedFunctorPlusCompIso'` attached to an
+isomorphism `e : F ⋙ G ≅ H` is characterized by its compatibility with the units: composing
+the composite unit with it gives the unit of `R⁺H`, transported along `e`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusCompIso'_fac {H : C ⥤ E} [H.Additive]
+    [F.PreservesInjectiveObjects] (e : F ⋙ G ≅ H) :
+    rightDerivedFunctorPlusCompUnit F G ≫ Functor.whiskerLeft DerivedCategory.Plus.Qh
+        (rightDerivedFunctorPlusCompIso' F G e).hom =
+      Functor.whiskerRight (NatTrans.mapHomotopyCategoryPlus e.hom) DerivedCategory.Plus.Qh ≫
+        H.rightDerivedFunctorPlusUnit := by
+  rw [← rightDerivedFunctorPlusCompIso_fac F G, Category.assoc, ← Functor.whiskerLeft_comp]
+  simp only [rightDerivedFunctorPlusCompIso', Iso.trans_hom, Iso.symm_hom, Iso.hom_inv_id_assoc]
+  exact rightDerivedNatTrans_fac _ _ _ _ (HomotopyCategory.Plus.quasiIso C) _
+
 end Composition
+
+section Identity
+
+variable (C : Type u₁) [Category.{v₁} C] [Abelian C] [HasDerivedCategory C]
+  [EnoughInjectives C]
+
+/-- The unit exhibiting the identity functor of `DerivedCategory.Plus C` as a right derived
+functor of `(𝟭 C).mapHomotopyCategoryPlus ⋙ Qh`. It is an isomorphism: the functor
+`(𝟭 C).mapHomotopyCategoryPlus ⋙ Qh` is `Qh` itself, which already inverts the
+quasi-isomorphisms. -/
+noncomputable def rightDerivedFunctorPlusIdUnit :
+    (𝟭 C).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⟶
+      DerivedCategory.Plus.Qh ⋙ 𝟭 (DerivedCategory.Plus C) :=
+  Functor.whiskerRight (mapHomotopyCategoryPlusIdIso C).hom DerivedCategory.Plus.Qh ≫
+    DerivedCategory.Plus.Qh.leftUnitor.hom ≫ DerivedCategory.Plus.Qh.rightUnitor.inv
+
+omit [EnoughInjectives C] in
+@[simp]
+lemma rightDerivedFunctorPlusIdUnit_app (K : HomotopyCategory.Plus C) :
+    (rightDerivedFunctorPlusIdUnit C).app K = 𝟙 _ := by
+  simp only [rightDerivedFunctorPlusIdUnit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, comp_id,
+    mapHomotopyCategoryPlusIdIso_hom_app_eq_id]
+  exact (Category.comp_id _).trans (DerivedCategory.Plus.Qh.map_id K)
+
+instance : IsIso (rightDerivedFunctorPlusIdUnit C) := by
+  dsimp only [rightDerivedFunctorPlusIdUnit]
+  infer_instance
+
+instance isRightDerivedFunctor_id_rightDerivedFunctorPlusIdUnit :
+    (𝟭 (DerivedCategory.Plus C)).IsRightDerivedFunctor (rightDerivedFunctorPlusIdUnit C)
+      (HomotopyCategory.Plus.quasiIso C) :=
+  isRightDerivedFunctor_of_inverts _ _ (asIso (rightDerivedFunctorPlusIdUnit C)).symm
+
+/-- **The identity functor is its own bounded below right derived functor**: the canonical
+comparison `R⁺(𝟭 C) ≅ 𝟭` is an isomorphism. -/
+noncomputable def rightDerivedFunctorPlusIdIso :
+    (𝟭 C).rightDerivedFunctorPlus ≅ 𝟭 (DerivedCategory.Plus C) :=
+  rightDerivedUnique (𝟭 C).rightDerivedFunctorPlus (𝟭 (DerivedCategory.Plus C))
+    (𝟭 C).rightDerivedFunctorPlusUnit (rightDerivedFunctorPlusIdUnit C)
+    (HomotopyCategory.Plus.quasiIso C)
+
+/-- The characterization of `Functor.rightDerivedFunctorPlusIdIso`: it transforms the unit of
+`R⁺(𝟭 C)` into the identity, up to the unitors. -/
+@[reassoc (attr := simp)]
+lemma rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso :
+    (𝟭 C).rightDerivedFunctorPlusUnit ≫
+        Functor.whiskerLeft DerivedCategory.Plus.Qh (rightDerivedFunctorPlusIdIso C).hom =
+      rightDerivedFunctorPlusIdUnit C := by
+  simp [rightDerivedFunctorPlusIdIso]
+
+/-- The pointwise form of
+`Functor.rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso`: the identity
+isomorphism `Functor.rightDerivedFunctorPlusIdIso` turns the unit of `R⁺(𝟭 C)` into
+`Functor.mapHomotopyCategoryPlusIdIso`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusIdIso_fac_app (K : HomotopyCategory.Plus C) :
+    (𝟭 C).rightDerivedFunctorPlusUnit.app K ≫
+        (rightDerivedFunctorPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      DerivedCategory.Plus.Qh.map ((mapHomotopyCategoryPlusIdIso C).hom.app K) := by
+  have := congr_app (rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso C) K
+  simpa [rightDerivedFunctorPlusIdUnit,
+    -rightDerivedFunctorPlusUnit_comp_rightDerivedFunctorPlusIdIso] using this
+
+end Identity
+
+section Coherence
+
+variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {E' : Type*}
+  [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category E']
+  [Abelian C] [Abelian D] [Abelian E] [Abelian E']
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] [HasDerivedCategory E']
+  [EnoughInjectives C]
+
+/-- The left unit law for `Functor.rightDerivedFunctorPlusCompIso`: composing with the
+identity isomorphism `Functor.rightDerivedFunctorPlusIdIso` in the first variable gives the
+identity. -/
+lemma rightDerivedFunctorPlusCompIso_id_comp (G : C ⥤ D) [G.Additive] :
+    (rightDerivedFunctorPlusCompIso (𝟭 C) G).hom ≫
+        Functor.whiskerRight (rightDerivedFunctorPlusIdIso C).hom G.rightDerivedFunctorPlus =
+      𝟙 G.rightDerivedFunctorPlus := by
+  refine Functor.rightDerived_ext (𝟭 C ⋙ G).rightDerivedFunctorPlus
+    (𝟭 C ⋙ G).rightDerivedFunctorPlusUnit (HomotopyCategory.Plus.quasiIso C) _ _ _ ?_
+  ext K : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NatTrans.id_app]
+  rw [← Category.assoc, rightDerivedFunctorPlusCompIso_fac_app,
+    rightDerivedFunctorPlusCompUnit_app, Category.assoc, ← Functor.map_comp,
+    rightDerivedFunctorPlusIdIso_fac_app, mapHomotopyCategoryPlusIdIso_hom_app_eq_id]
+  have h : G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map (𝟙 K)) =
+      𝟙 (G.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Qh.obj K)) := by
+    rw [DerivedCategory.Plus.Qh.map_id]
+    exact G.rightDerivedFunctorPlus.map_id _
+  rw [h]
+  exact (Category.comp_id _).trans (Category.comp_id _).symm
+
+/-- The right unit law for `Functor.rightDerivedFunctorPlusCompIso`: composing with the
+identity isomorphism `Functor.rightDerivedFunctorPlusIdIso` in the second variable gives the
+identity. -/
+lemma rightDerivedFunctorPlusCompIso_comp_id [EnoughInjectives D] (F : C ⥤ D) [F.Additive]
+    [F.PreservesInjectiveObjects] :
+    (rightDerivedFunctorPlusCompIso F (𝟭 D)).hom ≫
+        Functor.whiskerLeft F.rightDerivedFunctorPlus (rightDerivedFunctorPlusIdIso D).hom =
+      𝟙 F.rightDerivedFunctorPlus := by
+  refine Functor.rightDerived_ext (F ⋙ 𝟭 D).rightDerivedFunctorPlus
+    (F ⋙ 𝟭 D).rightDerivedFunctorPlusUnit (HomotopyCategory.Plus.quasiIso C) _ _ _ ?_
+  ext K : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app]
+  have hnat : (𝟭 D).rightDerivedFunctorPlus.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+      (rightDerivedFunctorPlusIdIso D).hom.app
+        (F.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Qh.obj K)) =
+      (rightDerivedFunctorPlusIdIso D).hom.app
+          (DerivedCategory.Plus.Qh.obj (F.mapHomotopyCategoryPlus.obj K)) ≫
+        F.rightDerivedFunctorPlusUnit.app K :=
+    (rightDerivedFunctorPlusIdIso D).hom.naturality _
+  rw [← Category.assoc, rightDerivedFunctorPlusCompIso_fac_app,
+    rightDerivedFunctorPlusCompUnit_app, Category.assoc, hnat, ← Category.assoc,
+    rightDerivedFunctorPlusIdIso_fac_app, mapHomotopyCategoryPlusIdIso_hom_app_eq_id]
+  have h : DerivedCategory.Plus.Qh.map (𝟙 (F.mapHomotopyCategoryPlus.obj K)) =
+      𝟙 (DerivedCategory.Plus.Qh.obj (F.mapHomotopyCategoryPlus.obj K)) :=
+    DerivedCategory.Plus.Qh.map_id _
+  rw [h]
+  exact (Category.id_comp _).trans (Category.comp_id _).symm
+
+/-- The associativity law for `Functor.rightDerivedFunctorPlusCompIso`: the two ways of
+comparing `R⁺(F ⋙ G ⋙ H)` with `R⁺F ⋙ R⁺G ⋙ R⁺H` agree. -/
+lemma rightDerivedFunctorPlusCompIso_assoc [EnoughInjectives D] [EnoughInjectives E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ E') [F.Additive] [G.Additive] [H.Additive]
+    [F.PreservesInjectiveObjects] [G.PreservesInjectiveObjects] :
+    (rightDerivedFunctorPlusCompIso F (G ⋙ H)).hom ≫
+        Functor.whiskerLeft F.rightDerivedFunctorPlus
+          (rightDerivedFunctorPlusCompIso G H).hom =
+      (rightDerivedFunctorPlusCompIso (F ⋙ G) H).hom ≫
+        Functor.whiskerRight (rightDerivedFunctorPlusCompIso F G).hom
+          H.rightDerivedFunctorPlus := by
+  refine Functor.rightDerived_ext (F ⋙ G ⋙ H).rightDerivedFunctorPlus
+    (F ⋙ G ⋙ H).rightDerivedFunctorPlusUnit (HomotopyCategory.Plus.quasiIso C) _ _ _ ?_
+  ext K : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  have hnat : (G ⋙ H).rightDerivedFunctorPlus.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+      (rightDerivedFunctorPlusCompIso G H).hom.app
+        (F.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Qh.obj K)) =
+      (rightDerivedFunctorPlusCompIso G H).hom.app
+          (DerivedCategory.Plus.Qh.obj (F.mapHomotopyCategoryPlus.obj K)) ≫
+        H.rightDerivedFunctorPlus.map (G.rightDerivedFunctorPlus.map
+          (F.rightDerivedFunctorPlusUnit.app K)) :=
+    (rightDerivedFunctorPlusCompIso G H).hom.naturality _
+  have facR : (F ⋙ G ⋙ H).rightDerivedFunctorPlusUnit.app K ≫
+      (rightDerivedFunctorPlusCompIso (F ⋙ G) H).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      (rightDerivedFunctorPlusCompUnit (F ⋙ G) H).app K :=
+    rightDerivedFunctorPlusCompIso_fac_app (F ⋙ G) H K
+  have unitR : (rightDerivedFunctorPlusCompUnit (F ⋙ G) H).app K =
+      H.rightDerivedFunctorPlusUnit.app (G.mapHomotopyCategoryPlus.obj
+          (F.mapHomotopyCategoryPlus.obj K)) ≫
+        H.rightDerivedFunctorPlus.map ((F ⋙ G).rightDerivedFunctorPlusUnit.app K) :=
+    rightDerivedFunctorPlusCompUnit_app (F ⋙ G) H K
+  trans H.rightDerivedFunctorPlusUnit.app
+      (G.mapHomotopyCategoryPlus.obj (F.mapHomotopyCategoryPlus.obj K)) ≫
+    H.rightDerivedFunctorPlus.map (G.rightDerivedFunctorPlusUnit.app
+      (F.mapHomotopyCategoryPlus.obj K)) ≫
+    H.rightDerivedFunctorPlus.map (G.rightDerivedFunctorPlus.map
+      (F.rightDerivedFunctorPlusUnit.app K))
+  · rw [← Category.assoc, rightDerivedFunctorPlusCompIso_fac_app,
+      rightDerivedFunctorPlusCompUnit_app, Category.assoc, hnat, ← Category.assoc,
+      rightDerivedFunctorPlusCompIso_fac_app, rightDerivedFunctorPlusCompUnit_app,
+      Category.assoc]
+  · symm
+    rw [← Category.assoc, facR, unitR, Category.assoc, ← Functor.map_comp,
+      rightDerivedFunctorPlusCompIso_fac_app, rightDerivedFunctorPlusCompUnit_app,
+      Functor.map_comp]
+
+end Coherence
 
 end Functor
 
