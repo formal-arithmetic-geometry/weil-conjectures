@@ -31,14 +31,14 @@ The site-theoretic inputs of the general definitions are discharged here:
   the `P = Q = @Etale` case of `AlgebraicGeometry.Scheme.isContinuous_overPullback` of
   `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. Hence `Etale.lowerStar`
   carries no hypotheses at all.
-- Sheafification on the small étale sites and the left Kan extensions along the
-  opposites of base change (together with their left
-  exactness) exist since `A` is Grothendieck abelian and the small étale sites are
-  essentially small; the latter are the sorried instances of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
+- The left Kan extensions along the opposites of base change exist since `A` is
+  Grothendieck abelian, with no smallness assumption on the small étale sites
+  (`CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`). Their left
+  exactness for an arbitrary `g` is still a sorried instance of that file, and
+  sheafification on the small étale sites is a sorried instance of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. Hence
-  `Etale.upperStar` and the adjunction
-  `g^* ⊣ g_*` carry no hypotheses either.
+  `Etale.upperStar` and the adjunction `g^* ⊣ g_*` carry no hypotheses either.
 - For `g` étale, no smallness or exactness argument is needed: base change is right
   adjoint to the localization functor `MorphismProperty.Over.map ⊤ ‹Etale g›`, so its
   opposite is a *left* adjoint (`Etale.isLeftAdjoint_op_overPullback`), all pointwise

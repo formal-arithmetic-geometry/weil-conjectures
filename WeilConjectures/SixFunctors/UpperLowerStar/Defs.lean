@@ -78,11 +78,13 @@ sheafification.
 - The continuity of the base change functor along an arbitrary morphism is proved, for
   `Q ≤ P`, as `AlgebraicGeometry.Scheme.isContinuous_overPullback` in
   `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small`. The left Kan extensions on
-  presheaves and the sheafification entering the definitions are provided, for `Q ≤ P`, by
-  the sorried results of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian`,
-  under the multiplicativity-type assumptions on `P` and `Q` assumed throughout; all of
-  them hold for `P = Q = @Etale`. The inequality `hQP : Q ≤ P` is an explicit argument of
-  the definitions using continuity.
+  presheaves entering the definitions exist by
+  `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback`; the
+  sheafification is provided, for `Q ≤ P`, by the sorried results of the folder
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian`, under the multiplicativity-type
+  assumptions on `P` and `Q` assumed throughout; all of them hold for `P = Q = @Etale`.
+  The inequality `hQP : Q ≤ P` is an explicit argument of the definitions using
+  continuity.
 
 -/
 
@@ -153,9 +155,10 @@ instance preservesFiniteLimits_lowerStar :
 section Adjunction
 
 /-- The pullback `g^*` along `g : W ⟶ U`: left Kan extension on presheaves followed by
-sheafification, left adjoint to `lowerStar`. The Kan extensions and the sheafification
-are provided by the sorried instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` and
+sheafification, left adjoint to `lowerStar`. The Kan extensions exist by
+`CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`; the
+sheafification is provided by the sorried instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
 noncomputable def upperStar :
     Sheaf (U.smallGrothendieckTopology Q (Q := P)) A ⥤
