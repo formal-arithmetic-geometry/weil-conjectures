@@ -28,12 +28,14 @@ followed by the structure morphism `ℙ(n; S) ↘ S`.
 
 Stacks 01W7 defines `f : X ⟶ S` to be projective if there is a quasi-coherent graded
 `𝒪_S`-algebra `𝒜`, generated in degree one by a finite type degree-one part, together with an
-`S`-isomorphism of `X` with a closed subscheme of `Proj_S 𝒜`. Over a base admitting an ample
-family this is equivalent to the "H-projective" condition used here, and in the generality of
-this file the two conditions agree because the index type is required to be finite: the
-factorisation exhibits `f` as a composition of a closed immersion with a proper morphism, so no
-quasi-compactness hypothesis has to be imposed separately (closed immersions are finite, hence
-proper, and `ℙ(n; S) ↘ S` is proper for finite `n`).
+`S`-isomorphism of `X` with a closed subscheme of `Proj_S 𝒜`. The "H-projective" condition
+formalised here always implies that one; the converse needs a hypothesis on the base, and holds
+for example whenever `S` admits an ample family of line bundles. The `@[stacks 01W7]` tag on
+`IsProjective` refers to part (2) of that definition, which is the H-projective condition itself.
+
+No quasi-compactness hypothesis has to be imposed separately, since the factorisation already
+exhibits `f` as a closed immersion (finite, hence proper) followed by the proper morphism
+`ℙ(n; S) ↘ S`.
 
 The index type of `ℙ(n; S)` lives in the same universe as `S`, so the `n + 1` homogeneous
 coordinates of the classical `ℙⁿ_S` are indexed by `ULift.{u} (Fin (n + 1))` rather than by
