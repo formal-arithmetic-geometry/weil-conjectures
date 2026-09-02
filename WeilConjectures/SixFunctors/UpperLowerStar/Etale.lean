@@ -70,7 +70,9 @@ The site-theoretic inputs of the general definitions are discharged here:
   `AlgebraicGeometry.Etale.lowerStarComp_id_left` and its five siblings.
   `AlgebraicGeometry.Etale.upperStarId_inv_app_counit_app` and
   `AlgebraicGeometry.Etale.upperStarComp_inv_app_counit_app` record the counit form of the
-  compatibility of these isomorphisms with the adjunctions `g^* ⊣ g_*`.
+  compatibility of these isomorphisms with the adjunctions `g^* ⊣ g_*`, and
+  `AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app` records the unit form for the
+  identity.
 - `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category; in particular it is left
@@ -282,6 +284,23 @@ lemma Etale.upperStarId_inv_app_counit_app (F : Sheaf V.smallEtaleTopology A) :
     congrArg Iso.inv (Etale.conjugateIsoEquiv_upperStarId A V)
   have h := conjugateEquiv_counit (Etale.upperStarLowerStarAdjunction A (𝟙 V))
     (Adjunction.id (C := Sheaf V.smallEtaleTopology A)) (Etale.upperStarId A V).inv F
+  rw [hconj] at h
+  simpa using h.symm
+
+/-- The unit form of `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarId`: transposing
+the identity isomorphism of the pullback along the adjunction `(𝟙 V)^* ⊣ (𝟙 V)_*` gives the
+identity isomorphism of the pushforward. This is the counterpart of
+`AlgebraicGeometry.Etale.upperStarId_inv_app_counit_app` on the unit side. -/
+lemma Etale.upperStarId_hom_app_unit_app (F : Sheaf V.smallEtaleTopology A) :
+    (Etale.upperStarLowerStarAdjunction A (𝟙 V)).unit.app F ≫
+        ((𝟙 V)_*[A]).map ((Etale.upperStarId A V).hom.app F) =
+      (Etale.lowerStarId A V).inv.app F := by
+  have hconj : conjugateEquiv (Adjunction.id (C := Sheaf V.smallEtaleTopology A))
+      (Etale.upperStarLowerStarAdjunction A (𝟙 V)) (Etale.upperStarId A V).hom =
+      (Etale.lowerStarId A V).inv :=
+    congrArg Iso.hom (Etale.conjugateIsoEquiv_upperStarId A V)
+  have h := unit_conjugateEquiv (Adjunction.id (C := Sheaf V.smallEtaleTopology A))
+    (Etale.upperStarLowerStarAdjunction A (𝟙 V)) (Etale.upperStarId A V).hom F
   rw [hconj] at h
   simpa using h.symm
 

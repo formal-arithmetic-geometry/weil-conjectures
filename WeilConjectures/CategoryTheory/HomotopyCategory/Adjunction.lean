@@ -42,6 +42,11 @@ complexes, where the unit is given degreewise by the unit of `adj`.
 
 - `CategoryTheory.Adjunction.mapHomotopyCategoryPlus_id_unit_app`: the identity law.
 - `CategoryTheory.Adjunction.mapHomotopyCategoryPlus_comp_unit_app`: the composition law.
+- `CategoryTheory.Adjunction.mapHomotopyCategoryPlus_unit_app_comp`: if an adjunction
+  `L ⊣ R` of endofunctors comes with isomorphisms `L ≅ 𝟭` and `R ≅ 𝟭` that correspond to
+  each other under the conjugation bijection, in the form of the unit relation
+  `adj.unit ≫ R(u) = l⁻¹`, then the same relation holds for the induced adjunction on the
+  bounded below homotopy categories.
 -/
 
 @[expose] public section
@@ -330,6 +335,80 @@ lemma mapHomotopyCategoryPlus_comp_unit_app {L₁ : C ⥤ D} {R₁ : D ⥤ C} (a
     mapHomotopyCategory_comp_unit_app]
 
 end Plus
+
+section Conjugate
+
+variable {L R : C ⥤ C} [L.Additive] [R.Additive] (adj : L ⊣ R) (u : L ≅ 𝟭 C) (l : R ≅ 𝟭 C)
+  (h : ∀ X, adj.unit.app X ≫ R.map (u.hom.app X) = l.inv.app X)
+
+include h in
+/-- Transport to complexes of the unit relation `adj.unit ≫ R(u) = l⁻¹` between an
+adjunction `L ⊣ R` of endofunctors and isomorphisms `u : L ≅ 𝟭`, `l : R ≅ 𝟭`: the unit of
+`Adjunction.mapHomologicalComplex` satisfies the same relation, since it is given
+degreewise by the unit of `adj`. -/
+lemma mapHomologicalComplex_unit_app_comp (X : HomologicalComplex C c) :
+    (adj.mapHomologicalComplex c).unit.app X ≫
+        (R.mapHomologicalComplex c).map ((NatTrans.mapHomologicalComplex u.hom c).app X) =
+      (NatTrans.mapHomologicalComplex l.inv c).app X := by
+  ext n
+  simp [h]
+
+section
+
+variable [(HomotopyCategory.quotient C c).IsLocalization
+  (HomologicalComplex.homotopyEquivalences C c)]
+
+include h in
+/-- The homotopy category form of `Adjunction.mapHomologicalComplex_unit_app_comp`. -/
+lemma mapHomotopyCategory_unit_app_comp (Y : HomotopyCategory C c) :
+    (adj.mapHomotopyCategory c).unit.app Y ≫
+        (R.mapHomotopyCategory c).map ((NatTrans.mapHomotopyCategory u.hom c).app Y) =
+      (NatTrans.mapHomotopyCategory l.inv c).app Y := by
+  obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
+  have hu : (NatTrans.mapHomotopyCategory u.hom c).app
+      ((HomotopyCategory.quotient C c).obj X) =
+      (HomotopyCategory.quotient C c).map
+        ((NatTrans.mapHomologicalComplex u.hom c).app X) := rfl
+  have hl : (NatTrans.mapHomotopyCategory l.inv c).app
+      ((HomotopyCategory.quotient C c).obj X) =
+      (HomotopyCategory.quotient C c).map
+        ((NatTrans.mapHomologicalComplex l.inv c).app X) := rfl
+  have hmapR : ∀ {P Q : HomologicalComplex C c} (g : P ⟶ Q),
+      (R.mapHomotopyCategory c).map ((HomotopyCategory.quotient C c).map g) =
+        (HomotopyCategory.quotient C c).map ((R.mapHomologicalComplex c).map g) :=
+    fun _ => rfl
+  rw [mapHomotopyCategory_unit_app_quotient, hu, hl, hmapR, ← Functor.map_comp,
+    mapHomologicalComplex_unit_app_comp c adj u l h]
+
+end
+
+include h in
+/-- The bounded below homotopy category form of
+`Adjunction.mapHomologicalComplex_unit_app_comp`: if `u : L ≅ 𝟭` and `l : R ≅ 𝟭` satisfy
+the unit relation `adj.unit ≫ R(u) = l⁻¹` for an adjunction `L ⊣ R` of endofunctors, then
+so do the transformations they induce on the bounded below homotopy categories. -/
+lemma mapHomotopyCategoryPlus_unit_app_comp [Limits.HasBinaryBiproducts C]
+    (K : HomotopyCategory.Plus C) :
+    adj.mapHomotopyCategoryPlus.unit.app K ≫
+        R.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus u.hom).app K) =
+      (NatTrans.mapHomotopyCategoryPlus l.inv).app K := by
+  apply (HomotopyCategory.Plus.ι C).map_injective
+  have hmapR : ∀ {P Q : HomotopyCategory.Plus C} (g : P ⟶ Q),
+      (HomotopyCategory.Plus.ι C).map (R.mapHomotopyCategoryPlus.map g) =
+        (R.mapHomotopyCategory (ComplexShape.up ℤ)).map
+          ((HomotopyCategory.Plus.ι C).map g) := fun _ => rfl
+  have hu : (HomotopyCategory.Plus.ι C).map
+      ((NatTrans.mapHomotopyCategoryPlus u.hom).app K) =
+      (NatTrans.mapHomotopyCategory u.hom (ComplexShape.up ℤ)).app
+        ((HomotopyCategory.Plus.ι C).obj K) := rfl
+  have hl : (HomotopyCategory.Plus.ι C).map
+      ((NatTrans.mapHomotopyCategoryPlus l.inv).app K) =
+      (NatTrans.mapHomotopyCategory l.inv (ComplexShape.up ℤ)).app
+        ((HomotopyCategory.Plus.ι C).obj K) := rfl
+  rw [Functor.map_comp, hmapR, hu, hl, ι_map_mapHomotopyCategoryPlus_unit_app]
+  exact mapHomotopyCategory_unit_app_comp (ComplexShape.up ℤ) adj u l h K.obj
+
+end Conjugate
 
 end Adjunction
 

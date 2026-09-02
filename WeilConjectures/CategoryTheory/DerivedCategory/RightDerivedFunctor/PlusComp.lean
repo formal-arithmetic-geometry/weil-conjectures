@@ -121,6 +121,18 @@ noncomputable def rightDerivedFunctorPlusNatIso {F G : C ⥤ D} [F.Additive] [G.
     simp [rightDerivedFunctorPlusNatTrans, ← Functor.whiskerRight_comp,
       ← NatTrans.mapHomotopyCategoryPlus_comp]
 
+/-- The natural transformation `Functor.rightDerivedFunctorPlusNatTrans τ` is characterized
+by its compatibility with the units of the two right derived functors: on the image of a
+bounded below complex it is the levelwise image of `τ`. -/
+@[reassoc (attr := simp)]
+lemma rightDerivedFunctorPlusNatTrans_app {F G : C ⥤ D} [F.Additive] [G.Additive]
+    (τ : F ⟶ G) (K : HomotopyCategory.Plus C) :
+    F.rightDerivedFunctorPlusUnit.app K ≫
+        (rightDerivedFunctorPlusNatTrans τ).app (DerivedCategory.Plus.Qh.obj K) =
+      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus τ).app K) ≫
+        G.rightDerivedFunctorPlusUnit.app K := by
+  simp [rightDerivedFunctorPlusNatTrans]
+
 /-- The natural transformation induced on bounded below right derived functors by a natural
 isomorphism is an isomorphism. -/
 instance isIso_rightDerivedFunctorPlusNatTrans {F G : C ⥤ D} [F.Additive] [G.Additive]
