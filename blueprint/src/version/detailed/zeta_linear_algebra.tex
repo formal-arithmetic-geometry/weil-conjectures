@@ -1,0 +1,819 @@
+% This file is a chapter fragment.  It is included by version/detailed.tex.
+
+\chapter{Zeta linear algebra}\label{chap:zla}
+
+This chapter is the purely algebraic endgame of the Weil conjectures: what one
+can deduce about a power series
+\[
+  Z(T)=\operatorname{Exp}\left(\sum_{n\geq1}N_n\frac{T^n}{n}\right)
+\]
+from the sole knowledge that its counting numbers $N_n$ are the alternating
+sums of the traces of the iterates of an endomorphism on a finite family of
+finite-dimensional vector spaces.  No geometry and no cohomology enter here; the
+input is a \emph{trace datum} (\Cref{def:zla-trace-datum}), which is what the
+Grothendieck--Lefschetz trace formula will eventually supply.
+
+The two statements this material serves are
+\begin{itemize}
+\item \texttt{AlgebraicGeometry.Scheme.zetaSeries\_rational} of
+      \texttt{WeilConjectures/Statement.lean}: the zeta series of a scheme of
+      finite type over a finite field is $P/Q$ with $P,Q\in\mathbf Z[T]$ and
+      $Q(0)=1$.  The chain that produces it is
+      \Cref{prop:zla-cohomological-factorization} (rationality after scalar
+      extension), \Cref{thm:zla-hankel-descent} together with
+      \Cref{cor:zla-rationality-counting-field} (descent of rationality to
+      $\mathbf Q$), and \Cref{thm:zla-integral-fatou} (integrality of the
+      reduced fraction).
+\item \texttt{AlgebraicGeometry.IsWeilFactorization} of
+      \texttt{Comparator/Weil/Definitions.lean}: the factorization
+      $Z\cdot\prod_{i\text{ even}}P_i=\prod_{i\text{ odd}}P_i$ with
+      $P_i\in\mathbf Z[T]$, $P_i(0)=1$.  Its factorization identity comes from
+      \Cref{prop:zla-cohomological-factorization}, and the integrality of the
+      individual $P_i$ from
+      \Cref{prop:zla-parity-identification},
+      \Cref{prop:zla-unique-recovery} and
+      \Cref{prop:zla-factor-integrality}, which separate the factors by
+      weight.  The last section prepares the functional equation by computing
+      the reciprocal characteristic polynomial of the partner of a Frobenius
+      under a perfect similitude pairing
+      (\Cref{thm:zla-degreewise-reciprocal}).
+\end{itemize}
+
+The source is the sketch article
+\texttt{blueprint/src/version/sketch/49\_zeta\_linear\_algebra.tex}, and only
+the statements that are to be formalised in this subtree are reproduced here:
+its sections on formal power series at the origin, locally finite products,
+periodic permutations, closed points and the Hasse--Weil series, compatible
+realizations, the middle pairing and its determinant sign, bounded graded
+duality systems, the raw and normalized functional equations,
+realization-independent constants and the final arithmetic theorem are
+deliberately omitted, as are the derived-category formulation of a trace datum
+and the statements about perfect complexes that go with it.
+
+Throughout, $R[[T]]$ is the ring of formal power series over a commutative
+ring $R$, identities in it are coefficientwise, and for a commutative
+$\mathbf Q$-algebra $R$ we write
+\[
+  \operatorname{Exp}(U)=\sum_{r\geq0}\frac{U^r}{r!}\in1+TR[[T]],
+  \qquad
+  \operatorname{Log}(1+V)=\sum_{r\geq1}(-1)^{r+1}\frac{V^r}{r}\in TR[[T]]
+\]
+for $U,V\in TR[[T]]$; both sums are coefficientwise finite.
+
+\section{Determinants and traces in finite dimension}\label{sec:zla-det-trace}
+
+Let $E$ be a field of characteristic zero.
+
+\begin{definition}[Reciprocal characteristic polynomial]
+\label{def:zla-recip-charpoly}
+For a finite-dimensional $E$-vector space $V$ and
+$u\in\operatorname{End}_E(V)$, define
+\[
+  P_{V,u}(T)=\det(1-Tu\mid V)\in E[T].
+\]
+After scalar extension to an algebraic closure $\Omega/E$, write
+\[
+  P_{V,u}(T)=\prod_{j=1}^{\dim_EV}(1-\alpha_jT).
+\]
+The multiset $\{\alpha_j\}$, with algebraic multiplicities, is the multiset of
+\emph{reciprocal roots} of $P_{V,u}$; it is the eigenvalue multiset of $u$.
+If $u$ is invertible then every $\alpha_j\neq0$, $\deg P_{V,u}=\dim_EV$, and
+the leading coefficient is
+$[T^{\dim V}]P_{V,u}=(-1)^{\dim V}\det(u)$.
+\end{definition}
+
+\begin{lemma}[Finite-dimensional trace--determinant identity]
+\label{lem:zla-trace-det}
+\uses{def:zla-recip-charpoly}
+Let $V$ be a finite-dimensional $E$-vector space and let
+$u\in\operatorname{End}_E(V)$.  Then
+\[
+  P_{V,u}(T)^{-1}
+  =\operatorname{Exp}\left(\sum_{n\geq1}\Tr(u^n\mid V)\frac{T^n}{n}\right)
+  \qquad\text{in }E[[T]],
+\]
+the inverse on the left being taken in $E[[T]]$, which is legitimate because
+$P_{V,u}(0)=1$.  Equivalently,
+\[
+  T\frac{d}{dT}\operatorname{Log}P_{V,u}(T)^{-1}
+  =\sum_{n\geq1}\Tr(u^n\mid V)T^n.
+\]
+No semisimplicity assumption is imposed on $u$.
+\end{lemma}
+\begin{proof}
+Differentiating a determinant gives the matrix identity
+$\frac{d}{dT}\det(1-Tu)=-\det(1-Tu)\Tr\!\left((1-Tu)^{-1}u\right)$ in
+$E[[T]]$, where the formal resolvent is
+$(1-Tu)^{-1}=\sum_{n\geq0}T^nu^n$; taking the trace coefficientwise turns the
+right-hand side into $-\det(1-Tu)\sum_{n\geq1}\Tr(u^n)T^{n-1}$.  Both sides of
+the asserted identity therefore have constant coefficient $1$ and the same
+logarithmic derivative, and over a $\mathbf Q$-algebra a power series is
+determined by its constant coefficient and its derivative.
+\end{proof}
+
+\section{The trace datum and cohomological factorization}
+\label{sec:zla-trace-datum}
+
+\begin{definition}[Finite cohomological trace datum]
+\label{def:zla-trace-datum}
+\uses{def:zla-recip-charpoly}
+Let $E$ be a field of characteristic zero.  A \emph{finite cohomological trace
+datum} over $E$ consists of:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item an integer $r\geq0$ and, for each $0\leq i\leq r$, a finite-dimensional
+      $E$-vector space $V_i$ together with an endomorphism
+      $F_i\in\operatorname{End}_E(V_i)$;
+\item integers $N_n\in\mathbf Z$ for every $n\geq1$;
+\item the equalities
+\[
+  N_n=\sum_{i=0}^r(-1)^i\Tr(F_i^n\mid V_i)
+  \qquad\text{in }E,\qquad(n\geq1),
+\]
+the left-hand side being the image of $N_n$ under
+$\mathbf Z\to\mathbf Q\to E$.
+\end{enumerate}
+Put $P_i(T)=\det(1-TF_i\mid V_i)$.  In the intended application $V_i$ is the
+$i$-th cohomology group of a perfect complex and $F_i$ is induced by a
+Frobenius automorphism, but nothing below uses a complex: only the finite
+family $(V_i,F_i)_{0\leq i\leq r}$ and the trace equalities enter.
+\end{definition}
+
+\begin{lemma}[Counting logarithm equals trace logarithm]
+\label{lem:zla-counting-log}
+\uses{def:zla-trace-datum}
+For a finite cohomological trace datum,
+\[
+  \sum_{n\geq1}N_n\frac{T^n}{n}
+  =\sum_{n\geq1}\left(\sum_{i=0}^r(-1)^i\Tr(F_i^n\mid V_i)\right)\frac{T^n}{n}
+  \qquad\text{in }TE[[T]].
+\]
+\end{lemma}
+\begin{proof}
+The two series are compared coefficientwise; in degree $n$ the assertion is
+the image in $E$ of the equality (iii) of \Cref{def:zla-trace-datum} divided by
+the invertible integer $n$.  The left-hand side is the coefficientwise scalar
+extension along $\mathbf Q\to E$ of a series with rational coefficients.
+\end{proof}
+
+\begin{proposition}[Cohomological determinant factorization]
+\label{prop:zla-cohomological-factorization}
+\uses{def:zla-trace-datum, lem:zla-counting-log, lem:zla-trace-det}
+For a finite cohomological trace datum,
+\[
+  \operatorname{Exp}\left(\sum_{n\geq1}N_n\frac{T^n}{n}\right)
+  =\prod_{i=0}^rP_i(T)^{(-1)^{i+1}}
+  \qquad\text{in }E[[T]],
+\]
+where a negative exponent denotes the inverse in $E[[T]]$, available because
+$P_i(0)=1$.  Equivalently, clearing the inverses,
+\[
+  \operatorname{Exp}\left(\sum_{n\geq1}N_n\frac{T^n}{n}\right)
+  \cdot\prod_{\substack{0\leq i\leq r\\ i\text{ even}}}P_i(T)
+  =\prod_{\substack{0\leq i\leq r\\ i\text{ odd}}}P_i(T),
+\]
+which is the shape of the factorization required by
+\texttt{IsWeilFactorization}.  In particular the left-hand side is the Taylor
+expansion at the origin of a rational function in $E(T)$.
+\end{proposition}
+\begin{proof}
+By \Cref{lem:zla-counting-log} the exponent may be rewritten as the finite
+alternating sum $\sum_i(-1)^i\sum_{n\geq1}\Tr(F_i^n\mid V_i)T^n/n$.  The formal
+exponential turns a finite sum into a finite product, so the left-hand side is
+$\prod_i\operatorname{Exp}\left(\sum_n\Tr(F_i^n)T^n/n\right)^{(-1)^i}$, and
+each factor is $P_i(T)^{-1}$ by \Cref{lem:zla-trace-det}.
+\end{proof}
+
+\section{Rational germs and Hankel descent}\label{sec:zla-hankel}
+
+\begin{definition}[Normalized rational germ]
+\label{def:zla-rational-germ}
+Let $K$ be a field.  A \emph{normalized polynomial fraction} is a pair
+$(A,B)\in K[T]^2$ with $B(0)=1$.  Two pairs are equivalent when
+\[
+  (A,B)\sim(A',B')
+  \quad\Longleftrightarrow\quad
+  AB'=A'B.
+\]
+The resulting equivalence class is a \emph{normalized rational germ at zero}.
+Its rational-function value is $A/B\in K(T)$ and its Taylor series is
+\[
+  \tau_K[A,B]=A(T)B(T)^{-1}\in K[[T]],
+\]
+the inverse being taken in $K[[T]]$.  Write $K(T)_0\subseteq K(T)$ for the
+subring of rational functions regular at $T=0$.
+\end{definition}
+
+\begin{lemma}[Faithfulness of the Taylor map]
+\label{lem:zla-taylor-faithful}
+\uses{def:zla-rational-germ}
+If two normalized rational germs have the same Taylor series, then they are
+equal.  Equivalently, Taylor expansion gives an injective map
+\[
+  K(T)_0\hookrightarrow K[[T]].
+\]
+\end{lemma}
+\begin{proof}
+A denominator with constant coefficient $1$ is invertible in $K[[T]]$, so the
+equality $AB^{-1}=A'B'^{-1}$ of power series may be cross-multiplied to
+$AB'=A'B$ in $K[[T]]$; both sides are polynomials, and $K[T]\to K[[T]]$ is
+injective, so the equality holds in $K[T]$, which is the defining relation of
+the equivalence.
+\end{proof}
+
+\begin{definition}[Shift span and Hankel matrix]
+\label{def:zla-shift-span}
+For a sequence $a=(a_n)_{n\geq0}\in K^{\mathbf N}$, define the left shift $Sa$
+by $(Sa)_n=a_{n+1}$, and put
+\[
+  \operatorname{Sh}_K(a)=\Span_K\{S^ma:m\geq0\}\subseteq K^{\mathbf N}.
+\]
+The associated Hankel matrix is $H(a)=(a_{r+s})_{r,s\geq0}$; its columns are
+the shifts of $a$.  It has rank at most $h$ if every $(h+1)\times(h+1)$ minor
+$\det(a_{r_x+s_y})_{0\leq x,y\leq h}$ vanishes, for all choices of nonnegative
+indices $r_x,s_y$.
+\end{definition}
+
+\begin{definition}[Eventual recurrence]
+\label{def:zla-eventual-recurrence}
+An \emph{eventual recurrence of order $d$} for a sequence
+$a\in K^{\mathbf N}$ is a tuple $(c_1,\ldots,c_d;N)$ in
+$K^d\times\mathbf N$ satisfying
+\[
+  a_n+c_1a_{n-1}+\cdots+c_da_{n-d}=0
+  \qquad(n\geq\max\{N,d\}).
+\]
+\end{definition}
+
+\begin{lemma}[A rational germ supplies a recurrence]
+\label{lem:zla-germ-recurrence}
+\uses{def:zla-rational-germ, def:zla-eventual-recurrence}
+Let $f(T)=\sum_{n\geq0}a_nT^n$ be the Taylor series of the normalized rational
+germ $A(T)/B(T)$, where $B(T)=1+c_1T+\cdots+c_dT^d$.  Then
+\[
+  a_n+c_1a_{n-1}+\cdots+c_da_{n-d}=0
+\]
+whenever $n>\deg A$ and $n\geq d$.  In particular $(c_1,\ldots,c_d;\deg A+1)$
+is an eventual recurrence of order $d$ for $a$.
+\end{lemma}
+\begin{proof}
+Read off the coefficient of $T^n$ in the identity $B(T)f(T)=A(T)$: the
+left-hand side contributes $\sum_{k=0}^{d}c_ka_{n-k}$ with $c_0=1$, and the
+right-hand side contributes $0$ once $n>\deg A$.
+\end{proof}
+
+\begin{lemma}[A recurrence gives finite shift span]
+\label{lem:zla-recurrence-shift-span}
+\uses{def:zla-eventual-recurrence, def:zla-shift-span}
+If $a\in K^{\mathbf N}$ satisfies an eventual recurrence, then
+$\operatorname{Sh}_K(a)$ is finite-dimensional.
+\end{lemma}
+\begin{proof}
+Let $(c_1,\ldots,c_d;N)$ be the recurrence and put
+$M=\max\{N,d\}$.  Beyond the threshold the recurrence expresses $S^ma$, for
+$m\geq M$, as a $K$-linear combination of $S^{m-1}a,\ldots,S^{m-d}a$ up to a
+sequence supported in the finitely many coordinates below the threshold; hence
+$\operatorname{Sh}_K(a)$ is contained in the span of
+$a,Sa,\ldots,S^{M-1}a$ together with the finitely many coordinate vectors
+supported before the recurrence threshold, and by induction on $m$ every shift
+lies in that finite-dimensional space.
+\end{proof}
+
+\begin{lemma}[Finite coordinates detect independent sequences]
+\label{lem:zla-finite-coordinates}
+Let $v_1,\ldots,v_r\in K^{\mathbf N}$ be linearly independent.  There exist
+indices $n_1,\ldots,n_r\in\mathbf N$ such that
+\[
+  \det\left(v_j(n_i)\right)_{1\leq i,j\leq r}\neq0.
+\]
+\end{lemma}
+\begin{proof}
+Induct on $r$ by finite Gaussian elimination: given indices that work for
+$v_1,\ldots,v_{r-1}$, subtract from $v_r$ the unique combination of
+$v_1,\ldots,v_{r-1}$ agreeing with it at those indices; the residual sequence
+is nonzero by independence, so it does not vanish at some further coordinate
+$n_r$, and expanding the determinant along the last row gives a nonzero
+value.
+\end{proof}
+
+\begin{proposition}[Finite shift span supplies a rational germ]
+\label{prop:zla-shift-span-germ}
+\uses{def:zla-shift-span, def:zla-rational-germ}
+Assume $W=\operatorname{Sh}_K(a)$ is finite-dimensional of dimension $r$.  The
+shift restricts to an endomorphism $S_W:W\to W$.  Write
+\[
+  \det(U-S_W)=U^r+c_{r-1}U^{r-1}+\cdots+c_0
+\]
+and set $B_a(T)=1+c_{r-1}T+\cdots+c_0T^r$.  If
+$f_a(T)=\sum_{n\geq0}a_nT^n$, then $B_a(T)f_a(T)$ is a polynomial $A_a(T)$.
+If $r=0$ then $a=0$ and $A_a=0$; if $r>0$ then $\deg A_a<r$.  In both cases
+$f_a(T)=\tau_K[A_a,B_a]$.
+\end{proposition}
+\begin{proof}
+Cayley--Hamilton applied to $S_W$ gives
+$S^ra+c_{r-1}S^{r-1}a+\cdots+c_0a=0$ in $W$, that is
+$a_{n+r}+c_{r-1}a_{n+r-1}+\cdots+c_0a_n=0$ for every $n\geq0$.  This is
+exactly the vanishing of the coefficient of $T^{n+r}$ in $B_a(T)f_a(T)$, so
+that product is a polynomial of degree less than $r$.  Since $B_a(0)=1$, the
+pair $(A_a,B_a)$ is a normalized polynomial fraction with Taylor series
+$f_a$.
+\end{proof}
+
+\begin{lemma}[Finite determinants reflect scalar extension]
+\label{lem:zla-det-scalar-extension}
+Let $K\hookrightarrow L$ be an injective field homomorphism.  For every finite
+square matrix $M$ over $K$,
+\[
+  \det(M)=0
+  \quad\Longleftrightarrow\quad
+  \det(M\otimes_KL)=0.
+\]
+Consequently a finite family of sequences in $K^{\mathbf N}$ that is linearly
+independent over $K$ remains linearly independent over $L$, and every finite
+bound on the dimension of the shift span over $L$ descends to a bound over
+$K$.
+\end{lemma}
+\begin{proof}
+The determinant is a finite polynomial expression in the matrix entries and is
+compatible with the ring homomorphism $K\to L$, which is injective, so it
+reflects the vanishing of that expression.  The consequence follows from
+\Cref{lem:zla-finite-coordinates}: a $K$-independent family has a nonvanishing
+finite coordinate determinant, which stays nonzero over $L$.
+\end{proof}
+
+\begin{theorem}[Hankel rationality descent]
+\label{thm:zla-hankel-descent}
+\uses{def:zla-rational-germ, def:zla-shift-span, lem:zla-germ-recurrence,
+lem:zla-recurrence-shift-span, lem:zla-finite-coordinates,
+lem:zla-det-scalar-extension, prop:zla-shift-span-germ}
+For every field extension $K\subseteq L$,
+\[
+  K[[T]]\cap L(T)_0=K(T)_0
+\]
+inside $L[[T]]$.  Explicitly, if $f\in K[[T]]$ becomes the Taylor series of a
+normalized rational germ over $L$, then its coefficient sequence has finite
+shift span over $K$, and the characteristic polynomial of the shift on that
+span constructs a normalized rational germ over $K$ whose Taylor series is
+$f$.
+\end{theorem}
+\begin{proof}
+Let $a$ be the coefficient sequence of $f$, which lies in $K^{\mathbf N}$.  A
+normalized rational germ over $L$ with Taylor series $f$ supplies an eventual
+recurrence for $a$ over $L$ (\Cref{lem:zla-germ-recurrence}), hence a finite
+bound on $\dim_L\operatorname{Sh}_L(a)$
+(\Cref{lem:zla-recurrence-shift-span}).  Any $K$-independent family of shifts
+of $a$ has a nonvanishing finite coordinate determinant
+(\Cref{lem:zla-finite-coordinates}) and therefore stays independent over $L$
+(\Cref{lem:zla-det-scalar-extension}); so $\dim_K\operatorname{Sh}_K(a)$ is
+bounded by the same number.  Now \Cref{prop:zla-shift-span-germ} over $K$
+produces $A_a,B_a\in K[T]$ with $B_a(0)=1$ and
+$f=\tau_K[A_a,B_a]$.  The reverse inclusion is trivial.
+\end{proof}
+
+\begin{corollary}[Rationality over the counting field]
+\label{cor:zla-rationality-counting-field}
+\uses{thm:zla-hankel-descent, def:zla-rational-germ}
+If $Z(T)\in\mathbf Q[[T]]$ becomes the Taylor series of a normalized rational
+germ after coefficientwise extension to a characteristic-zero field $E$, then
+$Z(T)\in\mathbf Q(T)_0$: there are $A,B\in\mathbf Q[T]$ with $B(0)=1$ and
+$B(T)Z(T)=A(T)$.
+\end{corollary}
+\begin{proof}
+Apply \Cref{thm:zla-hankel-descent} to the extension $\mathbf Q\subseteq E$,
+which is an extension of fields because $E$ has characteristic zero.
+\end{proof}
+
+\section{Integral Fatou and normalized Gauss descent}\label{sec:zla-fatou}
+
+\begin{definition}[Integral shift lattice]
+\label{def:zla-integral-shift-lattice}
+\uses{def:zla-shift-span}
+Let $a\in\mathbf Z^{\mathbf N}$ have finite-dimensional rational shift span
+$W=\operatorname{Sh}_{\mathbf Q}(a)$.  Define
+\[
+  M(a)=\sum_{m\geq0}\mathbf Z\,S^ma\subseteq W.
+\]
+This is a shift-stable torsion-free abelian group with
+$M(a)\otimes_{\mathbf Z}\mathbf Q=W$.
+\end{definition}
+
+\begin{lemma}[Finite-coordinate lattice]
+\label{lem:zla-finite-coordinate-lattice}
+\uses{def:zla-integral-shift-lattice, lem:zla-finite-coordinates}
+With the notation of \Cref{def:zla-integral-shift-lattice}, there is a finite
+set $J\subset\mathbf N$ such that coordinate evaluation
+\[
+  \operatorname{ev}_J:W\longrightarrow\mathbf Q^J
+\]
+is injective.  Its restriction maps $M(a)$ injectively into $\mathbf Z^J$.
+Hence $M(a)$ is a finite free abelian group.
+\end{lemma}
+\begin{proof}
+Choose a basis of $W$ consisting of shifts of $a$ and let $J$ be a set of
+coordinates on which the corresponding determinant does not vanish
+(\Cref{lem:zla-finite-coordinates}); then $\operatorname{ev}_J$ is injective on
+$W$ for dimension reasons.  Every element of $M(a)$ is an integral linear
+combination of integral sequences, hence integral, so
+$\operatorname{ev}_J(M(a))\subseteq\mathbf Z^J$, and a subgroup of a finite
+free abelian group is finite free.
+\end{proof}
+
+\begin{lemma}[Integral Cayley--Hamilton recurrence]
+\label{lem:zla-integral-cayley-hamilton}
+\uses{def:zla-integral-shift-lattice, lem:zla-finite-coordinate-lattice}
+With the notation of \Cref{def:zla-integral-shift-lattice}, the shift
+endomorphism $S:M(a)\to M(a)$ has a monic characteristic polynomial
+\[
+  C(U)=U^r+c_{r-1}U^{r-1}+\cdots+c_0\in\mathbf Z[U],
+\]
+where $r$ is the rank of $M(a)$, and for every $n\geq0$,
+\[
+  a_{n+r}+c_{r-1}a_{n+r-1}+\cdots+c_0a_n=0.
+\]
+\end{lemma}
+\begin{proof}
+By \Cref{lem:zla-finite-coordinate-lattice} the group $M(a)$ is finite free, and
+it is stable under the shift, so $S$ has an integral matrix in any basis; its
+characteristic polynomial is monic with integer coefficients.
+Cayley--Hamilton over $\mathbf Z$ gives
+$S^ra+c_{r-1}S^{r-1}a+\cdots+c_0a=0$ in $M(a)$, and reading this equality of
+sequences in coordinate $n$ is the displayed recurrence.
+\end{proof}
+
+\begin{proposition}[Integral rational presentation]
+\label{prop:zla-integral-presentation}
+\uses{lem:zla-integral-cayley-hamilton, thm:zla-hankel-descent,
+def:zla-rational-germ}
+Let $f(T)=\sum_{n\geq0}a_nT^n\in\mathbf Z[[T]]$ be the Taylor series of a
+normalized rational germ over $\mathbf Q$.  Then there exist
+$A_0,B_0\in\mathbf Z[T]$ with $B_0(0)=1$ and $A_0(0)=a_0$ such that
+\[
+  B_0(T)f(T)=A_0(T)
+  \qquad\text{in }\mathbf Z[[T]].
+\]
+One may take $B_0(T)=1+c_{r-1}T+\cdots+c_0T^r$ built from the characteristic
+polynomial of the shift on the integral shift lattice.
+\end{proposition}
+\begin{proof}
+Rationality over $\mathbf Q$ makes $\operatorname{Sh}_{\mathbf Q}(a)$
+finite-dimensional, so the integral shift lattice is defined and
+\Cref{lem:zla-integral-cayley-hamilton} applies.  Multiplying $f$ by the
+integral polynomial $B_0$ built from the recurrence kills every coefficient in
+degree at least $r$, so the product is a polynomial with integer coefficients;
+its constant coefficient is $a_0$ because $B_0(0)=1$.
+\end{proof}
+
+\begin{lemma}[Normalized Gauss factor lemma]
+\label{lem:zla-normalized-gauss}
+Let $A\in\mathbf Z[T]$ satisfy $A(0)=1$.  If
+\[
+  A(T)=P(T)Q(T),\qquad P,Q\in\mathbf Q[T],\qquad P(0)=Q(0)=1,
+\]
+then $P,Q\in\mathbf Z[T]$.
+\end{lemma}
+\begin{proof}
+Reversal turns a polynomial with constant coefficient $1$ and degree $b$ into
+the monic polynomial $U^bA(U^{-1})$, and it is multiplicative for the
+degrees involved here, so the factorization becomes a factorization of the
+monic integral polynomial $U^{\deg A}A(U^{-1})$ into the monic rational
+polynomials $U^{\deg P}P(U^{-1})$ and $U^{\deg Q}Q(U^{-1})$.  Gauss's lemma --
+primitive integral normalization together with multiplicativity of the content
+-- forces both monic rational factors to be integral, and reversing back gives
+$P,Q\in\mathbf Z[T]$.
+\end{proof}
+
+\begin{proposition}[Normalized gcd reduction over the integers]
+\label{prop:zla-normalized-gcd-reduction}
+\uses{lem:zla-normalized-gauss}
+Let $A_0,B_0\in\mathbf Z[T]$ satisfy $A_0(0)=B_0(0)=1$, and let
+$G\in\mathbf Q[T]$ be the unique generator of the ideal
+$(A_0,B_0)\subseteq\mathbf Q[T]$ with $G(0)=1$.  Define
+$A,B\in\mathbf Q[T]$ by $A_0=GA$ and $B_0=GB$.  Then
+\[
+  G,A,B\in\mathbf Z[T],
+  \qquad
+  G(0)=A(0)=B(0)=1,
+\]
+the pair $(A,B)$ is coprime in $\mathbf Q[T]$, that is, every common divisor
+of $A$ and $B$ is a unit, and
+\[
+  \frac{A_0}{B_0}=\frac{A}{B}
+  \qquad\text{in }\mathbf Q(T).
+\]
+\end{proposition}
+\begin{proof}
+The ring $\mathbf Q[T]$ is a principal ideal domain, so the ideal
+$(A_0,B_0)$ has a generator, unique up to a scalar; since $A_0(0)=1$ the
+generator does not vanish at $0$ and may be normalized by $G(0)=1$.  Then
+$A(0)=B(0)=1$ follows from $A_0(0)=B_0(0)=1$, and
+\Cref{lem:zla-normalized-gauss} applied to $A_0=GA$ and to $B_0=GB$ gives
+$G,A,B\in\mathbf Z[T]$.  A common divisor of $A$ and $B$ would multiply $G$ to
+a larger common divisor of $A_0$ and $B_0$, contradicting that $G$ generates
+their ideal.  The fraction is unchanged because $G\neq0$.
+\end{proof}
+
+\begin{lemma}[Uniqueness of normalized reduced fractions]
+\label{lem:zla-normalized-fraction-unique}
+Let $K$ be a field.  Suppose $A,B,O,E\in K[T]$ have constant coefficient $1$,
+both pairs $(A,B)$ and $(O,E)$ are coprime, and $OB=EA$.  Then
+\[
+  O=A,\qquad E=B.
+\]
+\end{lemma}
+\begin{proof}
+From $OB=EA$ and coprimality of $(A,B)$, Euclid's lemma gives $A\mid O$ and
+$B\mid E$; symmetrically coprimality of $(O,E)$ gives $O\mid A$ and
+$E\mid B$.  So $O$ and $A$ agree up to a unit of $K[T]$, that is a nonzero
+scalar, and likewise for $E$ and $B$; the normalization by constant
+coefficient $1$ makes both scalars equal to $1$.
+\end{proof}
+
+\begin{theorem}[Integral Fatou theorem]
+\label{thm:zla-integral-fatou}
+\uses{prop:zla-integral-presentation, prop:zla-normalized-gcd-reduction,
+lem:zla-normalized-fraction-unique, def:zla-rational-germ}
+Let $f(T)\in1+T\mathbf Z[[T]]$ be the Taylor series of a normalized rational
+germ over $\mathbf Q$.  There is a unique pair of polynomials
+$A,B\in\mathbf Z[T]$, coprime in $\mathbf Q[T]$, satisfying
+\[
+  A(0)=B(0)=1,
+  \qquad
+  f(T)=\frac{A(T)}{B(T)}.
+\]
+This is the \emph{normalized reduced integral presentation} of $f$.
+\end{theorem}
+\begin{proof}
+\Cref{prop:zla-integral-presentation} produces $A_0,B_0\in\mathbf Z[T]$ with
+$B_0f=A_0$; here $A_0(0)=f(0)=1=B_0(0)$.  Reducing this fraction by
+\Cref{prop:zla-normalized-gcd-reduction} gives coprime integral $A,B$ with
+constant coefficient $1$ and $A/B=A_0/B_0=f$.  If $(A',B')$ is a second pair
+with the same properties, then $A'/B'=f=A/B$ and both denominators are nonzero,
+so cross multiplication gives $A'B=B'A$; both pairs are coprime and all four
+polynomials have constant coefficient $1$, so
+\Cref{lem:zla-normalized-fraction-unique} over $\mathbf Q$ yields $A'=A$ and
+$B'=B$.
+\end{proof}
+
+\begin{definition}[Reversal and reciprocal roots]
+\label{def:zla-reversal}
+Let $P(T)=1+c_1T+\cdots+c_bT^b\in\mathbf Z[T]$ have degree $b$.  Its
+\emph{reversal} is
+\[
+  P^{\mathrm{rev}}(U)=U^bP(U^{-1})=U^b+c_1U^{b-1}+\cdots+c_b\in\mathbf Z[U].
+\]
+For a field $\Omega$ containing $\mathbf Q$, a scalar
+$\alpha\in\Omega^\times$ is a \emph{reciprocal root} of $P$ if
+$P(\alpha^{-1})=0$.  The same definitions apply verbatim to a polynomial with
+constant coefficient $1$ over any field containing $\mathbf Q$.
+\end{definition}
+
+\begin{lemma}[Reciprocal roots and reversal]
+\label{lem:zla-reversal-roots}
+\uses{def:zla-reversal}
+For $P$ as in \Cref{def:zla-reversal}, the polynomial $P^{\mathrm{rev}}$ is
+monic, and for every field $\Omega$ containing $\mathbf Q$ and every
+$\alpha\in\Omega^\times$,
+\[
+  P(\alpha^{-1})=0
+  \quad\Longleftrightarrow\quad
+  P^{\mathrm{rev}}(\alpha)=0.
+\]
+\end{lemma}
+\begin{proof}
+Monicity is the coefficient $c_0=1$ of $P$ read in top degree after reversal.
+The equivalence is the defining identity
+$P^{\mathrm{rev}}(\alpha)=\alpha^bP(\alpha^{-1})$ together with
+$\alpha\neq0$.
+\end{proof}
+
+\section{Weights and recovery of individual factors}\label{sec:zla-weights}
+
+Fix an integer $q>1$ and let $\Omega$ be an algebraically closed field of
+characteristic zero for which the set
+$\operatorname{Isom}_{\mathbf Q}(\Omega,\mathbf C)$ of field isomorphisms
+$\Omega\xrightarrow{\sim}\mathbf C$ is nonempty and every embedding into
+$\mathbf C$ of a number field contained in $\Omega$ extends to an element of
+that set.  An abstract algebraic closure of $\Qell$ has this property; the
+proof is in the sketch article and is not reproduced here.
+
+\begin{definition}[Pure polynomial]
+\label{def:zla-pure-polynomial}
+\uses{def:zla-reversal}
+A nonzero scalar $\alpha\in\Omega^\times$ is \emph{universally pure of weight
+$w\in\mathbf R$} if
+\[
+  |\iota(\alpha)|=q^{w/2}
+  \qquad\text{for every }\iota\in\operatorname{Isom}_{\mathbf Q}(\Omega,
+  \mathbf C);
+\]
+no algebraicity of $\alpha$ over $\mathbf Q$ is assumed.  A polynomial
+$P(T)\in\Omega[T]$ with $P(0)=1$ is \emph{pure of weight $w$} if all of its
+reciprocal roots, counted with multiplicity, are nonzero and universally pure
+of weight $w$.
+\end{definition}
+
+For the rest of this section fix $r\geq0$ and polynomials
+$P_i(T)\in\Omega[T]$, $0\leq i\leq r$, with $P_i(0)=1$, and put
+\[
+  O(T)=\prod_{\substack{0\leq i\leq r\\ i\text{ odd}}}P_i(T),
+  \qquad
+  E(T)=\prod_{\substack{0\leq i\leq r\\ i\text{ even}}}P_i(T).
+\]
+
+\begin{lemma}[Different weights have disjoint reciprocal roots]
+\label{lem:zla-disjoint-weights}
+\uses{def:zla-pure-polynomial}
+Assume $P_i$ is pure of weight $i$ for every $i$.  If $i\neq j$, then $P_i$
+and $P_j$ have no common reciprocal root in $\Omega$.
+\end{lemma}
+\begin{proof}
+A common reciprocal root would be universally pure of weight $i$ and of weight
+$j$; evaluating one complex realization gives $q^{i/2}=q^{j/2}$, and the real
+exponential with base $q>1$ is injective, so $i=j$.
+\end{proof}
+
+\begin{proposition}[Identification of the two parity factors]
+\label{prop:zla-parity-identification}
+\uses{def:zla-pure-polynomial, lem:zla-disjoint-weights,
+lem:zla-normalized-fraction-unique}
+Assume every $P_i$ is pure of weight $i$.  Let $A,B\in\mathbf Q[T]$ be
+coprime with $A(0)=B(0)=1$, and suppose that
+\[
+  \frac{O(T)}{E(T)}=\frac{A(T)}{B(T)}
+  \qquad\text{in }\Omega(T).
+\]
+Then, after coefficient extension to $\Omega$,
+\[
+  O(T)=A(T),\qquad E(T)=B(T).
+\]
+Thus no reciprocal root cancels between odd and even cohomological degrees.
+\end{proposition}
+\begin{proof}
+By \Cref{lem:zla-disjoint-weights} the polynomials $O$ and $E$ have no common
+root in the algebraically closed field $\Omega$, hence are coprime in
+$\Omega[T]$; the pair $(A,B)$ stays coprime after extension of scalars since a
+Bézout identity extends.  Both denominators are nonzero because their constant
+coefficients are $1$, so the equality of fractions may be cross-multiplied to
+$OB=EA$ in $\Omega[T]$, and all four polynomials have constant coefficient
+$1$.  \Cref{lem:zla-normalized-fraction-unique} over $\Omega$ concludes.
+\end{proof}
+
+\begin{definition}[Complete weight factor]
+\label{def:zla-complete-weight-factor}
+\uses{def:zla-pure-polynomial, def:zla-reversal}
+Continue with the hypotheses above and assume $A,B\in\mathbf Z[T]$.  For a
+polynomial $R\in\mathbf Q[T]$ with $R(0)=1$, let $\mathcal R(R)$ be its
+reciprocal-root multiset in $\Qbar$ and, for a real number $w$, let
+\[
+  \mathcal R_w(R)=\{\alpha\in\mathcal R(R):|\tau(\alpha)|=q^{w/2}
+  \text{ for every embedding }\tau:\mathbf Q(\alpha)\hookrightarrow\mathbf C\}
+\]
+be its weight-$w$ stratum, with multiplicities inherited from $R$.  For
+$0\leq i\leq r$ put
+\[
+  R_i(T)=
+  \begin{cases}
+    A(T),&i\text{ odd},\\
+    B(T),&i\text{ even},
+  \end{cases}
+\]
+and define the \emph{complete weight-$i$ factor} of the reduced fraction
+$A/B$ to be
+\[
+  P_i^{\mathrm{rec}}(T)=\prod_{\alpha\in\mathcal R_i(R_i)}(1-\alpha T).
+\]
+Since the stratum is stable under $\Gal(\Qbar/\mathbf Q)$ with multiplicities,
+$P_i^{\mathrm{rec}}(T)\in\mathbf Q[T]$, and $P_i^{\mathrm{rec}}(0)=1$.
+\end{definition}
+
+\begin{proposition}[Unique recovery over the coefficient field]
+\label{prop:zla-unique-recovery}
+\uses{def:zla-complete-weight-factor, prop:zla-parity-identification,
+def:zla-pure-polynomial}
+For every $i$,
+\[
+  P_i(T)=P_i^{\mathrm{rec}}(T)
+  \qquad\text{in }\Omega[T].
+\]
+In particular $P_i$ is the scalar extension of a unique polynomial in
+$\mathbf Q[T]$, determined by the reduced fraction $A/B$, by $q$, and by the
+integer $i$.
+\end{proposition}
+\begin{proof}
+By \Cref{prop:zla-parity-identification} the product of the $P_j$ over the
+$j$ of the same parity as $i$ is the scalar extension of $R_i$, so the
+reciprocal-root multiset of $R_i$ is the union, with multiplicities, of those
+of the $P_j$ with $j$ of that parity.  Purity and \Cref{lem:zla-disjoint-weights} show that the roots coming
+from $P_i$ are exactly those of weight $i$, and each of them is algebraic over
+$\mathbf Q$ because it is a root of the rational polynomial $R_i$, so the
+weight condition may be tested on all embeddings of $\mathbf Q(\alpha)$; hence
+the multiset of $P_i$ is $\mathcal R_i(R_i)$.  Two normalized polynomials with
+the same reciprocal-root multiset and constant coefficient $1$ are equal.
+\end{proof}
+
+\begin{proposition}[Integrality of an individual factor]
+\label{prop:zla-factor-integrality}
+\uses{def:zla-complete-weight-factor, lem:zla-normalized-gauss}
+The recovered polynomial $P_i^{\mathrm{rec}}(T)$ belongs to $\mathbf Z[T]$.
+\end{proposition}
+\begin{proof}
+By construction $P_i^{\mathrm{rec}}$ is a factor of $R_i$ in $\mathbf Q[T]$
+whose complementary factor $R_i/P_i^{\mathrm{rec}}$ is again rational with
+constant coefficient $1$, because both $R_i$ and $P_i^{\mathrm{rec}}$ have
+constant coefficient $1$.  Now $R_i$ is $A$ or $B$, hence lies in
+$\mathbf Z[T]$ with $R_i(0)=1$, and \Cref{lem:zla-normalized-gauss} applied to
+this factorization gives $P_i^{\mathrm{rec}}\in\mathbf Z[T]$.
+\end{proof}
+
+\section{Perfect similitude pairings}\label{sec:zla-similitude}
+
+\begin{definition}[Perfect similitude pairing]
+\label{def:zla-similitude-pairing}
+Let $E$ be a field and let $V,W$ be finite-dimensional $E$-vector spaces.  A
+bilinear pairing $B:V\times W\to E$ is \emph{perfect} if the adjoint map
+\[
+  \phi_B:W\longrightarrow V^\vee,
+  \qquad
+  \phi_B(w)(v)=B(v,w),
+\]
+is an isomorphism.  Given automorphisms $F_V\in\operatorname{Aut}_E(V)$,
+$F_W\in\operatorname{Aut}_E(W)$ and a scalar $\mu\in E^\times$, the pairing is
+a \emph{similitude pairing of multiplier $\mu$} if
+\[
+  B(F_Vv,F_Ww)=\mu B(v,w)
+  \qquad(v\in V,\ w\in W).
+\]
+\end{definition}
+
+\begin{lemma}[Adjoint conjugacy]
+\label{lem:zla-adjoint-conjugacy}
+\uses{def:zla-similitude-pairing}
+Let $B:V\times W\to E$ be a perfect similitude pairing of multiplier $\mu$ for
+the automorphisms $F_V,F_W$.  Then
+\[
+  \phi_BF_W=\mu\,(F_V^{-1})^\vee\phi_B,
+\]
+so $F_W$ is conjugate to $\mu\,(F_V^{-1})^\vee$.
+\end{lemma}
+\begin{proof}
+Evaluate both sides at $w\in W$ and then at $v\in V$: the left side gives
+$B(v,F_Ww)$ and the right side gives $\mu B(F_V^{-1}v,w)$, and these agree by
+the similitude identity applied to the pair $(F_V^{-1}v,w)$.  Since $\phi_B$
+is an isomorphism, the displayed identity exhibits the conjugacy.
+\end{proof}
+
+\begin{proposition}[Reciprocal eigenvalue pairing]
+\label{prop:zla-reciprocal-eigenvalue-pairing}
+\uses{def:zla-similitude-pairing, lem:zla-adjoint-conjugacy}
+Let $B:V\times W\to E$ be a perfect similitude pairing of multiplier $\mu$ for
+the automorphisms $F_V,F_W$, let $\Omega$ be an algebraic closure of $E$, and
+put $b=\dim_EV=\dim_EW$.  If $\alpha_1,\ldots,\alpha_b\in\Omega$ are the
+eigenvalues of $F_V\otimes_E\Omega$, counted with algebraic multiplicity, then
+the eigenvalues of $F_W\otimes_E\Omega$, counted with algebraic multiplicity,
+are
+\[
+  \frac{\mu}{\alpha_1},\ldots,\frac{\mu}{\alpha_b}.
+\]
+No semisimplicity assumption is required.
+\end{proposition}
+\begin{proof}
+By \Cref{lem:zla-adjoint-conjugacy} the endomorphism $F_W$ is conjugate to
+$\mu\,(F_V^{-1})^\vee$, and conjugate endomorphisms have the same
+characteristic polynomial.  Dualizing does not change the characteristic
+polynomial, inverting an automorphism replaces its eigenvalue multiset by the
+multiset of inverses, and multiplying by the scalar $\mu$ scales every
+eigenvalue by $\mu$; all three operations are computed on characteristic
+polynomials, so no semisimplicity is needed.
+\end{proof}
+
+\begin{theorem}[Degreewise reciprocal-polynomial identities]
+\label{thm:zla-degreewise-reciprocal}
+\uses{def:zla-similitude-pairing, prop:zla-reciprocal-eigenvalue-pairing,
+def:zla-recip-charpoly}
+Let $B:V\times W\to E$ be a perfect similitude pairing of multiplier $\mu$ for
+the automorphisms $F_V,F_W$.  Put $b=\dim_EV=\dim_EW$ and
+$D_V=\det(F_V)$, and set
+\[
+  P_V(T)=\det(1-TF_V\mid V),
+  \qquad
+  P_W(T)=\det(1-TF_W\mid W).
+\]
+Then, in $E[T,T^{-1}]$,
+\[
+  P_W(\mu^{-1}T^{-1})=(-1)^bT^{-b}D_V^{-1}P_V(T),
+\]
+or equivalently
+\[
+  P_W(T)=(-1)^b\mu^bD_V^{-1}T^bP_V(\mu^{-1}T^{-1}).
+\]
+\end{theorem}
+\begin{proof}
+Over an algebraic closure, $P_V(T)=\prod_{j=1}^b(1-\alpha_jT)$ with the
+$\alpha_j$ the eigenvalues of $F_V$, all nonzero, and
+$D_V=\prod_j\alpha_j$.  By
+\Cref{prop:zla-reciprocal-eigenvalue-pairing},
+$P_W(T)=\prod_j(1-\mu\alpha_j^{-1}T)$.  Substituting $T\mapsto\mu^{-1}T^{-1}$
+and clearing $\prod_j(-\alpha_j^{-1}T^{-1})$ from the product gives the first
+identity; both sides have coefficients in $E$, so the identity descends from
+$\Omega[T,T^{-1}]$ to $E[T,T^{-1}]$.  The second form follows by substituting
+$T\mapsto\mu^{-1}T^{-1}$ once more.
+\end{proof}
