@@ -85,8 +85,16 @@ the second proof of [Stacks 04DZ]:
 * `Outer`: reduction of the general case to the affine case with bounded fibre degrees,
   using the local structure of étale algebras.
 
-The equivalence `Hom.isEquivalence_etale` and the dense-subsite statement
-`Hom.isDenseSubsite_etale` are global instances.
+`Hom.isEquivalence_etale` itself has an empty proof: `Full`, `Faithful` and `EssSurj` for
+`f.Etale` are the global instances proved in `FullyFaithful` and `Outer`, and the bundled
+`IsEquivalence` merely collects them. It and `Hom.isDenseSubsite_etale` are global
+instances; both are keyed on the head symbol `Scheme.Hom.Etale f` and their only hypothesis,
+`IsUniversalHomeomorphism f`, is discharged by instance search, so they do not slow down
+unrelated goals.
+
+The axiom census checking that all of this is unconditional is in the leaf file
+`WeilConjectures.SixFunctors.UpperLowerStar.TopologicalInvariance.AxiomCensus`, together
+with the census of the sheaf-level consequences.
 
 ## References
 
@@ -189,18 +197,5 @@ by `AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff`.
 instance isDenseSubsite_etale :
     f.Etale.IsDenseSubsite Y.smallEtaleTopology X.smallEtaleTopology where
   functorPushforward_mem_iff := functorPushforward_mem_smallEtaleTopology_iff f _
-
-/-! ### Axiom census
-
-The topological invariance of the small étale site is unconditional: the check below is run
-by the build, so a `sorry` reappearing anywhere beneath it breaks compilation rather than
-going unnoticed. -/
-
-/--
-info: 'AlgebraicGeometry.Scheme.Hom.isEquivalence_etale' depends on
-  axioms: [propext, Classical.choice, Quot.sound]
--/
-#guard_msgs (whitespace := lax) in
-#print axioms AlgebraicGeometry.Scheme.Hom.isEquivalence_etale
 
 end AlgebraicGeometry.Scheme.Hom

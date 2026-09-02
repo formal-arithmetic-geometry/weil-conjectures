@@ -358,6 +358,7 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.UpperLowerStar.TopologicalInvariance.AxiomCensus
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification

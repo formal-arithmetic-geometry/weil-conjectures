@@ -72,6 +72,11 @@ because `f^*` is an equivalence, hence fully faithful and exact and preserving i
 objects, and because the category of étale sheaves on `Y` has enough injective objects,
 being Grothendieck abelian.
 
+`Etale.isEquivalence_lowerStar` and `Etale.isEquivalence_upperStar` are global instances,
+like the equivalence of sites they come from; they are keyed on the head symbols
+`Etale.lowerStar` and `Etale.upperStar` and their only geometric hypothesis,
+`IsUniversalHomeomorphism f`, is discharged by instance search.
+
 `Etale.sheafEquivalence` and `Etale.isEquivalence_lowerStar` depend only on
 `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, which is why they are stated first, for
 arbitrary coefficients. The `upperStar` and cohomology statements additionally need the
@@ -81,6 +86,9 @@ are what make `AlgebraicGeometry.Etale.upperStar` and `CategoryTheory.Sheaf.H` a
 the small étale site at all; these come from the hypothesis
 `CategoryTheory.HasSmallSiteSheafify A` on the coefficient category and are found by
 instance search.
+
+The axiom census checking that all of this is unconditional is in the leaf file
+`WeilConjectures.SixFunctors.UpperLowerStar.TopologicalInvariance.AxiomCensus`.
 
 ## References
 
@@ -127,7 +135,7 @@ lemma lowerStar_eq_sheafEquivalence_functor : (f)_*[A] = (sheafEquivalence A f).
 a universal homeomorphism is an equivalence of categories of étale sheaves.
 (blueprint: `prop:weil-pbc-universal-homeomorphism-topos`) -/
 @[stacks 03SI]
-theorem isEquivalence_lowerStar : ((f)_*[A]).IsEquivalence :=
+instance isEquivalence_lowerStar : ((f)_*[A]).IsEquivalence :=
   inferInstanceAs ((sheafEquivalence A f).functor.IsEquivalence)
 
 end General
@@ -150,7 +158,7 @@ universal homeomorphism `f : X ⟶ Y` is an equivalence between the category of 
 sheaves on the small étale site of `Y` and that of `X`.
 (blueprint: `prop:weil-pbc-universal-homeomorphism-topos`) -/
 @[stacks 03SI]
-theorem isEquivalence_upperStar : ((f)^*[A]).IsEquivalence :=
+instance isEquivalence_upperStar : ((f)^*[A]).IsEquivalence :=
   Functor.isEquivalence_of_iso (upperStarIsoInverse A f).symm
 
 end GrothendieckAbelian
@@ -196,8 +204,6 @@ lemma cohomologyMap_map {G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} (
   Sheaf.H.mapFunctor_map _ _ _ φ x
 
 variable [IsUniversalHomeomorphism f]
-
-attribute [local instance] isEquivalence_upperStar
 
 /-- **Topological invariance of étale cohomology**, [Stacks 03SI]: for a universal
 homeomorphism `f : X ⟶ Y` the comparison map `AlgebraicGeometry.Etale.cohomologyMap` on
