@@ -71,6 +71,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
 
+omit [HasSmallSiteSheafify A] in
 /-- **The direct image along a finite morphism is an epimorphism on stalks at geometric
 points with algebraically closed residue field.** By the stalk formula the square
 ```
