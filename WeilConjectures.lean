@@ -2,6 +2,7 @@ module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Modules.Cohomology
 public import WeilConjectures.AlgebraicGeometry.ProjectiveMorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AnalyticAux
@@ -131,6 +132,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.Retract
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
