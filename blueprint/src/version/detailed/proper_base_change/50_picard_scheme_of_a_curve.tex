@@ -4074,34 +4074,47 @@ $Lf^*\cN=f^*\cN$).
 
 
 % Decomposed.
-\begin{lemma}[Quasi-coherent modules on affine schemes are flasque]
-\label{lem:pc-affine-module-flasque}
-Let $X=\Spec(A)$ be an affine scheme and $\cF$ a quasi-coherent
-$\cO_X$-module.  Then $\cF$ is flasque: for every open
-$V\subseteq X$ the restriction map $\cF(X)\to\cF(V)$ is surjective.
-\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-cech-complex}
+\begin{lemma}[Acyclicity along an affine open immersion]
+\label{lem:pc-affine-immersion-acyclic}
+Let $X$ be a scheme, let $j:U\to X$ be an open immersion which is an
+\hyperref[def:pc-morphism-conventions]{affine morphism}, and let $\cF$
+be a quasi-coherent $\cO_U$-module.  Then:
+\begin{enumerate}
+\item $j_*\cF$ is quasi-coherent and $R^qj_*\cF=0$ for $q>0$;
+\item for every morphism $f:X\to S$ the canonical map
+$R^qf_*(j_*\cF)\to R^q(f\circ j)_*\cF$ is an isomorphism for all
+$q\ge0$; in particular, if $f\circ j$ is affine then
+$f_*(j_*\cF)=(f\circ j)_*\cF$ is quasi-coherent and
+$R^qf_*(j_*\cF)=0$ for $q>0$;
+\item if $U$ is affine then $H^q(X,j_*\cF)=0$ for $q>0$.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-morphism-hi,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-cech-complex}
-Let $V\subseteq X$ be open, $\cF=\widetilde M$ and write $V$ as the
-union of the standard opens $D(f_i)$, $i\in I$; we may assume $I$
-finite and $(f_i)$ generating the unit ideal of $A$.  (The reduction
-to a finite $I$ uses that $V$ is quasi-compact.  An open subset of an
-affine scheme need not be quasi-compact for a general ring $A$; it is
-quasi-compact when $A$ is Noetherian, every open subset of a
-Noetherian scheme being quasi-compact, and it is that case of the
-lemma which we prove.)
-This proof is wrong currently, it (or together with other lemmas) needs to be rewritten.
-For $V=\bigcup_{i=1}^nD(f_i)$, the sheaf axiom gives
-$\cF(V)=\operatorname{eq}\bigl(\prod_i\cF(D(f_i))\,\rightrightarrows\,
-\prod_{i<j}\cF(D(f_if_j))\bigr)$ and by \Cref{lem:pc-affine-cech-complex}
-(the complex is exact, so $M$ maps onto the equalizer of the first two
-segments -- the exactness at the first two spots: the exactness of
-$0\to M\to\prod_iM_{f_i}\to\prod_{i<j}M_{f_if_j}$ gives exactly
-$\operatorname{im}(M\to\prod M_{f_i})=\operatorname{eq}$), and the
-restriction maps $\cF(X)=M\to\cF(D(f_i))=M_{f_i}$ are consistent with
-the equalizer description, so the map $M\to\cF(V)$ is surjective
-(with image the equalizer elements).  Hence $\cF$ is flasque.
+\uses{lem:pc-affine-morphism-hi,lem:pc-affine-vanishing}
+(1) By assumption $j$ is an affine morphism, so this is
+\Cref{lem:pc-affine-morphism-hi} applied to $j$.
+
+(2) The Leray spectral sequence of the composite $f\circ j$ reads
+$E_2^{p,q}=R^pf_*(R^qj_*\cF)\Rightarrow R^{p+q}(f\circ j)_*\cF$.  By
+(1) its $E_2$-page is concentrated in the row $q=0$, so it degenerates
+and the edge map $R^qf_*(j_*\cF)\to R^q(f\circ j)_*\cF$ is an
+isomorphism for every $q$.  If moreover $f\circ j$ is affine, then
+\Cref{lem:pc-affine-morphism-hi} applied to $f\circ j$ gives
+$R^q(f\circ j)_*\cF=0$ for $q>0$ and the quasi-coherence of
+$(f\circ j)_*\cF$.
+
+(3) Likewise the Leray spectral sequence of $j$ for global sections,
+$E_2^{p,q}=H^p(X,R^qj_*\cF)\Rightarrow H^{p+q}(U,\cF)$, degenerates by
+(1) and gives $H^q(X,j_*\cF)=H^q(U,\cF)$; the right-hand side vanishes
+for $q>0$ by \Cref{lem:pc-affine-vanishing} because $U$ is affine and
+$\cF$ is quasi-coherent.
+
+Note that a quasi-coherent module on an affine scheme is \emph{not}
+flasque in general -- for $X=\Spec(k[t])$, $\cF=\cO_X$ and $V=D(t)$
+the restriction $k[t]\to k[t,t^{-1}]$ is not surjective -- so the
+vanishing above, and not flasqueness, is what makes the terms of the
+Čech resolution acyclic.
 \end{proof}
 
 \begin{lemma}[The Čech resolution]\label{lem:pc-cech-resolution}
@@ -4114,16 +4127,17 @@ $\cO_X$-module.  Then the alternating Čech resolution
 \longrightarrow\prod_{i<j}j_{U_{ij},*}\cF|_{U_{ij}}
 \longrightarrow\cdots
 \]
-is exact, and all its terms are flasque; consequently the complex of
-global sections computes $R\Gamma$: for the derived direct image of an
+is exact, and all its terms are acyclic for $\Gamma(X,-)$ and, for
+every morphism $f:X\to S$ with $S$ affine, for $f_*$; consequently the
+complex of global sections computes $R\Gamma$: for the derived direct image of an
 affine map (see \Cref{lem:pc-rf-perfect-base-change}) the uses below
 are: for a morphism $f:X\to S$ with an affine $S$, the object
 $Rf_*\cF$ is canonically quasi-isomorphic to the complex
 $\prod_{\substack{J\\|J|=p}}\;(f\circ j_U)_*\cF|_{U_J}\;$ of quasicoherent $\cO_S$-modules.
-\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-module-flasque}
+\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-immersion-acyclic}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-module-flasque}
+\uses{lem:pc-affine-immersion-acyclic}
 \emph{Exactness.}  At a point $x\in X$, with
 $I_x:=\{i:x\in U_i\}$, the stalk of the resolution is the alternating
 Čech complex of the finite set $I_x$ with constant coefficients in
@@ -4144,21 +4158,24 @@ also in the proof of the flasque Čech acyclicity, cf.\ Cohomology,
 Lemma 20.11.1-adjacent, Section 20.11, Tag 01EO); hence the resolution
 is exact.
 
-\emph{Flasqueness and the derived statement.}  Each term
-$j_{U_J,*}\cF|_{U_J}$ is flasque: $\cF|_{U_J}$ is quasi-coherent on
-the affine scheme $U_J$, hence flasque
-(\Cref{lem:pc-affine-module-flasque}), and the direct image of a
-flasque sheaf under an open immersion is flasque (on an open
-$W\subseteq X$: $j_*G(W)=G(W\cap U_J)$, and the restriction maps of a
-flasque $G$ are surjective).  For a flasque sheaf, the higher direct
-images vanish and the derived direct image is computed by the
-resolution: flasque sheaves are acyclic for the direct image functor
-(the standard: a flasque sheaf $\cG$ satisfies $H^p(X,\cG)=0$ for all
-$p>0$ [Cohomology, Section 20.11, Tag 01EO (flasque/Čech acyclicity);
-the classical acyclicity of flasque sheaves: the resolution by flasque
-sheaves therefore computes $R\Gamma$]); hence for
-$f:X\to S$ with finite-resolution terms as above, $Rf_*\cF$ is the
-total complex of the $f_*$'s of the resolution, i.e.\ the complex
+\emph{Acyclicity and the derived statement.}  Each $j_{U_J}:U_J\to X$
+is an affine morphism: affineness of a morphism may be checked on an
+affine open covering of the target, and for the covering
+$X=\bigcup_iU_i$ one has $j_{U_J}^{-1}(U_i)=U_{J\cup\{i\}}$, which is
+affine by hypothesis.  Hence
+\Cref{lem:pc-affine-immersion-acyclic} applies to each $j_{U_J}$: the
+term $j_{U_J,*}\cF|_{U_J}$ is quasi-coherent, and, $U_J$ being affine,
+$H^q(X,j_{U_J,*}\cF|_{U_J})=0$ for $q>0$, so the terms of the
+resolution are acyclic for $\Gamma(X,-)$.  Likewise, for a morphism
+$f:X\to S$ with $S$ affine the composite $f\circ j_{U_J}:U_J\to S$ is a
+morphism of affine schemes, hence affine, so the same lemma gives
+$R^qf_*(j_{U_J,*}\cF|_{U_J})=0$ for $q>0$ and
+$f_*(j_{U_J,*}\cF|_{U_J})=(f\circ j_{U_J})_*\cF|_{U_J}$ quasi-coherent:
+the terms are acyclic for $f_*$ as well.  A resolution by objects
+acyclic for a left exact functor computes its right derived functor;
+hence $R\Gamma(X,\cF)$ is the complex of global sections of the
+resolution, and for $f:X\to S$ with $S$ affine, $Rf_*\cF$ is the total
+complex of the $f_*$'s of the resolution, i.e.\ the complex
 $\prod_J\;(f\circ j_{U})_*\cF|_{U_J}$.
 \end{proof}
 
