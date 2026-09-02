@@ -15,6 +15,12 @@ functor of a preadditive category `V` is isomorphic to the identity functor
 (`CategoryTheory.Functor.mapHomotopyCategoryIdIso`). This is the homotopy category
 counterpart of Mathlib's `CategoryTheory.Functor.mapHomologicalComplexIdIso`.
 
+Both this isomorphism and `CategoryTheory.Functor.mapHomotopyCategoryCompIso` attached to
+`Iso.refl (F ⋙ G)` are pointwise the identity
+(`CategoryTheory.Functor.mapHomotopyCategoryIdIso_hom_app_eq_id` and
+`CategoryTheory.Functor.mapHomotopyCategoryCompIso_refl_hom_app`), since the corresponding
+isomorphisms of functors on homological complexes are the identity by definition.
+
 This material is destined for `Mathlib/Algebra/Homology/HomotopyCategory.lean`, next to
 `CategoryTheory.Functor.mapHomotopyCategoryCompIso`.
 -/
@@ -56,5 +62,36 @@ lemma mapHomotopyCategoryIdIso_inv_app (K : HomologicalComplex V c) :
       (HomotopyCategory.quotient V c).map
         ((mapHomologicalComplexIdIso V c).inv.app K) := by
   simp [mapHomotopyCategoryIdIso, HomotopyCategory.quotient, mapHomotopyCategoryFactors]
+
+/-- The isomorphism `Functor.mapHomotopyCategoryIdIso` is pointwise the identity: the
+functor induced on homotopy categories by the identity functor is the identity functor,
+not merely isomorphic to it. -/
+lemma mapHomotopyCategoryIdIso_hom_app_eq_id (Y : HomotopyCategory V c) :
+    (mapHomotopyCategoryIdIso V c).hom.app Y = 𝟙 Y := by
+  obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
+  rw [mapHomotopyCategoryIdIso_hom_app]
+  exact (HomotopyCategory.quotient V c).map_id X
+
+end CategoryTheory.Functor
+
+namespace CategoryTheory.Functor
+
+variable {V W V' : Type*} [Category V] [Category W] [Category V']
+  [Preadditive V] [Preadditive W] [Preadditive V'] {ι : Type*} (c : ComplexShape ι)
+
+/-- The isomorphism `Functor.mapHomotopyCategoryCompIso` attached to `Iso.refl (F ⋙ G)` is
+pointwise the identity: the functor induced on homotopy categories by a composition is the
+composition of the induced functors, not merely isomorphic to it. -/
+lemma mapHomotopyCategoryCompIso_refl_hom_app (F : V ⥤ W) (G : W ⥤ V')
+    [F.Additive] [G.Additive] (Y : HomotopyCategory V c) :
+    (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app Y = 𝟙 _ := by
+  obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
+  have h : (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app
+        ((HomotopyCategory.quotient V c).obj X) =
+      (HomotopyCategory.quotient V' c).map
+        ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) c).hom.app X) := rfl
+  have h' : (mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) c).hom.app X = 𝟙 _ := rfl
+  rw [h, h']
+  exact (HomotopyCategory.quotient V' c).map_id _
 
 end CategoryTheory.Functor

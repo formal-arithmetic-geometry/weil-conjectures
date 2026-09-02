@@ -47,6 +47,11 @@ For exact functors between abelian categories, the induced functor
   their characterizations `CategoryTheory.Functor.mapDerivedCategoryIdIso_factorsh` and
   `CategoryTheory.Functor.mapDerivedCategoryPlusIdIso_factorsh` at the level of the
   homotopy categories.
+- `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso_id_comp`,
+  `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso_comp_id` and
+  `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso_assoc`: the unit and associativity
+  laws relating `mapDerivedCategoryPlusCompIso` and `mapDerivedCategoryPlusIdIso`, i.e. the
+  coherence of `mapDerivedCategoryPlus` as a pseudofunctor.
 -/
 
 @[expose] public section
@@ -481,6 +486,137 @@ lemma mapDerivedCategoryPlusIdIso_fac_app (K : HomotopyCategory.Plus C) :
   have := congr_app (congr_arg Iso.hom (mapDerivedCategoryPlusIdIso_factorsh C)) K
   simpa using this
 
+/-- Sharpened form of `Functor.mapDerivedCategoryPlusIdIso_fac_app`: the comparison
+isomorphism `Functor.mapHomotopyCategoryPlusIdIso` of the bounded below homotopy categories
+is the identity, so `Functor.mapDerivedCategoryPlusIdIso` is, on the image of the
+localization functor, the factorization `Functor.mapDerivedCategoryPlusFactorsh` itself. -/
+lemma mapDerivedCategoryPlusIdIso_fac' (K : HomotopyCategory.Plus C) :
+    (mapDerivedCategoryPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      (𝟭 C).mapDerivedCategoryPlusFactorsh.hom.app K := by
+  have hq : DerivedCategory.Plus.Qh.map ((mapHomotopyCategoryPlusIdIso C).hom.app K) =
+      𝟙 (((𝟭 C).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).obj K) := by
+    rw [mapHomotopyCategoryPlusIdIso_hom_app_eq_id]
+    exact DerivedCategory.Plus.Qh.map_id _
+  rw [mapDerivedCategoryPlusIdIso_fac_app, hq, Category.comp_id]
+
 end Identity
+
+section Coherence
+
+section
+
+variable (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+
+/-- Sharpened form of `Functor.mapDerivedCategoryPlusCompIso_fac`: the comparison
+isomorphism `Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))` of the bounded
+below homotopy categories is the identity, so `Functor.mapDerivedCategoryPlusCompIso` is
+characterized by the factorizations `Functor.mapDerivedCategoryPlusFactorsh` alone. -/
+@[reassoc]
+lemma mapDerivedCategoryPlusCompIso_fac' (K : HomotopyCategory.Plus C) :
+    (mapDerivedCategoryPlusCompIso F G).hom.app (DerivedCategory.Plus.Qh.obj K) ≫
+      G.mapDerivedCategoryPlus.map (F.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+      G.mapDerivedCategoryPlusFactorsh.hom.app (F.mapHomotopyCategoryPlus.obj K) =
+    (F ⋙ G).mapDerivedCategoryPlusFactorsh.hom.app K := by
+  have hqc : DerivedCategory.Plus.Qh.map
+      ((mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).hom.app K) =
+      𝟙 ((G.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).obj
+        (F.mapHomotopyCategoryPlus.obj K)) := by
+    rw [mapHomotopyCategoryPlusCompIso_refl_hom_app]
+    exact DerivedCategory.Plus.Qh.map_id _
+  have h := mapDerivedCategoryPlusCompIso_fac F G K
+  rw [hqc, Category.comp_id] at h
+  exact h
+
+end
+
+/-- The left unit law for `Functor.mapDerivedCategoryPlusCompIso`: the composition
+isomorphism for `𝟭 C` and `F`, followed by the identity isomorphism
+`Functor.mapDerivedCategoryPlusIdIso`, is the identity. -/
+lemma mapDerivedCategoryPlusCompIso_id_comp (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    (mapDerivedCategoryPlusCompIso (𝟭 C) F).hom ≫
+        Functor.whiskerRight (mapDerivedCategoryPlusIdIso C).hom F.mapDerivedCategoryPlus =
+      𝟙 F.mapDerivedCategoryPlus := by
+  refine Localization.natTrans_ext DerivedCategory.Plus.Qh
+    (HomotopyCategory.Plus.quasiIso C) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app]
+  rw [← cancel_mono (F.mapDerivedCategoryPlusFactorsh.hom.app K),
+    mapDerivedCategoryPlusIdIso_fac', Category.assoc]
+  exact (mapDerivedCategoryPlusCompIso_fac' (𝟭 C) F K).trans (Category.id_comp _).symm
+
+/-- The right unit law for `Functor.mapDerivedCategoryPlusCompIso`: the composition
+isomorphism for `F` and `𝟭 D`, followed by the identity isomorphism
+`Functor.mapDerivedCategoryPlusIdIso`, is the identity. -/
+lemma mapDerivedCategoryPlusCompIso_comp_id (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    (mapDerivedCategoryPlusCompIso F (𝟭 D)).hom ≫
+        Functor.whiskerLeft F.mapDerivedCategoryPlus (mapDerivedCategoryPlusIdIso D).hom =
+      𝟙 F.mapDerivedCategoryPlus := by
+  refine Localization.natTrans_ext DerivedCategory.Plus.Qh
+    (HomotopyCategory.Plus.quasiIso C) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app]
+  rw [← cancel_mono (F.mapDerivedCategoryPlusFactorsh.hom.app K)]
+  have hnat : (𝟭 D).mapDerivedCategoryPlus.map (F.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+        (mapDerivedCategoryPlusIdIso D).hom.app
+          (DerivedCategory.Plus.Qh.obj (F.mapHomotopyCategoryPlus.obj K)) =
+      (mapDerivedCategoryPlusIdIso D).hom.app
+          (F.mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Qh.obj K)) ≫
+        F.mapDerivedCategoryPlusFactorsh.hom.app K :=
+    (mapDerivedCategoryPlusIdIso D).hom.naturality _
+  have key := mapDerivedCategoryPlusCompIso_fac' F (𝟭 D) K
+  rw [← mapDerivedCategoryPlusIdIso_fac', hnat] at key
+  rw [Category.assoc]
+  exact key.trans (Category.id_comp _).symm
+
+/-- The associativity law for `Functor.mapDerivedCategoryPlusCompIso`: the two ways of
+comparing `(F ⋙ G ⋙ H).mapDerivedCategoryPlus` with
+`F.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus ⋙ H.mapDerivedCategoryPlus` agree. -/
+lemma mapDerivedCategoryPlusCompIso_assoc {E' : Type*} [Category E'] [Abelian E']
+    [HasDerivedCategory E'] (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ E')
+    [F.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H] :
+    (mapDerivedCategoryPlusCompIso F (G ⋙ H)).hom ≫
+        Functor.whiskerLeft F.mapDerivedCategoryPlus
+          (mapDerivedCategoryPlusCompIso G H).hom =
+      (mapDerivedCategoryPlusCompIso (F ⋙ G) H).hom ≫
+        Functor.whiskerRight (mapDerivedCategoryPlusCompIso F G).hom
+          H.mapDerivedCategoryPlus := by
+  refine Localization.natTrans_ext DerivedCategory.Plus.Qh
+    (HomotopyCategory.Plus.quasiIso C) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  have hnat : (mapDerivedCategoryPlusCompIso G H).hom.app
+        (F.mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Qh.obj K)) ≫
+      H.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlus.map
+        (F.mapDerivedCategoryPlusFactorsh.hom.app K)) =
+      (G ⋙ H).mapDerivedCategoryPlus.map (F.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+        (mapDerivedCategoryPlusCompIso G H).hom.app
+          (DerivedCategory.Plus.Qh.obj (F.mapHomotopyCategoryPlus.obj K)) :=
+    ((mapDerivedCategoryPlusCompIso G H).hom.naturality
+      (F.mapDerivedCategoryPlusFactorsh.hom.app K)).symm
+  have facAssoc : (mapDerivedCategoryPlusCompIso (F ⋙ G) H).hom.app
+        (DerivedCategory.Plus.Qh.obj K) ≫
+      H.mapDerivedCategoryPlus.map ((F ⋙ G).mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+      H.mapDerivedCategoryPlusFactorsh.hom.app
+        (G.mapHomotopyCategoryPlus.obj (F.mapHomotopyCategoryPlus.obj K)) =
+      ((F ⋙ G) ⋙ H).mapDerivedCategoryPlusFactorsh.hom.app K :=
+    mapDerivedCategoryPlusCompIso_fac' (F ⋙ G) H K
+  rw [← cancel_mono (H.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlus.map
+        (F.mapDerivedCategoryPlusFactorsh.hom.app K)) ≫
+      H.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app
+        (F.mapHomotopyCategoryPlus.obj K)) ≫
+      H.mapDerivedCategoryPlusFactorsh.hom.app
+        (G.mapHomotopyCategoryPlus.obj (F.mapHomotopyCategoryPlus.obj K)))]
+  simp only [Category.assoc]
+  rw [reassoc_of% hnat, mapDerivedCategoryPlusCompIso_fac' G H,
+    mapDerivedCategoryPlusCompIso_fac' F (G ⋙ H), ← Functor.map_comp_assoc,
+    ← Functor.map_comp_assoc, Category.assoc, mapDerivedCategoryPlusCompIso_fac' F G,
+    facAssoc]
+  rfl
+
+end Coherence
 
 end CategoryTheory.Functor
