@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 
 /-!
@@ -24,6 +25,12 @@ extension by zero along `i` with the pushforward `GrothendieckTopology.lowerStar
 - `AlgebraicGeometry.lowerShriek`: the lower shriek `f_!` of a morphism `f` satisfying
   `HasCompactification f`, *definitionally* equal to the composition associated with the
   chosen compactification `HasCompactification.compactification f`, see `lowerShriek_eq`.
+
+The hypothesis `HasCompactification f` is not a restriction in practice: this file imports
+`WeilConjectures.Compactification.NagataCompactification`, so the instance provided by
+Nagata's compactification theorem is in scope and `f_!` is available for every separated,
+quasi-compact morphism `f` locally of finite type over a quasi-compact quasi-separated base
+without the user having to supply a compactification.
 
 ## Implementation notes
 
