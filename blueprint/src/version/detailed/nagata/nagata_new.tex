@@ -88,6 +88,7 @@ equality has explicitly been fixed.
 \begin{definition}[Compactification] 
   \label{def:nagata-compactification}
   \lean{AlgebraicGeometry.Compactification}
+  \leanok
 
   Let $f\colon X\to S$ be a morphism of schemes.  A \emph{compactification}
   of $f$ consists of a scheme $\overline X$, morphisms
@@ -102,6 +103,7 @@ equality has explicitly been fixed.
   \label{def:nagata-compactifiable}
   \uses{def:nagata-compactification}
   \lean{AlgebraicGeometry.HasCompactification}
+  \leanok
 
   A morphism $f\colon X\to S$ is \emph{compactifiable} if the type of
   compactifications of $f$ is nonempty.
@@ -110,6 +112,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Mathlib scheme-theoretic image interface]
   \label{lemma:nagata-scheme-image-ideal-qc}
   \lean{AlgebraicGeometry.Scheme.Hom.image}
+  \leanok
 
   For a morphism $g\colon T\to Y$, Mathlib defines its scheme-theoretic image
   as the closed subscheme cut out by the ideal sheaf $\operatorname{ker}(g)$.
@@ -131,6 +134,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   This block records the existing Mathlib construction.  The closed
   subscheme is \texttt{Scheme.Hom.image g}, its inclusion is the declaration
   \texttt{Scheme.Hom.imageι g}, and the factor map is
@@ -144,6 +148,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-theoretic-image}
   \uses{lemma:nagata-scheme-image-ideal-qc}
   \lean{AlgebraicGeometry.Scheme.Hom.image}
+  \leanok
 
   Let $g\colon T\to Y$ be a morphism.  Define
   $\operatorname{SIm}(g)$ to mean the Mathlib scheme-theoretic image
@@ -156,6 +161,9 @@ equality has explicitly been fixed.
 \begin{definition}[Scheme-theoretically dense open immersion]
   \label{def:nagata-scheme-theoretically-dense-open}
   \lean{}
+  \statusnote{Bypassed by the formalized route: scheme-theoretic density is
+    the predicate \texttt{AlgebraicGeometry.IsSchemeTheoreticallyDominant},
+    which \Cref{def:nagata-dense-compactification} uses directly.}
 
   For a quasi-compact open immersion $j\colon U\hookrightarrow X$, say that
   $U$ is scheme-theoretically dense in $X$ if the sheaf morphism
@@ -171,6 +179,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification,
     def:nagata-scheme-theoretically-dense-open}
   \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant}
+  \leanok
 
   A compactification $X\xrightarrow{j}\overline X\to S$ is
   \emph{scheme-theoretically dense} when its first map has the predicate
@@ -187,6 +196,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-dense-compactification,
     def:nagata-scheme-theoretic-image,lemma:nagata-scheme-image-ideal-qc}
   \lean{AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι}
+  \leanok
 
   For an open immersion $j$ (no quasi-compactness is needed), the density
   condition in
@@ -200,6 +210,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-scheme-image-ideal-qc}
   The kernel of $\mathcal O_{\overline X}\to j_*\mathcal O_X$ is the ideal
   defining $\operatorname{SIm}(j)$ by
@@ -217,6 +228,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-image-factor}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.Scheme.Hom.toImage}
+  \leanok
 
   Define
   \[
@@ -230,6 +242,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-image-comparison}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \leanok
 
   Suppose $g$ is supplied with a factorization
   $T\xrightarrow{h}Z\xrightarrow{z}Y$, where $z$ is a closed immersion.
@@ -245,6 +258,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-scheme-image-universal}
   \uses{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison}
   \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \leanok
 
   The composite of $g^{\mathrm{im}}$ with
   $\operatorname{SIm}(g)\hookrightarrow Y$ is $g$.  For every closed
@@ -254,6 +268,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The factorization equality is \texttt{Scheme.Hom.toImage_imageι}.
   Let $\mathcal I_Z$ be the ideal of $Z$.  From
   $z\circ h=g$ every local section of $\mathcal I_Z$ maps to zero under $g$,
@@ -273,6 +288,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Scheme-theoretic image of a closed immersion]
   \label{lemma:nagata-scheme-image-of-closed-immersion}
   \lean{AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage}
+  \leanok
 
   If $i\colon Z\hookrightarrow Y$ is a closed immersion, then the factor map
   $i^{\mathrm{im}}\colon Z\to\operatorname{SIm}(i)$ is an isomorphism.  Thus
@@ -281,6 +297,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The current Mathlib instance
   \texttt{AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage}
   supplies the isomorphism for every morphism carrying the
@@ -293,6 +310,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-affine-image-kernel-localization}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
+  \leanok
 
   Let $A$ be a ring, let $T\to\operatorname{Spec}(A)$ be quasi-compact and
   quasi-separated, and let $s\in A$.  Put
@@ -307,6 +325,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Choose a finite affine cover $(T_i)$ of $T$.  Quasi-separatedness makes
   each $T_i\cap T_j$ quasi-compact, so choose a finite affine refinement of
   every such intersection.  The sheaf equalizer for this finite covering
@@ -323,6 +342,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-affine-image-kernel-flat}
   \uses{lemma:nagata-affine-image-kernel-localization}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
+  \leanok
 
   Let $A\to B$ be flat, let $T\to\operatorname{Spec}(A)$ be quasi-compact
   and quasi-separated, and put
@@ -338,6 +358,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Use the finite affine cover and finite affine refinements from
   \Cref{lemma:nagata-affine-image-kernel-localization}.  Tensor its finite
   sheaf equalizer with $B$.  Flatness makes tensoring exact, and tensoring
@@ -355,6 +376,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-affine-image-kernel-localization}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_morphismRestrict}
+  \leanok
 
   Let $g\colon T\to Y$ be quasi-compact and quasi-separated, let
   $W\subseteq Y$ be open, let $T_W=T\times_YW$, and let
@@ -367,6 +389,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   On an affine open $V=\operatorname{Spec}(A)\subseteq Y$, the image ideal is
   the kernel of
   $A\to\Gamma(T\times_YV,\mathcal O)$.  On every principal open
@@ -389,6 +412,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-affine-image-kernel-flat}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
+  \leanok
 
   Let $g\colon T\to Y$ be quasi-compact and quasi-separated and let
   $q\colon Y'\to Y$ be flat.  For the base change
@@ -401,6 +425,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Work over an affine open $V=\operatorname{Spec}(A)\subseteq Y$ and an
   affine open $V'=\operatorname{Spec}(B)\subseteq q^{-1}(V)$.  The ring map
   $A\to B$ is flat.  Apply
@@ -434,6 +459,7 @@ equality has explicitly been fixed.
   \label{def:nagata-scheme-theoretic-closure}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.Scheme.Hom.image}
+  \leanok
 
   Let $a\colon T\to Y$ be a quasi-compact and quasi-separated immersion.
   Define the scheme-theoretic closure of $T$ in $Y$ to be the closed
@@ -444,6 +470,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-scheme-theoretic-closure-minimal}
   \uses{def:nagata-scheme-theoretic-closure}
   \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \leanok
 
   The scheme-theoretic closure is the smallest closed subscheme of $Y$
   through which $a$ factors: it factors through every such closed subscheme,
@@ -451,6 +478,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-scheme-image-universal}
   This is \Cref{lemma:nagata-scheme-image-universal} applied to the immersion
   $a$, together with
@@ -461,6 +489,7 @@ equality has explicitly been fixed.
   \label{lemma:nagata-immersion-open-in-scheme-image}
   \uses{def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact}
+  \leanok
 
   Let $g\colon T\to Y$ be a quasi-compact immersion.  The constructed map
   $g^{\mathrm{im}}\colon T\to\operatorname{SIm}(g)$ is a quasi-compact open
@@ -468,6 +497,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Apply the verified instance
   \texttt{AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact}
   to $g$.  It gives that
@@ -494,6 +524,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification,
     def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.Compactification.ofIsImmersion}
+  \leanok
 
   Let $g\colon X\to Y$ be a quasi-compact immersion over $S$, with
   $Y\to S$ proper.  Define $\mathsf C(g)$ to be the factorization
@@ -507,12 +538,14 @@ equality has explicitly been fixed.
   \label{lemma:nagata-immersion-into-proper}
   \uses{def:nagata-immersion-compactification}
   \lean{AlgebraicGeometry.HasCompactification.of_isImmersion}
+  \leanok
 
   The constructed factorization $\mathsf C(g)$ is a compactification of
   $X\to S$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-immersion-open-in-scheme-image}
   The first map is a quasi-compact open immersion by
   \Cref{lemma:nagata-immersion-open-in-scheme-image}.  The second map is the
@@ -531,6 +564,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification}
   \lean{AlgebraicGeometry.Compactification.ofIsPullback,
     AlgebraicGeometry.Compactification.baseChange}
+  \leanok
 
   Given a compactification $C=(X\to\overline X\to S)$ and $S'\to S$, define
   $C_{S'}$ to be
@@ -543,12 +577,14 @@ equality has explicitly been fixed.
   \label{lemma:nagata-compactification-base-change}
   \uses{def:nagata-compactification-base-change}
   \lean{AlgebraicGeometry.HasCompactification.of_isPullback}
+  \leanok
 
   The constructed factorization $C_{S'}$ is a compactification of
   $X\times_SS'\to S'$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Open immersions, quasi-compact morphisms, and proper morphisms are stable
   under arbitrary base change.  The factorization equality follows from the
   universal property of the two fibre products.
@@ -559,6 +595,7 @@ equality has explicitly been fixed.
   \uses{def:nagata-compactification,
     def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.Compactification.denseRefinement}
+  \leanok
 
   For a compactification $C=(X\xrightarrow{j}\overline X\to S)$, define
   $\mathsf{Dense}(C)$ by replacing $\overline X$ with
@@ -569,12 +606,14 @@ equality has explicitly been fixed.
   \label{prop:nagata-dense-refinement}
   \uses{def:nagata-dense-compactification,def:nagata-dense-refinement}
   \lean{AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_denseRefinement_i}
+  \leanok
 
   The object $\mathsf{Dense}(C)$ is a scheme-theoretically dense
   compactification of the same morphism as $C$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-immersion-open-in-scheme-image,
     def:nagata-scheme-image-factor}
   The induced map from $X$ is a quasi-compact open immersion and is
@@ -596,6 +635,7 @@ equality has explicitly been fixed.
     def:nagata-scheme-theoretic-image,
     def:nagata-scheme-image-factor}
   \lean{AlgebraicGeometry.Compactification.ofIsClosedImmersion}
+  \leanok
 
   Let $i\colon X\hookrightarrow X'$ be closed over $S$ and fix a
   compactification $C'=(X'\to\overline X'\to S)$.  Define
@@ -610,12 +650,14 @@ equality has explicitly been fixed.
   \label{prop:nagata-closed-subscheme-compactifiable}
   \uses{def:nagata-closed-subscheme-compactification}
   \lean{AlgebraicGeometry.HasCompactification.of_isClosedImmersion}
+  \leanok
 
   The constructed factorization $\mathsf{Closed}(i,C')$ is a compactification
   of $X\to S$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-scheme-image-of-closed-immersion}
   Its ambient scheme $\overline X$ is closed in the proper scheme
@@ -638,6 +680,7 @@ equality has explicitly been fixed.
 \begin{lemma}[The diagonal on a mixed open]
   \label{lemma:nagata-diagonal-mixed-open}
   \lean{AlgebraicGeometry.diagonalRestrictChartArrowIso}
+  \leanok
 
   Let $X=U\cup V$ be an open cover over $S$.  The pullback of
   $\Delta_{X/S}$ to $U\times_SV$ is canonically the map
@@ -648,6 +691,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Both schemes represent triples consisting of a point of $U$, a point of
   $V$, and an equality of their images in $X$.  The canonical isomorphism is
   obtained from the universal property of the pullback.
@@ -656,6 +700,7 @@ equality has explicitly been fixed.
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0F3U}{Tag 0F3U}]{stacks-project}}]
   \label{lemma:nagata-separated-two-open-cover}
   \lean{AlgebraicGeometry.IsSeparated.of_two_open_cover}
+  \leanok
 
   Let $X=U\cup V$ be an open cover over $S$.  Assume that $U\to S$ and
   $V\to S$ are separated and that
@@ -666,6 +711,7 @@ equality has explicitly been fixed.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-diagonal-mixed-open}
   The target of $\Delta_{X/S}$ is covered by
   \[
@@ -696,6 +742,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Degree-zero homogeneous localization]
   \label{def:nagata-homogeneous-localization-degree-zero}
   \lean{HomogeneousLocalization.Away}
+  \leanok
 
   Let $R=\bigoplus_{n\geq0}R_n$ be an $\mathbb N$-graded commutative ring and
   let $f\in R_d$ be homogeneous with $d>0$.  Write $R_{(f),0}$ for the
@@ -713,6 +760,12 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-proj-chart-ring-cocycle}
   \uses{def:nagata-homogeneous-localization-degree-zero}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   For positive-degree homogeneous $f,g,h$, localization induces canonical
   equivalences between the restrictions of $(R_{(f)})_0$ and
@@ -736,6 +789,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-affine-proj}
   \uses{def:nagata-homogeneous-localization-degree-zero}
   \lean{AlgebraicGeometry.Proj}
+  \leanok
 
   For an $\mathbb N$-graded commutative ring $R$, use the Mathlib scheme
   $\operatorname{Proj}(R)$, with its structural morphism to the degree-zero
@@ -752,6 +806,7 @@ it is not silently identified with an unavailable Mathlib primitive.
     def:nagata-homogeneous-localization-degree-zero}
   \lean{AlgebraicGeometry.Proj.basicOpenIsoSpec,
     AlgebraicGeometry.Proj.iSup_basicOpen_eq_top}
+  \leanok
 
   Each positive-degree homogeneous $f$ determines an open subscheme
   $D_+(f)\subseteq\operatorname{Proj}(R)$ and a canonical isomorphism
@@ -763,6 +818,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-proj-chart-ring-cocycle}
   The standard-open isomorphism is \texttt{Proj.basicOpenIsoSpec}.
   The cover assertion is
@@ -776,6 +832,12 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-relative-proj}
   \uses{def:nagata-affine-proj}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   Let $X$ be a scheme and
   $\mathcal A=\bigoplus_{n\geq0}\mathcal A_n$ a quasi-coherent graded
@@ -797,6 +859,12 @@ it is not silently identified with an unavailable Mathlib primitive.
   \uses{def:nagata-relative-proj,def:nagata-affine-proj,
     lemma:nagata-proj-chart-ring-cocycle}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   The relative Proj construction in
   \Cref{def:nagata-relative-proj} exists as a scheme, is independent up to a
@@ -868,6 +936,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-projective-space-base-change}
   \uses{def:nagata-affine-proj}
   \lean{AlgebraicGeometry.ProjectiveSpace}
+  \leanok
 
   Let $n$ be a finite index set and $S$ a scheme.  Put
   \[
@@ -896,12 +965,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-projective-space-base-change-proper}
   \uses{def:nagata-projective-space-base-change,def:nagata-affine-proj}
   \lean{AlgebraicGeometry.ProjectiveSpace.instIsProper}
+  \leanok
 
   For every finite index set $n$ and every scheme $S$, the structural
   morphism $\mathbf P(n;S)\to S$ is proper.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The polynomial ring $\mathbf Z[T_i:i\in n]$ is of finite type over the
   degree-zero part of its total-degree grading, which is $\mathbf Z$, because
   $n$ is finite.  Hence the verified properness instance for
@@ -917,6 +988,10 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-projective-morphism}
   \uses{def:nagata-relative-projective-space}
   \lean{}
+  \statusnote{Bypassed by the formalized route: only properness of the global
+    blow-up is needed, and it is proved directly as
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
+    global blow-up is never exhibited as a projective morphism.}
 
   A morphism $f\colon Y\to X$ is projective if there exist $r\in\mathbb N$
   and a closed immersion $Y\hookrightarrow\mathbf P^r_X$ over $X$ whose
@@ -949,6 +1024,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Properness is local on the target]
   \label{lemma:nagata-projective-target-local}
   \lean{AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget}
+  \leanok
 
   Let $f\colon Y\to X$ be a morphism.  If $X$ has an open cover
   $(V_i)$ such that every $f^{-1}(V_i)\to V_i$ is proper, then $f$ is
@@ -956,6 +1032,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Properness is a Zariski-local property on the target.  Apply the verified
   target-locality instance
   \texttt{AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget} to the open
@@ -972,6 +1049,12 @@ it is not silently identified with an unavailable Mathlib primitive.
   \uses{def:nagata-relative-proj,lemma:nagata-relative-proj-exists,
     lemma:nagata-proj-chart-ring-cocycle}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   Relative Proj has the following properties.
   \begin{enumerate}
@@ -1030,6 +1113,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Rees algebra]
   \label{def:nagata-rees-algebra}
   \lean{reesAlgebra}
+  \leanok
 
   Let $A$ be a ring and $I\subseteq A$ an ideal.  The Rees algebra is
   \[
@@ -1051,6 +1135,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-rees-piece}
   \uses{def:nagata-rees-algebra}
   \lean{AlgebraicGeometry.reesGrading}
+  \leanok
 
   For $n\in\mathbb N$, let $\mathcal R_A(I)_n$ be the $A$-submodule of Rees
   elements whose underlying polynomial is supported in degree $n$.
@@ -1060,6 +1145,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-piece-membership}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.mem_reesGrading_iff_exists}
+  \leanok
 
   An element $F\in\mathcal R_A(I)$ lies in $\mathcal R_A(I)_n$ if and only if
   there is $a\in I^n$ such that the underlying polynomial of $F$ is
@@ -1067,6 +1153,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   If $F$ is supported in degree $n$, coefficient extensionality gives
   $F=\operatorname{monomial}(n,F_n)$.  Membership in the Rees algebra gives
   $F_n\in I^n$.  Conversely, if the underlying polynomial is $at^n$ with $a\in I^n$, its
@@ -1079,6 +1166,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-piece-mul}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading.instGradedMonoid}
+  \leanok
 
   Multiplication maps
   \[
@@ -1088,6 +1176,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Write the two elements as $at^m$ and $bt^n$ with $a\in I^m$ and
   $b\in I^n$.  Their product is $(ab)t^{m+n}$ and
@@ -1098,12 +1187,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-component-finite-support}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   For $F\in\mathcal R_A(I)$, only finitely many homogeneous components
   $F_nt^n$ are nonzero.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The components are indexed by the support of the underlying polynomial,
   which is finite.
 \end{proof}
@@ -1112,12 +1203,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-sum-components}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   Every $F\in\mathcal R_A(I)$ is the finite sum of the monomials
   $F_nt^n$ regarded as elements of $\mathcal R_A(I)_n$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-component-finite-support,
     lemma:nagata-rees-piece-membership}
   Sum over the finite polynomial support.  Equality follows by comparing the
@@ -1128,6 +1221,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-components-unique}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading_isInternal}
+  \leanok
 
   Let $E$ be a finite set of pairwise distinct degrees and choose one element
   $F_n\in\mathcal R_A(I)_n$ for each $n\in E$.  If
@@ -1135,6 +1229,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Apply the coefficient projection in a fixed degree $n\in E$.  Every summand
   of degree different from $n$ has zero $n$th component, so the projection of
@@ -1145,12 +1240,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-rees-graded}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading.instGradedRing}
+  \leanok
 
   The family $n\mapsto\mathcal R_A(I)_n$ defines an
   $\mathbb N$-graded-ring structure on $\mathcal R_A(I)$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-mul,lemma:nagata-rees-sum-components,
     lemma:nagata-rees-components-unique}
   Use \Cref{lemma:nagata-rees-piece-mul} for graded multiplication,
@@ -1163,6 +1260,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-degree-zero}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGradingZero}
+  \leanok
 
   Taking the constant coefficient gives a ring equivalence
   \[
@@ -1171,6 +1269,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Since $I^0=A$, a degree-zero Rees element is exactly a constant polynomial.
   The inverse sends $a$ to the constant monomial $at^0$.  The two composites
@@ -1181,6 +1280,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-rees-degree-one-element}
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesX}
+  \leanok
 
   Every $a\in I$ determines a homogeneous element $at$ of degree one.  Its
   underlying polynomial and its coefficient in degree one are recorded by
@@ -1188,6 +1288,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-piece-membership}
   Since $a\in I=I^1$, the monomial $at$ belongs to the degree-one piece by
   \Cref{lemma:nagata-rees-piece-membership}.  The underlying-polynomial and
@@ -1199,6 +1300,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-rees-finite-generation}
   \uses{def:nagata-rees-algebra,def:nagata-rees-piece}
   \lean{AlgebraicGeometry.finiteType_reesGrading_zero}
+  \leanok
 
   If $I=(f_0,\ldots,f_r)$, then $\mathcal R_A(I)$ is generated as an algebra
   over its degree-zero piece by $f_0t,\ldots,f_rt$.  In particular it is of
@@ -1206,6 +1308,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-degree-zero,lemma:nagata-rees-degree-one-element,
     lemma:nagata-rees-sum-components}
   A homogeneous coefficient in $I^n$ is a linear combination of degree-$n$
@@ -1222,6 +1325,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-affine-blowup}
   \uses{def:nagata-rees-algebra,def:nagata-affine-proj}
   \lean{AlgebraicGeometry.AffineBlowup}
+  \leanok
 
   For an ideal $I\subseteq A$, define
   \[
@@ -1235,6 +1339,11 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Affine blow-up chart algebra]
   \label{def:nagata-blowup-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   Let $a\in I$.  Define $A[I/a]$ to be the $A$-subalgebra of $A_a$
   generated by the fractions $x/a$ with $x\in I$.
@@ -1244,6 +1353,11 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-chart-ring-normal-form}
   \uses{def:nagata-blowup-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   Every element of $A[I/a]$ is represented in $A_a$ by $x/a^n$ for some
   $n\geq 0$ and $x\in I^n$.
@@ -1261,6 +1375,11 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Equality criterion for chart fractions]
   \label{lemma:nagata-chart-ring-fraction-equality}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   Two representatives $x/a^m$ and $y/a^n$ define the same element of
   $A[I/a]$ exactly when they are equal in the localization $A_a$; equivalently,
@@ -1279,6 +1398,11 @@ it is not silently identified with an unavailable Mathlib primitive.
   \uses{def:nagata-rees-algebra,
     def:nagata-blowup-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   For $a\in I$, define $\theta_a$ on a degree-zero homogeneous fraction by
   \[
@@ -1291,6 +1415,11 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-homogeneous-away-to-chart}
   \uses{def:nagata-homogeneous-away-to-chart}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   The assignment $\theta_a$ is independent of the chosen homogeneous
   representative and defines a ring homomorphism from the degree-zero
@@ -1308,6 +1437,11 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Surjectivity of the chart map]
   \label{lemma:nagata-homogeneous-away-to-chart-surjective}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   The constructed map $\theta_a$ is surjective.
 \end{lemma}
@@ -1321,6 +1455,11 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Injectivity of the chart map]
   \label{lemma:nagata-homogeneous-away-to-chart-injective}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   The constructed map $\theta_a$ is injective.
 \end{lemma}
@@ -1339,6 +1478,7 @@ it is not silently identified with an unavailable Mathlib primitive.
     def:nagata-homogeneous-away-to-chart,
     prop:nagata-proj-standard-open}
   \lean{AlgebraicGeometry.AffineBlowup.chart}
+  \leanok
 
   Define
   \[
@@ -1353,12 +1493,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-affine-blowup-chart}
   \uses{def:nagata-affine-blowup-chart-map}
   \lean{AlgebraicGeometry.AffineBlowup.chart}
+  \leanok
 
   The constructed morphism $\chi_a$ is an isomorphism over
   $\operatorname{Spec}(A)$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-homogeneous-away-to-chart-surjective,
     lemma:nagata-homogeneous-away-to-chart-injective}
   The ring map $\theta_a$ is bijective by the two cited lemmas.  The induced
@@ -1369,12 +1511,14 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Degree-one generators cover Proj]
   \label{lemma:nagata-rees-generators-cover-proj}
   \lean{AlgebraicGeometry.Proj.iSup_basicOpen_eq_top}
+  \leanok
 
   If $I=(f_0,\ldots,f_r)$, then the standard opens
   $D_+(f_it)$ cover $\operatorname{Proj}(\mathcal R_A(I))$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-rees-finite-generation}
   The elements $f_it$ generate the irrelevant ideal by
   \Cref{prop:nagata-rees-finite-generation}.  Apply
@@ -1386,6 +1530,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Finite affine chart cover]
   \label{prop:nagata-affine-blowup-chart-cover}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.iSup_opensRange_blowupι_eq_top}
+  \leanok
 
   If $I=(f_0,\ldots,f_r)$, the affine opens
   \[
@@ -1396,6 +1541,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-affine-blowup-chart,lemma:nagata-rees-generators-cover-proj}
   The opens $D_+(f_it)$ cover by
   \Cref{lemma:nagata-rees-generators-cover-proj}.  Replace each one by the
@@ -1408,12 +1554,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-affine-blowup-top}
   \uses{def:nagata-affine-blowup}
   \lean{AlgebraicGeometry.AffineBlowup.isIso_toSpec_of_eq_top}
+  \leanok
 
   The blow-up of $\operatorname{Spec}(A)$ in the unit ideal is canonically
   isomorphic to $\operatorname{Spec}(A)$ over $\operatorname{Spec}(A)$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-affine-blowup-chart}
   The Rees algebra of the unit ideal is $A[t]$.  The single standard open
   $D_+(t)$ covers Proj, and its chart algebra $A[A/1]$ is $A$.
@@ -1423,6 +1571,11 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-affine-blowup-bot}
   \uses{def:nagata-affine-blowup}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   The blow-up in the zero ideal is empty: the positive-degree part of its Rees
   algebra vanishes, so the irrelevant ideal is zero and Proj has no points.
@@ -1440,6 +1593,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Localization commutes with powers of an ideal]
   \label{lemma:nagata-localization-ideal-pow}
   \lean{Ideal.map_pow}
+  \leanok
 
   Let $s\in A$.  For every $n$ there is a canonical equality
   \[
@@ -1448,6 +1602,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Extension of ideals along a ring homomorphism preserves products and the
   unit ideal.  Induct on $n$.
 \end{proof}
@@ -1455,6 +1610,11 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Localization of each Rees piece]
   \label{lemma:nagata-localization-rees-piece}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   Flatness of $A\to A_s$ gives an $A_s$-linear equivalence
   \[
@@ -1475,6 +1635,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-rees-localization-map}
   \uses{def:nagata-rees-algebra}
   \lean{AlgebraicGeometry.reesGrading.hom}
+  \leanok
 
   Define
   \[
@@ -1488,11 +1649,13 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-rees-localization}
   \uses{def:nagata-rees-localization-map}
   \lean{AlgebraicGeometry.AffineBlowup.isLocalization_away_map}
+  \leanok
 
   The map $\rho_s$ is a graded ring equivalence.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-localization-rees-piece,
     lemma:nagata-localization-ideal-pow}
   For each $n$, let $\rho_{s,n}$ be the equivalence of
@@ -1509,6 +1672,11 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Compatibility with degree zero]
   \label{lemma:nagata-rees-localization-degree-zero}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   On degree zero, the constructed coefficientwise localization map is the standard ring
   equivalence $A_s\otimes_AA\cong A_s$.
@@ -1520,26 +1688,15 @@ it is not silently identified with an unavailable Mathlib primitive.
   extensionality.
 \end{proof}
 
-\begin{lemma}[Compatibility with degree-one generators]
-  \label{lemma:nagata-rees-localization-degree-one}
-  \lean{}
-
-  The element $at$ maps to the degree-one element $(a/1)t$ of the localized
-  Rees algebra.
-\end{lemma}
-
-\begin{proof}
-  \uses{prop:nagata-rees-localization,lemma:nagata-rees-degree-one-element}
-  Unfold the degreewise map in
-  \Cref{prop:nagata-rees-localization}.  In degree one it is extension of the
-  coefficient map $I\to IA_s$, so it sends $a$ to $a/1$ and therefore sends
-  $at$ to $(a/1)t$.
-\end{proof}
-
 \begin{lemma}[Localization at one]
   \label{lemma:nagata-rees-localization-one}
   \uses{lemma:nagata-rees-sum-components}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   After the canonical identifications $A_1\cong A$, the Rees localization
   equivalence at $1$ is the identity.
@@ -1555,6 +1712,11 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Iterated localization coherence]
   \label{lemma:nagata-rees-localization-mul}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine blow-up and its
+    charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
+    \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map} supplying the chart algebra
+    and its localization coherence, so neither is rebuilt by hand.}
 
   Localizing first at $s$ and then at $t$ gives the same graded equivalence as
   localizing at $st$, after the canonical equivalence
@@ -1568,28 +1730,13 @@ it is not silently identified with an unavailable Mathlib primitive.
   extensionality gives equality.
 \end{proof}
 
-\begin{lemma}[Naturality under a ring isomorphism]
-  \label{lemma:nagata-rees-localization-natural}
-  \lean{}
-
-  The Rees localization equivalence commutes with transport of $I$ and $s$
-  along a ring isomorphism.
-\end{lemma}
-
-\begin{proof}
-  \uses{prop:nagata-rees-localization}
-  It suffices to compare the maps on homogeneous monomials.  Both routes send
-  $at^n$ to the monomial with coefficient obtained by transporting $a$ and
-  then localizing it.  Naturality of localization of rings gives equality of
-  those coefficients.
-\end{proof}
-
 \begin{definition}[Affine blow-up restriction morphism]
   \label{def:nagata-affine-blowup-restriction-map}
   \uses{def:nagata-affine-blowup,
     def:nagata-rees-localization-map,
     prop:nagata-relative-proj-functoriality}
   \lean{AlgebraicGeometry.AffineBlowup.hom}
+  \leanok
 
   Define
   \[
@@ -1608,12 +1755,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-affine-blowup-restrict}
   \uses{def:nagata-affine-blowup-restriction-map}
   \lean{AlgebraicGeometry.AffineBlowup.isPullback_hom_of_isLocalization}
+  \leanok
 
   The constructed morphism $r_s$ is an isomorphism over
   $\operatorname{Spec}(A_s)$.
 \end{proposition}
 
 \begin{proof}
+  \leanok
   \uses{prop:nagata-rees-localization,
     lemma:nagata-rees-localization-degree-zero,
     prop:nagata-relative-proj-functoriality}
@@ -1629,6 +1778,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Identity and cocycle laws for affine restriction]
   \label{lemma:nagata-affine-blowup-restrict-cocycle}
   \lean{AlgebraicGeometry.AffineBlowup.hom_comp}
+  \leanok
 
   The restriction isomorphism is the identity for $s=1$, and its two possible
   composites on an iterated basic open $D(st)$ agree literally after the
@@ -1636,6 +1786,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   \uses{lemma:nagata-rees-localization-one,lemma:nagata-rees-localization-mul,
     prop:nagata-affine-blowup-restrict}
   On each standard chart, the map for $s=1$ is induced by the identity of the
@@ -2190,6 +2341,10 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[Finite global free generation]
   \label{def:nagata-global-finite-free-generation}
   \lean{}
+  \statusnote{Bypassed by the formalized route: only properness of the global
+    blow-up is needed, and it is proved directly as
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
+    global blow-up is never exhibited as a projective morphism.}
 
   A quasi-coherent ideal sheaf \(\mathcal I\subseteq\mathcal O_X\) has a
   \emph{finite global free presentation} if there are \(r\in\mathbb N\) and
@@ -2209,6 +2364,10 @@ all its coherence maps are checked on basic affine refinements.
     def:nagata-rees-polynomial-map,
     lemma:nagata-rees-polynomial-surjection}
   \lean{}
+  \statusnote{Bypassed by the formalized route: only properness of the global
+    blow-up is needed, and it is proved directly as
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
+    global blow-up is never exhibited as a projective morphism.}
 
   Given a finite global free presentation
   \(q\colon\mathcal O_X^{r+1}\twoheadrightarrow\mathcal I\), the affine
@@ -2257,6 +2416,10 @@ all its coherence maps are checked on basic affine refinements.
     def:nagata-global-finite-free-generation,
     lemma:nagata-global-blowup-relative-projective-embedding}
   \lean{}
+  \statusnote{Bypassed by the formalized route: only properness of the global
+    blow-up is needed, and it is proved directly as
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
+    global blow-up is never exhibited as a projective morphism.}
 
   If \(\mathcal I\) is of finite type, then
   \(b_{X,\mathcal I}\colon\operatorname{Bl}_{\mathcal I}(X)\to X\) is
@@ -2471,6 +2634,12 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Associativity of ideal-power multiplication]
   \label{lemma:nagata-sheaf-ideal-powers-assoc}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   For a quasi-coherent ideal $\mathcal I\subseteq\mathcal O_X$, the canonical
   maps $\mathcal I^m\otimes\mathcal I^n\to\mathcal I^{m+n}$ are associative
@@ -2489,6 +2658,12 @@ all its coherence maps are checked on basic affine refinements.
   \label{def:nagata-sheaf-rees-algebra}
   \uses{lemma:nagata-sheaf-ideal-powers-assoc}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   Let $\mathcal I\subseteq\mathcal O_X$ be a quasi-coherent ideal sheaf.  Define
   its sheaf Rees algebra by
@@ -2568,6 +2743,12 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-relative-proj-base-change-arbitrary}
   \uses{prop:nagata-relative-proj-functoriality}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   For any morphism $g\colon Y\to X$ and graded quasi-coherent algebra
   $\mathcal A$ on $X$, coefficientwise pullback gives a canonical isomorphism
@@ -2705,6 +2886,12 @@ all its coherence maps are checked on basic affine refinements.
     lemma:nagata-relative-proj-exists,
     lemma:nagata-relative-proj-invertible-tensor-powers-affine}
   \lean{}
+  \statusnote{Bypassed by the formalized route: no separate relative-Proj
+    primitive was formalized.  The blow-up is glued from the affine Proj charts
+    (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
+    \texttt{AlgebraicGeometry.Proj.iSup\_basicOpen\_eq\_top}) with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.}
 
   If $\mathcal L$ is an invertible ideal on $Y$, the relative Proj of
   $\bigoplus_{n\geq0}\mathcal L^{\otimes n}$ is canonically isomorphic to $Y$.
@@ -2880,6 +3067,13 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-flat-pullback-ideal-pow}
   \uses{def:nagata-extended-ideal}
   \lean{}
+  \statusnote{Bypassed by the formalized route: blow-ups are never
+    base-changed along a flat morphism.  Every base-change step the route takes
+    goes through the universal property
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_lift\_blowup} and
+    the chart pullback squares
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isPullback\_blowup\ensuremath{\iota}}
+    instead.}
 
   Let $\mathcal I\subseteq\mathcal O_X$ be a quasi-coherent ideal.  If
   $g\colon Y\to X$ is flat, then the image of $g^*(\mathcal I^n)$ in
@@ -2900,6 +3094,13 @@ all its coherence maps are checked on basic affine refinements.
   \label{def:nagata-flat-pullback-rees-map}
   \uses{def:nagata-sheaf-rees-algebra,def:nagata-extended-ideal}
   \lean{}
+  \statusnote{Bypassed by the formalized route: blow-ups are never
+    base-changed along a flat morphism.  Every base-change step the route takes
+    goes through the universal property
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_lift\_blowup} and
+    the chart pullback squares
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isPullback\_blowup\ensuremath{\iota}}
+    instead.}
 
   For a quasi-coherent ideal $\mathcal I\subseteq\mathcal O_X$ and flat
   $g\colon Y\to X$, define $\beta_g$ degreewise by the canonical
@@ -2919,6 +3120,13 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-flat-pullback-rees}
   \uses{def:nagata-flat-pullback-rees-map}
   \lean{}
+  \statusnote{Bypassed by the formalized route: blow-ups are never
+    base-changed along a flat morphism.  Every base-change step the route takes
+    goes through the universal property
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_lift\_blowup} and
+    the chart pullback squares
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isPullback\_blowup\ensuremath{\iota}}
+    instead.}
 
   The map $\beta_g$ is a graded algebra equivalence.
 \end{lemma}
@@ -2938,6 +3146,13 @@ all its coherence maps are checked on basic affine refinements.
     lemma:nagata-flat-pullback-rees,
     prop:nagata-relative-proj-functoriality}
   \lean{}
+  \statusnote{Bypassed by the formalized route: blow-ups are never
+    base-changed along a flat morphism.  Every base-change step the route takes
+    goes through the universal property
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_lift\_blowup} and
+    the chart pullback squares
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isPullback\_blowup\ensuremath{\iota}}
+    instead.}
 
   Let $g\colon Y\to X$ be flat and let
   $\mathcal I\subseteq\mathcal O_X$ be a quasi-coherent ideal.  With
@@ -2959,6 +3174,13 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-blowup-flat-base-change-map,
     prop:nagata-relative-proj-functoriality}
   \lean{}
+  \statusnote{Bypassed by the formalized route: blow-ups are never
+    base-changed along a flat morphism.  Every base-change step the route takes
+    goes through the universal property
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_lift\_blowup} and
+    the chart pullback squares
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isPullback\_blowup\ensuremath{\iota}}
+    instead.}
 
   The constructed comparison $\operatorname{bc}_g$ is an isomorphism over
   $Y$.
@@ -3847,6 +4069,14 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-strict-transform-basechange-chart-ring}
   \uses{def:nagata-blowup-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   Let $A\to B$ be a ring map, let $I\subseteq A$, and let $a\in I$.
   Define
@@ -3861,6 +4091,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-basechange-chart}
   \uses{def:nagata-strict-transform-basechange-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   Over the $a$-chart of
   $\operatorname{Bl}_I(\operatorname{Spec}A)$, the ordinary base change
@@ -3884,6 +4122,14 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-power-torsion,
     def:nagata-strict-transform-basechange-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   Define
   \[
@@ -3896,6 +4142,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-chart-closed}
   \uses{def:nagata-strict-transform-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   The quotient map
   $C_a(A,B,I)\to C_a^{\mathrm{st}}(A,B,I)$ defines a closed immersion of
@@ -3914,6 +4168,14 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-strict-transform-basechange-chart-ring,
     def:nagata-blowup-chart-ring}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   Let $J=IB\subseteq B$, let $b$ be the image of $a$ in $B$, and write
   $B[J/b]$ for the corresponding chart ring.  Define
@@ -3930,6 +4192,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-chart-to-extended-blowup-chart}
   \uses{def:nagata-strict-chart-to-extended-blowup-chart}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   The assignment defining $\sigma_a$ respects addition, multiplication, the
   localization relations in $A[I/a]$, and the two $A$-algebra structures.
@@ -3975,6 +4245,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-chart-map-kernel}
   \uses{def:nagata-power-torsion,def:nagata-strict-chart-to-extended-blowup-chart}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   The kernel of $\sigma_a$ is exactly
   $\Gamma_{(a)}(C_a(A,B,I))$.
@@ -3996,6 +4274,14 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-strict-transform-chart-ring,
     def:nagata-strict-chart-to-extended-blowup-chart}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   Define
   \[
@@ -4009,6 +4295,14 @@ correction explicit before it is sheafified and glued.
   \label{prop:nagata-strict-transform-chart-iso}
   \uses{def:nagata-strict-transform-chart-comparison}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   The constructed comparison $\overline\sigma_a$ is a ring equivalence.
 \end{proposition}
@@ -4026,6 +4320,14 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-strict-transform-chart-comparison-localized}
   \uses{def:nagata-strict-transform-chart-comparison}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   After localizing the base ring or a chart ring, define
   $(\overline\sigma_a)_s$ by localizing the source and target of
@@ -4037,6 +4339,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-chart-localization}
   \uses{def:nagata-strict-transform-chart-comparison-localized}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   The constructed localized comparison $(\overline\sigma_a)_s$ equals the
   strict-transform chart comparison constructed directly from the localized
@@ -4059,6 +4369,14 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-strict-transform-chart-ring,
     lemma:nagata-power-torsion-localization}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   For $s\in B$, the canonical map
   \[
@@ -4085,6 +4403,14 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-chart-cocycle}
   \uses{def:nagata-strict-transform-chart-comparison-localized}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   The localized strict-transform chart comparisons agree on double
   localizations and satisfy the cocycle equality on triple chart overlaps.
@@ -4115,6 +4441,11 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-module-strict-transform}
   \uses{def:nagata-power-torsion,def:nagata-global-blowup}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   For a morphism $f\colon Y\to X$, a quasi-coherent
   $\mathcal O_Y$-module $\mathcal F$, a finite-type quasi-coherent ideal
@@ -4130,6 +4461,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-module-strict-transform-chart}
   \uses{def:nagata-module-strict-transform,def:nagata-power-torsion}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $A\to B$ be a ring map, let $I\subseteq A$ be an ideal, let $a\in I$,
   and let $\mathcal F$ on $\operatorname{Spec}(B)$ correspond to the
@@ -4186,33 +4522,20 @@ correction explicit before it is sheafified and glued.
   extensionality.
 \end{proof}
 
-\begin{lemma}[Quasi-coherence of the module strict transform]
-  \label{lemma:nagata-module-strict-transform-qc}
-  \uses{def:nagata-module-strict-transform}
-  \lean{}
-
-  The module strict transform is quasi-coherent.
-\end{lemma}
-
-\begin{proof}
-  \uses{lemma:nagata-module-strict-transform-chart,
-    lemma:nagata-module-power-torsion-localization}
-  On affine charts it is associated to the quotient module in
-  \Cref{lemma:nagata-module-strict-transform-chart}.  These modules localize
-  correctly by
-  \Cref{lemma:nagata-module-power-torsion-localization}.  On a basic overlap,
-  the transition map is the quotient of the ordinary localization map; the
-  final assertion of that lemma gives equality for two successive
-  localizations, hence the cocycle on triple overlaps.  The associated affine
-  sheaves therefore glue to a quasi-coherent module.
-\end{proof}
-
 \begin{definition}[Closed chart model of the global strict transform]
   \label{def:nagata-strict-transform-closed-chart-model}
   \uses{def:nagata-strict-transform-chart-ring,
     def:nagata-global-blowup,
     lemma:nagata-strict-transform-chart-localization-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
   ideal, and put $X'=\operatorname{Bl}_{\mathcal I}(X)$.  Choose an affine
@@ -4235,6 +4558,14 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-strict-transform-closed-chart-model,
     def:nagata-strict-transform}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the strict transform is
+    supplied by the API of
+    \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
+    \texttt{AlgebraicGeometry.strictTransform}, its closed immersion
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isClosedImmersion\_pullbackLift\_blowup\_comap},
+    and the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} --- so the
+    strict-transform chart rings and their cocycle are never assembled by hand.}
 
   Under the data of
   \Cref{def:nagata-strict-transform-closed-chart-model}, the constructed chart
@@ -4381,6 +4712,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-flat-strict-transform-no-torsion}
   \uses{def:nagata-power-torsion}
   \lean{}
+  \statusnote{Bypassed by the formalized route: flat base change of strict
+    transforms is not used.  The only strict-transform base-change fact the
+    route needs is the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} over the
+    preserved open.}
 
   Let $A\to B$ be flat, let $I\subseteq A$ be an ideal, and let $a\in I$.
   Then the $a$-power-torsion in
@@ -4398,6 +4734,11 @@ correction explicit before it is sheafified and glued.
 \begin{corollary}[Flat strict transform equals ordinary base change]
   \label{cor:nagata-flat-strict-transform-base-change}
   \lean{}
+  \statusnote{Bypassed by the formalized route: flat base change of strict
+    transforms is not used.  The only strict-transform base-change fact the
+    route needs is the pullback square
+    \texttt{AlgebraicGeometry.isPullback\_strictTransformOpen} over the
+    preserved open.}
 
   Let $f\colon Y\to X$ and let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$.  If $f$ is flat, the strict transform in
@@ -4445,6 +4786,11 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Strict transform under a dominating blow-up]
   \label{lemma:nagata-strict-transform-dominating}
   \lean{}
+  \statusnote{Bypassed by the formalized route: composition and domination of
+    admissible blow-ups are handled by
+    \texttt{AlgebraicGeometry.IsAdmissible.exists\_comp}, and the disjointness
+    that is actually used is
+    \texttt{AlgebraicGeometry.disjoint\_range\_strictTransformMap\_of\_disjoint}.}
 
   Let $f\colon Y\to X$.  Suppose $X''\to X'\to X$ are blow-ups which are
   isomorphisms over the same open $U\subseteq X$.  The strict transform of
@@ -4475,6 +4821,11 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Disjoint strict transforms stay disjoint]
   \label{lemma:nagata-strict-transform-disjoint-dominating}
   \lean{}
+  \statusnote{Bypassed by the formalized route: composition and domination of
+    admissible blow-ups are handled by
+    \texttt{AlgebraicGeometry.IsAdmissible.exists\_comp}, and the disjointness
+    that is actually used is
+    \texttt{AlgebraicGeometry.disjoint\_range\_strictTransformMap\_of\_disjoint}.}
 
   Let $Z_1,Z_2\to X$ be morphisms and let $X''\to X'\to X$ be blow-ups
   which are isomorphisms over the same open $U\subseteq X$.  If the strict
@@ -4596,6 +4947,10 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Gluing compatible finite-type ideals on two qc opens]
   \label{lemma:nagata-glue-finite-type-ideals}
   \lean{}
+  \statusnote{Bypassed by the formalized route: a finite-type ideal is
+    extended from a quasi-compact open in one step by
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_finiteType\_comap\_eq},
+    so no separate two-open gluing lemma is needed.}
 
   Let $U,W\subseteq X$ be quasi-compact opens of a qcqs scheme.  If
   $\mathcal I_U\subseteq\mathcal O_U$ and
@@ -4900,6 +5255,11 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-module-strict-transform-chart,
     lemma:nagata-power-torsion-localization}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $V\to S$ be a morphism and let
   $0\to\mathcal M_1\to\mathcal M_2\to\mathcal M_3\to0$ be a sequence of
@@ -4970,6 +5330,11 @@ correction explicit before it is sheafified and glued.
     def:nagata-module-strict-transform,
     lemma:nagata-module-strict-transform-exact}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $S$ be qcqs, $V\to S$ quasi-compact and locally of finite
   presentation, and let $\mathcal M$ be finite type.  Suppose that on a
@@ -5003,6 +5368,11 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-admissible-blowup-comp,
     lemma:nagata-finite-data-flattening-package}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $S$ be qcqs, let $V\to S$ be quasi-compact and locally of finite
   presentation, let $U\subseteq S$ be a quasi-compact open, and let
@@ -5027,6 +5397,11 @@ correction explicit before it is sheafified and glued.
     prop:nagata-strict-transform-closed-fiber-product,
     lemma:nagata-strict-transform-closure-characterization}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $i\colon Z\hookrightarrow V$ be a finite-presentation closed immersion
   and let $V'\to V$ be a blow-up with center ideal $\mathcal I$.  On every
@@ -5065,6 +5440,11 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-strict-transform-dominating,
     lemma:nagata-dense-flat-pullback}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $q\colon Z\to X$ be separated and of finite type, with $X$ qcqs, and
   let $U\subseteq X$ be a quasi-compact open over which $q$ is an
@@ -5103,6 +5483,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-open-dimension-package}
   \uses{def:nagata-scheme-theoretically-dense-open}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $q\colon Z\to X$ be flat and locally of finite type, and let $U\subseteq X$
   be retrocompact and scheme-theoretically dense.  If $q_U$ is locally of
@@ -5129,6 +5514,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-flat-dense-open-relative-dimension}
   \uses{lemma:nagata-dense-open-dimension-package}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $q\colon Z\to X$ be flat and locally of finite type, and let
   $U\subseteq X$ be a retrocompact dense open.  If $q^{-1}(U)\to U$ has
@@ -5146,6 +5536,11 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Standard-etale finite-part package]
   \label{lemma:nagata-standard-etale-finite-part-package}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   If $q\colon Z\to X$ is separated and quasi-finite and $x\in X$, there are
   finitely many points $z_i\in Z_x$ and an elementary etale neighbourhood
@@ -5169,6 +5564,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-quasifinite-etale-finite-part}
   \uses{lemma:nagata-standard-etale-finite-part-package}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $q\colon Z\to X$ be quasi-finite and separated and let $x\in X$.
   There is an elementary etale neighbourhood $(T,t)\to(X,x)$ and a
@@ -5184,6 +5584,11 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Affine morphisms descend fpqc-locally]
   \label{lemma:nagata-affine-fpqc-descent-package}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $p\colon X'\to X$ be faithfully flat and quasi-compact.  If
   $f\colon Y\to X$ is quasi-compact and $Y\times_XX'\to X'$ is affine, then
@@ -5208,6 +5613,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-finite-etale-local-on-target}
   \uses{lemma:nagata-affine-fpqc-descent-package}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Finiteness of a morphism of schemes is local on the target for the etale
   topology.  In particular, if a morphism becomes finite after a surjective
@@ -5228,6 +5638,11 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Finite flat degree one is an isomorphism]
   \label{lemma:nagata-finite-flat-degree-one-iso}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   A finite flat morphism of finite presentation whose finite locally free
   degree is one is an isomorphism.
@@ -5254,6 +5669,11 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-finite-flat-degree-one-iso,
     lemma:nagata-dense-flat-pullback}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $q\colon Z\to X$ be separated, flat, and locally of finite type.  If
   $U\subseteq X$ is a retrocompact (equivalently, $U\to X$ is
@@ -5294,6 +5714,11 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-flat-strict-transform-open,
     lemma:nagata-admissible-blowup-preserves-density}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Let $q\colon Z\to X$ be separated and of finite type, let $X$ be qcqs,
   and let $U\subseteq X$ be a quasi-compact open.  Fix an isomorphism
@@ -5333,6 +5758,11 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-flattening-ideal}
   \uses{lemma:nagata-flattening-ideal-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   Under the hypotheses of
   \Cref{lemma:nagata-flattening-ideal-exists}, choose one witness and define
@@ -5345,6 +5775,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-flattening-ideal}
   \uses{def:nagata-flattening-ideal}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
+    chain is not formalized.  Elimination of indeterminacy is obtained instead
+    by the route of the chapter \emph{Elimination of indeterminacy after Deligne
+    and Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.}
 
   The ideal $\mathcal F_U(q)$ is finite type and restricts to the unit ideal
   on $U$; the strict-transform projection after blowing it up is an open
@@ -5420,6 +5855,10 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[A proper dense open immersion is an isomorphism]
   \label{lemma:nagata-proper-open-dense-iso}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the two-open theorem is
+    concluded by
+    \texttt{AlgebraicGeometry.HasCompactification.of\_two\_open\_cover}, which
+    never needs this criterion.}
 
   Let $q\colon Z\to X$ be both proper and an open immersion.  If its image
   contains a scheme-theoretically dense open subscheme of $X$, then $q$ is an
@@ -5437,6 +5876,10 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Finite-presentation closed immersions and finite type ideals]
   \label{lemma:nagata-closed-fp-ideal-finite-type}
   \lean{}
+  \statusnote{Bypassed by the formalized route: centres are carried as
+    finite-type ideal sheaves (\texttt{AlgebraicGeometry.Scheme.IdealSheafData})
+    throughout, so the translation between finite-presentation closed immersions
+    and finite-type ideals is never made.}
 
   A closed immersion $Z\hookrightarrow X$ is of finite presentation if and
   only if its defining quasi-coherent ideal sheaf is of finite type.
@@ -5454,6 +5897,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-qc-open-complement-ideal}
   \uses{lemma:nagata-qc-open-complement-ideal-exists}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   Let $W\subseteq Y$ be a quasi-compact open in a qcqs scheme.  Choose one
   witness supplied by
@@ -5467,6 +5911,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-qc-open-complement-ideal}
   \uses{def:nagata-qc-open-complement-ideal}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   The ideal $\mathcal I_Y(W)$ is finite type and quasi-coherent, and
   \[
@@ -5476,6 +5921,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-qc-open-complement-ideal-exists}
+  \leanok
   The witness supplied by
   \Cref{lemma:nagata-qc-open-complement-ideal-exists} has exactly these
   fields, and the definition selects its ideal component.  Projecting those
@@ -5485,6 +5931,11 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[A finite type nil ideal sheaf is uniformly nilpotent]
   \label{lemma:nagata-finite-type-nil-ideal-nilpotent}
   \lean{}
+  \statusnote{Bypassed by the formalized route: boundary separation is
+    \texttt{AlgebraicGeometry.separationBlowup} with
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures},
+    proved from Deligne's disjointness blow-up rather than from this
+    preparation.}
 
   Let $X$ be quasi-compact and let $\mathcal I$ be a finite type
   quasi-coherent ideal with $V(\mathcal I)=X$.  Then there exists $n>0$ with
@@ -5507,6 +5958,11 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-admissible-blowup,def:nagata-strict-transform,
     lemma:nagata-chart-generator-regular}
   \lean{}
+  \statusnote{Bypassed by the formalized route: boundary separation is
+    \texttt{AlgebraicGeometry.separationBlowup} with
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures},
+    proved from Deligne's disjointness blow-up rather than from this
+    preparation.}
 
   Let $X$ be qcqs, let $U\subseteq X$ be quasi-compact open, and let
   $Z_i=V(\mathcal I_i)\hookrightarrow X$ be finite-presentation closed
@@ -5564,6 +6020,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-separate-closed-data-exists,
     def:nagata-global-blowup,def:nagata-strict-transform}
   \lean{AlgebraicGeometry.separationBlowup}
+  \leanok
 
   Under the hypotheses of
   \Cref{lemma:nagata-separate-closed-data-exists}, choose its center
@@ -5578,6 +6035,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-separate-closed-subschemes}
   \uses{def:nagata-separate-closed-subschemes}
   \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_sup}
+  \leanok
 
   The morphism $\mathsf{SepBl}_U(Z_1,Z_2)\to X$ is $U$-admissible, and the
   strict transforms of $Z_1$ and $Z_2$ in it are disjoint.
@@ -5586,6 +6044,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-separate-closed-data-exists,
     lemma:nagata-strict-transform-ambient-closed}
+  \leanok
   The selected center is disjoint from $U_Z$, hence its image in $X$ is
   disjoint from $U$.  A composite of finite-presentation closed immersions is
   finite presentation, so the ambient center is finite presentation and its
@@ -5613,6 +6072,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-constructible-closed-support}
   \uses{def:nagata-qc-open-complement-ideal}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   Let $T\subseteq U$ be constructible and closed, with $U$ qcqs.  Its
   complement $W=U\setminus T$ is a quasi-compact open.  Define
@@ -5626,6 +6086,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-constructible-closed-support}
   \uses{def:nagata-constructible-closed-support}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
+  \leanok
 
   The ideal $\mathcal J_U(T)$ is finite type and quasi-coherent, and its
   vanishing set is exactly $T$.
@@ -5633,6 +6094,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-qc-open-complement-ideal}
+  \leanok
   An open constructible subset of a spectral space is quasi-compact.  Apply
   \Cref{lemma:nagata-qc-open-complement-ideal} to $W=U\setminus T$; its
   vanishing set is $U\setminus W=T$.
@@ -5644,6 +6106,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-finite-type-ideal-extension,
     def:nagata-separate-closed-subschemes}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
+  \leanok
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $T_1,T_2\subseteq U$ be disjoint constructible subsets closed in $U$.
@@ -5664,6 +6127,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-separate-constructible-closed}
   \uses{def:nagata-separate-constructible-closed}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
+  \leanok
 
   The constructed blow-up $\mathsf{CSepBl}_U(T_1,T_2)\to X$ is
   $U$-admissible, and the closures of the inverse images of $T_1$ and $T_2$
@@ -5674,6 +6138,7 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-constructible-closed-support,
     lemma:nagata-extend-finite-type-ideal,
     lemma:nagata-separate-closed-subschemes}
+  \leanok
   By \Cref{lemma:nagata-constructible-closed-support},
   $V(\mathcal J_i)=T_i$ in $U$.  The restriction equality from
   \Cref{lemma:nagata-extend-finite-type-ideal} consequently gives
@@ -5690,6 +6155,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Existence of constructible closed separators in a spectral space]
   \label{lemma:nagata-spectral-constructible-separation-exists}
   \lean{PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ}
+  \leanok
 
   If $T,T'$ are disjoint closed subsets of a spectral space $V$, there exist
   quasi-compact opens $W,W'\subseteq V$ such that
@@ -5700,6 +6166,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Quasi-compact opens form a basis of a spectral space.  For each $x\in T'$,
   choose a quasi-compact open neighbourhood contained in $V\setminus T$.
   The closed subset $T'$ is quasi-compact, so finitely many suffice; their
@@ -5713,6 +6180,10 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-spectral-constructible-separation}
   \uses{lemma:nagata-spectral-constructible-separation-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the existence statement
+    \texttt{PrespectralSpace.exists\_isCompact\_isOpen\_disjoint\_union\_eq\_univ}
+    is used directly, so no selected separation datum and specification lemma
+    are introduced.}
 
   Let $T,T'\subseteq V$ be disjoint closed subsets of a spectral space.
   Select quasi-compact opens $(W,W')$ from
@@ -5728,6 +6199,10 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-spectral-constructible-separation}
   \uses{def:nagata-spectral-constructible-separation}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the existence statement
+    \texttt{PrespectralSpace.exists\_isCompact\_isOpen\_disjoint\_union\_eq\_univ}
+    is used directly, so no selected separation datum and specification lemma
+    are introduced.}
 
   The constructed subsets $T_c,T'_c$ are constructible and closed in $V$,
   and they satisfy
@@ -5748,6 +6223,7 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Maximal isomorphism open]
   \label{def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.Scheme.Hom.maximalIsomorphismOpen}
+  \leanok
 
   For a morphism $q\colon Z\to X$, define $\operatorname{IsoOpen}(q)$ to be
   the union of all open subschemes $W\subseteq X$ for which
@@ -5758,6 +6234,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-maximal-isomorphism-open}
   \uses{def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.Scheme.Hom.isIso_restrict_maximalIsomorphismOpen}
+  \leanok
 
   The subset $\operatorname{IsoOpen}(q)$ is open,
   $q^{-1}(\operatorname{IsoOpen}(q))\to\operatorname{IsoOpen}(q)$ is an
@@ -5766,6 +6243,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   A union of opens is open.  On pairwise intersections, the inverses of the
   restricted morphisms agree because an inverse to a fixed morphism is unique;
   hence the local inverses glue to an inverse over the union.  If an open
@@ -5782,6 +6260,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-extended-admissible-blowup,
     def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
+  \leanok
 
   Let $X$ be qcqs, let $q\colon Z\to X$ be proper, let $V\subseteq X$ be a
   quasi-compact open, set
@@ -5883,6 +6362,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-isomorphism-near-closure}
   \uses{def:nagata-isomorphism-near-closure}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
+  \leanok
 
   If $U\to V$ is an isomorphism over an open neighbourhood of $T$, then
   $\mathsf{IsoBl}_{V,T}(q)\to X$ is $V$-admissible and the strict transform
@@ -5901,6 +6381,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-admissible-blowup-preserves-density,
     prop:nagata-strict-transform-closed-fiber-product,
     lemma:nagata-strict-transform-over-complement}
+  \leanok
   By \Cref{lemma:nagata-maximal-isomorphism-open}, the assumed isomorphism
   neighbourhood is contained in $\operatorname{IsoOpen}(U\to V)$; hence the
   bad locus $E$ is disjoint from $T$.  The two separation steps make
@@ -5939,6 +6420,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-scheme-image-of-closed-immersion}
   \lean{AlgebraicGeometry.isPullback_toImage_partialSection,
     AlgebraicGeometry.isIso_restrict_imageι_comp_fst}
+  \leanok
 
   Let \(U\hookrightarrow X\) be a quasi-compact open immersion, let
   \(Y\to S\) be separated, and let
@@ -5951,6 +6433,7 @@ correction explicit before it is sheafified and glued.
 \begin{proof}
   \uses{lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-scheme-image-of-closed-immersion}
+  \leanok
   By \Cref{lemma:nagata-scheme-image-restrict-open}, restriction to
   \(U\times_SY\) commutes with taking the scheme-theoretic image.  On this
   open target the original map is a section of
@@ -5964,12 +6447,14 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/01W6}{Tag 01W6}]{stacks-project}}]
   \label{lemma:nagata-proper-to-separated-target}
   \lean{AlgebraicGeometry.IsProper.of_comp}
+  \leanok
 
   In a commutative triangle $T\to Y\to B$, if $T\to B$ is proper and
   $Y\to B$ is separated, then $T\to Y$ is proper.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Factor $T\to Y$ through the graph
   $T\to T\times_BY$.  The graph is closed because $Y\to B$ is separated, and
   the projection $T\times_BY\to Y$ is the base change of the proper morphism
@@ -5979,12 +6464,14 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Finite type over a separated target]
   \label{lemma:nagata-finite-type-to-separated-target}
   \lean{AlgebraicGeometry.locallyOfFiniteType_of_comp}
+  \leanok
 
   In a commutative triangle \(T\to Y\to B\), if \(T\to B\) is of finite
   type and \(Y\to B\) is separated, then \(T\to Y\) is of finite type.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Factor \(T\to Y\) as its graph
   \[
     T\longrightarrow T\times_BY\longrightarrow Y.
@@ -5997,6 +6484,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Quasi-compactness of an open map to a separated target]
   \label{lemma:nagata-open-immersion-qc-over-separated-target}
   \lean{AlgebraicGeometry.QuasiCompact.of_comp}
+  \leanok
 
   Let \(T\to Y\to B\) be a commutative triangle.  Assume that \(T\to B\) is
   of finite type, that \(Y\to B\) is separated, and that \(T\to Y\) is an
@@ -6005,6 +6493,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-finite-type-to-separated-target}
+  \leanok
   By \Cref{lemma:nagata-finite-type-to-separated-target}, the open immersion
   is of finite type.  An open immersion is locally of finite type, and it is
   of finite type exactly when it is quasi-compact.
@@ -6017,6 +6506,7 @@ correction explicit before it is sheafified and glued.
     def:nagata-global-blowup,
     def:nagata-extended-admissible-blowup}
   \lean{AlgebraicGeometry.CommonModification}
+  \leanok
 
   Let $U\hookrightarrow X_i$ be open immersions over $S$, with
   $U,X_1,X_2$ separated and of finite type over the qcqs scheme $S$.
@@ -6079,6 +6569,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-common-modification}
   \uses{def:nagata-common-modification}
   \lean{AlgebraicGeometry.nonempty_commonModification}
+  \leanok
 
   Each constructed map $X'_i\to X_i$ is a $U$-admissible blow-up.  Each
   $X'_i\to\mathsf{CM}(X_1,X_2;U)$ is an open immersion, their two copies of
@@ -6094,6 +6585,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-proper-to-separated-target,
     lemma:nagata-separated-two-open-cover,
     lemma:nagata-admissible-blowup-comp}
+  \leanok
   Apply Stacks Project, Tag~0F3X (Lemma~38.33.4), with the qcqs base $S$,
   the common quasi-compact open $U$, and the separated finite-type
   morphisms $X_i\to S$.  The two input maps are open immersions and are
@@ -6129,6 +6621,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-scheme-theoretic-image,def:nagata-strict-transform,
     def:nagata-admissible-blowup,thm:nagata-global-blowup-complement}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup}
+  \leanok
 
   Let $V\to X\times_SY$ be quasi-compact and quasi-separated, and assume its
   projection to $X$ factors through an open $U\subseteq X$.  Let $Z$ be its
@@ -6144,6 +6637,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-scheme-image-transport-strict-transform}
+  \leanok
   Apply \Cref{lemma:nagata-scheme-image-transport-strict-transform} to the
   given map $V\to X\times_SY$.  Its lifted map is exactly the map specified in
   the statement through $\varepsilon^{-1}$, so the resulting image equality is
@@ -6155,6 +6649,7 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-scheme-theoretic-image,
     def:nagata-elimination-indeterminacy}
   \lean{AlgebraicGeometry.Compactification.ProperExtension}
+  \leanok
 
   Let $U\to S$ be separated and of finite type, let $V\subseteq U$ be
   quasi-compact, and fix a compactification
@@ -6182,6 +6677,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-graph-extension}
   \uses{def:nagata-graph-extension}
   \lean{AlgebraicGeometry.Compactification.nonempty_properExtension}
+  \leanok
 
   The map $Y^{\mathrm{gr}}\to Y$ is $V$-admissible,
   $V\subseteq V^{\mathrm{gr}}\subseteq Y^{\mathrm{gr}}$ is open, and
@@ -6197,6 +6693,7 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-strict-transform-ambient-closed,
     thm:nagata-global-blowup-proper,
     lemma:nagata-strict-transform-over-complement}
+  \leanok
   Apply Stacks Project, Tag~0F3Z (Lemma~38.33.6), to the separated
   finite-type morphism $U\to S$, the quasi-compact open $V\subseteq U$, and
   the chosen compactification $V\hookrightarrow Y\to S$.  The theorem forms
@@ -6231,6 +6728,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Factorization through a closed subscheme over a valuation ring]
   \label{lemma:nagata-valuation-factor-closed}
   \lean{AlgebraicGeometry.IsClosedImmersion.exists_lift_of_isFractionRing}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$, let $Z\hookrightarrow Y$
   be a closed immersion, and let $g\colon\operatorname{Spec}(A)\to Y$.  If the
@@ -6239,6 +6737,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Pull the defining ideal of $Z$ back to $A$.  It becomes zero after applying
   the injective map $A\hookrightarrow K$, so it was already zero in $A$.
 \end{proof}
@@ -6247,6 +6746,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-valuation-probe-exists}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}
+  \leanok
 
   Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
@@ -6258,6 +6758,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $Z=\operatorname{SIm}(h)$.  The assumed image isomorphism identifies
   $z$ with a point of $Z$.  Stacks Project, Tag~02JQ (Lemma~29.6.5),
   applied to the quasi-compact morphism $h$ and the point $z\in Z$, supplies
@@ -6273,6 +6774,7 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-dense-valuation-probe}
   \uses{lemma:nagata-dense-valuation-probe-exists}
   \lean{AlgebraicGeometry.ValuativeCommSqWithPt}
+  \leanok
 
   Let $h\colon T\to P$ be quasi-compact, assume its image
   inclusion $\operatorname{SIm}(h)\hookrightarrow P$ is an isomorphism, assume
@@ -6294,6 +6796,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-valuation-probe}
   \uses{def:nagata-dense-valuation-probe}
   \lean{AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant}
+  \leanok
 
   The maps in $\mathsf{VP}(h,z)$ form a commutative diagram
   \[
@@ -6308,6 +6811,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-dense-valuation-probe-exists}
+  \leanok
   These are exactly the fields of the witness selected in
   \Cref{def:nagata-dense-valuation-probe}; nonemptiness is
   \Cref{lemma:nagata-dense-valuation-probe-exists}.
@@ -6317,6 +6821,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Composite of two valuation rings]
   \label{lemma:nagata-composite-valuation-ring}
   \lean{ValuationSubring.comapResidue}
+  \leanok
 
   Let \(A'\) be a valuation ring with maximal ideal \(\mathfrak m'\), and let
   \(A''\) be a valuation subring of the residue field
@@ -6329,6 +6834,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let \(x\) be a nonzero element of \(\operatorname{Frac}(A')\).  Since
   \(A'\) is a valuation ring, either \(x\in A'\) or \(x^{-1}\in A'\).  If
   exactly one lies in \(A'\), that element lies in \(C\) whenever its residue
@@ -6348,6 +6854,7 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Intersection with a dominating valuation ring]
   \label{lemma:nagata-valuation-intersection}
   \lean{ValuationSubring.comap_eq_of_toLocalSubring_le}
+  \leanok
 
   Let \(A\) be a valuation ring with fraction field \(K\), let
   \(K\hookrightarrow L\) be a field extension, and let \(B\subseteq L\) be a
@@ -6359,6 +6866,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The inclusion \(A\subseteq K\cap B\) follows because $B$ contains the image
   of $A$.  Conversely, let $x\in K\cap B$.  If $x\notin A$, the valuation-ring
   property of $A$ gives $x^{-1}\in A$, and in fact
@@ -6374,6 +6882,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-reduced-dense-image-schematic}
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isDominant}
+  \leanok
 
   Let $X$ be reduced and let $h\colon U\to X$ be quasi-compact and
   quasi-separated with dense topological image.  Then the image inclusion
@@ -6381,6 +6890,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   On an affine open $\operatorname{Spec}(A)\subseteq X$, every element of the
   kernel ideal defining the scheme-theoretic image vanishes at every point of
   a dense subset.  It therefore lies in every prime ideal of $A$, hence in
@@ -6407,12 +6917,14 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Valuation domination of a local domain]
   \label{lemma:nagata-local-domain-valuation-dominates}
   \lean{LocalSubring.exists_le_valuationSubring}
+  \leanok
 
   If $B$ is a local domain with fraction field $L$, there is a valuation ring
   $C\subseteq L$ whose maximal ideal contracts to the maximal ideal of $B$.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Consider the set of subrings of $L$ containing $B$ and whose units avoid the
   maximal ideal of $B$, ordered by inclusion.  The union of a chain has the
   same property, so Zorn's lemma gives a maximal such ring $C$.  For any
@@ -6428,6 +6940,7 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/00IA}{Lemma 10.50.2}]{stacks-project}}]
   \label{lemma:nagata-valuation-ring-extension}
   \lean{ValuationSubring.exists_comap_eq}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$, and let
   $K\hookrightarrow L$ be a field extension.  There exists a valuation ring
@@ -6438,6 +6951,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Apply Stacks Project, Tag~00IA (Lemma~10.50.2), to the inclusion
   $K\hookrightarrow L$.  Its proof considers the partially ordered set of
   local subrings of $L$ containing $A$ and dominating $A$; a chain union is
@@ -6457,6 +6971,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-dense-source-valuative}
   \lean{AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant,
     AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant}
+  \leanok
 
   Let \(f\colon X\to S\) be quasi-compact and let
   \(h\colon U\to X\) be quasi-compact and quasi-separated,
@@ -6597,6 +7112,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-dense-compactifications}
   \uses{def:nagata-compactifiable,def:nagata-dense-refinement}
   \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
+  \leanok
 
   Let $C_i^0$ be the compactification selected by classical choice from the
   nonempty type witnessing compactifiability of $U_i\to S$.  Define
@@ -6610,6 +7126,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-dense-compactifications}
   \uses{def:nagata-two-open-dense-compactifications}
   \lean{AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant}
+  \leanok
 
   For $i=1,2$, the constructed $C_i$ is a scheme-theoretically dense
   compactification of $U_i\to S$; in particular $X_i\to S$ is proper and
@@ -6618,6 +7135,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{prop:nagata-dense-refinement}
+  \leanok
   This is exactly \Cref{prop:nagata-dense-refinement}, applied to each selected
   compactification $C_i^0$.
 \end{proof}
@@ -6627,6 +7145,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-dense-compactifications,
     def:nagata-graph-extension}
   \lean{AlgebraicGeometry.TwoOpenSide}
+  \leanok
 
   Apply the graph-extension construction to
   $U_i\subseteq U$ and $C_i$.  Denote its output by
@@ -6643,6 +7162,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-graph-extensions}
   \uses{def:nagata-two-open-graph-extensions}
   \lean{AlgebraicGeometry.exists_prepared_twoOpenSide}
+  \leanok
 
   Each replacement $X_i\to X_i^{\mathrm{old}}$ is $U_i$-admissible;
   the resulting structural morphism $X_i\to S$ is proper;
@@ -6652,6 +7172,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-graph-extension}
+  \leanok
   For each $i$, \Cref{lemma:nagata-graph-extension} says that the selected
   replacement $X_i\to X_i^{\mathrm{old}}$ is $U_i$-admissible and that its
   associated map $\psi_i$ is proper, extends $U_i\hookrightarrow U$, has
@@ -6665,6 +7186,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-boundary-loci}
   \uses{def:nagata-two-open-graph-extensions}
   \lean{AlgebraicGeometry.TwoOpenSide.forbiddenBoundary}
+  \leanok
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6683,6 +7205,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-boundary-loci}
   \uses{def:nagata-two-open-boundary-loci}
   \lean{AlgebraicGeometry.TwoOpenSide.closure_image_preimage_inter}
+  \leanok
 
   The subschemes $Z_i$ are closed in $U$.  Each $Z_{i,k}$ is closed in
   $V_i$, their underlying closed sets are disjoint, and $\psi_i$ is an
@@ -6691,6 +7214,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-graph-extension}
+  \leanok
   Since the support of $Z_i$ is $U\setminus U_j$, it is closed in $U$ and
   contained in $U_i$.  Base change of this closed immersion along $\psi_i$
   gives each closed immersion $Z_{i,k}\hookrightarrow V_i$.  The supports of
@@ -6707,6 +7231,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-boundary-loci,
     def:nagata-separate-constructible-closed}
   \lean{AlgebraicGeometry.TwoOpenSide.Prepared}
+  \leanok
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -6723,6 +7248,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-prepared-boundaries}
   \uses{def:nagata-two-open-prepared-boundaries}
   \lean{AlgebraicGeometry.exists_prepared_twoOpenSide}
+  \leanok
 
   The constructed replacement $X_i^{\mathrm{prep}}\to X_i^{\mathrm{old}}$
   is $V_i$-admissible, the closures
@@ -6735,6 +7261,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-boundary-loci,
     lemma:nagata-separate-constructible-closed,
     lemma:nagata-blowup-proper}
+  \leanok
   By \Cref{lemma:nagata-boundary-loci}, the subsets $Z_{i,i}$ and
   $Z_{i,j}$ are disjoint constructible subsets closed in $V_i$.  Apply the
   property of the explicitly constructed separation blow-up.  It is
@@ -6751,6 +7278,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Disjoint boundary closures persist]
   \label{lemma:nagata-boundary-disjoint-persists}
   \lean{AlgebraicGeometry.disjoint_range_strictTransformMap_of_disjoint}
+  \leanok
 
   If $\overline Z_{i,i}$ and $\overline Z_{i,j}$ are disjoint, then their
   strict transforms remain disjoint after every further $V_i$-admissible
@@ -6759,6 +7287,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-strict-transform-restrict}
+  \leanok
   Let $b\colon X'_i\to X_i$ be a further $V_i$-admissible blow-up.  By
   \Cref{lemma:nagata-strict-transform-restrict}, the strict transform of
   $\overline Z_{i,k}$ is the closure of its restriction over the open on
@@ -6773,6 +7302,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-prepared-boundaries,
     def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.TwoOpenSide.comparisonSpace}
+  \leanok
 
   Define
   \[
@@ -6796,11 +7326,13 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-prepared-boundaries,
     lemma:nagata-scheme-image-universal}
   \lean{AlgebraicGeometry.TwoOpenSide.isProper_comparisonFst}
+  \leanok
 
   Both projections $p_i\colon X_{12}\to X_i$ are proper.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Apply \Cref{lemma:nagata-scheme-image-universal} to
   $V_{12}\to X_1\times_SX_2$.  It gives the canonical closed immersion
   $\iota_{12}\colon X_{12}\hookrightarrow X_1\times_SX_2$ occurring in
@@ -6817,6 +7349,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-boundary-loci,
     def:nagata-two-open-comparison-space}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   Define
   \[
@@ -6829,6 +7362,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-comparison-boundary,
     def:nagata-two-open-comparison-space}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   Inside $V_{12}$ one has
   \[
@@ -6837,6 +7371,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Let $z=(v_1,v_2)$ be a point of $V_{12}=V_1\times_UV_2$.  The fibre-product
   equality gives $\psi_1(v_1)=\psi_2(v_2)=u\in U$.  Since
   $Z_{1,2}=V_1\times_UZ_2$ and $Z_{2,2}=V_2\times_UZ_2$, membership in either
@@ -6855,6 +7390,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-proper-to-separated-target,
     lemma:nagata-scheme-image-of-closed-immersion}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   For \(\{i,j\}=\{1,2\}\), the canonical morphism
   \[
@@ -6869,6 +7405,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-proper-to-separated-target,
     lemma:nagata-scheme-image-of-closed-immersion}
+  \leanok
   Restrict the scheme-theoretic image defining \(X_{12}\) to the open target
   \(V_i\times_SX_j\subseteq X_i\times_SX_j\).  The inverse image of this
   open in \(V_{12}\) is all of \(V_{12}\), so
@@ -6904,6 +7441,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-strict-transform,
     def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.TwoOpenSide.admissibleBlowup}
+  \leanok
 
   Let $N_2=\operatorname{IsoOpen}(\psi_2)\subseteq U$.  Apply
   $\mathsf{IsoBl}_{V_1,Z_{1,2}}(p_1)$ to the proper projection
@@ -6918,6 +7456,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-comparison-isIso-near-boundary}
   \uses{def:nagata-two-open-improved-comparison}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   The constructed map $X_1^{\mathrm{cmp}}\to X_1^{\mathrm{old}}$ is
   $V_1$-admissible, the transported $p_1$ is an isomorphism over an open
@@ -6933,6 +7472,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-scheme-image-strict-transform,
     lemma:nagata-boundary-disjoint-persists,
     lemma:nagata-maximal-isomorphism-open}
+  \leanok
   By \Cref{lemma:nagata-comparison-restrict-proper-open}, the restriction of
   $p_1$ over $V_1$ is the base change
   $V_1\times_UV_2\to V_1$ of $\psi_2$.  The maximal isomorphism open $N_2$
@@ -6953,6 +7493,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Density over the prepared boundary]
   \label{lemma:nagata-comparison-boundary-density}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
+  \leanok
 
   The subset $Z_{12,2}$ is dense in
   $p_1^{-1}(\overline Z_{1,2})$.
@@ -6960,6 +7501,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-comparison-isIso-near-boundary}
+  \leanok
   Choose an open neighbourhood $N\subseteq X_1$ of
   $\overline Z_{1,2}$ over which $p_1$ is an isomorphism, as supplied by
   \Cref{lemma:nagata-comparison-isIso-near-boundary}.  Then
@@ -6976,6 +7518,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Key boundary disjointness]
   \label{lemma:nagata-key-boundary-disjointness}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint}
+  \leanok
 
   Inside $X_1\times_SX_2$ one has
   \[
@@ -6989,6 +7532,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-prepared-boundaries,
     lemma:nagata-comparison-boundary-density,
     lemma:nagata-two-open-comparison-boundary}
+  \leanok
   Put $C=p_1^{-1}(\overline Z_{1,2})$.  By
   \Cref{lemma:nagata-comparison-boundary-density}, $Z_{12,2}$ is dense in
   $C$.  The definition of the comparison boundary and
@@ -7011,6 +7555,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-improved-comparison,
     def:nagata-two-open-prepared-boundaries}
   \lean{AlgebraicGeometry.TwoOpenSide.interior}
+  \leanok
 
   For $\{i,j\}=\{1,2\}$, define
   \[
@@ -7032,6 +7577,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-graph-extensions,
     lemma:nagata-proper-to-separated-target}
   \lean{AlgebraicGeometry.TwoOpenSide.isProper_graph}
+  \leanok
 
   The morphism
   \[
@@ -7042,6 +7588,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   By \Cref{def:nagata-two-open-graph-extensions}, the morphism
   $\psi_i\colon V_i\to U$ is proper.  Regard
   $\gamma_i\colon V_i\to U\times_SX_i$ as a morphism over $U$.  The target
@@ -7057,6 +7604,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-intermediate-overlap-constructible}
   \uses{def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   The image of
   \[
@@ -7067,6 +7615,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The source and target are of finite type over the Noetherian scheme $S$.
   The displayed morphism is an immersion and hence of finite type.  Chevalley's
   theorem makes its image constructible.
@@ -7077,6 +7626,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-intermediate-schemes,
     def:nagata-two-open-prepared-boundaries}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   Let a point in the image of $U_i$ specialize in $U\times_SX_i$ to a point
   $(u,x)$.  There is a point $v\in V_i$ with
@@ -7086,6 +7636,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-proper-extension-graph-closed,lemma:nagata-boundary-loci}
+  \leanok
   The image of $U_i$ is contained in the image of
   $\gamma_i\colon V_i\to U\times_SX_i$.  The latter image is closed by
   \Cref{lemma:nagata-proper-extension-graph-closed}; hence the specialization
@@ -7101,6 +7652,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-intermediate-specialization-boundary,
     lemma:nagata-two-open-graph-extensions}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   The image of $U_i$ in
   $U\times_S(X_i\setminus\overline Z_{i,j})$ is stable under specialization.
@@ -7108,6 +7660,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-intermediate-specialization-boundary}
+  \leanok
   Let a point of the image specialize to $(u,x)$ in the displayed target.  If
   $u\notin U_i$, then
   \Cref{lemma:nagata-intermediate-specialization-boundary} gives
@@ -7124,6 +7677,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-intermediate-overlap-closed}
   \uses{def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph}
+  \leanok
 
   The canonical immersion
   \[
@@ -7136,6 +7690,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-intermediate-overlap-constructible,
     lemma:nagata-intermediate-overlap-specialization-closed}
+  \leanok
   By \Cref{lemma:nagata-intermediate-overlap-constructible}, the image is
   constructible.  By
   \Cref{lemma:nagata-intermediate-overlap-specialization-closed}, it is stable
@@ -7154,6 +7709,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-intermediate-separated}
   \uses{def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom}
+  \leanok
 
   Each $W_i\to S$ is separated and of finite type.
 \end{lemma}
@@ -7161,6 +7717,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-intermediate-overlap-closed,
     lemma:nagata-separated-two-open-cover}
+  \leanok
   The opens $U$ and $X_i\setminus\overline Z_{i,j}$ cover $W_i$.  The first
   is separated and of finite type over $S$ by the section hypotheses.  The
   second has those properties because it is open in the proper scheme
@@ -7176,6 +7733,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-comparison-space,
     lemma:nagata-valuation-factor-closed}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$.  Suppose
   $\operatorname{Spec}(K)\to U_1\cap U_2$ is an $S$-morphism and let
@@ -7187,6 +7745,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The two generic maps have the same image in $U$, so their pair lands in
   $V_1\times_UV_2=V_{12}$.  Composing with the canonical image-factor map
   gives a factorization of the generic pair through $X_{12}$.  The map
@@ -7200,6 +7759,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[An open containing the closed point of a valuation spectrum is total]
   \label{lemma:nagata-valuation-open-closed-point}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
+  \leanok
 
   Let $A$ be a valuation ring and let $O\subseteq\operatorname{Spec}(A)$ be
   open.  If the closed point $\mathfrak m_A$ belongs to $O$, then
@@ -7207,6 +7767,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   Choose a basic open $D(a)$ with $\mathfrak m_A\in D(a)\subseteq O$.
   Then $a\notin\mathfrak m_A$, hence $a$ is a unit of the local ring $A$ and
   $D(a)=\operatorname{Spec}(A)$.
@@ -7217,6 +7778,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-comparison-space,
     def:nagata-two-open-intermediate-schemes}
   \lean{AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$.  Let
   $\operatorname{Spec}(K)\to U_1\cap U_2$ be an $S$-morphism and let
@@ -7229,6 +7791,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-key-boundary-disjointness,
     lemma:nagata-valuation-pair-factors-comparison,
     lemma:nagata-valuation-open-closed-point}
+  \leanok
   Otherwise the closed point would map into $\overline Z_{1,2}$ under $g_1$
   and into $\overline Z_{2,1}$ under $g_2$.  By
   \Cref{lemma:nagata-valuation-pair-factors-comparison}, the pair factors
@@ -7247,6 +7810,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Existence part of the proper valuative criterion]
   \label{lemma:nagata-proper-valuative-criterion-existence-api}
   \lean{AlgebraicGeometry.UniversallyClosed.eq_valuativeCriterion}
+  \leanok
 
   Let $f\colon Y\to S$ be proper.  For every valuation ring $A$ with
   fraction field $K$, every $S$-morphism
@@ -7258,6 +7822,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-local-domain-valuation-dominates,
     lemma:nagata-valuation-intersection}
+  \leanok
   Let $G$ be the closure of the graph of the given generic map in
   $Y\times_S\operatorname{Spec}(A)$.  Properness of $Y\to S$ makes
   $G\to\operatorname{Spec}(A)$ proper, and the generic point of $G$ maps to
@@ -7281,6 +7846,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Uniqueness of a valuation lift for a separated morphism]
   \label{lemma:nagata-separated-valuation-lift-unique}
   \lean{AlgebraicGeometry.IsSeparated.valuativeCriterion}
+  \leanok
 
   Let $f\colon Y\to S$ be separated, let $A$ be a valuation ring with
   fraction field $K$, and let $h_1,h_2\colon\operatorname{Spec}(A)\to Y$ be
@@ -7289,6 +7855,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The equalizer of $h_1$ and $h_2$ is the inverse image of the diagonal
   $\Delta_f\colon Y\hookrightarrow Y\times_S Y$.  Since $f$ is separated,
   this is a closed subscheme of $\operatorname{Spec}(A)$.  It contains the
@@ -7301,6 +7868,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Valuative extension to a proper separated morphism]
   \label{lemma:nagata-proper-separated-valuation-extension}
   \lean{AlgebraicGeometry.IsProper.eq_valuativeCriterion}
+  \leanok
 
   Let $f\colon Y\to S$ be proper and separated.  Every commutative square
   \[
@@ -7315,6 +7883,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-proper-valuative-criterion-existence-api,
     lemma:nagata-separated-valuation-lift-unique}
+  \leanok
   Existence is the output of
   \Cref{lemma:nagata-proper-valuative-criterion-existence-api}.  If $h$ and
   $h'$ are two such lifts, their generic restrictions are the prescribed
@@ -7328,6 +7897,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-intermediate-schemes,
     def:nagata-common-modification}
   \lean{AlgebraicGeometry.CommonModification}
+  \leanok
 
   Apply the common-modification construction to the two open immersions
   $U\hookrightarrow W_1$ and $U\hookrightarrow W_2$.  Denote its output by
@@ -7344,6 +7914,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-final-modification}
   \uses{def:nagata-two-open-final-modification}
   \lean{AlgebraicGeometry.nonempty_commonModification}
+  \leanok
 
   Each $W'_i\to W_i$ is $U$-admissible; the maps $W'_i\hookrightarrow W$
   are open immersions covering $W$; their copies of $U$ agree; and $W\to S$
@@ -7354,6 +7925,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{proof}
   \uses{lemma:nagata-intermediate-separated,
     lemma:nagata-common-modification}
+  \leanok
   The schemes $W_i$ are separated and of finite type by
   \Cref{lemma:nagata-intermediate-separated}.  Thus all hypotheses of the
   common-modification property apply, and
@@ -7367,6 +7939,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-two-open-compactification-candidate}
   \uses{def:nagata-two-open-final-modification}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   Define $\mathsf C_{12}(U/S)$ to be the constructed factorization
   \[
@@ -7377,6 +7950,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Density and quasi-compactness under the finite modification diagram]
   \label{lemma:nagata-two-open-density-transport}
   \lean{AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU}
+  \leanok
 
   In the finite diagram defining $W'_1,W'_2$ and $W$, assume that $U$ is
   scheme-theoretically dense in each initial ambient piece and that every
@@ -7388,6 +7962,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-admissible-blowup-preserves-density,
     lemma:nagata-admissible-blowup-comp,
     lemma:nagata-two-open-final-modification}
+  \leanok
   The initial copies of $U$ are scheme-theoretically dense by hypothesis.
   Every graph, boundary-separation, and final modification in the displayed
   diagram is $U$-admissible, so
@@ -7415,6 +7990,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-final-density}
   \uses{def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   The constructed map $U_1\cap U_2\to W$ is quasi-compact and has dense
   image.
@@ -7422,6 +7998,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 
 \begin{proof}
   \uses{lemma:nagata-two-open-density-transport}
+  \leanok
   Apply \Cref{lemma:nagata-two-open-density-transport} to the construction of
   $W'_1,W'_2,W$.  Its hypotheses hold because the selected compactifications
   are scheme-theoretically dense and every subsequent center is supported
@@ -7433,6 +8010,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-valuative-lifting}
   \uses{def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   Let $A$ be a valuation ring with fraction field $K$.  Every commutative
   diagram whose generic map
@@ -7446,6 +8024,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-blowup-proper,
     lemma:nagata-separated-valuation-lift-unique,
     lemma:nagata-two-open-final-modification}
+  \leanok
   By
   \Cref{lemma:nagata-proper-separated-valuation-extension}, properness and
   separatedness of $X_i\to S$ extend the generic map to maps
@@ -7466,6 +8045,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-two-open-candidate-proper}
   \uses{def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   The constructed structural morphism $W\to S$ is proper.
 \end{lemma}
@@ -7475,6 +8055,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     lemma:nagata-two-open-valuative-lifting,
     lemma:nagata-two-open-final-modification,
     lemma:nagata-dense-source-valuative}
+  \leanok
   The morphism $U_1\cap U_2\to W$ is quasi-compact and dense by
   \Cref{lemma:nagata-final-density}, and its valuation diagrams admit unique
   lifts by \Cref{lemma:nagata-two-open-valuative-lifting}.  The dense-source
@@ -7487,6 +8068,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{thm:nagata-two-open}
   \uses{def:nagata-compactification,def:nagata-two-open-compactification-candidate}
   \lean{AlgebraicGeometry.HasCompactification.of_two_open_cover}
+  \leanok
 
   The constructed factorization $\mathsf C_{12}(U/S)$ is a compactification
   of $U\to S$.  Consequently $U\to S$ is compactifiable.
@@ -7496,6 +8078,7 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{lemma:nagata-two-open-final-modification,
     lemma:nagata-two-open-candidate-proper,
     lemma:nagata-open-immersion-qc-over-separated-target}
+  \leanok
   By \Cref{lemma:nagata-two-open-final-modification}, the first map
   $j_W\colon U\to W$ is an open immersion and $W\to S$ is separated and of
   finite type.  It is proper by
@@ -7529,6 +8112,9 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-relative-affine-space-charts}
   \uses{def:nagata-relative-affine-space}
   \lean{}
+  \statusnote{Bypassed by the formalized route: relative affine space is
+    \texttt{AlgebraicGeometry.AffineSpace}, which already carries its charts and
+    base change, so they are not reconstructed here.}
 
   The affine charts in \Cref{def:nagata-relative-affine-space} glue to a
   scheme over $S$.  Their transition maps satisfy the cocycle condition,
@@ -7626,6 +8212,10 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-relative-affine-space,
     lemma:nagata-quasi-affine-immersion-affine-space-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route:
+    \texttt{AlgebraicGeometry.exists\_immersion\_affineSpace\_of\_quasiAffine}
+    is used directly, so no selected immersion and specification lemma are
+    introduced.}
 
   Under the hypotheses of
   \Cref{lemma:nagata-quasi-affine-immersion-affine-space-exists}, choose one
@@ -7641,6 +8231,10 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-quasi-affine-immersion-affine-space,
     lemma:nagata-quasi-affine-immersion-affine-space-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route:
+    \texttt{AlgebraicGeometry.exists\_immersion\_affineSpace\_of\_quasiAffine}
+    is used directly, so no selected immersion and specification lemma are
+    introduced.}
 
   The constructed morphism
   $\iota_X\colon X\to\mathbb A^n_S$ is an immersion.
@@ -7730,6 +8324,10 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   {\cite[\href{https://stacks.math.columbia.edu/tag/01ZX}{Tag 01ZX}]{stacks-project}}]
   \label{lemma:nagata-affine-neighbourhood-generic-points-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine cover meeting the
+    selected generic points is produced in one step by
+    \texttt{AlgebraicGeometry.exists\_isAffineOpen\_iSup\_eq\_top\_and\_genericPoints\_subset\_iInter}
+    and \texttt{AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter}.}
 
   Let $X$ be quasi-separated, let $x\in X$, and let
   $\eta_1,\ldots,\eta_r$ be generic points of finitely many distinct
@@ -7765,6 +8363,10 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-affine-neighbourhood-generic-points}
   \uses{lemma:nagata-affine-neighbourhood-generic-points-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine cover meeting the
+    selected generic points is produced in one step by
+    \texttt{AlgebraicGeometry.exists\_isAffineOpen\_iSup\_eq\_top\_and\_genericPoints\_subset\_iInter}
+    and \texttt{AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter}.}
 
   Let $X$ be quasi-separated, let $x\in X$, and let
   $\eta_1,\ldots,\eta_r$ be generic points of distinct irreducible
@@ -7779,6 +8381,10 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-affine-neighbourhood-generic-points,
     lemma:nagata-affine-neighbourhood-generic-points-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the affine cover meeting the
+    selected generic points is produced in one step by
+    \texttt{AlgebraicGeometry.exists\_isAffineOpen\_iSup\_eq\_top\_and\_genericPoints\_subset\_iInter}
+    and \texttt{AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter}.}
 
   The constructed open $A(x;\eta_1,\ldots,\eta_r)$ is affine and contains
   $x$ and every $\eta_i$.
@@ -7955,6 +8561,11 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{definition}[Selected upper bound of a finite set]
   \label{def:nagata-directed-finite-upper-bound}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $I$ be a nonempty directed preorder.  Fix a base point $i_\varnothing$
   and, for each pair $(i,j)$, fix a selected common upper bound $d(i,j)$
@@ -7971,6 +8582,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{lemma:nagata-directed-finite-upper-bound}
   \uses{def:nagata-directed-finite-upper-bound}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Every $i\in F$ satisfies $i\leq u(F)$.
 \end{lemma}
@@ -8010,6 +8626,11 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[Finite data and finite relations descend in a filtered colimit]
   \label{lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $(A_i)_{i\in I}$ be a directed system of rings with colimit $A$.  Given
   finitely many elements of $A$ and finitely many equalities between ring
@@ -8031,6 +8652,11 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{definition}[Selected finite affine gluing presentation]
   \label{def:nagata-finite-affine-gluing-presentation}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $S$ be quasi-compact and quasi-separated.  Select a finite affine cover
   $S=\bigcup_{a=1}^nU_a$.  For every pair $(a,b)$, select a finite affine
@@ -8045,6 +8671,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{lemma:nagata-finite-affine-gluing-presentation}
   \uses{def:nagata-finite-affine-gluing-presentation}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Every overlap in $\mathsf G_S$ is quasi-compact and represented by finitely
   many basic affine opens, all gluing identities form finite lists, and
@@ -8066,6 +8697,11 @@ coefficients and relations and all later stages inherit the recorded data.
     def:nagata-finite-affine-gluing-presentation,
     lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Start with the finite lists of basic-open elements in $\mathsf G_S$.
   Close these lists under the finitely many overlap maps and proposed
@@ -8084,6 +8720,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{lemma:nagata-affine-gluing-coefficients-descend}
   \uses{def:nagata-affine-gluing-coefficient-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Every selected finite coefficient subalgebra, basic-open element, restricted
   overlap map, and proposed inverse is defined at
@@ -8114,6 +8755,11 @@ coefficients and relations and all later stages inherit the recorded data.
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   For every identity, inverse, open-preservation, and triple-cocycle equation
   in $\mathsf G_S$, select a finite stage at which that equation holds on the
@@ -8128,6 +8774,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{lemma:nagata-affine-gluing-identities-eventually}
   \uses{def:nagata-affine-gluing-valid-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   The overlap maps in $\mathsf G_{S,\lambda_{\mathrm{glue}}}$ preserve the
   selected opens, are mutually inverse, and satisfy all identity and
@@ -8148,6 +8799,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{def:nagata-noetherian-stage}
   \uses{def:nagata-affine-gluing-valid-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Define $S_{\lambda_{\mathrm{glue}}}$ to be the scheme obtained by gluing
   $\mathsf G_{S,\lambda_{\mathrm{glue}}}$.  More generally, for every finite
@@ -8159,6 +8815,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{lemma:nagata-valid-refinements-directed}
   \uses{def:nagata-noetherian-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   The valid finite coefficient refinements occurring in
   \Cref{def:nagata-noetherian-stage} are nonempty and directed under
@@ -8206,6 +8867,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{lemma:nagata-glue-noetherian-stage}
   \uses{def:nagata-noetherian-inverse-system}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Every $S_\lambda$ is of finite type over $\mathbf Z$, and every transition
   morphism $t_{\mu\lambda}$ is affine.
@@ -8225,6 +8891,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{def:nagata-glued-limit-comparison}
   \uses{def:nagata-noetherian-inverse-system}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   The inclusions of every finite coefficient algebra into the original chart
   algebra give compatible maps $S\to S_\lambda$.  Define
@@ -8238,6 +8909,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{lemma:nagata-glued-limit-recovery}
   \uses{def:nagata-glued-limit-comparison}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   The constructed comparison $\kappa_S$ is an isomorphism.
 \end{lemma}
@@ -8320,6 +8996,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{def:nagata-noetherian-inverse-system,
     def:nagata-glued-limit-comparison}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $X\to S$ be a morphism and choose the inverse systems
   $\mathsf N(X)$ and $\mathsf N(S)$ together with their comparison maps to
@@ -8344,6 +9025,11 @@ coefficients and relations and all later stages inherit the recorded data.
     lemma:nagata-filtered-colimit-finite-data,
     lemma:nagata-directed-finite-upper-bound}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   If $S$ is qcqs and $X\to S$ is locally of finite type with $X$
   quasi-compact and quasi-separated, then a finite-stage datum exists after enlarging both
@@ -8363,6 +9049,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{lemma:nagata-relative-stage-morphism-data-exists,
     def:nagata-relative-stage-morphism-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $S$ be qcqs and let $X\to S$ be locally of finite type with $X$
   quasi-compact and quasi-separated.  Choose a finite-stage datum from
@@ -8455,6 +9146,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{def:nagata-immersion-shrink-to-closed}
   \uses{lemma:nagata-immersion-shrink-to-closed-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Under the hypotheses of
   \Cref{lemma:nagata-immersion-shrink-to-closed-exists}, choose one witness and
@@ -8689,6 +9385,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{def:nagata-fixed-base-separated-stage}
   \uses{lemma:nagata-fixed-base-separated-stage-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Under the hypotheses of
   \Cref{lemma:nagata-fixed-base-separated-stage-exists}, choose one witness
@@ -8721,6 +9422,11 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{def:nagata-finite-type-fp-model-system,
     def:nagata-fixed-base-separated-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $S$ be qcqs and let $X\to S$ be separated and of finite type.  Form
   \[
@@ -8777,6 +9483,11 @@ transition morphisms.
 \begin{definition}[Base-changed system over a chosen stage]
   \label{def:nagata-basechanged-system}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Fix $\lambda_0\in I$ and a scheme $Y_{\lambda_0}$ equipped with a morphism
   to $S_{\lambda_0}$.  On the cofinal directed subsystem
@@ -8797,6 +9508,11 @@ transition morphisms.
   \uses{def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data,def:nagata-basechanged-system}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Fix $\lambda_0$, assume $Y_{\lambda_0}$ is qcqs, and put
   $Y=S\times_{S_{\lambda_0}}Y_{\lambda_0}$, and let $W\subseteq Y$ be a
@@ -8820,6 +9536,11 @@ transition morphisms.
   \label{lemma:nagata-qc-open-descends}
   \uses{def:nagata-qc-open-descent}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   The constructed $W_{\lambda_W}$ is quasi-compact, and its inverse image in
   $Y$ is exactly $W$.
@@ -8838,6 +9559,11 @@ transition morphisms.
   \uses{def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $W_{1,\lambda_0},W_{2,\lambda_0}\subseteq Y_{\lambda_0}$ be
   quasi-compact opens whose inverse images in $Y$ agree.  On a finite affine
@@ -8851,6 +9577,11 @@ transition morphisms.
   \label{lemma:nagata-qc-open-eq-eventually}
   \uses{def:nagata-qc-open-equality-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   For every $\lambda\geq\lambda_{W_1=W_2}$, the inverse images of
   $W_{1,\lambda_0}$ and $W_{2,\lambda_0}$ in $Y_\lambda$ are equal.
@@ -8869,6 +9600,11 @@ transition morphisms.
   \uses{def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Suppose $S_{\lambda_0}=\operatorname{Spec}(A_{\lambda_0})$,
   $S=\operatorname{Spec}(A)$, and fix a finite presentation
@@ -8891,6 +9627,11 @@ transition morphisms.
   \label{lemma:nagata-affine-fp-descends}
   \uses{def:nagata-affine-fp-descent}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   The algebra $B_{\lambda_B}$ is finitely presented over
   $A_{\lambda_B}$, and the constructed map $\beta_B$ is an isomorphism.
@@ -8911,6 +9652,11 @@ transition morphisms.
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $X_{\lambda_0},Y_{\lambda_0}$ be of finite presentation over
   $S_{\lambda_0}$, write
@@ -8937,6 +9683,11 @@ transition morphisms.
   \label{lemma:nagata-morphism-descends}
   \uses{def:nagata-morphism-descent}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   The base change of the constructed
   $\varphi_{\lambda_\varphi}$ to $S$ is $\varphi$.
@@ -8959,6 +9710,11 @@ transition morphisms.
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $\varphi_{\lambda_0},\psi_{\lambda_0}\colon
   X_{\lambda_0}\to Y_{\lambda_0}$ have equal base change to $S$.  On a
@@ -8973,6 +9729,11 @@ transition morphisms.
   \label{lemma:nagata-morphism-eq-eventually}
   \uses{def:nagata-morphism-equality-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   For every $\lambda\geq\lambda_{\varphi=\psi}$, the base changes of
   $\varphi_{\lambda_0}$ and $\psi_{\lambda_0}$ to $S_\lambda$ are equal.
@@ -8990,6 +9751,11 @@ transition morphisms.
 \begin{definition}[Selected finite relative affine presentation]
   \label{def:nagata-relative-finite-affine-presentation}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $S$ be qcqs and let $X\to S$ be of finite presentation.  Select a
   finite affine cover of
@@ -9015,6 +9781,11 @@ transition morphisms.
     lemma:nagata-morphism-descends,
     def:nagata-directed-finite-upper-bound}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Descend every chart algebra in $\mathsf R_X$ using
   \Cref{lemma:nagata-affine-fp-descends}, every quasi-compact overlap open
@@ -9033,6 +9804,11 @@ transition morphisms.
   \label{lemma:nagata-relative-gluing-datum-descends}
   \uses{def:nagata-relative-gluing-datum-descent}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Every chart, overlap open, and overlap map in the constructed raw datum
   base changes to its named counterpart in $\mathsf R_X$.
@@ -9056,6 +9832,11 @@ transition morphisms.
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   For the raw datum, form the finite list of required equalities of overlap
   opens, inverse identities, and triple-overlap cocycles.  Attach to each the
@@ -9073,6 +9854,11 @@ transition morphisms.
   \label{lemma:nagata-relative-gluing-axioms-eventually}
   \uses{def:nagata-relative-gluing-valid-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   In $\mathsf R_{X,\lambda_{\mathrm{rel}}}$ the overlap opens match in both
   directions, the overlap maps are inverse, and all triple-overlap cocycle
@@ -9094,6 +9880,11 @@ transition morphisms.
   \label{def:nagata-finite-presentation-descent}
   \uses{def:nagata-relative-gluing-valid-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Define
   \[
@@ -9213,6 +10004,11 @@ transition morphisms.
   \label{def:nagata-closed-immersion-stage}
   \uses{lemma:nagata-closed-immersion-stage-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $g_\lambda\colon Z_\lambda\to Y_\lambda$ be of finite presentation
   between finite-presentation $S_\lambda$-schemes, and assume its base change
@@ -9226,6 +10022,11 @@ transition morphisms.
   \label{lemma:nagata-closed-immersion-descends}
   \uses{def:nagata-closed-immersion-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   For every $\mu\geq\mu_{\mathrm{cl}}(g)$, the base change $g_\mu$ is a
   closed immersion.
@@ -9282,6 +10083,11 @@ transition morphisms.
   \uses{def:nagata-finite-presentation-descent,
     lemma:nagata-separated-descent-stage-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the finite-presentation and
+    Noetherian descent is done in one step by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation}, so
+    this stage-by-stage bookkeeping is never carried out.}
 
   Let $X\to S$ be separated and of finite presentation, and start from its
   constructed finite-stage model
@@ -9389,6 +10195,11 @@ must be checked in Lean:
     lemma:nagata-relative-proj-invertible-tensor-powers,
     thm:nagata-global-blowup-projective}
   \lean{}
+  \statusnote{Bypassed by the formalized route: this lemma is the record of
+    the replacement itself.  The relative-Proj interface above is realized by
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData} together with the
+    affine Proj chart API, and no relative-Proj declaration of its own was
+    formalized.}
 
   The relative Proj interface used in this blueprint can be implemented from
   the current Mathlib scheme APIs.  The affine pieces are the standard Proj
@@ -9428,6 +10239,10 @@ must be checked in Lean:
     lemma:nagata-finite-presentation-descends,
     lemma:nagata-closed-immersion-stage-exists}
   \lean{}
+  \statusnote{Bypassed by the formalized route: this lemma is the record of
+    the replacement itself.  The stagewise approximation above is subsumed by
+    \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation} and
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}.}
 
   The inverse-system and finite-stage constructions in this blueprint use only
   the verified Mathlib APIs for cofiltered limits with affine transition maps
@@ -9464,68 +10279,75 @@ must be checked in Lean:
 \subsection{Formalization gap registry}
 \label{sec:nagata-gap-registry}
 
-The following interfaces are intentionally left as named obligations.  A
-later block may use one of them as a blueprint dependency, but it must not be
-read as a current Mathlib theorem until the indicated construction and its
-compatibility proofs have been added.
+This registry no longer lists open obligations.  The chapter is formalized
+along a route that never passes through several of the blocks developed
+above; those blocks are kept because they carry the mathematical narrative,
+and each of them now displays a \textbf{Status} note naming the declaration
+or the alternative argument that replaced it.  The bypassed groups are the
+following.
 
 \begin{description}
-  \item[Scheme-theoretic images.]  The restriction statement in
-    \Cref{lemma:nagata-scheme-image-restrict-open} is a canonical-isomorphism
-    interface supplied by the affine kernel calculations.  Flat base change
-    in \Cref{lemma:nagata-scheme-image-flat-base-change} is discharged by the
-    finite-affine kernel and gluing argument, with the result identified with
-    Stacks Project Tag~081I.
+  \item[Relative Proj.]  The relative Proj interface of
+    \Cref{def:nagata-relative-proj,lemma:nagata-relative-proj-exists,
+    prop:nagata-relative-proj-functoriality} and its base-change and
+    tensor-power companions are never formalized as primitives.  The blow-up
+    is glued from the affine Proj charts with
+    \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
+    \Cref{lemma:nagata-relative-proj-current-api} explains.
 
-  \item[Relative Proj and blow-ups.]  The relative Proj and blow-up interfaces
-    are reduced to current affine Proj and relative-gluing primitives in
-    \Cref{lemma:nagata-relative-proj-current-api}.  The universal lift, flat
-    base change, product ideal, and arbitrary-composition results use the
-    coefficientwise localization and finite-coordinate fields stated in the
-    preceding blocks.
+  \item[Affine blow-up chart algebra.]  The chart algebra of
+    \Cref{def:nagata-blowup-chart-ring} and the Rees-localization coherence
+    lemmas are replaced by \texttt{AlgebraicGeometry.AffineBlowup} together
+    with \texttt{AffineBlowup.chart} and
+    \texttt{AffineBlowup.isLocalization\_away\_map}.
 
-  \item[Strict transforms and flattening.]  The scheme strict-transform
-    construction and its chart, torsion, ambient-closedness, and sheaf-gluing
-    properties are the blocks beginning with
-    \Cref{def:nagata-strict-transform}.  The finite-data flattening package is
-    justified by Stacks Project Tag~0815; the remaining strict-transform
-    chart/gluing APIs and the boundary Cartier preparation still need Lean
-    declarations before they can receive completion markers.
+  \item[Projectivity and flat base change of blow-ups.]  The route needs only
+    properness of the global blow-up
+    (\texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}),
+    so \Cref{thm:nagata-global-blowup-projective} is not used; and it never
+    base-changes a blow-up along a flat morphism, so
+    \Cref{thm:nagata-blowup-flat-base-change} is not used either.
 
-  \item[Boundary and graph arguments.]  The common-modification and
-    graph-extension assertions are matched to Stacks Project Tags~0F3X and
-    0F3Z, respectively, and their blueprint proofs now spell out the
-    strict-transform comparison and closed-graph steps.  The auxiliary
-    scheme-image strict-transform and boundary-separation interfaces remain
-    blueprint obligations until their local Lean compatibility maps are
-    exposed.
+  \item[Chart-cocycle strict transforms.]  The strict-transform chart rings,
+    their comparison isomorphisms and their cocycle are replaced by the API
+    of \texttt{WeilConjectures/Compactification/StrictTransform.lean}, that
+    is, \texttt{AlgebraicGeometry.strictTransform} with its closed immersion
+    into the base change and the pullback square over the preserved open.
 
-  \item[Valuative and two-open steps.]  The valuation probe, valuation-ring
-    extension, and density transport are now discharged by the explicit
-    applications of Stacks Project Tags~02JQ and~00IA together with the
-    admissible-blow-up density lemma.  The remaining formalization work is to
-    expose the corresponding valuation and gluing structures through verified
-    Lean declarations; no unresolved mathematical gap is recorded in these
-    blocks.
+  \item[The Raynaud--Gruson flattening chain.]  The module strict transform,
+    the flattening theorem, and the selected flattening ideal are not
+    formalized.  Elimination of indeterminacy is obtained instead by the
+    route of the chapter \emph{Elimination of indeterminacy after Deligne and
+    Conrad}, whose output is
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap}.
 
-  \item[Relative affine space and finite coordinates.]  The relative affine
-    space charts and the standard open immersion into relative projective
-    space are constructed in
-    \Cref{def:nagata-relative-affine-space,
-    lemma:nagata-relative-affine-space-charts,
-    lemma:nagata-relative-affine-space-open-immersion}.  The finite-coordinate
-    construction in
-    \Cref{lemma:nagata-quasi-affine-immersion-affine-space-exists} verifies its
-    overlap maps and local immersion criterion explicitly.  The affine
-    compactification proposition is then a direct application of the proper
-    projective target lemma.
+  \item[Boundary-separation preparation.]  The preparation data of
+    \Cref{lemma:nagata-separate-closed-data-exists} is replaced by
+    \texttt{AlgebraicGeometry.separationBlowup} and
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures},
+    which are proved from Deligne's disjointness blow-up.
 
-  \item[Noetherian approximation.]  The finite-stage inverse system,
-    relative affine gluing/base-change, and eventual closed-immersion stage
-    are explicitly matched to the current limit and relative-gluing APIs in
-    \Cref{lemma:nagata-noetherian-current-api}.  The only local work left is
-    packaging the finite coefficient and generator lists in the named Lean
-    wrappers; no unresolved mathematical dependency remains.
+  \item[Noetherian approximation bookkeeping.]  The stagewise descent carried
+    out in the section \emph{Finite-presentation reduction and approximation}
+    --- coefficient stages, valid stages, and eventual equalities --- is
+    subsumed by
+    \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
+    and \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation},
+    as \Cref{lemma:nagata-noetherian-current-api} records.
+
+  \item[The explicit final assembly.]  The named intermediate objects of the
+    section \emph{Explicit final assembly} are not built separately:
+    \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation}
+    produce the factorization and its three properties directly.
+
+  \item[Selected-witness and specification pairs.]  Wherever the blueprint
+    chooses a witness and then records its fields in a companion lemma, the
+    Lean route uses the corresponding existence statement directly, so
+    neither member of the pair has a declaration of its own.  This is the
+    case for the quasi-affine immersion into relative affine space, the
+    affine neighbourhood of finitely many generic points, and the
+    constructible separation data in a spectral space.
 \end{description}
 
 \subsubsection{Structured interface gaps}
@@ -9545,6 +10367,11 @@ made inside the final theorem.
   \label{def:nagata-final-fp-envelope}
   \uses{def:nagata-finite-type-closed-in-fp}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   Define
   \[
@@ -9558,6 +10385,11 @@ made inside the final theorem.
   \label{lemma:nagata-final-fp-envelope}
   \uses{def:nagata-final-fp-envelope}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   The map $i_f^{\mathrm{fp}}\colon X\hookrightarrow X_f^{\mathrm{fp}}$ is a
   closed immersion over $S$, and
@@ -9574,6 +10406,11 @@ made inside the final theorem.
   \label{def:nagata-final-noetherian-base-system}
   \uses{def:nagata-noetherian-inverse-system, def:nagata-glued-limit-comparison}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   Define
   \[
@@ -9588,6 +10425,11 @@ made inside the final theorem.
   \label{lemma:nagata-final-noetherian-base-system}
   \uses{def:nagata-final-noetherian-base-system}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   In the system of
   \Cref{def:nagata-final-noetherian-base-system}, every $S_\lambda$ is
@@ -9609,6 +10451,11 @@ made inside the final theorem.
     lemma:nagata-final-noetherian-base-system,
     def:nagata-separated-descent-stage}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   Apply the separated-descent construction to
   $X_f^{\mathrm{fp}}\to S$ relative to $\mathsf N_f$.  Define
@@ -9632,6 +10479,11 @@ made inside the final theorem.
   \label{lemma:nagata-final-descended-model}
   \uses{def:nagata-final-descended-model}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   The morphism
   $X_{f,\lambda_f}^{\mathrm{fp}}\to S_{\lambda_f}$ is separated and of
@@ -9653,6 +10505,11 @@ made inside the final theorem.
     def:nagata-noetherian-compactification,
     lemma:nagata-final-descended-model}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   Define
   \[
@@ -9666,6 +10523,11 @@ made inside the final theorem.
   \label{lemma:nagata-final-noetherian-compactification}
   \uses{def:nagata-final-noetherian-compactification}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   The constructed $C_{f,\lambda_f}$ is a compactification of
   $X_{f,\lambda_f}^{\mathrm{fp}}\to S_{\lambda_f}$.
@@ -9689,6 +10551,11 @@ made inside the final theorem.
     lemma:nagata-final-noetherian-compactification,
     lemma:nagata-final-descended-model}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   Let $\overline X_{f,\lambda_f}$ be the ambient term of
   $C_{f,\lambda_f}$ and let
@@ -9768,6 +10635,11 @@ made inside the final theorem.
     def:nagata-scheme-theoretic-image,def:nagata-scheme-image-factor,
     lemma:nagata-scheme-image-universal}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   The ambient scheme $\overline X_f$ is the scheme-theoretic image of the
   composite
@@ -9795,6 +10667,11 @@ made inside the final theorem.
   \uses{def:nagata-final-compactification,
     lemma:nagata-final-compactification-spec}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   The constructed morphism $p_f\colon\overline X_f\to S$ is proper.
 \end{lemma}
@@ -9815,6 +10692,11 @@ made inside the final theorem.
     lemma:nagata-scheme-image-universal,
     lemma:nagata-scheme-image-of-closed-immersion}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
 
   The constructed map $j_f\colon X\to\overline X_f$ is a quasi-compact open
   immersion.
@@ -9843,6 +10725,11 @@ made inside the final theorem.
   \uses{def:nagata-final-compactification,
     lemma:nagata-final-compactification-spec}
   \lean{}
+  \statusnote{Bypassed by the formalized route: the final assembly is carried
+    out inside \texttt{AlgebraicGeometry.NagataCompactification} and
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which produce the factorization and its three properties directly, without
+    separately named intermediate objects.}
     
   The constructed maps in
   \Cref{def:nagata-final-compactification} satisfy $p_f\circ j_f=f$.
@@ -9915,8 +10802,11 @@ arbitrary target by a quasi-affine one.
 The route written in the previous chapter --- Raynaud--Gruson flattening by
 blow-up (Stacks Tags 0815, 081R, 081P, 081L) --- is not the formalized one;
 see the remark after \Cref{lemma:nagata-module-strict-transform-exact} and the
-route remark closing this chapter.  Nothing in this chapter is formalized yet,
-so every \verb|\lean| field below is empty.
+route remark closing this chapter.  This chapter is formalized: most statements
+below carry a non-empty \verb|\lean| field naming the declaration that realizes
+them, up to Conrad's Theorem 2.4 itself
+(\verb|AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection|) and its
+$U=V$ corollary.
 
 Throughout, $S$ is a quasi-compact and quasi-separated base scheme and all
 fibre products of $S$-schemes are taken over $S$ unless another base is
@@ -9938,6 +10828,10 @@ generating set of $I$, cover the blow-up.
   {\cite[Def.~2.1]{ConradNagata}}]
   \label{def:nagata-conrad-quasi-domination}
   \lean{}
+  \statusnote{Bypassed by the formalized route: quasi-dominations are not
+    introduced in Lean.  The extension statements are proved directly from
+    scheme-theoretic dominance and separatedness, through
+    \texttt{AlgebraicGeometry.ext\_of\_isSchemeTheoreticallyDominant\_of\_isSeparated}.}
 
   Let $X$ and $Y$ be $S$-schemes with $Y\to S$ separated.  A
   \emph{quasi-domination of $X$ over $Y$} is a pair $(U,f)$ consisting of a
@@ -9964,6 +10858,10 @@ are glued along isomorphic open subschemes.
   \label{lemma:nagata-conrad-morphism-is-quasi-domination}
   \uses{def:nagata-conrad-quasi-domination}
   \lean{}
+  \statusnote{Bypassed by the formalized route: quasi-dominations are not
+    introduced in Lean.  The extension statements are proved directly from
+    scheme-theoretic dominance and separatedness, through
+    \texttt{AlgebraicGeometry.ext\_of\_isSchemeTheoreticallyDominant\_of\_isSeparated}.}
 
   Let $Y\to S$ be separated and let $f\colon U\to Y$ be any $S$-morphism.
   Then $(U,f)$ is a quasi-domination of $U$ over $Y$.
@@ -9981,6 +10879,10 @@ are glued along isomorphic open subschemes.
   \label{lemma:nagata-conrad-quasi-domination-proper-target}
   \uses{def:nagata-conrad-quasi-domination}
   \lean{}
+  \statusnote{Bypassed by the formalized route: quasi-dominations are not
+    introduced in Lean.  The extension statements are proved directly from
+    scheme-theoretic dominance and separatedness, through
+    \texttt{AlgebraicGeometry.ext\_of\_isSchemeTheoreticallyDominant\_of\_isSeparated}.}
 
   Let $Y\to S$ be proper and let $(U,f)$ be a quasi-domination of $X$ over
   $Y$.  Then $U=X$; that is, $f$ extends to an $S$-morphism $X\to Y$.
@@ -10074,6 +10976,10 @@ are glued along isomorphic open subschemes.
     def:nagata-blowup-chart-ring,
     prop:nagata-affine-blowup-chart-cover}
   \lean{}
+  \statusnote{Bypassed by the formalized route: Deligne's disjointness blow-up
+    is formalized as the single statement
+    \texttt{AlgebraicGeometry.disjoint\_closure\_range\_of\_blowupMap\_sup},
+    which absorbs this step.}
 
   Let $X$ be a scheme and let $Y,Y'\subseteq X$ be closed subschemes with
   quasi-coherent ideals $\mathcal I_Y,\mathcal I_{Y'}$.  In
@@ -10119,6 +11025,10 @@ are glued along isomorphic open subschemes.
   \uses{def:nagata-scheme-theoretic-image,
     def:nagata-global-blowup}
   \lean{}
+  \statusnote{Bypassed by the formalized route: Deligne's disjointness blow-up
+    is formalized as the single statement
+    \texttt{AlgebraicGeometry.disjoint\_closure\_range\_of\_blowupMap\_sup},
+    which absorbs this step.}
 
   Consider open immersions $i\colon U\to V$ and $j\colon V\to X$, a morphism
   $p\colon Z\to X$, a scheme $Y$ over $U$, and a quasi-compact immersion

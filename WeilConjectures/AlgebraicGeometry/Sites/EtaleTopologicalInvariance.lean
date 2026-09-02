@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.Data.Set.Image
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Outer
 
 /-!
 # Topological invariance of the small étale site
@@ -48,7 +49,7 @@ with `AlgebraicGeometry.Scheme.Hom.etaleEquivalence` the bundled form.
 - `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`
   (blueprint: `lemma:weil-pbc-universal-homeomorphism-site-equivalence`): base change along
   a universal homeomorphism is an equivalence of the underlying categories of the small
-  étale sites. This is `sorry`ed, see the implementation notes.
+  étale sites. See the implementation notes for the structure of the proof.
 - `AlgebraicGeometry.Scheme.Hom.isDenseSubsite_etale`: the two statements above combined,
   in the form `CategoryTheory.Functor.IsDenseSubsite` consumed by
   `CategoryTheory.Equivalence.sheafCongr`.
@@ -66,23 +67,26 @@ integrality either: it is stated for a morphism that is merely universally injec
 surjective.
 
 The equivalence itself, `Hom.isEquivalence_etale`, is the mathematical content of [Stacks
-04DZ] and is `sorry`ed. It is stated as a theorem rather than as `sorry`ed data, and it is
-not a global instance: each file that needs it re-enables it with
-`attribute [local instance]`, so the dependence on the `sorry` is visible in the file text.
-Everything below it in this file — `Hom.etaleEquivalence` and `Hom.isDenseSubsite_etale` —
-does depend on it.
+04DZ]. It is proved in the files of the directory `EtaleTopologicalInvariance/`, following
+the second proof of [Stacks 04DZ]:
 
-The natural decomposition of the remaining work is to reduce to the case of a surjective
-closed immersion with nil kernel ([Stacks 039R]), which is a statement worth having on its
-own; the diagonal `X ⟶ X ×_Y X` of a universal homeomorphism is such a morphism, so the
-canonical descent datum of `lemma:weil-pbc-universal-homeomorphism-descent-datum` follows,
-and gluing the descended affine pieces gives the quasi-inverse. For [Stacks 039R] itself
-Mathlib already has the essential inputs, so the Jacobian bookkeeping of the blueprint
-proof should not have to be redone by hand: `Algebra.FormallyEtale.comp_bijective` gives
-unique lifting along a square-zero ideal, hence full faithfulness;
-`StandardEtalePair.homEquiv` describes maps out of a standard étale algebra by a root of
-its monic polynomial at which the denominator is invertible; and
-`IsAdicComplete.henselianRing` lifts such roots.
+* `FullyFaithful`: full faithfulness of base change, by descending an `X`-morphism through
+  its graph, an open subscheme which corresponds to an open subscheme on the `Y`-side
+  because the base change of `f` is a homeomorphism ([Stacks 04DY]).
+* `Gluing`: being in the essential image is local on the source, by gluing descended
+  opens along a locally directed diagram of open immersions.
+* `PropertyC`: property (C) of [Stacks 04DW], reduced to the ring-theoretic statement
+  `Algebra.Etale.exists_etale_algHom_comap_eq`, which is proved by trivialising the
+  separable part of the residue field extension and applying the étale local structure of
+  quasi-finite algebras.
+* `EssSurj`: the affine case, by induction on a bound for the fibre degrees, using the
+  section trick of [Stacks 04DZ] and descent along an étale cover (`Descent`) through the
+  affine hull of a quasi-affine scheme (`Mathlib.RingTheory.Flat.DescentAlgebra`).
+* `Outer`: reduction of the general case to the affine case with bounded fibre degrees,
+  using the local structure of étale algebras.
+
+The equivalence is not a global instance: each file that needs it re-enables it with
+`attribute [local instance]`.
 
 ## References
 
@@ -159,16 +163,15 @@ end Bijective
 
 variable [IsUniversalHomeomorphism f]
 
--- TODO: prove; see [Stacks 04DZ] and the proof route in the implementation notes above.
 /-- **Topological invariance of the small étale site**: base change along a universal
 homeomorphism `f : X ⟶ Y` is an equivalence between the category of schemes étale over `Y`
 and the category of schemes étale over `X`.
 
 This is not a global instance: it is re-enabled with `attribute [local instance]` in each
-file that needs it, so the dependence on the `sorry` is visible in the file text.
+file that needs it.
 (blueprint: `lemma:weil-pbc-universal-homeomorphism-site-equivalence`) -/
 @[stacks 04DZ]
-theorem isEquivalence_etale : f.Etale.IsEquivalence := sorry
+theorem isEquivalence_etale : f.Etale.IsEquivalence where
 
 attribute [local instance] isEquivalence_etale
 
@@ -177,8 +180,7 @@ homeomorphism `f : X ⟶ Y`, the functor `V ↦ V ×_Y X` is an equivalence of c
 between schemes étale over `Y` and schemes étale over `X`.
 
 This bundled form is what `CategoryTheory.Equivalence.sheafCongr` consumes, see
-`AlgebraicGeometry.Etale.sheafEquivalence`. It depends on the `sorry` in
-`AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`.
+`AlgebraicGeometry.Etale.sheafEquivalence`.
 (blueprint: `lemma:weil-pbc-universal-homeomorphism-site-equivalence`) -/
 @[stacks 04DZ]
 noncomputable def etaleEquivalence : Y.Etale ≌ X.Etale :=
@@ -187,8 +189,7 @@ noncomputable def etaleEquivalence : Y.Etale ≌ X.Etale :=
 /-- Base change along a universal homeomorphism exhibits the small étale site of `Y` as a
 dense subsite of the small étale site of `X`: it is an equivalence of the underlying
 categories by `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, and it reflects coverings
-by `AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff`. It depends
-on the `sorry` in the former. -/
+by `AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff`. -/
 theorem isDenseSubsite_etale :
     f.Etale.IsDenseSubsite Y.smallEtaleTopology X.smallEtaleTopology where
   functorPushforward_mem_iff := functorPushforward_mem_smallEtaleTopology_iff f _

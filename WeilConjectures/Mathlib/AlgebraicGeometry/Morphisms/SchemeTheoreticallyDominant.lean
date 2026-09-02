@@ -23,6 +23,9 @@ Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in several independent
   image is an isomorphism;
 - `AlgebraicGeometry.Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant`: precomposing
   with a scheme-theoretically dominant morphism does not change the kernel ideal sheaf.
+- `AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_comp`: if `s ≫ j` is
+  scheme-theoretically dominant and quasi-compact and `j` is flat and a monomorphism
+  (for instance an open immersion), then `s` is scheme-theoretically dominant.
 - the inclusion of the generic point `Spec K ⟶ Spec A` of the spectrum of a domain with
   fraction field `K` is scheme-theoretically dominant, hence
   `AlgebraicGeometry.IsClosedImmersion.exists_lift_of_isFractionRing`: a morphism
@@ -128,6 +131,21 @@ kernel ideal sheaf. -/
 lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
     (γ : T ⟶ Y) [IsSchemeTheoreticallyDominant d] : (d ≫ γ).ker = γ.ker := by
   rw [Scheme.Hom.ker_comp, d.ker_eq_bot, Scheme.IdealSheafData.map_bot]
+
+/-- **Scheme-theoretic dominance descends along a flat monomorphism**: if `s ≫ j` is
+quasi-compact and scheme-theoretically dominant and `j` is a flat monomorphism, then the
+first factor `s` is scheme-theoretically dominant.
+
+The typical case is `j` an open immersion: the scheme-theoretic image of `s` inside the
+open subscheme `U` is the trace on it of the scheme-theoretic image of `s ≫ j`. The proof
+is that the square with vertical maps `s` and `s ≫ j` and horizontal maps `𝟙` and `j` is
+cartesian, `j` being a monomorphism, so this is flat base change for scheme-theoretic
+dominance. -/
+lemma IsSchemeTheoreticallyDominant.of_comp {U : Scheme.{u}} (s : T ⟶ U) (j : U ⟶ Y)
+    [Mono j] [Flat j] [QuasiCompact (s ≫ j)] [IsSchemeTheoreticallyDominant (s ≫ j)] :
+    IsSchemeTheoreticallyDominant s :=
+  have h : IsPullback (𝟙 T) s (s ≫ j) j := .of_horiz_isIso_mono ⟨Category.id_comp _⟩
+  .of_isPullback h
 
 section FractionRing
 

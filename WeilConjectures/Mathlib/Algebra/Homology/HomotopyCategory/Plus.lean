@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-!
 # Natural transformations between functors on bounded below homotopy categories
@@ -14,6 +15,9 @@ A natural transformation `τ : F ⟶ G` of additive functors induces a natural t
 `F.mapHomotopyCategoryPlus ⟶ G.mapHomotopyCategoryPlus` between the induced functors on the
 bounded below homotopy categories (`CategoryTheory.NatTrans.mapHomotopyCategoryPlus`),
 compatibly with identities and compositions.
+
+Moreover, the functor `(𝟭 C).mapHomotopyCategoryPlus` induced by the identity functor is
+isomorphic to the identity functor (`CategoryTheory.Functor.mapHomotopyCategoryPlusIdIso`).
 
 This material is destined for `Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean`, next to
 `CategoryTheory.Functor.mapHomotopyCategoryPlus`.
@@ -69,3 +73,36 @@ lemma mapHomotopyCategoryPlus_comp {F G H : C ⥤ D}
     (HomotopyCategory.Plus C)).preimage_comp (Y := G.mapHomotopyCategoryPlus) _ _
 
 end CategoryTheory.NatTrans
+
+namespace CategoryTheory.Functor
+
+variable (C : Type u₁) [Category.{v₁} C] [Preadditive C]
+
+/-- The functor on bounded below homotopy categories induced by the identity functor is
+isomorphic to the identity functor: the bounded below counterpart of
+`CategoryTheory.Functor.mapHomotopyCategoryIdIso`. -/
+noncomputable def mapHomotopyCategoryPlusIdIso :
+    (𝟭 C).mapHomotopyCategoryPlus ≅ 𝟭 (HomotopyCategory.Plus C) :=
+  fullyFaithfulCancelRight (HomotopyCategory.Plus.ι C)
+    (isoWhiskerLeft (HomotopyCategory.Plus.ι C)
+        (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)) ≪≫
+      (HomotopyCategory.Plus.ι C).rightUnitor ≪≫
+      (HomotopyCategory.Plus.ι C).leftUnitor.symm)
+
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlusIdIso_hom_app (K : HomotopyCategory.Plus C) :
+    (HomotopyCategory.Plus.ι C).map ((mapHomotopyCategoryPlusIdIso C).hom.app K) =
+      (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)).hom.app K.obj := by
+  rw [mapHomotopyCategoryPlusIdIso, fullyFaithfulCancelRight_hom_app,
+    Functor.map_preimage]
+  simp
+
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlusIdIso_inv_app (K : HomotopyCategory.Plus C) :
+    (HomotopyCategory.Plus.ι C).map ((mapHomotopyCategoryPlusIdIso C).inv.app K) =
+      (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)).inv.app K.obj := by
+  rw [mapHomotopyCategoryPlusIdIso, fullyFaithfulCancelRight_inv_app,
+    Functor.map_preimage]
+  simp
+
+end CategoryTheory.Functor

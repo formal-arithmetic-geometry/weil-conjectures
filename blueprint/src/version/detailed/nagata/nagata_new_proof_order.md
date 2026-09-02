@@ -63,7 +63,10 @@ not by the shortest source-file path.
 > (`Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`), and Stacks Tag 04II
 > is already formalized here as `exists_immersion_affineSpace_of_quasiAffine`
 > (`WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean:291`).  Item 30
-> is still `sorry` in Lean.  Item 23 is so far formalized only in its affine
+> is formalized and `sorry`-free, as
+> `AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap`
+> in `WeilConjectures/Compactification/EliminationOfIndeterminacy.lean`.
+> Item 23 is so far formalized only in its affine
 > algebraic layer (`Submodule.powTorsion` and `Submodule.torsion'QuotientMap`
 > in `WeilConjectures/Mathlib/Algebra/Module/Torsion.lean`).
 >
@@ -161,8 +164,12 @@ The chapter "Elimination of indeterminacy after Deligne and Conrad" of
 `nagata_new.tex`, following Conrad, *Deligne's notes on Nagata
 compactifications*, §§1-2 (pp. 10-19).  These items are numbered after item 60
 so that the numbering above is unchanged, but logically they all precede item
-30: they are the formalized route to it, replacing items 25-29.  Nothing here
-is formalized yet.
+30: they are the formalized route to it, replacing items 25-29.  This section is
+formalized: the culminating item 74 is
+`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` in
+`WeilConjectures/Blowup/PartialSectionExtension.lean`, with item 75 the
+corollary `AlgebraicGeometry.exists_admissibleBlowup_extend_section` in the
+same file.
 
 | Order | Label | Role | Main inputs -> output |
 |---:|---|---|---|
@@ -188,14 +195,27 @@ is formalized yet.
 > that its complement is exactly `U`, and observe that the strict transform of
 > `Z` — the scheme-theoretic closure of the graph — is a closed subscheme of the
 > closed graph `Γ` containing `U` as a schematically dense open, hence equals
-> it.  No `\leanok` is claimed for any item in this section.
+> it.  That derivation is carried out in Lean in
+> `WeilConjectures/Compactification/EliminationOfIndeterminacy.lean`.
 
 ## Formalization status by PR (stack nagata-01 … nagata-09, 2026-08)
 
-Where each core node (and its Stacks tag) is realized in the Lean development;
-labels not listed are either upstream (items 1-2, PR #18) or not yet started
-(items 49-60).  "Formalization route" remarks in `nagata_new.tex` record where
-the Lean proof deviates from the written route.
+**Current status (2026-09).** The whole chain is formalized and `sorry`-free on
+`slopmaster`, up to and including item 60 (`thm:nagata-compactification`):
+`AlgebraicGeometry.NagataCompactification` in
+`WeilConjectures/Compactification/NagataCompactification.lean`, which — together
+with `AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation`
+and `AlgebraicGeometry.nagataCompactification_of_isNoetherian` — carries a
+`#print axioms` census in the build checking that it depends on
+`[propext, Classical.choice, Quot.sound]` only.  In particular item 30
+(Tag 081S) is unconditional, and the "depends on `sorryAx` through Tag 081S"
+qualifications in the dated rows below are superseded.
+
+The table is a historical log: it records where each core node (and its Stacks
+tag) was first realized in the Lean development, and the state of the work at
+that date.  Labels not listed are upstream (items 1-2, PR #18).
+"Formalization route" remarks in `nagata_new.tex` record where the Lean proof
+deviates from the written route.
 
 | PR | Items / results | Status |
 |---|---|---|
@@ -220,6 +240,6 @@ former API markers are now discharged at the interface level in
 Proj construction to Mathlib's affine Proj charts and
 `Scheme.Cover.RelativeGluingData`; `lemma:nagata-noetherian-current-api` maps
 the Noetherian approximation argument to the affine-transition-limit and
-relative-gluing APIs.  What remains is ordinary Lean packaging of the finite
-coefficient, generator, and relation lists in those named wrappers, rather
-than an unproved mathematical dependency.
+relative-gluing APIs.  The Lean packaging of the finite coefficient, generator,
+and relation lists in those named wrappers has since been carried out, so
+nothing in the chain is outstanding.
