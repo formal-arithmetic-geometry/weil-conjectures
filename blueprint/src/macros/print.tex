@@ -27,3 +27,27 @@
  {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
   \ignorespaces}
 \ExplSyntaxOff
+
+% Logical-audit convention for the detailed Nagata chapter.  \uses already
+% records the dependency-graph edge; \nagataUsesAnnotations installs a wrapper
+% that additionally prints an explicit reference for every listed edge at the
+% point where the annotation occurs.  The annotation is placed immediately
+% before the sentence or proof paragraph that first uses the dependency.
+% The chapter invokes \nagataUsesAnnotations once, after both preambles have
+% run, so the \let below always captures the \uses of the build in hand.
+% macros/web.tex defines the same command as a no-op, because plasTeX has no
+% expl3 and would render the wrapper's own source as body text.
+\ExplSyntaxOn
+\cs_new_protected:Npn \nagataRefs:n #1
+  {\clist_map_inline:nn {#1} {\ref{##1}\,}}
+\newcommand{\nagataAnnotatedUses}[1]{%
+  \nagataOriginalUses{#1}%
+  \par\noindent
+  {\footnotesize\emph{uses: }
+    \nagataRefs:n {#1}.}%
+  \par
+}
+\ExplSyntaxOff
+\newcommand{\nagataUsesAnnotations}{%
+  \let\nagataOriginalUses\uses
+  \let\uses\nagataAnnotatedUses}

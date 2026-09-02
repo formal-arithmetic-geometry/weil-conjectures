@@ -64,7 +64,13 @@ The site-theoretic inputs of the general definitions are discharged here:
   functors are additive.
 - `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
   the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
-  `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`.
+  `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`, and `AlgebraicGeometry.Etale.lowerStarId`,
+  `AlgebraicGeometry.Etale.upperStarId`: the identity isomorphisms `(𝟙 V)_* ≅ 𝟭` and
+  `(𝟙 V)^* ≅ 𝟭`. Their unit and associativity laws are recorded as
+  `AlgebraicGeometry.Etale.lowerStarComp_id_left` and its five siblings.
+  `AlgebraicGeometry.Etale.upperStarId_inv_app_counit_app` and
+  `AlgebraicGeometry.Etale.upperStarComp_inv_app_counit_app` record the counit form of the
+  compatibility of these isomorphisms with the adjunctions `g^* ⊣ g_*`.
 - `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category; in particular it is left
@@ -241,6 +247,46 @@ end Adjunction
 
 end Star
 
+section Id
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable (V : Scheme.{u})
+
+open Etale
+
+/-- The identity isomorphism `(𝟙 V)_* ≅ 𝟭` of the pushforward on étale sheaves. -/
+noncomputable def Etale.lowerStarId : (𝟙 V)_*[A] ≅ 𝟭 _ :=
+  GrothendieckTopology.lowerStarId A @Etale @Etale le_rfl V
+
+/-- The identity isomorphism `(𝟙 V)^* ≅ 𝟭` of the pullback on étale sheaves. -/
+noncomputable def Etale.upperStarId : (𝟙 V)^*[A] ≅ 𝟭 _ :=
+  GrothendieckTopology.upperStarId A @Etale @Etale le_rfl V
+
+/-- Under the conjugation bijection between `𝟭 ⊣ 𝟭` and `(𝟙 V)^* ⊣ (𝟙 V)_*`, the identity
+isomorphism of the pullback corresponds to the identity isomorphism of the pushforward. -/
+lemma Etale.conjugateIsoEquiv_upperStarId :
+    conjugateIsoEquiv Adjunction.id (Etale.upperStarLowerStarAdjunction A (𝟙 V))
+        (Etale.upperStarId A V) = (Etale.lowerStarId A V).symm :=
+  GrothendieckTopology.conjugateIsoEquiv_upperStarId A @Etale @Etale le_rfl V
+
+/-- The counit form of `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarId`: transposing
+the identity isomorphism of the pullback along the adjunction `(𝟙 V)^* ⊣ (𝟙 V)_*` gives the
+identity isomorphism of the pushforward. -/
+lemma Etale.upperStarId_inv_app_counit_app (F : Sheaf V.smallEtaleTopology A) :
+    (Etale.upperStarId A V).inv.app (((𝟙 V)_*[A]).obj F) ≫
+        (Etale.upperStarLowerStarAdjunction A (𝟙 V)).counit.app F =
+      (Etale.lowerStarId A V).hom.app F := by
+  have hconj : conjugateEquiv (Etale.upperStarLowerStarAdjunction A (𝟙 V))
+      (Adjunction.id (C := Sheaf V.smallEtaleTopology A))
+      (Etale.upperStarId A V).inv = (Etale.lowerStarId A V).hom :=
+    congrArg Iso.inv (Etale.conjugateIsoEquiv_upperStarId A V)
+  have h := conjugateEquiv_counit (Etale.upperStarLowerStarAdjunction A (𝟙 V))
+    (Adjunction.id (C := Sheaf V.smallEtaleTopology A)) (Etale.upperStarId A V).inv F
+  rw [hconj] at h
+  simpa using h.symm
+
+end Id
+
 section Comp
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
@@ -250,18 +296,112 @@ open Etale
 
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
 étale sheaves. -/
-noncomputable def Etale.lowerStarComp : (h₁)_*[A] ⋙ (h₂)_*[A] ≅ (h₁ ≫ h₂)_*[A] :=
-  GrothendieckTopology.lowerStarComp A @Etale @Etale le_rfl h₁ h₂
+noncomputable def Etale.lowerStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) : (h₁)_*[A] ⋙ (h₂)_*[A] ≅ (h₁₂)_*[A] :=
+  GrothendieckTopology.lowerStarComp A @Etale @Etale le_rfl h₁ h₂ h₁₂ hh₁₂
 
 section UpperStar
 
 /-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale
 sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
-noncomputable def Etale.upperStarComp : (h₁ ≫ h₂)^*[A] ≅ (h₂)^*[A] ⋙ (h₁)^*[A] :=
-  GrothendieckTopology.upperStarComp A @Etale @Etale le_rfl h₁ h₂
+noncomputable def Etale.upperStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) : (h₁₂)^*[A] ≅ (h₂)^*[A] ⋙ (h₁)^*[A] :=
+  GrothendieckTopology.upperStarComp A @Etale @Etale le_rfl h₁ h₂ h₁₂ hh₁₂
+
+/-- Under the conjugation bijection between `(h₂)^* ⋙ (h₁)^* ⊣ (h₁)_* ⋙ (h₂)_*` and
+`(h₁ ≫ h₂)^* ⊣ (h₁ ≫ h₂)_*`, the composition isomorphism of the pullbacks corresponds to
+the composition isomorphism of the pushforwards. -/
+lemma Etale.conjugateIsoEquiv_upperStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) :
+    conjugateIsoEquiv ((Etale.upperStarLowerStarAdjunction A h₂).comp
+        (Etale.upperStarLowerStarAdjunction A h₁)) (Etale.upperStarLowerStarAdjunction A h₁₂)
+      (Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂) = Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂ :=
+  GrothendieckTopology.conjugateIsoEquiv_upperStarComp A @Etale @Etale le_rfl h₁ h₂ h₁₂ hh₁₂
+
+/-- The counit form of `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`:
+transposing the composition isomorphism of the pullbacks along the adjunctions
+`h^* ⊣ h_*` gives the composition isomorphism of the pushforwards. -/
+lemma Etale.upperStarComp_inv_app_counit_app (F : Sheaf T.smallEtaleTopology A)
+    (h₁₂ : T ⟶ R := h₁ ≫ h₂) (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) :
+    (Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂).inv.app (((h₁₂)_*[A]).obj F) ≫
+        (Etale.upperStarLowerStarAdjunction A h₁₂).counit.app F =
+      ((h₁)^*[A]).map (((h₂)^*[A]).map ((Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).inv.app F)) ≫
+        ((h₁)^*[A]).map ((Etale.upperStarLowerStarAdjunction A h₂).counit.app
+          (((h₁)_*[A]).obj F)) ≫
+        (Etale.upperStarLowerStarAdjunction A h₁).counit.app F := by
+  have hconj : conjugateEquiv (Etale.upperStarLowerStarAdjunction A h₁₂)
+      ((Etale.upperStarLowerStarAdjunction A h₂).comp
+        (Etale.upperStarLowerStarAdjunction A h₁))
+      (Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂).inv =
+      (Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).inv :=
+    congrArg Iso.inv (Etale.conjugateIsoEquiv_upperStarComp A h₁ h₂ h₁₂ hh₁₂)
+  have h := conjugateEquiv_counit (Etale.upperStarLowerStarAdjunction A h₁₂)
+    ((Etale.upperStarLowerStarAdjunction A h₂).comp
+      (Etale.upperStarLowerStarAdjunction A h₁))
+    (Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂).inv F
+  rw [hconj] at h
+  simpa using h.symm
 
 end UpperStar
 
 end Comp
+
+section Coherence
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable {R S T : Scheme.{u}}
+
+open Etale
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The left unit law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
+lemma Etale.lowerStarComp_id_left (h₂ : S ⟶ R) :
+    Etale.lowerStarComp A (𝟙 S) h₂ h₂ (Category.id_comp h₂).symm =
+      Functor.isoWhiskerRight (Etale.lowerStarId A S) (h₂)_*[A] ≪≫ ((h₂)_*[A]).leftUnitor :=
+  GrothendieckTopology.lowerStarComp_id_left A @Etale @Etale le_rfl h₂
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The right unit law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
+lemma Etale.lowerStarComp_id_right (h₁ : T ⟶ S) :
+    Etale.lowerStarComp A h₁ (𝟙 S) h₁ (Category.comp_id h₁).symm =
+      Functor.isoWhiskerLeft (h₁)_*[A] (Etale.lowerStarId A S) ≪≫ ((h₁)_*[A]).rightUnitor :=
+  GrothendieckTopology.lowerStarComp_id_right A @Etale @Etale le_rfl h₁
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The associativity law for `AlgebraicGeometry.Etale.lowerStarComp`. -/
+lemma Etale.lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)
+    (fgh : X ⟶ V := f ≫ g ≫ h) (hfgh : fgh = f ≫ g ≫ h := by cat_disch) :
+    ((f)_*[A]).associator (g)_*[A] (h)_*[A] ≪≫
+        Functor.isoWhiskerLeft (f)_*[A] (Etale.lowerStarComp A g h) ≪≫
+          Etale.lowerStarComp A f (g ≫ h) fgh hfgh =
+      Functor.isoWhiskerRight (Etale.lowerStarComp A f g) (h)_*[A] ≪≫
+        Etale.lowerStarComp A (f ≫ g) h fgh (by rw [hfgh, Category.assoc]) :=
+  GrothendieckTopology.lowerStarComp_assoc A @Etale @Etale le_rfl f g h fgh hfgh
+
+/-- The left unit law for `AlgebraicGeometry.Etale.upperStarComp`. -/
+lemma Etale.upperStarComp_id_left (h₂ : S ⟶ R) :
+    Etale.upperStarComp A (𝟙 S) h₂ h₂ (Category.id_comp h₂).symm =
+      ((h₂)^*[A]).rightUnitor.symm ≪≫
+        Functor.isoWhiskerLeft (h₂)^*[A] (Etale.upperStarId A S).symm :=
+  GrothendieckTopology.upperStarComp_id_left A @Etale @Etale le_rfl h₂
+
+/-- The right unit law for `AlgebraicGeometry.Etale.upperStarComp`. -/
+lemma Etale.upperStarComp_id_right (h₁ : T ⟶ S) :
+    Etale.upperStarComp A h₁ (𝟙 S) h₁ (Category.comp_id h₁).symm =
+      ((h₁)^*[A]).leftUnitor.symm ≪≫
+        Functor.isoWhiskerRight (Etale.upperStarId A S).symm (h₁)^*[A] :=
+  GrothendieckTopology.upperStarComp_id_right A @Etale @Etale le_rfl h₁
+
+/-- The associativity law for `AlgebraicGeometry.Etale.upperStarComp`. -/
+lemma Etale.upperStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)
+    (fgh : X ⟶ V := f ≫ g ≫ h) (hfgh : fgh = f ≫ g ≫ h := by cat_disch) :
+    Etale.upperStarComp A f (g ≫ h) fgh hfgh ≪≫
+        Functor.isoWhiskerRight (Etale.upperStarComp A g h) (f)^*[A] ≪≫
+          ((h)^*[A]).associator (g)^*[A] (f)^*[A] =
+      Etale.upperStarComp A (f ≫ g) h fgh (by rw [hfgh, Category.assoc]) ≪≫
+        Functor.isoWhiskerLeft (h)^*[A] (Etale.upperStarComp A f g) :=
+  GrothendieckTopology.upperStarComp_assoc A @Etale @Etale le_rfl f g h fgh hfgh
+
+end Coherence
 
 end AlgebraicGeometry
