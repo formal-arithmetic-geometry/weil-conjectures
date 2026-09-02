@@ -33,6 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 section Closed
 

@@ -64,6 +64,7 @@ namespace AlgebraicGeometry
 section LowerShriek
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 open Etale
@@ -75,7 +76,7 @@ def Etale.openImmersionRestriction :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf U.smallEtaleTopology A :=
   GrothendieckTopology.localizationRestriction A @Etale @Etale le_rfl j inferInstance
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The sections of `j^* G` over `T → U` are the sections of `G` over `T → U → X`. -/
 lemma Etale.openImmersionRestriction_obj_val_obj (G : Sheaf X.smallEtaleTopology A)
     (b : U.Etale) :
@@ -144,8 +145,9 @@ are left exact: the first by the `P`-general
 `CategoryTheory.GrothendieckTopology.preservesFiniteLimits_op_lan_overMap`, the second by
 the left exactness of sheafification, which is the content of `HasSheafify` beyond the
 `HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
-coefficient category `A`, the second by the sorried instance of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
+coefficient category `A`, the second by the instance of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, for `A` with
+`CategoryTheory.HasSmallSiteSheafify`. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by
   have heq : (j)_!open[A] =
