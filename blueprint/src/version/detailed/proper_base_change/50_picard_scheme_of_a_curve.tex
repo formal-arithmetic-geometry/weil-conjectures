@@ -1128,10 +1128,11 @@ Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial}
 \uses{def:pc-smooth-morphism}
 Smoothness of a ring map is Algebra, Definition~10.137.1
 (\stacksproject{00T2}); that a smooth ring map becomes standard smooth
-after inverting a single element, and that the projection to the
-remaining coordinates is then \'etale, is Morphisms of Schemes,
-Lemma~29.37.21 (\stacksproject{054L}).  Both are available in Mathlib,
-so this is a leaf of the plan.
+after inverting a single element is Algebra, Lemma~10.137.9
+(\stacksproject{00TA}); and that the projection to the remaining
+coordinates is then \'etale is Morphisms of Schemes, Lemma~29.37.21
+(\stacksproject{054L}).  All three are available in Mathlib, so this is
+a leaf of the plan.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -2228,23 +2229,27 @@ claim.  (The same applies to base changes $X_K$: see
 % Cited.
 \begin{lemma}[Local criterion for smoothness of a ring map]
 \label{lem:pc-smooth-local-criterion}
-Let $R\to A$ be a ring map and let $\mathfrak q\subset A$ be a prime lying over the prime
-$\mathfrak p\subset R$.  Assume there is $g\in A$, $g\notin\mathfrak q$, such that
-$R\to A_g$ is of finite presentation, that $R_{\mathfrak p}\to A_{\mathfrak q}$ is flat, and
-that the fibre $A\otimes_R\kappa(\mathfrak p)$ is smooth over $\kappa(\mathfrak p)$ at the
-prime corresponding to $\mathfrak q$.  Then $R\to A$ is
-\hyperref[def:pc-smooth-morphism]{smooth} at $\mathfrak q$.
+Let $R\to A$ be a flat ring map of finite presentation and let $\mathfrak q\subset A$ be a
+prime lying over the prime $\mathfrak p\subset R$.  If the fibre
+$A\otimes_R\kappa(\mathfrak p)$ is smooth over $\kappa(\mathfrak p)$, then $R\to A$ is
+\hyperref[def:pc-smooth-morphism]{smooth} at $\mathfrak q$.  Consequently, if every fibre
+$A\otimes_R\kappa(\mathfrak p)$, for $\mathfrak p\subset R$ prime, is smooth over
+$\kappa(\mathfrak p)$, then $R\to A$ is smooth.
 \uses{def:pc-smooth-morphism,def:pc-base-change}
-% Mathlib: flat plus finitely presented plus formally smooth fibres implies smooth.
+% Mathlib: flat plus finitely presented plus formally smooth fibres implies smooth,
+% at a given prime and globally.
 \mathlibok\ \lean{Algebra.IsSmoothAt.of_formallySmooth_fiber,
 Algebra.Smooth.of_formallySmooth_fiber}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-smooth-morphism}
-This is Algebra, Lemma~10.137.16 (\stacksproject{00TF}): after inverting one element $A$
-becomes a relative global complete intersection whose Jacobian is invertible at
-$\mathfrak q$, that is, standard smooth over $R$.  The statement is available in Mathlib, so
-this is a leaf of the plan.
+This is a special case of Algebra, Lemma~10.137.16 (\stacksproject{00TF}), namely the case
+$g=1$ with the whole fibre smooth: after inverting one element $A$ becomes a relative global
+complete intersection whose Jacobian is invertible at $\mathfrak q$, that is, standard smooth
+over $R$.  It is this special case, and not the localised statement of the tag, that is
+available in Mathlib, so this is a leaf of the plan.  (The fibre is again of finite
+presentation over $\kappa(\mathfrak p)$, so for it smoothness and formal smoothness agree,
+which is how Mathlib phrases the hypothesis.)
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -2308,8 +2313,8 @@ is flat and every fibre $X_s$ is smooth over $\kappa(s)$.
 may assume $S=\Spec(R)$ and $X=\Spec(A)$ with $R\to A$ of finite
 presentation and flat and with all fibres smooth.  For every prime
 $\mathfrak q\subset A$, lying over $\mathfrak p\subset R$, the
-hypotheses of \Cref{lem:pc-smooth-local-criterion} then hold with
-$g=1$, so $R\to A$ is smooth at $\mathfrak q$; as $\mathfrak q$ was
+hypotheses of \Cref{lem:pc-smooth-local-criterion} hold, so $R\to A$
+is smooth at $\mathfrak q$; as $\mathfrak q$ was
 arbitrary, $f$ is smooth.  (This is Morphisms of Schemes,
 Lemma~29.35.3, \stacksproject{01V8}.)
 
