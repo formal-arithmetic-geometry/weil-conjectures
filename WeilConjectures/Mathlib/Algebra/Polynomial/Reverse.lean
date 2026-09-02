@@ -8,15 +8,40 @@ module
 public import Mathlib.Algebra.Polynomial.Reverse
 
 /-!
-# Reversing a product of linear factors
+# Complements on the reversal of a polynomial
 
-The reverse of the monic linear polynomial `X - a` is `1 - a * X`; consequently the reverse of a
-product `∏ (X - aᵢ)` is `∏ (1 - aᵢ * X)`.
+## Main results
+
+- `Polynomial.reverse_reverse` — reversal is an involution on polynomials with nonzero constant
+  coefficient.
+- `Polynomial.reverse_map` — reversal commutes with the coefficient map along an injective ring
+  homomorphism.
+- `Polynomial.reverse_multiset_prod_X_sub_C` — the reverse of a product `∏ (X - aᵢ)` of monic
+  linear factors is `∏ (1 - aᵢ * X)`.
 -/
 
 @[expose] public section
 
 namespace Polynomial
+
+section Semiring
+
+variable {R S : Type*} [Semiring R] [Semiring S]
+
+/-- Reversing twice is the identity on polynomials with vanishing trailing degree, i.e. on
+polynomials with nonzero constant coefficient. -/
+theorem reverse_reverse {p : R[X]} (hp : p.natTrailingDegree = 0) : p.reverse.reverse = p := by
+  have h : p.reverse.natDegree = p.natDegree := by rw [reverse_natDegree, hp, Nat.sub_zero]
+  change reflect p.reverse.natDegree p.reverse = p
+  rw [h]
+  exact reflect_reflect
+
+/-- Reversal commutes with the coefficient map along an injective ring homomorphism. -/
+theorem reverse_map {f : R →+* S} (hf : Function.Injective f) (p : R[X]) :
+    (p.map f).reverse = p.reverse.map f := by
+  simp only [reverse, reflect_map, natDegree_map_eq_of_injective hf]
+
+end Semiring
 
 variable {R : Type*} [CommRing R]
 
