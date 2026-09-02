@@ -90,7 +90,7 @@ noncomputable def mapHomotopyCategoryPlusIdIso :
       (HomotopyCategory.Plus.ι C).leftUnitor.symm)
 
 @[simp]
-lemma map_mapHomotopyCategoryPlusIdIso_hom_app (K : HomotopyCategory.Plus C) :
+lemma ι_map_mapHomotopyCategoryPlusIdIso_hom_app (K : HomotopyCategory.Plus C) :
     (HomotopyCategory.Plus.ι C).map ((mapHomotopyCategoryPlusIdIso C).hom.app K) =
       (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)).hom.app K.obj := by
   rw [mapHomotopyCategoryPlusIdIso, fullyFaithfulCancelRight_hom_app,
@@ -98,7 +98,7 @@ lemma map_mapHomotopyCategoryPlusIdIso_hom_app (K : HomotopyCategory.Plus C) :
   simp
 
 @[simp]
-lemma map_mapHomotopyCategoryPlusIdIso_inv_app (K : HomotopyCategory.Plus C) :
+lemma ι_map_mapHomotopyCategoryPlusIdIso_inv_app (K : HomotopyCategory.Plus C) :
     (HomotopyCategory.Plus.ι C).map ((mapHomotopyCategoryPlusIdIso C).inv.app K) =
       (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)).inv.app K.obj := by
   rw [mapHomotopyCategoryPlusIdIso, fullyFaithfulCancelRight_inv_app,

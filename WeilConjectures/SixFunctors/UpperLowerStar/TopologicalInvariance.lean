@@ -71,8 +71,7 @@ because `f^*` is an equivalence, hence fully faithful and exact and preserving i
 objects, and because the category of étale sheaves on `Y` has enough injective objects,
 being Grothendieck abelian.
 
-Two different open inputs are used here, and it is worth keeping them apart.
-`Etale.sheafEquivalence` and `Etale.isEquivalence_lowerStar` depend only on the `sorry` in
+`Etale.sheafEquivalence` and `Etale.isEquivalence_lowerStar` depend only on
 `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, which is why they are stated first, for
 arbitrary coefficients. The `upperStar` and cohomology statements additionally inherit the
 `sorry`s behind the instances
