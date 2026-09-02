@@ -281,11 +281,15 @@ $\bar z'$.
 \begin{lemma}[Independence of the scheme structure]
 \label{lemma:constructible-immersion-independence}
 \uses{lemma:constructible-universal-homeomorphism-invariance,lemma:constructible-pullback-stratification}
+\lean{AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset,
+  AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq}
+\leanok
 Let $a\colon Z\to X$ and $b\colon Z'\to X$ be immersions with the same
 image.  Then $a^*\mathcal F$ is finite locally constant if and only if
 $b^*\mathcal F$ is.
 \end{lemma}
 \begin{proof}
+\leanok
 Let $W=Z\times_XZ'$ with projections $p\colon W\to Z$ and $q\colon W\to Z'$.
 The projection $p$ is an immersion, as a base change of $b$, and it is
 surjective, its image being $a^{-1}(b(Z'))=a^{-1}(a(Z))=Z$.  A surjective
@@ -304,16 +308,22 @@ $b^*\mathcal F$ is.
 
 \begin{definition}[Refinement]\label{def:constructible-refines}
 \uses{def:constructible-stratification}
+\lean{AlgebraicGeometry.Scheme.Stratification.Refines}
+\leanok
 A stratification $(T_l)_{l<m}$ of $T$ \emph{refines} a stratification
 $(T_k)_{k<n}$ if every $T_l$ is contained in some $T_k$.
 \end{definition}
 
 \begin{lemma}[Common refinement]\label{lemma:constructible-common-refinement}
 \uses{def:constructible-refines}
+\lean{AlgebraicGeometry.Scheme.Stratification.inter,
+  AlgebraicGeometry.Scheme.Stratification.exists_refines}
+\leanok
 Two stratifications $(\iota_k\colon Z_k\to X)_{k<n}$ and
 $(\kappa_l\colon W_l\to X)_{l<m}$ of a scheme $X$ have a common refinement.
 \end{lemma}
 \begin{proof}
+\leanok
 Index the pairs $(k,l)$ by $k+nl<nm$.  The intersections $X_k\cap X'_l$ are
 locally closed (an intersection of two locally closed sets is locally
 closed), pairwise disjoint, and cover $X$.  Take as scheme on the stratum
@@ -327,12 +337,16 @@ both given ones.
 \begin{lemma}[Constructibility passes to refinements]
 \label{lemma:constructible-of-refines}
 \uses{def:constructible-refines,lemma:constructible-immersion-independence,prop:constructible-pullback}
+\lean{AlgebraicGeometry.Scheme.Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar,
+  AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_refines}
+\leanok
 Let $(\iota_k\colon Z_k\to X)_k$ be a stratification with all
 $\iota_k^*\mathcal F$ finite locally constant, and let
 $(\kappa_l\colon W_l\to X)_l$ refine it.  Then all $\kappa_l^*\mathcal F$
 are finite locally constant.
 \end{lemma}
 \begin{proof}
+\leanok
 Fix $l$ and choose $k$ with $X'_l\subseteq X_k$.  The base change
 $\kappa'_l\colon W_l\times_XZ_k\to Z_k$ of $\kappa_l$ is an immersion, and
 the composite $\iota_k\circ\kappa'_l\colon W_l\times_XZ_k\to X$ is an
