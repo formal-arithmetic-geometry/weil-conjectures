@@ -125,6 +125,7 @@ public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.Local
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
@@ -369,7 +370,10 @@ public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
+public import WeilConjectures.Mathlib.Topology.Closure
 public import WeilConjectures.Mathlib.Topology.Constructions
+public import WeilConjectures.Mathlib.Topology.GDelta.Basic
+public import WeilConjectures.Mathlib.Topology.LocallyClosed
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
@@ -405,8 +409,8 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
-public import WeilConjectures.Topology.Stratification
-public import WeilConjectures.Topology.StratificationDense
+public import WeilConjectures.Topology.Stratification.Basic
+public import WeilConjectures.Topology.Stratification.Dense
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.Fatou

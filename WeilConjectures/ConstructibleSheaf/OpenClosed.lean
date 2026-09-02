@@ -57,7 +57,6 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.of_isZero {F : Sheaf X.smallEtaleTo
 /-- A zero sheaf is locally constant, trivialised by the identity cover. -/
 lemma IsLocallyConstantSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : IsZero F) :
     IsLocallyConstantSheaf F := by
-  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
   refine ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ ?_⟩⟩⟩
   rw [isConstant_over_iff_upperStar]
   exact Sheaf.IsConstant.of_isZero ((Etale.upperStar A _).map_isZero hF)

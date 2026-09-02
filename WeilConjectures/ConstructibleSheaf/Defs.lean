@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
-public import WeilConjectures.Topology.Stratification
+public import WeilConjectures.Topology.Stratification.Basic
 
 /-!
 # Constructible sheaves on the small étale site
@@ -83,7 +83,7 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
 
 @[expose] public section
 
-universe u u'
+universe v u u'
 
 open CategoryTheory Limits Opposite
 
@@ -125,7 +125,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The object of the small étale site of `X` given by a member of an étale cover
 of `X`. -/
-abbrev Cover.etalePrecoverageToEtale (𝒰 : Cover.{u} etalePrecoverage X) (i : 𝒰.I₀) : X.Etale :=
+abbrev Cover.etalePrecoverageToEtale (𝒰 : Cover.{v} etalePrecoverage X) (i : 𝒰.I₀) : X.Etale :=
   MorphismProperty.Over.mk ⊤ (𝒰.f i) (𝒰.map_prop i)
 
 /-- The datum of a trivialization of a sheaf `F` on the small étale site of `X`: an étale
@@ -157,7 +157,6 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
     {F : Sheaf X.smallEtaleTopology A} (h : F.IsConstant X.smallEtaleTopology) :
     IsLocallyConstantSheaf F :=
   have := h
-  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
   ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ F.isConstant_over _⟩⟩⟩
 
 end LocallyConstant

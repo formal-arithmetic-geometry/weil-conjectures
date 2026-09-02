@@ -35,6 +35,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
+- The classes of `AlgebraicGeometry.Scheme.etalePrecoverage` inherited from the precoverage
+  of the class of étale morphisms: `hasIsos_etalePrecoverage`,
+  `isStableUnderComposition_etalePrecoverage`, `isStableUnderBaseChange_etalePrecoverage`
+  and `jointlySurjective_etalePrecoverage`.
 -/
 
 @[expose] public section
@@ -48,6 +52,28 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme
 
 variable {A : Type u'} [Category.{v} A] {X Y : Scheme.{u}}
+
+section Precoverage
+
+/-- Isomorphisms are étale, so a family containing an isomorphism is an étale covering. -/
+instance hasIsos_etalePrecoverage : etalePrecoverage.{u}.HasIsos :=
+  inferInstanceAs (precoverage @AlgebraicGeometry.Etale).HasIsos
+
+/-- Étale coverings are stable under composition, étale morphisms being so. -/
+instance isStableUnderComposition_etalePrecoverage :
+    etalePrecoverage.{u}.IsStableUnderComposition :=
+  inferInstanceAs (precoverage @AlgebraicGeometry.Etale).IsStableUnderComposition
+
+/-- Étale coverings are stable under base change, étale morphisms being so. -/
+instance isStableUnderBaseChange_etalePrecoverage :
+    etalePrecoverage.{u}.IsStableUnderBaseChange :=
+  inferInstanceAs (precoverage @AlgebraicGeometry.Etale).IsStableUnderBaseChange
+
+/-- The members of an étale covering are jointly surjective. -/
+instance jointlySurjective_etalePrecoverage : JointlySurjective etalePrecoverage.{u} :=
+  inferInstanceAs (JointlySurjective (precoverage @AlgebraicGeometry.Etale))
+
+end Precoverage
 
 section Functoriality
 

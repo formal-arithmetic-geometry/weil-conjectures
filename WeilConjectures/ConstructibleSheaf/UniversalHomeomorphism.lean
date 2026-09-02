@@ -19,10 +19,13 @@ essentially surjective on étale schemes (Stacks 04DZ), a trivialising cover of 
 from an étale cover of `Y`, and `G` is locally constant if `u^* G` is
 (`AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.of_upperStar`).
 
-Finiteness of the stalks descends along a *surjective closed immersion* `p : W ⟶ Z`: every
-geometric point of `Z` lifts to `W` (`AlgebraicGeometry.Scheme.exists_comp_eq_of_surjective`,
-the residue field maps of a closed immersion being surjective), and the stalk of `p^* G` at a
-lift is the stalk of `G` (`AlgebraicGeometry.Scheme.IsFiniteSheaf.of_upperStar`,
+Finiteness of the stalks is local for a jointly surjective family of morphisms which are
+surjective on stalks (`AlgebraicGeometry.Scheme.IsFiniteSheaf.of_jointly_surjective`): every
+geometric point of the base lifts to a member of the family
+(`AlgebraicGeometry.Scheme.exists_comp_eq_of_mem_range`, the residue field maps of a morphism
+surjective on stalks being surjective), and the stalk of the pullback at a lift is the stalk.
+In particular finiteness descends along a *surjective closed immersion*
+(`AlgebraicGeometry.Scheme.IsFiniteSheaf.of_upperStar`,
 `IsFiniteLocallyConstantSheaf.of_upperStar`). This is the case needed for the independence of
 constructibility from the scheme structures on the strata, see
 `WeilConjectures.ConstructibleSheaf.Refinement`.
@@ -111,9 +114,6 @@ variable {X Y : Scheme.{u}} (u : X ⟶ Y) [IsUniversalHomeomorphism u]
 
 attribute [local instance] Scheme.Hom.isEquivalence_etale
 
-instance : JointlySurjective etalePrecoverage.{u} :=
-  inferInstanceAs (JointlySurjective (precoverage @Etale))
-
 /-- **Local constancy descends along a universal homeomorphism** `u : X ⟶ Y`: every member
 `V' ⟶ X` of a trivialising cover of `u^* G` is the base change of an étale `V ⟶ Y`
 (Stacks 04DZ), the `V` cover `Y` since `u` is surjective, and `V ×_Y X ⟶ V` is again a
@@ -158,9 +158,9 @@ theorem IsLocallyConstantSheaf.of_upperStar (G : Sheaf Y.smallEtaleTopology A)
       (Etale.upperStar A (e i).hom.left).obj
         ((Etale.upperStar A (𝒰.f i)).obj ((Etale.upperStar A u).obj G)) :=
     ((Etale.upperStarComp A (pullback.fst (V i).hom u) (V i).hom).app G).symm ≪≫
-      eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj G) pullback.condition) ≪≫
+      Etale.upperStarCongr A pullback.condition G ≪≫
       (Etale.upperStarComp A (pullback.snd (V i).hom u) u).app G ≪≫
-      eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj ((Etale.upperStar A u).obj G)) hsnd) ≪≫
+      Etale.upperStarCongr A hsnd ((Etale.upperStar A u).obj G) ≪≫
       (Etale.upperStarComp A (e i).hom.left (𝒰.f i)).app ((Etale.upperStar A u).obj G)
   exact Sheaf.isConstant_congr _ e'.symm
 
@@ -172,20 +172,46 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-variable {W Z : Scheme.{u}} (p : W ⟶ Z) [IsClosedImmersion p] [Surjective p]
+variable {W Z : Scheme.{u}}
 
-/-- **Finiteness descends along a surjective closed immersion** `p : W ⟶ Z`: a geometric
-point of `Z` lifts to `W`, and the stalk of `p^* G` at the lift is the stalk of `G`.
-(blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/
-theorem IsFiniteSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopology A)
-    [IsFiniteSheaf ((Etale.upperStar A p).obj G)] : IsFiniteSheaf G where
+/-- **Finiteness is local for a jointly surjective family of morphisms surjective on
+stalks**: a geometric point of `Z` lifts to some `Y i`, and the stalk of `(f i)^* G` at the
+lift is the stalk of `G`.
+
+```
+   Spec Ω ────s'───→ Y i
+       ╲              │
+      s ╲             │ f i
+         ╲            ↓
+          ──────────→ Z
+```
+-/
+theorem IsFiniteSheaf.of_jointly_surjective {ι : Type*} {Y : ι → Scheme.{u}}
+    (f : ∀ i, Y i ⟶ Z) [∀ i, SurjectiveOnStalks (f i)]
+    (hf : ∀ z : Z, ∃ i, z ∈ Set.range (f i)) (G : Sheaf Z.smallEtaleTopology A)
+    [∀ i, IsFiniteSheaf ((Etale.upperStar A (f i)).obj G)] : IsFiniteSheaf G where
   finite_sheafFiber Ω _ _ s := by
-    obtain ⟨s', rfl⟩ := exists_comp_eq_of_surjective p s
+    obtain ⟨i, hi⟩ := hf (s (IsLocalRing.closedPoint _))
+    obtain ⟨s', rfl⟩ := exists_comp_eq_of_mem_range (f i) s hi
     have := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA)
-      (F := (Etale.upperStar A p).obj G) Ω s'
+      (F := (Etale.upperStar A (f i)).obj G) Ω s'
     exact Finite.of_equiv
-      (ToType ((pointSmallEtale s').sheafFiber.obj ((Etale.upperStar A p).obj G)))
-      ((CategoryTheory.forget A).mapIso ((Etale.upperStarCompSheafFiberIso A p s').app G)).toEquiv
+      (ToType ((pointSmallEtale s').sheafFiber.obj ((Etale.upperStar A (f i)).obj G)))
+      ((CategoryTheory.forget A).mapIso
+        ((Etale.upperStarCompSheafFiberIso A (f i) s').app G)).toEquiv
+
+variable (p : W ⟶ Z)
+
+/-- **Finiteness descends along a surjective morphism which is surjective on stalks**, for
+instance along a surjective closed immersion: this is the one-member case of
+`AlgebraicGeometry.Scheme.IsFiniteSheaf.of_jointly_surjective`.
+(blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/
+theorem IsFiniteSheaf.of_upperStar [SurjectiveOnStalks p] [Surjective p]
+    (G : Sheaf Z.smallEtaleTopology A) [IsFiniteSheaf ((Etale.upperStar A p).obj G)] :
+    IsFiniteSheaf G :=
+  IsFiniteSheaf.of_jointly_surjective (fun _ : Unit ↦ p) (fun z ↦ ⟨(), p.surjective z⟩) G
+
+variable [IsClosedImmersion p] [Surjective p]
 
 /-- **Finite local constancy descends along a surjective closed immersion.**
 (blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/

@@ -358,49 +358,100 @@ finite sheaves).  By \Cref{lemma:constructible-immersion-independence},
 $\kappa_l^*\mathcal F$ is finite locally constant.
 \end{proof}
 
-\begin{proposition}[Generic constancy]
-\label{prop:constructible-generic-constancy}
-\uses{def:constructible-constructible,lemma:constructible-immersion-independence,prop:constructible-pullback}
-\lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open,
-  Topology.Stratification.dense_iUnion_interior_stratum,
-  AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover}
+\begin{lemma}[Dense union of interiors]
+\label{lemma:constructible-dense-interior}
+\lean{dense_iUnion_interior_of_isLocallyClosed,
+  Topology.Stratification.dense_iUnion_interior_stratum}
 \leanok
-Let $X$ be a scheme and let $\mathcal F\in\shv{\et X}$ be constructible.
-Then there is a dense open $U\subseteq X$ such that $\mathcal F|_U$ is
-finite locally constant.  (No Noetherian hypothesis on $X$ is needed.)
-\end{proposition}
+Let $T$ be a topological space covered by finitely many locally closed
+subsets $L_1,\dots,L_n$.  Then $\bigcup_k\operatorname{int}L_k$ is dense
+in $T$.  In particular this holds for the strata of a stratification of
+$T$.
+\end{lemma}
 \begin{proof}
 \leanok
-Let $(\iota_k\colon Z_k\to X)_{k<n}$ be a stratification witnessing
-constructibility, with strata $X_k=\iota_k(Z_k)$, and let
-$U=\bigcup_kU_k$ with $U_k$ the interior of $X_k$ in $X$.
-
-\emph{$U$ is dense.}  A locally closed subset $L$ of a topological space
-with empty interior is nowhere dense: writing $L=V\cap\overline L$ with $V$
-open, the open set $\operatorname{int}\overline L$ meets $V$ inside
+A locally closed subset $L$ with empty interior is nowhere dense: writing
+$L=V\cap\overline L$ with $V$ open, the open set
+$\operatorname{int}\overline L$ meets $V$ inside
 $\operatorname{int}L=\emptyset$, and an open subset of $\overline V$
 disjoint from $V$ is empty.  A finite union of nowhere dense sets is
 nowhere dense (if $A$ is closed with empty interior and $B$ has empty
 interior, then $\operatorname{int}(A\cup B)\setminus A$ is an open subset
 of $B$, hence empty, so $\operatorname{int}(A\cup B)\subseteq
-\operatorname{int}A=\emptyset$).  Now $X_k\setminus U_k$ is locally closed
-with empty interior, so $N=\bigcup_k(X_k\setminus U_k)$ is nowhere dense,
-and $X\setminus N\subseteq U$ since the $X_k$ cover $X$; the complement of
-a set with empty interior is dense, hence so is $U$.
+\operatorname{int}A=\emptyset$).  Now $L_k\setminus\operatorname{int}L_k$
+is locally closed with empty interior, since
+$\operatorname{int}(L_k\setminus\operatorname{int}L_k)\subseteq
+\operatorname{int}L_k\setminus\operatorname{int}L_k=\emptyset$; so
+$N=\bigcup_k(L_k\setminus\operatorname{int}L_k)$ is nowhere dense, and
+$T\setminus N\subseteq\bigcup_k\operatorname{int}L_k$ since the $L_k$
+cover $T$.  The complement of a set with empty interior is dense, hence
+so is $\bigcup_k\operatorname{int}L_k$.  Disjointness of the $L_k$ is not
+used.
+\end{proof}
 
-\emph{$\mathcal F|_U$ is finite locally constant.}  The open subsets
-$U_k$ cover $U$, and $\mathcal F|_{U_k}$ is the pullback of $\mathcal F$
-along the open immersion $U_k\to X$, whose image $U_k$ is contained in
-$X_k=\iota_k(Z_k)$; since $\iota_k^*\mathcal F$ is finite locally
-constant, so is $\mathcal F|_{U_k}$ by
+\begin{lemma}[Locality of local constancy and of finiteness]
+\label{lemma:constructible-local}
+\uses{def:constructible-finite-locally-constant}
+\lean{AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.of_cover,
+  AlgebraicGeometry.Scheme.IsFiniteSheaf.of_jointly_surjective,
+  AlgebraicGeometry.Scheme.IsFiniteSheaf.of_openCover,
+  AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover}
+\leanok
+Let $\mathcal G\in\shv{\et X}$.  If the restrictions of $\mathcal G$ to the
+members of an \'etale cover of $X$ are locally constant, then $\mathcal G$
+is locally constant.  If the restrictions of $\mathcal G$ to the members of
+an open cover of $X$ are finite (finite locally constant), then $\mathcal G$
+is finite (finite locally constant).
+\end{lemma}
+\begin{proof}
+\leanok
+For local constancy, choose for each member $U_i\to X$ of the \'etale cover
+a trivialising \'etale cover $(V_{ij}\to U_i)_j$ of $\mathcal G|_{U_i}$.
+The composites $V_{ij}\to U_i\to X$ form an \'etale cover of $X$, and the
+restriction of $\mathcal G$ to $V_{ij}$ is the restriction of
+$\mathcal G|_{U_i}$, hence constant.
+
+For finiteness it suffices that the members of the family be jointly
+surjective and surjective on stalks: a geometric point $s\colon
+\Spec\Omega\to X$ then lifts to a member $Y_i$ containing $s$ in its image,
+because the residue field map of $Y_i$ at the lift is an isomorphism, and
+the stalk of $\mathcal G$ at $s$ is the stalk of $\mathcal G|_{Y_i}$ at the
+lift.  Open immersions are surjective on stalks.  Finite local constancy is
+the conjunction of the two, an open cover being an \'etale cover.
+\end{proof}
+
+\begin{proposition}[Generic constancy]
+\label{prop:constructible-generic-constancy}
+\uses{def:constructible-constructible,lemma:constructible-immersion-independence,lemma:constructible-dense-interior,lemma:constructible-local}
+\lean{AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_iSupInteriorStratum,
+  AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open_isFiniteLocallyConstantSheaf}
+\leanok
+Let $X$ be a scheme and let $\mathcal F\in\shv{\et X}$ be constructible.
+Then there is a dense open $U\subseteq X$ such that $\mathcal F|_U$ is
+finite locally constant.
+\end{proposition}
+\begin{proof}
+\leanok
+No Noetherian hypothesis on $X$ is needed: unlike the classical argument
+through generic points, the one below only uses that a locally closed
+subset minus its interior is nowhere dense.
+
+Let $(\iota_k\colon Z_k\to X)_{k<n}$ be a stratification witnessing
+constructibility, with strata $X_k=\iota_k(Z_k)$, and let
+$U=\bigcup_kU_k$ with $U_k$ the interior of $X_k$ in $X$.  The strata are
+locally closed and cover $X$, so $U$ is dense by
+\Cref{lemma:constructible-dense-interior}.
+
+The open subsets $U_k$ cover $U$, and $\mathcal F|_{U_k}$ is the pullback
+of $\mathcal F$ along the open immersion $U_k\to X$, whose image $U_k$ is
+contained in $X_k=\iota_k(Z_k)$; since $\iota_k^*\mathcal F$ is finite
+locally constant, so is $\mathcal F|_{U_k}$ by
 \Cref{lemma:constructible-immersion-independence} (in the form: for an
 immersion $b$ and any morphism $a$ with image in the image of $b$,
 $b^*\mathcal F$ finite locally constant implies $a^*\mathcal F$ finite
-locally constant).  Finally, a sheaf which is finite locally constant on
-each member of an open cover is finite locally constant: the trivialising
-\'etale covers of the restrictions compose to a trivialising \'etale
-cover, and a geometric point of $U$ lifts to a member of the open cover
-containing its image, where the stalk is unchanged.
+locally constant).  By \Cref{lemma:constructible-local} applied to the open
+cover $(U_k)_k$ of $U$, the sheaf $\mathcal F|_U$ is finite locally
+constant.
 \end{proof}
 
 \section{Finite locally constant sheaves}\label{sec:constructible-flc}

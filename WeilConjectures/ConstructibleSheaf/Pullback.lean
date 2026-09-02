@@ -92,9 +92,6 @@ section LocallyConstant
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
 
-instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
-  inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
-
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- Locally constant sheaves are invariant under isomorphism. -/
 lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
@@ -121,7 +118,7 @@ theorem IsLocallyConstantSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTo
   let e : (Etale.upperStar A (pullback.fst (𝒰.f j) g)).obj ((Etale.upperStar A (𝒰.f j)).obj F) ≅
       (Etale.upperStar A (pullback.snd (𝒰.f j) g)).obj ((Etale.upperStar A g).obj F) :=
     ((Etale.upperStarComp A (pullback.fst (𝒰.f j) g) (𝒰.f j)).app F).symm ≪≫
-      eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition) ≪≫
+      Etale.upperStarCongr A pullback.condition F ≪≫
       (Etale.upperStarComp A (pullback.snd (𝒰.f j) g) g).app F
   exact Sheaf.isConstant_congr _ e
 

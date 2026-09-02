@@ -76,6 +76,8 @@ The site-theoretic inputs of the general definitions are discharged here:
   compatibility of these isomorphisms with the adjunctions `g^* ⊣ g_*`, and
   `AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app` records the unit form for the
   identity.
+- `AlgebraicGeometry.Etale.upperStarCongr`: the transport `f^* F ≅ g^* F` of the pullback
+  along an equality `f = g` of morphisms.
 - `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category; in particular it is left
@@ -255,6 +257,23 @@ example : PreservesFiniteColimits (g)^*[A] := inferInstance
 end Adjunction
 
 end Star
+
+section Congr
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
+
+open Etale
+
+/-- Transport of the pullback of étale sheaves along an equality of morphisms: for
+`h : f = g` the sheaves `f^* F` and `g^* F` are equal, hence canonically isomorphic. This
+names the transport used to compare the pullbacks along the two sides of a commutative
+square. -/
+noncomputable def Etale.upperStarCongr {Z Y : Scheme.{u}} {f g : Z ⟶ Y} (h : f = g)
+    (F : Sheaf Y.smallEtaleTopology A) : ((f)^*[A]).obj F ≅ ((g)^*[A]).obj F :=
+  eqToIso (congrArg (fun m ↦ ((m)^*[A]).obj F) h)
+
+end Congr
 
 section Id
 

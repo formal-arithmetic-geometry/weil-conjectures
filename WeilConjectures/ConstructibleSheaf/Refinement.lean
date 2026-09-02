@@ -82,7 +82,7 @@ theorem IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (h : Set.range a 
     IsFiniteLocallyConstantSheaf.of_iso (F := (Etale.upperStar A (pullback.snd a b)).obj
       ((Etale.upperStar A b).obj F))
       (((Etale.upperStarComp A (pullback.snd a b) b).app F).symm ≪≫
-        eqToIso (congrArg (fun m ↦ (Etale.upperStar A m).obj F) pullback.condition.symm) ≪≫
+        Etale.upperStarCongr A pullback.condition.symm F ≪≫
         (Etale.upperStarComp A (pullback.fst a b) a).app F)
   exact IsFiniteLocallyConstantSheaf.of_upperStar (pullback.fst a b) _
 
