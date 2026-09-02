@@ -237,4 +237,18 @@ end Devissage
 
 end AlgebraicGeometry.Scheme
 
+namespace AlgebraicGeometry.Etale
+
+variable {X : Scheme.{u}} {A : Type u'} [Category.{u + 1} A] [Abelian A]
+  [IsGrothendieckAbelian.{u + 1} A] {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [PreservesFiniteLimits (CategoryTheory.forget A)]
+
+open ZeroObject in
+/-- The constructible sheaves contain a zero object. -/
+instance isConstructibleSheaf_containsZero : (isConstructibleSheaf A X).ContainsZero where
+  exists_zero := ⟨0, isZero_zero _, Scheme.IsConstructibleSheaf.of_isZero (isZero_zero _)⟩
+
+end AlgebraicGeometry.Etale
+
 end

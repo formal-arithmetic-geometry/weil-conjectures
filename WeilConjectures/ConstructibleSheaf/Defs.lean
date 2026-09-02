@@ -39,7 +39,10 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
   [Stacks 09XZ] — together with schemes immersed in `X` realizing the strata) such that
   the pullback of `F` to each stratum is finite locally constant.
 
-All four predicates are `Prop`-valued classes.
+All four predicates are `Prop`-valued classes. Constructibility is moreover packaged as a
+property of objects of the category of étale sheaves
+(`AlgebraicGeometry.Etale.isConstructibleSheaf`), the form consumed by the
+`CategoryTheory.ObjectProperty` API for closure under kernels, cokernels and extensions.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
 Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above the
@@ -246,5 +249,18 @@ class IsConstructibleSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
 end Constructible
 
 end Scheme
+
+namespace Etale
+
+/-- The property of being a constructible sheaf, as a property of objects of the category of
+sheaves on the small étale site of `X`. -/
+abbrev isConstructibleSheaf (A : Type u') [Category.{u + 1} A] [Abelian A]
+    {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+    [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+    [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
+    ObjectProperty (Sheaf X.smallEtaleTopology A) :=
+  Scheme.IsConstructibleSheaf
+
+end Etale
 
 end AlgebraicGeometry

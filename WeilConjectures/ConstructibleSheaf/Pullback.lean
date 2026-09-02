@@ -218,4 +218,17 @@ end Constructible
 
 end AlgebraicGeometry.Scheme
 
+namespace AlgebraicGeometry.Etale
+
+variable {X : Scheme.{u}} {A : Type u'} [Category.{u + 1} A] [Abelian A]
+  [IsGrothendieckAbelian.{u + 1} A] {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+
+/-- Constructible sheaves are closed under isomorphisms. -/
+instance isConstructibleSheaf_isClosedUnderIsomorphisms :
+    (isConstructibleSheaf A X).IsClosedUnderIsomorphisms where
+  of_iso e _h := Scheme.IsConstructibleSheaf.of_iso e
+
+end AlgebraicGeometry.Etale
+
 end

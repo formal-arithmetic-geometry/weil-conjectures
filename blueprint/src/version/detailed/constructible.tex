@@ -594,10 +594,12 @@ kernel and the cokernel of a morphism between constructible sheaves on
 $\et X$, finite direct sums of constructible sheaves, and the middle term of
 a short exact sequence whose outer terms are constructible, are
 constructible.  Consequently the constructible sheaves form a weak Serre
-subcategory of $\shv{\et X}$.  (The kernel and cokernel statements are
-formalised, for any ring $\Lambda$, as are the instances
-\texttt{IsClosedUnderKernels} and \texttt{IsClosedUnderCokernels} of
-\texttt{Etale.constructibleSheaf}; the extension statement is not.)
+subcategory of $\shv{\et X}$.
+\statusnote{The kernel and the cokernel statements are formalised, for any ring
+$\Lambda$, as are the corresponding instances \texttt{IsClosedUnderKernels} and
+\texttt{IsClosedUnderCokernels} of \texttt{Etale.isConstructibleSheaf}.  The
+extension statement, and hence the instance \texttt{IsWeakSerreClass}, is not
+formalised yet.}
 \end{theorem}
 \begin{proof}
 Let $\varphi\colon\mathcal F\to\mathcal F'$ be a morphism of constructible
@@ -616,31 +618,55 @@ finite direct sums.  A full subcategory of an abelian category closed under
 kernels, cokernels and extensions is a weak Serre subcategory.
 \end{proof}
 
+\begin{lemma}[Complexes with cohomology in a weak Serre subcategory]
+\label{lemma:weak-serre-derived-subcategory}
+\lean{DerivedCategory.hasHomologyIn_isTriangulated}
+\leanok
+Let $\mathcal A$ be an abelian category and let $\mathcal C$ be a weak Serre
+subcategory of $\mathcal A$.  The complexes in $D(\mathcal A)$ all of whose
+cohomology objects lie in $\mathcal C$ form a triangulated subcategory.
+\end{lemma}
+\begin{proof}
+\leanok
+The zero object and the shifts are clear.  Let $K\to L\to M\to K[1]$ be a
+distinguished triangle with $K$ and $M$ having cohomology in $\mathcal C$.  The
+long exact cohomology sequence contains the five-term exact sequence
+\[
+  H^{n-1}(M)\to H^{n}(K)\to H^n(L)\to H^n(M)\to H^{n+1}(K),
+\]
+which exhibits $H^n(L)$ as an extension of
+$\ker\bigl(H^n(M)\to H^{n+1}(K)\bigr)$ by
+$\operatorname{coker}\bigl(H^{n-1}(M)\to H^{n}(K)\bigr)$.  Both of these lie in
+$\mathcal C$ since $\mathcal C$ is closed under kernels and cokernels, hence
+$H^n(L)\in\mathcal C$ since $\mathcal C$ is closed under extensions.
+
+Note that the three-term sequence $H^n(K)\to H^n(L)\to H^n(M)$ alone does not
+suffice: a weak Serre subcategory is not closed under subobjects or quotients.
+\statusnote{Formalised for an arbitrary homological functor $F$ on a
+pretriangulated category, with $H^n=F\circ[n]$; the statement above is the case
+of the cohomology functors of $D(\mathcal A)$.}
+\end{proof}
+
 \begin{proposition}[The constructible derived category]
 \label{prop:constructible-derived-subcategory}
-\uses{thm:constructible-serre}
+\uses{thm:constructible-serre,lemma:weak-serre-derived-subcategory}
 \lean{AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_isTriangulated,
-  AlgebraicGeometry.Etale.DerivedCategory.constructibleHomology_isTriangulated,
-  DerivedCategory.homologyProperty_isTriangulated}
+  AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible.isTriangulated}
 \leanok
-Let $\mathcal A=\mathrm{Mod}_\Lambda$ with $\Lambda$ a finite ring.  The
-full subcategory $D^b_c(\et X)$ of the bounded derived category
-$D^b(\shv{\et X})$ consisting of the complexes all of whose cohomology
-sheaves are constructible is a triangulated subcategory.
+Let $\mathcal A=\mathrm{Mod}_\Lambda$ with $\Lambda$ a finite ring and assume
+that the constructible sheaves form a weak Serre subcategory of $\shv{\et X}$
+(\Cref{thm:constructible-serre}).  Then the full subcategory $D^b_c(\et X)$ of
+the bounded derived category $D^b(\shv{\et X})$ consisting of the complexes all
+of whose cohomology sheaves are constructible is a triangulated subcategory, and
+$D^b_c(\et X)$ is a triangulated category.
 \end{proposition}
 \begin{proof}
 \leanok
-For a weak Serre subcategory $\mathcal C$ of an abelian category, the
-complexes with cohomology in $\mathcal C$ form a triangulated subcategory
-of the derived category: the zero object and shifts are clear, and for a
-distinguished triangle $K\to L\to M\to K[1]$ with $K$ and $M$ having
-cohomology in $\mathcal C$, the long exact cohomology sequence
-$H^{n}(K)\to H^n(L)\to H^n(M)$ exhibits $H^n(L)$ as an extension of a
-subobject of $H^n(M)$ (a kernel) by a quotient of $H^n(K)$ (a cokernel),
-both in $\mathcal C$, hence $H^n(L)\in\mathcal C$.  Apply this to the weak
-Serre subcategory of \Cref{thm:constructible-serre}.  (In the formalisation the
-general statement is \texttt{DerivedCategory.homologyProperty\_isTriangulated}, for any
-property of objects closed under isomorphisms, kernels, cokernels and extensions; it is
-applied to the constructible sheaves with these closure properties, the content of
-\Cref{thm:constructible-serre}, as hypotheses.)
+Apply \Cref{lemma:weak-serre-derived-subcategory} to the weak Serre subcategory
+of constructible sheaves and intersect with the bounded objects for the canonical
+$t$-structure; a triangulated subcategory of a triangulated category is again
+triangulated.
+\statusnote{The weak Serre property of the constructible sheaves is a hypothesis
+of the Lean statements, since the extension part of
+\Cref{thm:constructible-serre} is not formalised yet.}
 \end{proof}
