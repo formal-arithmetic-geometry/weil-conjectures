@@ -67,4 +67,31 @@ instance [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [CompactSpace Y] [QuasiSeparatedSpace Y] : HasCompactification f :=
   (NagataCompactification f).hasCompactification
 
+/-! ### Axiom census
+
+Nagata's compactification theorem is unconditional: the checks below are run by the build, so a
+`sorry` reappearing anywhere beneath the theorem or its two intermediate forms breaks compilation
+rather than going unnoticed. -/
+
+/--
+info: 'AlgebraicGeometry.NagataCompactification' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.NagataCompactification
+
+/--
+info: 'AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation
+
+/--
+info: 'AlgebraicGeometry.nagataCompactification_of_isNoetherian' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.nagataCompactification_of_isNoetherian
+
 end AlgebraicGeometry

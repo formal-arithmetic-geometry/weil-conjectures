@@ -968,7 +968,7 @@ Tag 0F3W) of the first comparison projection at the forbidden boundary locus.
 
 The proof consumes the modification layer only through
 `exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary`, and therefore
-depends on `sorryAx` only through Stacks Project Tag 081S; see the module
+through Stacks Project Tag 081S, which is unconditional here; see the module
 docstring. -/
 theorem exists_prepared_keyDisjoint_twoOpenSide [IsNoetherian S] (u : U ⟶ S)
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] (O₁ O₂ : U.Opens)
