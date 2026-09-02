@@ -212,6 +212,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
+public import WeilConjectures.Mathlib.Algebra.Polynomial.AlgebraMap
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
@@ -327,6 +328,7 @@ public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
+public import WeilConjectures.Mathlib.RingTheory.Polynomial.Nilpotent
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology

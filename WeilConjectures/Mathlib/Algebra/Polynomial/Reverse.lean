@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Polynomial.Reverse
+public import Mathlib.Algebra.Polynomial.Splits
 
 /-!
 # Complements on the reversal of a polynomial
@@ -18,6 +19,8 @@ public import Mathlib.Algebra.Polynomial.Reverse
   homomorphism.
 - `Polynomial.reverse_multiset_prod_X_sub_C` — the reverse of a product `∏ (X - aᵢ)` of monic
   linear factors is `∏ (1 - aᵢ * X)`.
+- `Polynomial.Splits.reverse_eq_prod_one_sub_C_mul_X` — the reverse of a split monic polynomial is
+  `∏ (1 - μ * X)` over its roots `μ`, counted with multiplicity.
 -/
 
 @[expose] public section
@@ -59,5 +62,11 @@ theorem reverse_multiset_prod_X_sub_C [NoZeroDivisors R] (s : Multiset R) :
   induction s using Multiset.induction with
   | empty => simpa using reverse_C (1 : R)
   | cons a s ih => simp [ih]
+
+/-- The reverse of a split monic polynomial is the product of `1 - μ * X` over its roots `μ`,
+counted with multiplicity. -/
+theorem Splits.reverse_eq_prod_one_sub_C_mul_X [IsDomain R] {p : R[X]} (hp : p.Splits)
+    (hm : p.Monic) : p.reverse = (p.roots.map fun a ↦ 1 - C a * X).prod := by
+  rw [← reverse_multiset_prod_X_sub_C, ← hp.eq_prod_roots_of_monic hm]
 
 end Polynomial
