@@ -268,7 +268,7 @@ theorem derivedPlus_unit_comp :
   · rw [Category.assoc, hnatL, derivedPlus_unit_app_fac_assoc,
       Functor.rightDerivedFunctorPlusNatTrans_app,
       ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
-      mapHomotopyCategoryPlus_unit_app_comp adjA adjB u l h K]
+      mapHomotopyCategoryPlus_unit_app_comp adjA adjB u.hom l.hom h K]
 
 include h in
 /-- The pointwise form of `Adjunction.derivedPlus_unit_comp`. -/
