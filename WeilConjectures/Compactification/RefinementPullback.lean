@@ -132,4 +132,11 @@ info: 'AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheor
 #print axioms
   AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant
 
+/--
+info: 'AlgebraicGeometry.Compactification.Refinement.isPullback_comp' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.Compactification.Refinement.isPullback_comp
+
 end AlgebraicGeometry.Compactification.Refinement
