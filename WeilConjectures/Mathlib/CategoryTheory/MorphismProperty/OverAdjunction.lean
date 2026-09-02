@@ -30,6 +30,8 @@ that `X ↦ P.Over Q X` becomes a pseudofunctor in all but name.
   `CategoryTheory.MorphismProperty.Over.pullbackComp_id_right`: the two unit laws, expressing
   `MorphismProperty.Over.pullbackComp` for `𝟙 X ≫ g` resp. `f ≫ 𝟙 Z` through
   `MorphismProperty.Over.pullbackId`, `MorphismProperty.Over.pullbackCongr` and the unitors.
+- `CategoryTheory.MorphismProperty.Over.pullbackCongr_refl`: comparing base change along `f`
+  with itself gives the identity isomorphism.
 - `CategoryTheory.MorphismProperty.Over.pullbackComp_assoc`: the associativity law, stating
   that the two ways of building `Over.pullback (f ≫ g ≫ h) ≅ Over.pullback h ⋙
   Over.pullback g ⋙ Over.pullback f` out of `MorphismProperty.Over.pullbackComp` agree.
@@ -137,6 +139,16 @@ lemma Over.pullbackId_inv_app_left_fst {X : T} [P.HasPullbacksAlong (𝟙 X)]
     [P.IsStableUnderBaseChangeAlong (𝟙 X)] (A : P.Over Q X) :
     ((Over.pullbackId P Q X).inv.app A).left ≫ pullback.fst A.hom (𝟙 X) = 𝟙 A.left := by
   simp
+
+omit [Q.RespectsIso] in
+/-- Base change along `f` compared with itself through a proof of `f = f` is the identity
+isomorphism. -/
+@[simp]
+lemma Over.pullbackCongr_refl (f : X ⟶ Y) [P.HasPullbacksAlong f]
+    [P.IsStableUnderBaseChangeAlong f] (h : f = f) :
+    Over.pullbackCongr (P := P) (Q := Q) h = Iso.refl (Over.pullback P Q f) := by
+  ext A : 4
+  apply pullback.hom_ext <;> simp [Over.pullbackCongr, Over.pullback, Over.mk]
 
 section Unit
 
