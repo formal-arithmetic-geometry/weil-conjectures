@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # The restriction of a constant sheaf to a localized site
@@ -153,5 +155,90 @@ theorem exists_mem_forall_exists_constantSheafOverHom_comp_map_eq (M N : ModuleC
   exact hf m
 
 end ModuleCat
+
+end CategoryTheory
+
+namespace CategoryTheory
+
+section Kernel
+
+variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
+  (A : Type u') [Category.{v'} A] [Abelian A] [HasSheafify J A] (U : C) [HasSheafify (J.over U) A]
+  [PreservesFiniteLimits (J.overPullback A U)] [PreservesFiniteColimits (J.overPullback A U)]
+  [PreservesFiniteLimits (constantSheaf (J.over U) A)]
+  {M N : A} (f : M ⟶ N) (φ : (constantSheaf J A).obj M ⟶ (constantSheaf J A).obj N)
+  [IsIso (constantSheafOverHom J A U M)] [IsIso (constantSheafOverHom J A U N)]
+  (h : constantSheafOverHom J A U M ≫ (J.overPullback A U).map φ =
+    (constantSheaf (J.over U) A).map f ≫ constantSheafOverHom J A U N)
+
+include h
+
+/-- If the restriction of `φ : M_C ⟶ N_C` to `J.over U` is induced by `f : M ⟶ N`, the
+restriction of its kernel is the constant sheaf at `kernel f`. -/
+noncomputable def kernelOverIso :
+    (kernel φ).over U ≅ (constantSheaf (J.over U) A).obj (kernel f) :=
+  PreservesKernel.iso (J.overPullback A U) φ ≪≫
+    kernel.mapIso _ ((constantSheaf (J.over U) A).map f) (asIso (constantSheafOverHom J A U M)).symm
+      (asIso (constantSheafOverHom J A U N)).symm (by
+        rw [Iso.symm_hom, Iso.symm_hom, asIso_inv, asIso_inv,
+          ← cancel_epi (constantSheafOverHom J A U M), IsIso.hom_inv_id_assoc, ← Category.assoc,
+          h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]) ≪≫
+    (PreservesKernel.iso (constantSheaf (J.over U) A) f).symm
+
+/-- If the restriction of `φ : M_C ⟶ N_C` to `J.over U` is induced by `f : M ⟶ N`, the
+restriction of its cokernel is the constant sheaf at `cokernel f`. -/
+noncomputable def cokernelOverIso :
+    (cokernel φ).over U ≅ (constantSheaf (J.over U) A).obj (cokernel f) :=
+  have := (constantSheafAdj (J.over U) A Over.mkIdTerminal).leftAdjoint_preservesColimits
+  PreservesCokernel.iso (J.overPullback A U) φ ≪≫
+    cokernel.mapIso _ ((constantSheaf (J.over U) A).map f)
+      (asIso (constantSheafOverHom J A U M)).symm (asIso (constantSheafOverHom J A U N)).symm (by
+        rw [Iso.symm_hom, Iso.symm_hom, asIso_inv, asIso_inv,
+          ← cancel_epi (constantSheafOverHom J A U M), IsIso.hom_inv_id_assoc, ← Category.assoc,
+          h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]) ≪≫
+    (PreservesCokernel.iso (constantSheaf (J.over U) A) f).symm
+
+omit [PreservesFiniteColimits (J.overPullback A U)] in
+/-- The restriction of the kernel of `φ` to `J.over U` is constant. -/
+lemma Sheaf.isConstant_kernel_over : ((kernel φ).over U).IsConstant (J.over U) :=
+  Sheaf.isConstant_of_iso _ (kernelOverIso J A U f φ h)
+
+omit [PreservesFiniteLimits (constantSheaf (J.over U) A)] in
+/-- The restriction of the cokernel of `φ` to `J.over U` is constant. -/
+lemma Sheaf.isConstant_cokernel_over : ((cokernel φ).over U).IsConstant (J.over U) :=
+  Sheaf.isConstant_of_iso _ (cokernelOverIso J A U f φ h)
+
+end Kernel
+
+end CategoryTheory
+
+namespace CategoryTheory
+
+section Instances
+
+variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
+  (A : Type u') [Category.{v'} A]
+
+/-- The constant sheaf functor is left exact, as the composite of the constant presheaf
+functor and sheafification. -/
+instance preservesFiniteLimits_constantSheaf [HasFiniteLimits A] [HasSheafify J A] :
+    PreservesFiniteLimits (constantSheaf J A) :=
+  have : PreservesFiniteLimits (Functor.const Cᵒᵖ : A ⥤ _) :=
+    PreservesLimitsOfSize.preservesFiniteLimits.{0, 0} _
+  comp_preservesFiniteLimits _ _
+
+/-- The restriction of sheaves to a localized site preserves colimits: it is left adjoint to
+the pushforward along the cocontinuous functor `Over.forget U`. -/
+instance preservesColimits_overPullback (U : C)
+    [∀ P : (Over U)ᵒᵖ ⥤ A, (Over.forget U).op.HasPointwiseRightKanExtension P] :
+    PreservesColimitsOfSize.{v, u} (J.overPullback A U) :=
+  ((Over.forget U).sheafAdjunctionCocontinuous A (J.over U) J).leftAdjoint_preservesColimits
+
+instance preservesFiniteColimits_overPullback (U : C)
+    [∀ P : (Over U)ᵒᵖ ⥤ A, (Over.forget U).op.HasPointwiseRightKanExtension P] :
+    PreservesFiniteColimits (J.overPullback A U) :=
+  PreservesColimitsOfSize.preservesFiniteColimits _
+
+end Instances
 
 end CategoryTheory

@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-!
@@ -167,5 +168,31 @@ instance Etale.DerivedCategory.boundedConstructible_isTriangulated :
     Etale.DerivedCategory.constructibleHomology A X).IsTriangulated
 
 end Triangulated
+
+section ModuleCat
+
+variable {Λ : Type (u + 1)} [Ring Λ]
+
+/-- Constructible sheaves of `Λ`-modules are closed under kernels. -/
+instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderKernels where
+  kernels_le := by
+    rintro _ ⟨f, k, hk, hf⟩
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.1
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.2
+    exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_iso
+      (IsLimit.conePointUniqueUpToIso (kernelIsKernel f) hk)
+      ((Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.kernel f))
+
+/-- Constructible sheaves of `Λ`-modules are closed under cokernels. -/
+instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderCokernels where
+  cokernels_le := by
+    rintro _ ⟨f, k, hk, hf⟩
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.1
+    have := (Etale.constructibleSheaf_iff _ _ _).mp hf.2
+    exact (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).prop_of_iso
+      (IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk)
+      ((Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.cokernel f))
+
+end ModuleCat
 
 end AlgebraicGeometry
