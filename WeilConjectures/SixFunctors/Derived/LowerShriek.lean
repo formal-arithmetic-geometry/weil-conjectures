@@ -38,6 +38,14 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 - `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`, with scoped notation
   `H_c(f)[A](i)`.
 
+The hypothesis `HasCompactification f` of `rightDerivedLowerShriek` and of the functors
+built from it is discharged by Nagata's compactification theorem (the instance registered in
+`WeilConjectures.Compactification.NagataCompactification`, which this file imports through
+`WeilConjectures.SixFunctors.LowerShriek.Defs`): `Rf_!` is available for every separated,
+quasi-compact morphism locally of finite type over a quasi-compact quasi-separated base,
+with no compactification supplied by hand. The `example` after
+`rightDerivedLowerShriekPlus_eq` records this.
+
 -/
 
 @[expose] public section
@@ -132,6 +140,20 @@ lemma rightDerivedLowerShriek_eq : R(f)_![A] =
 
 lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
     Rf_!(HasCompactification.compactification f)[A]+ := rfl
+
+section Nagata
+
+/-- `Rf_!` exists for every separated, quasi-compact morphism locally of finite type to a
+quasi-compact quasi-separated base, by Nagata's compactification theorem: the instance
+`HasCompactification f` needed by `rightDerivedLowerShriek` is found by instance search, so
+no compactification has to be supplied. -/
+noncomputable example {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [CompactSpace Y] [QuasiSeparatedSpace Y] :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
+  R(f)_![A]
+
+end Nagata
 
 end Etale
 
