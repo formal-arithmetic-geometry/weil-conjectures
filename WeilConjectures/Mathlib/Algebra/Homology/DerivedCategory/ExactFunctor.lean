@@ -503,6 +503,8 @@ lemma mapDerivedCategoryPlusCompIso_hom_app_factorsh (K : HomotopyCategory.Plus 
         G.mapDerivedCategoryPlus.map (F.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
         G.mapDerivedCategoryPlusFactorsh.hom.app (F.mapHomotopyCategoryPlus.obj K) =
       (F ⋙ G).mapDerivedCategoryPlusFactorsh.hom.app K := by
+  -- the identity has to be stated at the object in the syntactic form the goal uses,
+  -- otherwise `rw [Category.comp_id]` does not fire
   have hqc : DerivedCategory.Plus.Qh.map
       ((mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).hom.app K) =
       𝟙 ((G.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).obj
@@ -663,6 +665,8 @@ has been cancelled, it being the identity. -/
 lemma mapDerivedCategoryPlusIdIso_hom_app_factorsh (K : HomotopyCategory.Plus C) :
     (mapDerivedCategoryPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) =
       (𝟭 C).mapDerivedCategoryPlusFactorsh.hom.app K := by
+  -- the identity has to be stated at the object in the syntactic form the goal uses,
+  -- otherwise `rw [Category.comp_id]` does not fire
   have hq : DerivedCategory.Plus.Qh.map ((mapHomotopyCategoryPlusIdIso C).hom.app K) =
       𝟙 (((𝟭 C).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).obj K) := by
     rw [mapHomotopyCategoryPlusIdIso_hom_app_eq_id]
