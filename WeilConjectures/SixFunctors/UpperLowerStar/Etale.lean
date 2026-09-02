@@ -361,6 +361,31 @@ lemma Etale.upperStarComp_inv_app_counit_app (F : Sheaf T.smallEtaleTopology A)
   rw [hconj] at h
   simpa using h.symm
 
+/-- The unit form of `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`: transposing
+the composition isomorphism of the pullbacks along the adjunctions `h^* ⊣ h_*` gives the
+composition isomorphism of the pushforwards. This is the counterpart of
+`AlgebraicGeometry.Etale.upperStarComp_inv_app_counit_app` on the unit side. -/
+lemma Etale.upperStarComp_hom_app_unit_app (F : Sheaf R.smallEtaleTopology A)
+    (h₁₂ : T ⟶ R := h₁ ≫ h₂) (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch) :
+    (Etale.upperStarLowerStarAdjunction A h₁₂).unit.app F ≫
+        ((h₁₂)_*[A]).map ((Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂).hom.app F) =
+      ((Etale.upperStarLowerStarAdjunction A h₂).comp
+          (Etale.upperStarLowerStarAdjunction A h₁)).unit.app F ≫
+        (Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).hom.app
+          (((h₁)^*[A]).obj (((h₂)^*[A]).obj F)) := by
+  have hconj : conjugateEquiv ((Etale.upperStarLowerStarAdjunction A h₂).comp
+        (Etale.upperStarLowerStarAdjunction A h₁))
+      (Etale.upperStarLowerStarAdjunction A h₁₂)
+      (Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂).hom =
+      (Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).hom :=
+    congrArg Iso.hom (Etale.conjugateIsoEquiv_upperStarComp A h₁ h₂ h₁₂ hh₁₂)
+  have hh := unit_conjugateEquiv ((Etale.upperStarLowerStarAdjunction A h₂).comp
+      (Etale.upperStarLowerStarAdjunction A h₁))
+    (Etale.upperStarLowerStarAdjunction A h₁₂)
+    (Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂).hom F
+  rw [hconj] at hh
+  exact hh.symm
+
 end UpperStar
 
 end Comp
@@ -396,6 +421,35 @@ lemma Etale.lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
       Functor.isoWhiskerRight (Etale.lowerStarComp A f g) (h)_*[A] ≪≫
         Etale.lowerStarComp A (f ≫ g) h fgh (by rw [hfgh, Category.assoc]) :=
   GrothendieckTopology.lowerStarComp_assoc A @Etale @Etale le_rfl f g h fgh hfgh
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- Absorbing the transport along an equality `h₁ ≫ h₂ = h₁₂` of morphisms into the
+composition isomorphism `AlgebraicGeometry.Etale.lowerStarComp` at `h₁₂`. -/
+lemma Etale.lowerStarComp_trans_eqToIso {W X' Y' : Scheme.{u}} (k₁ : W ⟶ X') (k₂ : X' ⟶ Y')
+    (k₁₂ : W ⟶ Y') (hk : k₁ ≫ k₂ = k₁₂) :
+    Etale.lowerStarComp A k₁ k₂ ≪≫ eqToIso (congrArg (fun g => (g)_*[A]) hk) =
+      Etale.lowerStarComp A k₁ k₂ k₁₂ hk.symm := by
+  subst hk
+  simp
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The associativity law for `AlgebraicGeometry.Etale.lowerStarComp` in the form of an
+equality of natural transformations, with all three composites of the morphisms named. -/
+lemma Etale.lowerStarComp_assoc' {W X Y Z : Scheme.{u}} (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)
+    (fg : W ⟶ Y) (gh : X ⟶ Z) (fgh : W ⟶ Z) (hfg : fg = f ≫ g) (hgh : gh = g ≫ h)
+    (hfgh : fgh = fg ≫ h) :
+    Functor.whiskerRight (Etale.lowerStarComp A f g fg hfg).hom ((h)_*[A]) ≫
+        (Etale.lowerStarComp A fg h fgh hfgh).hom =
+      Functor.whiskerLeft ((f)_*[A]) (Etale.lowerStarComp A g h gh hgh).hom ≫
+        (Etale.lowerStarComp A f gh fgh
+          (by rw [hfgh, hfg, hgh, Category.assoc])).hom := by
+  subst hfg
+  subst hgh
+  subst hfgh
+  have key := congrArg Iso.hom
+    (Etale.lowerStarComp_assoc A f g h ((f ≫ g) ≫ h) (Category.assoc f g h))
+  refine NatTrans.ext (funext fun G => ?_)
+  simpa using (NatTrans.congr_app key G).symm
 
 /-- The left unit law for `AlgebraicGeometry.Etale.upperStarComp`. -/
 lemma Etale.upperStarComp_id_left (h₂ : S ⟶ R) :

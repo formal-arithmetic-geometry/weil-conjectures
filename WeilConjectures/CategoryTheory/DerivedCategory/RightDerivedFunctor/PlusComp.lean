@@ -79,7 +79,9 @@ right derived functors, in `CategoryTheory.Functor.rightDerivedFunctorPlusCompIs
 Finally, `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_id_comp`,
 `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_comp_id` and
 `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_assoc` are the unit and associativity
-laws relating `rightDerivedFunctorPlusCompIso` and `rightDerivedFunctorPlusIdIso`.
+laws relating `rightDerivedFunctorPlusCompIso` and `rightDerivedFunctorPlusIdIso`, and
+`CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'_assoc` is the associativity law for
+the primed composition isomorphism.
 
 -/
 
@@ -423,6 +425,90 @@ lemma rightDerivedFunctorPlusCompIso_assoc [EnoughInjectives D] [EnoughInjective
     rw [← Category.assoc, facR, unitR, Category.assoc, ← Functor.map_comp,
       rightDerivedFunctorPlusCompIso_fac_app, rightDerivedFunctorPlusCompUnit_app,
       Functor.map_comp]
+
+/-- **The associativity law for `Functor.rightDerivedFunctorPlusCompIso'`**: given
+isomorphisms `e₁ : F ⋙ G ≅ FG`, `e₂ : G ⋙ H ≅ GH`, `e₃ : FG ⋙ H ≅ FGH` and
+`e₄ : F ⋙ GH ≅ FGH` compatible in the evident sense, the two ways of comparing
+`R⁺F ⋙ R⁺G ⋙ R⁺H` with `R⁺FGH` agree. -/
+lemma rightDerivedFunctorPlusCompIso'_assoc [EnoughInjectives D] [EnoughInjectives E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ E') (FG : C ⥤ E) (GH : D ⥤ E') (FGH : C ⥤ E')
+    [F.Additive] [G.Additive] [H.Additive] [FG.Additive] [GH.Additive] [FGH.Additive]
+    [F.PreservesInjectiveObjects] [G.PreservesInjectiveObjects]
+    [FG.PreservesInjectiveObjects]
+    (e₁ : F ⋙ G ≅ FG) (e₂ : G ⋙ H ≅ GH) (e₃ : FG ⋙ H ≅ FGH) (e₄ : F ⋙ GH ≅ FGH)
+    (hcompat : whiskerRight e₁.hom H ≫ e₃.hom = whiskerLeft F e₂.hom ≫ e₄.hom) :
+    whiskerRight (rightDerivedFunctorPlusCompIso' F G e₁).hom H.rightDerivedFunctorPlus ≫
+        (rightDerivedFunctorPlusCompIso' FG H e₃).hom =
+      whiskerLeft F.rightDerivedFunctorPlus
+          (rightDerivedFunctorPlusCompIso' G H e₂).hom ≫
+        (rightDerivedFunctorPlusCompIso' F GH e₄).hom := by
+  rw [← cancel_epi (whiskerRight (rightDerivedFunctorPlusCompIso F G).hom
+    H.rightDerivedFunctorPlus)]
+  refine rightDerived_ext ((F ⋙ G).rightDerivedFunctorPlus ⋙ H.rightDerivedFunctorPlus)
+    (rightDerivedFunctorPlusCompUnit (F ⋙ G) H) (HomotopyCategory.Plus.quasiIso C) _ _ _ ?_
+  ext K : 2
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, comp_obj]
+  have hCI'₁ : (rightDerivedFunctorPlusCompIso F G).hom.app (DerivedCategory.Plus.Qh.obj K) ≫
+      (rightDerivedFunctorPlusCompIso' F G e₁).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      (rightDerivedFunctorPlusNatTrans e₁.hom).app (DerivedCategory.Plus.Qh.obj K) := by
+    have hd : (rightDerivedFunctorPlusCompIso' F G e₁).hom =
+        (rightDerivedFunctorPlusCompIso F G).inv ≫
+          rightDerivedFunctorPlusNatTrans e₁.hom := rfl
+    rw [hd, NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  have hunit := rightDerivedFunctorPlusCompUnit_app (F ⋙ G) H K
+  have hfac3 : (rightDerivedFunctorPlusCompUnit FG H).app K ≫
+      (rightDerivedFunctorPlusCompIso' FG H e₃).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e₃.hom).app K) ≫
+        FGH.rightDerivedFunctorPlusUnit.app K :=
+    NatTrans.congr_app (rightDerivedFunctorPlusCompIso'_fac FG H e₃) K
+  have hfac2 : (rightDerivedFunctorPlusCompUnit G H).app (F.mapHomotopyCategoryPlus.obj K) ≫
+      (rightDerivedFunctorPlusCompIso' G H e₂).hom.app
+        (DerivedCategory.Plus.Qh.obj (F.mapHomotopyCategoryPlus.obj K)) =
+      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e₂.hom).app
+          (F.mapHomotopyCategoryPlus.obj K)) ≫
+        GH.rightDerivedFunctorPlusUnit.app (F.mapHomotopyCategoryPlus.obj K) :=
+    NatTrans.congr_app (rightDerivedFunctorPlusCompIso'_fac G H e₂)
+      (F.mapHomotopyCategoryPlus.obj K)
+  have hfac4 : (rightDerivedFunctorPlusCompUnit F GH).app K ≫
+      (rightDerivedFunctorPlusCompIso' F GH e₄).hom.app (DerivedCategory.Plus.Qh.obj K) =
+      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e₄.hom).app K) ≫
+        FGH.rightDerivedFunctorPlusUnit.app K :=
+    NatTrans.congr_app (rightDerivedFunctorPlusCompIso'_fac F GH e₄) K
+  trans DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
+      (whiskerRight e₁.hom H ≫ e₃.hom)).app K) ≫ FGH.rightDerivedFunctorPlusUnit.app K
+  · have hnatH := H.rightDerivedFunctorPlusUnit.naturality
+      ((NatTrans.mapHomotopyCategoryPlus e₁.hom).app K)
+    simp only [comp_obj, comp_map] at hnatH
+    have hbridge : H.mapHomotopyCategoryPlus.map
+        ((NatTrans.mapHomotopyCategoryPlus e₁.hom).app K) =
+        (NatTrans.mapHomotopyCategoryPlus (whiskerRight e₁.hom H)).app K := rfl
+    rw [← Functor.map_comp_assoc, hCI'₁, hunit, Category.assoc,
+      ← Functor.map_comp_assoc, rightDerivedFunctorPlusNatTrans_app, Functor.map_comp,
+      Category.assoc, ← reassoc_of% hnatH, ← rightDerivedFunctorPlusCompUnit_app_assoc FG H K,
+      hfac3, hbridge,
+      ← Functor.map_comp_assoc, ← NatTrans.comp_app,
+      ← NatTrans.mapHomotopyCategoryPlus_comp]
+  · rw [hcompat]
+    have hnatCI2 := (rightDerivedFunctorPlusCompIso' G H e₂).hom.naturality
+      (F.rightDerivedFunctorPlusUnit.app K)
+    simp only [comp_obj, comp_map] at hnatCI2
+    have hbridge2 : (NatTrans.mapHomotopyCategoryPlus e₂.hom).app
+        (F.mapHomotopyCategoryPlus.obj K) =
+        (NatTrans.mapHomotopyCategoryPlus (whiskerLeft F e₂.hom)).app K := rfl
+    have hGH : H.rightDerivedFunctorPlusUnit.app ((F ⋙ G).mapHomotopyCategoryPlus.obj K) ≫
+        H.rightDerivedFunctorPlus.map
+          (G.rightDerivedFunctorPlusUnit.app (F.mapHomotopyCategoryPlus.obj K)) =
+        (rightDerivedFunctorPlusCompUnit G H).app (F.mapHomotopyCategoryPlus.obj K) :=
+      (rightDerivedFunctorPlusCompUnit_app G H (F.mapHomotopyCategoryPlus.obj K)).symm
+    rw [hunit, Category.assoc, ← Functor.map_comp_assoc,
+      rightDerivedFunctorPlusCompIso_fac_app, rightDerivedFunctorPlusCompUnit_app,
+      Functor.map_comp]
+    simp only [Category.assoc]
+    rw [reassoc_of% hGH, reassoc_of% hnatCI2, reassoc_of% hfac2,
+      ← rightDerivedFunctorPlusCompUnit_app_assoc F GH K,
+      hfac4, hbridge2,
+      ← Functor.map_comp_assoc, ← NatTrans.comp_app,
+      ← NatTrans.mapHomotopyCategoryPlus_comp]
 
 end Coherence
 

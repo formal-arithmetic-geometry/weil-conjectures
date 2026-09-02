@@ -49,6 +49,11 @@ of the four comparison isomorphisms.
   `CategoryTheory.Adjunction.derivedPlus_id_unit_app`: the identity law.
 - `CategoryTheory.Adjunction.derivedPlus_comp_unit` and
   `CategoryTheory.Adjunction.derivedPlus_comp_unit_app`: the composition law.
+- `CategoryTheory.Adjunction.derivedPlus_unit_comp` and
+  `CategoryTheory.Adjunction.derivedPlus_unit_comp_app`: if two adjunctions `LA ⊣ RA` and
+  `LB ⊣ RB` between the same pair of categories come with isomorphisms `u : LA ≅ LB` and
+  `l : RB ≅ RA` corresponding to each other under conjugation, then the same relation
+  holds for the bounded below derived adjunctions.
 
 ## The proof
 
@@ -214,6 +219,70 @@ theorem derivedPlus_id_unit_app [EnoughInjectives C] (X : DerivedCategory.Plus C
   simp
 
 end Identity
+
+section Conjugate
+
+variable {LA LB : C ⥤ D} {RA RB : D ⥤ C} [LA.Additive] [RA.Additive] [LB.Additive]
+  [RB.Additive] [PreservesFiniteLimits LA] [PreservesFiniteColimits LA]
+  [PreservesFiniteLimits LB] [PreservesFiniteColimits LB]
+  (adjA : LA ⊣ RA) (adjB : LB ⊣ RB) (u : LA ≅ LB) (l : RB ≅ RA)
+  (h : ∀ M, adjA.unit.app M ≫ RA.map (u.hom.app M) = adjB.unit.app M ≫ l.hom.app (LB.obj M))
+
+include h in
+/-- **Transport of a conjugation relation to the bounded below derived adjunctions**: if
+`u : LA ≅ LB` and `l : RB ≅ RA` satisfy the unit relation
+`adjA.unit ≫ RA(u) = adjB.unit ≫ l` for two adjunctions `LA ⊣ RA`, `LB ⊣ RB` with exact left
+adjoints between the same pair of categories, then the units of the bounded below derived
+adjunctions satisfy the same relation. -/
+theorem derivedPlus_unit_comp :
+    adjA.derivedPlus.unit ≫ Functor.whiskerRight
+        (Functor.mapDerivedCategoryPlusNatIso u).hom RA.rightDerivedFunctorPlus =
+      adjB.derivedPlus.unit ≫ Functor.whiskerLeft LB.mapDerivedCategoryPlus
+        (Functor.rightDerivedFunctorPlusNatTrans l.hom) := by
+  refine Localization.natTrans_ext DerivedCategory.Plus.Qh
+    (HomotopyCategory.Plus.quasiIso C) (fun K => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  rw [← cancel_mono (RA.rightDerivedFunctorPlus.map
+    (LB.mapDerivedCategoryPlusFactorsh.hom.app K))]
+  have hnatU : RA.rightDerivedFunctorPlusUnit.app (LA.mapHomotopyCategoryPlus.obj K) ≫
+      RA.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
+        ((NatTrans.mapHomotopyCategoryPlus u.hom).app K)) =
+      DerivedCategory.Plus.Qh.map (RA.mapHomotopyCategoryPlus.map
+          ((NatTrans.mapHomotopyCategoryPlus u.hom).app K)) ≫
+        RA.rightDerivedFunctorPlusUnit.app (LB.mapHomotopyCategoryPlus.obj K) :=
+    (RA.rightDerivedFunctorPlusUnit.naturality _).symm
+  have hnatL : (Functor.rightDerivedFunctorPlusNatTrans l.hom).app
+        (LB.mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Qh.obj K)) ≫
+      RA.rightDerivedFunctorPlus.map (LB.mapDerivedCategoryPlusFactorsh.hom.app K) =
+      RB.rightDerivedFunctorPlus.map (LB.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+        (Functor.rightDerivedFunctorPlusNatTrans l.hom).app
+          (DerivedCategory.Plus.Qh.obj (LB.mapHomotopyCategoryPlus.obj K)) :=
+    ((Functor.rightDerivedFunctorPlusNatTrans l.hom).naturality _).symm
+  trans DerivedCategory.Plus.Qh.map (adjA.mapHomotopyCategoryPlus.unit.app K) ≫
+    DerivedCategory.Plus.Qh.map (RA.mapHomotopyCategoryPlus.map
+      ((NatTrans.mapHomotopyCategoryPlus u.hom).app K)) ≫
+    RA.rightDerivedFunctorPlusUnit.app (LB.mapHomotopyCategoryPlus.obj K)
+  · rw [Category.assoc, ← Functor.map_comp,
+      Functor.mapDerivedCategoryPlusNatIso_hom_app_factorsh, Functor.map_comp,
+      derivedPlus_unit_app_fac_assoc, hnatU]
+  · rw [Category.assoc, hnatL, derivedPlus_unit_app_fac_assoc,
+      Functor.rightDerivedFunctorPlusNatTrans_app,
+      ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
+      mapHomotopyCategoryPlus_unit_app_comp adjA adjB u l h K]
+
+include h in
+/-- The pointwise form of `Adjunction.derivedPlus_unit_comp`. -/
+@[reassoc]
+theorem derivedPlus_unit_comp_app (X : DerivedCategory.Plus C) :
+    adjA.derivedPlus.unit.app X ≫
+        RA.rightDerivedFunctorPlus.map
+          ((Functor.mapDerivedCategoryPlusNatIso u).hom.app X) =
+      adjB.derivedPlus.unit.app X ≫
+        (Functor.rightDerivedFunctorPlusNatTrans l.hom).app
+          (LB.mapDerivedCategoryPlus.obj X) :=
+  NatTrans.congr_app (derivedPlus_unit_comp adjA adjB u l h) X
+
+end Conjugate
 
 section Composition
 
