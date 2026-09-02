@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Compactification.Defs
 
 /-!
@@ -36,7 +37,17 @@ special case of the literal pullback is `Compactification.baseChange`.
 - `AlgebraicGeometry.Compactification.isPullback_of_isPullback`: the open immersion of the
   base changed compactification is a base change of the original open immersion;
 - `AlgebraicGeometry.HasCompactification.of_isPullback`: compactifiability is stable under
-  base change.
+  base change;
+- `AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_ofIsPullback` and
+  `AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_baseChange`: along a
+  **flat** base change, scheme-theoretic density of the open immersion is preserved;
+- `AlgebraicGeometry.Compactification.locallyOfFinitePresentation_g_ofIsPullback`: if the
+  proper morphism of the compactification is locally of finite presentation, so is its base
+  change.
+
+Flatness of the base change morphism is a genuine hypothesis in the density statements: for
+an arbitrary base change the pulled back open need not be dense in the pulled back
+compactification, and the remedy is to replace it by its schematic closure.
 
 ## Blueprint
 
@@ -109,6 +120,37 @@ noncomputable def baseChange {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S
     (c.baseChange t).i ≫ pullback.snd c.g t = pullback.snd f t :=
   pullback.lift_snd _ _ _
 
+/-- **Flat base change preserves scheme-theoretic density of a compactification.**
+
+If the open immersion `c.i` of a compactification of `p` is scheme-theoretically dominant
+and quasi-compact, then so is the open immersion of the base changed compactification along
+a flat morphism `t`.
+
+Flatness is essential: along an arbitrary base change the pulled back open need not be
+dense. -/
+theorem isSchemeTheoreticallyDominant_i_ofIsPullback (hsq : IsPullback h u p t)
+    (c : Compactification p) (hc : IsSchemeTheoreticallyDominant c.i) [QuasiCompact c.i]
+    [Flat t] :
+    IsSchemeTheoreticallyDominant (c.ofIsPullback hsq).i :=
+  have := hc
+  .of_isPullback (isPullback_of_isPullback hsq c (pullback.lift_fst _ _ _)
+    (pullback.lift_snd _ _ _))
+
+/-- **Flat base change preserves scheme-theoretic density of a compactification**, stated for
+the literal fibre product, i.e. for `Compactification.baseChange`. -/
+theorem isSchemeTheoreticallyDominant_i_baseChange {f : X ⟶ S} (c : Compactification f)
+    (t : T ⟶ S) (hc : IsSchemeTheoreticallyDominant c.i) [QuasiCompact c.i] [Flat t] :
+    IsSchemeTheoreticallyDominant (c.baseChange t).i :=
+  isSchemeTheoreticallyDominant_i_ofIsPullback _ c hc
+
+/-- If the proper morphism of a compactification of `p` is locally of finite presentation,
+then so is the proper morphism of the base changed compactification. No flatness is needed:
+finite presentation is stable under arbitrary base change. -/
+theorem locallyOfFinitePresentation_g_ofIsPullback (hsq : IsPullback h u p t)
+    (c : Compactification p) [LocallyOfFinitePresentation c.g] :
+    LocallyOfFinitePresentation (c.ofIsPullback hsq).g :=
+  inferInstanceAs (LocallyOfFinitePresentation (pullback.snd c.g t))
+
 end Compactification
 
 /-- **Compactifiability is stable under base change**: if `p : Y ⟶ T` admits a
@@ -118,5 +160,17 @@ compactification and `IsPullback h u p t`, then the base change `u : X ⟶ S` of
 theorem HasCompactification.of_isPullback (hsq : IsPullback h u p t) [HasCompactification p] :
     HasCompactification u :=
   (Compactification.ofIsPullback hsq (HasCompactification.compactification p)).hasCompactification
+
+/-! ### Axiom census
+
+The flat base change statement is unconditional; the check below is run by the build, so a
+`sorry` reappearing anywhere beneath it breaks compilation rather than going unnoticed. -/
+
+/--
+info: 'AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_ofIsPullback' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_i_ofIsPullback
 
 end AlgebraicGeometry
