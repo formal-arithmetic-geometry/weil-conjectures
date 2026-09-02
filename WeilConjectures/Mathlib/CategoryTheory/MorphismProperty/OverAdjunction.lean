@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
-# Fully faithfulness of `MorphismProperty.Over.map`, and base change squares
+# Fully faithfulness of `MorphismProperty.Over.map`, and the coherence of base change
 
 The functor `MorphismProperty.Over.map` given by post-composition with a morphism
 satisfying `P` is always faithful (`CategoryTheory.MorphismProperty.Over.faithful_map`),
@@ -17,6 +17,34 @@ and it is full when the morphism is a monomorphism
 
 Base change along a morphism `f : X ⟶ Y` sends a morphism of `P.Over Q Y` to a cartesian
 square (`CategoryTheory.MorphismProperty.Over.isPullback_map_left`).
+
+Mathlib provides the composition isomorphism `MorphismProperty.Over.pullbackComp` for base
+change, but neither the identity isomorphism nor any coherence law. Both are added here, so
+that `X ↦ P.Over Q X` becomes a pseudofunctor in all but name.
+
+## Main declarations
+
+- `CategoryTheory.MorphismProperty.Over.pullbackId`: base change along `𝟙 X` is the identity
+  functor of `P.Over Q X`.
+- `CategoryTheory.MorphismProperty.Over.pullbackComp_id_left` and
+  `CategoryTheory.MorphismProperty.Over.pullbackComp_id_right`: the two unit laws, expressing
+  `MorphismProperty.Over.pullbackComp` for `𝟙 X ≫ g` resp. `f ≫ 𝟙 Z` through
+  `MorphismProperty.Over.pullbackId`, `MorphismProperty.Over.pullbackCongr` and the unitors.
+- `CategoryTheory.MorphismProperty.Over.pullbackComp_assoc`: the associativity law, stating
+  that the two ways of building `Over.pullback (f ≫ g ≫ h) ≅ Over.pullback h ⋙
+  Over.pullback g ⋙ Over.pullback f` out of `MorphismProperty.Over.pullbackComp` agree.
+
+## Implementation notes
+
+`MorphismProperty.Over.pullbackComp f g` takes the composite `f ≫ g` as an optional argument
+`fg` together with a proof `hfg : fg = f ≫ g`, so that base change along a morphism that is
+only propositionally a composite is covered. The three coherence laws below keep that shape:
+each takes the composite it is about as an optional argument, defaulting to the reduced
+morphism (`g`, `f` and `f ≫ g ≫ h` respectively). Thus `Over.pullbackComp_id_left g` is the
+unit law in its reduced form `Over.pullback P Q g ≅ Over.pullback P Q g ⋙ 𝟭`, while
+`Over.pullbackComp_id_left g (𝟙 X ≫ g) rfl` is the law for `Over.pullbackComp (𝟙 X) g` with
+its own default composite, which is the form produced by consumers such as
+`CategoryTheory.GrothendieckTopology.lowerStarComp`.
 -/
 
 @[expose] public section
@@ -81,5 +109,111 @@ lemma MorphismProperty.Over.isPullback_map_left {A B : P.Over Q Y} (φ : A ⟶ B
   exact IsPullback.of_hasPullback A.hom f
 
 end Pullback
+
+section PullbackCoherence
+
+namespace MorphismProperty
+
+variable (P Q) [Q.RespectsIso] [Q.IsStableUnderBaseChange]
+
+/-- Base change along `𝟙 X` is the identity functor of `P.Over Q X`: the isomorphism is given
+by the first projection `A ×_X X ≅ A`. -/
+@[simps! hom_app_left inv_app_left]
+noncomputable def Over.pullbackId (X : T) [P.HasPullbacksAlong (𝟙 X)]
+    [P.IsStableUnderBaseChangeAlong (𝟙 X)] :
+    Over.pullback P Q (𝟙 X) ≅ 𝟭 (P.Over Q X) :=
+  NatIso.ofComponents (fun A ↦ Over.isoMk
+    { hom := pullback.fst A.hom (𝟙 X)
+      inv := pullback.lift (𝟙 A.left) A.hom (by simp)
+      hom_inv_id := by apply pullback.hom_ext <;> simp [pullback.condition]
+      inv_hom_id := by simp }
+    (by simpa using pullback.condition (f := A.hom) (g := 𝟙 X)))
+    (by intros; apply Over.Hom.ext; simp)
+
+variable {P Q}
+
+@[reassoc (attr := simp)]
+lemma Over.pullbackId_inv_app_left_fst {X : T} [P.HasPullbacksAlong (𝟙 X)]
+    [P.IsStableUnderBaseChangeAlong (𝟙 X)] (A : P.Over Q X) :
+    ((Over.pullbackId P Q X).inv.app A).left ≫ pullback.fst A.hom (𝟙 X) = 𝟙 A.left := by
+  simp
+
+section Unit
+
+variable {X Z : T}
+
+/-- The left unit law for `MorphismProperty.Over.pullbackComp`: base change along a morphism
+of the form `𝟙 X ≫ g` is base change along `g`, followed by the identity functor. -/
+lemma Over.pullbackComp_id_left (g : X ⟶ Z) [P.IsStableUnderBaseChangeAlong g]
+    [P.HasPullbacksAlong g] [P.IsStableUnderBaseChangeAlong (𝟙 X)] [P.HasPullbacksAlong (𝟙 X)]
+    (fg : X ⟶ Z := g) (hfg : fg = 𝟙 X ≫ g := by cat_disch) :
+    haveI : P.HasPullbacksAlong fg := by subst hfg; infer_instance
+    haveI : P.IsStableUnderBaseChangeAlong fg := by subst hfg; infer_instance
+    Over.pullbackComp (𝟙 X) g fg hfg =
+      Over.pullbackCongr (hfg.trans (id_comp g)) ≪≫ (Over.pullback P Q g).rightUnitor.symm ≪≫
+        Functor.isoWhiskerLeft (Over.pullback P Q g) (Over.pullbackId P Q X).symm := by
+  subst hfg
+  ext A : 4
+  apply pullback.hom_ext (f := pullback.snd A.hom g) (g := 𝟙 X)
+  · apply pullback.hom_ext <;>
+      simp [Over.pullback, Over.mk, Over.pullbackCongr, pullback.condition]
+  · simp [Over.pullback, Over.mk, Over.pullbackCongr]
+
+/-- The right unit law for `MorphismProperty.Over.pullbackComp`: base change along a morphism
+of the form `f ≫ 𝟙 Z` is the identity functor, followed by base change along `f`. -/
+lemma Over.pullbackComp_id_right (f : X ⟶ Z) [P.IsStableUnderBaseChangeAlong f]
+    [P.HasPullbacksAlong f] [P.IsStableUnderBaseChangeAlong (𝟙 Z)] [P.HasPullbacksAlong (𝟙 Z)]
+    (fg : X ⟶ Z := f) (hfg : fg = f ≫ 𝟙 Z := by cat_disch) :
+    haveI : P.HasPullbacksAlong fg := by subst hfg; infer_instance
+    haveI : P.IsStableUnderBaseChangeAlong fg := by subst hfg; infer_instance
+    Over.pullbackComp f (𝟙 Z) fg hfg =
+      Over.pullbackCongr (hfg.trans (comp_id f)) ≪≫ (Over.pullback P Q f).leftUnitor.symm ≪≫
+        Functor.isoWhiskerRight (Over.pullbackId P Q Z).symm (Over.pullback P Q f) := by
+  subst hfg
+  ext A : 4
+  apply pullback.hom_ext (f := pullback.snd A.hom (𝟙 Z)) (g := f)
+  · apply pullback.hom_ext
+    · simp [Over.pullback, Over.mk, Over.pullbackCongr]
+    · have h : pullback.snd A.hom (f ≫ 𝟙 Z) ≫ f = pullback.fst A.hom (f ≫ 𝟙 Z) ≫ A.hom := by
+        simpa using (pullback.condition (f := A.hom) (g := f ≫ 𝟙 Z)).symm
+      simp [Over.pullback, Over.mk, Over.pullbackCongr, h]
+  · simp [Over.pullback, Over.mk, Over.pullbackCongr]
+
+end Unit
+
+section Assoc
+
+variable {X Y Z W : T}
+
+/-- The associativity law for `MorphismProperty.Over.pullbackComp`: the two ways of writing
+base change along `f ≫ g ≫ h` as base change along `h`, then along `g`, then along `f`
+agree. -/
+lemma Over.pullbackComp_assoc (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+    [P.IsStableUnderBaseChangeAlong f] [P.IsStableUnderBaseChangeAlong g]
+    [P.IsStableUnderBaseChangeAlong h] [P.HasPullbacksAlong f] [P.HasPullbacksAlong g]
+    [P.HasPullbacksAlong h] (fgh : X ⟶ W := f ≫ g ≫ h)
+    (hfgh : fgh = f ≫ g ≫ h := by cat_disch) :
+    haveI : P.HasPullbacksAlong fgh := by subst hfgh; infer_instance
+    haveI : P.IsStableUnderBaseChangeAlong fgh := by subst hfgh; infer_instance
+    Over.pullbackComp f (g ≫ h) fgh hfgh ≪≫
+        Functor.isoWhiskerRight (Over.pullbackComp g h) (Over.pullback P Q f) ≪≫
+          Functor.associator _ _ _ =
+      Over.pullbackComp (f ≫ g) h fgh (by rw [hfgh, assoc]) ≪≫
+        Functor.isoWhiskerLeft (Over.pullback P Q h) (Over.pullbackComp f g) := by
+  subst hfgh
+  ext A : 4
+  have : HasPullback (pullback.snd (pullback.snd A.hom h) g) f :=
+    HasPullbacksAlong.hasPullback _ (P.pullback_snd _ _ (P.pullback_snd A.hom h A.prop))
+  apply pullback.hom_ext (f := pullback.snd (pullback.snd A.hom h) g) (g := f)
+  · apply pullback.hom_ext (f := pullback.snd A.hom h) (g := g)
+    · apply pullback.hom_ext <;> simp [Over.pullback, Over.mk]
+    · simp [Over.pullback, Over.mk]
+  · simp [Over.pullback, Over.mk]
+
+end Assoc
+
+end MorphismProperty
+
+end PullbackCoherence
 
 end CategoryTheory
