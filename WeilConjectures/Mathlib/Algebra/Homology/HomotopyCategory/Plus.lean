@@ -22,7 +22,10 @@ Both this isomorphism and Mathlib's `CategoryTheory.Functor.mapHomotopyCategoryP
 attached to `Iso.refl (F ⋙ G)` are in fact identities
 (`CategoryTheory.Functor.mapHomotopyCategoryPlusIdIso_hom_app_eq_id` and
 `CategoryTheory.Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app`), together with their
-inverse forms.
+inverse forms. Both are computed from their unbounded counterparts through the fully
+faithful inclusion `HomotopyCategory.Plus.ι`
+(`CategoryTheory.Functor.ι_map_mapHomotopyCategoryPlusIdIso_hom_app` and
+`CategoryTheory.Functor.ι_map_mapHomotopyCategoryPlusCompIso_hom_app`).
 
 This material is destined for `Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean`, next to
 `CategoryTheory.Functor.mapHomotopyCategoryPlus`.
@@ -31,7 +34,7 @@ This material is destined for `Mathlib/Algebra/Homology/HomotopyCategory/Plus.le
 
 @[expose] public section
 
-universe v₁ v₂ u₁ u₂
+universe v₁ v₂ v₃ u₁ u₂ u₃
 
 open CategoryTheory
 
@@ -112,46 +115,62 @@ lemma ι_map_mapHomotopyCategoryPlusIdIso_inv_app (K : HomotopyCategory.Plus C) 
 
 /-- The isomorphism `Functor.mapHomotopyCategoryPlusIdIso` is the identity: this is the
 bounded below counterpart of `Functor.mapHomotopyCategoryIdIso_hom_app_eq_id`. -/
-lemma mapHomotopyCategoryPlusIdIso_hom_app_eq_id [Limits.HasBinaryBiproducts C]
-    (K : HomotopyCategory.Plus C) :
+@[simp]
+lemma mapHomotopyCategoryPlusIdIso_hom_app_eq_id (K : HomotopyCategory.Plus C) :
     (mapHomotopyCategoryPlusIdIso C).hom.app K = 𝟙 K := by
   apply (HomotopyCategory.Plus.ι C).map_injective
+  -- `rw` cannot rewrite under the identity here, so produce the identity on the right first
   refine Eq.trans ?_ ((HomotopyCategory.Plus.ι C).map_id K).symm
   rw [ι_map_mapHomotopyCategoryPlusIdIso_hom_app]
   exact mapHomotopyCategoryIdIso_hom_app_eq_id C (ComplexShape.up ℤ) K.obj
 
-/-- The inverse form of `Functor.mapHomotopyCategoryPlusIdIso_hom_app_eq_id`. -/
-lemma mapHomotopyCategoryPlusIdIso_inv_app_eq_id [Limits.HasBinaryBiproducts C]
-    (K : HomotopyCategory.Plus C) :
-    (mapHomotopyCategoryPlusIdIso C).inv.app K = 𝟙 _ :=
+/-- The inverse of `Functor.mapHomotopyCategoryPlusIdIso` is the identity. -/
+@[simp]
+lemma mapHomotopyCategoryPlusIdIso_inv_app_eq_id (K : HomotopyCategory.Plus C) :
+    (mapHomotopyCategoryPlusIdIso C).inv.app K = 𝟙 K :=
   congrArg Iso.inv (Iso.ext (mapHomotopyCategoryPlusIdIso_hom_app_eq_id C K) :
     (mapHomotopyCategoryPlusIdIso C).app K = Iso.refl _)
+
+section Comp
+
+variable {C}
+variable {D : Type u₂} {E : Type u₃} [Category.{v₂} D] [Category.{v₃} E]
+  [Preadditive D] [Preadditive E]
+
+/-- The isomorphism `Functor.mapHomotopyCategoryPlusCompIso` is the restriction of
+`Functor.mapHomotopyCategoryCompIso` along the fully faithful inclusion
+`HomotopyCategory.Plus.ι`. -/
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlusCompIso_hom_app {F : C ⥤ D} {G : D ⥤ E} {H : C ⥤ E}
+    [F.Additive] [G.Additive] [H.Additive] (e : F ⋙ G ≅ H) (K : HomotopyCategory.Plus C) :
+    (HomotopyCategory.Plus.ι E).map ((mapHomotopyCategoryPlusCompIso e).hom.app K) =
+      (mapHomotopyCategoryCompIso e (ComplexShape.up ℤ)).hom.app K.obj :=
+  rfl
 
 /-- The isomorphism `Functor.mapHomotopyCategoryPlusCompIso` attached to `Iso.refl (F ⋙ G)`
 is the identity: this is the bounded below counterpart of
 `Functor.mapHomotopyCategoryCompIso_refl_hom_app`. -/
-lemma mapHomotopyCategoryPlusCompIso_refl_hom_app {C D E : Type*} [Category C] [Category D]
-    [Category E] [Preadditive C] [Preadditive D] [Preadditive E]
-    [Limits.HasBinaryBiproducts C] [Limits.HasBinaryBiproducts D]
-    [Limits.HasBinaryBiproducts E] (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
-    (K : HomotopyCategory.Plus C) :
-    (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).hom.app K = 𝟙 _ := by
+@[simp]
+lemma mapHomotopyCategoryPlusCompIso_refl_hom_app (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
+    [G.Additive] (K : HomotopyCategory.Plus C) :
+    (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).hom.app K =
+      𝟙 ((F ⋙ G).mapHomotopyCategoryPlus.obj K) := by
   apply (HomotopyCategory.Plus.ι E).map_injective
+  -- `rw` cannot rewrite under the identity here, so produce the identity on the right first
   refine Eq.trans ?_ ((HomotopyCategory.Plus.ι E).map_id _).symm
-  have h : (HomotopyCategory.Plus.ι E).map
-      ((mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).hom.app K) =
-      (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).hom.app K.obj := rfl
-  rw [h]
+  rw [ι_map_mapHomotopyCategoryPlusCompIso_hom_app]
   exact mapHomotopyCategoryCompIso_refl_hom_app (ComplexShape.up ℤ) F G K.obj
 
-/-- The inverse form of `Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app`. -/
-lemma mapHomotopyCategoryPlusCompIso_refl_inv_app {C D E : Type*} [Category C] [Category D]
-    [Category E] [Preadditive C] [Preadditive D] [Preadditive E]
-    [Limits.HasBinaryBiproducts C] [Limits.HasBinaryBiproducts D]
-    [Limits.HasBinaryBiproducts E] (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
-    (K : HomotopyCategory.Plus C) :
-    (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).inv.app K = 𝟙 _ :=
+/-- The inverse of `Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))` is the
+identity. -/
+@[simp]
+lemma mapHomotopyCategoryPlusCompIso_refl_inv_app (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
+    [G.Additive] (K : HomotopyCategory.Plus C) :
+    (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).inv.app K =
+      𝟙 ((F ⋙ G).mapHomotopyCategoryPlus.obj K) :=
   congrArg Iso.inv (Iso.ext (mapHomotopyCategoryPlusCompIso_refl_hom_app F G K) :
     (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).app K = Iso.refl _)
+
+end Comp
 
 end CategoryTheory.Functor

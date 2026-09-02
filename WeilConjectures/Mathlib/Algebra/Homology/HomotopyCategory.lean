@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.HomotopyCategory
 
 /-!
-# The functor induced on homotopy categories by the identity functor
+# The functors induced on homotopy categories by the identity and by a composition
 
 The functor `(𝟭 V).mapHomotopyCategory c` induced on homotopy categories by the identity
 functor of a preadditive category `V` is isomorphic to the identity functor
@@ -18,8 +18,13 @@ counterpart of Mathlib's `CategoryTheory.Functor.mapHomologicalComplexIdIso`.
 Both this isomorphism and Mathlib's `CategoryTheory.Functor.mapHomotopyCategoryCompIso`
 attached to `Iso.refl (F ⋙ G)` are in fact *identities*
 (`CategoryTheory.Functor.mapHomotopyCategoryIdIso_hom_app_eq_id` and
-`CategoryTheory.Functor.mapHomotopyCategoryCompIso_refl_hom_app`), since the corresponding
-isomorphisms at the level of complexes are identities by definition.
+`CategoryTheory.Functor.mapHomotopyCategoryCompIso_refl_hom_app`, together with their
+inverse forms), since the corresponding isomorphisms at the level of complexes are
+identities by definition.
+
+The elementary description of the components of these isomorphisms on the image of a
+complex is `CategoryTheory.Functor.mapHomotopyCategoryIdIso_hom_app` and
+`CategoryTheory.Functor.mapHomotopyCategoryCompIso_hom_app`.
 
 This material is destined for `Mathlib/Algebra/Homology/HomotopyCategory.lean`, next to
 `CategoryTheory.Functor.mapHomotopyCategoryCompIso`.
@@ -45,7 +50,9 @@ noncomputable def mapHomotopyCategoryIdIso :
     (HomotopyCategory.quotient V c).leftUnitor ≪≫
     (HomotopyCategory.quotient V c).rightUnitor.symm)
 
-@[simp]
+/-- On the image of a complex, `Functor.mapHomotopyCategoryIdIso` is the image of
+`Functor.mapHomologicalComplexIdIso`. This is not a `simp` lemma: the simp normal form is
+`Functor.mapHomotopyCategoryIdIso_hom_app_eq_id`, which identifies it with the identity. -/
 lemma mapHomotopyCategoryIdIso_hom_app (K : HomologicalComplex V c) :
     (mapHomotopyCategoryIdIso V c).hom.app ((HomotopyCategory.quotient V c).obj K) =
       (HomotopyCategory.quotient V c).map
@@ -56,7 +63,8 @@ lemma mapHomotopyCategoryIdIso_hom_app (K : HomologicalComplex V c) :
     whiskerRight_app, leftUnitor_hom_app, rightUnitor_inv_app, Category.comp_id]
   apply Category.id_comp
 
-@[simp]
+/-- The inverse form of `Functor.mapHomotopyCategoryIdIso_hom_app`. This is not a `simp`
+lemma: the simp normal form is `Functor.mapHomotopyCategoryIdIso_inv_app_eq_id`. -/
 lemma mapHomotopyCategoryIdIso_inv_app (K : HomologicalComplex V c) :
     (mapHomotopyCategoryIdIso V c).inv.app ((HomotopyCategory.quotient V c).obj K) =
       (HomotopyCategory.quotient V c).map
@@ -65,32 +73,58 @@ lemma mapHomotopyCategoryIdIso_inv_app (K : HomologicalComplex V c) :
 
 /-- The isomorphism `Functor.mapHomotopyCategoryIdIso` is the identity: it is induced by
 `Functor.mapHomologicalComplexIdIso`, which is the identity by definition. -/
+@[simp]
 lemma mapHomotopyCategoryIdIso_hom_app_eq_id (Y : HomotopyCategory V c) :
     (mapHomotopyCategoryIdIso V c).hom.app Y = 𝟙 Y := by
   obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
   rw [mapHomotopyCategoryIdIso_hom_app]
   exact (HomotopyCategory.quotient V c).map_id X
 
-end CategoryTheory.Functor
+/-- The inverse of `Functor.mapHomotopyCategoryIdIso` is the identity. -/
+@[simp]
+lemma mapHomotopyCategoryIdIso_inv_app_eq_id (Y : HomotopyCategory V c) :
+    (mapHomotopyCategoryIdIso V c).inv.app Y = 𝟙 Y :=
+  congrArg Iso.inv (Iso.ext (mapHomotopyCategoryIdIso_hom_app_eq_id V c Y) :
+    (mapHomotopyCategoryIdIso V c).app Y = Iso.refl _)
 
-namespace CategoryTheory.Functor
+section Comp
 
-variable {V W V' : Type*} [Category V] [Category W] [Category V'] [Preadditive V]
-  [Preadditive W] [Preadditive V'] {ι : Type*} (c : ComplexShape ι)
+variable {V}
+variable {W W' : Type*} [Category W] [Category W'] [Preadditive W] [Preadditive W']
+
+/-- On the image of a complex, `Functor.mapHomotopyCategoryCompIso` is the image of
+`Functor.mapHomologicalComplexCompIso`. -/
+@[simp]
+lemma mapHomotopyCategoryCompIso_hom_app {F : V ⥤ W} {G : W ⥤ W'} {H : V ⥤ W'}
+    [F.Additive] [G.Additive] [H.Additive] (e : F ⋙ G ≅ H) (X : HomologicalComplex V c) :
+    (mapHomotopyCategoryCompIso e c).hom.app ((HomotopyCategory.quotient V c).obj X) =
+      (HomotopyCategory.quotient W' c).map ((mapHomologicalComplexCompIso e c).hom.app X) :=
+  rfl
 
 /-- The isomorphism `Functor.mapHomotopyCategoryCompIso` attached to `Iso.refl (F ⋙ G)` is
 the identity: it is induced by `Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))`,
 which is the identity by definition. -/
-lemma mapHomotopyCategoryCompIso_refl_hom_app (F : V ⥤ W) (G : W ⥤ V') [F.Additive]
+@[simp]
+lemma mapHomotopyCategoryCompIso_refl_hom_app (F : V ⥤ W) (G : W ⥤ W') [F.Additive]
     [G.Additive] (Y : HomotopyCategory V c) :
-    (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app Y = 𝟙 _ := by
+    (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app Y =
+      𝟙 (((F ⋙ G).mapHomotopyCategory c).obj Y) := by
   obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
-  have h₁ : (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app
-      ((HomotopyCategory.quotient V c).obj X) =
-      (HomotopyCategory.quotient V' c).map
-        ((mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) c).hom.app X) := rfl
-  have h₂ : (mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) c).hom.app X = 𝟙 _ := rfl
-  rw [h₁, h₂]
-  exact (HomotopyCategory.quotient V' c).map_id _
+  -- the composition isomorphism of `mapHomologicalComplex` attached to `Iso.refl` is `𝟙`
+  have h : (mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) c).hom.app X = 𝟙 _ := rfl
+  rw [mapHomotopyCategoryCompIso_hom_app, h]
+  exact (HomotopyCategory.quotient W' c).map_id _
+
+/-- The inverse of `Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))` is the
+identity. -/
+@[simp]
+lemma mapHomotopyCategoryCompIso_refl_inv_app (F : V ⥤ W) (G : W ⥤ W') [F.Additive]
+    [G.Additive] (Y : HomotopyCategory V c) :
+    (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).inv.app Y =
+      𝟙 (((F ⋙ G).mapHomotopyCategory c).obj Y) :=
+  congrArg Iso.inv (Iso.ext (mapHomotopyCategoryCompIso_refl_hom_app c F G Y) :
+    (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).app Y = Iso.refl _)
+
+end Comp
 
 end CategoryTheory.Functor

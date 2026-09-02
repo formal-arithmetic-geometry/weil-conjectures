@@ -191,8 +191,13 @@ theorem derivedPlus_id_unit [EnoughInjectives C] :
       (Functor.mapDerivedCategoryPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) ≫
         DerivedCategory.Plus.Qh.map
           ((Functor.mapHomotopyCategoryPlusIdIso C).inv.app K) := by
+    -- the identity has to be stated at the object in the syntactic form the goal uses,
+    -- otherwise `Category.comp_id` does not fire
+    have hq : DerivedCategory.Plus.Qh.map (𝟙 K) =
+        𝟙 (((𝟭 C).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).obj K) :=
+      DerivedCategory.Plus.Qh.map_id K
     rw [Functor.mapDerivedCategoryPlusIdIso_fac_app, Category.assoc, ← Functor.map_comp]
-    simp
+    simp [hq]
   have hu : (𝟭 C).rightDerivedFunctorPlusUnit.app ((𝟭 C).mapHomotopyCategoryPlus.obj K) =
       DerivedCategory.Plus.Qh.map
           ((Functor.mapHomotopyCategoryPlusIdIso C).hom.app

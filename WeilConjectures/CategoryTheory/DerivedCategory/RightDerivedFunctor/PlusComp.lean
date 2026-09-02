@@ -274,7 +274,8 @@ noncomputable def rightDerivedFunctorPlusIdUnit :
 omit [EnoughInjectives C] in
 @[simp]
 lemma rightDerivedFunctorPlusIdUnit_app (K : HomotopyCategory.Plus C) :
-    (rightDerivedFunctorPlusIdUnit C).app K = 𝟙 _ := by
+    (rightDerivedFunctorPlusIdUnit C).app K =
+      𝟙 (((𝟭 C).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh).obj K) := by
   simp only [rightDerivedFunctorPlusIdUnit, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, comp_id,
     mapHomotopyCategoryPlusIdIso_hom_app_eq_id]
@@ -331,7 +332,16 @@ variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {E' : Type*}
 
 /-- The left unit law for `Functor.rightDerivedFunctorPlusCompIso`: composing with the
 identity isomorphism `Functor.rightDerivedFunctorPlusIdIso` in the first variable gives the
-identity. -/
+identity.
+
+```
+R⁺(𝟭 C ⋙ G) ──── compIso ────► R⁺(𝟭 C) ⋙ R⁺G
+     ║                               │
+     ║                               │ idIso ▷ R⁺G
+     ╚═══════════════════════════════▼
+                                   R⁺G
+```
+-/
 lemma rightDerivedFunctorPlusCompIso_id_comp (G : C ⥤ D) [G.Additive] :
     (rightDerivedFunctorPlusCompIso (𝟭 C) G).hom ≫
         Functor.whiskerRight (rightDerivedFunctorPlusIdIso C).hom G.rightDerivedFunctorPlus =
@@ -353,7 +363,16 @@ lemma rightDerivedFunctorPlusCompIso_id_comp (G : C ⥤ D) [G.Additive] :
 
 /-- The right unit law for `Functor.rightDerivedFunctorPlusCompIso`: composing with the
 identity isomorphism `Functor.rightDerivedFunctorPlusIdIso` in the second variable gives the
-identity. -/
+identity.
+
+```
+R⁺(F ⋙ 𝟭 D) ──── compIso ────► R⁺F ⋙ R⁺(𝟭 D)
+     ║                               │
+     ║                               │ R⁺F ◁ idIso
+     ╚═══════════════════════════════▼
+                                   R⁺F
+```
+-/
 lemma rightDerivedFunctorPlusCompIso_comp_id [EnoughInjectives D] (F : C ⥤ D) [F.Additive]
     [F.PreservesInjectiveObjects] :
     (rightDerivedFunctorPlusCompIso F (𝟭 D)).hom ≫
@@ -380,7 +399,16 @@ lemma rightDerivedFunctorPlusCompIso_comp_id [EnoughInjectives D] (F : C ⥤ D) 
   exact (Category.id_comp _).trans (Category.comp_id _).symm
 
 /-- The associativity law for `Functor.rightDerivedFunctorPlusCompIso`: the two ways of
-comparing `R⁺(F ⋙ G ⋙ H)` with `R⁺F ⋙ R⁺G ⋙ R⁺H` agree. -/
+comparing `R⁺(F ⋙ G ⋙ H)` with `R⁺F ⋙ R⁺G ⋙ R⁺H` agree.
+
+```
+      R⁺(F ⋙ G ⋙ H) ─── compIso F (G ⋙ H) ───► R⁺F ⋙ R⁺(G ⋙ H)
+            │                                          │
+compIso (F⋙G) H                              R⁺F ◁ compIso G H
+            ▼                                          ▼
+  R⁺(F ⋙ G) ⋙ R⁺H ── compIso F G ▷ R⁺H ────► R⁺F ⋙ R⁺G ⋙ R⁺H
+```
+-/
 lemma rightDerivedFunctorPlusCompIso_assoc [EnoughInjectives D] [EnoughInjectives E]
     (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ E') [F.Additive] [G.Additive] [H.Additive]
     [F.PreservesInjectiveObjects] [G.PreservesInjectiveObjects] :

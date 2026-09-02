@@ -448,10 +448,10 @@ lemma mapHomotopyCategoryPlus_unit_app_comp_id [Limits.HasBinaryBiproducts C]
   have key := mapHomotopyCategoryPlus_unit_app_comp adj (Adjunction.id (C := C)) u l.symm h' K
   rw [key, mapHomotopyCategoryPlus_id_unit_app,
     Functor.mapHomotopyCategoryPlusIdIso_inv_app_eq_id]
-  simp only [Iso.symm_hom, Category.id_comp]
-  have hid : (𝟭 C).mapHomotopyCategoryPlus.map (𝟙 ((𝟭 (HomotopyCategory.Plus C)).obj K)) =
+  simp only [Iso.symm_hom]
+  have hid : (𝟭 C).mapHomotopyCategoryPlus.map (𝟙 K) =
       𝟙 ((𝟭 C).mapHomotopyCategoryPlus.obj K) := (𝟭 C).mapHomotopyCategoryPlus.map_id _
-  rw [hid]
+  rw [hid, Category.comp_id]
   exact Category.id_comp _
 
 end ConjugateId
