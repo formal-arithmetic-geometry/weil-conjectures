@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-!
@@ -25,6 +26,15 @@ we show that these two are again adjoint. In particular the adjunction has a uni
 which is what the comparison of derived lower shrieks along a refinement of
 compactifications is built from.
 
+We also prove the identity and composition laws for the derived unit. For the identity
+adjunction the derived unit is the identity, modulo
+`Functor.mapDerivedCategoryPlusIdIso` and `Functor.rightDerivedFunctorPlusIdIso`; for a
+composite of adjunctions the derived unit is the composite of the two derived units, modulo
+`Functor.mapDerivedCategoryPlusCompIso` and `Functor.rightDerivedFunctorPlusCompIso`. Both
+reduce, through `CategoryTheory.Adjunction.derivedPlus_unit_eq`, to the corresponding laws
+for `CategoryTheory.Adjunction.mapHomotopyCategoryPlus` together with the characterizations
+of the four comparison isomorphisms.
+
 ## Main definitions
 
 - `CategoryTheory.Adjunction.derivedPlus`: the adjunction
@@ -32,6 +42,13 @@ compactifications is built from.
 - `CategoryTheory.Adjunction.derivedPlus_unit_app_fac` and
   `CategoryTheory.Adjunction.derivedPlus_unit_eq`: the formula computing the unit on the
   image of a bounded below complex, and the fact that this formula characterises it.
+
+## Main results
+
+- `CategoryTheory.Adjunction.derivedPlus_id_unit` and
+  `CategoryTheory.Adjunction.derivedPlus_id_unit_app`: the identity law.
+- `CategoryTheory.Adjunction.derivedPlus_comp_unit` and
+  `CategoryTheory.Adjunction.derivedPlus_comp_unit_app`: the composition law.
 
 ## The proof
 
@@ -60,7 +77,7 @@ theorems.
 
 @[expose] public section
 
-universe v₁ v₂ u₁ u₂
+universe v₁ v₂ v₃ u₁ u₂ u₃
 
 open CategoryTheory Category Limits Abelian
 
@@ -150,5 +167,156 @@ lemma derivedPlus_unit_eq
     (HomotopyCategory.Plus.quasiIso C) _ _ _ ?_
   ext K : 2
   simpa using (h K).trans (adj.derivedPlus_unit_app_fac K).symm
+
+section Identity
+
+variable (C)
+
+/-- **The identity law for the bounded below derived unit**: the unit of the bounded below
+derived adjunction of `Adjunction.id` is the identity, modulo the identity isomorphisms
+`Functor.mapDerivedCategoryPlusIdIso` and `Functor.rightDerivedFunctorPlusIdIso`. -/
+theorem derivedPlus_id_unit [EnoughInjectives C] :
+    (Adjunction.id (C := C)).derivedPlus.unit =
+      (Functor.mapDerivedCategoryPlusIdIso C).inv ≫
+        Functor.whiskerLeft (𝟭 C).mapDerivedCategoryPlus
+          (Functor.rightDerivedFunctorPlusIdIso C).inv := by
+  refine ((Adjunction.id (C := C)).derivedPlus_unit_eq _ ?_).symm
+  intro K
+  have hαf : (𝟭 C).mapDerivedCategoryPlusFactorsh.hom.app K =
+      (Functor.mapDerivedCategoryPlusIdIso C).hom.app (DerivedCategory.Plus.Qh.obj K) ≫
+        DerivedCategory.Plus.Qh.map
+          ((Functor.mapHomotopyCategoryPlusIdIso C).inv.app K) := by
+    rw [Functor.mapDerivedCategoryPlusIdIso_fac_app, Category.assoc, ← Functor.map_comp]
+    simp
+  have hu : (𝟭 C).rightDerivedFunctorPlusUnit.app ((𝟭 C).mapHomotopyCategoryPlus.obj K) =
+      DerivedCategory.Plus.Qh.map
+          ((Functor.mapHomotopyCategoryPlusIdIso C).hom.app
+            ((𝟭 C).mapHomotopyCategoryPlus.obj K)) ≫
+        (Functor.rightDerivedFunctorPlusIdIso C).inv.app
+          (DerivedCategory.Plus.Qh.obj ((𝟭 C).mapHomotopyCategoryPlus.obj K)) := by
+    rw [← Functor.rightDerivedFunctorPlusIdIso_fac_app]
+    simp
+  rw [mapHomotopyCategoryPlus_id_unit_app, hu, hαf]
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
+  rw [← NatTrans.naturality_assoc, ← NatTrans.naturality]
+  simp only [Functor.id_map, Functor.comp_obj, Iso.inv_hom_id_app_assoc,
+    ← Functor.map_comp_assoc, NatTrans.naturality, Iso.hom_inv_id_app, Functor.map_id,
+    Category.id_comp]
+
+/-- The pointwise form of `Adjunction.derivedPlus_id_unit`. -/
+@[reassoc]
+theorem derivedPlus_id_unit_app [EnoughInjectives C] (X : DerivedCategory.Plus C) :
+    (Adjunction.id (C := C)).derivedPlus.unit.app X ≫
+        (Functor.rightDerivedFunctorPlusIdIso C).hom.app
+          ((𝟭 C).mapDerivedCategoryPlus.obj X) ≫
+        (Functor.mapDerivedCategoryPlusIdIso C).hom.app X = 𝟙 X := by
+  rw [derivedPlus_id_unit]
+  simp
+
+end Identity
+
+section Composition
+
+attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
+
+variable {E : Type u₃} [Category.{v₃} E] [Abelian E] [HasDerivedCategory E]
+  [EnoughInjectives E] {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : D ⥤ E} {R₂ : E ⥤ D}
+  [L₁.Additive] [R₁.Additive] [L₂.Additive] [R₂.Additive]
+  [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁]
+  [PreservesFiniteLimits L₂] [PreservesFiniteColimits L₂]
+  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [R₂.PreservesInjectiveObjects]
+
+/-- **The composition law for the bounded below derived unit**: the unit of the bounded
+below derived adjunction of a composite `adj₁.comp adj₂` is the composite of the two derived
+units, modulo the composition isomorphisms `Functor.mapDerivedCategoryPlusCompIso` and
+`Functor.rightDerivedFunctorPlusCompIso`.
+
+The hypothesis `R₂.PreservesInjectiveObjects`, which is what
+`Functor.rightDerivedFunctorPlusCompIso` needs, follows from the exactness of `L₂` by
+`Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj₂`. -/
+theorem derivedPlus_comp_unit :
+    (adj₁.comp adj₂).derivedPlus.unit =
+      adj₁.derivedPlus.unit ≫
+        Functor.whiskerLeft L₁.mapDerivedCategoryPlus
+          (Functor.whiskerRight adj₂.derivedPlus.unit R₁.rightDerivedFunctorPlus) ≫
+        Functor.whiskerRight (Functor.mapDerivedCategoryPlusCompIso L₁ L₂).inv
+          (R₂.rightDerivedFunctorPlus ⋙ R₁.rightDerivedFunctorPlus) ≫
+        Functor.whiskerLeft (L₁ ⋙ L₂).mapDerivedCategoryPlus
+          (Functor.rightDerivedFunctorPlusCompIso R₂ R₁).inv := by
+  refine ((adj₁.comp adj₂).derivedPlus_unit_eq _ ?_).symm
+  intro K
+  have hw : (R₂ ⋙ R₁).rightDerivedFunctorPlusUnit.app
+        ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K) =
+      (Functor.rightDerivedFunctorPlusCompUnit R₂ R₁).app
+          ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K) ≫
+        (Functor.rightDerivedFunctorPlusCompIso R₂ R₁).inv.app
+          (DerivedCategory.Plus.Qh.obj ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K)) := by
+    rw [← Functor.rightDerivedFunctorPlusCompIso_fac_app]
+    simp
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_map, Category.assoc]
+  rw [← NatTrans.naturality, hw, mapHomotopyCategoryPlus_comp_unit_app]
+  simp only [Functor.comp_obj, ← Category.assoc]
+  congr 1
+  simp only [Functor.rightDerivedFunctorPlusCompUnit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.map_comp, Category.assoc, Category.id_comp,
+    Category.comp_id]
+  rw [← Functor.mapDerivedCategoryPlusCompIso_fac L₁ L₂ K]
+  simp only [Functor.comp_map, Functor.map_comp]
+  simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc,
+    NatTrans.naturality, Functor.comp_map, Iso.hom_inv_id_app_assoc]
+  have hin : adj₂.derivedPlus.unit.app
+        (L₁.mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Qh.obj K)) ≫
+      R₂.rightDerivedFunctorPlus.map
+        (L₂.mapDerivedCategoryPlus.map (L₁.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+          L₂.mapDerivedCategoryPlusFactorsh.hom.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
+          DerivedCategory.Plus.Qh.map
+            ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L₁ ⋙ L₂))).hom.app K)) =
+      L₁.mapDerivedCategoryPlusFactorsh.hom.app K ≫
+        DerivedCategory.Plus.Qh.map
+          (adj₂.mapHomotopyCategoryPlus.unit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
+            R₂.mapHomotopyCategoryPlus.map
+              ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L₁ ⋙ L₂))).hom.app K)) ≫
+        R₂.rightDerivedFunctorPlusUnit.app ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K) := by
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← Functor.comp_map L₂.mapDerivedCategoryPlus R₂.rightDerivedFunctorPlus,
+      ← NatTrans.naturality_assoc]
+    simp only [Functor.id_map, Functor.comp_obj]
+    rw [derivedPlus_unit_app_fac_assoc,
+      ← Functor.comp_map DerivedCategory.Plus.Qh R₂.rightDerivedFunctorPlus,
+      ← NatTrans.naturality, Functor.comp_map]
+  rw [hin]
+  have hv₁ : R₁.rightDerivedFunctorPlusUnit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
+      R₁.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
+        (adj₂.mapHomotopyCategoryPlus.unit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
+          R₂.mapHomotopyCategoryPlus.map
+            ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L₁ ⋙ L₂))).hom.app K))) =
+      DerivedCategory.Plus.Qh.map (R₁.mapHomotopyCategoryPlus.map
+        (adj₂.mapHomotopyCategoryPlus.unit.app (L₁.mapHomotopyCategoryPlus.obj K) ≫
+          R₂.mapHomotopyCategoryPlus.map
+            ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L₁ ⋙ L₂))).hom.app K))) ≫
+      R₁.rightDerivedFunctorPlusUnit.app
+        (R₂.mapHomotopyCategoryPlus.obj ((L₁ ⋙ L₂).mapHomotopyCategoryPlus.obj K)) :=
+    (R₁.rightDerivedFunctorPlusUnit.naturality _).symm
+  rw [Functor.map_comp, derivedPlus_unit_app_fac_assoc, Functor.map_comp,
+    reassoc_of% hv₁]
+  simp only [Functor.map_comp, Category.assoc]
+
+/-- The pointwise form of `Adjunction.derivedPlus_comp_unit`. -/
+@[reassoc]
+theorem derivedPlus_comp_unit_app (X : DerivedCategory.Plus C) :
+    (adj₁.comp adj₂).derivedPlus.unit.app X ≫
+        (Functor.rightDerivedFunctorPlusCompIso R₂ R₁).hom.app
+          ((L₁ ⋙ L₂).mapDerivedCategoryPlus.obj X) ≫
+        R₁.rightDerivedFunctorPlus.map (R₂.rightDerivedFunctorPlus.map
+          ((Functor.mapDerivedCategoryPlusCompIso L₁ L₂).hom.app X)) =
+      adj₁.derivedPlus.unit.app X ≫
+        R₁.rightDerivedFunctorPlus.map
+          (adj₂.derivedPlus.unit.app (L₁.mapDerivedCategoryPlus.obj X)) := by
+  rw [derivedPlus_comp_unit]
+  simp
+
+end Composition
 
 end CategoryTheory.Adjunction
