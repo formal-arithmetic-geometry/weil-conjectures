@@ -275,7 +275,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
@@ -308,12 +307,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Comma
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
@@ -400,6 +399,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Stalk
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.UpperLowerStar.EtaleOver
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.UpperLowerStar.TopologicalInvariance

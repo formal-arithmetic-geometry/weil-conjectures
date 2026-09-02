@@ -95,7 +95,7 @@ constant sheaves to constant sheaves. -/
 lemma _root_.CategoryTheory.Sheaf.isConstant_upperStar_iff (G : Sheaf Y.smallEtaleTopology A) :
     ((Etale.upperStar A u).obj G).IsConstant X.smallEtaleTopology ↔
       G.IsConstant Y.smallEtaleTopology := by
-  refine ⟨fun h ↦ ?_, fun _ ↦ Sheaf.IsConstant.upperStar A u G⟩
+  refine ⟨fun h ↦ ?_, fun _ ↦ isConstant_upperStar A u G⟩
   have := Etale.isEquivalence_upperStar A u
   obtain ⟨a, ⟨i⟩⟩ := ((Etale.upperStar A u).obj G).mem_essImage_of_isConstant
   exact Sheaf.isConstant_of_iso _ ((Etale.upperStar A u).preimageIso
@@ -150,7 +150,7 @@ theorem IsLocallyConstantSheaf.of_upperStar (G : Sheaf Y.smallEtaleTopology A)
   have h₂ : ((Etale.upperStar A (e i).hom.left).obj
       ((Etale.upperStar A (𝒰.f i)).obj ((Etale.upperStar A u).obj G))).IsConstant
         (pullback (V i).hom u).smallEtaleTopology :=
-    Sheaf.IsConstant.upperStar A _ _
+    isConstant_upperStar A _ _
   have hsnd : pullback.snd (V i).hom u = (e i).hom.left ≫ 𝒰.f i :=
     (MorphismProperty.Over.w (e i).hom).symm
   let e' : (Etale.upperStar A (pullback.fst (V i).hom u)).obj

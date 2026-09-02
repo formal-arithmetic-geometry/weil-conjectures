@@ -98,7 +98,7 @@ theorem IsLocallyConstantSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
       (isConstant_over_iff_upperStar A (𝒰.etalePrecoverageToEtale i) F).mp (h𝒰 i)
     have h₂ : ((Etale.upperStar A (𝒰.f i) ⋙ Etale.upperStar A (pullback.snd (𝒱.f j) (𝒰.f i))).obj
         F).IsConstant (pullback (𝒱.f j) (𝒰.f i)).smallEtaleTopology :=
-      Sheaf.IsConstant.upperStar A (pullback.snd (𝒱.f j) (𝒰.f i))
+      isConstant_upperStar A (pullback.snd (𝒱.f j) (𝒰.f i))
         ((Etale.upperStar A (𝒰.f i)).obj F)
     exact Sheaf.isConstant_congr _
       ((Etale.upperStarComp A (pullback.snd (𝒱.f j) (𝒰.f i)) (𝒰.f i)).app F).symm
@@ -108,7 +108,7 @@ theorem IsLocallyConstantSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)
       (isConstant_over_iff_upperStar A (𝒱.etalePrecoverageToEtale j) G).mp (h𝒱 j)
     have h₂ : ((Etale.upperStar A (𝒱.f j) ⋙ Etale.upperStar A (pullback.fst (𝒱.f j) (𝒰.f i))).obj
         G).IsConstant (pullback (𝒱.f j) (𝒰.f i)).smallEtaleTopology :=
-      Sheaf.IsConstant.upperStar A (pullback.fst (𝒱.f j) (𝒰.f i))
+      isConstant_upperStar A (pullback.fst (𝒱.f j) (𝒰.f i))
         ((Etale.upperStar A (𝒱.f j)).obj G)
     refine Sheaf.isConstant_congr _
       (((Etale.upperStarComp A (pullback.fst (𝒱.f j) (𝒰.f i)) (𝒱.f j)).app G).symm ≪≫

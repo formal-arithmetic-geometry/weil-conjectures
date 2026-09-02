@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.UpperLowerStar.EtaleOver
 public import WeilConjectures.Topology.Stratification
 
 /-!
@@ -93,31 +93,6 @@ namespace AlgebraicGeometry.Scheme
 
 variable {X Y : Scheme.{u}}
 
-section PullbackFunctor
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [HasSmallSiteSheafify A]
-
-/-- The pullback of étale sheaves along `f : X ⟶ Y` sends constant sheaves to constant
-sheaves: `constantSheaf ⋙ f^*` and `constantSheaf` are both left adjoint to global
-sections of the pushforward, since base change preserves the terminal object of the
-small étale site (`X ×_Y Y ≅ X`). -/
-def upperStarConstantSheafIso (f : X ⟶ Y) :
-    constantSheaf Y.smallEtaleTopology A ⋙ Etale.upperStar A f ≅
-      constantSheaf X.smallEtaleTopology A :=
-  Adjunction.leftAdjointUniq
-    (((constantSheafAdj Y.smallEtaleTopology A terminalIsTerminal).comp
-        (Etale.upperStarLowerStarAdjunction A f)).ofNatIsoRight
-      (NatIso.ofComponents
-        (F := Etale.lowerStar A f ⋙
-          (sheafSections Y.smallEtaleTopology A).obj (op (⊤_ Y.Etale)))
-        (G := (sheafSections X.smallEtaleTopology A).obj (op (⊤_ X.Etale)))
-        (fun H ↦ H.obj.mapIso (PreservesTerminal.iso f.Etale).op.symm)
-        (fun α ↦ (α.hom.naturality _).symm)))
-    (constantSheafAdj X.smallEtaleTopology A terminalIsTerminal)
-
-end PullbackFunctor
-
 section LocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
@@ -157,7 +132,6 @@ lemma _root_.CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf
     {F : Sheaf X.smallEtaleTopology A} (h : F.IsConstant X.smallEtaleTopology) :
     IsLocallyConstantSheaf F :=
   have := h
-  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
   ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ F.isConstant_over _⟩⟩⟩
 
 end LocallyConstant
@@ -213,6 +187,22 @@ structure Stratification (X : Scheme.{u}) extends Topology.Stratification X wher
   range_immersion : ∀ i, Set.range (immersion i) = stratum i
 
 attribute [instance] Stratification.isImmersion
+
+/-- The pullback of a stratification of `X` along `g : Y ⟶ X`: the strata are the preimages
+of the strata, with the base changes of the immersions.
+(blueprint: `lemma:constructible-pullback-stratification`) -/
+@[simps n stratum domain immersion]
+noncomputable def Stratification.pullback (S : Stratification X) (g : Y ⟶ X) :
+    Stratification Y where
+  n := S.n
+  stratum i := g.base ⁻¹' S.stratum i
+  isLocallyClosed_stratum i := (S.isLocallyClosed_stratum i).preimage g.continuous
+  iUnion_stratum_eq_univ := by
+    rw [← Set.preimage_iUnion, S.iUnion_stratum_eq_univ, Set.preimage_univ]
+  pairwise_disjoint_stratum i j hij := (S.pairwise_disjoint_stratum hij).preimage _
+  domain i := Limits.pullback (S.immersion i) g
+  immersion i := Limits.pullback.snd (S.immersion i) g
+  range_immersion i := by rw [Pullback.range_snd, S.range_immersion]
 
 end Stratification
 

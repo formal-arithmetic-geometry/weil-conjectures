@@ -110,7 +110,8 @@ $M_X$ to $\et X$ localised at $X$ is $M_X$ again, which is constant.
 \begin{lemma}[Pullback of a constant sheaf]
 \label{lemma:constructible-pullback-constant}
 \uses{def:constructible-constant}
-\lean{AlgebraicGeometry.Scheme.upperStarConstantSheafIso}
+\lean{AlgebraicGeometry.Scheme.upperStarConstantSheafIso,
+  AlgebraicGeometry.Scheme.isConstant_upperStar}
 \leanok
 For $g\colon Y\to X$ and $M\in\mathcal A$ there is a natural isomorphism
 $g^*(M_X)\cong M_Y$.  In particular $g^*$ sends constant sheaves to constant
@@ -146,12 +147,51 @@ notions is a condition on these.  A trivialising datum, respectively a
 stratification, for $\mathcal F$ is therefore one for $\mathcal F'$.
 \end{proof}
 
+\begin{lemma}[The localised \'etale site]
+\label{lemma:constructible-localised-site}
+\lean{AlgebraicGeometry.Scheme.Etale.overEquiv,
+  AlgebraicGeometry.Scheme.Etale.overSheafEquiv}
+\leanok
+Let $U\to X$ be \'etale.  The localisation $\et X/U$ of the small \'etale site
+of $X$ at $U$ is equivalent, as a site, to the small \'etale site $\et U$;
+hence $\shv{\et X/U}\simeq\shv{\et U}$.
+\end{lemma}
+\begin{proof}
+\leanok
+An \'etale $X$-scheme over $U$ is the same thing as an \'etale $U$-scheme,
+since \'etale morphisms cancel on the right: if $V\to U\to X$ and $U\to X$
+are \'etale, then so is $V\to U$.  Under this equivalence the localised
+topology and the small \'etale topology of $U$ both consist of the jointly
+surjective families, so both functors are cocontinuous and the equivalence
+of sites induces an equivalence of the categories of sheaves.
+\end{proof}
+
+\begin{lemma}[Restriction to the localised site is pullback]
+\label{lemma:constructible-restriction-upperStar}
+\uses{lemma:constructible-localised-site}
+\lean{AlgebraicGeometry.Scheme.Etale.overSheafEquivIso,
+  AlgebraicGeometry.Scheme.isConstant_over_iff_upperStar}
+\leanok
+Let $U\to X$ be \'etale.  Under \Cref{lemma:constructible-localised-site} the
+restriction of $\mathcal F\in\shv{\et X}$ to $\et X/U$ corresponds to
+$U^*\mathcal F\in\shv{\et U}$, naturally in $\mathcal F$.  In particular the
+restriction of $\mathcal F$ to $\et X/U$ is constant if and only if
+$U^*\mathcal F$ is.
+\end{lemma}
+\begin{proof}
+\leanok
+Both are restriction of presheaves along the localisation functor
+$\et U\to\et X$, $(V\to U)\mapsto(V\to U\to X)$: for the left hand side this
+is the equivalence of \Cref{lemma:constructible-localised-site} followed by
+the forgetful functor, and for the right hand side this is the description of
+$U^*$ for an \'etale morphism $U\to X$, both restriction along the
+localisation functor and $U^*$ being left adjoint to $U_*$.
+\end{proof}
+
 \begin{lemma}[Pullback of locally constant sheaves]
 \label{lemma:constructible-pullback-locally-constant}
-\uses{def:constructible-locally-constant,lemma:constructible-pullback-constant}
-\lean{AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.upperStar,
-  AlgebraicGeometry.Scheme.isConstant_over_iff_upperStar,
-  AlgebraicGeometry.Scheme.Etale.overEquiv}
+\uses{def:constructible-locally-constant,lemma:constructible-pullback-constant,lemma:constructible-localised-site,lemma:constructible-restriction-upperStar}
+\lean{AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.upperStar}
 \leanok
 Let $g\colon Y\to X$ be a morphism and let $\mathcal F\in\shv{\et X}$ be
 locally constant.  Then $g^*\mathcal F$ is locally constant.
@@ -163,10 +203,10 @@ change $(U_i\times_XY\to Y)_i$ is an \'etale cover of $Y$, since \'etale
 morphisms and jointly surjective families are stable under base change.
 The restriction of $g^*\mathcal F$ to $\et{U_i\times_XY}$ is the pullback,
 along the projection $g_i\colon U_i\times_XY\to U_i$, of the restriction
-of $\mathcal F$ to $\et{U_i}$: pullback along $g$ followed by restriction to
-the localised site equals restriction followed by pullback along $g_i$,
-because both are the sheaf pullback along the composite of the base change
-functors, which agree.  The restriction of $\mathcal F$ to $\et{U_i}$ is
+of $\mathcal F$ to $\et{U_i}$: by
+\Cref{lemma:constructible-restriction-upperStar} both restrictions are
+pullbacks, and the two composites agree because the square
+$U_i\times_XY\to U_i\to X$, $U_i\times_XY\to Y\to X$ commutes.  The restriction of $\mathcal F$ to $\et{U_i}$ is
 constant, and pullbacks of constant sheaves are constant by
 \Cref{lemma:constructible-pullback-constant}.  Hence
 $(U_i\times_XY\to Y)_i$ is a trivialising datum for $g^*\mathcal F$.
@@ -209,11 +249,24 @@ cover $Y$, as preimages of the locally closed, pairwise disjoint sets $X_k$
 covering $X$.
 \end{proof}
 
+\begin{lemma}[Pullback of finite locally constant sheaves]
+\label{lemma:constructible-pullback-finite-locally-constant}
+\uses{def:constructible-finite-locally-constant,lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite}
+\lean{AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar}
+\leanok
+Let $g\colon Y\to X$ be a morphism and let $\mathcal F\in\shv{\et X}$ be
+finite locally constant.  Then $g^*\mathcal F$ is finite locally constant.
+\end{lemma}
+\begin{proof}
+\leanok
+Combine \Cref{lemma:constructible-pullback-locally-constant} and
+\Cref{lemma:constructible-pullback-finite}.
+\end{proof}
+
 \begin{proposition}[Pullback of constructible sheaves]
 \label{prop:constructible-pullback}
-\uses{def:constructible-constructible,lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite,lemma:constructible-pullback-stratification,lemma:constructible-iso-invariance}
-\lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.upperStar,
-  AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar}
+\uses{def:constructible-constructible,lemma:constructible-pullback-finite-locally-constant,lemma:constructible-pullback-stratification,lemma:constructible-iso-invariance}
+\lean{AlgebraicGeometry.Scheme.IsConstructibleSheaf.upperStar}
 \leanok
 Let $g\colon Y\to X$ be a morphism and let $\mathcal F\in\shv{\et X}$ be
 constructible.  Then $g^*\mathcal F$ is constructible.  In particular
@@ -230,8 +283,8 @@ $g_k\colon Z_k\times_XY\to Z_k$.  Since $\iota_k\circ g_k=g\circ\iota'_k$
 and pullback is functorial up to natural isomorphism,
 $\iota_k'^*g^*\mathcal F\cong g_k^*\iota_k^*\mathcal F$, which is finite
 locally constant by
-\Cref{lemma:constructible-pullback-locally-constant,lemma:constructible-pullback-finite}
-and \Cref{lemma:constructible-iso-invariance}.
+\Cref{lemma:constructible-pullback-finite-locally-constant} and
+\Cref{lemma:constructible-iso-invariance}.
 \end{proof}
 
 \section{Independence of the scheme structure on the strata}

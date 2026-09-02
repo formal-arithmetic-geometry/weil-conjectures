@@ -487,4 +487,31 @@ lemma Etale.upperStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
 
 end Coherence
 
+section Comm
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
+variable {S T U V : Scheme.{u}}
+
+open Etale
+
+/-- **Exchange isomorphism of a commutative square of schemes**: for
+
+```
+    T ────q────→ V
+    │            │
+    p            g
+    ↓            ↓
+    U ────f────→ S
+```
+
+with `p ≫ f = q ≫ g`, the two composite pullbacks `f^* ⋙ p^*` and `g^* ⋙ q^*` agree, both
+being the pullback along the diagonal of the square. The square need not be cartesian. -/
+noncomputable def Etale.upperStarCompIsoOfComm {p : T ⟶ U} {f : U ⟶ S} {q : T ⟶ V} {g : V ⟶ S}
+    (w : p ≫ f = q ≫ g) : (f)^*[A] ⋙ (p)^*[A] ≅ (g)^*[A] ⋙ (q)^*[A] :=
+  (Etale.upperStarComp A p f).symm ≪≫
+    eqToIso (congrArg (fun m ↦ Etale.upperStar A m) w) ≪≫ Etale.upperStarComp A q g
+
+end Comm
+
 end AlgebraicGeometry

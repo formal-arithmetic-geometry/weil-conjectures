@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Pullback
 
@@ -22,9 +23,17 @@ a continuous functor of sites which preserves a terminal object
 (`CategoryTheory.Functor.sheafPullbackCommuteConstant`); in particular the pullback of a
 constant sheaf is constant (`CategoryTheory.Sheaf.isConstant_sheafPullback`).
 
+Finally, `CategoryTheory.Sheaf.isConstant_sheafEquiv_inverse_iff` is a variant of
+mathlib's `CategoryTheory.Sheaf.isConstant_iff_of_equivalence` assuming directly that the
+pushforward of sheaves along a dense subsite is an equivalence, rather than the existence
+of the limits needed to prove it; this is what makes it applicable to the (large) small
+étale site. It specializes to an equivalence of sites in
+`CategoryTheory.Sheaf.isConstant_sheafCongr_functor_iff`.
+
 This file imports both `Mathlib.CategoryTheory.Sites.ConstantSheaf` and
 `Mathlib.CategoryTheory.Sites.Over` since neither imports the other, and additionally
-`Mathlib.CategoryTheory.Sites.Pullback` for the pullback of sheaves.
+`Mathlib.CategoryTheory.Sites.Pullback` for the pullback of sheaves and
+`Mathlib.CategoryTheory.Sites.Equivalence` for equivalences of sites.
 -/
 
 @[expose] public section
@@ -106,5 +115,79 @@ lemma Sheaf.isConstant_sheafPullback {T : C} (hT : IsTerminal T)
       (G.constantSheafsheafPullbackIso A J K hT hGT).app a)
 
 end Pullback
+
+section DenseSubsite
+
+open Functor.IsDenseSubsite
+
+variable {C : Type*} [Category* C] {C' : Type*} [Category* C'] (J : GrothendieckTopology C)
+  (K : GrothendieckTopology C') (G : C ⥤ C') [G.IsDenseSubsite J K]
+  (A : Type u') [Category.{v} A] [HasWeakSheafify J A] [HasWeakSheafify K A]
+  [(G.sheafPushforwardContinuous A J K).IsEquivalence]
+
+/-- The constant sheaf functor commutes with the equivalence of sheaf categories induced by
+a dense subsite:
+
+```
+                constantSheaf J A
+         A ────────────────────────→ Sheaf J A
+          \                              │
+           \ constantSheaf K A            │ (sheafEquiv J K G A).functor
+            ↘                             ↓
+                                     Sheaf K A
+```
+
+This is `CategoryTheory.equivCommuteConstant` with the hypothesis that the pushforward of
+sheaves is an equivalence in place of the stronger existence of the limits indexed by the
+structured arrow categories of `G.op`, which is unavailable for the (large) small étale
+site. -/
+def constantSheafSheafEquivIso {T : C} (hT : IsTerminal T) (hT' : IsTerminal (G.obj T)) :
+    constantSheaf J A ⋙ (sheafEquiv J K G A).functor ≅ constantSheaf K A :=
+  ((constantSheafAdj J A hT).comp (sheafEquiv J K G A).toAdjunction).leftAdjointUniq
+    (constantSheafAdj K A hT')
+
+/-- The inverse form of `CategoryTheory.constantSheafSheafEquivIso`. -/
+def constantSheafSheafEquivIso' {T : C} (hT : IsTerminal T) (hT' : IsTerminal (G.obj T)) :
+    constantSheaf J A ≅ constantSheaf K A ⋙ (sheafEquiv J K G A).inverse :=
+  Functor.isoWhiskerLeft (constantSheaf J A) (sheafEquiv J K G A).unitIso ≪≫
+    Functor.isoWhiskerRight (constantSheafSheafEquivIso J K G A hT hT')
+      (sheafEquiv J K G A).inverse
+
+variable {J K A} in
+/-- A sheaf on a dense subsite is constant if and only if the corresponding sheaf on the
+ambient site is. This is `CategoryTheory.Sheaf.isConstant_iff_of_equivalence` with the
+weaker hypothesis of `CategoryTheory.constantSheafSheafEquivIso`. -/
+lemma Sheaf.isConstant_sheafEquiv_inverse_iff {T : C} (hT : IsTerminal T)
+    (hT' : IsTerminal (G.obj T)) (F : Sheaf K A) :
+    ((sheafEquiv J K G A).inverse.obj F).IsConstant J ↔ F.IsConstant K :=
+  ⟨fun ⟨Y, ⟨i⟩⟩ ↦ ⟨Y, ⟨(constantSheafSheafEquivIso J K G A hT hT').symm.app Y ≪≫
+      (sheafEquiv J K G A).functor.mapIso i ≪≫ (sheafEquiv J K G A).counitIso.app F⟩⟩,
+    fun ⟨Y, ⟨i⟩⟩ ↦ ⟨Y, ⟨(constantSheafSheafEquivIso' J K G A hT hT').app Y ≪≫
+      (sheafEquiv J K G A).inverse.mapIso i⟩⟩⟩
+
+end DenseSubsite
+
+section Equivalence
+
+open Functor.IsDenseSubsite
+
+variable {C : Type*} [Category* C] {D : Type*} [Category* D] (e : C ≌ D)
+  (J : GrothendieckTopology C) (K : GrothendieckTopology D) [e.inverse.IsDenseSubsite K J]
+  (A : Type u') [Category.{v} A] [HasWeakSheafify J A] [HasWeakSheafify K A]
+
+/-- The transport of sheaves along an equivalence of sites is the pushforward of sheaves
+along the inverse equivalence, hence an equivalence. -/
+instance Equivalence.isEquivalence_sheafPushforwardContinuous_inverse :
+    (e.inverse.sheafPushforwardContinuous A K J).IsEquivalence :=
+  inferInstanceAs ((e.sheafCongr J K A).functor.IsEquivalence)
+
+variable {J K A} in
+/-- A sheaf is constant if and only if its transport along an equivalence of sites is. -/
+lemma Sheaf.isConstant_sheafCongr_functor_iff {T : D} (hT : IsTerminal T) (F : Sheaf J A) :
+    ((e.sheafCongr J K A).functor.obj F).IsConstant K ↔ F.IsConstant J :=
+  Sheaf.isConstant_sheafEquiv_inverse_iff (J := K) (K := J) (G := e.inverse) hT
+    (hT.isTerminalObj e.inverse) F
+
+end Equivalence
 
 end CategoryTheory
