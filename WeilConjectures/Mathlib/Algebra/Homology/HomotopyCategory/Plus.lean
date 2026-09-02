@@ -77,6 +77,14 @@ lemma mapHomotopyCategoryPlus_comp {F G H : C ⥤ D}
   exact ((HomotopyCategory.plus D).fullyFaithfulι.whiskeringRight
     (HomotopyCategory.Plus C)).preimage_comp (Y := G.mapHomotopyCategoryPlus) _ _
 
+/-- The natural transformation `NatTrans.mapHomotopyCategoryPlus τ` induced by a natural
+isomorphism is an isomorphism, with inverse induced by the inverse. -/
+instance isIso_mapHomotopyCategoryPlus {F G : C ⥤ D} [F.Additive] [G.Additive]
+    (τ : F ⟶ G) [IsIso τ] : IsIso (NatTrans.mapHomotopyCategoryPlus τ) :=
+  ⟨NatTrans.mapHomotopyCategoryPlus (inv τ),
+    by rw [← mapHomotopyCategoryPlus_comp, IsIso.hom_inv_id, mapHomotopyCategoryPlus_id],
+    by rw [← mapHomotopyCategoryPlus_comp, IsIso.inv_hom_id, mapHomotopyCategoryPlus_id]⟩
+
 end CategoryTheory.NatTrans
 
 namespace CategoryTheory.Functor
