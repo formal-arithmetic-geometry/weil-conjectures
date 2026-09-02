@@ -108,6 +108,7 @@ public import WeilConjectures.Compactification.TwoOpen
 public import WeilConjectures.Compactification.TwoOpenComparison
 public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
+public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
