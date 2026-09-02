@@ -58,7 +58,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-variable {k : Type u} [Field k] {X : Scheme.{u}} {f : X ⟶ Spec (.of k)}
+variable {k : Type u} [Field k] {X : Scheme.{u}}
 
 /-- A scheme `X` over a field `k` is a **variety** if it is integral and its structure
 morphism is separated and of finite type.
@@ -74,12 +74,12 @@ class IsVariety (f : X ⟶ Spec (.of k)) : Prop extends
 @[stacks 0A23]
 class IsCurve (f : X ⟶ Spec (.of k)) : Prop extends IsVariety f where
   /-- A curve has dimension one. -/
-  topologicalKrullDim_eq : topologicalKrullDim X = 1
+  topologicalKrullDim_eq_one : topologicalKrullDim X = 1
 
 /-- A scheme `X` over a field `k` is a **smooth projective curve** if it is a curve whose
 structure morphism is smooth and projective.
 (blueprint: `def:pc-smooth-projective-curve`) -/
 class IsSmoothProjectiveCurve (f : X ⟶ Spec (.of k)) : Prop extends
-    IsCurve f, Smooth f, IsProjective f where
+    IsCurve f, Smooth f, IsProjective f
 
 end AlgebraicGeometry

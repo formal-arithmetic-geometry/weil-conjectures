@@ -21,15 +21,17 @@ no proof is omitted; no definition asserts a provable property.
 % (morphism-theoretic conventions; smooth curves, invertible modules, the Picard
 % group, divisors, genus, ample modules; the local theory of smooth curves, the
 % Cech machinery and the flat base change lemma for proper schemes over fields).
-% They carry the original labels; proofs are included in full.  In the assembled
-% blueprint these are the same objects as in files 02/06 (shared labels).
+% Proofs are included in full.  The labels are chapter-local (prefix `pcb-'), so
+% that nothing here clashes with files 02/06 when those land: at that point these
+% blocks should be deleted and their \Cref and \uses targets redirected to the
+% originals.
 % ----------------------------------------------------------------------------
 
 \section{Basic blocks (from files 02 and 06, with proofs)}\label{sec:basis}
 % ---------------------------------------------------------------------------
-% [reproduced from 02_proper_base_change.tex] (label: def:weil-pbc-scheme-conventions)
+% [reproduced from 02_proper_base_change.tex] (label: def:pcb-scheme-conventions)
 \begin{definition}[Scheme and morphism conventions]
-\label{def:weil-pbc-scheme-conventions}
+\label{def:pcb-scheme-conventions}
 Let \(f:X\to Y\) be a morphism of schemes.  It is \emph{quasi-compact} if
 the preimage of every affine open of \(Y\) is quasi-compact, and
 \emph{quasi-separated} if its diagonal \(X\to X\times_YX\) is
@@ -77,37 +79,37 @@ has a basis of quasi-compact opens.
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-curves)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-curves)
 \begin{definition}[Smooth curves over algebraically closed fields]
-\label{def:sc-curves}
+\label{def:pcb-curves}
 Let \(k\) be an algebraically closed field.  A \emph{curve over
-\(k\)} is a nonempty \hyperref[def:weil-pbc-scheme-conventions]{separated
+\(k\)} is a nonempty \hyperref[def:pcb-scheme-conventions]{separated
 scheme of finite type} over \(k\) of dimension at most one; it is
 \emph{smooth} if it is smooth over \(k\), \emph{proper} if it is
 proper over \(k\), and \emph{affine} if it is an affine scheme.
 \(\mathcal C\) denotes the category of smooth separated curves over
 \(k\).
-\uses{def:weil-pbc-scheme-conventions}
+\uses{def:pcb-scheme-conventions}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-function-field)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-function-field)
 \begin{definition}[The function field of a curve]
-\label{def:sc-function-field}
-Let \(C\) be a \hyperref[def:sc-curves]{curve} over \(k\).  The
+\label{def:pcb-function-field}
+Let \(C\) be a \hyperref[def:pcb-curves]{curve} over \(k\).  The
 \emph{function field} \(k(C)\) is the product of the stalks of the
 structure sheaf at the generic points of the irreducible components
 of \(C\); equivalently the ring of rational functions on \(C\).  For
 an integral curve it is the field of fractions of
 \(\mathcal O_C(U)\) for any nonempty affine open \(U\subseteq C\).
-\uses{def:sc-curves}
+\uses{def:pcb-curves}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-invertible-module)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-invertible-module)
 \begin{definition}[Invertible modules and their duals]
-\label{def:sc-invertible-module}
-Let \(C\) be a \hyperref[def:sc-curves]{curve}.  An
+\label{def:pcb-invertible-module}
+Let \(C\) be a \hyperref[def:pcb-curves]{curve}.  An
 \emph{invertible \(\mathcal O_C\)-module} is a quasi-coherent
 \(\mathcal O_C\)-module \(\mathcal L\) which is locally free of rank
 one for the Zariski topology (equivalently: there is an
@@ -117,16 +119,20 @@ one for the Zariski topology (equivalently: there is an
 \[
  \mathcal L^{\vee}:=\mathcal{H}om_{\mathcal O_C}(\mathcal L,\mathcal O_C).
 \]
-\uses{def:sc-curves}
+\uses{def:pcb-curves}
 \lean{SheafOfModules.IsInvertible}
 \leanok
+\statusnote{Only the first half of this definition is formalised.
+\texttt{SheafOfModules.IsInvertible} is \emph{defined} as being locally free of rank one; the
+equivalent characterisation by tensor-invertibility, and the dual $\cL^\vee$, are not
+formalised, since Mathlib has no monoidal structure on \texttt{SheafOfModules}.}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-effective-cartier-divisor)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-effective-cartier-divisor)
 \begin{definition}[Effective Cartier divisors]
-\label{def:sc-effective-cartier-divisor}
-Let \(C\) be a \hyperref[def:sc-curves]{curve}.  An
+\label{def:pcb-effective-cartier-divisor}
+Let \(C\) be a \hyperref[def:pcb-curves]{curve}.  An
 \emph{effective Cartier divisor} on \(C\) is a closed subscheme
 \(D\subseteq C\) which is locally defined by a single
 non-zero-divisor: every point of \(D\) has an open neighbourhood
@@ -136,36 +142,42 @@ are exactly the finite unions of closed points with their reduced
 structures: each closed point of a smooth curve, with its reduced
 structure, is one -- this is proved in the basic facts below -- and
 finite sums of effective Cartier divisors are effective Cartier.
-\uses{def:sc-curves}
+\uses{def:pcb-curves}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-picard-group)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-picard-group)
 \begin{definition}[The Picard group]
-\label{def:sc-picard-group}
-Let \(C\) be a \hyperref[def:sc-curves]{curve}.  The
+\label{def:pcb-picard-group}
+Let \(C\) be a \hyperref[def:pcb-curves]{curve}.  The
 \emph{Picard group} \(\operatorname{Pic}(C)\) is the set of
 isomorphism classes of
-\hyperref[def:sc-invertible-module]{invertible \(\mathcal
+\hyperref[def:pcb-invertible-module]{invertible \(\mathcal
 O_C\)-modules}, with the group law induced by tensor product (the
 unit is \(\mathcal O_C\), and the inverse of an invertible module
 \(\mathcal L\) is its dual \(\mathcal L^{\vee}\), which is
 invertible; the group axioms are verified in the basic facts
 below).  (\emph{Stacks Project, Definition 18.32.6, Tag
 \texttt{040C}}.)
-\uses{def:sc-curves,def:sc-invertible-module}
+\uses{def:pcb-curves,def:pcb-invertible-module}
+\lean{AlgebraicGeometry.Scheme.Pic}
+\leanok
+\statusnote{Only the underlying \emph{set} is formalised.
+\texttt{AlgebraicGeometry.Scheme.Pic} carries no group law: the group law is induced by the
+tensor product of invertible modules, which needs a monoidal structure on
+\texttt{SheafOfModules} that Mathlib does not have.}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-divisor)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-divisor)
 \begin{definition}[Divisors, principal divisors, class group]
-\label{def:sc-divisor}
-Let \(C\) be a \hyperref[def:sc-curves]{curve} over \(k\).  A
+\label{def:pcb-divisor}
+Let \(C\) be a \hyperref[def:pcb-curves]{curve} over \(k\).  A
 \emph{divisor} on \(C\) is a finite formal sum
 \(D=\sum_Pn_P[P]\) of closed points \(P\) of \(C\) with integer
 coefficients; \(\operatorname{Div}(C)\) is the free abelian group on
 the closed points of \(C\).  For \(f\in k(C)^*\)
-(\Cref{def:sc-function-field}), its \emph{divisor} is
+(\Cref{def:pcb-function-field}), its \emph{divisor} is
 \[
  \operatorname{div}(f)=\sum_P v_P(f)\,[P],
 \]
@@ -187,21 +199,21 @@ it is invertible -- this is the identification of
 \(\operatorname{Pic}(C)\) with \(\operatorname{Cl}(C)\) for smooth
 curves, proved in the basic facts below.  When all
 \(n_P\geq0\), \(D\) is \emph{effective} and is an effective Cartier
-divisor in the sense of \Cref{def:sc-effective-cartier-divisor}
+divisor in the sense of \Cref{def:pcb-effective-cartier-divisor}
 (equivalently, per that definition on the smooth curve \(C\)); the
 \emph{degree} of \(D\) is
 \[
  \deg D:=\sum_Pn_P.
 \]
 (For reducible \(C\) all objects above are defined componentwise.)
-\uses{def:sc-curves,def:sc-function-field,def:sc-effective-cartier-divisor}
+\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-genus)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-genus)
 \begin{definition}[The genus of a curve]
-\label{def:sc-genus}
-Let \(C\) be a \hyperref[def:sc-curves]{proper} smooth curve over
+\label{def:pcb-genus}
+Let \(C\) be a \hyperref[def:pcb-curves]{proper} smooth curve over
 an algebraically closed field \(k\).  The \emph{genus} of \(C\) is
 \[
  g(C):=\dim_kH^1(C,\mathcal O_C),
@@ -221,13 +233,13 @@ genus used in this blueprint is the genus of a compactification
 \(C\) as an open subscheme with finite complement; this convention is
 fixed explicitly at the single place where it is used, and it is the
 compactification lemma below that provides the compactification.)
-\uses{def:sc-curves}
+\uses{def:pcb-curves}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-ample)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-ample)
 \begin{definition}[Very ample and ample line bundles]
-\label{def:sc-ample}
+\label{def:pcb-ample}
 Let \(X\) be a proper scheme over \(k\) and \(\mathcal L\) a line
 bundle on \(X\).  \(\mathcal L\) is \emph{very ample} if the complete
 linear system \(|\mathcal L|=\mathbf P(H^0(X,\mathcal L)^{\vee})\)
@@ -245,50 +257,50 @@ Stacks Project, Properties of Schemes, Proposition 28.27.13, \stacksproject{01Q3
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-pic0)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-pic0)
 \begin{definition}[Degree and \(\operatorname{Pic}^0\)]
-\label{def:sc-pic0}
-Let \(C\) be a \hyperref[def:sc-curves]{proper} smooth curve over
+\label{def:pcb-pic0}
+Let \(C\) be a \hyperref[def:pcb-curves]{proper} smooth curve over
 algebraically closed \(k\).  The \emph{degree} is the homomorphism
 \[
  \deg:\operatorname{Pic}(C)\to\mathbf Z,\qquad
  \deg[\mathcal O(D)]=\deg D,
 \]
-of the divisor class group of \Cref{def:sc-divisor}; it is well
+of the divisor class group of \Cref{def:pcb-divisor}; it is well
 defined because principal divisors have degree zero (proved in the
 basic facts below), and it sends the class of a \(k\)-rational point
 to \(1\).  Put
 \[
  \operatorname{Pic}^0(C):=\ker(\deg).
 \]
-\uses{def:sc-curves,def:sc-picard-group,def:sc-divisor}
+\uses{def:pcb-curves,def:pcb-picard-group,def:pcb-divisor}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-picard-functor)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-picard-functor)
 \begin{definition}[The Picard functor of a proper curve]
-\label{def:sc-picard-functor}
-Let \(C\) be a \hyperref[def:sc-curves]{proper} smooth curve over a
+\label{def:pcb-picard-functor}
+Let \(C\) be a \hyperref[def:pcb-curves]{proper} smooth curve over a
 field \(k\).  The \emph{Picard functor}
 \[
  \operatorname{Pic}_{C/k}:(k\text{-algebras})\longrightarrow\mathbf{Ab},
  \qquad R\longmapsto\operatorname{Pic}(C\times_kR),
 \]
 is the fppf sheafification of the functor of
-\hyperref[def:sc-invertible-module]{invertible modules}; for
+\hyperref[def:pcb-invertible-module]{invertible modules}; for
 \(d\in\mathbf Z\), \(\operatorname{Pic}^d_{C/k}\) is the open and
 closed subfunctor of \(\operatorname{Pic}_{C/k}\) of invertible
 modules of fibrewise degree \(d\) (degree \(d\) on every geometric
 fibre; for \(k\) algebraically closed this recovers
 \(\operatorname{Pic}(C)\) and its degree
-\Cref{def:sc-pic0}).
-\uses{def:sc-curves,def:sc-invertible-module,def:sc-pic0}
+\Cref{def:pcb-pic0}).
+\uses{def:pcb-curves,def:pcb-invertible-module,def:pcb-pic0}
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: def:sc-group-scheme)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-group-scheme)
 \begin{definition}[Group schemes over a field]
-\label{def:sc-group-scheme}
+\label{def:pcb-group-scheme}
 Let \(k\) be a field.  A \(k\)-\emph{group scheme} is a \(k\)-scheme
 \(G\) together with morphisms \(m:G\times_kG\to G\) (multiplication),
 \(i:G\to G\) (inverse) and \(e:\operatorname{Spec}k\to G\) (identity)
@@ -305,9 +317,9 @@ morphism of schemes compatible with the multiplications; the
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-regular-local-domain)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-regular-local-domain)
 \begin{lemma}[Regular local rings are domains]
-\label{lem:sc-regular-local-domain}
+\label{lem:pcb-regular-local-domain}
 A regular local ring \(R\) is a domain.
 \end{lemma}
 \begin{proof}
@@ -332,9 +344,9 @@ domain.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-principal-ideal-dvr)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-principal-ideal-dvr)
 \begin{lemma}[Local domains with principal maximal ideal]
-\label{lem:sc-principal-ideal-dvr}
+\label{lem:pcb-principal-ideal-dvr}
 A noetherian local domain \((R,\mathfrak m)\) with principal
 maximal ideal \(\mathfrak m=(t)\), \(t\neq0\), is a discrete
 valuation ring.
@@ -373,11 +385,11 @@ with \(R=\{x:v(x)\geq0\}\) and
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-invertible-dual)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-invertible-dual)
 \begin{lemma}[Duals of invertible modules]
-\label{lem:sc-invertible-dual}
-Let \(C\) be a \hyperref[def:sc-curves]{curve} and \(\mathcal L\) an
-\hyperref[def:sc-invertible-module]{invertible module}.  Then
+\label{lem:pcb-invertible-dual}
+Let \(C\) be a \hyperref[def:pcb-curves]{curve} and \(\mathcal L\) an
+\hyperref[def:pcb-invertible-module]{invertible module}.  Then
 \(\mathcal L^{\vee}\) is invertible, the evaluation map
 \[
  \operatorname{ev}:\mathcal L\otimes\mathcal L^{\vee}\to\mathcal O_C,
@@ -385,7 +397,7 @@ Let \(C\) be a \hyperref[def:sc-curves]{curve} and \(\mathcal L\) an
 \]
 is an isomorphism, and the canonical map
 \(\mathcal L\to(\mathcal L^{\vee})^{\vee}\) is an isomorphism.
-\uses{def:sc-curves,def:sc-invertible-module}
+\uses{def:pcb-curves,def:pcb-invertible-module}
 \end{lemma}
 \begin{proof}
 All assertions are local in the Zariski topology: on an open \(U\)
@@ -397,36 +409,36 @@ become the standard isomorphisms \(\mathcal O_U\otimes\mathcal O_U\to
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-pic-group)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-pic-group)
 \begin{lemma}[\(\operatorname{Pic}(C)\) is a group]
-\label{lem:sc-pic-group}
-Let \(C\) be a \hyperref[def:sc-curves]{curve}.  Tensor product makes
+\label{lem:pcb-pic-group}
+Let \(C\) be a \hyperref[def:pcb-curves]{curve}.  Tensor product makes
 the set of isomorphism classes of
-\hyperref[def:sc-invertible-module]{invertible modules} an abelian
+\hyperref[def:pcb-invertible-module]{invertible modules} an abelian
 group: associative with unit \(\mathcal O_C\), with inverse
 \(\mathcal L\mapsto\mathcal L^{\vee}\).
-\uses{def:sc-curves,def:sc-invertible-module}
+\uses{def:pcb-curves,def:pcb-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-invertible-dual}
+\uses{lem:pcb-invertible-dual}
 Associativity, commutativity and the unit property of \(\otimes\) are
 the standard properties of tensor product of quasi-coherent modules.
-By \Cref{lem:sc-invertible-dual},
+By \Cref{lem:pcb-invertible-dual},
 \(\mathcal L\otimes\mathcal L^{\vee}\cong\mathcal O_C\), so
 \(\mathcal L^{\vee}\) is an inverse.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-smooth-regular)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-smooth-regular)
 \begin{lemma}[Smoothness implies regularity]
-\label{lem:sc-smooth-regular}
-Let \(C\) be a \hyperref[def:sc-curves]{smooth} curve over a field
+\label{lem:pcb-smooth-regular}
+Let \(C\) be a \hyperref[def:pcb-curves]{smooth} curve over a field
 \(k\).  Then every local ring \(\mathcal O_{C,P}\) is regular (hence
 a domain).
-\uses{def:sc-curves}
+\uses{def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-regular-local-domain}
+\uses{lem:pcb-regular-local-domain}
 By definition, a morphism is smooth if and only if it is locally of
 finite presentation, flat, and has geometrically regular fibres
 (the standard definition of smoothness: the fibres are regular and
@@ -436,42 +448,42 @@ each local ring \(\mathcal O_{C,P}\) is geometrically regular over
 \(k\): the ring \(\mathcal O_{C,P}\otimes_kk'\) is regular for every
 finite extension \(k'/k\).  Taking \(k'=k\), the ring
 \(\mathcal O_{C,P}\) itself is regular, hence a domain by
-\Cref{lem:sc-regular-local-domain}.
+\Cref{lem:pcb-regular-local-domain}.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-regular-dim1-dvr)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-regular-dim1-dvr)
 \begin{lemma}[One-dimensional regular local rings]
-\label{lem:sc-regular-dim1-dvr}
+\label{lem:pcb-regular-dim1-dvr}
 A regular local ring of dimension one is a discrete valuation ring.
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-principal-ideal-dvr,lem:sc-regular-local-domain}
+\uses{lem:pcb-principal-ideal-dvr,lem:pcb-regular-local-domain}
 A regular local ring of dimension one has
 \(\dim_R\mathfrak m/\mathfrak m^2=1\), so \(\mathfrak m=(t)\) for
 some \(t\) (Nakayama's lemma: \emph{reference: Stacks Project,
 Algebra, Lemma 10.20.1, \stacksproject{00DV}}), and \(R\) is a domain
-(\Cref{lem:sc-regular-local-domain}).  Hence \(R\) is a discrete
-valuation ring by \Cref{lem:sc-principal-ideal-dvr}.
+(\Cref{lem:pcb-regular-local-domain}).  Hence \(R\) is a discrete
+valuation ring by \Cref{lem:pcb-principal-ideal-dvr}.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-point-cartier)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-point-cartier)
 \begin{lemma}[Closed points are Cartier divisors on smooth curves]
-\label{lem:sc-point-cartier}
-Let \(C\) be a \hyperref[def:sc-curves]{smooth} curve over \(k\) and
+\label{lem:pcb-point-cartier}
+Let \(C\) be a \hyperref[def:pcb-curves]{smooth} curve over \(k\) and
 \(P\in C\) a closed point.  Then \(P\), with its reduced structure,
 is an effective Cartier divisor on \(C\): locally at \(P\), the ideal
 of \(P\) is generated by one non-zero-divisor.  Consequently every
-effective divisor of \Cref{def:sc-divisor} is an effective Cartier
+effective divisor of \Cref{def:pcb-divisor} is an effective Cartier
 divisor.
-\uses{def:sc-divisor,def:sc-curves,def:sc-effective-cartier-divisor}
+\uses{def:pcb-divisor,def:pcb-curves,def:pcb-effective-cartier-divisor}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-regular-dim1-dvr,lem:sc-smooth-regular}
-By \Cref{lem:sc-smooth-regular}, \(\mathcal O_{C,P}\) is a regular
+\uses{lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
+By \Cref{lem:pcb-smooth-regular}, \(\mathcal O_{C,P}\) is a regular
 local ring of dimension one, hence a discrete valuation ring by
-\Cref{lem:sc-regular-dim1-dvr}; its maximal ideal \(\mathfrak m_P\)
+\Cref{lem:pcb-regular-dim1-dvr}; its maximal ideal \(\mathfrak m_P\)
 is generated by a uniformizer \(t_P\), a non-zero-divisor.  The
 ideal of \(P\) in \(\mathcal O_{C,P}\) is \(\mathfrak m_P=(t_P)\), so
 \(P=V(t_P)\) on an affine neighbourhood where \(t_P\) extends; hence
@@ -481,20 +493,20 @@ equations), which gives the last assertion.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-base-change-curve)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-base-change-curve)
 \begin{lemma}[Base change of a curve]
-\label{lem:sc-base-change-curve}
+\label{lem:pcb-base-change-curve}
 Let \(k\subseteq k'\) be algebraically closed and let \(C\) be a
-\hyperref[def:sc-curves]{curve} over \(k\).  Then \(C_{k'}\) is a
+\hyperref[def:pcb-curves]{curve} over \(k\).  Then \(C_{k'}\) is a
 smooth separated curve over \(k'\) of the same dimension, and
 \(C_{k'}\) is proper (resp.\ affine) if \(C\) is proper (resp.\
 affine).
-\uses{def:sc-curves}
+\uses{def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{def:weil-pbc-scheme-conventions}
+\uses{def:pcb-scheme-conventions}
 Separation, smoothness, properness, finite type and affineness are
-all stable under base change (\Cref{def:weil-pbc-scheme-conventions}),
+all stable under base change (\Cref{def:pcb-scheme-conventions}),
 and for an affine curve \(C=\operatorname{Spec}A\) one has
 \(C_{k'}=\operatorname{Spec}(A\otimes_kk')\).  For the dimension:
 for an affine open piece \(U=\operatorname{Spec}A\) of \(C\), by
@@ -510,9 +522,9 @@ morphisms preserve dimension (the going-up theorem:
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-cech-spectral)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-cech-spectral)
 \begin{lemma}[The Cech-to-cohomology spectral sequence]
-\label{lem:sc-cech-spectral}
+\label{lem:pcb-cech-spectral}
 Let \(X\) be a scheme, \(\mathfrak U=\{U_i\to X\}\) an etale covering
 (or any covering of a site; we apply the statement below also to the
 Zariski site), and \(F\) an abelian sheaf on \(X_{\Et}\).  There is
@@ -552,10 +564,10 @@ Algebra: spectral sequences of double complexes}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-line-bundle-rational-section)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-line-bundle-rational-section)
 \begin{lemma}[Rational sections of line bundles]
-\label{lem:sc-line-bundle-rational-section}
-Let \(C\) be an integral \hyperref[def:sc-curves]{curve} over \(k\)
+\label{lem:pcb-line-bundle-rational-section}
+Let \(C\) be an integral \hyperref[def:pcb-curves]{curve} over \(k\)
 and \(\mathcal L\) an invertible module.  Then
 \(\mathcal L\otimes_{\mathcal O_C}k(C)\cong k(C)\); in particular
 \(\mathcal L\) has a nonzero rational section
@@ -566,17 +578,17 @@ the map
  \qquad f\longmapsto fs,
 \]
 is an isomorphism.
-\uses{def:sc-curves,def:sc-function-field,def:sc-divisor}
+\uses{def:pcb-curves,def:pcb-function-field,def:pcb-divisor}
 \end{lemma}
 \begin{proof}
-\uses{def:sc-divisor,def:sc-function-field}
+\uses{def:pcb-divisor,def:pcb-function-field}
 At the generic point \(\eta\), \(\mathcal L_\eta\) is a free
 \(\mathcal O_{C,\eta}=k(C)\)-module of rank one
-(\Cref{def:sc-function-field}), so
+(\Cref{def:pcb-function-field}), so
 \(\mathcal L\otimes k(C)\cong k(C)\) and a nonzero element \(s\)
 exists.  Writing \(D=\operatorname{div}(s)\) for the divisor of
 zeros and poles of \(s\), the submodule
-\(\mathcal O_C(D)\subseteq k(C)\) of \Cref{def:sc-divisor} is exactly
+\(\mathcal O_C(D)\subseteq k(C)\) of \Cref{def:pcb-divisor} is exactly
 the set of \(f\in k(C)\) with \(fs\in\mathcal L\), and
 \(f\mapsto fs\) is an isomorphism \(\mathcal O_C(D)\to\mathcal L\):
 locally, on an open \(U\) with \(\mathcal L|_U\cong\mathcal O_U\), it
@@ -586,9 +598,9 @@ is multiplication by the element \(s\) of \(k(C)\), and
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-flat-base-change-coherent)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-flat-base-change-coherent)
 \begin{lemma}[Flat base change for coherent cohomology]
-\label{lem:sc-flat-base-change-coherent}
+\label{lem:pcb-flat-base-change-coherent}
 Let \(X\) be a proper scheme over a field \(k\), \(k\to k'\) a flat
 \(k\)-algebra (e.g.\ a field extension) and \(\mathcal F\) a
 quasi-coherent sheaf on \(X\).  Then for all \(i\geq0\)
@@ -602,14 +614,14 @@ closed fields and \(\mathcal F=\mathcal O_X\), then
 \]
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-cech-spectral}
+\uses{lem:pcb-cech-spectral}
 Since \(X\) is proper over \(k\), it is quasi-compact and
 quasi-separated, hence covered by finitely many affine open subsets
 \(U_1,\dots,U_r\), and their base changes \(U_{j,k'}\) cover
 \(X_{k'}\).  For a quasi-coherent sheaf \(\mathcal F\), the cohomology
 \(H^\bullet(X,\mathcal F)\) is computed by the Cech complex of the
 affine covering \(\{U_j\to X\}\): in the Cech-to-cohomology spectral
-sequence of the covering (\Cref{lem:sc-cech-spectral}, applied to
+sequence of the covering (\Cref{lem:pcb-cech-spectral}, applied to
 the Zariski site),
 \[
  E_2^{pq}=\check H^p(\mathfrak U,\underline H^q(\mathcal F)),
@@ -642,10 +654,10 @@ scalars, because the field extension \(k\to k'\) is flat (injective).
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:sc-divisor-class-curve)
+% [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-divisor-class-curve)
 \begin{lemma}[\(\operatorname{Pic}\) is the divisor class group for smooth curves]
-\label{lem:sc-divisor-class-curve}
-Let \(C\) be a smooth \hyperref[def:sc-curves]{curve} over \(k\)
+\label{lem:pcb-divisor-class-curve}
+Let \(C\) be a smooth \hyperref[def:pcb-curves]{curve} over \(k\)
 (proper or not; for reducible \(C\) the assertion holds
 componentwise).  The map
 \[
@@ -653,10 +665,10 @@ componentwise).  The map
  D\mapsto[\mathcal O_C(D)],
 \]
 is an isomorphism of abelian groups.
-\uses{def:sc-curves,def:sc-divisor,def:sc-picard-group,def:sc-function-field}
+\uses{def:pcb-curves,def:pcb-divisor,def:pcb-picard-group,def:pcb-function-field}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-line-bundle-rational-section}
+\uses{lem:pcb-line-bundle-rational-section}
 The map is well defined: for \(f\in k(C)^*\),
 \(\mathcal O_C(\operatorname{div}f)=f^{-1}\mathcal O_C\cong
 \mathcal O_C\), and the class of \(\mathcal O_C(D)\) is independent
@@ -665,7 +677,7 @@ homomorphism: the multiplication map
 \(\mathcal O_C(D)\otimes\mathcal O_C(D')\to\mathcal O_C(D+D')\),
 \(f\otimes g\mapsto fg\), is an isomorphism (locally both sides are
 invertible modules generated by the same element of \(k(C)\)).
-Surjectivity: by \Cref{lem:sc-line-bundle-rational-section} every
+Surjectivity: by \Cref{lem:pcb-line-bundle-rational-section} every
 invertible module is \(\mathcal O_C(D)\) for
 \(D=\operatorname{div}(s)\) a rational section.  Injectivity: if
 \(\mathcal O_C(D)\cong\mathcal O_C\), let \(f\) be the image of
@@ -676,40 +688,40 @@ invertible module is \(\mathcal O_C(D)\) for
 
 % ---------------- end of basis blocks ----------------
 
-% [reproduced from file 06 (label lem:sc-positive-degree-ample)]
+% [reproduced from file 06 (label lem:pcb-positive-degree-ample)]
 \begin{lemma}[Positive degree implies ample]
-\label{lem:sc-positive-degree-ample}
-Let \(C\) be a proper smooth \hyperref[def:sc-curves]{curve} of
+\label{lem:pcb-positive-degree-ample}
+Let \(C\) be a proper smooth \hyperref[def:pcb-curves]{curve} of
 genus \(g\) over an algebraically closed field \(k\) and
 \(\mathcal L\) a line bundle with \(\deg\mathcal L>0\)
-(\Cref{def:sc-pic0}).  Then \(\mathcal L\) is
-\hyperref[def:sc-ample]{ample}.
-\uses{def:sc-pic0,def:sc-curves,def:sc-ample}
+(\Cref{def:pcb-pic0}).  Then \(\mathcal L\) is
+\hyperref[def:pcb-ample]{ample}.
+\uses{def:pcb-pic0,def:pcb-curves,def:pcb-ample}
 \end{lemma}
 \begin{proof}
-\uses{def:sc-ample,def:sc-pic0,lem:sc-degree-2g1-very-ample}
-Since \(\deg\) is a homomorphism (\Cref{def:sc-pic0}),
+\uses{def:pcb-ample,def:pcb-pic0,lem:pcb-degree-2g1-very-ample}
+Since \(\deg\) is a homomorphism (\Cref{def:pcb-pic0}),
 \(\deg(\mathcal L^{\otimes m})=m\deg\mathcal L\to\infty\), so for
 \(m\gg0\) one has \(\deg(\mathcal L^{\otimes m})\geq2g+1\), and by
-\Cref{lem:sc-degree-2g1-very-ample} the bundle
+\Cref{lem:pcb-degree-2g1-very-ample} the bundle
 \(\mathcal L^{\otimes m}\) is very ample; by definition
-(\Cref{def:sc-ample}) \(\mathcal L\) is ample.
+(\Cref{def:pcb-ample}) \(\mathcal L\) is ample.
 \end{proof}
 
-% [reproduced from file 06 (label lem:sc-degree-2g1-very-ample)]
+% [reproduced from file 06 (label lem:pcb-degree-2g1-very-ample)]
 \begin{lemma}[Line bundles of large degree are very ample]
-\label{lem:sc-degree-2g1-very-ample}
-Let \(C\) be a \hyperref[def:sc-curves]{proper smooth} curve of
-genus \(g\) (\Cref{def:sc-genus}) over an algebraically closed
+\label{lem:pcb-degree-2g1-very-ample}
+Let \(C\) be a \hyperref[def:pcb-curves]{proper smooth} curve of
+genus \(g\) (\Cref{def:pcb-genus}) over an algebraically closed
 field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
-\(\deg\mathcal M\geq2g+1\) (\Cref{def:sc-pic0}).  Then
-\(\mathcal M\) is \hyperref[def:sc-ample]{very ample}.
-\uses{def:sc-genus,def:sc-pic0,def:sc-curves,def:sc-ample}
+\(\deg\mathcal M\geq2g+1\) (\Cref{def:pcb-pic0}).  Then
+\(\mathcal M\) is \hyperref[def:pcb-ample]{very ample}.
+\uses{def:pcb-genus,def:pcb-pic0,def:pcb-curves,def:pcb-ample}
 \end{lemma}
 \begin{proof}
-\uses{def:sc-genus,lem:sc-dim0-finite,lem:sc-morphism-from-function,lem:sc-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree}
+\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree}
 We use Riemann--Roch (\Cref{thm:pc-riemann-roch}) for the proper
-smooth curve \(C\) of genus \(g\) (\Cref{def:sc-genus}): first, \(C\) is projective (a
+smooth curve \(C\) of genus \(g\) (\Cref{def:pcb-genus}): first, \(C\) is projective (a
 proper smooth curve over a field is projective: Varieties,
 Lemma~33.43.4,
 \stacksproject{0A26}; the remaining
@@ -731,7 +743,7 @@ and \(\deg\omega_C=2g-2\) (\Cref{lem:pc-omega-degree}).
 First, \(H^1(C,\mathcal M)=0\): the dual
 \(\mathcal O_C(K_C)\otimes\mathcal M^{-1}\) has degree
 \((2g-2)-d<0\), and a line bundle of negative degree has no nonzero
-global sections (\Cref{lem:sc-negative-degree-no-sections}).
+global sections (\Cref{lem:pcb-negative-degree-no-sections}).
 Hence \(\dim H^0(C,\mathcal M)=d-g+1\).  Similarly, for
 \(P,Q\in C\) (possibly equal),
 \(\deg\mathcal M(-P-Q)=d-2\geq2g-1\), so
@@ -767,11 +779,11 @@ over a field with vanishing sheaf of differentials is a finite
 disjoint union of points: its irreducible components have function
 fields with no differentials, hence are algebraic over the base
 field, so the dimension is zero and
-\Cref{lem:sc-dim0-finite} applies).  Thus \(\varphi\) is proper
+\Cref{lem:pcb-dim0-finite} applies).  Thus \(\varphi\) is proper
 (a morphism of proper schemes) with finite fibres, hence finite
 (\emph{reference: Stacks Project, Morphisms of Schemes,
 \stacksproject{02OG}: proper and quasi-finite implies finite;
-cf.\ the proof recalled in \Cref{lem:sc-morphism-from-function}}).
+cf.\ the proof recalled in \Cref{lem:pcb-morphism-from-function}}).
 Finally, \(\varphi\) is finite and injective on closed points: its
 image \(\varphi(C)\subset\mathbf P^N\) is closed, and for
 \(y=\varphi(P)\in\varphi(C)\) the fibre is the single point \(P\)
@@ -784,28 +796,28 @@ an isomorphism onto \(\varphi(C)\), i.e.\ a closed immersion.
 Hence \(\mathcal M\) is very ample.
 \end{proof}
 
-% [reproduced from file 06] (label: lem:sc-negative-degree-no-sections)
+% [reproduced from file 06] (label: lem:pcb-negative-degree-no-sections)
 \begin{lemma}[Line bundles of negative degree]
-\label{lem:sc-negative-degree-no-sections}
+\label{lem:pcb-negative-degree-no-sections}
 Let \(C\) be a proper smooth curve over an algebraically closed
 field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
-\(\deg\mathcal M<0\) (\Cref{def:sc-pic0}).  Then
+\(\deg\mathcal M<0\) (\Cref{def:pcb-pic0}).  Then
 \(H^0(C,\mathcal M)=0\).
-\uses{def:sc-pic0}
+\uses{def:pcb-pic0}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-deg-principal-zero,lem:sc-line-bundle-rational-section}
+\uses{lem:pcb-deg-principal-zero,lem:pcb-line-bundle-rational-section}
 A section \(s\neq0\) gives
 \(\mathcal M\cong\mathcal O(\operatorname{div}s)\) with
 \(\operatorname{div}s\) effective by
-\Cref{lem:sc-line-bundle-rational-section}, so
+\Cref{lem:pcb-line-bundle-rational-section}, so
 \(\deg\mathcal M=\deg\operatorname{div}s\geq0\), the degree being
-well defined by \Cref{lem:sc-deg-principal-zero}; contradiction.
+well defined by \Cref{lem:pcb-deg-principal-zero}; contradiction.
 \end{proof}
 
-% [reproduced from file 06] (label: lem:sc-dim0-finite)
+% [reproduced from file 06] (label: lem:pcb-dim0-finite)
 \begin{lemma}[Zero-dimensional closed subsets are finite]
-\label{lem:sc-dim0-finite}
+\label{lem:pcb-dim0-finite}
 Let \(X\) be a scheme of finite type over a field \(k\).  A closed
 subset \(Z\subseteq X\) of dimension at most zero is a finite set of
 closed points.
@@ -850,19 +862,19 @@ finite set, and every point of \(Z\) is closed because
 \(\dim Z=0\).
 \end{proof}
 
-% [reproduced from file 06] (label: lem:sc-morphism-from-function)
+% [reproduced from file 06] (label: lem:pcb-morphism-from-function)
 \begin{lemma}[Rational functions define finite morphisms to \(\mathbf P^1\)]
-\label{lem:sc-morphism-from-function}
-Let \(C\) be a proper smooth \hyperref[def:sc-curves]{curve} over
-\(k\), \(f\in k(C)\setminus k\) (\Cref{def:sc-function-field}),
+\label{lem:pcb-morphism-from-function}
+Let \(C\) be a proper smooth \hyperref[def:pcb-curves]{curve} over
+\(k\), \(f\in k(C)\setminus k\) (\Cref{def:pcb-function-field}),
 and \(\pi_f:C\to\mathbf P^1_k\) the morphism of
-\Cref{lem:sc-rational-function-morphism}.  Then \(\pi_f\) is
+\Cref{lem:pcb-rational-function-morphism}.  Then \(\pi_f\) is
 finite surjective and flat of degree \([k(C):k(f)]\).
-\uses{def:sc-function-field,lem:sc-rational-function-morphism,def:sc-curves}
+\uses{def:pcb-function-field,lem:pcb-rational-function-morphism,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-dim0-finite,lem:sc-rational-function-morphism,lem:sc-regular-dim1-dvr,lem:sc-smooth-regular}
-By \Cref{lem:sc-rational-function-morphism}, \(\pi_f\) is defined
+\uses{lem:pcb-dim0-finite,lem:pcb-rational-function-morphism,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
+By \Cref{lem:pcb-rational-function-morphism}, \(\pi_f\) is defined
 with \(\pi_f^*t=f\).
 
 \emph{Surjectivity and finiteness.}  The image of \(\pi_f\) is not a
@@ -871,7 +883,7 @@ and of dimension one, hence all of \(\mathbf P^1_k\): \(\pi_f\) is
 surjective.  The fibres of \(\pi_f\) are finite: the fibre over
 \(y\in\mathbf P^1\) is a proper closed subscheme of \(C\) not equal
 to \(C\), hence of dimension zero and finite by
-\Cref{lem:sc-dim0-finite}.  A proper morphism with finite fibres is
+\Cref{lem:pcb-dim0-finite}.  A proper morphism with finite fibres is
 finite (\emph{reference: Stacks Project, Morphisms of Schemes, \stacksproject{02OG}
 : a proper morphism is finite if and only if it is
 quasi-finite}; we
@@ -891,8 +903,8 @@ Hence \(\mathcal E\) is torsion-free.  A coherent torsion-free sheaf
 on the smooth curve \(\mathbf P^1\) is locally free: at a closed
 point \(y\), the stalk \(\mathcal E_y\) is a finitely generated
 module over the discrete valuation ring \(\mathcal O_{\mathbf P^1,y}\)
-(\Cref{lem:sc-smooth-regular},
-\Cref{lem:sc-regular-dim1-dvr}) and is torsion-free, hence free
+(\Cref{lem:pcb-smooth-regular},
+\Cref{lem:pcb-regular-dim1-dvr}) and is torsion-free, hence free
 (finitely generated torsion-free modules over a discrete valuation
 ring are free).  A finite morphism is flat if and only if its
 pushforward is locally free, so \(\pi_f\) is finite flat.  Its degree
@@ -904,18 +916,18 @@ a finitely generated field of transcendence degree one over \(k\) is
 finite over \(k(t)\) for any transcendental \(t\)).
 \end{proof}
 
-% [reproduced from file 06] (label: lem:sc-deg-principal-zero)
+% [reproduced from file 06] (label: lem:pcb-deg-principal-zero)
 \begin{lemma}[Principal divisors have degree zero]
-\label{lem:sc-deg-principal-zero}
-Let \(C\) be a proper smooth \hyperref[def:sc-curves]{curve} over an
+\label{lem:pcb-deg-principal-zero}
+Let \(C\) be a proper smooth \hyperref[def:pcb-curves]{curve} over an
 algebraically closed field \(k\), and \(f\in k(C)^*\).  Then
 \[
  \deg(\operatorname{div}(f))=0.
 \]
-\uses{def:sc-curves,def:sc-function-field,def:sc-divisor}
+\uses{def:pcb-curves,def:pcb-function-field,def:pcb-divisor}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-morphism-from-function,lem:sc-pullback-degree}
+\uses{lem:pcb-morphism-from-function,lem:pcb-pullback-degree}
 If \(f\in k^*\) then \(\operatorname{div}(f)=0\).  Otherwise
 \(f\notin k\), and \(f\) is transcendental over \(k\) (an algebraic
 element of \(k(C)\) over the algebraically closed field \(k\) lies
@@ -928,7 +940,7 @@ type admits a finite injective map
 \(\operatorname{trdeg}_k\operatorname{Frac}(A)=d\) (\emph{reference
 for the Noether normalization theorem: Stacks Project, Commutative
 Algebra, \stacksproject{00OY}}); so \(k(C)\neq k\).  Let \(\pi:=\pi_f:C\to\mathbf P^1_k\)
-be the morphism of \Cref{lem:sc-morphism-from-function}, finite flat
+be the morphism of \Cref{lem:pcb-morphism-from-function}, finite flat
 of degree \(d=[k(C):k(f)]\), with \(\pi^*t=f\).  Pullback of
 divisors is compatible with pullback of functions,
 \(\operatorname{div}(f)=\operatorname{div}(\pi^*t)=\pi^*\operatorname{div}(t)\):
@@ -936,34 +948,34 @@ at a point \(P\in C\) with image \(Q=\pi(P)\), the valuation \(v_P\)
 on \(k(C)\) extends the valuation \(v_Q\) on \(k(\mathbf P^1)\) with
 \(v_P(t_Q)=e_P\), where \(t_Q\) is a uniformizer of \(Q\) and
 \(e_P:=v_P(t_Q)\) is by definition the coefficient of \(P\) in
-\(\pi^*[Q]\) (\Cref{lem:sc-pullback-degree}), so the coefficient of
+\(\pi^*[Q]\) (\Cref{lem:pcb-pullback-degree}), so the coefficient of
 \(P\) in \(\operatorname{div}(\pi^*t)\) is
 \(v_P(t\circ\pi)=v_P(t)=e_Pv_Q(t)\), which is also the coefficient of
 \(P\) in \(\pi^*\operatorname{div}(t)\).  Finally,
 \(\operatorname{div}_{\mathbf P^1}(t)=[0]-[\infty]\) (the function
 \(t=x_1/x_0\) on \(\mathbf P^1_k\) vanishes to order one at
 \([0:1]\) and has a pole of order one at \([1:0]\)).  By
-\Cref{lem:sc-pullback-degree},
+\Cref{lem:pcb-pullback-degree},
 \[
  \deg\operatorname{div}(f)=d\cdot\deg([0]-[\infty])=d-d=0.
 \]
 \end{proof}
 
-% [reproduced from file 06] (label: lem:sc-rational-function-morphism)
+% [reproduced from file 06] (label: lem:pcb-rational-function-morphism)
 \begin{lemma}[Rational functions define morphisms to \(\mathbf P^1\)]
-\label{lem:sc-rational-function-morphism}
-Let \(C\) be a proper smooth \hyperref[def:sc-curves]{curve} over
-\(k\) and \(f\in k(C)\setminus k\) (\Cref{def:sc-function-field}).
+\label{lem:pcb-rational-function-morphism}
+Let \(C\) be a proper smooth \hyperref[def:pcb-curves]{curve} over
+\(k\) and \(f\in k(C)\setminus k\) (\Cref{def:pcb-function-field}).
 Then \(f\) defines a morphism
 \[
  \pi_f:C\to\mathbf P^1_k
 \]
 with \(\pi_f^*t=f\), where \(t\) is the standard coordinate on
 \(\mathbf P^1\).
-\uses{def:sc-function-field,def:sc-curves}
+\uses{def:pcb-function-field,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-regular-dim1-dvr,lem:sc-smooth-regular}
+\uses{lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
 Write \(\mathbf P^1_k=\operatorname{Proj}k[x_0,x_1]\) with
 coordinate \(t=x_1/x_0\), and cover \(C\) by finitely many affine
 open subsets \(U_\alpha=\operatorname{Spec}A_\alpha\).  We first
@@ -971,8 +983,8 @@ note that on each \(U_\alpha\) one can write \(f=a/b\) with
 \(a,b\in A_\alpha\) and \((a,b)=(1)\) in \(A_\alpha\).  Indeed, at
 every closed point \(P\in U_\alpha\) the local ring
 \(\mathcal O_{C,P}\) is a discrete valuation ring
-(\Cref{lem:sc-smooth-regular},
-\Cref{lem:sc-regular-dim1-dvr}) with uniformizer \(t_P\), and
+(\Cref{lem:pcb-smooth-regular},
+\Cref{lem:pcb-regular-dim1-dvr}) with uniformizer \(t_P\), and
 \(f=t_P^{v_P(f)}u_P\) with \(u_P\) a unit: if \(v_P(f)\geq0\),
 then \(f=(t_P^{v_P(f)}u_P)/1\) is a representation with
 \((a_P,b_P)=(1)\) in \(\mathcal O_{C,P}\), and if \(v_P(f)<0\),
@@ -1003,11 +1015,11 @@ a dense open, hence is the whole scheme.  We thus obtain a
 morphism \(\pi_f:C\to\mathbf P^1_k\) with \(\pi_f^*t=f\).
 \end{proof}
 
-% [reproduced from file 06] (label: lem:sc-pullback-degree)
+% [reproduced from file 06] (label: lem:pcb-pullback-degree)
 \begin{lemma}[Degree of pullbacks of divisors]
-\label{lem:sc-pullback-degree}
+\label{lem:pcb-pullback-degree}
 Let \(\pi:C\to C'\) be a finite flat morphism of proper smooth
-\hyperref[def:sc-curves]{curves} over an algebraically closed field
+\hyperref[def:pcb-curves]{curves} over an algebraically closed field
 \(k\), of degree \(d=[k(C):k(C')]\), and let
 \(D'=\sum_Pn_P[P']\) be a divisor on \(C'\).  Then
 \[
@@ -1017,10 +1029,10 @@ where \(\pi^*D'\) is the pullback divisor
 \(\sum_{P'}n_{P'}\sum_{\pi(P)=P'}v_P(t_{P'})[P]\) (\(t_{P'}\) a local
 equation of \(P'\)); in particular
 \(\deg\pi^*[P']=d\) for every closed point \(P'\).
-\uses{def:sc-curves,def:sc-divisor}
+\uses{def:pcb-curves,def:pcb-divisor}
 \end{lemma}
 \begin{proof}
-\uses{lem:sc-point-cartier}
+\uses{lem:pcb-point-cartier}
 Since \(\pi\) is finite flat, \(\pi_*\mathcal O_C\) is locally free
 of rank \(d\), and the fibre over \(P'\) is
 \(\operatorname{Spec}((\pi_*\mathcal O_C)\otimes k(P'))\), a
@@ -1031,24 +1043,24 @@ because \(k\) is algebraically closed), whose length is
  =\sum_{\pi(P)=P'}v_P(t_{P'}),
 \]
 as \(\mathcal O_{C,P}\) is a discrete valuation ring with residue
-field \(k(P)\) (\Cref{lem:sc-point-cartier}).  Hence
+field \(k(P)\) (\Cref{lem:pcb-point-cartier}).  Hence
 \(\deg\pi^*[P']=\sum_{\pi(P)=P'}v_P(t_{P'})=d\), and the general
 case follows by linearity.
 \end{proof}
 
-% [reproduced from file 06] (label: lem:sc-ample-complement-affine)
+% [reproduced from file 06] (label: lem:pcb-ample-complement-affine)
 \begin{lemma}[Complements of ample divisors are affine]
-\label{lem:sc-ample-complement-affine}
+\label{lem:pcb-ample-complement-affine}
 Let \(X\) be a proper scheme over a field \(k\), \(D\subseteq X\) an
-effective Cartier divisor (\Cref{def:sc-effective-cartier-divisor})
+effective Cartier divisor (\Cref{def:pcb-effective-cartier-divisor})
 and \(\mathcal L:=\mathcal O_X(D)\)
-\hyperref[def:sc-ample]{ample}.  Then \(X\setminus D\) is affine.
-\uses{def:sc-effective-cartier-divisor,def:sc-ample,def:sc-divisor}
+\hyperref[def:pcb-ample]{ample}.  Then \(X\setminus D\) is affine.
+\uses{def:pcb-effective-cartier-divisor,def:pcb-ample,def:pcb-divisor}
 \end{lemma}
 \begin{proof}
-\uses{def:sc-ample}
+\uses{def:pcb-ample}
 Choose \(m\geq1\) with \(\mathcal L^{\otimes m}\) very ample
-(\Cref{def:sc-ample}) and let \(i:X\hookrightarrow\mathbf P^N_k\) be
+(\Cref{def:pcb-ample}) and let \(i:X\hookrightarrow\mathbf P^N_k\) be
 the closed immersion given by the complete linear system
 \(|\mathcal L^{\otimes m}|\), so that
 \(i^*\mathcal O(1)\cong\mathcal L^{\otimes m}\) and every global
@@ -1219,7 +1231,7 @@ completes the proof.
 Let $k$ be a field, $X$ a smooth projective \hyperref[def:pc-curve]{curve}
 over $k$, $i:X\hookrightarrow\mathbf P^N_k$ a closed immersion with
 $N\ge2$, and put $r:=N-1$.  For every invertible $\cO_X$-module
-$\cM$ (\Cref{def:sc-invertible-module}):
+$\cM$ (\Cref{def:pcb-invertible-module}):
 \[
 \hyperref[def:pc-ext]{\operatorname{Ext}}^{i}_{\mathbf P^N}\bigl(i_*\cM,\;
 \Omega_{\mathbf P^N/k}^{N}\bigr)=0\qquad(i<r),
@@ -1236,7 +1248,7 @@ differential) module, together with the classical Ext-computation for
 a closed immersion of a smooth curve into a smooth projective space
 (EGA III$_1$, \,(6.5.5); Hartshorne, \emph{Algebraic Geometry}, III,
 (7.12)).
-\uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:sc-invertible-module,def:pc-ext}
+\uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:pcb-invertible-module,def:pc-ext}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-affine-morphism-hi,def:pc-ext}
@@ -1304,7 +1316,7 @@ $\cO_X$-module.  Then
 \[
 H^1(X,\cM)^{\vee}\;\cong\;H^0\bigl(X,\;\Omega^1_{X/k}\otimes\cM^{-1}\bigr).
 \]
-\uses{def:pc-curve,def:pc-kahler-differentials,def:sc-invertible-module,def:pc-projective-morphism}
+\uses{def:pc-curve,def:pc-kahler-differentials,def:pcb-invertible-module,def:pc-projective-morphism}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-projective-morphism,lem:pc-affine-morphism-hi,lem:pc-omega-identity,thm:pc-serre-duality-pn,def:pc-ext}
@@ -1355,6 +1367,7 @@ degree $d$ (\Cref{def:pc-degree-line-bundle}).  Then
 \uses{def:pc-genus,def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-curve,lem:pc-h0-proper-variety,lem:pc-vanishing-above-dim}
 \lean{AlgebraicGeometry.riemannRoch}
 \leanok
+\statusnote{The Lean statement is formalised; its proof is \texttt{sorry}.}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-euler-characteristic,def:pc-genus,def:pc-degree-line-bundle,lem:pc-h0-proper-variety,lem:pc-vanishing-above-dim}
@@ -1440,11 +1453,11 @@ presentation}, \emph{surjective}, \emph{open immersion},
 \emph{proper}, \emph{finite}, \emph{integral}, \emph{flat},
 \emph{unramified}, \emph{etale}, \emph{geometric fibre} and
 \emph{geometric point} (see
-\hyperref[def:weil-pbc-scheme-conventions]{Definition~\ref{def:weil-pbc-scheme-conventions}}).
+\hyperref[def:pcb-scheme-conventions]{Definition~\ref{def:pcb-scheme-conventions}}).
 Two further notions are fixed here: \emph{smooth}
 (\Cref{def:pc-smooth-morphism}) and \emph{projective}
 (\Cref{def:pc-projective-morphism}).
-\uses{def:pc-scheme,def:weil-pbc-scheme-conventions,def:pc-smooth-morphism}
+\uses{def:pc-scheme,def:pcb-scheme-conventions,def:pc-smooth-morphism}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1481,6 +1494,10 @@ $X\to\Spec(k)$ is projective.
 \uses{def:pc-scheme,def:pc-morphism-conventions}
 \lean{AlgebraicGeometry.IsProjective}
 \leanok
+\statusnote{\texttt{AlgebraicGeometry.IsProjective} imposes only the H-projective condition.
+No quasi-compactness hypothesis is needed on top of it: the factorisation already exhibits $f$
+as a closed immersion (finite, hence proper, hence quasi-compact) followed by the proper
+structure morphism of a projective space.}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1499,7 +1516,7 @@ module} $\cF$ on $X_T$ is $\cF_{T'}=g_X^*\cF$ where
 $g_X:X_{T'}\to X_T$.  For a point $t\in T$ the \emph{fibre}
 $X_t=X\times_S\Spec(\kappa(t))$ and the \emph{geometric fibre} $X_{\bar
 t}$ are as in
-\hyperref[def:weil-pbc-scheme-conventions]{Definition~\ref{def:weil-pbc-scheme-conventions}}.
+\hyperref[def:pcb-scheme-conventions]{Definition~\ref{def:pcb-scheme-conventions}}.
 If $f$ has a section $\sigma:S\to X$ and $T$ is over $S$, then
 $\sigma_T:=(\mathrm{id}_T\times\sigma):T\to X_T$ is the induced section.
 \uses{def:pc-scheme,def:pc-morphism-conventions}
@@ -1554,8 +1571,8 @@ which is integral and whose structure morphism $X\to\Spec(k)$ is
 \emph{curve over $k$} is a scheme over $k$ which is a variety of
 dimension $1$ (\Cref{def:pc-dimension}; Varieties, Definition~33.43.1,
 \stacksproject{0A23}).
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-dimension,def:weil-pbc-scheme-conventions}
-\lean{AlgebraicGeometry.IsCurve}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-dimension,def:pcb-scheme-conventions}
+\lean{AlgebraicGeometry.IsVariety, AlgebraicGeometry.IsCurve}
 \leanok
 \end{definition}
 
@@ -1603,20 +1620,20 @@ $\sigma_T:T\to X_T$ (\Cref{def:pc-base-change}).
 The notions of \emph{invertible module} (and its dual),
 \emph{tensor product of modules} and \emph{Picard group} used below are
 those already introduced in file~06:
-\hyperref[def:sc-invertible-module]{Definition~\ref{def:sc-invertible-module}}
-(\Cref{def:sc-invertible-module}, with \Cref{lem:sc-invertible-dual})
+\hyperref[def:pcb-invertible-module]{Definition~\ref{def:pcb-invertible-module}}
+(\Cref{def:pcb-invertible-module}, with \Cref{lem:pcb-invertible-dual})
 and
-\hyperref[def:sc-picard-group]{Definition~\ref{def:sc-picard-group}}
-(\Cref{def:sc-picard-group}, with the group law of
-\Cref{lem:sc-pic-group}).  The basic properties that we will use are
+\hyperref[def:pcb-picard-group]{Definition~\ref{def:pcb-picard-group}}
+(\Cref{def:pcb-picard-group}, with the group law of
+\Cref{lem:pcb-pic-group}).  The basic properties that we will use are
 \begin{itemize}
 \item an
-\hyperref[def:sc-invertible-module]{invertible module} is closed under
+\hyperref[def:pcb-invertible-module]{invertible module} is closed under
 duals and tensor products (\Cref{lem:pc-tensor-dual-invertible});
 \item $\Pic(S)$ is trivial for $S=\Spec(k)$, $k$ a field
 (\Cref{lem:pc-pic-of-field}).
 \end{itemize}
-\uses{def:sc-invertible-module,def:sc-picard-group,def:pc-scheme}
+\uses{def:pcb-invertible-module,def:pcb-picard-group,def:pc-scheme}
 \end{remark}
 
 % ---------------------------------------------------------------------------
@@ -1624,7 +1641,7 @@ duals and tensor products (\Cref{lem:pc-tensor-dual-invertible});
 \begin{definition}[The module $\cO_X(D)$ of an effective Cartier divisor]
 \label{def:pc-divisor-line-bundle}
 Let $S$ be a scheme and let $D\subset S$ be an
-\hyperref[def:sc-effective-cartier-divisor]{effective Cartier divisor}
+\hyperref[def:pcb-effective-cartier-divisor]{effective Cartier divisor}
 with ideal sheaf $\cI_D$.  The \emph{associated invertible module} is
 \[
 \cO_S(D):=\mathcal{H}om_{\cO_S}(\cI_D,\cO_S)=\cI_D^\vee .
@@ -1634,7 +1651,7 @@ base change, coincidence with the module $\cO_C(D)$ of file~06 for
 finite unions of closed points) are
 \Cref{lem:pc-divisor-line-bundle-properties} and
 \Cref{lem:pc-divisor-line-bundle-agrees-sc}.
-\uses{def:sc-effective-cartier-divisor,def:sc-invertible-module,def:sc-divisor}
+\uses{def:pcb-effective-cartier-divisor,def:pcb-invertible-module,def:pcb-divisor}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1645,14 +1662,14 @@ Let $f:X\to S$ be a morphism of schemes.  A \emph{relative effective
 Cartier divisor on $X/S$} is an effective Cartier divisor $D\subset X$
 such that $D\to S$ is flat (Divisors, Definition~31.19.2,
 \stacksproject{062T}).
-\uses{def:sc-effective-cartier-divisor,def:pc-scheme,def:pc-morphism-conventions}
+\uses{def:pcb-effective-cartier-divisor,def:pc-scheme,def:pc-morphism-conventions}
 \end{definition}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{definition}[The zero scheme of a section]\label{def:pc-zero-scheme}
 Let $X$ be a scheme, $\cM$ an
-\hyperref[def:sc-invertible-module]{invertible $\cO_X$-module} and
+\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module} and
 $s\in H^0(X,\cM)$.  The \emph{zero scheme} $Z(s)\subseteq X$ of $s$ is
 the closed subscheme defined by the ideal sheaf
 \[
@@ -1662,7 +1679,7 @@ the closed subscheme defined by the ideal sheaf
 Its basic properties (well-definedness, local form
 $\Spec(A/(a))$, compatibility with flat base change, $Z(s)=X
 \Leftrightarrow s=0$) are \Cref{lem:pc-zero-scheme-properties}.
-\uses{def:sc-invertible-module,def:pc-scheme}
+\uses{def:pcb-invertible-module,def:pc-scheme}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1778,10 +1795,10 @@ Let $f:X\to S$ be a morphism of schemes.  The \emph{Picard presheaf} is
 (\mathit{Sch}/S)^{\mathrm{op}}\longrightarrow\textit{Sets},\qquad
 T\longmapsto\Pic(X_T),
 \]
-with $\Pic$ of \Cref{def:sc-picard-group} (in the generality of
+with $\Pic$ of \Cref{def:pcb-picard-group} (in the generality of
 \Cref{rem:pc-sc-modules}) and $X_T$ of \Cref{def:pc-base-change}; the
 assignment is functorial \Cref{lem:pc-pic-presheaf-functorial}.
-\uses{def:pc-base-change,def:sc-picard-group}
+\uses{def:pc-base-change,def:pcb-picard-group}
 \lean{AlgebraicGeometry.picardPresheaf}
 \leanok
 \end{definition}
@@ -1801,7 +1818,7 @@ Curves, Definition~44.4.1,
 with the affine functor $\Pic_{C/k}$ of file~06 is
 \Cref{lem:pc-picard-functor-agrees-sc}.  For $S=\Spec(k)$ we write
 $\Pic_{X/k}$.
-\uses{def:pc-picard-presheaf,def:pc-fppf-site,def:pc-representable-functor,def:sc-picard-functor,def:sc-pic0}
+\uses{def:pc-picard-presheaf,def:pc-fppf-site,def:pc-representable-functor,def:pcb-picard-functor,def:pcb-pic0}
 \lean{AlgebraicGeometry.picardFunctor}
 \leanok
 \end{definition}
@@ -1823,7 +1840,7 @@ along $\sigma$}); this is a
 \hyperref[def:pc-subfunctor]{subfunctor} of the
 \hyperref[def:pc-picard-presheaf]{Picard presheaf}.  Its value at
 $T=\Spec(k)$ is computed in \Cref{lem:pc-sigma-k-points}.
-\uses{def:pc-picard-presheaf,def:pc-rational-point,def:pc-subfunctor,def:sc-picard-group}
+\uses{def:pc-picard-presheaf,def:pc-rational-point,def:pc-subfunctor,def:pcb-picard-group}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1868,10 +1885,37 @@ of finite projective modules (Derived Categories of Schemes,
 Section~36.31,
 \stacksproject{0BDH}); the subcategory
 is $D_{\mathrm{perf}}(\cO_X)$.  The perfectness of an
-\hyperref[def:sc-invertible-module]{invertible} module is
+\hyperref[def:pcb-invertible-module]{invertible} module is
 \Cref{lem:pc-invertible-perfect}.
-\uses{def:pc-derived-category,def:sc-invertible-module}
+\uses{def:pc-derived-category,def:pcb-invertible-module}
 \end{definition}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{lemma}[Sheaves of modules form a Grothendieck abelian category]
+\label{lem:pc-sheaves-of-modules-grothendieck}
+Let $\cR$ be a sheaf of rings on an essentially small site.  The category of $\cR$-modules is a
+Grothendieck abelian category.  In particular, for a scheme $X$ the category of
+$\cO_X$-modules is Grothendieck abelian, hence has enough injectives and has injective
+resolutions.
+\uses{def:pc-scheme}
+\lean{SheafOfModules.isGrothendieckAbelian}
+\leanok
+\statusnote{The Lean instance is stated with a \texttt{sorry}ed proof.  It is what makes the
+right derived functors of \Cref{def:pc-derived-direct-image} exist, so every declaration built
+on them reports \texttt{sorryAx} under \texttt{\#print axioms}.}
+\end{lemma}
+\begin{proof}
+Presheaves of $\cR$-modules form a Grothendieck abelian category: they are locally presentable,
+filtered colimits are computed sectionwise and are therefore exact, and the free modules on the
+representable presheaves form a separating family, which is small because the site is
+essentially small.  Sheaves of $\cR$-modules form a reflective subcategory of presheaves of
+$\cR$-modules whose reflector, sheafification, is exact; a Giraud subcategory of a Grothendieck
+abelian category is again Grothendieck abelian, since colimits are computed by sheafifying the
+presheaf colimit, filtered colimits stay exact because sheafification is exact, and the
+sheafifications of the presheaf generators form a separating family.  A Grothendieck abelian
+category has enough injectives, hence has injective resolutions.
+\end{proof}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
@@ -1885,7 +1929,15 @@ criterion of file~02, the standard $K$-injective-resolution criterion) is the
 standard one; the relevant admissibility statements are in Derived
 Categories of Schemes, Section~36.30,
 \stacksproject{0A1G}.)
-\uses{def:pc-derived-category,def:pc-scheme}
+\uses{def:pc-derived-category,def:pc-scheme,lem:pc-sheaves-of-modules-grothendieck}
+\lean{AlgebraicGeometry.Scheme.Modules.cohomology}
+\leanok
+\statusnote{\texttt{AlgebraicGeometry.Scheme.Modules.cohomology} formalises only the special
+case used below: the right derived functors of global sections of a scheme over an affine base,
+that is $R^if_*$ for $S=\Spec(R)$, evaluated on $S$.  The derived direct image along a general
+morphism is not formalised.  It rests on the sorried instance
+\Cref{lem:pc-sheaves-of-modules-grothendieck}, so \texttt{\#print axioms} reports
+\texttt{sorryAx} on it.}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1900,7 +1952,7 @@ complex $\cN$ concentrated in degree $0$.  It is a
 $M\cong E[-i]$ with $E$ finite locally free of rank $r$
 (\Cref{def:pc-finite-locally-free}).  The structure of the cohomology of
 $M$ in this situation is \Cref{lem:pc-degree-zero-properties}.
-\uses{def:pc-derived-category,def:sc-invertible-module,def:pc-finite-locally-free}
+\uses{def:pc-derived-category,def:pcb-invertible-module,def:pc-finite-locally-free}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1929,7 +1981,7 @@ $\mathcal A$ the category of $\cO_X$-modules, and
 denotes the associated sheaf ($\mathcal{H}om^{\bullet}$ the derived
 inner hom of sheaves).
 % Mathlib: the Ext bifunctor of an abelian category exists in Mathlib.
-\mathlibok\ \lean{CategoryTheory.Abelian.Ext, CategoryTheory.ProjectiveResolution.isoExt,
+\mathlibok\ \lean{Ext, CategoryTheory.ProjectiveResolution.isoExt,
   isZero_Ext_succ_of_projective}
 \end{definition}
 
@@ -1946,7 +1998,7 @@ set of points with
 \dim_{\kappa(s)}\Gamma(X_s,\cO_{X_s})=d .
 \]
 (The resulting structure of $f_*\cO_X$ is \Cref{lem:pc-flf-properties}.)
-\uses{def:pc-morphism-conventions,def:pc-base-change,def:weil-pbc-scheme-conventions}
+\uses{def:pc-morphism-conventions,def:pc-base-change,def:pcb-scheme-conventions}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1987,6 +2039,10 @@ the definition of Varieties, Definition~33.33.1 (\stacksproject{0BEJ}).
 \uses{def:pc-scheme,def:pc-derived-direct-image,def:pc-morphism-conventions}
 \lean{AlgebraicGeometry.Scheme.Modules.eulerCharacteristic}
 \leanok
+\statusnote{The Lean definition drops the hypotheses: it is stated for an arbitrary module on an
+arbitrary scheme over $k$, and takes a junk value when the sum is not finitely supported.  It
+rests on the sorried instance \Cref{lem:pc-sheaves-of-modules-grothendieck}, so
+\texttt{\#print axioms} reports \texttt{sorryAx} on it.}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1994,7 +2050,7 @@ the definition of Varieties, Definition~33.33.1 (\stacksproject{0BEJ}).
 \begin{definition}[The degree of an invertible module]
 \label{def:pc-degree-line-bundle}
 Let $k$ be a field, $X$ a proper scheme over $k$ and $\cL$ an
-\hyperref[def:sc-invertible-module]{invertible $\cO_X$-module}.  The
+\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module}.  The
 \emph{degree} of $\cL$ is
 \[
 \deg(\cL):=\chi(X,\cL)-\chi(X,\cO_X)\in\Z
@@ -2003,11 +2059,13 @@ Let $k$ be a field, $X$ a proper scheme over $k$ and $\cL$ an
 \stacksproject{0AYR}).  For an
 effective Cartier divisor $D$ on $X$ the degree of $D$ is
 $\deg(D):=\deg(\cO_X(D))$.  The relation with the degree of
-\Cref{def:sc-pic0} for smooth proper curves over algebraically closed
+\Cref{def:pcb-pic0} for smooth proper curves over algebraically closed
 fields is \Cref{lem:pc-degree-agrees-sc}.
-\uses{def:pc-euler-characteristic,def:pc-divisor-line-bundle,def:sc-pic0,def:sc-divisor}
+\uses{def:pc-euler-characteristic,def:pc-divisor-line-bundle,def:pcb-pic0,def:pcb-divisor}
 \lean{AlgebraicGeometry.Scheme.Modules.degree}
 \leanok
+\statusnote{As for \Cref{def:pc-euler-characteristic}: the Lean definition drops the properness
+and invertibility hypotheses, and reports \texttt{sorryAx} under \texttt{\#print axioms}.}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2022,12 +2080,15 @@ g(X):=\dim_kH^1(X,\cO_X)\in\Z_{\geq0}
 \]
 (Stacks Project, Picard Schemes of Curves, Definition~44.6.3,
 \stacksproject{0B9W}).  Well-definedness
-and agreement with \Cref{def:sc-genus} and its behaviour under base
+and agreement with \Cref{def:pcb-genus} and its behaviour under base
 change are \Cref{lem:pc-genus-well-defined},
 \Cref{lem:pc-genus-agrees-sc} and \Cref{lem:pc-genus-base-change}.
-\uses{def:pc-smooth-projective-curve,def:pc-geometrically-irreducible,def:sc-genus}
-\lean{AlgebraicGeometry.genus}
+\uses{def:pc-smooth-projective-curve,def:pc-geometrically-irreducible,def:pcb-genus}
+\lean{AlgebraicGeometry.Scheme.genus}
 \leanok
+\statusnote{The Lean definition drops the geometric irreducibility hypothesis and is made for an
+arbitrary scheme over $k$; it reports \texttt{sorryAx} under \texttt{\#print axioms}, as
+\Cref{def:pc-euler-characteristic} does.}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2035,14 +2096,14 @@ change are \Cref{lem:pc-genus-well-defined},
 \begin{remark}[Ample and very ample: existing in file 06]
 \label{rem:pc-sc-ample}
 The notions of \emph{ample} and \emph{very ample} invertible module are
-those of file~06: \Cref{def:sc-ample} (with the Stacks Project
+those of file~06: \Cref{def:pcb-ample} (with the Stacks Project
 references Properties of Schemes, Section~28.27,
 \stacksproject{01PR}, Proposition
 28.27.13, \stacksproject{01Q3},
 and Morphisms of Schemes, Definition~29.39.1,
 \stacksproject{01VM}).  We use that
 definition in its stated generality (any proper scheme over a field).
-\uses{def:sc-ample}
+\uses{def:pcb-ample}
 \end{remark}
 
 % ---------------------------------------------------------------------------
@@ -2050,8 +2111,8 @@ definition in its stated generality (any proper scheme over a field).
 \begin{remark}[Group schemes: existing in file 06]\label{rem:pc-sc-group}
 The notion of a $k$-\emph{group scheme} (and of commutative group
 scheme, homomorphism and kernel) is that of file~06:
-\Cref{def:sc-group-scheme}.
-\uses{def:sc-group-scheme}
+\Cref{def:pcb-group-scheme}.
+\uses{def:pcb-group-scheme}
 \end{remark}
 
 % ---------------------------------------------------------------------------
@@ -2061,12 +2122,12 @@ scheme, homomorphism and kernel) is that of file~06:
 For a curve $C$ over a field, the \emph{divisors} ($D=\sum_Pn_P[P]$,
 $\operatorname{Div}(C)$, principal divisors, the divisor class group
 $\operatorname{Cl}(C)$ and the associated module $\cO_C(D)$ of a
-divisor, defined via $k(C)$) are those of file~06: \Cref{def:sc-divisor}.
+divisor, defined via $k(C)$) are those of file~06: \Cref{def:pcb-divisor}.
 In this blueprint they are used for the curve $X$ and its base changes
 $X_K$; the corresponding invertible module of an effective Cartier
 divisor is the one of \Cref{def:pc-divisor-line-bundle}
 (\Cref{lem:pc-divisor-line-bundle-agrees-sc}).
-\uses{def:sc-divisor,def:pc-divisor-line-bundle}
+\uses{def:pcb-divisor,def:pc-divisor-line-bundle}
 \end{remark}
 
 % ============================================================================
@@ -2087,23 +2148,23 @@ divisor is the one of \Cref{def:pc-divisor-line-bundle}
 Let $k$ be a field and let $X$ be a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} over
 $k$.  Then $X$ is a \emph{curve over $k$} in the sense of
-\Cref{def:sc-curves}: $X$ is nonempty, separated, of finite type over
+\Cref{def:pcb-curves}: $X$ is nonempty, separated, of finite type over
 $k$ and of dimension $\le1$, and smooth over $k$.
-\uses{def:pc-smooth-projective-curve,def:pc-curve,def:pc-dimension,def:sc-curves}
+\uses{def:pc-smooth-projective-curve,def:pc-curve,def:pc-dimension,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-curve,def:pc-smooth-projective-curve,def:sc-curves,def:weil-pbc-scheme-conventions,lem:sc-base-change-curve,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-smooth-projective-curve,def:pcb-curves,def:pcb-scheme-conventions,lem:pcb-base-change-curve,prop:pc-XK-integral}
 By\ \Cref{def:pc-smooth-projective-curve} $X$ is a
 \hyperref[def:pc-curve]{curve} over $k$, hence a
-\hyperref[def:weil-pbc-scheme-conventions]{variety}: integral, with
+\hyperref[def:pcb-scheme-conventions]{variety}: integral, with
 $X\to\Spec(k)$ separated and of finite type (\Cref{def:pc-curve}); in
 particular $X$ is nonempty, separated, of finite type and, being a
 curve, of dimension $1$.  Its structure morphism is smooth by hypothesis,
 and
-\Cref{def:sc-curves} requires exactly: nonempty, separated scheme of
+\Cref{def:pcb-curves} requires exactly: nonempty, separated scheme of
 finite type of dimension $\le1$, smooth over $k$.  This proves the
 claim.  (The same applies to base changes $X_K$: see
-\Cref{lem:sc-base-change-curve} and \Cref{prop:pc-XK-integral}.)
+\Cref{lem:pcb-base-change-curve} and \Cref{prop:pc-XK-integral}.)
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -2153,12 +2214,12 @@ Zariski-locality.
 \begin{lemma}[Invertible modules: duals and tensor products]
 \label{lem:pc-tensor-dual-invertible}
 Let $X$ be a scheme and let $\cM,\cN$ be
-\hyperref[def:sc-invertible-module]{invertible $\cO_X$-modules}.  Then
+\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-modules}.  Then
 $\cM^\vee=\mathcal{H}om_{\cO_X}(\cM,\cO_X)$ is invertible, so is
 $\cM\otimes_{\cO_X}\cN$, and the canonical maps
 $\cM\otimes\cM^\vee\to\cO_X$ and $\cM\to\cM^{\vee\vee}$ are
 isomorphisms.
-\uses{def:sc-invertible-module,def:pc-scheme,def:pc-morphism-conventions}
+\uses{def:pcb-invertible-module,def:pc-scheme,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 All three assertions are Zariski-local in $X$, and at a point $x$ an
@@ -2174,9 +2235,9 @@ isomorphism is a local property of coherent modules, the claim follows.
 % Decomposed.
 \begin{lemma}[$\Pic$ of a field]\label{lem:pc-pic-of-field}
 Let $k$ be a field.  Then the
-\hyperref[def:sc-picard-group]{Picard group} of $\Spec(k)$ is trivial:
+\hyperref[def:pcb-picard-group]{Picard group} of $\Spec(k)$ is trivial:
 every invertible $\cO_k$-module is isomorphic to $\cO_k$.
-\uses{def:sc-invertible-module,def:sc-picard-group,def:pc-scheme}
+\uses{def:pcb-invertible-module,def:pcb-picard-group,def:pc-scheme}
 \end{lemma}
 \begin{proof}
 An invertible $\cO_k$-module is locally free of rank $1$; an $\cO_k$-module
@@ -2190,14 +2251,14 @@ k,\cO)$.
 % Decomposed.
 \begin{lemma}[Properties of $\cO_X(D)$]\label{lem:pc-divisor-line-bundle-properties}
 Let $S$ be a scheme and $D\subset S$ an
-\hyperref[def:sc-effective-cartier-divisor]{effective Cartier divisor}.
+\hyperref[def:pcb-effective-cartier-divisor]{effective Cartier divisor}.
 \begin{enumerate}
 \item $\cO_S(D)$ is an
-\hyperref[def:sc-invertible-module]{invertible $\cO_S$-module}.
+\hyperref[def:pcb-invertible-module]{invertible $\cO_S$-module}.
 \item If $g:Y\to S$ is a flat morphism and $D_Y=D\times_SY$, then
 $\cI_{D_Y}=g^*\cI_D$ and $\cO_Y(D_Y)\cong g^*\cO_S(D)$.
 \end{enumerate}
-\uses{def:pc-divisor-line-bundle,def:sc-effective-cartier-divisor,def:sc-invertible-module,def:pc-base-change,lem:pc-tensor-dual-invertible,lem:pc-closed-imm-base-change}
+\uses{def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,def:pcb-invertible-module,def:pc-base-change,lem:pc-tensor-dual-invertible,lem:pc-closed-imm-base-change}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-closed-imm-base-change,lem:pc-tensor-dual-invertible}
@@ -2221,20 +2282,20 @@ $\cO_Y(D_Y)=(\cI_{D_Y})^\vee=(g^*\cI_D)^\vee=g^*(\cI_D^\vee)=g^*\cO_S(D)$.
 \label{lem:pc-divisor-line-bundle-agrees-sc}
 Let $k$ be a field, $C$ a smooth \hyperref[def:pc-curve]{curve} over $k$
 and $D=\sum_{i=1}^m n_i[P_i]$ a
-\hyperref[def:sc-divisor]{divisor} of $C$ which is an effective Cartier
+\hyperref[def:pcb-divisor]{divisor} of $C$ which is an effective Cartier
 divisor (e.g.\ all $n_i\ge0$).  Then
 \[
 \cO_C(D)
 \]
-of \Cref{lem:sc-divisor-class-curve} (the sub-$\cO_C$-module of $k(C)$
-of \Cref{def:sc-divisor}) and the module $\cO_C(D)$ of
+of \Cref{lem:pcb-divisor-class-curve} (the sub-$\cO_C$-module of $k(C)$
+of \Cref{def:pcb-divisor}) and the module $\cO_C(D)$ of
 \Cref{def:pc-divisor-line-bundle} are canonically isomorphic; and for
 $D=[P]$ a $k$-rational point
 $\deg(\cO_C([P]))=1$ \Cref{def:pc-degree-line-bundle}.
-\uses{def:pc-divisor-line-bundle,def:sc-divisor,lem:sc-divisor-class-curve,def:pc-degree-line-bundle,def:sc-pic0}
+\uses{def:pc-divisor-line-bundle,def:pcb-divisor,lem:pcb-divisor-class-curve,def:pc-degree-line-bundle,def:pcb-pic0}
 \end{lemma}
 \begin{proof}
-\uses{def:sc-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive,lem:sc-point-cartier}
+\uses{def:pcb-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive,lem:pcb-point-cartier}
 It suffices to prove this for $D=[P]$ with $P$ a closed point: both
 constructions are additive in $D$ (the divisor module of file~06 is
 $\cO_C(D_1)\otimes\cO_C(D_2)$ on the open dense subscheme where the two
@@ -2246,7 +2307,7 @@ compatible after restriction to the cover of $C$ by the open sets
 $U=C\setminus\{P_i\}$ and affine neighbourhoods of the $P_i$; the
 isomorphism is local: on $U
 i P$ with $\cI_P=(t)$ (nonzero divisor,
-the ideal of the point on the smooth curve; \Cref{lem:sc-point-cartier}), the divisor module
+the ideal of the point on the smooth curve; \Cref{lem:pcb-point-cartier}), the divisor module
 $\{f\in k(C):\operatorname{div}f|_U+[P]\ge0\}$ is
 $t^{-1}\cO_C(U)$, the module $\cI_P^\vee$ likewise maps
 $\cI_P=(t)$ to $\cO_U$ isomorphically to $t^{-1}\cO_U$, and on
@@ -2262,7 +2323,7 @@ $k$-rational) together with the additivity of $\chi$
 \Cref{lem:pc-euler-additive} gives
 $\chi(C,\cO_C([P]))=\chi(C,\cO_C)+1$, whence
 $\deg(\cO_C([P]))=\chi(\cO_C([P]))-\chi(\cO_C)=1$, the value given by
-the degree of \Cref{def:sc-pic0} of the class $[P]$; for general $D$
+the degree of \Cref{def:pcb-pic0} of the class $[P]$; for general $D$
 the value follows by additivity of the degree on tensor products
 \Cref{lem:pc-degree-base-change}.  This proves the claim.
 \end{proof}
@@ -2271,7 +2332,7 @@ the value follows by additivity of the degree on tensor products
 % Decomposed.
 \begin{lemma}[Properties of the zero scheme]\label{lem:pc-zero-scheme-properties}
 Let $X$ be a scheme, $\cM$ a
-\hyperref[def:sc-invertible-module]{invertible $\cO_X$-module} and
+\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module} and
 $s\in H^0(X,\cM)$.
 \begin{enumerate}
 \item $Z(s)$ is a closed subscheme of $X$ (a locally principal closed
@@ -2282,7 +2343,7 @@ $s_Y=g^*s\in H^0(Y,g^*\cM)$: $Z(s_Y)=Z(s)\times_XY$, i.e.\
 $g^*\cI_{Z(s)}=\cI_{Z(s_Y)}$.
 \item $Z(s)=X$ if and only if $s=0$.
 \end{enumerate}
-\uses{def:pc-zero-scheme,def:sc-invertible-module,def:pc-scheme,lem:pc-tensor-dual-invertible,def:pc-base-change}
+\uses{def:pc-zero-scheme,def:pcb-invertible-module,def:pc-scheme,lem:pc-tensor-dual-invertible,def:pc-base-change}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-divisor-line-bundle-properties,lem:pc-tensor-dual-invertible}
@@ -2365,14 +2426,18 @@ $(\mathit{Sch}/S)^{\mathrm{op}}\to\textit{Sets}$: for $g:T'\to T$ with
 $g_X:X_{T'}\to X_T$ the map $\cL\mapsto g_X^*\cL$ sends invertible
 modules to invertible modules, respects isomorphisms and satisfies
 $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
-\uses{def:pc-picard-presheaf,def:pc-base-change,def:sc-invertible-module,lem:pc-tensor-dual-invertible}
+\uses{def:pc-picard-presheaf,def:pc-base-change,def:pcb-invertible-module,lem:pc-tensor-dual-invertible}
+\lean{SheafOfModules.IsInvertible.pullback, AlgebraicGeometry.Scheme.picFunctor}
+\leanok
 \end{lemma}
 \begin{proof}
+\leanok
 If $\cL$ is invertible on $X_T$, then $g_X^*\cL$ is invertible on
-$X_{T'}$: local on $X_{T'}$, $g_X^*\cL$ is the base change of a locally
-free rank one module (trivializing by an open cover and using that
-$g_X^*$ preserves admits an exactness: $g_X^*$ of a free module of rank
-one is free of rank one).  The two functoriality equations are the
+$X_{T'}$: the question is local on $X_{T'}$, and over the preimage of an
+open subset on which $\cL$ is free of rank one, $g_X^*\cL$ is the
+pullback of a free module of rank one, hence again free of rank one,
+because $g_X^*$ takes $\cO_{X_T}$ to $\cO_{X_{T'}}$ and commutes with
+direct sums.  The two functoriality equations are the
 standard $(g_1g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$ for the pullback
 functor (a straightforward identity of the corresponding module
 sections), and isomorphisms are sent to isomorphisms, so the map is
@@ -2388,12 +2453,12 @@ Let $k$ be a field and $X$ a
 $k$.  The restriction of
 \hyperref[def:pc-picard-functor]{$\Pic_{X/k}$} to affine $k$-schemes
 $T=\Spec(R)$ is canonically the sheafification presented in
-\Cref{def:sc-picard-functor}, i.e.\ the functor
+\Cref{def:pcb-picard-functor}, i.e.\ the functor
 $R\mapsto\Pic(X\times_k\Spec R)$ of file~06 (with its fppf sheaf
 structure); more precisely
 $\Pic_{X/k}(\Spec(R))=\operatorname{Pic}_{X/k}^{\mathrm{sc}}(R)$ where
-the right side is the value of the functor of \Cref{def:sc-picard-functor}.
-\uses{def:pc-picard-functor,def:sc-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme}
+the right side is the value of the functor of \Cref{def:pcb-picard-functor}.
+\uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme}
 \end{lemma}
 \begin{proof}
 Both sides are the fppf sheafification of the same presheaf on the
@@ -2423,7 +2488,7 @@ Let $k$ be a field, $X$ a scheme over $k$ and $\sigma\in X(k)$.  Then
 \Pic_{X/k,\sigma}(k)=\Pic(X)
 \]
 canonically.
-\uses{def:pc-pic-sigma-functor,def:sc-picard-group,lem:pc-pic-of-field,def:pc-base-change}
+\uses{def:pc-pic-sigma-functor,def:pcb-picard-group,lem:pc-pic-of-field,def:pc-base-change}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-pic-of-field}
@@ -2439,10 +2504,10 @@ kernel of $\sigma^*$ is all of $\Pic(X)$.
 % Decomposed.
 \begin{lemma}[Invertible modules are perfect]\label{lem:pc-invertible-perfect}
 Let $X$ be a scheme and $\cM$ an
-\hyperref[def:sc-invertible-module]{invertible $\cO_X$-module}.  Then
+\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module}.  Then
 $\cM$, viewed as a complex in degree $0$, is
 \hyperref[def:pc-perfect-complex]{perfect}.
-\uses{def:pc-perfect-complex,def:sc-invertible-module,def:pc-derived-category}
+\uses{def:pc-perfect-complex,def:pcb-invertible-module,def:pc-derived-category}
 \end{lemma}
 \begin{proof}
 An invertible module is locally free of rank one: Zariski-locally
@@ -2456,12 +2521,12 @@ a bounded complex of finite projective modules.
 \begin{lemma}[Cohomology of a module in degree zero]
 \label{lem:pc-degree-zero-properties}
 Let $X$ be a scheme, $M\in D(\cO_X)$ and let $\cN$ be an
-\hyperref[def:sc-invertible-module]{invertible $\cO_X$-module} with
+\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module} with
 $M\cong\cN[0]$.  Then $H^i(M)=0$ for $i\neq0$ and $H^0(M)\cong\cN$.  If
 $M\cong E[-i]$ with $E$ locally free of rank $r$ (cf.\
 \Cref{def:pc-finite-locally-free} and its \Cref{lem:pc-flf-properties}),
 then $H^j(M)=0$ for $j\neq i$ and $H^i(M)\cong E$.
-\uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:sc-invertible-module}
+\uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:pcb-invertible-module}
 \end{lemma}
 \begin{proof}
 By definition of the shift, $H^j(\cN[0])$ is the $j$-th cohomology of
@@ -2551,12 +2616,12 @@ $\Gamma(Z_{t'},\cO)=\Gamma(Z_t,\cO)\otimes\kappa(t')$
 \begin{remark}[Relation to the curves of file 06]\label{rem:pc-relation-sc}
 File~06 uses a slightly coarser notion: for a field $k$, a \emph{curve
 over $k$} there is a nonempty separated scheme of finite type over $k$
-of dimension at most $1$ (\Cref{def:sc-curves}).  A
+of dimension at most $1$ (\Cref{def:pcb-curves}).  A
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} in
 our sense is in particular a smooth curve in the sense of
-\Cref{def:sc-curves} (\Cref{lem:pc-curves-are-sc}); conversely, for
+\Cref{def:pcb-curves} (\Cref{lem:pc-curves-are-sc}); conversely, for
 smooth proper one-dimensional curves the two notions coincide.
-\uses{def:pc-curve,def:sc-curves,lem:pc-curves-are-sc,def:pc-dimension}
+\uses{def:pc-curve,def:pcb-curves,lem:pc-curves-are-sc,def:pc-dimension}
 \end{remark}
 
 % ---------------------------------------------------------------------------
@@ -2588,16 +2653,16 @@ finite.
 \label{lem:pc-degree-agrees-sc}
 Let $k$ be a field, $C$ a proper smooth
 \hyperref[def:pc-curve]{curve} over $k$, and $D$ a
-\hyperref[def:sc-divisor]{divisor} of $C$ which is effective.  Then the
+\hyperref[def:pcb-divisor]{divisor} of $C$ which is effective.  Then the
 degree $\deg(\cO_C(D))$ of
 \hyperref[def:pc-degree-line-bundle]{Definition~\ref{def:pc-degree-line-bundle}}
-equals $\deg D$ of \Cref{def:sc-pic0} (for $k$ algebraically closed
+equals $\deg D$ of \Cref{def:pcb-pic0} (for $k$ algebraically closed
 where it is defined).  In particular for a $k$-rational point $P$,
 $\deg(\cO_C([P]))=1$.
-\uses{def:pc-degree-line-bundle,def:sc-pic0,def:sc-divisor,def:pc-divisor-line-bundle,lem:pc-euler-additive,lem:pc-divisor-line-bundle-agrees-sc,def:pc-curve}
+\uses{def:pc-degree-line-bundle,def:pcb-pic0,def:pcb-divisor,def:pc-divisor-line-bundle,lem:pc-euler-additive,lem:pc-divisor-line-bundle-agrees-sc,def:pc-curve}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-divisor-line-bundle,def:sc-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive}
+\uses{def:pc-divisor-line-bundle,def:pcb-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive}
 Both notions are additive in $D$: $\cO_C(D_1+D_2)=\cO_C(D_1)\otimes\cO_C(D_2)$
 (for the module of
 \Cref{def:pc-divisor-line-bundle}: by the local checks of
@@ -2617,7 +2682,7 @@ quotient as stated) together with the additivity of $\chi$
 \]
 and for a $k$-rational point $P$ (i.e.\ $\dim_k\kappa(P)=1$) therefore
 $\deg(\cO_C([P]))=\chi(\cO_C([P]))-\chi(\cO_C)=1=\deg([P])$ of
-\Cref{def:sc-pic0} (degree of a $k$-rational point is $1$).  For
+\Cref{def:pcb-pic0} (degree of a $k$-rational point is $1$).  For
 general closed points the same computation gives
 $\deg(\cO_C([P]))=[\kappa(P):k]=\deg([P])$, and additivity finishes.
 \end{proof}
@@ -2646,10 +2711,10 @@ finite dimensional.
 Let $k$ be an algebraically closed field and $C$ a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} over
 $k$ (or, more generally, a proper smooth curve in the sense of
-\Cref{def:sc-curves} with $\dim H^0(C,\cO_C)=1$).  Then the genus
+\Cref{def:pcb-curves} with $\dim H^0(C,\cO_C)=1$).  Then the genus
 $g(C)$ of \Cref{def:pc-genus} equals the genus of
-\Cref{def:sc-genus}.
-\uses{def:pc-genus,def:sc-genus,def:pc-smooth-projective-curve,def:sc-curves}
+\Cref{def:pcb-genus}.
+\uses{def:pc-genus,def:pcb-genus,def:pc-smooth-projective-curve,def:pcb-curves}
 \end{lemma}
 \begin{proof}
 Both definitions are $g=\dim_kH^1(C,\cO_C)$ (Definition 44.6.3 in the
@@ -2668,15 +2733,15 @@ $k$ which is geometrically irreducible with $H^0(X,\cO_X)=k$, and let
 $K/k$ be a field extension.  Then
 $g(X_K)=\dim_KH^1(X_K,\cO_{X_K})=g(X)$.  If $k$ is separably closed (or
 more generally $H^0(X,\cO_X)=k$), this applies in particular when
-$X_K$ is a curve in the sense of \Cref{def:sc-curves}.
-\uses{def:pc-genus,lem:sc-flat-base-change-coherent,def:pc-base-change,def:pc-smooth-projective-curve}
+$X_K$ is a curve in the sense of \Cref{def:pcb-curves}.
+\uses{def:pc-genus,lem:pcb-flat-base-change-coherent,def:pc-base-change,def:pc-smooth-projective-curve}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-proper-base-change,lem:sc-flat-base-change-coherent}
+\uses{lem:pc-proper-base-change,lem:pcb-flat-base-change-coherent}
 The base change $X_K=X\times_{\Spec k}\Spec K$ is proper over $K$
 (base change of proper \Cref{lem:pc-proper-base-change}), and the
 structure morphism $X\to\Spec k$ is proper, so by
-\Cref{lem:sc-flat-base-change-coherent} (the affine/flat base change
+\Cref{lem:pcb-flat-base-change-coherent} (the affine/flat base change
 case, already decomposed in file 06, applied with the flat $k$-algebra
 $K$):
 \[
@@ -2694,16 +2759,16 @@ Let $k$ be a field, $X$ a
 $k$ with $H^0(X,\cO_X)=k$ and $T$ a scheme over $k$.  Then
 $f_{T,*}\cO_{X_T}\cong\cO_T$, where $f_T:X_T\to T$ is the structure
 morphism of the base change.
-\uses{def:pc-base-change,def:pc-morphism-conventions,lem:sc-flat-base-change-coherent,lem:pc-coherent-hi,def:pc-picard-presheaf}
+\uses{def:pc-base-change,def:pc-morphism-conventions,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:sc-flat-base-change-coherent}
+\uses{lem:pc-coherent-hi,lem:pcb-flat-base-change-coherent}
 Since $X$ is proper over $k$, $f_T$ is proper, hence quasi-compact and
 quasi-separated, so $f_{T,*}\cO_{X_T}$ is quasi-coherent
 (\Cref{lem:pc-coherent-hi}(1)).  To identify it with $\cO_T$ it
 suffices to show that its sections over every affine open
 $V=\Spec(A)\subseteq T$ equal $A$ compatibly with localization: by
-\Cref{lem:sc-flat-base-change-coherent} applied to $X$ proper over $k$,
+\Cref{lem:pcb-flat-base-change-coherent} applied to $X$ proper over $k$,
 the flat $k$-algebra $A$ and $\cF=\cO_X$,
 \[
 \Gamma(X_V,\cO_{X_V})=H^0(X_V,\cO_{X_V})\cong H^0(X,\cO_X)\otimes_kA
@@ -2839,12 +2904,12 @@ quasi-coherent $\cO_X$-module $\cF$:
 \[
 \check H^p(\mathcal U,\cF)=H^p(X,\cF)\qquad\text{for all }p\ge0 .
 \]
-\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-vanishing,lem:sc-cech-spectral}
+\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-vanishing,lem:pcb-cech-spectral}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:sc-cech-spectral}
+\uses{lem:pc-affine-vanishing,lem:pcb-cech-spectral}
 Use the Čech-to-cohomology spectral sequence of
-\Cref{lem:sc-cech-spectral} (whose proof -- the double complex
+\Cref{lem:pcb-cech-spectral} (whose proof -- the double complex
 $C^p(\mathcal U,I^q)$ of an injective resolution $I^\bullet$ of
 $\cF$ -- is included there): it has
 $E_2^{p,q}=\check H^p(\mathcal U,\underline H^q(\cF))$ and converges to
@@ -2859,7 +2924,7 @@ argument of Stacks Project, Cohomology of Schemes, Lemma 30.2.6,
 \stacksproject{01XD}; its two
 ingredients, Čech acyclicity of injective sheaves and the spectral
 sequence of the double complex, are exactly the content of
-\Cref{lem:sc-cech-spectral}.)
+\Cref{lem:pcb-cech-spectral}.)
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -3023,10 +3088,10 @@ $H^0(X,\cO_X)$ is a finite field extension of $k$.
 \item If $X$ is geometrically integral over $k$, then
 $H^0(X,\cO_X)=k$.
 \end{enumerate}
-\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-coherent-hi,lem:sc-flat-base-change-coherent,lem:pc-finite-extension-alg-closed,def:pc-curve,def:pc-geometrically-irreducible}
+\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-coherent-hi,lem:pcb-flat-base-change-coherent,lem:pc-finite-extension-alg-closed,def:pc-curve,def:pc-geometrically-irreducible}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:sc-flat-base-change-coherent}
+\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent}
 (1) Put $A=H^0(X,\cO_X)$.  The structure morphism $f:X\to\Spec(k)$ is
 proper, so by \Cref{lem:pc-coherent-hi} (with $S=\Spec(k)$, $A=k$,
 $\cF=\cO_X$) the $k$-vector space $A$ is finite dimensional.  Since $X$
@@ -3041,7 +3106,7 @@ Artinian domain, i.e.\ a field.  Hence $A$ is a finite field extension
 of $k$.
 
 (2) Since $X$ is proper over $k$ and $k\to\bar k$ is a flat ring map,
-\Cref{lem:sc-flat-base-change-coherent} gives
+\Cref{lem:pcb-flat-base-change-coherent} gives
 $H^0(X_{\bar k},\cO_{X_{\bar k}})=A\otimes_k\bar k$.  By part (1) applied
 over the algebraically closed field $\bar k$ (the base change of the
 variety is... the scheme $X_{\bar k}$ is geometrically integral, hence
@@ -3064,12 +3129,12 @@ Let $k$ be a field and $X$ a proper
 \hyperref[def:pc-geometrically-irreducible]{geometrically reduced}
 scheme over $k$.  Then $H^0(X,\cO_X)=k$ if and only if $X$ is
 geometrically connected.
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-geometrically-irreducible,lem:sc-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-geometrically-irreducible,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:sc-flat-base-change-coherent}
+\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent}
 ($\Rightarrow$) Let $k'/k$ be a field extension and set
-$A_{k'}:=H^0(X_{k'},\cO_{X_{k'}})$; by \Cref{lem:sc-flat-base-change-coherent}
+$A_{k'}:=H^0(X_{k'},\cO_{X_{k'}})$; by \Cref{lem:pcb-flat-base-change-coherent}
 $A_{k'}=H^0(X,\cO_X)\otimes_kk'=k'$.  A scheme $Y$ is connected if and
 only if every idempotent of $H^0(Y,\cO_Y)$ equals $0$ or $1$
 (the standard: an idempotent $e$ decomposes $Y=V(e)\sqcup V(1-e)$,
@@ -3081,7 +3146,7 @@ geometrically connected.
 
 ($\Leftarrow$) Assume $X$ is geometrically connected.  Put
 $\Omega=\bar k$; $X_\Omega$ is connected and (geometrically reduced,
-hence) reduced.  By \Cref{lem:sc-flat-base-change-coherent},
+hence) reduced.  By \Cref{lem:pcb-flat-base-change-coherent},
 $H^0(X_\Omega,\cO_{X_\Omega})=H^0(X,\cO_X)\otimes_k\Omega$, so by
 \Cref{lem:pc-coherent-hi} (proper $X_\Omega$ over the field $\Omega$)
 it is a finite $\Omega$-algebra; it is reduced (a submodule-statement:
@@ -3135,7 +3200,7 @@ H^i(X,\cF)\otimes_AB\;\cong\;H^i(X',\cF')\qquad\text{for all }i .
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-finite-support-hi,lem:pc-cech-computes,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:sc-cech-spectral}
+\uses{lem:pc-affine-vanishing,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pcb-cech-spectral}
 \emph{The affine case (2), $X$ separated.}  Let $A\to B$ be flat and let
 $X$ be quasi-compact and separated over $A$; choose a finite affine
 open covering $\mathcal U:X=U_1\cup\dots\cup U_t$.  The base changes
@@ -3171,7 +3236,7 @@ $\mathrm{Tor}_1$-terms occur).  Combining gives (2) for separated $X$.
 \emph{The affine case (2), $X$ quasi-separated.}  Take a finite affine
 open covering $\mathcal U$ of $X$ (quasi-compactness) and use the
 Čech-to-cohomology spectral sequence
-(\Cref{lem:sc-cech-spectral}): with
+(\Cref{lem:pcb-cech-spectral}): with
 $\underline H^q=\underline H^q(\cF)$,
 \[
 E_2^{p,q}=\check H^p(\mathcal U,\underline H^q(\cF))
@@ -3253,6 +3318,20 @@ the situation) are finite modules: hence it is coherent.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Grothendieck vanishing]\label{lem:pc-grothendieck-vanishing}
+Let $Y$ be a Noetherian topological space of dimension $\le d$ and let $\cF$ be an abelian
+sheaf on $Y$.  Then $H^i(Y,\cF)=0$ for all $i>d$.  In particular, for a Noetherian scheme $Y$
+whose underlying space has dimension $\le d$ and any $\cO_Y$-module $\cF$, one has
+$H^i(Y,\cF)=0$ for $i>d$.
+\uses{def:pc-scheme,def:pc-dimension}
+\end{lemma}
+\begin{proof}
+This is a cited external input: EGA III$_1$,\,(3.2.1), equivalently Cohomology on Sites,
+Proposition~21.22.4 (\stacksproject{02UZ}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Vanishing above the dimension of a curve]
 \label{lem:pc-vanishing-above-dim}
@@ -3268,117 +3347,12 @@ dimension $d$ vanishes above $d$; here $d=1$.)
 \uses{def:pc-curve,def:pc-smooth-projective-curve,def:pc-projective-morphism}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-curve,def:pc-degree-line-bundle,def:pc-dimension,def:pc-divisor-line-bundle,def:pc-morphism-conventions,def:sc-ample,def:sc-effective-cartier-divisor,lem:pc-cech-computes,lem:pc-euler-additive,lem:pc-projective-proper,lem:sc-ample-complement-affine,lem:sc-point-cartier,lem:sc-regular-dim1-dvr,lem:sc-smooth-regular}
-\emph{Step 1: the point $P$ and the first affine open.}  The curve $X$
-is proper (a projective morphism is proper,
-\Cref{lem:pc-projective-proper}), nonempty (an integral scheme,
-\Cref{def:pc-curve}) and of finite
-type over $k$, hence has a closed point: any nonempty open affine
-$\Spec(A)\subseteq X$ has $A$ a nonzero
-\hyperref[def:pc-morphism-conventions]{finite type} $k$-algebra, so
-$A$ has a maximal ideal (the classical Nullstellensatz: a maximal
-ideal exists in a nonzero finitely generated algebra over a field),
-and the closed points of $\Spec(A)$ are exactly its maximal ideals.
-Pick a closed point $P\in X$.
-
-The local ring $\cO_{X,P}$ is a regular local ring of dimension one
-(\Cref{lem:sc-smooth-regular}: smooth over a field; the curve is
-one-dimensional because $\dim\cO_{X,P}=\dim X=1$ for the closed point
-$P$, \Cref{def:pc-dimension}), hence a discrete valuation ring
-(\Cref{lem:sc-regular-dim1-dvr}).  By the argument of
-\Cref{lem:sc-point-cartier} (the same proof works over an arbitrary
-base field: it only uses the two lemmas just cited) the closed point
-$P$ with its reduced structure is an effective Cartier divisor
-(\Cref{def:sc-effective-cartier-divisor}); write
-$D:=[P]$  and $\cL:=\cO_X(D)$
-(\Cref{def:pc-divisor-line-bundle}), so that the support of $D$ is
-$\{P\}$.
-
-The exact sequence
-\[
-0\to\cO_X\to\cO_X(D)\to\cO_X(D)\otimes\cO_P\to0
-\]
-(the first map is multiplication by the canonical section $1_D$;
-$\cO_X(D)\otimes\cO_P\cong k(P)$, the structure sheaf of the closed
-point) is exact, $\cO_X(D)\otimes\cO_P$ is the skyscraper $k(P)$,
-which is flasque, hence has no higher cohomology
-($H^i(X,k(P))=0$ for $i\ge1$), and its $H^0$ is
-$k(P)$, a $[k(P):k]$-dimensional $k$-vector space.  By the additivity
-of the Euler characteristic (\Cref{lem:pc-euler-additive}) and
-\Cref{def:pc-degree-line-bundle},
-\[
-\deg\cL=\deg[\cO_X(D)]=\chi(\cO_X(D))-\chi(\cO_X)
-=[k(P):k]\ge1 .
-\]
-Hence $\cL$ is ample (\Cref{lem:pc-ample-positive-degree}: positive
-degree is equivalent to ampleness), and by
-\Cref{lem:sc-ample-complement-affine} (the complement of an ample
-Cartier divisor is affine, \Cref{def:sc-ample} for the ampleness
-hypothesis) the open subscheme
-\[
-U_1:=X\setminus\{P\}=X\setminus D
-\]
-is affine.
-
-\emph{Step 2: the second affine open.}  By the standard fact that
-every point of a scheme has an affine open neighbourhood, choose an
-affine open $V\subseteq X$ with $P\in V$; write $V=\Spec(A)$ with
-$A:=\cO_X(V)$.  The ring $A$ is a finitely generated $k$-algebra and
-an integral domain (an affine chart of the integral scheme $X$,
-\Cref{def:pc-curve}), of Krull dimension one (a nonempty open
-subscheme of the one-dimensional $X$; \Cref{def:pc-dimension}), and
-$P$ corresponds to a maximal ideal $\mathfrak m\subset A$ (the closed
-points of $\Spec A$ are the maximal ideals).
-
-\emph{Claim: $V\setminus\{P\}$ is affine.}  We show
-$\Spec(A)\setminus\{\mathfrak m\}$ is a principal open: since
-$\dim A=1$, the ideal $\mathfrak m$ is nonzero, so choose
-$0\neq f\in\mathfrak m$.  By Krull's principal ideal theorem every
-minimal prime over $(f)$ has height $\le1$; it is nonzero because
-$(f)\neq0$ and $A$ is a domain; hence it has height exactly $1$, so it
-is maximal ($\dim A=1$).  Let
-$\mathfrak m_1,\dots,\mathfrak m_r$ be the finitely many (Noetherian
-ring) minimal primes over $(f)$; they are maximal ideals and
-$\mathfrak m\in\{\mathfrak m_1,\dots,\mathfrak m_r\}$ because
-$f\in\mathfrak m$.  If $r=1$ put $g:=f$; otherwise
-$\mathfrak m\nsubseteq\mathfrak m_1\cup\cdots\cup\mathfrak m_r$
-(a maximal ideal $\neq\mathfrak m_j$ is not contained in
-$\mathfrak m_j$, and an ideal contained in a finite union of prime
-ideals is contained in one of them: prime avoidance; this applies
-since all $\mathfrak m_j$ are prime), so there is
-$g\in\mathfrak m\setminus(\mathfrak m_1\cup\cdots\cup\mathfrak m_r)$.
-In both cases $V(g)=\{\mathfrak m\}$: a prime
-$\mathfrak p\supseteq(g)$ contains a minimal prime over $(g)$
-(Noetherianity), which has height one, hence is one of the maximal
-ideals $\mathfrak m_1,\dots,\mathfrak m_r$; among them only
-$\mathfrak m$ contains $g$ (for $r\ge2$ by the choice of $g$; for
-$r=1$ because $\mathfrak m_1=\mathfrak m$ since $f\in\mathfrak m$ with
-$V(f)=\{\mathfrak m_1\}$), so $\mathfrak p=\mathfrak m$ as
-$\mathfrak m$ is maximal.  Therefore
-\[
-V\setminus\{P\}=\Spec(A)\setminus\{\mathfrak m\}=D(g)=\Spec(A_g)
-\]
-is affine, as claimed.
-
-\emph{Step 3: the two-member cover computes.}  The open subschemes
-$U_1$ (Step 1) and $U_2:=V$ (Step 2) cover $X$: every point of $X$
-different from $P$ lies in $U_1$, and $P\in V$.  The finite
-intersections of the members are affine: $U_1$ by Step 1, $U_2$ by
-construction, and $U_1\cap U_2=V\setminus\{P\}$ by the claim of Step
-2.  By \Cref{lem:pc-cech-computes} (the Čech complex of an open
-affine covering computes sheaf cohomology of quasi-coherent modules
-whenever all finite intersections are affine),
-\[
-H^i(X,\cF)=\check H^i(\{U_1,U_2\},\cF)\qquad\text{for all }i\ge0 .
-\]
-In the alternating Čech complex of a two-member cover the $i$-th term
-is the product over the $(i+1)$-element subsets of $\{1,2\}$; there
-are none as soon as $i\ge2$:
-\[
-\check C^i(\{U_1,U_2\},\cF)=0\qquad\text{for }i\ge2 ,
-\]
-so $\check H^i(\{U_1,U_2\},\cF)=0$ for all $i\ge2$, and hence
-$H^i(X,\cF)=0$ for all $i\ge2$.
+\uses{def:pc-curve,def:pc-dimension,def:pc-morphism-conventions,lem:pc-grothendieck-vanishing,lem:pc-projective-proper}
+The curve $X$ is proper over $k$ (a projective morphism is proper,
+\Cref{lem:pc-projective-proper}) and of finite type over $k$
+(\Cref{def:pc-curve}), hence a Noetherian scheme; its underlying
+topological space has dimension $1$ (\Cref{def:pc-dimension}).  Apply
+\Cref{lem:pc-grothendieck-vanishing} with $d=1$.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -3388,18 +3362,18 @@ $H^i(X,\cF)=0$ for all $i\ge2$.
 \stacksproject{0B5U}, for schemes
 proper over a field; EGA III$_1$, Proposition~(2.6.1).)
 Let $k$ be a field, let $X$ be a proper scheme over $k$, let $\cL$ be an
-\hyperref[def:sc-ample]{ample} invertible $\cO_X$-module, and let $\cF$ be a
+\hyperref[def:pcb-ample]{ample} invertible $\cO_X$-module, and let $\cF$ be a
 coherent $\cO_X$-module.  Then there exists $n_0\geq0$ such that
 \[
 H^p(X,\;\cF\otimes_{\cO_X}\cL^{\otimes n})=0
 \qquad\text{for all }n\ge n_0\text{ and all }p>0 .
 \]
-\uses{def:sc-ample,def:sc-invertible-module,lem:pc-projection-formula,lem:pc-affine-morphism-hi,lem:pc-cech-computes}
+\uses{def:pcb-ample,def:pcb-invertible-module,lem:pc-projection-formula,lem:pc-affine-morphism-hi,lem:pc-cech-computes}
 \end{lemma}
 \begin{proof}
-\uses{def:sc-ample,lem:pc-affine-morphism-hi,lem:pc-cech-computes,lem:pc-projection-formula}
+\uses{def:pcb-ample,lem:pc-affine-morphism-hi,lem:pc-cech-computes,lem:pc-projection-formula}
 \emph{Step 1: reduction to projective space.}  By
-\Cref{def:sc-ample} there is $m\ge1$ with $\cL^{\otimes m}$ very
+\Cref{def:pcb-ample} there is $m\ge1$ with $\cL^{\otimes m}$ very
 ample: the complete linear system $|\cL^{\otimes m}|$ is a closed
 immersion $i:X\hookrightarrow\mathbf P^N_k$ with
 $i^*\cO_{\mathbf P^N}(1)\cong\cL^{\otimes m}$, where
@@ -3530,19 +3504,19 @@ $t$ is an integer).  This proves the lemma.
 % Decomposed.
 \begin{remark}[Local regularity theory: already in file 06]\label{rem:pc-regularity-sc}
 The local regularity facts used in this blueprint are already decomposed
-in file~06: \Cref{lem:sc-smooth-regular} (a smooth curve over a field has
-regular, hence domain, local rings), \Cref{lem:sc-regular-dim1-dvr} (a
+in file~06: \Cref{lem:pcb-smooth-regular} (a smooth curve over a field has
+regular, hence domain, local rings), \Cref{lem:pcb-regular-dim1-dvr} (a
 regular local ring of dimension $1$ is a discrete valuation ring) and
-\Cref{lem:sc-point-cartier} (a closed point of a smooth curve is an
+\Cref{lem:pcb-point-cartier} (a closed point of a smooth curve is an
 effective Cartier divisor with ideal generated by one non-zero-divisor).
 They apply in our situation because a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} over a
 field is in particular a \emph{smooth curve} in the sense of
-\Cref{def:sc-curves} (nonempty, separated, of finite type, dimension
+\Cref{def:pcb-curves} (nonempty, separated, of finite type, dimension
 $\le1$; see \Cref{rem:pc-relation-sc}), and every base change $X_K$ is
-again such a curve (\Cref{lem:sc-base-change-curve} and
+again such a curve (\Cref{lem:pcb-base-change-curve} and
 \Cref{prop:pc-XK-integral}).
-\uses{def:pc-smooth-projective-curve,def:sc-curves,lem:sc-smooth-regular,lem:sc-regular-dim1-dvr,lem:sc-point-cartier,lem:sc-base-change-curve}
+\uses{def:pc-smooth-projective-curve,def:pcb-curves,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pcb-point-cartier,lem:pcb-base-change-curve}
 \end{remark}
 
 % ---------------------------------------------------------------------------
@@ -3568,13 +3542,13 @@ In particular a regular, connected, Noetherian scheme is irreducible.
 % Decomposed.
 \begin{remark}[Closed points of curves are Cartier divisors]\label{rem:pc-closed-point-cartier-sc}
 For the proofs below we use the following consequence of the local
-theory (for smooth curves this is \Cref{lem:sc-point-cartier}; in
+theory (for smooth curves this is \Cref{lem:pcb-point-cartier}; in
 general: Stacks Project, Varieties, Lemma~33.43.8,
 \stacksproject{0B8Y}): a closed point
 $P$ of a smooth \hyperref[def:pc-curve]{curve} over a field has
 invertible ideal sheaf, i.e.\ is an effective Cartier divisor, and
 $\cO_{C,P}$ is a discrete valuation ring.
-\uses{def:pc-curve,def:sc-effective-cartier-divisor,lem:sc-point-cartier}
+\uses{def:pc-curve,def:pcb-effective-cartier-divisor,lem:pcb-point-cartier}
 \end{remark}
 \begin{lemma}[Density of rationally defined closed points]
 \label{lem:pc-dense-separable-points}
@@ -3777,9 +3751,9 @@ $\Spec(K)\to\Spec(k)$.
 \label{lem:pc-very-ample-ample}
 Let $k$ be a field, let $i:X\hookrightarrow\PP^n_k$ be a closed immersion
 and let $\cL:=i^*\cO_{\PP^n}(1)$.  Then $\cL$ is
-\hyperref[def:sc-ample]{ample} on $X$; in particular the base change
+\hyperref[def:pcb-ample]{ample} on $X$; in particular the base change
 $\cL\otimes_k K$ is ample on $X_K$ for every field extension $K/k$.
-\uses{def:sc-ample,def:sc-invertible-module,def:pc-morphism-conventions}
+\uses{def:pcb-ample,def:pcb-invertible-module,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-closed-imm-base-change}
@@ -4040,9 +4014,9 @@ Rf_*(E)\otimes_{\cO_Y}^{\mathbb L}K\;\longrightarrow\;
 Rf_*(E\otimes_{\cO_X}^{\mathbb L}Lf^*K)
 \]
 is an isomorphism; in particular, for an invertible
-\hyperref[def:sc-invertible-module]{$\cO_Y$-module} $\cN$,
+\hyperref[def:pcb-invertible-module]{$\cO_Y$-module} $\cN$,
 $Rf_*(E)\otimes\cN\cong Rf_*(E\otimes f^*\cN)$.
-\uses{def:pc-derived-category,def:pc-derived-direct-image,def:sc-invertible-module,def:pc-base-change}
+\uses{def:pc-derived-category,def:pc-derived-direct-image,def:pcb-invertible-module,def:pc-base-change}
 \end{lemma}
 \begin{proof}
 The map of the statement (defined in Cohomology, Equation 20.54.2.1) is
@@ -4262,7 +4236,7 @@ isomorphism in $D(\cO_T)$.  This proves the claim.
 \begin{lemma}[The perfect locus with fixed degree]
 \label{lem:pc-perfect-locus}
 Let $X$ be a scheme and let $E\in D(\cO_X)$ be
-\hyperref[def:pc-perfect-complex]{perfect}.  Given $i,r\in\zz$ there is
+\hyperref[def:pc-perfect-complex]{perfect}.  Given $i,r\in\Z$ there is
 an open subscheme $U\subseteq X$ characterized by the property: a
 morphism $f:Y\to X$ factors through $U$ if and only if $Lf^*E$ is
 isomorphic to a locally free $\cO_Y$-module of rank $r$ placed in
@@ -4368,7 +4342,7 @@ all $y$, i.e.\ $f$ factors through $U$.  This proves the lemma.
 (Derived Categories of Schemes, Lemma~36.32.3,
 \stacksproject{0B9S}.)  Let
 $f:X\to S$ be a proper morphism of finite presentation and let $\cF$ be an
-$\cO_X$-module of finite presentation, flat over $S$.  Fix $i,r\in\zz$.
+$\cO_X$-module of finite presentation, flat over $S$.  Fix $i,r\in\Z$.
 Then there exists an open subscheme $U\subset S$ such that a morphism
 $T\to S$ factors through $U$ if and only if $Rf_{T,*}\cF_T$ is isomorphic
 to a finite locally free $\cO_T$-module of rank $r$ placed in degree $i$.
@@ -4452,7 +4426,7 @@ as claimed.
 \label{lem:pc-degree-base-change}
 Let $k$ be a field, $X$ a proper scheme over $k$ of dimension $\le1$
 (a proper curve), and let $\cL,\cM$ be invertible
-\hyperref[def:sc-invertible-module]{$\cO_X$-modules}.
+\hyperref[def:pcb-invertible-module]{$\cO_X$-modules}.
 \begin{enumerate}
 \item (Base change) For a field extension $K/k$:
 $\deg_{X_K}(\cL\otimes_kK)=\deg_X(\cL)$.
@@ -4474,10 +4448,10 @@ $\chi(X,\cF_2)=\chi(X,\cF_1)+\chi(X,\cF_3)$
 only through the effective-divisor case (2) and the case of a pullback
 from a point, which is explicit in the base change part (1) and in
 \Cref{lem:pc-degree-agrees-sc}.)
-\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:sc-invertible-module,def:pc-divisor-line-bundle,def:sc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pcb-invertible-module,def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:sc-divisor,def:sc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:sc-point-cartier,rem:pc-regularity-sc}
+\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pcb-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,rem:pc-regularity-sc}
 \emph{(3).}  This is exactly \Cref{lem:pc-euler-additive}.
 
 \emph{(1).}  For the field extension $K/k$ put $X_K:=X\times_{\Spec(k)}\Spec(K)$ (\Cref{def:pc-base-change}).
@@ -4503,7 +4477,7 @@ because $\dim_K(V\otimes_kK)=\dim_kV$ for a finite-dimensional
 $k$-vector space $V$.
 
 \emph{(2).}  Let $D\subset X$ be an effective Cartier divisor
-(\Cref{def:sc-effective-cartier-divisor}) and put $\cM=\cO_X(D)$
+(\Cref{def:pcb-effective-cartier-divisor}) and put $\cM=\cO_X(D)$
 (\Cref{def:pc-divisor-line-bundle}).  The canonical section $\mathbf 1_D$
 gives the exact
 sequence
@@ -4539,14 +4513,14 @@ the sum of the lengths.  For the divisor $D=\sum_Pn_P[P]$ on the
 smooth curve, the local structure is
 $\cO_{D,P}=\cO_{X,P}/\mathfrak m_P^{n_P}$ (the ideal of $[P]$ is the
 ideal of the closed point, generated by a uniformizer
-\Cref{lem:sc-point-cartier}, and the DVR structure
+\Cref{lem:pcb-point-cartier}, and the DVR structure
 \Cref{rem:pc-regularity-sc}), so
 $\ell(\cO_{D,P})=n_P\cdot[\kappa(P):k]$; this is the classical
 degree-of-a-divisor formula
 \[
 \deg(\cO_X(D))=\chi(X,\cO_D)=\sum_Pn_P[\kappa(P):k]
 \]
-(the degree of \Cref{def:sc-divisor} for algebraically closed $k$).
+(the degree of \Cref{def:pcb-divisor} for algebraically closed $k$).
 By the additivity (3) one gets
 \[
 \chi\bigl(X,\cL\otimes\cO_X(D)\bigr)=\chi(X,\cL)+\chi(X,\cO_D),
@@ -4581,19 +4555,19 @@ $\deg(\cO_X(D))=\sum_in_i\deg(\cO_X([P_i]))=\sum_in_i$.
 \label{lem:pc-very-ample-descends}
 Let $k$ be a field, $X$ a scheme of finite type over $k$ and $\cL$ an
 invertible module on $X$ such that $\cL_K$ is
-\hyperref[def:sc-ample]{very ample} on $X_K$ for a field extension
+\hyperref[def:pcb-ample]{very ample} on $X_K$ for a field extension
 $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
-\hyperref[def:sc-ample]{ample} if $\cL_K$ is.
-\uses{def:sc-ample,def:pc-base-change,def:pc-morphism-conventions,def:sc-invertible-module,lem:sc-flat-base-change-coherent,def:pc-picard-presheaf}
+\hyperref[def:pcb-ample]{ample} if $\cL_K$ is.
+\uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pcb-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{def:sc-ample,lem:pc-very-ample-ample,lem:sc-flat-base-change-coherent}
+\uses{def:pcb-ample,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent}
 By definition of very ampleness there is an immersion
 $i:X_K\to\mathbf P^N_K$ with $i^*\cO_{\mathbf P^N}(1)=\cL_K$.  The
 sections $x_1,\dots,x_N$ of $\cO_{\mathbf P^N}(1)$ pull back to
 sections $s_j$ of $\cL_K$ which $K$-linearly generate
 $H^0(X_K,\cL_K)=H^0(X,\cL)\otimes_kK$
-(\Cref{lem:sc-flat-base-change-coherent}; the finite generation of the
+(\Cref{lem:pcb-flat-base-change-coherent}; the finite generation of the
 sections of $i^*\cO(1)$: the morphism $i$ is the morphism of the
 sections; more precisely the immersion $i$ is given by base point free
 sections $t_0,\dots,t_N\in H^0(X_K,\cL_K)$ separating points and
@@ -4629,20 +4603,20 @@ by construction), and $X$ proper
 ($\mathbf P(V)$ and the immersion give the image-closedness over $k$),
 and ampleness: a very ample module is ample (the
 $X_s$-affine basis property, as in
-\Cref{def:sc-ample} and \Cref{lem:pc-very-ample-ample}).
+\Cref{def:pcb-ample} and \Cref{lem:pc-very-ample-ample}).
 \end{proof}
 
 \begin{lemma}[Positive degree is equivalent to ampleness]
 \label{lem:pc-ample-positive-degree}
 Let $k$ be a field, $X$ a smooth projective
 \hyperref[def:pc-curve]{curve} over $k$ and $\cL$ an invertible
-$\cO_X$-module.  Then $\cL$ is \hyperref[def:sc-ample]{ample} if and
+$\cO_X$-module.  Then $\cL$ is \hyperref[def:pcb-ample]{ample} if and
 only if $\deg(\cL)>0$.
-\uses{def:pc-degree-line-bundle,def:sc-ample,def:pc-curve,def:pc-smooth-projective-curve,def:sc-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:sc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
+\uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pcb-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:sc-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:sc-positive-degree-ample,rem:pc-regularity-sc}
-\emph{($\Rightarrow$).}  By \Cref{def:sc-ample}, $\cL$ ample implies
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,rem:pc-regularity-sc}
+\emph{($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
 $\cL^{\otimes m}=i^*\cO(1)$.  Since $X$ is proper, the immersion is a
@@ -4664,7 +4638,7 @@ divisor of finite type and dimension $0$, hence finite).  Moreover
 $D\neq\emptyset$: if $D=\emptyset$, then $s$ is a nowhere vanishing
 section, so $\cL^{\otimes m}\cong\cO_X$; but the trivial module is not
 ample on a curve (if $\cO_X$ were ample,
-then by \Cref{def:sc-ample} some power is very ample, so a closed
+then by \Cref{def:pcb-ample} some power is very ample, so a closed
 immersion of $X$ into a projective space exists with an ample structure
 sheaf: a nowhere vanishing module's powers have no sections separating
 points; or directly: the affine open sets $X_s$ (for $s$ the constant
@@ -4692,11 +4666,11 @@ integral by \Cref{lem:pc-h0-geom-connected} and the regularity
 verbatim: $H^0(X_{\bar k},\cO)=H^0(X,\cO)\otimes_k\bar k$ is a field
 \Cref{lem:pc-h0-proper-variety}(1), so $X_{\bar k}$ is connected,
 normal and reduced and hence integral).  By the decomposed lemma of
-file 06, \Cref{lem:sc-positive-degree-ample}, applied to the smooth
+file 06, \Cref{lem:pcb-positive-degree-ample}, applied to the smooth
 projective curve $X_{\bar k}$ of genus $g$ (the genus is finite
 \Cref{lem:pc-genus-well-defined} and its base change invariance
 \Cref{lem:pc-genus-base-change}), the module $\cL_{\bar k}$ is ample.
-Then $\cL$ is ample: by \Cref{def:sc-ample} some power
+Then $\cL$ is ample: by \Cref{def:pcb-ample} some power
 $\cL_{\bar k}^{\otimes m}$ is very ample, i.e.\ the base change of
 $\cL^{\otimes m}$ to $\bar k$ is very ample; by
 \Cref{lem:pc-very-ample-descends} $\cL^{\otimes m}$ is very ample over
@@ -4716,13 +4690,13 @@ $Z\subset X$ be a locally principal closed subscheme.  If all fibres
 $Z_s\subset X_s$ are effective Cartier divisors on $X_s$, then $Z$ is a
 \hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
 divisor} on $X/S$.
-\uses{def:pc-relative-effective-cartier,def:sc-effective-cartier-divisor,def:pc-morphism-conventions}
+\uses{def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-relative-effective-cartier,def:sc-effective-cartier-divisor}
+\uses{def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor}
 The statement is local on $X$ (the conclusion asserts: $Z$ is an
 effective Cartier divisor on $X$ -- a local property, cf.\
-\Cref{def:sc-effective-cartier-divisor} -- and $Z\to S$ is flat -- a
+\Cref{def:pcb-effective-cartier-divisor} -- and $Z\to S$ is flat -- a
 property local on $Z$); so fix $x\in Z$, let $s:=\phi(x)$, and choose
 affine open neighbourhoods $\Spec(A)$ of $s$ and $\Spec(B)$ of $x$
 with $\phi(\Spec(B))\subseteq\Spec(A)$; let $\mathfrak
@@ -4795,7 +4769,7 @@ and, with $g_X:X_T\to X$,
 \[
 \cO_{X_T}(D_T)\cong g_X^*\cO_X(D).
 \]
-\uses{def:pc-relative-effective-cartier,def:pc-divisor-line-bundle,def:sc-effective-cartier-divisor,def:pc-base-change,lem:pc-closed-imm-base-change,lem:pc-flat-compose,def:pc-morphism-conventions}
+\uses{def:pc-relative-effective-cartier,def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,def:pc-base-change,lem:pc-closed-imm-base-change,lem:pc-flat-compose,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-closed-imm-base-change,lem:pc-divisor-line-bundle-properties}
@@ -4850,7 +4824,7 @@ proper, the first arrow is an if-and-only-if.
 \uses{def:pc-relative-effective-cartier,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:sc-effective-cartier-divisor,lem:pc-recd-locally-principal,lem:sc-regular-dim1-dvr,lem:sc-smooth-regular,rem:pc-regularity-sc}
+\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,lem:pc-recd-locally-principal,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,rem:pc-regularity-sc}
 \emph{$(3)\Rightarrow(2)$.}  This is the ``in particular'' of
 \Cref{lem:pc-recd-locally-principal}: $D$ is locally principal (the
 fibres are effective Cartier divisors and $D$ is flat and locally
@@ -4872,7 +4846,7 @@ effective Cartier divisor: locally $D=\Spec(B/(f))$ with $B$ finitely
 presented over $A$).  The fibres $D_s$ are effective Cartier divisors
 on the smooth one-dimensional $X_s$, hence finite unions of closed
 points with their Artinian structures
-(\Cref{def:sc-effective-cartier-divisor} and the local theory of
+(\Cref{def:pcb-effective-cartier-divisor} and the local theory of
 \Cref{rem:pc-regularity-sc}: the fibre of a relative effective Cartier
 divisor is an effective Cartier divisor, and on a smooth curve those
 are the finite unions of closed points); hence $D_s$ is finite, so
@@ -4885,8 +4859,8 @@ and locally of finite presentation (\Cref{def:pc-finite-locally-free}),
 and $D\to X$ is of finite presentation as above.  For a fibre: $D_s$ is
 finite flat of rank $d$ over $\kappa(s)$, and at a point $x\in D_s$
 the local ring $\cO_{X_s,x}$ is a regular local ring of dimension one
-(\Cref{lem:sc-smooth-regular}), hence a discrete valuation ring
-(\Cref{lem:sc-regular-dim1-dvr}); the stalk of the ideal of $D_s$ at
+(\Cref{lem:pcb-smooth-regular}), hence a discrete valuation ring
+(\Cref{lem:pcb-regular-dim1-dvr}); the stalk of the ideal of $D_s$ at
 $x$ is an ideal of the DVR with nonzero quotient (finite flat over the
 field: the quotient $\cO_{D_s,x}$ is a finite flat module, hence of
 finite length), so it is the $n$-th power of the maximal ideal, a
@@ -4971,7 +4945,7 @@ there exists an affine open $U\subset X$ containing them
 (e.g.\ if $X\to S$ is quasi-projective, or if there exists an ample
 invertible sheaf on $X$).  Then $\Hilb^d_{X/S}$ is representable by a
 scheme $\underline{\Hilb}^d_{X/S}$.
-\uses{def:pc-hilb-functor,def:sc-ample}
+\uses{def:pc-hilb-functor,def:pcb-ample}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-finite-locally-free,def:pc-fppf-site,lem:pc-hilb-sheaf,lem:pc-schemes-criterion}
@@ -5339,10 +5313,10 @@ divisors of degree $d$ on $X_{k'}$;
 \]
 which is finite locally free of degree $\binom{d_1+d_2}{d_1}$.
 \end{enumerate}
-\uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:sc-effective-cartier-divisor,def:pc-degree-line-bundle}
+\uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:pcb-effective-cartier-divisor,def:pc-degree-line-bundle}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:sc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-vanishing-above-dim,lem:sc-ample-complement-affine}
+\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pcb-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine}
 \emph{Step 0: the affine-open hypothesis.}  We verify the hypothesis of
 \Cref{lem:pc-hilb-representable} (for $S=\Spec(k)$, $X/k$): let
 $x_1,\dots,x_d$ be a finite set of points of $X$ (of the single fibre
@@ -5356,7 +5330,7 @@ the closed $x_i$ contains all of them.  (If none of the $x_i$ is
 closed, any nonempty affine open $U_0\subset X$ will do.)  For the
 closed points $P_1,\dots,P_m$ among them, the divisor
 $D_0:=\sum_{j=1}^m[P_j]$ is an effective Cartier divisor on the smooth
-curve (\Cref{def:sc-effective-cartier-divisor} and
+curve (\Cref{def:pcb-effective-cartier-divisor} and
 \Cref{lem:pc-ample-positive-degree} argue positivity) -- precisely:
 by \Cref{lem:pc-degree-base-change} or directly
 (deg$\cO_X(D_0)=\sum_j[\kappa(P_j):k]\ge1$: the explicit computation
@@ -5366,7 +5340,7 @@ degree established in \Cref{lem:pc-degree-base-change}(2)) the
 invertible module
 $\cO_X(D_0)$ has positive degree; hence it is ample
 (\Cref{lem:pc-ample-positive-degree}); by
-\Cref{lem:sc-ample-complement-affine} the open subscheme
+\Cref{lem:pcb-ample-complement-affine} the open subscheme
 $X\setminus\operatorname{Supp}(D_0)=X\setminus\{P_1,\dots,P_m\}$
 is affine and it contains all the $x_i$ (the closed ones by
 construction, the generic point $\eta$ automatically: $\eta$ lies in
@@ -5530,7 +5504,7 @@ $k$-rational point $[D]\in\underline{\Hilb}^{d+1}_{X/k}$ corresponding to
 an effective Cartier divisor $D\subset X$ of degree $d+1$, the restriction
 of $\cO(D_{\mathrm{univ}})$ to the fibre $[D]\times X\cong X$ is
 $\cO_X(D)$.
-\uses{def:pc-relative-effective-cartier,def:sc-effective-cartier-divisor,def:pc-hilb-functor}
+\uses{def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-hilb-functor}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-divisor-line-bundle,def:pc-hilb-functor,def:pc-relative-effective-cartier,lem:pc-cartier-criterion,lem:pc-recd-pullback,thm:pc-hilb-curves}
@@ -5585,7 +5559,7 @@ $\cO_{S_i}$-modules with gluing isomorphisms satisfying the cocycle
 condition) is an equivalence of categories; in particular, if the
 restrictions of an invertible module to the $S_i$ are trivial, then the
 module is trivial.
-\uses{def:sc-invertible-module}
+\uses{def:pcb-invertible-module}
 \end{lemma}
 \begin{proof}
 \emph{Step 1: the affine case for modules.}  Let $A\to B$ be a faithfully
@@ -5827,7 +5801,7 @@ $\underline{\Hilb}^d_{X/k}$
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-rational-point,def:pc-curve,def:pc-geometrically-irreducible,def:pc-hilb-functor}
 \end{proposition}
 \begin{proof}
-\uses{def:pc-curve,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-projective-proper,lem:pc-proper-base-change,lem:sc-smooth-regular,rem:pc-regular-normal,thm:pc-hilb-curves}
+\uses{def:pc-curve,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-projective-proper,lem:pc-proper-base-change,lem:pcb-smooth-regular,rem:pc-regular-normal,thm:pc-hilb-curves}
 Since $X$ is a proper variety (projective $\Rightarrow$ proper,
 \Cref{lem:pc-projective-proper}; a curve is a variety, hence integral,
 \Cref{def:pc-curve}), the ring $k':=H^0(X,\cO_X)$ is a finite field
@@ -5852,7 +5826,7 @@ $\dim_K H^1(X_K,\cO_{X_K})=\dim_kH^1(X,\cO_X)$.
 The morphism $X_K\to\Spec(K)$ is smooth (base change of smooth,
 \Cref{lem:pc-proper-base-change}) and proper (base change of proper,
 \Cref{lem:pc-proper-base-change}), so $X_K$ is regular
-(\Cref{lem:sc-smooth-regular}), hence normal (\Cref{rem:pc-regular-normal})
+(\Cref{lem:pcb-smooth-regular}), hence normal (\Cref{rem:pc-regular-normal})
 and reduced.  Moreover $X_K$ is geometrically reduced: for every $K'/K$,
 $X_{K'}$ is smooth over $K'$, hence regular, hence reduced; and $X_K$ is
 proper, so \Cref{lem:pc-h0-geom-connected} (with $k$ replaced by $K$ and
@@ -5891,7 +5865,7 @@ $T\in\Ob((\Sch/S)_{fppf})$, then
 \]
 is an exact sequence for all $T$ (the first map is $f_T^*$, the second the
 canonical map).
-\uses{def:pc-picard-functor,def:sc-picard-group,def:sc-invertible-module,def:pc-fppf-site}
+\uses{def:pc-picard-functor,def:pcb-picard-group,def:pcb-invertible-module,def:pc-fppf-site}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-fpqc-descent}
@@ -5990,6 +5964,28 @@ condition.  This proves the lemma.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+\begin{lemma}[The Picard group of the base sheafifies away]
+\label{lem:pc-pic-base-sheafifies}
+Let $S$ be a scheme.  The fppf sheafification of the presheaf
+$T\mapsto\Pic(T)$ on $(\Sch/S)_{fppf}$ is the trivial sheaf; already
+its Zariski sheafification is trivial.
+\uses{def:pcb-picard-group,def:pcb-invertible-module,def:pc-fppf-site}
+\end{lemma}
+\begin{proof}
+\uses{def:pcb-invertible-module,def:pc-fppf-site}
+Let $T$ be a scheme over $S$ and let $\cL$ be an invertible
+$\cO_T$-module, representing a class in $\Pic(T)$.  By
+\Cref{def:pcb-invertible-module} an invertible module is Zariski-locally
+free of rank one, so there is a Zariski open covering
+$\{T_i\to T\}$ with $\cL|_{T_i}\cong\cO_{T_i}$, i.e.\ the restriction
+of the class of $\cL$ to each $T_i$ is the unit of $\Pic(T_i)$.  A
+Zariski covering is an fppf covering, so every section of the presheaf
+$T\mapsto\Pic(T)$ vanishes locally, and a presheaf all of whose
+sections vanish locally has trivial sheafification.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
 \begin{theorem}[The split exact sequence for the Picard functor]
 \label{thm:pc-pic-split}
 (Picard Schemes of Curves, Lemma~44.4.3,
@@ -6011,7 +6007,7 @@ sheafification of the presheaf $K$).
 \uses{def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor}
 \end{theorem}
 \begin{proof}
-\uses{lem:pc-k-sheaf,lem:pc-pic-exact}
+\uses{lem:pc-k-sheaf,lem:pc-pic-exact,lem:pc-pic-base-sheafifies}
 Since $\sigma$ is a section of $f$, we have
 $\sigma_T^*\circ f_T^*=\id_{\Pic(T)}$; hence $f_T^*$ is injective and, by
 the splitting lemma for abelian groups,
@@ -6021,11 +6017,13 @@ the second factor in $K(T)$).  By \Cref{lem:pc-pic-exact} the kernel of
 $\Pic(X_T)\to\Pic_{X/S}(T)$ is exactly $f_T^*(\Pic(T))$, in particular
 $K(T)\subseteq\Pic_{X/S}(T)$ (already as a subset, compatibly with the
 restriction maps).  By \Cref{lem:pc-k-sheaf} the presheaf $K$ is an fppf
-sheaf, and it is clear from the construction (the sheafification of the
-pointwise split presheaf $T\mapsto\Pic(X_T)$ is its splitting, the first
-summand $T\mapsto\Pic(T)$ being fppf-locally trivializable exactly
-through the descent condition, cf.\ the argument of
-\Cref{lem:pc-k-sheaf}) that $\Pic_{X/S}$ is the sheafification of $K$.
+sheaf.  Sheafification is exact, so applying it to the split exact
+sequence of presheaves
+$0\to\Pic(-)\to\Pic(X_{(-)})\to K\to0$ gives a split exact sequence of
+fppf sheaves; its first term is trivial by
+\Cref{lem:pc-pic-base-sheafifies} and its third term is $K$ itself,
+which is already a sheaf.  Hence $\Pic_{X/S}$, which is by definition
+the sheafification of $\Pic(X_{(-)})$, is $K$.
 Consequently the third map is surjective and the sequence is split.
 \end{proof}
 
@@ -6103,10 +6101,10 @@ invertible }\cO_T\text{-module placed in degree }0\}.
 Then $F$ is a subfunctor of $\Pic_{X/k,\sigma}$ and the inclusion
 $F\subseteq\Pic_{X/k,\sigma}$ is
 \hyperref[def:pc-subfunctor]{representable by open immersions}.
-\uses{def:pc-f-subfunctor,def:pc-subfunctor,def:pc-pic-sigma-functor,def:pc-derived-category,def:sc-invertible-module}
+\uses{def:pc-f-subfunctor,def:pc-subfunctor,def:pc-pic-sigma-functor,def:pc-derived-category,def:pcb-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-subfunctor,def:sc-invertible-module,lem:pc-flat-rf-open,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat}
+\uses{def:pc-subfunctor,def:pcb-invertible-module,lem:pc-flat-rf-open,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat}
 $F$ is a subfunctor: if $\cL\in F(T)$ and $u:T'\to T$ is a morphism, then
 $\cL_{T'}=u_X^*\cL$ satisfies
 $Rf_{T',*}\cL_{T'}\cong u^*(Rf_{T,*}\cL)$ (base change, \Cref{lem:pc-rf-perfect-base-change};
@@ -6124,7 +6122,7 @@ such that a morphism $u:T'\to T$ factors through $U$ if and only if
 $Rf_{T',*}\cL_{T'}$ is isomorphic to a finite locally free
 $\cO_{T'}$-module of rank $1$ placed in degree $0$, i.e.\ if and only if
 $u^*\cL\in F(T')$ (a finite locally free module of rank $1$ is an
-invertible module, \Cref{def:sc-invertible-module}).  Taking $U=U_\xi$
+invertible module, \Cref{def:pcb-invertible-module}).  Taking $U=U_\xi$
 for $\xi=\cL$ gives exactly the property required.
 \end{proof}
 
@@ -6148,10 +6146,10 @@ the tensor-Hom adjunction, $\cN$ invertible).  Then the
 \hyperref[def:pc-zero-scheme]{zero scheme} $D:=Z(s)$ is a
 \hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
 divisor} on $X_T/T$ which is finite locally free of degree $g$ over $T$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:sc-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:sc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pcb-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:sc-regular-dim1-dvr,lem:sc-smooth-regular,prop:pc-XK-integral}
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,prop:pc-XK-integral}
 $\cM:=\cL\otimes f_T^*\cN^{-1}$ is an invertible module on $X_T$ and
 $s\in H^0(X_T,\cM)$.  By
 \Cref{def:pc-zero-scheme} the ideal sheaf
@@ -6211,8 +6209,8 @@ $\cM_{t,x}\hookrightarrow\cM_{t,\eta}$ to the generic stalk is injective
 by integrality, and $s_{t,\eta}\neq0$ since $s_t\neq0$).  Hence the ideal
 $\cI_{Z(s_t),x}$ is generated by a non-zero element of the local ring
 $\cO_{X_t,x}$, which is regular of dimension $1$
-(\Cref{lem:sc-smooth-regular}), hence a DVR
-(\Cref{lem:sc-regular-dim1-dvr}); in a DVR a non-zero element generates
+(\Cref{lem:pcb-smooth-regular}), hence a DVR
+(\Cref{lem:pcb-regular-dim1-dvr}); in a DVR a non-zero element generates
 an invertible ideal.  Therefore $\cI_{Z(s_t)}$ is invertible: $D_t$ is an
 effective Cartier divisor.
 
@@ -6255,7 +6253,7 @@ $Z(1)=D_{\mathrm{univ}}\subset H\times X$; moreover this section is the
 adjoint section of $\cL_H$ for the module $\cN_H$, i.e.\ it corresponds
 under the adjunction of \Cref{lem:pc-zero-scheme-recd} on the open
 $W\subseteq H$ where $\cN_H$ is invertible.
-\uses{def:pc-separably-closed,def:pc-genus,def:pc-rational-point,def:pc-hilb-functor,def:sc-effective-cartier-divisor,def:pc-zero-scheme}
+\uses{def:pc-separably-closed,def:pc-genus,def:pc-rational-point,def:pc-hilb-functor,def:pcb-effective-cartier-divisor,def:pc-zero-scheme}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-zero-scheme,lem:pc-zero-scheme-recd}
@@ -6299,7 +6297,7 @@ let $X$ be a
 $F$ be the subfunctor of
 \Cref{lem:pc-f-open-subfunctor}.  Then $F$ is representable by an open
 subscheme of $\underline{\Hilb}^g_{X/k}$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-hilb-functor,def:sc-effective-cartier-divisor,def:pc-relative-effective-cartier,def:sc-invertible-module,def:pc-derived-category,def:pc-representable-functor,def:pc-subfunctor,def:pc-finite-locally-free,lem:pc-hilb-representable,def:pc-pic-sigma-functor}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-hilb-functor,def:pcb-effective-cartier-divisor,def:pc-relative-effective-cartier,def:pcb-invertible-module,def:pc-derived-category,def:pc-representable-functor,def:pc-subfunctor,def:pc-finite-locally-free,lem:pc-hilb-representable,def:pc-pic-sigma-functor}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-hilb-functor,def:pc-pic-sigma-functor,def:pc-representable-functor,def:pc-subfunctor,lem:pc-cartier-criterion,lem:pc-f-open-subfunctor,lem:pc-flat-rf-open,lem:pc-projection-formula,lem:pc-recd-pullback,lem:pc-rf-perfect-base-change,lem:pc-universal-adjoint-section,lem:pc-universal-divisor,lem:pc-zero-scheme-recd,prop:pc-XK-integral,thm:pc-hilb-curves}
@@ -6429,10 +6427,10 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 \qquad\text{and}\qquad
 \dim_KH^1\bigl(X_K,\;\cL\otimes\cL_0|_{X_K}\bigr)=0 .
 \]
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:sc-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:sc-ample,def:pc-curve,def:pc-rational-point,def:sc-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pcb-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pcb-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-curve,def:sc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:sc-point-cartier,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pcb-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
 \emph{Step 1: an ample polarisation.}  The smooth projective curve $X$
 carries a closed immersion $i:X\to\PP^n_k$; by \Cref{lem:pc-very-ample-ample}
 the module $\cL_0^{\bullet}:=i^*\cO_{\PP^n}(1)$ is ample on $X$ and, by
@@ -6488,7 +6486,7 @@ $s(x_K)\neq0$ (i.e.\ $s$ does not vanish at $x_K$: $s_{x_K}
 otin
 \mathfrak m_{x_K}\cL_{x_K}$).
 Let $\cI$ be the ideal sheaf of the closed immersion
-$i:x_K\hookrightarrow X_K$; by \Cref{lem:sc-point-cartier}
+$i:x_K\hookrightarrow X_K$; by \Cref{lem:pcb-point-cartier}
 $\cI$ is invertible ($X_K$ is smooth over $K$, $x_K$ is a closed point
 with $\kappa(x_K)=K$).  The sequence
 \[
@@ -6519,7 +6517,7 @@ we reach a module
 \]
 with $\cL_0:=\cL_0^{\bullet\otimes n}\otimes\cI_{x_1}\otimes\cdots\otimes
 \cI_{x_{t-1}}$, an invertible sheaf on $X$ (products of invertible
-modules, \Cref{def:sc-invertible-module}), and with
+modules, \Cref{def:pcb-invertible-module}), and with
 $\dim_KH^0=1$, $H^1=0$.  This proves the lemma.
 \end{proof}
 
@@ -6597,6 +6595,10 @@ $\underline{\Pic}_{X/k}$ is a group scheme over $k$.
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor}
 \lean{AlgebraicGeometry.isRepresentable_picardFunctor}
 \leanok
+\statusnote{The Lean statement is formalised; its proof is \texttt{sorry}.  It asserts
+representability of the \emph{set}-valued functor by a scheme that carries a group structure;
+that this group structure is the Picard one is not asserted, since
+\Cref{def:pcb-picard-group} has no group law in Lean.}
 \end{theorem}
 \begin{proof}
 \uses{cor:pc-sigma-pic-iso,def:pc-genus,def:pc-pic-sigma-functor,def:pc-rational-point,lem:pc-f-open-subfunctor,lem:pc-k-sheaf,lem:pc-rational-hyp,lem:pc-rational-points-dense,lem:pc-twist,lem:pc-vanishing-above-dim,prop:pc-XK-integral,thm:pc-criterion,thm:pc-f-representable,thm:pc-pic-split}

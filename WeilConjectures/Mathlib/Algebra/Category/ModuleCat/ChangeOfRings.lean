@@ -1,7 +1,7 @@
 /-
-Copyright (c) 2026 Orchestra Agent. All rights reserved.
+Copyright (c) 2026 Christian Merten. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Orchestra Agent
+Authors: Christian Merten
 -/
 module
 
@@ -27,6 +27,6 @@ namespace ModuleCat
 noncomputable instance preservesFiniteLimits_restrictScalars
     {R : Type u₁} {S : Type u₂} [Ring R] [Ring S] (f : R →+* S) :
     PreservesFiniteLimits (restrictScalars.{v} f) where
-  preservesFiniteLimits _ := ⟨fun {_} => inferInstance⟩
+  preservesFiniteLimits _ := ⟨fun {_} ↦ inferInstance⟩
 
 end ModuleCat

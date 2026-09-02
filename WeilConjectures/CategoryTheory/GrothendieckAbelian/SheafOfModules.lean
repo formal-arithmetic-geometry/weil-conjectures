@@ -27,6 +27,15 @@ leaves the proof to a future contribution.
 its docstring for a sketch of why it is true. Since `IsGrothendieckAbelian` is a `Prop`-valued
 class, no data is fabricated by doing so.
 
+Note that the instance is nevertheless global, so `#print axioms` reports `sorryAx` on every
+declaration whose elaboration goes through it — in particular on `Scheme.Modules.cohomology`
+and on the invariants built from it (`eulerCharacteristic`, `degree`, `genus`), none of which
+contains a `sorry` of its own.
+
+## Blueprint
+
+`SheafOfModules.isGrothendieckAbelian` implements `lem:pc-sheaves-of-modules-grothendieck`.
+
 -/
 
 @[expose] public section

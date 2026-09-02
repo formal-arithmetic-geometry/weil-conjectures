@@ -156,6 +156,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
