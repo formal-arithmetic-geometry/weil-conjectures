@@ -20,6 +20,13 @@ neighbourhood (`AlgebraicGeometry.Scheme.Hom.SplitNbhd.exists_hom`): choosing an
 `A' ⊗ Γ(X, f ⁻¹ᵁ Y₀)`, indexed by the geometric points of `X` over `y`, and the basic opens of
 these idempotents are the pieces of the decomposition of `Spec A' ×_Y X`.
 
+It follows that the category of split neighbourhoods is cofiltered
+(`AlgebraicGeometry.Scheme.Hom.SplitNbhd.isCofiltered`) and that the forgetful functor to the
+pointed étale neighbourhoods of `y` is initial
+(`AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_forget`). We also record that the opposite
+category is essentially small, hence finally small, so that colimits over it exist and are
+exact in a Grothendieck abelian category.
+
 -/
 
 @[expose] public section
@@ -177,6 +184,15 @@ instance isCofiltered : IsCofiltered (SplitNbhd f y) where
   cone_maps s₁ s₂ g h := by
     obtain ⟨c, k, hk⟩ := IsCofilteredOrEmpty.cone_maps g.val h.val
     exact ⟨s₁.pullbackDec k, s₁.pullbackDecHom k, hom_ext (by rw [comp_val, comp_val]; exact hk)⟩
+
+/-- The category of split neighbourhoods is essentially small: it is small, being cut out of
+the pointed étale neighbourhoods, and locally small. -/
+instance essentiallySmall_op : EssentiallySmall.{u + 1} (SplitNbhd f y)ᵒᵖ :=
+  essentiallySmall_of_small_of_locallySmall _
+
+/-- The category of split neighbourhoods is finally small, being essentially small. -/
+instance finallySmall_op : FinallySmall.{u + 1} (SplitNbhd f y)ᵒᵖ :=
+  finallySmall_of_essentiallySmall _
 
 /-- **The forgetful functor from split neighbourhoods to pointed étale neighbourhoods is
 initial**: the split neighbourhoods are cofinal among all pointed étale neighbourhoods. -/

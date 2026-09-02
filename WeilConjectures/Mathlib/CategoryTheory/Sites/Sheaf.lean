@@ -8,13 +8,14 @@ module
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
-# A local criterion for a morphism of sheaves to be an isomorphism
+# Two consequences of the sheaf condition
 
-A morphism of sheaves is an isomorphism as soon as, at every object `X` of the site, it is
-invertible on the members of *some* covering sieve of `X`. Both sheaves are the limit of
-their restriction to a covering sieve
-(`CategoryTheory.Presheaf.isSheaf_iff_isLimit`), so a morphism which is invertible on the
-whole diagram induces an isomorphism of the limits, which is the morphism at `X`.
+*A local criterion for a morphism of sheaves to be an isomorphism.* A morphism of sheaves is
+an isomorphism as soon as, at every object `X` of the site, it is invertible on the members
+of *some* covering sieve of `X`. Both sheaves are the limit of their restriction to a
+covering sieve (`CategoryTheory.Presheaf.isSheaf_iff_isLimit`), so a morphism which is
+invertible on the whole diagram induces an isomorphism of the limits, which is the morphism
+at `X`.
 
 This is the sheaf-theoretic ingredient of
 `AlgebraicGeometry.Etale.isIso_of_isIso_openImmersionRestriction`, where the covering sieve
@@ -23,12 +24,21 @@ family of open immersions. Note that no hypothesis on the coefficient category i
 particular this does not go through stalks, and applies to sheaves valued in an arbitrary
 category.
 
+*A sheaf sends a disjoint cover to a product.* If an object `V` is covered by subobjects
+`π i : W i ⟶ V` which are pairwise disjoint, in the sense that the sheaf has terminal
+sections over any object mapping into two different `W i` compatibly over `V`, then the
+restriction maps exhibit the sections over `V` as the product of the sections over the
+`W i`: every family of sections of the `W i` is compatible, hence has a unique
+amalgamation. The index type is arbitrary; only the existence of the product is assumed.
+
 ## Main results
 
 - `CategoryTheory.Presheaf.isIso_app_of_isIso_app_of_mem`: the statement at a single object.
 - `CategoryTheory.Presheaf.isIso_of_isIso_app_of_mem` and
   `CategoryTheory.Sheaf.isIso_of_isIso_app_of_mem`: the global statements, for a morphism of
   presheaves which are sheaves and for a morphism in the category of sheaves.
+- `CategoryTheory.Sheaf.isIso_piLift_of_isTerminal`: the sections over an object covered by
+  pairwise disjoint subobjects are the product of the sections over the subobjects.
 -/
 
 @[expose] public section
@@ -78,9 +88,64 @@ lemma isIso_of_isIso_app_of_mem (hG : IsSheaf J G) (hG' : IsSheaf J G') (φ : G 
     exact isIso_app_of_isIso_app_of_mem J hG hG' φ S hS hSiso
   exact NatIso.isIso_of_isIso_app _
 
+/-- **Compatibility for a family of disjoint subobjects.** If the `π i : W i ⟶ V` are
+monomorphisms and `P` has terminal sections over every object mapping to two different `W i`
+compatibly over `V`, then every family of sections `x i : E ⟶ P (W i)` is compatible: given
+a fork
+
+```
+        a                    b
+   Z ──────→ W i        Z ──────→ W j
+              │ π i                │ π j
+              ↓                    ↓
+              V                    V
+```
+
+with `a ≫ π i = b ≫ π j`, either `i = j` and then `a = b`, or `P Z` is terminal. -/
+lemma compatible_of_isTerminal {P : Cᵒᵖ ⥤ A} {V : C} {ι : Type*} {W : ι → C}
+    (π : ∀ i, W i ⟶ V) [∀ i, Mono (π i)]
+    (hdisj : ∀ ⦃Z : C⦄ ⦃i j : ι⦄, i ≠ j → ∀ (a : Z ⟶ W i) (b : Z ⟶ W j),
+      a ≫ π i = b ≫ π j → Nonempty (IsTerminal (P.obj (op Z))))
+    {E : A} (x : ∀ i, E ⟶ P.obj (op (W i))) ⦃Z : C⦄ ⦃i j : ι⦄ (a : Z ⟶ W i) (b : Z ⟶ W j)
+    (h : a ≫ π i = b ≫ π j) :
+    x i ≫ P.map a.op = x j ≫ P.map b.op := by
+  by_cases hij : i = j
+  · subst hij
+    obtain rfl : a = b := (cancel_mono (π i)).mp h
+    rfl
+  · exact (hdisj hij a b h).some.hom_ext _ _
+
 end Presheaf
 
 namespace Sheaf
+
+/-- **A sheaf sends a disjoint cover to a product**: if the monomorphisms `π i : W i ⟶ V`
+cover `V` and the sheaf `G` has terminal sections over every object mapping to two different
+`W i` compatibly over `V`, then the restriction maps exhibit `G V` as the product of the
+`G (W i)`:
+
+```
+   G V ──Pi.lift (fun i ↦ G.map (π i).op)──→ ∏ᶜ G (W i)
+       ╲                                          │
+        ╲ G.map (π i).op                          │ Pi.π i
+         ↘                                        ↓
+                          G (W i)
+```
+-/
+theorem isIso_piLift_of_isTerminal (G : Sheaf J A) {V : C} {ι : Type*} (W : ι → C)
+    (π : ∀ i, W i ⟶ V) [∀ i, Mono (π i)] (hcov : Sieve.ofArrows W π ∈ J V)
+    (hdisj : ∀ ⦃Z : C⦄ ⦃i j : ι⦄, i ≠ j → ∀ (a : Z ⟶ W i) (b : Z ⟶ W j),
+      a ≫ π i = b ≫ π j → Nonempty (IsTerminal (G.obj.obj (op Z))))
+    [HasProduct fun i ↦ G.obj.obj (op (W i))] :
+    IsIso (Pi.lift fun i ↦ G.obj.map (π i).op) := by
+  refine isIso_of_yoneda_map_bijective _ fun E ↦ ⟨fun x y hxy ↦ ?_, fun φ ↦ ?_⟩
+  · obtain ⟨t, -, ht⟩ := G.property.existsUnique_amalgamation_ofArrows π hcov
+      (fun i ↦ x ≫ G.obj.map (π i).op) (Presheaf.compatible_of_isTerminal π hdisj _)
+    refine (ht x fun i ↦ rfl).trans (ht y fun i ↦ ?_).symm
+    simpa using (congrArg (· ≫ Pi.π _ i) hxy).symm
+  · obtain ⟨t, ht, -⟩ := G.property.existsUnique_amalgamation_ofArrows π hcov
+      (fun i ↦ φ ≫ Pi.π _ i) (Presheaf.compatible_of_isTerminal π hdisj _)
+    exact ⟨t, Pi.hom_ext _ _ fun i ↦ by simpa using ht i⟩
 
 /-- A morphism of sheaves which, at every object, is invertible on the members of some
 covering sieve is an isomorphism. -/

@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 
 /-!
@@ -29,11 +28,21 @@ sections of `G` over `U ×_Y X` are the product of the sections over the pieces,
 - `AlgebraicGeometry.Scheme.Hom.SplitNbhd.sectionsIsoPi`: the natural isomorphism between the
   sections over `U ×_Y X` and the product of the sections over the pieces.
 
+## Main results
+
+- `AlgebraicGeometry.Scheme.Hom.SplitNbhd.ofArrows_pieceIncl_mem_smallEtaleTopology`: the
+  pieces cover `U ×_Y X`.
+- `AlgebraicGeometry.Scheme.Hom.SplitNbhd.disjoint_range_pieceIncl`: the pieces are pairwise
+  disjoint.
+- `AlgebraicGeometry.Scheme.Hom.SplitNbhd.isIso_piLift_restrictToPiece`: the restriction maps
+  to the pieces exhibit the sections over `U ×_Y X` as the product of the sections over the
+  pieces.
+
 -/
 
 @[expose] public section
 
-universe u u'
+universe v u u'
 
 open CategoryTheory Limits Opposite
 
@@ -45,7 +54,17 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} {Ω : Type u} [Field Ω] [IsSepClosed 
   {y : Spec (.of Ω) ⟶ Y}
 
 /-- The inclusion of the `t`-th piece of a split neighbourhood into `U ×_Y X`, as a morphism
-of étale `X`-schemes. -/
+of étale `X`-schemes. Together with
+`AlgebraicGeometry.Scheme.Hom.SplitNbhd.piecePt_comp_pieceIncl` it is the triangle
+
+```
+                Spec Ω
+              ╱        ╲
+   piecePt t ╱          ╲ basePt f s.obj t
+            ↙            ↘
+   s.pieceObj t ─pieceIncl─→ U ×_Y X
+```
+-/
 def pieceIncl (s : SplitNbhd f y) (t : GeometricFiber f y) :
     s.pieceObj t ⟶ f.Etale.obj s.obj.1 :=
   MorphismProperty.Over.homMk (s.piece t).ι rfl
@@ -55,44 +74,53 @@ lemma pieceIncl_left (s : SplitNbhd f y) (t : GeometricFiber f y) :
     (s.pieceIncl t).left = (s.piece t).ι := rfl
 
 instance (s : SplitNbhd f y) (t : GeometricFiber f y) : Mono (s.pieceIncl t) where
-  right_cancellation g h hgh := by
-    apply MorphismProperty.Over.Hom.ext
-    apply (cancel_mono (s.piece t).ι).mp
-    exact congrArg (fun m ↦ m.left) hgh
+  right_cancellation _ _ hgh :=
+    MorphismProperty.Over.Hom.ext ((cancel_mono (s.piece t).ι).mp (congrArg (·.left) hgh))
 
-/-- The point `(u, t)` of the `t`-th piece, seen in `U ×_Y X`, is `(u, t)`. -/
-@[reassoc (attr := simp)]
+/-- The marked point of the `t`-th piece maps to the point `(u, t)` of `U ×_Y X`. -/
+@[reassoc]
 lemma piecePt_comp_pieceIncl (s : SplitNbhd f y) (t : GeometricFiber f y) :
     (s.piecePt t).left ≫ (s.pieceIncl t).left = basePt f s.obj t :=
   s.piecePt_left_ι t
 
-/-- The inclusions of the pieces are compatible with morphisms of split neighbourhoods. -/
+/-- The inclusions of the pieces are compatible with morphisms of split neighbourhoods:
+
+```
+   s.pieceObj t ──pieceIncl──→ U ×_Y X
+        │                          │
+        │ pieceMap g t             │ f.Etale.map g.val.val
+        ↓                          ↓
+   s'.pieceObj t ─pieceIncl──→ U' ×_Y X
+```
+-/
 @[reassoc]
 lemma pieceMap_comp_pieceIncl {s s' : SplitNbhd f y} (g : s ⟶ s') (t : GeometricFiber f y) :
     pieceMap g t ≫ s'.pieceIncl t = s.pieceIncl t ≫ f.Etale.map g.val.val := by
   apply MorphismProperty.Over.Hom.ext
   exact pieceMap_left_ι g t
 
+/-- The image of the `t`-th piece in `U ×_Y X` is the `t`-th piece. -/
+@[simp]
+lemma range_pieceIncl_left (s : SplitNbhd f y) (t : GeometricFiber f y) :
+    Set.range (s.pieceIncl t).left = SetLike.coe (s.piece t) :=
+  Scheme.Opens.range_ι _
+
 /-- The pieces of a split neighbourhood cover `U ×_Y X` in the small étale topology. -/
-lemma ofArrows_pieceIncl_mem (s : SplitNbhd f y) :
-    Sieve.ofArrows (fun t ↦ s.pieceObj t) (fun t ↦ s.pieceIncl t) ∈
-      X.smallEtaleTopology (f.Etale.obj s.obj.1) := by
+lemma ofArrows_pieceIncl_mem_smallEtaleTopology (s : SplitNbhd f y) :
+    Sieve.ofArrows s.pieceObj s.pieceIncl ∈ X.smallEtaleTopology (f.Etale.obj s.obj.1) := by
   rw [ofArrows_mem_smallEtaleTopology_iff]
-  change ⋃ t, Set.range (s.piece t).ι.base = Set.univ
-  simp only [Scheme.Opens.range_ι]
-  rw [← TopologicalSpace.Opens.coe_iSup, s.iSup_eq, TopologicalSpace.Opens.coe_top]
+  simp only [range_pieceIncl_left, ← TopologicalSpace.Opens.coe_iSup, s.iSup_eq,
+    TopologicalSpace.Opens.coe_top]
 
 /-- The pieces of a split neighbourhood are pairwise disjoint. -/
 lemma disjoint_range_pieceIncl (s : SplitNbhd f y) {t t' : GeometricFiber f y} (h : t ≠ t') :
-    Disjoint (Set.range (s.pieceIncl t).left.base) (Set.range (s.pieceIncl t').left.base) := by
-  change Disjoint (Set.range (s.piece t).ι.base) (Set.range (s.piece t').ι.base)
-  simp only [Scheme.Opens.range_ι]
-  rw [Set.disjoint_iff_inter_eq_empty, ← TopologicalSpace.Opens.coe_inf,
-    (s.disjoint t t' h).eq_bot, TopologicalSpace.Opens.coe_bot]
+    Disjoint (Set.range (s.pieceIncl t).left) (Set.range (s.pieceIncl t').left) := by
+  simp only [range_pieceIncl_left, Set.disjoint_iff_inter_eq_empty,
+    ← TopologicalSpace.Opens.coe_inf, (s.disjoint t t' h).eq_bot, TopologicalSpace.Opens.coe_bot]
 
 section Sections
 
-variable (f y) {A : Type u'} [Category.{u + 1} A] (G : Sheaf X.smallEtaleTopology A)
+variable (f y) {A : Type u'} [Category.{v} A] (G : Sheaf X.smallEtaleTopology A)
 
 /-- The sections of `G` over `U ×_Y X`, as a functor on the opposite of the category of split
 neighbourhoods of `y`. -/
@@ -109,17 +137,34 @@ lemma sectionsFunctor_obj (s : (SplitNbhd f y)ᵒᵖ) :
     (sectionsFunctor f y G).obj s = G.obj.obj (op (f.Etale.obj s.unop.obj.1)) := rfl
 
 @[simp]
+lemma sectionsFunctor_map {s s' : (SplitNbhd f y)ᵒᵖ} (g : s ⟶ s') :
+    (sectionsFunctor f y G).map g = G.obj.map (f.Etale.map g.unop.val.val).op := rfl
+
+@[simp]
 lemma pieceSectionsFunctor_obj (t : GeometricFiber f y) (s : (SplitNbhd f y)ᵒᵖ) :
     (pieceSectionsFunctor f y G t).obj s = G.obj.obj (op (s.unop.pieceObj t)) := rfl
 
-/-- Restriction of sections from `U ×_Y X` to the `t`-th piece. -/
+@[simp]
+lemma pieceSectionsFunctor_map (t : GeometricFiber f y) {s s' : (SplitNbhd f y)ᵒᵖ} (g : s ⟶ s') :
+    (pieceSectionsFunctor f y G t).map g = G.obj.map (pieceMap g.unop t).op := rfl
+
+/-- Restriction of sections from `U ×_Y X` to the `t`-th piece; it is natural in the split
+neighbourhood, by `AlgebraicGeometry.Scheme.Hom.SplitNbhd.pieceMap_comp_pieceIncl`:
+
+```
+   G (U ×_Y X) ──restrictToPiece──→ G (s.pieceObj t)
+        │                                 │
+        │ G (f.Etale.map g.val.val)       │ G (pieceMap g t)
+        ↓                                 ↓
+   G (U' ×_Y X) ─restrictToPiece──→ G (s'.pieceObj t)
+```
+-/
 @[simps]
 def restrictToPiece (t : GeometricFiber f y) :
     sectionsFunctor f y G ⟶ pieceSectionsFunctor f y G t where
   app s := G.obj.map (s.unop.pieceIncl t).op
   naturality s s' g := by
-    change G.obj.map (f.Etale.map g.unop.val.val).op ≫ G.obj.map (s'.unop.pieceIncl t).op =
-      G.obj.map (s.unop.pieceIncl t).op ≫ G.obj.map (pieceMap g.unop t).op
+    simp only [sectionsFunctor_map, pieceSectionsFunctor_map]
     rw [← G.obj.map_comp, ← G.obj.map_comp, ← op_comp, ← op_comp, pieceMap_comp_pieceIncl]
 
 variable [HasLimitsOfShape (Discrete (GeometricFiber f y)) A]
@@ -136,9 +181,9 @@ instance isIso_piLift_restrictToPiece : IsIso (Pi.lift (restrictToPiece f y G)) 
     rw [← Iso.eq_comp_inv] at h
     rw [h]
     have : IsIso (Pi.lift fun t ↦ (restrictToPiece f y G t).app s) :=
-      Etale.isIso_piLift_of_disjoint G _ _ s.unop.ofArrows_pieceIncl_mem
+      Etale.isIso_piLift_of_disjoint G _ _ s.unop.ofArrows_pieceIncl_mem_smallEtaleTopology
         (fun t t' h ↦ s.unop.disjoint_range_pieceIncl h)
-    exact inferInstance
+    infer_instance
   exact NatIso.isIso_of_isIso_app _
 
 /-- **The sections over a split neighbourhood are the product of the sections over its

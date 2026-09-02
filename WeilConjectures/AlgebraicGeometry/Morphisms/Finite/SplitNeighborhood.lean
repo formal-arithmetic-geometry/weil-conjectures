@@ -31,6 +31,8 @@ is finite, hence closed, and every point of its fibre over `u` is hit by some `(
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.basePt`: the point `(u, t)` of `U ×_Y X`.
+- `AlgebraicGeometry.Scheme.Hom.baseChangeNbhd`: base change to `X`, as a functor from the
+  pointed étale neighbourhoods of `y` to those of `t`.
 - `AlgebraicGeometry.Scheme.Hom.SplitNbhd`: the category of split neighbourhoods.
 - `AlgebraicGeometry.Scheme.Hom.SplitNbhd.forget`: the forgetful functor.
 - `AlgebraicGeometry.Scheme.Hom.SplitNbhd.pieceFunctor`: the `t`-th piece, as a functor to
@@ -82,6 +84,16 @@ lemma basePt_comp_etale_map_left {c c' : Nbhd y} (g : c ⟶ c') (t : GeometricFi
   · rw [Category.assoc]
     change basePt f c t ≫ pullback.lift _ _ _ ≫ pullback.snd _ _ = _
     rw [pullback.lift_snd, basePt_snd, basePt_snd]
+
+/-- The pointed étale neighbourhood `(U ×_Y X, (u, t))` of the geometric point `t` of `X`
+obtained from a pointed étale neighbourhood `(U, u)` of `y`, functorially. -/
+@[simps!]
+def baseChangeNbhd (t : GeometricFiber f y) : Nbhd y ⥤ Nbhd t.1 where
+  obj c := ⟨f.Etale.obj c.1, CategoryTheory.Over.homMk (basePt f c t) (basePt_snd f c t)⟩
+  map g := CategoryOfElements.homMk _ _ (f.Etale.map g.val)
+    (CategoryTheory.Over.OverMorphism.ext (basePt_comp_etale_map_left f g t))
+  map_id _ := CategoryOfElements.ext _ _ _ (f.Etale.map_id _)
+  map_comp _ _ := CategoryOfElements.ext _ _ _ (f.Etale.map_comp _ _)
 
 variable (y) in
 /-- A pointed étale neighbourhood `(U, u)` of `y` together with a decomposition of `U ×_Y X`

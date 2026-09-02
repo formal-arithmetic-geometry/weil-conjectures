@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Complements on the small étale site
@@ -32,6 +33,11 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 - `AlgebraicGeometry.Scheme.Etale.isTerminalSectionsOfIsEmpty`: a sheaf on the small étale
   site has terminal sections over an object whose underlying scheme is empty. This is the
   sheaf condition for the empty covering.
+- `AlgebraicGeometry.Scheme.Etale.isIso_piLift_of_disjoint`: a sheaf on the small étale site
+  sends an object covered by subobjects with pairwise disjoint ranges to the product of its
+  sections over them. This is the étale case of
+  `CategoryTheory.Sheaf.isIso_piLift_of_isTerminal`, the objects lying over two disjoint
+  subobjects being empty.
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
@@ -202,6 +208,38 @@ def Etale.isTerminalSectionsOfIsEmpty
   G.isTerminalOfBotCover T (Etale.bot_mem_smallEtaleTopology T)
 
 end EmptyObject
+
+section DisjointCover
+
+variable (G : Sheaf X.smallEtaleTopology A) {V : X.Etale} {ι : Type*} (W : ι → X.Etale)
+  (π : ∀ i, W i ⟶ V)
+
+/-- **A sheaf on the small étale site sends a disjoint cover to a product**: if the
+subobjects `π i : W i ⟶ V` cover `V` in the small étale topology and have pairwise disjoint
+ranges, then the restriction maps exhibit `G V` as the product of the `G (W i)`:
+
+```
+   G V ──Pi.lift (fun i ↦ G.map (π i).op)──→ ∏ᶜ G (W i)
+       ╲                                          │
+        ╲ G.map (π i).op                          │ Pi.π i
+         ↘                                        ↓
+                          G (W i)
+```
+
+The index type is arbitrary; the disjointness makes any object mapping to two different
+`W i` over `V` empty, where `G` has terminal sections. -/
+theorem Etale.isIso_piLift_of_disjoint [∀ i, Mono (π i)]
+    (hcov : Sieve.ofArrows W π ∈ X.smallEtaleTopology V)
+    (hdisj : ∀ i j, i ≠ j → Disjoint (Set.range (π i).left) (Set.range (π j).left))
+    [HasProduct fun i ↦ G.obj.obj (op (W i))] :
+    IsIso (Pi.lift fun i ↦ G.obj.map (π i).op) := by
+  refine Sheaf.isIso_piLift_of_isTerminal _ G W π hcov fun {Z i j} hij a b h ↦ ⟨?_⟩
+  have : IsEmpty Z.left := ⟨fun z ↦ by
+    have hz : (π i).left (a.left z) = (π j).left (b.left z) := congrArg (fun m ↦ m.left z) h
+    exact Set.disjoint_left.mp (hdisj i j hij) ⟨a.left z, rfl⟩ ⟨b.left z, hz.symm⟩⟩
+  exact Etale.isTerminalSectionsOfIsEmpty G Z
+
+end DisjointCover
 
 section Sheafify
 

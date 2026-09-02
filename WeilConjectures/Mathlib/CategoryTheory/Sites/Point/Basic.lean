@@ -21,6 +21,9 @@ Since the category of elements of `Φ.fiber ⋙ uliftFunctor` is equivalent to t
 `Φ.fiber`, nothing changes: the fibre functors of `Φ.ulift` and of `Φ` on presheaves and on
 sheaves with values in `A` are isomorphic.
 
+This file also records that the fibre functor on sheaves is the fibre functor on presheaves
+applied to the underlying presheaf, on objects and on morphisms.
+
 ## Main definitions
 
 - `CategoryTheory.GrothendieckTopology.Point.ulift`: the point `Φ.ulift : J.Point.{max w w'}`
@@ -62,6 +65,17 @@ noncomputable def ulift : Point.{max w w'} J where
 lemma ulift_fiber_map {X Y : C} (f : X ⟶ Y) (x : (Φ.ulift.{w'}).fiber.obj X) :
     (Φ.ulift.{w'}).fiber.map f x = ULift.up (Φ.fiber.map f x.down) :=
   rfl
+
+section SheafFiber
+
+variable {A : Type u'} [Category.{v'} A] [HasColimitsOfSize.{w, w} A]
+
+lemma sheafFiber_obj (G : Sheaf J A) : Φ.sheafFiber.obj G = Φ.presheafFiber.obj G.obj := rfl
+
+lemma sheafFiber_map {G G' : Sheaf J A} (φ : G ⟶ G') :
+    Φ.sheafFiber.map φ = Φ.presheafFiber.map φ.hom := rfl
+
+end SheafFiber
 
 variable (A : Type u') [Category.{v'} A] [HasColimitsOfSize.{max w w', max w w'} A]
 
