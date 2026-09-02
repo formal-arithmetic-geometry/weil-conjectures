@@ -1195,7 +1195,11 @@ integer $n$ give the asserted single factorization.
 
 \begin{lemma}[Projective embedding over $X$]
 \label{lemma:weil-pbc-chow-embedding-over-x}
-\uses{}
+\uses{cor:chow-lemma-proper,def:nagata-projective-space-base-change}
+\lean{AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_lift,
+  AlgebraicGeometry.ChowModification.toProjectiveSpaceSource,
+  AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpaceSource}
+\leanok
 
 Let $\iota_Y:X'\hookrightarrow\mathbf P^n_Y$ be the closed immersion and
 $\pi:X'\to X$ the Chow modification.  Then
@@ -1206,17 +1210,16 @@ $\pi:X'\to X$ the Chow modification.  Then
 is a closed immersion over $X$.
 \end{lemma}
 \begin{proof}
-\uses{lemma:weil-pbc-chow-factorization}
+\uses{lemma:weil-pbc-chow-factorization,cor:chow-lemma-proper,
+def:nagata-projective-space-base-change}
+\leanok
 
-The product map is an immersion because $\iota_Y$ is an immersion and
-immersions are preserved by base change and composition with a graph.  The
-map $\iota_X$ is proper over $X$: its source $X'$ is proper over $X$, while
-$\mathbf P^n_X$ is separated over $X$, so the graph criterion makes every
-$X$-morphism from $X'$ proper.  A proper immersion is a closed immersion:
-properness makes its image closed after every base change, and an immersion
-identifies the source with a locally closed subscheme of that image; universal
-closedness forces the locally closed subset to be closed.  The equality with
-$\mathbf P^n_X$ is the defining fibre-product identity.
+The identification $\mathbf P^n_X=X\times_Y\mathbf P^n_Y$ is the defining fibre-product
+identity, so the pair $\iota_X=(\pi,\iota_Y)$ is a morphism over $X$ by construction, and
+composing it with the base change $\mathbf P^n_X\to\mathbf P^n_Y$ of $f$ gives back
+$\iota_Y$.  That base change is separated, because $f$ is separated and separatedness is
+stable under base change.  A morphism whose composite with a separated morphism is a closed
+immersion is itself a closed immersion; hence $\iota_X$ is a closed immersion.
 \end{proof}
 
 \begin{lemma}[Symmetric product map]
