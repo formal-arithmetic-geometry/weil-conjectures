@@ -1,7 +1,21 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Coprod
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Cover
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Descent
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.EssSurj
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.FullyFaithful
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.FullyFaithfulAlgebra
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.GlobalSections
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Gluing
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Outer
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Reduction
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.Defs
@@ -180,6 +194,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.Mathlib.Data.Set.Image
+public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
+public import WeilConjectures.Mathlib.RingTheory.Etale.PropertyC
+public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
+public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueFieldBaseChange
+public import WeilConjectures.Mathlib.RingTheory.Etale.Section
+public import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
