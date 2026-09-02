@@ -295,10 +295,8 @@ lemma Etale.upperStarBaseChange_eq :
   have hconj : conjugateEquiv ((Etale.upperStarLowerStarAdjunction A q).comp
         (Etale.upperStarLowerStarAdjunction A j))
       (Etale.upperStarLowerStarAdjunction A (j ≫ q)) (Etale.upperStarComp A j q).hom =
-      (Etale.lowerStarComp A j q).hom := by
-    simp only [Etale.upperStarComp, GrothendieckTopology.upperStarComp, Iso.symm_hom,
-      conjugateIsoEquiv_symm_apply_inv, Iso.symm_inv]
-    exact Equiv.apply_symm_apply _ _
+      (Etale.lowerStarComp A j q).hom :=
+    congrArg Iso.hom (Etale.conjugateIsoEquiv_upperStarComp A j q)
   have hmate : TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((j ≫ q)^*[A]) (𝟭 _)
       (Etale.upperStarBaseChange A j q (j ≫ q) rfl) =
       mateEquiv (Etale.upperStarLowerStarAdjunction A q) Adjunction.id
