@@ -61,6 +61,8 @@ of an open of `V`.
   algebraic closure of the residue field of `s`.
 - `AlgebraicGeometry.Scheme.uliftPointSmallEtale`: the geometric point of the small étale
   site of `S` at `s`, with its fibre functor taking values in `Type (u + 1)`.
+- `AlgebraicGeometry.Scheme.EtaleNeighborhood`: the category of pointed étale neighbourhoods
+  of a geometric point, that is, the category of elements of its fibre functor.
 - `AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso`: the fibre functor of the
   geometric point `s` of `X`, composed with base change along `f`, is the fibre functor of
   the geometric point `s ≫ f` of `Y`.
@@ -172,6 +174,18 @@ lemma isIso_of_isIso_sheafFiber_map {F G : Sheaf S.smallEtaleTopology A} (φ : F
       exact h s)
 
 end Ulift
+
+section Neighborhood
+
+variable {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+
+/-- The category of pointed étale neighbourhoods of a geometric point `s : Spec Ω ⟶ X`: an
+object is an étale `X`-scheme `U` together with a lift of `s` to `U`, and a morphism is a
+morphism of étale `X`-schemes commuting with the lifts. This is the category of elements of
+the fibre functor of `AlgebraicGeometry.Scheme.pointSmallEtale s`. -/
+abbrev EtaleNeighborhood (s : Spec (.of Ω) ⟶ X) := (pointSmallEtale s).fiber.Elements
+
+end Neighborhood
 
 section BaseChange
 

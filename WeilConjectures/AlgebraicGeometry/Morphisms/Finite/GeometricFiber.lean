@@ -178,6 +178,13 @@ lemma _root_.AlgebraicGeometry.Spec.map_default_eq {S : Type u} [CommRing S] (t 
   change Ideal.comap t (default : Spec (CommRingCat.of Ω)).asIdeal = RingHom.ker t
   rw [hp, RingHom.ker_eq_comap_bot]
 
+/-- `Spec` of a point `t : S →+* Ω` lands in the basic open of `a` exactly when `t a ≠ 0`. -/
+lemma _root_.AlgebraicGeometry.Spec.map_default_mem_basicOpen_iff {S : Type u} [CommRing S]
+    (t : S →+* Ω) (a : S) :
+    Spec.map (CommRingCat.ofHom t) default ∈ PrimeSpectrum.basicOpen a ↔ t a ≠ 0 := by
+  rw [Spec.map_default_eq]
+  exact not_congr RingHom.mem_ker
+
 /-- The image point of the geometric point corresponding to a point `t` of `Γ(X, f ⁻¹ᵁ Y₀)`
 is the prime `ker t`. -/
 lemma geometricFiberEquivPointsOver_symm_apply_default

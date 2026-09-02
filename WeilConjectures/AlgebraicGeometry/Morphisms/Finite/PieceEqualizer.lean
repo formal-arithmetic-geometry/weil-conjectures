@@ -15,14 +15,14 @@ Let `f : X ⟶ Y` be finite, `y : Spec Ω ⟶ Y` a geometric point with `Ω` alg
 and `t` a geometric point of `X` over `y`. Two morphisms from the `t`-th piece of a split
 neighbourhood `s` to a pointed étale neighbourhood `(V, v)` of `t`, both sending the point
 `(u, t)` to `v`, agree after passing to a smaller split neighbourhood
-(`AlgebraicGeometry.Scheme.Hom.SplitNbhd.exists_pieceFunctor_map_comp_eq`): since `V` is étale
-over `X`, the locus where the two morphisms agree is open in the piece
+(`AlgebraicGeometry.Scheme.Hom.SplitNeighborhood.exists_pieceFunctor_map_comp_eq`): since `V` is
+étale over `X`, the locus where the two morphisms agree is open in the piece
 (`AlgebraicGeometry.FormallyUnramified.eqLocus`) and contains `(u, t)`; its complement is
 closed in `U ×_Y X`, contains none of the points `(u, t')`, and is removed by the shrinking
 lemma `AlgebraicGeometry.Scheme.Hom.exists_hom_preimage_eq_bot`.
 
 This is one half of the initiality of the piece functor
-`AlgebraicGeometry.Scheme.Hom.SplitNbhd.pieceFunctor`.
+`AlgebraicGeometry.Scheme.Hom.SplitNeighborhood.pieceFunctor`.
 
 -/
 
@@ -36,30 +36,33 @@ noncomputable section
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
-  {y : Spec (.of Ω) ⟶ Y}
+variable {X Y : Scheme.{u}} {f : X ⟶ Y} {Ω : Type u} [Field Ω]
 
-namespace SplitNbhd
+namespace SplitNeighborhood
 
-variable {f}
+section SepClosed
+
+variable [IsSepClosed Ω] {y : Spec (.of Ω) ⟶ Y}
 
 /-- The point `(u, t')` does not lie in the `t`-th piece for `t' ≠ t`. -/
-lemma basePt_notMem_piece (s : SplitNbhd f y) {t t' : GeometricFiber f y} (h : t' ≠ t) :
+lemma basePt_notMem_piece (s : SplitNeighborhood f y) {t t' : GeometricFiber f y} (h : t' ≠ t) :
     basePt f s.obj t' default ∉ s.piece t := by
   intro hmem
   have h₁ : basePt f s.obj t' default ∈ s.piece t' ⊓ s.piece t := ⟨s.mem t', hmem⟩
-  rw [(s.disjoint t' t h).eq_bot] at h₁
-  exact h₁
+  rwa [(s.disjoint t' t h).eq_bot] at h₁
 
-variable [IsFinite f] [IsAlgClosed Ω]
+end SepClosed
 
-set_option backward.isDefEq.respectTransparency.types false in
+section AlgClosed
+
+variable [IsFinite f] [IsAlgClosed Ω] {y : Spec (.of Ω) ⟶ Y}
+
 /-- **Two morphisms out of a piece agreeing at the marked point agree after shrinking.** -/
-theorem exists_pieceFunctor_map_comp_eq (t : GeometricFiber f y) (s : SplitNbhd f y)
-    {d : (pointSmallEtale t.1).fiber.Elements} (g g' : (pieceFunctor t).obj s ⟶ d) :
-    ∃ (s' : SplitNbhd f y) (k : s' ⟶ s),
+theorem exists_pieceFunctor_map_comp_eq (t : GeometricFiber f y) (s : SplitNeighborhood f y)
+    {d : EtaleNeighborhood t.1} (g g' : (pieceFunctor t).obj s ⟶ d) :
+    ∃ (s' : SplitNeighborhood f y) (k : s' ⟶ s),
       (pieceFunctor t).map k ≫ g = (pieceFunctor t).map k ≫ g' := by
-  set V : X.Etale := d.1 with hV
+  set V : X.Etale := d.1
   set a : (s.piece t).toScheme ⟶ V.left := g.val.left with ha
   set b : (s.piece t).toScheme ⟶ V.left := g'.val.left with hb
   have hab : a ≫ V.hom = b ≫ V.hom := by
@@ -70,10 +73,10 @@ theorem exists_pieceFunctor_map_comp_eq (t : GeometricFiber f y) (s : SplitNbhd 
     have h₂ : (s.piecePt t) ≫ (Etale.forget X).map g'.val = d.2 := g'.property
     exact congrArg CategoryTheory.Over.Hom.left (h₁.trans h₂.symm)
   -- the open locus of the piece where they agree
-  set E := FormallyUnramified.eqLocus V.hom a b hab with hE
+  set E := FormallyUnramified.eqLocus V.hom a b hab
   -- its complement in the piece, as a closed subset of `U ×_Y X` without any of the `(u, t')`
   set C : Set (pullback s.obj.1.hom f : Scheme.{u}) :=
-    SetLike.coe (s.piece t) ∩ (Set.range (E.ι ≫ (s.piece t).ι).base)ᶜ with hC
+    ↑(s.piece t) ∩ (Set.range (E.ι ≫ (s.piece t).ι).base)ᶜ
   have hCc : IsClosed C := (s.isClopen t).isClosed.inter
     (E.ι ≫ (s.piece t).ι).isOpenEmbedding.isOpen_range.isClosed_compl
   have hnot : ∀ t', basePt f s.obj t' default ∉ C := by
@@ -115,14 +118,15 @@ theorem exists_pieceFunctor_map_comp_eq (t : GeometricFiber f y) (s : SplitNbhd 
       rw [pieceMap_left_ι]
       rfl
     rw [Scheme.Hom.comp_apply, Scheme.Hom.comp_apply] at h₃
-    have : ((s.pullbackDec k).piece t).ι w ∈ (f.Etale.map k.val).left.base ⁻¹' C :=
+    have hmem : ((s.pullbackDec k).piece t).ι w ∈ (f.Etale.map k.val).left.base ⁻¹' C :=
       (congrArg (fun z ↦ z ∈ C) h₃).mp hx
-    rw [hk] at this
-    exact this
+    rwa [hk] at hmem
   have hfac := IsOpenImmersion.lift_fac E.ι (pieceMap (s.pullbackDecHom k) t).left hrange
   rw [← hfac, Category.assoc, Category.assoc, FormallyUnramified.eqLocus_ι_comp_eq]
 
-end SplitNbhd
+end AlgClosed
+
+end SplitNeighborhood
 
 end AlgebraicGeometry.Scheme.Hom
 

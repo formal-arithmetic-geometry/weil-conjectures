@@ -95,10 +95,28 @@ lemma Hom.etale_map_left_comp_fst (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
     (f.Etale.map g).left ≫ pullback.fst U.hom f = pullback.fst V.hom f ≫ g.left :=
   pullback.lift_fst _ _ _
 
-/-- Base change along `f : X ⟶ Y` is compatible with the projections to `X`. -/
+/-- Base change along `f : X ⟶ Y` is compatible with the projections to `X`:
+
+```
+   V ×_Y X ──(f.Etale.map g).left──→ U ×_Y X
+        ╲                              ╱
+         ╲ pullback.snd V.hom f       ╱ pullback.snd U.hom f
+          ↘                          ↙
+                       X
+```
+-/
 lemma Hom.etale_map_left_comp_snd (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
     (f.Etale.map g).left ≫ pullback.snd U.hom f = pullback.snd V.hom f :=
   pullback.lift_snd _ _ _
+
+/-- The preimage of an open of `U ×_Y X` along a composite of morphisms of étale
+`Y`-schemes is the iterated preimage. -/
+lemma Hom.etale_map_left_comp_preimage (f : X ⟶ Y) {U V W : Y.Etale} (g : W ⟶ V) (g' : V ⟶ U)
+    (O : (pullback U.hom f).Opens) :
+    (f.Etale.map (g ≫ g')).left ⁻¹ᵁ O =
+      (f.Etale.map g).left ⁻¹ᵁ ((f.Etale.map g').left ⁻¹ᵁ O) := by
+  rw [CategoryTheory.Functor.map_comp, MorphismProperty.Comma.comp_left]
+  rfl
 
 end Functoriality
 

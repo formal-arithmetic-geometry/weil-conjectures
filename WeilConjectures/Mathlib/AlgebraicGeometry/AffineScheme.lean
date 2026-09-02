@@ -32,6 +32,11 @@ finitely many basic opens, each of which lands in an affine open of `S`.
 We also record that, for a morphism `f : X ⟶ Y`, the affine opens of `X` contained in the
 preimage of an affine open of `Y` form a basis of the topology of `X`
 (`AlgebraicGeometry.isBasis_affineOpens_le_preimage`).
+
+Finally, for a morphism `q : V ⟶ Spec B` and an affine open `W` of `V`, we record the ring map
+`B →+* Γ(V, W)` induced by `q` (`AlgebraicGeometry.IsAffineOpen.ringHomOfSpec`) and the fact
+that `Spec` of it is the composite `Spec Γ(V, W) ⟶ V ⟶ Spec B`
+(`AlgebraicGeometry.IsAffineOpen.SpecMap_ringHomOfSpec`).
 -/
 
 @[expose] public section
@@ -226,5 +231,30 @@ lemma exists_finite_basicOpen_cover [IsAffine X] {U : X.Opens}
   intro x hx
   obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (ht hx)
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨a, ha⟩, hxa⟩
+
+namespace IsAffineOpen
+
+variable {B : Type u} [CommRing B] {V : Scheme.{u}} (q : V ⟶ Spec (.of B)) {W : V.Opens}
+  (hW : IsAffineOpen W)
+
+/-- The ring map `B →+* Γ(V, W)` induced by a morphism `q : V ⟶ Spec B` and an affine open
+`W ⊆ V`, that is, the ring map corresponding to `Spec Γ(V, W) ⟶ V ⟶ Spec B`. -/
+noncomputable def ringHomOfSpec : B →+* Γ(V, W) :=
+  (Spec.preimage (hW.fromSpec ≫ q)).hom
+
+/-- `Spec` of the ring map `B →+* Γ(V, W)` is the composite `Spec Γ(V, W) ⟶ V ⟶ Spec B`:
+```
+Spec Γ(V, W) --fromSpec--> V
+      |                    |
+      |                    q
+      ↓                    ↓
+   Spec B  =========== Spec B
+```
+-/
+lemma SpecMap_ringHomOfSpec :
+    Spec.map (CommRingCat.ofHom (hW.ringHomOfSpec q)) = hW.fromSpec ≫ q := by
+  rw [ringHomOfSpec, CommRingCat.ofHom_hom, Spec.map_preimage]
+
+end IsAffineOpen
 
 end AlgebraicGeometry

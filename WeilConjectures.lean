@@ -234,7 +234,6 @@ public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineOpenAlgebra
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
@@ -357,7 +356,6 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
-public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous

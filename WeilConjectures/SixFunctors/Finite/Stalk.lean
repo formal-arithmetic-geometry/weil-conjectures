@@ -20,12 +20,12 @@ finitely many geometric points `t` of `X` over `y`:
 
 The stalk `(f_* G)_y` is the colimit of the sections `G (U ×_Y X)` over the pointed étale
 neighbourhoods `(U, u)` of `y`. The split neighbourhoods
-(`AlgebraicGeometry.Scheme.Hom.SplitNbhd`) are cofinal among them, and over a split
+(`AlgebraicGeometry.Scheme.Hom.SplitNeighborhood`) are cofinal among them, and over a split
 neighbourhood `U ×_Y X` decomposes into pairwise disjoint clopen pieces indexed by the `t`,
 so that `G (U ×_Y X) = ∏_t G (piece_t)`. Finite products commute with the filtered colimit
 (`A` satisfies AB5), and the colimit of `G (piece_t)` over the split neighbourhoods is the
 stalk `G_t`, the pieces being cofinal among the pointed étale neighbourhoods of `t`
-(`AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_pieceFunctor`).
+(`AlgebraicGeometry.Scheme.Hom.SplitNeighborhood.initial_pieceFunctor`).
 
 ## Main definitions
 
@@ -48,7 +48,7 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-open Scheme Etale Scheme.Hom Scheme.Hom.SplitNbhd
+open Scheme Etale Scheme.Hom Scheme.Hom.SplitNeighborhood
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
@@ -58,27 +58,28 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] {Ω : Type u} [Field Ω] 
 
 section Instances
 
-instance : HasColimitsOfShape (SplitNbhd f y)ᵒᵖ A :=
+instance : HasColimitsOfShape (SplitNeighborhood f y)ᵒᵖ A :=
   hasColimitsOfShape_of_essentiallySmall.{u + 1} _ _
 
-instance : EssentiallySmall.{u + 1} (SplitNbhd f y)ᵒᵖ :=
+instance : EssentiallySmall.{u + 1} (SplitNeighborhood f y)ᵒᵖ :=
   essentiallySmall_of_small_of_locallySmall _
 
-instance : FinallySmall.{u + 1} (SplitNbhd f y)ᵒᵖ :=
+instance : FinallySmall.{u + 1} (SplitNeighborhood f y)ᵒᵖ :=
   finallySmall_of_essentiallySmall _
 
 /-- Colimits over the split neighbourhoods of `y` are exact: the category is filtered and
 essentially small, and `A` satisfies AB5. -/
-instance hasExactColimitsOfShape_splitNbhd_op :
-    HasExactColimitsOfShape (SplitNbhd f y)ᵒᵖ A :=
-  hasExactColimitsOfShape_of_final _ (FinallySmall.fromFilteredFinalModel.{u + 1} (SplitNbhd f y)ᵒᵖ)
+instance hasExactColimitsOfShape_splitNeighborhood_op :
+    HasExactColimitsOfShape (SplitNeighborhood f y)ᵒᵖ A :=
+  hasExactColimitsOfShape_of_final _
+    (FinallySmall.fromFilteredFinalModel.{u + 1} (SplitNeighborhood f y)ᵒᵖ)
 
 /-- Colimits over the split neighbourhoods of `y` commute with products indexed by the
 (finite) geometric fibre. -/
 instance preservesLimitsOfShape_discrete_geometricFiber_colim :
     PreservesLimitsOfShape (Discrete (GeometricFiber f y))
-      (colim (J := (SplitNbhd f y)ᵒᵖ) (C := A)) :=
-  have := HasExactColimitsOfShape.preservesFiniteLimits (J := (SplitNbhd f y)ᵒᵖ) (C := A)
+      (colim (J := (SplitNeighborhood f y)ᵒᵖ) (C := A)) :=
+  have := HasExactColimitsOfShape.preservesFiniteLimits (J := (SplitNeighborhood f y)ᵒᵖ) (C := A)
   have : Fintype (GeometricFiber f y) := Fintype.ofFinite _
   preservesLimitsOfShape_of_equiv
     (Discrete.equivalence (Fintype.equivFin (GeometricFiber f y)).symm) colim
@@ -93,7 +94,7 @@ omit [IsFinite f] [IsAlgClosed Ω] in
 /-- The pointed étale neighbourhood `(U ×_Y X, (u, t))` of the geometric point `t` of `X`
 obtained from a pointed étale neighbourhood `(U, u)` of `y`, functorially. -/
 @[simps!]
-def Etale.baseChangeNbhd : Nbhd y ⥤ (pointSmallEtale t.1).fiber.Elements where
+def Etale.baseChangeNeighborhood : EtaleNeighborhood y ⥤ EtaleNeighborhood t.1 where
   obj c := ⟨f.Etale.obj c.1, CategoryTheory.Over.homMk (basePt f c t) (basePt_snd f c t)⟩
   map g := CategoryOfElements.homMk _ _ (f.Etale.map g.val)
     (CategoryTheory.Over.OverMorphism.ext (basePt_comp_etale_map_left f g t))
@@ -109,19 +110,19 @@ def Etale.stalkRestrict :
     (pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) ⟶
       (pointSmallEtale t.1).sheafFiber.obj G :=
   colimit.pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
-    (Etale.baseChangeNbhd f y t).op
+    (Etale.baseChangeNeighborhood f y t).op
 
 omit [IsFinite f] [HasSmallSiteSheafify A] in
 /-- `stalkRestrict` on the germ of a section over `(U, u)`: it is the germ of the same section
 at the pointed étale neighbourhood `(U ×_Y X, (u, t))` of `t`. -/
 @[reassoc (attr := simp)]
-lemma Etale.toPresheafFiber_stalkRestrict (c : Nbhd y) :
+lemma Etale.toPresheafFiber_stalkRestrict (c : EtaleNeighborhood y) :
     (pointSmallEtale y).toPresheafFiber c.1 c.2 ((f)_*[A].obj G).obj ≫
         Etale.stalkRestrict A f y t G =
       (pointSmallEtale t.1).toPresheafFiber (f.Etale.obj c.1)
-        ((Etale.baseChangeNbhd f y t).obj c).2 G.obj :=
+        ((Etale.baseChangeNeighborhood f y t).obj c).2 G.obj :=
   colimit.ι_pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
-    (Etale.baseChangeNbhd f y t).op (op c)
+    (Etale.baseChangeNeighborhood f y t).op (op c)
 
 omit [IsFinite f] [HasSmallSiteSheafify A] in
 /-- `stalkRestrict` is natural in the sheaf. -/
@@ -183,7 +184,7 @@ lemma Etale.stalkIsoColimitSections_hom_comp_piLift_stalkRestrict :
     Functor.Final.ι_colimitIso_hom]
   exact (colimit.w ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
     (CategoryOfElements.homMk ⟨s.unop.pieceObj t, s.unop.piecePt t⟩
-      ((Etale.baseChangeNbhd f y t).obj s.unop.obj) (s.unop.pieceIncl t)
+      ((Etale.baseChangeNeighborhood f y t).obj s.unop.obj) (s.unop.pieceIncl t)
       (CategoryTheory.Over.OverMorphism.ext (s.unop.piecePt_comp_pieceIncl t))).op).symm
 
 /-- The stalk of `f_* G` at `y` is the product of the stalks of `G` at the geometric points

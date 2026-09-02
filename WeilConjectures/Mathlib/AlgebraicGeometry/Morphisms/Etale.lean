@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Unramified.LocalStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 
 /-!
@@ -30,6 +31,12 @@ over a quotient `R ⧸ I` is the base change of a standard étale algebra over `
 - `AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`: the pointed form. Given a
   morphism `s : Spec Ω ⟶ W` with `Ω` a field — in the application a geometric point of `W` — there
   is an étale `q : V ⟶ X` and a morphism `V ×[X] Z ⟶ W` over `Z` through which `s` factors.
+
+We also record that for an étale morphism `q : V ⟶ Spec B` and an affine open `W` of `V`, the
+induced ring map `B →+* Γ(V, W)` is étale
+(`AlgebraicGeometry.IsAffineOpen.etale_ringHomOfSpec`), and deduce the pointed affine form
+`AlgebraicGeometry.Etale.exists_algebraMap_hom_of_point`: a scheme étale over `Spec B` is, in
+a neighbourhood of any of its points with values in a field, `Spec` of an étale `B`-algebra.
 -/
 
 @[expose] public section
@@ -174,5 +181,48 @@ theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i :
   · rw [Category.assoc, Iso.inv_comp_eq]
     exact hpb.isoPullback_hom_snd.symm
   · rw [Category.assoc, Iso.hom_inv_id_assoc, IsOpenImmersion.lift_fac]
+
+/-- The ring map `B →+* Γ(V, W)` induced by an affine open `W` of `V` is étale if
+`q : V ⟶ Spec B` is, since `Spec` of it is `Spec Γ(V, W) ⟶ V ⟶ Spec B` and the first map is an
+open immersion. -/
+lemma IsAffineOpen.etale_ringHomOfSpec {B : Type u} [CommRing B] {V : Scheme.{u}}
+    (q : V ⟶ Spec (.of B)) [Etale q] {W : V.Opens} (hW : IsAffineOpen W) :
+    (hW.ringHomOfSpec q).Etale := by
+  have : Etale (Spec.map (CommRingCat.ofHom (hW.ringHomOfSpec q))) := by
+    rw [hW.SpecMap_ringHomOfSpec q]
+    infer_instance
+  exact HasRingHomProperty.Spec_iff.mp this
+
+/-- **A scheme étale over `Spec B` is affine and étale over `B` near a point.** For an étale
+morphism `q : V ⟶ Spec B` and a morphism `pt : Spec Ω ⟶ V` with `Ω` a field there is an étale
+`B`-algebra `C` and a morphism `j : Spec C ⟶ V` over `Spec B` through which `pt` factors:
+```
+Spec Ω --pt--→ V --------q--------→ Spec B
+      ╲        ↑                      ↑
+        ╲      j                      ‖
+   Spec ψ ↘    |                      ‖
+             Spec C --Spec (algebraMap B C)--→ Spec B
+```
+-/
+theorem Etale.exists_algebraMap_hom_of_point {B : Type u} [CommRing B] {V : Scheme.{u}}
+    (q : V ⟶ Spec (.of B)) [Etale q] {Ω : Type u} [Field Ω] (pt : Spec (.of Ω) ⟶ V) :
+    ∃ (C : Type u) (_ : CommRing C) (_ : Algebra B C) (_ : Algebra.Etale B C)
+      (j : Spec (.of C) ⟶ V) (ψ : C →+* Ω),
+      j ≫ q = Spec.map (CommRingCat.ofHom (algebraMap B C)) ∧
+        Spec.map (CommRingCat.ofHom ψ) ≫ j = pt := by
+  obtain ⟨W, hW, hpt, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := V) (x := pt.base default) (U := ⊤) trivial
+  have hrange : Set.range pt.base ⊆ Set.range hW.fromSpec.base := by
+    rw [hW.range_fromSpec]
+    rintro _ ⟨x, rfl⟩
+    rw [Subsingleton.elim x default]
+    exact hpt
+  let _ : Algebra B Γ(V, W) := (hW.ringHomOfSpec q).toAlgebra
+  refine ⟨Γ(V, W), inferInstance, inferInstance,
+    RingHom.etale_algebraMap.mp (hW.etale_ringHomOfSpec q), hW.fromSpec,
+    (Spec.preimage (IsOpenImmersion.lift hW.fromSpec pt hrange)).hom,
+    (hW.SpecMap_ringHomOfSpec q).symm, ?_⟩
+  rw [CommRingCat.ofHom_hom, Spec.map_preimage]
+  exact IsOpenImmersion.lift_fac _ _ _
 
 end AlgebraicGeometry

@@ -6,7 +6,9 @@ Authors: Christian Merten
 module
 
 public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Lemmas
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Generators with a common denominator
@@ -28,9 +30,16 @@ open `X_b` but not all of `X`.
 Note that no monotonicity lemma is provided: if one wants to enlarge the generating family, the
 adjoin form makes this a one-line application of `Algebra.adjoin_mono` combined with
 `Set.image_subset`, and `eq_top_iff` (or `top_le_iff`).
+
+We also record that localization away from an idempotent commutes with base change: Mathlib's
+`IsLocalization.Away.quotient_of_isIdempotentElem` presents `R ⧸ (1 - e)` as the localization
+of `R` away from an idempotent `e`, and `IsLocalization.Away.tensor_quotient_span_one_sub`
+says that `A ⊗[S] (R ⧸ (1 - e))` is the localization of `A ⊗[S] R` away from `1 ⊗ e`.
 -/
 
 @[expose] public section
+
+open TensorProduct
 
 namespace Algebra.FiniteType
 
@@ -86,3 +95,35 @@ theorem exists_surjective_aeval_mk' :
   exact ⟨fun ⟨i, hi⟩ ↦ ⟨e i, (e i).2, hi⟩, fun ⟨x, hx, hy⟩ ↦ ⟨e.symm ⟨x, hx⟩, by simpa using hy⟩⟩
 
 end Algebra.FiniteType
+
+namespace IsLocalization.Away
+
+variable {R S A : Type*} [CommRing R] [CommRing S] [CommRing A] [Algebra S R] [Algebra S A]
+  {e : R}
+
+/-- The `A ⊗[S] R`-algebra structure on `A ⊗[S] (R ⧸ (1 - e))` given by the base change of
+the quotient map. -/
+@[instance_reducible]
+def tensorQuotientAlgebra : Algebra (A ⊗[S] R) (A ⊗[S] (R ⧸ Ideal.span {1 - e})) :=
+  (Algebra.TensorProduct.map (AlgHom.id S A) (Ideal.Quotient.mkₐ S (Ideal.span {1 - e}))).toAlgebra
+
+/-- Base change is compatible with localization away from an idempotent: `A ⊗[S] (R ⧸ (1 - e))`
+is the localization of `A ⊗[S] R` away from `1 ⊗ e`, with respect to the base change of the
+quotient map. This is the base change of Mathlib's
+`IsLocalization.Away.quotient_of_isIdempotentElem`. -/
+theorem tensor_quotient_span_one_sub (he : IsIdempotentElem e) :
+    letI := tensorQuotientAlgebra (S := S) (A := A) (e := e)
+    IsLocalization.Away (Algebra.TensorProduct.includeRight e : A ⊗[S] R)
+      (A ⊗[S] (R ⧸ Ideal.span {1 - e})) := by
+  let inst := tensorQuotientAlgebra (S := S) (A := A) (e := e)
+  refine IsLocalization.away_of_isIdempotentElem (he.map _) ?_ ?_
+  · rw [RingHom.algebraMap_toAlgebra]
+    change RingHom.ker (Algebra.TensorProduct.map (AlgHom.id S A)
+      (Ideal.Quotient.mkₐ S (Ideal.span {1 - e}))) = _
+    rw [Algebra.TensorProduct.lTensor_ker _ (Ideal.Quotient.mkₐ_surjective S _)]
+    change Ideal.map _ (RingHom.ker (Ideal.Quotient.mk (Ideal.span {1 - e}))) = _
+    rw [Ideal.mk_ker, Ideal.map_span, Set.image_singleton, map_sub, map_one]
+  · exact Algebra.TensorProduct.map_surjective _ _ Function.surjective_id
+      (Ideal.Quotient.mkₐ_surjective S _)
+
+end IsLocalization.Away

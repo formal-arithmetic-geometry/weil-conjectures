@@ -30,6 +30,10 @@ produces its data: a partial section `m` of `ψ` whose composite `m ≫ ψ` is a
 immersion and whose range is the full inverse image of the range of `m ≫ ψ` exhibits
 `ψ` as an isomorphism over that range
 (`AlgebraicGeometry.isIso_morphismRestrict_opensRange_of_range_eq`).
+
+Finally, `AlgebraicGeometry.Scheme.Hom.opensRange_of_isLocalizationAway` generalises Mathlib's
+`AlgebraicGeometry.Scheme.Hom.opensRange_localizationAway` from the model `Localization.Away r`
+to an arbitrary realization of the localization away from `r`.
 -/
 
 @[expose] public section
@@ -212,6 +216,18 @@ lemma exists_isIso_lift_of_mem_iff {Y Z : Scheme.{u}} (m : Z ⟶ Y)
   refine ⟨z, B.ι.isOpenEmbedding.injective ?_⟩
   rw [← Scheme.Hom.comp_apply, hfac]
   exact hz
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The range of `Spec S ⟶ Spec R`, for `S` an arbitrary realization of the localization of `R`
+away from `r`, is the basic open of `r`. This is
+`AlgebraicGeometry.Scheme.Hom.opensRange_localizationAway` for an arbitrary `S`. -/
+lemma Scheme.Hom.opensRange_of_isLocalizationAway {R S : Type u} [CommRing R] [CommRing S]
+    [Algebra R S] (r : R) [IsLocalization.Away r S] :
+    haveI := IsOpenImmersion.of_isLocalization (S := S) r
+    (Spec.map (CommRingCat.ofHom (algebraMap R S))).opensRange = PrimeSpectrum.basicOpen r := by
+  have := IsOpenImmersion.of_isLocalization (S := S) r
+  rw [SetLike.ext'_iff]
+  exact PrimeSpectrum.localization_away_comap_range S r
 
 /-- A set in a scheme is closed as soon as its preimage under each member of a jointly
 surjective family of open immersions is closed. -/
