@@ -119,7 +119,7 @@ end Finite
 section Constant
 
 variable {X : Scheme.{u}} {A : Type*} [Category.{u + 1} A] [Abelian A]
-  [IsGrothendieckAbelian.{u + 1} A]
+  [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
 
 /-- Two locally constant sheaves are trivialised by a common étale cover. -/
 lemma IsLocallyConstantSheaf.exists_cover₂ (F G : Sheaf X.smallEtaleTopology A)

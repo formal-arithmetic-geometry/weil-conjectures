@@ -51,6 +51,7 @@ namespace AlgebraicGeometry
 open Scheme Etale Scheme.Hom Scheme.Hom.SplitNbhd
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
   (y : Spec (.of Ω) ⟶ Y)
@@ -110,7 +111,7 @@ def Etale.stalkRestrict :
   colimit.pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
     (Etale.baseChangeNbhd f y t).op
 
-omit [IsFinite f] in
+omit [IsFinite f] [HasSmallSiteSheafify A] in
 /-- `stalkRestrict` on the germ of a section over `(U, u)`: it is the germ of the same section
 at the pointed étale neighbourhood `(U ×_Y X, (u, t))` of `t`. -/
 @[reassoc (attr := simp)]
@@ -122,7 +123,7 @@ lemma Etale.toPresheafFiber_stalkRestrict (c : Nbhd y) :
   colimit.ι_pre ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
     (Etale.baseChangeNbhd f y t).op (op c)
 
-omit [IsFinite f] in
+omit [IsFinite f] [HasSmallSiteSheafify A] in
 /-- `stalkRestrict` is natural in the sheaf. -/
 @[reassoc]
 lemma Etale.stalkRestrict_naturality {G G' : Sheaf X.smallEtaleTopology A} (φ : G ⟶ G') :
@@ -160,6 +161,7 @@ def Etale.pieceIsoStalk (t : GeometricFiber f y) :
   Functor.Final.colimitIso (pieceFunctor t).op
     ((CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj)
 
+omit [HasSmallSiteSheafify A] in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The components `stalkRestrict` assemble, through the split neighbourhoods, to the
 composite of the product decomposition of the sections and the commutation of the colimit
@@ -200,6 +202,7 @@ def Etale.stalkIsoPi (G : Sheaf X.smallEtaleTopology A) :
       ∏ᶜ fun t : GeometricFiber f y ↦ (pointSmallEtale t.1).sheafFiber.obj G :=
   asIso (Pi.lift fun t ↦ Etale.stalkRestrict A f y t G)
 
+omit [HasSmallSiteSheafify A] in
 @[simp]
 lemma Etale.stalkIsoPi_hom (G : Sheaf X.smallEtaleTopology A) :
     (Etale.stalkIsoPi A f y G).hom = Pi.lift fun t ↦ Etale.stalkRestrict A f y t G := rfl

@@ -79,6 +79,7 @@ variable {X : Scheme.{u}}
 section LocallyConstant
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
 
 /-- The direct sum of two locally constant sheaves is locally constant, trivialised by the
 fibre product of trivialising covers. (blueprint: `lemma:constructible-flc-biproduct`) -/
@@ -123,6 +124,7 @@ end LocallyConstant
 section Finite
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [PreservesFiniteLimits (CategoryTheory.forget A)]

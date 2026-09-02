@@ -82,7 +82,7 @@ lemma isIso_of_isIso_sheafFiber_map_algClosurePoint {F G : Sheaf S.smallEtaleTop
 
 section Abelian
 
-variable [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
 
 include hJ in
 /-- A morphism of `A`-valued étale sheaves whose fibre at every geometric point with

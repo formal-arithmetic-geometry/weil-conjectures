@@ -46,6 +46,7 @@ namespace AlgebraicGeometry
 open Scheme Etale Scheme.Hom
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [HasSmallSiteSheafify A]
   {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
@@ -54,6 +55,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
   [hJ : Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
+omit [HasSmallSiteSheafify A] in
 /-- A morphism of sheaves whose image under each factor of a product of functors is an
 epimorphism has epimorphic image under the product, for a finite product of functors into an
 abelian category. -/

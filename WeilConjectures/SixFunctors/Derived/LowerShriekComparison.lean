@@ -186,7 +186,7 @@ lemma refinementLowerShriekBaseChangeDerivedPlusIso_hom_app_factorsh
 
 variable (c)
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The composition isomorphism of pushforwards attached to the identity refinement cancels
 the identity isomorphism `AlgebraicGeometry.Etale.lowerStarId`. -/
 lemma refinementLowerStarComp_id :
@@ -318,7 +318,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 section CompositionLaw
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The composition isomorphism of pushforwards attached to a refinement is the composition
 isomorphism `AlgebraicGeometry.Etale.lowerStarComp` at the structure morphism of the
 finer compactification. -/
@@ -329,7 +329,7 @@ lemma refinementLowerStarComp_eq {c d : Compactification f} (r : c.Refinement d)
         eqToIso (congrArg (fun g => (g)_*[A]) r.hom_g) := rfl
   rw [h, Etale.lowerStarComp_trans_eqToIso A r.hom d.g c.g r.hom_g]
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- **Cocycle law for the composition isomorphism of pushforwards along a refinement**. -/
 lemma refinementLowerStarComp_comp {c d e : Compactification f}
     (r : c.Refinement d) (s : d.Refinement e) :
