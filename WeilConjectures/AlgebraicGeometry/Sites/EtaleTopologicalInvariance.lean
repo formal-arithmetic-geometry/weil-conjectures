@@ -85,8 +85,8 @@ the second proof of [Stacks 04DZ]:
 * `Outer`: reduction of the general case to the affine case with bounded fibre degrees,
   using the local structure of étale algebras.
 
-The equivalence is not a global instance: each file that needs it re-enables it with
-`attribute [local instance]`.
+The equivalence `Hom.isEquivalence_etale` and the dense-subsite statement
+`Hom.isDenseSubsite_etale` are global instances.
 
 ## References
 
@@ -167,13 +167,9 @@ variable [IsUniversalHomeomorphism f]
 homeomorphism `f : X ⟶ Y` is an equivalence between the category of schemes étale over `Y`
 and the category of schemes étale over `X`.
 
-This is not a global instance: it is re-enabled with `attribute [local instance]` in each
-file that needs it.
 (blueprint: `lemma:weil-pbc-universal-homeomorphism-site-equivalence`) -/
 @[stacks 04DZ]
-theorem isEquivalence_etale : f.Etale.IsEquivalence where
-
-attribute [local instance] isEquivalence_etale
+instance isEquivalence_etale : f.Etale.IsEquivalence where
 
 /-- **Topological invariance of the small étale site**, [Stacks 04DZ]: for a universal
 homeomorphism `f : X ⟶ Y`, the functor `V ↦ V ×_Y X` is an equivalence of categories
@@ -190,8 +186,21 @@ noncomputable def etaleEquivalence : Y.Etale ≌ X.Etale :=
 dense subsite of the small étale site of `X`: it is an equivalence of the underlying
 categories by `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, and it reflects coverings
 by `AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff`. -/
-theorem isDenseSubsite_etale :
+instance isDenseSubsite_etale :
     f.Etale.IsDenseSubsite Y.smallEtaleTopology X.smallEtaleTopology where
   functorPushforward_mem_iff := functorPushforward_mem_smallEtaleTopology_iff f _
+
+/-! ### Axiom census
+
+The topological invariance of the small étale site is unconditional: the check below is run
+by the build, so a `sorry` reappearing anywhere beneath it breaks compilation rather than
+going unnoticed. -/
+
+/--
+info: 'AlgebraicGeometry.Scheme.Hom.isEquivalence_etale' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.Scheme.Hom.isEquivalence_etale
 
 end AlgebraicGeometry.Scheme.Hom
