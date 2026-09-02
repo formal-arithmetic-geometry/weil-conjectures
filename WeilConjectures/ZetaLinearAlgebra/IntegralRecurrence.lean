@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import Mathlib.LinearAlgebra.FreeModule.PID
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
 
 @[expose] public section
@@ -17,10 +18,11 @@ public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
 Let `a : ℕ → ℤ` be a sequence of integers and let `aQ : ℕ → ℚ` be its coefficientwise image.
 The `ℤ`-span `intShiftSpan a` of the iterated left shifts of `aQ` is a shift-stable lattice
 inside the `ℚ`-span `shiftSpan ℚ aQ`. If the latter is finite-dimensional, then finitely many
-coordinates separate it, so the lattice embeds into a finite free `ℤ`-module and is therefore
-itself finite and free. Cayley–Hamilton for the shift operator on the lattice then produces a
-*monic* integral polynomial annihilating the sequence, and its reverse is an integral
-denominator for the power series `∑ a n Xⁿ`.
+coordinates separate it (`Submodule.exists_finset_eq_of_forall_apply_eq`), so the lattice
+embeds into a finite free `ℤ`-module and is therefore itself finite and free.
+Cayley–Hamilton for the shift operator on the lattice then produces a *monic* integral
+polynomial annihilating the sequence, and its reverse is an integral denominator for the
+power series `∑ a n Xⁿ`.
 
 The upshot is that a power series with integer coefficients that is rational over `ℚ` already
 admits a normalized fraction with *integer* numerator and denominator. The coprimality of that
@@ -33,8 +35,6 @@ fraction (Gauss' lemma) and the uniqueness of the reduced fraction are developed
 
 ## Main statements
 
-- `Submodule.exists_finset_eval_injective`: a finite-dimensional space of sequences is
-  separated by finitely many coordinates.
 - `finite_intShiftSpan` and `free_intShiftSpan`: if `shiftSpan ℚ aQ` is finite-dimensional,
   the integral shift lattice is a finite free `ℤ`-module.
 - `exists_monic_sum_coeff_mul_eq_zero`: the integral Cayley–Hamilton recurrence, i.e. a monic
@@ -46,78 +46,6 @@ fraction (Gauss' lemma) and the uniqueness of the reduced fraction are developed
 open Finset
 
 open scoped Polynomial PowerSeries
-
-section Separation
-
-variable {K : Type*} [Field K]
-
-/-- A finite-dimensional space of sequences is separated by finitely many coordinates: there
-is a finite set `J` of indices such that two elements agreeing on `J` are equal. -/
-theorem Submodule.exists_finset_eq_of_forall_apply_eq (V : Submodule K (ℕ → K))
-    [FiniteDimensional K V] :
-    ∃ J : Finset ℕ, ∀ x ∈ V, ∀ y ∈ V, (∀ j ∈ J, x j = y j) → x = y := by
-  have hker : ∀ (J : Finset ℕ) (x : ℕ → K),
-      x ∈ LinearMap.ker (LinearMap.funLeft K K fun j : J => (j : ℕ)) ↔ ∀ j ∈ J, x j = 0 := by
-    intro J x
-    rw [LinearMap.mem_ker]
-    refine ⟨fun hx j hj => congrFun hx ⟨j, hj⟩, fun hx => ?_⟩
-    funext j
-    exact hx j.1 j.2
-  set W : Finset ℕ → Submodule K (ℕ → K) := fun J =>
-    V ⊓ LinearMap.ker (LinearMap.funLeft K K fun j : J => (j : ℕ)) with hW
-  have hmem : ∀ (J : Finset ℕ) (x : ℕ → K), x ∈ W J ↔ x ∈ V ∧ ∀ j ∈ J, x j = 0 := by
-    intro J x
-    rw [hW]
-    exact and_congr_right' (hker J x)
-  have hle : ∀ J : Finset ℕ, W J ≤ V := fun J x hx => ((hmem J x).1 hx).1
-  have hfd : ∀ J : Finset ℕ, FiniteDimensional K (W J) := fun J =>
-    FiniteDimensional.of_injective (Submodule.inclusion (hle J))
-      (Submodule.inclusion_injective (hle J))
-  have key : ∀ (k : ℕ) (J : Finset ℕ), Module.finrank K (W J) ≤ k →
-      ∃ J' : Finset ℕ, W J' = ⊥ := by
-    intro k
-    induction k with
-    | zero =>
-      intro J hJ
-      have := hfd J
-      exact ⟨J, Submodule.finrank_eq_zero.1 (Nat.le_zero.1 hJ)⟩
-    | succ k ih =>
-      intro J hJ
-      rcases eq_or_ne (W J) ⊥ with h | h
-      · exact ⟨J, h⟩
-      obtain ⟨x, hxW, hx0⟩ := (W J).ne_bot_iff.1 h
-      obtain ⟨n, hn⟩ : ∃ n, x n ≠ 0 := by
-        by_contra hc
-        exact hx0 (funext fun n => not_not.1 (not_exists.1 hc n))
-      have hsub : W (insert n J) ≤ W J := by
-        intro y hy
-        obtain ⟨hyV, hy0⟩ := (hmem _ y).1 hy
-        exact (hmem J y).2 ⟨hyV, fun j hj => hy0 j (Finset.mem_insert_of_mem hj)⟩
-      have hlt : W (insert n J) < W J := by
-        refine lt_of_le_of_ne hsub fun hEq => hn ?_
-        exact ((hmem _ x).1 (hEq.ge hxW)).2 n (Finset.mem_insert_self n J)
-      have := hfd J
-      refine ih (insert n J) ?_
-      have := Submodule.finrank_lt_finrank_of_lt hlt
-      omega
-  obtain ⟨J, hJ⟩ := key (Module.finrank K (W ∅)) ∅ le_rfl
-  refine ⟨J, fun x hx y hy hxy => ?_⟩
-  have hsub : x - y ∈ W J := by
-    refine (hmem J _).2 ⟨V.sub_mem hx hy, fun j hj => ?_⟩
-    simp [hxy j hj]
-  rw [hJ, Submodule.mem_bot, sub_eq_zero] at hsub
-  exact hsub
-
-/-- A finite-dimensional space of sequences is separated by finitely many coordinates:
-evaluation at the coordinates in a suitable finite set `J` is injective. -/
-theorem Submodule.exists_finset_eval_injective (V : Submodule K (ℕ → K))
-    [FiniteDimensional K V] :
-    ∃ J : Finset ℕ, Function.Injective fun (x : V) (j : J) => (x : ℕ → K) (j : ℕ) := by
-  obtain ⟨J, hJ⟩ := V.exists_finset_eq_of_forall_apply_eq
-  refine ⟨J, fun x y hxy => Subtype.ext (hJ _ x.2 _ y.2 fun j hj => ?_)⟩
-  exact congrFun hxy ⟨j, hj⟩
-
-end Separation
 
 /-- The left shift `x ↦ (n ↦ x (n + 1))` on rational sequences, as a `ℤ`-linear map. -/
 def intSeqShift : (ℕ → ℚ) →ₗ[ℤ] (ℕ → ℚ) := LinearMap.funLeft ℤ ℚ (· + 1)
