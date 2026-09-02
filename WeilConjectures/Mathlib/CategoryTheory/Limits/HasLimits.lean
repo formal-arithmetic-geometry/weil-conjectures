@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 
-# Limits and colimits of size `u` from limits and colimits of size `u + 1`
+# Limits and colimits of small size from limits and colimits of size `u + 1`
 
 The coefficient categories of this development have `Hom`-types in the universe `u + 1`, one
 above the universe `u` of the base schemes, and a Grothendieck abelian such category has
@@ -21,9 +21,15 @@ shrinking. Mathlib's `CategoryTheory.Limits.hasLimitsOfSizeShrink` and
 `CategoryTheory.Limits.hasColimitsOfSizeShrink` do exactly this, but are deliberately not
 instances: in that generality instance search would climb the universes without terminating.
 
-This file registers the two consequences of them that the development needs, so that
-`HasLimitsOfSize.{u, u} A` and `HasColimitsOfSize.{u, u} A` need not be carried as
-hypotheses alongside `IsGrothendieckAbelian.{u + 1} A`.
+The comma categories indexing a pointwise Kan extension along a functor between small
+sites are one step less small: an object of such a comma category is an object of the site
+together with a morphism, so it lives in `Type (u + 1)`, while the `Hom`-types are still
+in `Type u`. So `HasColimitsOfSize.{u, u + 1} A` is needed as well.
+
+This file registers the three consequences of the shrinking lemmas that the development
+needs, so that `HasLimitsOfSize.{u, u} A`, `HasColimitsOfSize.{u, u} A` and
+`HasColimitsOfSize.{u, u + 1} A` need not be carried as hypotheses alongside
+`IsGrothendieckAbelian.{u + 1} A`.
 
 -/
 
@@ -57,5 +63,19 @@ instances which do provide colimits of size `u + 1`. -/
 instance (priority := low) hasColimitsOfSize_of_succ (A : Type u') [Category.{u + 1} A]
     [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u} A :=
   hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} A
+
+/-- A category with `Hom`-types in `u + 1` and colimits of size `u + 1` has colimits
+indexed by categories with objects in `Type (u + 1)` and `Hom`-types in `Type u`, by
+`hasColimitsOfSizeShrink`. Such are the comma categories indexing the pointwise left Kan
+extensions along a functor between small sites.
+
+Instance search does not climb the universes here: discharging the hypothesis
+`HasColimitsOfSize.{u + 1, u + 1} A` through this very instance would require
+`Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. As for
+`hasColimitsOfSize_of_succ` the priority is `low`, so that the attempt is made only after
+the instances which do provide colimits of size `u + 1`. -/
+instance (priority := low) hasColimitsOfSize_succ_of_succ (A : Type u') [Category.{u + 1} A]
+    [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u + 1} A :=
+  hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
 
 end CategoryTheory.Limits
