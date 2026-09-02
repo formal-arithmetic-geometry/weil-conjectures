@@ -2,15 +2,16 @@
 % It is intended to be included by the main blueprint document.
 %
 % Status convention:
-%   A non-empty \lean{...} names a declaration that exists, either in Mathlib
-%   or in the WeilConjectures Lean development; the names are kept in sync with
-%   the declarations and are checked with `lake exe checkdecls`.  An empty
-%   \lean{} means the statement has not been formalized yet -- do not record a
-%   proposed name there, since a name that resolves to nothing misleads a reader
-%   looking for where the result lives.  "Formalization route" remarks record
-%   where the Lean proof deviates from the route written here.  A \nagataGap
-%   paragraph is an intentional, unresolved formalization obligation; it must be
-%   closed before a completion marker is added.
+%   A \lean{...} names a declaration that exists, either in Mathlib or in the
+%   WeilConjectures Lean development; the names are kept in sync with the
+%   declarations and are checked with `lake exe checkdecls`.  A statement with
+%   no \lean at all is not formalized: do not record a proposed name there,
+%   since a name that resolves to nothing misleads a reader looking for where
+%   the result lives, and do not write an empty \lean{} either, since the web
+%   build turns it into a Lean button whose link goes nowhere.  "Formalization
+%   route" remarks record where the Lean proof deviates from the route written
+%   here.  A \nagataGap paragraph is an intentional, unresolved formalization
+%   obligation; it must be closed before a completion marker is added.
 %
 % This file is the built nagata chapter: version/detailed.tex inputs it, and it
 % is the one to edit.  The sibling nagata.tex is an unbuilt 2026-08-19 reference
@@ -160,7 +161,6 @@ equality has explicitly been fixed.
 
 \begin{definition}[Scheme-theoretically dense open immersion]
   \label{def:nagata-scheme-theoretically-dense-open}
-  \lean{}
   \statusnote{Bypassed by the formalized route: scheme-theoretic density is
     the predicate \texttt{AlgebraicGeometry.IsSchemeTheoreticallyDominant},
     which \Cref{def:nagata-dense-compactification} uses directly.}
@@ -759,7 +759,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Coherence of the standard Proj chart rings]
   \label{lemma:nagata-proj-chart-ring-cocycle}
   \uses{def:nagata-homogeneous-localization-degree-zero}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -831,7 +830,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Relative Proj]
   \label{def:nagata-relative-proj}
   \uses{def:nagata-affine-proj}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -858,7 +856,6 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{lemma:nagata-relative-proj-exists}
   \uses{def:nagata-relative-proj,def:nagata-affine-proj,
     lemma:nagata-proj-chart-ring-cocycle}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -987,7 +984,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{definition}[Projective morphism]
   \label{def:nagata-projective-morphism}
   \uses{def:nagata-relative-projective-space}
-  \lean{}
   \statusnote{Bypassed by the formalized route: only properness of the global
     blow-up is needed, and it is proved directly as
     \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
@@ -1048,7 +1044,6 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-relative-proj-functoriality}
   \uses{def:nagata-relative-proj,lemma:nagata-relative-proj-exists,
     lemma:nagata-proj-chart-ring-cocycle}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -1338,7 +1333,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{definition}[Affine blow-up chart algebra]
   \label{def:nagata-blowup-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1352,7 +1346,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Normal form in a chart algebra]
   \label{lemma:nagata-chart-ring-normal-form}
   \uses{def:nagata-blowup-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1374,7 +1367,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Equality criterion for chart fractions]
   \label{lemma:nagata-chart-ring-fraction-equality}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1397,7 +1389,6 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{def:nagata-homogeneous-away-to-chart}
   \uses{def:nagata-rees-algebra,
     def:nagata-blowup-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1414,7 +1405,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Well-definedness of the homogeneous-localization chart map]
   \label{lemma:nagata-homogeneous-away-to-chart}
   \uses{def:nagata-homogeneous-away-to-chart}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1436,7 +1426,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Surjectivity of the chart map]
   \label{lemma:nagata-homogeneous-away-to-chart-surjective}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1454,7 +1443,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Injectivity of the chart map]
   \label{lemma:nagata-homogeneous-away-to-chart-injective}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1570,7 +1558,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Blow-up of the zero ideal]
   \label{lemma:nagata-affine-blowup-bot}
   \uses{def:nagata-affine-blowup}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1609,7 +1596,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Localization of each Rees piece]
   \label{lemma:nagata-localization-rees-piece}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1671,7 +1657,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Compatibility with degree zero]
   \label{lemma:nagata-rees-localization-degree-zero}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1691,7 +1676,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{lemma}[Localization at one]
   \label{lemma:nagata-rees-localization-one}
   \uses{lemma:nagata-rees-sum-components}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1711,7 +1695,6 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Iterated localization coherence]
   \label{lemma:nagata-rees-localization-mul}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine blow-up and its
     charts are the construction \texttt{AlgebraicGeometry.AffineBlowup}, with
     \texttt{AffineBlowup.chart} and
@@ -1792,8 +1775,8 @@ it is not silently identified with an unavailable Mathlib primitive.
   On each standard chart, the map for $s=1$ is induced by the identity of the
   Rees algebra, hence is the identity.  For $s,t$, both composites send a
   homogeneous fraction to its image in the localization at $st$; the two
-  coefficient maps are equal by
-  \Cref{lemma:nagata-rees-localization-one,lemma:nagata-rees-localization-mul}.
+  coefficient maps are equal by \Cref{lemma:nagata-rees-localization-one}
+  and \Cref{lemma:nagata-rees-localization-mul}.
   The chart maps therefore agree on a cover, proving the asserted identity
   and cocycle equalities globally.
 \end{proof}
@@ -2340,7 +2323,6 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{definition}[Finite global free generation]
   \label{def:nagata-global-finite-free-generation}
-  \lean{}
   \statusnote{Bypassed by the formalized route: only properness of the global
     blow-up is needed, and it is proved directly as
     \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
@@ -2363,7 +2345,6 @@ all its coherence maps are checked on basic affine refinements.
     lemma:nagata-affine-blowup-projective-embedding,
     def:nagata-rees-polynomial-map,
     lemma:nagata-rees-polynomial-surjection}
-  \lean{}
   \statusnote{Bypassed by the formalized route: only properness of the global
     blow-up is needed, and it is proved directly as
     \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
@@ -2415,7 +2396,6 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-projective-morphism,
     def:nagata-global-finite-free-generation,
     lemma:nagata-global-blowup-relative-projective-embedding}
-  \lean{}
   \statusnote{Bypassed by the formalized route: only properness of the global
     blow-up is needed, and it is proved directly as
     \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isProper\_blowupMap}; the
@@ -2633,7 +2613,6 @@ all its coherence maps are checked on basic affine refinements.
 
 \begin{lemma}[Associativity of ideal-power multiplication]
   \label{lemma:nagata-sheaf-ideal-powers-assoc}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -2657,7 +2636,6 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[Sheaf Rees algebra]
   \label{def:nagata-sheaf-rees-algebra}
   \uses{lemma:nagata-sheaf-ideal-powers-assoc}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -2742,7 +2720,6 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Relative Proj base change for an arbitrary morphism]
   \label{lemma:nagata-relative-proj-base-change-arbitrary}
   \uses{prop:nagata-relative-proj-functoriality}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -2885,7 +2862,6 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-relative-proj,def:nagata-invertible-ideal,
     lemma:nagata-relative-proj-exists,
     lemma:nagata-relative-proj-invertible-tensor-powers-affine}
-  \lean{}
   \statusnote{Bypassed by the formalized route: no separate relative-Proj
     primitive was formalized.  The blow-up is glued from the affine Proj charts
     (\texttt{AlgebraicGeometry.Proj.basicOpenIsoSpec},
@@ -3066,7 +3042,6 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Flat pullback commutes with ideal powers]
   \label{lemma:nagata-flat-pullback-ideal-pow}
   \uses{def:nagata-extended-ideal}
-  \lean{}
   \statusnote{Bypassed by the formalized route: blow-ups are never
     base-changed along a flat morphism.  Every base-change step the route takes
     goes through the universal property
@@ -3093,7 +3068,6 @@ all its coherence maps are checked on basic affine refinements.
 \begin{definition}[Flat pullback map for Rees algebras]
   \label{def:nagata-flat-pullback-rees-map}
   \uses{def:nagata-sheaf-rees-algebra,def:nagata-extended-ideal}
-  \lean{}
   \statusnote{Bypassed by the formalized route: blow-ups are never
     base-changed along a flat morphism.  Every base-change step the route takes
     goes through the universal property
@@ -3119,7 +3093,6 @@ all its coherence maps are checked on basic affine refinements.
 \begin{lemma}[Flat pullback of the Rees algebra]
   \label{lemma:nagata-flat-pullback-rees}
   \uses{def:nagata-flat-pullback-rees-map}
-  \lean{}
   \statusnote{Bypassed by the formalized route: blow-ups are never
     base-changed along a flat morphism.  Every base-change step the route takes
     goes through the universal property
@@ -3145,7 +3118,6 @@ all its coherence maps are checked on basic affine refinements.
     def:nagata-extended-ideal,
     lemma:nagata-flat-pullback-rees,
     prop:nagata-relative-proj-functoriality}
-  \lean{}
   \statusnote{Bypassed by the formalized route: blow-ups are never
     base-changed along a flat morphism.  Every base-change step the route takes
     goes through the universal property
@@ -3173,7 +3145,6 @@ all its coherence maps are checked on basic affine refinements.
   \label{thm:nagata-blowup-flat-base-change}
   \uses{def:nagata-blowup-flat-base-change-map,
     prop:nagata-relative-proj-functoriality}
-  \lean{}
   \statusnote{Bypassed by the formalized route: blow-ups are never
     base-changed along a flat morphism.  Every base-change step the route takes
     goes through the universal property
@@ -4068,7 +4039,6 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Affine base-change chart ring]
   \label{def:nagata-strict-transform-basechange-chart-ring}
   \uses{def:nagata-blowup-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4090,7 +4060,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Ordinary base-change chart]
   \label{lemma:nagata-strict-transform-basechange-chart}
   \uses{def:nagata-strict-transform-basechange-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4121,7 +4090,6 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-strict-transform-chart-ring}
   \uses{def:nagata-power-torsion,
     def:nagata-strict-transform-basechange-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4141,7 +4109,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Closedness of the strict-transform chart]
   \label{lemma:nagata-strict-transform-chart-closed}
   \uses{def:nagata-strict-transform-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4167,7 +4134,6 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-strict-chart-to-extended-blowup-chart}
   \uses{def:nagata-strict-transform-basechange-chart-ring,
     def:nagata-blowup-chart-ring}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4191,7 +4157,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Well-definedness of the extended-ideal chart map]
   \label{lemma:nagata-strict-chart-to-extended-blowup-chart}
   \uses{def:nagata-strict-chart-to-extended-blowup-chart}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4244,7 +4209,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Kernel of the map to the extended-ideal chart]
   \label{lemma:nagata-strict-chart-map-kernel}
   \uses{def:nagata-power-torsion,def:nagata-strict-chart-to-extended-blowup-chart}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4273,7 +4237,6 @@ correction explicit before it is sheafified and glued.
   \label{def:nagata-strict-transform-chart-comparison}
   \uses{def:nagata-strict-transform-chart-ring,
     def:nagata-strict-chart-to-extended-blowup-chart}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4294,7 +4257,6 @@ correction explicit before it is sheafified and glued.
 \begin{proposition}[Affine strict-transform chart formula]
   \label{prop:nagata-strict-transform-chart-iso}
   \uses{def:nagata-strict-transform-chart-comparison}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4319,7 +4281,6 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Localized strict-transform chart comparison]
   \label{def:nagata-strict-transform-chart-comparison-localized}
   \uses{def:nagata-strict-transform-chart-comparison}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4338,7 +4299,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Strict-transform chart formula localizes]
   \label{lemma:nagata-strict-transform-chart-localization}
   \uses{def:nagata-strict-transform-chart-comparison-localized}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4368,7 +4328,6 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-chart-localization-data}
   \uses{def:nagata-strict-transform-chart-ring,
     lemma:nagata-power-torsion-localization}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4402,7 +4361,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Cocycle for strict-transform charts]
   \label{lemma:nagata-strict-transform-chart-cocycle}
   \uses{def:nagata-strict-transform-chart-comparison-localized}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4440,7 +4398,6 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Strict transform of a quasi-coherent module]
   \label{def:nagata-module-strict-transform}
   \uses{def:nagata-power-torsion,def:nagata-global-blowup}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -4460,7 +4417,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Affine formula for a module strict transform]
   \label{lemma:nagata-module-strict-transform-chart}
   \uses{def:nagata-module-strict-transform,def:nagata-power-torsion}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -4527,7 +4483,6 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-strict-transform-chart-ring,
     def:nagata-global-blowup,
     lemma:nagata-strict-transform-chart-localization-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4557,7 +4512,6 @@ correction explicit before it is sheafified and glued.
   \label{prop:nagata-strict-transform-closed-fiber-product}
   \uses{def:nagata-strict-transform-closed-chart-model,
     def:nagata-strict-transform}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the strict transform is
     supplied by the API of
     \texttt{WeilConjectures/Compactification/StrictTransform.lean} ---
@@ -4711,7 +4665,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Flatness kills the strict-transform torsion]
   \label{lemma:nagata-flat-strict-transform-no-torsion}
   \uses{def:nagata-power-torsion}
-  \lean{}
   \statusnote{Bypassed by the formalized route: flat base change of strict
     transforms is not used.  The only strict-transform base-change fact the
     route needs is the pullback square
@@ -4733,7 +4686,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{corollary}[Flat strict transform equals ordinary base change]
   \label{cor:nagata-flat-strict-transform-base-change}
-  \lean{}
   \statusnote{Bypassed by the formalized route: flat base change of strict
     transforms is not used.  The only strict-transform base-change fact the
     route needs is the pullback square
@@ -4785,7 +4737,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Strict transform under a dominating blow-up]
   \label{lemma:nagata-strict-transform-dominating}
-  \lean{}
   \statusnote{Bypassed by the formalized route: composition and domination of
     admissible blow-ups are handled by
     \texttt{AlgebraicGeometry.IsAdmissible.exists\_comp}, and the disjointness
@@ -4820,7 +4771,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Disjoint strict transforms stay disjoint]
   \label{lemma:nagata-strict-transform-disjoint-dominating}
-  \lean{}
   \statusnote{Bypassed by the formalized route: composition and domination of
     admissible blow-ups are handled by
     \texttt{AlgebraicGeometry.IsAdmissible.exists\_comp}, and the disjointness
@@ -4946,7 +4896,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Gluing compatible finite-type ideals on two qc opens]
   \label{lemma:nagata-glue-finite-type-ideals}
-  \lean{}
   \statusnote{Bypassed by the formalized route: a finite-type ideal is
     extended from a quasi-compact open in one step by
     \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_finiteType\_comap\_eq},
@@ -5254,7 +5203,6 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-module-strict-transform,
     lemma:nagata-module-strict-transform-chart,
     lemma:nagata-power-torsion-localization}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5329,7 +5277,6 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-admissible-blowup,
     def:nagata-module-strict-transform,
     lemma:nagata-module-strict-transform-exact}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5367,7 +5314,6 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-module-strict-transform-exact,
     lemma:nagata-admissible-blowup-comp,
     lemma:nagata-finite-data-flattening-package}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5396,7 +5342,6 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-module-strict-transform-chart,
     prop:nagata-strict-transform-closed-fiber-product,
     lemma:nagata-strict-transform-closure-characterization}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5439,7 +5384,6 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-strict-transform-closed-module-comparison,
     lemma:nagata-strict-transform-dominating,
     lemma:nagata-dense-flat-pullback}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5482,7 +5426,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Dense-open dimension and finite-presentation package]
   \label{lemma:nagata-dense-open-dimension-package}
   \uses{def:nagata-scheme-theoretically-dense-open}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5513,7 +5456,6 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/081L}{Tag 081L}]{stacks-project}}]
   \label{lemma:nagata-flat-dense-open-relative-dimension}
   \uses{lemma:nagata-dense-open-dimension-package}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5535,7 +5477,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Standard-etale finite-part package]
   \label{lemma:nagata-standard-etale-finite-part-package}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5563,7 +5504,6 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/02LP}{Tag 02LP}]{stacks-project}}]
   \label{lemma:nagata-quasifinite-etale-finite-part}
   \uses{lemma:nagata-standard-etale-finite-part-package}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5583,7 +5523,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Affine morphisms descend fpqc-locally]
   \label{lemma:nagata-affine-fpqc-descent-package}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5612,7 +5551,6 @@ correction explicit before it is sheafified and glued.
   {\cite[\href{https://stacks.math.columbia.edu/tag/02LA}{Tag 02LA}]{stacks-project}}]
   \label{lemma:nagata-finite-etale-local-on-target}
   \uses{lemma:nagata-affine-fpqc-descent-package}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5637,7 +5575,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Finite flat degree one is an isomorphism]
   \label{lemma:nagata-finite-flat-degree-one-iso}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5668,7 +5605,6 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-finite-etale-local-on-target,
     lemma:nagata-finite-flat-degree-one-iso,
     lemma:nagata-dense-flat-pullback}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5713,7 +5649,6 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-flattening-after-cartier-boundary,
     lemma:nagata-flat-strict-transform-open,
     lemma:nagata-admissible-blowup-preserves-density}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5757,7 +5692,6 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Selected flattening ideal]
   \label{def:nagata-flattening-ideal}
   \uses{lemma:nagata-flattening-ideal-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5774,7 +5708,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Properties of the selected flattening ideal]
   \label{lemma:nagata-flattening-ideal}
   \uses{def:nagata-flattening-ideal}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the Raynaud--Gruson flattening
     chain is not formalized.  Elimination of indeterminacy is obtained instead
     by the route of the chapter \emph{Elimination of indeterminacy after Deligne
@@ -5854,7 +5787,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[A proper dense open immersion is an isomorphism]
   \label{lemma:nagata-proper-open-dense-iso}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the two-open theorem is
     concluded by
     \texttt{AlgebraicGeometry.HasCompactification.of\_two\_open\_cover}, which
@@ -5875,7 +5807,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Finite-presentation closed immersions and finite type ideals]
   \label{lemma:nagata-closed-fp-ideal-finite-type}
-  \lean{}
   \statusnote{Bypassed by the formalized route: centres are carried as
     finite-type ideal sheaves (\texttt{AlgebraicGeometry.Scheme.IdealSheafData})
     throughout, so the translation between finite-presentation closed immersions
@@ -5930,7 +5861,6 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[A finite type nil ideal sheaf is uniformly nilpotent]
   \label{lemma:nagata-finite-type-nil-ideal-nilpotent}
-  \lean{}
   \statusnote{Bypassed by the formalized route: boundary separation is
     \texttt{AlgebraicGeometry.separationBlowup} with
     \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures},
@@ -5957,7 +5887,6 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-separate-closed-data-exists}
   \uses{def:nagata-admissible-blowup,def:nagata-strict-transform,
     lemma:nagata-chart-generator-regular}
-  \lean{}
   \statusnote{Bypassed by the formalized route: boundary separation is
     \texttt{AlgebraicGeometry.separationBlowup} with
     \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures},
@@ -6179,7 +6108,6 @@ correction explicit before it is sheafified and glued.
 \begin{definition}[Constructible separation data in a spectral space]
   \label{def:nagata-spectral-constructible-separation}
   \uses{lemma:nagata-spectral-constructible-separation-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the existence statement
     \texttt{PrespectralSpace.exists\_isCompact\_isOpen\_disjoint\_union\_eq\_univ}
     is used directly, so no selected separation datum and specification lemma
@@ -6198,7 +6126,6 @@ correction explicit before it is sheafified and glued.
 \begin{lemma}[Properties of the constructible separation data]
   \label{lemma:nagata-spectral-constructible-separation}
   \uses{def:nagata-spectral-constructible-separation}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the existence statement
     \texttt{PrespectralSpace.exists\_isCompact\_isOpen\_disjoint\_union\_eq\_univ}
     is used directly, so no selected separation datum and specification lemma
@@ -8111,7 +8038,6 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Relative affine-space charts and base change]
   \label{lemma:nagata-relative-affine-space-charts}
   \uses{def:nagata-relative-affine-space}
-  \lean{}
   \statusnote{Bypassed by the formalized route: relative affine space is
     \texttt{AlgebraicGeometry.AffineSpace}, which already carries its charts and
     base change, so they are not reconstructed here.}
@@ -8211,7 +8137,6 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{def:nagata-quasi-affine-immersion-affine-space}
   \uses{def:nagata-relative-affine-space,
     lemma:nagata-quasi-affine-immersion-affine-space-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route:
     \texttt{AlgebraicGeometry.exists\_immersion\_affineSpace\_of\_quasiAffine}
     is used directly, so no selected immersion and specification lemma are
@@ -8230,7 +8155,6 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-quasi-affine-immersion-affine-space}
   \uses{def:nagata-quasi-affine-immersion-affine-space,
     lemma:nagata-quasi-affine-immersion-affine-space-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route:
     \texttt{AlgebraicGeometry.exists\_immersion\_affineSpace\_of\_quasiAffine}
     is used directly, so no selected immersion and specification lemma are
@@ -8323,7 +8247,6 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{lemma}[Existence of an affine neighbourhood through finitely many generic points,
   {\cite[\href{https://stacks.math.columbia.edu/tag/01ZX}{Tag 01ZX}]{stacks-project}}]
   \label{lemma:nagata-affine-neighbourhood-generic-points-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine cover meeting the
     selected generic points is produced in one step by
     \texttt{AlgebraicGeometry.exists\_isAffineOpen\_iSup\_eq\_top\_and\_genericPoints\_subset\_iInter}
@@ -8362,7 +8285,6 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \begin{definition}[Affine neighbourhood containing selected generic points]
   \label{def:nagata-affine-neighbourhood-generic-points}
   \uses{lemma:nagata-affine-neighbourhood-generic-points-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine cover meeting the
     selected generic points is produced in one step by
     \texttt{AlgebraicGeometry.exists\_isAffineOpen\_iSup\_eq\_top\_and\_genericPoints\_subset\_iInter}
@@ -8380,7 +8302,6 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \label{lemma:nagata-affine-neighbourhood-generic-points}
   \uses{def:nagata-affine-neighbourhood-generic-points,
     lemma:nagata-affine-neighbourhood-generic-points-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the affine cover meeting the
     selected generic points is produced in one step by
     \texttt{AlgebraicGeometry.exists\_isAffineOpen\_iSup\_eq\_top\_and\_genericPoints\_subset\_iInter}
@@ -8560,7 +8481,6 @@ coefficients and relations and all later stages inherit the recorded data.
 
 \begin{definition}[Selected upper bound of a finite set]
   \label{def:nagata-directed-finite-upper-bound}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8581,7 +8501,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[Property of the selected finite upper bound]
   \label{lemma:nagata-directed-finite-upper-bound}
   \uses{def:nagata-directed-finite-upper-bound}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8625,7 +8544,6 @@ coefficients and relations and all later stages inherit the recorded data.
 
 \begin{lemma}[Finite data and finite relations descend in a filtered colimit]
   \label{lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8651,7 +8569,6 @@ coefficients and relations and all later stages inherit the recorded data.
 
 \begin{definition}[Selected finite affine gluing presentation]
   \label{def:nagata-finite-affine-gluing-presentation}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8670,7 +8587,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[Properties of the selected finite affine presentation]
   \label{lemma:nagata-finite-affine-gluing-presentation}
   \uses{def:nagata-finite-affine-gluing-presentation}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8696,7 +8612,6 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{def:nagata-directed-finite-upper-bound,
     def:nagata-finite-affine-gluing-presentation,
     lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8719,7 +8634,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[All gluing coefficients occur at the selected stage]
   \label{lemma:nagata-affine-gluing-coefficients-descend}
   \uses{def:nagata-affine-gluing-coefficient-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8754,7 +8668,6 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{def:nagata-affine-gluing-coefficient-stage,
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8773,7 +8686,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[The selected finite-stage datum satisfies the gluing axioms]
   \label{lemma:nagata-affine-gluing-identities-eventually}
   \uses{def:nagata-affine-gluing-valid-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8798,7 +8710,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{definition}[Finite-type Noetherian stage]
   \label{def:nagata-noetherian-stage}
   \uses{def:nagata-affine-gluing-valid-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8814,7 +8725,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[Valid finite coefficient refinements form a directed set]
   \label{lemma:nagata-valid-refinements-directed}
   \uses{def:nagata-noetherian-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8866,7 +8776,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[Properties of the finite-type stages]
   \label{lemma:nagata-glue-noetherian-stage}
   \uses{def:nagata-noetherian-inverse-system}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8890,7 +8799,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{definition}[Comparison from the original scheme to the inverse limit]
   \label{def:nagata-glued-limit-comparison}
   \uses{def:nagata-noetherian-inverse-system}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8908,7 +8816,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{lemma}[Recovery of the glued limit]
   \label{lemma:nagata-glued-limit-recovery}
   \uses{def:nagata-glued-limit-comparison}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -8995,7 +8902,6 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{def:nagata-relative-stage-morphism-data}
   \uses{def:nagata-noetherian-inverse-system,
     def:nagata-glued-limit-comparison}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9024,7 +8930,6 @@ coefficients and relations and all later stages inherit the recorded data.
   \uses{def:nagata-relative-stage-morphism-data,
     lemma:nagata-filtered-colimit-finite-data,
     lemma:nagata-directed-finite-upper-bound}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9048,7 +8953,6 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{def:nagata-immersion-into-fp-model}
   \uses{lemma:nagata-relative-stage-morphism-data-exists,
     def:nagata-relative-stage-morphism-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9145,7 +9049,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{definition}[Quasi-compact open on which an immersion is closed]
   \label{def:nagata-immersion-shrink-to-closed}
   \uses{lemma:nagata-immersion-shrink-to-closed-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9384,7 +9287,6 @@ coefficients and relations and all later stages inherit the recorded data.
 \begin{definition}[Selected stage for fixed-base separatedness]
   \label{def:nagata-fixed-base-separated-stage}
   \uses{lemma:nagata-fixed-base-separated-stage-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9421,7 +9323,6 @@ coefficients and relations and all later stages inherit the recorded data.
   \label{def:nagata-finite-type-closed-in-fp}
   \uses{def:nagata-finite-type-fp-model-system,
     def:nagata-fixed-base-separated-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9482,7 +9383,6 @@ transition morphisms.
 
 \begin{definition}[Base-changed system over a chosen stage]
   \label{def:nagata-basechanged-system}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9507,7 +9407,6 @@ transition morphisms.
   \label{def:nagata-qc-open-descent}
   \uses{def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data,def:nagata-basechanged-system}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9535,7 +9434,6 @@ transition morphisms.
 \begin{lemma}[Property of the descended quasi-compact open]
   \label{lemma:nagata-qc-open-descends}
   \uses{def:nagata-qc-open-descent}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9558,7 +9456,6 @@ transition morphisms.
   \label{def:nagata-qc-open-equality-stage}
   \uses{def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9576,7 +9473,6 @@ transition morphisms.
 \begin{lemma}[Eventual equality of descended quasi-compact opens]
   \label{lemma:nagata-qc-open-eq-eventually}
   \uses{def:nagata-qc-open-equality-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9599,7 +9495,6 @@ transition morphisms.
   \label{def:nagata-affine-fp-descent}
   \uses{def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9626,7 +9521,6 @@ transition morphisms.
 \begin{lemma}[Property of affine finite-presentation descent]
   \label{lemma:nagata-affine-fp-descends}
   \uses{def:nagata-affine-fp-descent}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9651,7 +9545,6 @@ transition morphisms.
     def:nagata-affine-fp-descent,
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9682,7 +9575,6 @@ transition morphisms.
   {\cite[\href{https://stacks.math.columbia.edu/tag/01ZM}{Tag 01ZM(2)}]{stacks-project}}]
   \label{lemma:nagata-morphism-descends}
   \uses{def:nagata-morphism-descent}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9709,7 +9601,6 @@ transition morphisms.
   \uses{def:nagata-qc-open-equality-stage,
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9728,7 +9619,6 @@ transition morphisms.
   {\cite[\href{https://stacks.math.columbia.edu/tag/01ZM}{Tag 01ZM(3)}]{stacks-project}}]
   \label{lemma:nagata-morphism-eq-eventually}
   \uses{def:nagata-morphism-equality-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9750,7 +9640,6 @@ transition morphisms.
 
 \begin{definition}[Selected finite relative affine presentation]
   \label{def:nagata-relative-finite-affine-presentation}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9780,7 +9669,6 @@ transition morphisms.
     lemma:nagata-qc-open-descends,
     lemma:nagata-morphism-descends,
     def:nagata-directed-finite-upper-bound}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9803,7 +9691,6 @@ transition morphisms.
 \begin{lemma}[Property of the descended finite affine presentation]
   \label{lemma:nagata-relative-gluing-datum-descends}
   \uses{def:nagata-relative-gluing-datum-descent}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9831,7 +9718,6 @@ transition morphisms.
     def:nagata-morphism-equality-stage,
     def:nagata-directed-finite-upper-bound,
     lemma:nagata-filtered-colimit-finite-data}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9853,7 +9739,6 @@ transition morphisms.
 \begin{lemma}[The relative gluing axioms hold at the selected stage]
   \label{lemma:nagata-relative-gluing-axioms-eventually}
   \uses{def:nagata-relative-gluing-valid-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -9879,7 +9764,6 @@ transition morphisms.
 \begin{definition}[Finite-presentation descent construction]
   \label{def:nagata-finite-presentation-descent}
   \uses{def:nagata-relative-gluing-valid-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -10003,7 +9887,6 @@ transition morphisms.
 \begin{definition}[Stage at which a finite-presentation map is closed]
   \label{def:nagata-closed-immersion-stage}
   \uses{lemma:nagata-closed-immersion-stage-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -10021,7 +9904,6 @@ transition morphisms.
 \begin{lemma}[A finite-presentation closed immersion descends at the selected stage]
   \label{lemma:nagata-closed-immersion-descends}
   \uses{def:nagata-closed-immersion-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -10082,7 +9964,6 @@ transition morphisms.
   \label{def:nagata-separated-descent-stage}
   \uses{def:nagata-finite-presentation-descent,
     lemma:nagata-separated-descent-stage-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the finite-presentation and
     Noetherian descent is done in one step by
     \texttt{AlgebraicGeometry.Scheme.exists\_isPullback\_of\_finitePresentation\_of\_isSeparated}
@@ -10194,7 +10075,6 @@ must be checked in Lean:
     prop:nagata-relative-proj-functoriality,
     lemma:nagata-relative-proj-invertible-tensor-powers,
     thm:nagata-global-blowup-projective}
-  \lean{}
   \statusnote{Bypassed by the formalized route: this lemma is the record of
     the replacement itself.  The relative-Proj interface above is realized by
     \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData} together with the
@@ -10238,7 +10118,6 @@ must be checked in Lean:
     lemma:nagata-relative-gluing-datum-descends,
     lemma:nagata-finite-presentation-descends,
     lemma:nagata-closed-immersion-stage-exists}
-  \lean{}
   \statusnote{Bypassed by the formalized route: this lemma is the record of
     the replacement itself.  The stagewise approximation above is subsumed by
     \texttt{AlgebraicGeometry.Scheme.nonempty\_noetherianApproximation} and
@@ -10248,8 +10127,8 @@ must be checked in Lean:
   the verified Mathlib APIs for cofiltered limits with affine transition maps
   and for relative gluing.  In particular,
   \Cref{prop:nagata-noetherian-inverse-system} supplies the selected system,
-  \Cref{lemma:nagata-relative-gluing-datum-descends,
-  lemma:nagata-finite-presentation-descends} supplies the finite-stage model,
+  \Cref{lemma:nagata-relative-gluing-datum-descends} and
+  \Cref{lemma:nagata-finite-presentation-descends} supply the finite-stage model,
   and \Cref{lemma:nagata-closed-immersion-stage-exists} supplies the common
   closed stage.  The remaining stage arguments are finite affine coefficient
   calculations, so they are local wrapper lemmas rather than missing
@@ -10288,9 +10167,9 @@ following.
 
 \begin{description}
   \item[Relative Proj.]  The relative Proj interface of
-    \Cref{def:nagata-relative-proj,lemma:nagata-relative-proj-exists,
-    prop:nagata-relative-proj-functoriality} and its base-change and
-    tensor-power companions are never formalized as primitives.  The blow-up
+    \Cref{def:nagata-relative-proj}, \Cref{lemma:nagata-relative-proj-exists}
+    and \Cref{prop:nagata-relative-proj-functoriality}, and its base-change
+    and tensor-power companions, are never formalized as primitives.  The blow-up
     is glued from the affine Proj charts with
     \texttt{AlgebraicGeometry.Scheme.Cover.RelativeGluingData}, as
     \Cref{lemma:nagata-relative-proj-current-api} explains.
@@ -10366,7 +10245,6 @@ made inside the final theorem.
 \begin{definition}[Finite-presentation envelope used in the final assembly]
   \label{def:nagata-final-fp-envelope}
   \uses{def:nagata-finite-type-closed-in-fp}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10384,7 +10262,6 @@ made inside the final theorem.
 
   \label{lemma:nagata-final-fp-envelope}
   \uses{def:nagata-final-fp-envelope}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10405,7 +10282,6 @@ made inside the final theorem.
 \begin{definition}[Noetherian base system used in the final assembly]
   \label{def:nagata-final-noetherian-base-system}
   \uses{def:nagata-noetherian-inverse-system, def:nagata-glued-limit-comparison}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10424,7 +10300,6 @@ made inside the final theorem.
 \begin{lemma}[Properties of the final Noetherian base system]
   \label{lemma:nagata-final-noetherian-base-system}
   \uses{def:nagata-final-noetherian-base-system}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10450,7 +10325,6 @@ made inside the final theorem.
     lemma:nagata-final-fp-envelope,
     lemma:nagata-final-noetherian-base-system,
     def:nagata-separated-descent-stage}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10478,7 +10352,6 @@ made inside the final theorem.
 \begin{lemma}[Properties of the final descended model]
   \label{lemma:nagata-final-descended-model}
   \uses{def:nagata-final-descended-model}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10504,7 +10377,6 @@ made inside the final theorem.
   \uses{def:nagata-final-descended-model,
     def:nagata-noetherian-compactification,
     lemma:nagata-final-descended-model}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10522,7 +10394,6 @@ made inside the final theorem.
 \begin{lemma}[Property of the selected Noetherian compactification]
   \label{lemma:nagata-final-noetherian-compactification}
   \uses{def:nagata-final-noetherian-compactification}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10550,7 +10421,6 @@ made inside the final theorem.
     def:nagata-final-descended-model,
     lemma:nagata-final-noetherian-compactification,
     lemma:nagata-final-descended-model}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10634,7 +10504,6 @@ made inside the final theorem.
     def:nagata-closed-subscheme-compactification,
     def:nagata-scheme-theoretic-image,def:nagata-scheme-image-factor,
     lemma:nagata-scheme-image-universal}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10666,7 +10535,6 @@ made inside the final theorem.
   \label{lemma:nagata-final-ambient-proper}
   \uses{def:nagata-final-compactification,
     lemma:nagata-final-compactification-spec}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10691,7 +10559,6 @@ made inside the final theorem.
     lemma:nagata-scheme-image-restrict-open,
     lemma:nagata-scheme-image-universal,
     lemma:nagata-scheme-image-of-closed-immersion}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10724,7 +10591,6 @@ made inside the final theorem.
   \label{lemma:nagata-final-factorization}
   \uses{def:nagata-final-compactification,
     lemma:nagata-final-compactification-spec}
-  \lean{}
   \statusnote{Bypassed by the formalized route: the final assembly is carried
     out inside \texttt{AlgebraicGeometry.NagataCompactification} and
     \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
@@ -10827,7 +10693,6 @@ generating set of $I$, cover the blow-up.
 \begin{definition}[Quasi-domination,
   {\cite[Def.~2.1]{ConradNagata}}]
   \label{def:nagata-conrad-quasi-domination}
-  \lean{}
   \statusnote{Bypassed by the formalized route: quasi-dominations are not
     introduced in Lean.  The extension statements are proved directly from
     scheme-theoretic dominance and separatedness, through
@@ -10857,7 +10722,6 @@ are glued along isomorphic open subschemes.
   quasi-domination of that open, {\cite[Rem.~2.5]{ConradNagata}}]
   \label{lemma:nagata-conrad-morphism-is-quasi-domination}
   \uses{def:nagata-conrad-quasi-domination}
-  \lean{}
   \statusnote{Bypassed by the formalized route: quasi-dominations are not
     introduced in Lean.  The extension statements are proved directly from
     scheme-theoretic dominance and separatedness, through
@@ -10878,7 +10742,6 @@ are glued along isomorphic open subschemes.
   {\cite[\S2, p.~12]{ConradNagata}}]
   \label{lemma:nagata-conrad-quasi-domination-proper-target}
   \uses{def:nagata-conrad-quasi-domination}
-  \lean{}
   \statusnote{Bypassed by the formalized route: quasi-dominations are not
     introduced in Lean.  The extension statements are proved directly from
     scheme-theoretic dominance and separatedness, through
@@ -10975,7 +10838,6 @@ are glued along isomorphic open subschemes.
   \uses{def:nagata-strict-transform,
     def:nagata-blowup-chart-ring,
     prop:nagata-affine-blowup-chart-cover}
-  \lean{}
   \statusnote{Bypassed by the formalized route: Deligne's disjointness blow-up
     is formalized as the single statement
     \texttt{AlgebraicGeometry.disjoint\_closure\_range\_of\_blowupMap\_sup},
@@ -11024,7 +10886,6 @@ are glued along isomorphic open subschemes.
   \label{def:nagata-conrad-disjointness-setup}
   \uses{def:nagata-scheme-theoretic-image,
     def:nagata-global-blowup}
-  \lean{}
   \statusnote{Bypassed by the formalized route: Deligne's disjointness blow-up
     is formalized as the single statement
     \texttt{AlgebraicGeometry.disjoint\_closure\_range\_of\_blowupMap\_sup},
