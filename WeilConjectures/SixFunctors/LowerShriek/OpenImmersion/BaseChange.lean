@@ -269,9 +269,18 @@ lemma Etale.upperStarBaseChange_eq :
       Etale.openImmersionRestrictionBaseChange, Etale.lowerStarComp,
       GrothendieckTopology.localizationRestrictionLowerStarAdjunction,
       GrothendieckTopology.lowerStarComp]
-    simp [Etale.lowerStar_map_hom_app, Functor.sheafPushforwardContinuousNatTrans,
-      Adjunction.sheafPushforwardContinuous, Adjunction.whiskerLeft]
-    show F.obj.map _ ≫ F.obj.map _ ≫ 𝟙 _ ≫ F.obj.map _ = _
+    simp only [Functor.comp_obj, Functor.id_obj, Adjunction.sheafPushforwardContinuous,
+      Adjunction.whiskerLeft, Functor.whiskeringLeft_obj_obj, Adjunction.op_unit,
+      Adjunction.op_counit, Functor.sheafPushforwardContinuousNatTrans, ObjectProperty.ι_obj,
+      NatTrans.comp_app, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Functor.whiskerRight_app,
+      Functor.comp_map, Functor.id_map, Functor.leftUnitor_hom_app, comp_id, id_comp,
+      ObjectProperty.FullSubcategory.comp_hom, assoc, Functor.leftUnitor_inv_app,
+      Functor.op_obj, NatTrans.op_app, MorphismProperty.Over.mapPullbackAdj_counit_app,
+      Etale.lowerStar_map_hom_app, MorphismProperty.Over.mapPullbackAdj_unit_app,
+      MorphismProperty.Over.pullback_obj_left, MorphismProperty.Over.pullback_obj_hom,
+      Functor.sheafPushforwardContinuousComp'_hom_app_hom_app, Iso.symm_inv]
+    change F.obj.map _ ≫ F.obj.map _ ≫ 𝟙 _ ≫ F.obj.map _ = _
     rw [Category.id_comp, ← Functor.map_comp, ← Functor.map_comp]
     congr 1
     apply Quiver.Hom.unop_inj
