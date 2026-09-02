@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-!
 # Natural transformations between functors on bounded below homotopy categories
@@ -14,6 +15,13 @@ A natural transformation `τ : F ⟶ G` of additive functors induces a natural t
 `F.mapHomotopyCategoryPlus ⟶ G.mapHomotopyCategoryPlus` between the induced functors on the
 bounded below homotopy categories (`CategoryTheory.NatTrans.mapHomotopyCategoryPlus`),
 compatibly with identities and compositions.
+
+Moreover, the functor `(𝟭 C).mapHomotopyCategoryPlus` induced by the identity functor is
+isomorphic to the identity functor (`CategoryTheory.Functor.mapHomotopyCategoryPlusIdIso`).
+Both this isomorphism and Mathlib's `CategoryTheory.Functor.mapHomotopyCategoryPlusCompIso`
+attached to `Iso.refl (F ⋙ G)` are in fact identities
+(`CategoryTheory.Functor.mapHomotopyCategoryPlusIdIso_hom_app_eq_id` and
+`CategoryTheory.Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app`).
 
 This material is destined for `Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean`, next to
 `CategoryTheory.Functor.mapHomotopyCategoryPlus`.
@@ -69,3 +77,73 @@ lemma mapHomotopyCategoryPlus_comp {F G H : C ⥤ D}
     (HomotopyCategory.Plus C)).preimage_comp (Y := G.mapHomotopyCategoryPlus) _ _
 
 end CategoryTheory.NatTrans
+
+namespace CategoryTheory.Functor
+
+variable (C : Type u₁) [Category.{v₁} C] [Preadditive C]
+
+/-- The functor on bounded below homotopy categories induced by the identity functor is
+isomorphic to the identity functor: the bounded below counterpart of
+`CategoryTheory.Functor.mapHomotopyCategoryIdIso`. -/
+noncomputable def mapHomotopyCategoryPlusIdIso :
+    (𝟭 C).mapHomotopyCategoryPlus ≅ 𝟭 (HomotopyCategory.Plus C) :=
+  fullyFaithfulCancelRight (HomotopyCategory.Plus.ι C)
+    (isoWhiskerLeft (HomotopyCategory.Plus.ι C)
+        (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)) ≪≫
+      (HomotopyCategory.Plus.ι C).rightUnitor ≪≫
+      (HomotopyCategory.Plus.ι C).leftUnitor.symm)
+
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlusIdIso_hom_app (K : HomotopyCategory.Plus C) :
+    (HomotopyCategory.Plus.ι C).map ((mapHomotopyCategoryPlusIdIso C).hom.app K) =
+      (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)).hom.app K.obj := by
+  rw [mapHomotopyCategoryPlusIdIso, fullyFaithfulCancelRight_hom_app,
+    Functor.map_preimage]
+  simp
+
+@[simp]
+lemma ι_map_mapHomotopyCategoryPlusIdIso_inv_app (K : HomotopyCategory.Plus C) :
+    (HomotopyCategory.Plus.ι C).map ((mapHomotopyCategoryPlusIdIso C).inv.app K) =
+      (mapHomotopyCategoryIdIso C (ComplexShape.up ℤ)).inv.app K.obj := by
+  rw [mapHomotopyCategoryPlusIdIso, fullyFaithfulCancelRight_inv_app,
+    Functor.map_preimage]
+  simp
+
+/-- The isomorphism `Functor.mapHomotopyCategoryPlusIdIso` is the identity: this is the
+bounded below counterpart of `Functor.mapHomotopyCategoryIdIso_hom_app_eq_id`. -/
+lemma mapHomotopyCategoryPlusIdIso_hom_app_eq_id [Limits.HasBinaryBiproducts C]
+    (K : HomotopyCategory.Plus C) :
+    (mapHomotopyCategoryPlusIdIso C).hom.app K = 𝟙 K := by
+  apply (HomotopyCategory.Plus.ι C).map_injective
+  refine Eq.trans ?_ ((HomotopyCategory.Plus.ι C).map_id K).symm
+  rw [ι_map_mapHomotopyCategoryPlusIdIso_hom_app]
+  exact mapHomotopyCategoryIdIso_hom_app_eq_id C (ComplexShape.up ℤ) K.obj
+
+/-- The isomorphism `Functor.mapHomotopyCategoryPlusCompIso` attached to `Iso.refl (F ⋙ G)`
+is the identity: this is the bounded below counterpart of
+`Functor.mapHomotopyCategoryCompIso_refl_hom_app`. -/
+lemma mapHomotopyCategoryPlusCompIso_refl_hom_app {C D E : Type*} [Category C] [Category D]
+    [Category E] [Preadditive C] [Preadditive D] [Preadditive E]
+    [Limits.HasBinaryBiproducts C] [Limits.HasBinaryBiproducts D]
+    [Limits.HasBinaryBiproducts E] (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory.Plus C) :
+    (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).hom.app K = 𝟙 _ := by
+  apply (HomotopyCategory.Plus.ι E).map_injective
+  refine Eq.trans ?_ ((HomotopyCategory.Plus.ι E).map_id _).symm
+  have h : (HomotopyCategory.Plus.ι E).map
+      ((mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).hom.app K) =
+      (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).hom.app K.obj := rfl
+  rw [h]
+  exact mapHomotopyCategoryCompIso_refl_hom_app (ComplexShape.up ℤ) F G K.obj
+
+/-- The inverse form of `Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app`. -/
+lemma mapHomotopyCategoryPlusCompIso_refl_inv_app {C D E : Type*} [Category C] [Category D]
+    [Category E] [Preadditive C] [Preadditive D] [Preadditive E]
+    [Limits.HasBinaryBiproducts C] [Limits.HasBinaryBiproducts D]
+    [Limits.HasBinaryBiproducts E] (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory.Plus C) :
+    (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).inv.app K = 𝟙 _ :=
+  congrArg Iso.inv (Iso.ext (mapHomotopyCategoryPlusCompIso_refl_hom_app F G K) :
+    (mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G))).app K = Iso.refl _)
+
+end CategoryTheory.Functor
