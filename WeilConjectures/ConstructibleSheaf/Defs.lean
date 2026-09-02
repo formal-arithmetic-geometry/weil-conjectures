@@ -59,13 +59,12 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
 ## Implementation notes
 
 - The pullback `Etale.upperStar` is defined by left Kan extension along base change
-  followed by sheafification, and the Kan extensions in question are not known to exist
-  for an arbitrary `f` with current mathlib: the full small étale site is not known to be
-  essentially small (only the small affine étale site
-  `AlgebraicGeometry.Scheme.AffineEtale` is). Mathematically they always exist; they are
-  provided by the sorried instance
-  `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
+  followed by sheafification. The Kan extensions in question exist for an arbitrary `f`
+  without any smallness of the full small étale site, by the instance
+  `CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
+  `WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`: the indexing comma
+  categories have objects in `Type (u + 1)` and `Hom`-types in `Type u`, and `A` has all
+  colimits of size `u + 1`.
 - Sheafification is likewise not assumed here. Restricting a sheaf to a member of an étale
   cover needs it for the *localizations* of the small étale sites, and for a Grothendieck
   abelian `A` these are supplied by the sorried instances
@@ -227,9 +226,9 @@ The stratification records a choice of scheme structure on each stratum via the 
 condition does not depend on this choice.
 
 The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
-provided by the sorried instance
-`CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`. Stating
+provided by the instance
+`CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
+`WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`. Stating
 `IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
 étale sites of the strata; since the
 stratification is existentially quantified, this is a hypothesis of the definition,

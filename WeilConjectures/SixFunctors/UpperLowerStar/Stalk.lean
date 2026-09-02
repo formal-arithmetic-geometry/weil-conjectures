@@ -63,13 +63,13 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed 
 
 /-- All left Kan extensions of `A`-valued presheaves along the opposite of base change
 `f.Etale` exist. This is the `P = @Etale` case of
-`CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback`, restated for
-`AlgebraicGeometry.Scheme.Hom.Etale`; it is what makes the sheaf pullback along `f.Etale`
-available, hence also the fibre functor on sheaves of the point
+`CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback`, restated
+for `AlgebraicGeometry.Scheme.Hom.Etale`; it is what makes the sheaf pullback along
+`f.Etale` available, hence also the fibre functor on sheaves of the point
 `(pointSmallEtale s).comap f.Etale _`. -/
 instance Scheme.Hom.hasLeftKanExtension_op_etale (G : Y.Etaleᵒᵖ ⥤ A) :
     f.Etale.op.HasLeftKanExtension G :=
-  GrothendieckTopology.hasLeftKanExtension_op_overPullback A @AlgebraicGeometry.Etale f G
+  inferInstance
 
 /-- The stalk of a pullback of étale sheaves is the stalk at the image point: for a morphism
 of schemes `f : X ⟶ Y` and a geometric point `s : Spec Ω ⟶ X`, the stalk of `f^* F` at `s`

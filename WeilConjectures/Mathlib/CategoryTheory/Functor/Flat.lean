@@ -5,43 +5,66 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.CategoryTheory.Functor.Flat
 
 /-!
-
-# The pointwise formula for left Kan extension, without smallness
+# Left exactness of left Kan extension along a flat functor, without smallness
 
 `CategoryTheory.Functor.lanEvaluationIsoColim` in Mathlib identifies the evaluation of the
 left Kan extension functor `F.lan` at `X` with the colimit over the comma category
 `CostructuredArrow F X`, but only for small categories. This file provides the same
 isomorphism assuming only that the pointwise left Kan extensions along `F` exist and that
 the colimits of shape `CostructuredArrow F X` exist in the target
-(`CategoryTheory.Functor.lanEvaluationIsoColim'`). It is what makes left Kan extension along
-a representably flat functor left exact when the target has exact filtered colimits of
-the relevant size, see
-`CategoryTheory.GrothendieckTopology.preservesFiniteLimits_op_lan_overPullback`.
+(`CategoryTheory.Functor.lanEvaluationIsoColim'`).
 
-This is taken from the `proetale` dependency
-(`Proetale.Topology.Comparison.CohomologyComparison`), which is not otherwise imported here.
+The consequence we are after is `CategoryTheory.preservesFiniteLimits_op_lan_of_flat`: left
+Kan extension along the opposite of a representably flat functor is left exact as soon as
+the pointwise left Kan extensions exist and filtered colimits of the relevant size are exact
+in the target. This is the variant of `CategoryTheory.lan_preservesFiniteLimits_of_flat`
+that replaces smallness of the categories and concreteness of the target by AB5 at the
+relevant size.
 
+`lanEvaluationIsoColim'` is taken verbatim from the `proetale` dependency
+(`Proetale.Topology.Comparison.CohomologyComparison`), which is not otherwise imported here;
+the import direction would be the wrong way round and that file is heavy.
+
+TODO: upstream `lanEvaluationIsoColim'` to `Mathlib/CategoryTheory/Functor/Flat.lean`,
+deriving Mathlib's `lanEvaluationIsoColim` from it (and renaming: the prime is only kept
+here to match the copy in `proetale`), then drop this copy and the one in `proetale`.
 -/
 
 @[expose] public section
 
 universe v₁ v₂ v₃ u₁ u₂ u₃
 
-namespace CategoryTheory.Functor
+namespace CategoryTheory
 
-open Limits
+open Limits Opposite
 
 variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
   {H : Type u₃} [Category.{v₃} H]
+
+namespace Functor
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Variant of `CategoryTheory.Functor.lanEvaluationIsoColim` without the smallness
 assumptions on the categories involved: the evaluation of `F.lan` at `X` is the colimit
-over the costructured arrows over `X`. -/
+over the costructured arrows over `X`.
+
+```
+                            F.lan
+       (C ⥤ H) ───────────────────────────────▶ (D ⥤ H)
+          │                                        │
+  whisker │                                        │ evaluation at `X`
+  by proj │                                        │
+          ▼                                        ▼
+(CostructuredArrow F X ⥤ H) ────────colim────────▶ H
+```
+
+Here `whisker by proj` is restriction along `CostructuredArrow.proj F X`.
+-/
 noncomputable def lanEvaluationIsoColim' (F : C ⥤ D) (X : D)
     [∀ G : C ⥤ H, F.HasPointwiseLeftKanExtension G]
     [HasColimitsOfShape (CostructuredArrow F X) H] :
@@ -63,4 +86,27 @@ noncomputable def lanEvaluationIsoColim' (F : C ⥤ D) (X : D)
       ι_colimMap, Functor.whiskerLeft_app]
     rfl)
 
-end CategoryTheory.Functor
+end Functor
+
+/-- Left Kan extension along the opposite of a representably flat functor `F` is left
+exact, provided the pointwise left Kan extensions along `F.op` exist and filtered colimits
+of shape the comma categories `CostructuredArrow F.op K` are exact in the target.
+
+This is the variant of `CategoryTheory.lan_preservesFiniteLimits_of_flat` that assumes AB5
+at the relevant size instead of smallness of `C` and `D` and concreteness of `H`. -/
+instance preservesFiniteLimits_op_lan_of_flat (F : C ⥤ D) [RepresentablyFlat F]
+    [∀ G : Cᵒᵖ ⥤ H, F.op.HasPointwiseLeftKanExtension G]
+    [HasFiniteLimits H] [HasFilteredColimitsOfSize.{v₁, max u₁ v₂} H]
+    [AB5OfSize.{v₁, max u₁ v₂} H] :
+    PreservesFiniteLimits (F.op.lan : (Cᵒᵖ ⥤ H) ⥤ (Dᵒᵖ ⥤ H)) := by
+  constructor
+  intro J _ _
+  refine preservesLimitsOfShape_of_evaluation _ _ fun K ↦ ?_
+  -- flatness of `F` makes `StructuredArrow (unop K) F` cofiltered, hence
+  -- `CostructuredArrow F.op K` filtered, and the Kan extension is pointwise a filtered
+  -- colimit, which is exact by AB5
+  have : IsFiltered (CostructuredArrow F.op K) :=
+    IsFiltered.of_equivalence (structuredArrowOpEquivalence F (unop K))
+  exact preservesLimitsOfShape_of_natIso (Functor.lanEvaluationIsoColim' F.op K).symm
+
+end CategoryTheory
