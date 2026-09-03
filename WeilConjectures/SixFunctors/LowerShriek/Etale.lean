@@ -45,6 +45,28 @@ Hence `f_!` carries no hypotheses beyond the standing assumptions on `A`.
   values in an abelian category is left exact. This one needs sheafification to be *exact*,
   not merely to exist.
 
+## TODO
+
+- The composition isomorphism `(fg)_! ≅ f_! g_!`. Nothing in this library constructs it, at
+  the sheaf level or any other: a compactification of a composite has to be built out of
+  compactifications of the two factors before the comparison can even be stated.
+
+- Invariance with the choice of compactification. The comparison along a refinement
+  `r : c.Refinement d` of two compactifications of `f`, whose square over `X` is cartesian,
+  does exist at both levels:
+  `AlgebraicGeometry.Compactification.Refinement.openImmersionLowerShriekBaseChange` is the
+  comparison `(c.i)_!open ⟶ (d.i)_!open ⋙ (r.hom)^*` of the extensions by zero, an
+  isomorphism for a cartesian square by
+  `AlgebraicGeometry.Compactification.Refinement.isIso_openImmersionLowerShriekBaseChange`,
+  and `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison` is
+  the comparison `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+` on the bounded below derived category; both
+  satisfy their identity and composition laws, and any two compactifications of `f` admit a
+  common refinement by
+  `AlgebraicGeometry.Compactification.exists_common_refinement_isSchemeTheoreticallyDominant`.
+  What is missing is that the derived comparison is an *isomorphism*, which is proper base
+  change; proper base change is not formalized here. So `f_!` is not yet known to be
+  independent of the choice of compactification.
+
 -/
 
 @[expose] public section
@@ -107,9 +129,5 @@ instance Etale.preservesFiniteLimits_lowerShriek :
   exact comp_preservesFiniteLimits _ _
 
 end LowerShriek
-
---TODO: the composition isomorphism : `(fg)_! ≅ f_! g_!`
-
---TODO: invarience with choice of compcatification
 
 end AlgebraicGeometry

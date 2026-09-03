@@ -18,21 +18,21 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
 
 # Derived Lower Shriek
 
-# Main Results
+## Main results
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification` : `Rf_!` with respect
-  to a compcatification `c`, with scoped notation `Rf_!(c)[A]`.
+  to a compactification `c`, with scoped notation `Rf_!(c)[A]`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlus` : `Rf_!`
-  on bounded below derived category with respect to a compcatification `c`, with scoped
+  on bounded below derived category with respect to a compactification `c`, with scoped
   notation `Rf_!(c)[A]+`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriek` : `Rf_!`
-  specifying to the chosen compcatification `HasCompactification.compactification`, with
+  specifying to the chosen compactification `HasCompactification.compactification`, with
   scoped notation `R(f)_![A]`.
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus` : `Rf_!` on bounded below derived
-  category specifying to the chosen compcatification `HasCompactification.compactification`,
+  category specifying to the chosen compactification `HasCompactification.compactification`,
   with scoped notation `R(f)_![A]+`.
 
 - `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`, with scoped notation
