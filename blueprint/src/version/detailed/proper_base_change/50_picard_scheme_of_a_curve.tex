@@ -2947,6 +2947,7 @@ is exact.
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-morphism-conventions}
 \emph{Detection over a faithfully flat base.}  For a complex
 $C^\bullet$ of flat $A$-modules, $H^i(C^\bullet\otimes_AB)
 =H^i(C^\bullet)\otimes_AB$ for every $A$-algebra $B$: this is the
@@ -3014,6 +3015,31 @@ generate the unit ideal.  The assertion is therefore
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Čech criterion for vanishing of cohomology on a basis]
+\label{lem:pc-cech-vanishing-criterion}
+Let $X$ be a ringed space, let $\mathcal B$ be a basis for the topology of
+$X$ and let $\cF$ be an $\cO_X$-module.  Assume there is a set
+$\mathrm{Cov}$ of open coverings such that:
+\begin{enumerate}
+\item for every $\mathcal U:U=\bigcup_{i\in I}U_i$ in $\mathrm{Cov}$ one has
+$U\in\mathcal B$, $U_i\in\mathcal B$, and $U_{i_0\dots i_p}\in\mathcal B$
+for every multi-index;
+\item for every $U\in\mathcal B$ the coverings of $U$ occurring in
+$\mathrm{Cov}$ form a cofinal system among the open coverings of $U$;
+\item $\check H^p(\mathcal U,\cF)=0$ for all $p>0$ and all
+$\mathcal U\in\mathrm{Cov}$.
+\end{enumerate}
+Then $H^p(U,\cF)=0$ for all $p>0$ and all $U\in\mathcal B$.
+\uses{def:pc-scheme}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Stacks Project, Cohomology of Sheaves,
+Lemma~20.11.9 (the section is Cohomology of Sheaves, Section~20.11,
+\stacksproject{01EO}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Vanishing of cohomology on affine schemes]
 \label{lem:pc-affine-vanishing}
@@ -3022,10 +3048,9 @@ $\cO_X$-module.  Then $H^p(X,\cF)=0$ for all $p>0$.
 \uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-cech-complex}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-cech-complex}
-Apply the standard Čech criterion (Stacks Project, Cohomology,
-Lemma 20.11.9; the section is Cohomology, Section 20.11,
-\stacksproject{01EO}): let
+\uses{lem:pc-affine-cech-complex,lem:pc-cech-vanishing-criterion}
+Apply the standard Čech criterion
+(\Cref{lem:pc-cech-vanishing-criterion}): let
 $\mathcal B$ be the basis of affine opens of $X$ and $\mathrm{Cov}$ the
 set of the standard coverings $\{D(f_i)\}$ of affine opens; then
 (1) the generating open subsets are closed under finite intersections
@@ -3168,6 +3193,7 @@ Then every finite separable field extension $K/k$ is trivial: $K=k$.
 \uses{def:pc-separably-closed}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-separably-closed,def:pc-field-tower}
 The extension is finite and separable, hence simple: $K=k[\alpha]$ for some
 $\alpha$ (primitive element theorem, classical).  Let $m_\alpha\in k[T]$ be
 the minimal polynomial of $\alpha$; it is nonconstant and separable, hence
@@ -3184,6 +3210,7 @@ finite field extension.  Then $K=\Omega$.
 \uses{def:pc-field-tower}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-field-tower}
 Let $\alpha\in K$.  The minimal polynomial $m_\alpha\in\Omega[T]$ is
 irreducible; over the algebraically closed field it has a root, and an
 irreducible polynomial with a root is linear, so $\deg m_\alpha=1$ and
@@ -3322,6 +3349,34 @@ $1$).
 
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The canonical base change map]
+\label{lem:pc-base-change-map}
+Let
+\[
+\begin{array}{ccc}
+X' & \xrightarrow{g'} & X\\[-2pt]
+\downarrow{\scriptstyle f'} & & \downarrow{\scriptstyle f}\\[-2pt]
+S' & \xrightarrow{g} & S
+\end{array}
+\]
+be a commutative diagram of ringed spaces in which $g$ and $g'$ are flat,
+and let $\cF^\bullet$ be a bounded below complex of $\cO_X$-modules.  Then
+there is a canonical map
+\[
+g^*Rf_*\cF^\bullet\;\longrightarrow\;R(f')_*(g')^*\cF^\bullet
+\]
+in $D^+(\cO_{S'})$.  Taking cohomology sheaves, a quasi-coherent
+$\cO_X$-module $\cF$ with $\cF'=(g')^*\cF$ acquires canonical
+\emph{base change maps} $g^*R^if_*\cF\to R^if'_*\cF'$ for all $i\ge0$.
+\uses{def:pc-scheme,def:pc-derived-category,def:pc-derived-direct-image}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Stacks Project, Cohomology of Sheaves,
+Lemma~20.17.1 (\stacksproject{02N7}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Cohomology and flat base change]
 \label{lem:pc-flat-base-change-cohom}
@@ -3347,7 +3402,7 @@ H^i(X,\cF)\otimes_AB\;\cong\;H^i(X',\cF')\qquad\text{for all }i .
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-finite-support-hi,lem:pc-cech-computes,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pcb-cech-spectral}
+\uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pcb-cech-spectral}
 \emph{The affine case (2), $X$ separated.}  Let $A\to B$ be flat and let
 $X$ be quasi-compact and separated over $A$; choose a finite affine
 open covering $\mathcal U:X=U_1\cup\dots\cup U_t$.  The base changes
@@ -3419,12 +3474,10 @@ $H^i(X,\cF)=H^0(S,R^if_*\cF)$; this is Cohomology of Schemes,
 Lemma 30.4.6, \stacksproject{01XK}).
 Pullback of quasi-coherent modules corresponds to $\otimes_AB$; by
 (2) the two quasi-coherent $\cO_{S'}$-modules are associated with the
-same $B$-module, so the canonical base change map
-(Cohomology of Schemes, Lemma 30.5.2,
-\stacksproject{02KH}; the canonical
-map of Cohomology, Lemma 20.17.1,
-\stacksproject{02N7}) is an
-isomorphism.
+same $B$-module, so the canonical base change map of
+\Cref{lem:pc-base-change-map} is an isomorphism.  (The result proved
+here is Cohomology of Schemes, Lemma 30.5.2,
+\stacksproject{02KH}.)
 \end{proof}
 
 
@@ -3474,8 +3527,9 @@ $H^i(Y,\cF)=0$ for $i>d$.
 \uses{def:pc-scheme,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-This is a cited external input: EGA III$_1$,\,(3.2.1), equivalently Cohomology on Sites,
-Proposition~21.22.4 (\stacksproject{02UZ}).  It is not decomposed here.
+This is a cited external input: Grothendieck, \emph{Tôhoku}, Théorème~3.6.5, equivalently
+Cohomology of Sheaves, Section~20.20 (Vanishing on Noetherian topological spaces),
+Proposition~20.20.7 (\stacksproject{02UZ}).  It is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -3489,8 +3543,8 @@ quasi-coherent $\cO_X$-module $\cF$ one has
 \[
 H^i(X,\cF)=0\qquad\text{for all }i\ge2 .
 \]
-(EGA III$_1$, \,(3.2.1): cohomology of a Noetherian scheme of
-dimension $d$ vanishes above $d$; here $d=1$.)
+(Grothendieck, \emph{Tôhoku}, Théorème~3.6.5: cohomology of a
+Noetherian scheme of dimension $d$ vanishes above $d$; here $d=1$.)
 \uses{def:pc-curve,def:pc-smooth-projective-curve,def:pc-projective-morphism}
 \end{lemma}
 \begin{proof}
