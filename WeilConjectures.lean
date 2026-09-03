@@ -425,6 +425,7 @@ public import WeilConjectures.ZetaLinearAlgebra.Hankel
 public import WeilConjectures.ZetaLinearAlgebra.IntegralRecurrence
 public import WeilConjectures.ZetaLinearAlgebra.NormalizedGauss
 public import WeilConjectures.ZetaLinearAlgebra.Pairing
+public import WeilConjectures.ZetaLinearAlgebra.Rationality
 public import WeilConjectures.ZetaLinearAlgebra.Recovery
 public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
