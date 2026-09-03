@@ -2266,12 +2266,10 @@ $\cI_{D_Y}=g^*\cI_D$ and $\cO_Y(D_Y)\cong g^*\cO_S(D)$.
 invertible $\cO_S$-module; by \Cref{lem:pc-tensor-dual-invertible} its
 dual $\cO_S(D)=\cI_D^\vee$ is invertible.
 
-(2) The ideal sheaf of the base change is the pullback of the ideal
-sheaf (\Cref{lem:pc-closed-imm-base-change}:
-$\cI_{D_Y}=\operatorname{im}(g^*\cI_D\to\cO_Y)=g^*\cI_D$; flatness of
-$g$ is not needed for the closed subscheme, and the identification is
-exact because $g^*$ is right exact), and the pullback of a dual is the
-dual of the pullback:
+(2) Since $g$ is flat, the ideal sheaf of the base change is the
+pullback of the ideal sheaf: $\cI_{D_Y}=g^*\cI_D$ by the flat case of
+\Cref{lem:pc-closed-imm-base-change}.  And the pullback of a dual is
+the dual of the pullback:
 $g^*(\cI_D^\vee)=\mathcal{H}om(g^*\cI_D,\cO_Y)$ (both are invertible
 and the canonical map is an isomorphism; check locally after a
 trivialization of $\cI_D$).  Hence
@@ -3780,30 +3778,45 @@ and the very ample module $\cO_{\PP^n_K}(1)$.
 \label{lem:pc-closed-imm-base-change}
 (Schemes, Lemma~26.18.2,
 \stacksproject{01JY}.)  Closed immersions
-are stable under arbitrary base change; if $i:Z\to X$ is a closed
+are stable under arbitrary base change: if $i:Z\to X$ is a closed
 immersion with ideal sheaf $\cI_Z$, and $g:X'\to X$ is a morphism, then
-$Z'=Z\times_XX'$ is a closed subscheme of $X'$ whose ideal sheaf is the
-pullback $g^*\cI_Z$; in particular for a closed immersion with a section
-structure this yields the canonical identification $\cI_{x_K}=\cI_x\otimes
-\cO_{X_K}$ for $\kappa(x)$-points.
+$Z'=Z\times_XX'$ is a closed subscheme of $X'$, and its ideal sheaf is
+the image of the canonical map $g^*\cI_Z\to\cO_{X'}$:
+\[
+\cI_{Z'}=\operatorname{im}\bigl(g^*\cI_Z\to\cO_{X'}\bigr).
+\]
+If moreover $g$ is flat, then $g^*\cI_Z\to\cO_{X'}$ is injective and
+$\cI_{Z'}=g^*\cI_Z$.  In particular, base change along a field
+extension $K/k$ is flat, so for a $\kappa(x)$-point this yields the
+canonical identification $\cI_{x_K}=\cI_x\otimes\cO_{X_K}$.
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
+\uses{lem:pc-flat-field}
 The first assertion is the statement that closed immersions are stable
 under base change (Schemes, Lemma 26.18.2,
 \stacksproject{01JY}): the pullback
-$Z\times_XX'\to X'$ is a closed immersion; for the ideal sheaf, the
-pullback $g^*\cI_Z$ is the ideal sheaf of the base change: the
-exactness argument: $g^*$ is right exact, so applying it to the exact
+$Z\times_XX'\to X'$ is a closed immersion.  For the ideal sheaf, $g^*$
+is right exact, so applying it to the exact
 sequence $0\to\cI_Z\to\cO_X\to i_*\cO_Z\to0$ gives an exact sequence
 $g^*\cI_Z\to\cO_{X'}\to g^*i_*\cO_Z\to0$; the last map is the canonical
-$\cO_{X'}\to i'_*\cO_{Z'}$, the image of $g^*\cI_Z$ in $\cO_{X'}$ is therefore
-its kernel, i.e.\ the ideal sheaf of $Z'$ (the base change of the closed
-immersion is the closed immersion with this ideal sheaf, by the affine
-computation: on affines, $A\to A/I$ and $B=A'$-tensored: the ideal of
-$Z'$ is $(A'\otimes_A I)$-image = the kernel of
-$A'\to A'\otimes_AA/I$).  This gives
-$\cI_{Z'}=g^*\cI_Z$.
+$\cO_{X'}\to i'_*\cO_{Z'}$, so the image of $g^*\cI_Z$ in $\cO_{X'}$ is
+its kernel, i.e.\ the ideal sheaf of $Z'$ (on affines, with $X=\Spec A$,
+$Z=\Spec A/I$ and $X'=\Spec A'$, this is the statement that the ideal of
+$Z'=\Spec(A'\otimes_AA/I)$ is the image of $A'\otimes_AI$ in $A'$, that
+image being the kernel of $A'\to A'\otimes_AA/I$).  This gives
+$\cI_{Z'}=\operatorname{im}(g^*\cI_Z\to\cO_{X'})$.
+
+The map $g^*\cI_Z\to\cO_{X'}$ need not be injective, so the image
+cannot in general be dropped from the statement: for $A=k[t]$, $I=(t)$
+and $A'=k[t]/(t^2)$ the module $A'\otimes_AI$ is free of rank one over
+$A'$, hence of dimension $2$ over $k$, while its image
+$(t)/(t^2)\subseteq A'$ has dimension $1$.  If $g$ is flat, however,
+$g^*$ is exact, so $g^*\cI_Z\to\cO_{X'}$ is injective and maps
+isomorphically onto its image; that is, $\cI_{Z'}=g^*\cI_Z$.  A base
+change along a field extension $K/k$ is flat, being the base change of
+the flat morphism $\Spec K\to\Spec k$, so this applies to $X_K\to X$
+and gives $\cI_{x_K}=\cI_x\otimes\cO_{X_K}$.
 \end{proof}
 
 % Decomposed.
@@ -4745,6 +4758,24 @@ divisor.
 
 
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Pullback of an effective Cartier divisor flat over the base]
+\label{lem:pc-flat-divisor-pullback-cartier}
+Let $f:X\to S$ be a morphism of schemes and let $D\subset X$ be a closed
+subscheme.  Assume that $D$ is an
+\hyperref[def:pcb-effective-cartier-divisor]{effective Cartier divisor}
+on $X$ and that the morphism $D\to S$ is flat.  Then for every morphism
+$g:S'\to S$ the pullback $(g')^{-1}D$ is an effective Cartier divisor on
+$X'=S'\times_SX$, where $g':X'\to X$ denotes the projection.
+\uses{def:pcb-effective-cartier-divisor,def:pc-base-change,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Divisors, Lemma~31.19.1
+(\stacksproject{056Q}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Pullback of relative effective Cartier divisors]
 \label{lem:pc-recd-pullback}
@@ -4760,7 +4791,7 @@ and, with $g_X:X_T\to X$,
 \uses{def:pc-relative-effective-cartier,def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,def:pc-base-change,lem:pc-closed-imm-base-change,lem:pc-flat-compose,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-closed-imm-base-change,lem:pc-divisor-line-bundle-properties}
+\uses{lem:pc-closed-imm-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-flat-divisor-pullback-cartier}
 $D\to S$ is flat (relative effective Cartier divisor) and finite
 presentation (as a closed subscheme of the fp scheme $X$ with the
 Cartier property: the ideal sheaf is locally generated by one element,
@@ -4769,21 +4800,26 @@ affine base); hence the base change $D_T\to T$ is flat and of finite
 presentation; it is the closed subscheme $D\times_ST\subseteq
 X\times_ST=X_T$ (closed immersions are stable under base change and
 the base change of a closed subscheme followed by the projection is
-the closed subscheme of the product), with ideal sheaf the pullback
-$g_X^*\cI_D$ (\Cref{lem:pc-closed-imm-base-change}): as
-$\cI_D$ is an invertible ideal sheaf, $g_X^*\cI_D$ is invertible, so
-$D_T$ is an effective Cartier divisor on $X_T$ (the pullback of a
-locally principal ideal is locally principal, and invertibility of the
-pullback of an invertible module is clear: locally free rank $1$ base
-changes to locally free rank $1$).  As $D_T\to T$ is flat, $D_T$ is a
-relative effective Cartier divisor.  For the module: by
-\Cref{lem:pc-divisor-line-bundle-properties},
+the closed subscheme of the product).  Its ideal sheaf is
+$\cI_{D_T}=g_X^*\cI_D$.  Here $g_X$ need not be flat, so
+\Cref{lem:pc-closed-imm-base-change} by itself only exhibits
+$\cI_{D_T}$ as the image of $g_X^*\cI_D$ in $\cO_{X_T}$; the
+injectivity comes instead from the flatness of $D$ over $S$, which
+makes $0\to\cI_D\to\cO_X\to\cO_D\to0$ stay exact after applying
+$g_X^*$ (\Cref{lem:pc-flat-divisor-pullback-cartier}, whose conclusion
+is exactly that the pullback of an effective Cartier divisor $D$ with
+$D\to S$ flat is again an effective Cartier divisor).  As $\cI_D$ is
+invertible, so is its pullback $g_X^*\cI_D=\cI_{D_T}$ (locally free of rank $1$ base changes
+to locally free of rank $1$), and $D_T$ is therefore an effective
+Cartier divisor on $X_T$.  As $D_T\to T$ is flat, $D_T$ is a relative
+effective Cartier divisor.  For the module: $\cI_{D_T}=g_X^*\cI_D$ is
+invertible, so by part~(1) of
+\Cref{lem:pc-divisor-line-bundle-properties} the module
+$\cO_{X_T}(D_T)=(\cI_{D_T})^\vee$ is invertible, and
 $\cO_{X_T}(D_T)=(g_X^*\cI_D)^\vee=g_X^*(\cI_D^\vee)=g_X^*\cO_X(D)$
 (the pullback of a dual is the dual of the pullback, i.e.\\
 $g_X^*$ commutes with $\mathcal{H}om$ of the pair $(\cI_D,\cO_X)$ --
-valid for $\cI_D$ invertible by the local trivialization check; see
-also Divisors, Lemma 31.19.1,
-\stacksproject{056Q}).
+valid for $\cI_D$ invertible by the local trivialization check).
 \end{proof}
 
 \begin{lemma}[The Cartier criterion on smooth one-dimensional fibres]
