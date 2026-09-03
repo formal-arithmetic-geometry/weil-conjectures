@@ -35,11 +35,8 @@ Counting notes, each of which has caught a wrong census in this project:
 
 With ``DECL_LIST_PATH`` given, the list of declaration names named by
 ``\\lean{...}`` is written there, one per line, sorted -- suitable input for
-an existence/axiom check.  Names coming from ``blueprint/src/version/detailed/
-nagata/*`` are **excluded** from that list: those files carry 143 empty
-``\\lean{}`` tags and a literal ``\\lean{...}`` placeholder, they belong to a
-separate issue that is rewriting them, and including them would drown the
-output.  They are still scanned for labels, ``\\uses`` targets and duplicates.
+an existence/axiom check.  The list covers the whole ``content.tex`` closure:
+every file the document inputs contributes its names.
 
 The blueprint itself cannot be compiled in the agent sandbox: there is no
 ``leanblueprint``, no ``plastex`` and no LaTeX engine there.  This script is a
@@ -52,7 +49,6 @@ import sys
 
 SRC = pathlib.Path("blueprint/src")
 ROOT = SRC / "content.tex"
-NAGATA_DIR = SRC / "version/detailed/nagata"
 
 INPUT_RE = re.compile(r"\\input\{([^}]*)\}")
 LABEL_RE = re.compile(r"\\label\{([^}]*)\}", re.S)
@@ -137,15 +133,12 @@ def main(argv):
             if not names:
                 n_empty += 1
                 empty_leans.append((name, text[: m.start()].count("\n") + 1))
-            if NAGATA_DIR.resolve() in path.parents:
-                continue
             for decl in names:
                 leans.setdefault(decl, []).append(name)
         per_file.append((name, n_label, n_lean, n_empty, text.count("\\leanok")))
 
     unresolved = sorted(t for t in uses if t != "none" and t not in labels)
     duplicates = sorted(lab for lab, files in labels.items() if len(files) > 1)
-    empty_leans = [e for e in empty_leans if not str(NAGATA_DIR) in e[0]]
 
     width = max(len(name) for name, *_ in per_file)
     print(f"{'file':{width}}  {'label':>6} {'lean{':>6} {'empty':>6} {'leanok':>6}")
@@ -157,9 +150,8 @@ def main(argv):
     print(f"{len(order)} files inputted from {rel(ROOT)}")
     print(f"{sum(len(f) for f in labels.values())} labels, {len(labels)} distinct")
     print(f"{len(uses)} distinct \\uses targets, {len(unresolved)} unresolved")
-    print(f"{len(leans)} distinct \\lean names outside {rel(NAGATA_DIR)}")
-    print(f"{len(duplicates)} duplicate labels, {len(empty_leans)} empty \\lean{{}}"
-          f" outside {rel(NAGATA_DIR)}")
+    print(f"{len(leans)} distinct \\lean names")
+    print(f"{len(duplicates)} duplicate labels, {len(empty_leans)} empty \\lean{{}}")
 
     for target in unresolved:
         print(f"  UNRESOLVED \\uses{{{target}}} in {', '.join(sorted(set(uses[target])))}")
