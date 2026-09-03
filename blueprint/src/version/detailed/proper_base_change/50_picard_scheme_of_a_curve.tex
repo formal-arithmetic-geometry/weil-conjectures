@@ -2172,6 +2172,21 @@ topology refines the Zariski topology is \Cref{lem:pc-zariski-coverings-are-fppf
 \end{definition}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{definition}[fpqc coverings]\label{def:pc-fpqc-covering}
+Let $T$ be a scheme.  An \emph{fpqc covering} of $T$ is a family
+$\{f_i\colon T_i\to T\}_{i\in I}$ of morphisms of schemes such that each
+$f_i$ is a \hyperref[def:pc-morphism-conventions]{flat morphism} and such
+that for every affine open $U\subseteq T$ there are an integer $n\ge0$, a
+map $a\colon\{1,\dots,n\}\to I$ and affine opens $V_j\subseteq T_{a(j)}$
+for $j=1,\dots,n$ with $\bigcup_{j=1}^{n}f_{a(j)}(V_j)=U$ (Topologies,
+Definition~34.9.1, \stacksproject{022B}).
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+% Mathlib: AlgebraicGeometry.Scheme.fpqcPrecoverage.
+\mathlibok\ \lean{AlgebraicGeometry.Scheme.fpqcPrecoverage}
+\end{definition}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{definition}[Zariski sheaf property of a functor]
 \label{def:pc-zariski-sheaf-property}
@@ -7257,6 +7272,45 @@ with fixed target (and of a refinement) is Sites, Definition~7.8.1
 (\stacksproject{00VT}).  It is not decomposed here.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Isomorphisms, composites and base changes of fpqc coverings]
+\label{lem:pc-fpqc-covering-stability}
+Let $T$ be a scheme.
+\begin{enumerate}
+\item If $T'\to T$ is an isomorphism, then $\{T'\to T\}$ is an
+\hyperref[def:pc-fpqc-covering]{fpqc covering} of $T$.
+\item If $\{T_i\to T\}_{i\in I}$ is an fpqc covering and for each $i\in I$
+the family $\{T_{ij}\to T_i\}_{j\in J_i}$ is an fpqc covering, then
+$\{T_{ij}\to T\}_{i\in I,\,j\in J_i}$ is an fpqc covering of $T$.
+\item If $\{T_i\to T\}_{i\in I}$ is an fpqc covering and $T'\to T$ is a
+morphism of schemes, then $\{T'\times_TT_i\to T'\}_{i\in I}$ is an fpqc
+covering of $T'$.
+\end{enumerate}
+\uses{def:pc-fpqc-covering,def:pc-scheme,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Topologies, Section~34.9 (The fpqc topology),
+Lemma~34.9.8 (\stacksproject{022D}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Descent for quasi-coherent sheaves along an open covering]
+\label{lem:pc-open-covering-descent}
+Let $S$ be a scheme and let $S=\bigcup_{i\in I}U_i$ be an open covering.
+Every descent datum on quasi-coherent sheaves for the family
+$\mathcal U=\{U_i\to S\}_{i\in I}$ is effective, and the functor from
+quasi-coherent $\cO_S$-modules to descent data with respect to
+$\mathcal U$ is fully faithful.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Descent, Section~35.2 (Descent data for
+quasi-coherent sheaves), Lemma~35.2.4 (\stacksproject{023E}).  It is not
+decomposed here.
+\end{proof}
+
 % ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[FPQC descent for invertible modules]
@@ -7272,7 +7326,7 @@ module is trivial.
 \uses{def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-invertible-module,lem:pc-descent-datum-refinement,lem:pc-tensor-dual-invertible}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-fpqc-covering,lem:pc-descent-datum-refinement,lem:pc-tensor-dual-invertible,lem:pc-fpqc-covering-stability,lem:pc-open-covering-descent}
 \emph{Step 1: the affine case for modules.}  Let $A\to B$ be a faithfully
 flat ring map, and let
 \[
@@ -7359,11 +7413,9 @@ an fpqc covering and $\xi=(N_i,\varphi_{ii'})$ a descent datum of
 invertible modules.  The datum and the statement are local on $S$
 (the descent data restrict along morphisms $S'\to S$, i.e.\ along the
 base changed covering; base changes of fpqc coverings are fpqc,
-Topologies, Lemma~34.9.8,
-\stacksproject{022D}), so it suffices
+\Cref{lem:pc-fpqc-covering-stability}(3)), so it suffices
 to treat $S$ affine; by definition of an fpqc covering
-(Topologies, Definition~34.9.1,
-\stacksproject{022B}) the affine
+(\Cref{def:pc-fpqc-covering}) the affine
 $S=\Spec(A)$ is covered by standard fpqc coverings of finite
 subfamilies, and a finite standard fpqc covering
 $\{V_k=\Spec(B_k)\to\Spec(A)\}_k$ is precisely a faithfully flat map
@@ -7386,9 +7438,9 @@ argument (faithfulness over the common refinements), and glueing over
 an affine open cover (the composite objects are canonically isomorphic
 on the intersections by the faithfulness of Step~1 applied to the
 common refinement, and descent data for an open covering are effective
-with the comparison functor fully faithful: Descent, Lemma~35.2.4,
-\stacksproject{023E}) proves the statement in general.  The last assertion
-(trivial restrictions imply trivial module) is the case of the datum
+with the comparison functor fully faithful,
+\Cref{lem:pc-open-covering-descent}) proves the statement in general.
+The last assertion (trivial restrictions imply trivial module) is the case of the datum
 given by the trivial modules $N_i=\cO_{S_i}$ with identities: the
 descended module has canonical datum isomorphic to it, hence is
 trivial by faithfulness.
