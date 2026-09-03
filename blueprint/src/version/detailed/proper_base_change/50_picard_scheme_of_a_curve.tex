@@ -6019,6 +6019,21 @@ $X_s$-affine basis property, as in
 \Cref{def:pcb-ample} and \Cref{lem:pc-very-ample-ample}).
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[An immersion with closed image is a closed immersion]
+\label{lem:pc-immersion-closed-image}
+Let $f:Y\to X$ be an
+\hyperref[def:pcb-scheme-conventions]{immersion} of schemes.  Then $f$
+is a closed immersion if and only if $f(Y)\subset X$ is a closed
+subset.
+\uses{def:pc-scheme,def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Schemes, Lemma~26.10.4
+(\stacksproject{01IQ}).  It is not decomposed here.
+\end{proof}
+
 % ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Positive degree is equivalent to ampleness]
@@ -6030,14 +6045,14 @@ only if $\deg(\cL)>0$.
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,rem:pc-regularity-sc}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,rem:pc-regularity-sc}
 \emph{($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
 $\cL^{\otimes m}=i^*\cO(1)$.  Since $X$ is proper, the immersion is a
 closed immersion (the image of the proper $X$ is closed, and an
-immersion with closed image is a closed immersion; Schemes, Lemma
-26.10.4, \stacksproject{01IQ}).
+immersion with closed image is a closed immersion,
+\Cref{lem:pc-immersion-closed-image}).
 Choose $x_0\in X$ and a section $s\in H^0(X,\cL^{\otimes m})$ with
 $s(x_0)\neq0$ (the base locus of a very ample module is empty: the
 linear system $\mathbf P(H^0(X,\cL^{\otimes m}))$ gives the embedding,
@@ -6096,6 +6111,68 @@ $k$, hence $\cL$ is ample.
 % ---------------------------------------------------------------------------
 \subsection{Divisors and Hilbert schemes}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A flat module of finite presentation comes from a Noetherian base]
+\label{lem:pc-flat-fp-noetherian-descent}
+Let $R\to S$ be a ring map of finite presentation and let $M$ be a
+finitely presented $S$-module which is flat over $R$.  Then there exist
+a finite type $\mathbf Z$-algebra $R_0$, a finite type ring map
+$R_0\to S_0$ and a finite $S_0$-module $M_0$ which is flat over $R_0$,
+together with ring maps $R_0\to R$ and $S_0\to S$ and an $S_0$-module
+map $M_0\to M$, such that $S\cong R\otimes_{R_0}S_0$ and
+$M\cong S\otimes_{S_0}M_0$.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.168.1(1)
+(\stacksproject{02JO}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A nonzerodivisor on the closed fibre of a flat local homomorphism]
+\label{lem:pc-flat-local-fibre-nzd}
+Let $R\to S$ be a flat local homomorphism of Noetherian local rings and
+let $\mathfrak m\subset R$ be the maximal ideal.  Let $f\in S$ be a
+nonzerodivisor in $S/\mathfrak mS$.  Then $S/fS$ is flat over $R$, and
+$f$ is a nonzerodivisor in $S$.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.99.2
+(\stacksproject{00MF}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Regular sequences spread out from a prime]
+\label{lem:pc-regular-sequence-spreads-out}
+Let $R$ be a Noetherian ring, let $M$ be a finite $R$-module, let
+$\mathfrak p\subset R$ be a prime and let $x_1,\dots,x_r$ be a sequence
+in $R$ whose image in $R_{\mathfrak p}$ is an $M_{\mathfrak p}$-regular
+sequence.  Then there is a $g\in R$, $g\notin\mathfrak p$, such that the
+image of $x_1,\dots,x_r$ in $R_g$ is an $M_g$-regular sequence.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.68.6
+(\stacksproject{061L}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Openness of the flat locus]
+\label{lem:pc-flat-locus-open}
+Let $R\to S$ be a ring map of finite presentation and let $M$ be a
+finitely presented $S$-module.  Then the set
+\[
+\{\mathfrak q\in\Spec(S)\mid M_{\mathfrak q}\text{ is flat over }R\}
+\]
+is open in $\Spec(S)$.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Theorem~10.129.4
+(\stacksproject{00RC}).  It is not decomposed here.
+\end{proof}
+
 % ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Effective Cartier divisors from local equations]
@@ -6110,7 +6187,7 @@ divisor} on $X/S$.
 \uses{def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor}
+\uses{def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,lem:pc-flat-fp-noetherian-descent,lem:pc-flat-local-fibre-nzd,lem:pc-flat-locus-open,lem:pc-regular-sequence-spreads-out}
 The statement is local on $X$ (the conclusion asserts: $Z$ is an
 effective Cartier divisor on $X$ -- a local property, cf.\
 \Cref{def:pc-effective-cartier-divisor} -- and $Z\to S$ is flat -- a
@@ -6129,8 +6206,8 @@ $D:=V(f)\subseteq\Spec(B_g)$ is a relative effective Cartier divisor
 on $\Spec(B_g)/\Spec(A)$, and that $Z\cap\Spec(B_g)=D$.
 
 To prove the claim, use the Noether approximation
-(Algebra, Lemma~10.168.1,
-\stacksproject{02JO}): there is a
+(\Cref{lem:pc-flat-fp-noetherian-descent}, applied to the flat finitely
+presented $B$-module $B$): there is a
 flat finite type ring map $A_0\to B_0$ of Noetherian rings, an element
 $f_0\in B_0$ and a ring map $A_0\to A$ with
 $A\otimes_{A_0}B_0\cong B$ and $f_0\mapsto f$.  With
@@ -6142,14 +6219,13 @@ B\otimes_A\kappa(\mathfrak p)
 \]
 so $f_0$ is a nonzerodivisor in
 $B_0\otimes_{A_0}\kappa(\mathfrak p_0)$ as well.  By
-(Algebra, Lemma~10.99.2,
-\stacksproject{00MF}), $f_0$ is a
+\Cref{lem:pc-flat-local-fibre-nzd}, applied to the flat local
+homomorphism $(A_0)_{\mathfrak p_0}\to(B_0)_{\mathfrak q_0}$, $f_0$ is a
 nonzerodivisor in $(B_0)_{\mathfrak q_0}$, $\mathfrak
 q_0:=B_0\cap\mathfrak q$, and $(B_0/f_0B_0)_{\mathfrak q_0}$ is flat
-over $A_0$.  By (Algebra, Lemma~10.68.6,
-\stacksproject{061L}) and
-(Algebra, Theorem~10.129.4,
-\stacksproject{00RC}) there is
+over $A_0$.  By \Cref{lem:pc-regular-sequence-spreads-out} (with
+$M=B_0$ and the length one sequence $f_0$) and
+\Cref{lem:pc-flat-locus-open} (with $M=B_0/f_0B_0$) there is
 $g_0\in B_0$, $g_0\notin\mathfrak q_0$, with $f_0$ a nonzerodivisor
 in $(B_0)_{g_0}$ and $(B_0/f_0B_0)_{g_0}$ flat over $A_0$: $D_0$ is a
 relative effective Cartier divisor on
