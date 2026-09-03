@@ -1467,6 +1467,26 @@ and the vanishing for $i<r$.  This proves the lemma.
 \end{proof}
 
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The Leray spectral sequence]
+\label{lem:pc-leray-spectral-sequence}
+Let $f:X\to Y$ be a morphism of ringed spaces and let $\cF^\bullet$ be a bounded below
+complex of $\cO_X$-modules.  Then there is a spectral sequence
+\[
+E_2^{p,q}=H^p\bigl(Y,\;R^qf_*(\cF^\bullet)\bigr)
+\qquad\text{converging to}\qquad H^{p+q}(X,\cF^\bullet).
+\]
+In particular, for a single $\cO_X$-module $\cF$ (viewed as a complex concentrated in
+degree $0$) there is a spectral sequence
+$E_2^{p,q}=H^p(Y,R^qf_*\cF)\Rightarrow H^{p+q}(X,\cF)$.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-derived-direct-image}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Cohomology of Sheaves, Section~20.13 (The Leray spectral
+sequence), Lemma~20.13.4 (\stacksproject{01F2}).  It is not decomposed here.
+\end{proof}
+
 % Decomposed.
 \begin{theorem}[Serre duality for smooth projective curves]
 \label{thm:pc-serre-duality-curve}
@@ -1479,7 +1499,7 @@ H^1(X,\cM)^{\vee}\;\cong\;H^0\bigl(X,\;\Omega^1_{X/k}\otimes\cM^{-1}\bigr).
 \uses{def:pc-curve,def:pc-kahler-differentials,def:pc-invertible-module,def:pc-projective-morphism}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-projective-morphism,lem:pc-affine-morphism-hi,lem:pc-omega-identity,thm:pc-serre-duality-pn,def:pc-ext}
+\uses{def:pc-projective-morphism,lem:pc-affine-morphism-hi,lem:pc-leray-spectral-sequence,lem:pc-omega-identity,thm:pc-serre-duality-pn,def:pc-ext}
 By \Cref{def:pc-projective-morphism} there is a closed immersion
 $i:X\hookrightarrow\mathbf P^N_k$.  \emph{Case $N=1$:} then $X$ is a
 closed subscheme of dimension $1$ of $\mathbf P^1_k$, hence
@@ -1498,7 +1518,8 @@ H^1(X,\cM)^{\vee}\cong
 \]
 \emph{Case $N\ge2$:} set $r:=N-1$.  By
 \Cref{lem:pc-affine-morphism-hi} (a closed immersion is affine, so
-$R^qi_*\cM=0$ for $q>0$) and the Leray spectral sequence of $i$:
+$R^qi_*\cM=0$ for $q>0$) and the Leray spectral sequence of $i$
+(\Cref{lem:pc-leray-spectral-sequence}):
 $H^1(X,\cM)=H^1(\mathbf P^N_k,i_*\cM)$.  With
 $\omega:=\Omega^N_{\mathbf P^N_k/k}$,
 \[
@@ -3706,7 +3727,7 @@ H^i(X,\cF)\otimes_AB\;\cong\;H^i(X',\cF')\qquad\text{for all }i .
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-finite-support-hi,lem:pc-cech-computes,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pcb-cech-spectral}
+\uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pc-leray-spectral-sequence,lem:pcb-cech-spectral}
 \emph{The affine case (2), $X$ separated.}  Let $A\to B$ be flat and let
 $X$ be quasi-compact and separated over $A$; choose a finite affine
 open covering $\mathcal U:X=U_1\cup\dots\cup U_t$.  The base changes
@@ -3770,7 +3791,7 @@ sheaf) we may assume $S=\Spec(A)$.  By
 $R^if'_*\cF'$ are quasi-coherent.  On $S$ affine, the quasi-coherent
 sheaf $R^if_*\cF$ is $\widetilde{H^0(S,R^if_*\cF)}$ and
 $H^0(S,R^if_*\cF)=H^i(X,\cF)$: this is the classical identification
-(Leray: the spectral sequence
+(Leray, \Cref{lem:pc-leray-spectral-sequence}: the spectral sequence
 $E_2^{p,q}=H^p(S,R^qf_*\cF)\Rightarrow H^{p+q}(X,\cF)$ has
 $E_2^{p,q}=0$ for $p>0$ by \Cref{lem:pc-affine-vanishing} (affine $S$)
 and the quasi-coherence just noted, so it degenerates at $E_2$, giving
@@ -3876,7 +3897,7 @@ H^p(X,\;\cF\otimes_{\cO_X}\cL^{\otimes n})=0
 \uses{def:pcb-ample,def:pc-invertible-module,lem:pc-projection-formula,lem:pc-affine-morphism-hi,lem:pc-cech-computes}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-affine-morphism-hi,lem:pc-cech-computes,lem:pc-projection-formula}
+\uses{def:pcb-ample,lem:pc-affine-morphism-hi,lem:pc-cech-computes,lem:pc-leray-spectral-sequence,lem:pc-projection-formula}
 \emph{Step 1: reduction to projective space.}  By
 \Cref{def:pcb-ample} there is $m\ge1$ with $\cL^{\otimes m}$ very
 ample: the complete linear system $|\cL^{\otimes m}|$ is a closed
@@ -3884,8 +3905,9 @@ immersion $i:X\hookrightarrow\mathbf P^N_k$ with
 $i^*\cO_{\mathbf P^N}(1)\cong\cL^{\otimes m}$, where
 $N=\dim_kH^0(X,\cL^{\otimes m})-1$, and every global section of
 $\cL^{\otimes m}$ is pulled back from a linear form on
-$\mathbf P^N$.  By the Leray spectral sequence of $i$ (the standard
-spectral sequence $H^p(\mathbf P^N,R^qi_*\cM)\Rightarrow
+$\mathbf P^N$.  By the Leray spectral sequence of $i$
+(\Cref{lem:pc-leray-spectral-sequence}: the spectral sequence
+$H^p(\mathbf P^N,R^qi_*\cM)\Rightarrow
 H^{p+q}(X,\cM)$, which here degenerates) and the vanishing of the
 higher direct images of an affine morphism
 (\Cref{lem:pc-affine-morphism-hi}; a closed immersion is affine),
@@ -5248,7 +5270,7 @@ coherent $\cO_Y$-module $\cG$:
 \uses{def:pc-euler-characteristic,def:pc-morphism-conventions,lem:pc-coherent-hi,def:pc-derived-direct-image}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-spectral-sequence-euler}
+\uses{lem:pc-coherent-hi,lem:pc-leray-spectral-sequence,lem:pc-spectral-sequence-euler}
 The long exact cohomology sequence of the short exact sequence is
 \[
 0\to H^0(\cF_1)\to H^0(\cF_2)\to H^0(\cF_3)\to H^1(\cF_1)\to H^1(\cF_2)
@@ -5269,7 +5291,7 @@ first statement (Varieties, Lemma 33.33.2,
 \stacksproject{08AA}).
 
 For the second statement, consider the Leray spectral sequence of $f$
-(Cohomology, Lemma 20.13.4)
+(\Cref{lem:pc-leray-spectral-sequence})
 \[
 E_2^{p,q}=H^p(X,R^qf_*\cG)\Longrightarrow H^{p+q}(Y,\cG).
 \]
@@ -5419,8 +5441,23 @@ $\deg(\cO_X(D))=\sum_in_i\deg(\cO_X([P_i]))=\sum_in_i$.
 \end{proof}
 
 
-% Decomposed.
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Being a quasi-compact immersion is fpqc local on the base]
+\label{lem:pc-qc-immersion-fpqc-local}
+The property $\mathcal P(f)=$ ``$f$ is a quasi-compact immersion'' is fpqc local on the base; that
+is, for a morphism of schemes $f:X\to Y$ and an fpqc covering $\{Y_i\to Y\}_{i\in I}$, the
+morphism $f$ is a quasi-compact immersion if and only if every base change
+$f_i:X\times_YY_i\to Y_i$ is a quasi-compact immersion.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Descent, Section~35.23 (Properties of morphisms local in the
+fpqc topology on the target), Lemma~35.23.23 (\stacksproject{02L8}).  The same section proves
+the corresponding statements for closed immersions (Lemma~35.23.21, \stacksproject{02L6}) and
+for open immersions (Lemma~35.23.18, \stacksproject{02L3}).  It is not decomposed here.
+\end{proof}
+
 % Decomposed.
 \begin{lemma}[Very ampleness descends along field extensions]
 \label{lem:pc-very-ample-descends}
@@ -5432,7 +5469,7 @@ $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
 \uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pc-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent}
+\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent}
 By definition of very ampleness there is an immersion
 $i:X_K\to\mathbf P^N_K$ with $i^*\cO_{\mathbf P^N}(1)=\cL_K$.  The
 sections $x_1,\dots,x_N$ of $\cO_{\mathbf P^N}(1)$ pull back to
@@ -5454,21 +5491,17 @@ after base change to $K$ contains the defining sections
 $t_0,\dots,t_N$, so the morphism
 $\psi:X\to\mathbf P(V)$ (from the $k$-subspace $V$ of $H^0(X,\cL)$)
 has base change $\psi_K:X_K\to\mathbf P(V_K)$ such that $\psi_K=i$
-(the same sections): $\psi_K$ is an immersion, and the descent of the
-immersion property along a faithfully flat (field) base extension
-(Descent, Lemma 35.37.2 for closed immersions and the standard
-descendability of open immersions -- or: the classical statement: the
-property "the morphism of a finite type scheme to projective space
-defined by base-point-free sections is an immersion" is descent-stable
-because it is precisely the condition that the base-point-freeness and
-separation hold, and these conditions are tested on the geometric
-points: for the closed-immersion picture of the
-$\Gamma$-sections, effective descent along fields for closed
-immersions is formal from the affine case along
-$k'\to k''$: $A\to A/I$ base changes, and descent of ideals:
-$I\otimes_{k'}k''$-preimage: the ideal of a closed subscheme over a
-finitely generated subextension is the span of finitely many
-elements; descent is classical) gives that $\psi$ is an immersion).
+(the same sections): $\psi_K$ is an immersion.  Now $\psi$ is
+quasi-compact -- its source $X$ is of finite type over $k$, hence
+quasi-compact, and its target $\mathbf P(V)$ is Noetherian, hence
+quasi-separated, so any morphism $X\to\mathbf P(V)$ is quasi-compact
+-- and quasi-compactness is stable under base change, so $\psi_K$ is a
+quasi-compact immersion.  Since $\Spec(K)\to\Spec(k)$ is a faithfully
+flat morphism of affine schemes, $\{\Spec(K)\to\Spec(k)\}$ is an fpqc
+covering, and $\psi_K$ is the base change of $\psi$ along it; being a
+quasi-compact immersion is fpqc local on the base
+(\Cref{lem:pc-qc-immersion-fpqc-local}), so $\psi$ is a quasi-compact
+immersion, in particular an immersion).
 Hence $\cL$ is very ample over $k$ ($\psi^*\cO_{\mathbf P(V)}(1)=\cL$
 by construction), and $X$ proper
 ($\mathbf P(V)$ and the immersion give the image-closedness over $k$),
@@ -6114,6 +6147,21 @@ $\kappa(x)=k$ a field) $\Gamma_x$ is the reduced point and
 $Z+\Gamma_x$ is the divisor $Z+x$.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Smoothness descends along surjective flat morphisms of finite presentation]
+\label{lem:pc-smooth-descends-flat}
+Let $S$ be a scheme and let $f:X\to Y$ be a morphism of schemes over $S$, with structure
+morphisms $p:X\to S$ and $q:Y\to S$, so $p=q\circ f$.  Assume that $f$ is surjective, flat
+and locally of finite presentation, and that $p$ is smooth (resp.\ \'etale).  Then $q$ is
+smooth (resp.\ \'etale).
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-smooth-morphism}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Descent, Section~35.14 (Descent of finiteness and smoothness
+properties of morphisms), Lemma~35.14.5 (\stacksproject{05B5}).  It is not decomposed here.
+\end{proof}
+
 \begin{lemma}[Hilbert schemes of curves are smooth]
 \label{lem:pc-hilb-smooth}
 (Picard Schemes of Curves, Lemma~44.3.5,
@@ -6128,7 +6176,7 @@ $\underline{\Hilb}^d_{X/k}$ is smooth of dimension $d$ over $k$).
 \uses{def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-morphism-conventions,lem:pc-hilb-addition}
+\uses{def:pc-morphism-conventions,lem:pc-hilb-addition,lem:pc-smooth-descends-flat}
 \emph{The cases $d=0,1$.}  $\Hilb^0_{X/S}(T)$ has exactly one element
 (the empty closed subscheme of $X_T$, finite locally free of degree
 $0$; it is the zero ideal; the pullback along $T'\to T$ is the empty
@@ -6166,14 +6214,11 @@ surjective (a finite locally free morphism of positive degree has
 nonempty fibres: over a point $t$ of the target the fibre is a
 finite flat algebra of rank $d+1\ge1$ over $\kappa(t)$, hence nonzero,
 so the fibre is a nonempty scheme) and faithfully flat.  Smoothness
-descends along faithfully flat coverings: the classical descent
-``smoothness is of fpqc local nature on the target''
-(Descent, Lemma~35.14.5: a morphism $Y\to S$ such that there is a
-surjective flat morphism of finite presentation $Y'\to Y$ with
-$Y'\to S$ smooth, has $Y\to S$ smooth; the statement in the precise
-form used here: the faithfully flat descent of the smoothness
-property, which is a local property in the fpqc topology), so
-$H_{d+1}\to S$ is smooth.  The relative dimension: $\pi$ is finite,
+descends along $\pi$
+(\Cref{lem:pc-smooth-descends-flat} applied to the morphism $\pi$ over
+$S$: it is surjective, flat and of finite presentation, being finite
+locally free of degree $d+1$, and its source $H_d\times_SX$ is smooth
+over $S$), so $H_{d+1}\to S$ is smooth.  The relative dimension: $\pi$ is finite,
 hence proper, and surjective, so $\dim H_{d+1}=\dim(H_d\times_SX)=
 d+1$ (a finite surjective morphism between schemes of finite type
 over $S$ preserves the dimension; the dimension of the source over
@@ -6437,6 +6482,33 @@ $\cO(D_{\mathrm{univ}})$ is $\cO_X(D)$.
 % ---------------------------------------------------------------------------
 \subsection{Descent and representability criteria}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Descent data pull back along a morphism of families]
+\label{lem:pc-descent-datum-refinement}
+Let $\mathcal U=\{U_i\to U\}_{i\in I}$ and $\mathcal V=\{V_j\to V\}_{j\in J}$ be families of
+morphisms of schemes with fixed target and let
+$(g,\alpha:I\to J,(g_i)):\mathcal U\to\mathcal V$ be a morphism of such families, i.e.\
+$g:U\to V$ together with maps $g_i:U_i\to V_{\alpha(i)}$ commuting with the structure
+morphisms.  Let $(\cF_j,\varphi_{jj'})$ be a descent datum for quasi-coherent sheaves with
+respect to $\mathcal V$.  Then:
+\begin{enumerate}
+\item the system
+$\bigl(g_i^*\cF_{\alpha(i)},\,(g_i\times g_{i'})^*\varphi_{\alpha(i)\alpha(i')}\bigr)$
+is a descent datum with respect to $\mathcal U$;
+\item this construction is functorial in the descent datum $(\cF_j,\varphi_{jj'})$;
+\item given a second morphism $(g',\alpha':I\to J,(g_i'))$ of families with $g=g'$, there is
+a functorial isomorphism between the two descent data so obtained.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Descent, Section~35.2 (Descent data for quasi-coherent
+sheaves), Lemma~35.2.2 (\stacksproject{023C}); the notion of a morphism of families of maps
+with fixed target (and of a refinement) is Sites, Definition~7.8.1
+(\stacksproject{00VT}).  It is not decomposed here.
+\end{proof}
+
 \begin{lemma}[FPQC descent for invertible modules]
 \label{lem:pc-fpqc-descent}
 (Descent, Proposition~35.5.2,
@@ -6450,7 +6522,7 @@ module is trivial.
 \uses{def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-invertible-module,lem:pc-tensor-dual-invertible}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-invertible-module,lem:pc-descent-datum-refinement,lem:pc-tensor-dual-invertible}
 \emph{Step 1: the affine case for modules.}  Let $A\to B$ be a faithfully
 flat ring map, and let
 \[
@@ -6550,19 +6622,46 @@ $V_k$), which is effective by Step~2 with
 $B=\prod_kB_k$ (the datum on a disconnected covering: the modules and
 isomorphisms are the product of the pieces, and the cocycle condition
 is the compatibility over the intersections, checked on the original
-$S_i$'s by the refinement: the standard argument of Stacks
-35.5.2: the descent data pull back along refinements and agree on
-common refinements).  This yields an invertible $\cO_S$-module
-restricting to $N_i$ with the given $N_{ii'}$; the identification is
-constructed with the same standard refinement-compatibility argument
-(faithfulness over the common refinements), and glueing over an affine
-open cover (the composite objects are canonically isomorphic on the
-intersections by the faithfulness of Step~1 applied to the common
-refinement) proves the statement in general.  The last assertion
+$S_i$'s by the refinement: the datum $(N_i,\varphi_{ii'})$ pulls back
+along the refinement $\{V_k\to\Spec(A)\}\to\{S_i\to S\}$ to a descent
+datum, functorially in the datum and -- for two morphisms of families
+over the same map of bases -- compatibly up to a canonical isomorphism
+(\Cref{lem:pc-descent-datum-refinement})).  This yields an invertible
+$\cO_S$-module restricting to $N_i$ with the given $N_{ii'}$; the
+identification is constructed with the same refinement-compatibility
+argument (faithfulness over the common refinements), and glueing over
+an affine open cover (the composite objects are canonically isomorphic
+on the intersections by the faithfulness of Step~1 applied to the
+common refinement, and descent data for an open covering are effective
+with the comparison functor fully faithful: Descent, Lemma~35.2.4,
+\stacksproject{023E}) proves the statement in general.  The last assertion
 (trivial restrictions imply trivial module) is the case of the datum
 given by the trivial modules $N_i=\cO_{S_i}$ with identities: the
 descended module has canonical datum isomorphic to it, hence is
 trivial by faithfulness.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The glueing lemma for schemes]
+\label{lem:pc-glueing-schemes}
+Let $\bigl(I,(X_i)_{i\in I},(U_{ij})_{i,j\in I},(\varphi_{ij})_{i,j\in I}\bigr)$ be glueing
+data of locally ringed spaces: for all $i,j,k\in I$ the $U_{ij}\subseteq X_i$ are open, the
+$\varphi_{ij}:U_{ij}\to U_{ji}$ are isomorphisms of locally ringed spaces, $U_{ii}=X_i$,
+$\varphi_{ij}(U_{ij}\cap U_{ik})=U_{ji}\cap U_{jk}$ and
+$\varphi_{jk}\circ\varphi_{ij}=\varphi_{ik}$ on $U_{ij}\cap U_{ik}$.  Then there exist a
+locally ringed space $X$, open subspaces $U_i\subseteq X$ and isomorphisms
+$\varphi_i:X_i\to U_i$ such that $X=\bigcup_{i\in I}U_i$,
+$\varphi_i(U_{ij})=U_i\cap U_j$ and
+$\varphi_{ij}=\varphi_j^{-1}|_{U_i\cap U_j}\circ\varphi_i|_{U_{ij}}$.  If moreover all $X_i$
+are schemes, then $X$ is a scheme.
+\uses{def:pc-scheme}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Schemes, Section~26.14 (Glueing schemes), Lemma~26.14.1
+(\stacksproject{01JA}) for the locally ringed space $X$ and Lemma~26.14.2
+(\stacksproject{01JC}) for the assertion that $X$ is a scheme when all $X_i$ are.  It is not
+decomposed here.
 \end{proof}
 
 \begin{lemma}[A representability criterion via covers]
@@ -6582,7 +6681,7 @@ Then $F$ is representable by a scheme over $S$.
 \uses{def:pc-subfunctor,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-scheme,def:pc-representable-functor,def:pc-subfunctor,def:pc-open-subfunctor,def:pc-cover,def:pc-zariski-sheaf-property,lem:pc-yoneda}
+\uses{def:pc-scheme,def:pc-representable-functor,def:pc-subfunctor,def:pc-open-subfunctor,def:pc-cover,def:pc-zariski-sheaf-property,lem:pc-glueing-schemes,lem:pc-yoneda}
 For $i\in I$ choose a scheme $X_i$ over $S$ representing $F_i$ and the
 universal element $\xi_i\in F_i(X_i)\subseteq F(X_i)$, and let
 $U_{ij}\subseteq X_i$ be the open subscheme given by (2)(b) for the
@@ -6628,10 +6727,10 @@ definition of $U_{ik}$).  Moreover the cocycle condition
 $\varphi_{jk}\circ\varphi_{ij}\circ\varphi_{ik}^{-1}
 =\mathrm{id}$ on $U_{ij}\cap U_{ik}$ holds trivially (both sides pull
 $\xi_k$ back to $\xi_i$ there and the representing morphism is
-unique).  By the glueing lemma for schemes (Schemes, Lemma~26.14.2:
-a scheme $X$ with an open covering $X=\bigcup_{i}U_i$ and isomorphisms
-$\varphi_i:X_i\stackrel{\sim}{\to}U_i$ with the compatibility above
-glues to a scheme; note the family is a set: the $X_i$ form a set) we
+unique).  By the glueing lemma for schemes
+(\Cref{lem:pc-glueing-schemes}, applied to the glueing data
+$\bigl(I,(X_i),(U_{ij}),(\varphi_{ij})\bigr)$ constructed above; note
+the family is a set: the $X_i$ form a set) we
 obtain a scheme $X$ over $S$ with open immersions
 $X_i\hookrightarrow X$ whose intersections are the $U_{ij}$.
 
