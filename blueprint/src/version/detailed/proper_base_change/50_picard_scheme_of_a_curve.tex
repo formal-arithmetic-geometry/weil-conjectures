@@ -536,7 +536,7 @@ injective map \(k[x_1,\dots,x_d]\hookrightarrow A\) with
 % below; so no \mathlibok is claimed for this node.
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-integral-dimension}
+\uses{lem:pcb-integral-dimension,lem:pcb-finite-is-integral,lem:pcb-polynomial-ring-dimension}
 This is a cited external input: Algebra, Lemma~10.115.4
 (\stacksproject{00OY}), the Noether normalization theorem.  It is not
 decomposed here.  The cited lemma gives the existence of \(r\) and of
@@ -544,9 +544,11 @@ the finite injective map, and says of the \(r\) it constructs that it
 ``is the dimension of \(S\)''; the equality for an \emph{arbitrary}
 finite injective \(k[y_1,\dots,y_r]\hookrightarrow S\) is
 \Cref{lem:pcb-integral-dimension} applied to that extension (finite
-\(\Rightarrow\) integral), which gives
-\(\dim S=\dim k[y_1,\dots,y_r]=r\).  This is also how the cited proof
-obtains its own last assertion.
+\(\Rightarrow\) integral, \Cref{lem:pcb-finite-is-integral}), which
+gives \(\dim S=\dim k[y_1,\dots,y_r]\); and
+\(\dim k[y_1,\dots,y_r]=r\) is
+\Cref{lem:pcb-polynomial-ring-dimension}.  This is also how the cited
+proof obtains its own last assertion.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -559,6 +561,38 @@ Let \(R\subseteq S\) be rings with \(S\) integral over \(R\).  Then
 \begin{proof}
 This is a cited external input: Algebra, Lemma~10.112.4
 (\stacksproject{00OK}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A finite ring map is integral]
+\label{lem:pcb-finite-is-integral}
+Let \(R\to S\) be a finite ring map.  Then \(R\to S\) is integral,
+that is, every element of \(S\) satisfies a monic polynomial with
+coefficients in \(R\).
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.36.3
+(\stacksproject{00GK}), whose statement is ``a finite ring map is
+integral''.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The dimension of a polynomial ring over a field]
+\label{lem:pcb-polynomial-ring-dimension}
+Let \(k\) be a field and let \(r\geq0\).  Then the polynomial ring in
+\(r\) variables has \(\dim k[y_1,\dots,y_r]=r\).
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.116.1
+(\stacksproject{00P0}), which states that a finite type \(k\)-algebra
+\(S\) that is an integral domain has \(\dim S=\operatorname{trdeg}(K/k)\),
+where \(K\) is the fraction field of \(S\).  The statement above is the
+case \(S=k[y_1,\dots,y_r]\): its fraction field is
+\(k(y_1,\dots,y_r)\), of transcendence degree \(r\) over \(k\) because
+the \(y_i\) are by definition algebraically independent.  It is not
+decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -1503,7 +1537,7 @@ is a line bundle (the \emph{canonical} module).
 \uses{def:pc-kahler-differentials,def:pc-smooth-morphism}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-smooth-morphism,def:pc-kahler-differentials,lem:pc-standard-smooth-form,lem:pc-omega-presentation}
+\uses{def:pc-smooth-morphism,def:pc-kahler-differentials,lem:pc-standard-smooth-form,lem:pc-omega-presentation,lem:pc-standard-smooth-properties}
 The assertion is Zariski-local on $X$, so we may assume
 $X=\Spec(A)$, $S=\Spec(R)$ with $A$ smooth over $R$: by the standard
 local form of a smooth algebra (\Cref{lem:pc-standard-smooth-form}) there are
@@ -1518,9 +1552,10 @@ presentation the module of Kähler differentials is the quotient
 $\cO$-span of the differentials $df_i$ in $A^{\oplus(n+c)}$ is a
 direct summand of rank $c$ (the Jacobian matrix has rank $c$), so
 $\Omega_{A/R}\cong A^{\oplus n}$ is free of rank $n$ (a basis being
-given by $dx_1,\dots,dx_n$ after a change of coordinates: the
-cokernel-generating submatrix structure of the rank-$c$ Jacobian: the
-standard linear-algebra form of the argument).  Hence
+given by $dx_1,\dots,dx_n$ after a change of coordinates; this is
+\Cref{lem:pc-standard-smooth-properties}(2) for the presentation
+above, which has $m=n+c$ and so gives $\Omega_{A/R}$ free of rank
+$m-c=n$).  Hence
 $\Omega^1_{X/S}$ is locally free of rank $n$.
 \end{proof}
 
@@ -4190,7 +4225,7 @@ H^p(X,\;\cF\otimes_{\cO_X}\cL^{\otimes n})=0
 \uses{def:pcb-ample,def:pc-invertible-module,lem:pc-projection-formula,lem:pc-affine-morphism-hi,lem:pc-cech-computes}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-affine-morphism-hi,lem:pc-cech-computes,lem:pc-leray-spectral-sequence,lem:pc-projection-formula}
+\uses{def:pcb-ample,lem:pc-affine-morphism-hi,lem:pc-cech-computes,lem:pc-leray-spectral-sequence,lem:pc-projection-formula,lem:pc-closed-immersion-proper,lem:pc-coherent-hi}
 \emph{Step 1: reduction to projective space.}  By
 \Cref{def:pcb-ample} there is $m\ge1$ with $\cL^{\otimes m}$ very
 ample: the complete linear system $|\cL^{\otimes m}|$ is a closed
@@ -4219,7 +4254,10 @@ For $0\le r<m$ put
 \cG_r:=i_*\bigl(\cF\otimes\cL^{\otimes r}\bigr):
 \]
 it is coherent, because $i_*$ is exact and maps coherent modules to
-coherent modules (a closed immersion; standard) and $\cL$ is
+coherent modules (a closed immersion is proper,
+\Cref{lem:pc-closed-immersion-proper}, and $\mathbf P^N_k$ is
+Noetherian, so this is the case $i=0$ of \Cref{lem:pc-coherent-hi};
+exactness of $i_*$ makes $R^0i_*=i_*$) and $\cL$ is
 invertible (so $\cF\otimes\cL^{\otimes r}$ is coherent).  Since
 $\cL^{\otimes mt}=i^*\cO_{\mathbf P^N}(t)$, the formulas above give,
 for all $p$ and all $t\ge0$,
