@@ -79,13 +79,14 @@ derived pushforwards, neither of which is available.
 That the comparison is an isomorphism is proper base change and is not proved here.
 
 The identity law is proved by factoring the comparison for the identity refinement through
-the whiskering by `D(c.i)_!⁺`: the base change isomorphism for the identity refinement is
-the whiskering of the identity isomorphism `D(𝟙 c.Z)^*⁺ ≅ 𝟭` of
+the whiskering by `D(c.i)_!⁺`: the *inverse* of the base change isomorphism for the identity
+refinement is the whiskering of the identity isomorphism `D(𝟙 c.Z)^*⁺ ≅ 𝟭` of
 `AlgebraicGeometry.Etale.upperStarIdDerivedPlus`
 (`AlgebraicGeometry.Etale.refinementLowerShriekBaseChangeDerivedPlusIso_inv_id`), which
 turns the comparison into a natural transformation of `R(c.g)_*⁺` with itself, and there the
 universal property of a right derived functor applies. The two ingredients are that the
-derived unit of `D(𝟙 c.Z)^* ⊣ R(𝟙 c.Z)_*` is the inverse of the identity isomorphism
+derived unit of `D(𝟙 c.Z)^* ⊣ R(𝟙 c.Z)_*` is, modulo that same identity isomorphism
+`D(𝟙 c.Z)^*⁺ ≅ 𝟭` of the pullback, the inverse of the identity isomorphism
 `R(𝟙 c.Z)_*⁺ ≅ 𝟭` of `AlgebraicGeometry.Etale.lowerStarIdDerivedPlus`, and that the
 composition isomorphism cancels the latter.
 
