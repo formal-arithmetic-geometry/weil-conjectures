@@ -74,8 +74,8 @@ The site-theoretic inputs of the general definitions are discharged here:
   `AlgebraicGeometry.Etale.upperStarId_inv_app_counit_app` and
   `AlgebraicGeometry.Etale.upperStarComp_inv_app_counit_app` record the counit form of the
   compatibility of these isomorphisms with the adjunctions `g^* ⊣ g_*`, and
-  `AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app` records the unit form for the
-  identity.
+  `AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app` and
+  `AlgebraicGeometry.Etale.upperStarComp_hom_app_unit_app` record the unit form.
 - `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category; in particular it is left
