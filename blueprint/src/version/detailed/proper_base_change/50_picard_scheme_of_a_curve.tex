@@ -602,18 +602,48 @@ is multiplication by the element \(s\) of \(k(C)\), and
 \label{lem:pcb-flat-base-change-coherent}
 Let \(X\) be a proper scheme over a field \(k\), \(k\to k'\) a flat
 \(k\)-algebra (e.g.\ a field extension) and \(\mathcal F\) a
-quasi-coherent sheaf on \(X\).  Then for all \(i\geq0\)
+quasi-coherent sheaf on \(X\).  Write \(f\colon X\to\Spec(k)\) and
+\(f'\colon X_{k'}\to\Spec(k')\) for the structure morphisms and
+\(g\colon\Spec(k')\to\Spec(k)\), \(g'\colon X_{k'}\to X\) for the two
+projections; both \(g\) and \(g'\) are flat, so
+\Cref{lem:pc-base-change-map} applies to this square and gives canonical
+base change maps \(g^*R^if_*\mathcal F\to R^if'_*\mathcal F_{k'}\).
+Taking global sections over the affine scheme \(\Spec(k')\), these are
+canonical \(k'\)-linear maps
+\[
+ H^i(X,\mathcal F)\otimes_kk'\;\longrightarrow\;H^i(X_{k'},\mathcal F_{k'}).
+\]
+Then for all \(i\geq0\) this canonical base change map is an
+isomorphism, so that
 \[
  H^i(X_{k'},\mathcal F_{k'})\cong H^i(X,\mathcal F)\otimes_kk'.
 \]
+Moreover the base change map is natural in \(\mathcal F\): a morphism
+\(\mathcal F\to\mathcal G\) of quasi-coherent sheaves on \(X\) gives a
+commutative square with the base change maps for \(\mathcal F\) and for
+\(\mathcal G\); and it is natural in \(k'\): for a \(k\)-algebra map
+\(k'\to k''\) between flat \(k\)-algebras the square
+\[
+\begin{array}{ccc}
+H^i(X,\mathcal F)\otimes_kk' & \longrightarrow & H^i(X_{k'},\mathcal F_{k'})\\[-2pt]
+\downarrow & & \downarrow\\[-2pt]
+H^i(X,\mathcal F)\otimes_kk'' & \longrightarrow & H^i(X_{k''},\mathcal F_{k''})
+\end{array}
+\]
+commutes, the left vertical map being induced by \(k'\to k''\) and the
+right vertical map being pullback along \(X_{k''}\to X_{k'}\).  Applied
+to a localization \(A\to A_f\) of a flat \(k\)-algebra \(A\), this says
+that the identifications of \(H^i(X_A,\mathcal F_A)\) and of
+\(H^i(X_{A_f},\mathcal F_{A_f})\) are compatible with localization.
 In particular, if \(k'\supseteq k\) is an extension of algebraically
 closed fields and \(\mathcal F=\mathcal O_X\), then
 \[
  \dim_{k'}H^i(X_{k'},\mathcal O_{X_{k'}})=\dim_kH^i(X,\mathcal O_X).
 \]
+\uses{lem:pc-base-change-map}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-cech-spectral}
+\uses{lem:pcb-cech-spectral,lem:pc-base-change-map}
 Since \(X\) is proper over \(k\), it is quasi-compact and
 quasi-separated, hence covered by finitely many affine open subsets
 \(U_1,\dots,U_r\), and their base changes \(U_{j,k'}\) cover
@@ -647,6 +677,26 @@ complex computing \(H^\bullet(X,\mathcal F)\) by applying
 \[
  H^i(X_{k'},\mathcal F_{k'})\cong H^i(X,\mathcal F)\otimes_kk'.
 \]
+The comparison just used is the map of complexes
+\(\check C^\bullet(\mathfrak U,\mathcal F)\otimes_kk'\to
+\check C^\bullet(\mathfrak U_{k'},\mathcal F_{k'})\) whose degree \(q\)
+component is the displayed identification
+\(\Gamma(U_J,\mathcal F)\otimes_kk'\to
+\Gamma(U_{J,k'},\mathcal F_{k'})\) on each multi-index \(J\); this is the
+base change map of \Cref{lem:pc-base-change-map} in each degree, so the
+isomorphism it induces on cohomology is the base change map of the
+statement.  Naturality is inherited from this map of complexes: a
+morphism \(\mathcal F\to\mathcal G\) induces a map of Cech complexes
+commuting with it degreewise, and a \(k\)-algebra map \(k'\to k''\)
+between flat \(k\)-algebras induces
+\(\check C^\bullet(\mathfrak U,\mathcal F)\otimes_kk'\to
+\check C^\bullet(\mathfrak U,\mathcal F)\otimes_kk''\), which is
+compatible degreewise with the pullback
+\(\check C^\bullet(\mathfrak U_{k'},\mathcal F_{k'})\to
+\check C^\bullet(\mathfrak U_{k''},\mathcal F_{k''})\) along
+\(X_{k''}\to X_{k'}\), because \(\mathfrak U_{k''}\) is the base change
+of \(\mathfrak U_{k'}\) and both maps are extension of scalars on
+sections over the \(U_J\).
 The dimension statement follows: a \(k\)-basis of
 \(H^i(X,\mathcal F)\) remains a \(k'\)-basis after extension of
 scalars, because the field extension \(k\to k'\) is flat (injective).
