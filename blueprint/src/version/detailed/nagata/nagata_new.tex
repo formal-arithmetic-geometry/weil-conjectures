@@ -6035,10 +6035,16 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Finite-presentation closed immersions and finite type ideals]
   \label{lemma:nagata-closed-fp-ideal-finite-type}
-  \statusnote{Bypassed by the formalized route: centres are carried as
-    finite-type ideal sheaves (\texttt{AlgebraicGeometry.Scheme.IdealSheafData})
-    throughout, so the translation between finite-presentation closed immersions
-    and finite-type ideals is never made.}
+  \statusnote{Formalized, but as the two implications separately rather than as a single
+    biconditional:
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation\_subschemeι}
+    for ``finite-type ideal gives a closed immersion locally of finite presentation'' and
+    \texttt{AlgebraicGeometry.Scheme.Hom.fg\_ideal\_ker} for the converse, both in
+    \texttt{WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation}.  The
+    boundary-separation route does not need them --- centres are carried as finite-type
+    ideal sheaves (\texttt{AlgebraicGeometry.Scheme.IdealSheafData}) throughout --- but
+    the finite-presentation reduction does, through
+    \texttt{WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit}.}
 
   A closed immersion $Z\hookrightarrow X$ is of finite presentation if and
   only if its defining quasi-coherent ideal sheaf is of finite type.
@@ -6077,10 +6083,12 @@ correction explicit before it is sheafified and glued.
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
   \leanok
   \statusnote{No separate Lean declaration: the asserted properties of
-    $\mathcal I_Y(W)$ are exactly the body of the existence statement
+    $\mathcal I_Y(W)$ are the body of the existence statement
     \texttt{AlgebraicGeometry.Scheme.exists\_finiteType\_ideal\_coe\_support\_eq\_compl},
-    which the \texttt{\textbackslash lean} field above names; there is no Lean
-    declaration about a separately selected ideal.}
+    which the \texttt{\textbackslash lean} field above names --- except quasi-coherence,
+    which is carried by the type \texttt{AlgebraicGeometry.Scheme.IdealSheafData} of the
+    witness rather than asserted about it.  There is no Lean declaration about a separately
+    selected ideal.}
 
   The ideal $\mathcal I_Y(W)$ is finite type and quasi-coherent, and
   \[
@@ -6101,9 +6109,15 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-finite-type-nil-ideal-nilpotent}
   \statusnote{Bypassed by the formalized route: boundary separation is
     \texttt{AlgebraicGeometry.separationBlowup} with
-    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures},
-    proved from Deligne's disjointness blow-up rather than from this
-    preparation.}
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures}, which blows up
+    the sum $\mathcal I_1+\mathcal I_2$ directly on $X$ and separates the strict transforms
+    chart-locally
+    (\texttt{AlgebraicGeometry.disjoint\_range\_strictTransformMap\_sup}, Tag 0F3V), as the
+    Remark below records, rather than going through this preparation.  Deligne's
+    disjointness blow-up
+    (\texttt{AlgebraicGeometry.disjoint\_closure\_range\_of\_blowupMap\_sup}) is a different
+    statement and is not in the import closure of
+    \texttt{WeilConjectures.Compactification.BoundaryPreparation}.}
 
   Let $X$ be quasi-compact and let $\mathcal I$ be a finite type
   quasi-coherent ideal with $V(\mathcal I)=X$.  Then there exists $n>0$ with
@@ -6127,9 +6141,15 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-chart-generator-regular}
   \statusnote{Bypassed by the formalized route: boundary separation is
     \texttt{AlgebraicGeometry.separationBlowup} with
-    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures},
-    proved from Deligne's disjointness blow-up rather than from this
-    preparation.}
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures}, which blows up
+    the sum $\mathcal I_1+\mathcal I_2$ directly on $X$ and separates the strict transforms
+    chart-locally
+    (\texttt{AlgebraicGeometry.disjoint\_range\_strictTransformMap\_sup}, Tag 0F3V), as the
+    Remark below records, rather than going through this preparation.  Deligne's
+    disjointness blow-up
+    (\texttt{AlgebraicGeometry.disjoint\_closure\_range\_of\_blowupMap\_sup}) is a different
+    statement and is not in the import closure of
+    \texttt{WeilConjectures.Compactification.BoundaryPreparation}.}
 
   Let $X$ be qcqs, let $U\subseteq X$ be quasi-compact open, and let
   $Z_i=V(\mathcal I_i)\hookrightarrow X$ be finite-presentation closed
@@ -6289,11 +6309,14 @@ correction explicit before it is sheafified and glued.
     def:nagata-separate-closed-subschemes}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
   \leanok
-  \statusnote{No separate Lean declaration: the ideals $\mathcal J_i$ and
-    $\mathcal I_i$, the closed subschemes $Z_i$ and the blow-up
-    $\mathsf{CSepBl}_U(T_1,T_2)$ are all constructed inside the proof of
+  \statusnote{No separate Lean declaration: the ideals $\mathcal I_i$, the closed
+    subschemes $Z_i$ and the blow-up $\mathsf{CSepBl}_U(T_1,T_2)$ are all constructed
+    inside the proof of
     \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures}, which
-    the \texttt{\textbackslash lean} field above names.}
+    the \texttt{\textbackslash lean} field above names; the ideals $\mathcal J_i$ are
+    constructed one level down, inside the proof of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_finiteType\_preimage\_coe\_support\_eq}
+    that this proof invokes.}
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $T_1,T_2\subseteq U$ be disjoint constructible subsets closed in $U$.
@@ -6446,12 +6469,24 @@ correction explicit before it is sheafified and glued.
     def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
   \leanok
-  \statusnote{No separate Lean declaration: the whole construction --- the
-    constructible separation, the separation blow-up, the elimination of
-    indeterminacy over $X_0$ and the extension back to $X_1$ --- is carried out
-    inside the proof of
+  \statusnote{No separate Lean declaration: the whole construction is carried out inside
+    the proof of
     \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isIso\_strictTransformMap\_near\_closure},
-    which the \texttt{\textbackslash lean} field above names.}
+    which the \texttt{\textbackslash lean} field above names.  That proof also departs from
+    the construction displayed here.  It performs \emph{two} constructible separations, not
+    one: the first inside $V$, separating $T$ from $E$ and producing a quasi-compact open
+    $V_2$ with $T\subseteq V_2\subseteq V\setminus E$; the second inside the separation
+    blow-up $X_1$, producing a quasi-compact open $A\subseteq X_1$ which contains the
+    closure of the inverse image of $T$ and misses the closure of the inverse image of
+    $V\setminus V_2$.  There is no $X_0=X_1\setminus\overline E_c$: the open $A$ plays its
+    role, the elimination of indeterminacy is applied on $X_1$ itself, to the canonical lift
+    of $q$ and relative to the locus above $V_2$; and the centre it produces is not extended
+    to $X_1$ by \Cref{def:nagata-extended-admissible-blowup} but glued across $A$ and the
+    locus above $V$ (Tag 080M,
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_finiteType\_comap\_eq\_of\_disjoint})
+    and then composed with the first blow-up (Tag 080B,
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_blowup\_comp\_base\_change})
+    into a single $V$-admissible centre on $X$.}
 
   Let $X$ be qcqs, let $q\colon Z\to X$ be proper, let $V\subseteq X$ be a
   quasi-compact open, set
