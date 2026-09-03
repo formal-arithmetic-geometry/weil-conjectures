@@ -66,6 +66,8 @@ Let $E$ be a field of characteristic zero.
 
 \begin{definition}[Reciprocal characteristic polynomial]
 \label{def:zla-recip-charpoly}
+\lean{LinearMap.charpolyRev}
+\leanok
 For a finite-dimensional $E$-vector space $V$ and
 $u\in\operatorname{End}_E(V)$, define
 \[
@@ -85,6 +87,9 @@ $[T^{\dim V}]P_{V,u}=(-1)^{\dim V}\det(u)$.
 \begin{lemma}[Finite-dimensional trace--determinant identity]
 \label{lem:zla-trace-det}
 \uses{def:zla-recip-charpoly}
+\lean{LinearMap.inv_charpolyRev_eq_exp,
+      LinearMap.X_mul_derivative_charpolyRev}
+\leanok
 Let $V$ be a finite-dimensional $E$-vector space and let
 $u\in\operatorname{End}_E(V)$.  Then
 \[
@@ -101,6 +106,7 @@ $P_{V,u}(0)=1$.  Equivalently,
 No semisimplicity assumption is imposed on $u$.
 \end{lemma}
 \begin{proof}
+\leanok
 Differentiating a determinant gives the matrix identity
 $\frac{d}{dT}\det(1-Tu)=-\det(1-Tu)\Tr\!\left((1-Tu)^{-1}u\right)$ in
 $E[[T]]$, where the formal resolvent is
@@ -117,6 +123,8 @@ determined by its constant coefficient and its derivative.
 \begin{definition}[Finite cohomological trace datum]
 \label{def:zla-trace-datum}
 \uses{def:zla-recip-charpoly}
+\lean{TraceDatum, TraceDatum.P}
+\leanok
 Let $E$ be a field of characteristic zero.  A \emph{finite cohomological trace
 datum} over $E$ consists of:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -155,9 +163,18 @@ the invertible integer $n$.  The left-hand side is the coefficientwise scalar
 extension along $\mathbf Q\to E$ of a series with rational coefficients.
 \end{proof}
 
+No Lean declaration states this comparison.  The nearby
+\texttt{TraceDatum.X\_mul\_derivative\_zeta} is a different identity, namely
+that the logarithmic derivative of the counting series is
+$\sum_{n\geq1}N_nT^n$; the alternating-sum comparison itself is carried out
+inside the proof of
+\texttt{TraceDatum.zeta\_mul\_prod\_even\_eq\_prod\_odd}.
+
 \begin{proposition}[Cohomological determinant factorization]
 \label{prop:zla-cohomological-factorization}
 \uses{def:zla-trace-datum, lem:zla-counting-log, lem:zla-trace-det}
+\lean{TraceDatum.zeta_mul_prod_even_eq_prod_odd}
+\leanok
 For a finite cohomological trace datum,
 \[
   \operatorname{Exp}\left(\sum_{n\geq1}N_n\frac{T^n}{n}\right)
@@ -176,12 +193,16 @@ which is the shape of the factorization required by
 expansion at the origin of a rational function in $E(T)$.
 \end{proposition}
 \begin{proof}
+\leanok
 By \Cref{lem:zla-counting-log} the exponent may be rewritten as the finite
 alternating sum $\sum_i(-1)^i\sum_{n\geq1}\Tr(F_i^n\mid V_i)T^n/n$.  The formal
 exponential turns a finite sum into a finite product, so the left-hand side is
 $\prod_i\operatorname{Exp}\left(\sum_n\Tr(F_i^n)T^n/n\right)^{(-1)^i}$, and
 each factor is $P_i(T)^{-1}$ by \Cref{lem:zla-trace-det}.
 \end{proof}
+
+The Lean statement is the second, cleared form; the first form follows from
+it because $P_i(0)=1$ makes each $P_i$ invertible in $E[[T]]$.
 
 \section{Rational germs and Hankel descent}\label{sec:zla-hankel}
 
@@ -848,6 +869,8 @@ $1$.  \Cref{lem:zla-normalized-fraction-unique} over $\Omega$ concludes.
 \begin{definition}[Complete weight factor]
 \label{def:zla-complete-weight-factor}
 \uses{def:zla-weight-stratum, prop:zla-weight-stratum-rational}
+\lean{Polynomial.parityPart, Polynomial.weightFactor}
+\leanok
 Continue with the hypotheses above and assume $A,B\in\mathbf Z[T]$.  For
 $0\leq i\leq r$ put
 \[
@@ -866,10 +889,18 @@ reciprocal roots of $R_i$ that are universally pure of weight $i$, with the
 multiplicities they have in $R_i$.
 \end{definition}
 
+The two halves of this definition are separate in Lean: $R_i$ is
+\texttt{Polynomial.parityPart A B i}, the weight-$i$ stratum is the
+\texttt{Polynomial.weightFactor} of \Cref{def:zla-weight-stratum}, and
+$P_i^{\mathrm{rec}}$ is their composite
+\texttt{(parityPart A B i).weightFactor q i}.
+
 \begin{proposition}[Unique recovery over the coefficient field]
 \label{prop:zla-unique-recovery}
 \uses{def:zla-complete-weight-factor, prop:zla-parity-identification,
 def:zla-pure-polynomial, prop:zla-weight-stratum-rational}
+\lean{Polynomial.eq_map_weightFactor}
+\leanok
 For every $i$,
 \[
   P_i(T)=P_i^{\mathrm{rec}}(T)
@@ -880,6 +911,7 @@ $\mathbf Q[T]$, determined by the reduced fraction $A/B$, by $q$, and by the
 integer $i$.
 \end{proposition}
 \begin{proof}
+\leanok
 By \Cref{prop:zla-parity-identification} the product of the $P_j$ over the
 $j$ of the same parity as $i$ is the scalar extension of $R_i$, so the
 reciprocal-root multiset of $R_i$ is the union, with multiplicities, of those
@@ -896,9 +928,13 @@ reciprocal-root multiset and constant coefficient $1$ are equal.
 \label{prop:zla-factor-integrality}
 \uses{def:zla-complete-weight-factor, prop:zla-weight-stratum-rational,
 lem:zla-normalized-gauss}
+\lean{Polynomial.exists_int_weightFactor,
+      Polynomial.exists_int_weightFactor_parityPart}
+\leanok
 The recovered polynomial $P_i^{\mathrm{rec}}(T)$ belongs to $\mathbf Z[T]$.
 \end{proposition}
 \begin{proof}
+\leanok
 By \Cref{prop:zla-weight-stratum-rational} the polynomial
 $P_i^{\mathrm{rec}}$ is a factor of $R_i$ in $\mathbf Q[T]$ whose
 complementary factor $R_i/P_i^{\mathrm{rec}}$ is again rational, and both
@@ -1280,6 +1316,12 @@ inverses of the roots of $\iota(P_V)(\iota(\mu)^{-1}T)$; the map
 $z\mapsto(\iota(\mu)z)^{-1}$ is an involution of $\Omega^\times$, so no
 bookkeeping of directions is needed.
 \end{proof}
+
+\texttt{LinearMap.roots\_map\_charpolyRev\_of\_similitude} proves the displayed
+equality of root multisets, over an arbitrary algebraically closed target
+field and without assuming $E$ algebraically closed, but it does not state
+that $\iota(P_V)$ and $\iota(P_W)$ have degree $b$, nor that they do not
+vanish at $0$.
 
 \begin{theorem}[The functional equation of a trace datum]
 \label{thm:zla-functional-equation}
