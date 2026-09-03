@@ -74,9 +74,12 @@ nature:
   of injectives.
 
 Like `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp`, this
-file deliberately avoids the unbounded machinery indexed by K-injective complexes, whose
-only source in this repository is a `sorry`; the bounded below statement rests on proved
-theorems.
+file deliberately avoids the unbounded machinery indexed by K-injective complexes. That
+machinery is proved, not assumed — `HasKInjectiveResolutions` holds in every Grothendieck
+abelian category (`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`)
+— but it is not implied by enough injectives, which is all the bounded below statement needs,
+so this file does not import
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
 
 -/
 
