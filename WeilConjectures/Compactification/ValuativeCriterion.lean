@@ -49,9 +49,11 @@ extension `ValuationSubring.exists_comap_eq` (Stacks Tag 00IA).
 
 ## Implementation notes
 
-The criterion is proved in the form `ValuativeCriterion.Existence f`, which is stronger
-than `UniversallyClosed f` (it needs no quasi-compactness of `f` and is stable under base
-change), and the two named consequences are read off from it.
+The criterion is proved in the form `ValuativeCriterion.Existence f`, which applies more
+widely than `UniversallyClosed f`: Mathlib's `UniversallyClosed.eq_valuativeCriterion` reads
+`UniversallyClosed = ValuativeCriterion.Existence ⊓ QuasiCompact`, so the existence form
+needs no quasi-compactness of `f`, and it is stable under base change. The two named
+consequences are read off from it.
 
 Two reductions differ from the Stacks Project text. Instead of replacing `U`, `X` and `S`
 by their reductions, `h` is factored through its scheme-theoretic image — `h.toImage` is
