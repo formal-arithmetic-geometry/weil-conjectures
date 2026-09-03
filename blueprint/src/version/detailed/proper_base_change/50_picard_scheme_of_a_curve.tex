@@ -2903,27 +2903,30 @@ whence $\dim_KH^1(X_K,\cO_{X_K})=\dim_kH^1(X,\cO_X)=g(X)$.
 \label{lem:pc-structure-pushforward}
 Let $k$ be a field, $X$ a
 \hyperref[def:pc-smooth-projective-curve]{smooth projective curve} over
-$k$ with $H^0(X,\cO_X)=k$ and $T$ a scheme over $k$.  Then
-$f_{T,*}\cO_{X_T}\cong\cO_T$, where $f_T:X_T\to T$ is the structure
-morphism of the base change.
+$k$ with $H^0(X,\cO_X)=k$ and $T$ a scheme over $k$.  Then the
+canonical map $\cO_T\to f_{T,*}\cO_{X_T}$ is an isomorphism, where
+$f_T:X_T\to T$ is the structure morphism of the base change.
 \uses{def:pc-base-change,def:pc-morphism-conventions,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-coherent-hi,lem:pcb-flat-base-change-coherent}
 Since $X$ is proper over $k$, $f_T$ is proper, hence quasi-compact and
 quasi-separated, so $f_{T,*}\cO_{X_T}$ is quasi-coherent
-(\Cref{lem:pc-coherent-hi}(1)).  To identify it with $\cO_T$ it
-suffices to show that its sections over every affine open
-$V=\Spec(A)\subseteq T$ equal $A$ compatibly with localization: by
+(\Cref{lem:pc-coherent-hi}(1)).  Both $\cO_T$ and $f_{T,*}\cO_{X_T}$
+being quasi-coherent, the canonical map $\cO_T\to f_{T,*}\cO_{X_T}$ is an
+isomorphism as soon as it is bijective on sections over every affine open
+$V=\Spec(A)\subseteq T$: by
 \Cref{lem:pcb-flat-base-change-coherent} applied to $X$ proper over $k$,
 the flat $k$-algebra $A$ and $\cF=\cO_X$,
 \[
 \Gamma(X_V,\cO_{X_V})=H^0(X_V,\cO_{X_V})\cong H^0(X,\cO_X)\otimes_kA
 =k\otimes_kA=A ,
 \]
-and these identifications are compatible with the localization maps of
-the structure sheaf of $T$ (the corresponding identification holds for
-every localizing $A\to A_f$).  Hence $f_{T,*}\cO_{X_T}=\cO_T$.
+the composite being the map induced by $A=\Gamma(V,\cO_T)$, and these
+identifications are compatible with the localization maps of the
+structure sheaf of $T$ (the corresponding identification holds for every
+localizing $A\to A_f$).  Hence the canonical map
+$\cO_T\to f_{T,*}\cO_{X_T}$ is an isomorphism.
 \end{proof}
 
 \section{Imported facts and technical methods}\label{sec:facts}
@@ -6549,20 +6552,17 @@ $T\in\Ob((\Sch/k)_{fppf})$.
 \uses{def:pc-smooth-projective-curve,def:pc-rational-point,def:pc-picard-functor,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-h0-proper-variety}
+\uses{lem:pc-h0-proper-variety,lem:pc-structure-pushforward}
 The section $\sigma$ verifies the first condition.  By
 \Cref{lem:pc-h0-proper-variety} (1) (or the first part of Varieties,
 Lemma~33.26.2), $k':=H^0(X,\cO_X)$ is a finite field extension of $k$;
 the $k$-rational point induces a $k$-algebra homomorphism $k'\to k$, and
-a field homomorphism over $k$ is injective, so $k'=k$.  Hence
-$f_*\cO_X=\cO_k$, and for $T\in(\Sch/k)_{fppf}$: the structure morphism
-$T\to\Spec(k)$ is flat (\Cref{lem:pc-flat-field}), so by
-\Cref{lem:pc-flat-base-change-cohom} applied to $f:X\to\Spec k$ and
-$\cF=\cO_X$,
-\[
-f_{T,*}\cO_{X_T}=g^*f_*\cO_X=g^*\cO_k=\cO_T
-\]
-where $g:T\to\Spec(k)$.  This proves the claim.
+a field homomorphism over $k$ is injective, so $k'=k$.  Thus $X$ is a
+smooth projective curve over $k$ with $H^0(X,\cO_X)=k$, so
+\Cref{lem:pc-structure-pushforward} applies to every scheme over $k$, in
+particular to every $T\in\Ob((\Sch/k)_{fppf})$: the canonical map
+$\cO_T\to f_{T,*}\cO_{X_T}$ is an isomorphism, where $f_T:X_T\to T$ is
+the structure morphism of the base change.  This proves the claim.
 \end{proof}
 
 % ---------------------------------------------------------------------------
