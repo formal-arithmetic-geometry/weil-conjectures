@@ -1,0 +1,215 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.PowerSeries.Exp
+public import WeilConjectures.EulerProductAux
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
+
+/-!
+# The determinant-trace identity
+
+Let `K` be a field, `V` a finite dimensional `K`-vector space and `F : V →ₗ[K] V`. The
+reciprocal characteristic polynomial `LinearMap.charpolyRev F = det (1 - t F)`, viewed as a
+formal power series, satisfies the classical identity
+
+`det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)`,
+
+which is the linear algebra input to the cohomological factorisation of a zeta function. This
+file proves it in two forms: a logarithmic derivative form, valid over any field, and the
+exponential form above, over a field of characteristic zero.
+
+The proof reduces to an algebraically closed field, where `det (1 - t F) = ∏ (1 - λ t)` and
+`tr (F ^ n) = ∑ λ ^ n` are both expressed through the multiset of roots of the characteristic
+polynomial, so that everything follows from the single factor case
+`t * (1 - λ t)' = - (∑_{n ≥ 1} λ ^ n t ^ n) (1 - λ t)`.
+
+## Main results
+
+- `LinearMap.X_mul_derivative_charpolyRev`: the logarithmic derivative form
+  `t * (det (1 - t F))' = - (∑_{n ≥ 1} tr (F ^ n) t ^ n) * det (1 - t F)`, together with its
+  matrix counterpart `Matrix.X_mul_derivative_charpolyRev`.
+- `LinearMap.inv_charpolyRev_eq_exp`: the exponential form
+  `det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)`, over a field of characteristic
+  zero. It is stated in the same shape as
+  `AlgebraicGeometry.Scheme.Hom.zetaSeries`, so that the two can be compared directly.
+-/
+
+@[expose] public section
+
+open PowerSeries
+
+namespace PowerSeries
+
+variable {K : Type*} [Field K]
+
+/-- The geometric series `∑_{n ≥ 1} λ ^ n t ^ n` times `1 - λ t` is `λ t`. -/
+private theorem mk_pow_mul_one_sub (l : K) :
+    (mk fun n ↦ if n = 0 then 0 else l ^ n) * (1 - C l * X) = C l * X := by
+  have key : ∀ f : K⟦X⟧, f * (1 - C l * X) = f - C l * (X * f) := by
+    intro f; ring
+  rw [key]
+  ext n
+  match n with
+  | 0 => simp
+  | (m + 1) =>
+    rw [map_sub, coeff_mk, coeff_C_mul, coeff_succ_X_mul, coeff_mk, coeff_C_mul,
+      if_neg (Nat.succ_ne_zero m)]
+    match m with
+    | 0 => simp
+    | (k + 1) =>
+      rw [if_neg (Nat.succ_ne_zero k)]
+      simp [pow_succ, coeff_X, mul_comm]
+
+private theorem derivative_one_sub_C_mul_X (l : K) :
+    derivative K (1 - C l * X : K⟦X⟧) = -C l := by
+  rw [map_sub, Derivation.map_one_eq_zero, Derivation.leibniz, derivative_X, derivative_C,
+    smul_zero, add_zero, smul_eq_mul, mul_one, zero_sub]
+
+/-- The logarithmic derivative of a finite product `∏ (1 - λ t)` is
+`- ∑_{n ≥ 1} (∑ λ ^ n) t ^ n`. -/
+private theorem X_mul_derivative_multiset_prod (s : Multiset K) :
+    X * derivative K (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod =
+      (-mk fun n ↦ if n = 0 then 0 else (s.map (· ^ n)).sum) *
+        (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
+  induction s using Multiset.induction with
+  | empty =>
+    have hz : (mk fun _ : ℕ ↦ (0 : K)) = 0 := by ext; simp
+    simp [hz]
+  | cons a s ih =>
+    have hsplit : (mk fun n ↦ if n = 0 then 0 else ((a ::ₘ s).map (· ^ n)).sum) =
+        (mk fun n ↦ if n = 0 then 0 else a ^ n) +
+          (mk fun n ↦ if n = 0 then 0 else (s.map (· ^ n)).sum) := by
+      ext n
+      simp only [coeff_mk, map_add, Multiset.map_cons, Multiset.sum_cons]
+      split <;> simp
+    have h4 : X * derivative K (1 - C a * X : K⟦X⟧) =
+        (-mk fun n ↦ if n = 0 then 0 else a ^ n) * (1 - C a * X) := by
+      rw [neg_mul, mk_pow_mul_one_sub, derivative_one_sub_C_mul_X]
+      ring
+    rw [hsplit, Multiset.map_cons, Multiset.prod_cons, Derivation.leibniz, smul_eq_mul,
+      smul_eq_mul]
+    linear_combination (1 - C a * X : K⟦X⟧) * ih +
+      (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod * h4
+
+/-- The image in `K⟦X⟧` of a product of polynomials `1 - λ t`. -/
+private theorem coe_multiset_prod_one_sub (s : Multiset K) :
+    (((s.map fun l ↦ (1 - Polynomial.C l * Polynomial.X)).prod : Polynomial K) : K⟦X⟧) =
+      (s.map fun l ↦ (1 - C l * X : K⟦X⟧)).prod := by
+  rw [← Polynomial.coeToPowerSeries.ringHom_apply, map_multiset_prod, Multiset.map_map]
+  simp
+
+end PowerSeries
+
+namespace Matrix
+
+variable {K : Type*} [Field K] {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+private theorem X_mul_derivative_charpolyRev_of_isAlgClosed [IsAlgClosed K] (A : Matrix ι ι K) :
+    X * derivative K (A.charpolyRev : K⟦X⟧) =
+      (-mk fun n ↦ if n = 0 then 0 else (A ^ n).trace) * (A.charpolyRev : K⟦X⟧) := by
+  simp only [Matrix.trace_pow_eq_sum_pow_roots_charpoly]
+  rw [Matrix.charpolyRev_eq_prod_one_sub_smul, coe_multiset_prod_one_sub]
+  exact X_mul_derivative_multiset_prod _
+
+/-- The logarithmic derivative of the reciprocal characteristic polynomial `det (1 - t A)` of a
+square matrix is minus the generating series of the traces of the powers of `A`. -/
+theorem X_mul_derivative_charpolyRev (A : Matrix ι ι K) :
+    X * derivative K (A.charpolyRev : K⟦X⟧) =
+      (-mk fun n ↦ if n = 0 then 0 else (A ^ n).trace) * (A.charpolyRev : K⟦X⟧) := by
+  set φ := algebraMap K (AlgebraicClosure K)
+  have hinj : Function.Injective φ := (algebraMap K (AlgebraicClosure K)).injective
+  apply PowerSeries.map_injective φ hinj
+  have hcp : Polynomial.map φ A.charpolyRev = (A.map φ).charpolyRev := by
+    rw [← Matrix.reverse_charpoly, ← Matrix.reverse_charpoly, Matrix.charpoly_map,
+      Polynomial.reverse_map hinj]
+  have htr : PowerSeries.map φ (mk fun n ↦ if n = 0 then 0 else (A ^ n).trace)
+      = mk fun n ↦ if n = 0 then 0 else ((A.map φ) ^ n).trace := by
+    ext n
+    rw [coeff_map, coeff_mk, coeff_mk]
+    split
+    · exact map_zero φ
+    · rw [AddMonoidHom.map_trace, Matrix.map_pow]
+  rw [map_mul, map_X, map_derivative, map_mul, map_neg, htr, ← Polynomial.polynomial_map_coe,
+    hcp]
+  exact X_mul_derivative_charpolyRev_of_isAlgClosed _
+
+end Matrix
+
+namespace LinearMap
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+
+/-- **The determinant-trace identity**, in logarithmic derivative form: the logarithmic
+derivative of the reciprocal characteristic polynomial `det (1 - t F)` of an endomorphism `F`
+of a finite dimensional vector space is minus the generating series of the traces of the
+powers of `F`, i.e. `t * (det (1 - t F))' = - (∑_{n ≥ 1} tr (F ^ n) t ^ n) * det (1 - t F)`. -/
+theorem X_mul_derivative_charpolyRev (F : Module.End K V) :
+    X * derivative K (F.charpolyRev : K⟦X⟧) =
+      (-PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n)) *
+        (F.charpolyRev : K⟦X⟧) := by
+  classical
+  set b := Module.finBasis K V
+  have htr : ∀ n : ℕ, LinearMap.trace K V (F ^ n) = ((toMatrix b b F) ^ n).trace := by
+    intro n
+    rw [LinearMap.toMatrix_pow, LinearMap.trace_eq_matrix_trace K b]
+  simp only [htr]
+  rw [← LinearMap.charpolyRev_toMatrix b F]
+  exact Matrix.X_mul_derivative_charpolyRev _
+
+/-- **The determinant-trace identity**, exponential form:
+`det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)` for an endomorphism `F` of a finite
+dimensional vector space over a field of characteristic zero. -/
+theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
+    (F.charpolyRev : K⟦X⟧)⁻¹ =
+      (PowerSeries.exp K).subst
+        (PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n) := by
+  have hlogP := X_mul_derivative_charpolyRev F
+  set P : K⟦X⟧ := (F.charpolyRev : K⟦X⟧) with hP
+  set T : K⟦X⟧ := PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n)
+    with hT
+  set g : K⟦X⟧ := PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n
+    with hg
+  have hsubst : PowerSeries.HasSubst g :=
+    PowerSeries.HasSubst.of_constantCoeff_zero' (by simp [hg])
+  have hP1 : PowerSeries.constantCoeff P = 1 := by
+    rw [hP, Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
+  have hmul : P * P⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hP1]; exact one_ne_zero)
+  have hlogPinv : X * derivative K P⁻¹ = T * P⁻¹ := by
+    rw [PowerSeries.derivative_inv']
+    linear_combination (-(P⁻¹ ^ 2)) * hlogP + (T * P⁻¹) * hmul
+  have hXg : X * derivative K g = T := by
+    ext n
+    match n with
+    | 0 => simp [hg, hT]
+    | m + 1 =>
+      rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative, hg, hT,
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
+        if_neg m.succ_ne_zero]
+      have hm : ((m : K) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero m
+      push_cast
+      rw [div_mul_cancel₀ _ hm]
+  have hlogE : X * derivative K ((PowerSeries.exp K).subst g) =
+      T * (PowerSeries.exp K).subst g := by
+    rw [PowerSeries.derivative_subst hsubst, PowerSeries.derivative_exp,
+      mul_comm (PowerSeries.subst g (PowerSeries.exp K)), ← mul_assoc, hXg]
+  have hEconst : PowerSeries.constantCoeff ((PowerSeries.exp K).subst g) = 1 := by
+    have h0 : PowerSeries.coeff 0 ((PowerSeries.exp K).subst g) = 1 := by
+      rw [PowerSeries.coeff_subst' (hb := hsubst), finsum_eq_single _ 0
+        fun d hd ↦ by simp [PowerSeries.coeff_zero_eq_constantCoeff, map_pow, zero_pow hd, hg]]
+      simp [PowerSeries.coeff_exp]
+    simpa using h0
+  have hconst : PowerSeries.constantCoeff P⁻¹ =
+      PowerSeries.constantCoeff ((PowerSeries.exp K).subst g) := by
+    rw [PowerSeries.constantCoeff_inv, hP1, hEconst, inv_one]
+  have hT0 : PowerSeries.constantCoeff T = 0 := by rw [hT]; simp
+  ext n
+  exact PowerSeries.coeff_eq_of_X_mul_derivative_eq hlogPinv hlogE hconst hT0
+    (m := n) (fun i _ ↦ rfl) n le_rfl
+
+end LinearMap

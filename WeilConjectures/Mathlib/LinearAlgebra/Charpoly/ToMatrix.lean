@@ -16,6 +16,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 
 * `LinearMap.charpolyRev`: the reverse characteristic polynomial `det (1 - t • f)` of an
   endomorphism `f` of a finite free module.
+* `LinearMap.eval_charpolyRev`: the reverse characteristic polynomial takes the value `1` at
+  `t = 0`.
 * `LinearMap.charpoly_dualMap`: the characteristic polynomial is invariant under transposition.
 * `LinearMap.C_det_mul_charpolyRev`: if `f * g = c • 1`, then `det (1 - t • g)` is determined by
   the characteristic polynomial of `f`.
@@ -39,6 +41,12 @@ theorem charpolyRev_def (f : M →ₗ[R] M) : f.charpolyRev = f.charpoly.reverse
 theorem charpolyRev_toMatrix {ι : Type*} [DecidableEq ι] [Fintype ι] (b : Basis ι R M)
     (f : M →ₗ[R] M) : (toMatrix b b f).charpolyRev = f.charpolyRev := by
   rw [charpolyRev_def, ← charpoly_toMatrix f b, Matrix.reverse_charpoly]
+
+/-- The reverse characteristic polynomial `det (1 - t • f)` takes the value `1` at `t = 0`. -/
+@[simp]
+theorem eval_charpolyRev (f : M →ₗ[R] M) : Polynomial.eval 0 f.charpolyRev = 1 := by
+  classical
+  rw [← charpolyRev_toMatrix (Module.Free.chooseBasis R M) f, Matrix.eval_charpolyRev]
 
 variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
 
