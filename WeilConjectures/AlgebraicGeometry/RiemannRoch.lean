@@ -43,8 +43,10 @@ this is the idiom used by `CategoryTheory.GradedObject.eulerChar`, and it takes 
 that is not free of finite rank. The hypotheses under which these junk values do not occur — `X`
 proper over `k` and `ℱ` coherent — are not part of the definitions; that they are the right
 hypotheses is the blueprint's `lem:pc-euler-characteristic-well-defined`. For the same reason
-`genus` is defined for an arbitrary scheme over `k`, without the geometric irreducibility
-hypothesis under which the blueprint states `def:pc-genus`.
+`degree` is defined for an arbitrary module on an arbitrary scheme over `k`, without the
+invertibility and properness hypotheses of `def:pc-degree-line-bundle`, and `genus` is defined
+for an arbitrary scheme over `k`, without the geometric irreducibility hypothesis under which
+the blueprint states `def:pc-genus`.
 
 The Euler characteristic and the degree are invariants of a module and live in the
 `Scheme.Modules` namespace alongside `Scheme.Modules.cohomology`, whereas the genus is an
@@ -89,9 +91,10 @@ noncomputable def eulerCharacteristic (f : X ⟶ Spec (.of k)) (M : X.Modules) :
 /-- The **degree** `deg(ℒ) = χ(X, ℒ) - χ(X, 𝒪_X)` of an invertible `𝒪_X`-module `ℒ` on a
 scheme `f : X ⟶ Spec k` over a field `k`.
 
-The definition is made for an arbitrary `𝒪_X`-module on an arbitrary scheme over `k`; Stacks
-0AYR defines it for an invertible module on a scheme proper of dimension `≤ 1` over `k`, which is
-where it has the expected properties.
+The degree is used, and has the expected properties, only for an invertible module on a scheme
+proper of dimension `≤ 1` over `k`: this is the setting of Stacks 0AYR, and the setting of the
+sole use site `riemannRoch`. As for `eulerCharacteristic`, these hypotheses are not part of the
+definition.
 (blueprint: `def:pc-degree-line-bundle`, Stacks 0AYR) -/
 @[stacks 0AYR]
 noncomputable def degree (f : X ⟶ Spec (.of k)) (M : X.Modules) : ℤ :=
