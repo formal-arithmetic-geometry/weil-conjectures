@@ -2694,6 +2694,26 @@ isomorphism is a local property of coherent modules, the claim follows.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Pullback commutes with tensor products]
+\label{lem:pc-pullback-tensor}
+Let $h:(X,\cO_X)\to(Y,\cO_Y)$ be a morphism of ringed spaces, for instance
+a morphism of schemes, and let $\cF,\cG$ be $\cO_Y$-modules.  Then
+\[
+h^*(\cF\otimes_{\cO_Y}\cG)\;\cong\;h^*\cF\otimes_{\cO_X}h^*\cG,
+\]
+functorially in $\cF$ and $\cG$, and $h^*\cO_Y\cong\cO_X$.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Modules, Lemma~17.16.4
+(\stacksproject{01CD}).  The identification $h^*\cO_Y\cong\cO_X$ is the
+unit case and is immediate from the definition
+$h^*\cG=h^{-1}\cG\otimes_{h^{-1}\cO_Y}\cO_X$ of the pullback.  It is not
+decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[$\Pic$ of a field]\label{lem:pc-pic-of-field}
 Let $k$ be a field.  Then the
@@ -2943,15 +2963,15 @@ reason recorded in \Cref{def:pc-picard-group}: Mathlib has no monoidal structure
 \texttt{SheafOfModules}.}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-picard-group,def:pc-pic-sigma-functor,def:pc-base-change,def:pc-rational-point,lem:pc-pic-presheaf-functorial,lem:pc-tensor-dual-invertible}
+\uses{def:pc-picard-group,def:pc-pic-sigma-functor,def:pc-base-change,def:pc-rational-point,lem:pc-pic-presheaf-functorial,lem:pc-pullback-tensor,lem:pc-tensor-dual-invertible}
 (1) The pullback of an invertible module is invertible and $h^*$ sends
 isomorphic modules to isomorphic modules (Modules, Lemma~17.25.3,
 \stacksproject{0B8L}; this is also the first assertion of
 \Cref{lem:pc-pic-presheaf-functorial}), so $[\cL]\mapsto[h^*\cL]$ is a
 well-defined map $\Pic(Y)\to\Pic(Y')$.  It is a group homomorphism
 because $h^*(\cL\otimes_{\cO_Y}\cM)\cong
-h^*\cL\otimes_{\cO_{Y'}}h^*\cM$ (Modules, Lemma~17.16.4,
-\stacksproject{01CD}) and $h^*\cO_Y\cong\cO_{Y'}$: these say exactly
+h^*\cL\otimes_{\cO_{Y'}}h^*\cM$ and $h^*\cO_Y\cong\cO_{Y'}$
+(\Cref{lem:pc-pullback-tensor}): these say exactly
 that $h^*$ preserves the product and the unit of the group law of
 \Cref{def:pc-picard-group}.
 
@@ -5495,6 +5515,54 @@ one.  It is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The Leray spectral sequence comes from a filtration finite in
+each degree]
+\label{lem:pc-leray-finite-filtration}
+Let $f:X\to Y$ be a morphism of ringed spaces and let $\cG^\bullet$ be a
+bounded below complex of $\cO_X$-modules.  Then the Leray spectral sequence
+of \Cref{lem:pc-leray-spectral-sequence},
+\[
+E_2^{p,q}=H^p\bigl(Y,\;R^qf_*(\cG^\bullet)\bigr)
+\Longrightarrow H^{p+q}(X,\cG^\bullet),
+\]
+is the spectral sequence associated with a
+\hyperref[def:pc-filtered-complex]{filtered complex} $(K^\bullet,F)$ whose
+filtration is \hyperref[def:pc-filtered-complex]{finite in each degree},
+that is, finite on $K^n$ for every $n$.  For $X$ and $Y$ schemes over a
+field $k$ this is a filtered complex of $k$-vector spaces.
+\uses{def:pc-filtered-complex,def:pc-derived-direct-image,def:pc-morphism-conventions,lem:pc-leray-spectral-sequence}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-filtered-complex}
+This is a cited external input.  The Leray spectral sequence is the
+Grothendieck spectral sequence of the composition
+$\Gamma(X,-)=\Gamma(Y,-)\circ f_*$ (Derived Categories,
+Lemma~13.22.2, \stacksproject{015N}), which
+is the spectral sequence of the double complex obtained by applying
+$\Gamma(Y,-)$ to a Cartan--Eilenberg resolution $I^{\bullet,\bullet}$ of a
+bounded below complex computing $Rf_*\cG^\bullet$ (Derived Categories,
+Lemma~13.21.3, \stacksproject{015J}); and
+the spectral sequences of a double complex $K^{\bullet,\bullet}$ are by
+construction those of the filtered complex
+$\operatorname{Tot}(K^{\bullet,\bullet})$ for the two filtrations
+$F_{I}^p\operatorname{Tot}^n=\bigoplus_{i+j=n,\,i\ge p}K^{i,j}$ and
+$F_{II}^p\operatorname{Tot}^n=\bigoplus_{i+j=n,\,j\ge p}K^{i,j}$
+(Homology, Section~12.25,
+\stacksproject{012X}).  A
+Cartan--Eilenberg resolution has $I^{p,q}=0$ for $q<0$ and for all
+sufficiently small $p$, so in each total degree $n$ only finitely many
+$K^{i,j}$ with $i+j=n$ are nonzero and both filtrations are finite on
+$\operatorname{Tot}^n$ (\Cref{def:pc-filtered-complex}); the filtration is
+therefore finite in each degree.  The Cartan--Eilenberg route is not
+avoidable here: Lemma~13.22.2 also asserts that the spectral sequence is
+bounded and induces a finite filtration on each $H^n$ of the
+\emph{abutment}, which is a different and weaker statement than the
+finiteness on each $K^n$ of the filtered complex asserted above.  It is not
+decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Additivity of the Euler characteristic]
 \label{lem:pc-euler-additive}
@@ -5516,7 +5584,7 @@ coherent $\cO_X$-module $\cG$:
 \uses{def:pc-euler-characteristic,def:pc-morphism-conventions,lem:pc-coherent-hi,def:pc-derived-direct-image}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-filtered-complex,lem:pc-coherent-hi,lem:pc-leray-spectral-sequence,lem:pc-spectral-sequence-euler}
+\uses{def:pc-filtered-complex,lem:pc-coherent-hi,lem:pc-leray-finite-filtration,lem:pc-leray-spectral-sequence,lem:pc-spectral-sequence-euler}
 The long exact cohomology sequence of the short exact sequence is
 \[
 0\to H^0(\cF_1)\to H^0(\cF_2)\to H^0(\cF_3)\to H^1(\cF_1)\to H^1(\cF_2)
@@ -5544,27 +5612,9 @@ E_2^{p,q}=H^p(Y,R^qf_*\cG)\Longrightarrow H^{p+q}(X,\cG).
 \]
 This is the spectral sequence of a filtered complex of $k$-vector spaces
 whose filtration is finite in each degree
-(\Cref{def:pc-filtered-complex}), as
-\Cref{lem:pc-spectral-sequence-euler} requires: the Leray spectral
-sequence is the Grothendieck spectral sequence of the composition
-$\Gamma(X,-)=\Gamma(Y,-)\circ f_*$ (Derived Categories,
-Lemma~13.22.2, \stacksproject{015N}), which
-is the spectral sequence of the double complex obtained by applying
-$\Gamma(Y,-)$ to a Cartan--Eilenberg resolution $I^{\bullet,\bullet}$ of a
-bounded below complex computing $Rf_*\cG$ (Derived Categories,
-Lemma~13.21.3, \stacksproject{015J}); and
-the spectral sequences of a double complex $K^{\bullet,\bullet}$ are by
-construction those of the filtered complex
-$\operatorname{Tot}(K^{\bullet,\bullet})$ for the two filtrations
-$F_{I}^p\operatorname{Tot}^n=\bigoplus_{i+j=n,\,i\ge p}K^{i,j}$ and
-$F_{II}^p\operatorname{Tot}^n=\bigoplus_{i+j=n,\,j\ge p}K^{i,j}$
-(Homology, Section~12.25,
-\stacksproject{012X}).  A
-Cartan--Eilenberg resolution has $I^{p,q}=0$ for $q<0$ and for all
-sufficiently small $p$, so in each total degree $n$ only finitely many
-$K^{i,j}$ with $i+j=n$ are nonzero and both filtrations are finite on
-$\operatorname{Tot}^n$; the filtration is therefore finite in each
-degree.
+(\Cref{def:pc-filtered-complex},
+\Cref{lem:pc-leray-finite-filtration}), as
+\Cref{lem:pc-spectral-sequence-euler} requires.
 All $R^qf_*\cG$ are coherent (\Cref{lem:pc-coherent-hi}) and only
 finitely many are nonzero, so each $E_2^{p,q}$ is finite dimensional
 over $k$ and $E_2$ has finite support; the spectral sequence converges
@@ -5729,6 +5779,32 @@ the corresponding statements for closed immersions (Lemma~35.23.21, \stacksproje
 for open immersions (Lemma~35.23.18, \stacksproject{02L3}).  It is not decomposed here.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Relative very ampleness and the complete linear system]
+\label{lem:pc-relative-very-ample-criterion}
+Let $f:X\to S$ be a quasi-compact morphism of schemes and let $\cL$ be an
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-module}.  The
+following are equivalent.
+\begin{enumerate}
+\item $\cL$ is relatively very ample on $X/S$: there are a
+quasi-coherent $\cO_S$-module $\mathcal E$ and an immersion
+$i:X\to\mathbf P(\mathcal E)$ over $S$ with $i^*\cO(1)\cong\cL$.
+\item $f$ is quasi-separated, the canonical map
+$f^*f_*\cL\to\cL$ is surjective, and the associated morphism
+$r_{\cL}:X\to\mathbf P(f_*\cL)$ is an immersion.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-invertible-module}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Lemma~29.39.7
+(\stacksproject{01VR}).  That lemma has four equivalent conditions, of
+which (1) and (4) are the two listed above, in that order; its
+condition~(1) is the definition of relative very ampleness.  It is not
+decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Very ampleness descends along field extensions]
 \label{lem:pc-very-ample-descends}
@@ -5740,7 +5816,7 @@ $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
 \uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pc-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi}
+\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi}
 By definition of very ampleness there is an immersion
 $i:X_K\to\mathbf P^N_K$ with $i^*\cO_{\mathbf P^N}(1)=\cL_K$.  The
 sections $x_1,\dots,x_N$ of $\cO_{\mathbf P^N}(1)$ pull back to
@@ -5776,14 +5852,13 @@ quasi-compact immersion is fpqc local on the base
 immersion, in particular an immersion).
 By construction $\psi^*\cO_{\mathbf P(V)}(1)=\cL$, so $\cL$ is very
 ample relative to the structure morphism $f:X\to\Spec(k)$: this is
-condition~(1) of Morphisms of Schemes, Lemma~29.39.7
-(\stacksproject{01VR}), an immersion
+condition~(1) of \Cref{lem:pc-relative-very-ample-criterion}, i.e.\ an immersion
 into $\mathbf P(\mathcal E)$ for the quasi-coherent module
 $\mathcal E=V$ on $\Spec(k)$.  That is not yet very ampleness in the
 sense of \Cref{def:pcb-ample}, which asks for the \emph{complete}
 linear system $|\cL|$ and for a \emph{closed} immersion; two steps
 supply the difference.  First, $f$ is quasi-compact, so that lemma
-applies, and its condition~(4) gives that the morphism
+applies, and its condition~(2) gives that the morphism
 $r_{\cL}:X\to\mathbf P(f_*\cL)$ associated with the canonical
 surjection $f^*f_*\cL\to\cL$ is again an immersion --- which is
 exactly the passage from the subsystem $V$ to the complete system,
