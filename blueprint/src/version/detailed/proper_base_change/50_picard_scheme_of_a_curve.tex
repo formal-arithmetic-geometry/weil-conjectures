@@ -4093,16 +4093,45 @@ $x\in U$ and $\varphi(U)\subseteq V$, together with an \'etale morphism
 $\pi:U\to\mathbf A^d_V$ over $V$ (so that the induced morphism $U\to V$
 is the composition of $\pi$ with the projection
 $\mathbf A^d_V\to V$).
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-smooth-morphism}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-smooth-morphism,lem:pc-standard-smooth-form}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Morphisms of Schemes, Section~29.37
 (\'Etale morphisms), Lemma~29.37.21
 (\stacksproject{054L}) --- smooth schemes are
 \'etale-locally like affine spaces.  It is not decomposed here.
-% Mathlib: not present.  grep -rn "stacks 054L" over .lake/packages/mathlib is
-% empty, and Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean contains no
-% construction of an etale chart of a smooth morphism over affine space.
+
+The same Stacks lemma is cited for the last clause of
+\Cref{lem:pc-standard-smooth-form}; it is stated separately here because
+the form above --- the form the tag itself states --- is stronger in two
+ways.  The affine open $V\subseteq Y$ over which the chart is produced
+is \emph{prescribed} in advance, whereas \Cref{lem:pc-standard-smooth-form}
+produces an affine open of the target of its own choosing; and the
+\'etale projection is asserted with no proviso, whereas in
+\Cref{lem:pc-standard-smooth-form} that clause is stated only for a
+$\varphi$ having a relative dimension $n$.  At the use of this node
+below, in the density of separable points, the first strengthening is
+vacuous --- the prescribed $V=\Spec(k)$ is the whole base --- and it is
+the second that is wanted, since it removes the step of shrinking $X$ to
+a neighbourhood of the point on which $\varphi$ has a relative
+dimension.
+% Mathlib: not stated by any single declaration, but composed of two that are
+% present -- so this node is not \mathlibok, and the "leaf of the plan" verdict
+% on \Cref{lem:pc-standard-smooth-form}, which cites the same tag for its weaker
+% clause, is the one to read for what Mathlib has.  The two declarations are:
+%   AlgebraicGeometry.Smooth.exists_isStandardSmooth
+%   (Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:99) -- for f smooth and
+%   x : X, there are an affine open U of Y and an affine open V of X with x in V
+%   and V <= f^-1 U such that (f.appLE U V e).hom.IsStandardSmooth; and
+%   RingHom.IsStandardSmooth.exists_etale_mvPolynomial
+%   (Mathlib/RingTheory/RingHom/StandardSmooth.lean:260) -- a standard smooth
+%   ring map f : R -> S factors as R -> MvPolynomial (Fin n) R -> S with the
+%   second map etale.
+% Composed they give the lemma, but they do not literally state it: it takes two
+% declarations rather than one; the affine open of the target is produced by the
+% first declaration rather than prescribed as a hypothesis; and that declaration
+% assumes f smooth rather than smooth at the given point.  grep -rn "stacks 054L"
+% over .lake/packages/mathlib is empty.
 \end{proof}
 
 % ---------------------------------------------------------------------------
