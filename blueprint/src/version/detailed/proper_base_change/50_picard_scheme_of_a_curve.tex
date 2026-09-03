@@ -4108,6 +4108,160 @@ invertible ideal sheaf, i.e.\ is an effective Cartier divisor, and
 $\cO_{C,P}$ is a discrete valuation ring.
 \uses{def:pc-curve,def:pc-effective-cartier-divisor,lem:pcb-point-cartier}
 \end{remark}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Smooth morphisms are \'etale over affine space, locally]
+\label{lem:pc-smooth-etale-over-affine-space}
+Let $\varphi:X\to Y$ be a morphism of schemes, let $x\in X$, and let
+$V\subseteq Y$ be an affine open neighbourhood of $\varphi(x)$.  If
+$\varphi$ is \hyperref[def:pc-smooth-morphism]{smooth} at $x$, then
+there exist an integer $d\ge0$ and an affine open $U\subseteq X$ with
+$x\in U$ and $\varphi(U)\subseteq V$, together with an \'etale morphism
+$\pi:U\to\mathbf A^d_V$ over $V$ (so that the induced morphism $U\to V$
+is the composition of $\pi$ with the projection
+$\mathbf A^d_V\to V$).
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-smooth-morphism,lem:pc-standard-smooth-form}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.37
+(\'Etale morphisms), Lemma~29.37.21
+(\stacksproject{054L}) --- smooth schemes are
+\'etale-locally like affine spaces.  It is not decomposed here.
+
+The same Stacks lemma is cited for the last clause of
+\Cref{lem:pc-standard-smooth-form}; it is stated separately here because
+the form above --- the form the tag itself states --- is stronger in two
+ways.  The affine open $V\subseteq Y$ over which the chart is produced
+is \emph{prescribed} in advance, whereas \Cref{lem:pc-standard-smooth-form}
+produces an affine open of the target of its own choosing; and the
+\'etale projection is asserted with no proviso, whereas in
+\Cref{lem:pc-standard-smooth-form} that clause is stated only for a
+$\varphi$ having a relative dimension $n$.  At the use of this node
+below, in the density of separable points, the first strengthening is
+vacuous --- the prescribed $V=\Spec(k)$ is the whole base --- and it is
+the second that is wanted, since it removes the step of shrinking $X$ to
+a neighbourhood of the point on which $\varphi$ has a relative
+dimension.
+% Mathlib: not stated by any single declaration, but composed of two that are
+% present -- so this node is not \mathlibok, and the "leaf of the plan" verdict
+% on \Cref{lem:pc-standard-smooth-form}, which cites the same tag for its weaker
+% clause, is the one to read for what Mathlib has.  The two declarations are:
+%   AlgebraicGeometry.Smooth.exists_isStandardSmooth
+%   (Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:99) -- for f smooth and
+%   x : X, there are an affine open U of Y and an affine open V of X with x in V
+%   and V <= f^-1 U such that (f.appLE U V e).hom.IsStandardSmooth; and
+%   RingHom.IsStandardSmooth.exists_etale_mvPolynomial
+%   (Mathlib/RingTheory/RingHom/StandardSmooth.lean:260) -- a standard smooth
+%   ring map f : R -> S factors as R -> MvPolynomial (Fin n) R -> S with the
+%   second map etale.
+% Composed they give the lemma, but they do not literally state it: it takes two
+% declarations rather than one; the affine open of the target is produced by the
+% first declaration rather than prescribed as a hypothesis; and that declaration
+% assumes f smooth rather than smooth at the given point.  grep -rn "stacks 054L"
+% over .lake/packages/mathlib is empty.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[\'Etale morphisms are open]
+\label{lem:pc-etale-open}
+Let $f:X\to Y$ be an \'etale morphism of schemes.  Then $f$ is open:
+the image $f(U)$ of every open $U\subseteq X$ is open in $Y$.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.37
+(\'Etale morphisms), Lemma~29.37.13
+(\stacksproject{03WT}).  It is not decomposed
+here.
+% Mathlib: no single declaration states this.  grep -rn "stacks 03WT" over
+% .lake/packages/mathlib is empty; the fact is only reachable through an
+% instance chain, Etale f gives Flat f and LocallyOfFinitePresentation f, then
+% AlgebraicGeometry.UniversallyOpen.of_flat, then
+% AlgebraicGeometry.Scheme.Hom.isOpenMap -- whose statements are about
+% UniversallyOpen, not about Etale.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Separable closed points on affine space]
+\label{lem:pc-affine-space-separable-closed-point}
+Let $k$ be a field, let $d\ge0$ and let $W\subseteq\mathbf A^d_k$ be a
+nonempty open subscheme.  Then there exists a closed point $w\in W$
+such that $\kappa(w)/k$ is
+\hyperref[def:pc-field-tower]{finite separable}.
+\uses{def:pc-scheme,def:pc-field-tower}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Section~33.25 (Schemes
+smooth over fields), Lemma~33.25.5
+(\stacksproject{055T}).  (Its argument: after
+shrinking, $W=\mathbf A^d_k\setminus V(f)$ for a nonzero
+$f\in k[x_1,\dots,x_d]$, and $f$ cannot vanish at every point of
+$(k^{sep})^d$ because $k^{sep}$ is an infinite field.)  It is not
+decomposed here.
+% Mathlib: not present.  grep -rn "stacks 055T" over .lake/packages/mathlib is
+% empty, and there is no existence statement for closed points with finite
+% separable residue field on AlgebraicGeometry.AffineSpace.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Points with algebraic residue extension are closed]
+\label{lem:pc-algebraic-residue-closed-point}
+Let $f:X\to S$ be a morphism of schemes, let $x\in X$ and put $s=f(x)$.
+If $\kappa(x)/\kappa(s)$ is an
+\hyperref[def:pc-field-tower]{algebraic} field extension, then:
+\begin{enumerate}
+\item $x$ is a closed point of its fibre $X_s$;
+\item if in addition $s$ is a closed point of $S$, then $x$ is a closed
+point of $X$.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-base-change,def:pc-field-tower}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.21
+(Quasi-finite morphisms), Lemma~29.21.2
+(\stacksproject{01TE}).  It is not decomposed
+here.
+% Mathlib: not present.  grep -rn "stacks 01TE" over .lake/packages/mathlib is
+% empty, and no declaration in Mathlib/AlgebraicGeometry deduces closedness of a
+% point from algebraicity of its residue field extension over the image point.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Fibres of \'etale morphisms]
+\label{lem:pc-etale-fibres-separable}
+\'Etale schemes over a field, and the fibres of an \'etale morphism,
+are described as follows.
+\begin{enumerate}
+\item Let $X$ be a scheme over a field $k$.  The structure morphism
+$X\to\Spec(k)$ is \'etale if and only if $X$ is a disjoint union of
+spectra of \hyperref[def:pc-field-tower]{finite separable} field
+extensions of $k$.
+\item If $f:X\to S$ is an \'etale morphism of schemes, then for every
+$s\in S$ the fibre $X_s$ is a disjoint union of spectra of finite
+separable field extensions of $\kappa(s)$.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,def:pc-field-tower}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.37
+(\'Etale morphisms), Lemma~29.37.7
+(\stacksproject{02GL}).  It is not decomposed
+here.
+% Mathlib: the nearest declaration is Algebra.Etale.iff_exists_algEquiv_prod in
+% Mathlib/RingTheory/Etale/Field.lean -- "A is etale over a field K if and only
+% if A is a finite product of finite separable field extensions".  That is the
+% ring-level statement for one algebra, restricted to finite products; it is not
+% the scheme-level statement (1)--(2) above, which allows arbitrary disjoint
+% unions and speaks about the fibres of a morphism.  grep -rn "stacks 02GL" over
+% .lake/packages/mathlib is empty.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 \begin{lemma}[Density of rationally defined closed points]
 \label{lem:pc-dense-separable-points}
 (Varieties, Lemma~33.25.6,
@@ -4118,65 +4272,48 @@ finite and separable is dense in $X$.
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-field-tower,def:pc-smooth-morphism}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-morphism-conventions,def:pc-smooth-morphism,def:pc-field-tower}
+\uses{def:pc-morphism-conventions,def:pc-smooth-morphism,def:pc-field-tower,lem:pc-smooth-etale-over-affine-space,lem:pc-etale-open,lem:pc-affine-space-separable-closed-point,lem:pc-algebraic-residue-closed-point,lem:pc-etale-fibres-separable}
 It suffices to show: for every nonempty open $V\subseteq X$ there is a
 closed point of $V$ with finite separable residue field over $k$ (the
 statement is Zariski-local and the assertion is stable under replacing
-$X$ by a nonempty open, so we may replace $X$ by $V$ in the course of
-the argument).  Choose a diagram
+$X$ by a nonempty open).  So fix such a $V$, replace $X$ by $V$, and
+assume $X=V$ is nonempty.
+
+Pick a point $x_0\in X$.  The structure morphism
+$\varphi:X\to\Spec(k)$ is smooth, hence smooth at $x_0$
+(\Cref{def:pc-smooth-morphism}), and $\Spec(k)$ is an affine open
+neighbourhood of $\varphi(x_0)$ in $\Spec(k)$; so
+\Cref{lem:pc-smooth-etale-over-affine-space} applies to $\varphi$, to
+the point $x_0$ and to that affine open.  It yields an integer $d\ge0$,
+an affine open $U\subseteq X$ containing $x_0$ (so $U\neq\emptyset$)
+and an \'etale morphism
 \[
 \pi:U\longrightarrow\mathbf A^d_k
 \]
-with $U\subseteq X$ a nonempty open and $\pi$ an 'etale morphism over $k$
-with $U\subseteq X$ a nonempty open and $\pi$ \'etale: since $X$ is
-smooth over the field $k$, the structure morphism is smooth, and a
-smooth $k$-algebra is Zariski-locally a standard smooth
-$k[x_1,\dots,x_n]/(f_1,\dots,f_c)$ with invertible Jacobian subdeterminant;
-the Jacobian condition says exactly that the projection onto the
-remaining $n-c$ coordinates is \'etale -- this is Morphisms of Schemes,
-Lemma 29.37.21, \stacksproject{054L}
-(smooth $=$ locally \'etale over affine space; we replace $X$ by the
-relevant open).
+over $k$.
 
-The morphism $\pi$ is open (etale morphisms are open: Morphisms of
-Schemes, Lemma 29.37.13,
-\stacksproject{03WT}), so
-$\pi(U)\subseteq\mathbf A^d_k$ is a nonempty open.  By Varieties,
-Lemma 33.25.5 (\stacksproject{055T})
-there is a closed point $w\in\pi(U)$ with $\kappa(w)/k$ finite
-separable: the proof of 33.25.5 is the simple argument that a nonempty
-open $W\subseteq\mathbf A^d_k$ contains the point
-$(a_1,\dots,a_d)$ of $k^{sep}$-rational type with
-$f(a_1,\dots,a_d)\neq0$ (after shrinking, $W=\mathbf A^d_k\setminus V(f)$
-for a nonzero polynomial $f$, and $f$ cannot vanish on the whole of
-$(k^{sep})^d$ because $k^{sep}$ is infinite: e.g.\ if $k$ is finite
-then $k^{sep}=\bigcup_{m\ge1}\mathbf F_{q^{m!}}$ is infinite and a
-nonzero polynomial in $d$ variables over an infinite field does not
-vanish identically elsewhere; the same genericity argument applies for
-any infinite field); the point
-$\Spec(k(a_1,\dots,a_d))\to\mathbf A^d_k$ with
-$k(a_1,\dots,a_d)/k$ finite separable (the $a_i$'s are separable:
-their minimal polynomials are separable since their roots generate a
-separable extension) is a closed point of $W$: its residue field is
-finite over $k$, and points of a scheme locally of finite type over a
-field with finite residue field are closed (Morphisms of Schemes,
-Lemma 29.21.2, \stacksproject{01TE}).
+The morphism $\pi$ is \'etale, hence open by
+\Cref{lem:pc-etale-open}, so $\pi(U)\subseteq\mathbf A^d_k$ is a
+nonempty open subscheme.  Applying
+\Cref{lem:pc-affine-space-separable-closed-point} to the field $k$, the
+integer $d$ and the nonempty open $W=\pi(U)$, we obtain a closed point
+$w\in\pi(U)$ with $\kappa(w)/k$ finite separable.
 
-Pick any $x\in U$ with $\pi(x)=w$.  By Morphisms of Schemes,
-Lemma 29.37.7 (\stacksproject{02GL})
-the extension $\kappa(x)/\kappa(w)$ is finite separable (for an \'etale
-ring map $R\to S$ over a field, the residue extension is finite
-separable: an \'etale morphism is unramified, so the residue extension
-is a finite separable extension, a standard consequence of the
-definitions of unramified and flat), hence $\kappa(x)/k$ is finite
-separable by transitivity.  The point $x$ is closed in $X$: it is
-closed in $U$ (its residue field is finite over $k$), and a closed
-point of a nonempty open of a scheme locally of finite type over $k$
-with finite residue field is closed in $X$: its residue field $\kappa(x)$
-is finite over $k$, so $x$ is closed in every open neighbourhood in
-which it lies (the standard criterion of 01TE applies
-Zariski-locally on $X$).  This proves the claim for $V$ (we applied the
-argument with $U$ replaced by the nonempty open $U\cap V$).
+Pick any $x\in U$ with $\pi(x)=w$; then $x$ lies in the fibre $U_w$ of
+the \'etale morphism $\pi$ over the point $w$.  By
+\Cref{lem:pc-etale-fibres-separable}(2) that fibre is a disjoint union
+of spectra of finite separable field extensions of $\kappa(w)$, and the
+residue field of $x$ is one of them; so $\kappa(x)/\kappa(w)$ is finite
+separable, and $\kappa(x)/k$ is finite separable by transitivity.
+
+Finally $x$ is a closed point of $X$.  Apply
+\Cref{lem:pc-algebraic-residue-closed-point} to the structure morphism
+$X\to\Spec(k)$ and the point $x$: its image is the unique point $s$ of
+$\Spec(k)$, which is a closed point of $\Spec(k)$, and
+$\kappa(x)/\kappa(s)=\kappa(x)/k$ is finite, hence algebraic
+(\Cref{def:pc-field-tower}); part~(2) of that lemma gives that $x$ is
+closed in $X$.  Since $x\in U\subseteq X=V$, this is the closed point
+of $V$ we wanted.
 \end{proof}
 
 
