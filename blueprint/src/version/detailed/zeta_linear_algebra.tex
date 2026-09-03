@@ -203,9 +203,17 @@ the inverse being taken in $K[[T]]$.  Write $K(T)_0\subseteq K(T)$ for the
 subring of rational functions regular at $T=0$.
 \end{definition}
 
+The Lean development does not package normalized rational germs as a type:
+it works throughout with the predicate $\exists A,B\in K[T]$ with $B(0)=1$
+and $fB=A$ on a power series $f$, so this definition has no Lean counterpart
+of its own and the statements below are formalised in that unpackaged form.
+
 \begin{lemma}[Faithfulness of the Taylor map]
 \label{lem:zla-taylor-faithful}
 \uses{def:zla-rational-germ}
+\lean{PowerSeries.mul_eq_mul_of_mul_coe_eq,
+      PowerSeries.eq_of_mul_eq_mul}
+\leanok
 If two normalized rational germs have the same Taylor series, then they are
 equal.  Equivalently, Taylor expansion gives an injective map
 \[
@@ -213,6 +221,7 @@ equal.  Equivalently, Taylor expansion gives an injective map
 \]
 \end{lemma}
 \begin{proof}
+\leanok
 A denominator with constant coefficient $1$ is invertible in $K[[T]]$, so the
 equality $AB^{-1}=A'B'^{-1}$ of power series may be cross-multiplied to
 $AB'=A'B$ in $K[[T]]$; both sides are polynomials, and $K[T]\to K[[T]]$ is
@@ -233,6 +242,10 @@ $\det(a_{r_x+s_y})_{0\leq x,y\leq h}$ vanishes, for all choices of nonnegative
 indices $r_x,s_y$.
 \end{definition}
 
+Only the shift span is formalised; the Hankel matrix $H(a)$ and its rank
+condition have no Lean counterpart, the shift span playing their role
+throughout the Lean proofs.
+
 \begin{definition}[Eventual recurrence]
 \label{def:zla-eventual-recurrence}
 An \emph{eventual recurrence of order $d$} for a sequence
@@ -244,9 +257,14 @@ $K^d\times\mathbf N$ satisfying
 \]
 \end{definition}
 
+There is no Lean definition of an eventual recurrence: it enters as the
+hypothesis of \texttt{finiteDimensional\_shiftSpan\_of\_recurrence}.
+
 \begin{lemma}[A rational germ supplies a recurrence]
 \label{lem:zla-germ-recurrence}
 \uses{def:zla-rational-germ, def:zla-eventual-recurrence}
+\lean{PowerSeries.sum_coeff_mul_coeff_eq_zero}
+\leanok
 Let $f(T)=\sum_{n\geq0}a_nT^n$ be the Taylor series of the normalized rational
 germ $A(T)/B(T)$, where $B(T)=1+c_1T+\cdots+c_dT^d$.  Then
 \[
@@ -256,6 +274,7 @@ whenever $n>\deg A$ and $n\geq d$.  In particular $(c_1,\ldots,c_d;\deg A+1)$
 is an eventual recurrence of order $d$ for $a$.
 \end{lemma}
 \begin{proof}
+\leanok
 Read off the coefficient of $T^n$ in the identity $B(T)f(T)=A(T)$: the
 left-hand side contributes $\sum_{k=0}^{d}c_ka_{n-k}$ with $c_0=1$, and the
 right-hand side contributes $0$ once $n>\deg A$.
@@ -264,10 +283,13 @@ right-hand side contributes $0$ once $n>\deg A$.
 \begin{lemma}[A recurrence gives finite shift span]
 \label{lem:zla-recurrence-shift-span}
 \uses{def:zla-eventual-recurrence, def:zla-shift-span}
+\lean{finiteDimensional_shiftSpan_of_recurrence}
+\leanok
 If $a\in K^{\mathbf N}$ satisfies an eventual recurrence, then
 $\operatorname{Sh}_K(a)$ is finite-dimensional.
 \end{lemma}
 \begin{proof}
+\leanok
 Let $(c_1,\ldots,c_d;N)$ be the recurrence and put
 $M=\max\{N,d\}$.  Beyond the threshold the recurrence expresses $S^ma$, for
 $m\geq M$, as a $K$-linear combination of $S^{m-1}a,\ldots,S^{m-d}a$ up to a
@@ -280,6 +302,9 @@ lies in that finite-dimensional space.
 
 \begin{lemma}[Finite coordinates detect independent sequences]
 \label{lem:zla-finite-coordinates}
+\lean{linearIndependent_iff_exists_det_ne_zero,
+      LinearIndependent.exists_det_ne_zero}
+\leanok
 Let $v_1,\ldots,v_r\in K^{\mathbf N}$ be linearly independent.  There exist
 indices $n_1,\ldots,n_r\in\mathbf N$ such that
 \[
@@ -287,6 +312,7 @@ indices $n_1,\ldots,n_r\in\mathbf N$ such that
 \]
 \end{lemma}
 \begin{proof}
+\leanok
 Induct on $r$ by finite Gaussian elimination: given indices that work for
 $v_1,\ldots,v_{r-1}$, subtract from $v_r$ the unique combination of
 $v_1,\ldots,v_{r-1}$ agreeing with it at those indices; the residual sequence
@@ -318,8 +344,13 @@ pair $(A_a,B_a)$ is a normalized polynomial fraction with Taylor series
 $f_a$.
 \end{proof}
 
+The Lean statement asserts the existence of the normalized fraction
+$(A_a,B_a)$ only; the degree bound $\deg A_a<r$ is visible in its proof but
+is not part of the statement, and nothing below uses it.
+
 \begin{lemma}[Finite determinants reflect scalar extension]
 \label{lem:zla-det-scalar-extension}
+\uses{lem:zla-finite-coordinates}
 Let $K\hookrightarrow L$ be an injective field homomorphism.  For every finite
 square matrix $M$ over $K$,
 \[
@@ -340,11 +371,16 @@ reflects the vanishing of that expression.  The consequence follows from
 finite coordinate determinant, which stays nonzero over $L$.
 \end{proof}
 
+The determinant criterion itself is not isolated as a Lean declaration; the
+two Lean statements are the two consequences, the first as an equivalence.
+
 \begin{theorem}[Hankel rationality descent]
 \label{thm:zla-hankel-descent}
 \uses{def:zla-rational-germ, def:zla-shift-span, lem:zla-germ-recurrence,
 lem:zla-recurrence-shift-span, lem:zla-finite-coordinates,
 lem:zla-det-scalar-extension, prop:zla-shift-span-germ}
+\lean{PowerSeries.exists_normalized_fraction_map_iff}
+\leanok
 For every field extension $K\subseteq L$,
 \[
   K[[T]]\cap L(T)_0=K(T)_0
@@ -356,6 +392,7 @@ span constructs a normalized rational germ over $K$ whose Taylor series is
 $f$.
 \end{theorem}
 \begin{proof}
+\leanok
 Let $a$ be the coefficient sequence of $f$, which lies in $K^{\mathbf N}$.  A
 normalized rational germ over $L$ with Taylor series $f$ supplies an eventual
 recurrence for $a$ over $L$ (\Cref{lem:zla-germ-recurrence}), hence a finite
@@ -372,12 +409,15 @@ $f=\tau_K[A_a,B_a]$.  The reverse inclusion is trivial.
 \begin{corollary}[Rationality over the counting field]
 \label{cor:zla-rationality-counting-field}
 \uses{thm:zla-hankel-descent, def:zla-rational-germ}
+\lean{PowerSeries.exists_normalized_fraction_of_map_rat}
+\leanok
 If $Z(T)\in\mathbf Q[[T]]$ becomes the Taylor series of a normalized rational
 germ after coefficientwise extension to a characteristic-zero field $E$, then
 $Z(T)\in\mathbf Q(T)_0$: there are $A,B\in\mathbf Q[T]$ with $B(0)=1$ and
 $B(T)Z(T)=A(T)$.
 \end{corollary}
 \begin{proof}
+\leanok
 Apply \Cref{thm:zla-hankel-descent} to the extension $\mathbf Q\subseteq E$,
 which is an extension of fields because $E$ has characteristic zero.
 \end{proof}
@@ -387,6 +427,9 @@ which is an extension of fields because $E$ has characteristic zero.
 \begin{definition}[Integral shift lattice]
 \label{def:zla-integral-shift-lattice}
 \uses{def:zla-shift-span}
+\lean{intSeqShift,
+      intShiftSpan}
+\leanok
 Let $a\in\mathbf Z^{\mathbf N}$ have finite-dimensional rational shift span
 $W=\operatorname{Sh}_{\mathbf Q}(a)$.  Define
 \[
@@ -399,6 +442,10 @@ $M(a)\otimes_{\mathbf Z}\mathbf Q=W$.
 \begin{lemma}[Finite-coordinate lattice]
 \label{lem:zla-finite-coordinate-lattice}
 \uses{def:zla-integral-shift-lattice, lem:zla-finite-coordinates}
+\lean{Submodule.exists_finset_eval_injective,
+      finite_intShiftSpan,
+      free_intShiftSpan}
+\leanok
 With the notation of \Cref{def:zla-integral-shift-lattice}, there is a finite
 set $J\subset\mathbf N$ such that coordinate evaluation
 \[
@@ -408,6 +455,7 @@ is injective.  Its restriction maps $M(a)$ injectively into $\mathbf Z^J$.
 Hence $M(a)$ is a finite free abelian group.
 \end{lemma}
 \begin{proof}
+\leanok
 Choose a basis of $W$ consisting of shifts of $a$ and let $J$ be a set of
 coordinates on which the corresponding determinant does not vanish
 (\Cref{lem:zla-finite-coordinates}); then $\operatorname{ev}_J$ is injective on
@@ -420,6 +468,8 @@ free abelian group is finite free.
 \begin{lemma}[Integral Cayley--Hamilton recurrence]
 \label{lem:zla-integral-cayley-hamilton}
 \uses{def:zla-integral-shift-lattice, lem:zla-finite-coordinate-lattice}
+\lean{exists_monic_sum_coeff_mul_eq_zero}
+\leanok
 With the notation of \Cref{def:zla-integral-shift-lattice}, the shift
 endomorphism $S:M(a)\to M(a)$ has a monic characteristic polynomial
 \[
@@ -431,6 +481,7 @@ where $r$ is the rank of $M(a)$, and for every $n\geq0$,
 \]
 \end{lemma}
 \begin{proof}
+\leanok
 By \Cref{lem:zla-finite-coordinate-lattice} the group $M(a)$ is finite free, and
 it is stable under the shift, so $S$ has an integral matrix in any basis; its
 characteristic polynomial is monic with integer coefficients.
@@ -443,6 +494,8 @@ sequences in coordinate $n$ is the displayed recurrence.
 \label{prop:zla-integral-presentation}
 \uses{lem:zla-integral-cayley-hamilton, thm:zla-hankel-descent,
 def:zla-rational-germ}
+\lean{PowerSeries.exists_int_normalized_fraction'}
+\leanok
 Let $f(T)=\sum_{n\geq0}a_nT^n\in\mathbf Z[[T]]$ be the Taylor series of a
 normalized rational germ over $\mathbf Q$.  Then there exist
 $A_0,B_0\in\mathbf Z[T]$ with $B_0(0)=1$ and $A_0(0)=a_0$ such that
@@ -454,6 +507,7 @@ One may take $B_0(T)=1+c_{r-1}T+\cdots+c_0T^r$ built from the characteristic
 polynomial of the shift on the integral shift lattice.
 \end{proposition}
 \begin{proof}
+\leanok
 Rationality over $\mathbf Q$ makes $\operatorname{Sh}_{\mathbf Q}(a)$
 finite-dimensional, so the integral shift lattice is defined and
 \Cref{lem:zla-integral-cayley-hamilton} applies.  Multiplying $f$ by the
@@ -464,6 +518,8 @@ its constant coefficient is $a_0$ because $B_0(0)=1$.
 
 \begin{lemma}[Normalized Gauss factor lemma]
 \label{lem:zla-normalized-gauss}
+\lean{Polynomial.exists_int_of_coeff_zero_eq_one_of_mul}
+\leanok
 Let $A\in\mathbf Z[T]$ satisfy $A(0)=1$.  If
 \[
   A(T)=P(T)Q(T),\qquad P,Q\in\mathbf Q[T],\qquad P(0)=Q(0)=1,
@@ -471,6 +527,7 @@ Let $A\in\mathbf Z[T]$ satisfy $A(0)=1$.  If
 then $P,Q\in\mathbf Z[T]$.
 \end{lemma}
 \begin{proof}
+\leanok
 Reversal turns a polynomial with constant coefficient $1$ and degree $b$ into
 the monic polynomial $U^bA(U^{-1})$, and it is multiplicative for the
 degrees involved here, so the factorization becomes a factorization of the
@@ -484,6 +541,8 @@ $P,Q\in\mathbf Z[T]$.
 \begin{proposition}[Normalized gcd reduction over the integers]
 \label{prop:zla-normalized-gcd-reduction}
 \uses{lem:zla-normalized-gauss}
+\lean{Polynomial.exists_reduced_int_fraction}
+\leanok
 Let $A_0,B_0\in\mathbf Z[T]$ satisfy $A_0(0)=B_0(0)=1$, and let
 $G\in\mathbf Q[T]$ be the unique generator of the ideal
 $(A_0,B_0)\subseteq\mathbf Q[T]$ with $G(0)=1$.  Define
@@ -501,6 +560,7 @@ of $A$ and $B$ is a unit, and
 \]
 \end{proposition}
 \begin{proof}
+\leanok
 The ring $\mathbf Q[T]$ is a principal ideal domain, so the ideal
 $(A_0,B_0)$ has a generator, unique up to a scalar; since $A_0(0)=1$ the
 generator does not vanish at $0$ and may be normalized by $G(0)=1$.  Then
@@ -511,8 +571,14 @@ a larger common divisor of $A_0$ and $B_0$, contradicting that $G$ generates
 their ideal.  The fraction is unchanged because $G\neq0$.
 \end{proof}
 
+The Lean statement asserts the existence of the reduced pair $(A,B)$ with
+the stated properties; it does not name the common factor $G$ or record its
+integrality separately.
+
 \begin{lemma}[Uniqueness of normalized reduced fractions]
 \label{lem:zla-normalized-fraction-unique}
+\lean{Polynomial.eq_of_coeff_zero_eq_one_of_isCoprime}
+\leanok
 Let $K$ be a field.  Suppose $A,B,O,E\in K[T]$ have constant coefficient $1$,
 both pairs $(A,B)$ and $(O,E)$ are coprime, and $OB=EA$.  Then
 \[
@@ -520,6 +586,7 @@ both pairs $(A,B)$ and $(O,E)$ are coprime, and $OB=EA$.  Then
 \]
 \end{lemma}
 \begin{proof}
+\leanok
 From $OB=EA$ and coprimality of $(A,B)$, Euclid's lemma gives $A\mid O$ and
 $B\mid E$; symmetrically coprimality of $(O,E)$ gives $O\mid A$ and
 $E\mid B$.  So $O$ and $A$ agree up to a unit of $K[T]$, that is a nonzero
@@ -531,6 +598,8 @@ coefficient $1$ makes both scalars equal to $1$.
 \label{thm:zla-integral-fatou}
 \uses{prop:zla-integral-presentation, prop:zla-normalized-gcd-reduction,
 lem:zla-normalized-fraction-unique, def:zla-rational-germ}
+\lean{PowerSeries.exists_unique_reduced_int_fraction}
+\leanok
 Let $f(T)\in1+T\mathbf Z[[T]]$ be the Taylor series of a normalized rational
 germ over $\mathbf Q$.  There is a unique pair of polynomials
 $A,B\in\mathbf Z[T]$, coprime in $\mathbf Q[T]$, satisfying
@@ -542,6 +611,7 @@ $A,B\in\mathbf Z[T]$, coprime in $\mathbf Q[T]$, satisfying
 This is the \emph{normalized reduced integral presentation} of $f$.
 \end{theorem}
 \begin{proof}
+\leanok
 \Cref{prop:zla-integral-presentation} produces $A_0,B_0\in\mathbf Z[T]$ with
 $B_0f=A_0$; here $A_0(0)=f(0)=1=B_0(0)$.  Reducing this fraction by
 \Cref{prop:zla-normalized-gcd-reduction} gives coprime integral $A,B$ with
@@ -555,6 +625,8 @@ $B'=B$.
 
 \begin{definition}[Reversal and reciprocal roots]
 \label{def:zla-reversal}
+\lean{Polynomial.reverse}
+\leanok
 Let $P(T)=1+c_1T+\cdots+c_bT^b\in\mathbf Z[T]$ have degree $b$.  Its
 \emph{reversal} is
 \[
@@ -569,6 +641,9 @@ constant coefficient $1$ over any field containing $\mathbf Q$.
 \begin{lemma}[Reciprocal roots and reversal]
 \label{lem:zla-reversal-roots}
 \uses{def:zla-reversal}
+\lean{Polynomial.reverse_leadingCoeff,
+      Polynomial.eval₂_reverse_eq_zero_iff}
+\leanok
 For $P$ as in \Cref{def:zla-reversal}, the polynomial $P^{\mathrm{rev}}$ is
 monic, and for every field $\Omega$ containing $\mathbf Q$ and every
 $\alpha\in\Omega^\times$,
@@ -579,6 +654,7 @@ $\alpha\in\Omega^\times$,
 \]
 \end{lemma}
 \begin{proof}
+\leanok
 Monicity is the coefficient $c_0=1$ of $P$ read in top degree after reversal.
 The equivalence is the defining identity
 $P^{\mathrm{rev}}(\alpha)=\alpha^bP(\alpha^{-1})$ together with
@@ -596,6 +672,10 @@ the conjugates of the scalar, because
 \texttt{AlgebraicGeometry.WeilRiemannHypothesis} of
 \texttt{Comparator/Weil/Definitions.lean} speaks about complex roots.
 
+In the Lean formalisation of this section the field $\Omega$ is $\mathbf C$ and
+the weights are natural numbers; the statements tagged below are those
+specialisations.
+
 \begin{definition}[Universal purity of a scalar]
 \label{def:zla-universal-purity}
 A nonzero algebraic number $\alpha\in\Qbar\subseteq\mathbf C$ is
@@ -608,13 +688,21 @@ minimal polynomial alone, so it applies verbatim to a nonzero element of any
 field of characteristic zero that is algebraic over $\mathbf Q$.
 \end{definition}
 
+The Lean predicate is stated for the inverse scalar:
+\texttt{IsUniversallyPureOfWeight q w z} says that every complex root of the
+minimal polynomial of $z$ has absolute value $q^{-w/2}$, that is, that
+$z^{-1}$ is universally pure of weight $w$ in the sense above.
+
 \begin{lemma}[Uniqueness of a scalar weight]
 \label{lem:zla-scalar-weight-unique}
 \uses{def:zla-universal-purity}
+\lean{IsUniversallyPureOfWeight.weight_unique}
+\leanok
 If a nonzero algebraic number is universally pure of weight $w$ and of weight
 $w'$, then $w=w'$.
 \end{lemma}
 \begin{proof}
+\leanok
 The scalar is itself a complex root of its own minimal polynomial, so its
 absolute value is both $q^{w/2}$ and $q^{w'/2}$; the real exponential with
 base $q>1$ is injective, so $w=w'$.
@@ -622,6 +710,9 @@ base $q>1$ is injective, so $w=w'$.
 
 \begin{definition}[Weight stratum of a rational polynomial]
 \label{def:zla-weight-stratum}
+\lean{Polynomial.weightFactor,
+      Polynomial.coweightFactor}
+\leanok
 Let $R\in\mathbf Q[T]$ satisfy $R(0)=1$.  Since $R(0)\neq0$, no irreducible
 factor of $R$ is a scalar multiple of $T$, so $R$ has a factorization
 \[
@@ -677,6 +768,10 @@ $F_j$ with $j\in J_w$, with the multiplicities $m_j$ they have in $R$, and
 these are the reciprocal roots of $R_w$.
 \end{proof}
 
+The Lean description of the roots is the case $K=\mathbf C$, that is the
+last sentence of the statement; the general characteristic-zero field $K$ is
+not formalised.
+
 Purity under a single embedding would not suffice here: the reciprocal roots
 of $R$ of one prescribed absolute value need not form a conjugation-stable
 family, and the factor they cut out need not be rational, which is why
@@ -685,6 +780,8 @@ family, and the factor they cut out need not be rational, which is why
 \begin{definition}[Pure polynomial]
 \label{def:zla-pure-polynomial}
 \uses{def:zla-reversal, def:zla-universal-purity}
+\lean{Polynomial.IsUniversallyPureOfWeight}
+\leanok
 A polynomial $P(T)\in\Omega[T]$ with $P(0)=1$ is \emph{pure of weight $w$} if
 all of its reciprocal roots, counted with multiplicity, are nonzero, algebraic
 over $\mathbf Q$, and universally pure of weight $w$ in the sense of
@@ -702,18 +799,29 @@ $P_i(T)\in\Omega[T]$, $0\leq i\leq r$, with $P_i(0)=1$, and put
 \begin{lemma}[Different weights have disjoint reciprocal roots]
 \label{lem:zla-disjoint-weights}
 \uses{def:zla-pure-polynomial, lem:zla-scalar-weight-unique}
+\lean{Polynomial.IsPureOfWeight.disjoint_roots}
+\leanok
 Assume $P_i$ is pure of weight $i$ for every $i$.  If $i\neq j$, then $P_i$
 and $P_j$ have no common reciprocal root in $\Omega$.
 \end{lemma}
 \begin{proof}
+\leanok
 A common reciprocal root would be universally pure of weight $i$ and of weight
 $j$, so $i=j$ by \Cref{lem:zla-scalar-weight-unique}.
 \end{proof}
+
+The Lean statement, and likewise that of
+\Cref{prop:zla-parity-identification}, assumes only that the complex roots
+of each $P_i$ have absolute value $q^{-i/2}$, which is weaker than the
+universal purity of \Cref{def:zla-pure-polynomial}; so the Lean statement
+proves more.
 
 \begin{proposition}[Identification of the two parity factors]
 \label{prop:zla-parity-identification}
 \uses{def:zla-pure-polynomial, lem:zla-disjoint-weights,
 lem:zla-normalized-fraction-unique}
+\lean{Polynomial.prod_odd_eq_map_and_prod_even_eq_map}
+\leanok
 Assume every $P_i$ is pure of weight $i$.  Let $A,B\in\mathbf Q[T]$ be
 coprime with $A(0)=B(0)=1$, and suppose that
 \[
@@ -727,6 +835,7 @@ Then, after coefficient extension to $\Omega$,
 Thus no reciprocal root cancels between odd and even cohomological degrees.
 \end{proposition}
 \begin{proof}
+\leanok
 By \Cref{lem:zla-disjoint-weights} the polynomials $O$ and $E$ have no common
 root in the algebraically closed field $\Omega$, hence are coprime in
 $\Omega[T]$; the pair $(A,B)$ stays coprime after extension of scalars since a
@@ -818,9 +927,16 @@ a \emph{similitude pairing of multiplier $\mu$} if
 \]
 \end{definition}
 
+Only perfectness of the pairing is a Lean definition; the similitude
+identity is carried as the hypothesis \texttt{p (F v) (G w) = c * p v w} of
+the statements below, not packaged as a definition.
+
 \begin{lemma}[Adjoint conjugacy]
 \label{lem:zla-adjoint-conjugacy}
 \uses{def:zla-similitude-pairing}
+\lean{LinearMap.dualMap_comp_toPerfPair_comp_of_similitude,
+      LinearMap.charpoly_eq_smul_inverse_dualMap_of_similitude}
+\leanok
 Let $B:V\times W\to E$ be a perfect similitude pairing of multiplier $\mu$ for
 the automorphisms $F_V,F_W$.  Then
 \[
@@ -829,6 +945,7 @@ the automorphisms $F_V,F_W$.  Then
 so $F_W$ is conjugate to $\mu\,(F_V^{-1})^\vee$.
 \end{lemma}
 \begin{proof}
+\leanok
 Evaluate both sides at $w\in W$ and then at $v\in V$: the left side gives
 $B(v,F_Ww)$ and the right side gives $\mu B(F_V^{-1}v,w)$, and these agree by
 the similitude identity applied to the pair $(F_V^{-1}v,w)$.  Since $\phi_B$
@@ -859,10 +976,16 @@ eigenvalue by $\mu$; all three operations are computed on characteristic
 polynomials, so no semisimplicity is needed.
 \end{proof}
 
+The Lean statement is the conclusion over an algebraically closed base
+field: the pairing is assumed to be one over $\Omega$ already, rather than
+obtained from a pairing over $E$ by scalar extension.
+
 \begin{theorem}[Degreewise reciprocal-polynomial identities]
 \label{thm:zla-degreewise-reciprocal}
 \uses{def:zla-similitude-pairing, prop:zla-reciprocal-eigenvalue-pairing,
 def:zla-recip-charpoly}
+\lean{LinearMap.C_det_mul_charpolyRev_of_similitude}
+\leanok
 Let $B:V\times W\to E$ be a perfect similitude pairing of multiplier $\mu$ for
 the automorphisms $F_V,F_W$.  Put $b=\dim_EV=\dim_EW$ and
 $D_V=\det(F_V)$, and set
@@ -881,6 +1004,7 @@ or equivalently
 \]
 \end{theorem}
 \begin{proof}
+\leanok
 Over an algebraic closure, $P_V(T)=\prod_{j=1}^b(1-\alpha_jT)$ with the
 $\alpha_j$ the eigenvalues of $F_V$, all nonzero, and
 $D_V=\prod_j\alpha_j$.  By
