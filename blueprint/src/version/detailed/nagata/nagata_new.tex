@@ -7588,9 +7588,14 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-two-open-comparison-space}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
   \leanok
-  \statusnote{No separate Lean declaration: this construction is carried out
-    inside the proof of \texttt{AlgebraicGeometry.exists\_prepared\_keyDisjoint\_twoOpenSide},
-    which the \texttt{\textbackslash lean} field above names.}
+  \statusnote{There is a separate Lean declaration for this locus:
+    \texttt{AlgebraicGeometry.TwoOpenSide.comparisonBoundary}, the inverse image under the
+    first comparison projection of the forbidden boundary of the first side.  It differs
+    from the definition here in two ways: it uses the closure $\overline Z_{1,2}$ rather
+    than $Z_{1,2}$, and it is formed in the whole comparison space $X_{12}$ rather than in
+    $V_{12}$.  The declaration named by the \texttt{\textbackslash lean} field above,
+    \texttt{AlgebraicGeometry.exists\_prepared\_keyDisjoint\_twoOpenSide}, only assembles
+    the comparison layer; its proof does not construct this locus.}
 
   Define
   \[
@@ -7604,9 +7609,14 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
     def:nagata-two-open-comparison-space}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
   \leanok
-  \statusnote{No separate Lean declaration: this step is discharged
-    inside the proof of \texttt{AlgebraicGeometry.exists\_prepared\_keyDisjoint\_twoOpenSide},
-    which the \texttt{\textbackslash lean} field above names.}
+  \statusnote{No separate Lean declaration: this step is discharged inside the proof of
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_comparisonBoundary\_subset\_selfBoundary},
+    where the second projection of the comparison boundary is shown to land in the self
+    boundary of the second side because the two projections of $V_{12}=V_1\times_UV_2$ have
+    the same image in $U$.  The declaration named by the
+    \texttt{\textbackslash lean} field above,
+    \texttt{AlgebraicGeometry.exists\_prepared\_keyDisjoint\_twoOpenSide}, only applies that
+    lemma; its own proof does not carry out this step.}
 
   Inside $V_{12}$ one has
   \[
@@ -7701,9 +7711,17 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   \uses{def:nagata-two-open-improved-comparison}
   \lean{AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide}
   \leanok
-  \statusnote{No separate Lean declaration: this step is discharged
-    inside the proof of \texttt{AlgebraicGeometry.exists\_prepared\_keyDisjoint\_twoOpenSide},
-    which the \texttt{\textbackslash lean} field above names.}
+  \statusnote{This step is not discharged inside the proof of the declaration named by the
+    \texttt{\textbackslash lean} field above, and it is not free of separate Lean
+    declarations.  The admissible blow-up and the isomorphism over a neighbourhood of
+    $\overline Z_{1,2}$ are produced inside the proof of
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_comparisonBoundary\_subset\_selfBoundary},
+    the improved side is
+    \texttt{AlgebraicGeometry.TwoOpenSide.admissibleBlowup}, and the persistence of the
+    boundary-disjointness relations is the separate lemma
+    \texttt{AlgebraicGeometry.TwoOpenSide.Prepared.admissibleBlowup}.  The proof of
+    \texttt{AlgebraicGeometry.exists\_prepared\_keyDisjoint\_twoOpenSide} only combines
+    these three.}
 
   The constructed map $X_1^{\mathrm{cmp}}\to X_1^{\mathrm{old}}$ is
   $V_1$-admissible, the transported $p_1$ is an isomorphism over an open
