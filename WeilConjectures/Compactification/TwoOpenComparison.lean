@@ -850,9 +850,10 @@ product `V₁' ×_U V₂` and both projections have the same image in `U`; the d
 criterion `comparisonBoundary_subset_preimage_selfBoundary` then concludes.
 
 The blow-up shape of the conclusion is the one the surrounding API was built for:
-`TwoOpenSide.admissibleBlowup` and `TwoOpenSide.Prepared.admissibleBlowup` both cite
-`def:nagata-two-open-improved-comparison`, and preparedness of the improved first side
-is exactly what the latter supplies. No preparedness of the two sides is assumed. -/
+`TwoOpenSide.admissibleBlowup` is the Lean form of
+`def:nagata-two-open-improved-comparison`, and preparedness of the improved first side is
+supplied by `TwoOpenSide.Prepared.admissibleBlowup` (blueprint:
+`lemma:nagata-boundary-disjoint-persists`). No preparedness of the two sides is assumed. -/
 theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoetherian S]
     {u : U ⟶ S} [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     {O₁ O₂ : U.Opens} (σ₁ : TwoOpenSide u O₁) (σ₂ : TwoOpenSide u O₂)

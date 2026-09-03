@@ -94,11 +94,11 @@ theorem isPullback_of_isSchemeTheoreticallyDominant (r : c.Refinement d)
   have : IsIso t := IsClosedImmersion.isIso_iff_ker_eq_bot.mpr t.ker_eq_bot
   exact IsPullback.of_iso_pullback ⟨hcomm⟩ (asIso t) hfst hsnd
 
-/-- The dense refinement of a compactification of a quasi-compact morphism satisfies the
-hypothesis of
+/-- The dense refinement of a compactification of a quasi-compact morphism satisfies both
+instance hypotheses of
 `AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant`
 with no argument: its open immersion is the factor map through the scheme-theoretic image,
-which is scheme-theoretically dominant. -/
+hence scheme-theoretically dominant, and it is quasi-compact because `f` is. -/
 theorem isPullback_denseRefinement (c : Compactification f) [QuasiCompact f]
     (r : c.denseRefinement.Refinement d) :
     IsPullback c.denseRefinement.i (𝟙 X) r.hom d.i := by
