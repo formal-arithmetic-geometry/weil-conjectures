@@ -78,7 +78,7 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap`
   center; finite-typeness, the support formula and the comparison of blow-ups (product
   comparison, then removal of the effective Cartier exceptional factor `(I.comap π)^d`
   of `L.comap π`) are assembled here from the finite-degree descent and the two
-  universal-property comparisons below. The special case `f = 𝟙 X` is
+  universal-property comparisons below. Its base-change-free part is
   `Scheme.IdealSheafData.exists_blowup_comp`;
 - `Scheme.IdealSheafData.exists_blowup_mul_iso`: the product-ideal comparison
   `Bl_{I·L}(X) ≅ Bl_{L·O}(Bl_I X)` over `X` (`thm:nagata-blowup-product-ideal`,
@@ -510,8 +510,9 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp_base_c
 /-- **Composition of blow-ups** (Stacks Project Tag 080B), interface form; blueprint
 `thm:nagata-composition-of-blowups`.
 
-This is the `f = 𝟙 X` case of
-`Scheme.IdealSheafData.exists_blowup_comp_base_change`: the composite center is
+This is the base-change-free part of
+`Scheme.IdealSheafData.exists_blowup_comp_base_change`, obtained by discarding its
+final clause rather than by instantiating `f`: the composite center is
 `K = I * L` with `L` the finite-degree descent of `J`
 (`Scheme.IdealSheafData.exists_finiteDegree_center`, Stacks Tag 0803). -/
 theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp
