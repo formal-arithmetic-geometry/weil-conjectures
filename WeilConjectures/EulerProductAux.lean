@@ -134,12 +134,13 @@ end Geometric
 
 section Uniqueness
 
-/-- Uniqueness of solutions of the differential equation `X * F' = A * F`: two power
-series with the same constant coefficient satisfying logarithmic differential equations
-whose right hand sides agree up to order `m` agree up to order `m`. The coefficients are
-determined by the recursion `n * c n = ∑ j < n, a (n - j) * c j`. -/
-theorem coeff_eq_of_X_mul_derivative_eq {F G A B : ℚ⟦X⟧}
-    (hF : X * derivative ℚ F = A * F) (hG : X * derivative ℚ G = B * G)
+/-- Uniqueness of solutions of the differential equation `X * F' = A * F` over a field of
+characteristic zero: two power series with the same constant coefficient satisfying
+logarithmic differential equations whose right hand sides agree up to order `m` agree up to
+order `m`. The coefficients are determined by the recursion
+`n * c n = ∑ j < n, a (n - j) * c j`. -/
+theorem coeff_eq_of_X_mul_derivative_eq {R : Type*} [Field R] [CharZero R] {F G A B : R⟦X⟧}
+    (hF : X * derivative R F = A * F) (hG : X * derivative R G = B * G)
     (h0 : constantCoeff F = constantCoeff G) (hA : constantCoeff A = 0)
     {m : ℕ} (hAB : ∀ i ≤ m, coeff i A = coeff i B) :
     ∀ n ≤ m, coeff n F = coeff n G := by
@@ -154,10 +155,10 @@ theorem coeff_eq_of_X_mul_derivative_eq {F G A B : ℚ⟦X⟧}
         rw [coeff_zero_eq_constantCoeff_apply]; exact hA
       have hB0 : coeff 0 B = 0 := by
         rw [← hAB 0 (Nat.zero_le m)]; exact hA0
-      have hFc : coeff (j + 1) F * ((j : ℚ) + 1) =
+      have hFc : coeff (j + 1) F * ((j : R) + 1) =
           ∑ p ∈ antidiagonal (j + 1), coeff p.1 A * coeff p.2 F := by
         rw [← coeff_derivative, ← coeff_succ_X_mul, hF, coeff_mul]
-      have hGc : coeff (j + 1) G * ((j : ℚ) + 1) =
+      have hGc : coeff (j + 1) G * ((j : R) + 1) =
           ∑ p ∈ antidiagonal (j + 1), coeff p.1 B * coeff p.2 G := by
         rw [← coeff_derivative, ← coeff_succ_X_mul, hG, coeff_mul]
       have hsum : ∑ p ∈ antidiagonal (j + 1), coeff p.1 A * coeff p.2 F =
@@ -167,7 +168,7 @@ theorem coeff_eq_of_X_mul_derivative_eq {F G A B : ℚ⟦X⟧}
         rcases eq_or_ne p.1 0 with h1 | h1
         · rw [h1, hA0, hB0, zero_mul, zero_mul]
         · rw [hAB p.1 (by omega), ih p.2 (by omega) (by omega)]
-      have hcast : ((j : ℚ) + 1) ≠ 0 := by positivity
+      have hcast : ((j : R) + 1) ≠ 0 := by exact_mod_cast Nat.succ_ne_zero j
       exact mul_right_cancel₀ hcast (hFc.trans (hsum.trans hGc.symm))
 
 end Uniqueness

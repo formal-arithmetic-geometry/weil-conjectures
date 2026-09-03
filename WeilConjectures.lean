@@ -366,6 +366,7 @@ public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
@@ -418,6 +419,7 @@ public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaIntegrality
+public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
 public import WeilConjectures.ZetaLinearAlgebra.Hankel
 public import WeilConjectures.ZetaLinearAlgebra.IntegralRecurrence
