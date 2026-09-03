@@ -1015,3 +1015,357 @@ identity; both sides have coefficients in $E$, so the identity descends from
 $\Omega[T,T^{-1}]$ to $E[T,T^{-1}]$.  The second form follows by substituting
 $T\mapsto\mu^{-1}T^{-1}$ once more.
 \end{proof}
+
+\section{The Weil conjectures for a trace datum}\label{sec:zla-weil-endgame}
+
+This section assembles the chapter into the three conclusions it was built
+for, stated for the counting series of a trace datum: the Weil
+factorization, the Riemann hypothesis for the recovered factors, and the
+functional equation.  Their shapes are those of
+\texttt{AlgebraicGeometry.IsWeilFactorization},
+\texttt{AlgebraicGeometry.WeilRiemannHypothesis} and
+\texttt{AlgebraicGeometry.WeilFunctionalEquation} of
+\texttt{Comparator/Weil/Definitions.lean}.  Nothing new is proved here: the
+factorization is the recovery of the individual factors of
+\Cref{sec:zla-weights} applied to the reduced integral presentation of the
+counting series, and the functional equation is the reciprocity of a perfect
+similitude pairing of \Cref{sec:zla-similitude} read on root multisets.
+
+The trace datum is a \emph{hypothesis} of this chapter, not a conclusion of
+it.  Producing one for a variety over a finite field requires a cohomology
+theory with finite-dimensional cohomology groups, invertible Frobenius, and a
+Lefschetz trace formula for every iterate of Frobenius; none of that is
+developed here, and neither is the purity of the eigenvalues nor the
+existence of the duality pairings.  Those three, together with the
+integrality of the counting series, are the inputs; what this chapter
+contributes is that they force the three Weil conjectures by linear algebra
+over a field of characteristic zero and polynomial arithmetic over
+$\mathbf Z$.
+
+Throughout the section fix an integer $q>1$, as in \Cref{sec:zla-weights},
+and take the algebraically closed field $\Omega$ of that section to be
+$\mathbf C$, except in \Cref{cor:zla-reciprocal-roots-embedding}, which is
+about a general one.  For an embedding of fields $\iota:K\hookrightarrow L$
+and a polynomial $P\in K[T]$ we write $\iota(P)\in L[T]$ for the polynomial
+obtained by applying $\iota$ to each coefficient, and for an algebraically
+closed field $L$ and a nonzero $P\in L[T]$ we write $\mathcal R(P)$ for the
+multiset of roots of $P$ in $L$, counted with multiplicity.
+
+\begin{theorem}[The Weil factorization of a trace datum]
+\label{thm:zla-weil-factorization}
+\uses{def:zla-trace-datum, prop:zla-cohomological-factorization,
+cor:zla-rationality-counting-field, thm:zla-integral-fatou,
+prop:zla-normalized-gcd-reduction, def:zla-pure-polynomial,
+prop:zla-parity-identification, def:zla-complete-weight-factor,
+prop:zla-unique-recovery, prop:zla-factor-integrality}
+Let $d\geq0$ be an integer, let $K$ be a field of characteristic zero, and
+let $\iota:K\hookrightarrow\mathbf C$ be a field embedding.  Let
+\[
+  \bigl((V_i,F_i)_{0\leq i\leq2d},(N_n)_{n\geq1}\bigr)
+\]
+be a finite cohomological trace datum over $K$ (\Cref{def:zla-trace-datum})
+with $r=2d$, put $P_i(T)=\det(1-TF_i\mid V_i)\in K[T]$, and let
+\[
+  Z(T)=\operatorname{Exp}\left(\sum_{n\geq1}N_n\frac{T^n}{n}\right)
+  \in1+T\mathbf Q[[T]]
+\]
+be its counting series, a series with rational coefficients because the $N_n$
+are integers.  Assume:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $Z(T)\in1+T\mathbf Z[[T]]$;
+\item for every $0\leq i\leq2d$ the polynomial $\iota(P_i)\in\mathbf C[T]$ is
+      pure of weight $i$ in the sense of \Cref{def:zla-pure-polynomial};
+\item $P_0(T)=1-T$ and $P_{2d}(T)=1-q^dT$ in $K[T]$.
+\end{enumerate}
+Then there are polynomials
+$P_i^{\mathrm{rec}}\in\mathbf Z[T]$, $0\leq i\leq2d$, with
+\[
+  P_i^{\mathrm{rec}}(0)=1,
+  \qquad
+  P_0^{\mathrm{rec}}(T)=1-T,
+  \qquad
+  P_{2d}^{\mathrm{rec}}(T)=1-q^dT,
+\]
+satisfying the factorization
+\[
+  Z(T)\cdot\prod_{\substack{0\leq i\leq2d\\ i\text{ even}}}P_i^{\mathrm{rec}}(T)
+  =\prod_{\substack{0\leq i\leq2d\\ i\text{ odd}}}P_i^{\mathrm{rec}}(T)
+  \qquad\text{in }\mathbf Q[[T]]
+\]
+and matching the trace datum degreewise:
+\[
+  \iota\bigl(P_i^{\mathrm{rec}}\bigr)=\iota(P_i)
+  \qquad\text{in }\mathbf C[T],\qquad 0\leq i\leq2d,
+\]
+where on the left $\iota$ is the coefficient extension
+$\mathbf Z[T]\to\mathbf C[T]$.  The family $(P_i^{\mathrm{rec}})_i$ is unique
+with these properties; it is determined by $Z$ and $q$ alone.
+\end{theorem}
+\begin{proof}
+Write $Z_K\in K[[T]]$ for the image of $Z$ under coefficient extension
+$\mathbf Q\to K$.  By \Cref{prop:zla-cohomological-factorization},
+\[
+  Z_K(T)\cdot\prod_{i\text{ even}}P_i(T)=\prod_{i\text{ odd}}P_i(T)
+  \qquad\text{in }K[[T]],
+\]
+and applying $\iota$ coefficientwise carries this to the same identity in
+$\mathbf C[[T]]$ with each $P_i$ replaced by $\iota(P_i)$.  Put
+$O=\prod_{i\text{ odd}}\iota(P_i)$ and $E=\prod_{i\text{ even}}\iota(P_i)$,
+the two parity products of \Cref{sec:zla-weights}; both have constant
+coefficient $1$, so the identity exhibits the image of $Z$ in
+$\mathbf C[[T]]$ as the Taylor series of the normalized rational germ $O/E$.
+By \Cref{cor:zla-rationality-counting-field}, applied to the
+characteristic-zero field $\mathbf C$, the series $Z$ is itself a normalized
+rational germ over $\mathbf Q$.
+
+Hypothesis (i) puts $Z$ in $1+T\mathbf Z[[T]]$, so
+\Cref{thm:zla-integral-fatou} applies: there is a unique pair
+$A,B\in\mathbf Z[T]$, coprime in $\mathbf Q[T]$, with
+$A(0)=B(0)=1$ and $Z=A/B$; the reduction of the fraction to a coprime pair
+without leaving $\mathbf Z[T]$ is
+\Cref{prop:zla-normalized-gcd-reduction}.  Since $E$ has nonzero constant
+coefficient, $O/E=Z=A/B$ in $\mathbf C(T)$, and hypothesis (ii) is exactly the
+hypothesis of \Cref{prop:zla-parity-identification} for the family
+$(\iota(P_i))_i$; that proposition gives
+\[
+  O=A,\qquad E=B\qquad\text{in }\mathbf C[T].
+\]
+
+Now $A,B\in\mathbf Z[T]$, so \Cref{def:zla-complete-weight-factor} defines
+the complete weight-$i$ factor $P_i^{\mathrm{rec}}\in\mathbf Q[T]$ of the
+reduced fraction $A/B$ for each $i$, with
+$P_i^{\mathrm{rec}}(0)=1$, and \Cref{prop:zla-unique-recovery} identifies it
+with the given factor: the image of $P_i^{\mathrm{rec}}$ in $\mathbf C[T]$ is
+$\iota(P_i)$.  By
+\Cref{prop:zla-factor-integrality} each $P_i^{\mathrm{rec}}$ lies in
+$\mathbf Z[T]$.
+
+The factorization follows: taking the products of the previous display over
+each parity class and using that $\mathbf Q[T]\to\mathbf C[T]$ is injective,
+$\prod_{i\text{ odd}}P_i^{\mathrm{rec}}=A$ and
+$\prod_{i\text{ even}}P_i^{\mathrm{rec}}=B$ in $\mathbf Q[T]$, whence
+$Z\cdot\prod_{i\text{ even}}P_i^{\mathrm{rec}}
+=(A/B)\cdot B=A=\prod_{i\text{ odd}}P_i^{\mathrm{rec}}$ in
+$\mathbf Q[[T]]$.  For the normalization, hypothesis (iii) gives
+$\iota(P_0^{\mathrm{rec}})=\iota(P_0)=1-T$ and
+$\iota(P_{2d}^{\mathrm{rec}})=\iota(P_{2d})=1-q^dT$ in $\mathbf C[T]$, and
+$\mathbf Z[T]\to\mathbf C[T]$ is injective, so
+$P_0^{\mathrm{rec}}=1-T$ and $P_{2d}^{\mathrm{rec}}=1-q^dT$ in
+$\mathbf Z[T]$.  Uniqueness is that of the two ingredients: the pair $(A,B)$
+is the unique normalized reduced integral presentation of $Z$
+(\Cref{thm:zla-integral-fatou}) and each $P_i^{\mathrm{rec}}$ is determined
+by $A/B$, by $q$ and by $i$ (\Cref{prop:zla-unique-recovery}); in particular
+the family does not depend on $\iota$.
+\end{proof}
+
+Hypothesis (i) is an extra input, not a restatement of the integrality of
+the $N_n$ contained in \Cref{def:zla-trace-datum}: what makes the recovered
+factors integral is \Cref{thm:zla-integral-fatou}, and that theorem consumes
+integrality of the coefficients of the counting series, which is a different
+condition on the $N_n$ and is not produced by anything earlier in this
+chapter.  In the geometric application (i) comes from the Euler product
+$Z(T)=\prod_x(1-T^{\deg x})^{-1}$ over the closed points, each factor of which
+already lies in $1+T\mathbf Z[[T]]$; that product is one of the parts of the
+sketch article deliberately not reproduced in this chapter.
+
+Hypotheses (ii) and (iii) are compatible: $1-T$ has the single reciprocal
+root $1$, which is universally pure of weight $0$, and $1-q^dT$ has the single
+reciprocal root $q^d$, which is a rational integer and satisfies
+$|q^d|=q^{2d/2}$, so it is universally pure of weight $2d$.  Note also that
+(ii) does not really depend on $\iota$: universal purity of a scalar is read
+off its minimal polynomial over $\mathbf Q$ (\Cref{def:zla-universal-purity}),
+so the embedding serves only to place the $P_i$ in a field where the weight
+machinery of \Cref{sec:zla-weights} is available.
+
+\begin{corollary}[The Riemann hypothesis for the recovered factors]
+\label{cor:zla-riemann-hypothesis}
+\uses{thm:zla-weil-factorization, def:zla-pure-polynomial,
+def:zla-universal-purity}
+In the situation of \Cref{thm:zla-weil-factorization}, every complex root $z$
+of $P_i^{\mathrm{rec}}$ satisfies
+\[
+  |z|=q^{-i/2},
+\]
+equivalently every reciprocal root $\alpha=z^{-1}$ of $P_i^{\mathrm{rec}}$
+satisfies $|\alpha|=q^{i/2}$.
+\end{corollary}
+\begin{proof}
+Since $P_i^{\mathrm{rec}}(0)=1$, no root of $P_i^{\mathrm{rec}}$ is zero, so
+a complex root $z$ has an inverse $\alpha=z^{-1}\in\mathbf C^\times$, and
+$\alpha$ is a reciprocal root of $P_i^{\mathrm{rec}}$ in the sense of
+\Cref{def:zla-reversal}.  By \Cref{thm:zla-weil-factorization} the image of
+$P_i^{\mathrm{rec}}$ in $\mathbf C[T]$ is $\iota(P_i)$, so $\alpha$ is a
+reciprocal root of $\iota(P_i)$, which is pure of weight $i$ by hypothesis
+(ii) of that theorem.  Hence $\alpha$ is algebraic over $\mathbf Q$ and
+universally pure of weight $i$ (\Cref{def:zla-pure-polynomial}), that is
+$|\tau(\alpha)|=q^{i/2}$ for every embedding
+$\tau:\mathbf Q(\alpha)\hookrightarrow\mathbf C$
+(\Cref{def:zla-universal-purity}).  Taking for $\tau$ the inclusion of
+$\mathbf Q(\alpha)\subseteq\mathbf C$ itself gives $|\alpha|=q^{i/2}$ and
+therefore $|z|=q^{-i/2}$.
+\end{proof}
+
+Only one embedding is used in the proof, but the hypothesis really is
+universal purity: it is what \Cref{sec:zla-weights} needs to cut the
+factors out of $A$ and $B$ rationally, hence what
+\Cref{thm:zla-weil-factorization} assumes, and the bound for a single
+embedding is all that survives in the conclusion.
+
+\begin{corollary}[Reciprocal roots along an embedding]
+\label{cor:zla-reciprocal-roots-embedding}
+\uses{thm:zla-degreewise-reciprocal, lem:zla-reversal-roots}
+Let $B:V\times W\to E$ be a perfect similitude pairing of multiplier
+$\mu\in E^\times$ for the automorphisms $F_V,F_W$ over a field $E$, put
+$b=\dim_EV=\dim_EW$ and
+\[
+  P_V(T)=\det(1-TF_V\mid V),
+  \qquad
+  P_W(T)=\det(1-TF_W\mid W).
+\]
+Let $\iota:E\hookrightarrow\Omega$ be an embedding into an algebraically
+closed field $\Omega$.  Then $\iota(P_V)$ and $\iota(P_W)$ have degree $b$,
+neither vanishes at $0$, and
+\[
+  \mathcal R\bigl(\iota(P_W)\bigr)
+  =\Bigl\{\bigl(\iota(\mu)z\bigr)^{-1}
+  \ :\ z\in\mathcal R\bigl(\iota(P_V)\bigr)\Bigr\},
+\]
+an equality of multisets of $b$ elements of $\Omega^\times$: the map
+$z\mapsto(\iota(\mu)z)^{-1}$ carries the root multiset of $\iota(P_V)$
+bijectively onto that of $\iota(P_W)$, with multiplicities.  The field $E$ is
+not assumed algebraically closed.
+\end{corollary}
+\begin{proof}
+This is \Cref{thm:zla-degreewise-reciprocal} transported along $\iota$.  That
+theorem is an identity between polynomials with coefficients in $E$, so it
+survives any embedding of $E$, which is why it and not
+\Cref{prop:zla-reciprocal-eigenvalue-pairing} is the right thing to move: the
+eigenvalues of $F_V$ need not lie in $E$, and an eigenvalue statement over an
+algebraic closure of $E$ would first have to be matched with the chosen
+$\Omega$.
+
+Since $F_V$ and $F_W$ are automorphisms, $P_V$ and $P_W$ have degree $b$ with
+leading coefficients $(-1)^b\det(F_V)$ and $(-1)^b\det(F_W)$, both nonzero,
+and constant coefficient $1$; the same holds for their images under $\iota$.
+Write $D_V=\det(F_V)$.  Applying $\iota$ to the second identity of
+\Cref{thm:zla-degreewise-reciprocal} gives
+\[
+  \iota(P_W)(T)
+  =(-1)^b\iota(\mu)^b\iota(D_V)^{-1}\,T^b\,
+   \iota(P_V)\bigl(\iota(\mu)^{-1}T^{-1}\bigr)
+  \qquad\text{in }\Omega[T,T^{-1}].
+\]
+Since $\Omega$ is algebraically closed and $\iota(P_V)$ has degree $b$ and
+constant coefficient $1$, we may write
+$\iota(P_V)(T)=\prod_{j=1}^b(1-\alpha_jT)$ with $\alpha_j\in\Omega^\times$,
+so that $\mathcal R(\iota(P_V))=\{\alpha_j^{-1}\}_j$ and
+$\iota(D_V)=\prod_j\alpha_j$.  Substituting and clearing
+$\prod_j(-\alpha_j\iota(\mu)^{-1})=(-1)^b\iota(\mu)^{-b}\iota(D_V)$ from the
+product turns the right-hand side into
+$\prod_{j=1}^b\bigl(1-\iota(\mu)\alpha_j^{-1}T\bigr)$, so
+\[
+  \iota(P_W)(T)=\prod_{j=1}^b\bigl(1-\iota(\mu)\alpha_j^{-1}T\bigr),
+  \qquad
+  \mathcal R\bigl(\iota(P_W)\bigr)
+  =\bigl\{\alpha_j\iota(\mu)^{-1}\bigr\}_j .
+\]
+Both multisets have $b$ elements, and
+$\alpha_j\iota(\mu)^{-1}=(\iota(\mu)\alpha_j^{-1})^{-1}$ is the image of
+$\alpha_j^{-1}$ under $z\mapsto(\iota(\mu)z)^{-1}$, which is the assertion.
+The same computation may be run through the reversal instead of the
+factorization: the displayed identity says that $\iota(P_W)$ is a nonzero
+scalar multiple of the reversal of $T\mapsto\iota(P_V)(\iota(\mu)^{-1}T)$, and
+\Cref{lem:zla-reversal-roots} turns the roots of that reversal into the
+inverses of the roots of $\iota(P_V)(\iota(\mu)^{-1}T)$; the map
+$z\mapsto(\iota(\mu)z)^{-1}$ is an involution of $\Omega^\times$, so no
+bookkeeping of directions is needed.
+\end{proof}
+
+\begin{theorem}[The functional equation of a trace datum]
+\label{thm:zla-functional-equation}
+\uses{thm:zla-weil-factorization, cor:zla-reciprocal-roots-embedding,
+def:zla-similitude-pairing}
+Keep the hypotheses and notation of \Cref{thm:zla-weil-factorization}, and
+assume in addition that every $F_i$ is an automorphism of $V_i$ and that for
+every $0\leq i\leq2d$ there is a perfect similitude pairing
+\[
+  B_i:V_i\times V_{2d-i}\longrightarrow K
+\]
+of multiplier $\mu=q^d$ for the automorphisms $F_i,F_{2d-i}$
+(\Cref{def:zla-similitude-pairing}).  Then, for every $0\leq i\leq2d$, the map
+$z\mapsto(q^dz)^{-1}$ carries the multiset of complex roots of
+$P_i^{\mathrm{rec}}$ onto the multiset of complex roots of
+$P_{2d-i}^{\mathrm{rec}}$:
+\[
+  \mathcal R\bigl(P_{2d-i}^{\mathrm{rec}}\bigr)
+  =\Bigl\{\bigl(q^dz\bigr)^{-1}
+  \ :\ z\in\mathcal R\bigl(P_i^{\mathrm{rec}}\bigr)\Bigr\},
+\]
+the roots being taken in $\mathbf C$ with multiplicity.  In particular
+$\deg P_i^{\mathrm{rec}}=\deg P_{2d-i}^{\mathrm{rec}}=\dim_KV_i$.
+\end{theorem}
+\begin{proof}
+Fix $i$ and apply \Cref{cor:zla-reciprocal-roots-embedding} to the pairing
+$B_i$, with $E=K$, with $V=V_i$, $W=V_{2d-i}$, $F_V=F_i$, $F_W=F_{2d-i}$,
+$\mu=q^d$, and with the embedding $\iota:K\hookrightarrow\mathbf C$ as the
+embedding into an algebraically closed field.  This gives
+\[
+  \mathcal R\bigl(\iota(P_{2d-i})\bigr)
+  =\bigl\{(\iota(q^d)z)^{-1}:z\in\mathcal R(\iota(P_i))\bigr\},
+\]
+and $\iota(q^d)=q^d$ because $\iota$ is a field embedding of a
+characteristic-zero field, hence fixes the image of $\mathbf Z$.  By
+\Cref{thm:zla-weil-factorization} the images of $P_i^{\mathrm{rec}}$ and
+$P_{2d-i}^{\mathrm{rec}}$ in $\mathbf C[T]$ are $\iota(P_i)$ and
+$\iota(P_{2d-i})$, so the two displayed multisets are those of the recovered
+integral polynomials.  The degree statement is the equality of the
+cardinalities of the two multisets, both being $\dim_KV_i=\dim_KV_{2d-i}$,
+together with $P_i^{\mathrm{rec}}(0)=1$, which forbids a root at $0$.
+\end{proof}
+
+\begin{theorem}[The Weil conjectures for the counting series of a trace datum]
+\label{thm:zla-weil-summary}
+\uses{thm:zla-weil-factorization, cor:zla-riemann-hypothesis,
+thm:zla-functional-equation}
+Let $q>1$ and $d\geq0$ be integers, let $K$ be a field of characteristic zero
+with an embedding $\iota:K\hookrightarrow\mathbf C$, and let
+$((V_i,F_i)_{0\leq i\leq2d},(N_n)_{n\geq1})$ be a finite cohomological trace
+datum over $K$ satisfying the hypotheses of
+\Cref{thm:zla-weil-factorization} and of
+\Cref{thm:zla-functional-equation}, that is: its counting series $Z$ has
+integer coefficients, each $\iota(P_i)$ is pure of weight $i$,
+$P_0=1-T$, $P_{2d}=1-q^dT$, every $F_i$ is an automorphism, and every pair of
+complementary degrees $i,2d-i$ carries a perfect similitude pairing of
+multiplier $q^d$.  Then the
+family $P_i^{\mathrm{rec}}\in\mathbf Z[T]$, $0\leq i\leq2d$, of
+\Cref{thm:zla-weil-factorization} -- the unique family of integral
+polynomials whose images in $\mathbf C[T]$ are the $\iota(P_i)$ -- satisfies
+all three of
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \textup{(factorization)} $P_i^{\mathrm{rec}}(0)=1$,
+      $P_0^{\mathrm{rec}}=1-T$, $P_{2d}^{\mathrm{rec}}=1-q^dT$, and
+\[
+  Z(T)\cdot\prod_{i\text{ even}}P_i^{\mathrm{rec}}(T)
+  =\prod_{i\text{ odd}}P_i^{\mathrm{rec}}(T)
+  \qquad\text{in }\mathbf Q[[T]];
+\]
+\item \textup{(functional equation)} $z\mapsto(q^dz)^{-1}$ carries the
+      multiset of complex roots of $P_i^{\mathrm{rec}}$ onto that of
+      $P_{2d-i}^{\mathrm{rec}}$, for every $i$;
+\item \textup{(Riemann hypothesis)} every complex root $z$ of
+      $P_i^{\mathrm{rec}}$ satisfies $|z|=q^{-i/2}$.
+\end{enumerate}
+These are the three conditions
+\texttt{IsWeilFactorization}, \texttt{WeilFunctionalEquation} and
+\texttt{WeilRiemannHypothesis} for $Z$, $q$, $d$ and the family
+$(P_i^{\mathrm{rec}})_i$.
+\end{theorem}
+\begin{proof}
+\Cref{thm:zla-weil-factorization} produces the family, its uniqueness and
+(a); \Cref{thm:zla-functional-equation}, whose hypotheses are those of
+\Cref{thm:zla-weil-factorization} together with the pairings, gives (b); and
+\Cref{cor:zla-riemann-hypothesis} gives (c).  All three speak about the same
+family, namely the one \Cref{thm:zla-weil-factorization} pins down by
+$\iota(P_i^{\mathrm{rec}})=\iota(P_i)$; no claim is made that (a), (b) and
+(c) by themselves determine a family of integral polynomials.
+\end{proof}
