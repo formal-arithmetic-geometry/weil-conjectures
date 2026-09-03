@@ -431,4 +431,5 @@ public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 public import WeilConjectures.ZetaLinearAlgebra.WeightStrata
 public import WeilConjectures.ZetaLinearAlgebra.Weights
+public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 public import WeilConjectures.ZetaSeries
