@@ -367,6 +367,10 @@ domain.
 A noetherian local domain \((R,\mathfrak m)\) with principal
 maximal ideal \(\mathfrak m=(t)\), \(t\neq0\), is a discrete
 valuation ring.
+% Mathlib: the equivalence of items (0) and (4) of the list, under the
+% hypotheses noetherian local domain and not a field (which is what
+% \(\mathfrak m=(t)\) with \(t\neq0\) says).
+\mathlibok\ \lean{IsDiscreteValuationRing.TFAE}
 \end{lemma}
 \begin{proof}
 First, \(\bigcap_{n\geq0}\mathfrak m^n=0\).  This is the Krull
@@ -933,8 +937,9 @@ well defined by \Cref{lem:pcb-deg-principal-zero}; contradiction.
 \label{lem:pcb-fg-algebra-noetherian}
 Any finitely generated ring over a Noetherian ring is Noetherian.  Any
 localization of a Noetherian ring is Noetherian.
-% Mathlib: the Hilbert basis theorem, and its finitely generated algebra form.
-\mathlibok\ \lean{Polynomial.isNoetherianRing, Algebra.FiniteType.isNoetherianRing}
+% Mathlib: the Hilbert basis theorem and its finitely generated algebra form for the
+% first sentence, and the localization of a Noetherian ring for the second.
+\mathlibok\ \lean{Polynomial.isNoetherianRing, Algebra.FiniteType.isNoetherianRing, IsLocalization.isNoetherianRing}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Algebra, Lemma~10.31.1
@@ -2086,6 +2091,10 @@ scheme} if $F\cong h_P$ for some scheme $P$ over $S$
 representing a functor is denoted $\underline{\Pic}$,
 $\underline{\Hilb}$ etc.; uniqueness of the representing scheme is
 \Cref{lem:pc-representable-unique}.
+% Mathlib: \texttt{RepresentableBy} is the datum of an isomorphism \(F\cong h_X\) and
+% \texttt{IsRepresentable} the existence of one, for a presheaf of types on any
+% category; take that category to be the category of schemes over \(S\).
+\mathlibok\ \lean{CategoryTheory.Functor.RepresentableBy, CategoryTheory.Functor.IsRepresentable}
 \uses{def:pc-scheme}
 \end{definition}
 
@@ -7030,6 +7039,13 @@ $\varphi_i:X_i\to U_i$ such that $X=\bigcup_{i\in I}U_i$,
 $\varphi_i(U_{ij})=U_i\cap U_j$ and
 $\varphi_{ij}=\varphi_j^{-1}|_{U_i\cap U_j}\circ\varphi_i|_{U_{ij}}$.  If moreover all $X_i$
 are schemes, then $X$ is a scheme.
+% Mathlib: the glueing datum is packaged categorically -- the overlap $U_{ij}$ is an
+% object $V(i,j)$ with an open immersion $f\,i\,j:V(i,j)\to U\,i$, the isomorphism
+% $\varphi_{ij}$ is the transition map $t\,i\,j$, and the cocycle condition is
+% \texttt{cocycle} -- and the conclusion is the glued object together with
+% \texttt{ι\_isOpenImmersion} (the $U_i\subseteq X$), \texttt{ι\_jointly\_surjective}
+% ($X=\bigcup U_i$) and \texttt{glue\_condition} (the last displayed identity).
+\mathlibok\ \lean{AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.ι_isOpenImmersion, AlgebraicGeometry.Scheme.GlueData.glue_condition}
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
