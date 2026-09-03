@@ -317,7 +317,7 @@ section ChartRingExt
 Two ring maps out of the chart ring at a homogeneous element `t = τ·Xᵈ` of the Rees
 algebra that agree on the base and take a nonzerodivisor value on `τ` are equal: every
 chart fraction `g/τⁿ` satisfies `(g/τⁿ)·τⁿ = g`, and division by the nonzerodivisor
-`φ τ` is unique. -/
+image of `τ` is unique. -/
 
 namespace AffineBlowup
 
@@ -380,8 +380,9 @@ namespace AffineBlowup
 variable {A : Type u} [CommRing A] (I₀ : Ideal A)
 
 /-- **The chart section map preserves nonzerodivisors**: the image in the `a`-chart
-ring of a nonzerodivisor of the base is a nonzerodivisor. Generalizes
-`isRegular_awayAlgebraMap_reesX` (the case `s = a`). -/
+ring of a nonzerodivisor of the base is a nonzerodivisor. This does not generalize
+`isRegular_awayAlgebraMap_reesX`, which places no hypothesis on `a`: the two overlap
+only in the case `s = a` with `a` itself a nonzerodivisor of `A`. -/
 theorem awayAlgebraMap_mem_nonZeroDivisors_of_mem {a : A} (ha : a ∈ I₀) {s : A}
     (hs : s ∈ nonZeroDivisors A) :
     awayAlgebraMap I₀ (reesX I₀ a ha) s ∈
