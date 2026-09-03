@@ -68,7 +68,7 @@ Then the graph of the induced morphism on `c ⁻¹ W` is closed in the open `(pr
 
 This is the mechanism behind the finiteness of the fibres in
 `AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph`: the base change of
-a closed immersion along `Y ×[X] X' ⟶ Y ×[X] Bl` has as range the preimage of its range. -/
+the graph section along `Y ×[X] X' ⟶ Y ×[X] Bl` has as range the preimage of its range. -/
 theorem isClosed_preimage_range_lift_of_comp {X Y X' Bl : Scheme.{u}}
     (p : Y ⟶ X) {q : X' ⟶ X} {π : Bl ⟶ X} (c : X' ⟶ Bl) (hc : c ≫ π = q)
     {Z : Y.Opens} {W : Bl.Opens} (g : W.toScheme ⟶ Z.toScheme)
