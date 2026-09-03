@@ -1640,6 +1640,9 @@ presentation}, \emph{surjective}, \emph{open immersion},
 Two further notions are fixed here: \emph{smooth}
 (\Cref{def:pc-smooth-morphism}) and \emph{projective}
 (\Cref{def:pc-projective-morphism}).
+A morphism of schemes is written $f:X\to Y$, with $X$ the source and $Y$
+the target, and statements about pushforward along a morphism are stated
+in that direction.
 \uses{def:pc-scheme,def:pcb-scheme-conventions,def:pc-smooth-morphism}
 \end{definition}
 
@@ -5450,10 +5453,10 @@ be a short exact sequence of coherent $\cO_X$-modules.  Then
 \[
 \chi(X,\cF_2)=\chi(X,\cF_1)+\chi(X,\cF_3).
 \]
-Moreover, for a morphism $f:Y\to X$ of proper $k$-schemes and a
-coherent $\cO_Y$-module $\cG$:
+Moreover, for a morphism $f:X\to Y$ of proper $k$-schemes and a
+coherent $\cO_X$-module $\cG$:
 \[
-\chi(Y,\cG)=\sum_{i\ge0}(-1)^i\chi(X,R^if_*\cG).
+\chi(X,\cG)=\sum_{i\ge0}(-1)^i\chi(Y,R^if_*\cG).
 \]
 (The second statement is Varieties, Lemma~33.33.5,
 \stacksproject{0BEK}.)
@@ -5467,7 +5470,8 @@ The long exact cohomology sequence of the short exact sequence is
 \to H^1(\cF_3)\to\cdots,
 \]
 exact, terminates at both ends (finite support,
-\Cref{lem:pc-coherent-hi} via the properness of $f$, and finite
+\Cref{lem:pc-coherent-hi} via the properness of $X$ over $k$, i.e.\ of
+its structure morphism $X\to\Spec(k)$, and finite
 dimensionality of the terms, \Cref{lem:pc-coherent-hi}), and the
 alternating sum of the dimensions in an exact sequence of finite
 dimensional vector spaces vanishes (rank--nullity, applied inductively
@@ -5483,17 +5487,17 @@ first statement (Varieties, Lemma 33.33.2,
 For the second statement, consider the Leray spectral sequence of $f$
 (\Cref{lem:pc-leray-spectral-sequence})
 \[
-E_2^{p,q}=H^p(X,R^qf_*\cG)\Longrightarrow H^{p+q}(Y,\cG).
+E_2^{p,q}=H^p(Y,R^qf_*\cG)\Longrightarrow H^{p+q}(X,\cG).
 \]
 This is the spectral sequence of a filtered complex of $k$-vector spaces
 whose filtration is finite in each degree
 (\Cref{def:pc-filtered-complex}), as
 \Cref{lem:pc-spectral-sequence-euler} requires: the Leray spectral
 sequence is the Grothendieck spectral sequence of the composition
-$\Gamma(Y,-)=\Gamma(X,-)\circ f_*$ (Derived Categories,
+$\Gamma(X,-)=\Gamma(Y,-)\circ f_*$ (Derived Categories,
 Lemma~13.22.2, \stacksproject{015N}), which
 is the spectral sequence of the double complex obtained by applying
-$\Gamma(X,-)$ to a Cartan--Eilenberg resolution $I^{\bullet,\bullet}$ of a
+$\Gamma(Y,-)$ to a Cartan--Eilenberg resolution $I^{\bullet,\bullet}$ of a
 bounded below complex computing $Rf_*\cG$ (Derived Categories,
 Lemma~13.21.3, \stacksproject{015J}); and
 the spectral sequences of a double complex $K^{\bullet,\bullet}$ are by
@@ -5511,7 +5515,7 @@ degree.
 All $R^qf_*\cG$ are coherent (\Cref{lem:pc-coherent-hi}) and only
 finitely many are nonzero, so each $E_2^{p,q}$ is finite dimensional
 over $k$ and $E_2$ has finite support; the spectral sequence converges
-to finite dimensional $H^n(Y,\cG)$ and the alternating sum over the
+to finite dimensional $H^n(X,\cG)$ and the alternating sum over the
 total degree equals the alternating sum of the $E_2$-terms (each
 $E_r$-page's alternating total sum is invariant under the differentials
 of the spectral sequence, as the pages are finite dimensional and the
@@ -5520,9 +5524,9 @@ the standard invariance of the Euler characteristic in a spectral
 sequence; this is
 \Cref{lem:pc-spectral-sequence-euler}):
 \[
-\chi(Y,\cG)=\sum_{p,q}(-1)^{p+q}\dim_kE_2^{p,q}
-=\sum_{q\ge0}(-1)^q\Bigl(\sum_p(-1)^p\dim_kH^p(X,R^qf_*\cG)\Bigr)
-=\sum_{q\ge0}(-1)^q\chi(X,R^qf_*\cG),
+\chi(X,\cG)=\sum_{p,q}(-1)^{p+q}\dim_kE_2^{p,q}
+=\sum_{q\ge0}(-1)^q\Bigl(\sum_p(-1)^p\dim_kH^p(Y,R^qf_*\cG)\Bigr)
+=\sum_{q\ge0}(-1)^q\chi(Y,R^qf_*\cG),
 \]
 as claimed.
 \end{proof}
