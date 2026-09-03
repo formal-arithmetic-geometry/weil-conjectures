@@ -89,8 +89,9 @@ noncomputable def eulerCharacteristic (f : X ⟶ Spec (.of k)) (M : X.Modules) :
 /-- The **degree** `deg(ℒ) = χ(X, ℒ) - χ(X, 𝒪_X)` of an invertible `𝒪_X`-module `ℒ` on a
 scheme `f : X ⟶ Spec k` over a field `k`.
 
-The definition makes sense for an arbitrary `𝒪_X`-module; it is only for invertible modules on
-a proper scheme that it has the expected properties.
+The definition is made for an arbitrary `𝒪_X`-module on an arbitrary scheme over `k`; Stacks
+0AYR defines it for an invertible module on a scheme proper of dimension `≤ 1` over `k`, which is
+where it has the expected properties.
 (blueprint: `def:pc-degree-line-bundle`, Stacks 0AYR) -/
 @[stacks 0AYR]
 noncomputable def degree (f : X ⟶ Spec (.of k)) (M : X.Modules) : ℤ :=
