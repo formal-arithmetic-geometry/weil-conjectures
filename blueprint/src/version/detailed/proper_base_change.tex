@@ -6989,8 +6989,15 @@ compactifications, and flat base change of a dense compactification.  What remai
 \S A43 is the derived-categorical layer: the refinement comparison $\rho$ of
 \textup{(BA43-RHO)} being an isomorphism, the resulting $\kappa$ system and its
 independence, the open--proper exchange \textup{(BA43-OPX)}, and densification after a
-non-flat base change.  Finite presentation of the constructed compactifications is also not
-yet formalized.}
+non-flat base change.  Over a \emph{locally Noetherian} base, finite presentation of the
+constructed compactifications is formalized as well: the structure morphism of \emph{every}
+compactification is then locally of finite presentation
+(\texttt{AlgebraicGeometry.Compactification.locallyOfFinitePresentation\_g}), so
+\textup{(BA43-DENSE-DATA)} is delivered in full over such a base by
+\texttt{AlgebraicGeometry.exists\_isDense\_compactification\_locallyOfFinitePresentation}
+(\texttt{WeilConjectures/Compactification/DenseFinitePresentation.lean}); over a general
+quasi-compact quasi-separated base, finite presentation of the \emph{dense} models remains
+unformalized.}
 \subsection*{A43. Dense compactifications and composition}
 
 Let $f:X\to Y$ be separated and finitely presented.  A dense
@@ -7660,7 +7667,7 @@ integral, and rational exports are outside this finite-level owner.
 \textbf{Status. }\texttt{OPEN}; \textbf{reduction status. }\texttt{LEAF}; \textbf{class. }\texttt{GEO}.
 \uses{}
 \textbf{Exact output required. }Construct a typed common dense refinement with finitely presented proper structure map.
-\formalizationnote{Partially formalized as \texttt{AlgebraicGeometry.Compactification.exists\_common\_refinement\_isSchemeTheoreticallyDominant}, with the density-free version \texttt{AlgebraicGeometry.Compactification.exists\_common\_refinement} (both in \texttt{WeilConjectures/Compactification/CommonRefinement.lean}).  Delivered: for a quasi-compact $f$, any two compactifications of $f$ are refined by a common one --- the schematic closure of the graph in the fibre product --- in which the source open is scheme-theoretically dense.  Not delivered: the structure morphism of that common refinement is proper but is not shown to be finitely presented, so the owner stays open on that half.  Finite presentation of the constructed models is tracked separately.}
+\formalizationnote{Partially formalized as \texttt{AlgebraicGeometry.Compactification.exists\_common\_refinement\_isSchemeTheoreticallyDominant}, with the density-free version \texttt{AlgebraicGeometry.Compactification.exists\_common\_refinement} (both in \texttt{WeilConjectures/Compactification/CommonRefinement.lean}).  Delivered: for a quasi-compact $f$, any two compactifications of $f$ are refined by a common one --- the schematic closure of the graph in the fibre product --- in which the source open is scheme-theoretically dense.  Over a locally Noetherian base the remaining half is delivered too, by \texttt{AlgebraicGeometry.Compactification.exists\_common\_refinement\_isDense\_locallyOfFinitePresentation} (\texttt{WeilConjectures/Compactification/DenseFinitePresentation.lean}), which adds finite presentation of the structure morphism to the common dense refinement.  Not delivered: over a general quasi-compact quasi-separated base the structure morphism of the common refinement is proper but is not shown to be finitely presented, so the owner stays open on that half.  Finite presentation of the constructed models is tracked separately.}
 \openobligation{GEO-BA43-PAIRWISE-COMMON-REFINEMENT}
 \end{openproblem}
 
