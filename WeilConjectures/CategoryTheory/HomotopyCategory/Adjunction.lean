@@ -27,7 +27,8 @@ homotopy categories (`CategoryTheory.Adjunction.mapHomotopyCategoryPlus`).
 
 We also record how these adjunctions behave under identities and composition: the unit of
 the adjunction induced by `Adjunction.id` is the inverse of the isomorphism
-`Functor.mapHomotopyCategoryPlusIdIso`, and the unit of the adjunction induced by a
+`Functor.mapHomotopyCategoryPlusIdIso` followed by the image of that inverse under
+`(𝟭 C).mapHomotopyCategoryPlus`, and the unit of the adjunction induced by a
 composite `adj₁.comp adj₂` is the composite of the two units, transported along
 `Functor.mapHomotopyCategoryPlusCompIso`. Both are proved by descending to categories of
 complexes, where the unit is given degreewise by the unit of `adj`.
@@ -145,7 +146,8 @@ lemma mapHomologicalComplex_counit_app_f (Y : HomologicalComplex D c) (n : ι) :
 end MapHomologicalComplex
 
 /-- The identity law for `Adjunction.mapHomologicalComplex`: the unit of the adjunction
-induced by `Adjunction.id` is the inverse of `Functor.mapHomologicalComplexIdIso`. -/
+induced by `Adjunction.id` is the inverse of `Functor.mapHomologicalComplexIdIso` followed
+by the image of that inverse under `(𝟭 C).mapHomologicalComplex c`. -/
 lemma mapHomologicalComplex_id_unit_app (X : HomologicalComplex C c) :
     ((Adjunction.id (C := C)).mapHomologicalComplex c).unit.app X =
       (Functor.mapHomologicalComplexIdIso C c).inv.app X ≫
@@ -282,7 +284,8 @@ lemma ι_map_mapHomotopyCategoryPlus_unit_app {L : C ⥤ D} {R : D ⥤ C} (adj :
 
 /-- **The identity law for `Adjunction.mapHomotopyCategoryPlus`**: the unit of the
 adjunction induced by `Adjunction.id` is the inverse of
-`Functor.mapHomotopyCategoryPlusIdIso`. -/
+`Functor.mapHomotopyCategoryPlusIdIso` followed by the image of that inverse under
+`(𝟭 C).mapHomotopyCategoryPlus`. -/
 lemma mapHomotopyCategoryPlus_id_unit_app (K : HomotopyCategory.Plus C) :
     (Adjunction.id (C := C)).mapHomotopyCategoryPlus.unit.app K =
       (Functor.mapHomotopyCategoryPlusIdIso C).inv.app K ≫
