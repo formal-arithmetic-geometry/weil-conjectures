@@ -43,9 +43,11 @@ because the closedness of the graph is a purely topological consequence of the c
 `closure (Set.range f₁)` lying inside `p₁ ⁻¹ X₀`.
 
 The centre found over `X₀` is extended to `X₁` by `IsAdmissible.exists_extend_of_disjoint`
-(Stacks Tag 080M) — its hypothesis is exactly `X₀ ⊓ π₁ ⁻¹ V = π₁ ⁻¹ U` — and the two admissible
-blow-ups are composed by `IsAdmissible.exists_comp` (Stacks Tag 080L). Transporting the local
-extension from the blow-up of `X₀` to the blow-up of `X₁` is Case 2's own
+(Stacks Tag 080M), whose hypothesis is that the support of that centre avoids the overlap
+`X₀ ⊓ π₁ ⁻¹ V`; the centre is admissible over `X₀ ⊓ π₁ ⁻¹ U`, so it is step 2's equality
+`X₀ ⊓ π₁ ⁻¹ V = π₁ ⁻¹ U` that discharges it. The two admissible blow-ups are composed by
+`IsAdmissible.exists_comp` (Stacks Tag 080L). Transporting the local extension from the
+blow-up of `X₀` to the blow-up of `X₁` is Case 2's own
 `AlgebraicGeometry.exists_extend_of_lift`, used here with the open `X₀` of `X₁` in the role of
 its affine open.
 

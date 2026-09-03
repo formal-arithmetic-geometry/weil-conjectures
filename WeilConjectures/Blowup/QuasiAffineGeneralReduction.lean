@@ -62,9 +62,9 @@ from a qcqs scheme and let `f : U ⟶ Y` be a section of `p` over `U` whose imag
 in `p ⁻¹ V`. There is a `V`-admissible blow-up of `X` after which the closure of the image
 of the base change of `f` is disjoint from the part lying over the closure of `V ∖ U`.
 
-The base change is left flexible: `Z'` and `Y'` are arbitrary schemes over `Y` and over
-`(I₁ ⊔ I₂).blowup` fitting into the two commuting squares, exactly as in
-`AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`.
+The base change is left flexible: `Z'` is an arbitrary scheme over `Y` and over
+`(I₁ ⊔ I₂).blowup`, and `Y'` an arbitrary scheme over `U` and over `Z'`, fitting into the two
+commuting squares, exactly as in `AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`.
 (Blueprint: `lemma:nagata-conrad-case3-disjointness-reduction`.) -/
 theorem exists_isAdmissible_disjoint_closure_range_of_le
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
