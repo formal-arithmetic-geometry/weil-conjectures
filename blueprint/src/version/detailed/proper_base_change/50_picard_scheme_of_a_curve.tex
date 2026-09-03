@@ -546,6 +546,30 @@ integral over \(R\) one has \(\dim R=\dim S\):
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The spectral sequences of a double complex]
+\label{lem:pcb-double-complex-spectral}
+Let \(\mathcal A\) be an abelian category and \(K^{\bullet,\bullet}\) a
+double complex in \(\mathcal A\).  The two spectral sequences associated
+with \(K^{\bullet,\bullet}\) have
+\[
+ {}'E_1^{pq}=H^q(K^{p,\bullet}),\qquad
+ {}'E_2^{pq}=H^p_I(H^q_{II}(K^{\bullet,\bullet})),
+\]
+\[
+ {}''E_1^{pq}=H^q(K^{\bullet,p}),\qquad
+ {}''E_2^{pq}=H^p_{II}(H^q_I(K^{\bullet,\bullet})),
+\]
+where \(H_I\) and \(H_{II}\) denote cohomology taken in the first and
+in the second direction.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Homological Algebra, Section~12.25
+(Spectral sequences: double complexes), Lemma~12.25.1
+(\stacksproject{0130}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-cech-spectral)
 % Decomposed.
 \begin{lemma}[The Cech-to-cohomology spectral sequence]
@@ -563,6 +587,7 @@ where \(\underline H^q(F)\) is the presheaf
 Cech cohomology with respect to the covering \(\mathfrak U\).
 \end{lemma}
 \begin{proof}
+\uses{lem:pcb-double-complex-spectral}
 Choose an injective resolution \(F\to I^{\bullet}\) and consider the
 double complex \(C^{pq}:=C^p(\mathfrak U,I^q)\), where
 \(C^p(\mathfrak U,-)\) is the (alternating) Cech complex of the
@@ -587,9 +612,10 @@ quasi-isomorphism, and the total cohomology is the hypercohomology
 a double complex, whose first page and second page are
 \({}'E_1^{pq}=H^q(K^{p,\bullet})\) and
 \({}'E_2^{pq}=H^p_I(H^q_{II}(K^{\bullet,\bullet}))\) for a double
-complex \(K^{\bullet,\bullet}\) (\emph{reference: Stacks Project,
-Homological Algebra, Section~12.25 (Spectral sequences: double
-complexes), Lemma~12.25.1, \stacksproject{0130}}).
+complex \(K^{\bullet,\bullet}\)
+(\Cref{lem:pcb-double-complex-spectral}: \emph{reference: Stacks
+Project, Homological Algebra, Section~12.25 (Spectral sequences:
+double complexes), Lemma~12.25.1, \stacksproject{0130}}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -813,6 +839,37 @@ the diagonal.  It is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Proper schemes of dimension at most one are projective]
+\label{lem:pcb-proper-dim-one-projective}
+Let \(X\) be a scheme \hyperref[def:pcb-scheme-conventions]{proper}
+over a field \(k\) with \(\dim X\leq1\).  Then \(X\) is projective
+over \(k\); more precisely \(X\) is H-projective over \(k\), that is,
+isomorphic over \(k\) to a closed subscheme of \(\mathbf P^n_k\) for
+some \(n\).
+\uses{def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Lemma~33.43.4
+(\stacksproject{0A26}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Finite equals proper with finite fibres]
+\label{lem:pcb-finite-iff-proper-finite-fibres}
+Let \(f:X\to S\) be a morphism of schemes with \(S\) locally
+Noetherian.  Then \(f\) is \hyperref[def:pcb-scheme-conventions]{finite}
+if and only if \(f\) is \hyperref[def:pcb-scheme-conventions]{proper}
+and all its fibres are finite.
+\uses{def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Cohomology of Schemes, Lemma~30.21.1
+(\stacksproject{02OG}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % [reproduced from file 06 (label lem:pcb-degree-2g1-very-ample)]
 % Decomposed.
 \begin{lemma}[Line bundles of large degree are very ample]
@@ -825,12 +882,12 @@ field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
 \uses{def:pcb-genus,def:pcb-pic0,def:pcb-curves,def:pcb-ample}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree,lem:pcb-unramified-omega-zero}
+\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree,lem:pcb-unramified-omega-zero,lem:pcb-proper-dim-one-projective,lem:pcb-finite-iff-proper-finite-fibres}
 We use Riemann--Roch (\Cref{thm:pc-riemann-roch}) for the proper
 smooth curve \(C\) of genus \(g\) (\Cref{def:pcb-genus}): first, \(C\) is projective (a
-proper smooth curve over a field is projective: Varieties,
-Lemma~33.43.4,
-\stacksproject{0A26}; the remaining
+proper scheme of dimension at most one over a field is projective,
+\Cref{lem:pcb-proper-dim-one-projective}: \emph{reference: Stacks
+Project, Varieties, Lemma~33.43.4, \stacksproject{0A26}}; the remaining
 hypotheses of the theorem hold: the curve is smooth, proper and
 connected, and \(H^0(C,\mathcal O_C)=k\) since the field is
 algebraically closed) and, for a line bundle \(\mathcal N\) of degree
@@ -888,8 +945,9 @@ fields with no differentials, hence are algebraic over the base
 field, so the dimension is zero and
 \Cref{lem:pcb-dim0-finite} applies).  Thus \(\varphi\) is proper
 (a morphism of proper schemes) with finite fibres, hence finite
-(\emph{reference: Stacks Project, Cohomology of Schemes,
-Lemma~30.21.1, \stacksproject{02OG}: over a locally Noetherian base a
+(\Cref{lem:pcb-finite-iff-proper-finite-fibres}: \emph{reference:
+Stacks Project, Cohomology of Schemes, Lemma~30.21.1,
+\stacksproject{02OG}: over a locally Noetherian base a
 morphism is finite if and only if it is proper with finite fibres};
 the base \(\mathbf P^N_k\) is of finite type over a field, hence
 locally Noetherian; cf.\ the proof recalled in
@@ -1006,7 +1064,7 @@ finite surjective and flat of degree \([k(C):k(f)]\).
 \uses{def:pcb-function-field,lem:pcb-rational-function-morphism,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-dim0-finite,lem:pcb-rational-function-morphism,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
+\uses{lem:pcb-dim0-finite,lem:pcb-rational-function-morphism,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,lem:pcb-finite-iff-proper-finite-fibres}
 By \Cref{lem:pcb-rational-function-morphism}, \(\pi_f\) is defined
 with \(\pi_f^*t=f\).
 
@@ -1017,7 +1075,8 @@ surjective.  The fibres of \(\pi_f\) are finite: the fibre over
 \(y\in\mathbf P^1\) is a proper closed subscheme of \(C\) not equal
 to \(C\), hence of dimension zero and finite by
 \Cref{lem:pcb-dim0-finite}.  A proper morphism with finite fibres is
-finite (\emph{reference: Stacks Project, Cohomology of Schemes,
+finite (\Cref{lem:pcb-finite-iff-proper-finite-fibres}:
+\emph{reference: Stacks Project, Cohomology of Schemes,
 Lemma~30.21.1, \stacksproject{02OG}: over a locally Noetherian base a
 morphism is finite if and only if it is proper with finite fibres};
 the base \(\mathbf P^1_k\) is of finite type over a field, hence
