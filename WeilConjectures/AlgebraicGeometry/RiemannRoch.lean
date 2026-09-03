@@ -44,9 +44,9 @@ that is not free of finite rank. The hypotheses under which these junk values do
 proper over `k` and `ℱ` coherent — are not part of the definitions; that they are the right
 hypotheses is the blueprint's `lem:pc-euler-characteristic-well-defined`. For the same reason
 `degree` is defined for an arbitrary module on an arbitrary scheme over `k`, without the
-invertibility and properness hypotheses of `def:pc-degree-line-bundle`, and `genus` is defined
-for an arbitrary scheme over `k`, without the geometric irreducibility hypothesis under which
-the blueprint states `def:pc-genus`.
+invertibility, properness and dimension hypotheses of `def:pc-degree-line-bundle`, and `genus` is
+defined for an arbitrary scheme over `k`, without the geometric irreducibility hypothesis under
+which the blueprint states `def:pc-genus`.
 
 The Euler characteristic and the degree are invariants of a module and live in the
 `Scheme.Modules` namespace alongside `Scheme.Modules.cohomology`, whereas the genus is an
