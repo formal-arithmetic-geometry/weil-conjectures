@@ -3588,15 +3588,28 @@ $\partial(a_1\otimes\cdots\otimes a_n)=
 \sum_{i=1}^n(-1)^{i+1}a_1\otimes\cdots\otimes a_i\otimes1\otimes
 a_{i+1}\otimes\cdots\otimes a_n$ (in degree $0$,
 $\partial(1)=1\otimes1\otimes\cdots$ is the inclusion of $A'$).
-The $A'$-linear maps
+Write $\partial=\sum_{i\ge1}(-1)^{i+1}\delta_i$, where $\delta_i$ inserts
+$1$ after the $i$-th tensor factor; the face inserting $1$ \emph{before}
+the first factor does not occur, the base change having consumed it.
+The contraction is therefore the degeneracy at the front: the
+$A'$-linear maps
 \[
-s(a_1\otimes\cdots\otimes a_{n+1}):=a_1\otimes\cdots\otimes a_n\cdot a_{n+1}
+s(a_1\otimes\cdots\otimes a_{n+1}):=a_1a_2\otimes a_3\otimes\cdots
+\otimes a_{n+1}
 \]
-satisfy $\partial s+s\partial=\id$ (the classical contraction of the bar
-complex: expanding both $\partial s$ and $s\partial$ as double sums,
-all terms cancel pairwise except the identity).  Hence the base-changed
-complex is exact (it is split exact), so the original complex is exact
-by faithfully flat detection.  Tensoring the exact complex
+(multiplication of the first two tensor factors) satisfy
+$\partial s+s\partial=\id$.  Indeed $s\delta_1=\id$, and
+$s\delta_i=\delta_{i-1}s$ for $i\ge2$ because such an insertion does not
+touch the first two factors, so
+\[
+s\partial x=x+\sum_{i\ge2}(-1)^{i+1}\delta_{i-1}sx
+=x-\sum_{m\ge1}(-1)^{m+1}\delta_msx=x-\partial sx .
+\]
+(Multiplying the \emph{last} two factors instead would not contract this
+complex: on $a_1\otimes a_2$ the two terms of $s\partial$ cancel, leaving
+$\partial s+s\partial=\partial(a_1a_2)=a_1a_2\otimes1\ne a_1\otimes a_2$.)
+Hence the base-changed complex is exact (it is split exact), so the
+original complex is exact by faithfully flat detection.  Tensoring the exact complex
 $0\to A\to A'^{\otimes\bullet}$ with $M$ (all terms flat over $A$) and
 using the detection step once more gives the general $M$-statement.
 \end{proof}
@@ -7393,12 +7406,28 @@ $\{\Spec(B)\to\Spec(A)\}$ on a $B$-module $N$ is an isomorphism
 \psi:N\otimes_AB\longrightarrow B\otimes_AN
 \]
 of $B\otimes_AB$-modules satisfying the
-\emph{cocycle condition}: the two isomorphisms
+\emph{cocycle condition}.  Explicitly, write
 \[
-N\otimes_AB\otimes_AB\longrightarrow B\otimes_AB\otimes_AN
+\psi_{01}:=\psi\otimes\mathrm{id}_B:
+N\otimes_AB\otimes_AB\longrightarrow B\otimes_AN\otimes_AB,
+\qquad
+\psi_{12}:=\mathrm{id}_B\otimes\psi:
+B\otimes_AN\otimes_AB\longrightarrow B\otimes_AB\otimes_AN,
 \]
-obtained by applying $\psi$ to the first two, resp.\ to the last two,
-tensor factors, agree.  \emph{Claim: the functor from $A$-modules to
+and let
+\[
+\psi_{02}:N\otimes_AB\otimes_AB\longrightarrow B\otimes_AB\otimes_AN
+\]
+be the map obtained by applying $\psi$ to the outer two tensor factors
+and leaving the middle one in place (so $\psi_{02}(n\otimes b\otimes b')$
+is $\psi(n\otimes b')$ with $b$ inserted into the middle slot); all three
+are isomorphisms, and $\psi_{01},\psi_{12},\psi_{02}$ are
+$B\otimes_AB\otimes_AB$-linear.  The cocycle condition is that the two
+isomorphisms $N\otimes_AB\otimes_AB\to B\otimes_AB\otimes_AN$ so obtained
+agree:
+\[
+\psi_{12}\circ\psi_{01}=\psi_{02}.
+\]  \emph{Claim: the functor from $A$-modules to
 $B$-modules with descent datum (an $A$-module $M$ goes to
 $M\otimes_AB$ with the canonical swap isomorphism) is an equivalence.}
 
@@ -7414,25 +7443,161 @@ N_0:=\ker\bigl(N\longrightarrow B\otimes_AN\bigr),
 \qquad
 n\longmapsto\psi(n\otimes1)-1\otimes n .
 \]
-The cocycle condition says precisely that the (twisted) Amitsur-type
-complex
+\emph{The twisted Amitsur complex.}  For $r\ge0$ set
 \[
-0\to N_0\to N\to B\otimes_AN\to B\otimes_AB\otimes_AN\to\cdots
+C^r:=B^{\otimes r}\otimes_AN,
+\qquad\text{so}\quad C^0=N,\quad C^1=B\otimes_AN,\quad
+C^2=B\otimes_AB\otimes_AN,\ \dots
 \]
-(the differentials are the alternating sums of the cyclic permutations
-of the tensor factors, with the first map $N\to B\otimes_AN$ the
-difference above; in degree $r$, $\sum_{j=0}^{r+1}(-1)^j$ of the
-$r$-fold multiplications with $\psi$ applied to the appropriate
-factors) is a complex, and the maps
+(all tensor products are over $A$, and $C^r$ is regarded as an
+$A$-module).  Since $\psi$ is $B\otimes_AB$-linear and the elements
+$n\otimes1$ generate $N\otimes_AB$ over $B\otimes_AB$, the datum $\psi$
+is determined by the $A$-linear map
 \[
-s(b_1\otimes\cdots\otimes b_p\otimes n):=b_1\otimes\cdots\otimes
-b_{p-1}\otimes\psi^{-1}(b_p\otimes n)
+\widetilde\psi:N\longrightarrow B\otimes_AN,
+\qquad \widetilde\psi(n):=\psi(n\otimes1),
 \]
-satisfy $ds+sd=\mathrm{id}$ (the two double sums cancel pairwise;
-only the top and bottom terms -- which are $\mathrm{id}$ and
-$N_0$-inclusion-composed terms -- remain; the cocycle condition is
-what makes the $\psi$-twisted pieces cancel).  Hence the complex is
-split exact; in particular the composite
+and the linearity of $\psi$ reads
+$\widetilde\psi(bn)=(b\otimes1)\cdot\widetilde\psi(n)$ for $b\in B$,
+$n\in N$, where $B\otimes_AB$ acts on $N\otimes_AB$ by
+$(b\otimes b')(n\otimes c)=bn\otimes b'c$ and on $B\otimes_AN$ by
+$(b\otimes b')(c\otimes n)=bc\otimes b'n$.  Define $A$-linear face maps
+\[
+\delta^r_j:C^r\longrightarrow C^{r+1}\qquad(0\le j\le r+1)
+\]
+by
+\[
+\delta^r_j(b_1\otimes\cdots\otimes b_r\otimes n):=
+b_1\otimes\cdots\otimes b_j\otimes1\otimes b_{j+1}\otimes\cdots\otimes
+b_r\otimes n\qquad(0\le j\le r),
+\]
+\[
+\delta^r_{r+1}(b_1\otimes\cdots\otimes b_r\otimes n):=
+b_1\otimes\cdots\otimes b_r\otimes\widetilde\psi(n)\ \in\
+B^{\otimes r}\otimes_A(B\otimes_AN)=C^{r+1}:
+\]
+the faces $\delta^r_0,\dots,\delta^r_r$ insert $1$ into one of the $r+1$
+gaps between the $B$-factors, while the top face $\delta^r_{r+1}$ -- the
+only one that uses the descent datum -- replaces $n$ by
+$\widetilde\psi(n)$, which occupies the last two slots of $C^{r+1}$.
+Put
+\[
+d^r:=\sum_{j=0}^{r+1}(-1)^j\,\delta^r_j:C^r\longrightarrow C^{r+1}.
+\]
+In degree $0$ this is $d^0(n)=1\otimes n-\psi(n\otimes1)$, the negative
+of the map displayed above, so $N_0=\ker d^0$ and the sequence in
+question is the augmented complex
+\[
+0\to N_0\to C^0\xrightarrow{\ d^0\ }C^1\xrightarrow{\ d^1\ }
+C^2\to\cdots
+\]
+which is the (twisted) Amitsur-type complex
+$0\to N_0\to N\to B\otimes_AN\to B\otimes_AB\otimes_AN\to\cdots$.
+
+\emph{It is a complex, and this is where the cocycle condition enters.}
+As for any alternating sum of faces, $d^{r+1}\circ d^r=0$ follows from
+the cosimplicial identities
+\[
+\delta^{r+1}_j\circ\delta^r_i=\delta^{r+1}_i\circ\delta^r_{j-1}
+\qquad(0\le i<j\le r+2),
+\]
+which make the terms of the double sum $d^{r+1}d^r=
+\sum_{i,j}(-1)^{i+j}\delta^{r+1}_j\delta^r_i$ cancel in pairs: the term
+$(i,j)$ with $i<j$ against the term $(j-1,i)$, whose signs are
+$(-1)^{i+j}$ and $(-1)^{i+j-1}$.  For $j\le r+1$ both sides of the
+identity insert two $1$'s and it is the usual bookkeeping of insertion
+positions.  For $j=r+2$ and $i\le r$ both sides insert one $1$ into a
+$B$-gap and apply $\widetilde\psi$ at the end, and these operate on
+disjoint tensor slots.  The one remaining case, $i=r+1$ and $j=r+2$,
+is
+\[
+\delta^{r+1}_{r+2}\circ\delta^r_{r+1}=
+\delta^{r+1}_{r+1}\circ\delta^r_{r+1},
+\]
+and, the $r$ leading factors being untouched on both sides, it says: for
+every $n\in N$, writing $\widetilde\psi(n)=\sum_ib_i\otimes n_i$,
+\[
+\sum_ib_i\otimes\widetilde\psi(n_i)=\sum_ib_i\otimes1\otimes n_i
+\qquad\text{in }B\otimes_AB\otimes_AN.
+\]
+This is exactly the cocycle condition: the left-hand side is
+$\psi_{12}(\psi_{01}(n\otimes1\otimes1))$ and the right-hand side is
+$\psi_{02}(n\otimes1\otimes1)$, the maps $\psi_{12}\circ\psi_{01}$ and
+$\psi_{02}$ are $B\otimes_AB\otimes_AB$-linear, and the elements
+$n\otimes1\otimes1$ generate $N\otimes_AB\otimes_AB$ over
+$B\otimes_AB\otimes_AB$ (indeed
+$n\otimes b\otimes b'=(1\otimes b\otimes b')\cdot(n\otimes1\otimes1)$),
+so the two maps agree if and only if they agree on these elements.
+Thus $C^\bullet$ is a complex, and this is the only place where the
+cocycle condition is used.
+
+\emph{The contracting homotopy, after base change.}  The homotopy is not
+available over $A$: contracting the first gap of $C^\bullet$ over $A$
+would require an $A$-linear retraction $B\to A$ of the structure map,
+which a faithfully flat $A\to B$ need not admit.  (Nor does the naive
+formula $b_1\otimes\cdots\otimes b_p\otimes n\mapsto
+b_1\otimes\cdots\otimes b_{p-1}\otimes\psi^{-1}(b_p\otimes n)$ define a
+map $C^p\to C^{p-1}$: since $\psi^{-1}:B\otimes_AN\to N\otimes_AB$, its
+value lies in $B^{\otimes(p-1)}\otimes_AN\otimes_AB$.)  The retraction
+that is available is the one produced by the base change along $A\to B$
+itself: the multiplication $B\otimes_AB\to B$ retracts
+$B\to B\otimes_AB$, $b\mapsto b\otimes1$.  Accordingly put
+\[
+D^r:=B\otimes_AC^r=B^{\otimes(r+1)}\otimes_AN=C^{r+1},
+\qquad d^r_D:=\mathrm{id}_B\otimes d^r.
+\]
+Under the identification $D^r=C^{r+1}$ one has
+$\mathrm{id}_B\otimes\delta^r_j=\delta^{r+1}_{j+1}$ for $0\le j\le r+1$
+(these are all the faces of $C^{r+1}$ except $\delta^{r+1}_0$), so
+\[
+d^r_D=\sum_{k=1}^{r+2}(-1)^{k-1}\,\delta^{r+1}_k:D^r\longrightarrow
+D^{r+1}.
+\]
+For $r\ge1$ define
+\[
+h^r:D^r=B^{\otimes(r+1)}\otimes_AN\longrightarrow
+D^{r-1}=B^{\otimes r}\otimes_AN,\qquad
+h^r(b_0\otimes b_1\otimes\cdots\otimes b_r\otimes n):=
+b_0b_1\otimes b_2\otimes\cdots\otimes b_r\otimes n,
+\]
+the multiplication of the first two $B$-factors -- there are $r+1\ge2$
+of them, and this is where the multiplication $B\otimes_AB\to B$ is
+used.  Two identities hold: first
+\[
+h^{r+1}\circ\delta^{r+1}_1=\mathrm{id}_{D^r},
+\]
+because $\delta^{r+1}_1$ inserts $1$ between the first two slots and
+$h^{r+1}$ multiplies those two slots again; and second
+\[
+h^{r+1}\circ\delta^{r+1}_k=\delta^r_{k-1}\circ h^r
+\qquad(2\le k\le r+2),
+\]
+because such a face operates on slots strictly after the second one
+(for $k=r+2$, on $n$ alone), hence on slots disjoint from the two that
+$h$ multiplies.  Therefore, for $y\in D^r$ with $r\ge1$,
+\[
+h^{r+1}(d^r_Dy)=y+\sum_{k=2}^{r+2}(-1)^{k-1}\delta^r_{k-1}(h^ry)
+=y-\sum_{m=1}^{r+1}(-1)^{m-1}\delta^r_m(h^ry)=y-d^{r-1}_D(h^ry),
+\]
+the last equality because $d^{r-1}_D=\sum_{m=1}^{r+1}(-1)^{m-1}\delta^r_m$
+on $D^{r-1}=C^r$.  That is,
+\[
+h^{r+1}\circ d^r_D+d^{r-1}_D\circ h^r=\mathrm{id}_{D^r}
+\qquad(r\ge1),
+\]
+which is the identity $ds+sd=\mathrm{id}$, with $s=h$, in the exact form
+in which it holds: on the base-changed complex, with no sign or
+degree-shift correction.
+
+Consequently $D^\bullet=B\otimes_AC^\bullet$ is exact in every degree
+$r\ge1$: if $d^r_Dy=0$ then $y=d^{r-1}_D(h^ry)$.  Since $B$ is flat over
+$A$, kernels and images commute with $-\otimes_AB$ and hence
+$H^r(B\otimes_AC^\bullet)=B\otimes_AH^r(C^\bullet)$; since $B$ is
+moreover faithfully flat, $B\otimes_AH^r(C^\bullet)=0$ forces
+$H^r(C^\bullet)=0$.  So $C^\bullet$ is exact in every degree $r\ge1$,
+and it is exact at $N_0$ and at $C^0$ by the definition $N_0=\ker d^0$.
+Hence the augmented complex above is exact -- split exact after the
+faithfully flat base change $-\otimes_AB$; in particular the composite
 \[
 N_0\otimes_AB\longrightarrow N\otimes_AB\cong B\otimes_AN
 \]
