@@ -471,6 +471,88 @@ finite extension \(k'/k\).  Taking \(k'=k\), the ring
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Nakayama's lemma]
+\label{lem:pcb-nakayama}
+Let \(R\) be a ring and \(I\subseteq R\) an ideal contained in the
+Jacobson radical of \(R\), and let \(M\) be an \(R\)-module.
+\begin{enumerate}
+\item If \(N,N'\subseteq M\) are submodules with \(N'\) finitely
+generated and \(N'\subseteq N+IN'\), then \(N'\subseteq N\); in
+particular, if \(M\) is finite and \(M=N+IM\), then \(M=N\).
+\item If \(f:N\to M\) is a map of \(R\)-modules with \(M\) finite and
+the induced map \(N/IN\to M/IM\) surjective, then \(f\) is surjective.
+\end{enumerate}
+% Mathlib: parts (4) and (6) of Algebra, Lemma 10.20.1.
+\mathlibok\ \lean{Submodule.le_of_le_smul_of_le_jacobson_bot,
+LinearMap.surjective_of_surjective_comp_mkQ}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.20.1, parts~(4)
+and~(6) (\stacksproject{00DV}).  It is available in Mathlib in the form
+named in the statement, so it is not decomposed further here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Noether normalization]
+\label{lem:pcb-noether-normalization}
+Let \(k\) be a field and let \(S=k[x_1,\dots,x_n]/I\) with
+\(I\neq(1)\).  Then there are an integer \(r\geq0\) and elements
+\(y_1,\dots,y_r\in S\) such that the map \(k[y_1,\dots,y_r]\to S\)
+from the polynomial ring on \(y_1,\dots,y_r\) is injective and finite,
+and for such a presentation one has \(r=\dim S\).  Equivalently: every
+nonzero finitely generated \(k\)-algebra \(A\) admits a finite
+injective map \(k[x_1,\dots,x_d]\hookrightarrow A\) with
+\(d=\dim A\).
+% Mathlib: RingTheory/NoetherNormalization.lean proves the existence of the
+% finite injective map (exists_finite_inj_algHom_of_fg, and the integral
+% form exists_integral_inj_algHom_of_fg, which carries the tag 00OW), but
+% neither of those two statements records the equality of the number of
+% variables with the dimension of the algebra, which is the part used
+% below; so no \mathlibok is claimed for this node.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.115.4
+(\stacksproject{00OY}), the Noether normalization theorem.  It is not
+decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Integral extensions preserve dimension]
+\label{lem:pcb-integral-dimension}
+Let \(R\subseteq S\) be rings with \(S\) integral over \(R\).  Then
+\(\dim R=\dim S\).
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.112.4
+(\stacksproject{00OK}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Surjectivity of a map of finite projective modules is open]
+\label{lem:pcb-surjective-locus-open}
+Let \(R\) be a ring and \(\varphi:P_1\to P_2\) a map of finite
+projective \(R\)-modules.  Then the set \(W\) of primes
+\(\mathfrak p\in\operatorname{Spec}R\) at which
+\(\varphi\otimes\kappa(\mathfrak p)\) is surjective is open, and for
+every \(f\in R\) with \(D(f)\subseteq W\) the map
+\(P_{1,f}\to P_{2,f}\) is surjective and \(\ker(\varphi)_f\) is finite
+projective over \(R_f\).  Likewise the locus where
+\(\varphi\otimes\kappa(\mathfrak p)\) is injective is open (with
+\(\operatorname{coker}(\varphi)_f\) finite projective over the
+corresponding \(D(f)\)), and so is the locus where
+\(\varphi\otimes\kappa(\mathfrak p)\) is bijective (where
+\(\varphi_f\) is an isomorphism).
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.79.4
+(\stacksproject{00O0}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-regular-dim1-dvr)
 % Decomposed.
 \begin{lemma}[One-dimensional regular local rings]
@@ -478,10 +560,12 @@ finite extension \(k'/k\).  Taking \(k'=k\), the ring
 A regular local ring of dimension one is a discrete valuation ring.
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-principal-ideal-dvr,lem:pcb-regular-local-domain}
+\uses{lem:pcb-nakayama,lem:pcb-principal-ideal-dvr,lem:pcb-regular-local-domain}
 A regular local ring of dimension one has
 \(\dim_R\mathfrak m/\mathfrak m^2=1\), so \(\mathfrak m=(t)\) for
-some \(t\) (Nakayama's lemma: \emph{reference: Stacks Project,
+some \(t\) (Nakayama's lemma, \Cref{lem:pcb-nakayama}(1) with
+\(N=(t)\), \(N'=\mathfrak m\) and \(I=\mathfrak m\):
+\emph{reference: Stacks Project,
 Algebra, Lemma 10.20.1, \stacksproject{00DV}}), and \(R\) is a domain
 (\Cref{lem:pcb-regular-local-domain}).  Hence \(R\) is a discrete
 valuation ring by \Cref{lem:pcb-principal-ideal-dvr}.
@@ -526,19 +610,21 @@ affine).
 \uses{def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-scheme-conventions}
+\uses{def:pcb-scheme-conventions,lem:pcb-integral-dimension,lem:pcb-noether-normalization}
 Separation, smoothness, properness, finite type and affineness are
 all stable under base change (\Cref{def:pcb-scheme-conventions}),
 and for an affine curve \(C=\operatorname{Spec}A\) one has
 \(C_{k'}=\operatorname{Spec}(A\otimes_kk')\).  For the dimension:
 for an affine open piece \(U=\operatorname{Spec}A\) of \(C\), by
-Noether normalization (\emph{reference: Stacks Project, Commutative
-Algebra, \stacksproject{00OY}}) there is a finite injective map
+Noether normalization (\Cref{lem:pcb-noether-normalization};
+\emph{reference: Stacks Project, Commutative
+Algebra, Lemma 10.115.4, \stacksproject{00OY}}) there is a finite injective map
 \(k[x_1,\dots,x_d]\hookrightarrow A\) with \(d=\dim A\); tensoring
 with \(k'\) gives a finite injective map
 \(k'[x_1,\dots,x_d]\hookrightarrow A\otimes_kk'\), and finite
 morphisms preserve dimension (for \(R\subseteq S\) with \(S\)
 integral over \(R\) one has \(\dim R=\dim S\):
+\Cref{lem:pcb-integral-dimension};
 \emph{reference: Stacks Project, Commutative Algebra, Lemma
 10.112.4, \stacksproject{00OK}}), so
 \(\dim(A\otimes_kk')=d=\dim A\); hence
@@ -1064,7 +1150,7 @@ algebraically closed field \(k\), and \(f\in k(C)^*\).  Then
 \uses{def:pcb-curves,def:pcb-function-field,def:pcb-divisor}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-morphism-from-function,lem:pcb-pullback-degree}
+\uses{lem:pcb-morphism-from-function,lem:pcb-noether-normalization,lem:pcb-pullback-degree}
 If \(f\in k^*\) then \(\operatorname{div}(f)=0\).  Otherwise
 \(f\notin k\), and \(f\) is transcendental over \(k\) (an algebraic
 element of \(k(C)\) over the algebraically closed field \(k\) lies
@@ -1074,9 +1160,10 @@ in \(k\)).  The field \(k(C)\) has transcendence degree one over
 normalization -- an affine integral \(k\)-algebra \(A\) of finite
 type admits a finite injective map
 \(k[x_1,\dots,x_d]\hookrightarrow A\) with \(d=\dim A\), whence
-\(\operatorname{trdeg}_k\operatorname{Frac}(A)=d\) (\emph{reference
+\(\operatorname{trdeg}_k\operatorname{Frac}(A)=d\)
+(\Cref{lem:pcb-noether-normalization}; \emph{reference
 for the Noether normalization theorem: Stacks Project, Commutative
-Algebra, \stacksproject{00OY}}); so \(k(C)\neq k\).  Let \(\pi:=\pi_f:C\to\mathbf P^1_k\)
+Algebra, Lemma 10.115.4, \stacksproject{00OY}}); so \(k(C)\neq k\).  Let \(\pi:=\pi_f:C\to\mathbf P^1_k\)
 be the morphism of \Cref{lem:pcb-morphism-from-function}, finite flat
 of degree \(d=[k(C):k(f)]\), with \(\pi^*t=f\).  Pullback of
 divisors is compatible with pullback of functions,
@@ -6233,7 +6320,7 @@ $\underline{\Hilb}^d_{X/S}$.
 \uses{def:pc-hilb-functor,def:pc-ample}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-fppf-site,lem:pc-hilb-sheaf,lem:pc-schemes-criterion}
+\uses{def:pc-finite-locally-free,def:pc-fppf-site,lem:pc-hilb-sheaf,lem:pc-schemes-criterion,lem:pcb-nakayama,lem:pcb-surjective-locus-open}
 \emph{Step 1: the closed-immersion claim.}  We shall use the following
 claim.  \emph{Let $i:X'\hookrightarrow Y$ be a closed immersion, let
 $Z\in\Hilb^d_{Y/S}(T)$; then there is a largest closed subscheme
@@ -6350,7 +6437,7 @@ T_{\mathrm{univ}}$ with $Z\cong Z_{\mathrm{univ}}\times_{T_{\mathrm{univ}}}T$;
 uniqueness is clear by the same data, so $F_W$ is representable by the
 affine scheme $T_{\mathrm{univ}}$.  (2)(b) \emph{openness}: surjectivity
 of a morphism of finite locally free modules is an open condition
-(Algebra, Lemma~10.79.4,
+(\Cref{lem:pcb-surjective-locus-open}; Algebra, Lemma~10.79.4,
 \stacksproject{00O0}), so each
 inclusion $F_W\subseteq\Hilb^d_{X/S}$ is representable by open
 immersions.  (2)(c) \emph{covering}: for a field-valued $Z\in
@@ -6359,7 +6446,7 @@ surjective and $\cO_Z$ is a $d$-dimensional $\kappa$-vector space, so
 there is a finite subset $W\subseteq A$ of $d$ elements whose images
 in $\cO_Z$ form a basis; for a general $T$ and $t\in T$ use the same
 argument over $\kappa(t)$ and Nakayama's lemma
-(Algebra, Lemma~10.20.1,
+(\Cref{lem:pcb-nakayama}(2); Algebra, Lemma~10.20.1,
 \stacksproject{00DV}): $Z_V\in
 F_W(V)$ on an open neighbourhood $V$ of $t$.  By
 \Cref{lem:pc-schemes-criterion} the functor $\Hilb^d_{Y/S}$ is
