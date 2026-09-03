@@ -10606,6 +10606,14 @@ made inside the final theorem.
   \uses{def:nagata-final-basechanged-compactification}
   \lean{AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation}
   \leanok
+  \statusnote{No separate Lean declaration: the construction of
+    $C_f^{\mathrm{fp}}$ and this property of it are discharged inside the proof
+    of
+    \texttt{AlgebraicGeometry.nagataCompactification\_of\_locallyOfFinitePresentation},
+    which the \texttt{\textbackslash lean} field above names, and which states
+    the existence of a compactification for an arbitrary separated,
+    quasi-compact morphism of finite presentation over a quasi-compact
+    quasi-separated base.  See the formalization remark after this lemma.}
 
   The constructed $C_f^{\mathrm{fp}}$ is a compactification of
   $X_f^{\mathrm{fp}}\to S$.
@@ -11987,6 +11995,13 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
     lemma:nagata-quasi-affine-morphism-of-quasi-finite}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection}
   \leanok
+  \statusnote{The named Lean declaration
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_extend\_partialSection}
+    states this theorem in the form reduced to the base $X$: the case $S=X$, in
+    which $f$ is a section of $p\colon Y\to X$ over $U$ whose image is closed
+    in $p^{-1}(V)$.  Conrad's opening reduction, replacing $Y$ by
+    $Y\times_SX$, is the first step of the proof below and has no Lean
+    declaration of its own.}
 
   Let $S$ be qcqs and let $X$ and $Y$ be qcqs $S$-schemes with $Y\to S$
   separated and of finite type.  Let $U\subseteq V\subseteq X$ be dense open
@@ -12039,6 +12054,18 @@ quasi-affine scheme is quasi-affine, and an affine morphism is quasi-affine.
     lemma:nagata-conrad-quasi-domination-proper-target}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_extend_section}
   \leanok
+  \statusnote{The named Lean declaration
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_extend\_section} is
+    the case $V=U$ of
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_extend\_partialSection}:
+    it assumes only that $p\colon Y\to X$ is separated, quasi-compact and
+    locally of finite type, and it produces an extension of $f$ over an open
+    subscheme $W\subseteq\widetilde X$ containing the inverse image of $U$,
+    together with the closedness of its graph.  The passage from that to a
+    morphism defined on all of $\widetilde X$ is
+    \Cref{lemma:nagata-conrad-quasi-domination-proper-target}, which carries
+    no \texttt{\textbackslash lean} field, and the properness of $Y\to S$ is
+    not among the hypotheses of the named declaration.}
 
   Let $S$ be qcqs, let $X$ be a qcqs $S$-scheme, let $U\subseteq X$ be a dense
   quasi-compact open subscheme, and let $Y\to S$ be proper and of finite type.
