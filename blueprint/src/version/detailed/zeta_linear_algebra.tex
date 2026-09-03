@@ -1094,6 +1094,8 @@ cor:zla-rationality-counting-field, thm:zla-integral-fatou,
 prop:zla-normalized-gcd-reduction, def:zla-pure-polynomial,
 prop:zla-parity-identification, def:zla-complete-weight-factor,
 prop:zla-unique-recovery, prop:zla-factor-integrality}
+\lean{TraceDatum.exists_isWeilFactorization}
+\leanok
 Let $d\geq0$ be an integer, let $K$ be a field of characteristic zero, and
 let $\iota:K\hookrightarrow\mathbf C$ be a field embedding.  Let
 \[
@@ -1138,6 +1140,7 @@ $\mathbf Z[T]\to\mathbf C[T]$.  The family $(P_i^{\mathrm{rec}})_i$ is unique
 with these properties; it is determined by $Z$ and $q$ alone.
 \end{theorem}
 \begin{proof}
+\leanok
 Write $Z_K\in K[[T]]$ for the image of $Z$ under coefficient extension
 $\mathbf Q\to K$.  By \Cref{prop:zla-cohomological-factorization},
 \[
@@ -1194,6 +1197,14 @@ by $A/B$, by $q$ and by $i$ (\Cref{prop:zla-unique-recovery}); in particular
 the family does not depend on $\iota$.
 \end{proof}
 
+\texttt{TraceDatum.exists\_isWeilFactorization} states the existence of the
+family $(P_i^{\mathrm{rec}})_i$ together with the factorization, the
+normalizations and the degreewise identification
+$\iota(P_i^{\mathrm{rec}})=\iota(P_i)$.  The uniqueness assertion of the last
+sentence of the theorem is not itself a Lean declaration; it is immediate from
+that identification, two polynomials of $\mathbf Z[T]$ with the same image in
+$\mathbf C[T]$ being equal.
+
 Hypothesis (i) is an extra input, not a restatement of the integrality of
 the $N_n$ contained in \Cref{def:zla-trace-datum}: what makes the recovered
 factors integral is \Cref{thm:zla-integral-fatou}, and that theorem consumes
@@ -1217,6 +1228,8 @@ machinery of \Cref{sec:zla-weights} is available.
 \label{cor:zla-riemann-hypothesis}
 \uses{thm:zla-weil-factorization, def:zla-pure-polynomial,
 def:zla-universal-purity}
+\lean{TraceDatum.exists_isWeilFactorization}
+\leanok
 In the situation of \Cref{thm:zla-weil-factorization}, every complex root $z$
 of $P_i^{\mathrm{rec}}$ satisfies
 \[
@@ -1226,6 +1239,7 @@ equivalently every reciprocal root $\alpha=z^{-1}$ of $P_i^{\mathrm{rec}}$
 satisfies $|\alpha|=q^{i/2}$.
 \end{corollary}
 \begin{proof}
+\leanok
 Since $P_i^{\mathrm{rec}}(0)=1$, no root of $P_i^{\mathrm{rec}}$ is zero, so
 a complex root $z$ has an inverse $\alpha=z^{-1}\in\mathbf C^\times$, and
 $\alpha$ is a reciprocal root of $P_i^{\mathrm{rec}}$ in the sense of
@@ -1241,6 +1255,14 @@ $\mathbf Q(\alpha)\subseteq\mathbf C$ itself gives $|\alpha|=q^{i/2}$ and
 therefore $|z|=q^{-i/2}$.
 \end{proof}
 
+There is no separate Lean declaration for this corollary: the bound is a
+conjunct of the existential proved by
+\texttt{TraceDatum.exists\_isWeilFactorization}, in the form
+\texttt{AlgebraicGeometry.WeilRiemannHypothesis} $q$ $d$ $P$, which asks
+$|z|=q^{-i/2}$ of every complex root $z$ of $P_i$ -- the first of
+the two displays above.  The reciprocal-root form of the second display is the
+same statement.
+
 Only one embedding is used in the proof, but the hypothesis really is
 universal purity: it is what \Cref{sec:zla-weights} needs to cut the
 factors out of $A$ and $B$ rationally, hence what
@@ -1250,6 +1272,10 @@ embedding is all that survives in the conclusion.
 \begin{corollary}[Reciprocal roots along an embedding]
 \label{cor:zla-reciprocal-roots-embedding}
 \uses{thm:zla-degreewise-reciprocal, lem:zla-reversal-roots}
+\lean{LinearMap.natDegree_map_charpolyRev_of_similitude,
+      LinearMap.coeff_zero_charpolyRev,
+      LinearMap.roots_map_charpolyRev_of_similitude}
+\leanok
 Let $B:V\times W\to E$ be a perfect similitude pairing of multiplier
 $\mu\in E^\times$ for the automorphisms $F_V,F_W$ over a field $E$, put
 $b=\dim_EV=\dim_EW$ and
@@ -1272,6 +1298,7 @@ bijectively onto that of $\iota(P_W)$, with multiplicities.  The field $E$ is
 not assumed algebraically closed.
 \end{corollary}
 \begin{proof}
+\leanok
 This is \Cref{thm:zla-degreewise-reciprocal} transported along $\iota$.  That
 theorem is an identity between polynomials with coefficients in $E$, so it
 survives any embedding of $E$, which is why it and not
@@ -1317,16 +1344,23 @@ $z\mapsto(\iota(\mu)z)^{-1}$ is an involution of $\Omega^\times$, so no
 bookkeeping of directions is needed.
 \end{proof}
 
+The three assertions are three Lean declarations.
 \texttt{LinearMap.roots\_map\_charpolyRev\_of\_similitude} proves the displayed
 equality of root multisets, over an arbitrary algebraically closed target
-field and without assuming $E$ algebraically closed, but it does not state
-that $\iota(P_V)$ and $\iota(P_W)$ have degree $b$, nor that they do not
-vanish at $0$.
+field and without assuming $E$ algebraically closed.
+\texttt{LinearMap.natDegree\_map\_charpolyRev\_of\_similitude} gives the
+degrees, stated as $\deg\iota(P_V)=\deg\iota(P_W)=\dim_EV$; the equality
+$\dim_EV=\dim_EW$ of the two dimensions is Mathlib's
+\texttt{Module.finrank\_of\_isPerfPair}, used inside that proof rather than
+restated there.  \texttt{LinearMap.coeff\_zero\_charpolyRev} gives constant
+coefficient $1$, hence the non-vanishing at $0$.
 
 \begin{theorem}[The functional equation of a trace datum]
 \label{thm:zla-functional-equation}
 \uses{thm:zla-weil-factorization, cor:zla-reciprocal-roots-embedding,
 def:zla-similitude-pairing}
+\lean{TraceDatum.weilFunctionalEquation_of_pairing}
+\leanok
 Keep the hypotheses and notation of \Cref{thm:zla-weil-factorization}, and
 assume in addition that every $F_i$ is an automorphism of $V_i$ and that for
 every $0\leq i\leq2d$ there is a perfect similitude pairing
@@ -1347,6 +1381,7 @@ the roots being taken in $\mathbf C$ with multiplicity.  In particular
 $\deg P_i^{\mathrm{rec}}=\deg P_{2d-i}^{\mathrm{rec}}=\dim_KV_i$.
 \end{theorem}
 \begin{proof}
+\leanok
 Fix $i$ and apply \Cref{cor:zla-reciprocal-roots-embedding} to the pairing
 $B_i$, with $E=K$, with $V=V_i$, $W=V_{2d-i}$, $F_V=F_i$, $F_W=F_{2d-i}$,
 $\mu=q^d$, and with the embedding $\iota:K\hookrightarrow\mathbf C$ as the
@@ -1365,10 +1400,18 @@ cardinalities of the two multisets, both being $\dim_KV_i=\dim_KV_{2d-i}$,
 together with $P_i^{\mathrm{rec}}(0)=1$, which forbids a root at $0$.
 \end{proof}
 
+\texttt{TraceDatum.weilFunctionalEquation\_of\_pairing} states the displayed
+identity of complex root multisets, and nothing more: the degree equality of
+the last sentence is not a Lean declaration for the recovered integral
+polynomials.  It follows from that identity together with
+\texttt{LinearMap.natDegree\_map\_charpolyRev\_of\_similitude}.
+
 \begin{theorem}[The Weil conjectures for the counting series of a trace datum]
 \label{thm:zla-weil-summary}
 \uses{thm:zla-weil-factorization, cor:zla-riemann-hypothesis,
 thm:zla-functional-equation}
+\lean{TraceDatum.exists_isWeilFactorization_and_functionalEquation_and_riemannHypothesis}
+\leanok
 Let $q>1$ and $d\geq0$ be integers, let $K$ be a field of characteristic zero
 with an embedding $\iota:K\hookrightarrow\mathbf C$, and let
 $((V_i,F_i)_{0\leq i\leq2d},(N_n)_{n\geq1})$ be a finite cohomological trace
@@ -1403,6 +1446,7 @@ These are the three conditions
 $(P_i^{\mathrm{rec}})_i$.
 \end{theorem}
 \begin{proof}
+\leanok
 \Cref{thm:zla-weil-factorization} produces the family, its uniqueness and
 (a); \Cref{thm:zla-functional-equation}, whose hypotheses are those of
 \Cref{thm:zla-weil-factorization} together with the pairings, gives (b); and
