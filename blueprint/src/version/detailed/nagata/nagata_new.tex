@@ -6035,15 +6035,26 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Finite-presentation closed immersions and finite type ideals]
   \label{lemma:nagata-closed-fp-ideal-finite-type}
-  \statusnote{Formalized, but as the two implications separately rather than as a single
-    biconditional:
-    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation\_subschemeι}
-    for ``finite-type ideal gives a closed immersion locally of finite presentation'' and
-    \texttt{AlgebraicGeometry.Scheme.Hom.fg\_ideal\_ker} for the converse, both in
+  \lean{AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation_subschemeι}
+  \leanok
+  \statusnote{The biconditional is discharged by two one-directional declarations rather than
+    by a single statement, both in
     \texttt{WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation}.  The
-    boundary-separation route does not need them --- centres are carried as finite-type
-    ideal sheaves (\texttt{AlgebraicGeometry.Scheme.IdealSheafData}) throughout --- but
-    the finite-presentation reduction does, through
+    \texttt{\textbackslash lean} field above names the direction ``finite-type ideal gives a
+    closed immersion of finite presentation''; the converse half is
+    \texttt{AlgebraicGeometry.Scheme.Hom.fg\_ideal\_ker}.  The predicate standing for ``of
+    finite presentation'' is \texttt{LocallyOfFinitePresentation} in both: Mathlib has no
+    bundled class for ``of finite presentation'', which is ``locally of finite presentation,
+    quasi-compact and quasi-separated'', and for a \emph{closed} immersion the last two are
+    automatic --- \texttt{IsClosedImmersion} gives \texttt{IsAffineHom}, which gives both
+    \texttt{QuasiCompact} and, via \texttt{AlgebraicGeometry.IsSeparated.of\_isAffineHom},
+    \texttt{IsSeparated} and hence \texttt{QuasiSeparated}.  ``The ideal sheaf is of finite
+    type'' is \texttt{AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType}, which unfolds
+    (\texttt{ofFiniteType\_iff}) to finite generation of the ideal of sections on every affine
+    open --- exactly the hypothesis of the first declaration and the conclusion of the second.
+    The boundary-separation route does not need the lemma --- centres are carried as
+    finite-type ideal sheaves (\texttt{AlgebraicGeometry.Scheme.IdealSheafData}) throughout
+    --- but the finite-presentation reduction does, through
     \texttt{WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit}.}
 
   A closed immersion $Z\hookrightarrow X$ is of finite presentation if and
@@ -6051,6 +6062,7 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
+  \leanok
   The assertion is local on $X$.  On $\operatorname{Spec}(A)$ the closed
   immersion is $\operatorname{Spec}(A/I)\to\operatorname{Spec}(A)$.  The
   quotient $A/I$ is a finitely presented $A$-algebra exactly when $I$ is
