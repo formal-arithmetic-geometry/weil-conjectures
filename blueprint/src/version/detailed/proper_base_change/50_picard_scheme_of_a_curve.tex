@@ -5098,6 +5098,46 @@ Hence $f'$ is smooth.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Compositions of smooth morphisms are smooth]
+\label{lem:pc-smooth-composition}
+The composition of two \hyperref[def:pc-smooth-morphism]{smooth} morphisms of schemes is
+smooth.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-smooth-morphism}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.35 (Smooth morphisms),
+Lemma~29.35.4 (\stacksproject{01VA}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Compositions of proper morphisms are proper]
+\label{lem:pc-proper-composition}
+The composition of two \hyperref[def:pcb-scheme-conventions]{proper} morphisms of schemes
+is proper.  The same is true for universally closed morphisms.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.42 (Proper morphisms),
+Lemma~29.42.4 (\stacksproject{01W3}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Smooth over a field implies regular]
+\label{lem:pc-smooth-over-field-regular}
+Let $k$ be a field and let $X\to\Spec(k)$ be a
+\hyperref[def:pc-smooth-morphism]{smooth} morphism.  Then $X$ is a regular scheme, i.e.\
+all its local rings are regular.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-smooth-morphism}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Section~33.25 (Schemes smooth over fields),
+Lemma~33.25.3 (\stacksproject{056S}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Smooth morphisms are flat]\label{lem:pc-smooth-flat}
 A smooth morphism of schemes is flat and locally of finite
@@ -7065,7 +7105,7 @@ $\underline{\Hilb}^d_{X/k}$ is smooth of dimension $d$ over $k$).
 \uses{def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-morphism-conventions,lem:pc-hilb-addition,lem:pc-smooth-descends-flat}
+\uses{def:pc-morphism-conventions,lem:pc-hilb-addition,lem:pc-proper-base-change,lem:pc-smooth-composition,lem:pc-smooth-descends-flat}
 \emph{The cases $d=0,1$.}  $\Hilb^0_{X/S}(T)$ has exactly one element
 (the empty closed subscheme of $X_T$, finite locally free of degree
 $0$; it is the zero ideal; the pullback along $T'\to T$ is the empty
@@ -7090,10 +7130,9 @@ and let
 \]
 be the morphism of \Cref{lem:pc-hilb-addition}, finite locally free of
 degree $d+1$.  The source $H_d\times_SX$ is smooth over $S$ of
-relative dimension $d+1$: base changes and compositions of smooth
-morphisms are smooth (the standard statements; in the
-\Cref{def:pc-morphism-conventions} under the local
-characterization of smoothness), so the source is smooth over
+relative dimension $d+1$: base changes of smooth morphisms are smooth
+(\Cref{lem:pc-proper-base-change}) and compositions of smooth
+morphisms are smooth (\Cref{lem:pc-smooth-composition}), so the source is smooth over
 $H_d$ (the projection is the base change of the smooth
 $X\to S$ along $H_d\to S$) and then over $S$; the relative dimension
 is $d+1$ (relative dimensions add for composites, and base change of
@@ -7140,7 +7179,7 @@ which is finite locally free of degree $\binom{d_1+d_2}{d_1}$.
 \uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:pc-effective-cartier-divisor,def:pc-degree-line-bundle}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-geom-irreducible-product,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-image-universally-closed,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine}
+\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-geom-irreducible-product,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-image-universally-closed,lem:pc-proper-base-change,lem:pc-proper-composition,lem:pc-smooth-over-field-regular,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine,lem:pcb-regular-local-domain}
 \emph{Step 0: the affine-open hypothesis.}  We verify the hypothesis of
 \Cref{lem:pc-hilb-representable} (for $S=\Spec(k)$, $X/k$): let
 $x_1,\dots,x_d$ be a finite set of points of $X$ (of the single fibre
@@ -7223,8 +7262,10 @@ or: the fibre of the composite over a point is the scheme of the
 tensor product of the two finite locally free algebras, whose rank is
 the product of the ranks)).  The morphism $\pi_d$ is
 \emph{surjective}: the image $I:=\pi_d(X^d)$ is closed
-($X^d$ is proper, $\pi_d$ is finite hence proper, and the image of a
-proper morphism is closed: the standard statement); for a closed
+($X^d$ is proper, $\pi_d$ is finite hence proper, and a proper morphism
+is universally closed (\Cref{def:pcb-scheme-conventions}), hence in
+particular closed, the identity being one of its base changes; so the
+image of the closed subset $X^d\subseteq X^d$ is closed); for a closed
 point $\bar t$ of $H_d\otimes_k\bar k$ the corresponding closed
 subscheme $D_{\bar t}\subseteq X_{\bar k}$ is finite flat of rank
 $d$ over $\bar k$, so it is a sum
@@ -7244,10 +7285,10 @@ $I$ with $I\otimes_k\bar k=H_d\otimes_k\bar k$: the closure
 condition: if $x\in H_d\setminus I$ then the image point
 $x_{\bar k}$ lies in $H_d\otimes\bar k\setminus I\otimes\bar k$,
 contradiction).  So $\pi_d$ is surjective.
-  Then $H_d$ is proper: $X^d$ is proper (finite products of proper schemes over $k$ are proper, the standard statement; and $X\to\Spec k$ is proper by hypothesis), $\pi_d$ is finite hence proper, so
+  Then $H_d$ is proper: $X^d$ is proper ($X\to\Spec k$ is proper by hypothesis, so each projection $X^{j}\times_kX\to X^{j}$ is proper, being a base change of it (\Cref{lem:pc-proper-base-change}), and $X^d\to\Spec k$ is proper as the composite $X^d\to X^{d-1}\to\cdots\to X\to\Spec k$ of proper morphisms (\Cref{lem:pc-proper-composition})), $\pi_d$ is finite hence proper, so
   $H_d=\pi_d(X^d)$ is universally closed over $k$: this is \Cref{lem:pc-image-universally-closed} applied to the surjection $\pi_d:X^d\to H_d$ over $S=\Spec(k)$, whose source is universally closed over $k$; and $H_d$ is separated (just shown) and locally of finite type over $k$ (it is smooth over $k$), so the same lemma gives that $H_d$ is proper over $k$ (Morphisms, Lemma~29.42.9,
 \stacksproject{03GN}).  Finally $H_d$ is irreducible: $X^d$ is irreducible (by induction on $d$: $X$ is geometrically irreducible over $k$ by hypothesis, and if $X^{d-1}$ is irreducible then the projection $X\times_kX^{d-1}\to X^{d-1}$ puts the irreducible components of $X^d$ in bijection with those of $X^{d-1}$, so $X^d$ is irreducible: \Cref{lem:pc-geom-irreducible-product}, Varieties, Lemma~33.8.4,
-\stacksproject{038F}), and the image of an irreducible scheme under a continuous surjective map is irreducible; together with smoothness (hence reducedness: smooth over the field $k$ is reduced, the standard statement) $H_d$ is an integral separated scheme of finite type over $k$ of dimension $d$, i.e.\ a variety over $k$ (\Cref{def:pc-curve}: a variety is an integral separated scheme of finite type over $k$).  This proves (1).
+\stacksproject{038F}), and the image of an irreducible scheme under a continuous surjective map is irreducible; together with smoothness (hence reducedness: $H_d$ is smooth over the field $k$, so it is a regular scheme (\Cref{lem:pc-smooth-over-field-regular}), and a regular local ring is a domain (\Cref{lem:pcb-regular-local-domain}), so every local ring of $H_d$ is reduced and hence $H_d$ is reduced) $H_d$ is an integral separated scheme of finite type over $k$ of dimension $d$, i.e.\ a variety over $k$ (\Cref{def:pc-curve}: a variety is an integral separated scheme of finite type over $k$).  This proves (1).
 
 \emph{Step 2: the points of $H_d$; part (2).}  For a field extension
 $k'/k$: a $k'$-rational point of $H_d$ is, by the representability of
@@ -7333,7 +7374,7 @@ $\cO_X(D)$.
 \uses{def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-hilb-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-divisor-line-bundle,def:pc-hilb-functor,def:pc-relative-effective-cartier,lem:pc-cartier-criterion,lem:pc-recd-pullback,thm:pc-hilb-curves}
+\uses{def:pc-divisor-line-bundle,def:pc-hilb-functor,def:pc-relative-effective-cartier,lem:pc-cartier-criterion,lem:pc-proper-base-change,lem:pc-recd-pullback,thm:pc-hilb-curves}
 By \Cref{thm:pc-hilb-curves}(1) the functor $\Hilb^{d+1}_{X/k}$ is
 representable by
 $H:=\underline{\Hilb}^{d+1}_{X/k}$; by the definition of
@@ -7347,7 +7388,8 @@ finite locally free of degree $d+1$ over $H$.  Apply
 \Cref{lem:pc-cartier-criterion} ((1)$\Rightarrow$(2)) to the smooth
 morphism of relative dimension $1$
 $H\times_kX\to H$ (the base change of $X\to k$ along $H\to k$: base
-changes of smooth morphisms are smooth, the standard statement) and
+changes of smooth morphisms are smooth,
+\Cref{lem:pc-proper-base-change}) and
 the closed subscheme $Z_{\mathrm{univ}}$: it is a relative effective
 Cartier divisor $D_{\mathrm{univ}}$ on $H\times_kX/H$
 (\Cref{def:pc-relative-effective-cartier}).  Its associated invertible
