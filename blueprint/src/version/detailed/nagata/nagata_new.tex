@@ -244,7 +244,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Universal property of the scheme-theoretic image]
   \label{lemma:nagata-scheme-image-universal}
   \uses{def:nagata-scheme-image-factor,def:nagata-scheme-image-comparison}
-  \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \lean{AlgebraicGeometry.IsClosedImmersion.eq_lift}
   \leanok
 
   The composite of $g^{\mathrm{im}}$ with
@@ -298,6 +298,12 @@ equality has explicitly been fixed.
   \uses{def:nagata-scheme-theoretic-image}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
   \leanok
+  \statusnote{No separate Lean declaration: the affine kernel computation is never
+    run in Lean.  It is encapsulated in Mathlib's
+    \texttt{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of\_isPullback}, which the
+    proof of \texttt{AlgebraicGeometry.Scheme.Hom.ker\_pullback\_snd} --- the
+    declaration the \texttt{\textbackslash lean} field above names --- uses in its
+    place.}
 
   Let $A$ be a ring, let $T\to\operatorname{Spec}(A)$ be quasi-compact and
   quasi-separated, and let $s\in A$.  Put
@@ -330,6 +336,12 @@ equality has explicitly been fixed.
   \uses{lemma:nagata-affine-image-kernel-localization}
   \lean{AlgebraicGeometry.Scheme.Hom.ker_pullback_snd}
   \leanok
+  \statusnote{No separate Lean declaration: the affine kernel computation is never
+    run in Lean.  It is encapsulated in Mathlib's
+    \texttt{AlgebraicGeometry.IsSchemeTheoreticallyDominant.of\_isPullback}, which the
+    proof of \texttt{AlgebraicGeometry.Scheme.Hom.ker\_pullback\_snd} --- the
+    declaration the \texttt{\textbackslash lean} field above names --- uses in its
+    place.}
 
   Let $A\to B$ be flat, let $T\to\operatorname{Spec}(A)$ be quasi-compact
   and quasi-separated, and put
@@ -456,7 +468,7 @@ equality has explicitly been fixed.
 \begin{lemma}[Minimality of the scheme-theoretic closure]
   \label{lemma:nagata-scheme-theoretic-closure-minimal}
   \uses{def:nagata-scheme-theoretic-closure}
-  \lean{AlgebraicGeometry.IsClosedImmersion.lift}
+  \lean{AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac}
   \leanok
 
   The scheme-theoretic closure is the smallest closed subscheme of $Y$
@@ -1205,6 +1217,11 @@ it is not silently identified with an unavailable Mathlib primitive.
   \uses{def:nagata-rees-piece}
   \lean{AlgebraicGeometry.reesGrading_isInternal}
   \leanok
+  \statusnote{No separate Lean declaration: finiteness of the homogeneous support is
+    discharged inside the proof of
+    \texttt{AlgebraicGeometry.reesGrading\_isInternal}, which the
+    \texttt{\textbackslash lean} field above names, as the sum over the support of the
+    underlying polynomial.}
 
   For $F\in\mathcal R_A(I)$, only finitely many homogeneous components
   $F_nt^n$ are nonzero.
@@ -1502,7 +1519,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 \begin{proposition}[Affine chart identification]
   \label{prop:nagata-affine-blowup-chart}
   \uses{def:nagata-affine-blowup-chart-map}
-  \lean{AlgebraicGeometry.AffineBlowup.chart}
+  \lean{AlgebraicGeometry.AffineBlowup.opensRange_chart}
   \leanok
 
   The constructed morphism $\chi_a$ is an isomorphism over
@@ -1520,7 +1537,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{lemma}[Degree-one generators cover Proj]
   \label{lemma:nagata-rees-generators-cover-proj}
-  \lean{AlgebraicGeometry.Proj.iSup_basicOpen_eq_top}
+  \lean{AlgebraicGeometry.AffineBlowup.iSup_basicOpen_reesX_eq_top}
   \leanok
 
   If $I=(f_0,\ldots,f_r)$, then the standard opens
@@ -1541,6 +1558,14 @@ it is not silently identified with an unavailable Mathlib primitive.
   \label{prop:nagata-affine-blowup-chart-cover}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.iSup_opensRange_blowupι_eq_top}
   \leanok
+  \statusnote{No separate Lean declaration for the affine chart cover: the
+    declaration the \texttt{\textbackslash lean} field above names is its global form,
+    that the chart embeddings of the affine opens of $X$ cover
+    $\operatorname{Bl}_{\mathcal I}(X)$.  The affine form is discharged inside the
+    proof of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isInvertible\_comap\_blowupMap},
+    from \texttt{AlgebraicGeometry.AffineBlowup.iSup\_basicOpen\_reesX\_eq\_top} and
+    \texttt{AlgebraicGeometry.AffineBlowup.opensRange\_chart}.}
 
   If $I=(f_0,\ldots,f_r)$, the affine opens
   \[
@@ -1829,6 +1854,13 @@ all its coherence maps are checked on basic affine refinements.
     prop:nagata-affine-blowup-restrict}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupNatTrans_of_basicOpen}
   \leanok
+  \statusnote{No separate Lean declaration: the formalized route has no pairwise
+    overlap comparison $\omega_{ij,s}$.  It glues over the thin category of all affine
+    opens, where the comparison is the transition map of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}, which occurs as the
+    first leg of the cartesian square in
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.isPullback\_blowupNatTrans\_of\_basicOpen},
+    the declaration the \texttt{\textbackslash lean} field above names.}
 
   If a basic affine open $D(s)$ lies in $V_i\cap V_j$, define
   \[
@@ -1866,6 +1898,12 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-global-blowup-overlap-independent}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
   \leanok
+  \statusnote{No separate Lean declaration: the formalized route glues over the thin
+    category of all affine opens of $X$, in which any two refinement maps between the
+    same pair of opens are equal by \texttt{Subsingleton.elim}, so independence of the
+    chosen basic refinement never has to be proved.  It is used in that form inside the
+    functor laws of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}.}
 
   On the intersection of two chosen basic refinements, the two overlap
   constructed maps $\omega_{ij,s}$ agree.
@@ -1886,6 +1924,11 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-global-blowup-overlap-id-symm}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
   \leanok
+  \statusnote{No separate Lean declaration: in the formalized route the identity law
+    is the \texttt{map\_id} field of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}, discharged there
+    from \texttt{AlgebraicGeometry.AffineBlowup.hom\_id}; symmetry does not arise,
+    because the index category is thin and its transition maps are never inverted.}
 
   The overlap isomorphism of a chart with itself is the identity, and the
   overlap isomorphism from chart $i$ to chart $j$ is inverse to the one from
@@ -1904,6 +1947,10 @@ all its coherence maps are checked on basic affine refinements.
   \label{lemma:nagata-global-blowup-overlap-cocycle}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowupNatTrans_equifibered}
   \leanok
+  \statusnote{No separate Lean declaration: in the formalized route the
+    triple-overlap cocycle is the \texttt{map\_comp} field of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.blowupFunctor}, discharged there
+    from \texttt{AlgebraicGeometry.AffineBlowup.hom\_comp}.}
 
   On every triple overlap, the composite of the $(i,j)$ and $(j,k)$ overlap
   isomorphisms equals the $(i,k)$ overlap isomorphism.
@@ -2053,6 +2100,11 @@ all its coherence maps are checked on basic affine refinements.
     lemma:nagata-global-blowup-overlap-cocycle}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowup}
   \leanok
+  \statusnote{No separate Lean declaration: the construction
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.blowup}, which the
+    \texttt{\textbackslash lean} field above names, glues over the canonical diagram of
+    \emph{all} affine opens of $X$ and takes no affine cover as input, so no comparison
+    between two cover choices is constructed.}
 
   Given two affine covers of $X$, choose their intersection refinement.  On
   every refined affine chart use the two affine-restriction isomorphisms to
@@ -2069,6 +2121,11 @@ all its coherence maps are checked on basic affine refinements.
   \uses{def:nagata-global-blowup-cover-comparison}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.blowup}
   \leanok
+  \statusnote{No separate Lean declaration: independence of the affine cover holds by
+    construction for \texttt{AlgebraicGeometry.Scheme.IdealSheafData.blowup}, which the
+    \texttt{\textbackslash lean} field above names: it is glued over the canonical
+    diagram of all affine opens of $X$ and has no cover parameter, so nothing in Lean
+    corresponds to the comparison or to its uniqueness.}
 
   The constructed comparison is the unique isomorphism over $X$ restricting
   to the identity comparison on every common affine refinement.
