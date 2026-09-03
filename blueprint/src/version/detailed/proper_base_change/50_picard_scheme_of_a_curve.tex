@@ -2275,8 +2275,8 @@ Let $F:(\mathit{Sch}/S)^{\mathrm{op}}\to\textit{Sets}$ be a functor.  The
 \emph{functor of points} of a scheme $X$ over $S$ is
 $h_X=\operatorname{Hom}_S(\bullet,X)$; $F$ is \emph{representable by a
 scheme} if $F\cong h_P$ for some scheme $P$ over $S$
-(Schemes, Section~26.15; Categories, Lemma~4.3.5,
-\stacksproject{001P}).  A scheme
+(Schemes, Section~26.15; Categories, Definition~4.3.6,
+\stacksproject{001Q}).  A scheme
 representing a functor is denoted $\underline{\Pic}$,
 $\underline{\Hilb}$ etc.; uniqueness of the representing scheme is
 \Cref{lem:pc-representable-unique}.
@@ -2299,10 +2299,12 @@ the map
 \]
 is a bijection, natural in both arguments (Categories, Lemma~4.3.5,
 \stacksproject{001P}).
-% Mathlib: the category-theoretic statement already exists.
+% Mathlib: the category-theoretic statement already exists.  \texttt{yonedaEquiv} is the
+% displayed bijection $(\texttt{yoneda.obj }X\to F)\simeq F(X)$ itself; \texttt{yonedaLemma}
+% is its naturality in both arguments, as an isomorphism of the two pairings; \texttt{yoneda}
+% is the functor $X\mapsto h_X$ in terms of which both are stated.
 \mathlibok\ \lean{CategoryTheory.yonedaEquiv, CategoryTheory.yonedaLemma,
-CategoryTheory.yoneda, CategoryTheory.Functor.IsRepresentedBy,
-CategoryTheory.Functor.IsRepresentable}
+CategoryTheory.yoneda}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-representable-functor}
@@ -7519,8 +7521,10 @@ are schemes, then $X$ is a scheme.
 % $\varphi_{ij}$ is the transition map $t\,i\,j$, and the cocycle condition is
 % \texttt{cocycle} -- and the conclusion is the glued object together with
 % \texttt{ι\_isOpenImmersion} (the $U_i\subseteq X$), \texttt{ι\_jointly\_surjective}
-% ($X=\bigcup U_i$) and \texttt{glue\_condition} (the last displayed identity).
-\mathlibok\ \lean{AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.ι_isOpenImmersion, AlgebraicGeometry.Scheme.GlueData.glue_condition}
+% ($X=\bigcup U_i$), \texttt{glue\_condition} (the last displayed identity) and
+% \texttt{vPullbackConeIsLimit} ($V(i,j)$ is the pullback of $U\,i$ and $U\,j$ over the glued
+% object, which is the identity $\varphi_i(U_{ij})=U_i\cap U_j$).
+\mathlibok\ \lean{AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.LocallyRingedSpace.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.ι_isOpenImmersion, AlgebraicGeometry.Scheme.GlueData.glue_condition, AlgebraicGeometry.Scheme.GlueData.vPullbackConeIsLimit}
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
