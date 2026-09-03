@@ -2271,6 +2271,33 @@ inner hom of sheaves).
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+\begin{definition}[Filtered complexes and finite filtrations]
+\label{def:pc-filtered-complex}
+Let $\mathcal A$ be an abelian category.  A \emph{decreasing filtration} $F$
+on an object $A$ of $\mathcal A$ is a family $(F^nA)_{n\in\Z}$ of subobjects
+of $A$ with
+$A\supset\cdots\supset F^nA\supset F^{n+1}A\supset\cdots\supset0$; a
+\emph{filtered object} of $\mathcal A$ is a pair $(A,F)$ consisting of an
+object $A$ and a decreasing filtration $F$ on it, and filtered objects with
+the morphisms $\varphi:A\to B$ satisfying $\varphi(F^iA)\subset F^iB$ form
+the category $\mathrm{Fil}(\mathcal A)$ (Homology, Definition~12.19.1,
+\stacksproject{0121}).  A \emph{filtered complex} $(K^\bullet,F)$ of
+$\mathcal A$ is a complex of $\mathrm{Fil}(\mathcal A)$ (Homology,
+Definition~12.24.1,
+\stacksproject{012L}); thus $F^pK^n$ is the
+$p$th step of the filtration of the $n$th term $K^n$, and each
+$F^pK^\bullet$ is again a complex of $\mathcal A$.
+
+A filtration $F$ on an object $A$ is \emph{finite} if there exist $n,m$ with
+$F^nA=A$ and $F^mA=0$ (Homology, Definition~12.19.1 item~(7),
+\stacksproject{0121}); since the filtration
+is decreasing this says exactly that $F^pA=A$ for $p\ll0$ and $F^pA=0$ for
+$p\gg0$.  We say the filtration of a filtered complex $(K^\bullet,F)$ is
+\emph{finite in each degree} if it is finite on $K^n$ for every $n$.
+\end{definition}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
 \begin{definition}[Finite locally free morphisms]
 \label{def:pc-finite-locally-free}
 Let $f:X\to S$ be a morphism of schemes.  $f$ is \emph{finite locally
@@ -5250,7 +5277,7 @@ and
 \sum_{n}(-1)^n\dim_kH^n(K^\bullet)
 =\sum_{p,q}(-1)^{p+q}\dim_kE_r^{p,q}.
 \]
-\uses{def:pc-derived-category}
+\uses{def:pc-filtered-complex}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Homology, Lemma~12.24.12
@@ -5295,7 +5322,7 @@ coherent $\cO_Y$-module $\cG$:
 \uses{def:pc-euler-characteristic,def:pc-morphism-conventions,lem:pc-coherent-hi,def:pc-derived-direct-image}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-leray-spectral-sequence,lem:pc-spectral-sequence-euler}
+\uses{def:pc-filtered-complex,lem:pc-coherent-hi,lem:pc-leray-spectral-sequence,lem:pc-spectral-sequence-euler}
 The long exact cohomology sequence of the short exact sequence is
 \[
 0\to H^0(\cF_1)\to H^0(\cF_2)\to H^0(\cF_3)\to H^1(\cF_1)\to H^1(\cF_2)
@@ -5320,6 +5347,29 @@ For the second statement, consider the Leray spectral sequence of $f$
 \[
 E_2^{p,q}=H^p(X,R^qf_*\cG)\Longrightarrow H^{p+q}(Y,\cG).
 \]
+This is the spectral sequence of a filtered complex of $k$-vector spaces
+whose filtration is finite in each degree
+(\Cref{def:pc-filtered-complex}), as
+\Cref{lem:pc-spectral-sequence-euler} requires: the Leray spectral
+sequence is the Grothendieck spectral sequence of the composition
+$\Gamma(Y,-)=\Gamma(X,-)\circ f_*$ (Derived Categories,
+Lemma~13.22.2, \stacksproject{015N}), which
+is the spectral sequence of the double complex obtained by applying
+$\Gamma(X,-)$ to a Cartan--Eilenberg resolution $I^{\bullet,\bullet}$ of a
+bounded below complex computing $Rf_*\cG$ (Derived Categories,
+Lemma~13.21.3, \stacksproject{015J}); and
+the spectral sequences of a double complex $K^{\bullet,\bullet}$ are by
+construction those of the filtered complex
+$\operatorname{Tot}(K^{\bullet,\bullet})$ for the two filtrations
+$F_{I}^p\operatorname{Tot}^n=\bigoplus_{i+j=n,\,i\ge p}K^{i,j}$ and
+$F_{II}^p\operatorname{Tot}^n=\bigoplus_{i+j=n,\,j\ge p}K^{i,j}$
+(Homology, Section~12.25,
+\stacksproject{012X}).  A
+Cartan--Eilenberg resolution has $I^{p,q}=0$ for $q<0$ and for all
+sufficiently small $p$, so in each total degree $n$ only finitely many
+$K^{i,j}$ with $i+j=n$ are nonzero and both filtrations are finite on
+$\operatorname{Tot}^n$; the filtration is therefore finite in each
+degree.
 All $R^qf_*\cG$ are coherent (\Cref{lem:pc-coherent-hi}) and only
 finitely many are nonzero, so each $E_2^{p,q}$ is finite dimensional
 over $k$ and $E_2$ has finite support; the spectral sequence converges
