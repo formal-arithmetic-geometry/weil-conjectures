@@ -1712,7 +1712,7 @@ t}$ are as in
 If $f$ has a section $\sigma:S\to X$ and $T$ is over $S$, then
 $\sigma_T:=(\mathrm{id}_T\times\sigma):T\to X_T$ is the induced section
 of $f_T$, so that $f_T\circ\sigma_T=\id_T$.
-\uses{def:pc-scheme,def:pc-morphism-conventions}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2079,7 +2079,7 @@ T\longmapsto\Pic(X_T),
 with $\Pic$ of \Cref{def:pc-picard-group} (in the generality of
 \Cref{rem:pc-sc-modules}) and $X_T$ of \Cref{def:pc-base-change}; the
 assignment is functorial \Cref{lem:pc-pic-presheaf-functorial}.
-\uses{def:pc-base-change,def:pc-picard-group}
+\uses{def:pc-base-change,def:pc-picard-group,rem:pc-sc-modules}
 \lean{AlgebraicGeometry.picardPresheaf}
 \leanok
 \end{definition}
@@ -2262,6 +2262,7 @@ $\mathcal A$ the category of $\cO_X$-modules, and
 \]
 denotes the associated sheaf ($\mathcal{H}om^{\bullet}$ the derived
 inner hom of sheaves).
+\uses{def:pc-derived-category}
 % Mathlib: the Ext bifunctor of an abelian category exists in Mathlib.
 \mathlibok\ \lean{CategoryTheory.Abelian.Ext,
   CategoryTheory.Abelian.Ext.homEquiv,
@@ -2344,7 +2345,7 @@ effective Cartier divisor $D$ on $X$ the degree of $D$ is
 $\deg(D):=\deg(\cO_X(D))$.  The relation with the degree of
 \Cref{def:pcb-pic0} for smooth proper curves over algebraically closed
 fields is \Cref{lem:pc-degree-agrees-sc}.
-\uses{def:pc-euler-characteristic,def:pc-divisor-line-bundle,def:pcb-pic0,def:pcb-divisor}
+\uses{def:pc-euler-characteristic,def:pc-divisor-line-bundle,def:pcb-pic0,def:pcb-divisor,def:pc-invertible-module}
 \lean{AlgebraicGeometry.Scheme.Modules.degree}
 \leanok
 \statusnote{As for \Cref{def:pc-euler-characteristic}: the Lean definition drops the properness
@@ -2682,7 +2683,7 @@ of \Cref{def:pcb-divisor}) and the module $\cO_C(D)$ of
 \Cref{def:pc-divisor-line-bundle} are canonically isomorphic; and for
 $D=[P]$ a $k$-rational point
 $\deg(\cO_C([P]))=1$ \Cref{def:pc-degree-line-bundle}.
-\uses{def:pc-divisor-line-bundle,def:pcb-divisor,lem:pcb-divisor-class-curve,def:pc-degree-line-bundle,def:pcb-pic0}
+\uses{def:pc-divisor-line-bundle,def:pcb-divisor,lem:pcb-divisor-class-curve,def:pc-degree-line-bundle,def:pcb-pic0,def:pc-curve}
 \end{lemma}
 \begin{proof}
 \uses{def:pcb-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive,lem:pcb-point-cartier}
@@ -2922,7 +2923,7 @@ $R\mapsto\Pic(X\times_k\Spec R)$ of file~06 (with its fppf sheaf
 structure); more precisely
 $\Pic_{X/k}(\Spec(R))=\operatorname{Pic}_{X/k}^{\mathrm{sc}}(R)$ where
 the right side is the value of the functor of \Cref{def:pcb-picard-functor}.
-\uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme}
+\uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme,def:pc-smooth-projective-curve}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,lem:pc-zariski-coverings-are-fppf}
@@ -2993,7 +2994,7 @@ $M\cong\cN[0]$.  Then $H^i(M)=0$ for $i\neq0$ and $H^0(M)\cong\cN$.  If
 $M\cong E[-i]$ with $E$ locally free of rank $r$ (cf.\
 \Cref{def:pc-finite-locally-free} and its \Cref{lem:pc-flf-properties}),
 then $H^j(M)=0$ for $j\neq i$ and $H^i(M)\cong E$.
-\uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:pc-invertible-module}
+\uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:pc-invertible-module,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-derived-category,def:pcb-invertible-module}
@@ -3204,7 +3205,7 @@ $K/k$ be a field extension.  Then
 $g(X_K)=\dim_KH^1(X_K,\cO_{X_K})=g(X)$.  If $k$ is separably closed (or
 more generally $H^0(X,\cO_X)=k$), this applies in particular when
 $X_K$ is a curve in the sense of \Cref{def:pcb-curves}.
-\uses{def:pc-genus,lem:pcb-flat-base-change-coherent,def:pc-base-change,def:pc-smooth-projective-curve}
+\uses{def:pc-genus,lem:pcb-flat-base-change-coherent,def:pc-base-change,def:pc-smooth-projective-curve,def:pcb-curves}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-proper-base-change,lem:pcb-flat-base-change-coherent}
@@ -3229,7 +3230,7 @@ Let $k$ be a field, $X$ a
 $k$ with $H^0(X,\cO_X)=k$ and $T$ a scheme over $k$.  Then the
 canonical map $\cO_T\to f_{T,*}\cO_{X_T}$ is an isomorphism, where
 $f_T:X_T\to T$ is the structure morphism of the base change.
-\uses{def:pc-base-change,def:pc-morphism-conventions,lem:pcb-flat-base-change-coherent,lem:pc-finite-support-hi,def:pc-picard-presheaf}
+\uses{def:pc-base-change,def:pc-morphism-conventions,lem:pcb-flat-base-change-coherent,lem:pc-finite-support-hi,def:pc-picard-presheaf,def:pc-smooth-projective-curve}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-finite-support-hi,lem:pcb-flat-base-change-coherent}
@@ -7029,7 +7030,7 @@ $k$ which has a $k$-rational point $\sigma$.  Then the hypotheses of
 satisfied: $f$ has the section $\sigma$, and
 $\cO_T\to f_{T,*}\cO_{X_T}$ is an isomorphism for every
 $T\in\Ob((\Sch/k)_{fppf})$.
-\uses{def:pc-smooth-projective-curve,def:pc-rational-point,def:pc-picard-functor,lem:pc-flat-base-change-cohom}
+\uses{def:pc-smooth-projective-curve,def:pc-rational-point,def:pc-picard-functor,thm:pc-pic-split}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-h0-proper-variety,lem:pc-structure-pushforward}
@@ -7087,7 +7088,7 @@ invertible }\cO_T\text{-module placed in degree }0\}.
 Then $F$ is a subfunctor of $\Pic_{X/k,\sigma}$ and the inclusion
 $F\subseteq\Pic_{X/k,\sigma}$ is
 \hyperref[def:pc-subfunctor]{representable by open immersions}.
-\uses{def:pc-f-subfunctor,def:pc-subfunctor,def:pc-pic-sigma-functor,def:pc-derived-category,def:pc-invertible-module}
+\uses{def:pc-f-subfunctor,def:pc-subfunctor,def:pc-pic-sigma-functor,def:pc-derived-category,def:pc-invertible-module,def:pc-smooth-projective-curve}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-subfunctor,def:pc-invertible-module,lem:pc-flat-rf-open,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat}
@@ -7132,7 +7133,7 @@ the tensor-Hom adjunction, $\cN$ invertible).  Then the
 \hyperref[def:pc-zero-scheme]{zero scheme} $D:=Z(s)$ is a
 \hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
 divisor} on $X_T/T$ which is finite locally free of degree $g$ over $T$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom,lem:pc-f-open-subfunctor}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,prop:pc-XK-integral}
@@ -7239,7 +7240,7 @@ $Z(1)=D_{\mathrm{univ}}\subset H\times X$; moreover this section is the
 adjoint section of $\cL_H$ for the module $\cN_H$, i.e.\ it corresponds
 under the adjunction of \Cref{lem:pc-zero-scheme-recd} on the open
 $W\subseteq H$ where $\cN_H$ is invertible.
-\uses{def:pc-separably-closed,def:pc-genus,def:pc-rational-point,def:pc-hilb-functor,def:pc-effective-cartier-divisor,def:pc-zero-scheme}
+\uses{def:pc-separably-closed,def:pc-genus,def:pc-rational-point,def:pc-hilb-functor,def:pc-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-universal-divisor}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-zero-scheme,lem:pc-zero-scheme-recd}
@@ -7524,7 +7525,7 @@ representable;
 $g\in G(K)$ there exists $g'\in G(k)$ such that $g'g\in F(K)$.
 \end{enumerate}
 Then $G$ is representable by a group scheme over $k$.
-\uses{def:pc-subfunctor,def:pc-representable-functor}
+\uses{def:pc-subfunctor,def:pc-representable-functor,def:pcb-group-scheme}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-representable-functor,def:pc-subfunctor,lem:pc-schemes-criterion}
@@ -7577,7 +7578,7 @@ $k$.  Then the
 \hyperref[def:pc-picard-functor]{Picard functor} $\Pic_{X/k}$ is
 representable, and the representing scheme
 $\underline{\Pic}_{X/k}$ is a group scheme over $k$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor,def:pcb-group-scheme}
 \lean{AlgebraicGeometry.isRepresentable_picardFunctor}
 \leanok
 \statusnote{The Lean statement is formalised; its proof is \texttt{sorry}.  It asserts
