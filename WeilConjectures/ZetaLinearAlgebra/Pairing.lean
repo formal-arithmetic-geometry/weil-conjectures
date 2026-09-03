@@ -38,6 +38,8 @@ the pairing is Poincaré duality and `c = qᵈ`.
   closed extension field along a ring homomorphism `ι`. Here the base field carries no
   `IsAlgClosed` assumption. With `ι : L →+* ℂ`, `c = qᵈ` and `G` the dual endomorphism this
   is literally the shape of `AlgebraicGeometry.WeilFunctionalEquation`.
+* `LinearMap.natDegree_map_charpolyRev_of_similitude`: both reverse characteristic polynomials
+  of a similitude pair have degree `dim V` after mapping into an extension field along `ι`.
 
 An auxiliary polynomial lemma `Polynomial.roots_reverse_of_monic` (the roots of the reverse of
 a split monic polynomial with nonzero constant coefficient are the inverses of its roots) also
@@ -196,6 +198,21 @@ theorem roots_map_charpolyRev_of_similitude {M : Type*} [Field M] [IsAlgClosed M
     Multiset.map_map]
   refine Multiset.map_congr rfl fun a _ ↦ ?_
   simp [Ring.inverse_eq_inv', mul_inv_rev, mul_comm]
+
+include hc in
+/-- **The degrees along a field embedding.** Both members of a similitude pair are invertible,
+so their reverse characteristic polynomials keep the full degree `dim V = dim W` after their
+coefficients are mapped into an extension field `M` along a ring homomorphism `ι`.
+
+Together with `LinearMap.roots_map_charpolyRev_of_similitude` (the reciprocal root identity) and
+`LinearMap.coeff_zero_charpolyRev` (the constant coefficient is `1`, so neither polynomial
+vanishes at `0`), this is the whole of the blueprint's `cor:zla-reciprocal-roots-embedding`. -/
+theorem natDegree_map_charpolyRev_of_similitude {M : Type*} [Field M] (ι : L →+* M) :
+    (F.charpolyRev.map ι).natDegree = finrank L V ∧
+      (G.charpolyRev.map ι).natDegree = finrank L V :=
+  ⟨natDegree_map_charpolyRev (isUnit_det_of_similitude hc hFG) ι,
+    (natDegree_map_charpolyRev (isUnit_det_right_of_similitude hc hFG) ι).trans
+      (Module.finrank_of_isPerfPair p).symm⟩
 
 variable [IsAlgClosed L]
 include hc

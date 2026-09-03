@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.Charpoly.BaseChange
 public import Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import Mathlib.LinearAlgebra.Matrix.Dual
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
@@ -16,8 +17,13 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 
 * `LinearMap.charpolyRev`: the reverse characteristic polynomial `det (1 - t • f)` of an
   endomorphism `f` of a finite free module.
-* `LinearMap.eval_charpolyRev`: the reverse characteristic polynomial takes the value `1` at
-  `t = 0`.
+* `LinearMap.eval_charpolyRev`, `LinearMap.coeff_zero_charpolyRev`: the reverse characteristic
+  polynomial takes the value `1` at `t = 0`, equivalently its constant coefficient is `1`.
+* `LinearMap.natDegree_charpolyRev`, `LinearMap.leadingCoeff_charpolyRev`: for an endomorphism
+  with invertible determinant, the reverse characteristic polynomial has full degree
+  `finrank K V` and leading coefficient `(-1) ^ finrank K V * det f`.
+* `LinearMap.natDegree_map_charpolyRev`: the degree is unchanged by mapping the coefficients
+  along a ring homomorphism out of a field.
 * `LinearMap.charpoly_dualMap`: the characteristic polynomial is invariant under transposition.
 * `LinearMap.C_det_mul_charpolyRev`: if `f * g = c • 1`, then `det (1 - t • g)` is determined by
   the characteristic polynomial of `f`.
@@ -48,7 +54,43 @@ theorem eval_charpolyRev (f : M →ₗ[R] M) : Polynomial.eval 0 f.charpolyRev =
   classical
   rw [← charpolyRev_toMatrix (Module.Free.chooseBasis R M) f, Matrix.eval_charpolyRev]
 
+/-- The constant coefficient of the reverse characteristic polynomial `det (1 - t • f)` is `1`. -/
+@[simp]
+theorem coeff_zero_charpolyRev (f : M →ₗ[R] M) : f.charpolyRev.coeff 0 = 1 := by
+  rw [coeff_zero_eq_eval_zero, eval_charpolyRev]
+
 variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+
+/-- An endomorphism with invertible determinant has characteristic polynomial with nonzero
+constant coefficient. -/
+theorem charpoly_coeff_zero_ne_zero {f : V →ₗ[K] V} (hf : IsUnit (LinearMap.det f)) :
+    f.charpoly.coeff 0 ≠ 0 := by
+  intro h
+  rw [LinearMap.det_eq_sign_charpoly_coeff, h, mul_zero] at hf
+  exact not_isUnit_zero hf
+
+/-- For an endomorphism with invertible determinant, the reverse characteristic polynomial
+`det (1 - t • f)` has full degree `finrank K V`. -/
+theorem natDegree_charpolyRev {f : V →ₗ[K] V} (hf : IsUnit (LinearMap.det f)) :
+    f.charpolyRev.natDegree = finrank K V := by
+  rw [charpolyRev_def, reverse_natDegree, charpoly_natDegree,
+    natTrailingDegree_eq_zero.2 (Or.inr (charpoly_coeff_zero_ne_zero hf)), Nat.sub_zero]
+
+/-- For an endomorphism with invertible determinant, the leading coefficient of the reverse
+characteristic polynomial `det (1 - t • f)` is `(-1) ^ finrank K V * det f`. -/
+theorem leadingCoeff_charpolyRev {f : V →ₗ[K] V} (hf : IsUnit (LinearMap.det f)) :
+    f.charpolyRev.leadingCoeff = (-1) ^ finrank K V * LinearMap.det f := by
+  rw [charpolyRev_def, reverse_leadingCoeff, trailingCoeff,
+    natTrailingDegree_eq_zero.2 (Or.inr (charpoly_coeff_zero_ne_zero hf)),
+    LinearMap.det_eq_sign_charpoly_coeff, ← mul_assoc, ← mul_pow, neg_one_mul, neg_neg,
+    one_pow, one_mul]
+
+/-- Mapping the coefficients along a ring homomorphism out of a field preserves the degree of
+the reverse characteristic polynomial. -/
+theorem natDegree_map_charpolyRev {f : V →ₗ[K] V} (hf : IsUnit (LinearMap.det f))
+    {S : Type*} [CommRing S] [Nontrivial S] (φ : K →+* S) :
+    (f.charpolyRev.map φ).natDegree = finrank K V := by
+  rw [natDegree_map_eq_of_injective φ.injective, natDegree_charpolyRev hf]
 
 /-- The characteristic polynomial of the transpose of an endomorphism agrees with the
 characteristic polynomial of the endomorphism. -/
