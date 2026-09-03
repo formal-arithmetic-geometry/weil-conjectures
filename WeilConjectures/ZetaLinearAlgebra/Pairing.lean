@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.Charpoly.BaseChange
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 
 /-!
@@ -31,11 +33,39 @@ the pairing is Poincaré duality and `c = qᵈ`.
 * `LinearMap.charpolyRev_roots_of_similitude`: the same statement in terms of the reverse
   characteristic polynomials `det (1 - t • F)`, in the shape of
   `AlgebraicGeometry.WeilFunctionalEquation`.
+* `LinearMap.roots_map_charpolyRev_of_similitude`: the same reciprocal root identity for the
+  roots computed *after* mapping the reverse characteristic polynomials into an algebraically
+  closed extension field along a ring homomorphism `ι`. Here the base field carries no
+  `IsAlgClosed` assumption. With `ι : L →+* ℂ`, `c = qᵈ` and `G` the dual endomorphism this
+  is literally the shape of `AlgebraicGeometry.WeilFunctionalEquation`.
+
+An auxiliary polynomial lemma `Polynomial.roots_reverse_of_monic` (the roots of the reverse of
+a split monic polynomial with nonzero constant coefficient are the inverses of its roots) also
+lives here: `#find_home` places it in this file, since it combines the two mirror files
+`WeilConjectures.Mathlib.Algebra.Polynomial.Reverse` and
+`WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision`, and no Mathlib file imports both.
 -/
 
 @[expose] public section
 
 open Module Polynomial
+
+namespace Polynomial
+
+/-- The roots of the reverse of a monic split polynomial with nonzero constant coefficient are
+the inverses of its roots. The splitting hypothesis is stated as `f.Splits` rather than as
+`[IsAlgClosed L]`, so that it also applies to a polynomial that happens to split over a field
+that is not algebraically closed. -/
+theorem roots_reverse_of_monic {L : Type*} [Field L] {f : L[X]} (hf : f.Monic) (hsp : f.Splits)
+    (h0 : f.coeff 0 ≠ 0) : f.reverse.roots = f.roots.map (·⁻¹) := by
+  have hmem : (0 : L) ∉ f.roots := by
+    intro h
+    rw [mem_roots hf.ne_zero, IsRoot.def, ← coeff_zero_eq_eval_zero] at h
+    exact h0 h
+  conv_lhs => rw [hsp.eq_prod_roots_of_monic hf]
+  rw [reverse_multiset_prod_X_sub_C, roots_multiset_prod_one_sub_C_mul_X hmem]
+
+end Polynomial
 
 namespace LinearMap
 
@@ -128,6 +158,44 @@ theorem C_det_mul_charpolyRev_of_similitude :
   have h := LinearMap.C_det_mul_charpolyRev (dualMap_mul_conj_of_similitude hFG)
   rwa [det_dualMap, charpoly_dualMap, charpolyRev_def, LinearEquiv.charpoly_conj,
     ← charpolyRev_def, Subspace.dual_finrank_eq] at h
+
+include hc in
+/-- **The reciprocal root identity along a field embedding.** After mapping the reverse
+characteristic polynomials into an algebraically closed extension field `M` along a ring
+homomorphism `ι`, the roots of `det (1 - t • G)` are the images of the roots of
+`det (1 - t • F)` under `z ↦ (ι c * z)⁻¹`. Unlike `charpolyRev_roots_of_similitude`, the base
+field `L` is not assumed algebraically closed.
+
+With `M = ℂ`, `c = qᵈ` and `G` the endomorphism dual to `F`, this is literally the shape of
+`AlgebraicGeometry.WeilFunctionalEquation`. -/
+theorem roots_map_charpolyRev_of_similitude {M : Type*} [Field M] [IsAlgClosed M] (ι : L →+* M) :
+    (G.charpolyRev.map ι).roots = (F.charpolyRev.map ι).roots.map fun z ↦ (ι c * z)⁻¹ := by
+  have hdet : IsUnit (LinearMap.det F) := isUnit_det_of_similitude hc hFG
+  have hι : Function.Injective ι := ι.injective
+  have hc0 : ι c ≠ 0 := fun h ↦ hc (hι (by simpa using h))
+  have hcoeff : F.charpoly.coeff 0 ≠ 0 := by
+    intro h
+    rw [LinearMap.det_eq_sign_charpoly_coeff, h, mul_zero] at hdet
+    exact not_isUnit_zero hdet
+  have hcoeff' : (F.charpoly.map ι).coeff 0 ≠ 0 := by
+    rw [coeff_map]
+    exact fun h ↦ hcoeff (hι (by simpa using h))
+  have hkey : C (ι (LinearMap.det F)) * G.charpolyRev.map ι
+      = C ((-1 : M) ^ finrank L V) * (F.charpoly.map ι).comp (C (ι c) * X) := by
+    have h := congrArg (Polynomial.map ι) (C_det_mul_charpolyRev_of_similitude hFG)
+    rwa [Polynomial.map_mul, Polynomial.map_mul, Polynomial.map_C, Polynomial.map_C,
+      Polynomial.map_comp, Polynomial.map_mul, Polynomial.map_C, Polynomial.map_X,
+      map_pow, map_neg, map_one] at h
+  have hroots := congrArg Polynomial.roots hkey
+  rw [roots_C_mul _ (fun h ↦ hdet.ne_zero (hι (by simpa using h))),
+    roots_C_mul _ (pow_ne_zero _ (neg_ne_zero.mpr one_ne_zero))] at hroots
+  rw [show (C (ι c) * X : M[X]) = C (ι c) * X + C 0 by simp,
+    roots_comp_C_mul_X_add_C _ _ _ hc0.isUnit] at hroots
+  rw [hroots, charpolyRev_def, ← reverse_map hι,
+    roots_reverse_of_monic ((charpoly_monic F).map ι) (IsAlgClosed.splits _) hcoeff',
+    Multiset.map_map]
+  refine Multiset.map_congr rfl fun a _ ↦ ?_
+  simp [Ring.inverse_eq_inv', mul_inv_rev, mul_comm]
 
 variable [IsAlgClosed L]
 include hc
