@@ -6084,6 +6084,63 @@ valid for $\cI_D$ invertible by the local trivialization check).
 \end{proof}
 
 % ----------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Over a locally Noetherian base, finite type is finite
+presentation]
+\label{lem:pc-finite-type-noetherian-fp}
+Let $f:X\to S$ be a morphism of schemes with $S$ locally Noetherian.  If
+$f$ is \hyperref[def:pc-morphism-conventions]{locally of finite type}
+then $f$ is locally of finite presentation; if $f$ is of finite type
+then $f$ is of finite presentation.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Lemma~29.22.9
+(\stacksproject{01TX}).  It is not
+decomposed here.
+\end{proof}
+
+% ----------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A proper locally quasi-finite morphism is finite]
+\label{lem:pc-proper-quasi-finite-finite}
+A morphism of schemes $f:X\to S$ is
+\hyperref[def:pc-morphism-conventions]{finite} if and only if it is
+\hyperref[def:pc-morphism-conventions]{proper} and locally quasi-finite.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+% Mathlib: the finite $\Leftrightarrow$ proper + locally quasi-finite half of
+% Zariski's main theorem, for an arbitrary morphism of schemes, as stated here.
+\mathlibok\ \lean{AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite}
+\end{lemma}
+\begin{proof}
+This is a cited external input: More on Morphisms, Lemma~37.44.1
+(\stacksproject{02LS}), which lists four
+equivalent conditions; the two above are its (1) and (3).  It is not
+decomposed here.
+\end{proof}
+
+% ----------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Finite locally free means finite, flat and of finite
+presentation]
+\label{lem:pc-finite-flat-fp-locally-free}
+Let $f:X\to S$ be a morphism of schemes.  Then $f$ is \emph{finite
+locally free} --- that is, $f$ is affine and $f_*\cO_X$ is a finite
+locally free $\cO_S$-module --- if and only if $f$ is
+\hyperref[def:pc-morphism-conventions]{finite, flat and locally of
+finite presentation}; and if $S$ is locally Noetherian, if and only if
+$f$ is finite and flat.  (Being finite, flat and locally of finite
+presentation is, together with the fibre-rank condition, exactly
+\hyperref[def:pc-finite-locally-free]{Definition~\ref{def:pc-finite-locally-free}}.)
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-finite-locally-free}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Lemma~29.49.2
+(\stacksproject{02KB}).  It is not
+decomposed here.
+\end{proof}
+
+% ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[The Cartier criterion on smooth one-dimensional fibres]
 \label{lem:pc-cartier-criterion}
@@ -6104,7 +6161,7 @@ proper, the first arrow is an if-and-only-if.
 \uses{def:pc-relative-effective-cartier,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,lem:pc-recd-locally-principal,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,rem:pc-regularity-sc}
+\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,lem:pc-finite-flat-fp-locally-free,lem:pc-finite-type-noetherian-fp,lem:pc-proper-quasi-finite-finite,lem:pc-recd-locally-principal,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,rem:pc-regularity-sc}
 \emph{$(3)\Rightarrow(2)$.}  This is the ``in particular'' of
 \Cref{lem:pc-recd-locally-principal}: $D$ is locally principal (the
 fibres are effective Cartier divisors and $D$ is flat and locally
@@ -6152,9 +6209,10 @@ effective Cartier divisor.
 \emph{$(3)\Rightarrow(4)$.}  Clear.
 
 \emph{$(4)\Rightarrow(3)$ for locally Noetherian $S$.}  A locally
-quasi-finite morphism into a locally Noetherian scheme is locally of
-finite presentation (Morphisms, Lemma~29.22.9,
-\stacksproject{01TX}), so (4)
+quasi-finite morphism is locally of finite type (that is part of the
+definition of local quasi-finiteness), hence locally of finite
+presentation when the target is locally Noetherian
+(\Cref{lem:pc-finite-type-noetherian-fp}), so (4)
 implies (3) in this case.
 
 \emph{$(1)\Leftrightarrow(2)$ for proper $X\to S$.}  If (1) holds,
@@ -6163,12 +6221,10 @@ locally quasi-finite (by (2)$\Rightarrow$(3)) and flat; $D\to S$ is
 proper: $D\to X$ is a closed immersion (hence proper) and $X\to S$ is
 proper (a composition of proper morphisms is proper, the standard
 statement, used through \Cref{def:pc-morphism-conventions}).  A proper
-locally quasi-finite morphism is finite (More on Morphisms,
-Lemma~37.44.1,
-\stacksproject{02LS}); a finite flat
-and finitely presented morphism is finite locally free (Morphisms,
-Lemma~29.49.2,
-\stacksproject{02KB}):
+locally quasi-finite morphism is finite
+(\Cref{lem:pc-proper-quasi-finite-finite}); a finite, flat and locally
+finitely presented morphism is finite locally free
+(\Cref{lem:pc-finite-flat-fp-locally-free}):
 $D\to S$ is finite locally free.
 \end{proof}
 
@@ -6403,6 +6459,30 @@ it to arbitrary $S$.
 \end{proof}
 
 % ----------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The difference of two relative effective Cartier divisors]
+\label{lem:pc-relative-cartier-difference}
+Let $f:X\to S$ be a morphism of schemes and let $D_1\subseteq D_2$ be
+\hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
+divisors on $X/S$}, the inclusion being one of closed subschemes.  Then
+there is a unique
+\hyperref[def:pc-effective-cartier-divisor]{effective Cartier divisor}
+$D$ on $X$ with $D_2=D_1+D$ (Divisors, Lemma~31.14.8), and $D$ is again
+a relative effective Cartier divisor on $X/S$.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-effective-cartier-divisor,def:pc-relative-effective-cartier}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Divisors, Lemma~31.19.4
+(\stacksproject{0B8V}).  That
+statement quotes Divisors, Lemma~31.14.8 for the existence of the
+difference $D$ and adds that $D$ is again relative over $S$; in local
+terms, if $D_i$ is cut out by a nonzerodivisor $h_i$ on an affine open
+$\Spec(B)$ of $X$ then $(h_2)\subseteq(h_1)$ forces $h_2=hh_1$ with $h$
+a nonzerodivisor, and $D$ is cut out by $h$.  It is not decomposed
+here.
+\end{proof}
+
+% ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[The addition morphism on Hilbert schemes]
 \label{lem:pc-hilb-addition}
@@ -6423,7 +6503,7 @@ $1$ gives the corresponding divisor $Z+x$.
 \uses{def:pc-hilb-functor,def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-hilb-functor,lem:pc-cartier-criterion}
+\uses{def:pc-finite-locally-free,def:pc-hilb-functor,lem:pc-cartier-criterion,lem:pc-relative-cartier-difference}
 Write $H_d:=\underline{\Hilb}^d_{X/S}$,
 $H_{d+1}:=\underline{\Hilb}^{d+1}_{X/S}$ and let
 \[
@@ -6444,14 +6524,11 @@ Proof: by \Cref{lem:pc-cartier-criterion} ((1)$\Rightarrow$(2)) both
 $D\to T$ and $\Gamma_x\to T$ ($\cong T$, finite locally free of degree
 $1$; it is a closed subscheme of $X_T$ because the graph of a morphism
 to a separated scheme over $S$ is closed) are relative effective
-Cartier divisors on $X_T/T$; since $\Gamma_x\subseteq D$, the classical
-difference statement for relative effective Cartier divisors
-(Divisors, Lemma~31.19.4,
-\stacksproject{0B8V}: if
-$D_1,D_2$ are relative effective Cartier divisors with $D_1\subseteq
-D_2$ there is a relative effective Cartier divisor $D'$ with
-$D_2=D_1+D'$) gives $D=D'+\Gamma_x$ with $D'$ a relative effective
-Cartier divisor.  Then $D'\subseteq D$ (the summand of a sum is
+Cartier divisors on $X_T/T$; since $\Gamma_x\subseteq D$, the difference
+statement for relative effective Cartier divisors
+(\Cref{lem:pc-relative-cartier-difference}, applied with
+$D_1=\Gamma_x$ and $D_2=D$) gives $D=D'+\Gamma_x$ with $D'$ a relative
+effective Cartier divisor.  Then $D'\subseteq D$ (the summand of a sum is
 contained in the sum) so $D'\to T$ is finite (a closed subscheme of
 the finite scheme $D$ over $T$), hence finite locally free
 (\Cref{def:pc-finite-locally-free}: finite + flat + locally of finite
