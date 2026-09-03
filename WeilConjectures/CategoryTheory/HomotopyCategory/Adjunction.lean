@@ -301,8 +301,9 @@ lemma mapHomotopyCategoryPlus_id_unit_app (K : HomotopyCategory.Plus C) :
     mapHomotopyCategory_id_unit_app]
 
 /-- The unit of the adjunction induced by `Adjunction.id` is the identity: the sharp form
-of `Adjunction.mapHomotopyCategoryPlus_id_unit_app`, since `Adjunction.id` is induced by
-`Functor.mapHomotopyCategoryPlusIdIso`, which is itself an identity. -/
+of `Adjunction.mapHomotopyCategoryPlus_id_unit_app`, since both factors of the composite
+appearing there are built from the inverse of `Functor.mapHomotopyCategoryPlusIdIso`, which
+is itself an identity (`Functor.mapHomotopyCategoryPlusIdIso_inv_app_eq_id`). -/
 @[simp]
 lemma mapHomotopyCategoryPlus_id_unit_app_eq_id (K : HomotopyCategory.Plus C) :
     (Adjunction.id (C := C)).mapHomotopyCategoryPlus.unit.app K = 𝟙 K := by
