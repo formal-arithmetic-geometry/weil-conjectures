@@ -1231,7 +1231,7 @@ completes the proof.
 Let $k$ be a field, $X$ a smooth projective \hyperref[def:pc-curve]{curve}
 over $k$, $i:X\hookrightarrow\mathbf P^N_k$ a closed immersion with
 $N\ge2$, and put $r:=N-1$.  For every invertible $\cO_X$-module
-$\cM$ (\Cref{def:pcb-invertible-module}):
+$\cM$ (\Cref{def:pc-invertible-module}):
 \[
 \hyperref[def:pc-ext]{\operatorname{Ext}}^{i}_{\mathbf P^N}\bigl(i_*\cM,\;
 \Omega_{\mathbf P^N/k}^{N}\bigr)=0\qquad(i<r),
@@ -1248,7 +1248,7 @@ differential) module, together with the classical Ext-computation for
 a closed immersion of a smooth curve into a smooth projective space
 (EGA III$_1$, \,(6.5.5); Hartshorne, \emph{Algebraic Geometry}, III,
 (7.12)).
-\uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:pcb-invertible-module,def:pc-ext}
+\uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-ext}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-affine-morphism-hi,def:pc-ext}
@@ -1316,7 +1316,7 @@ $\cO_X$-module.  Then
 \[
 H^1(X,\cM)^{\vee}\;\cong\;H^0\bigl(X,\;\Omega^1_{X/k}\otimes\cM^{-1}\bigr).
 \]
-\uses{def:pc-curve,def:pc-kahler-differentials,def:pcb-invertible-module,def:pc-projective-morphism}
+\uses{def:pc-curve,def:pc-kahler-differentials,def:pc-invertible-module,def:pc-projective-morphism}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-projective-morphism,lem:pc-affine-morphism-hi,lem:pc-omega-identity,thm:pc-serre-duality-pn,def:pc-ext}
@@ -1615,26 +1615,92 @@ $\sigma_T:T\to X_T$ (\Cref{def:pc-base-change}).
 
 % ---------------------------------------------------------------------------
 % Decomposed.
-\begin{remark}[Invertible modules and Picard groups: existing in file 06]
+\begin{remark}[Invertible modules and Picard groups: the generality used below]
 \label{rem:pc-sc-modules}
 The notions of \emph{invertible module} (and its dual),
-\emph{tensor product of modules} and \emph{Picard group} used below are
-those already introduced in file~06:
-\hyperref[def:pcb-invertible-module]{Definition~\ref{def:pcb-invertible-module}}
-(\Cref{def:pcb-invertible-module}, with \Cref{lem:pcb-invertible-dual})
-and
-\hyperref[def:pcb-picard-group]{Definition~\ref{def:pcb-picard-group}}
-(\Cref{def:pcb-picard-group}, with the group law of
-\Cref{lem:pcb-pic-group}).  The basic properties that we will use are
+\emph{tensor product of modules} and \emph{Picard group} are used below
+for arbitrary schemes, not only for curves.  They are
+\Cref{def:pc-invertible-module} and \Cref{def:pc-picard-group} just
+below; the blocks reproduced from file~06,
+\Cref{def:pcb-invertible-module} (with \Cref{lem:pcb-invertible-dual})
+and \Cref{def:pcb-picard-group} (with the group law of
+\Cref{lem:pcb-pic-group}), are the case of a
+\hyperref[def:pcb-curves]{curve}.  The basic properties that we will use
+are
 \begin{itemize}
 \item an
-\hyperref[def:pcb-invertible-module]{invertible module} is closed under
+\hyperref[def:pc-invertible-module]{invertible module} is closed under
 duals and tensor products (\Cref{lem:pc-tensor-dual-invertible});
 \item $\Pic(S)$ is trivial for $S=\Spec(k)$, $k$ a field
-(\Cref{lem:pc-pic-of-field}).
+(\Cref{lem:pc-pic-of-field});
+\item $\Pic$ is a group-valued functor, and pullback is a group
+homomorphism (\Cref{lem:pc-pic-group-valued}).
 \end{itemize}
-\uses{def:pcb-invertible-module,def:pcb-picard-group,def:pc-scheme}
+\uses{def:pc-invertible-module,def:pc-picard-group,def:pc-scheme}
 \end{remark}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{definition}[Invertible modules on a scheme, and their duals]
+\label{def:pc-invertible-module}
+Let $Y$ be a scheme.  An \emph{invertible $\cO_Y$-module} is an
+$\cO_Y$-module $\cL$ such that the functor
+$\cF\mapsto\cL\otimes_{\cO_Y}\cF$ is an auto-equivalence of the category
+of $\cO_Y$-modules (Modules, Definition~17.25.1,
+\stacksproject{01CS}).  Equivalently, there exists an $\cO_Y$-module
+$\cN$ with $\cL\otimes_{\cO_Y}\cN\cong\cO_Y$ (Modules, Lemma~17.25.2,
+\stacksproject{0B8K}); equivalently again, $\cL$ is locally free of rank
+one for the Zariski topology (hence quasi-coherent), which is the form
+in which the notion is used below --- Modules, Lemma~17.25.4,
+\stacksproject{0B8M}, says that a locally free module of rank one is
+invertible on any ringed space and that the converse holds as soon as
+all stalks of the structure sheaf are local rings, which they are on a
+scheme.  The \emph{dual} of $\cL$ is
+\[
+\cL^\vee:=\mathcal{H}om_{\cO_Y}(\cL,\cO_Y).
+\]
+It is again invertible and the evaluation map
+$\cL\otimes_{\cO_Y}\cL^\vee\to\cO_Y$ is an isomorphism (Modules,
+Lemma~17.25.5, \stacksproject{01CT}), so $\cL^\vee$ is a module $\cN$ as
+above.  For $Y$ a \hyperref[def:pcb-curves]{curve} this is the notion of
+\Cref{def:pcb-invertible-module}.
+\uses{def:pc-scheme}
+\lean{SheafOfModules.IsInvertible}
+\leanok
+\statusnote{Only the ``locally free of rank one'' form of this definition is formalised.
+\texttt{SheafOfModules.IsInvertible} is \emph{defined} as being locally free of rank one; the
+equivalent characterisations by tensor-invertibility, and the dual $\cL^\vee$, are not
+formalised, since Mathlib has no monoidal structure on \texttt{SheafOfModules}.}
+\end{definition}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{definition}[The Picard group of a scheme]
+\label{def:pc-picard-group}
+Let $Y$ be a scheme.  The \emph{Picard group} $\Pic(Y)$ is the abelian
+group whose elements are the isomorphism classes of
+\hyperref[def:pc-invertible-module]{invertible $\cO_Y$-modules}, the
+group law being induced by tensor product: the unit is the class of
+$\cO_Y$, the product of $[\cL]$ and $[\cM]$ is
+$[\cL\otimes_{\cO_Y}\cM]$, and the inverse of $[\cL]$ is the class of
+its dual $\cL^\vee$ (that tensor products and duals of invertible
+modules are again invertible, and that
+$\cL\otimes_{\cO_Y}\cL^\vee\cong\cO_Y$, is
+\Cref{lem:pc-tensor-dual-invertible}; associativity, commutativity and
+the unit law are those of the tensor product).  This is Modules on
+Sites, Definition~18.32.6, \stacksproject{040C} --- the Picard group of
+a ringed site --- applied to the small Zariski site of $Y$ with its
+structure sheaf $\cO_Y$, whose modules are the $\cO_Y$-modules.  For $Y$
+a \hyperref[def:pcb-curves]{curve} this is \Cref{def:pcb-picard-group},
+whose group law is \Cref{lem:pcb-pic-group}.
+\uses{def:pc-invertible-module,def:pc-scheme,lem:pc-tensor-dual-invertible}
+\lean{AlgebraicGeometry.Scheme.Pic}
+\leanok
+\statusnote{Only the underlying \emph{set} is formalised.
+\texttt{AlgebraicGeometry.Scheme.Pic} carries no group law: the group law is induced by the
+tensor product of invertible modules, which needs a monoidal structure on
+\texttt{SheafOfModules} that Mathlib does not have.}
+\end{definition}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
@@ -1651,7 +1717,7 @@ base change, coincidence with the module $\cO_C(D)$ of file~06 for
 finite unions of closed points) are
 \Cref{lem:pc-divisor-line-bundle-properties} and
 \Cref{lem:pc-divisor-line-bundle-agrees-sc}.
-\uses{def:pcb-effective-cartier-divisor,def:pcb-invertible-module,def:pcb-divisor}
+\uses{def:pcb-effective-cartier-divisor,def:pc-invertible-module,def:pcb-divisor}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1669,7 +1735,7 @@ such that $D\to S$ is flat (Divisors, Definition~31.19.2,
 % Decomposed.
 \begin{definition}[The zero scheme of a section]\label{def:pc-zero-scheme}
 Let $X$ be a scheme, $\cM$ an
-\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module} and
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-module} and
 $s\in H^0(X,\cM)$.  The \emph{zero scheme} $Z(s)\subseteq X$ of $s$ is
 the closed subscheme defined by the ideal sheaf
 \[
@@ -1679,7 +1745,7 @@ the closed subscheme defined by the ideal sheaf
 Its basic properties (well-definedness, local form
 $\Spec(A/(a))$, compatibility with flat base change, $Z(s)=X
 \Leftrightarrow s=0$) are \Cref{lem:pc-zero-scheme-properties}.
-\uses{def:pcb-invertible-module,def:pc-scheme}
+\uses{def:pc-invertible-module,def:pc-scheme}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1795,10 +1861,10 @@ Let $f:X\to S$ be a morphism of schemes.  The \emph{Picard presheaf} is
 (\mathit{Sch}/S)^{\mathrm{op}}\longrightarrow\textit{Sets},\qquad
 T\longmapsto\Pic(X_T),
 \]
-with $\Pic$ of \Cref{def:pcb-picard-group} (in the generality of
+with $\Pic$ of \Cref{def:pc-picard-group} (in the generality of
 \Cref{rem:pc-sc-modules}) and $X_T$ of \Cref{def:pc-base-change}; the
 assignment is functorial \Cref{lem:pc-pic-presheaf-functorial}.
-\uses{def:pc-base-change,def:pcb-picard-group}
+\uses{def:pc-base-change,def:pc-picard-group}
 \lean{AlgebraicGeometry.picardPresheaf}
 \leanok
 \end{definition}
@@ -1840,7 +1906,7 @@ along $\sigma$}); this is a
 \hyperref[def:pc-subfunctor]{subfunctor} of the
 \hyperref[def:pc-picard-presheaf]{Picard presheaf}.  Its value at
 $T=\Spec(k)$ is computed in \Cref{lem:pc-sigma-k-points}.
-\uses{def:pc-picard-presheaf,def:pc-rational-point,def:pc-subfunctor,def:pcb-picard-group}
+\uses{def:pc-picard-presheaf,def:pc-rational-point,def:pc-subfunctor,def:pc-picard-group}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1885,9 +1951,9 @@ of finite projective modules (Derived Categories of Schemes,
 Section~36.31,
 \stacksproject{0BDH}); the subcategory
 is $D_{\mathrm{perf}}(\cO_X)$.  The perfectness of an
-\hyperref[def:pcb-invertible-module]{invertible} module is
+\hyperref[def:pc-invertible-module]{invertible} module is
 \Cref{lem:pc-invertible-perfect}.
-\uses{def:pc-derived-category,def:pcb-invertible-module}
+\uses{def:pc-derived-category,def:pc-invertible-module}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1952,7 +2018,7 @@ complex $\cN$ concentrated in degree $0$.  It is a
 $M\cong E[-i]$ with $E$ finite locally free of rank $r$
 (\Cref{def:pc-finite-locally-free}).  The structure of the cohomology of
 $M$ in this situation is \Cref{lem:pc-degree-zero-properties}.
-\uses{def:pc-derived-category,def:pcb-invertible-module,def:pc-finite-locally-free}
+\uses{def:pc-derived-category,def:pc-invertible-module,def:pc-finite-locally-free}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2050,7 +2116,7 @@ rests on the sorried instance \Cref{lem:pc-sheaves-of-modules-grothendieck}, so
 \begin{definition}[The degree of an invertible module]
 \label{def:pc-degree-line-bundle}
 Let $k$ be a field, $X$ a proper scheme over $k$ and $\cL$ an
-\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module}.  The
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-module}.  The
 \emph{degree} of $\cL$ is
 \[
 \deg(\cL):=\chi(X,\cL)-\chi(X,\cO_X)\in\Z
@@ -2214,12 +2280,12 @@ Zariski-locality.
 \begin{lemma}[Invertible modules: duals and tensor products]
 \label{lem:pc-tensor-dual-invertible}
 Let $X$ be a scheme and let $\cM,\cN$ be
-\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-modules}.  Then
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-modules}.  Then
 $\cM^\vee=\mathcal{H}om_{\cO_X}(\cM,\cO_X)$ is invertible, so is
 $\cM\otimes_{\cO_X}\cN$, and the canonical maps
 $\cM\otimes\cM^\vee\to\cO_X$ and $\cM\to\cM^{\vee\vee}$ are
 isomorphisms.
-\uses{def:pcb-invertible-module,def:pc-scheme,def:pc-morphism-conventions}
+\uses{def:pc-invertible-module,def:pc-scheme,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 All three assertions are Zariski-local in $X$, and at a point $x$ an
@@ -2235,9 +2301,9 @@ isomorphism is a local property of coherent modules, the claim follows.
 % Decomposed.
 \begin{lemma}[$\Pic$ of a field]\label{lem:pc-pic-of-field}
 Let $k$ be a field.  Then the
-\hyperref[def:pcb-picard-group]{Picard group} of $\Spec(k)$ is trivial:
+\hyperref[def:pc-picard-group]{Picard group} of $\Spec(k)$ is trivial:
 every invertible $\cO_k$-module is isomorphic to $\cO_k$.
-\uses{def:pcb-invertible-module,def:pcb-picard-group,def:pc-scheme}
+\uses{def:pc-invertible-module,def:pc-picard-group,def:pc-scheme}
 \end{lemma}
 \begin{proof}
 An invertible $\cO_k$-module is locally free of rank $1$; an $\cO_k$-module
@@ -2254,11 +2320,11 @@ Let $S$ be a scheme and $D\subset S$ an
 \hyperref[def:pcb-effective-cartier-divisor]{effective Cartier divisor}.
 \begin{enumerate}
 \item $\cO_S(D)$ is an
-\hyperref[def:pcb-invertible-module]{invertible $\cO_S$-module}.
+\hyperref[def:pc-invertible-module]{invertible $\cO_S$-module}.
 \item If $g:Y\to S$ is a flat morphism and $D_Y=D\times_SY$, then
 $\cI_{D_Y}=g^*\cI_D$ and $\cO_Y(D_Y)\cong g^*\cO_S(D)$.
 \end{enumerate}
-\uses{def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,def:pcb-invertible-module,def:pc-base-change,lem:pc-tensor-dual-invertible,lem:pc-closed-imm-base-change}
+\uses{def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,def:pc-invertible-module,def:pc-base-change,lem:pc-tensor-dual-invertible,lem:pc-closed-imm-base-change}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-closed-imm-base-change,lem:pc-tensor-dual-invertible}
@@ -2332,7 +2398,7 @@ the value follows by additivity of the degree on tensor products
 % Decomposed.
 \begin{lemma}[Properties of the zero scheme]\label{lem:pc-zero-scheme-properties}
 Let $X$ be a scheme, $\cM$ a
-\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module} and
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-module} and
 $s\in H^0(X,\cM)$.
 \begin{enumerate}
 \item $Z(s)$ is a closed subscheme of $X$ (a locally principal closed
@@ -2343,7 +2409,7 @@ $s_Y=g^*s\in H^0(Y,g^*\cM)$: $Z(s_Y)=Z(s)\times_XY$, i.e.\
 $g^*\cI_{Z(s)}=\cI_{Z(s_Y)}$.
 \item $Z(s)=X$ if and only if $s=0$.
 \end{enumerate}
-\uses{def:pc-zero-scheme,def:pcb-invertible-module,def:pc-scheme,lem:pc-tensor-dual-invertible,def:pc-base-change}
+\uses{def:pc-zero-scheme,def:pc-invertible-module,def:pc-scheme,lem:pc-tensor-dual-invertible,def:pc-base-change}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-divisor-line-bundle-properties,lem:pc-tensor-dual-invertible}
@@ -2426,7 +2492,7 @@ $(\mathit{Sch}/S)^{\mathrm{op}}\to\textit{Sets}$: for $g:T'\to T$ with
 $g_X:X_{T'}\to X_T$ the map $\cL\mapsto g_X^*\cL$ sends invertible
 modules to invertible modules, respects isomorphisms and satisfies
 $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
-\uses{def:pc-picard-presheaf,def:pc-base-change,def:pcb-invertible-module,lem:pc-tensor-dual-invertible}
+\uses{def:pc-picard-presheaf,def:pc-base-change,def:pc-invertible-module,lem:pc-tensor-dual-invertible}
 \lean{SheafOfModules.IsInvertible.pullback, AlgebraicGeometry.Scheme.picFunctor}
 \leanok
 \end{lemma}
@@ -2442,6 +2508,77 @@ standard $(g_1g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$ for the pullback
 functor (a straightforward identity of the corresponding module
 sections), and isomorphisms are sent to isomorphisms, so the map is
 well defined on isomorphism classes.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{lemma}[The Picard presheaf and $\Pic_{X/k,\sigma}$ are group-valued]
+\label{lem:pc-pic-group-valued}
+\begin{enumerate}
+\item Let $h:Y'\to Y$ be a morphism of schemes.  Then
+$h^*:\Pic(Y)\to\Pic(Y')$, $[\cL]\mapsto[h^*\cL]$, is a well-defined
+homomorphism of abelian groups.
+\item Let $f:X\to S$ be a morphism of schemes.  Then the
+\hyperref[def:pc-picard-presheaf]{Picard presheaf} $T\mapsto\Pic(X_T)$
+takes values in abelian groups and all its transition maps $g_X^*$ are
+group homomorphisms; that is, it lifts to a functor
+$(\mathit{Sch}/S)^{\mathrm{op}}\to\textit{Ab}$ whose composition with
+the forgetful functor $\textit{Ab}\to\textit{Sets}$ is the functor of
+\Cref{lem:pc-pic-presheaf-functorial}.  The same holds for
+$T\mapsto\Pic(T)$.
+\item Let $k$ be a field, $X$ a scheme over $k$ and $\sigma\in X(k)$ a
+\hyperref[def:pc-rational-point]{$k$-rational point}.  Then
+$\Pic_{X/k,\sigma}(T)=\operatorname{Ker}(\sigma_T^*)$ of
+\Cref{def:pc-pic-sigma-functor} is a subgroup of $\Pic(X_T)$ for every
+$k$-scheme $T$, and $\Pic_{X/k,\sigma}$ is a
+\hyperref[def:pc-subfunctor]{subfunctor} of the Picard presheaf taking
+values in abelian groups, i.e.\ a functor
+$(\Sch/k)^{\mathrm{op}}\to\textit{Groups}$.
+\end{enumerate}
+\uses{def:pc-invertible-module,def:pc-picard-group,def:pc-picard-presheaf,def:pc-pic-sigma-functor,def:pc-rational-point,def:pc-base-change,def:pc-subfunctor,def:pc-scheme,lem:pc-pic-presheaf-functorial,lem:pc-tensor-dual-invertible}
+\statusnote{Not formalised.  \texttt{AlgebraicGeometry.picardPresheaf} is
+$\textit{Type}$-valued and \texttt{AlgebraicGeometry.Scheme.Pic} carries no group law, for the
+reason recorded in \Cref{def:pc-picard-group}: Mathlib has no monoidal structure on
+\texttt{SheafOfModules}.}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-picard-group,def:pc-pic-sigma-functor,def:pc-base-change,def:pc-rational-point,lem:pc-pic-presheaf-functorial,lem:pc-tensor-dual-invertible}
+(1) The pullback of an invertible module is invertible and $h^*$ sends
+isomorphic modules to isomorphic modules (Modules, Lemma~17.25.3,
+\stacksproject{0B8L}; this is also the first assertion of
+\Cref{lem:pc-pic-presheaf-functorial}), so $[\cL]\mapsto[h^*\cL]$ is a
+well-defined map $\Pic(Y)\to\Pic(Y')$.  It is a group homomorphism
+because $h^*(\cL\otimes_{\cO_Y}\cM)\cong
+h^*\cL\otimes_{\cO_{Y'}}h^*\cM$ (Modules, Lemma~17.16.4,
+\stacksproject{01CD}) and $h^*\cO_Y\cong\cO_{Y'}$: these say exactly
+that $h^*$ preserves the product and the unit of the group law of
+\Cref{def:pc-picard-group}.
+
+(2) For every $T$ the set $\Pic(X_T)$ is an abelian group:
+\Cref{def:pc-picard-group} applied to the scheme $X_T$, whose group law
+is well defined because tensor products and duals of invertible modules
+are invertible (\Cref{lem:pc-tensor-dual-invertible}).  For $g:T'\to T$
+over $S$ the transition map of the Picard presheaf is $g_X^*$ for
+$g_X:X_{T'}\to X_T$ (\Cref{lem:pc-pic-presheaf-functorial},
+\Cref{def:pc-base-change}), which is a group homomorphism by (1).  The
+two functoriality identities $(g_1g_2)^*=g_2^*g_1^*$ and
+$(\id)^*=\id$ are those of \Cref{lem:pc-pic-presheaf-functorial}, so
+these groups and homomorphisms form a functor into abelian groups whose
+underlying set-valued functor is the one proved there.  The assertion
+for $T\mapsto\Pic(T)$ is the same argument applied to $f=\id_S$.
+
+(3) The section $\sigma_T:T\to X_T$ is a morphism of schemes
+(\Cref{def:pc-rational-point}), so $\sigma_T^*:\Pic(X_T)\to\Pic(T)$ is
+a group homomorphism by (1), and its kernel $\Pic_{X/k,\sigma}(T)$ is a
+subgroup of $\Pic(X_T)$.  For $g:T'\to T$ we have
+$\sigma_{T'}=\sigma_T\times_TT'$ as morphisms $T'\to X_{T'}$
+(\Cref{def:pc-rational-point}, \Cref{def:pc-base-change}), so
+$g^*\circ\sigma_T^*=\sigma_{T'}^*\circ g_X^*$; hence $g_X^*$ carries
+$\operatorname{Ker}\sigma_T^*$ into $\operatorname{Ker}\sigma_{T'}^*$
+and the kernels form a subfunctor, which is the subfunctor
+$\Pic_{X/k,\sigma}$ of \Cref{def:pc-pic-sigma-functor}.  It takes values
+in abelian groups and its transition maps are group homomorphisms, being
+restrictions of the $g_X^*$ of (2).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -2488,7 +2625,7 @@ Let $k$ be a field, $X$ a scheme over $k$ and $\sigma\in X(k)$.  Then
 \Pic_{X/k,\sigma}(k)=\Pic(X)
 \]
 canonically.
-\uses{def:pc-pic-sigma-functor,def:pcb-picard-group,lem:pc-pic-of-field,def:pc-base-change}
+\uses{def:pc-pic-sigma-functor,def:pc-picard-group,lem:pc-pic-of-field,def:pc-base-change}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-pic-of-field}
@@ -2504,10 +2641,10 @@ kernel of $\sigma^*$ is all of $\Pic(X)$.
 % Decomposed.
 \begin{lemma}[Invertible modules are perfect]\label{lem:pc-invertible-perfect}
 Let $X$ be a scheme and $\cM$ an
-\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module}.  Then
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-module}.  Then
 $\cM$, viewed as a complex in degree $0$, is
 \hyperref[def:pc-perfect-complex]{perfect}.
-\uses{def:pc-perfect-complex,def:pcb-invertible-module,def:pc-derived-category}
+\uses{def:pc-perfect-complex,def:pc-invertible-module,def:pc-derived-category}
 \end{lemma}
 \begin{proof}
 An invertible module is locally free of rank one: Zariski-locally
@@ -2521,12 +2658,12 @@ a bounded complex of finite projective modules.
 \begin{lemma}[Cohomology of a module in degree zero]
 \label{lem:pc-degree-zero-properties}
 Let $X$ be a scheme, $M\in D(\cO_X)$ and let $\cN$ be an
-\hyperref[def:pcb-invertible-module]{invertible $\cO_X$-module} with
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-module} with
 $M\cong\cN[0]$.  Then $H^i(M)=0$ for $i\neq0$ and $H^0(M)\cong\cN$.  If
 $M\cong E[-i]$ with $E$ locally free of rank $r$ (cf.\
 \Cref{def:pc-finite-locally-free} and its \Cref{lem:pc-flf-properties}),
 then $H^j(M)=0$ for $j\neq i$ and $H^i(M)\cong E$.
-\uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:pcb-invertible-module}
+\uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
 By definition of the shift, $H^j(\cN[0])$ is the $j$-th cohomology of
@@ -3368,7 +3505,7 @@ coherent $\cO_X$-module.  Then there exists $n_0\geq0$ such that
 H^p(X,\;\cF\otimes_{\cO_X}\cL^{\otimes n})=0
 \qquad\text{for all }n\ge n_0\text{ and all }p>0 .
 \]
-\uses{def:pcb-ample,def:pcb-invertible-module,lem:pc-projection-formula,lem:pc-affine-morphism-hi,lem:pc-cech-computes}
+\uses{def:pcb-ample,def:pc-invertible-module,lem:pc-projection-formula,lem:pc-affine-morphism-hi,lem:pc-cech-computes}
 \end{lemma}
 \begin{proof}
 \uses{def:pcb-ample,lem:pc-affine-morphism-hi,lem:pc-cech-computes,lem:pc-projection-formula}
@@ -3753,7 +3890,7 @@ Let $k$ be a field, let $i:X\hookrightarrow\PP^n_k$ be a closed immersion
 and let $\cL:=i^*\cO_{\PP^n}(1)$.  Then $\cL$ is
 \hyperref[def:pcb-ample]{ample} on $X$; in particular the base change
 $\cL\otimes_k K$ is ample on $X_K$ for every field extension $K/k$.
-\uses{def:pcb-ample,def:pcb-invertible-module,def:pc-morphism-conventions}
+\uses{def:pcb-ample,def:pc-invertible-module,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-closed-imm-base-change}
@@ -4015,9 +4152,9 @@ Rf_*(E)\otimes_{\cO_Y}^{\mathbb L}K\;\longrightarrow\;
 Rf_*(E\otimes_{\cO_X}^{\mathbb L}Lf^*K)
 \]
 is an isomorphism; in particular, for an invertible
-\hyperref[def:pcb-invertible-module]{$\cO_Y$-module} $\cN$,
+\hyperref[def:pc-invertible-module]{$\cO_Y$-module} $\cN$,
 $Rf_*(E)\otimes\cN\cong Rf_*(E\otimes f^*\cN)$.
-\uses{def:pc-derived-category,def:pc-derived-direct-image,def:pcb-invertible-module,def:pc-base-change}
+\uses{def:pc-derived-category,def:pc-derived-direct-image,def:pc-invertible-module,def:pc-base-change}
 \end{lemma}
 \begin{proof}
 The map of the statement (defined in Cohomology, Equation 20.54.2.1) is
@@ -4427,7 +4564,7 @@ as claimed.
 \label{lem:pc-degree-base-change}
 Let $k$ be a field, $X$ a proper scheme over $k$ of dimension $\le1$
 (a proper curve), and let $\cL,\cM$ be invertible
-\hyperref[def:pcb-invertible-module]{$\cO_X$-modules}.
+\hyperref[def:pc-invertible-module]{$\cO_X$-modules}.
 \begin{enumerate}
 \item (Base change) For a field extension $K/k$:
 $\deg_{X_K}(\cL\otimes_kK)=\deg_X(\cL)$.
@@ -4449,7 +4586,7 @@ $\chi(X,\cF_2)=\chi(X,\cF_1)+\chi(X,\cF_3)$
 only through the effective-divisor case (2) and the case of a pullback
 from a point, which is explicit in the base change part (1) and in
 \Cref{lem:pc-degree-agrees-sc}.)
-\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pcb-invertible-module,def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pcb-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,rem:pc-regularity-sc}
@@ -4559,7 +4696,7 @@ invertible module on $X$ such that $\cL_K$ is
 \hyperref[def:pcb-ample]{very ample} on $X_K$ for a field extension
 $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
 \hyperref[def:pcb-ample]{ample} if $\cL_K$ is.
-\uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pcb-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
+\uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pc-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
 \uses{def:pcb-ample,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent}
@@ -5576,7 +5713,7 @@ $\cO_{S_i}$-modules with gluing isomorphisms satisfying the cocycle
 condition) is an equivalence of categories; in particular, if the
 restrictions of an invertible module to the $S_i$ are trivial, then the
 module is trivial.
-\uses{def:pcb-invertible-module}
+\uses{def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
 \emph{Step 1: the affine case for modules.}  Let $A\to B$ be a faithfully
@@ -5882,7 +6019,7 @@ $T\in\Ob((\Sch/S)_{fppf})$, then
 \]
 is an exact sequence for all $T$ (the first map is $f_T^*$, the second the
 canonical map).
-\uses{def:pc-picard-functor,def:pcb-picard-group,def:pcb-invertible-module,def:pc-fppf-site}
+\uses{def:pc-picard-functor,def:pc-picard-group,def:pc-invertible-module,def:pc-fppf-site,lem:pc-pic-group-valued}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-fpqc-descent}
@@ -5986,13 +6123,13 @@ condition.  This proves the lemma.
 Let $S$ be a scheme.  The fppf sheafification of the presheaf
 $T\mapsto\Pic(T)$ on $(\Sch/S)_{fppf}$ is the trivial sheaf; already
 its Zariski sheafification is trivial.
-\uses{def:pcb-picard-group,def:pcb-invertible-module,def:pc-fppf-site}
+\uses{def:pc-picard-group,def:pc-invertible-module,def:pc-fppf-site}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-invertible-module,def:pc-fppf-site}
+\uses{def:pc-invertible-module,def:pc-fppf-site}
 Let $T$ be a scheme over $S$ and let $\cL$ be an invertible
 $\cO_T$-module, representing a class in $\Pic(T)$.  By
-\Cref{def:pcb-invertible-module} an invertible module is Zariski-locally
+\Cref{def:pc-invertible-module} an invertible module is Zariski-locally
 free of rank one, so there is a Zariski open covering
 $\{T_i\to T\}$ with $\cL|_{T_i}\cong\cO_{T_i}$, i.e.\ the restriction
 of the class of $\cL$ to each $T_i$ is the unit of $\Pic(T_i)$.  A
@@ -6021,7 +6158,7 @@ $\sigma_T^*:\Pic(X_T)\to\Pic(T)$ (i.e.\ for every $T$,
 $\Pic(X_T)=\Pic(T)\oplus K(T)$ with
 $K(T)=\operatorname{Ker}\sigma_T^*$, and $\Pic_{X/S}$ is the fppf
 sheafification of the presheaf $K$).
-\uses{def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor}
+\uses{def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor,lem:pc-pic-group-valued}
 \end{theorem}
 \begin{proof}
 \uses{lem:pc-k-sheaf,lem:pc-pic-exact,lem:pc-pic-base-sheafifies}
@@ -6118,10 +6255,10 @@ invertible }\cO_T\text{-module placed in degree }0\}.
 Then $F$ is a subfunctor of $\Pic_{X/k,\sigma}$ and the inclusion
 $F\subseteq\Pic_{X/k,\sigma}$ is
 \hyperref[def:pc-subfunctor]{representable by open immersions}.
-\uses{def:pc-f-subfunctor,def:pc-subfunctor,def:pc-pic-sigma-functor,def:pc-derived-category,def:pcb-invertible-module}
+\uses{def:pc-f-subfunctor,def:pc-subfunctor,def:pc-pic-sigma-functor,def:pc-derived-category,def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-subfunctor,def:pcb-invertible-module,lem:pc-flat-rf-open,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat}
+\uses{def:pc-subfunctor,def:pc-invertible-module,lem:pc-flat-rf-open,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat}
 $F$ is a subfunctor: if $\cL\in F(T)$ and $u:T'\to T$ is a morphism, then
 $\cL_{T'}=u_X^*\cL$ satisfies
 $Rf_{T',*}\cL_{T'}\cong u^*(Rf_{T,*}\cL)$ (base change, \Cref{lem:pc-rf-perfect-base-change};
@@ -6139,7 +6276,7 @@ such that a morphism $u:T'\to T$ factors through $U$ if and only if
 $Rf_{T',*}\cL_{T'}$ is isomorphic to a finite locally free
 $\cO_{T'}$-module of rank $1$ placed in degree $0$, i.e.\ if and only if
 $u^*\cL\in F(T')$ (a finite locally free module of rank $1$ is an
-invertible module, \Cref{def:pcb-invertible-module}).  Taking $U=U_\xi$
+invertible module, \Cref{def:pc-invertible-module}).  Taking $U=U_\xi$
 for $\xi=\cL$ gives exactly the property required.
 \end{proof}
 
@@ -6163,7 +6300,7 @@ the tensor-Hom adjunction, $\cN$ invertible).  Then the
 \hyperref[def:pc-zero-scheme]{zero scheme} $D:=Z(s)$ is a
 \hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
 divisor} on $X_T/T$ which is finite locally free of degree $g$ over $T$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pcb-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,prop:pc-XK-integral}
@@ -6314,7 +6451,7 @@ let $X$ be a
 $F$ be the subfunctor of
 \Cref{lem:pc-f-open-subfunctor}.  Then $F$ is representable by an open
 subscheme of $\underline{\Hilb}^g_{X/k}$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-hilb-functor,def:pcb-effective-cartier-divisor,def:pc-relative-effective-cartier,def:pcb-invertible-module,def:pc-derived-category,def:pc-representable-functor,def:pc-subfunctor,def:pc-finite-locally-free,lem:pc-hilb-representable,def:pc-pic-sigma-functor}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-hilb-functor,def:pcb-effective-cartier-divisor,def:pc-relative-effective-cartier,def:pc-invertible-module,def:pc-derived-category,def:pc-representable-functor,def:pc-subfunctor,def:pc-finite-locally-free,lem:pc-hilb-representable,def:pc-pic-sigma-functor}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-hilb-functor,def:pc-pic-sigma-functor,def:pc-representable-functor,def:pc-subfunctor,lem:pc-cartier-criterion,lem:pc-f-open-subfunctor,lem:pc-flat-rf-open,lem:pc-projection-formula,lem:pc-recd-pullback,lem:pc-rf-perfect-base-change,lem:pc-universal-adjoint-section,lem:pc-universal-divisor,lem:pc-zero-scheme-recd,prop:pc-XK-integral,thm:pc-hilb-curves}
@@ -6444,10 +6581,10 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 \qquad\text{and}\qquad
 \dim_KH^1\bigl(X_K,\;\cL\otimes\cL_0|_{X_K}\bigr)=0 .
 \]
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pcb-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pcb-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pcb-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-curve,def:pcb-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
 \emph{Step 1: an ample polarisation.}  The smooth projective curve $X$
 carries a closed immersion $i:X\to\PP^n_k$; by \Cref{lem:pc-very-ample-ample}
 the module $\cL_0^{\bullet}:=i^*\cO_{\PP^n}(1)$ is ample on $X$ and, by
@@ -6534,7 +6671,7 @@ we reach a module
 \]
 with $\cL_0:=\cL_0^{\bullet\otimes n}\otimes\cI_{x_1}\otimes\cdots\otimes
 \cI_{x_{t-1}}$, an invertible sheaf on $X$ (products of invertible
-modules, \Cref{def:pcb-invertible-module}), and with
+modules, \Cref{def:pc-invertible-module}), and with
 $\dim_KH^0=1$, $H^1=0$.  This proves the lemma.
 \end{proof}
 
@@ -6615,10 +6752,10 @@ $\underline{\Pic}_{X/k}$ is a group scheme over $k$.
 \statusnote{The Lean statement is formalised; its proof is \texttt{sorry}.  It asserts
 representability of the \emph{set}-valued functor by a scheme that carries a group structure;
 that this group structure is the Picard one is not asserted, since
-\Cref{def:pcb-picard-group} has no group law in Lean.}
+\Cref{def:pc-picard-group} has no group law in Lean.}
 \end{theorem}
 \begin{proof}
-\uses{cor:pc-sigma-pic-iso,def:pc-genus,def:pc-pic-sigma-functor,def:pc-rational-point,lem:pc-f-open-subfunctor,lem:pc-k-sheaf,lem:pc-rational-hyp,lem:pc-rational-points-dense,lem:pc-twist,lem:pc-vanishing-above-dim,prop:pc-XK-integral,thm:pc-criterion,thm:pc-f-representable,thm:pc-pic-split}
+\uses{cor:pc-sigma-pic-iso,def:pc-genus,def:pc-pic-sigma-functor,def:pc-rational-point,lem:pc-f-open-subfunctor,lem:pc-k-sheaf,lem:pc-pic-group-valued,lem:pc-rational-hyp,lem:pc-rational-points-dense,lem:pc-twist,lem:pc-vanishing-above-dim,prop:pc-XK-integral,thm:pc-criterion,thm:pc-f-representable,thm:pc-pic-split}
 Since $k$ is separably closed and $X$ is smooth over $k$ (hence nonempty:
 $X$ is a variety), there exists a
 \hyperref[def:pc-rational-point]{$k$-rational point} $\sigma$ of $X$ by
@@ -6632,7 +6769,11 @@ follows from the conclusion of \Cref{thm:pc-criterion}).
 
 We check the conditions (1), (2)(a), (2)(b), (2)(c) of
 \Cref{thm:pc-criterion} (with $G=\Pic_{X/k,\sigma}$ and $F$ the
-subfunctor of \Cref{lem:pc-f-open-subfunctor}):
+subfunctor of \Cref{lem:pc-f-open-subfunctor}).  The standing hypothesis
+of \Cref{thm:pc-criterion} that $G$ is a functor
+$(\Sch/k)^{\mathrm{op}}\to\textit{Groups}$ holds by
+\Cref{lem:pc-pic-group-valued}(3), and the products $g'g$ used below are
+taken in these groups.
 \begin{enumerate}
 \item[(1)] The functor $\Pic_{X/k,\sigma}$ satisfies the sheaf condition
 for the fppf topology: by \Cref{lem:pc-rational-hyp} the hypotheses of
@@ -6712,6 +6853,7 @@ The theorem produces a scheme $\underline{\Pic}_{X/k}$ representing
 $\Pic_{X/k}$ together with the group structure given by the group law of
 the sheaf $\Pic_{X/k}$ — the multiplication and inversion morphisms are
 induced by the corresponding natural transformations of the representable
-functor (the group-valued functor structure of $\Pic_{X/k}$ is part of
-its definition via the groups $\Pic(X_T)$).
+functor (the group-valued functor structure of $\Pic_{X/k}$ comes
+from that of the Picard presheaf, \Cref{lem:pc-pic-group-valued}, and is
+inherited by its fppf sheafification).
 \end{remark}
