@@ -1071,7 +1071,7 @@ set_option maxHeartbeats 1000000 in
 -- The chart rings are large; unification exceeds the default heartbeat limit.
 /-- **The chart-local coordinate identity for the graph of the extension.** On the overlap of
 the `S`-chart with the `Ri`-chart, the `j`-th coordinate of the graph is the fraction
-`si j / vS`. -/
+`wS / vS`, which is the coordinate `si j` of the `Ri`-chart. -/
 lemma AffineSpace.mul_appTop_coord_eq_of_chartOverlap {σ : Type u} {X Bl : Scheme.{u}}
     (π : Bl ⟶ X) {W : Bl.Opens} (g : W.toScheme ⟶ 𝔸(σ; X))
     {S : CommRingCat.{u}} (chart : Spec S ⟶ Bl)
