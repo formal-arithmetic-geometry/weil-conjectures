@@ -2392,7 +2392,7 @@ the generality of \Cref{def:pc-ample} just below (Properties of
 Schemes, Definition~28.27.1,
 \stacksproject{01PS}).  The ``some power
 is very ample'' formulation of \Cref{def:pcb-ample} is the case of a
-scheme of finite type over a field: that the two agree there is
+scheme proper over a field: that the two agree there is
 \Cref{lem:pc-ample-iff-power-very-ample} (Morphisms of Schemes,
 Lemma~29.40.5, \stacksproject{01VU}).
 \uses{def:pcb-ample,def:pc-ample}
@@ -2409,8 +2409,8 @@ the open locus where $s$ does not vanish.  We say $\cL$ is
 \emph{ample} if $X$ is quasi-compact and for every $x\in X$ there
 exist $n\ge1$ and $s\in\Gamma(X,\cL^{\otimes n})$ with $x\in X_s$ and
 $X_s$ affine (Properties of Schemes, Definition~28.27.1,
-\stacksproject{01PS}).  For $X$ of
-finite type over a field this is the notion of \Cref{def:pcb-ample},
+\stacksproject{01PS}).  For $X$ proper
+over a field this is the notion of \Cref{def:pcb-ample},
 by \Cref{lem:pc-ample-iff-power-very-ample}.
 \uses{def:pc-scheme,def:pc-invertible-module}
 \end{definition}
@@ -4383,7 +4383,7 @@ Proposition~28.27.13 (\stacksproject{01Q3}), the implication
 (4) $\Rightarrow$ (1) among the equivalent conditions listed there.
 Ampleness in its condition (1) is that of \Cref{def:pc-ample}, the
 definition to which that proposition refers; that it agrees, on a
-scheme of finite type over a field, with the
+scheme proper over a field, with the
 ``some power is very ample'' formulation of \Cref{def:pcb-ample} is
 \Cref{lem:pc-ample-iff-power-very-ample} and is not part of this
 proposition.  It is not decomposed here.
@@ -4393,7 +4393,7 @@ proposition.  It is not decomposed here.
 % Cited.
 \begin{lemma}[Ample if and only if some power is very ample]
 \label{lem:pc-ample-iff-power-very-ample}
-Let $k$ be a field, let $X$ be a scheme of finite type over $k$ and let
+Let $k$ be a field, let $X$ be a scheme proper over $k$ and let
 $\cL$ be an \hyperref[def:pc-invertible-module]{invertible
 $\cO_X$-module}.  Then the following are equivalent:
 \begin{enumerate}
@@ -4402,13 +4402,15 @@ $\cO_X$-module}.  Then the following are equivalent:
 for some $d\ge1$;
 \item[(3)] $\cL^{\otimes d}$ is very ample for all $d\gg1$.
 \end{enumerate}
-Both the finite type hypothesis and the passage to a power are
+Both the properness hypothesis and the passage to a power are
 needed.  Morphisms of Schemes, Example~29.39.4
 (\stacksproject{01VO}) exhibits, on a
-scheme over a field which is not of finite type, an ample invertible
+scheme over a field which is not of finite type, hence not proper over
+it, an ample invertible
 module no power of which is very ample; and Morphisms of Schemes,
 Example~29.39.5 (\stacksproject{01VP})
-exhibits, for every $d\ge1$, a projective scheme over a field carrying
+exhibits, for every $d\ge1$, a projective, hence proper, scheme over a
+field carrying
 an ample invertible module whose $n$-th power is very ample only for
 $n\ge d$, so that the exponent in (2) cannot in general be taken to be
 $1$.
@@ -4421,13 +4423,33 @@ the equivalence relatively --- for $f:X\to S$ with $S$ quasi-compact
 and $f$ of finite type, $\cL$ is $f$-ample if and only if
 $\cL^{\otimes d}$ is $f$-very ample for some $d\ge1$, if and only if
 for all $d\gg1$ --- applied to the structure morphism
-$f:X\to\Spec(k)$, whose base is quasi-compact.  Over an affine base the
-relative notions $f$-ample (Morphisms of Schemes, Definition~29.38.1,
-\stacksproject{01VH}) and $f$-very
-ample (Morphisms of Schemes, Definition~29.39.1,
+$f:X\to\Spec(k)$, whose base is quasi-compact and which is of finite
+type because $X$ is proper over $k$.  Over the affine base $\Spec(k)$
+the relative notion $f$-ample (Morphisms of Schemes,
+Definition~29.38.1, \stacksproject{01VH}) is
+the absolute notion of \Cref{def:pc-ample} used in~(1).  For very
+ampleness the two notions are not the same by inspection: the relative
+one (Morphisms of Schemes, Definition~29.39.1,
 \stacksproject{01VM}, the reference
-\Cref{def:pcb-ample} gives for very ampleness) are the absolute ones
-used above.  It is not decomposed here.
+\Cref{def:pcb-ample} gives for very ampleness) asks for \emph{some}
+immersion into $\mathbf P(\mathcal E)$ for \emph{some} quasi-coherent
+$\mathcal E$ on the base, whereas \Cref{def:pcb-ample} asks for the
+\emph{complete} linear system to give a \emph{closed} immersion into
+$\PP^N_k$.  They are matched by Morphisms of Schemes, Lemma~29.39.7
+(\stacksproject{01VR}), whose
+condition~(4) says that for $f$ quasi-compact, $\cL$ is $f$-very ample
+if and only if $f$ is quasi-separated, the canonical map
+$f^*f_*\cL\to\cL$ is surjective and the associated morphism
+$r_{\cL,\psi}:X\to\mathbf P(f_*\cL)$ is an immersion.  Over
+$S=\Spec(k)$ one has $f_*\cL=H^0(X,\cL)$, finite-dimensional because
+$X$ is proper over $k$ (\Cref{lem:pc-coherent-hi}), so $r_{\cL,\psi}$
+is exactly the morphism $X\to\PP^N_k$, $N+1=\dim_kH^0(X,\cL)$, given
+by the complete linear system $|\cL|$; and since $X$ is proper over
+$k$ while $\PP^N_k$ is
+separated over $k$, that immersion has closed image and is therefore a
+closed immersion.  So $f$-very ampleness over $\Spec(k)$ is very
+ampleness in the sense of \Cref{def:pcb-ample}.  It is not decomposed
+here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -4450,7 +4472,7 @@ affine scheme is affine, \Cref{lem:pc-closed-immersion-affine}),
 and $\bigcup_jX_{s_j}=X$ as the $D_+(x_j)$ cover $\PP^n_k$ and $i$ is
 injective.  Thus the affine open sets $X_s$ form a basis of the topology,
 so $\cL$ is ample in the sense of \Cref{def:pc-ample} by
-\Cref{lem:pc-ample-basis-criterion}; since $X$ is of finite type over
+\Cref{lem:pc-ample-basis-criterion}; since $X$ is proper over
 $k$, being a closed subscheme of $\PP^n_k$, some power
 $\cL^{\otimes m}$ is therefore very ample
 (\Cref{lem:pc-ample-iff-power-very-ample}), which is ampleness in the
@@ -5462,7 +5484,7 @@ for open immersions (Lemma~35.23.18, \stacksproject{02L3}).  It is not decompose
 % Decomposed.
 \begin{lemma}[Very ampleness descends along field extensions]
 \label{lem:pc-very-ample-descends}
-Let $k$ be a field, $X$ a scheme of finite type over $k$ and $\cL$ an
+Let $k$ be a field, $X$ a scheme proper over $k$ and $\cL$ an
 invertible module on $X$ such that $\cL_K$ is
 \hyperref[def:pcb-ample]{very ample} on $X_K$ for a field extension
 $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
@@ -5493,8 +5515,9 @@ $t_0,\dots,t_N$, so the morphism
 $\psi:X\to\mathbf P(V)$ (from the $k$-subspace $V$ of $H^0(X,\cL)$)
 has base change $\psi_K:X_K\to\mathbf P(V_K)$ such that $\psi_K=i$
 (the same sections): $\psi_K$ is an immersion.  Now $\psi$ is
-quasi-compact -- its source $X$ is of finite type over $k$, hence
-quasi-compact, and its target $\mathbf P(V)$ is Noetherian, hence
+quasi-compact -- its source $X$ is of finite type over $k$, being
+proper over $k$, hence quasi-compact, and its target $\mathbf P(V)$ is
+Noetherian, hence
 quasi-separated, so any morphism $X\to\mathbf P(V)$ is quasi-compact
 -- and quasi-compactness is stable under base change, so $\psi_K$ is a
 quasi-compact immersion.  Since $\Spec(K)\to\Spec(k)$ is a faithfully
@@ -5503,10 +5526,27 @@ covering, and $\psi_K$ is the base change of $\psi$ along it; being a
 quasi-compact immersion is fpqc local on the base
 (\Cref{lem:pc-qc-immersion-fpqc-local}), so $\psi$ is a quasi-compact
 immersion, in particular an immersion).
-Hence $\cL$ is very ample over $k$ ($\psi^*\cO_{\mathbf P(V)}(1)=\cL$
-by construction), and $X$ proper
-($\mathbf P(V)$ and the immersion give the image-closedness over $k$),
-and ampleness: a very ample module is ample (the
+By construction $\psi^*\cO_{\mathbf P(V)}(1)=\cL$, so $\cL$ is very
+ample relative to the structure morphism $f:X\to\Spec(k)$: this is
+condition~(1) of Morphisms of Schemes, Lemma~29.39.7
+(\stacksproject{01VR}), an immersion
+into $\mathbf P(\mathcal E)$ for the quasi-coherent module
+$\mathcal E=V$ on $\Spec(k)$.  That is not yet very ampleness in the
+sense of \Cref{def:pcb-ample}, which asks for the \emph{complete}
+linear system $|\cL|$ and for a \emph{closed} immersion; two steps
+supply the difference.  First, $f$ is quasi-compact, so that lemma
+applies, and its condition~(4) gives that the morphism
+$r_{\cL}:X\to\mathbf P(f_*\cL)$ associated with the canonical
+surjection $f^*f_*\cL\to\cL$ is again an immersion --- which is
+exactly the passage from the subsystem $V$ to the complete system,
+since $f_*\cL=H^0(X,\cL)$, finite-dimensional because $X$ is proper
+over $k$ (\Cref{lem:pc-coherent-hi}), so that $r_{\cL}$ is the
+morphism $X\to\PP^M_k$, $M+1=\dim_kH^0(X,\cL)$, given by $|\cL|$.
+Second, $X$ is proper over $k$ while $\PP^M_k$ is separated over $k$,
+so that immersion has closed image and is therefore a closed
+immersion.  Hence $\cL$ is very ample over $k$ in the sense of
+\Cref{def:pcb-ample}; and it is ample there too, a very ample module
+being ample (the
 $X_s$-affine basis property, as in
 \Cref{def:pcb-ample} and \Cref{lem:pc-very-ample-ample}).
 \end{proof}
