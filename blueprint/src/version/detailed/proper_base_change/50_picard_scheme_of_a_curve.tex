@@ -4920,6 +4920,37 @@ $\dim X=\max_i\dim A_i=1$); the $X_K$ are covered by the
 $\Spec(A_i\otimes_kK)$ of dimension $\dim A_i$, so $\dim X_K=1$.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Universal closedness passes to the target along a surjection]
+\label{lem:pc-image-universally-closed}
+Let $S$ be a scheme and let $f:X\to Y$ be a morphism of schemes over $S$.  If $X$ is
+universally closed over $S$ and $f$ is surjective, then $Y$ is universally closed over $S$.
+In particular, if in addition $Y$ is separated and locally of finite type over $S$, then $Y$
+is proper over $S$.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.42 (Proper morphisms),
+Lemma~29.42.9 (\stacksproject{03GN}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Products with a geometrically irreducible factor]
+\label{lem:pc-geom-irreducible-product}
+Let $k$ be a field and let $X$, $Y$ be schemes over $k$.  If $X$ is
+\hyperref[def:pc-geometrically-irreducible]{geometrically irreducible} over $k$, then the
+projection $p:X\times_kY\to Y$ induces a bijection between irreducible components.  In
+particular, if moreover $Y$ is irreducible, then $X\times_kY$ is irreducible.
+\uses{def:pc-scheme,def:pc-base-change,def:pc-geometrically-irreducible}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Section~33.8 (Geometrically irreducible schemes),
+Lemma~33.8.4 (\stacksproject{038F}).  The last assertion is the case in which $Y$ has exactly
+one irreducible component.  It is not decomposed here.
+\end{proof}
+
 
 % ---------------------------------------------------------------------------
 \subsection{Derived categories}
@@ -6183,7 +6214,7 @@ property for the fppf topology.
 \uses{def:pc-hilb-functor,def:pc-fppf-site}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-fppf-site,def:pc-hilb-functor}
+\uses{def:pc-finite-locally-free,def:pc-fppf-site,def:pc-hilb-functor,lem:pc-effective-descent-closed-immersions,lem:pc-flf-fpqc-local}
 Let $\{T_i\to T\}_{i\in I}$ be an fppf covering of schemes over $S$
 (\Cref{def:pc-fppf-site}; an fppf covering is flat, locally of finite
 presentation and surjective, hence faithfully flat: it is an fpqc
@@ -6198,7 +6229,8 @@ closed subschemes agree).  Note that
 $\{X_{T_i}\to X_T\}_{i\in I}$ is an fpqc covering of $X_T$ (base
 change of an fpqc covering; the standard statement) and that
 $X_{T_i\times_TT_{i'}}=X_{T_i}\times_{X_T}X_{T_{i'}}$.  By effective
-descent for closed immersions (Descent, Lemma~35.37.2,
+descent for closed immersions
+(\Cref{lem:pc-effective-descent-closed-immersions}; Descent, Lemma~35.37.2,
 \stacksproject{03I0}; the classical
 statement: closed subschemes form an fpqc sheaf) there is a closed
 immersion $\varphi:Z\hookrightarrow X_T$ whose base change along
@@ -6207,7 +6239,8 @@ given compatibility of the $Z_i$'s over the double intersections.
 The morphism $Z\to T$ then has base change $Z_i\to T_i$, which is
 finite locally free of degree $d$ (\Cref{def:pc-finite-locally-free});
 the property of being finite locally free of a given degree descends
-along fpqc coverings (Descent, Lemma~35.23.32,
+along fpqc coverings (\Cref{lem:pc-flf-fpqc-local};
+Descent, Lemma~35.23.32,
 \stacksproject{02VO}: the
 classical: finite flat of finite presentation is of fpqc-local nature
 on the target, and the rank is locally constant and can be detected
@@ -6619,7 +6652,7 @@ which is finite locally free of degree $\binom{d_1+d_2}{d_1}$.
 \uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:pc-effective-cartier-divisor,def:pc-degree-line-bundle}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine}
+\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-geom-irreducible-product,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-image-universally-closed,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine}
 \emph{Step 0: the affine-open hypothesis.}  We verify the hypothesis of
 \Cref{lem:pc-hilb-representable} (for $S=\Spec(k)$, $X/k$): let
 $x_1,\dots,x_d$ be a finite set of points of $X$ (of the single fibre
@@ -6724,8 +6757,8 @@ condition: if $x\in H_d\setminus I$ then the image point
 $x_{\bar k}$ lies in $H_d\otimes\bar k\setminus I\otimes\bar k$,
 contradiction).  So $\pi_d$ is surjective.
   Then $H_d$ is proper: $X^d$ is proper (finite products of proper schemes over $k$ are proper, the standard statement; and $X\to\Spec k$ is proper by hypothesis), $\pi_d$ is finite hence proper, so
-  $H_d=\pi_d(X^d)$ is the image of a proper scheme under a proper morphism, hence proper (Morphisms, Lemma~29.42.9,
-\stacksproject{03GN}: the image of a proper morphism is proper).  Finally $H_d$ is irreducible: $X^d$ is irreducible (geometrically irreducible over $k$: products of geometrically irreducible schemes over $k$ are irreducible: Varieties, Lemma~33.8.4,
+  $H_d=\pi_d(X^d)$ is universally closed over $k$: this is \Cref{lem:pc-image-universally-closed} applied to the surjection $\pi_d:X^d\to H_d$ over $S=\Spec(k)$, whose source is universally closed over $k$; and $H_d$ is separated (just shown) and locally of finite type over $k$ (it is smooth over $k$), so the same lemma gives that $H_d$ is proper over $k$ (Morphisms, Lemma~29.42.9,
+\stacksproject{03GN}).  Finally $H_d$ is irreducible: $X^d$ is irreducible (by induction on $d$: $X$ is geometrically irreducible over $k$ by hypothesis, and if $X^{d-1}$ is irreducible then the projection $X\times_kX^{d-1}\to X^{d-1}$ puts the irreducible components of $X^d$ in bijection with those of $X^{d-1}$, so $X^d$ is irreducible: \Cref{lem:pc-geom-irreducible-product}, Varieties, Lemma~33.8.4,
 \stacksproject{038F}), and the image of an irreducible scheme under a continuous surjective map is irreducible; together with smoothness (hence reducedness: smooth over the field $k$ is reduced, the standard statement) $H_d$ is an integral separated scheme of finite type over $k$ of dimension $d$, i.e.\ a variety over $k$ (\Cref{def:pc-curve}: a variety is an integral separated scheme of finite type over $k$).  This proves (1).
 
 \emph{Step 2: the points of $H_d$; part (2).}  For a field extension
@@ -6853,6 +6886,41 @@ $\cO(D_{\mathrm{univ}})$ is $\cO_X(D)$.
 
 % ---------------------------------------------------------------------------
 \subsection{Descent and representability criteria}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Effective descent for closed immersions]
+\label{lem:pc-effective-descent-closed-immersions}
+Let $S$ be a scheme and let $\{X_i\to S\}_{i\in I}$ be an fpqc covering.  Let
+$(V_i/X_i,\varphi_{ij})$ be a descent datum relative to this covering.  If every morphism
+$V_i\to X_i$ is a closed immersion, then the descent datum is effective: there are a scheme
+$V$ over $S$ and isomorphisms $V\times_SX_i\cong V_i$ carrying the canonical descent datum of
+$V$ to $(V_i,\varphi_{ij})$.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Descent, Section~35.37 (Descending affine morphisms),
+Lemma~35.37.2 (\stacksproject{03I0}); there it is deduced from the corresponding statement for
+affine morphisms, Lemma~35.37.1, since a closed immersion is affine.  It is not decomposed
+here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Finite locally free of a given degree is fpqc local on the base]
+\label{lem:pc-flf-fpqc-local}
+The property $\mathcal P(f)=$ ``$f$ is finite locally free'' is fpqc local on the base, and so
+is, for every $d\geq0$, the property $\mathcal P_d(f)=$ ``$f$ is
+\hyperref[def:pc-finite-locally-free]{finite locally free of degree $d$}''; that is, for a
+morphism of schemes $f:X\to Y$ and an fpqc covering $\{Y_i\to Y\}_{i\in I}$, the morphism $f$
+has the property in question if and only if every base change $X\times_YY_i\to Y_i$ has it.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,def:pc-finite-locally-free}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Descent, Section~35.23 (Properties of morphisms local in the
+fpqc topology on the target), Lemma~35.23.32 (\stacksproject{02VO}).  It is not decomposed
+here.
+\end{proof}
 
 % ---------------------------------------------------------------------------
 % Cited.
