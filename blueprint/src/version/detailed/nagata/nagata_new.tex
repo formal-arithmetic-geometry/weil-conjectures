@@ -3969,6 +3969,11 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-power-torsion}
   \lean{Submodule.powTorsion}
   \leanok
+  \statusnote{No separate Lean declaration: \texttt{powTorsion} is defined as
+    the $S$-torsion submodule for $S$ the monoid of powers of $a$, so containing
+    zero and being closed under addition and scalar multiplication is part of the
+    definition \texttt{Submodule.powTorsion}, which the \texttt{\textbackslash lean}
+    field above names.}
 
   The subset $\Gamma_{(a)}(M)$ contains zero and is closed under addition and
   scalar multiplication.
@@ -4469,6 +4474,13 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-power-torsion-kernel-localization}
   \lean{Submodule.localized'_powTorsion}
   \leanok
+  \statusnote{No separate Lean declaration for the quotient half: the displayed
+    equality of the image of $\Gamma_{(a)}(N)$ with $\Gamma_{(a/1)}(N_s)$ is
+    \texttt{Submodule.localized'\_powTorsion}, which the
+    \texttt{\textbackslash lean} field above names and which
+    \Cref{lemma:nagata-power-torsion-localization} already states; the induced
+    isomorphism of quotients and its compatibility with successive localization
+    have no Lean declaration of their own.}
 
   Let $R$ be a ring, $N$ an $R$-module, and $a,s\in R$.  Under the canonical
   localization map one has
@@ -4650,6 +4662,11 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-strict-transform-closure-characterization}
   \lean{AlgebraicGeometry.strictTransform}
   \leanok
+  \statusnote{No separate Lean declaration: \texttt{AlgebraicGeometry.strictTransform},
+    which the \texttt{\textbackslash lean} field above names, is defined as the
+    scheme-theoretic image of the open locus over $U$, so the characterization as
+    the smallest closed subscheme through which the open part factors is the
+    universal property of that image and is not stated as a Lean lemma of its own.}
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
   ideal on $X$, put $X'=\operatorname{Bl}_{\mathcal I}(X)$, and let
@@ -4730,7 +4747,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Strict transform on the preserved open]
   \label{lemma:nagata-strict-transform-over-complement}
-  \lean{AlgebraicGeometry.isPullback_strictTransformOpen}
+  \lean{AlgebraicGeometry.isPullback_strictTransform_over}
   \leanok
 
   Let $f\colon Y\to X$, let $\mathcal I$ be a finite-type quasi-coherent
@@ -4945,6 +4962,11 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-finite-type-ideal-extension-exists}
   \lean{AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq}
   \leanok
+  \statusnote{No separate Lean declaration: there is no Lean definition of
+    $\operatorname{Ext}_{X,W}(\mathcal J)$.  The extended ideal is obtained at each
+    use site by destructuring the existence statement
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_finiteType\_comap\_eq},
+    which the \texttt{\textbackslash lean} field above names.}
 
   Let $X$ be quasi-compact and quasi-separated, let $W\subseteq X$ be a
   quasi-compact open, and let
@@ -5057,6 +5079,13 @@ correction explicit before it is sheafified and glued.
     lemma:nagata-glue-finite-type-ideals}
   \lean{AlgebraicGeometry.IsAdmissible.exists_extend}
   \leanok
+  \statusnote{No separate Lean declaration: the extended centre is constructed
+    inside the proof of
+    \texttt{AlgebraicGeometry.IsAdmissible.exists\_extend}, which the
+    \texttt{\textbackslash lean} field above names --- and by a different route,
+    as the product of a finite-type extension of $\mathcal J$ with a finite-type
+    ideal cutting out the boundary of $W$, rather than by gluing with the unit
+    ideal on $U$.}
 
   Let $X$ be quasi-compact and quasi-separated and let $U,W\subseteq X$ be
   quasi-compact opens.  Write a given $(U\cap W)$-admissible blow-up of $W$
@@ -5756,6 +5785,12 @@ correction explicit before it is sheafified and glued.
     def:nagata-flattening-ideal}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap}
   \leanok
+  \statusnote{No separate Lean declaration: $X^{\mathrm{el}}(q,U)$ and
+    $Z^{\mathrm{el}}(q,U)$ are constructed inside the proof of
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isOpenImmersion\_strictTransformMap},
+    which the \texttt{\textbackslash lean} field above names.  That statement is
+    existential, so neither the blow-up nor the selected flattening ideal is a
+    named Lean object.}
 
   Let $q\colon Z\to X$ be separated and of finite type, let $X$ be qcqs, and
   let $U\subseteq X$ be quasi-compact.  Fix an isomorphism
@@ -5851,6 +5886,11 @@ correction explicit before it is sheafified and glued.
   \uses{lemma:nagata-qc-open-complement-ideal-exists}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
   \leanok
+  \statusnote{No separate Lean declaration: there is no Lean definition of
+    $\mathcal I_Y(W)$.  The witness is destructured at each use site from the
+    existence statement
+    \texttt{AlgebraicGeometry.Scheme.exists\_finiteType\_ideal\_coe\_support\_eq\_compl},
+    which the \texttt{\textbackslash lean} field above names.}
 
   Let $W\subseteq Y$ be a quasi-compact open in a qcqs scheme.  Choose one
   witness supplied by
@@ -5865,6 +5905,11 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-qc-open-complement-ideal}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
   \leanok
+  \statusnote{No separate Lean declaration: the asserted properties of
+    $\mathcal I_Y(W)$ are exactly the body of the existence statement
+    \texttt{AlgebraicGeometry.Scheme.exists\_finiteType\_ideal\_coe\_support\_eq\_compl},
+    which the \texttt{\textbackslash lean} field above names; there is no Lean
+    declaration about a separately selected ideal.}
 
   The ideal $\mathcal I_Y(W)$ is finite type and quasi-coherent, and
   \[
@@ -6024,6 +6069,13 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-qc-open-complement-ideal}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
   \leanok
+  \statusnote{No separate Lean declaration: $\mathcal J_U(T)$ is the instance
+    $W=U\setminus T$ of
+    \texttt{AlgebraicGeometry.Scheme.exists\_finiteType\_ideal\_coe\_support\_eq\_compl},
+    which the \texttt{\textbackslash lean} field above names, and is taken in that
+    form inside the proof of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_finiteType\_preimage\_coe\_support\_eq}.
+    Neither the ideal nor its selection is a named Lean object.}
 
   Let $T\subseteq U$ be constructible and closed, with $U$ qcqs.  Its
   complement $W=U\setminus T$ is a quasi-compact open.  Define
@@ -6038,6 +6090,14 @@ correction explicit before it is sheafified and glued.
   \uses{def:nagata-constructible-closed-support}
   \lean{AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl}
   \leanok
+  \statusnote{No separate Lean declaration: the statement is the instance
+    $W=U\setminus T$ of
+    \texttt{AlgebraicGeometry.Scheme.exists\_finiteType\_ideal\_coe\_support\_eq\_compl},
+    which the \texttt{\textbackslash lean} field above names, and is used in that
+    form inside the proof of
+    \texttt{AlgebraicGeometry.Scheme.IdealSheafData.exists\_finiteType\_preimage\_coe\_support\_eq},
+    the extension of a constructible closed subset of $U$ to a finite-type centre
+    on $X$.}
 
   The ideal $\mathcal J_U(T)$ is finite type and quasi-coherent, and its
   vanishing set is exactly $T$.
@@ -6058,6 +6118,11 @@ correction explicit before it is sheafified and glued.
     def:nagata-separate-closed-subschemes}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures}
   \leanok
+  \statusnote{No separate Lean declaration: the ideals $\mathcal J_i$ and
+    $\mathcal I_i$, the closed subschemes $Z_i$ and the blow-up
+    $\mathsf{CSepBl}_U(T_1,T_2)$ are all constructed inside the proof of
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_disjoint\_closures}, which
+    the \texttt{\textbackslash lean} field above names.}
 
   Let $X$ be qcqs, let $U\subseteq X$ be a quasi-compact open, and let
   $T_1,T_2\subseteq U$ be disjoint constructible subsets closed in $U$.
@@ -6210,6 +6275,12 @@ correction explicit before it is sheafified and glued.
     def:nagata-maximal-isomorphism-open}
   \lean{AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure}
   \leanok
+  \statusnote{No separate Lean declaration: the whole construction --- the
+    constructible separation, the separation blow-up, the elimination of
+    indeterminacy over $X_0$ and the extension back to $X_1$ --- is carried out
+    inside the proof of
+    \texttt{AlgebraicGeometry.exists\_admissibleBlowup\_isIso\_strictTransformMap\_near\_closure},
+    which the \texttt{\textbackslash lean} field above names.}
 
   Let $X$ be qcqs, let $q\colon Z\to X$ be proper, let $V\subseteq X$ be a
   quasi-compact open, set
@@ -6599,6 +6670,13 @@ correction explicit before it is sheafified and glued.
     def:nagata-elimination-indeterminacy}
   \lean{AlgebraicGeometry.Compactification.ProperExtension}
   \leanok
+  \statusnote{No separate Lean declaration for the construction:
+    \texttt{AlgebraicGeometry.Compactification.ProperExtension}, which the
+    \texttt{\textbackslash lean} field above names, is the structure recording the
+    output data $V^{\mathrm{gr}}$, $\psi^{\mathrm{gr}}$ and their properties; the
+    construction of $Z_V$, $Y^{\mathrm{gr}}$ and $V^{\mathrm{gr}}$ is carried out
+    inside the proof of
+    \texttt{AlgebraicGeometry.Compactification.nonempty\_properExtension}.}
 
   Let $U\to S$ be separated and of finite type, let $V\subseteq U$ be
   quasi-compact, and fix a compactification
