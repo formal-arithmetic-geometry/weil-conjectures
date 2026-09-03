@@ -1102,6 +1102,69 @@ Algebra, Section~10.131,
 \uses{def:pc-scheme,def:pc-base-change,def:pc-morphism-conventions}
 \end{definition}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Smooth algebras are Zariski-locally standard smooth]
+\label{lem:pc-standard-smooth-form}
+Let $f:X\to S$ be a \hyperref[def:pc-smooth-morphism]{smooth} morphism and let $x\in X$.
+Then there are affine opens $\Spec(A)=U\subseteq X$ with $x\in U$ and $\Spec(R)=V\subseteq S$
+with $f(U)\subseteq V$, an integer $c\ge0$ and a presentation
+\[
+A=R[t_1,\dots,t_m]/(f_1,\dots,f_c)
+\]
+whose Jacobian minor $\det\bigl(\partial f_j/\partial t_i\bigr)_{1\le i,j\le c}$ is invertible
+in $A$; such an $A$ is called \emph{standard smooth} over $R$.  If $f$ has relative dimension
+$n$, the presentation may be taken with $m=n+c$, and then the projection to the remaining
+coordinates $\Spec(A)\to\mathbf A^n_R$ is \'etale.
+\uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-scheme}
+% Mathlib: smoothness is Zariski-locally standard smoothness, for rings and for schemes.
+\mathlibok\ \lean{Algebra.IsStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth,
+Algebra.IsSmoothAt.exists_notMem_isStandardSmooth,
+AlgebraicGeometry.Smooth.exists_isStandardSmooth,
+AlgebraicGeometry.SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension,
+Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-smooth-morphism}
+Smoothness of a ring map is Algebra, Definition~10.137.1
+(\stacksproject{00T2}); that a smooth ring map becomes standard smooth
+after inverting a single element is Algebra, Lemma~10.137.9
+(\stacksproject{00TA}); and that the projection to the remaining
+coordinates is then \'etale is Morphisms of Schemes, Lemma~29.37.21
+(\stacksproject{054L}).  All three are available in Mathlib, so this is
+a leaf of the plan.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Differentials of a presentation]
+\label{lem:pc-omega-presentation}
+Let $R$ be a ring, let $P=R[t_1,\dots,t_m]$ be a polynomial algebra, let
+$I=(f_1,\dots,f_c)\subseteq P$ and let $A=P/I$.  Then the conormal sequence
+\[
+I/I^2\;\longrightarrow\;\Omega_{P/R}\otimes_PA=A^{\oplus m}\;\longrightarrow\;\Omega_{A/R}
+\;\longrightarrow\;0,
+\]
+whose first map sends the class of $f$ to $df$, is exact.  Equivalently
+\[
+\Omega_{A/R}=A^{\oplus m}\big/\bigl(df_1,\dots,df_c\bigr),\qquad
+df_j=\sum_{i=1}^m\frac{\partial f_j}{\partial t_i}\,dt_i .
+\]
+\uses{def:pc-kahler-differentials}
+% Mathlib: the conormal (right exact) sequence of a presentation, and the basis of
+% the cotangent space of a polynomial algebra.
+\mathlibok\ \lean{Algebra.Extension.cotangentComplex,
+Algebra.Extension.exact_cotangentComplex_toKaehler,
+Algebra.Extension.toKaehler_surjective, Algebra.Generators.cotangentSpaceBasis}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-kahler-differentials}
+This is the conormal sequence attached to the presentation $A=P/I$, together with the
+computation of $\Omega_{P/R}$ as the free $P$-module on $dt_1,\dots,dt_m$ (Algebra,
+Section~10.131, \stacksproject{00RM}).  Both are available in Mathlib, so this is a leaf of
+the plan.
+\end{proof}
+
 % Decomposed.
 \begin{lemma}[Differentials of a smooth morphism are locally free]
 \label{lem:pc-omega-line-bundle}
@@ -1117,16 +1180,10 @@ is a line bundle (the \emph{canonical} module).
 \uses{def:pc-kahler-differentials,def:pc-smooth-morphism}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-smooth-morphism}
+\uses{def:pc-smooth-morphism,def:pc-kahler-differentials,lem:pc-standard-smooth-form,lem:pc-omega-presentation}
 The assertion is Zariski-local on $X$, so we may assume
 $X=\Spec(A)$, $S=\Spec(R)$ with $A$ smooth over $R$: by the standard
-local form of a smooth algebra (\Cref{def:pc-smooth-morphism}, the definition of smoothness,
-Algebra, Definition~10.137.1,
-\stacksproject{00T2}; the local
-presentation with the Jacobian of rank the number of relations is the
-standard consequence, cf.\ also the Jacobian criterion for
-smoothness, Morphisms of Schemes, Lemma~29.37.21,
-\stacksproject{054L}) there are
+local form of a smooth algebra (\Cref{lem:pc-standard-smooth-form}) there are
 $x_1,\dots,x_{n+c}\in A$ and $f_1,\dots,f_c$ with
 $A=R[x_1,\dots,x_{n+c}]/(f_1,\dots,f_c)$ and the Jacobian matrix
 $\bigl(\partial f_i/\partial x_j\bigr)$ of rank $c$.  For such a
@@ -1134,8 +1191,7 @@ presentation the module of Kähler differentials is the quotient
 \[
 \Omega_{A/R}=A^{\oplus(n+c)}\Big/\bigl(df_i:\ i=1,\dots,c\bigr)
 \]
-(the standard computation of Algebra, Section~10.131,
-\stacksproject{00RM}); the
+(\Cref{lem:pc-omega-presentation}); the
 $\cO$-span of the differentials $df_i$ in $A^{\oplus(n+c)}$ is a
 direct summand of rank $c$ (the Jacobian matrix has rank $c$), so
 $\Omega_{A/R}\cong A^{\oplus n}$ is free of rank $n$ (a basis being
@@ -1784,6 +1840,7 @@ is a bijection, natural in both arguments (Categories, Lemma~4.3.5,
 CategoryTheory.Functor.IsRepresentable}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-representable-functor}
 Omitted.  (Mathlib item.)
 \end{proof}
 
@@ -1906,6 +1963,7 @@ right derived functors of \Cref{def:pc-derived-direct-image} exist, so every dec
 on them reports \texttt{sorryAx} under \texttt{\#print axioms}.}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-scheme}
 Presheaves of $\cR$-modules form a Grothendieck abelian category: they are locally presentable,
 filtered colimits are computed sectionwise and are therefore exact, and the free modules on the
 representable presheaves form a separating family, which is small because the site is
@@ -2168,6 +2226,79 @@ claim.  (The same applies to base changes $X_K$: see
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Local criterion for smoothness of a ring map]
+\label{lem:pc-smooth-local-criterion}
+Let $R\to A$ be a flat ring map of finite presentation and let $\mathfrak q\subset A$ be a
+prime lying over the prime $\mathfrak p\subset R$.  If the fibre
+$A\otimes_R\kappa(\mathfrak p)$ is smooth over $\kappa(\mathfrak p)$, then $R\to A$ is
+\hyperref[def:pc-smooth-morphism]{smooth} at $\mathfrak q$.  Consequently, if every fibre
+$A\otimes_R\kappa(\mathfrak p)$, for $\mathfrak p\subset R$ prime, is smooth over
+$\kappa(\mathfrak p)$, then $R\to A$ is smooth.
+\uses{def:pc-smooth-morphism,def:pc-base-change}
+% Mathlib: flat plus finitely presented plus formally smooth fibres implies smooth,
+% at a given prime and globally.
+\mathlibok\ \lean{Algebra.IsSmoothAt.of_formallySmooth_fiber,
+Algebra.Smooth.of_formallySmooth_fiber}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-smooth-morphism}
+This is a special case of Algebra, Lemma~10.137.16 (\stacksproject{00TF}), namely the case
+$g=1$ with the whole fibre smooth: after inverting one element $A$ becomes a relative global
+complete intersection whose Jacobian is invertible at $\mathfrak q$, that is, standard smooth
+over $R$.  It is this special case, and not the localised statement of the tag, that is
+available in Mathlib, so this is a leaf of the plan.  (The fibre is again of finite
+presentation over $\kappa(\mathfrak p)$, so for it smoothness and formal smoothness agree,
+which is how Mathlib phrases the hypothesis.)
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Properties of standard smooth algebras]
+\label{lem:pc-standard-smooth-properties}
+Let $A=R[t_1,\dots,t_m]/(f_1,\dots,f_c)$ be standard smooth over $R$ in the sense of
+\Cref{lem:pc-standard-smooth-form}, i.e.\ with
+$\det(\partial f_j/\partial t_i)_{1\le i,j\le c}$ invertible in $A$.  Then
+\begin{enumerate}
+\item $R\to A$ is \hyperref[def:pc-smooth-morphism]{smooth};
+\item $\Omega_{A/R}$ is free on $dt_{c+1},\dots,dt_m$, hence of rank $m-c$;
+\item for every ring map $R\to R'$ the base change $R'\to R'\otimes_RA$ is again standard
+  smooth, for the base changed presentation.
+\end{enumerate}
+\uses{lem:pc-standard-smooth-form,def:pc-smooth-morphism,def:pc-kahler-differentials,def:pc-base-change}
+% Mathlib: Algebra.IsStandardSmooth and its basic API.
+\mathlibok\ \lean{Algebra.instSmoothOfIsStandardSmooth,
+Algebra.IsStandardSmooth.free_kaehlerDifferential,
+Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential,
+Algebra.IsStandardSmooth.baseChange}
+\end{lemma}
+\begin{proof}
+\uses{lem:pc-standard-smooth-form}
+This is Algebra, Lemma~10.137.6 (\stacksproject{00T7}), proved by computing the naive
+cotangent complex of the given presentation: the Jacobian condition says exactly that
+$I/I^2\to\Omega_{R[t]/R}\otimes_{R[t]}A$ is a split injection onto a free direct summand of
+rank $c$.  All three assertions are available in Mathlib, so this is a leaf of the plan.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Smoothness of ring maps is stable under base change]
+\label{lem:pc-smooth-base-change-ring}
+Let $R\to A$ be a \hyperref[def:pc-smooth-morphism]{smooth} ring map and let $R\to R'$ be an
+arbitrary ring map.  Then $R'\to A'=R'\otimes_RA$ is smooth.
+\uses{def:pc-smooth-morphism,def:pc-base-change}
+% Mathlib: smoothness of algebras is stable under base change.
+\mathlibok\ \lean{Algebra.Smooth.baseChange}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-smooth-morphism}
+This is Algebra, Lemma~10.137.3 (\stacksproject{00T4}): the naive cotangent complex of
+$A'/R'$ is the base change of that of $A/R$ and the base change of a finite projective module
+is finite projective, so the defining property of Algebra, Definition~10.137.1
+(\stacksproject{00T2}) is preserved; finite presentation is preserved by base change as
+well.  The statement is available in Mathlib, so this is a leaf of the plan.
+\end{proof}
+
 % Decomposed.
 \begin{lemma}[Smoothness versus flatness]\label{lem:pc-smooth-characterization}
 Let $f:X\to S$ be a morphism of
@@ -2177,21 +2308,23 @@ is flat and every fibre $X_s$ is smooth over $\kappa(s)$.
 \uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-($\Leftarrow$) This is Morphisms of Schemes, Lemma~29.35.3 (\stacksproject{01V8}) (the proof of
-which is the local algebra criterion Algebra, Lemma~10.137.16,
-\stacksproject{00TF}: after inverting
-one element, the ring map is a relative global complete intersection
-whose Jacobian is invertible, which is the definition of a standard
-smooth ring map).
+\uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change,lem:pc-smooth-local-criterion,lem:pc-standard-smooth-form,lem:pc-standard-smooth-properties,lem:pc-smooth-base-change-ring}
+($\Leftarrow$) The assertion is Zariski-local on $S$ and on $X$, so we
+may assume $S=\Spec(R)$ and $X=\Spec(A)$ with $R\to A$ of finite
+presentation and flat and with all fibres smooth.  For every prime
+$\mathfrak q\subset A$, lying over $\mathfrak p\subset R$, the
+hypotheses of \Cref{lem:pc-smooth-local-criterion} hold, so $R\to A$
+is smooth at $\mathfrak q$; as $\mathfrak q$ was
+arbitrary, $f$ is smooth.  (This is Morphisms of Schemes,
+Lemma~29.35.3, \stacksproject{01V8}.)
 
 ($\Rightarrow$) We may work Zariski-locally and assume $S=\Spec(R)$ and
-$X=\Spec(A)$ with $R\to A$ smooth at a prime $\mathfrak q$; assume
+$X=\Spec(A)$ with $R\to A$ smooth at a prime $\mathfrak q$; by
+\Cref{lem:pc-standard-smooth-form} we may, after shrinking, assume that
 $A$ is standard smooth over $R$, i.e.\
 $A=R[x_1,\dots,x_n]/(f_1,\dots,f_c)$ with the Jacobian
-$\det(\partial f_j/\partial x_i)_{i,j\le c}$ a unit in $A$ (Algebra,
-Lemma~10.137.6, \stacksproject{00T7},
-which also gives the Zariski-locality: smooth ring maps are
-Zariski-locally standard smooth).  \emph{Finite presentation} holds by
+$\det(\partial f_j/\partial x_i)_{i,j\le c}$ a unit in $A$.
+\emph{Finite presentation} holds by
 definition.  \emph{Flatness:} the elements $f_1,\dots,f_c$ form a
 regular sequence of $R[x]$: after the invertible linear change of
 variables $x_i\mapsto x_i-a_i$ we may assume the Jacobian is invertible
@@ -2201,12 +2334,15 @@ sequence, is regular; hence the Koszul complex
 $0\to\wedge^cR[x]^c\to\cdots\to R[x]^c\to R[x]\to A\to0$ is exact
 (exactness of the Koszul complex of a regular sequence), a projective
 (hence flat) resolution of $A$; $A$ is flat over $R$.
-\emph{Smooth fibres:} for $\mathfrak p\subset R$ the base change
-$A\otimes_R\kappa(\mathfrak p)$ is standard smooth over
-$\kappa(\mathfrak p)$ (Algebra, Lemma~10.137.3,
-\stacksproject{00T4}), hence smooth
-(Lemma~10.137.6, Tag 00T7).  The general statement follows by
-Zariski-locality.
+\emph{Smooth fibres:} smoothness of a ring map is preserved by
+arbitrary base change (\Cref{lem:pc-smooth-base-change-ring}), so for
+every $\mathfrak p\subset R$ the fibre
+$A\otimes_R\kappa(\mathfrak p)$ is smooth over $\kappa(\mathfrak p)$;
+concretely, the chosen presentation base changes to a standard smooth
+presentation (\Cref{lem:pc-standard-smooth-properties}(3)) and a
+standard smooth algebra is smooth
+(\Cref{lem:pc-standard-smooth-properties}(1)).  The general statement
+follows by Zariski-locality.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -2222,6 +2358,7 @@ isomorphisms.
 \uses{def:pcb-invertible-module,def:pc-scheme,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
+\uses{def:pcb-invertible-module,def:pc-scheme}
 All three assertions are Zariski-local in $X$, and at a point $x$ an
 invertible $\cO_{X,x}$-module is free of rank $1$, hence isomorphic to
 $\cO_{X,x}$: then $\cM^\vee\cong\cO_x$, $\cM\otimes\cN\cong\cO_x$,
@@ -2240,6 +2377,7 @@ every invertible $\cO_k$-module is isomorphic to $\cO_k$.
 \uses{def:pcb-invertible-module,def:pcb-picard-group,def:pc-scheme}
 \end{lemma}
 \begin{proof}
+\uses{def:pcb-invertible-module,def:pcb-picard-group}
 An invertible $\cO_k$-module is locally free of rank $1$; an $\cO_k$-module
 is the same as a $k$-vector space, and a locally free rank $1$ $k$-module
 is free of rank $1$ (a module over a field is free; every nonzero
@@ -2384,6 +2522,7 @@ $\{U_i\to T\}$ is an
 \uses{def:pc-fppf-site,def:pc-morphism-conventions,def:pc-scheme}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-fppf-site,def:pc-morphism-conventions}
 Each $U_i\to T$ is locally of finite presentation (an open immersion
 $U\to T$ is, on affine patching of $T$ by $\Spec(A)$ and $U$ by
 $\Spec(A_f)$, the map $\Spec(A_f)\to\Spec(A)$; $A_f=A[x]/(fx-1)$ is a
@@ -2431,6 +2570,7 @@ $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
 \leanok
 \end{lemma}
 \begin{proof}
+\uses{def:pc-picard-presheaf,def:pc-base-change,def:pcb-invertible-module}
 \leanok
 If $\cL$ is invertible on $X_T$, then $g_X^*\cL$ is invertible on
 $X_{T'}$: the question is local on $X_{T'}$, and over the preimage of an
@@ -2461,13 +2601,15 @@ the right side is the value of the functor of \Cref{def:pcb-picard-functor}.
 \uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,lem:pc-zariski-coverings-are-fppf}
 Both sides are the fppf sheafification of the same presheaf on the
 category of affine $k$-schemes: the left is the restriction of the fppf
 sheafification on $(\mathit{Sch}/k)_{fppf}$, and fppf sheafification
 commutes with restricting to the essentially full subcategory of affine
 schemes, because the $(\mathit{Sch}/k)_{fppf}$-coverings of an affine
 scheme and the corresponding coverings by affines cofinalize (every
-scheme is covered by open affines in the Zariski, hence fppf, topology;
+scheme is covered by open affines in the Zariski, hence, by
+\Cref{lem:pc-zariski-coverings-are-fppf}, in the fppf topology;
 and for our purposes the affine objects fully capture the value of a
 sheaf).  More precisely: let
 $F_T=\Pic(X_T)$ and let $\pi:(\mathit{Sch}/k)_{fppf}\to(\mathit{Aff}/k)_{fppf}$
@@ -2476,8 +2618,8 @@ $(\pi^{-1}F^\#)^\#=(\pi^{-1}F)^\#$ for the restriction of the sheafified
 functor to affine schemes; the sheaves that are sheafifications of
 presheaves on the affine site are exactly the fppf sheaves on
 $(\mathit{Aff}/k)_{fppf}$, the two prescriptions agree on affine inputs.
-This is the standard construction of the big sites (see Topologies,
-Section~34.7, \stacksproject{021S}).
+This is the standard construction of the big fppf sites
+(\Cref{def:pc-fppf-site}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -2510,6 +2652,7 @@ $\cM$, viewed as a complex in degree $0$, is
 \uses{def:pc-perfect-complex,def:pcb-invertible-module,def:pc-derived-category}
 \end{lemma}
 \begin{proof}
+\uses{def:pcb-invertible-module,def:pc-perfect-complex}
 An invertible module is locally free of rank one: Zariski-locally
 $\cM\cong\cO_X$, hence the bounded complex $\cM$ in degree $0$ is
 locally isomorphic to the free module $\cO_X$ in degree zero, which is
@@ -2529,6 +2672,7 @@ then $H^j(M)=0$ for $j\neq i$ and $H^i(M)\cong E$.
 \uses{def:pc-invertible-in-degree-zero,def:pc-derived-category,def:pcb-invertible-module}
 \end{lemma}
 \begin{proof}
+\uses{def:pc-derived-category,def:pcb-invertible-module}
 By definition of the shift, $H^j(\cN[0])$ is the $j$-th cohomology of
 the complex with $\cN$ in degree $0$, i.e.\ $0$ for $j
 e0$ and $H^0$ is
@@ -2717,10 +2861,13 @@ $g(C)$ of \Cref{def:pc-genus} equals the genus of
 \uses{def:pc-genus,def:pcb-genus,def:pc-smooth-projective-curve,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-Both definitions are $g=\dim_kH^1(C,\cO_C)$ (Definition 44.6.3 in the
-first case, specific to the geometric irreducible smooth projective
-curve; Definition 53.8.1 (\stacksproject{0BY7}) in the second),
-so they agree.
+\uses{def:pc-genus,def:pcb-genus}
+Both definitions read $g=\dim_kH^1(C,\cO_C)$: that of
+\Cref{def:pc-genus} (Picard Schemes of Curves, Definition~44.6.3,
+specific to the geometrically irreducible smooth projective curve) and
+that of \Cref{def:pcb-genus} (Algebraic Curves, Definition~53.8.1).
+The hypotheses of the present lemma place $C$ in the scope of both, so
+they agree.
 \end{proof}
 
 % ---------------------------------------------------------------------------
