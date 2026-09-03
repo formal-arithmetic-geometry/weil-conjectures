@@ -284,8 +284,10 @@ end ValuativeCriterion
 morphism `Spec K ⟶ X` with `K` a field factors as a surjection `P ↠ K` followed by a flat
 morphism `Spec P ⟶ X`.
 
-The presentation is `P = K[x_s : s ∈ Γ(X, V)]` for an affine open `V` containing the image
-of the point, evaluated at the corresponding `K`-algebra map. -/
+The presentation takes for `P` the polynomial `Γ(X, V)`-algebra on variables indexed by the
+underlying set of `K`, where `V` is an affine open containing the image of the point. The
+surjection `P ↠ K` sends a variable `X k` to `k` and acts on coefficients through the ring map
+`Γ(X, V) ⟶ K` defining the point, and the flatness is that of `algebraMap Γ(X, V) P`. -/
 theorem exists_flat_polynomial_presentation {X : Scheme.{u}} {K : Type u} [Field K]
     (i₁ : Spec (CommRingCat.of K) ⟶ X) :
     ∃ (P : CommRingCat.{u}) (π : P ⟶ CommRingCat.of K) (p : Spec P ⟶ X),
