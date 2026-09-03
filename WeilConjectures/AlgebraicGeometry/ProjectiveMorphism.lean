@@ -26,11 +26,11 @@ followed by the structure morphism `ℙ(n; S) ↘ S`.
 
 ## Implementation notes
 
-Stacks 01W7 defines `f : X ⟶ S` to be projective if there is a quasi-coherent graded
+Stacks 01W8 defines `f : X ⟶ S` to be projective if there is a quasi-coherent graded
 `𝒪_S`-algebra `𝒜`, generated in degree one by a finite type degree-one part, together with an
 `S`-isomorphism of `X` with a closed subscheme of `Proj_S 𝒜`. The "H-projective" condition
 formalised here always implies that one; the converse needs a hypothesis on the base, and holds
-for example whenever `S` admits an ample family of line bundles. The `@[stacks 01W7]` tag on
+for example whenever `S` admits an ample family of line bundles. The `@[stacks 01W8]` tag on
 `IsProjective` refers to part (2) of that definition, which is the H-projective condition itself.
 
 No quasi-compactness hypothesis has to be imposed separately, since the factorisation already
@@ -61,8 +61,8 @@ variable {X S : Scheme.{u}}
 /-- A morphism of schemes `f : X ⟶ S` is **projective** if it factors as a closed immersion
 into a projective space `ℙ(n; S)` over `S` with finitely many homogeneous coordinates followed
 by the structure morphism `ℙ(n; S) ↘ S`.
-(blueprint: `def:pc-projective-morphism`, Stacks 01W7) -/
-@[stacks 01W7]
+(blueprint: `def:pc-projective-morphism`, Stacks 01W8) -/
+@[stacks 01W8]
 class IsProjective (f : X ⟶ S) : Prop where
   /-- A projective morphism factors as a closed immersion into some `ℙ(n; S)` followed by the
   structure morphism of that projective space. -/
