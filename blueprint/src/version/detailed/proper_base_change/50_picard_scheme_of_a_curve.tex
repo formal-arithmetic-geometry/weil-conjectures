@@ -251,8 +251,10 @@ gives a closed immersion \(i:X\hookrightarrow\mathbf P^N_k\) with
 28.27, \stacksproject{01PR} (ample invertible sheaves)}).  \(\mathcal L\) is
 \emph{ample} if
 \(\mathcal L^{\otimes m}\) is very ample for some \(m\geq1\) (the
-standard characterization for proper schemes; \emph{reference:
-Stacks Project, Properties of Schemes, Proposition 28.27.13, \stacksproject{01Q3}
+standard characterization for proper schemes; that this agrees with
+ampleness in the sense of \Cref{def:pc-ample} is
+\Cref{lem:pc-ample-iff-power-very-ample}, \emph{reference: Stacks
+Project, Morphisms of Schemes, Lemma 29.40.5, \stacksproject{01VU}
 }).
 \end{definition}
 
@@ -1821,10 +1823,28 @@ tensor product of invertible modules, which needs a monoidal structure on
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+\begin{definition}[Effective Cartier divisors on a scheme]
+\label{def:pc-effective-cartier-divisor}
+Let $S$ be a scheme.  An \emph{effective Cartier divisor} on $S$ is a
+closed subscheme $D\subset S$ whose ideal sheaf $\cI_D\subset\cO_S$ is
+an \hyperref[def:pc-invertible-module]{invertible $\cO_S$-module}
+(Divisors, Definition~31.14.1, \stacksproject{01WR}).  Equivalently,
+every point of $D$ has an affine open neighbourhood
+$\Spec(A)=U\subseteq S$ with $D\cap U=\Spec(A/fA)$ for a
+non-zero-divisor $f\in A$; that is, $D$ is locally cut out by a single
+non-zero-divisor (Divisors, Lemma~31.14.2, \stacksproject{01WS}).  For
+$S$ a \hyperref[def:pcb-curves]{curve} this is the notion of
+\Cref{def:pcb-effective-cartier-divisor}, which is stated in the
+second of the two forms above.
+\uses{def:pc-scheme,def:pc-invertible-module}
+\end{definition}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
 \begin{definition}[The module $\cO_X(D)$ of an effective Cartier divisor]
 \label{def:pc-divisor-line-bundle}
 Let $S$ be a scheme and let $D\subset S$ be an
-\hyperref[def:pcb-effective-cartier-divisor]{effective Cartier divisor}
+\hyperref[def:pc-effective-cartier-divisor]{effective Cartier divisor}
 with ideal sheaf $\cI_D$.  The \emph{associated invertible module} is
 \[
 \cO_S(D):=\mathcal{H}om_{\cO_S}(\cI_D,\cO_S)=\cI_D^\vee .
@@ -1834,7 +1854,7 @@ base change, coincidence with the module $\cO_C(D)$ of file~06 for
 finite unions of closed points) are
 \Cref{lem:pc-divisor-line-bundle-properties} and
 \Cref{lem:pc-divisor-line-bundle-agrees-sc}.
-\uses{def:pcb-effective-cartier-divisor,def:pc-invertible-module,def:pcb-divisor}
+\uses{def:pc-effective-cartier-divisor,def:pc-invertible-module,def:pcb-divisor}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1845,7 +1865,7 @@ Let $f:X\to S$ be a morphism of schemes.  A \emph{relative effective
 Cartier divisor on $X/S$} is an effective Cartier divisor $D\subset X$
 such that $D\to S$ is flat (Divisors, Definition~31.19.2,
 \stacksproject{062T}).
-\uses{def:pcb-effective-cartier-divisor,def:pc-scheme,def:pc-morphism-conventions}
+\uses{def:pc-effective-cartier-divisor,def:pc-scheme,def:pc-morphism-conventions}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2282,18 +2302,43 @@ arbitrary scheme over $k$; it reports \texttt{sorryAx} under \texttt{\#print axi
 
 % ---------------------------------------------------------------------------
 % Decomposed.
-\begin{remark}[Ample and very ample: existing in file 06]
+\begin{remark}[Ample and very ample: the generality used below]
 \label{rem:pc-sc-ample}
-The notions of \emph{ample} and \emph{very ample} invertible module are
-those of file~06: \Cref{def:pcb-ample} (with the Stacks Project
-references Properties of Schemes, Section~28.27,
-\stacksproject{01PR}, Proposition
-28.27.13, \stacksproject{01Q3},
-and Morphisms of Schemes, Definition~29.39.1,
-\stacksproject{01VM}).  We use that
-definition in its stated generality (any proper scheme over a field).
-\uses{def:pcb-ample}
+The notion of a \emph{very ample} invertible module is the one of
+file~06, \Cref{def:pcb-ample} (with the Stacks Project reference
+Morphisms of Schemes, Definition~29.39.1,
+\stacksproject{01VM}), and it is used
+only in the generality stated there, for a proper scheme over a field.
+The notion of an \emph{ample} invertible module is used below beyond
+that generality --- for a scheme that is merely quasi-compact in
+\Cref{lem:pc-ample-basis-criterion}, and for a scheme over an
+arbitrary base in \Cref{lem:pc-hilb-representable} --- so we take it in
+the generality of \Cref{def:pc-ample} just below (Properties of
+Schemes, Definition~28.27.1,
+\stacksproject{01PS}).  The ``some power
+is very ample'' formulation of \Cref{def:pcb-ample} is the case of a
+scheme of finite type over a field: that the two agree there is
+\Cref{lem:pc-ample-iff-power-very-ample} (Morphisms of Schemes,
+Lemma~29.40.5, \stacksproject{01VU}).
+\uses{def:pcb-ample,def:pc-ample}
 \end{remark}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{definition}[Ample invertible modules on a scheme]
+\label{def:pc-ample}
+Let $X$ be a scheme and let $\cL$ be an
+\hyperref[def:pc-invertible-module]{invertible $\cO_X$-module}.  For
+$n\ge1$ and $s\in\Gamma(X,\cL^{\otimes n})$ write $X_s\subseteq X$ for
+the open locus where $s$ does not vanish.  We say $\cL$ is
+\emph{ample} if $X$ is quasi-compact and for every $x\in X$ there
+exist $n\ge1$ and $s\in\Gamma(X,\cL^{\otimes n})$ with $x\in X_s$ and
+$X_s$ affine (Properties of Schemes, Definition~28.27.1,
+\stacksproject{01PS}).  For $X$ of
+finite type over a field this is the notion of \Cref{def:pcb-ample},
+by \Cref{lem:pc-ample-iff-power-very-ample}.
+\uses{def:pc-scheme,def:pc-invertible-module}
+\end{definition}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
@@ -2522,14 +2567,14 @@ k,\cO)$.
 % Decomposed.
 \begin{lemma}[Properties of $\cO_X(D)$]\label{lem:pc-divisor-line-bundle-properties}
 Let $S$ be a scheme and $D\subset S$ an
-\hyperref[def:pcb-effective-cartier-divisor]{effective Cartier divisor}.
+\hyperref[def:pc-effective-cartier-divisor]{effective Cartier divisor}.
 \begin{enumerate}
 \item $\cO_S(D)$ is an
 \hyperref[def:pc-invertible-module]{invertible $\cO_S$-module}.
 \item If $g:Y\to S$ is a flat morphism and $D_Y=D\times_SY$, then
 $\cI_{D_Y}=g^*\cI_D$ and $\cO_Y(D_Y)\cong g^*\cO_S(D)$.
 \end{enumerate}
-\uses{def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,def:pc-invertible-module,def:pc-base-change,lem:pc-tensor-dual-invertible,lem:pc-closed-imm-base-change}
+\uses{def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,def:pc-invertible-module,def:pc-base-change,lem:pc-tensor-dual-invertible,lem:pc-closed-imm-base-change}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-closed-imm-base-change,lem:pc-tensor-dual-invertible}
@@ -3955,7 +4000,7 @@ general: Stacks Project, Varieties, Lemma~33.43.8,
 $P$ of a smooth \hyperref[def:pc-curve]{curve} over a field has
 invertible ideal sheaf, i.e.\ is an effective Cartier divisor, and
 $\cO_{C,P}$ is a discrete valuation ring.
-\uses{def:pc-curve,def:pcb-effective-cartier-divisor,lem:pcb-point-cartier}
+\uses{def:pc-curve,def:pc-effective-cartier-divisor,lem:pcb-point-cartier}
 \end{remark}
 \begin{lemma}[Density of rationally defined closed points]
 \label{lem:pc-dense-separable-points}
@@ -4218,16 +4263,60 @@ $S=\Gamma_*(X,\cL)=\bigoplus_{n\ge0}H^0(X,\cL^{\otimes n})$, a graded
 ring, and for a homogeneous $s\in S$ of positive degree let
 $X_s\subseteq X$ be the open locus where $s$ does not vanish.  If the
 affine open subsets among the $X_s$ form a basis for the topology of
-$X$, then $\cL$ is \hyperref[def:pcb-ample]{ample}.
-\uses{def:pc-scheme,def:pcb-ample,def:pcb-invertible-module}
+$X$, then $\cL$ is \hyperref[def:pc-ample]{ample}.
+\uses{def:pc-scheme,def:pc-ample,def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Properties of Schemes,
 Proposition~28.27.13 (\stacksproject{01Q3}), the implication
 (4) $\Rightarrow$ (1) among the equivalent conditions listed there.
-The same proposition is what identifies the notion of ampleness used
-there with the one of \Cref{def:pcb-ample}, as recorded in that
-definition.  It is not decomposed here.
+Ampleness in its condition (1) is that of \Cref{def:pc-ample}, the
+definition to which that proposition refers; that it agrees, on a
+scheme of finite type over a field, with the
+``some power is very ample'' formulation of \Cref{def:pcb-ample} is
+\Cref{lem:pc-ample-iff-power-very-ample} and is not part of this
+proposition.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Ample if and only if some power is very ample]
+\label{lem:pc-ample-iff-power-very-ample}
+Let $k$ be a field, let $X$ be a scheme of finite type over $k$ and let
+$\cL$ be an \hyperref[def:pc-invertible-module]{invertible
+$\cO_X$-module}.  Then the following are equivalent:
+\begin{enumerate}
+\item[(1)] $\cL$ is \hyperref[def:pc-ample]{ample};
+\item[(2)] $\cL^{\otimes d}$ is \hyperref[def:pcb-ample]{very ample}
+for some $d\ge1$;
+\item[(3)] $\cL^{\otimes d}$ is very ample for all $d\gg1$.
+\end{enumerate}
+Both the finite type hypothesis and the passage to a power are
+needed.  Morphisms of Schemes, Example~29.39.4
+(\stacksproject{01VO}) exhibits, on a
+scheme over a field which is not of finite type, an ample invertible
+module no power of which is very ample; and Morphisms of Schemes,
+Example~29.39.5 (\stacksproject{01VP})
+exhibits, for every $d\ge1$, a projective scheme over a field carrying
+an ample invertible module whose $n$-th power is very ample only for
+$n\ge d$, so that the exponent in (2) cannot in general be taken to be
+$1$.
+\uses{def:pc-scheme,def:pc-invertible-module,def:pc-ample,def:pcb-ample}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Lemma~29.40.5
+(\stacksproject{01VU}), which states
+the equivalence relatively --- for $f:X\to S$ with $S$ quasi-compact
+and $f$ of finite type, $\cL$ is $f$-ample if and only if
+$\cL^{\otimes d}$ is $f$-very ample for some $d\ge1$, if and only if
+for all $d\gg1$ --- applied to the structure morphism
+$f:X\to\Spec(k)$, whose base is quasi-compact.  Over an affine base the
+relative notions $f$-ample (Morphisms of Schemes, Definition~29.38.1,
+\stacksproject{01VH}) and $f$-very
+ample (Morphisms of Schemes, Definition~29.39.1,
+\stacksproject{01VM}, the reference
+\Cref{def:pcb-ample} gives for very ampleness) are the absolute ones
+used above.  It is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -4241,7 +4330,7 @@ $\cL\otimes_k K$ is ample on $X_K$ for every field extension $K/k$.
 \uses{def:pcb-ample,def:pc-invertible-module,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-closed-imm-base-change,lem:pc-closed-immersion-affine,lem:pc-ample-basis-criterion}
+\uses{lem:pc-closed-imm-base-change,lem:pc-closed-immersion-affine,lem:pc-ample-basis-criterion,lem:pc-ample-iff-power-very-ample}
 The scheme $\PP^n_k$ is the union of the affine opens $D_+(x_j)$,
 $j=0,\dots,n$ (as usual via the homogeneous coordinates $x_0,\dots,x_n$);
 hence with $s_j:=i^*x_j\in H^0(X,\cL)$ we have
@@ -4249,7 +4338,12 @@ $X_{s_j}=X\cap D_+(x_j)$, which is affine (a closed subscheme of an
 affine scheme is affine, \Cref{lem:pc-closed-immersion-affine}),
 and $\bigcup_jX_{s_j}=X$ as the $D_+(x_j)$ cover $\PP^n_k$ and $i$ is
 injective.  Thus the affine open sets $X_s$ form a basis of the topology,
-so $\cL$ is ample by \Cref{lem:pc-ample-basis-criterion}.  The last
+so $\cL$ is ample in the sense of \Cref{def:pc-ample} by
+\Cref{lem:pc-ample-basis-criterion}; since $X$ is of finite type over
+$k$, being a closed subscheme of $\PP^n_k$, some power
+$\cL^{\otimes m}$ is therefore very ample
+(\Cref{lem:pc-ample-iff-power-very-ample}), which is ampleness in the
+sense of \Cref{def:pcb-ample}.  The last
 assertion follows since the same argument
 applies to the base-changed closed immersion
 $i_K:X_K\hookrightarrow\PP^n_K$ (base change of a closed immersion, see
@@ -5103,10 +5197,10 @@ $\chi(X,\cF_2)=\chi(X,\cF_1)+\chi(X,\cF_3)$
 only through the effective-divisor case (2) and the case of a pullback
 from a point, which is explicit in the base change part (1) and in
 \Cref{lem:pc-degree-agrees-sc}.)
-\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pcb-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,rem:pc-regularity-sc}
+\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,rem:pc-regularity-sc}
 \emph{(3).}  This is exactly \Cref{lem:pc-euler-additive}.
 
 \emph{(1).}  For the field extension $K/k$ put $X_K:=X\times_{\Spec(k)}\Spec(K)$ (\Cref{def:pc-base-change}).
@@ -5132,7 +5226,7 @@ because $\dim_K(V\otimes_kK)=\dim_kV$ for a finite-dimensional
 $k$-vector space $V$.
 
 \emph{(2).}  Let $D\subset X$ be an effective Cartier divisor
-(\Cref{def:pcb-effective-cartier-divisor}) and put $\cM=\cO_X(D)$
+(\Cref{def:pc-effective-cartier-divisor}) and put $\cM=\cO_X(D)$
 (\Cref{def:pc-divisor-line-bundle}).  The canonical section $\mathbf 1_D$
 gives the exact
 sequence
@@ -5267,7 +5361,7 @@ Let $k$ be a field, $X$ a smooth projective
 \hyperref[def:pc-curve]{curve} over $k$ and $\cL$ an invertible
 $\cO_X$-module.  Then $\cL$ is \hyperref[def:pcb-ample]{ample} if and
 only if $\deg(\cL)>0$.
-\uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pcb-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
+\uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,rem:pc-regularity-sc}
@@ -5345,13 +5439,13 @@ $Z\subset X$ be a locally principal closed subscheme.  If all fibres
 $Z_s\subset X_s$ are effective Cartier divisors on $X_s$, then $Z$ is a
 \hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
 divisor} on $X/S$.
-\uses{def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-morphism-conventions}
+\uses{def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor}
+\uses{def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor}
 The statement is local on $X$ (the conclusion asserts: $Z$ is an
 effective Cartier divisor on $X$ -- a local property, cf.\
-\Cref{def:pcb-effective-cartier-divisor} -- and $Z\to S$ is flat -- a
+\Cref{def:pc-effective-cartier-divisor} -- and $Z\to S$ is flat -- a
 property local on $Z$); so fix $x\in Z$, let $s:=\phi(x)$, and choose
 affine open neighbourhoods $\Spec(A)$ of $s$ and $\Spec(B)$ of $x$
 with $\phi(\Spec(B))\subseteq\Spec(A)$; let $\mathfrak
@@ -5418,11 +5512,11 @@ divisor.
 \label{lem:pc-flat-divisor-pullback-cartier}
 Let $f:X\to S$ be a morphism of schemes and let $D\subset X$ be a closed
 subscheme.  Assume that $D$ is an
-\hyperref[def:pcb-effective-cartier-divisor]{effective Cartier divisor}
+\hyperref[def:pc-effective-cartier-divisor]{effective Cartier divisor}
 on $X$ and that the morphism $D\to S$ is flat.  Then for every morphism
 $g:S'\to S$ the pullback $(g')^{-1}D$ is an effective Cartier divisor on
 $X'=S'\times_SX$, where $g':X'\to X$ denotes the projection.
-\uses{def:pcb-effective-cartier-divisor,def:pc-base-change,def:pc-morphism-conventions}
+\uses{def:pc-effective-cartier-divisor,def:pc-base-change,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Divisors, Lemma~31.19.1
@@ -5442,7 +5536,7 @@ and, with $g_X:X_T\to X$,
 \[
 \cO_{X_T}(D_T)\cong g_X^*\cO_X(D).
 \]
-\uses{def:pc-relative-effective-cartier,def:pc-divisor-line-bundle,def:pcb-effective-cartier-divisor,def:pc-base-change,lem:pc-closed-imm-base-change,lem:pc-flat-compose,def:pc-morphism-conventions}
+\uses{def:pc-relative-effective-cartier,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,def:pc-base-change,lem:pc-closed-imm-base-change,lem:pc-flat-compose,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-closed-imm-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-flat-divisor-pullback-cartier}
@@ -5495,7 +5589,7 @@ proper, the first arrow is an if-and-only-if.
 \uses{def:pc-relative-effective-cartier,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,lem:pc-recd-locally-principal,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,rem:pc-regularity-sc}
+\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,lem:pc-recd-locally-principal,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,rem:pc-regularity-sc}
 \emph{$(3)\Rightarrow(2)$.}  This is the ``in particular'' of
 \Cref{lem:pc-recd-locally-principal}: $D$ is locally principal (the
 fibres are effective Cartier divisors and $D$ is flat and locally
@@ -5517,7 +5611,7 @@ effective Cartier divisor: locally $D=\Spec(B/(f))$ with $B$ finitely
 presented over $A$).  The fibres $D_s$ are effective Cartier divisors
 on the smooth one-dimensional $X_s$, hence finite unions of closed
 points with their Artinian structures
-(\Cref{def:pcb-effective-cartier-divisor} and the local theory of
+(\Cref{def:pc-effective-cartier-divisor} and the local theory of
 \Cref{rem:pc-regularity-sc}: the fibre of a relative effective Cartier
 divisor is an effective Cartier divisor, and on a smooth curve those
 are the finite unions of closed points); hence $D_s$ is finite, so
@@ -5613,10 +5707,11 @@ satisfies the sheaf property for fppf coverings.
 be a morphism of schemes and $d\geq0$.  Assume that for all points
 $s\in S$ and $x_1,\dots,x_d\in X_s$ (a finite set of points of a fibre)
 there exists an affine open $U\subset X$ containing them
-(e.g.\ if $X\to S$ is quasi-projective, or if there exists an ample
-invertible sheaf on $X$).  Then $\Hilb^d_{X/S}$ is representable by a
-scheme $\underline{\Hilb}^d_{X/S}$.
-\uses{def:pc-hilb-functor,def:pcb-ample}
+(e.g.\ if $X\to S$ is quasi-projective, or if there exists an
+\hyperref[def:pc-ample]{ample} invertible sheaf on $X$).  Then
+$\Hilb^d_{X/S}$ is representable by a scheme
+$\underline{\Hilb}^d_{X/S}$.
+\uses{def:pc-hilb-functor,def:pc-ample}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-finite-locally-free,def:pc-fppf-site,lem:pc-hilb-sheaf,lem:pc-schemes-criterion}
@@ -5984,10 +6079,10 @@ divisors of degree $d$ on $X_{k'}$;
 \]
 which is finite locally free of degree $\binom{d_1+d_2}{d_1}$.
 \end{enumerate}
-\uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:pcb-effective-cartier-divisor,def:pc-degree-line-bundle}
+\uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:pc-effective-cartier-divisor,def:pc-degree-line-bundle}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pcb-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine}
+\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine}
 \emph{Step 0: the affine-open hypothesis.}  We verify the hypothesis of
 \Cref{lem:pc-hilb-representable} (for $S=\Spec(k)$, $X/k$): let
 $x_1,\dots,x_d$ be a finite set of points of $X$ (of the single fibre
@@ -6001,7 +6096,7 @@ the closed $x_i$ contains all of them.  (If none of the $x_i$ is
 closed, any nonempty affine open $U_0\subset X$ will do.)  For the
 closed points $P_1,\dots,P_m$ among them, the divisor
 $D_0:=\sum_{j=1}^m[P_j]$ is an effective Cartier divisor on the smooth
-curve (\Cref{def:pcb-effective-cartier-divisor} and
+curve (\Cref{def:pc-effective-cartier-divisor} and
 \Cref{lem:pc-ample-positive-degree} argue positivity) -- precisely:
 by \Cref{lem:pc-degree-base-change} or directly
 (deg$\cO_X(D_0)=\sum_j[\kappa(P_j):k]\ge1$: the explicit computation
@@ -6175,7 +6270,7 @@ $k$-rational point $[D]\in\underline{\Hilb}^{d+1}_{X/k}$ corresponding to
 an effective Cartier divisor $D\subset X$ of degree $d+1$, the restriction
 of $\cO(D_{\mathrm{univ}})$ to the fibre $[D]\times X\cong X$ is
 $\cO_X(D)$.
-\uses{def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-hilb-functor}
+\uses{def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-hilb-functor}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-divisor-line-bundle,def:pc-hilb-functor,def:pc-relative-effective-cartier,lem:pc-cartier-criterion,lem:pc-recd-pullback,thm:pc-hilb-curves}
@@ -6816,7 +6911,7 @@ the tensor-Hom adjunction, $\cN$ invertible).  Then the
 \hyperref[def:pc-zero-scheme]{zero scheme} $D:=Z(s)$ is a
 \hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
 divisor} on $X_T/T$ which is finite locally free of degree $g$ over $T$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pcb-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,prop:pc-XK-integral}
@@ -6923,7 +7018,7 @@ $Z(1)=D_{\mathrm{univ}}\subset H\times X$; moreover this section is the
 adjoint section of $\cL_H$ for the module $\cN_H$, i.e.\ it corresponds
 under the adjunction of \Cref{lem:pc-zero-scheme-recd} on the open
 $W\subseteq H$ where $\cN_H$ is invertible.
-\uses{def:pc-separably-closed,def:pc-genus,def:pc-rational-point,def:pc-hilb-functor,def:pcb-effective-cartier-divisor,def:pc-zero-scheme}
+\uses{def:pc-separably-closed,def:pc-genus,def:pc-rational-point,def:pc-hilb-functor,def:pc-effective-cartier-divisor,def:pc-zero-scheme}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-zero-scheme,lem:pc-zero-scheme-recd}
@@ -6967,7 +7062,7 @@ let $X$ be a
 $F$ be the subfunctor of
 \Cref{lem:pc-f-open-subfunctor}.  Then $F$ is representable by an open
 subscheme of $\underline{\Hilb}^g_{X/k}$.
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-hilb-functor,def:pcb-effective-cartier-divisor,def:pc-relative-effective-cartier,def:pc-invertible-module,def:pc-derived-category,def:pc-representable-functor,def:pc-subfunctor,def:pc-finite-locally-free,lem:pc-hilb-representable,def:pc-pic-sigma-functor}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-hilb-functor,def:pc-effective-cartier-divisor,def:pc-relative-effective-cartier,def:pc-invertible-module,def:pc-derived-category,def:pc-representable-functor,def:pc-subfunctor,def:pc-finite-locally-free,lem:pc-hilb-representable,def:pc-pic-sigma-functor}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-hilb-functor,def:pc-pic-sigma-functor,def:pc-representable-functor,def:pc-subfunctor,lem:pc-cartier-criterion,lem:pc-f-open-subfunctor,lem:pc-flat-rf-open,lem:pc-projection-formula,lem:pc-recd-pullback,lem:pc-rf-perfect-base-change,lem:pc-universal-adjoint-section,lem:pc-universal-divisor,lem:pc-zero-scheme-recd,prop:pc-XK-integral,thm:pc-hilb-curves}
@@ -7097,7 +7192,7 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 \qquad\text{and}\qquad
 \dim_KH^1\bigl(X_K,\;\cL\otimes\cL_0|_{X_K}\bigr)=0 .
 \]
-\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pcb-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
+\uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pc-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-curve,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
