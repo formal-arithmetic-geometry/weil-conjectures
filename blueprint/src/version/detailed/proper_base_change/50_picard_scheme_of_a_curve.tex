@@ -2301,7 +2301,7 @@ T\longmapsto\Pic(X_T),
 with $\Pic$ of \Cref{def:pc-picard-group} (in the generality of
 \Cref{rem:pc-sc-modules}) and $X_T$ of \Cref{def:pc-base-change}; the
 assignment is functorial \Cref{lem:pc-pic-presheaf-functorial}.
-\uses{def:pc-base-change,def:pc-picard-group,rem:pc-sc-modules}
+\uses{def:pc-base-change,def:pc-invertible-module,def:pc-picard-group}
 \lean{AlgebraicGeometry.picardPresheaf}
 \leanok
 \end{definition}
@@ -4322,21 +4322,47 @@ again such a curve (\Cref{lem:pcb-base-change-curve} and
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{remark}[Regular schemes are normal; the normal decomposition]\label{rem:pc-regular-normal}
-We use the following two facts of the Stacks Project:
-\begin{itemize}
-\item \emph{regular schemes are normal} (Properties of Schemes,
-Lemma~28.9.4, \stacksproject{0569};
-see also Lemma~28.9.2, \stacksproject{02IT}),
-and
-\item \emph{Noetherian normal schemes decompose}: a Noetherian normal
-scheme is a finite disjoint union of normal integral schemes (Properties
-of Schemes, Lemma~28.7.6, \stacksproject{033M}).
-\end{itemize}
-In particular a regular, connected, Noetherian scheme is irreducible.
-(These are the scheme-level regularity-normal facts, in contrast with
+Two facts of the Stacks Project about schemes are used below, and each has
+a node of its own: \emph{a regular scheme is normal}
+(\Cref{lem:pc-regular-is-normal}) and \emph{a Noetherian normal scheme is a
+finite disjoint union of normal integral schemes}
+(\Cref{lem:pc-noetherian-normal-decomposition}).  Together they give that a
+regular, connected, Noetherian scheme is irreducible.  (These are the
+scheme-level regularity-normal facts, in contrast with
 \Cref{rem:pc-regularity-sc} which works with smooth curves.)
 \uses{def:pc-scheme}
 \end{remark}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A regular scheme is normal]
+\label{lem:pc-regular-is-normal}
+Let $X$ be a regular scheme.  Then $X$ is normal.
+\uses{def:pc-scheme}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-scheme}
+This is a cited external input: Properties of Schemes, Section~28.9 (Regular
+schemes), Lemma~28.9.4 (\stacksproject{0569}); see also Lemma~28.9.2,
+\stacksproject{02IT}.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Noetherian normal schemes decompose]
+\label{lem:pc-noetherian-normal-decomposition}
+Let $X$ be a Noetherian scheme.  Then $X$ is normal if and only if $X$ is a
+finite disjoint union of normal integral schemes.  In particular, a
+Noetherian normal connected scheme is integral.
+\uses{def:pc-scheme}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-scheme}
+This is a cited external input: Properties of Schemes, Section~28.7 (Normal
+schemes), Lemma~28.7.6 (\stacksproject{033M}).  The last assertion is the case
+in which the disjoint union has a single part, which connectedness forces.  It
+is not decomposed here.
+\end{proof}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
@@ -5865,7 +5891,7 @@ from a point, which is explicit in the base change part (1) and in
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,rem:pc-regularity-sc}
+\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier}
 \emph{(3).}  This is exactly \Cref{lem:pc-euler-additive}.
 
 \emph{(1).}  For the field extension $K/k$ put $X_K:=X\times_{\Spec(k)}\Spec(K)$ (\Cref{def:pc-base-change}).
@@ -6100,7 +6126,7 @@ only if $\deg(\cL)>0$.
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,rem:pc-regularity-sc}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample}
 \emph{($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
@@ -6447,7 +6473,7 @@ proper, the first arrow is an if-and-only-if.
 \uses{def:pc-relative-effective-cartier,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,lem:pc-finite-flat-fp-locally-free,lem:pc-finite-type-noetherian-fp,lem:pc-proper-quasi-finite-finite,lem:pc-recd-locally-principal,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,rem:pc-regularity-sc}
+\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,lem:pc-finite-flat-fp-locally-free,lem:pc-finite-type-noetherian-fp,lem:pc-proper-quasi-finite-finite,lem:pc-recd-locally-principal,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
 \emph{$(3)\Rightarrow(2)$.}  This is the ``in particular'' of
 \Cref{lem:pc-recd-locally-principal}: $D$ is locally principal (the
 fibres are effective Cartier divisors and $D$ is flat and locally
@@ -7613,7 +7639,7 @@ $\underline{\Hilb}^d_{X/k}$
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-rational-point,def:pc-curve,def:pc-geometrically-irreducible,def:pc-hilb-functor}
 \end{proposition}
 \begin{proof}
-\uses{def:pc-curve,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-projective-proper,lem:pc-proper-base-change,lem:pcb-smooth-regular,rem:pc-regular-normal,thm:pc-hilb-curves}
+\uses{def:pc-curve,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-noetherian-normal-decomposition,lem:pc-projective-proper,lem:pc-proper-base-change,lem:pc-regular-is-normal,lem:pcb-smooth-regular,thm:pc-hilb-curves}
 Since $X$ is a proper variety (projective $\Rightarrow$ proper,
 \Cref{lem:pc-projective-proper}; a curve is a variety, hence integral,
 \Cref{def:pc-curve}), the ring $k':=H^0(X,\cO_X)$ is a finite field
@@ -7638,15 +7664,18 @@ $\dim_K H^1(X_K,\cO_{X_K})=\dim_kH^1(X,\cO_X)$.
 The morphism $X_K\to\Spec(K)$ is smooth (base change of smooth,
 \Cref{lem:pc-proper-base-change}) and proper (base change of proper,
 \Cref{lem:pc-proper-base-change}), so $X_K$ is regular
-(\Cref{lem:pcb-smooth-regular}), hence normal (\Cref{rem:pc-regular-normal})
+(\Cref{lem:pcb-smooth-regular}), hence normal
+(\Cref{lem:pc-regular-is-normal})
 and reduced.  Moreover $X_K$ is geometrically reduced: for every $K'/K$,
 $X_{K'}$ is smooth over $K'$, hence regular, hence reduced; and $X_K$ is
 proper, so \Cref{lem:pc-h0-geom-connected} (with $k$ replaced by $K$ and
 $X$ by $X_K$) shows that $X_K$ is geometrically connected, in particular
 connected.  A Noetherian normal connected scheme is irreducible by
-\Cref{rem:pc-regular-normal}: the normal scheme $X_K$ is a finite disjoint
-union of normal integral schemes, and connectedness forces a single
-component.  Hence $X_K$ is integral.  By \Cref{lem:pc-dim-base-change}
+\Cref{lem:pc-noetherian-normal-decomposition}, which applies because $X_K$ is
+Noetherian: it is of finite type over the field $K$, being the base change of
+the finite type morphism $X\to\Spec(k)$.  Indeed the normal scheme $X_K$ is a
+finite disjoint union of normal integral schemes, and connectedness forces a
+single component.  Hence $X_K$ is integral.  By \Cref{lem:pc-dim-base-change}
 the dimension of $X_K$ is $1$, and $X_K\to\Spec(K)$ is of finite type and
 separated (base changes of finite type and separated morphisms), so $X_K$
 is a variety of dimension $1$, i.e.\ a curve (\Cref{def:pc-curve}).
