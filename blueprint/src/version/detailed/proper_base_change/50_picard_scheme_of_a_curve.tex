@@ -1965,7 +1965,8 @@ the map
 is a bijection, natural in both arguments (Categories, Lemma~4.3.5,
 \stacksproject{001P}).
 % Mathlib: the category-theoretic statement already exists.
-\mathlibok\ \lean{CategoryTheory.yoneda, CategoryTheory.Functor.IsRepresentedBy,
+\mathlibok\ \lean{CategoryTheory.yonedaEquiv, CategoryTheory.yonedaLemma,
+CategoryTheory.yoneda, CategoryTheory.Functor.IsRepresentedBy,
 CategoryTheory.Functor.IsRepresentable}
 \end{lemma}
 \begin{proof}
@@ -2391,13 +2392,15 @@ Let $A=R[t_1,\dots,t_m]/(f_1,\dots,f_c)$ be standard smooth over $R$ in the sens
 $\det(\partial f_j/\partial t_i)_{1\le i,j\le c}$ invertible in $A$.  Then
 \begin{enumerate}
 \item $R\to A$ is \hyperref[def:pc-smooth-morphism]{smooth};
-\item $\Omega_{A/R}$ is free on $dt_{c+1},\dots,dt_m$, hence of rank $m-c$;
+\item $\Omega_{A/R}$ is free on $dt_{c+1},\dots,dt_m$; if moreover $A\ne0$, it is of rank
+  $m-c$;
 \item for every ring map $R\to R'$ the base change $R'\to R'\otimes_RA$ is again standard
   smooth, for the base changed presentation.
 \end{enumerate}
 \uses{lem:pc-standard-smooth-form,def:pc-smooth-morphism,def:pc-kahler-differentials,def:pc-base-change}
 % Mathlib: Algebra.IsStandardSmooth and its basic API.
 \mathlibok\ \lean{Algebra.instSmoothOfIsStandardSmooth,
+Algebra.SubmersivePresentation.basisKaehler,
 Algebra.IsStandardSmooth.free_kaehlerDifferential,
 Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential,
 Algebra.IsStandardSmooth.baseChange}
@@ -4189,10 +4192,13 @@ In particular, for an arbitrary scheme $Y$ and a closed immersion
 $i:Z\to Y$, the preimage $i^{-1}(U)$ of an affine open $U\subseteq Y$
 is affine, i.e.\ a closed immersion is an affine morphism.
 \uses{def:pc-scheme,def:pc-morphism-conventions}
-% Mathlib: closed immersions are affine morphisms, and an affine
-% morphism to an affine scheme has affine source.
+% Mathlib: closed immersions are affine morphisms, an affine morphism to an
+% affine scheme has affine source, and closed subschemes of $X$ are the ideal
+% sheaves on $X$.
 \mathlibok\ \lean{AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine,
-AlgebraicGeometry.isAffine_of_isAffineHom}
+AlgebraicGeometry.isAffine_of_isAffineHom,
+AlgebraicGeometry.isClosedImmersion_iff_isAffineHom,
+AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Schemes, Lemma~26.8.2
