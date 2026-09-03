@@ -330,9 +330,10 @@ ring
  :=\bigoplus_{i\geq0}\mathfrak m^i/\mathfrak m^{i+1}
 \]
 is a polynomial ring over the residue field \(R/\mathfrak m\) in
-\(\dim R\) variables (the standard characterization of regularity:
-\(R\) is regular if and only if
-\(\operatorname{gr}_{\mathfrak m}R\) is a polynomial ring;
+\(\dim R\) variables (the standard structure theorem for regular
+local rings: if \(R\) is regular of dimension \(d\) then
+\(\operatorname{gr}_{\mathfrak m}R\) is the polynomial algebra
+\((R/\mathfrak m)[X_1,\dots,X_d]\);
 \emph{reference: Stacks Project, Commutative Algebra, Lemma
 10.106.1, \stacksproject{00NO}}).  A polynomial ring over a field is a domain.
 Finally, a ring whose associated graded ring is a domain is a
@@ -514,8 +515,10 @@ Algebra, \stacksproject{00OY}}) there is a finite injective map
 \(k[x_1,\dots,x_d]\hookrightarrow A\) with \(d=\dim A\); tensoring
 with \(k'\) gives a finite injective map
 \(k'[x_1,\dots,x_d]\hookrightarrow A\otimes_kk'\), and finite
-morphisms preserve dimension (the going-up theorem:
-\emph{reference: Stacks Project, Commutative Algebra, \stacksproject{00GU}}), so
+morphisms preserve dimension (for \(R\subseteq S\) with \(S\)
+integral over \(R\) one has \(\dim R=\dim S\):
+\emph{reference: Stacks Project, Commutative Algebra, Lemma
+10.112.4, \stacksproject{00OK}}), so
 \(\dim(A\otimes_kk')=d=\dim A\); hence
 \(\dim C_{k'}=\dim C\).
 \end{proof}
@@ -558,8 +561,12 @@ which vanishes in positive degrees by injectivity), so the natural
 map from the complex \(F\to I^{\bullet}\) to the total complex is a
 quasi-isomorphism, and the total cohomology is the hypercohomology
 \(H^{p+q}(X_{\Et},F)\).  This is the standard spectral sequence of
-a double complex (\emph{reference: Stacks Project, Homological
-Algebra: spectral sequences of double complexes}).
+a double complex, whose first page and second page are
+\({}'E_1^{pq}=H^q(K^{p,\bullet})\) and
+\({}'E_2^{pq}=H^p_I(H^q_{II}(K^{\bullet,\bullet}))\) for a double
+complex \(K^{\bullet,\bullet}\) (\emph{reference: Stacks Project,
+Homological Algebra, Section~12.25 (Spectral sequences: double
+complexes), Lemma~12.25.1, \stacksproject{0130}}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -757,6 +764,27 @@ Since \(\deg\) is a homomorphism (\Cref{def:pcb-pic0}),
 (\Cref{def:pcb-ample}) \(\mathcal L\) is ample.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Unramified is the vanishing of the sheaf of differentials]
+\label{lem:pcb-unramified-omega-zero}
+Let \(f:X\to S\) be a morphism of schemes.  Then \(f\) is
+unramified if and only if \(f\) is locally of finite type and
+\(\Omega_{X/S}=0\).  Moreover the diagonal of an unramified morphism
+is an open immersion, and conversely a morphism locally of finite type
+whose diagonal is an open immersion is unramified; so for morphisms
+locally of finite type this agrees with the convention of
+\Cref{def:pcb-scheme-conventions}.
+\uses{def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Lemma~29.36.2
+(\stacksproject{02G5}) for the first assertion, and Morphisms of
+Schemes, Lemma~29.36.13 (\stacksproject{02GE}) for the comparison with
+the diagonal.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % [reproduced from file 06 (label lem:pcb-degree-2g1-very-ample)]
 \begin{lemma}[Line bundles of large degree are very ample]
 \label{lem:pcb-degree-2g1-very-ample}
@@ -768,7 +796,7 @@ field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
 \uses{def:pcb-genus,def:pcb-pic0,def:pcb-curves,def:pcb-ample}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree}
+\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree,lem:pcb-unramified-omega-zero}
 We use Riemann--Roch (\Cref{thm:pc-riemann-roch}) for the proper
 smooth curve \(C\) of genus \(g\) (\Cref{def:pcb-genus}): first, \(C\) is projective (a
 proper smooth curve over a field is projective: Varieties,
@@ -821,8 +849,9 @@ from the trivial deformation), and the injectivity of
 \(d\varphi_P\) for all \(P\) is equivalent to
 \(\Omega_{C/\mathbf P^N}=0\) (the fibre of
 \(\Omega_{C/\mathbf P^N}\) at \(P\) is the dual of the cokernel of
-the tangent map; \emph{reference: Stacks Project, Morphisms of
-Schemes: unramified morphisms}), i.e.\ \(\varphi\) is unramified.
+the tangent map), i.e.\ \(\varphi\) is unramified
+(\Cref{lem:pcb-unramified-omega-zero}; the morphism \(\varphi\) is
+of finite type).
 An unramified morphism has finite fibres (a scheme of finite type
 over a field with vanishing sheaf of differentials is a finite
 disjoint union of points: its irreducible components have function
@@ -830,9 +859,12 @@ fields with no differentials, hence are algebraic over the base
 field, so the dimension is zero and
 \Cref{lem:pcb-dim0-finite} applies).  Thus \(\varphi\) is proper
 (a morphism of proper schemes) with finite fibres, hence finite
-(\emph{reference: Stacks Project, Morphisms of Schemes,
-\stacksproject{02OG}: proper and quasi-finite implies finite;
-cf.\ the proof recalled in \Cref{lem:pcb-morphism-from-function}}).
+(\emph{reference: Stacks Project, Cohomology of Schemes,
+Lemma~30.21.1, \stacksproject{02OG}: over a locally Noetherian base a
+morphism is finite if and only if it is proper with finite fibres};
+the base \(\mathbf P^N_k\) is of finite type over a field, hence
+locally Noetherian; cf.\ the proof recalled in
+\Cref{lem:pcb-morphism-from-function}).
 Finally, \(\varphi\) is finite and injective on closed points: its
 image \(\varphi(C)\subset\mathbf P^N\) is closed, and for
 \(y=\varphi(P)\in\varphi(C)\) the fibre is the single point \(P\)
@@ -864,6 +896,23 @@ A section \(s\neq0\) gives
 well defined by \Cref{lem:pcb-deg-principal-zero}; contradiction.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Finitely generated algebras over a Noetherian ring are Noetherian]
+\label{lem:pcb-fg-algebra-noetherian}
+Any finitely generated ring over a Noetherian ring is Noetherian.  Any
+localization of a Noetherian ring is Noetherian.
+% Mathlib: the Hilbert basis theorem, and its finitely generated algebra form.
+\mathlibok\ \lean{Polynomial.isNoetherianRing, Algebra.FiniteType.isNoetherianRing}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.31.1
+(\stacksproject{00FN}), the Hilbert basis theorem.  It is available in
+Mathlib in the form named in the statement, so it is not decomposed
+further here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % [reproduced from file 06] (label: lem:pcb-dim0-finite)
 \begin{lemma}[Zero-dimensional closed subsets are finite]
 \label{lem:pcb-dim0-finite}
@@ -872,10 +921,11 @@ subset \(Z\subseteq X\) of dimension at most zero is a finite set of
 closed points.
 \end{lemma}
 \begin{proof}
+\uses{lem:pcb-fg-algebra-noetherian}
 It suffices to treat \(X=\operatorname{Spec}A\) affine and
 \(Z=V(I)\).  Then \(B:=A/I\) is a finitely generated \(k\)-algebra,
-hence noetherian (Hilbert's basis theorem: \emph{reference: Stacks
-Project, Commutative Algebra}), and of dimension zero,
+hence noetherian (the Hilbert basis theorem,
+\Cref{lem:pcb-fg-algebra-noetherian}), and of dimension zero,
 i.e.\ every prime ideal of \(B\) is maximal.  We first show that
 \(B\) is Artinian.  The topological space \(\operatorname{Spec}B\)
 is a noetherian space, so it has finitely many irreducible
@@ -933,9 +983,11 @@ surjective.  The fibres of \(\pi_f\) are finite: the fibre over
 \(y\in\mathbf P^1\) is a proper closed subscheme of \(C\) not equal
 to \(C\), hence of dimension zero and finite by
 \Cref{lem:pcb-dim0-finite}.  A proper morphism with finite fibres is
-finite (\emph{reference: Stacks Project, Morphisms of Schemes, \stacksproject{02OG}
-: a proper morphism is finite if and only if it is
-quasi-finite}; we
+finite (\emph{reference: Stacks Project, Cohomology of Schemes,
+Lemma~30.21.1, \stacksproject{02OG}: over a locally Noetherian base a
+morphism is finite if and only if it is proper with finite fibres};
+the base \(\mathbf P^1_k\) is of finite type over a field, hence
+locally Noetherian; we
 recall the proof: the Stein factorization
 \(C\to T\to\mathbf P^1\) of \(\pi_f\) has \(T\to\mathbf P^1\) finite,
 and \(C\to T\) is proper with connected fibres; combined with
@@ -1107,7 +1159,7 @@ and \(\mathcal L:=\mathcal O_X(D)\)
 \uses{def:pcb-effective-cartier-divisor,def:pcb-ample,def:pcb-divisor}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample}
+\uses{def:pcb-ample,lem:pc-closed-immersion-affine}
 Choose \(m\geq1\) with \(\mathcal L^{\otimes m}\) very ample
 (\Cref{def:pcb-ample}) and let \(i:X\hookrightarrow\mathbf P^N_k\) be
 the closed immersion given by the complete linear system
@@ -1127,9 +1179,10 @@ canonical section, with \(V(s)=D\); then
 The complement of a hyperplane is affine space,
 \(\mathbf A^N_k\cong\mathbf P^N_k\setminus H\), and
 \(i(X)\cap\mathbf A^N\) is closed in \(\mathbf A^N\), hence affine
-(a closed immersion is an affine morphism: \emph{reference:
-Stacks Project, Morphisms of Schemes: closed immersions are
-affine}); therefore \(X\setminus D\) is affine.
+(a closed immersion is an affine morphism,
+\Cref{lem:pc-closed-immersion-affine}: \emph{reference: Stacks
+Project, Morphisms of Schemes, Lemma~29.11.10,
+\stacksproject{01SE}}); therefore \(X\setminus D\) is affine.
 \end{proof}
 % ---------------------------------------------------------------------------
 \subsection{Serre duality and Riemann--Roch for smooth projective curves}
