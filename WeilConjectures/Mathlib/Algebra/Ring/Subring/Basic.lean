@@ -8,10 +8,10 @@ module
 public import Mathlib.Algebra.Ring.Subring.Basic
 
 /-!
-# Inverses of units of a subring of a division ring
+# Complements on subrings
 
-`Subring.inv_mem_of_isUnit`: if an element of a subring of a division ring is a unit of
-that subring, then its inverse in the ambient ring already lies in the subring.
+* `Subring.inv_mem_of_isUnit`: if an element of a subring of a division ring is a unit of
+  that subring, then its inverse in the ambient ring already lies in the subring.
 -/
 
 @[expose] public section

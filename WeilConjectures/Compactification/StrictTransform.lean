@@ -139,18 +139,28 @@ lemma strictTransform_condition :
 separatedness, quasi-compactness, local finite type and being a closed immersion are
 inherited from `f`. -/
 
-instance [IsSeparated f] : IsSeparated (strictTransformMap f π U) :=
+/-- Separatedness passes from `f` to the projection of the strict transform to `X'`. -/
+instance isSeparated_strictTransformMap [IsSeparated f] :
+    IsSeparated (strictTransformMap f π U) :=
   have : IsSeparated (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
   inferInstanceAs (IsSeparated (strictTransformι f π U ≫ pullback.snd f π))
 
-instance [QuasiCompact f] : QuasiCompact (strictTransformMap f π U) :=
+/-- Quasi-compactness passes from `f` to the projection of the strict transform to `X'`. -/
+instance quasiCompact_strictTransformMap [QuasiCompact f] :
+    QuasiCompact (strictTransformMap f π U) :=
   inferInstanceAs (QuasiCompact (strictTransformι f π U ≫ pullback.snd f π))
 
-instance [LocallyOfFiniteType f] : LocallyOfFiniteType (strictTransformMap f π U) :=
+/-- Being locally of finite type passes from `f` to the projection of the strict transform
+to `X'`. -/
+instance locallyOfFiniteType_strictTransformMap [LocallyOfFiniteType f] :
+    LocallyOfFiniteType (strictTransformMap f π U) :=
   have : LocallyOfFiniteType (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
   inferInstanceAs (LocallyOfFiniteType (strictTransformι f π U ≫ pullback.snd f π))
 
-instance [IsClosedImmersion f] : IsClosedImmersion (strictTransformMap f π U) :=
+/-- Being a closed immersion passes from `f` to the projection of the strict transform to
+`X'`. -/
+instance isClosedImmersion_strictTransformMap [IsClosedImmersion f] :
+    IsClosedImmersion (strictTransformMap f π U) :=
   have : IsClosedImmersion (pullback.snd f π) := MorphismProperty.pullback_snd _ _ ‹_›
   inferInstanceAs (IsClosedImmersion (strictTransformι f π U ≫ pullback.snd f π))
 
@@ -159,6 +169,17 @@ lemma ker_strictTransformι :
     (strictTransformι f π U).ker = ((strictTransformOpen f π U).ι).ker :=
   Scheme.IdealSheafData.ker_subschemeι _
 
+section SchemeTheoreticImage
+
+variable [QuasiCompact (strictTransformOpen f π U).ι]
+
+/-- The factorization of the open locus through the strict transform is
+scheme-theoretically dominant: the strict transform is by definition the
+scheme-theoretic image of that inclusion. -/
+instance : IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
+  inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
+
+end SchemeTheoreticImage
 section Range
 
 /-! ### The underlying set of the strict transform
@@ -202,10 +223,10 @@ theorem mem_range_strictTransformMap_of_mem_of_mem_range {x' : X'} (hU : π x' �
     _ = x' := hw2
 
 /-- **Disjointness of boundary closures persists along strict transforms**
-(blueprint: `lemma:nagata-boundary-disjoint-persists`; proof order item 37): if two
-closed subschemes have disjoint images, their strict transforms along an arbitrary
-morphism `π : X' ⟶ X` remain disjoint, because each strict transform is contained
-in the full inverse image of the corresponding closed subscheme. -/
+(blueprint: `lemma:nagata-boundary-disjoint-persists`; proof order item 37).
+
+Each strict transform is contained in the full inverse image of the corresponding closed
+subscheme. -/
 theorem disjoint_range_strictTransformMap_of_disjoint {Y₁ Y₂ : Scheme.{u}}
     (f₁ : Y₁ ⟶ X) (f₂ : Y₂ ⟶ X) (hdisj : Disjoint (Set.range f₁) (Set.range f₂)) :
     Disjoint (Set.range (strictTransformMap f₁ π U))
@@ -241,11 +262,9 @@ section PullbackComparison
 
 variable [IsIso (π ∣_ U)]
 
-/-- If `π : X' ⟶ X` restricts to an isomorphism over `U` — for instance if `π` is the
-blow-up of an ideal whose support is disjoint from `U` — then the open locus of
-`Y ×_X X'` over `U` is canonically the ordinary pullback `Y ×_X U`, compatibly with the
-projection to `Y`.
-(Blueprint: `lemma:nagata-strict-transform-over-complement`.) -/
+/-- **The open locus over `U` is the ordinary pullback when `π` is an isomorphism over
+`U`** — for instance when `π` is the blow-up of an ideal whose support is disjoint from
+`U` (blueprint: `lemma:nagata-strict-transform-over-complement`). -/
 theorem isPullback_strictTransformOpen :
     IsPullback ((strictTransformOpen f π U).ι ≫ pullback.fst f π)
       ((pullback.snd f π ∣_ (π ⁻¹ᵁ U)) ≫ (π ∣_ U)) f U.ι := by
@@ -259,11 +278,11 @@ theorem isPullback_strictTransformOpen :
   · simp
   · simp [morphismRestrict_ι]
 
-/-- The strict transform over the preserved open: combining
-`AlgebraicGeometry.isIso_pullback_fst_strictTransformι` with
-`AlgebraicGeometry.isPullback_strictTransformOpen`, the part of the strict transform lying
-over `U` is the ordinary base change `Y ×_X U`.
-(Blueprint: `lemma:nagata-strict-transform-over-complement`.) -/
+/-- **The strict transform over the preserved open is the ordinary base change**
+(blueprint: `lemma:nagata-strict-transform-over-complement`).
+
+This combines `AlgebraicGeometry.isIso_pullback_fst_strictTransformι` with
+`AlgebraicGeometry.isPullback_strictTransformOpen`. -/
 theorem isPullback_strictTransform_over :
     IsPullback
       (pullback.fst (strictTransformOpen f π U).ι (strictTransformι f π U) ≫

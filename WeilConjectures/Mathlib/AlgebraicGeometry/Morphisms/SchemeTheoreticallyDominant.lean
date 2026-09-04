@@ -12,16 +12,23 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Scheme-theoretically dominant morphisms
 
-Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in two independent groups.
+Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in three independent groups.
+
+## Basic characterizations
+
+- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
+  scheme-theoretically dominant if and only if the inclusion of its scheme-theoretic
+  image is an isomorphism;
+- `AlgebraicGeometry.Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant`: precomposing
+  with a scheme-theoretically dominant morphism does not change the kernel ideal sheaf;
+- the inclusion of the generic point `Spec K ⟶ Spec A` of the spectrum of a domain with
+  fraction field `K` is scheme-theoretically dominant.
 
 ## Flat base change for scheme-theoretic images
 
 Formation of scheme-theoretic images commutes with flat base change (blueprint:
 `lemma:nagata-scheme-image-flat-base-change`; Stacks Project Tag 081I):
 
-- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
-  scheme-theoretically dominant if and only if the inclusion of its scheme-theoretic
-  image is an isomorphism;
 - `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` and
   `AlgebraicGeometry.Scheme.Hom.ker_of_isPullback`: for `q : Y' ⟶ Y` flat, the kernel of
   the base change `T ×_Y Y' ⟶ Y'` is the pullback of the kernel of `g`;
@@ -55,6 +62,9 @@ inclusion `U.ι` is scheme-theoretically dominant:
   restricts to an isomorphism over `W`, the open `f ⁻¹ᵁ W` is scheme-theoretically
   dense in `X'` and `U ≤ W` is scheme-theoretically dense in `X`, then `f ⁻¹ᵁ U` is
   scheme-theoretically dense in `X'`.
+- `AlgebraicGeometry.IsSchemeTheoreticallyDominant.preimage_ι_of_isIso`: the inverse
+  image of a scheme-theoretically dense open under an isomorphism is
+  scheme-theoretically dense.
 -/
 
 @[expose] public section
@@ -75,6 +85,33 @@ theorem isSchemeTheoreticallyDominant_iff_isIso_imageι (g : T ⟶ Y) :
     IsSchemeTheoreticallyDominant g ↔ IsIso g.imageι :=
   (isSchemeTheoreticallyDominant_iff g).trans
     (Scheme.isIso_subschemeι_iff_eq_bot g.ker).symm
+
+/-- Precomposition with a scheme-theoretically dominant morphism does not change the
+kernel ideal sheaf. -/
+lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
+    (γ : T ⟶ Y) [IsSchemeTheoreticallyDominant d] : (d ≫ γ).ker = γ.ker := by
+  rw [Scheme.Hom.ker_comp, d.ker_eq_bot, Scheme.IdealSheafData.map_bot]
+
+section FractionRing
+
+variable (A K : Type u) [CommRing A] [IsDomain A] [Field K] [Algebra A K]
+  [IsFractionRing A K]
+
+/-- The inclusion of the generic point of the spectrum of a domain is
+scheme-theoretically dominant. -/
+instance : IsSchemeTheoreticallyDominant
+    (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
+  have : IsDominant (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
+    constructor
+    change DenseRange (PrimeSpectrum.comap (algebraMap A K))
+    rw [PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical,
+      (RingHom.injective_iff_ker_eq_bot _).mp (IsFractionRing.injective A K)]
+    exact bot_le
+  exact .of_isDominant _
+
+variable {A K} {Z : Scheme.{u}}
+
+end FractionRing
 
 variable (g : T ⟶ Y) [QuasiCompact g] {Y' : Scheme.{u}} (q : Y' ⟶ Y) [Flat q]
 
@@ -242,6 +279,20 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
     rw [hsq]
     infer_instance
   have he : (f ⁻¹ᵁ U).ι = X'.homOfLE hpre ≫ (f ⁻¹ᵁ W).ι := (Scheme.homOfLE_ι _ _).symm
+  rw [he]
+  infer_instance
+
+/-- **Scheme-theoretic density of an open transports along an isomorphism**: if `f` is an
+isomorphism and `U` is a scheme-theoretically dense open of its target, then `f ⁻¹ᵁ U` is
+scheme-theoretically dense in the source. -/
+theorem IsSchemeTheoreticallyDominant.preimage_ι_of_isIso (f : X' ⟶ X) [IsIso f]
+    (U : X.Opens) [IsSchemeTheoreticallyDominant U.ι] :
+    IsSchemeTheoreticallyDominant (f ⁻¹ᵁ U).ι := by
+  have : IsIso (f ∣_ U) :=
+    IsZariskiLocalAtTarget.restrict (P := .isomorphisms Scheme) (inferInstanceAs (IsIso f)) U
+  have he : (f ⁻¹ᵁ U).ι = (f ∣_ U) ≫ U.ι ≫ inv f := by
+    rw [← Category.assoc, morphismRestrict_ι, Category.assoc, IsIso.hom_inv_id,
+      Category.comp_id]
   rw [he]
   infer_instance
 

@@ -14,6 +14,9 @@ We record that `Spec` of a restriction map between affine opens intertwines the 
 isomorphisms `Spec Γ(X, U) ≅ U` with the inclusion of opens, and that the algebra map
 realizing `Γ(X, X.basicOpen f)` as a localization is the restriction map of the structure
 sheaf.
+
+We also record that an open of an affine scheme is covered by finitely many basic opens
+as soon as it is quasi-compact (`AlgebraicGeometry.exists_finite_basicOpen_cover`).
 -/
 
 @[expose] public section
@@ -41,5 +44,23 @@ lemma algebraMap_basicOpen_eq {U : X.Opens} (f : Γ(X, U)) :
     algebraMap Γ(X, U) Γ(X, X.basicOpen f) =
       (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom :=
   rfl
+
+/-- A quasi-compact open of an affine scheme is a finite union of basic opens. -/
+lemma exists_finite_basicOpen_cover [IsAffine X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) :
+    ∃ (ι : Type u) (_ : Finite ι) (u : ι → Γ(X, ⊤)) (_ : ∀ i, X.basicOpen (u i) ≤ U),
+      U = ⨆ i, X.basicOpen (u i) := by
+  classical
+  obtain ⟨t, ht⟩ := hU.elim_finite_subcover
+    (fun a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} ↦ (X.basicOpen a.1 : Set X))
+    (fun a ↦ (X.basicOpen a.1).2) (by
+      intro x hx
+      obtain ⟨a, ha1, ha2⟩ := (isAffineOpen_top X).exists_basicOpen_le (V := U) ⟨x, hx⟩ trivial
+      exact Set.mem_iUnion.mpr ⟨⟨a, ha1⟩, ha2⟩)
+  refine ⟨{a : {a : Γ(X, ⊤) // X.basicOpen a ≤ U} // a ∈ t}, inferInstance,
+    fun a ↦ a.1.1, fun a ↦ a.1.2, le_antisymm ?_ (iSup_le fun a ↦ a.1.2)⟩
+  intro x hx
+  obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (ht hx)
+  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨a, ha⟩, hxa⟩
 
 end AlgebraicGeometry
