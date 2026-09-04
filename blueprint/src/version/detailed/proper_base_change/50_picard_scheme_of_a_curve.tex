@@ -4000,6 +4000,14 @@ $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
 %     formalisation marker.  AlgebraicGeometry.Scheme.picFunctor, which stood
 %     here, is the absolute functor Y |-> Pic(Y) on Scheme^op: it is a functor
 %     Scheme^op -> Type and does not mention f.
+%     The redirection closes the loop rather than ending it: picardPresheaf f
+%     is by definition the base change (Over.pullback f followed by
+%     Over.forget X), made opposite, then composed with picFunctor, and
+%     picFunctor's own map_id and map_comp fields are proved by
+%     funext Pic.pullback_id and by funext (fun L => Pic.pullback_comp _ _ L)
+%     (both in the definition of picFunctor in PicardFunctor.lean, up to a
+%     congrArg TypeCat.ofHom).  So the two lemmas this node names are exactly
+%     the functoriality obligations of the object that states its headline.
 \lean{SheafOfModules.IsInvertible.pullback, AlgebraicGeometry.Scheme.Pic.pullback_id, AlgebraicGeometry.Scheme.Pic.pullback_comp}
 \leanok
 \end{lemma}
