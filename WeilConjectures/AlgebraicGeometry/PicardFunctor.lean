@@ -23,8 +23,7 @@ the `Set`-valued Picard presheaf `T ↦ Pic (X ×[S] T)` on the category of sche
 
 - `AlgebraicGeometry.Scheme.Pic`: the Picard group of a scheme, as a set
   (blueprint `def:pcb-picard-group`).
-- `AlgebraicGeometry.Scheme.picFunctor`: the Picard group as a functor `Schemeᵒᵖ ⥤ Type (u+1)`
-  (blueprint `lem:pc-pic-presheaf-functorial`).
+- `AlgebraicGeometry.Scheme.picFunctor`: the Picard group as a functor `Schemeᵒᵖ ⥤ Type (u+1)`.
 - `AlgebraicGeometry.picardPresheaf`: the Picard presheaf of `f : X ⟶ S`
   (blueprint `def:pc-picard-presheaf`).
 
