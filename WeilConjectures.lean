@@ -41,6 +41,7 @@ public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
