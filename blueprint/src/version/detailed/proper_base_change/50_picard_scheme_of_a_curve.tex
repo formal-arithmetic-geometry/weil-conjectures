@@ -1117,7 +1117,7 @@ field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
 \uses{def:pcb-genus,def:pcb-pic0,def:pcb-curves,def:pcb-ample}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree,lem:pcb-unramified-omega-zero,lem:pcb-proper-dim-one-projective,lem:pcb-finite-iff-proper-finite-fibres}
+\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree,lem:pcb-unramified-omega-zero,lem:pcb-proper-dim-one-projective,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-nakayama}
 We use Riemann--Roch (\Cref{thm:pc-riemann-roch}) for the proper
 smooth curve \(C\) of genus \(g\) (\Cref{def:pcb-genus}): first, \(C\) is projective (a
 proper scheme of dimension at most one over a field is projective,
@@ -1192,6 +1192,13 @@ image \(\varphi(C)\subset\mathbf P^N\) is closed, and for
 \(y=\varphi(P)\in\varphi(C)\) the fibre is the single point \(P\)
 with residue field \(k\) (\(k\) algebraically closed), so
 \((\varphi_*\mathcal O_C)_y\otimes k(y)=k\); by Nakayama's lemma
+(\Cref{lem:pcb-nakayama}(2), applied to the local ring
+\(R=\mathcal O_{\mathbf P^N,y}\) with \(I=\mathfrak m_y\), which is the
+Jacobson radical of \(R\), and to the \(R\)-module
+\(M=(\varphi_*\mathcal O_C)_y\), which is finite because \(\varphi\) is
+finite: the induced map \(R/\mathfrak m_yR=k(y)\to M/\mathfrak m_yM=k\)
+is a map of one-dimensional \(k\)-vector spaces sending \(1\) to \(1\),
+hence surjective)
 \(\mathcal O_{\mathbf P^N,y}\to(\varphi_*\mathcal O_C)_y\) is
 surjective, hence an isomorphism (it is injective because
 \(\varphi\) is dominant onto \(\varphi(C)\)), and \(\varphi\) is
@@ -1714,7 +1721,7 @@ which is Algebraic Curves, Lemma~53.4.1,
 \uses{def:pc-kahler-differentials,def:pc-scheme,def:pc-ext}
 \end{theorem}
 \begin{proof}
-\uses{lem:pc-cech-computes,lem:pc-serre-vanishing,def:pc-ext,lem:pc-ext-injective-resolution,lem:pc-coeffaceable-universal}
+\uses{lem:pc-cech-computes,lem:pc-serre-vanishing,def:pc-ext,lem:pc-ext-injective-resolution,lem:pc-coeffaceable-universal,lem:pc-sheaves-of-modules-grothendieck}
 Write $P:=\mathbf P^N_k$ and $\omega:=\omega_P$.  (Here and below
 $\operatorname{Ext}$ is the Ext of \Cref{def:pc-ext}.)
 
@@ -1802,7 +1809,9 @@ the short exact sequence, making
 exact.
 
 For $F=T$: choose an injective resolution $\omega\to I^{\bullet}$ in
-the category of $\cO_P$-modules (which has enough injectives; this is
+the category of $\cO_P$-modules (which has enough injectives, being a
+Grothendieck abelian category,
+\Cref{lem:pc-sheaves-of-modules-grothendieck}; this is
 the resolution the injective-resolution description of
 \Cref{def:pc-ext} refers to).  Each $I^n$ is injective, so
 $\Hom_{\cO_P}(-,I^n)$ is exact and
