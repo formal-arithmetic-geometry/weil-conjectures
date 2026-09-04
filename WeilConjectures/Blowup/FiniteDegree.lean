@@ -95,14 +95,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
   rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
   exact (hI U le_top).mul (hK U le_top)
 
-/-- The ideal of sections on `⊤` of `ofIdealTop`. -/
-private lemma ideal_top_ofIdealTop {Y : Scheme.{u}} [IsAffine Y] (K : Ideal Γ(Y, ⊤)) :
-    (Scheme.IdealSheafData.ofIdealTop K).ideal ⟨⊤, isAffineOpen_top _⟩ = K := by
-  have h1 : Y.presheaf.map ((homOfLE le_top).op :
-      Opposite.op (⊤ : Y.Opens) ⟶ Opposite.op (((⟨⊤, isAffineOpen_top Y⟩ :
-        Y.affineOpens) : Y.Opens))) = 𝟙 _ := Y.presheaf.map_id _
-  rw [Scheme.IdealSheafData.ofIdealTop_ideal, h1, CommRingCat.hom_id, Ideal.map_id]
-
 /-- **Finite-type subsheaves through prescribed sections** (a corollary of the
 finite-type extension theorem, Stacks Project Tag 01PF): if `F` is a finitely generated
 subideal of the sections of an ideal sheaf `H` over an affine open `V` of a qcqs
@@ -120,7 +112,7 @@ theorem _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_idea
   set K : V.1.toScheme.IdealSheafData :=
     Scheme.IdealSheafData.ofIdealTop (F.map (V.1.ι.appLE V.1 ⊤ htop).hom) with hKdef
   have hKtop : K.ideal ⟨⊤, isAffineOpen_top _⟩ = F.map (V.1.ι.appLE V.1 ⊤ htop).hom :=
-    ideal_top_ofIdealTop _
+    Scheme.IdealSheafData.ideal_top_ofIdealTop _
   have hKle : K ≤ H.comap V.1.ι := by
     refine Scheme.IdealSheafData.le_of_isAffine ?_
     rw [hKtop, Scheme.IdealSheafData.ideal_comap_eq_map_appLE V.1.ι H V
