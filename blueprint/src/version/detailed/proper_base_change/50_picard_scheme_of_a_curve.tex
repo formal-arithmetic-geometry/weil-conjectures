@@ -2096,6 +2096,44 @@ is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The conormal sequence of an immersion, short exact for a smooth source]
+\label{lem:pc-conormal-sequence-smooth}
+Let $S$ be a scheme and let $i:Z\to X$ be an
+\termref{def:pcb-scheme-conventions}{immersion} of schemes over $S$.
+Write $\mathcal C_{Z/X}$ for the conormal sheaf of $i$: the
+$\cO_Z$-module $\cI/\cI^2$, where $\cI\subseteq\cO_X$ is the ideal sheaf
+cutting out $Z$ after shrinking $X$ so that $i$ becomes a closed
+immersion.  Then there is a canonical exact sequence of
+$\cO_Z$-modules
+\[
+\mathcal C_{Z/X}\;\longrightarrow\;i^*\Omega_{X/S}
+\;\longrightarrow\;\Omega_{Z/S}\;\longrightarrow\;0
+\]
+(\Cref{def:pc-kahler-differentials}), whose first map is induced by
+$\mathrm d_{X/S}$.  If moreover $Z$ is
+\termref{def:pc-smooth-morphism}{smooth} over $S$, then this sequence is
+\emph{short} exact:
+\[
+0\;\longrightarrow\;\mathcal C_{Z/X}\;\longrightarrow\;i^*\Omega_{X/S}
+\;\longrightarrow\;\Omega_{Z/S}\;\longrightarrow\;0 .
+\]
+Only the \emph{source} $Z$ of the immersion is assumed smooth over $S$;
+no hypothesis is placed on $X\to S$.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-kahler-differentials,def:pc-smooth-morphism}
+\end{lemma}
+\begin{proof}
+This is a cited external input.  The three-term exact sequence and the
+description of its first map are Morphisms of Schemes, Section~29.33
+(Sheaf of differentials of a morphism), Lemma~29.33.15
+(\stacksproject{01UZ}).  That the sequence is short exact --- i.e.\ that
+$\mathcal C_{Z/X}\to i^*\Omega_{X/S}$ is injective --- when $Z$ is smooth
+over $S$ is Morphisms of Schemes, Section~29.35 (Smooth morphisms),
+Lemma~29.35.17 (\stacksproject{06AA}), which is stated for an immersion
+whose source alone is smooth over $S$.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[The dualizing module of a curve in projective space]
 \label{lem:pc-omega-identity}
@@ -2122,7 +2160,7 @@ a closed immersion of a smooth curve into a smooth projective space
 \uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-ext}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-morphism-hi,def:pc-ext,lem:pc-koszul-resolution}
+\uses{lem:pc-affine-morphism-hi,def:pc-ext,lem:pc-koszul-resolution,lem:pc-conormal-sequence-smooth}
 Let $\cK:=\cI_X/\cI_X^2$ be the conormal sheaf of the immersion and
 $\cN:=\mathcal{H}om(\cK,\cO_X)$ the normal bundle.  Both $\mathbf P^N_k$ and
 $X$ are smooth over $k$; the immersion is a regular immersion of
@@ -2185,7 +2223,13 @@ adjunction: from the conormal exact sequence
 \[
 0\to\cN^{\vee}\to\Omega^1_{\mathbf P^N}|_X\to\Omega^1_X\to0
 \]
-(using the smoothness of both schemes in the immersion) the exterior
+(this is \Cref{lem:pc-conormal-sequence-smooth} applied to the immersion
+$i:X\to\mathbf P^N_k$ over $S=\Spec(k)$, whose conormal sheaf
+$\mathcal C_{X/\mathbf P^N}$ is the sheaf $\cK=\cN^{\vee}$ above: the
+three-term sequence is exact in general, and it is \emph{short} exact
+here because the source $X$ is smooth over $k$ --- that is the only
+smoothness the cited node asks for, so no hypothesis on
+$\mathbf P^N_k$ is used at this step) the exterior
 power argument gives $\Lambda^N\Omega^1_{\mathbf P^N}|_X
 =\Lambda^r\cN^{\vee}\otimes\Omega^1_X$, i.e.
 \[
@@ -4242,6 +4286,88 @@ condition in \Cref{def:pc-finite-locally-free}.  Since $f_*\cO_X$ is
 locally free, its stalk at $s$ is a finite free $\cO_{S,s}$-module of
 rank $\dim_{\kappa(s)}(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)=d$.  As
 $s\in S$ was arbitrary, $f_*\cO_X$ is locally free of rank $d$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{lemma}[Degrees of finite locally free morphisms multiply]
+\label{lem:pc-flf-degree-multiplicative}
+Let $S$ be a scheme.
+\begin{enumerate}
+\item (Composites.)  Let $f:X\to Y$ be
+  \termref{def:pc-finite-locally-free}{finite locally free of degree
+  $d$} and let $g:Y\to S$ be finite locally free of degree $e$.  Then
+  $g\circ f$ is finite locally free of degree $de$.
+\item (Base change.)  Let $f:X\to Y$ be finite locally free of degree
+  $d$ and let $Y'\to Y$ be an arbitrary morphism.  Then the
+  \termref{def:pc-base-change}{base change}
+  $f':X\times_YY'\to Y'$ is finite locally free of degree $d$.
+\item (Products.)  Let $f_i:X_i\to Y_i$ $(i=1,2)$ be morphisms of
+  schemes over $S$ which are finite locally free of degrees $d_1$ and
+  $d_2$.  Then
+  $f_1\times_Sf_2:X_1\times_SX_2\to Y_1\times_SY_2$ is finite locally
+  free of degree $d_1d_2$.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-finite-locally-free,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-finite-locally-free,def:pc-base-change,lem:pc-flf-properties,lem:pc-finite-flat-fp-locally-free,lem:pc-artinian-product-local}
+(1)  That $g\circ f$ is \emph{finite locally free} --- that is, affine
+with $(g\circ f)_*\cO_X$ a finite locally free $\cO_S$-module --- is
+Morphisms of Schemes, Section~29.49 (Finite locally free morphisms),
+Lemma~29.49.3 (\stacksproject{02KC}); by
+\Cref{lem:pc-finite-flat-fp-locally-free} this says exactly that
+$g\circ f$ is finite, flat and locally of finite presentation, which are
+the first three requirements of \Cref{def:pc-finite-locally-free}.  That
+tag says nothing about degrees, so what remains --- and what this lemma
+adds --- is the fibre-rank condition.
+
+Fix $s\in S$.  By \Cref{lem:pc-flf-properties} the module $g_*\cO_Y$ is
+locally free of rank $e$, so there is an affine open
+$V=\Spec(R)\subseteq S$ containing $s$ over which it is free of rank
+$e$.  As $f$ and $g$ are affine, $g^{-1}(V)=\Spec(B)$ and
+$(g\circ f)^{-1}(V)=\Spec(A)$ are affine, and $B\cong R^{\oplus e}$ as an
+$R$-module.  The ring $A$ is the module of sections of $f_*\cO_X$ over
+$\Spec(B)$, hence a locally free $B$-module of rank $d$, again by
+\Cref{lem:pc-flf-properties}.  Put $\kappa:=\kappa(s)$ and
+$M:=B\otimes_R\kappa$, so that $\dim_\kappa M=e$.  The fibre $X_s$ is
+affine with ring $A\otimes_R\kappa=A\otimes_BM$, a locally free
+$M$-module of rank $d$.  Now $M$ is a finite $\kappa$-algebra, hence
+Artinian, hence a finite product $M=\prod_iM_i$ of local rings
+(\Cref{lem:pc-artinian-product-local}); a locally free module of rank
+$d$ over a local ring is free of rank $d$, so
+\[
+\dim_\kappa\Gamma(X_s,\cO_{X_s})=\dim_\kappa(A\otimes_BM)
+=\sum_i d\cdot\dim_\kappa M_i=d\cdot\dim_\kappa M=de .
+\]
+As $s\in S$ was arbitrary, $g\circ f$ is finite locally free of degree
+$de$.
+
+(2)  That $f'$ is finite locally free is Morphisms of Schemes,
+Section~29.49, Lemma~29.49.4 (\stacksproject{02KD}); as in (1),
+\Cref{lem:pc-finite-flat-fp-locally-free} turns this into the first
+three requirements of \Cref{def:pc-finite-locally-free}, and that tag
+too says nothing about degrees.  For the degree, let $y'\in Y'$ lie over
+$y\in Y$.  The fibre of $f'$ over $y'$ is the base change of the fibre of
+$f$ over $y$:
+$X'_{y'}=X_y\times_{\Spec\kappa(y)}\Spec\kappa(y')$
+(\Cref{def:pc-base-change}).  As $f$ is affine, $X_y$ is affine with
+$\dim_{\kappa(y)}\Gamma(X_y,\cO_{X_y})=d$; hence $X'_{y'}$ is affine with
+$\Gamma(X'_{y'},\cO)=\Gamma(X_y,\cO_{X_y})\otimes_{\kappa(y)}\kappa(y')$,
+of dimension $d$ over $\kappa(y')$.
+
+(3)  Factor $f_1\times_Sf_2$ as
+\[
+X_1\times_SX_2\;\xrightarrow{\ f_1\times\id\ }\;Y_1\times_SX_2
+\;\xrightarrow{\ \id\times f_2\ }\;Y_1\times_SY_2 .
+\]
+The first arrow is the base change of $f_1$ along the projection
+$Y_1\times_SX_2\to Y_1$, because
+$X_1\times_{Y_1}(Y_1\times_SX_2)=X_1\times_SX_2$; the second is the base
+change of $f_2$ along the projection $Y_1\times_SY_2\to Y_2$, because
+$X_2\times_{Y_2}(Y_1\times_SY_2)=Y_1\times_SX_2$.  By (2) they are finite
+locally free of degrees $d_1$ and $d_2$, so by (1) their composite is
+finite locally free of degree $d_1d_2$.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -6304,6 +6430,25 @@ Lemma~26.21.12 (\stacksproject{01KU}), clauses (1)--(4), stated here as the
 source states them.  The source carries two further clauses, on (fibre)
 products of separated and of quasi-separated morphisms; they are not used
 below and are not claimed by this node.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A section of a separated morphism is a closed immersion]
+\label{lem:pc-section-closed-immersion}
+Let $f:X\to S$ be a morphism of schemes and let $s:S\to X$ be a section
+of $f$, i.e.\ $f\circ s=\id_S$.  Then $s$ is an
+\termref{def:pcb-scheme-conventions}{immersion}.  If $f$ is
+\termref{def:pcb-scheme-conventions}{separated}, then $s$ is a closed
+immersion.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Schemes, Section~26.21 (Separation
+axioms), Lemma~26.21.11 (\stacksproject{01KT}).  The source carries one
+further clause, that $s$ is quasi-compact when $f$ is quasi-separated;
+it is not used below and is not claimed by this node.  It is not
+decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -8628,7 +8773,7 @@ $1$ gives the corresponding divisor $Z+x$.
 \uses{def:pc-hilb-functor,def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-hilb-functor,lem:pc-cartier-criterion,lem:pc-relative-cartier-difference}
+\uses{def:pc-finite-locally-free,def:pc-hilb-functor,lem:pc-cartier-criterion,lem:pc-relative-cartier-difference,lem:pc-section-closed-immersion,lem:pc-separated-permanence,lem:pc-flf-degree-multiplicative}
 Write $H_d:=\underline{\Hilb}^d_{X/S}$,
 $H_{d+1}:=\underline{\Hilb}^{d+1}_{X/S}$ and let
 \[
@@ -8647,8 +8792,11 @@ degree $d$ over $T$, with $D=D'+\Gamma_x$ (the sum of the effective
 Cartier divisors).
 Proof: by \Cref{lem:pc-cartier-criterion} ((1)$\Rightarrow$(2)) both
 $D\to T$ and $\Gamma_x\to T$ ($\cong T$, finite locally free of degree
-$1$; it is a closed subscheme of $X_T$ because the graph of a morphism
-to a separated scheme over $S$ is closed) are relative effective
+$1$; it is a closed subscheme of $X_T$ because $\Gamma_x$ is a section
+of the projection $X_T\to T$, which is separated as the base change of
+the separated $X\to S$ (\Cref{lem:pc-separated-permanence}(3)), so
+$\Gamma_x$ is a closed immersion by
+\Cref{lem:pc-section-closed-immersion}) are relative effective
 Cartier divisors on $X_T/T$; since $\Gamma_x\subseteq D$, the difference
 statement for relative effective Cartier divisors
 (\Cref{lem:pc-relative-cartier-difference}, applied with
@@ -8678,8 +8826,13 @@ the claim.
 $(\Sch/S)$: a $T$-valued point of $H_d\times_SX$ is a pair
 $(D',x)$ with $D'\in\Hilb^d_{X/S}(T)$ (a closed subscheme of $X_T$
 finite locally free of degree $d$) and $x:T\to X$; here $\Gamma_x$ is a
-relative effective Cartier divisor on $X_T/T$ because $X\to S$ is
-separated, so that the sum $D'+\Gamma_x$ is defined.  Over $T$ the pair
+closed subscheme of $X_T$ --- it is a section of the projection
+$X_T\to T$, which is separated as the base change of the separated
+$X\to S$ (\Cref{lem:pc-separated-permanence}(3)), so
+\Cref{lem:pc-section-closed-immersion} makes it a closed immersion ---
+and hence, as in Step 1, a relative effective Cartier divisor on
+$X_T/T$ by \Cref{lem:pc-cartier-criterion}, so that the sum
+$D'+\Gamma_x$ is defined.  Over $T$ the pair
 $(D'+\Gamma_x,x)$ is, by Step 1 applied with $D:=D'+\Gamma_x$ and
 $\Gamma_x$, an element of $D_{\mathrm{univ}}(T)$ (an element
 $(D,x)$ of $\Hilb^{d+1}(T)$ whose graph is contained in $D$): the
@@ -8708,7 +8861,11 @@ finite locally free of degree $d+1$ (it is the composite of an
 isomorphism with the projection $D_{\mathrm{univ}}\to H_{d+1}$, and
 $D_{\mathrm{univ}}\to H_{d+1}$ is finite locally free of degree
 $d+1$: it is the universal closed object, hence finite locally free
-of degree $d+1$ by \Cref{def:pc-hilb-functor}).  The description of
+of degree $d+1$ by \Cref{def:pc-hilb-functor}; an isomorphism is
+finite locally free of degree $1$, and the degree of a composite is
+the product of the degrees by
+\Cref{lem:pc-flf-degree-multiplicative}(1), so the composite has
+degree $1\cdot(d+1)=d+1$).  The description of
 the morphism on points is exactly the statement: a pair $(Z,x)$
 goes to $D'+\Gamma_x$; for a closed point $x$ of degree $1$ (with
 $\kappa(x)=k$ a field) $\Gamma_x$ is the reduced point and
@@ -8746,7 +8903,7 @@ $\underline{\Hilb}^d_{X/k}$ is smooth of dimension $d$ over $k$).
 \uses{def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-dimension,def:pc-morphism-conventions,def:pcb-scheme-conventions,lem:pc-hilb-addition,lem:pc-relative-dimension-base-change,lem:pc-relative-dimension-composition,lem:pc-smooth-base-change,lem:pc-smooth-composition,lem:pc-smooth-descends-flat,lem:pc-smooth-flat,lem:pcb-finite-is-integral,lem:pcb-integral-dimension}
+\uses{def:pc-dimension,def:pc-morphism-conventions,def:pcb-scheme-conventions,lem:pc-hilb-addition,lem:pc-relative-dimension-base-change,lem:pc-relative-dimension-composition,lem:pc-smooth-base-change,lem:pc-smooth-composition,lem:pc-smooth-descends-flat,lem:pc-smooth-flat,lem:pcb-finite-is-integral,lem:pcb-integral-dimension,lem:pc-section-closed-immersion,lem:pc-separated-permanence}
 \emph{The cases $d=0,1$.}  $\Hilb^0_{X/S}(T)$ has exactly one element
 (the empty closed subscheme of $X_T$, finite locally free of degree
 $0$; it is the zero ideal; the pullback along $T'\to T$ is the empty
@@ -8757,9 +8914,14 @@ $Z$ is the graph of a unique morphism $T\to X$ (the projection
 $Z\to T$ is an isomorphism, being finite locally free of degree $1$
 and the closed immersion gives the section $T\to X$: the composite
 $T\stackrel{\sim}{\leftarrow}Z\hookrightarrow X_T$ is the desired
-morphism; conversely the graph of a morphism $T\to X$ is a closed
-subscheme finite locally free of degree $1$ because $X\to S$ is
-separated, the graph being closed): hence $\Hilb^1_{X/S}=X$ (the
+morphism; conversely the graph $\Gamma_x$ of a morphism $x:T\to X$ is a
+closed subscheme finite locally free of degree $1$: it is a section of
+the projection $X_T\to T$, which is separated as the base change of the
+separated $X\to S$ (\Cref{lem:pc-separated-permanence}(3)), so
+$\Gamma_x$ is a closed immersion by
+\Cref{lem:pc-section-closed-immersion}, and $\Gamma_x\to T$ is an
+isomorphism, hence finite locally free of degree $1$): hence
+$\Hilb^1_{X/S}=X$ (the
 functor is represented by $X$), which is smooth of relative dimension
 $1$ over $S$.
 
@@ -8892,7 +9054,7 @@ which is finite locally free of degree $\binom{d_1+d_2}{d_1}$.
 \uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:pc-effective-cartier-divisor,def:pc-degree-line-bundle}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-geom-irreducible-product,lem:pc-h0-proper-variety,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-image-universally-closed,lem:pc-proper-base-change,lem:pc-proper-composition,lem:pc-smooth-over-field-regular,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine,lem:pcb-regular-local-domain}
+\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-geom-irreducible-product,lem:pc-h0-proper-variety,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-image-universally-closed,lem:pc-proper-base-change,lem:pc-proper-composition,lem:pc-smooth-over-field-regular,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine,lem:pcb-regular-local-domain,lem:pc-flf-degree-multiplicative}
 \emph{Step 0: the affine-open hypothesis.}  We verify the hypothesis of
 \Cref{lem:pc-hilb-representable} (for $S=\Spec(k)$, $X/k$): let
 $x_1,\dots,x_d$ be a finite set of points of $X$ (of the single fibre
@@ -8961,23 +9123,20 @@ iterated composite
 (x_1,\dots,x_d)\longmapsto x_1+\cdots+x_d
 \]
 (the addition applied successively) is finite locally free of degree
-$d!$ (composites of finite locally free morphisms of degrees
-$1,2,\dots,d$: the degree multiplies, the classical multiplicativity:
-the composite $H_{d-1}\times X\to H_d$ has degree $d$; the
-projection $X^d\to X^{d-1}\times X$ is an isomorphism
-($X^d\cong X^{d-1}\times X$), the composite
-$X^d\to H_{d-1}\times X$ (the product of $\pi_{d-1}$ with
-$\mathrm{id}_X$) has degree $(d-1)!$ by the multiplicativity of the
-degree (the degree of a product of finite locally free morphisms is
-the product of the degrees: the rank of the finite locally free
-module attached to the fibre product is the tensor product of the
-modules, whose rank multiplies), and the composite of $X^d\to
-H_{d-1}\times X$ with $H_{d-1}\times X\to H_d$ has degree
-$(d-1)!\cdot d=d!$, the degree of a composite of finite locally free
-morphisms being the product of the degrees (again multiplicativity,
-or: the fibre of the composite over a point is the scheme of the
-tensor product of the two finite locally free algebras, whose rank is
-the product of the ranks)).  The morphism $\pi_d$ is
+$d!$, by induction on $d$ using \Cref{lem:pc-flf-degree-multiplicative}:
+the addition morphism $H_{d-1}\times_kX\to H_d$ has degree $d$; the
+projection $X^d\to X^{d-1}\times_kX$ is an isomorphism
+($X^d\cong X^{d-1}\times_kX$), the morphism
+$X^d\to H_{d-1}\times_kX$ is $\pi_{d-1}\times\mathrm{id}_X$, i.e.\ the
+base change of $\pi_{d-1}$ along the projection
+$H_{d-1}\times_kX\to H_{d-1}$, hence finite locally free of degree
+$(d-1)!$ by \Cref{lem:pc-flf-degree-multiplicative}(2) and the induction
+hypothesis; and the composite of $X^d\to
+H_{d-1}\times_kX$ with $H_{d-1}\times_kX\to H_d$ is finite locally free
+of degree $(d-1)!\cdot d=d!$ by
+\Cref{lem:pc-flf-degree-multiplicative}(1), the degree of a composite of
+finite locally free morphisms being the product of the degrees.  The
+morphism $\pi_d$ is
 \emph{surjective}: the image $I:=\pi_d(X^d)$ is closed
 ($X^d$ is proper, $\pi_d$ is finite hence proper, and a proper morphism
 is universally closed (\Cref{def:pcb-scheme-conventions}), hence in
@@ -9060,14 +9219,17 @@ H_{d_1}\times_kH_{d_2}&\longrightarrow&H_{d_1+d_2}
 \]
 (the vertical left arrow is $\pi_{d_1}\times\pi_{d_2}$, the vertical
 right $\pi_{d_1+d_2}$; the diagram commutes by the definition of $\alpha$
-and the additivity of the sums).  The left vertical arrow is finite
-locally free of degree $d_1!\cdot d_2!$ (the degrees multiply), the
-right vertical arrow of degree $(d_1+d_2)!$; with
-$\deg(\alpha)=N$ the commutativity gives
-$d_1!\,d_2!\,N=(d_1+d_2)!$ (the classical multiplicativity of the
-degree of composites of finite locally free morphisms: the composite
-has degree the product; the identity in the diagram is the identity of
-the two schemes), so $N=\binom{d_1+d_2}{d_1}$.  This proves (3).
+and the additivity of the sums).  The left vertical arrow is the product
+over $k$ of $\pi_{d_1}$ and $\pi_{d_2}$, hence finite locally free of
+degree $d_1!\cdot d_2!$ by
+\Cref{lem:pc-flf-degree-multiplicative}(3); the right vertical arrow has
+degree $(d_1+d_2)!$, by the computation of $\deg\pi_d$ in Step 1.  With
+$\deg(\alpha)=N$, the two ways round the commuting square are composites
+of finite locally free morphisms, whose degrees multiply
+(\Cref{lem:pc-flf-degree-multiplicative}(1)); as the horizontal top
+arrow is an isomorphism, this gives
+$d_1!\,d_2!\,N=(d_1+d_2)!$, so $N=\binom{d_1+d_2}{d_1}$.  This proves
+(3).
 \end{proof}
 
 % ----------------------------------------------------------------------------
