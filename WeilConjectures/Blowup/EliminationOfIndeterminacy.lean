@@ -15,8 +15,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
-public import Mathlib.RingTheory.MvPolynomial.Localization
 
 /-!
 
@@ -37,12 +35,16 @@ quasi-affine target is obtained by embedding it into a relative affine space.
   quasi-compact open and `f : U ⟶ 𝔸(σ; X)` an `X`-morphism, there are a `U`-admissible
   blow-up `B`, an open `W` of the blow-up containing the preimage of `U`, and an
   `X`-morphism `g : W ⟶ 𝔸(σ; X)` agreeing with `f` over `U` whose graph
-  `W ⟶ Bl ×_X 𝔸(σ; X)` has closed range.
+  `W ⟶ 𝔸(σ; X) ×_X Bl` has closed range.
   (Blueprint: `lemma:nagata-conrad-affine-space-extension`.)
 - `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine`: the same statement for
-  a quasi-affine target `Y` of finite type over the affine base `X`, with the additional
-  conclusion that the preimage of `U` is scheme-theoretically dense in the blow-up.
+  a quasi-affine target `Y` of finite type over the affine base `X`, the graph being
+  taken in `Y ×_X Bl` as above, with the additional conclusion that the preimage of `U`
+  is scheme-theoretically dense in the blow-up.
   (Blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`.)
+- `AlgebraicGeometry.isClosed_range_pullbackLift_of_descent_along_immersion`: the graph of
+  an extension descended along an immersion is closed. This is the last step of the
+  reduction of the quasi-affine case to the affine-space case.
 
 ## Proof sketch
 
@@ -63,6 +65,11 @@ there the graph is the vanishing locus of the sections `v̂ᵢ · tⱼ − ŵᵢ
 slopes `vᵢ = (uᵢ^N X)/(aX)` and `wᵢⱼ = (g uᵢ j · X)/(aX)`, because the slopes of the
 generators of the centre generate the unit ideal on the chart
 (`AffineBlowup.one_mem_span_awaySlope`).
+
+The algebra of slopes lives in `WeilConjectures.Blowup.Affine.Slope`, its transport to the
+charts of the blow-up of an ideal sheaf in `WeilConjectures.Blowup.FiniteDegree`, and the
+chart-local graph-closedness criterion in
+`WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace`.
 
 ## Implementation notes
 
@@ -325,7 +332,6 @@ lemma Scheme.isClosed_preimage_range_pullbackLift {X Bl : Scheme.{u}} {σ : Type
   rw [hpre]
   exact hcl
 
-
 set_option maxHeartbeats 400000 in
 -- Slow step: rewriting under `appTop` over the abstract chart rings `S`, `R`, `T`; the
 -- composite morphisms carry three `Spec` applications each.
@@ -382,7 +388,6 @@ lemma AffineSpace.appTop_coord_mul_eq_of_overlap {σ : Type u} {X Bl : Scheme.{u
       AffineSpace.comp_homOfVector_appTop_coord]
   apply hinj
   rw [map_mul, hres, hres, ← hval, hstep, hstep2]
-
 
 set_option maxHeartbeats 400000 in
 -- Slow step: instantiating `appTop_coord_mul_eq_of_overlap` at the three chart rings

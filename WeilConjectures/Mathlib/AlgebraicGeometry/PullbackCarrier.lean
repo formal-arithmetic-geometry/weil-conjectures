@@ -18,7 +18,7 @@ immersion with range the preimage of the range of the bottom.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
