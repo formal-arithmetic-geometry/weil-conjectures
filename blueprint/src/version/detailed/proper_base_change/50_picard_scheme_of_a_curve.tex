@@ -5679,6 +5679,30 @@ $\Spec(A_i\otimes_kK)$ of dimension $\dim A_i$, so $\dim X_K=1$.
 
 % ---------------------------------------------------------------------------
 % Cited.
+\begin{lemma}[A scheme of finite type over a field of dimension zero is finite]
+\label{lem:pc-dim-zero-finite}
+Let $k$ be a field and let $X$ be a scheme
+\termref{def:pc-morphism-conventions}{of finite type} over $k$ with
+$\dim X=0$ (\Cref{def:pc-dimension}).  Then $X$ is a disjoint union of
+spectra of local Artinian $k$-algebras $A$ with $\dim_k(A)<\infty$, and
+moreover $X$ is affine and $X\to\Spec(k)$ is
+\termref{def:pc-morphism-conventions}{finite}.  In particular the underlying
+topological space of $X$ is a finite discrete set of closed points.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-dimension}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Section~33.20 (Algebraic schemes),
+Lemma~33.20.2 (\stacksproject{06LH}); a scheme of finite type over $k$ is
+what is there called an \emph{algebraic $k$-scheme} (Varieties,
+Definition~33.20.1, \stacksproject{06LG}).  The last sentence is the
+conjunction of the first two: each member of the disjoint union is the
+spectrum of a local ring, hence a single closed point, and there are finitely
+many of them because an affine scheme is quasi-compact.  It is not decomposed
+here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
 \begin{lemma}[Universal closedness passes to the target along a surjection]
 \label{lem:pc-image-universally-closed}
 Let $S$ be a scheme and let $f:X\to Y$ be a morphism of schemes over $S$.  If $X$ is
@@ -8088,6 +8112,34 @@ Lemma~34.9.8 (\stacksproject{022D}).  It is not decomposed here.
 
 % ---------------------------------------------------------------------------
 % Cited.
+\begin{lemma}[Isomorphisms, composites and base changes of fppf coverings]
+\label{lem:pc-fppf-covering-stability}
+Let $T$ be a scheme.
+\begin{enumerate}
+\item If $T'\to T$ is an isomorphism, then $\{T'\to T\}$ is an
+\termref{def:pc-fppf-site}{fppf covering} of $T$.
+\item If $\{T_i\to T\}_{i\in I}$ is an fppf covering and for each $i\in I$
+the family $\{T_{ij}\to T_i\}_{j\in J_i}$ is an fppf covering, then
+$\{T_{ij}\to T\}_{i\in I,\,j\in J_i}$ is an fppf covering of $T$.
+\item If $\{T_i\to T\}_{i\in I}$ is an fppf covering and $T'\to T$ is a
+morphism of schemes, then $\{T'\times_TT_i\to T'\}_{i\in I}$ is an fppf
+covering of $T'$.
+\end{enumerate}
+\uses{def:pc-fppf-site,def:pc-scheme,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Topologies, Section~34.7 (The fppf topology),
+Lemma~34.7.3 (\stacksproject{021O}).  It is the fppf analogue of
+\Cref{lem:pc-fpqc-covering-stability} and is stated separately because it is
+not implied by it: an \termref{def:pc-fppf-site}{fppf covering} is a jointly
+surjective family of flat morphisms locally of finite presentation, an
+\termref{def:pc-fpqc-covering}{fpqc covering} a flat family satisfying a
+quasi-compactness condition, and neither notion contains the other.  It is not
+decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
 \begin{lemma}[Descent for quasi-coherent sheaves along an open covering]
 \label{lem:pc-open-covering-descent}
 Let $S$ be a scheme and let $S=\bigcup_{i\in I}U_i$ be an open covering.
@@ -8798,7 +8850,7 @@ canonical map).
 \uses{def:pc-picard-functor,def:pc-picard-group,def:pc-invertible-module,def:pc-fppf-site,lem:pc-pic-group-valued}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-fpqc-descent}
+\uses{lem:pc-fpqc-descent,lem:pc-fppf-covering-stability}
 By base change we may assume $T=S$.  \emph{Injectivity.}  Let $\cN$ be an
 invertible $\cO_S$-module with $f^*\cN\cong\cO_X$.  Then
 $f_*f^*\cN\cong f_*\cO_X\cong\cO_S$ by hypothesis.  The canonical map
@@ -8827,8 +8879,9 @@ $\{S_i\to S\}$; by \Cref{lem:pc-fpqc-descent} there is an invertible
 $\cO_S$-module $\cN$ with trivializations over $S_i$ whose associated
 descent datum is $\{f_{ij}\}$.  Then $f^*\cN\cong\cL$, as both are
 invertible modules with the same descent datum for the covering
-$\{X_{S_i}\to X\}$ (the pullback of the covering; base changes of fppf
-coverings are fppf coverings), which shows the kernel is contained in the
+$\{X_{S_i}\to X\}$ (the pullback of $\{S_i\to S\}$ along $f:X\to S$; base
+changes of fppf coverings are fppf coverings,
+\Cref{lem:pc-fppf-covering-stability}(3)), which shows the kernel is contained in the
 image of $f_S^*$; the reverse inclusion is immediate, since the composite
 $\Pic(S)\xrightarrow{f_S^*}\Pic(X)\to\Pic_{X/S}(S)$ vanishes on the
 fppf covering $\{S_i\to S\}$ (the restrictions of the pulled-back module
@@ -8850,7 +8903,7 @@ satisfies the sheaf property for fppf coverings.
 \uses{def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor,def:pc-fppf-site}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-fpqc-descent}
+\uses{lem:pc-fpqc-descent,def:pc-base-change}
 Let $\{T_i\to T\}_{i\in I}$ be an fppf covering and let
 $\cL_i\in K(T_i)$ with $\cL_i$ and $\cL_j$ mapping to the same element of
 $K(T_i\times_TT_j)$.
@@ -8862,11 +8915,12 @@ $i$, and an isomorphism
 \]
 The composite
 \[
-\alpha_j|_{T_{ij}}\circ\sigma_{T_{ij}}^*\varphi_{ij}\circ\alpha_i|_{T_{ij}}:
+\psi_{ij}:=\bigl(\alpha_j|_{T_{ij}}\bigr)^{-1}\circ
+\sigma_{T_{ij}}^*\varphi_{ij}\circ\alpha_i|_{T_{ij}}:
 \cO_{T_{ij}}\longrightarrow\cO_{T_{ij}}
 \]
 is multiplication by some unit $u_{ij}$; replacing $\varphi_{ij}$ by
-$u_{ij}^{-1}\varphi_{ij}$ we may assume the composite is
+$u_{ij}^{-1}\varphi_{ij}$ we may assume $\psi_{ij}$ is
 multiplication by $1$, i.e.\ that the $\varphi_{ij}$ are compatible with
 the $\alpha$'s along $\sigma$.
 Now the self-map of $\cL_i|_{X_{T_{ijk}}}$
@@ -8874,12 +8928,31 @@ Now the self-map of $\cL_i|_{X_{T_{ijk}}}$
 \varphi_{ki}\circ\varphi_{jk}\circ\varphi_{ij}
 \]
 is multiplication by a unit
-$u_{ijk}\in\Gamma(X_{T_{ijk}},\cO^*)$; by the equality
-$\Gamma(X_{T_{ijk}},\cO^*)=\Gamma(T_{ijk},\cO^*)$ (from the hypothesis)
-we may regard $u_{ijk}$ as a unit on $T_{ijk}$, and its image under
-$\sigma^*$ is $1$ by the $\alpha$-compatibility — since
-$\sigma^*:\Gamma(T,\cO^*)\to\Gamma(X_T,\cO^*)$ is a section of the
-pullback $f^*$, $u_{ijk}=1$ and the $\varphi_{ij}$ satisfy the cocycle
+$u_{ijk}\in\Gamma(X_{T_{ijk}},\cO^*)$.  Two separate identifications make
+this unit trivial.  First, the hypothesis that
+$\cO_{T_{ijk}}\to f_{T_{ijk},*}\cO_{X_{T_{ijk}}}$ is an isomorphism says
+that
+\[
+f_{T_{ijk}}^*:\Gamma(T_{ijk},\cO^*)\longrightarrow
+\Gamma(X_{T_{ijk}},\cO^*)
+\]
+is bijective (this is the equality
+$\Gamma(X_{T_{ijk}},\cO^*)=\Gamma(T_{ijk},\cO^*)$ used above), so
+$u_{ijk}=f_{T_{ijk}}^*(v_{ijk})$ for a unique unit
+$v_{ijk}\in\Gamma(T_{ijk},\cO^*)$.  Second,
+$f_{T_{ijk}}\circ\sigma_{T_{ijk}}=\id$ (\Cref{def:pc-base-change}), so the
+pullback $\sigma_{T_{ijk}}^*:\Gamma(X_{T_{ijk}},\cO^*)\to
+\Gamma(T_{ijk},\cO^*)$ along the section is a \emph{retraction} of
+$f_{T_{ijk}}^*$, whence
+$\sigma_{T_{ijk}}^*(u_{ijk})=\sigma_{T_{ijk}}^*f_{T_{ijk}}^*(v_{ijk})
+=v_{ijk}$.  It remains to see that $\sigma_{T_{ijk}}^*(u_{ijk})=1$, and
+this is the $\alpha$-compatibility: conjugating
+$\sigma_{T_{ijk}}^*(\varphi_{ki}\circ\varphi_{jk}\circ\varphi_{ij})$ by
+$\alpha_i|_{T_{ijk}}$ turns it into
+$\psi_{ki}|_{T_{ijk}}\circ\psi_{jk}|_{T_{ijk}}\circ\psi_{ij}|_{T_{ijk}}
+=\id$, while conjugation leaves multiplication by a unit unchanged.  Hence
+$v_{ijk}=\sigma_{T_{ijk}}^*(u_{ijk})=1$ and therefore
+$u_{ijk}=f_{T_{ijk}}^*(1)=1$, so the $\varphi_{ij}$ satisfy the cocycle
 condition.  Thus $\{\cL_i|_{X_{T_i}},\varphi_{ij}\}$ is a descent datum
 for invertible modules on the fppf (in particular fpqc) covering
 $\{X_{T_i}\to X_T\}$; by \Cref{lem:pc-fpqc-descent} there exists an
@@ -9360,7 +9433,7 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pc-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-curve,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
 \emph{Step 1: an ample polarisation.}  The smooth projective curve $X$
 carries a closed immersion $i:X\to\PP^n_k$; by \Cref{lem:pc-very-ample-ample}
 the module $\cL_0^{\bullet}:=i^*\cO_{\PP^n}(1)$ is ample on $X$ and, by
@@ -9409,9 +9482,18 @@ $X_K$ (it is infinite, and a closed subset of the integral
 points is all of $X_K$; $X_K$ is integral by \Cref{prop:pc-XK-integral}).
 Choose a non-zero $s\in H^0(X_K,\cL)$.  Since $s\neq0$ and $X_K$ is
 integral, $s_\eta\neq0$ at the generic point, so the zero scheme
-$Z(s)$ is a proper closed subset of $X_K$, hence finite (a proper closed
-subset of a $1$-dimensional Noetherian scheme has dimension $0$, hence
-is a finite set of points); by density there is an $x\in X(k)$ with
+$Z(s)$ is a proper closed subset of $X_K$, hence a finite set of closed
+points.  Indeed $X_K$ is irreducible (\Cref{prop:pc-XK-integral}) of
+dimension $1$ (\Cref{lem:pc-dim-base-change}), so every closed subset
+$Z\subsetneq X_K$ has $\dim Z=0$: if an irreducible closed
+$Z'\subseteq Z$ had $\dim Z'\ge1$, a chain
+$Z'_0\subsetneq Z'_1\subseteq Z'$ of irreducible closed subsets of $Z'$
+would give the chain $Z'_0\subsetneq Z'_1\subsetneq X_K$ of irreducible
+closed subsets of $X_K$ --- the last inclusion is strict because
+$Z'_1\subseteq Z\subsetneq X_K$ --- contradicting $\dim X_K=1$.  As
+$Z(s)$ is a closed subscheme of $X_K$ it is of finite type over $K$, so
+\Cref{lem:pc-dim-zero-finite} applies to it.  By density there is an
+$x\in X(k)$ with
 $s(x_K)\neq0$ (i.e.\ $s$ does not vanish at $x_K$: $s_{x_K}\notin
 \mathfrak m_{x_K}\cL_{x_K}$).
 Let $\cI$ be the ideal sheaf of the closed immersion
