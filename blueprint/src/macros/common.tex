@@ -116,3 +116,12 @@
 
 \newcommand{\checked}{\color{red}\aftergroup\restorecolor}
 \newcommand{\restorecolor}{\color{black}}
+
+% Inline terminology link.  \termref{label}{text} displays `text' and links it to
+% the node carrying \label{label}, so that a term can be named in prose and still
+% point at the node that defines it.  In the pdf version this is exactly
+% \hyperref[label]{text}; the web version overrides it in macros/web.tex, because
+% plasTeX's HTML5 renderer drops the target of \hyperref and emits href="#.".
+% Use this rather than a bare \hyperref for terminology links.  It is a text-mode
+% command: inside $...$ it is not rendered, so link the term outside the math.
+\newcommand{\termref}[2]{\hyperref[#1]{#2}}
