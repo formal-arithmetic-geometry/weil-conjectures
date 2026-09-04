@@ -18,13 +18,17 @@ no proof is omitted; no definition asserts a provable property.
 \noindent\textbf{What the \texttt{mathlibok} marker claims.}
 Some nodes below carry a \texttt{mathlibok} marker.  It records that Mathlib carries the
 statement of the node, and it also sets that node's \texttt{leanok} flag, so it is visible in
-the rendered chapter: it draws a dark green ``this is in Mathlib'' border on the dependency
+the rendered blueprint: it draws a dark green ``this is in Mathlib'' border on the dependency
 graph, and a check mark on those markered nodes that are definitions.  It is always
 accompanied by a source comment beginning \texttt{Mathlib:} naming which Mathlib declaration
 discharges which clause of the node; that comment, unlike the marker, is visible in the source
 only.  Where Mathlib's coverage is only partial --- where the declarations named cover less
-than the node states --- that comment says so, and says which clause they cover.  So the
-marker is read together with its comment, and claims no more than that comment does.
+than the node states --- that comment says so, and says which clause they cover.  That
+flag also counts as ``stated in Lean'' when the graph decides whether a node depending
+on the markered one is ready to be stated or proved, so a marker with only partial
+coverage propagates that far: those dependents are filled as ready, and their own
+comments say nothing about it.  So the marker is read together with its comment, and
+claims no more than that comment does.
 % ============================================================================
 % ============ SECTION 0: basis blocks reproduced from files 02/06 =============
 % ============================================================================
@@ -2795,7 +2799,7 @@ $\underline{\Hilb}$ etc.; uniqueness of the representing scheme is
 \end{definition}
 
 % ---------------------------------------------------------------------------
-% Decomposed.
+% Cited.
 \begin{lemma}[Yoneda]\label{lem:pc-yoneda}
 Let $S$ be a scheme.  For any functor
 $F:(\mathit{Sch}/S)^{\mathrm{op}}\to\textit{Sets}$ and any scheme $X/S$,
@@ -2815,7 +2819,9 @@ CategoryTheory.yoneda}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-representable-functor}
-Omitted.  (Mathlib item.)
+This is a cited external input: the Yoneda lemma, cited from the Stacks
+Project tag named in the statement, and it is available in Mathlib in the
+form named there, so it is not decomposed further here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
