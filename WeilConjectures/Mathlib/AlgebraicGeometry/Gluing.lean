@@ -6,9 +6,9 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Pushouts of open immersions of schemes
@@ -18,7 +18,8 @@ are all open immersions, so Mathlib's locally directed gluing provides its colim
 pushout `X ⊔_U Y`, i.e. the scheme obtained by gluing `X` and `Y` along `U`. This file
 records the basic geometry of this pushout:
 
-- `AlgebraicGeometry.IsOpenImmersion.hasPushout`: the pushout exists;
+## Main results
+
 - the inclusions `pushout.inl`/`pushout.inr` are open immersions and are jointly
   surjective (`AlgebraicGeometry.range_pushout_inl_union_range_pushout_inr`);
 - `AlgebraicGeometry.IsOpenImmersion.isPullback_pushout`: the pushout square is also a
@@ -26,9 +27,10 @@ records the basic geometry of this pushout:
 - `CompactSpace` transfers from the two charts to the pushout;
 - `AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`: a source-local property holds
   for `pushout.desc h k w` as soon as it holds for `h` and `k`;
-- `AlgebraicGeometry.QuasiCompact.pushout_desc` and
-  `AlgebraicGeometry.IsSeparated.pushout_desc`: quasi-compactness and (given that the
-  graph `U ⟶ X ×_S Y` is a closed immersion) separatedness of the glued morphism.
+- `AlgebraicGeometry.isPullback_pushout_map_inl_of_isPullback` and
+  `AlgebraicGeometry.isPullback_pushout_map_inr_of_isPullback`: for a morphism of spans of
+  open immersions with one cartesian component square, the corresponding component square
+  of the induced morphism of pushouts is cartesian.
 
 These are the raw ingredients for gluing a scheme out of two charts along their overlap, as
 in the induction step of absolute Noetherian approximation.
@@ -45,21 +47,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 variable {U X Y : Scheme.{u}} (f : U ⟶ X) (g : U ⟶ Y) [IsOpenImmersion f] [IsOpenImmersion g]
-
-/-- Every arrow of the span of two open immersions is an open immersion: the two
-non-identity arrows are `f` and `g` themselves. This is what makes the span a locally
-directed diagram, hence gluable. -/
-instance IsOpenImmersion.span_map : ∀ {i j : WalkingSpan} (h : i ⟶ j),
-    IsOpenImmersion ((span f g).map h)
-  | _, _, .id _ => by rw [span_map_id]; infer_instance
-  | _, _, .init WalkingPair.left => inferInstanceAs (IsOpenImmersion f)
-  | _, _, .init WalkingPair.right => inferInstanceAs (IsOpenImmersion g)
-
-/-- The pushout of two open immersions of schemes with common source exists: the span
-is a locally directed diagram of open immersions, glued by
-`AlgebraicGeometry.Scheme.IsLocallyDirected`. -/
-instance IsOpenImmersion.hasPushout : HasPushout f g :=
-  inferInstanceAs (HasColimit (span f g))
 
 instance : IsOpenImmersion (pushout.inl f g) :=
   inferInstanceAs (IsOpenImmersion (colimit.ι (span f g) WalkingSpan.left))
@@ -86,13 +73,21 @@ lemma range_pushout_inl_union_range_pushout_inr :
 
 /-- **The pushout square of two open immersions of schemes is also a pullback square**:
 the two charts of the glued scheme intersect in exactly the glued copy of the common
-source. -/
+source.
+
+```
+  U ──f──▶ X
+  │        │
+  g        inl
+  ▼        ▼
+  Y ─inr─▶ X ⊔_U Y
+```
+-/
 theorem IsOpenImmersion.isPullback_pushout :
     IsPullback f g (pushout.inl f g) (pushout.inr f g) := by
-  have hrange : ∀ (T : Scheme.{u}) (s₁ : T ⟶ X) (s₂ : T ⟶ Y),
-      s₁ ≫ pushout.inl f g = s₂ ≫ pushout.inr f g →
-      ∀ t : T, ∃ u : U, f u = s₁ t ∧ g u = s₂ t := by
-    intro T s₁ s₂ hs t
+  have hrange (T : Scheme.{u}) (s₁ : T ⟶ X) (s₂ : T ⟶ Y)
+      (hs : s₁ ≫ pushout.inl f g = s₂ ≫ pushout.inr f g) (t : T) :
+      ∃ u : U, f u = s₁ t ∧ g u = s₂ t := by
     have ht : colimit.ι (span f g) WalkingSpan.left (s₁ t) =
         colimit.ι (span f g) WalkingSpan.right (s₂ t) := by
       calc colimit.ι (span f g) WalkingSpan.left (s₁ t)
@@ -127,16 +122,24 @@ def IsOpenImmersion.pushoutCover : (pushout f g).OpenCover :=
   Scheme.Cover.mkOfCovers WalkingPair (fun j ↦ WalkingPair.casesOn j X Y)
     (fun j ↦ WalkingPair.casesOn j (pushout.inl f g) (pushout.inr f g))
     (fun x ↦ by
-      have hx : x ∈ Set.range (pushout.inl f g) ∪ Set.range (pushout.inr f g) := by
-        rw [range_pushout_inl_union_range_pushout_inr f g]
-        trivial
-      obtain ⟨y, hy⟩ | ⟨y, hy⟩ := hx
+      obtain ⟨y, hy⟩ | ⟨y, hy⟩ :
+          x ∈ Set.range (pushout.inl f g) ∪ Set.range (pushout.inr f g) :=
+        (range_pushout_inl_union_range_pushout_inr f g).ge (Set.mem_univ x)
       exacts [⟨WalkingPair.left, y, hy⟩, ⟨WalkingPair.right, y, hy⟩])
     (fun j ↦ by cases j <;> infer_instance)
 
 /-- **Source-local properties descend to a pushout of open immersions**: if `P` is
 Zariski-local on the source and holds for `h : X ⟶ S` and `k : Y ⟶ S`, then it holds
-for the glued morphism `pushout.desc h k w : X ⊔_U Y ⟶ S`. -/
+for the glued morphism `pushout.desc h k w : X ⊔_U Y ⟶ S`:
+
+```
+  X ─inl─▶ X ⊔_U Y ◀─inr─ Y
+      ╲        │        ╱
+       h    desc h k w  k
+        ╲      ▼      ╱
+          ──▶  S  ◀──
+```
+-/
 lemma IsZariskiLocalAtSource.pushout_desc {P : MorphismProperty Scheme.{u}}
     [IsZariskiLocalAtSource P] {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     (w : f ≫ h = g ≫ k) (hh : P h) (hk : P k) : P (pushout.desc h k w) := by
@@ -145,75 +148,6 @@ lemma IsZariskiLocalAtSource.pushout_desc {P : MorphismProperty Scheme.{u}}
   cases i with
   | left => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inl_desc] using hh
   | right => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inr_desc] using hk
-
-/-- **Quasi-compactness of a gluing of two schemes along a common open**: the inverse
-image of a quasi-compact open under the glued morphism is the union of the images of the
-two inverse images under `h` and `k`, hence quasi-compact. (Quasi-compactness of morphisms
-is not Zariski-local on the source, so this does not follow from
-`AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`; what makes it work is that the
-cover of the pushout has only two members.) -/
-theorem QuasiCompact.pushout_desc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
-    (w : f ≫ h = g ≫ k) [QuasiCompact h] [QuasiCompact k] :
-    QuasiCompact (pushout.desc h k w) := by
-  constructor
-  intro V hVopen hVcompact
-  have hl : IsCompact (⇑h ⁻¹' V) := QuasiCompact.isCompact_preimage _ hVopen hVcompact
-  have hr : IsCompact (⇑k ⁻¹' V) := QuasiCompact.isCompact_preimage _ hVopen hVcompact
-  have hcov : ⇑(pushout.desc h k w) ⁻¹' V =
-      ⇑(pushout.inl f g) '' (⇑h ⁻¹' V) ∪ ⇑(pushout.inr f g) '' (⇑k ⁻¹' V) := by
-    apply subset_antisymm
-    · intro p hp
-      have hmem : p ∈ Set.range ⇑(pushout.inl f g) ∪ Set.range ⇑(pushout.inr f g) := by
-        rw [range_pushout_inl_union_range_pushout_inr f g]
-        trivial
-      rcases hmem with ⟨t, rfl⟩ | ⟨t, rfl⟩
-      · refine Or.inl ⟨t, ?_, rfl⟩
-        rwa [Set.mem_preimage, ← pushout.inl_desc (f := f) (g := g) h k w,
-          Scheme.Hom.comp_apply]
-      · refine Or.inr ⟨t, ?_, rfl⟩
-        rwa [Set.mem_preimage, ← pushout.inr_desc (f := f) (g := g) h k w,
-          Scheme.Hom.comp_apply]
-    · rintro - (⟨t, ht, rfl⟩ | ⟨t, ht, rfl⟩)
-      · rw [Set.mem_preimage, ← Scheme.Hom.comp_apply, pushout.inl_desc]
-        exact ht
-      · rw [Set.mem_preimage, ← Scheme.Hom.comp_apply, pushout.inr_desc]
-        exact ht
-  rw [hcov]
-  exact (hl.image (pushout.inl f g).continuous).union (hr.image (pushout.inr f g).continuous)
-
-/-- **Separatedness of a gluing of two schemes along a common open**: let `h : X ⟶ S`
-and `k : Y ⟶ S` be separated morphisms restricting to the same morphism on a common
-open subscheme `U`, and assume the graph morphism `(f, g) : U ⟶ X ×_S Y` is a closed
-immersion. Then the glued morphism `X ⊔_U Y ⟶ S` is separated. This is the form of the
-two-open criterion (Stacks Project Tag 0F3U, `IsSeparated.of_two_open_cover`) used for
-the intermediate schemes of the two-open compactification theorem. -/
-theorem IsSeparated.pushout_desc {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
-    (w : f ≫ h = g ≫ k) [IsSeparated h] [IsSeparated k]
-    (hd : IsClosedImmersion (pullback.lift f g w)) :
-    IsSeparated (pushout.desc h k w) := by
-  have h₁ : IsSeparated (pushout.inl f g ≫ pushout.desc h k w) := by
-    rw [pushout.inl_desc]
-    infer_instance
-  have h₂ : IsSeparated (pushout.inr f g ≫ pushout.desc h k w) := by
-    rw [pushout.inr_desc]
-    infer_instance
-  refine IsSeparated.of_two_open_cover (pushout.desc h k w) (pushout.inl f g)
-    (pushout.inr f g) (range_pushout_inl_union_range_pushout_inr f g) ?_
-  have hp := IsOpenImmersion.isPullback_pushout f g
-  have heq : pullback.map (pushout.inl f g) (pushout.inr f g)
-      (pushout.inl f g ≫ pushout.desc h k w) (pushout.inr f g ≫ pushout.desc h k w)
-      (𝟙 X) (𝟙 Y) (pushout.desc h k w) (by simp) (by simp) =
-      hp.isoPullback.inv ≫ pullback.lift f g w ≫
-        (pullback.congrHom (pushout.inl_desc h k w) (pushout.inr_desc h k w)).inv := by
-    apply pullback.hom_ext
-    · simp only [Category.assoc, pullback.congrHom_inv, pullback.lift_fst,
-        Category.comp_id, hp.isoPullback_inv_fst]
-    · simp only [Category.assoc, pullback.congrHom_inv, pullback.lift_snd,
-        Category.comp_id, hp.isoPullback_inv_snd]
-  rw [heq]
-  have := hd
-  infer_instance
-
 
 section PointsAndMap
 
@@ -227,11 +161,11 @@ of spans of open immersions with one cartesian component square, the correspondi
 component square of the induced morphism of pushouts is cartesian as well.
 -/
 
+/-- **Points of the pushout of two open immersions**: a point of `X` and a point of `Y`
+have the same image in `X ⊔_U Y` if and only if they have a common preimage in `U`. -/
 lemma pushout_inl_eq_inr_iff (x : X) (y : Y) :
     pushout.inl f g x = pushout.inr f g y ↔ ∃ u : U, f u = x ∧ g u = y := by
-  rw [show pushout.inl f g x = pushout.inr f g y ↔
-      colimit.ι (span f g) WalkingSpan.left x = colimit.ι (span f g) WalkingSpan.right y from
-    Iff.rfl, Scheme.IsLocallyDirected.ι_eq_ι_iff]
+  refine (Scheme.IsLocallyDirected.ι_eq_ι_iff (span f g)).trans ?_
   constructor
   · rintro ⟨k, fi, fj, u, hx, hy⟩
     obtain (_ | ⟨_ | _⟩) := k
@@ -243,6 +177,7 @@ lemma pushout_inl_eq_inr_iff (x : X) (y : Y) :
   · rintro ⟨u, hx, hy⟩
     exact ⟨WalkingSpan.zero, WalkingSpan.Hom.fst, WalkingSpan.Hom.snd, u, hx, hy⟩
 
+/-- The two charts of the pushout of two open immersions cover it. -/
 lemma opensRange_pushout_inl_sup_opensRange_pushout_inr :
     (pushout.inl f g).opensRange ⊔ (pushout.inr f g).opensRange = ⊤ := by
   rw [eq_top_iff]
@@ -250,7 +185,10 @@ lemma opensRange_pushout_inl_sup_opensRange_pushout_inr :
   rw [TopologicalSpace.Opens.mem_sup]
   exact Set.eq_univ_iff_forall.mp (range_pushout_inl_union_range_pushout_inr f g) x
 
-lemma preimage_opensRange_pushout_inl :
+/-- The preimage of the chart `X` under the chart `Y` of the pushout `X ⊔_U Y` is the
+image of `U` in `Y`. (This is the mirror image of
+`AlgebraicGeometry.pushout_inl_preimage_opensRange_inr`; both are recorded for symmetry.) -/
+lemma pushout_inr_preimage_opensRange_inl :
     pushout.inr f g ⁻¹ᵁ (pushout.inl f g).opensRange = g.opensRange := by
   ext z
   constructor
@@ -260,7 +198,9 @@ lemma preimage_opensRange_pushout_inl :
   · rintro ⟨u, rfl⟩
     exact ⟨f u, (pushout_inl_eq_inr_iff f g _ _).mpr ⟨u, rfl, rfl⟩⟩
 
-lemma preimage_opensRange_pushout_inr :
+/-- The preimage of the chart `Y` under the chart `X` of the pushout `X ⊔_U Y` is the
+image of `U` in `X`. -/
+lemma pushout_inl_preimage_opensRange_inr :
     pushout.inl f g ⁻¹ᵁ (pushout.inr f g).opensRange = f.opensRange := by
   ext y
   constructor
@@ -276,13 +216,16 @@ variable {U' X' Y' : Scheme.{u}} (f' : U' ⟶ X') (g' : U' ⟶ Y')
   (hf : γ ≫ f = f' ≫ α) (hg : γ ≫ g = g' ≫ β)
 
 include hf hg in
-lemma preimage_opensRange_pushout_inl_of_isPullback (H : IsPullback γ g' g β) :
+/-- For a morphism of spans of open immersions whose `Y`-component square is cartesian, the
+preimage of the chart `X` under the induced morphism of pushouts is the chart `X'`. -/
+lemma pushout_map_preimage_opensRange_inl_of_isPullback (H : IsPullback γ g' g β) :
     pushout.map f' g' f g α β γ hf.symm hg.symm ⁻¹ᵁ (pushout.inl f g).opensRange =
       (pushout.inl f' g').opensRange := by
   apply le_antisymm
   · rintro p hp
     have : p ∈ (pushout.inl f' g').opensRange ⊔ (pushout.inr f' g').opensRange := by
-      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]; trivial
+      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]
+      trivial
     obtain (hmem | ⟨z', rfl⟩) := this
     · exact hmem
     · replace hp : (pushout.inr f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) z' ∈
@@ -292,7 +235,6 @@ lemma preimage_opensRange_pushout_inl_of_isPullback (H : IsPullback γ g' g β) 
       obtain ⟨u, -, hu⟩ := (pushout_inl_eq_inr_iff f g y (β z')).mp
         (by rwa [Scheme.Hom.comp_apply] at hy)
       obtain ⟨u', -, rfl⟩ := Scheme.exists_preimage_of_isPullback H u z' hu
-      change pushout.inr f' g' (g' u') ∈ (pushout.inl f' g').opensRange
       exact ⟨f' u', (pushout_inl_eq_inr_iff f' g' _ _).mpr ⟨u', rfl, rfl⟩⟩
   · rintro p ⟨y', rfl⟩
     change (pushout.inl f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) y' ∈
@@ -302,30 +244,44 @@ lemma preimage_opensRange_pushout_inl_of_isPullback (H : IsPullback γ g' g β) 
 
 include hf hg in
 /-- Given a morphism of spans of open immersions whose `Y`-component square is cartesian,
-the `X`-component square of the induced morphism of pushouts is cartesian. -/
+the `X`-component square of the induced morphism of pushouts is cartesian:
+
+```
+  X' ◀──f'── U' ──g'──▶ Y'          X' ────▶ X' ⊔_{U'} Y'
+  │          │          │           │             │
+  α          γ          β    ⟹      α             map
+  ▼          ▼          ▼           ▼             ▼
+  X ◀──f──── U ──g────▶ Y           X ─────▶ X ⊔_U Y
+```
+
+the right-hand square being cartesian as soon as the `γ, g', g, β` square is. -/
 lemma isPullback_pushout_map_inl_of_isPullback (H : IsPullback γ g' g β) :
     IsPullback α (pushout.inl f' g') (pushout.inl f g)
       (pushout.map f' g' f g α β γ hf.symm hg.symm) :=
   IsOpenImmersion.isPullback _ _ _ _ (pushout.inl_desc _ _ _)
-    (preimage_opensRange_pushout_inl_of_isPullback f g f' g' α β γ hf hg H)
+    (pushout_map_preimage_opensRange_inl_of_isPullback f g f' g' α β γ hf hg H)
 
 include hf hg in
-lemma preimage_opensRange_pushout_inr_of_isPullback (H : IsPullback γ f' f α) :
+/-- For a morphism of spans of open immersions whose `X`-component square is cartesian, the
+preimage of the chart `Y` under the induced morphism of pushouts is the chart `Y'`. -/
+lemma pushout_map_preimage_opensRange_inr_of_isPullback (H : IsPullback γ f' f α) :
     pushout.map f' g' f g α β γ hf.symm hg.symm ⁻¹ᵁ (pushout.inr f g).opensRange =
       (pushout.inr f' g').opensRange := by
   apply le_antisymm
   · rintro p hp
     have : p ∈ (pushout.inl f' g').opensRange ⊔ (pushout.inr f' g').opensRange := by
-      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]; trivial
+      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]
+      trivial
     obtain (⟨y', rfl⟩ | hmem) := this
     · replace hp : (pushout.inl f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) y' ∈
           (pushout.inr f g).opensRange := by rwa [Scheme.Hom.comp_apply]
       rw [pushout.inl_desc] at hp
       obtain ⟨z, hz⟩ := hp
       obtain ⟨u, hu, -⟩ := (pushout_inl_eq_inr_iff f g (α y') z).mp
-        (by rw [Scheme.Hom.comp_apply] at hz; exact hz.symm)
+        (by
+          rw [Scheme.Hom.comp_apply] at hz
+          exact hz.symm)
       obtain ⟨u', -, rfl⟩ := Scheme.exists_preimage_of_isPullback H u y' hu
-      change pushout.inl f' g' (f' u') ∈ (pushout.inr f' g').opensRange
       exact ⟨g' u', ((pushout_inl_eq_inr_iff f' g' _ _).mpr ⟨u', rfl, rfl⟩).symm⟩
     · exact hmem
   · rintro p ⟨z', rfl⟩
@@ -336,12 +292,21 @@ lemma preimage_opensRange_pushout_inr_of_isPullback (H : IsPullback γ f' f α) 
 
 include hf hg in
 /-- Given a morphism of spans of open immersions whose `X`-component square is cartesian,
-the `Y`-component square of the induced morphism of pushouts is cartesian. -/
+the `Y`-component square of the induced morphism of pushouts is cartesian:
+
+```
+  Y' ────▶ X' ⊔_{U'} Y'
+  │             │
+  β             map
+  ▼             ▼
+  Y ─────▶ X ⊔_U Y
+```
+-/
 lemma isPullback_pushout_map_inr_of_isPullback (H : IsPullback γ f' f α) :
     IsPullback β (pushout.inr f' g') (pushout.inr f g)
       (pushout.map f' g' f g α β γ hf.symm hg.symm) :=
   IsOpenImmersion.isPullback _ _ _ _ (pushout.inr_desc _ _ _)
-    (preimage_opensRange_pushout_inr_of_isPullback f g f' g' α β γ hf hg H)
+    (pushout_map_preimage_opensRange_inr_of_isPullback f g f' g' α β γ hf hg H)
 
 end PointsAndMap
 

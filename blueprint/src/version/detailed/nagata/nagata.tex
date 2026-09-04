@@ -21561,7 +21561,8 @@ Assume $\operatorname{Comp}(s_i)\neq\varnothing$ for $i=1,2$.
   \uses{def:nagata-choice-notation,
     def:nagata-limit-datum,
     lemma:nagata-limit-datum}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.NoetherianApproximation}
+  \leanok
 
   Let \(S\) be a quasi-compact and quasi-separated scheme.  An
   \emph{absolute Noetherian approximation datum} for \(S\) is a tuple
@@ -21648,13 +21649,27 @@ Assume $\operatorname{Comp}(s_i)\neq\varnothing$ for $i=1,2$.
   Noetherian system, affine transitions, and comparison isomorphism are
   additional blueprint data; Mathlib does not currently package
   $\operatorname{ANApp}(S)$ or its existence theorem.
+
+  \paragraph{Formalisation.}
+  The Lean structure
+  \texttt{\detokenize{AlgebraicGeometry.Scheme.NoetherianApproximation}}
+  packages the same data with two harmless changes of bookkeeping: the index
+  $(I,\leq)$ of (68a)--(69) is replaced by an arbitrary small cofiltered
+  category, which supplies the identities (72) and the joint-refinement
+  condition (69) by the functoriality of the diagram; and the comparison pair
+  $(\kappa,\eta)$ of (68) is replaced by the statement that the cone with point
+  $S$ is a limit cone, so that $S$ \emph{is} the limit rather than being
+  isomorphic to it.  Every entry of (68) is recovered from the Lean structure,
+  and conversely a datum indexed by a directed preorder gives a Lean structure
+  with the index category of the preorder.
 \end{definition}
 
 \begin{lemma}[Existence of an absolute Noetherian approximation datum]
   \label{lemma:nagata-absolute-noetherian-approximation-exists}
   \uses{def:nagata-absolute-noetherian-approximation-datum,
     lemma:nagata-affine-transition-limit-datum-exists}
-  \lean{}
+  \lean{AlgebraicGeometry.Scheme.nonempty_noetherianApproximation}
+  \leanok
 
   For every quasi-compact and quasi-separated scheme \(S\),
   \[
@@ -21663,58 +21678,63 @@ Assume $\operatorname{Comp}(s_i)\neq\varnothing$ for $i=1,2$.
 \end{lemma}
 
 \begin{proof}
-  Proposition
+  \leanok
+  \uses{def:nagata-absolute-noetherian-approximation-datum}
+  We construct the entries of (68) directly; this is
   \cite[\href{https://stacks.math.columbia.edu/tag/01ZA}{Tag 01ZA}]
-    {stacks-project}
-  supplies entries for which the exact predicates are
+    {stacks-project}.
+
+  \emph{Affine case.}  Let $S=\operatorname{Spec}(R)$ be affine.  Index the
+  system by the finitely generated $\mathbb Z$-subalgebras $A\subseteq R$,
+  ordered by inclusion; this is a directed poset, and it is nonempty because
+  $\mathbb Z\cdot 1\subseteq R$ is one of its members.  Put
+  $S_A:=\operatorname{Spec}(A)$ and let $t_{BA}\colon S_B\to S_A$ be
+  $\operatorname{Spec}$ of the inclusion $A\subseteq B$; each $S_A$ is of finite
+  type over $\mathbb Z$ and each $t_{BA}$ is affine.  Since $R$ is the filtered
+  colimit of its finitely generated $\mathbb Z$-subalgebras and
+  $\operatorname{Spec}$ turns colimits of rings into limits of schemes,
+  $S=\varprojlim_A S_A$, which supplies (74)--(75).
+
+  \emph{Induction step.}  Let $X$ be quasi-compact and quasi-separated, let
+  $U\subseteq X$ be a quasi-compact open carrying a datum
+  $\mathsf A\in\operatorname{ANApp}(U)$ with system $(U_\lambda)$, and let
+  $V\subseteq X$ be an affine open.  Write $W:=U\cap V$; it is quasi-compact
+  because $X$ is quasi-separated, so $W$ descends to a quasi-compact open
+  $W_0\subseteq U_{\lambda_0}$ for some $\lambda_0$, and
+  $W=\varprojlim_{\lambda\geq\lambda_0}W_\lambda$ for the preimages
+  $W_\lambda\subseteq U_\lambda$ of $W_0$.  Choose finitely many
+  $b_1,\dots,b_n\in\mathcal O_X(V)$ whose basic opens cover $W$.  A
+  \emph{stage} consists of an index $\lambda\geq\lambda_0$, lifts
+  $r_i\in\mathcal O(W_\lambda)$ of the $b_i$ whose basic opens form an affine
+  cover of $W_\lambda$, and a finitely generated $\mathbb Z$-subalgebra
   \[
-  \begin{gathered}
-    I\neq\varnothing,\qquad
-    (\forall\lambda\in I)\ \lambda\leq\lambda,\qquad
-    (\forall\lambda\leq\mu\leq\nu)\ \lambda\leq\nu,\\
-    (\forall\lambda,\mu\in I)(\exists\nu\in I)\
-      (\lambda\leq\nu\wedge\mu\leq\nu),\\
-    \operatorname{FiniteType}(s_{S_\lambda})\quad(\lambda\in I),
-    \qquad
-    \operatorname{IsAffine}(t_{\mu\lambda})\quad(\lambda\leq\mu).
-  \end{gathered}                                                     \tag{79a}
+    A\subseteq
+      \mathcal O_X(V)\times_{\mathcal O(W)}\mathcal O(W_\lambda)
   \]
-  The same proposition supplies the isomorphism
+  containing the pairs $(b_i,r_i)$ and large enough that
+  $\mathcal O(W_\lambda(r_i))$ is the localization $A_{(b_i,r_i)}$; such
+  enlargements exist by
+  \cite[\href{https://stacks.math.columbia.edu/tag/01Z7}{Tag 01Z7}]
+    {stacks-project}, and then $W_\lambda\to\operatorname{Spec}(A)$ is an open
+  immersion by
+  \cite[\href{https://stacks.math.columbia.edu/tag/01Z9}{Tag 01Z9}]
+    {stacks-project}.  The stages form a cofiltered category, and the schemes
   \[
-    \alpha_S\colon
-      S\xrightarrow{\sim}
-      L:=\varprojlim_{\lambda\in I}S_\lambda.                       \tag{80}
+    S_T:=U_\lambda\amalg_{W_\lambda}\operatorname{Spec}(A)
   \]
-  Let \(\pi_\lambda\colon L\to S_\lambda\) be the limit projections and
-  define
-  \[
-    q_\lambda:=\pi_\lambda\circ\alpha_S,\qquad
-    \kappa:=\alpha_S,\qquad
-    \eta:=\alpha_S^{-1}.                                            \tag{81}
-  \]
-  The remaining typed entries and the inverse-system identities are
-  \begin{align}
-    &L\text{ is a scheme},\qquad
-      \pi_\lambda\colon L\to S_\lambda,\qquad
-      \kappa\colon S\to L,\qquad\eta\colon L\to S,                  \tag{80a}\\
-    &t_{\lambda\lambda}=\operatorname{id}_{S_\lambda},\qquad
-    t_{\nu\lambda}=t_{\mu\lambda}\circ t_{\nu\mu},\qquad
-    t_{\mu\lambda}\circ\pi_\mu=\pi_\lambda,                         \tag{82}\\
-    &t_{\mu\lambda}\circ q_\mu
-      =t_{\mu\lambda}\circ\pi_\mu\circ\alpha_S
-      =\pi_\lambda\circ\alpha_S=q_\lambda,                          \tag{83}\\
-    &\eta\circ\kappa
-      =\alpha_S^{-1}\circ\alpha_S=\operatorname{id}_S,\qquad
-    \kappa\circ\eta
-      =\alpha_S\circ\alpha_S^{-1}=\operatorname{id}_L.              \tag{84}
-  \end{align}
-  The universal property of \(L=\varprojlim_\lambda S_\lambda\) is exactly
-  the bijection (75).  Thus the tuple in (68), with entries (80)--(81),
-  satisfies (69)--(77), and hence
-  \[
-    \mathsf A\in\operatorname{ANApp}(S).
-  \]
-  This membership is a witness for (79).
+  obtained by gluing along these open immersions form a system of schemes of
+  finite type over $\mathbb Z$ with affine transition morphisms.  The two
+  charts $U_\lambda$ and $\operatorname{Spec}(A)$ of $S_T$, and their overlap
+  $W_\lambda$, have limits $U$, $V$ and $W$, so
+  $U\cup V=\varprojlim_T S_T$, checking the limit property chart by chart.
+  This is
+  \cite[\href{https://stacks.math.columbia.edu/tag/07RN}{Tag 07RN}]
+    {stacks-project}.
+
+  \emph{Conclusion.}  A quasi-compact quasi-separated $S$ is a finite union of
+  affine opens, so finitely many applications of the induction step to the
+  affine case produce a datum $\mathsf A\in\operatorname{ANApp}(S)$, whence
+  (79).
 \end{proof}
 
 \begin{definition}[Selected Noetherian inverse system]

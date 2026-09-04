@@ -14,9 +14,8 @@ The finitely generated `R`-subalgebras of an `R`-algebra `A` form a nonempty dir
 poset `{S : Subalgebra R A // S.FG}` whose supremum is all of `A`
 (`Subalgebra.iSup_val_fg_eq_top`).
 
-This is the algebra analogue of `Module.fgSystem` in
-`Mathlib/Algebra/Colimit/Finiteness.lean`, and it is the index poset of the filtered
-system exhibiting `A` as the colimit of its finitely generated subalgebras.
+This is the algebra analogue of `Module.fgSystem`, and it is the index poset of the
+filtered system exhibiting `A` as the colimit of its finitely generated subalgebras.
 -/
 
 @[expose] public section
@@ -25,9 +24,9 @@ namespace Subalgebra
 
 variable (R A : Type*) [CommRing R] [CommRing A] [Algebra R A]
 
-instance : Nonempty {S : Subalgebra R A // S.FG} := ⟨⟨⊥, fg_bot⟩⟩
+instance nonempty_fg : Nonempty {S : Subalgebra R A // S.FG} := ⟨⟨⊥, fg_bot⟩⟩
 
-instance : IsDirectedOrder {S : Subalgebra R A // S.FG} where
+instance isDirectedOrder_fg : IsDirectedOrder {S : Subalgebra R A // S.FG} where
   directed S T :=
     ⟨⟨_, S.2.sup T.2⟩, Subtype.coe_le_coe.mp le_sup_left, Subtype.coe_le_coe.mp le_sup_right⟩
 

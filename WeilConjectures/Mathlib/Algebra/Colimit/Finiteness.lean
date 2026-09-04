@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Algebra.Subalgebra.Directed
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Colimit.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 
 /-!
@@ -17,14 +18,16 @@ nonempty directed poset with supremum `⊤`, then `R` is the colimit of the diag
 form in `CommRingCat` (`CommRingCat.isColimitSubalgebraCocone`); this is the categorical
 companion of `Subalgebra.iSupLift`. Applying it to `P = Subalgebra.FG` shows that `R` is
 the filtered colimit of its finitely generated `ℤ`-subalgebras
-(`CommRingCat.isColimitFgSubalgebraCocone`).
+(`CommRingCat.isColimitFGSubalgebraCocone`).
 
-Only the base ring `ℤ` is treated, since the universal property is obtained from
-`Subalgebra.iSupLift`, which produces an algebra homomorphism into the cocone point, and a
-bare commutative ring carries a canonical algebra structure only over `ℤ`.
+This is the algebra analogue of `Module.fgSystem`, the system of finitely generated
+submodules of a module.
 
-For the analogous statement about the finitely generated submodules of a module, see
-`Module.fgSystem` in `Mathlib/Algebra/Colimit/Finiteness.lean`.
+Only the base ring `ℤ` is treated. This is a deliberate specialization to what absolute
+Noetherian approximation needs, not an intrinsic limitation: for a general base `R` and an
+`R`-algebra `A`, the diagram of `R`-subalgebras of `A` still lands in `CommRingCat`, and a
+cocone point acquires a canonical `R`-algebra structure from `s.ι.app A₀ ∘ algebraMap R A₀`
+for any index `A₀`, independently of `A₀` by cocone compatibility and directedness.
 
 ## Main declarations
 
@@ -33,7 +36,7 @@ For the analogous statement about the finitely generated submodules of a module,
 * `CommRingCat.isColimitSubalgebraCocone`: that cocone is colimiting if these subalgebras
   form a nonempty directed poset with supremum `⊤`.
 * `CommRingCat.fgSubalgebraDiagram`, `CommRingCat.fgSubalgebraCocone`,
-  `CommRingCat.isColimitFgSubalgebraCocone`: the special case of the family of all
+  `CommRingCat.isColimitFGSubalgebraCocone`: the special case of the family of all
   finitely generated `ℤ`-subalgebras of `R`.
 -/
 
@@ -122,7 +125,7 @@ abbrev fgSubalgebraCocone : Cocone (fgSubalgebraDiagram R) :=
   subalgebraCocone R Subalgebra.FG
 
 /-- A commutative ring is the filtered colimit of its finitely generated `ℤ`-subalgebras. -/
-noncomputable def isColimitFgSubalgebraCocone : IsColimit (fgSubalgebraCocone R) :=
+noncomputable def isColimitFGSubalgebraCocone : IsColimit (fgSubalgebraCocone R) :=
   isColimitSubalgebraCocone R Subalgebra.FG (Subalgebra.iSup_val_fg_eq_top ℤ R)
 
 end CommRingCat
