@@ -5,10 +5,27 @@ Run from the repository root:
 
     python3 blueprint/check_blueprint.py [DECL_LIST_PATH]
 
-The file set is *derived*, not hard-coded: the script starts at
-``blueprint/src/content.tex`` and follows every ``\\input`` transitively, so it
-measures exactly the document that would be built, and picks up a chapter as
-soon as it is inputted.
+Two populations of Lean declaration names are read.
+
+The first is the ``.tex`` blueprint.  Its file set is *derived*, not hard-coded:
+the script starts at ``blueprint/src/content.tex`` and follows every
+``\\input`` transitively, so it measures exactly the document that would be
+built, and picks up a chapter as soon as it is inputted.  Those files name
+declarations in ``\\lean{...}``.
+
+The second is ``blueprint/verso/``, a second (Verso) rendering of the Nagata
+blueprint whose nodes name their realising declarations in a
+``(lean := "...")`` option instead.  It is read because nothing else looks at
+those names: the Verso package is a separate lake package, so it is outside the
+main project's ``lake build``, and it is outside the ``content.tex`` closure, so
+the ``\\lean{...}`` scan above never sees it.  Without this, a declaration
+renamed in ``WeilConjectures`` leaves the Verso names dangling until somebody
+takes a manual census.  The directory is optional -- it does not exist on every
+branch -- and its absence is reported, not an error.
+
+This script does not check that any name *exists*; that is
+``lake exe checkdecls``'s job, and ``DECL_LIST_PATH`` below is how the two
+populations are handed to it in one pass.
 
 What it enforces (each of these makes the exit status non-zero):
 
@@ -19,7 +36,9 @@ What it enforces (each of these makes the exit status non-zero):
 * no ``\\label{...}`` is defined twice -- two chapters colliding on a label
   silently redirect every reference to one of them;
 * no ``\\lean{}`` is empty -- an empty tag feeds a blank declaration name to
-  the name list, which is then reported as a missing declaration.
+  the name list, which is then reported as a missing declaration;
+* no Verso ``(lean := "")`` option is empty -- it feeds a blank name to that
+  same list in exactly the same way.
 
 It also reports, per file, the counts the blueprint-hygiene work is measured
 by: ``\\label``s, ``\\lean{`` tags, empty ``\\lean{}`` tags and ``\\leanok``s.
@@ -33,10 +52,13 @@ Counting notes, each of which has caught a wrong census in this project:
 * LaTeX ``%`` comments and ``\\verb|...|`` spans are blanked before any
   matching, so a tag written inside a comment does not inflate the counts.
 
-With ``DECL_LIST_PATH`` given, the list of declaration names named by
-``\\lean{...}`` is written there, one per line, sorted -- suitable input for
-an existence/axiom check.  The list covers the whole ``content.tex`` closure:
-every file the document inputs contributes its names.
+With ``DECL_LIST_PATH`` given, the declaration names are written there, one
+per line, sorted -- suitable input for ``lake exe checkdecls`` or an axiom
+check.  The list is the deduplicated *union* of both populations: the
+``\\lean{...}`` names of the whole ``content.tex`` closure and the Verso
+``(lean := "...")`` names.  The split between them is printed.  The literal
+``...``, which appears in the prose that documents the option's syntax, is not
+a name and is skipped; each skip is reported.
 
 A PDF build of the blueprint is out of reach in the agent sandbox: there is no
 LaTeX engine, no ``bibtex`` and no ``dvisvgm``.  The web (plasTeX) build *is*
@@ -52,11 +74,19 @@ import sys
 
 SRC = pathlib.Path("blueprint/src")
 ROOT = SRC / "content.tex"
+VERSO = pathlib.Path("blueprint/verso")
+
+# The placeholder in the prose documenting the ``(lean := "...")`` syntax.  The
+# test is equality with this exact string and nothing cleverer: a Lean name may
+# carry Unicode letters and primes, so an identifier regex would silently drop
+# real names (six of them here, e.g. ``...IdealSheafData.blowupι``).
+PLACEHOLDER = "..."
 
 INPUT_RE = re.compile(r"\\input\{([^}]*)\}")
 LABEL_RE = re.compile(r"\\label\{([^}]*)\}", re.S)
 USES_RE = re.compile(r"\\uses\{([^}]*)\}", re.S)
 LEAN_RE = re.compile(r"\\lean\{([^}]*)\}", re.S)
+VERSO_LEAN_RE = re.compile(r'\(lean\s*:=\s*"([^"]*)"\)', re.S)
 
 
 def blank(text):
@@ -104,6 +134,38 @@ def split(arg):
     return [x.strip() for x in arg.split(",") if x.strip()]
 
 
+def verso_scan():
+    """Collect the ``(lean := "...")`` names of every file under ``blueprint/verso``.
+
+    Returns ``(per_file, names, skipped, empty)`` where ``per_file`` is a list
+    of ``(file, occurrences, names)`` rows in path order, ``names`` maps a
+    declaration name to the files naming it, ``skipped`` and ``empty`` are
+    ``(file, line)`` lists for the ``...`` placeholder and for an empty option.
+    ``per_file`` is ``None`` when the directory is absent.
+    """
+    if not VERSO.is_dir():
+        return None, {}, [], []
+    per_file, names, skipped, empty = [], {}, [], []
+    for path in sorted(VERSO.rglob("*.lean")):
+        text = path.read_text(encoding="utf-8")
+        name = rel(path)
+        n_occ = n_name = 0
+        for m in VERSO_LEAN_RE.finditer(text):
+            n_occ += 1
+            line = text[: m.start()].count("\n") + 1
+            decls = split(m.group(1))
+            if not decls:
+                empty.append((name, line))
+            for decl in decls:
+                if decl == PLACEHOLDER:
+                    skipped.append((name, line))
+                    continue
+                n_name += 1
+                names.setdefault(decl, []).append(name)
+        per_file.append((name, n_occ, n_name))
+    return per_file, names, skipped, empty
+
+
 def main(argv):
     if not ROOT.exists():
         print(f"{ROOT} not found -- run this from the repository root.")
@@ -111,6 +173,7 @@ def main(argv):
 
     seen, order = set(), []
     collect(ROOT, seen, order)
+    verso_files, verso_names, verso_skipped, verso_empty = verso_scan()
 
     labels = {}          # label -> [file, ...]
     uses = {}            # target -> [file, ...]
@@ -163,12 +226,39 @@ def main(argv):
     for name, line in empty_leans:
         print(f"  EMPTY \\lean{{}} at {name}:{line}")
 
+    print()
+    if verso_files is None:
+        print(f"{VERSO} not present -- no Verso (lean := \"...\") names to check.")
+    else:
+        width = max([len(name) for name, *_ in verso_files] + [len("TOTAL")])
+        print(f"{'verso file':{width}}  {'(lean:=':>7} {'names':>6}")
+        for name, n_occ, n_name in verso_files:
+            print(f"{name:{width}}  {n_occ:7d} {n_name:6d}")
+        n_occ = sum(row[1] for row in verso_files)
+        n_name = sum(row[2] for row in verso_files)
+        print(f"{'TOTAL':{width}}  {n_occ:7d} {n_name:6d}")
+        print()
+        print(f"{len(verso_files)} Verso files under {VERSO}, "
+              f"{n_occ} (lean := \"...\") options, {n_name} names, "
+              f"{len(verso_names)} distinct")
+        print(f"{len(verso_skipped)} \"{PLACEHOLDER}\" placeholders skipped, "
+              f"{len(verso_empty)} empty (lean := \"\")")
+        for name, line in verso_skipped:
+            print(f"  SKIPPED \"{PLACEHOLDER}\" at {name}:{line}")
+        for name, line in verso_empty:
+            print(f"  EMPTY (lean := \"\") at {name}:{line}")
+
     if len(argv) > 1:
         out = pathlib.Path(argv[1])
-        out.write_text("\n".join(sorted(leans)) + "\n", encoding="utf-8")
-        print(f"wrote {len(leans)} declaration names to {out}")
+        union = sorted(set(leans) | set(verso_names))
+        out.write_text("\n".join(union) + "\n", encoding="utf-8")
+        both = len(set(leans) & set(verso_names))
+        print()
+        print(f"wrote {len(union)} declaration names to {out}")
+        print(f"  {len(leans)} from \\lean{{}}, {len(verso_names)} from Verso, "
+              f"{both} in both")
 
-    return 1 if (unresolved or duplicates or empty_leans) else 0
+    return 1 if (unresolved or duplicates or empty_leans or verso_empty) else 0
 
 
 if __name__ == "__main__":
