@@ -2100,8 +2100,10 @@ $d$.
 \begin{definition}[Field extensions]\label{def:pc-field-tower}
 Let $K/k$ be a field extension.  It is \emph{finite} if $[K:k]<\infty$,
 \emph{algebraic} if every element of $K$ is algebraic over $k$,
-\emph{finite separable} if it is finite and every element has a separable
-minimal polynomial over $k$, and \emph{purely inseparable} if every
+\emph{separable} if it is algebraic and every element of $K$ has a
+separable minimal polynomial over $k$ (one with no repeated root in an
+algebraic closure), \emph{finite separable} if it is finite and
+separable, and \emph{purely inseparable} if every
 element $\alpha\in K$ satisfies $\alpha^{p^n}\in k$ for some $n$ (in
 characteristic $0$ this means $K=k$).  An \emph{algebraic closure}
 $\bar k$ of $k$ is an algebraically closed extension of $k$ which is
@@ -3520,32 +3522,20 @@ $(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)\to
 \uses{def:pc-finite-locally-free,def:pc-morphism-conventions,lem:pc-flat-base-change-cohom,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,lem:pc-flat-base-change-cohom,lem:pc-fp-flat-finite-projective,lem:pc-finite-flat-local-free}
-$f$ is finite, so $f_*\cO_X$ is a finite $\cO_S$-module; $f$ is
-fp and flat, hence $f_*\cO_X$ is flat over $S$ (a standard
-consequence: $f_*\cO_X$ is the value of the derived direct image of
-$f$ and the flatness of $\cO_X$ over $S$ means that the direct image
-under the flat morphism $f$ is flat; flatness can be checked on
-stalks: for $s$ a point and $x_1,\dots,x_m\in f^{-1}(s)$ the finitely
-many preimages, $\cO_{X,x_i}$ flat over $\cO_{S,s}$, and the finite
-module
-$N=(f_*\cO_X)_s=\mathrm{colim}_{V\ni s}\Gamma(f^{-1}(V),\cO_X)$
-has the property that $N\otimes_{\cO_{S,s}}\kappa(s)=\Gamma(X_s,\cO)$
-(the base change identity \Cref{lem:pc-flat-base-change-cohom}), and
-the flatness of $N$ is inherited from flatness of the induced maps
-(the standard proof: $N$ is the directed colimit of the modules
-$\Gamma(f^{-1}(V),\cO_X)$ over the affine opens $V\ni s$, each of which
-is flat as a module over $\cO_S(V)$, and flatness passes to that
-colimit)).  Thus $N$ is a finite flat module over the local ring
-$\cO_{S,s}$, hence free
-(\Cref{lem:pc-finite-flat-local-free}; the argument is Nakayama
-together with the equational criterion of flatness), of
-rank $\dim_{\kappa(s)}N\otimes\kappa(s)=\dim_{\kappa(s)}\Gamma(X_s,\cO)=d$
-(the last equality is the definition
-\Cref{def:pc-finite-locally-free}).  So $f_*\cO_X$ is a finitely
-presented $\cO_S$-module ($f$ is finite and locally of finite
-presentation) all of whose stalks are free, hence finite locally free
-of rank $d$ (\Cref{lem:pc-fp-flat-finite-projective}).
+\uses{def:pc-finite-locally-free,lem:pc-flat-base-change-cohom,lem:pc-finite-flat-fp-locally-free}
+By \Cref{def:pc-finite-locally-free} the morphism $f$ is finite, flat
+and locally of finite presentation, hence finite locally free: $f$ is
+affine and $f_*\cO_X$ is a finite locally free $\cO_S$-module
+(\Cref{lem:pc-finite-flat-fp-locally-free}).  Fix $s\in S$.  The
+canonical map
+$(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)\to\Gamma(X_s,\cO_{X_s})$ is
+an isomorphism by the base change identity
+(\Cref{lem:pc-flat-base-change-cohom}); this is the second assertion.
+Moreover $\dim_{\kappa(s)}\Gamma(X_s,\cO_{X_s})=d$ by the fibre-rank
+condition in \Cref{def:pc-finite-locally-free}.  Since $f_*\cO_X$ is
+locally free, its stalk at $s$ is a finite free $\cO_{S,s}$-module of
+rank $\dim_{\kappa(s)}(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)=d$.  As
+$s\in S$ was arbitrary, $f_*\cO_X$ is locally free of rank $d$.
 \end{proof}
 
 % ---------------------------------------------------------------------------
