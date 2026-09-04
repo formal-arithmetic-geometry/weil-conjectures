@@ -3136,7 +3136,7 @@ is flat and every fibre $X_s$ is smooth over $\kappa(s)$.
 \uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change,lem:pc-smooth-local-criterion,lem:pc-standard-smooth-form,lem:pc-standard-smooth-properties,lem:pc-smooth-base-change-ring}
+\uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change,lem:pc-smooth-local-criterion,lem:pc-standard-smooth-form,lem:pc-standard-smooth-properties,lem:pc-smooth-base-change-ring,lem:pc-koszul-resolution}
 ($\Leftarrow$) The assertion is Zariski-local on $S$ and on $X$, so we
 may assume $S=\Spec(R)$ and $X=\Spec(A)$ with $R\to A$ of finite
 presentation and flat and with all fibres smooth.  For every prime
@@ -3160,7 +3160,8 @@ at $\mathfrak q$, so the initial forms of the $f_j$ in the graded ring
 are $x_1,\dots,x_c$, and a sequence whose initial forms in a regular
 sequence, is regular; hence the Koszul complex
 $0\to\wedge^cR[x]^c\to\cdots\to R[x]^c\to R[x]\to A\to0$ is exact
-(exactness of the Koszul complex of a regular sequence), a projective
+(the Koszul complex of a regular sequence is a resolution,
+\Cref{lem:pc-koszul-resolution}), a projective
 (hence flat) resolution of $A$; $A$ is flat over $R$.
 \emph{Smooth fibres:} smoothness of a ring map is preserved by
 arbitrary base change (\Cref{lem:pc-smooth-base-change-ring}), so for
@@ -4282,6 +4283,20 @@ $p^n$-th powers, i.e.\ $\bar k/k$ is purely inseparable.
 \end{proof}
 
 % ----------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Artinian rings are finite products of local rings]
+\label{lem:pc-artinian-product-local}
+A ring $R$ is Artinian if and only if it has finite length as a module
+over itself.  Any such ring $R$ is both Artinian and Noetherian, every
+prime ideal of $R$ is maximal, and $R$ is the (finite) product of its
+localizations at its maximal ideals.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Commutative Algebra, Lemma~10.53.6
+(\stacksproject{00JB}).  It is not decomposed here.
+\end{proof}
+
+% ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Global sections of a proper scheme]
 \label{lem:pc-h0-proper-variety}
@@ -4295,7 +4310,7 @@ $H^0(X,\cO_X)=k$.
 \uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-coherent-hi,lem:pcb-flat-base-change-coherent,lem:pc-finite-extension-alg-closed,def:pc-curve,def:pc-geometrically-irreducible}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent}
+\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent,lem:pc-artinian-product-local}
 (1) Put $A=H^0(X,\cO_X)$.  The structure morphism $f:X\to\Spec(k)$ is
 proper, so by \Cref{lem:pc-coherent-hi} (with $S=\Spec(k)$, $A=k$,
 $\cF=\cO_X$) the $k$-vector space $A$ is finite dimensional.  Since $X$
@@ -4304,9 +4319,10 @@ map $H^0(X,\cO_X)\to\kappa(\eta)$ to the generic point $\eta$ is
 injective (the structure sheaf injects into the constant sheaf of the
 function field of the integral $X$), so $A$ is a subring of a field.
 A finite dimensional $k$-algebra which is a domain is a field: it is
-Artinian (finite dimensional over a field), a finite product of local
-Artin rings, and a domain has exactly one factor, so it is a local
-Artinian domain, i.e.\ a field.  Hence $A$ is a finite field extension
+Artinian (finite dimensional over a field, so of finite length over
+itself), hence a finite product of local Artinian rings
+(\Cref{lem:pc-artinian-product-local}), and a domain has exactly one
+factor, so it is a local Artinian domain, i.e.\ a field.  Hence $A$ is a finite field extension
 of $k$.
 
 (2) Since $X$ is proper over $k$ and $k\to\bar k$ is a flat ring map,
@@ -5202,13 +5218,14 @@ extensions are proper.
 \leanok
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-closed-immersion-proper,lem:pc-proper-base-change,lem:pc-valuative-criterion-proper,lem:pc-projective-space-separated}
+\uses{lem:pc-closed-immersion-proper,lem:pc-proper-base-change,lem:pc-valuative-criterion-proper,lem:pc-projective-space-separated,lem:pc-proper-composition}
 \leanok
 A projective morphism $f:X\to S$ factors as
 $X\xrightarrow{i}\mathbf P^n_S\xrightarrow{\pi}S$ with $i$ a closed
 immersion.  Closed immersions are proper
 (\Cref{lem:pc-closed-immersion-proper}),
-$\pi$ is proper, and properness is stable under composition.  For
+$\pi$ is proper, and properness is stable under composition
+(\Cref{lem:pc-proper-composition}).  For
 $\pi$: the structure morphism $\mathbf P^n_S\to S$ is separated
 (\Cref{lem:pc-projective-space-separated}), and it is of finite type
 because $\mathbf P^n_S$ is covered by the $n+1$ standard opens
@@ -5362,7 +5379,7 @@ is exactly the morphism $X\to\PP^N_k$, $N+1=\dim_kH^0(X,\cL)$, given
 by the complete linear system $|\cL|$; and since $X$ is proper over
 $k$ while $\PP^N_k$ is
 separated over $k$, that immersion has closed image and is therefore a
-closed immersion.  So $f$-very ampleness over $\Spec(k)$ is very
+closed immersion (\Cref{lem:pc-immersion-closed-image}).  So $f$-very ampleness over $\Spec(k)$ is very
 ampleness in the sense of \Cref{def:pcb-ample}.  It is not decomposed
 here.
 \end{proof}
@@ -6234,7 +6251,7 @@ degree $i$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,lem:pc-perfect-local-normal-form,lem:pc-fitting-fibre-dimension}
+\uses{def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,lem:pc-perfect-local-normal-form,lem:pc-fitting-fibre-dimension,lem:pcb-nakayama}
 \emph{1. The local normal form.}  Since $E$ is perfect, every point
 $x\in X$ has, by \Cref{lem:pc-perfect-local-normal-form}, an affine
 open neighbourhood $U_x=\Spec(A)$ together with an isomorphism in
@@ -6279,7 +6296,8 @@ On $W_i$ the cohomology of $E$ is concentrated in degree $i$: for
 $j\ne i$, the $A$-module $H^j(M^{\bullet})$ is of finite type (the
 complex has finite type terms) and its fibre at $x$ is
 $H^j(M^{\bullet}\otimes\kappa(x))=0$ for $x\in W_i$, so
-$H^j(M^{\bullet})_x=0$ (Nakayama), whence
+$H^j(M^{\bullet})_x=0$ (Nakayama's lemma,
+\Cref{lem:pcb-nakayama}(1) with $N=0$ and $I=\mathfrak m_x$), whence
 $H^j(E)|_{W_i}=H^j(M^{\bullet})|_{W_i}=0$ for $j\ne i$.
 Moreover, over each point $x\in W_i$ the complex is
 "formal": $E_x\cong H^i(E)_x[-i]$ (the classical statement: a perfect
@@ -6525,6 +6543,27 @@ as claimed.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Flasque modules are acyclic]
+\label{lem:pc-flasque-acyclic}
+Let $(X,\cO_X)$ be a ringed space and let $\cF$ be an $\cO_X$-module
+which is \emph{flasque}, i.e.\ such that the restriction map
+$\cF(V)\to\cF(U)$ is surjective for every pair of opens
+$U\subseteq V\subseteq X$.  Then $\cF$ is acyclic for
+$R\Gamma(X,-)$, and for $R\Gamma(U,-)$ for every open $U\subseteq X$;
+in particular $H^i(X,\cF)=0$ for all $i\ge1$.
+\uses{def:pc-scheme}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Cohomology of Sheaves,
+Lemma~20.12.3 (\stacksproject{09SY}), whose statement is that any
+flasque $\cO_X$-module is acyclic for $R\Gamma(X,-)$ as well as for
+$R\Gamma(U,-)$ for any open $U$ of $X$; ``flasque'' is Cohomology of
+Sheaves, Definition~20.12.1, the condition recalled in the statement
+above.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Degree: base change and tensor products]
 \label{lem:pc-degree-base-change}
@@ -6555,7 +6594,7 @@ from a point, which is explicit in the base change part (1) and in
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular}
+\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flasque-acyclic,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular}
 \emph{(3).}  This is exactly \Cref{lem:pc-euler-additive}.
 
 \emph{(1).}  For the field extension $K/k$ put $X_K:=X\times_{\Spec(k)}\Spec(K)$ (\Cref{def:pc-base-change}).
@@ -6608,7 +6647,8 @@ skyscraper sheaves with Artinian stalks (for each $P\in D$, the stalk
 is the Artinian local ring $\cO_{D,P}$); such a skyscraper
 $i_*M$, $i:\{P\}\hookrightarrow X$, is flasque (its sections over an
 open are $M$ if it contains $P$ and $0$ otherwise, so all restriction
-maps are surjective), hence $H^i(X,\cO_D)=0$ for $i\ge1$ and
+maps are surjective), hence acyclic
+(\Cref{lem:pc-flasque-acyclic}), so $H^i(X,\cO_D)=0$ for $i\ge1$ and
 \[
 \chi(X,\cO_D)=\dim_kH^0(X,\cO_D)=\sum_{P\in D}\dim_k\cO_{D,P}
 =\sum_{P\in D}\ell(\cO_{D,P}),
@@ -6727,7 +6767,7 @@ $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
 \uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pc-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi}
+\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-immersion-closed-image}
 By definition of very ampleness there is an immersion
 $i:X_K\to\mathbf P^N_K$ with $i^*\cO_{\mathbf P^N}(1)=\cL_K$.  The
 sections $x_1,\dots,x_N$ of $\cO_{\mathbf P^N}(1)$ pull back to
@@ -6778,7 +6818,7 @@ over $k$ (\Cref{lem:pc-coherent-hi}), so that $r_{\cL}$ is the
 morphism $X\to\PP^M_k$, $M+1=\dim_kH^0(X,\cL)$, given by $|\cL|$.
 Second, $X$ is proper over $k$ while $\PP^M_k$ is separated over $k$,
 so that immersion has closed image and is therefore a closed
-immersion.  Hence $\cL$ is very ample over $k$ in the sense of
+immersion (\Cref{lem:pc-immersion-closed-image}).  Hence $\cL$ is very ample over $k$ in the sense of
 \Cref{def:pcb-ample}; and it is ample there too, a very ample module
 being ample (the
 $X_s$-affine basis property, as in
@@ -6821,7 +6861,7 @@ over $k$ (\Cref{lem:pc-h0-proper-variety}(2)).
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible,lem:pc-h0-proper-variety}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
 \emph{(1) ($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
@@ -6871,7 +6911,8 @@ and $X_{\bar k}$ is a smooth projective curve over the algebraically
 closed field $\bar k$ (smooth: \Cref{lem:pc-smooth-base-change};
 proper: \Cref{lem:pc-proper-base-change}; curve: \Cref{lem:pc-dim-base-change};
 integral: by the hypothesis $H^0(X,\cO_X)=k$ and flat base change
-along the flat morphism $\Spec(\bar k)\to\Spec(k)$ applied to the
+along the morphism $\Spec(\bar k)\to\Spec(k)$, which is flat
+(\Cref{lem:pc-flat-field}), applied to the
 proper, hence quasi-compact and quasi-separated, morphism
 $X\to\Spec(k)$ and to $\cF=\cO_X$
 (\Cref{lem:pc-flat-base-change-cohom}), one has
