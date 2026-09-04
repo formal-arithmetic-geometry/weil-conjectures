@@ -7653,7 +7653,7 @@ $\underline{\Hilb}^d_{X/k}$ is smooth of dimension $d$ over $k$).
 \uses{def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-dimension,def:pc-morphism-conventions,lem:pc-hilb-addition,lem:pc-relative-dimension-base-change,lem:pc-relative-dimension-composition,lem:pc-smooth-base-change,lem:pc-smooth-composition,lem:pc-smooth-descends-flat,lem:pc-smooth-flat}
+\uses{def:pc-dimension,def:pc-morphism-conventions,def:pcb-scheme-conventions,lem:pc-hilb-addition,lem:pc-relative-dimension-base-change,lem:pc-relative-dimension-composition,lem:pc-smooth-base-change,lem:pc-smooth-composition,lem:pc-smooth-descends-flat,lem:pc-smooth-flat,lem:pcb-finite-is-integral,lem:pcb-integral-dimension}
 \emph{The cases $d=0,1$.}  $\Hilb^0_{X/S}(T)$ has exactly one element
 (the empty closed subscheme of $X_T$, finite locally free of degree
 $0$; it is the zero ideal; the pullback along $T'\to T$ is the empty
@@ -7703,13 +7703,76 @@ descends along $\pi$
 (\Cref{lem:pc-smooth-descends-flat} applied to the morphism $\pi$ over
 $S$: it is surjective, flat and of finite presentation, being finite
 locally free of degree $d+1$, and its source $H_d\times_SX$ is smooth
-over $S$), so $H_{d+1}\to S$ is smooth.  The relative dimension: $\pi$ is finite,
-hence proper, and surjective, so $\dim H_{d+1}=\dim(H_d\times_SX)=
-d+1$ (a finite surjective morphism between schemes of finite type
-over $S$ preserves the dimension; the dimension of the source over
-$S$ is $d+1$ since it is smooth of relative dimension $d+1$), i.e.\
-$H_{d+1}$ is smooth of relative dimension $d+1$ over $S$.  This
-proves the lemma.
+over $S$), so $H_{d+1}\to S$ is smooth.
+
+\emph{A preliminary: a finite surjective morphism preserves the
+dimension.}  Let $g:P\to Q$ be a finite surjective morphism of schemes;
+we claim $\dim P=\dim Q$.  Cover $Q$ by affine opens
+$U_i=\Spec(A_i)$.  Since $g$ is finite it is affine and $g_*\cO_P$ is a
+finite $\cO_Q$-algebra (\Cref{def:pcb-scheme-conventions}), so
+$g^{-1}(U_i)=\Spec(B_i)$ with $A_i\to B_i$ a finite ring map.  Since
+$g$ is surjective, so is $\Spec(B_i)\to\Spec(A_i)$; hence every prime
+of $A_i$ is the contraction of a prime of $B_i$ and therefore contains
+$\mathfrak a_i:=\ker(A_i\to B_i)$.  Thus the closed immersion
+$\Spec(A_i/\mathfrak a_i)\to\Spec(A_i)$ is a homeomorphism and
+$\dim(A_i/\mathfrak a_i)=\dim A_i$, the dimension of a scheme being a
+topological invariant (\Cref{def:pc-dimension}).  Now
+$A_i/\mathfrak a_i\subseteq B_i$ is an injective finite ring map, hence
+integral (\Cref{lem:pcb-finite-is-integral}), so
+$\dim(A_i/\mathfrak a_i)=\dim B_i$
+(\Cref{lem:pcb-integral-dimension}); therefore $\dim A_i=\dim B_i$ for
+every $i$.  Finally, the dimension of a scheme is the supremum of the
+Krull dimensions of its local rings (\Cref{def:pc-dimension}) and the
+local rings of an open subscheme are local rings of the ambient scheme,
+so the dimension of a scheme is the supremum of the dimensions of the
+members of any open cover.  As $\{U_i\}$ covers $Q$ and
+$\{g^{-1}(U_i)\}$ covers $P$ this gives
+$\dim Q=\sup_i\dim A_i=\sup_i\dim B_i=\dim P$, as claimed.
+
+\emph{The relative dimension.}  Having relative dimension $d+1$ is a
+condition on the fibres over $S$ (\Cref{def:pc-dimension}), so we argue
+fibrewise.  Fix $s\in S$ with $(H_{d+1})_s\neq\emptyset$ and let
+\[
+\pi_s:W:=(H_d\times_SX)_s\longrightarrow V:=(H_{d+1})_s
+\]
+be the base change of $\pi$ along $\Spec\kappa(s)\to S$; we must show
+that $V$ is equidimensional of dimension $d+1$.  The morphism $\pi_s$
+is finite, finiteness being stable under base change
+(\Cref{def:pcb-scheme-conventions}), and it is surjective: the fibre of
+$\pi_s$ over a point $v\in V$ is the fibre of $\pi$ over $v$ regarded as
+a point of $H_{d+1}$, and those fibres are nonempty as recorded above.
+In particular $W\neq\emptyset$, so the relative dimension $d+1$ of
+$H_d\times_SX\to S$ just established says exactly that $W$ is
+equidimensional of dimension $d+1$; in particular $\dim W=d+1$.
+
+Let $V'\subseteq V$ be an irreducible component, equipped with its
+reduced induced structure, and let $\eta$ be its generic point.  The
+base change $\pi_s^{-1}(V')=W\times_VV'\to V'$ of $\pi_s$ along the
+closed immersion $V'\to V$ is again finite and surjective, by the same
+two arguments, so the preliminary gives
+$\dim V'=\dim\pi_s^{-1}(V')$.  Now
+\begin{itemize}
+\item $\pi_s^{-1}(V')$ is a closed subspace of $W$, whence
+$\dim\pi_s^{-1}(V')\leq\dim W=d+1$; and
+\item choose $w\in W$ with $\pi_s(w)=\eta$ and let $W'$ be an
+irreducible component of $W$ containing $w$, with generic point $\xi$.
+From $w\in\overline{\{\xi\}}$ we get
+$\eta=\pi_s(w)\in\overline{\{\pi_s(\xi)\}}$, hence
+$V'=\overline{\{\eta\}}\subseteq\overline{\{\pi_s(\xi)\}}$; as $V'$ is a
+maximal irreducible closed subset of $V$ this forces
+$\overline{\{\pi_s(\xi)\}}=V'$, and then $\pi_s(\xi)=\eta$ because an
+irreducible closed subset of a scheme has a unique generic point.
+Consequently
+$\pi_s(W')=\pi_s(\overline{\{\xi\}})\subseteq\overline{\{\eta\}}=V'$,
+that is $W'\subseteq\pi_s^{-1}(V')$, and therefore
+$\dim\pi_s^{-1}(V')\geq\dim W'=d+1$, the last equality because $W'$ is
+an irreducible component of the equidimensional $W$.
+\end{itemize}
+So $\dim V'=d+1$ for every irreducible component $V'$ of $V$, i.e.\ the
+fibre $V=(H_{d+1})_s$ is equidimensional of dimension $d+1$.  As $s$ was
+an arbitrary point of $S$ with nonempty fibre, $H_{d+1}\to S$ is of
+relative dimension $d+1$ (\Cref{def:pc-dimension}), i.e.\ $H_{d+1}$ is
+smooth of relative dimension $d+1$ over $S$.  This proves the lemma.
 \end{proof}
 
 % ----------------------------------------------------------------------------
