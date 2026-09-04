@@ -22,8 +22,6 @@ records the basic geometry of this pushout:
 
 - the inclusions `pushout.inl`/`pushout.inr` are open immersions and are jointly
   surjective (`AlgebraicGeometry.range_pushout_inl_union_range_pushout_inr`);
-- `AlgebraicGeometry.IsOpenImmersion.isPullback_pushout`: the pushout square is also a
-  pullback square, i.e. the two charts intersect in exactly the glued copy of `U`;
 - `CompactSpace` transfers from the two charts to the pushout;
 - `AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`: a source-local property holds
   for `pushout.desc h k w` as soon as it holds for `h` and `k`;
@@ -70,45 +68,6 @@ lemma range_pushout_inl_union_range_pushout_inr :
           (Scheme.Hom.comp_apply _ _ _).symm
       _ = colimit.ι (span f g) WalkingSpan.zero y := by
           rw [colimit.w (span f g) WalkingSpan.Hom.fst]
-
-/-- **The pushout square of two open immersions of schemes is also a pullback square**:
-the two charts of the glued scheme intersect in exactly the glued copy of the common
-source.
-
-```
-  U ──f──▶ X
-  │        │
-  g        inl
-  ▼        ▼
-  Y ─inr─▶ X ⊔_U Y
-```
--/
-theorem IsOpenImmersion.isPullback_pushout :
-    IsPullback f g (pushout.inl f g) (pushout.inr f g) := by
-  have hrange (T : Scheme.{u}) (s₁ : T ⟶ X) (s₂ : T ⟶ Y)
-      (hs : s₁ ≫ pushout.inl f g = s₂ ≫ pushout.inr f g) (t : T) :
-      ∃ u : U, f u = s₁ t ∧ g u = s₂ t := by
-    have ht : colimit.ι (span f g) WalkingSpan.left (s₁ t) =
-        colimit.ι (span f g) WalkingSpan.right (s₂ t) := by
-      calc colimit.ι (span f g) WalkingSpan.left (s₁ t)
-          = (s₁ ≫ pushout.inl f g) t := (Scheme.Hom.comp_apply _ _ _).symm
-        _ = (s₂ ≫ pushout.inr f g) t := by rw [hs]
-        _ = colimit.ι (span f g) WalkingSpan.right (s₂ t) := Scheme.Hom.comp_apply _ _ _
-    obtain ⟨k, fi, fj, u, hu₁, hu₂⟩ := (Scheme.IsLocallyDirected.ι_eq_ι_iff (span f g)).mp ht
-    cases fi with
-    | id => exact nomatch fj
-    | init j => cases fj with
-      | init j' => exact ⟨u, hu₁, hu₂⟩
-  refine IsPullback.of_isLimit (PullbackCone.IsLimit.mk pushout.condition
-    (fun s ↦ IsOpenImmersion.lift f s.fst ?_) (fun s ↦ IsOpenImmersion.lift_fac _ _ _)
-    (fun s ↦ ?_) (fun s m hm₁ _ ↦ ?_))
-  · rintro - ⟨t, rfl⟩
-    obtain ⟨u, hu, -⟩ := hrange s.pt s.fst s.snd s.condition t
-    exact ⟨u, hu⟩
-  · rw [← cancel_mono (pushout.inr f g), Category.assoc, ← pushout.condition,
-      IsOpenImmersion.lift_fac_assoc]
-    exact s.condition
-  · rw [← cancel_mono f, hm₁, IsOpenImmersion.lift_fac]
 
 instance [CompactSpace X] [CompactSpace Y] : CompactSpace ↑(pushout f g) := by
   constructor
@@ -184,19 +143,6 @@ lemma opensRange_pushout_inl_sup_opensRange_pushout_inr :
   rintro x -
   rw [TopologicalSpace.Opens.mem_sup]
   exact Set.eq_univ_iff_forall.mp (range_pushout_inl_union_range_pushout_inr f g) x
-
-/-- The preimage of the chart `X` under the chart `Y` of the pushout `X ⊔_U Y` is the
-image of `U` in `Y`. (This is the mirror image of
-`AlgebraicGeometry.pushout_inl_preimage_opensRange_inr`; both are recorded for symmetry.) -/
-lemma pushout_inr_preimage_opensRange_inl :
-    pushout.inr f g ⁻¹ᵁ (pushout.inl f g).opensRange = g.opensRange := by
-  ext z
-  constructor
-  · rintro ⟨y, hy⟩
-    obtain ⟨u, -, rfl⟩ := (pushout_inl_eq_inr_iff f g y z).mp hy
-    exact ⟨u, rfl⟩
-  · rintro ⟨u, rfl⟩
-    exact ⟨f u, (pushout_inl_eq_inr_iff f g _ _).mpr ⟨u, rfl, rfl⟩⟩
 
 /-- The preimage of the chart `Y` under the chart `X` of the pushout `X ⊔_U Y` is the
 image of `U` in `X`. -/

@@ -58,9 +58,6 @@ noncomputable def Wι (E : ExtensionData.{u}) (j : Over E.i₀) :
     E.WD.obj j ⟶ E.N.D.obj j.left :=
   (opensDiagramι E.N.D E.i₀ E.W₀).app j
 
-lemma Wι_def (E : ExtensionData.{u}) (j : Over E.i₀) :
-    E.Wι j = (opensDiagramι E.N.D E.i₀ E.W₀).app j := rfl
-
 instance (E : ExtensionData.{u}) (j : Over E.i₀) : IsOpenImmersion (E.Wι j) :=
   inferInstanceAs (IsOpenImmersion ((opensDiagramι E.N.D E.i₀ E.W₀).app j))
 
@@ -758,8 +755,6 @@ noncomputable def specDiagram (E : ExtensionData.{u}) : E.Stage ⥤ Scheme.{u} :
 algebras. -/
 noncomputable def specCone (E : ExtensionData.{u}) : Cone E.specDiagram :=
   Scheme.Spec.mapCone (Limits.coneOfCoconeLeftOp E.algCocone)
-
-lemma specCone_pt (E : ExtensionData.{u}) : E.specCone.pt = Spec Γ(E.X, E.V) := rfl
 
 lemma specCone_π_app (E : ExtensionData.{u}) (T : E.Stage) :
     E.specCone.π.app T = Spec.map T.toSectionsV := rfl

@@ -130,12 +130,8 @@ abbrev WU : E.U.toScheme.Opens := E.N.π.app E.i₀ ⁻¹ᵁ E.W₀
 /-- The system of the descended intersections `Wⱼ`. -/
 noncomputable def WD : Over E.i₀ ⥤ Scheme.{u} := opensDiagram E.N.D E.i₀ E.W₀
 
-lemma WD_def : E.WD = opensDiagram E.N.D E.i₀ E.W₀ := rfl
-
 /-- The cone exhibiting `W` as the limit of the `Wⱼ`. -/
 noncomputable def Wc : Cone E.WD := opensCone E.N.D E.cone E.i₀ E.W₀
-
-lemma Wc_def : E.Wc = opensCone E.N.D E.cone E.i₀ E.W₀ := rfl
 
 /-- `W` is the limit of the `Wⱼ`. -/
 noncomputable def isLimitWc : IsLimit E.Wc :=
