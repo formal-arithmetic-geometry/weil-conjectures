@@ -522,9 +522,11 @@ named in the statement, so it is not decomposed further here.
 \label{lem:pcb-noether-normalization}
 Let \(k\) be a field and let \(S=k[x_1,\dots,x_n]/I\) with
 \(I\neq(1)\).  Then there are an integer \(r\geq0\) and elements
-\(y_1,\dots,y_r\in S\) such that the map \(k[y_1,\dots,y_r]\to S\)
-from the polynomial ring on \(y_1,\dots,y_r\) is injective and finite,
-and for such a presentation one has \(r=\dim S\).  Equivalently: every
+\(y_1,\dots,y_r\in k[x_1,\dots,x_n]\) such that the map
+\(k[y_1,\dots,y_r]\to S\) from the polynomial ring on
+\(y_1,\dots,y_r\) to \(S\), sending each variable to the image of the
+corresponding \(y_i\), is injective and finite, and for such a
+presentation one has \(r=\dim S\).  Equivalently: every
 nonzero finitely generated \(k\)-algebra \(A\) admits a finite
 injective map \(k[x_1,\dots,x_d]\hookrightarrow A\) with
 \(d=\dim A\).
@@ -1980,8 +1982,12 @@ of $f_T$, so that $f_T\circ\sigma_T=\id_T$.
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{definition}[Dimension]\label{def:pc-dimension}
-The \emph{dimension} $\dim X$ of a nonempty scheme $X$ is the supremum
-of the Krull dimensions of the local rings of $X$, and the
+The \emph{dimension} $\dim X$ of a scheme $X$ is the supremum, taken in
+$\{-\infty,0,1,2,\dots,\infty\}$, of the Krull dimensions of the local
+rings of $X$; for $X=\emptyset$ the supremum is over the empty set, so
+$\dim\emptyset=-\infty$, and $\dim X=-\infty$ if and only if $X$ is
+empty (Topology, Definition~5.10.1,
+\stacksproject{0055}).  The
 \emph{relative dimension} of a morphism $f:X\to S$ of finite type at a
 point $s\in S$ is $\dim X_s$ (the dimension of the fibre); $f$ is
 \emph{of relative dimension $d$} if all nonempty fibres have dimension
@@ -6565,7 +6571,11 @@ decomposed here.
 $X\to S$ be a smooth morphism of relative dimension $1$ and let
 $D\subset X$ be a closed subscheme.  Consider:
 \begin{enumerate}
-\item[(1)] $D\to S$ is finite locally free;
+\item[(1)] $D\to S$ is finite locally free in the degreeless sense:
+$D\to S$ is affine and the pushforward of $\cO_D$ is a finite locally
+free $\cO_S$-module.  The fibre rank is not required to be constant, so
+this is weaker than ``finite locally free of degree $d$'' in the sense
+of \Cref{def:pc-finite-locally-free};
 \item[(2)] $D$ is a relative effective Cartier divisor on $X/S$;
 \item[(3)] $D\to S$ is locally quasi-finite, flat and locally of finite
 presentation;
@@ -6573,7 +6583,12 @@ presentation;
 \end{enumerate}
 Then $(1)\Rightarrow(2)\Leftrightarrow(3)\Rightarrow(4)$.  If $S$ is
 locally Noetherian the last arrow is an if-and-only-if; if $X\to S$ is
-proper, the first arrow is an if-and-only-if.
+proper, the first arrow is an if-and-only-if.  The degreeless reading of
+(1) is the one both arrows need: a constant fibre rank is nowhere used
+in $(1)\Rightarrow(2)$, and $(2)\Rightarrow(1)$ for proper $X\to S$
+cannot produce one, since the rank of $\cO_D$ may differ on different
+connected components of $S$; with ``of degree $d$'' in (1) the second
+arrow would be false.
 \uses{def:pc-relative-effective-cartier,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
@@ -6888,9 +6903,10 @@ it to arbitrary $S$.
 Let $f:X\to S$ be a morphism of schemes and let $D_1\subseteq D_2$ be
 \hyperref[def:pc-relative-effective-cartier]{relative effective Cartier
 divisors on $X/S$}, the inclusion being one of closed subschemes.  Then
-there is a unique
+there is an
 \hyperref[def:pc-effective-cartier-divisor]{effective Cartier divisor}
-$D$ on $X$ with $D_2=D_1+D$ (Divisors, Lemma~31.14.8), and $D$ is again
+$D$ on $X$ with $D_2=D_1+D$ (Divisors, Lemma~31.14.8,
+\stacksproject{02ON}), and $D$ is again
 a relative effective Cartier divisor on $X/S$.
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-effective-cartier-divisor,def:pc-relative-effective-cartier}
 \end{lemma}
@@ -6901,8 +6917,11 @@ statement quotes Divisors, Lemma~31.14.8 for the existence of the
 difference $D$ and adds that $D$ is again relative over $S$; in local
 terms, if $D_i$ is cut out by a nonzerodivisor $h_i$ on an affine open
 $\Spec(B)$ of $X$ then $(h_2)\subseteq(h_1)$ forces $h_2=hh_1$ with $h$
-a nonzerodivisor, and $D$ is cut out by $h$.  It is not decomposed
-here.
+a nonzerodivisor, and $D$ is cut out by $h$.  That local description
+also shows that $D$ is unique, which is what lets the cited statement
+speak of \emph{the} effective Cartier divisor $D$; neither cited
+statement asserts uniqueness, so the statement above does not claim it.
+It is not decomposed here.
 \end{proof}
 
 % ----------------------------------------------------------------------------
