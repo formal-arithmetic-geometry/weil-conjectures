@@ -2804,17 +2804,23 @@ $\mathcal A$ the category of $\cO_X$-modules, and
 denotes the associated sheaf ($\mathcal{H}om^{\bullet}$ the derived
 inner hom of sheaves).
 \uses{def:pc-derived-category,lem:pc-ext-injective-resolution}
-% Mathlib: the three names cover the Ext group only.  CategoryTheory.Abelian.Ext
+% Mathlib: the four names cover the Ext group only.  CategoryTheory.Abelian.Ext
 % X Y n is the displayed definition: Ext.homEquiv identifies it with the shifted
 % homs from X to Y in the derived category, which is this node's own formula, and
-% the third name is the vanishing against an injective that the classical
-% description rests on.  The sheaf Ext of the last display,
+% eq_zero_of_injective is the vanishing against an injective that the classical
+% description rests on.  The classical description itself, Ext^i(F,G) = H^i of
+% Hom^bullet(F,I^bullet) for an injective resolution G -> I^bullet, is
+% InjectiveResolution.extAddEquivCohomologyClass: an isomorphism of groups from
+% Ext X Y n to CohomologyClass (single X) R.cochainComplex n, and the latter is
+% by definition the degree-n cocycles of the Hom-complex modulo coboundaries.
+% The sheaf Ext of the last display,
 % Ext^i sheaf of O_X-modules, has no Mathlib counterpart: Mathlib has no
 % declaration for a sheaf Ext, and no derived inner hom of sheaves of modules for
 % such a thing to be the cohomology of.
 \mathlibok\ \lean{CategoryTheory.Abelian.Ext,
   CategoryTheory.Abelian.Ext.homEquiv,
-  CategoryTheory.Abelian.Ext.eq_zero_of_injective}
+  CategoryTheory.Abelian.Ext.eq_zero_of_injective,
+  CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -3455,7 +3461,14 @@ $g_X:X_{T'}\to X_T$ the map $\cL\mapsto g_X^*\cL$ sends invertible
 modules to invertible modules, respects isomorphisms and satisfies
 $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
 \uses{def:pc-picard-presheaf,def:pc-base-change,def:pc-invertible-module,lem:pc-tensor-dual-invertible}
-\lean{SheafOfModules.IsInvertible.pullback, AlgebraicGeometry.Scheme.picFunctor}
+% Lean: the two clauses of the lemma.  SheafOfModules.IsInvertible.pullback is
+% ``sends invertible modules to invertible modules''; Scheme.Pic.pullback_id and
+% Scheme.Pic.pullback_comp are the two displayed equations (id)^* = id and
+% (g_1 g_2)^* = g_2^* g_1^*, stated for the pullback maps Pic(Y) -> Pic(X).  The
+% assembled functor (Sch/S)^op -> Sets is AlgebraicGeometry.picardPresheaf, named
+% at def:pc-picard-presheaf; AlgebraicGeometry.Scheme.picFunctor, which stood
+% here, is the absolute functor Y |-> Pic(Y) on Scheme^op and does not mention f.
+\lean{SheafOfModules.IsInvertible.pullback, AlgebraicGeometry.Scheme.Pic.pullback_id, AlgebraicGeometry.Scheme.Pic.pullback_comp}
 \leanok
 \end{lemma}
 \begin{proof}
