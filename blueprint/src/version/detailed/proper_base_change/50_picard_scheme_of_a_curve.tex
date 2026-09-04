@@ -5066,13 +5066,14 @@ H^i(X,\cF)\otimes_AB\;\cong\;H^i(X',\cF')\qquad\text{for all }i .
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-finite-support-hi,lem:pc-cech-computes,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pc-five-lemma,lem:pc-leray-spectral-sequence,lem:pcb-cech-spectral}
+\uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pc-five-lemma,lem:pc-leray-spectral-sequence,lem:pc-separated-permanence,lem:pcb-cech-spectral}
 \emph{The affine case (2), $X$ separated.}  Let $A\to B$ be flat and let
 $X$ be quasi-compact and separated over $A$; choose a finite affine
 open covering $\mathcal U:X=U_1\cup\dots\cup U_t$.  The base changes
 $(U_i)_B$ are affine and form a cover $\mathcal U_B$ of
 $X_B=X\times_{\Spec A}\Spec B$ (open affine subschemes of the base
-change; separability of $X_B$ follows from that of $X$), and the
+change; separatedness of $X_B$ over $B$ follows from that of $X$ over $A$,
+\Cref{lem:pc-separated-permanence}(3)), and the
 intersections are affine.  By \Cref{lem:pc-cech-computes},
 \[
 H^p(X,\cF)=\check H^p(\mathcal U,\cF),\qquad
@@ -5845,7 +5846,7 @@ extensions are proper.
 \leanok
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-closed-immersion-proper,lem:pc-proper-base-change,lem:pc-valuative-criterion-proper,lem:pc-projective-space-separated,lem:pc-proper-composition}
+\uses{lem:pc-closed-immersion-proper,lem:pc-proper-base-change,lem:pc-valuative-criterion-proper,lem:pc-projective-space-separated,lem:pc-proper-composition,lem:pc-separated-permanence,lem:pc-finite-type-composition}
 \leanok
 A projective morphism $f:X\to S$ factors as
 $X\xrightarrow{i}\mathbf P^n_S\xrightarrow{\pi}S$ with $i$ a closed
@@ -5876,8 +5877,10 @@ V}$ exists (the explicit affine chart where some $a_j$ is a unit
 gives the inhomogeneous coordinates in $V$), and it is unique (the
 same construction is forced).  Hence $\pi$ is proper.  Compositions:
 if $g:X\to Y$ and $f:Y\to Z$ are proper, then $f\circ g$ is proper:
-it is separated and of finite type (compositions of separated and
-finite type morphisms are so), and a universally closed morphism
+it is separated and of finite type (compositions of separated
+morphisms are separated, \Cref{lem:pc-separated-permanence}(1), and
+compositions of morphisms of finite type are of finite type,
+\Cref{lem:pc-finite-type-composition}), and a universally closed morphism
 composed with a universally closed one is universally closed (a base
 change of the composite is the composite of the base changes, and
 closed maps compose).  Therefore $f$ is proper.  The last sentence
@@ -6194,6 +6197,46 @@ is proper.  The same is true for universally closed morphisms.
 \begin{proof}
 This is a cited external input: Morphisms of Schemes, Section~29.42 (Proper morphisms),
 Lemma~29.42.4 (\stacksproject{01W3}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Permanence properties of separated and quasi-separated morphisms]
+\label{lem:pc-separated-permanence}
+Let the following be morphisms of schemes.
+\begin{enumerate}
+\item A composition of \termref{def:pcb-scheme-conventions}{separated}
+  morphisms is separated.
+\item A composition of
+  \termref{def:pcb-scheme-conventions}{quasi-separated} morphisms is
+  quasi-separated.
+\item The \termref{def:pc-base-change}{base change} of a separated
+  morphism is separated.
+\item The base change of a quasi-separated morphism is quasi-separated.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Schemes, Section~26.21 (Separation axioms),
+Lemma~26.21.12 (\stacksproject{01KU}), clauses (1)--(4), stated here as the
+source states them.  The source carries two further clauses, on (fibre)
+products of separated and of quasi-separated morphisms; they are not used
+below and are not claimed by this node.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Compositions of morphisms of finite type]
+\label{lem:pc-finite-type-composition}
+The composition of two morphisms of schemes which are
+\termref{def:pcb-scheme-conventions}{locally of finite type} is locally of
+finite type.  The same is true for morphisms of finite type.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.15
+(Morphisms of finite type), Lemma~29.15.3 (\stacksproject{01T3}).  It is not
+decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
