@@ -3492,7 +3492,7 @@ $(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)\to
 \uses{def:pc-finite-locally-free,def:pc-morphism-conventions,lem:pc-flat-base-change-cohom,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,lem:pc-flat-base-change-cohom}
+\uses{def:pc-finite-locally-free,lem:pc-flat-base-change-cohom,lem:pc-fp-flat-finite-projective,lem:pc-finite-flat-local-free}
 $f$ is finite, so $f_*\cO_X$ is a finite $\cO_S$-module; $f$ is
 fp and flat, hence $f_*\cO_X$ is flat over $S$ (a standard
 consequence: $f_*\cO_X$ is the value of the derived direct image of
@@ -3505,20 +3505,19 @@ $N=(f_*\cO_X)_s=\mathrm{colim}_{V\ni s}\Gamma(f^{-1}(V),\cO_X)$
 has the property that $N\otimes_{\cO_{S,s}}\kappa(s)=\Gamma(X_s,\cO)$
 (the base change identity \Cref{lem:pc-flat-base-change-cohom}), and
 the flatness of $N$ is inherited from flatness of the induced maps
-(the standard proof: $N$ is a directed colimit of flat modules
-$\Gamma(f^{-1}(V),\cO_X)$ over the affine $V$, each of which is flat as
-a module over $\cO_S(V)$, and $N\otimes_{\cO_{S,s}}M$ for a flat
-modulus $M$... here we may argue via the finite presentation: $N$ is
-finitely presented and its Tor vanishes because the
-$\cO_{X,x_i}$'s are flat: for a flat and finitely presented module one
-has $N$ flat over the local ring by the criterion "Tor$_1$ vanishes up
-to finite generation"; the classical reference is: $f$ is flat and
-fp, then $f_*\cO_X$ is flat)).  Thus $N$ is a finitely generated flat
-module over the local ring $\cO_{S,s}$; by Nakayama it is free, of
+(the standard proof: $N$ is the directed colimit of the modules
+$\Gamma(f^{-1}(V),\cO_X)$ over the affine opens $V\ni s$, each of which
+is flat as a module over $\cO_S(V)$, and flatness passes to that
+colimit)).  Thus $N$ is a finite flat module over the local ring
+$\cO_{S,s}$, hence free
+(\Cref{lem:pc-finite-flat-local-free}; the argument is Nakayama
+together with the equational criterion of flatness), of
 rank $\dim_{\kappa(s)}N\otimes\kappa(s)=\dim_{\kappa(s)}\Gamma(X_s,\cO)=d$
 (the last equality is the definition
-\Cref{def:pc-finite-locally-free}).  Hence $f_*\cO_X$ is locally free of
-rank $d$.
+\Cref{def:pc-finite-locally-free}).  So $f_*\cO_X$ is a finitely
+presented $\cO_S$-module ($f$ is finite and locally of finite
+presentation) all of whose stalks are free, hence finite locally free
+of rank $d$ (\Cref{lem:pc-fp-flat-finite-projective}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -3993,6 +3992,50 @@ for $p\ge t$.  This proves (2).
 % ---------------------------------------------------------------------------
 \subsection{Fields}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Primitive element]
+\label{lem:pc-primitive-element}
+Let $K/k$ be a \hyperref[def:pc-field-tower]{finite separable} field
+extension.  Then $K/k$ is simple: there is an $\alpha\in K$ with
+$K=k[\alpha]$.
+\uses{def:pc-field-tower}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Fields, Lemma~9.19.1
+(\stacksproject{030N}), the primitive element theorem.  For a finite
+extension $E/F$ that lemma states the equivalence of ``there exists a
+primitive element for $E$ over $F$'' with ``there are finitely many
+subextensions $E/K/F$'', and then adds: ``moreover, (1) and (2) hold if
+$E/F$ is separable''.  The statement above is that final clause,
+applied to $E/F=K/k$; the equivalence itself is not used here.  It is
+not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The separable--purely inseparable tower of an algebraic extension]
+\label{lem:pc-separable-purely-inseparable-tower}
+Let $K/k$ be an \hyperref[def:pc-field-tower]{algebraic} field
+extension.  Then there is a unique intermediate field
+$k\subseteq K_{\mathrm{sep}}\subseteq K$ such that $K_{\mathrm{sep}}/k$
+is separable and $K/K_{\mathrm{sep}}$ is
+\hyperref[def:pc-field-tower]{purely inseparable}.
+\uses{def:pc-field-tower}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Fields, Lemma~9.14.6
+(\stacksproject{030K}), sloganed ``any algebraic field extension is
+uniquely a separable field extension followed by a purely inseparable
+one''.  The statement above is that lemma verbatim, with $E/F$ written
+$K/k$.  Note the shape: the cited lemma produces a \emph{tower}
+$K/K_{\mathrm{sep}}/k$, not a compositum, and this is the form in which
+the chapter uses it --- both for the existence of the separable
+subextension $K_{\mathrm{sep}}$ and for the purely inseparable step
+above it.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Separably closed fields: finite separable extensions are trivial]
 \label{lem:pc-sepclosed-finite-sep-trivial}
@@ -4001,9 +4044,9 @@ Then every finite separable field extension $K/k$ is trivial: $K=k$.
 \uses{def:pc-separably-closed}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-separably-closed,def:pc-field-tower}
+\uses{def:pc-separably-closed,def:pc-field-tower,lem:pc-primitive-element}
 The extension is finite and separable, hence simple: $K=k[\alpha]$ for some
-$\alpha$ (primitive element theorem, classical).  Let $m_\alpha\in k[T]$ be
+$\alpha$ (the primitive element theorem, \Cref{lem:pc-primitive-element}).  Let $m_\alpha\in k[T]$ be
 the minimal polynomial of $\alpha$; it is nonconstant and separable, hence
 all its roots lie in $k$ (by separably closedness: a separable polynomial
 has a root in $k$, and then the quotient $k[T]/(m_\alpha)$ is a field only
@@ -4040,18 +4083,21 @@ $\bar k/k$ is purely inseparable.
 \uses{def:pc-separably-closed,def:pc-field-tower,lem:pc-sepclosed-finite-sep-trivial}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-sepclosed-finite-sep-trivial}
-Let $K=k(\alpha)$ (finite over $k$).  Let $L$ be the separable closure
-of $k$ inside $K$, i.e.\ the maximal separable subextension (standard:
-among the subextensions $k\subseteq k'\subseteq K$ with $k'/k$ finite
-separable there is a maximal one, obtained by compositum).
-Then $K/L$ is purely inseparable: for a finite extension in
-characteristic $p$ this is the standard fact that a finite extension is
-the compositum of a separable and a purely inseparable subextension
-(the tower $K/k$ decomposes: the separable part $L$, and for
-$\beta\in K$ the minimal polynomial over $L$ is $T^{p^f}-c$, a purely
-inseparable polynomial: this is the classical normal-separable
-devissage; we use it as standard field theory).  Let
+\uses{lem:pc-sepclosed-finite-sep-trivial,lem:pc-separable-purely-inseparable-tower}
+Let $K=k(\alpha)$ (finite, hence algebraic, over $k$).  Let $L$ be the
+separable closure of $k$ inside $K$, that is, the intermediate field
+$K_{\mathrm{sep}}$ of
+\Cref{lem:pc-separable-purely-inseparable-tower}; that lemma gives
+$L/k$ separable.
+Then $K/L$ is purely inseparable by the same
+\Cref{lem:pc-separable-purely-inseparable-tower}, which produces the
+tower $K/L/k$ with purely inseparable upper step; this is the form we
+use of the decomposition of a finite extension into a separable and a
+purely inseparable part.  Concretely, for $\beta\in K$ there is an $n$
+with $\beta^{p^n}\in L$, so the minimal polynomial of $\beta$ over $L$
+divides $T^{p^n}-\beta^{p^n}=(T-\beta)^{p^n}$; it is
+$T^{p^f}-c$ with $c=\beta^{p^f}\in L$, for $p^f$ the smallest $p$-power
+with $\beta^{p^f}\in L$.  Let
 $[K:L]=p^e$.  For every $\beta\in K$, $\beta^{p^e}\in L$: indeed the
 minimal polynomial $T^{p^f}-c$ of $\beta$ over $L$ has $f\le e$, and
 $\beta^{p^e}=c^{p^{e-f}}\in L$.
@@ -5670,7 +5716,7 @@ is an isomorphism in $D(\cO_T)$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-morphism-conventions,def:pc-base-change,lem:pc-cech-resolution,lem:pc-affine-morphism-hi,lem:pc-proper-base-change,lem:pc-flat-compose,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-perfect-complex,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-base-change-cohom,lem:pc-flf-properties}
+\uses{def:pc-perfect-complex,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-base-change-cohom,lem:pc-flf-properties,lem:pc-fp-flat-finite-projective}
 Both assertions are Zariski-local in $S$ (the object $Rf_*\cG$
 restricts to the corresponding object for the restricted morphism and
 the base change map localizes in $T$), so assume $S=\Spec(A)$ affine.
@@ -5706,7 +5752,8 @@ over $A$ -- the standard: flatness of a quasi-coherent module over
 $S$ is detected on the affines of a base; for our $f$ of finite
 presentation with $S$ affine, also direct: from the local
 $\Gamma$-description of the flatness of $\cG$ over $S$).
-A finitely presented flat $A$-module is finite projective: it is finite
+A finitely presented flat $A$-module is finite projective
+(\Cref{lem:pc-fp-flat-finite-projective}): it is finite
 locally free (for local $A_{\mathfrak p}$, flat $+$ finitely presented
 module is free by Nakayama, and the ranks glue: the local freeness is
 the standard consequence of the freeness of the finitely presented
@@ -5763,6 +5810,43 @@ $A^n\twoheadrightarrow M$; flatness makes its kernel vanish modulo
 $\mathfrak m$, and the kernel is finitely generated because $M$ is of
 finite presentation, so Nakayama again makes it zero).  The rank is
 finite because $M$ is finite.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Finitely presented and flat means finite locally free]
+\label{lem:pc-fp-flat-finite-projective}
+Let $A$ be a ring and $M$ an $A$-module.  The following are equivalent:
+$M$ is finitely presented and flat over $A$; $M$ is finite projective;
+$M$ is a direct summand of a finite free $A$-module; $M$ is finitely
+presented and $M_{\mathfrak p}$ is free for every prime
+$\mathfrak p\subset A$; and $M$ is finite locally free.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.78.2
+(\stacksproject{00NX}), which lists these among seven equivalent
+conditions on $M$.  It is the converse of
+\Cref{lem:pc-finite-projective-module}, which records the other
+direction (a finite projective module is finitely presented and flat,
+and free over a local ring).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A finite flat module over a local ring is free]
+\label{lem:pc-finite-flat-local-free}
+Let $A$ be a local ring and $M$ a finite flat $A$-module.  Then $M$ is
+finite free.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.78.5
+(\stacksproject{00NZ}), proved there from the equational criterion of
+flatness.  The hypothesis is finite and \emph{flat}, not finite
+projective, so this is not the local case of
+\Cref{lem:pc-finite-projective-module}; and the locality of $A$ is
+needed, since a finite flat module over a general ring need not even be
+projective (Algebra, Remark~10.78.4, \stacksproject{00NY}).  It is not
+decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
