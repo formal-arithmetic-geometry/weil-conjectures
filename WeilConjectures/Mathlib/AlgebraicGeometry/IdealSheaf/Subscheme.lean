@@ -11,8 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 /-!
 # Complements on the subscheme cut out by an ideal sheaf
 
-This file adds three independent complements to
-`Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
+This file adds two independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
 
 ## Base change of the subscheme cut out by an ideal sheaf
 
@@ -39,11 +38,6 @@ The proof is the expected one and uses no new input: `f.toImage.app` is injectiv
 preimage of an affine open of `Y` (`AlgebraicGeometry.Scheme.Hom.toImage_app_injective`), those
 preimages are affine because `f.imageι` is a closed immersion, and they cover the image, so
 the kernel ideal vanishes on a cover by affine opens.
-
-## The subscheme cut out by an ideal sheaf inherits quasi-compactness and quasi-separatedness
-
-The inclusion `I.subschemeι` is a closed immersion, hence affine, so `V(I)` is quasi-compact
-(resp. quasi-separated) as soon as the ambient scheme is.
 
 ## Main results
 
@@ -84,13 +78,6 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
   (isPullback_SpecMap_of_isPushout _ _ _ _
     (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
       (I.isPullback_subschemeCover_map U)
-
-instance compactSpace_subscheme [CompactSpace X] : CompactSpace I.subscheme :=
-  QuasiCompact.compactSpace_of_compactSpace I.subschemeι
-
-instance quasiSeparatedSpace_subscheme [QuasiSeparatedSpace X] :
-    QuasiSeparatedSpace I.subscheme :=
-  quasiSeparatedSpace_of_quasiSeparated I.subschemeι
 
 end AlgebraicGeometry.Scheme.IdealSheafData
 

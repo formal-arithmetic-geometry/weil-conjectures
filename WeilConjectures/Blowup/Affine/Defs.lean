@@ -103,6 +103,16 @@ lemma iSup_basicOpen_reesX_eq_top :
   Proj.iSup_basicOpen_eq_top (reesGrading I) (fun a : I ↦ reesX I a a.2)
     (irrelevant_le_span_range_reesX I)
 
+/-- **The charts at a generating family cover the blow-up**: if `gen` generates `I`, the
+basic opens of `Proj` of the Rees algebra at the degree-one elements `gen k · X` cover it. -/
+lemma iSup_basicOpen_reesX_gen_eq_top {κ : Type*} (gen : κ → A) (hgen : ∀ k, gen k ∈ I)
+    (hspan : Ideal.span (Set.range gen) = I) :
+    ⨆ k, Proj.basicOpen (reesGrading I) (reesX I (gen k) (hgen k)) = ⊤ :=
+  Proj.iSup_basicOpen_eq_top (reesGrading I) _
+    ((irrelevant_le_span_range_reesX I).trans (Ideal.span_le.mpr (by
+      rintro - ⟨b, rfl⟩
+      exact reesX_mem_span_reesX I gen hgen hspan b.2)))
+
 /-- Hom extensionality over the standard chart cover of the blow-up. -/
 lemma hom_ext {Y : Scheme.{u}} {f g : AffineBlowup I ⟶ Y}
     (h : ∀ (a : A) (ha : a ∈ I),

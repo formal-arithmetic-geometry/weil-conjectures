@@ -11,15 +11,15 @@ public import Mathlib.Topology.Constructions
 /-!
 # Closedness along a cover by open embeddings
 
-`isClosed_of_isOpenEmbedding_cover`: a subset of a space covered by open embeddings is
-closed as soon as its preimage in each member of the cover is closed.
+`Topology.isClosed_of_isOpenEmbedding_cover`: a subset of a space covered by open
+embeddings is closed as soon as its preimage in each member of the cover is closed.
 -/
 
 @[expose] public section
 
 open Set
 
-variable {X : Type*} [TopologicalSpace X]
+namespace Topology
 
 /-- A set is closed as soon as its preimage under each member of a jointly surjective family
 of open embeddings is closed. -/
@@ -34,8 +34,10 @@ lemma isClosed_of_isOpenEmbedding_cover {Q : Type*} [TopologicalSpace Q] {κ : T
     · intro hx
       obtain ⟨k, y, rfl⟩ := hcov x
       exact Set.mem_iUnion.mpr ⟨k, y, hx, rfl⟩
-    · rintro hx
+    · intro hx
       obtain ⟨k, y, hy, rfl⟩ := Set.mem_iUnion.mp hx
       exact hy
   rw [hcompl]
   exact isOpen_iUnion fun k ↦ (hq k).isOpenMap _ (hs k).isOpen_compl
+
+end Topology

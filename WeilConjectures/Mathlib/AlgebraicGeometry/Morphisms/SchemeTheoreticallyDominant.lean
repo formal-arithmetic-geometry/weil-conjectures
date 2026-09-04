@@ -20,9 +20,7 @@ Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in three independent g
   scheme-theoretically dominant if and only if the inclusion of its scheme-theoretic
   image is an isomorphism;
 - `AlgebraicGeometry.Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant`: precomposing
-  with a scheme-theoretically dominant morphism does not change the kernel ideal sheaf;
-- the inclusion of the generic point `Spec K ⟶ Spec A` of the spectrum of a domain with
-  fraction field `K` is scheme-theoretically dominant.
+  with a scheme-theoretically dominant morphism does not change the kernel ideal sheaf.
 
 ## Flat base change for scheme-theoretic images
 
@@ -91,27 +89,6 @@ kernel ideal sheaf. -/
 lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
     (γ : T ⟶ Y) [IsSchemeTheoreticallyDominant d] : (d ≫ γ).ker = γ.ker := by
   rw [Scheme.Hom.ker_comp, d.ker_eq_bot, Scheme.IdealSheafData.map_bot]
-
-section FractionRing
-
-variable (A K : Type u) [CommRing A] [IsDomain A] [Field K] [Algebra A K]
-  [IsFractionRing A K]
-
-/-- The inclusion of the generic point of the spectrum of a domain is
-scheme-theoretically dominant. -/
-instance : IsSchemeTheoreticallyDominant
-    (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
-  have : IsDominant (Spec.map (CommRingCat.ofHom (algebraMap A K))) := by
-    constructor
-    change DenseRange (PrimeSpectrum.comap (algebraMap A K))
-    rw [PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical,
-      (RingHom.injective_iff_ker_eq_bot _).mp (IsFractionRing.injective A K)]
-    exact bot_le
-  exact .of_isDominant _
-
-variable {A K} {Z : Scheme.{u}}
-
-end FractionRing
 
 variable (g : T ⟶ Y) [QuasiCompact g] {Y' : Scheme.{u}} (q : Y' ⟶ Y) [Flat q]
 

@@ -80,7 +80,6 @@ lemma exists_opens_restrict_preimage {X Z : Scheme.{u}} (W₁ : X.Opens)
     rw [← cancel_mono W₁.ι, Scheme.homOfLE_ι, Category.assoc, hefac]
   refine ⟨W₁.ι ''ᵁ (F ⁻¹ᵁ V), hle, e ≫ (F ∣_ V), ?_, ?_⟩
   · rw [hhom, Category.assoc, Category.assoc, morphismRestrict_ι]
-  · intro x
-    exact Scheme.Opens.mem_ι_image_iff W₁
+  · exact fun _ ↦ Scheme.Opens.mem_ι_image_iff W₁
 
 end AlgebraicGeometry

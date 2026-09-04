@@ -30,6 +30,4 @@ instance : MorphismProperty.RespectsRight @IsImmersion @IsOpenImmersion where
     have : IsImmersion f := hf
     infer_instance
 
-variable {X Y : Scheme.{u}}
-
 end AlgebraicGeometry

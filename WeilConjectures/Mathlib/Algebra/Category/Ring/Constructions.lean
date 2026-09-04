@@ -7,8 +7,6 @@ module
 
 public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.RingTheory.TensorProduct.Quotient
-public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 
 /-!
 # Quotients by extended ideals are pushouts

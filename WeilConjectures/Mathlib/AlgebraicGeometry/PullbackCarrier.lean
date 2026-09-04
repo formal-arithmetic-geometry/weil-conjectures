@@ -5,9 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Gluing
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Pullback squares of schemes along open immersions

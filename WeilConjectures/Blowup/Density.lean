@@ -24,12 +24,7 @@ This file proves the density-preservation lemma for admissible blow-ups
   (`Scheme.IdealSheafData.isInvertible_comap_blowupMap`);
 - `AlgebraicGeometry.IsAdmissible.isSchemeTheoreticallyDominant_preimage_ι`: if `U`
   is a quasi-compact scheme-theoretically dense open of `X`, its inverse image under a
-  `U`-admissible blow-up is scheme-theoretically dense in the total space;
-- `AlgebraicGeometry.IsAdmissible.dense_preimage_blowupMap_of_qcqs` and its open form
-  `AlgebraicGeometry.IsAdmissible.dense_coe_preimage_blowupMap`
-  (blueprint: `lemma:nagata-conrad-dense-in-admissible-blowup`): the inverse image of a
-  dense subset of a qcqs scheme under an admissible blow-up is topologically dense. The
-  Noetherian special case is `AlgebraicGeometry.IsAdmissible.dense_preimage_blowupMap`.
+  `U`-admissible blow-up is scheme-theoretically dense in the total space.
 
 It also proves the existence statement of the blueprint's
 `lemma:nagata-conrad-schematically-dense-blowup`, in its absolute and relative forms:
@@ -112,9 +107,10 @@ theorem IsInvertible.isSchemeTheoreticallyDominant_compl_support
         Γ(Y, Y.basicOpen (a x)) (powers_le_nonZeroDivisors (ha x))
 
 /-- **The complement of the center is scheme-theoretically dense in a blow-up**
-(blueprint: `lemma:nagata-admissible-blowup-preserves-density`, blow-up part).
-
-The extension of `I` to the blow-up is an invertible ideal. -/
+(blueprint: `lemma:nagata-admissible-blowup-preserves-density`, blow-up part): the
+inverse image of the complement of the support of `I` under `I.blowupMap` is
+scheme-theoretically dense, because the extension of `I` to the blow-up is an
+invertible ideal. -/
 theorem isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
     (I : Y.IdealSheafData) :
     IsSchemeTheoreticallyDominant (I.blowupMap ⁻¹ᵁ I.support.compl).ι := by
@@ -150,37 +146,23 @@ theorem isNoetherian_blowup [IsNoetherian X] : IsNoetherian B.I.blowup := by
   have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
   exact ⟨⟩
 
-/-- **The preimage of the preserved open is dense in the blow-up**: the inverse image
-of the complement of the center under a `U`-admissible blow-up of a quasi-compact,
-quasi-separated scheme is scheme-theoretically dense
-(`Scheme.IdealSheafData.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support`),
-hence topologically dense. -/
-theorem dense_coe_preimage_preservedOpen [CompactSpace X] [QuasiSeparatedSpace X] :
-    Dense ((B.I.blowupMap ⁻¹ᵁ B.preservedOpen : B.I.blowup.Opens) : Set B.I.blowup) := by
-  have := B.isProper_blowupMap
-  have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
-  have : QuasiSeparatedSpace B.I.blowup := quasiSeparatedSpace_of_quasiSeparated B.I.blowupMap
-  have hc : IsCompact ((B.I.blowupMap ⁻¹ᵁ B.preservedOpen : B.I.blowup.Opens) :
-      Set B.I.blowup) :=
-    B.I.blowupMap.isCompact_preimage
-      (Scheme.IdealSheafData.isCompact_coe_compl_support B.finiteType)
+/-- **Topological density transports through an admissible blow-up**: the inverse
+image of a dense subset of a Noetherian scheme is dense in any admissible blow-up.
+The preimage of the complement of the center is scheme-theoretically, hence
+topologically, dense, and the blow-up is an isomorphism there. -/
+theorem dense_preimage_blowupMap [IsNoetherian X] {D : Set X} (hD : Dense D) :
+    Dense (B.I.blowupMap ⁻¹' D) := by
+  have : IsNoetherian B.I.blowup := B.isNoetherian_blowup
   have : CompactSpace (B.I.blowupMap ⁻¹ᵁ B.preservedOpen).toScheme :=
-    isCompact_iff_compactSpace.mp hc
-  have := B.I.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
-  have hdr : DenseRange (B.I.blowupMap ⁻¹ᵁ B.preservedOpen).ι :=
-    Scheme.Hom.denseRange (B.I.blowupMap ⁻¹ᵁ B.preservedOpen).ι
-  rwa [DenseRange, Scheme.Opens.range_ι] at hdr
-
-/-- **Topological density transports through an admissible blow-up** (blueprint:
-`lemma:nagata-conrad-dense-in-admissible-blowup`).
-
-The preimage of the complement of the center is dense
-(`IsAdmissible.dense_coe_preimage_preservedOpen`) and the blow-up is an isomorphism
-there, so every nonempty open of the blow-up maps onto a nonempty open of the preserved
-open, which meets the dense set. -/
-theorem dense_preimage_blowupMap_of_qcqs [CompactSpace X] [QuasiSeparatedSpace X]
-    {D : Set X} (hD : Dense D) : Dense (B.I.blowupMap ⁻¹' D) := by
-  have hPd := B.dense_coe_preimage_preservedOpen
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
+  have : IsNoetherian (B.I.blowupMap ⁻¹ᵁ B.preservedOpen).toScheme := ⟨⟩
+  -- the preimage of the preserved open is (scheme-theoretically, hence) dense
+  have hPd : Dense ((B.I.blowupMap ⁻¹ᵁ B.preservedOpen : B.I.blowup.Opens) :
+      Set B.I.blowup) := by
+    have := B.I.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
+    have hdr : DenseRange (B.I.blowupMap ⁻¹ᵁ B.preservedOpen).ι :=
+      Scheme.Hom.denseRange (B.I.blowupMap ⁻¹ᵁ B.preservedOpen).ι
+    rwa [DenseRange, Scheme.Opens.range_ι] at hdr
   have hiso : IsIso (B.I.blowupMap ∣_ B.preservedOpen) :=
     B.I.isIso_blowupMap_restrict_support_compl
   rw [dense_iff_inter_open]
@@ -208,22 +190,6 @@ theorem dense_preimage_blowupMap_of_qcqs [CompactSpace X] [QuasiSeparatedSpace X
     congr 1
   exact Set.mem_preimage.mpr (hcomm ▸ hdD)
 
-/-- **Topological density transports through an admissible blow-up**, in the form
-consumed by the Conrad case lemmas: the inverse image open of a dense open of a
-quasi-compact, quasi-separated scheme is dense in any admissible blow-up. -/
-theorem dense_coe_preimage_blowupMap [CompactSpace X] [QuasiSeparatedSpace X]
-    {D : X.Opens} (hD : Dense (D : Set X)) :
-    Dense ((B.I.blowupMap ⁻¹ᵁ D : B.I.blowup.Opens) : Set B.I.blowup) :=
-  B.dense_preimage_blowupMap_of_qcqs hD
-
-/-- **Topological density transports through an admissible blow-up**: the inverse
-image of a dense subset of a Noetherian scheme is dense in any admissible blow-up.
-This is the Noetherian special case of
-`IsAdmissible.dense_preimage_blowupMap_of_qcqs`. -/
-theorem dense_preimage_blowupMap [IsNoetherian X] {D : Set X} (hD : Dense D) :
-    Dense (B.I.blowupMap ⁻¹' D) :=
-  B.dense_preimage_blowupMap_of_qcqs hD
-
 end IsAdmissible
 
 /-- **A `U`-admissible blow-up in which `U` becomes scheme-theoretically dense**
@@ -241,11 +207,10 @@ theorem exists_isAdmissible_isSchemeTheoreticallyDominant_preimage
     ∃ B : IsAdmissible X U, IsSchemeTheoreticallyDominant (B.I.blowupMap ⁻¹ᵁ U).ι := by
   obtain ⟨I, hIft, hIsupp⟩ := X.exists_finiteType_ideal_coe_support_eq_compl U hU
   have hdisj : Disjoint (U : Set X) (I.support : Set X) := by
-    rw [hIsupp]; exact disjoint_compl_right
-  have hcompl : I.support.compl = U := by
-    apply TopologicalSpace.Opens.ext
-    change (I.support : Set X)ᶜ = (U : Set X)
-    rw [hIsupp, compl_compl]
+    rw [hIsupp]
+    exact disjoint_compl_right
+  have hcompl : I.support.compl = U :=
+    TopologicalSpace.Opens.ext (by rw [TopologicalSpace.Closeds.coe_compl, hIsupp, compl_compl])
   refine ⟨⟨I, hIft, hdisj⟩, ?_⟩
   have h := I.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
   rwa [hcompl] at h
@@ -271,16 +236,16 @@ theorem exists_comp_isSchemeTheoreticallyDominant_preimage
   have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
   have : QuasiSeparatedSpace B.I.blowup :=
     quasiSeparatedSpace_of_quasiSeparated B.I.blowupMap
-  set V : B.I.blowup.Opens := B.I.blowupMap ⁻¹ᵁ U with hVdef
+  set V : B.I.blowup.Opens := B.I.blowupMap ⁻¹ᵁ U
   have hV : IsCompact (V : Set B.I.blowup) :=
     QuasiCompact.isCompact_preimage (f := B.I.blowupMap) _ U.isOpen hU
   obtain ⟨B₂, hB₂⟩ := exists_isAdmissible_isSchemeTheoreticallyDominant_preimage hV
   obtain ⟨K, hKft, hKdisj, iso, hiso⟩ := B.exists_comp B₂
   have hK : K.blowupMap = iso.inv ≫ B₂.I.blowupMap ≫ B.I.blowupMap := by
     rw [← hiso, iso.inv_hom_id_assoc]
+  have hpre : K.blowupMap ⁻¹ᵁ U = iso.inv ⁻¹ᵁ (B₂.I.blowupMap ⁻¹ᵁ V) := by rw [hK]; rfl
   refine ⟨⟨K, hKft, hKdisj⟩, iso.inv ≫ B₂.I.blowupMap, by rw [Category.assoc, ← hK], ?_⟩
   change IsSchemeTheoreticallyDominant (K.blowupMap ⁻¹ᵁ U).ι
-  have hpre : K.blowupMap ⁻¹ᵁ U = iso.inv ⁻¹ᵁ (B₂.I.blowupMap ⁻¹ᵁ V) := by rw [hK]; rfl
   rw [hpre]
   exact .preimage_ι_of_isIso iso.inv _
 

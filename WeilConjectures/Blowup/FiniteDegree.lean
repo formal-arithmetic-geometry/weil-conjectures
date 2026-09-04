@@ -6,11 +6,14 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Affine.Principalization
+public import WeilConjectures.Blowup.Affine.Slope
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.Proper
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 
@@ -84,14 +87,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.mul
   intro U _
   rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
   exact (hI U le_top).mul (hK U le_top)
-
-/-- Finite-type ideal sheaves are stable under powers. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.pow
-    {X : Scheme.{u}} {I : X.IdealSheafData} (hI : I.ofFiniteType) (n : ℕ) :
-    (I ^ n).ofFiniteType := by
-  induction n with
-  | zero => simpa using Scheme.IdealSheafData.ofFiniteType_top
-  | succ n ih => rw [pow_succ]; exact ih.mul hI
 
 /-- **Finite-type subsheaves through prescribed sections** (a corollary of the
 finite-type extension theorem, Stacks Project Tag 01PF): if `F` is a finitely generated
@@ -186,15 +181,6 @@ lemma _root_.CommRingCat.hom_mem_ideal_map_iso_iff {R S : CommRingCat.{u}} (e : 
     rw [← Ideal.comap_map_of_bijective _ (ConcreteCategory.bijective_of_isIso e.hom)
       (I := P)]
   exact Iff.rfl
-
-/-- The degree-one Rees elements are additive in the section. -/
-lemma _root_.AlgebraicGeometry.reesX_add {A : Type u} [CommRing A] (I : Ideal A)
-    {b₁ b₂ : A} (hb₁ : b₁ ∈ I)
-    (hb₂ : b₂ ∈ I) :
-    reesX I (b₁ + b₂) (add_mem hb₁ hb₂) = reesX I b₁ hb₁ + reesX I b₂ hb₂ := by
-  apply Subtype.ext
-  push_cast [coe_reesX]
-  exact map_add (Polynomial.monomial 1) b₁ b₂
 
 /-- **The chart basic opens at a generating set cover the affine blow-up**: for a
 finite generating set `s` of `I`, the basic opens at the degree-one elements `a·X`,
@@ -348,13 +334,23 @@ lemma _root_.Ideal.le_of_comap_le_comap_of_bijective {R S : Type u} [CommRing R]
 
 variable {X : Scheme.{u}}
 
+/-- The affine chart of the blow-up of `I` over an affine open `V` at a section
+`a ∈ I(V)`: the spectrum of the degree-zero part of the Rees algebra away from `a·X`.
+Bundling this scheme under a name of its own keeps the (very large)
+`HomogeneousLocalization` chart ring out of the statements of the chart API below, where
+unifying it repeatedly is expensive. -/
+@[reducible] noncomputable def _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChartSpec
+    (I : X.IdealSheafData) (V : X.affineOpens) {a : Γ(X, V.1)} (_ha : a ∈ I.ideal V) :
+    Scheme.{u} :=
+  Spec (.of (HomogeneousLocalization.Away (reesGrading (I.ideal V))
+    (reesX (I.ideal V) a _ha)))
+
 /-- The chart probe of the blow-up over an affine open `V` at a section `a ∈ I(V)`: the
 affine chart of the affine blow-up at the degree-one Rees element `a·X`, embedded into
 the blow-up. -/
 noncomputable def _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart
     (I : X.IdealSheafData) (V : X.affineOpens) {a : Γ(X, V.1)} (ha : a ∈ I.ideal V) :
-    Spec (.of (HomogeneousLocalization.Away (reesGrading (I.ideal V))
-      (reesX (I.ideal V) a ha))) ⟶ I.blowup :=
+    I.blowupChartSpec V ha ⟶ I.blowup :=
   AffineBlowup.chart (I.ideal V) (reesX (I.ideal V) a ha)
     (reesX_mem (I.ideal V) a ha) ≫ I.blowupι V
 
@@ -366,8 +362,7 @@ instance (I : X.IdealSheafData) (V : X.affineOpens) {a : Γ(X, V.1)} (ha : a ∈
 /-- The map on section rings induced by the chart probe of the blow-up. -/
 noncomputable def _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChartSection
     (I : X.IdealSheafData) (V : X.affineOpens) {a : Γ(X, V.1)} (ha : a ∈ I.ideal V) :
-    Γ(X, V.1) ⟶ Γ(Spec (.of (HomogeneousLocalization.Away (reesGrading (I.ideal V))
-      (reesX (I.ideal V) a ha))), ⊤) :=
+    Γ(X, V.1) ⟶ Γ(I.blowupChartSpec V ha, ⊤) :=
   CommRingCat.ofHom (AffineBlowup.awayAlgebraMap (I.ideal V)
     (reesX (I.ideal V) a ha)) ≫ (Scheme.ΓSpecIso _).inv
 
@@ -388,8 +383,7 @@ form `top_le_preimage_specMap_fromSpec`, which keeps the chart ring out of the
 rewrite motives. -/
 lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart_comp_blowupMap_preimage
     (I : X.IdealSheafData) (V : X.affineOpens) {a : Γ(X, V.1)} (ha : a ∈ I.ideal V) :
-    (⊤ : (Spec (.of (HomogeneousLocalization.Away (reesGrading (I.ideal V))
-        (reesX (I.ideal V) a ha)))).Opens) ≤
+    (⊤ : (I.blowupChartSpec V ha).Opens) ≤
       (I.blowupChart V ha ≫ I.blowupMap) ⁻¹ᵁ V.1 :=
   le_of_le_of_eq (top_le_preimage_specMap_fromSpec V _)
     (congrArg (fun f : Spec _ ⟶ X ↦ f ⁻¹ᵁ V.1)
@@ -405,8 +399,8 @@ lemma _root_.AlgebraicGeometry.Scheme.Hom.appLE_eq_of_eq {T T' : Scheme.{u}}
 /-- The `appLE` of the chart probe over `V` is the chart section map. -/
 lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.appLE_blowupChart_comp_blowupMap
     (I : X.IdealSheafData) (V : X.affineOpens) {a : Γ(X, V.1)} (ha : a ∈ I.ideal V)
-    (h : (⊤ : (Spec (.of (HomogeneousLocalization.Away (reesGrading (I.ideal V))
-        (reesX (I.ideal V) a ha)))).Opens) ≤ (I.blowupChart V ha ≫ I.blowupMap) ⁻¹ᵁ V.1) :
+    (h : (⊤ : (I.blowupChartSpec V ha).Opens) ≤
+      (I.blowupChart V ha ≫ I.blowupMap) ⁻¹ᵁ V.1) :
     (I.blowupChart V ha ≫ I.blowupMap).appLE V.1 ⊤ h = I.blowupChartSection V ha := by
   rw [Scheme.Hom.appLE_eq_of_eq (I.blowupChart_comp_blowupMap V ha)]
   exact appLE_top_specMap_fromSpec V (CommRingCat.ofHom (AffineBlowup.awayAlgebraMap
@@ -575,6 +569,87 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.specMap_awayMap_blowupChart
         I.blowupChart V hb := by
   unfold Scheme.IdealSheafData.blowupChart AffineBlowup.chart
   rw [Proj.SpecMap_awayMap_awayι_assoc, Proj.SpecMap_awayMap_awayι_assoc]
+
+/-- **The charts at a generating family cover the blow-up over an affine open**: if `gen`
+generates `I(V)`, every point of the blow-up over `V` lies in the chart at some `gen k`. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.exists_mem_range_blowupChart_of_span
+    (I : X.IdealSheafData) (V : X.affineOpens) {κ : Type*} {gen : κ → Γ(X, V.1)}
+    (hgen : ∀ k, gen k ∈ I.ideal V) (hspan : Ideal.span (Set.range gen) = I.ideal V)
+    {x : I.blowup} (hx : x ∈ I.blowupMap ⁻¹ᵁ V.1) :
+    ∃ (k : κ) (y : _), x = I.blowupChart V (hgen k) y := by
+  rw [I.blowupMap_preimage V] at hx
+  obtain ⟨y, rfl⟩ := hx
+  have hy : y ∈ (⊤ : (AffineBlowup (I.ideal V)).Opens) := trivial
+  rw [← AffineBlowup.iSup_basicOpen_reesX_gen_eq_top (I.ideal V) gen hgen hspan] at hy
+  obtain ⟨k, hyk⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
+  rw [← AffineBlowup.opensRange_chart (I.ideal V) (reesX (I.ideal V) (gen k) (hgen k))
+    (reesX_mem (I.ideal V) (gen k) (hgen k))] at hyk
+  obtain ⟨z, hz⟩ := hyk
+  exact ⟨k, z, by rw [Scheme.IdealSheafData.blowupChart, Scheme.Hom.comp_apply, hz]⟩
+
+/-- **The chart at a product is the intersection of the two charts.** The square
+
+```
+  Chart(a·b) --Spec awayMap--> Chart(b)
+      |                           |
+Spec awayMap                  blowupChart b
+      |                           |
+      v                           v
+   Chart(a) --blowupChart a--> Bl_I X
+```
+
+is a pullback square. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupChart
+    (I : X.IdealSheafData) (V : X.affineOpens) {a b : Γ(X, V.1)} (ha : a ∈ I.ideal V)
+    (hb : b ∈ I.ideal V) :
+    IsPullback
+      (Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap (reesGrading (I.ideal V))
+        (reesX_mem (I.ideal V) b hb) rfl)))
+      (Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap (reesGrading (I.ideal V))
+        (reesX_mem (I.ideal V) a ha)
+        (mul_comm (reesX (I.ideal V) a ha) (reesX (I.ideal V) b hb)))))
+      (I.blowupChart V ha) (I.blowupChart V hb) := by
+  unfold Scheme.IdealSheafData.blowupChart
+  rw [IsPullback.comp_mono_iff (I.blowupι V)]
+  exact AffineBlowup.isPullback_chart _ _
+
+/-- The `a`-chart of the blow-up over an affine open meets the `b`-chart in the basic open
+of the slope `b / a`. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart_preimage_opensRange
+    (I : X.IdealSheafData) (V : X.affineOpens) {a b : Γ(X, V.1)} (ha : a ∈ I.ideal V)
+    (hb : b ∈ I.ideal V) :
+    I.blowupChart V ha ⁻¹ᵁ (I.blowupChart V hb).opensRange =
+      PrimeSpectrum.basicOpen (AffineBlowup.awaySlope (I.ideal V) ha hb) := by
+  rw [← AffineBlowup.chart_preimage_opensRange ha hb]
+  refine TopologicalSpace.Opens.ext (Set.ext fun y ↦ ?_)
+  constructor
+  · rintro ⟨z, hz⟩
+    refine ⟨z, (I.blowupι V).isOpenEmbedding.injective ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]
+    exact hz
+  · rintro ⟨z, hz⟩
+    refine ⟨z, ?_⟩
+    rw [Scheme.IdealSheafData.blowupChart, Scheme.IdealSheafData.blowupChart,
+      Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, hz]
+
+set_option maxHeartbeats 400000 in
+-- Slow step: rewriting with `appLE_blowupChart_comp_blowupMap` has to unify the chart
+-- scheme `I.blowupChartSpec ⟨⊤, _⟩ hd` with the domain of the composite, which unfolds to
+-- a large `HomogeneousLocalization.Away` type.
+/-- The global sections of the blow-up chart over an affine scheme pull sections of `X` back
+through the structure map of the chart ring. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.appTop_blowupChart_comp_blowupMap
+    [IsAffine X] (I : X.IdealSheafData) {d : Γ(X, ⊤)}
+    (hd : d ∈ I.ideal ⟨⊤, isAffineOpen_top X⟩) (r : Γ(X, ⊤)) :
+    (I.blowupChart ⟨⊤, isAffineOpen_top X⟩ hd ≫ I.blowupMap).appTop r =
+      (Scheme.ΓSpecIso _).inv (AffineBlowup.awayAlgebraMap
+        (I.ideal ⟨⊤, isAffineOpen_top X⟩)
+        (reesX (I.ideal ⟨⊤, isAffineOpen_top X⟩) d hd) r) := by
+  have h := I.appLE_blowupChart_comp_blowupMap ⟨⊤, isAffineOpen_top X⟩ hd
+    (I.blowupChart_comp_blowupMap_preimage ⟨⊤, isAffineOpen_top X⟩ hd)
+  rw [Scheme.Hom.appLE_top_top] at h
+  rw [h]
+  rfl
 
 /-- Comparing the ideals of two ideal sheaves on the image of an affine probe through
 the pullbacks of global sections. -/

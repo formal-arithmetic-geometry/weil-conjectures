@@ -24,8 +24,19 @@ namespace CategoryTheory.Limits
 
 variable {C : Type*} [Category C] [HasPullbacks C]
 
-/-- The morphism induced on pullbacks by a morphism of the first leg of the cospan is a base
-change of that morphism. -/
+/-- **A morphism of the first leg of a cospan induces a base-change square on pullbacks.**
+For a cospan `A --m--> B --p--> T <--π-- S`, the square
+
+```
+  A ×_T S --pullback.map--> B ×_T S
+     |                         |
+    fst                       fst
+     |                         |
+     v                         v
+     A ----------m---------->  B
+```
+
+is a pullback square. -/
 lemma isPullback_pullback_map_left {A B T S : C} (m : A ⟶ B) (p : B ⟶ T) (π : S ⟶ T) :
     IsPullback (pullback.fst (m ≫ p) π)
       (pullback.map (m ≫ p) π p π m (𝟙 S) (𝟙 T) (by simp) (by simp)) m (pullback.fst p π) := by
@@ -35,14 +46,29 @@ lemma isPullback_pullback_map_left {A B T S : C} (m : A ⟶ B) (p : B ⟶ T) (π
   rw [h]
   exact IsPullback.of_hasPullback (m ≫ p) π
 
-/-- Composing both legs of a commutative square with a monomorphism does not change whether
-it is a pullback square. -/
-lemma _root_.CategoryTheory.IsPullback.comp_mono_iff {C : Type*} [Category C]
-    {P S T Z Z' : C} {p : P ⟶ S} {q : P ⟶ T} {α : S ⟶ Z} {β : T ⟶ Z} (j : Z ⟶ Z')
-    [Mono j] :
+end CategoryTheory.Limits
+
+namespace CategoryTheory.IsPullback
+
+variable {C : Type*} [Category C]
+
+/-- **Cancelling a monomorphism out of a commutative square.** For a monomorphism
+`j : Z ⟶ Z'`, the outer square
+
+```
+  P ---q---> T
+  |          |
+  p          β
+  |          |
+  v          v
+  S ---α---> Z ---j---> Z'
+```
+
+is a pullback square if and only if the inner square `p, q, α, β` is. -/
+lemma comp_mono_iff {P S T Z Z' : C} {p : P ⟶ S} {q : P ⟶ T} {α : S ⟶ Z} {β : T ⟶ Z}
+    (j : Z ⟶ Z') [Mono j] :
     IsPullback p q (α ≫ j) (β ≫ j) ↔ IsPullback p q α β := by
-  have hw : ∀ {D : C} (a : D ⟶ S) (b : D ⟶ T), a ≫ α ≫ j = b ≫ β ≫ j ↔ a ≫ α = b ≫ β := by
-    intro D a b
+  have hw {D : C} (a : D ⟶ S) (b : D ⟶ T) : a ≫ α ≫ j = b ≫ β ≫ j ↔ a ≫ α = b ≫ β := by
     rw [← Category.assoc, ← Category.assoc, cancel_mono]
   constructor
   · intro h
@@ -60,13 +86,25 @@ lemma _root_.CategoryTheory.IsPullback.comp_mono_iff {C : Type*} [Category C]
     · rw [h₁, h.lift_fst]
     · rw [h₂, h.lift_snd]
 
-/-- Two morphisms out of the two legs of a pullback square which agree on a scheme realizing
-the square agree on the chosen pullback. -/
-lemma _root_.CategoryTheory.IsPullback.fst_comp_eq_snd_comp {C : Type*} [Category C]
-    {P S T Z : C} {p : P ⟶ S} {q : P ⟶ T} {α : S ⟶ Z} {β : T ⟶ Z} (h : IsPullback p q α β)
-    [Limits.HasPullback α β] {Y : C} (v : S ⟶ Y) (w : T ⟶ Y) (hvw : p ≫ v = q ≫ w) :
+/-- **Two morphisms out of the legs of a pullback square that agree on a realization of the
+square agree on the chosen pullback.** Given
+
+```
+  P ---q---> T ---w---> Y
+  |          |
+  p          β
+  |          |
+  v          v
+  S ---α---> Z
+```
+
+with `S ---v---> Y` and `p ≫ v = q ≫ w`, one has
+`pullback.fst α β ≫ v = pullback.snd α β ≫ w`. -/
+lemma fst_comp_eq_snd_comp {P S T Z : C} {p : P ⟶ S} {q : P ⟶ T} {α : S ⟶ Z} {β : T ⟶ Z}
+    (h : IsPullback p q α β) [Limits.HasPullback α β] {Y : C} (v : S ⟶ Y) (w : T ⟶ Y)
+    (hvw : p ≫ v = q ≫ w) :
     Limits.pullback.fst α β ≫ v = Limits.pullback.snd α β ≫ w := by
   rw [← cancel_epi h.isoPullback.hom, ← Category.assoc, ← Category.assoc,
     h.isoPullback_hom_fst, h.isoPullback_hom_snd, hvw]
 
-end CategoryTheory.Limits
+end CategoryTheory.IsPullback

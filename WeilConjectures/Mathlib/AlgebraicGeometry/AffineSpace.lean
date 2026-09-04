@@ -11,12 +11,17 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
 
 /-!
-# Immersions of quasi-affine schemes into relative affine space
+# Immersions of quasi-affine schemes into relative affine space, and closed graphs
 
 This file proves Stacks Tag 04II: a quasi-affine scheme `X` that is locally of finite type
 over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; S)` over `S`.
+It also proves that a partial section of a relative affine space over an affine base whose
+coordinates are fractions with unit-ideal denominators has closed range.
 
 ## Main results
 
@@ -30,6 +35,18 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
   `i : X ⟶ 𝔸(ULift (Fin n); S)` with `i ≫ 𝔸(ULift (Fin n); S) ↘ S = π`. The variant
   `AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine'` produces an immersion into
   the affine space on an unspecified finite index type.
+- `AlgebraicGeometry.AffineSpace.zeroLocus_subset_range_homOfVector`: over an affine base,
+  the vanishing locus of the sections `coordⱼ − t̂ⱼ` is contained in the range of the section
+  with coordinates `t`.
+- `AlgebraicGeometry.AffineSpace.isClosed_range_of_basicOpen_fractions`: a morphism to
+  `𝔸(σ; Spec S)` defined on a union of basic opens `D(v i)`, with `j`-th coordinate the
+  fraction `w i j / v i` there, has closed range as soon as the `v i` and the `w i j`
+  generate the unit ideal and satisfy `v i · w i' j = v i' · w i j`.
+- `AlgebraicGeometry.AffineSpace.comp_homOfVector_appTop_coord`,
+  `AlgebraicGeometry.AffineSpace.specMap_comp_homOfVector_eq`,
+  `AlgebraicGeometry.AffineSpace.hom_ext_of_mul_unit` and
+  `AlgebraicGeometry.AffineSpace.homOfVector_comp_map`: the coordinate calculus of
+  `homOfVector` used to glue and to compare morphisms into a relative affine space.
 
 ## Blueprint
 
@@ -54,8 +71,13 @@ universe u
 
 namespace AffineSpace
 
+section Immersion
+
 variable {n : Type u} {S : Scheme.{u}}
 
+/-- **Naturality of `homOfVector` in the base**: the morphism to `𝔸(n; S)` defined by a
+vector of sections, followed by the base change `𝔸(n; S) ⟶ 𝔸(n; T)`, is the morphism to
+`𝔸(n; T)` defined by the same vector. -/
 @[reassoc]
 lemma homOfVector_map {X T : Scheme.{u}} (f : X ⟶ S) (g : S ⟶ T) (v : n → Γ(X, ⊤)) :
     homOfVector f v ≫ map n g = homOfVector (f ≫ g) v := by
@@ -88,8 +110,7 @@ theorem isImmersion_homOfVector {Y V : Scheme.{u}} [IsAffine Y] [IsAffine V]
       Set.range (𝔸(n; V).basicOpen (coord V j)).ι.base := by
     rw [Scheme.Opens.range_ι]
     rintro - ⟨y, rfl⟩
-    have hy : y ∈ homOfVector g w ⁻¹ᵁ 𝔸(n; V).basicOpen (coord V j) := hpre.ge trivial
-    exact hy
+    exact hpre.ge trivial
   rw [← IsOpenImmersion.lift_fac (𝔸(n; V).basicOpen (coord V j)).ι (homOfVector g w) hrange]
   suffices h : IsClosedImmersion
       (IsOpenImmersion.lift (𝔸(n; V).basicOpen (coord V j)).ι (homOfVector g w) hrange) by
@@ -132,15 +153,361 @@ theorem isImmersion_homOfVector {Y V : Scheme.{u}} [IsAffine Y] [IsAffine V]
     | mem z hz => exact hsub hz
     | zero => exact ⟨0, map_zero _⟩
     | one => exact ⟨1, map_one _⟩
-    | add _ _ _ _ h1 h2 => obtain ⟨p, rfl⟩ := h1; obtain ⟨q, rfl⟩ := h2
-                           exact ⟨p + q, map_add _ p q⟩
-    | mul _ _ _ _ h1 h2 => obtain ⟨p, rfl⟩ := h1; obtain ⟨q, rfl⟩ := h2
-                           exact ⟨p * q, map_mul _ p q⟩
-    | neg _ _ h1 => obtain ⟨p, rfl⟩ := h1; exact ⟨-p, map_neg _ p⟩
+    | add _ _ _ _ h1 h2 =>
+        obtain ⟨p, rfl⟩ := h1
+        obtain ⟨q, rfl⟩ := h2
+        exact ⟨p + q, map_add _ p q⟩
+    | mul _ _ _ _ h1 h2 =>
+        obtain ⟨p, rfl⟩ := h1
+        obtain ⟨q, rfl⟩ := h2
+        exact ⟨p * q, map_mul _ p q⟩
+    | neg _ _ h1 =>
+        obtain ⟨p, rfl⟩ := h1
+        exact ⟨-p, map_neg _ p⟩
   rintro x ((⟨c, rfl⟩ | ⟨s, rfl⟩) | rfl)
   · exact ⟨((𝔸(n; V).basicOpen (coord V j)).ι ≫ 𝔸(n; V) ↘ V).appTop c, hbase c⟩
   · exact ⟨(𝔸(n; V).basicOpen (coord V j)).ι.appTop (coord V s), hcoord s⟩
   · exact ⟨(↑hc.unit⁻¹ : _), hinv⟩
+
+end Immersion
+
+section GraphClosedness
+
+/-! ### Closedness of graphs cut out by fraction equations
+
+Over `Spec S`, consider a morphism `γ` to `𝔸(σ; Spec S)` defined on a union `O` of basic
+opens `D(v i)` whose `j`-th coordinate on `D(v i)` is the fraction `w i j / v i`. If the
+elements `v i` and `w i j` generate the unit ideal and satisfy the compatibilities
+`v i * w i' j = v i' * w i j`, the range of `γ` is closed in the whole relative affine
+space: it is the vanishing locus of the sections `v̂ᵢ · coordⱼ − ŵᵢⱼ`. -/
+
+variable {σ : Type u}
+
+/-- The `j`-th coordinate of a morphism to relative affine space precomposed with `m` is the
+pullback along `m` of the `j`-th defining section. -/
+lemma comp_homOfVector_appTop_coord {S T Y : Scheme.{u}} (m : T ⟶ Y)
+    (h : Y ⟶ S) (v : σ → Γ(Y, ⊤)) (j : σ) :
+    (m ≫ homOfVector h v).appTop (coord S j) = m.appTop (v j) := by
+  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, homOfVector_appTop_coord]
+
+/-- Two morphisms from `Spec T` to a relative affine space, given by ring maps out of `R` and
+`S` together with defining vectors of sections of `R` and `S`, agree as soon as the underlying
+morphisms to the base agree and the defining sections have the same image in `T`. -/
+lemma specMap_comp_homOfVector_eq {X : Scheme.{u}}
+    {R S T : CommRingCat.{u}} (φ : R ⟶ T) (ψ : S ⟶ T) (pR : Spec R ⟶ X) (pS : Spec S ⟶ X)
+    (hp : Spec.map φ ≫ pR = Spec.map ψ ≫ pS) (vR : σ → R) (vS : σ → S)
+    (hv : ∀ j, φ (vR j) = ψ (vS j)) :
+    Spec.map φ ≫ homOfVector pR (fun j ↦ (Scheme.ΓSpecIso R).inv (vR j)) =
+      Spec.map ψ ≫ homOfVector pS (fun j ↦ (Scheme.ΓSpecIso S).inv (vS j)) := by
+  refine hom_ext ?_ ?_
+  · rw [Category.assoc, Category.assoc, homOfVector_over,
+      homOfVector_over, hp]
+  · intro j
+    rw [comp_homOfVector_appTop_coord, comp_homOfVector_appTop_coord,
+      ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
+      ← Scheme.ΓSpecIso_inv_naturality, ← Scheme.ΓSpecIso_inv_naturality,
+      CommRingCat.comp_apply, CommRingCat.comp_apply, hv j]
+
+/-- Two morphisms to a relative affine space with the same structure morphism agree if their
+coordinates agree after multiplication by a unit. -/
+lemma hom_ext_of_mul_unit {S T : Scheme.{u}} {F G : T ⟶ 𝔸(σ; S)}
+    (h₁ : F ≫ 𝔸(σ; S) ↘ S = G ≫ 𝔸(σ; S) ↘ S) {w : Γ(T, ⊤)} (hw : IsUnit w)
+    (h₂ : ∀ j, w * F.appTop (coord S j) = w * G.appTop (coord S j)) :
+    F = G :=
+  hom_ext h₁ fun j ↦ hw.mul_left_cancel (h₂ j)
+
+/-- If the coordinates of `G` are used as the defining vector, `homOfVector` composed with the
+base-change map recovers `G`. -/
+lemma homOfVector_comp_map {S T Z : Scheme.{u}} (p : Z ⟶ S)
+    (h : S ⟶ T) (G : Z ⟶ 𝔸(σ; T)) (hG : G ≫ 𝔸(σ; T) ↘ T = p ≫ h) :
+    homOfVector p (fun j ↦ G.appTop (coord T j)) ≫
+      map σ h = G := by
+  refine hom_ext ?_ fun j ↦ ?_
+  · rw [Category.assoc, map_over, ← Category.assoc,
+      homOfVector_over, hG]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, map_appTop_coord,
+      homOfVector_appTop_coord]
+
+/-- Over `Spec L`, the vanishing locus of the sections `coordⱼ − ĉⱼ` is contained in
+the range of the section of `𝔸(σ; Spec L) ↘ Spec L` with coordinates `c`. -/
+lemma zeroLocus_subset_range_homOfVector_spec {L : CommRingCat.{u}} (c : σ → L) :
+    𝔸(σ; Spec L).zeroLocus (U := ⊤) (Set.range fun j ↦ coord (Spec L) j -
+        (𝔸(σ; Spec L) ↘ Spec L).appTop ((Scheme.ΓSpecIso L).inv (c j))) ⊆
+      Set.range (homOfVector (𝟙 (Spec L)) fun j ↦ (Scheme.ΓSpecIso L).inv (c j)) := by
+  set ev : CommRingCat.of (MvPolynomial σ L) ⟶ L := CommRingCat.ofHom (MvPolynomial.eval c)
+    with hev_def
+  have hev : Function.Surjective (MvPolynomial.eval c) :=
+    fun l ↦ ⟨MvPolynomial.C l, by simp⟩
+  -- the section with coordinates `c` is `Spec` of the evaluation at `c`
+  have hsec : Spec.map ev ≫ (SpecIso σ L).inv =
+      homOfVector (𝟙 (Spec L)) fun j ↦ (Scheme.ΓSpecIso L).inv (c j) := by
+    apply hom_ext
+    · rw [Category.assoc, SpecIso_inv_over, homOfVector_over, ← Spec.map_comp,
+        ← Spec.map_id]
+      congr 1
+      ext p
+      change MvPolynomial.eval c (MvPolynomial.C p) = p
+      simp
+    · intro j
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, SpecIso_inv_appTop_coord,
+        homOfVector_appTop_coord, ← CommRingCat.comp_apply,
+        ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply, hev_def]
+      congr 1
+      simp
+  intro x hx
+  -- transport the vanishing condition to the prime spectrum of the polynomial ring
+  have hpre : (SpecIso σ L).inv ⁻¹' (𝔸(σ; Spec L).zeroLocus (U := ⊤)
+      (Set.range fun j ↦ coord (Spec L) j -
+        (𝔸(σ; Spec L) ↘ Spec L).appTop ((Scheme.ΓSpecIso L).inv (c j)))) =
+      PrimeSpectrum.zeroLocus
+        (Set.range fun j ↦ MvPolynomial.X j - MvPolynomial.C (c j)) := by
+    rw [Scheme.preimage_zeroLocus, ← Scheme.zeroLocus_ΓSpecIso_inv_image
+      (R := CommRingCat.of (MvPolynomial σ L))
+      (Set.range fun j ↦ MvPolynomial.X j - MvPolynomial.C (c j))]
+    congr 1
+    rw [← Set.range_comp, ← Set.range_comp]
+    congr 1
+    funext j
+    simp only [Function.comp_apply, map_sub]
+    congr 1
+    · exact SpecIso_inv_appTop_coord L j
+    · rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, SpecIso_inv_over,
+        ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality,
+        CommRingCat.comp_apply]
+      rfl
+  have hx' : (SpecIso σ L).hom x ∈ PrimeSpectrum.zeroLocus
+      (Set.range fun j ↦ MvPolynomial.X j - MvPolynomial.C (c j)) := by
+    rw [← hpre, Set.mem_preimage]
+    have hxx : (SpecIso σ L).inv ((SpecIso σ L).hom x) = x := by
+      rw [← Scheme.Hom.comp_apply, Iso.hom_inv_id]
+      rfl
+    rwa [hxx]
+  -- the vanishing locus is the range of `Spec` of the evaluation
+  rw [← PrimeSpectrum.zeroLocus_span, ← MvPolynomial.ker_eval,
+    ← range_comap_of_surjective _ _ hev] at hx'
+  obtain ⟨y, hy⟩ := hx'
+  refine ⟨y, ?_⟩
+  rw [← hsec, Scheme.Hom.comp_apply]
+  have hSpec : (Spec.map ev) y = PrimeSpectrum.comap (MvPolynomial.eval c) y := rfl
+  rw [hSpec, hy, ← Scheme.Hom.comp_apply, Iso.hom_inv_id]
+  rfl
+
+/-- The vanishing locus of the sections `coordⱼ − t̂ⱼ` on a relative affine space over
+an affine scheme is contained in the range of the section with coordinates `t`. -/
+lemma zeroLocus_subset_range_homOfVector {Z : Scheme.{u}} [IsAffine Z] (t : σ → Γ(Z, ⊤)) :
+    𝔸(σ; Z).zeroLocus (U := ⊤)
+        (Set.range fun j ↦ coord Z j - (𝔸(σ; Z) ↘ Z).appTop (t j)) ⊆
+      Set.range (homOfVector (𝟙 Z) t) := by
+  set tL : σ → Γ(Spec Γ(Z, ⊤), ⊤) := fun j ↦ Z.isoSpec.inv.appTop (t j) with htL
+  set c : σ → Γ(Z, ⊤) := fun j ↦ (Scheme.ΓSpecIso Γ(Z, ⊤)).hom (tL j) with hc
+  have hct : ∀ j, (Scheme.ΓSpecIso Γ(Z, ⊤)).inv (c j) = tL j := fun j ↦
+    Iso.hom_inv_id_apply (Scheme.ΓSpecIso Γ(Z, ⊤)) (tL j)
+  have hisot : ∀ j, Z.isoSpec.hom.appTop (tL j) = t j := by
+    intro j
+    rw [htL, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Iso.hom_inv_id]
+    simp
+  set α := map σ Z.isoSpec.hom with hα
+  have : IsIso α := by
+    refine ⟨map σ Z.isoSpec.inv, ?_, ?_⟩ <;>
+      rw [hα, ← map_comp] <;> simp [map_id]
+  have hcomm : homOfVector (𝟙 Z) t ≫ α = Z.isoSpec.hom ≫
+      homOfVector (𝟙 (Spec Γ(Z, ⊤))) tL := by
+    apply hom_ext
+    · rw [Category.assoc, hα, map_over, homOfVector_over_assoc, Category.id_comp,
+        Category.assoc, homOfVector_over, Category.comp_id]
+    · intro j
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, hα, map_appTop_coord,
+        homOfVector_appTop_coord, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        homOfVector_appTop_coord, hisot]
+  intro x hx
+  have hfun : ∀ j, α.appTop (coord (Spec Γ(Z, ⊤)) j -
+      (𝔸(σ; Spec Γ(Z, ⊤)) ↘ Spec Γ(Z, ⊤)).appTop ((Scheme.ΓSpecIso Γ(Z, ⊤)).inv (c j))) =
+      coord Z j - (𝔸(σ; Z) ↘ Z).appTop (t j) := by
+    intro j
+    rw [map_sub, hα, map_appTop_coord, hct, ← CommRingCat.comp_apply,
+      ← Scheme.Hom.comp_appTop, map_over, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply, hisot]
+  have hαx : α x ∈ 𝔸(σ; Spec Γ(Z, ⊤)).zeroLocus (U := ⊤)
+      (Set.range fun j ↦ coord (Spec Γ(Z, ⊤)) j -
+        (𝔸(σ; Spec Γ(Z, ⊤)) ↘ Spec Γ(Z, ⊤)).appTop
+          ((Scheme.ΓSpecIso Γ(Z, ⊤)).inv (c j))) := by
+    have hpre : α ⁻¹' (𝔸(σ; Spec Γ(Z, ⊤)).zeroLocus (U := ⊤)
+        (Set.range fun j ↦ coord (Spec Γ(Z, ⊤)) j -
+          (𝔸(σ; Spec Γ(Z, ⊤)) ↘ Spec Γ(Z, ⊤)).appTop
+            ((Scheme.ΓSpecIso Γ(Z, ⊤)).inv (c j)))) =
+        𝔸(σ; Z).zeroLocus (U := ⊤)
+          (Set.range fun j ↦ coord Z j - (𝔸(σ; Z) ↘ Z).appTop (t j)) := by
+      rw [Scheme.preimage_zeroLocus, ← Set.range_comp]
+      exact congrArg (fun s ↦ 𝔸(σ; Z).zeroLocus (U := ⊤) s)
+        (congrArg Set.range (funext hfun))
+    rw [← Set.mem_preimage, hpre]
+    exact hx
+  have hmem := zeroLocus_subset_range_homOfVector_spec c hαx
+  obtain ⟨z, hz⟩ := hmem
+  have hfun : (fun j ↦ (Scheme.ΓSpecIso Γ(Z, ⊤)).inv (c j)) = tL := funext hct
+  rw [hfun] at hz
+  refine ⟨Z.isoSpec.inv z, ?_⟩
+  have hαeq : α (homOfVector (𝟙 Z) t (Z.isoSpec.inv z)) = α x := by
+    rw [← Scheme.Hom.comp_apply, hcomm, Scheme.Hom.comp_apply]
+    have h1 : Z.isoSpec.hom (Z.isoSpec.inv z) = z := by
+      rw [← Scheme.Hom.comp_apply, Iso.inv_hom_id]
+      rfl
+    rw [h1, hz]
+  exact (Scheme.Hom.homeomorph α).injective hαeq
+
+/-- **Chart-local graph closedness.** Let `v i`, `w i j` be elements of a ring `S`
+generating the unit ideal and satisfying the compatibilities
+`v i * w i' j = v i' * w i j`, and let `γ` be a morphism over `Spec S` from the union
+`O` of the basic opens `D(v i)` to the relative affine space whose `j`-th coordinate on
+`D(v i)` is the fraction `w i j / v i`. Then the range of `γ` is closed in the whole
+relative affine space: it is the vanishing locus of the sections
+`v̂ᵢ · coordⱼ − ŵᵢⱼ`. -/
+theorem isClosed_range_of_basicOpen_fractions {S : CommRingCat.{u}} {ι : Type*}
+    (v : ι → S) (w : ι → σ → S)
+    (hone : (1 : S) ∈ Ideal.span (Set.range v ∪ ⋃ i, Set.range (w i)))
+    (hrel : ∀ i i' j, v i * w i' j = v i' * w i j)
+    {O : (Spec S).Opens} {B : ι → (Spec S).Opens}
+    (hBv : ∀ i, B i = PrimeSpectrum.basicOpen (v i)) (hO : O = ⨆ i, B i)
+    (γ : O.toScheme ⟶ 𝔸(σ; Spec S)) (hγ : γ ≫ 𝔸(σ; Spec S) ↘ Spec S = O.ι)
+    (hB : ∀ i, B i ≤ O)
+    (hcoord : ∀ i j, ((Spec S).homOfLE (hB i) ≫ γ).appTop (coord (Spec S) j) *
+        ((Scheme.ΓSpecIso S).inv ≫ (B i).ι.appTop) (v i) =
+        ((Scheme.ΓSpecIso S).inv ≫ (B i).ι.appTop) (w i j)) :
+    IsClosed (Set.range γ) := by
+  classical
+  -- the pulled-back ring elements and the graph equations
+  set pl : S → Γ(𝔸(σ; Spec S), ⊤) := fun e ↦
+    (𝔸(σ; Spec S) ↘ Spec S).appTop ((Scheme.ΓSpecIso S).inv e) with hpl
+  set E : ι → σ → Γ(𝔸(σ; Spec S), ⊤) :=
+    fun i j ↦ pl (v i) * coord (Spec S) j - pl (w i j) with hE
+  -- restriction of ring elements to the basic pieces
+  have hres : ∀ i (e : S), ((Spec S).homOfLE (hB i) ≫ γ).appTop (pl e) =
+      ((Scheme.ΓSpecIso S).inv ≫ (B i).ι.appTop) e := by
+    intro i e
+    simp only [hpl]
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Category.assoc, hγ,
+      Scheme.homOfLE_ι, CommRingCat.comp_apply]
+  -- the denominators are units on their own pieces
+  have hu : ∀ i, IsUnit (((Scheme.ΓSpecIso S).inv ≫ (B i).ι.appTop) (v i)) := by
+    intro i
+    rw [CommRingCat.comp_apply]
+    refine Scheme.isUnit_of_le_basicOpen (le_of_eq ?_)
+    rw [← Scheme.preimage_basicOpen_top, basicOpen_eq_of_affine, ← hBv i,
+      Scheme.Opens.ι_preimage_self]
+  suffices h : Set.range γ = 𝔸(σ; Spec S).zeroLocus (U := ⊤) (⋃ i, Set.range (E i)) by
+    rw [h]
+    exact Scheme.zeroLocus_isClosed _ _
+  apply subset_antisymm
+  · -- the range satisfies the graph equations
+    rintro - ⟨y, rfl⟩
+    rw [Scheme.mem_zeroLocus_iff]
+    intro e he
+    simp only [Set.mem_iUnion, Set.mem_range] at he
+    obtain ⟨i, j, rfl⟩ := he
+    -- `y` lies in one of the basic pieces
+    have hy : y.1 ∈ ⨆ i, B i := by rw [← hO]; exact y.2
+    obtain ⟨i₀, hi₀⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
+    obtain ⟨y', rfl⟩ := (mem_opensRange_homOfLE (hB i₀) y).mpr hi₀
+    rw [← Scheme.Hom.comp_apply]
+    intro hmem
+    have h1 : y' ∈ ((Spec S).homOfLE (hB i₀) ≫ γ) ⁻¹ᵁ
+        𝔸(σ; Spec S).basicOpen (E i j) := hmem
+    rw [Scheme.preimage_basicOpen_top] at h1
+    -- the pulled-back equation is annihilated by the unit `v i₀`
+    have hval : ((Spec S).homOfLE (hB i₀) ≫ γ).appTop (E i j) *
+        ((Scheme.ΓSpecIso S).inv ≫ (B i₀).ι.appTop) (v i₀) = 0 := by
+      simp only [hE, map_sub, map_mul]
+      rw [hres i₀ (v i), hres i₀ (w i j), sub_mul, mul_assoc, hcoord i₀ j,
+        ← map_mul, ← map_mul, hrel i i₀ j, mul_comm (w i j) (v i₀), sub_self]
+    have hz : ((Spec S).homOfLE (hB i₀) ≫ γ).appTop (E i j) = 0 :=
+      ((hu i₀).mul_left_eq_zero).mp hval
+    rw [hz, Scheme.basicOpen_zero] at h1
+    simp at h1
+  · -- the graph equations cut out the range
+    intro x hx
+    rw [Scheme.mem_zeroLocus_iff] at hx
+    -- some denominator is invertible at `x`
+    have hbase : ∃ i, x ∈ 𝔸(σ; Spec S).basicOpen (pl (v i)) :=
+      Scheme.exists_mem_basicOpen_of_span_eq_top
+        ((Scheme.ΓSpecIso S).inv ≫ (𝔸(σ; Spec S) ↘ Spec S).appTop) v w
+        (fun j ↦ coord (Spec S) j) hone
+        fun i j ↦ hx (E i j) (Set.mem_iUnion.mpr ⟨i, Set.mem_range_self j⟩)
+    obtain ⟨i₀, hi₀⟩ := hbase
+    -- `x` lies in the affine space over the basic piece
+    have hrange : x ∈ (map σ (B i₀).ι).opensRange := by
+      rw [(isPullback_map (n := σ) (B i₀).ι).opensRange_fst, Scheme.Opens.opensRange_ι,
+        hBv i₀]
+      simp only [hpl] at hi₀
+      rwa [← Scheme.preimage_basicOpen_top, basicOpen_eq_of_affine] at hi₀
+    obtain ⟨x', rfl⟩ := hrange
+    have : IsAffine (B i₀).toScheme := by
+      have h := (isAffineOpen_top (Spec S)).basicOpen ((Scheme.ΓSpecIso S).inv (v i₀))
+      rwa [basicOpen_eq_of_affine, ← hBv i₀] at h
+    -- the graph section over the basic piece
+    set t : σ → Γ((B i₀).toScheme, ⊤) := fun j ↦ ↑(hu i₀).unit⁻¹ *
+      ((Scheme.ΓSpecIso S).inv ≫ (B i₀).ι.appTop) (w i₀ j) with ht
+    -- pulling back the ambient ring elements to the piece
+    have hplmap : ∀ e : S, (map σ (B i₀).ι).appTop (pl e) =
+        (𝔸(σ; (B i₀).toScheme) ↘ (B i₀).toScheme).appTop
+          (((Scheme.ΓSpecIso S).inv ≫ (B i₀).ι.appTop) e) := by
+      intro e
+      simp only [hpl]
+      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, map_over,
+        Scheme.Hom.comp_appTop, CommRingCat.comp_apply, CommRingCat.comp_apply]
+    -- `x'` satisfies the section equations of the graph over the piece
+    have hx' : x' ∈ 𝔸(σ; (B i₀).toScheme).zeroLocus (U := ⊤)
+        (Set.range fun j ↦ coord (B i₀).toScheme j -
+          (𝔸(σ; (B i₀).toScheme) ↘ (B i₀).toScheme).appTop (t j)) := by
+      rw [Scheme.mem_zeroLocus_iff]
+      rintro - ⟨j, rfl⟩
+      intro hmem
+      beta_reduce at hmem
+      have hsection : coord (B i₀).toScheme j -
+          (𝔸(σ; (B i₀).toScheme) ↘ (B i₀).toScheme).appTop (t j) =
+          (𝔸(σ; (B i₀).toScheme) ↘ (B i₀).toScheme).appTop ((↑(hu i₀).unit⁻¹ :
+            Γ((B i₀).toScheme, ⊤))) * (map σ (B i₀).ι).appTop (E i₀ j) := by
+        have hX12 : (𝔸(σ; (B i₀).toScheme) ↘ (B i₀).toScheme).appTop
+            ((↑(hu i₀).unit⁻¹ : Γ((B i₀).toScheme, ⊤))) *
+            (𝔸(σ; (B i₀).toScheme) ↘ (B i₀).toScheme).appTop
+              (((Scheme.ΓSpecIso S).inv ≫ (B i₀).ι.appTop) (v i₀)) = 1 := by
+          rw [← map_mul, IsUnit.val_inv_mul, map_one]
+        simp only [hE, map_sub, map_mul, ht]
+        rw [map_appTop_coord, hplmap (v i₀), hplmap (w i₀ j), mul_sub, ← mul_assoc,
+          hX12, one_mul]
+      rw [hsection, Scheme.basicOpen_mul] at hmem
+      have h2 : x' ∈ (map σ (B i₀).ι) ⁻¹ᵁ 𝔸(σ; Spec S).basicOpen (E i₀ j) := by
+        rw [Scheme.preimage_basicOpen_top]
+        exact hmem.2
+      exact hx (E i₀ j) (Set.mem_iUnion.mpr ⟨i₀, Set.mem_range_self j⟩) h2
+    obtain ⟨z, hz⟩ := zeroLocus_subset_range_homOfVector t hx'
+    -- the graph section composed with the chart inclusion is `γ`
+    have hσγ : homOfVector (𝟙 (B i₀).toScheme) t ≫ map σ (B i₀).ι =
+        (Spec S).homOfLE (hB i₀) ≫ γ := by
+      apply hom_ext
+      · rw [Category.assoc, map_over, homOfVector_over_assoc, Category.id_comp,
+          Category.assoc, hγ, Scheme.homOfLE_ι]
+      · intro j
+        rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, map_appTop_coord,
+          homOfVector_appTop_coord]
+        simp only [ht]
+        calc ↑(hu i₀).unit⁻¹ * ((Scheme.ΓSpecIso S).inv ≫ (B i₀).ι.appTop) (w i₀ j)
+            = ↑(hu i₀).unit⁻¹ * (((Spec S).homOfLE (hB i₀) ≫ γ).appTop
+                (coord (Spec S) j) *
+                ((Scheme.ΓSpecIso S).inv ≫ (B i₀).ι.appTop) (v i₀)) := by
+              rw [hcoord i₀ j]
+          _ = (↑(hu i₀).unit⁻¹ * ((Scheme.ΓSpecIso S).inv ≫ (B i₀).ι.appTop) (v i₀)) *
+                ((Spec S).homOfLE (hB i₀) ≫ γ).appTop (coord (Spec S) j) := by ring
+          _ = ((Spec S).homOfLE (hB i₀) ≫ γ).appTop (coord (Spec S) j) := by
+              rw [IsUnit.val_inv_mul, one_mul]
+    refine ⟨(Spec S).homOfLE (hB i₀) z, ?_⟩
+    calc γ ((Spec S).homOfLE (hB i₀) z)
+        = ((Spec S).homOfLE (hB i₀) ≫ γ) z := (Scheme.Hom.comp_apply _ _ _).symm
+      _ = (homOfVector (𝟙 (B i₀).toScheme) t ≫ map σ (B i₀).ι) z := by rw [hσγ]
+      _ = map σ (B i₀).ι (homOfVector (𝟙 (B i₀).toScheme) t z) :=
+          Scheme.Hom.comp_apply _ _ _
+      _ = map σ (B i₀).ι x' := by rw [hz]
+
+end GraphClosedness
 
 end AffineSpace
 
@@ -178,10 +545,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
     refine ⟨b, m, ?_⟩
     have halg : ⇑(algebraMap Γ(X, ⊤) Γ(X.basicOpen (r x), ⊤)) =
         ⇑((X.basicOpen (r x)).ι.appTop) := rfl
-    rw [halg] at hq
-    rw [← hm] at hq
-    rw [map_pow] at hq
-    exact hq
+    rwa [halg, ← hm, map_pow] at hq
   choose b m hbm using hnum
   -- Step 4: finite-type generators over each affine chart
   have hgens : ∀ x : X, ∃ s : Finset Γ(X.basicOpen (r x), ⊤),
@@ -193,7 +557,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
     have hft : RingHom.FiniteType ((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom :=
       HasRingHomProperty.appTop (P := @LocallyOfFiniteType)
         (π.resLE (V x) (X.basicOpen (r x)) (hrV x)) inferInstance
-    let := ((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom.toAlgebra
+    algebraize [((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom]
     have hFT : Algebra.FiniteType Γ(V x, ⊤) Γ(X.basicOpen (r x), ⊤) := hft
     obtain ⟨s, hs⟩ := hFT.out
     refine ⟨s, fun y ↦ ?_⟩
@@ -225,8 +589,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
         X.basicOpen (r j) := by
       rw [Scheme.preimage_basicOpen_top, homOfVector_appTop_coord, hjcoord]
     have h1 : homOfVector π v ⁻¹ᵁ ((𝔸(σ; S) ↘ S) ⁻¹ᵁ V j) = π ⁻¹ᵁ V j := by
-      change (homOfVector π v ≫ 𝔸(σ; S) ↘ S) ⁻¹ᵁ V j = π ⁻¹ᵁ V j
-      rw [homOfVector_over]
+      rw [← Scheme.Hom.comp_preimage, homOfVector_over]
     have hinf : homOfVector π v ⁻¹ᵁ
         ((𝔸(σ; S) ↘ S) ⁻¹ᵁ V j ⊓ 𝔸(σ; S).basicOpen (coord S (Sum.inl ⟨j, hjt⟩))) =
         homOfVector π v ⁻¹ᵁ ((𝔸(σ; S) ↘ S) ⁻¹ᵁ V j) ⊓
@@ -234,17 +597,14 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
     rw [hinf, h1, h2]
     exact inf_eq_right.mpr (hrV j)
   refine ⟨(𝔸(σ; S) ↘ S) ⁻¹ᵁ V j ⊓ 𝔸(σ; S).basicOpen (coord S (Sum.inl ⟨j, hjt⟩)), ?_, ?_⟩
-  · have : x ∈ homOfVector π v ⁻¹ᵁ
-        ((𝔸(σ; S) ↘ S) ⁻¹ᵁ V j ⊓ 𝔸(σ; S).basicOpen (coord S (Sum.inl ⟨j, hjt⟩))) := by
-      rw [hUeq]; exact hxj
-    exact this
+  · exact hUeq.ge hxj
   · rw [hUeq, comp_homOfVector, ← Scheme.Hom.resLE_comp_ι π (hrV j), ← homOfVector_map]
     have : IsAffine (X.basicOpen (r j)).toScheme := hraff j
     have : IsAffine (V j).toScheme := hVaff j
     -- the restriction of `r j` to its own basic open is a unit
     have hu : IsUnit (((X.basicOpen (r j)).ι.appTop ∘ v) (Sum.inl ⟨j, hjt⟩)) := by
-      change IsUnit ((X.basicOpen (r j)).ι.appTop (r j))
-      refine Scheme.isUnit_of_le_basicOpen (le_of_eq ?_)
+      refine Scheme.isUnit_of_le_basicOpen (f := (X.basicOpen (r j)).ι.appTop (r j))
+        (le_of_eq ?_)
       rw [← Scheme.preimage_basicOpen_top, Scheme.Opens.ι_preimage_self]
     -- the generation hypothesis over the chart
     have hgen : Subring.closure
@@ -312,52 +672,5 @@ theorem exists_immersion_affineSpace_of_quasiAffine {X S : Scheme.{u}} (π : X �
   · rw [Category.assoc, reindex_over, hover]
   · have := himm
     infer_instance
-
-/-- The `j`-th coordinate of a morphism to relative affine space precomposed with `m` is the
-pullback along `m` of the `j`-th defining section. -/
-lemma AffineSpace.comp_homOfVector_appTop_coord {n : Type u} {S T Y : Scheme.{u}} (m : T ⟶ Y)
-    (h : Y ⟶ S) (v : n → Γ(Y, ⊤)) (j : n) :
-    (m ≫ AffineSpace.homOfVector h v).appTop (AffineSpace.coord S j) = m.appTop (v j) := by
-  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.homOfVector_appTop_coord]
-
-/-- Two morphisms from `Spec T` to a relative affine space, given by ring maps out of `R` and
-`S` together with defining vectors of sections of `R` and `S`, agree as soon as the underlying
-morphisms to the base agree and the defining sections have the same image in `T`. -/
-lemma AffineSpace.specMap_comp_homOfVector_eq {X : Scheme.{u}} {σ : Type u}
-    {R S T : CommRingCat.{u}} (φ : R ⟶ T) (ψ : S ⟶ T) (pR : Spec R ⟶ X) (pS : Spec S ⟶ X)
-    (hp : Spec.map φ ≫ pR = Spec.map ψ ≫ pS) (vR : σ → R) (vS : σ → S)
-    (hv : ∀ j, φ (vR j) = ψ (vS j)) :
-    Spec.map φ ≫ AffineSpace.homOfVector pR (fun j ↦ (Scheme.ΓSpecIso R).inv (vR j)) =
-      Spec.map ψ ≫ AffineSpace.homOfVector pS (fun j ↦ (Scheme.ΓSpecIso S).inv (vS j)) := by
-  refine AffineSpace.hom_ext ?_ ?_
-  · rw [Category.assoc, Category.assoc, AffineSpace.homOfVector_over,
-      AffineSpace.homOfVector_over, hp]
-  · intro j
-    rw [AffineSpace.comp_homOfVector_appTop_coord, AffineSpace.comp_homOfVector_appTop_coord,
-      ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
-      ← Scheme.ΓSpecIso_inv_naturality, ← Scheme.ΓSpecIso_inv_naturality,
-      CommRingCat.comp_apply, CommRingCat.comp_apply, hv j]
-
-/-- Two morphisms to a relative affine space with the same structure morphism agree if their
-coordinates agree after multiplication by a unit. -/
-lemma AffineSpace.hom_ext_of_mul_unit {S T : Scheme.{u}} {σ : Type u} {F G : T ⟶ 𝔸(σ; S)}
-    (h₁ : F ≫ 𝔸(σ; S) ↘ S = G ≫ 𝔸(σ; S) ↘ S) {w : Γ(T, ⊤)} (hw : IsUnit w)
-    (h₂ : ∀ j, w * F.appTop (AffineSpace.coord S j) = w * G.appTop (AffineSpace.coord S j)) :
-    F = G :=
-  AffineSpace.hom_ext h₁ fun j ↦ hw.mul_left_cancel (h₂ j)
-
-variable {X : Scheme.{u}}
-
-/-- If the coordinates of `G` are used as the defining vector, `homOfVector` composed with the
-base-change map recovers `G`. -/
-lemma AffineSpace.homOfVector_comp_map {σ : Type u} {S T Z : Scheme.{u}} (p : Z ⟶ S)
-    (h : S ⟶ T) (G : Z ⟶ 𝔸(σ; T)) (hG : G ≫ 𝔸(σ; T) ↘ T = p ≫ h) :
-    AffineSpace.homOfVector p (fun j ↦ G.appTop (AffineSpace.coord T j)) ≫
-      AffineSpace.map σ h = G := by
-  refine AffineSpace.hom_ext ?_ fun j ↦ ?_
-  · rw [Category.assoc, AffineSpace.map_over, ← Category.assoc,
-      AffineSpace.homOfVector_over, hG]
-  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
-      AffineSpace.homOfVector_appTop_coord]
 
 end AlgebraicGeometry
