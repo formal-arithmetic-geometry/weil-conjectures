@@ -442,7 +442,7 @@ equality has explicitly been fixed.
 \end{proof}
 
 \begin{remark}[Formalization route]
-  The formal proof (\texttt{Nagata.schemeImageFlatBaseChange}) does not run
+  The formal proof (\texttt{Scheme.Hom.ker\_pullback\_snd}) does not run
   the affine kernel computations of
   \Cref{lemma:nagata-affine-image-kernel-localization} and
   \Cref{lemma:nagata-affine-image-kernel-flat}: it factors the base-changed
@@ -1059,7 +1059,7 @@ it is not silently identified with an unavailable Mathlib primitive.
   instance \texttt{AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget}
   gives that $\mathbf P^r_X\to X$ is proper.  A closed immersion is proper, and the
   composite of proper morphisms is proper by
-  \texttt{AlgebraicGeometry.IsProper.comp}; applying this to
+  \texttt{AlgebraicGeometry.IsProper.stableUnderComposition}; applying this to
   $Y\hookrightarrow\mathbf P^r_X\to X$ proves the claim.
 \end{proof}
 
@@ -4136,14 +4136,15 @@ closed subscheme of the first blow-up.
 \end{definition}
 
 \begin{remark}[Formalization route]
-  The formal development (\texttt{AlgebraicGeometry.StrictTransform},
+  The formal development (\texttt{AlgebraicGeometry.strictTransform},
   specialized to blow-ups as
   \texttt{Scheme.IdealSheafData.strictTransform}) works with this
   scheme-theoretic-closure definition directly, and proves the identification
   over the preserved open (\Cref{lemma:nagata-strict-transform-over-complement})
-  by scheme-image flat base change for a quasi-compact flat monomorphism
-  (\texttt{Nagata.ker\_comap\_self}), not through the torsion-quotient chart
-  model.  The chart-by-chart infrastructure below
+  from the vanishing of the kernel ideal sheaf of a morphism pulled back
+  along that morphism (\texttt{Scheme.Hom.comap\_ker\_self}, applied in
+  \texttt{strictTransform\_ker\_comap\_openι}), not through the
+  torsion-quotient chart model.  The chart-by-chart infrastructure below
   (\Cref{def:nagata-strict-transform-chart-ring} through
   \Cref{prop:nagata-strict-transform-closed-fiber-product}) is accordingly
   not formalized — with the exception of the chart surjectivity
@@ -6308,7 +6309,7 @@ correction explicit before it is sheafified and glued.
 
 \begin{remark}[Formalization route]
   The formal proof
-  (\texttt{separationBlowup\_disjoint\_strictTransforms}) blows up the sum
+  (\texttt{disjoint\_range\_strictTransformMap\_sup}) blows up the sum
   $\mathcal I_1+\mathcal I_2$ directly on $X$
   (\texttt{separationBlowup}) and proves disjointness of the strict
   transforms chart-locally, using the chart inclusion
@@ -7316,14 +7317,15 @@ correction explicit before it is sheafified and glued.
 
 \begin{remark}[Formalization route]
   In Lean the two conclusions are split into
-  \texttt{ValuativeCriterion.universallyClosed\_of\_isDominant} and
-  \texttt{ValuativeCriterion.isSeparated\_of\_isDominant}; both are fully
-  proved.  The ingredients — the valuation probe
-  (Tag 02JQ, \texttt{nonempty\_valuationProbe}), the
-  composite valuation ring (\texttt{ValuationSubring.comapResidue}), the
-  intersection lemma (Tag 052K,
-  \texttt{ValuationSubring.comap\_eq\_of\_le\_comap}) and the extension lemma
-  (Tag 00IA, \texttt{ValuationSubring.exists\_comap\_eq}, via
+  \texttt{UniversallyClosed.of\_valuativeCriterion\_of\_isDominant} and
+  \texttt{IsSeparated.of\_valuativeCriterion\_of\_isDominant}; both are fully
+  proved.  The valuation probe (Tag 02JQ) is
+  \texttt{ValuativeCommSqWithPt.ofIsDominant}, built on the topological
+  statement \texttt{exists\_specializes\_of\_mem\_closure\_range}; the remaining
+  ingredients — the composite valuation ring
+  (\texttt{ValuationSubring.comapResidue}), the intersection lemma (Tag 052K,
+  \texttt{ValuationSubring.comap\_eq\_of\_toLocalSubring\_le}) and the extension
+  lemma (Tag 00IA, \texttt{ValuationSubring.exists\_comap\_eq}, via
   Mathlib's Chevalley extension theorem rather than the Zorn argument) — live
   in the \texttt{WeilConjectures.Mathlib} helper files.  The formalized proof
   deviates from the Stacks Project text in two reductions: instead of
@@ -7332,7 +7334,8 @@ correction explicit before it is sheafified and glued.
   scheme-theoretically dominant with no reducedness hypothesis, and the
   valuative data factors through the image because $\operatorname{Spec}$ of a
   valuation ring or of a field is reduced
-  (\texttt{Scheme.IdealSheafData.le\_ker\_of\_range\_subset\_support}); and the
+  (\texttt{ValuativeCriterion.ker\_imageι\_le\_ker}, from
+  \texttt{Scheme.IdealSheafData.le\_ker\_iff\_range\_subset\_support}); and the
   polynomial presentation of
   \Cref{lemma:nagata-field-point-polynomial-presentation} is supplied by the
   separate declaration
