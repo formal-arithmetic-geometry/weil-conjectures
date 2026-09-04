@@ -250,10 +250,9 @@ theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
   -- in `X₁₂` are both the range of `γ.toImage`.
   have hiso₁ : IsIso (p₁ ∣_ j₁.opensRange) := by
     rw [hp₁def]; exact isIso_restrict_imageι_comp_fst s₁ s₂ j₁ γ hγ₁
-  have hOItoIm : IsOpenImmersion γ.toImage :=
-    isOpenImmersion_of_comp_of_isIso_restrict γ.toImage p₁ j₁ htoIm₁ hiso₁
+  have hOItoIm : IsOpenImmersion γ.toImage := isOpenImmersion_of_comp_eq p₁ γ.toImage htoIm₁
   have hr₁ : Set.range ⇑γ.toImage = ⇑p₁ ⁻¹' Set.range ⇑j₁ :=
-    range_eq_preimage_of_comp_of_isIso_restrict γ.toImage p₁ j₁ htoIm₁ hiso₁
+    range_eq_preimage_range_of_comp_eq p₁ γ.toImage htoIm₁
   have hr₂ : ⇑p₂ ⁻¹' Set.range ⇑j₂ = Set.range ⇑γ.toImage := by
     rw [hp₂def]; exact preimage_range_snd_eq_range_toImage s₁ s₂ γ j₂ hγ₂
   have hiso₂ : IsIso (p₂ ∣_ j₂.opensRange) := by

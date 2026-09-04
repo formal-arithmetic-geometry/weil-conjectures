@@ -22,25 +22,25 @@ by two compactifiable opens with dense intersection
 (`AlgebraicGeometry.HasCompactification.of_two_open_cover`).
 
 The intermediate schemes of the construction are built from a prepared side
-`σ : TwoOpenSide u O`:
+`σ : CompactifiedProperExtension u O`:
 
-- `AlgebraicGeometry.TwoOpenSide.intermediate`: the glued scheme
+- `AlgebraicGeometry.CompactifiedProperExtension.intermediate`: the glued scheme
   `Wᵢ = U ⊔_{O} Xᵢ°` obtained by gluing `U` and the complement `Xᵢ°` of the forbidden
   boundary along the embedded copy of `O` (blueprint:
   `def:nagata-two-open-intermediate-schemes`; proof order item 43), with its two
   charts `intermediateU`, `intermediateInterior` and structure morphism
   `intermediateHom`;
-- `AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph`: the overlap
+- `AlgebraicGeometry.CompactifiedProperExtension.isClosedImmersion_intermediateGraph`: the overlap
   `O ⟶ U ×_S Xᵢ°` is a closed immersion — its range is the preimage of the closed
   range of the proper graph `V ⟶ U ×_S X` (blueprint:
   `lemma:nagata-proper-extension-graph-closed` through
   `lemma:nagata-intermediate-overlap-closed`; the constructibility detour of the
   blueprint is bypassed by the exact description `range υ = ψ⁻¹(O)`);
-- `AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom`: `Wᵢ ⟶ S` is separated
+- `AlgebraicGeometry.CompactifiedProperExtension.isSeparated_intermediateHom`: `Wᵢ ⟶ S` is separated
   (Stacks Project Tag 0F3U via `IsSeparated.pushout_desc`; blueprint:
   `lemma:nagata-intermediate-separated`);
-- `AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU`: the copy of `U` is dense
-  in `Wᵢ` (blueprint: part of `lemma:nagata-two-open-density-transport`).
+- `AlgebraicGeometry.CompactifiedProperExtension.dense_range_intermediateU`: the copy of
+  `U` is dense in `Wᵢ` (blueprint: part of `lemma:nagata-two-open-density-transport`).
 
 The final theorem `HasCompactification.of_two_open_cover` then applies the common
 modification (Stacks Project Tag 0F3X, `nonempty_commonModification`; blueprint
@@ -69,41 +69,52 @@ namespace AlgebraicGeometry
 
 variable {U S : Scheme.{u}}
 
-namespace TwoOpenSide
+namespace CompactifiedProperExtension
 
-variable {u : U ⟶ S} {O : U.Opens} (σ : TwoOpenSide u O)
+variable {u : U ⟶ S} {O : U.Opens} (σ : CompactifiedProperExtension u O)
 
 section Intermediate
 
-lemma interiorEmb_comm : O.ι ≫ u = σ.interiorEmb ≫ σ.interior.ι ≫ σ.s := by
-  rw [σ.interiorEmb_ι_assoc, σ.embX_s]
+/-- The embedded copy of `O` in the ambient model lies over `S`. -/
+@[reassoc]
+lemma υ_comp_i_comp_g : σ.υ ≫ σ.X.i ≫ σ.X.g = O.ι ≫ u := by
+  rw [← σ.X.comm, ← Category.assoc, σ.υ_ψ]
+
+/-- **The embedded copy of `O` is dense in the ambient model**: it is scheme-theoretically
+dominant, hence dominant as soon as it is quasi-compact. -/
+lemma dense_range_υ_comp_i [QuasiCompact (σ.υ ≫ σ.X.i)] :
+    Dense (Set.range ⇑(σ.υ ≫ σ.X.i)) :=
+  (σ.υ ≫ σ.X.i).denseRange
+
+lemma interiorLocusEmb_comm : O.ι ≫ u = σ.interiorLocusEmb ≫ σ.interiorLocus.ι ≫ σ.X.g := by
+  rw [σ.interiorLocusEmb_ι_assoc, σ.υ_comp_i_comp_g]
 
 /-- The **intermediate scheme** `Wᵢ = U ⊔_O Xᵢ°` of a side: the gluing of `U` and the
 complement of the forbidden boundary along the embedded copy of `O`.
 (Blueprint: `def:nagata-two-open-intermediate-schemes`; proof order item 43.) -/
-def intermediate : Scheme.{u} := pushout O.ι σ.interiorEmb
+def intermediate : Scheme.{u} := pushout O.ι σ.interiorLocusEmb
 
 /-- The chart `U ⟶ Wᵢ` of the intermediate scheme. -/
-def intermediateU : U ⟶ σ.intermediate := pushout.inl O.ι σ.interiorEmb
+def intermediateU : U ⟶ σ.intermediate := pushout.inl O.ι σ.interiorLocusEmb
 
 /-- The chart `Xᵢ° ⟶ Wᵢ` of the intermediate scheme. -/
-def intermediateInterior : σ.interior.toScheme ⟶ σ.intermediate :=
-  pushout.inr O.ι σ.interiorEmb
+def intermediateInterior : σ.interiorLocus.toScheme ⟶ σ.intermediate :=
+  pushout.inr O.ι σ.interiorLocusEmb
 
 instance : IsOpenImmersion σ.intermediateU :=
-  inferInstanceAs (IsOpenImmersion (pushout.inl O.ι σ.interiorEmb))
+  inferInstanceAs (IsOpenImmersion (pushout.inl O.ι σ.interiorLocusEmb))
 
 instance : IsOpenImmersion σ.intermediateInterior :=
-  inferInstanceAs (IsOpenImmersion (pushout.inr O.ι σ.interiorEmb))
+  inferInstanceAs (IsOpenImmersion (pushout.inr O.ι σ.interiorLocusEmb))
 
 @[reassoc]
 lemma intermediate_condition :
-    O.ι ≫ σ.intermediateU = σ.interiorEmb ≫ σ.intermediateInterior :=
+    O.ι ≫ σ.intermediateU = σ.interiorLocusEmb ≫ σ.intermediateInterior :=
   pushout.condition
 
 /-- The structure morphism `Wᵢ ⟶ S` of the intermediate scheme. -/
 def intermediateHom : σ.intermediate ⟶ S :=
-  pushout.desc u (σ.interior.ι ≫ σ.s) σ.interiorEmb_comm
+  pushout.desc u (σ.interiorLocus.ι ≫ σ.X.g) σ.interiorLocusEmb_comm
 
 @[reassoc (attr := simp)]
 lemma intermediateU_hom : σ.intermediateU ≫ σ.intermediateHom = u :=
@@ -111,17 +122,18 @@ lemma intermediateU_hom : σ.intermediateU ≫ σ.intermediateHom = u :=
 
 @[reassoc (attr := simp)]
 lemma intermediateInterior_hom :
-    σ.intermediateInterior ≫ σ.intermediateHom = σ.interior.ι ≫ σ.s :=
+    σ.intermediateInterior ≫ σ.intermediateHom = σ.interiorLocus.ι ≫ σ.X.g :=
   pushout.inr_desc _ _ _
 
 lemma range_intermediateU_union :
     Set.range σ.intermediateU ∪ Set.range σ.intermediateInterior = Set.univ :=
-  range_pushout_inl_union_range_pushout_inr O.ι σ.interiorEmb
+  range_pushout_inl_union_range_pushout_inr O.ι σ.interiorLocusEmb
 
 /-- **The copy of `U` is dense in the intermediate scheme**: the second chart is the
 complement of the forbidden boundary, in which the embedded copy of `O` is dense.
 (Blueprint: part of `lemma:nagata-two-open-density-transport`.) -/
-theorem dense_range_intermediateU : Dense (Set.range σ.intermediateU) := by
+theorem dense_range_intermediateU [QuasiCompact (σ.υ ≫ σ.X.i)] :
+    Dense (Set.range σ.intermediateU) := by
   rw [dense_iff_inter_open]
   rintro W₀ hW₀ ⟨w₀, hw₀⟩
   have hw₀cov : w₀ ∈ Set.range σ.intermediateU ∪ Set.range σ.intermediateInterior := by
@@ -130,17 +142,17 @@ theorem dense_range_intermediateU : Dense (Set.range σ.intermediateU) := by
   obtain ⟨a, rfl⟩ | ⟨p, rfl⟩ := hw₀cov
   · exact ⟨σ.intermediateU a, hw₀, a, rfl⟩
   · -- transport the open to `X` and use density of the copy of `O`
-    have hopen : IsOpen (σ.interior.ι '' (σ.intermediateInterior ⁻¹' W₀)) :=
-      σ.interior.ι.isOpenEmbedding.isOpenMap _
+    have hopen : IsOpen (σ.interiorLocus.ι '' (σ.intermediateInterior ⁻¹' W₀)) :=
+      σ.interiorLocus.ι.isOpenEmbedding.isOpenMap _
         (hW₀.preimage σ.intermediateInterior.continuous)
-    obtain ⟨d, hd, hdD⟩ := dense_iff_inter_open.mp σ.dense_range_embX _ hopen
-      ⟨σ.interior.ι p, ⟨p, hw₀, rfl⟩⟩
+    obtain ⟨d, hd, hdD⟩ := dense_iff_inter_open.mp σ.dense_range_υ_comp_i _ hopen
+      ⟨σ.interiorLocus.ι p, ⟨p, hw₀, rfl⟩⟩
     obtain ⟨q, hq, hqd⟩ := hd
     obtain ⟨o, rfl⟩ := hdD
-    have hqEmb : q = σ.interiorEmb o := by
-      apply σ.interior.ι.isOpenEmbedding.injective
+    have hqEmb : q = σ.interiorLocusEmb o := by
+      apply σ.interiorLocus.ι.isOpenEmbedding.injective
       rw [hqd]
-      exact congrArg (fun m ↦ m) (by rw [← σ.interiorEmb_ι]; exact Scheme.Hom.comp_apply _ _ _)
+      exact congrArg (fun m ↦ m) (by rw [← σ.interiorLocusEmb_ι]; exact Scheme.Hom.comp_apply _ _ _)
     refine ⟨σ.intermediateInterior q, ?_, ?_⟩
     · exact hq
     · refine ⟨O.ι o, ?_⟩
@@ -151,28 +163,29 @@ section Graph
 
 /-- The proper graph `γ : V ⟶ U ×_S X` of the proper extension `ψ`.
 (Blueprint: `lemma:nagata-proper-extension-graph-closed`.) -/
-def graph : σ.V.toScheme ⟶ pullback u σ.s := pullback.lift σ.ψ σ.V.ι σ.ψ_u
+def graph : σ.V ⟶ pullback u σ.X.g := pullback.lift σ.ψ σ.X.i σ.X.comm
 
 @[reassoc (attr := simp)]
-lemma graph_fst : σ.graph ≫ pullback.fst u σ.s = σ.ψ := pullback.lift_fst _ _ _
+lemma graph_fst : σ.graph ≫ pullback.fst u σ.X.g = σ.ψ := pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
-lemma graph_snd : σ.graph ≫ pullback.snd u σ.s = σ.V.ι := pullback.lift_snd _ _ _
+lemma graph_snd : σ.graph ≫ pullback.snd u σ.X.g = σ.X.i := pullback.lift_snd _ _ _
 
 /-- The graph of the proper extension is proper; in particular its range is closed.
 (Blueprint: `lemma:nagata-proper-extension-graph-closed`.) -/
 theorem isProper_graph : IsProper σ.graph := by
   have := σ.isProper_ψ
-  have := σ.isProper_s
-  have : IsProper (σ.graph ≫ pullback.fst u σ.s) := by
+  have := σ.X.isProper
+  have : IsProper (σ.graph ≫ pullback.fst u σ.X.g) := by
     rw [σ.graph_fst]
     exact σ.isProper_ψ
-  exact IsProper.of_comp σ.graph (pullback.fst u σ.s)
+  exact IsProper.of_comp σ.graph (pullback.fst u σ.X.g)
 
 /-- The open immersion `U ×_S Xᵢ° ⟶ U ×_S X` induced by the inclusion of the
 complement of the forbidden boundary. -/
-def intermediateOpenι : pullback u (σ.interior.ι ≫ σ.s) ⟶ pullback u σ.s :=
-  pullback.map u (σ.interior.ι ≫ σ.s) u σ.s (𝟙 U) σ.interior.ι (𝟙 S) (by simp) (by simp)
+def intermediateOpenι : pullback u (σ.interiorLocus.ι ≫ σ.X.g) ⟶ pullback u σ.X.g :=
+  pullback.map u (σ.interiorLocus.ι ≫ σ.X.g) u σ.X.g (𝟙 U) σ.interiorLocus.ι (𝟙 S)
+    (by simp) (by simp)
 
 instance : IsOpenImmersion σ.intermediateOpenι :=
   MorphismProperty.pullbackMap (P := @IsOpenImmersion) inferInstance inferInstance
@@ -180,27 +193,27 @@ instance : IsOpenImmersion σ.intermediateOpenι :=
 
 @[reassoc (attr := simp)]
 lemma intermediateOpenι_fst :
-    σ.intermediateOpenι ≫ pullback.fst u σ.s = pullback.fst u (σ.interior.ι ≫ σ.s) ≫ 𝟙 U :=
+    σ.intermediateOpenι ≫ pullback.fst u σ.X.g = pullback.fst u (σ.interiorLocus.ι ≫ σ.X.g) ≫ 𝟙 U :=
   pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
 lemma intermediateOpenι_snd :
-    σ.intermediateOpenι ≫ pullback.snd u σ.s =
-      pullback.snd u (σ.interior.ι ≫ σ.s) ≫ σ.interior.ι :=
+    σ.intermediateOpenι ≫ pullback.snd u σ.X.g =
+      pullback.snd u (σ.interiorLocus.ι ≫ σ.X.g) ≫ σ.interiorLocus.ι :=
   pullback.lift_snd _ _ _
 
 /-- The overlap map `O ⟶ U ×_S Xᵢ°` of the two charts of the intermediate scheme. -/
-def intermediateGraph : O.toScheme ⟶ pullback u (σ.interior.ι ≫ σ.s) :=
-  pullback.lift O.ι σ.interiorEmb σ.interiorEmb_comm
+def intermediateGraph : O.toScheme ⟶ pullback u (σ.interiorLocus.ι ≫ σ.X.g) :=
+  pullback.lift O.ι σ.interiorLocusEmb σ.interiorLocusEmb_comm
 
 @[reassoc (attr := simp)]
 lemma intermediateGraph_fst :
-    σ.intermediateGraph ≫ pullback.fst u (σ.interior.ι ≫ σ.s) = O.ι :=
+    σ.intermediateGraph ≫ pullback.fst u (σ.interiorLocus.ι ≫ σ.X.g) = O.ι :=
   pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
 lemma intermediateGraph_snd :
-    σ.intermediateGraph ≫ pullback.snd u (σ.interior.ι ≫ σ.s) = σ.interiorEmb :=
+    σ.intermediateGraph ≫ pullback.snd u (σ.interiorLocus.ι ≫ σ.X.g) = σ.interiorLocusEmb :=
   pullback.lift_snd _ _ _
 
 lemma intermediateGraph_openι :
@@ -209,8 +222,7 @@ lemma intermediateGraph_openι :
   · rw [Category.assoc, σ.intermediateOpenι_fst, σ.intermediateGraph_fst_assoc,
       Category.comp_id, Category.assoc, σ.graph_fst, σ.υ_ψ]
   · rw [Category.assoc, σ.intermediateOpenι_snd, σ.intermediateGraph_snd_assoc,
-      σ.interiorEmb_ι, Category.assoc, σ.graph_snd]
-    rfl
+      σ.interiorLocusEmb_ι, Category.assoc, σ.graph_snd]
 
 /-- **The overlap of the two charts of the intermediate scheme is a closed immersion**
 (blueprint: `lemma:nagata-intermediate-overlap-constructible` through
@@ -218,17 +230,17 @@ lemma intermediateGraph_openι :
 
 The range of the overlap map is the preimage of the closed range of the proper graph
 `V ⟶ U ×_S X`, because over the complement of the forbidden boundary the graph passes
-through the embedded copy of `O` exactly over `O` (`TwoOpenSide.range_υ`). -/
+through the embedded copy of `O` exactly over `O` (`CompactifiedProperExtension.range_υ`). -/
 theorem isClosedImmersion_intermediateGraph :
     IsClosedImmersion σ.intermediateGraph := by
   have := σ.isOpenImmersion_υ
   have hprop := σ.isProper_graph
   -- the overlap map is an immersion since its first projection is an open immersion
-  have : IsImmersion (σ.intermediateGraph ≫ pullback.fst u (σ.interior.ι ≫ σ.s)) := by
+  have : IsImmersion (σ.intermediateGraph ≫ pullback.fst u (σ.interiorLocus.ι ≫ σ.X.g)) := by
     rw [σ.intermediateGraph_fst]
     infer_instance
   have : IsImmersion σ.intermediateGraph :=
-    IsImmersion.of_comp σ.intermediateGraph (pullback.fst u (σ.interior.ι ≫ σ.s))
+    IsImmersion.of_comp σ.intermediateGraph (pullback.fst u (σ.interiorLocus.ι ≫ σ.X.g))
   refine IsClosedImmersion.of_isPreimmersion _ ?_
   -- the range is the preimage of the closed range of the proper graph
   · have hkey : Set.range σ.intermediateGraph =
@@ -240,20 +252,20 @@ theorem isClosedImmersion_intermediateGraph :
       · intro t ht
         obtain ⟨v, hv⟩ := Set.mem_preimage.mp ht
         -- the second component of the graph point lies in the interior
-        have hvV : σ.V.ι v ∈ (σ.interior : Set σ.X) := by
-          have h1 : σ.V.ι v = (σ.graph ≫ pullback.snd u σ.s) v := by
+        have hvV : σ.X.i v ∈ (σ.interiorLocus : Set σ.X.Z) := by
+          have h1 : σ.X.i v = (σ.graph ≫ pullback.snd u σ.X.g) v := by
             rw [σ.graph_snd]
-          have h2 : (σ.graph ≫ pullback.snd u σ.s) v =
-              pullback.snd u σ.s (σ.intermediateOpenι t) := by
+          have h2 : (σ.graph ≫ pullback.snd u σ.X.g) v =
+              pullback.snd u σ.X.g (σ.intermediateOpenι t) := by
             rw [Scheme.Hom.comp_apply, hv]
-          have h3 : pullback.snd u σ.s (σ.intermediateOpenι t) =
-              σ.interior.ι (pullback.snd u (σ.interior.ι ≫ σ.s) t) := by
-            calc pullback.snd u σ.s (σ.intermediateOpenι t)
-                = (σ.intermediateOpenι ≫ pullback.snd u σ.s) t :=
+          have h3 : pullback.snd u σ.X.g (σ.intermediateOpenι t) =
+              σ.interiorLocus.ι (pullback.snd u (σ.interiorLocus.ι ≫ σ.X.g) t) := by
+            calc pullback.snd u σ.X.g (σ.intermediateOpenι t)
+                = (σ.intermediateOpenι ≫ pullback.snd u σ.X.g) t :=
                   (Scheme.Hom.comp_apply _ _ _).symm
-              _ = (pullback.snd u (σ.interior.ι ≫ σ.s) ≫ σ.interior.ι) t := by
+              _ = (pullback.snd u (σ.interiorLocus.ι ≫ σ.X.g) ≫ σ.interiorLocus.ι) t := by
                   rw [σ.intermediateOpenι_snd]
-              _ = σ.interior.ι (pullback.snd u (σ.interior.ι ≫ σ.s) t) :=
+              _ = σ.interiorLocus.ι (pullback.snd u (σ.interiorLocus.ι ≫ σ.X.g) t) :=
                   Scheme.Hom.comp_apply _ _ _
           rw [h1, h2, h3, ← Scheme.Opens.range_ι]
           exact ⟨_, rfl⟩
@@ -261,7 +273,7 @@ theorem isClosedImmersion_intermediateGraph :
         have hvO : v ∈ Set.range σ.υ := by
           rw [σ.range_υ]
           by_contra hvO
-          have hvZ : σ.V.ι v ∈ σ.V.ι '' (σ.ψ ⁻¹' ((O : Set U)ᶜ)) :=
+          have hvZ : σ.X.i v ∈ σ.X.i '' (σ.ψ ⁻¹' ((O : Set U)ᶜ)) :=
             ⟨v, fun h ↦ hvO h, rfl⟩
           exact hvV (subset_closure hvZ)
         obtain ⟨o, rfl⟩ := hvO
@@ -279,27 +291,27 @@ section Structure
 `lemma:nagata-intermediate-separated`): the two charts of `Wᵢ ⟶ S` are separated and
 their overlap is a closed immersion. -/
 theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediateHom := by
-  have := σ.isProper_s
-  have : IsSeparated (σ.interior.ι ≫ σ.s) := inferInstance
-  exact IsSeparated.pushout_desc O.ι σ.interiorEmb σ.interiorEmb_comm
+  have := σ.X.isProper
+  have : IsSeparated (σ.interiorLocus.ι ≫ σ.X.g) := inferInstance
+  exact IsSeparated.pushout_desc O.ι σ.interiorLocusEmb σ.interiorLocusEmb_comm
     σ.isClosedImmersion_intermediateGraph
 
 /-- The intermediate scheme is of finite type over the base (blueprint:
 `lemma:nagata-intermediate-separated`, finite-type part). -/
 theorem locallyOfFiniteType_intermediateHom [LocallyOfFiniteType u] :
     LocallyOfFiniteType σ.intermediateHom := by
-  have := σ.isProper_s
-  exact IsZariskiLocalAtSource.pushout_desc O.ι σ.interiorEmb σ.interiorEmb_comm
+  have := σ.X.isProper
+  exact IsZariskiLocalAtSource.pushout_desc O.ι σ.interiorLocusEmb σ.interiorLocusEmb_comm
     inferInstance inferInstance
 
 /-- The intermediate scheme of a side over a Noetherian base is quasi-compact. -/
 theorem compactSpace_intermediate [IsNoetherian S] [QuasiCompact u] :
     CompactSpace σ.intermediate := by
-  have : IsNoetherian σ.X := σ.isNoetherian_X
+  have : IsNoetherian σ.X.Z := σ.isNoetherian_Z
   have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace u
-  have : CompactSpace σ.interior.toScheme :=
+  have : CompactSpace σ.interiorLocus.toScheme :=
     isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
-  exact inferInstanceAs (CompactSpace ↑(pushout O.ι σ.interiorEmb))
+  exact inferInstanceAs (CompactSpace ↑(pushout O.ι σ.interiorLocusEmb))
 
 /-- The intermediate scheme of a side over a Noetherian base is Noetherian. -/
 theorem isNoetherian_intermediate [IsNoetherian S] [LocallyOfFiniteType u]
@@ -314,9 +326,9 @@ end Structure
 
 end Intermediate
 
-end TwoOpenSide
+end CompactifiedProperExtension
 
-open TwoOpenSide in
+open CompactifiedProperExtension in
 /-- **The two-open compactification theorem** (Stacks Project Tag 0F40; blueprint:
 `def:nagata-two-open-final-modification` through `thm:nagata-two-open`; proof order
 items 43–48).
@@ -339,8 +351,8 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
   have : IsNoetherian U := ⟨⟩
   -- the comparison layer: prepared sides with the key boundary disjointness
   obtain ⟨P⟩ := nonempty_twoOpenPreparation u O₁ O₂ hcov
-  have := P.side₁.isProper_s
-  have := P.side₂.isProper_s
+  have := P.side₁.X.isProper
+  have := P.side₂.X.isProper
   -- the two intermediate schemes are separated, of finite type and Noetherian
   have : IsSeparated P.side₁.intermediateHom := P.side₁.isSeparated_intermediateHom
   have : IsSeparated P.side₂.intermediateHom := P.side₂.isSeparated_intermediateHom
@@ -355,12 +367,14 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     P.side₂.intermediateHom P.side₁.intermediateU P.side₂.intermediateU
     (by rw [P.side₁.intermediateU_hom, P.side₂.intermediateU_hom])
   -- the open immersion of `U` into the glued scheme
+  have hiso₁ : IsIso (cm.B₁.I.blowupMap ∣_ P.side₁.intermediateU.opensRange) :=
+    cm.B₁.isIso_blowupMap_restrict
+  have hiso₂ : IsIso (cm.B₂.I.blowupMap ∣_ P.side₂.intermediateU.opensRange) :=
+    cm.B₂.isIso_blowupMap_restrict
   have hu₁OI : IsOpenImmersion cm.u₁ :=
-    isOpenImmersion_of_comp_of_isIso_restrict cm.u₁ cm.B₁.I.blowupMap
-      P.side₁.intermediateU cm.u₁_blowupMap cm.B₁.isIso_blowupMap_restrict
+    isOpenImmersion_of_comp_eq cm.B₁.I.blowupMap cm.u₁ cm.u₁_blowupMap
   have hu₂OI : IsOpenImmersion cm.u₂ :=
-    isOpenImmersion_of_comp_of_isIso_restrict cm.u₂ cm.B₂.I.blowupMap
-      P.side₂.intermediateU cm.u₂_blowupMap cm.B₂.isIso_blowupMap_restrict
+    isOpenImmersion_of_comp_eq cm.B₂.I.blowupMap cm.u₂ cm.u₂_blowupMap
   set jW : U ⟶ cm.W := cm.u₁ ≫ cm.k₁ with hjW_def
   have : IsOpenImmersion jW := inferInstance
   have hjWu : jW ≫ cm.w = u := by
@@ -376,14 +390,19 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
   have : QuasiCompact h := inferInstance
   have : QuasiSeparated h := inferInstance
   -- density transport (blueprint: items 46–47): the copies of `U` are dense in the
-  -- two modified charts, and `O₁ ∩ O₂` is dense in `U`
+  -- two modified charts, and `O₁ ∩ O₂` is dense in `U`; the embedded copies of the two
+  -- opens are quasi-compact because the opens are Noetherian
+  have : CompactSpace O₁.toScheme :=
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
+  have : IsNoetherian O₁.toScheme := ⟨⟩
+  have : CompactSpace O₂.toScheme :=
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
+  have : IsNoetherian O₂.toScheme := ⟨⟩
   have hdense₁ : Dense (Set.range cm.u₁) := by
-    rw [range_eq_preimage_of_comp_of_isIso_restrict cm.u₁ cm.B₁.I.blowupMap
-      P.side₁.intermediateU cm.u₁_blowupMap cm.B₁.isIso_blowupMap_restrict]
+    rw [range_eq_preimage_range_of_comp_eq cm.B₁.I.blowupMap cm.u₁ cm.u₁_blowupMap]
     exact cm.B₁.dense_preimage_blowupMap P.side₁.dense_range_intermediateU
   have hdense₂ : Dense (Set.range cm.u₂) := by
-    rw [range_eq_preimage_of_comp_of_isIso_restrict cm.u₂ cm.B₂.I.blowupMap
-      P.side₂.intermediateU cm.u₂_blowupMap cm.B₂.isIso_blowupMap_restrict]
+    rw [range_eq_preimage_range_of_comp_eq cm.B₂.I.blowupMap cm.u₂ cm.u₂_blowupMap]
     exact cm.B₂.dense_preimage_blowupMap P.side₂.dense_range_intermediateU
   have hdom : IsDominant h := by
     constructor
@@ -422,27 +441,28 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     let : Field (CommRingCat.of K) := ‹_›
     replace hηU : ηU ≫ h = i₁ := hηU
     -- extend the generic point to the two proper ambient models
-    have hexist : ∀ {O : U.Opens} (σ : TwoOpenSide u O) (hle : O₁ ⊓ O₂ ≤ O),
-        ∃ g : Spec (CommRingCat.of R) ⟶ σ.X,
+    have hexist : ∀ {O : U.Opens} (σ : CompactifiedProperExtension u O) (hle : O₁ ⊓ O₂ ≤ O),
+        ∃ g : Spec (CommRingCat.of R) ⟶ σ.X.Z,
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ g =
-            ηU ≫ U.homOfLE hle ≫ σ.embX ∧ g ≫ σ.s = i₂ := by
+            ηU ≫ U.homOfLE hle ≫ (σ.υ ≫ σ.X.i) ∧ g ≫ σ.X.g = i₂ := by
       intro O σ hle
-      have := σ.isProper_s
-      have hcomm : (ηU ≫ U.homOfLE hle ≫ σ.embX) ≫ σ.s =
+      have := σ.X.isProper
+      have hcomm : (ηU ≫ U.homOfLE hle ≫ (σ.υ ≫ σ.X.i)) ≫ σ.X.g =
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ i₂ := by
-        have h1 : (ηU ≫ U.homOfLE hle ≫ σ.embX) ≫ σ.s =
+        have h1 : (ηU ≫ U.homOfLE hle ≫ (σ.υ ≫ σ.X.i)) ≫ σ.X.g =
             ηU ≫ (O₁ ⊓ O₂ : U.Opens).ι ≫ u := by
-          simp only [Category.assoc, TwoOpenSide.embX_s, Scheme.homOfLE_ι_assoc]
+          simp only [Category.assoc, CompactifiedProperExtension.υ_comp_i_comp_g,
+            Scheme.homOfLE_ι_assoc]
         rw [h1, ← hhw, ← Category.assoc, hηU, wsq]
-      have hE : ValuativeCriterion.Existence σ.s := by
-        have huc' : (ValuativeCriterion.Existence ⊓ @QuasiCompact) σ.s := by
+      have hE : ValuativeCriterion.Existence σ.X.g := by
+        have huc' : (ValuativeCriterion.Existence ⊓ @QuasiCompact) σ.X.g := by
           rw [← UniversallyClosed.eq_valuativeCriterion]
           infer_instance
         exact huc'.1
       obtain ⟨⟨l, hl₁, hl₂⟩⟩ := (hE
         { R := R
           K := K
-          i₁ := ηU ≫ U.homOfLE hle ≫ σ.embX
+          i₁ := ηU ≫ U.homOfLE hle ≫ (σ.υ ≫ σ.X.i)
           i₂ := i₂
           commSq := ⟨hcomm⟩ }).exists_lift
       exact ⟨l, hl₁, hl₂⟩
@@ -452,25 +472,25 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
     have havoid := P.keyDisjoint.avoids ηU g₁ g₂ hg₁ hg₂ (by rw [hg₁s, hg₂s])
     -- the avoiding extension lifts to the glued scheme through the corresponding
     -- intermediate model and its admissible blow-up
-    have branch : ∀ {O : U.Opens} (σ : TwoOpenSide u O) (hle : O₁ ⊓ O₂ ≤ O)
+    have branch : ∀ {O : U.Opens} (σ : CompactifiedProperExtension u O) (hle : O₁ ⊓ O₂ ≤ O)
         (B : IsAdmissible σ.intermediate σ.intermediateU.opensRange)
         (k : B.I.blowup ⟶ cm.W) (uu : U ⟶ B.I.blowup),
         uu ≫ B.I.blowupMap = σ.intermediateU →
         k ≫ cm.w = B.I.blowupMap ≫ σ.intermediateHom →
         uu ≫ k = jW →
-        ∀ g : Spec (CommRingCat.of R) ⟶ σ.X,
+        ∀ g : Spec (CommRingCat.of R) ⟶ σ.X.Z,
         Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ g =
-          ηU ≫ U.homOfLE hle ≫ σ.embX →
-        g ≫ σ.s = i₂ → Set.range g ⊆ (σ.interior : Set σ.X) →
+          ηU ≫ U.homOfLE hle ≫ (σ.υ ≫ σ.X.i) →
+        g ≫ σ.X.g = i₂ → Set.range g ⊆ (σ.interiorLocus : Set σ.X.Z) →
         ∃ l : Spec (CommRingCat.of R) ⟶ cm.W,
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ l = i₁ ∧ l ≫ cm.w = i₂ := by
       intro O σ hle B k uu huu hkw hglue g hg hgs hrange
-      have := σ.isProper_s
+      have := σ.X.isProper
       have := σ.isOpenImmersion_υ
       -- corestrict to the complement of the forbidden boundary
-      let g₀ : Spec (CommRingCat.of R) ⟶ σ.interior.toScheme :=
-        IsOpenImmersion.lift σ.interior.ι g (by rwa [Scheme.Opens.range_ι])
-      have hg₀ : g₀ ≫ σ.interior.ι = g := IsOpenImmersion.lift_fac _ _ _
+      let g₀ : Spec (CommRingCat.of R) ⟶ σ.interiorLocus.toScheme :=
+        IsOpenImmersion.lift σ.interiorLocus.ι g (by rwa [Scheme.Opens.range_ι])
+      have hg₀ : g₀ ≫ σ.interiorLocus.ι = g := IsOpenImmersion.lift_fac _ _ _
       -- the resulting morphism to the intermediate scheme
       set m : Spec (CommRingCat.of R) ⟶ σ.intermediate :=
         g₀ ≫ σ.intermediateInterior with hm_def
@@ -479,9 +499,9 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
           hgs]
       -- the generic point factors through the embedded copy of `O`
       have hgen : Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ g₀ =
-          ηU ≫ U.homOfLE hle ≫ σ.interiorEmb := by
-        rw [← cancel_mono σ.interior.ι, Category.assoc, hg₀, hg]
-        simp only [Category.assoc, TwoOpenSide.interiorEmb_ι]
+          ηU ≫ U.homOfLE hle ≫ σ.interiorLocusEmb := by
+        rw [← cancel_mono σ.interiorLocus.ι, Category.assoc, hg₀, hg]
+        simp only [Category.assoc, CompactifiedProperExtension.interiorLocusEmb_ι]
       -- the valuative square along the proper admissible blow-up
       have hsqB : (ηU ≫ (O₁ ⊓ O₂ : U.Opens).ι ≫ uu) ≫ B.I.blowupMap =
           Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ m := by
@@ -489,7 +509,7 @@ theorem HasCompactification.of_two_open_cover [IsNoetherian S] (u : U ⟶ S)
             ηU ≫ (O₁ ⊓ O₂ : U.Opens).ι ≫ σ.intermediateU := by
           simp only [Category.assoc, huu]
         have h2 : Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ m =
-            ηU ≫ U.homOfLE hle ≫ σ.interiorEmb ≫ σ.intermediateInterior := by
+            ηU ≫ U.homOfLE hle ≫ σ.interiorLocusEmb ≫ σ.intermediateInterior := by
           rw [hm_def, ← Category.assoc, hgen]
           simp only [Category.assoc]
         rw [h1, h2, ← σ.intermediate_condition]

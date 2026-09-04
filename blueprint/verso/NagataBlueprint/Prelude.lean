@@ -52,7 +52,7 @@ import WeilConjectures.Compactification.StrictTransform
 import WeilConjectures.Compactification.StrictTransformBlowup
 import WeilConjectures.Compactification.TwoOpen
 import WeilConjectures.Compactification.TwoOpenComparison
-import WeilConjectures.Compactification.TwoOpenSetup
+import WeilConjectures.Compactification.CompactifiedProperExtension
 import WeilConjectures.Compactification.ValuativeCriterion
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
