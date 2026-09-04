@@ -10,17 +10,16 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 
-# The prepared sides of the two-open compactification theorem
+# Transport of a side of the two-open construction along an admissible blow-up
 
-This file sets up the per-side data of the two-open compactification theorem,
-following the blueprint chapter "Nagata compactification", section "The two-open
-compactification theorem" (proof order items 34–37 applied to the two opens):
+This file ports the node `prop:side-transport` of the route map `nagata.svg`, together
+with the two definitions it rests on, `def:two-open-side` and `def:boundaries`.
 
 Let `u : U ⟶ S` be separated and of finite type over a Noetherian scheme `S` and let `O`
-be an open of `U`. The structure `AlgebraicGeometry.TwoOpenSide u O` records the state of
-one side of the construction: a proper ambient scheme `X ⟶ S`, an open `V ⊆ X` with a
-proper morphism `ψ : V ⟶ U` extending the inclusion of an embedded copy of `O`, and
-density of the copy of `O` in `X`.
+be an open of `U`. The structure `AlgebraicGeometry.TwoOpenSide u O` records one side of
+the two-open compactification theorem: a proper ambient scheme `X ⟶ S`, an open `V ⊆ X`
+with a proper morphism `ψ : V ⟶ U` extending the inclusion of an embedded copy of `O`,
+and density of the copy of `O` in `X`.
 
 The other open `O'` of the two-open construction enters only through the boundary loci,
 so it is a parameter of those and not of the structure itself:
@@ -29,16 +28,17 @@ so it is a parameter of those and not of the structure itself:
 * `TwoOpenSide.forbiddenBoundary` — the closure in `X` of `ψ ⁻¹ (U ∖ O)`.
 
 The predicate `TwoOpenSide.Prepared O'` states that the two boundary closures are
-disjoint (blueprint: `def:nagata-two-open-prepared-boundaries`,
-`lemma:nagata-prepared-boundaries`). The complement of the forbidden boundary is the
-open `TwoOpenSide.interior` (the `Xᵢ°` of the blueprint), which contains the embedded
-copy of `O` (`TwoOpenSide.interiorEmb`).
+disjoint. The complement of the forbidden boundary is the open `TwoOpenSide.interior`
+(the `Xᵢ°` of the blueprint), which contains the embedded copy of `O`
+(`TwoOpenSide.interiorEmb`).
 
-`TwoOpenSide.admissibleBlowup` transports a side along a `V`-admissible blow-up of the
-ambient scheme; boundary loci transport to preimages
-(`TwoOpenSide.admissibleBlowup_image_preimage`), so preparedness persists
-(`TwoOpenSide.Prepared.admissibleBlowup`; blueprint:
-`lemma:nagata-boundary-disjoint-persists`).
+The node itself is the pair `TwoOpenSide.admissibleBlowup`, transporting a side along a
+`V`-admissible blow-up of the ambient scheme, and `TwoOpenSide.Prepared.admissibleBlowup`,
+saying that preparedness persists: boundary loci transport to preimages
+(`TwoOpenSide.admissibleBlowup_image_preimage`), so disjointness is preserved.
+
+It is the input to the improved comparison (`thm:improved-comparison`) and to the
+existence of a prepared side (`thm:prepared-side`).
 
 -/
 
@@ -55,8 +55,8 @@ namespace AlgebraicGeometry
 variable {U S : Scheme.{u}}
 
 /-- The data of one **side of the two-open compactification theorem** for a morphism
-`u : U ⟶ S` and an open `O` of `U` (blueprint:
-`def:nagata-two-open-graph-extensions`, `def:nagata-two-open-boundary-loci`).
+`u : U ⟶ S` and an open `O` of `U` (blueprint: `def:two-open-side`,
+`def:nagata-two-open-graph-extensions`).
 
 The second open of the two-open construction plays no role in this data; it enters only
 as a parameter of the boundary loci `TwoOpenSide.selfBoundary` and of the preparedness
@@ -119,17 +119,17 @@ section Boundary
 
 /-- The **self boundary** of a side, relative to the other open `O'`: the closure in the
 ambient scheme of the inverse image under `ψ` of the closed complement `U ∖ O'`.
-(Blueprint: `Z̄_{i,i}` in `def:nagata-two-open-prepared-boundaries`.) -/
+(Blueprint: `def:boundaries`; `Z̄_{i,i}` in `def:nagata-two-open-prepared-boundaries`.) -/
 def selfBoundary (O' : U.Opens) : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O' : Set U)ᶜ)))
 
 /-- The **forbidden boundary** of a side: the closure in the ambient scheme of the
 inverse image under `ψ` of the closed complement `U ∖ O` of its own open. Removing it
 yields the intermediate locus `Xᵢ°` of the blueprint.
-(Blueprint: `Z̄_{i,j}` in `def:nagata-two-open-prepared-boundaries`.) -/
+(Blueprint: `def:boundaries`; `Z̄_{i,j}` in `def:nagata-two-open-prepared-boundaries`.) -/
 def forbiddenBoundary : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O : Set U)ᶜ)))
 
 /-- A side is **prepared** relative to the other open `O'` if its two boundary closures
-are disjoint. (Blueprint: `lemma:nagata-prepared-boundaries`.) -/
+are disjoint. (Blueprint: `def:boundaries`, `def:nagata-two-open-prepared-boundaries`.) -/
 def Prepared (O' : U.Opens) : Prop := Disjoint (σ.selfBoundary O') σ.forbiddenBoundary
 
 /-- The image in the ambient scheme of a closed boundary locus of `V` meets `V` in
@@ -170,9 +170,11 @@ lemma disjoint_range_embX_forbiddenBoundary :
   exact this hmemO
 
 /-- The complement of the forbidden boundary, i.e. the locus `Xᵢ°` of the blueprint.
-(Blueprint: `def:nagata-two-open-intermediate-schemes`.) -/
+(Blueprint: `def:boundaries`, `def:nagata-two-open-intermediate-schemes`.) -/
 def interior : σ.X.Opens := ⟨σ.forbiddenBoundaryᶜ, isClosed_closure.isOpen_compl⟩
 
+/-- **The interior contains the embedded copy of the open** (blueprint:
+`lem:interior-contains-copy`). -/
 lemma range_embX_subset_interior : Set.range σ.embX ⊆ (σ.interior : Set σ.X) :=
   σ.disjoint_range_embX_forbiddenBoundary.subset_compl_right
 
@@ -198,8 +200,7 @@ section AdmissibleBlowup
 variable [IsNoetherian S] (B : IsAdmissible σ.X σ.V)
 
 /-- **Transport of a side along a `V`-admissible blow-up** of the ambient scheme
-(blueprint: `def:nagata-two-open-prepared-boundaries`,
-`def:nagata-two-open-improved-comparison`).
+(blueprint: `prop:side-transport`, `def:nagata-two-open-prepared-boundaries`).
 
 The open `V`, the proper extension `ψ` and the embedded copy of `O` transport along the
 isomorphism over `V`; density transports because the complement of the center is dense in
@@ -319,8 +320,8 @@ lemma admissibleBlowup_forbiddenBoundary :
 
 /-- **Preparedness persists along admissible blow-ups**: the transported boundary
 closures are contained in the preimages of the original ones, so disjointness is
-preserved. (Blueprint: `lemma:nagata-boundary-disjoint-persists`; proof order
-item 37.) -/
+preserved. (Blueprint: `prop:side-transport`,
+`lemma:nagata-boundary-disjoint-persists`.) -/
 lemma Prepared.admissibleBlowup {O' : U.Opens} (hσ : σ.Prepared O') :
     (σ.admissibleBlowup B).Prepared O' := by
   have hsub : ∀ A : Set σ.X,
