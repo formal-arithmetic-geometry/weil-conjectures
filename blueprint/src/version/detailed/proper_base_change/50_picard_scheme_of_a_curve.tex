@@ -7886,29 +7886,46 @@ h^1\circ d^0_D+d^{-1}_D\circ h^0=\mathrm{id}_{D^0},
 \]
 so the homotopy identity holds in every degree $r\ge0$.  (The one
 remaining identity of a contraction,
-$h^0\circ d^{-1}_D=\mathrm{id}_{D^{-1}}$, is proved at the end of the
-next paragraph; nothing before that point uses it.)
+$h^0\circ d^{-1}_D=\mathrm{id}_{D^{-1}}$, is proved in the paragraph
+\emph{The split exactness} below; nothing before that point uses it.)
 
 Consequently $D^\bullet=B\otimes_AC^\bullet$ is exact in every degree
-$r\ge1$: if $d^r_Dy=0$ then $y=d^{r-1}_D(h^ry)$.  Since $B$ is flat over
-$A$, kernels and images commute with $-\otimes_AB$ and hence
+$r\ge1$: if $d^r_Dy=0$ then $y=d^{r-1}_D(h^ry)$.  The bottom degree of
+the homotopy says as much at $D^0$, for the augmented complex: if
+$d^0_Dy=0$ then $y=d^{-1}_D(h^0y)=\widetilde\psi(h^0y)$, so that
+$\ker d^0_D=\widetilde\psi(N)$, the reverse inclusion
+$\widetilde\psi(N)\subseteq\ker d^0_D$ being $d^0_D\circ d^{-1}_D=0$.
+That last statement is about $D^\bullet$ alone -- $D^{-1}=N$ is not the
+base change of an $A$-module, so it is not transported to $C^\bullet$
+below -- and it is what the paragraph \emph{The descended module} uses;
+exactness at $D^{-1}$, i.e.\ the injectivity of $\widetilde\psi$, is not
+claimed here, and is proved there by a separate argument.  Since $B$ is
+flat over $A$, kernels and images commute with $-\otimes_AB$ and hence
 $H^r(B\otimes_AC^\bullet)=B\otimes_AH^r(C^\bullet)$; since $B$ is
 moreover faithfully flat, $B\otimes_AH^r(C^\bullet)=0$ forces
 $H^r(C^\bullet)=0$.  So $C^\bullet$ is exact in every degree $r\ge1$,
 and it is exact at $N_0$ and at $C^0$ by the definition $N_0=\ker d^0$.
-Hence the augmented complex above is exact -- and, as the next paragraph
-shows, split exact after the faithfully flat base change $-\otimes_AB$.
+Hence the augmented complex above is exact -- and, as the paragraph
+\emph{The split exactness} below shows, split exact after the
+faithfully flat base change $-\otimes_AB$.
 
 \emph{The descended module.}  The map to be identified is the canonical
 $B$-linear map
 \[
 \alpha:N_0\otimes_AB\longrightarrow N,\qquad
-n_0\otimes b\longmapsto bn_0
+n_0\otimes b\longmapsto bn_0 .
 \]
-(equivalently, after the swap $N_0\otimes_AB\cong B\otimes_AN_0$, the
-map $b\otimes n_0\mapsto bn_0$, which is the restriction of $h^0$ to
-$B\otimes_AN_0\subseteq D^0$).  Three facts make it an isomorphism.
-First, $\widetilde\psi$ is injective: it is the composite of
+It is convenient to read it on the other side of the swap isomorphism
+$\mathrm{swap}:N_0\otimes_AB\to B\otimes_AN_0$,
+$n_0\otimes b\mapsto b\otimes n_0$, that is, to work with
+\[
+\alpha':B\otimes_AN_0\longrightarrow N,\qquad
+b\otimes n_0\longmapsto bn_0,
+\]
+which is the restriction of $h^0$ to $B\otimes_AN_0\subseteq D^0$.
+Then $\alpha=\alpha'\circ\mathrm{swap}$, so $\alpha$ is an isomorphism
+if and only if $\alpha'$ is.  Three facts make $\alpha'$ an
+isomorphism.  First, $\widetilde\psi$ is injective: it is the composite of
 $N\to N\otimes_AB$, $n\mapsto n\otimes1$, with the isomorphism $\psi$,
 and that first map is a split injection of $A$-modules, a retraction
 being $n\otimes b\mapsto bn$.  Second, $\ker d^0_D=B\otimes_AN_0$:
@@ -7923,30 +7940,73 @@ then $y=d^{-1}_D(h^0y)=\widetilde\psi(h^0y)$.  The second and third
 facts together say that $\widetilde\psi$ maps $N$ \emph{onto}
 $B\otimes_AN_0$, and by the first it does so injectively, so
 $\widetilde\psi:N\to B\otimes_AN_0$ is bijective.  Its inverse is
-$\alpha$: for $n_0\in N_0$ the definition $N_0=\ker d^0$ with
+$\alpha'$: for $n_0\in N_0$ the definition $N_0=\ker d^0$ with
 $d^0(n)=1\otimes n-\widetilde\psi(n)$ reads
 $\widetilde\psi(n_0)=1\otimes n_0$, whence
 \[
-\widetilde\psi\bigl(\alpha(b\otimes n_0)\bigr)=\widetilde\psi(bn_0)
+\widetilde\psi\bigl(\alpha'(b\otimes n_0)\bigr)=\widetilde\psi(bn_0)
 =(b\otimes1)\widetilde\psi(n_0)=b\otimes n_0,
 \]
-i.e.\ $\widetilde\psi\circ\alpha=\mathrm{id}$ on $B\otimes_AN_0$; as
+i.e.\ $\widetilde\psi\circ\alpha'=\mathrm{id}$ on $B\otimes_AN_0$; as
 $\widetilde\psi$ is a bijection onto $B\otimes_AN_0$ this forces
-$\alpha=\widetilde\psi^{-1}$.  So $\alpha$ is an isomorphism and its
-image is all of $N$, which is the surjectivity at issue: the cocycle
-condition, through $d^0_D\circ\widetilde\psi=0$, is what puts
+$\alpha'=\widetilde\psi^{-1}$.  So $\alpha'$, and with it $\alpha$, is
+an isomorphism, and its image is all of $N$, which is the surjectivity
+at issue: the cocycle condition, through
+$d^0_D\circ\widetilde\psi=0$, is what puts
 $\widetilde\psi(N)$ inside $B\otimes_AN_0$, and the contracting homotopy
 in the bottom degree is what fills that submodule out, its component
-$h^0$ being the inverse map.  Thus $N_0\otimes_AB\cong N$, compatibly
-with the descent data.  In particular
-$h^0\circ d^{-1}_D=\alpha\circ\widetilde\psi=\mathrm{id}_{D^{-1}}$, so
+$h^0$ being the inverse map.
+
+It remains to see that $\alpha$ is a map of descent data.  The datum
+that the functor of the claim attaches to the $A$-module $N_0$ is the
+canonical swap
+\[
+\psi_{\mathrm{can}}:(N_0\otimes_AB)\otimes_AB\longrightarrow
+B\otimes_A(N_0\otimes_AB),\qquad
+(n_0\otimes b)\otimes b'\longmapsto b\otimes(n_0\otimes b'),
+\]
+which is $B\otimes_AB$-linear for the actions fixed above:
+$(c\otimes c')\cdot\bigl((n_0\otimes b)\otimes b'\bigr)
+=(n_0\otimes cb)\otimes c'b'$ is sent to
+$cb\otimes(n_0\otimes c'b')
+=(c\otimes c')\cdot\bigl(b\otimes(n_0\otimes b')\bigr)$.  The square to
+be checked has these two modules along its top, $N\otimes_AB$ and
+$B\otimes_AN$ below them, the maps $\alpha\otimes\mathrm{id}_B$ and
+$\mathrm{id}_B\otimes\alpha$ as its vertical edges and $\psi$ along its
+bottom; that it commutes is the identity
+\[
+\psi\circ(\alpha\otimes\mathrm{id}_B)
+=(\mathrm{id}_B\otimes\alpha)\circ\psi_{\mathrm{can}}:
+(N_0\otimes_AB)\otimes_AB\longrightarrow B\otimes_AN .
+\]
+Both composites are $B\otimes_AB$-linear ($\psi$ by hypothesis,
+$\psi_{\mathrm{can}}$ by the computation just made, and the two
+vertical maps because $\alpha$ is $B$-linear), and the elements
+$(n_0\otimes1)\otimes1$ with $n_0\in N_0$ generate the source over
+$B\otimes_AB$, since $(n_0\otimes b)\otimes b'=(b\otimes b')\cdot
+\bigl((n_0\otimes1)\otimes1\bigr)$; so it is enough to evaluate the two
+composites there.  Going right and then down,
+$\psi_{\mathrm{can}}\bigl((n_0\otimes1)\otimes1\bigr)
+=1\otimes(n_0\otimes1)$ and $\alpha(n_0\otimes1)=1\cdot n_0=n_0$, which
+gives $1\otimes n_0$.  Going down and then right,
+$(\alpha\otimes\mathrm{id}_B)\bigl((n_0\otimes1)\otimes1\bigr)
+=n_0\otimes1$ and $\psi(n_0\otimes1)=\widetilde\psi(n_0)=1\otimes n_0$,
+by the identity $\widetilde\psi(n_0)=1\otimes n_0$ for $n_0\in N_0$
+already used.  The two values agree, so the square commutes.  Thus
+$N_0\otimes_AB\cong N$, compatibly with the descent data.
+
+\emph{The split exactness.}  The identification just made supplies the
+one contraction identity still outstanding:
+$h^0\circ d^{-1}_D=\alpha'\circ\widetilde\psi=\mathrm{id}_{D^{-1}}$, so
 $h$ contracts the augmented complex $D^\bullet$ in every degree; and
 transporting along $\widetilde\psi$, which carries $d^{-1}_D$ to the
 inclusion $B\otimes_AN_0\subseteq D^0$, the maps $\widetilde\psi\circ
 h^0$ in degree $0$ and $h^r$ in degrees $r\ge1$ contract
 $0\to B\otimes_AN_0\to B\otimes_AC^0\to B\otimes_AC^1\to\cdots$, the
 base change of the augmented complex, in every degree -- the split
-exactness asserted above.  The faithfulness (an $A$-map vanishing after
+exactness asserted above.
+
+The faithfulness (an $A$-map vanishing after
 $\otimes_AB$ vanishes) and the fullness (a map of descent data is determined by --
 and arises from -- the induced map on the kernels, by the same
 exactness) are then immediate: a morphism $N\to N'$ compatible with
