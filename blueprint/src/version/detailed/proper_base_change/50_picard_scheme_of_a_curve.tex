@@ -535,17 +535,20 @@ a domain).
 \uses{def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-regular-local-domain}
-By definition, a morphism is smooth if and only if it is locally of
-finite presentation, flat, and has geometrically regular fibres
-(the standard definition of smoothness: the fibres are regular and
-remain regular after every base change by a field extension).  For
-the structure morphism \(C\to\operatorname{Spec}k\), this says that
-each local ring \(\mathcal O_{C,P}\) is geometrically regular over
-\(k\): the ring \(\mathcal O_{C,P}\otimes_kk'\) is regular for every
-finite extension \(k'/k\).  Taking \(k'=k\), the ring
-\(\mathcal O_{C,P}\) itself is regular, hence a domain by
-\Cref{lem:pcb-regular-local-domain}.
+\uses{def:pcb-curves,def:pc-smooth-morphism,lem:pc-smooth-over-field-regular,lem:pcb-regular-local-domain}
+That \(C\) is smooth means that the structure morphism
+\(C\to\operatorname{Spec}k\) is smooth (\Cref{def:pcb-curves}), where
+smoothness of a morphism is understood in the sense of
+\Cref{def:pc-smooth-morphism}.  A scheme smooth over a field is a
+regular scheme (\Cref{lem:pc-smooth-over-field-regular}), so every
+local ring \(\mathcal O_{C,P}\) is regular, and a regular local ring is
+a domain (\Cref{lem:pcb-regular-local-domain}).
+
+The present lemma is thus the special case of
+\Cref{lem:pc-smooth-over-field-regular} in which the smooth scheme over
+the field is a curve; it is kept as a separate node because it is a
+basic block reproduced from file~06 and is cited under that name
+throughout this chapter.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -5356,6 +5359,46 @@ Lemma~29.42.4 (\stacksproject{01W3}).  It is not decomposed here.
 
 % ---------------------------------------------------------------------------
 % Cited.
+\begin{lemma}[Relative dimension is stable under base change]
+\label{lem:pc-relative-dimension-base-change}
+Let $f:X\to S$ be a morphism of schemes which is locally of finite type.  If $f$
+has \hyperref[def:pc-dimension]{relative dimension} $d$, then so does any
+\hyperref[def:pc-base-change]{base change} of $f$.  The same holds for relative
+dimension $\le d$.  (In the source, $f$ locally of finite type is \emph{of
+relative dimension $d$} if all nonempty fibres $X_s$ are equidimensional of
+dimension $d$, and \emph{of relative dimension $\le d$} if
+$\dim_x(X_{f(x)})\le d$ for every $x\in X$: Morphisms of Schemes,
+Definition~29.30.1, \stacksproject{02NJ}.)
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,def:pc-dimension}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.30 (Morphisms of
+given relative dimension), Lemma~29.30.2 (\stacksproject{02NK}).  It is not
+decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Relative dimensions add along a composite]
+\label{lem:pc-relative-dimension-composition}
+Let $f:X\to Y$ and $g:Y\to Z$ be morphisms of schemes which are locally of finite
+type.  If $f$ has \hyperref[def:pc-dimension]{relative dimension} $\le d$ and $g$
+has relative dimension $\le e$, then $g\circ f$ has relative dimension $\le d+e$.
+If moreover $f$ has relative dimension $d$, $g$ has relative dimension $e$, and
+$f$ is flat, then $g\circ f$ has relative dimension $d+e$.  (Relative dimension
+$d$ and $\le d$ are as in Morphisms of Schemes, Definition~29.30.1,
+\stacksproject{02NJ}; the flatness of $f$ is needed only for the second, exact
+assertion.)
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-dimension}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.30 (Morphisms of
+given relative dimension), Lemma~29.30.3 (\stacksproject{02NL}).  It is not
+decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
 \begin{lemma}[Smooth over a field implies regular]
 \label{lem:pc-smooth-over-field-regular}
 Let $k$ be a field and let $X\to\Spec(k)$ be a
@@ -7377,7 +7420,7 @@ $\underline{\Hilb}^d_{X/k}$ is smooth of dimension $d$ over $k$).
 \uses{def:pc-hilb-functor,def:pc-morphism-conventions,def:pc-representable-functor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-morphism-conventions,lem:pc-hilb-addition,lem:pc-smooth-base-change,lem:pc-smooth-composition,lem:pc-smooth-descends-flat}
+\uses{def:pc-dimension,def:pc-morphism-conventions,lem:pc-hilb-addition,lem:pc-relative-dimension-base-change,lem:pc-relative-dimension-composition,lem:pc-smooth-base-change,lem:pc-smooth-composition,lem:pc-smooth-descends-flat,lem:pc-smooth-flat}
 \emph{The cases $d=0,1$.}  $\Hilb^0_{X/S}(T)$ has exactly one element
 (the empty closed subscheme of $X_T$, finite locally free of degree
 $0$; it is the zero ideal; the pullback along $T'\to T$ is the empty
@@ -7407,8 +7450,17 @@ relative dimension $d+1$: base changes of smooth morphisms are smooth
 morphisms are smooth (\Cref{lem:pc-smooth-composition}), so the source is smooth over
 $H_d$ (the projection is the base change of the smooth
 $X\to S$ along $H_d\to S$) and then over $S$; the relative dimension
-is $d+1$ (relative dimensions add for composites, and base change of
-$X/S$ of relative dimension $1$ keeps relative dimension $1$).
+is $d+1$, as follows.  All the morphisms in sight are smooth, hence
+flat and locally of finite presentation
+(\Cref{lem:pc-smooth-flat}), so in particular locally of finite type.
+The projection $H_d\times_SX\to H_d$ is the base change of $X\to S$
+along $H_d\to S$, so it again has relative dimension $1$
+(\Cref{lem:pc-relative-dimension-base-change}); it is flat; and
+$H_d\to S$ has relative dimension $d$ by the induction hypothesis.
+Hence the composite $H_d\times_SX\to H_d\to S$ has relative dimension
+$1+d$ (\Cref{lem:pc-relative-dimension-composition}, in its second,
+exact form, whose flatness hypothesis on the first morphism is the
+flatness just recorded).
 Since $\pi$ is finite locally free of degree $d+1\ge1$, it is
 surjective (a finite locally free morphism of positive degree has
 nonempty fibres: over a point $t$ of the target the fibre is a
