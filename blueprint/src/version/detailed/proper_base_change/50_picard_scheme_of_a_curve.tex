@@ -935,7 +935,7 @@ closed fields and \(\mathcal F=\mathcal O_X\), then
 \uses{lem:pc-base-change-map}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-cech-spectral,lem:pc-base-change-map}
+\uses{lem:pcb-cech-spectral,lem:pc-base-change-map,lem:pc-affine-vanishing}
 Since \(X\) is proper over \(k\), it is quasi-compact and
 quasi-separated, hence covered by finitely many affine open subsets
 \(U_1,\dots,U_r\), and their base changes \(U_{j,k'}\) cover
@@ -950,7 +950,8 @@ the Zariski site),
 and \(\underline H^q(\mathcal F)(U_J)=H^q_{\Zar}(U_J,\mathcal F)=0\)
 for \(q>0\), because each intersection
 \(U_J=U_{j_0}\cap\dots\cap U_{j_q}\) is affine (higher Zariski
-cohomology of a quasi-coherent sheaf on an affine scheme vanishes);
+cohomology of a quasi-coherent sheaf on an affine scheme vanishes,
+\Cref{lem:pc-affine-vanishing});
 so the spectral sequence degenerates and
 \(H^i(X,\mathcal F)=\check H^i(\mathfrak U,\mathcal F)\).  For every multi-index \(J=\{j_0<\dots<j_q\}\), the
 intersection \(U_J:=U_{j_0}\cap\dots\cap U_{j_q}\) is affine and
@@ -1455,7 +1456,7 @@ with \(\pi_f^*t=f\), where \(t\) is the standard coordinate on
 \uses{def:pcb-function-field,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
+\uses{lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,lem:pc-projective-space-separated,lem:pcb-regular-local-domain}
 Write \(\mathbf P^1_k=\operatorname{Proj}k[x_0,x_1]\) with
 coordinate \(t=x_1/x_0\), and cover \(C\) by finitely many affine
 open subsets \(U_\alpha=\operatorname{Spec}A_\alpha\).  We first
@@ -1490,8 +1491,18 @@ morphisms agree there, and they glue: for two morphisms
 open subset, the preimage of the diagonal under
 \((u,v):U_\alpha\cap U_\beta\to\mathbf
 P^1_k\times_k\mathbf P^1_k\) is a closed subset (the diagonal is a
-closed immersion by separatedness of \(\mathbf P^1_k\)) containing
-a dense open, hence is the whole scheme.  We thus obtain a
+closed immersion by separatedness of \(\mathbf P^1_k\),
+\Cref{lem:pc-projective-space-separated} with \(S=\operatorname{Spec}k\)
+and \(n=1\)) containing
+a dense open, hence is the whole scheme.  (The preimage is a closed
+\emph{subscheme}, and that it contains a dense open gives equality with
+all of \(U_\alpha\cap U_\beta\) because \(U_\alpha\cap U_\beta\) is
+reduced: \(C\) is smooth over \(k\), so every local ring
+\(\mathcal O_{C,P}\) is regular (\Cref{lem:pcb-smooth-regular}) and a
+regular local ring is a domain
+(\Cref{lem:pcb-regular-local-domain}), hence every local ring of
+\(C\) is reduced; the ideal sheaf of the preimage vanishes on a dense
+open, and on a reduced scheme that forces it to vanish.)  We thus obtain a
 morphism \(\pi_f:C\to\mathbf P^1_k\) with \(\pi_f^*t=f\).
 \end{proof}
 
