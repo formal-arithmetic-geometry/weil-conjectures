@@ -5262,6 +5262,27 @@ further here.
 
 % ---------------------------------------------------------------------------
 % Cited.
+\begin{lemma}[Affineness may be checked on an affine open covering of the target]
+\label{lem:pc-affine-local-on-target}
+Let $f:X\to S$ be a morphism of schemes.  If there is an affine open
+covering $S=\bigcup_jW_j$ such that $f^{-1}(W_j)$ is affine for every
+$j$, then $f$ is an \termref{def:pc-morphism-conventions}{affine
+morphism}, i.e.\ the preimage of \emph{every} affine open of $S$ is
+affine.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.11
+(Affine morphisms), Lemma~29.11.3 (\stacksproject{01S8}), which states
+that $f$ is affine if and only if there is an affine open covering
+$S=\bigcup W_j$ with all $f^{-1}(W_j)$ affine, if and only if
+$X\cong\underline{\Spec}_S(\mathcal A)$ for a quasi-coherent sheaf of
+$\cO_S$-algebras $\mathcal A$.  Only the implication from the covering
+condition to affineness is used here.  It is not decomposed further.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
 \begin{lemma}[Ampleness from a basis of affine opens $X_s$]
 \label{lem:pc-ample-basis-criterion}
 Let $X$ be a quasi-compact scheme and let $\cL$ be an invertible
@@ -5404,7 +5425,7 @@ canonical identification $\cI_{x_K}=\cI_x\otimes\cO_{X_K}$.
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-flat-field}
+\uses{lem:pc-flat-field,lem:pc-flat-stable-base-change}
 The first assertion is the statement that closed immersions are stable
 under base change (Schemes, Lemma 26.18.2,
 \stacksproject{01JY}): the pullback
@@ -5426,9 +5447,10 @@ $A'$, hence of dimension $2$ over $k$, while its image
 $(t)/(t^2)\subseteq A'$ has dimension $1$.  If $g$ is flat, however,
 $g^*$ is exact, so $g^*\cI_Z\to\cO_{X'}$ is injective and maps
 isomorphically onto its image; that is, $\cI_{Z'}=g^*\cI_Z$.  A base
-change along a field extension $K/k$ is flat, being the base change of
-the flat morphism $\Spec K\to\Spec k$, so this applies to $X_K\to X$
-and gives $\cI_{x_K}=\cI_x\otimes\cO_{X_K}$.
+change along a field extension $K/k$ is flat: the morphism
+$\Spec K\to\Spec k$ is flat (\Cref{lem:pc-flat-field}), and flatness is
+stable under base change (\Cref{lem:pc-flat-stable-base-change}).  So
+this applies to $X_K\to X$ and gives $\cI_{x_K}=\cI_x\otimes\cO_{X_K}$.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -5599,6 +5621,22 @@ product), the sequence $0\to M'\otimes_AC\to M\otimes_AC\to
 M''\otimes_AC\to0$ is exact: $C$ is flat over $A$.
 \end{proof}
 
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Flat morphisms are stable under base change]
+\label{lem:pc-flat-stable-base-change}
+Let $f:X\to S$ be a flat morphism of schemes and let $g:S'\to S$ be an
+arbitrary morphism.  Then the base change $f':X\times_SS'\to S'$ is
+flat.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.26 (Flat
+morphisms), Lemma~29.26.8 (\stacksproject{01U9}), whose statement is
+``the base change of a flat morphism is flat''.  It is not decomposed
+here.
+\end{proof}
 
 % Decomposed.
 \begin{lemma}[Every morphism to a field is flat]\label{lem:pc-flat-field}
@@ -5874,6 +5912,30 @@ vanishing above, and not flasqueness, is what makes the terms of the
 \end{proof}
 
 % ----------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Leray's acyclicity lemma]
+\label{lem:pc-leray-acyclicity}
+Let $F:\mathcal A\to\mathcal B$ be an additive functor between abelian
+categories.
+Let $A^\bullet$ be a bounded below complex of right $F$-acyclic objects
+such that $RF$ is defined at $A^\bullet$.  Then the canonical map
+\[
+F(A^\bullet)\longrightarrow RF(A^\bullet)
+\]
+is an isomorphism in $D^+(\mathcal B)$; that is, $A^\bullet$ computes
+$RF$.
+In particular, a bounded below resolution of an object by objects
+acyclic for $F$ computes $RF$ of that object, provided $RF$ is defined
+there.
+\uses{def:pc-derived-category}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Derived Categories, Section~13.16
+(Higher derived functors), Lemma~13.16.7 (\stacksproject{015E}),
+Leray's acyclicity lemma.  It is not decomposed here.
+\end{proof}
+
+% ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[The Čech resolution]\label{lem:pc-cech-resolution}
 Let $X$ be a quasi-compact, quasi-separated scheme, let
@@ -5897,7 +5959,7 @@ in the proof of \Cref{lem:pc-rf-perfect-base-change} below.
 \uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-immersion-acyclic}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-immersion-acyclic}
+\uses{lem:pc-affine-immersion-acyclic,lem:pc-affine-local-on-target,lem:pc-leray-acyclicity,lem:pc-sheaves-of-modules-grothendieck}
 \emph{Exactness.}  At a point $x\in X$, with
 $I_x:=\{i:x\in U_i\}$, the stalk of the resolution is the alternating
 Čech complex of the finite set $I_x$ with constant coefficients in
@@ -5920,7 +5982,8 @@ is exact.
 
 \emph{Acyclicity and the derived statement.}  Each $j_{U_J}:U_J\to X$
 is an affine morphism: affineness of a morphism may be checked on an
-affine open covering of the target, and for the covering
+affine open covering of the target
+(\Cref{lem:pc-affine-local-on-target}), and for the covering
 $X=\bigcup_iU_i$ one has $j_{U_J}^{-1}(U_i)=U_{J\cup\{i\}}$, which is
 affine by hypothesis.  Hence
 \Cref{lem:pc-affine-immersion-acyclic} applies to each $j_{U_J}$: the
@@ -5931,11 +5994,18 @@ $f:X\to S$ with $S$ affine the composite $f\circ j_{U_J}:U_J\to S$ is a
 morphism of affine schemes, hence affine, so the same lemma gives
 $R^qf_*(j_{U_J,*}\cF|_{U_J})=0$ for $q>0$ and
 $f_*(j_{U_J,*}\cF|_{U_J})=(f\circ j_{U_J})_*\cF|_{U_J}$ quasi-coherent:
-the terms are acyclic for $f_*$ as well.  A resolution by objects
-acyclic for a left exact functor computes its right derived functor;
-hence $R\Gamma(X,\cF)$ is the complex of global sections of the
-resolution, and for $f:X\to S$ with $S$ affine, $Rf_*\cF$ is the total
-complex of the $f_*$'s of the resolution, i.e.\ the complex
+the terms are acyclic for $f_*$ as well.  Leray's acyclicity lemma
+(\Cref{lem:pc-leray-acyclicity}) now applies to the resolution, for
+$F=\Gamma(X,-)$ and for $F=f_*$: its two hypotheses hold here because
+the resolution is a bounded complex, its $p$-th term being indexed by
+the subsets $J\subseteq\{1,\dots,t\}$ with $|J|=p+1$ and hence zero for
+$p\ge t$, and because $\cO_X$-modules form a Grothendieck abelian
+category, so they have enough injectives
+(\Cref{lem:pc-sheaves-of-modules-grothendieck}) and $R\Gamma(X,-)$ and
+$Rf_*$ are defined on all of $D^+(\cO_X)$, in particular at this
+complex.  Hence $R\Gamma(X,\cF)$ is the complex of global sections of
+the resolution, and for $f:X\to S$ with $S$ affine, $Rf_*\cF$ is the
+total complex of the $f_*$'s of the resolution, i.e.\ the complex
 $\prod_J\;(f\circ j_{U})_*\cF|_{U_J}$.
 \end{proof}
 
