@@ -6377,10 +6377,15 @@ topological space of $X$ is a finite discrete set of closed points.
 This is a cited external input: Varieties, Section~33.20 (Algebraic schemes),
 Lemma~33.20.2 (\stacksproject{06LH}); a scheme of finite type over $k$ is
 what is there called an \emph{algebraic $k$-scheme} (Varieties,
-Definition~33.20.1, \stacksproject{06LG}).  The last sentence is the
-conjunction of the first two: each member of the disjoint union is the
-spectrum of a local ring, hence a single closed point, and there are finitely
-many of them because an affine scheme is quasi-compact.  It is not decomposed
+Definition~33.20.1, \stacksproject{06LG}).  The last sentence is not part of
+the source's statement; it is derived from the first, in the order the
+source's own proof runs.  Being
+\termref{def:pc-morphism-conventions}{of finite type} over $k$, $X$ is
+quasi-compact, so the disjoint union has finitely many members; each of them
+is the spectrum of a local Artinian ring, hence a single point, and that point
+is closed because its complement is the union of the remaining members, which
+are open.  So the derivation does not pass through the affineness clause,
+which is cited and not derived.  It is not decomposed
 here.
 \end{proof}
 
@@ -10257,7 +10262,7 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pc-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-curve,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
 \emph{Step 1: an ample polarisation.}  The smooth projective curve $X$
 carries a closed immersion $i:X\to\PP^n_k$; by \Cref{lem:pc-very-ample-ample}
 the module $\cL_0^{\bullet}:=i^*\cO_{\PP^n}(1)$ is ample on $X$ and, by
@@ -10308,15 +10313,17 @@ Choose a non-zero $s\in H^0(X_K,\cL)$.  Since $s\neq0$ and $X_K$ is
 integral, $s_\eta\neq0$ at the generic point, so the zero scheme
 $Z(s)$ is a proper closed subset of $X_K$, hence a finite set of closed
 points.  Indeed $X_K$ is irreducible (\Cref{prop:pc-XK-integral}) of
-dimension $1$ (\Cref{lem:pc-dim-base-change}), so every closed subset
-$Z\subsetneq X_K$ has $\dim Z=0$: if an irreducible closed
+dimension $1$ (\Cref{lem:pc-dim-base-change}), so every non-empty closed
+subset $Z\subsetneq X_K$ has $\dim Z=0$: if an irreducible closed
 $Z'\subseteq Z$ had $\dim Z'\ge1$, a chain
 $Z'_0\subsetneq Z'_1\subseteq Z'$ of irreducible closed subsets of $Z'$
 would give the chain $Z'_0\subsetneq Z'_1\subsetneq X_K$ of irreducible
 closed subsets of $X_K$ --- the last inclusion is strict because
-$Z'_1\subseteq Z\subsetneq X_K$ --- contradicting $\dim X_K=1$.  As
-$Z(s)$ is a closed subscheme of $X_K$ it is of finite type over $K$, so
-\Cref{lem:pc-dim-zero-finite} applies to it.  By density there is an
+$Z'_1\subseteq Z\subsetneq X_K$ --- contradicting $\dim X_K=1$.  If
+$Z(s)=\emptyset$ the claim is trivial; otherwise $\dim Z(s)=0$, and as $Z(s)$ is a closed subscheme of $X_K$ it is
+of finite type over $K$, so \Cref{lem:pc-dim-zero-finite} applies to it.
+(The exclusion is needed: $\dim\emptyset=-\infty$, not $0$, by
+\Cref{def:pc-dimension}.)  By density there is an
 $x\in X(k)$ with
 $s(x_K)\neq0$ (i.e.\ $s$ does not vanish at $x_K$: $s_{x_K}\notin
 \mathfrak m_{x_K}\cL_{x_K}$).
