@@ -10,43 +10,13 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 /-!
 # Complements on pullback squares
 
-If only the first leg of a cospan is changed, the induced morphism of pullbacks is a base
-change of the morphism of legs (`CategoryTheory.Limits.isPullback_pullback_map_left`). We
-also record that a pullback square can be cancelled against a monomorphism
-(`CategoryTheory.IsPullback.comp_mono_iff`) and that two morphisms into the corner of a
-pullback square agree as soon as their composites with both legs do
-(`CategoryTheory.IsPullback.fst_comp_eq_snd_comp`).
+We record that a commutative square can be cancelled against a monomorphism
+(`CategoryTheory.IsPullback.comp_mono_iff`) and that two morphisms out of the legs of a
+pullback square agree on the chosen pullback as soon as their composites with the legs of a
+realization of the square agree (`CategoryTheory.IsPullback.fst_comp_eq_snd_comp`).
 -/
 
 @[expose] public section
-
-namespace CategoryTheory.Limits
-
-variable {C : Type*} [Category C] [HasPullbacks C]
-
-/-- **A morphism of the first leg of a cospan induces a base-change square on pullbacks.**
-For a cospan `A --m--> B --p--> T <--π-- S`, the square
-
-```
-  A ×_T S --pullback.map--> B ×_T S
-     |                         |
-    fst                       fst
-     |                         |
-     v                         v
-     A ----------m---------->  B
-```
-
-is a pullback square. -/
-lemma isPullback_pullback_map_left {A B T S : C} (m : A ⟶ B) (p : B ⟶ T) (π : S ⟶ T) :
-    IsPullback (pullback.fst (m ≫ p) π)
-      (pullback.map (m ≫ p) π p π m (𝟙 S) (𝟙 T) (by simp) (by simp)) m (pullback.fst p π) := by
-  refine IsPullback.of_bot ?_ (by simp) (IsPullback.of_hasPullback p π)
-  have h : pullback.map (m ≫ p) π p π m (𝟙 S) (𝟙 T) (by simp) (by simp) ≫ pullback.snd p π =
-      pullback.snd (m ≫ p) π := by simp
-  rw [h]
-  exact IsPullback.of_hasPullback (m ≫ p) π
-
-end CategoryTheory.Limits
 
 namespace CategoryTheory.IsPullback
 
