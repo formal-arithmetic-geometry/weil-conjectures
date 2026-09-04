@@ -17,6 +17,10 @@ are the localization of `Γ(X, ⊤)` away from `f`. This is the analogue of
 quasi-compact quasi-separated, deduced from the qcqs lemma
 `AlgebraicGeometry.isLocalization_basicOpen_of_qcqs`.
 
+We deduce `AlgebraicGeometry.exists_pow_mul_eq_appTop_of_qcqs`: a section over
+`X.basicOpen f` becomes the restriction of a global section after multiplication by a power
+of `f`.
+
 We also record `AlgebraicGeometry.Scheme.Opens.quasiCompact_ι`: the inclusion of a
 quasi-compact open of a quasi-separated scheme is a quasi-compact morphism.
 -/
@@ -46,6 +50,21 @@ theorem Γ_restrict_isLocalization_of_qcqs (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (f : Γ(X, ⊤)) :
     IsLocalization.Away f Γ(X.basicOpen f, ⊤) :=
   isLocalization_of_eq_basicOpen_of_qcqs f _ (Opens.isOpenEmbedding_obj_top _)
+
+/-- **Clearing denominators on a basic open of a qcqs scheme**: every section over
+`X.basicOpen f` becomes the restriction of a global section after multiplication by a power
+of `f`. This is the surjectivity half of `Γ_restrict_isLocalization_of_qcqs`. -/
+theorem exists_pow_mul_eq_appTop_of_qcqs {X : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] (f : Γ(X, ⊤)) (g : Γ((X.basicOpen f).toScheme, ⊤)) :
+    ∃ (b : Γ(X, ⊤)) (m : ℕ),
+      g * (X.basicOpen f).ι.appTop f ^ m = (X.basicOpen f).ι.appTop b := by
+  have := Γ_restrict_isLocalization_of_qcqs X f
+  obtain ⟨⟨b, q⟩, hq⟩ := IsLocalization.surj (M := Submonoid.powers f) g
+  obtain ⟨m, hm⟩ := q.2
+  refine ⟨b, m, ?_⟩
+  have halg : ⇑(algebraMap Γ(X, ⊤) Γ(X.basicOpen f, ⊤)) =
+      ⇑((X.basicOpen f).ι.appTop) := rfl
+  rwa [halg, ← hm, map_pow] at hq
 
 /-- The inclusion of a quasi-compact open of a quasi-separated scheme is a quasi-compact
 morphism. -/

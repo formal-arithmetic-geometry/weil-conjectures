@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.QuasiAffine
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
@@ -536,39 +537,11 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
     (fun x : X ↦ (X.basicOpen (r x) : Set X)) (fun x ↦ (X.basicOpen (r x)).2)
     (fun x _ ↦ Set.mem_iUnion.mpr ⟨x, hxr x⟩)
   -- Step 3: clear denominators, using the qcqs lemma
-  have hnum : ∀ (x : X) (g : Γ(X.basicOpen (r x), ⊤)), ∃ (b : Γ(X, ⊤)) (m : ℕ),
-      g * (X.basicOpen (r x)).ι.appTop (r x) ^ m = (X.basicOpen (r x)).ι.appTop b := by
-    intro x g
-    have := Γ_restrict_isLocalization_of_qcqs X (r x)
-    obtain ⟨⟨b, q⟩, hq⟩ := IsLocalization.surj (M := Submonoid.powers (r x)) g
-    obtain ⟨m, hm⟩ := q.2
-    refine ⟨b, m, ?_⟩
-    have halg : ⇑(algebraMap Γ(X, ⊤) Γ(X.basicOpen (r x), ⊤)) =
-        ⇑((X.basicOpen (r x)).ι.appTop) := rfl
-    rwa [halg, ← hm, map_pow] at hq
-  choose b m hbm using hnum
+  choose b m hbm using fun (x : X) (g : Γ(X.basicOpen (r x), ⊤)) ↦
+    exists_pow_mul_eq_appTop_of_qcqs (r x) g
   -- Step 4: finite-type generators over each affine chart
-  have hgens : ∀ x : X, ∃ s : Finset Γ(X.basicOpen (r x), ⊤),
-      ∀ y : Γ(X.basicOpen (r x), ⊤), y ∈ Subring.closure
-        (Set.range (π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop ∪ ↑s) := by
-    intro x
-    have : IsAffine (X.basicOpen (r x)).toScheme := hraff x
-    have : IsAffine (V x).toScheme := hVaff x
-    have hft : RingHom.FiniteType ((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom :=
-      HasRingHomProperty.appTop (P := @LocallyOfFiniteType)
-        (π.resLE (V x) (X.basicOpen (r x)) (hrV x)) inferInstance
-    algebraize [((π.resLE (V x) (X.basicOpen (r x)) (hrV x)).appTop).hom]
-    have hFT : Algebra.FiniteType Γ(V x, ⊤) Γ(X.basicOpen (r x), ⊤) := hft
-    obtain ⟨s, hs⟩ := hFT.out
-    refine ⟨s, fun y ↦ ?_⟩
-    have hy : y ∈ Algebra.adjoin Γ(V x, ⊤) (↑s : Set Γ(X.basicOpen (r x), ⊤)) := by
-      rw [hs]; exact Algebra.mem_top
-    induction hy using Algebra.adjoin_induction with
-    | mem z hz => exact Subring.subset_closure (Set.mem_union_right _ hz)
-    | algebraMap c => exact Subring.subset_closure (Set.mem_union_left _ ⟨c, rfl⟩)
-    | add _ _ _ _ h1 h2 => exact add_mem h1 h2
-    | mul _ _ _ _ h1 h2 => exact mul_mem h1 h2
-  choose s hs using hgens
+  choose s hs using fun x : X ↦
+    exists_finset_mem_subring_closure_of_locallyOfFiniteType π (hrV x) (hraff x) (hVaff x)
   -- Step 5: assemble the global tuple of sections
   let σ : Type u := {x : X // x ∈ t} ⊕
     (Σ jj : {x : X // x ∈ t}, {g : Γ(X.basicOpen (r jj.1), ⊤) // g ∈ s jj.1})
