@@ -449,6 +449,61 @@ become the standard isomorphisms \(\mathcal O_U\otimes\mathcal O_U\to
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Associativity, commutativity and the unit for \(\otimes\)]
+\label{lem:pcb-tensor-monoidal}
+Let \((X,\mathcal O_X)\) be a ringed space, for instance a scheme, and
+let \(\mathcal F,\mathcal G,\mathcal H\) be \(\mathcal O_X\)-modules.
+There are isomorphisms of \(\mathcal O_X\)-modules
+\[
+ (\mathcal F\otimes_{\mathcal O_X}\mathcal G)\otimes_{\mathcal O_X}
+ \mathcal H\;\cong\;\mathcal F\otimes_{\mathcal O_X}
+ (\mathcal G\otimes_{\mathcal O_X}\mathcal H),
+ \qquad
+ \mathcal F\otimes_{\mathcal O_X}\mathcal G\;\cong\;
+ \mathcal G\otimes_{\mathcal O_X}\mathcal F,
+ \qquad
+ \mathcal F\otimes_{\mathcal O_X}\mathcal O_X\;\cong\;\mathcal F,
+\]
+canonical and functorial in each of their arguments.  No
+quasi-coherence hypothesis is needed.
+\end{lemma}
+\begin{proof}
+The associativity and commutativity isomorphisms are a cited external
+input: Sheaves of Modules, Section~17.16 (\stacksproject{01CA}) states
+both, in the running text and in exactly this form -- ``the tensor
+product of modules \(M,N\) over a ring \(R\) satisfies symmetry
+\(\dots\) hence the same holds for tensor products of sheaves of
+modules'', displayed as \(\mathcal F\otimes\mathcal G=\mathcal
+G\otimes\mathcal F\) functorial in \(\mathcal F,\mathcal G\), and
+``since tensor product of modules satisfies associativity we also get
+canonical functorial isomorphisms''.  The section numbers neither of
+the two as a lemma, so the citation is to the section; they are not
+decomposed here.
+
+The unit isomorphism is \emph{not} stated in that section, so we give
+it.  Multiplication \(\mathcal F(U)\times\mathcal O_X(U)\to
+\mathcal F(U)\), \((s,a)\mapsto as\), is \(\mathcal
+O_X(U)\)-bilinear and compatible with restriction, so it is a bilinear
+map of \(\mathcal O_X\)-modules \(\mathcal F\times\mathcal
+O_X\to\mathcal F\); by the universal property of the tensor product
+recorded in the same Section~17.16, \(\Hom_{\mathcal O_X}(\mathcal
+F\otimes_{\mathcal O_X}\mathcal G,\mathcal H)=
+\mathrm{Bilin}_{\mathcal O_X}(\mathcal F\times\mathcal G,\mathcal
+H)\), it corresponds to a map of \(\mathcal O_X\)-modules
+\(\mathcal F\otimes_{\mathcal O_X}\mathcal O_X\to\mathcal F\).
+By the stalk
+formula for the tensor product, Sheaves of Modules, Lemma~17.16.1
+(\stacksproject{01CB}), its stalk at \(x\in X\) is the multiplication
+map \(\mathcal F_x\otimes_{\mathcal O_{X,x}}\mathcal O_{X,x}\to
+\mathcal F_x\), which is an isomorphism of \(\mathcal O_{X,x}\)-modules.
+A map of sheaves that is bijective on all stalks is an isomorphism
+(Sheaves, Lemma~6.16.1(3), \stacksproject{007T}), so the displayed map
+is an isomorphism, and it is functorial in \(\mathcal F\) because
+multiplication is.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-pic-group)
 % Decomposed.
 \begin{lemma}[\(\operatorname{Pic}(C)\) is a group]
@@ -461,9 +516,9 @@ group: associative with unit \(\mathcal O_C\), with inverse
 \uses{def:pcb-curves,def:pcb-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-invertible-dual}
+\uses{lem:pcb-invertible-dual,lem:pcb-tensor-monoidal}
 Associativity, commutativity and the unit property of \(\otimes\) are
-the standard properties of tensor product of quasi-coherent modules.
+\Cref{lem:pcb-tensor-monoidal}, applied to the ringed space \(C\).
 By \Cref{lem:pcb-invertible-dual},
 \(\mathcal L\otimes\mathcal L^{\vee}\cong\mathcal O_C\), so
 \(\mathcal L^{\vee}\) is an inverse.
@@ -1207,6 +1262,43 @@ finite set, and every point of \(Z\) is closed because
 \end{proof}
 
 % ----------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A finitely generated field of transcendence degree one is
+finite over \(k(t)\)]
+\label{lem:pcb-trdeg-one-finite}
+Let \(k\) be a field and let \(K/k\) be a finitely generated field
+extension with \(\operatorname{trdeg}_kK=1\).  Let \(t\in K\) be
+transcendental over \(k\).  Then \(K\) is a finite extension of the
+subfield \(k(t)\subseteq K\).
+\end{lemma}
+\begin{proof}
+Two cited external inputs, in two steps.
+
+\emph{Step 1: \(K/k(t)\) is algebraic.}  Fields, Lemma~9.26.5
+(\stacksproject{030H}) states that for field extensions \(L/K'/k\) one
+has \(\operatorname{trdeg}_k(L)=\operatorname{trdeg}_{K'}(L)+
+\operatorname{trdeg}_k(K')\).  Applied to \(K/k(t)/k\) this gives
+\(1=\operatorname{trdeg}_kK=\operatorname{trdeg}_{k(t)}K+
+\operatorname{trdeg}_kk(t)\).  Since \(t\) is transcendental over
+\(k\), the singleton \(\{t\}\) is a transcendence basis of \(k(t)\)
+over \(k\), so \(\operatorname{trdeg}_kk(t)=1\) and therefore
+\(\operatorname{trdeg}_{k(t)}K=0\): every element of \(K\) is
+algebraic over \(k(t)\).
+
+\emph{Step 2: an algebraic finitely generated extension is finite.}
+Write \(K=k(\alpha_1,\dots,\alpha_n)\), which is possible because
+\(K/k\) is finitely generated as a field extension; then
+\(K=k(t)(\alpha_1,\dots,\alpha_n)\), and each \(\alpha_i\) is
+algebraic over \(k(t)\) by Step~1.  Fields, Lemma~9.8.6
+(\stacksproject{09GH}) states that if \(\alpha_1,\dots,\alpha_n\) in
+an extension field of a field \(F\) are algebraic over \(F\), then
+\(F(\alpha_1,\dots,\alpha_n)/F\) is finite.  With \(F=k(t)\) this
+gives that \(K/k(t)\) is finite.
+
+Neither cited input is decomposed here.
+\end{proof}
+
+% ----------------------------------------------------------------------------
 % [reproduced from file 06] (label: lem:pcb-morphism-from-function)
 % Decomposed.
 \begin{lemma}[Rational functions define finite morphisms to \(\mathbf P^1\)]
@@ -1219,7 +1311,7 @@ finite surjective and flat of degree \([k(C):k(f)]\).
 \uses{def:pcb-function-field,lem:pcb-rational-function-morphism,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-dim0-finite,lem:pcb-rational-function-morphism,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,lem:pcb-finite-iff-proper-finite-fibres}
+\uses{lem:pcb-dim0-finite,lem:pcb-rational-function-morphism,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-trdeg-one-finite}
 By \Cref{lem:pcb-rational-function-morphism}, \(\pi_f\) is defined
 with \(\pi_f^*t=f\).
 
@@ -1260,9 +1352,10 @@ pushforward is locally free, so \(\pi_f\) is finite flat.  Its degree
 is the rank of the locally free sheaf \(\mathcal E\), which equals
 \([k(C):k(f)]\): the generic stalk of \(\mathcal E\) is the field
 \(k(C)\), viewed as a \(k(\mathbf P^1)=k(t)\)-vector space (and
-\(k(C)\) is a finite extension of \(k(t)\) by standard field theory:
-a finitely generated field of transcendence degree one over \(k\) is
-finite over \(k(t)\) for any transcendental \(t\)).
+\(k(C)\) is a finite extension of \(k(t)\) by
+\Cref{lem:pcb-trdeg-one-finite}: \(k(C)\) is finitely generated of
+transcendence degree one over \(k\), and \(t\) is transcendental
+over \(k\)).
 \end{proof}
 
 % ----------------------------------------------------------------------------
@@ -3147,6 +3240,45 @@ uniqueness is again the injectivity of Yoneda.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Pullback is functorial]
+\label{lem:pc-pullback-composition}
+Let $f:(X,\cO_X)\to(Y,\cO_Y)$ and $g:(Y,\cO_Y)\to(Z,\cO_Z)$ be
+morphisms of ringed spaces, for instance morphisms of schemes.
+\begin{enumerate}
+\item There is a canonical isomorphism of functors
+$(g\circ f)^*\cong f^*\circ g^*$ on $\cO_Z$-modules, and
+$\id_X^*\cong\id$ on $\cO_X$-modules.
+\item Consequently, on isomorphism classes the two functoriality
+equations hold on the nose: for every $\cO_Z$-module $\cG$ one has
+$[(g\circ f)^*\cG]=[f^*g^*\cG]$, and $[\id_X^*\cF]=[\cF]$ for every
+$\cO_X$-module $\cF$.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+Part~(1) for the composition is a cited external input: Sheaves,
+Lemma~6.26.3 (\stacksproject{0097}), whose statement reads ``Let
+$f:X\to Y$ and $g:Y\to Z$ be morphisms of ringed spaces.  The functors
+$(g\circ f)_*$ and $g_*\circ f_*$ are equal.  There is a canonical
+isomorphism of functors $(g\circ f)^*\cong f^*\circ g^*$.''  It is not
+decomposed here.  Note that the cited statement gives an
+\emph{isomorphism} of functors, not an equality; the identity case
+$\id_X^*\cong\id$ is not part of it and is immediate from the definition
+$f^*\cG=f^{-1}\cG\otimes_{f^{-1}\cO_Y}\cO_X$ of the pullback, since
+$\id^{-1}$ is the identity functor and the remaining tensor factor is
+the unit isomorphism $\cF\otimes_{\cO_X}\cO_X\cong\cF$.
+
+Part~(2) is how (1) is used below.  A canonical isomorphism of
+functors $(g\circ f)^*\cong f^*\circ g^*$ produces, for each $\cG$, an
+isomorphism $(g\circ f)^*\cG\cong f^*g^*\cG$ of $\cO_X$-modules, hence
+an equality of their isomorphism classes; so the induced maps on sets
+of isomorphism classes are literally equal, which is the form in which
+the statement is applied to Picard groups.  The same remark turns
+$\id^*\cong\id$ into $[\id^*\cF]=[\cF]$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[The Picard presheaf is a functor]\label{lem:pc-pic-presheaf-functorial}
 Let $f:X\to S$ be a morphism of schemes.  The assignment of
@@ -3161,17 +3293,19 @@ $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
 \leanok
 \end{lemma}
 \begin{proof}
-\uses{def:pc-picard-presheaf,def:pc-base-change,def:pc-invertible-module}
+\uses{def:pc-picard-presheaf,def:pc-base-change,def:pc-invertible-module,lem:pc-pullback-composition}
 \leanok
 If $\cL$ is invertible on $X_T$, then $g_X^*\cL$ is invertible on
 $X_{T'}$: the question is local on $X_{T'}$, and over the preimage of an
 open subset on which $\cL$ is free of rank one, $g_X^*\cL$ is the
 pullback of a free module of rank one, hence again free of rank one,
 because $g_X^*$ takes $\cO_{X_T}$ to $\cO_{X_{T'}}$ and commutes with
-direct sums.  The two functoriality equations are the
-standard $(g_1g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$ for the pullback
-functor (a straightforward identity of the corresponding module
-sections), and isomorphisms are sent to isomorphisms, so the map is
+direct sums.  The two functoriality equations
+$(g_1g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$ are
+\Cref{lem:pc-pullback-composition}(2), which is the form of
+\Cref{lem:pc-pullback-composition}(1) that holds on isomorphism
+classes and so as an equality of maps $\Pic(X_T)\to\Pic(X_{T'})$;
+and isomorphisms are sent to isomorphisms, so the map is
 well defined on isomorphism classes.
 \end{proof}
 
