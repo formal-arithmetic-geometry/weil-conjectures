@@ -5842,6 +5842,25 @@ This is a cited external input: Morphisms of Schemes, Lemma~29.42.6
 
 % ---------------------------------------------------------------------------
 % Cited.
+\begin{lemma}[Proper source and separated target: the morphism is proper and its image is closed]
+\label{lem:pc-proper-to-separated-target}
+Let $S$ be a scheme and let $X\to Y$ be a morphism of schemes over $S$, with
+$Y$ \termref{def:pcb-scheme-conventions}{separated} over $S$.
+\begin{enumerate}
+\item If $X\to S$ is universally closed, then $X\to Y$ is universally closed.
+\item If $X$ is proper over $S$, then $X\to Y$ is proper.
+\end{enumerate}
+In particular, in both cases the image of $X$ in $Y$ is a closed subset
+of $Y$.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Section~29.42 (Proper
+morphisms), Lemma~29.42.7 (\stacksproject{01W6}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
 \begin{lemma}[Projective space over a base is separated and universally closed]
 \label{lem:pc-projective-space-separated}
 Let $S$ be a scheme and let $n\ge0$.  The structure morphism
@@ -6027,7 +6046,7 @@ $1$.
 \uses{def:pc-scheme,def:pc-invertible-module,def:pc-ample,def:pcb-ample}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-relative-very-ample-criterion,lem:pc-immersion-closed-image}
+\uses{lem:pc-coherent-hi,lem:pc-immersion-closed-image,lem:pc-proper-to-separated-target,lem:pc-relative-very-ample-criterion}
 This is a cited external input: Morphisms of Schemes, Lemma~29.40.5
 (\stacksproject{01VU}), which states
 the equivalence relatively --- for $f:X\to S$ with $S$ quasi-compact
@@ -6059,7 +6078,9 @@ $X$ is proper over $k$ (\Cref{lem:pc-coherent-hi}), so $r_{\cL,\psi}$
 is exactly the morphism $X\to\PP^N_k$, $N+1=\dim_kH^0(X,\cL)$, given
 by the complete linear system $|\cL|$; and since $X$ is proper over
 $k$ while $\PP^N_k$ is
-separated over $k$, that immersion has closed image and is therefore a
+separated over $k$, that immersion has closed image
+(\Cref{lem:pc-proper-to-separated-target}, applied over $S=\Spec(k)$ to the
+immersion $X\to\PP^N_k$) and is therefore a
 closed immersion (\Cref{lem:pc-immersion-closed-image}).  So $f$-very ampleness over $\Spec(k)$ is very
 ampleness in the sense of \Cref{def:pcb-ample}.  It is not decomposed
 here.
@@ -7588,7 +7609,7 @@ $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
 \uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pc-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-immersion-closed-image,lem:pc-locally-noetherian-quasi-separated}
+\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-immersion-closed-image,lem:pc-locally-noetherian-quasi-separated,lem:pc-proper-to-separated-target}
 By definition of very ampleness there is an immersion
 $i:X_K\to\mathbf P^N_K$ with $i^*\cO_{\mathbf P^N}(1)=\cL_K$.  The
 sections $x_1,\dots,x_N$ of $\cO_{\mathbf P^N}(1)$ pull back to
@@ -7640,7 +7661,9 @@ since $f_*\cL=H^0(X,\cL)$, finite-dimensional because $X$ is proper
 over $k$ (\Cref{lem:pc-coherent-hi}), so that $r_{\cL}$ is the
 morphism $X\to\PP^M_k$, $M+1=\dim_kH^0(X,\cL)$, given by $|\cL|$.
 Second, $X$ is proper over $k$ while $\PP^M_k$ is separated over $k$,
-so that immersion has closed image and is therefore a closed
+so that immersion has closed image
+(\Cref{lem:pc-proper-to-separated-target}, applied over $S=\Spec(k)$ to the
+immersion $X\to\PP^M_k$) and is therefore a closed
 immersion (\Cref{lem:pc-immersion-closed-image}).  Hence $\cL$ is very ample over $k$ in the sense of
 \Cref{def:pcb-ample}; and it is ample there too, a very ample module
 being ample (the
@@ -7699,12 +7722,14 @@ over $k$ (\Cref{lem:pc-h0-proper-variety}(2)).
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible,lem:pc-h0-proper-variety}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-proper-to-separated-target}
 \emph{(1) ($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
 $\cL^{\otimes m}=i^*\cO(1)$.  Since $X$ is proper, the immersion is a
-closed immersion (the image of the proper $X$ is closed, and an
+closed immersion (the image of the proper $X$ in the target
+$\mathbf P^N_k$, which is separated over $k$, is closed,
+\Cref{lem:pc-proper-to-separated-target}, and an
 immersion with closed image is a closed immersion,
 \Cref{lem:pc-immersion-closed-image}).
 Choose $x_0\in X$ and a section $s\in H^0(X,\cL^{\otimes m})$ with
@@ -9962,14 +9987,17 @@ its Zariski sheafification is trivial.
 \uses{def:pc-picard-group,def:pc-invertible-module,def:pc-fppf-site}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-invertible-module,def:pc-fppf-site}
+\uses{def:pc-invertible-module,def:pc-fppf-site,lem:pc-zariski-coverings-are-fppf}
 Let $T$ be a scheme over $S$ and let $\cL$ be an invertible
 $\cO_T$-module, representing a class in $\Pic(T)$.  By
 \Cref{def:pc-invertible-module} an invertible module is Zariski-locally
 free of rank one, so there is a Zariski open covering
 $\{T_i\to T\}$ with $\cL|_{T_i}\cong\cO_{T_i}$, i.e.\ the restriction
 of the class of $\cL$ to each $T_i$ is the unit of $\Pic(T_i)$.  A
-Zariski covering is an fppf covering, so every section of the presheaf
+Zariski covering is an fppf covering
+(\Cref{lem:pc-zariski-coverings-are-fppf}: affine-locally the maps
+$\Spec(A_f)\to\Spec(A)$ are flat and of finite presentation, $A\to A_f$
+being the localization), so every section of the presheaf
 $T\mapsto\Pic(T)$ vanishes locally, and a presheaf all of whose
 sections vanish locally has trivial sheafification.
 \end{proof}
