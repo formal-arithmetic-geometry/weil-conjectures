@@ -7690,6 +7690,71 @@ which is the identity $ds+sd=\mathrm{id}$, with $s=h$, in the exact form
 in which it holds: on the base-changed complex, with no sign or
 degree-shift correction.
 
+\emph{The bottom degree.}  The identity just proved presupposes $r\ge1$,
+since $h^r$ was defined only for $r\ge1$; it extends to $r=0$ once
+$D^\bullet$ is augmented in degree $-1$.  Under the identification
+$D^r=C^{r+1}$ used above, degree $-1$ is $C^0=N$, so put
+\[
+D^{-1}:=N,\qquad
+d^{-1}_D:=\widetilde\psi:D^{-1}=N\longrightarrow B\otimes_AN=D^0,
+\]
+which is the case $r=-1$ of the formula
+$d^r_D=\sum_{k=1}^{r+2}(-1)^{k-1}\delta^{r+1}_k$ (one term only,
+$\delta^0_1=\widetilde\psi$).  The augmented complex is then
+\[
+0\to D^{-1}=N\xrightarrow{\ \widetilde\psi\ }D^0=B\otimes_AN
+\xrightarrow{\ d^0_D\ }D^1=B\otimes_AB\otimes_AN
+\xrightarrow{\ d^1_D\ }D^2\to\cdots,
+\]
+and it is a complex in degree $-1$ as well:
+$d^0_D\circ d^{-1}_D=(\delta^1_1-\delta^1_2)\circ\delta^0_1=0$ is the
+case $r=0$ of the face identity
+$\delta^{r+1}_{r+2}\circ\delta^r_{r+1}=\delta^{r+1}_{r+1}\circ\delta^r_{r+1}$
+proved above, i.e.\ once more the cocycle condition.  Define
+\[
+h^0:D^0=B\otimes_AN\longrightarrow D^{-1}=N,\qquad
+h^0(b\otimes n):=bn,
+\]
+which is ``multiply the first two factors'' in the only sense available
+in degree $0$: $D^0$ has a single $B$-factor, and it is multiplied into
+$N$.  Of the two identities used for $r\ge1$, the first persists
+verbatim,
+\[
+h^1\circ\delta^1_1=\mathrm{id}_{D^0},
+\]
+because $\delta^1_1$ inserts $1$ after the first slot and $h^1$
+multiplies the two slots together again.  The second, in its only
+instance $k=2$,
+\[
+h^1\circ\delta^1_2=\delta^0_1\circ h^0,
+\]
+holds here for a different reason: the slots are \emph{not} disjoint,
+since the top face $\delta^1_2$ writes $\widetilde\psi(n)$ into the last
+two slots, the first of which is one of the two that $h^1$ multiplies.
+What gives it is instead the $B$-semilinearity
+$\widetilde\psi(bn)=(b\otimes1)\widetilde\psi(n)$ recorded above:
+writing $\widetilde\psi(n)=\sum_ic_i\otimes n_i$,
+\[
+h^1\bigl(\delta^1_2(b\otimes n)\bigr)
+=h^1\Bigl(b\otimes\sum_ic_i\otimes n_i\Bigr)
+=\sum_ibc_i\otimes n_i=(b\otimes1)\widetilde\psi(n)=\widetilde\psi(bn)
+=\delta^0_1\bigl(h^0(b\otimes n)\bigr).
+\]
+Since $d^0_D=\delta^1_1-\delta^1_2$, these two identities give, for
+$y=b\otimes n\in D^0$ and hence for every $y\in D^0$ by additivity,
+\[
+h^1(d^0_Dy)+d^{-1}_D(h^0y)
+=\bigl(y-\widetilde\psi(bn)\bigr)+\widetilde\psi(bn)=y,
+\]
+that is,
+\[
+h^1\circ d^0_D+d^{-1}_D\circ h^0=\mathrm{id}_{D^0},
+\]
+so the homotopy identity holds in every degree $r\ge0$.  (The one
+remaining identity of a contraction,
+$h^0\circ d^{-1}_D=\mathrm{id}_{D^{-1}}$, is proved at the end of the
+next paragraph; nothing before that point uses it.)
+
 Consequently $D^\bullet=B\otimes_AC^\bullet$ is exact in every degree
 $r\ge1$: if $d^r_Dy=0$ then $y=d^{r-1}_D(h^ry)$.  Since $B$ is flat over
 $A$, kernels and images commute with $-\otimes_AB$ and hence
@@ -7697,18 +7762,58 @@ $H^r(B\otimes_AC^\bullet)=B\otimes_AH^r(C^\bullet)$; since $B$ is
 moreover faithfully flat, $B\otimes_AH^r(C^\bullet)=0$ forces
 $H^r(C^\bullet)=0$.  So $C^\bullet$ is exact in every degree $r\ge1$,
 and it is exact at $N_0$ and at $C^0$ by the definition $N_0=\ker d^0$.
-Hence the augmented complex above is exact -- split exact after the
-faithfully flat base change $-\otimes_AB$; in particular the composite
+Hence the augmented complex above is exact -- and, as the next paragraph
+shows, split exact after the faithfully flat base change $-\otimes_AB$.
+
+\emph{The descended module.}  The map to be identified is the canonical
+$B$-linear map
 \[
-N_0\otimes_AB\longrightarrow N\otimes_AB\cong B\otimes_AN
+\alpha:N_0\otimes_AB\longrightarrow N,\qquad
+n_0\otimes b\longmapsto bn_0
 \]
-has image the kernel of $B\otimes_AN\to B\otimes_AB\otimes_AN$, which
-by the exactness is $N_0\otimes_AB$; the exactness in degree zero
-says this kernel is mapped isomorphically onto its image, and the
-cocycle argument with the contracting homotopy identifies this image
-with all of $N$: $N_0\otimes_AB\cong N$, compatibly with the descent
-data.  The faithfulness (an $A$-map vanishing after $\otimes_AB$
-vanishes) and the fullness (a map of descent data is determined by --
+(equivalently, after the swap $N_0\otimes_AB\cong B\otimes_AN_0$, the
+map $b\otimes n_0\mapsto bn_0$, which is the restriction of $h^0$ to
+$B\otimes_AN_0\subseteq D^0$).  Three facts make it an isomorphism.
+First, $\widetilde\psi$ is injective: it is the composite of
+$N\to N\otimes_AB$, $n\mapsto n\otimes1$, with the isomorphism $\psi$,
+and that first map is a split injection of $A$-modules, a retraction
+being $n\otimes b\mapsto bn$.  Second, $\ker d^0_D=B\otimes_AN_0$:
+indeed $d^0_D=\mathrm{id}_B\otimes d^0$ and $B$ is flat over $A$, so
+$\ker(\mathrm{id}_B\otimes d^0)=B\otimes_A\ker d^0=B\otimes_AN_0$, which
+flatness also exhibits as a submodule of $B\otimes_AN=D^0$.  Third,
+$\ker d^0_D=\widetilde\psi(N)$: the inclusion
+$\widetilde\psi(N)\subseteq\ker d^0_D$ is the identity
+$d^0_D\circ d^{-1}_D=0$, that is the cocycle condition, and the reverse
+inclusion is exactly the bottom degree of the homotopy -- if $d^0_Dy=0$
+then $y=d^{-1}_D(h^0y)=\widetilde\psi(h^0y)$.  The second and third
+facts together say that $\widetilde\psi$ maps $N$ \emph{onto}
+$B\otimes_AN_0$, and by the first it does so injectively, so
+$\widetilde\psi:N\to B\otimes_AN_0$ is bijective.  Its inverse is
+$\alpha$: for $n_0\in N_0$ the definition $N_0=\ker d^0$ with
+$d^0(n)=1\otimes n-\widetilde\psi(n)$ reads
+$\widetilde\psi(n_0)=1\otimes n_0$, whence
+\[
+\widetilde\psi\bigl(\alpha(b\otimes n_0)\bigr)=\widetilde\psi(bn_0)
+=(b\otimes1)\widetilde\psi(n_0)=b\otimes n_0,
+\]
+i.e.\ $\widetilde\psi\circ\alpha=\mathrm{id}$ on $B\otimes_AN_0$; as
+$\widetilde\psi$ is a bijection onto $B\otimes_AN_0$ this forces
+$\alpha=\widetilde\psi^{-1}$.  So $\alpha$ is an isomorphism and its
+image is all of $N$, which is the surjectivity at issue: the cocycle
+condition, through $d^0_D\circ\widetilde\psi=0$, is what puts
+$\widetilde\psi(N)$ inside $B\otimes_AN_0$, and the contracting homotopy
+in the bottom degree is what fills that submodule out, its component
+$h^0$ being the inverse map.  Thus $N_0\otimes_AB\cong N$, compatibly
+with the descent data.  In particular
+$h^0\circ d^{-1}_D=\alpha\circ\widetilde\psi=\mathrm{id}_{D^{-1}}$, so
+$h$ contracts the augmented complex $D^\bullet$ in every degree; and
+transporting along $\widetilde\psi$, which carries $d^{-1}_D$ to the
+inclusion $B\otimes_AN_0\subseteq D^0$, the maps $\widetilde\psi\circ
+h^0$ in degree $0$ and $h^r$ in degrees $r\ge1$ contract
+$0\to B\otimes_AN_0\to B\otimes_AC^0\to B\otimes_AC^1\to\cdots$, the
+base change of the augmented complex, in every degree -- the split
+exactness asserted above.  The faithfulness (an $A$-map vanishing after
+$\otimes_AB$ vanishes) and the fullness (a map of descent data is determined by --
 and arises from -- the induced map on the kernels, by the same
 exactness) are then immediate: a morphism $N\to N'$ compatible with
 the data maps the kernel $N_0$ into $N_0'$; conversely a map
