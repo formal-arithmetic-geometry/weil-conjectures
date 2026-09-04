@@ -17,7 +17,7 @@ type with quasi-affine source is compactifiable.
 Let $`\sigma` be an index type. The polynomial ring
 $`\mathbb{Z}[T_i : i \in \sigma \sqcup \{\ast\}]` carries its total-degree grading.
 
-:::definition "def:relative-projective-space" (parent := "grp:projective") (lean := "AlgebraicGeometry.ProjectiveSpaceInt, AlgebraicGeometry.RelativeProjectiveSpace, AlgebraicGeometry.RelativeProjectiveSpace.toProjectiveSpaceInt")
+:::definition "def:relative-projective-space" (parent := "grp:projective") (lean := "AlgebraicGeometry.Proj.projectiveSpaceOverAffine, AlgebraicGeometry.ProjectiveSpace, AlgebraicGeometry.ProjectiveSpace.toProjInt")
 The _integral model_ is $`\Pj^{\sigma}_{\mathbb{Z}} = \Proj \mathbb{Z}[T_i]` for the
 total-degree grading. For a scheme $`S`, the _relative projective space_ is the base change
 $$`\Pj(\sigma; S) \;=\; \Pj^{\sigma}_{\mathbb{Z}} \times_{\Spec \mathbb{Z}} S,`
@@ -25,7 +25,7 @@ with its structure morphism $`\Pj(\sigma; S) \to S` and its comparison morphism
 $`\Pj(\sigma; S) \to \Pj^{\sigma}_{\mathbb{Z}}` to the integral model.
 :::
 
-:::lemma_ "lem:projective-space-cartesian" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isPullback_over")
+:::lemma_ "lem:projective-space-cartesian" (parent := "grp:projective") (lean := "AlgebraicGeometry.ProjectiveSpace.isPullback_over_toProjInt")
 The square formed by the structure morphism $`\Pj(\sigma; S) \to S`, the comparison morphism
 $`\Pj(\sigma; S) \to \Pj^{\sigma}_{\mathbb{Z}}` and the two morphisms to $`\Spec \mathbb{Z}`
 is cartesian {uses "def:relative-projective-space"}[].
@@ -36,7 +36,7 @@ The relative projective space is defined as the fibre product of the integral mo
 $`S` over $`\Spec \mathbb{Z}`, and the two morphisms in question are its projections.
 :::
 
-:::theorem "thm:proj-proper" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isProper_over")
+:::theorem "thm:proj-proper" (parent := "grp:projective") (lean := "AlgebraicGeometry.ProjectiveSpace.instIsProper")
 For finite $`\sigma` the structure morphism $`\Pj(\sigma; S) \to S` is proper.
 :::
 
