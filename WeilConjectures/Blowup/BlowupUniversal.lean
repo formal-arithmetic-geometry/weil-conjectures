@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
 
@@ -34,7 +35,8 @@ The proof is chart-local, with the algebraic core the universal property of the
 On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
 
 - `Scheme.IdealSheafData.comap_mul`: inverse images commute with products of ideal
-  sheaves (for arbitrary morphisms);
+  sheaves (for arbitrary morphisms), and the resulting cancellation law
+  `Scheme.IdealSheafData.le_ker_of_mul_le_ker`;
 - the invertible-ideal lemma kit: local presentations on a basis
   (`IsInvertible.exists_presentation_le`), stability under products, factors of
   products (`IsInvertible.of_mul_left/right`, the "factor of an invertible product
@@ -46,7 +48,10 @@ On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
   `HomogeneousLocalization.Away.isLocalization_mul`;
 - `Scheme.IdealSheafData.exists_lift_blowup`: existence of the universal lift
   (Stacks Project Tag 0806); together with `hom_ext_of_isInvertible_comap` above
-  this is the universal property of blowing up.
+  this is the universal property of blowing up;
+- `Scheme.IdealSheafData.exists_mem_range_chart_sup`: for a sum of two centers, the
+  charts at degree-one elements coming from local sections of one summand cover the
+  blow-up.
 
 Elaboration-performance conventions follow
 `WeilConjectures.Compactification.FiniteDegree`: chart probes keep their section
@@ -458,6 +463,16 @@ theorem Scheme.IdealSheafData.comap_mul (f : Y ⟶ X) (I J : X.IdealSheafData) :
       Ideal.map_mul, Scheme.IdealSheafData.ideal_comap_appLE I f V W hle,
       Scheme.IdealSheafData.ideal_comap_appLE J f V W hle]
 
+/-- **Cancelling a unit factor from a containment in the kernel**: if the inverse image of
+`K` along `f` is the unit ideal, then `K * J ≤ f.ker` already forces `J ≤ f.ker`. -/
+theorem Scheme.IdealSheafData.le_ker_of_mul_le_ker {K J : X.IdealSheafData} (f : Y ⟶ X)
+    (hK : K.comap f = ⊤) (h : K * J ≤ f.ker) : J ≤ f.ker := by
+  refine (Scheme.IdealSheafData.le_ker_iff_comap_eq_bot f).mpr (le_bot_iff.mp ?_)
+  have hle : (K * J).comap f ≤ (Scheme.Hom.ker f).comap f :=
+    Scheme.IdealSheafData.comap_mono f h
+  rwa [Scheme.IdealSheafData.comap_mul, hK, Scheme.IdealSheafData.top_mul,
+    Scheme.Hom.comap_ker_self] at hle
+
 end ComapAffineLocality
 
 section InvertibleKit
@@ -674,18 +689,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChartSection_mem_nonZ
   exact map_mem_nonZeroDivisors_of_bijective _
     (ConcreteCategory.bijective_of_isIso _)
     (AffineBlowup.awayAlgebraMap_mem_nonZeroDivisors_of_mem (K.ideal V) ha hs)
-
-/-- The chart probe of the blow-up evaluated at a point: the chart embedding of the
-affine chart point. Standalone lemma so that the definitional unfolding of
-`blowupChart` happens once, with a directed expected type. -/
-lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart_apply
-    (K : Y.IdealSheafData) (V : Y.affineOpens) {a : Γ(Y, V.1)} (ha : a ∈ K.ideal V)
-    (z : Spec (.of (HomogeneousLocalization.Away (reesGrading (K.ideal V))
-      (reesX (K.ideal V) a ha)))) :
-    K.blowupChart V ha z =
-      K.blowupι V (AffineBlowup.chart (K.ideal V) (reesX (K.ideal V) a ha)
-        (reesX_mem (K.ideal V) a ha) z) :=
-  Scheme.Hom.comp_apply _ _ z
 
 /-- Criterion for invertibility at a point through an affine open immersion probe: if
 `w : Spec R ⟶ Y` is an open immersion whose range contains `x` and the pullback of `I'`
@@ -1338,5 +1341,52 @@ theorem Scheme.IdealSheafData.exists_lift_blowup (I : X.IdealSheafData)
   rfl
 
 end Existence
+
+section ChartCover
+
+/-- **The charts at pure degree-one elements cover the blow-up of a sum**: every point
+of `Bl_{I₁ ⊔ I₂}(X)` lies in a chart at a degree-one element coming from a local
+section of `I₁` or of `I₂`, since `D₊(b₁ + b₂) ⊆ D₊(b₁) ∪ D₊(b₂)`. -/
+lemma Scheme.IdealSheafData.exists_mem_range_chart_sup {X : Scheme.{u}}
+    (I₁ I₂ : X.IdealSheafData) (x : (I₁ ⊔ I₂).blowup) :
+    ∃ (U : X.affineOpens) (b : Γ(X, U.1)) (hb : b ∈ (I₁ ⊔ I₂).ideal U),
+      (b ∈ I₁.ideal U ∨ b ∈ I₂.ideal U) ∧
+      x ∈ Set.range ((I₁ ⊔ I₂).blowupChart U hb) := by
+  have hx : (I₁ ⊔ I₂).blowupMap x ∈ (⊤ : X.Opens) := trivial
+  rw [← iSup_affineOpens_eq_top X] at hx
+  obtain ⟨U, hU⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+  have hx2 : x ∈ (I₁ ⊔ I₂).blowupMap ⁻¹ᵁ U.1 := hU
+  rw [(I₁ ⊔ I₂).blowupMap_preimage U] at hx2
+  obtain ⟨y, rfl⟩ := hx2
+  have hy : y ∈ (⊤ : (AffineBlowup ((I₁ ⊔ I₂).ideal U)).Opens) := trivial
+  rw [← AffineBlowup.iSup_basicOpen_reesX_eq_top ((I₁ ⊔ I₂).ideal U)] at hy
+  obtain ⟨a, hy⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
+  obtain ⟨av, hav⟩ := a
+  have hsup : (I₁ ⊔ I₂).ideal U = I₁.ideal U ⊔ I₂.ideal U := by
+    rw [congrFun (Scheme.IdealSheafData.ideal_sup (I := I₁) (J := I₂)) U, Pi.sup_apply]
+  have hav' : av ∈ I₁.ideal U ⊔ I₂.ideal U := hsup ▸ hav
+  obtain ⟨b₁, hb₁, b₂, hb₂, hsum⟩ := Submodule.mem_sup.mp hav'
+  subst hsum
+  have hb₁K : b₁ ∈ (I₁ ⊔ I₂).ideal U := by
+    rw [hsup]
+    exact Submodule.mem_sup_left hb₁
+  have hb₂K : b₂ ∈ (I₁ ⊔ I₂).ideal U := by
+    rw [hsup]
+    exact Submodule.mem_sup_right hb₂
+  rw [show reesX ((I₁ ⊔ I₂).ideal U) (b₁ + b₂) hav =
+    reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K + reesX ((I₁ ⊔ I₂).ideal U) b₂ hb₂K from
+    reesX_add _ hb₁K hb₂K] at hy
+  have hy' := TopologicalSpace.Opens.mem_sup.mp (Proj.basicOpen_add_le _ _ _ hy)
+  rcases hy' with h | h
+  · rw [← AffineBlowup.opensRange_chart ((I₁ ⊔ I₂).ideal U)
+      (reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K) (reesX_mem _ b₁ hb₁K)] at h
+    obtain ⟨z, rfl⟩ := h
+    exact ⟨U, b₁, hb₁K, Or.inl hb₁, ⟨z, (I₁ ⊔ I₂).blowupChart_apply U hb₁K z⟩⟩
+  · rw [← AffineBlowup.opensRange_chart ((I₁ ⊔ I₂).ideal U)
+      (reesX ((I₁ ⊔ I₂).ideal U) b₂ hb₂K) (reesX_mem _ b₂ hb₂K)] at h
+    obtain ⟨z, rfl⟩ := h
+    exact ⟨U, b₂, hb₂K, Or.inr hb₂, ⟨z, (I₁ ⊔ I₂).blowupChart_apply U hb₂K z⟩⟩
+
+end ChartCover
 
 end AlgebraicGeometry

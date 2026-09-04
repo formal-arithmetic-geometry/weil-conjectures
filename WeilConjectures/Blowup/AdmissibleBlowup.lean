@@ -655,49 +655,6 @@ lemma Scheme.IdealSheafData.isCompact_coe_compl_support {X : Scheme.{u}} [Compac
   exact ((PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr
     ⟨K.ideal V, hK V le_top, rfl⟩).1).image V.2.fromSpec.continuous
 
-/-- **The charts at pure degree-one elements cover the blow-up of a sum**: every point
-of `Bl_{I₁ ⊔ I₂}(X)` lies in a chart at a degree-one element coming from a local
-section of `I₁` or of `I₂`, since `D₊(b₁ + b₂) ⊆ D₊(b₁) ∪ D₊(b₂)`. -/
-lemma Scheme.IdealSheafData.exists_mem_range_chart_sup {X : Scheme.{u}}
-    (I₁ I₂ : X.IdealSheafData) (x : (I₁ ⊔ I₂).blowup) :
-    ∃ (U : X.affineOpens) (b : Γ(X, U.1)) (hb : b ∈ (I₁ ⊔ I₂).ideal U),
-      (b ∈ I₁.ideal U ∨ b ∈ I₂.ideal U) ∧
-      x ∈ Set.range ((I₁ ⊔ I₂).blowupChart U hb) := by
-  have hx : (I₁ ⊔ I₂).blowupMap x ∈ (⊤ : X.Opens) := trivial
-  rw [← iSup_affineOpens_eq_top X] at hx
-  obtain ⟨U, hU⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
-  have hx2 : x ∈ (I₁ ⊔ I₂).blowupMap ⁻¹ᵁ U.1 := hU
-  rw [(I₁ ⊔ I₂).blowupMap_preimage U] at hx2
-  obtain ⟨y, rfl⟩ := hx2
-  have hy : y ∈ (⊤ : (AffineBlowup ((I₁ ⊔ I₂).ideal U)).Opens) := trivial
-  rw [← AffineBlowup.iSup_basicOpen_reesX_eq_top ((I₁ ⊔ I₂).ideal U)] at hy
-  obtain ⟨a, hy⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
-  obtain ⟨av, hav⟩ := a
-  have hsup : (I₁ ⊔ I₂).ideal U = I₁.ideal U ⊔ I₂.ideal U := by
-    rw [congrFun (Scheme.IdealSheafData.ideal_sup (I := I₁) (J := I₂)) U, Pi.sup_apply]
-  have hav' : av ∈ I₁.ideal U ⊔ I₂.ideal U := hsup ▸ hav
-  obtain ⟨b₁, hb₁, b₂, hb₂, hsum⟩ := Submodule.mem_sup.mp hav'
-  subst hsum
-  have hb₁K : b₁ ∈ (I₁ ⊔ I₂).ideal U := by
-    rw [hsup]
-    exact Submodule.mem_sup_left hb₁
-  have hb₂K : b₂ ∈ (I₁ ⊔ I₂).ideal U := by
-    rw [hsup]
-    exact Submodule.mem_sup_right hb₂
-  rw [show reesX ((I₁ ⊔ I₂).ideal U) (b₁ + b₂) hav =
-    reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K + reesX ((I₁ ⊔ I₂).ideal U) b₂ hb₂K from
-    reesX_add _ hb₁K hb₂K] at hy
-  have hy' := TopologicalSpace.Opens.mem_sup.mp (Proj.basicOpen_add_le _ _ _ hy)
-  rcases hy' with h | h
-  · rw [← AffineBlowup.opensRange_chart ((I₁ ⊔ I₂).ideal U)
-      (reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K) (reesX_mem _ b₁ hb₁K)] at h
-    obtain ⟨z, rfl⟩ := h
-    exact ⟨U, b₁, hb₁K, Or.inl hb₁, ⟨z, (I₁ ⊔ I₂).blowupChart_apply U hb₁K z⟩⟩
-  · rw [← AffineBlowup.opensRange_chart ((I₁ ⊔ I₂).ideal U)
-      (reesX ((I₁ ⊔ I₂).ideal U) b₂ hb₂K) (reesX_mem _ b₂ hb₂K)] at h
-    obtain ⟨z, rfl⟩ := h
-    exact ⟨U, b₂, hb₂K, Or.inr hb₂, ⟨z, (I₁ ⊔ I₂).blowupChart_apply U hb₂K z⟩⟩
-
 /-- **The strict transform of a center misses the affine probes at its own sections**:
 let `K` and `J` be ideal sheaves and let `c : Spec S ⟶ Bl_K(X)` be a morphism lying
 over an affine probe `Spec.map φ ≫ fromSpec : Spec S ⟶ X` on which the extension of
@@ -775,13 +732,8 @@ lemma disjoint_range_strictTransformMap_of_probe
     rw [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage]
     exact fun hmem ↦ hzK (hz1 ▸ Set.mem_preimage.mp hmem)
   -- the pulled-back center is contained in the pulled-back ideal of `J`
-  have hle : K.comap (Spec.map φ ≫ U.2.fromSpec) ≤ J.comap (Spec.map φ ≫ U.2.fromSpec) := by
-    refine Scheme.IdealSheafData.le_of_isAffine ?_
-    rw [Scheme.IdealSheafData.ideal_top_comap_specMap_fromSpec K U φ,
-      Scheme.IdealSheafData.ideal_top_comap_specMap_fromSpec J U φ,
-      hspan, Ideal.map_span, Set.image_singleton, Ideal.span_singleton_le_iff_mem]
-    exact Ideal.mem_map_of_mem _ (Ideal.mem_map_of_mem _ hbJ)
-  exact hy'K (Scheme.IdealSheafData.support_antitone hle hy'J)
+  exact hy'K (Scheme.IdealSheafData.support_antitone
+    (Scheme.IdealSheafData.comap_le_comap_of_ideal_map_eq_span K J U hbJ φ hspan) hy'J)
 
 /-- **Quasi-compactness of the inclusion of the open locus of a strict transform** over
 the complement of the support of a finite-type center on a qcqs scheme: the fibre
@@ -840,13 +792,7 @@ theorem disjoint_range_strictTransformMap_sup [CompactSpace X]
   intro x hx₁ hx₂
   obtain ⟨U', b, hbK, hb12, hxc⟩ :=
     Scheme.IdealSheafData.exists_mem_range_chart_sup I₁ I₂ x
-  have hspan : ((I₁ ⊔ I₂).ideal U').map (CommRingCat.ofHom
-      (AffineBlowup.awayAlgebraMap ((I₁ ⊔ I₂).ideal U')
-        (reesX ((I₁ ⊔ I₂).ideal U') b hbK))).hom =
-      Ideal.span {(CommRingCat.ofHom (AffineBlowup.awayAlgebraMap ((I₁ ⊔ I₂).ideal U')
-        (reesX ((I₁ ⊔ I₂).ideal U') b hbK))).hom b} := by
-    rw [CommRingCat.hom_ofHom]
-    exact AffineBlowup.map_awayAlgebraMap_reesX_eq_span_singleton ((I₁ ⊔ I₂).ideal U') b hbK
+  have hspan := (I₁ ⊔ I₂).map_blowupChartAlgebraMap_eq_span U' hbK
   have hcomp := (I₁ ⊔ I₂).blowupChart_comp_blowupMap U' hbK
   rcases hb12 with hb | hb
   · exact Set.disjoint_left.mp
