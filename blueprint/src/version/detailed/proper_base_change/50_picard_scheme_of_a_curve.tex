@@ -2927,6 +2927,27 @@ is $D_{\mathrm{perf}}(\cO_X)$.  The perfectness of an
 \end{definition}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A Grothendieck abelian category has enough injectives]
+\label{lem:pc-grothendieck-enough-injectives}
+Let $\mathcal A$ be a Grothendieck abelian category, that is, an abelian category
+which has arbitrary direct sums, in which filtered colimits are exact, and which has a
+generator.  Then $\mathcal A$ has \emph{functorial injective embeddings}: there are a
+functor $M\mapsto J(M)$ on $\mathcal A$ and a monomorphism $M\to J(M)$, functorial in
+$M$, with $J(M)$ injective.  In particular $\mathcal A$ has enough injectives, and every
+object $M$ of $\mathcal A$ has an injective resolution $0\to M\to J^0\to J^1\to\cdots$,
+obtained by setting $J^0=J(M)$ and applying the embedding again to each successive
+cokernel.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Injectives, Theorem~19.11.7 (\stacksproject{079H}).
+It is not decomposed here.  Only the two consequences stated are used below: a
+functorial injective embedding is in particular an injective embedding, which is what
+``enough injectives'' asks for, and iterating it on the cokernels of the embeddings
+already constructed produces the injective resolution.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Sheaves of modules form a Grothendieck abelian category]
 \label{lem:pc-sheaves-of-modules-grothendieck}
@@ -2942,16 +2963,27 @@ right derived functors of \Cref{def:pc-derived-direct-image} exist, so every dec
 on them reports \texttt{sorryAx} under \texttt{\#print axioms}.}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-scheme}
-Presheaves of $\cR$-modules form a Grothendieck abelian category: they are locally presentable,
-filtered colimits are computed sectionwise and are therefore exact, and the free modules on the
-representable presheaves form a separating family, which is small because the site is
-essentially small.  Sheaves of $\cR$-modules form a reflective subcategory of presheaves of
+\uses{def:pc-scheme,lem:pc-grothendieck-enough-injectives}
+Presheaves of $\cR$-modules form a Grothendieck abelian category, that is, an abelian
+category with arbitrary direct sums, in which filtered colimits are exact, and with a
+generator.  Indeed, kernels, cokernels and arbitrary colimits of presheaves of
+$\cR$-modules are computed sectionwise, so the category is abelian, a sequence of
+presheaves is exact exactly when it is exact on every object of the site, and filtered
+colimits of presheaves are exact because filtered colimits of modules over a ring are.
+For a generator, write $\cR_U$ for the free presheaf of $\cR$-modules on the presheaf
+represented by an object $U$, that is $\cR_U:V\mapsto\bigoplus_{\varphi:V\to U}\cR(V)$,
+so that $\Hom_{\cR}(\cR_U,\cF)=\cF(U)$ for every presheaf $\cF$ of $\cR$-modules; if
+$\cN\subsetneq\cM$ then some object $U$ carries a section $s\in\cM(U)$ not lying in
+$\cN(U)$, and the map $\cR_U\to\cM$ corresponding to $s$ does not factor through $\cN$.
+The site being essentially small, its objects form a set up to isomorphism, so the direct
+sum of the $\cR_U$ over that set exists and, by the previous sentence, is a generator.
+Sheaves of $\cR$-modules form a reflective subcategory of presheaves of
 $\cR$-modules whose reflector, sheafification, is exact; a Giraud subcategory of a Grothendieck
 abelian category is again Grothendieck abelian, since colimits are computed by sheafifying the
 presheaf colimit, filtered colimits stay exact because sheafification is exact, and the
 sheafifications of the presheaf generators form a separating family.  A Grothendieck abelian
-category has enough injectives, hence has injective resolutions.
+category has functorial injective embeddings, hence enough injectives and injective
+resolutions (\Cref{lem:pc-grothendieck-enough-injectives}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -3547,6 +3579,33 @@ is finite projective, so the defining property of Algebra, Definition~10.137.1
 well.  The statement is available in Mathlib, so this is a leaf of the plan.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The equations of a standard smooth presentation form a regular sequence]
+\label{lem:pc-standard-smooth-regular-sequence}
+Let $R$ be a ring and let $A=R[x_1,\dots,x_n]/(f_1,\dots,f_c)$ be standard smooth over
+$R$ in the sense of \Cref{lem:pc-standard-smooth-form}, i.e.\ with
+$\det(\partial f_j/\partial x_i)_{1\le i,j\le c}$ invertible in $A$.  Let
+$\mathfrak q\subset A$ be a prime and let $\mathfrak q'\subset R[x_1,\dots,x_n]$ be the
+prime corresponding to it.  Then $f_1,\dots,f_c$ is a regular sequence in the local ring
+$R[x_1,\dots,x_n]_{\mathfrak q'}$, and each of the rings
+$R[x_1,\dots,x_n]_{\mathfrak q'}/(f_1,\dots,f_i)$ is flat over $R$.
+\uses{lem:pc-standard-smooth-form}
+\end{lemma}
+\begin{proof}
+\uses{lem:pc-standard-smooth-properties}
+This is a cited external input: Algebra, Lemma~10.136.12(1) and~(2)
+(\stacksproject{00SV}).  The tag states both assertions for a \emph{relative global
+complete intersection}, that is, for a presentation
+$A=R[x_1,\dots,x_n]/(f_1,\dots,f_c)$ such that every nonempty fibre of
+$\Spec(A)\to\Spec(R)$ has dimension $n-c$ (Algebra, Definition~10.136.5); a standard
+smooth presentation is one, by the last clause, clause~(7), of Algebra,
+Lemma~10.137.6 --- the tag already cited by \Cref{lem:pc-standard-smooth-properties},
+which states clauses~(1), (2) and~(5) of it.  Neither step is decomposed here.
+The statement is local at $\mathfrak q'$, as the tag has it, and is not asserted for
+$R[x_1,\dots,x_n]$ itself.
+\end{proof}
+
 % Decomposed.
 \begin{lemma}[Smoothness versus flatness]\label{lem:pc-smooth-characterization}
 Let $f:X\to S$ be a morphism of
@@ -3556,7 +3615,7 @@ is flat and every fibre $X_s$ is smooth over $\kappa(s)$.
 \uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change,lem:pc-smooth-local-criterion,lem:pc-standard-smooth-form,lem:pc-standard-smooth-properties,lem:pc-smooth-base-change-ring,lem:pc-koszul-resolution}
+\uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change,lem:pc-smooth-local-criterion,lem:pc-standard-smooth-form,lem:pc-standard-smooth-properties,lem:pc-smooth-base-change-ring,lem:pc-koszul-resolution,lem:pc-standard-smooth-regular-sequence}
 ($\Leftarrow$) The assertion is Zariski-local on $S$ and on $X$, so we
 may assume $S=\Spec(R)$ and $X=\Spec(A)$ with $R\to A$ of finite
 presentation and flat and with all fibres smooth.  For every prime
@@ -3573,16 +3632,21 @@ $A$ is standard smooth over $R$, i.e.\
 $A=R[x_1,\dots,x_n]/(f_1,\dots,f_c)$ with the Jacobian
 $\det(\partial f_j/\partial x_i)_{i,j\le c}$ a unit in $A$.
 \emph{Finite presentation} holds by
-definition.  \emph{Flatness:} the elements $f_1,\dots,f_c$ form a
-regular sequence of $R[x]$: after the invertible linear change of
-variables $x_i\mapsto x_i-a_i$ we may assume the Jacobian is invertible
-at $\mathfrak q$, so the initial forms of the $f_j$ in the graded ring
-are $x_1,\dots,x_c$, and a sequence whose initial forms in a regular
-sequence, is regular; hence the Koszul complex
+definition.  \emph{Flatness:} an $A$-module is flat over $R$ as soon as
+all of its localizations at the primes of $A$ are, so it is enough to
+prove that $A_{\mathfrak q}$ is flat over $R$ for every prime
+$\mathfrak q\subset A$.  Fix such a $\mathfrak q$, let
+$\mathfrak q'\subset R[x]$ be the prime corresponding to it, and read
+$R[x]$ and $A$ for the remainder of this flatness step as the local ring
+$R[x]_{\mathfrak q'}$ and its quotient
+$A_{\mathfrak q}=R[x]_{\mathfrak q'}/(f_1,\dots,f_c)$.  There the
+elements $f_1,\dots,f_c$ form a regular sequence
+(\Cref{lem:pc-standard-smooth-regular-sequence}); hence the Koszul complex
 $0\to\wedge^cR[x]^c\to\cdots\to R[x]^c\to R[x]\to A\to0$ is exact
 (the Koszul complex of a regular sequence is a resolution,
 \Cref{lem:pc-koszul-resolution}), a projective
-(hence flat) resolution of $A$; $A$ is flat over $R$.
+(hence flat) resolution of $A$; $A$ is flat over $R$.  As $\mathfrak q$
+was arbitrary, this proves that $A$ itself is flat over $R$.
 \emph{Smooth fibres:} smoothness of a ring map is preserved by
 arbitrary base change (\Cref{lem:pc-smooth-base-change-ring}), so for
 every $\mathfrak p\subset R$ the fibre
