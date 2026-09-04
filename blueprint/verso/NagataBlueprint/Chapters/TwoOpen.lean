@@ -17,7 +17,7 @@ finite type and quasi-compact. Let $`O, O'` be opens of $`U`.
 
 # Prepared sides
 
-:::definition "def:two-open-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide")
+:::definition "def:two-open-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension")
 *A side of the two-open compactification theorem.*
 A _side_ for $`(u, O)` consists of a proper morphism $`s \colon X \to S`, an open
 $`V \subseteq X`, a proper morphism $`\psi \colon V \to U` over $`S`, and an open immersion
@@ -27,7 +27,7 @@ $`O \to V \to X` has dense range. The second open $`O'` does not enter this data
 parameter of the boundary loci below.
 :::
 
-:::definition "def:boundaries" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.selfBoundary, AlgebraicGeometry.TwoOpenSide.forbiddenBoundary, AlgebraicGeometry.TwoOpenSide.Prepared, AlgebraicGeometry.TwoOpenSide.interior")
+:::definition "def:boundaries" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.selfBoundary, AlgebraicGeometry.CompactifiedProperExtension.forbiddenBoundary, AlgebraicGeometry.CompactifiedProperExtension.Prepared, AlgebraicGeometry.CompactifiedProperExtension.interiorLocus")
 *The self boundary, the forbidden boundary and preparedness.*
 For a side $`\sigma` and an open $`O'` of $`U` put
 $$`\overline{Z}_{\mathrm{self}} = \overline{\,\iota_V\bigl(\psi^{-1}(U \setminus O')\bigr)\,}, \qquad \overline{Z}_{\mathrm{forb}} = \overline{\,\iota_V\bigl(\psi^{-1}(U \setminus O)\bigr)\,},`
@@ -38,7 +38,7 @@ complement $`X^{\circ} = X \setminus \overline{Z}_{\mathrm{forb}}` is the _inter
 side {uses "def:two-open-side"}[].
 :::
 
-:::lemma_ "lem:interior-contains-copy" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.range_embX_subset_interior")
+:::lemma_ "lem:interior-contains-copy" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.range_υ_comp_i_subset_interiorLocus")
 *The interior contains the embedded copy of the open.*
 The interior of a side contains the embedded copy of $`O` in the ambient scheme
 {uses "def:boundaries"}[].
@@ -50,7 +50,7 @@ inverse image of $`U \setminus O`; being open, it is also disjoint from its clos
 forbidden boundary.
 :::
 
-:::proposition "prop:side-transport" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.admissibleBlowup, AlgebraicGeometry.TwoOpenSide.Prepared.admissibleBlowup")
+:::proposition "prop:side-transport" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.admissibleBlowup, AlgebraicGeometry.CompactifiedProperExtension.Prepared.admissibleBlowup")
 *Transport of a side along an admissible blow-up.*
 Let $`S` be Noetherian. A side may be transported along a $`V`-admissible blow-up of its
 ambient scheme; boundary loci transport to their preimages, so preparedness relative to
@@ -94,7 +94,7 @@ $`\overline{Z}_{\mathrm{forb}}` are, and inverse images preserve disjointness. H
 transported boundary closures are disjoint, for any choice of $`O'`.
 :::
 
-:::theorem "thm:prepared-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_twoOpenSide")
+:::theorem "thm:prepared-side" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_compactifiedProperExtension")
 *Existence of a prepared side.*
 Let $`S` be Noetherian, let $`u \colon U \to S` be separated, locally of finite type and
 quasi-compact, let $`O \sqcup O' = U` and assume $`u \circ \iota_O` is compactifiable. Then a
@@ -114,7 +114,7 @@ ambient schemes $`X_1, X_2` and proper extensions $`\psi_1, \psi_2`. Self bounda
 taken relative to the other open: $`\overline{Z}_{1,\mathrm{self}}` relative to $`O_2` and
 $`\overline{Z}_{2,\mathrm{self}}` relative to $`O_1`.
 
-:::definition "def:comparison-space" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.comparisonMap, AlgebraicGeometry.TwoOpenSide.comparisonSpace, AlgebraicGeometry.TwoOpenSide.comparisonFst, AlgebraicGeometry.TwoOpenSide.comparisonSnd")
+:::definition "def:comparison-space" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.comparisonMap, AlgebraicGeometry.CompactifiedProperExtension.comparisonSpace, AlgebraicGeometry.CompactifiedProperExtension.comparisonFst, AlgebraicGeometry.CompactifiedProperExtension.comparisonSnd")
 *The comparison space.*
 The _comparison morphism_ is the canonical morphism $`V_1 \times_U V_2 \to X_1 \times_S X_2`.
 The _comparison space_ $`X_{12}` is its scheme-theoretic image, with the two projections
@@ -122,7 +122,7 @@ $`\mathrm{pr}_1 \colon X_{12} \to X_1` and $`\mathrm{pr}_2 \colon X_{12} \to X_2
 {uses "def:two-open-side"}[].
 :::
 
-:::lemma_ "lem:comparison-projections-proper" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.isProper_comparisonFst, AlgebraicGeometry.TwoOpenSide.isProper_comparisonSnd")
+:::lemma_ "lem:comparison-projections-proper" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.isProper_comparisonFst, AlgebraicGeometry.CompactifiedProperExtension.isProper_comparisonSnd")
 *Properness of the comparison projections.*
 Both projections $`\mathrm{pr}_1 \colon X_{12} \to X_1` and
 $`\mathrm{pr}_2 \colon X_{12} \to X_2` of the comparison space are proper
@@ -135,7 +135,7 @@ followed by a projection of the product, which is a base change of the proper st
 morphism of the other ambient model.
 :::
 
-:::definition "def:key-disjoint" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.KeyDisjoint, AlgebraicGeometry.TwoOpenSide.comparisonBoundary")
+:::definition "def:key-disjoint" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.KeyDisjoint, AlgebraicGeometry.CompactifiedProperExtension.comparisonBoundary")
 *Key boundary disjointness.*
 The pair $`(\sigma_1, \sigma_2)` satisfies _key boundary disjointness_ if no point of
 $`X_{12}` projects into the forbidden boundary on both sides:
@@ -146,7 +146,7 @@ under $`\mathrm{pr}_2` avoids $`\overline{Z}_{2,\mathrm{forb}}`
 {uses "def:comparison-space"}[] {uses "def:boundaries"}[].
 :::
 
-:::lemma_ "lem:key-disjoint-avoids" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids")
+:::lemma_ "lem:key-disjoint-avoids" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.KeyDisjoint.avoids")
 *One valuation extension avoids its forbidden boundary.*
 Key boundary disjointness implies that, for any pair of valuation-ring extensions of a common
 generic point of $`O_1 \cap O_2` to the two ambient models, at least one of the two avoids its
@@ -179,7 +179,7 @@ whose closure swallows the comparison boundary suffices, because the self bounda
 a closure.
 :::
 
-:::theorem "thm:two-open-preparation" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_keyDisjoint_twoOpenSide")
+:::theorem "thm:two-open-preparation" (parent := "grp:two-open") (lean := "AlgebraicGeometry.exists_prepared_keyDisjoint_compactifiedProperExtension")
 *Existence of a prepared, key-disjoint pair of sides.*
 Let $`S` be Noetherian, let $`u \colon U \to S` be separated, locally of finite type and
 quasi-compact, let $`O_1 \sqcup O_2 = U` and assume both $`u \circ \iota_{O_1}` and
@@ -195,7 +195,7 @@ landing in the self boundary of a _prepared_ second side cannot meet its forbidd
 
 # The intermediate schemes and the theorem
 
-:::definition "def:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.intermediate, AlgebraicGeometry.TwoOpenSide.intermediateU, AlgebraicGeometry.TwoOpenSide.intermediateInterior, AlgebraicGeometry.TwoOpenSide.intermediateHom, AlgebraicGeometry.TwoOpenSide.graph, AlgebraicGeometry.TwoOpenSide.intermediateGraph")
+:::definition "def:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.intermediate, AlgebraicGeometry.CompactifiedProperExtension.intermediateU, AlgebraicGeometry.CompactifiedProperExtension.intermediateInterior, AlgebraicGeometry.CompactifiedProperExtension.intermediateHom, AlgebraicGeometry.CompactifiedProperExtension.graph, AlgebraicGeometry.CompactifiedProperExtension.intermediateGraph")
 *The intermediate scheme.*
 For a side $`\sigma` with interior $`X^{\circ}`, the _intermediate scheme_ is the pushout
 $$`W \;=\; U \ \sqcup_{O}\ X^{\circ},`
@@ -206,7 +206,7 @@ $`O \to U \times_S X^{\circ}` for the _overlap morphism_ of the two charts
 {uses "def:boundaries"}[].
 :::
 
-:::proposition "prop:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.TwoOpenSide.isProper_graph, AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph, AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom, AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU, AlgebraicGeometry.TwoOpenSide.isNoetherian_intermediate")
+:::proposition "prop:intermediate" (parent := "grp:two-open") (lean := "AlgebraicGeometry.CompactifiedProperExtension.isProper_graph, AlgebraicGeometry.CompactifiedProperExtension.isClosedImmersion_intermediateGraph, AlgebraicGeometry.CompactifiedProperExtension.isSeparated_intermediateHom, AlgebraicGeometry.CompactifiedProperExtension.dense_range_intermediateU, AlgebraicGeometry.CompactifiedProperExtension.isNoetherian_intermediate")
 *Properties of the intermediate scheme.*
 Let $`\sigma` be a side {uses "def:intermediate"}[].
 

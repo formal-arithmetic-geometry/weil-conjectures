@@ -144,10 +144,9 @@ theorem Compactification.nonempty_properExtension
     ⟨(c.i.isoOpensRange.hom ≫ inv (π ∣_ c.i.opensRange)) ≫ (π ⁻¹ᵁ c.i.opensRange).ι, by
       simp only [Category.assoc]
       rw [← morphismRestrict_ι, IsIso.inv_hom_id_assoc, Scheme.Hom.isoOpensRange_hom_ι]⟩
-  have hOIℓ : IsOpenImmersion ℓ :=
-    isOpenImmersion_of_comp_of_isIso_restrict ℓ π c.i hℓπ hπV₀
+  have hOIℓ : IsOpenImmersion ℓ := isOpenImmersion_of_comp_eq π ℓ hℓπ
   have hrangeℓ : Set.range ℓ = ⇑π ⁻¹' Set.range c.i :=
-    range_eq_preimage_of_comp_of_isIso_restrict ℓ π c.i hℓπ hπV₀
+    range_eq_preimage_range_of_comp_eq π ℓ hℓπ
   -- the canonical morphism to the image projects back to `c.i` and `V.ι`
   have htoImp : γ.toImage ≫ p = c.i := by
     have h := Scheme.Hom.toImage_imageι_assoc γ (pullback.fst c.g u)
