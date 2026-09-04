@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Density
-public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.Topology.Continuous
@@ -40,12 +39,7 @@ The main results are `TwoOpenSide.admissibleBlowup`, transporting a side along a
 saying that preparedness persists: boundary loci transport to preimages
 (`TwoOpenSide.admissibleBlowup_image_preimage`), so disjointness is preserved
 (blueprint: `def:nagata-two-open-side-transport`,
-`lemma:nagata-two-open-side-transport-prepared`). Combining the transport with the
-separation blow-up of `WeilConjectures.Compactification.BoundaryPreparation` produces a
-prepared side (`TwoOpenSide.exists_admissibleBlowup_prepared`).
-
-A side is in particular a compactification of `O ⟶ U ⟶ S`
-(`TwoOpenSide.toCompactification`).
+`lemma:nagata-two-open-side-transport-prepared`).
 
 -/
 
@@ -119,11 +113,6 @@ instance isOpenImmersion_υ : IsOpenImmersion σ.υ :=
   isOpenImmersion_of_comp_eq σ.υ σ.ψ σ.comm_ι
 
 /-- The embedded copy of `O` is exactly the part of `V` lying over `O`. -/
-lemma opensRange_υ : σ.υ.opensRange = σ.ψ ⁻¹ᵁ O := by
-  have := σ.isIso_ψ_restrict_opensRange
-  rw [opensRange_eq_preimage_of_comp_eq σ.υ σ.ψ σ.comm_ι, Scheme.Opens.opensRange_ι]
-
-/-- The embedded copy of `O` is exactly the part of `V` lying over `O`. -/
 lemma range_υ : Set.range σ.υ = σ.ψ ⁻¹' (O : Set U) := by
   have := σ.isIso_ψ_restrict_opensRange
   rw [range_eq_preimage_range_of_comp_eq σ.υ σ.ψ σ.comm_ι, Scheme.Opens.range_ι]
@@ -137,33 +126,9 @@ instance : IsOpenImmersion σ.embX :=
 instance : IsSchemeTheoreticallyDominant σ.embX :=
   inferInstanceAs (IsSchemeTheoreticallyDominant (σ.υ ≫ σ.V.ι))
 
-lemma embX_comp_s : σ.embX ≫ σ.s = O.ι ≫ u := by
-  rw [embX, Category.assoc, ← σ.comm_s, ← Category.assoc, σ.comm_ι]
-
-/-- A side is in particular a compactification of `O ⟶ U ⟶ S`. -/
-def toCompactification : Compactification (O.ι ≫ u) where
-  Z := σ.X
-  g := σ.s
-  i := σ.embX
-  comm := σ.embX_comp_s.symm
-  isProper := σ.isProper_s
-  isOpenImmersion := inferInstance
-
 /-- The ambient model of a side over a Noetherian base is Noetherian. -/
 lemma isNoetherian_X [IsNoetherian S] : IsNoetherian σ.X :=
   isNoetherian_of_isProper σ.s
-
-/-- The embedded copy of `O` is topologically dense in the ambient model: over a
-Noetherian base, scheme-theoretic density implies density. -/
-lemma denseRange_embX [IsNoetherian S] : DenseRange σ.embX := by
-  have := σ.isNoetherian_X
-  have : IsSchemeTheoreticallyDominant σ.embX.opensRange.ι :=
-    (isSchemeTheoreticallyDominant_iff_opensRange_ι σ.embX).mp inferInstance
-  have : CompactSpace σ.embX.opensRange.toScheme :=
-    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact _)
-  have : IsNoetherian σ.embX.opensRange.toScheme := ⟨⟩
-  have hdr : DenseRange σ.embX.opensRange.ι := Scheme.Hom.denseRange _
-  rwa [DenseRange, Scheme.Opens.range_ι, Scheme.Hom.coe_opensRange] at hdr
 
 section Boundary
 
@@ -181,19 +146,6 @@ def forbiddenBoundary : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O : Set 
 /-- A side is **prepared** relative to the other open `O'` if its two boundary closures
 are disjoint. (Blueprint: `def:nagata-two-open-prepared-boundaries`.) -/
 def Prepared (O' : U.Opens) : Prop := Disjoint (σ.selfBoundary O') σ.forbiddenBoundary
-
-/-- **The boundary loci are closed in `V`**: the image in the ambient scheme of the
-inverse image under `ψ` of a closed subset of `U` meets `V` in exactly itself.
-(Blueprint: `lemma:nagata-boundary-loci`.)
-
-This is the form in which the blueprint records closedness of the boundary loci; the
-disjointness statement of the same node is
-`TwoOpenSide.disjoint_range_embX_forbiddenBoundary`, which is proved directly. -/
-lemma closure_image_preimage_inter {A : Set U} (hA : IsClosed A) :
-    closure (σ.V.ι '' (σ.ψ ⁻¹' A)) ∩ (σ.V : Set σ.X) = σ.V.ι '' (σ.ψ ⁻¹' A) := by
-  rw [← Scheme.Opens.range_ι, ← Set.image_preimage_eq_inter_range,
-    σ.V.ι.isOpenEmbedding.isOpenMap.preimage_closure_image σ.V.ι.isOpenEmbedding.injective
-      σ.V.ι.continuous _ (hA.preimage σ.ψ.continuous)]
 
 /-- The embedded copy of `O` avoids the forbidden boundary. -/
 lemma disjoint_range_embX_forbiddenBoundary :
@@ -322,32 +274,6 @@ lemma Prepared.admissibleBlowup {σ : TwoOpenSide u O} (B : IsAdmissible σ.X σ
     {O' : U.Opens} (hσ : σ.Prepared O') : (σ.admissibleBlowup B).Prepared O' := by
   rw [Prepared, σ.admissibleBlowup_selfBoundary B O', σ.admissibleBlowup_forbiddenBoundary]
   exact hσ.closure_preimage B.I.blowupMap.continuous
-
-/-- **Every side becomes prepared after an admissible blow-up**: if the two opens cover `U`,
-then the boundary loci of a side are disjoint closed subsets of `V` with quasi-compact
-complements, so the separation blow-up `exists_admissibleBlowup_disjoint_closures` transports
-the side to a prepared one. (Blueprint: the separation-blow-up half of
-`lemma:nagata-prepared-boundaries`, whose input is `def:nagata-separate-constructible-closed`.) -/
-theorem exists_admissibleBlowup_prepared {O' : U.Opens} (hO : O ⊔ O' = ⊤) :
-    ∃ B : IsAdmissible σ.X σ.V, (σ.admissibleBlowup B).Prepared O' := by
-  have hX := σ.isNoetherian_X
-  have hV : IsCompact (σ.V : Set σ.X) := TopologicalSpace.NoetherianSpace.isCompact _
-  have : CompactSpace σ.V.toScheme := isCompact_iff_compactSpace.mp hV
-  have : IsNoetherian σ.V.toScheme := ⟨⟩
-  have hUO : (O : Set U) ∪ (O' : Set U) = Set.univ := by
-    rw [← TopologicalSpace.Opens.coe_sup, hO, TopologicalSpace.Opens.coe_top]
-  have hdisj : Disjoint (σ.ψ ⁻¹' ((O' : Set U)ᶜ)) (σ.ψ ⁻¹' ((O : Set U)ᶜ)) :=
-    Disjoint.preimage _ (by
-      rw [Set.disjoint_compl_left_iff_subset, Set.compl_subset_iff_union]
-      exact hUO)
-  obtain ⟨B, hB⟩ := exists_admissibleBlowup_disjoint_closures hV
-    ((O'.isOpen.isClosed_compl).preimage σ.ψ.continuous)
-    ((O.isOpen.isClosed_compl).preimage σ.ψ.continuous)
-    (TopologicalSpace.NoetherianSpace.isCompact _) (TopologicalSpace.NoetherianSpace.isCompact _)
-    hdisj
-  refine ⟨B, ?_⟩
-  rw [Prepared, σ.admissibleBlowup_selfBoundary B O', σ.admissibleBlowup_forbiddenBoundary]
-  exact hB
 
 end AdmissibleBlowup
 
