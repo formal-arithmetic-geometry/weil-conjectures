@@ -6626,13 +6626,23 @@ This is a cited external input: Schemes, Lemma~26.10.4
 \label{lem:pc-ample-positive-degree}
 Let $k$ be a field, $X$ a smooth projective
 \termref{def:pc-curve}{curve} over $k$ and $\cL$ an invertible
-$\cO_X$-module.  Then $\cL$ is \termref{def:pcb-ample}{ample} if and
-only if $\deg(\cL)>0$.
-\uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
+$\cO_X$-module.
+\begin{enumerate}
+\item If $\cL$ is \termref{def:pcb-ample}{ample}, then $\deg(\cL)>0$.
+\item If $H^0(X,\cO_X)=k$ and $\deg(\cL)>0$, then $\cL$ is ample.
+\end{enumerate}
+In particular, if $H^0(X,\cO_X)=k$, then $\cL$ is ample if and only if
+$\deg(\cL)>0$.  The hypothesis $H^0(X,\cO_X)=k$ in (2) is not
+automatic: on a proper variety $H^0(X,\cO_X)$ is in general only a
+finite field extension of $k$ (\Cref{lem:pc-h0-proper-variety}(1)).  It
+holds whenever $X$ is
+\termref{def:pc-geometrically-irreducible}{geometrically integral}
+over $k$ (\Cref{lem:pc-h0-proper-variety}(2)).
+\uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible,lem:pc-h0-proper-variety}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
-\emph{($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
+\emph{(1) ($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
 $\cL^{\otimes m}=i^*\cO(1)$.  Since $X$ is proper, the immersion is a
@@ -6672,14 +6682,25 @@ m\deg(\cL)=\deg(\cL^{\otimes m})=\deg D\ge1 ,
 \]
 and $\deg\cL>0$.
 
-\emph{($\Leftarrow$).}  Assume $\deg\cL>0$.  By
+\emph{(2) ($\Leftarrow$).}  Assume $H^0(X,\cO_X)=k$ and $\deg\cL>0$.  By
 \Cref{lem:pc-degree-base-change}(1), $\deg(\cL_{\bar k})=\deg\cL>0$,
 and $X_{\bar k}$ is a smooth projective curve over the algebraically
 closed field $\bar k$ (smooth: \Cref{lem:pc-smooth-base-change};
 proper: \Cref{lem:pc-proper-base-change}; curve: \Cref{lem:pc-dim-base-change};
-integral: $H^0(X_{\bar k},\cO)=H^0(X,\cO)\otimes_k\bar k$ is a field
-\Cref{lem:pc-h0-proper-variety}(1), so $X_{\bar k}$ is connected
-\Cref{lem:pc-h0-geom-connected}; and $X_{\bar k}$, being smooth over
+integral: by the hypothesis $H^0(X,\cO_X)=k$ and flat base change
+along the flat morphism $\Spec(\bar k)\to\Spec(k)$ applied to the
+proper, hence quasi-compact and quasi-separated, morphism
+$X\to\Spec(k)$ and to $\cF=\cO_X$
+(\Cref{lem:pc-flat-base-change-cohom}), one has
+$H^0(X_{\bar k},\cO_{X_{\bar k}})=H^0(X,\cO_X)\otimes_k\bar k=\bar k$;
+moreover $X$ is geometrically reduced, since for every field extension
+$k'/k$ the base change $X_{k'}$ is smooth over $k'$
+(\Cref{lem:pc-smooth-base-change}), hence regular
+(\Cref{lem:pc-smooth-over-field-regular}) and in particular reduced; so
+\Cref{lem:pc-h0-geom-connected}, applied to the proper geometrically
+reduced $X$ with $H^0(X,\cO_X)=k$, shows that $X$ is geometrically
+connected, and in particular $X_{\bar k}$ is connected.  And
+$X_{\bar k}$, being smooth over
 $\bar k$, is regular \Cref{lem:pcb-smooth-regular}, hence normal
 \Cref{lem:pc-regular-is-normal} and in particular reduced; a Noetherian
 ($X_{\bar k}$ is of finite type over $\bar k$) normal connected scheme
@@ -7575,7 +7596,7 @@ which is finite locally free of degree $\binom{d_1+d_2}{d_1}$.
 \uses{def:pc-hilb-functor,lem:pc-hilb-representable,def:pc-effective-cartier-divisor,def:pc-degree-line-bundle}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-geom-irreducible-product,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-image-universally-closed,lem:pc-proper-base-change,lem:pc-proper-composition,lem:pc-smooth-over-field-regular,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine,lem:pcb-regular-local-domain}
+\uses{def:pc-base-change,def:pc-curve,def:pc-degree-line-bundle,def:pc-hilb-functor,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-effective-cartier-divisor,lem:pc-ample-positive-degree,lem:pc-cartier-criterion,lem:pc-degree-base-change,lem:pc-geom-irreducible-product,lem:pc-h0-proper-variety,lem:pc-hilb-addition,lem:pc-hilb-representable,lem:pc-hilb-smooth,lem:pc-image-universally-closed,lem:pc-proper-base-change,lem:pc-proper-composition,lem:pc-smooth-over-field-regular,lem:pc-vanishing-above-dim,lem:pcb-ample-complement-affine,lem:pcb-regular-local-domain}
 \emph{Step 0: the affine-open hypothesis.}  We verify the hypothesis of
 \Cref{lem:pc-hilb-representable} (for $S=\Spec(k)$, $X/k$): let
 $x_1,\dots,x_d$ be a finite set of points of $X$ (of the single fibre
@@ -7598,7 +7619,11 @@ at the beginning of the proof of
 degree established in \Cref{lem:pc-degree-base-change}(2)) the
 invertible module
 $\cO_X(D_0)$ has positive degree; hence it is ample
-(\Cref{lem:pc-ample-positive-degree}); by
+(\Cref{lem:pc-ample-positive-degree}(2), whose hypothesis
+$H^0(X,\cO_X)=k$ holds here: $X$ is geometrically irreducible by
+assumption and geometrically reduced, being smooth over $k$, hence
+geometrically integral, so \Cref{lem:pc-h0-proper-variety}(2) applies
+to the proper $X$); by
 \Cref{lem:pcb-ample-complement-affine} the open subscheme
 $X\setminus\operatorname{Supp}(D_0)=X\setminus\{P_1,\dots,P_m\}$
 is affine and it contains all the $x_i$ (the closed ones by
@@ -9165,7 +9190,7 @@ the module $\cL_0^{\bullet}:=i^*\cO_{\PP^n}(1)$ is ample on $X$ and, by
 the last assertion of the same lemma applied to
 $i_K:X_K\to\PP^n_K$ (base change of $i$ along $K$, \Cref{lem:pc-closed-imm-base-change}),
 the base change $\cL_0^{\bullet}|_{X_K}$ is ample on $X_K$.
-By \Cref{lem:pc-ample-positive-degree}, $\deg_X(\cL_0^{\bullet})>0$, and
+By \Cref{lem:pc-ample-positive-degree}(1), $\deg_X(\cL_0^{\bullet})>0$, and
 by \Cref{lem:pc-degree-base-change},
 $\deg_{X_K}(\cL_0^{\bullet}|_{X_K})=\deg_X(\cL_0^{\bullet})>0$.
 
