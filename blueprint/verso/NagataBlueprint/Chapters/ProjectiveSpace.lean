@@ -18,6 +18,7 @@ Let $`\sigma` be an index type. The polynomial ring
 $`\mathbb{Z}[T_i : i \in \sigma \sqcup \{\ast\}]` carries its total-degree grading.
 
 :::definition "def:relative-projective-space" (parent := "grp:projective") (lean := "AlgebraicGeometry.ProjectiveSpaceInt, AlgebraicGeometry.RelativeProjectiveSpace, AlgebraicGeometry.RelativeProjectiveSpace.toProjectiveSpaceInt")
+*Relative projective space.*
 The _integral model_ is $`\Pj^{\sigma}_{\mathbb{Z}} = \Proj \mathbb{Z}[T_i]` for the
 total-degree grading. For a scheme $`S`, the _relative projective space_ is the base change
 $$`\Pj(\sigma; S) \;=\; \Pj^{\sigma}_{\mathbb{Z}} \times_{\Spec \mathbb{Z}} S,`
@@ -26,6 +27,7 @@ $`\Pj(\sigma; S) \to \Pj^{\sigma}_{\mathbb{Z}}` to the integral model.
 :::
 
 :::lemma_ "lem:projective-space-cartesian" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isPullback_over")
+*Relative projective space is a base change of the integral model.*
 The square formed by the structure morphism $`\Pj(\sigma; S) \to S`, the comparison morphism
 $`\Pj(\sigma; S) \to \Pj^{\sigma}_{\mathbb{Z}}` and the two morphisms to $`\Spec \mathbb{Z}`
 is cartesian {uses "def:relative-projective-space"}[].
@@ -37,6 +39,7 @@ $`S` over $`\Spec \mathbb{Z}`, and the two morphisms in question are its project
 :::
 
 :::theorem "thm:proj-proper" (parent := "grp:projective") (lean := "AlgebraicGeometry.RelativeProjectiveSpace.isProper_over")
+*The relative projective space is proper over its base.*
 For finite $`\sigma` the structure morphism $`\Pj(\sigma; S) \to S` is proper.
 :::
 
@@ -47,6 +50,7 @@ properness is stable under base change.
 :::
 
 :::lemma_ "lem:dehomogenization" (parent := "grp:projective") (lean := "MvPolynomial.dehomogenizeEquiv")
+*Dehomogenization at the distinguished variable.*
 Let $`R` be a commutative ring and let $`R[T_\ast, T_i : i \in \sigma]` carry its
 total-degree grading. The degree-zero part of the localization away from the variable
 $`T_\ast` is canonically isomorphic to the polynomial ring in the remaining variables:
@@ -55,12 +59,14 @@ for $`a` homogeneous of degree $`k`; the inverse sends $`T_i` to $`T_i / T_\ast`
 :::
 
 :::definition "def:standard-affine-chart" (parent := "grp:projective") (lean := "AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace")
+*The standard affine chart of the relative projective space.*
 The _standard chart_ $`\Aff(\sigma; S) \to \Pj(\sigma; S)` is the morphism obtained by base
 change from the morphism of integral models given by $`T_i \mapsto T_i / T_\ast`
 {uses "def:relative-projective-space"}[].
 :::
 
 :::lemma_ "lem:affine-chart" (parent := "grp:projective") (lean := "AlgebraicGeometry.AffineSpace.isOpenImmersion_toRelativeProjectiveSpace, AlgebraicGeometry.AffineSpace.toRelativeProjectiveSpace_over")
+*The standard chart is an open immersion over the base.*
 The standard chart $`\Aff(\sigma; S) \to \Pj(\sigma; S)` {uses "def:standard-affine-chart"}[]
 is an open immersion, and it is a morphism over $`S`.
 :::
@@ -75,6 +81,7 @@ immersions are stable under base change.
 # Quasi-affine sources
 
 :::theorem "thm:04II" (parent := "grp:projective") (lean := "AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine, AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine'")
+*Stacks Tag 04II: immersion of a quasi-affine scheme into a relative affine space.*
 Let $`X` be a quasi-affine scheme and let $`\pi \colon X \to S` be locally of finite type.
 Then there are a finite index type $`\sigma` and an immersion $`i \colon X \to \Aff(\sigma; S)`
 over $`S`, that is, with $`\pi` equal to the composite of $`i` with the structure morphism of
@@ -91,6 +98,7 @@ closed immersion into the basic open of one of the coordinates, hence an immersi
 :::
 
 :::definition "def:affine-compactification" (parent := "grp:projective") (lean := "AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace")
+*The affine compactification construction.*
 Let $`f \colon X \to S` be quasi-compact and let $`i \colon X \to \Aff(\sigma; S)` be an
 immersion over $`S` with $`\sigma` finite. Composing $`i` with the standard chart
 {uses "def:standard-affine-chart"}[] {uses "lem:affine-chart"}[] exhibits $`f` as an
@@ -100,6 +108,7 @@ immersion into a scheme proper over $`S`
 :::
 
 :::theorem "thm:quasi-affine-compactifiable" (parent := "grp:projective") (lean := "AlgebraicGeometry.HasCompactification.of_isQuasiAffine")
+*A quasi-affine scheme of finite type over the base is compactifiable.*
 Let $`f \colon X \to S` be quasi-compact and locally of finite type with $`X` quasi-affine.
 Then $`f` admits a compactification. In particular this holds when $`X` is affine.
 :::

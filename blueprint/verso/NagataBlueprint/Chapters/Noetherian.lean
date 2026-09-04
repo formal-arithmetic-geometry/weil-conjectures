@@ -12,6 +12,7 @@ the quasi-affine one, the inductive step is the two-open theorem.
 :::
 
 :::theorem "thm:dense-affine-cover" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter")
+*Dense affine covers exist.*
 Let $`X` be a quasi-compact scheme with finitely many irreducible components. Then $`X`
 admits a finite affine open cover $`U_0, \dots, U_{n-1}` whose total intersection
 $`\bigcap_i U_i` contains every generic point of $`X`, and is therefore dense in $`X`.
@@ -26,10 +27,12 @@ a cover contains all generic points, hence is dense.
 :::
 
 :::definition "def:partial-unions" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.partialAffineOpenUnions")
+*The partial unions of a finite family of opens.*
 For a finite family $`U_0, \dots, U_{n-1}` of opens of $`X` put $`X_r = \bigcup_{i < r} U_i`.
 :::
 
 :::lemma_ "lem:partial-unions-endpoints" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.Scheme.partialAffineOpenUnions_zero, AlgebraicGeometry.Scheme.partialAffineOpenUnions_self")
+*The extreme partial unions.*
 The two extreme partial unions are $`X_0 = \emptyset` and $`X_n = \bigcup_i U_i`
 {uses "def:partial-unions"}[].
 :::
@@ -40,6 +43,7 @@ condition $`i < r` holds for every index of the family.
 :::
 
 :::lemma_ "lem:gluing-step" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.HasCompactification.of_sup_of_dense_subset")
+*The gluing step of the induction over a dense affine cover.*
 Let $`S` be Noetherian and $`f \colon X \to S` separated, locally of finite type and
 quasi-compact. Let $`D \subseteq X` be dense and contained in two opens $`V, W \subseteq X`,
 and assume both $`f \circ \iota_V` and $`f \circ \iota_W` are compactifiable. Then
@@ -54,6 +58,7 @@ $`W`; and $`V \cup W` is Noetherian, $`X` being locally Noetherian and quasi-com
 :::
 
 :::theorem "thm:noetherian" (parent := "grp:noetherian") (lean := "AlgebraicGeometry.nagataCompactification_of_isNoetherian")
+*Nagata compactification over a Noetherian base.*
 Let $`S` be a Noetherian scheme and let $`f \colon X \to S` be separated, locally of finite
 type and quasi-compact. Then $`f` admits a compactification.
 :::

@@ -14,6 +14,7 @@ two-open theorem.
 :::
 
 :::theorem "thm:0F3Y" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup")
+*Stacks Tag 0F3Y: scheme-theoretic images and admissible blow-ups.*
 Let $`\sI` be a $`U`-admissible centre on $`X`. Let $`h` be a quasi-compact morphism into a
 fibre product over $`X` whose first component lands in $`U`, and let $`h'` be a lift of $`h`
 along the base change of $`\pi_\sI`; assume, as everywhere in the strict-transform theory,
@@ -29,6 +30,7 @@ Both kernels are computed from the same schematically dense open locus over $`U`
 :::
 
 :::definition "def:common-modification" (parent := "grp:modifications") (lean := "AlgebraicGeometry.CommonModification")
+*Common modification.*
 Let $`s_1 \colon X_1 \to S`, $`s_2 \colon X_2 \to S` be morphisms and let
 $`j_1 \colon U \to X_1`, $`j_2 \colon U \to X_2` be open immersions with
 $`s_1 \circ j_1 = s_2 \circ j_2`. A _common modification_ consists of $`j_i(U)`-admissible
@@ -40,6 +42,7 @@ that $`w` is separated, locally of finite type and quasi-compact
 :::
 
 :::theorem "thm:0F3X" (parent := "grp:modifications") (lean := "AlgebraicGeometry.nonempty_commonModification")
+*Stacks Tag 0F3X: existence of a common modification.*
 Let $`S` be quasi-compact quasi-separated, let $`s_1 \colon X_1 \to S` and
 $`s_2 \colon X_2 \to S` be separated, locally of finite type and quasi-compact, and let
 $`j_1 \colon U \to X_1`, $`j_2 \colon U \to X_2` be quasi-compact open immersions with
@@ -60,6 +63,7 @@ finite type and quasi-compact over $`S`.
 :::
 
 :::definition "def:proper-extension" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Compactification.ProperExtension")
+*Graph extension of a compactification.*
 Let $`u \colon U \to S` be a morphism, $`V \subseteq U` a quasi-compact open and
 $`c = (Z, g, i)` a compactification of $`u \circ \iota_V` {uses "def:compactification"}[]. A
 _graph extension_ of $`c` consists of an $`i(V)`-admissible centre on $`Z`, an open
@@ -69,6 +73,7 @@ exactly the preimage $`\psi^{-1}V` and $`\psi` is an isomorphism over $`V`.
 :::
 
 :::theorem "thm:0F3Z" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Compactification.nonempty_properExtension")
+*Stacks Tag 0F3Z: existence of a graph extension.*
 Let $`S` be quasi-compact quasi-separated, let $`u \colon U \to S` be separated, locally of
 finite type and quasi-compact, let $`V \subseteq U` be a quasi-compact open and let $`c` be a
 compactification of $`u \circ \iota_V`. Then a graph extension of $`c` exists.
@@ -83,6 +88,7 @@ second projection, proper because $`Z \times_S U \to U` is proper.
 :::
 
 :::theorem "thm:0F3W" (parent := "grp:modifications") (lean := "AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure")
+*Stacks Tag 0F3W: isomorphism near the closure of a boundary piece.*
 Let $`X` be quasi-compact quasi-separated, let $`U \subseteq X` be a quasi-compact open and
 let $`q \colon Z \to X` be proper. Let $`T \subseteq U` be a subset which is closed in $`U`
 and let $`N \subseteq X` be an open containing $`T` over which $`q` is an isomorphism. Then
@@ -99,6 +105,7 @@ over the resulting neighbourhood.
 # Boundary preparation
 
 :::definition "def:dense-refinement" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Compactification.denseRefinement")
+*The scheme-theoretically dense refinement of a compactification.*
 Let $`c = (Z, g, i)` be a compactification of a quasi-compact morphism $`f`
 {uses "def:compactification"}[]. The _dense refinement_ of $`c` is the compactification
 obtained by replacing $`Z` by the scheme-theoretic image of $`i`: its open immersion is the
@@ -107,6 +114,7 @@ image closed immersion with $`g`.
 :::
 
 :::theorem "thm:dense-compactification" (parent := "grp:modifications") (lean := "AlgebraicGeometry.Compactification.isSchemeTheoreticallyDominant_denseRefinement_i, AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant")
+*Choice of dense compactifications.*
 The open immersion of the dense refinement {uses "def:dense-refinement"}[] is
 scheme-theoretically dominant. Consequently every compactifiable quasi-compact morphism
 admits a compactification whose open immersion is scheme-theoretically dominant.
@@ -119,6 +127,7 @@ compactifiable morphism gives the second assertion.
 :::
 
 :::theorem "thm:boundary-separation" (parent := "grp:modifications") (lean := "AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures")
+*The constructible-boundary separation blow-up.*
 If $`T_1, T_2` are disjoint closed subsets of a quasi-compact open $`U` of a quasi-compact
 quasi-separated scheme $`X` with quasi-compact complements in $`U`, then after a
 $`U`-admissible blow-up of $`X` the closures of the inverse images of $`T_1` and $`T_2` are

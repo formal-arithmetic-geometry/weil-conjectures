@@ -15,6 +15,7 @@ subschemes, base change).
 # The notion
 
 :::definition "def:compactification" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification, AlgebraicGeometry.HasCompactification")
+*Compactification of a morphism.*
 Let $`f \colon X \to Y` be a morphism of schemes. A _compactification_ of $`f` is a triple
 $`(Z, g, i)` consisting of a scheme $`Z`, a proper morphism $`g \colon Z \to Y` and an open
 immersion $`i \colon X \to Z` such that
@@ -23,6 +24,7 @@ We say that $`f` is _compactifiable_ if a compactification of $`f` exists.
 :::
 
 :::proposition "prop:compactification-basic" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.isSeparated, AlgebraicGeometry.Compactification.locallyOfFiniteType, AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff, AlgebraicGeometry.Compactification.isProper_openImmersion, AlgebraicGeometry.Compactification.isClosedImmersion_openImmersion, AlgebraicGeometry.Compactification.isClopen_range_openImmersion")
+*Properties forced by a compactification.*
 Let $`(Z, g, i)` be a compactification of $`f \colon X \to Y`. Then
 
 * $`f` is separated;
@@ -46,6 +48,7 @@ morphism which is both an open and a closed immersion has open and closed range.
 :::
 
 :::proposition "prop:compactification-elementary" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.ofIsProper, AlgebraicGeometry.Compactification.copy, AlgebraicGeometry.Compactification.precomp, AlgebraicGeometry.HasCompactification.comp_of_isOpenImmersion")
+*Elementary constructions of compactifications.*
 Three elementary constructions {uses "def:compactification"}[]:
 
 * a proper morphism $`f` is a compactification of itself, via $`(X, f, \mathrm{id}_X)`;
@@ -64,6 +67,7 @@ scheme-theoretic image followed by a closed immersion, are taken from the ambien
 and are not restated as nodes of this blueprint.
 
 :::definition "def:of-immersion" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.ofIsImmersion")
+*Compactification constructed from an immersion.*
 Let $`g \colon X \to Y` be a quasi-compact immersion and let $`p \colon Y \to S` be proper.
 The factorization of $`p \circ g` through the scheme-theoretic image of $`g`,
 $$`X \xrightarrow{\ g_{\to}\ } \operatorname{im} g \xrightarrow{\ \iota\ } Y \xrightarrow{\ p\ } S,`
@@ -73,6 +77,7 @@ as the composite of a closed immersion with a proper morphism.
 :::
 
 :::theorem "thm:immersion-into-proper" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.HasCompactification.of_isImmersion")
+*An immersion into a proper scheme is compactifiable.*
 Let $`u \colon X \to S` be quasi-compact and suppose that $`u = p \circ g` for an immersion
 $`g \colon X \to Y` and a proper morphism $`p \colon Y \to S`. Then $`u` admits a
 compactification.
@@ -84,6 +89,7 @@ closing-up construction applies.
 :::
 
 :::corollary "cor:closed-subscheme" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.ofIsClosedImmersion, AlgebraicGeometry.HasCompactification.of_isClosedImmersion")
+*Compactifiability is inherited by closed subschemes.*
 Let $`i \colon X \to X'` be a closed immersion and let $`f' \colon X' \to S` be quasi-compact
 and compactifiable. Then $`f' \circ i` admits a compactification; one may take for its
 ambient scheme the scheme-theoretic image of $`X` inside the ambient scheme of a
@@ -99,6 +105,7 @@ Now close up that immersion, using $`f' \circ i = g \circ (j \circ i)`.
 # Base change
 
 :::definition "def:compactification-base-change" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.ofIsPullback")
+*Base change construction for a compactification.*
 Let a cartesian square with horizontal morphisms $`h \colon X \to Y` and $`t \colon S \to T`
 and vertical morphisms $`u \colon X \to S` and $`p \colon Y \to T` be given, and let
 $`(Z, g, i)` be a compactification of $`p` {uses "def:compactification"}[]. Then
@@ -109,6 +116,7 @@ is a compactification of $`u`.
 :::
 
 :::lemma_ "lem:base-change-square" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.Compactification.isPullback_of_isPullback")
+*The base-changed open immersion square is cartesian.*
 In the situation above, the square formed by $`h`, the morphism $`X \to Z \times_T S`, the
 open immersion $`i` and the first projection $`Z \times_T S \to Z` is cartesian.
 Consequently $`X \to Z \times_T S` is an open immersion, open immersions being stable under
@@ -116,6 +124,7 @@ base change.
 :::
 
 :::theorem "thm:base-change" (parent := "grp:compactifications") (lean := "AlgebraicGeometry.HasCompactification.of_isPullback")
+*Compactifiability is stable under base change.*
 If $`p \colon Y \to T` admits a compactification and $`u \colon X \to S` is a base change of
 $`p` along a morphism $`t \colon S \to T`, then $`u` admits a compactification.
 :::

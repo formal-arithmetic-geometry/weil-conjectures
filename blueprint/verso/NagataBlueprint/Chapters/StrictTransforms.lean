@@ -12,6 +12,7 @@ and its identification with the blow-up of the pulled-back centre.
 :::
 
 :::definition "def:strict-transform" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.strictTransformOpen, AlgebraicGeometry.strictTransform, AlgebraicGeometry.strictTransformι, AlgebraicGeometry.strictTransformMap, AlgebraicGeometry.strictTransformToSource, AlgebraicGeometry.Scheme.IdealSheafData.strictTransform, AlgebraicGeometry.Scheme.IdealSheafData.strictTransformι")
+*The strict transform.*
 Let $`f \colon Y \to X` and $`\pi \colon X' \to X` be morphisms and let $`U \subseteq X` be an
 open. Inside the fibre product $`Y \times_X X'` consider the open locus $`L` lying over $`U`.
 The _strict transform_ $`\St{f}{\pi}{U}` of $`f` along $`\pi` preserving $`U` is the
@@ -22,6 +23,7 @@ this is the classical strict transform {uses "def:blowup"}[].
 :::
 
 :::proposition "prop:strict-transform-basic" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.isSeparated_strictTransformMap, AlgebraicGeometry.quasiCompact_strictTransformMap, AlgebraicGeometry.locallyOfFiniteType_strictTransformMap, AlgebraicGeometry.isClosedImmersion_strictTransformMap, AlgebraicGeometry.range_strictTransformMap_subset_preimage_range, AlgebraicGeometry.mem_range_strictTransformMap_of_mem_of_mem_range, AlgebraicGeometry.disjoint_range_strictTransformMap_of_disjoint")
+*Basic properties of the strict transform.*
 Separatedness, quasi-compactness, being locally of finite type and being a closed immersion
 pass from $`f` to the projection $`\St{f}{\pi}{U} \to X'`. The strict transform contains the
 whole open locus over $`U`. Its underlying set is squeezed between the inverse image of the
@@ -31,12 +33,14 @@ disjointness of two closed subschemes of $`X` persists for their strict transfor
 :::
 
 :::lemma_ "lem:strict-transform-over-U" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.isPullback_strictTransformOpen, AlgebraicGeometry.isPullback_strictTransform_over, AlgebraicGeometry.strictTransformOpenIso")
+*The strict transform over the preserved open is the ordinary base change.*
 If $`\pi` is an isomorphism over $`U`, then the open locus $`L` is canonically
 $`Y \times_X U`, hence identified with $`f^{-1}U`, and the part of the strict transform lying
 over $`U` is the ordinary base change $`Y \times_X U`.
 :::
 
 :::lemma_ "lem:kernel-criterion" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.ker_strictTransformMap, AlgebraicGeometry.ker_eq_ker_strictTransformOpen_ι")
+*The kernel criterion for the strict transform.*
 Assume the inclusion of the open locus $`L` is quasi-compact. Then the strict transform and
 its open locus have the same scheme-theoretic image in $`X'`. Assume moreover that $`\pi` is
 an isomorphism over $`U`. Then a morphism to $`Y \times_X X'` whose first component is an
@@ -45,6 +49,7 @@ closed subscheme of $`Y \times_X X'` as the open locus over $`U`.
 :::
 
 :::theorem "thm:080E" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform")
+*Stacks Tag 080E: the strict transform is the blow-up of the pulled-back ideal.*
 Let $`f \colon Y \to X` be a morphism and $`\sI` a quasi-coherent ideal sheaf on $`X`. Then
 there is an isomorphism
 $$`\Bl_{\sI \cdot \sO_Y}(Y) \;\xrightarrow{\ \sim\ }\; \St{f}{\pi_\sI}{V(\sI)^{c}}`
@@ -70,6 +75,7 @@ $`Y \times_X \Bl_\sI(X)` coincide.
 :::
 
 :::corollary "cor:080E-closed" (parent := "grp:strict-transform") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_isClosedImmersion_blowup_comap")
+*Stacks Tag 080E for a closed immersion.*
 Let $`j \colon Z \to X` be a closed immersion and $`\sI` a quasi-coherent ideal sheaf on
 $`X`. Then $`\Bl_{\sI \cdot \sO_Z}(Z)` is a closed subscheme of $`\Bl_\sI(X)`, compatibly
 with the two blow-up morphisms.

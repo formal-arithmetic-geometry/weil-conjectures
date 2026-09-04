@@ -19,12 +19,14 @@ suprema $`\sI \sqcup \sL` computed sectionwise. We write $`V(\sI)` for the suppo
 and $`\sI \cdot \sO_Y` for the inverse image ideal sheaf along $`Y \to X`.
 
 :::definition "def:finite-type-ideal" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType")
+*Ideal sheaves of finite type.*
 Let $`\sI` be a quasi-coherent ideal sheaf on $`X` and let $`O \subseteq X` be an open. We say
 $`\sI` is _of finite type_ on $`O` if $`\sI(U)` is a finitely generated ideal for every affine
 open $`U \subseteq O`, and _of finite type_ if this holds for every affine open of $`X`.
 :::
 
 :::proposition "prop:finite-type-stability" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_top, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_bot, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn_iff_comap, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn.sup, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteTypeOn.iSup, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType.comap, AlgebraicGeometry.Scheme.IdealSheafData.ofFiniteType_of_isLocallyNoetherian")
+*Stability properties of finite-typeness.*
 The zero and unit ideal sheaves are of finite type. Finite-typeness on an open is
 finite-typeness of the restriction to that open; it is local on the target, that is, stable
 under finite suprema and under suprema of families of opens. On a locally Noetherian scheme
@@ -33,6 +35,7 @@ image along an arbitrary morphism {uses "def:finite-type-ideal"}[].
 :::
 
 :::theorem "thm:01PF" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_le, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq")
+*Stacks Tag 01PF: extension of a finite-type ideal sheaf across a quasi-compact open.*
 Let $`X` be a quasi-compact quasi-separated scheme.
 
 * Let $`\sI_0 \le \sH_0` be quasi-coherent ideal sheaves on $`X`, let $`W \subseteq X` be a
@@ -55,6 +58,7 @@ obtained by clearing denominators on a finite cover of the overlap by basic open
 :::
 
 :::theorem "thm:01PF-affine" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_of_isAffineHom, AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_comap_eq_disjoint_support")
+*Extension of a finite-type centre along an affine morphism.*
 Let $`X` be quasi-compact quasi-separated, let $`\sH_0` be a quasi-coherent ideal sheaf on
 $`X` and let $`j \colon Z \to X` be an affine morphism such that $`\sH_0 \cdot \sO_Z` is of
 finite type.
@@ -72,6 +76,7 @@ the cover.
 :::
 
 :::theorem "thm:finite-type-directed" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup, AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le, AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_eq, AlgebraicGeometry.Scheme.IdealSheafData.directedOn_ofFiniteType_le_comap_eq_top, AlgebraicGeometry.Scheme.IdealSheafData.sSup_ofFiniteType_le_comap_eq_top_eq")
+*Finite-type ideal sheaves are compact and exhaust every quasi-coherent ideal sheaf.*
 Let $`X` be a quasi-compact scheme.
 
 * If $`\mathcal{A}` is of finite type and $`\mathcal{A} \le \bigvee_i \mathcal{B}_i` for a
@@ -92,6 +97,7 @@ lies in one member.
 :::
 
 :::theorem "thm:01PH" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl, AlgebraicGeometry.Scheme.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetherian")
+*Stacks Tag 01PH: a quasi-compact open is the complement of the support of a finite-type ideal.*
 Let $`X` be quasi-compact quasi-separated and let $`U \subseteq X` be a quasi-compact open.
 Then there is a finite-type quasi-coherent ideal sheaf $`\sI` on $`X` with
 $`V(\sI) = X \setminus U`. On a locally Noetherian scheme the same holds for an arbitrary
@@ -105,6 +111,7 @@ $`U`, and the support of such a subsheaf is exactly the complement of $`U`.
 :::
 
 :::lemma_ "lem:power-in-ideal" (parent := "grp:finite-type") (lean := "AlgebraicGeometry.Scheme.IdealSheafData.exists_pow_le")
+*A finite-type ideal sheaf has a power inside any ideal sheaf whose support it contains.*
 Let $`X` be quasi-compact, let $`\mathcal{A}, \mathcal{B}` be quasi-coherent ideal sheaves
 with $`\mathcal{B}` of finite type, and assume $`V(\mathcal{A}) \subseteq V(\mathcal{B})`.
 Then $`\mathcal{B}^n \le \mathcal{A}` for some $`n \in \mathbb{N}`.
