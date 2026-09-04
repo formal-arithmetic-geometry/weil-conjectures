@@ -2241,8 +2241,17 @@ covering} is such a family (Topologies, Definition~34.7.1,
 \stacksproject{021M}).  (That the fppf
 topology refines the Zariski topology is \Cref{lem:pc-zariski-coverings-are-fppf}.)
 \uses{def:pc-scheme,def:pc-morphism-conventions}
-% Mathlib: AlgebraicGeometry.Scheme.fppfTopology.
-\mathlibok\ \lean{AlgebraicGeometry.Scheme.fppfTopology}
+% Mathlib: one name per clause.  AlgebraicGeometry.Scheme.fppfPrecoverage is the
+% covering-family notion of the second sentence: its covering families are exactly
+% the jointly surjective families of flat morphisms locally of finite presentation
+% (its docstring, and ofArrows_mem_precoverage_iff, which unfolds it to
+% "(forall x, exists i, x in range (f i)) and (forall i, P (f i))").
+% AlgebraicGeometry.Scheme.fppfTopology, defined as fppfPrecoverage.toGrothendieck,
+% is the site itself, as a topology of sieves.  Both are stated for the absolute
+% category of schemes, not for (Sch/S); as with the representable-functor
+% definition below, take that category to be the category of schemes over S.
+\mathlibok\ \lean{AlgebraicGeometry.Scheme.fppfPrecoverage,
+AlgebraicGeometry.Scheme.fppfTopology}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2441,9 +2450,14 @@ $D_{\text{QCoh}}(\cO_X)$ the full subcategory of objects with
 quasi-coherent cohomology sheaves.  Two objects of $D(\cO_X)$ are
 \emph{isomorphic} if they are connected by a zig-zag of
 quasi-isomorphisms of complexes.
-% Mathlib: the derived category of an abelian category exists (as the
-% localization of the category of chain complexes at quasi-isomorphisms).
-\mathlibok\ \lean{DerivedCategory}
+% Mathlib: the two names cover the first clause only.  DerivedCategory is the
+% derived category of an arbitrary abelian category (the localization of its chain
+% complexes at the quasi-isomorphisms), and AlgebraicGeometry.Scheme.Modules is the
+% category of O_X-modules, so D(O_X) is DerivedCategory X.Modules.  The
+% D_QCoh(O_X) clause has no Mathlib counterpart: DerivedCategory does not occur
+% anywhere under Mathlib/AlgebraicGeometry/, and Mathlib names no derived category
+% cut out by quasi-coherence of the cohomology sheaves.
+\mathlibok\ \lean{DerivedCategory, AlgebraicGeometry.Scheme.Modules}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2552,7 +2566,14 @@ $\mathcal A$ the category of $\cO_X$-modules, and
 denotes the associated sheaf ($\mathcal{H}om^{\bullet}$ the derived
 inner hom of sheaves).
 \uses{def:pc-derived-category}
-% Mathlib: the Ext bifunctor of an abelian category exists in Mathlib.
+% Mathlib: the three names cover the Ext group only.  CategoryTheory.Abelian.Ext
+% X Y n is the displayed definition: Ext.homEquiv identifies it with the shifted
+% homs from X to Y in the derived category, which is this node's own formula, and
+% the third name is the vanishing against an injective that the classical
+% description rests on.  The sheaf Ext of the last display,
+% Ext^i sheaf of O_X-modules, has no Mathlib counterpart: Mathlib has no
+% declaration for a sheaf Ext, and no derived inner hom of sheaves of modules for
+% such a thing to be the cohomology of.
 \mathlibok\ \lean{CategoryTheory.Abelian.Ext,
   CategoryTheory.Abelian.Ext.homEquiv,
   CategoryTheory.Abelian.Ext.eq_zero_of_injective}
