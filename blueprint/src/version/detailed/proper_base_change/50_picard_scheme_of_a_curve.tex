@@ -628,17 +628,21 @@ This is a cited external input: Algebra, Lemma~10.112.4
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% Cited.
+% Decomposed.
 \begin{lemma}[A finite ring map is integral]
 \label{lem:pcb-finite-is-integral}
 Let \(R\to S\) be a finite ring map.  Then \(R\to S\) is integral,
 that is, every element of \(S\) satisfies a monic polynomial with
 coefficients in \(R\).
+% Mathlib: a finite ring homomorphism is integral.
+\mathlibok\ \lean{RingHom.Finite.to_isIntegral}
 \end{lemma}
 \begin{proof}
-This is a cited external input: Algebra, Lemma~10.36.3
-(\stacksproject{00GK}), whose statement is ``a finite ring map is
-integral''.  It is not decomposed here.
+The source is Algebra, Lemma~10.36.3 (\stacksproject{00GK}), whose
+statement is ``a finite ring map is integral''.  Mathlib carries that
+same tag on \texttt{RingHom.Finite.to\_isIntegral}, whose statement is
+the one above, so the node is a Mathlib leaf and is not decomposed
+further here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -4119,27 +4123,34 @@ for $p\ge t$.  This proves (2).
 \subsection{Fields}
 
 % ---------------------------------------------------------------------------
-% Cited.
+% Decomposed.
 \begin{lemma}[Primitive element]
 \label{lem:pc-primitive-element}
 Let $K/k$ be a \termref{def:pc-field-tower}{finite separable} field
 extension.  Then $K/k$ is simple: there is an $\alpha\in K$ with
 $K=k[\alpha]$.
 \uses{def:pc-field-tower}
+% Mathlib: a finite separable extension has a primitive element.
+\mathlibok\ \lean{Field.exists_primitive_element}
 \end{lemma}
 \begin{proof}
-This is a cited external input: Fields, Lemma~9.19.1
-(\stacksproject{030N}), the primitive element theorem.  For a finite
-extension $E/F$ that lemma states the equivalence of ``there exists a
-primitive element for $E$ over $F$'' with ``there are finitely many
-subextensions $E/K/F$'', and then adds: ``moreover, (1) and (2) hold if
-$E/F$ is separable''.  The statement above is that final clause,
-applied to $E/F=K/k$; the equivalence itself is not used here.  It is
-not decomposed here.
+The source is Fields, Lemma~9.19.1 (\stacksproject{030N}), the
+primitive element theorem.  For a finite extension $E/F$ that lemma
+states the equivalence of ``there exists a primitive element for $E$
+over $F$'' with ``there are finitely many subextensions $E/K/F$'', and
+then adds: ``moreover, (1) and (2) hold if $E/F$ is separable''.  The
+statement above is that final clause, applied to $E/F=K/k$; the
+equivalence itself is not used here.  Mathlib's
+\texttt{Field.exists\_primitive\_element} is tagged with exactly that
+scope, \texttt{@[stacks 030N "The moreover part"]}, and states, under
+the hypotheses \texttt{FiniteDimensional F E} and
+\texttt{Algebra.IsSeparable F E}, that there is an $\alpha\in E$ with
+$F(\alpha)=E$.  So the node is a Mathlib leaf and is not decomposed
+further here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% Cited.
+% Decomposed.
 \begin{lemma}[The separable--purely inseparable tower of an algebraic extension]
 \label{lem:pc-separable-purely-inseparable-tower}
 Let $K/k$ be an \termref{def:pc-field-tower}{algebraic} field
@@ -4148,17 +4159,26 @@ $k\subseteq K_{\mathrm{sep}}\subseteq K$ such that $K_{\mathrm{sep}}/k$
 is separable and $K/K_{\mathrm{sep}}$ is
 \termref{def:pc-field-tower}{purely inseparable}.
 \uses{def:pc-field-tower}
+% Mathlib: the witness is the separable closure of $k$ in $K$; it is separable
+% over $k$; $K$ is purely inseparable over it; and any intermediate field with
+% those two properties equals it, which is the uniqueness clause.
+\mathlibok\ \lean{separableClosure.isSeparable,
+separableClosure.isPurelyInseparable, eq_separableClosure}
 \end{lemma}
 \begin{proof}
-This is a cited external input: Fields, Lemma~9.14.6
-(\stacksproject{030K}), sloganed ``any algebraic field extension is
-uniquely a separable field extension followed by a purely inseparable
-one''.  The statement above is that lemma verbatim, with $E/F$ written
-$K/k$.  Note the shape: the cited lemma produces a \emph{tower}
-$K/K_{\mathrm{sep}}/k$, not a compositum, and this is the form in which
-the chapter uses it --- both for the existence of the separable
-subextension $K_{\mathrm{sep}}$ and for the purely inseparable step
-above it.  It is not decomposed here.
+The source is Fields, Lemma~9.14.6 (\stacksproject{030K}), sloganed
+``any algebraic field extension is uniquely a separable field extension
+followed by a purely inseparable one''.  The statement above is that
+lemma verbatim, with $E/F$ written $K/k$.  Note the shape: the cited
+lemma produces a \emph{tower} $K/K_{\mathrm{sep}}/k$, not a compositum,
+and this is the form in which the chapter uses it --- both for the
+existence of the separable subextension $K_{\mathrm{sep}}$ and for the
+purely inseparable step above it.  Mathlib takes $K_{\mathrm{sep}}$ to
+be \texttt{separableClosure k K} and splits the statement into the
+three declarations named above: the two tagged
+\texttt{030K} give the existence half, and
+\texttt{eq\_separableClosure} gives the uniqueness half.  So the node is
+a Mathlib leaf and is not decomposed further here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -6008,7 +6028,7 @@ finite because $M$ is finite.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% Cited.
+% Decomposed.
 \begin{lemma}[Finitely presented and flat means finite locally free]
 \label{lem:pc-fp-flat-finite-projective}
 Let $A$ be a ring and $M$ an $A$-module.  The following are equivalent:
@@ -6016,32 +6036,53 @@ $M$ is finitely presented and flat over $A$; $M$ is finite projective;
 $M$ is a direct summand of a finite free $A$-module; $M$ is finitely
 presented and $M_{\mathfrak p}$ is free for every prime
 $\mathfrak p\subset A$; and $M$ is finite locally free.
+% Mathlib: the implication ``finitely presented and flat $\Rightarrow$
+% projective'' -- the first clause implies the second, which is the only
+% direction of the equivalence used below.  The remaining implications are not
+% carried by a single declaration, so no name is claimed for them.
+\mathlibok\ \lean{Module.Flat.projective_of_finitePresentation}
 \end{lemma}
 \begin{proof}
-This is a cited external input: Algebra, Lemma~10.78.2
-(\stacksproject{00NX}), which lists these among seven equivalent
-conditions on $M$.  It is the converse of
-\Cref{lem:pc-finite-projective-module}, which records the other
-direction (a finite projective module is finitely presented and flat,
-and free over a local ring).  It is not decomposed here.
+The source is Algebra, Lemma~10.78.2 (\stacksproject{00NX}), which
+lists these among eight equivalent conditions on $M$.  It is the
+converse of \Cref{lem:pc-finite-projective-module}, which records the
+other direction (a finite projective module is finitely presented and
+flat, and free over a local ring).  Mathlib carries the tag on
+\texttt{Module.Flat.projective\_of\_finitePresentation}, with the scope
+string ``(1) $\Rightarrow$ (2)'': from \texttt{Module.Flat} and
+\texttt{Module.FinitePresentation} it concludes
+\texttt{Module.Projective}, i.e.\ the first clause above implies the
+second.  That is the direction both users of this node take --- in
+\Cref{lem:pc-flf-properties} and in
+\Cref{lem:pc-rf-perfect-base-change} the hypothesis is finite
+presentation together with flatness and the conclusion is finite
+projectivity.  The reverse implications and the further two clauses are
+not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% Cited.
+% Decomposed.
 \begin{lemma}[A finite flat module over a local ring is free]
 \label{lem:pc-finite-flat-local-free}
 Let $A$ be a local ring and $M$ a finite flat $A$-module.  Then $M$ is
 finite free.
+% Mathlib: a finite flat module over a local ring is free.
+\mathlibok\ \lean{Module.free_of_flat_of_isLocalRing}
 \end{lemma}
 \begin{proof}
-This is a cited external input: Algebra, Lemma~10.78.5
-(\stacksproject{00NZ}), proved there from the equational criterion of
-flatness.  The hypothesis is finite and \emph{flat}, not finite
-projective, so this is not the local case of
-\Cref{lem:pc-finite-projective-module}; and the locality of $A$ is
-needed, since a finite flat module over a general ring need not even be
-projective (Algebra, Remark~10.78.4, \stacksproject{00NY}).  It is not
-decomposed here.
+The source is Algebra, Lemma~10.78.5 (\stacksproject{00NZ}), proved
+there from the equational criterion of flatness.  The hypothesis is
+finite and \emph{flat}, not finite projective, so this is not the local
+case of \Cref{lem:pc-finite-projective-module}; and the locality of $A$
+is needed, since a finite flat module over a general ring need not even
+be projective (Algebra, Remark~10.78.4, \stacksproject{00NY}).  Mathlib
+carries the tag on \texttt{Module.free\_of\_flat\_of\_isLocalRing},
+which assumes exactly \texttt{IsLocalRing}, \texttt{Module.Finite} and
+\texttt{Module.Flat} and concludes \texttt{Module.Free}; that
+declaration is also named by
+\Cref{lem:pc-finite-projective-module}, where it discharges the last of
+that node's three clauses.  So the node is a Mathlib leaf and is not
+decomposed further here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -8539,6 +8580,19 @@ $F$ each of which is representable;
 \end{description}
 Then $F$ is representable by a scheme over $S$.
 \uses{def:pc-subfunctor,def:pc-open-subfunctor,def:pc-representable-functor}
+% Mathlib: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable
+% (Mathlib/AlgebraicGeometry/Sites/Representability.lean) carries this tag and
+% takes exactly the four hypotheses above -- a sheaf for the Zariski topology,
+% a family X : \iota \to Scheme, maps yoneda.obj (X i) \to F that are
+% relatively representable open immersions, and joint local surjectivity of
+% Sigma.desc f.  But it is stated for the absolute category of schemes:
+% F : Sheaf Scheme.zariskiTopology (Type u) and X : \iota \to Scheme, with the
+% conclusion F.1.IsRepresentable.  The node is stated over (Sch/S)^{op} and
+% concludes representability by a scheme *over S*, which is the form its
+% users below need; Mathlib has no declaration of the criterion over the
+% relative site (Scheme.zariskiTopology.over S exists, but nothing is proved
+% about it here).  So no \mathlibok is claimed for this node and the proof
+% below stays.
 \end{lemma}
 \begin{proof}
 \uses{def:pc-scheme,def:pc-representable-functor,def:pc-subfunctor,def:pc-open-subfunctor,def:pc-cover,def:pc-zariski-sheaf-property,lem:pc-glueing-schemes,lem:pc-yoneda}
