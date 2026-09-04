@@ -37,11 +37,11 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.BoundaryPreparation
+public import WeilConjectures.Compactification.CompactifiedProperExtension
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.StrictTransform
-public import WeilConjectures.Compactification.TwoOpenSide
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Convergence
