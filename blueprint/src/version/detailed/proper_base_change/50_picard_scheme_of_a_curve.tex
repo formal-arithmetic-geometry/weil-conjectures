@@ -1616,6 +1616,12 @@ That last tag is also stated on its own below, in the stronger form the
 tag itself has, as \Cref{lem:pc-smooth-etale-over-affine-space}; the
 comparison of the two forms is made there.  That node is proved from the
 present lemma and is not used here.
+% No \uses for \Cref{lem:pc-smooth-etale-over-affine-space} here, deliberately: the
+% edge would close a cycle.  That node's statement already
+% \uses{lem:pc-standard-smooth-form}, so adding the reverse edge makes the 2-cycle
+%   lem:pc-standard-smooth-form -> lem:pc-smooth-etale-over-affine-space
+%     -> lem:pc-standard-smooth-form.
+% The prose citation above is a comparison of the two forms of tag 054L, not a use.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -3187,6 +3193,12 @@ monomorphism, \emph{out of} $A$.  The contravariant, coeffaceable
 form that this chapter uses is
 \Cref{lem:pc-coeffaceable-universal}, which is deduced from this
 lemma there.  It is not decomposed here.
+% No \uses for \Cref{lem:pc-coeffaceable-universal} here, deliberately: the edge would
+% close a cycle.  That node is deduced from this one, so it already
+% \uses{lem:pc-effaceable-universal}, and adding the reverse edge makes the 2-cycle
+%   lem:pc-effaceable-universal -> lem:pc-coeffaceable-universal
+%     -> lem:pc-effaceable-universal.
+% The prose citation above points at a consumer of this node, not at a hypothesis.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -5469,6 +5481,7 @@ $\mathbf A^d_V\to V$).
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-smooth-morphism,lem:pc-standard-smooth-form}
 \end{lemma}
 \begin{proof}
+\uses{lem:pc-standard-smooth-form}
 This is a cited external input: Morphisms of Schemes, Section~29.37
 (\'Etale morphisms), Lemma~29.37.21
 (\stacksproject{054L}) --- smooth schemes are
@@ -5949,6 +5962,10 @@ scheme proper over a field, with the
 ``some power is very ample'' formulation of \Cref{def:pcb-ample} is
 \Cref{lem:pc-ample-iff-power-very-ample} and is not part of this
 proposition.  It is not decomposed here.
+% No \uses for \Cref{lem:pc-ample-iff-power-very-ample}, deliberately: the sentence
+% above cites it to say what this node does *not* prove, so it is not a hypothesis of
+% this proof.  Adding the edge would be acyclic but would record a dependency that
+% does not exist.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -6827,6 +6844,19 @@ second.  That is the direction both users of this node take --- in
 presentation together with flatness and the conclusion is finite
 projectivity.  The reverse implications and the further two clauses are
 not decomposed here.
+% No \uses for the three lemmas cited above, deliberately; none of them is a
+% hypothesis of this proof, whose only input is tag 00NX.
+%  * \Cref{lem:pc-rf-perfect-base-change} would close a cycle: it already
+%    \uses{lem:pc-fp-flat-finite-projective}, so the edge makes the 2-cycle
+%      lem:pc-fp-flat-finite-projective -> lem:pc-rf-perfect-base-change
+%        -> lem:pc-fp-flat-finite-projective.
+%  * \Cref{lem:pc-flf-properties} is cited in the same breath and for the same
+%    reason -- both are named as *users* of this node, so the edge would point
+%    backwards.  It happens not to close a cycle today only because that node
+%    reaches finite local freeness through lem:pc-finite-flat-fp-locally-free
+%    instead; do not add it.
+%  * \Cref{lem:pc-finite-projective-module} is cited as the converse statement,
+%    which is not a premise of this one.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -6852,6 +6882,10 @@ declaration is also named by
 \Cref{lem:pc-finite-projective-module}, where it discharges the last of
 that node's three clauses.  So the node is a Mathlib leaf and is not
 decomposed further here.
+% No \uses for \Cref{lem:pc-finite-projective-module}, deliberately: it is cited above
+% as a contrast (``this is not the local case of'' it) and for the Mathlib name it
+% shares, not as a hypothesis.  Adding the edge would be acyclic but would record a
+% dependency that does not exist.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -7425,6 +7459,10 @@ fpqc topology on the target), Lemma~35.23.23 (\stacksproject{02L8}).  The same s
 the corresponding statement for open immersions (Lemma~35.23.18, \stacksproject{02L3}); the
 closed-immersion case is stated separately as \Cref{lem:pc-closed-immersion-fpqc-local}.  It
 is not decomposed here.
+% No \uses for \Cref{lem:pc-closed-immersion-fpqc-local}, deliberately: it is the
+% neighbouring case of the same Stacks section, proved from its own tag, not an input
+% to this one.  Adding the edge would be acyclic but would record a dependency that
+% does not exist.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -7674,6 +7712,14 @@ $\cL_{\bar k}^{\otimes m}$ is very ample, i.e.\ the base change of
 $\cL^{\otimes m}$ to $\bar k$ is very ample; by
 \Cref{lem:pc-very-ample-descends} $\cL^{\otimes m}$ is very ample over
 $k$, hence $\cL$ is ample.
+% No \uses for the ``cf.\ \Cref{prop:pc-XK-integral}'' above, deliberately: the edge
+% would close the 3-cycle
+%   lem:pc-ample-positive-degree -> prop:pc-XK-integral -> thm:pc-hilb-curves
+%     -> lem:pc-ample-positive-degree.
+% The integrality of $X_{\bar k}$ is argued inline from the underlying lemmas, which
+% this proof does \uses (lem:pcb-smooth-regular, lem:pc-regular-is-normal,
+% lem:pc-noetherian-normal-decomposition); naming them rather than the proposition is
+% what keeps the graph acyclic.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -7946,6 +7992,9 @@ are separate nodes because they record different clauses of the
 equivalence, $(1)\Leftrightarrow(2)$ there and
 $(1)\Leftrightarrow(3)$ here; neither is used in the proof of the
 other, so no dependency edge joins them.
+% The sentence above is the ruling: no \uses for
+% \Cref{lem:pcb-finite-iff-proper-finite-fibres}, deliberately.  Adding the edge would
+% be acyclic but would contradict the prose it sits next to.
 \end{proof}
 
 % ----------------------------------------------------------------------------
@@ -8996,6 +9045,9 @@ surjective family of flat morphisms locally of finite presentation, an
 \termref{def:pc-fpqc-covering}{fpqc covering} a flat family satisfying a
 quasi-compactness condition, and neither notion contains the other.  It is not
 decomposed here.
+% No \uses for \Cref{lem:pc-fpqc-covering-stability}, deliberately: the sentence above
+% cites it to say that this lemma is *not* implied by it, so it is not a hypothesis.
+% Adding the edge would be acyclic but would record a dependency that does not exist.
 \end{proof}
 
 % ---------------------------------------------------------------------------
