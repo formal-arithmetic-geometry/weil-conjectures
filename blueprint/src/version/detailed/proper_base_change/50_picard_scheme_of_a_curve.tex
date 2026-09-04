@@ -1709,6 +1709,102 @@ $m-c=n$).  Hence
 $\Omega^1_{X/S}$ is locally free of rank $n$.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{lemma}[The top differentials on projective space are $\cO(-N-1)$]
+\label{lem:pc-omega-top-projective-space}
+Let $k$ be a field, let $N\ge0$ and write
+$P:=\mathbf P^N_k=\operatorname{Proj}\bigl(k[x_0,\dots,x_N]\bigr)$ and
+$\Omega:=\Omega^1_{P/k}$ (\Cref{def:pc-kahler-differentials}).  Then
+$\Omega$ is a locally free $\cO_P$-module of rank $N$, and its top
+exterior power is the twist $\cO_P(-N-1)$:
+\[
+\omega_P\;:=\;\Omega^{N}_{P/k}\;:=\;\Lambda^{N}\Omega
+\;\cong\;\cO_P(-N-1).
+\]
+(This is the canonical --- or dualizing --- module of projective space;
+classically EGA III$_1$, \,(2.2.2).  The statement is asserted for all
+$N\ge0$, but the two ranges of $N$ are proved differently: for $N\ge1$
+the isomorphism comes from the Euler sequence, whose source restricts
+it to $N\ge1$, while for $N=0$ it is the degenerate statement
+$\cO_P\cong\cO_P(-1)$ on $P=\mathbf P^0_k=\Spec(k)$, settled
+separately in Step 2 below.)
+\uses{def:pc-scheme,def:pc-kahler-differentials,def:pc-invertible-module}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-scheme,def:pc-kahler-differentials,def:pc-invertible-module,lem:pc-omega-presentation}
+\emph{Step 1 (the rank).}  The scheme $P$ is covered by the $N+1$
+standard opens $D_+(x_i)\cong\mathbf A^N_k=\Spec k[t_1,\dots,t_N]$,
+the coordinates being $t_j=x_j/x_i$ ($j\neq i$).  The sheaf of Kähler
+differentials is Zariski-local on the source and on an affine open is
+the module of differentials of the corresponding algebra
+(\Cref{def:pc-kahler-differentials}), and for the polynomial algebra
+$k[t_1,\dots,t_N]$ --- the case $c=0$ of \Cref{lem:pc-omega-presentation}
+--- that module is free on $dt_1,\dots,dt_N$.  So
+$\Omega|_{D_+(x_i)}$ is free of rank $N$ for every $i$, and $\Omega$
+is locally free of rank $N$ (the rank being $N$ on every member of a
+covering of $P$, it is constant).  This step consumes nothing beyond
+the standard covering; for $N=0$ it says $\Omega=0$.
+
+\emph{Step 2 (the case $N=0$).}  Here
+$P=\operatorname{Proj}(k[x_0])=\Spec(k)$, so
+$\Lambda^{0}\Omega=\cO_P$, while $\cO_P(-1)$ is an invertible
+$\cO_P$-module (\stacksproject{01MT}, quoted in Step 4 below) on the
+spectrum of a field, hence free of rank one: an invertible module on
+$\Spec(k)$ is a rank-one projective $k$-module, and $k$ being a field
+that module is free.  So both sides of the displayed isomorphism are
+$\cO_P$ and the lemma holds.  This step consumes $N=0$ only.
+
+\emph{Step 3 (the Euler sequence, for $N\ge1$).}  By de Rham
+Cohomology, Section~50.11 (de Rham cohomology of projective space),
+Lemma~50.11.1 (\stacksproject{0FMH}) there is a short exact sequence
+\[
+0\to\Omega\to\cO_P(-1)^{\oplus N+1}\to\cO_P\to0
+\]
+of $\cO_P$-modules (the \emph{Euler sequence}; the first map sends
+$\sum_{j\neq i}g_j\,d(x_j/x_i)$ to
+$\sum_{j\neq i}(g_j/x_i)\,dx_j-\bigl(\sum_{j\neq i}g_jx_j/x_i^2\bigr)dx_i$
+on $D_+(x_i)$, the second sends $dx_j$ to $x_j$).  This step consumes
+$N\ge1$: that is the hypothesis of the section of \emph{loc.\ cit.} in
+which the tag sits.  The tag is stated over an arbitrary base ring
+$A$; only the case $A=k$ is used here.
+
+\emph{Step 4 (determinants).}  For a short exact sequence
+$0\to\mathcal E'\to\mathcal E\to\mathcal E''\to0$ of finite locally
+free modules on a ringed space there is a canonical isomorphism
+$\det(\mathcal E')\otimes\det(\mathcal E'')\cong\det(\mathcal E)$,
+where $\det$ of a module
+of constant rank $r$ is its top exterior power $\Lambda^{r}$: Sheaves
+of Modules, Section~17.26 (Rank and determinant), Lemma~17.26.1
+(\stacksproject{0B38}).  \emph{This is the step that must not be left
+implicit}, and it is what the tag supplies.  All three terms of the
+Euler sequence are finite locally free of constant rank: $\Omega$ of
+rank $N$ by Step 1, $\cO_P(-1)^{\oplus N+1}$ of rank $N+1$ (the
+twists $\cO_P(d)$ of $P=\operatorname{Proj}(k[x_0,\dots,x_N])$ are
+invertible because the graded ring $k[x_0,\dots,x_N]$ is generated in
+degree $1$ over $k$: Constructions of Schemes, Section~27.10
+(Invertible sheaves on Proj), Lemma~27.10.3, \stacksproject{01MT}) and
+$\cO_P$ of rank $1$.  Hence
+\[
+\Lambda^{N}\Omega\;=\;\Lambda^{N}\Omega\otimes\cO_P
+\;=\;\det(\Omega)\otimes\det(\cO_P)
+\;\cong\;\det\bigl(\cO_P(-1)^{\oplus N+1}\bigr).
+\]
+
+\emph{Step 5 (the determinant of a sum of copies of $\cO(-1)$).}
+Applying Step 4 to the split short exact sequences
+$0\to\cO_P(-1)^{\oplus j}\to\cO_P(-1)^{\oplus j+1}\to\cO_P(-1)\to0$
+and inducting on $j$ from $j=1$ --- where $\det$ of an invertible
+module is the module itself, as $\Lambda^{1}=\id$ ---
+gives
+$\det\bigl(\cO_P(-1)^{\oplus N+1}\bigr)\cong\cO_P(-1)^{\otimes(N+1)}$.
+By \stacksproject{01MT} again, the multiplication maps
+$\cO_P(a)\otimes\cO_P(b)\to\cO_P(a+b)$ are isomorphisms for all
+$a,b\in\mathbf Z$, so $\cO_P(-1)^{\otimes(N+1)}\cong\cO_P(-N-1)$.
+Combining with Step 4, $\Lambda^{N}\Omega\cong\cO_P(-N-1)$ for
+$N\ge1$; with Step 2 for $N=0$, this proves the lemma.
+\end{proof}
+
 % Decomposed.
 \begin{theorem}[Serre duality on projective space]
 \label{thm:pc-serre-duality-pn}
@@ -1725,15 +1821,19 @@ H^q(\mathbf P^N_k,\cG)^{\vee}
 (The classical Serre duality theorem for projective space; the
 monomial refinement used below, together with its top-degree statement,
 is \Cref{lem:pc-cohomology-twists-projective-space}, classically
-EGA III$_1$, \,(2.1.12) and \,(2.2.2).  In the case $N=1$ the
+EGA III$_1$, \,(2.1.12).  The identification
+$\omega_{\mathbf P^N_k}=\Omega^{N}_{\mathbf P^N_k/k}\cong
+\cO_{\mathbf P^N_k}(-N-1)$ displayed above --- for which the bare
+number \,(2.2.2) stood here --- is
+\Cref{lem:pc-omega-top-projective-space}.  In the case $N=1$ the
 theorem gives $H^1(\mathbf P^1,\cM)^{\vee}\cong
 H^0(\mathbf P^1,\omega\otimes\cM^{-1})$ for line bundles $\cM$,
 which is Algebraic Curves, Lemma~53.4.1,
 \stacksproject{0BS2}(5).)
-\uses{def:pc-kahler-differentials,def:pc-scheme,def:pc-ext,lem:pc-cohomology-twists-projective-space}
+\uses{def:pc-kahler-differentials,def:pc-scheme,def:pc-ext,lem:pc-cohomology-twists-projective-space,lem:pc-omega-top-projective-space}
 \end{theorem}
 \begin{proof}
-\uses{lem:pc-cech-computes,lem:pc-serre-vanishing,def:pc-ext,lem:pc-ext-injective-resolution,lem:pc-coeffaceable-universal,lem:pc-sheaves-of-modules-grothendieck,lem:pc-cohomology-twists-projective-space,lem:pc-coherent-quotient-of-twists}
+\uses{lem:pc-cech-computes,lem:pc-serre-vanishing,def:pc-ext,lem:pc-ext-injective-resolution,lem:pc-coeffaceable-universal,lem:pc-sheaves-of-modules-grothendieck,lem:pc-cohomology-twists-projective-space,lem:pc-coherent-quotient-of-twists,lem:pc-omega-top-projective-space}
 Write $P:=\mathbf P^N_k$ and $\omega:=\omega_P$.  (Here and below
 $\operatorname{Ext}$ is the Ext of \Cref{def:pc-ext}.)
 
@@ -1770,7 +1870,10 @@ $\operatorname{Ext}^{N-q}(P)$-terms compute as
 =H^{m}\bigl(P,\omega(-d)\bigr)
 =H^{m}\bigl(P,\cO(-d-N-1)\bigr)
 \]
-for all $m\ge0$; combining with
+for all $m\ge0$ (the second equality is
+\Cref{lem:pc-omega-top-projective-space}: $\omega\cong\cO(-N-1)$, and
+twisting it by $\cO(-d)$ gives $\cO(-d-N-1)$ by the multiplication
+isomorphisms for the twists recorded in the proof of that node); combining with
 \Cref{lem:pc-cohomology-twists-projective-space}:
 \begin{itemize}
 \item $0<m<N$: $\operatorname{Ext}^m(\cO(d),\omega)=0$ (as is
@@ -1958,8 +2061,10 @@ We choose $l\ge\max\bigl(l_0(\cG),1\bigr)$.  That is what
 ``$l\gg0$'' has to mean here, and it is two conditions with two
 different jobs: $l\ge l_0(\cG)$ buys the \emph{existence} of the
 surjection, and $l\ge1$ buys the single vanishing
-$H^0(P,\cO(-l))=0$, which is what makes the two functors vanish on
-$E$ at $m=N$.  In particular the presentation is by \emph{negative}
+$H^0(P,\cO(-l))=0$ --- a clause of
+\Cref{lem:pc-cohomology-twists-projective-space}(1) that holds for
+$N\ge1$, which is the only case in which the index $m=N$ is positive
+--- which is what makes the two functors vanish on $E$ at $m=N$.  In particular the presentation is by \emph{negative}
 twists $\cO(-l)$ with $l\ge1$ --- the normalisation of
 \Cref{lem:pc-coherent-quotient-of-twists} just performed, and the one
 already used in the proof of \Cref{lem:pc-serre-vanishing}, whose
@@ -1970,12 +2075,15 @@ Now let $d\ge1$ and $m>0$, and read off from Step 1:
 \item $S^m(\cO(-d))=H^{N-m}(P,\cO(-d))^{\vee}$.  For $0<N-m<N$ this
 vanishes by \Cref{lem:pc-cohomology-twists-projective-space}(2); for
 $N-m=0$, i.e.\ $m=N$, it is $H^0(P,\cO(-d))^{\vee}=0$ because $-d<0$
-(part (1) of the same lemma); for $N-m<0$, i.e.\ $m>N$,
+(part (1) of the same lemma, whose $d<0$ vanishing carries the
+hypothesis $N\ge1$ --- available here, since this case is
+$m=N$ with $m>0$); for $N-m<0$, i.e.\ $m>N$,
 it is $0$.  So $S^m(\cO(-d))=0$ for \emph{all} $m>0$.
 \item $T^m(\cO(-d))=\operatorname{Ext}^m_{\cO_P}(\cO(-d),\omega)
 =H^{m}(P,\cO(d-N-1))$ by the computation of Step 1.  For $0<m<N$
 this vanishes; for $m=N$ it is
-$H^N(P,\cO(d-N-1))=H^0(P,\cO(-d))^{\vee}=0$, again because $-d<0$;
+$H^N(P,\cO(d-N-1))=H^0(P,\cO(-d))^{\vee}=0$, again because $-d<0$
+(and again $m=N>0$, so $N\ge1$);
 for $m>N$ it is $0$.  So $T^m(\cO(-d))=0$ for \emph{all} $m>0$.
 \end{itemize}
 Both vanishings at $m=N$ are the ones that fail for non-negative
@@ -5532,9 +5640,14 @@ Let $k$ be a field, let $N\ge0$ and write
 $P:=\mathbf P^N_k=\operatorname{Proj}\bigl(k[x_0,\dots,x_N]\bigr)$.
 Then, for every $d\in\mathbf Z$:
 \begin{enumerate}
-\item $H^0\bigl(P,\cO_P(d)\bigr)=k[x_0,\dots,x_N]_d$, the space of
-homogeneous polynomials of degree $d$ in $x_0,\dots,x_N$; in particular
-$H^0(P,\cO_P(d))=0$ for $d<0$, and $H^0(P,\cO_P)=k$.
+\item For $d\ge0$: $H^0\bigl(P,\cO_P(d)\bigr)=k[x_0,\dots,x_N]_d$, the
+space of homogeneous polynomials of degree $d$ in $x_0,\dots,x_N$; in
+particular $H^0(P,\cO_P)=k$.  If moreover $N\ge1$, then
+$H^0\bigl(P,\cO_P(d)\bigr)=0$ for every $d<0$, so that for $N\ge1$ the
+displayed formula holds for all $d\in\mathbf Z$.  (For $N=0$ that
+vanishing is false and is not claimed: $\mathbf P^0_k=\Spec(k)$ and
+$\cO_P(d)\cong\cO_P$ for every $d$, so $H^0(P,\cO_P(d))=k$ for every
+$d\in\mathbf Z$, negative $d$ included.)
 \item $H^q\bigl(P,\cO_P(d)\bigr)=0$ for every $q$ with $q\ne0$ and
 $q\ne N$.
 \item $H^N\bigl(P,\cO_P(-N-1)\bigr)$ is one-dimensional over $k$, and
@@ -5557,8 +5670,14 @@ H^N\bigl(P,\cO_P(d)\bigr)\to
 \]
 are isomorphisms.  Consequently every $k$-linear isomorphism
 $\operatorname{tr}:H^N(P,\cO_P(-N-1))\to k$ induces an isomorphism
-$H^N(P,\cO_P(d))\cong H^0(P,\cO_P(-d-N-1))^{\vee}$; in particular
-$H^N(P,\cO_P(d))=0$ for $d>-N-1$.
+$H^N(P,\cO_P(d))\cong H^0(P,\cO_P(-d-N-1))^{\vee}$; in particular, if
+$N\ge1$, then $H^N(P,\cO_P(d))=0$ for every $d>-N-1$.  (Again the
+final clause needs $N\ge1$: for $N=0$ it would read
+$H^0(\mathbf P^0,\cO(d))=0$ for $d\ge0$, contradicting
+$H^0(P,\cO_P)=k$ in part~(1).  The rest of this part holds for
+$N\ge0$; for $N=0$ the pairing is the multiplication
+$k\cdot x_0^{-d-1}\otimes k\cdot x_0^{d}\to k\cdot x_0^{-1}$ of
+one-dimensional spaces, which is perfect.)
 \end{enumerate}
 \uses{def:pc-scheme,def:pc-invertible-module}
 \end{lemma}
@@ -5572,7 +5691,25 @@ module $\frac{1}{x_0\cdots x_N}k[\frac1{x_0},\dots,\frac1{x_N}]$, are
 Cohomology of Schemes, Section~30.8 (Cohomology of projective space),
 Lemma~30.8.1 (\stacksproject{01XT}) --- whose own reference block is
 \emph{loc.\ cit.} --- which also gives that this module is free of rank
-one in degree $-N-1$, on the generator $\frac{1}{x_0\cdots x_N}$.  That
+one in degree $-N-1$, on the generator $\frac{1}{x_0\cdots x_N}$.
+
+Part (1) is read off that lemma's case matrix, and it matters that the
+two nonzero rows of \emph{that} matrix --- $q=0$ with $d\ge0$, giving
+$k[x_0,\dots,x_N]_d$, and $q=N$ with $d<0$, giving the degree-$d$ part
+of the module above --- are \emph{disjoint}.  For $N\ge1$ the pair
+$(q,d)=(0,d)$ with $d<0$ falls under neither row, which is the
+vanishing $H^0(P,\cO_P(d))=0$ claimed for $N\ge1$.  For $N=0$ it
+falls under the second row, which in that case is the degree-$d$ part
+of $\frac{1}{x_0}k[\frac1{x_0}]$, free of rank one for every
+$d\le-1$; that is the $N=0$ clause of part (1), and it is why the
+vanishing is claimed for $N\ge1$ only.  Equation~30.8.1.1
+(\stacksproject{01XU}) restates the same lemma with the rows $q=0$,
+$q\ne0,N$ and $q=N$, which \emph{overlap} at $q=N=0$ and disagree
+there; part (1) above is stated from the disjoint matrix of
+\stacksproject{01XT} and not from that reformulation, whose first row
+would give the false $H^0(\mathbf P^0,\cO(d))=0$ for $d<0$.  The same
+degenerate case is what restricts the final clause of part (3) to
+$N\ge1$.  That
 the pairing of part (3) is perfect is Equation~30.8.1.1
 (\stacksproject{01XU}), which identifies that degree-$d$ part with
 $\Hom_k\bigl(k[x_0,\dots,x_N]_{-N-1-d},k\bigr)$ under
@@ -5701,7 +5838,8 @@ $H^N(\mathbf P^N,\cO(e))\cong H^0(\mathbf P^N,\cO(-e-N-1))^\vee$.
 This shows: for $e\ge0$ and $p\ge1$ with $p\neq N$ it is zero, and for
 $p=N$ the module $\cO(-e-N-1)$ has negative degree
 $-(e+N+1)\le-N-1<0$, hence $H^0(\mathbf P^N,\cO(-e-N-1))=0$ by part
-(1).  Secondly,
+(1) --- whose vanishing clause carries $N\ge1$, which holds here
+because this case is $p=N$ with $p\ge1$.  Secondly,
 $H^p(\mathbf P^N,\cM)=0$ for $p>N$ and every quasi-coherent $\cM$
 (again by \Cref{lem:pc-cech-computes}: the cover above has $N+1$
 members, so $\check C^p=0$ for $p>N$).
