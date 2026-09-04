@@ -38,9 +38,12 @@ With ``DECL_LIST_PATH`` given, the list of declaration names named by
 an existence/axiom check.  The list covers the whole ``content.tex`` closure:
 every file the document inputs contributes its names.
 
-The blueprint itself cannot be compiled in the agent sandbox: there is no
-``leanblueprint``, no ``plastex`` and no LaTeX engine there.  This script is a
-source-level check and is not a substitute for building the document.
+A PDF build of the blueprint is out of reach in the agent sandbox: there is no
+LaTeX engine, no ``bibtex`` and no ``dvisvgm``.  The web (plasTeX) build *is*
+possible there -- ``leanblueprint``, ``plastex`` and their plugins install from
+the wheels already in the pip cache -- but it needs a ``pygraphviz`` stub and a
+``kpsewhich`` shim to get through.  This script is a cheap source-level check
+and is not a substitute for either build.
 """
 
 import pathlib
