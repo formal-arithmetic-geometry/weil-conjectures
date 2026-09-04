@@ -5265,16 +5265,17 @@ and gives $\cI_{x_K}=\cI_x\otimes\cO_{X_K}$.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
-\begin{lemma}[Proper and smooth morphisms are stable under base change]
+\begin{lemma}[Proper morphisms are stable under base change]
 \label{lem:pc-proper-base-change}
 Let $f:X\to S$ be a proper morphism, let $g:S'\to S$ be arbitrary, and
 let $f':X'=X\times_SS'\to S'$ be the base change.  Then $f'$ is
-proper.  If $f$ is smooth, then $f'$ is smooth.
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,def:pc-smooth-morphism}
+proper.  (The corresponding statement for smooth morphisms needs no
+properness hypothesis and is \Cref{lem:pc-smooth-base-change}.)
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-valuative-criterion-proper,def:pc-smooth-morphism,lem:pc-standard-smooth-form,lem:pc-smooth-base-change-ring}
-\emph{Properness.}  $f'$ is separated and of finite type (base changes
+\uses{lem:pc-valuative-criterion-proper}
+$f'$ is separated and of finite type (base changes
 of separated and finite type morphisms have these properties: the
 diagonal of $f'$ is the base change of the diagonal of $f$, and the
 base changes of finite type morphisms are of finite type, both by the
@@ -5300,17 +5301,6 @@ $\Spec V\to X\times_SS'=X'$
 (the morphism into the fibre product from the two legs over $S$),
 i.e.\ the required lift; uniqueness is inherited from the uniqueness
 for $f$.  Hence $f'$ satisfies the valuative criterion, and is proper.
-
-\emph{Smoothness.}  Smoothness is Zariski-local on the base and the
-target; affine-locally, a smooth ring map $R\to A$ remains smooth
-after base change $R\to R'$ by
-\Cref{lem:pc-smooth-base-change-ring} (the proof: the
-naive cotangent complex base changes, and the base change of a finite
-projective module is finite projective, so the defining property of a
-smooth ring map, as recalled in \Cref{lem:pc-standard-smooth-form}, is
-preserved; the finite presentation property is preserved by base
-change).
-Hence $f'$ is smooth.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -6537,7 +6527,7 @@ only if $\deg(\cL)>0$.
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
 \emph{($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
@@ -6581,7 +6571,7 @@ and $\deg\cL>0$.
 \emph{($\Leftarrow$).}  Assume $\deg\cL>0$.  By
 \Cref{lem:pc-degree-base-change}(1), $\deg(\cL_{\bar k})=\deg\cL>0$,
 and $X_{\bar k}$ is a smooth projective curve over the algebraically
-closed field $\bar k$ (smooth: \Cref{lem:pc-proper-base-change};
+closed field $\bar k$ (smooth: \Cref{lem:pc-smooth-base-change};
 proper: \Cref{lem:pc-proper-base-change}; curve: \Cref{lem:pc-dim-base-change};
 integral: $H^0(X_{\bar k},\cO)=H^0(X,\cO)\otimes_k\bar k$ is a field
 \Cref{lem:pc-h0-proper-variety}(1), so $X_{\bar k}$ is connected
@@ -8342,7 +8332,7 @@ $\underline{\Hilb}^d_{X/k}$
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-rational-point,def:pc-base-change,def:pc-curve,def:pc-geometrically-irreducible,def:pc-hilb-functor}
 \end{proposition}
 \begin{proof}
-\uses{def:pc-curve,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-noetherian-normal-decomposition,lem:pc-projective-proper,lem:pc-proper-base-change,lem:pc-regular-is-normal,lem:pcb-smooth-regular,thm:pc-hilb-curves}
+\uses{def:pc-curve,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-noetherian-normal-decomposition,lem:pc-projective-proper,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-regular-is-normal,lem:pcb-smooth-regular,thm:pc-hilb-curves}
 Since $X$ is a proper variety (projective $\Rightarrow$ proper,
 \Cref{lem:pc-projective-proper}; a curve is a variety, hence integral,
 \Cref{def:pc-curve}), the ring $k':=H^0(X,\cO_X)$ is a finite field
@@ -8365,7 +8355,7 @@ hence $f_{K,*}\cO_{X_K}=\cO_K$ and $H^0(X_K,\cO_{X_K})=K$; likewise
 $H^1(X_K,\cO_{X_K})\cong H^1(X,\cO_X)\otimes_kK$, whence
 $\dim_K H^1(X_K,\cO_{X_K})=\dim_kH^1(X,\cO_X)$.
 The morphism $X_K\to\Spec(K)$ is smooth (base change of smooth,
-\Cref{lem:pc-proper-base-change}) and proper (base change of proper,
+\Cref{lem:pc-smooth-base-change}) and proper (base change of proper,
 \Cref{lem:pc-proper-base-change}), so $X_K$ is regular
 (\Cref{lem:pcb-smooth-regular}), hence normal
 (\Cref{lem:pc-regular-is-normal})
@@ -8690,14 +8680,14 @@ divisor} on $X_T/T$ which is finite locally free of degree $g$ over $T$.
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom,lem:pc-f-open-subfunctor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,prop:pc-XK-integral}
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,prop:pc-XK-integral}
 $\cM:=\cL\otimes f_T^*\cN^{-1}$ is an invertible module on $X_T$ and
 $s\in H^0(X_T,\cM)$.  By
 \Cref{def:pc-zero-scheme} the ideal sheaf
 $\cI_{Z(s)}=\operatorname{im}(s^\vee)$ is locally generated by one
 element, i.e.\ $D=Z(s)$ is a locally principal closed subscheme of
 $X_T$.  Also $X_T\to T$ is smooth (base change of the smooth structure
-morphism, \Cref{lem:pc-proper-base-change}), hence flat
+morphism, \Cref{lem:pc-smooth-base-change}), hence flat
 (\Cref{lem:pc-smooth-flat}), of finite presentation, and of relative
 dimension $1$ (fibres are base changes of $X$ by fields, of dimension $1$
 by \Cref{lem:pc-dim-base-change}).
