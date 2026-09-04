@@ -1712,6 +1712,48 @@ $\Omega^1_{X/S}$ is locally free of rank $n$.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The determinant of a short exact sequence]
+\label{lem:pc-det-short-exact-sequence}
+Let $(X,\cO_X)$ be a ringed space.  For a finite locally free
+$\cO_X$-module $\mathcal E$ there is a disjoint decomposition
+$X=\coprod_{i\ge0}X_i$ into open and closed subsets such that
+$\mathcal E|_{X_i}$ is finite locally free of rank $i$; the
+\emph{determinant} of $\mathcal E$ is the
+\termref{def:pc-invertible-module}{invertible} $\cO_X$-module
+$\det(\mathcal E)$ equal to $\Lambda^{i}\bigl(\mathcal E|_{X_i}\bigr)$
+on $X_i$ for every $i\ge0$ (the decomposition being disjoint, there are
+no glueing conditions to check).  In particular
+$\det(\mathcal E)=\Lambda^{r}\mathcal E$ when $\mathcal E$ has constant
+rank $r$.  Then for every short exact sequence
+\[
+0\to\mathcal E'\to\mathcal E\to\mathcal E''\to0
+\]
+of finite locally free $\cO_X$-modules there is a canonical
+isomorphism
+\[
+\det(\mathcal E')\otimes_{\cO_X}\det(\mathcal E'')
+\;\longrightarrow\;\det(\mathcal E)
+\]
+of $\cO_X$-modules.
+\uses{def:pc-invertible-module}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-invertible-module}
+This is a cited external input: Sheaves of Modules, Section~17.26
+(Rank and determinant), Lemma~17.26.1 (\stacksproject{0B38}) is the
+displayed canonical isomorphism.  The construction of $\det$ recalled
+in the statement --- the decomposition of $X$ into the loci of constant
+rank, and $\Lambda^{\text{rank}}$ on each of them --- is the definition
+made in the same section, just above the lemma, and is not a further
+assertion; the word ``invertible'' there is that section's own, and
+\Cref{def:pc-invertible-module} records that a
+locally free module of rank one is invertible on an arbitrary ringed
+space, which is what each $\Lambda^{i}\bigl(\mathcal E|_{X_i}\bigr)$
+is.  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[The top differentials on projective space are $\cO(-N-1)$]
 \label{lem:pc-omega-top-projective-space}
@@ -1734,7 +1776,7 @@ separately in Step 2 below.)
 \uses{def:pc-scheme,def:pc-kahler-differentials,def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-scheme,def:pc-kahler-differentials,def:pc-invertible-module,lem:pc-omega-presentation}
+\uses{def:pc-scheme,def:pc-kahler-differentials,def:pc-invertible-module,lem:pc-omega-presentation,lem:pc-det-short-exact-sequence}
 \emph{Step 1 (the rank).}  The scheme $P$ is covered by the $N+1$
 standard opens $D_+(x_i)\cong\mathbf A^N_k=\Spec k[t_1,\dots,t_N]$,
 the coordinates being $t_j=x_j/x_i$ ($j\neq i$).  The sheaf of Kähler
@@ -1777,9 +1819,12 @@ free modules on a ringed space there is a canonical isomorphism
 $\det(\mathcal E')\otimes\det(\mathcal E'')\cong\det(\mathcal E)$,
 where $\det$ of a module
 of constant rank $r$ is its top exterior power $\Lambda^{r}$: Sheaves
-of Modules, Section~17.26 (Rank and determinant), Lemma~17.26.1
-(\stacksproject{0B38}).  \emph{This is the step that must not be left
-implicit}, and it is what the tag supplies.  All three terms of the
+of Modules, Section~17.26 (Rank and determinant), Lemma~17.26.1.
+\emph{This is the step that must not be left
+implicit}, and it is what the tag supplies.  The general statement,
+with the construction of $\det$, is
+\Cref{lem:pc-det-short-exact-sequence}; what follows is that node
+applied to the Euler sequence.  All three terms of the
 Euler sequence are finite locally free of constant rank: $\Omega$ of
 rank $N$ by Step 1, $\cO_P(-1)^{\oplus N+1}$ of rank $N+1$ (the
 twists $\cO_P(d)$ of $P=\operatorname{Proj}(k[x_0,\dots,x_N])$ are
@@ -1825,9 +1870,9 @@ monomial refinement used below, together with its top-degree statement,
 is \Cref{lem:pc-cohomology-twists-projective-space}, classically
 EGA III$_1$, \,(2.1.12).  The identification
 $\omega_{\mathbf P^N_k}=\Omega^{N}_{\mathbf P^N_k/k}\cong
-\cO_{\mathbf P^N_k}(-N-1)$ displayed above --- for which the bare
-number \,(2.2.2) stood here --- is
-\Cref{lem:pc-omega-top-projective-space}.  In the case $N=1$ the
+\cO_{\mathbf P^N_k}(-N-1)$ displayed above is
+\Cref{lem:pc-omega-top-projective-space} (classically
+EGA III$_1$, \,(2.2.2)).  In the case $N=1$ the
 theorem gives $H^1(\mathbf P^1,\cM)^{\vee}\cong
 H^0(\mathbf P^1,\omega\otimes\cM^{-1})$ for line bundles $\cM$,
 which is Algebraic Curves, Lemma~53.4.1,
@@ -2388,7 +2433,7 @@ a closed immersion of a smooth curve into a smooth projective space
 \uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-ext}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-morphism-hi,def:pc-ext,lem:pc-koszul-resolution,lem:pc-conormal-sequence-smooth,lem:pc-smooth-immersion-regular,def:pc-dimension}
+\uses{lem:pc-affine-morphism-hi,def:pc-ext,lem:pc-koszul-resolution,lem:pc-conormal-sequence-smooth,lem:pc-smooth-immersion-regular,def:pc-dimension,lem:pc-det-short-exact-sequence}
 Let $\cK:=\cI_X/\cI_X^2$ be the conormal sheaf of the immersion and
 $\cN:=\mathcal{H}om(\cK,\cO_X)$ the normal bundle.  Both $\mathbf P^N_k$
 and $X$ are smooth over $k$, with the relative dimensions we shall need:
@@ -2449,13 +2494,36 @@ $\mathcal{H}om_{\cO_U}(K_r,\omega_{\mathbf P^N}|_U)
 \otimes_{\cO_U}\cO_U/(f_1,\dots,f_r)$ of the last map of the dual
 complex.  Restricting the free module $K_1=\cO_U^{\oplus r}$ along
 $i$ identifies it with $\cK|_{X\cap U}$, so
-$K_r\otimes_{\cO_U}\cO_X=\Lambda^r\cK$ and that cokernel is
+$K_r\otimes_{\cO_U}\cO_X=\Lambda^r\cK$ (exterior powers are
+defined by generators and relations, so they commute with the pullback
+$-\otimes_{\cO_U}\cO_X$, and $K_r=\Lambda^r K_1$) and that cokernel is
 $i_*\bigl((\Lambda^r\cK)^{\vee}\otimes\omega_{\mathbf P^N}|_X\bigr)
 =i_*\bigl(\Lambda^r\cN\otimes\omega_{\mathbf P^N}|_X\bigr)$ on $U$
-(tensored with $\cM^{-1}$ for a general invertible $\cM$).  This is
-where $\Lambda^r\cK$ enters the proof: as the restriction to $X$ of
-the top term of the local resolution, dualised --- not as a term of
-the resolution itself.  The remaining equality is the standard
+(tensored with $\cM^{-1}$ for a general invertible $\cM$).  That the
+two forms of the cokernel agree is the identity
+$(\Lambda^r\cK)^{\vee}=\Lambda^r(\cK^{\vee})=\Lambda^r\cN$ --- that
+determinants of duals are duals.  No tag of Sheaves of Modules,
+Section~17.26 (Rank and determinant), the section supplying
+\Cref{lem:pc-det-short-exact-sequence}, states it, so we argue it
+here.  Both sides are invertible, $\cK$ being finite locally free of
+rank $r$, and the pairing
+\[
+\Lambda^r\cK\otimes_{\cO_X}\Lambda^r(\cK^{\vee})\longrightarrow\cO_X,
+\qquad
+(s_1\wedge\cdots\wedge s_r)\otimes(\xi_1\wedge\cdots\wedge\xi_r)
+\longmapsto\det\bigl(\xi_j(s_i)\bigr)_{1\le i,j\le r},
+\]
+is perfect: whether it is may be checked Zariski-locally on $X$, and
+on an open on which $\cK$ is free on a basis $s_1,\dots,s_r$ --- so
+that $\cK^{\vee}$ is free on the dual basis $\xi_1,\dots,\xi_r$ ---
+the pairing carries the generator
+$(s_1\wedge\cdots\wedge s_r)\otimes(\xi_1\wedge\cdots\wedge\xi_r)$ of
+the free rank-one module on the left to $\det(\id)=1$, so it is a
+generator of the dual too.  Hence the pairing induces an isomorphism
+$\Lambda^r(\cK^{\vee})\to(\Lambda^r\cK)^{\vee}$.  This is also where
+$\Lambda^r\cK$ enters the proof: as the restriction to $X$ of the top
+term of the local resolution, dualised --- not as a term of the
+resolution itself.  The remaining equality is the standard
 adjunction: from the conormal exact sequence
 \[
 0\to\cN^{\vee}\to\Omega^1_{\mathbf P^N}|_X\to\Omega^1_X\to0
@@ -2466,14 +2534,25 @@ $\mathcal C_{X/\mathbf P^N}$ is the sheaf $\cK=\cN^{\vee}$ above: the
 three-term sequence is exact in general, and it is \emph{short} exact
 here because the source $X$ is smooth over $k$ --- that is the only
 smoothness the cited node asks for, so no hypothesis on
-$\mathbf P^N_k$ is used at this step) the exterior
-power argument gives $\Lambda^N\Omega^1_{\mathbf P^N}|_X
-=\Lambda^r\cN^{\vee}\otimes\Omega^1_X$, i.e.
+$\mathbf P^N_k$ is used at this step) the determinant of a short exact
+sequence --- \Cref{lem:pc-det-short-exact-sequence}, applied to that
+conormal sequence, all three of whose terms are finite locally free of
+constant rank ($\cN^{\vee}=\cK$ of rank $r$ by
+\Cref{lem:pc-smooth-immersion-regular}, and
+$\Omega^1_{\mathbf P^N}|_X$ of rank $N$ and $\Omega^1_X$ of rank $1$
+by the smoothness of $\mathbf P^N_k$ and of $X$ over $k$, of relative
+dimensions $N$ and $1$, recorded two paragraphs above), so that the
+three determinants are the top exterior powers $\Lambda^r$,
+$\Lambda^N$ and $\Lambda^1=\id$, the ranks adding up as $N=r+1$ ---
+gives $\Lambda^N\Omega^1_{\mathbf P^N}|_X
+=\Lambda^r\cN^{\vee}\otimes\Omega^1_X$.  Hence
 \[
 \Omega^1_{X/k}\;=\;\Lambda^r\cN\otimes\omega_{\mathbf P^N}|_X
 \]
-(as determinants of duals are duals,
-$\Lambda^r\cN=(\Lambda^r\cK)^{\vee}$).
+(the module $\Lambda^r\cN^{\vee}=\Lambda^r\cK$ being invertible,
+tensoring by its dual inverts it, and
+$(\Lambda^r\cK)^{\vee}=\Lambda^r\cN$ by the determinants-of-duals
+identification made above).
 By the affineness of the closed immersion $i_*$ (a closed immersion
 is affine, so $H^p(\mathbf P^N,i_*\cG)=H^p(X,\cG)$ for all $p$;
 \Cref{lem:pc-affine-morphism-hi}) and the local-global Ext spectral
