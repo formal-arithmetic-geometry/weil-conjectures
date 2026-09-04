@@ -7288,7 +7288,7 @@ $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
 \uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pc-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-immersion-closed-image}
+\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-immersion-closed-image,lem:pc-locally-noetherian-quasi-separated}
 By definition of very ampleness there is an immersion
 $i:X_K\to\mathbf P^N_K$ with $i^*\cO_{\mathbf P^N}(1)=\cL_K$.  The
 sections $x_1,\dots,x_N$ of $\cO_{\mathbf P^N}(1)$ pull back to
@@ -7314,7 +7314,9 @@ has base change $\psi_K:X_K\to\mathbf P(V_K)$ such that $\psi_K=i$
 quasi-compact -- its source $X$ is of finite type over $k$, being
 proper over $k$, hence quasi-compact, and its target $\mathbf P(V)$ is
 Noetherian, hence
-quasi-separated, so any morphism $X\to\mathbf P(V)$ is quasi-compact
+quasi-separated (\Cref{lem:pc-locally-noetherian-quasi-separated},
+applied to $\mathbf P(V)$, which is Noetherian and in particular
+locally Noetherian), so any morphism $X\to\mathbf P(V)$ is quasi-compact
 -- and quasi-compactness is stable under base change, so $\psi_K$ is a
 quasi-compact immersion.  Since $\Spec(K)\to\Spec(k)$ is a faithfully
 flat morphism of affine schemes, $\{\Spec(K)\to\Spec(k)\}$ is an fpqc
@@ -7361,6 +7363,21 @@ This is a cited external input: Schemes, Lemma~26.10.4
 (\stacksproject{01IQ}).  It is not decomposed here.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[A locally Noetherian scheme is quasi-separated]
+\label{lem:pc-locally-noetherian-quasi-separated}
+Let $X$ be a locally Noetherian scheme, that is, a scheme admitting an
+affine open covering by spectra of Noetherian rings.  Then $X$ is
+quasi-separated: its diagonal $X\to X\times_{\Spec(\mathbf Z)}X$ is
+\termref{def:pcb-scheme-conventions}{quasi-compact}.
+\uses{def:pc-scheme,def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Properties of Schemes, Lemma~28.5.4
+(\stacksproject{01OY}).  It is not decomposed here.
+\end{proof}
+
 % ----------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Positive degree is equivalent to ampleness]
@@ -7382,7 +7399,7 @@ over $k$ (\Cref{lem:pc-h0-proper-variety}(2)).
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible,lem:pc-h0-proper-variety}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
 \emph{(1) ($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
@@ -7413,7 +7430,10 @@ immersion of $X$ into a projective space exists with an ample structure
 sheaf: a nowhere vanishing module's powers have no sections separating
 points; or directly: the affine open sets $X_s$ (for $s$ the constant
 $1$) give $X\subseteq$ one affine piece, so $X$ would be affine, and
-a proper affine scheme over $k$ is finite over $k$, but the curve is
+a proper affine scheme over $k$ is finite over $k$
+(\Cref{lem:pc-affine-proper-finite}, applied to the structure morphism
+$X\to\Spec(k)$, which is an affine morphism because $X$ and $\Spec(k)$
+are both affine, and is proper by hypothesis), but the curve is
 one-dimensional): contradiction.  Hence $\deg D\ge1$.  From the exact
 sequence $0\to\cO_X\to\cL^{\otimes m}\to\mathcal Q\to0$ with
 $\mathcal Q$ supported on $D$ and the computation
@@ -7461,6 +7481,21 @@ $\cL_{\bar k}^{\otimes m}$ is very ample, i.e.\ the base change of
 $\cL^{\otimes m}$ to $\bar k$ is very ample; by
 \Cref{lem:pc-very-ample-descends} $\cL^{\otimes m}$ is very ample over
 $k$, hence $\cL$ is ample.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Finite is the same as affine and proper]
+\label{lem:pc-affine-proper-finite}
+Let $f:X\to S$ be a morphism of schemes.  Then $f$ is
+\termref{def:pc-morphism-conventions}{finite} if and only if $f$ is
+affine (the preimage of every affine open of $S$ is affine) and
+\termref{def:pc-morphism-conventions}{proper}.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Morphisms of Schemes, Lemma~29.45.11
+(\stacksproject{01WN}).  It is not decomposed here.
 \end{proof}
 
 
@@ -7646,9 +7681,13 @@ Cartier property: the ideal sheaf is locally generated by one element,
 which gives locally $D=\Spec(A/(f))$ of finite presentation over the
 affine base); hence the base change $D_T\to T$ is flat and of finite
 presentation; it is the closed subscheme $D\times_ST\subseteq
-X\times_ST=X_T$ (closed immersions are stable under base change and
-the base change of a closed subscheme followed by the projection is
-the closed subscheme of the product).  Its ideal sheaf is
+X\times_ST=X_T$ (closed immersions are stable under base change --- the
+first assertion of \Cref{lem:pc-closed-imm-base-change}, applied to the
+closed immersion $D\to X$ along $g_X:X_T\to X$; and the base change of a
+closed subscheme followed by the projection is the closed subscheme of
+the product, which is the transitivity of fibre products
+$D\times_XX_T=D\times_X(X\times_ST)=D\times_ST$ for $D\to X\to S$).
+Its ideal sheaf is
 $\cI_{D_T}=g_X^*\cI_D$.  Here $g_X$ need not be flat, so
 \Cref{lem:pc-closed-imm-base-change} by itself only exhibits
 $\cI_{D_T}$ as the image of $g_X^*\cI_D$ in $\cO_{X_T}$; the
