@@ -7089,7 +7089,7 @@ degree $i$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,lem:pc-perfect-local-normal-form,lem:pc-fitting-fibre-dimension,lem:pcb-nakayama}
+\uses{def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-base-change,lem:pc-perfect-local-normal-form,lem:pc-fitting-fibre-dimension}
 \emph{1. The local normal form.}  Since $E$ is perfect, every point
 $x\in X$ has, by \Cref{lem:pc-perfect-local-normal-form}, an affine
 open neighbourhood $U_x=\Spec(A)$ together with an isomorphism in
@@ -7130,13 +7130,67 @@ W_i:=\{x\in X:\beta_j(x)=0\text{ for all }j\ne i\}
 is open: each condition $\beta_j\le0$ is the condition
 $r_j(x)+r_{j-1}(x)\ge n_j$, an open condition by the semicontinuity
 above.
-On $W_i$ the cohomology of $E$ is concentrated in degree $i$: for
-$j\ne i$, the $A$-module $H^j(M^{\bullet})$ is of finite type (the
-complex has finite type terms) and its fibre at $x$ is
-$H^j(M^{\bullet}\otimes\kappa(x))=0$ for $x\in W_i$, so
-$H^j(M^{\bullet})_x=0$ (Nakayama's lemma,
-\Cref{lem:pcb-nakayama}(1) with $N=0$ and $I=\mathfrak m_x$), whence
-$H^j(E)|_{W_i}=H^j(M^{\bullet})|_{W_i}=0$ for $j\ne i$.
+On $W_i$ the cohomology of $E$ is concentrated in degree $i$.  Fix a
+point $x\in W_i$ and work over the local ring $A_x$, writing
+$M^{\bullet}_x$ for the localized complex, a bounded complex of finite
+free $A_x$-modules with
+$M^{\bullet}_x\otimes_{A_x}\kappa(x)=M^{\bullet}\otimes_A\kappa(x)$.
+Call such a complex \emph{minimal} if every matrix entry of every one
+of its differentials lies in $\mathfrak m_x$, equivalently if all the
+differentials of $M^{\bullet}_x\otimes_{A_x}\kappa(x)$ vanish.  We
+claim that $M^{\bullet}_x$ is the direct sum of a minimal complex
+$\widetilde M^{\bullet}$ of finite free $A_x$-modules and finitely
+many copies of the contractible complex $(A_x\xrightarrow{\sim}A_x)$
+placed in two adjacent degrees.  Indeed, suppose $M^{\bullet}_x$ is
+not minimal, so that some $d^{j-1}$ has a matrix entry that is a unit
+of $A_x$; choose bases $(e_1,\dots,e_{n_{j-1}})$ of $M^{j-1}_x$ and
+$(f_1,\dots,f_{n_j})$ of $M^{j}_x$ such that, after renumbering, the
+coefficient $c$ of $f_1$ in $d^{j-1}(e_1)$ is a unit.  Then
+$f_1':=d^{j-1}(e_1),f_2,\dots,f_{n_j}$ is again a basis of $M^j_x$,
+the matrix expressing it in $(f_1,\dots,f_{n_j})$ having determinant
+$c$; let $\phi:M^j_x\to A_x$ be the coordinate form dual to $f_1'$ for
+this new basis and put $\psi:=\phi\circ d^{j-1}$, so $\psi(e_1)=1$.
+Set
+\[
+C^{j-1}:=A_xe_1,\quad C^{j}:=A_xf_1',\quad
+N^{j-1}:=\ker(\psi),\quad N^{j}:=\ker(\phi),
+\]
+and $C^{k}:=0$, $N^{k}:=M^{k}_x$ for $k\ne j-1,j$.  Then $C^{\bullet}$
+is a subcomplex, since $d^{j-1}(e_1)=f_1'$ and
+$d^{j}(f_1')=d^{j}(d^{j-1}(e_1))=0$, and it is the contractible
+complex $(A_x\xrightarrow{\sim}A_x)$ in degrees $j-1,j$; and
+$N^{\bullet}$ is a subcomplex, since
+$d^{j-1}(N^{j-1})\subseteq\ker(\phi)=N^{j}$ by the definition of
+$N^{j-1}$, while $\psi\circ d^{j-2}=\phi\circ d^{j-1}\circ d^{j-2}=0$
+gives $d^{j-2}(M^{j-2}_x)\subseteq N^{j-1}$.  Its terms are again
+finite free, of ranks $n_{j-1}-1$ and $n_j-1$ in degrees $j-1$ and
+$j$: bases are $(e_k-\psi(e_k)e_1)_{k\ge2}$ for $N^{j-1}$ and
+$(f_2,\dots,f_{n_j})$ for $N^{j}$.  Finally
+$M^{j-1}_x=C^{j-1}\oplus N^{j-1}$ and $M^{j}_x=C^{j}\oplus N^{j}$,
+because $\psi(e_1)=1$ and $\phi(f_1')=1$ make
+$m=\psi(m)e_1+(m-\psi(m)e_1)$ and $m=\phi(m)f_1'+(m-\phi(m)f_1')$ the
+unique such decompositions.  So
+$M^{\bullet}_x=C^{\bullet}\oplus N^{\bullet}$ as complexes and
+$\sum_k\operatorname{rank}N^{k}=\sum_kn_k-2$; iterating on
+$\sum_kn_k$ proves the claim.
+
+Now $C^{\bullet}\otimes_{A_x}\kappa(x)$ is exact for each contractible
+summand, and the differentials of
+$\widetilde M^{\bullet}\otimes_{A_x}\kappa(x)$ vanish because
+$\widetilde M^{\bullet}$ is minimal; hence
+$H^j(M^{\bullet}\otimes_A\kappa(x))=\widetilde
+M^{j}\otimes_{A_x}\kappa(x)$ and
+$\beta_j(x)=\operatorname{rank}\widetilde M^{j}$ for every $j$.  For
+$x\in W_i$ this says $\widetilde M^{j}=0$ for $j\ne i$, that is
+$\widetilde M^{\bullet}=\widetilde M^{i}[-i]$ with $\widetilde M^{i}$
+finite free of rank $\beta_i(x)$.  The contractible summands being
+acyclic, $H^j(M^{\bullet})_x=H^j(M^{\bullet}_x)=0$ for $j\ne i$ and
+$H^i(M^{\bullet})_x=\widetilde M^{i}$.  As $x\in W_i$ was arbitrary
+and all stalks of $H^j(M^{\bullet})$ over $W_i$ thus vanish for
+$j\ne i$, we get $H^j(E)|_{W_i}=H^j(M^{\bullet})|_{W_i}=0$ for
+$j\ne i$; and $M^{\bullet}_x=C^{\bullet}\oplus\widetilde M^{i}[-i]$
+also gives $M^{\bullet}_x\cong H^i(M^{\bullet})_x[-i]$ in $D(A_x)$,
+which is the formality recorded in the next paragraph.
 Moreover, over each point $x\in W_i$ the complex is
 "formal": $E_x\cong H^i(E)_x[-i]$ (the classical statement: a perfect
 complex over a local ring whose cohomology is concentrated in one
