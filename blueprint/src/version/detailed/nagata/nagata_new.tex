@@ -6380,6 +6380,69 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
   their contained strict transforms are disjoint as well.
 \end{proof}
 
+\begin{definition}[Transport of a side along a $V_i$-admissible blow-up]
+  \label{def:nagata-two-open-side-transport}
+  \uses{def:nagata-two-open-graph-extensions,
+    def:nagata-two-open-boundary-loci,
+    def:nagata-admissible-blowup}
+  \lean{AlgebraicGeometry.TwoOpenSide.admissibleBlowup}
+
+  Let $b\colon X_i'\to X_i$ be a $V_i$-admissible blow-up.  Transport the
+  side $(X_i,V_i,\psi_i,U_i\hookrightarrow V_i)$ along $b$: take $X_i'$ with
+  its structural morphism $X_i'\to X_i\to S$, the open $b^{-1}(V_i)$, the
+  proper morphism $b^{-1}(V_i)\xrightarrow{\ \sim\ }V_i\xrightarrow{\psi_i}U$,
+  and the copy of $U_i$ obtained from the selected isomorphism over $V_i$.
+  Its boundary loci are the closures in $X_i'$ of the inverse images
+  $b^{-1}(\overline Z_{i,k}\cap V_i)$.
+\end{definition}
+
+\begin{lemma}[Properties of the transported side]
+  \label{lemma:nagata-two-open-side-transport}
+  \uses{def:nagata-two-open-side-transport}
+  \lean{AlgebraicGeometry.TwoOpenSide.admissibleBlowup}
+
+  The transported data is again a side: $X_i'\to S$ is proper, the
+  transported $\psi_i$ is proper and extends $U_i\hookrightarrow U$, it is an
+  isomorphism over $U_i$, and the transported copy of $U_i$ is
+  scheme-theoretically dense in $X_i'$.
+\end{lemma}
+
+\begin{proof}
+  \uses{lemma:nagata-blowup-proper,
+    lemma:nagata-admissible-blowup-over-open,
+    lemma:nagata-admissible-blowup-preserves-density}
+  An admissible blow-up is proper by
+  \Cref{lemma:nagata-blowup-proper}, so the composite $X_i'\to S$ is proper,
+  and the transported $\psi_i$ differs from $\psi_i$ by the isomorphism over
+  $V_i$ of \Cref{lemma:nagata-admissible-blowup-over-open}, hence is proper,
+  extends $U_i\hookrightarrow U$ and is an isomorphism over $U_i$.  The copy
+  of $U_i$ inside $V_i$ is a scheme-theoretically dense open of $X_i$
+  contained in $V_i$; its inverse image is therefore scheme-theoretically
+  dense in $X_i'$ by
+  \Cref{lemma:nagata-admissible-blowup-preserves-density}, and it is exactly
+  the transported copy because $b$ is an isomorphism over $V_i$.
+\end{proof}
+
+\begin{lemma}[Disjoint boundary closures persist along a transport]
+  \label{lemma:nagata-two-open-side-transport-prepared}
+  \uses{def:nagata-two-open-side-transport,
+    def:nagata-two-open-prepared-boundaries}
+  \lean{AlgebraicGeometry.TwoOpenSide.Prepared.admissibleBlowup}
+
+  If the boundary closures $\overline Z_{i,i}$ and $\overline Z_{i,j}$ of a
+  side are disjoint, then the boundary closures of the side transported along
+  a $V_i$-admissible blow-up $b$ are disjoint as well.
+\end{lemma}
+
+\begin{proof}
+  The boundary closures of the transported side are the closures of the
+  inverse images under $b$ of the boundary loci of the original side.  A
+  continuous map carries the closure of an inverse image into the inverse
+  image of the closure, so these are contained in
+  $b^{-1}(\overline Z_{i,i})$ and $b^{-1}(\overline Z_{i,j})$, which are
+  disjoint because $\overline Z_{i,i}$ and $\overline Z_{i,j}$ are.
+\end{proof}
+
 \begin{definition}[The two-open comparison space]
   \label{def:nagata-two-open-comparison-space}
   \uses{def:nagata-two-open-prepared-boundaries,

@@ -245,6 +245,22 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
   rw [he]
   infer_instance
 
+/-- An open immersion is scheme-theoretically dominant if and only if its open range is
+scheme-theoretically dense. -/
+theorem isSchemeTheoreticallyDominant_iff_opensRange_ι {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [IsOpenImmersion f] :
+    IsSchemeTheoreticallyDominant f ↔ IsSchemeTheoreticallyDominant f.opensRange.ι := by
+  have he : inv f.isoOpensRange.hom ≫ f = f.opensRange.ι := by
+    rw [IsIso.inv_comp_eq, Scheme.Hom.isoOpensRange_hom_ι]
+  constructor
+  · intro h
+    have h' : IsSchemeTheoreticallyDominant (inv f.isoOpensRange.hom ≫ f) := inferInstance
+    rwa [he] at h'
+  · intro h
+    have h' : IsSchemeTheoreticallyDominant (f.isoOpensRange.hom ≫ f.opensRange.ι) :=
+      inferInstance
+    rwa [Scheme.Hom.isoOpensRange_hom_ι] at h'
+
 end Opens
 
 end AlgebraicGeometry
