@@ -3865,13 +3865,30 @@ $g_X:X_{T'}\to X_T$ the map $\cL\mapsto g_X^*\cL$ sends invertible
 modules to invertible modules, respects isomorphisms and satisfies
 $(g_1\circ g_2)^*=g_2^*g_1^*$ and $(\id)^*=\id$.
 \uses{def:pc-picard-presheaf,def:pc-base-change,def:pc-invertible-module,lem:pc-tensor-dual-invertible}
-% Lean: the two clauses of the lemma.  SheafOfModules.IsInvertible.pullback is
-% ``sends invertible modules to invertible modules''; Scheme.Pic.pullback_id and
-% Scheme.Pic.pullback_comp are the two displayed equations (id)^* = id and
-% (g_1 g_2)^* = g_2^* g_1^*, stated for the pullback maps Pic(Y) -> Pic(X).  The
-% assembled functor (Sch/S)^op -> Sets is AlgebraicGeometry.picardPresheaf, named
-% at def:pc-picard-presheaf; AlgebraicGeometry.Scheme.picFunctor, which stood
-% here, is the absolute functor Y |-> Pic(Y) on Scheme^op and does not mention f.
+% Lean, clause by clause.
+%   * ``sends invertible modules to invertible modules'':
+%     SheafOfModules.IsInvertible.pullback, i.e.
+%       {g : X -> Y} {M : Y.Modules} (hM : M.IsInvertible) :
+%         ((Modules.pullback g).obj M).IsInvertible.
+%   * (id)^* = id and (g_1 g_2)^* = g_2^* g_1^*: Scheme.Pic.pullback_id and
+%     Scheme.Pic.pullback_comp, stated for the pullback maps Pic(Y) -> Pic(X).
+%   * ``respects isomorphisms'': carried by construction rather than by a named
+%     lemma.  Scheme.Pic.pullback is a map on X.Pic, which is
+%     ``the set of isomorphism classes of invertible sheaves of O_Y-modules,
+%     realized as the invertible classes inside the skeleton of Y.Modules''
+%     (docstring of AlgebraicGeometry.Scheme.Pic in
+%     WeilConjectures/AlgebraicGeometry/PicardFunctor.lean); that isomorphic
+%     modules have the same class is Scheme.Pic.mk_eq_mk_iff,
+%       mk M = mk N <-> Nonempty (M ~= N)   [~= is the iso relation],
+%     in the same file.  So pullback_id and pullback_comp cannot even be typed
+%     without this clause.
+%   * the headline conclusion, that T |-> Pic(X_T) is a functor
+%     (Sch/S)^op -> Sets: no declaration in the list above states it.  It is
+%     discharged by the neighbouring node def:pc-picard-presheaf, whose Lean
+%     name is AlgebraicGeometry.picardPresheaf and which carries its own
+%     formalisation marker.  AlgebraicGeometry.Scheme.picFunctor, which stood
+%     here, is the absolute functor Y |-> Pic(Y) on Scheme^op: it is a functor
+%     Scheme^op -> Type and does not mention f.
 \lean{SheafOfModules.IsInvertible.pullback, AlgebraicGeometry.Scheme.Pic.pullback_id, AlgebraicGeometry.Scheme.Pic.pullback_comp}
 \leanok
 \end{lemma}
