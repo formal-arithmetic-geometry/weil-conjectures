@@ -11,6 +11,7 @@ public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
@@ -32,6 +33,10 @@ module flattening is needed, so no flattening statements are formalized here.
   quasi-coherent ideal whose support is disjoint from `U`; the associated
   `U`-admissible blow-up is the blow-up of that ideal
   (blueprint: `def:nagata-admissible-blowup`);
+- `AlgebraicGeometry.IsAdmissible.blowupBaseChange` and
+  `AlgebraicGeometry.IsAdmissible.preservedOpenPullback`: the base change
+  `X' ×_S Y ⟶ X ×_S Y` of a `U`-admissible blow-up along the first projection, and the
+  open of `X ×_S Y` over which it is an isomorphism;
 - `AlgebraicGeometry.separationBlowup`: the boundary-separation blow-up of the sum of
   two center ideals (revised blueprint: `def:nagata-separate-closed-subschemes`).
 
@@ -147,6 +152,31 @@ abbrev preservedOpen : X.Opens := B.I.support.compl
 lemma le_preservedOpen : U ≤ B.preservedOpen := by
   intro x hx
   exact Set.disjoint_left.mp B.disjoint_support hx
+
+/-- **A `U`-admissible blow-up is quasi-compact**, the center being of finite type. -/
+lemma quasiCompact_blowupMap : QuasiCompact B.I.blowupMap :=
+  Scheme.IdealSheafData.quasiCompact_blowupMap B.finiteType
+
+variable {S Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
+
+/-- The base change of a `U`-admissible blow-up along the first projection of a fibre
+product: the morphism `X' ×_S Y ⟶ X ×_S Y` induced by `B.I.blowupMap : X' ⟶ X`. -/
+abbrev blowupBaseChange : pullback (B.I.blowupMap ≫ f) g ⟶ pullback f g :=
+  pullbackCompFstMap f g B.I.blowupMap
+
+/-- The preimage of the preserved open under the first projection of a fibre product:
+the open of `X ×_S Y` over which the base-changed blow-up is an isomorphism. -/
+abbrev preservedOpenPullback : (pullback f g).Opens :=
+  pullback.fst f g ⁻¹ᵁ B.preservedOpen
+
+/-- **The base-changed blow-up is an isomorphism over the preserved open**: the blow-up
+is an isomorphism over the complement of its center, and this persists under the base
+change along the first projection. -/
+instance isIso_blowupBaseChange_restrict :
+    IsIso (B.blowupBaseChange f g ∣_ B.preservedOpenPullback f g) :=
+  have := B.I.isIso_blowupMap_restrict_support_compl
+  isIso_morphismRestrict_of_isPullback
+    (isPullback_pullbackCompFstMap f g B.I.blowupMap) B.preservedOpen
 
 /-- **A `U`-admissible blow-up is proper**: the properness of the blow-up of the
 center (`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
@@ -785,9 +815,9 @@ lemma disjoint_range_strictTransformMap_of_probe
 
 /-- **Quasi-compactness of the inclusion of the open locus of a strict transform** over
 the complement of the support of a finite-type center on a qcqs scheme: the fibre
-product is quasi-separated over `X`, and the open locus is the preimage of the
-quasi-compact open `X ∖ supp K` under a quasi-compact morphism. -/
-lemma quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
+product is quasi-separated over `X`, so
+`AlgebraicGeometry.quasiCompact_strictTransformOpen_ι` applies. -/
+lemma quasiCompact_strictTransformOpen_ι_blowupMap {X : Scheme.{u}}
     [QuasiSeparatedSpace X] {K : X.IdealSheafData} (hK : K.ofFiniteType)
     (hU₀ : IsCompact ((K.support.compl : X.Opens) : Set X)) (J : X.IdealSheafData) :
     QuasiCompact (strictTransformOpen J.subschemeι K.blowupMap K.support.compl).ι := by
@@ -799,19 +829,7 @@ lemma quasiCompact_strictTransformOpen_ι {X : Scheme.{u}}
   have hPqs : QuasiSeparatedSpace ↥(Limits.pullback J.subschemeι K.blowupMap) :=
     quasiSeparatedSpace_of_quasiSeparated
       (pullback.fst J.subschemeι K.blowupMap ≫ J.subschemeι)
-  have hfstQC : QuasiCompact (pullback.fst J.subschemeι K.blowupMap) :=
-    MorphismProperty.pullback_fst _ _ inferInstance
-  have hcpt : IsCompact
-      ((strictTransformOpen J.subschemeι K.blowupMap K.support.compl :
-        Set ↥(Limits.pullback J.subschemeι K.blowupMap))) := by
-    rw [strictTransformOpen_eq_preimage]
-    exact QuasiCompact.isCompact_preimage
-      (f := pullback.fst J.subschemeι K.blowupMap ≫ J.subschemeι) _
-      (K.support.compl).isOpen hU₀
-  have : CompactSpace
-      (strictTransformOpen J.subschemeι K.blowupMap K.support.compl).toScheme :=
-    isCompact_iff_compactSpace.mp hcpt
-  infer_instance
+  exact quasiCompact_strictTransformOpen_ι _ _ _ hU₀
 
 /-- **Boundary separation** (Stacks Project Tag 0F3V; revised blueprint
 `lemma:nagata-separate-closed-subschemes`): after blowing up the sum of two finite-type
@@ -834,8 +852,8 @@ theorem disjoint_range_strictTransformMap_sup [CompactSpace X]
   have hKft : (I₁ ⊔ I₂).ofFiniteType := h₁.sup h₂
   have hU₀ : IsCompact (((I₁ ⊔ I₂).support.compl : X.Opens) : Set X) :=
     Scheme.IdealSheafData.isCompact_coe_compl_support hKft
-  have := quasiCompact_strictTransformOpen_ι hKft hU₀ I₁
-  have := quasiCompact_strictTransformOpen_ι hKft hU₀ I₂
+  have := quasiCompact_strictTransformOpen_ι_blowupMap hKft hU₀ I₁
+  have := quasiCompact_strictTransformOpen_ι_blowupMap hKft hU₀ I₂
   rw [Set.disjoint_left]
   intro x hx₁ hx₂
   obtain ⟨U', b, hbK, hb12, hxc⟩ :=

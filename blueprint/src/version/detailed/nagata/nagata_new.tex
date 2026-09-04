@@ -5472,41 +5472,52 @@ correction explicit before it is sheafified and glued.
 
 \begin{lemma}[Scheme-image transport to a strict transform]
   \label{lemma:nagata-scheme-image-transport-strict-transform}
-  \uses{lemma:nagata-scheme-image-restrict-open,
-    lemma:nagata-scheme-image-affine-saturation,
-    prop:nagata-strict-transform-closed-fiber-product,
-    lemma:nagata-strict-transform-closure-characterization,
-    thm:nagata-global-blowup-complement}
-  Let $h\colon T\to X\times_SY$ be quasi-compact and quasi-separated, with
-  first projection factoring through a quasi-compact open $U\subseteq X$.
-  Let $Z=\operatorname{SIm}(h)$ and let $\pi\colon X'\to X$ be a
-  $U$-admissible blow-up.  Via the canonical identity
-  $X'\times_XU\cong U$, let $h'$ be the lifted map to $X'\times_SY$.  Then
+  \uses{def:nagata-scheme-theoretic-image,def:nagata-strict-transform,
+    lemma:nagata-scheme-image-flat-base-change}
+  \lean{AlgebraicGeometry.ker_eq_ker_strictTransformMap}
+
+  Let $\pi\colon X'\to X$ be a morphism restricting to an isomorphism over an
+  open $U\subseteq X$, and let $h\colon V\to X$ be quasi-compact with
+  $\operatorname{im}(h)\subseteq U$.  Write $Z=\operatorname{SIm}(h)$ and let
+  $h'\colon V\to X'$ be a lift of $h$ along $\pi$; such a lift exists and is
+  unique, because $\pi$ is an isomorphism over $U$.  Then
   \[
-    \operatorname{SIm}(h')
-      \;=\;\operatorname{ST}_{X'/X}(Z)
+    \operatorname{SIm}(h')\;=\;\operatorname{ST}_{X'/X}(Z)
   \]
-  as closed subschemes of $X'\times_SY$, compatibly with their maps to $X'$.
+  as closed subschemes of $X'$, the strict transform being taken relative to
+  $U$.  Formally the two closed subschemes are compared through their kernel
+  ideal sheaves, and the statement carries the standing assumption that the
+  inclusion of the open locus of $Z\times_XX'$ over $U$ is quasi-compact.
 \end{lemma}
 
 \begin{proof}
-  Restriction of scheme-theoretic image to $U\times_SY$ identifies the image
-  there with the image of $h|_U$ by
-  \Cref{lemma:nagata-scheme-image-restrict-open}.  Work on an affine chart of
-  $X'\times_SY$ on which the pulled-back center has principal equation $a$.
-  Write its coordinate ring as $C$ and refine the source by affine opens
-  $\operatorname{Spec}(B_j)$.  The image ideal on this chart is
-  $K=\bigcap_j\ker(C\to B_j)$, so $C/K\to\prod_jB_j$ is injective; the image
-  of $a$ is a unit in every $B_j$ because $h$ factors through $U$.  Applying
-  \Cref{lemma:nagata-scheme-image-affine-saturation} to the product ring
-  identifies the kernel on this chart with the $a$-saturation of the pulled
-  back image ideal.  By
-  \Cref{prop:nagata-strict-transform-closed-fiber-product} and
-  \Cref{lemma:nagata-strict-transform-closure-characterization}, that
-  quotient is precisely the strict-transform chart.  The identifications are
-  unchanged after localization, so they agree on overlaps and glue to the
-  claimed global equality.
+  \uses{lemma:nagata-scheme-image-flat-base-change}
+  By definition $\operatorname{ST}_{X'/X}(Z)$ is the scheme-theoretic image of
+  the open locus $L\subseteq Z\times_XX'$ lying over $U$, so it is enough to
+  factor $h'$ as $V\to L\to Z\times_XX'\to X'$ with $V\to L$
+  scheme-theoretically dominant: precomposition with a scheme-theoretically
+  dominant morphism does not change the kernel ideal sheaf.  The map $V\to
+  Z\times_XX'$ induced by $V\to Z$ and $h'$ lands in $L$ because
+  $\operatorname{im}(h)\subseteq U$.  Since $\pi$ is an isomorphism over $U$,
+  the projection $L\to Z$ is the base change of the open immersion
+  $U\hookrightarrow X$ along $Z\to X$; hence the square exhibiting $V$ as the
+  fibre product of $V\to Z$ along $L\to Z$ is cartesian, and scheme-theoretic
+  dominance of $V\to Z$ descends to $V\to L$ by flat base change
+  (\Cref{lemma:nagata-scheme-image-flat-base-change}).
 \end{proof}
+
+\begin{remark}[Formalization route]
+  The route originally written here was an affine chart argument: work on a
+  chart of $X'\times_SY$ where the pulled-back centre is principal with
+  equation $a$, identify the image ideal with its $a$-saturation
+  (\Cref{lemma:nagata-scheme-image-affine-saturation},
+  \Cref{prop:nagata-strict-transform-closed-fiber-product},
+  \Cref{lemma:nagata-strict-transform-closure-characterization}), and glue.
+  The formal proof (\texttt{ker\_eq\_ker\_strictTransformMap}) uses none of the
+  saturation machinery; it is the flat-base-change argument above, and it is
+  stated for an arbitrary $\pi$ that is an isomorphism over $U$ rather than
+  only for admissible blow-ups.
+\end{remark}
 
 \begin{lemma}[Property of the isomorphism-near-closure construction,
   {\cite[\href{https://stacks.math.columbia.edu/tag/0F3W}{Tag 0F3W}]{stacks-project}}]
@@ -5567,7 +5578,7 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-scheme-image-partial-section}
   \uses{def:nagata-scheme-theoretic-image,
     lemma:nagata-scheme-image-of-closed-immersion}
-  \lean{AlgebraicGeometry.Nagata.ker_comap_partialSectionOpenι}
+  \lean{AlgebraicGeometry.ker_comap_pullbackCompFstMap}
 
   Let \(U\hookrightarrow X\) be a quasi-compact open immersion, let
   \(Y\to S\) be separated, and let
@@ -5739,18 +5750,28 @@ correction explicit before it is sheafified and glued.
   \label{lemma:nagata-scheme-image-strict-transform}
   \uses{def:nagata-scheme-theoretic-image,def:nagata-strict-transform,
     def:nagata-admissible-blowup,thm:nagata-global-blowup-complement}
-  \lean{AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup}
+  \lean{AlgebraicGeometry.ker_eq_ker_strictTransformMap_of_isAdmissible}
 
-  Let $V\to X\times_SY$ be quasi-compact and quasi-separated, and assume its
-  projection to $X$ factors through an open $U\subseteq X$.  Let $Z$ be its
-  scheme-theoretic image.  If $X'\to X$ is a $U$-admissible blow-up, then the scheme-theoretic
-  image of the lifted map $V\to X'\times_SY$ is the strict transform of $Z$.
-  More precisely, use the canonical isomorphism
-  $\varepsilon\colon X'\times_XU\cong U$ from
-  \Cref{thm:nagata-global-blowup-complement}; the lift is the map whose
-  $X'$-component is obtained from $V\to U$ by
-  $\varepsilon^{-1}\colon U\to X'\times_XU\to X'$ and whose $Y$-component is
-  the given projection $V\to Y$.
+  Let $h\colon V\to X\times_SY$ be quasi-compact, and assume its projection to
+  $X$ factors through an open $U\subseteq X$.  Let $Z=\operatorname{SIm}(h)$.
+  If $X'\to X$ is a $U$-admissible blow-up with base change
+  $\rho\colon X'\times_SY\to X\times_SY$ and $h'\colon V\to X'\times_SY$ is a
+  lift of $h$ along $\rho$, then
+  \[
+    \operatorname{SIm}(h')\;=\;\operatorname{ST}_{X'/X}(Z),
+  \]
+  the strict transform being taken relative to the preimage in $X\times_SY$ of
+  the complement of the centre.  The lift exists and is unique because $\rho$
+  is an isomorphism over that open, by the canonical isomorphism
+  $\varepsilon\colon X'\times_XU\cong U$ of
+  \Cref{thm:nagata-global-blowup-complement}.
+
+  Formalization note: quasi-separatedness of $h$ is not needed, the kernel
+  ideal sheaf theory using only quasi-compactness.  Conversely the Lean
+  statement takes $h'$ as data and carries the finiteness data --- quasi-separatedness
+  of $Z\times_{X\times_SY}(X'\times_SY)$ and quasi-compactness of the
+  preserved open of $X\times_SY$ --- needed to discharge the standing
+  quasi-compactness assumption of the strict-transform comparison.
 \end{lemma}
 
 \begin{proof}

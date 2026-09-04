@@ -15,7 +15,11 @@ We record:
 - `AlgebraicGeometry.morphismRestrictArrowIso` — transport of a morphism restriction along
   compatible open immersions;
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
-  — membership and preimage formulas for the ranges of inclusions of opens.
+  — membership and preimage formulas for the ranges of inclusions of opens;
+- `AlgebraicGeometry.isIso_morphismRestrict_of_isPullback` — a base change of a morphism
+  that is an isomorphism over an open is an isomorphism over the preimage of that open;
+- `AlgebraicGeometry.Scheme.Hom.liftOfIsIsoRestrict` — the (unique) lift of a morphism
+  along a morphism that is an isomorphism over an open containing its range.
 -/
 
 @[expose] public section
@@ -58,5 +62,80 @@ lemma homOfLE_preimage_opensRange {X : Scheme.{u}} {U V W : X.Opens} (hWU : W �
       (X.homOfLE hWU).opensRange := by
   rw [Scheme.opensRange_homOfLE, Scheme.opensRange_homOfLE, ← Scheme.Hom.comp_preimage,
     Scheme.homOfLE_ι]
+
+/-- **A base change of an isomorphism over an open is an isomorphism over the preimage
+of that open**: if the square
+
+```
+T' --ρ--> T
+|         |
+p         q
+↓         ↓
+U --j---> X
+```
+
+is cartesian and `j` restricts to an isomorphism over an open `V ⊆ X`, then `ρ` restricts
+to an isomorphism over `q ⁻¹ᵁ V`. -/
+lemma isIso_morphismRestrict_of_isPullback {T T' U : Scheme.{u}} {ρ : T' ⟶ T} {p : T' ⟶ U}
+    {q : T ⟶ X} {j : U ⟶ X} (H : IsPullback ρ p q j) (V : X.Opens) [IsIso (j ∣_ V)] :
+    IsIso (ρ ∣_ (q ⁻¹ᵁ V)) := by
+  -- `T'|_{ρ⁻¹ q⁻¹ V}` is `U ×_X T|_{q⁻¹ V}` by pasting the restriction square onto the
+  -- cartesian square, ...
+  have hA : IsPullback (ρ ∣_ (q ⁻¹ᵁ V)) (ρ ⁻¹ᵁ (q ⁻¹ᵁ V)).ι (q ⁻¹ᵁ V).ι ρ :=
+    isPullback_morphismRestrict _ _
+  have hpaste := hA.paste_vert H
+  -- ... and `T|_{q⁻¹ V} ⟶ X` factors through `V`, so it is `j ∣_ V` base-changed.
+  have ht : IsPullback (j ⁻¹ᵁ V).ι (j ∣_ V) j V.ι := (isPullback_morphismRestrict j V).flip
+  have hs : IsPullback ((ρ ⁻¹ᵁ (q ⁻¹ᵁ V)).ι ≫ p) (ρ ∣_ (q ⁻¹ᵁ V)) j ((q ∣_ V) ≫ V.ι) := by
+    rw [morphismRestrict_ι]
+    exact hpaste.flip
+  exact (IsPullback.of_right' hs ht).flip.isIso_fst_of_isIso
+
+section Lift
+
+variable {X' : Scheme.{u}} (π : X' ⟶ X) (U : X.Opens) [IsIso (π ∣_ U)] (h : Z ⟶ X)
+    (hrange : Set.range h ⊆ (U : Set X))
+
+omit [IsIso (π ∣_ U)] in
+include hrange in
+/-- A morphism to `X'` lifting a morphism whose range lies in `U` has range inside the
+open `π ⁻¹ᵁ U`. -/
+lemma range_subset_range_preimage_ι_of_comp_eq {h' : Z ⟶ X'} (hh' : h' ≫ π = h) :
+    Set.range h' ⊆ Set.range (π ⁻¹ᵁ U).ι := by
+  rw [Scheme.Opens.range_ι]
+  rintro _ ⟨z, rfl⟩
+  exact hrange ⟨z, by rw [← hh', Scheme.Hom.comp_apply]⟩
+
+/-- **The lift along a morphism that is an isomorphism over an open**: if `π : X' ⟶ X`
+restricts to an isomorphism over an open `U ⊆ X` and the range of `h : Z ⟶ X` is
+contained in `U`, then `h` lifts along `π`, by inverting `π ∣_ U`. -/
+noncomputable def Scheme.Hom.liftOfIsIsoRestrict : Z ⟶ X' :=
+  IsOpenImmersion.lift U.ι h (by rwa [Scheme.Opens.range_ι]) ≫ inv (π ∣_ U) ≫ (π ⁻¹ᵁ U).ι
+
+@[reassoc (attr := simp)]
+lemma Scheme.Hom.liftOfIsIsoRestrict_comp :
+    π.liftOfIsIsoRestrict U h hrange ≫ π = h := by
+  rw [Scheme.Hom.liftOfIsIsoRestrict, Category.assoc, Category.assoc, ← morphismRestrict_ι,
+    IsIso.inv_hom_id_assoc]
+  exact IsOpenImmersion.lift_fac _ _ _
+
+/-- **Uniqueness of the lift**: two morphisms to `X'` whose composites with `π` agree and
+land in an open `U` over which `π` is an isomorphism are equal. -/
+lemma Scheme.Hom.hom_ext_of_isIso_restrict {h₁ h₂ : Z ⟶ X'} (hcomp : h₁ ≫ π = h₂ ≫ π)
+    (h₁range : Set.range (h₁ ≫ π) ⊆ (U : Set X)) : h₁ = h₂ := by
+  -- both morphisms factor through the open `π ⁻¹ᵁ U`, where `π` is an isomorphism
+  set k₁ := IsOpenImmersion.lift (π ⁻¹ᵁ U).ι h₁
+    (range_subset_range_preimage_ι_of_comp_eq π U _ h₁range rfl)
+  set k₂ := IsOpenImmersion.lift (π ⁻¹ᵁ U).ι h₂
+    (range_subset_range_preimage_ι_of_comp_eq π U _ (hcomp ▸ h₁range) rfl)
+  have e₁ : k₁ ≫ (π ⁻¹ᵁ U).ι = h₁ := IsOpenImmersion.lift_fac _ _ _
+  have e₂ : k₂ ≫ (π ⁻¹ᵁ U).ι = h₂ := IsOpenImmersion.lift_fac _ _ _
+  have hk : k₁ = k₂ := by
+    rw [← cancel_mono (π ∣_ U), ← cancel_mono U.ι]
+    simp only [Category.assoc, morphismRestrict_ι]
+    rw [← Category.assoc, ← Category.assoc, e₁, e₂, hcomp]
+  rw [← e₁, ← e₂, hk]
+
+end Lift
 
 end AlgebraicGeometry

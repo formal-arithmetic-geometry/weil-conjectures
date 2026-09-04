@@ -7,10 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 
@@ -57,13 +57,16 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 - `AlgebraicGeometry.isPullback_strictTransform_over`: the combination of the previous
   two, identifying the part of the strict transform lying over `U` with the ordinary base
   change `Y ×_X U` (blueprint: `lemma:nagata-strict-transform-over-complement`);
-- `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι_of_isCompact`: the standing
-  quasi-compactness assumption of the comparison API, discharged from finiteness data;
+- `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι`: if `f` and `π` are
+  quasi-compact, `Y ×_X X'` is quasi-separated and `U` is a quasi-compact open, then
+  `(strictTransformOpen f π U).ι` is quasi-compact;
 - `AlgebraicGeometry.ker_strictTransformMap`: when the inclusion of the open locus is
   quasi-compact, the strict transform and its open locus have the same scheme-theoretic
-  image in `X'`, since the factorization of the open locus through the strict transform
-  is scheme-theoretically dominant
-  (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`).
+  image in `X'`;
+- `AlgebraicGeometry.ker_eq_ker_strictTransformMap`: if `π` is an isomorphism over `U`
+  and `h : V ⟶ X` is quasi-compact with range in `U`, then the scheme-theoretic image of
+  a lift `h' : V ⟶ X'` of `h` is the strict transform of the scheme-theoretic image of
+  `h` (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`).
 
 -/
 
@@ -89,19 +92,17 @@ lemma strictTransformOpen_eq_preimage :
     strictTransformOpen f π U = (pullback.fst f π ≫ f) ⁻¹ᵁ U := by
   rw [strictTransformOpen, ← Scheme.Hom.comp_preimage, pullback.condition]
 
-/-- **The standing quasi-compactness assumption, discharged from finiteness data**: if
-the fibre product `Y ×_X X'` is quasi-separated, `f` and `π` are quasi-compact and `U`
-is a quasi-compact open of `X`, then the inclusion of the open locus over `U` is a
-quasi-compact morphism, so the whole comparison API below applies. -/
-theorem quasiCompact_strictTransformOpen_ι_of_isCompact [QuasiSeparatedSpace ↥(pullback f π)]
+/-- If the fibre product `Y ×_X X'` is quasi-separated, `f` and `π` are quasi-compact and
+`U` is a quasi-compact open of `X`, then the inclusion of the open locus over `U` is a
+quasi-compact morphism. -/
+theorem quasiCompact_strictTransformOpen_ι [QuasiSeparatedSpace ↥(pullback f π)]
     [QuasiCompact f] [QuasiCompact π] (hU : IsCompact (U : Set X)) :
     QuasiCompact (strictTransformOpen f π U).ι := by
   have : QuasiCompact (pullback.fst f π) := MorphismProperty.pullback_fst _ _ ‹_›
-  have hcpt : IsCompact ((strictTransformOpen f π U : Set ↥(pullback f π))) := by
-    rw [strictTransformOpen_eq_preimage]
-    exact QuasiCompact.isCompact_preimage (f := pullback.fst f π ≫ f) _ U.isOpen hU
   have : CompactSpace (strictTransformOpen f π U).toScheme :=
-    isCompact_iff_compactSpace.mp hcpt
+    isCompact_iff_compactSpace.mp <| by
+      rw [strictTransformOpen_eq_preimage]
+      exact QuasiCompact.isCompact_preimage (f := pullback.fst f π ≫ f) _ U.isOpen hU
   infer_instance
 
 section Lift
@@ -216,16 +217,24 @@ section SchemeTheoreticImage
 variable [QuasiCompact (strictTransformOpen f π U).ι]
 
 /-- The factorization of the open locus through the strict transform is
-scheme-theoretically dominant: the strict transform is by definition the
-scheme-theoretic image of that inclusion. -/
-instance : IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
+scheme-theoretically dominant. -/
+instance isSchemeTheoreticallyDominant_strictTransformFactor :
+    IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
   inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
 
 /-- **The strict transform and its open locus have the same scheme-theoretic image in
-`X'`** (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`).
+`X'`**: in the commutative diagram
 
-This is the half of the transport of scheme-theoretic images along an admissible blow-up
-(Stacks Project Tag 0F3Y) that is pure strict-transform theory. -/
+```
+strictTransformOpen f π U --ι--> Y ×_X X' --snd--> X'
+           \                                      ↗
+  strictTransformFactor            strictTransformMap
+             ↘                          /
+              strictTransform f π U
+```
+
+the two composites `strictTransformOpen f π U ⟶ X'` agree, and the left-hand
+factorization is scheme-theoretically dominant. -/
 theorem ker_strictTransformMap :
     (strictTransformMap f π U).ker =
       ((strictTransformOpen f π U).ι ≫ pullback.snd f π).ker := by
@@ -353,6 +362,61 @@ theorem isPullback_strictTransform_over :
   · simp
   · simp
   · simp
+
+/-- **Transport of a scheme-theoretic image through a morphism that is an isomorphism
+over `U`** (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`): if
+`h : V ⟶ X` is quasi-compact with range inside `U`, and `h' : V ⟶ X'` is a lift of `h`
+along `π`, then the scheme-theoretic image of `h'` is the strict transform of the
+scheme-theoretic image of `h`. Both images are recorded by their kernel ideal sheaves.
+
+```
+              V
+         h'  ↙ ↘  h
+           ↙     ↘
+         X' --π--> X
+```
+
+The lift exists and is unique (`AlgebraicGeometry.Scheme.Hom.liftOfIsIsoRestrict` and
+`AlgebraicGeometry.Scheme.Hom.hom_ext_of_isIso_restrict`), but it is taken as data here
+because in the applications it is produced by a different construction.
+
+The right-hand side is a strict transform, so the theorem carries the standing
+quasi-compactness assumption of this section: the inclusion of the open locus over `U`
+must be a quasi-compact morphism. It is not implied by the remaining hypotheses, and is
+discharged from finiteness data by
+`AlgebraicGeometry.quasiCompact_strictTransformOpen_ι`. -/
+theorem ker_eq_ker_strictTransformMap {V : Scheme.{u}} (h : V ⟶ X) [QuasiCompact h]
+    (hrange : Set.range h ⊆ (U : Set X)) (h' : V ⟶ X') (hlift : h' ≫ π = h)
+    [QuasiCompact (strictTransformOpen h.imageι π U).ι] :
+    h'.ker = (strictTransformMap h.imageι π U).ker := by
+  set L := strictTransformOpen h.imageι π U
+  -- The open locus is the restriction of `SIm(h)` over `U`.
+  have hPB := isPullback_strictTransformOpen h.imageι π U
+  -- The lift of `h` to `SIm(h) ×_X X'`.
+  have hcond : h.toImage ≫ h.imageι = h' ≫ π := by rw [Scheme.Hom.toImage_imageι, hlift]
+  set k := pullback.lift h.toImage h' hcond
+  have hkfst : k ≫ pullback.fst h.imageι π = h.toImage := pullback.lift_fst _ _ _
+  have hksnd : k ≫ pullback.snd h.imageι π = h' := pullback.lift_snd _ _ _
+  -- It lands in the open locus, because `h` lands over `U`.
+  have hkrange : Set.range (k ≫ pullback.fst h.imageι π ≫ h.imageι) ⊆ (U : Set X) := by
+    rw [← Category.assoc, hkfst, Scheme.Hom.toImage_imageι]
+    exact hrange
+  set m := strictTransformOpenLift h.imageι π U k hkrange
+  have hmfac : m ≫ L.ι = k := strictTransformOpenLift_ι h.imageι π U k hkrange
+  -- The projection of the open locus to `SIm(h)` is a base change of the open immersion
+  -- `U ⟶ X`, so `V` sits inside the open locus as a flat base change of `V ⟶ SIm(h)`,
+  -- and scheme-theoretic dominance descends.
+  have hopen : IsOpenImmersion (L.ι ≫ pullback.fst h.imageι π) :=
+    IsOpenImmersion.of_isPullback hPB.flip inferInstance
+  have hsq : IsPullback (𝟙 V) m h.toImage (L.ι ≫ pullback.fst h.imageι π) :=
+    IsPullback.of_horiz_isIso_mono
+      ⟨by rw [Category.id_comp, ← Category.assoc, hmfac, hkfst]⟩
+  have hdom : IsSchemeTheoreticallyDominant m := .of_isPullback hsq
+  calc h'.ker
+      = (m ≫ L.ι ≫ pullback.snd h.imageι π).ker := by rw [← Category.assoc, hmfac, hksnd]
+    _ = (L.ι ≫ pullback.snd h.imageι π).ker :=
+        Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _
+    _ = _ := (ker_strictTransformMap h.imageι π U).symm
 
 end PullbackComparison
 

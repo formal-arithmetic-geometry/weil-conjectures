@@ -83,8 +83,8 @@ theorem isSchemeTheoreticallyDominant_iff_isIso_imageι (g : T ⟶ Y) :
 
 /-- Precomposition with a scheme-theoretically dominant morphism does not change the
 kernel ideal sheaf. -/
-lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
-    (γ : T ⟶ Y) [IsSchemeTheoreticallyDominant d] : (d ≫ γ).ker = γ.ker := by
+theorem Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d : T' ⟶ T)
+    (g' : T ⟶ Y) [IsSchemeTheoreticallyDominant d] : (d ≫ g').ker = g'.ker := by
   rw [Scheme.Hom.ker_comp, d.ker_eq_bot, Scheme.IdealSheafData.map_bot]
 
 variable (g : T ⟶ Y) [QuasiCompact g] {Y' : Scheme.{u}} (q : Y' ⟶ Y) [Flat q]

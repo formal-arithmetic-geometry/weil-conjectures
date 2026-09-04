@@ -7,23 +7,27 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
-# Points in the closure of the range of a quasi-compact morphism
+# Complements on quasi-compact morphisms of schemes
 
 A point in the closure of the range of a quasi-compact morphism is a specialization of a
 point of the range (`AlgebraicGeometry.exists_specializes_of_mem_closure_range`). This is
 the topological content of Stacks Project Tag 02JQ; it is deduced from the corresponding
 statement about prime spectra,
 `PrimeSpectrum.exists_specializes_of_mem_closure_range_comap`.
+
+We also record that the base change of a quasi-compact morphism along the first
+projection of a fibre product is quasi-compact.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
@@ -74,5 +78,11 @@ theorem exists_specializes_of_mem_closure_range {T P : Scheme.{u}} (h : T ⟶ P)
   obtain ⟨t, ht⟩ := exists_specializes_of_mem_closure_range_of_isAffine (h ∣_ V) hzV'
   refine ⟨(h ⁻¹ᵁ V).ι t, ?_⟩
   simpa [Scheme.Opens.ι_apply, morphismRestrict_base_coe] using ht.map V.ι.continuous
+
+/-- The base change `U ×_S Y ⟶ X ×_S Y` of a quasi-compact morphism `j : U ⟶ X` along
+the first projection is quasi-compact. -/
+instance {S X Y U : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (j : U ⟶ X) [QuasiCompact j] :
+    QuasiCompact (pullbackCompFstMap f g j) :=
+  MorphismProperty.pullbackMap (P := @QuasiCompact) ‹_› inferInstance rfl (by simp)
 
 end AlgebraicGeometry
