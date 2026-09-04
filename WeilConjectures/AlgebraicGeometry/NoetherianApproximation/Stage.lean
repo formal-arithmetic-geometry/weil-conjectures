@@ -140,10 +140,6 @@ noncomputable def isLimitWc : IsLimit E.Wc :=
 instance isAffineHom_WD_map {j j' : Over E.i₀} (f : j ⟶ j') : IsAffineHom (E.WD.map f) :=
   inferInstanceAs (IsAffineHom ((opensDiagram E.N.D E.i₀ E.W₀).map f))
 
-instance isOpenImmersion_WD_map_ι (j : Over E.i₀) :
-    IsOpenImmersion (Scheme.Opens.ι (E.N.D.map j.hom ⁻¹ᵁ E.W₀)) :=
-  inferInstance
-
 instance (j : Over E.i₀) : CompactSpace (E.WD.obj j) :=
   isCompact_iff_compactSpace.mp
     (QuasiCompact.isCompact_preimage (f := E.N.D.map j.hom) _ E.W₀.2 E.hW₀c)
