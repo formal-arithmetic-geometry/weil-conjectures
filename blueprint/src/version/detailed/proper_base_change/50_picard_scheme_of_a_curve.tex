@@ -4511,6 +4511,44 @@ value on $V$ is $\Gamma(f^{-1}(V),\cF)^{\sim}$.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Affine opens of a separated morphism meet in an affine]
+\label{lem:pc-affine-intersection-separated}
+Let $f:X\to S$ be a separated morphism of schemes.  Then for every pair
+$(U,V)$ of affine open subschemes of $X$ which map into a common affine
+open subscheme of $S$:
+\begin{enumerate}
+\item the intersection $U\cap V$ is affine;
+\item the ring map
+$\cO_X(U)\otimes_{\mathbf Z}\cO_X(V)\to\cO_X(U\cap V)$ is surjective.
+\end{enumerate}
+In particular, if $X$ is a separated scheme, i.e.\ if
+$X\to\Spec(\mathbf Z)$ is separated, then the intersection of any two
+affine open subschemes of $X$ is affine.
+\uses{def:pc-scheme,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Stacks Project, Schemes, Lemma~26.21.7
+(\stacksproject{01KP}).  It is not decomposed here.  Note that the
+hypothesis is separatedness: for a merely quasi-separated $f$ the
+intersection $U\cap V$ is quasi-compact, but need not be affine.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Base change of an affine morphism]
+\label{lem:pc-base-change-affine}
+The base change of an affine morphism of schemes is affine: if
+$f:X\to S$ is affine and $S'\to S$ is any morphism of schemes, then the
+projection $f':X\times_SS'\to S'$ is affine.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Stacks Project, Morphisms of Schemes,
+Lemma~29.11.9 (\stacksproject{01SD}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Finite support of higher direct images]
 \label{lem:pc-finite-support-hi}
@@ -4527,22 +4565,44 @@ $\cF'$ on $X'=S'\times_SX$).
 \uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:pc-cech-computes}
+\uses{lem:pc-affine-vanishing,lem:pc-cech-computes,lem:pc-affine-intersection-separated,lem:pc-base-change-affine}
 It suffices to prove the statements on affine open subschemes
 $V=\Spec(A)$ of $S$ (the sheaf $R^if_*\cF$ is determined by its
 sections on affines, and $(R^if_*\cF)|_V=R^i(f|_V)_*\cF|$): after
 replacing $S$ by $V$ and $X$ by $f^{-1}(V)$ we have an affine $S$,
 and $X$ is quasi-compact and quasi-separated.  Choose a finite affine
-open covering $X=U_1\cup\dots\cup U_t$ (quasi-compactness) with all
-intersections affine (quasi-separatedness: the intersection of two
-affine open subschemes of a quasi-separated scheme is affine; or
-refine).  We prove by induction on $t$ the assertion
-$P(t)$: $H^p(X,\cF)=0$ for $p\ge t$ and $H^p(X,\cF)=\check H^p(\mathcal U,\cF)$
-for all $p$, for every quasi-coherent $\cF$.  For $t=1$, $X$ affine and
-$P(1)$ is \Cref{lem:pc-affine-vanishing}.  For $t>1$ write
-$U=U_1$, $V=U_2\cup\cdots\cup U_t$ ($V$ is quasi-compact, covered by
-$t-1$ affine opens with affine intersections) and consider the short
-exact sequence of sheaves on $X$
+open covering $\mathcal U:X=U_1\cup\dots\cup U_t$ (quasi-compactness).
+The hypothesis on $f$ supplies quasi-separatedness only, so each
+intersection $U_i\cap U_j$ is quasi-compact but need \emph{not} be
+affine: affineness of the intersection of two affine opens is what
+\emph{separatedness} gives
+(\Cref{lem:pc-affine-intersection-separated}), and no refinement of the
+covering repairs this in general -- the affine plane with doubled
+origin over a field $k$ is quasi-separated, and the intersection of
+its two standard charts is $\mathbf A^2_k\setminus\{0\}$, which is not
+affine.  Quasi-separatedness is nevertheless enough for the devissage,
+because $U_i\cap U_j$ is a quasi-compact open subscheme of the affine
+$U_i$ and is therefore separated: it has a finite affine open covering
+all of whose intersections are affine, again by
+\Cref{lem:pc-affine-intersection-separated}, now applied to $U_i$.  Fix
+one such auxiliary covering for each pair $(i,j)$.
+
+Call a quasi-compact open $W\subseteq X$ \emph{good} if there is an
+integer $n(W)$, independent of $\cF$, with $H^p(W,\cF)=0$ for all
+$p\ge n(W)$ and all quasi-coherent $\cF$ on $W$.  A quasi-compact open
+$W$ carrying a finite affine open covering $\mathcal U_W$ of
+cardinality $m$ whose intersections are all affine is good with
+$n(W)=m$, and satisfies in addition
+$H^p(W,\cF)=\check H^p(\mathcal U_W,\cF)$ for all $p$
+(\Cref{lem:pc-cech-computes}, together with
+\Cref{lem:pc-affine-vanishing} and the vanishing of an $m$-term Čech
+complex in degrees $\ge m$); by the previous paragraph this covers the
+affine opens ($m=1$) and every quasi-compact open subscheme of an
+affine open of $X$, in particular every $U_i\cap U_j$.  We prove by
+induction on $t$ the assertion $P(t)$: $U_1\cup\dots\cup U_t$ is good.
+For $t=1$ this is \Cref{lem:pc-affine-vanishing}.  For $t>1$ write
+$U=U_1$, $V=U_2\cup\cdots\cup U_t$ (good by the induction hypothesis)
+and consider the short exact sequence of sheaves on $X$
 \[
 0\to\cF\longrightarrow j_{U,*}\cF|_U\oplus j_{V,*}\cF|_V
 \longrightarrow j_{U\cap V,*}\cF|_{U\cap V}\to0
@@ -4551,20 +4611,33 @@ exact sequence of sheaves on $X$
 $0\to\cF_x\to\cF_x\oplus\cF_x\to\cF_x\to0$ for $x\in U\cap V$, and
 $0\to\cF_x\to\cF_x\to0\to0$ otherwise, with the maps the diagonal and
 the difference).  Its long exact cohomology sequence, together with
-$H^p(U,\cdot)=H^p(V,\cdot)=0$ for $p\ge t-1$ and the identifications
-$H^p(U,\cF)=\check H^p(U,\cF)$ etc.\ (the induction hypothesis applied
-to $U$ ($t=1$) and to $V$ ($t-1$ opens) and the standard equality for
-a two-open cover), gives $H^p(X,\cF)=0$ for $p\ge t$ and the Čech
-identification for lower $p$ (the classical devissage of Cohomology of
-Schemes, Lemma 30.4.5, \stacksproject{01XJ},
-which also uses \Cref{lem:pc-cech-computes} for the Čech comparison).
-This proves (1) and the first statement of (2) (the integer $n=t$).
-The base-change uniformity: the same $t$ bounds the coverings obtained
-by base change $S'\to S$: the $U_i$'s pull back to affine opens of
-$X'$ with affine intersections covering $X'$ (base change of affine
-along $S'\to S$ is affine; $\cF$ replaced by an arbitrary
-quasi-coherent $\cF'$), so the same induction proves $R^p(f')_*\cF'=0$
-for $p\ge t$.  This proves (2).
+the vanishing of $H^p(U,\cdot)$, $H^p(V,\cdot)$ and $H^p(U\cap V,\cdot)$
+in large degrees -- $U$ is affine, $V$ is good by the induction
+hypothesis, and $U\cap V=\bigcup_{i\ge2}(U_1\cap U_i)$ is a
+quasi-compact open subscheme of the affine $U_1$, hence good by the
+previous paragraph -- shows that $X=U\cup V$ is good, with
+$n(X)=\max\{n(U),n(V),n(U\cap V)+1\}$; and when all the $U_i\cap U_j$
+happen to be affine, so that $\mathcal U$ itself has affine
+intersections, the same devissage gives the sharp bound $n(X)=t$
+together with the Čech identification
+$H^p(X,\cF)=\check H^p(\mathcal U,\cF)$ for all $p$ (the classical
+devissage of Cohomology of Schemes, Lemma 30.4.5,
+\stacksproject{01XJ}, which also uses \Cref{lem:pc-cech-computes} for
+the Čech comparison).
+This proves (1) and the first statement of (2), with the integer
+$n=n(X)$ produced by the induction.
+The base-change uniformity: the vanishing $R^p(f')_*\cF'=0$ is local
+on $S'$, so we may assume $S'$ affine, and then the whole devissage
+base changes.  The $U_i$ pull back to affine opens $(U_i)_{S'}$
+covering $X'$, and the auxiliary coverings of the $U_i\cap U_j$ pull
+back to affine coverings of
+$(U_i)_{S'}\cap(U_j)_{S'}=(U_i\cap U_j)_{S'}$ with affine
+intersections: each of the affine opens in question is affine over the
+affine $S$, and the base change of an affine morphism is affine
+(\Cref{lem:pc-base-change-affine}).  The combinatorics of the
+induction is therefore unchanged, so the integer $n=n(X)$ found above
+works for every base change $S'\to S$ and every quasi-coherent $\cF'$
+on $X'$.  This proves (2).
 \end{proof}
 
 
@@ -4743,8 +4816,13 @@ proper, so by \Cref{lem:pc-coherent-hi} (with $S=\Spec(k)$, $A=k$,
 $\cF=\cO_X$) the $k$-vector space $A$ is finite dimensional.  Since $X$
 is a (connected, integral) variety, $A$ is a domain: the restriction
 map $H^0(X,\cO_X)\to\kappa(\eta)$ to the generic point $\eta$ is
-injective (the structure sheaf injects into the constant sheaf of the
-function field of the integral $X$), so $A$ is a subring of a field.
+injective, so $A$ is a subring of a field.  For that injectivity, let
+$s\in H^0(X,\cO_X)$ have zero image in $\cO_{X,\eta}=\kappa(\eta)$ and
+let $U=\Spec(R)\subseteq X$ be any nonempty affine open.  Since $X$ is
+integral, $R$ is a domain and $\eta$ lies in $U$ as the point given by
+the prime $(0)$, so $\cO_{X,\eta}=R_{(0)}$ is the fraction field of
+$R$ and $R\to\cO_{X,\eta}$ is injective; hence $s|_U=0$.  The nonempty
+affine opens cover $X$, so $s=0$.
 A finite dimensional $k$-algebra which is a domain is a field: it is
 Artinian (finite dimensional over a field, so of finite length over
 itself), hence a finite product of local Artinian rings
@@ -4849,6 +4927,29 @@ Lemma~20.17.1 (\stacksproject{02N7}).  It is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The five lemma]
+\label{lem:pc-five-lemma}
+Let $\mathcal A$ be an abelian category and let
+\[
+\begin{array}{ccccccccc}
+v & \to & w & \to & x & \to & y & \to & z\\[-2pt]
+\downarrow{\scriptstyle\alpha} & & \downarrow{\scriptstyle\beta} & &
+\downarrow{\scriptstyle\gamma} & & \downarrow{\scriptstyle\delta} & &
+\downarrow{\scriptstyle\varepsilon}\\[-2pt]
+v' & \to & w' & \to & x' & \to & y' & \to & z'
+\end{array}
+\]
+be a commutative diagram in $\mathcal A$ with exact rows.  If $\beta$
+and $\delta$ are isomorphisms, $\varepsilon$ is injective and $\alpha$
+is surjective, then $\gamma$ is an isomorphism.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Stacks Project, Homological Algebra,
+Lemma~12.5.20 (\stacksproject{05QB}).  It is not decomposed here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{lemma}[Cohomology and flat base change]
 \label{lem:pc-flat-base-change-cohom}
@@ -4874,7 +4975,7 @@ H^i(X,\cF)\otimes_AB\;\cong\;H^i(X',\cF')\qquad\text{for all }i .
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-finite-support-hi,lem:pc-cech-computes,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pc-leray-spectral-sequence,lem:pcb-cech-spectral}
+\uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pc-five-lemma,lem:pc-leray-spectral-sequence,lem:pcb-cech-spectral}
 \emph{The affine case (2), $X$ separated.}  Let $A\to B$ be flat and let
 $X$ be quasi-compact and separated over $A$; choose a finite affine
 open covering $\mathcal U:X=U_1\cup\dots\cup U_t$.  The base changes
@@ -4902,7 +5003,8 @@ H^i(C^\bullet\otimes_AB)=H^i(C^\bullet)\otimes_AB:
 \]
 the proof is by induction on the number of terms (via the
 truncations $0\to C^{\ge n+1}\to C^{\ge n}\to C^n[-n]\to0$ and the
-five-lemma applied to the long exact sequences of the short exact
+five lemma (\Cref{lem:pc-five-lemma}) applied to the long exact
+sequences of the short exact
 sequences, both for $C^\bullet$ and for $C^\bullet\otimes_AB$ -- the
 base changed sequences are exact because $A\to B$ is flat, so no
 $\mathrm{Tor}_1$-terms occur).  Combining gives (2) for separated $X$.
@@ -6507,7 +6609,7 @@ is an isomorphism in $D(\cO_T)$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-morphism-conventions,def:pc-base-change,lem:pc-cech-resolution,lem:pc-affine-morphism-hi,lem:pc-proper-base-change,lem:pc-flat-compose,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-perfect-complex,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-base-change-cohom,lem:pc-flf-properties,lem:pc-fp-flat-finite-projective}
+\uses{def:pc-perfect-complex,lem:pc-affine-intersection-separated,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-base-change-cohom,lem:pc-flf-properties,lem:pc-fp-flat-finite-projective}
 Both assertions are Zariski-local in $S$ (the object $Rf_*\cG$
 restricts to the corresponding object for the restricted morphism and
 the base change map localizes in $T$), so assume $S=\Spec(A)$ affine.
@@ -6515,7 +6617,8 @@ $X$ is of finite presentation over $A$ (proper and of finite
 presentation) and separated, so there is a finite affine open covering
 $X=U_1\cup\dots\cup U_t$ whose intersections $U_J$ are affine
 ($X$ is separated over $A$, and the intersection of two affine open
-subschemes of a separated scheme is affine: the diagonal
+subschemes of a separated scheme is affine,
+\Cref{lem:pc-affine-intersection-separated}; concretely, the diagonal
 $\Delta:X\to X\times_AX$ is a closed immersion, and
 $U_1\cap U_2=(U_1\times_AU_2)\times_{X\times_AX}X$ is the preimage of
 the affine scheme $U_1\times_AU_2$ under $\Delta$, hence affine).
