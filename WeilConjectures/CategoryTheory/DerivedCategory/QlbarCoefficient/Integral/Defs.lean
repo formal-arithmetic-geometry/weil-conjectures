@@ -23,14 +23,14 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 # The derived category of `𝒪`-modules on the pro-étale site, and derived completeness
 
 Let `Y` be a scheme and `𝒪` a commutative ring — in the application, the valuation ring
-`𝒪_E` of a finite extension `E/ℚ_ℓ`. This file introduces
+`𝒪_E` of a finite extension `E/ℚ_ℓ`. This file works with the derived category
+`D(Y_proét, 𝒪)` of sheaves of `𝒪`-modules on the small pro-étale site of `Y`, namely
 
-* `AlgebraicGeometry.Scheme.ProEt.ModuleSheaf Y 𝒪`, the category of sheaves of
-  `𝒪`-modules on the small pro-étale site of `Y`, and
-* `AlgebraicGeometry.Scheme.ProEt.ModuleDerived Y 𝒪`, its derived category
-  `D(Y_proét, 𝒪)`,
+`DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} 𝒪))`,
 
-and defines *derived `ℓ`-completeness* for objects of the latter.
+and defines *derived `ℓ`-completeness* for its objects. The coefficients are taken in
+`Type (u + 1)`, one universe above the base schemes, because the pro-étale site is only
+essentially small there.
 
 ## Derived completeness
 
@@ -67,29 +67,20 @@ open CategoryTheory Limits Pretriangulated
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-variable (Y : Scheme.{u}) (O : Type u) [CommRing O]
-
-/-- Sheaves of `𝒪`-modules on the small pro-étale site of `Y`. The coefficients are taken
-in `Type (u + 1)`, one universe above the base schemes, because the pro-étale site is only
-essentially small there. -/
-abbrev ModuleSheaf : Type _ := Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)
-
-/-- The derived category `D(Y_proét, 𝒪)` of sheaves of `𝒪`-modules on the pro-étale site
-of `Y`. -/
-abbrev ModuleDerived : Type _ := DerivedCategory (ModuleSheaf Y O)
-
-variable (l : O)
+variable (Y : Scheme.{u}) (O : Type u) [CommRing O] (l : O)
 
 /-- The constant sheaf on the `𝒪`-module `𝒪[1/ℓ]`. Since the constant-sheaf functor is a
 left adjoint it commutes with the filtered colimit defining `𝒪[1/ℓ]`, so this is the sheaf
 `colim (𝒪 --ℓ--> 𝒪 --ℓ--> ⋯)` obtained by inverting `ℓ` on the structure sheaf. -/
-noncomputable def invSheaf : ModuleSheaf Y O :=
+noncomputable def invSheaf : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O) :=
   (constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)).obj
     (ModuleCat.of O (ULift.{u + 1} (Localization.Away l)))
 
 /-- `𝒪[1/ℓ]` as an object of the derived category, placed in degree `0`. -/
-noncomputable def invObj : ModuleDerived Y O :=
-  (DerivedCategory.singleFunctor (ModuleSheaf Y O) 0).obj (invSheaf Y O l)
+noncomputable def invObj :
+    DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)) :=
+  (DerivedCategory.singleFunctor
+    (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)) 0).obj (invSheaf Y O l)
 
 /-- An object `K` of `D(Y_proét, 𝒪)` is **derived `ℓ`-complete** if `RHom(𝒪[1/ℓ], K) = 0`,
 i.e. if every morphism into `K` from a shift of `𝒪[1/ℓ]` vanishes.
@@ -98,20 +89,25 @@ This is equivalent to the more familiar condition that `K ⟶ R lim_n (K ⊗^L �
 isomorphism, and is the condition that makes an object of the derived category be
 determined by its tower of reductions. It must not be confused with the underived
 condition `K ≅ lim_n K/ℓⁿ`. -/
-def IsDerivedComplete (K : ModuleDerived Y O) : Prop :=
+def IsDerivedComplete
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))) : Prop :=
   ∀ (n : ℤ) (f : (invObj Y O l)⟦n⟧ ⟶ K), f = 0
 
 /-- Derived `ℓ`-completeness as a property of objects of `D(Y_proét, 𝒪)`. -/
-def derivedComplete : ObjectProperty (ModuleDerived Y O) := IsDerivedComplete Y O l
+def derivedComplete :
+    ObjectProperty (DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))) :=
+  IsDerivedComplete Y O l
 
 variable {Y O l}
 
-lemma isDerivedComplete_iff (K : ModuleDerived Y O) :
+lemma isDerivedComplete_iff
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))) :
     IsDerivedComplete Y O l K ↔ ∀ (n : ℤ) (f : (invObj Y O l)⟦n⟧ ⟶ K), f = 0 := Iff.rfl
 
 /-- Derived `ℓ`-completeness is invariant under isomorphism. -/
-lemma IsDerivedComplete.of_iso {K L : ModuleDerived Y O} (hK : IsDerivedComplete Y O l K)
-    (e : K ≅ L) : IsDerivedComplete Y O l L := by
+lemma IsDerivedComplete.of_iso
+    {K L : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))}
+    (hK : IsDerivedComplete Y O l K) (e : K ≅ L) : IsDerivedComplete Y O l L := by
   intro n f
   have : f ≫ e.inv = 0 := hK n _
   rw [← Category.comp_id f, ← e.inv_hom_id, ← Category.assoc, this, zero_comp]
@@ -120,28 +116,30 @@ instance : (derivedComplete Y O l).IsClosedUnderIsomorphisms where
   of_iso e hK := IsDerivedComplete.of_iso hK e
 
 /-- Derived `ℓ`-complete objects are stable under shifts. -/
-lemma IsDerivedComplete.shift {K : ModuleDerived Y O} (hK : IsDerivedComplete Y O l K)
-    (m : ℤ) : IsDerivedComplete Y O l (K⟦m⟧) := by
+lemma IsDerivedComplete.shift
+    {K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))}
+    (hK : IsDerivedComplete Y O l K) (m : ℤ) : IsDerivedComplete Y O l (K⟦m⟧) := by
   intro n f
-  have h : (shiftFunctorAdd' (ModuleDerived Y O) n (-m) (n + -m) rfl).hom.app
-      (invObj Y O l) ≫ (shiftFunctor (ModuleDerived Y O) (-m)).map f ≫
-      (shiftFunctorCompIsoId (ModuleDerived Y O) m (-m) (by ring)).hom.app K = 0 :=
+  have h : (shiftFunctorAdd' _ n (-m) (n + -m) rfl).hom.app (invObj Y O l) ≫
+      (shiftFunctor _ (-m)).map f ≫
+      (shiftFunctorCompIsoId _ m (-m) (by ring)).hom.app K = 0 :=
     hK (n + -m) _
-  have h2 : (shiftFunctor (ModuleDerived Y O) (-m)).map f = 0 := by
-    rw [← cancel_epi ((shiftFunctorAdd' (ModuleDerived Y O) n (-m) (n + -m) rfl).hom.app
-        (invObj Y O l)), ← cancel_mono ((shiftFunctorCompIsoId (ModuleDerived Y O) m (-m)
-        (by ring)).hom.app K)]
+  have h2 : (shiftFunctor _ (-m)).map f = 0 := by
+    rw [← cancel_epi ((shiftFunctorAdd' _ n (-m) (n + -m) rfl).hom.app (invObj Y O l)),
+      ← cancel_mono ((shiftFunctorCompIsoId _ m (-m) (by ring)).hom.app K)]
     simpa using h
-  refine (shiftFunctor (ModuleDerived Y O) (-m)).map_injective ?_
+  refine (shiftFunctor _ (-m)).map_injective ?_
   simpa using h2
 
 /-- The zero object is derived `ℓ`-complete. -/
-lemma isDerivedComplete_zero {K : ModuleDerived Y O} (hK : IsZero K) :
+lemma isDerivedComplete_zero
+    {K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))} (hK : IsZero K) :
     IsDerivedComplete Y O l K := fun _ _ ↦ hK.eq_of_tgt _ _
 
 /-- Derived `ℓ`-completeness is a two-out-of-three property in distinguished triangles: it
 is the right-orthogonal complement of `𝒪[1/ℓ]`, so it is stable under cones. -/
-lemma IsDerivedComplete.of_distTriang {T : Triangle (ModuleDerived Y O)}
+lemma IsDerivedComplete.of_distTriang
+    {T : Triangle (DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)))}
     (hT : T ∈ distinguishedTriangles) (h₁ : IsDerivedComplete Y O l T.obj₁)
     (h₂ : IsDerivedComplete Y O l T.obj₂) : IsDerivedComplete Y O l T.obj₃ := by
   intro n f
@@ -155,10 +153,13 @@ variable (Y O l)
 /-- A choice of cone of a morphism of `D(Y_proét, 𝒪)`. Cones are unique up to
 (non-canonical) isomorphism, so any property of objects closed under isomorphism — such as
 `IsDerivedComplete` — is independent of the choice. -/
-noncomputable def coneOf {K L : ModuleDerived Y O} (f : K ⟶ L) : ModuleDerived Y O :=
+noncomputable def coneOf
+    {K L : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))} (f : K ⟶ L) :
+    DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)) :=
   (Pretriangulated.distinguished_cocone_triangle f).choose
 
-lemma exists_coneOf_distTriang {K L : ModuleDerived Y O} (f : K ⟶ L) :
+lemma exists_coneOf_distTriang
+    {K L : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))} (f : K ⟶ L) :
     ∃ (g : L ⟶ coneOf Y O f) (h : coneOf Y O f ⟶ K⟦(1 : ℤ)⟧),
       Triangle.mk f g h ∈ distinguishedTriangles := by
   obtain ⟨g, h, hgh⟩ := (Pretriangulated.distinguished_cocone_triangle f).choose_spec
@@ -169,11 +170,14 @@ lemma exists_coneOf_distTriang {K L : ModuleDerived Y O} (f : K ⟶ L) :
 Since `𝒪/ℓⁿ` is the two-term complex `𝒪 --ℓⁿ--> 𝒪`, the derived tensor product with it is
 the cone of multiplication by `ℓⁿ`; taking this as the definition avoids having to
 construct a derived tensor product on sheaves of modules. -/
-noncomputable def reduction (n : ℕ) (K : ModuleDerived Y O) : ModuleDerived Y O :=
+noncomputable def reduction (n : ℕ)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))) :
+    DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)) :=
   coneOf Y O ((l ^ n) • 𝟙 K)
 
 /-- The defining distinguished triangle `K --ℓⁿ--> K ⟶ K/ℓⁿ ⟶ K[1]` of the reduction. -/
-lemma exists_reduction_distTriang (n : ℕ) (K : ModuleDerived Y O) :
+lemma exists_reduction_distTriang (n : ℕ)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))) :
     ∃ (g : K ⟶ reduction Y O l n K) (h : reduction Y O l n K ⟶ K⟦(1 : ℤ)⟧),
       Triangle.mk ((l ^ n) • 𝟙 K) g h ∈ distinguishedTriangles :=
   exists_coneOf_distTriang Y O _
@@ -190,7 +194,8 @@ variable (Y O l)
 
 The uniformity is essential: asking each reduction to be bounded, with a bound allowed to
 depend on `n`, is strictly weaker and is not the adic notion of boundedness. -/
-def UniformlyBoundedConstructible (a b : ℤ) (K : ModuleDerived Y O) : Prop :=
+def UniformlyBoundedConstructible (a b : ℤ)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))) : Prop :=
   ∀ n : ℕ,
     DerivedCategory.TStructure.t.le b (reduction Y O l n K) ∧
     DerivedCategory.TStructure.t.ge a (reduction Y O l n K) ∧
@@ -200,7 +205,8 @@ def UniformlyBoundedConstructible (a b : ℤ) (K : ModuleDerived Y O) : Prop :=
 /-- The objects of `Dᵇ_c(Y, 𝒪)`: the derived `ℓ`-complete objects of `D(Y_proét, 𝒪)`
 whose reductions modulo `ℓⁿ` are constructible with a cohomological amplitude independent
 of `n`. -/
-def adicBoundedConstructible : ObjectProperty (ModuleDerived Y O) :=
+def adicBoundedConstructible :
+    ObjectProperty (DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O))) :=
   fun K ↦ IsDerivedComplete Y O l K ∧
     ∃ a b : ℤ, UniformlyBoundedConstructible Y O l a b K
 
@@ -219,7 +225,8 @@ noncomputable instance : Linear O (AdicDerivedCategory Y O l) :=
 
 /-- The inclusion of `Dᵇ_c(Y, 𝒪)` into `D(Y_proét, 𝒪)`. -/
 noncomputable def AdicDerivedCategory.ι :
-    AdicDerivedCategory Y O l ⥤ ModuleDerived Y O :=
+    AdicDerivedCategory Y O l ⥤
+      DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} O)) :=
   (adicBoundedConstructible Y O l).ι
 
 end BoundedConstructible
