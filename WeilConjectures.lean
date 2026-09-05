@@ -28,6 +28,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.QlbarCoefficient.Co
 public import WeilConjectures.CategoryTheory.DerivedCategory.QlbarCoefficient.CommonStage.Linear
 public import WeilConjectures.CategoryTheory.DerivedCategory.QlbarCoefficient.CommonStage.Preadditive
 public import WeilConjectures.CategoryTheory.DerivedCategory.QlbarCoefficient.Integral.CoefficientSheaf
+public import WeilConjectures.CategoryTheory.DerivedCategory.QlbarCoefficient.FiniteField
 public import WeilConjectures.CategoryTheory.DerivedCategory.QlbarCoefficient.Integral.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.QlbarCoefficient.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp

@@ -10,7 +10,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Linear.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
@@ -176,5 +179,49 @@ lemma exists_reduction_distTriang (n : ℕ) (K : ModuleDerived Y O) :
   exists_coneOf_distTriang Y O _
 
 end Reduction
+
+section BoundedConstructible
+
+variable (Y O l)
+
+/-- The reduction tower of `K` is *uniformly bounded constructible* with amplitude
+`[a, b]` if every reduction `K ⊗^L 𝒪/ℓⁿ` is constructible and lies in the interval
+`[a, b]` for the canonical t-structure, the interval being independent of `n`.
+
+The uniformity is essential: asking each reduction to be bounded, with a bound allowed to
+depend on `n`, is strictly weaker and is not the adic notion of boundedness. -/
+def UniformlyBoundedConstructible (a b : ℤ) (K : ModuleDerived Y O) : Prop :=
+  ∀ n : ℕ,
+    DerivedCategory.TStructure.t.le b (reduction Y O l n K) ∧
+    DerivedCategory.TStructure.t.ge a (reduction Y O l n K) ∧
+    ProEtale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} O) Y
+      (reduction Y O l n K)
+
+/-- The objects of `Dᵇ_c(Y, 𝒪)`: the derived `ℓ`-complete objects of `D(Y_proét, 𝒪)`
+whose reductions modulo `ℓⁿ` are constructible with a cohomological amplitude independent
+of `n`. -/
+def adicBoundedConstructible : ObjectProperty (ModuleDerived Y O) :=
+  fun K ↦ IsDerivedComplete Y O l K ∧
+    ∃ a b : ℤ, UniformlyBoundedConstructible Y O l a b K
+
+/-- The **integral coefficient category** `Dᵇ_c(Y, 𝒪)`, realized as the full subcategory of
+`D(Y_proét, 𝒪)` cut out by `adicBoundedConstructible`. -/
+def AdicDerivedCategory : Type _ := (adicBoundedConstructible Y O l).FullSubcategory
+
+noncomputable instance : Category (AdicDerivedCategory Y O l) :=
+  inferInstanceAs <| Category (adicBoundedConstructible Y O l).FullSubcategory
+
+noncomputable instance : Preadditive (AdicDerivedCategory Y O l) :=
+  inferInstanceAs <| Preadditive (adicBoundedConstructible Y O l).FullSubcategory
+
+noncomputable instance : Linear O (AdicDerivedCategory Y O l) :=
+  inferInstanceAs <| Linear O (adicBoundedConstructible Y O l).FullSubcategory
+
+/-- The inclusion of `Dᵇ_c(Y, 𝒪)` into `D(Y_proét, 𝒪)`. -/
+noncomputable def AdicDerivedCategory.ι :
+    AdicDerivedCategory Y O l ⥤ ModuleDerived Y O :=
+  (adicBoundedConstructible Y O l).ι
+
+end BoundedConstructible
 
 end AlgebraicGeometry.Scheme.ProEt
