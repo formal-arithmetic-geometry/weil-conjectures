@@ -31,7 +31,7 @@ category. That dichotomy is what makes the pointwise left Kan extensions exist o
 category with an initial object (`hasPointwiseLeftKanExtension_op_overMap`) and makes the
 presheaf-level left Kan extension left exact (`preservesFiniteLimits_op_lan_overMap`),
 being pointwise either an evaluation or a zero object. It generalizes the étale-specific
-arguments of `WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale` to an arbitrary
+arguments of `WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs` to an arbitrary
 morphism property `P` satisfying `[P.HasOfPostcompProperty P]`, which supplies the
 cancellation `P (α ≫ f) → P f → P α`. All uses of the localization lower shriek in the
 `SixFunctors` folder are along open immersions, which are monomorphisms.
@@ -44,7 +44,7 @@ input Mathlib offers is essential smallness of the small *affine* sites only
 dense subsite rather than used directly. So the existence of the pointwise left Kan
 extensions along base change and their left exactness (by AB5, filtered colimits being
 exact in `A`) are the two instances still sorried here. For an étale `g` both are proved in
-`WeilConjectures.SixFunctors.UpperLowerStar.Etale` via the adjunction
+`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` via the adjunction
 `MorphismProperty.Over.mapPullbackAdj`, without any smallness assumption.
 
 -/
@@ -163,7 +163,7 @@ end LiftIndex
 `g : W ⟶ U` exist for `A`-valued presheaves on the small sites of `P`-schemes: the sites
 are essentially small for the étale-like properties `P` of interest and the Grothendieck
 abelian category `A` is cocomplete. For an étale `g` this is proved in
-`WeilConjectures.SixFunctors.UpperLowerStar.Etale` via the adjunction with the
+`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` via the adjunction with the
 localization functor. -/
 instance hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] (P : MorphismProperty Scheme.{u})
@@ -242,7 +242,7 @@ namespace AlgebraicGeometry
 comma categories of the pointwise left Kan extensions are cofiltered (base change
 preserves the finite limits of the étale slice), so the Kan extension is computed by
 filtered colimits, which are exact in `A` by AB5. For an étale `g` this is proved in
-`WeilConjectures.SixFunctors.UpperLowerStar.Etale` via the adjunction with the
+`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` via the adjunction with the
 localization functor. -/
 instance Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
     (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]

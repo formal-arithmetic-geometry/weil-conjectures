@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Topology.Stratification
 
 /-!
@@ -53,7 +53,7 @@ the `ℓ`-adic formalism, where `Λ` is the finite ring `Λₙ = ℤ/ℓⁿℤ`.
 To restrict `F` to an étale `U ⟶ X` we use the localized site: `F.over U` is the sheaf
 induced by `F` on the localization of the small étale site at `U`, which is equivalent to
 the small étale site of `U`. To restrict `F` to a stratum we use the pullback
-`AlgebraicGeometry.Etale.upperStar` of `WeilConjectures.SixFunctors.UpperLowerStar.Etale`
+`AlgebraicGeometry.Etale.upperStar` of `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`
 along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale.lowerStar`.
 
 ## Implementation notes
