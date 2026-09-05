@@ -6,23 +6,26 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 
 /-!
 
-# Sheafification on the small sites (sorried)
+# Sheafification on essentially small sites (sorried)
 
-Sheafification exists for `A`-valued presheaves on the small `Q`-sites of `P`-schemes,
-for a Grothendieck abelian category `A` with `Hom`-types in the universe `u + 1`, one
-above the universe `u` of the base schemes: the sites are essentially small and `A` is
+Sheafification exists for `A`-valued presheaves on any essentially small site, for a
+Grothendieck abelian category `A` with `Hom`-types in the universe `u + 1`, one above the
+universe `u` of the base schemes: the site is equivalent to a small one, and `A` is
 complete and cocomplete with exact filtered colimits of size `u + 1`, so the
 plus-construction applies and is left exact.
 
-The same applies to the localizations `J.over V` of these sites at an object `V`: a slice
-of an essentially small category is again essentially small. These localized instances are
-what lets the constructible-sheaf definitions of
-`WeilConjectures.ConstructibleSheaf.Defs` restrict a sheaf to a member of an étale cover
-without carrying `HasWeakSheafify` for the localized sites as a hypothesis.
+Everything in this file is deduced from that single statement
+(`hasSheafify_essentiallySmall`), which is the only sorry: the small `Q`-sites of
+`P`-schemes, their localizations `J.over V`, and the small pro-étale site are all
+essentially small in `u + 1`. The localized instances are what lets the
+constructible-sheaf definitions of `WeilConjectures.ConstructibleSheaf.Defs` restrict a
+sheaf to a member of an étale cover without carrying `HasWeakSheafify` for the localized
+sites as a hypothesis.
 
 -/
 
@@ -33,6 +36,18 @@ universe u' u
 open CategoryTheory Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace CategoryTheory.GrothendieckTopology
+
+/-- Sheafification for `A`-valued presheaves on an essentially small site, for a
+Grothendieck abelian coefficient category `A` with `Hom`-types in the universe `u + 1`: the
+site is equivalent to a small one and `A` is complete and cocomplete with exact filtered
+colimits of size `u + 1`, so the plus-construction applies and is left exact.
+
+All the other instances in this file are special cases. -/
+instance (priority := high) hasSheafify_essentiallySmall (A : Type u')
+    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+    {C : Type*} [Category* C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C) :
+    HasSheafify J A :=
+  sorry
 
 /-- Sheafification for `A`-valued presheaves on the small `Q`-site of `P`-schemes over a
 scheme `U`, for a Grothendieck abelian coefficient category `A` with `Hom`-types in the
@@ -46,7 +61,7 @@ instance (priority := high) hasSheafify_smallGrothendieckTopology (A : Type u')
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
     (U : Scheme.{u}) :
     HasSheafify (U.smallGrothendieckTopology Q (Q := P)) A :=
-  sorry
+  inferInstance
 
 /-- Sheafification for `A`-valued presheaves on the small étale site, the case
 `P = Q = @Etale` of the above. -/
@@ -66,7 +81,7 @@ instance (priority := high) hasSheafify_over_smallGrothendieckTopology (A : Type
     [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
     (U : Scheme.{u}) (V : P.Over ⊤ U) :
     HasSheafify ((U.smallGrothendieckTopology Q (Q := P)).over V) A :=
-  sorry
+  inferInstance
 
 /-- Sheafification for `A`-valued presheaves on the localization of the small étale site
 at an étale `U ⟶ X`, the case `P = Q = @Etale` of the above. This is what lets a sheaf be
@@ -78,5 +93,12 @@ instance (priority := high) hasSheafify_over_smallEtaleTopology (A : Type u')
     HasSheafify (X.smallEtaleTopology.over U) A :=
   inferInstanceAs
     (HasSheafify ((X.smallGrothendieckTopology (P := @Etale) (Q := @Etale)).over U) A)
+
+/-- Sheafification for `A`-valued presheaves on the small pro-étale site: it is essentially
+small in `u + 1`. -/
+instance (priority := high) hasSheafify_proEtTopology (A : Type u')
+    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (Y : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology Y) A :=
+  inferInstance
 
 end CategoryTheory.GrothendieckTopology
