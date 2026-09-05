@@ -29,6 +29,41 @@ on the markered one is ready to be stated or proved, so a marker with only parti
 coverage propagates that far: those dependents are filled as ready, and their own
 comments say nothing about it.  So the marker is read together with its comment, and
 claims no more than that comment does.
+% ---------------------------------------------------------------------------
+% WHAT ``UNOWNED TAG'' MEANS IN THIS CHAPTER'S CENSUSES.
+% A Stacks tag is OWNED when some node of this chapter stands for it.  Two things
+% can make a node stand for a tag, and a census has to say which of them it
+% accepts, because the two readings give different counts:
+%
+%   (i)  the tag is printed in the proof of a `% Cited.' node -- that node is the
+%        chapter's citation node for the tag;
+%   (ii) the tag is printed in the STATEMENT of a `% Decomposed.' node, so that the
+%        statement attributes that node to the tag -- the node is the chapter's own
+%        decomposed proof of what the tag says.
+%
+% THIS CHAPTER'S CENSUSES USE (i) AND (ii) TOGETHER.  Measured at this commit over
+% the proof-position \stacksproject occurrences that sit inside `% Decomposed.'
+% nodes outside `sec:basis', with % comments stripped over the whole file, the tags
+% that no node owns under that convention number 10, in 7 nodes:
+%
+%   01V8 (lem:pc-smooth-characterization), 01XD (lem:pc-cech-computes),
+%   01XK and 02KH (lem:pc-flat-base-change-cohom),
+%   023L, 023M, 023N (lem:pc-fpqc-descent), 08AA (lem:pc-euler-additive),
+%   0B8L (lem:pc-pic-group-valued), 0BDK (lem:pc-perfect-locus).
+%
+% Dropping (ii) and counting only citation-node ownership gives 12, in 9 nodes.
+% The two extra are exactly 01XJ and 01JY, and they are the only two sites at which
+% the readings differ:
+%
+%   01XJ is printed in \Cref{lem:pc-finite-support-hi}'s proof and again in the
+%     statement of \Cref{lem:pc-coherent-hi}, a `% Decomposed.' node, which that
+%     statement attributes to it;
+%   01JY is printed in \Cref{lem:pc-closed-imm-base-change}'s proof and again in
+%     that same `% Decomposed.' node's own statement, which attributes it to the tag.
+%
+% Both readings are defensible and neither difference is a defect; what a census
+% must not do is leave which one it used unstated.  Quote the counts above with the
+% commit they were measured at, or re-measure them.
 % ============================================================================
 % ============ SECTION 0: basis blocks reproduced from files 02/06 =============
 % ============================================================================
@@ -48,14 +83,41 @@ claims no more than that comment does.
 % header, and the prefix on a node's label, not its position in the section, says
 % whether the node is in scope:
 %
-%   * a `pcb-'-prefixed node is reproduced verbatim from files 02 and 06.  It is
-%     OUT OF SCOPE for node creation and for tag decomposition: it is deleted when
-%     those files land, so a node created for one of its tags would be deleted with
-%     it.  Every Stacks tag carried inside a `pcb-' node is excluded by this ruling
-%     and is not a census finding.  The two sites a census is likeliest to reach for
-%     are named here so that it does not file them: the bare load-bearing proof tags
-%     00IN and 00IP in \Cref{lem:pcb-principal-ideal-dvr}, and 01SE in
-%     \Cref{lem:pcb-ample-complement-affine}.
+%   * a `pcb-'-prefixed node reproduces the basic material intended for blueprint
+%     files 02 and 06.  Those files do not exist: this directory holds only
+%     04_chow_lemma_proof.tex and this file, version/detailed.tex inputs neither of
+%     them, and no ref of this repository has ever carried a file of either name.
+%     So a `pcb-' block is not a copy of any text in the tree -- it is original
+%     material that ships with this chapter, and the `% [reproduced from ...]'
+%     comments on the individual blocks, like the section banner above, record where
+%     the material is meant to end up rather than a source it was taken from.  The
+%     ruling is therefore a scope decision and not a schedule: a `pcb-' node is
+%     OUT OF SCOPE for node creation and for tag decomposition here, and it is to be
+%     deleted, with its \Cref and \uses targets redirected to the originals, if and
+%     when files 02 and 06 land.  Every Stacks tag carried inside a `pcb-' node is
+%     excluded by this ruling and is not a census finding: not for node creation,
+%     not for tag decomposition, and not for a tag-duplication or a tag-ownership
+%     census either.  The three sites a census is likeliest to reach for are named
+%     here so that it does not file them.
+%
+%       - 00IN and 00IP in \Cref{lem:pcb-principal-ideal-dvr}.  These are bare
+%         load-bearing proof tags in the strict sense: that proof carries no \uses
+%         at all, and its displayed computation applies Artin--Rees rather than
+%         attributing it.
+%
+%       - 01SE in \Cref{lem:pcb-ample-complement-affine}.  Here only the tag is
+%         unowned, not the claim: the prose cites \Cref{lem:pc-closed-immersion-affine}
+%         -- a closed immersion is an affine morphism -- and that label is in the
+%         proof's \uses list, so no argument is missing.  What that node carries is
+%         01IH, not 01SE, which is why 01SE has no owner.
+%
+%       - 00NO, one tag with two occurrences: it is printed in the `% Cited.' proof
+%         of \Cref{lem:pcb-regular-graded-polynomial} and again in the proof of
+%         \Cref{lem:pcb-regular-local-domain}, whose \uses list already contains
+%         lem:pcb-regular-graded-polynomial.  A duplication census keyed on ``one
+%         tag, two occurrences'' fires here; it is excluded by this ruling, and the
+%         second occurrence is a reference inside a decomposed argument, not a
+%         citation copied out of its owning node.
 %
 %   * a `pc-'-prefixed node is this chapter's own, wherever in the section it sits,
 %     and is FULLY IN SCOPE for every check the chapter runs.
@@ -1878,8 +1940,8 @@ the standard covering; for $N=0$ it says $\Omega=0$.
 \emph{Step 2 (the case $N=0$).}  Here
 $P=\operatorname{Proj}(k[x_0])=\Spec(k)$, so
 $\Lambda^{0}\Omega=\cO_P$, while $\cO_P(-1)$ is an invertible
-$\cO_P$-module (\Cref{lem:pc-proj-twists-invertible}, quoted in Step 4
-below) on the spectrum of a field, hence free of rank one: an
+$\cO_P$-module (\Cref{lem:pc-proj-twists-invertible}, applied again in
+Step 4 below) on the spectrum of a field, hence free of rank one: an
 invertible module on
 $\Spec(k)$ is a rank-one projective $k$-module, and $k$ being a field
 that module is free.  So both sides of the displayed isomorphism are
@@ -1896,9 +1958,9 @@ of $\cO_P$-modules (the \emph{Euler sequence}; the first map sends
 $\sum_{j\neq i}g_j\,d(x_j/x_i)$ to
 $\sum_{j\neq i}(g_j/x_i)\,dx_j-\bigl(\sum_{j\neq i}g_jx_j/x_i^2\bigr)dx_i$
 on $D_+(x_i)$, the second sends $dx_j$ to $x_j$).  This step consumes
-$N\ge1$: that is the hypothesis of the section of \emph{loc.\ cit.} in
-which the tag sits.  The tag is stated over an arbitrary base ring
-$A$; only the case $A=k$ is used here.
+$N\ge1$: that is the hypothesis under which
+\Cref{lem:pc-euler-sequence} is stated.  That node is stated over an
+arbitrary base ring $A$; only the case $A=k$ is used here.
 
 \emph{Step 4 (determinants).}  For a short exact sequence
 $0\to\mathcal E'\to\mathcal E\to\mathcal E''\to0$ of finite locally
@@ -1908,9 +1970,8 @@ where $\det$ of a module
 of constant rank $r$ is its top exterior power $\Lambda^{r}$: Sheaves
 of Modules, Section~17.26 (Rank and determinant), Lemma~17.26.1.
 \emph{This is the step that must not be left
-implicit}, and it is what the tag supplies.  The general statement,
-with the construction of $\det$, is
-\Cref{lem:pc-det-short-exact-sequence}; what follows is that node
+implicit}: the general statement, with the construction of $\det$, is
+\Cref{lem:pc-det-short-exact-sequence}, and what follows is that node
 applied to the Euler sequence.  All three terms of the
 Euler sequence are finite locally free of constant rank: $\Omega$ of
 rank $N$ by Step 1, $\cO_P(-1)^{\oplus N+1}$ of rank $N+1$ (the
