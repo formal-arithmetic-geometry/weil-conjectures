@@ -64,6 +64,55 @@ claims no more than that comment does.
 % Both readings are defensible and neither difference is a defect; what a census
 % must not do is leave which one it used unstated.  Quote the counts above with the
 % commit they were measured at, or re-measure them.
+%
+% WHERE A CENSUS LOOKS FOR AN OWNER.  The `outside sec:basis' restriction above
+% scopes the DOMAIN of the census -- which \stacksproject occurrences are counted --
+% and it does not scope the ownership side.  Ownership is looked for OVER THE WHOLE
+% CHAPTER, `sec:basis' INCLUDED: a tag printed in the domain is owned as soon as
+% some node of this chapter stands for it under (i) or (ii), wherever that node
+% sits.  This is what produces the figure of 10 above.  Mirroring the domain
+% restriction onto the owner side instead -- accepting only owners that themselves
+% sit outside `sec:basis' -- gives 12, in 8 nodes, and the two extra tags are
+% exactly 00DV and 00O0:
+%
+%   00DV is owned by \Cref{lem:pcb-nakayama}, a `% Cited.' node inside `sec:basis',
+%     and is printed in the domain in \Cref{lem:pc-hilb-representable}'s proof;
+%   00O0 is owned by \Cref{lem:pcb-surjective-locus-open}, likewise a `% Cited.'
+%     node inside `sec:basis', and is likewise printed in
+%     \Cref{lem:pc-hilb-representable}'s proof.
+%
+% Note that this 12 is not the 12 of the paragraph above: that one keeps ownership
+% chapter-wide and drops reading (ii), and its two extra tags are 01XJ and 01JY, in
+% 9 nodes.  The three figures -- 10 in 7 nodes (domain outside `sec:basis',
+% ownership chapter-wide, readings (i) and (ii)), 12 in 9 nodes ((i) only), 12 in
+% 8 nodes (ownership also restricted to outside `sec:basis') -- were all re-measured
+% at this commit, and each agrees with the tag list printed for it.
+%
+% SCOPE OF THE ONE-TAG-ONE-NODE INVARIANT (issue 625).  That invariant -- no Stacks
+% tag is stood for by two nodes -- is PER CHAPTER.  It is about this chapter's own
+% decomposition bookkeeping: what it forbids is this chapter citing one tag from two
+% of its nodes, so that a reader cannot tell which node is the tag's.  A bare tag in
+% another chapter's prose stands for no node at all, so it is not a second owner
+% here; it is that chapter's business.
+%
+% The one place the per-chapter and the per-document readings differ is the four
+% tags that occur both here and in `04_chow_lemma_proof.tex', which
+% version/detailed.tex also inputs, so that each of them is in the built document
+% twice either way.  The tag the reviewers of this chapter reached for is 01T6: it
+% is printed once here, in the proof of
+% \Cref{lem:pc-finite-type-locally-noetherian}, which owns it, and once as bare
+% prose in that file's \section{Conventions and standing facts}, owned by no node.
+% It is the only tag of the four whose second occurrence sits in that conventions
+% section, and a census should not read the single name as the whole of the class:
+% 01IQ, 01W5 and 01W6 are likewise owned by a `% Cited.' node here and printed bare
+% in `04_chow_lemma_proof.tex', in that file's later sections -- 01IQ once (so that
+% 01IQ, like 01T6, has exactly two occurrences in blueprint/src), 01W5 three times,
+% 01W6 four times.
+%
+% Under the per-chapter reading ruled here none of the four is a finding.  Under a
+% per-document reading they would be findings against `04_chow_lemma_proof.tex',
+% which belongs to another project and sits on `master'; they are OUT OF SCOPE for
+% this chapter either way and are not repaired here.
 % ============================================================================
 % ============ SECTION 0: basis blocks reproduced from files 02/06 =============
 % ============================================================================
@@ -85,8 +134,10 @@ claims no more than that comment does.
 %
 %   * a `pcb-'-prefixed node reproduces the basic material intended for blueprint
 %     files 02 and 06.  Those files do not exist: this directory holds only
-%     04_chow_lemma_proof.tex and this file, version/detailed.tex inputs neither of
-%     them, and no ref of this repository has ever carried a file of either name.
+%     04_chow_lemma_proof.tex and this file, version/detailed.tex inputs no file 02
+%     and no file 06, and no ref of this repository has ever carried a file of
+%     either name.  (The files said not to be input are 02 and 06, not the two
+%     files just named, both of which version/detailed.tex does input.)
 %     So a `pcb-' block is not a copy of any text in the tree -- it is original
 %     material that ships with this chapter, and the `% [reproduced from ...]'
 %     comments on the individual blocks, like the section banner above, record where
@@ -2611,6 +2662,15 @@ decomposed here.
 
 % ---------------------------------------------------------------------------
 % Cited.
+% Tag ownership for this node.  The four SEQUENCE notions defined below -- a
+% regular, Koszul-regular, H_1-regular, quasi-regular sequence on a ringed space --
+% are unnumbered running text of Divisors, Section 31.21, and carry no Stacks tag of
+% their own.  The only numbered statement of that section reproduced here is
+% Definition 31.21.2 (063D), which is the IDEAL-SHEAF definition alone, and that is
+% why the citation below names 063D and nothing else.  A tag-ownership census asking
+% which tag stands for the four sequence notions therefore has no answer to find in
+% the source, and this is the reason: there is no such tag.  The node is deliberately
+% kept whole -- not split, not re-attributed -- on that account.
 \begin{definition}[Regular ideal sheaves]
 \label{def:pc-regular-ideal-sheaf}
 Let $X$ be a ringed space and let $f_1,\dots,f_r\in\cO_X(X)$; write
@@ -2783,7 +2843,19 @@ locally on $X$, so locally $i^*\Omega_{P/k}\cong\mathcal C_{X/P}\oplus
 
 Now fix $x\in X$ and let $U\subseteq V$ be as in~(1), shrunk so that
 $U=\Spec(A)$ is affine; let $I=(f_1,\dots,f_c)\subseteq A$ be the ideal of
-$X\cap U$, so that $f_1,\dots,f_c$ is a regular sequence in $A$.  A
+$X\cap U$, so that $f_1,\dots,f_c$ is a regular sequence in $A$.  Two
+different senses of ``regular sequence'' meet at that step: what~(1) supplies is
+one in the ringed-space sense of Divisors, Section~31.21
+(\Cref{def:pc-regular-ideal-sheaf}), where multiplication by $f_i$ is asked to
+be injective as a map of sheaves on $U$ and no non-vanishing clause is imposed,
+whereas what \Cref{lem:pc-regular-quasi-regular} consumes is one in the sense of
+Algebra, Definition~10.68.1, which asks for injectivity on the $A$-modules
+$A/(f_1,\dots,f_{i-1})$ \emph{and}, in addition, for $A/I\neq0$.  The passage
+is legitimate on both counts: $U=\Spec(A)$ is affine, so injectivity of a map of
+quasi-coherent sheaves on $U$ is injectivity of the corresponding map of
+$A$-modules, which turns the sheaf conditions into the module conditions with
+$M=A$; and $x\in X\cap U$ lies in
+$\operatorname{Supp}(\cO_U/\cI|_U)$, which is exactly what gives $A/I\neq0$.  A
 regular sequence is quasi-regular (Algebra, Section~10.69 (Quasi-regular
 sequences), Lemma~10.69.2, \Cref{lem:pc-regular-quasi-regular}), i.e.\ the
 canonical
