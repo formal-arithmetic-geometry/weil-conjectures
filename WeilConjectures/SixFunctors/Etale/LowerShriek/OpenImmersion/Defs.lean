@@ -61,7 +61,7 @@ the adjoint triple `Etale.localizationAdjunctionTriple` below.
   `AlgebraicGeometry.Etale.preservesFiniteColimits_openImmersionLowerShriek`: the lower
   shriek `j_!` is exact when `j` is an open immersion. The left exactness of the
   presheaf-level lower shriek is
-  `CategoryTheory.GrothendieckTopology.preservesFiniteLimits_op_lan_overMap` of
+  `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overMap` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
 
 ## Implementation notes
@@ -317,7 +317,7 @@ abelian category is exact. This is the left exactness half.
 
 `j_!` is the presheaf-level left Kan extension followed by sheafification, and both factors
 are left exact: the first by
-`CategoryTheory.GrothendieckTopology.preservesFiniteLimits_op_lan_overMap`, the second by
+`AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overMap`, the second by
 the left exactness of sheafification, which is the content of `HasSheafify` beyond the
 `HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
 coefficient category `A`, the second by the sorried instance of
@@ -330,7 +330,7 @@ instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
           presheafToSheaf X.smallEtaleTopology A :=
     rfl
   have hlan : PreservesFiniteLimits (Etale.localizationLowerShriekPresheaf A j inferInstance) :=
-    GrothendieckTopology.preservesFiniteLimits_op_lan_overMap A @Etale inferInstance
+    Etale.preservesFiniteLimits_op_lan_overMap A inferInstance
   rw [heq]
   exact comp_preservesFiniteLimits _ _
 

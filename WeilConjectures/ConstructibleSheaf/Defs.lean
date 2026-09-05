@@ -64,16 +64,16 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   essentially small (only the small affine étale site
   `AlgebraicGeometry.Scheme.AffineEtale` is). Mathematically they always exist; they are
   provided by the sorried instance
-  `CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
+  `AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
 - Sheafification is likewise not assumed here. Restricting a sheaf to a member of an étale
   cover needs it for the *localizations* of the small étale sites, and for a Grothendieck
-  abelian `A` these are supplied by the sorried instances
-  `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallGrothendieckTopology` and
+  abelian `A` it is supplied by the instance
   `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallEtaleTopology` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, a slice of an
-  essentially small site being again essentially small. This replaces what used to be a
-  `HasWeakSheafify` hypothesis quantified over all schemes and all étale `U`, the
+  essentially small site being again essentially small; it is a case of the sorried
+  `CategoryTheory.GrothendieckTopology.hasSheafify_essentiallySmall` there. This replaces
+  what used to be a `HasWeakSheafify` hypothesis quantified over all schemes and all étale `U`, the
   quantification being forced by the existential quantifier over stratifications.
 - Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the
   existence of the right Kan extensions along `(Over.forget U).op` needed to compare
@@ -228,7 +228,7 @@ condition does not depend on this choice.
 
 The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
 provided by the sorried instance
-`CategoryTheory.GrothendieckTopology.hasLeftKanExtension_op_overPullback` of
+`AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback` of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`. Stating
 `IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
 étale sites of the strata; since the
