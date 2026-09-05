@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Etale
-public import WeilConjectures.ConstructibleSheaf.ProEt
+public import WeilConjectures.ConstructibleSheaf.ProEtale
 
 /-!
 
@@ -52,8 +52,8 @@ the universe `u` of the base schemes. Nothing beyond that is assumed:
   by the property above, the constructible bounded derived category of the `ℓ`-adic
   formalism.
 - `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible` and
-  `AlgebraicGeometry.ProEt.DerivedCategoryBoundedConstructible`: the étale and pro-étale
-  specializations.
+  `AlgebraicGeometry.ProEtale.DerivedCategoryBoundedConstructible`: the étale and
+  pro-étale versions.
 
 -/
 
@@ -143,21 +143,39 @@ noncomputable abbrev DerivedCategoryBoundedConstructible.ι :
 
 end Etale
 
-namespace ProEt
+namespace ProEtale
 
 variable (X : Scheme.{u})
 
-/-- The constructible bounded derived category of the small pro-étale site. -/
-noncomputable abbrev DerivedCategoryBoundedConstructible : Type _ :=
-  Scheme.DerivedCategoryBoundedConstructible A @WeaklyEtale @WeaklyEtale le_rfl X
+/-- An object of the derived category of pro-étale sheaves has constructible homology if
+all its homology sheaves are constructible. -/
+noncomputable def DerivedCategory.constructibleHomology :
+    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
+  fun M ↦ ∀ n : ℤ, ProEtale.IsConstructibleSheaf
+    ((DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) A) n).obj M)
+
+/-- An object of the derived category of pro-étale sheaves is bounded constructible if it
+is bounded for the canonical t-structure and all its homology sheaves are constructible. -/
+noncomputable def DerivedCategory.boundedConstructible :
+    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
+  DerivedCategory.TStructure.t.bounded ⊓ ProEtale.DerivedCategory.constructibleHomology A X
+
+/-- The constructible bounded derived category of the small pro-étale site, realized as
+the full subcategory of bounded complexes with constructible homology in the derived
+category of pro-étale sheaves. -/
+noncomputable def DerivedCategoryBoundedConstructible : Type _ :=
+  (ProEtale.DerivedCategory.boundedConstructible A X).FullSubcategory
+
+noncomputable instance : Category (ProEtale.DerivedCategoryBoundedConstructible A X) :=
+  inferInstanceAs <|
+    Category (ProEtale.DerivedCategory.boundedConstructible A X).FullSubcategory
 
 /-- The inclusion into the derived category of pro-étale sheaves. -/
-noncomputable abbrev DerivedCategoryBoundedConstructible.ι :
-    ProEt.DerivedCategoryBoundedConstructible A X ⥤
-      DerivedCategory
-        (Sheaf (X.smallGrothendieckTopology @WeaklyEtale (Q := @WeaklyEtale)) A) :=
-  Scheme.DerivedCategoryBoundedConstructible.ι A @WeaklyEtale @WeaklyEtale le_rfl X
+noncomputable def DerivedCategoryBoundedConstructible.ι :
+    ProEtale.DerivedCategoryBoundedConstructible A X ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
+  (ProEtale.DerivedCategory.boundedConstructible A X).ι
 
-end ProEt
+end ProEtale
 
 end AlgebraicGeometry
