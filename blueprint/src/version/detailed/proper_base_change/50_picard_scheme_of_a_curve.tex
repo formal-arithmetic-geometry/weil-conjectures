@@ -7641,7 +7641,11 @@ is an isomorphism in $D(\cO_T)$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-morphism-conventions,def:pc-base-change,lem:pc-cech-resolution,lem:pc-affine-morphism-hi,lem:pc-proper-base-change,lem:pc-flat-compose,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-perfect-complex,lem:pc-affine-intersection-separated,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-base-change-cohom,lem:pc-flf-properties,lem:pc-fp-flat-finite-projective}
+\uses{def:pc-perfect-complex,lem:pc-affine-intersection-separated,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-finite-flat-local-free,lem:pc-flat-base-change-cohom,lem:pc-fp-flat-finite-projective}
+% \uses drops lem:pc-flf-properties, deliberately: its only citation in this proof was
+% the ``cf.\ the proof of'' pointer replaced above, and that node is about a morphism of
+% schemes and $f_*\cO_X$, not about an $A$-module over a local ring.  The step it was
+% gestured at is now carried by \Cref{lem:pc-finite-flat-local-free}.
 Both assertions are Zariski-local in $S$ (the object $Rf_*\cG$
 restricts to the corresponding object for the restricted morphism and
 the base change map localizes in $T$), so assume $S=\Spec(A)$ affine.
@@ -7680,12 +7684,12 @@ presentation with $S$ affine, also direct: from the local
 $\Gamma$-description of the flatness of $\cG$ over $S$).
 A finitely presented flat $A$-module is finite projective
 (\Cref{lem:pc-fp-flat-finite-projective}): it is finite
-locally free (for local $A_{\mathfrak p}$, flat $+$ finitely presented
-module is free by Nakayama, and the ranks glue: the local freeness is
-the standard consequence of the freeness of the finitely presented
-flat modules over local rings, cf.\ the proof of
-\Cref{lem:pc-flf-properties}) and finite locally free modules are
-projective.  Hence $Rf_*\cG$ is a bounded complex of finite projective
+locally free (over the local ring $A_{\mathfrak p}$ the localization
+is flat and finitely presented, hence finite, so it is free by
+\Cref{lem:pc-finite-flat-local-free}, whose hypotheses --- finite and
+flat over a local ring --- are exactly what is available at this point
+of the argument; and the ranks glue) and finite locally free modules
+are projective.  Hence $Rf_*\cG$ is a bounded complex of finite projective
 $\cO_S$-modules, i.e.\ a perfect object of $D(\cO_S)$ (\Cref{def:pc-perfect-complex}).
 
 For the base change: let $g:T\to S$ be arbitrary; the statement is
@@ -7797,7 +7801,10 @@ finite free.
 The source is Algebra, Lemma~10.78.5 (\stacksproject{00NZ}), proved
 there from the equational criterion of flatness.  The hypothesis is
 finite and \emph{flat}, not finite projective, so this is not the local
-case of \Cref{lem:pc-finite-projective-module}; and the locality of $A$
+case of \Cref{lem:pc-finite-projective-module} --- a distinction that is
+load-bearing wherever this node is used to \emph{obtain} projectivity,
+since such a proof cannot appeal to the projective statement without
+circularity; and the locality of $A$
 is needed, since a finite flat module over a general ring need not even
 be projective (Algebra, Remark~10.78.4, \stacksproject{00NY}).  Mathlib
 carries the tag on \texttt{Module.free\_of\_flat\_of\_isLocalRing},
