@@ -329,6 +329,23 @@ formalised, since Mathlib has no monoidal structure on \texttt{SheafOfModules}.}
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-effective-cartier-divisor)
 % Decomposed.
+% Ruling: the notion itself is defined for every \termref{def:pcb-curves} curve,
+% but the identification of the effective Cartier divisors with the finite unions
+% of reduced closed points needs DIMENSION ONE, and it is stated in the body
+% rather than left to the reader.  \Cref{def:pcb-curves} asks only for dimension
+% AT MOST one, so \(C=\Spec k\) is a proper smooth affine curve in its sense, and
+% there the identification fails: the unique closed point is the whole scheme, its
+% ideal sheaf is \((0)\), and \(0\) is a zero-divisor in a nonzero ring, so the
+% point is not an effective Cartier divisor, and \(\emptyset\) is the only one.
+% "Of dimension one" is spelled out as "every irreducible component has dimension
+% one", because the weaker reading \(\dim C=1\) still admits
+% \(C=\mathbf P^1\sqcup\Spec k\), a proper smooth \termref{def:pcb-curves} curve
+% of dimension one on which the closed point of the second component is again not
+% Cartier.  This is the same missing word at
+% \Cref{lem:pcb-point-cartier}, \Cref{def:pcb-divisor},
+% \Cref{lem:pcb-divisor-class-curve}, \Cref{def:pcb-pic0} and
+% \Cref{lem:pcb-pullback-degree}, and it is a different word from the
+% connectedness added elsewhere in this chapter: \(\Spec k\) is connected.
 \begin{definition}[Effective Cartier divisors]
 \label{def:pcb-effective-cartier-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve}.  An
@@ -336,11 +353,18 @@ Let \(C\) be a \termref{def:pcb-curves}{curve}.  An
 \(D\subseteq C\) which is locally defined by a single
 non-zero-divisor: every point of \(D\) has an open neighbourhood
 \(U\) and a non-zero-divisor \(f\in\mathcal O_C(U)\) with
-\(D\cap U=V(f)\).  On a smooth curve the effective Cartier divisors
-are exactly the finite unions of closed points with their reduced
-structures: each closed point of a smooth curve, with its reduced
-structure, is one -- this is proved in the basic facts below -- and
-finite sums of effective Cartier divisors are effective Cartier.
+\(D\cap U=V(f)\).  Finite sums of effective Cartier divisors are
+effective Cartier on any curve.  On a smooth curve \emph{of dimension
+one} -- one every irreducible component of which has dimension one,
+which \Cref{def:pcb-curves} does not require -- the effective Cartier
+divisors are exactly the finite unions of closed points with their
+reduced structures: each closed point of such a curve, with its
+reduced structure, is one, and this is proved in the basic facts
+below.  Without the dimension hypothesis the description fails: on
+\(C=\Spec k\) the unique closed point is the whole scheme, its ideal
+sheaf is \((0)\), and \(0\) is a zero-divisor in a nonzero ring, so
+that point is not an effective Cartier divisor and \(\emptyset\) is
+the only one on \(C\).
 \uses{def:pcb-curves}
 \end{definition}
 
@@ -383,10 +407,12 @@ the closed points of \(C\).  For \(f\in k(C)^*\)
  \operatorname{div}(f)=\sum_P v_P(f)\,[P],
 \]
 where \(v_P\) is the normalized valuation of the local ring
-\(\mathcal O_{C,P}\) (a discrete valuation ring for \(C\) smooth --
-the local theory of smooth curves, which establishes this and the
-Cartier-divisor property of closed points, is developed in the
-basic facts below); such divisors are \emph{principal}.
+\(\mathcal O_{C,P}\) (a discrete valuation ring when \(C\) is smooth
+\emph{of dimension one}, i.e.\ every irreducible component of \(C\)
+has dimension one -- the local theory of such curves, which
+establishes this and the Cartier-divisor property of closed points, is
+developed in the basic facts below); such divisors are
+\emph{principal}.
 The \emph{divisor class group} is
 \[
  \operatorname{Cl}(C):=\operatorname{Div}(C)/\{\operatorname{div}(f):f\in k(C)^*\}.
@@ -407,6 +433,19 @@ divisor in the sense of \Cref{def:pcb-effective-cartier-divisor}
  \deg D:=\sum_Pn_P.
 \]
 (For reducible \(C\) all objects above are defined componentwise.)
+The group \(\operatorname{Div}(C)\) and the degree are defined for
+every \termref{def:pcb-curves}{curve}, but \(\operatorname{div}(f)\),
+\(\operatorname{Cl}(C)\), \(\mathcal O_C(D)\) and the assertion that
+an effective \(D\) is an effective Cartier divisor require \(C\) to be
+smooth of dimension one, which \Cref{def:pcb-curves} does not supply
+and which is therefore hypothesised at each statement below that uses
+them.  Defining the objects componentwise does not supply it either,
+since the obstruction is a zero-dimensional component and not a
+reducible one: on \(C=\Spec k\), and on the zero-dimensional component
+of \(C=\mathbf P^1\sqcup\Spec k\), the local ring at the closed point
+is the field \(k\), which is not a discrete valuation ring and carries
+no normalized valuation, so \(\operatorname{div}(f)\) is undefined
+there.
 \uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor}
 \end{definition}
 
@@ -541,22 +580,38 @@ Project, Morphisms of Schemes, Lemma 29.40.5, \stacksproject{01VU}
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-pic0)
 % Decomposed.
+% Ruling: dimension one is stated here, not left to the proof.  Degree-zero-ness
+% of principal divisors, the justification that stood alone here, is true and
+% insufficient: well-definedness of \(\deg\) on \(\operatorname{Pic}(C)\) needs
+% \(\cO_C(D)\cong\cO_C(D')\Rightarrow D-D'\) principal, i.e.\ the INJECTIVITY of
+% \Cref{lem:pcb-divisor-class-curve}, which is now cited and whose own dimension
+% hypothesis is the one added there.  \(C=\Spec k\) is the counterexample that
+% forced this: it is a proper smooth \termref{def:pcb-curves} curve,
+% \(\cO_C([P])\cong\cO_C\) while \(\deg[P]=1\neq0=\deg 0\), so \(\deg\) is not
+% well defined; and \(\operatorname{Pic}(\Spec k)=0\), so the class of the
+% \(k\)-rational point is trivial and cannot have degree \(1\).  On
+% \(C=\mathbf P^1\sqcup\Spec k\) the same failure sits on the second component.
 \begin{definition}[Degree and \(\operatorname{Pic}^0\)]
 \label{def:pcb-pic0}
-Let \(C\) be a \termref{def:pcb-curves}{proper} smooth curve over
+Let \(C\) be a \termref{def:pcb-curves}{proper} smooth curve of
+dimension one -- every irreducible component of dimension one -- over
 algebraically closed \(k\).  The \emph{degree} is the homomorphism
 \[
  \deg:\operatorname{Pic}(C)\to\mathbf Z,\qquad
  \deg[\mathcal O(D)]=\deg D,
 \]
 of the divisor class group of \Cref{def:pcb-divisor}; it is well
-defined because principal divisors have degree zero (proved in the
-basic facts below), and it sends the class of a \(k\)-rational point
-to \(1\).  Put
+defined because \(D\mapsto[\mathcal O_C(D)]\) identifies
+\(\operatorname{Cl}(C)\) with \(\operatorname{Pic}(C)\)
+(\Cref{lem:pcb-divisor-class-curve}), so that
+\(\mathcal O_C(D)\cong\mathcal O_C(D')\) forces \(D-D'\) to be
+principal, and because principal divisors have degree zero (proved in
+the basic facts below); and it sends the class of a \(k\)-rational
+point to \(1\).  Put
 \[
  \operatorname{Pic}^0(C):=\ker(\deg).
 \]
-\uses{def:pcb-curves,def:pcb-picard-group,def:pcb-divisor}
+\uses{def:pcb-curves,def:pcb-picard-group,def:pcb-divisor,lem:pcb-divisor-class-curve}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -978,9 +1033,21 @@ valuation ring by \Cref{lem:pcb-principal-ideal-dvr}.
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-point-cartier)
 % Decomposed.
+% Ruling: dimension one is stated here rather than asserted in the proof.  The
+% proof used to read "by \Cref{lem:pcb-smooth-regular}, \(\cO_{C,P}\) is a regular
+% local ring OF DIMENSION ONE", but that lemma gives regularity only and
+% \Cref{def:pcb-curves} asks for dimension at most one, so the dimension was a
+% hypothesis living in a proof.  It is now in the statement, and the proof derives
+% \(\dim\cO_{C,P}=1\) from it.  Counterexamples: on \(C=\Spec k\) the closed point
+% has \(\cO_{C,P}=k\), no uniformizer and ideal \((0)\), so it is not Cartier; on
+% \(C=\mathbf P^1\sqcup\Spec k\), a proper smooth \termref{def:pcb-curves} curve
+% with a one-dimensional component, the closed point of the second component is
+% still not Cartier --- which is why the hypothesis is on every component and not
+% on \(\dim C\).
 \begin{lemma}[Closed points are Cartier divisors on smooth curves]
 \label{lem:pcb-point-cartier}
-Let \(C\) be a \termref{def:pcb-curves}{smooth} curve over \(k\) and
+Let \(C\) be a \termref{def:pcb-curves}{smooth} curve over \(k\) of
+dimension one -- every irreducible component of dimension one -- and
 \(P\in C\) a closed point.  Then \(P\), with its reduced structure,
 is an effective Cartier divisor on \(C\): locally at \(P\), the ideal
 of \(P\) is generated by one non-zero-divisor.  Consequently every
@@ -991,7 +1058,12 @@ divisor.
 \begin{proof}
 \uses{lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
 By \Cref{lem:pcb-smooth-regular}, \(\mathcal O_{C,P}\) is a regular
-local ring of dimension one, hence a discrete valuation ring by
+local ring, hence a domain; so \(P\) lies on exactly one irreducible
+component \(Z\) of \(C\), and \(\dim\mathcal O_{C,P}=\dim\mathcal
+O_{Z,P}\).  By hypothesis \(\dim Z=1\), and \(P\) is a closed point of
+the finite-type \(k\)-scheme \(Z\), so that dimension is
+\(\dim Z-\dim\overline{\{P\}}=1\).  Thus \(\mathcal O_{C,P}\) is a
+regular local ring of dimension one, hence a discrete valuation ring by
 \Cref{lem:pcb-regular-dim1-dvr}; its maximal ideal \(\mathfrak m_P\)
 is generated by a uniformizer \(t_P\), a non-zero-divisor.  The
 ideal of \(P\) in \(\mathcal O_{C,P}\) is \(\mathfrak m_P=(t_P)\), so
@@ -1254,11 +1326,20 @@ scalars, because the field extension \(k\to k'\) is flat (injective).
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-divisor-class-curve)
 % Decomposed.
+% Ruling: dimension one is stated here.  Without it the map is not INJECTIVE:
+% \(C=\Spec k\) is a smooth \termref{def:pcb-curves} curve with
+% \(\operatorname{Cl}(C)=\Z\) --- free on the one closed point, and every
+% principal divisor is \(0\), whichever reading of \(v_P\) is taken at a
+% zero-dimensional point --- while \(\operatorname{Pic}(C)=0\).  The step of the
+% proof that breaks is exactly injectivity: \(\cO_C([P])=k(C)=\cO_C\) there, yet
+% \([P]\neq0\).  The componentwise parenthetical does not repair it, since the
+% offending component of \(\mathbf P^1\sqcup\Spec k\) is not reducible but
+% zero-dimensional; hence the hypothesis is put on every component.
 \begin{lemma}[\(\operatorname{Pic}\) is the divisor class group for smooth curves]
 \label{lem:pcb-divisor-class-curve}
-Let \(C\) be a smooth \termref{def:pcb-curves}{curve} over \(k\)
-(proper or not; for reducible \(C\) the assertion holds
-componentwise).  The map
+Let \(C\) be a smooth \termref{def:pcb-curves}{curve} over \(k\) of
+dimension one, every irreducible component of dimension one (proper or
+not; for reducible \(C\) the assertion holds componentwise).  The map
 \[
  \operatorname{Cl}(C)\to\operatorname{Pic}(C),\qquad
  D\mapsto[\mathcal O_C(D)],
@@ -1817,10 +1898,19 @@ morphism \(\pi_f:C\to\mathbf P^1_k\) with \(\pi_f^*t=f\).
 % ----------------------------------------------------------------------------
 % [reproduced from file 06] (label: lem:pcb-pullback-degree)
 % Decomposed.
+% Ruling: dimension one is stated here.  The pullback formula is not merely false
+% but undefined at dimension zero --- there is no \(v_P\)
+% (\Cref{def:pcb-divisor}) and no local equation \(t_{P'}\) of \(P'\)
+% (\Cref{def:pcb-effective-cartier-divisor}) --- and the proof takes
+% "\(\cO_{C,P}\) is a discrete valuation ring" from
+% \Cref{lem:pcb-point-cartier}, which now carries the hypothesis.  At
+% \(C=C'=\Spec k\) every \(D'\) other than \(0\) has no pullback at all, and on
+% \(\mathbf P^1\sqcup\Spec k\) the same holds over the second component.
 \begin{lemma}[Degree of pullbacks of divisors]
 \label{lem:pcb-pullback-degree}
 Let \(\pi:C\to C'\) be a finite flat morphism of proper smooth
-\termref{def:pcb-curves}{curves} over an algebraically closed field
+\termref{def:pcb-curves}{curves} of dimension one -- every irreducible
+component of dimension one -- over an algebraically closed field
 \(k\), of degree \(d=[k(C):k(C')]\), and let
 \(D'=\sum_Pn_P[P']\) be a divisor on \(C'\).  Then
 \[
