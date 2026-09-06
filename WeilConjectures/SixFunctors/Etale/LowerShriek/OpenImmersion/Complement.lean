@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 
 /-!
@@ -45,80 +47,28 @@ isomorphism.
 
 ## Main results
 
-- `AlgebraicGeometry.isEmpty_pullback_of_disjoint_range`: the geometric input.
 - `AlgebraicGeometry.Etale.isZero_openImmersionRestriction_lowerStar` and
   `AlgebraicGeometry.Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek`: the two
   vanishing statements.
 - `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_openImmersionLowerShriekToLowerStar`:
   `k^*` of the comparison is an isomorphism, for disjoint `j` and `k`.
 
-Also proved here, and generic enough to be upstreamable as they stand:
+The geometric input `AlgebraicGeometry.isEmpty_pullback_of_disjoint_range` lives in
+`WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion`, and the sheaf-theoretic inputs
 `CategoryTheory.Sheaf.isTerminalOfIsTerminalObj`, `CategoryTheory.Sheaf.isZero_of_isZero_obj`
 and `CategoryTheory.Sheaf.isInitialOfIsZeroObj` — a sheaf whose sections are all terminal (resp.
-zero) is terminal (resp. zero, hence initial), for an arbitrary site and coefficient category.
+zero) is terminal (resp. zero, hence initial), for an arbitrary site and coefficient category —
+in `WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf`. Both are shared with the pro-étale
+counterpart `WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement`.
 -/
 
 @[expose] public section
 
-universe v₁ u₁ v' u' u
+universe u' u
 
 open CategoryTheory Category Limits Opposite
 
-/-! ### Sheaves whose sections vanish -/
-
-namespace CategoryTheory.Sheaf
-
-variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
-  {A : Type u'} [Category.{v'} A]
-
-/-- A sheaf whose sections are all terminal is terminal. -/
-noncomputable def isTerminalOfIsTerminalObj (F : Sheaf J A) (h : ∀ U, IsTerminal (F.obj.obj U)) :
-    IsTerminal F :=
-  IsTerminal.isTerminalOfObj (sheafToPresheaf J A) _ (Functor.isTerminal h)
-
-/-- A sheaf whose sections are all zero objects is a zero object. Morphisms of sheaves are
-morphisms of the underlying presheaves, so this is `CategoryTheory.Functor.isZero` transported
-along `CategoryTheory.Sheaf.homEquiv`. -/
-lemma isZero_of_isZero_obj (F : Sheaf J A) (h : ∀ U, IsZero (F.obj.obj U)) : IsZero F := by
-  have h1 : IsZero F.obj := Functor.isZero _ h
-  refine ⟨fun G => ?_, fun G => ?_⟩
-  · obtain ⟨u⟩ := h1.unique_to G.obj
-    exact ⟨Equiv.unique Sheaf.homEquiv⟩
-  · obtain ⟨u⟩ := h1.unique_from G.obj
-    exact ⟨Equiv.unique Sheaf.homEquiv⟩
-
-/-- A sheaf whose sections are all zero objects is initial. -/
-noncomputable def isInitialOfIsZeroObj (F : Sheaf J A) (h : ∀ U, IsZero (F.obj.obj U)) :
-    IsInitial F :=
-  (isZero_of_isZero_obj F h).isInitial
-
-end CategoryTheory.Sheaf
-
 namespace AlgebraicGeometry
-
-/-! ### Emptiness of a fibre product over disjoint opens -/
-
-section Geometry
-
-variable {U X : Scheme.{u}}
-
-set_option backward.isDefEq.respectTransparency false in
-/-- If `j` is an open immersion whose range is disjoint from the range of `f`, the fibre
-product `V ×_X U` is empty. -/
-lemma isEmpty_pullback_of_disjoint_range {V : Scheme.{u}} (f : V ⟶ X) (j : U ⟶ X)
-    [IsOpenImmersion j] (h : Set.range f.base ∩ Set.range j.base = ∅) :
-    IsEmpty ↥(Limits.pullback f j) := by
-  have hr : Set.range (Limits.pullback.fst f j).base = ∅ := by
-    rw [IsOpenImmersion.range_pullbackFst]
-    ext x
-    simp only [Set.mem_empty_iff_false, iff_false]
-    intro hx
-    have hmem : f.base x ∈ Set.range f.base ∩ Set.range j.base := ⟨⟨x, rfl⟩, hx⟩
-    rw [h] at hmem
-    exact hmem
-  exact Set.range_eq_empty_iff.mp hr
-
-end Geometry
 
 /-! ### The sections of `k^* j_*` and of `j^* k_*` -/
 

@@ -96,3 +96,33 @@ lemma isIso_of_isIso_app_of_mem {G G' : Sheaf J A} (φ : G ⟶ G')
 end Sheaf
 
 end CategoryTheory
+
+/-! ### Sheaves whose sections vanish -/
+
+namespace CategoryTheory.Sheaf
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
+  {A : Type u₂} [Category.{v₂} A]
+
+/-- A sheaf whose sections are all terminal is terminal. -/
+noncomputable def isTerminalOfIsTerminalObj (F : Sheaf J A) (h : ∀ U, IsTerminal (F.obj.obj U)) :
+    IsTerminal F :=
+  IsTerminal.isTerminalOfObj (sheafToPresheaf J A) _ (Functor.isTerminal h)
+
+/-- A sheaf whose sections are all zero objects is a zero object. Morphisms of sheaves are
+morphisms of the underlying presheaves, so this is `CategoryTheory.Functor.isZero` transported
+along `CategoryTheory.Sheaf.homEquiv`. -/
+lemma isZero_of_isZero_obj (F : Sheaf J A) (h : ∀ U, IsZero (F.obj.obj U)) : IsZero F := by
+  have h1 : IsZero F.obj := Functor.isZero _ h
+  refine ⟨fun G => ?_, fun G => ?_⟩
+  · obtain ⟨u⟩ := h1.unique_to G.obj
+    exact ⟨Equiv.unique Sheaf.homEquiv⟩
+  · obtain ⟨u⟩ := h1.unique_from G.obj
+    exact ⟨Equiv.unique Sheaf.homEquiv⟩
+
+/-- A sheaf whose sections are all zero objects is initial. -/
+noncomputable def isInitialOfIsZeroObj (F : Sheaf J A) (h : ∀ U, IsZero (F.obj.obj U)) :
+    IsInitial F :=
+  (isZero_of_isZero_obj F h).isInitial
+
+end CategoryTheory.Sheaf
