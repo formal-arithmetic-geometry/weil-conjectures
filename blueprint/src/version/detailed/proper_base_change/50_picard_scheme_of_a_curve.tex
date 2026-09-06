@@ -422,6 +422,32 @@ divisor in the sense of \Cref{def:pcb-effective-cartier-divisor}
 % hypothesis is stated at the five lemmas that actually use it --- the precedent
 % of \Cref{lem:pc-ample-positive-degree}, which carries \(H^0(X,\cO_X)=k\) in
 % its own statement.
+% Ruling: \(H^0(C,\cO_C)=k\) is equivalent to CONNECTEDNESS, not to "connected of
+% dimension one".  The two hypotheses of tag 0BY7 --- dimension one, and
+% \(H^0=k\) --- are independent, \Cref{def:pcb-curves} supplies neither, and they
+% are therefore named separately below.  \(C=\Spec k\) is the counterexample that
+% forced this wording: it is a proper smooth \termref{def:pcb-curves} curve
+% (nonempty, separated, of finite type over \(k\), of dimension \(0\leq1\)), it is
+% connected, and \(H^0(C,\cO_C)=k\), yet \(\dim C=0\) --- so the biconditional
+% "\(H^0=k\) iff connected of dimension one" that stood here is false in the
+% "\(\Rightarrow\)" direction.  The surviving equivalence with connectedness is
+% proved in the block: connected \(\Rightarrow\) integral \(\Rightarrow\) variety
+% \(\Rightarrow\) \(H^0\) a finite extension of \(k=\bar k\); disconnected
+% \(\Rightarrow\) \(H^0\) a product of \(\geq2\) nonzero factors, which is the
+% \(\mathbf P^1\sqcup\mathbf P^1\) case of the ruling above.
+% Ruling: the duality clause is argued componentwise, because its two citations do
+% not cover the curves this block admits: \Cref{thm:pc-serre-duality-curve} wants a
+% smooth PROJECTIVE \termref{def:pc-curve} curve, i.e. an integral scheme of
+% dimension exactly one, so neither \(\Spec k\) (dimension \(0\), where
+% \(\Omega^1=0\) is no line bundle) nor \(\mathbf P^1\sqcup\mathbf P^1\) (not
+% integral) is one.  The seams the clause now crosses, rather than asserts:
+% proper of dimension \(\leq1\) \(\Rightarrow\) projective is
+% \Cref{lem:pcb-proper-dim-one-projective}; connected smooth \(\Rightarrow\)
+% integral is \Cref{lem:pcb-smooth-regular}, \Cref{lem:pc-regular-is-normal},
+% \Cref{lem:pc-noetherian-normal-decomposition}, the route
+% \Cref{lem:pcb-degree-2g1-very-ample} already takes; and the zero-dimensional
+% components are disposed of by \Cref{lem:pc-grothendieck-vanishing} (\(H^1=0\))
+% and \Cref{lem:pc-omega-line-bundle} (\(\Omega^1\) locally free of rank \(0\)).
 \begin{definition}[The genus of a curve]
 \label{def:pcb-genus}
 Let \(C\) be a \termref{def:pcb-curves}{proper} smooth curve over
@@ -435,15 +461,50 @@ morphism are coherent: \Cref{lem:pc-coherent-hi}; this is the genus of
 Stacks Project, Algebraic Curves, Definition 53.8.1,
 \stacksproject{0BY7}, which
 defines \(g=\dim_kH^1(X,\mathcal O_X)\) for a proper scheme \(X\) of
-dimension one with \(H^0(X,\mathcal O_X)=k\); the present \(C\) satisfies
-that last condition exactly when it is connected of dimension one, which
-\Cref{def:pcb-curves} does not require, so the identification is with
-that case of the cited definition and the formula above is taken as the
-definition in general).
-Equivalently, by duality
-\(g=\dim_kH^0(C,\Omega^1_{C/k})\) (\Cref{thm:pc-serre-duality-curve} and
-\Cref{lem:pc-omega-line-bundle}).
-\uses{def:pcb-curves,lem:pc-coherent-hi,thm:pc-serre-duality-curve,lem:pc-omega-line-bundle}
+dimension one with \(H^0(X,\mathcal O_X)=k\); the present \(C\)
+satisfies that last condition exactly when it is connected, while the
+cited definition requires in addition that the dimension be one, and
+\Cref{def:pcb-curves} requires neither --- it allows disconnected
+\(C\), and allows \(\dim C=0\).  So the formula above is taken as the
+definition in general, and it agrees with the genus of the cited
+definition exactly for those \(C\) that are connected of dimension
+one).
+
+Indeed, a connected such \(C\) is integral: it is smooth, hence
+regular (\Cref{lem:pcb-smooth-regular}), hence normal
+(\Cref{lem:pc-regular-is-normal}), and a Noetherian normal connected
+scheme is integral (\Cref{lem:pc-noetherian-normal-decomposition});
+so \(C\) is a variety over \(k\) (\Cref{def:pc-curve}) and
+\(H^0(C,\mathcal O_C)\) is a finite field extension of \(k\)
+(\Cref{lem:pc-h0-proper-variety}(1)), hence equal to \(k\) because
+\(k\) is algebraically closed
+(\Cref{lem:pc-finite-extension-alg-closed}).  Conversely \(C\), being
+Noetherian, is the disjoint union of its finitely many connected
+components, each of them open and closed and nonempty, so
+\(H^0(C,\mathcal O_C)\) is the product of their rings of global
+sections; if \(C\) is disconnected there are at least two such
+factors, each a nonzero \(k\)-algebra, and \(H^0(C,\mathcal O_C)\neq
+k\) (on \(\mathbf P^1\sqcup\mathbf P^1\) it is \(k\times k\)).
+
+Equivalently, by duality \(g=\dim_kH^0(C,\Omega^1_{C/k})\).  Both
+sides are additive over the connected components of \(C\), so it is
+enough to check this on a connected component \(C'\), which is again a
+proper smooth curve over \(k\).  If \(\dim C'=1\), then \(C'\) is
+projective (\Cref{lem:pcb-proper-dim-one-projective}) and integral as
+above, hence a smooth projective \termref{def:pc-curve}{curve} in the
+sense required by \Cref{thm:pc-serre-duality-curve}; that theorem,
+applied to the invertible module \(\mathcal O_{C'}\), gives
+\[
+ H^1(C',\mathcal O_{C'})^{\vee}\cong
+ H^0\bigl(C',\Omega^1_{C'/k}\bigr),
+\]
+the global sections of the canonical line bundle
+(\Cref{lem:pc-omega-line-bundle}).  If \(\dim C'=0\), both sides
+vanish: \(H^1(C',\mathcal O_{C'})=0\) by
+\Cref{lem:pc-grothendieck-vanishing} with \(d=0\), and
+\(\Omega^1_{C'/k}\) is locally free of rank \(0\), hence zero, again
+by \Cref{lem:pc-omega-line-bundle}.
+\uses{def:pcb-curves,lem:pc-coherent-hi,thm:pc-serre-duality-curve,lem:pc-omega-line-bundle,lem:pcb-smooth-regular,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,def:pc-curve,lem:pc-h0-proper-variety,lem:pc-finite-extension-alg-closed,lem:pcb-proper-dim-one-projective,lem:pc-grothendieck-vanishing}
 \end{definition}
 
 % ---------------------------------------------------------------------------
