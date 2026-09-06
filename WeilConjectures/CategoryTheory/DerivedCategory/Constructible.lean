@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Etale
 
 /-!
 
@@ -19,7 +19,7 @@ For a scheme `X` and a concrete abelian coefficient category `A`, this file defi
 subcategory `Dᵇc(X, A)` of the derived category
 `DerivedCategory (Sheaf X.smallEtaleTopology A)` of étale sheaves consisting of the
 bounded complexes all of whose homology sheaves are constructible
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf`). Boundedness refers to the canonical
+(`AlgebraicGeometry.Etale.IsConstructibleSheaf`). Boundedness refers to the canonical
 t-structure `DerivedCategory.TStructure.t`.
 
 Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
@@ -73,7 +73,7 @@ section ConstructibleHomology
 its homology sheaves are constructible. -/
 noncomputable def Etale.DerivedCategory.constructibleHomology :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  fun M ↦ ∀ n : ℤ, IsConstructibleSheaf
+  fun M ↦ ∀ n : ℤ, Etale.IsConstructibleSheaf
     ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology A) n).obj M)
 
 end ConstructibleHomology

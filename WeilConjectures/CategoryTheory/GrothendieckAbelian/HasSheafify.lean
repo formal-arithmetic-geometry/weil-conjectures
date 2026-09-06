@@ -23,7 +23,7 @@ Everything in this file is deduced from that single statement
 (`hasSheafify_essentiallySmall`), which is the only sorry: the small étale site, the small
 pro-étale site and their localizations `J.over V` are essentially small in `u + 1`. The
 localized instances are what lets the constructible-sheaf definitions of
-`WeilConjectures.ConstructibleSheaf.Defs` restrict a sheaf to a member of an étale cover
+`WeilConjectures.ConstructibleSheaf.Etale` restrict a sheaf to a member of an étale cover
 without carrying `HasWeakSheafify` for the localized sites as a hypothesis.
 
 -/
