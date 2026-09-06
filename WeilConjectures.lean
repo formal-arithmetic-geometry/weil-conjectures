@@ -43,6 +43,7 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Etale
+public import WeilConjectures.ConstructibleSheaf.ProEtale
 public import WeilConjectures.ConstructibleSheaf.Stratification
 public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
