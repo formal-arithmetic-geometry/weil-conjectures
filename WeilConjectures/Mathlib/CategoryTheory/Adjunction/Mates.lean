@@ -56,4 +56,18 @@ theorem mateEquiv_whiskerBottom (α : TwoSquare G L₁ L₂ H) (d : H ⟶ H') :
     Functor.map_id, Functor.leftUnitor_hom_app, Category.comp_id, Category.id_comp,
     Category.assoc, Functor.comp_map, ← R₂.map_comp, d.naturality]
 
+variable {L : C ⥤ D} {R : D ⥤ C}
+
+/-- The inverse form of `CategoryTheory.conjugateEquiv_leftUnitor_hom`. -/
+lemma conjugateEquiv_leftUnitor_inv (adj : L ⊣ R) :
+    conjugateEquiv (Adjunction.id.comp adj) adj (Functor.leftUnitor L).inv =
+      (Functor.rightUnitor R).hom := by
+  cat_disch
+
+/-- The inverse form of `CategoryTheory.conjugateEquiv_rightUnitor_hom`. -/
+lemma conjugateEquiv_rightUnitor_inv (adj : L ⊣ R) :
+    conjugateEquiv (adj.comp Adjunction.id) adj (Functor.rightUnitor L).inv =
+      (Functor.leftUnitor R).hom := by
+  cat_disch
+
 end CategoryTheory
