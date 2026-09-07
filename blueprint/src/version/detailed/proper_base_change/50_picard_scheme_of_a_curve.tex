@@ -1703,6 +1703,38 @@ This is a cited external input: Cohomology of Schemes, Lemma~30.21.1
 % ring at the closed point is the field \(k\), not a discrete valuation ring, and
 % the symbol used is undefined there.  Same at the zero-dimensional component of
 % \(C=\mathbf P^1\sqcup\Spec k\).  Both curves are now excluded by hypothesis.
+% Ruling: \(\mathcal O_C(K_C)\) is gone from the proof.  The clause read ``the dual
+% \(\mathcal O_C(K_C)\otimes\mathcal M^{-1}\) has degree \((2g-2)-d\)'', citing
+% \(\deg\omega_C=2g-2\) of \Cref{lem:pc-omega-degree} for one symbol
+% (\(\omega_C\)) and using it for another (\(\mathcal O_C(K_C)\)).  \(K_C\)
+% occurred exactly once in the chapter and is introduced nowhere: no node defines a
+% canonical divisor, and \Cref{def:pcb-divisor}'s \(\mathcal O_C(D)\) is defined
+% only for a \(D\in\operatorname{Div}(C)\) the chapter produces.  The
+% identification \(\omega_C\cong\mathcal O_C(K_C)\) is a theorem, true here, and
+% was left unstated.  Nothing downstream was unsound and the mathematics does not
+% change: the two preceding displays already give the step for \(\omega_C\), which
+% the proof sets up as \(\Omega^1_{C/k}\), so the clause now says \(\omega_C\).
+% Ruling: the two degrees are identified in the proof, per the #374 standard, rather
+% than mixed silently.  The hypothesis \(\deg\mathcal M\geq2g+1\) is
+% \Cref{def:pcb-pic0}'s degree (defined through divisors,
+% \(\deg[\mathcal O(D)]=\deg D\)), while \Cref{thm:pc-riemann-roch} and
+% \Cref{lem:pc-omega-degree} are stated for \Cref{def:pc-degree-line-bundle}'s
+% degree \(\chi(\mathcal L)-\chi(\mathcal O_X)\), and the arithmetic
+% \((2g-2)-d\), \(d-2\), \(d-1\) mixes them.  The crossing is SOUND, but the
+% chapter's own bridge \Cref{lem:pc-degree-agrees-sc} is stated for EFFECTIVE
+% divisors only, so a bare \Cref to it does not close it.  The general case is
+% closed inside this proof, from ingredients already in the closure:
+% \Cref{lem:pcb-line-bundle-rational-section} gives
+% \(\mathcal L\cong\mathcal O_C(D)\), and writing \(D=D^+-D^-\),
+% \Cref{lem:pc-degree-base-change}(2) gives additivity against the effective twist
+% \(D^-\) and (4) gives \(\deg\mathcal O_C(E)=\sum n_P[\kappa(P):k]\) for
+% effective \(E\).  Eight labels go on the proof's \uses list, seven of them new
+% edges (\Cref{def:pcb-pic0} is already cited by the statement); none closes a
+% cycle -- \Cref{lem:pcb-degree-2g1-very-ample} is in no target's closure.
+% Ruling: \Cref{lem:pc-degree-agrees-sc} is NOT generalised to arbitrary divisors,
+% although its own proof argues the general case.  That would move a statement other
+% nodes depend on; the identification is stated where it is used instead, which is
+% what this node needs and is the smaller change.
 \begin{lemma}[Line bundles of large degree are very ample]
 \label{lem:pcb-degree-2g1-very-ample}
 Let \(C\) be a connected \termref{def:pcb-curves}{proper smooth} curve
@@ -1714,7 +1746,7 @@ field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
 \uses{def:pcb-genus,def:pcb-pic0,def:pcb-curves,def:pcb-ample}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree,lem:pcb-unramified-omega-zero,lem:pcb-proper-dim-one-projective,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-nakayama,lem:pcb-smooth-regular,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,def:pc-curve,lem:pc-h0-proper-variety,lem:pc-finite-extension-alg-closed}
+\uses{def:pcb-genus,lem:pcb-dim0-finite,lem:pcb-morphism-from-function,lem:pcb-negative-degree-no-sections,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-omega-degree,lem:pcb-unramified-omega-zero,lem:pcb-proper-dim-one-projective,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-nakayama,lem:pcb-smooth-regular,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,def:pc-curve,lem:pc-h0-proper-variety,lem:pc-finite-extension-alg-closed,def:pcb-pic0,def:pcb-divisor,def:pc-degree-line-bundle,lem:pc-degree-agrees-sc,lem:pc-degree-base-change,lem:pcb-line-bundle-rational-section,lem:pcb-divisor-class-curve,lem:pc-divisor-line-bundle-agrees-sc}
 We use Riemann--Roch (\Cref{thm:pc-riemann-roch}) for the proper
 smooth curve \(C\) of genus \(g\) (\Cref{def:pcb-genus}): first, \(C\) is projective (a
 proper scheme of dimension at most one over a field is projective,
@@ -1743,10 +1775,51 @@ and Serre duality (\Cref{thm:pc-serre-duality-curve}): with
 \]
 and \(\deg\omega_C=2g-2\) (\Cref{lem:pc-omega-degree}).
 
-First, \(H^1(C,\mathcal M)=0\): the dual
-\(\mathcal O_C(K_C)\otimes\mathcal M^{-1}\) has degree
-\((2g-2)-d<0\), and a line bundle of negative degree has no nonzero
-global sections (\Cref{lem:pcb-negative-degree-no-sections}).
+\emph{The two degrees.}  The hypothesis \(\deg\mathcal M\geq2g+1\) is
+the degree of \Cref{def:pcb-pic0}, defined on
+\(\operatorname{Pic}(C)\) through divisors by
+\(\deg[\mathcal O_C(D)]=\deg D=\sum_Pn_P\)
+(\Cref{def:pcb-divisor}), whereas the \(d\) of
+\Cref{thm:pc-riemann-roch} and the \(\deg\omega_C\) of
+\Cref{lem:pc-omega-degree} are the degree of
+\Cref{def:pc-degree-line-bundle},
+\(\deg\mathcal L=\chi(C,\mathcal L)-\chi(C,\mathcal O_C)\).  The
+computation below mixes the two, so we record that they agree on every
+invertible module of \(C\).  \Cref{lem:pc-degree-agrees-sc} states the
+agreement for \emph{effective} \(D\) only, and that is not enough
+here, so we extend it.  The curve \(C\) is integral, as just shown, so
+every invertible module is \(\mathcal O_C(D)\) for some
+\(D\in\operatorname{Div}(C)\)
+(\Cref{lem:pcb-line-bundle-rational-section}); write
+\(D=D^+-D^-\) with \(D^+,D^-\) effective.  Since
+\(D\mapsto[\mathcal O_C(D)]\) is a homomorphism
+(\Cref{lem:pcb-divisor-class-curve}) we have
+\(\mathcal O_C(D)\otimes\mathcal O_C(D^-)\cong\mathcal O_C(D^+)\),
+and \(D^-\), being effective, is an effective Cartier divisor
+(\Cref{def:pcb-divisor}) whose module \(\mathcal O_C(D^-)\) is the
+one \Cref{lem:pc-degree-base-change} is stated for
+(\Cref{lem:pc-divisor-line-bundle-agrees-sc}); so
+\Cref{lem:pc-degree-base-change}(2) applies and gives
+\[
+ \deg\mathcal O_C(D)=\deg\mathcal O_C(D^+)-\deg\mathcal O_C(D^-)
+\]
+for the degree of \Cref{def:pc-degree-line-bundle}.  Each term on the
+right equals \(\deg D^{\pm}\) of \Cref{def:pcb-pic0} by
+\Cref{lem:pc-degree-agrees-sc} (equivalently by
+\Cref{lem:pc-degree-base-change}(4), every closed point of \(C\) being
+\(k\)-rational because \(k\) is algebraically closed), and
+\(\deg D^+-\deg D^-=\deg D\).  The two notions are therefore the
+same function on \(\operatorname{Pic}(C)\); we write \(\deg\) for it,
+put \(d:=\deg\mathcal M\geq2g+1\), and use freely that it is a
+homomorphism \(\operatorname{Pic}(C)\to\mathbf Z\)
+(\Cref{def:pcb-pic0}), which is what makes the additivity in the
+degree computations below legitimate.
+
+First, \(H^1(C,\mathcal M)=0\): by the Serre duality displayed above
+it is the dual of \(H^0(C,\omega_C\otimes\mathcal M^{-1})\), and
+\(\omega_C\otimes\mathcal M^{-1}\) has degree \((2g-2)-d<0\), so it
+has no nonzero global sections
+(\Cref{lem:pcb-negative-degree-no-sections}).
 Hence \(\dim H^0(C,\mathcal M)=d-g+1\).  Similarly, for
 \(P,Q\in C\) (possibly equal),
 \(\deg\mathcal M(-P-Q)=d-2\geq2g-1\), so
@@ -12489,6 +12562,11 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 % valuation ring from \Cref{lem:pcb-regular-dim1-dvr}, which has no hypothesis on any
 % field.  The \uses edge to \Cref{lem:pcb-point-cartier} comes off and the two nodes
 % of the replacement route go on.
+% Ruling (notation): Step 2's display wrote \(\deg_K(\cL)\), the only site in the
+% chapter subscripting \(\deg\) by a field rather than by the scheme the module
+% lives on; \(\cL\) is an invertible sheaf on \(X_K\), and the other three
+% subscripted sites of this same base change write \(\deg_{X_K}\).  Corrected to
+% \(\deg_{X_K}(\cL)\).  Cosmetic: no hypothesis, no citation and no value changes.
 \begin{proof}
 \uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular,prop:pc-XK-integral}
 \emph{Step 1: an ample polarisation.}  The smooth projective curve $X$
@@ -12508,7 +12586,7 @@ $\cL_0^{\bullet}|_{X_K}$ and $\cF=\cL$) shows
 $H^p(X_K,\cL^{(n)})=0$ for all $p\ge1$ once $n\gg0$.  On the other hand
 \[
 \chi(X_K,\cL^{(n)})=\deg(\cL^{(n)})+\chi(X_K,\cO)
-=\deg_K(\cL)+n\deg_X(\cL_0^{\bullet})+\bigl(1-g\bigr)
+=\deg_{X_K}(\cL)+n\deg_X(\cL_0^{\bullet})+\bigl(1-g\bigr)
 \]
 by \Cref{lem:pc-degree-base-change} (tensor products and base change
 \Cref{lem:pc-degree-base-change}, the additivity of $\chi$
