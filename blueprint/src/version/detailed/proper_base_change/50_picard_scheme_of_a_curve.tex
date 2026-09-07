@@ -694,11 +694,27 @@ point to \(1\).  Put
 % algebraically closed \(k\) would empty it.  Nothing in the construction below uses
 % algebraic closedness; only the final clause does, and it says so.  The \uses edge
 % to \Cref{def:pcb-curves} stays, since the list of conditions is still that
-% definition's, read over a general base as \Cref{rem:pc-relation-sc} describes.  The
-% \termref{def:pcb-invertible-module}{invertible modules} named below are read the
-% same way: that definition's content is ``quasi-coherent and locally free of rank
-% one'', which uses no hypothesis on the base field, its \termref to
-% \Cref{def:pcb-curves} naming the ambient scheme only.
+% definition's, read over a general base as \Cref{rem:pc-relation-sc} describes.
+% Ruling amended (the \termref for ``invertible modules'' below).  The sentence that
+% stood here read \Cref{def:pcb-invertible-module} over a general base on the ground
+% that its content -- ``quasi-coherent and locally free of rank one'' -- uses no
+% hypothesis on the base field, its \termref to \Cref{def:pcb-curves} naming the
+% ambient scheme only.  That reading is true, but it is not the rule this chapter
+% applies: what a node's content uses is not what the node states, and
+% \Cref{def:pcb-invertible-module} states the notion only for a
+% \termref{def:pcb-curves}{curve}, hence only over an algebraically closed base,
+% which the \(k\) fixed above is not.  So the repair is at the citation.
+% \Cref{def:pc-invertible-module} states the same notion for an arbitrary scheme,
+% with no hypothesis on any field, and \Cref{rem:pc-sc-modules} already records that
+% the block reproduced from file~06 is its curve case; the \termref and the \uses
+% edge below therefore name \Cref{def:pc-invertible-module}, and the edge to
+% \Cref{def:pcb-invertible-module} is dropped, nothing else in this block needing
+% it.  This does not widen \Cref{def:pcb-invertible-module}, which keeps its curve
+% hypothesis.  The block's two other internal citations are sound and stay as they
+% are: \Cref{def:pcb-pic0} occurs only inside the clause gated ``for \(k\)
+% algebraically closed'', which is where that definition applies, and the ruling on
+% \Cref{def:pcb-curves} recorded just above still reads correctly -- it is cited for
+% its list of conditions, over a general \(k\), as the sentence below says aloud.
 \begin{definition}[The Picard functor of a proper curve]
 \label{def:pcb-picard-functor}
 Let \(k\) be a field and let \(C\) be a proper smooth curve over
@@ -711,14 +727,14 @@ that definition fixes.  The \emph{Picard functor}
  \qquad R\longmapsto\operatorname{Pic}(C\times_kR),
 \]
 is the fppf sheafification of the functor of
-\termref{def:pcb-invertible-module}{invertible modules}; for
+\termref{def:pc-invertible-module}{invertible modules}; for
 \(d\in\mathbf Z\), \(\operatorname{Pic}^d_{C/k}\) is the open and
 closed subfunctor of \(\operatorname{Pic}_{C/k}\) of invertible
 modules of fibrewise degree \(d\) (degree \(d\) on every geometric
 fibre; for \(k\) algebraically closed this recovers
 \(\operatorname{Pic}(C)\) and its degree
 \Cref{def:pcb-pic0}).
-\uses{def:pcb-curves,def:pcb-invertible-module,def:pcb-pic0}
+\uses{def:pcb-curves,def:pc-invertible-module,def:pcb-pic0}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2097,13 +2113,42 @@ case follows by linearity.
 % ----------------------------------------------------------------------------
 % [reproduced from file 06] (label: lem:pcb-ample-complement-affine)
 % Decomposed.
+% Ruling (the three internal citations of this block).  The \(X\) here is an
+% arbitrary proper scheme over an arbitrary field, so this statement carries neither
+% a dimension hypothesis nor an algebraically closed base.
+% (1) The effective Cartier divisor used to be cited as
+% \Cref{def:pcb-effective-cartier-divisor}, which opens ``Let \(C\) be a
+% \termref{def:pcb-curves}{curve}'' and so states the notion only on a curve and only
+% over an algebraically closed field -- both hypotheses absent here, an over-reach in
+% two directions at once.  The fact is true at this generality but that node does not
+% say so, and the chapter already carries the node that does:
+% \Cref{def:pc-effective-cartier-divisor} states it for an arbitrary scheme, and closes
+% by recording that the file-06 block is its curve case.  The \Cref and the \uses edge
+% now name it.  \Cref{def:pcb-effective-cartier-divisor} is not widened.
+% (2) The third edge, to \Cref{def:pcb-divisor}, was carried by no citation in the
+% statement or the proof, but it is load-bearing all the same: \Cref{def:pcb-divisor}
+% is where \(\mathcal O_C(D)\) is defined on the file-06 side, and
+% \(\mathcal L:=\mathcal O_X(D)\) is the only place this statement could be reading
+% it from.  It over-reaches in the same two directions -- that definition's
+% \(\mathcal O_C(D)\) is a submodule of the constant sheaf \(k(C)\) on a curve smooth
+% of dimension one over an algebraically closed field.  So the edge is repointed rather
+% than dropped: \Cref{def:pc-divisor-line-bundle} defines \(\cO_S(D)=\cI_D^\vee\) for an
+% arbitrary scheme \(S\) and an effective Cartier divisor \(D\), which is exactly the
+% \(\mathcal O_X(D)\) meant here, and the statement now names it in prose too.
+% (3) \termref{def:pcb-ample}{ample} is sound and stays: \Cref{def:pcb-ample} opens
+% ``Let \(X\) be a proper scheme over \(k\)'', which is this statement's hypothesis
+% verbatim, with no curve and no algebraically closed base.  \Cref{def:pc-ample} would
+% also serve but is not needed, and ampleness in its sense is the same notion here by
+% \Cref{lem:pc-ample-iff-power-very-ample}.  The proof's citation of
+% \Cref{def:pcb-ample} is sound for the same reason.
 \begin{lemma}[Complements of ample divisors are affine]
 \label{lem:pcb-ample-complement-affine}
 Let \(X\) be a proper scheme over a field \(k\), \(D\subseteq X\) an
-effective Cartier divisor (\Cref{def:pcb-effective-cartier-divisor})
-and \(\mathcal L:=\mathcal O_X(D)\)
+effective Cartier divisor (\Cref{def:pc-effective-cartier-divisor}),
+and \(\mathcal L:=\mathcal O_X(D)\) its associated invertible module
+(\Cref{def:pc-divisor-line-bundle}), assumed
 \termref{def:pcb-ample}{ample}.  Then \(X\setminus D\) is affine.
-\uses{def:pcb-effective-cartier-divisor,def:pcb-ample,def:pcb-divisor}
+\uses{def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pcb-ample}
 \end{lemma}
 \begin{proof}
 \uses{def:pcb-ample,lem:pc-closed-immersion-affine}
