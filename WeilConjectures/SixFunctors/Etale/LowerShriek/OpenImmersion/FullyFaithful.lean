@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 
@@ -26,7 +26,7 @@ hypothesis on the range of `j`, and no condition on the coefficient category `A`
 fully faithful together: the unit of the left adjunction is invertible if and only if the
 counit of the right one is
 (`CategoryTheory.Adjunction.Triple.isIso_unit_iff_isIso_counit`, packaged for this situation
-as `GrothendieckTopology.isIso_localizationLowerShriekAdjunction_unit_iff`). The counit of
+applied to `AlgebraicGeometry.Etale.openImmersionAdjunctionTriple`). The counit of
 `j^* ⊣ j_*` is *already known* to be invertible —
 `AlgebraicGeometry.Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit`, which
 holds because `j` is a monomorphism, so the unit of the site-level adjunction
@@ -49,7 +49,7 @@ is fully faithful", and none is needed here.
   `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf. This is the form the
   comparison `j_! ⟶ j_*` consumes; see
   `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar` in
-  `WeilConjectures.SixFunctors.LowerShriek.Comparison`.
+  `WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison`.
 
 -/
 
@@ -65,11 +65,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 open Etale
-
-/-- The adjoint triple `j_! ⊣ j^* ⊣ j_*` on small étale sites along an open immersion. -/
-noncomputable def Etale.openImmersionAdjunctionTriple :
-    Adjunction.Triple (j)_!open[A] (Etale.openImmersionRestriction A j) (j)_*[A] :=
-  GrothendieckTopology.localizationAdjunctionTriple A @Etale @Etale le_rfl j inferInstance
 
 /-- **The unit of `j_! ⊣ j^*` is an isomorphism for an open immersion `j`**, i.e.
 `j^* j_! F ≅ F` naturally in `F`.
