@@ -98,8 +98,9 @@ theorem quasiCompact_strictTransformOpen_ι [QuasiSeparatedSpace ↥(pullback f 
     [QuasiCompact f] [QuasiCompact π] (hU : IsCompact (U : Set X)) :
     QuasiCompact (strictTransformOpen f π U).ι := by
   have : QuasiCompact (pullback.fst f π) := MorphismProperty.pullback_fst _ _ ‹_›
+  refine Scheme.Opens.quasiCompact_ι _ ?_
   rw [strictTransformOpen_eq_preimage]
-  exact quasiCompact_preimage_ι _ hU
+  exact (pullback.fst f π ≫ f).isCompact_preimage hU
 
 /-- The strict transform of `f : Y ⟶ X` along `π : X' ⟶ X` relative to the open
 `U ⊆ X`: the scheme-theoretic image of the open locus of `Y ×_X X'` lying over `U`.
