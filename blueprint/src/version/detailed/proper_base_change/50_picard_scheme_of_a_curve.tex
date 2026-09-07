@@ -225,6 +225,23 @@ originals.
 % ---------------------------------------------------------------------------
 % [reproduced from 02_proper_base_change.tex] (label: def:pcb-scheme-conventions)
 % Decomposed.
+% Ruling: the immersion clause used to end "(equivalently, as an open immersion
+% followed by a closed immersion)".  That parenthetical was not a restatement of
+% the definition but a theorem, and it was asserted for an arbitrary immersion,
+% which is more than its source proves: Morphisms of Schemes, Lemma~29.7.7
+% (\stacksproject{01RG}) assumes the immersion is quasi-compact or its source is
+% reduced.  The hypothesis is now carried in the text with the tag beside it.
+% No weaker reading of the parenthetical avoided the hypothesis.  Asserting only
+% that SOME closed \(W\subseteq Y\) has \(X\to W\) an open immersion is
+% equivalent to 01RG's conclusion about the scheme-theoretic image: if \(X\to W\)
+% is an open immersion with \(W\subseteq Y\) closed then \(f\) factors through
+% \(W\), so the scheme-theoretic image satisfies \(\overline X\subseteq W\);
+% writing \(X=W\cap V\) with \(V\subseteq Y\) open gives
+% \(\overline X\cap V\subseteq W\cap V=X\subseteq\overline X\cap V\), so
+% \(X=\overline X\cap V\) is open in \(\overline X\).
+% Nothing in the chapter consumed the reversed factorisation -- it occurred here
+% and nowhere else -- so this is a false clause repaired in place and not an
+% unsound argument: no \uses edge and no node is affected.
 \begin{definition}[Scheme and morphism conventions]
 \label{def:pcb-scheme-conventions}
 Let \(f:X\to Y\) be a morphism of schemes.  It is \emph{quasi-compact} if
@@ -247,8 +264,11 @@ an \emph{open immersion} if it identifies \(X\) with an open subscheme
 of \(Y\), and a \emph{closed
 immersion} if it is affine and is induced locally by a surjective ring
 homomorphism.  It is an \emph{immersion} if it factors as a closed
-immersion followed by an open immersion (equivalently, as an open
-immersion followed by a closed immersion).  It is \emph{universally closed} if every base change of
+immersion followed by an open immersion; an immersion which is
+quasi-compact, or whose source is reduced, factors also as an open
+immersion followed by a closed immersion, namely through its
+scheme-theoretic image in \(Y\) (Morphisms of Schemes, Lemma~29.7.7,
+\stacksproject{01RG}).  It is \emph{universally closed} if every base change of
 \(f\) is a closed map, and \emph{proper} if it is separated, of finite
 type, and universally closed.  It is \emph{finite} if it is affine and
 \(f_*\mathcal O_X\) is a finite \(\mathcal O_Y\)-algebra, and
@@ -296,12 +316,34 @@ proper over \(k\), and \emph{affine} if it is an affine scheme.
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-function-field)
 % Decomposed.
+% Ruling: the first sentence used to end "; equivalently the ring of rational
+% functions on \(C\)", an ungated equivalence between the product of the stalks
+% at the generic points and the total ring of fractions.  \Cref{def:pcb-curves}
+% does not require reduced, and the two differ as soon as there is an embedded
+% point: on \(C=\Spec k[x,y]/(y^2,xy)\) the radical of \((y^2,xy)\) is \((y)\),
+% so the only generic point is that of \(V(y)\) and the product of stalks is
+% \(k(x)\), while in \(k[x,y]/(y^2,xy)\) the element \(x\) is a zero-divisor
+% (\(xy=0\) and \(y\neq0\)) and so is not inverted in the total ring of
+% fractions.  The clause is now gated on \(C\) reduced, which is where it is
+% true and is the only case the chapter uses -- every consumer of \(k(C)\) below
+% hypothesises \(C\) smooth of dimension one -- and the two Algebra tags that
+% prove it are named.  02LX's remaining hypothesis, finitely many minimal
+% primes, is supplied by \Cref{def:pcb-curves}: a curve is of finite type over
+% \(k\), hence Noetherian.  Neither tag creates a node: `pcb-' is exempt.
 \begin{definition}[The function field of a curve]
 \label{def:pcb-function-field}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  The
 \emph{function field} \(k(C)\) is the product of the stalks of the
 structure sheaf at the generic points of the irreducible components
-of \(C\); equivalently the ring of rational functions on \(C\).  For
+of \(C\).  When \(C\) is \emph{reduced} -- which \Cref{def:pcb-curves}
+does not require -- those stalks are fields and the zero-divisors of a
+reduced ring are exactly the union of its minimal primes (Algebra,
+Lemma~10.25.2, \stacksproject{00EW}), so \(k(C)\) is then the ring of
+rational functions on \(C\): it is the total ring of fractions of
+\(\mathcal O_C(U)\) for any affine open \(U\subseteq C\) meeting every
+irreducible component (Algebra, Lemma~10.25.4, \stacksproject{02LX}).
+Without reducedness the two can differ, and it is the product of
+stalks that is meant here.  For
 an integral curve it is the field of fractions of
 \(\mathcal O_C(U)\) for any nonempty affine open \(U\subseteq C\).
 \uses{def:pcb-curves}
@@ -310,6 +352,14 @@ an integral curve it is the field of fractions of
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-invertible-module)
 % Decomposed.
+% Ruling: the parenthetical equivalence "locally free of rank one iff
+% tensor-invertible" carries no tag here, and none is added, because it is
+% already sourced one node away and this block is a verbatim reproduction whose
+% tags are out of scope.  \Cref{def:pc-invertible-module} states the same
+% equivalence for a scheme with \stacksproject{01CS}, \stacksproject{0B8K} and
+% \stacksproject{0B8M}, and closes by saying that for \(Y\) a curve this is the
+% notion of the present definition; a curve is a scheme, so that node covers
+% this one.  Recorded rather than duplicated.
 \begin{definition}[Invertible modules and their duals]
 \label{def:pcb-invertible-module}
 Let \(C\) be a \termref{def:pcb-curves}{curve}.  An
@@ -454,6 +504,14 @@ tensor product of invertible modules, which needs a monoidal structure on
 % effective \(D\) is the subscheme locally cut out by \(\prod t_P^{n_P}\), and it
 % is reduced exactly when every \(n_P\leq1\).  The unparenthesised clause was and
 % remains true, and is all the chapter uses.
+% Re-checked: the surviving clause is sound.  It is stated only of the subscheme
+% locally cut out by \(\prod_Pt_P^{n_P}\) for \(t_P\) a uniformizer of
+% \(\mathcal O_{C,P}\), so it is already gated on \(C\) smooth of dimension one
+% by the sentence it sits in and by the closing paragraph of this definition; and
+% under that gating the local ring of that subscheme at \(P\) is
+% \(\mathcal O_{C,P}/(t_P^{n_P})\), a discrete valuation ring modulo a power of
+% its maximal ideal, which is reduced precisely when \(n_P\leq1\).  Nothing to
+% repair here.
 \begin{definition}[Divisors, principal divisors, class group]
 \label{def:pcb-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  A
@@ -724,6 +782,11 @@ fibre; for \(k\) algebraically closed this recovers
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-group-scheme)
 % Decomposed.
+% Ruling: the functor-of-points clause said only that \(R\mapsto G(R)\) "takes
+% values in groups", which is weaker than the equivalence it claims to be -- a
+% group structure on each set \(G(R)\) with no naturality is not enough to
+% recover \(m\), \(i\) and \(e\).  The Yoneda argument needs the group
+% structures to be natural in \(R\); the two words are now in the text.
 \begin{definition}[Group schemes over a field]
 \label{def:pcb-group-scheme}
 Let \(k\) be a field.  A \(k\)-\emph{group scheme} is a \(k\)-scheme
@@ -731,7 +794,8 @@ Let \(k\) be a field.  A \(k\)-\emph{group scheme} is a \(k\)-scheme
 \(i:G\to G\) (inverse) and \(e:\operatorname{Spec}k\to G\) (identity)
 such that the usual associativity, unit and inverse diagrams
 commute; equivalently, the functor of points
-\(R\mapsto G(R)\) takes values in groups.  The group scheme is
+\(R\mapsto G(R)\) takes values in groups \emph{functorially in
+\(R\)}, i.e.\ lifts to a functor from \(k\)-algebras to groups.  The group scheme is
 \emph{commutative} if \(m\circ s=m\), where \(s\) swaps the two
 factors.  A \emph{homomorphism} \(f:G\to H\) of group schemes is a
 morphism of schemes compatible with the multiplications; the
