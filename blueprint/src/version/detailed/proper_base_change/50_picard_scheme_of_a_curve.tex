@@ -330,9 +330,36 @@ formalised, since Mathlib has no monoidal structure on \texttt{SheafOfModules}.}
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-effective-cartier-divisor)
 % Decomposed.
 % Ruling: the notion itself is defined for every \termref{def:pcb-curves} curve,
-% but the identification of the effective Cartier divisors with the finite unions
-% of reduced closed points needs DIMENSION ONE, and it is stated in the body
-% rather than left to the reader.  \Cref{def:pcb-curves} asks only for dimension
+% but the identification of the effective Cartier divisors with the effective
+% divisors needs DIMENSION ONE, and it is stated in the body rather than left to
+% the reader.
+% Ruling (multiplicities): the body used to say that on a smooth curve of
+% dimension one the effective Cartier divisors are "exactly the finite unions of
+% closed points with their reduced structures".  The \(\subseteq\) direction of
+% that "exactly" is false, and it is false on \(\mathbf P^1_k\) itself, with no
+% boundary curve needed: in the chart \(\Spec k[x]\) the subscheme \(V(x^2)\) is
+% locally defined by the single non-zero-divisor \(x^2\), so it is an effective
+% Cartier divisor by this very definition, and it is not reduced.  The axis is
+% MULTIPLICITY, not a hypothesis on \(C\).  The body now states the correspondence
+% that is true --- effective Cartier divisors correspond to the effective divisors
+% \(\sum n_P[P]\), \(n_P\geq0\), the reduced ones being those with every
+% \(n_P\leq1\) --- and \(V(x^2)\) is the divisor \(2[0]\) under it.
+% Ruling (what is proved below): the old clause "and this is proved in the basic
+% facts below" over-claimed.  \Cref{lem:pcb-point-cartier} proves only the
+% \(\supseteq\) direction --- a reduced closed point is an effective Cartier
+% divisor, hence so is a finite sum --- and nothing below proves any
+% \(\subseteq\) direction.  The clause now names exactly that, and says the
+% converse is neither proved nor used.  No node is created for the converse:
+% \texttt{pcb-} is exempt from node creation and the chapter uses only
+% \(\supseteq\).
+% The forward cross-references to \Cref{def:pcb-divisor} and
+% \Cref{lem:pcb-point-cartier} deliberately carry NO \uses edge: both of those
+% blocks already \uses this
+% definition, so an edge either way round would make a two-cycle in the
+% dependency graph.  They are reader-facing "defined/proved below" pointers, the
+% same shape as the cross-reference in \Cref{def:pcb-ample} to
+% \Cref{lem:pc-ample-iff-power-very-ample}.
+% \Cref{def:pcb-curves} asks only for dimension
 % AT MOST one, so \(C=\Spec k\) is a proper smooth affine curve in its sense, and
 % there the identification fails: the unique closed point is the whole scheme, its
 % ideal sheaf is \((0)\), and \(0\) is a zero-divisor in a nonzero ring, so the
@@ -357,14 +384,34 @@ non-zero-divisor: every point of \(D\) has an open neighbourhood
 effective Cartier on any curve.  On a smooth curve \emph{of dimension
 one} -- one every irreducible component of which has dimension one,
 which \Cref{def:pcb-curves} does not require -- the effective Cartier
-divisors are exactly the finite unions of closed points with their
-reduced structures: each closed point of such a curve, with its
-reduced structure, is one, and this is proved in the basic facts
-below.  Without the dimension hypothesis the description fails: on
-\(C=\Spec k\) the unique closed point is the whole scheme, its ideal
-sheaf is \((0)\), and \(0\) is a zero-divisor in a nonzero ring, so
-that point is not an effective Cartier divisor and \(\emptyset\) is
-the only one on \(C\).
+divisors are exactly the closed subschemes cut out, on a neighbourhood
+of each closed point \(P\), by \(t_P^{n_P}\), where \(t_P\) is a
+uniformizer of the discrete valuation ring \(\mathcal O_{C,P}\) and
+\(n_P\geq0\) is an integer, all but finitely many \(n_P\) being \(0\);
+equivalently, they correspond bijectively to the effective divisors
+\(\sum_Pn_P[P]\), \(n_P\geq0\), of \Cref{def:pcb-divisor}, the
+subscheme attached to \(\sum_Pn_P[P]\) being the one locally cut out
+by \(\prod_Pt_P^{n_P}\).  Multiplicities are therefore \emph{not}
+excluded: the \emph{reduced} effective Cartier divisors are exactly
+those with every \(n_P\leq1\), that is, the finite unions of closed
+points with their reduced structures, and these are not all of them.
+Already on \(C=\mathbf P^1_k\), in the chart \(\Spec k[x]\), the
+closed subscheme \(V(x^2)\) is cut out by the single non-zero-divisor
+\(x^2\) and so is an effective Cartier divisor in the sense just
+defined; it is the one attached to the effective divisor \(2[0]\), and
+it is not reduced, hence not a finite union of closed points with
+their reduced structures.  Of this correspondence only the direction
+from divisors to subschemes is proved in the basic facts below:
+\Cref{lem:pcb-point-cartier} shows that a closed point with its
+reduced structure is an effective Cartier divisor, and hence that so
+is every effective divisor.  The converse direction, that every
+effective Cartier divisor arises this way, is not proved here and is
+not used in this chapter.  Without the dimension hypothesis the
+correspondence fails: on \(C=\Spec k\) the unique closed point is the
+whole scheme, its ideal sheaf is \((0)\), and \(0\) is a zero-divisor
+in a nonzero ring, so that point is not an effective Cartier divisor
+and \(\emptyset\) is the only one on \(C\), while \([P]\) is a nonzero
+effective divisor.
 \uses{def:pcb-curves}
 \end{definition}
 
@@ -395,6 +442,13 @@ tensor product of invertible modules, which needs a monoidal structure on
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-divisor)
 % Decomposed.
+% Ruling: the effectivity clause used to end "(equivalently, per that definition
+% on the smooth curve \(C\))", which read as an appeal to the biconditional that
+% \Cref{def:pcb-effective-cartier-divisor} used to assert and that was false for
+% multiplicities.  It now says what that definition says after repair: an
+% effective \(D\) is the subscheme locally cut out by \(\prod t_P^{n_P}\), and it
+% is reduced exactly when every \(n_P\leq1\).  The unparenthesised clause was and
+% remains true, and is all the chapter uses.
 \begin{definition}[Divisors, principal divisors, class group]
 \label{def:pcb-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  A
@@ -426,8 +480,10 @@ it is invertible -- this is the identification of
 \(\operatorname{Pic}(C)\) with \(\operatorname{Cl}(C)\) for smooth
 curves, proved in the basic facts below.  When all
 \(n_P\geq0\), \(D\) is \emph{effective} and is an effective Cartier
-divisor in the sense of \Cref{def:pcb-effective-cartier-divisor}
-(equivalently, per that definition on the smooth curve \(C\)); the
+divisor in the sense of \Cref{def:pcb-effective-cartier-divisor} --
+namely the closed subscheme locally cut out by \(\prod_Pt_P^{n_P}\),
+for \(t_P\) a uniformizer of \(\mathcal O_{C,P}\), which is reduced
+exactly when every \(n_P\leq1\); the
 \emph{degree} of \(D\) is
 \[
  \deg D:=\sum_Pn_P.
@@ -1183,10 +1239,27 @@ double complexes), Lemma~12.25.1, \stacksproject{0130}}).
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-line-bundle-rational-section)
 % Decomposed.
+% Ruling: smoothness and dimension one are stated here, on the whole lemma
+% (repair (a) of the two the issue offered), rather than only on the final
+% clause.  Reason: it is the smaller diff, and it is what every consumer already
+% supplies --- \Cref{lem:pcb-divisor-class-curve} and
+% \Cref{lem:pcb-negative-degree-no-sections}, the only two blocks that cite this
+% lemma, both hypothesise a smooth curve of dimension one, so nothing is lost by
+% putting the hypothesis on the whole statement.  Without it the conclusion
+% \(\mathcal O_C(\operatorname{div}s)\cong\mathcal L\) is not false but
+% ILL-FORMED: \(\operatorname{div}\) and \(\mathcal O_C(-)\) are defined in
+% \Cref{def:pcb-divisor} only for a curve smooth of dimension one.  Two curves
+% the old hypotheses admitted show this is not vacuous: \(C=\Spec k\) is an
+% integral \termref{def:pcb-curves} curve, and so is a nodal plane cubic, where
+% \(\mathcal O_{C,P}\) at the node is not a discrete valuation ring and carries no
+% normalized valuation.  The first clause --- \(\mathcal L\otimes k(C)\cong k(C)\)
+% and the existence of a nonzero rational section --- needs only integrality and
+% remains true on both; it is simply now stated under the stronger hypothesis.
 \begin{lemma}[Rational sections of line bundles]
 \label{lem:pcb-line-bundle-rational-section}
 Let \(C\) be an integral \termref{def:pcb-curves}{curve} over \(k\)
-and \(\mathcal L\) an invertible module.  Then
+which is smooth of dimension one -- every irreducible component of
+dimension one -- and \(\mathcal L\) an invertible module.  Then
 \(\mathcal L\otimes_{\mathcal O_C}k(C)\cong k(C)\); in particular
 \(\mathcal L\) has a nonzero rational section
 \(s\in(\mathcal L\otimes k(C))\setminus\{0\}\), and for such an \(s\)
@@ -1380,10 +1453,20 @@ invertible module is \(\mathcal O_C(D)\) for
 % word the proofs themselves use and, for a smooth curve over an algebraically
 % closed field, it is equivalent to integrality (regular, hence normal, and a
 % Noetherian normal connected scheme is integral).
+% Ruling: "of dimension one -- every irreducible component of dimension one" is
+% stated here because the statement uses \(\deg\) of \Cref{def:pcb-pic0}, and
+% \Cref{def:pcb-pic0} requires exactly that.  Without it the statement is not
+% false but ILL-FORMED on the curves \Cref{def:pcb-curves} still admits: at
+% \(C=\Spec k\) --- connected, proper, smooth, integral, over algebraically
+% closed \(k\), with \(k(C)^*=k^*\) nonempty, so nothing is vacuous --- the local
+% ring at the closed point is the field \(k\), not a discrete valuation ring, and
+% the symbol used is undefined there.  Same at the zero-dimensional component of
+% \(C=\mathbf P^1\sqcup\Spec k\).  Both curves are now excluded by hypothesis.
 \begin{lemma}[Positive degree implies ample]
 \label{lem:pcb-positive-degree-ample}
-Let \(C\) be a connected proper smooth \termref{def:pcb-curves}{curve} of
-genus \(g\) over an algebraically closed field \(k\) and
+Let \(C\) be a connected proper smooth \termref{def:pcb-curves}{curve}
+of genus \(g\), of dimension one -- every irreducible component of
+dimension one -- over an algebraically closed field \(k\) and
 \(\mathcal L\) a line bundle with \(\deg\mathcal L>0\)
 (\Cref{def:pcb-pic0}).  Then \(\mathcal L\) is
 \termref{def:pcb-ample}{ample}.
@@ -1461,13 +1544,26 @@ This is a cited external input: Cohomology of Schemes, Lemma~30.21.1
 % very ample: restricting a closed immersion to the second component would give
 % a closed immersion \(\mathbf P^1\hookrightarrow\mathbf P^N\) pulling
 % \(\mathcal O(1)\) back to \(\mathcal O\), of degree \(0\).
-% The dimension is left as \(\dim C\leq1\), as in \termref{def:pcb-curves}: for
-% \(\dim C=0\) the statement is vacuous, every line bundle then having degree
-% \(0<2g+1\).
+% The dimension used to be left as \(\dim C\leq1\), as in
+% \termref{def:pcb-curves}, on the ground that for \(\dim C=0\) the statement is
+% vacuous, every line bundle then having degree \(0<2g+1\).  That ground was
+% wrong and is superseded: at \(C=\Spec k\) the symbol \(\deg\) of
+% \Cref{def:pcb-pic0} is not defined at all, so there is no degree to compare
+% with \(2g+1\) and the statement is ill-formed rather than vacuously true.
+% Ruling: "of dimension one -- every irreducible component of dimension one" is
+% stated here because the statement uses \(\deg\) of \Cref{def:pcb-pic0}, and
+% \Cref{def:pcb-pic0} requires exactly that.  Without it the statement is not
+% false but ILL-FORMED on the curves \Cref{def:pcb-curves} still admits: at
+% \(C=\Spec k\) --- connected, proper, smooth, integral, over algebraically
+% closed \(k\), with \(k(C)^*=k^*\) nonempty, so nothing is vacuous --- the local
+% ring at the closed point is the field \(k\), not a discrete valuation ring, and
+% the symbol used is undefined there.  Same at the zero-dimensional component of
+% \(C=\mathbf P^1\sqcup\Spec k\).  Both curves are now excluded by hypothesis.
 \begin{lemma}[Line bundles of large degree are very ample]
 \label{lem:pcb-degree-2g1-very-ample}
-Let \(C\) be a connected \termref{def:pcb-curves}{proper smooth} curve of
-genus \(g\) (\Cref{def:pcb-genus}) over an algebraically closed
+Let \(C\) be a connected \termref{def:pcb-curves}{proper smooth} curve
+of genus \(g\) (\Cref{def:pcb-genus}), of dimension one -- every
+irreducible component of dimension one -- over an algebraically closed
 field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
 \(\deg\mathcal M\geq2g+1\) (\Cref{def:pcb-pic0}).  Then
 \(\mathcal M\) is \termref{def:pcb-ample}{very ample}.
@@ -1577,13 +1673,26 @@ Hence \(\mathcal M\) is very ample.
 % Decomposed.
 % Connected for the same reason as the two ampleness lemmas: the proof passes
 % through \Cref{lem:pcb-line-bundle-rational-section}, which is stated for an
-% integral curve, and through \Cref{lem:pcb-deg-principal-zero}, which now
-% carries connectedness.  Without it the lemma is false: on
+% integral curve smooth of dimension one, and through
+% \Cref{lem:pcb-deg-principal-zero}, which now carries connectedness.
+% Without it the lemma is false: on
 % \(\mathbf P^1\sqcup\mathbf P^1\) the bundle \((\mathcal O(-3),\mathcal O(1))\)
 % has degree \(-2<0\) and a two-dimensional space of global sections.
+% Ruling: "of dimension one -- every irreducible component of dimension one" is
+% stated here because the statement uses \(\deg\) of \Cref{def:pcb-pic0}, and
+% \Cref{def:pcb-pic0} requires exactly that.  Without it the statement is not
+% false but ILL-FORMED on the curves \Cref{def:pcb-curves} still admits: at
+% \(C=\Spec k\) --- connected, proper, smooth, integral, over algebraically
+% closed \(k\), with \(k(C)^*=k^*\) nonempty, so nothing is vacuous --- the local
+% ring at the closed point is the field \(k\), not a discrete valuation ring, and
+% the symbol used is undefined there.  Same at the zero-dimensional component of
+% \(C=\mathbf P^1\sqcup\Spec k\).  Both curves are now excluded by hypothesis.
+% Dimension one is in any case demanded by the two lemmas the proof cites, both
+% of which now require it.
 \begin{lemma}[Line bundles of negative degree]
 \label{lem:pcb-negative-degree-no-sections}
-Let \(C\) be a connected proper smooth curve over an algebraically closed
+Let \(C\) be a connected proper smooth curve of dimension one -- every
+irreducible component of dimension one -- over an algebraically closed
 field \(k\), and \(\mathcal M\) a line bundle on \(C\) with
 \(\deg\mathcal M<0\) (\Cref{def:pcb-pic0}).  Then
 \(H^0(C,\mathcal M)=0\).
@@ -1782,10 +1891,21 @@ over \(k\)).
 % \Cref{lem:pcb-morphism-from-function}, both of which need irreducibility.
 % (The conclusion itself survives componentwise on a disconnected curve; only
 % this route to it does not.)
+% Ruling: "of dimension one -- every irreducible component of dimension one" is
+% stated here because the statement uses \(\deg\) of \Cref{def:pcb-pic0} and
+% \(\operatorname{div}\) of \Cref{def:pcb-divisor}, and both require exactly
+% that.  Without it the statement is not false but ILL-FORMED on the curves
+% \Cref{def:pcb-curves} still admits: at
+% \(C=\Spec k\) --- connected, proper, smooth, integral, over algebraically
+% closed \(k\), with \(k(C)^*=k^*\) nonempty, so nothing is vacuous --- the local
+% ring at the closed point is the field \(k\), not a discrete valuation ring, and
+% the symbol used is undefined there.  Same at the zero-dimensional component of
+% \(C=\mathbf P^1\sqcup\Spec k\).  Both curves are now excluded by hypothesis.
 \begin{lemma}[Principal divisors have degree zero]
 \label{lem:pcb-deg-principal-zero}
-Let \(C\) be a connected proper smooth \termref{def:pcb-curves}{curve} over an
-algebraically closed field \(k\), and \(f\in k(C)^*\).  Then
+Let \(C\) be a connected proper smooth \termref{def:pcb-curves}{curve}
+of dimension one -- every irreducible component of dimension one --
+over an algebraically closed field \(k\), and \(f\in k(C)^*\).  Then
 \[
  \deg(\operatorname{div}(f))=0.
 \]
