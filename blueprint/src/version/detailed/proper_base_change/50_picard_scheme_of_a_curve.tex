@@ -2169,13 +2169,51 @@ morphism \(\pi_f:C\to\mathbf P^1_k\) with \(\pi_f^*t=f\).
 % \Cref{lem:pcb-point-cartier}, which now carries the hypothesis.  At
 % \(C=C'=\Spec k\) every \(D'\) other than \(0\) has no pullback at all, and on
 % \(\mathbf P^1\sqcup\Spec k\) the same holds over the second component.
+% Ruling: connected is stated here too, for both curves, in the wording the
+% connectedness pass used on this chapter
+% (\Cref{lem:pcb-deg-principal-zero}, \Cref{lem:pcb-morphism-from-function},
+% \Cref{lem:pcb-rational-function-morphism}).  That axis is independent of the
+% dimension axis above and neither probe named there reaches it: both
+% \(\Spec k\) and \(\mathbf P^1\sqcup\Spec k\) are already excluded by the
+% dimension-one clause, and the probe that pays here is
+% \(\mathbf P^1\sqcup\mathbf P^1\), which has every irreducible component of
+% dimension one.  Two things needed the hypothesis.  First, \(d=[k(C):k(C')]\)
+% is a degree of field extensions only when \(k(C)\) and \(k(C')\) are fields,
+% and by \Cref{def:pcb-function-field} the function field of a curve is the
+% product of the stalks of the structure sheaf at the generic points of its
+% irreducible components --- a field exactly when the curve is irreducible,
+% which for a smooth curve is connectedness, since the local rings are regular
+% (\Cref{lem:pcb-smooth-regular}) hence domains
+% (\Cref{lem:pcb-regular-local-domain}), so distinct irreducible components are
+% disjoint.  Second, without connectedness of \(C'\) the last clause is not
+% merely undefined but false: take \(C'=\mathbf P^1\sqcup\mathbf P^1\) and
+% \(C=\mathbf P^1\sqcup\mathbf P^1\sqcup\mathbf P^1\), with \(\pi\) the
+% identity on the first component and the two-fold trivial cover on the second.
+% Then \(\pi\) is finite and flat and every other word of the hypothesis holds,
+% but \(\pi_*\cO_C\) is locally free of rank one over the first component of
+% \(C'\) and of rank two over the second, so \(\deg\pi^*[P']\) is one or two
+% according to where \(P'\) sits and no single \(d\) makes
+% "\(\deg\pi^*[P']=d\) for every closed point \(P'\)" true.  The proof's
+% opening "locally free of rank \(d\)" is where the hypothesis had been
+% hiding; it is stated now, not gated in this comment.  The only consumer is
+% the proof of \Cref{lem:pcb-deg-principal-zero}, which applies this to
+% \(\pi_f:C\to\mathbf P^1_k\) with both sides connected, so nothing downstream
+% loses anything.
+% The divisor is now written \(D'=\sum_{P'}n_{P'}[P']\).  It read
+% \(\sum_Pn_P[P']\), summing over points \(P\) of \(C\) with coefficients
+% \(n_P\) while displaying points \([P']\) of \(C'\), and the pullback display
+% two lines below uses coefficients \(n_{P'}\) that the first display then
+% never defined.
 \begin{lemma}[Degree of pullbacks of divisors]
 \label{lem:pcb-pullback-degree}
-Let \(\pi:C\to C'\) be a finite flat morphism of proper smooth
-\termref{def:pcb-curves}{curves} of dimension one -- every irreducible
-component of dimension one -- over an algebraically closed field
-\(k\), of degree \(d=[k(C):k(C')]\), and let
-\(D'=\sum_Pn_P[P']\) be a divisor on \(C'\).  Then
+Let \(\pi:C\to C'\) be a finite flat morphism of connected proper
+smooth \termref{def:pcb-curves}{curves} of dimension one -- every
+irreducible component of dimension one -- over an algebraically closed
+field \(k\), of degree \(d=[k(C):k(C')]\); this is a degree of field
+extensions because a connected smooth curve is irreducible, so that
+\(k(C)\) and \(k(C')\) are fields
+(\Cref{def:pcb-function-field}).  Let
+\(D'=\sum_{P'}n_{P'}[P']\) be a divisor on \(C'\).  Then
 \[
  \deg(\pi^*D')=d\cdot\deg D',
 \]
@@ -2183,12 +2221,19 @@ where \(\pi^*D'\) is the pullback divisor
 \(\sum_{P'}n_{P'}\sum_{\pi(P)=P'}v_P(t_{P'})[P]\) (\(t_{P'}\) a local
 equation of \(P'\)); in particular
 \(\deg\pi^*[P']=d\) for every closed point \(P'\).
-\uses{def:pcb-curves,def:pcb-divisor}
+\uses{def:pcb-curves,def:pcb-divisor,def:pcb-function-field}
 \end{lemma}
 \begin{proof}
 \uses{lem:pcb-point-cartier}
-Since \(\pi\) is finite flat, \(\pi_*\mathcal O_C\) is locally free
-of rank \(d\), and the fibre over \(P'\) is
+Since \(\pi\) is finite flat, \(\pi_*\mathcal O_C\) is locally free,
+and of \emph{constant} rank because \(C'\) is connected.  That rank is
+\(d\): the rank is nonzero, because \(C\) is nonempty and the rank is
+constant, so \(\pi\) is surjective (a finite flat morphism is both
+closed and open, and \(C'\) is connected); hence the generic point of
+the irreducible curve \(C\) lies over the generic point \(\eta'\) of
+\(C'\), and the stalk of \(\pi_*\mathcal O_C\) at
+\(\eta'\) is \(k(C)\), a \(k(C')\)-vector space of dimension
+\([k(C):k(C')]\).  The fibre over \(P'\) is
 \(\operatorname{Spec}((\pi_*\mathcal O_C)\otimes k(P'))\), a
 \(k\)-algebra of dimension \(d\) (all residue fields are \(k\)
 because \(k\) is algebraically closed), whose length is
