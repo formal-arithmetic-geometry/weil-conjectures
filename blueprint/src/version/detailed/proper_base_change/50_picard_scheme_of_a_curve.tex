@@ -9899,7 +9899,7 @@ over $k$ (\Cref{lem:pc-h0-proper-variety}(2)).
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible,lem:pc-h0-proper-variety}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pc-zero-scheme-properties,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
 \emph{(1) ($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
@@ -9915,8 +9915,9 @@ $s(x_0)\neq0$ (the base locus of a very ample module is empty: the
 linear system $\mathbf P(H^0(X,\cL^{\otimes m}))$ gives the embedding,
 so for every point there is a section not vanishing at it).  The zero
 scheme $D=Z(s)$ is an effective Cartier divisor (finite closed
-subscheme of the smooth curve; the local description of
-\Cref{def:pc-zero-scheme}, and the DVR structure of the local rings of
+subscheme of the smooth curve; the local description
+$\Spec(A/(a))$ of \Cref{lem:pc-zero-scheme-properties}(1), and the DVR
+structure of the local rings of
 $X$: each $\cO_{X,x}$ is regular, $X$ being smooth over $k$
 (\Cref{lem:pc-smooth-over-field-regular}), and of dimension one, $X$
 being a curve, hence a discrete valuation ring
@@ -12857,7 +12858,7 @@ Then $G$ is representable by a group scheme over $k$.
 \uses{def:pc-subfunctor,def:pc-representable-functor,def:pcb-group-scheme}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-representable-functor,def:pc-subfunctor,lem:pc-schemes-criterion}
+\uses{def:pc-representable-functor,def:pc-subfunctor,lem:pc-representable-unique,lem:pc-schemes-criterion}
 Apply \Cref{lem:pc-schemes-criterion} with $S=\Spec(k)$ and $I=G(k)$: for
 $i=g'\in I$ let $F_i\subseteq G$ be the subfunctor
 \[
@@ -12885,7 +12886,8 @@ $g|_{U_g^{g'}}\in F_{g'}(U_g^{g'})$ by the criterion.  This verifies
 condition \Cref{def:pc-subfunctor}), while (2)(a), (2)(b) for the family
 $(F_i)$ are what we just proved and (1) is the hypothesis; hence $G$ is
 representable by a scheme.  As $G$ takes values in groups and the
-representing object is unique up to unique isomorphism, the group
+representing object is unique up to unique isomorphism
+(\Cref{lem:pc-representable-unique}), the group
 structure on $G$ makes it a group scheme (the group-valued sheaf
 structure is given; see the usual Yoneda argument, cf.\
 \Cref{def:pc-representable-functor}).
@@ -12916,7 +12918,7 @@ that this group structure is the Picard one is not asserted, since
 \Cref{def:pc-picard-group} has no group law in Lean.}
 \end{theorem}
 \begin{proof}
-\uses{cor:pc-sigma-pic-iso,def:pc-genus,def:pc-pic-sigma-functor,def:pc-rational-point,lem:pc-f-open-subfunctor,lem:pc-k-sheaf,lem:pc-pic-group-valued,lem:pc-rational-hyp,lem:pc-rational-points-dense,lem:pc-twist,lem:pc-vanishing-above-dim,prop:pc-XK-integral,thm:pc-criterion,thm:pc-f-representable,thm:pc-pic-split}
+\uses{cor:pc-sigma-pic-iso,def:pc-genus,def:pc-pic-sigma-functor,def:pc-rational-point,lem:pc-f-open-subfunctor,lem:pc-k-sheaf,lem:pc-pic-group-valued,lem:pc-rational-hyp,lem:pc-rational-points-dense,lem:pc-sigma-k-points,lem:pc-twist,lem:pc-vanishing-above-dim,prop:pc-XK-integral,thm:pc-criterion,thm:pc-f-representable,thm:pc-pic-split}
 Since $k$ is separably closed and $X$ is smooth over $k$ (hence nonempty:
 $X$ is a variety), there exists a
 \termref{def:pc-rational-point}{$k$-rational point} $\sigma$ of $X$ by
@@ -12959,7 +12961,9 @@ with $\sigma_K^*\cL\cong\cO_K$.  By \Cref{lem:pc-twist} there is an
 invertible sheaf $\cL_0$ on $X$ with
 $\dim_KH^0(X_K,\cL\otimes\cL_0|_{X_K})=1$ and
 $H^1(X_K,\cL\otimes\cL_0|_{X_K})=0$.  Since
-$\Pic_{X/k,\sigma}(k)=\Pic(X)$ (\Cref{def:pc-pic-sigma-functor}), the
+$\Pic_{X/k,\sigma}(k)=\Pic(X)$ (\Cref{lem:pc-sigma-k-points}, computing
+the value at $T=\Spec(k)$ of the functor of
+\Cref{def:pc-pic-sigma-functor}), the
 module $\cL_0$ corresponds to an element $g_0'\in G(k)$; and in
 $G(K)$ the product $g_0'\cdot g_0$ is the class of
 $\cL_0|_{X_K}\otimes\cL$.  For it we have
