@@ -6,10 +6,10 @@ Authors: Edison Xie, Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 
@@ -188,15 +188,10 @@ section BaseChangeTransformation
 
 /- The K-flat resolution package on the coefficient category `A`, as in the sections
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
-`WeilConjectures.SixFunctors.Derived`; it enters here through the bounded below derived
-adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is obtained by
-restriction of the unbounded derived adjunction. -/
+`WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar`; it enters here through the
+bounded below derived adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is
+obtained by restriction of the unbounded derived adjunction. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution A]
 
 variable {X Y X' Y' : Scheme.{u}}
