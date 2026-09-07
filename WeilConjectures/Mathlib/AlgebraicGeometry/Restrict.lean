@@ -22,6 +22,8 @@ We record:
   surjectivity of the induced map on global sections of the restrictions;
 - `AlgebraicGeometry.exists_opens_restrict_preimage` — a morphism defined on an open subscheme
   restricts to the open subscheme of points mapping into a given open of the target;
+- `AlgebraicGeometry.Scheme.Hom.liftPreimage` — the factorization of a morphism through a
+  preimage open containing its range;
 - the **lift of an open immersion along a partial isomorphism**
   `AlgebraicGeometry.liftOfIsIsoRestrict`: if `π : T ⟶ X` is an isomorphism over the range of
   an open immersion `j : Z ⟶ X`, then `j` lifts to an open immersion `Z ⟶ T` onto the inverse
@@ -121,6 +123,30 @@ lemma exists_opens_restrict_preimage {X Z : Scheme.{u}} (W₁ : X.Opens)
   · rw [hhom, Category.assoc, Category.assoc, morphismRestrict_ι]
   · intro x
     exact Scheme.Opens.mem_ι_image_iff W₁
+
+section LiftPreimage
+
+variable {P : Scheme.{u}} (g : P ⟶ X) (U : X.Opens) (k : Z ⟶ P)
+    (hk : Set.range (k ≫ g) ⊆ (U : Set X))
+
+include hk in
+/-- A morphism whose composite with `g : P ⟶ X` has range inside an open `U ⊆ X` has
+range inside the open `g ⁻¹ᵁ U` of `P`. -/
+lemma range_subset_range_preimage_ι : Set.range k ⊆ Set.range (g ⁻¹ᵁ U).ι := by
+  rw [Scheme.Opens.range_ι]
+  rintro _ ⟨z, rfl⟩
+  simpa [Scheme.Hom.comp_apply] using hk ⟨z, rfl⟩
+
+/-- **The lift into a preimage open**: a morphism `k : Z ⟶ P` whose composite with
+`g : P ⟶ X` has range inside an open `U ⊆ X` factors through the open `g ⁻¹ᵁ U`. -/
+def Scheme.Hom.liftPreimage : Z ⟶ (g ⁻¹ᵁ U).toScheme :=
+  IsOpenImmersion.lift (g ⁻¹ᵁ U).ι k (range_subset_range_preimage_ι g U k hk)
+
+@[reassoc (attr := simp)]
+lemma Scheme.Hom.liftPreimage_ι : g.liftPreimage U k hk ≫ (g ⁻¹ᵁ U).ι = k :=
+  IsOpenImmersion.lift_fac _ _ _
+
+end LiftPreimage
 
 section LiftAlongPartialIso
 

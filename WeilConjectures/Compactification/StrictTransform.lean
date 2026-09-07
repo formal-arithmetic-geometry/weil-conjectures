@@ -7,9 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 
@@ -106,37 +107,29 @@ theorem quasiCompact_strictTransformOpen_ι_of_isCompact [QuasiSeparatedSpace �
     [QuasiCompact f] [QuasiCompact π] (hU : IsCompact (U : Set X)) :
     QuasiCompact (strictTransformOpen f π U).ι := by
   have : QuasiCompact (pullback.fst f π) := MorphismProperty.pullback_fst _ _ ‹_›
-  have hcpt : IsCompact ((strictTransformOpen f π U : Set ↥(pullback f π))) := by
-    rw [strictTransformOpen_eq_preimage]
-    exact QuasiCompact.isCompact_preimage (f := pullback.fst f π ≫ f) _ U.isOpen hU
-  have : CompactSpace (strictTransformOpen f π U).toScheme :=
-    isCompact_iff_compactSpace.mp hcpt
-  infer_instance
+  refine Scheme.Opens.quasiCompact_ι _ ?_
+  rw [strictTransformOpen_eq_preimage]
+  exact (pullback.fst f π ≫ f).isCompact_preimage hU
 
 section Lift
 
 variable {T : Scheme.{u}} (k : T ⟶ pullback f π)
     (hk : Set.range (k ≫ pullback.fst f π ≫ f) ⊆ (U : Set X))
 
-include hk in
-/-- A morphism to the fibre product whose composite to the base lands in `U` has range
-inside the open locus over `U`. -/
-lemma range_subset_range_strictTransformOpen_ι :
-    Set.range k ⊆ Set.range (strictTransformOpen f π U).ι := by
-  rw [Scheme.Opens.range_ι, strictTransformOpen_eq_preimage]
-  rintro _ ⟨v, rfl⟩
-  simpa [Scheme.Hom.comp_apply] using hk ⟨v, rfl⟩
-
 /-- **The lift into the open locus**: a morphism to the fibre product whose composite to
-the base lands in `U` factors through the open locus over `U`. -/
+the base lands in `U` factors through the open locus over `U`. It is
+`AlgebraicGeometry.Scheme.Hom.liftPreimage` for the projection to the modified scheme,
+the open locus being the preimage of `π ⁻¹ᵁ U` under it. -/
 def strictTransformOpenLift : T ⟶ (strictTransformOpen f π U).toScheme :=
-  IsOpenImmersion.lift (strictTransformOpen f π U).ι k
-    (range_subset_range_strictTransformOpen_ι f π U k hk)
+  (pullback.snd f π).liftPreimage (π ⁻¹ᵁ U) k <| by
+    rw [← Scheme.Opens.range_ι]
+    refine range_subset_range_preimage_ι π U _ ?_
+    rwa [Category.assoc, ← pullback.condition]
 
 @[reassoc (attr := simp)]
 lemma strictTransformOpenLift_ι :
     strictTransformOpenLift f π U k hk ≫ (strictTransformOpen f π U).ι = k :=
-  IsOpenImmersion.lift_fac _ _ _
+  Scheme.Hom.liftPreimage_ι ..
 
 end Lift
 
