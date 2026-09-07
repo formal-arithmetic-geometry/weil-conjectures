@@ -231,15 +231,20 @@ Let \(f:X\to Y\) be a morphism of schemes.  It is \emph{quasi-compact} if
 the preimage of every affine open of \(Y\) is quasi-compact, and
 \emph{quasi-separated} if its diagonal \(X\to X\times_YX\) is
 quasi-compact.  A scheme is \emph{affine} if it is isomorphic to
-\(\operatorname{Spec}A\) for a commutative ring \(A\).  The morphism
-\(f\) is \emph{separated} if its diagonal is a closed immersion, of
-\emph{finite type} if it is quasi-compact and every affine open of \(Y\)
-is covered by finitely many affine opens of \(X\) whose coordinate rings
-are finitely generated over the coordinate ring of the corresponding
-affine open of \(Y\), and of \emph{finite presentation} if the same holds
-with finitely presented algebras.  It is \emph{surjective} if it is
-surjective on underlying topological spaces, an \emph{open immersion} if
-it identifies \(X\) with an open subscheme of \(Y\), and a \emph{closed
+\(\operatorname{Spec}A\) for a commutative ring \(A\), and \(f\) is an
+\emph{affine morphism} if the preimage of every affine open of \(Y\) is
+affine.  The morphism \(f\) is \emph{separated} if its diagonal is a
+closed immersion.  It is \emph{locally of finite type} if for every affine open
+\(\operatorname{Spec}A=U\subseteq X\) mapping into an affine open
+\(\operatorname{Spec}R=V\subseteq Y\) the ring \(A\) is a finitely
+generated \(R\)-algebra, and \emph{locally of finite presentation} if in
+the same situation \(A\) is always a finitely presented \(R\)-algebra.
+It is of \emph{finite type} if it is locally of finite type and
+quasi-compact, and of \emph{finite presentation} if it is locally of
+finite presentation, quasi-compact and quasi-separated.  It is
+\emph{surjective} if it is surjective on underlying topological spaces,
+an \emph{open immersion} if it identifies \(X\) with an open subscheme
+of \(Y\), and a \emph{closed
 immersion} if it is affine and is induced locally by a surjective ring
 homomorphism.  It is an \emph{immersion} if it factors as a closed
 immersion followed by an open immersion (equivalently, as an open
@@ -252,10 +257,10 @@ type, and universally closed.  It is \emph{finite} if it is affine and
 map \(X(K)\to Y(K)\) is injective, and a \emph{universal homeomorphism}
 if every base change of \(f\) is a homeomorphism of underlying spaces.
 It is \emph{flat} if every induced local-ring map is flat, and
-\emph{unramified} if its diagonal is an open immersion.  It is
-\emph{\'etale} if it is locally of finite presentation, flat, and
-unramified, and \emph{weakly etale} if it is flat and its diagonal is
-flat.
+\emph{unramified} if it is locally of finite type and its diagonal is an
+open immersion.  It is \emph{\'etale} if it is locally of finite
+presentation, flat, and unramified, and \emph{weakly etale} if it is
+flat and its diagonal is flat.
 
 For \(y\in|Y|\), the \emph{geometric fiber} over \(y\) is
 \[
@@ -1487,19 +1492,26 @@ Since \(\deg\) is a homomorphism (\Cref{def:pcb-pic0}),
 \begin{lemma}[Unramified is the vanishing of the sheaf of differentials]
 \label{lem:pcb-unramified-omega-zero}
 Let \(f:X\to S\) be a morphism of schemes.  Then \(f\) is
-unramified if and only if \(f\) is locally of finite type and
-\(\Omega_{X/S}=0\).  Moreover the diagonal of an unramified morphism
-is an open immersion, and conversely a morphism locally of finite type
-whose diagonal is an open immersion is unramified; so for morphisms
-locally of finite type this agrees with the convention of
-\Cref{def:pcb-scheme-conventions}.
+\termref{def:pcb-scheme-conventions}{unramified} if and only if \(f\) is
+locally of finite type and \(\Omega_{X/S}=0\).  Here \emph{unramified}
+is the single notion fixed in \Cref{def:pcb-scheme-conventions}, namely
+locally of finite type with diagonal an open immersion; the finiteness
+clause there is not redundant, since the diagonal of
+\(\operatorname{Spec}\mathbf Q\to\operatorname{Spec}\mathbf Z\) is an
+isomorphism while that morphism is not locally of finite type.  So the
+statement is a differential criterion for one notion, not a comparison
+of two.
 \uses{def:pcb-scheme-conventions}
 \end{lemma}
 \begin{proof}
-This is a cited external input: Morphisms of Schemes, Lemma~29.36.2
-(\stacksproject{02G5}) for the first assertion, and Morphisms of
-Schemes, Lemma~29.36.13 (\stacksproject{02GE}) for the comparison with
-the diagonal.  It is not decomposed here.
+This is a cited external input.  The convention of
+\Cref{def:pcb-scheme-conventions} is Morphisms of Schemes,
+Lemma~29.36.13(2) (\stacksproject{02GE}): a morphism locally of finite
+type whose diagonal is an open immersion is unramified, and by
+part~(1) of the same lemma the diagonal of an unramified morphism is an
+open immersion, so the two agree.  The differential criterion is
+Morphisms of Schemes, Lemma~29.36.2 (\stacksproject{02G5}).  It is not
+decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -3590,8 +3602,8 @@ in file~02: \emph{quasi-compact}, \emph{quasi-separated},
 type}, \emph{locally of finite presentation} and \emph{of finite
 presentation}, \emph{surjective}, \emph{open immersion},
 \emph{closed immersion}, \emph{immersion}, \emph{universally closed},
-\emph{proper}, \emph{finite}, \emph{integral}, \emph{flat},
-\emph{unramified}, \emph{etale}, \emph{geometric fibre} and
+\emph{proper}, \emph{affine morphism}, \emph{finite}, \emph{integral},
+\emph{flat}, \emph{unramified}, \emph{etale}, \emph{geometric fibre} and
 \emph{geometric point} (see
 Definition~\ref{def:pcb-scheme-conventions}).
 Two further notions are fixed here: \emph{smooth}
@@ -4754,7 +4766,7 @@ $k$ and of dimension $\le1$, and smooth over $k$.
 \uses{def:pc-curve,def:pc-smooth-projective-curve,def:pcb-curves,def:pcb-scheme-conventions,lem:pcb-base-change-curve,prop:pc-XK-integral}
 By\ \Cref{def:pc-smooth-projective-curve} $X$ is a
 \termref{def:pc-curve}{curve} over $k$, hence a
-\termref{def:pcb-scheme-conventions}{variety}: integral, with
+\termref{def:pc-curve}{variety}: integral, with
 $X\to\Spec(k)$ separated and of finite type (\Cref{def:pc-curve}); in
 particular $X$ is nonempty, separated, of finite type and, being a
 curve, of dimension $1$.  Its structure morphism is smooth by hypothesis,
@@ -4870,8 +4882,8 @@ $R[x_1,\dots,x_n]$ itself.
 
 % Decomposed.
 \begin{lemma}[Smoothness versus flatness]\label{lem:pc-smooth-characterization}
-Let $f:X\to S$ be a morphism of
-\termref{def:pc-morphism-conventions}{locally finite presentation}.
+Let $f:X\to S$ be
+\termref{def:pc-morphism-conventions}{locally of finite presentation}.
 Then $f$ is \termref{def:pc-smooth-morphism}{smooth} if and only if $f$
 is flat and every fibre $X_s$ is smooth over $\kappa(s)$.
 \uses{def:pc-smooth-morphism,def:pc-morphism-conventions,def:pc-base-change}
