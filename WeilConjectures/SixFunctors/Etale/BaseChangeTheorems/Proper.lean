@@ -6,8 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
-public import WeilConjectures.SixFunctors.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 
 /-!
 
@@ -31,7 +31,7 @@ base-change morphism
 
 `BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
 
-of `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs` is an isomorphism. No
+of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` is an isomorphism. No
 hypothesis is imposed on `g`.
 
 Torsion refers to the underlying abelian groups, so the statement contains the two
@@ -78,8 +78,8 @@ open Scheme
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /- The K-flat resolution package on the coefficient category `ModuleCat.{u + 1} Λ`, as
-in `WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs`. Most of it is covered
-by mathlib and by instance search:
+in `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs`. Most of it is
+covered by mathlib and by instance search:
 
 - `ModuleCat.{u + 1} Λ` is Grothendieck abelian and symmetric monoidal closed over the
   commutative ring `Λ`, hence in particular braided and preadditive; mathlib insists
@@ -87,11 +87,11 @@ by mathlib and by instance search:
   `Type (u + 1)`;
 - it has all colimits of size `u + 1`, hence — being `Category.{u + 1}` — of size `u` as
   well, by `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize`;
-- since the category is monoidal *closed*, tensoring is a left adjoint in each variable
-  and therefore preserves all colimits; this gives the `ℤ`-indexed preservation and the
-  compatibilities `GradedObject.HasTensor₄ObjExt`,
-  `GradedObject.HasGoodTensor₁₂Tensor` and `GradedObject.HasGoodTensorTensor₂₃` of the
-  tensor product of graded objects with coproducts.
+- being symmetric monoidal *closed* is exactly what
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits` needs to
+  make the étale sheaf categories monoidal closed by Day's reflection theorem, hence to
+  make tensoring by a fixed sheaf preserve colimits; no tensor-colimit hypothesis on the
+  coefficient category itself is required.
 
 What remains is the functorial flat resolutions, recorded here with `sorry`. -/
 instance : Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} Λ) :=
