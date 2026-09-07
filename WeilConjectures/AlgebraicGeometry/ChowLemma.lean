@@ -5,10 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Chow's lemma
@@ -23,6 +23,12 @@ isomorphism over a dense open subset of `X`, and an immersion
 `AlgebraicGeometry.ChowModification.toProjectiveSpace f : ChowModification f ⟶ ℙ(index f; S)`
 over `S`.
 
+When `f` is moreover *proper*, both morphisms out of the modification are as good as one could
+hope for: the immersion into `ℙ(index f; S)` is a *closed* immersion, and the modification
+itself factors as a closed immersion `ChowModification f ⟶ ℙ(index f; X)` followed by the
+projection `ℙ(index f; X) ⟶ X`. This is the form of Chow's lemma used in the proof of proper
+base change.
+
 ## Main definitions
 
 - `AlgebraicGeometry.ChowModification` — the Chow modification `X'` of `f : X ⟶ S`.
@@ -30,6 +36,9 @@ over `S`.
   of the projective space the Chow modification embeds into.
 - `AlgebraicGeometry.ChowModification.modificationMap` — the modification `X' ⟶ X`.
 - `AlgebraicGeometry.ChowModification.toProjectiveSpace` — the immersion `X' ⟶ ℙ(index f; S)`.
+- `AlgebraicGeometry.ChowModification.toProjectiveSpaceOver` — the morphism
+  `X' ⟶ ℙ(index f; X)` into projective space over `X` induced by `X' ⟶ X` and
+  `X' ⟶ ℙ(index f; S)`.
 
 ## Main statements
 
@@ -41,12 +50,17 @@ over `S`.
   space is an immersion over `S`.
 - `AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict` — the modification is an
   isomorphism over a dense open subset of `X`.
+- `AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace` — for proper `f`,
+  the morphism to `ℙ(index f; S)` is a closed immersion.
+- `AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpaceOver` — for proper
+  `f`, the morphism to `ℙ(index f; X)` is a closed immersion.
 
 ## Implementation notes
 
-* All of the above are `sorry` by design: this file only *states* Chow's lemma, the
-  construction of `ChowModification f` and the proofs of its properties are left to a later
-  file. See the `TODO` below for the intended construction.
+* The construction of `ChowModification f` and the proofs of its basic properties are `sorry`
+  by design: this file only *states* Chow's lemma, and the construction is left to a later
+  file. See the `TODO` below for the intended route. The closed-immersion statements for
+  proper `f` are proved, but of course inherit those `sorry`s.
 * Rather than packaging the modification as a structure and asserting that it is nonempty,
   the modification is a definition and its properties are separate statements. A consumer
   therefore obtains properness of the modification and the immersion property by typeclass
@@ -71,18 +85,19 @@ over `S`.
   followed by the Segre embedding is an immersion into a single `ℙ(n; S)`. The immersions of
   the `Uᵢ` need the standard affine charts of `ℙ(n; S)`, which are a `TODO` of
   `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`.
-* The closed-immersion form of Chow's lemma, [Stacks, Tag 0202]: for proper `f`, the induced
-  morphism `ChowModification f ⟶ X ×_S ℙ(index f; S)` is an immersion by `IsImmersion.of_comp`,
-  and a proper immersion is a closed immersion. This is what
-  `lemma:weil-pbc-chow-factorization` of the proper-base-change blueprint asks for.
 
 ## References
 
 * [Stacks, Tag 0200](https://stacks.math.columbia.edu/tag/0200)
+* [Stacks, Tag 0202](https://stacks.math.columbia.edu/tag/0202)
 
 ## Blueprint
 
 The declarations of this file implement `thm:chow-lemma` of the proper-base-change blueprint.
+`ChowModification.isClosedImmersion_toProjectiveSpace` implements
+`lemma:weil-pbc-chow-factorization` and `ChowModification.toProjectiveSpaceOver` together with
+`ChowModification.isClosedImmersion_toProjectiveSpaceOver` implements
+`lemma:weil-pbc-chow-embedding-over-x`.
 -/
 
 @[expose] public section
@@ -171,6 +186,75 @@ open subset of `X`.
 theorem exists_dense_isIso_restrict :
     ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (modificationMap f ∣_ U) :=
   sorry
+
+/-- The morphism `ChowModification f ⟶ ℙ(index f; X)` induced by the modification
+`modificationMap f : ChowModification f ⟶ X` and the immersion
+`toProjectiveSpace f : ChowModification f ⟶ ℙ(index f; S)`, using that `ℙ(index f; X)` is the
+fibre product `X ×_S ℙ(index f; S)` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`). -/
+def toProjectiveSpaceOver : ChowModification f ⟶ ℙ(index f; X) :=
+  ProjectiveSpace.liftBaseChange (modificationMap f) (toProjectiveSpace f)
+    (toProjectiveSpace_over f).symm
+
+/-- `toProjectiveSpaceOver f` is a morphism over `X`:
+
+```
+                    toProjectiveSpaceOver
+  ChowModification f --------------------> ℙ(index f; X)
+          |                                      |
+          | modificationMap                      | ↘
+          ↓                                      ↓
+          X ==================================== X
+```
+
+commutes. -/
+@[reassoc (attr := simp)]
+lemma toProjectiveSpaceOver_over :
+    toProjectiveSpaceOver f ≫ ℙ(index f; X) ↘ X = modificationMap f :=
+  ProjectiveSpace.liftBaseChange_over _ _ _
+
+/-- `toProjectiveSpaceOver f` recovers `toProjectiveSpace f` after projecting
+`ℙ(index f; X) ⟶ ℙ(index f; S)`. -/
+@[reassoc (attr := simp)]
+lemma toProjectiveSpaceOver_map :
+    toProjectiveSpaceOver f ≫ ProjectiveSpace.map (index f) f = toProjectiveSpace f :=
+  ProjectiveSpace.liftBaseChange_map _ _ _
+
+section IsProper
+
+variable {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsProper f]
+
+/-- For a **proper** `f`, the immersion of the Chow modification into projective space is
+proper: the composite `ChowModification f ⟶ ℙ(index f; S) ⟶ S` is `modificationMap f ≫ f`,
+which is proper, and `ℙ(index f; S) ↘ S` is separated. -/
+instance isProper_toProjectiveSpace : IsProper (toProjectiveSpace f) :=
+  have : IsProper (toProjectiveSpace f ≫ ℙ(index f; S) ↘ S) := by
+    rw [toProjectiveSpace_over]
+    infer_instance
+  .of_comp _ (ℙ(index f; S) ↘ S)
+
+/-- **The closed-immersion form of Chow's lemma**: for a proper `f : X ⟶ S`, the immersion of
+the Chow modification into `ℙ(index f; S)` is a *closed* immersion, being a proper immersion.
+Together with `AlgebraicGeometry.ChowModification.toProjectiveSpace_over` this says that
+`ChowModification f ⟶ S` factors as a closed immersion into a projective space over `S`
+followed by the structure morphism of that projective space.
+(blueprint: `lemma:weil-pbc-chow-factorization`) -/
+@[stacks 0202]
+instance isClosedImmersion_toProjectiveSpace : IsClosedImmersion (toProjectiveSpace f) :=
+  .of_isImmersion_of_universallyClosed _
+
+/-- **The projective embedding of a Chow modification over `X`**: for a proper `f : X ⟶ S`,
+the morphism `(modificationMap f, toProjectiveSpace f) : ChowModification f ⟶ ℙ(index f; X)`
+into `ℙ(index f; X) = X ×_S ℙ(index f; S)` is a closed immersion. Together with
+`AlgebraicGeometry.ChowModification.toProjectiveSpaceOver_over` this says that
+`modificationMap f : ChowModification f ⟶ X` factors as a closed immersion into a projective
+space over `X` followed by the structure morphism of that projective space.
+(blueprint: `lemma:weil-pbc-chow-embedding-over-x`) -/
+@[stacks 0202]
+instance isClosedImmersion_toProjectiveSpaceOver :
+    IsClosedImmersion (toProjectiveSpaceOver f) :=
+  ProjectiveSpace.isClosedImmersion_liftBaseChange _ _ _
+
+end IsProper
 
 end ChowModification
 
