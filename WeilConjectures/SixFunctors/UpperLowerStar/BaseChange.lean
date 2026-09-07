@@ -100,4 +100,82 @@ lemma lowerStarComp_id_left {W U : Scheme.{u}} (g : W ⟶ U) (e : g = 𝟙 W ≫
 
 end Coherence
 
+section UpperStarCoherence
+
+/-- The pullback along the identity is the identity functor. -/
+noncomputable def upperStarId (U : Scheme.{u}) :
+    upperStar A P Q (𝟙 U) ≅ 𝟭 (Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) :=
+  ((conjugateIsoEquiv (upperStarLowerStarAdjunction A P Q hQP (𝟙 U)) Adjunction.id).symm
+    (lowerStarId A P Q hQP U)).symm
+
+variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h : T ⟶ R) (hh : h = h₁ ≫ h₂)
+
+lemma conjugateEquiv_upperStarComp_hom :
+    conjugateEquiv ((upperStarLowerStarAdjunction A P Q hQP h₂).comp
+          (upperStarLowerStarAdjunction A P Q hQP h₁))
+        (upperStarLowerStarAdjunction A P Q hQP h)
+        (upperStarComp A P Q hQP h₁ h₂ h hh).hom =
+      (lowerStarComp A P Q hQP h₁ h₂ h hh).hom := by
+  simp [upperStarComp]
+
+lemma conjugateEquiv_upperStarId_inv (U : Scheme.{u}) :
+    conjugateEquiv (upperStarLowerStarAdjunction A P Q hQP (𝟙 U)) Adjunction.id
+        (upperStarId A P Q hQP U).inv =
+      (lowerStarId A P Q hQP U).hom := by
+  simp [upperStarId]
+
+variable {V : Scheme.{u}} (h₃ : R ⟶ V)
+
+lemma upperStarComp_assoc (h₁₂ : T ⟶ R) (e₁₂ : h₁₂ = h₁ ≫ h₂) (h₂₃ : S ⟶ V)
+    (e₂₃ : h₂₃ = h₂ ≫ h₃) (hh' : T ⟶ V) (e : hh' = h₁₂ ≫ h₃) (e' : hh' = h₁ ≫ h₂₃) :
+    (upperStarComp A P Q hQP h₁₂ h₃ hh' e).hom ≫
+        Functor.whiskerLeft (upperStar A P Q h₃) (upperStarComp A P Q hQP h₁ h₂ h₁₂ e₁₂).hom =
+      (upperStarComp A P Q hQP h₁ h₂₃ hh' e').hom ≫
+        Functor.whiskerRight (upperStarComp A P Q hQP h₂ h₃ h₂₃ e₂₃).hom (upperStar A P Q h₁) ≫
+          (Functor.associator (upperStar A P Q h₃) (upperStar A P Q h₂)
+            (upperStar A P Q h₁)).hom := by
+  apply (conjugateEquiv
+    ((upperStarLowerStarAdjunction A P Q hQP h₃).comp
+      ((upperStarLowerStarAdjunction A P Q hQP h₂).comp
+        (upperStarLowerStarAdjunction A P Q hQP h₁)))
+    (upperStarLowerStarAdjunction A P Q hQP hh')).injective
+  rw [← conjugateEquiv_comp _ ((upperStarLowerStarAdjunction A P Q hQP h₃).comp
+        (upperStarLowerStarAdjunction A P Q hQP h₁₂)) _,
+      ← conjugateEquiv_comp _ ((upperStarLowerStarAdjunction A P Q hQP h₂₃).comp
+        (upperStarLowerStarAdjunction A P Q hQP h₁)) _,
+      ← conjugateEquiv_comp _ (((upperStarLowerStarAdjunction A P Q hQP h₃).comp
+        (upperStarLowerStarAdjunction A P Q hQP h₂)).comp
+        (upperStarLowerStarAdjunction A P Q hQP h₁)) _,
+      conjugateEquiv_whiskerLeft, conjugateEquiv_whiskerRight, conjugateEquiv_associator_hom,
+      conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarComp_hom,
+      conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarComp_hom]
+  simpa using lowerStarComp_assoc A P Q hQP h₁ h₂ h₃ h₁₂ e₁₂ h₂₃ e₂₃ hh' e e'
+
+lemma upperStarComp_id_right {W U : Scheme.{u}} (g : W ⟶ U) (e : g = g ≫ 𝟙 U) :
+    (upperStarComp A P Q hQP g (𝟙 U) g e).hom =
+      (upperStar A P Q g).leftUnitor.inv ≫
+        Functor.whiskerRight (upperStarId A P Q hQP U).inv (upperStar A P Q g) := by
+  apply (conjugateEquiv ((upperStarLowerStarAdjunction A P Q hQP (𝟙 U)).comp
+    (upperStarLowerStarAdjunction A P Q hQP g))
+    (upperStarLowerStarAdjunction A P Q hQP g)).injective
+  rw [← conjugateEquiv_comp _ (Adjunction.id.comp (upperStarLowerStarAdjunction A P Q hQP g)) _,
+    conjugateEquiv_whiskerRight, conjugateEquiv_leftUnitor_inv,
+    conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarId_inv]
+  exact lowerStarComp_id_right A P Q hQP g e
+
+lemma upperStarComp_id_left {W U : Scheme.{u}} (g : W ⟶ U) (e : g = 𝟙 W ≫ g) :
+    (upperStarComp A P Q hQP (𝟙 W) g g e).hom =
+      (upperStar A P Q g).rightUnitor.inv ≫
+        Functor.whiskerLeft (upperStar A P Q g) (upperStarId A P Q hQP W).inv := by
+  apply (conjugateEquiv ((upperStarLowerStarAdjunction A P Q hQP g).comp
+    (upperStarLowerStarAdjunction A P Q hQP (𝟙 W)))
+    (upperStarLowerStarAdjunction A P Q hQP g)).injective
+  rw [← conjugateEquiv_comp _ ((upperStarLowerStarAdjunction A P Q hQP g).comp Adjunction.id) _,
+    conjugateEquiv_whiskerLeft, conjugateEquiv_rightUnitor_inv,
+    conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarId_inv]
+  exact lowerStarComp_id_left A P Q hQP g e
+
+
+end UpperStarCoherence
+
 end CategoryTheory.GrothendieckTopology
