@@ -161,6 +161,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Funct
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
@@ -173,6 +174,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
@@ -207,6 +209,17 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyF
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
