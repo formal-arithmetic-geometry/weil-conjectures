@@ -1,5 +1,7 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
+public import WeilConjectures.AlgebraicGeometry.ChowLemma
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.Defs
@@ -158,7 +160,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Funct
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleClopen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
@@ -177,9 +178,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.IsIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
@@ -187,23 +188,23 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.PointCount
-public import WeilConjectures.SixFunctors.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.LowerShriek.Comparison
-public import WeilConjectures.SixFunctors.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.LowerShriek.Etale
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
-public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
-public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conservative
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification

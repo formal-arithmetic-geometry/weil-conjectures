@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Functor.Category
 
 This file records the observation that whether a natural transformation is invertible at an
 object only depends on the isomorphism class of that object. It is the form in which
-`AlgebraicGeometry.Etale.isIso_of_isIso_openImmersionRestriction` transports invertibility
+`AlgebraicGeometry.Etale.isIso_app_of_isIso_openImmersionRestriction` transports invertibility
 of a morphism of sheaves from an étale `U`-scheme to an isomorphic étale `X`-scheme.
 
 ## Main results
