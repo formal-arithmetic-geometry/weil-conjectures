@@ -121,7 +121,7 @@ docstrings of the files that state them.
 
 The additivity and exactness of `g^*` are `Etale.additive_upperStar`,
 `Etale.preservesFiniteLimits_upperStar` and `Etale.preservesHomology_upperStar` of
-`WeilConjectures.SixFunctors.UpperLowerStar.Etale`; the left exactness there rests on the
+`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`; the left exactness there rests on the
 sorried `HasSheafify` instance for the small étale site of `Z` and on left exactness of
 the left Kan extension along the opposite of base change, both global instances of the
 folder `WeilConjectures.CategoryTheory.GrothendieckAbelian` (for an étale `g` the latter
