@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 
 /-!
 
-# The tensor product of étale and pro-étale sheaves preserves colimits (pro-étale sorried)
+# The tensor product of étale and pro-étale sheaves preserves colimits
 
 The K-flat left derivability structure requires the tensor product of the sheaf category
 to interact well with the coproducts defining the tensor product of complexes and with
@@ -20,13 +20,14 @@ to interact well with the coproducts defining the tensor product of complexes an
 `GradedObject.HasGoodTensor₁₂Tensor`, `GradedObject.HasGoodTensorTensor₂₃` and the
 preservation of `ℤ`-indexed colimits in each variable — unfold to the statement that
 `tensorLeft X` or `tensorRight X` preserves a colimit of size `0`. This file proves the
-single instance they all follow from, for the monoidal structure of
+single instance they all follow from, for the monoidal structures of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`.
 
 The proof is Day's reflection theorem
-(`CategoryTheory.Monoidal.Reflective.monoidalClosed`), which makes
-`Sheaf Y.smallEtaleTopology A` monoidal closed and hence `tensorLeft X` a left adjoint.
-Its inputs are all available for the small étale site:
+(`CategoryTheory.Monoidal.Reflective.monoidalClosed`), which makes the sheaf category
+monoidal closed and hence `tensorLeft X` a left adjoint. Its inputs are all available for
+the small étale site of `Y` — and, verbatim, for the pro-étale site `Y.ProEt`, since the
+argument uses nothing about the site beyond the sheafification adjunction:
 
 * the presheaf category `Y.Etaleᵒᵖ ⥤ A` is monoidal closed for the objectwise monoidal
   structure, by `CategoryTheory.MonoidalClosed.FunctorCategory.monoidalClosed`, whose
@@ -38,7 +39,7 @@ Its inputs are all available for the small étale site:
   ambient category and is the only reason `A` is assumed symmetric rather than merely
   braided here — this is the sole extra hypothesis this file adds to those of `Defs`;
 * `presheafToSheaf` is monoidal and `sheafToPresheaf` is fully faithful, both instances
-  of `CategoryTheory.Sheaf.monoidalCategory`'s file for the monoidal structure of `Defs`.
+  of `CategoryTheory.Sheaf.monoidalCategory`'s file for the monoidal structures of `Defs`.
 
 Note that the resulting `Etale.sheafMonoidalClosed` is over the monoidal structure of
 `Defs` (the sheafification of the objectwise tensor product), *not* over a cartesian one:
@@ -50,14 +51,12 @@ cartesian closed.
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.sheafMonoidalClosed`: the category of `A`-valued étale sheaves
-  is monoidal closed.
-- `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`: tensoring on the
-  left with a fixed étale sheaf preserves colimits of size `0`.
-
-- `AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`: tensoring on the
-  left with a fixed pro-étale sheaf preserves colimits of size `0`. The intended proof
-  above uses nothing about the site, so it applies verbatim.
+- `AlgebraicGeometry.Etale.sheafMonoidalClosed` and
+  `AlgebraicGeometry.ProEtale.sheafMonoidalClosed`: the categories of `A`-valued étale and
+  pro-étale sheaves are monoidal closed.
+- `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf` and
+  `AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`: tensoring on the
+  left with a fixed étale, respectively pro-étale, sheaf preserves colimits of size `0`.
 
 -/
 
@@ -107,12 +106,23 @@ instance Etale.preservesColimitsOfSize_tensorRight_sheaf (X : Sheaf Y.smallEtale
     PreservesColimitsOfSize.{0, 0} (tensorRight X) where
   preservesColimitsOfShape := ⟨inferInstance⟩
 
+/-- The category of `A`-valued pro-étale sheaves is monoidal closed, for the monoidal
+structure `ProEtale.sheafMonoidalCategory` of the sibling file `Defs`.
+
+This is `Etale.sheafMonoidalClosed` for the pro-étale site: Day's reflection theorem uses
+nothing about the site beyond the sheafification adjunction, so the argument applies
+verbatim. -/
+noncomputable instance ProEtale.sheafMonoidalClosed :
+    MonoidalClosed (Sheaf (Scheme.ProEt.topology Y) A) :=
+  Monoidal.Reflective.monoidalClosed (sheafificationAdjunction (Scheme.ProEt.topology Y) A)
+
 /-- Tensoring on the left with a fixed `A`-valued pro-étale sheaf preserves colimits of
-size `0`, exactly as in the étale case; see the module docstring for the intended proof. -/
+size `0`, exactly as in the étale case: it is left adjoint to the internal hom of
+`ProEtale.sheafMonoidalClosed`. -/
 instance ProEtale.preservesColimitsOfSize_tensorLeft_sheaf
     (X : Sheaf (Scheme.ProEt.topology Y) A) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
-  sorry
+  inferInstance
 
 /-- Tensoring on the right with a fixed `A`-valued pro-étale sheaf preserves colimits of
 size `0`, by `ProEtale.preservesColimitsOfSize_tensorLeft_sheaf` and the braiding. -/

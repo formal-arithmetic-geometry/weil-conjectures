@@ -121,12 +121,12 @@ supplied for the sheaf categories by the instances of the folder
 compatibility with colimits provided by its `Monoidal` subfolder, and its preadditivity
 by `CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
 
-As in the étale case two of those instances are still `sorry`ed, so everything below
-depends on them: `AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`
-(tensoring a pro-étale sheaf preserves colimits) and
-`AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf` (functorial flat
-resolutions of pro-étale sheaves). Both are discussed in the module docstrings of the
-files that state them.
+As in the étale case one of those instances is still `sorry`ed, so everything below
+depends on it: `AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf` (functorial
+flat resolutions of pro-étale sheaves), discussed in the module docstring of the file that
+states it. The tensor-colimit input is no longer among them: it is now proved, by Day's
+reflection theorem, in
+`AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`.
 
 The additivity and exactness of `g^*` are `ProEtale.additive_upperStar`,
 `ProEtale.preservesFiniteLimits_upperStar` and `ProEtale.preservesHomology_upperStar` of
@@ -144,14 +144,17 @@ open MonoidalCategory ProEtale
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /- The preadditive monoidal structure on the coefficient category. It is assumed closed
-and braided (as is the intended application `A = ModuleCat.{u + 1} Λ` for a commutative
-ring `Λ`, which is even symmetric monoidal closed): that is what makes the class of
-sheafification-inverting morphisms of presheaves monoidal, hence what lets the monoidal
-structure descend to the pro-étale sheaf categories, see
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. Closedness moreover
-makes tensoring by a fixed object preserve colimits, which is what the tensor product of
-complexes needs; no further tensor-colimit hypothesis on `A` is required. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+and *symmetric* (as is the intended application `A = ModuleCat.{u + 1} Λ` for a
+commutative ring `Λ`): that is what makes the class of sheafification-inverting
+morphisms of presheaves monoidal, hence what lets the monoidal structure descend to the
+pro-étale sheaf categories, see
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. Closedness and the
+symmetry moreover make the pro-étale sheaf categories monoidal closed by Day's reflection
+theorem, hence make tensoring by a fixed sheaf preserve colimits, which is what the
+tensor product of complexes needs, see
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits`; no further
+tensor-colimit hypothesis on `A` is required. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
 
 /- Functorial flat resolutions on the coefficient category; they induce functorial flat
 resolutions of pro-étale sheaves via `ProEtale.hasFunctorialFlatResolution_sheaf`. -/
@@ -287,10 +290,10 @@ open MonoidalCategory ProEtale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/- The closed braided preadditive monoidal structure on the coefficient category, as in
+/- The closed symmetric preadditive monoidal structure on the coefficient category, as in
 the section `DerivedUpperStar`; it is what the monoidal transport instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
 
 /- Functorial flat resolutions on the coefficient category, as in the section
 `DerivedUpperStar`. -/
