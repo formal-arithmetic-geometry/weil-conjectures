@@ -797,6 +797,51 @@ point to \(1\).  Put
 % \(\Pic(C)\), which is how that clause always read.  No citation is added --
 % \Cref{thm:pc-pic-split} is named in this comment only, so no \uses edge moves and
 % no forward edge out of the \(pcb\)-region is created.
+% Ruling (which degree the \(\Pic^d\) clause uses).  The clause that closed this
+% block -- ``\(\Pic^d_{C/k}\) is the \dots\ subfunctor \dots\ of fibrewise degree
+% \(d\) \dots; for \(k\) algebraically closed this recovers \(\Pic(C)\) and its
+% degree \Cref{def:pcb-pic0}'' -- names a degree that the hypothesis above does not
+% define.  This block fixes ``dimension at most one'', the \Cref{def:pcb-curves}
+% list; \Cref{def:pcb-pic0} defines \(\deg\) only for a proper smooth curve every
+% irreducible component of which has dimension one, over an algebraically closed
+% field, and dimension at most one does not give that.  Witnesses, both already
+% ruled on this branch: \(C=\Spec k\) over algebraically closed \(k\) is nonempty,
+% separated, of finite type, proper, smooth and of dimension \(0\le1\), so it
+% satisfies every word of the hypothesis above, while its local ring at the closed
+% point is \(k\) and not a discrete valuation ring, so \Cref{def:pcb-pic0} gives it
+% no degree and the clause is there not false but ill-formed; and
+% \(C=\mathbf P^1\sqcup\Spec k\) fails the same way on its zero-dimensional
+% component while \(\dim C=1\), which is why ``of dimension one'' alone is not the
+% repair and the clause now stated is the per-component one carried by
+% \Cref{lem:pcb-positive-degree-ample}, \Cref{lem:pcb-negative-degree-no-sections}
+% and \Cref{lem:pcb-degree-2g1-very-ample}.  The hypothesis is added at the point of
+% use rather than at the head, because the presheaf and \(\Pic_{C/k}\) themselves
+% need none of it and the head is what the chapter actually consumes: the two citers
+% of this block, \Cref{def:pc-picard-functor} and
+% \Cref{lem:pc-picard-functor-agrees-sc}, name \(\Pic_{C/k}\) and not
+% \(\Pic^d_{C/k}\), so no consumer inherited the defect and none loses anything by
+% the repair.  It is stated on the geometric fibres, which is where the degree is
+% taken, so that no separate claim about how dimension behaves under extension of
+% the base field is needed.  No \uses edge moves: \Cref{def:pcb-pic0} was cited and
+% stays cited.  Why every earlier sweep passed over this: the \(\deg\) macro occurs
+% \(0\) times in this block, against \(4\), \(1\) and \(1\) in the three sibling
+% nodes that do carry the dimension-one clause, the block reaching the symbol
+% through the English word ``degree'' and through \(\Pic^d\); and the block is a
+% definition, so it has no proof body for the \uses-per-proof rule to look at.
+% Ruling (``open and closed'').  The same clause said that \(\Pic^d_{C/k}\) ``is the
+% open and closed subfunctor'' of \(\Pic_{C/k}\).  Openness and closedness of the
+% fibrewise-degree locus is a theorem about the family, not part of naming the
+% subfunctor, and it stood here inside a definition with no \Cref and no
+% \stacksproject tag; no node of this chapter states or proves it, and the
+% hypotheses under which the Stacks Project proves the corresponding statement
+% (Picard Schemes of Curves, where \(C\) is smooth and geometrically connected) are
+% not the ones fixed above, which admit disconnected \(C\), on which a single
+% fibrewise degree \(d\) does not pin one multidegree.  The clause is therefore
+% stated as the construction it is -- \(\Pic^d_{C/k}\) is the subfunctor of sections
+% of fibrewise degree \(d\) -- and no property of the inclusion is claimed.  It is
+% dropped rather than cited because there is no node here to cite and nothing in the
+% chapter uses it: \(\Pic^d_{C/k}\) occurs nowhere else.  A later chapter that comes
+% to need the open-and-closed statement should state and prove it as its own node.
 \begin{definition}[The Picard functor of a proper curve]
 \label{def:pcb-picard-functor}
 Let \(k\) be a field and let \(C\) be a proper smooth curve over
@@ -813,13 +858,18 @@ presheaf
 and the \emph{Picard functor}
 \(\operatorname{Pic}_{C/k}:(k\text{-algebras})\longrightarrow\mathbf{Ab}\)
 is the fppf sheafification of that presheaf; the two are different
-functors, the presheaf being in general no fppf sheaf.  For
-\(d\in\mathbf Z\), \(\operatorname{Pic}^d_{C/k}\) is the open and
-closed subfunctor of \(\operatorname{Pic}_{C/k}\) of invertible
-modules of fibrewise degree \(d\) (degree \(d\) on every geometric
-fibre; for \(k\) algebraically closed this recovers
-\(\operatorname{Pic}(C)\) and its degree
-\Cref{def:pcb-pic0}).
+functors, the presheaf being in general no fppf sheaf.  Suppose
+moreover that every irreducible component of every geometric fibre of
+\(C\) over \(k\) has dimension one -- the ``dimension at most one''
+fixed above does not supply this, and it is what \Cref{def:pcb-pic0}
+requires of a curve over an algebraically closed field before it
+defines a degree there.  Then, for \(d\in\mathbf Z\),
+\(\operatorname{Pic}^d_{C/k}\) is the subfunctor of
+\(\operatorname{Pic}_{C/k}\) of invertible modules of fibrewise
+degree \(d\): of degree \(d\), in the sense of \Cref{def:pcb-pic0},
+on every geometric fibre.  For \(k\) algebraically closed the
+geometric fibre is \(C\) itself, and this recovers
+\(\operatorname{Pic}(C)\) and its degree.
 \uses{def:pcb-curves,def:pc-invertible-module,def:pcb-pic0}
 \end{definition}
 
