@@ -480,11 +480,13 @@ Let \(C\) be a \termref{def:pcb-curves}{curve}.  The
 isomorphism classes of
 \termref{def:pcb-invertible-module}{invertible \(\mathcal
 O_C\)-modules}, with the group law induced by tensor product (the
-unit is \(\mathcal O_C\), and the inverse of an invertible module
-\(\mathcal L\) is its dual \(\mathcal L^{\vee}\), which is
-invertible; the group axioms are verified in the basic facts
-below).  (\emph{Stacks Project, Definition 18.32.6, Tag
-\texttt{040C}}.)
+unit is \(\mathcal O_C\), the invertible modules are closed under
+tensor products, so that the law is defined on isomorphism classes,
+and the inverse of an invertible module \(\mathcal L\) is its dual
+\(\mathcal L^{\vee}\), which is invertible; closure under tensor
+products and duals, and the group axioms, are verified in the basic
+facts below, \Cref{lem:pcb-pic-group}).  (\emph{Stacks Project,
+Definition 18.32.6, Tag \texttt{040C}}.)
 \uses{def:pcb-curves,def:pcb-invertible-module}
 \lean{AlgebraicGeometry.Scheme.Pic}
 \leanok
@@ -512,6 +514,14 @@ tensor product of invertible modules, which needs a monoidal structure on
 % \(\mathcal O_{C,P}/(t_P^{n_P})\), a discrete valuation ring modulo a power of
 % its maximal ideal, which is reduced precisely when \(n_P\leq1\).  Nothing to
 % repair here.
+% Ruling: \(\operatorname{Cl}(C)\) was written as a quotient of
+% \(\operatorname{Div}(C)\) by a SET, and nothing in the block said that set is
+% a subgroup, which is what makes the quotient a group and what
+% \Cref{lem:pcb-divisor-class-curve} needs in order to conclude "isomorphism of
+% abelian groups".  Ruled a text repair rather than a comment-only ruling: the
+% step is one line from the normalized valuation the same sentence already
+% names, so it is stated where the quotient is formed, in the statement and not
+% in a proof.  No node is created and no citation is needed.
 \begin{definition}[Divisors, principal divisors, class group]
 \label{def:pcb-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  A
@@ -529,7 +539,12 @@ where \(v_P\) is the normalized valuation of the local ring
 has dimension one -- the local theory of such curves, which
 establishes this and the Cartier-divisor property of closed points, is
 developed in the basic facts below); such divisors are
-\emph{principal}.
+\emph{principal}.  Since each \(v_P\) is a valuation, one has
+\(\operatorname{div}(fg)=\operatorname{div}(f)+\operatorname{div}(g)\),
+so \(\operatorname{div}:k(C)^*\to\operatorname{Div}(C)\) is a
+homomorphism of abelian groups and the principal divisors form a
+subgroup of \(\operatorname{Div}(C)\); the quotient below is
+therefore a group.
 The \emph{divisor class group} is
 \[
  \operatorname{Cl}(C):=\operatorname{Div}(C)/\{\operatorname{div}(f):f\in k(C)^*\}.
@@ -831,6 +846,17 @@ fibre; for \(k\) algebraically closed this recovers
 % group structure on each set \(G(R)\) with no naturality is not enough to
 % recover \(m\), \(i\) and \(e\).  The Yoneda argument needs the group
 % structures to be natural in \(R\); the two words are now in the text.
+% Ruling: the kernel clause asserted that \(\ker f\) is CLOSED, which needs
+% \(e_H\) to be a closed immersion, i.e.\ \(H\) separated over \(k\) -- and
+% this definition requires no separatedness of a group scheme.  The assertion is
+% true, but by a theorem, and it sat unsourced inside a definition, where there
+% is no proof body in which the shortfall could be disclosed.  Ruled: name the
+% tag rather than weaken the notion, since \stacksproject{047L} gives
+% separatedness for every group scheme over a field, so no hypothesis has to be
+% added and the nodes citing this one -- \Cref{thm:pc-picard-representable},
+% \Cref{thm:pc-criterion} and \Cref{rem:pc-sc-group} -- are unaffected.  A
+% comment-only ruling was not enough here: the word "closed" is in the rendered
+% text.  No \uses edge is added; this definition carries none.
 \begin{definition}[Group schemes over a field]
 \label{def:pcb-group-scheme}
 Let \(k\) be a field.  A \(k\)-\emph{group scheme} is a \(k\)-scheme
@@ -843,10 +869,16 @@ commute; equivalently, the functor of points
 \emph{commutative} if \(m\circ s=m\), where \(s\) swaps the two
 factors.  A \emph{homomorphism} \(f:G\to H\) of group schemes is a
 morphism of schemes compatible with the multiplications; the
-\emph{kernel} of \(f\) is the closed subgroup scheme
+\emph{kernel} of \(f\) is the subgroup scheme
 \[
- \ker f:=G\times_{H,f,e_H}\operatorname{Spec}k.
+ \ker f:=G\times_{H,f,e_H}\operatorname{Spec}k,
 \]
+and it is a \emph{closed} subscheme of \(G\): a group scheme over a
+field is separated (Groupoid Schemes, Lemma~39.7.3,
+\stacksproject{047L}), so the identity section \(e_H\) of
+\(H\to\operatorname{Spec}k\) is a closed immersion
+(\Cref{lem:pc-section-closed-immersion}) and \(\ker f\to G\) is its
+base change, closed immersions being stable under base change.
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1025,17 +1057,48 @@ multiplication is.
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: lem:pcb-pic-group)
 % Decomposed.
+% Ruling: the statement asserted that tensor product makes the isomorphism
+% classes a group without ever saying that the operation is DEFINED -- that
+% \(\mathcal L\otimes\mathcal M\) is invertible when \(\mathcal L\) and
+% \(\mathcal M\) are.  Neither node the proof cited supplies it:
+% \Cref{lem:pcb-invertible-dual} is about \(\mathcal L^\vee\), the evaluation
+% map and \(\mathcal L\to\mathcal L^{\vee\vee}\) only, and
+% \Cref{lem:pcb-tensor-monoidal} is associativity, commutativity and the unit
+% for arbitrary \(\mathcal O_X\)-modules on a ringed space, so it says nothing
+% about invertibility.  Closure is now stated and sourced to
+% \Cref{lem:pc-tensor-dual-invertible}, which states it for an arbitrary scheme;
+% the bridge is \Cref{def:pc-invertible-module}, which closes by saying that for
+% \(Y\) a curve its notion is that of \Cref{def:pcb-invertible-module}.  No new
+% node is created, and the route through the tensor-invertibility parenthetical
+% of \Cref{def:pcb-invertible-module} is deliberately not taken.
+% No cycle: the \uses-closure of \Cref{lem:pc-tensor-dual-invertible} is six
+% nodes -- itself, def:pc-invertible-module, def:pc-scheme,
+% def:pc-morphism-conventions, def:pc-smooth-morphism, def:pcb-scheme-conventions
+% -- and contains neither this node nor \Cref{def:pcb-picard-group}, so the two
+% recorded refusals of a cross-edge at def:pcb-ample and
+% def:pcb-effective-cartier-divisor, which were refusals of 2-cycles, are not
+% contradicted.
 \begin{lemma}[\(\operatorname{Pic}(C)\) is a group]
 \label{lem:pcb-pic-group}
-Let \(C\) be a \termref{def:pcb-curves}{curve}.  Tensor product makes
-the set of isomorphism classes of
-\termref{def:pcb-invertible-module}{invertible modules} an abelian
+Let \(C\) be a \termref{def:pcb-curves}{curve}.  If \(\mathcal L\)
+and \(\mathcal M\) are
+\termref{def:pcb-invertible-module}{invertible \(\mathcal
+O_C\)-modules}, then so is \(\mathcal L\otimes_{\mathcal
+O_C}\mathcal M\) (\Cref{lem:pc-tensor-dual-invertible}), so tensor
+product is a well-defined operation on isomorphism classes; and it
+makes the set of isomorphism classes of invertible modules an abelian
 group: associative with unit \(\mathcal O_C\), with inverse
 \(\mathcal L\mapsto\mathcal L^{\vee}\).
-\uses{def:pcb-curves,def:pcb-invertible-module}
+\uses{def:pcb-curves,def:pcb-invertible-module,lem:pc-tensor-dual-invertible}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-invertible-dual,lem:pcb-tensor-monoidal}
+\uses{lem:pcb-invertible-dual,lem:pcb-tensor-monoidal,lem:pc-tensor-dual-invertible}
+That \(\mathcal L\otimes_{\mathcal O_C}\mathcal M\) is again
+invertible, so that tensor product is defined on isomorphism classes,
+is \Cref{lem:pc-tensor-dual-invertible} applied to the scheme \(C\):
+a \termref{def:pcb-curves}{curve} is a scheme, and for a curve the
+notion of \Cref{def:pc-invertible-module} is that of
+\Cref{def:pcb-invertible-module}, as that definition records.
 Associativity, commutativity and the unit property of \(\otimes\) are
 \Cref{lem:pcb-tensor-monoidal}, applied to the ringed space \(C\).
 By \Cref{lem:pcb-invertible-dual},
