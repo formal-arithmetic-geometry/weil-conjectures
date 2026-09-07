@@ -4717,17 +4717,32 @@ scheme, homomorphism and kernel) is that of file~06:
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% This remark used to open ``For a curve $C$ over a field'' and then name
+% $\operatorname{div}(f)$, $\operatorname{Cl}(C)$ and $\cO_C(D)$ among the notions it
+% takes from \Cref{def:pcb-divisor}.  That definition is stated for a
+% \Cref{def:pcb-curves} curve, hence over an algebraically closed field, and gates
+% exactly those three objects behind ``$C$ smooth of dimension one'', which it says is
+% hypothesised at each statement that uses them.  The opening now supplies both, and
+% the sentence about $X$ and $X_K$ says which half of the boundary each side of it
+% lives on, as \Cref{rem:pc-regularity-sc} does for the regularity nodes.
 \begin{remark}[Divisors and the divisor class group: existing in file 06]
 \label{rem:pc-sc-divisor}
-For a curve $C$ over a field, the \emph{divisors} ($D=\sum_Pn_P[P]$,
-$\operatorname{Div}(C)$, principal divisors, the divisor class group
-$\operatorname{Cl}(C)$ and the associated module $\cO_C(D)$ of a
-divisor, defined via $k(C)$) are those of file~06: \Cref{def:pcb-divisor}.
-In this blueprint they are used for the curve $X$ and its base changes
-$X_K$; the corresponding invertible module of an effective Cartier
-divisor is the one of \Cref{def:pc-divisor-line-bundle}
-(\Cref{lem:pc-divisor-line-bundle-agrees-sc}).
-\uses{def:pcb-divisor,def:pc-divisor-line-bundle}
+For a \termref{def:pcb-curves}{curve} $C$ over an algebraically closed
+field, the \emph{divisors} ($D=\sum_Pn_P[P]$, $\operatorname{Div}(C)$,
+principal divisors, the divisor class group $\operatorname{Cl}(C)$ and
+the associated module $\cO_C(D)$ of a divisor, defined via $k(C)$) are
+those of file~06: \Cref{def:pcb-divisor}.  Of these, $\operatorname{Div}(C)$
+and the degree are defined for every such $C$, whereas
+$\operatorname{div}(f)$, $\operatorname{Cl}(C)$ and $\cO_C(D)$ require in
+addition that $C$ be smooth of dimension one, as \Cref{def:pcb-divisor}
+says.  In this blueprint they are used for the curve $X$ and its base
+changes $X_K$, which are smooth of dimension one but need not lie over
+an algebraically closed field; over a base field that is not
+algebraically closed the corresponding invertible module of an
+effective Cartier divisor is the one of
+\Cref{def:pc-divisor-line-bundle}, which agrees with $\cO_C(D)$ where
+both are defined (\Cref{lem:pc-divisor-line-bundle-agrees-sc}).
+\uses{def:pcb-divisor,def:pc-divisor-line-bundle,def:pcb-curves}
 \end{remark}
 
 % ============================================================================
@@ -4750,6 +4765,15 @@ $k$.  Then $X$ is a \emph{curve over $k$} in the sense of
 $k$ and of dimension $\le1$, and smooth over $k$.
 \uses{def:pc-smooth-projective-curve,def:pc-curve,def:pc-dimension,def:pcb-curves}
 \end{lemma}
+% The closing parenthetical of the proof below used to cite
+% \Cref{lem:pcb-base-change-curve} and \Cref{prop:pc-XK-integral} together for an
+% unquantified $K$.  \Cref{lem:pcb-base-change-curve} states its conclusion only for
+% an algebraically closed extension, so of the two repairs available --- narrow the
+% whole parenthetical to algebraically closed $K$, or attribute the general-$K$ half
+% to \Cref{prop:pc-XK-integral} alone --- the second is taken, splitting the sentence
+% in two: it keeps the general-$K$ claim, which the rest of the chapter uses, and
+% \Cref{prop:pc-XK-integral}(2) states it verbatim.  This is the wording
+% \Cref{rem:pc-regularity-sc} carries for the same pair of nodes.
 \begin{proof}
 \uses{def:pc-curve,def:pc-smooth-projective-curve,def:pcb-curves,def:pcb-scheme-conventions,lem:pcb-base-change-curve,prop:pc-XK-integral}
 By\ \Cref{def:pc-smooth-projective-curve} $X$ is a
@@ -4761,8 +4785,13 @@ curve, of dimension $1$.  Its structure morphism is smooth by hypothesis,
 and
 \Cref{def:pcb-curves} requires exactly: nonempty, separated scheme of
 finite type of dimension $\le1$, smooth over $k$.  This proves the
-claim.  (The same applies to base changes $X_K$: see
-\Cref{lem:pcb-base-change-curve} and \Cref{prop:pc-XK-integral}.)
+claim.  (The same applies to base changes $X_K$: along an algebraically
+closed extension $K/k$ this is \Cref{lem:pcb-base-change-curve}, whose
+two base fields are required to be algebraically closed; along an
+arbitrary field extension $K/k$ it is \Cref{prop:pc-XK-integral}(2)
+alone that applies, and what it gives is that $X_K$ is a smooth
+projective curve over $K$ --- \Cref{def:pcb-curves} itself, being stated
+over an algebraically closed base, does not apply to $X_K$ then.)
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -5571,14 +5600,27 @@ $\Gamma(Z_{t'},\cO)=\Gamma(Z_t,\cO)\otimes\kappa(t')$
 % ============================================================================
 % ===================== % ---------------------------------------------------------------------------
 % Decomposed.
+% This remark used to describe \Cref{def:pcb-curves} as being made ``for a field
+% $k$'', where that definition opens ``Let $k$ be an algebraically closed field''.
+% The base field is now stated as the definition states it, and the last sentence
+% records how the chapter reads the definition over a general field --- the ruling
+% \Cref{rem:pc-regularity-sc} already carries, and which \Cref{lem:pc-curves-are-sc}
+% is what applies there.
 \begin{remark}[Relation to the curves of file 06]\label{rem:pc-relation-sc}
-File~06 uses a slightly coarser notion: for a field $k$, a \emph{curve
-over $k$} there is a nonempty separated scheme of finite type over $k$
-of dimension at most $1$ (\Cref{def:pcb-curves}).  A
+File~06 uses a slightly coarser notion: for an \emph{algebraically
+closed} field $k$, a \emph{curve over $k$} there is a nonempty
+separated scheme of finite type over $k$ of dimension at most $1$
+(\Cref{def:pcb-curves}).  A
 \termref{def:pc-smooth-projective-curve}{smooth projective curve} in
 our sense is in particular a smooth curve in the sense of
 \Cref{def:pcb-curves} (\Cref{lem:pc-curves-are-sc}); conversely, for
-smooth proper one-dimensional curves the two notions coincide.
+smooth proper one-dimensional curves the two notions coincide.  Over a
+field that is not algebraically closed \Cref{def:pcb-curves} does not
+apply as a definition and only its list of conditions is read off, which
+is what \Cref{lem:pc-curves-are-sc} verifies; see
+\Cref{rem:pc-regularity-sc}.
+% No \uses for \Cref{rem:pc-regularity-sc} here, deliberately: it is a remark, and
+% no \uses list in this chapter names a remark --- remarks are cited in prose only.
 \uses{def:pc-curve,def:pcb-curves,lem:pc-curves-are-sc,def:pc-dimension}
 \end{remark}
 
