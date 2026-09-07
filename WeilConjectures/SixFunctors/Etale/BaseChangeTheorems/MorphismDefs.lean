@@ -191,7 +191,7 @@ section BaseChangeTransformation
 `WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar`; it enters here through the
 bounded below derived adjunction `Etale.derivedUpperStarLowerStarAdjunctionPlus`, which is
 obtained by restriction of the unbounded derived adjunction. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
 variable {X Y X' Y' : Scheme.{u}}
