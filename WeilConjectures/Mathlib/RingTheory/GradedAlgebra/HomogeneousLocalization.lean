@@ -9,11 +9,14 @@ public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 
 /-!
-# `HomogeneousLocalization.Away.map`
+# `HomogeneousLocalization.Away.map` and the base algebra structure
 
 We show that `HomogeneousLocalization.Away.map` is compatible with the canonical ring
 homomorphisms from the degree-zero subrings, and that it is surjective as soon as the
 graded ring homomorphism it is built from is.
+
+Moreover, if `A` is a graded algebra over a base ring `R`, we endow `HomogeneousLocalization`
+with the induced `R`-algebra structure, via the degree-zero part `𝒜 0`.
 -/
 
 @[expose] public section
@@ -48,3 +51,45 @@ theorem map_surjective (g : 𝒜 →+*ᵍ ℬ) (hg : Function.Surjective g) {d :
   exact ⟨Away.mk 𝒜 hs n a ha, by rw [Away.map_mk]⟩
 
 end HomogeneousLocalization.Away
+
+namespace HomogeneousLocalization
+
+section Algebra
+
+variable {ι R A : Type*} [CommRing R] [CommRing A] [Algebra R A] [AddCommMonoid ι]
+  [DecidableEq ι] (𝒜 : ι → Submodule R A) [GradedAlgebra 𝒜] (x : Submonoid A)
+
+@[simp]
+lemma val_fromZeroRingHom (a : 𝒜 0) :
+    (fromZeroRingHom 𝒜 x a).val = algebraMap A (Localization x) (a : A) := by
+  simp only [fromZeroRingHom, ← Localization.mk_one_eq_algebraMap]
+  rfl
+
+/-- If `A` is a graded `R`-algebra, its homogeneous localization at a submonoid of `A` is an
+`R`-algebra, via the degree-zero part `𝒜 0`. -/
+instance : Algebra R (HomogeneousLocalization 𝒜 x) where
+  algebraMap := (fromZeroRingHom 𝒜 x).comp (algebraMap R (𝒜 0))
+  smul := (· • ·)
+  commutes' _ _ := mul_comm _ _
+  smul_def' r z := by
+    obtain ⟨c, rfl⟩ := mk_surjective z
+    apply val_injective
+    simp [val_smul, Algebra.smul_def, IsScalarTower.algebraMap_apply R A (Localization x)]
+
+lemma algebraMap_eq' :
+    algebraMap R (HomogeneousLocalization 𝒜 x) =
+      (fromZeroRingHom 𝒜 x).comp (algebraMap R (𝒜 0)) :=
+  rfl
+
+@[simp]
+lemma val_algebraMap (r : R) :
+    (algebraMap R (HomogeneousLocalization 𝒜 x) r).val = algebraMap R (Localization x) r := by
+  rw [algebraMap_eq']
+  simp [IsScalarTower.algebraMap_apply R A (Localization x)]
+
+instance : IsScalarTower R (HomogeneousLocalization 𝒜 x) (Localization x) :=
+  .of_algebraMap_eq fun r ↦ (val_algebraMap 𝒜 x r).symm
+
+end Algebra
+
+end HomogeneousLocalization
