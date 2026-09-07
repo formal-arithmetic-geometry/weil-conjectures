@@ -715,19 +715,47 @@ point to \(1\).  Put
 % algebraically closed'', which is where that definition applies, and the ruling on
 % \Cref{def:pcb-curves} recorded just above still reads correctly -- it is cited for
 % its list of conditions, over a general \(k\), as the sentence below says aloud.
+% Ruling (presheaf versus sheafification).  The sentence that stood here displayed
+% the rule \(R\mapsto\operatorname{Pic}(C\times_kR)\) as the definition of
+% \(\operatorname{Pic}_{C/k}\) and, in the same breath, said that
+% \(\operatorname{Pic}_{C/k}\) ``is the fppf sheafification of the functor of
+% invertible modules''.  Those name two different functors, because the displayed
+% rule IS the functor of invertible modules, i.e.\ the presheaf being sheafified;
+% read as written the node asserted that \(R\mapsto\operatorname{Pic}(C\times_kR)\)
+% is already an fppf sheaf.  It is not, by this chapter's own
+% \Cref{thm:pc-pic-split}: the sequence \(0\to\Pic(T)\to\Pic(X_T)\to\Pic_{X/S}(T)\to0\)
+% is split exact, so the presheaf and its sheafification agree at \(T\) exactly when
+% \(\Pic(T)=0\).  Witness: \(C=\mathbf P^1_k\) and \(T=\Spec(R)\) with
+% \(\Pic(R)\neq0\) (\(R\) the coordinate ring of an affine elliptic curve over
+% algebraically closed \(k\)), where
+% \(\Pic(\mathbf P^1_R)=\Pic(R)\oplus\mathbf Z\neq\mathbf Z\).
+% The repair states the presheaf and the functor separately, in the ordinary way and
+% inside this one block: the \(pcb\)-region creates no node, and the two-node model
+% already exists in scope as \Cref{def:pc-picard-presheaf} and
+% \Cref{def:pc-picard-functor}, which is also what the Lean side records
+% (\texttt{picardFunctor f = (presheafToSheaf \_ \_).obj (picardPresheaf f)}), so
+% nothing in Lean changes.  The last clause of the block is unaffected: for \(k\)
+% algebraically closed \(\Pic(k)=0\), so the sheafification does recover
+% \(\Pic(C)\), which is how that clause always read.  No citation is added --
+% \Cref{thm:pc-pic-split} is named in this comment only, so no \uses edge moves and
+% no forward edge out of the \(pcb\)-region is created.
 \begin{definition}[The Picard functor of a proper curve]
 \label{def:pcb-picard-functor}
 Let \(k\) be a field and let \(C\) be a proper smooth curve over
 \(k\) -- nonempty, separated, of finite type over \(k\) and of
 dimension at most one, the conditions \Cref{def:pcb-curves} lists, read
 here over a general \(k\) rather than over the algebraically closed base
-that definition fixes.  The \emph{Picard functor}
+that definition fixes.  The functor of
+\termref{def:pc-invertible-module}{invertible modules} of \(C\) is the
+presheaf
 \[
- \operatorname{Pic}_{C/k}:(k\text{-algebras})\longrightarrow\mathbf{Ab},
+ (k\text{-algebras})\longrightarrow\mathbf{Ab},
  \qquad R\longmapsto\operatorname{Pic}(C\times_kR),
 \]
-is the fppf sheafification of the functor of
-\termref{def:pc-invertible-module}{invertible modules}; for
+and the \emph{Picard functor}
+\(\operatorname{Pic}_{C/k}:(k\text{-algebras})\longrightarrow\mathbf{Ab}\)
+is the fppf sheafification of that presheaf; the two are different
+functors, the presheaf being in general no fppf sheaf.  For
 \(d\in\mathbf Z\), \(\operatorname{Pic}^d_{C/k}\) is the open and
 closed subfunctor of \(\operatorname{Pic}_{C/k}\) of invertible
 modules of fibrewise degree \(d\) (degree \(d\) on every geometric
@@ -5524,6 +5552,22 @@ restrictions of the $g_X^*$ of (2).
 % read it; see the comment there.  What this statement owes in exchange is that $X$
 % satisfy that definition's hypotheses, and the only one not immediate from
 % \Cref{def:pc-smooth-projective-curve} is properness, now named.
+% Ruling (what the gloss asserted).  The statement identified the restriction of
+% $\Pic_{X/k}$ to affine $k$-schemes with ``the sheafification presented in
+% \Cref{def:pcb-picard-functor}, i.e.\ the functor $R\mapsto\Pic(X\times_k\Spec R)$
+% of file~06 (with its fppf sheaf structure)''.  The ``i.e.'' equated the
+% sheafification with the presheaf it sheafifies, inheriting the conflation repaired
+% at \Cref{def:pcb-picard-functor}; read as written it made this lemma false, since
+% by \Cref{thm:pc-pic-split} the two differ by $\Pic(T)$ and
+% $\Pic(\mathbf P^1_R)=\Pic(R)\oplus\mathbf Z$ for $\Pic(R)\neq0$, with
+% $\mathbf P^1_k$ inside this statement's hypotheses.  The proof below never proved
+% that: it proves only that both sides are the fppf sheafification of the same
+% presheaf on the affine site, $(\pi^{-1}F^\#)^\#=(\pi^{-1}F)^\#$.  So the statement
+% is brought back to what the proof gives -- the gloss now names the sheafification
+% of the file~06 presheaf and says aloud that it is not that presheaf.  The proof is
+% untouched, and the \uses lists are unchanged: no citation is added or removed, and
+% \Cref{def:pc-picard-presheaf} stays on the statement's list, the presheaf whose
+% rule the gloss still displays being exactly what that node names in general.
 \begin{lemma}[Agreement with the affine Picard functor of file 06]
 \label{lem:pc-picard-functor-agrees-sc}
 Let $k$ be a field and $X$ a
@@ -5532,9 +5576,9 @@ $k$; $X$ is then proper over $k$, projective morphisms being proper
 (\Cref{lem:pc-projective-proper}).  The restriction of
 \termref{def:pc-picard-functor}{$\Pic_{X/k}$} to affine $k$-schemes
 $T=\Spec(R)$ is canonically the sheafification presented in
-\Cref{def:pcb-picard-functor}, i.e.\ the functor
-$R\mapsto\Pic(X\times_k\Spec R)$ of file~06 (with its fppf sheaf
-structure); more precisely
+\Cref{def:pcb-picard-functor}, i.e.\ the fppf sheafification of the
+presheaf $R\mapsto\Pic(X\times_k\Spec R)$ of file~06, and not that
+presheaf itself; more precisely
 $\Pic_{X/k}(\Spec(R))=\operatorname{Pic}_{X/k}^{\mathrm{sc}}(R)$ where
 the right side is the value of the functor of \Cref{def:pcb-picard-functor}.
 \uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme,def:pc-smooth-projective-curve,lem:pc-projective-proper}
