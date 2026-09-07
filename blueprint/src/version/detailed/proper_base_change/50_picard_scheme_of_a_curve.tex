@@ -4792,25 +4792,57 @@ both are defined (\Cref{lem:pc-divisor-line-bundle-agrees-sc}).
 \subsection{Properties of the definitions}
 
 % Decomposed.
+% The statement below used to read ``$X$ is a curve over $k$ in the sense of
+% \Cref{def:pcb-curves}'' for an arbitrary field $k$, and \Cref{def:pcb-curves}
+% opens ``let $k$ be an algebraically closed field'', so over a general $k$ there
+% was no such notion for $X$ to be an instance of.  Two readings were available:
+% the sentence names \Cref{def:pcb-curves}'s list of conditions (the colon spells
+% it out, and the proof proves exactly that list), or it claims membership in the
+% notion.  It is ruled a finding on the second reading, because the block itself
+% already gates the base-change half of the same crossing --- the proof's closing
+% parenthetical says \Cref{def:pcb-curves} ``does not apply to $X_K$'' over a
+% general $k$ --- while its own statement did not.  The repair is the scope clause
+% only: no hypothesis is added to the lemma, and the conditions asserted over a
+% general $k$ are exactly the ones asserted before.  \Cref{rem:pc-relation-sc}
+% records the same reading in prose.
 \begin{lemma}[Curves in the sense of file 06]\label{lem:pc-curves-are-sc}
 Let $k$ be a field and let $X$ be a
 \termref{def:pc-smooth-projective-curve}{smooth projective curve} over
-$k$.  Then $X$ is a \emph{curve over $k$} in the sense of
-\Cref{def:pcb-curves}: $X$ is nonempty, separated, of finite type over
-$k$ and of dimension $\le1$, and smooth over $k$.
+$k$.  Then $X$ satisfies the conditions \Cref{def:pcb-curves} lists for
+a \emph{smooth curve over $k$}: $X$ is nonempty, separated, of finite
+type over $k$ and of dimension $\le1$, and smooth over $k$.  For $k$
+algebraically closed, where \Cref{def:pcb-curves} applies, $X$ is
+accordingly a smooth curve over $k$ in its sense; over a general $k$
+that definition defines no notion, and it is the list of conditions
+alone that is asserted.
 \uses{def:pc-smooth-projective-curve,def:pc-curve,def:pc-dimension,def:pcb-curves}
 \end{lemma}
-% The closing parenthetical of the proof below used to cite
-% \Cref{lem:pcb-base-change-curve} and \Cref{prop:pc-XK-integral} together for an
-% unquantified $K$.  \Cref{lem:pcb-base-change-curve} states its conclusion only for
-% an algebraically closed extension, so of the two repairs available --- narrow the
-% whole parenthetical to algebraically closed $K$, or attribute the general-$K$ half
-% to \Cref{prop:pc-XK-integral} alone --- the second is taken, splitting the sentence
-% in two: it keeps the general-$K$ claim, which the rest of the chapter uses, and
-% \Cref{prop:pc-XK-integral}(2) states it verbatim.  This is the wording
-% \Cref{rem:pc-regularity-sc} carries for the same pair of nodes.
+% RULING on the closing parenthetical of the proof below, and on the identical
+% sentence in \Cref{rem:pc-regularity-sc}; the two say the same thing in the same
+% words and this comment is the record for both.
+%
+% The parenthetical once cited \Cref{lem:pcb-base-change-curve} and
+% \Cref{prop:pc-XK-integral} together for an unquantified $K$.  Because
+% \Cref{lem:pcb-base-change-curve} states its conclusion only for an algebraically
+% closed extension, the general-$K$ half was attributed to
+% \Cref{prop:pc-XK-integral}(2) alone.  That left a second over-reach: this host
+% opens ``let $k$ be a field'', whereas \Cref{prop:pc-XK-integral} requires $k$ to
+% be separably closed and to carry a $k$-rational point, so over a general $k$ it
+% does not apply either.
+%
+% The repair keeps the general-$K$ claim, which the rest of the chapter uses, and
+% attributes each half of it to the node that actually gives it over a general
+% base: smoothness of $X_K$ to \Cref{lem:pc-smooth-base-change}, its dimension to
+% \Cref{lem:pc-dim-base-change} and its projectivity to
+% \Cref{lem:pc-closed-imm-base-change}, none of which hypothesises anything about
+% $k$; separatedness and finite type are stable under base change.  What is left
+% over is integrality --- the ``variety'', hence ``curve'', content of
+% \Cref{def:pc-smooth-projective-curve} --- and that is exactly what
+% \Cref{prop:pc-XK-integral}(2) supplies and what its separably-closed-with-a-
+% rational-point hypothesis is for.  The \uses lists of both blocks gain the three
+% base-change nodes and the two field/point definitions now named.
 \begin{proof}
-\uses{def:pc-curve,def:pc-smooth-projective-curve,def:pcb-curves,def:pcb-scheme-conventions,lem:pcb-base-change-curve,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-rational-point,def:pc-separably-closed,def:pc-smooth-projective-curve,def:pcb-curves,def:pcb-scheme-conventions,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-smooth-base-change,lem:pcb-base-change-curve,prop:pc-XK-integral}
 By\ \Cref{def:pc-smooth-projective-curve} $X$ is a
 \termref{def:pc-curve}{curve} over $k$, hence a
 \termref{def:pc-curve}{variety}: integral, with
@@ -4822,11 +4854,21 @@ and
 finite type of dimension $\le1$, smooth over $k$.  This proves the
 claim.  (The same applies to base changes $X_K$: along an algebraically
 closed extension $K/k$ this is \Cref{lem:pcb-base-change-curve}, whose
-two base fields are required to be algebraically closed; along an
-arbitrary field extension $K/k$ it is \Cref{prop:pc-XK-integral}(2)
-alone that applies, and what it gives is that $X_K$ is a smooth
-projective curve over $K$ --- \Cref{def:pcb-curves} itself, being stated
-over an algebraically closed base, does not apply to $X_K$ then.)
+two base fields are required to be algebraically closed.  Over a base
+field $k$ which need not be algebraically closed, and along an arbitrary
+field extension $K/k$, the scheme $X_K$ is smooth over $K$
+(\Cref{lem:pc-smooth-base-change}), of dimension one
+(\Cref{lem:pc-dim-base-change}) and projective, the closed
+immersion $X\to\PP^n_k$ base changing to a closed immersion
+$X_K\to\PP^n_K$ (\Cref{lem:pc-closed-imm-base-change}), and it is
+separated and of finite type, both being stable under base change; that
+$X_K$ is moreover integral, hence a smooth projective curve over $K$, is
+\Cref{prop:pc-XK-integral}(2), which requires $k$ to be
+\termref{def:pc-separably-closed}{separably closed} and to carry a
+\termref{def:pc-rational-point}{$k$-rational point}, so over a general
+$k$ neither node covers $X_K$.  \Cref{def:pcb-curves} itself, being
+stated over an algebraically closed base, does not apply to $X_K$
+then.)
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -6999,10 +7041,20 @@ $k$ is in particular a \emph{smooth curve} in the sense of
 \Cref{def:pcb-curves} (nonempty, separated, of finite type, dimension
 $\le1$; see \Cref{rem:pc-relation-sc}), and the base change $X_K$ along
 an algebraically closed extension $K/k$ is again such a curve
-(\Cref{lem:pcb-base-change-curve}); for an arbitrary field extension
-$K/k$ it is \Cref{prop:pc-XK-integral} alone that applies, and what it
-gives is that $X_K$ is a smooth projective curve over $K$.  Over a base
-field which is not algebraically closed --- and most of the chapter works
+(\Cref{lem:pcb-base-change-curve}).  Over a base field $k$ which need
+not be algebraically closed, and along an arbitrary field extension
+$K/k$, the scheme $X_K$ is smooth over $K$
+(\Cref{lem:pc-smooth-base-change}), of dimension one
+(\Cref{lem:pc-dim-base-change}) and projective, the closed immersion
+$X\to\PP^n_k$ base changing to a closed immersion $X_K\to\PP^n_K$
+(\Cref{lem:pc-closed-imm-base-change}), and it is separated and of
+finite type, both being stable under base change; that $X_K$ is moreover
+integral, hence a smooth projective curve over $K$, is
+\Cref{prop:pc-XK-integral}(2), which requires $k$ to be
+\termref{def:pc-separably-closed}{separably closed} and to carry a
+\termref{def:pc-rational-point}{$k$-rational point}, so over a general
+$k$ neither node covers $X_K$.  Over a base field which is not
+algebraically closed --- and most of the chapter works
 over such a field, or over the residue field $\kappa(s)$ of an arbitrary
 point of a base scheme --- \Cref{def:pcb-curves} does not apply, and the
 chapter uses instead \Cref{lem:pc-smooth-over-field-regular}: a scheme
@@ -7017,7 +7069,13 @@ on any field.
 % example, one of the hypotheses a citing statement might supply the dimension-one
 % half from; the notion is mentioned, not used, and the nodes that do use it carry
 % the edge themselves.
-\uses{def:pc-smooth-projective-curve,def:pcb-curves,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pcb-point-cartier,lem:pcb-base-change-curve,lem:pc-smooth-over-field-regular}
+%
+% The sentence above about $X_K$ along an arbitrary $K/k$ is the same sentence, in
+% the same words, as the closing parenthetical of the proof of
+% \Cref{lem:pc-curves-are-sc}; the ruling that produced that wording, and the
+% reason each half is attributed to the node it names, is recorded in the comment
+% above that proof.
+\uses{def:pc-rational-point,def:pc-separably-closed,def:pc-smooth-projective-curve,def:pcb-curves,lem:pc-closed-imm-base-change,lem:pc-dim-base-change,lem:pc-smooth-base-change,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pcb-point-cartier,lem:pcb-base-change-curve,lem:pc-smooth-over-field-regular,prop:pc-XK-integral}
 \end{remark}
 
 % ---------------------------------------------------------------------------
