@@ -54,11 +54,6 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction`; it is what makes the total left
 derived functor of `j_!` available. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution A]
 
 /-- The derived adjunction `j_! ⊣ j^*` along an open immersion `j : U ⟶ X` on the

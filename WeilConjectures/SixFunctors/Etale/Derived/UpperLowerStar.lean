@@ -282,11 +282,6 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 the section `DerivedUpperStar`; it is what the monoidal transport instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
 
 /- Functorial flat resolutions on the coefficient category, as in the section
 `DerivedUpperStar`. -/
