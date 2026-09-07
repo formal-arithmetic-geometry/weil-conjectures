@@ -18,6 +18,8 @@ We record:
   — membership and preimage formulas for the ranges of inclusions of opens;
 - `AlgebraicGeometry.isIso_morphismRestrict_of_isPullback` — a base change of a morphism
   that is an isomorphism over an open is an isomorphism over the preimage of that open;
+- `AlgebraicGeometry.Scheme.Hom.liftPreimage` — the factorization of a morphism through a
+  preimage open containing its range;
 - `AlgebraicGeometry.Scheme.Hom.liftOfIsIsoRestrict` — the (unique) lift of a morphism
   along a morphism that is an isomorphism over an open containing its range.
 -/
@@ -91,20 +93,34 @@ lemma isIso_morphismRestrict_of_isPullback {T T' U : Scheme.{u}} {ρ : T' ⟶ T}
     exact hpaste.flip
   exact (IsPullback.of_right' hs ht).flip.isIso_fst_of_isIso
 
+section LiftPreimage
+
+variable {P : Scheme.{u}} (g : P ⟶ X) (U : X.Opens) (k : Z ⟶ P)
+    (hk : Set.range (k ≫ g) ⊆ (U : Set X))
+
+include hk in
+/-- A morphism whose composite with `g : P ⟶ X` has range inside an open `U ⊆ X` has
+range inside the open `g ⁻¹ᵁ U` of `P`. -/
+lemma range_subset_range_preimage_ι : Set.range k ⊆ Set.range (g ⁻¹ᵁ U).ι := by
+  rw [Scheme.Opens.range_ι]
+  rintro _ ⟨z, rfl⟩
+  simpa [Scheme.Hom.comp_apply] using hk ⟨z, rfl⟩
+
+/-- **The lift into a preimage open**: a morphism `k : Z ⟶ P` whose composite with
+`g : P ⟶ X` has range inside an open `U ⊆ X` factors through the open `g ⁻¹ᵁ U`. -/
+noncomputable def Scheme.Hom.liftPreimage : Z ⟶ (g ⁻¹ᵁ U).toScheme :=
+  IsOpenImmersion.lift (g ⁻¹ᵁ U).ι k (range_subset_range_preimage_ι g U k hk)
+
+@[reassoc (attr := simp)]
+lemma Scheme.Hom.liftPreimage_ι : g.liftPreimage U k hk ≫ (g ⁻¹ᵁ U).ι = k :=
+  IsOpenImmersion.lift_fac _ _ _
+
+end LiftPreimage
+
 section Lift
 
 variable {X' : Scheme.{u}} (π : X' ⟶ X) (U : X.Opens) [IsIso (π ∣_ U)] (h : Z ⟶ X)
     (hrange : Set.range h ⊆ (U : Set X))
-
-omit [IsIso (π ∣_ U)] in
-include hrange in
-/-- A morphism to `X'` lifting a morphism whose range lies in `U` has range inside the
-open `π ⁻¹ᵁ U`. -/
-lemma range_subset_range_preimage_ι_of_comp_eq {h' : Z ⟶ X'} (hh' : h' ≫ π = h) :
-    Set.range h' ⊆ Set.range (π ⁻¹ᵁ U).ι := by
-  rw [Scheme.Opens.range_ι]
-  rintro _ ⟨z, rfl⟩
-  exact hrange ⟨z, by rw [← hh', Scheme.Hom.comp_apply]⟩
 
 /-- **The lift along a morphism that is an isomorphism over an open**: if `π : X' ⟶ X`
 restricts to an isomorphism over an open `U ⊆ X` and the range of `h : Z ⟶ X` is
@@ -124,12 +140,10 @@ land in an open `U` over which `π` is an isomorphism are equal. -/
 lemma Scheme.Hom.hom_ext_of_isIso_restrict {h₁ h₂ : Z ⟶ X'} (hcomp : h₁ ≫ π = h₂ ≫ π)
     (h₁range : Set.range (h₁ ≫ π) ⊆ (U : Set X)) : h₁ = h₂ := by
   -- both morphisms factor through the open `π ⁻¹ᵁ U`, where `π` is an isomorphism
-  set k₁ := IsOpenImmersion.lift (π ⁻¹ᵁ U).ι h₁
-    (range_subset_range_preimage_ι_of_comp_eq π U _ h₁range rfl)
-  set k₂ := IsOpenImmersion.lift (π ⁻¹ᵁ U).ι h₂
-    (range_subset_range_preimage_ι_of_comp_eq π U _ (hcomp ▸ h₁range) rfl)
-  have e₁ : k₁ ≫ (π ⁻¹ᵁ U).ι = h₁ := IsOpenImmersion.lift_fac _ _ _
-  have e₂ : k₂ ≫ (π ⁻¹ᵁ U).ι = h₂ := IsOpenImmersion.lift_fac _ _ _
+  set k₁ := π.liftPreimage U h₁ h₁range
+  set k₂ := π.liftPreimage U h₂ (hcomp ▸ h₁range)
+  have e₁ : k₁ ≫ (π ⁻¹ᵁ U).ι = h₁ := π.liftPreimage_ι U h₁ h₁range
+  have e₂ : k₂ ≫ (π ⁻¹ᵁ U).ι = h₂ := π.liftPreimage_ι U h₂ (hcomp ▸ h₁range)
   have hk : k₁ = k₂ := by
     rw [← cancel_mono (π ∣_ U), ← cancel_mono U.ι]
     simp only [Category.assoc, morphismRestrict_ι]

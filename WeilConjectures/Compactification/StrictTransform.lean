@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Blowup.Complement
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
@@ -29,8 +30,6 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 ## Main definitions
 
 - `AlgebraicGeometry.strictTransformOpen f π U`: the open locus of `Y ×_X X'` over `U`;
-- `AlgebraicGeometry.strictTransformOpenLift`: the factorization through the open locus
-  of a morphism to `Y ×_X X'` whose composite to the base lands in `U`;
 - `AlgebraicGeometry.strictTransform f π U`: the strict transform, i.e. the
   scheme-theoretic image of the open locus in `Y ×_X X'`
   (blueprint: `def:nagata-strict-transform`);
@@ -99,38 +98,8 @@ theorem quasiCompact_strictTransformOpen_ι [QuasiSeparatedSpace ↥(pullback f 
     [QuasiCompact f] [QuasiCompact π] (hU : IsCompact (U : Set X)) :
     QuasiCompact (strictTransformOpen f π U).ι := by
   have : QuasiCompact (pullback.fst f π) := MorphismProperty.pullback_fst _ _ ‹_›
-  have : CompactSpace (strictTransformOpen f π U).toScheme :=
-    isCompact_iff_compactSpace.mp <| by
-      rw [strictTransformOpen_eq_preimage]
-      exact QuasiCompact.isCompact_preimage (f := pullback.fst f π ≫ f) _ U.isOpen hU
-  infer_instance
-
-section Lift
-
-variable {T : Scheme.{u}} (k : T ⟶ pullback f π)
-    (hk : Set.range (k ≫ pullback.fst f π ≫ f) ⊆ (U : Set X))
-
-include hk in
-/-- A morphism to the fibre product whose composite to the base lands in `U` has range
-inside the open locus over `U`. -/
-lemma range_subset_range_strictTransformOpen_ι :
-    Set.range k ⊆ Set.range (strictTransformOpen f π U).ι := by
-  rw [Scheme.Opens.range_ι, strictTransformOpen_eq_preimage]
-  rintro _ ⟨v, rfl⟩
-  simpa [Scheme.Hom.comp_apply] using hk ⟨v, rfl⟩
-
-/-- **The lift into the open locus**: a morphism to the fibre product whose composite to
-the base lands in `U` factors through the open locus over `U`. -/
-def strictTransformOpenLift : T ⟶ (strictTransformOpen f π U).toScheme :=
-  IsOpenImmersion.lift (strictTransformOpen f π U).ι k
-    (range_subset_range_strictTransformOpen_ι f π U k hk)
-
-@[reassoc (attr := simp)]
-lemma strictTransformOpenLift_ι :
-    strictTransformOpenLift f π U k hk ≫ (strictTransformOpen f π U).ι = k :=
-  IsOpenImmersion.lift_fac _ _ _
-
-end Lift
+  rw [strictTransformOpen_eq_preimage]
+  exact quasiCompact_preimage_ι _ hU
 
 /-- The strict transform of `f : Y ⟶ X` along `π : X' ⟶ X` relative to the open
 `U ⊆ X`: the scheme-theoretic image of the open locus of `Y ×_X X'` lying over `U`.
@@ -397,12 +366,12 @@ theorem ker_eq_ker_strictTransformMap {V : Scheme.{u}} (h : V ⟶ X) [QuasiCompa
   set k := pullback.lift h.toImage h' hcond
   have hkfst : k ≫ pullback.fst h.imageι π = h.toImage := pullback.lift_fst _ _ _
   have hksnd : k ≫ pullback.snd h.imageι π = h' := pullback.lift_snd _ _ _
-  -- It lands in the open locus, because `h` lands over `U`.
-  have hkrange : Set.range (k ≫ pullback.fst h.imageι π ≫ h.imageι) ⊆ (U : Set X) := by
-    rw [← Category.assoc, hkfst, Scheme.Hom.toImage_imageι]
-    exact hrange
-  set m := strictTransformOpenLift h.imageι π U k hkrange
-  have hmfac : m ≫ L.ι = k := strictTransformOpenLift_ι h.imageι π U k hkrange
+  -- It lands in the open locus, because `h'` lands over `U`, hence in `π ⁻¹ᵁ U`.
+  have hkrange : Set.range (k ≫ pullback.snd h.imageι π) ⊆ ((π ⁻¹ᵁ U : X'.Opens) : Set X') := by
+    rw [hksnd, ← Scheme.Opens.range_ι]
+    exact range_subset_range_preimage_ι π U h' (by rwa [hlift])
+  set m := (pullback.snd h.imageι π).liftPreimage (π ⁻¹ᵁ U) k hkrange
+  have hmfac : m ≫ L.ι = k := (pullback.snd h.imageι π).liftPreimage_ι (π ⁻¹ᵁ U) k hkrange
   -- The projection of the open locus to `SIm(h)` is a base change of the open immersion
   -- `U ⟶ X`, so `V` sits inside the open locus as a flat base change of `V ⟶ SIm(h)`,
   -- and scheme-theoretic dominance descends.
