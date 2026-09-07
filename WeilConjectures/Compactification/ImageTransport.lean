@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 
@@ -16,6 +17,11 @@ This file records the transport of scheme-theoretic images through an admissible
 (Stacks Project Tag 0F3Y; blueprint `lemma:nagata-scheme-image-strict-transform`; proof
 order item 31):
 
+- `AlgebraicGeometry.IsAdmissible.blowupBaseChange` and
+  `AlgebraicGeometry.IsAdmissible.preservedOpenPullback`: the base change
+  `X' ×_S Y ⟶ X ×_S Y` of a `U`-admissible blow-up along the first projection, and the
+  open of `X ×_S Y` over which it is an isomorphism, both of which appear in the
+  statement below;
 - `AlgebraicGeometry.ker_eq_ker_strictTransformMap_of_isAdmissible`: the scheme-theoretic
   image of a lift along a `U`-admissible blow-up is the strict transform of the
   scheme-theoretic image.
@@ -50,6 +56,32 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
+
+namespace IsAdmissible
+
+variable {X : Scheme.{u}} {U : X.Opens} (B : IsAdmissible X U) {S Y : Scheme.{u}}
+  (f : X ⟶ S) (g : Y ⟶ S)
+
+/-- The base change of a `U`-admissible blow-up along the first projection of a fibre
+product: the morphism `X' ×_S Y ⟶ X ×_S Y` induced by `B.I.blowupMap : X' ⟶ X`. -/
+abbrev blowupBaseChange : pullback (B.I.blowupMap ≫ f) g ⟶ pullback f g :=
+  pullbackCompFstMap f g B.I.blowupMap
+
+/-- The preimage of the preserved open under the first projection of a fibre product:
+the open of `X ×_S Y` over which the base-changed blow-up is an isomorphism. -/
+abbrev preservedOpenPullback : (pullback f g).Opens :=
+  pullback.fst f g ⁻¹ᵁ B.preservedOpen
+
+/-- **The base-changed blow-up is an isomorphism over the preserved open**: the blow-up
+is an isomorphism over the complement of its center, and this persists under the base
+change along the first projection. -/
+instance isIso_blowupBaseChange_restrict :
+    IsIso (B.blowupBaseChange f g ∣_ B.preservedOpenPullback f g) :=
+  have := B.I.isIso_blowupMap_restrict_support_compl
+  isIso_morphismRestrict_of_isPullback
+    (isPullback_pullbackCompFstMap f g B.I.blowupMap) B.preservedOpen
+
+end IsAdmissible
 
 variable {S X Y V : Scheme.{u}} {f : X ⟶ S} {g : Y ⟶ S}
 

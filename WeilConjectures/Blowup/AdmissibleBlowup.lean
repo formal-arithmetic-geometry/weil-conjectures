@@ -11,7 +11,6 @@ public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Compactification.FiniteTypeExtension
 public import WeilConjectures.Compactification.StrictTransform
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
@@ -33,10 +32,6 @@ module flattening is needed, so no flattening statements are formalized here.
   quasi-coherent ideal whose support is disjoint from `U`; the associated
   `U`-admissible blow-up is the blow-up of that ideal
   (blueprint: `def:nagata-admissible-blowup`);
-- `AlgebraicGeometry.IsAdmissible.blowupBaseChange` and
-  `AlgebraicGeometry.IsAdmissible.preservedOpenPullback`: the base change
-  `X' ×_S Y ⟶ X ×_S Y` of a `U`-admissible blow-up along the first projection, and the
-  open of `X ×_S Y` over which it is an isomorphism;
 - `AlgebraicGeometry.separationBlowup`: the boundary-separation blow-up of the sum of
   two center ideals (revised blueprint: `def:nagata-separate-closed-subschemes`).
 
@@ -156,27 +151,6 @@ lemma le_preservedOpen : U ≤ B.preservedOpen := by
 /-- **A `U`-admissible blow-up is quasi-compact**, the center being of finite type. -/
 lemma quasiCompact_blowupMap : QuasiCompact B.I.blowupMap :=
   Scheme.IdealSheafData.quasiCompact_blowupMap B.finiteType
-
-variable {S Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
-
-/-- The base change of a `U`-admissible blow-up along the first projection of a fibre
-product: the morphism `X' ×_S Y ⟶ X ×_S Y` induced by `B.I.blowupMap : X' ⟶ X`. -/
-abbrev blowupBaseChange : pullback (B.I.blowupMap ≫ f) g ⟶ pullback f g :=
-  pullbackCompFstMap f g B.I.blowupMap
-
-/-- The preimage of the preserved open under the first projection of a fibre product:
-the open of `X ×_S Y` over which the base-changed blow-up is an isomorphism. -/
-abbrev preservedOpenPullback : (pullback f g).Opens :=
-  pullback.fst f g ⁻¹ᵁ B.preservedOpen
-
-/-- **The base-changed blow-up is an isomorphism over the preserved open**: the blow-up
-is an isomorphism over the complement of its center, and this persists under the base
-change along the first projection. -/
-instance isIso_blowupBaseChange_restrict :
-    IsIso (B.blowupBaseChange f g ∣_ B.preservedOpenPullback f g) :=
-  have := B.I.isIso_blowupMap_restrict_support_compl
-  isIso_morphismRestrict_of_isPullback
-    (isPullback_pullbackCompFstMap f g B.I.blowupMap) B.preservedOpen
 
 /-- **A `U`-admissible blow-up is proper**: the properness of the blow-up of the
 center (`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
