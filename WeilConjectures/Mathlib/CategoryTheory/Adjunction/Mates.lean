@@ -35,7 +35,7 @@ universe v₁ v₂ v₃ v₄ v₅ v₆ u₁ u₂ u₃ u₄ u₅ u₆
 
 namespace CategoryTheory
 
-open Category Functor Adjunction
+open Category CategoryTheory.Functor Adjunction
 
 section Whisker
 
@@ -60,7 +60,7 @@ theorem mateEquiv_comp_whiskerLeft (α : G ⋙ L₂ ⟶ L₁ ⋙ H) (d : H ⟶ H
   ext b
   simp only [mateEquiv, Equiv.coe_fn_mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.comp_obj, Functor.id_obj, Functor.rightUnitor_inv_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.map_id,
+    Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_hom_app, Category.comp_id, Category.id_comp, Category.assoc,
     Functor.comp_map, ← R₂.map_comp, d.naturality]
 

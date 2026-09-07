@@ -8,7 +8,8 @@ module
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
-# Fully faithfulness of `MorphismProperty.Over.map`, and base change squares
+# Fully faithfulness of `MorphismProperty.Over.map`, base change squares, and the
+coherence of base change
 
 The functor `MorphismProperty.Over.map` given by post-composition with a morphism
 satisfying `P` is always faithful (`CategoryTheory.MorphismProperty.Over.faithful_map`),
@@ -17,6 +18,22 @@ and it is full when the morphism is a monomorphism
 
 Base change along a morphism `f : X ⟶ Y` sends a morphism of `P.Over Q Y` to a cartesian
 square (`CategoryTheory.MorphismProperty.Over.isPullback_map_left`).
+
+Finally, base change is a pseudofunctor: base change along the identity is the identity
+functor, and the composition isomorphism `MorphismProperty.Over.pullbackComp` satisfies the
+associativity pentagon and the two unit triangles.
+
+## Main definitions
+
+- `CategoryTheory.MorphismProperty.Over.pullbackId`: base change along `𝟙 X` is `𝟭`.
+
+## Main results
+
+- `CategoryTheory.MorphismProperty.Over.pullbackComp_inv_assoc` and
+  `CategoryTheory.MorphismProperty.Over.pullbackComp_hom_assoc`: the associativity
+  coherence of `MorphismProperty.Over.pullbackComp`.
+- `CategoryTheory.MorphismProperty.Over.pullbackComp_id_right` and
+  `CategoryTheory.MorphismProperty.Over.pullbackComp_id_left`: its unit coherence.
 -/
 
 @[expose] public section
@@ -135,10 +152,14 @@ lemma MorphismProperty.Over.pullbackComp_id_left {X Z : T} (g : X ⟶ Z) :
         Functor.whiskerLeft (MorphismProperty.Over.pullback P Q g)
           (MorphismProperty.Over.pullbackId (P := P) (Q := Q) X).inv := by
   ext A
-  apply pullback.hom_ext <;>
-    simp [pullback.map, MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+  apply pullback.hom_ext
+  · simp only [pullback, Functor.id_obj, Functor.const_obj_obj, Over.mk, Functor.comp_obj,
+      pullbackComp_hom_app_left, pullback.map, comp_id, assoc, pullbackId, NatTrans.comp_app,
+      Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, NatIso.ofComponents_inv_app,
+      id_comp, isoMk_inv_left, asIso_inv, IsIso.inv_hom_id]
+    apply pullback.hom_ext <;> simp
+  · simp [pullback.map, MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
       MorphismProperty.Over.pullbackId]
-  apply pullback.hom_ext <;> simp
 
 /-- The associativity coherence of `MorphismProperty.Over.pullbackComp`, for the
 isomorphisms themselves; see `MorphismProperty.Over.pullbackComp_inv_assoc`. -/

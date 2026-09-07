@@ -63,6 +63,10 @@ The site-theoretic inputs of the general definitions are discharged here:
 - `AlgebraicGeometry.Etale.lowerStarComp` and `AlgebraicGeometry.Etale.upperStarComp`:
   the composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and
   `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`.
+- `AlgebraicGeometry.Etale.upperStarId`: the pullback along the identity is the identity
+  functor, and `AlgebraicGeometry.Etale.upperStarComp_assoc`,
+  `AlgebraicGeometry.Etale.upperStarComp_id_left` and
+  `AlgebraicGeometry.Etale.upperStarComp_id_right`: the coherence of `upperStarComp`.
 - `AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar` and
   `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar`: the pushforward `g_*`
   preserves every limit that exists in the coefficient category; in particular it is left

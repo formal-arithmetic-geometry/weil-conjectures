@@ -34,7 +34,12 @@ sheafification.
 - `CategoryTheory.GrothendieckTopology.lowerStarComp` and
   `CategoryTheory.GrothendieckTopology.upperStarComp`: the composition isomorphisms
   `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` and `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`, the latter
-  obtained from the former by uniqueness of left adjoints.
+  obtained from the former by uniqueness of left adjoints. Both take the composite
+  `h₁ ≫ h₂` as an optional argument, in the same way as
+  `CategoryTheory.MorphismProperty.Over.pullbackComp`.
+- `CategoryTheory.GrothendieckTopology.lowerStarId` and
+  `CategoryTheory.GrothendieckTopology.upperStarId`: the pushforward and the pullback
+  along the identity are the identity functor.
 
 ## Main results
 
@@ -48,6 +53,14 @@ sheafification.
   of the base change functor is. In contrast to `g_*` this is not automatic; see
   `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback` for the case of an
   étale morphism, where the Kan extension is precomposition with a right adjoint.
+- `CategoryTheory.GrothendieckTopology.lowerStarComp_assoc`,
+  `CategoryTheory.GrothendieckTopology.lowerStarComp_id_left` and
+  `CategoryTheory.GrothendieckTopology.lowerStarComp_id_right`, together with their
+  counterparts `upperStarComp_assoc`, `upperStarComp_id_left` and
+  `upperStarComp_id_right`: `g ↦ g_*` and `g ↦ g^*` are pseudofunctors. The `upperStar`
+  statements are transported from the `lowerStar` ones along the conjugation bijection
+  `CategoryTheory.conjugateEquiv`, which is how `upperStarComp` is defined in the first
+  place.
 
 ## Implementation notes
 
@@ -220,10 +233,12 @@ section Components
 
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h : T ⟶ R) (hh : h = h₁ ≫ h₂)
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 lemma lowerStarComp_hom_app_hom_app
     (M : Sheaf (T.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ R) :
     (((lowerStarComp A P Q hQP h₁ h₂ h hh).hom.app M).hom).app (op b) =
-      M.obj.map ((MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) h₁ h₂ h hh).hom.app b).op := by
+      M.obj.map
+        ((MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) h₁ h₂ h hh).hom.app b).op := by
   simp [lowerStarComp]
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
@@ -241,6 +256,7 @@ noncomputable def lowerStarId (U : Scheme.{u}) :
     (MorphismProperty.Over.pullbackId (P := P) (Q := ⊤) U) A
     (U.smallGrothendieckTopology Q (Q := P))
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 lemma lowerStarId_hom_app_hom_app (U : Scheme.{u})
     (M : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
     (((lowerStarId A P Q hQP U).hom.app M).hom).app (op b) =
@@ -253,6 +269,7 @@ section Coherence
 
 variable {R S T V : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₃ : R ⟶ V)
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- Associativity coherence of the composition isomorphism of pushforwards. -/
 lemma lowerStarComp_assoc (h₁₂ : T ⟶ R) (e₁₂ : h₁₂ = h₁ ≫ h₂) (h₂₃ : S ⟶ V)
     (e₂₃ : h₂₃ = h₂ ≫ h₃) (h : T ⟶ V) (e : h = h₁₂ ≫ h₃) (e' : h = h₁ ≫ h₂₃) :
@@ -272,6 +289,7 @@ lemma lowerStarComp_assoc (h₁₂ : T ⟶ R) (e₁₂ : h₁₂ = h₁ ≫ h₂
   simpa using congr_app (MorphismProperty.Over.pullbackComp_hom_assoc (P := P) (Q := ⊤)
     h₁ h₂ h₃ h₁₂ e₁₂ h₂₃ e₂₃ h e e') b
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- Unit coherence of the composition isomorphism of pushforwards: composing with the
 identity on the target. -/
 lemma lowerStarComp_id_right {W U : Scheme.{u}} (g : W ⟶ U) (e : g = g ≫ 𝟙 U) :
@@ -284,6 +302,7 @@ lemma lowerStarComp_id_right {W U : Scheme.{u}} (g : W ⟶ U) (e : g = g ≫ �
   congr 2
   simpa using congr_app (MorphismProperty.Over.pullbackComp_id_right (P := P) (Q := ⊤) g) b
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- Unit coherence of the composition isomorphism of pushforwards: composing with the
 identity on the source. -/
 lemma lowerStarComp_id_left {W U : Scheme.{u}} (g : W ⟶ U) (e : g = 𝟙 W ≫ g) :

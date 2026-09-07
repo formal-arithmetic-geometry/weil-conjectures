@@ -209,4 +209,63 @@ lemma Etale.exchange_hComp (w : g' ≫ f = f' ≫ g) (w' : k' ≫ f' = f'' ≫ k
 
 end HComp
 
+section VComp
+
+variable {X Y Z X' Y' Z' : Scheme.{u}} (f₁ : Z ⟶ Y) (f₂ : X ⟶ Z) (g : Y' ⟶ Y) (k : Z' ⟶ Z)
+  (g' : X' ⟶ X) (f₁' : Z' ⟶ Y') (f₂' : X' ⟶ Z')
+
+lemma Etale.upperStarSquareIso_vComp (wA : g' ≫ f₂ = f₂' ≫ k) (wB : k ≫ f₁ = f₁' ≫ g)
+    (w : g' ≫ (f₂ ≫ f₁) = (f₂' ≫ f₁') ≫ g) :
+    (upperStarSquareIso A (f₂ ≫ f₁) g (f₂' ≫ f₁') g' w).hom =
+      (Functor.whiskerLeft ((g)^*[A]) (upperStarComp A f₂' f₁').hom ≫
+          (Functor.whiskerRight (upperStarSquareIso A f₁ g f₁' k wB).hom ((f₂')^*[A]) ≫
+            Functor.whiskerLeft ((f₁)^*[A]) (upperStarSquareIso A f₂ k f₂' g' wA).hom)) ≫
+        Functor.whiskerRight (upperStarComp A f₂ f₁).inv ((g')^*[A]) := by
+  have e1 : g' ≫ (f₂ ≫ f₁) = f₂' ≫ (k ≫ f₁) := by
+    rw [← Category.assoc, wA, Category.assoc]
+  have e2 : g' ≫ (f₂ ≫ f₁) = (g' ≫ f₂) ≫ f₁ := (Category.assoc _ _ _).symm
+  have j1 := upperStarComp_assoc' A f₂' f₁' g (f₂' ≫ f₁') rfl (k ≫ f₁) wB
+    (g' ≫ (f₂ ≫ f₁)) w e1
+  have j2 := upperStarComp_assoc' A g' f₂ f₁ (g' ≫ f₂) rfl (f₂ ≫ f₁) rfl
+    (g' ≫ (f₂ ≫ f₁)) e2 rfl
+  have j3 := upperStarComp_assoc' A f₂' k f₁ (g' ≫ f₂) wA (k ≫ f₁) rfl
+    (g' ≫ (f₂ ≫ f₁)) e2 e1
+  simp only [upperStarSquareIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
+  simp only [← Functor.isoWhiskerLeft_hom, ← Functor.isoWhiskerLeft_inv,
+    ← Functor.isoWhiskerRight_hom, ← Functor.isoWhiskerRight_inv] at j1 j2 j3 ⊢
+  rw [Iso.inv_comp_eq, reassoc_of% j1]
+  simp only [Iso.hom_inv_id_assoc]
+  rw [← reassoc_of% j3]
+  simp only [Iso.hom_inv_id_assoc]
+  rw [reassoc_of% j2]
+  simp only [Iso.hom_inv_id, Category.comp_id]
+
+/-- Vertical pasting: for two squares glued along the common horizontal edge `k`, the
+exchange transformation of the pasted square is the composite of the two exchange
+transformations, modulo the composition isomorphisms of the glued vertical edges. -/
+lemma Etale.exchange_vComp (wA : g' ≫ f₂ = f₂' ≫ k) (wB : k ≫ f₁ = f₁' ≫ g)
+    (w : g' ≫ (f₂ ≫ f₁) = (f₂' ≫ f₁') ≫ g) :
+    exchange A (f₂ ≫ f₁) g (f₂' ≫ f₁') g' w =
+      Functor.whiskerRight (lowerStarComp A f₂ f₁).inv ((g)^*[A]) ≫
+        Functor.whiskerLeft ((f₂)_*[A]) (exchange A f₁ g f₁' k wB) ≫
+          Functor.whiskerRight (exchange A f₂ k f₂' g' wA) ((f₁')_*[A]) ≫
+            Functor.whiskerLeft ((g')^*[A]) (lowerStarComp A f₂' f₁').hom := by
+  unfold Etale.exchange
+  simp only [upperStarSquareIso_vComp A f₁ f₂ g k g' f₁' f₂' wA wB w]
+  rw [mateEquiv_comp_whiskerRight (upperStarLowerStarAdjunction A (f₂ ≫ f₁))
+      ((upperStarLowerStarAdjunction A f₁).comp (upperStarLowerStarAdjunction A f₂))
+      (upperStarLowerStarAdjunction A (f₂' ≫ f₁')) _ (upperStarComp A f₂ f₁).inv,
+    mateEquiv_whiskerLeft_comp
+      ((upperStarLowerStarAdjunction A f₁).comp (upperStarLowerStarAdjunction A f₂))
+      ((upperStarLowerStarAdjunction A f₁').comp (upperStarLowerStarAdjunction A f₂'))
+      (upperStarLowerStarAdjunction A (f₂' ≫ f₁')) _ (upperStarComp A f₂' f₁').hom,
+    mateEquiv_hcomp' (upperStarLowerStarAdjunction A f₁) (upperStarLowerStarAdjunction A f₁')
+      (upperStarLowerStarAdjunction A f₂) (upperStarLowerStarAdjunction A f₂')
+      (upperStarSquareIso A f₁ g f₁' k wB).hom (upperStarSquareIso A f₂ k f₂' g' wA).hom,
+    Etale.conjugateEquiv_upperStarComp_inv, Etale.conjugateEquiv_upperStarComp_hom]
+  simp only [Category.assoc]
+
+end VComp
+
 end AlgebraicGeometry
