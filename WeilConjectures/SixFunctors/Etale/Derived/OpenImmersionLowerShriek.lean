@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
 ## The derived adjunction `j_! ⊣ j^*` along an open immersion

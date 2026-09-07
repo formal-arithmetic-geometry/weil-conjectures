@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
@@ -23,6 +24,12 @@ This file registers the single consequence of it that the development needs, so 
 `HasColimitsOfSize.{u, u} A` need not be carried as a hypothesis alongside
 `IsGrothendieckAbelian.{u + 1} A`.
 
+The same shrinking is needed for the *exactness* of these colimits: a Grothendieck abelian
+category satisfies `AB5OfSize.{u + 1, u + 1}` by definition, and
+`CategoryTheory.AB5OfSize_of_univLE` brings this down to filtered colimits of size `0`.
+The instance `CategoryTheory.Limits.hasExactColimitsOfShape_int` records the case of the
+filtered shape `ℤ`, which is what the K-flat left derivability structure asks for.
+
 -/
 
 @[expose] public section
@@ -40,5 +47,14 @@ Instance search does not climb the universes here: discharging the hypothesis
 instance hasColimitsOfSize_of_succ (A : Type u') [Category.{u + 1} A]
     [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u} A :=
   hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} A
+
+/-- A Grothendieck abelian category with `Hom`-types in `u + 1` has exact `ℤ`-indexed
+colimits: it satisfies `AB5OfSize.{u + 1, u + 1}`, hence `AB5OfSize.{0, 0}` by
+`CategoryTheory.AB5OfSize_of_univLE` and `UnivLE.{0, u + 1}`, and `ℤ` is a filtered
+category of that size. -/
+instance hasExactColimitsOfShape_int (A : Type u') [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] : HasExactColimitsOfShape ℤ A :=
+  have := AB5OfSize_of_univLE.{0, 0} A
+  inferInstance
 
 end CategoryTheory.Limits
