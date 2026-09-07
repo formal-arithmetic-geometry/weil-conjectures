@@ -243,18 +243,89 @@ open Etale
 
 /-- The composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of pushforwards on
 étale sheaves. -/
-noncomputable def Etale.lowerStarComp : (h₁)_*[A] ⋙ (h₂)_*[A] ≅ (h₁ ≫ h₂)_*[A] :=
-  GrothendieckTopology.lowerStarComp A @Etale @Etale le_rfl h₁ h₂
+noncomputable def Etale.lowerStarComp (h : T ⟶ R := h₁ ≫ h₂)
+    (hh : h = h₁ ≫ h₂ := by cat_disch) : (h₁)_*[A] ⋙ (h₂)_*[A] ≅ (h)_*[A] :=
+  GrothendieckTopology.lowerStarComp A @Etale @Etale le_rfl h₁ h₂ h hh
 
 section UpperStar
 
 /-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale
 sheaves, obtained from `Etale.lowerStarComp` by uniqueness of left adjoints. -/
-noncomputable def Etale.upperStarComp : (h₁ ≫ h₂)^*[A] ≅ (h₂)^*[A] ⋙ (h₁)^*[A] :=
-  GrothendieckTopology.upperStarComp A @Etale @Etale le_rfl h₁ h₂
+noncomputable def Etale.upperStarComp (h : T ⟶ R := h₁ ≫ h₂)
+    (hh : h = h₁ ≫ h₂ := by cat_disch) : (h)^*[A] ≅ (h₂)^*[A] ⋙ (h₁)^*[A] :=
+  GrothendieckTopology.upperStarComp A @Etale @Etale le_rfl h₁ h₂ h hh
 
 end UpperStar
 
 end Comp
+
+section Coherence
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+open Etale
+
+/-- The pullback `(𝟙 Y)^*` along the identity is the identity functor. -/
+noncomputable def Etale.upperStarId (Y : Scheme.{u}) :
+    (𝟙 Y)^*[A] ≅ 𝟭 (Sheaf Y.smallEtaleTopology A) :=
+  GrothendieckTopology.upperStarId A @Etale @Etale le_rfl Y
+
+variable {R S T V : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₃ : R ⟶ V)
+
+/-- Associativity of the composition isomorphism `Etale.upperStarComp`: the two ways of
+decomposing `(h₁ ≫ h₂ ≫ h₃)^*` into `(h₃)^* ⋙ (h₂)^* ⋙ (h₁)^*` agree. -/
+lemma Etale.upperStarComp_assoc (h₁₂ : T ⟶ R) (e₁₂ : h₁₂ = h₁ ≫ h₂) (h₂₃ : S ⟶ V)
+    (e₂₃ : h₂₃ = h₂ ≫ h₃) (h : T ⟶ V) (e : h = h₁₂ ≫ h₃) (e' : h = h₁ ≫ h₂₃) :
+    (upperStarComp A h₁₂ h₃ h e).hom ≫
+        Functor.whiskerLeft ((h₃)^*[A]) (upperStarComp A h₁ h₂ h₁₂ e₁₂).hom =
+      (upperStarComp A h₁ h₂₃ h e').hom ≫
+        Functor.whiskerRight (upperStarComp A h₂ h₃ h₂₃ e₂₃).hom ((h₁)^*[A]) ≫
+          (Functor.associator ((h₃)^*[A]) ((h₂)^*[A]) ((h₁)^*[A])).hom :=
+  GrothendieckTopology.upperStarComp_assoc A @Etale @Etale le_rfl h₁ h₂ h₃ h₁₂ e₁₂ h₂₃ e₂₃ h e e'
+
+/-- The associativity coherence `Etale.upperStarComp_assoc`, with the (identity) associator
+of the triple composite left implicit. -/
+lemma Etale.upperStarComp_assoc' (h₁₂ : T ⟶ R) (e₁₂ : h₁₂ = h₁ ≫ h₂) (h₂₃ : S ⟶ V)
+    (e₂₃ : h₂₃ = h₂ ≫ h₃) (h : T ⟶ V) (e : h = h₁₂ ≫ h₃) (e' : h = h₁ ≫ h₂₃) :
+    (upperStarComp A h₁₂ h₃ h e).hom ≫
+        Functor.whiskerLeft ((h₃)^*[A]) (upperStarComp A h₁ h₂ h₁₂ e₁₂).hom =
+      (upperStarComp A h₁ h₂₃ h e').hom ≫
+        Functor.whiskerRight (upperStarComp A h₂ h₃ h₂₃ e₂₃).hom ((h₁)^*[A]) := by
+  refine NatTrans.ext (funext fun M ↦ ?_)
+  simpa using congr_app (Etale.upperStarComp_assoc A h₁ h₂ h₃ h₁₂ e₁₂ h₂₃ e₂₃ h e e') M
+
+/-- Unit coherence of `Etale.upperStarComp`: composing with the identity on the target. -/
+lemma Etale.upperStarComp_id_right {Z Y : Scheme.{u}} (g : Z ⟶ Y) (e : g = g ≫ 𝟙 Y) :
+    (upperStarComp A g (𝟙 Y) g e).hom =
+      ((g)^*[A]).leftUnitor.inv ≫
+        Functor.whiskerRight (Etale.upperStarId A Y).inv ((g)^*[A]) :=
+  GrothendieckTopology.upperStarComp_id_right A @Etale @Etale le_rfl g e
+
+/-- Unit coherence of `Etale.upperStarComp`: composing with the identity on the source. -/
+lemma Etale.upperStarComp_id_left {Z Y : Scheme.{u}} (g : Z ⟶ Y) (e : g = 𝟙 Z ≫ g) :
+    (upperStarComp A (𝟙 Z) g g e).hom =
+      ((g)^*[A]).rightUnitor.inv ≫
+        Functor.whiskerLeft ((g)^*[A]) (Etale.upperStarId A Z).inv :=
+  GrothendieckTopology.upperStarComp_id_left A @Etale @Etale le_rfl g e
+
+/-- The composition isomorphism `Etale.upperStarComp` is the conjugate, under the
+adjunctions `g^* ⊣ g_*`, of the composition isomorphism `Etale.lowerStarComp`. -/
+lemma Etale.conjugateEquiv_upperStarComp_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (h : T ⟶ R) (hh : h = h₁ ≫ h₂) :
+    conjugateEquiv ((upperStarLowerStarAdjunction A h₂).comp (upperStarLowerStarAdjunction A h₁))
+        (upperStarLowerStarAdjunction A h) (upperStarComp A h₁ h₂ h hh).hom =
+      (lowerStarComp A h₁ h₂ h hh).hom :=
+  GrothendieckTopology.conjugateEquiv_upperStarComp_hom A @Etale @Etale le_rfl h₁ h₂ h hh
+
+@[inherit_doc Etale.conjugateEquiv_upperStarComp_hom]
+lemma Etale.conjugateEquiv_upperStarComp_inv {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (h : T ⟶ R) (hh : h = h₁ ≫ h₂) :
+    conjugateEquiv (upperStarLowerStarAdjunction A h)
+        ((upperStarLowerStarAdjunction A h₂).comp (upperStarLowerStarAdjunction A h₁))
+        (upperStarComp A h₁ h₂ h hh).inv =
+      (lowerStarComp A h₁ h₂ h hh).inv :=
+  GrothendieckTopology.conjugateEquiv_upperStarComp_inv A @Etale @Etale le_rfl h₁ h₂ h hh
+
+end Coherence
 
 end AlgebraicGeometry

@@ -1,181 +1,212 @@
+/-
+Copyright (c) 2026 Christian Merten. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Christian Merten
+-/
 module
 
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
-public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+
+/-!
+
+# The exchange transformation `g^* f_* ⟶ f'_* g'^*` on small étale sites
+
+For a commutative square of schemes
+
+```
+X' --g'--> X
+|f'        |f
+v          v
+Y' --g---> Y
+```
+
+the two composites `X' ⟶ Y` agree, so the composition isomorphisms
+`AlgebraicGeometry.Etale.upperStarComp` identify `g^* ⋙ f'^*` with `f^* ⋙ g'^*`. Its mate
+with respect to the adjunctions `f^* ⊣ f_*` and `f'^* ⊣ f'_*` is the exchange, or
+Beck–Chevalley, transformation `Ex□ : f_* ⋙ g^* ⟶ g'^* ⋙ f'_*` of this file. Being a
+natural transformation, it is automatically natural in the sheaf.
+
+The square is only required to *commute*; cartesianness is nowhere used, and the exchange
+transformation is not claimed to be an isomorphism.
+
+## Main definitions
+
+- `AlgebraicGeometry.Etale.upperStarSquareIso`: the isomorphism
+  `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` of pullbacks attached to a commutative square.
+- `AlgebraicGeometry.Etale.exchange`: the exchange transformation
+  `f_* ⋙ g^* ⟶ g'^* ⋙ f'_*`, the mate of `Etale.upperStarSquareIso`.
+
+## Main results
+
+- `AlgebraicGeometry.Etale.exchange_id`: for the square with both horizontal edges the
+  identity, the exchange is the identity, modulo the identification
+  `AlgebraicGeometry.Etale.upperStarId` of `(𝟙 _)^*` with the identity functor.
+- `AlgebraicGeometry.Etale.exchange_hComp`: horizontal pasting. For two squares glued along
+  a common vertical edge, the exchange of the pasted square is the composite of the two
+  exchanges, modulo the composition isomorphisms `Etale.upperStarComp` of the two glued
+  horizontal edges.
+- `AlgebraicGeometry.Etale.exchange_vComp`: vertical pasting. For two squares glued along a
+  common horizontal edge, the exchange of the pasted square is the composite of the two
+  exchanges, modulo the composition isomorphisms `Etale.lowerStarComp` of the two glued
+  vertical edges.
+
+## Implementation notes
+
+Both `Etale.upperStarSquareIso` and `Etale.exchange` take the diagonal `d : X' ⟶ Y` of the
+square as an optional argument, defaulting to `g' ≫ f`, in the same way as
+`CategoryTheory.MorphismProperty.Over.pullbackComp` takes the composite as an optional
+argument. This is what makes the identity square usable: there the diagonal is `𝟙 X ≫ f`,
+and only passing `f` for it keeps the statement free of `eqToHom`s.
+`AlgebraicGeometry.Etale.exchange_eq` says that the choice does not matter.
+
+## Blueprint
+
+- `def:weil-pbc-underived-exchange` is `AlgebraicGeometry.Etale.exchange`.
+- `lemma:weil-pbc-underived-exchange-naturality` is the naturality of that transformation,
+  which holds by construction; the blueprint statement is recorded as
+  `AlgebraicGeometry.Etale.exchange_naturality`.
+
+-/
 
 @[expose] public section
 
 universe u' u
 
-open CategoryTheory Category Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
+open CategoryTheory Category Limits Opposite
 
-namespace CategoryTheory.GrothendieckTopology
+namespace AlgebraicGeometry
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-variable (P Q : MorphismProperty Scheme.{u})
-variable [P.IsMultiplicative] [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P]
-  [Q.IsMultiplicative] [Q.IsStableUnderBaseChange]
-variable (hQP : Q ≤ P)
 
-section Components
+open Etale
 
-variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h : T ⟶ R) (hh : h = h₁ ≫ h₂)
+section Defs
 
-lemma lowerStarComp_hom_app_hom_app
-    (M : Sheaf (T.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ R) :
-    (((lowerStarComp A P Q hQP h₁ h₂ h hh).hom.app M).hom).app (op b) =
-      M.obj.map ((MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) h₁ h₂ h hh).hom.app b).op := by
-  simp [lowerStarComp]
+variable {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-lemma lowerStar_obj_obj_map {W U : Scheme.{u}} (g : W ⟶ U)
-    (M : Sheaf (W.smallGrothendieckTopology Q (Q := P)) A) {b b' : P.Over ⊤ U} (φ : b ⟶ b') :
-    ((lowerStar A P Q hQP g).obj M).obj.map φ.op =
-      M.obj.map ((MorphismProperty.Over.pullback P ⊤ g).map φ).op :=
-  rfl
+/-- For a commutative square with horizontal edges `g`, `g'` and vertical edges `f`, `f'`,
+the canonical isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` of pullbacks on small étale sites: both
+sides are identified with the pullback along the diagonal `d` of the square. -/
+noncomputable def Etale.upperStarSquareIso (w : g' ≫ f = f' ≫ g) (d : X' ⟶ Y := g' ≫ f)
+    (hd : d = g' ≫ f := by cat_disch) :
+    (g)^*[A] ⋙ (f')^*[A] ≅ (f)^*[A] ⋙ (g')^*[A] :=
+  (upperStarComp A f' g d (hd.trans w)).symm ≪≫ upperStarComp A g' f d hd
 
-/-- The pushforward along the identity is the identity functor. -/
-noncomputable def lowerStarId (U : Scheme.{u}) :
-    lowerStar A P Q hQP (𝟙 U) ≅ 𝟭 (Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) :=
-  have := isContinuous_overPullback P Q hQP (𝟙 U)
-  Functor.sheafPushforwardContinuousId'
-    (MorphismProperty.Over.pullbackId (P := P) (Q := ⊤) U) A
-    (U.smallGrothendieckTopology Q (Q := P))
+/-- The exchange (Beck–Chevalley) transformation `Ex□ : f_* ⋙ g^* ⟶ g'^* ⋙ f'_*` attached
+to a commutative square with horizontal edges `g`, `g'` and vertical edges `f`, `f'`: the
+mate of `Etale.upperStarSquareIso` with respect to the adjunctions `f^* ⊣ f_*` and
+`f'^* ⊣ f'_*`. Only commutativity of the square is used. -/
+noncomputable def Etale.exchange (w : g' ≫ f = f' ≫ g) (d : X' ⟶ Y := g' ≫ f)
+    (hd : d = g' ≫ f := by cat_disch) :
+    (f)_*[A] ⋙ (g)^*[A] ⟶ (g')^*[A] ⋙ (f')_*[A] :=
+  (mateEquiv (upperStarLowerStarAdjunction A f) (upperStarLowerStarAdjunction A f')
+    (.mk ((g)^*[A]) ((f)^*[A]) ((f')^*[A]) ((g')^*[A])
+      (Etale.upperStarSquareIso A f g f' g' w d hd).hom)).natTrans
 
-lemma lowerStarId_hom_app_hom_app (U : Scheme.{u})
-    (M : Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) (b : P.Over ⊤ U) :
-    (((lowerStarId A P Q hQP U).hom.app M).hom).app (op b) =
-      M.obj.map ((MorphismProperty.Over.pullbackId (P := P) (Q := ⊤) U).inv.app b).op := by
-  simp [lowerStarId]
+/-- The exchange transformation does not depend on the chosen diagonal of the square. -/
+lemma Etale.exchange_eq (w : g' ≫ f = f' ≫ g) (d : X' ⟶ Y) (hd : d = g' ≫ f) :
+    exchange A f g f' g' w d hd = exchange A f g f' g' w := by
+  subst hd; rfl
 
-end Components
+/-- The exchange transformation is natural in the sheaf: this is the naturality square of
+the natural transformation `Etale.exchange`. -/
+lemma Etale.exchange_naturality (w : g' ≫ f = f' ≫ g)
+    {F G : Sheaf X.smallEtaleTopology A} (u : F ⟶ G) :
+    ((f)_*[A] ⋙ (g)^*[A]).map u ≫ (exchange A f g f' g' w).app G =
+      (exchange A f g f' g' w).app F ≫ ((g')^*[A] ⋙ (f')_*[A]).map u :=
+  (exchange A f g f' g' w).naturality u
 
-section Coherence
+end Defs
 
-variable {R S T V : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₃ : R ⟶ V)
+section Id
 
-/-- Associativity coherence of the composition isomorphism of pushforwards. -/
-lemma lowerStarComp_assoc (h₁₂ : T ⟶ R) (e₁₂ : h₁₂ = h₁ ≫ h₂) (h₂₃ : S ⟶ V)
-    (e₂₃ : h₂₃ = h₂ ≫ h₃) (h : T ⟶ V) (e : h = h₁₂ ≫ h₃) (e' : h = h₁ ≫ h₂₃) :
-    Functor.whiskerRight (lowerStarComp A P Q hQP h₁ h₂ h₁₂ e₁₂).hom
-          (lowerStar A P Q hQP h₃) ≫
-        (lowerStarComp A P Q hQP h₁₂ h₃ h e).hom =
-      (Functor.associator (lowerStar A P Q hQP h₁) (lowerStar A P Q hQP h₂)
-            (lowerStar A P Q hQP h₃)).hom ≫
-        Functor.whiskerLeft (lowerStar A P Q hQP h₁)
-            (lowerStarComp A P Q hQP h₂ h₃ h₂₃ e₂₃).hom ≫
-          (lowerStarComp A P Q hQP h₁ h₂₃ h e').hom := by
-  ext M b
-  obtain ⟨b⟩ := b
-  simp [lowerStarComp_hom_app_hom_app, lowerStar_map_hom_app, lowerStar_obj_obj_map,
-    ← Functor.map_comp, ← op_comp]
-  congr 2
-  simpa using congr_app (MorphismProperty.Over.pullbackComp_hom_assoc (P := P) (Q := ⊤)
-    h₁ h₂ h₃ h₁₂ e₁₂ h₂₃ e₂₃ h e e') b
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- Unit coherence of the composition isomorphism of pushforwards: composing with the
-identity on the target. -/
-lemma lowerStarComp_id_right {W U : Scheme.{u}} (g : W ⟶ U) (e : g = g ≫ 𝟙 U) :
-    (lowerStarComp A P Q hQP g (𝟙 U) g e).hom =
-      Functor.whiskerLeft (lowerStar A P Q hQP g) (lowerStarId A P Q hQP U).hom ≫
-        (lowerStar A P Q hQP g).rightUnitor.hom := by
-  ext M b
-  obtain ⟨b⟩ := b
-  simp [lowerStarComp_hom_app_hom_app, lowerStarId_hom_app_hom_app, lowerStar_obj_obj_map]
-  congr 2
-  simpa using congr_app (MorphismProperty.Over.pullbackComp_id_right (P := P) (Q := ⊤) g) b
+lemma Etale.upperStarSquareIso_id (w : 𝟙 X ≫ f = f ≫ 𝟙 Y) (hd : f = 𝟙 X ≫ f) :
+    (upperStarSquareIso A f (𝟙 Y) f (𝟙 X) w f hd).hom =
+      (Functor.whiskerRight (upperStarId A Y).hom ((f)^*[A]) ≫
+          ((f)^*[A]).leftUnitor.hom ≫ ((f)^*[A]).rightUnitor.inv) ≫
+        Functor.whiskerLeft ((f)^*[A]) (upperStarId A X).inv := by
+  have h1 : upperStarComp A f (𝟙 Y) f (hd.trans w) =
+      ((f)^*[A]).leftUnitor.symm ≪≫
+        Functor.isoWhiskerRight (upperStarId A Y).symm ((f)^*[A]) :=
+    Iso.ext (by simpa using upperStarComp_id_right A f (hd.trans w))
+  simp [upperStarSquareIso, h1, upperStarComp_id_left A f hd]
 
-/-- Unit coherence of the composition isomorphism of pushforwards: composing with the
-identity on the source. -/
-lemma lowerStarComp_id_left {W U : Scheme.{u}} (g : W ⟶ U) (e : g = 𝟙 W ≫ g) :
-    (lowerStarComp A P Q hQP (𝟙 W) g g e).hom =
-      Functor.whiskerRight (lowerStarId A P Q hQP W).hom (lowerStar A P Q hQP g) ≫
-        (lowerStar A P Q hQP g).leftUnitor.hom := by
-  ext M b
-  obtain ⟨b⟩ := b
-  simp [lowerStarComp_hom_app_hom_app, lowerStarId_hom_app_hom_app, lowerStar_map_hom_app]
-  congr 2
-  simpa using congr_app (MorphismProperty.Over.pullbackComp_id_left (P := P) (Q := ⊤) g) b
+/-- Identity square: for `g = 𝟙 Y` and `g' = 𝟙 X` the exchange transformation is the
+identity, modulo the identification `Etale.upperStarId` of `(𝟙 _)^*` with `𝟭`. -/
+lemma Etale.exchange_id (w : 𝟙 X ≫ f = f ≫ 𝟙 Y) :
+    exchange A f (𝟙 Y) f (𝟙 X) w =
+      Functor.whiskerLeft ((f)_*[A]) (upperStarId A Y).hom ≫
+        ((f)_*[A]).rightUnitor.hom ≫ ((f)_*[A]).leftUnitor.inv ≫
+          Functor.whiskerRight (upperStarId A X).inv ((f)_*[A]) := by
+  have hd : f = 𝟙 X ≫ f := by simp
+  rw [← exchange_eq A f (𝟙 Y) f (𝟙 X) w f hd]
+  unfold Etale.exchange
+  rw [upperStarSquareIso_id A f w hd,
+    mateEquiv_comp_whiskerLeft (upperStarLowerStarAdjunction A f)
+      (upperStarLowerStarAdjunction A f) _ (upperStarId A X).inv,
+    mateEquiv_whiskerRight_comp (upperStarLowerStarAdjunction A f)
+      (upperStarLowerStarAdjunction A f) _ (upperStarId A Y).hom,
+    mateEquiv_id]
+  simp
 
-end Coherence
+end Id
 
-section UpperStarCoherence
+section HComp
 
-/-- The pullback along the identity is the identity functor. -/
-noncomputable def upperStarId (U : Scheme.{u}) :
-    upperStar A P Q (𝟙 U) ≅ 𝟭 (Sheaf (U.smallGrothendieckTopology Q (Q := P)) A) :=
-  ((conjugateIsoEquiv (upperStarLowerStarAdjunction A P Q hQP (𝟙 U)) Adjunction.id).symm
-    (lowerStarId A P Q hQP U)).symm
+variable {X Y X' Y' X'' Y'' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y')
+  (g' : X' ⟶ X) (k : Y'' ⟶ Y') (f'' : X'' ⟶ Y'') (k' : X'' ⟶ X')
 
-variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h : T ⟶ R) (hh : h = h₁ ≫ h₂)
+lemma Etale.upperStarSquareIso_hComp (w : g' ≫ f = f' ≫ g) (w' : k' ≫ f' = f'' ≫ k)
+    (w'' : (k' ≫ g') ≫ f = f'' ≫ (k ≫ g)) :
+    (upperStarSquareIso A f (k ≫ g) f'' (k' ≫ g') w'').hom =
+      (Functor.whiskerRight (upperStarComp A k g).hom ((f'')^*[A]) ≫
+        (Functor.whiskerLeft ((g)^*[A]) (upperStarSquareIso A f' k f'' k' w').hom ≫
+          Functor.whiskerRight (upperStarSquareIso A f g f' g' w).hom ((k')^*[A]))) ≫
+        Functor.whiskerLeft ((f)^*[A]) (upperStarComp A k' g').inv := by
+  have eDE : (k' ≫ g') ≫ f = (k' ≫ f') ≫ g := by
+    rw [Category.assoc, w, ← Category.assoc]
+  have eDF : (k' ≫ g') ≫ f = k' ≫ (g' ≫ f) := Category.assoc _ _ _
+  have i1 := upperStarComp_assoc' A f'' k g (k' ≫ f') w' (k ≫ g) rfl
+    ((k' ≫ g') ≫ f) eDE w''
+  have i2 := upperStarComp_assoc' A k' g' f (k' ≫ g') rfl (g' ≫ f) rfl
+    ((k' ≫ g') ≫ f) rfl eDF
+  have i3 := upperStarComp_assoc' A k' f' g (k' ≫ f') rfl (g' ≫ f) w
+    ((k' ≫ g') ≫ f) eDE eDF
+  simp only [upperStarSquareIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
+  simp only [← Functor.isoWhiskerLeft_hom, ← Functor.isoWhiskerLeft_inv,
+    ← Functor.isoWhiskerRight_hom, ← Functor.isoWhiskerRight_inv] at i1 i2 i3 ⊢
+  rw [Iso.inv_comp_eq, ← reassoc_of% i1]
+  simp only [Iso.hom_inv_id_assoc]
+  rw [reassoc_of% i3]
+  simp only [Iso.hom_inv_id_assoc]
+  rw [← reassoc_of% i2]
+  simp only [Iso.hom_inv_id, Category.comp_id]
 
-lemma conjugateEquiv_upperStarComp_hom :
-    conjugateEquiv ((upperStarLowerStarAdjunction A P Q hQP h₂).comp
-          (upperStarLowerStarAdjunction A P Q hQP h₁))
-        (upperStarLowerStarAdjunction A P Q hQP h)
-        (upperStarComp A P Q hQP h₁ h₂ h hh).hom =
-      (lowerStarComp A P Q hQP h₁ h₂ h hh).hom := by
-  simp [upperStarComp]
+/-- Horizontal pasting: for two squares glued along the common vertical edge `f'`, the
+exchange transformation of the pasted square is the composite of the two exchange
+transformations, modulo the composition isomorphisms of the glued horizontal edges. -/
+lemma Etale.exchange_hComp (w : g' ≫ f = f' ≫ g) (w' : k' ≫ f' = f'' ≫ k)
+    (w'' : (k' ≫ g') ≫ f = f'' ≫ (k ≫ g)) :
+    exchange A f (k ≫ g) f'' (k' ≫ g') w'' =
+      Functor.whiskerLeft ((f)_*[A]) (upperStarComp A k g).hom ≫
+        Functor.whiskerRight (exchange A f g f' g' w) ((k)^*[A]) ≫
+          Functor.whiskerLeft ((g')^*[A]) (exchange A f' k f'' k' w') ≫
+            Functor.whiskerRight (upperStarComp A k' g').inv ((f'')_*[A]) := by
+  unfold Etale.exchange
+  simp only [upperStarSquareIso_hComp A f g f' g' k f'' k' w w' w'']
+  rw [mateEquiv_comp_whiskerLeft (upperStarLowerStarAdjunction A f)
+      (upperStarLowerStarAdjunction A f'') _ (upperStarComp A k' g').inv,
+    mateEquiv_whiskerRight_comp (upperStarLowerStarAdjunction A f)
+      (upperStarLowerStarAdjunction A f'') _ (upperStarComp A k g).hom,
+    mateEquiv_vcomp' (upperStarLowerStarAdjunction A f) (upperStarLowerStarAdjunction A f')
+      (upperStarLowerStarAdjunction A f'') (upperStarSquareIso A f g f' g' w).hom
+      (upperStarSquareIso A f' k f'' k' w').hom]
+  simp only [Category.assoc]
 
-lemma conjugateEquiv_upperStarId_inv (U : Scheme.{u}) :
-    conjugateEquiv (upperStarLowerStarAdjunction A P Q hQP (𝟙 U)) Adjunction.id
-        (upperStarId A P Q hQP U).inv =
-      (lowerStarId A P Q hQP U).hom := by
-  simp [upperStarId]
+end HComp
 
-variable {V : Scheme.{u}} (h₃ : R ⟶ V)
-
-lemma upperStarComp_assoc (h₁₂ : T ⟶ R) (e₁₂ : h₁₂ = h₁ ≫ h₂) (h₂₃ : S ⟶ V)
-    (e₂₃ : h₂₃ = h₂ ≫ h₃) (hh' : T ⟶ V) (e : hh' = h₁₂ ≫ h₃) (e' : hh' = h₁ ≫ h₂₃) :
-    (upperStarComp A P Q hQP h₁₂ h₃ hh' e).hom ≫
-        Functor.whiskerLeft (upperStar A P Q h₃) (upperStarComp A P Q hQP h₁ h₂ h₁₂ e₁₂).hom =
-      (upperStarComp A P Q hQP h₁ h₂₃ hh' e').hom ≫
-        Functor.whiskerRight (upperStarComp A P Q hQP h₂ h₃ h₂₃ e₂₃).hom (upperStar A P Q h₁) ≫
-          (Functor.associator (upperStar A P Q h₃) (upperStar A P Q h₂)
-            (upperStar A P Q h₁)).hom := by
-  apply (conjugateEquiv
-    ((upperStarLowerStarAdjunction A P Q hQP h₃).comp
-      ((upperStarLowerStarAdjunction A P Q hQP h₂).comp
-        (upperStarLowerStarAdjunction A P Q hQP h₁)))
-    (upperStarLowerStarAdjunction A P Q hQP hh')).injective
-  rw [← conjugateEquiv_comp _ ((upperStarLowerStarAdjunction A P Q hQP h₃).comp
-        (upperStarLowerStarAdjunction A P Q hQP h₁₂)) _,
-      ← conjugateEquiv_comp _ ((upperStarLowerStarAdjunction A P Q hQP h₂₃).comp
-        (upperStarLowerStarAdjunction A P Q hQP h₁)) _,
-      ← conjugateEquiv_comp _ (((upperStarLowerStarAdjunction A P Q hQP h₃).comp
-        (upperStarLowerStarAdjunction A P Q hQP h₂)).comp
-        (upperStarLowerStarAdjunction A P Q hQP h₁)) _,
-      conjugateEquiv_whiskerLeft, conjugateEquiv_whiskerRight, conjugateEquiv_associator_hom,
-      conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarComp_hom,
-      conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarComp_hom]
-  simpa using lowerStarComp_assoc A P Q hQP h₁ h₂ h₃ h₁₂ e₁₂ h₂₃ e₂₃ hh' e e'
-
-lemma upperStarComp_id_right {W U : Scheme.{u}} (g : W ⟶ U) (e : g = g ≫ 𝟙 U) :
-    (upperStarComp A P Q hQP g (𝟙 U) g e).hom =
-      (upperStar A P Q g).leftUnitor.inv ≫
-        Functor.whiskerRight (upperStarId A P Q hQP U).inv (upperStar A P Q g) := by
-  apply (conjugateEquiv ((upperStarLowerStarAdjunction A P Q hQP (𝟙 U)).comp
-    (upperStarLowerStarAdjunction A P Q hQP g))
-    (upperStarLowerStarAdjunction A P Q hQP g)).injective
-  rw [← conjugateEquiv_comp _ (Adjunction.id.comp (upperStarLowerStarAdjunction A P Q hQP g)) _,
-    conjugateEquiv_whiskerRight, conjugateEquiv_leftUnitor_inv,
-    conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarId_inv]
-  exact lowerStarComp_id_right A P Q hQP g e
-
-lemma upperStarComp_id_left {W U : Scheme.{u}} (g : W ⟶ U) (e : g = 𝟙 W ≫ g) :
-    (upperStarComp A P Q hQP (𝟙 W) g g e).hom =
-      (upperStar A P Q g).rightUnitor.inv ≫
-        Functor.whiskerLeft (upperStar A P Q g) (upperStarId A P Q hQP W).inv := by
-  apply (conjugateEquiv ((upperStarLowerStarAdjunction A P Q hQP g).comp
-    (upperStarLowerStarAdjunction A P Q hQP (𝟙 W)))
-    (upperStarLowerStarAdjunction A P Q hQP g)).injective
-  rw [← conjugateEquiv_comp _ ((upperStarLowerStarAdjunction A P Q hQP g).comp Adjunction.id) _,
-    conjugateEquiv_whiskerLeft, conjugateEquiv_rightUnitor_inv,
-    conjugateEquiv_upperStarComp_hom, conjugateEquiv_upperStarId_inv]
-  exact lowerStarComp_id_left A P Q hQP g e
-
-
-end UpperStarCoherence
-
-end CategoryTheory.GrothendieckTopology
+end AlgebraicGeometry
