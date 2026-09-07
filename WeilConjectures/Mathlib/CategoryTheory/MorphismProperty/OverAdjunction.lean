@@ -82,4 +82,90 @@ lemma MorphismProperty.Over.isPullback_map_left {A B : P.Over Q Y} (φ : A ⟶ B
 
 end Pullback
 
+section PullbackCoherence
+
+variable [Q.IsStableUnderBaseChange] [Q.RespectsIso] [P.IsStableUnderBaseChange]
+  [HasPullbacks T]
+
+/-- Base change along the identity is the identity functor: the fibre product `A ×_X X` is
+`A`, via the first projection. -/
+noncomputable def MorphismProperty.Over.pullbackId (X : T) :
+    MorphismProperty.Over.pullback P Q (𝟙 X) ≅ 𝟭 (P.Over Q X) :=
+  NatIso.ofComponents
+    (fun A ↦ MorphismProperty.Over.isoMk (asIso (pullback.fst A.hom (𝟙 X)))
+      (by simpa using pullback.condition (f := A.hom) (g := 𝟙 X)))
+    (fun {A B} φ ↦ by ext; simp)
+
+/-- The associativity coherence of `MorphismProperty.Over.pullbackComp`: the two ways of
+decomposing base change along a triple composite `f ≫ g ≫ h` agree. Stated for the
+inverses; see `MorphismProperty.Over.pullbackComp_hom_assoc` for the version for the
+underlying isomorphisms. -/
+lemma MorphismProperty.Over.pullbackComp_inv_assoc {X Y Z W : T} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (h : Z ⟶ W) (fg : X ⟶ Z) (hfg : fg = f ≫ g) (gh : Y ⟶ W) (hgh : gh = g ≫ h)
+    (fgh : X ⟶ W) (hfgh : fgh = fg ≫ h) (hfgh' : fgh = f ≫ gh) :
+    Functor.whiskerLeft (MorphismProperty.Over.pullback P Q h)
+        (MorphismProperty.Over.pullbackComp f g fg hfg).inv ≫
+      (MorphismProperty.Over.pullbackComp (P := P) (Q := Q) fg h fgh hfgh).inv =
+    (Functor.associator (MorphismProperty.Over.pullback P Q h)
+          (MorphismProperty.Over.pullback P Q g) (MorphismProperty.Over.pullback P Q f)).inv ≫
+      Functor.whiskerRight (MorphismProperty.Over.pullbackComp g h gh hgh).inv
+        (MorphismProperty.Over.pullback P Q f) ≫
+      (MorphismProperty.Over.pullbackComp (P := P) (Q := Q) f gh fgh hfgh').inv := by
+  ext A
+  apply pullback.hom_ext <;>
+    simp [pullback.map, MorphismProperty.Over.pullback, MorphismProperty.Over.mk]
+
+/-- Unit coherence of `MorphismProperty.Over.pullbackComp`: composing with the identity on
+the target. -/
+lemma MorphismProperty.Over.pullbackComp_id_right {X Y : T} (f : X ⟶ Y) :
+    (MorphismProperty.Over.pullbackComp (P := P) (Q := Q) f (𝟙 Y) f (by simp)).hom =
+      (MorphismProperty.Over.pullback P Q f).leftUnitor.inv ≫
+        Functor.whiskerRight (MorphismProperty.Over.pullbackId (P := P) (Q := Q) Y).inv
+          (MorphismProperty.Over.pullback P Q f) := by
+  ext A
+  apply pullback.hom_ext <;>
+    simp [pullback.map, MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackId]
+
+/-- Unit coherence of `MorphismProperty.Over.pullbackComp`: composing with the identity on
+the source. -/
+lemma MorphismProperty.Over.pullbackComp_id_left {X Z : T} (g : X ⟶ Z) :
+    (MorphismProperty.Over.pullbackComp (P := P) (Q := Q) (𝟙 X) g g (by simp)).hom =
+      (MorphismProperty.Over.pullback P Q g).rightUnitor.inv ≫
+        Functor.whiskerLeft (MorphismProperty.Over.pullback P Q g)
+          (MorphismProperty.Over.pullbackId (P := P) (Q := Q) X).inv := by
+  ext A
+  apply pullback.hom_ext <;>
+    simp [pullback.map, MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackId]
+  apply pullback.hom_ext <;> simp
+
+/-- The associativity coherence of `MorphismProperty.Over.pullbackComp`, for the
+isomorphisms themselves; see `MorphismProperty.Over.pullbackComp_inv_assoc`. -/
+lemma MorphismProperty.Over.pullbackComp_hom_assoc {X Y Z W : T} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (h : Z ⟶ W) (fg : X ⟶ Z) (hfg : fg = f ≫ g) (gh : Y ⟶ W) (hgh : gh = g ≫ h)
+    (fgh : X ⟶ W) (hfgh : fgh = fg ≫ h) (hfgh' : fgh = f ≫ gh) :
+    (MorphismProperty.Over.pullbackComp (P := P) (Q := Q) fg h fgh hfgh).hom ≫
+        Functor.whiskerLeft (MorphismProperty.Over.pullback P Q h)
+          (MorphismProperty.Over.pullbackComp f g fg hfg).hom =
+      (MorphismProperty.Over.pullbackComp (P := P) (Q := Q) f gh fgh hfgh').hom ≫
+        Functor.whiskerRight (MorphismProperty.Over.pullbackComp g h gh hgh).hom
+          (MorphismProperty.Over.pullback P Q f) ≫
+        (Functor.associator (MorphismProperty.Over.pullback P Q h)
+          (MorphismProperty.Over.pullback P Q g) (MorphismProperty.Over.pullback P Q f)).hom := by
+  have key : MorphismProperty.Over.pullbackComp (P := P) (Q := Q) fg h fgh hfgh ≪≫
+        Functor.isoWhiskerLeft (MorphismProperty.Over.pullback P Q h)
+          (MorphismProperty.Over.pullbackComp f g fg hfg) =
+      MorphismProperty.Over.pullbackComp (P := P) (Q := Q) f gh fgh hfgh' ≪≫
+        Functor.isoWhiskerRight (MorphismProperty.Over.pullbackComp g h gh hgh)
+            (MorphismProperty.Over.pullback P Q f) ≪≫
+          Functor.associator (MorphismProperty.Over.pullback P Q h)
+            (MorphismProperty.Over.pullback P Q g) (MorphismProperty.Over.pullback P Q f) :=
+    Iso.ext ((Iso.inv_eq_inv _ _).mp (by
+      simpa using MorphismProperty.Over.pullbackComp_inv_assoc (P := P) (Q := Q) f g h fg hfg
+        gh hgh fgh hfgh hfgh'))
+  simpa using congrArg Iso.hom key
+
+end PullbackCoherence
+
 end CategoryTheory

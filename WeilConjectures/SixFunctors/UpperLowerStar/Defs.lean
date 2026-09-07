@@ -187,13 +187,13 @@ variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 sheaves for the small sites: both sides send a sheaf `G` to the sheaf
 `(V → R) ↦ G(V ×_R T → T)`, up to the pullback pasting isomorphism
 `(V ×_R S) ×_S T ≅ V ×_R T` of `MorphismProperty.Over.pullbackComp`. -/
-noncomputable def lowerStarComp :
-    lowerStar A P Q hQP h₁ ⋙ lowerStar A P Q hQP h₂ ≅ lowerStar A P Q hQP (h₁ ≫ h₂) :=
+noncomputable def lowerStarComp (h : T ⟶ R := h₁ ≫ h₂) (hh : h = h₁ ≫ h₂ := by cat_disch) :
+    lowerStar A P Q hQP h₁ ⋙ lowerStar A P Q hQP h₂ ≅ lowerStar A P Q hQP h :=
   have := isContinuous_overPullback P Q hQP h₁
   have := isContinuous_overPullback P Q hQP h₂
-  have := isContinuous_overPullback P Q hQP (h₁ ≫ h₂)
+  have := isContinuous_overPullback P Q hQP h
   Functor.sheafPushforwardContinuousComp'
-    (eFG := (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) h₁ h₂).symm) A
+    (eFG := (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) h₁ h₂ h hh).symm) A
     (R.smallGrothendieckTopology Q (Q := P)) (S.smallGrothendieckTopology Q (Q := P))
     (T.smallGrothendieckTopology Q (Q := P))
 
@@ -203,12 +203,12 @@ section UpperStar
 for the small sites, obtained from the composition isomorphism `lowerStarComp` of the
 pushforwards by uniqueness of left adjoints: both sides are left adjoint to
 `(h₁)_* ⋙ (h₂)_*`. -/
-noncomputable def upperStarComp :
-    upperStar A P Q (h₁ ≫ h₂) ≅ upperStar A P Q h₂ ⋙ upperStar A P Q h₁ :=
-  ((conjugateIsoEquiv (upperStarLowerStarAdjunction A P Q hQP (h₁ ≫ h₂))
+noncomputable def upperStarComp (h : T ⟶ R := h₁ ≫ h₂) (hh : h = h₁ ≫ h₂ := by cat_disch) :
+    upperStar A P Q h ≅ upperStar A P Q h₂ ⋙ upperStar A P Q h₁ :=
+  ((conjugateIsoEquiv (upperStarLowerStarAdjunction A P Q hQP h)
       ((upperStarLowerStarAdjunction A P Q hQP h₂).comp
         (upperStarLowerStarAdjunction A P Q hQP h₁))).symm
-    (lowerStarComp A P Q hQP h₁ h₂).symm).symm
+    (lowerStarComp A P Q hQP h₁ h₂ h hh).symm).symm
 
 end UpperStar
 
