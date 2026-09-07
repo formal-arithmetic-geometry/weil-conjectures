@@ -678,10 +678,34 @@ point to \(1\).  Put
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-picard-functor)
 % Decomposed.
+% Ruling (base field).  The opening sentence read ``Let \(C\) be a
+% \termref{def:pcb-curves}{proper} smooth curve over a field \(k\)'', which
+% contradicts itself: \Cref{def:pcb-curves} requires \(k\) algebraically closed,
+% while the sentence says ``a field'', and the last clause of the definition --
+% ``for \(k\) algebraically closed this recovers \(\operatorname{Pic}(C)\) and its
+% degree'' -- only makes sense if the surrounding \(k\) is general.  So ``a field''
+% is what this definition means, and the \termref was the error.  Two repairs were
+% available: gate the identification at every citer, as \Cref{lem:pc-degree-agrees-sc}
+% does for \Cref{def:pcb-pic0} with ``(for \(k\) algebraically closed where it is
+% defined)''; or state the hypothesis here as the definition actually uses it.  The
+% second is taken.  It is the smaller diff, and the first does not in fact work for
+% the citer at issue: \Cref{lem:pc-picard-functor-agrees-sc} exists precisely to
+% identify \(\Pic_{X/k}\) with this functor over a general field, so gating it to
+% algebraically closed \(k\) would empty it.  Nothing in the construction below uses
+% algebraic closedness; only the final clause does, and it says so.  The \uses edge
+% to \Cref{def:pcb-curves} stays, since the list of conditions is still that
+% definition's, read over a general base as \Cref{rem:pc-relation-sc} describes.  The
+% \termref{def:pcb-invertible-module}{invertible modules} named below are read the
+% same way: that definition's content is ``quasi-coherent and locally free of rank
+% one'', which uses no hypothesis on the base field, its \termref to
+% \Cref{def:pcb-curves} naming the ambient scheme only.
 \begin{definition}[The Picard functor of a proper curve]
 \label{def:pcb-picard-functor}
-Let \(C\) be a \termref{def:pcb-curves}{proper} smooth curve over a
-field \(k\).  The \emph{Picard functor}
+Let \(k\) be a field and let \(C\) be a proper smooth curve over
+\(k\) -- nonempty, separated, of finite type over \(k\) and of
+dimension at most one, the conditions \Cref{def:pcb-curves} lists, read
+here over a general \(k\) rather than over the algebraically closed base
+that definition fixes.  The \emph{Picard functor}
 \[
  \operatorname{Pic}_{C/k}:(k\text{-algebras})\longrightarrow\mathbf{Ab},
  \qquad R\longmapsto\operatorname{Pic}(C\times_kR),
@@ -5051,6 +5075,28 @@ $\cO_Y(D_Y)=(\cI_{D_Y})^\vee=(g^*\cI_D)^\vee=g^*(\cI_D^\vee)=g^*\cO_S(D)$.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (base field), two parts.
+% (1) The proof cited \Cref{lem:pcb-point-cartier} for ``$\cI_P=(t)$, a nonzero
+% divisor''.  That lemma is stated for a \termref{def:pcb-curves}{smooth} curve,
+% hence over an algebraically closed base, and this host opens ``Let $k$ be a
+% field''.  The fact is true here, so nothing is weakened and no hypothesis is added:
+% the proof now takes the route \Cref{rem:pc-regularity-sc} prescribes for a general
+% base field -- regularity from \Cref{lem:pc-smooth-over-field-regular}, dimension one
+% from the host's own hypothesis that $C$ is a \Cref{def:pc-curve} curve, and the
+% discrete valuation ring from \Cref{lem:pcb-regular-dim1-dvr}, which has no
+% hypothesis on any field.  This is the wording \Cref{lem:pc-degree-base-change}
+% already carries for the same step.  The \uses edge to \Cref{lem:pcb-point-cartier}
+% comes off and the three nodes of the replacement route go on.
+% (2) The statement also names \Cref{def:pcb-divisor} and
+% \Cref{lem:pcb-divisor-class-curve} for the file-06 module, and both are stated over
+% an algebraically closed base, so this host is not literally inside what they state.
+% It is not repaired by dropping them -- naming the file-06 side is the whole content
+% of this lemma, which is the bridge between it and \Cref{def:pc-divisor-line-bundle}.
+% Ruling: the only field-sensitive input to the formulas of \Cref{def:pcb-divisor} is
+% that $v_P$ be the valuation of a discrete valuation ring $\cO_{C,P}$, as that
+% definition says itself, and that is exactly what the route of (1) supplies over a
+% general $k$.  The statement now says so, so the identification is well posed here
+% without reading algebraic closedness into it.
 \begin{lemma}[$\cO_X(D)$ agrees with the divisor module of file 06]
 \label{lem:pc-divisor-line-bundle-agrees-sc}
 Let $k$ be a field, $C$ a smooth \termref{def:pc-curve}{curve} over $k$
@@ -5064,11 +5110,18 @@ of \Cref{lem:pcb-divisor-class-curve} (the sub-$\cO_C$-module of $k(C)$
 of \Cref{def:pcb-divisor}) and the module $\cO_C(D)$ of
 \Cref{def:pc-divisor-line-bundle} are canonically isomorphic; and, if
 moreover $C$ is proper over $k$, then for $D=[P]$ a $k$-rational point
-$\deg(\cO_C([P]))=1$ \Cref{def:pc-degree-line-bundle}.
-\uses{def:pc-divisor-line-bundle,def:pcb-divisor,lem:pcb-divisor-class-curve,def:pc-degree-line-bundle,def:pcb-pic0,def:pc-curve}
+$\deg(\cO_C([P]))=1$ \Cref{def:pc-degree-line-bundle}.  (Both
+\Cref{def:pcb-divisor} and \Cref{lem:pcb-divisor-class-curve} are stated
+over an algebraically closed base; their formulas are read here over the
+general field $k$, for which it is enough that each $v_P$ be the
+valuation of a discrete valuation ring $\cO_{C,P}$ --- supplied by
+\Cref{lem:pc-smooth-over-field-regular} together with
+\Cref{lem:pcb-regular-dim1-dvr}, as \Cref{rem:pc-regularity-sc}
+prescribes.)
+\uses{def:pc-divisor-line-bundle,def:pcb-divisor,lem:pcb-divisor-class-curve,def:pc-degree-line-bundle,def:pcb-pic0,def:pc-curve,lem:pc-smooth-over-field-regular,lem:pcb-regular-dim1-dvr}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive,lem:pcb-point-cartier}
+\uses{def:pcb-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive,lem:pc-smooth-over-field-regular,lem:pcb-regular-dim1-dvr,def:pc-curve}
 It suffices to prove this for $D=[P]$ with $P$ a closed point: both
 constructions are additive in $D$ (the divisor module of file~06 is
 $\cO_C(D_1)\otimes\cO_C(D_2)$ on the open dense subscheme where the two
@@ -5078,8 +5131,13 @@ definitions via $k(C)$, and the Cartier-module by
 \Cref{lem:pc-divisor-line-bundle-properties}); the constructions are
 compatible after restriction to the cover of $C$ by the open sets
 $U=C\setminus\{P_i\}$ and affine neighbourhoods of the $P_i$; the
-isomorphism is local: on $U\ni P$ with $\cI_P=(t)$ (nonzero divisor,
-the ideal of the point on the smooth curve; \Cref{lem:pcb-point-cartier}), the divisor module
+isomorphism is local: on $U\ni P$ with $\cI_P=(t)$ ($t$ a uniformizer
+of $\cO_{C,P}$, hence a nonzero divisor: $\cO_{C,P}$ is regular, $C$
+being smooth over $k$ (\Cref{lem:pc-smooth-over-field-regular}), and of
+dimension one, $C$ being a curve over $k$ in the sense of
+\Cref{def:pc-curve} and $P$ a closed point of it, so
+\Cref{lem:pcb-regular-dim1-dvr} applies and the ideal $\cI_P=\mathfrak
+m_P$ of the point is principal), the divisor module
 $\{f\in k(C):\operatorname{div}f|_U+[P]\ge0\}$ is
 $t^{-1}\cO_C(U)$, the module $\cI_P^\vee$ likewise maps
 $\cI_P=(t)$ to $\cO_U$ isomorphically to $t^{-1}\cO_U$, and on
@@ -5096,7 +5154,10 @@ $k$-rational) together with the additivity of $\chi$
 \Cref{lem:pc-euler-additive} gives
 $\chi(C,\cO_C([P]))=\chi(C,\cO_C)+1$, whence
 $\deg(\cO_C([P]))=\chi(\cO_C([P]))-\chi(\cO_C)=1$, the value given by
-the degree of \Cref{def:pcb-pic0} of the class $[P]$; for general $D$
+the degree of \Cref{def:pcb-pic0} of the class $[P]$ (for $k$
+algebraically closed, where that degree is defined --- the gate
+\Cref{lem:pc-degree-agrees-sc} carries for the same comparison); for
+general $D$
 the value follows by additivity of the degree on tensor products
 \Cref{lem:pc-degree-base-change}.  This proves the claim.
 \end{proof}
@@ -5367,11 +5428,21 @@ restrictions of the $g_X^*$ of (2).
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (base field).  Both citations of \Cref{def:pcb-picard-functor} below are
+% over a general field $k$.  That definition used to hypothesise a
+% \termref{def:pcb-curves}{proper} smooth curve, hence an algebraically closed base,
+% so over a general $k$ there was no functor on the right-hand side to be equal to.
+% The repair is at \Cref{def:pcb-picard-functor} itself, whose opening sentence
+% contradicted itself and is now stated over a field, as its own last clause always
+% read it; see the comment there.  What this statement owes in exchange is that $X$
+% satisfy that definition's hypotheses, and the only one not immediate from
+% \Cref{def:pc-smooth-projective-curve} is properness, now named.
 \begin{lemma}[Agreement with the affine Picard functor of file 06]
 \label{lem:pc-picard-functor-agrees-sc}
 Let $k$ be a field and $X$ a
 \termref{def:pc-smooth-projective-curve}{smooth projective curve} over
-$k$.  The restriction of
+$k$; $X$ is then proper over $k$, projective morphisms being proper
+(\Cref{lem:pc-projective-proper}).  The restriction of
 \termref{def:pc-picard-functor}{$\Pic_{X/k}$} to affine $k$-schemes
 $T=\Spec(R)$ is canonically the sheafification presented in
 \Cref{def:pcb-picard-functor}, i.e.\ the functor
@@ -5379,7 +5450,7 @@ $R\mapsto\Pic(X\times_k\Spec R)$ of file~06 (with its fppf sheaf
 structure); more precisely
 $\Pic_{X/k}(\Spec(R))=\operatorname{Pic}_{X/k}^{\mathrm{sc}}(R)$ where
 the right side is the value of the functor of \Cref{def:pcb-picard-functor}.
-\uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme,def:pc-smooth-projective-curve}
+\uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,def:pc-scheme,def:pc-smooth-projective-curve,lem:pc-projective-proper}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-picard-functor,def:pcb-picard-functor,def:pc-fppf-site,def:pc-picard-presheaf,lem:pc-zariski-coverings-are-fppf}
@@ -9073,8 +9144,21 @@ in \Cref{lem:pc-degree-agrees-sc}.)
 % parenthesis says where the pullback-from-a-point case of tag 0AYV is made explicit
 % downstream.
 \end{lemma}
+% Ruling (base field): the uniformizer citation in part (4) below.  The sentence
+% cited \Cref{lem:pcb-point-cartier} for ``the ideal of the closed point, generated
+% by a uniformizer'', over a host whose $k$ is a general field, where that lemma --
+% stated for a \termref{def:pcb-curves}{smooth} curve, hence over an algebraically
+% closed base -- does not apply.  Ruled REDUNDANT, not load-bearing: the same
+% parenthesis goes on to prove over a general $k$ that $\cO_{X,P}$ is a discrete
+% valuation ring, by \Cref{lem:pc-smooth-over-field-regular} and
+% \Cref{lem:pcb-regular-dim1-dvr}, and a uniformizer generating $\mathfrak m_P$ is
+% exactly what that gives.  So the citation is demoted to a ``cf.'' and its \uses
+% edge comes off; the mathematics of the block is unchanged, and the block keeps the
+% two nodes of the replacement route, which it already cited.  An earlier pass read
+% this block and ruled it sound on exactly this ground; sound it is, and the ``cf.''
+% now says why out loud rather than leaving it to be re-derived.
 \begin{proof}
-\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flasque-acyclic,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-point-cartier,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular}
+\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flasque-acyclic,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular}
 \emph{(3).}  This is exactly \Cref{lem:pc-euler-additive}.
 
 \emph{(1).}  For the field extension $K/k$ put $X_K:=X\times_{\Spec(k)}\Spec(K)$ (\Cref{def:pc-base-change}).
@@ -9138,11 +9222,13 @@ that $X$ is in addition smooth over $k$ and of dimension $1$, as in (4).
 For the divisor
 $D=\sum_Pn_P[P]$ on the smooth curve, the local structure is
 $\cO_{D,P}=\cO_{X,P}/\mathfrak m_P^{n_P}$ (the ideal of $[P]$ is the
-ideal of the closed point, generated by a uniformizer
-\Cref{lem:pcb-point-cartier}, and $\cO_{X,P}$ is a discrete valuation
-ring: it is regular, $X$ being smooth over $k$
+ideal $\mathfrak m_P$ of the closed point, and $\cO_{X,P}$ is a discrete
+valuation ring: it is regular, $X$ being smooth over $k$
 (\Cref{lem:pc-smooth-over-field-regular}), and of dimension one, $X$
-being a curve, so \Cref{lem:pcb-regular-dim1-dvr} applies), so
+being a curve, so \Cref{lem:pcb-regular-dim1-dvr} applies and
+$\mathfrak m_P$ is generated by a uniformizer; cf.\
+\Cref{lem:pcb-point-cartier}, which is this step over an algebraically
+closed base), so
 $\ell(\cO_{D,P})=n_P\cdot[\kappa(P):k]$; this is the classical
 degree-of-a-divisor formula
 \[
@@ -12180,8 +12266,20 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 \]
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-invertible-module,def:pc-derived-category,def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-rational-point,def:pc-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-flat-base-change-cohom}
 \end{lemma}
+% Ruling (base field): the invertibility of $\cI$ in Step 3 below.  The proof cited
+% \Cref{lem:pcb-point-cartier}, supplying smoothness of $X_K$ and closedness of $x_K$
+% but not algebraic closedness of $K$, which that lemma demands through
+% \termref{def:pcb-curves}: here $k$ is only \emph{separably} closed and $K/k$ is an
+% arbitrary field extension, so the lemma says nothing about $X_K$.  The fact is true
+% over $K$, so nothing is weakened and no hypothesis is added to the statement: the
+% proof now takes the route \Cref{rem:pc-regularity-sc} prescribes for a general base
+% field -- regularity from \Cref{lem:pc-smooth-over-field-regular}, dimension one from
+% this proof's own $\dim X_K=1$, established a few lines above, and the discrete
+% valuation ring from \Cref{lem:pcb-regular-dim1-dvr}, which has no hypothesis on any
+% field.  The \uses edge to \Cref{lem:pcb-point-cartier} comes off and the two nodes
+% of the replacement route go on.
 \begin{proof}
-\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-point-cartier,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular,prop:pc-XK-integral}
 \emph{Step 1: an ample polarisation.}  The smooth projective curve $X$
 carries a closed immersion $i:X\to\PP^n_k$; by \Cref{lem:pc-very-ample-ample}
 the module $\cL_0^{\bullet}:=i^*\cO_{\PP^n}(1)$ is ample on $X$ and, by
@@ -12247,9 +12345,18 @@ $x\in X(k)$ with
 $s(x_K)\neq0$ (i.e.\ $s$ does not vanish at $x_K$: $s_{x_K}\notin
 \mathfrak m_{x_K}\cL_{x_K}$).
 Let $\cI$ be the ideal sheaf of the closed immersion
-$i:x_K\hookrightarrow X_K$; by \Cref{lem:pcb-point-cartier}
-$\cI$ is invertible ($X_K$ is smooth over $K$, $x_K$ is a closed point
-with $\kappa(x_K)=K$).  The sequence
+$i:x_K\hookrightarrow X_K$; then $\cI$ is invertible.  Indeed $x_K$ is a
+closed point of $X_K$ with $\kappa(x_K)=K$, and $\cO_{X_K,x_K}$ is a
+discrete valuation ring: it is regular, $X_K$ being smooth over $K$
+(\Cref{lem:pc-smooth-over-field-regular}), and of dimension one, since
+$X_K$ is irreducible (\Cref{prop:pc-XK-integral}), of finite type over
+$K$ and of dimension $1$ (\Cref{lem:pc-dim-base-change}), as used just
+above, and $x_K$ is a closed point of it, so
+$\dim\cO_{X_K,x_K}=\dim X_K-\dim\overline{\{x_K\}}=1$; hence
+\Cref{lem:pcb-regular-dim1-dvr} applies.  Its maximal ideal is
+therefore generated by a uniformizer, and $\cI$ is that ideal at $x_K$
+and all of $\cO_{X_K}$ away from $x_K$, so $\cI$ is invertible.  The
+sequence
 \[
 0\longrightarrow\cI\otimes\cL\longrightarrow\cL\longrightarrow
 i_*i^*\cL\longrightarrow0
