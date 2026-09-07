@@ -281,10 +281,10 @@ open MonoidalCategory Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/- The closed braided preadditive monoidal structure on the coefficient category, as in
+/- The closed symmetric preadditive monoidal structure on the coefficient category, as in
 the section `DerivedUpperStar`; it is what the monoidal transport instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
-variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
 
 /- Functorial flat resolutions on the coefficient category, as in the section
 `DerivedUpperStar`. -/
