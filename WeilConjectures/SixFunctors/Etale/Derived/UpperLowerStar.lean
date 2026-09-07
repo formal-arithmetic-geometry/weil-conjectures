@@ -18,13 +18,13 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.SixFunctors.LowerShriek.Etale
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
 /-!
 
 # Derived Upper Star and Lower Star
 
-# Main Results
+## Main results
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star, with
   scoped notation `R(g)_*[A]`, prefixing the notation `(g)_*[A]` of the underived
@@ -37,8 +37,19 @@ public import WeilConjectures.SixFunctors.LowerShriek.Etale
   scoped notation `L(g)^*[A]`, prefixing the notation `(g)^*[A]` of the underived pullback
   by `L`.
 
-- `AlgebraicGeometry.Etale.homologyLeftDerivedUpperStarIso` : compatibility of
-  `AlgebraicGeometry.Etale.leftDerivedUpperStar` and map derived category.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory` : the derived
+  pullback `Lg^*` is the functor `(g)^*[A].mapDerivedCategory` induced levelwise by the
+  exact functor `g^*`.
+
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarComp` : the composition isomorphism
+  `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`.
+
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarHomologyFunctorIso` : the derived pullback
+  commutes with the homology functors, `H^n ⋙ g^* ≅ Lg^* ⋙ H^n`.
+
+- `AlgebraicGeometry.Etale.singleFunctorCompLeftDerivedUpperStarIso` : the derived
+  pullback of a sheaf placed in degree `0` is the pullback of the sheaf placed in degree
+  `0`.
 
 -/
 
@@ -95,62 +106,46 @@ section DerivedUpperStar
 The pullback `g^* = Etale.upperStar` is left derived using the K-flat left
 derivability structure of `WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs`.
 This requires the source sheaf category `Sheaf Y.smallEtaleTopology A` to carry a
-preadditive monoidal structure whose tensor product interacts well with coproducts and
-`ℤ`-indexed colimits, and to admit functorial flat resolutions. These inputs are stated
-as hypotheses on the coefficient category `A` only; they are transported to the sheaf
-categories by the instances of the folder
-`WeilConjectures.CategoryTheory.GrothendieckAbelian`, with the monoidal structure and
-its compatibilities provided by its `Monoidal` subfolder; its preadditivity is
-`CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
+preadditive monoidal structure whose tensor product preserves colimits, to have countable
+coproducts and exact `ℤ`-indexed colimits, and to admit functorial flat resolutions.
+These inputs are stated as hypotheses on the coefficient category `A` only; they are
+supplied for the sheaf categories by the instances of the folder
+`WeilConjectures.CategoryTheory.GrothendieckAbelian`, with the monoidal structure and its
+compatibility with colimits provided by its `Monoidal` subfolder, and its preadditivity
+by `CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
 
-The additivity and right exactness of `g^*` are derived here from the adjunction
-`g^* ⊣ g_*`; the left exactness comes from `Etale.preservesFiniteLimits_upperStar`, whose
-hypotheses — sheafification on the small étale site of `Z` and left exactness of the left
-Kan extension along the opposite of base change — are stated as variables of this section;
-for an étale `g` both are automatic. Since `g^*` is exact, it preserves in
-particular all K-flat quasi-isomorphisms, which is the input needed by the
-derivability-structure machinery.
+Two of those instances are still `sorry`ed, so everything below depends on them:
+`AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf` (tensoring an étale
+sheaf preserves colimits) and `AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf`
+(functorial flat resolutions of étale sheaves). Both are discussed in the module
+docstrings of the files that state them.
+
+The additivity and exactness of `g^*` are `Etale.additive_upperStar`,
+`Etale.preservesFiniteLimits_upperStar` and `Etale.preservesHomology_upperStar` of
+`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`; the left exactness there rests on the
+sorried `HasSheafify` instance for the small étale site of `Z` and on left exactness of
+the left Kan extension along the opposite of base change, both global instances of the
+folder `WeilConjectures.CategoryTheory.GrothendieckAbelian` (for an étale `g` the latter
+is proved, not sorried). Since `g^*` is exact, it preserves in particular all K-flat
+quasi-isomorphisms, which is the input needed by the derivability-structure machinery.
 -/
 
-open MonoidalCategory MonoidalClosed Etale
+open MonoidalCategory Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-
-instance : HasExactColimitsOfShape ℤ A := by
-  have := AB5OfSize_of_univLE.{0, 0} A
-  infer_instance
 
 /- The preadditive monoidal structure on the coefficient category. It is assumed closed
 and braided (as is the intended application `A = ModuleCat.{u + 1} Λ` for a commutative
 ring `Λ`, which is even symmetric monoidal closed): that is what makes the class of
 sheafification-inverting morphisms of presheaves monoidal, hence what lets the monoidal
 structure descend to the étale sheaf categories, see
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. -/
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`. Closedness moreover
+makes tensoring by a fixed object preserve colimits, which is what the tensor product of
+complexes needs; no further tensor-colimit hypothesis on `A` is required. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
 
-/- Existence of the coproducts defining the tensor product of complexes (the indexing
-fibers of the total degree map are in bijection with `ℤ`, see
-`ComplexShape.hasColimitsOfShape_discrete_π_up_int`), and its compatibility with the
-tensor product, on the coefficient category. -/
-variable [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-
-/- Existence and exactness of `ℤ`-indexed colimits, and their preservation by the
-tensor product in each variable, on the coefficient category. -/
-variable [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
-
-instance : (g)^*[A].Additive :=
-  (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive
-
-instance : (g)^*[A].PreservesHomology := by
-  have : PreservesColimitsOfSize.{0, 0} (g)^*[A] :=
-    (Etale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits
-  exact {}
-
 /- Functorial flat resolutions on the coefficient category; they induce functorial flat
-resolutions of étale sheaves via `Etale.sheafHasFunctorialFlatResolution`. -/
+resolutions of étale sheaves via `Etale.hasFunctorialFlatResolution_sheaf`. -/
 variable [Abelian.HasFunctorialFlatResolution A]
 
 namespace Etale
@@ -173,40 +168,88 @@ noncomputable def leftDerivedUpperStar :
 scoped notation "L(" g ")^*[" A "]" =>
   leftDerivedUpperStar A g
 
-end Etale
-
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
-derived functor `Lh^*`, computed via K-flat resolutions, is canonically isomorphic to
-the functor induced by the exact functor `h^*` on the derived categories. -/
-noncomputable def Etale.leftDerivedUpperStarIsoMapDerivedCategory {T S : Scheme.{u}}
-    (h : T ⟶ S) : L(h)^*[A] ≅ (h)^*[A].mapDerivedCategory :=
-  (h)^*[A].leftDerivedFunctorIsoMapDerivedCategory
+derived functor `Lg^*`, computed via K-flat resolutions, is canonically isomorphic to
+the functor induced by the exact functor `g^*` on the derived categories.
 
-/-- The composition isomorphism `L(h₁ ≫ h₂)^* ≅ Lh₁^* ∘ Lh₂^*` of derived pullbacks,
+```
+                        Lg^*
+                 -------------------->
+        D(Y_ét)            ≅             D(Z_ét)
+                 -------------------->
+          (g)^*[A].mapDerivedCategory
+```
+
+This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`, restated in terms of
+the notation `L(g)^*[A]`, which the general statement does not mention. -/
+noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
+    L(g)^*[A] ≅ (g)^*[A].mapDerivedCategory :=
+  (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory
+
+/-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks,
 obtained from the underived composition isomorphism `Etale.upperStarComp` and the
-compatibility of left derivation with `mapDerivedCategory` for exact functors. -/
-noncomputable def Etale.leftDerivedUpperStarComp {T S R : Scheme.{u}}
-    (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
-    L(h₁ ≫ h₂)^*[A] ≅ L(h₂)^*[A] ⋙ L(h₁)^*[A] :=
-  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarComp A h₁ h₂) ≪≫
-    Functor.leftDerivedFunctorCompIso (h₂)^*[A] (h₁)^*[A]
+compatibility of left derivation with `mapDerivedCategory` for exact functors.
 
-/-- The exactness comparison `κ : h^* ∘ H^n ≅ H^n ∘ Lh^*`: since the underived pullback
-`h^*` on étale sheaves is exact, applying it to the `n`-th homology sheaf of an object
-of the derived category computes the `n`-th homology sheaf of the derived pullback. -/
-noncomputable def Etale.homologyLeftDerivedUpperStarIso {T S : Scheme.{u}}
-    (h : T ⟶ S) (n : ℤ) :
-    DerivedCategory.homologyFunctor (Sheaf S.smallEtaleTopology A) n ⋙ (h)^*[A] ≅
-      L(h)^*[A] ⋙ DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology A) n :=
-  (h)^*[A].leftDerivedFunctorHomologyFunctorIso n
+```
+                 L(g₁ ≫ g₂)^*
+D(R_ét) -------------------------------> D(T_ét)
+      |                                    ^
+      |                                    |
+      +---------> D(S_ét) -----------------+
+        L(g₂)^*            L(g₁)^*
+```
+-/
+noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
+    (g₁ : T ⟶ S) (g₂ : S ⟶ R) :
+    L(g₁ ≫ g₂)^*[A] ≅ L(g₂)^*[A] ⋙ L(g₁)^*[A] :=
+  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarComp A g₁ g₂) ≪≫
+    Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
+
+/-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
+on étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of the
+derived category computes the `n`-th homology sheaf of the derived pullback.
+
+```
+                H^n
+D(Y_ét) -----------------> Sh(Y_ét)
+   |                           |
+ L(g)^*                      (g)^*
+   |                           |
+   v                           v
+D(Z_ét) -----------------> Sh(Z_ét)
+                H^n
+```
+
+This is `Functor.leftDerivedFunctorHomologyFunctorIso` at `g^*`, restated in terms of the
+notation `L(g)^*[A]`, which the general statement does not mention. -/
+noncomputable def leftDerivedUpperStarHomologyFunctorIso (n : ℤ) :
+    DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology A) n ⋙ (g)^*[A] ≅
+      L(g)^*[A] ⋙ DerivedCategory.homologyFunctor (Sheaf Z.smallEtaleTopology A) n :=
+  (g)^*[A].leftDerivedFunctorHomologyFunctorIso n
 
 /-- The single-degree comparison for the derived pullback: since the underived pullback
-`h^*` on étale sheaves is exact, the derived pullback of a sheaf placed in degree `0` is
-the pullback of the sheaf placed in degree `0`, `Lh^*(F[0]) ≅ (h^* F)[0]`. -/
-noncomputable def Etale.singleCompLeftDerivedUpperStarIso {T S : Scheme.{u}} (h : T ⟶ S) :
-    DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology A) 0 ⋙ L(h)^*[A] ≅
-      (h)^*[A] ⋙ DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology A) 0 :=
-  (h)^*[A].singleFunctorCompLeftDerivedFunctorIso
+`g^*` on étale sheaves is exact, the derived pullback of a sheaf placed in degree `0` is
+the pullback of the sheaf placed in degree `0`, `Lg^*(F[0]) ≅ (g^* F)[0]`.
+
+```
+                (-)[0]
+Sh(Y_ét) -----------------> D(Y_ét)
+    |                           |
+  (g)^*                      L(g)^*
+    |                           |
+    v                           v
+Sh(Z_ét) -----------------> D(Z_ét)
+                (-)[0]
+```
+
+This is `Functor.singleFunctorCompLeftDerivedFunctorIso` at `g^*`, restated in terms of
+the notation `L(g)^*[A]`, which the general statement does not mention. -/
+noncomputable def singleFunctorCompLeftDerivedUpperStarIso :
+    DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology A) 0 ⋙ L(g)^*[A] ≅
+      (g)^*[A] ⋙ DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology A) 0 :=
+  (g)^*[A].singleFunctorCompLeftDerivedFunctorIso
+
+end Etale
 
 end DerivedUpperStar
 
@@ -231,24 +274,25 @@ K-injective resolutions on the pushforward side are supplied by the sheaf catego
 being Grothendieck abelian.
 -/
 
-open MonoidalCategory MonoidalClosed Etale
+open MonoidalCategory Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
 /- The closed braided preadditive monoidal structure on the coefficient category, as in
 the section `DerivedUpperStar`; it is what the monoidal transport instances of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
-variable [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).obj X)]
-  [∀ (X : A), PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X)]
+
+/- Functorial flat resolutions on the coefficient category, as in the section
+`DerivedUpperStar`. -/
 variable [Abelian.HasFunctorialFlatResolution A]
+
+namespace Etale
 
 /-- The derived adjunction `Lg^* ⊣ Rg_*` between the total derived functors of the
 pullback and the pushforward along an arbitrary morphism `g : Z ⟶ Y` on the unbounded
 derived categories of étale sheaves, induced by the adjunction `g^* ⊣ g_*`. -/
-noncomputable def Etale.derivedUpperStarLowerStarAdjunction :
+noncomputable def derivedUpperStarLowerStarAdjunction :
     L(g)^*[A] ⊣ R(g)_*[A] :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunction
 
@@ -259,9 +303,11 @@ induced by `g^*`, and it is left adjoint to the right derived functor
 `(g_*).rightDerivedFunctorPlus` of the pushforward on the bounded below derived
 categories. The right adjoint is derived via injective resolutions, which exist since
 the étale sheaf category is Grothendieck abelian. -/
-noncomputable def Etale.derivedUpperStarLowerStarAdjunctionPlus :
+noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
     (g)^*[A].mapDerivedCategoryPlus ⊣ R(g)_*[A]+ :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
+
+end Etale
 
 end DerivedUpperLowerStarAdjunction
 

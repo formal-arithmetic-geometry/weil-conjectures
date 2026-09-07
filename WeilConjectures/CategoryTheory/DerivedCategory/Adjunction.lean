@@ -120,7 +120,7 @@ section DerivedAdjunction
 
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [MonoidalCategory C] [MonoidalPreadditive C]
-  [HasColimitsOfShape (Discrete ℤ) C]
+  [HasCountableCoproducts C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
