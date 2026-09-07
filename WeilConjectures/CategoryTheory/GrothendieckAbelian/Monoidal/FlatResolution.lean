@@ -10,7 +10,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-!
 
-# Functorial flat resolutions of étale sheaves (sorried)
+# Functorial flat resolutions of étale and pro-étale sheaves (sorried)
 
 The K-flat left derivability structure computes the derived pullback on a K-flat
 resolution, so it requires the sheaf categories to admit functorial flat resolutions
@@ -36,6 +36,12 @@ The construction is not yet formalized and the instance is recorded with `sorry`
 - `AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf`: the category of `A`-valued
   étale sheaves admits functorial flat resolutions.
 
+- `AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf`: the category of
+  `A`-valued pro-étale sheaves admits functorial flat resolutions. The construction above
+  is site-agnostic — it only uses that the site is essentially small and that extension by
+  zero along a localization is exact and satisfies the projection formula — so it applies
+  verbatim with `U ⟶ Y` weakly étale.
+
 -/
 
 @[expose] public section
@@ -59,6 +65,13 @@ extension by zero to a functorial flat resolution of the sections; see the modul
 docstring. -/
 instance Etale.hasFunctorialFlatResolution_sheaf [Abelian.HasFunctorialFlatResolution A] :
     Abelian.HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A) :=
+  sorry
+
+/-- Functorial flat resolutions of `A`-valued pro-étale sheaves, obtained by applying
+extension by zero to a functorial flat resolution of the sections, exactly as in the étale
+case; see the module docstring. -/
+instance ProEtale.hasFunctorialFlatResolution_sheaf [Abelian.HasFunctorialFlatResolution A] :
+    Abelian.HasFunctorialFlatResolution (Sheaf (Scheme.ProEt.topology Y) A) :=
   sorry
 
 end AlgebraicGeometry

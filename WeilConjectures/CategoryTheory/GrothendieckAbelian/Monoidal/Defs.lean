@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 /-!
 
-# The monoidal structure on étale sheaf categories
+# The monoidal structure on étale and pro-étale sheaf categories
 
 The K-flat left derivability structure used to derive the pullback `g^*` on étale
 sheaves requires the sheaf category `Sheaf Y.smallEtaleTopology A` to carry a
@@ -59,6 +59,9 @@ The preadditivity of this monoidal structure needs no transport of its own: it i
 category. The remaining transports are in the sibling files `TensorColimits` and
 `FlatResolution` of this folder; the latter is still recorded with `sorry`.
 
+Every argument below is site-agnostic, so each instance is recorded both for the small
+étale site and for the small pro-étale site.
+
 -/
 
 @[expose] public section
@@ -95,6 +98,19 @@ noncomputable instance Etale.sheafMonoidalCategory :
 braiding of the coefficient category `A`. -/
 noncomputable instance Etale.sheafBraidedCategory :
     BraidedCategory (Sheaf Y.smallEtaleTopology A) :=
+  Sheaf.braidedCategory _ _
+
+/-- The monoidal structure on `A`-valued pro-étale sheaves induced by a monoidal structure
+on the coefficient category `A`: the sheafification of the objectwise tensor product of
+presheaves. -/
+noncomputable instance ProEtale.sheafMonoidalCategory :
+    MonoidalCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
+  Sheaf.monoidalCategory _ _
+
+/-- The braiding of the monoidal structure on `A`-valued pro-étale sheaves, induced by the
+braiding of the coefficient category `A`. -/
+noncomputable instance ProEtale.sheafBraidedCategory :
+    BraidedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
   Sheaf.braidedCategory _ _
 
 end AlgebraicGeometry

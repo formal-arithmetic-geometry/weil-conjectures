@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 
 /-!
 
-# The tensor product of étale sheaves preserves colimits (sorried)
+# The tensor product of étale and pro-étale sheaves preserves colimits (sorried)
 
 The K-flat left derivability structure requires the tensor product of the sheaf category
 to interact well with the coproducts defining the tensor product of complexes and with
@@ -41,6 +41,10 @@ objectwise monoidal structure, which mathlib does not yet provide.
 - `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`: tensoring on the
   left with a fixed étale sheaf preserves colimits of size `0`.
 
+- `AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`: tensoring on the
+  left with a fixed pro-étale sheaf preserves colimits of size `0`. The intended proof
+  above uses nothing about the site, so it applies verbatim.
+
 -/
 
 @[expose] public section
@@ -70,6 +74,20 @@ instance Etale.preservesColimitsOfSize_tensorLeft_sheaf (X : Sheaf Y.smallEtaleT
 /-- Tensoring on the right with a fixed `A`-valued étale sheaf preserves colimits of size
 `0`, by `Etale.preservesColimitsOfSize_tensorLeft_sheaf` and the braiding. -/
 instance Etale.preservesColimitsOfSize_tensorRight_sheaf (X : Sheaf Y.smallEtaleTopology A) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight X) where
+  preservesColimitsOfShape := ⟨inferInstance⟩
+
+/-- Tensoring on the left with a fixed `A`-valued pro-étale sheaf preserves colimits of
+size `0`, exactly as in the étale case; see the module docstring for the intended proof. -/
+instance ProEtale.preservesColimitsOfSize_tensorLeft_sheaf
+    (X : Sheaf (Scheme.ProEt.topology Y) A) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
+  sorry
+
+/-- Tensoring on the right with a fixed `A`-valued pro-étale sheaf preserves colimits of
+size `0`, by `ProEtale.preservesColimitsOfSize_tensorLeft_sheaf` and the braiding. -/
+instance ProEtale.preservesColimitsOfSize_tensorRight_sheaf
+    (X : Sheaf (Scheme.ProEt.topology Y) A) :
     PreservesColimitsOfSize.{0, 0} (tensorRight X) where
   preservesColimitsOfShape := ⟨inferInstance⟩
 

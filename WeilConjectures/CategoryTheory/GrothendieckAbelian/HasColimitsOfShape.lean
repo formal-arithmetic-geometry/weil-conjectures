@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-!
 
-# Countable coproducts of étale sheaves
+# Countable coproducts of étale and pro-étale sheaves
 
 The K-flat left derivability structure used to derive the pullback `g^*` on étale sheaves
 computes the tensor product of complexes as a coproduct over the fibers of the total
@@ -24,6 +24,9 @@ once per countable shape. It is restated here because instance search does not f
 on its own for the small étale site: unifying a `Discrete` shape against the many
 `HasColimitsOfShape` instances available for `Sheaf Y.smallEtaleTopology A` diverges,
 whereas naming `Sheaf.instHasColimitsOfShape` discharges the goal instantly.
+
+The same applies verbatim to the small pro-étale site, so the instance is restated there
+too; nothing in the argument is specific to either site.
 
 -/
 
@@ -47,6 +50,14 @@ coproduct of the underlying presheaves. This is mathlib's
 be restated here. -/
 instance (priority := high) Etale.hasCountableCoproducts_sheaf :
     HasCountableCoproducts (Sheaf Y.smallEtaleTopology A) :=
+  ⟨fun _ ↦ Sheaf.instHasColimitsOfShape⟩
+
+/-- Countable coproducts of `A`-valued pro-étale sheaves, computed by sheafifying the
+coproduct of the underlying presheaves. As in the étale case this is mathlib's
+`CategoryTheory.Sheaf.instHasColimitsOfShape`, restated because instance search does not
+find it on its own for the small pro-étale site. -/
+instance (priority := high) ProEtale.hasCountableCoproducts_sheaf :
+    HasCountableCoproducts (Sheaf (Scheme.ProEt.topology Y) A) :=
   ⟨fun _ ↦ Sheaf.instHasColimitsOfShape⟩
 
 end AlgebraicGeometry
