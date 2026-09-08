@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
-public import WeilConjectures.SixFunctors.LowerShriek.Comparison
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 
 /-!
 # The extension by zero and the pushforward vanish off an open immersion
@@ -16,7 +16,7 @@ that both `k^* j_! F` and `k^* j_* F` are initial as sheaves on the small étale
 and deduces that `k^*` of the comparison `j_! ⟶ j_*` is an isomorphism.
 
 Together with the `j^*` half (`j_!` fully faithful for an open immersion, proved in
-`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful`), this is the
+`WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful`), this is the
 sheaf-theoretic input to the comparison `j_! ⟶ j_*` being an isomorphism for an open
 immersion with closed range. It is the one place where the zero object of the abelian `A`
 is consumed, and genuinely so: for `A = Type` and `k` with nonempty source, `k^* j_* F` has

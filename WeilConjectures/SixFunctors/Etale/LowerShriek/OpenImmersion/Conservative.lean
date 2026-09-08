@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Restriction along an étale cover is conservative
@@ -17,8 +17,8 @@ Let `g i : W i ⟶ X` be a jointly surjective family of étale morphisms. This f
 a morphism of sheaves on the small étale site of `X` which becomes invertible after
 restricting along every `g i` is itself invertible
 (`AlgebraicGeometry.Etale.isIso_of_isIso_localizationRestriction`). Here restriction is the
-functor `GrothendieckTopology.localizationRestriction` of
-`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs`, which for an open immersion is
+functor `AlgebraicGeometry.Etale.localizationRestriction` of
+`WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs`, which for an open immersion is
 `AlgebraicGeometry.Etale.openImmersionRestriction`.
 
 The statement is proved objectwise, from the general local criterion
@@ -33,7 +33,7 @@ That objectwise statement holds because an étale `X`-scheme `V` whose structure
 factors as `p ≫ g` is the image of the étale `W`-scheme `p` under the localization functor
 along `g`. The sections of a restricted sheaf over an étale `W`-scheme are by definition the
 sections of the original sheaf over its image
-(`CategoryTheory.GrothendieckTopology.localizationRestriction_map_hom_app`), so invertibility
+(`AlgebraicGeometry.Etale.localizationRestriction_map_hom_app`), so invertibility
 of the restricted morphism transports back along `CategoryTheory.NatTrans.isIso_app_of_iso`.
 
 ## Main results
@@ -71,16 +71,15 @@ sections of `g^* G` over `p` are the sections of `G` over `V` and likewise for `
 ```
 -/
 lemma Etale.isIso_app_of_isIso_localizationRestriction {W : Scheme.{u}} (g : W ⟶ X) [Etale g]
-    (h : IsIso ((GrothendieckTopology.localizationRestriction A @Etale @Etale le_rfl g
-      inferInstance).map φ))
+    (h : IsIso ((Etale.localizationRestriction A g inferInstance).map φ))
     (V : X.Etale) (p : V.left ⟶ W) (hp : p ≫ g = V.hom) :
     IsIso (φ.hom.app (op V)) := by
   have hpetale : Etale p := by
     have : Etale (p ≫ g) := hp ▸ V.prop
     exact MorphismProperty.of_postcomp (W' := @Etale) _ p g ‹_› ‹_›
-  have h1 : IsIso (((GrothendieckTopology.localizationRestriction A @Etale @Etale le_rfl g
-      inferInstance).map φ).hom.app (op (MorphismProperty.Over.mk ⊤ p hpetale))) := inferInstance
-  rw [GrothendieckTopology.localizationRestriction_map_hom_app] at h1
+  have h1 : IsIso (((Etale.localizationRestriction A g inferInstance).map φ).hom.app
+      (op (MorphismProperty.Over.mk ⊤ p hpetale))) := inferInstance
+  rw [Etale.localizationRestriction_map_hom_app] at h1
   have e : (MorphismProperty.Over.map ⊤ (inferInstance : Etale g)).obj
       (MorphismProperty.Over.mk ⊤ p hpetale) ≅ V :=
     MorphismProperty.Over.isoMk (Iso.refl _) (by simpa using hp.symm)
@@ -104,8 +103,7 @@ the previous lemma applies.
 lemma Etale.isIso_of_isIso_localizationRestriction {ι : Type*} {W : ι → Scheme.{u}}
     (g : ∀ i, W i ⟶ X) [∀ i, Etale (g i)]
     (hg : ⋃ i, Set.range (g i).base = Set.univ)
-    (h : ∀ i, IsIso ((GrothendieckTopology.localizationRestriction A @Etale @Etale le_rfl (g i)
-      inferInstance).map φ)) :
+    (h : ∀ i, IsIso ((Etale.localizationRestriction A (g i) inferInstance).map φ)) :
     IsIso φ := by
   refine Sheaf.isIso_of_isIso_app_of_mem _ φ fun V ↦
     ⟨_, Scheme.Etale.ofArrows_baseChange_mem_smallEtaleTopology V g hg, ?_⟩

@@ -5,8 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.LowerShriek.Etale
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 
 /-!
 
@@ -38,7 +38,7 @@ immersion `i`:
 For a proper morphism `f`, the comparison `ι_f` is an isomorphism; that statement needs the
 vanishing of both sides off the range of `i`, which is where closedness of that range and
 `HasZeroObject A` enter, and is proved downstream in
-`WeilConjectures.SixFunctors.LowerShriek.Proper`.
+`WeilConjectures.SixFunctors.Etale.LowerShriek.Proper`.
 
 ## Main definitions
 

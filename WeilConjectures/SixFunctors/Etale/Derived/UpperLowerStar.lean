@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.SixFunctors.LowerShriek.Etale
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
 /-!
 
