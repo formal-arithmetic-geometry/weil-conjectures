@@ -968,12 +968,14 @@ $C$ is a finitely presented $B$-algebra for any $K$-algebra map $B\to C$.
 \uses{thm:av-mulby-formally-unramified, thm:av-mulby-formally-smooth,
 lem:av-mulby-lfp}
 \lean{AlgebraicGeometry.IsAbelianVariety.etale_mulBy}
+\leanok
 Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
 $K$.  Then $[n]\colon A\to A$ is \'etale.  This holds over an arbitrary field.
 \end{theorem}
 \begin{proof}
 \uses{thm:av-mulby-formally-unramified, thm:av-mulby-formally-smooth,
 lem:av-mulby-lfp, rem:av-smooth-affine-local, rem:av-unramified-affine-local}
+\leanok
 By \Cref{thm:av-mulby-formally-smooth} the morphism $[n]$ is formally smooth,
 and by \Cref{lem:av-mulby-lfp} it is locally of finite presentation; a formally
 smooth morphism that is locally of finite presentation is smooth
@@ -1021,18 +1023,17 @@ only missing Mathlib ingredients are the two packaging obligations recorded at
 \begin{theorem}[$[n]$ is finite, flat and surjective for $n$ invertible]
 \label{thm:av-mulby-etale-corollaries}
 \uses{thm:av-mulby-etale, thm:av-zariski-main, prop:av-basic}
+\lean{AlgebraicGeometry.IsAbelianVariety.isFinite_mulBy_of_natCast_ne_zero,
+AlgebraicGeometry.IsAbelianVariety.flat_mulBy_of_natCast_ne_zero,
+AlgebraicGeometry.IsAbelianVariety.surjective_mulBy_of_natCast_ne_zero}
+\leanok
 Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
 $K$.  Then $[n]\colon A\to A$ is finite, flat and surjective.  This holds over
 an arbitrary field.
-\openobligation{AlgebraicGeometry: the implication from Etale to
-LocallyQuasiFinite for morphisms of schemes. Mathlib v4.33.1 has the ring-level
-instance producing Algebra.QuasiFinite from EssFiniteType and
-FormallyUnramified, in RingTheory/Unramified/LocalStructure.lean, but no scheme
-level instance; the bridge is HasRingHomProperty for LocallyQuasiFinite and
-RingHom.QuasiFinite.}
 \end{theorem}
 \begin{proof}
 \uses{thm:av-mulby-etale, thm:av-zariski-main, prop:av-basic, lem:av-mulby-lfp}
+\leanok
 \emph{Flat and locally quasi-finite.}  By \Cref{thm:av-mulby-etale} the
 morphism $[n]$ is \'etale, hence flat, and hence locally quasi-finite: an
 \'etale morphism is formally unramified and locally of finite type, and a
@@ -1059,8 +1060,8 @@ $[n](A)=A$.
 \begin{corollary}[$A[n]$ is finite \'etale for $n$ invertible]
 \label{cor:av-torsion-finite-etale}
 \uses{thm:av-mulby-etale-corollaries, lem:av-torsion-pullback}
-\lean{AlgebraicGeometry.IsAbelianVariety.isFinite_torsion,
-AlgebraicGeometry.IsAbelianVariety.flat_torsion,
+\lean{AlgebraicGeometry.IsAbelianVariety.isFinite_torsion_of_natCast_ne_zero,
+AlgebraicGeometry.IsAbelianVariety.flat_torsion_of_natCast_ne_zero,
 AlgebraicGeometry.IsAbelianVariety.etale_torsion}
 \leanok
 Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
@@ -1353,13 +1354,14 @@ together with the mirror files under \texttt{WeilConjectures/Mathlib/}.
 \Cref{lem:av-torsion-pullback}; \Cref{def:av-degree} and
 \Cref{lem:av-degree-base-change}; \Cref{thm:av-zariski-main};
 \Cref{prop:av-finite-etale-points}; \Cref{thm:av-finite-abelian-group};
+\Cref{thm:av-mulby-etale}; \Cref{thm:av-mulby-etale-corollaries};
 \Cref{cor:av-torsion-finite-etale}; and the two derivations
 \Cref{prop:av-etale-torsion} and \Cref{prop:av-divisibility}.  The Lean proofs
-of the last three are complete \emph{given} the five statements listed next,
+of the last two are complete \emph{given} the four statements listed next,
 which is exactly the sense in which a blueprint node can be green above a red
 one.
 
-\emph{Formalised as a deliberate \texttt{sorry}.}  Five declarations in
+\emph{Formalised as a deliberate \texttt{sorry}.}  Four declarations in
 \texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Isogeny.lean}:
 \begin{itemize}
   \item \texttt{AlgebraicGeometry.IsAbelianVariety.isFinite\_mulBy} ---
@@ -1369,27 +1371,23 @@ one.
   \item \texttt{AlgebraicGeometry.IsAbelianVariety.surjective\_mulBy} ---
     surjectivity of $[n]$, part of \Cref{prop:av-isogeny};
   \item \texttt{AlgebraicGeometry.IsAbelianVariety.finrank\_mulBy} ---
-    $\deg[n]=n^{2g}$, that is \Cref{thm:av-degree-formula};
-  \item \texttt{AlgebraicGeometry.IsAbelianVariety.etale\_mulBy} ---
-    \'etaleness of $[n]$ for $n$ invertible in $K$, that is
-    \Cref{thm:av-mulby-etale}.
+    $\deg[n]=n^{2g}$, that is \Cref{thm:av-degree-formula}.
 \end{itemize}
-The first four are the content of \Cref{sec:av-cube} and are blocked on the
-scope question recorded in the status note there.  The fifth is the content of
-\Cref{sec:av-etale-route} and is \emph{not} blocked on anything mathematical:
-its proof is written out in full in
-\Cref{sec:av-etale-kernel,sec:av-etale-unramified,sec:av-etale-smooth,sec:av-etale-conclusion},
-and needs only the packaging obligations recorded at
-\Cref{thm:av-mulby-formally-unramified},
-\Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp}.  Note that
-\Cref{thm:av-mulby-etale-corollaries} would then also give finiteness, flatness
-and surjectivity of $[n]$ for $n$ invertible in $K$, independently of
-\Cref{sec:av-cube}, so that three of the five placeholders above would remain
-open only in the bad characteristic.
+All four are the content of \Cref{sec:av-cube} and are blocked on the scope
+question recorded in the status note there.  The first three are, however, open
+only in the bad characteristic: \Cref{thm:av-mulby-etale-corollaries} gives
+finiteness, flatness and surjectivity of $[n]$ for $n$ invertible in $K$
+independently of \Cref{sec:av-cube}, and those statements are formalised with
+complete proofs as \texttt{isFinite\_mulBy\_of\_natCast\_ne\_zero},
+\texttt{flat\_mulBy\_of\_natCast\_ne\_zero} and
+\texttt{surjective\_mulBy\_of\_natCast\_ne\_zero} in the same file.  Only
+\texttt{finrank\_mulBy} is open in every characteristic; see
+\Cref{rem:av-etale-route-scope}.
 
 \emph{No Lean statement yet.}  Everything in \Cref{sec:av-etale-route} except
-\Cref{thm:av-mulby-etale} and \Cref{cor:av-torsion-finite-etale}: the
-translations \Cref{def:av-translation}, \Cref{lem:av-translation},
+\Cref{thm:av-mulby-etale}, \Cref{thm:av-mulby-etale-corollaries} and
+\Cref{cor:av-torsion-finite-etale}: the translations
+\Cref{def:av-translation}, \Cref{lem:av-translation},
 \Cref{lem:av-translation-intertwines} and
 \Cref{lem:av-translation-spreading}; the cotangent-space material
 \Cref{def:av-cotangent}, \Cref{lem:av-cotangent-affine},
@@ -1398,8 +1396,8 @@ kernel computation \Cref{lem:av-kernel-cotangent},
 \Cref{lem:av-kernel-group-law}, \Cref{cor:av-kernel-module} and
 \Cref{cor:av-kernel-npow}; \Cref{lem:av-lift-lands-in-open};
 \Cref{thm:av-mulby-formally-unramified};
-\Cref{thm:av-mulby-formally-smooth}; \Cref{lem:av-mulby-lfp}; and
-\Cref{thm:av-mulby-etale-corollaries}.  And everything in \Cref{sec:av-cube}:
+\Cref{thm:av-mulby-formally-smooth}; and \Cref{lem:av-mulby-lfp}.  And
+everything in \Cref{sec:av-cube}:
 \Cref{thm:av-cube}, \Cref{thm:av-mulby-pullback},
 \Cref{prop:av-symmetric-ample}, \Cref{prop:av-ample-self-intersection},
 \Cref{prop:av-degree-intersection}, \Cref{thm:av-degree-formula} and

@@ -8,11 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 
 /-!
@@ -38,36 +40,54 @@ point along a finite morphism is again closed.
 
 - `AlgebraicGeometry.IsAbelianVariety.isFinite_mulBy`,
   `AlgebraicGeometry.IsAbelianVariety.flat_mulBy` and
-  `AlgebraicGeometry.IsAbelianVariety.surjective_mulBy` — for `n ≠ 0`, the morphism `[n]` is
-  finite, flat and surjective, i.e. an isogeny.
+  `AlgebraicGeometry.IsAbelianVariety.surjective_mulBy` — for every `n ≠ 0`, the morphism `[n]`
+  is finite, flat and surjective, i.e. an isogeny.
 - `AlgebraicGeometry.IsAbelianVariety.finrank_mulBy` — the isogeny `[n]` has degree
   `n ^ (2 * g)`, where `g` is the dimension of `A`.
 - `AlgebraicGeometry.IsAbelianVariety.etale_mulBy` — if `n` is invertible in `K`, then `[n]` is
   étale.
 - `AlgebraicGeometry.IsAbelianVariety.isFinite_mulBy_of_natCast_ne_zero`,
   `AlgebraicGeometry.IsAbelianVariety.flat_mulBy_of_natCast_ne_zero` and
-  `AlgebraicGeometry.IsAbelianVariety.surjective_mulBy_of_natCast_ne_zero` — if `n` is
-  invertible in `K`, then `[n]` is finite, flat and surjective, i.e. an isogeny.
+  `AlgebraicGeometry.IsAbelianVariety.surjective_mulBy_of_natCast_ne_zero` — the same three
+  properties, but under the stronger hypothesis that `n` is invertible in `K`, and with a
+  complete proof.
 - `AlgebraicGeometry.IsAbelianVariety.exists_npow_eq` and
-  `AlgebraicGeometry.IsAbelianVariety.rootableBy` — if `K` is algebraically
-  closed and `n ≠ 0`, then every `K`-point of `A` is an `n`-th power, i.e. the group `A(K)` is
-  `n`-divisible.
+  `AlgebraicGeometry.IsAbelianVariety.exists_npow_eq_of_natCast_ne_zero` — if `K` is
+  algebraically closed and `n ≠ 0` (resp. `n` is invertible in `K`), then every `K`-point of `A`
+  is an `n`-th power, i.e. the group `A(K)` is `n`-divisible; see also
+  `AlgebraicGeometry.IsAbelianVariety.rootableBy`.
 
 ## Implementation notes
 
-* When `n` is invertible in `K`, everything is proved: `etale_mulBy` is
-  `AlgebraicGeometry.GrpObj.etale_npow_left`, an infinitesimal-lifting argument that needs no
-  theory of differentials, and finiteness, flatness and surjectivity of `[n]` follow from it
-  together with properness of `[n]`.
-* The four statements with hypothesis `n ≠ 0` — `isFinite_mulBy`, `flat_mulBy`,
-  `surjective_mulBy` and `finrank_mulBy` — are the only remaining `sorry`s of this file. They
-  are stated for every `n ≠ 0`, so they also cover the case where the characteristic of `K`
-  divides `n`, which is out of reach of the étale argument. The missing ingredient is the
-  theorem of the cube, which for a symmetric ample line bundle `L` gives `[n]^* L ≅ L ^ (n ^ 2)`;
-  Mathlib has neither the theorem of the cube nor ampleness of line bundles nor intersection
-  numbers. See the classical proofs in the individual docstrings. They are owned by issue 776
-  ("Prove that `[n]` is an isogeny of degree `n ^ (2 * g)`: the theorem of the cube and the
-  degree computation").
+* When `n` is invertible in `K`, everything except the degree formula is proved: étaleness,
+  properness, finiteness, flatness and surjectivity of `[n]`, and `n`-divisibility of `A(K)`.
+  The starting point is `etale_mulBy`, which is `AlgebraicGeometry.GrpObj.etale_npow_left`, an
+  infinitesimal-lifting argument that needs no theory of differentials. The étale route sees no
+  dimension, so it says nothing about the degree of `[n]`.
+* Four statements are still `sorry`, and they are the only ones in this file.
+  `isFinite_mulBy`, `flat_mulBy` and `surjective_mulBy` are open only in the bad characteristic:
+  they are stated for every `n ≠ 0`, and the case `(n : K) ≠ 0` is the content of
+  `isFinite_mulBy_of_natCast_ne_zero`, `flat_mulBy_of_natCast_ne_zero` and
+  `surjective_mulBy_of_natCast_ne_zero`. `finrank_mulBy`, the degree formula, is open for every
+  `n`, in every characteristic. The missing ingredient in both cases is the theorem of the cube,
+  which for a symmetric ample line bundle `L` gives `[n]^* L ≅ L ^ (n ^ 2)`; Mathlib has neither
+  the theorem of the cube nor ampleness of line bundles nor intersection numbers. See the
+  classical proofs in the individual docstrings. They are owned by issue 776 ("Prove that `[n]`
+  is an isogeny of degree `n ^ (2 * g)`: the theorem of the cube and the degree computation").
+* TODO: once issue 776 is done, `isFinite_mulBy`, `flat_mulBy` and `surjective_mulBy` subsume
+  the `_of_natCast_ne_zero` variants, since `(n : K) ≠ 0` implies `n ≠ 0`; the variants (and
+  likewise `exists_npow_eq_of_natCast_ne_zero`, and `isFinite_torsion_of_natCast_ne_zero` and
+  `flat_torsion_of_natCast_ne_zero` in
+  `WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion`) should then be deprecated, so that
+  the file is left with a single API.
+* Properness of `[n]` is not stated in this file: it is found by instance search, from
+  `AlgebraicGeometry.isProper_left`, which says that a morphism in `Over S` whose source is
+  proper over `S` and whose target is separated over `S` is proper.
+* Naming: a lemma about `[n]` carries the suffix `_of_natCast_ne_zero` exactly when a statement
+  of the same conclusion under the weaker hypothesis `n ≠ 0` is also available. So the
+  `sorry`-free finiteness, flatness and surjectivity results are suffixed, whereas `etale_mulBy`
+  is not: étaleness is false in general when the characteristic of `K` divides `n`, so there is
+  no unsuffixed version for it to be confused with.
 * Following `WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian`, the dimension `g` of `A`
   is not a field of `IsAbelianVariety` but an instance argument
   `[SmoothOfRelativeDimension g G.hom]` at the use site.
@@ -79,9 +99,11 @@ point along a finite morphism is again closed.
 
 ## Blueprint
 
-The declarations of this file implement Proposition 2.7 (`mulBy`, `isFinite_mulBy`,
-`flat_mulBy`, `surjective_mulBy`, `finrank_mulBy`), Proposition 2.8 (`etale_mulBy`, the input it
-needs) and Proposition 2.9 (`exists_npow_eq`) of §2.6 of `blueprint/curve_estimates.pdf`.
+The declarations of this file implement, in §2.6 of `blueprint/curve_estimates.pdf`:
+Proposition 2.7 (`mulBy`, `isFinite_mulBy`, `flat_mulBy`, `surjective_mulBy`, `finrank_mulBy`),
+Proposition 2.8 (`etale_mulBy`), Proposition 2.9 (`exists_npow_eq`), and the corollaries for `n`
+invertible, `thm:av-mulby-etale-corollaries` (`isFinite_mulBy_of_natCast_ne_zero`,
+`flat_mulBy_of_natCast_ne_zero`, `surjective_mulBy_of_natCast_ne_zero`).
 -/
 
 @[expose] public section
@@ -154,52 +176,43 @@ theorem finrank_mulBy {g : ℕ} [SmoothOfRelativeDimension g G.hom] (hn : n ≠ 
 /-- The multiplication by `n` isogeny of an abelian variety is étale if `n` is invertible in the
 base field.
 
-This is a special case of `AlgebraicGeometry.GrpObj.etale_npow_left`: an abelian variety is a
-smooth commutative group scheme, and for such a group scheme `[n]` is étale by an infinitesimal
-lifting argument, rigidity and `n`-divisibility of the group of points trivial on a square-zero
-thickening. No properness of `G` is needed. -/
+This is `AlgebraicGeometry.GrpObj.etale_npow_left` specialised to an abelian variety. -/
 theorem etale_mulBy (hn : (n : K) ≠ 0) : Etale (mulBy G n).left :=
   GrpObj.etale_npow_left hn
 
-/-- The multiplication by `n` endomorphism of an abelian variety is proper, for every `n`: it is
-a morphism over the proper and separated structure morphism of `G`. -/
-instance isProper_mulBy : IsProper (mulBy G n).left := by
-  have : IsProper ((mulBy G n).left ≫ G.hom) := by rw [Over.w (mulBy G n)]; infer_instance
-  exact IsProper.of_comp _ G.hom
-
 /-- The multiplication by `n` endomorphism of an abelian variety is finite if `n` is invertible
-in the base field: it is proper by `AlgebraicGeometry.IsAbelianVariety.isProper_mulBy` and locally
-quasi-finite because it is étale, hence finite by Zariski's main theorem. -/
+in the base field.
+
+See `AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite`. -/
 theorem isFinite_mulBy_of_natCast_ne_zero (hn : (n : K) ≠ 0) : IsFinite (mulBy G n).left :=
   have := etale_mulBy G hn
-  have : LocallyQuasiFinite (mulBy G n).left := inferInstance
   IsFinite.of_isProper_of_locallyQuasiFinite _
 
 /-- The multiplication by `n` endomorphism of an abelian variety is flat if `n` is invertible in
-the base field, since it is étale. -/
+the base field. -/
 theorem flat_mulBy_of_natCast_ne_zero (hn : (n : K) ≠ 0) : Flat (mulBy G n).left :=
   have := etale_mulBy G hn
   inferInstance
 
 /-- The multiplication by `n` endomorphism of an abelian variety is surjective if `n` is
-invertible in the base field: it is universally closed, being proper, and universally open, being
-flat and locally of finite presentation, so its image is a nonempty clopen subset of the
-irreducible, hence preconnected, space `G.left`. -/
+invertible in the base field.
+
+See `IsOpenMap.surjective_of_isClosedMap`. -/
 theorem surjective_mulBy_of_natCast_ne_zero (hn : (n : K) ≠ 0) : Surjective (mulBy G n).left :=
   have := etale_mulBy G hn
-  surjective_of_universallyOpen_of_universallyClosed _
+  -- `[n]` is closed, being proper, and open, being flat and locally of finite presentation
+  ⟨(mulBy G n).left.isOpenMap.surjective_of_isClosedMap (mulBy G n).left.isClosedMap⟩
 
 section IsAlgClosed
 
 variable [IsAlgClosed K]
 
 /-- **Divisibility of the group of points of an abelian variety.** If `K` is algebraically closed
-and `n ≠ 0`, every `K`-point of an abelian variety over `K` is an `n`-th power; in other words
-`A(K) / n · A(K) = 0`. -/
-theorem exists_npow_eq (hn : n ≠ 0) (x : 𝟙_ (Over (Spec (.of K))) ⟶ G) :
+and `[n]` is finite and surjective, every `K`-point of an abelian variety over `K` is an `n`-th
+power; in other words `A(K) / n · A(K) = 0`. -/
+theorem exists_npow_eq_of_isFinite_of_surjective [IsFinite (mulBy G n).left]
+    [Surjective (mulBy G n).left] (x : 𝟙_ (Over (Spec (.of K))) ⟶ G) :
     ∃ y : 𝟙_ (Over (Spec (.of K))) ⟶ G, y ^ n = x := by
-  have := isFinite_mulBy G hn
-  have := surjective_mulBy G hn
   have : JacobsonSpace G.left := LocallyOfFiniteType.jacobsonSpace G.hom
   set f : G.left ⟶ G.left := (mulBy G n).left with hf
   -- the `K`-point `x` is a section of `G.hom`, hence a closed point `x₀` of `G.left`
@@ -221,6 +234,25 @@ theorem exists_npow_eq (hn : n ≠ 0) (x : 𝟙_ (Over (Spec (.of K))) ⟶ G) :
   · rw [Category.assoc, hf, Over.w (mulBy G n), pointOfClosedPoint_comp]
   · rw [Scheme.Hom.comp_apply, pointOfClosedPoint_apply]
     exact hz
+
+/-- **Divisibility of the group of points of an abelian variety.** If `K` is algebraically closed
+and `n ≠ 0`, every `K`-point of an abelian variety over `K` is an `n`-th power; in other words
+`A(K) / n · A(K) = 0`. -/
+theorem exists_npow_eq (hn : n ≠ 0) (x : 𝟙_ (Over (Spec (.of K))) ⟶ G) :
+    ∃ y : 𝟙_ (Over (Spec (.of K))) ⟶ G, y ^ n = x :=
+  have := isFinite_mulBy G hn
+  have := surjective_mulBy G hn
+  exists_npow_eq_of_isFinite_of_surjective G x
+
+/-- **Divisibility of the group of points of an abelian variety, in good characteristic.** If `K`
+is algebraically closed and `n` is invertible in `K`, every `K`-point of an abelian variety over
+`K` is an `n`-th power; in other words `A(K) / n · A(K) = 0`. -/
+theorem exists_npow_eq_of_natCast_ne_zero (hn : (n : K) ≠ 0)
+    (x : 𝟙_ (Over (Spec (.of K))) ⟶ G) :
+    ∃ y : 𝟙_ (Over (Spec (.of K))) ⟶ G, y ^ n = x :=
+  have := isFinite_mulBy_of_natCast_ne_zero G hn
+  have := surjective_mulBy_of_natCast_ne_zero G hn
+  exists_npow_eq_of_isFinite_of_surjective G x
 
 /-- The group of `K`-points of an abelian variety over an algebraically closed field `K` is
 divisible. -/
