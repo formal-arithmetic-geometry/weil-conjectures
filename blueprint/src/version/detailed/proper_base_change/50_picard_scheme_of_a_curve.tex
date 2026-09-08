@@ -8611,6 +8611,32 @@ proposition.  It is not decomposed here.
 % above cites it to say what this node does *not* prove, so it is not a hypothesis of
 % this proof.  Adding the edge would be acyclic but would record a dependency that
 % does not exist.
+%
+% This node has no \uses citer, deliberately, and this rules it.  Its one citer was
+% \Cref{lem:pc-very-ample-ample}, whose proof exhibits a *finite affine cover* of $X$ by
+% the $X_{s_j}$ and then concluded ampleness from this criterion -- but the hypothesis
+% here is that the affine $X_s$ form a *basis* of the topology, which is strictly more
+% than a cover: it needs the localisation step realising a principal open
+% $D(a)\subseteq X_{s_j}=\Spec A$ as $X_{as_j^m}$, and the chapter has no node for that
+% step.  The chapter's only route to the basis property is the converse implication
+% (1) $\Rightarrow$ (4) of the same proposition \stacksproject{01Q3} that this node
+% imports as (4) $\Rightarrow$ (1), so the step was circular in presentation.  What that
+% proof actually establishes -- $X$ quasi-compact, and every point in an affine $X_{s_j}$
+% with $s_j$ a section of $\cL$ -- is \Cref{def:pc-ample} verbatim, so it now cites the
+% definition directly and this criterion is no longer on its route.
+%
+% The node is kept, not deleted: it is the chapter's statement of the covering-condition
+% criterion of \stacksproject{01Q3} in the generality \Cref{rem:pc-sc-ample} appeals to
+% when it fixes the generality of \Cref{def:pc-ample} -- ``for a scheme that is merely
+% quasi-compact in \Cref{lem:pc-ample-basis-criterion}''.  No \uses edge is drawn from
+% that remark to here to restore an in-degree: the remark names this node, and
+% \Cref{lem:pc-hilb-representable} and \Cref{lem:pc-ample-iff-power-very-ample} beside
+% it, only to say what generality is needed below, and edges for those prose mentions
+% would record dependencies that do not exist -- the same ruling as the two paragraphs
+% above.  Such an edge would also not do the work it looks like it does:
+% \Cref{rem:pc-sc-ample} is itself uncited and lies in no headline theorem's closure, so
+% the edge would raise this node's in-degree to $1$ while leaving it exactly as
+% unreachable from \Cref{thm:pc-picard-representable} as it is now.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -8695,16 +8721,20 @@ $\cL\otimes_k K$ is ample on $X_K$ for every field extension $K/k$.
 \uses{def:pcb-ample,def:pc-invertible-module,def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-ample,lem:pc-closed-imm-base-change,lem:pc-closed-immersion-affine,lem:pc-ample-basis-criterion,lem:pc-ample-iff-power-very-ample}
+\uses{def:pc-ample,lem:pc-closed-imm-base-change,lem:pc-closed-immersion-affine,lem:pc-ample-iff-power-very-ample}
 The scheme $\PP^n_k$ is the union of the affine opens $D_+(x_j)$,
 $j=0,\dots,n$ (as usual via the homogeneous coordinates $x_0,\dots,x_n$);
 hence with $s_j:=i^*x_j\in H^0(X,\cL)$ we have
 $X_{s_j}=X\cap D_+(x_j)$, which is affine (a closed subscheme of an
 affine scheme is affine, \Cref{lem:pc-closed-immersion-affine}),
 and $\bigcup_jX_{s_j}=X$ as the $D_+(x_j)$ cover $\PP^n_k$ and $i$ is
-injective.  Thus the affine open sets $X_s$ form a basis of the topology,
-so $\cL$ is ample in the sense of \Cref{def:pc-ample} by
-\Cref{lem:pc-ample-basis-criterion}; since $X$ is proper over
+injective.  In particular $X$ is covered by the $n+1$ affine opens
+$X_{s_0},\dots,X_{s_n}$ and is therefore quasi-compact, and every
+$x\in X$ lies in one of them, with $X_{s_j}$ affine and
+$s_j\in H^0(X,\cL)=\Gamma(X,\cL^{\otimes1})$ a section of the first
+power of $\cL$.  That is the condition of \Cref{def:pc-ample}
+verbatim, with the tensor power taken to be $1$, so $\cL$ is ample in
+the sense of that definition.  Since $X$ is proper over
 $k$, being a closed subscheme of $\PP^n_k$, some power
 $\cL^{\otimes m}$ is therefore very ample
 (\Cref{lem:pc-ample-iff-power-very-ample}), which is ampleness in the
