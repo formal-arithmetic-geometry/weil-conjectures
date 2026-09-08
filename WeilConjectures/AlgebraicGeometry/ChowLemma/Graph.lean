@@ -96,7 +96,7 @@ noncomputable def ambient : Over S := ∏ᶜ fun i ↦ Over.mk (ℙ((M i).n; S) 
 /-- **The product of the ambient projective spaces is proper over `S`**, being a finite product
 of proper `S`-schemes. This is what replaces the Segre embedding. -/
 instance isProper_ambient_hom : IsProper (ambient M).hom :=
-  haveI (i : ι) : IsProper (Over.mk (ℙ((M i).n; S) ↘ S)).hom :=
+  have (i : ι) : IsProper (Over.mk (ℙ((M i).n; S) ↘ S)).hom :=
     inferInstanceAs (IsProper (ℙ((M i).n; S) ↘ S))
   isProper_pi_hom _
 
@@ -273,30 +273,17 @@ end Noetherian
 closed immersion `Z ⟶ ∏_S ℙ(Mᵢ.n; S)` of `AlgebraicGeometry.ChowGraph.emb` with the `m`-fold
 Segre embedding `AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi` yields a closed
 immersion of `Z` into a projective space `ℙ(N; S)` with `N` finite, compatible with the
-structure morphisms over `S`.
-
-The index type `ι` of the cover lives in an arbitrary universe, while the Segre embedding is
-stated for an index type in the universe of the schemes; the two are matched up by reindexing
-the product along an equivalence `ι ≃ ULift.{u} (Fin k)`. -/
+structure morphisms over `S`. -/
 @[stacks 0200 "step 7 of the proof"]
 theorem exists_isClosedImmersion_over :
     ∃ (N : Type u) (_ : Finite N) (g : ChowGraph M ⟶ ℙ(N; S)),
       IsClosedImmersion g ∧ g ≫ ℙ(N; S) ↘ S = over M := by
-  obtain ⟨k, ⟨e⟩⟩ := Finite.exists_equiv_fin ι
-  let e' : ι ≃ ULift.{u} (Fin k) := e.trans Equiv.ulift.symm
-  obtain ⟨N, hN, g, hg⟩ :=
-    ProjectiveSpace.exists_isClosedImmersion_pi (fun j ↦ (M (e'.symm j)).n) S
-  let ee : ambient M ≅ ∏ᶜ fun j ↦ Over.mk (ℙ((M (e'.symm j)).n; S) ↘ S) :=
-    Pi.whiskerEquiv (f := fun i ↦ Over.mk (ℙ((M i).n; S) ↘ S))
-      (g := fun j ↦ Over.mk (ℙ((M (e'.symm j)).n; S) ↘ S)) e'
-      fun i ↦ eqToIso (by rw [Equiv.symm_apply_apply])
-  have : IsIso ee.hom.left := inferInstanceAs (IsIso ((Over.forget S).map ee.hom))
-  refine ⟨N, hN, emb M ≫ (ee.hom ≫ g).left, ?_, ?_⟩
-  · rw [Over.comp_left]
-    infer_instance
-  · have h := Over.w (ee.hom ≫ g)
-    simp only [Over.mk_hom] at h
-    rw [Category.assoc, h, over]
+  obtain ⟨N, hN, g, hg⟩ := ProjectiveSpace.exists_isClosedImmersion_pi (fun i ↦ (M i).n) S
+  refine ⟨N, hN, emb M ≫ g.left, inferInstance, ?_⟩
+  have h := Over.w g
+  simp only [Over.mk_hom] at h
+  rw [Category.assoc, h]
+  rfl
 
 end ChowGraph
 

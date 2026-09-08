@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 
@@ -27,9 +26,7 @@ whose inclusion into `W` is universally closed is all of `W`
 (`AlgebraicGeometry.Scheme.Opens.eq_of_universallyClosed_of_dense`). Since properness of a
 composite `V ⟶ W ⟶ T` with `W ⟶ T` separated forces the inclusion `V ⟶ W` to be
 universally closed, this gives the form used in practice,
-`AlgebraicGeometry.Scheme.Opens.eq_of_isProper_of_dense`, and its variant
-`AlgebraicGeometry.Scheme.Opens.eq_of_isProper_of_isSchemeTheoreticallyDominant`, where the
-density is supplied by a quasi-compact scheme-theoretically dense open contained in `V`.
+`AlgebraicGeometry.Scheme.Opens.eq_of_isProper_of_dense`.
 -/
 
 @[expose] public section
@@ -75,16 +72,5 @@ theorem Scheme.Opens.eq_of_isProper_of_dense {V W : Z.Opens} (h : V ≤ W) (q : 
   have : UniversallyClosed (Z.homOfLE h) :=
     UniversallyClosed.of_comp_of_isSeparated (f := Z.homOfLE h) (g := q)
   eq_of_universallyClosed_of_dense h hd
-
-/-- An open subscheme `V ≤ W` that is proper over a base `T` over which `W` is separated and
-that contains a quasi-compact scheme-theoretically dense open of `Z` is all of `W`. -/
-theorem Scheme.Opens.eq_of_isProper_of_isSchemeTheoreticallyDominant {V W : Z.Opens} (h : V ≤ W)
-    (q : W.toScheme ⟶ T) [IsProper (Z.homOfLE h ≫ q)] [IsSeparated q]
-    (D : Z.Opens) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι] (hD : D ≤ V) :
-    V = W :=
-  eq_of_isProper_of_dense h q <| by
-    have : closure (D : Set Z) = Set.univ := by
-      simpa using D.ι.denseRange.closure_range
-    exact fun x _ ↦ closure_mono hD (this ▸ Set.mem_univ x)
 
 end AlgebraicGeometry

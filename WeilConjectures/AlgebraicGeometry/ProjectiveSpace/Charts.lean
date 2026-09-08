@@ -189,7 +189,6 @@ lemma evalSectionsAway_X (i : n) (j : {j : n // j ≠ i}) :
   · exact evalSections_X s j.1
   · exact Subtype.ext (by simp)
 
-set_option backward.isDefEq.respectTransparency.types false in
 variable {n S} in
 /-- Read through the chart isomorphism, the morphism `X_{s i} ⟶ 𝔸({j // j ≠ i}; S)` induced
 by `homOfSections g s hs` is `Spec` of the map `Yⱼ ↦ s j / s i` on coordinate rings. -/

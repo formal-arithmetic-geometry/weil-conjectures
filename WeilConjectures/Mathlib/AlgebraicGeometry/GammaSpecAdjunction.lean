@@ -23,7 +23,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical morphism `X.basicOpen x ⟶ Spec Γ(X, ⊤)[1/x]`, composed with `Spec` of the
 localization map, is the composite `X.basicOpen x ⟶ X ⟶ Spec Γ(X, ⊤)`. -/
 @[reassoc]

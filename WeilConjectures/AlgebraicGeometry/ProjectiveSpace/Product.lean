@@ -24,6 +24,10 @@ Segre embedding `AlgebraicGeometry.ProjectiveSpace.segre`. Since the index type 
 grows by a product at every step, the statement is existential in the target index type; this
 is all that Chow's lemma consumes.
 
+The index type of the product lives in an arbitrary universe, `Finite.induction_empty_option`
+being universe-polymorphic; only the homogeneous coordinates are in the universe of the
+schemes.
+
 ## Main declarations
 
 * `AlgebraicGeometry.ProjectiveSpace.segreOver`: the relative Segre morphism read as a morphism
@@ -70,7 +74,7 @@ instance : IsClosedImmersion (segreOver n m S).left := by
 
 end Binary
 
-variable {ι : Type u} [Finite ι] (n : ι → Type u) [∀ i, Finite (n i)] (S : Scheme.{u})
+variable {ι : Type*} [Finite ι] (n : ι → Type u) [∀ i, Finite (n i)] (S : Scheme.{u})
 
 /-- **A finite fibre product of projective spaces over `S` embeds into a projective space
 over `S`**: the product `∏ᶜ fun i ↦ ℙ(n i; S)` in `Over S` admits a closed immersion into

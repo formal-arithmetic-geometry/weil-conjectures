@@ -27,9 +27,9 @@ because the only fraction of the shape `Xᵃ / Xᵃ` is `1`, whence
 
 ## Main results
 
-- `AlgebraicGeometry.Proj.instIsIsoProjectiveSpaceOverAffineToSpec` — for a one-element index
+- `AlgebraicGeometry.Proj.isIso_projectiveSpaceOverAffineToSpec` — for a one-element index
   type, the structure morphism `ℙ^n_A ⟶ Spec A` is an isomorphism.
-- `AlgebraicGeometry.ProjectiveSpace.instIsIso` — for a one-element index type, the structure
+- `AlgebraicGeometry.ProjectiveSpace.isIso_over` — for a one-element index type, the structure
   morphism `ℙ(n; S) ↘ S` is an isomorphism.
 
 ## Implementation notes
@@ -113,7 +113,7 @@ lemma Proj.basicOpen_X_eq_top :
 
 /-- **Projective space on one homogeneous coordinate is its base**: for a one-element index
 type `n`, the structure morphism `ℙ^n_A ⟶ Spec A` is an isomorphism. -/
-instance Proj.instIsIsoProjectiveSpaceOverAffineToSpec :
+instance Proj.isIso_projectiveSpaceOverAffineToSpec :
     IsIso (Proj.projectiveSpaceOverAffineToSpec n A) := by
   have : IsIso (Proj.toSpecZero (MvPolynomial.homogeneousSubmodule n A)) :=
     Proj.isIso_toSpecZero _ (MvPolynomial.isHomogeneous_X A (default : n)) one_pos
@@ -146,7 +146,7 @@ variable (n : Type u) [Unique n] (S : Scheme.{u})
 /-- **`ℙ(n; S)` is `S` on one homogeneous coordinate**: for a one-element index type `n`, the
 structure morphism `ℙ(n; S) ↘ S` is an isomorphism, being the base change of the isomorphism
 `ℙ^n_ℤ ⟶ Spec ℤ` along the structure morphism of `S`. -/
-instance instIsIso : IsIso (ℙ(n; S) ↘ S) := by
+instance isIso_over : IsIso (ℙ(n; S) ↘ S) := by
   have hP : terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)) =
       Proj.projectiveSpaceOverAffineToSpec n (ULift.{u} ℤ) ≫ terminal.from _ := terminal.hom_ext _ _
   have hZ : terminal.from (Spec (.of (ULift.{u} ℤ))) =

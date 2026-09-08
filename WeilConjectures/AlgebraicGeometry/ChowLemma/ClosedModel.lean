@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Proper closed models of affine pieces
 
-Let `S` be a Noetherian scheme and let `g : V ⟶ S` be locally of finite type with `V` affine.
+Let `g : V ⟶ S` be locally of finite type with `V` an affine Noetherian space.
 Step 3 of the proof of Chow's lemma replaces `V` by the scheme-theoretic image `Z` of an
 immersion of `V` into a projective space over `S`: then `Z` is proper over `S` and `V` sits
 inside `Z` as a scheme-theoretically dense open subscheme. This file packages that outcome as a
@@ -23,8 +23,7 @@ structure `AlgebraicGeometry.ProperClosedModel g` and proves that it is nonempty
 Both ingredients are already available: the immersion into projective space is
 `AlgebraicGeometry.exists_isImmersion_projectiveSpace`, and the properties of the
 scheme-theoretic image of a quasi-compact immersion are Mathlib's
-`AlgebraicGeometry.Scheme.Hom.toImage`. What this file adds is the assembly, together with the
-deduction that `V` is Noetherian, which is what makes the immersion quasi-compact.
+`AlgebraicGeometry.Scheme.Hom.toImage`. What this file adds is the assembly.
 
 ## Main definitions
 
@@ -32,8 +31,8 @@ deduction that `V` is Noetherian, which is what makes the immersion quasi-compac
 
 ## Main statements
 
-- `AlgebraicGeometry.nonempty_properClosedModel` — an affine scheme locally of finite type over
-  a Noetherian scheme admits a proper closed model.
+- `AlgebraicGeometry.nonempty_properClosedModel` — an affine Noetherian scheme locally of
+  finite type over a base admits a proper closed model.
 
 ## References
 
@@ -44,7 +43,7 @@ deduction that `V` is Noetherian, which is what makes the immersion quasi-compac
 
 universe u
 
-open CategoryTheory
+open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry
 
@@ -82,22 +81,19 @@ instance isProper_emb_comp_over : IsProper (M.emb ≫ ℙ(M.n; S) ↘ S) := infe
 
 end ProperClosedModel
 
-/-- **Step 3 of the proof of Chow's lemma.** An affine scheme `V` locally of finite type over a
-Noetherian scheme `S` admits a proper closed model: a closed subscheme `Z` of some projective
-space `ℙ(n; S)` with `n` finite, containing `V` as a scheme-theoretically dense open subscheme
-and proper over `S`.
+/-- **Step 3 of the proof of Chow's lemma.** An affine scheme `V` with Noetherian underlying
+space, locally of finite type over `S`, admits a proper closed model: a closed subscheme `Z` of
+some projective space `ℙ(n; S)` with `n` finite, containing `V` as a scheme-theoretically dense
+open subscheme and proper over `S`.
 
 Indeed, `V` immerses into some `ℙ(n; S)` over `S` by
 `AlgebraicGeometry.exists_isImmersion_projectiveSpace`, and this immersion is quasi-compact
-since `V` is Noetherian; so its scheme-theoretic image does the job. -/
+because `V` is a Noetherian space; so its scheme-theoretic image does the job. -/
 @[stacks 01RG "combined with 0200, step 3 of the proof"]
-theorem nonempty_properClosedModel {V S : Scheme.{u}} [IsAffine V] [IsNoetherian S] (g : V ⟶ S)
-    [LocallyOfFiniteType g] :
+theorem nonempty_properClosedModel {V S : Scheme.{u}} [IsAffine V] [NoetherianSpace V]
+    (g : V ⟶ S) [LocallyOfFiniteType g] :
     Nonempty (ProperClosedModel g) := by
   obtain ⟨n, hn, j, hj, hjg⟩ := exists_isImmersion_projectiveSpace g
-  -- `V` is Noetherian, hence `j` is quasi-compact.
-  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian g
-  have : IsNoetherian V := ⟨⟩
   exact ⟨{ n := n
            Z := j.image
            emb := j.imageι

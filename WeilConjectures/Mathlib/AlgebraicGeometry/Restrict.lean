@@ -17,6 +17,8 @@ We record:
   compatible open immersions;
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
   — membership and preimage formulas for the ranges of inclusions of opens;
+- `AlgebraicGeometry.Scheme.Opens.isoPreimageOfLE` — for opens `U ≤ V`, the identification of
+  `U` with the open `V.ι ⁻¹ᵁ U` of `V`;
 - `AlgebraicGeometry.Scheme.divBasicOpen` — the quotient `a / b` of two global sections, as a
   section over the basic open `X_b`, where `b` is invertible.
 -/
@@ -61,6 +63,18 @@ lemma homOfLE_preimage_opensRange {X : Scheme.{u}} {U V W : X.Opens} (hWU : W �
       (X.homOfLE hWU).opensRange := by
   rw [Scheme.opensRange_homOfLE, Scheme.opensRange_homOfLE, ← Scheme.Hom.comp_preimage,
     Scheme.homOfLE_ι]
+
+/-- For opens `U ≤ V` of `X`, the identification of `U` with the copy `V.ι ⁻¹ᵁ U` of `U`
+inside the open subscheme `V`. -/
+noncomputable def Scheme.Opens.isoPreimageOfLE {X : Scheme.{u}} {U V : X.Opens} (h : U ≤ V) :
+    U.toScheme ≅ (V.ι ⁻¹ᵁ U).toScheme :=
+  (X.homOfLE h).isoOpensRange ≪≫ V.toScheme.isoOfEq (Scheme.opensRange_homOfLE h)
+
+@[reassoc (attr := simp)]
+lemma Scheme.Opens.isoPreimageOfLE_hom_ι {X : Scheme.{u}} {U V : X.Opens} (h : U ≤ V) :
+    (Scheme.Opens.isoPreimageOfLE h).hom ≫ (V.ι ⁻¹ᵁ U).ι = X.homOfLE h := by
+  rw [isoPreimageOfLE, Iso.trans_hom, Category.assoc, Scheme.isoOfEq_hom_ι,
+    Scheme.Hom.isoOpensRange_hom_ι]
 
 section BasicOpen
 

@@ -18,7 +18,7 @@ Let `S` be a Noetherian scheme and let `f : X ⟶ S` be separated, locally of fi
 quasi-compact. The first two steps of the proof of Chow's lemma replace `X` by a closed
 subscheme `X*` carrying a finite affine open cover whose intersection is not merely dense but
 *scheme-theoretically* dense. This file packages the outcome of those two steps as a structure
-`AlgebraicGeometry.ChowReduction f` and proves that it is nonempty
+`AlgebraicGeometry.ChowReduction X` and proves that it is nonempty
 (`AlgebraicGeometry.nonempty_chowReduction`), so that the proof of Chow's lemma itself can
 `obtain` such a package and start from step 3.
 
@@ -52,15 +52,15 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- **The reduction step of Chow's lemma** for a morphism `f : X ⟶ S`: a surjective closed
-immersion `c : X* ⟶ X` together with a finite affine open cover `X* = ⋃ i, Uᵢ` whose
-intersection `⋂ i, Uᵢ` is scheme-theoretically dense in `X*`, and which is the preimage under
-`c` of a dense open `V ⊆ X` over which `c` is an isomorphism.
+/-- **The reduction step of Chow's lemma** for a scheme `X`: a surjective closed immersion
+`c : X* ⟶ X` together with a finite affine open cover `X* = ⋃ i, Uᵢ` whose intersection
+`⋂ i, Uᵢ` is scheme-theoretically dense in `X*`, and which is the preimage under `c` of a
+dense open `V ⊆ X` over which `c` is an isomorphism.
 
-Since `c` is a closed immersion, `X*` is again separated, locally of finite type and
-quasi-compact over `S`, so the remaining steps of the proof of Chow's lemma may be run on `X*`
-in place of `X`. -/
-structure ChowReduction {X S : Scheme.{u}} (f : X ⟶ S) where
+Nothing here refers to a base: for a morphism `f : X ⟶ S`, the composite `X* ⟶ X ⟶ S` is
+again separated, locally of finite type and quasi-compact because `c` is a closed immersion,
+so the remaining steps of the proof of Chow's lemma may be run on `X*` in place of `X`. -/
+structure ChowReduction (X : Scheme.{u}) where
   /-- the number of members of the cover -/
   n : ℕ
   /-- the closed model `X*` of `X` -/
@@ -95,7 +95,7 @@ dense. -/
 @[stacks 0200 "Steps 1 and 2 of the proof"]
 theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
     [LocallyOfFiniteType f] [QuasiCompact f] :
-    Nonempty (ChowReduction f) := by
+    Nonempty (ChowReduction X) := by
   -- `X` is Noetherian, hence quasi-compact, quasi-separated and with finitely many components.
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
@@ -123,8 +123,8 @@ theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
 /-- The cover of a `AlgebraicGeometry.ChowReduction` may always be assumed to be nonempty: if it
 is indexed by `Fin 0`, then `X*` is empty and the one-element cover by `⊤` satisfies all the
 requirements. -/
-theorem ChowReduction.exists_n_ne_zero {X S : Scheme.{u}} {f : X ⟶ S} (R : ChowReduction f) :
-    ∃ R' : ChowReduction f, R'.n ≠ 0 := by
+theorem ChowReduction.exists_n_ne_zero {X : Scheme.{u}} (R : ChowReduction X) :
+    ∃ R' : ChowReduction X, R'.n ≠ 0 := by
   rcases eq_or_ne R.n 0 with hn | hn
   · -- If the cover is indexed by the empty type, `X*` is covered by nothing, hence empty.
     have : IsEmpty (Fin R.n) := by rw [hn]; infer_instance
@@ -153,7 +153,7 @@ may assume it has at least one member. -/
 @[stacks 0200 "Steps 1 and 2 of the proof"]
 theorem exists_chowReduction_n_ne_zero {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
-    ∃ R : ChowReduction f, R.n ≠ 0 :=
+    ∃ R : ChowReduction X, R.n ≠ 0 :=
   (nonempty_chowReduction f).elim fun R ↦ R.exists_n_ne_zero
 
 end AlgebraicGeometry

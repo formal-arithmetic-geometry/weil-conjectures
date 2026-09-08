@@ -329,7 +329,6 @@ lemma opensRange_segreCover_f (i : n) (j : m) :
     (terminal.from (projectiveSpaceOverAffine n (ULift.{u} ℤ)))
     (terminal.from (projectiveSpaceOverAffine m (ULift.{u} ℤ))) (i, j)
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Inside the `(i, j)`-chart of `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ`, the locus where the `k`-th and `l`-th
 homogeneous coordinates of the two factors do not vanish is the basic open of the chart
 section `(Xₖ / Xᵢ) · (Yₗ / Yⱼ)`. -/

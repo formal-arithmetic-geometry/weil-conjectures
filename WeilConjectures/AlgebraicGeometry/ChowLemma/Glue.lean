@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Gluing the projections of the graph into the modification
@@ -21,10 +22,12 @@ graph `AlgebraicGeometry.ChowGraph M` of the family, with its proper projections
 `Vᵢ ⟶ Uᵢ ⊆ X` all agree on `U∞`, where they are the inclusion of `U∞` in `X`, and this
 suffices because `X` is separated over `S` and `U∞` is scheme-theoretically dense.
 
-This file constructs `π` (`AlgebraicGeometry.ChowGraph.modificationMap`) and identifies its
-fibres over the members of the family: `π⁻¹(Uᵢ) = Vᵢ`, so that `π⁻¹(Uᵢ) ⟶ Uᵢ` is proper. Both
-statements together say that `π` becomes proper over each `Uᵢ`, which is what makes `π` itself
-proper once the `Uᵢ` cover `X`.
+This file constructs `π` (`AlgebraicGeometry.ChowGraph.modificationMap`) and establishes the
+three properties of it that Chow's lemma consumes. Its fibres over the members of the family
+are the `Vᵢ`, so that `π⁻¹(Uᵢ) ⟶ Uᵢ` is proper and `π` is proper once the `Uᵢ` cover `X`; `π`
+is dominant, hence surjective; and its fibre over `⋂ i, Uᵢ` is `U∞`, so that `π` is an
+isomorphism there. The last two are the same argument as the first, run for the open `U∞`
+instead of the opens `Vᵢ`.
 
 ## Main definitions
 
@@ -38,9 +41,16 @@ proper once the `Uᵢ` cover `X`.
 - `AlgebraicGeometry.ChowGraph.homOfLE_modificationMap` — `π` restricts to `pᵢ|_{Vᵢ}` on `Vᵢ`;
   `AlgebraicGeometry.ChowGraph.toGraph_modificationMap` — `π` restricts to the inclusion on
   `U∞`; `AlgebraicGeometry.ChowGraph.modificationMap_over` — `π` is a morphism over `S`.
-- `AlgebraicGeometry.ChowGraph.preimage_modificationMap` — `π⁻¹(Uᵢ) = Vᵢ`.
-- `AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap` — `π⁻¹(Uᵢ) ⟶ Uᵢ` is
-  proper.
+- `AlgebraicGeometry.ChowGraph.preimage_modificationMap` — `π⁻¹(Uᵢ) = Vᵢ`, and
+  `AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap` — `π⁻¹(Uᵢ) ⟶ Uᵢ` is
+  proper; `AlgebraicGeometry.ChowGraph.isProper_modificationMap` — `π` is proper if the `Uᵢ`
+  cover `X`.
+- `AlgebraicGeometry.ChowGraph.isDominant_modificationMap` and
+  `AlgebraicGeometry.ChowGraph.surjective_modificationMap` — `π` is dominant, and surjective
+  if the `Uᵢ` cover `X`.
+- `AlgebraicGeometry.ChowGraph.preimage_iInf_modificationMap` — `π⁻¹(⋂ i, Uᵢ) = U∞`, and
+  `AlgebraicGeometry.ChowGraph.isIso_morphismRestrict_iInf_modificationMap` — `π` is an
+  isomorphism over `⋂ i, Uᵢ`.
 
 ## Implementation notes
 
@@ -67,7 +77,8 @@ proper once the `Uᵢ` cover `X`.
 `AlgebraicGeometry.ChowGraph.modificationMap` and the lemmas around it implement
 `lem:chow-glue`, `AlgebraicGeometry.ChowGraph.preimage_modificationMap` and
 `AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap` implement
-`lem:chow-preimage`.
+`lem:chow-preimage`, and the properness, surjectivity and partial invertibility of `π` are
+steps 5 and 6 of the proof of `thm:chow-lemma`.
 -/
 
 @[expose] public section
@@ -108,21 +119,6 @@ lemma projRestrict_ι_over (i : ι) :
     (projRestrict M i ≫ (U i).ι) ≫ f = (projPreimage M i).ι ≫ over M := by
   rw [Category.assoc, ← (M i).w, projRestrict_ι_assoc, proj_over]
 
-/-- The isomorphism of `Vᵢ` with the corresponding open subscheme of `X'`. -/
-noncomputable def projPreimageIsoOfLE (i : ι) :
-    (projPreimage M i).toScheme ≅
-      ((⨆ i, projPreimage M i).ι ⁻¹ᵁ projPreimage M i).toScheme :=
-  ((ChowGraph M).homOfLE (le_iSup (projPreimage M) i)).isoOpensRange ≪≫
-    (⨆ i, projPreimage M i).toScheme.isoOfEq (Scheme.opensRange_homOfLE _)
-
-@[reassoc (attr := simp)]
-lemma projPreimageIsoOfLE_hom_ι (i : ι) :
-    (projPreimageIsoOfLE M i).hom ≫
-        ((⨆ i, projPreimage M i).ι ⁻¹ᵁ projPreimage M i).ι =
-      (ChowGraph M).homOfLE (le_iSup (projPreimage M) i) := by
-  rw [projPreimageIsoOfLE, Iso.trans_hom, Category.assoc, Scheme.isoOfEq_hom_ι,
-    Scheme.Hom.isoOpensRange_hom_ι]
-
 section Nonempty
 
 variable [Nonempty ι]
@@ -154,6 +150,19 @@ lemma homOfLE_projRestrict_ι (i : ι) :
 /-- `U∞` is contained in `X'`. -/
 lemma opensRange_toGraph_le_iSup : (toGraph M).opensRange ≤ ⨆ i, projPreimage M i :=
   (opensRange_toGraph_le_projPreimage M (Classical.arbitrary ι)).trans (le_iSup _ _)
+
+/-- **`U∞` is dense in every open subscheme of the graph containing it**, in the form used
+below: any open `A` of the graph containing `U∞` has dense preimage in `X'`. Indeed `U∞` is
+dense in the whole graph, and `X'` is an open subscheme of it. -/
+lemma dense_preimage_ι_of_opensRange_toGraph_le {A : (ChowGraph M).Opens}
+    (hA : (toGraph M).opensRange ≤ A) :
+    Dense ((⨆ i, projPreimage M i).ι.base ⁻¹' (A : Set (ChowGraph M))) := by
+  have h : Dense ((toGraph M).opensRange : Set (ChowGraph M)) := by
+    rw [Scheme.Hom.coe_opensRange]
+    exact (toGraph M).denseRange
+  rw [dense_iff_closure_eq, ← (⨆ i, projPreimage M i).ι.isOpenEmbedding.isOpenMap
+    |>.preimage_closure_eq_closure_preimage (⨆ i, projPreimage M i).ι.continuous,
+    (h.mono hA).closure_eq, Set.preimage_univ]
 
 variable [IsSeparated f]
 
@@ -219,12 +228,13 @@ lemma le_preimage_modificationMap (i : ι) :
 
 /-- Under the identification of `Vᵢ` with an open subscheme of `X'`, the inclusion of `Vᵢ`
 in `π⁻¹(Uᵢ)` followed by `π|_{Uᵢ}` is the proper morphism `pᵢ|_{Vᵢ}`. -/
-lemma projPreimageIsoOfLE_hom_homOfLE_morphismRestrict (i : ι) :
-    (projPreimageIsoOfLE M i).hom ≫
+lemma isoPreimageOfLE_hom_homOfLE_morphismRestrict (i : ι) :
+    (Scheme.Opens.isoPreimageOfLE (le_iSup (projPreimage M) i)).hom ≫
       (⨆ i, projPreimage M i).toScheme.homOfLE (le_preimage_modificationMap M i) ≫
         (modificationMap M ∣_ U i) = projRestrict M i := by
   rw [← cancel_mono (U i).ι, Category.assoc, Category.assoc, morphismRestrict_ι,
-    Scheme.homOfLE_ι_assoc, projPreimageIsoOfLE_hom_ι_assoc, homOfLE_modificationMap]
+    Scheme.homOfLE_ι_assoc, Scheme.Opens.isoPreimageOfLE_hom_ι_assoc,
+    homOfLE_modificationMap]
 
 /-- The inclusion of `Vᵢ` in `π⁻¹(Uᵢ)` is proper over `Uᵢ`, being `pᵢ|_{Vᵢ}` up to the
 identification of `Vᵢ` with an open subscheme of `X'`. -/
@@ -232,8 +242,8 @@ instance isProper_homOfLE_morphismRestrict (i : ι) :
     IsProper ((⨆ i, projPreimage M i).toScheme.homOfLE (le_preimage_modificationMap M i) ≫
       (modificationMap M ∣_ U i)) := by
   refine (MorphismProperty.cancel_left_of_respectsIso @IsProper
-    (projPreimageIsoOfLE M i).hom _).mp ?_
-  rw [projPreimageIsoOfLE_hom_homOfLE_morphismRestrict]
+    (Scheme.Opens.isoPreimageOfLE (le_iSup (projPreimage M) i)).hom _).mp ?_
+  rw [isoPreimageOfLE_hom_homOfLE_morphismRestrict]
   infer_instance
 
 /-- **The fibre of the modification over `Uᵢ` is `Vᵢ`.**
@@ -244,17 +254,11 @@ dense open subscheme of `π⁻¹(Uᵢ)`, hence all of it.
 (blueprint: `lem:chow-preimage`) -/
 @[stacks 0200 "step 5 of the proof"]
 theorem preimage_modificationMap (i : ι) :
-    modificationMap M ⁻¹ᵁ U i = (⨆ i, projPreimage M i).ι ⁻¹ᵁ projPreimage M i := by
-  have h1 : Dense ((toGraph M).opensRange : Set (ChowGraph M)) := by
-    rw [Scheme.Hom.coe_opensRange]
-    exact (toGraph M).denseRange
-  have h2 : Dense ((⨆ i, projPreimage M i).ι.base ⁻¹'
-      (projPreimage M i : Set (ChowGraph M))) := by
-    rw [dense_iff_closure_eq, ← (⨆ i, projPreimage M i).ι.isOpenEmbedding.isOpenMap
-      |>.preimage_closure_eq_closure_preimage (⨆ i, projPreimage M i).ι.continuous,
-      (h1.mono (opensRange_toGraph_le_projPreimage M i)).closure_eq, Set.preimage_univ]
-  exact (Scheme.Opens.eq_of_isProper_of_dense (le_preimage_modificationMap M i)
-    (modificationMap M ∣_ U i) fun x _ ↦ h2 x).symm
+    modificationMap M ⁻¹ᵁ U i = (⨆ i, projPreimage M i).ι ⁻¹ᵁ projPreimage M i :=
+  (Scheme.Opens.eq_of_isProper_of_dense (le_preimage_modificationMap M i)
+    (modificationMap M ∣_ U i) fun x _ ↦
+      dense_preimage_ι_of_opensRange_toGraph_le M
+        (opensRange_toGraph_le_projPreimage M i) x).symm
 
 /-- **The modification is proper over each member of the family.** -/
 instance isProper_morphismRestrict_modificationMap (i : ι) :
@@ -266,6 +270,101 @@ instance isProper_morphismRestrict_modificationMap (i : ι) :
   exact (MorphismProperty.cancel_left_of_respectsIso @IsProper
     ((⨆ i, projPreimage M i).toScheme.homOfLE (le_preimage_modificationMap M i)) _).mp
     inferInstance
+
+/-- **The modification is proper** as soon as the family covers `X`, properness being local
+at the target and the modification being proper over each member of the family.
+(blueprint: `thm:chow-lemma`, step 5 of the proof) -/
+@[stacks 0200 "step 5 of the proof"]
+theorem isProper_modificationMap (hU : ⨆ i, U i = ⊤) : IsProper (modificationMap M) :=
+  IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsProper) (f := modificationMap M) U hU
+    fun i ↦ isProper_morphismRestrict_modificationMap M i
+
+/-- **On `U∞` the modification is the inclusion of `⋂ i, Uᵢ` in `X`**, read on `U∞` as an open
+subscheme of the graph rather than on `⋂ i, Uᵢ`. -/
+lemma homOfLE_iSup_modificationMap :
+    (ChowGraph M).homOfLE (opensRange_toGraph_le_iSup M) ≫ modificationMap M =
+      (toGraph M).isoOpensRange.inv ≫ (⨅ i, U i).ι :=
+  (Iso.eq_inv_comp _).mpr (toGraph_modificationMap M)
+
+/-- **The modification is dominant**, since on `U∞` it is the inclusion of `⋂ i, Uᵢ`, which is
+dominant.
+(blueprint: `thm:chow-lemma`, step 5 of the proof) -/
+instance isDominant_modificationMap [IsDominant (⨅ i, U i).ι] :
+    IsDominant (modificationMap M) := by
+  have h : IsDominant ((⨅ i, U i).ι) := inferInstance
+  rw [← toGraph_modificationMap M] at h
+  have h' : IsDominant ((ChowGraph M).homOfLE (opensRange_toGraph_le_iSup M) ≫
+      modificationMap M) :=
+    IsDominant.of_comp (toGraph M).isoOpensRange.hom _
+  exact IsDominant.of_comp ((ChowGraph M).homOfLE (opensRange_toGraph_le_iSup M)) _
+
+/-- **The modification is surjective** as soon as the family covers `X`: it is dominant and,
+being proper, universally closed.
+(blueprint: `thm:chow-lemma`, step 5 of the proof) -/
+@[stacks 0200 "step 5 of the proof"]
+theorem surjective_modificationMap [IsDominant (⨅ i, U i).ι] (hU : ⨆ i, U i = ⊤) :
+    Surjective (modificationMap M) :=
+  have := isProper_modificationMap M hU
+  inferInstance
+
+/-- `U∞` is contained in `π⁻¹(⋂ i, Uᵢ)`, since on `U∞` the modification is the inclusion of
+`⋂ i, Uᵢ`. -/
+lemma le_preimage_iInf_modificationMap :
+    (⨆ i, projPreimage M i).ι ⁻¹ᵁ (toGraph M).opensRange ≤
+      modificationMap M ⁻¹ᵁ ⨅ i, U i := by
+  rw [← Scheme.opensRange_homOfLE (opensRange_toGraph_le_iSup M)]
+  rintro x ⟨y, rfl⟩
+  have h : (modificationMap M).base
+      (((ChowGraph M).homOfLE (opensRange_toGraph_le_iSup M)).base y) ∈ ⨅ i, U i := by
+    rw [← Scheme.Hom.comp_apply, homOfLE_iSup_modificationMap, Scheme.Hom.comp_apply]
+    exact ((toGraph M).isoOpensRange.inv.base y).2
+  exact h
+
+/-- Under the identification of `U∞` with an open subscheme of `X'`, the inclusion of `U∞` in
+`π⁻¹(⋂ i, Uᵢ)` followed by `π|_{⋂ i, Uᵢ}` is an isomorphism: it is inverse to the
+identification of `⋂ i, Uᵢ` with `U∞`. In particular it is proper. -/
+instance isIso_homOfLE_morphismRestrict_iInf :
+    IsIso ((⨆ i, projPreimage M i).toScheme.homOfLE (le_preimage_iInf_modificationMap M) ≫
+      (modificationMap M ∣_ ⨅ i, U i)) := by
+  have hcomp : ((toGraph M).isoOpensRange ≪≫
+      Scheme.Opens.isoPreimageOfLE (opensRange_toGraph_le_iSup M)).hom ≫
+        ((⨆ i, projPreimage M i).toScheme.homOfLE (le_preimage_iInf_modificationMap M) ≫
+          (modificationMap M ∣_ ⨅ i, U i)) = 𝟙 _ := by
+    rw [← cancel_mono (⨅ i, U i).ι]
+    simp only [Iso.trans_hom, Category.assoc, Category.id_comp]
+    rw [morphismRestrict_ι, Scheme.homOfLE_ι_assoc, Scheme.Opens.isoPreimageOfLE_hom_ι_assoc,
+      toGraph_modificationMap]
+  rw [(Iso.hom_comp_eq_id _).mp hcomp]
+  infer_instance
+
+/-- **The fibre of the modification over `⋂ i, Uᵢ` is `U∞`.**
+
+This is the argument of `AlgebraicGeometry.ChowGraph.preimage_modificationMap` run for the
+open `U∞` in place of `Vᵢ`: the inclusion `U∞ ⊆ π⁻¹(⋂ i, Uᵢ)` is proper over `⋂ i, Uᵢ` — an
+isomorphism onto it, even — and `U∞` is dense in `X'`.
+(blueprint: `thm:chow-lemma`, step 6 of the proof) -/
+@[stacks 0200 "step 6 of the proof"]
+theorem preimage_iInf_modificationMap :
+    modificationMap M ⁻¹ᵁ (⨅ i, U i) =
+      (⨆ i, projPreimage M i).ι ⁻¹ᵁ (toGraph M).opensRange := by
+  have : IsProper ((⨆ i, projPreimage M i).toScheme.homOfLE
+      (le_preimage_iInf_modificationMap M) ≫ (modificationMap M ∣_ ⨅ i, U i)) :=
+    MorphismProperty.of_isIso @IsProper _
+  exact (Scheme.Opens.eq_of_isProper_of_dense (le_preimage_iInf_modificationMap M)
+    (modificationMap M ∣_ ⨅ i, U i) fun x _ ↦
+      dense_preimage_ι_of_opensRange_toGraph_le M le_rfl x).symm
+
+/-- **The modification is an isomorphism over `⋂ i, Uᵢ`**, its fibre there being `U∞`.
+(blueprint: `thm:chow-lemma`, step 6 of the proof) -/
+@[stacks 0200 "step 6 of the proof"]
+instance isIso_morphismRestrict_iInf_modificationMap :
+    IsIso (modificationMap M ∣_ ⨅ i, U i) := by
+  have hiso : IsIso ((⨆ i, projPreimage M i).toScheme.homOfLE
+      (le_preimage_iInf_modificationMap M)) :=
+    inferInstanceAs (IsIso ((⨆ i, projPreimage M i).toScheme.isoOfEq
+      (preimage_iInf_modificationMap M).symm).hom)
+  exact IsIso.of_isIso_comp_left ((⨆ i, projPreimage M i).toScheme.homOfLE
+    (le_preimage_iInf_modificationMap M)) _
 
 end Nonempty
 

@@ -23,10 +23,6 @@ the pairwise intersections. We record this form:
 - `AlgebraicGeometry.Scheme.Opens.hom_ext_iSup` — two morphisms out of `⨆ i, U i` agreeing on
   every `U i` are equal.
 
-For a family of opens covering `X`, i.e. with `⨆ i, U i = ⊤`, we also record the corresponding
-`AlgebraicGeometry.Scheme.Opens.glueMorphismsOfTop`, `Scheme.Opens.ι_glueMorphismsOfTop` and
-`AlgebraicGeometry.Scheme.Opens.hom_ext_of_iSup_eq_top`, gluing to a morphism `X ⟶ Y`.
-
 Finally, for morphisms into a scheme `Y` separated over a base `S`, agreement on the pairwise
 intersections need not be assumed: by rigidity it follows from agreement on a single
 scheme-theoretically dense open `D` contained in every `U i`. We record:
@@ -80,33 +76,6 @@ lemma Scheme.Opens.homOfLE_glueMorphisms (f : ∀ i, (U i).toScheme ⟶ Y)
 lemma Scheme.Opens.hom_ext_iSup (g₁ g₂ : (⨆ i, U i).toScheme ⟶ Y)
     (h : ∀ i, X.homOfLE (le_iSup U i) ≫ g₁ = X.homOfLE (le_iSup U i) ≫ g₂) : g₁ = g₂ :=
   (iSupOpenCover U).hom_ext g₁ g₂ h
-
-/-- Glue a family of morphisms `f i : U i ⟶ Y` defined on a family of opens covering `X` and
-agreeing on the pairwise intersections `U i ⊓ U j` into a morphism `X ⟶ Y`. -/
-noncomputable def Scheme.Opens.glueMorphismsOfTop (hU : ⨆ i, U i = ⊤)
-    (f : ∀ i, (U i).toScheme ⟶ Y)
-    (hf : ∀ i j, X.homOfLE (inf_le_left : U i ⊓ U j ≤ U i) ≫ f i =
-      X.homOfLE (inf_le_right : U i ⊓ U j ≤ U j) ≫ f j) :
-    X ⟶ Y :=
-  (X.isoOfEq hU ≪≫ X.topIso).inv ≫ Scheme.Opens.glueMorphisms U f hf
-
-@[reassoc (attr := simp)]
-lemma Scheme.Opens.ι_glueMorphismsOfTop (hU : ⨆ i, U i = ⊤) (f : ∀ i, (U i).toScheme ⟶ Y)
-    (hf : ∀ i j, X.homOfLE (inf_le_left : U i ⊓ U j ≤ U i) ≫ f i =
-      X.homOfLE (inf_le_right : U i ⊓ U j ≤ U j) ≫ f j) (i : J) :
-    (U i).ι ≫ Scheme.Opens.glueMorphismsOfTop U hU f hf = f i := by
-  have hhom : (X.isoOfEq hU ≪≫ X.topIso).hom = (⨆ i, U i).ι := by simp
-  rw [glueMorphismsOfTop, ← X.homOfLE_ι (le_iSup U i), ← hhom, Category.assoc,
-    Iso.hom_inv_id_assoc, homOfLE_glueMorphisms]
-
-/-- Two morphisms out of `X` that agree on every member of a family of opens covering `X` are
-equal. -/
-lemma Scheme.Opens.hom_ext_of_iSup_eq_top (hU : ⨆ i, U i = ⊤) (g₁ g₂ : X ⟶ Y)
-    (h : ∀ i, (U i).ι ≫ g₁ = (U i).ι ≫ g₂) : g₁ = g₂ := by
-  have hhom : (X.isoOfEq hU ≪≫ X.topIso).hom = (⨆ i, U i).ι := by simp
-  rw [← cancel_epi (X.isoOfEq hU ≪≫ X.topIso).hom]
-  refine hom_ext_iSup U _ _ fun i ↦ ?_
-  rw [hhom, X.homOfLE_ι_assoc, X.homOfLE_ι_assoc, h]
 
 section Dominant
 

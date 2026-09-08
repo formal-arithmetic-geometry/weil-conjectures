@@ -280,10 +280,11 @@ $V\to Z$ is an open immersion identifying $V$ with a scheme-theoretically dense
 open subscheme of $Z$, and $Z\to S$ is proper.
 
 The formalisation packages this data as a structure
-\texttt{ProperClosedModel}, in the case in which it is used below: $S$ is
-noetherian and $g\colon V\to S$ is locally of finite type with $V$ affine, so
+\texttt{ProperClosedModel}, in the case in which it is used below:
+$g\colon V\to S$ is locally of finite type with $V$ affine and noetherian, so
 that $j$ is supplied by \Cref{lem:chow-affine-immersion} and is automatically
-quasi-compact because $V$ is then noetherian.
+quasi-compact.  (Below $V$ is noetherian because it is an open subscheme of a
+scheme of finite type over the noetherian base $S$.)
 \end{lemma}
 \begin{proof}
 \uses{lem:chow-affine-immersion}
@@ -407,6 +408,7 @@ requires the $Y_i$ to be separated over $S$.  The argument above needs neither.)
 \begin{lemma}[Two morphisms agreeing on a scheme-theoretically dense open]
 \label{lem:chow-agree-on-dense-open}
 \lean{AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant}
+\leanok
 Let $T$ and $Y$ be schemes over $S$ with $Y\to S$ separated, let
 $a,b\colon T\to Y$ be morphisms of $S$-schemes and let $V\subseteq T$ be a
 scheme-theoretically dense open subscheme with $a|_V=b|_V$.  Then $a=b$.
@@ -525,11 +527,19 @@ $\pi\colon X'\to X$, and $\pi|_U=\mathrm{id}_U$.
 
 \begin{lemma}[The preimages of the members of the cover]\label{lem:chow-preimage}
 \lean{AlgebraicGeometry.ChowGraph.preimage_modificationMap,
-AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap}
+AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap,
+AlgebraicGeometry.ChowGraph.preimage_iInf_modificationMap,
+AlgebraicGeometry.ChowGraph.isIso_morphismRestrict_iInf_modificationMap}
 \leanok
 In the situation of \Cref{lem:chow-glue} one has $\pi^{-1}(U_i)=V_i$ for every
 $i$.  Consequently $\pi^{-1}(U_i)\to U_i$ is the proper morphism
 $p_i|_{V_i}$.
+
+The same argument with $U_i$ replaced by $U$ gives $\pi^{-1}(U)=U$, so that
+$\pi^{-1}(U)\to U$ is an isomorphism.  This is Step 6 of the proof of
+\Cref{thm:chow-lemma} below; since it is a statement about $\pi$ alone, the
+formalisation proves it here, next to the case of $U_i$ whose argument it
+repeats.
 \end{lemma}
 \begin{proof}
 \uses{lem:chow-glue}
@@ -627,12 +637,13 @@ target by \stacksproject{01W2}, and $X=\bigcup_iU_i$ is an open covering with
 $\pi^{-1}(U_i)\to U_i$ proper; hence $\pi$ is proper.  In particular
 $\pi(X')\subseteq X$ is closed.  It contains $U$ because
 $\pi|_U=\mathrm{id}_U$, and $U$ is dense in $X$; therefore $\pi(X')=X$.
+(In the formalisation these two statements about $\pi$ are
+\texttt{ChowGraph.isProper\_modificationMap} and
+\texttt{ChowGraph.surjective\_modificationMap}.)
 
-\emph{Step 6: $\pi$ is an isomorphism over $U$.}  Repeat the argument of
-\Cref{lem:chow-preimage} with $U_i$ replaced by $U$: the identity
-$U\to U$ is proper, $\pi^{-1}(U)\to U$ is separated, so
-\stacksproject{01W6} shows that $U\to\pi^{-1}(U)$ is universally closed and
-hence $U$ is closed in $\pi^{-1}(U)$; and $U$ is dense in the open subscheme
+\emph{Step 6: $\pi$ is an isomorphism over $U$.}  This is the second half of
+\Cref{lem:chow-preimage}: the argument for $U_i$ applies verbatim to $U$, the
+identity $U\to U$ being proper and $U$ being dense in the open subscheme
 $\pi^{-1}(U)\subseteq Z$.  Thus $U=\pi^{-1}(U)$ and $\pi^{-1}(U)\to U$ is the
 identity.
 

@@ -52,7 +52,7 @@ over `S`.
 
 ## Implementation notes
 
-* The construction depends on a great many choices — a reduction of `f`, a proper closed model
+* The construction depends on a great many choices — a reduction of `X`, a proper closed model
   of each member of its affine cover, and a closed immersion of the resulting graph into a
   single projective space — and `ChowModification f`, `index f`, `modificationMap f` and
   `toProjectiveSpace f` are four separate declarations that must all be read off the *same*
@@ -131,15 +131,14 @@ structure Data {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
 /-- **Chow's lemma**: a separated morphism of finite type over a Noetherian scheme admits a
 Chow modification.
 
-Steps 1 and 2 of Stacks' proof produce a reduction `R` of `f` (`AlgebraicGeometry.ChowReduction`)
+Steps 1 and 2 of Stacks' proof produce a reduction `R` of `X` (`AlgebraicGeometry.ChowReduction`)
 with a nonempty finite affine open cover `R.U`, step 3 a proper closed model `M i` of each
-member of the cover, step 4 the graph `ChowGraph M` of the family, and step 5 the modification
-`ChowGraph.modificationMap M` obtained by gluing the projections of the graph. It remains to
-check that the latter is proper (it is proper over each `R.U i`, which cover), surjective (it
-is universally closed and dominant, the dense open `U∞` mapping isomorphically onto
-`⋂ i, R.U i`) and an isomorphism over `⋂ i, R.U i` (the open `U∞` of `X'` is dense in the
-preimage of `⋂ i, R.U i` and proper over it, hence all of it); step 7 is the closed immersion
-of the graph into a single projective space over `S`.
+member of the cover, step 4 the graph `ChowGraph M` of the family, and steps 5 and 6 the
+modification `ChowGraph.modificationMap M` obtained by gluing the projections of the graph,
+which is proper and surjective and an isomorphism over `⋂ i, R.U i`; step 7 is the closed
+immersion of the graph into a single projective space over `S`. All that is left here is to
+assemble these into a `Data f`, transporting the modification along the closed immersion
+`R.c : R.Y ⟶ X` and the isomorphism from `⋂ i, R.U i` to the dense open `R.V` of `X`.
 (blueprint: `thm:chow-lemma`) -/
 @[stacks 0200]
 theorem nonempty_data : Nonempty (Data f) := by
@@ -152,74 +151,16 @@ theorem nonempty_data : Nonempty (Data f) := by
   -- Step 3: a proper closed model of each member of the cover.
   have M : ∀ i, ProperClosedModel ((R.U i).ι ≫ R.c ≫ f) := fun i ↦
     have : IsAffine (R.U i) := R.isAffineOpen_U i
+    have : NoetherianSpace (R.U i) :=
+      inferInstanceAs (NoetherianSpace ((R.U i : R.Y.Opens) : Set R.Y))
     (nonempty_properClosedModel _).some
   -- Step 7: the graph is a closed subscheme of a single projective space over `S`.
   obtain ⟨N, hNfin, g, hg, hgS⟩ := ChowGraph.exists_isClosedImmersion_over M
-  -- Step 5: the modification is proper, being proper over each member of the cover.
-  have hproper : IsProper (ChowGraph.modificationMap M) :=
-    IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsProper)
-      (f := ChowGraph.modificationMap M) R.U R.iSup_U fun i ↦
-        ChowGraph.isProper_morphismRestrict_modificationMap M i
-  -- Step 5: the modification is dominant, since `U∞` maps onto the dense `⋂ i, R.U i`, hence
-  -- surjective, being universally closed.
-  have hdom : IsDominant (ChowGraph.modificationMap M) := by
-    have h : IsDominant ((⨅ i, R.U i).ι) := inferInstance
-    rw [← ChowGraph.toGraph_modificationMap M] at h
-    have h' : IsDominant ((ChowGraph M).homOfLE (ChowGraph.opensRange_toGraph_le_iSup M) ≫
-        ChowGraph.modificationMap M) :=
-      IsDominant.of_comp (ChowGraph.toGraph M).isoOpensRange.hom _
-    exact IsDominant.of_comp
-      ((ChowGraph M).homOfLE (ChowGraph.opensRange_toGraph_le_iSup M)) _
-  have hsurj : Surjective (ChowGraph.modificationMap M) := inferInstance
-  -- Step 6: on `U∞` the modification is the inclusion of `⋂ i, R.U i` in `R.Y`.
-  have hju : (ChowGraph M).homOfLE (ChowGraph.opensRange_toGraph_le_iSup M) ≫
-      ChowGraph.modificationMap M =
-        (ChowGraph.toGraph M).isoOpensRange.inv ≫ (⨅ i, R.U i).ι :=
-    (Iso.eq_inv_comp _).mpr (ChowGraph.toGraph_modificationMap M)
-  have hle : ((ChowGraph M).homOfLE (ChowGraph.opensRange_toGraph_le_iSup M)).opensRange ≤
-      ChowGraph.modificationMap M ⁻¹ᵁ ⨅ i, R.U i := by
-    rintro x ⟨y, rfl⟩
-    have h : (ChowGraph.modificationMap M).base
-        (((ChowGraph M).homOfLE (ChowGraph.opensRange_toGraph_le_iSup M)).base y) ∈
-          ⨅ i, R.U i := by
-      rw [← Scheme.Hom.comp_apply, hju, Scheme.Hom.comp_apply]
-      exact ((ChowGraph.toGraph M).isoOpensRange.inv.base y).2
-    exact h
-  -- so `U∞ ⟶ π⁻¹(⋂ i, R.U i) ⟶ ⋂ i, R.U i` is an isomorphism, in particular proper.
-  have hcomp : ((ChowGraph.toGraph M).isoOpensRange ≪≫
-      ((ChowGraph M).homOfLE (ChowGraph.opensRange_toGraph_le_iSup M)).isoOpensRange).hom ≫
-        ((⨆ i, ChowGraph.projPreimage M i).toScheme.homOfLE hle ≫
-          (ChowGraph.modificationMap M ∣_ ⨅ i, R.U i)) = 𝟙 _ := by
-    rw [← cancel_mono (⨅ i, R.U i).ι]
-    simp only [Iso.trans_hom, Category.assoc, Category.id_comp]
-    rw [morphismRestrict_ι, Scheme.homOfLE_ι_assoc, Scheme.Hom.isoOpensRange_hom_ι_assoc,
-      ChowGraph.toGraph_modificationMap]
-  have hb : IsIso ((⨆ i, ChowGraph.projPreimage M i).toScheme.homOfLE hle ≫
-      (ChowGraph.modificationMap M ∣_ ⨅ i, R.U i)) := by
-    rw [(Iso.hom_comp_eq_id _).mp hcomp]
-    infer_instance
-  -- `U∞` is dense in `X'` and proper over `⋂ i, R.U i`, hence all of `π⁻¹(⋂ i, R.U i)`.
-  have hVW : ((ChowGraph M).homOfLE (ChowGraph.opensRange_toGraph_le_iSup M)).opensRange =
-      ChowGraph.modificationMap M ⁻¹ᵁ ⨅ i, R.U i := by
-    have h1 : Dense ((ChowGraph.toGraph M).opensRange : Set (ChowGraph M)) := by
-      rw [Scheme.Hom.coe_opensRange]
-      exact (ChowGraph.toGraph M).denseRange
-    have h2 : Dense ((⨆ i, ChowGraph.projPreimage M i).ι.base ⁻¹'
-        ((ChowGraph.toGraph M).opensRange : Set (ChowGraph M))) := by
-      rw [dense_iff_closure_eq, ← (⨆ i, ChowGraph.projPreimage M i).ι.isOpenEmbedding.isOpenMap
-        |>.preimage_closure_eq_closure_preimage (⨆ i, ChowGraph.projPreimage M i).ι.continuous,
-        h1.closure_eq, Set.preimage_univ]
-    have h3 : Dense ((((ChowGraph M).homOfLE
-        (ChowGraph.opensRange_toGraph_le_iSup M)).opensRange :
-          Set (⨆ i, ChowGraph.projPreimage M i).toScheme)) := by
-      rw [Scheme.opensRange_homOfLE]
-      exact h2
-    exact Scheme.Opens.eq_of_isProper_of_dense hle
-      (ChowGraph.modificationMap M ∣_ ⨅ i, R.U i) fun x _ ↦ h3 x
-  have hisoLE : IsIso ((⨆ i, ChowGraph.projPreimage M i).toScheme.homOfLE hle) :=
-    inferInstanceAs (IsIso ((⨆ i, ChowGraph.projPreimage M i).toScheme.isoOfEq hVW).hom)
-  have hq : IsIso (ChowGraph.modificationMap M ∣_ ⨅ i, R.U i) :=
-    IsIso.of_isIso_comp_left ((⨆ i, ChowGraph.projPreimage M i).toScheme.homOfLE hle) _
+  -- Step 5: the modification is proper and surjective, the cover being a cover of `R.Y`.
+  have : IsProper (ChowGraph.modificationMap M) :=
+    ChowGraph.isProper_modificationMap M R.iSup_U
+  have : Surjective (ChowGraph.modificationMap M) :=
+    ChowGraph.surjective_modificationMap M R.iSup_U
   refine ⟨{ X' := (⨆ i, ChowGraph.projPreimage M i).toScheme
             π := ChowGraph.modificationMap M ≫ R.c
             N := N
@@ -228,10 +169,12 @@ theorem nonempty_data : Nonempty (Data f) := by
             exists_dense_isIso := ?_ }⟩
   · simp only [Category.assoc]
     rw [hgS, ChowGraph.modificationMap_over]
+  -- Step 6: the modification is an isomorphism over `⋂ i, R.U i`, which is the preimage of the
+  -- dense open `R.V` of `X` along the closed immersion `R.c`.
   · refine ⟨R.V, R.dense_V, ?_⟩
     have hcV : IsIso (ChowGraph.modificationMap M ∣_ R.c ⁻¹ᵁ R.V) := by
       rw [R.preimage_V]
-      exact hq
+      infer_instance
     rw [morphismRestrict_comp]
     infer_instance
 

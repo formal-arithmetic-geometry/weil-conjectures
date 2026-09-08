@@ -69,7 +69,6 @@ variable {X Y : Scheme.{u}}
 
 section fromOfGlobalSections
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The description of `Proj.toBasicOpenOfGlobalSections` after identifying `D₊(t)` with
 `Spec (A_t)₀`. -/
 lemma toBasicOpenOfGlobalSections_comp_basicOpenIsoSpec_hom (f : A →+* Γ(X, ⊤))
@@ -115,7 +114,6 @@ lemma basicOpen_comp_appTop_le_preimage (r : A) :
     Y.basicOpen ((g.appTop.hom.comp f) r) ≤ g ⁻¹ᵁ X.basicOpen (f r) :=
   (Scheme.preimage_basicOpen_top g (f r)).ge
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality of `Proj.toBasicOpenOfGlobalSections` in the source scheme, after identifying
 `D₊(t)` with `Spec (A_t)₀`. -/
 @[reassoc]
@@ -153,7 +151,6 @@ private lemma resLE_toSpecΓ_comp_SpecMap_map (t : A) :
     Scheme.Hom.resLE_comp_ι_assoc, CommRingCat.ofHom_comp, Spec.map_comp, CommRingCat.ofHom_hom,
     ← Scheme.toSpecΓ_naturality_assoc]
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality of `Proj.toBasicOpenOfGlobalSections` in the source scheme. -/
 @[reassoc]
 lemma resLE_toBasicOpenOfGlobalSections {t : A} {d : ℕ} (h0d : 0 < d) (hd : t ∈ 𝒜 d) :
@@ -169,7 +166,6 @@ lemma resLE_toBasicOpenOfGlobalSections {t : A} {d : ℕ} (h0d : 0 < d) (hd : t 
     CommRingCat.ofHom_comp, Spec.map_comp, CommRingCat.ofHom_comp, Spec.map_comp,
     resLE_toSpecΓ_comp_SpecMap_map_assoc]
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The morphism `X ⟶ Proj 𝒜` induced by a ring homomorphism `f : A →+* Γ(X, ⊤)` is natural
 in `X`: precomposing with `g : Y ⟶ X` gives the morphism induced by `Γ(g) ∘ f`. -/
 @[reassoc]
@@ -192,7 +188,6 @@ end naturality
 
 section unitPowMul
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Rescaling `f` in degree `i` by the `i`-th power of a unit does not change
 `Proj.toBasicOpenOfGlobalSections`. -/
 lemma toBasicOpenOfGlobalSections_eq_of_unit_pow_mul (u : Γ(X, ⊤)ˣ) (f f' : A →+* Γ(X, ⊤))
@@ -318,7 +313,6 @@ lemma isUnit_appTop_awayMk (hf' : f ∈ 𝒜 (1 • d)) (hg' : g ∈ 𝒜 (1 •
 
 end Cocycle
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- **A criterion for a morphism into `Proj 𝒜` to factor as a closed immersion into an affine
 chart.** If `X` is affine and the homogeneous element `t` of positive degree pulls back to `1`
 under `f : A →+* Γ(X, ⊤)`, the morphism `X ⟶ Proj 𝒜` attached to `f` factors through
