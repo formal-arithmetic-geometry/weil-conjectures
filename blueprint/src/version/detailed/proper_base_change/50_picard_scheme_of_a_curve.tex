@@ -643,6 +643,31 @@ tensor product of invertible modules, which needs a monoidal structure on
 %     finiteness repaired above; see the notes at the first and third of them.
 %   lem:pcb-ample-complement-affine -- HYPOTHESISES that \(D\) is an effective
 %     Cartier divisor, and so is out of class by the predicate.
+% Ruling (re-attribution, not a change of the argument).  The clause above used to
+% read ``on an affine open \(U\) of a component of \(C\) -- integral, of dimension
+% one, and of finite type over \(k\) by \Cref{def:pcb-curves}'', sourcing all three
+% properties to \Cref{def:pcb-curves}.  That definition supplies nonempty,
+% separated, of finite type over \(k\), and dimension AT MOST one; it supplies
+% neither integrality nor dimension exactly one, as the closing paragraph of this
+% very block says.  The mathematics was right and is unchanged; only the citation
+% was over-broad, and each property is now attributed to what supplies it.
+% Integrality comes from the smoothness hypothesis under which \(v_P\) is a
+% valuation at all, by the chain this chapter already uses at
+% \Cref{def:pcb-genus}, \Cref{lem:pcb-negative-degree-no-sections} and
+% \Cref{lem:pcb-degree-2g1-very-ample}: smooth, hence regular
+% (\Cref{lem:pcb-smooth-regular}), hence normal (\Cref{lem:pc-regular-is-normal}),
+% and a Noetherian normal connected scheme is integral
+% (\Cref{lem:pc-noetherian-normal-decomposition}); the three edges are drawn.
+% Dimension is left where \Cref{def:pcb-curves} does supply it: the argument uses
+% only ``at most one'' -- a proper closed subset of an irreducible \(U\) of
+% dimension at most one has dimension at most zero -- so the stronger clause of the
+% smooth-of-dimension-one hypothesis is not invoked, and the text says so.  The
+% three new edges close no cycle: the \uses-closures of
+% \Cref{lem:pcb-smooth-regular}, \Cref{lem:pc-regular-is-normal} and
+% \Cref{lem:pc-noetherian-normal-decomposition} at this head are 9, 2 and 2 nodes
+% and none of them contains this definition; a whole-graph DFS finds 0 cycles
+% after them, and planting each reverse edge in turn yields exactly one cycle.
+% No node is created and no \label is touched.
 \begin{definition}[Divisors, principal divisors, class group]
 \label{def:pcb-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  A
@@ -663,8 +688,19 @@ developed in the basic facts below); such divisors are
 \emph{principal}.  This sum is finite, so that \(\operatorname{div}(f)\) is
 indeed an element of \(\operatorname{Div}(C)\): one has \(v_P(f)\neq0\)
 only when \(f\) is not a unit in \(\mathcal O_{C,P}\), and on an affine
-open \(U\) of a component of \(C\) -- integral, of dimension one, and of
-finite type over \(k\) by \Cref{def:pcb-curves} -- one may write
+open \(U\) of a connected component of \(C\) -- separated, of finite
+type over \(k\) and of dimension at most one by \Cref{def:pcb-curves},
+which are among the conditions that definition imposes, and integral,
+which it does not impose and which comes instead from the hypothesis,
+stated just above,
+that \(C\) is smooth: a connected component of \(C\) is then smooth,
+hence regular (\Cref{lem:pcb-smooth-regular}), hence normal
+(\Cref{lem:pc-regular-is-normal}), and a Noetherian normal connected
+scheme is integral (\Cref{lem:pc-noetherian-normal-decomposition}), so
+that its nonempty open subscheme \(U\) is integral too; dimension at
+most one is all that is used below, so the stronger ``every irreducible
+component of dimension one'' of that same hypothesis is not needed here
+-- one may write
 \(f=a/b\) with \(a,b\in\mathcal O_C(U)\) nonzero; at a closed point
 \(P\in U\) outside \(V(a)\cup V(b)\) both \(a\) and \(b\) are units
 in \(\mathcal O_{C,P}\), hence so is \(f\), and \(v_P(f)=0\).  Since
@@ -715,7 +751,7 @@ of \(C=\mathbf P^1\sqcup\Spec k\), the local ring at the closed point
 is the field \(k\), which is not a discrete valuation ring and carries
 no normalized valuation, so \(\operatorname{div}(f)\) is undefined
 there.
-\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor,lem:pcb-dim0-finite}
+\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor,lem:pcb-dim0-finite,lem:pcb-smooth-regular,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -2544,6 +2580,114 @@ morphism \(\pi_f:C\to\mathbf P^1_k\) with \(\pi_f^*t=f\).
 % \(n_P\) while displaying points \([P']\) of \(C'\), and the pullback display
 % two lines below uses coefficients \(n_{P'}\) that the first display then
 % never defined.
+% Ruling: \(\pi^*D'\) is now said to BE a divisor before its degree is taken.  The
+% block called \(\sum_{P'}n_{P'}\sum_{\pi(P)=P'}v_P(t_{P'})[P]\) ``the pullback
+% divisor'' and applied \(\deg\) to it, and \Cref{def:pcb-divisor} makes
+% \(\operatorname{Div}(C)\) the free abelian group on the closed points, whose
+% elements are FINITE formal sums, with \(\deg\) defined on that group; so calling
+% the double sum a divisor and taking its degree presupposes that it is finite, and
+% nothing here said so.  This is the class repaired at \Cref{def:pcb-divisor} for
+% \(\operatorname{div}(f)\), and the repair is of the same shape: stated in the
+% statement text, where the containment is asserted, and not in a comment or in the
+% proof (the #374 standard).  The step is sound and was so before: the outer sum is
+% finite because \(D'\) is a divisor, and the inner sums run over the fibres of a
+% finite morphism.  For the fibres the chapter already carries the node --
+% \Cref{lem:pcb-finite-iff-proper-finite-fibres}, ``over a locally Noetherian base a
+% morphism is finite if and only if it is proper with finite fibres'' (Cohomology of
+% Schemes, Lemma~30.21.1, \stacksproject{02OG}) -- used here in its ``only if''
+% direction, with \(C'\) locally Noetherian because \Cref{def:pcb-curves} makes it
+% of finite type over \(k\); so no Stacks tag is quoted that this chapter has not
+% already read, and the \uses edge is drawn.  The proof's own computation of the
+% fibre over \(P'\) as a \(k\)-algebra of dimension \(d\) is not used for this: a
+% statement may not lean on its proof for the well-formedness of what it asserts.
+% The edge closes no cycle: the \uses-closure of
+% \Cref{lem:pcb-finite-iff-proper-finite-fibres} at this head is 2 nodes, itself and
+% \Cref{def:pcb-scheme-conventions}, and contains neither this lemma nor anything
+% reaching it; a whole-graph DFS finds 0 cycles after it, and planting the reverse
+% edge from \Cref{lem:pcb-finite-iff-proper-finite-fibres} to this lemma yields
+% exactly one cycle.  The ruling recorded at \Cref{lem:pc-proper-quasi-finite-finite}
+% -- ``No \uses for \Cref{lem:pcb-finite-iff-proper-finite-fibres}, deliberately''
+% -- is not reopened: it refuses that edge from THAT node, on the ground that its
+% prose says neither of the two is used in the proof of the other, and says nothing
+% about any other consumer.
+% Membership sweep, second pass: the population run over ALL \texttt{pcb-} nodes.
+% Predicate, unchanged from the pass recorded at \Cref{def:pcb-divisor}: a node
+% whose statement or proof asserts that a PARTICULAR object lies in a set this
+% chapter defines by a finiteness, support or coherence condition --
+% \(\operatorname{Div}(C)\), \(\operatorname{Cl}(C)\), \(\operatorname{Pic}(C)\)
+% (whose membership condition is invertibility) and the effective Cartier divisors.
+% Defining such a set, and HYPOTHESISING that an object lies in one, do not count.
+% Convention, re-derived here and not inherited: \% comments stripped whole-file and
+% escape-aware before any parse; nodes taken as the top-level definition/lemma/
+% theorem/proposition/corollary/remark/example environments, each keyed by its first
+% \label, with a following proof attached to the node before it.  Under it this
+% chapter has 301 nodes, 47 of them \texttt{pcb-}, and all 47 were read in full --
+% that is the change from the first pass, which collected its population by keyword
+% and so reached 16 and missed this block.  A mechanical marker scan (the four sets'
+% names, \(\deg\), \(\operatorname{div}\), ``invertible'', ``effective Cartier'')
+% over the same 47 is marker-positive on 19: the first pass's 16, plus this block,
+% plus \Cref{def:pcb-ample} and \Cref{lem:pcb-positive-degree-ample}.
+% Firing control: a synthetic membership assertion planted at
+% \Cref{lem:pcb-nakayama}, and a second at \Cref{lem:pcb-cech-spectral}, both
+% \texttt{pcb-} nodes outside the 19, in scratch copies of this file outside
+% blueprint/src/, each move the marker count 19 -> 20.
+% Residue 2, both now repaired: \(\operatorname{div}(f)\in\operatorname{Div}(C)\) at
+% \Cref{def:pcb-divisor} (repaired in the first pass) and \(\pi^*D'\) here.  No
+% third match; the rulings on the rest, which the first pass gave for its 16 and
+% which are not repeated here, extend as follows over the 47.
+%   \Cref{def:pcb-ample}, \Cref{lem:pcb-positive-degree-ample} -- marker-positive
+%     but out of class: ampleness is not one of the four sets, is defined by an
+%     existential (\(\mathcal L^{\otimes m}\) very ample) and not by a finiteness,
+%     support or coherence condition, and the degree in the second is
+%     HYPOTHESISED.  This confirms the reviews' reading of both.
+%   \Cref{lem:pcb-morphism-from-function} -- the nearest thing to a third match, and
+%     ruled rather than passed over.  Its proof writes ``the coherent sheaf
+%     \(\mathcal E:=(\pi_f)_*\mathcal O_C\)'', which is an assertion of coherence,
+%     the third word of the axis.  It is out of the population because the coherent
+%     modules are not a set THIS chapter defines: there is no definition node for
+%     coherence here, the notion entering only as a hypothesis of
+%     \Cref{lem:pc-coherent-hi}.  It is sound in any case: \(\pi_f\) has been shown
+%     finite two paragraphs earlier, hence proper, and \Cref{lem:pc-coherent-hi} at
+%     \(i=0\) gives that \((\pi_f)_*\mathcal O_C\) is coherent.  No edge is added,
+%     the node being sound as it stands and the reading a widening of the predicate
+%     rather than the predicate itself.
+%   \Cref{lem:pcb-base-change-curve} -- a boundary case, ruled sound.  It asserts
+%     that \(C_{k'}\) IS a curve, and \Cref{def:pcb-curves} defines that set partly
+%     by a finiteness condition (finite type over \(k\)); so it matches the axis
+%     read at its widest.  It is established, and by its own proof: finite type,
+%     separatedness, smoothness, properness and affineness are stable under base
+%     change (\Cref{def:pcb-scheme-conventions}), and the dimension is computed by
+%     Noether normalization (\Cref{lem:pcb-noether-normalization}) and
+%     \Cref{lem:pcb-integral-dimension}.  Nothing to repair.
+%   The remaining \texttt{pcb-} nodes are commutative algebra, homological algebra
+%     or scheme-theoretic generalities (\Cref{def:pcb-scheme-conventions},
+%     \Cref{def:pcb-curves}, \Cref{def:pcb-function-field},
+%     \Cref{def:pcb-group-scheme}, \Cref{lem:pcb-regular-graded-polynomial},
+%     \Cref{lem:pcb-regular-local-domain}, \Cref{lem:pcb-principal-ideal-dvr},
+%     \Cref{lem:pcb-tensor-monoidal}, \Cref{lem:pcb-smooth-regular},
+%     \Cref{lem:pcb-nakayama}, \Cref{lem:pcb-noether-normalization},
+%     \Cref{lem:pcb-integral-dimension}, \Cref{lem:pcb-finite-is-integral},
+%     \Cref{lem:pcb-polynomial-ring-dimension},
+%     \Cref{lem:pcb-surjective-locus-open}, \Cref{lem:pcb-regular-dim1-dvr},
+%     \Cref{lem:pcb-double-complex-spectral}, \Cref{lem:pcb-cech-spectral},
+%     \Cref{lem:pcb-flat-base-change-coherent},
+%     \Cref{lem:pcb-unramified-omega-zero},
+%     \Cref{lem:pcb-proper-dim-one-projective},
+%     \Cref{lem:pcb-finite-iff-proper-finite-fibres},
+%     \Cref{lem:pcb-fg-algebra-noetherian}, \Cref{lem:pcb-dim0-finite},
+%     \Cref{lem:pcb-trdeg-one-finite}, \Cref{lem:pcb-rational-function-morphism}),
+%     and none of them names any of the four sets or asserts membership in one;
+%     \Cref{lem:pcb-flat-base-change-coherent} hypothesises quasi-coherence rather
+%     than asserting it.
+% Absolutes for this pass, all re-derived at this head under the convention above,
+% none inherited: 13185 lines and 307 \labels at the base bb17c15, the \label
+% multiset unchanged by this change; \uses instances 1483 -> 1487, distinct targets
+% 283 -> 283, dangling 0 -> 0, in-degree-0 nodes 24 -> 24 with the \texttt{pcb-}
+% half 0 -> 0, cycles 0 -> 0.  Stripping-disabled control: exactly 5 self-loops, at
+% \Cref{lem:pc-cech-resolution}, \Cref{lem:pc-degree-base-change},
+% \Cref{lem:pc-effaceable-universal}, \Cref{lem:pc-fp-flat-finite-projective} and
+% \Cref{lem:pc-standard-smooth-form}; stripped, 0.  There is no TeX and no pip in
+% this slot, so no build was run and none is claimed.
 \begin{lemma}[Degree of pullbacks of divisors]
 \label{lem:pcb-pullback-degree}
 Let \(\pi:C\to C'\) be a finite flat morphism of connected proper
@@ -2559,9 +2703,18 @@ extensions because a connected smooth curve is irreducible, so that
 \]
 where \(\pi^*D'\) is the pullback divisor
 \(\sum_{P'}n_{P'}\sum_{\pi(P)=P'}v_P(t_{P'})[P]\) (\(t_{P'}\) a local
-equation of \(P'\)); in particular
+equation of \(P'\)).  That double sum is finite, so that \(\pi^*D'\) is
+indeed an element of \(\operatorname{Div}(C)\) and has a degree at all:
+the outer sum is finite because \(D'\) is a divisor on \(C'\), hence a
+finite formal sum by \Cref{def:pcb-divisor}, and each inner sum is
+finite because it runs over the fibre \(\pi^{-1}(P')\), which is a
+finite set -- a finite morphism to a locally Noetherian base has finite
+fibres (\Cref{lem:pcb-finite-iff-proper-finite-fibres}, in the
+direction ``finite \(\Rightarrow\) proper with finite fibres''), and
+\(C'\) is locally Noetherian, being of finite type over \(k\)
+(\Cref{def:pcb-curves}).  In particular
 \(\deg\pi^*[P']=d\) for every closed point \(P'\).
-\uses{def:pcb-curves,def:pcb-divisor,def:pcb-function-field}
+\uses{def:pcb-curves,def:pcb-divisor,def:pcb-function-field,lem:pcb-finite-iff-proper-finite-fibres}
 \end{lemma}
 \begin{proof}
 \uses{lem:pcb-point-cartier}
