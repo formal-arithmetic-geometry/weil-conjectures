@@ -34,6 +34,8 @@ schemes.
   `ℙ(n; S) ⨯ ℙ(m; S) ⟶ ℙ(n × m; S)` of the binary product in `Over S`.
 * `AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi`: a finite product of
   projective spaces over `S` admits a closed immersion into some `ℙ(N; S)` over `S`.
+* `AlgebraicGeometry.ProjectiveSpace.isProper_pi_hom`: a finite product of projective spaces
+  over `S` is proper over `S`; this is what `AlgebraicGeometry.ChowGraph` uses.
 
 ## Blueprint
 
@@ -84,7 +86,9 @@ theorem exists_isClosedImmersion_pi :
     ∃ (N : Type u) (_ : Finite N)
       (g : (∏ᶜ fun i ↦ Over.mk (ℙ(n i; S) ↘ S)) ⟶ Over.mk (ℙ(N; S) ↘ S)),
       IsClosedImmersion g.left := by
-  have : IsIso (ℙ(PUnit.{u + 1}; S) ↘ S) := inferInstance
+  -- the instance has to be in the local context: `Over.isoMk` elaborates its argument before
+  -- the instance argument of `asIso` can be synthesised
+  have : IsIso (ℙ(PUnit.{u + 1}; S) ↘ S) := isIso_over PUnit S
   have hT' : IsTerminal (Over.mk (ℙ(PUnit.{u + 1}; S) ↘ S)) :=
     Over.mkIdTerminal.ofIso (Over.isoMk (asIso (ℙ(PUnit.{u + 1}; S) ↘ S)) (by simp)).symm
   refine Finite.induction_empty_option

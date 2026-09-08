@@ -301,12 +301,14 @@ theorem ext_of_isSchemeTheoreticallyDominant {V T Y S : Scheme.{u}} (g : Y ⟶ S
     infer_instance
   -- `a` and `b` agree after composing with `z`, both projections being the second
   -- projection of the defining square.
+  have hpa : a = p ≫ pullback.fst g g := (pullback.lift_fst _ _ _).symm
+  have hpb : b = p ≫ pullback.snd g g := (pullback.lift_snd _ _ _).symm
   have hza : z ≫ a = pullback.snd p (pullback.diagonal g) := by
-    rw [show a = p ≫ pullback.fst g g from (pullback.lift_fst _ _ _).symm, ← Category.assoc,
-      hz, pullback.condition, Category.assoc, pullback.diagonal_fst, Category.comp_id]
+    rw [hpa, ← Category.assoc, hz, pullback.condition, Category.assoc, pullback.diagonal_fst,
+      Category.comp_id]
   have hzb : z ≫ b = pullback.snd p (pullback.diagonal g) := by
-    rw [show b = p ≫ pullback.snd g g from (pullback.lift_snd _ _ _).symm, ← Category.assoc,
-      hz, pullback.condition, Category.assoc, pullback.diagonal_snd, Category.comp_id]
+    rw [hpb, ← Category.assoc, hz, pullback.condition, Category.assoc, pullback.diagonal_snd,
+      Category.comp_id]
   -- `v` factors through `z`, because `a` and `b` agree after composing with `v`.
   have hcomm : v ≫ p = (v ≫ a) ≫ pullback.diagonal g :=
     pullback.hom_ext

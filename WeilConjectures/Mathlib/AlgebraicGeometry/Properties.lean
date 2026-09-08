@@ -169,8 +169,8 @@ theorem exists_isAffineOpen_cover_genericPoints_subset [CompactSpace X] [QuasiSe
     ∃ (ι : Type u) (_ : Finite ι) (U : ι → X.Opens), (∀ i, IsAffineOpen (U i)) ∧
       (∀ i, genericPoints X ⊆ (U i : Set X)) ∧ ⨆ i, U i = ⊤ := by
   classical
-  have h : ∀ x : X, ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧ genericPoints X ⊆ (U : Set X) :=
-    fun x ↦ exists_isAffineOpen_mem_of_subset_genericPoints (genericPoints.finite hX) le_rfl x
+  have h (x : X) : ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧ genericPoints X ⊆ (U : Set X) :=
+    exists_isAffineOpen_mem_of_subset_genericPoints (genericPoints.finite hX) le_rfl x
   choose U hUaff hUmem hUsub using h
   obtain ⟨c, hc⟩ := isCompact_univ.elim_finite_subcover (fun x : X ↦ (U x : Set X))
     (fun x ↦ (U x).isOpen) fun x _ ↦ Set.mem_iUnion.mpr ⟨x, hUmem x⟩

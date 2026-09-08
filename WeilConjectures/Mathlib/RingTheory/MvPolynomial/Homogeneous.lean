@@ -106,9 +106,10 @@ theorem toIdeal_irrelevant_homogeneousSubmodule :
   rw [h1, mem_pow_idealOfVars_iff']
   simp only [HomogeneousIdeal.toIdeal_irrelevant, RingHom.mem_ker,
     GradedRing.projZeroRingHom_apply]
-  rw [show ((DirectSum.decompose (homogeneousSubmodule σ R) p 0 : homogeneousSubmodule σ R 0) :
-      MvPolynomial σ R) = homogeneousComponent 0 p from decomposition.decompose'_apply p 0,
-    homogeneousComponent_zero, C_eq_zero]
+  have hdec : ((DirectSum.decompose (homogeneousSubmodule σ R) p 0 :
+      homogeneousSubmodule σ R 0) : MvPolynomial σ R) = homogeneousComponent 0 p :=
+    decomposition.decompose'_apply p 0
+  rw [hdec, homogeneousComponent_zero, C_eq_zero]
   refine ⟨fun h d hd ↦ ?_, fun h ↦ h 0 (by simp)⟩
   obtain rfl : d = 0 := by
     simpa [Nat.lt_one_iff, Finsupp.degree_eq_zero_iff] using hd
@@ -388,8 +389,8 @@ away from `X` is bijective. -/
 lemma bijective_fromZeroRingHom_X :
     Function.Bijective (HomogeneousLocalization.fromZeroRingHom (homogeneousSubmodule σ R)
       (Submonoid.powers (X (default : σ)))) := by
-  have hX : ∀ i : σ, (X i : MvPolynomial σ R) ∈ homogeneousSubmodule σ R 1 :=
-    fun i ↦ isHomogeneous_X R i
+  have hX (i : σ) : (X i : MvPolynomial σ R) ∈ homogeneousSubmodule σ R 1 :=
+    isHomogeneous_X R i
   constructor
   · have hle : Submonoid.powers (X (default : σ)) ≤ nonZeroDivisors (MvPolynomial σ R) :=
       Submonoid.powers_le.mpr (isRegular_iff_mem_nonZeroDivisors.mp isRegular_X)
@@ -434,9 +435,9 @@ theorem closure_range_awayXRatio_eq_top (R : Type*) [CommRing R] {σ : Type*}
     (hR : Function.Surjective ((↑) : ℤ → R)) (i : σ) :
     Subring.closure (Set.range (awayXRatio R i)) = ⊤ := by
   classical
-  set E := (homogeneousLocalizationAwayXEquiv R i).toRingEquiv.toRingHom with hEdef
-  have hE : ∀ k : σ, E (awayXRatio R i k) = dehomogenizeX R i (X k) :=
-    fun k ↦ homogeneousLocalizationAwayXEquiv_awayMk R i 1 (X k) _
+  let E := (homogeneousLocalizationAwayXEquiv R i).toRingEquiv.toRingHom
+  have hE (k : σ) : E (awayXRatio R i k) = dehomogenizeX R i (X k) :=
+    homogeneousLocalizationAwayXEquiv_awayMk R i 1 (X k) _
   have himg : Subring.map E (Subring.closure (Set.range (awayXRatio R i))) = ⊤ := by
     rw [RingHom.map_closure, ← top_le_iff, ← closure_range_X_eq_top {j : σ // j ≠ i} hR]
     refine Subring.closure_le.mpr ?_

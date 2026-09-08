@@ -194,14 +194,14 @@ lemma segreChartHom_compatible :
     pullback.fst ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j')) ≫ segreChartHom i j =
       pullback.snd ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j')) ≫
         segreChartHom i' j' := by
-  have hXi : ∀ k : n, (MvPolynomial.X k : MvPolynomial n (ULift.{u} ℤ)) ∈
-      homogeneousSubmodule n (ULift.{u} ℤ) 1 := X_mem_homogeneousSubmodule_one _
-  have hXj : ∀ l : m, (MvPolynomial.X l : MvPolynomial m (ULift.{u} ℤ)) ∈
-      homogeneousSubmodule m (ULift.{u} ℤ) 1 := X_mem_homogeneousSubmodule_one _
-  have hXi1 : ∀ k : n, (MvPolynomial.X k : MvPolynomial n (ULift.{u} ℤ)) ∈
-      homogeneousSubmodule n (ULift.{u} ℤ) (1 • 1) := fun k ↦ by simpa using hXi k
-  have hXj1 : ∀ l : m, (MvPolynomial.X l : MvPolynomial m (ULift.{u} ℤ)) ∈
-      homogeneousSubmodule m (ULift.{u} ℤ) (1 • 1) := fun l ↦ by simpa using hXj l
+  have hXi (k : n) : (MvPolynomial.X k : MvPolynomial n (ULift.{u} ℤ)) ∈
+      homogeneousSubmodule n (ULift.{u} ℤ) 1 := X_mem_homogeneousSubmodule_one _ k
+  have hXj (l : m) : (MvPolynomial.X l : MvPolynomial m (ULift.{u} ℤ)) ∈
+      homogeneousSubmodule m (ULift.{u} ℤ) 1 := X_mem_homogeneousSubmodule_one _ l
+  have hXi1 (k : n) : (MvPolynomial.X k : MvPolynomial n (ULift.{u} ℤ)) ∈
+      homogeneousSubmodule n (ULift.{u} ℤ) (1 • 1) := by simpa using hXi k
+  have hXj1 (l : m) : (MvPolynomial.X l : MvPolynomial m (ULift.{u} ℤ)) ∈
+      homogeneousSubmodule m (ULift.{u} ℤ) (1 • 1) := by simpa using hXj l
   let p₁ := pullback.fst ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j'))
   let p₂ := pullback.snd ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j'))
   have hcond : p₁ ≫ (segreCover n m).f (i, j) = p₂ ≫ (segreCover n m).f (i', j') :=

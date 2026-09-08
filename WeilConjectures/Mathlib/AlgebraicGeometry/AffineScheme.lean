@@ -159,8 +159,8 @@ theorem exists_finite_basicOpen_cover_le_preimage_isAffineOpen
     exact Set.mem_biUnion (show b ∈ T from ⟨W, hW, hbW⟩) hvb
   obtain ⟨t, htT, htfin, htcov⟩ :=
     isCompact_univ.elim_finite_subcover_image (fun b _ ↦ (V.basicOpen b).isOpen) hcov
-  have h : ∀ l : t, ∃ W : S.Opens, IsAffineOpen W ∧ V.basicOpen (l : Γ(V, ⊤)) ≤ g ⁻¹ᵁ W :=
-    fun l ↦ htT l.2
+  have h (l : t) : ∃ W : S.Opens, IsAffineOpen W ∧ V.basicOpen (l : Γ(V, ⊤)) ≤ g ⁻¹ᵁ W :=
+    htT l.2
   choose W hW hWle using h
   refine ⟨t, htfin.to_subtype, Subtype.val, W, hW, hWle, eq_top_iff.mpr fun v _ ↦ ?_⟩
   obtain ⟨b, hb, hv⟩ := Set.mem_iUnion₂.mp (htcov (Set.mem_univ v))
