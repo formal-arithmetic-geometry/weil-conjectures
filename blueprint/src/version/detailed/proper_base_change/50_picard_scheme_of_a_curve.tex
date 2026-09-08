@@ -4318,7 +4318,51 @@ degree $d$ (\Cref{def:pc-degree-line-bundle}).  Then
 \statusnote{The Lean statement is formalised; its proof is \texttt{sorry}.}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-euler-characteristic,def:pc-genus,def:pc-degree-line-bundle,lem:pc-h0-proper-variety,lem:pc-vanishing-above-dim}
+\uses{def:pc-euler-characteristic,def:pc-genus,def:pc-degree-line-bundle,lem:pc-h0-proper-variety,lem:pc-vanishing-above-dim,lem:pc-euler-characteristic-well-defined,lem:pc-genus-well-defined,lem:pc-projective-proper,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-regular-is-normal,lem:pc-h0-geom-connected,lem:pc-noetherian-normal-decomposition,def:pc-geometrically-irreducible,def:pc-curve}
+\emph{Step 0: the definitions the statement invokes apply to $X$, and the
+quantities it compares are finite.}
+
+\emph{$X$ is proper over $k$.}  Projective morphisms are proper
+(\Cref{lem:pc-projective-proper}), so the structure morphism
+$X\to\Spec(k)$ is proper.  This is the hypothesis under which
+$\chi(X,-)$ (\Cref{def:pc-euler-characteristic}) and $\deg$
+(\Cref{def:pc-degree-line-bundle}) are defined, and it is used at every
+appeal to either below.
+
+\emph{$X$ is geometrically integral over $k$, so $g$ is defined.}
+\Cref{def:pc-genus} is stated for a smooth projective curve which is
+\termref{def:pc-geometrically-irreducible}{geometrically irreducible},
+a hypothesis the statement of the present theorem does not carry; over
+an algebraically closed field it is automatic, by the following argument
+from nodes already in this chapter.  First,
+$X$ is geometrically reduced: for every field extension $k'/k$ the base
+change $X_{k'}$ is smooth over $k'$ (\Cref{lem:pc-smooth-base-change}),
+hence regular (\Cref{lem:pc-smooth-over-field-regular}), hence normal
+(\Cref{lem:pc-regular-is-normal}) and in particular reduced.  Second,
+$H^0(X,\cO_X)=k$: a curve is a variety, hence integral
+(\Cref{def:pc-curve}), and it is proper over $k$ by the previous
+paragraph, so $H^0(X,\cO_X)$ is a finite field extension of $k$
+(\Cref{lem:pc-h0-proper-variety}(1)), hence equal to $k$, the field $k$
+being algebraically closed.  By \Cref{lem:pc-h0-geom-connected}, applied
+to the proper geometrically reduced $X$ with $H^0(X,\cO_X)=k$, the
+scheme $X$ is therefore geometrically connected.  Finally each $X_{k'}$
+is Noetherian (it is of finite type over $k'$), normal by the first step
+and connected by the second, hence integral
+(\Cref{lem:pc-noetherian-normal-decomposition}).  So $X$ is
+geometrically integral, in particular geometrically irreducible
+(\Cref{def:pc-geometrically-irreducible}), and \Cref{def:pc-genus}
+applies to it.
+
+\emph{Finiteness.}  $X$ is proper over $k$ and $\cM$, $\cO_X$ are
+coherent, so by \Cref{lem:pc-euler-characteristic-well-defined} each
+$\dim_kH^i(X,-)$ is finite and only finitely many are non-zero: this is
+what makes $\chi(X,\cM)$ and $\chi(X,\cO_X)$ --- hence $d$, hence both
+sides of the asserted equation --- well defined.  And
+$g=\dim_kH^1(X,\cO_X)$ is finite by
+\Cref{lem:pc-genus-well-defined}, whose geometric irreducibility
+hypothesis is the one just established.
+
+\emph{Step 1: the computation.}
 By \Cref{def:pc-degree-line-bundle},
 $d=\chi(X,\cM)-\chi(X,\cO_X)$, and
 \[
@@ -4327,9 +4371,9 @@ $d=\chi(X,\cM)-\chi(X,\cO_X)$, and
 for $\cF=\cM,\cO_X$ (\Cref{def:pc-euler-characteristic}: only
 $i=0,1$ occur, since $H^i(X,\cF)=0$ for $i\ge2$ by
 \Cref{lem:pc-vanishing-above-dim}, the curve being of dimension $1$).
-Moreover $H^0(X,\cO_X)=k$ (a finite field extension of the
-algebraically closed field $k$, hence equal to $k$;
-\Cref{lem:pc-h0-proper-variety}) and
+Moreover $H^0(X,\cO_X)=k$ (Step 0: a finite field extension of the
+algebraically closed field $k$, hence equal to $k$,
+\Cref{lem:pc-h0-proper-variety}(1)) and
 $\dim_kH^1(X,\cO_X)=g$ by \Cref{def:pc-genus}.  Hence
 $\chi(X,\cO_X)=1-g$ and
 \[
@@ -4352,7 +4396,24 @@ $\omega_X:=\Omega^1_{X/k}$:
 \uses{def:pc-genus,def:pc-degree-line-bundle,def:pc-curve,def:pc-kahler-differentials,lem:pc-omega-line-bundle,thm:pc-serre-duality-curve,thm:pc-riemann-roch}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-genus,lem:pc-omega-line-bundle,thm:pc-riemann-roch,thm:pc-serre-duality-curve}
+\uses{def:pc-genus,lem:pc-omega-line-bundle,thm:pc-riemann-roch,thm:pc-serre-duality-curve,lem:pc-projective-proper,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-regular-is-normal,lem:pc-h0-proper-variety,lem:pc-h0-geom-connected,lem:pc-noetherian-normal-decomposition,def:pc-geometrically-irreducible,def:pc-curve}
+The genus $g$ of the statement is defined for $X$: the hypotheses here
+are those of \Cref{thm:pc-riemann-roch}, and, exactly as in Step 0 of
+that proof, $X$ is geometrically integral over the algebraically closed
+field $k$ --- geometrically reduced because every base change $X_{k'}$
+is smooth (\Cref{lem:pc-smooth-base-change}), hence regular
+(\Cref{lem:pc-smooth-over-field-regular}), hence normal
+(\Cref{lem:pc-regular-is-normal}); geometrically connected because $X$
+is a proper (\Cref{lem:pc-projective-proper}) variety
+(\Cref{def:pc-curve}), so $H^0(X,\cO_X)$ is a finite extension of the
+algebraically closed $k$ (\Cref{lem:pc-h0-proper-variety}(1)), i.e.\
+equal to $k$, and \Cref{lem:pc-h0-geom-connected} applies; and each
+$X_{k'}$ is then Noetherian, normal and connected, hence integral
+(\Cref{lem:pc-noetherian-normal-decomposition}) --- so it is in
+particular geometrically irreducible
+(\Cref{def:pc-geometrically-irreducible}) and \Cref{def:pc-genus}
+applies to it.
+
 $\omega_X$ is a line bundle by \Cref{lem:pc-omega-line-bundle}.  By
 \Cref{thm:pc-serre-duality-curve} with $\cM=\cO_X$:
 \[
@@ -6674,6 +6735,13 @@ finite dimensional.
 % crosses to \Cref{def:pc-genus}; so no proof takes the step this lemma states, and
 % its only available citation would be the forward pointer from
 % \Cref{def:pc-genus}, which closes a 2-cycle.
+% Ruling (genus precondition, a different axis and additive to the one above).  The
+% statement names the genus of \Cref{def:pc-genus} but carries no geometric
+% irreducibility clause, which is a hypothesis of that definition.  Nothing is added
+% to the statement: over the algebraically closed $k$ hypothesised here the clause is
+% automatic, and the proof below now derives it from nodes the chapter already has,
+% in both of the lemma's two cases.  The route of \Cref{prop:pc-XK-integral} is not
+% taken: it would demand a $k$-rational point the statement does not hypothesise.
 \begin{lemma}[Agreement with the genus of file 06]
 \label{lem:pc-genus-agrees-sc}
 Let $k$ be an algebraically closed field and $C$ a
@@ -6685,13 +6753,36 @@ $g(C)$ of \Cref{def:pc-genus} equals the genus of
 \uses{def:pc-genus,def:pcb-genus,def:pc-smooth-projective-curve,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-genus,def:pcb-genus}
+\uses{def:pc-genus,def:pcb-genus,lem:pc-projective-proper,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-regular-is-normal,lem:pc-h0-proper-variety,lem:pc-h0-geom-connected,lem:pc-noetherian-normal-decomposition,def:pc-geometrically-irreducible,def:pc-curve}
 Both definitions read $g=\dim_kH^1(C,\cO_C)$: that of
 \Cref{def:pc-genus} (Picard Schemes of Curves, Definition~44.6.3,
 specific to the geometrically irreducible smooth projective curve) and
 that of \Cref{def:pcb-genus} (Algebraic Curves, Definition~53.8.1).
-The hypotheses of the present lemma place $C$ in the scope of both, so
-they agree.
+
+That the hypotheses of the present lemma place $C$ in the scope of the
+first --- i.e.\ that $C$ is
+\termref{def:pc-geometrically-irreducible}{geometrically irreducible},
+which is not hypothesised --- is the following argument, and it covers
+both of the cases allowed above at once.  In either case $C$ is proper
+over $k$ (projective $\Rightarrow$ proper,
+\Cref{lem:pc-projective-proper}, in the first case; by hypothesis in the
+second) and smooth over $k$.  So $C$ is geometrically reduced: for every
+field extension $k'/k$ the base change $C_{k'}$ is smooth over $k'$
+(\Cref{lem:pc-smooth-base-change}), hence regular
+(\Cref{lem:pc-smooth-over-field-regular}), hence normal
+(\Cref{lem:pc-regular-is-normal}) and in particular reduced.  And
+$H^0(C,\cO_C)=k$: in the first case $C$ is a variety
+(\Cref{def:pc-curve}), so $H^0(C,\cO_C)$ is a finite field extension of
+$k$ (\Cref{lem:pc-h0-proper-variety}(1)), hence equal to $k$ as $k$ is
+algebraically closed; in the second case it is the hypothesis
+$\dim H^0(C,\cO_C)=1$.  By \Cref{lem:pc-h0-geom-connected}, applied to
+the proper geometrically reduced $C$, the scheme $C$ is geometrically
+connected; each $C_{k'}$ is Noetherian, normal and connected, hence
+integral (\Cref{lem:pc-noetherian-normal-decomposition}).  So $C$ is
+geometrically integral, in particular geometrically irreducible
+(\Cref{def:pc-geometrically-irreducible}).
+
+Both definitions therefore apply to $C$, and they agree.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -12942,7 +13033,11 @@ curve over $\kappa$ with $H^0(X_t,\cO)=H^0(X,\cO)\otimes_k\kappa=\kappa$
 \Cref{lem:pc-rational-hyp} plus \Cref{prop:pc-XK-integral}) and
 $\dim_\kappa H^1(X_t,\cO)=\dim_\kappa(H^1(X,\cO)\otimes_k\kappa)=g$
 (\Cref{lem:pc-flat-base-change-cohom}, the genus being
-$\dim_kH^1(X,\cO)$, \Cref{def:pc-genus}); by
+$\dim_kH^1(X,\cO)$, \Cref{def:pc-genus} --- which does apply to $X$:
+that definition asks for a geometrically irreducible smooth projective
+curve, and the hypotheses of the present lemma are exactly those of
+\Cref{prop:pc-XK-integral}, whose part (3) states that $X$ is
+geometrically irreducible); by
 \Cref{lem:pc-vanishing-above-dim} the higher cohomology of both vanishes.
 Therefore
 \[
@@ -13019,7 +13114,15 @@ $W\subseteq H$ where $\cN_H$ is invertible.
 \uses{def:pc-separably-closed,def:pc-genus,def:pc-rational-point,def:pc-hilb-functor,def:pc-effective-cartier-divisor,def:pc-zero-scheme,lem:pc-universal-divisor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,lem:pc-zero-scheme-recd}
+\uses{def:pc-zero-scheme,lem:pc-zero-scheme-recd,prop:pc-XK-integral}
+The genus $g$ that indexes $H=\underline{\Hilb}^g_{X/k}$ is defined for
+$X$: \Cref{def:pc-genus} asks for a geometrically irreducible smooth
+projective curve, and the hypotheses assumed here --- $k$ separably
+closed, $X$ a smooth projective curve over $k$ with a $k$-rational point
+$\sigma$ --- are those of \Cref{prop:pc-XK-integral}, whose part (3)
+states that $X$ is geometrically irreducible.  The same part is what
+makes $H$ exist.
+
 $\cO(D_{\mathrm{univ}})$ is invertible on $H\times X$, and its canonical
 global section $1\in H^0(H\times X,\cO(D_{\mathrm{univ}}))$ is defined as
 the generator $1$ of the ideal sheaf $\cI_{D_{\mathrm{univ}}}$ viewed as a
@@ -13065,7 +13168,13 @@ subscheme of $\underline{\Hilb}^g_{X/k}$.
 \begin{proof}
 \uses{def:pc-hilb-functor,def:pc-pic-sigma-functor,def:pc-representable-functor,def:pc-subfunctor,lem:pc-cartier-criterion,lem:pc-f-open-subfunctor,lem:pc-flat-rf-open,lem:pc-projection-formula,lem:pc-recd-pullback,lem:pc-rf-perfect-base-change,lem:pc-universal-adjoint-section,lem:pc-universal-divisor,lem:pc-zero-scheme-recd,prop:pc-XK-integral,thm:pc-hilb-curves}
 Write $H:=\underline{\Hilb}^g_{X/k}$; it exists by \Cref{prop:pc-XK-integral}
-(3) and \Cref{thm:pc-hilb-curves}.  Let $D_{\mathrm{univ}}\subset H\times X$
+(3) and \Cref{thm:pc-hilb-curves}.  The same part (3) discharges the
+hypothesis under which the genus $g$ of the statement is defined at all:
+\Cref{def:pc-genus} asks for a geometrically irreducible smooth
+projective curve, and $X$ is geometrically irreducible because the
+hypotheses assumed here are those of \Cref{prop:pc-XK-integral}.
+
+Let $D_{\mathrm{univ}}\subset H\times X$
 be the universal divisor, and let
 \[
 \cL_H:=\cO(D_{\mathrm{univ}})\otimes
@@ -13211,6 +13320,22 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 % \(\deg_{X_K}(\cL)\).  Cosmetic: no hypothesis, no citation and no value changes.
 \begin{proof}
 \uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular,prop:pc-XK-integral}
+\emph{Step 0: the genus of the statement is defined for $X$.}
+\Cref{def:pc-genus} asks for a geometrically irreducible smooth
+projective curve, which the statement does not hypothesise, and
+\Cref{prop:pc-XK-integral} --- which the argument below uses twice
+anyway --- asks in addition for a $k$-rational point, which the
+statement does not hypothesise either.  The point is free here: $X$ is
+non-empty (a curve is a variety, hence integral, \Cref{def:pc-curve})
+and smooth over the separably closed field $k$, so
+$X(k)\neq\emptyset$ by \Cref{lem:pc-rational-points-dense}.  Fix
+$\sigma\in X(k)$; then $(k,X,\sigma)$ satisfies the hypotheses of
+\Cref{prop:pc-XK-integral}, whose part (3) gives that $X$ is
+geometrically irreducible, so \Cref{def:pc-genus} applies to $X$ and
+$g$ means what the statement says it means.  Every later appeal to
+\Cref{prop:pc-XK-integral} in this proof rests on the same choice of
+$\sigma$; nothing depends on which point is chosen.
+
 \emph{Step 1: an ample polarisation.}  The smooth projective curve $X$
 carries a closed immersion $i:X\to\PP^n_k$; by \Cref{lem:pc-very-ample-ample}
 the module $\cL_0^{\bullet}:=i^*\cO_{\PP^n}(1)$ is ample on $X$ and, by
