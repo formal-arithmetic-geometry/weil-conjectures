@@ -48,10 +48,10 @@ theorem exists_adjoin_mk'_eq_top :
   classical
   obtain ⟨s, hs⟩ := ‹Algebra.FiniteType A L›.out
   -- the numerator and the exponent of the denominator of a chosen fraction for `x : L`
-  set num : L → B := fun x ↦ (IsLocalization.Away.sec b x).1
-  set exp : L → ℕ := fun x ↦ (IsLocalization.Away.sec b x).2
+  let num : L → B := fun x ↦ (IsLocalization.Away.sec b x).1
+  let exp : L → ℕ := fun x ↦ (IsLocalization.Away.sec b x).2
   -- clear all denominators at once, using the largest occurring exponent
-  set N : ℕ := s.sup exp
+  let N : ℕ := s.sup exp
   refine ⟨N, s.image fun x ↦ num x * b ^ (N - exp x), ?_⟩
   have key : ∀ x ∈ s, IsLocalization.mk' L (num x * b ^ (N - exp x))
       (⟨b ^ N, N, rfl⟩ : Submonoid.powers b) = x := by
@@ -68,17 +68,17 @@ theorem exists_adjoin_mk'_eq_top :
   simpa using Set.image_congr key
 
 /-- If a localization `L` of `B` away from `b : B` is of finite type over `A`, then `L` is a
-quotient of a polynomial ring over `A` in finitely many variables, where the variables are sent
-to fractions `c μ / b ^ N` sharing the single denominator `b ^ N`. -/
+quotient of a polynomial ring over `A` in `k` variables for some `k`, where the variables are
+sent to fractions `c μ / b ^ N` sharing the single denominator `b ^ N`. -/
 theorem exists_surjective_aeval_mk' :
-    ∃ (N : ℕ) (M : Type) (_ : Finite M) (c : M → B),
+    ∃ (N k : ℕ) (c : Fin k → B),
       Function.Surjective
         (MvPolynomial.aeval (R := A)
           (fun μ ↦ IsLocalization.mk' L (c μ) (⟨b ^ N, N, rfl⟩ : Submonoid.powers b))) := by
   classical
   obtain ⟨N, c, hc⟩ := exists_adjoin_mk'_eq_top (A := A) b L
   let e : Fin c.card ≃ {x : B // x ∈ c} := (Fintype.equivFinOfCardEq (Fintype.card_coe c)).symm
-  refine ⟨N, Fin c.card, inferInstance, fun i ↦ (e i : B), ?_⟩
+  refine ⟨N, c.card, fun i ↦ (e i : B), ?_⟩
   rw [← AlgHom.range_eq_top, ← Algebra.adjoin_range_eq_range_aeval]
   convert hc using 2
   ext y

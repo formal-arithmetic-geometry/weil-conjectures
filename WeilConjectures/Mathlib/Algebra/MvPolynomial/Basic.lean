@@ -25,16 +25,13 @@ a ring by the variables. -/
 theorem closure_range_X_eq_top (σ : Type*) {R : Type*} [CommRing R]
     (hR : Function.Surjective ((↑) : ℤ → R)) :
     Subring.closure (Set.range (X : σ → MvPolynomial σ R)) = ⊤ := by
-  have key : ∀ p : MvPolynomial σ R,
-      p ∈ Subring.closure (Set.range (X : σ → MvPolynomial σ R)) := by
-    intro p
-    induction p using MvPolynomial.induction_on with
-    | C r =>
-        obtain ⟨z, rfl⟩ := hR r
-        rw [map_intCast]
-        exact intCast_mem _ z
-    | add p q hp hq => exact add_mem hp hq
-    | mul_X p i hp => exact mul_mem hp (Subring.subset_closure ⟨i, rfl⟩)
-  exact le_antisymm le_top fun p _ ↦ key p
+  refine (Subring.eq_top_iff' _).mpr fun p ↦ ?_
+  induction p using MvPolynomial.induction_on with
+  | C r =>
+      obtain ⟨z, rfl⟩ := hR r
+      rw [map_intCast]
+      exact intCast_mem _ z
+  | add p q hp hq => exact add_mem hp hq
+  | mul_X p i hp => exact mul_mem hp (Subring.subset_closure ⟨i, rfl⟩)
 
 end MvPolynomial

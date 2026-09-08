@@ -55,7 +55,16 @@ attribute [local instance] ULift.algebra'
 variable (A B : Type u) [CommRing A] [CommRing B]
 
 /-- `Spec (A ⊗[ULift ℤ] B)`, with the two maps induced by `a ↦ a ⊗ₜ 1` and `b ↦ 1 ⊗ₜ b`, is the
-fibre product of `Spec A` and `Spec B` over the terminal scheme. -/
+fibre product of `Spec A` and `Spec B` over the terminal scheme:
+
+```
+  Spec (A ⊗[ULift ℤ] B) --b ↦ 1 ⊗ₜ b--> Spec B
+            |                              |
+      a ↦ a ⊗ₜ 1                           |
+            ↓                              ↓
+         Spec A --------------------> ⊤_ Scheme
+```
+-/
 theorem isPullback_terminalFrom_spec :
     IsPullback (Spec.map (ofHom (Algebra.TensorProduct.includeLeftRingHom
         (R := ULift.{u} ℤ) (A := A) (B := B))))
@@ -129,69 +138,77 @@ theorem closure_range_mul_appTop_eq_top {A B : Type u} [CommRing A] [CommRing B]
     Subring.closure (Set.range fun p : ιA × ιB ↦
         ((Scheme.ΓSpecIso _).inv ≫ pa.appTop).hom (a p.1) *
           ((Scheme.ΓSpecIso _).inv ≫ pb.appTop).hom (b p.2)) = ⊤ := by
-  set e : W ≅ Spec (.of (A ⊗[ULift.{u} ℤ] B)) :=
-    hP.isoPullback ≪≫ pullbackTerminalSpecIso A B with he
-  set φ : CommRingCat.of (A ⊗[ULift.{u} ℤ] B) ⟶ Γ(W, ⊤) :=
-    (Scheme.ΓSpecIso _).inv ≫ e.hom.appTop with hφ
+  -- identify `W` with `Spec (A ⊗ B)` and read the two pullbacks of sections off the two
+  -- inclusions of the tensor factors
+  let e : W ≅ Spec (.of (A ⊗[ULift.{u} ℤ] B)) := hP.isoPullback ≪≫ pullbackTerminalSpecIso A B
+  let φ : CommRingCat.of (A ⊗[ULift.{u} ℤ] B) ⟶ Γ(W, ⊤) :=
+    (Scheme.ΓSpecIso _).inv ≫ e.hom.appTop
   have hfst : e.hom ≫ Spec.map (ofHom (Algebra.TensorProduct.includeLeftRingHom
       (R := ULift.{u} ℤ) (A := A) (B := B))) = pa := by
-    rw [he, Iso.trans_hom, Category.assoc, pullbackTerminalSpecIso_hom_fst,
+    simp only [e, Iso.trans_hom, Category.assoc, pullbackTerminalSpecIso_hom_fst,
       IsPullback.isoPullback_hom_fst]
   have hsnd : e.hom ≫ Spec.map (ofHom (Algebra.TensorProduct.includeRight
       (R := ULift.{u} ℤ) (A := A) (B := B)).toRingHom) = pb := by
-    rw [he, Iso.trans_hom, Category.assoc, pullbackTerminalSpecIso_hom_snd,
+    simp only [e, Iso.trans_hom, Category.assoc, pullbackTerminalSpecIso_hom_snd,
       IsPullback.isoPullback_hom_snd]
-  have hA : ∀ x : A, ((Scheme.ΓSpecIso _).inv ≫ pa.appTop).hom x =
+  have hA (x : A) : ((Scheme.ΓSpecIso _).inv ≫ pa.appTop).hom x =
       φ.hom (x ⊗ₜ[ULift.{u} ℤ] 1) := by
-    intro x
     rw [← hfst, Scheme.Hom.comp_appTop, ← Category.assoc,
-      ← Scheme.ΓSpecIso_inv_naturality, Category.assoc, ← hφ]
+      ← Scheme.ΓSpecIso_inv_naturality, Category.assoc]
     rfl
-  have hB : ∀ y : B, ((Scheme.ΓSpecIso _).inv ≫ pb.appTop).hom y =
+  have hB (y : B) : ((Scheme.ΓSpecIso _).inv ≫ pb.appTop).hom y =
       φ.hom (1 ⊗ₜ[ULift.{u} ℤ] y) := by
-    intro y
     rw [← hsnd, Scheme.Hom.comp_appTop, ← Category.assoc,
-      ← Scheme.ΓSpecIso_inv_naturality, Category.assoc, ← hφ]
+      ← Scheme.ΓSpecIso_inv_naturality, Category.assoc]
     rfl
-  have hiso : IsIso φ := by rw [hφ]; infer_instance
+  have hiso : IsIso φ := inferInstanceAs (IsIso ((Scheme.ΓSpecIso _).inv ≫ e.hom.appTop))
   have hsurj : Function.Surjective φ.hom :=
     ((ConcreteCategory.isIso_iff_bijective φ).mp hiso).2
-  have hrange : ∀ p : ιA × ιB,
+  have hrange (p : ιA × ιB) :
       ((Scheme.ΓSpecIso _).inv ≫ pa.appTop).hom (a p.1) *
         ((Scheme.ΓSpecIso _).inv ≫ pb.appTop).hom (b p.2) =
       φ.hom (a p.1 ⊗ₜ[ULift.{u} ℤ] b p.2) := by
-    intro p
     rw [hA, hB, ← map_mul, Algebra.TensorProduct.tmul_mul_tmul, one_mul, mul_one]
+  have himage : (Set.range fun p : ιA × ιB ↦ φ.hom (a p.1 ⊗ₜ[ULift.{u} ℤ] b p.2)) =
+      φ.hom '' (Set.range fun p : ιA × ιB ↦ a p.1 ⊗ₜ[ULift.{u} ℤ] b p.2) := by
+    rw [← Set.range_comp]
+    rfl
   simp only [hrange]
-  rw [show (Set.range fun p : ιA × ιB ↦ φ.hom (a p.1 ⊗ₜ[ULift.{u} ℤ] b p.2)) =
-      φ.hom '' (Set.range fun p : ιA × ιB ↦ a p.1 ⊗ₜ[ULift.{u} ℤ] b p.2) by
-    rw [← Set.range_comp]; rfl]
-  rw [← RingHom.map_closure, Algebra.TensorProduct.closure_range_tmul_eq_top ha hb hra hrb]
+  rw [himage, ← RingHom.map_closure,
+    Algebra.TensorProduct.closure_range_tmul_eq_top ha hb hra hrb]
   ext z
   simp only [Subring.mem_map, Subring.mem_top, iff_true, true_and]
   exact hsurj z
 
 /-- The range of the morphism of fibre products induced by two open immersions `u` and `v` is
-the intersection of the preimages of the ranges of `u` and `v`. -/
+the intersection of the preimages of the ranges of `u` and `v`:
+
+```
+  X' <---fst--- X' ×[Z] Y' ---snd---> Y'
+   |                 |                 |
+   u           pullback.map            v
+   ↓                 ↓                 ↓
+   X  <---fst--- X ×[Z] Y ----snd----> Y
+```
+-/
 lemma Scheme.Pullback.opensRange_map {X Y Z X' Y' : Scheme.{u}} {f : X ⟶ Z} {g : Y ⟶ Z}
     (u : X' ⟶ X) (v : Y' ⟶ Y) [IsOpenImmersion u] [IsOpenImmersion v]
-    (w₁ : (u ≫ f) ≫ 𝟙 Z = u ≫ f) (w₂ : (v ≫ g) ≫ 𝟙 Z = v ≫ g) :
+    (w₁ : (u ≫ f) ≫ 𝟙 Z = u ≫ f := Category.comp_id _)
+    (w₂ : (v ≫ g) ≫ 𝟙 Z = v ≫ g := Category.comp_id _) :
     (pullback.map (u ≫ f) (v ≫ g) f g u v (𝟙 Z) w₁ w₂).opensRange =
       pullback.fst f g ⁻¹ᵁ u.opensRange ⊓ pullback.snd f g ⁻¹ᵁ v.opensRange := by
-  set M := pullback.map (u ≫ f) (v ≫ g) f g u v (𝟙 Z) w₁ w₂ with hM
-  have hMfst : M ≫ pullback.fst f g = pullback.fst (u ≫ f) (v ≫ g) ≫ u := by simp [hM]
-  have hMsnd : M ≫ pullback.snd f g = pullback.snd (u ≫ f) (v ≫ g) ≫ v := by simp [hM]
+  let M := pullback.map (u ≫ f) (v ≫ g) f g u v (𝟙 Z) w₁ w₂
+  have hMfst : M ≫ pullback.fst f g = pullback.fst (u ≫ f) (v ≫ g) ≫ u := by simp [M]
+  have hMsnd : M ≫ pullback.snd f g = pullback.snd (u ≫ f) (v ≫ g) ≫ v := by simp [M]
   refine le_antisymm ?_ ?_
   · rintro _ ⟨z, rfl⟩
     refine ⟨?_, ?_⟩
-    · change (pullback.fst f g).base (M.base z) ∈ u.opensRange
-      rw [← Scheme.Hom.comp_apply, hMfst]
+    · rw [Scheme.Hom.coe_preimage, Set.mem_preimage, ← Scheme.Hom.comp_apply, hMfst]
       exact ⟨_, rfl⟩
-    · change (pullback.snd f g).base (M.base z) ∈ v.opensRange
-      rw [← Scheme.Hom.comp_apply, hMsnd]
+    · rw [Scheme.Hom.coe_preimage, Set.mem_preimage, ← Scheme.Hom.comp_apply, hMsnd]
       exact ⟨_, rfl⟩
-  · set W : (pullback f g).Opens :=
-      pullback.fst f g ⁻¹ᵁ u.opensRange ⊓ pullback.snd f g ⁻¹ᵁ v.opensRange with hW
+  · let W : (pullback f g).Opens :=
+      pullback.fst f g ⁻¹ᵁ u.opensRange ⊓ pullback.snd f g ⁻¹ᵁ v.opensRange
     have h1 : Set.range (W.ι ≫ pullback.fst f g).base ⊆ Set.range u.base := by
       rintro _ ⟨y, rfl⟩
       exact y.2.1
@@ -220,8 +237,7 @@ lemma Scheme.Pullback.opensRange_openCoverOfLeftRight_f {X Y Z : Scheme.{u}}
     ((Scheme.Pullback.openCoverOfLeftRight 𝒰X 𝒰Y f g).f ij).opensRange =
       pullback.fst f g ⁻¹ᵁ (𝒰X.f ij.1).opensRange ⊓
         pullback.snd f g ⁻¹ᵁ (𝒰Y.f ij.2).opensRange := by
-  rw [← Scheme.Pullback.opensRange_map (f := f) (g := g) (𝒰X.f ij.1) (𝒰Y.f ij.2)
-    (by simp) (by simp)]
+  rw [← Scheme.Pullback.opensRange_map (f := f) (g := g) (𝒰X.f ij.1) (𝒰Y.f ij.2)]
   refine TopologicalSpace.Opens.ext ?_
   rw [Scheme.Hom.coe_opensRange, Scheme.Hom.coe_opensRange,
     Scheme.Pullback.openCoverOfLeftRight_f]

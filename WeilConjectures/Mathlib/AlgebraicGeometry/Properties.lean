@@ -6,8 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Properties
-public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
-public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.Topology.Sober
 
 /-!
@@ -30,7 +29,7 @@ affine open cover all of whose members contain all the generic points.
 * `AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset`: a quasi-compact and
   quasi-separated scheme with finitely many irreducible components has a finite affine open
   cover each member of which contains all the generic points. The intersection of such a cover
-  is dense by `dense_iInf_of_genericPoints_subset`.
+  is dense by `genericPoints.dense_iInf_of_subset`.
 
 These are the topological input to Chow's lemma (Stacks Project Tag 0200, Step 1 of the proof).
 The key geometric ingredient is
@@ -49,47 +48,6 @@ open scoped Function
 namespace AlgebraicGeometry
 
 variable {X : Scheme.{u}}
-
-/-- A point of an affine open `U` of `X` that is the generic point of an irreducible component
-of `X` corresponds to a minimal prime of `Γ(X, U)`. -/
-lemma IsAffineOpen.primeIdealOf_mem_minimalPrimes {U : X.Opens} (hU : IsAffineOpen U) {x : X}
-    (hx : x ∈ genericPoints X) (hxU : x ∈ U) :
-    (hU.primeIdealOf ⟨x, hxU⟩).asIdeal ∈ minimalPrimes Γ(X, U) := by
-  rw [← PrimeSpectrum.mem_genericPoints_iff]
-  have hoe : IsOpenEmbedding hU.fromSpec.base := hU.fromSpec.isOpenEmbedding
-  have h : hU.fromSpec.base ⁻¹' closure {x} ∈ irreducibleComponents (Spec Γ(X, U)) :=
-    preimage_mem_irreducibleComponents hx hoe
-      ⟨x, subset_closure rfl, by rw [hU.range_fromSpec]; exact hxU⟩
-  rw [hoe.isOpenMap.preimage_closure_eq_closure_preimage hoe.continuous] at h
-  have : hU.fromSpec.base ⁻¹' {x} = {hU.primeIdealOf ⟨x, hxU⟩} := by
-    refine Set.eq_singleton_iff_unique_mem.mpr ⟨hU.fromSpec_primeIdealOf ⟨x, hxU⟩, fun y hy ↦ ?_⟩
-    exact hoe.injective (hy.trans (hU.fromSpec_primeIdealOf ⟨x, hxU⟩).symm)
-  rwa [this] at h
-
-/-- Let `U` be an affine open of `X` and let `x ∈ U` be the generic point of an irreducible
-component of `X`. Any quasi-compact open `W ⊆ U` not containing `x` can be separated from `x`
-by a standard open: there is `f ∈ Γ(X, U)` with `x ∈ D(f)` and `D(f) ∩ W = ∅`. -/
-@[stacks 00EV]
-lemma IsAffineOpen.exists_mem_basicOpen_and_disjoint {U : X.Opens} (hU : IsAffineOpen U) {x : X}
-    (hx : x ∈ genericPoints X) (hxU : x ∈ U) {W : Set X} (hWo : IsOpen W) (hWc : IsCompact W)
-    (hWU : W ⊆ (U : Set X)) (hxW : x ∉ W) :
-    ∃ f : Γ(X, U), x ∈ X.basicOpen f ∧ Disjoint (X.basicOpen f : Set X) W := by
-  have hoe : IsOpenEmbedding hU.fromSpec.base := hU.fromSpec.isOpenEmbedding
-  have hrange : Set.range hU.fromSpec.base = (U : Set X) := hU.range_fromSpec
-  obtain ⟨f, hf, hdisj⟩ := PrimeSpectrum.exists_notMem_and_disjoint_basicOpen_of_mem_minimalPrimes
-    (hU.primeIdealOf_mem_minimalPrimes hx hxU) (hWo.preimage hU.fromSpec.continuous)
-    (hoe.isInducing.isCompact_preimage' hWc (hrange ▸ hWU))
-    (by simpa [hU.fromSpec_primeIdealOf ⟨x, hxU⟩] using hxW)
-  have hmem (y : Spec Γ(X, U)) :
-      hU.fromSpec.base y ∈ X.basicOpen f ↔ y ∈ PrimeSpectrum.basicOpen f :=
-    congr(y ∈ $(hU.fromSpec_preimage_basicOpen f)).to_iff
-  refine ⟨f, ?_, Set.disjoint_left.mpr fun y hy hyW ↦ ?_⟩
-  · have h := (hmem (hU.primeIdealOf ⟨x, hxU⟩)).mpr hf
-    rwa [hU.fromSpec_primeIdealOf ⟨x, hxU⟩] at h
-  · have hyU : y ∈ Set.range hU.fromSpec.base := by
-      rw [hrange]; exact X.basicOpen_le f hy
-    obtain ⟨z, rfl⟩ := hyU
-    exact Set.disjoint_left.mp hdisj ((hmem z).mp hy) hyW
 
 /-- **Disjoint affine neighbourhoods of generic points.** Let `X` be a quasi-separated scheme
 and let `s` be a finite set of generic points of irreducible components of `X`. Then there is a
@@ -118,7 +76,7 @@ theorem exists_isAffineOpen_pairwise_disjoint [QuasiSeparatedSpace X] {s : Set X
   have key : ∀ x ∈ s, ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧ U ≤ V x ∧
       ∀ y ∈ s, y ≠ x → Disjoint U (V y) := by
     intro x hx
-    set W : Set X := ⋃ y ∈ s \ {x}, ((V x : Set X) ∩ (V y : Set X))
+    let W : Set X := ⋃ y ∈ s \ {x}, ((V x : Set X) ∩ (V y : Set X))
     have hWo : IsOpen W := isOpen_biUnion fun y _ ↦ (V x).isOpen.inter (V y).isOpen
     have hWc : IsCompact W := hsf.sdiff.isCompact_biUnion fun y hy ↦
       QuasiSeparatedSpace.inter_isCompact _ _ (V x).isOpen (hVaff x hx).isCompact
@@ -159,7 +117,7 @@ theorem exists_isAffineOpen_mem_of_subset_genericPoints [QuasiSeparatedSpace X] 
     ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧ s ⊆ (U : Set X) := by
   classical
   -- the points of `s` whose component does not contain `x`
-  set t : Set X := {y ∈ s | x ∉ closure ({y} : Set X)}
+  let t : Set X := {y ∈ s | x ∉ closure ({y} : Set X)}
   have htf : t.Finite := hsf.subset fun y hy ↦ hy.1
   have hts : t ⊆ genericPoints X := fun y hy ↦ hs hy.1
   -- an affine open `W ∋ x` avoiding the components of the points of `t`
@@ -208,7 +166,7 @@ contains all the generic points of the irreducible components. -/
 @[stacks 0200 "Step 1 of the proof"]
 theorem exists_isAffineOpen_cover_genericPoints_subset [CompactSpace X] [QuasiSeparatedSpace X]
     (hX : (irreducibleComponents X).Finite) :
-    ∃ (n : ℕ) (U : Fin n → X.Opens), (∀ i, IsAffineOpen (U i)) ∧
+    ∃ (ι : Type u) (_ : Finite ι) (U : ι → X.Opens), (∀ i, IsAffineOpen (U i)) ∧
       (∀ i, genericPoints X ⊆ (U i : Set X)) ∧ ⨆ i, U i = ⊤ := by
   classical
   have h : ∀ x : X, ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧ genericPoints X ⊆ (U : Set X) :=
@@ -216,9 +174,9 @@ theorem exists_isAffineOpen_cover_genericPoints_subset [CompactSpace X] [QuasiSe
   choose U hUaff hUmem hUsub using h
   obtain ⟨c, hc⟩ := isCompact_univ.elim_finite_subcover (fun x : X ↦ (U x : Set X))
     (fun x ↦ (U x).isOpen) fun x _ ↦ Set.mem_iUnion.mpr ⟨x, hUmem x⟩
-  refine ⟨c.card, fun i ↦ U (c.equivFin.symm i), fun i ↦ hUaff _, fun i ↦ hUsub _,
+  refine ⟨{x : X // x ∈ c}, inferInstance, fun i ↦ U i.1, fun i ↦ hUaff _, fun i ↦ hUsub _,
     eq_top_iff.mpr fun x _ ↦ ?_⟩
   obtain ⟨y, hy, hxy⟩ := Set.mem_iUnion₂.mp (hc (Set.mem_univ x))
-  exact Opens.mem_iSup.mpr ⟨c.equivFin ⟨y, hy⟩, by simpa using hxy⟩
+  exact Opens.mem_iSup.mpr ⟨⟨y, hy⟩, hxy⟩
 
 end AlgebraicGeometry

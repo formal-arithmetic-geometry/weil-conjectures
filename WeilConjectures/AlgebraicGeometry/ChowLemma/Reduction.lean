@@ -37,7 +37,7 @@ ingredients applicable.
 ## Main statements
 
 - `AlgebraicGeometry.nonempty_chowReduction` — steps 1 and 2 of the proof of Chow's lemma.
-- `AlgebraicGeometry.exists_chowReduction_n_ne_zero` — the same, with a nonempty cover.
+- `AlgebraicGeometry.exists_chowReduction_nonempty_index` — the same, with a nonempty cover.
 
 ## References
 
@@ -61,8 +61,9 @@ Nothing here refers to a base: for a morphism `f : X ⟶ S`, the composite `X* �
 again separated, locally of finite type and quasi-compact because `c` is a closed immersion,
 so the remaining steps of the proof of Chow's lemma may be run on `X*` in place of `X`. -/
 structure ChowReduction (X : Scheme.{u}) where
-  /-- the number of members of the cover -/
-  n : ℕ
+  /-- the index type of the cover -/
+  ι : Type u
+  [finite_ι : Finite ι]
   /-- the closed model `X*` of `X` -/
   Y : Scheme.{u}
   /-- the surjective closed immersion `X* ⟶ X` -/
@@ -70,7 +71,7 @@ structure ChowReduction (X : Scheme.{u}) where
   [isClosedImmersion_c : IsClosedImmersion c]
   [surjective_c : Surjective c]
   /-- the finite affine open cover of `X*` -/
-  U : Fin n → Y.Opens
+  U : ι → Y.Opens
   isAffineOpen_U : ∀ i, IsAffineOpen (U i)
   iSup_U : ⨆ i, U i = ⊤
   /-- the dense open of `X` the closed model is an isomorphism over -/
@@ -80,8 +81,9 @@ structure ChowReduction (X : Scheme.{u}) where
   [isIso_morphismRestrict_c : IsIso (c ∣_ V)]
   [isSchemeTheoreticallyDominant_iInf : IsSchemeTheoreticallyDominant (⨅ i, U i).ι]
 
-attribute [instance] ChowReduction.isClosedImmersion_c ChowReduction.surjective_c
-  ChowReduction.isIso_morphismRestrict_c ChowReduction.isSchemeTheoreticallyDominant_iInf
+attribute [instance] ChowReduction.finite_ι ChowReduction.isClosedImmersion_c
+  ChowReduction.surjective_c ChowReduction.isIso_morphismRestrict_c
+  ChowReduction.isSchemeTheoreticallyDominant_iInf
 
 /-- **Steps 1 and 2 of the proof of Chow's lemma.** A scheme `X` that is separated and of finite
 type over a Noetherian scheme `S` admits a surjective closed model `X*` with a finite affine
@@ -101,14 +103,15 @@ theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   have : IsNoetherian X := ⟨⟩
   -- Step 1: a finite affine cover through the generic points, with dense intersection.
-  obtain ⟨n, W, hWaff, hWgen, hWcov⟩ :=
+  obtain ⟨ι, hι, W, hWaff, hWgen, hWcov⟩ :=
     exists_isAffineOpen_cover_genericPoints_subset
       (finite_irreducibleComponents_of_isNoetherian (X := X))
-  set V : X.Opens := ⨅ i, W i with hV
-  have hVdense : Dense (V : Set X) := dense_iInf_of_genericPoints_subset hWgen
+  have : Finite ι := hι
+  let V : X.Opens := ⨅ i, W i
+  have hVdense : Dense (V : Set X) := genericPoints.dense_iInf_of_subset hWgen
   -- Step 2: replace `X` by the scheme-theoretic image of `V ⟶ X`.
-  have hVU : ⨅ i, V.ι.imageι ⁻¹ᵁ W i = V.ι.imageι ⁻¹ᵁ V := V.iInf_preimage_imageι hV.symm
-  exact ⟨{ n := n
+  have hVU : ⨅ i, V.ι.imageι ⁻¹ᵁ W i = V.ι.imageι ⁻¹ᵁ V := V.iInf_preimage_imageι rfl
+  exact ⟨{ ι := ι
            Y := V.ι.image
            c := V.ι.imageι
            surjective_c := V.surjective_imageι_ι hVdense
@@ -121,39 +124,39 @@ theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
            isSchemeTheoreticallyDominant_iInf := hVU ▸ inferInstance }⟩
 
 /-- The cover of a `AlgebraicGeometry.ChowReduction` may always be assumed to be nonempty: if it
-is indexed by `Fin 0`, then `X*` is empty and the one-element cover by `⊤` satisfies all the
-requirements. -/
-theorem ChowReduction.exists_n_ne_zero {X : Scheme.{u}} (R : ChowReduction X) :
-    ∃ R' : ChowReduction X, R'.n ≠ 0 := by
-  rcases eq_or_ne R.n 0 with hn | hn
+is indexed by an empty type, then `X*` is empty and the one-element cover by `⊤` satisfies all
+the requirements. -/
+theorem ChowReduction.exists_nonempty_index {X : Scheme.{u}} (R : ChowReduction X) :
+    ∃ R' : ChowReduction X, Nonempty R'.ι := by
+  rcases isEmpty_or_nonempty R.ι with hι | hι
   · -- If the cover is indexed by the empty type, `X*` is covered by nothing, hence empty.
-    have : IsEmpty (Fin R.n) := by rw [hn]; infer_instance
     have hbot : (⊥ : R.Y.Opens) = ⊤ := (iSup_of_empty R.U).symm.trans R.iSup_U
     have : IsEmpty R.Y := Set.univ_eq_empty_iff.mp
       (congrArg (fun W : R.Y.Opens ↦ (W : Set R.Y)) hbot.symm)
     -- In an empty scheme all opens agree, so every field is inherited from `R`.
-    have hopens : ∀ U U' : R.Y.Opens, U = U' := fun U U' ↦ by
+    have hopens (U U' : R.Y.Opens) : U = U' := by
       ext x
       exact isEmptyElim x
     refine ⟨{ R with
-      n := 1
+      ι := PUnit.{u + 1}
+      finite_ι := inferInstance
       U := fun _ ↦ ⊤
       isAffineOpen_U := fun _ ↦ isAffineOpen_top R.Y
       iSup_U := hopens _ _
       preimage_V := hopens _ _
-      isSchemeTheoreticallyDominant_iInf := ?_ }, one_ne_zero⟩
-    rw [hopens (⨅ _ : Fin 1, (⊤ : R.Y.Opens)) ⊤]
+      isSchemeTheoreticallyDominant_iInf := ?_ }, ⟨PUnit.unit⟩⟩
+    rw [hopens (⨅ _ : PUnit.{u + 1}, (⊤ : R.Y.Opens)) ⊤]
     infer_instance
-  · exact ⟨R, hn⟩
+  · exact ⟨R, hι⟩
 
 /-- **Steps 1 and 2 of the proof of Chow's lemma**, with a nonempty cover. This is
 `AlgebraicGeometry.nonempty_chowReduction` normalised via
-`AlgebraicGeometry.ChowReduction.exists_n_ne_zero`, so that the constructions consuming the cover
-may assume it has at least one member. -/
+`AlgebraicGeometry.ChowReduction.exists_nonempty_index`, so that the constructions consuming the
+cover may assume it has at least one member. -/
 @[stacks 0200 "Steps 1 and 2 of the proof"]
-theorem exists_chowReduction_n_ne_zero {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
+theorem exists_chowReduction_nonempty_index {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
-    ∃ R : ChowReduction X, R.n ≠ 0 :=
-  (nonempty_chowReduction f).elim fun R ↦ R.exists_n_ne_zero
+    ∃ R : ChowReduction X, Nonempty R.ι :=
+  (nonempty_chowReduction f).elim fun R ↦ R.exists_nonempty_index
 
 end AlgebraicGeometry

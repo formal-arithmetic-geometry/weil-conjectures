@@ -52,7 +52,7 @@ namespace AlgebraicGeometry
 compatibly with `g`.
 
 Since a closed immersion is proper and `ℙ(n; S)` is proper over `S` for finite `n`, the
-structure morphism `Z ⟶ S` is proper; see the `IsProper` instance below. -/
+structure morphism `Z ⟶ S` is proper; typeclass inference finds this on its own. -/
 structure ProperClosedModel {V S : Scheme.{u}} (g : V ⟶ S) where
   /-- the index type of the homogeneous coordinates of the ambient projective space -/
   n : Type u
@@ -71,28 +71,16 @@ structure ProperClosedModel {V S : Scheme.{u}} (g : V ⟶ S) where
 attribute [instance] ProperClosedModel.finite_n ProperClosedModel.isClosedImmersion_emb
   ProperClosedModel.isOpenImmersion_ι ProperClosedModel.isSchemeTheoreticallyDominant_ι
 
-namespace ProperClosedModel
-
-variable {V S : Scheme.{u}} {g : V ⟶ S} (M : ProperClosedModel g)
-
-/-- **The closed model is proper over the base**: `Z ⟶ S` is the composition of a closed
-immersion with the structure morphism of a projective space, both of which are proper. -/
-instance isProper_emb_comp_over : IsProper (M.emb ≫ ℙ(M.n; S) ↘ S) := inferInstance
-
-end ProperClosedModel
-
 /-- **Step 3 of the proof of Chow's lemma.** An affine scheme `V` with Noetherian underlying
 space, locally of finite type over `S`, admits a proper closed model: a closed subscheme `Z` of
 some projective space `ℙ(n; S)` with `n` finite, containing `V` as a scheme-theoretically dense
-open subscheme and proper over `S`.
-
-Indeed, `V` immerses into some `ℙ(n; S)` over `S` by
-`AlgebraicGeometry.exists_isImmersion_projectiveSpace`, and this immersion is quasi-compact
-because `V` is a Noetherian space; so its scheme-theoretic image does the job. -/
+open subscheme and proper over `S`. -/
 @[stacks 01RG "combined with 0200, step 3 of the proof"]
 theorem nonempty_properClosedModel {V S : Scheme.{u}} [IsAffine V] [NoetherianSpace V]
     (g : V ⟶ S) [LocallyOfFiniteType g] :
     Nonempty (ProperClosedModel g) := by
+  -- `V` immerses into some `ℙ(n; S)` over `S`, and this immersion is quasi-compact because `V`
+  -- is a Noetherian space; so its scheme-theoretic image does the job
   obtain ⟨n, hn, j, hj, hjg⟩ := exists_isImmersion_projectiveSpace g
   exact ⟨{ n := n
            Z := j.image

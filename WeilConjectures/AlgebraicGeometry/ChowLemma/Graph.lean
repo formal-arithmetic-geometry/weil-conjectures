@@ -27,8 +27,8 @@ each `i`, a proper morphism `pᵢ : Z ⟶ Mᵢ.Z` restricting on `U∞` to the o
 `U∞ ⟶ Uᵢ ⟶ Mᵢ.Z`. Gluing the `pᵢ` over the opens `pᵢ⁻¹(Uᵢ)` is the subject of a later file.
 
 The `m`-fold fibre product `∏_S ℙ(nᵢ; S)` is taken to be the categorical finite product in the
-category `Over S`; `AlgebraicGeometry.isProper_pi_hom` is what makes it proper over `S`, so no
-Segre embedding is needed here. The composition of the closed immersion
+category `Over S`; `AlgebraicGeometry.ProjectiveSpace.isProper_pi_hom` is what makes it proper
+over `S`, so no Segre embedding is needed here. The composition of the closed immersion
 `Z ⟶ ∏_S ℙ(Mᵢ.n; S)` with the Segre embedding of
 `AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi`, giving a closed immersion of `Z`
 into a single projective space `ℙ(N; S)` over `S`, is the separate statement
@@ -45,8 +45,6 @@ into a single projective space `ℙ(N; S)` over `S`, is the separate statement
 
 ## Main statements
 
-- `AlgebraicGeometry.isImmersion_left_pi_lift` — a tuple of morphisms of `S`-schemes one of
-  whose components is an immersion is itself an immersion.
 - `AlgebraicGeometry.ChowGraph.isProper_over` — `Z` is proper over `S`.
 - `AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over` — `Z` admits a closed immersion
   into a single projective space `ℙ(N; S)` over `S`.
@@ -96,16 +94,14 @@ noncomputable def ambient : Over S := ∏ᶜ fun i ↦ Over.mk (ℙ((M i).n; S) 
 /-- **The product of the ambient projective spaces is proper over `S`**, being a finite product
 of proper `S`-schemes. This is what replaces the Segre embedding. -/
 instance isProper_ambient_hom : IsProper (ambient M).hom :=
-  have (i : ι) : IsProper (Over.mk (ℙ((M i).n; S) ↘ S)).hom :=
-    inferInstanceAs (IsProper (ℙ((M i).n; S) ↘ S))
-  isProper_pi_hom _
+  ProjectiveSpace.isProper_pi_hom _ _
 
 /-- The `i`-th projection `∏_S ℙ(Mⱼ.n; S) ⟶ ℙ(Mᵢ.n; S)`. -/
-noncomputable def ambientπ (i : ι) : (ambient M).left ⟶ ℙ((M i).n; S) :=
+noncomputable def ambientProj (i : ι) : (ambient M).left ⟶ ℙ((M i).n; S) :=
   (Pi.π (fun i ↦ Over.mk (ℙ((M i).n; S) ↘ S)) i).left
 
 @[reassoc (attr := simp)]
-lemma ambientπ_over (i : ι) : ambientπ M i ≫ ℙ((M i).n; S) ↘ S = (ambient M).hom :=
+lemma ambientProj_over (i : ι) : ambientProj M i ≫ ℙ((M i).n; S) ↘ S = (ambient M).hom :=
   Over.w (Pi.π (fun i ↦ Over.mk (ℙ((M i).n; S) ↘ S)) i)
 
 /-- The `i`-th component `U∞ ⟶ ℙ(Mᵢ.n; S)` of the tuple morphism: the intersection of the
@@ -114,8 +110,8 @@ closed subscheme of `ℙ(Mᵢ.n; S)`. -/
 noncomputable def toProjectiveSpace (i : ι) : ↑(⨅ i, U i) ⟶ ℙ((M i).n; S) :=
   X.homOfLE (iInf_le U i) ≫ (M i).ι ≫ (M i).emb
 
-instance isImmersion_toProjectiveSpace (i : ι) : IsImmersion (toProjectiveSpace M i) := by
-  unfold toProjectiveSpace; infer_instance
+instance isImmersion_toProjectiveSpace (i : ι) : IsImmersion (toProjectiveSpace M i) :=
+  inferInstanceAs (IsImmersion (X.homOfLE (iInf_le U i) ≫ (M i).ι ≫ (M i).emb))
 
 omit [Finite ι] in
 @[reassoc (attr := simp)]
@@ -131,9 +127,19 @@ noncomputable def tuple : ↑(⨅ i, U i) ⟶ (ambient M).left :=
     (fun i ↦ Over.homMk (U := Over.mk ((⨅ i, U i).ι ≫ f)) (toProjectiveSpace M i)
       (toProjectiveSpace_over M i))).left
 
+/-- The `i`-th component of the tuple morphism is `toProjectiveSpace M i`:
+
+```
+  U∞ ------- tuple -------> ∏_S ℙ(Mⱼ.n; S)
+   |                              |
+   | toProjectiveSpace i          | ambientProj i
+   ↓                              ↓
+  ℙ(Mᵢ.n; S) ================ ℙ(Mᵢ.n; S)
+```
+-/
 @[reassoc (attr := simp)]
-lemma tuple_ambientπ (i : ι) : tuple M ≫ ambientπ M i = toProjectiveSpace M i := by
-  rw [tuple, ambientπ, ← Over.comp_left, Pi.lift_π]
+lemma tuple_ambientProj (i : ι) : tuple M ≫ ambientProj M i = toProjectiveSpace M i := by
+  rw [tuple, ambientProj, ← Over.comp_left, Pi.lift_π]
   rfl
 
 @[reassoc (attr := simp)]
@@ -170,8 +176,8 @@ variable {ι : Type*} [Finite ι] {X S : Scheme.{u}} {f : X ⟶ S} {U : ι → X
 /-- The closed immersion of the graph into the product `∏_S ℙ(Mᵢ.n; S)`. -/
 noncomputable def emb : ChowGraph M ⟶ (ambient M).left := (tuple M).imageι
 
-instance isClosedImmersion_emb : IsClosedImmersion (emb M) := by
-  unfold emb; infer_instance
+instance isClosedImmersion_emb : IsClosedImmersion (emb M) :=
+  inferInstanceAs (IsClosedImmersion (tuple M).imageι)
 
 /-- The morphism from the intersection of the members of the cover to the graph. It is an open
 immersion onto a scheme-theoretically dense open subscheme; see
@@ -187,8 +193,8 @@ noncomputable def over : ChowGraph M ⟶ S := emb M ≫ (ambient M).hom
 
 /-- **The graph is proper over `S`**: it is a closed subscheme of the product
 `∏_S ℙ(Mᵢ.n; S)`, which is proper over `S`. -/
-instance isProper_over : IsProper (over M) := by
-  unfold over; infer_instance
+instance isProper_over : IsProper (over M) :=
+  inferInstanceAs (IsProper (emb M ≫ (ambient M).hom))
 
 @[reassoc (attr := simp)]
 lemma toGraph_over : toGraph M ≫ over M = (⨅ i, U i).ι ≫ f := by
@@ -201,20 +207,17 @@ variable [NoetherianSpace X]
 instance noetherianSpace_iInf : NoetherianSpace ↑(⨅ i, U i) :=
   inferInstanceAs (NoetherianSpace ((⨅ i, U i : X.Opens) : Set X))
 
-/-- The tuple morphism is quasi-compact, its source being a Noetherian space. -/
-instance quasiCompact_tuple : QuasiCompact (tuple M) := inferInstance
-
 /-- **`U∞` is scheme-theoretically dense in the graph**, being the source of the factorisation
 of the tuple morphism through its scheme-theoretic image. -/
 instance isSchemeTheoreticallyDominant_toGraph :
-    IsSchemeTheoreticallyDominant (toGraph M) := by
-  unfold toGraph; infer_instance
+    IsSchemeTheoreticallyDominant (toGraph M) :=
+  inferInstanceAs (IsSchemeTheoreticallyDominant (tuple M).toImage)
 
 /-- **`U∞` is an open subscheme of the graph**: the tuple morphism is a quasi-compact
 immersion, so it factors as an open immersion onto its scheme-theoretic image followed by a
 closed immersion. -/
-instance isOpenImmersion_toGraph [Nonempty ι] : IsOpenImmersion (toGraph M) := by
-  unfold toGraph; infer_instance
+instance isOpenImmersion_toGraph [Nonempty ι] : IsOpenImmersion (toGraph M) :=
+  inferInstanceAs (IsOpenImmersion (tuple M).toImage)
 
 /-- The open subscheme of the graph cut out by `U∞` is scheme-theoretically dense. -/
 instance isSchemeTheoreticallyDominant_opensRange_toGraph [Nonempty ι] :
@@ -222,42 +225,80 @@ instance isSchemeTheoreticallyDominant_opensRange_toGraph [Nonempty ι] :
   (toGraph M).isoOpensRange_inv_comp ▸ inferInstance
 
 /-- **The projection of the graph onto the `i`-th closed model.** It is the unique morphism
-`pᵢ : Z ⟶ Mᵢ.Z` compatible with the `i`-th projection `∏_S ℙ(Mⱼ.n; S) ⟶ ℙ(Mᵢ.n; S)`; it exists
-by the universal property of the closed immersion `Mᵢ.Z ⟶ ℙ(Mᵢ.n; S)`, because the composition
-of the tuple morphism with the `i`-th projection factors through `Mᵢ.Z` by construction and
-`U∞` is scheme-theoretically dense in `Z`. -/
+`pᵢ : Z ⟶ Mᵢ.Z` compatible with the `i`-th projection `∏_S ℙ(Mⱼ.n; S) ⟶ ℙ(Mᵢ.n; S)`:
+
+```
+        Z -------- pᵢ --------> Mᵢ.Z
+        |                        |
+      emb                       Mᵢ.emb
+        ↓                        ↓
+  ∏_S ℙ(Mⱼ.n; S) --ambientProj i--> ℙ(Mᵢ.n; S)
+```
+-/
 @[stacks 01R9 "combined with 0200, step 4 of the proof"]
 noncomputable def proj (i : ι) : ChowGraph M ⟶ (M i).Z :=
-  IsClosedImmersion.lift (M i).emb (emb M ≫ ambientπ M i) <| by
-    have key : (emb M ≫ ambientπ M i).ker = (tuple M ≫ ambientπ M i).ker := by
+  -- the universal property of the closed immersion `Mᵢ.Z ⟶ ℙ(Mᵢ.n; S)` applies, because the
+  -- composition of the tuple morphism with the `i`-th projection factors through `Mᵢ.Z` by
+  -- construction and `U∞` is scheme-theoretically dense in `Z`
+  IsClosedImmersion.lift (M i).emb (emb M ≫ ambientProj M i) <| by
+    have key : (emb M ≫ ambientProj M i).ker = (tuple M ≫ ambientProj M i).ker := by
       conv_rhs => rw [← toGraph_emb M, Category.assoc]
       exact (Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant (toGraph M)
-        (emb M ≫ ambientπ M i)).symm
-    rw [key, tuple_ambientπ, toProjectiveSpace, ← Category.assoc]
+        (emb M ≫ ambientProj M i)).symm
+    rw [key, tuple_ambientProj, toProjectiveSpace, ← Category.assoc]
     exact Scheme.Hom.le_ker_comp _ _
 
+/-- The defining square of `AlgebraicGeometry.ChowGraph.proj`:
+
+```
+        Z -------- pᵢ --------> Mᵢ.Z
+        |                        |
+      emb                       Mᵢ.emb
+        ↓                        ↓
+  ∏_S ℙ(Mⱼ.n; S) --ambientProj i--> ℙ(Mᵢ.n; S)
+```
+-/
 @[reassoc (attr := simp)]
-lemma proj_emb (i : ι) : proj M i ≫ (M i).emb = emb M ≫ ambientπ M i :=
+lemma proj_emb (i : ι) : proj M i ≫ (M i).emb = emb M ≫ ambientProj M i :=
   IsClosedImmersion.lift_fac _ _ _
 
+/-- The projection onto the `i`-th closed model is a morphism over `S`:
+
+```
+    Z ----- pᵢ -----> Mᵢ.Z --Mᵢ.emb--> ℙ(Mᵢ.n; S)
+     \                                     |
+      `------------ over -----------------`↓
+                                           S
+```
+-/
 @[reassoc (attr := simp)]
 lemma proj_over (i : ι) : proj M i ≫ (M i).emb ≫ ℙ((M i).n; S) ↘ S = over M := by
-  rw [← Category.assoc, proj_emb, Category.assoc, ambientπ_over, over]
+  rw [← Category.assoc, proj_emb, Category.assoc, ambientProj_over, over]
 
 /-- **The projection onto the `i`-th closed model is proper**: it becomes proper after
 composing with the structure morphism `Mᵢ.Z ⟶ S`, which is separated. -/
 @[stacks 01W6 "(2), combined with 0200, step 4 of the proof"]
 instance isProper_proj (i : ι) : IsProper (proj M i) := by
   have : IsProper (proj M i ≫ (M i).emb ≫ ℙ((M i).n; S) ↘ S) := by
-    rw [proj_over]; infer_instance
+    rw [proj_over]
+    infer_instance
   exact IsProper.of_comp (f := proj M i) (g := (M i).emb ≫ ℙ((M i).n; S) ↘ S)
 
 /-- **On `U∞` the projection onto the `i`-th closed model is the open immersion
-`U∞ ⟶ Uᵢ ⟶ Mᵢ.Z`.** -/
+`U∞ ⟶ Uᵢ ⟶ Mᵢ.Z`**:
+
+```
+  U∞ --toGraph--> Z
+   |              |
+  homOfLE         pᵢ
+   ↓              ↓
+  Uᵢ ---Mᵢ.ι---> Mᵢ.Z
+```
+-/
 @[reassoc (attr := simp)]
 lemma toGraph_proj (i : ι) :
     toGraph M ≫ proj M i = X.homOfLE (iInf_le U i) ≫ (M i).ι := by
-  rw [← cancel_mono (M i).emb, Category.assoc, proj_emb, toGraph_emb_assoc, tuple_ambientπ,
+  rw [← cancel_mono (M i).emb, Category.assoc, proj_emb, toGraph_emb_assoc, tuple_ambientProj,
     toProjectiveSpace, Category.assoc]
 
 /-- **`U∞` is contained in `pᵢ⁻¹(Uᵢ)`**, as an open subscheme of the graph. -/

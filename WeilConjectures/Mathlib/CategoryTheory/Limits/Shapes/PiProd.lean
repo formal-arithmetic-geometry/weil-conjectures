@@ -5,8 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Shapes.PiProd
 
 /-!
 # Splitting off one factor of a product indexed by `Option`
@@ -39,12 +38,16 @@ noncomputable def binaryFanOptionPi :
       | none => s.fst
       | some i => s.snd ≫ Pi.π (fun i ↦ F (some i)) i)
     (fun s ↦ by simp)
-    (fun s ↦ by ext i; simp)
+    (fun s ↦ by
+      ext i
+      simp)
     (fun s m h₁ h₂ ↦ by
       refine Pi.hom_ext _ _ fun j ↦ ?_
       match j with
       | none => simpa using h₁
-      | some i => rw [← h₂]; simp)
+      | some i =>
+        rw [← h₂]
+        simp)
 
 variable [HasBinaryProduct (F none) (∏ᶜ fun i ↦ F (some i))]
 

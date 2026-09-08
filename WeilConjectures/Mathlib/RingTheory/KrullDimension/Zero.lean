@@ -22,10 +22,12 @@ element of `p` becomes nilpotent in `R_p`. This is
 
 variable {R : Type*} [CommRing R]
 
-/-- If `p` is a minimal prime of `R` and `x ∈ p`, there are `y ∉ p` and `n` with `y * x ^ n = 0`:
-the localization `R_p` is zero-dimensional and local, so the image of `x` in `R_p` is nilpotent. -/
+/-- If `p` is a minimal prime of `R` and `x ∈ p`, there are `y ∉ p` and `n` with
+`y * x ^ n = 0`. -/
 theorem Ideal.exists_notMem_mul_pow_eq_zero_of_mem_minimalPrimes {p : Ideal R}
     (hp : p ∈ minimalPrimes R) {x : R} (hx : x ∈ p) : ∃ y ∉ p, ∃ n : ℕ, y * x ^ n = 0 := by
+  -- the localization `R_p` is zero-dimensional and local, so the image of `x` in `R_p`
+  -- is nilpotent
   have : p.IsPrime := hp.1.1
   have : Ring.KrullDimLE 0 (Localization.AtPrime p) := Ring.KrullDimLE.of_isLocalization p hp _
   obtain ⟨n, hn⟩ : IsNilpotent (algebraMap R (Localization.AtPrime p) x) :=

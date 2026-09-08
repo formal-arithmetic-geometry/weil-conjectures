@@ -116,7 +116,7 @@ theorem isProper_openImmersion (hf : IsProper f) : IsProper c.i :=
 immersion. -/
 theorem isClosedImmersion_openImmersion (hf : IsProper f) : IsClosedImmersion c.i :=
   have := c.isProper_openImmersion hf
-  .of_isOpenImmersion_of_universallyClosed c.i
+  .of_universallyClosed c.i
 
 /-- The open immersion into a compactification of a proper morphism identifies `X` with a
 **clopen** subscheme of the compactification: its range is open, being an open immersion,

@@ -105,9 +105,19 @@ noncomputable def projRestrict (i : ι) : (projPreimage M i).toScheme ⟶ (U i).
 
 /-- **The restriction `pᵢ|_{Vᵢ} : Vᵢ ⟶ Uᵢ` is proper**, being the base change of the proper
 morphism `pᵢ` along the open immersion of `Uᵢ` in `Mᵢ.Z`. -/
-instance isProper_projRestrict (i : ι) : IsProper (projRestrict M i) := by
-  unfold projRestrict; infer_instance
+instance isProper_projRestrict (i : ι) : IsProper (projRestrict M i) :=
+  inferInstanceAs (IsProper ((proj M i ∣_ (M i).ι.opensRange) ≫ (M i).ι.isoOpensRange.inv))
 
+/-- The restriction of the `i`-th projection is compatible with the inclusions:
+
+```
+  Vᵢ ---projRestrict i---> Uᵢ
+   |                        |
+  ι                        Mᵢ.ι
+   ↓                        ↓
+   Z -------- pᵢ --------> Mᵢ.Z
+```
+-/
 @[reassoc (attr := simp)]
 lemma projRestrict_ι (i : ι) :
     projRestrict M i ≫ (M i).ι = (projPreimage M i).ι ≫ proj M i := by
@@ -132,7 +142,16 @@ lemma opensRange_toGraph_le_projPreimage (i : ι) :
     (toGraph M).opensRange ≤ projPreimage M i :=
   opensRange_toGraph_le_preimage M i
 
-/-- **On `U∞` the restriction `pᵢ|_{Vᵢ}` is the inclusion `U∞ ⟶ Uᵢ`.** -/
+/-- **On `U∞` the restriction `pᵢ|_{Vᵢ}` is the inclusion `U∞ ⟶ Uᵢ`:**
+
+```
+  U∞ ---homOfLE---> Vᵢ
+   |                 |
+  isoOpensRange.inv  | projRestrict i
+   ↓                 ↓
+  ⋂ⱼ Uⱼ ---homOfLE--> Uᵢ
+```
+-/
 lemma homOfLE_projRestrict (i : ι) :
     (ChowGraph M).homOfLE (opensRange_toGraph_le_projPreimage M i) ≫ projRestrict M i =
       (toGraph M).isoOpensRange.inv ≫ X.homOfLE (iInf_le U i) := by
@@ -140,7 +159,16 @@ lemma homOfLE_projRestrict (i : ι) :
     Category.assoc, ← toGraph_proj, Scheme.Hom.isoOpensRange_inv_comp_assoc]
 
 /-- **On `U∞` the morphism `Vᵢ ⟶ Uᵢ ⟶ X` is the inclusion of `U∞` in `X`**, independently
-of `i`. This is the compatibility that makes the gluing possible. -/
+of `i`. This is the compatibility that makes the gluing possible:
+
+```
+  U∞ ---homOfLE---> Vᵢ ---projRestrict i---> Uᵢ
+   |                                          |
+  isoOpensRange.inv                           ι
+   ↓                                          ↓
+  ⋂ⱼ Uⱼ ------------------ ι ---------------> X
+```
+-/
 lemma homOfLE_projRestrict_ι (i : ι) :
     (ChowGraph M).homOfLE (opensRange_toGraph_le_projPreimage M i) ≫
         projRestrict M i ≫ (U i).ι =
@@ -181,7 +209,16 @@ noncomputable def modificationMap : (⨆ i, projPreimage M i).toScheme ⟶ X :=
     (projRestrict_ι_over M) fun i j ↦ by
       rw [homOfLE_projRestrict_ι, homOfLE_projRestrict_ι]
 
-/-- **On `Vᵢ` the modification is the restriction `pᵢ|_{Vᵢ} : Vᵢ ⟶ Uᵢ ⊆ X`.** -/
+/-- **On `Vᵢ` the modification is the restriction `pᵢ|_{Vᵢ} : Vᵢ ⟶ Uᵢ ⊆ X`:**
+
+```
+  Vᵢ ---homOfLE---> X'
+   |                 |
+   | projRestrict i  | π
+   ↓                 ↓
+  Uᵢ ------ ι -----> X
+```
+-/
 @[reassoc (attr := simp)]
 lemma homOfLE_modificationMap (i : ι) :
     (ChowGraph M).homOfLE (le_iSup (projPreimage M) i) ≫ modificationMap M =
@@ -196,7 +233,16 @@ lemma modificationMap_over :
   Scheme.Opens.glueMorphismsOfDominant_comp (projPreimage M) (toGraph M).opensRange
     (opensRange_toGraph_le_projPreimage M) f (over M) _ _ _
 
-/-- **On `U∞` the modification is the inclusion of `U∞ = ⋂ i, Uᵢ` in `X`.** -/
+/-- **On `U∞` the modification is the inclusion of `U∞ = ⋂ i, Uᵢ` in `X`:**
+
+```
+  ⋂ᵢ Uᵢ --isoOpensRange--> U∞ ---homOfLE---> X'
+      \                                       |
+       `------------------ ι ----------------`| π
+                                               ↓
+                                               X
+```
+-/
 lemma toGraph_modificationMap :
     (toGraph M).isoOpensRange.hom ≫ (ChowGraph M).homOfLE (opensRange_toGraph_le_iSup M) ≫
       modificationMap M = (⨅ i, U i).ι := by
@@ -211,7 +257,9 @@ lemma toGraph_modificationMap :
 /-- **The modification is separated**, being separated over `S` since the graph is proper
 over `S`. -/
 instance isSeparated_modificationMap : IsSeparated (modificationMap M) :=
-  have : IsSeparated (modificationMap M ≫ f) := by rw [modificationMap_over]; infer_instance
+  have : IsSeparated (modificationMap M ≫ f) := by
+    rw [modificationMap_over]
+    infer_instance
   .of_comp (f := modificationMap M) (g := f)
 
 /-- `Vᵢ` is contained in `π⁻¹(Uᵢ)`, since on `Vᵢ` the modification is `pᵢ|_{Vᵢ}`, which takes
@@ -220,14 +268,21 @@ lemma le_preimage_modificationMap (i : ι) :
     (⨆ i, projPreimage M i).ι ⁻¹ᵁ projPreimage M i ≤ modificationMap M ⁻¹ᵁ U i := by
   rw [← Scheme.opensRange_homOfLE (le_iSup (projPreimage M) i)]
   rintro x ⟨y, rfl⟩
-  have h : (modificationMap M).base
-      (((ChowGraph M).homOfLE (le_iSup (projPreimage M) i)).base y) ∈ U i := by
-    rw [← Scheme.Hom.comp_apply, homOfLE_modificationMap, Scheme.Hom.comp_apply]
-    exact ((projRestrict M i).base y).2
-  exact h
+  rw [Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply, homOfLE_modificationMap,
+    Scheme.Hom.comp_apply]
+  exact ((projRestrict M i).base y).2
 
 /-- Under the identification of `Vᵢ` with an open subscheme of `X'`, the inclusion of `Vᵢ`
-in `π⁻¹(Uᵢ)` followed by `π|_{Uᵢ}` is the proper morphism `pᵢ|_{Vᵢ}`. -/
+in `π⁻¹(Uᵢ)` followed by `π|_{Uᵢ}` is the proper morphism `pᵢ|_{Vᵢ}`:
+
+```
+  Vᵢ --isoPreimageOfLE--> ι⁻¹(Vᵢ) --homOfLE--> π⁻¹(Uᵢ)
+    \                                            |
+     `--------- projRestrict i ------------------`| π|_{Uᵢ}
+                                                  ↓
+                                                  Uᵢ
+```
+-/
 lemma isoPreimageOfLE_hom_homOfLE_morphismRestrict (i : ι) :
     (Scheme.Opens.isoPreimageOfLE (le_iSup (projPreimage M) i)).hom ≫
       (⨆ i, projPreimage M i).toScheme.homOfLE (le_preimage_modificationMap M i) ≫
@@ -263,7 +318,7 @@ theorem preimage_modificationMap (i : ι) :
 /-- **The modification is proper over each member of the family.** -/
 instance isProper_morphismRestrict_modificationMap (i : ι) :
     IsProper (modificationMap M ∣_ U i) := by
-  have hiso : IsIso ((⨆ i, projPreimage M i).toScheme.homOfLE
+  have : IsIso ((⨆ i, projPreimage M i).toScheme.homOfLE
       (le_preimage_modificationMap M i)) :=
     inferInstanceAs (IsIso ((⨆ i, projPreimage M i).toScheme.isoOfEq
       (preimage_modificationMap M i).symm).hom)
@@ -314,11 +369,9 @@ lemma le_preimage_iInf_modificationMap :
       modificationMap M ⁻¹ᵁ ⨅ i, U i := by
   rw [← Scheme.opensRange_homOfLE (opensRange_toGraph_le_iSup M)]
   rintro x ⟨y, rfl⟩
-  have h : (modificationMap M).base
-      (((ChowGraph M).homOfLE (opensRange_toGraph_le_iSup M)).base y) ∈ ⨅ i, U i := by
-    rw [← Scheme.Hom.comp_apply, homOfLE_iSup_modificationMap, Scheme.Hom.comp_apply]
-    exact ((toGraph M).isoOpensRange.inv.base y).2
-  exact h
+  rw [Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply, homOfLE_iSup_modificationMap,
+    Scheme.Hom.comp_apply]
+  exact ((toGraph M).isoOpensRange.inv.base y).2
 
 /-- Under the identification of `U∞` with an open subscheme of `X'`, the inclusion of `U∞` in
 `π⁻¹(⋂ i, Uᵢ)` followed by `π|_{⋂ i, Uᵢ}` is an isomorphism: it is inverse to the
@@ -359,7 +412,7 @@ theorem preimage_iInf_modificationMap :
 @[stacks 0200 "step 6 of the proof"]
 instance isIso_morphismRestrict_iInf_modificationMap :
     IsIso (modificationMap M ∣_ ⨅ i, U i) := by
-  have hiso : IsIso ((⨆ i, projPreimage M i).toScheme.homOfLE
+  have : IsIso ((⨆ i, projPreimage M i).toScheme.homOfLE
       (le_preimage_iInf_modificationMap M)) :=
     inferInstanceAs (IsIso ((⨆ i, projPreimage M i).toScheme.isoOfEq
       (preimage_iInf_modificationMap M).symm).hom)

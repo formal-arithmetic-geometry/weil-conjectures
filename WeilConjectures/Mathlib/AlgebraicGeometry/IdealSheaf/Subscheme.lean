@@ -152,18 +152,18 @@ lemma opensRange_toImage : U.ι.toImage.opensRange = U.ι.imageι ⁻¹ᵁ U := 
   refine TopologicalSpace.Opens.ext ?_
   have h : (U : Set X) = U.ι.imageι '' Set.range U.ι.toImage := by
     rw [← Set.range_comp, ← TopCat.coe_comp, ← Scheme.Hom.comp_base, U.ι.toImage_imageι, range_ι]
-  change Set.range U.ι.toImage = U.ι.imageι ⁻¹' (U : Set X)
-  rw [h, Set.preimage_image_eq _ U.ι.imageι.isClosedEmbedding.injective]
+  rw [Scheme.Hom.coe_opensRange, Scheme.Hom.coe_preimage, h,
+    Set.preimage_image_eq _ U.ι.imageι.isClosedEmbedding.injective]
 
 /-- The scheme-theoretic closure `X* ⟶ X` of an open `U ⊆ X` is an isomorphism over `U`.
 (blueprint: `lem:chow-scheme-theoretic-closure` (1)) -/
 instance isIso_morphismRestrict_imageι : IsIso (U.ι.imageι ∣_ U) := by
   -- `U.ι.toImage` corestricts to an isomorphism `e : U ≅ X* ∩ U`, ...
-  set e := U.ι.toImage.isoOpensRange ≪≫ U.ι.image.isoOfEq (opensRange_toImage U) with he
+  let e := U.ι.toImage.isoOpensRange ≪≫ U.ι.image.isoOfEq (opensRange_toImage U)
   -- ... and `e` is a section of the restriction `X* ∩ U ⟶ U` of `X* ⟶ X`.
   have hcomp : e.hom ≫ (U.ι.imageι ∣_ U) = 𝟙 _ := by
-    rw [← cancel_mono U.ι, Category.assoc, morphismRestrict_ι, Category.id_comp, he]
-    simp only [Iso.trans_hom, Category.assoc, Scheme.isoOfEq_hom_ι_assoc,
+    rw [← cancel_mono U.ι, Category.assoc, morphismRestrict_ι, Category.id_comp]
+    simp only [e, Iso.trans_hom, Category.assoc, Scheme.isoOfEq_hom_ι_assoc,
       Scheme.Hom.isoOpensRange_hom_ι_assoc, Scheme.Hom.toImage_imageι]
   have : IsIso (e.hom ≫ (U.ι.imageι ∣_ U)) := hcomp ▸ inferInstance
   exact IsIso.of_isIso_comp_left e.hom _

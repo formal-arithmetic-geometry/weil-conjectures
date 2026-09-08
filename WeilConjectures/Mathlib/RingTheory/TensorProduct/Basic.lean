@@ -32,9 +32,8 @@ theorem closure_range_tmul_eq_top {ιA ιB : Type*} {a : ιA → A} {b : ιB →
     (ha : Subring.closure (Set.range a) = ⊤) (hb : Subring.closure (Set.range b) = ⊤)
     {ra : ιA} (hra : a ra = 1) {rb : ιB} (hrb : b rb = 1) :
     Subring.closure (Set.range fun p : ιA × ιB ↦ a p.1 ⊗ₜ[R] b p.2) = ⊤ := by
-  set S := Subring.closure (Set.range fun p : ιA × ιB ↦ a p.1 ⊗ₜ[R] b p.2) with hS
-  have hleft : ∀ x : A, x ⊗ₜ[R] (1 : B) ∈ S := by
-    intro x
+  let S := Subring.closure (Set.range fun p : ιA × ιB ↦ a p.1 ⊗ₜ[R] b p.2)
+  have hleft (x : A) : x ⊗ₜ[R] (1 : B) ∈ S := by
     have hx : x ⊗ₜ[R] (1 : B) ∈ Subring.map (includeLeftRingHom (R := R) (A := A) (B := B))
         (Subring.closure (Set.range a)) := by
       rw [ha]
@@ -43,8 +42,7 @@ theorem closure_range_tmul_eq_top {ιA ιB : Type*} {a : ιA → A} {b : ιB →
     refine Subring.closure_le.mpr ?_ hx
     rintro _ ⟨_, ⟨i, rfl⟩, rfl⟩
     exact Subring.subset_closure ⟨(i, rb), by simp [hrb]⟩
-  have hright : ∀ y : B, (1 : A) ⊗ₜ[R] y ∈ S := by
-    intro y
+  have hright (y : B) : (1 : A) ⊗ₜ[R] y ∈ S := by
     have hy : (1 : A) ⊗ₜ[R] y ∈ Subring.map
         (includeRight (R := R) (A := A) (B := B)).toRingHom (Subring.closure (Set.range b)) := by
       rw [hb]
@@ -53,16 +51,15 @@ theorem closure_range_tmul_eq_top {ιA ιB : Type*} {a : ιA → A} {b : ιB →
     refine Subring.closure_le.mpr ?_ hy
     rintro _ ⟨_, ⟨i, rfl⟩, rfl⟩
     exact Subring.subset_closure ⟨(ra, i), by simp [hra]⟩
-  have key : ∀ z : A ⊗[R] B, z ∈ S := by
-    intro z
-    induction z with
-    | zero => exact zero_mem _
-    | tmul x y =>
-        have hxy : x ⊗ₜ[R] y = (x ⊗ₜ[R] (1 : B)) * ((1 : A) ⊗ₜ[R] y) := by
-          rw [Algebra.TensorProduct.tmul_mul_tmul]; simp
-        rw [hxy]
-        exact mul_mem (hleft x) (hright y)
-    | add x y hx hy => exact add_mem hx hy
-  exact le_antisymm le_top fun z _ ↦ key z
+  refine (Subring.eq_top_iff' _).mpr fun z ↦ ?_
+  induction z with
+  | zero => exact zero_mem _
+  | tmul x y =>
+      have hxy : x ⊗ₜ[R] y = (x ⊗ₜ[R] (1 : B)) * ((1 : A) ⊗ₜ[R] y) := by
+        rw [Algebra.TensorProduct.tmul_mul_tmul]
+        simp
+      rw [hxy]
+      exact mul_mem (hleft x) (hright y)
+  | add x y hx hy => exact add_mem hx hy
 
 end Algebra.TensorProduct

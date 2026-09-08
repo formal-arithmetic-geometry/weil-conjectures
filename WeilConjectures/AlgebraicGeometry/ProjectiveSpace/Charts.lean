@@ -76,29 +76,35 @@ lemma projIntBasicOpenIso_hom :
           (homogeneousLocalizationAwayXEquiv (ULift.{u} ℤ) i).symm.toRingHom) :=
   rfl
 
-/-- `ℙ(n; S)` is the base change of the integral model `ℙⁿ_ℤ` along `S ⟶ Spec ℤ`. -/
-lemma isPullback_toProjInt :
-    IsPullback (toProjInt n S) (ℙ(n; S) ↘ S)
-      (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ))) (terminal.from S) :=
-  (IsPullback.of_hasPullback _ _).flip
-
 /-- The standard open `D₊(Tᵢ)` of `ℙ(n; S)` is the base change of the standard open `D₊(Tᵢ)`
-of the integral model `ℙⁿ_ℤ`. -/
+of the integral model `ℙⁿ_ℤ`:
+
+```
+  D₊(Tᵢ) ⊆ ℙ(n; S) ---> D₊(Tᵢ) ⊆ ℙⁿ_ℤ
+        |                     |
+        ↓                     ↓
+        S -------------> ⊤_ Scheme
+```
+-/
 lemma isPullback_standardOpen :
     IsPullback ((toProjInt n S).resLE _ (standardOpen n S i) le_rfl)
       ((standardOpen n S i).ι ≫ ℙ(n; S) ↘ S)
       (terminal.from _) (terminal.from S) := by
   have h := (isPullback_morphismRestrict (toProjInt n S)
     (Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i))).paste_vert
-      (isPullback_toProjInt n S)
+      (isPullback_over_toProjInt n S).flip
   have hr : (toProjInt n S).resLE
       (Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i))
         (standardOpen n S i) le_rfl =
       toProjInt n S ∣_ Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i) :=
     Scheme.Hom.resLE_eq_morphismRestrict ..
   exact h.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) (Iso.refl _)
-    (by rw [Iso.refl_hom, Category.comp_id]; exact hr.symm.trans (Category.id_comp _).symm)
-    (by rw [Iso.refl_hom, Category.comp_id]; exact (Category.id_comp _).symm)
+    (by
+      rw [Iso.refl_hom, Category.comp_id]
+      exact hr.symm.trans (Category.id_comp _).symm)
+    (by
+      rw [Iso.refl_hom, Category.comp_id]
+      exact (Category.id_comp _).symm)
     (terminal.hom_ext _ _) (terminal.hom_ext _ _)
 
 /-- The variant of `isPullback_standardOpen` where the integral chart is read as the affine
@@ -138,7 +144,16 @@ lemma standardOpenIso_inv_ι_over :
       𝔸({j : n // j ≠ i}; S) ↘ S :=
   IsPullback.isoIsPullback_inv_snd _ _ _ _
 
-/-- The chart isomorphism is compatible with the charts of the integral model. -/
+/-- The chart isomorphism is compatible with the charts of the integral model:
+
+```
+  D₊(Tᵢ) ⊆ ℙ(n; S) --standardOpenIso--> 𝔸({j // j ≠ i}; S)
+        |                                       |
+    toProjInt|_{D₊(Tᵢ)}                    toSpecMvPoly
+        ↓                                       ↓
+  D₊(Tᵢ) ⊆ ℙⁿ_ℤ --projIntBasicOpenIso--> Spec ℤ[Yⱼ : j ≠ i]
+```
+-/
 @[reassoc (attr := simp)]
 lemma standardOpenIso_hom_toSpecMvPoly :
     (standardOpenIso n S i).hom ≫ AffineSpace.toSpecMvPoly {j : n // j ≠ i} S =
@@ -149,7 +164,8 @@ section Sections
 
 variable {X : Scheme.{u}} (g : X ⟶ S) (s : n → Γ(X, ⊤)) (hs : Ideal.span (Set.range s) = ⊤)
 
-variable {n S} in
+variable {n S}
+
 /-- Evaluating the homogeneous coordinates at the sections `s` maps powers of `Tᵢ` to powers
 of `s i`. -/
 lemma powers_X_le_comap_powers (i : n) :
@@ -158,7 +174,6 @@ lemma powers_X_le_comap_powers (i : n) :
   rw [← Submonoid.map_le_iff_le_comap, Submonoid.map_powers]
   simp
 
-variable {n S} in
 /-- The ring map `ℤ[Yⱼ : j ≠ i] ⟶ Γ(X, ⊤)_{s i}` sending the variable `Yⱼ` to the quotient
 `s j / s i`: the degree-zero part of `evalSections s` localized away from `Tᵢ`. This is the map
 on coordinate rings underlying the computation rule below. -/
@@ -172,24 +187,20 @@ def evalSectionsAway (i : n) :
           (MvPolynomial.X i))
           (Localization.Away (MvPolynomial.X i : MvPolynomial n (ULift.{u} ℤ)))))
 
-variable {n S} in
 @[simp]
 lemma evalSectionsAway_X (i : n) (j : {j : n // j ≠ i}) :
     evalSectionsAway s i (MvPolynomial.X j) =
       IsLocalization.mk' (Localization.Away (s i)) (s j.1)
         (⟨s i, Submonoid.mem_powers _⟩ : Submonoid.powers (s i)) := by
-  rw [evalSectionsAway, CommRingCat.comp_apply]
-  change ((IsLocalization.map (Localization.Away (s i)) (evalSections s)
-      (powers_X_le_comap_powers s i)).comp (algebraMap _ _))
-      ((homogeneousLocalizationAwayXEquiv (ULift.{u} ℤ) i).symm (MvPolynomial.X j)) = _
-  rw [homogeneousLocalizationAwayXEquiv_symm_X, RingHom.comp_apply,
+  rw [evalSectionsAway, CommRingCat.comp_apply, CommRingCat.ofHom_apply, CommRingCat.ofHom_apply,
+    RingEquiv.toRingHom_eq_coe, RingHom.coe_coe, AlgEquiv.coe_ringEquiv,
+    homogeneousLocalizationAwayXEquiv_symm_X, RingHom.comp_apply,
     HomogeneousLocalization.algebraMap_apply, HomogeneousLocalization.Away.val_mk,
     Localization.mk_eq_mk', IsLocalization.map_mk']
   congr 1
   · exact evalSections_X s j.1
   · exact Subtype.ext (by simp)
 
-variable {n S} in
 /-- Read through the chart isomorphism, the morphism `X_{s i} ⟶ 𝔸({j // j ≠ i}; S)` induced
 by `homOfSections g s hs` is `Spec` of the map `Yⱼ ↦ s j / s i` on coordinate rings. -/
 lemma homOfSections_resLE_standardOpenIso_hom_toSpecMvPoly (i : n) :
@@ -208,7 +219,6 @@ lemma homOfSections_resLE_standardOpenIso_hom_toSpecMvPoly (i : n) :
           (powers_X_le_comap_powers s i)).trans
         (Category.assoc _ _ _).symm)).trans (Category.assoc _ _ _))
 
-variable {n S} in
 /-- **The computation rule for the standard charts**: for a morphism `g : X ⟶ S` and a family
 `s : n → Γ(X, ⊤)` of global sections generating the unit ideal, the morphism
 `X_{s i} ⟶ 𝔸({j // j ≠ i}; S)` obtained by restricting `homOfSections g s hs` to the standard
@@ -222,9 +232,7 @@ theorem homOfSections_resLE_standardOpenIso_hom (i : n) :
   refine AffineSpace.hom_ext ?_ fun j ↦ ?_
   · rw [Category.assoc, standardOpenIso_hom_over, homOfSections_resLE_ι_over,
       AffineSpace.homOfVector_over]
-  · rw [AffineSpace.homOfVector_appTop_coord,
-      show AffineSpace.coord S j =
-        AffineSpace.toSpecMvPolyIntEquiv _ (AffineSpace.toSpecMvPoly _ S) j from rfl,
+  · rw [AffineSpace.homOfVector_appTop_coord, AffineSpace.coord_eq_toSpecMvPolyIntEquiv,
       ← AffineSpace.toSpecMvPolyIntEquiv_comp,
       homOfSections_resLE_standardOpenIso_hom_toSpecMvPoly g s hs i,
       AffineSpace.toSpecMvPolyIntEquiv_comp_SpecMap, ← Scheme.awayToBasicOpen_apply,

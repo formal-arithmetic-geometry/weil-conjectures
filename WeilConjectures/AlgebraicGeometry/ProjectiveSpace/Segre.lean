@@ -178,8 +178,18 @@ section Compatibility
 variable (i i' : n) (j j' : m)
 
 /-- The chart morphisms `segreChartHom` agree on the overlap of two charts of the standard
-cover of `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ`: the two chart morphisms differ by rescaling the homogeneous
-coordinates of `ℙ^(n×m)_ℤ` by the unit `(Xᵢ / Xᵢ') · (Yⱼ / Yⱼ')`. -/
+cover of `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ`:
+
+```
+  Uᵢⱼ ∩ Uᵢ'ⱼ' --fst--> Uᵢⱼ
+        |                |
+       snd    segreChartHom i j
+        ↓                ↓
+     Uᵢ'ⱼ' --------> ℙ^(n×m)_ℤ
+```
+
+The two chart morphisms differ by rescaling the homogeneous coordinates of `ℙ^(n×m)_ℤ` by the
+unit `(Xᵢ / Xᵢ') · (Yⱼ / Yⱼ')`. -/
 lemma segreChartHom_compatible :
     pullback.fst ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j')) ≫ segreChartHom i j =
       pullback.snd ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j')) ≫
@@ -192,8 +202,8 @@ lemma segreChartHom_compatible :
       homogeneousSubmodule n (ULift.{u} ℤ) (1 • 1) := fun k ↦ by simpa using hXi k
   have hXj1 : ∀ l : m, (MvPolynomial.X l : MvPolynomial m (ULift.{u} ℤ)) ∈
       homogeneousSubmodule m (ULift.{u} ℤ) (1 • 1) := fun l ↦ by simpa using hXj l
-  set p₁ := pullback.fst ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j'))
-  set p₂ := pullback.snd ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j'))
+  let p₁ := pullback.fst ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j'))
+  let p₂ := pullback.snd ((segreCover n m).f (i, j)) ((segreCover n m).f (i', j'))
   have hcond : p₁ ≫ (segreCover n m).f (i, j) = p₂ ≫ (segreCover n m).f (i', j') :=
     pullback.condition
   have ha : (p₁ ≫ segreCoverFst i j) ≫ awayι _ (MvPolynomial.X i) (hXi i) Nat.one_pos =
@@ -276,7 +286,16 @@ lemma segreCover_f_comp_segre (i : n) (j : m) :
 section ClosedImmersion
 
 /-- The `(i, j)`-chart `D₊(Xᵢ) ×_ℤ D₊(Yⱼ)` of `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ` is the fibre product of the two
-affine charts over the terminal scheme. -/
+affine charts over the terminal scheme:
+
+```
+  Uᵢⱼ --segreCoverSnd--> Spec (ℤ[Y]_{Yⱼ})₀
+   |                            |
+  segreCoverFst                 |
+   ↓                            ↓
+  Spec (ℤ[X]_{Xᵢ})₀ -------> ⊤_ Scheme
+```
+-/
 lemma isPullback_segreCoverFst_segreCoverSnd (i : n) (j : m) :
     IsPullback (segreCoverFst i j) (segreCoverSnd i j)
       (terminal.from (Spec (.of <| Away (homogeneousSubmodule n (ULift.{u} ℤ))
@@ -299,7 +318,9 @@ instance isAffine_segreCover_X (i : n) (j : m) : IsAffine ((segreCover n m).X (i
 `D₊(Xᵢ) ×_ℤ D₊(Yⱼ)` are generated as a ring by the products `(Xₖ / Xᵢ) · (Yₗ / Yⱼ)`. -/
 lemma closure_range_segreChartSection_eq_top (i : n) (j : m) :
     Subring.closure (Set.range (segreChartSection i j)) = ⊤ := by
-  have hR : Function.Surjective ((↑) : ℤ → ULift.{u} ℤ) := fun r ↦ ⟨r.down, by ext; simp⟩
+  have hR : Function.Surjective ((↑) : ℤ → ULift.{u} ℤ) := fun r ↦ ⟨r.down, by
+    ext
+    simp⟩
   exact closure_range_mul_appTop_eq_top (isPullback_segreCoverFst_segreCoverSnd i j)
     (MvPolynomial.closure_range_awayXRatio_eq_top _ hR i)
     (MvPolynomial.closure_range_awayXRatio_eq_top _ hR j)
@@ -486,14 +507,22 @@ lemma prodToProjInt_snd :
   pullback.lift_snd _ _ _
 
 /-- `ℙ(n; S) ×_S ℙ(m; S)` is the base change of `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ` along the structure morphism
-of `S`. -/
+of `S`:
+
+```
+  ℙ(n; S) ×_S ℙ(m; S) --prodToProjInt--> ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ
+            |                                  |
+            ↓                                  ↓
+            S --------------------------> ⊤_ Scheme
+```
+-/
 lemma isPullback_prodToProjInt :
     IsPullback (pullback.fst (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) ≫ (ℙ(n; S) ↘ S))
       (prodToProjInt n m S) (terminal.from S)
       (terminal.from (pullback
         (terminal.from (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)))
         (terminal.from (Proj.projectiveSpaceOverAffine m (ULift.{u} ℤ))))) := by
-  have h := IsPullback.baseChange_pullback' (isPullback_over_toProjInt n S)
+  have h := IsPullback.baseChange_pullback (isPullback_over_toProjInt n S)
     (isPullback_over_toProjInt m S)
     (IsPullback.of_hasPullback (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S))
     (IsPullback.of_hasPullback _ _) (prodToProjInt_fst n m S) (prodToProjInt_snd n m S)
@@ -523,7 +552,16 @@ lemma segre_toProjInt :
   pullback.lift_snd _ _ _
 
 /-- **The relative Segre morphism is the base change of the Segre morphism of the integral
-models** along the map `ℙ(n × m; S) ⟶ ℙ^(n×m)_ℤ`. -/
+models** along the map `ℙ(n × m; S) ⟶ ℙ^(n×m)_ℤ`:
+
+```
+  ℙ(n; S) ×_S ℙ(m; S) --prodToProjInt--> ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ
+            |                                  |
+          segre                            Proj.segre
+            ↓                                  ↓
+       ℙ(n × m; S) ------toProjInt------> ℙ^(n×m)_ℤ
+```
+-/
 lemma isPullback_segre :
     IsPullback (prodToProjInt n m S) (segre n m S) (Proj.segre n m) (toProjInt (n × m) S) := by
   refine IsPullback.of_bot ?_ (segre_toProjInt n m S).symm
@@ -537,13 +575,5 @@ morphism of the integral models.
 (blueprint: `lem:chow-segre`, binary case) -/
 instance isClosedImmersion_segre : IsClosedImmersion (segre n m S) :=
   MorphismProperty.of_isPullback (isPullback_segre n m S) inferInstance
-
-/-- For finite index types, the projection `ℙ(n; S) ×_S ℙ(m; S) ⟶ S` is proper: it factors as
-the relative Segre closed immersion followed by the proper structure morphism of
-`ℙ(n × m; S)`. -/
-instance isProper_pullback_fst_comp_over [Finite n] [Finite m] :
-    IsProper (pullback.fst (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) ≫ (ℙ(n; S) ↘ S)) := by
-  have : IsProper (segre n m S ≫ (ℙ(n × m; S) ↘ S)) := inferInstance
-  rwa [segre_over] at this
 
 end AlgebraicGeometry.ProjectiveSpace

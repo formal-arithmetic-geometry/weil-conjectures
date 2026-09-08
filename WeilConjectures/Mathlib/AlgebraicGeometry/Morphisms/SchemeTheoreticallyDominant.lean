@@ -204,7 +204,16 @@ lemma Scheme.Hom.image.isPullback_imageι_of_comp (f' : (pullback.snd g q).image
 
 /-- Flat base change for scheme-theoretic images, in the form of a cartesian square: the
 closed immersion of the scheme-theoretic image of the base change is the base change of
-the closed immersion of the scheme-theoretic image of `g`. -/
+the closed immersion of the scheme-theoretic image of `g`:
+
+```
+  im (X ×_Y Y' ⟶ Y') --------> im (X ⟶ Y)
+          |                         |
+       imageι                    imageι
+          ↓                         ↓
+          Y' ---------- q ---------> Y
+```
+-/
 lemma Scheme.Hom.image.isPullback_imageι :
     IsPullback (pullback.snd g q).imageι ((pullbackIso g q).hom ≫ pullback.snd q g.imageι)
       q g.imageι :=
@@ -287,7 +296,9 @@ theorem ext_of_isSchemeTheoreticallyDominant {V T Y S : Scheme.{u}} (g : Y ⟶ S
   -- base change of the diagonal of `g` along `p`.
   set p : T ⟶ pullback g g := pullback.lift a b h with hp
   set z : pullback p (pullback.diagonal g) ⟶ T := pullback.fst p (pullback.diagonal g) with hz
-  have : IsClosedImmersion z := by rw [hz]; infer_instance
+  have : IsClosedImmersion z := by
+    rw [hz]
+    infer_instance
   -- `a` and `b` agree after composing with `z`, both projections being the second
   -- projection of the defining square.
   have hza : z ≫ a = pullback.snd p (pullback.diagonal g) := by
@@ -321,14 +332,13 @@ variable {X Y Z : Scheme.{u}}
 
 /-- Precomposing with a quasi-compact scheme-theoretically dominant morphism does not
 change the kernel: if `d : X ⟶ Y` is scheme-theoretically dominant and quasi-compact,
-then `(d ≫ h).ker = h.ker` for every `h : Y ⟶ Z`.
-
-Only the inequality `(d ≫ h).ker ≤ h.ker` is content, the other one being
-`AlgebraicGeometry.Scheme.Hom.le_ker_comp`: sections of `𝒪_Z` killed by `d ≫ h` are
-already killed by `h`, since each `d.app` is injective. -/
+then `(d ≫ h).ker = h.ker` for every `h : Y ⟶ Z`. -/
 lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant (d : X ⟶ Y) (h : Y ⟶ Z)
     [IsSchemeTheoreticallyDominant d] [QuasiCompact d] :
     (d ≫ h).ker = h.ker := by
+  -- only the inequality `(d ≫ h).ker ≤ h.ker` is content, the other one being
+  -- `AlgebraicGeometry.Scheme.Hom.le_ker_comp`: sections of `𝒪_Z` killed by `d ≫ h` are
+  -- already killed by `h`, since each `d.app` is injective
   have key (U : Z.affineOpens) :
       RingHom.ker ((d ≫ h).app U).hom = RingHom.ker ((h.app U).hom) := by
     rw [Scheme.Hom.comp_app, CommRingCat.hom_comp,

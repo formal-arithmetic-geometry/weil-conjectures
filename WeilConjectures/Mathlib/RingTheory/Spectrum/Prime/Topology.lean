@@ -42,7 +42,7 @@ corresponding prime ideal is a minimal prime of `R`. -/
 @[stacks 00ES]
 theorem mem_genericPoints_iff {p : PrimeSpectrum R} :
     p ∈ genericPoints (PrimeSpectrum R) ↔ p.asIdeal ∈ minimalPrimes R := by
-  change closure ({p} : Set (PrimeSpectrum R)) ∈ irreducibleComponents (PrimeSpectrum R) ↔ _
-  rw [closure_singleton, zeroLocus_ideal_mem_irreducibleComponents, p.2.radical]
+  rw [genericPoints, Set.mem_ofPred_eq, closure_singleton,
+    zeroLocus_ideal_mem_irreducibleComponents, p.2.radical]
 
 end PrimeSpectrum

@@ -143,13 +143,13 @@ assemble these into a `Data f`, transporting the modification along the closed i
 @[stacks 0200]
 theorem nonempty_data : Nonempty (Data f) := by
   -- Steps 1 and 2: a reduction of `f` with a nonempty finite affine open cover.
-  obtain ⟨R, hn⟩ := exists_chowReduction_n_ne_zero f
-  have : Nonempty (Fin R.n) := ⟨⟨0, Nat.pos_of_ne_zero hn⟩⟩
+  obtain ⟨R, hι⟩ := exists_chowReduction_nonempty_index f
+  have : Nonempty R.ι := hι
   have : IsLocallyNoetherian R.Y := LocallyOfFiniteType.isLocallyNoetherian (R.c ≫ f)
   have : CompactSpace R.Y := QuasiCompact.compactSpace_of_compactSpace (R.c ≫ f)
   have : IsNoetherian R.Y := ⟨⟩
   -- Step 3: a proper closed model of each member of the cover.
-  have M : ∀ i, ProperClosedModel ((R.U i).ι ≫ R.c ≫ f) := fun i ↦
+  have M (i) : ProperClosedModel ((R.U i).ι ≫ R.c ≫ f) :=
     have : IsAffine (R.U i) := R.isAffineOpen_U i
     have : NoetherianSpace (R.U i) :=
       inferInstanceAs (NoetherianSpace ((R.U i : R.Y.Opens) : Set R.Y))
@@ -172,7 +172,7 @@ theorem nonempty_data : Nonempty (Data f) := by
   -- Step 6: the modification is an isomorphism over `⋂ i, R.U i`, which is the preimage of the
   -- dense open `R.V` of `X` along the closed immersion `R.c`.
   · refine ⟨R.V, R.dense_V, ?_⟩
-    have hcV : IsIso (ChowGraph.modificationMap M ∣_ R.c ⁻¹ᵁ R.V) := by
+    have : IsIso (ChowGraph.modificationMap M ∣_ R.c ⁻¹ᵁ R.V) := by
       rw [R.preimage_V]
       infer_instance
     rw [morphismRestrict_comp]
@@ -263,14 +263,13 @@ modification into projective space is a *closed* immersion. Together with
 `AlgebraicGeometry.ChowModification.isProper_modificationMap` and
 `AlgebraicGeometry.ChowModification.surjective_modificationMap` this says that a proper scheme
 over a Noetherian base is dominated by a projective one.
-
-Indeed, `toProjectiveSpace f` composed with the structure morphism of `ℙ(index f; S)` is the
-proper morphism `modificationMap f ≫ f`, and the structure morphism is separated, so
-`toProjectiveSpace f` is itself proper, hence universally closed.
 (blueprint: `cor:chow-lemma-proper`) -/
 @[stacks 0202]
 instance isClosedImmersion_toProjectiveSpace {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
     [IsProper f] : IsClosedImmersion (toProjectiveSpace f) := by
+  -- `toProjectiveSpace f` composed with the structure morphism of `ℙ(index f; S)` is the proper
+  -- morphism `modificationMap f ≫ f`, and the structure morphism is separated, so
+  -- `toProjectiveSpace f` is itself proper, hence universally closed
   have : IsProper (toProjectiveSpace f ≫ ℙ(index f; S) ↘ S) := by
     rw [toProjectiveSpace_over]
     infer_instance

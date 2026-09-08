@@ -50,6 +50,8 @@ space `Proj R[Xⱼ : j ∈ σ]` is an affine space over `R`.
   `(R[Xⱼ]_{Xᵢ})₀`, an affine coordinate of the standard chart `D₊(Xᵢ)`.
 - `MvPolynomial.closure_range_awayXRatio_eq_top` — over a ring of integers, `(R[Xⱼ]_{Xᵢ})₀` is
   generated as a ring by the ratios `Xₖ / Xᵢ`.
+- `MvPolynomial.bijective_fromZeroRingHom_X` — in one variable, the degree-zero part of
+  `R[X][X⁻¹]` is again `R`.
 
 ## Implementation notes
 
@@ -222,10 +224,9 @@ private lemma valToAwayX_comp_dehomogenizeX :
           algebraMap (MvPolynomial σ R) (Localization.Away (X i : MvPolynomial σ R)) (X j)) := by
   apply ringHom_ext
   · intro r
-    change valToAwayX R i (dehomogenizeX R i (C r)) = _
     simp [valToAwayX, toAwayX, dehomogenizeX, Localization.mk_one_eq_algebraMap]
   · intro j
-    change valToAwayX R i (dehomogenizeX R i (X j)) = _
+    simp only [RingHom.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe]
     by_cases h : j = i
     · subst h
       simp [valToAwayX, IsLocalization.Away.invSelf]
@@ -284,7 +285,8 @@ private lemma ofAwayXRingHom_awayMk (n : ℕ) (a : MvPolynomial σ R)
 
 omit [DecidableEq σ] in
 /-- The structure map of `(R[Xⱼ]_{Xᵢ})₀` as an `R`-algebra is the class of `C r / Xᵢ ^ 0`. -/
-private lemma awayMk_zero_C (r : R) (h) :
+private lemma awayMk_zero_C (r : R) (h : (C r : MvPolynomial σ R) ∈
+    homogeneousSubmodule σ R (0 • 1)) :
     HomogeneousLocalization.Away.mk (homogeneousSubmodule σ R)
         (X_mem_homogeneousSubmodule_one R i) 0 (C r) h =
       algebraMap R (HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X i)) r := by
@@ -293,15 +295,22 @@ private lemma awayMk_zero_C (r : R) (h) :
   simp only [algebraMap_eq, pow_zero]
   rfl
 
+private lemma ofAwayXRingHom_algebraMap (r : R) :
+    ofAwayXRingHom R i
+        (algebraMap R (HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X i)) r) =
+      algebraMap R (MvPolynomial {j : σ // j ≠ i} R) r := by
+  rw [← awayMk_zero_C R i r (by simp), ofAwayXRingHom_awayMk]
+  simp [dehomogenizeX, algebraMap_eq]
+
 /-- `ofAwayXRingHom` as a map of `R`-algebras. -/
 private noncomputable def ofAwayX :
     HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X i) →ₐ[R]
-      MvPolynomial {j : σ // j ≠ i} R where
-  __ := ofAwayXRingHom R i
-  commutes' r := by
-    change ofAwayXRingHom R i (algebraMap R _ r) = _
-    rw [← awayMk_zero_C R i r (by simp), ofAwayXRingHom_awayMk]
-    simp [dehomogenizeX, algebraMap_eq]
+      MvPolynomial {j : σ // j ≠ i} R :=
+  AlgHom.mk (ofAwayXRingHom R i) (ofAwayXRingHom_algebraMap R i)
+
+private lemma ofAwayX_apply (z : HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X i)) :
+    ofAwayX R i z = ofAwayXRingHom R i z :=
+  rfl
 
 /-- **The standard affine chart of projective space is an affine space**, algebraically: the
 degree-zero part of the localization of the polynomial ring `R[Xⱼ : j ∈ σ]`, graded by total
@@ -314,15 +323,14 @@ noncomputable def homogeneousLocalizationAwayXEquiv :
   AlgEquiv.ofAlgHom (ofAwayX R i) (toAwayX R i)
     (by
       refine algHom_ext fun j ↦ ?_
-      change ofAwayXRingHom R i (toAwayX R i (X j)) = _
-      rw [toAwayX, aeval_X, ofAwayXRingHom_awayMk, dehomogenizeX_X_of_ne R i j.2]
+      rw [AlgHom.comp_apply, ofAwayX_apply, toAwayX, aeval_X, ofAwayXRingHom_awayMk,
+        dehomogenizeX_X_of_ne R i j.2]
       simp)
     (by
       refine AlgHom.ext fun z ↦ ?_
       obtain ⟨n, a, ha, rfl⟩ :=
         HomogeneousLocalization.Away.mk_surjective _ (X_mem_homogeneousSubmodule_one R i) z
-      change toAwayX R i (ofAwayXRingHom R i _) = _
-      rw [ofAwayXRingHom_awayMk, toAwayX_dehomogenizeX]
+      rw [AlgHom.comp_apply, ofAwayX_apply, ofAwayXRingHom_awayMk, toAwayX_dehomogenizeX]
       rfl)
 
 /-- The isomorphism sends the class of `a / Xᵢ ^ n`, for `a` a form of degree `n`, to the
@@ -345,13 +353,15 @@ lemma homogeneousLocalizationAwayXEquiv_symm_X (j : {j : σ // j ≠ i}) :
     dehomogenizeX_X_of_ne R i j.2]
 
 /-- The class of `Xᵢ / Xᵢ` is sent to `1`. -/
-lemma homogeneousLocalizationAwayXEquiv_awayMk_X_self (h) :
+lemma homogeneousLocalizationAwayXEquiv_awayMk_X_self
+    (h : (X i : MvPolynomial σ R) ∈ homogeneousSubmodule σ R (1 • 1)) :
     homogeneousLocalizationAwayXEquiv R i
         (HomogeneousLocalization.Away.mk _ (X_mem_homogeneousSubmodule_one R i) 1 (X i) h) = 1 := by
   rw [homogeneousLocalizationAwayXEquiv_awayMk, dehomogenizeX_X_self]
 
 /-- The class of `Xⱼ / Xᵢ` is sent to `Yⱼ`, for `j ≠ i`. -/
-lemma homogeneousLocalizationAwayXEquiv_awayMk_X_of_ne {j : σ} (hj : j ≠ i) (h) :
+lemma homogeneousLocalizationAwayXEquiv_awayMk_X_of_ne {j : σ} (hj : j ≠ i)
+    (h : (X j : MvPolynomial σ R) ∈ homogeneousSubmodule σ R (1 • 1)) :
     homogeneousLocalizationAwayXEquiv R i
         (HomogeneousLocalization.Away.mk _ (X_mem_homogeneousSubmodule_one R i) 1 (X j) h) =
       X ⟨j, hj⟩ := by
@@ -365,6 +375,53 @@ lemma homogeneousLocalizationAwayXEquiv_algebraMap (r : R) :
 
 end Chart
 
+
+section GradeZeroAway
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+variable (σ : Type*) (R : Type*) [CommRing R] [Unique σ]
+
+/-- **The degree-zero part of `R[X][X⁻¹]` is `R`** for a single variable `X`: the canonical
+map from the degree-zero part of `R[X]` to the degree-zero part of the localization of `R[X]`
+away from `X` is bijective. -/
+lemma bijective_fromZeroRingHom_X :
+    Function.Bijective (HomogeneousLocalization.fromZeroRingHom (homogeneousSubmodule σ R)
+      (Submonoid.powers (X (default : σ)))) := by
+  have hX : ∀ i : σ, (X i : MvPolynomial σ R) ∈ homogeneousSubmodule σ R 1 :=
+    fun i ↦ isHomogeneous_X R i
+  constructor
+  · have hle : Submonoid.powers (X (default : σ)) ≤ nonZeroDivisors (MvPolynomial σ R) :=
+      Submonoid.powers_le.mpr (isRegular_iff_mem_nonZeroDivisors.mp isRegular_X)
+    have hinj : Function.Injective (algebraMap (MvPolynomial σ R)
+        (Localization (Submonoid.powers (X default : MvPolynomial σ R)))) :=
+      IsLocalization.injective
+        (S := Localization (Submonoid.powers (X default : MvPolynomial σ R))) hle
+    intro a b hab
+    refine Subtype.ext (hinj ?_)
+    rw [← Localization.mk_one_eq_algebraMap, ← Localization.mk_one_eq_algebraMap]
+    exact congrArg HomogeneousLocalization.val hab
+  · intro y
+    have hgen := HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top
+      (𝒜 := homogeneousSubmodule σ R) (hX default) σ (X : σ → MvPolynomial σ R)
+      (adjoin_range_X_eq_top σ R) (fun _ ↦ 1) hX
+    have hbot : (⊤ : Subalgebra (homogeneousSubmodule σ R 0)
+        (HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X (default : σ)))) ≤ ⊥ := by
+      rw [← hgen]
+      refine Algebra.adjoin_le ?_
+      rintro _ ⟨a, ai, hai, -, rfl⟩
+      have hprod : (∏ i, (X i : MvPolynomial σ R) ^ ai i) = X (default : σ) ^ a := by
+        rw [Fintype.prod_unique]
+        congr 1
+        simpa using hai
+      refine Algebra.mem_bot.mpr ⟨1, ?_⟩
+      rw [map_one]
+      refine HomogeneousLocalization.val_injective _ ?_
+      rw [HomogeneousLocalization.val_one, HomogeneousLocalization.Away.val_mk, hprod]
+      exact (Localization.mk_self_mk _ _).symm
+    exact Algebra.mem_bot.mp (hbot Algebra.mem_top)
+
+end GradeZeroAway
 
 section Generators
 

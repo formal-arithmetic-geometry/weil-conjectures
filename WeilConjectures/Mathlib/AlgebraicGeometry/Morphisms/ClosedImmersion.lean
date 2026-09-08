@@ -71,13 +71,6 @@ lemma IsClosedImmersion.of_universallyClosed [IsPreimmersion f] [UniversallyClos
     IsClosedImmersion f :=
   .of_isPreimmersion f f.isClosedMap.isClosed_range
 
-/-- An open immersion that is universally closed is a closed immersion. In particular this
-applies to a proper open immersion. -/
-lemma IsClosedImmersion.of_isOpenImmersion_of_universallyClosed
-    [IsOpenImmersion f] [UniversallyClosed f] :
-    IsClosedImmersion f :=
-  .of_isOpenImmersion f f.isClosedMap.isClosed_range
-
 /-- The range of an open immersion that is universally closed is clopen. -/
 lemma Scheme.Hom.isClopen_range [IsOpenImmersion f] [UniversallyClosed f] :
     IsClopen (Set.range f) :=
