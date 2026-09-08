@@ -129,7 +129,7 @@ cohomology sheaves are torsion, the derived base-change morphism
 is an isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is imposed on `g`. For `Λ = ℤ` this
 is [SGA 4, Exp. XII, Thm 5.1] and Stacks Project, Tag 0DDE; the case of a general
 coefficient ring follows by restriction of scalars. -/
-theorem Etale.properBaseChange [IsProper g] (sq : IsPullback g' f' f g)
+theorem Etale.properBaseChange [IsProper f] (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
@@ -143,7 +143,7 @@ for a cartesian square with `f` proper the base-change transformation
 
 on the bounded below derived categories is an isomorphism: every complex of sheaves of
 `Λ`-modules automatically has torsion cohomology. -/
-theorem Etale.isIso_baseChange_of_isProper (hΛ : IsAddTorsion Λ) [IsProper g]
+theorem Etale.isIso_baseChange_of_isProper (hΛ : IsAddTorsion Λ) [IsProper f]
     (sq : IsPullback g' f' f g) :
     IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
   have : ∀ K, IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := fun K ↦
