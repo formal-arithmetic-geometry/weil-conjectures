@@ -22,22 +22,24 @@ v          v
 Y' --g---> Y
 ```
 
-with `g` **smooth**, recorded as `sq : IsPullback g' f' f g`. This file states the general
-smooth base change theorem in étale cohomology: for every object `K` of the bounded below
-derived category `D⁺(X_ét, Λ)` whose cohomology sheaves are torsion of orders invertible on
-`Y` (`AlgebraicGeometry.Etale.DerivedCategory.Plus.orderInvertibleOn`, stated for the right
+with `g` **smooth** and `f` **quasi-compact and quasi-separated**, recorded as
+`sq : IsPullback g' f' f g`. This file states the general smooth base change theorem in
+étale cohomology: for every object `K` of the bounded below derived category
+`D⁺(X_ét, Λ)` whose cohomology sheaves are torsion of orders invertible on `Y`
+(`AlgebraicGeometry.Etale.DerivedCategory.Plus.orderInvertibleOn`, stated for the right
 vertical arrow `f : X ⟶ Y` of the square, whose target is the base `Y`), the derived
 base-change morphism
 
 `BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
 
 of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` is an isomorphism.
-No hypothesis is imposed on `f`.
 
-Note where the hypothesis sits: smoothness is asked of the *base-change* morphism `g`, the
-opposite arrangement from the proper base change theorem of
+Note where the hypotheses sit: smoothness is asked of the *base-change* morphism `g`, and
+`f` only has to be quasi-compact and quasi-separated. This is the opposite arrangement
+from the proper base change theorem of
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`, where `f` is proper and
-nothing is asked of `g`. Everything else is a condition on the coefficient complex `K`.
+nothing at all is asked of `g`. Everything else is a condition on the coefficient complex
+`K`.
 
 Unlike proper base change, smooth base change is false for torsion that is not invertible
 on the base — already for `Y` of characteristic `p` and `p`-torsion coefficients, by
@@ -63,7 +65,7 @@ Two statements are given, as in `Proper.lean`:
   bounded below complex whose cohomology is torsion of orders invertible on `Y`.
 - `AlgebraicGeometry.Etale.isIso_baseChange_of_smooth`: for a coefficient ring whose
   characteristic is invertible on `Y`, the base-change transformation of a cartesian square
-  with `g` smooth is an isomorphism of functors.
+  with `g` smooth and `f` quasi-compact quasi-separated is an isomorphism of functors.
 
 ## Implementation notes
 
@@ -109,18 +111,19 @@ v          v
 Y' --g---> Y
 ```
 
-with `g` smooth and every bounded below complex `K ∈ D⁺(X_ét, Λ)` whose cohomology sheaves
-are torsion of orders invertible on the base `Y` of the square, the derived base-change
-morphism
+with `g` smooth, `f` quasi-compact and quasi-separated, and every bounded below complex
+`K ∈ D⁺(X_ét, Λ)` whose cohomology sheaves are torsion of orders invertible on the base `Y`
+of the square, the derived base-change morphism
 
 `BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
 
-is an isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is imposed on `f`.
+is an isomorphism in `D⁺(Y'_ét, Λ)`.
 
 For `Λ = ℤ` this is [Stacks 0EYU] and [SGA 4, Exp. XVI, Thm 1.1]; the case of a general
 coefficient ring follows by restriction of scalars, which is exact, conservative, and
 compatible with the base-change mates. -/
-theorem Etale.smoothBaseChange [Smooth g] (sq : IsPullback g' f' f g)
+theorem Etale.smoothBaseChange [Smooth g] [QuasiCompact f] [QuasiSeparated f]
+    (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : Etale.DerivedCategory.Plus.orderInvertibleOn Λ f K) :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
@@ -130,7 +133,7 @@ theorem Etale.smoothBaseChange [Smooth g] (sq : IsPullback g' f' f g)
 torsion as an additive group and its characteristic is invertible in `Γ(Y, 𝒪_Y)`, the
 global sections of the base `Y` of the square — for the finite rings `Λ = ℤ/ℓⁿℤ` of the
 `ℓ`-adic formalism this says that `ℓ` is invertible on `Y` — then for a cartesian square
-with `g` smooth the base-change transformation
+with `g` smooth and `f` quasi-compact quasi-separated the base-change transformation
 
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`
 
@@ -138,7 +141,8 @@ on the bounded below derived categories is an isomorphism: every complex of shea
 `Λ`-modules automatically has torsion cohomology, of orders dividing `ringChar Λ` and
 hence invertible on `Y`. -/
 theorem Etale.isIso_baseChange_of_smooth (hΛ : IsAddTorsion Λ)
-    (hY : IsUnit ((ringChar Λ : ℕ) : Γ(Y, ⊤))) [Smooth g] (sq : IsPullback g' f' f g) :
+    (hY : IsUnit ((ringChar Λ : ℕ) : Γ(Y, ⊤))) [Smooth g] [QuasiCompact f]
+    [QuasiSeparated f] (sq : IsPullback g' f' f g) :
     IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
   have : ∀ K, IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := fun K ↦
     Etale.smoothBaseChange Λ sq K
