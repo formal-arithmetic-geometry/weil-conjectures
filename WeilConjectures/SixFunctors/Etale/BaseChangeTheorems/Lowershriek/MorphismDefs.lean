@@ -7,11 +7,11 @@ module
 
 public import Mathlib
 public import WeilConjectures.Compactification.BaseChange
-public import WeilConjectures.SixFunctors.BaseChangeTheorems.MorphismDefs
-public import WeilConjectures.SixFunctors.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.SixFunctors.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
