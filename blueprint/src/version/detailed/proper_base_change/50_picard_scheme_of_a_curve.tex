@@ -9318,6 +9318,18 @@ $k\to A$; as a $k$-vector space $A$ is free.
 \end{proof}
 
 % Cited.
+% Ruling on this node's consumers, recorded at its own site.
+% Its only consumer was lem:pc-dim-base-change's written-out proof, which
+% this pass replaced by a citation of Algebra, Lemma 10.116.5 (tag 00P3);
+% so after that repair no proof in this chapter appeals to going down for
+% flat ring maps, and this node drops to consumer-in-degree 0 and out of
+% thm:pc-picard-representable's closure.  The node stays: it is a correct
+% external input, backed in Mathlib by the names below, and it is the
+% natural input for any later height or dimension argument this chapter
+% grows.  No consumer edge is drawn to it, because after the repair there
+% is no proof here that depends on it, and this chapter's convention --
+% stated at lem:pc-ample-basis-criterion -- is not to record a dependency
+% that does not exist.
 \begin{lemma}[Going down for flat ring maps]
 \label{lem:pc-going-down-flat}
 Let $R\to R'$ be a flat ring map.  Let $\mathfrak p\subseteq\mathfrak
@@ -9338,7 +9350,26 @@ the statement, so it is not decomposed further here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% Decomposed.
+% Cited.
+% The first assertion is the source's statement verbatim -- Algebra,
+% Lemma 10.116.5, tag 00P3 -- so this node is cited, not decomposed.
+% Until this pass the node was marked Decomposed and carried a written-out
+% proof whose load-bearing step was the formula
+%   dim k[x_1,...,x_n]/I = n - ht(I)
+% appealed to as "the classical formula" with no tag and no reference to
+% any node stating it.  There is no Stacks statement of that formula to
+% cite: the Stacks source states it only inside the proof of Algebra,
+% Lemma 10.114.4 (tag 00OS), and only for a prime ideal, whose own
+% statement is the different assertion dim(S) = dim(S_m).  The written-out
+% proof also proved its height identity for a prime and then applied it to
+% the arbitrary I of the presentation, which needs the minimal primes of
+% I.K[x] to lie over minimal primes of I -- true, but a further fact and
+% unstated.  Both gaps go with the argument, and the source's own proof of
+% 00P3 runs by Noether normalisation, not by heights, so nothing is lost
+% that this chapter had decomposed.  The second assertion (the curve
+% consequence) is not part of 00P3 and stays derived, in the idiom of
+% lem:pc-dim-zero-finite below: the proof says which clause is cited and
+% which is derived, and in what order.
 \begin{lemma}[Dimension is unchanged under base change along field extensions]
 \label{lem:pc-dim-base-change}
 Let $k$ be a field, $A$ a $k$-algebra of finite type and $K/k$ a field
@@ -9348,38 +9379,26 @@ $X_K=X\times_{\Spec k}\Spec K$ has dimension $1$.
 \uses{def:pc-morphism-conventions,def:pc-field-tower,def:pc-curve,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-going-down-flat,def:pc-curve,def:pc-dimension}
-Write $A=k[x_1,\dots,x_n]/I$, so $A\otimes_kK=K[x_1,\dots,x_n]/I\cdot
-K[x]$.  For a Noetherian ring dimension formulas:
-$\dim k[x]/I=n-\operatorname{ht}(I)$ (the classical formula for the
-dimension of a quotient of a polynomial ring by the height of the
-ideal), and the extension of an ideal under a faithfully flat ring map
-preserves height: the map $k[x]\to K[x]$ is faithfully flat (base
-change of the faithfully flat $k\to K$), and for flat ring maps
-$\varphi:R\to R'$ and a prime $\mathfrak p\subset R$ one has
-$\operatorname{ht}(\mathfrak pR')=\operatorname{ht}(\mathfrak p)$:
-$\mathfrak pR'\cap R=\mathfrak p$ (faithful flatness: the tensor
-$R/\mathfrak p\to R'/\mathfrak pR'$ is faithfully flat, hence
-injective, so the preimage of $\mathfrak pR'$ is $\mathfrak p$), and
-$\operatorname{ht}(\mathfrak pR')\ge\operatorname{ht}(\mathfrak p)$:
-a chain $\mathfrak p_0\subsetneq\cdots\subsetneq\mathfrak p_r=\mathfrak p$
-of primes of $R$ gives, by going-down for flat ring maps
-(\Cref{lem:pc-going-down-flat}), a chain of primes of $R'$ lying over
-it and contained in a prime above $\mathfrak p$,
-hence the height of the extended ideal is at least that of the source
-ideal; and $\operatorname{ht}(\mathfrak pR')\le\operatorname{ht}(\mathfrak p)$:
-a chain of primes in $R'$ above $\mathfrak pR'$ intersects $R$ in a
-chain of primes all containing $\mathfrak p$ (again by
-$\mathfrak q\cap R\supseteq\mathfrak p$ for $\mathfrak q\supseteq
-\mathfrak pR'$: flatness gives $\mathfrak q\cap R\supseteq\mathfrak p$
-and the going-down property applied inside), i.e.\ a chain in $R$ from
-$\mathfrak p$ down; so the two heights agree.  Combining:
-$\dim(A\otimes_kK)=n-\operatorname{ht}(I\cdot K[x])
-=n-\operatorname{ht}(I)=\dim A$.
-For the last assertion: $X$ is a curve, covered by affine opens
-$\Spec(A_i)$ with $A_i$ finite type over $k$ and $\dim A_i\le1$ (and
-$\dim X=\max_i\dim A_i=1$); the $X_K$ are covered by the
-$\Spec(A_i\otimes_kK)$ of dimension $\dim A_i$, so $\dim X_K=1$.
+\uses{def:pc-curve,def:pc-dimension}
+The first assertion is a cited external input: Algebra,
+Section~10.116 (Dimension of finite type algebras over fields,
+reprise), Lemma~10.116.5 (\stacksproject{00P3}), which states that for
+a field $k$, a finite type $k$-algebra $S$ and a field extension $K/k$
+one has $\dim(S)=\dim(K\otimes_kS)$.  That is the assertion here, at
+$S=A$; the source's proof runs through a finite injective
+$k[y_1,\dots,y_d]\to S$ with $d=\dim(S)$ given by Noether
+normalisation, base changed along the flat $k\to K$.  It is not
+decomposed here.
+
+The second assertion is not part of the source's statement; it is
+derived from the first.  A \termref{def:pc-curve}{curve} $X$ over $k$
+is covered by affine opens $\Spec(A_i)$ with $A_i$ of finite type over
+$k$, and $\dim X=\max_i\dim A_i=1$ (\Cref{def:pc-dimension}).  The
+base change $X_K$ is covered by the $\Spec(A_i\otimes_kK)$, and
+$\dim(A_i\otimes_kK)=\dim A_i$ for each $i$ by the cited lemma applied
+to $A_i$, so $\dim X_K=\max_i\dim A_i=1$.  So the derivation uses the
+cited statement only through its conclusion, once for each member of an
+affine covering.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -12403,6 +12422,12 @@ C^2\to\cdots
 which is the (twisted) Amitsur-type complex
 $0\to N_0\to N\to B\otimes_AN\to B\otimes_AB\otimes_AN\to\cdots$.
 
+% Ruled clean on the classical-appeal axis: "the usual bookkeeping of
+% insertion positions" below carries no tag and no Cref, but it appeals to
+% no external fact -- it is the index check for one of the three cases of
+% the cosimplicial identity, and the other two cases are done explicitly
+% in the same sentence and the next.  Close but sound; no node or tag is
+% owed here.
 \emph{It is a complex, and this is where the cocycle condition enters.}
 As for any alternating sum of faces, $d^{r+1}\circ d^r=0$ follows from
 the cosimplicial identities
