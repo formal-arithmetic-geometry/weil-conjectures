@@ -473,6 +473,42 @@ effective divisor.
 % ---------------------------------------------------------------------------
 % [reproduced from 06_smooth_curve_calculations.tex] (label: def:pcb-picard-group)
 % Decomposed.
+% Ruling (dependency edge): this definition now \uses \Cref{lem:pcb-pic-group}.
+% Before the edge that lemma had \uses-in-degree ZERO -- the only \texttt{pcb-}
+% node among the chapter's 28 in-degree-0 nodes (convention for every count
+% here: \% comments stripped whole-file, escape-aware, before any \uses parse;
+% the host of a \uses is the nearest preceding \label; every \label is counted,
+% not only top-level nodes; a parser restricted to top-level labelled nodes
+% reads 22 rather than 28 and the \texttt{pcb-} half is 1 under both).  It was
+% reached only by prose \Cref, from \Cref{rem:pc-sc-modules} and
+% \Cref{def:pc-picard-group}, and neither of those draws an edge.  So the node
+% that carries the group axioms of \(\operatorname{Pic}(C)\) sat outside the
+% \uses-closure of both headline theorems, although this definition -- which is
+% inside them -- is what asserts the group law it verifies.  This definition is
+% the natural host: its parenthetical already cites that lemma for closure under
+% tensor products and duals and for the group axioms, so the prose citation was
+% there and only the edge was missing.
+% No cycle, re-derived at this head rather than inherited: the \uses-closure of
+% \Cref{lem:pcb-pic-group} is 11 nodes -- itself, def:pcb-curves,
+% def:pcb-invertible-module, lem:pc-tensor-dual-invertible,
+% lem:pcb-invertible-dual, lem:pcb-tensor-monoidal, def:pc-invertible-module,
+% def:pc-scheme, def:pc-morphism-conventions, def:pc-smooth-morphism,
+% def:pcb-scheme-conventions -- and does not contain this definition.  (It was 6
+% one commit earlier; the edge to \Cref{lem:pc-tensor-dual-invertible} added
+% just above grew it, and the conclusion is unchanged.)  A whole-graph DFS finds
+% 0 cycles at this head and 0 after the new edge, and fires -- one cycle,
+% def:pcb-picard-group -> lem:pcb-pic-group -> def:pcb-picard-group -- on a
+% planted reverse decoy edge, so the check is live.
+% The two recorded refusals of a cross-edge are not contradicted and not
+% reopened.  \Cref{def:pcb-ample} refuses an edge to
+% \Cref{lem:pc-ample-iff-power-very-ample} because that node's statement already
+% declares this definition among its dependencies, and
+% \Cref{def:pcb-effective-cartier-divisor} refuses edges to
+% \Cref{def:pcb-divisor} and \Cref{lem:pcb-point-cartier} because both of those
+% blocks already \uses it.  Both are refusals of a 2-CYCLE, on the criterion
+% "the target already \uses this node".  \Cref{lem:pcb-pic-group} does not \uses
+% this definition, so that criterion is not met here: the edge runs from a
+% definition to a lemma which does not cite it back.
 \begin{definition}[The Picard group]
 \label{def:pcb-picard-group}
 Let \(C\) be a \termref{def:pcb-curves}{curve}.  The
@@ -487,7 +523,7 @@ and the inverse of an invertible module \(\mathcal L\) is its dual
 products and duals, and the group axioms, are verified in the basic
 facts below, \Cref{lem:pcb-pic-group}).  (\emph{Stacks Project,
 Definition 18.32.6, Tag \texttt{040C}}.)
-\uses{def:pcb-curves,def:pcb-invertible-module}
+\uses{def:pcb-curves,def:pcb-invertible-module,lem:pcb-pic-group}
 \lean{AlgebraicGeometry.Scheme.Pic}
 \leanok
 \statusnote{Only the underlying \emph{set} is formalised.
@@ -522,6 +558,91 @@ tensor product of invertible modules, which needs a monoidal structure on
 % step is one line from the normalized valuation the same sentence already
 % names, so it is stated where the quotient is formed, in the statement and not
 % in a proof.  No node is created and no citation is needed.
+% Ruling: \(\operatorname{div}(f)=\sum_Pv_P(f)[P]\) was called "its divisor",
+% and the sentence above now says outright that
+% \(\operatorname{div}:k(C)^*\to\operatorname{Div}(C)\) is a homomorphism of
+% abelian groups -- a TOTAL map into a group whose elements are, by this block's
+% own first sentence, FINITE formal sums.  Nothing in the block said
+% \(v_P(f)=0\) for all but finitely many \(P\), which is the whole content of
+% that map landing in \(\operatorname{Div}(C)\) at all; the word "finite"
+% occurred here only in the definition of a divisor itself.  Ruled a text repair
+% and not a comment-only ruling, on the #374 standard: the step is stated in the
+% statement text, where the containment is asserted, and not in a comment or a
+% proof.  It is given with its reason rather than by a Stacks tag, no tag being
+% quoted here that has not been read; the reason is the standard finiteness of
+% the zeros and poles of a nonzero rational function on a curve.  Its last step
+% -- a closed subset of dimension zero in a scheme of finite type over a field
+% is a finite set of closed points -- is exactly \Cref{lem:pcb-dim0-finite},
+% which is therefore cited and given a \uses edge.  That edge closes no cycle:
+% the \uses-closure of \Cref{lem:pcb-dim0-finite} at this head is 2 nodes,
+% itself and \Cref{lem:pcb-fg-algebra-noetherian}, and contains neither this
+% definition nor anything reaching it; a whole-graph DFS finds 0 cycles after
+% it.  Unlike the forward references in this block to
+% \Cref{lem:pcb-point-cartier} and to the Pic-Cl identification, which carry no
+% edge because those blocks already \uses this definition and an edge would make
+% a 2-cycle, \Cref{lem:pcb-dim0-finite} does not cite this definition back, so
+% the refusals recorded at \Cref{def:pcb-ample} and
+% \Cref{def:pcb-effective-cartier-divisor} do not reach it.  No node is created.
+% Membership sweep of the \texttt{pcb-} region, recorded here because this block
+% is where the four sets involved are defined or used.  Predicate: a node whose
+% statement or proof asserts that a PARTICULAR object lies in a set this chapter
+% defines by a finiteness, support or coherence condition -- \(\operatorname
+% {Div}(C)\), \(\operatorname{Cl}(C)\), \(\operatorname{Pic}(C)\) (whose
+% membership condition is invertibility: quasi-coherent and locally free of rank
+% one), and the effective Cartier divisors.  Defining such a set, and
+% HYPOTHESISING that an object lies in one, do not count.  This is the
+% membership half of the axis of issue 781 row 4, whose structure half (a set
+% asserted to carry an algebraic structure) was swept to residue 0 there and is
+% not re-run.
+% Convention and population.  Text with \% comments stripped whole-file and
+% escape-aware; nodes taken as the top-level definition/lemma/theorem/
+% proposition/corollary/remark/example environments, each keyed by its first
+% \label, with a following proof environment attached to the node before it;
+% whitespace normalised before matching.  Under that convention the chapter has
+% 301 nodes, 47 of them \texttt{pcb-}, and the mechanical population is 16 of
+% those 47.  Under the other convention used on this branch -- host of a
+% \uses/of a line = the nearest preceding \label, so that a block runs to the
+% next \label -- it reads 21 rather than 16; the five extra
+% (def:pcb-function-field, def:pcb-ample, lem:pcb-principal-ideal-dvr,
+% lem:pcb-tensor-monoidal, lem:pcb-flat-base-change-coherent) are the
+% \begin{...}[...] header line of the NEXT node bleeding into the previous
+% block, and are artefacts.  Both counts are right under their own convention.
+% Firing control: a synthetic membership assertion planted at
+% \Cref{lem:pcb-nakayama}, a \texttt{pcb-} node outside the population, in a
+% scratch copy of this file outside blueprint/src/, moves the count 16 -> 17.
+% Residue: 1 of 16 -- \(\operatorname{div}(f)\in\operatorname{Div}(C)\) in
+% this block, repaired above.  The other 15 are ruled sound, as follows, rather
+% than passed over.
+%   def:pcb-invertible-module -- defines the condition, asserts no membership.
+%   def:pcb-effective-cartier-divisor -- defines the condition, and where it
+%     asserts membership (finite sums of effective Cartier divisors are
+%     effective Cartier; \(V(x^2)\subseteq\mathbf A^1\) is one) it gives the
+%     local non-zero-divisor; the divisor side carries "all but finitely many
+%     \(n_P\) being \(0\)" in so many words.
+%   def:pcb-picard-group -- membership in \(\operatorname{Pic}(C)\) is
+%     invertibility; closure under tensor products and duals is stated and
+%     sourced to \Cref{lem:pcb-pic-group}, which is now also a \uses edge.
+%   def:pcb-genus -- asserts \(\dim_kH^1(C,\cO_C)\) is finite and discharges
+%     it by \Cref{lem:pc-coherent-hi}.
+%   def:pcb-pic0, lem:pcb-divisor-class-curve -- \(\deg D=\sum_Pn_P\) and the
+%     quotient \(\operatorname{Cl}(C)\) inherit the finiteness repaired above
+%     and add nothing of their own; well-definedness of \(\deg\) on
+%     \(\operatorname{Pic}(C)\) is cited to \Cref{lem:pcb-divisor-class-curve}
+%     there, and that lemma proves the invertibility of \(\cO_C(D)\) it uses.
+%   def:pcb-picard-functor -- \(\operatorname{Pic}^d_{C/k}\) is cut out by a
+%     fibrewise degree, and the hypothesis that makes that degree defined (every
+%     irreducible component of every geometric fibre of dimension one) is stated
+%     in the block.
+%   lem:pcb-invertible-dual, lem:pcb-pic-group, lem:pcb-point-cartier -- the
+%     membership IS the conclusion, and each is proved: \(\cL^\vee\) and
+%     \(\cL\otimes\cM\) invertible, \([P]\) effective Cartier.
+%   lem:pcb-line-bundle-rational-section, lem:pcb-negative-degree-no-sections,
+%     lem:pcb-deg-principal-zero, lem:pcb-degree-2g1-very-ample -- all write
+%     \(\operatorname{div}(s)\) or \(\operatorname{div}(f)\) as an element of
+%     \(\operatorname{Div}(C)\), or take its degree, and all inherit the
+%     finiteness repaired above; see the notes at the first and third of them.
+%   lem:pcb-ample-complement-affine -- HYPOTHESISES that \(D\) is an effective
+%     Cartier divisor, and so is out of class by the predicate.
 \begin{definition}[Divisors, principal divisors, class group]
 \label{def:pcb-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  A
@@ -539,7 +660,21 @@ where \(v_P\) is the normalized valuation of the local ring
 has dimension one -- the local theory of such curves, which
 establishes this and the Cartier-divisor property of closed points, is
 developed in the basic facts below); such divisors are
-\emph{principal}.  Since each \(v_P\) is a valuation, one has
+\emph{principal}.  This sum is finite, so that \(\operatorname{div}(f)\) is
+indeed an element of \(\operatorname{Div}(C)\): one has \(v_P(f)\neq0\)
+only when \(f\) is not a unit in \(\mathcal O_{C,P}\), and on an affine
+open \(U\) of a component of \(C\) -- integral, of dimension one, and of
+finite type over \(k\) by \Cref{def:pcb-curves} -- one may write
+\(f=a/b\) with \(a,b\in\mathcal O_C(U)\) nonzero; at a closed point
+\(P\in U\) outside \(V(a)\cup V(b)\) both \(a\) and \(b\) are units
+in \(\mathcal O_{C,P}\), hence so is \(f\), and \(v_P(f)=0\).  Since
+\(a\) and \(b\) are nonzero and \(U\) is integral, \(V(a)\cup V(b)\)
+is a proper closed subset of \(U\), hence of dimension at most zero, hence
+a finite set of closed points (\Cref{lem:pcb-dim0-finite}); and \(C\) is
+quasi-compact, being of finite type over \(k\), so finitely many such \(U\)
+cover it.  Therefore \(v_P(f)=0\) for all but finitely many closed points
+\(P\), and \(\operatorname{div}(f)\) is a finite formal sum.  Since each
+\(v_P\) is a valuation, one has
 \(\operatorname{div}(fg)=\operatorname{div}(f)+\operatorname{div}(g)\),
 so \(\operatorname{div}:k(C)^*\to\operatorname{Div}(C)\) is a
 homomorphism of abelian groups and the principal divisors form a
@@ -580,7 +715,7 @@ of \(C=\mathbf P^1\sqcup\Spec k\), the local ring at the closed point
 is the field \(k\), which is not a discrete valuation ring and carries
 no normalized valuation, so \(\operatorname{div}(f)\) is undefined
 there.
-\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor}
+\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor,lem:pcb-dim0-finite}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1505,6 +1640,16 @@ double complexes), Lemma~12.25.1, \stacksproject{0130}}).
 % normalized valuation.  The first clause --- \(\mathcal L\otimes k(C)\cong k(C)\)
 % and the existence of a nonzero rational section --- needs only integrality and
 % remains true on both; it is simply now stated under the stronger hypothesis.
+% Membership ruling (sweep recorded at \Cref{def:pcb-divisor}): this lemma and
+% its proof write \(D=\operatorname{div}(s)\) for a nonzero RATIONAL SECTION
+% \(s\) of \(\cL\) and treat \(D\) as an element of
+% \(\operatorname{Div}(C)\), i.e.\ as a finite formal sum.  Sound, and it adds
+% nothing beyond the finiteness now stated at \Cref{def:pcb-divisor}: on an open
+% \(U\) over which \(\cL|_U\cong\cO_U\) the section \(s\) corresponds to
+% an element of \(k(C)^*\), so \(\operatorname{div}(s)|_U\) is the divisor of
+% that function; \(C\) is quasi-compact, so finitely many such \(U\) cover it,
+% and the support of \(\operatorname{div}(s)\) is a finite union of finite
+% sets.  No repair and no edge is due here.
 \begin{lemma}[Rational sections of line bundles]
 \label{lem:pcb-line-bundle-rational-section}
 Let \(C\) be an integral \termref{def:pcb-curves}{curve} over \(k\)
@@ -2230,6 +2375,15 @@ over \(k\)).
 % ring at the closed point is the field \(k\), not a discrete valuation ring, and
 % the symbol used is undefined there.  Same at the zero-dimensional component of
 % \(C=\mathbf P^1\sqcup\Spec k\).  Both curves are now excluded by hypothesis.
+% Membership ruling (sweep recorded at \Cref{def:pcb-divisor}): the statement
+% takes \(\deg(\operatorname{div}(f))\), and \(\deg\) is the finite sum
+% \(\sum_Pn_P\) of \Cref{def:pcb-divisor}, so the statement is well formed
+% only because \(\operatorname{div}(f)\) is a finite formal sum.  That step is
+% now stated at \Cref{def:pcb-divisor}, which this lemma already \uses; nothing
+% further is due here, and the proof's own route -- \(\operatorname{div}(f)=
+% \pi^*\operatorname{div}(t)\) for \(\pi\) finite, with
+% \(\operatorname{div}_{\mathbf P^1}(t)=[0]-[\infty]\) -- exhibits a finite
+% sum independently.  Sound; no repair.
 \begin{lemma}[Principal divisors have degree zero]
 \label{lem:pcb-deg-principal-zero}
 Let \(C\) be a connected proper smooth \termref{def:pcb-curves}{curve}
