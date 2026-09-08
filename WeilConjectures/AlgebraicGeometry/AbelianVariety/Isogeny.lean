@@ -8,7 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 
@@ -41,6 +44,10 @@ point along a finite morphism is again closed.
   `n ^ (2 * g)`, where `g` is the dimension of `A`.
 - `AlgebraicGeometry.IsAbelianVariety.etale_mulBy` — if `n` is invertible in `K`, then `[n]` is
   étale.
+- `AlgebraicGeometry.IsAbelianVariety.isFinite_mulBy_of_natCast_ne_zero`,
+  `AlgebraicGeometry.IsAbelianVariety.flat_mulBy_of_natCast_ne_zero` and
+  `AlgebraicGeometry.IsAbelianVariety.surjective_mulBy_of_natCast_ne_zero` — if `n` is
+  invertible in `K`, then `[n]` is finite, flat and surjective, i.e. an isogeny.
 - `AlgebraicGeometry.IsAbelianVariety.exists_npow_eq` and
   `AlgebraicGeometry.IsAbelianVariety.rootableBy` — if `K` is algebraically
   closed and `n ≠ 0`, then every `K`-point of `A` is an `n`-th power, i.e. the group `A(K)` is
@@ -48,17 +55,19 @@ point along a finite morphism is again closed.
 
 ## Implementation notes
 
-* `isFinite_mulBy`, `flat_mulBy`, `surjective_mulBy`, `finrank_mulBy` and `etale_mulBy` are
-  `sorry` by design: this file only *states* that `[n]` is an isogeny of degree `n ^ (2 * g)`
-  which is étale in the good characteristic, and uses those statements. The missing ingredient
-  for the first four is the theorem of the cube, which for a symmetric ample line bundle `L`
-  gives `[n]^* L ≅ L ^ (n ^ 2)`; Mathlib has neither the theorem of the cube nor ampleness of
-  line bundles nor intersection numbers. The missing ingredient for `etale_mulBy` is a theory of
-  differentials for schemes, which Mathlib does not have either. See the classical proofs in the
-  individual docstrings.
-* The first four statements are owned by issue 776 ("Prove that `[n]` is an isogeny of degree
-  `n ^ (2 * g)`: the theorem of the cube and the degree computation") and `etale_mulBy` by issue
-  777 ("Prove that `[n]` is étale when `n` is prime to the characteristic").
+* When `n` is invertible in `K`, everything is proved: `etale_mulBy` is
+  `AlgebraicGeometry.GrpObj.etale_npow_left`, an infinitesimal-lifting argument that needs no
+  theory of differentials, and finiteness, flatness and surjectivity of `[n]` follow from it
+  together with properness of `[n]`.
+* The four statements with hypothesis `n ≠ 0` — `isFinite_mulBy`, `flat_mulBy`,
+  `surjective_mulBy` and `finrank_mulBy` — are the only remaining `sorry`s of this file. They
+  are stated for every `n ≠ 0`, so they also cover the case where the characteristic of `K`
+  divides `n`, which is out of reach of the étale argument. The missing ingredient is the
+  theorem of the cube, which for a symmetric ample line bundle `L` gives `[n]^* L ≅ L ^ (n ^ 2)`;
+  Mathlib has neither the theorem of the cube nor ampleness of line bundles nor intersection
+  numbers. See the classical proofs in the individual docstrings. They are owned by issue 776
+  ("Prove that `[n]` is an isogeny of degree `n ^ (2 * g)`: the theorem of the cube and the
+  degree computation").
 * Following `WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian`, the dimension `g` of `A`
   is not a field of `IsAbelianVariety` but an instance argument
   `[SmoothOfRelativeDimension g G.hom]` at the use site.
@@ -145,14 +154,40 @@ theorem finrank_mulBy {g : ℕ} [SmoothOfRelativeDimension g G.hom] (hn : n ≠ 
 /-- The multiplication by `n` isogeny of an abelian variety is étale if `n` is invertible in the
 base field.
 
-Classically: `[n]` is finite and flat, so it is étale as soon as it is unramified, and this can
-be checked at the identity by translating. The differential of `[n]` at the identity is
-multiplication by `n` on the tangent space, which is an isomorphism precisely when `n` is
-invertible in `K`.
-
-This is `sorry` by design; see the implementation notes of this file and issue 777. -/
+This is a special case of `AlgebraicGeometry.GrpObj.etale_npow_left`: an abelian variety is a
+smooth commutative group scheme, and for such a group scheme `[n]` is étale by an infinitesimal
+lifting argument, rigidity and `n`-divisibility of the group of points trivial on a square-zero
+thickening. No properness of `G` is needed. -/
 theorem etale_mulBy (hn : (n : K) ≠ 0) : Etale (mulBy G n).left :=
-  sorry
+  GrpObj.etale_npow_left hn
+
+/-- The multiplication by `n` endomorphism of an abelian variety is proper, for every `n`: it is
+a morphism over the proper and separated structure morphism of `G`. -/
+instance isProper_mulBy : IsProper (mulBy G n).left := by
+  have : IsProper ((mulBy G n).left ≫ G.hom) := by rw [Over.w (mulBy G n)]; infer_instance
+  exact IsProper.of_comp _ G.hom
+
+/-- The multiplication by `n` endomorphism of an abelian variety is finite if `n` is invertible
+in the base field: it is proper by `AlgebraicGeometry.IsAbelianVariety.isProper_mulBy` and locally
+quasi-finite because it is étale, hence finite by Zariski's main theorem. -/
+theorem isFinite_mulBy_of_natCast_ne_zero (hn : (n : K) ≠ 0) : IsFinite (mulBy G n).left :=
+  have := etale_mulBy G hn
+  have : LocallyQuasiFinite (mulBy G n).left := inferInstance
+  IsFinite.of_isProper_of_locallyQuasiFinite _
+
+/-- The multiplication by `n` endomorphism of an abelian variety is flat if `n` is invertible in
+the base field, since it is étale. -/
+theorem flat_mulBy_of_natCast_ne_zero (hn : (n : K) ≠ 0) : Flat (mulBy G n).left :=
+  have := etale_mulBy G hn
+  inferInstance
+
+/-- The multiplication by `n` endomorphism of an abelian variety is surjective if `n` is
+invertible in the base field: it is universally closed, being proper, and universally open, being
+flat and locally of finite presentation, so its image is a nonempty clopen subset of the
+irreducible, hence preconnected, space `G.left`. -/
+theorem surjective_mulBy_of_natCast_ne_zero (hn : (n : K) ≠ 0) : Surjective (mulBy G n).left :=
+  have := etale_mulBy G hn
+  surjective_of_universallyOpen_of_universallyClosed _
 
 section IsAlgClosed
 
