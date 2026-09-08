@@ -6635,15 +6635,30 @@ separated scheme of finite type over $k$ of dimension at most $1$
 (\Cref{def:pcb-curves}).  A
 \termref{def:pc-smooth-projective-curve}{smooth projective curve} in
 our sense is in particular a smooth curve in the sense of
-\Cref{def:pcb-curves} (\Cref{lem:pc-curves-are-sc}); conversely, for
-smooth proper one-dimensional curves the two notions coincide.  Over a
+\Cref{def:pcb-curves} (\Cref{lem:pc-curves-are-sc}); conversely, a
+curve in the sense of \Cref{def:pcb-curves} which is smooth, proper and
+connected of dimension one is a smooth projective curve in our sense.
+That converse is a crossing in the direction \Cref{lem:pc-curves-are-sc}
+does not cover, and the chapter has the nodes for it: such a curve is
+projective over $k$ (proper of dimension at most one,
+\Cref{lem:pcb-proper-dim-one-projective}) and integral (smooth, hence
+regular by \Cref{lem:pcb-smooth-regular}, hence normal by
+\Cref{lem:pc-regular-is-normal}, and a Noetherian normal connected
+scheme is integral, \Cref{lem:pc-noetherian-normal-decomposition}),
+hence a \termref{def:pc-curve}{curve} of dimension one which is smooth
+and projective, i.e.\ a
+\termref{def:pc-smooth-projective-curve}{smooth projective curve}.  None
+of the three added conditions can be dropped: \Cref{def:pcb-curves}
+requires none of them, and it admits $\Spec k$ (dimension $0$),
+$\PP^1_k\sqcup\PP^1_k$ (not connected, hence not integral) and the
+affine line (not proper, hence not projective).  Over a
 field that is not algebraically closed \Cref{def:pcb-curves} does not
 apply as a definition and only its list of conditions is read off, which
 is what \Cref{lem:pc-curves-are-sc} verifies; see
 \Cref{rem:pc-regularity-sc}.
 % No \uses for \Cref{rem:pc-regularity-sc} here, deliberately: it is a remark, and
 % no \uses list in this chapter names a remark --- remarks are cited in prose only.
-\uses{def:pc-curve,def:pcb-curves,lem:pc-curves-are-sc,def:pc-dimension}
+\uses{def:pc-curve,def:pcb-curves,lem:pc-curves-are-sc,def:pc-dimension,def:pc-smooth-projective-curve,lem:pcb-proper-dim-one-projective,lem:pcb-smooth-regular,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
 \end{remark}
 
 % ---------------------------------------------------------------------------
@@ -6742,18 +6757,43 @@ finite dimensional.
 % automatic, and the proof below now derives it from nodes the chapter already has,
 % in both of the lemma's two cases.  The route of \Cref{prop:pc-XK-integral} is not
 % taken: it would demand a $k$-rational point the statement does not hypothesise.
+% Ruling (hypothesis scope: dimension and projectivity; a third axis, additive to the
+% two above).  The second case admitted any \Cref{def:pcb-curves} curve, and that
+% definition requires only dimension at most one, nothing about projectivity and
+% nothing about integrality, whereas \Cref{def:pc-genus} is stated for a
+% \termref{def:pc-smooth-projective-curve}{smooth projective curve}, i.e.\ for a
+% projective \Cref{def:pc-curve} curve --- a variety of dimension exactly one.  So the
+% second case owed that definition three things and the ruling above supplies only
+% one, geometric irreducibility.  Of the other two, projectivity is derived in the
+% proof below from \Cref{lem:pcb-proper-dim-one-projective} (proper of dimension at
+% most one $\Rightarrow$ projective), which is the step \Cref{def:pcb-genus}'s own
+% comment block already names for this crossing; dimension cannot be derived, because
+% it is false as the case stood.  $C=\Spec k$ is nonempty, separated and of finite
+% type over $k$, of dimension $0\leq1$, smooth and proper over $k$, and has
+% $\dim_kH^0(C,\cO_C)=\dim_kk=1$ --- every hypothesis of the second case --- yet is
+% not a \Cref{def:pc-curve} curve, so at it the conclusion named a genus
+% \Cref{def:pc-genus} defines nowhere.
+% ``of dimension one'' is therefore added to the second case as a hypothesis, rather
+% than $\dim C=0$ being carried as a separately ruled case: at $\dim C=0$ there is
+% nothing to compare, one side of the asserted equality being undefined, so such a
+% case would have no conclusion to state.  The exclusion is not vacuous --- $\Spec k$
+% is exactly the object it removes, and \Cref{def:pcb-genus} does give that object a
+% genus, namely $0$ --- and it costs the chapter nothing: this lemma has \uses
+% in-degree $0$, and its only reader anywhere is the forward pointer in
+% \Cref{def:pc-genus}, which names it without hypotheses.
 \begin{lemma}[Agreement with the genus of file 06]
 \label{lem:pc-genus-agrees-sc}
 Let $k$ be an algebraically closed field and $C$ a
 \termref{def:pc-smooth-projective-curve}{smooth projective curve} over
 $k$ (or, more generally, a proper smooth curve in the sense of
-\Cref{def:pcb-curves} with $\dim H^0(C,\cO_C)=1$).  Then the genus
+\Cref{def:pcb-curves} of \termref{def:pc-dimension}{dimension one} with
+$\dim H^0(C,\cO_C)=1$).  Then the genus
 $g(C)$ of \Cref{def:pc-genus} equals the genus of
 \Cref{def:pcb-genus}.
-\uses{def:pc-genus,def:pcb-genus,def:pc-smooth-projective-curve,def:pcb-curves}
+\uses{def:pc-genus,def:pcb-genus,def:pc-smooth-projective-curve,def:pcb-curves,def:pc-dimension}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-genus,def:pcb-genus,lem:pc-projective-proper,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-regular-is-normal,lem:pc-h0-proper-variety,lem:pc-h0-geom-connected,lem:pc-noetherian-normal-decomposition,def:pc-geometrically-irreducible,def:pc-curve}
+\uses{def:pc-genus,def:pcb-genus,lem:pc-projective-proper,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-regular-is-normal,lem:pc-h0-proper-variety,lem:pc-h0-geom-connected,lem:pc-noetherian-normal-decomposition,def:pc-geometrically-irreducible,def:pc-curve,lem:pcb-proper-dim-one-projective,lem:pc-curves-are-sc,def:pc-smooth-projective-curve,def:pcb-curves,def:pc-dimension}
 Both definitions read $g=\dim_kH^1(C,\cO_C)$: that of
 \Cref{def:pc-genus} (Picard Schemes of Curves, Definition~44.6.3,
 specific to the geometrically irreducible smooth projective curve) and
@@ -6781,6 +6821,26 @@ connected; each $C_{k'}$ is Noetherian, normal and connected, hence
 integral (\Cref{lem:pc-noetherian-normal-decomposition}).  So $C$ is
 geometrically integral, in particular geometrically irreducible
 (\Cref{def:pc-geometrically-irreducible}).
+
+It remains to see that each definition applies to $C$ at all.  For
+\Cref{def:pcb-genus}, which asks for a proper smooth curve in the sense
+of \Cref{def:pcb-curves}: in the second case this is the hypothesis, and
+in the first case $C$ is proper (as above) and satisfies
+\Cref{def:pcb-curves}'s list of conditions by
+\Cref{lem:pc-curves-are-sc}, $k$ being algebraically closed.  For
+\Cref{def:pc-genus}, which asks for a
+\termref{def:pc-smooth-projective-curve}{smooth projective curve}: in
+the first case this is the hypothesis, and in the second case $C$ is
+proper over $k$ of \termref{def:pc-dimension}{dimension one}, hence
+projective over $k$ (\Cref{lem:pcb-proper-dim-one-projective}, whose
+hypothesis $\dim C\leq1$ is met); it is integral by the previous
+paragraph (geometric integrality at $k'=k$), and separated and of finite
+type over $k$ by \Cref{def:pcb-curves}, so it is a variety over $k$ of
+dimension one, that is, a \termref{def:pc-curve}{curve}
+(\Cref{def:pc-curve}); with smoothness over $k$, which is a hypothesis,
+that is \Cref{def:pc-smooth-projective-curve} verbatim.  Geometric
+irreducibility, the remaining hypothesis of \Cref{def:pc-genus}, is the
+previous paragraph.
 
 Both definitions therefore apply to $C$, and they agree.
 \end{proof}
