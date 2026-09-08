@@ -7,7 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
 
 /-!
 # The `n`-torsion subgroup scheme of an abelian variety
@@ -35,15 +38,32 @@ in the sense of `CategoryTheory.GrpObj.ker`. This kernel is the `n`-torsion subg
   is `n ^ (2 * g)`, where `g` is the dimension of `A`.
 - `AlgebraicGeometry.IsAbelianVariety.etale_torsion`: if `n` is invertible in `K`, then `A[n]` is
   étale over `K`.
+- `AlgebraicGeometry.IsAbelianVariety.finite_torsionHom` and
+  `AlgebraicGeometry.IsAbelianVariety.natCard_torsionHom`: if `K` is algebraically closed and `n`
+  is invertible in `K`, then `A[n]` has finitely many points with values in `K`, in fact exactly
+  `n ^ (2 * g)` of them.
+- `AlgebraicGeometry.IsAbelianVariety.nonempty_torsionHom_mulEquiv_pi`: if `K` is algebraically
+  closed and `n` is invertible in `K`, then `A[n](K) ≅ (ℤ/n)^(2 * g)`.
 
-The last four are obtained from the corresponding statements for the isogeny `[n] : A ⟶ A` in
+The finiteness, flatness, rank and étaleness of `A[n]` are obtained from the corresponding
+statements for the isogeny `[n] : A ⟶ A` in
 `WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny` by base change along the identity
-section `η[A] : Spec K ⟶ A`, since `A[n]` is by definition the kernel of `[n]`.
+section `η[A] : Spec K ⟶ A`, since `A[n]` is by definition the kernel of `[n]`. The number of
+`K`-points of `A[n]` is then its rank over `K`, because `A[n]` is finite étale over the
+algebraically closed field `K`, and the group `A[n](K)` is determined by these counts for all
+divisors of `n` via `CommGroup.nonempty_equiv_pi_multiplicative_zmod_of_card_torsion`.
+
+## Implementation notes
+
+The elementary facts about the kernel of the `n`-th power map of an abstract commutative group
+that are used to identify the `m`-torsion of `A[n](K)` with `A[m](K)` are kept as private lemmas
+in this file.
 
 ## Blueprint
 
 `isFinite_torsion`, `flat_torsion`, `finrank_torsion` and `etale_torsion` are the geometric half
-of Proposition 2.8 of §2.6 of `blueprint/curve_estimates.pdf`.
+of Proposition 2.8 of §2.6 of `blueprint/curve_estimates.pdf`, and `natCard_torsionHom` together
+with `nonempty_torsionHom_mulEquiv_pi` are its group-theoretic half.
 -/
 
 @[expose] public section
@@ -136,5 +156,90 @@ lemma coe_torsionHomMulEquiv {T : Over (Spec (.of K))} (a : T ⟶ torsion G n) :
     ((torsionHomMulEquiv G n T a : (powMonoidHom n : (T ⟶ G) →* (T ⟶ G)).ker) : T ⟶ G) =
       a ≫ GrpObj.kerι (GrpObj.npow G n) :=
   rfl
+
+section Points
+
+/-- If `n` is invertible in a field `K` and `m` divides `n`, then `m` is invertible in `K`. -/
+private lemma natCast_ne_zero_of_dvd {F : Type*} [Field F] {m n : ℕ} (hn : (n : F) ≠ 0)
+    (hm : m ∣ n) : (m : F) ≠ 0 := fun h =>
+  hn ((ringChar.spec F n).mpr (((ringChar.spec F m).mp h).trans hm))
+
+/-- An element of the kernel of the `n`-th power map of a commutative group is killed by `n`. -/
+private lemma pow_eq_one_of_mem_ker_powMonoidHom {H : Type*} [CommGroup H] (n : ℕ)
+    (y : (powMonoidHom n : H →* H).ker) : y ^ n = 1 := by
+  rw [← OneMemClass.coe_eq_one, SubmonoidClass.coe_pow]
+  simpa using MonoidHom.mem_ker.mp y.2
+
+/-- If `m` divides `n`, the `m`-torsion of the kernel of the `n`-th power map of a commutative
+group is the kernel of the `m`-th power map. -/
+private def kerPowMonoidHomTorsionEquiv {H : Type*} [CommGroup H] {m n : ℕ}
+    (hmn : m ∣ n) :
+    {x : (powMonoidHom n : H →* H).ker // x ^ m = 1} ≃ (powMonoidHom m : H →* H).ker where
+  toFun x := ⟨(x.1 : H), by
+    have h := x.2
+    rw [← OneMemClass.coe_eq_one, SubmonoidClass.coe_pow] at h
+    simpa using h⟩
+  invFun y :=
+    have hy : (y.1 : H) ^ m = 1 := by simpa using MonoidHom.mem_ker.mp y.2
+    ⟨⟨(y.1 : H), by
+      obtain ⟨k, rfl⟩ := hmn
+      simp [MonoidHom.mem_ker, pow_mul, hy]⟩, by
+      rw [← OneMemClass.coe_eq_one, SubmonoidClass.coe_pow]
+      simpa using hy⟩
+  left_inv _ := rfl
+  right_inv _ := rfl
+
+variable [IsAlgClosed K]
+
+/-- If `n` is invertible in an algebraically closed field `K`, then the group `A[n](K)` of
+`K`-points of the `n`-torsion of an abelian variety `A` over `K` is finite. -/
+theorem finite_torsionHom (hn : (n : K) ≠ 0) :
+    Finite (𝟙_ (Over (Spec (.of K))) ⟶ torsion G n) := by
+  have hn₀ : n ≠ 0 := by rintro rfl; simp at hn
+  have := isFinite_torsion G n hn₀
+  have := etale_torsion G n hn
+  have : Finite (torsion G n).left := finite_of_isFinite_over_field (torsion G n).hom
+  exact .of_equiv _
+    ((Over.unitHomEquiv (torsion G n)).trans (pointEquiv (torsion G n).hom)).symm
+
+variable {g : ℕ} [SmoothOfRelativeDimension g G.hom]
+
+/-- If `n` is invertible in an algebraically closed field `K`, then the `n`-torsion of an abelian
+variety `A` of dimension `g` over `K` has exactly `n ^ (2 * g)` points with values in `K`. This is
+the rank of `A[n]` over `K`, since `A[n]` is finite étale over the algebraically closed field
+`K`. -/
+theorem natCard_torsionHom (hn : (n : K) ≠ 0) :
+    Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ torsion G n) = n ^ (2 * g) := by
+  have hn₀ : n ≠ 0 := by rintro rfl; simp at hn
+  have := isFinite_torsion G n hn₀
+  have := etale_torsion G n hn
+  rw [Nat.card_congr (Over.unitHomEquiv (torsion G n)),
+    natCard_pointHom_eq_finrank (torsion G n).hom (IsLocalRing.closedPoint K),
+    finrank_torsion (g := g) G n hn₀]
+
+/-- **Proposition 2.8**: if `n` is invertible in an algebraically closed field `K`, then the group
+`A[n](K)` of `K`-points of the `n`-torsion of an abelian variety `A` of dimension `g` over `K` is
+isomorphic to `(ℤ/n)^(2 * g)`.
+
+The point is that for every `m` dividing `n`, the `m`-torsion of `A[n](K)` is `A[m](K)`, which has
+`m ^ (2 * g)` elements by `AlgebraicGeometry.IsAbelianVariety.natCard_torsionHom`; a finite abelian
+group killed by `n` with this many `m`-torsion points for all `m ∣ n` is free of rank `2 * g`
+over `ℤ/n`. -/
+theorem nonempty_torsionHom_mulEquiv_pi (hn : (n : K) ≠ 0) :
+    Nonempty ((𝟙_ (Over (Spec (.of K))) ⟶ torsion G n) ≃*
+      (Fin (2 * g) → Multiplicative (ZMod n))) := by
+  have hn₀ : n ≠ 0 := by rintro rfl; simp at hn
+  have := finite_torsionHom G n hn
+  have : Finite (powMonoidHom n : (𝟙_ (Over (Spec (.of K))) ⟶ G) →* _).ker :=
+    .of_equiv _ (torsionHomMulEquiv G n _).toEquiv
+  obtain ⟨e⟩ := CommGroup.nonempty_equiv_pi_multiplicative_zmod_of_card_torsion
+    (G := (powMonoidHom n : (𝟙_ (Over (Spec (.of K))) ⟶ G) →* _).ker) (r := 2 * g) hn₀
+    (pow_eq_one_of_mem_ker_powMonoidHom n) fun m hm => by
+      rw [Nat.card_congr ((kerPowMonoidHomTorsionEquiv hm).trans
+          (torsionHomMulEquiv G m (𝟙_ (Over (Spec (.of K))))).toEquiv.symm),
+        natCard_torsionHom (g := g) G m (natCast_ne_zero_of_dvd hn hm)]
+  exact ⟨(torsionHomMulEquiv G n _).trans e⟩
+
+end Points
 
 end AlgebraicGeometry.IsAbelianVariety
