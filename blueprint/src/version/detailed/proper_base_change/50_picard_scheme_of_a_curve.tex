@@ -2993,29 +2993,16 @@ morphism \(\pi_f:C\to\mathbf P^1_k\) with \(\pi_f^*t=f\).
 % \Cref{lem:pc-standard-smooth-form}; stripped, 0.  There is no TeX and no pip in
 % this slot, so no build was run and none is claimed.
 %
-% Repair recorded at its own site (prose only; the statement below is
-% byte-identical to what it was, no hypothesis is added and no \uses edge
-% changes).  The proof used to call the displayed first expression
-%   sum_{pi(P)=P'} v_P(t_{P'}) [k(P):k]
-% the *length* of the fibre algebra.  It is not: for
-% B = prod_{pi(P)=P'} O_{C,P}/(t_{P'}) over the DVRs O_{C,P}, the length is
-% sum_P v_P(t_{P'}) -- the graded pieces of the m_P-adic filtration are
-% simple, so each contributes 1 and no field-degree factor appears -- while
-% it is the k-dimension that carries [k(P):k].  So the sentence asserted
-% l(B) = sum_P v_P(t_{P'}) [k(P):k], false in general, and true here only
-% because k is algebraically closed makes every [k(P):k] = 1 and the two
-% readings coincide.  The step also needs the fibre's *dimension* d to be
-% the displayed quantity, which is a statement about dim_k.  Naming the
-% quantity dim_k repairs both readings at once, and the chain from ``a
-% k-algebra of dimension d'' to the display is now an identity between two
-% k-dimensions.  The conclusion deg pi^*[P'] = d was never in doubt and
-% nothing downstream of this node was unsound.
-%
-% This is the same conflation that PR #630 repaired inside
-% \Cref{lem:pc-degree-base-change}'s proof, at a third site.  The reason a
-% sweep keyed on the word ``length'' passed over this line is worth
-% recording: the word was right and the expression beside it was not, and a
-% word-keyed predicate cannot see which of the two a display computes.
+% Repair recorded at its own site.  The proof below used to call the displayed
+% first expression \(\sum_{\pi(P)=P'}v_P(t_{P'})\,[k(P):k]\) the \emph{length}
+% of the fibre algebra \(B\), without saying over which ring the length is
+% taken, and the two readings differ: over \(\mathcal O_{C,P}\), or over \(B\)
+% itself, it is \(\sum_{\pi(P)=P'}v_P(t_{P'})\), the graded pieces of the
+% \(\mathfrak m_P\)-adic filtration being simple, whereas over
+% \(\mathcal O_{C',P'}\) it is \(\dim_{k(P')}B\).  What the step needs is the
+% \(k\)-dimension, since the fibre is compared with a \(k\)-algebra of
+% dimension \(d\); the quantity is named \(\dim_k\) accordingly.  The same
+% conflation was repaired inside \Cref{lem:pc-degree-base-change}'s proof.
 \begin{lemma}[Degree of pullbacks of divisors]
 \label{lem:pcb-pullback-degree}
 Let \(\pi:C\to C'\) be a finite flat morphism of connected proper
@@ -3045,7 +3032,7 @@ direction ``finite \(\Rightarrow\) proper with finite fibres''), and
 \uses{def:pcb-curves,def:pcb-divisor,def:pcb-function-field,lem:pcb-finite-iff-proper-finite-fibres}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-point-cartier}
+\uses{lem:pc-artinian-product-local,lem:pcb-point-cartier,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular}
 Since \(\pi\) is finite flat, \(\pi_*\mathcal O_C\) is locally free,
 and of \emph{constant} rank because \(C'\) is connected.  That rank is
 \(d\): the rank is nonzero, because \(C\) is nonempty and the rank is
@@ -3056,21 +3043,36 @@ the irreducible curve \(C\) lies over the generic point \(\eta'\) of
 \(\eta'\) is \(k(C)\), a \(k(C')\)-vector space of dimension
 \([k(C):k(C')]\).  The fibre over \(P'\) is
 \(\operatorname{Spec}((\pi_*\mathcal O_C)\otimes k(P'))\), a
-\(k\)-algebra of dimension \(d\) (all residue fields are \(k\)
-because \(k\) is algebraically closed), whose \(k\)-dimension is
+\(k\)-algebra of dimension \(d\); here \(k(P')=k\), because \(k\) is
+algebraically closed.  On the other hand its \(k\)-dimension is
 \[
  \sum_{\pi(P)=P'}v_P(t_{P'})\,[k(P):k]
  =\sum_{\pi(P)=P'}v_P(t_{P'}),
 \]
-as \(\mathcal O_{C,P}\) is a discrete valuation ring with residue
-field \(k(P)\) (\Cref{lem:pcb-point-cartier}): the fibre algebra is
-the product over \(\pi(P)=P'\) of the rings
-\(\mathcal O_{C,P}/(t_{P'})\), and each factor is filtered by the
-powers of the maximal ideal with \(v_P(t_{P'})\) graded pieces, each
-of them a one-dimensional \(k(P)\)-vector space, so the factor has
-\(k\)-dimension \(v_P(t_{P'})\,[k(P):k]\).  The second equality is
-where the hypothesis that \(k\) is algebraically closed is used: every
-residue field \(k(P)\) is then \(k\) itself, so \([k(P):k]=1\).  Hence
+where \(t_{P'}\) denotes also its image in \(\mathcal O_{C,P}\) under
+the map \(\mathcal O_{C',P'}\to\mathcal O_{C,P}\) induced by \(\pi\).
+Indeed the fibre algebra is finite dimensional over \(k\), hence
+Artinian, hence the product of its localizations at its maximal
+ideals (\Cref{lem:pc-artinian-product-local}); those maximal ideals
+are the points \(P\) of the fibre, and the localization at \(P\) is
+\(\mathcal O_{C,P}/(t_{P'})\).  Each \(\mathcal O_{C,P}\) is
+a discrete valuation ring with residue field \(k(P)\): it is regular,
+\(C\) being smooth (\Cref{lem:pcb-smooth-regular}), and of dimension
+one, \(P\) being a closed point on a component of dimension one, so
+\Cref{lem:pcb-regular-dim1-dvr} applies and \(\mathfrak m_P\) is
+generated by a uniformizer -- this is the argument carried out in
+\Cref{lem:pcb-point-cartier}'s proof.  Hence
+\((t_{P'})=\mathfrak m_P^{v_P(t_{P'})}\), by the definition of
+\(v_P\), and filtering \(\mathcal O_{C,P}/(t_{P'})\) by the images of
+the powers \(\mathfrak m_P^i\), \(0\le i\le v_P(t_{P'})\), gives
+\(v_P(t_{P'})\) graded pieces \(\mathfrak m_P^i/\mathfrak m_P^{i+1}\),
+each isomorphic to \(k(P)\) because \(\mathfrak m_P\) is principal
+(multiplication by the \(i\)-th power of a uniformizer induces an
+isomorphism \(\mathcal O_{C,P}/\mathfrak m_P\to\mathfrak
+m_P^i/\mathfrak m_P^{i+1}\)); so the factor has \(k\)-dimension
+\(v_P(t_{P'})\,[k(P):k]\).  The second equality uses again that \(k\)
+is algebraically closed: every residue field \(k(P)\) is then \(k\)
+itself, so \([k(P):k]=1\).  Hence
 \(\deg\pi^*[P']=\sum_{\pi(P)=P'}v_P(t_{P'})=d\), and the general
 case follows by linearity.
 \end{proof}
@@ -9830,28 +9832,6 @@ over $A$ -- the standard: flatness of a quasi-coherent module over
 $S$ is detected on the affines of a base; for our $f$ of finite
 presentation with $S$ affine, also direct: from the local
 $\Gamma$-description of the flatness of $\cG$ over $S$).
-% Ruling on the flatness step just above, recorded at its own site.  That
-% parenthesis names a fact -- flatness of a quasi-coherent module over $S$
-% is detected on the affines of a base -- and the naming carries neither a
-% \Cref nor a \stacksproject tag.  It is nonetheless not a bare appeal to
-% something outside this chapter, in the sense of the axis swept by taxis
-% 809 and PR #629: the derivation is supplied in the same sentence, which
-% goes on to obtain flatness of $N$ over $A$ from the local
-% $\Gamma$-description of $\cG$, for the $f$ of finite presentation with
-% $S$ affine that is in force here.  The naming is decorative and the
-% derivation is what carries the step, so no node and no tag is owed, and
-% no \uses edge is drawn for it -- there is nothing external being used,
-% and this chapter's convention (stated at
-% \Cref{lem:pc-ample-basis-criterion}) is not to record a dependency that
-% does not exist.  Both rounds of review on 809 read this site and reached
-% the same verdict; this block is the ruling they recommended.
-%
-% Deliberate wording.  This block carries none of that axis's cue words and
-% does not quote the phrase it rules, so a re-run of 809's sweep with
-% comments left unstripped does not fire on the ruling itself.  #629's
-% ruling at \Cref{lem:pc-fpqc-descent} does quote its own cue, which is why
-% an unstripped re-run there reads a residue one row larger than a stripped
-% one; the same trap is avoided here by paraphrase.
 A finitely presented flat $A$-module is finite projective
 (\Cref{lem:pc-fp-flat-finite-projective}): it is finite
 locally free (over the local ring $A_{\mathfrak p}$ the localization
