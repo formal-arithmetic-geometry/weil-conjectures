@@ -29,7 +29,7 @@ theorem for the unbounded derived category, but it assumes `HasKInjectiveResolut
 both `C` and `D`, whose only source in this repository is a `sorry`. The bounded below
 statement needs only
 enough injectives, so it rests on proved theorems; see
-`WeilConjectures.SixFunctors.Derived` for why that distinction matters here. This file
+`WeilConjectures.SixFunctors.Etale.Derived` for why that distinction matters here. This file
 therefore deliberately does not import anything from
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
 
