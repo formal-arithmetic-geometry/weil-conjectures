@@ -40,6 +40,8 @@ of any Mathlib file and lives outside `WeilConjectures/Mathlib/`.
 
 - `AlgebraicGeometry.Spec.overQuotientMk`: the closed immersion `Spec (B ⧸ I) ⟶ Spec B` attached
   to an ideal `I` of `B`, as a morphism of schemes over a base.
+- `AlgebraicGeometry.IsAffineOpen.app`: the ring map on functions over an affine open `U`
+  attached to a morphism `Spec S ⟶ X` whose image lies in `U`.
 
 ## Main statements
 
@@ -195,37 +197,47 @@ lemma Spec.overQuotientMk_left {R B : CommRingCat.{u}} (I : Ideal B) (t : Spec B
 /-! ### Morphisms landing in an affine chart
 
 For a morphism `f : Spec S ⟶ X` whose image lies in an affine open `U` of `X`, the ring map
-`app hU f hf : Γ(X, U) ⟶ S` determines `f`, and every ring map arises this way. -/
+`hU.app f hf : Γ(X, U) ⟶ S` determines `f`, and every ring map arises this way. -/
 
 section Chart
+
+namespace IsAffineOpen
 
 variable {X : Scheme.{u}} {U : X.Opens} (hU : IsAffineOpen U)
 
 /-- The ring map on functions over the affine open `U` induced by a morphism `f : Spec S ⟶ X`
-whose image is contained in `U`. -/
-private noncomputable def app {S : CommRingCat.{u}} (f : Spec S ⟶ X)
+whose image is contained in `U`. It is the unique ring map `φ : Γ(X, U) ⟶ S` with
+`Spec.map φ ≫ hU.fromSpec = f`; see `AlgebraicGeometry.IsAffineOpen.Spec_map_app` and
+`AlgebraicGeometry.IsAffineOpen.app_eq`. -/
+noncomputable def app {S : CommRingCat.{u}} (f : Spec S ⟶ X)
     (hf : Set.range f ⊆ (U : Set X)) : Γ(X, U) ⟶ S :=
   Spec.preimage (IsOpenImmersion.lift hU.fromSpec f (by rwa [hU.range_fromSpec]))
 
+/-- A morphism `f : Spec S ⟶ X` landing in the affine open `U` is recovered from its ring map
+on functions over `U`. -/
 @[reassoc]
-private lemma Spec_map_app {S : CommRingCat.{u}} (f : Spec S ⟶ X)
+lemma Spec_map_app {S : CommRingCat.{u}} (f : Spec S ⟶ X)
     (hf : Set.range f ⊆ (U : Set X)) : Spec.map (app hU f hf) ≫ hU.fromSpec = f := by
   rw [app, Spec.map_preimage]
   exact IsOpenImmersion.lift_fac _ _ _
 
-private lemma app_eq {S : CommRingCat.{u}} (f : Spec S ⟶ X)
+/-- The ring map on functions attached to a morphism landing in the affine open `U` is the
+unique one factoring it through `hU.fromSpec`. -/
+lemma app_eq {S : CommRingCat.{u}} (f : Spec S ⟶ X)
     (hf : Set.range f ⊆ (U : Set X)) (φ : Γ(X, U) ⟶ S)
     (h : Spec.map φ ≫ hU.fromSpec = f) : app hU f hf = φ := by
   rw [app, ← IsOpenImmersion.lift_uniq hU.fromSpec f _ (Spec.map φ) h, Spec.preimage_map]
 
 /-- Composing a morphism into `U` with a morphism of affine schemes on the source. -/
-private lemma app_Spec_map_comp {S S' : CommRingCat.{u}} (f : Spec S ⟶ X)
+lemma app_Spec_map_comp {S S' : CommRingCat.{u}} (f : Spec S ⟶ X)
     (hf : Set.range f ⊆ (U : Set X)) (φ : S ⟶ S') :
     app hU (Spec.map φ ≫ f) (by
       refine .trans ?_ hf
       simpa using Set.range_comp_subset_range (Spec.map φ).base f.base) = app hU f hf ≫ φ := by
   refine app_eq hU _ _ _ ?_
   rw [Spec.map_comp, Category.assoc, Spec_map_app]
+
+end IsAffineOpen
 
 end Chart
 
@@ -336,13 +348,14 @@ omit [GrpObj G] in
 /-- A morphism `Spec S ⟶ G` landing in `U` is a `K`-algebra map on functions. -/
 private lemma chartAlg_comp_app {S : CommRingCat.{u}} (f : Spec S ⟶ G.left)
     (hf : Set.range f ⊆ (U : Set G.left)) :
-    chartAlg hU ≫ app hU f hf = Spec.preimage (f ≫ G.hom) := by
+    chartAlg hU ≫ IsAffineOpen.app hU f hf = Spec.preimage (f ≫ G.hom) := by
   refine Spec.map_injective ?_
-  rw [Spec.map_comp, Spec_map_chartAlg, Spec.map_preimage, ← Category.assoc, Spec_map_app]
+  rw [Spec.map_comp, Spec_map_chartAlg, Spec.map_preimage, ← Category.assoc,
+    IsAffineOpen.Spec_map_app]
 
 /-- The ring map on functions of the identity section of `G`. -/
 private noncomputable def unitApp : Γ(G.left, U) ⟶ CommRingCat.of K :=
-  app hU (η[G]).left hUe
+  IsAffineOpen.app hU (η[G]).left hUe
 
 private lemma chartAlg_comp_unitApp : chartAlg hU ≫ unitApp hU hUe = 𝟙 _ := by
   rw [unitApp, chartAlg_comp_app]
@@ -355,11 +368,11 @@ variable (hI : I ^ 2 = ⊥)
 /-- The ring map on functions over `U` induced by a point of `G` trivial on the thickening. -/
 private noncomputable def pt (d : Over.mk t ⟶ G) (hd : Spec.overQuotientMk I t ≫ d = 1) :
     Γ(G.left, U) ⟶ B :=
-  app hU d.left ((range_left_subset hI hd).trans hUe)
+  IsAffineOpen.app hU d.left ((range_left_subset hI hd).trans hUe)
 
 private lemma Spec_map_pt (d : Over.mk t ⟶ G) (hd : Spec.overQuotientMk I t ≫ d = 1) :
     Spec.map (pt hU hUe hI d hd) ≫ hU.fromSpec = d.left :=
-  Spec_map_app hU _ _
+  IsAffineOpen.Spec_map_app hU _ _
 
 private lemma chartAlg_comp_pt (d : Over.mk t ⟶ G) (hd : Spec.overQuotientMk I t ≫ d = 1) :
     chartAlg hU ≫ pt hU hUe hI d hd = Spec.preimage t := by
@@ -368,8 +381,9 @@ private lemma chartAlg_comp_pt (d : Over.mk t ⟶ G) (hd : Spec.overQuotientMk I
 
 private lemma pt_one :
     pt hU hUe hI (1 : Over.mk t ⟶ G) one_triv = unitApp hU hUe ≫ Spec.preimage t := by
-  refine app_eq hU _ _ _ ?_
-  rw [Spec.map_comp, Spec.map_preimage, unitApp, Category.assoc, Spec_map_app, Hom.one_def]
+  refine IsAffineOpen.app_eq hU _ _ _ ?_
+  rw [Spec.map_comp, Spec.map_preimage, unitApp, Category.assoc, IsAffineOpen.Spec_map_app,
+    Hom.one_def]
   rfl
 
 
@@ -385,8 +399,9 @@ private lemma pt_sub_mem {d : Over.mk t ⟶ G} (hd : Spec.overQuotientMk I t ≫
   have key : pt hU hUe hI d hd ≫ CommRingCat.ofHom (Ideal.Quotient.mk I)
       = pt hU hUe hI (1 : Over.mk t ⟶ G) one_triv ≫
         CommRingCat.ofHom (Ideal.Quotient.mk I) := by
-    rw [pt, pt, ← app_Spec_map_comp, ← app_Spec_map_comp]
-    exact app_eq hU _ _ _ (by rw [Spec_map_app]; exact (left_comp_quotientMk hd).symm)
+    rw [pt, pt, ← IsAffineOpen.app_Spec_map_comp, ← IsAffineOpen.app_Spec_map_comp]
+    exact IsAffineOpen.app_eq hU _ _ _
+      (by rw [IsAffineOpen.Spec_map_app]; exact (left_comp_quotientMk hd).symm)
   refine (Ideal.Quotient.eq (I := I)).mp ?_
   simpa using congr(($key) x)
 
@@ -471,9 +486,9 @@ private lemma pt_mul_add {c d : Over.mk t ⟶ G} (hc : Spec.overQuotientMk I t �
         = pullback.lift (η[G]).left (η[G]).left rfl := by
       refine pullback.hom_ext ?_ ?_
       · rw [Category.assoc, hjT₁, pullback.lift_fst, ← Category.assoc, ← Spec.map_comp, hi₁,
-          unitApp, Spec_map_app]
+          unitApp, IsAffineOpen.Spec_map_app]
       · rw [Category.assoc, hjT₂, pullback.lift_snd, ← Category.assoc, ← Spec.map_comp, hi₂,
-          unitApp, Spec_map_app]
+          unitApp, IsAffineOpen.Spec_map_app]
     rw [hg, ← Category.assoc, h, lift_unit_comp_mul]
   let pt0 : ↥(Spec (CommRingCat.of K)) := default
   have hp₀ : g ((Spec.map (CommRingCat.ofHom θ.toRingHom)) pt0) ∈ U := by
@@ -511,8 +526,8 @@ private lemma pt_mul_add {c d : Over.mk t ⟶ G} (hc : Spec.overQuotientMk I t �
   have hjL : Set.range (Spec.map algTL ≫ g) ⊆ (U : Set G.left) := by
     rintro _ ⟨y, rfl⟩
     exact hrle (hrangeL y)
-  let m : Γ(G.left, U) ⟶ CommRingCat.of (Localization.Away s) := app hU _ hjL
-  have hm : Spec.map m ≫ hU.fromSpec = Spec.map algTL ≫ g := Spec_map_app hU _ hjL
+  let m : Γ(G.left, U) ⟶ CommRingCat.of (Localization.Away s) := IsAffineOpen.app hU _ hjL
+  have hm : Spec.map m ≫ hU.fromSpec = Spec.map algTL ≫ g := IsAffineOpen.Spec_map_app hU _ hjL
   -- units and nilpotents
   have hunit_of : ∀ a b : B, IsUnit b → a - b ∈ I → IsUnit a := by
     intro a b hb hab
@@ -600,7 +615,7 @@ private lemma pt_mul_add {c d : Over.mk t ⟶ G} (hc : Spec.overQuotientMk I t �
       · rw [pullback.lift_snd, Category.assoc, Category.assoc]; exact hsnd
     have key : m ≫ CommRingCat.ofHom ψ = pt hU hUe hI (c' * d') (mul_triv hc' hd') := by
       rw [pt]
-      refine (app_eq hU _ _ _ ?_).symm
+      refine (IsAffineOpen.app_eq hU _ _ _ ?_).symm
       rw [Spec.map_comp, Category.assoc, hm, hg, mul_left, ← hfac]
       simp
     simpa using congr(($key) y)
@@ -707,7 +722,7 @@ private lemma exists_pow_eq_aux {n : ℕ} (hn : (n : K) ≠ 0) (d : Over.mk t �
         - (pt hU hUe hI (1 : Over.mk t ⟶ G) one_triv).hom y ∈ I
     simpa using I.mul_mem_left u (delta_mem hU hUe hI d hd y)
   refine ⟨_, hc, ?_⟩
-  have hptc : pt hU hUe hI _ hc = CommRingCat.ofHom φ := app_eq hU _ _ _ rfl
+  have hptc : pt hU hUe hI _ hc = CommRingCat.ofHom φ := IsAffineOpen.app_eq hU _ _ _ rfl
   refine eq_of_pt_eq hU hUe hI (pow_triv hc n) hd
     (CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_))
   have h2 : delta hU hUe hI _ hc x = u * delta hU hUe hI d hd x := by
