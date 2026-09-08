@@ -1369,7 +1369,7 @@ it is not silently identified with an unavailable Mathlib primitive.
 
 \begin{definition}[Affine blow-up]
   \label{def:nagata-affine-blowup}
-  \uses{def:nagata-rees-algebra,def:nagata-affine-proj}
+  \uses{def:nagata-rees-algebra,def:nagata-affine-proj,prop:nagata-rees-graded}
   \lean{AlgebraicGeometry.AffineBlowup}
   \leanok
 
@@ -3949,7 +3949,8 @@ closed subscheme of the first blow-up.
 
 \begin{proof}
   \uses{lemma:nagata-composition-center-ideal,
-    lemma:nagata-chart-extended-ideal-principal}
+    lemma:nagata-chart-extended-ideal-principal,
+    lemma:nagata-extended-ideal-affine-chart}
   \leanok
   Let $D_+(at)=\operatorname{Spec}(R_a)$ be a standard chart of the first
   blow-up, where $R_a=A[\mathcal I/a]$ and $a\in\mathcal I$.  The extended
@@ -5014,7 +5015,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{lemma:nagata-strict-transform-closure-characterization,
-    prop:nagata-strict-transform-closed-fiber-product}
+    prop:nagata-strict-transform-closed-fiber-product,
+    lemma:nagata-scheme-theoretic-closure-minimal}
   Use the canonical associativity isomorphism
   $(Y\times_XX')\times_{X'}X''\cong Y\times_XX''$.  Under it, the preserved
   open used in the second strict transform is identified with
@@ -5463,7 +5465,8 @@ correction explicit before it is sheafified and glued.
 \end{lemma}
 
 \begin{proof}
-  \uses{lemma:nagata-scheme-image-flat-base-change}
+  \uses{lemma:nagata-scheme-image-flat-base-change,
+    lemma:nagata-dense-compactification-characterization}
   \leanok
   By \Cref{lemma:nagata-scheme-image-flat-base-change}, the scheme-theoretic
   image after pullback is canonically the pullback of the scheme-theoretic
@@ -6229,7 +6232,8 @@ correction explicit before it is sheafified and glued.
 
 \begin{proof}
   \uses{def:nagata-qc-open-complement-ideal,
-    lemma:nagata-finite-type-nil-ideal-nilpotent}
+    lemma:nagata-finite-type-nil-ideal-nilpotent,
+    lemma:nagata-closed-fp-ideal-finite-type}
   Put $K_i=\mathcal I_Z(P_i)$, the finite-type ideal whose vanishing set is
   $Z\setminus P_i$ (\Cref{def:nagata-qc-open-complement-ideal}).  Since
   $P_1$ and $P_2$ are disjoint, $V(K_1K_2)=Z$; finite type and
@@ -8390,7 +8394,8 @@ $U_1\cap U_2$ is dense in $U$.  Assume each $U_i\to S$ is compactifiable.
 \end{lemma}
 
 \begin{proof}
-  \uses{lemma:nagata-two-open-density-transport}
+  \uses{lemma:nagata-two-open-density-transport,
+    lemma:nagata-two-open-dense-compactifications}
   \leanok
   Apply \Cref{lemma:nagata-two-open-density-transport} to the construction of
   $W'_1,W'_2,W$.  Its hypotheses hold because the selected compactifications
@@ -9594,6 +9599,7 @@ coefficients and relations and all later stages inherit the recorded data.
 
 \begin{proof}
   \leanok
+  \uses{lemma:nagata-closed-fp-ideal-finite-type}
   Finite type of $\mathcal I_\alpha$ is equivalent to finite presentation of
   $X_\alpha\hookrightarrow Y$, and each transition $X_\beta\to X_\alpha$ is a
   closed immersion because its composite with the closed immersion
@@ -11569,7 +11575,8 @@ function used in the proof.
   \leanok
   \uses{def:nagata-scheme-theoretic-closure,
     lemma:nagata-scheme-image-restrict-open,
-    def:nagata-blowup-chart-ring}
+    def:nagata-blowup-chart-ring,
+    lemma:nagata-ideal-unit-off-support}
   Formation of topological closures commutes with restriction to an open
   subspace, and by \Cref{lemma:nagata-scheme-image-restrict-open} the same
   holds for scheme-theoretic images of quasi-compact immersions.  The
