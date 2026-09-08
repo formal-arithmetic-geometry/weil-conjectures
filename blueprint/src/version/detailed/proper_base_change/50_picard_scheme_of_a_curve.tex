@@ -817,9 +817,15 @@ The \emph{divisor class group} is
 For \(D=\sum n_P[P]\) the associated invertible module is the
 sub-\(\mathcal O_C\)-module of the constant sheaf \(k(C)\)
 \[
- \mathcal O_C(D)(U):=\{f\in k(C):\operatorname{div}(f)|_U+D|_U\geq0\};
+ \mathcal O_C(D)(U):=\{0\}\cup
+ \{f\in k(C)^*:\operatorname{div}(f)|_U+D|_U\geq0\};
 \]
-it is invertible -- this is the identification of
+the zero function is adjoined on its own because \(\operatorname{div}\)
+is defined on \(k(C)^*\) only, as above, so that the displayed condition
+is defined at every \(f\) on which it is imposed and the set has a zero
+element; equivalently \(\mathcal O_C(D)(U)\) consists of those
+\(f\in k(C)\) which either vanish or satisfy
+\(\operatorname{div}(f)|_U+D|_U\geq0\).  It is invertible -- this is the identification of
 \(\operatorname{Pic}(C)\) with \(\operatorname{Cl}(C)\) for smooth
 curves, proved in the basic facts below.  When all
 \(n_P\geq0\), \(D\) is \emph{effective} and is an effective Cartier
@@ -5390,9 +5396,13 @@ Z\to T\text{ is finite locally free of degree }d\bigr\},
 \]
 where ``finite locally free of degree $d$'' is
 Definition~\ref{def:pc-finite-locally-free};
-the assignment is contravariant by base change of closed subschemes
-(the resulting functor's sheaf properties are
-\Cref{lem:pc-hilb-functorial}).  If it is representable
+the assignment is contravariant by base change of closed subschemes;
+that this is well defined --- that the base change of a closed
+subscheme of $X_T$ finite locally free of degree $d$ over $T$ is again
+one over $T'$, so that $T\mapsto\Hilb^d_{X/S}(T)$ is a functor --- is
+\Cref{lem:pc-hilb-functorial}, and the resulting functor's sheaf
+property for the fppf topology is \Cref{lem:pc-hilb-sheaf}.  If it is
+representable
 (\Cref{def:pc-representable-functor}), the representing scheme is
 $\underline{\Hilb}^d_{X/S}$ (Stacks Project, Picard Schemes of Curves,
 Chapter~44, Section~44.2,
@@ -5949,7 +5959,9 @@ dimension one, $C$ being a curve over $k$ in the sense of
 \Cref{def:pc-curve} and $P$ a closed point of it, so
 \Cref{lem:pcb-regular-dim1-dvr} applies and the ideal $\cI_P=\mathfrak
 m_P$ of the point is principal), the divisor module
-$\{f\in k(C):\operatorname{div}f|_U+[P]\ge0\}$ is
+$\{0\}\cup\{f\in k(C)^*:\operatorname{div}f|_U+[P]\ge0\}$ (the set of
+\Cref{def:pcb-divisor}, in which $0$ is adjoined on its own because
+$\operatorname{div}$ is defined on $k(C)^*$ only) is
 $t^{-1}\cO_C(U)$, the module $\cI_P^\vee$ likewise maps
 $\cI_P=(t)$ to $\cO_U$ isomorphically to $t^{-1}\cO_U$, and on
 $V=C\setminus\{P\}$ both are $\cO_C(V)$.  This gives the canonical
@@ -6264,6 +6276,13 @@ restrictions of the $g_X^*$ of (2).
 % untouched, and the \uses lists are unchanged: no citation is added or removed, and
 % \Cref{def:pc-picard-presheaf} stays on the statement's list, the presheaf whose
 % rule the gloss still displays being exactly what that node names in general.
+% Ruling (same sweep).  Predicate: no --- no proof in this chapter passes between
+% \Cref{def:pc-picard-functor} and \Cref{def:pcb-picard-functor}; the file~06 functor
+% is named in this chapter only here and in that definition's own prose pointer.
+% This is a comparison lemma, and the standing exclusion for comparison lemmas
+% applies: it records that two nodes of different files agree and is not a step of
+% any argument, so no edge is forced.  Its only available citation would be the
+% forward pointer from \Cref{def:pc-picard-functor}, which closes a 2-cycle.
 \begin{lemma}[Agreement with the affine Picard functor of file 06]
 \label{lem:pc-picard-functor-agrees-sc}
 Let $k$ be a field and $X$ a
@@ -6323,6 +6342,16 @@ kernel of $\sigma^*$ is all of $\Pic(X)$.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (same sweep).  Predicate: no --- no proof in this chapter takes the step
+% ``an invertible module is perfect''.  Every perfectness asserted below is
+% perfectness of a derived direct image and comes from
+% \Cref{lem:pc-rf-perfect-base-change}, whose hypothesis is finite presentation and
+% flatness over the base and not invertibility; \Cref{lem:pc-perfect-locus} and
+% \Cref{lem:pc-perfect-local-normal-form} take the perfectness of $E$ as a
+% hypothesis, and \Cref{lem:pc-flat-rf-open} gets it for $Rf_*\cF$ from that same
+% lemma.  So this lemma keeps \uses-in-degree 0 deliberately: its only citation would
+% be the forward pointer from \Cref{def:pc-perfect-complex}, and that edge closes a
+% 2-cycle.
 \begin{lemma}[Invertible modules are perfect]\label{lem:pc-invertible-perfect}
 Let $X$ be a scheme and $\cM$ an
 \termref{def:pc-invertible-module}{invertible $\cO_X$-module}.  Then
@@ -6340,6 +6369,14 @@ a bounded complex of finite projective modules.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (same sweep).  Predicate: yes --- the proof of
+% \Cref{lem:pc-zero-scheme-recd} passes from $Rf_{\kappa,*}\cL_t\cong\cN_t[0]$ with
+% $\cN_t$ invertible to $H^0(X_t,\cL_t)\cong\cN_t$ and the vanishing of the other
+% cohomology, which is exactly this lemma; that proof now cites it and carries the
+% edge.  Not \Cref{thm:pc-f-representable}, which only passes the datum
+% $Rf_{T,*}\cL\cong\cN[0]$ on to \Cref{lem:pc-zero-scheme-recd} and never reads the
+% cohomology of the complex itself.  The edge is not drawn from
+% \Cref{def:pc-invertible-in-degree-zero}, whose prose pointer would close a 2-cycle.
 \begin{lemma}[Cohomology of a module in degree zero]
 \label{lem:pc-degree-zero-properties}
 Let $X$ be a scheme, $M\in D(\cO_X)$ and let $\cN$ be an
@@ -6480,6 +6517,21 @@ finite locally free of degree $d_1d_2$.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (\uses-in-degree sweep over the in-degree-0 lemmas of this chapter).
+% Predicate: does some proof in the chapter take the step this lemma states?  Yes ---
+% the proof of \Cref{lem:pc-hilb-sheaf} states its glueing datum as ``$Z_i$ and
+% $Z_{i'}$ map to the same element of $\Hilb^d(T_i\times_TT_{i'})$'', and those two
+% maps are exactly the pullbacks this lemma supplies; that proof now cites it and
+% carries the edge.  The edge is drawn there and not from
+% \Cref{def:pc-hilb-functor}: a definition -> property-lemma edge closes a 2-cycle,
+% which is the standing ruling for the nine such pairs of this chapter.  The
+% definition names this lemma in prose only, for what it proves (well-definedness of
+% the contravariant assignment), the fppf sheaf property being
+% \Cref{lem:pc-hilb-sheaf}.
+% No second edge from \Cref{lem:pc-hilb-representable}: its Steps 2--4 do form
+% subfunctors of $\Hilb^d_{X/S}$, but the only base change of a member it needs is
+% the one its own Step 1 proves inline for the situation at hand, so it takes no
+% separate step from here.
 \begin{lemma}[The Hilbert functor is a functor]\label{lem:pc-hilb-functorial}
 Let $X\to S$ be a morphism of schemes and $d\ge0$.  The assignment
 $T\mapsto\Hilb^d_{X/S}(T)$ of
@@ -6615,6 +6667,13 @@ finite dimensional.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (same sweep).  Predicate: no --- the comparison-lemma exclusion again.  The
+% chapter's own arguments read the genus through \Cref{def:pc-genus} throughout, and
+% the one node below that uses \Cref{def:pcb-genus},
+% \Cref{lem:pcb-degree-2g1-very-ample}, stays inside the file~06 notion and never
+% crosses to \Cref{def:pc-genus}; so no proof takes the step this lemma states, and
+% its only available citation would be the forward pointer from
+% \Cref{def:pc-genus}, which closes a 2-cycle.
 \begin{lemma}[Agreement with the genus of file 06]
 \label{lem:pc-genus-agrees-sc}
 Let $k$ be an algebraically closed field and $C$ a
@@ -7134,6 +7193,13 @@ irreducible forces $q$ constant.)
 
 % ----------------------------------------------------------------------------
 % Decomposed.
+% Ruling (same sweep).  Predicate: no --- this lemma is the first step of the
+% classical alternative route to \Cref{prop:pc-XK-integral}, and that proposition is
+% proved here by the smoothness route (smooth => regular => normal => decomposition)
+% instead, as \Cref{rem:pc-conventions} records.  No proof in the chapter takes the
+% step, so no edge is drawn: the lemma is recorded for the reader, and a
+% cross-reference made only to compare is not a \uses, by the convention stated in
+% \Cref{rem:pc-conventions}.
 \begin{lemma}[The algebraic closure over a separably closed field]
 \label{lem:pc-kbar-pure-insep}
 Let $k$ be a \termref{def:pc-separably-closed}{separably closed field}
@@ -8203,6 +8269,9 @@ generators of the residue field extensions.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (same sweep).  Predicate: no --- the second step of the same unused
+% alternative route as \Cref{lem:pc-kbar-pure-insep}; see the ruling there.  No proof
+% in the chapter takes the step, so no edge is drawn.
 \begin{lemma}[Base change along a purely inseparable extension is a homeomorphism]
 \label{lem:pc-homeo-pure-insep}
 Let $k\subset k'$ be a purely inseparable field extension and $X$ a
@@ -10877,13 +10946,16 @@ property for the fppf topology.
 \uses{def:pc-hilb-functor,def:pc-fppf-site}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,def:pc-fppf-site,def:pc-fpqc-covering,def:pc-hilb-functor,lem:pc-closed-immersion-fpqc-local,lem:pc-effective-descent-closed-immersions,lem:pc-flf-fpqc-local,lem:pc-fpqc-covering-stability}
+\uses{def:pc-finite-locally-free,def:pc-fppf-site,def:pc-fpqc-covering,def:pc-hilb-functor,lem:pc-closed-immersion-fpqc-local,lem:pc-effective-descent-closed-immersions,lem:pc-flf-fpqc-local,lem:pc-fpqc-covering-stability,lem:pc-hilb-functorial}
 Let $\{T_i\to T\}_{i\in I}$ be an fppf covering of schemes over $S$
 (\Cref{def:pc-fppf-site}; an fppf covering is flat, locally of finite
 presentation and surjective, hence faithfully flat: it is an fpqc
 covering (\Cref{def:pc-fpqc-covering}) in particular) and let
 $Z_i\in\Hilb^d_{X/S}(T_i)$ be objects such that $Z_i$ and $Z_{i'}$ map to the same element of
-$\Hilb^d_{X/S}(T_i\times_TT_{i'})$; say $Z_i$ corresponds to a closed
+$\Hilb^d_{X/S}(T_i\times_TT_{i'})$ --- the two maps being the pullbacks
+along the projections $T_i\times_TT_{i'}\to T_i$ and
+$T_i\times_TT_{i'}\to T_{i'}$, which exist because $\Hilb^d_{X/S}$ is a
+functor (\Cref{lem:pc-hilb-functorial}); say $Z_i$ corresponds to a closed
 subscheme $\varphi_i:Z_i\hookrightarrow X_{T_i}$ (the definition
 \Cref{def:pc-hilb-functor}) and the compatibility means: the two
 pullbacks of $\varphi_i$ and $\varphi_{i'}$ to
@@ -12833,7 +12905,7 @@ divisor} on $X_T/T$ which is finite locally free of degree $g$ over $T$.
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom,lem:pc-f-open-subfunctor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-degree-line-bundle,def:pc-dimension,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,prop:pc-XK-integral,lem:pc-smooth-over-field-regular}
+\uses{def:pc-degree-line-bundle,def:pc-dimension,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-degree-zero-properties,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,prop:pc-XK-integral,lem:pc-smooth-over-field-regular}
 $\cM:=\cL\otimes f_T^*\cN^{-1}$ is an invertible module on $X_T$ and
 $s\in H^0(X_T,\cM)$.  By
 \Cref{def:pc-zero-scheme} the ideal sheaf
@@ -12860,7 +12932,9 @@ presentation and flat over $\kappa$.)  Hence
 $H^0(X_t,\cL_t)\cong\cN_t$ and $H^1(X_t,\cL_t)=0$ (and
 $H^i(X_t,\cL_t)=0$ for $i\ge2$ by \Cref{lem:pc-vanishing-above-dim},
 $\dim X_t=1$; the equality $H^0\cong\cN_t$ also uses the canonical
-identification of $H^0$ of the complex $\cN_t[0]$).
+identification of $H^0$ of the complex $\cN_t[0]$, which is
+\Cref{lem:pc-degree-zero-properties} for the invertible module
+$\cN_t$).
 In particular $\dim_\kappa H^0(X_t,\cL_t)=1$.
 Consider the identical analysis for $\cO$: $X_t$ is a smooth projective
 curve over $\kappa$ with $H^0(X_t,\cO)=H^0(X,\cO)\otimes_k\kappa=\kappa$
