@@ -1140,12 +1140,15 @@ The \'etale route says nothing about the degree of $[n]$, and nothing at all
 when $n$ is divisible by the characteristic of $K$.  Both come from the theory
 of line bundles on abelian varieties.  This section states the five inputs that
 are needed, with proof sketches and references, and derives the remaining parts
-of \Cref{prop:av-isogeny} from them.  Each input is marked as an open
-obligation: Mathlib \texttt{v4.33.1} has no invertible sheaves on a scheme, no
-Picard group of a scheme, no ampleness, no cohomology of coherent sheaves and
-no intersection numbers, so \emph{none} of the five can currently even be
-stated in Lean.  The statements below carry full labels so that a later chapter
-can depend on them.
+of \Cref{prop:av-isogeny} from them.  Two of the five, \Cref{thm:av-cube} and
+\Cref{thm:av-mulby-pullback}, are proved in \Cref{chap:cube} and are quoted
+here from there.  The other three are marked as open obligations: Mathlib
+\texttt{v4.33.1} has no invertible sheaves on a scheme, no Picard group of a
+scheme, no ampleness, no cohomology of coherent sheaves and no intersection
+numbers, so \emph{none} of the five can currently even be stated in Lean, and
+\Cref{sec:cube-cost} counts what the two proved ones would cost.  The
+statements below carry full labels so that a later chapter can depend on
+them.
 
 \statusnote{Whether this project builds the layer of algebraic geometry that
 the five inputs of this section require --- invertible sheaves and the Picard
@@ -1167,16 +1170,16 @@ restrictions to
   X\times Y\times\{z_0\}
 \]
 are all trivial.  Then $L$ is trivial.
-\openobligation{AlgebraicGeometry: invertible sheaves on a scheme and the
-Picard group; cohomology of coherent sheaves; the seesaw principle.}
 \end{theorem}
 \begin{proof}
-\emph{Sketch.}  By the seesaw principle the assertion reduces to showing that a
-family of line bundles on $X\times Y$ parametrised by $Z$, trivial at one point
-of $Z$, is trivial; and that in turn follows from the vanishing of $H^0$ of the
-relevant twists together with semicontinuity of cohomology in the family.  The
-proof is in \cite[\S6]{MumfordAbelianVarieties} and
-\cite[\S5]{MilneAbelianVarieties}.
+\uses{thm:cube-cube}
+This is \Cref{thm:cube-cube}, which is proved in \Cref{chap:cube} in the
+slightly more general form where $Z$ is only assumed to be a connected reduced
+scheme of finite type over $K$.  The proof there is the classical one of
+\cite[\S6]{MumfordAbelianVarieties} and \cite[I, \S5]{MilneAbelianVarieties}:
+the locus in $Z$ over which $L$ is trivial is closed by the seesaw theorem and
+open by a K\"unneth argument on the square-zero thickenings of a point of it
+together with the theorem on formal functions, hence is all of $Z$.
 \end{proof}
 
 \begin{theorem}[Pullback of a symmetric line bundle along $[n]$]
@@ -1190,28 +1193,30 @@ $L$ be a line bundle on $A$.  Then for every $n\in\Z$
 \]
 In particular, if $L$ is \emph{symmetric}, that is $[-1]^*L\cong L$, then
 $[n]^*L\cong L^{\otimes n^2}$.
-\openobligation{AlgebraicGeometry: invertible sheaves on a scheme and the
-Picard group, together with the pullback action of a morphism on it.}
 \end{theorem}
 \begin{proof}
-\uses{thm:av-cube}
-\emph{Sketch.}  Apply \Cref{thm:av-cube} on $A\times A\times A$ to the line
-bundle
+\uses{thm:av-cube, thm:cube-mulby-pullback, thm:cube-abelian,
+cor:cube-mulby-recursion}
+This is \Cref{thm:cube-mulby-pullback}, proved in \Cref{sec:cube-abelian};
+the argument there is the one sketched here.  Apply \Cref{thm:av-cube} on
+$A\times A\times A$ to the line bundle
 \[
   m_{123}^*L\otimes m_{12}^*L^{-1}\otimes m_{13}^*L^{-1}\otimes
   m_{23}^*L^{-1}\otimes p_1^*L\otimes p_2^*L\otimes p_3^*L,
 \]
 where $m_S$ denotes the sum of the coordinates indexed by $S$ and $p_i$ the
 projections: its restrictions to the three coordinate slices are trivial, so it
-is trivial.  Pulling back along $(x,y)\mapsto(x,x,y)$ turns this into the
-recursion
+is trivial; that is \Cref{thm:cube-abelian}.  Evaluating the resulting identity
+at the three points $[n]$, $[1]$ and $[-1]$ of the group $A(A)$ turns it into
+the recursion
 \[
   [n+1]^*L\otimes[n-1]^*L\cong\bigl([n]^*L\bigr)^{\otimes2}\otimes L\otimes
   [-1]^*L,
 \]
-and the stated formula follows by induction from $[0]^*L\cong\O_A$ and
-$[1]^*L\cong L$.  See \cite[\S6]{MumfordAbelianVarieties} and
-\cite[\S5]{MilneAbelianVarieties}.
+of \Cref{cor:cube-mulby-recursion}, and the stated formula follows by a
+two-sided induction on $n\in\Z$ from the three base cases $[0]^*L\cong\O_A$,
+$[1]^*L\cong L$ and $[-1]^*L$.  See \cite[\S6]{MumfordAbelianVarieties} and
+\cite[I, \S5]{MilneAbelianVarieties}.
 \end{proof}
 
 \begin{proposition}[Existence of a symmetric ample line bundle]
