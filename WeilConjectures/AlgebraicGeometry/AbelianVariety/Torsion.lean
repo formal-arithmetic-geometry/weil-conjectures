@@ -33,7 +33,10 @@ in the sense of `CategoryTheory.GrpObj.ker`. This kernel is the `n`-torsion subg
 - `A[n]` is a closed subscheme of `A`, and is proper and separated over `K`.
 - `AlgebraicGeometry.IsAbelianVariety.isFinite_torsion` and
   `AlgebraicGeometry.IsAbelianVariety.flat_torsion`: for `n ≠ 0`, the scheme `A[n]` is finite and
-  flat over `K`.
+  flat over `K`; and
+  `AlgebraicGeometry.IsAbelianVariety.isFinite_torsion_of_natCast_ne_zero`,
+  `AlgebraicGeometry.IsAbelianVariety.flat_torsion_of_natCast_ne_zero`, the same statements under
+  the stronger hypothesis that `n` is invertible in `K`, and with a complete proof.
 - `AlgebraicGeometry.IsAbelianVariety.finrank_torsion`: for `n ≠ 0`, the rank of `A[n]` over `K`
   is `n ^ (2 * g)`, where `g` is the dimension of `A`.
 - `AlgebraicGeometry.IsAbelianVariety.etale_torsion`: if `n` is invertible in `K`, then `A[n]` is
@@ -128,6 +131,18 @@ theorem flat_torsion (hn : n ≠ 0) : Flat (torsion G n).hom :=
   have := flat_mulBy G hn
   MorphismProperty.of_isPullback (isPullback_torsion G n) ‹_›
 
+/-- If `n` is invertible in the base field `K`, the `n`-torsion `A[n]` of an abelian variety is
+finite over `K`, being the base change of the finite morphism `[n]`. -/
+theorem isFinite_torsion_of_natCast_ne_zero (hn : (n : K) ≠ 0) : IsFinite (torsion G n).hom :=
+  have := isFinite_mulBy_of_natCast_ne_zero G hn
+  MorphismProperty.of_isPullback (isPullback_torsion G n) ‹_›
+
+/-- If `n` is invertible in the base field `K`, the `n`-torsion `A[n]` of an abelian variety is
+flat over `K`, being the base change of the flat morphism `[n]`. -/
+theorem flat_torsion_of_natCast_ne_zero (hn : (n : K) ≠ 0) : Flat (torsion G n).hom :=
+  have := flat_mulBy_of_natCast_ne_zero G hn
+  MorphismProperty.of_isPullback (isPullback_torsion G n) ‹_›
+
 /-- For `n ≠ 0`, the `n`-torsion `A[n]` of an abelian variety of dimension `g` has rank
 `n ^ (2 * g)` over the base field, this being the degree of the isogeny `[n]`. -/
 theorem finrank_torsion {g : ℕ} [SmoothOfRelativeDimension g G.hom] (hn : n ≠ 0)
@@ -195,8 +210,7 @@ variable [IsAlgClosed K]
 `K`-points of the `n`-torsion of an abelian variety `A` over `K` is finite. -/
 theorem finite_torsionHom (hn : (n : K) ≠ 0) :
     Finite (𝟙_ (Over (Spec (.of K))) ⟶ torsion G n) := by
-  have hn₀ : n ≠ 0 := by rintro rfl; simp at hn
-  have := isFinite_torsion G n hn₀
+  have := isFinite_torsion_of_natCast_ne_zero G n hn
   have := etale_torsion G n hn
   have : Finite (torsion G n).left := finite_of_isFinite_over_field (torsion G n).hom
   exact .of_equiv _
@@ -211,7 +225,7 @@ the rank of `A[n]` over `K`, since `A[n]` is finite étale over the algebraicall
 theorem natCard_torsionHom (hn : (n : K) ≠ 0) :
     Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ torsion G n) = n ^ (2 * g) := by
   have hn₀ : n ≠ 0 := by rintro rfl; simp at hn
-  have := isFinite_torsion G n hn₀
+  have := isFinite_torsion_of_natCast_ne_zero G n hn
   have := etale_torsion G n hn
   rw [Nat.card_congr (Over.unitHomEquiv (torsion G n)),
     natCard_pointHom_eq_finrank (torsion G n).hom (IsLocalRing.closedPoint K),
