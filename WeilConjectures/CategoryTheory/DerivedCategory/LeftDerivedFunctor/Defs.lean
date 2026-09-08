@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import WeilConjectures.CategoryTheory.HasTensor
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Derives
 
@@ -56,7 +56,7 @@ namespace CategoryTheory.Functor
 
 variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelian C] [Abelian D]
   [MonoidalCategory C] [MonoidalPreadditive C]
-  [HasColimitsOfShape (Discrete ℤ) C]
+  [HasCountableCoproducts C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]

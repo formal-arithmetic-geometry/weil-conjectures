@@ -42,7 +42,7 @@ that left derivation commutes with the constructions preserved by `mapDerivedCat
 These are the general inputs needed to identify the derived pullback `Lg^*` of étale
 sheaves (which is left derived from the *exact* functor `g^*`) with the levelwise
 functor, and to obtain its composition, homology, and single-degree compatibilities; see
-`WeilConjectures.SixFunctors.UpperStarMapDerivedCategory`.
+`WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar`.
 
 -/
 
@@ -62,7 +62,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelia
   [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
 
 variable [MonoidalCategory C] [MonoidalPreadditive C]
-  [HasColimitsOfShape (Discrete ℤ) C]
+  [HasCountableCoproducts C]
   [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
@@ -130,12 +130,10 @@ end Compatibility
 
 section Composition
 
-open MonoidalCategory
-
 variable {E : Type uE} [Category.{vE} E] [Abelian E] [HasDerivedCategory.{wE} E]
 
 variable [MonoidalCategory D] [MonoidalPreadditive D]
-  [HasColimitsOfShape (Discrete ℤ) D]
+  [HasCountableCoproducts D]
   [HasColimitsOfShape ℤ D] [HasExactColimitsOfShape ℤ D]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
@@ -148,9 +146,7 @@ variable [MonoidalCategory D] [MonoidalPreadditive D]
 `(F ⋙ G).leftDerivedFunctor ≅ F.leftDerivedFunctor ⋙ G.leftDerivedFunctor` for exact
 functors between abelian categories with functorial flat resolutions, obtained from
 `mapDerivedCategoryCompIso` by transport along the compatibility isomorphisms. -/
-noncomputable def leftDerivedFunctorCompIso (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+noncomputable def leftDerivedFunctorCompIso (G : D ⥤ E) [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).leftDerivedFunctor ≅ F.leftDerivedFunctor ⋙ G.leftDerivedFunctor :=
   (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory ≪≫ mapDerivedCategoryCompIso F G ≪≫

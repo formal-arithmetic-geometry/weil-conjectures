@@ -5,7 +5,8 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
@@ -15,15 +16,15 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 The K-flat left derivability structure used to derive the pullback `g^*` on étale
 sheaves requires the sheaf category `Sheaf Y.smallEtaleTopology A` to carry a
-preadditive monoidal structure whose tensor product interacts well with coproducts and
-`ℤ`-indexed colimits, and to admit functorial flat resolutions. The files of this
-folder transport each of these hypotheses from the coefficient category `A` to the
+preadditive monoidal structure whose tensor product preserves colimits, and to admit
+functorial flat resolutions. The files of this folder supply each of these for the
 categories of `A`-valued étale sheaves, so that the derived pullback only takes
-hypotheses on `A`.
+hypotheses on the coefficient category `A`.
 
 This file provides the monoidal structure itself, from
 `CategoryTheory.Sheaf.monoidalCategory` (sheafification of the objectwise tensor
-product of presheaves). Its inputs are the sheafification (from
+product of presheaves), together with its braiding
+(`CategoryTheory.Sheaf.braidedCategory`). Their inputs are the sheafification (from
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`) and the monoidality of
 the class `W` of sheafification-inverting morphisms of presheaves.
 
@@ -45,13 +46,18 @@ the small étale site — are not assumed: they are limits of size `u + 1`, whic
 Grothendieck abelian category with `Hom`-types in `Type (u + 1)` has by
 `CategoryTheory.IsGrothendieckAbelian.hasLimits`.
 
+Mathlib deliberately does not make `Sheaf.monoidalCategory` an instance, because for a
+general coefficient category it can clash with a monoidal structure coming from chosen
+finite products. No such clash arises here: the coefficient categories of this
+development are abelian, and `Sheaf Y.smallEtaleTopology A` carries no cartesian monoidal
+structure — its finite products are biproducts, for which mathlib registers no
+`MonoidalCategory` instance. The two instances of this file are therefore global.
+
 The preadditivity of this monoidal structure needs no transport of its own: it is
 `CategoryTheory.Sheaf.monoidalPreadditive` of
 `WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal`, which applies to any sheaf
-category, with `Etale.isMonoidal_W_smallEtaleTopology` supplying its `(W).IsMonoidal`
-hypothesis. The remaining transports are not yet formalized; they are recorded with
-`sorry` in the sibling files `TensorColimits` and `FlatResolution` of this folder, and in
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape`.
+category. The remaining transports are in the sibling files `TensorColimits` and
+`FlatResolution` of this folder; the latter is still recorded with `sorry`.
 
 -/
 
@@ -59,7 +65,7 @@ hypothesis. The remaining transports are not yet formalized; they are recorded w
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory MonoidalClosed
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
@@ -78,19 +84,6 @@ with `Λ` a commutative ring — which is even symmetric monoidal closed, and co
 `A = Ab.{u + 1}` through `Λ = ℤ`. -/
 variable [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
 
-/-- The class `Y.smallEtaleTopology.W` of morphisms of `A`-valued étale presheaves
-inverted by sheafification is monoidal, by `CategoryTheory.GrothendieckTopology.W.monoidal`:
-`A` is closed braided, so tensoring a presheaf by a fixed `F` is left adjoint to the
-internal hom `[F, -]`, which preserves sheaves.
-
-This is mathlib's instance, restated here for the small étale site to record that its
-hypotheses are met: the enriched homs it asks for are ends indexed by the (large) étale
-site, i.e. limits of size `u + 1`, which `A` has as a Grothendieck abelian category with
-`Hom`-types in `Type (u + 1)`. -/
-instance Etale.isMonoidal_W_smallEtaleTopology :
-    (Y.smallEtaleTopology.W (A := A)).IsMonoidal :=
-  GrothendieckTopology.W.monoidal
-
 /-- The monoidal structure on `A`-valued étale sheaves induced by a monoidal structure
 on the coefficient category `A`: the sheafification of the objectwise tensor product of
 presheaves. -/
@@ -98,7 +91,10 @@ noncomputable instance Etale.sheafMonoidalCategory :
     MonoidalCategory (Sheaf Y.smallEtaleTopology A) :=
   Sheaf.monoidalCategory _ _
 
---# tech debt :
---figure out why we need `Etale.isMonoidal_W_smallEtaleTopology` instead of synth directly
+/-- The braiding of the monoidal structure on `A`-valued étale sheaves, induced by the
+braiding of the coefficient category `A`. -/
+noncomputable instance Etale.sheafBraidedCategory :
+    BraidedCategory (Sheaf Y.smallEtaleTopology A) :=
+  Sheaf.braidedCategory _ _
 
 end AlgebraicGeometry

@@ -5,27 +5,25 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Mathlib.CategoryTheory.Sites.Limits
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-!
 
-# `ℤ`-indexed colimits of étale sheaves (sorried)
+# Countable coproducts of étale sheaves
 
-The K-flat left derivability structure used to derive the pullback `g^*` on étale
-sheaves requires the sheaf categories to have `ℤ`-indexed coproducts and exact
-`ℤ`-indexed colimits. The instances of this file transport these hypotheses from the
-Grothendieck abelian coefficient category `A` to the categories of `A`-valued étale
-sheaves; they hold since the sheaf categories are Grothendieck abelian
-(`AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology`), but the
-transports are not yet formalized and are recorded with `sorry`.
+The K-flat left derivability structure used to derive the pullback `g^*` on étale sheaves
+computes the tensor product of complexes as a coproduct over the fibers of the total
+degree map `(p, q) ↦ p + q` on `ℤ × ℤ`. These fibers are countable, so the hypothesis it
+needs on the sheaf categories is `CategoryTheory.Limits.HasCountableCoproducts`.
 
-## Sorried instances
-
-- `AlgebraicGeometry.Etale.sheafHasCoproductsOfShapeInt`: existence of `ℤ`-indexed
-  coproducts of étale sheaves.
-- `AlgebraicGeometry.Etale.sheafHasColimitsOfShapeInt` and
-  `AlgebraicGeometry.Etale.sheafHasExactColimitsOfShapeInt`: existence and exactness of
-  `ℤ`-indexed colimits of étale sheaves.
+That instance is mathlib's `CategoryTheory.Sheaf.instHasColimitsOfShape` (colimits of
+sheaves are computed by sheafifying the colimit of the underlying presheaves), applied
+once per countable shape. It is restated here because instance search does not find it
+on its own for the small étale site: unifying a `Discrete` shape against the many
+`HasColimitsOfShape` instances available for `Sheaf Y.smallEtaleTopology A` diverges,
+whereas naming `Sheaf.instHasColimitsOfShape` discharges the goal instantly.
 
 -/
 
@@ -43,27 +41,12 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable (Y : Scheme.{u})
 
-/-- Existence of `ℤ`-indexed coproducts of étale sheaves, induced by the corresponding
-condition on the coefficient category. Via
-`ComplexShape.hasColimitsOfShape_discrete_π_up_int`, this provides the coproducts
-defining the tensor product of complexes of étale sheaves, whose indexing fibers
-`(ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j}` are in
-bijection with `ℤ`. -/
-instance Etale.sheafHasCoproductsOfShapeInt [HasColimitsOfShape (Discrete ℤ) A] :
-    HasColimitsOfShape (Discrete ℤ) (Sheaf Y.smallEtaleTopology A) :=
-  sorry
-
-/-- Existence of `ℤ`-indexed colimits of étale sheaves, induced by the corresponding
-condition on the coefficient category. -/
-instance Etale.sheafHasColimitsOfShapeInt [HasColimitsOfShape ℤ A] :
-    HasColimitsOfShape ℤ (Sheaf Y.smallEtaleTopology A) :=
-  sorry
-
-/-- Exactness of `ℤ`-indexed colimits of étale sheaves, induced by the corresponding
-condition on the coefficient category. -/
-instance Etale.sheafHasExactColimitsOfShapeInt [HasColimitsOfShape ℤ A]
-    [HasExactColimitsOfShape ℤ A] :
-    HasExactColimitsOfShape ℤ (Sheaf Y.smallEtaleTopology A) :=
-  sorry
+/-- Countable coproducts of `A`-valued étale sheaves, computed by sheafifying the
+coproduct of the underlying presheaves. This is mathlib's
+`CategoryTheory.Sheaf.instHasColimitsOfShape`; see the module docstring for why it has to
+be restated here. -/
+instance (priority := high) Etale.hasCountableCoproducts_sheaf :
+    HasCountableCoproducts (Sheaf Y.smallEtaleTopology A) :=
+  ⟨fun _ ↦ Sheaf.instHasColimitsOfShape⟩
 
 end AlgebraicGeometry
