@@ -143,6 +143,7 @@ public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
@@ -152,6 +153,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
