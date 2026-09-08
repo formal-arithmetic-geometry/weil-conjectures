@@ -6,8 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.SixFunctors.BaseChangeTheorems.Proper
-public import WeilConjectures.SixFunctors.BaseChangeTheorems.LowerShriek.MorphismDefs
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs
 
 /-!
 
@@ -26,12 +26,12 @@ Y' --g---> Y
 recorded as `sq : IsPullback g' f' f g`, and a compactification `c : X ⟶[i] Z ⟶[p] Y`
 of `f`. This file deduces from the proper base change theorem
 (`AlgebraicGeometry.Etale.properBaseChange` of
-`WeilConjectures.SixFunctors.BaseChangeTheorems.Proper`) that the compact-support
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`) that the compact-support
 base-change morphism
 
 `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c'}`
 
-of `WeilConjectures.SixFunctors.BaseChangeTheorems.LowerShriek.MorphismDefs` is an
+of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs` is an
 isomorphism, where `c' = c.baseChange sq` and `Rf_!^c` is the derived lower shriek
 `Compactification.rightDerivedLowerShriekPlus` associated with `c`. No properness is
 assumed on `f` itself: the properness enters only through the structure morphism `p` of
@@ -71,9 +71,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /- Sheafification, pointwise left Kan extensions and their left exactness for the small
 étale sites of all schemes at once, with coefficients in the ring `Λ`, are provided by
-the instances of `WeilConjectures.SixFunctors.BaseChangeTheorems.Proper`; the localized
-derived categories are the chosen `Scheme.hasDerivedCategory_sheaf_smallEtaleTopology`
-instances of `WeilConjectures.SixFunctors.Derived`. -/
+the instances of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`; the
+localized derived categories come from `HasDerivedCategory.ofIsGrothendieckAbelian` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory`. -/
 
 /-- Extension by zero along an open immersion preserves torsion cohomology: since `j_!`
 is exact, the cohomology sheaves of `j_! K` are the extensions by zero of the cohomology
