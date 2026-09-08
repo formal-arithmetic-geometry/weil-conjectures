@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructiblePullback
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 
@@ -69,6 +69,14 @@ structures through `Rf_!` are subsequent layers built on top of these definition
 
 ## Implementation notes
 
+Following the convention of the `SixFunctors` folder, the coefficient category `A` is a
+Grothendieck abelian category with `Hom`-types in the universe `u + 1`, one above the
+universe `u` of the base schemes. That is all the first three layers need: it is what makes
+the pullback `AlgebraicGeometry.Etale.upperStar` exist and be exact, and what supplies the
+derived category of étale sheaves. Only the constructible layer asks for more, `A` being
+concrete there so that the finiteness of stalks entering
+`AlgebraicGeometry.Scheme.IsConstructibleSheaf` can be stated.
+
 The iterated structure isomorphism `IsoAlgebra.strIterate n` of a Weil complex is an
 isomorphism `(e^*)ⁿ K ≅ K`, whereas the `m`-th Frobenius operator `φ_m` of the trace
 formula is an isomorphism `(eⁿ)^* K ≅ K`. Identifying the two uses the composition
@@ -104,10 +112,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A]
-  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
-  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
-  [IsGrothendieckAbelian.{u + 1} A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {X : Scheme.{u}} (e : X ≅ X)
 
 noncomputable section
@@ -199,6 +204,9 @@ def WeilComplexPlus.toWeilComplex : WeilComplexPlus A e ⥤ WeilComplex A e :=
 end WeilComplexPlus
 
 section WeilComplexBoundedConstructible
+
+variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 /-- A *bounded constructible Weil complex* for a scheme `X` with an automorphism
 `e : X ≅ X` is an object `K` of the bounded constructible derived category `Dᵇc(X, A)`
