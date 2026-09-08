@@ -44,14 +44,21 @@ claims no more than that comment does.
 % THIS CHAPTER'S CENSUSES USE (i) AND (ii) TOGETHER.  Measured at this commit over
 % the proof-position \stacksproject occurrences that sit inside `% Decomposed.'
 % nodes outside `sec:basis', with % comments stripped over the whole file, the tags
-% that no node owns under that convention number 10, in 7 nodes:
+% that no node owns under that convention number 11, in 8 nodes:
 %
 %   01V8 (lem:pc-smooth-characterization), 01XD (lem:pc-cech-computes),
 %   01XK and 02KH (lem:pc-flat-base-change-cohom),
 %   023L, 023M, 023N (lem:pc-fpqc-descent), 08AA (lem:pc-euler-additive),
-%   0B8L (lem:pc-pic-group-valued), 0BDK (lem:pc-perfect-locus).
+%   0B8L (lem:pc-pic-group-valued), 0BDK (lem:pc-perfect-locus),
+%   0G6T (lem:pc-cech-resolution).
 %
-% Dropping (ii) and counting only citation-node ownership gives 12, in 9 nodes.
+% 0G6T is the newest of them: it arrived with the citation repair of issue 788,
+% which replaced an unresolvable prose reference in that node's proof by the tag
+% the proof actually uses.  Before that repair these figures read 10 in 7 nodes,
+% 12 in 9 nodes and 12 in 8 nodes respectively; each moved by exactly one tag in
+% one node, and that one node is lem:pc-cech-resolution.
+%
+% Dropping (ii) and counting only citation-node ownership gives 13, in 10 nodes.
 % The two extra are exactly 01XJ and 01JY, and they are the only two sites at which
 % the readings differ:
 %
@@ -70,9 +77,9 @@ claims no more than that comment does.
 % and it does not scope the ownership side.  Ownership is looked for OVER THE WHOLE
 % CHAPTER, `sec:basis' INCLUDED: a tag printed in the domain is owned as soon as
 % some node of this chapter stands for it under (i) or (ii), wherever that node
-% sits.  This is what produces the figure of 10 above.  Mirroring the domain
+% sits.  This is what produces the figure of 11 above.  Mirroring the domain
 % restriction onto the owner side instead -- accepting only owners that themselves
-% sit outside `sec:basis' -- gives 12, in 8 nodes, and the two extra tags are
+% sit outside `sec:basis' -- gives 13, in 9 nodes, and the two extra tags are
 % exactly 00DV and 00O0:
 %
 %   00DV is owned by \Cref{lem:pcb-nakayama}, a `% Cited.' node inside `sec:basis',
@@ -81,11 +88,11 @@ claims no more than that comment does.
 %     node inside `sec:basis', and is likewise printed in
 %     \Cref{lem:pc-hilb-representable}'s proof.
 %
-% Note that this 12 is not the 12 of the paragraph above: that one keeps ownership
+% Note that this 13 is not the 13 of the paragraph above: that one keeps ownership
 % chapter-wide and drops reading (ii), and its two extra tags are 01XJ and 01JY, in
-% 9 nodes.  The three figures -- 10 in 7 nodes (domain outside `sec:basis',
-% ownership chapter-wide, readings (i) and (ii)), 12 in 9 nodes ((i) only), 12 in
-% 8 nodes (ownership also restricted to outside `sec:basis') -- were all re-measured
+% 10 nodes.  The three figures -- 11 in 8 nodes (domain outside `sec:basis',
+% ownership chapter-wide, readings (i) and (ii)), 13 in 10 nodes ((i) only), 13 in
+% 9 nodes (ownership also restricted to outside `sec:basis') -- were all re-measured
 % at this commit, and each agrees with the tag list printed for it.
 %
 % SCOPE OF THE ONE-TAG-ONE-NODE INVARIANT (issue 625).  That invariant -- no Stacks
@@ -145,6 +152,93 @@ claims no more than that comment does.
 % Those 2 are exactly the two definitions named above.  They are not proofs without
 % statements, and the excess is NOT A FINDING: a check reporting one has applied the
 % four-environment convention to a chapter that does not use it.
+%
+% REFERENCES TO STACKS THAT DO NOT GO THROUGH THE `stacksproject' MACRO (issue 788).
+% Every tag instrument used on this chapter parses the `stacksproject' macro, so a
+% reference to the Stacks project written any other way is in NO population any of
+% them measures.  That residual axis was swept in full and is ruled here.  Absolutes
+% are measured at the commit this comment lands in, with % comments stripped over
+% the whole file, escape-aware; re-measure rather than quote.
+%
+% THE INSTRUMENT.  Stacks `chapter.section.item' numbering rebuilt from the project's
+% own LaTeX sources (`chapters.tex' for the chapter order and titles, one `.tex' per
+% chapter, `tags/tags' for tag -> label): sections counted in order, and `theorem',
+% `proposition', `lemma', `definition', `example', `exercise', `situation', `remark',
+% `remarks' and `subsection' sharing one counter per section, as the Stacks preamble
+% declares them.  FIRING CONTROL: on the 257 sites of this chapter that carry BOTH a
+% three-part number AND an adjacent tag macro (number bound to tag only
+% across separators), the rebuilt number agrees with the tag's own statement at
+% 257 of 257, 0 disagreements.  Decoys planted at end of file, outside every block
+% measured below, all three fired: a right tag beside a wrong number (1), a right
+% section number beside a wrong title (1), and a section number that does not exist
+% (1); the real file reads 0 on each.
+%
+%   (a) UNTAGGED THREE-PART NUMERIC REFERENCES -- "Algebra, Definition~10.68.1" with
+%       no adjacent tag macro.  Population 43: 40 preceded by a statement-kind
+%       word, plus the three at the `44.6.2--44.6.4' range in \Cref{rem:pc-conventions},
+%       which no kind word precedes.  (16 further untagged three-part numerals are
+%       not Stacks references at all -- EGA III_1 (2.1.12), (2.2.2), (6.5.5), EGA II
+%       (2.4.7), EGA 0_IV (2.5.7), EGA III_1 Prop. (2.6.1) and Grothendieck's
+%       Tohoku Theoreme 3.6.5 -- and are excluded by the predicate.)
+%       ALL 43 RESOLVE, all 43 name a statement of the kind the chapter says
+%       ("Lemma" -> a lemma, and so on: 0 kind mismatches), and all 43 were read
+%       against what the chapter says each says.  RESIDUE 1, now repaired: the
+%       "Lemma 20.11.1" in \Cref{lem:pc-cech-resolution}'s proof, which was the
+%       INJECTIVE-module Cech lemma (`01EP') and not the alternating-Cech/simplex
+%       computation the sentence attributes to it.  It now cites Cohomology of
+%       Sheaves, Lemma~20.23.7 (`0G6T'), read off the source.
+%       THE OTHER 42 ARE SOUND and are ruled so here rather than passed over.
+%       Three worth naming because they read like defects and are not:
+%         - the 15.77.7 site: the chapter cites More on Algebra, Lemma~15.77.7 "as
+%           used in the proof of Lemma 36.31.3, `0BDK'".  0BDK's proof
+%           in the Stacks source does cite `more-algebra-lemma-lift-perfect-from-
+%           residue-field' = 15.77.7, for exactly the quoted statement.  Two chapter
+%           names in one sentence, not a mis-attribution.
+%         - the 37.44.1 site: "Cohomology of Schemes, Lemma~30.21.1
+%           (`02OG'), which the Stacks Project itself heads with a
+%           pointer to Lemma~37.44.1".  02OG's statement does literally open
+%           "(For a more general version see More on Morphisms, Lemma ...)".
+%         - the 44.6.2--44.6.4 range: those three are stated in the source for an
+%           arbitrary field and 44.6.6 for a separably closed one, as the remark says.
+%
+%   (b) PROSE TAG REFERENCES -- a four-character tag typed as text rather than passed
+%       to the tag macro.  Population 2 before this commit, both repaired here:
+%       `040C' in \Cref{def:pcb-picard-group} (which resolved, and is correctly cited
+%       through the macro at the `rem:pc-picard-group' site) and `01EO' in
+%       \Cref{lem:pc-cech-resolution} (a SECTION tag printed beside a Lemma number).
+%       POPULATION NOW 0.  A prose tag is outside the domain of the tag-fidelity
+%       sweep, of the attribution census and of the tag-ownership grep, all of which
+%       parse the macro; that is why fifteen tag sweeps went past both.
+%
+%   (c) TWO-PART REFERENCES -- "Section~29.35", "Chapter~44".  Never swept before.
+%       Population 89 section references (12 with an adjacent tag, 77 without) and 4
+%       bare chapter references.  ALL 93 name the right chapter and the right section
+%       or chapter number.  Of the 89, 71 carry a parenthetical section title and ALL
+%       71 REPRODUCE THE STACKS SECTION TITLE EXACTLY; 16 carry no title; 2 carry a
+%       parenthesis that is a tag or a `\Cref', not a title claim.  RESIDUE 0.
+%       Normalise whitespace before matching a chapter name: line-wrapped names such
+%       as "Morphisms of\n Schemes" are false mismatches, and the chapter correctly
+%       uses the Stacks SHORT names in cross-references ("Algebra" for Commutative
+%       Algebra, "Sheaves" for Sheaves on Spaces, "Homology" for Homological Algebra,
+%       "Topologies" for Topologies on Schemes, "Cohomology" for Cohomology of
+%       Sheaves).  None of those is a finding.
+%
+% WHAT THIS DOES NOT CLOSE.  It rules the reference's target, not its clause index
+% (that axis is closed separately) and not the hypothesis fidelity of a tagged
+% citation.  A clean axis is not evidence about the next one.
+%
+% CONSEQUENCE FOR THE UNOWNED-TAG CENSUS ABOVE.  0G6T is a tag this chapter did not
+% carry before, printed at a proof position inside a `% Decomposed.' node outside
+% `sec:basis' and stood for by no node, so it joins the unowned list under all three
+% of that census's readings.  The figures there have been moved with it, by one tag
+% in one node each; the pre-repair figures are recorded beside them.
+%
+% NO EDGE WAS DRAWN.  The repair at \Cref{lem:pc-cech-resolution} cites a Stacks tag,
+% not a node of this chapter -- no node of this chapter states 0G6T
+% (\Cref{lem:pc-cech-exact} is the Amitsur complex of a faithfully flat ring map, a
+% different statement) -- so no `\uses' edge is added and the deliberate withholding
+% ruled in the `%' block above that lemma is untouched.  The `\label' multiset and
+% the node count are identical to base.
 % ============================================================================
 % ============ SECTION 0: basis blocks reproduced from files 02/06 =============
 % ============================================================================
@@ -521,8 +615,8 @@ tensor products, so that the law is defined on isomorphism classes,
 and the inverse of an invertible module \(\mathcal L\) is its dual
 \(\mathcal L^{\vee}\), which is invertible; closure under tensor
 products and duals, and the group axioms, are verified in the basic
-facts below, \Cref{lem:pcb-pic-group}).  (\emph{Stacks Project,
-Definition 18.32.6, Tag \texttt{040C}}.)
+facts below, \Cref{lem:pcb-pic-group}).  (Modules on Sites,
+Definition~18.32.6, \stacksproject{040C}.)
 \uses{def:pcb-curves,def:pcb-invertible-module,lem:pcb-pic-group}
 \lean{AlgebraicGeometry.Scheme.Pic}
 \leanok
@@ -8981,9 +9075,17 @@ cone of that of the $(m-1)$-simplex, and the augmentation $G=$ the
 sections gives the exactness by induction on $m$; the cochain complex
 of a contractible simplicial set with constant coefficients has no
 higher cohomology -- this is the classical simplex computation, used
-also in the proof of the flasque Čech acyclicity, cf.\ Cohomology,
-Lemma 20.11.1-adjacent, Section 20.11, Tag 01EO); hence the resolution
-is exact.
+also in the proof of the flasque Čech acyclicity.  The same statement
+in the source is Cohomology of Sheaves, Section~20.23 (The alternating
+Čech complex), Lemma~20.23.7 (\stacksproject{0G6T}): for an abelian
+presheaf $\cG$ on a topological space and an open covering
+$\mathcal U:U=\bigcup_{i\in I}U_i$ with $U_i=U$ for some $i\in I$, the
+extended alternating Čech complex of $\mathcal U$ with values in $\cG$
+is homotopy equivalent to $0$, hence exact.  That is the displayed
+complex here: every $U_i$ with $i\in I_x$ contains $x$, so on stalks
+each $U_J$, $J\subseteq I_x$, contributes the same group $\cF_x$ and
+the covering is one in which some member equals the whole).  Hence the
+resolution is exact.
 
 \emph{Acyclicity and the derived statement.}  Each $j_{U_J}:U_J\to X$
 is an affine morphism: affineness of a morphism may be checked on an
