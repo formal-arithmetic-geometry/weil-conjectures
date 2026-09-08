@@ -722,7 +722,28 @@ tensor product of invertible modules, which needs a monoidal structure on
 %     quotient \(\operatorname{Cl}(C)\) inherit the finiteness repaired above
 %     and add nothing of their own; well-definedness of \(\deg\) on
 %     \(\operatorname{Pic}(C)\) is cited to \Cref{lem:pcb-divisor-class-curve}
-%     there, and that lemma proves the invertibility of \(\cO_C(D)\) it uses.
+%     there.
+%     CORRECTION (issue 808).  This ruling used to end "and that lemma proves
+%     the invertibility of \(\cO_C(D)\) it uses".  That clause was FALSE, and
+%     correcting it is half of the repair recorded at \Cref{def:pcb-divisor}
+%     below.  \Cref{lem:pcb-divisor-class-curve} does not prove the
+%     invertibility of \(\cO_C(D)\); it PRESUPPOSES it.  Its map
+%     \(\operatorname{Cl}(C)\to\operatorname{Pic}(C)\),
+%     \(D\mapsto[\cO_C(D)]\), cannot even be stated until \(\cO_C(D)\) is
+%     known to be invertible, \Cref{def:pcb-picard-group} defining
+%     \(\operatorname{Pic}(C)\) as the set of isomorphism classes of
+%     INVERTIBLE modules; and no step of its proof establishes invertibility
+%     -- the proof gives well-definedness modulo principal divisors, the
+%     homomorphism property, surjectivity from
+%     \Cref{lem:pcb-line-bundle-rational-section} (which STARTS from an
+%     invertible \(\cL\)) and injectivity.  The invertibility is now proved
+%     in \Cref{def:pcb-divisor}, where it is asserted.  The rulings on the
+%     other fifteen rows of this sweep are unaffected and are not reopened.
+%     Lesson recorded with the correction: a ruling that records a node as
+%     proving something it does not is what a later pass reads and stops at,
+%     which is exactly why this sweep closed clean over the hole -- the same
+%     lesson as issue 732, that a ruling certifies nothing about whether the
+%     statements it ranges over are true.
 %   def:pcb-picard-functor -- \(\operatorname{Pic}^d_{C/k}\) is cut out by a
 %     fibrewise degree, and the hypothesis that makes that degree defined (every
 %     irreducible component of every geometric fibre of dimension one) is stated
@@ -762,6 +783,102 @@ tensor product of invertible modules, which needs a monoidal structure on
 % and none of them contains this definition; a whole-graph DFS finds 0 cycles
 % after them, and planting each reverse edge in turn yields exactly one cycle.
 % No node is created and no \label is touched.
+% Ruling (issue 808): the invertibility of \(\cO_C(D)\) is PROVED here, and the
+% route was chosen between the two the issue offered.  The block used to assert
+% "It is invertible --- this is the identification of \(\operatorname{Pic}(C)\)
+% with \(\operatorname{Cl}(C)\) for smooth curves, proved in the basic facts
+% below", which named no node, carried no \uses edge, and delegated to
+% \Cref{lem:pcb-divisor-class-curve} -- a node that PRESUPPOSES the
+% invertibility (its map \(D\mapsto[\cO_C(D)]\) is not stateable without it,
+% \Cref{def:pcb-picard-group} defining \(\operatorname{Pic}(C)\) by
+% invertibility) and no step of whose proof establishes it.  The chapter's only
+% proved invertibility statement, \Cref{lem:pc-divisor-line-bundle-properties}(1),
+% is for an EFFECTIVE Cartier divisor, and the bridge
+% \Cref{lem:pc-divisor-line-bundle-agrees-sc} hypothesises effectivity, so
+% nothing reached a general \(D\) with some \(n_P<0\); the decomposition
+% \(\cO_C(D)\otimes\cO_C(D^-)\cong\cO_C(D^+)\) that
+% \Cref{lem:pcb-degree-2g1-very-ample} uses is derived FROM
+% \Cref{lem:pcb-divisor-class-curve} being a homomorphism and closes the same
+% circle.
+% Route taken: prove it in this block, where the assertion is made, rather than
+% as a clause of \Cref{lem:pcb-divisor-class-curve}.  Reasons.  (i) This block
+% calls \(\cO_C(D)\) "the associated invertible module" in its own defining
+% sentence, so the property is asserted here and the justification belongs here;
+% adding a clause to that lemma would leave this block still asserting
+% invertibility and still delegating.  (ii) The delegation could not be made
+% honest: \Cref{lem:pcb-divisor-class-curve} \uses this definition, so an edge
+% from here to it is a two-cycle -- the same refusal already recorded at
+% \Cref{def:pcb-effective-cartier-divisor} for \Cref{def:pcb-divisor} and
+% \Cref{lem:pcb-point-cartier} -- and it is a def-to-property-lemma edge, barred
+% by the standing ruling of issue 723.  So under the other route the load-bearing
+% claim would keep its unnamed-in-graph delegate.  (iii) Every consumer of the
+% invertibility \uses this definition necessarily, \(\cO_C(D)\) being defined
+% here; in-degree 14 against 3 for that lemma, so proving it here is what puts it
+% in front of every consumer, and the CONSUMER-EDGE route of issue 723 is
+% satisfied for free.
+% Steps and their edges.  The uniformizer computation needs: \(\cO_{C,P}\) a
+% discrete valuation ring at each closed point, which is
+% \Cref{lem:pcb-smooth-regular} (edge already present) plus
+% \Cref{lem:pcb-regular-dim1-dvr} (NEW edge), the intervening
+% \(\dim\cO_{C,P}=1\) being derived in the block from the
+% every-component-of-dimension-one hypothesis exactly as the proof of
+% \Cref{lem:pcb-point-cartier} derives it; integrality of a connected component,
+% which is the chain \Cref{lem:pcb-smooth-regular} ->
+% \Cref{lem:pc-regular-is-normal} -> \Cref{lem:pc-noetherian-normal-decomposition}
+% already cited and already carrying edges; finiteness of the support, which is
+% the finiteness proved in this block (\Cref{lem:pcb-dim0-finite}, edge already
+% present); the notion of invertibility itself,
+% \Cref{def:pcb-invertible-module} (NEW edge); and
+% \Cref{def:pcb-picard-group} (NEW edge) for what \(\operatorname{Pic}(C)\) is,
+% cited for the sentence that says why the identification lemma cannot supply
+% the invertibility.  The one purely algebraic step -- a rational function whose
+% valuation is \(\geq0\) at every closed point of an open is regular there -- is
+% given with its reason and no tag, on the standard already used in this block
+% for the finiteness of \(\operatorname{div}\): a domain is the intersection of
+% its localizations at its maximal ideals, proved in one line in the text, and
+% the maximal ideals of an affine open are its closed points, which are closed
+% in \(C\) as \(C\) is of finite type over a field.  No \stacksproject tag is
+% added, \texttt{pcb-} being out of scope for tag decomposition; no node is
+% created, \texttt{pcb-} being out of scope for node creation; no \label is
+% added or removed.
+% Delegates kept, and their edges.  \Cref{lem:pcb-divisor-class-curve} is now
+% cited only for the identification of \(\operatorname{Pic}(C)\) with
+% \(\operatorname{Cl}(C)\), which is what it does prove, and
+% \Cref{lem:pcb-point-cartier} for the Cartier-divisor property of closed
+% points; both are named by \Cref where the old text said "the basic facts
+% below", and both deliberately carry NO edge, each of them already using this
+% definition, so that either edge would make a two-cycle.  Those are the two
+% refusals already recorded above; no third positional delegate remains in the
+% block.
+% Acyclicity and closures, re-derived at this base rather than inherited.
+% Convention for every number here: \% comments stripped whole-file and
+% escape-aware before any \uses parse; host of a \uses = the nearest preceding
+% \label; targets de-duplicated per host; every \label counted, not only
+% top-level nodes.  Under that convention the chapter has 307 \labels at base
+% and 307 at head, and 1309 distinct host->target edges at base and 1312 at head
+% (+3, the three NEW edges above).  A whole-graph DFS finds 0 cycles at base and
+% 0 at head.  The \uses-closures of the three new targets at base are
+% \Cref{lem:pcb-regular-dim1-dvr} 5 nodes, \Cref{def:pcb-invertible-module} 3,
+% \Cref{def:pcb-picard-group} 11, and none of the three contains this
+% definition.  Headline closures, root inclusive:
+% \Cref{thm:pc-riemann-roch} 115 -> 118 and \Cref{thm:pc-picard-representable}
+% 282 -> 282.  The Riemann-Roch delta is exactly
+% \Cref{lem:pcb-regular-dim1-dvr}, \Cref{lem:pcb-principal-ideal-dvr} and
+% \Cref{lem:pcb-nakayama}: before this repair that closure contained the
+% invertibility ASSERTION and no invertibility statement whatever, and it now
+% contains the local-algebra input the proof runs on.  (A parser using top-level
+% nodes as hosts reads 1282 edges and closures one smaller, exclusive of the
+% root; the deltas +3, +3 and 0 are the same under both.)
+% Controls, all fired.  Stripping-disabled \uses control: exactly 5 self-loops,
+% at \Cref{lem:pc-standard-smooth-form}, \Cref{lem:pc-effaceable-universal},
+% \Cref{lem:pc-cech-resolution}, \Cref{lem:pc-fp-flat-finite-projective},
+% \Cref{lem:pc-degree-base-change}, and 0 with stripping enabled, at base and at
+% head.  Reverse-edge decoy for each of the three acyclicity claims, planted
+% outside the edited blocks: each yields exactly one cycle, the two-cycle
+% through this definition, and 0 otherwise.  Edge-deletion decoy for each new
+% edge: deleting the edge to \Cref{lem:pcb-regular-dim1-dvr} returns the
+% Riemann-Roch closure to 115, and deleting either of the other two leaves 118,
+% which is why only the first is quoted as the closure delta.
 \begin{definition}[Divisors, principal divisors, class group]
 \label{def:pcb-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  A
@@ -774,13 +891,21 @@ the closed points of \(C\).  For \(f\in k(C)^*\)
  \operatorname{div}(f)=\sum_P v_P(f)\,[P],
 \]
 where \(v_P\) is the normalized valuation of the local ring
-\(\mathcal O_{C,P}\) (a discrete valuation ring when \(C\) is smooth
-\emph{of dimension one}, i.e.\ every irreducible component of \(C\)
-has dimension one -- the local theory of such curves, which
-establishes this and the Cartier-divisor property of closed points, is
-developed in the basic facts below); such divisors are
-\emph{principal}.  This sum is finite, so that \(\operatorname{div}(f)\) is
-indeed an element of \(\operatorname{Div}(C)\): one has \(v_P(f)\neq0\)
+\(\mathcal O_{C,P}\), which is a discrete valuation ring when \(C\) is
+smooth \emph{of dimension one}, i.e.\ every irreducible component of
+\(C\) has dimension one: \(\mathcal O_{C,P}\) is then regular
+(\Cref{lem:pcb-smooth-regular}), hence a domain, so that \(P\) lies on
+exactly one irreducible component \(Z\) of \(C\) and
+\(\dim\mathcal O_{C,P}=\dim\mathcal O_{Z,P}
+=\dim Z-\dim\overline{\{P\}}=1\), \(P\) being a closed point of the
+finite-type \(k\)-scheme \(Z\); and a regular local ring of dimension
+one is a discrete valuation ring (\Cref{lem:pcb-regular-dim1-dvr}).
+Such divisors are \emph{principal}.  (The other piece of local theory
+used below, that a closed point of such a curve is an effective
+Cartier divisor, is \Cref{lem:pcb-point-cartier}.)
+The sum defining \(\operatorname{div}(f)\) is finite, so that
+\(\operatorname{div}(f)\) is indeed an element of
+\(\operatorname{Div}(C)\): one has \(v_P(f)\neq0\)
 only when \(f\) is not a unit in \(\mathcal O_{C,P}\), and on an affine
 open \(U\) of a connected component of \(C\) -- separated, of finite
 type over \(k\) and of dimension at most one by \Cref{def:pcb-curves},
@@ -825,11 +950,81 @@ is defined on \(k(C)^*\) only, as above, so that the displayed condition
 is defined at every \(f\) on which it is imposed and the set has a zero
 element; equivalently \(\mathcal O_C(D)(U)\) consists of those
 \(f\in k(C)\) which either vanish or satisfy
-\(\operatorname{div}(f)|_U+D|_U\geq0\).  It is invertible -- this is the identification of
+\(\operatorname{div}(f)|_U+D|_U\geq0\).
+
+This \(\mathcal O_C\)-module is
+\termref{def:pcb-invertible-module}{invertible}, and it is proved so
+here.  It is not a consequence of the identification of
 \(\operatorname{Pic}(C)\) with \(\operatorname{Cl}(C)\) for smooth
-curves, proved in the basic facts below.  When all
-\(n_P\geq0\), \(D\) is \emph{effective} and is an effective Cartier
-divisor in the sense of \Cref{def:pcb-effective-cartier-divisor} --
+curves, \Cref{lem:pcb-divisor-class-curve}: that statement
+\emph{presupposes} the present one, its map
+\(\operatorname{Cl}(C)\to\operatorname{Pic}(C)\),
+\(D\mapsto[\mathcal O_C(D)]\), landing in \(\operatorname{Pic}(C)\)
+only once \(\mathcal O_C(D)\) is known to be invertible, since
+\Cref{def:pcb-picard-group} defines \(\operatorname{Pic}(C)\) as the
+set of isomorphism classes of invertible modules.  All the objects
+here are defined componentwise, as recorded below, and each connected
+component of \(C\) is integral by the chain just used, so we may and
+do assume \(C\) connected, hence integral, with function field
+\(k(C)\).  For \(g\in k(C)^*\) write
+\(g^{-1}\mathcal O_C\) for the sub-\(\mathcal O_C\)-module of the
+constant sheaf \(k(C)\) with
+\((g^{-1}\mathcal O_C)(V)=\{h\in k(C):hg\in\mathcal O_C(V)\}\);
+multiplication by \(g\) is an isomorphism
+\(g^{-1}\mathcal O_C\to\mathcal O_C\), so \(g^{-1}\mathcal O_C\) is
+free of rank one.  It therefore suffices to produce, around each point
+of \(C\), an open \(U\) and a \(g\in k(C)^*\) with
+\(\mathcal O_C(D)|_U=g^{-1}\mathcal O_U\).
+
+That identity holds as soon as \(\operatorname{div}(g)|_U=D|_U\).
+Indeed, let \(V\subseteq U\) be open and nonempty and
+\(f\in k(C)^*\).  Since \(\operatorname{div}\) is a homomorphism,
+\(\operatorname{div}(f)|_V+D|_V\geq0\) if and only if
+\(\operatorname{div}(fg)|_V\geq0\), that is, if and only if
+\(v_Q(fg)\geq0\) at every closed point \(Q\in V\), that is -- each
+\(\mathcal O_{C,Q}\) being a discrete valuation ring with valuation
+\(v_Q\), as above -- if and only if \(fg\in\mathcal O_{C,Q}\) for
+every closed point \(Q\in V\).  This last condition says exactly that
+\(fg\in\mathcal O_C(V)\).  One direction is immediate; for the other,
+\(\mathcal O_C(V)=\bigcap_W\mathcal O_C(W)\) over the affine opens
+\(W\subseteq V\) by the sheaf axiom, and on \(W=\Spec A\) the ring
+\(A\) is a domain with fraction field \(k(C)\) whose maximal ideals
+are the closed points of \(W\) -- these being closed in \(C\), as
+\(C\) is of finite type over the field \(k\) and hence Jacobson -- so
+it is enough that a domain is the intersection of its localizations at
+its maximal ideals.  If \(h\in A_{\mathfrak m}\) for every maximal
+ideal \(\mathfrak m\), then the ideal \(\{a\in A:ah\in A\}\) contains,
+for each \(\mathfrak m\), a denominator of \(h\) in
+\(A_{\mathfrak m}\) and hence an element outside \(\mathfrak m\); so
+it lies in no maximal ideal, is therefore \(A\), and \(h\in A\).
+Adjoining \(0\) to both sides, this gives
+\(\mathcal O_C(D)|_U=g^{-1}\mathcal O_U\).
+
+It remains to produce the pairs.  Let \(S=\{P:n_P\neq0\}\), a finite
+set of closed points -- finite because \(D\) is a finite formal sum.
+On \(U=C\setminus S\), which contains every point of \(C\) not in
+\(S\), take \(g=1\): then \(\operatorname{div}(1)|_U=0=D|_U\), so
+\(\mathcal O_C(D)\) is \(\mathcal O_C\) away from the support of
+\(D\).  At a point \(P\in S\), let \(t_P\) be a uniformizer of the
+discrete valuation ring \(\mathcal O_{C,P}\) and let \(U_0\) be an
+affine open neighbourhood of \(P\) on which \(t_P\) is a regular
+function, which exists because \(\mathcal O_{C,P}\) is the colimit of
+the \(\mathcal O_C(W)\) over the opens \(W\ni P\).  Then
+\(v_Q(t_P)\geq0\) at every closed point \(Q\in U_0\), because
+\(t_P\in\mathcal O_C(U_0)\subseteq\mathcal O_{C,Q}\), while
+\(v_P(t_P)=1\); and the set of closed points \(Q\) with
+\(v_Q(t_P)>0\) is finite, by the finiteness of \(\operatorname{div}\)
+proved above.  Deleting from \(U_0\) the finitely many closed points
+\(Q\neq P\) with \(v_Q(t_P)>0\), together with the finitely many
+points of \(S\) other than \(P\), leaves an open \(U\ni P\) on which
+\(\operatorname{div}(t_P^{n_P})|_U=n_P[P]|_U=D|_U\), so
+\(g=t_P^{n_P}\) serves.  Hence \(\mathcal O_C(D)\) is locally free of
+rank one, in particular quasi-coherent, and therefore invertible; near
+a closed point \(P\) it is \(t_P^{-n_P}\mathcal O_C\).
+
+When all \(n_P\geq0\), \(D\) is \emph{effective} and is an effective
+Cartier divisor in the sense of
+\Cref{def:pcb-effective-cartier-divisor} --
 namely the closed subscheme locally cut out by \(\prod_Pt_P^{n_P}\),
 for \(t_P\) a uniformizer of \(\mathcal O_{C,P}\), which is reduced
 exactly when every \(n_P\leq1\); the
@@ -851,7 +1046,7 @@ of \(C=\mathbf P^1\sqcup\Spec k\), the local ring at the closed point
 is the field \(k\), which is not a discrete valuation ring and carries
 no normalized valuation, so \(\operatorname{div}(f)\) is undefined
 there.
-\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor,lem:pcb-dim0-finite,lem:pcb-smooth-regular,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
+\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor,def:pcb-invertible-module,def:pcb-picard-group,lem:pcb-dim0-finite,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1959,8 +2154,17 @@ The map is well defined: for \(f\in k(C)^*\),
 of the representative of \(D\) modulo principal divisors.  It is a
 homomorphism: the multiplication map
 \(\mathcal O_C(D)\otimes\mathcal O_C(D')\to\mathcal O_C(D+D')\),
-\(f\otimes g\mapsto fg\), is an isomorphism (locally both sides are
-invertible modules generated by the same element of \(k(C)\)).
+\(f\otimes g\mapsto fg\), is an isomorphism: writing
+\(D=\sum_Pn_P[P]\) and \(D'=\sum_Pn'_P[P]\), the local description of
+\Cref{def:pcb-divisor} gives, around each closed point \(P\), a common
+open neighbourhood on which the three modules are
+\(t_P^{-n_P}\mathcal O_C\), \(t_P^{-n'_P}\mathcal O_C\) and
+\(t_P^{-n_P-n'_P}\mathcal O_C\) for a uniformizer \(t_P\) of
+\(\mathcal O_{C,P}\), and there the map carries the generator
+\(t_P^{-n_P}\otimes t_P^{-n'_P}\) to the generator
+\(t_P^{-n_P-n'_P}\).  That all three are invertible is supplied by
+\Cref{def:pcb-divisor}, where it is proved, and is not proved here:
+the statement of this lemma already presupposes it.
 Surjectivity: by \Cref{lem:pcb-line-bundle-rational-section} every
 invertible module is \(\mathcal O_C(D)\) for
 \(D=\operatorname{div}(s)\) a rational section.  Injectivity: if
