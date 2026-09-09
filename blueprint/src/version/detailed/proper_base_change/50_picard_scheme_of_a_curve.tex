@@ -10833,10 +10833,27 @@ $[\kappa(P):k]$ is $1$ and the formula is the last one of (2).
 states it in the form $\deg(\cO_X(D))=\dim_k\Gamma(D,\cO_D)$; it is
 proved below.)
 (The general formula of Varieties, Lemma~33.44.5,
-\stacksproject{0AYV}, is used below
-only through the effective-divisor cases (2) and (4) and the case of a
-pullback from a point, which is explicit in the base change part (1) and
-in \Cref{lem:pc-degree-agrees-sc}.)
+\stacksproject{0AYV}, is used below only through the effective-divisor
+cases (2) and (4) and the case of a pullback from a point, which is
+explicit in the base change part (1) and in
+\Cref{lem:pc-degree-agrees-sc}.  The tensor-product formula for two
+invertible modules neither of which is assumed to have a nonzero section
+is not a case of (2), whose $\cM$ is $\cO_X(D)$ for an effective Cartier
+divisor $D$; conversely, the two displayed identities of (2) are that
+formula specialised to $\cM=\cO_X(D)$, and the proof below establishes
+them in that case with no cited input.  The general form is stated
+separately as \Cref{lem:pc-degree-tensor-additive}, cited there not to
+\stacksproject{0AYV} --- whose hypotheses are narrower, $X$ being a
+proper curve there, hence integral --- but to the tensor-product form
+Varieties, Lemma~33.44.7, \stacksproject{0AYX}.  Its consequence for
+powers, \Cref{lem:pc-degree-powers}, is used in the proof of
+\Cref{lem:pc-ample-positive-degree}(1) and again in Step~2 of the proof
+of \Cref{lem:pc-twist}, where the degree of
+$\cL\otimes\cL_0^{\bullet\otimes n}|_{X_K}$ is computed: the additivity
+there is \Cref{lem:pc-degree-tensor-additive}, the identity
+$\deg(\cL_0^{\bullet\otimes n})=n\deg(\cL_0^{\bullet})$ is
+\Cref{lem:pc-degree-powers}(2), and only the base change
+$\deg_{X_K}=\deg_X$ is taken from part (1) of the present lemma.)
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension,def:pc-smooth-morphism}
 % No \uses for \Cref{lem:pc-degree-agrees-sc} here, deliberately: the edge would
 % close a cycle.  That node's proof already
@@ -10846,6 +10863,19 @@ in \Cref{lem:pc-degree-agrees-sc}.)
 % The prose citation above points at a consumer of this node, not at a hypothesis: the
 % parenthesis says where the pullback-from-a-point case of tag 0AYV is made explicit
 % downstream.
+% The same ruling covers the four forward pointers added to that parenthesis.
+% \Cref{lem:pc-degree-tensor-additive} is named there as the place where the general
+% tensor-product form of the degree is stated, \Cref{lem:pc-degree-powers} as the place
+% where its consequence for powers is drawn, and \Cref{lem:pc-ample-positive-degree}
+% and \Cref{lem:pc-twist} as the two places where that consequence is consumed; none of
+% the four is a hypothesis of this lemma.  An edge to
+% \Cref{lem:pc-ample-positive-degree} would in addition close the 2-cycle
+%   lem:pc-degree-base-change -> lem:pc-ample-positive-degree
+%     -> lem:pc-degree-base-change,
+% that node's proof already citing this one, and an edge to \Cref{lem:pc-twist} would
+% close the 2-cycle
+%   lem:pc-degree-base-change -> lem:pc-twist -> lem:pc-degree-base-change
+% for the same reason.  So no uses-edge is added for any of the four.
 \end{lemma}
 % Ruling (hypothesis of (4)): "of dimension $1$" is spelled out as "every
 % irreducible component of dimension one".  Part (4) applies
@@ -10978,6 +11008,112 @@ above gives $\chi(X,\cO_X([P]))=\chi(X,\cO_X)+1$ (the locus $[P]$ has
 length $1$: $\cO_{[P],P}=\kappa(P)=k$), so
 $\deg(\cO_X([P]))=1$ and by the additivity already established
 $\deg(\cO_X(D))=\sum_in_i\deg(\cO_X([P_i]))=\sum_in_i$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Degree of a tensor product of invertible modules]
+\label{lem:pc-degree-tensor-additive}
+Let $k$ be a field and let $X$ be a proper scheme over $k$ of
+\termref{def:pc-dimension}{dimension} $\le1$; $X$ is not assumed
+irreducible.  Let $\cL,\cM$ be
+\termref{def:pc-invertible-module}{invertible $\cO_X$-modules}; neither
+is assumed to have a nonzero section.  Then
+\[
+\deg(\cL\otimes\cM)=\deg(\cL)+\deg(\cM),
+\]
+where $\deg$ is the degree of \Cref{def:pc-degree-line-bundle},
+$\deg(\cL)=\chi(X,\cL)-\chi(X,\cO_X)$.
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-dimension,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Lemma~33.44.7
+(\stacksproject{0AYX}), whose statement is that for a field $k$, a
+proper scheme $X$ of dimension $\le1$ over $k$ and locally free
+$\cO_X$-modules $\mathcal E,\mathcal V$ of constant finite rank one has
+\[
+\deg(\mathcal E\otimes\mathcal V)
+=\rank(\mathcal E)\deg(\mathcal V)+\rank(\mathcal V)\deg(\mathcal E).
+\]
+The statement above is the case $\mathcal E=\cL$, $\mathcal V=\cM$, both
+of rank $1$.  It is not decomposed here.  (In the Stacks Project that
+lemma is deduced from the general formula
+$\chi(X,\mathcal E\otimes\mathcal F)=r\deg(\mathcal E)+n\chi(X,\mathcal F)$
+on a proper curve, Varieties, Lemma~33.44.5, \stacksproject{0AYV},
+after the reduction to the irreducible components of Varieties,
+Lemma~33.44.6, \stacksproject{0AYW}.  That route is not open under the
+hypotheses carried here: \stacksproject{0AYV} asks for a proper curve,
+hence for an integral $X$, whereas the hypotheses above are those of
+\stacksproject{0AYX}, which does not require $X$ to be irreducible.)
+\end{proof}
+% Ruling (the tags named in the proof above).  This node's attribution is tag 0AYX
+% and that tag alone, and no other node of the chapter stands for it.  The two further tags printed in the parenthesis, 0AYV and 0AYW, are
+% narrative about the Stacks Project's own proof of 0AYX, not attributions of this
+% node: 0AYV stays owned by \Cref{lem:pc-degree-base-change}, whose own parenthesis
+% delimits where it enters this chapter, and 0AYW is stood for by no node.  No
+% \uses edge follows from either mention.
+% Ruling (no ``(a proper curve)'' gloss here).  \Cref{def:pc-degree-line-bundle} and
+% \Cref{lem:pc-degree-base-change} both gloss ``proper over $k$ of dimension $\le1$''
+% as ``a proper curve''.  The gloss is deliberately absent from this node:
+% \Cref{def:pc-curve} defines a curve to be an integral variety of dimension $1$, and
+% the whole reason this node is cited to 0AYX rather than to 0AYV is that $X$ is not
+% assumed integral here.  Repairing the gloss at the two other nodes is a separate
+% matter and is not done here.
+
+% ---------------------------------------------------------------------------
+% Decomposed.
+\begin{lemma}[The degree on powers, duals and the Picard group]
+\label{lem:pc-degree-powers}
+Let $k$ be a field, let $X$ be a proper scheme over $k$ of
+\termref{def:pc-dimension}{dimension} $\le1$ and let $\cL$ be an
+\termref{def:pc-invertible-module}{invertible $\cO_X$-module}, not
+assumed to have a nonzero section.  Write $\deg$ for the degree of
+\Cref{def:pc-degree-line-bundle}.
+\begin{enumerate}
+\item $\deg(\cO_X)=0$, and $\deg(\cL)$ depends only on the isomorphism
+class of $\cL$.
+\item (Powers) $\deg(\cL^{\otimes m})=m\deg(\cL)$ for every integer $m$,
+where for $m<0$ we write $\cL^{\otimes m}:=(\cL^\vee)^{\otimes(-m)}$ for
+the tensor power of the dual $\cL^\vee$ of
+\Cref{def:pc-invertible-module}, so that
+$\cL^{\otimes m}\otimes\cL^{\otimes(-m)}\cong\cO_X$.
+\item $\deg$ induces a group homomorphism
+$\Pic(X)\to\mathbf Z$, $[\cL]\mapsto\deg(\cL)$, on the
+\termref{def:pc-picard-group}{Picard group} of $X$.
+\end{enumerate}
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-dimension,def:pc-morphism-conventions,def:pc-picard-group,lem:pc-tensor-dual-invertible,lem:pc-degree-tensor-additive}
+\end{lemma}
+\begin{proof}
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-picard-group,lem:pc-tensor-dual-invertible,lem:pc-degree-tensor-additive}
+\emph{(1).}  $\deg(\cO_X)=\chi(X,\cO_X)-\chi(X,\cO_X)=0$ by
+\Cref{def:pc-degree-line-bundle}.  Isomorphic coherent modules have the
+same cohomology groups, hence the same Euler characteristic
+(\Cref{def:pc-euler-characteristic}) and, subtracting
+$\chi(X,\cO_X)$, the same degree.
+
+\emph{(2).}  That the dual $\cL^\vee$ and the tensor product of two
+invertible modules are again invertible, and that
+$\cL\otimes\cL^\vee\cong\cO_X$, is
+\Cref{lem:pc-tensor-dual-invertible}; so $\cL^{\otimes m}$ is an
+invertible $\cO_X$-module for every integer $m$ and
+$\cL^{\otimes m}\otimes\cL^{\otimes(-m)}\cong\cO_X$, as asserted.  The
+case $m=0$ is $\deg(\cO_X)=0$, part of (1).  For $m\ge1$ induct on $m$,
+taking $\cM=\cL^{\otimes(m-1)}$ in
+\Cref{lem:pc-degree-tensor-additive}.  For $m\le-1$, the same lemma
+applied to $\cL^{\otimes m}$ and $\cL^{\otimes(-m)}$ gives
+$\deg(\cL^{\otimes m})+\deg(\cL^{\otimes(-m)})=\deg(\cO_X)=0$, using (1)
+both for the invariance of the degree along the isomorphism
+$\cL^{\otimes m}\otimes\cL^{\otimes(-m)}\cong\cO_X$ and for
+$\deg(\cO_X)=0$; hence
+$\deg(\cL^{\otimes m})=-\deg(\cL^{\otimes(-m)})=-(-m)\deg(\cL)=m\deg(\cL)$
+by the case $-m\ge1$ just proved.
+
+\emph{(3).}  By (1) the degree depends only on the isomorphism class, so
+$[\cL]\mapsto\deg(\cL)$ is a well-defined map on the classes of
+\Cref{def:pc-picard-group}.  It carries the unit $[\cO_X]$ to $0$ by (1)
+and the group law $[\cL][\cM]=[\cL\otimes\cM]$ to addition by
+\Cref{lem:pc-degree-tensor-additive}, so it is a group homomorphism
+$\Pic(X)\to\mathbf Z$.
 \end{proof}
 
 
@@ -11172,7 +11308,7 @@ over $k$ (\Cref{lem:pc-h0-proper-variety}(2)).
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible,lem:pc-h0-proper-variety}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pc-zero-scheme-properties,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-degree-powers,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-projective-proper,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pc-zero-scheme-properties,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
 \emph{(1) ($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
@@ -11219,9 +11355,18 @@ affineness/finiteness of $D$), the additivity of $\chi$ gives
 \[
 \chi(\cL^{\otimes m})=\chi(\cO_X)+\deg D,\qquad
 \text{so}\qquad
-m\deg(\cL)=\deg(\cL^{\otimes m})=\deg D\ge1 ,
+\deg(\cL^{\otimes m})=\deg D\ge1.
 \]
-and $\deg\cL>0$.
+Finally $\deg(\cL^{\otimes m})=m\deg(\cL)$ by the multiplicativity of the
+degree in powers, \Cref{lem:pc-degree-powers}(2), applied to the
+invertible module $\cL$ on $X$.  Its hypotheses hold: $X$ is proper over
+$k$, being projective over $k$ (\Cref{lem:pc-projective-proper}), and is
+of dimension $1$, being a curve over $k$.  (That node rests on the
+general tensor-product form of the degree; the effective-divisor case
+\Cref{lem:pc-degree-base-change}(2) is not available here, since at this
+point of the argument only $\cL^{\otimes m}$, and not $\cL$ itself, is
+known to have a nonzero section.)  So $m\deg(\cL)\ge1$ with $m\ge1$, and
+$\deg\cL>0$.
 
 \emph{(2) ($\Leftarrow$).}  Assume $H^0(X,\cO_X)=k$ and $\deg\cL>0$.  By
 \Cref{lem:pc-degree-base-change}(1), $\deg(\cL_{\bar k})=\deg\cL>0$,
@@ -14029,7 +14174,7 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 % subscripted sites of this same base change write \(\deg_{X_K}\).  Corrected to
 % \(\deg_{X_K}(\cL)\).  Cosmetic: no hypothesis, no citation and no value changes.
 \begin{proof}
-\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-smooth-curve-local-dvr,lem:pc-smooth-base-change,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-smooth-curve-local-dvr,lem:pc-smooth-base-change,prop:pc-XK-integral,def:pc-degree-line-bundle,lem:pc-degree-powers,lem:pc-degree-tensor-additive,lem:pc-projective-proper,lem:pc-tensor-dual-invertible}
 \emph{Step 0: the genus of the statement is defined for $X$.}
 \Cref{def:pc-genus} asks for a geometrically irreducible smooth
 projective curve, which the statement does not hypothesise, and
@@ -14065,9 +14210,33 @@ $H^p(X_K,\cL^{(n)})=0$ for all $p\ge1$ once $n\gg0$.  On the other hand
 \chi(X_K,\cL^{(n)})=\deg(\cL^{(n)})+\chi(X_K,\cO)
 =\deg_{X_K}(\cL)+n\deg_X(\cL_0^{\bullet})+\bigl(1-g\bigr)
 \]
-by \Cref{lem:pc-degree-base-change} (tensor products and base change
-\Cref{lem:pc-degree-base-change}, the additivity of $\chi$
-\Cref{lem:pc-euler-additive}); here
+the first equality by \Cref{def:pc-degree-line-bundle}, the degree on
+$X_K$ being $\chi(X_K,-)-\chi(X_K,\cO)$, and the second in three steps:
+\Cref{lem:pc-degree-tensor-additive}, applied on $X_K$ to the two
+invertible modules $\cL$ and $\cL_0^{\bullet\otimes n}|_{X_K}$, gives
+$\deg(\cL^{(n)})
+=\deg_{X_K}(\cL)+\deg_{X_K}(\cL_0^{\bullet\otimes n}|_{X_K})$;
+\Cref{lem:pc-degree-base-change}(1), the base change part and nothing
+more, gives
+$\deg_{X_K}(\cL_0^{\bullet\otimes n}|_{X_K})=\deg_X(\cL_0^{\bullet\otimes n})$;
+and \Cref{lem:pc-degree-powers}(2) gives
+$\deg_X(\cL_0^{\bullet\otimes n})=n\deg_X(\cL_0^{\bullet})$.  Neither
+the first nor the third is a case of \Cref{lem:pc-degree-base-change}(2),
+whose $\cM$ is $\cO_X(D)$ for an effective Cartier divisor $D$: $\cL$ is
+arbitrary here and Step~1 produced $\cL_0^{\bullet}$ only as an ample
+module, this step being where a nonzero section is first achieved.  The
+hypotheses of the two degree lemmas are met at both ends.  $X$ is a
+smooth projective curve over $k$, hence proper over $k$
+(\Cref{lem:pc-projective-proper}) and of dimension $1$ (a
+\termref{def:pc-curve}{curve}), and $\cL_0^{\bullet\otimes n}$ is
+invertible on it (\Cref{lem:pc-tensor-dual-invertible}); $X_K$ is proper
+over $K$ (the last assertion of \Cref{lem:pc-projective-proper}: the base
+change of a smooth projective curve along a field extension is proper)
+and of dimension $1$ (\Cref{lem:pc-dim-base-change}), and on it $\cL$ is
+invertible by hypothesis while $\cL_0^{\bullet\otimes n}|_{X_K}$ is
+invertible as a base change of an invertible module
+(\Cref{def:pc-invertible-module}), as Step~1 already used for $n=1$.  The
+additivity of $\chi$ is \Cref{lem:pc-euler-additive}; here
 $\chi(X_K,\cO)=1-g$: indeed
 $\dim_KH^0(X_K,\cO)=\dim_k(H^0(X,\cO)\otimes_kK)=1$ and
 $\dim_KH^1(X_K,\cO)=g$ by \Cref{lem:pc-flat-base-change-cohom} and
