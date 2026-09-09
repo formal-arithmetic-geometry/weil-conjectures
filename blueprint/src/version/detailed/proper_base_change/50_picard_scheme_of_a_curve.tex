@@ -879,6 +879,22 @@ tensor product of invertible modules, which needs a monoidal structure on
 % edge: deleting the edge to \Cref{lem:pcb-regular-dim1-dvr} returns the
 % Riemann-Roch closure to 115, and deleting either of the other two leaves 118,
 % which is why only the first is quoted as the closure delta.
+% Superseded on a later pass; recorded here rather than rewritten above, since the
+% block is that pass's own record.  The edge from this definition to
+% \Cref{lem:pcb-regular-dim1-dvr} discussed above is now an edge to
+% \Cref{lem:pcb-smooth-curve-local-dvr}, which packages ``smooth and of finite
+% type over \(k\), \(P\) a closed point on a component of dimension one, hence
+% \(\cO_{X,P}\) a discrete valuation ring'' and whose own \uses-closure contains
+% \Cref{lem:pcb-regular-dim1-dvr}.  So the derivation quoted above under ``Steps
+% and their edges'' is no longer written out in this block; it is cited.  The edge
+% to \Cref{lem:pcb-smooth-regular} stays, that node still being cited here for the
+% integrality chain.  Acyclicity is unaffected: the closure of
+% \Cref{lem:pcb-smooth-curve-local-dvr} is 16 nodes and does not contain this
+% definition, and a whole-graph DFS still finds 0 cycles.  Re-derived at that
+% later head, under the same convention: 311 \labels, 1330 distinct edges, 1546
+% \uses target instances, 0 dangling \uses and 0 dangling \Cref against the
+% \labels of the whole blueprint tree, 0 self-loops with stripping enabled.
+% This definition's closure is 32 nodes and \Cref{thm:pc-riemann-roch}'s is 122.
 \begin{definition}[Divisors, principal divisors, class group]
 \label{def:pcb-divisor}
 Let \(C\) be a \termref{def:pcb-curves}{curve} over \(k\).  A
@@ -893,13 +909,10 @@ the closed points of \(C\).  For \(f\in k(C)^*\)
 where \(v_P\) is the normalized valuation of the local ring
 \(\mathcal O_{C,P}\), which is a discrete valuation ring when \(C\) is
 smooth \emph{of dimension one}, i.e.\ every irreducible component of
-\(C\) has dimension one: \(\mathcal O_{C,P}\) is then regular
-(\Cref{lem:pcb-smooth-regular}), hence a domain, so that \(P\) lies on
-exactly one irreducible component \(Z\) of \(C\) and
-\(\dim\mathcal O_{C,P}=\dim\mathcal O_{Z,P}
-=\dim Z-\dim\overline{\{P\}}=1\), \(P\) being a closed point of the
-finite-type \(k\)-scheme \(Z\); and a regular local ring of dimension
-one is a discrete valuation ring (\Cref{lem:pcb-regular-dim1-dvr}).
+\(C\) has dimension one: \(\mathcal O_{C,P}\) is then a discrete
+valuation ring (\Cref{lem:pcb-smooth-curve-local-dvr}, \(C\) being
+smooth and of finite type over \(k\) by \Cref{def:pcb-curves} and
+\(P\) a closed point lying on a component of dimension one).
 Such divisors are \emph{principal}.  (The other piece of local theory
 used below, that a closed point of such a curve is an effective
 Cartier divisor, is \Cref{lem:pcb-point-cartier}.)
@@ -1046,7 +1059,7 @@ of \(C=\mathbf P^1\sqcup\Spec k\), the local ring at the closed point
 is the field \(k\), which is not a discrete valuation ring and carries
 no normalized valuation, so \(\operatorname{div}(f)\) is undefined
 there.
-\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor,def:pcb-invertible-module,def:pcb-picard-group,lem:pcb-dim0-finite,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
+\uses{def:pcb-curves,def:pcb-function-field,def:pcb-effective-cartier-divisor,def:pcb-invertible-module,def:pcb-picard-group,lem:pcb-dim0-finite,lem:pcb-smooth-regular,lem:pcb-smooth-curve-local-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -1803,35 +1816,92 @@ valuation ring by \Cref{lem:pcb-principal-ideal-dvr}.
 \end{proof}
 
 % ---------------------------------------------------------------------------
-% Cited.
+% Decomposed.
+% Derived from \Cref{lem:pc-dim-zero-finite} rather than cited afresh against a
+% Nullstellensatz tag of its own: that node already carries the content this
+% needs (Varieties, Lemma~33.20.2, \stacksproject{06LH}, whose conclusion
+% includes \(\dim_kA<\infty\) for the local Artinian factors), so a second
+% external input for the same fact would be one more thing to formalise for no
+% gain.
 \begin{lemma}[Residue fields at closed points are finite over the base field]
 \label{lem:pcb-closed-point-residue-finite}
 Let \(k\) be a field and \(X\) a scheme of finite type over \(k\).  For
 every closed point \(P\) of \(X\), the residue field \(k(P)\) is a
 finite extension of \(k\).
+% Mathlib: the ring form only, and no \mathlibok marker on that account.
+% finite_of_finite_type_of_isJacobsonRing (Mathlib/RingTheory/Jacobson/Ring.lean)
+% gives Module.Finite R S for a field S of finite type over a Jacobson ring R, hence
+% for S a field of finite type over a field k -- which is this statement once the
+% residue field at a closed point is known to be a finite type k-algebra.  That
+% last step, the scheme-level half, has no single declaration.
 \end{lemma}
 \begin{proof}
-This is a cited external input: Algebra, Theorem~10.34.1 (Hilbert
-Nullstellensatz, \stacksproject{00FV}), whose first assertion is that
-\(\kappa(\mathfrak m)/k\) is finite for every maximal ideal
-\(\mathfrak m\) of a finite type \(k\)-algebra.  A closed point \(P\)
-of \(X\) lies in some affine open \(\operatorname{Spec}A\) with \(A\) of
-finite type over \(k\), and is closed there, hence corresponds to a
-maximal ideal of \(A\).  It is not decomposed here.
+\uses{lem:pc-dim-zero-finite}
+Give the closed subset \(\{P\}\) its reduced induced structure.  The
+resulting closed subscheme of \(X\) is \(\operatorname{Spec}k(P)\), it is
+of finite type over \(k\) --- a closed immersion is of finite type and
+\(X\) is of finite type over \(k\) --- and its dimension is zero.  So
+\Cref{lem:pc-dim-zero-finite} applies to it and gives
+\(\dim_kk(P)<\infty\), which is to say that \(k(P)/k\) is finite.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Dimension of the local ring at a closed point]
+\label{lem:pcb-local-ring-dimension}
+Let \(k\) be a field, let \(Z\) be an irreducible scheme of finite type
+over \(k\) and let \(P\in Z\) be a closed point.  Then
+\(\dim\mathcal O_{Z,P}=\dim Z\).
+% Mathlib: not present, and no \mathlibok marker.  Mathlib has ringKrullDim and
+% Order.krullDim for the two sides, but nothing under Mathlib/AlgebraicGeometry/
+% relates the Krull dimension of a stalk to the dimension of an irreducible scheme
+% of finite type over a field.
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Section~33.20 (Algebraic
+schemes), Lemma~33.20.3 (\stacksproject{0A21}), whose clause~(2) gives
+\(\dim_P(Z)=\dim\mathcal O_{Z,P}\) for \(P\) a closed point and whose
+clause~(3) gives \(\dim_P(Z)=\dim Z\) for \(Z\) irreducible; a scheme of
+finite type over \(k\) is what is there called an \emph{algebraic
+\(k\)-scheme}, hence in particular locally algebraic (Varieties,
+Definition~33.20.1, \stacksproject{06LG}).  It is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (no \uses on the proof): the first two conclusions are read off the
+% structure of a discrete valuation ring --- \(\mathfrak m=(\varpi)\), and every
+% nonzero \(t\) equal to \(u\varpi^{v(t)}\) --- and this chapter owns no node for
+% that structure.  \Cref{lem:pcb-principal-ideal-dvr} runs the other way, from a
+% principal maximal ideal to the valuation, so it is not the missing input.  The
+% empty \uses is therefore a deliberate non-edge, recorded here in the idiom of
+% the chapter's other refusals, not an omission.
+% Ruling (statement): \((t)=\mathfrak m^{v(t)}\) and the length are stated with no
+% base field in sight, because the proof uses none; only the \(k\)-dimension needs
+% \(R\) to be a \(k\)-algebra with \(\kappa/k\) finite.  Naming the length and the
+% \(k\)-dimension side by side in one statement is what stops them being
+% conflated: the two numbers differ as soon as \(v(t)>0\) and \([\kappa:k]>1\), so
+% the ring over which a length is taken has to be named.
 \begin{lemma}[Dimension of a quotient of a discrete valuation ring]
 \label{lem:pcb-dvr-quotient-dimension}
-Let \(k\) be a field and let \(R\) be a discrete valuation ring which is
-a \(k\)-algebra, with normalized valuation \(v\), maximal ideal
-\(\mathfrak m\) and residue field \(\kappa=R/\mathfrak m\) finite over
-\(k\).  Let \(t\in R\) be nonzero.  Then \((t)=\mathfrak m^{v(t)}\), the
-\(R\)-module \(R/(t)\) has length \(v(t)\), and
+Let \(R\) be a discrete valuation ring with normalized valuation \(v\),
+maximal ideal \(\mathfrak m\) and residue field
+\(\kappa=R/\mathfrak m\), and let \(t\in R\) be nonzero.  Then
+\((t)=\mathfrak m^{v(t)}\) and the \(R\)-module \(R/(t)\) has length
+\(v(t)\).  If moreover \(R\) is a \(k\)-algebra for a field \(k\) and
+\(\kappa\) is finite over \(k\), then
 \[
  \dim_kR/(t)=v(t)\,[\kappa:k].
 \]
+% Mathlib: the first two clauses only, and no \mathlibok marker on that account,
+% the third clause being the one both call sites use.
+% IsDiscreteValuationRing.ideal_eq_span_pow_irreducible says every nonzero ideal of
+% a discrete valuation ring is generated by a power of a uniformizer, which with
+% IsDiscreteValuationRing.addVal_def is \((t)=\mathfrak m^{v(t)}\), and
+% IsDiscreteValuationRing.length_quotient_pow_maximalIdeal says the length of
+% R / maximalIdeal R ^ n over R is n, which is the length clause (both in
+% Mathlib/RingTheory/DiscreteValuationRing/Basic.lean).  The \(k\)-dimension
+% clause has no counterpart.
 \end{lemma}
 \begin{proof}
 Write \(\mathfrak m=(\varpi)\); then \(v(\varpi)=1\), and every nonzero
@@ -1843,38 +1913,56 @@ isomorphic to \(\kappa\) because \(\mathfrak m\) is principal
 (multiplication by \(\varpi^{i}\) induces an isomorphism
 \(R/\mathfrak m\to\mathfrak m^{i}/\mathfrak m^{i+1}\)).  Each piece is
 therefore a simple \(R\)-module, so the filtration is a composition
-series and \(R/(t)\) has length \(v(t)\) over \(R\); and each piece is a
-\(k\)-vector space of dimension \([\kappa:k]\), so
-\(\dim_kR/(t)=v(t)\,[\kappa:k]\).  The two numbers differ as soon as
-\(\kappa\neq k\), which is why the ring over which a length is taken has
-to be named.
+series and \(R/(t)\) has length \(v(t)\) over \(R\).  Under the further
+hypotheses each piece is moreover a \(k\)-vector space of dimension
+\([\kappa:k]\), so \(\dim_kR/(t)=v(t)\,[\kappa:k]\).
 \end{proof}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (smoothness rather than regularity): smoothness enters the proof only
+% through \Cref{lem:pc-smooth-over-field-regular}, so the lemma would hold with
+% ``\(\mathcal O_{X,P}\) regular'' in place of ``\(X\) smooth over \(k\)''.  It is
+% stated for a smooth \(X\) all the same: every site that cites it has smoothness
+% and none has bare regularity, so a regular-hypothesis node would have no
+% consumer and each site would pay back, in the specialisation, exactly the
+% citation this node exists to save.
+% Ruling (finiteness of \(k(P)\)): folded into the conclusion rather than left to
+% the call sites.  Each of them needs \([k(P):k]\) immediately after the discrete
+% valuation ring, and each used to fetch it separately from
+% \Cref{lem:pcb-closed-point-residue-finite}.
 \begin{lemma}[Local rings at closed points of a smooth curve]
 \label{lem:pcb-smooth-curve-local-dvr}
 Let \(k\) be a field, let \(X\) be a scheme of finite type over \(k\)
 which is \termref{def:pc-smooth-morphism}{smooth} over \(k\), and let
 \(P\in X\) be a closed point lying on an irreducible component of
 dimension one.  Then \(\mathcal O_{X,P}\) is a discrete valuation ring
-with residue field \(k(P)\), and its maximal ideal \(\mathfrak m_P\) is
-generated by a uniformizer.
+whose maximal ideal \(\mathfrak m_P\) is generated by a uniformizer, and
+the residue field \(k(P)\) is a finite extension of \(k\).
+% Mathlib: not present as a single declaration, and no \mathlibok marker.  The
+% inputs are there separately (smooth over a field implies regular; a regular local
+% ring of dimension one is a discrete valuation ring, IsDiscreteValuationRing.TFAE),
+% but nothing states the composite for a closed point of a finite type scheme.
 \uses{def:pc-smooth-morphism}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-smooth-over-field-regular,lem:pcb-regular-dim1-dvr,lem:pcb-regular-local-domain}
+\uses{lem:pc-smooth-over-field-regular,lem:pcb-closed-point-residue-finite,lem:pcb-local-ring-dimension,lem:pcb-regular-dim1-dvr,lem:pcb-regular-local-domain}
 A scheme smooth over a field is regular
 (\Cref{lem:pc-smooth-over-field-regular}), so \(\mathcal O_{X,P}\) is a
 regular local ring, hence a domain
 (\Cref{lem:pcb-regular-local-domain}); therefore \(P\) lies on exactly
-one irreducible component \(Z\) of \(X\), and
-\(\dim\mathcal O_{X,P}=\dim\mathcal O_{Z,P}\).  By hypothesis
-\(\dim Z=1\), and \(P\) is a closed point of the finite-type
-\(k\)-scheme \(Z\), so that dimension is
-\(\dim Z-\dim\overline{\{P\}}=1\).  A regular local ring of dimension
-one is a discrete valuation ring (\Cref{lem:pcb-regular-dim1-dvr}), and
-its maximal ideal is then generated by a uniformizer.
+one irreducible component \(Z\) of \(X\), so \(Z\) is the component
+named in the hypothesis and \(\dim Z=1\), and
+\(\dim\mathcal O_{X,P}=\dim\mathcal O_{Z,P}\).  Give \(Z\) its reduced
+induced structure: it is then an irreducible scheme of finite type over
+\(k\), being a closed subscheme of \(X\), and \(P\) is a closed point of
+it, so \(\dim\mathcal O_{Z,P}=\dim Z=1\)
+(\Cref{lem:pcb-local-ring-dimension}).  A regular local ring of
+dimension one is a discrete valuation ring
+(\Cref{lem:pcb-regular-dim1-dvr}), and its maximal ideal is then
+generated by a uniformizer.  Finally \(k(P)\) is a finite extension of
+\(k\), \(P\) being a closed point of the scheme \(X\) of finite type
+over \(k\) (\Cref{lem:pcb-closed-point-residue-finite}).
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -1908,8 +1996,9 @@ divisor.
 By hypothesis \(P\) lies on an irreducible component of \(C\) of
 dimension one, so \(\mathcal O_{C,P}\) is a discrete valuation ring and
 its maximal ideal \(\mathfrak m_P\) is generated by a uniformizer
-\(t_P\), a non-zero-divisor
-(\Cref{lem:pcb-smooth-curve-local-dvr}).  The
+\(t_P\) (\Cref{lem:pcb-smooth-curve-local-dvr}), which is a
+non-zero-divisor, \(\mathcal O_{C,P}\) being a domain --- a discrete
+valuation ring is one.  The
 ideal of \(P\) in \(\mathcal O_{C,P}\) is \(\mathfrak m_P=(t_P)\), so
 \(P=V(t_P)\) on an affine neighbourhood where \(t_P\) extends; hence
 \(P\) is an effective Cartier divisor.  A finite sum of effective
@@ -2721,7 +2810,7 @@ finite surjective and flat of degree \([k(C):k(f)]\).
 \uses{def:pcb-function-field,lem:pcb-rational-function-morphism,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-dim0-finite,lem:pcb-rational-function-morphism,lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-trdeg-one-finite}
+\uses{lem:pcb-dim0-finite,lem:pcb-rational-function-morphism,lem:pcb-smooth-curve-local-dvr,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-trdeg-one-finite}
 By \Cref{lem:pcb-rational-function-morphism}, \(\pi_f\) is defined
 with \(\pi_f^*t=f\).
 
@@ -2754,8 +2843,9 @@ Hence \(\mathcal E\) is torsion-free.  A coherent torsion-free sheaf
 on the smooth curve \(\mathbf P^1\) is locally free: at a closed
 point \(y\), the stalk \(\mathcal E_y\) is a finitely generated
 module over the discrete valuation ring \(\mathcal O_{\mathbf P^1,y}\)
-(\Cref{lem:pcb-smooth-regular},
-\Cref{lem:pcb-regular-dim1-dvr}) and is torsion-free, hence free
+(\Cref{lem:pcb-smooth-curve-local-dvr}, \(\mathbf P^1_k\) being smooth
+and of finite type over \(k\) and irreducible of dimension one) and is
+torsion-free, hence free
 (finitely generated torsion-free modules over a discrete valuation
 ring are free).  A finite morphism is flat if and only if its
 pushforward is locally free, so \(\pi_f\) is finite flat.  Its degree
@@ -2860,7 +2950,7 @@ with \(\pi_f^*t=f\), where \(t\) is the standard coordinate on
 \uses{def:pcb-function-field,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-regular-dim1-dvr,lem:pcb-smooth-regular,lem:pc-projective-space-separated,lem:pcb-regular-local-domain}
+\uses{lem:pcb-smooth-curve-local-dvr,lem:pcb-smooth-regular,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-projective-space-separated,lem:pcb-regular-local-domain,def:pcb-curves,def:pcb-function-field}
 Write \(\mathbf P^1_k=\operatorname{Proj}k[x_0,x_1]\) with
 coordinate \(t=x_1/x_0\), and cover \(C\) by finitely many affine
 open subsets \(U_\alpha=\operatorname{Spec}A_\alpha\).  We first
@@ -2868,9 +2958,17 @@ note that on each \(U_\alpha\) one can write \(f=a/b\) with
 \(a,b\in A_\alpha\) and \((a,b)=(1)\) in \(A_\alpha\).  Indeed, at
 every closed point \(P\in U_\alpha\) the local ring
 \(\mathcal O_{C,P}\) is a discrete valuation ring
-(\Cref{lem:pcb-smooth-regular},
-\Cref{lem:pcb-regular-dim1-dvr}) with uniformizer \(t_P\), and
-\(f=t_P^{v_P(f)}u_P\) with \(u_P\) a unit: if \(v_P(f)\geq0\),
+(\Cref{lem:pcb-smooth-curve-local-dvr}) with uniformizer \(t_P\).
+Its hypotheses hold: \(C\) is smooth and of finite type over \(k\)
+(\Cref{def:pcb-curves}), it is irreducible --- being connected and
+smooth, hence regular (\Cref{lem:pcb-smooth-regular}), hence normal
+(\Cref{lem:pc-regular-is-normal}) and so integral
+(\Cref{lem:pc-noetherian-normal-decomposition}) --- and its unique
+irreducible component has dimension one: that dimension is at most one
+by \Cref{def:pcb-curves}, and it is not zero, since \(C\) would then
+be a single closed point and \(k(C)=k\), against \(f\notin k\).
+So \(f=t_P^{v_P(f)}u_P\) with
+\(u_P\) a unit: if \(v_P(f)\geq0\),
 then \(f=(t_P^{v_P(f)}u_P)/1\) is a representation with
 \((a_P,b_P)=(1)\) in \(\mathcal O_{C,P}\), and if \(v_P(f)<0\),
 then \(1/f\in\mathcal O_{C,P}\) and \(f=1/(1/f)\) is a
@@ -3055,14 +3153,24 @@ morphism \(\pi_f:C\to\mathbf P^1_k\) with \(\pi_f^*t=f\).
 %     and none of them names any of the four sets or asserts membership in one;
 %     \Cref{lem:pcb-flat-base-change-coherent} hypothesises quasi-coherence rather
 %     than asserting it.
-% Absolutes for this pass, all re-derived at this head under the convention above,
-% none inherited: 13185 lines and 307 \labels at the base bb17c15, the \label
-% multiset unchanged by this change; \uses instances 1483 -> 1487, distinct targets
-% 283 -> 283, dangling 0 -> 0, in-degree-0 nodes 24 -> 24 with the \texttt{pcb-}
-% half 0 -> 0, cycles 0 -> 0.  Stripping-disabled control: exactly 5 self-loops, at
-% \Cref{lem:pc-cech-resolution}, \Cref{lem:pc-degree-base-change},
-% \Cref{lem:pc-effaceable-universal}, \Cref{lem:pc-fp-flat-finite-projective} and
+% Absolutes for the pass at base bb17c15, kept as that pass's own record and NOT
+% describing the block below as it now stands: 13185 lines and 307 \labels at that
+% base, the \label multiset unchanged by that change; \uses instances 1483 -> 1487,
+% distinct targets 283 -> 283, dangling 0 -> 0, in-degree-0 nodes 24 -> 24 with the
+% \texttt{pcb-} half 0 -> 0, cycles 0 -> 0.  Stripping-disabled control: exactly 5
+% self-loops, at \Cref{lem:pc-cech-resolution},
+% \Cref{lem:pc-degree-base-change}, \Cref{lem:pc-effaceable-universal},
+% \Cref{lem:pc-fp-flat-finite-projective} and
 % \Cref{lem:pc-standard-smooth-form}; stripped, 0.
+% Absolutes at the present head, re-derived under the same convention, base
+% 5815cf65 -> head: 13997 -> 14257 lines, 307 -> 311 \labels, 1321 -> 1330 edges,
+% 1533 -> 1546 \uses target instances, 283 -> 287 distinct targets, dangling
+% \uses and \Cref 0 -> 0 against the \labels of the whole blueprint tree, cycles
+% 0 -> 0, self-loops 0 -> 0 stripped and 5 -> 5 unstripped at the same five nodes.
+% The four new \labels are \Cref{lem:pcb-closed-point-residue-finite},
+% \Cref{lem:pcb-local-ring-dimension}, \Cref{lem:pcb-dvr-quotient-dimension} and
+% \Cref{lem:pcb-smooth-curve-local-dvr}; the \uses lists of the block below are
+% not the ones the census above was taken over.
 \begin{lemma}[Degree of pullbacks of divisors]
 \label{lem:pcb-pullback-degree}
 Let \(\pi:C\to C'\) be a finite flat morphism of connected proper
@@ -3077,31 +3185,41 @@ extensions because a connected smooth curve is irreducible, so that
  \deg(\pi^*D')=d\cdot\deg D',
 \]
 where \(\pi^*D'\) is the pullback divisor
-\(\sum_{P'}n_{P'}\sum_{\pi(P)=P'}v_P(t_{P'})[P]\), where \(t_{P'}\) is a
-local equation of \(P'\) -- one exists at every closed point of \(C'\)
-because such a point is an effective Cartier divisor
-(\Cref{lem:pcb-point-cartier}) -- and where \(t_{P'}\) denotes also its
-image in \(\mathcal O_{C,P}\) under the map
-\(\mathcal O_{C',P'}\to\mathcal O_{C,P}\) induced by \(\pi\), on which
-\(v_P\) is evaluated.  The coefficient \(v_P(t_{P'})\) is independent of
-the choice of \(t_{P'}\): two local equations of \(P'\) differ by a unit
-of \(\mathcal O_{C',P'}\), whose image in \(\mathcal O_{C,P}\) is again
-a unit, and a valuation is unchanged on multiplying by a unit.  That
-double sum is finite, so that \(\pi^*D'\) is
-indeed an element of \(\operatorname{Div}(C)\) and has a degree at all:
-the outer sum is finite because \(D'\) is a divisor on \(C'\), hence a
-finite formal sum by \Cref{def:pcb-divisor}, and each inner sum is
-finite because it runs over the fibre \(\pi^{-1}(P')\), which is a
-finite set -- a finite morphism to a locally Noetherian base has finite
-fibres (\Cref{lem:pcb-finite-iff-proper-finite-fibres}, in the
-direction ``finite \(\Rightarrow\) proper with finite fibres''), and
-\(C'\) is locally Noetherian, being of finite type over \(k\)
-(\Cref{def:pcb-curves}).  In particular
-\(\deg\pi^*[P']=d\) for every closed point \(P'\).
-\uses{def:pcb-curves,def:pcb-divisor,def:pcb-function-field,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-point-cartier}
+\[
+ \pi^*D'=\sum_{P'}n_{P'}\sum_{\pi(P)=P'}v_P(t_{P'})\,[P],
+\]
+in which \(t_{P'}\) is a local equation of the closed point \(P'\) --
+one exists at every closed point of \(C'\), such a point being an
+effective Cartier divisor (\Cref{lem:pcb-point-cartier}) -- and in
+which \(t_{P'}\) denotes also its image in \(\mathcal O_{C,P}\) under
+the map \(\mathcal O_{C',P'}\to\mathcal O_{C,P}\) induced by \(\pi\),
+on which \(v_P\) is evaluated.  The coefficient \(v_P(t_{P'})\) does
+not depend on the choice of \(t_{P'}\), the \(P\) occurring are closed
+points of \(C\) and the double sum is finite, so that \(\pi^*D'\) is
+indeed an element of \(\operatorname{Div}(C)\) and has a degree at all.
+In particular \(\deg\pi^*[P']=d\) for every closed point \(P'\).
+\uses{def:pcb-curves,def:pcb-divisor,def:pcb-function-field,lem:pcb-point-cartier}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-divisor,lem:pc-artinian-product-local,lem:pc-finite-extension-alg-closed,lem:pcb-closed-point-residue-finite,lem:pcb-dvr-quotient-dimension,lem:pcb-smooth-curve-local-dvr}
+\uses{def:pcb-divisor,def:pcb-effective-cartier-divisor,lem:pc-artinian-product-local,lem:pc-finite-extension-alg-closed,lem:pcb-dvr-quotient-dimension,lem:pcb-finite-iff-proper-finite-fibres,lem:pcb-point-cartier,lem:pcb-smooth-curve-local-dvr}
+\emph{Well-definedness of \(\pi^*D'\).}  The coefficient
+\(v_P(t_{P'})\) is independent of the choice of \(t_{P'}\): two local
+equations of \(P'\) differ by a unit of \(\mathcal O_{C',P'}\), whose
+image in \(\mathcal O_{C,P}\) is again a unit, and a valuation is
+unchanged on multiplying by a unit.  The double sum is finite: the
+outer sum is, because \(D'\) is a divisor on \(C'\), hence a finite
+formal sum by \Cref{def:pcb-divisor}; and each inner sum is, because it
+runs over the fibre \(\pi^{-1}(P')\), which is a finite set -- a finite
+morphism to a locally Noetherian base has finite fibres
+(\Cref{lem:pcb-finite-iff-proper-finite-fibres}, in the direction
+``finite \(\Rightarrow\) proper with finite fibres''), and \(C'\) is
+locally Noetherian, being of finite type over \(k\)
+(\Cref{def:pcb-curves}).  That the points \(P\) of that fibre are
+closed points of \(C\), which is what \Cref{def:pcb-divisor} asks of
+the points a divisor is supported on, is checked below together with
+the computation of the fibre.
+
+\emph{The rank of \(\pi_*\mathcal O_C\).}
 Since \(\pi\) is finite flat, \(\pi_*\mathcal O_C\) is locally free,
 and of \emph{constant} rank because \(C'\) is connected.  That rank is
 \(d\): the rank is nonzero, because \(C\) is nonempty and the rank is
@@ -3113,14 +3231,16 @@ the irreducible curve \(C\) lies over the generic point \(\eta'\) of
 \([k(C):k(C')]\).
 
 Fix a closed point \(P'\) of \(C'\) and put
-\(B=(\pi_*\mathcal O_C)\otimes_{\mathcal O_{C'}}k(P')\), so that the
-fibre \(\pi^{-1}(P')\) is \(\operatorname{Spec}B\).  As
-\(\pi_*\mathcal O_C\) is locally free of rank \(d\), the ring \(B\) is a
-\(k(P')\)-vector space of dimension \(d\); and \(k(P')=k\), because
-\(k(P')\) is finite over \(k\), \(P'\) being a closed point of the
-scheme \(C'\) of finite type over \(k\)
-(\Cref{lem:pcb-closed-point-residue-finite}), and \(k\) is
-algebraically closed
+\(B=(\pi_*\mathcal O_C)_{P'}\otimes_{\mathcal O_{C',P'}}k(P')\), the
+fibre algebra of \(\pi\) at \(P'\); this is a ring, and the fibre
+\(\pi^{-1}(P')\) is \(\operatorname{Spec}B\).  As
+\(\pi_*\mathcal O_C\) is locally free of rank \(d\), the ring \(B\) is
+a \(k(P')\)-vector space of dimension \(d\); and \(k(P')=k\), because
+\(k(P')\) is finite over \(k\)
+(\Cref{lem:pcb-smooth-curve-local-dvr}, applied to \(C'\) and \(P'\):
+\(C'\) is smooth and of finite type over \(k\) and \(P'\) is a closed
+point on a component of \(C'\) of dimension one, by the hypotheses of
+the statement) and \(k\) is algebraically closed
 (\Cref{lem:pc-finite-extension-alg-closed}).  So \(B\) is a
 \(k\)-algebra with \(\dim_kB=d\).  The lemma will follow from
 \[
@@ -3131,17 +3251,34 @@ algebraically closed
 For the first equality, choose an affine open
 \(U'=\operatorname{Spec}A\) of \(C'\) containing \(P'\) and small enough
 that the maximal ideal \(\mathfrak m\subset A\) of \(P'\) is generated
-by \(t_{P'}\); this is possible because \(t_{P'}\) is a local equation
-of \(P'\) and \(P'\) is the only point of \(V(\mathfrak m)\).  A finite
+by \(t_{P'}\).  This is possible by what ``local equation'' means: the
+ideal sheaf of the reduced closed point \(P'\) is generated by
+\(t_{P'}\) on some open neighbourhood of \(P'\)
+(\Cref{def:pcb-effective-cartier-divisor}, \(P'\) being an effective
+Cartier divisor by \Cref{lem:pcb-point-cartier}), so shrinking to an
+affine open \(\operatorname{Spec}A\) contained in that neighbourhood
+and taking sections gives \(\mathfrak m=t_{P'}A\).  A finite
 morphism is affine, so \(\pi^{-1}(U')=\operatorname{Spec}\mathcal B\)
 for a ring \(\mathcal B\) finite over \(A\), and
-\(B=\mathcal B/\mathfrak m\mathcal B=\mathcal B/t_{P'}\mathcal B\), an
-algebra over \(A/\mathfrak m=k(P')=k\).  The primes of \(B\) are the
-primes of \(\mathcal B\) containing \(t_{P'}\), that is, those lying
-over \(\mathfrak m\): they are the points \(P\) of the fibre
-\(\pi^{-1}(P')\).  Now \(B\) is of finite length over itself, its ideals
-being \(k\)-subspaces of a finite-dimensional \(k\)-vector space, hence
-Artinian, hence the product of its localizations at its maximal ideals
+\(\mathcal B/\mathfrak m\mathcal B=\mathcal B/t_{P'}\mathcal B\) is an
+algebra over \(A/\mathfrak m=k(P')=k\).  That algebra is \(B\): being
+killed by \(\mathfrak m\) it is a module over \(A/\mathfrak m\), so
+localizing at \(\mathfrak m\) changes nothing and it already computes
+\(\mathcal B_{\mathfrak m}\otimes_{A_{\mathfrak m}}k(P')
+=(\pi_*\mathcal O_C)_{P'}\otimes_{\mathcal O_{C',P'}}k(P')\).
+The primes of \(B\) are the primes of \(\mathcal B\) containing
+\(t_{P'}\), that is, those lying over \(\mathfrak m\): they are the
+points \(P\) of the fibre \(\pi^{-1}(P')\).  Each of them is a maximal
+ideal of \(\mathcal B\), a prime of a ring finite over \(A\) lying over
+a maximal ideal of \(A\) being maximal, so each \(P\) is a closed point
+of \(\pi^{-1}(U')\); and \(\pi\) is finite, hence closed, so the
+closure of \(\{P\}\) in \(C\) has closed image inside \(\{P'\}\) and is
+therefore contained in \(\pi^{-1}(U')\), where it is \(\{P\}\).  So the
+\(P\) are closed points of \(C\), as promised above.
+Now \(B\) is Artinian: its ideals are \(k\)-subspaces of the
+finite-dimensional \(k\)-vector space \(B\), so descending chains of
+ideals stabilise.  Hence \(B\) is the finite product of its
+localizations at its maximal ideals
 (\Cref{lem:pc-artinian-product-local}); and localization commutes with
 the quotient, so the factor at \(P\) is
 \(\mathcal B_{\mathfrak n_P}/t_{P'}\mathcal B_{\mathfrak n_P}
@@ -3149,28 +3286,36 @@ the quotient, so the factor at \(P\) is
 is the prime of \(P\) and \(\pi^{-1}(U')\) is an open neighbourhood of
 \(P\) in \(C\).
 
-Each \(\mathcal O_{C,P}\) is a discrete valuation ring with residue
-field \(k(P)\), and \(\mathfrak m_P\) is generated by a uniformizer
-(\Cref{lem:pcb-smooth-curve-local-dvr}: \(C\) is smooth of finite type
-over \(k\), and \(P\) is a closed point on a component of dimension
-one).  Its valuation is the \(v_P\) of \Cref{def:pcb-divisor}, and
+Each \(\mathcal O_{C,P}\) is a discrete valuation ring whose maximal
+ideal \(\mathfrak m_P\) is generated by a uniformizer, and each
 \(k(P)\) is finite over \(k\)
-(\Cref{lem:pcb-closed-point-residue-finite}).  The image of
-\(t_{P'}\) in \(\mathcal O_{C,P}\) is nonzero: it generates the maximal
-ideal of \(\mathcal O_{C',P'}\), which is nonzero, that ring being a
-discrete valuation ring (\Cref{lem:pcb-smooth-curve-local-dvr} again,
-applied to \(C'\) and \(P'\)); and
-\(\mathcal O_{C',P'}\to\mathcal O_{C,P}\) is a local homomorphism which
-is flat, \(\pi\) being flat, hence faithfully flat, hence injective.
+(\Cref{lem:pcb-smooth-curve-local-dvr}: \(C\) is smooth of finite type
+over \(k\), and \(P\), just shown to be closed, lies on a component of
+\(C\) of dimension one by hypothesis).  Its valuation is the \(v_P\) of
+\Cref{def:pcb-divisor}.  The image of \(t_{P'}\) in
+\(\mathcal O_{C,P}\) is nonzero: it generates the maximal ideal of
+\(\mathcal O_{C',P'}\), which is nonzero, that ring being a discrete
+valuation ring (\Cref{lem:pcb-smooth-curve-local-dvr} again, applied to
+\(C'\) and \(P'\) as above); and
+\(\mathcal O_{C',P'}\to\mathcal O_{C,P}\) is injective.  It is a local
+homomorphism of local rings, and it is flat because \(\pi\) is, so that
+\(\mathcal O_{C,P}\) is a flat \(\mathcal O_{C',P'}\)-module; a flat
+local homomorphism of local rings is faithfully flat
+(\emph{reference: Stacks Project, Commutative Algebra,
+Lemma~10.39.17, \stacksproject{00HR}}), and a faithfully flat ring map
+is universally injective, in particular injective
+(\emph{reference: Stacks Project, Commutative Algebra,
+Lemma~10.82.15, \stacksproject{05CK}}).
 So \Cref{lem:pcb-dvr-quotient-dimension} applies with
-\(R=\mathcal O_{C,P}\) and \(t=t_{P'}\) and gives
+\(R=\mathcal O_{C,P}\), residue field \(\kappa=k(P)\) and
+\(t=t_{P'}\), and gives
 \(\dim_k\mathcal O_{C,P}/(t_{P'})=v_P(t_{P'})\,[k(P):k]\); summing over
 the fibre gives the first equality.
 
 The second equality uses again that \(k\) is algebraically closed:
-every residue field \(k(P)\) is finite over \(k\)
-(\Cref{lem:pcb-closed-point-residue-finite}), hence equal to \(k\)
-(\Cref{lem:pc-finite-extension-alg-closed}), so \([k(P):k]=1\).  Hence
+every residue field \(k(P)\) is finite over \(k\), as just recalled,
+hence equal to \(k\) (\Cref{lem:pc-finite-extension-alg-closed}), so
+\([k(P):k]=1\).  Hence
 \(\deg\pi^*[P']=\sum_{\pi(P)=P'}v_P(t_{P'})=\dim_kB=d\), and the
 general case follows by linearity.
 \end{proof}
@@ -8366,10 +8511,15 @@ The local regularity facts used in this blueprint are already decomposed
 in file~06: \Cref{lem:pcb-smooth-regular} (a smooth curve over an
 algebraically closed field has regular, hence domain, local rings),
 \Cref{lem:pcb-regular-dim1-dvr} (a regular local ring of dimension $1$
-is a discrete valuation ring) and
+is a discrete valuation ring),
 \Cref{lem:pcb-point-cartier} (a closed point of a smooth curve is an
-effective Cartier divisor with ideal generated by one non-zero-divisor).
-Two of these three nodes are stated for a curve in the sense of
+effective Cartier divisor with ideal generated by one non-zero-divisor)
+and \Cref{lem:pcb-smooth-curve-local-dvr}, which packages the first two
+over an arbitrary base field: for $X$ of finite type and smooth over any
+field $k$ and $P$ a closed point on an irreducible component of
+dimension one, $\cO_{X,P}$ is a discrete valuation ring with
+uniformizer and $\kappa(P)/k$ finite.
+Two of the first three nodes are stated for a curve in the sense of
 \Cref{def:pcb-curves}, whose base field is required to be
 \emph{algebraically closed}, so the way they are used depends on the
 base field.  Over an algebraically closed field $k$ they apply directly:
@@ -8394,13 +8544,19 @@ $k$ neither node covers $X_K$.  Over a base field which is not
 algebraically closed --- and most of the chapter works
 over such a field, or over the residue field $\kappa(s)$ of an arbitrary
 point of a base scheme --- \Cref{def:pcb-curves} does not apply, and the
-chapter uses instead \Cref{lem:pc-smooth-over-field-regular}: a scheme
-smooth over any field is regular.  That node gives regularity only, so the dimension-one
-half of the ``local ring is a discrete valuation ring'' step has to come
-from the citing statement's own hypotheses (the fibre is a curve, or the
-morphism has relative dimension one); with it in hand,
+chapter uses instead \Cref{lem:pcb-smooth-curve-local-dvr}, which is
+exactly that route packaged as one node: it runs on
+\Cref{lem:pc-smooth-over-field-regular} (a scheme smooth over any field
+is regular), which gives regularity only, so the dimension-one half of
+the ``local ring is a discrete valuation ring'' step has to come from
+the citing statement's own hypotheses --- and the node asks for it in
+the form ``$P$ lies on an irreducible component of dimension one'',
+which is what a citing statement can supply (the fibre is a curve, or
+the morphism has relative dimension one).  With that in hand
 \Cref{lem:pcb-regular-dim1-dvr} applies unchanged, having no hypothesis
-on any field.
+on any field; a citing statement over a general base field should cite
+\Cref{lem:pcb-smooth-curve-local-dvr} rather than assemble the chain
+again.
 % No \uses for \Cref{def:pc-dimension} here, deliberately: this remark states no
 % hypothesis and no conclusion of its own.  ``relative dimension one'' names, as an
 % example, one of the hypotheses a citing statement might supply the dimension-one
@@ -10568,8 +10724,9 @@ $0\to\cF_1\to\cF_2\to\cF_3\to0$:
 $\chi(X,\cF_2)=\chi(X,\cF_1)+\chi(X,\cF_3)$
 (\Cref{lem:pc-euler-additive}).
 \item (Degree of a divisor of closed points) Assume in addition that $X$
-is \termref{def:pc-smooth-morphism}{smooth} over $k$ and of dimension $1$
-(a smooth proper curve).  Let
+is \termref{def:pc-smooth-morphism}{smooth} over $k$ and of dimension
+$1$, every irreducible component being of dimension one (a smooth
+proper curve).  Let
 $D=\sum_Pn_P[P]$ be an effective Cartier divisor on $X$, written as a
 finite sum over closed points $P$ of $X$ with multiplicities $n_P\ge0$.
 Then
@@ -10599,6 +10756,15 @@ in \Cref{lem:pc-degree-agrees-sc}.)
 % parenthesis says where the pullback-from-a-point case of tag 0AYV is made explicit
 % downstream.
 \end{lemma}
+% Ruling (hypothesis of (4)): "of dimension $1$" is spelled out as "every
+% irreducible component of dimension one".  Part (4) applies
+% \Cref{lem:pcb-smooth-curve-local-dvr} at each $P\in\operatorname{supp}D$, and
+% that node asks for a component of dimension one THROUGH $P$; $\dim X=1$ is the
+% maximum over components and does not give it, $X$ not being assumed connected.
+% On $X=\PP^1_k\sqcup\Spec k$, smooth and proper over $k$ with $\dim X=1$, the
+% local ring at the closed point of the second component is $k$, not a discrete
+% valuation ring.  The wording now matches \Cref{lem:pcb-point-cartier} and
+% \Cref{lem:pcb-pullback-degree}, which state the same hypothesis the same way.
 % Ruling (base field): the uniformizer citation in part (4) below.  The sentence
 % cited \Cref{lem:pcb-point-cartier} for ``the ideal of the closed point, generated
 % by a uniformizer'', over a host whose $k$ is a general field, where that lemma --
@@ -10609,10 +10775,10 @@ in \Cref{lem:pc-degree-agrees-sc}.)
 % that gives.  So the citation is demoted to a ``cf.'' and its \uses edge comes
 % off; the mathematics of the block is unchanged, and the block cites
 % \Cref{lem:pcb-smooth-curve-local-dvr} for the replacement route.  An earlier
-% pass read this block and ruled it sound on exactly this ground; sound it is, and the ``cf.''
-% now says why out loud rather than leaving it to be re-derived.
+% pass read this block and ruled it sound on exactly this ground; sound it is,
+% and the ``cf.'' now says why out loud rather than leaving it to be re-derived.
 \begin{proof}
-\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flasque-acyclic,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-closed-point-residue-finite,lem:pcb-dvr-quotient-dimension,lem:pcb-smooth-curve-local-dvr}
+\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flasque-acyclic,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-dvr-quotient-dimension,lem:pcb-smooth-curve-local-dvr}
 \emph{(3).}  This is exactly \Cref{lem:pc-euler-additive}.
 
 \emph{(1).}  For the field extension $K/k$ put $X_K:=X\times_{\Spec(k)}\Spec(K)$ (\Cref{def:pc-base-change}).
@@ -10679,12 +10845,12 @@ $\cO_{D,P}=\cO_{X,P}/\mathfrak m_P^{n_P}$ (the ideal of $[P]$ is the
 ideal $\mathfrak m_P$ of the closed point).  Here $\cO_{X,P}$ is a
 discrete valuation ring and $\mathfrak m_P$ is generated by a
 uniformizer $\varpi_P$
-(\Cref{lem:pcb-smooth-curve-local-dvr}, $X$ being smooth over $k$ and
-$P$ a closed point on a component of dimension one, $X$ being a curve of
-dimension one; cf.\ \Cref{lem:pcb-point-cartier}, which is this step
-over an algebraically closed base), and $\kappa(P)$ is finite over $k$,
-$P$ being a closed point of the finite-type $k$-scheme $X$
-(\Cref{lem:pcb-closed-point-residue-finite}).  So
+(\Cref{lem:pcb-smooth-curve-local-dvr}, $X$ being smooth and of finite
+type over $k$ and $P$ a closed point, which lies on a component of
+dimension one by the hypothesis of (4); cf.\
+\Cref{lem:pcb-point-cartier}, which is this step over an algebraically
+closed base), and the same node gives that $\kappa(P)$ is finite over
+$k$.  So
 \Cref{lem:pcb-dvr-quotient-dimension} applies with $R=\cO_{X,P}$ and
 $t=\varpi_P^{n_P}$, of valuation $n_P$, and gives
 $\dim_k\cO_{D,P}=n_P\cdot[\kappa(P):k]$.  This is the classical
@@ -13772,7 +13938,7 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 % subscripted sites of this same base change write \(\deg_{X_K}\).  Corrected to
 % \(\deg_{X_K}(\cL)\).  Cosmetic: no hypothesis, no citation and no value changes.
 \begin{proof}
-\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-smooth-curve-local-dvr,lem:pc-smooth-base-change,prop:pc-XK-integral}
 \emph{Step 0: the genus of the statement is defined for $X$.}
 \Cref{def:pc-genus} asks for a geometrically irreducible smooth
 projective curve, which the statement does not hypothesise, and
@@ -13856,14 +14022,13 @@ $s(x_K)\neq0$ (i.e.\ $s$ does not vanish at $x_K$: $s_{x_K}\notin
 Let $\cI$ be the ideal sheaf of the closed immersion
 $i:x_K\hookrightarrow X_K$; then $\cI$ is invertible.  Indeed $x_K$ is a
 closed point of $X_K$ with $\kappa(x_K)=K$, and $\cO_{X_K,x_K}$ is a
-discrete valuation ring: it is regular, $X_K$ being smooth over $K$
-(\Cref{lem:pc-smooth-over-field-regular}), and of dimension one, since
-$X_K$ is irreducible (\Cref{prop:pc-XK-integral}), of finite type over
-$K$ and of dimension $1$ (\Cref{lem:pc-dim-base-change}), as used just
-above, and $x_K$ is a closed point of it, so
-$\dim\cO_{X_K,x_K}=\dim X_K-\dim\overline{\{x_K\}}=1$; hence
-\Cref{lem:pcb-regular-dim1-dvr} applies.  Its maximal ideal is
-therefore generated by a uniformizer, and $\cI$ is that ideal at $x_K$
+discrete valuation ring whose maximal ideal is generated by a
+uniformizer (\Cref{lem:pcb-smooth-curve-local-dvr}): $X_K$ is smooth
+over $K$ (\Cref{lem:pc-smooth-base-change}) and of finite type over
+$K$, it is irreducible (\Cref{prop:pc-XK-integral}) of dimension $1$
+(\Cref{lem:pc-dim-base-change}), as used just above, so its unique
+irreducible component has dimension one, and $x_K$ is a closed point of
+it.  So $\cI$ is that ideal at $x_K$
 and all of $\cO_{X_K}$ away from $x_K$, so $\cI$ is invertible.  The
 sequence
 \[
