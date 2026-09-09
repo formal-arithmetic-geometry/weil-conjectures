@@ -2123,10 +2123,22 @@ double complexes), Lemma~12.25.1, \stacksproject{0130}}).
 % Ruling: smoothness and dimension one are stated here, on the whole lemma
 % (repair (a) of the two the issue offered), rather than only on the final
 % clause.  Reason: it is the smaller diff, and it is what every consumer already
-% supplies --- \Cref{lem:pcb-divisor-class-curve} and
-% \Cref{lem:pcb-negative-degree-no-sections}, the only two blocks that cite this
-% lemma, both hypothesise a smooth curve of dimension one, so nothing is lost by
-% putting the hypothesis on the whole statement.  Without it the conclusion
+% supplies.  Three blocks cite this lemma, and the two readings of ``cite''
+% agree on which three: by an edge alone, or by an edge together with a prose
+% \Cref, the citers are \Cref{lem:pcb-divisor-class-curve},
+% \Cref{lem:pcb-negative-degree-no-sections} and
+% \Cref{lem:pcb-degree-2g1-very-ample} (each of the three carries both).  The
+% first two hypothesise a smooth curve of dimension one outright; the third
+% hypothesises a connected proper smooth curve of dimension one over an
+% algebraically closed field and derives integrality inline, before the point at
+% which it cites this lemma.  So every consumer does supply the hypothesis and
+% nothing is lost by putting it on the whole statement.  The enumeration is
+% commit-stamped (measured at \texttt{72c1d333}, convention: comments stripped
+% whole-file and escape-aware, host of an edge = nearest preceding \label,
+% pairs de-duplicated); what does not drift, and is the reason for the repair,
+% is that every consumer supplies a smooth curve of dimension one --- re-derive
+% that over the in-edge set as it then stands, do not copy the list of three.
+% Without the hypothesis here the conclusion
 % \(\mathcal O_C(\operatorname{div}s)\cong\mathcal L\) is not false but
 % ILL-FORMED: \(\operatorname{div}\) and \(\mathcal O_C(-)\) are defined in
 % \Cref{def:pcb-divisor} only for a curve smooth of dimension one.  Two curves
@@ -2493,7 +2505,18 @@ This is a cited external input: Cohomology of Schemes, Lemma~30.21.1
 % \(D^-\) and (4) gives \(\deg\mathcal O_C(E)=\sum n_P[\kappa(P):k]\) for
 % effective \(E\).  Eight labels go on the proof's \uses list, seven of them new
 % edges (\Cref{def:pcb-pic0} is already cited by the statement); none closes a
-% cycle -- \Cref{lem:pcb-degree-2g1-very-ample} is in no target's closure.
+% cycle.  The warrant is that none of the seven new targets reaches
+% \Cref{lem:pcb-degree-2g1-very-ample} --- checked target by target, and a
+% whole-graph search finds no cycle anywhere in the chapter.  It is NOT that
+% nothing reaches this node; that is false, and an editor weighing an eighth
+% edge should test the eighth target's own closure rather than reuse a blanket
+% claim about this node.  Commit-stamped, for calibration only (measured at
+% \texttt{72c1d333}, convention: comments stripped whole-file and escape-aware,
+% host of an edge = nearest preceding \label, pairs de-duplicated, closure
+% exclusive of the root): this node lies in the closure of 14 nodes, among them
+% \Cref{thm:pc-picard-representable}, and carries the in-edge
+% \Cref{lem:pcb-positive-degree-ample}.  That figure drifts; the acyclicity
+% above does not depend on it.
 % Ruling: \Cref{lem:pc-degree-agrees-sc} is NOT generalised to arbitrary divisors,
 % although its own proof argues the general case.  That would move a statement other
 % nodes depend on; the identification is stated where it is used instead, which is
