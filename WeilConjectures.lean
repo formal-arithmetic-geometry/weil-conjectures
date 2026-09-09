@@ -211,5 +211,6 @@ public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaSeries
