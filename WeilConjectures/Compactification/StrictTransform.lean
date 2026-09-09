@@ -187,8 +187,14 @@ section SchemeTheoreticImage
 variable [QuasiCompact (strictTransformOpen f π U).ι]
 
 /-- The factorization of the open locus through the strict transform is
-scheme-theoretically dominant. -/
-instance isSchemeTheoreticallyDominant_strictTransformFactor :
+scheme-theoretically dominant.
+
+This is the instance for `AlgebraicGeometry.Scheme.Hom.toImage` read through the
+definition of `strictTransformFactor`, so it is deliberately *not* an `instance` itself:
+there is exactly one instance for this fact, the one on `toImage`. Instance search does
+not unfold the plain `def` `strictTransformFactor`, so introduce this with `have` where
+it is needed. -/
+lemma isSchemeTheoreticallyDominant_strictTransformFactor :
     IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
   inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
 
@@ -208,6 +214,7 @@ factorization is scheme-theoretically dominant. -/
 theorem ker_strictTransformMap :
     (strictTransformMap f π U).ker =
       ((strictTransformOpen f π U).ι ≫ pullback.snd f π).ker := by
+  have := isSchemeTheoreticallyDominant_strictTransformFactor f π U
   rw [← strictTransformFactor_ι, Category.assoc, strictTransformMap]
   exact (Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _).symm
 
@@ -345,6 +352,18 @@ scheme-theoretic image of `h`. Both images are recorded by their kernel ideal sh
            ↙     ↘
          X' --π--> X
 ```
+
+The two kernels are ideal sheaves on one and the same scheme: `h' : V ⟶ X'` and
+`strictTransformMap h.imageι π U : strictTransform … ⟶ X'` have the same codomain `X'`,
+so `Scheme.Hom.ker` sends both to `X'.IdealSheafData`. The conclusion is therefore an
+equality of ideal sheaves on `X'`, which is the full strength of the statement: taking
+`Scheme.IdealSheafData.subscheme` and `subschemeι` of both sides — that is,
+`Scheme.Hom.image` and `Scheme.Hom.imageι`, which are notation for exactly those — the
+two scheme-theoretic images are *equal as closed subschemes of* `X'`, with the same
+inclusion morphism into `X'`, not merely abstractly isomorphic as schemes. Conversely
+nothing is lost by phrasing it with kernels: an ideal sheaf is recovered from its
+subscheme by `Scheme.IdealSheafData.ker_subschemeι`, so the two formulations are
+equivalent.
 
 The lift exists and is unique (`AlgebraicGeometry.Scheme.Hom.liftOfIsIsoRestrict` and
 `AlgebraicGeometry.Scheme.Hom.hom_ext_of_isIso_restrict`), but it is taken as data here

@@ -103,7 +103,14 @@ image of `h`.
 ```
 
 Here `π = B.I.blowupMap` and `ρ = B.blowupBaseChange f g`, and both scheme-theoretic
-images are recorded by their kernel ideal sheaves. -/
+images are recorded by their kernel ideal sheaves.
+
+Both kernels are ideal sheaves on the same scheme `X' ×_S Y`, since `h'` and the
+strict-transform projection share that codomain. So the conclusion says that the two
+scheme-theoretic images are *equal as closed subschemes of* `X' ×_S Y`, with the same
+inclusion morphism into it, and not merely that they are isomorphic schemes; see the
+discussion in the docstring of
+`AlgebraicGeometry.ker_eq_ker_strictTransformMap`. -/
 theorem ker_eq_ker_strictTransformMap_of_isAdmissible {U : X.Opens} (B : IsAdmissible X U)
     (h : V ⟶ pullback f g) [QuasiCompact h]
     (hfac : Set.range (h ≫ pullback.fst f g) ⊆ (U : Set X))
