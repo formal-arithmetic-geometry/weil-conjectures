@@ -1162,9 +1162,9 @@ placeholders stay unproved.}
 
 \begin{theorem}[Theorem of the cube]\label{thm:av-cube}
 Let $X$ and $Y$ be proper varieties over an algebraically closed field $K$, let
-$Z$ be a connected variety over $K$, and let $x_0\in X$, $y_0\in Y$, $z_0\in Z$
-be rational points.  Let $L$ be a line bundle on $X\times Y\times Z$ whose
-restrictions to
+$Z$ be a connected reduced scheme of finite type over $K$, and let
+$x_0\in X$, $y_0\in Y$, $z_0\in Z$ be rational points.  Let $L$ be a line
+bundle on $X\times Y\times Z$ whose restrictions to
 \[
   \{x_0\}\times Y\times Z,\qquad X\times\{y_0\}\times Z,\qquad
   X\times Y\times\{z_0\}
@@ -1173,9 +1173,9 @@ are all trivial.  Then $L$ is trivial.
 \end{theorem}
 \begin{proof}
 \uses{thm:cube-cube}
-This is \Cref{thm:cube-cube}, which is proved in \Cref{chap:cube} in the
-slightly more general form where $Z$ is only assumed to be a connected reduced
-scheme of finite type over $K$.  The proof there is the classical one of
+This is \Cref{thm:cube-cube}, word for word; it is proved in
+\Cref{chap:cube} and is restated here so that \Cref{sec:av-cube} reads on its
+own.  The proof there is the classical one of
 \cite[\S6]{MumfordAbelianVarieties} and \cite[I, \S5]{MilneAbelianVarieties}:
 the locus in $Z$ over which $L$ is trivial is closed by the seesaw theorem and
 open by a K\"unneth argument on the square-zero thickenings of a point of it
@@ -1184,7 +1184,7 @@ together with the theorem on formal functions, hence is all of $Z$.
 
 \begin{theorem}[Pullback of a symmetric line bundle along $[n]$]
 \label{thm:av-mulby-pullback}
-\uses{thm:av-cube, def:av-mulby}
+\uses{def:av-mulby}
 Let $A$ be an abelian variety over an algebraically closed field $K$ and let
 $L$ be a line bundle on $A$.  Then for every $n\in\Z$
 \[
@@ -1195,10 +1195,12 @@ In particular, if $L$ is \emph{symmetric}, that is $[-1]^*L\cong L$, then
 $[n]^*L\cong L^{\otimes n^2}$.
 \end{theorem}
 \begin{proof}
-\uses{thm:av-cube, thm:cube-mulby-pullback, thm:cube-abelian,
-cor:cube-mulby-recursion}
+\uses{thm:cube-mulby-pullback}
 This is \Cref{thm:cube-mulby-pullback}, proved in \Cref{sec:cube-abelian};
-the argument there is the one sketched here.  Apply \Cref{thm:av-cube} on
+what follows is a sketch of the argument given there, not a second proof, so
+the statements it mentions are recorded as dependencies of
+\Cref{thm:cube-mulby-pullback} in \Cref{chap:cube} and not again here.  Apply
+\Cref{thm:av-cube} on
 $A\times A\times A$ to the line bundle
 \[
   m_{123}^*L\otimes m_{12}^*L^{-1}\otimes m_{13}^*L^{-1}\otimes
@@ -1281,8 +1283,15 @@ prop:av-ample-self-intersection, prop:av-degree-intersection, def:av-degree}
 Let $A$ be an abelian variety of dimension $g$ over an algebraically closed
 field $K$ and let $n\neq0$.  Suppose $[n]$ is finite, flat and surjective.
 Then $\deg[n]=n^{2g}$.
-\openobligation{AlgebraicGeometry: all of the theory named in the four
-statements above.}
+\openobligation{AlgebraicGeometry: ampleness of an invertible sheaf on a
+scheme and the projectivity of an abelian variety; intersection numbers of
+invertible sheaves on a proper scheme, via the Snapper polynomial and Euler
+characteristics of coherent sheaves; the projection formula for a finite
+morphism; and everything the theorem of the cube needs, which is invertible
+sheaves and the Picard group of a scheme together with the cohomology of
+sheaves on a scheme in degrees zero and one and the direct images of a
+coherent sheaf along a proper morphism, counted in the formalisation cost
+section of the chapter on the theorem of the cube.}
 \end{theorem}
 \begin{proof}
 \uses{thm:av-mulby-pullback, prop:av-symmetric-ample,
@@ -1304,10 +1313,15 @@ prop:av-basic, lem:av-translation-intertwines}
 Let $A$ be an abelian variety of dimension $g$ over an algebraically closed
 field $K$ and let $n\neq0$ be a natural number, possibly divisible by the
 characteristic of $K$.  Then $[n]$ is finite, flat and surjective.
-\openobligation{AlgebraicGeometry: all of the theory named in the four
-statements above, and in addition miracle flatness, that is, a finite
-surjective morphism between regular schemes of the same dimension is flat,
-which Mathlib v4.33.1 does not have in any form.}
+\openobligation{AlgebraicGeometry: ampleness of an invertible sheaf on a
+scheme and the projectivity of an abelian variety; everything the theorem of
+the cube needs, which is invertible sheaves and the Picard group of a scheme
+together with the cohomology of sheaves on a scheme in degrees zero and one
+and the direct images of a coherent sheaf along a proper morphism, counted in
+the formalisation cost section of the chapter on the theorem of the cube; and
+in addition miracle flatness, that is, a finite surjective morphism between
+regular schemes of the same dimension is flat, which Mathlib v4.33.1 does not
+have in any form.}
 \end{theorem}
 \begin{proof}
 \uses{thm:av-mulby-pullback, prop:av-symmetric-ample, thm:av-zariski-main,
