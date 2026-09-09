@@ -10487,10 +10487,17 @@ $[\kappa(P):k]$ is $1$ and the formula is the last one of (2).
 states it in the form $\deg(\cO_X(D))=\dim_k\Gamma(D,\cO_D)$; it is
 proved below.)
 (The general formula of Varieties, Lemma~33.44.5,
-\stacksproject{0AYV}, is used below
-only through the effective-divisor cases (2) and (4) and the case of a
+\stacksproject{0AYV}, is used below in exactly two ways.  First, through
+the effective-divisor cases (2) and (4) and the case of a
 pullback from a point, which is explicit in the base change part (1) and
-in \Cref{lem:pc-degree-agrees-sc}.)
+in \Cref{lem:pc-degree-agrees-sc}.  Second, through its tensor-product
+consequence for two arbitrary invertible modules, neither of which is
+assumed to have a nonzero section: that is not a case of (2), whose
+$\cM$ is $\cO_X(D)$ for an effective Cartier divisor $D$, and it is
+therefore stated separately, as \Cref{lem:pc-degree-tensor-additive},
+cited there to the tensor-product form Varieties, Lemma~33.44.7,
+\stacksproject{0AYX}; it is used in the proof of
+\Cref{lem:pc-ample-positive-degree}(1).)
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension,def:pc-smooth-morphism}
 % No \uses for \Cref{lem:pc-degree-agrees-sc} here, deliberately: the edge would
 % close a cycle.  That node's proof already
@@ -10500,6 +10507,14 @@ in \Cref{lem:pc-degree-agrees-sc}.)
 % The prose citation above points at a consumer of this node, not at a hypothesis: the
 % parenthesis says where the pullback-from-a-point case of tag 0AYV is made explicit
 % downstream.
+% The same ruling covers the two forward pointers added to that parenthesis.
+% \Cref{lem:pc-degree-tensor-additive} is named there as the place where the general
+% tensor-product form of the degree is stated, and \Cref{lem:pc-ample-positive-degree}
+% as the place where it is consumed; neither is a hypothesis of this lemma.  An edge to
+% \Cref{lem:pc-ample-positive-degree} would in addition close the 2-cycle
+%   lem:pc-degree-base-change -> lem:pc-ample-positive-degree
+%     -> lem:pc-degree-base-change,
+% that node's proof already citing this one.  So no uses-edge is added for either.
 \end{lemma}
 % Ruling (base field): the uniformizer citation in part (4) below.  The sentence
 % cited \Cref{lem:pcb-point-cartier} for ``the ideal of the closed point, generated
@@ -10626,6 +10641,53 @@ above gives $\chi(X,\cO_X([P]))=\chi(X,\cO_X)+1$ (the locus $[P]$ has
 length $1$: $\cO_{[P],P}=\kappa(P)=k$), so
 $\deg(\cO_X([P]))=1$ and by the additivity already established
 $\deg(\cO_X(D))=\sum_in_i\deg(\cO_X([P_i]))=\sum_in_i$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Degree of a tensor product of invertible modules]
+\label{lem:pc-degree-tensor-additive}
+Let $k$ be a field and let $X$ be a proper scheme over $k$ of
+\termref{def:pc-dimension}{dimension} $\le1$ (a proper curve).  Let
+$\cL,\cM$ be invertible
+\termref{def:pc-invertible-module}{$\cO_X$-modules}; neither is assumed
+to have a nonzero section.
+\begin{enumerate}
+\item (Additivity) $\deg(\cL\otimes\cM)=\deg(\cL)+\deg(\cM)$.
+\item (Powers) $\deg(\cL^{\otimes m})=m\deg(\cL)$ for every integer $m$,
+where $\cL^{\otimes m}$ for $m<0$ means the invertible module
+$(\cL^{\otimes(-m)})^{-1}$ inverse to $\cL^{\otimes(-m)}$.
+\end{enumerate}
+Here $\deg$ is the degree of \Cref{def:pc-degree-line-bundle},
+$\deg(\cL)=\chi(X,\cL)-\chi(X,\cO_X)$.  Equivalently: $\deg$ is a
+group homomorphism from the group of isomorphism classes of invertible
+$\cO_X$-modules under tensor product to $\mathbf Z$.
+\uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-dimension,def:pc-morphism-conventions}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Varieties, Lemma~33.44.7
+(\stacksproject{0AYX}), whose statement is that for a field $k$, a
+proper scheme $X$ of dimension $\le1$ over $k$ and locally free
+$\cO_X$-modules $\mathcal E,\mathcal V$ of constant finite rank one has
+\[
+\deg(\mathcal E\otimes\mathcal V)
+=\rank(\mathcal E)\deg(\mathcal V)+\rank(\mathcal V)\deg(\mathcal E).
+\]
+Clause (1) is the case $\mathcal E=\cL$, $\mathcal V=\cM$, both of rank
+$1$.  (In the Stacks Project that lemma is deduced from the general
+formula $\chi(X,\mathcal E\otimes\mathcal F)=r\deg(\mathcal E)+n\chi(X,\mathcal F)$
+on a proper curve, Varieties, Lemma~33.44.5, \stacksproject{0AYV},
+after the reduction to the irreducible components of Varieties,
+Lemma~33.44.6, \stacksproject{0AYW}; the hypotheses above are those of
+\stacksproject{0AYX}, which does not require $X$ to be irreducible.)
+Clause (2) follows from (1): the case $m=0$ is
+$\deg(\cO_X)=\chi(X,\cO_X)-\chi(X,\cO_X)=0$, immediate from
+\Cref{def:pc-degree-line-bundle}; the case $m\ge1$ follows by induction,
+taking $\cM=\cL^{\otimes(m-1)}$ in (1); and for $m\le-1$, clause (1)
+applied to $\cL^{\otimes m}\otimes\cL^{\otimes(-m)}\cong\cO_X$ gives
+$\deg(\cL^{\otimes m})=-\deg(\cL^{\otimes(-m)})=-(-m)\deg(\cL)=m\deg(\cL)$,
+the middle equality by the case $-m\ge1$ just proved.  It is not
+otherwise decomposed here.
 \end{proof}
 
 
@@ -10820,7 +10882,7 @@ over $k$ (\Cref{lem:pc-h0-proper-variety}(2)).
 \uses{def:pc-degree-line-bundle,def:pcb-ample,def:pc-curve,def:pc-smooth-projective-curve,def:pcb-divisor,lem:pc-degree-base-change,lem:pc-euler-additive,def:pc-zero-scheme,def:pc-effective-cartier-divisor,def:pc-divisor-line-bundle,def:pc-base-change,lem:pc-very-ample-descends,def:pc-dimension,def:pc-geometrically-irreducible,lem:pc-h0-proper-variety}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pc-zero-scheme-properties,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
+\uses{def:pc-zero-scheme,def:pcb-ample,lem:pc-affine-proper-finite,lem:pc-degree-base-change,lem:pc-degree-tensor-additive,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-genus-base-change,lem:pc-genus-well-defined,lem:pc-h0-geom-connected,lem:pc-h0-proper-variety,lem:pc-immersion-closed-image,lem:pc-proper-base-change,lem:pc-smooth-base-change,lem:pc-smooth-over-field-regular,lem:pc-very-ample-descends,lem:pc-zero-scheme-properties,lem:pcb-positive-degree-ample,lem:pcb-smooth-regular,lem:pcb-regular-dim1-dvr,lem:pc-regular-is-normal,lem:pc-noetherian-normal-decomposition,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
 \emph{(1) ($\Rightarrow$).}  By \Cref{def:pcb-ample}, $\cL$ ample implies
 $\cL^{\otimes m}$ very ample for some $m\ge1$; fix such an $m$ and an
 immersion $i:X\to\mathbf P^N_k$ with
@@ -10867,9 +10929,16 @@ affineness/finiteness of $D$), the additivity of $\chi$ gives
 \[
 \chi(\cL^{\otimes m})=\chi(\cO_X)+\deg D,\qquad
 \text{so}\qquad
-m\deg(\cL)=\deg(\cL^{\otimes m})=\deg D\ge1 ,
+\deg(\cL^{\otimes m})=\deg D\ge1 .
 \]
-and $\deg\cL>0$.
+Finally $\deg(\cL^{\otimes m})=m\deg(\cL)$ by the multiplicativity of the
+degree in powers, \Cref{lem:pc-degree-tensor-additive}(2), applied to the
+invertible module $\cL$ on the proper curve $X$.  (That is the general
+tensor-product form of the degree; the effective-divisor case
+\Cref{lem:pc-degree-base-change}(2) is not available here, since at this
+point of the argument only $\cL^{\otimes m}$, and not $\cL$ itself, is
+known to have a nonzero section.)  So $m\deg(\cL)\ge1$ with $m\ge1$, and
+$\deg\cL>0$.
 
 \emph{(2) ($\Leftarrow$).}  Assume $H^0(X,\cO_X)=k$ and $\deg\cL>0$.  By
 \Cref{lem:pc-degree-base-change}(1), $\deg(\cL_{\bar k})=\deg\cL>0$,
