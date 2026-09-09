@@ -10501,7 +10501,13 @@ separately as \Cref{lem:pc-degree-tensor-additive}, cited there not to
 proper curve there, hence integral --- but to the tensor-product form
 Varieties, Lemma~33.44.7, \stacksproject{0AYX}.  Its consequence for
 powers, \Cref{lem:pc-degree-powers}, is used in the proof of
-\Cref{lem:pc-ample-positive-degree}(1).)
+\Cref{lem:pc-ample-positive-degree}(1) and again in Step~2 of the proof
+of \Cref{lem:pc-twist}, where the degree of
+$\cL\otimes\cL_0^{\bullet\otimes n}|_{X_K}$ is computed: the additivity
+there is \Cref{lem:pc-degree-tensor-additive}, the identity
+$\deg(\cL_0^{\bullet\otimes n})=n\deg(\cL_0^{\bullet})$ is
+\Cref{lem:pc-degree-powers}(2), and only the base change
+$\deg_{X_K}=\deg_X$ is taken from part (1) of the present lemma.)
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension,def:pc-smooth-morphism}
 % No \uses for \Cref{lem:pc-degree-agrees-sc} here, deliberately: the edge would
 % close a cycle.  That node's proof already
@@ -10511,17 +10517,19 @@ powers, \Cref{lem:pc-degree-powers}, is used in the proof of
 % The prose citation above points at a consumer of this node, not at a hypothesis: the
 % parenthesis says where the pullback-from-a-point case of tag 0AYV is made explicit
 % downstream.
-% The same ruling covers the three forward pointers added to that parenthesis.
+% The same ruling covers the four forward pointers added to that parenthesis.
 % \Cref{lem:pc-degree-tensor-additive} is named there as the place where the general
 % tensor-product form of the degree is stated, \Cref{lem:pc-degree-powers} as the place
 % where its consequence for powers is drawn, and \Cref{lem:pc-ample-positive-degree}
-% as the place where that consequence is consumed; none of the three is a hypothesis of
-% this lemma.  An edge to
+% and \Cref{lem:pc-twist} as the two places where that consequence is consumed; none of
+% the four is a hypothesis of this lemma.  An edge to
 % \Cref{lem:pc-ample-positive-degree} would in addition close the 2-cycle
 %   lem:pc-degree-base-change -> lem:pc-ample-positive-degree
 %     -> lem:pc-degree-base-change,
-% that node's proof already citing this one.  So no uses-edge is added for any of the
-% three.
+% that node's proof already citing this one, and an edge to \Cref{lem:pc-twist} would
+% close the 2-cycle
+%   lem:pc-degree-base-change -> lem:pc-twist -> lem:pc-degree-base-change
+% for the same reason.  So no uses-edge is added for any of the four.
 \end{lemma}
 % Ruling (base field): the uniformizer citation in part (4) below.  The sentence
 % cited \Cref{lem:pcb-point-cartier} for ``the ideal of the closed point, generated
@@ -13814,7 +13822,7 @@ there exists an invertible sheaf $\cL_0$ on $X$ such that
 % subscripted sites of this same base change write \(\deg_{X_K}\).  Corrected to
 % \(\deg_{X_K}(\cL)\).  Cosmetic: no hypothesis, no citation and no value changes.
 \begin{proof}
-\uses{def:pc-curve,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular,prop:pc-XK-integral}
+\uses{def:pc-curve,def:pc-degree-line-bundle,def:pc-dimension,def:pc-invertible-module,lem:pc-ample-positive-degree,lem:pc-closed-imm-base-change,lem:pc-degree-base-change,lem:pc-degree-powers,lem:pc-degree-tensor-additive,lem:pc-dim-base-change,lem:pc-dim-zero-finite,lem:pc-euler-additive,lem:pc-flat-base-change-cohom,lem:pc-projective-proper,lem:pc-rational-points-dense,lem:pc-serre-vanishing,lem:pc-tensor-dual-invertible,lem:pc-vanishing-above-dim,lem:pc-very-ample-ample,lem:pcb-regular-dim1-dvr,lem:pc-smooth-over-field-regular,prop:pc-XK-integral}
 \emph{Step 0: the genus of the statement is defined for $X$.}
 \Cref{def:pc-genus} asks for a geometrically irreducible smooth
 projective curve, which the statement does not hypothesise, and
@@ -13850,9 +13858,33 @@ $H^p(X_K,\cL^{(n)})=0$ for all $p\ge1$ once $n\gg0$.  On the other hand
 \chi(X_K,\cL^{(n)})=\deg(\cL^{(n)})+\chi(X_K,\cO)
 =\deg_{X_K}(\cL)+n\deg_X(\cL_0^{\bullet})+\bigl(1-g\bigr)
 \]
-by \Cref{lem:pc-degree-base-change} (tensor products and base change
-\Cref{lem:pc-degree-base-change}, the additivity of $\chi$
-\Cref{lem:pc-euler-additive}); here
+the first equality by \Cref{def:pc-degree-line-bundle}, the degree on
+$X_K$ being $\chi(X_K,-)-\chi(X_K,\cO)$, and the second in three steps:
+\Cref{lem:pc-degree-tensor-additive}, applied on $X_K$ to the two
+invertible modules $\cL$ and $\cL_0^{\bullet\otimes n}|_{X_K}$, gives
+$\deg(\cL^{(n)})
+=\deg_{X_K}(\cL)+\deg_{X_K}(\cL_0^{\bullet\otimes n}|_{X_K})$;
+\Cref{lem:pc-degree-base-change}(1), the base change part and nothing
+more, gives
+$\deg_{X_K}(\cL_0^{\bullet\otimes n}|_{X_K})=\deg_X(\cL_0^{\bullet\otimes n})$;
+and \Cref{lem:pc-degree-powers}(2) gives
+$\deg_X(\cL_0^{\bullet\otimes n})=n\deg_X(\cL_0^{\bullet})$.  Neither
+the first nor the third is a case of \Cref{lem:pc-degree-base-change}(2),
+whose $\cM$ is $\cO_X(D)$ for an effective Cartier divisor $D$: $\cL$ is
+arbitrary here and Step~1 produced $\cL_0^{\bullet}$ only as an ample
+module, this step being where a nonzero section is first achieved.  The
+hypotheses of the two degree lemmas are met at both ends.  $X$ is a
+smooth projective curve over $k$, hence proper over $k$
+(\Cref{lem:pc-projective-proper}) and of dimension $1$ (a
+\termref{def:pc-curve}{curve}), and $\cL_0^{\bullet\otimes n}$ is
+invertible on it (\Cref{lem:pc-tensor-dual-invertible}); $X_K$ is proper
+over $K$ (the last assertion of \Cref{lem:pc-projective-proper}: the base
+change of a smooth projective curve along a field extension is proper)
+and of dimension $1$ (\Cref{lem:pc-dim-base-change}), and on it $\cL$ is
+invertible by hypothesis while $\cL_0^{\bullet\otimes n}|_{X_K}$ is
+invertible as a base change of an invertible module
+(\Cref{def:pc-invertible-module}), as Step~1 already used for $n=1$.  The
+additivity of $\chi$ is \Cref{lem:pc-euler-additive}; here
 $\chi(X_K,\cO)=1-g$: indeed
 $\dim_KH^0(X_K,\cO)=\dim_k(H^0(X,\cO)\otimes_kK)=1$ and
 $\dim_KH^1(X_K,\cO)=g$ by \Cref{lem:pc-flat-base-change-cohom} and
