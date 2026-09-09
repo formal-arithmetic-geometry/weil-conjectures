@@ -35,15 +35,16 @@ The theorem is the specialization to admissible blow-ups of
 particular the lift `h'` exists and is unique: it is
 `AlgebraicGeometry.Scheme.Hom.liftOfIsIsoRestrict` of the base-changed blow-up.
 
-Differences from the informal statement. The two closed subschemes of `X' ×_S Y` are
-recorded by the kernels of the corresponding closed immersions, so the statement is in
-kernel ideal sheaf form. The Stacks Project and the blueprint also assume `h`
-quasi-separated; Mathlib's kernel ideal sheaf theory only needs quasi-compactness, so
-that hypothesis is dropped here. Conversely the right-hand side is a strict transform,
-so the finiteness data of `WeilConjectures.Compactification.StrictTransform` is needed:
-quasi-separatedness of `SIm(h) ×_{X ×_S Y} (X' ×_S Y)` and quasi-compactness of the
-preserved open of `X ×_S Y`, which together discharge the standing quasi-compactness
-assumption of the strict-transform comparison API.
+Differences from the informal statement. The two closed subschemes of `X' ×_S Y` are recorded
+by the kernels of the corresponding closed immersions, so the statement is in kernel ideal
+sheaf form; on the subschemes themselves this is
+`AlgebraicGeometry.image_eq_image_strictTransformMap`. The Stacks Project and the blueprint
+also assume `h` quasi-separated; Mathlib's kernel ideal sheaf theory only needs
+quasi-compactness, so that hypothesis is dropped here. Conversely the right-hand side is a
+strict transform, so the finiteness data of `WeilConjectures.Compactification.StrictTransform`
+is needed: quasi-separatedness of `SIm(h) ×_{X ×_S Y} (X' ×_S Y)` and quasi-compactness of the
+preserved open of `X ×_S Y`, which together discharge the standing quasi-compactness assumption
+of the strict-transform comparison API.
 
 -/
 
@@ -108,9 +109,10 @@ images are recorded by their kernel ideal sheaves.
 Both kernels are ideal sheaves on the same scheme `X' ×_S Y`, since `h'` and the
 strict-transform projection share that codomain. So the conclusion says that the two
 scheme-theoretic images are *equal as closed subschemes of* `X' ×_S Y`, with the same
-inclusion morphism into it, and not merely that they are isomorphic schemes; see the
-discussion in the docstring of
-`AlgebraicGeometry.ker_eq_ker_strictTransformMap`. -/
+inclusion morphism into it, and not merely that they are isomorphic schemes; this is
+spelled out on the closed subschemes themselves in
+`AlgebraicGeometry.image_eq_image_strictTransformMap` and
+`AlgebraicGeometry.imageι_eq_imageι_strictTransformMap`. -/
 theorem ker_eq_ker_strictTransformMap_of_isAdmissible {U : X.Opens} (B : IsAdmissible X U)
     (h : V ⟶ pullback f g) [QuasiCompact h]
     (hfac : Set.range (h ≫ pullback.fst f g) ⊆ (U : Set X))

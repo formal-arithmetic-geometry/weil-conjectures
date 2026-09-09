@@ -65,7 +65,11 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 - `AlgebraicGeometry.ker_eq_ker_strictTransformMap`: if `π` is an isomorphism over `U`
   and `h : V ⟶ X` is quasi-compact with range in `U`, then the scheme-theoretic image of
   a lift `h' : V ⟶ X'` of `h` is the strict transform of the scheme-theoretic image of
-  `h` (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`).
+  `h` (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`);
+- `AlgebraicGeometry.image_eq_image_strictTransformMap` and
+  `AlgebraicGeometry.imageι_eq_imageι_strictTransformMap`: the same statement read on the
+  closed subschemes cut out by those two ideal sheaves, which are equal as closed
+  subschemes of `X'`.
 
 -/
 
@@ -186,18 +190,6 @@ section SchemeTheoreticImage
 
 variable [QuasiCompact (strictTransformOpen f π U).ι]
 
-/-- The factorization of the open locus through the strict transform is
-scheme-theoretically dominant.
-
-This is the instance for `AlgebraicGeometry.Scheme.Hom.toImage` read through the
-definition of `strictTransformFactor`, so it is deliberately *not* an `instance` itself:
-there is exactly one instance for this fact, the one on `toImage`. Instance search does
-not unfold the plain `def` `strictTransformFactor`, so introduce this with `have` where
-it is needed. -/
-lemma isSchemeTheoreticallyDominant_strictTransformFactor :
-    IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
-  inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
-
 /-- **The strict transform and its open locus have the same scheme-theoretic image in
 `X'`**: in the commutative diagram
 
@@ -214,8 +206,8 @@ factorization is scheme-theoretically dominant. -/
 theorem ker_strictTransformMap :
     (strictTransformMap f π U).ker =
       ((strictTransformOpen f π U).ι ≫ pullback.snd f π).ker := by
-  have := isSchemeTheoreticallyDominant_strictTransformFactor f π U
-  rw [← strictTransformFactor_ι, Category.assoc, strictTransformMap]
+  rw [← ((strictTransformOpen f π U).ι).toImage_imageι, Category.assoc, strictTransformMap,
+    strictTransformι]
   exact (Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _).symm
 
 end SchemeTheoreticImage
@@ -353,17 +345,14 @@ scheme-theoretic image of `h`. Both images are recorded by their kernel ideal sh
          X' --π--> X
 ```
 
-The two kernels are ideal sheaves on one and the same scheme: `h' : V ⟶ X'` and
-`strictTransformMap h.imageι π U : strictTransform … ⟶ X'` have the same codomain `X'`,
-so `Scheme.Hom.ker` sends both to `X'.IdealSheafData`. The conclusion is therefore an
-equality of ideal sheaves on `X'`, which is the full strength of the statement: taking
-`Scheme.IdealSheafData.subscheme` and `subschemeι` of both sides — that is,
-`Scheme.Hom.image` and `Scheme.Hom.imageι`, which are notation for exactly those — the
-two scheme-theoretic images are *equal as closed subschemes of* `X'`, with the same
-inclusion morphism into `X'`, not merely abstractly isomorphic as schemes. Conversely
-nothing is lost by phrasing it with kernels: an ideal sheaf is recovered from its
-subscheme by `Scheme.IdealSheafData.ker_subschemeι`, so the two formulations are
-equivalent.
+The two kernels are ideal sheaves on one and the same scheme `X'`, since `h'` and
+`strictTransformMap h.imageι π U` have that same codomain, so the conclusion is an
+equality of ideal sheaves on `X'`. This is the full strength of the statement: the two
+scheme-theoretic images are equal as closed subschemes of `X'` and not merely isomorphic
+as schemes, which is the content of `AlgebraicGeometry.image_eq_image_strictTransformMap`
+and `AlgebraicGeometry.imageι_eq_imageι_strictTransformMap` below. Conversely nothing is
+lost by phrasing it with kernels: an ideal sheaf is recovered from its subscheme by
+`Scheme.IdealSheafData.ker_subschemeι`.
 
 The lift exists and is unique (`AlgebraicGeometry.Scheme.Hom.liftOfIsIsoRestrict` and
 `AlgebraicGeometry.Scheme.Hom.hom_ext_of_isIso_restrict`), but it is taken as data here
@@ -406,6 +395,30 @@ theorem ker_eq_ker_strictTransformMap {V : Scheme.{u}} (h : V ⟶ X) [QuasiCompa
     _ = (L.ι ≫ pullback.snd h.imageι π).ker :=
         Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant _ _
     _ = _ := (ker_strictTransformMap h.imageι π U).symm
+
+/-- **The scheme-theoretic image of the lift is the strict transform of the scheme-theoretic
+image, as a closed subscheme of `X'`** (blueprint:
+`lemma:nagata-scheme-image-transport-strict-transform`): the image form of
+`AlgebraicGeometry.ker_eq_ker_strictTransformMap`, the two subschemes of `X'` being cut out
+by the two ideal sheaves compared there.
+
+Together with `AlgebraicGeometry.imageι_eq_imageι_strictTransformMap`, which says that this
+equality is compatible with the two inclusions into `X'`, the two scheme-theoretic images are
+the same closed subscheme of `X'`, not merely isomorphic schemes. -/
+theorem image_eq_image_strictTransformMap {V : Scheme.{u}} (h : V ⟶ X) [QuasiCompact h]
+    (hrange : Set.range h ⊆ (U : Set X)) (h' : V ⟶ X') (hlift : h' ≫ π = h)
+    [QuasiCompact (strictTransformOpen h.imageι π U).ι] :
+    h'.image = (strictTransformMap h.imageι π U).image :=
+  congrArg Scheme.IdealSheafData.subscheme (ker_eq_ker_strictTransformMap π U h hrange h' hlift)
+
+/-- The equality of `AlgebraicGeometry.image_eq_image_strictTransformMap` is an equality of
+closed subschemes of `X'`: it commutes with the two inclusions into `X'`. -/
+theorem imageι_eq_imageι_strictTransformMap {V : Scheme.{u}} (h : V ⟶ X) [QuasiCompact h]
+    (hrange : Set.range h ⊆ (U : Set X)) (h' : V ⟶ X') (hlift : h' ≫ π = h)
+    [QuasiCompact (strictTransformOpen h.imageι π U).ι] :
+    h'.imageι = eqToHom (image_eq_image_strictTransformMap π U h hrange h' hlift) ≫
+      (strictTransformMap h.imageι π U).imageι :=
+  Scheme.IdealSheafData.subschemeι_congr (ker_eq_ker_strictTransformMap π U h hrange h' hlift)
 
 end PullbackComparison
 

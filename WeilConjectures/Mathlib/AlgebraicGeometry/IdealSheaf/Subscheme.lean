@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 /-!
 # Complements on the subscheme cut out by an ideal sheaf
 
-This file adds two independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
+This file adds three independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
 
 ## Base change of the subscheme cut out by an ideal sheaf
 
@@ -25,6 +25,13 @@ Pasting this square with `Spec` of the pushout square `CommRingCat.isPushout_quo
 computes the base change of `I.subschemeι` along an arbitrary affine probe
 `Spec.map φ ≫ U.2.fromSpec`: it is the closed immersion cut out by the extended ideal
 `I(U)·S` (`AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`).
+
+## Equal ideal sheaves cut out the same closed subscheme
+
+A closed subscheme of `X` is recorded by its ideal sheaf, so an equality of ideal sheaves is an
+equality of closed subschemes: `AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_congr` says
+that the identification of the two subschemes commutes with the inclusions into `X`, so the two
+closed subschemes are equal *inside* `X` and not merely isomorphic as schemes.
 
 ## The map to the scheme-theoretic image is scheme-theoretically dominant
 
@@ -43,6 +50,7 @@ the kernel ideal vanishes on a cover by affine opens.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
+- `AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_congr`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
 -/
 
@@ -78,6 +86,14 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
   (isPullback_SpecMap_of_isPushout _ _ _ _
     (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
       (I.isPullback_subschemeCover_map U)
+
+/-- **Equal ideal sheaves cut out the same closed subscheme of `X`**: the identification of
+`I.subscheme` with `J.subscheme` coming from `I = J` commutes with the two inclusions
+into `X`. -/
+lemma subschemeι_congr {I J : X.IdealSheafData} (h : I = J) :
+    I.subschemeι = eqToHom (congrArg subscheme h) ≫ J.subschemeι := by
+  subst h
+  simp
 
 end AlgebraicGeometry.Scheme.IdealSheafData
 
