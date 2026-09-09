@@ -1236,7 +1236,8 @@ integer $n$ give the asserted single factorization.
 
 \begin{lemma}[Projective embedding over $X$]
 \label{lemma:weil-pbc-chow-embedding-over-x}
-\uses{cor:chow-lemma-proper,def:nagata-projective-space-base-change}
+\uses{cor:chow-lemma-proper,def:nagata-projective-space-base-change,
+lemma:nagata-projective-space-base-change-pullback}
 \lean{AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_liftBaseChange,
   AlgebraicGeometry.ChowModification.toProjectiveSpaceSource,
   AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpaceSource}
@@ -1252,11 +1253,13 @@ is a closed immersion over $X$.
 \end{lemma}
 \begin{proof}
 \uses{lemma:weil-pbc-chow-factorization,cor:chow-lemma-proper,
-def:nagata-projective-space-base-change}
+def:nagata-projective-space-base-change,
+lemma:nagata-projective-space-base-change-pullback}
 \leanok
 
-The identification $\mathbf P^n_X=X\times_Y\mathbf P^n_Y$ is the defining fibre-product
-identity, so the pair $\iota_X=(\pi,\iota_Y)$ is a morphism over $X$ by construction, and
+The identification $\mathbf P^n_X=X\times_Y\mathbf P^n_Y$ is the cartesian square of
+\Cref{lemma:nagata-projective-space-base-change-pullback}, so the pair
+$\iota_X=(\pi,\iota_Y)$ is a morphism over $X$ by construction, and
 composing it with the base change $\mathbf P^n_X\to\mathbf P^n_Y$ of $f$ gives back
 $\iota_Y$.  That base change is separated, because $f$ is separated and separatedness is
 stable under base change.  A morphism whose composite with a separated morphism is a closed
