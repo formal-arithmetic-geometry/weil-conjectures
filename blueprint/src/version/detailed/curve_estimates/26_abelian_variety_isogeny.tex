@@ -37,13 +37,13 @@ the proofs of \Cref{prop:av-etale-torsion} and \Cref{prop:av-divisibility} from
 $[n]$ is \'etale, and then finite, flat and surjective, whenever $n$ is
 invertible in $K$, using only deformation theory and the smoothness of $A$, and
 in particular using nothing about line bundles.  This is the part that has
-since been formalised, so every step there is a labelled statement with its own
-proof and no step is left as ``standard''; the status note at the head of that
-section says which of those statements the Lean proof actually goes through.
-\Cref{sec:av-cube} treats what the
-\'etale route does not give --- the degree $n^{2g}$, and the case where $n$ is
-divisible by the characteristic --- in the form of five inputs from the theory
-of line bundles on abelian varieties, stated with proof sketches and citations,
+since been formalised; it is written so that every step there is a labelled
+statement with its own proof, with no step left as ``standard'', and the status
+note at the head of that section records where the Lean proof departs from the
+decomposition written here.  \Cref{sec:av-cube} treats what the \'etale route
+does not give --- the degree $n^{2g}$, and the case where $n$ is divisible by
+the characteristic --- in the form of five inputs from the theory of line
+bundles on abelian varieties, stated with proof sketches and citations,
 each marked as an open obligation because Mathlib has none of the theory they
 need.  \Cref{sec:av-status} records the formalisation status of every statement
 of the chapter.
@@ -395,28 +395,46 @@ bijective on it; therefore $[n]$ is formally unramified and formally smooth
 and Zariski's main theorem, $[n]$ is finite, flat and surjective
 (\Cref{sec:av-etale-corollaries}).
 
-\statusnote{This section is formalised, but not by the decomposition written
-here.  The Lean route is
-\texttt{WeilConjectures/AlgebraicGeometry/Group/Infinitesimal.lean} and
-\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}, both for an
-arbitrary commutative group scheme over $K$ rather than for an abelian
-variety.  Two points where it departs from the text below.  First,
-\Cref{cor:av-kernel-npow} is proved directly, by a product formula for ring
-maps out of an affine chart around the identity, with no cotangent space and
-no module structure anywhere; so the statement of \Cref{cor:av-kernel-npow} is
-formalised (as \texttt{GrpObj.eq\_one\_of\_pow\_eq\_one} and
-\texttt{GrpObj.exists\_pow\_eq}) while the cotangent-space material of
-\Cref{sec:av-etale-kernel} that the proof below runs through ---
+\statusnote{The results of this section are formalised, but not by the
+decomposition written here.  The Lean sources are
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Infinitesimal.lean}, which
+proves \Cref{cor:av-kernel-npow} for an arbitrary group scheme over $K$,
+commutative or not, and
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}, which proves
+\Cref{thm:av-mulby-formally-unramified} for a commutative group scheme over
+$K$ and \Cref{thm:av-mulby-formally-smooth} for a commutative group scheme
+that is moreover smooth over $K$.  None of the three needs properness or
+integrality, so all of them hold well beyond abelian varieties; restating them
+here in that generality is left for later.  There are three points where the
+Lean route departs from the text below.  \emph{First}, \Cref{cor:av-kernel-npow}
+is proved directly, by a product formula for ring maps out of an affine chart
+around the identity, with no cotangent space and no module structure anywhere;
+so the statement of \Cref{cor:av-kernel-npow} is formalised (as
+\texttt{AlgebraicGeometry.GrpObj.eq\_one\_of\_pow\_eq\_one} and
+\texttt{AlgebraicGeometry.GrpObj.exists\_pow\_eq}) while the cotangent-space
+material of \Cref{sec:av-etale-kernel} that the proof below runs through ---
 \Cref{def:av-cotangent} to \Cref{cor:av-kernel-module} --- has no Lean
-counterpart and is not on the path to \Cref{thm:av-mulby-etale}.  Second,
+counterpart and is not on the path to \Cref{thm:av-mulby-etale}.  That direct
+argument is not written out in this chapter; writing it out, and keeping the
+cotangent route as the classical account, is a follow-up.  \emph{Second},
 \Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp} are packaged
-into the single declaration \texttt{GrpObj.smooth\_npow\_left}, because
-Mathlib's \texttt{AlgebraicGeometry.Smooth} is formal smoothness together with
-local finite presentation.  Both statements are formalised in the affine-local
-form of \Cref{rem:av-smooth-affine-local} and
-\Cref{rem:av-unramified-affine-local}, which is why the packaging obligations
-formerly recorded at \Cref{thm:av-mulby-formally-unramified},
-\Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp} are gone.}
+into the single declaration
+\texttt{AlgebraicGeometry.GrpObj.smooth\_npow\_left}, because Mathlib's
+\texttt{AlgebraicGeometry.Smooth} is formal smoothness together with local
+finite presentation.  That packaging also saddles \Cref{lem:av-mulby-lfp} with
+the hypothesis that $n$ be invertible in $K$, which it does not need; an
+unconditional Lean lemma for it is a follow-up.  \emph{Third}, the three open
+obligations formerly recorded at \Cref{thm:av-mulby-formally-unramified},
+\Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp} are removed,
+but the Mathlib gaps they recorded are circumvented rather than filled:
+Mathlib \texttt{v4.33.1} still has no infinitesimal lifting criterion for
+\texttt{AlgebraicGeometry.FormallyUnramified}, no
+\texttt{AlgebraicGeometry.FormallySmooth} and no cancellation instance for
+\texttt{LocallyOfFinitePresentation}.  The formalisation sidesteps the first
+two by working on affine charts, in the form described in
+\Cref{rem:av-unramified-affine-local} and \Cref{rem:av-smooth-affine-local},
+and the third by cancelling finite presentation at ring level with
+\texttt{RingHom.FinitePresentation.of\_comp\_finiteType}.}
 
 \subsection{Translations}\label{sec:av-etale-translations}
 
@@ -785,12 +803,18 @@ element of $N(R,I)$ with $\Theta(\lambda\cdot w)=\lambda\,\Theta(w)$.
 \end{proof}
 
 \begin{corollary}[$n$-th powers on the kernel]\label{cor:av-kernel-npow}
-\uses{cor:av-kernel-module}
 \lean{AlgebraicGeometry.GrpObj.eq_one_of_pow_eq_one,
 AlgebraicGeometry.GrpObj.exists_pow_eq}
 \leanok
 Let $G$ be a group scheme over $K$, let $R$ be a $K$-algebra, let $I\subseteq R$
-be an ideal with $I^2=0$, and let $n$ be invertible in $K$.  Then
+be an ideal with $I^2=0$, let $n$ be invertible in $K$, and write
+$N(R,I)=\ker\bigl(G(R)\to G(R/I)\bigr)$.  Then
+\begin{enumerate}
+  \item if $w\in N(R,I)$ satisfies $w^n=1$ then $w=1$; and
+  \item every $w\in N(R,I)$ is the $n$-th power of an element of $N(R,I)$.
+\end{enumerate}
+Since $N(R,I)$ is abelian (\Cref{lem:av-kernel-group-law}), the two together
+say that
 \[
   N(R,I)\longrightarrow N(R,I),\qquad w\longmapsto w^n,
 \]
@@ -801,8 +825,12 @@ is bijective.  This holds over an arbitrary field.
 Under the group isomorphism $\Theta$ of \Cref{lem:av-kernel-group-law} the map
 $w\mapsto w^n$ becomes $D\mapsto nD$ on $\Hom_K(\mathfrak c(G,e),I)$, and by
 \Cref{cor:av-kernel-module} this is multiplication by the image of $n$ in $K$,
-which is a unit.  So it is bijective, with inverse multiplication by $n^{-1}$.
+which is a unit.  So it is bijective, and in particular (1) and (2) hold.
 \end{proof}
+\statusnote{This is not the Lean proof.  In Lean (1) and (2) are proved
+directly, in an affine chart around the identity and with no commutativity
+assumption on $G$, so the cotangent space plays no part; see the status note at
+the head of \Cref{sec:av-etale-route}.}
 
 \begin{remark}[Where the vector space structure comes from]
 \label{rem:av-kernel-source}
@@ -856,6 +884,7 @@ arbitrary field.
 \begin{proof}
 \uses{cor:av-kernel-npow, lem:av-mulby-points, prop:av-basic,
 lem:av-kernel-group-law}
+\leanok
 Work in the group $A(R)=\Hom_K(T,A)$, which is commutative by
 \Cref{prop:av-basic}.  Put $w:=u\cdot v^{-1}\in A(R)$.  Restriction to $T_0$ is
 a group homomorphism $A(R)\to A(R/I)$, and $u|_{T_0}=v|_{T_0}$, so $w$ lies in
@@ -911,6 +940,7 @@ This holds over an arbitrary field.
 \begin{proof}
 \uses{cor:av-kernel-npow, lem:av-mulby-points, prop:av-basic,
 lem:av-lift-lands-in-open, lem:av-kernel-group-law}
+\leanok
 \emph{Step 1: lift $a$ along $A\to\Spec K$.}  By \Cref{prop:av-basic} the
 structure morphism $A\to\Spec K$ is smooth, hence formally smooth, so there is
 $\tilde u\colon T\to A$ over $K$ with $\tilde u|_{T_0}=a$.  (When the image of
@@ -982,20 +1012,26 @@ $K$-schemes, so $\pi\circ[n]=\pi$; and a morphism $f\colon X\to Y$ of schemes
 over $S$ with $X\to S$ and $Y\to S$ locally of finite presentation is itself
 locally of finite presentation, by \stacksproject{02FV}.  Affine-locally this
 is the statement that if $B$ and $C$ are finitely presented $K$-algebras then
-$C$ is a finitely presented $B$-algebra for any $K$-algebra map $B\to C$.
+$C$ is a finitely presented $B$-algebra for any $K$-algebra map $B\to C$, and
+that is the form the formalisation uses: Mathlib \texttt{v4.33.1} has no
+cancellation for \texttt{LocallyOfFinitePresentation} at the level of schemes,
+so the Lean proof cancels at ring level with
+\texttt{RingHom.FinitePresentation.of\_comp\_finiteType} applied to the
+structure map $K\to\Gamma(V,\O)$ of an affine chart.
 \end{proof}
 
 \begin{theorem}[$[n]$ is \'etale for $n$ invertible]\label{thm:av-mulby-etale}
 \uses{thm:av-mulby-formally-unramified, thm:av-mulby-formally-smooth,
 lem:av-mulby-lfp}
-\lean{AlgebraicGeometry.IsAbelianVariety.etale_mulBy}
+\lean{AlgebraicGeometry.IsAbelianVariety.etale_mulBy,
+AlgebraicGeometry.GrpObj.etale_npow_left}
 \leanok
 Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
 $K$.  Then $[n]\colon A\to A$ is \'etale.  This holds over an arbitrary field.
 \end{theorem}
 \begin{proof}
 \uses{thm:av-mulby-formally-unramified, thm:av-mulby-formally-smooth,
-lem:av-mulby-lfp}
+lem:av-mulby-lfp, rem:av-smooth-affine-local, rem:av-unramified-affine-local}
 \leanok
 By \Cref{thm:av-mulby-formally-smooth} the morphism $[n]$ is formally smooth,
 and by \Cref{lem:av-mulby-lfp} it is locally of finite presentation; a formally
@@ -1032,11 +1068,18 @@ over $\Gamma(V,\O)$ by \Cref{thm:av-mulby-formally-smooth} read through
 \texttt{Algebra.FormallyEtale}; with finite presentation
 (\Cref{lem:av-mulby-lfp}) they are \texttt{Algebra.Etale}; and
 \texttt{HasRingHomProperty} for \texttt{AlgebraicGeometry.Etale} and
-\texttt{RingHom.Etale} promotes that to \'etaleness of $[n]$.  This is the path
-the formalisation took, in
-\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}: no class for
-schemes was introduced, and the mathematical content is entirely
-\Cref{cor:av-kernel-npow}.
+\texttt{RingHom.Etale} promotes that to \'etaleness of $[n]$.  The
+formalisation, in
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}, follows this
+affine-local strategy but assembles it differently: it establishes the
+scheme-level classes \texttt{AlgebraicGeometry.FormallyUnramified} and
+\texttt{AlgebraicGeometry.Smooth} for $[n]$ chart by chart through
+\texttt{HasRingHomProperty.iff\_appLE}, so that only
+\texttt{Algebra.FormallyUnramified} and \texttt{Algebra.FormallySmooth} appear
+at ring level, and concludes with
+\texttt{AlgebraicGeometry.Etale.of\_formallyUnramified\_of\_flat} rather than
+building \texttt{Algebra.Etale}.  Either way the mathematical content is
+entirely \Cref{cor:av-kernel-npow}.
 \end{remark}
 
 \subsection{Corollaries for $n$ invertible}\label{sec:av-etale-corollaries}
@@ -1384,9 +1427,11 @@ of the ground field is already an instance in
 \section{Formalisation status}\label{sec:av-status}
 
 The Lean sources are
-\texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Isogeny.lean} and
+\texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Isogeny.lean},
 \texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Torsion.lean},
-together with the mirror files under \texttt{WeilConjectures/Mathlib/}.
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Infinitesimal.lean} and
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}, together with the
+mirror files under \texttt{WeilConjectures/Mathlib/}.
 
 \emph{Formalised, with a complete Lean proof.}
 \Cref{def:av-abelian-variety}; \Cref{prop:av-basic}; \Cref{def:av-mulby};
@@ -1394,7 +1439,9 @@ together with the mirror files under \texttt{WeilConjectures/Mathlib/}.
 \Cref{lem:av-torsion-pullback}; \Cref{def:av-degree} and
 \Cref{lem:av-degree-base-change}; \Cref{thm:av-zariski-main};
 \Cref{prop:av-finite-etale-points}; \Cref{thm:av-finite-abelian-group};
-\Cref{lem:av-mulby-lfp}; \Cref{thm:av-mulby-etale};
+\Cref{thm:av-mulby-formally-unramified},
+\Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp}, the last two
+packaged into one declaration; \Cref{thm:av-mulby-etale};
 \Cref{thm:av-mulby-etale-corollaries};
 \Cref{cor:av-torsion-finite-etale}; and the two derivations
 \Cref{prop:av-etale-torsion} and \Cref{prop:av-divisibility}.  The Lean proofs
@@ -1425,27 +1472,26 @@ surjectivity of $[n]$ for $n$ invertible in $K$ independently of
 \texttt{sorry} as \texttt{isFinite\_mulBy\_of\_natCast\_ne\_zero},
 \texttt{flat\_mulBy\_of\_natCast\_ne\_zero} and
 \texttt{surjective\_mulBy\_of\_natCast\_ne\_zero} in the same file, as is the
-properness of $[n]$ that the first of them rests on (the general
+properness of $[n]$ that the first and third of them rest on (the general
 \texttt{AlgebraicGeometry.isProper\_left} in
 \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}).
-Consequently \Cref{prop:av-divisibility} holds unconditionally for $n$
-invertible in $K$ --- that is
-\texttt{exists\_npow\_eq\_of\_natCast\_ne\_zero}, again with no
-\texttt{sorry} --- and so does the finite-flat-\'etale half of
-\Cref{prop:av-etale-torsion}, which is
+Consequently \Cref{prop:av-divisibility} is proved with no \texttt{sorry} for
+$n$ invertible in $K$ --- that is
+\texttt{exists\_npow\_eq\_of\_natCast\_ne\_zero}, which like the node itself
+still asks for $K$ algebraically closed --- and so is the finite-flat-\'etale
+half of \Cref{prop:av-etale-torsion}, which is
 \Cref{cor:av-torsion-finite-etale}.  What does \emph{not} follow for $n$
 invertible is the rank $n^{2g}$, because \texttt{finrank\_mulBy} is open in
 every characteristic; see \Cref{rem:av-etale-route-scope}.
 
 \emph{Statement formalised, but proved by a different argument.}
-\Cref{cor:av-kernel-npow}, \Cref{thm:av-mulby-formally-unramified} and
-\Cref{thm:av-mulby-formally-smooth}.  All three have complete,
-\texttt{sorry}-free Lean proofs, in
-\texttt{WeilConjectures/AlgebraicGeometry/Group/Infinitesimal.lean} and
-\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}; but the Lean proof
-of \Cref{cor:av-kernel-npow} does not go through the cotangent space, so the
-proofs written here are not the formalised ones and are left unmarked.  The
-status note at the head of \Cref{sec:av-etale-route} records the difference.
+\Cref{cor:av-kernel-npow}, as
+\texttt{AlgebraicGeometry.GrpObj.eq\_one\_of\_pow\_eq\_one} and
+\texttt{AlgebraicGeometry.GrpObj.exists\_pow\_eq}, both without a
+\texttt{sorry}.  The Lean proof does not go through the cotangent space, so the
+proof written here is not the formalised one and is left unmarked; the status
+note at the head of \Cref{sec:av-etale-route} records the difference, and
+writing the formalised argument out as a node of its own is a follow-up.
 
 \emph{No Lean statement yet.}  Everything else in \Cref{sec:av-etale-route}:
 the translations
@@ -1456,7 +1502,9 @@ the translations
 \Cref{lem:av-cotangent-product} and \Cref{lem:av-cotangent-group-law}; the
 kernel computation \Cref{lem:av-kernel-cotangent},
 \Cref{lem:av-kernel-group-law} and \Cref{cor:av-kernel-module}; and
-\Cref{lem:av-lift-lands-in-open}.  And
+\Cref{lem:av-lift-lands-in-open}, which has no declaration of its own but whose
+content the Lean proof does use, inline in the divisibility step of
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}.  And
 everything in \Cref{sec:av-cube}:
 \Cref{thm:av-cube}, \Cref{thm:av-mulby-pullback},
 \Cref{prop:av-symmetric-ample}, \Cref{prop:av-ample-self-intersection},
