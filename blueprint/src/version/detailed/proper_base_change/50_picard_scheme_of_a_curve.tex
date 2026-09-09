@@ -44,21 +44,25 @@ claims no more than that comment does.
 % THIS CHAPTER'S CENSUSES USE (i) AND (ii) TOGETHER.  Measured at this commit over
 % the proof-position \stacksproject occurrences that sit inside `% Decomposed.'
 % nodes outside `sec:basis', with % comments stripped over the whole file, the tags
-% that no node owns under that convention number 11, in 8 nodes:
+% that no node owns under that convention number 12, in 9 nodes:
 %
+%   00HT (lem:pc-rf-perfect-base-change),
 %   01V8 (lem:pc-smooth-characterization), 01XD (lem:pc-cech-computes),
 %   01XK and 02KH (lem:pc-flat-base-change-cohom),
 %   023L, 023M, 023N (lem:pc-fpqc-descent), 08AA (lem:pc-euler-additive),
 %   0B8L (lem:pc-pic-group-valued), 0BDK (lem:pc-perfect-locus),
 %   0G6T (lem:pc-cech-resolution).
 %
-% 0G6T is the newest of them: it arrived with the citation repair of issue 788,
-% which replaced an unresolvable prose reference in that node's proof by the tag
-% the proof actually uses.  Before that repair these figures read 10 in 7 nodes,
-% 12 in 9 nodes and 12 in 8 nodes respectively; each moved by exactly one tag in
-% one node, and that one node is lem:pc-cech-resolution.
+% 00HT is the newest of them: it arrived with the repair of issue 819, which
+% replaced a mis-named justification in that node's proof by the tag the step
+% actually uses.  Before that repair these figures read 11 in 8 nodes, 13 in 10
+% nodes and 13 in 9 nodes respectively; each moved by exactly one tag in one
+% node, and that one node is lem:pc-rf-perfect-base-change.  0G6T arrived the
+% same way one pass earlier, with the citation repair of issue 788, at
+% lem:pc-cech-resolution; before that one the figures read 10 in 7 nodes, 12 in
+% 9 nodes and 12 in 8 nodes.
 %
-% Dropping (ii) and counting only citation-node ownership gives 13, in 10 nodes.
+% Dropping (ii) and counting only citation-node ownership gives 14, in 11 nodes.
 % The two extra are exactly 01XJ and 01JY, and they are the only two sites at which
 % the readings differ:
 %
@@ -79,7 +83,7 @@ claims no more than that comment does.
 % some node of this chapter stands for it under (i) or (ii), wherever that node
 % sits.  This is what produces the figure of 11 above.  Mirroring the domain
 % restriction onto the owner side instead -- accepting only owners that themselves
-% sit outside `sec:basis' -- gives 13, in 9 nodes, and the two extra tags are
+% sit outside `sec:basis' -- gives 14, in 10 nodes, and the two extra tags are
 % exactly 00DV and 00O0:
 %
 %   00DV is owned by \Cref{lem:pcb-nakayama}, a `% Cited.' node inside `sec:basis',
@@ -88,11 +92,11 @@ claims no more than that comment does.
 %     node inside `sec:basis', and is likewise printed in
 %     \Cref{lem:pc-hilb-representable}'s proof.
 %
-% Note that this 13 is not the 13 of the paragraph above: that one keeps ownership
+% Note that this 14 is not the 14 of the paragraph above: that one keeps ownership
 % chapter-wide and drops reading (ii), and its two extra tags are 01XJ and 01JY, in
-% 10 nodes.  The three figures -- 11 in 8 nodes (domain outside `sec:basis',
-% ownership chapter-wide, readings (i) and (ii)), 13 in 10 nodes ((i) only), 13 in
-% 9 nodes (ownership also restricted to outside `sec:basis') -- were all re-measured
+% 11 nodes.  The three figures -- 12 in 9 nodes (domain outside `sec:basis',
+% ownership chapter-wide, readings (i) and (ii)), 14 in 11 nodes ((i) only), 14 in
+% 10 nodes (ownership also restricted to outside `sec:basis') -- were all re-measured
 % at this commit, and each agrees with the tag list printed for it.
 %
 % SCOPE OF THE ONE-TAG-ONE-NODE INVARIANT (issue 625).  That invariant -- no Stacks
@@ -9824,14 +9828,101 @@ quasi-coherent $\cG|_{U_J}$ is $\widetilde{\Gamma(U_J,\cG)}$); the
 module $\Gamma(U_J,\cG)$ is of finite type over $A$ (with
 $U_J=\Spec(B_J)$, $B_J$ a finite type $A$-algebra and
 $\cG|_{U_J}=\widetilde N$ with $N$ a finite $B_J$-module) and flat
-over $A$ (for the local ring $A_{\mathfrak p}$,
-$N\otimes_AA_{\mathfrak p}$ is flat: $\cG$ flat over $S$ means each
-$\cG_{x}$ flat over $\cO_{S,f(x)}$, and for an affine neighbourhood
-of the point the $\Gamma$-module description gives flatness of $N$
-over $A$ -- the standard: flatness of a quasi-coherent module over
-$S$ is detected on the affines of a base; for our $f$ of finite
-presentation with $S$ affine, also direct: from the local
-$\Gamma$-description of the flatness of $\cG$ over $S$).
+over $A$ ($\cG$ flat over $S$ means that $\cG_{x}$ is flat over
+$\cO_{S,f(x)}$ for every $x\in X$; for $x\in U_J$ corresponding to
+the prime $\mathfrak q\subset B_J$ the description
+$\cG|_{U_J}=\widetilde N$ gives $\cG_{x}=N_{\mathfrak q}$, and
+$f(x)$ corresponds to the prime $\mathfrak p\subset A$ lying under
+$\mathfrak q$, so $\cO_{S,f(x)}=A_{\mathfrak p}$; the hypothesis on
+$\cG$ therefore reads: $N_{\mathfrak q}$ is flat over
+$A_{\mathfrak p}$ for every prime $\mathfrak q$ of $B_J$.  That is
+the hypothesis of Algebra, Section~10.39 (Flat modules and flat ring
+maps), Lemma~10.39.18 (\stacksproject{00HT}), part~(6): for a ring map
+$R\to R'$ and an $R'$-module $M$, $M$ is flat over $R$ if and only if
+$M_{\mathfrak q}$ is flat over $R_{\mathfrak p}$, with $\mathfrak p$
+the prime of $R$ lying under $\mathfrak q$, for every prime
+$\mathfrak q$ of $R'$.  Applied to $A\to B_J$ and $M=N$ it gives that
+$N$ is flat over $A$).
+% Ruling on the flatness step just above, recorded at its own site.
+%
+% WHAT THE STEP USES.  It passes from flatness of the stalks $\cG_x$ --
+% which sit at the points of the SOURCE $X$, each over the local ring
+% $\cO_{S,f(x)}$ of the base -- to flatness of the single $A$-module
+% $N=\Gamma(U_J,\cG)$.  What carries that passage is the source-local
+% criterion: an $R'$-module $M$ all of whose localizations
+% $M_{\mathfrak q}$ are flat over $R_{\mathfrak p}$, $\mathfrak p$ the
+% contraction of $\mathfrak q$, is flat over $R$.  It is now named in the
+% text above and cited there: Algebra, Lemma 10.39.18(6), tag 00HT.
+%
+% WHAT THE TEXT NAMED BEFORE.  Until this pass the parenthesis named
+% instead a criterion about covering the BASE by affines -- flatness of a
+% quasi-coherent module over $S$ read off the affines of a base -- with
+% neither a \Cref nor a tag on it.  That is a true statement, and it is
+% not the one this step needs: it is about affine opens of $S$, whereas
+% the passage made here is from the points of $X$.  Nothing downstream was
+% unsound, since the criterion the step really wants is true and does give
+% what was claimed; what was wrong was the name put on the step.
+%
+% THE EARLIER RULING IS SUPERSEDED (taxis 819).  Both rounds of review on
+% taxis 809 read this site and ruled the appeal decorative, on the ground
+% that the derivation was supplied in the same sentence; taxis 815 wrote
+% that verdict into this file as a comment block, and PR #640 deleted it
+% again.  The verdict was wrong for the reason above and is not to be
+% reinstated.  The clause those reviews read as the derivation -- that for
+% an $f$ of finite presentation with $S$ affine the flatness of $N$ over
+% $A$ follows ``directly'' from the local $\Gamma$-description -- named no
+% argument at all: the $\Gamma$-description gives $\cG_x=N_{\mathfrak q}$
+% and nothing further, getting from those localizations to $N$ is the
+% criterion just cited, and neither finite presentation of $f$ nor
+% affineness of $S$ enters that criterion.  So the clause is deleted here
+% rather than left standing as a second justification for one step.  The
+% lesson is the reason this site was read five times without the defect
+% being seen: a ruling that certifies a step as self-contained can itself
+% name the wrong fact, and every instrument run over this site was asking
+% whether the appeal was BARE, never whether the thing appealed to was the
+% thing being used.
+%
+% WHAT IS OWED AND WHAT IS NOT.  A tag, now printed; no \uses edge, because
+% no node of this chapter states the criterion.  The whole node set was read
+% for one rather than grepped: of the 301 statement environments, the 52
+% whose title or statement body mentions flatness were kept and read, and the
+% nearest candidates state something else -- lem:pc-flat-locus-open is the
+% OPENNESS of the locus where $M_{\mathfrak q}$ is flat over $R$,
+% lem:pc-fp-flat-finite-projective is finitely-presented-and-flat versus
+% finite projective, and def:pcb-scheme-conventions defines flatness of a
+% MORPHISM through its local-ring maps, not flatness of a module over a
+% base.  No node is created for it either: a step this elementary takes a
+% tag, and a new node here would add an in-degree-one leaf for no gain.
+%
+% CENSUS CONSEQUENCE.  00HT was carried nowhere in this chapter before and
+% no node of it stands for the tag, so 00HT joins the unowned-tag list at
+% the head of this file under all three of that census's readings, in this
+% node -- which stays marked `% Decomposed.', since it is one step of its
+% proof that a tag discharges and not its statement.  Each of the three
+% figures there moves by one tag in one node, and the lists have been moved
+% with them.
+%
+% DELIBERATE WORDING.  This block carries none of taxis 809's cue words and
+% quotes neither the phrase it rules nor the phrase that replaces it, so a
+% re-run of that sweep with comments left unstripped does not fire on the
+% ruling itself.  Measured at the commit this lands in, over the whole file
+% with whitespace normalised: 54 cue rows stripped and 62 unstripped,
+% against 55 and 63 at the parent.  The gap of 8 is unchanged -- that is the
+% number to check, not either absolute -- and the single row that left the
+% stripped population is the one repaired here.
+%
+% WHAT THIS DOES NOT CLOSE.  The axis this site opens -- an appeal that
+% does carry a justification, whose content is not the step's -- was swept
+% whole-file over 809's cue words for taxis 819, comments stripped and
+% whitespace normalised: 55 rows in 41 hosts, and this was the only row
+% where the fact named is not the fact used.  One further row is reported
+% rather than repaired, in \Cref{lem:pc-picard-functor-agrees-sc}'s proof,
+% whose closing sentence attributes a comparison of two sheafifications to
+% the construction of the big fppf sites; the comparison is argued out in
+% full in the paragraph above that sentence, so the label is loose and the
+% step is not bare.  Eleven rows use a cue word as a NAME and not as an
+% appeal at all -- a coordinate on $\mathbf P^1$, the opens $D_+(f)$, the
+% diagrams of a group scheme -- and are off this axis.
 A finitely presented flat $A$-module is finite projective
 (\Cref{lem:pc-fp-flat-finite-projective}): it is finite
 locally free (over the local ring $A_{\mathfrak p}$ the localization
