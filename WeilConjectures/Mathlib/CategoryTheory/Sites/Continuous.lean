@@ -6,6 +6,7 @@ Authors: Nailin Guan, Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Limits
 
@@ -18,8 +19,9 @@ isomorphism, then the counit of the induced adjunction
 on sheaves is an isomorphism
 (`CategoryTheory.Adjunction.isIso_sheafPushforwardContinuous_counit`).
 
-`CategoryTheory.Functor.sheafPushforwardContinuous` preserves all limits that exist in the
-coefficient category
+`CategoryTheory.Functor.sheafPushforwardContinuous` is additive
+(`CategoryTheory.Functor.additive_sheafPushforwardContinuous`) and preserves all limits
+that exist in the coefficient category
 (`CategoryTheory.Functor.preservesLimitsOfShape_sheafPushforwardContinuous`): it is
 precomposition with `F.op`, corestricted to the sheaf subcategories, and limits of sheaves
 are created by `sheafToPresheaf` while limits of presheaves are computed pointwise. Note
@@ -86,5 +88,11 @@ instance preservesLimitsOfShape_sheafPushforwardContinuous (E : Type w₁) [Cate
 instance preservesFiniteLimits_sheafPushforwardContinuous [HasFiniteLimits A] :
     PreservesFiniteLimits (F.sheafPushforwardContinuous A J K) where
   preservesFiniteLimits _ := inferInstance
+
+/-- The pushforward of sheaves along a continuous functor is additive: it is given by
+precomposition with `F.op`, so on morphisms it does not change the components. -/
+instance additive_sheafPushforwardContinuous [Preadditive A] :
+    (F.sheafPushforwardContinuous A J K).Additive where
+  map_add := by intros; ext; rfl
 
 end CategoryTheory.Functor

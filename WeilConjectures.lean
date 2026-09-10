@@ -4,6 +4,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
@@ -216,6 +217,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Grothendieck
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyInjective
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
@@ -248,6 +250,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
+public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.Depth.Basic
 public import WeilConjectures.RingTheory.MvPolynomial.HomogeneousLocalization
