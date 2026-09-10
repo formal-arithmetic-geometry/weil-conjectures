@@ -118,34 +118,42 @@ claims no more than that comment does.
 % WHERE A `% Cited.' NODE'S ATTRIBUTION SITS, AND WHAT A PROOF-COUNT CHECK MUST
 % COUNT.  A `% Cited.' node carries an attribution naming the external source it
 % reproduces --- ``This is a cited external input: <source>, <numbered statement>
-% (<tag>).  It is not decomposed here.''  Almost every such node in this chapter
-% carries that attribution inside the body of its statement environment.  Two do
-% not: \Cref{def:pc-regular-immersion} and \Cref{def:pc-regular-ideal-sheaf} each
-% carry it in a `proof' environment placed immediately after the `definition'
-% environment, and they are the only two nodes of the chapter in that form.
+% (<tag>).  It is not decomposed here.''  That attribution sits in a `proof' block
+% placed after the node's statement environment: the statement says what is being
+% reproduced, and the `proof' block says where it comes from and that the chapter
+% stops there.  A `% Cited.' node carrying no `proof' block at all puts the
+% attribution in its statement body instead --- \Cref{def:pc-fpqc-covering} is such
+% a node.
 %
 % BOTH FORMS ARE ALLOWED, and that is the ruling: a `% Cited.' node may carry its
-% attribution either inside its statement body or in a following `proof' block.  The
-% two named definitions take the second form; every other `% Cited.' node takes the
-% first.  Nothing in the dependency graph sees the difference, because a `proof'
-% block contributes edges only through its own \uses tokens, and neither of those
-% two blocks carries any.
+% attribution in a following `proof' block or inside its statement body, and a
+% check must treat neither as a defect.  Nothing in the dependency graph sees the
+% difference, because a `proof' block contributes edges only through its own \uses
+% tokens.
+%
+% What is distinctive about \Cref{def:pc-regular-immersion} and
+% \Cref{def:pc-regular-ideal-sheaf} is therefore NOT where their attribution sits
+% --- it sits in a `proof' block, as at nearly every other `% Cited.' node --- but
+% which environment that `proof' block follows: they are the only two `definition'
+% environments of the chapter carrying a `proof' block.  Neither of those two
+% `proof' blocks carries a \uses token, so neither contributes an edge.
 %
 % What this costs is a proof count.  A check that compares `proof' environments
 % against statement environments MUST COUNT `definition' AMONG THE STATEMENT
-% ENVIRONMENTS.  Measured at this commit, with % comments stripped over the whole
-% file:
+% ENVIRONMENTS.  Under this chapter's own convention --- `definition' and `remark'
+% counted alongside `lemma', `theorem', `proposition' and `corollary' --- there are
+% 0 proofs not preceded by a statement environment.  Under the four-environment
+% convention --- `lemma', `theorem', `proposition' and `corollary' only --- there
+% are exactly 2, and they are the `proof' blocks of the two definitions named
+% above.
 %
-%   * ten-environment convention (this chapter's, counting `definition' and `remark'
-%     alongside `lemma', `theorem', `proposition' and `corollary'): 301 statements,
-%     237 proofs, and 0 proofs not preceded by a statement environment;
-%   * four-environment convention (`lemma', `theorem', `proposition' and `corollary'
-%     only): 235 statements, 237 proofs, and 2 proofs not preceded by a statement
-%     environment.
-%
-% Those 2 are exactly the two definitions named above.  They are not proofs without
-% statements, and the excess is NOT A FINDING: a check reporting one has applied the
-% four-environment convention to a chapter that does not use it.
+% Those 2 are not proofs without statements, and the excess is NOT A FINDING: a
+% check reporting one has applied the four-environment convention to a chapter that
+% does not use it.  The raw statement and proof totals that used to stand here have
+% been DELETED RATHER THAN RE-STAMPED: they were true at the commit that wrote them
+% and every merge since moved them, and this wave is still adding nodes.  The 0 and
+% the 2 are structural and do not drift with the node count; re-measure rather than
+% quote.
 %
 % REFERENCES TO STACKS THAT DO NOT GO THROUGH THE `stacksproject' MACRO (issue 788).
 % Every tag instrument used on this chapter parses the `stacksproject' macro, so a
