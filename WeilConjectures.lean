@@ -143,10 +143,13 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
+public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
+public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Funext
+public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Monad
 public import WeilConjectures.Mathlib.Algebra.Ring.Equiv
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
@@ -234,6 +237,7 @@ public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.MvPolynomial.HomogeneousLocalization
+public import WeilConjectures.RingTheory.NumericalPolynomial
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
