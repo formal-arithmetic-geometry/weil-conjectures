@@ -9742,16 +9742,33 @@ $R_{\mathfrak p}$ for every prime $\mathfrak q\subset R'$, where
 $\mathfrak p=\mathfrak q\cap R$ is the prime of $R$ lying under
 $\mathfrak q$.
 \uses{def:pc-morphism-conventions}
-% Mathlib: flatness over the base descends from the localizations
-% of $M$ at the maximal ideals of $R'$, and for a module over
-% $R_{\mathfrak p}$ flatness over $R_{\mathfrak p}$ and over $R$ agree.
+% Mathlib: the ``if'' direction only, that $M$ is flat over $R$ when
+% $M_{\mathfrak q}$ is flat over $R_{\mathfrak p}$ for every prime
+% $\mathfrak q$.  It is the composite of the two names: flatness over the
+% base descends from the localizations of $M$ at the maximal ideals of $R'$
+% (\texttt{flat\_of\_isLocalized\_maximal}, which is an implication and not
+% an equivalence), and for a module over $R_{\mathfrak p}$ flatness over
+% $R_{\mathfrak p}$ and over $R$ agree
+% (\texttt{flat\_iff\_of\_isLocalization}, an equivalence, but of a
+% different pair -- one module and the two bases $R$ and $R_{\mathfrak p}$,
+% not the two sides of this node).  That is the only direction of the
+% equivalence used below, in the proof of
+% \Cref{lem:pc-rf-perfect-base-change}.  The converse, that flatness over
+% $R$ passes to the localizations, is carried by neither declaration, so no
+% name is claimed for it.
 \mathlibok\ \lean{Module.flat_of_isLocalized_maximal,
 Module.flat_iff_of_isLocalization}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Algebra, Lemma~10.39.18
-(\stacksproject{00HT}), part~(6).  It is available in Mathlib in the
-form named in the statement, so it is not decomposed further here.
+(\stacksproject{00HT}), part~(6), so it is not decomposed further here.
+Of the equivalence, Mathlib carries the ``if'' direction: that $M$ is
+flat over $R$ once $M_{\mathfrak q}$ is flat over $R_{\mathfrak p}$ for
+every prime $\mathfrak q\subset R'$.  That is the direction this node's
+user takes, since in \Cref{lem:pc-rf-perfect-base-change} the stalkwise
+flatness is the hypothesis and flatness over the base is the conclusion.
+The converse is not carried by either of the declarations named in the
+statement.
 \end{proof}
 
 % ---------------------------------------------------------------------------
