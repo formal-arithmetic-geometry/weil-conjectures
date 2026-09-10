@@ -1867,10 +1867,19 @@ of finite type over \(k\) --- a closed immersion is of finite type and
 Let \(k\) be a field, let \(Z\) be an irreducible scheme of finite type
 over \(k\) and let \(P\in Z\) be a closed point.  Then
 \(\dim\mathcal O_{Z,P}=\dim Z\).
-% Mathlib: not present, and no \mathlibok marker.  Mathlib has ringKrullDim and
-% Order.krullDim for the two sides, but nothing under Mathlib/AlgebraicGeometry/
-% relates the Krull dimension of a stalk to the dimension of an irreducible scheme
-% of finite type over a field.
+% Mathlib: the clause~(2) half only, and no \mathlibok marker on that account.
+% AlgebraicGeometry.ringKrullDim_stalk_eq_coheight
+% (Mathlib/AlgebraicGeometry/Properties.lean, tagged @[stacks 02IZ]) states
+% ringKrullDim (X.presheaf.stalk x) = coheight x for an arbitrary scheme, with
+% no hypotheses beyond X : Scheme.  Since coheight P is \(\dim_P(Z)\), that is
+% precisely the clause \(\dim\mathcal O_{Z,P}=\dim_P(Z)\) which the proof below
+% reads off the cited 0A21 as its clause~(2).
+% Clause~(3), \(\dim_P(Z)=\dim Z\) for \(Z\) irreducible, is the half that needs
+% finite type over a field, and that one has no counterpart:
+% Order.krullDim_eq_iSup_coheight (Mathlib/Order/KrullDimension.lean) is the
+% general order-theoretic fact and gives only \(\dim_P(Z)\le\dim Z\) at a single
+% point.  So the composite stated here is still not present and the marker is
+% still withheld.
 \end{lemma}
 \begin{proof}
 This is a cited external input: Varieties, Section~33.20 (Algebraic
