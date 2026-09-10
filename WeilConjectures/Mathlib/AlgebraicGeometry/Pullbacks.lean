@@ -1,0 +1,286 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Topology.Sheaves.CommRingCat
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+
+/-!
+# Global sections and flat base change of the ground ring
+
+Let `X` be a separated scheme over `Spec R`, let `φ : R ⟶ R'` be a flat ring map and let
+`p : X ×_{Spec R} Spec R' ⟶ X` be the first projection. For a quasi-compact open `U ⊆ X`, the
+ring `Γ(X ×_{Spec R} Spec R', p⁻¹ U)` is the base change of `Γ(X, U)` along `φ`, that is
+`Γ(X, U) ⊗[R] R'`. This is the degree-zero case of Stacks tag `02KH`.
+
+As in `WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions`, "is the base change along
+`φ`" is phrased as a `CategoryTheory.IsPushout` square in `CommRingCat`, which needs no `Algebra`
+instances on the rings of sections.
+
+The proof is the usual one: the statement holds over an affine open because a base change of
+affine schemes is the `Spec` of a tensor product, and it propagates from `U`, `V` and `U ⊓ V` to
+`U ⊔ V` because `Γ(X, U ⊔ V)` is the equaliser of the two restriction maps
+`Γ(X, U) × Γ(X, V) ⇉ Γ(X, U ⊓ V)` and flat base change preserves that equaliser. Every
+quasi-compact open is a finite union of affine opens, and on a separated scheme an intersection
+of two affine opens is affine, so an induction on the number of members of the cover finishes it.
+
+## Main results
+
+- `AlgebraicGeometry.isPushout_app_of_isAffineOpen`
+- `AlgebraicGeometry.isPushout_app_of_isCompact`
+
+## References
+
+* [Stacks Project, Tag 02KH](https://stacks.math.columbia.edu/tag/02KH)
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits TopologicalSpace
+
+namespace AlgebraicGeometry
+
+variable {X : Scheme.{u}} {R R' : CommRingCat.{u}}
+
+section
+
+variable (φ : R ⟶ R') (f : X ⟶ Spec R)
+
+/-- (Implementation.) `IsPushoutApp φ f U` says that the sections of the base change
+`X ×_{Spec R} Spec R'` over the preimage of `U` form the base change along `φ` of the sections
+of `X` over `U`. -/
+private def IsPushoutApp (U : X.Opens) : Prop :=
+  IsPushout ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ U le_top) φ
+    ((pullback.fst f (Spec.map φ)).app U)
+    ((Scheme.ΓSpecIso R').inv ≫
+      (pullback.snd f (Spec.map φ)).appLE ⊤ (pullback.fst f (Spec.map φ) ⁻¹ᵁ U) le_top)
+
+end
+
+/-- Over an affine open `U`, the sections of the base change `X ×_{Spec R} Spec R'` over the
+preimage of `U` are the base change of the sections of `X` over `U`. -/
+theorem isPushout_app_of_isAffineOpen (φ : R ⟶ R') (f : X ⟶ Spec R) {U : X.Opens}
+    (hU : IsAffineOpen U) :
+    IsPushout ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ U le_top) φ
+      ((pullback.fst f (Spec.map φ)).app U)
+      ((Scheme.ΓSpecIso R').inv ≫
+        (pullback.snd f (Spec.map φ)).appLE ⊤ (pullback.fst f (Spec.map φ) ⁻¹ᵁ U) le_top) := by
+  have hp : IsPullback (pullback.fst f (Spec.map φ)) (pullback.snd f (Spec.map φ)) f (Spec.map φ) :=
+    IsPullback.of_hasPullback _ _
+  have key := Scheme.Hom.isPullback_resLE hp (US := ⊤) (UT := ⊤) (UX := U) le_top le_top
+    (UY := pullback.fst f (Spec.map φ) ⁻¹ᵁ U) (by simp)
+  have : IsAffine U.toScheme := hU
+  have : IsAffine (⊤ : (Spec R).Opens).toScheme := isAffineOpen_top _
+  have : IsAffine (⊤ : (Spec R').Opens).toScheme := isAffineOpen_top _
+  have key2 := isPushout_appTop_of_isPullback key
+  simp only [Scheme.Hom.resLE_app_top] at key2
+  refine key2.of_iso' (((⊤ : (Spec R).Opens).topIso ≪≫ Scheme.ΓSpecIso R).symm) U.topIso.symm
+    (((⊤ : (Spec R').Opens).topIso ≪≫ Scheme.ΓSpecIso R').symm)
+    (pullback.fst f (Spec.map φ) ⁻¹ᵁ U).topIso.symm ?_ ?_ ?_ ?_
+  · simp
+  · simp [← Scheme.Hom.appLE_eq_app]
+  · simp [Scheme.Hom.app_eq_appLE]
+  · simp
+
+/-- (Implementation.) The base-change square of sections over an open `U` commutes. -/
+private lemma commSq_app (φ : R ⟶ R') (f : X ⟶ Spec R) (W : X.Opens) :
+    ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ W le_top) ≫ (pullback.fst f (Spec.map φ)).app W =
+      φ ≫ ((Scheme.ΓSpecIso R').inv ≫ (pullback.snd f (Spec.map φ)).appLE ⊤
+        (pullback.fst f (Spec.map φ) ⁻¹ᵁ W) le_top) := by
+  rw [Category.assoc, Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE, pullback.condition,
+    ← Scheme.Hom.appLE_comp_appLE (V := ⊤) (e₁ := le_top) (e₂ := le_top), ← Category.assoc,
+    ← Category.assoc]
+  congr 1
+  simp [← Scheme.Hom.appLE_eq_app]
+
+/-- (Implementation.) The first projection of a product of two rings. -/
+private def pr₁ (A B : CommRingCat.{u}) : CommRingCat.of (↥A × ↥B) ⟶ A :=
+  CommRingCat.ofHom (RingHom.fst ↥A ↥B)
+
+/-- (Implementation.) The second projection of a product of two rings. -/
+private def pr₂ (A B : CommRingCat.{u}) : CommRingCat.of (↥A × ↥B) ⟶ B :=
+  CommRingCat.ofHom (RingHom.snd ↥A ↥B)
+
+/-- (Implementation.) The map into a product of two rings given by a pair of maps. -/
+private def prodLift {A B C : CommRingCat.{u}} (u : A ⟶ B) (v : A ⟶ C) :
+    A ⟶ CommRingCat.of (↥B × ↥C) :=
+  CommRingCat.ofHom (u.hom.prod v.hom)
+
+@[simp]
+private lemma comp_prodLift {A' A B C : CommRingCat.{u}} (g : A' ⟶ A) (u : A ⟶ B) (v : A ⟶ C) :
+    g ≫ prodLift u v = prodLift (g ≫ u) (g ≫ v) := rfl
+
+@[reassoc (attr := simp)]
+private lemma prodLift_comp_pr₁ {A B C : CommRingCat.{u}} (u : A ⟶ B) (v : A ⟶ C) :
+    prodLift u v ≫ pr₁ B C = u := rfl
+
+@[reassoc (attr := simp)]
+private lemma prodLift_comp_pr₂ {A B C : CommRingCat.{u}} (u : A ⟶ B) (v : A ⟶ C) :
+    prodLift u v ≫ pr₂ B C = v := rfl
+
+/-- (Implementation.) The pair of restriction maps `Γ(X, U ⊔ V) ⟶ Γ(X, U) × Γ(X, V)`. -/
+private def resProd (U V : X.Opens) : Γ(X, U ⊔ V) ⟶ CommRingCat.of (↥Γ(X, U) × ↥Γ(X, V)) :=
+  prodLift (X.presheaf.map (homOfLE (le_sup_left : U ≤ U ⊔ V)).op)
+    (X.presheaf.map (homOfLE (le_sup_right : V ≤ U ⊔ V)).op)
+
+/-- (Implementation.) Restriction of the first factor of `Γ(X, U) × Γ(X, V)` to `U ⊓ V`. -/
+private def resFst (U V : X.Opens) : CommRingCat.of (↥Γ(X, U) × ↥Γ(X, V)) ⟶ Γ(X, U ⊓ V) :=
+  pr₁ _ _ ≫ X.presheaf.map (homOfLE (inf_le_left : U ⊓ V ≤ U)).op
+
+/-- (Implementation.) Restriction of the second factor of `Γ(X, U) × Γ(X, V)` to `U ⊓ V`. -/
+private def resSnd (U V : X.Opens) : CommRingCat.of (↥Γ(X, U) × ↥Γ(X, V)) ⟶ Γ(X, U ⊓ V) :=
+  pr₂ _ _ ≫ X.presheaf.map (homOfLE (inf_le_right : U ⊓ V ≤ V)).op
+
+private lemma resProd_injective (U V : X.Opens) : Function.Injective (resProd U V) :=
+  fun s t h => X.sheaf.eq_of_locally_eq₂ (homOfLE le_sup_left) (homOfLE le_sup_right) le_rfl s t
+    (congrArg Prod.fst h) (congrArg Prod.snd h)
+
+private lemma exists_resProd_eq (U V : X.Opens) (x : ↥Γ(X, U) × ↥Γ(X, V))
+    (hx : resFst U V x = resSnd U V x) : ∃ y : Γ(X, U ⊔ V), resProd U V y = x := by
+  refine ⟨(TopCat.Sheaf.objSupIsoProdEqLocus X.sheaf U V).inv ⟨x, hx⟩, Prod.ext ?_ ?_⟩
+  · exact TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst X.sheaf U V ⟨x, hx⟩
+  · exact TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd X.sheaf U V ⟨x, hx⟩
+
+private lemma resProd_comp_resFst (U V : X.Opens) :
+    resProd U V ≫ resFst U V = resProd U V ≫ resSnd U V := by
+  simp only [resProd, resFst, resSnd, prodLift_comp_pr₁_assoc, prodLift_comp_pr₂_assoc,
+    ← Functor.map_comp, ← op_comp]
+  rfl
+
+private lemma map_comp_app {Y : Scheme.{u}} (p : Y ⟶ X) {U W : X.Opens} (h : U ≤ W) :
+    X.presheaf.map (homOfLE h).op ≫ p.app U =
+      p.app W ≫ Y.presheaf.map (homOfLE (Scheme.Hom.preimage_mono p h)).op := by
+  simp only [Scheme.Hom.app_eq_appLE, Scheme.Hom.map_appLE, Scheme.Hom.appLE_map]
+
+/-- (Implementation.) The Mayer-Vietoris step: if the base-change square is a pushout over `U`,
+over `V` and over `U ⊓ V`, then it is a pushout over `U ⊔ V`. -/
+private lemma isPushoutApp_sup (φ : R ⟶ R') (f : X ⟶ Spec R) [Flat (Spec.map φ)] {U V : X.Opens}
+    (hU : IsPushoutApp φ f U) (hV : IsPushoutApp φ f V) (hUV : IsPushoutApp φ f (U ⊓ V)) :
+    IsPushoutApp φ f (U ⊔ V) := by
+  have hφ : φ.hom.Flat := Flat.SpecMap_iff.mp ‹_›
+  unfold IsPushoutApp at hU hV hUV ⊢
+  set Y := pullback f (Spec.map φ)
+  set p : Y ⟶ X := pullback.fst f (Spec.map φ)
+  set q : Y ⟶ Spec R' := pullback.snd f (Spec.map φ)
+  have hB : IsPushout
+      (prodLift ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ U le_top)
+        ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ V le_top)) φ
+      (prodLift (pr₁ _ _ ≫ p.app U) (pr₂ _ _ ≫ p.app V))
+      (prodLift ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ U) le_top)
+        ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ V) le_top)) :=
+    CommRingCat.isPushout_prod hU hV
+  have e₁ : ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ (U ⊔ V) le_top) ≫ resProd U V =
+      prodLift ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ U le_top)
+        ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ V le_top) := by
+    simp only [resProd, comp_prodLift, Category.assoc, Scheme.Hom.appLE_map]
+  have e₂ : prodLift ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ U le_top)
+        ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ V le_top) ≫ resFst U V =
+      (Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ (U ⊓ V) le_top := by
+    simp only [resFst, prodLift_comp_pr₁_assoc, Category.assoc, Scheme.Hom.appLE_map]
+  have e₃ : prodLift ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ U le_top)
+        ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ V le_top) ≫ resSnd U V =
+      (Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ (U ⊓ V) le_top := by
+    simp only [resSnd, prodLift_comp_pr₂_assoc, Category.assoc, Scheme.Hom.appLE_map]
+  have e₁' : ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ (U ⊔ V)) le_top) ≫
+        resProd (p ⁻¹ᵁ U) (p ⁻¹ᵁ V) =
+      prodLift ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ U) le_top)
+        ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ V) le_top) := by
+    simp only [resProd, comp_prodLift, Category.assoc, Scheme.Hom.appLE_map]
+  have e₂' : prodLift ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ U) le_top)
+        ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ V) le_top) ≫
+        resFst (p ⁻¹ᵁ U) (p ⁻¹ᵁ V) =
+      (Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ (U ⊓ V)) le_top := by
+    simp only [resFst, prodLift_comp_pr₁_assoc, Category.assoc, Scheme.Hom.appLE_map]
+    rfl
+  have e₃' : prodLift ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ U) le_top)
+        ((Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ V) le_top) ≫
+        resSnd (p ⁻¹ᵁ U) (p ⁻¹ᵁ V) =
+      (Scheme.ΓSpecIso R').inv ≫ q.appLE ⊤ (p ⁻¹ᵁ (U ⊓ V)) le_top := by
+    simp only [resSnd, prodLift_comp_pr₂_assoc, Category.assoc, Scheme.Hom.appLE_map]
+    rfl
+  have hα : resProd U V ≫ prodLift (pr₁ _ _ ≫ p.app U) (pr₂ _ _ ≫ p.app V) =
+      p.app (U ⊔ V) ≫ resProd (p ⁻¹ᵁ U) (p ⁻¹ᵁ V) := by
+    simp only [resProd, comp_prodLift, prodLift_comp_pr₁_assoc, prodLift_comp_pr₂_assoc,
+      map_comp_app p le_sup_left, map_comp_app p le_sup_right]
+  have hβ₁ : resFst U V ≫ p.app (U ⊓ V) =
+      prodLift (pr₁ _ _ ≫ p.app U) (pr₂ _ _ ≫ p.app V) ≫ resFst (p ⁻¹ᵁ U) (p ⁻¹ᵁ V) := by
+    simp only [resFst, Category.assoc, prodLift_comp_pr₁_assoc, map_comp_app p inf_le_left]
+  have hβ₂ : resSnd U V ≫ p.app (U ⊓ V) =
+      prodLift (pr₁ _ _ ≫ p.app U) (pr₂ _ _ ≫ p.app V) ≫ resSnd (p ⁻¹ᵁ U) (p ⁻¹ᵁ V) := by
+    simp only [resSnd, Category.assoc, prodLift_comp_pr₂_assoc, map_comp_app p inf_le_right]
+  exact CommRingCat.isPushout_of_isEqualizer hφ e₁ e₂ e₃ e₁' e₂' e₃'
+    (resProd_comp_resFst U V) (resProd_injective U V) (exists_resProd_eq U V)
+    (resProd_comp_resFst (p ⁻¹ᵁ U) (p ⁻¹ᵁ V)) (resProd_injective (p ⁻¹ᵁ U) (p ⁻¹ᵁ V))
+    hα hβ₁ hβ₂ hB hUV (commSq_app φ f (U ⊔ V))
+
+private lemma isPushoutApp_bot (φ : R ⟶ R') (f : X ⟶ Spec R) : IsPushoutApp φ f ⊥ :=
+  isPushout_app_of_isAffineOpen φ f (isAffineOpen_bot X)
+
+private lemma isPushoutApp_finsetSup (φ : R ⟶ R') (f : X ⟶ Spec R) [IsSeparated f]
+    [Flat (Spec.map φ)] :
+    ∀ (n : ℕ) (s : Finset X.Opens), s.card ≤ n → (∀ a ∈ s, IsAffineOpen a) →
+      IsPushoutApp φ f (s.sup id) := by
+  classical
+  have hsep : IsSeparated (terminal.from X) := by
+    rw [show terminal.from X = f ≫ terminal.from (Spec R) from Subsingleton.elim _ _]
+    infer_instance
+  intro n
+  induction n with
+  | zero =>
+    intro s hs _
+    rw [Finset.card_eq_zero.mp (Nat.le_zero.mp hs), Finset.sup_empty]
+    exact isPushoutApp_bot φ f
+  | succ n ih =>
+    intro s hs haff
+    rcases s.eq_empty_or_nonempty with rfl | ⟨a, ha⟩
+    · rw [Finset.sup_empty]
+      exact isPushoutApp_bot φ f
+    · obtain ⟨t, hat, rfl⟩ : ∃ t : Finset X.Opens, a ∉ t ∧ s = insert a t :=
+        ⟨s.erase a, Finset.notMem_erase _ _, (Finset.insert_erase ha).symm⟩
+      have hcard : t.card ≤ n := by
+        have := Finset.card_insert_of_notMem hat
+        omega
+      have haffa : IsAffineOpen a := haff a (Finset.mem_insert_self _ _)
+      have hafft : ∀ b ∈ t, IsAffineOpen b := fun b hb => haff b (Finset.mem_insert_of_mem hb)
+      rw [Finset.sup_insert]
+      refine isPushoutApp_sup φ f (isPushout_app_of_isAffineOpen φ f haffa) (ih t hcard hafft) ?_
+      have himg : id a ⊓ t.sup id = (t.image (fun b => a ⊓ b)).sup id := by
+        rw [Finset.sup_inf_distrib_left, Finset.sup_image]
+        rfl
+      rw [himg]
+      refine ih _ (le_trans Finset.card_image_le hcard) fun b hb => ?_
+      obtain ⟨c, hc, rfl⟩ := Finset.mem_image.mp hb
+      exact haffa.inf (hafft c hc)
+
+/-- **Global sections and flat base change of the ground ring**, over a quasi-compact open.
+
+For a separated `R`-scheme `X`, a quasi-compact open `U ⊆ X` and a flat ring map `φ : R ⟶ R'`,
+the sections of `X ×_{Spec R} Spec R'` over the preimage of `U` are the base change along `φ` of
+the sections of `X` over `U`. -/
+@[stacks 02KH]
+theorem isPushout_app_of_isCompact (φ : R ⟶ R') (f : X ⟶ Spec R) [IsSeparated f]
+    [Flat (Spec.map φ)] {U : X.Opens} (hU : IsCompact (U : Set X)) :
+    IsPushout ((Scheme.ΓSpecIso R).inv ≫ f.appLE ⊤ U le_top) φ
+      ((pullback.fst f (Spec.map φ)).app U)
+      ((Scheme.ΓSpecIso R').inv ≫ (pullback.snd f (Spec.map φ)).appLE ⊤
+        (pullback.fst f (Spec.map φ) ⁻¹ᵁ U) le_top) := by
+  classical
+  obtain ⟨s, hs, rfl⟩ := isCompact_iff_finite_and_eq_biUnion_affineOpens.mp hU
+  have hsup : (⨆ i ∈ s, (i : X.Opens)) =
+      (hs.toFinset.image (fun i : X.affineOpens => (i : X.Opens))).sup id := by
+    rw [Finset.sup_id_eq_sSup, Finset.coe_image, Set.Finite.coe_toFinset, sSup_image]
+  rw [hsup]
+  refine isPushoutApp_finsetSup φ f _ _ le_rfl fun a ha => ?_
+  obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp ha
+  exact i.2
+
+end AlgebraicGeometry
