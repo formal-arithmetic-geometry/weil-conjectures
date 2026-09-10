@@ -1,0 +1,1685 @@
+% This file is a chapter fragment, in the same style as the other files under
+% version/detailed/.  It is included by version/detailed.tex and must not
+% contain a preamble of its own.
+%
+% Contents: the chapter which supplies the three remaining inputs of section
+% 2.6 of the curve estimates -- the existence of a symmetric ample line bundle
+% on an abelian variety, the positivity of the top self-intersection number of
+% an ample line bundle, and the behaviour of intersection numbers under a
+% finite surjective morphism -- and deduces from them, together with the
+% formula [n]^*L = L^(n^2) of the previous chapter, that [n] is finite, flat
+% and surjective for every n nonzero and that its degree is n^(2g).
+%
+% The intersection-number layer is built here from scratch, by the Snapper
+% route: the Euler characteristic of a coherent sheaf is the one input taken on
+% trust, and everything above it -- numerical polynomials, Snapper's theorem,
+% multilinearity, symmetry, the projection formula, ampleness and positivity --
+% is proved.
+%
+% Labels follow the project convention <type>:deg-<topic>.
+
+\chapter{Ampleness, intersection numbers and the degree of $[n]$}
+\label{chap:deg}
+
+This chapter completes \Cref{sec:av-cube} of \Cref{chap:av-isogeny}.  What is
+proved here is:
+
+\begin{itemize}
+  \item \emph{Intersection numbers.}  For line bundles $L_1,\dots,L_d$ on a
+  projective scheme $X$ over an algebraically closed field, the integer
+  $(L_1\cdots L_d)$ is defined (\Cref{def:deg-intersection}) as the coefficient
+  of $m_1m_2\cdots m_d$ in the Snapper polynomial
+  $(m_1,\dots,m_d)\mapsto\chi(X,L_1^{\otimes m_1}\otimes\cdots\otimes
+  L_d^{\otimes m_d})$, and is proved to be symmetric
+  (\Cref{lem:deg-intersection-symmetric}) and multilinear
+  (\Cref{thm:deg-intersection-multilinear}).
+  \item \emph{The projection formula},
+  \Cref{prop:deg-projection-formula}: $(f^*L_1\cdots f^*L_d)=\deg
+  f\cdot(L_1\cdots L_d)$ for a finite surjective morphism $f$ of projective
+  integral schemes of dimension $d$.  This is
+  \Cref{prop:av-degree-intersection}.
+  \item \emph{Positivity}, \Cref{prop:deg-ample-positive}: $(L^g)>0$ for an
+  ample line bundle $L$ on a projective scheme of dimension $g$.  This is
+  \Cref{prop:av-ample-self-intersection}.
+  \item \emph{A symmetric ample line bundle},
+  \Cref{prop:deg-symmetric-ample}: every abelian variety carries one.  This is
+  \Cref{prop:av-symmetric-ample}.
+  \item \emph{The isogeny theorem}, \Cref{thm:deg-isogeny}: for every $n\neq0$
+  the morphism $[n]$ is finite, flat and surjective.  This is
+  \Cref{thm:av-isogeny-general}.
+  \item \emph{The degree formula}, \Cref{thm:deg-degree-formula}:
+  $\deg[n]=n^{2g}$.  This is \Cref{thm:av-degree-formula}.
+\end{itemize}
+
+The last two are the point of the chapter; the first four are what they are
+proved from.  The one further input is
+\Cref{thm:cube-mulby-pullback} of \Cref{chap:cube}, which for a symmetric line
+bundle $L$ on an abelian variety gives $[n]^*L\cong L^{\otimes n^2}$; it is
+used as a proved result and is not restated here.
+
+Everything is built on \emph{one} unproved analytic input, isolated in
+\Cref{sec:deg-euler}: the Euler characteristic $\chi(X,F)$ of a coherent sheaf
+on a projective scheme over a field, that is the finite-dimensionality of the
+cohomology groups, their vanishing above the dimension, and the additivity of
+$\chi$ on short exact sequences.  Three further statements are left unproved
+and each is marked where it occurs: the invariance of $\chi$ along a finite
+morphism together with the projection formula for the direct image
+(\Cref{prop:deg-euler-finite-morphism}), the projectivity of an abelian variety
+(\Cref{prop:deg-abelian-projective}), and miracle flatness
+(\Cref{prop:deg-miracle-flatness}).  Two more are quoted from the standard
+theory of ample sheaves and of coherent sheaves on a noetherian scheme
+(\Cref{lem:deg-ample-basic} and \Cref{lem:deg-devissage}).  Nothing else in
+this chapter is asserted without proof.  \Cref{sec:deg-cost} counts what all of
+it would cost to formalise, and is written so as to add to the count of
+\Cref{sec:cube-cost} rather than to repeat it.
+
+The route is Snapper's, as presented by Kleiman
+\cite[\S1]{KleimanAmpleness}; the abelian-variety statements follow
+\cite[\S6]{MumfordAbelianVarieties} and \cite[I, \S7]{MilneAbelianVarieties}.
+Everything is written out in full, on the assumption that the reader has to
+formalise from it and should not have to consult anything else.
+
+\statusnote{The scope question recorded in \Cref{sec:av-cube} --- whether this
+project builds the line-bundle and intersection-number layer of algebraic
+geometry, or quotes $\deg[n]=n^{2g}$ as an external input --- has been settled
+in favour of building it.  Nothing in this chapter is conditional on it.  What
+is \emph{not} settled is when the Lean layer that \Cref{sec:deg-cost} and
+\Cref{sec:cube-cost} price will be built; those two sections are written so
+that the decision can be taken on their numbers.}
+
+\section{Conventions}\label{sec:deg-conventions}
+
+Throughout this chapter $k$ is an algebraically closed field; in particular it
+is infinite, which is used in \Cref{lem:deg-general-hyperplane} and nowhere
+else.  A \emph{variety} over $k$ is a $k$-scheme which is separated, of finite
+type and geometrically integral over $k$, as in
+\Cref{sec:cube-conventions}; in particular it is integral, irreducible,
+connected and non-empty, and its closed points are exactly its $k$-rational
+points and are dense in it.
+
+All schemes occurring below are of finite type over $k$, hence noetherian, and
+all sheaves of modules occurring below are coherent.  We write
+$\mathbf P^N:=\mathbf P^N_k$ for projective $N$-space over $k$ and $\O(1)$ for
+its Serre twisting sheaf.  A $k$-scheme is \emph{projective} if it admits a
+closed immersion into some $\mathbf P^N$; a projective $k$-scheme is proper
+over $k$.
+
+For a line bundle --- that is, an invertible sheaf of $\O_X$-modules --- we
+write $L^{\otimes m}$ for its $m$-th tensor power, $m\in\Z$, with
+$L^{\otimes0}=\O_X$ and $L^{\otimes-1}=L^{-1}$ the inverse.  Given a tuple
+$\underline L=(L_1,\dots,L_r)$ of line bundles on $X$ and
+$\underline m=(m_1,\dots,m_r)\in\Z^r$ we abbreviate
+\[
+  \underline L^{\underline m}:=L_1^{\otimes m_1}\otimes\cdots\otimes
+  L_r^{\otimes m_r}.
+\]
+For a coherent sheaf $F$ we write $\operatorname{Supp}F$ for its support, a
+closed subset of $X$, and $\dim F:=\dim\operatorname{Supp}F$, with
+$\dim\emptyset:=-1$ so that $\dim F=-1$ exactly when $F=0$.  For a morphism
+$u\colon X'\to X$ and a sheaf $F$ on $X$ we write $u^*F$ for the pullback and,
+for $u$ a closed immersion, $F|_{X'}$ for $u^*F$.
+
+\begin{warning}[Composition order]\label{warn:deg-composition-order}
+Composition is written in the classical order: $g\circ f$ means ``first $f$,
+then $g$''.  This is the convention of \Cref{chap:av-isogeny} and
+\Cref{chap:cube} --- see \Cref{warn:cube-composition-order} --- and it is the
+opposite of the one used in the Lean sources, which write the same morphism as
+\texttt{f} $\gg$ \texttt{g}.  Every composite in this chapter therefore
+appears reversed in Lean.
+\end{warning}
+
+\begin{warning}[What the parallel layer supplies]
+\label{warn:deg-parallel-layer}
+As in \Cref{warn:cube-parallel-layer}, the tensor product of sheaves of modules
+over a scheme, invertible sheaves and the Picard group $\mathrm{Pic}(X)$ are
+being built in this project in parallel with this chapter, so they are treated
+here as available and are \emph{not} counted as missing in
+\Cref{sec:deg-cost}.  The same holds for the cohomology of a sheaf of modules
+on a scheme and the direct images along a proper morphism: those are counted in
+\Cref{sec:cube-cost}, as notions (N4) and (N6) there, and
+\Cref{sec:deg-cost} charges only what sits on top of them.
+\end{warning}
+
+\section{The Euler characteristic}\label{sec:deg-euler}
+
+Everything in this chapter rests on one number attached to a coherent sheaf on
+a projective scheme over a field.  This section states what is needed about it,
+and states it once, so that no later proof appeals to an unnamed cohomological
+fact.
+
+\begin{proposition}[Cohomology of a coherent sheaf on a projective scheme]
+\label{prop:deg-cohomology-finiteness}
+Let $X$ be a projective scheme over a field $k$ and let $F$ be a coherent sheaf
+of $\O_X$-modules.  Then:
+\begin{enumerate}
+  \item each $H^i(X,F)$ is a finite-dimensional $k$-vector space;
+  \item $H^i(X,F)=0$ for $i>\dim X$, and for $i<0$;
+  \item a short exact sequence $0\to F'\to F\to F''\to0$ of coherent sheaves
+  induces a long exact sequence
+  \[
+    0\to H^0(X,F')\to H^0(X,F)\to H^0(X,F'')\to H^1(X,F')\to\cdots
+  \]
+  of $k$-vector spaces;
+  \item if $X$ is affine then $H^i(X,F)=0$ for $i>0$.
+\end{enumerate}
+\openobligation{AlgebraicGeometry: the cohomology of a coherent sheaf of
+modules on a scheme, together with its finite dimensionality over the base
+field for a proper scheme and its vanishing above the dimension. The
+cohomology functors themselves are notion N4 of the formalisation cost section
+of the chapter on the theorem of the cube; what is new here is the finiteness
+and the vanishing.}
+\end{proposition}
+\begin{proof}
+Not proved here.  Part (1) is \cite[III, \S5]{Hartshorne}, part (2) is
+Grothendieck's vanishing theorem \cite[III, \S2]{Hartshorne}, part (3)
+is the long exact sequence of derived functors, and part (4) is Serre's
+vanishing theorem on an affine scheme, \cite[III, \S3]{Hartshorne}.
+Parts (1) and (2) hold more generally for a proper scheme over a field; only
+the projective case is used below.
+\end{proof}
+
+\begin{definition}[Euler characteristic]\label{def:deg-euler}
+\uses{prop:deg-cohomology-finiteness}
+Let $X$ be a projective scheme over a field $k$ and let $F$ be a coherent sheaf
+of $\O_X$-modules.  The \emph{Euler characteristic} of $F$ is
+\[
+  \chi(X,F):=\sum_{i\geq0}(-1)^i\dim_kH^i(X,F)\;\in\;\Z .
+\]
+The sum is finite and each term is finite by
+\Cref{prop:deg-cohomology-finiteness}(1) and (2), so $\chi(X,F)$ is a
+well-defined integer.  We write $\chi(F)$ when $X$ is clear.
+\end{definition}
+
+\begin{lemma}[The Euler characteristic is additive]\label{lem:deg-euler-additive}
+\uses{def:deg-euler}
+Let $X$ be a projective scheme over a field $k$ and let
+$0\to F'\to F\to F''\to0$ be a short exact sequence of coherent sheaves on
+$X$.  Then
+\[
+  \chi(X,F)=\chi(X,F')+\chi(X,F'').
+\]
+In particular $\chi(X,0)=0$, and if $F'\cong F''$ then $\chi(F')=\chi(F'')$.
+\end{lemma}
+\begin{proof}
+\uses{prop:deg-cohomology-finiteness, def:deg-euler}
+By \Cref{prop:deg-cohomology-finiteness}(3) the sequence
+\[
+  0\to H^0(F')\to H^0(F)\to H^0(F'')\to H^1(F')\to H^1(F)\to\cdots
+\]
+is exact, and by parts (1) and (2) of the same proposition it consists of
+finite-dimensional $k$-vector spaces and has only finitely many non-zero
+terms.  For a bounded exact sequence $0\to V_0\to V_1\to\cdots\to V_n\to0$ of
+finite-dimensional vector spaces one has $\sum_j(-1)^j\dim V_j=0$: this is the
+rank--nullity theorem applied inductively, or the statement that the Euler
+characteristic of an acyclic bounded complex vanishes.  Applying it to the
+long exact sequence and grouping the terms in threes gives the assertion.
+Invariance under isomorphism is the case $F''=0$ of the sequence
+$0\to F'\to F\to0\to0$.
+\end{proof}
+
+\begin{lemma}[Euler characteristic of a finite scheme]
+\label{lem:deg-euler-affine}
+\uses{def:deg-euler}
+Let $X$ be a projective scheme over $k$ which is affine, and let $F$ be
+coherent on $X$.  Then $\chi(X,F)=\dim_k\Gamma(X,F)$.  In particular
+$\chi(X,\O_X)=\dim_k\Gamma(X,\O_X)$, which is $>0$ if $X\neq\emptyset$.
+\end{lemma}
+\begin{proof}
+\uses{prop:deg-cohomology-finiteness, def:deg-euler}
+By \Cref{prop:deg-cohomology-finiteness}(4) all higher cohomology vanishes, so
+only the $i=0$ term survives and $\chi(X,F)=\dim_kH^0(X,F)=\dim_k\Gamma(X,F)$.
+For $F=\O_X$ and $X\neq\emptyset$ the ring $\Gamma(X,\O_X)$ is non-zero, so its
+dimension over $k$ is at least one.
+\end{proof}
+
+\begin{proposition}[The Euler characteristic along a finite morphism]
+\label{prop:deg-euler-finite-morphism}
+Let $f\colon X\to Y$ be a finite morphism of projective schemes over $k$.
+Then:
+\begin{enumerate}
+  \item for every coherent sheaf $F$ on $X$ the direct image $f_*F$ is coherent
+  and $H^i(X,F)\cong H^i(Y,f_*F)$ for every $i$; in particular
+  $\chi(X,F)=\chi(Y,f_*F)$;
+  \item for every coherent $F$ on $X$ and every line bundle $N$ on $Y$ there
+  is an isomorphism $f_*(F\otimes f^*N)\cong(f_*F)\otimes N$, natural in $F$
+  and in $N$.
+\end{enumerate}
+\openobligation{AlgebraicGeometry: the invariance of cohomology under the
+direct image along an affine morphism, and the projection formula for the
+direct image. The projection formula is already charged as notion N5 of the
+formalisation cost section of the chapter on the theorem of the cube; what is
+new here is the affine invariance.}
+\end{proposition}
+\begin{proof}
+Not proved here.  A finite morphism is affine, so (1) is
+\cite[III, \S4 and \S8]{Hartshorne}: the higher direct images
+of a quasi-coherent sheaf along an affine morphism vanish, whence the Leray
+spectral sequence degenerates to the stated isomorphism; coherence of $f_*F$
+is the finiteness of $f$.  Part (2) is the projection formula, which for $N$
+locally free of finite rank is a local computation, \cite[II, \S5]{Hartshorne}.
+\end{proof}
+
+\begin{remark}[Why $\chi$ and not $h^0$]\label{rem:deg-why-chi}
+The whole point of working with $\chi$ rather than with
+$h^0=\dim_kH^0$ is \Cref{lem:deg-euler-additive}: $h^0$ is only left exact,
+whereas $\chi$ is exactly additive, and the entire theory below is an exercise
+in additivity.  The price is
+\Cref{prop:deg-cohomology-finiteness}, that is, cohomology in \emph{all}
+degrees, which \Cref{sec:cube-cost} already charges as notion (N4); the
+chapter on the theorem of the cube needed degrees zero and one only, and this
+one needs all of them.  There is no cheaper route: $\chi$ is what makes
+$m\mapsto\chi(L^{\otimes m})$ polynomial, and $h^0$ is not polynomial in $m$
+for small $m$.
+\end{remark}
+
+\section{Numerical polynomials}\label{sec:deg-numerical}
+
+This section is pure combinatorics: no scheme occurs in it.  It is separated
+out because it is the only part of the chapter that can be formalised today,
+and because the whole definition of an intersection number is an application of
+\Cref{lem:deg-difference-explicit}.
+
+\begin{definition}[Numerical polynomial and the difference operators]
+\label{def:deg-numerical}
+Let $r\geq0$.  A function $P\colon\Z^r\to\Z$ is a \emph{numerical polynomial of
+total degree at most $d$} if there is a polynomial
+$\widetilde P\in\mathbf Q[T_1,\dots,T_r]$ of total degree at most $d$ with
+$P(\underline m)=\widetilde P(\underline m)$ for every $\underline m\in\Z^r$.
+For $1\leq j\leq r$ the \emph{$j$-th difference operator} is
+\[
+  (\Delta_jP)(\underline m):=P(\underline m+e_j)-P(\underline m),
+\]
+where $e_j$ is the $j$-th standard basis vector of $\Z^r$; more generally, for
+$v\in\Z^r$ we write $(\Delta_vP)(\underline m):=P(\underline m+v)-P(\underline
+m)$, so that $\Delta_j=\Delta_{e_j}$.  The operators $\Delta_v$ commute with
+one another, being differences of the commuting shift operators
+$(T_vP)(\underline m):=P(\underline m+v)$.
+\end{definition}
+
+\begin{lemma}[The representing polynomial is unique]
+\label{lem:deg-numerical-unique}
+\uses{def:deg-numerical}
+If $\widetilde P,\widetilde Q\in\mathbf Q[T_1,\dots,T_r]$ agree at every point
+of $\Z^r$ then $\widetilde P=\widetilde Q$.  Consequently a numerical
+polynomial $P$ determines $\widetilde P$, hence its total degree and each of
+its coefficients, unambiguously.
+\end{lemma}
+\begin{proof}
+It suffices to show that a polynomial $R\in\mathbf Q[T_1,\dots,T_r]$ vanishing
+on $\Z^r$ is zero, and this is an induction on $r$.  For $r=0$ there is
+nothing to prove.  For $r\geq1$ write $R=\sum_{i}R_i(T_1,\dots,T_{r-1})T_r^i$.
+For each fixed $\underline a\in\Z^{r-1}$ the one-variable polynomial
+$\sum_iR_i(\underline a)T_r^i$ has infinitely many roots, namely every integer,
+hence is zero; so every $R_i$ vanishes on $\Z^{r-1}$ and is zero by induction.
+\end{proof}
+
+\begin{lemma}[Differences lower the degree]
+\label{lem:deg-difference-lowers-degree}
+\uses{def:deg-numerical}
+Let $P\colon\Z^r\to\Z$ be a numerical polynomial of total degree at most $d$
+and let $v\in\Z^r$.  Then $\Delta_vP$ is a numerical polynomial of total degree
+at most $d-1$; here ``of total degree at most $-1$'' means ``identically
+zero''.  Consequently:
+\begin{enumerate}
+  \item $\Delta_{v_1}\cdots\Delta_{v_{d+1}}P=0$ for any $d+1$ vectors
+  $v_1,\dots,v_{d+1}\in\Z^r$;
+  \item $\Delta_{v_1}\cdots\Delta_{v_d}P$ is a constant function for any $d$
+  vectors $v_1,\dots,v_d\in\Z^r$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\uses{lem:deg-numerical-unique}
+Write $\widetilde P=\sum_{e\leq d}\widetilde P_e$ with $\widetilde P_e$
+homogeneous of degree $e$.  Then
+$\widetilde P(T+v)-\widetilde P(T)$ is a polynomial of total degree at most
+$d$ whose degree-$d$ homogeneous part is
+$\widetilde P_d(T+v)-\widetilde P_d(T)$; expanding
+$\widetilde P_d(T+v)$ by multilinearity of the monomials, every term other
+than $\widetilde P_d(T)$ involves at least one coordinate of $v$ and therefore
+has degree at most $d-1$ in $T$.  So the degree-$d$ part of the difference
+vanishes and $\Delta_vP$ is represented by a polynomial of total degree at
+most $d-1$; it takes integer values because $P$ does.  If $d=0$ then
+$\widetilde P$ is a constant and $\Delta_vP=0$.  Assertions (1) and (2) follow
+by applying this $d+1$ respectively $d$ times, using
+\Cref{lem:deg-numerical-unique} to speak of \emph{the} total degree at each
+step; a numerical polynomial of total degree at most $0$ is a constant.
+\end{proof}
+
+\begin{lemma}[Vanishing differences characterise numerical polynomials]
+\label{lem:deg-difference-criterion}
+\uses{def:deg-numerical}
+Let $P\colon\Z^r\to\Z$ and $d\geq-1$ be such that
+$\Delta_{j_1}\Delta_{j_2}\cdots\Delta_{j_{d+1}}P=0$ for every choice of
+indices $j_1,\dots,j_{d+1}\in\{1,\dots,r\}$, repetitions allowed.  Then $P$ is
+a numerical polynomial of total degree at most $d$.
+\end{lemma}
+\begin{proof}
+Induction on $r$, and inside it induction on $d$.
+
+\emph{The case $r=1$.}  We must show: if $\Delta^{d+1}P=0$ then $P$ is a
+numerical polynomial of degree at most $d$.  For $d=-1$ this says $P=0$.  Let
+$d\geq0$ and assume the statement for $d-1$.  Then $\Delta^{d}(\Delta P)=0$, so
+by the inductive hypothesis $\Delta P$ is a numerical polynomial of degree at
+most $d-1$.  Set $c_i:=(\Delta^iP)(0)$ for $0\leq i\leq d$; these are integers.
+We claim
+\[
+  P(m)=\sum_{i=0}^{d}c_i\binom{m}{i}\qquad(m\in\Z),
+\]
+where $\binom{m}{i}:=m(m-1)\cdots(m-i+1)/i!$, a polynomial of degree $i$ in $m$
+taking integer values on $\Z$.  Indeed, put
+$Q(m):=\sum_{i=0}^{d}c_i\binom{m}{i}$.  From the Pascal identity
+$\binom{m+1}{i}-\binom{m}{i}=\binom{m}{i-1}$ one gets
+$(\Delta Q)(m)=\sum_{i=1}^{d}c_i\binom{m}{i-1}$, and iterating,
+$(\Delta^jQ)(0)=c_j$ for every $j\leq d$; also $\Delta^{d+1}Q=0$.  So
+$R:=P-Q$ satisfies $\Delta^{d+1}R=0$ and $(\Delta^jR)(0)=0$ for every
+$j\leq d$.  We claim that any such $R$ is identically zero, which gives $P=Q$
+and finishes the case $r=1$.  The claim is an induction on $d$: for $d=-1$ it
+says $R=0$; for $d\geq0$ the function $\Delta R$ satisfies the same two
+hypotheses with $d$ replaced by $d-1$, since
+$(\Delta^j(\Delta R))(0)=(\Delta^{j+1}R)(0)=0$ for $j\leq d-1$, hence is
+identically zero by the inductive hypothesis; so $R$ is constant, and
+$R(0)=c_0-c_0=0$.  Thus $P=Q$ is a numerical polynomial of degree at most
+$d$.
+
+\emph{The inductive step in $r$.}  Let $r\geq2$ and assume the statement for
+$r-1$ variables and every $d$.  Fix $\underline m'=(m_2,\dots,m_r)$ and apply
+the case $r=1$ to $m_1\mapsto P(m_1,\underline m')$, whose $(d+1)$-st
+difference vanishes by hypothesis.  This gives
+\[
+  P(m_1,\underline m')=\sum_{i=0}^{d}c_i(\underline m')\binom{m_1}{i},
+  \qquad c_i(\underline m'):=(\Delta_1^iP)(0,\underline m').
+\]
+Each $c_i\colon\Z^{r-1}\to\Z$ satisfies the hypothesis of the lemma with $d$
+replaced by $d-i$: any $d-i+1$ difference operators in the variables
+$m_2,\dots,m_r$ applied to $c_i$ give $\Delta_1^i$ followed by those
+operators applied to $P$, evaluated at $m_1=0$, and that is a composite of
+$d+1$ difference operators applied to $P$, hence zero.  By the inductive
+hypothesis in $r$, each $c_i$ is a numerical polynomial of total degree at most
+$d-i$.  Therefore $P$ is represented by
+$\sum_{i\leq d}\widetilde c_i(T_2,\dots,T_r)\binom{T_1}{i}$, a polynomial of
+total degree at most $\max_i\bigl((d-i)+i\bigr)=d$.
+\end{proof}
+
+\begin{lemma}[The top difference as an alternating sum]
+\label{lem:deg-difference-explicit}
+\uses{def:deg-numerical}
+Let $P\colon\Z^r\to\Z$ be any function and let $v_1,\dots,v_d\in\Z^r$.  Then
+\[
+  (\Delta_{v_1}\cdots\Delta_{v_d}P)(\underline m)
+  =\sum_{S\subseteq\{1,\dots,d\}}(-1)^{d-\#S}\,
+   P\Bigl(\underline m+\sum_{i\in S}v_i\Bigr).
+\]
+Moreover, for $v,w\in\Z^r$ one has the operator identity
+\[
+  \Delta_{v+w}=\Delta_v+\Delta_w+\Delta_v\Delta_w .
+\]
+\end{lemma}
+\begin{proof}
+Write $T_v$ for the shift $(T_vP)(\underline m)=P(\underline m+v)$, so that
+$\Delta_v=T_v-\mathrm{id}$ and $T_vT_w=T_{v+w}$.  All these operators commute.
+Expanding the product $\prod_{i=1}^d(T_{v_i}-\mathrm{id})$ over the subsets $S$
+of $\{1,\dots,d\}$ on which the factor $T_{v_i}$ is chosen gives
+$\sum_S(-1)^{d-\#S}T_{\sum_{i\in S}v_i}$, which is the displayed formula.  For
+the second identity,
+\[
+  \Delta_v+\Delta_w+\Delta_v\Delta_w
+  =(T_v-\mathrm{id})+(T_w-\mathrm{id})+(T_v-\mathrm{id})(T_w-\mathrm{id})
+  =T_vT_w-\mathrm{id}=T_{v+w}-\mathrm{id}=\Delta_{v+w}.
+\]
+\end{proof}
+
+\section{Ample and very ample line bundles}\label{sec:deg-ample}
+
+Ampleness is used twice: to produce, on an abelian variety, a line bundle whose
+top self-intersection number is positive, and --- in the opposite direction ---
+to force a scheme carrying an ample \emph{trivial} bundle to be finite.  This
+section fixes the definition and collects the standard permanence properties;
+they are quoted, not proved, and \Cref{sec:deg-cost} counts them.
+
+\begin{definition}[Ample, very ample]\label{def:deg-ample}
+Let $X$ be a scheme of finite type over $k$ and let $L$ be a line bundle on
+$X$.
+\begin{itemize}
+  \item $L$ is \emph{ample} if for every coherent sheaf $F$ on $X$ there is an
+  integer $n_0$ such that $F\otimes L^{\otimes n}$ is generated by its global
+  sections for every $n\geq n_0$.
+  \item $L$ is \emph{very ample} if there are $N\geq0$ and an immersion
+  $i\colon X\to\mathbf P^N$ with $i^*\O(1)\cong L$.  If $X$ is proper over $k$
+  such an immersion is automatically a closed immersion.
+\end{itemize}
+A \emph{symmetric} line bundle on a commutative group scheme $G$ over $k$ is a
+line bundle $L$ with $[-1]^*L\cong L$, where $[-1]$ is the inversion morphism
+of \Cref{def:cube-mulby-int}.
+\end{definition}
+
+\begin{lemma}[Permanence properties of ampleness]\label{lem:deg-ample-basic}
+\uses{def:deg-ample}
+Let $X$ be a proper scheme over $k$ and let $L,M$ be line bundles on $X$.
+\begin{enumerate}
+  \item If $L$ is ample and $M$ is generated by its global sections then
+  $L\otimes M$ is ample.  In particular a tensor product of two ample line
+  bundles is ample.
+  \item For $n\geq1$: $L$ is ample if and only if $L^{\otimes n}$ is ample.
+  \item If $u\colon X'\to X$ is a finite morphism of proper $k$-schemes ---
+  in particular, if $u$ is a closed immersion or an isomorphism --- and $L$ is
+  ample, then $u^*L$ is ample.
+  \item $L$ is ample if and only if $L^{\otimes n}$ is very ample for some
+  $n\geq1$.  Consequently a proper $k$-scheme carrying an ample line bundle is
+  projective; and conversely $\O(1)$ is ample on $\mathbf P^N$, so by (3) every
+  projective $k$-scheme carries an ample line bundle.
+  \item If $L$ is ample then for every line bundle $M$ the bundle
+  $M\otimes L^{\otimes n}$ is very ample for all $n\gg0$.
+\end{enumerate}
+\openobligation{AlgebraicGeometry: ampleness and very ampleness of an
+invertible sheaf on a scheme, the notion of a sheaf generated by its global
+sections, and the permanence properties of ampleness listed here. Mathlib
+v4.33.1 has none of these.}
+\end{lemma}
+\begin{proof}
+Not proved here; all five are classical.  See \cite[II, \S7]{Hartshorne}, where
+(1), (2), (4) and (5) are proved for a scheme of finite type over a noetherian
+ring, and \cite[\S1]{KleimanAmpleness}.  Part (3) for a closed immersion is
+immediate from (4): compose the closed immersion with the one given by a very
+ample power of $L$.  For a general finite $u$ it is the standard descent of
+ampleness along a finite morphism, \cite[III, \S5]{Hartshorne}; only the case
+of a closed immersion and the case of an isomorphism are used below.
+\end{proof}
+
+\begin{lemma}[A proper affine scheme is finite]
+\label{lem:deg-proper-affine-finite}
+Let $X$ be a $k$-scheme which is proper over $k$ and affine.  Then
+$\Gamma(X,\O_X)$ is a finite-dimensional $k$-algebra, $X\cong\Spec
+\Gamma(X,\O_X)$ is finite over $k$, and $\dim X\leq0$.
+\end{lemma}
+\begin{proof}
+Since $X$ is affine, the counit of the adjunction between global sections and
+$\Spec$ is an isomorphism $X\cong\Spec\Gamma(X,\O_X)$.  Since $X\to\Spec k$ is
+universally closed and of finite type, $\Gamma(X,\O_X)$ is a finite
+$k$-algebra; this is
+\texttt{AlgebraicGeometry.finite\_appTop\_of\_universallyClosed}, which is in
+Mathlib \texttt{v4.33.1} and is already listed among the available inputs in
+\Cref{sec:cube-cost}.  A finite-dimensional $k$-algebra is artinian, so its
+spectrum is a finite discrete space and has dimension at most $0$.
+\end{proof}
+
+\section{Snapper's theorem}\label{sec:deg-snapper}
+
+\begin{lemma}[A hyperplane section avoiding the associated points]
+\label{lem:deg-general-hyperplane}
+Let $X$ be a projective scheme over the algebraically closed field $k$, let $L$
+be a very ample line bundle on $X$ --- that is, $L\cong i^*\O(1)$ for a closed
+immersion $i\colon X\to\mathbf P^N$ --- and let $F$ be a coherent sheaf on
+$X$.  Then there is a global section $s\in\Gamma(X,L)$ such that
+multiplication by $s$,
+\[
+  s\colon F\longrightarrow F\otimes L,
+\]
+is injective.  Its cokernel is $(F\otimes L)|_D$, where $D\subseteq X$ is the
+closed subscheme cut out by $s$, and $\operatorname{Supp}\bigl((F\otimes
+L)|_D\bigr)=\operatorname{Supp}F\cap D$ contains no generic point of an
+irreducible component of $\operatorname{Supp}F$.
+\end{lemma}
+\begin{proof}
+A noetherian scheme has only finitely many associated points --- the points
+$x$ whose local ring has $\m_x$ among the associated primes of $F_x$ --- and
+every generic point of an irreducible component of $\operatorname{Supp}F$ is
+one of them.  Let $x_1,\dots,x_t$ be the associated points of $F$ and let
+$i(x_1),\dots,i(x_t)$ be their images in $\mathbf P^N$.  A hyperplane
+$H=V\bigl(\sum_ja_jT_j\bigr)$, $\underline a\in k^{N+1}\setminus\{0\}$,
+contains $i(x_l)$ if and only if $\sum_ja_j\xi_j=0$ in the residue field
+$\kappa(i(x_l))$, where $\underline\xi$ is a system of homogeneous coordinates
+of $i(x_l)$; not all $\xi_j$ vanish, so this is a $k$-linear condition on
+$\underline a$ cutting out a \emph{proper} subspace $W_l\subsetneq k^{N+1}$.
+Since $k$ is infinite, $k^{N+1}$ is not the union of the finitely many proper
+subspaces $W_1,\dots,W_t$; choose $\underline a$ outside all of them and let
+$s\in\Gamma(X,L)$ be the image of the corresponding section
+$\sum_ja_jT_j\in\Gamma(\mathbf P^N,\O(1))$ under
+$\Gamma(\mathbf P^N,\O(1))\to\Gamma(X,i^*\O(1))=\Gamma(X,L)$.
+
+By construction the zero scheme $D$ of $s$ contains no associated point of
+$F$.  Injectivity of $s\colon F\to F\otimes L$ may be checked on stalks; at a
+point $x$ the map is, after trivialising $L$ near $x$, multiplication by an
+element $\sigma\in\O_{X,x}$ on $F_x$, and the kernel of that multiplication is
+non-zero for some $x$ only if $\sigma$ lies in an associated prime of $F_x$,
+which by the choice of $s$ happens for no $x$.  The cokernel is
+$(F\otimes L)\otimes\O_X/(s)=(F\otimes L)|_D$ by definition of $D$, and its
+support is $\operatorname{Supp}F\cap D$, which by construction misses the
+generic points of the irreducible components of $\operatorname{Supp}F$.
+\end{proof}
+
+\begin{theorem}[Snapper]\label{thm:deg-snapper}
+\uses{def:deg-euler, def:deg-numerical}
+Let $X$ be a projective scheme over the algebraically closed field $k$, let $F$
+be a coherent sheaf on $X$ and let $L_1,\dots,L_r$ be line bundles on $X$.
+Then
+\[
+  P_{F,\underline L}\colon\Z^r\longrightarrow\Z,\qquad
+  P_{F,\underline L}(\underline m):=
+  \chi\bigl(X,F\otimes\underline L^{\underline m}\bigr)
+\]
+is a numerical polynomial of total degree at most $\dim F$.
+\end{theorem}
+\begin{proof}
+\uses{lem:deg-euler-additive, lem:deg-difference-criterion,
+lem:deg-difference-lowers-degree, lem:deg-general-hyperplane,
+lem:deg-ample-basic}
+Write $d:=\dim F$.  We argue by induction on $d$, the statement being proved
+simultaneously for all $X$, all $r$, all tuples $\underline L$ and all
+coherent $F$ with $\dim F\leq d$.
+
+\emph{Base case $d=-1$.}  Then $F=0$, so $F\otimes\underline L^{\underline m}=0$
+and $P_{F,\underline L}=0$ by \Cref{lem:deg-euler-additive}.
+
+\emph{Reduction to very ample $L_j$.}  Fix an embedding $X\subseteq\mathbf P^N$
+and put $A:=\O(1)|_X$, a very ample line bundle on $X$.  For each $j$ the sheaf
+$L_j\otimes A^{\otimes n}$ is very ample for $n\gg0$ by
+\Cref{lem:deg-ample-basic}(5), so we may write
+$L_j\cong M_j\otimes N_j^{-1}$ with $M_j:=L_j\otimes A^{\otimes n_j}$ and
+$N_j:=A^{\otimes n_j}$ both very ample.  Consider the tuple
+$\underline M\underline N:=(M_1,\dots,M_r,N_1,\dots,N_r)$ of $2r$ very ample
+line bundles, and suppose the theorem is known for it, so that
+$Q:=P_{F,\underline M\underline N}$ is a numerical polynomial of total degree
+at most $d$ on $\Z^{2r}$.  Then
+\[
+  P_{F,\underline L}(\underline m)
+  =\chi\Bigl(F\otimes\bigotimes_jM_j^{\otimes m_j}\otimes
+  \bigotimes_jN_j^{\otimes(-m_j)}\Bigr)
+  =Q(m_1,\dots,m_r,-m_1,\dots,-m_r),
+\]
+and substituting the linear forms $m_j$ and $-m_j$ into a polynomial of total
+degree at most $d$ yields a polynomial of total degree at most $d$.  So it is
+enough to prove the theorem when every $L_j$ is very ample.
+
+\emph{The inductive step.}  Let $d\geq0$ and assume the theorem for all
+coherent sheaves of dimension at most $d-1$; let $F$ have $\dim F\leq d$ and
+let $L_1,\dots,L_r$ all be very ample.  Fix $j$.  By
+\Cref{lem:deg-general-hyperplane} applied to $F$ and $L_j$ there is a section
+$s$ of $L_j$ and a short exact sequence
+\[
+  0\longrightarrow F\stackrel{s}{\longrightarrow}F\otimes L_j
+  \longrightarrow G_j\longrightarrow0,\qquad
+  G_j:=(F\otimes L_j)|_{D_j},
+\]
+with $\dim G_j\leq d-1$: indeed $\operatorname{Supp}G_j$ is a closed subset of
+$\operatorname{Supp}F$ containing no generic point of an irreducible component
+of the latter, hence meets each such component in a proper closed subset, of
+strictly smaller dimension.  Tensoring the sequence with the invertible sheaf
+$\underline L^{\underline m}$ is exact and gives, by
+\Cref{lem:deg-euler-additive},
+\[
+  (\Delta_jP_{F,\underline L})(\underline m)
+  =\chi\bigl(F\otimes\underline L^{\underline m}\otimes L_j\bigr)
+  -\chi\bigl(F\otimes\underline L^{\underline m}\bigr)
+  =\chi\bigl(G_j\otimes\underline L^{\underline m}\bigr)
+  =P_{G_j,\underline L}(\underline m).
+\]
+By the inductive hypothesis $P_{G_j,\underline L}$ is a numerical polynomial of
+total degree at most $d-1$, so by
+\Cref{lem:deg-difference-lowers-degree}(1) any $d$ further difference operators
+annihilate it.  Hence any $d+1$ difference operators annihilate
+$P_{F,\underline L}$, and \Cref{lem:deg-difference-criterion} shows that
+$P_{F,\underline L}$ is a numerical polynomial of total degree at most $d$.
+\end{proof}
+
+\begin{remark}[Proper rather than projective]\label{rem:deg-snapper-proper}
+\Cref{thm:deg-snapper} holds for a proper scheme $X$ over $k$, with the same
+statement; see \cite[\S1]{KleimanAmpleness} and the chapter \emph{Chow homology
+and Chern classes} of \cite{stacks-project}.  The reduction to the projective
+case is by Chow's lemma, \Cref{thm:chow-lemma} of \Cref{chap:chow-lemma}, in
+the form \Cref{cor:chow-lemma-proper}, together with a d\'evissage on
+$\dim F$.  It is not carried out here, and it is not needed: every scheme on
+which this chapter forms an intersection number carries an ample line bundle
+and is therefore projective (\Cref{lem:deg-ample-basic}(4)).  The two places
+where this matters are \Cref{prop:deg-ample-positive}, whose hypothesis
+already contains an ample bundle, and \Cref{lem:deg-torsion-finite}, where the
+scheme is $A[n]$ and the ample bundle is the restriction of one on $A$.
+\end{remark}
+
+\section{Intersection numbers}\label{sec:deg-intersection}
+
+\begin{definition}[Intersection number]\label{def:deg-intersection}
+\uses{def:deg-euler}
+Let $X$ be a projective scheme over $k$, let $d\geq0$, let $L_1,\dots,L_d$ be
+line bundles on $X$ and let $F$ be a coherent sheaf on $X$.  The
+\emph{intersection number of $L_1,\dots,L_d$ with coefficients in $F$} is
+\[
+  (L_1\cdots L_d\cdot F):=
+  \sum_{S\subseteq\{1,\dots,d\}}(-1)^{d-\#S}\,
+  \chi\Bigl(X,F\otimes\bigotimes_{i\in S}L_i\Bigr)\;\in\;\Z .
+\]
+We write $(L_1\cdots L_d):=(L_1\cdots L_d\cdot\O_X)$, and
+$(L^d\cdot F):=(L\cdots L\cdot F)$ and $(L^d)$ when all the $L_i$ are equal to
+$L$.  For $d=0$ the empty intersection number is $(\,\cdot\,F)=\chi(X,F)$.
+\end{definition}
+
+\begin{lemma}[The intersection number is the top difference of the Snapper
+polynomial]\label{lem:deg-intersection-is-top-difference}
+\uses{def:deg-intersection, thm:deg-snapper}
+In the situation of \Cref{def:deg-intersection},
+\[
+  (L_1\cdots L_d\cdot F)=
+  \bigl(\Delta_1\Delta_2\cdots\Delta_dP_{F,\underline L}\bigr)(0).
+\]
+If moreover $\dim F\leq d$, then $\Delta_1\cdots\Delta_dP_{F,\underline L}$ is
+a constant function, so the same formula holds with $0$ replaced by any
+$\underline m\in\Z^d$, and $(L_1\cdots L_d\cdot F)$ is the coefficient of the
+monomial $T_1T_2\cdots T_d$ in the polynomial representing
+$P_{F,\underline L}$.
+\end{lemma}
+\begin{proof}
+\uses{lem:deg-difference-explicit, lem:deg-difference-lowers-degree,
+thm:deg-snapper, def:deg-intersection}
+By \Cref{lem:deg-difference-explicit} with $v_i=e_i$,
+\[
+  \bigl(\Delta_1\cdots\Delta_dP_{F,\underline L}\bigr)(0)
+  =\sum_{S\subseteq\{1,\dots,d\}}(-1)^{d-\#S}P_{F,\underline L}
+   \Bigl(\sum_{i\in S}e_i\Bigr)
+  =\sum_S(-1)^{d-\#S}\chi\Bigl(F\otimes\bigotimes_{i\in S}L_i\Bigr),
+\]
+which is the definition of $(L_1\cdots L_d\cdot F)$.  Suppose now
+$\dim F\leq d$.  By \Cref{thm:deg-snapper}, $P_{F,\underline L}$ is a numerical
+polynomial of total degree at most $\dim F\leq d$, so by
+\Cref{lem:deg-difference-lowers-degree}(2) the function
+$\Delta_1\cdots\Delta_dP_{F,\underline L}$ is constant.  For the last
+assertion, write the representing polynomial as
+$\widetilde P=\sum_{\underline i}c_{\underline i}T^{\underline i}$, of total
+degree at most $d$.  The operator $\Delta_1\cdots\Delta_d$ lowers the degree in
+each variable $T_j$ by one, so it kills every monomial in which some $T_j$ does
+not occur; a monomial in which every one of the $d$ variables occurs has total
+degree at least $d$, hence exactly $d$, hence is $T_1T_2\cdots T_d$; and
+$\Delta_1\cdots\Delta_d(T_1\cdots T_d)=1$.  So the constant equals
+$c_{(1,\dots,1)}$.
+\end{proof}
+
+\begin{lemma}[Symmetry]\label{lem:deg-intersection-symmetric}
+\uses{def:deg-intersection}
+The intersection number $(L_1\cdots L_d\cdot F)$ is unchanged by permuting
+$L_1,\dots,L_d$, and depends on each $L_i$ only through its isomorphism class.
+\end{lemma}
+\begin{proof}
+\uses{def:deg-intersection, lem:deg-euler-additive}
+The defining sum runs over the subsets of $\{1,\dots,d\}$ and its terms depend
+only on the unordered family $\{L_i\}_{i\in S}$, so a permutation of the
+indices merely permutes the terms.  Isomorphic line bundles give isomorphic
+tensor products, hence equal Euler characteristics by
+\Cref{lem:deg-euler-additive}.
+\end{proof}
+
+\begin{lemma}[Additivity in the coefficient sheaf]
+\label{lem:deg-intersection-additive}
+\uses{def:deg-intersection}
+Let $0\to F'\to F\to F''\to0$ be a short exact sequence of coherent sheaves on
+the projective $k$-scheme $X$ and let $L_1,\dots,L_d$ be line bundles.  Then
+\[
+  (L_1\cdots L_d\cdot F)=(L_1\cdots L_d\cdot F')+(L_1\cdots L_d\cdot F'').
+\]
+\end{lemma}
+\begin{proof}
+\uses{lem:deg-euler-additive, def:deg-intersection}
+Tensoring the sequence with the invertible sheaf $\bigotimes_{i\in S}L_i$ is
+exact, so \Cref{lem:deg-euler-additive} gives the identity term by term in the
+defining sum.
+\end{proof}
+
+\begin{lemma}[Vanishing in small dimension]
+\label{lem:deg-intersection-small-support}
+\uses{def:deg-intersection}
+If $\dim F<d$ then $(L_1\cdots L_d\cdot F)=0$.  In particular
+$(L_1\cdots L_d\cdot F)=0$ whenever $F$ is supported on a closed subset of
+dimension less than $d$, and $(L_1\cdots L_d)=0$ on a projective $k$-scheme of
+dimension less than $d$.
+\end{lemma}
+\begin{proof}
+\uses{thm:deg-snapper, lem:deg-difference-lowers-degree,
+lem:deg-intersection-is-top-difference}
+By \Cref{thm:deg-snapper} the function $P_{F,\underline L}$ is a numerical
+polynomial of total degree at most $\dim F\leq d-1$, so by
+\Cref{lem:deg-difference-lowers-degree}(1) the composite of the $d$ operators
+$\Delta_1,\dots,\Delta_d$ annihilates it.  Now apply
+\Cref{lem:deg-intersection-is-top-difference}.
+\end{proof}
+
+\begin{theorem}[Multilinearity]\label{thm:deg-intersection-multilinear}
+\uses{def:deg-intersection}
+Let $X$ be a projective scheme over $k$, let $F$ be coherent with $\dim F\leq
+d$, let $M,N,L_2,\dots,L_d$ be line bundles on $X$ and let $n\in\Z$.  Then
+\begin{enumerate}
+  \item $(M\otimes N\cdot L_2\cdots L_d\cdot F)
+        =(M\cdot L_2\cdots L_d\cdot F)+(N\cdot L_2\cdots L_d\cdot F)$;
+  \item $(\O_X\cdot L_2\cdots L_d\cdot F)=0$;
+  \item $(M^{\otimes n}\cdot L_2\cdots L_d\cdot F)
+        =n\,(M\cdot L_2\cdots L_d\cdot F)$.
+\end{enumerate}
+By \Cref{lem:deg-intersection-symmetric} the same holds in every slot; thus
+$(L_1\cdots L_d\cdot F)$ is a symmetric $\Z$-multilinear function of the
+classes of $L_1,\dots,L_d$ in $\mathrm{Pic}(X)$.
+\end{theorem}
+\begin{proof}
+\uses{thm:deg-snapper, lem:deg-difference-explicit,
+lem:deg-difference-lowers-degree, lem:deg-intersection-is-top-difference,
+lem:deg-intersection-symmetric}
+Consider the tuple $\underline K:=(M,N,L_2,\dots,L_d)$ of $d+1$ line bundles,
+with the variables of $\Z^{d+1}$ indexed by $0,1,2,\dots,d$, and put
+$Q:=P_{F,\underline K}$, so that
+$Q(m_0,m_1,m_2,\dots,m_d)=\chi\bigl(F\otimes M^{\otimes m_0}\otimes
+N^{\otimes m_1}\otimes L_2^{\otimes m_2}\otimes\cdots\otimes
+L_d^{\otimes m_d}\bigr)$.  By \Cref{thm:deg-snapper}, $Q$ is a numerical
+polynomial of total degree at most $\dim F\leq d$.
+
+\emph{(1).}  Write $v:=e_0+e_1\in\Z^{d+1}$.  Substituting $m_0=m_1$ into $Q$
+gives exactly the Snapper polynomial of the tuple
+$(M\otimes N,L_2,\dots,L_d)$, and the difference of that substituted function
+in its first variable is $\Delta_v Q$ evaluated along the same substitution.
+Iterating and using \Cref{lem:deg-intersection-is-top-difference} on both sides,
+\[
+  (M\otimes N\cdot L_2\cdots L_d\cdot F)
+  =\bigl(\Delta_v\Delta_2\cdots\Delta_dQ\bigr)(0).
+\]
+By the operator identity of \Cref{lem:deg-difference-explicit},
+$\Delta_v=\Delta_0+\Delta_1+\Delta_0\Delta_1$, so
+\[
+  \Delta_v\Delta_2\cdots\Delta_dQ
+  =\Delta_0\Delta_2\cdots\Delta_dQ+\Delta_1\Delta_2\cdots\Delta_dQ
+  +\Delta_0\Delta_1\Delta_2\cdots\Delta_dQ .
+\]
+The last summand is the composite of $d+1$ difference operators applied to a
+numerical polynomial of total degree at most $d$, hence vanishes by
+\Cref{lem:deg-difference-lowers-degree}(1).  The first two summands are
+constant and equal, by \Cref{lem:deg-intersection-is-top-difference} applied to
+the tuples $(M,L_2,\dots,L_d)$ and $(N,L_2,\dots,L_d)$, to
+$(M\cdot L_2\cdots L_d\cdot F)$ and $(N\cdot L_2\cdots L_d\cdot F)$
+respectively.  This is (1).
+
+\emph{(2).}  The Snapper polynomial of the tuple $(\O_X,L_2,\dots,L_d)$ does
+not depend on its first variable, since $\O_X^{\otimes m_1}=\O_X$ for every
+$m_1$.  Hence $\Delta_1$ annihilates it, and
+\Cref{lem:deg-intersection-is-top-difference} gives (2).
+
+\emph{(3).}  For $n\geq0$ this follows from (1) and (2) by induction on $n$,
+writing $M^{\otimes n}=M^{\otimes(n-1)}\otimes M$ and $M^{\otimes0}=\O_X$.  For
+$n=-1$, apply (1) to $M$ and $M^{-1}$ and use (2):
+$0=(\O_X\cdot\cdots)=(M\cdot\cdots)+(M^{-1}\cdot\cdots)$, so
+$(M^{-1}\cdot\cdots)=-(M\cdot\cdots)$.  The case of general $n<0$ follows by
+applying the non-negative case to $M^{-1}$.
+\end{proof}
+
+\begin{corollary}[Scaling the top self-intersection]
+\label{cor:deg-intersection-powers}
+\uses{thm:deg-intersection-multilinear}
+Let $X$ be a projective $k$-scheme of dimension at most $g$, let $L$ be a line
+bundle on $X$ and let $n\in\Z$.  Then
+\[
+  \bigl((L^{\otimes n})^g\bigr)=n^g\,(L^g).
+\]
+\end{corollary}
+\begin{proof}
+\uses{thm:deg-intersection-multilinear, lem:deg-intersection-symmetric}
+Apply \Cref{thm:deg-intersection-multilinear}(3) in the first slot, then in the
+second, and so on; by \Cref{lem:deg-intersection-symmetric} each application is
+legitimate and each contributes a factor $n$.  Formally: induction on
+$0\leq j\leq g$ shows
+$\bigl((L^{\otimes n})^j\cdot L^{g-j}\bigr)=n^j(L^g)$, the inductive step being
+\Cref{thm:deg-intersection-multilinear}(3) in the $(j+1)$-st slot.
+\end{proof}
+
+\begin{lemma}[D\'evissage of a coherent sheaf]\label{lem:deg-devissage}
+Let $X$ be a noetherian scheme and let $F$ be a coherent sheaf on $X$.  Then
+there is a finite filtration by coherent subsheaves
+\[
+  0=F_0\subseteq F_1\subseteq\cdots\subseteq F_t=F
+\]
+such that for each $j$ there are an integral closed subscheme
+$\iota_j\colon Z_j\to X$ and a non-zero coherent sheaf of ideals
+$\mathcal I_j\subseteq\O_{Z_j}$ with
+$F_j/F_{j-1}\cong(\iota_j)_*\mathcal I_j$.
+\openobligation{AlgebraicGeometry: the devissage of a coherent sheaf on a
+noetherian scheme by pushforwards of ideal sheaves on integral closed
+subschemes.}
+\end{lemma}
+\begin{proof}
+Not proved here.  This is the standard d\'evissage of coherent sheaves; see the
+section \emph{D\'evissage of coherent sheaves} of the chapter \emph{Cohomology
+of schemes} in \cite{stacks-project}, and \cite[III, \S5]{Hartshorne}, where
+the same filtration is the engine of the finiteness theorem for cohomology.
+The construction is noetherian induction on $\operatorname{Supp}F$: one takes
+$Z_1$ to be an irreducible component of $\operatorname{Supp}F$ of maximal
+dimension with its reduced structure, and $F_1$ the subsheaf of sections
+supported on $Z_1$ whose restriction to $Z_1$ has no embedded contribution.
+\end{proof}
+
+\begin{proposition}[The top intersection number sees only the generic rank]
+\label{prop:deg-intersection-rank}
+\uses{def:deg-intersection}
+Let $Y$ be a projective integral $k$-scheme of dimension $d$ with generic point
+$\eta$, let $L_1,\dots,L_d$ be line bundles on $Y$ and let $F$ be a coherent
+sheaf on $Y$.  Put $r:=\dim_{\kappa(\eta)}F_\eta$, the \emph{generic rank} of
+$F$.  Then
+\[
+  (L_1\cdots L_d\cdot F)=r\,(L_1\cdots L_d).
+\]
+\end{proposition}
+\begin{proof}
+\uses{lem:deg-devissage, lem:deg-intersection-additive,
+lem:deg-intersection-small-support, def:deg-intersection}
+Write $\phi(F):=(L_1\cdots L_d\cdot F)$.  By
+\Cref{lem:deg-intersection-additive}, $\phi$ is additive on short exact
+sequences; by \Cref{lem:deg-intersection-small-support}, $\phi(G)=0$ whenever
+$\dim G<d$.
+
+Take a filtration of $F$ as in \Cref{lem:deg-devissage}, with graded pieces
+$(\iota_j)_*\mathcal I_j$ for integral closed subschemes $Z_j\subseteq Y$ and
+non-zero ideal sheaves $\mathcal I_j\subseteq\O_{Z_j}$.  Additivity gives
+$\phi(F)=\sum_j\phi\bigl((\iota_j)_*\mathcal I_j\bigr)$.
+
+Since $Y$ is integral of dimension $d$, the only integral closed subscheme of
+$Y$ of dimension $d$ is $Y$ itself: a proper closed subset of an irreducible
+scheme of finite type over a field has strictly smaller dimension.  So for
+each $j$ either $\dim Z_j<d$, in which case
+$\dim\bigl((\iota_j)_*\mathcal I_j\bigr)\leq\dim Z_j<d$ and the term vanishes,
+or $Z_j=Y$ and the term is $\phi(\mathcal I_j)$ for a non-zero ideal sheaf
+$\mathcal I_j\subseteq\O_Y$.  In the latter case the exact sequence
+$0\to\mathcal I_j\to\O_Y\to\O_Y/\mathcal I_j\to0$ has a third term supported on
+the proper closed subset $V(\mathcal I_j)\subsetneq Y$, of dimension $<d$, so
+$\phi(\mathcal I_j)=\phi(\O_Y)=(L_1\cdots L_d)$.
+
+It remains to count the indices $j$ with $Z_j=Y$.  Taking stalks at $\eta$ is
+exact, so
+$\dim_{\kappa(\eta)}F_\eta=\sum_j\dim_{\kappa(\eta)}\bigl((\iota_j)_*\mathcal
+I_j\bigr)_\eta$.  If $Z_j\neq Y$ then $\eta\notin Z_j$ and the stalk is $0$.
+If $Z_j=Y$ then the stalk is $(\mathcal I_j)_\eta$, a non-zero ideal of the
+field $\O_{Y,\eta}=\kappa(\eta)$, hence $\kappa(\eta)$ itself, of dimension
+one.  So the number of $j$ with $Z_j=Y$ is exactly $r$, and
+$\phi(F)=r\,(L_1\cdots L_d)$.
+\end{proof}
+
+\begin{proposition}[Projection formula for a finite surjective morphism]
+\label{prop:deg-projection-formula}
+\uses{def:deg-intersection, def:av-degree}
+Let $f\colon X\to Y$ be a finite surjective morphism of projective integral
+$k$-schemes of the same dimension $d$, and let $L_1,\dots,L_d$ be line bundles
+on $Y$.  Then
+\[
+  \bigl(f^*L_1\cdots f^*L_d\bigr)_X=\deg f\cdot\bigl(L_1\cdots L_d\bigr)_Y,
+\]
+where $\deg f:=\dim_{\kappa(\eta_Y)}(f_*\O_X)_{\eta_Y}$ is the generic rank of
+$f_*\O_X$, equal to the degree of the field extension
+$\kappa(\eta_X)/\kappa(\eta_Y)$ of function fields.  If moreover $f$ is flat,
+$f_*\O_X$ is locally free and $\deg f$ agrees with the degree of
+\Cref{def:av-degree}.
+\end{proposition}
+\begin{proof}
+\uses{prop:deg-euler-finite-morphism, prop:deg-intersection-rank,
+def:deg-intersection, lem:deg-euler-additive, def:av-degree}
+For every $S\subseteq\{1,\dots,d\}$ put $L_S:=\bigotimes_{i\in S}L_i$, so that
+$\bigotimes_{i\in S}f^*L_i\cong f^*L_S$.  By
+\Cref{prop:deg-euler-finite-morphism}(1) and (2),
+\[
+  \chi\bigl(X,f^*L_S\bigr)=\chi\bigl(Y,f_*f^*L_S\bigr)
+  =\chi\bigl(Y,(f_*\O_X)\otimes L_S\bigr),
+\]
+the second equality because $f_*(\O_X\otimes f^*L_S)\cong(f_*\O_X)\otimes L_S$.
+Summing over $S$ with the signs of \Cref{def:deg-intersection} gives
+\[
+  \bigl(f^*L_1\cdots f^*L_d\bigr)_X
+  =\bigl(L_1\cdots L_d\cdot f_*\O_X\bigr)_Y .
+\]
+Now apply \Cref{prop:deg-intersection-rank} on $Y$: the right-hand side is
+$r\,(L_1\cdots L_d)_Y$ with $r$ the generic rank of $f_*\O_X$.
+
+Finally we identify $r$.  A finite morphism is affine, and $f_*\O_X$ is the
+quasi-coherent sheaf of $\O_Y$-algebras whose stalk at $\eta_Y$ is
+$(f_*\O_X)_{\eta_Y}=\Gamma\bigl(f^{-1}(\Spec R),\O_X\bigr)\otimes_R
+\kappa(\eta_Y)$ for an affine open $\Spec R\subseteq Y$ containing $\eta_Y$;
+since $f$ is finite, surjective and $X$, $Y$ are integral, $f$ is dominant and
+the fibre of $f$ over $\eta_Y$ is the spectrum of the field
+$\kappa(\eta_X)$, viewed as a $\kappa(\eta_Y)$-algebra.  Hence
+$r=[\kappa(\eta_X):\kappa(\eta_Y)]$.  If $f$ is in addition flat then $f_*\O_X$
+is locally free of finite rank and that rank, which is what
+\Cref{def:av-degree} calls $\deg f$, is computed at any point, in particular at
+$\eta_Y$, where it is $r$.
+\end{proof}
+
+\section{Positivity}\label{sec:deg-positivity}
+
+\begin{proposition}[The top self-intersection of an ample bundle is positive]
+\label{prop:deg-ample-positive}
+\uses{def:deg-intersection, def:deg-ample}
+Let $X$ be a proper scheme over $k$ of dimension $g\geq0$ and let $L$ be an
+ample line bundle on $X$.  Then $X$ is projective and
+\[
+  (L^g)>0 .
+\]
+\end{proposition}
+\begin{proof}
+\uses{lem:deg-ample-basic, cor:deg-intersection-powers,
+lem:deg-general-hyperplane, lem:deg-proper-affine-finite,
+lem:deg-euler-additive, lem:deg-euler-affine, thm:deg-snapper,
+lem:deg-difference-explicit, lem:deg-difference-lowers-degree,
+lem:deg-intersection-is-top-difference, prop:deg-euler-finite-morphism}
+That $X$ is projective is \Cref{lem:deg-ample-basic}(4).  We prove
+$(L^g)>0$ by induction on $g$.
+
+\emph{Reduction to $L$ very ample.}  By \Cref{lem:deg-ample-basic}(4) there is
+$e\geq1$ with $L^{\otimes e}$ very ample, and by
+\Cref{cor:deg-intersection-powers}
+$\bigl((L^{\otimes e})^g\bigr)=e^g(L^g)$ with $e^g>0$.  So $(L^g)>0$ if and
+only if $\bigl((L^{\otimes e})^g\bigr)>0$, and $L^{\otimes e}$ is again ample
+by \Cref{lem:deg-ample-basic}(2).  We may therefore assume $L$ very ample, and
+fix a closed immersion $X\subseteq\mathbf P^N$ with $L=\O(1)|_X$.
+
+\emph{Base case $g=0$.}  Here $(L^0)=\chi(X,\O_X)$ by
+\Cref{def:deg-intersection}.  A scheme of finite type over $k$ of dimension
+$0$ is finite and discrete, hence affine, so
+$\chi(X,\O_X)=\dim_k\Gamma(X,\O_X)>0$ by \Cref{lem:deg-euler-affine}; note
+$X\neq\emptyset$, since $\dim\emptyset=-1$.
+
+\emph{Inductive step.}  Let $g\geq1$ and assume the proposition in dimension
+$g-1$.  Apply \Cref{lem:deg-general-hyperplane} with $F=\O_X$: there is
+$s\in\Gamma(X,L)$, the restriction of a hyperplane form on $\mathbf P^N$, whose
+zero scheme $D\subseteq X$ contains no generic point of an irreducible
+component of $X$ and for which
+\[
+  0\longrightarrow\O_X\stackrel{s}{\longrightarrow}L
+  \longrightarrow L|_D\longrightarrow0
+\]
+is exact.  Call this sequence the \emph{hyperplane sequence}.
+
+\emph{The divisor $D$ has dimension exactly $g-1$.}  Let $X_1$ be an
+irreducible component of $X$ of dimension $g$.  If $D\cap X_1$ were empty then
+$X_1$ would be a closed subscheme of $\mathbf P^N\setminus H\cong\mathbf A^N$,
+where $H$ is the hyperplane cutting out $s$; a closed subscheme of an affine
+scheme is affine, and $X_1$ is proper over $k$, so
+\Cref{lem:deg-proper-affine-finite} would give $\dim X_1\leq0$, contradicting
+$\dim X_1=g\geq1$.  So $D\cap X_1\neq\emptyset$; it is cut out in $X_1$ by one
+equation, so each of its irreducible components has codimension at most one in
+$X_1$ by Krull's principal ideal theorem, whence $\dim(D\cap X_1)\geq g-1$.  On
+the other hand $D$ contains no generic point of a component of $X$, so
+$D\cap X_i\subsetneq X_i$ for every component $X_i$ and therefore
+$\dim(D\cap X_i)<\dim X_i\leq g$.  Taking the maximum over the components gives
+$\dim D=g-1$.
+
+\emph{Restriction of $L$ to $D$.}  The inclusion $D\to X$ is a closed
+immersion of proper $k$-schemes, so $L|_D$ is ample on $D$ by
+\Cref{lem:deg-ample-basic}(3), and $\dim D=g-1$.  By the inductive hypothesis
+\[
+  \bigl((L|_D)^{g-1}\bigr)_D>0 .
+\]
+
+\emph{Comparison of the two Snapper polynomials.}  Put
+$P(m):=\chi(X,L^{\otimes m})$ and $R(m):=\chi\bigl(D,(L|_D)^{\otimes m}\bigr)$,
+both functions on $\Z$.  Tensoring the hyperplane sequence with
+$L^{\otimes(m-1)}$ gives the exact sequence
+\[
+  0\longrightarrow L^{\otimes(m-1)}\longrightarrow L^{\otimes m}
+  \longrightarrow(L|_D)^{\otimes m}\longrightarrow0,
+\]
+where we used $(L^{\otimes m})|_D=(L|_D)^{\otimes m}$ and the fact that the
+Euler characteristic of a sheaf pushed forward along a closed immersion is
+unchanged, which is the case of a closed immersion in
+\Cref{prop:deg-euler-finite-morphism}(1).  By
+\Cref{lem:deg-euler-additive}, $P(m)-P(m-1)=R(m)$ for every $m\in\Z$, that is
+$(\Delta P)(m)=R(m+1)$.
+
+\emph{Conclusion.}  By \Cref{lem:deg-intersection-is-top-difference} applied on
+$X$ with $L_1=\cdots=L_g=L$, and by
+\Cref{lem:deg-difference-explicit},
+\[
+  (L^g)_X=\bigl(\Delta^gP\bigr)(0)
+  =\bigl(\Delta^{g-1}(\Delta P)\bigr)(0)
+  =\sum_{j=0}^{g-1}(-1)^{g-1-j}\binom{g-1}{j}(\Delta P)(j)
+  =\bigl(\Delta^{g-1}R\bigr)(1).
+\]
+By \Cref{thm:deg-snapper}, $R$ is a numerical polynomial of degree at most
+$\dim D=g-1$, so $\Delta^{g-1}R$ is a constant by
+\Cref{lem:deg-difference-lowers-degree}(2); by
+\Cref{lem:deg-intersection-is-top-difference} on $D$ that constant is
+$\bigl((L|_D)^{g-1}\bigr)_D$.  Hence
+$(L^g)_X=\bigl((L|_D)^{g-1}\bigr)_D>0$.
+\end{proof}
+
+\begin{corollary}[A proper scheme with an ample trivial bundle is finite]
+\label{cor:deg-ample-trivial-finite}
+\uses{def:deg-ample}
+Let $X$ be a proper scheme over $k$ carrying a line bundle $L$ which is at once
+ample and trivial, that is $L\cong\O_X$.  Then $X$ is finite over $k$; in
+particular $\dim X\leq0$ and $X$ has finitely many points.
+\end{corollary}
+\begin{proof}
+\uses{prop:deg-ample-positive, thm:deg-snapper,
+lem:deg-intersection-is-top-difference, lem:deg-difference-lowers-degree,
+thm:av-zariski-main}
+Let $g:=\dim X$ and suppose $g\geq1$.  The Snapper polynomial of the tuple
+$(L,\dots,L)$ with $L\cong\O_X$ is the constant function
+$\underline m\mapsto\chi(X,\O_X)$, so any single difference operator
+annihilates it and, by \Cref{lem:deg-intersection-is-top-difference},
+$(L^g)=0$.  But $L$ is ample and $\dim X=g$, so
+\Cref{prop:deg-ample-positive} gives $(L^g)>0$; a contradiction.  Hence
+$g\leq0$.  If $X=\emptyset$ there is nothing to prove.  Otherwise $g=0$, so
+$X\to\Spec k$ has finite fibres and is of finite type, hence locally
+quasi-finite, and it is proper; by
+\Cref{thm:av-zariski-main} it is finite.
+\end{proof}
+
+\begin{proposition}[An abelian variety is projective]
+\label{prop:deg-abelian-projective}
+\uses{def:av-abelian-variety, def:deg-ample}
+Every abelian variety $A$ over $k$ is projective; equivalently, by
+\Cref{lem:deg-ample-basic}(4), it carries an ample line bundle.
+\openobligation{AlgebraicGeometry: the projectivity of an abelian variety over
+an algebraically closed field, and with it ampleness of an invertible sheaf on
+a scheme.}
+\end{proposition}
+\begin{proof}
+Not proved here.  This is \cite[\S6]{MumfordAbelianVarieties} and
+\cite[I, \S7]{MilneAbelianVarieties}.  The classical argument runs as follows.
+Choose an affine open $U\subseteq A$ containing the identity $e$.  Since $A$ is
+smooth (\Cref{prop:av-basic}) and the complement of an affine open in a smooth
+variety is of pure codimension one, the reduced complement $D:=A\setminus U$ is
+an effective divisor, and $A\setminus\operatorname{Supp}D=U$ is affine.  One
+then shows that $\O_A(3D)$ is very ample, by using the theorem of the square to
+translate $D$ and thereby separate any pair of points and any tangent vector.
+The step that makes this work, and the reason it belongs to this chapter rather
+than to \Cref{chap:cube}, is that it uses only the group law and the affineness
+of $U$, not the theorem of the cube.
+\end{proof}
+
+\begin{proposition}[Existence of a symmetric ample line bundle]
+\label{prop:deg-symmetric-ample}
+\uses{def:av-abelian-variety, def:deg-ample, def:cube-mulby-int}
+Every abelian variety $A$ over $k$ carries a line bundle $L$ which is ample and
+symmetric, that is $[-1]^*L\cong L$.
+\end{proposition}
+\begin{proof}
+\uses{prop:deg-abelian-projective, lem:deg-ample-basic,
+lem:cube-mulby-int-points, def:cube-mulby-int}
+By \Cref{prop:deg-abelian-projective} there is an ample line bundle $L_0$ on
+$A$.  By \Cref{lem:cube-mulby-int-points} the morphism $[-1]$ is the inversion
+morphism of the group scheme $A$ and satisfies $[-1]\circ[-1]=[1]=\mathrm{id}_A$;
+in particular $[-1]$ is an isomorphism, equal to its own inverse.  Put
+\[
+  L:=L_0\otimes[-1]^*L_0 .
+\]
+Then $[-1]^*L_0$ is ample by \Cref{lem:deg-ample-basic}(3) applied to the
+isomorphism $[-1]$, and $L$ is ample by \Cref{lem:deg-ample-basic}(1) as a
+tensor product of two ample bundles.  Finally, pullback is pseudofunctorial and
+compatible with tensor products, so
+\[
+  [-1]^*L\cong[-1]^*L_0\otimes[-1]^*[-1]^*L_0
+  \cong[-1]^*L_0\otimes\bigl([-1]\circ[-1]\bigr)^*L_0
+  \cong[-1]^*L_0\otimes L_0\cong L,
+\]
+so $L$ is symmetric.
+\end{proof}
+
+\section{$[n]$ is finite, flat and surjective}\label{sec:deg-isogeny}
+
+\begin{proposition}[Miracle flatness]\label{prop:deg-miracle-flatness}
+Let $f\colon X\to Y$ be a morphism locally of finite type between locally
+noetherian schemes, let $x\in X$ and $y:=f(x)$.  Suppose that $\O_{X,x}$ is
+Cohen--Macaulay, that $\O_{Y,y}$ is regular and that
+\[
+  \dim\O_{X,x}=\dim\O_{Y,y}+\dim\O_{X_y,x},
+\]
+where $X_y$ is the fibre of $f$ over $y$.  Then $f$ is flat at $x$.  In
+particular a finite surjective morphism between smooth varieties of the same
+dimension over $k$ is flat.
+\openobligation{CommutativeAlgebra: miracle flatness, that is, the local
+criterion for flatness of a morphism whose source is Cohen-Macaulay and whose
+target is regular and whose fibre dimension is the difference of the
+dimensions. Mathlib v4.33.1 has neither the Cohen-Macaulay condition nor this
+criterion.}
+\end{proposition}
+\begin{proof}
+Not proved here.  This is the standard local criterion for flatness; see
+\cite[\S23]{MatsumuraCRT} and the section \emph{Flatness and dimension} of the
+chapter \emph{Commutative algebra} in \cite{stacks-project}.  For the last
+sentence: a
+smooth $k$-variety is regular, hence Cohen--Macaulay, and its local ring at a
+closed point has dimension equal to the dimension of the variety; a finite
+morphism has $0$-dimensional fibres, so the displayed equality reads
+$g=g+0$ for a finite surjective morphism between $g$-dimensional smooth
+varieties, and flatness at every point follows.  Flatness at the non-closed
+points follows from flatness at the closed points because the closed points are
+dense and flatness is an open condition for a morphism of finite type between
+noetherian schemes; alternatively, apply the criterion verbatim at every point,
+the two local rings there having equal dimension because both schemes are
+irreducible and catenary.
+\end{proof}
+
+\begin{lemma}[The $n$-torsion is finite]\label{lem:deg-torsion-finite}
+\uses{def:av-torsion, def:cube-mulby-int, def:av-abelian-variety}
+Let $A$ be an abelian variety over $k$, let $n\in\Z$ with $n\neq0$ and let
+$A[n]=\ker[n]$ be the $n$-torsion subgroup scheme of \Cref{def:av-torsion}.
+Then $A[n]$ is finite over $k$.
+\end{lemma}
+\begin{proof}
+\uses{prop:deg-symmetric-ample, thm:cube-mulby-pullback,
+lem:deg-ample-basic, cor:deg-ample-trivial-finite, lem:av-torsion-pullback,
+lem:cube-pullback-constant, prop:av-basic}
+Choose a symmetric ample line bundle $L$ on $A$ by
+\Cref{prop:deg-symmetric-ample}.  By \Cref{thm:cube-mulby-pullback},
+\[
+  [n]^*L\;\cong\;L^{\otimes n^2}.
+\]
+
+Let $j\colon A[n]\to A$ be the canonical morphism.  By
+\Cref{lem:av-torsion-pullback} the square
+\[
+  \begin{CD}
+    A[n]      @>{j}>>  A\\
+    @VVV               @VV{[n]}V\\
+    \Spec k   @>{e}>>  A
+  \end{CD}
+\]
+is cartesian; in particular $j$ is a closed immersion, being the base change of
+the closed immersion $e\colon\Spec k\to A$ --- a section of the separated
+morphism $A\to\Spec k$ --- along $[n]$, and $A[n]$ is a closed subscheme of the
+proper $k$-scheme $A$, hence proper over $k$.
+
+Consider the line bundle $j^*[n]^*L=([n]\circ j)^*L$ on $A[n]$.  On one hand
+the square commutes, so $[n]\circ j=e\circ\pi$ is the constant morphism at the
+identity point $e$, where $\pi\colon A[n]\to\Spec k$ is the structure
+morphism; by \Cref{lem:cube-pullback-constant} the bundle
+$([n]\circ j)^*L$ is therefore \emph{trivial}.  On the other hand
+$[n]^*L\cong L^{\otimes n^2}$ with $n^2\geq1$, so $[n]^*L$ is ample by
+\Cref{lem:deg-ample-basic}(2), and its pullback along the closed immersion $j$
+is ample by \Cref{lem:deg-ample-basic}(3).
+
+So $A[n]$ is a proper $k$-scheme carrying a line bundle that is at once ample
+and trivial.  By \Cref{cor:deg-ample-trivial-finite}, $A[n]$ is finite over
+$k$.
+\end{proof}
+
+\begin{lemma}[$[n]$ is proper]\label{lem:deg-mulby-proper}
+\uses{def:cube-mulby-int, def:av-abelian-variety}
+Let $A$ be an abelian variety over $k$ and $n\in\Z$.  Then
+$[n]\colon A\to A$ is proper.
+\end{lemma}
+\begin{proof}
+\uses{prop:av-basic, def:cube-mulby-int}
+The composite of $[n]$ with the structure morphism $A\to\Spec k$ is the
+structure morphism $A\to\Spec k$, which is proper, and $A\to\Spec k$ is
+separated (\Cref{prop:av-basic}).  Cancellation for proper morphisms --- if
+$h\circ f$ is proper and $h$ is separated then $f$ is proper --- gives the
+claim.  This is the argument already used in the proof of
+\Cref{thm:av-mulby-etale-corollaries}, where it is recorded that Mathlib has it
+as \texttt{AlgebraicGeometry.IsProper.of\_comp}.
+\end{proof}
+
+\begin{theorem}[$[n]$ is an isogeny for every $n\neq0$]\label{thm:deg-isogeny}
+\uses{def:av-abelian-variety, def:cube-mulby-int}
+Let $A$ be an abelian variety of dimension $g$ over $k$ and let $n\in\Z$,
+$n\neq0$.  Then $[n]\colon A\to A$ is finite, flat and surjective.
+\end{theorem}
+\begin{proof}
+\uses{lem:deg-torsion-finite, lem:deg-mulby-proper, thm:av-zariski-main,
+lem:av-translation-spreading, prop:av-basic, prop:deg-miracle-flatness,
+lem:av-torsion-pullback}
+\emph{Locally quasi-finite.}  By \Cref{lem:deg-torsion-finite} the scheme
+$A[n]$ is finite over $k$, and by \Cref{lem:av-torsion-pullback} it is the
+fibre of $[n]$ over the identity point $e$.  So $[n]$ is quasi-finite at every
+point of $A[n]$, and $A[n]\neq\emptyset$ because it contains $e$.  The locus
+\[
+  V:=\{x\in A:\ [n]\ \text{is quasi-finite at}\ x\}
+\]
+is open, quasi-finiteness at a point being an open condition for a morphism
+locally of finite type between locally noetherian schemes, and it is non-empty
+by the above.  Quasi-finiteness at a point is local on source and target and is
+stable under pre- and post-composition with isomorphisms, so
+\Cref{lem:av-translation-spreading} applies and gives $V=A$.  Thus $[n]$ is
+locally quasi-finite.
+
+\emph{Finite.}  By \Cref{lem:deg-mulby-proper} the morphism $[n]$ is proper,
+and it is locally quasi-finite; by Zariski's main theorem in the form
+\Cref{thm:av-zariski-main} it is finite.
+
+\emph{Surjective.}  Being finite, $[n]$ is closed, so its set-theoretic image
+$Z:=[n](A)$ is a closed subset of $A$.  It is irreducible, being the image of
+the irreducible space $A$ (\Cref{prop:av-basic}).  Every fibre of $[n]$ over a
+point of $Z$ is $0$-dimensional, since $[n]$ is finite, so the fibre-dimension
+formula for a dominant morphism of irreducible schemes of finite type over a
+field, applied to the surjection $A\to Z$ with $Z$ given its reduced structure,
+gives $\dim A=\dim Z+0$, that is $\dim Z=g$.  A closed irreducible subset of
+the irreducible $g$-dimensional scheme $A$ of dimension $g$ is all of $A$,
+because a proper closed subset of an irreducible scheme of finite type over a
+field has strictly smaller dimension.  So $Z=A$ and $[n]$ is surjective.
+
+\emph{Flat.}  By \Cref{prop:av-basic} the abelian variety $A$ is smooth over
+$k$ and irreducible of dimension $g$; so $[n]\colon A\to A$ is a finite
+surjective morphism between smooth $k$-varieties of the same dimension $g$.  By
+\Cref{prop:deg-miracle-flatness} it is flat.
+\end{proof}
+
+\section{The degree formula}\label{sec:deg-degree}
+
+\begin{theorem}[The degree of $[n]$]\label{thm:deg-degree-formula}
+\uses{def:av-abelian-variety, def:cube-mulby-int, def:av-degree}
+Let $A$ be an abelian variety of dimension $g$ over $k$ and let $n\in\Z$,
+$n\neq0$.  Then $[n]$ is finite and flat, so its degree is defined, and
+\[
+  \deg[n]=n^{2g}.
+\]
+\end{theorem}
+\begin{proof}
+\uses{thm:deg-isogeny, prop:deg-symmetric-ample, thm:cube-mulby-pullback,
+prop:deg-projection-formula, cor:deg-intersection-powers,
+prop:deg-ample-positive, prop:deg-abelian-projective, prop:av-basic,
+def:av-degree}
+By \Cref{thm:deg-isogeny} the morphism $[n]$ is finite, flat and surjective, so
+$\deg[n]$ is defined by \Cref{def:av-degree}; $A$ is connected
+(\Cref{prop:av-basic}), so the degree does not depend on the chosen point.
+
+Choose a symmetric ample line bundle $L$ on $A$ by
+\Cref{prop:deg-symmetric-ample}.  By \Cref{prop:deg-abelian-projective} the
+scheme $A$ is projective, and it is integral of dimension $g$ by
+\Cref{prop:av-basic}.  So \Cref{prop:deg-projection-formula} applies to the
+finite surjective morphism $[n]\colon A\to A$ and to the $g$-tuple
+$(L,\dots,L)$:
+\[
+  \bigl(([n]^*L)^g\bigr)=\deg[n]\cdot(L^g).
+\]
+
+On the other hand \Cref{thm:cube-mulby-pullback} gives
+$[n]^*L\cong L^{\otimes n^2}$, because $L$ is symmetric, so by
+\Cref{cor:deg-intersection-powers}
+\[
+  \bigl(([n]^*L)^g\bigr)=\bigl((L^{\otimes n^2})^g\bigr)
+  =(n^2)^g\,(L^g)=n^{2g}\,(L^g).
+\]
+
+Comparing the two displays gives $\deg[n]\cdot(L^g)=n^{2g}\,(L^g)$.  Finally
+$(L^g)>0$ by \Cref{prop:deg-ample-positive}, since $L$ is ample and
+$\dim A=g$; so $(L^g)$ may be cancelled from the identity, and
+$\deg[n]=n^{2g}$.
+\end{proof}
+
+\begin{remark}[What this discharges]\label{rem:deg-discharged}
+\Cref{prop:deg-symmetric-ample}, \Cref{prop:deg-ample-positive},
+\Cref{prop:deg-projection-formula}, \Cref{thm:deg-isogeny} and
+\Cref{thm:deg-degree-formula} are the five statements that
+\Cref{sec:av-cube} carried as open obligations about ampleness, intersection
+numbers and the degree computation; they are
+\Cref{prop:av-symmetric-ample}, \Cref{prop:av-ample-self-intersection},
+\Cref{prop:av-degree-intersection}, \Cref{thm:av-isogeny-general} and
+\Cref{thm:av-degree-formula}, which now cite this chapter.  What remains open
+after this chapter is \emph{not} any of them but the layer beneath: the Euler
+characteristic (\Cref{prop:deg-cohomology-finiteness} and
+\Cref{prop:deg-euler-finite-morphism}), ampleness
+(\Cref{lem:deg-ample-basic}), the projectivity of an abelian variety
+(\Cref{prop:deg-abelian-projective}), the d\'evissage of a coherent sheaf
+(\Cref{lem:deg-devissage}) and miracle flatness
+(\Cref{prop:deg-miracle-flatness}).  Together with
+\Cref{thm:cube-mulby-pullback} of \Cref{chap:cube}, this closes
+\Cref{prop:av-isogeny} and the four \texttt{sorry}s listed in
+\Cref{sec:av-status}, modulo that layer and modulo the descent to a general
+base field of \Cref{rem:av-descent-to-any-field}.
+\end{remark}
+
+\begin{remark}[Negative $n$, and the group of $k$-points]
+\label{rem:deg-negative-n}
+\Cref{thm:deg-degree-formula} is stated for every non-zero integer $n$, positive
+or negative, and $n^{2g}=(n^2)^g>0$ in either case; this is why
+\Cref{def:cube-mulby-int}, the $\Z$-valued $[n]$, rather than
+\Cref{def:av-mulby}, is the right notion here.  Nothing in the proof
+distinguishes the sign: the only place $n$ enters is through $n^2$, in
+$[n]^*L\cong L^{\otimes n^2}$.  In particular $[-1]$ has degree $1$, as it must,
+being an isomorphism.  Note also that \Cref{thm:deg-degree-formula} counts the
+degree as a rank, not as a number of points: when $n$ is divisible by the
+characteristic of $k$ the scheme $A[n]$ is non-reduced and
+$\#A[n](k)<n^{2g}$.  The comparison of the two counts, which is where
+\Cref{prop:av-finite-etale-points} enters, is the subject of
+\Cref{prop:av-etale-torsion} and not of this chapter.
+\end{remark}
+
+\section{Formalisation cost}\label{sec:deg-cost}
+
+This section counts what Mathlib \texttt{v4.33.1} does not have and this
+chapter needs.  It is written to \emph{compose} with \Cref{sec:cube-cost}, not
+to repeat it: the two are meant to be added together, and nothing charged
+there is charged again here.  Concretely:
+
+\begin{itemize}
+  \item The cohomology $H^i(S,F)$ of a sheaf of modules on a scheme, in all
+  degrees, is notion (N4) of \Cref{sec:cube-cost} --- two definitions and about
+  twelve lemmas, in
+  \texttt{WeilConjectures/AlgebraicGeometry/Cohomology/Basic.lean}.  The Euler
+  characteristic of this chapter sits directly on top of it and is charged
+  below as (N8); $H^i$ itself is \textbf{not} recounted.
+  \item Coherence of a sheaf of modules on a locally noetherian scheme is
+  notion (N1) of \Cref{sec:cube-cost} --- one definition and about six lemmas.
+  Every statement of this chapter is about coherent sheaves, and none of that
+  is recounted.
+  \item The projection formula for the direct image is charged in
+  \Cref{sec:cube-cost} as part of notion (N5).
+  \Cref{prop:deg-euler-finite-morphism}(2) is exactly that statement and is
+  \textbf{not} recounted; only part (1) of that proposition, the invariance of
+  cohomology along an affine morphism, is new and is charged below.
+  \item The direct images along a proper morphism and base change for them are
+  notion (N6) of \Cref{sec:cube-cost}.  This chapter uses none of that
+  machinery: no semicontinuity, no Grauert, no formal functions.  Its
+  cohomological needs are strictly the \emph{absolute} groups $H^i(X,F)$ over a
+  field, together with the one affine-morphism statement just mentioned.
+  \item The tensor product of sheaves of modules, invertible sheaves and
+  $\mathrm{Pic}(X)$, and the pullback homomorphism
+  $u^*\colon\mathrm{Pic}(V)\to\mathrm{Pic}(S)$, are the parallel layer of
+  \Cref{warn:deg-parallel-layer} and notion (N3) of \Cref{sec:cube-cost}
+  respectively; neither is recounted.
+\end{itemize}
+
+\subsection*{What is already available}
+
+Beyond items (1) to (6) of the corresponding list in \Cref{sec:cube-cost},
+which are not repeated, three further things exist and are used.
+\begin{enumerate}
+  \item \texttt{AlgebraicGeometry.finite\_appTop\_of\_universallyClosed} in
+  \texttt{Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}, which is the whole
+  of \Cref{lem:deg-proper-affine-finite} once combined with the
+  $\Gamma\dashv\Spec$ adjunction; and
+  \texttt{AlgebraicGeometry.IsFinite.of\_isProper\_of\_locallyQuasiFinite},
+  which is \Cref{thm:av-zariski-main} and is used twice here.
+  \item Associated primes of a module over a noetherian ring, in
+  \texttt{Mathlib/RingTheory/Ideal/AssociatedPrime/}, including their
+  finiteness and the characterisation of zerodivisors.  This is the
+  commutative-algebra half of \Cref{lem:deg-general-hyperplane}; the
+  scheme-theoretic half is not there and is charged below.
+  \item Projective space as a scheme: \texttt{AlgebraicGeometry.Proj} in
+  \texttt{Mathlib/AlgebraicGeometry/ProjectiveSpectrum/} and, in this project,
+  \texttt{AlgebraicGeometry.ProjectiveSpace} --- the scheme
+  $\mathbf P(n;S)$ over a base scheme $S$, with its universal property under
+  base change --- in
+  \texttt{WeilConjectures/AlgebraicGeometry/ProjectiveSpace.lean}.  What is
+  \emph{not} there, in Mathlib or in this project, is the twisting sheaf
+  $\O(1)$, the correspondence between morphisms to $\mathbf P^N$ and
+  globally generated line bundles, or any notion of ampleness; those are
+  charged below as (N11).
+\end{enumerate}
+
+\subsection*{The missing notions, one by one}
+
+Six notions are missing beyond (N1) to (N7) of \Cref{sec:cube-cost}; they are
+numbered (N8) to (N13) so that the two lists can be concatenated.  For each:
+which statements of this chapter need it, how many definitions and how many
+lemmas it is, and the file it would live in.  As in \Cref{sec:cube-cost}, the
+lemma counts estimate the API a usable version needs, not the individual proof
+steps.
+
+\begin{enumerate}
+  \item[(N8)] \emph{The Euler characteristic of a coherent sheaf on a proper
+  scheme over a field.}  Needed to state \Cref{def:deg-euler}, and used by
+  every statement of \Cref{sec:deg-snapper} and \Cref{sec:deg-intersection}.
+  This sits directly on (N4) and (N1) of \Cref{sec:cube-cost}, which are not
+  recounted.  \emph{One definition}, $\chi(X,F)=\sum_i(-1)^i\dim_kH^i(X,F)$,
+  and \emph{about six lemmas}: the finite-dimensionality of $H^i(X,F)$ for $X$
+  proper over a field and $F$ coherent; the vanishing $H^i=0$ for
+  $i>\dim X$; the vanishing of the alternating sum of dimensions along a
+  bounded exact sequence of finite-dimensional vector spaces --- the only one
+  of the six that is pure linear algebra, and the only one for which
+  \texttt{Mathlib/Algebra/Homology/EulerCharacteristic.lean} is a plausible
+  starting point; additivity of $\chi$ on short exact sequences,
+  \Cref{lem:deg-euler-additive}; $\chi(X,F)=\dim_k\Gamma(X,F)$ for $X$ affine,
+  \Cref{lem:deg-euler-affine}; and invariance of $H^i$, hence of $\chi$, along
+  an affine morphism, which is \Cref{prop:deg-euler-finite-morphism}(1).  In a
+  new file
+  \texttt{WeilConjectures/AlgebraicGeometry/Cohomology/EulerCharacteristic.lean},
+  beside the \texttt{Basic.lean} of (N4).  The first two of the six are the
+  expensive ones and are the reason this notion cannot be cut loose from
+  (N4): they are the finiteness theorem for the cohomology of a proper
+  morphism, in the absolute case.
+  \item[(N9)] \emph{Numerical polynomials in several variables and the
+  difference calculus.}  Needed to state \Cref{def:deg-numerical} and
+  \Cref{thm:deg-snapper}, and used by every statement of
+  \Cref{sec:deg-intersection} and by \Cref{prop:deg-ample-positive}.
+  \emph{Two definitions} --- the predicate ``$P\colon\Z^r\to\Z$ is a numerical
+  polynomial of total degree at most $d$'' and the difference operator
+  $\Delta_v$ --- and \emph{about seven lemmas}, all four of the section proved
+  in full here (\Cref{lem:deg-numerical-unique},
+  \Cref{lem:deg-difference-lowers-degree},
+  \Cref{lem:deg-difference-criterion} and
+  \Cref{lem:deg-difference-explicit}) plus three pieces of API they need: the
+  binomial coefficient $\binom{m}{i}$ as an integer-valued polynomial on $\Z$,
+  the Pascal identity for it, and the substitution of linear forms into a
+  polynomial of bounded total degree, which is what makes the reduction to
+  very ample bundles work inside \Cref{thm:deg-snapper}.  In a new file
+  \texttt{WeilConjectures/RingTheory/NumericalPolynomial.lean}.
+  \emph{This notion is the one item of the whole chapter that can be
+  formalised today}: it mentions no scheme, no sheaf and no cohomology, it
+  needs nothing from \Cref{sec:cube-cost}, and it is about a fifth of the
+  chapter by length.  Mathlib \texttt{v4.33.1} has
+  \texttt{Polynomial.hilbertPoly} in
+  \texttt{Mathlib/RingTheory/Polynomial/HilbertPoly.lean}, but that is the
+  Hilbert polynomial of a graded module in \emph{one} variable and over a
+  field of characteristic zero, and it is not the multivariable
+  integer-valued statement needed here.
+  \item[(N10)] \emph{Intersection numbers of line bundles on a projective
+  scheme.}  Needed to state \Cref{def:deg-intersection},
+  \Cref{prop:deg-projection-formula} and \Cref{prop:deg-ample-positive}, and
+  hence \Cref{thm:deg-degree-formula}.  \emph{Two definitions} --- the
+  intersection number $(L_1\cdots L_d\cdot F)$ with coefficients in a coherent
+  sheaf and the abbreviation $(L^d)$ for the top self-intersection --- and
+  \emph{about eight lemmas}: the identification with the top difference of the
+  Snapper polynomial (\Cref{lem:deg-intersection-is-top-difference}); symmetry
+  (\Cref{lem:deg-intersection-symmetric}); additivity in the coefficient sheaf
+  (\Cref{lem:deg-intersection-additive}); vanishing below the dimension
+  (\Cref{lem:deg-intersection-small-support}); the three parts of
+  multilinearity (\Cref{thm:deg-intersection-multilinear}); and the scaling
+  rule (\Cref{cor:deg-intersection-powers}).  In a new file
+  \texttt{WeilConjectures/AlgebraicGeometry/IntersectionNumber.lean}.
+  Mathlib \texttt{v4.33.1} has
+  \texttt{Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean} and
+  \texttt{Mathlib/AlgebraicGeometry/OrderOfVanishing.lean}, which are the
+  beginnings of a \emph{cycle-theoretic} intersection theory; that is a
+  different route from Snapper's and none of it applies directly.
+  \item[(N11)] \emph{Ampleness and very ampleness of an invertible sheaf, and
+  global generation.}  Needed to state \Cref{def:deg-ample},
+  \Cref{lem:deg-ample-basic}, \Cref{prop:deg-ample-positive},
+  \Cref{cor:deg-ample-trivial-finite}, \Cref{prop:deg-abelian-projective} and
+  \Cref{prop:deg-symmetric-ample}, and used by \Cref{lem:deg-torsion-finite},
+  \Cref{thm:deg-isogeny} and \Cref{thm:deg-degree-formula}.  \emph{Three
+  definitions} --- a sheaf of modules generated by its global sections,
+  ampleness, and very ampleness relative to a base --- and \emph{about nine
+  lemmas}: the twisting sheaf $\O(1)$ on $\mathbf P^N$ and its ampleness; the
+  correspondence between a morphism to $\mathbf P^N$ and a globally generated
+  line bundle with $N+1$ chosen sections, which is what makes
+  \Cref{lem:deg-general-hyperplane} available; the fact that an immersion of a
+  proper scheme is a closed immersion, which is what makes
+  \Cref{def:deg-ample} usable; and the five permanence properties collected as
+  \Cref{lem:deg-ample-basic}, of which the fourth --- ample if and only if some
+  power is very ample --- is much the hardest and is a genuine theorem, not
+  API.  In two new files
+  \texttt{WeilConjectures/AlgebraicGeometry/Ample.lean} and
+  \texttt{WeilConjectures/AlgebraicGeometry/TwistingSheaf.lean}.
+  \emph{This is the largest single item in this chapter's count}, and the one
+  most obviously worth upstreaming: nothing in it mentions abelian varieties.
+  \item[(N12)] \emph{Associated points of a coherent sheaf on a scheme, the
+  d\'evissage of a coherent sheaf, and the generic rank.}  Needed to state
+  \Cref{lem:deg-general-hyperplane} and \Cref{lem:deg-devissage}, and used by
+  \Cref{thm:deg-snapper}, \Cref{prop:deg-intersection-rank},
+  \Cref{prop:deg-projection-formula} and \Cref{prop:deg-ample-positive}.
+  \emph{Two definitions} --- the set of associated points of a coherent sheaf
+  and the generic rank of a coherent sheaf on an integral scheme --- and
+  \emph{about six lemmas}: finiteness of the set of associated points; the
+  fact that every generic point of an irreducible component of the support is
+  associated; the criterion for a section of a line bundle to be a
+  nonzerodivisor on a coherent sheaf; the d\'evissage
+  \Cref{lem:deg-devissage}; that a proper closed subset of an irreducible
+  scheme of finite type over a field has strictly smaller dimension; and
+  Krull's principal ideal theorem in the scheme-theoretic form used in
+  \Cref{prop:deg-ample-positive}.  In
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Noetherian.lean} for the
+  first four and
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Properties.lean} for the
+  last two, both mirroring existing Mathlib files.  The ring-theoretic half is
+  available (see item (2) above); what is missing is entirely the passage to
+  schemes.
+  \item[(N13)] \emph{Miracle flatness.}  Needed to state
+  \Cref{prop:deg-miracle-flatness} and used only by the flatness clause of
+  \Cref{thm:deg-isogeny}.  \emph{One definition}, the Cohen--Macaulay
+  condition on a noetherian local ring --- which Mathlib \texttt{v4.33.1} does
+  not have in any form; \texttt{grep} for \texttt{CohenMacaulay} over the whole
+  library returns nothing --- and \emph{about four lemmas}: a regular local
+  ring is Cohen--Macaulay; the local criterion for flatness in the form of
+  \Cref{prop:deg-miracle-flatness}; the fibre-dimension formula
+  $\dim\O_{X,x}=\dim\O_{Y,y}+\dim\O_{X_y,x}$ for a finite morphism of
+  irreducible varieties of the same dimension; and the transfer of the local
+  criterion to the scheme level.  In
+  \texttt{WeilConjectures/Mathlib/RingTheory/Flat/Basic.lean} and
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Flat.lean}.
+  This is the one notion of the chapter that is pure commutative algebra and
+  needs no cohomology; it is also the only one whose absence was already
+  recorded in \Cref{chap:av-isogeny}, in the open obligation on
+  \Cref{thm:av-isogeny-general}.
+\end{enumerate}
+
+Adding the columns: \emph{eleven definitions} and \emph{about forty lemmas of
+supporting API}, on top of which the statements of this chapter sit.  One
+further definition belongs to no notion above --- the predicate
+``$L$ is symmetric'' on a commutative group scheme, part of
+\Cref{def:deg-ample}, which is glue over the $\Z$-valued $[n]$ that the
+project already has --- and it brings the definition count to twelve.
+
+\subsection*{Definitions missing: twelve, of which ten carry content}
+
+\begin{enumerate}
+  \item \emph{The Euler characteristic $\chi(X,F)$}, from (N8).
+  \item \emph{Numerical polynomial of total degree at most $d$}, from (N9).
+  \item \emph{The difference operator $\Delta_v$}, from (N9).
+  \item \emph{The intersection number $(L_1\cdots L_d\cdot F)$}, from (N10).
+  \item \emph{The top self-intersection $(L^d)$}, from (N10).  Glue: the
+  special case of the previous one with all entries equal.
+  \item \emph{Generated by global sections}, from (N11).
+  \item \emph{Ample}, from (N11).
+  \item \emph{Very ample}, from (N11).
+  \item \emph{The associated points of a coherent sheaf}, from (N12).
+  \item \emph{The generic rank of a coherent sheaf}, from (N12).
+  \item \emph{Cohen--Macaulay local ring}, from (N13).
+  \item \emph{Symmetric line bundle on a commutative group scheme}, part of
+  \Cref{def:deg-ample}.  Glue: $[-1]^*L\cong L$ for the $[-1]$ of
+  \Cref{def:cube-mulby-int}.
+\end{enumerate}
+Items (1) to (4) and (6) to (11) carry content; items (5) and (12) are
+abbreviations.  None of the twelve duplicates any of the ten counted in
+\Cref{sec:cube-cost}, so the two chapters together need
+\emph{twenty-two definitions} and \emph{about eighty-five lemmas of supporting
+API}.
+
+\subsection*{Statements missing: six left open, twenty-two proved here}
+
+Six statements are left open, and they are the only unproved statements in the
+chapter.
+\begin{enumerate}
+  \item \Cref{prop:deg-cohomology-finiteness} needs (N8), and beneath it (N4)
+  and (N1) of \Cref{sec:cube-cost}: finiteness and vanishing of the cohomology
+  of a coherent sheaf on a projective scheme over a field.  Used by every
+  statement of the chapter.
+  \item \Cref{prop:deg-euler-finite-morphism} needs (N8) for part (1) and
+  (N5) of \Cref{sec:cube-cost} for part (2).  Used by
+  \Cref{prop:deg-projection-formula} and \Cref{prop:deg-ample-positive}.
+  \item \Cref{lem:deg-ample-basic} needs (N11).  Used by
+  \Cref{thm:deg-snapper}, \Cref{prop:deg-ample-positive},
+  \Cref{lem:deg-torsion-finite} and \Cref{prop:deg-symmetric-ample}.
+  \item \Cref{lem:deg-devissage} needs (N12).  Used by
+  \Cref{prop:deg-intersection-rank} only.
+  \item \Cref{prop:deg-abelian-projective} needs (N11) and the classical
+  construction of a very ample divisor on an abelian variety.  Used by
+  \Cref{prop:deg-symmetric-ample} and \Cref{thm:deg-degree-formula}.  This is
+  the one open statement of the chapter that is about abelian varieties rather
+  than about general algebraic geometry, and the only one that will not be
+  supplied by a general-purpose Lean subtree.
+  \item \Cref{prop:deg-miracle-flatness} needs (N13).  Used by the flatness
+  clause of \Cref{thm:deg-isogeny} only.
+\end{enumerate}
+
+Twenty-two statements are proved here in full and are new to Lean:
+\Cref{def:deg-euler} and \Cref{lem:deg-euler-additive},
+\Cref{lem:deg-euler-affine},
+\Cref{lem:deg-numerical-unique},
+\Cref{lem:deg-difference-lowers-degree},
+\Cref{lem:deg-difference-criterion},
+\Cref{lem:deg-difference-explicit},
+\Cref{lem:deg-proper-affine-finite},
+\Cref{lem:deg-general-hyperplane},
+\Cref{thm:deg-snapper},
+\Cref{lem:deg-intersection-is-top-difference},
+\Cref{lem:deg-intersection-symmetric},
+\Cref{lem:deg-intersection-additive},
+\Cref{lem:deg-intersection-small-support},
+\Cref{thm:deg-intersection-multilinear},
+\Cref{cor:deg-intersection-powers},
+\Cref{prop:deg-intersection-rank},
+\Cref{prop:deg-projection-formula},
+\Cref{prop:deg-ample-positive},
+\Cref{cor:deg-ample-trivial-finite},
+\Cref{prop:deg-symmetric-ample},
+\Cref{lem:deg-torsion-finite},
+\Cref{lem:deg-mulby-proper},
+\Cref{thm:deg-isogeny} and
+\Cref{thm:deg-degree-formula} --- twenty-five items, of which
+\Cref{def:deg-euler} is a definition and \Cref{lem:deg-mulby-proper} and
+\Cref{lem:deg-euler-affine} are one-line consequences of facts Mathlib already
+has, leaving twenty-two of real formalisation work.  Four are theorems, two are
+corollaries, four are propositions and the remaining twelve are supporting
+lemmas.
+
+Four of the twenty-two use nothing that is missing beyond the definitions
+listed above and can therefore be formalised today:
+\Cref{lem:deg-numerical-unique},
+\Cref{lem:deg-difference-lowers-degree},
+\Cref{lem:deg-difference-criterion} and
+\Cref{lem:deg-difference-explicit} --- the whole of
+\Cref{sec:deg-numerical}, which is notion (N9) and is self-contained
+combinatorics.  A fifth, \Cref{lem:deg-proper-affine-finite}, needs only what
+Mathlib already has.  None of the others is formalisable before (N8) and (N11)
+exist.
+
+\subsection*{Summary, and how it composes with \Cref{sec:cube-cost}}
+
+Twelve definitions, of which ten carry content; about forty lemmas of
+supporting API in the six missing notions (N8) to (N13); six statements left
+open; and twenty-two statements proved in full here, five of which are
+formalisable immediately.
+
+Taken together with \Cref{sec:cube-cost} --- ten definitions, about forty-five
+lemmas, seven statements left open, twenty-five proved --- the two chapters
+that stand between \Cref{prop:av-isogeny} and a complete Lean proof of
+$\deg[n]=n^{2g}$ come to \emph{twenty-two definitions}, \emph{about
+eighty-five lemmas of supporting API in thirteen missing notions}, \emph{thirteen
+statements left open} and \emph{forty-seven statements proved in the
+blueprint}.
+
+The thirteen open statements are not thirteen independent theories.  They rest
+on four:
+\begin{enumerate}
+  \item \emph{The cohomology of coherent sheaves on a scheme, with proper base
+  change} --- (N1), (N4), (N5), (N6) of \Cref{sec:cube-cost} and (N8) here.
+  Eight of the thirteen open statements rest on this --- six of the seven of
+  \Cref{sec:cube-cost} and both of the cohomological ones here --- and it is by
+  a wide margin the largest single cost of the two chapters.
+  \Cref{chap:cube} needs degrees zero and one in a family; this chapter needs
+  all degrees but only absolutely,
+  over a field, with no base.  The two demands are close enough that one
+  development serves both, but neither is a special case of the other.
+  \item \emph{Ampleness} --- (N11) here.  Two open statements,
+  \Cref{lem:deg-ample-basic} and \Cref{prop:deg-abelian-projective}, and no
+  overlap with \Cref{chap:cube} at all: the theorem of the cube never mentions
+  an ample bundle.
+  \item \emph{Coherent-sheaf bookkeeping on a noetherian scheme} --- (N12)
+  here, together with (N7) of \Cref{sec:cube-cost}.  Two open statements,
+  \Cref{lem:deg-devissage} and
+  \Cref{prop:cube-global-sections-flat-base-change}; cheap, and needing no
+  cohomology.
+  \item \emph{Miracle flatness} --- (N13) here.  One open statement, one
+  clause of one theorem, and pure commutative algebra.
+\end{enumerate}
+
+Two practical consequences for the Lean split.  First, notion (N9), the
+numerical-polynomial calculus, is a genuinely independent piece of about seven
+lemmas which can be formalised now, before any decision about the cohomology
+layer, and which nothing else in the project blocks; it should be cut out
+first.  Second, notion (N11), ampleness, is the largest item here and is
+entirely general algebraic geometry: it depends on none of the cohomological
+notions, it would be a natural Mathlib contribution, and it is the gate through
+which \Cref{prop:deg-ample-positive}, \Cref{lem:deg-torsion-finite} and hence
+both main theorems of this chapter pass.  The three-way split ``numerical
+polynomials'', ``ampleness'' and ``Euler characteristic and intersection
+numbers'' is the natural one, in that order of increasing cost, and only the
+third of the three is blocked on \Cref{sec:cube-cost}.

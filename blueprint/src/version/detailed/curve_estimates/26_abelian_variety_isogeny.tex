@@ -1204,23 +1204,27 @@ of line bundles on abelian varieties.  This section states the five inputs that
 are needed, with proof sketches and references, and derives the remaining parts
 of \Cref{prop:av-isogeny} from them.  Two of the five, \Cref{thm:av-cube} and
 \Cref{thm:av-mulby-pullback}, are proved in \Cref{chap:cube} and are quoted
-here from there.  The other three are marked as open obligations: Mathlib
-\texttt{v4.33.1} has no invertible sheaves on a scheme, no Picard group of a
-scheme, no ampleness, no cohomology of coherent sheaves and no intersection
-numbers, so \emph{none} of the five can currently even be stated in Lean, and
-\Cref{sec:cube-cost} counts what the two proved ones would cost.  The
-statements below carry full labels so that a later chapter can depend on
-them.
+here from there.  The other three are proved in \Cref{chap:deg} and are
+likewise quoted here.  Mathlib \texttt{v4.33.1} has no invertible sheaves on a
+scheme, no Picard group of a scheme, no ampleness, no cohomology of coherent
+sheaves and no intersection numbers, so \emph{none} of the five can currently
+even be stated in Lean; \Cref{sec:cube-cost} and \Cref{sec:deg-cost} count
+between them what all five would cost.  The statements below carry full labels
+so that a later chapter can depend on them.
 
 \statusnote{Whether this project builds the layer of algebraic geometry that
 the five inputs of this section require --- invertible sheaves and the Picard
 group of a scheme, ampleness, cohomology of coherent sheaves, intersection
-numbers --- is an open scope question, and it has not been decided.  The
-alternative is to quote \Cref{prop:av-isogeny} as an external input, which is
-the precedent set by \S2.5 of the curve estimates, where the representability
-of $\mathrm{Pic}^0$ is marked ``Omitted --- quoted input''.  Until that question
-is settled, the Lean declarations listed in \Cref{sec:av-status} as deliberate
-placeholders stay unproved.}
+numbers --- was an open scope question when this section was written.  It has
+since been settled in favour of building it, and the mathematics has been
+written out: \Cref{chap:cube} proves \Cref{thm:av-cube} and
+\Cref{thm:av-mulby-pullback}, and \Cref{chap:deg} proves the other three
+inputs together with \Cref{thm:av-degree-formula} and
+\Cref{thm:av-isogeny-general} themselves.  Nothing in this section is
+conditional any more.  What remains open is the Lean layer beneath it, counted
+in \Cref{sec:cube-cost} and \Cref{sec:deg-cost}; until it exists, the Lean
+declarations listed in \Cref{sec:av-status} as deliberate placeholders stay
+unproved.}
 
 \begin{theorem}[Theorem of the cube]\label{thm:av-cube}
 Let $X$ and $Y$ be proper varieties over an algebraically closed field $K$, let
@@ -1287,15 +1291,16 @@ $[1]^*L\cong L$ and $[-1]^*L$.  See \cite[\S6]{MumfordAbelianVarieties} and
 \label{prop:av-symmetric-ample}
 Every abelian variety $A$ over an algebraically closed field carries an ample
 line bundle $L$ with $[-1]^*L\cong L$.
-\openobligation{AlgebraicGeometry: ampleness of an invertible sheaf on a
-scheme, and the projectivity of an abelian variety.}
 \end{proposition}
 \begin{proof}
-\emph{Sketch.}  An abelian variety is projective, so it carries some ample line
-bundle $L_0$ \cite[\S6]{MilneAbelianVarieties}.  Then $L:=L_0\otimes[-1]^*L_0$
-is ample, being a tensor product of ample bundles --- $[-1]$ is an isomorphism,
-so $[-1]^*L_0$ is ample --- and it is symmetric because $[-1]$ is an
-involution.
+\uses{prop:deg-symmetric-ample}
+This is \Cref{prop:deg-symmetric-ample}, proved in \Cref{sec:deg-positivity}
+of \Cref{chap:deg}; what follows is a sketch of the argument given there, not
+a second proof.  An abelian variety is projective, so it carries some ample
+line bundle $L_0$ --- that is \Cref{prop:deg-abelian-projective}, following
+\cite[I, \S7]{MilneAbelianVarieties}.  Then $L:=L_0\otimes[-1]^*L_0$ is ample,
+being a tensor product of ample bundles --- $[-1]$ is an isomorphism, so
+$[-1]^*L_0$ is ample --- and it is symmetric because $[-1]$ is an involution.
 \end{proof}
 
 \begin{proposition}[Positivity of the top self-intersection of an ample bundle]
@@ -1303,17 +1308,18 @@ involution.
 Let $X$ be a proper variety of dimension $g$ over an algebraically closed field
 and let $L$ be an ample line bundle on $X$.  Then the self-intersection number
 $(L^g)$ is a positive integer.
-\openobligation{AlgebraicGeometry: intersection numbers of invertible sheaves
-on a proper scheme, via the Snapper polynomial and Euler characteristics of
-coherent sheaves.}
 \end{proposition}
 \begin{proof}
-\emph{Sketch.}  By Snapper's theorem the function
-$m\mapsto\chi(X,L^{\otimes m})$ is a numerical polynomial of degree at most $g$
-whose degree-$g$ coefficient is $(L^g)/g!$.  For $L$ ample and $m\gg0$ one has
-$\chi(X,L^{\otimes m})=h^0(X,L^{\otimes m})$, which grows like a positive
-multiple of $m^g$; so the leading coefficient, and with it $(L^g)$, is
-positive.
+\uses{prop:deg-ample-positive}
+This is \Cref{prop:deg-ample-positive}, proved in \Cref{sec:deg-positivity} of
+\Cref{chap:deg}; what follows is a sketch of the argument given there, not a
+second proof.  By Snapper's theorem the function
+$m\mapsto\chi(X,L^{\otimes m})$ is a numerical polynomial of degree at most
+$g$, and $(L^g)$ is its $g$-th difference, a constant.  Replacing $L$ by a very
+ample power and cutting with a hyperplane section $D$ that avoids the
+associated points identifies that constant with the corresponding one on $D$,
+which has dimension $g-1$; the induction ends at $g=0$, where the number is
+$\dim_K\Gamma(X,\O_X)>0$.
 \end{proof}
 
 \begin{proposition}[Degree and intersection numbers]
@@ -1325,11 +1331,12 @@ Then for every line bundle $L$ on $Y$
 \[
   \bigl((f^*L)^g\bigr)=d\cdot\bigl(L^g\bigr).
 \]
-\openobligation{AlgebraicGeometry: intersection numbers of invertible sheaves
-on a proper scheme, and the projection formula for a finite morphism.}
 \end{proposition}
 \begin{proof}
-\emph{Sketch.}  By the projection formula
+\uses{prop:deg-projection-formula}
+This is \Cref{prop:deg-projection-formula}, proved in
+\Cref{sec:deg-intersection} of \Cref{chap:deg}; what follows is a sketch of
+the argument given there, not a second proof.  By the projection formula
 $f_*\bigl((f^*L)^{\otimes m}\bigr)\cong L^{\otimes m}\otimes f_*\O_X$, and
 $f_*\O_X$ is locally free of rank $d$ because $f$ is finite and flat of degree
 $d$.  Since $f$ is finite, cohomology is unchanged by $f_*$, so
@@ -1344,22 +1351,18 @@ $d\cdot(L^g)/g!$.  Comparing leading coefficients gives the identity.  See
 prop:av-ample-self-intersection, prop:av-degree-intersection, def:av-degree}
 Let $A$ be an abelian variety of dimension $g$ over an algebraically closed
 field $K$ and let $n\neq0$.  Suppose $[n]$ is finite, flat and surjective.
-Then $\deg[n]=n^{2g}$.
-\openobligation{AlgebraicGeometry: ampleness of an invertible sheaf on a
-scheme and the projectivity of an abelian variety; intersection numbers of
-invertible sheaves on a proper scheme, via the Snapper polynomial and Euler
-characteristics of coherent sheaves; the projection formula for a finite
-morphism; and everything the theorem of the cube needs, which is invertible
-sheaves and the Picard group of a scheme together with the cohomology of
-sheaves on a scheme in degrees zero and one and the direct images of a
-coherent sheaf along a proper morphism, counted in the formalisation cost
-section of the chapter on the theorem of the cube.}
+Then $\deg[n]=n^{2g}$.  The hypothesis is automatic: it is
+\Cref{thm:av-isogeny-general}.
 \end{theorem}
 \begin{proof}
-\uses{thm:av-mulby-pullback, prop:av-symmetric-ample,
-prop:av-ample-self-intersection, prop:av-degree-intersection}
-Choose a symmetric ample $L$ by \Cref{prop:av-symmetric-ample}.  By
-\Cref{thm:av-mulby-pullback}, $[n]^*L\cong L^{\otimes n^2}$, so
+\uses{thm:deg-degree-formula, thm:av-mulby-pullback,
+prop:av-symmetric-ample, prop:av-ample-self-intersection,
+prop:av-degree-intersection}
+This is \Cref{thm:deg-degree-formula}, proved in \Cref{sec:deg-degree} of
+\Cref{chap:deg}; what follows is a sketch of the argument given there, not a
+second proof.  Choose a symmetric ample $L$ by
+\Cref{prop:av-symmetric-ample}.  By \Cref{thm:av-mulby-pullback},
+$[n]^*L\cong L^{\otimes n^2}$, so
 $\bigl(([n]^*L)^g\bigr)=n^{2g}(L^g)$ by multilinearity of the intersection
 number.  On the other hand $[n]$ is finite, flat and surjective between proper
 varieties of dimension $g$, so \Cref{prop:av-degree-intersection} gives
@@ -1375,20 +1378,14 @@ prop:av-basic, lem:av-translation-intertwines}
 Let $A$ be an abelian variety of dimension $g$ over an algebraically closed
 field $K$ and let $n\neq0$ be a natural number, possibly divisible by the
 characteristic of $K$.  Then $[n]$ is finite, flat and surjective.
-\openobligation{AlgebraicGeometry: ampleness of an invertible sheaf on a
-scheme and the projectivity of an abelian variety; everything the theorem of
-the cube needs, which is invertible sheaves and the Picard group of a scheme
-together with the cohomology of sheaves on a scheme in degrees zero and one
-and the direct images of a coherent sheaf along a proper morphism, counted in
-the formalisation cost section of the chapter on the theorem of the cube; and
-in addition miracle flatness, that is, a finite surjective morphism between
-regular schemes of the same dimension is flat, which Mathlib v4.33.1 does not
-have in any form.}
 \end{theorem}
 \begin{proof}
-\uses{thm:av-mulby-pullback, prop:av-symmetric-ample, thm:av-zariski-main,
-prop:av-basic, lem:av-translation-intertwines, lem:av-torsion-pullback}
-\emph{Sketch.}  Choose a symmetric ample $L$ by
+\uses{thm:deg-isogeny, thm:av-mulby-pullback, prop:av-symmetric-ample,
+thm:av-zariski-main, prop:av-basic, lem:av-translation-intertwines,
+lem:av-torsion-pullback}
+This is \Cref{thm:deg-isogeny}, proved in \Cref{sec:deg-isogeny} of
+\Cref{chap:deg}; what follows is a sketch of the argument given there, not a
+second proof.  Choose a symmetric ample $L$ by
 \Cref{prop:av-symmetric-ample}.  By \Cref{thm:av-mulby-pullback},
 $[n]^*L\cong L^{\otimes n^2}$, which is ample because $n\neq0$.  The
 restriction of $[n]^*L$ to $A[n]$ is trivial, because $[n]$ maps $A[n]$ to the
@@ -1403,8 +1400,10 @@ quasi-finite; it is proper by the cancellation argument in the proof of
 of dimension $g=\dim A-\dim A[n]$ while $A$ is irreducible
 (\Cref{prop:av-basic}).  Flatness follows from miracle flatness: $[n]$ is a
 finite surjective morphism between smooth, hence regular, varieties of the same
-dimension.  See \cite[\S6]{MumfordAbelianVarieties} and
-\cite[\S7]{MilneAbelianVarieties}.
+dimension --- which is \Cref{prop:deg-miracle-flatness}, the one input of
+\Cref{chap:deg} that is pure commutative algebra and the only thing left open
+about this theorem.  See \cite[\S6]{MumfordAbelianVarieties} and
+\cite[I, \S7]{MilneAbelianVarieties}.
 \end{proof}
 
 \begin{remark}[Descending to an arbitrary field]
