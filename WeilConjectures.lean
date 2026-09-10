@@ -246,6 +246,7 @@ public import WeilConjectures.Mathlib.RingTheory.RingHom.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
+public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.PointCount
