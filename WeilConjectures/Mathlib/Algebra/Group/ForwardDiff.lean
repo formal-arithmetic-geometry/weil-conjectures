@@ -23,7 +23,12 @@ forward difference operator. This file collects the facts one needs about compos
   `v : Fin d → M`, defined as the product of the `fwdDiffₗ (v i)` in the endomorphism ring
   `Module.End ℤ (M → G)`, applied to `f`;
 * `fwdDiffComp_eq_sum_powerset`: the expansion of that composite as an alternating sum over the
-  subsets of `Fin d`.
+  subsets of `Fin d`;
+* `fwdDiff_iter_sub`: the iterates `Δ_[h]^[n]` are compatible with subtraction;
+* `fwdDiffList`: the same composite indexed by a list of directions instead, so that
+  concatenating two families of directions is `fwdDiffList_append`;
+* `eq_zero_of_fwdDiff_iter_eq_zero`: a function on `ℤ` killed by `Δ_[1]^[n + 1]` and with
+  vanishing differences `Δ_[1]^[j] Q 0` for `j ≤ n` is identically zero.
 
 These are the operator identities of `lem:deg-difference-explicit` in the blueprint chapter on the
 degree of an isogeny.
@@ -97,6 +102,77 @@ lemma fwdDiffComp_succ' (v : Fin (d + 1) → M) (f : M → G) :
   simp only [fwdDiffComp, List.ofFn_succ, List.prod_cons]
   rw [hc]
   simp only [Module.End.mul_apply, coe_fwdDiffₗ]
+
+/-- Iterated forward difference operators are compatible with subtraction. -/
+@[simp] lemma fwdDiff_iter_sub (h : M) (f g : M → G) (n : ℕ) :
+    Δ_[h]^[n] (f - g) = Δ_[h]^[n] f - Δ_[h]^[n] g := by
+  simpa only [coe_fwdDiffₗ_pow] using map_sub (fwdDiffₗ M G h ^ n) f g
+
+/-- A function on `ℤ` with vanishing first difference is constant, hence zero if it vanishes at
+`0`. -/
+private lemma eq_zero_of_fwdDiff_eq_zero {Q : ℤ → G} (h : Δ_[(1 : ℤ)] Q = 0) (h0 : Q 0 = 0) :
+    Q = 0 := by
+  have key : ∀ m : ℤ, Q (m + 1) = Q m := by
+    intro m
+    have := congrFun h m
+    simp only [_root_.fwdDiff, Pi.zero_apply, sub_eq_zero] at this
+    exact this
+  funext m
+  induction m using Int.induction_on with
+  | zero => simpa using h0
+  | succ k ih => rw [key k, ih]; simp
+  | pred k ih =>
+    have hk := key (-(k : ℤ) - 1)
+    rw [sub_add_cancel] at hk
+    rw [Pi.zero_apply, ← hk, ih]
+    simp
+
+/-- **Rigidity of the Newton expansion.** A function `Q : ℤ → G` killed by `Δ_[1]^[n + 1]` and
+with `Δ_[1]^[j] Q 0 = 0` for all `j ≤ n` is identically zero. -/
+theorem eq_zero_of_fwdDiff_iter_eq_zero {n : ℕ} {Q : ℤ → G} (h : Δ_[(1 : ℤ)]^[n + 1] Q = 0)
+    (h0 : ∀ j < n + 1, Δ_[(1 : ℤ)]^[j] Q 0 = 0) : Q = 0 := by
+  induction n generalizing Q with
+  | zero =>
+    refine eq_zero_of_fwdDiff_eq_zero ?_ (by simpa using h0 0 (by omega))
+    simpa using h
+  | succ n ih =>
+    have hΔ : Δ_[(1 : ℤ)] Q = 0 := by
+      refine ih ?_ fun j hj ↦ ?_
+      · rw [← Function.iterate_succ_apply]
+        exact h
+      · rw [← Function.iterate_succ_apply]
+        exact h0 (j + 1) (by omega)
+    exact eq_zero_of_fwdDiff_eq_zero hΔ (by simpa using h0 0 (by omega))
+
+/-- The composite `Δ_[l.head] ∘ ⋯ ∘ Δ_[l.getLast]` of the forward difference operators attached to
+a list of directions `l : List M`, applied to `f : M → G`.
+
+This is the same operator as `fwdDiffComp`, indexed by a list rather than by a `Fin d`-family; the
+list form is what makes concatenating two families of directions easy. -/
+def fwdDiffList (l : List M) (f : M → G) : M → G := (l.map (fwdDiffₗ M G)).prod f
+
+@[simp] lemma fwdDiffList_nil (f : M → G) : fwdDiffList ([] : List M) f = f := by
+  simp [fwdDiffList]
+
+lemma fwdDiffList_cons (a : M) (l : List M) (f : M → G) :
+    fwdDiffList (a :: l) f = Δ_[a] (fwdDiffList l f) := by
+  simp [fwdDiffList, Module.End.mul_apply, coe_fwdDiffₗ]
+
+/-- Concatenating the lists of directions composes the operators. -/
+lemma fwdDiffList_append (l₁ l₂ : List M) (f : M → G) :
+    fwdDiffList (l₁ ++ l₂) f = fwdDiffList l₁ (fwdDiffList l₂ f) := by
+  simp [fwdDiffList, List.map_append, List.prod_append, Module.End.mul_apply]
+
+/-- Repeating one direction gives the iterated difference operator. -/
+lemma fwdDiffList_replicate (n : ℕ) (a : M) (f : M → G) :
+    fwdDiffList (List.replicate n a) f = Δ_[a]^[n] f := by
+  induction n generalizing f with
+  | zero => simp
+  | succ n ih => rw [List.replicate_succ, fwdDiffList_cons, ih, Function.iterate_succ_apply']
+
+lemma fwdDiffComp_eq_fwdDiffList (v : Fin d → M) (f : M → G) :
+    fwdDiffComp v f = fwdDiffList (List.ofFn v) f := by
+  rw [fwdDiffComp, fwdDiffList, List.map_ofFn, Function.comp_def]
 
 /-- Splitting a sum over the subsets of `Fin (d + 1)` according to whether the subset contains
 `0` or not. -/
