@@ -3,6 +3,7 @@ module  -- shake: keep-all --deprecated_module: ignore
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
@@ -169,6 +170,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Over
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
