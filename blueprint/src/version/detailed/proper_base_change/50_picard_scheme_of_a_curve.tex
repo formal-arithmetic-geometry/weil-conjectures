@@ -14122,8 +14122,19 @@ $F$ be the subfunctor of
 subscheme of $\underline{\Hilb}^g_{X/k}$.
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-hilb-functor,def:pc-effective-cartier-divisor,def:pc-relative-effective-cartier,def:pc-invertible-module,def:pc-derived-category,def:pc-representable-functor,def:pc-subfunctor,def:pc-finite-locally-free,lem:pc-hilb-representable,def:pc-pic-sigma-functor}
 \end{theorem}
+% Ruling (route for $\cO_{X_T}(D)\cong\cM$ in ``$m$ factors through $W$'').  The
+% companion chain at \Cref{lem:pc-zero-scheme-recd} gets the injectivity of
+% $s^\vee$ from $s_x\neq0$ in a domain, using the integrality of the fibre $X_t$
+% (\Cref{prop:pc-XK-integral}) and the non-vanishing of $s_t$ established there.
+% Neither input is available here: $T$ is an arbitrary scheme over $k$, so $X_T$
+% need be neither integral nor reduced, and this proof establishes no
+% non-vanishing of $s$.  What it does have is \Cref{lem:pc-zero-scheme-recd}'s
+% conclusion, already invoked a paragraph earlier -- $D=Z(s)$ is a relative
+% effective Cartier divisor -- so the proof below routes the injectivity through
+% the invertibility of $\cI_D$ instead.  Nothing is weakened and no hypothesis is
+% added to the statement.
 \begin{proof}
-\uses{def:pc-hilb-functor,def:pc-pic-sigma-functor,def:pc-representable-functor,def:pc-subfunctor,lem:pc-cartier-criterion,lem:pc-f-open-subfunctor,lem:pc-flat-rf-open,lem:pc-projection-formula,lem:pc-recd-pullback,lem:pc-rf-perfect-base-change,lem:pc-universal-adjoint-section,lem:pc-universal-divisor,lem:pc-zero-scheme-recd,prop:pc-XK-integral,thm:pc-hilb-curves}
+\uses{def:pc-hilb-functor,def:pc-pic-sigma-functor,def:pc-representable-functor,def:pc-subfunctor,lem:pc-cartier-criterion,lem:pc-f-open-subfunctor,lem:pc-flat-rf-open,lem:pc-projection-formula,lem:pc-recd-pullback,lem:pc-rf-perfect-base-change,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-invertible-module,def:pc-divisor-line-bundle,lem:pc-tensor-dual-invertible,lem:pc-universal-adjoint-section,lem:pc-universal-divisor,lem:pc-zero-scheme-recd,prop:pc-XK-integral,thm:pc-hilb-curves}
 Write $H:=\underline{\Hilb}^g_{X/k}$; it exists by \Cref{prop:pc-XK-integral}
 (3) and \Cref{thm:pc-hilb-curves}.  The same part (3) discharges the
 hypothesis under which the genus $g$ of the statement is defined at all:
@@ -14189,10 +14200,28 @@ associated module
 (m\times\id)^*\cO(D_{\mathrm{univ}})\cong\cO_{X_T}(D)\cong\cM
 =\cL\otimes f_T^*\cN^{-1}
 \]
-(the second isomorphism holds because the section $s$ of $\cM$ has zero
-scheme $D$, so $s$ generates the ideal sheaf $\cI_D$ at the points where
-it does not vanish and the identification $D=Z(s)$ gives
-$\cO_{X_T}(D)=\cI_D^\vee$; write $u$ for this isomorphism).  We compute:
+(the second isomorphism is the following chain, in three steps.  First,
+$\cM$ is invertible on $X_T$ and $D=Z(s)$, so by \Cref{def:pc-zero-scheme}
+the ideal sheaf of $D$ is $\cI_D=\operatorname{im}\bigl(s^\vee:\cM^\vee
+\to\cO_{X_T}\bigr)$.  Second, $s^\vee$ is injective.  Indeed
+\Cref{lem:pc-zero-scheme-recd}, already applied above, gives that $D$ is a
+relative effective Cartier divisor on $X_T/T$, hence an effective Cartier
+divisor on $X_T$ (\Cref{def:pc-relative-effective-cartier}), so $\cI_D$ is
+invertible (\Cref{def:pc-effective-cartier-divisor}); injectivity may be
+checked on stalks, and at $x\in X_T$ the map $s^\vee_x$ factors as the
+surjection $\cM^\vee_x\twoheadrightarrow(\cI_D)_x$ followed by the
+inclusion $(\cI_D)_x\subseteq\cO_{X_T,x}$, where $\cM^\vee_x$ and
+$(\cI_D)_x$ are both free $\cO_{X_T,x}$-modules of rank $1$
+(\Cref{def:pc-invertible-module}, $\cM^\vee$ being invertible by
+\Cref{lem:pc-tensor-dual-invertible}); a surjection of free modules of rank
+$1$ over a local ring is multiplication by an element generating the unit
+ideal, hence by a unit, hence injective.  Therefore
+$\cI_D=\operatorname{im}(s^\vee)\cong\cM^\vee$.  Third,
+$\cO_{X_T}(D)=\cI_D^\vee\cong\cM^{\vee\vee}\cong\cM$, the equality
+being \Cref{def:pc-divisor-line-bundle}, which reads
+$\cO_S(D):=\cI_D^\vee$, and the last isomorphism
+\Cref{lem:pc-tensor-dual-invertible}, which asks of $\cM$ nothing beyond
+invertibility.  Write $u$ for this isomorphism.)  We compute:
 \[
 (m\times\id)^*\cL_H
 =(m\times\id)^*\cO(D_{\mathrm{univ}})
