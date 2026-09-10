@@ -214,6 +214,8 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.Idempotents
 public import WeilConjectures.Mathlib.RingTheory.Jacobson.Ideal
 public import WeilConjectures.Mathlib.RingTheory.Jacobson.Radical
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Basic
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
