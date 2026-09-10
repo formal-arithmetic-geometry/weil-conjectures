@@ -6537,7 +6537,7 @@ prescribes.)
 \uses{def:pc-divisor-line-bundle,def:pcb-divisor,lem:pcb-divisor-class-curve,def:pc-degree-line-bundle,def:pcb-pic0,def:pc-curve,lem:pc-smooth-over-field-regular,lem:pcb-regular-dim1-dvr}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-pic0,lem:pc-degree-base-change,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive,lem:pc-smooth-over-field-regular,lem:pcb-regular-dim1-dvr,def:pc-curve}
+\uses{def:pcb-pic0,lem:pc-degree-base-change,lem:pc-degree-tensor-additive,lem:pc-divisor-line-bundle-properties,lem:pc-euler-additive,lem:pc-smooth-over-field-regular,lem:pcb-regular-dim1-dvr,def:pc-curve}
 It suffices to prove this for $D=[P]$ with $P$ a closed point: both
 constructions are additive in $D$ (the divisor module of file~06 is
 $\cO_C(D_1)\otimes\cO_C(D_2)$ on the open dense subscheme where the two
@@ -6576,8 +6576,17 @@ the degree of \Cref{def:pcb-pic0} of the class $[P]$ (for $k$
 algebraically closed, where that degree is defined --- the gate
 \Cref{lem:pc-degree-agrees-sc} carries for the same comparison); for
 general $D$
-the value follows by additivity of the degree on tensor products
-\Cref{lem:pc-degree-base-change}.  This proves the claim.
+the value follows by additivity of the degree on tensor products,
+\Cref{lem:pc-degree-tensor-additive}, applied to the isomorphism
+$\cO_C(D_1+D_2)\cong\cO_C(D_1)\otimes\cO_C(D_2)$ of the first paragraph
+--- that node asks of its two factors only that they be invertible, no
+nonzero section being assumed of either, and its remaining hypotheses,
+$C$ proper over $k$ of dimension $\le1$, are those under which $\deg$ is
+being read here.  The value so obtained for an effective
+$D=\sum_in_i[P_i]$ with the $P_i$ $k$-rational, namely $\sum_in_i$, is
+the last formula of \Cref{lem:pc-degree-base-change}(2), which is where
+the effective case of the same additivity is proved.  This proves the
+claim.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -10895,15 +10904,32 @@ them in that case with no cited input.  The general form is stated
 separately as \Cref{lem:pc-degree-tensor-additive}, cited there not to
 \stacksproject{0AYV} --- whose hypotheses are narrower, $X$ being a
 proper curve there, hence integral --- but to the tensor-product form
-Varieties, Lemma~33.44.7, \stacksproject{0AYX}.  Its consequence for
-powers, \Cref{lem:pc-degree-powers}, is used in the proof of
-\Cref{lem:pc-ample-positive-degree}(1) and again in Step~2 of the proof
-of \Cref{lem:pc-twist}, where the degree of
+Varieties, Lemma~33.44.7, \stacksproject{0AYX}.  Apart from
+\Cref{lem:pc-degree-powers}, whose proof is where the consequence for
+powers is drawn from it, \Cref{lem:pc-degree-tensor-additive} and
+\Cref{lem:pc-degree-powers} are consumed at exactly four places in the
+chapter, and the list that
+follows is the whole of them.  The additivity of
+\Cref{lem:pc-degree-tensor-additive} is used in the proof of
+\Cref{lem:pc-divisor-line-bundle-agrees-sc}, to pass from $D=[P]$ to a
+general $D$; in the proof of \Cref{lem:pc-zero-scheme-recd}, to drop the
+factor $f_t^*\cN_t^{-1}$ from $\deg(\cL_t\otimes f_t^*\cN_t^{-1})$, that
+factor having degree $0$ by \Cref{lem:pc-degree-powers}(1) --- as a
+module isomorphic to $\cO_{X_t}$, and not by any case of the present
+lemma; and in Step~2 of the proof of \Cref{lem:pc-twist}.  The
+consequence for powers, \Cref{lem:pc-degree-powers}(2), is used in the
+proof of \Cref{lem:pc-ample-positive-degree}(1) and again in that
+Step~2, where the degree of
 $\cL\otimes\cL_0^{\bullet\otimes n}|_{X_K}$ is computed: the additivity
 there is \Cref{lem:pc-degree-tensor-additive}, the identity
 $\deg(\cL_0^{\bullet\otimes n})=n\deg(\cL_0^{\bullet})$ is
 \Cref{lem:pc-degree-powers}(2), and only the base change
-$\deg_{X_K}=\deg_X$ is taken from part (1) of the present lemma.)
+$\deg_{X_K}=\deg_X$ is taken from part (1) of the present lemma.  At the
+first two of those places the present lemma is cited as well and keeps
+its own role there: the value $\sum_in_i$ in the effective case, which
+is the last formula of (2), at
+\Cref{lem:pc-divisor-line-bundle-agrees-sc}, and part (4) at
+\Cref{lem:pc-zero-scheme-recd}.)
 \uses{def:pc-degree-line-bundle,def:pc-euler-characteristic,def:pc-invertible-module,def:pc-divisor-line-bundle,def:pc-effective-cartier-divisor,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-euler-additive,lem:pc-affine-vanishing,def:pc-base-change,def:pc-dimension,def:pc-smooth-morphism}
 % No \uses for \Cref{lem:pc-degree-agrees-sc} here, deliberately: the edge would
 % close a cycle.  That node's proof already
@@ -10913,19 +10939,24 @@ $\deg_{X_K}=\deg_X$ is taken from part (1) of the present lemma.)
 % The prose citation above points at a consumer of this node, not at a hypothesis: the
 % parenthesis says where the pullback-from-a-point case of tag 0AYV is made explicit
 % downstream.
-% The same ruling covers the four forward pointers added to that parenthesis.
+% The same ruling covers the six forward pointers of that parenthesis.
 % \Cref{lem:pc-degree-tensor-additive} is named there as the place where the general
 % tensor-product form of the degree is stated, \Cref{lem:pc-degree-powers} as the place
-% where its consequence for powers is drawn, and \Cref{lem:pc-ample-positive-degree}
-% and \Cref{lem:pc-twist} as the two places where that consequence is consumed; none of
-% the four is a hypothesis of this lemma.  An edge to
+% where its consequence for powers is drawn, and
+% \Cref{lem:pc-divisor-line-bundle-agrees-sc}, \Cref{lem:pc-zero-scheme-recd},
+% \Cref{lem:pc-ample-positive-degree} and \Cref{lem:pc-twist} as the four places where
+% the two are consumed; none of the six is a hypothesis of this lemma.  An edge to
 % \Cref{lem:pc-ample-positive-degree} would in addition close the 2-cycle
 %   lem:pc-degree-base-change -> lem:pc-ample-positive-degree
 %     -> lem:pc-degree-base-change,
 % that node's proof already citing this one, and an edge to \Cref{lem:pc-twist} would
 % close the 2-cycle
 %   lem:pc-degree-base-change -> lem:pc-twist -> lem:pc-degree-base-change
-% for the same reason.  So no uses-edge is added for any of the four.
+% for the same reason.  The two pointers added here fall the same way: the proofs of
+% \Cref{lem:pc-divisor-line-bundle-agrees-sc} and of \Cref{lem:pc-zero-scheme-recd}
+% both already cite this node, so either edge would close the 2-cycle
+%   lem:pc-degree-base-change -> <that node> -> lem:pc-degree-base-change.
+% So no uses-edge is added for any of the six.
 \end{lemma}
 % Ruling (hypothesis of (4)): "of dimension $1$" is spelled out as "every
 % irreducible component of dimension one".  Part (4) applies
@@ -13901,7 +13932,7 @@ divisor} on $X_T/T$ which is finite locally free of degree $g$ over $T$.
 \uses{def:pc-separably-closed,def:pc-smooth-projective-curve,def:pc-genus,def:pc-rational-point,def:pc-f-subfunctor,def:pc-finite-locally-free,def:pc-zero-scheme,def:pc-relative-effective-cartier,def:pc-effective-cartier-divisor,def:pc-euler-characteristic,def:pc-degree-line-bundle,def:pc-invertible-module,def:pc-curve,lem:pc-flat-base-change-cohom,lem:pc-f-open-subfunctor}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-degree-line-bundle,def:pc-dimension,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-degree-zero-properties,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,prop:pc-XK-integral,lem:pc-smooth-over-field-regular}
+\uses{def:pc-degree-line-bundle,def:pc-dimension,def:pc-euler-characteristic,def:pc-finite-locally-free,def:pc-genus,def:pc-zero-scheme,lem:pc-cartier-criterion,lem:pc-coherent-hi,lem:pc-degree-base-change,lem:pc-degree-powers,lem:pc-degree-tensor-additive,lem:pc-degree-zero-properties,lem:pc-dim-base-change,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pc-rational-hyp,lem:pc-recd-locally-principal,lem:pc-rf-perfect-base-change,lem:pc-smooth-base-change,lem:pc-smooth-flat,lem:pc-vanishing-above-dim,lem:pcb-regular-dim1-dvr,prop:pc-XK-integral,lem:pc-smooth-over-field-regular,def:pc-divisor-line-bundle,lem:pc-tensor-dual-invertible}
 $\cM:=\cL\otimes f_T^*\cN^{-1}$ is an invertible module on $X_T$ and
 $s\in H^0(X_T,\cM)$.  By
 \Cref{def:pc-zero-scheme} the ideal sheaf
@@ -13988,8 +14019,29 @@ module,
 \deg(D_t)=\deg(\cO_{X_t}(D_t))=\deg(\cM_t)
 =\deg(\cL_t\otimes f_t^*\cN_t^{-1})=\deg(\cL_t)=g ,
 \]
-by \Cref{lem:pc-degree-base-change} (the module $f_t^*\cN_t^{-1}$ is a
-pullback from a point, hence of degree $0$) and the computation above.
+where the first equality is
+\Cref{lem:pc-degree-base-change}(4), whose hypotheses hold for the fibre
+$X_t$ (smooth and proper over $\kappa(t)$, of dimension $1$ and integral:
+recorded above); the third is the definition
+$\cM_t=\cL_t\otimes f_t^*\cN_t^{-1}$; the second holds because
+$\cO_{X_t}(D_t)\cong\cM_t$, since $s_t^\vee:\cM_t^\vee\to\cO_{X_t}$ is
+injective (stalkwise it is multiplication by $s_{t,x}$, which is
+non-zero in the domain $\cO_{X_t,x}$ --- both recorded above), so that
+$\cI_{D_t}=\operatorname{im}(s_t^\vee)\cong\cM_t^\vee$ and hence
+$\cO_{X_t}(D_t)=\cI_{D_t}^\vee\cong\cM_t^{\vee\vee}\cong\cM_t$
+(\Cref{def:pc-divisor-line-bundle} for
+$\cO_{X_t}(D_t)=\cI_{D_t}^\vee$ and \Cref{lem:pc-tensor-dual-invertible}
+for $\cM_t\cong\cM_t^{\vee\vee}$), while $\deg$ depends only on the
+isomorphism class of an invertible module,
+\Cref{lem:pc-degree-powers}(1); the
+fourth is additivity of the degree on a tensor product of invertible
+modules, \Cref{lem:pc-degree-tensor-additive},
+applied on $X_t$ to $\cL_t$ and $f_t^*\cN_t^{-1}$, together with
+$\deg(f_t^*\cN_t^{-1})=0$: an invertible module on the point
+$\Spec\kappa(t)$ is free of rank one, so $f_t^*\cN_t^{-1}\cong\cO_{X_t}$,
+and $\deg(\cO_{X_t})=0$ while the degree depends only on the isomorphism
+class, both by \Cref{lem:pc-degree-powers}(1); and the last is the
+computation above.
 Since $D\to T$ is finite locally free and the fibre degree at $t$ equals
 $\dim_{\kappa(t)}\Gamma(D_t,\cO_{D_t})=\deg(D_t)=g$, the morphism
 $D\to T$ is finite locally free of degree $g$
