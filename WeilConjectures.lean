@@ -137,7 +137,10 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Change
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
@@ -160,6 +163,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
