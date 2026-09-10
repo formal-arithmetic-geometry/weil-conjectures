@@ -249,6 +249,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.PointCount
+public import WeilConjectures.RingTheory.CohenMacaulay.Basic
 public import WeilConjectures.RingTheory.Depth.Basic
 public import WeilConjectures.RingTheory.MvPolynomial.HomogeneousLocalization
 public import WeilConjectures.RingTheory.NumericalPolynomial
