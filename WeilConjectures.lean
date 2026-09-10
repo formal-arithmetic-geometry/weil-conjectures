@@ -219,6 +219,7 @@ public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.PrincipalIdealDomain
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
+public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.Mathlib.RingTheory.RingHom.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
@@ -226,6 +227,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.PointCount
+public import WeilConjectures.RingTheory.Depth.Basic
 public import WeilConjectures.RingTheory.MvPolynomial.HomogeneousLocalization
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
