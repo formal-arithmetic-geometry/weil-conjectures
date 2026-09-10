@@ -10136,7 +10136,12 @@ is an isomorphism in $D(\cO_T)$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-morphism-conventions,def:pc-base-change,lem:pc-cech-resolution,lem:pc-affine-morphism-hi,lem:pc-proper-base-change,lem:pc-flat-compose,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-perfect-complex,lem:pc-affine-intersection-separated,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-base-change-cohom,lem:pc-flat-source-local}
+\uses{def:pc-perfect-complex,lem:pc-affine-intersection-separated,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-source-local}
+% \uses drops lem:pc-flat-base-change-cohom with this pass: it was
+% cited only at the base-change step below, whose $g:T\to S$ is
+% arbitrary, so its flatness hypothesis on $g$ was not available at
+% that site.  The step is carried instead by lem:pc-affine-morphism-hi,
+% already an edge here, which needs no flatness.
 % \uses drops lem:pc-fp-flat-finite-projective and
 % lem:pc-finite-flat-local-free with this pass: both were cited only
 % for the attempt to read perfectness off the terms of the Čech
@@ -10213,11 +10218,25 @@ Rf_{B,*}\cG_B\;\cong\;\prod_{J}(f_B\circ j_{U_{J,B}})_*\cG_B|_{U_{J,B}},
 \]
 and the terms satisfy
 $(f_B\circ j_{U_{J,B}})_*\cG_B|_{U_{J,B}}
-\;=\;(f\circ j_J)_*\cG|_{U_J}\otimes_AB$
-(the identification of \Cref{lem:pc-flat-base-change-cohom}: affine
-flat base change for the quasi-coherent $(f\circ j)_*\cG$ -- flatness
-of $A\to B$; and the direct computation
-$\Gamma(U_{J,B},\cG_B)=\Gamma(U_J,\cG)\otimes_AB$).  Hence the two sides
+\;=\;(f\circ j_J)_*\cG|_{U_J}\otimes_AB$.
+This needs no flatness of $A\to B$, which is essential here because
+$g$, and hence $A\to B$, is arbitrary.  The terms are pushforwards of a
+quasi-coherent module along an affine morphism, and the formation of
+such a pushforward commutes with arbitrary affine base change.  Indeed
+$U_J$ and $\Spec A$ are affine, so $f\circ j_J$ is an affine morphism
+and $(f\circ j_J)_*\cG|_{U_J}=\widetilde{\Gamma(U_J,\cG)}$ on $\Spec A$
+by \Cref{lem:pc-affine-morphism-hi}; likewise $U_{J,B}$ and $\Spec B$
+are affine, so $(f_B\circ j_{U_{J,B}})_*\cG_B|_{U_{J,B}}
+=\widetilde{\Gamma(U_{J,B},\cG_B)}$ on $\Spec B$.  So the identification
+is the direct computation
+$\Gamma(U_{J,B},\cG_B)=\Gamma(U_J,\cG)\otimes_AB$, which is the
+description of a pullback of quasi-coherent modules along a morphism of
+affine schemes: writing $U_J=\Spec(B_J)$ and $\cG|_{U_J}=\widetilde N$
+as above, one has $U_{J,B}=\Spec(B_J\otimes_AB)$ and
+$\cG_B|_{U_{J,B}}=\widetilde{N\otimes_{B_J}(B_J\otimes_AB)}
+=\widetilde{N\otimes_AB}$, whence
+$\Gamma(U_{J,B},\cG_B)=N\otimes_AB=\Gamma(U_J,\cG)\otimes_AB$.
+Hence the two sides
 are the two natural exact triangles; the canonical map
 $g^*(Rf_*\cG)\to Rf_{B,*}\cG_B$ is, under the two quasi-isomorphisms,
 the identity of the base changed resolution complex: the map
