@@ -204,6 +204,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
+public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
@@ -215,6 +216,7 @@ public import WeilConjectures.Mathlib.RingTheory.Idempotents
 public import WeilConjectures.Mathlib.RingTheory.Jacobson.Ideal
 public import WeilConjectures.Mathlib.RingTheory.Jacobson.Radical
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Basic
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Field
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
