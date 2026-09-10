@@ -9695,6 +9695,17 @@ the statement, so it is not decomposed further here.
 
 % ---------------------------------------------------------------------------
 % Cited.
+% PR #645 (taxis 819) ruled the other way at the flatness step of
+% \Cref{lem:pc-rf-perfect-base-change} -- ``no node is created for it either:
+% a step this elementary takes a tag, and a new node here would add an
+% in-degree-one leaf for no gain'' -- and that ruling is superseded here.  Its
+% factual prediction holds (this node has in-degree 1 and out-degree 1), so the
+% reversal is on the weighing, not on the facts: a `% Cited.' node owning
+% `00HT' retires it from the unowned-tag census at the head of this file, where
+% it was an entry under all three readings for as long as it sat as a
+% proof-position tag inside a `% Decomposed.' node, and a node can carry
+% \mathlibok and \lean{...} and so surface the Mathlib coverage in the
+% rendered graph, which a bare tag inside a proof cannot.
 \begin{lemma}[Flatness over the base is local on the source]
 \label{lem:pc-flat-source-local}
 Let $R\to R'$ be a ring map and let $M$ be an $R'$-module.  Then $M$ is
@@ -10182,8 +10193,8 @@ already for $X=\mathbf P^1_A$ and the standard affine open
 $U=D_+(x_0)$ one has $\Gamma(U,\cO_X)=A[t]$.  What makes $Rf_*\cG$
 perfect is the finiteness of its cohomology, which comes from
 properness of $f$, and that step is taken here as a cited external
-input: Derived Categories of Schemes, Lemma~36.30.4,
-\stacksproject{0B91}, whose second part is the perfectness assertion
+input: Derived Categories of Schemes, Lemma~36.30.4
+(\stacksproject{0B91}), part~(2), which is the perfectness assertion
 of this lemma, for $f$ proper of finite presentation and $\cG$ of
 finite presentation and flat over $S$.  So $Rf_*\cG$ is a perfect
 object of $D(\cO_S)$ (\Cref{def:pc-perfect-complex}).
@@ -10244,6 +10255,12 @@ finite because $M$ is finite.
 
 % ---------------------------------------------------------------------------
 % Cited.
+% Consumer-in-degree 0 since the perfectness repair at
+% \Cref{lem:pc-rf-perfect-base-change}, whose proof was this node's only
+% consumer: \Cref{lem:pc-flf-properties}, cited as a user in the proof below,
+% is a prose citation and not an edge -- it carries no \uses to this node,
+% reaching finite local freeness through lem:pc-finite-flat-fp-locally-free
+% instead.  The node stays, in the idiom of \Cref{lem:pc-going-down-flat}.
 \begin{lemma}[Finitely presented and flat means finite locally free]
 \label{lem:pc-fp-flat-finite-projective}
 Let $A$ be a ring and $M$ an $A$-module.  The following are equivalent:
