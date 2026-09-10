@@ -7041,18 +7041,57 @@ $d$}.  Then $f_*\cO_X$ is a locally free $\cO_S$-module of rank $d$,
 and for every $s\in S$ the canonical map
 $(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)\to
 \Gamma(X_s,\cO_{X_s})$ is an isomorphism.
-\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,lem:pc-flat-base-change-cohom,def:pc-base-change}
+\uses{def:pc-finite-locally-free,def:pc-morphism-conventions,def:pc-base-change}
+% \uses drops lem:pc-flat-base-change-cohom with this pass.  The statement edge
+% was bare: the statement makes no prose reference to that node, and the only
+% place it was ever read was the base-change step of the proof below, which no
+% longer appeals to it.  See the note on the proof \uses line.
 \end{lemma}
 \begin{proof}
-\uses{def:pc-finite-locally-free,lem:pc-flat-base-change-cohom,lem:pc-finite-flat-fp-locally-free}
+\uses{def:pc-finite-locally-free,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-finite-flat-fp-locally-free}
+% \uses drops lem:pc-flat-base-change-cohom with this pass: it was cited only
+% at the fibre step below, whose base change is $\Spec\kappa(s)\to S$, the
+% inclusion of a point, so that node's flatness hypothesis on the base change
+% morphism was not available at this site.  The step is carried instead by
+% lem:pc-affine-morphism-hi -- of which only the quasi-coherence clause is
+% used -- together with a direct computation, and needs no flatness.
 By \Cref{def:pc-finite-locally-free} the morphism $f$ is finite, flat
 and locally of finite presentation, hence finite locally free: $f$ is
 affine and $f_*\cO_X$ is a finite locally free $\cO_S$-module
 (\Cref{lem:pc-finite-flat-fp-locally-free}).  Fix $s\in S$.  The
 canonical map
 $(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)\to\Gamma(X_s,\cO_{X_s})$ is
-an isomorphism by the base change identity
-(\Cref{lem:pc-flat-base-change-cohom}); this is the second assertion.
+an isomorphism because $\cO_X$ is quasi-coherent and $f$ is affine, so
+that the formation of $f_*\cO_X$ commutes with arbitrary base change.
+No flatness of $\Spec\kappa(s)\to S$ is needed here, and none is
+available: that morphism is the inclusion of a point and is not flat in
+general, so the flat base change identity for cohomology, whose
+hypothesis is flatness of the base change morphism, is unavailable at
+this site.  In detail, choose an affine open $V=\Spec(A)\subseteq S$
+containing $s$ and let $\mathfrak p\subset A$ be the prime of $s$, so that
+$\cO_{S,s}=A_{\mathfrak p}$ and $\kappa(s)=\kappa(\mathfrak p)$; as $f$
+is affine, $f^{-1}(V)=\Spec(B)$ is affine.  The module $f_*\cO_X$ is
+quasi-coherent by \Cref{lem:pc-affine-morphism-hi}, applied to the
+affine morphism $f$ and the quasi-coherent $\cO_X$-module $\cO_X$ --- it
+is that clause of the lemma that is used, not the vanishing of the
+higher direct images.  A quasi-coherent module on an affine scheme is
+the module associated with its global sections, so
+$f_*\cO_X|_V=\widetilde M$ with
+$M=\Gamma(V,f_*\cO_X)=\Gamma(f^{-1}(V),\cO_X)=B$ by the definition of
+the pushforward.  Hence
+\[
+(f_*\cO_X)_s\otimes_{\cO_{S,s}}\kappa(s)
+=B_{\mathfrak p}\otimes_{A_{\mathfrak p}}\kappa(\mathfrak p)
+=B\otimes_A\kappa(s).
+\]
+On the other side $X_s=X\times_S\Spec\kappa(s)$
+(\Cref{def:pc-base-change}), and $\Spec\kappa(s)\to S$ factors through
+the open subscheme $V$, so
+$X_s=\Spec(B)\times_{\Spec(A)}\Spec\kappa(s)=\Spec(B\otimes_A\kappa(s))$
+and $\Gamma(X_s,\cO_{X_s})=B\otimes_A\kappa(s)$ as well.  Under these
+two identifications the canonical map is the identity of
+$B\otimes_A\kappa(s)$, hence an isomorphism; this is the second
+assertion.
 Moreover $\dim_{\kappa(s)}\Gamma(X_s,\cO_{X_s})=d$ by the fibre-rank
 condition in \Cref{def:pc-finite-locally-free}.  Since $f_*\cO_X$ is
 locally free, its stalk at $s$ is a finite free $\cO_{S,s}$-module of
