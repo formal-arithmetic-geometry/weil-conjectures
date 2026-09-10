@@ -46,21 +46,11 @@ claims no more than that comment does.
 % nodes outside `sec:basis', with % comments stripped over the whole file, the tags
 % that no node owns under that convention number 12, in 9 nodes:
 %
-%   00HT (lem:pc-rf-perfect-base-change),
 %   01V8 (lem:pc-smooth-characterization), 01XD (lem:pc-cech-computes),
 %   01XK and 02KH (lem:pc-flat-base-change-cohom),
 %   023L, 023M, 023N (lem:pc-fpqc-descent), 08AA (lem:pc-euler-additive),
-%   0B8L (lem:pc-pic-group-valued), 0BDK (lem:pc-perfect-locus),
-%   0G6T (lem:pc-cech-resolution).
-%
-% 00HT is the newest of them: it arrived with the repair of issue 819, which
-% replaced a mis-named justification in that node's proof by the tag the step
-% actually uses.  Before that repair these figures read 11 in 8 nodes, 13 in 10
-% nodes and 13 in 9 nodes respectively; each moved by exactly one tag in one
-% node, and that one node is lem:pc-rf-perfect-base-change.  0G6T arrived the
-% same way one pass earlier, with the citation repair of issue 788, at
-% lem:pc-cech-resolution; before that one the figures read 10 in 7 nodes, 12 in
-% 9 nodes and 12 in 8 nodes.
+%   0B8L (lem:pc-pic-group-valued), 0B91 (lem:pc-rf-perfect-base-change),
+%   0BDK (lem:pc-perfect-locus), 0G6T (lem:pc-cech-resolution).
 %
 % Dropping (ii) and counting only citation-node ownership gives 14, in 11 nodes.
 % The two extra are exactly 01XJ and 01JY, and they are the only two sites at which
@@ -378,7 +368,11 @@ It is \emph{flat} if every induced local-ring map is flat, and
 \emph{unramified} if it is locally of finite type and its diagonal is an
 open immersion.  It is \emph{\'etale} if it is locally of finite
 presentation, flat, and unramified, and \emph{weakly etale} if it is
-flat and its diagonal is flat.
+flat and its diagonal is flat.  An \(\mathcal O_X\)-module
+\(\mathcal F\) is \emph{flat over \(Y\)} if for every \(x\in X\) the
+stalk \(\mathcal F_x\) is flat as a module over
+\(\mathcal O_{Y,f(x)}\); flatness of \(f\) is the case
+\(\mathcal F=\mathcal O_X\).
 
 For \(y\in|Y|\), the \emph{geometric fiber} over \(y\) is
 \[
@@ -9701,6 +9695,39 @@ the statement, so it is not decomposed further here.
 
 % ---------------------------------------------------------------------------
 % Cited.
+% PR #645 (taxis 819) ruled the other way at the flatness step of
+% \Cref{lem:pc-rf-perfect-base-change} -- ``no node is created for it either:
+% a step this elementary takes a tag, and a new node here would add an
+% in-degree-one leaf for no gain'' -- and that ruling is superseded here.  Its
+% factual prediction holds (this node has in-degree 1 and out-degree 1), so the
+% reversal is on the weighing, not on the facts: a `% Cited.' node owning
+% `00HT' retires it from the unowned-tag census at the head of this file, where
+% it was an entry under all three readings for as long as it sat as a
+% proof-position tag inside a `% Decomposed.' node, and a node can carry
+% \mathlibok and \lean{...} and so surface the Mathlib coverage in the
+% rendered graph, which a bare tag inside a proof cannot.
+\begin{lemma}[Flatness over the base is local on the source]
+\label{lem:pc-flat-source-local}
+Let $R\to R'$ be a ring map and let $M$ be an $R'$-module.  Then $M$ is
+flat over $R$ if and only if $M_{\mathfrak q}$ is flat over
+$R_{\mathfrak p}$ for every prime $\mathfrak q\subset R'$, where
+$\mathfrak p=\mathfrak q\cap R$ is the prime of $R$ lying under
+$\mathfrak q$.
+\uses{def:pc-morphism-conventions}
+% Mathlib: flatness over the base descends from the localizations
+% of $M$ at the maximal ideals of $R'$, and for a module over
+% $R_{\mathfrak p}$ flatness over $R_{\mathfrak p}$ and over $R$ agree.
+\mathlibok\ \lean{Module.flat_of_isLocalized_maximal,
+Module.flat_iff_of_isLocalization}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Algebra, Lemma~10.39.18
+(\stacksproject{00HT}), part~(6).  It is available in Mathlib in the
+form named in the statement, so it is not decomposed further here.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
 % The first assertion is the source's statement verbatim -- Algebra,
 % Lemma 10.116.5, tag 00P3 -- so this node is cited, not decomposed.
 % Until this pass the node was marked Decomposed and carried a written-out
@@ -10098,7 +10125,8 @@ $\prod_J\;(f\circ j_{U})_*\cF|_{U_J}$.
 \label{lem:pc-rf-perfect-base-change}
 Let $S$ be a scheme, $f:X\to S$ a proper morphism of finite
 presentation, and let $\cG$ be an $\cO_X$-module of finite presentation
-and flat over $S$.  Then $Rf_*\cG$ is a perfect object of $D(\cO_S)$,
+and flat over $S$ (i.e.\ $\cG_x$ is flat over $\cO_{S,f(x)}$ for every
+$x\in X$).  Then $Rf_*\cG$ is a perfect object of $D(\cO_S)$,
 and its formation commutes with arbitrary base change: for every
 morphism $g:T\to S$ the canonical map
 \[
@@ -10108,11 +10136,13 @@ is an isomorphism in $D(\cO_T)$.
 \uses{def:pc-derived-category,def:pc-perfect-complex,def:pc-invertible-in-degree-zero,def:pc-morphism-conventions,def:pc-base-change,lem:pc-cech-resolution,lem:pc-affine-morphism-hi,lem:pc-proper-base-change,lem:pc-flat-compose,def:pc-finite-locally-free}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-perfect-complex,lem:pc-affine-intersection-separated,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-finite-flat-local-free,lem:pc-flat-base-change-cohom,lem:pc-fp-flat-finite-projective}
-% \uses drops lem:pc-flf-properties, deliberately: its only citation in this proof was
-% the ``cf.\ the proof of'' pointer replaced above, and that node is about a morphism of
-% schemes and $f_*\cO_X$, not about an $A$-module over a local ring.  The step it was
-% gestured at is now carried by \Cref{lem:pc-finite-flat-local-free}.
+\uses{def:pc-perfect-complex,lem:pc-affine-intersection-separated,lem:pc-affine-morphism-hi,lem:pc-cech-resolution,lem:pc-flat-base-change-cohom,lem:pc-flat-source-local}
+% \uses drops lem:pc-fp-flat-finite-projective and
+% lem:pc-finite-flat-local-free with this pass: both were cited only
+% for the attempt to read perfectness off the terms of the Čech
+% complex, which does not work -- see the paragraph beginning
+% ``Perfectness does not follow'' below.  lem:pc-flat-source-local
+% is added: it is the criterion the flatness step uses.
 Both assertions are Zariski-local in $S$ (the object $Rf_*\cG$
 restricts to the corresponding object for the restricted morphism and
 the base change map localizes in $T$), so assume $S=\Spec(A)$ affine.
@@ -10131,120 +10161,47 @@ $X/\Spec A$ and $\cG$:
 Rf_*\cG\;\cong\;\Bigl(\;\cdots\;\to\prod_{|J|=1}(f\circ j_J)_*\cG|_{U_J}
 \to\prod_{|J|=2}(f\circ j_J)_*\cG|_{U_J}\to\cdots\Bigr),
 \]
-a bounded complex (length $\le t$) of quasi-coherent, finitely
-presented, flat $\cO_S$-modules: each
+a bounded complex (length $\le t$) of quasi-coherent, flat
+$\cO_S$-modules: each
 $(f\circ j_J)_*\cG|_{U_J}$ is quasi-coherent (affine morphism,
 \Cref{lem:pc-affine-morphism-hi}) with value on $\Spec(A)$ the
 $A$-module $\Gamma(U_J,\cG)$ (affine: $(f\circ j_J)$ is affine since
 $U_J$ is affine and $S$ affine, so the direct image of the
-quasi-coherent $\cG|_{U_J}$ is $\widetilde{\Gamma(U_J,\cG)}$); the
-module $\Gamma(U_J,\cG)$ is of finite type over $A$ (with
-$U_J=\Spec(B_J)$, $B_J$ a finite type $A$-algebra and
-$\cG|_{U_J}=\widetilde N$ with $N$ a finite $B_J$-module) and flat
-over $A$ ($\cG$ flat over $S$ means that $\cG_{x}$ is flat over
-$\cO_{S,f(x)}$ for every $x\in X$; for $x\in U_J$ corresponding to
-the prime $\mathfrak q\subset B_J$ the description
-$\cG|_{U_J}=\widetilde N$ gives $\cG_{x}=N_{\mathfrak q}$, and
-$f(x)$ corresponds to the prime $\mathfrak p\subset A$ lying under
-$\mathfrak q$, so $\cO_{S,f(x)}=A_{\mathfrak p}$; the hypothesis on
-$\cG$ therefore reads: $N_{\mathfrak q}$ is flat over
-$A_{\mathfrak p}$ for every prime $\mathfrak q$ of $B_J$.  That is
-the hypothesis of Algebra, Section~10.39 (Flat modules and flat ring
-maps), Lemma~10.39.18 (\stacksproject{00HT}), part~(6): for a ring map
-$R\to R'$ and an $R'$-module $M$, $M$ is flat over $R$ if and only if
-$M_{\mathfrak q}$ is flat over $R_{\mathfrak p}$, with $\mathfrak p$
-the prime of $R$ lying under $\mathfrak q$, for every prime
-$\mathfrak q$ of $R'$.  Applied to $A\to B_J$ and $M=N$ it gives that
-$N$ is flat over $A$).
-% Ruling on the flatness step just above, recorded at its own site.
-%
-% WHAT THE STEP USES.  It passes from flatness of the stalks $\cG_x$ --
-% which sit at the points of the SOURCE $X$, each over the local ring
-% $\cO_{S,f(x)}$ of the base -- to flatness of the single $A$-module
-% $N=\Gamma(U_J,\cG)$.  What carries that passage is the source-local
-% criterion: an $R'$-module $M$ all of whose localizations
-% $M_{\mathfrak q}$ are flat over $R_{\mathfrak p}$, $\mathfrak p$ the
-% contraction of $\mathfrak q$, is flat over $R$.  It is now named in the
-% text above and cited there: Algebra, Lemma 10.39.18(6), tag 00HT.
-%
-% WHAT THE TEXT NAMED BEFORE.  Until this pass the parenthesis named
-% instead a criterion about covering the BASE by affines -- flatness of a
-% quasi-coherent module over $S$ read off the affines of a base -- with
-% neither a \Cref nor a tag on it.  That is a true statement, and it is
-% not the one this step needs: it is about affine opens of $S$, whereas
-% the passage made here is from the points of $X$.  Nothing downstream was
-% unsound, since the criterion the step really wants is true and does give
-% what was claimed; what was wrong was the name put on the step.
-%
-% THE EARLIER RULING IS SUPERSEDED (taxis 819).  Both rounds of review on
-% taxis 809 read this site and ruled the appeal decorative, on the ground
-% that the derivation was supplied in the same sentence; taxis 815 wrote
-% that verdict into this file as a comment block, and PR #640 deleted it
-% again.  The verdict was wrong for the reason above and is not to be
-% reinstated.  The clause those reviews read as the derivation -- that for
-% an $f$ of finite presentation with $S$ affine the flatness of $N$ over
-% $A$ follows ``directly'' from the local $\Gamma$-description -- named no
-% argument at all: the $\Gamma$-description gives $\cG_x=N_{\mathfrak q}$
-% and nothing further, getting from those localizations to $N$ is the
-% criterion just cited, and neither finite presentation of $f$ nor
-% affineness of $S$ enters that criterion.  So the clause is deleted here
-% rather than left standing as a second justification for one step.  The
-% lesson is the reason this site was read five times without the defect
-% being seen: a ruling that certifies a step as self-contained can itself
-% name the wrong fact, and every instrument run over this site was asking
-% whether the appeal was BARE, never whether the thing appealed to was the
-% thing being used.
-%
-% WHAT IS OWED AND WHAT IS NOT.  A tag, now printed; no \uses edge, because
-% no node of this chapter states the criterion.  The whole node set was read
-% for one rather than grepped: of the 301 statement environments, the 52
-% whose title or statement body mentions flatness were kept and read, and the
-% nearest candidates state something else -- lem:pc-flat-locus-open is the
-% OPENNESS of the locus where $M_{\mathfrak q}$ is flat over $R$,
-% lem:pc-fp-flat-finite-projective is finitely-presented-and-flat versus
-% finite projective, and def:pcb-scheme-conventions defines flatness of a
-% MORPHISM through its local-ring maps, not flatness of a module over a
-% base.  No node is created for it either: a step this elementary takes a
-% tag, and a new node here would add an in-degree-one leaf for no gain.
-%
-% CENSUS CONSEQUENCE.  00HT was carried nowhere in this chapter before and
-% no node of it stands for the tag, so 00HT joins the unowned-tag list at
-% the head of this file under all three of that census's readings, in this
-% node -- which stays marked `% Decomposed.', since it is one step of its
-% proof that a tag discharges and not its statement.  Each of the three
-% figures there moves by one tag in one node, and the lists have been moved
-% with them.
-%
-% DELIBERATE WORDING.  This block carries none of taxis 809's cue words and
-% quotes neither the phrase it rules nor the phrase that replaces it, so a
-% re-run of that sweep with comments left unstripped does not fire on the
-% ruling itself.  Measured at the commit this lands in, over the whole file
-% with whitespace normalised: 54 cue rows stripped and 62 unstripped,
-% against 55 and 63 at the parent.  The gap of 8 is unchanged -- that is the
-% number to check, not either absolute -- and the single row that left the
-% stripped population is the one repaired here.
-%
-% WHAT THIS DOES NOT CLOSE.  The axis this site opens -- an appeal that
-% does carry a justification, whose content is not the step's -- was swept
-% whole-file over 809's cue words for taxis 819, comments stripped and
-% whitespace normalised: 55 rows in 41 hosts, and this was the only row
-% where the fact named is not the fact used.  One further row is reported
-% rather than repaired, in \Cref{lem:pc-picard-functor-agrees-sc}'s proof,
-% whose closing sentence attributes a comparison of two sheafifications to
-% the construction of the big fppf sites; the comparison is argued out in
-% full in the paragraph above that sentence, so the label is loose and the
-% step is not bare.  Eleven rows use a cue word as a NAME and not as an
-% appeal at all -- a coordinate on $\mathbf P^1$, the opens $D_+(f)$, the
-% diagrams of a group scheme -- and are off this axis.
-A finitely presented flat $A$-module is finite projective
-(\Cref{lem:pc-fp-flat-finite-projective}): it is finite
-locally free (over the local ring $A_{\mathfrak p}$ the localization
-is flat and finitely presented, hence finite, so it is free by
-\Cref{lem:pc-finite-flat-local-free}, whose hypotheses --- finite and
-flat over a local ring --- are exactly what is available at this point
-of the argument; and the ranks glue) and finite locally free modules
-are projective.  Hence $Rf_*\cG$ is a bounded complex of finite projective
-$\cO_S$-modules, i.e.\ a perfect object of $D(\cO_S)$ (\Cref{def:pc-perfect-complex}).
+quasi-coherent $\cG|_{U_J}$ is $\widetilde{\Gamma(U_J,\cG)}$).  For the
+flatness, write $U_J=\Spec(B_J)$ with $B_J$ a finite type $A$-algebra
+and $\cG|_{U_J}=\widetilde N$ with $N$ a finite $B_J$-module, so that
+$N=\Gamma(U_J,\cG)$.  Since $U_J\subseteq X$ is open, a prime
+$\mathfrak q\subset B_J$ is a point $x$ of $X$, the stalk of $\cG$ at
+$x$ computed in $X$ is the stalk of $\cG|_{U_J}$ at $x$, namely
+$N_{\mathfrak q}$, and $f(x)\in\Spec(A)$ is the prime
+$\mathfrak q\cap A$.  So the hypothesis that $\cG$ is flat over $S$ ---
+flatness of $\cG_x$ over $\cO_{S,f(x)}$ at every $x\in X$ --- says at
+these points that $N_{\mathfrak q}$ is flat over $A_{\mathfrak q\cap A}$
+for every prime $\mathfrak q$ of $B_J$, and
+\Cref{lem:pc-flat-source-local}, applied to $A\to B_J$ and $N$, gives
+that $N$ is flat over $A$.
+% \Cref{lem:pc-flat-source-local} is a new node, Algebra, Lemma
+% 10.39.18(6) (`00HT'): no existing node of this chapter states that
+% criterion, and the nearest ones state something else --
+% lem:pc-flat-locus-open is the openness of the flat locus, and
+% lem:pc-fp-flat-finite-projective is finitely-presented-and-flat
+% versus finite projective.
+
+Perfectness does not follow from this description of the terms.  The
+terms are flat, but they are not in general of finite type over $A$:
+already for $X=\mathbf P^1_A$ and the standard affine open
+$U=D_+(x_0)$ one has $\Gamma(U,\cO_X)=A[t]$.  What makes $Rf_*\cG$
+perfect is the finiteness of its cohomology, which comes from
+properness of $f$, and that step is taken here as a cited external
+input: Derived Categories of Schemes, Lemma~36.30.4
+(\stacksproject{0B91}), part~(2), which is the perfectness assertion
+of this lemma, for $f$ proper of finite presentation and $\cG$ of
+finite presentation and flat over $S$.  So $Rf_*\cG$ is a perfect
+object of $D(\cO_S)$ (\Cref{def:pc-perfect-complex}).
+% `0B91' states the base change assertion as well.  That half is
+% nevertheless derived below rather than cited: flatness of the terms
+% is what makes $Lg^*$ of the Čech complex computable termwise, and
+% that is the description the consumers of this node use.
 
 For the base change: let $g:T\to S$ be arbitrary; the statement is
 local in $T$, so assume $T=\Spec(B)$ affine as well, and let
@@ -10298,6 +10255,12 @@ finite because $M$ is finite.
 
 % ---------------------------------------------------------------------------
 % Cited.
+% Consumer-in-degree 0 since the perfectness repair at
+% \Cref{lem:pc-rf-perfect-base-change}, whose proof was this node's only
+% consumer: \Cref{lem:pc-flf-properties}, cited as a user in the proof below,
+% is a prose citation and not an edge -- it carries no \uses to this node,
+% reaching finite local freeness through lem:pc-finite-flat-fp-locally-free
+% instead.  The node stays, in the idiom of \Cref{lem:pc-going-down-flat}.
 \begin{lemma}[Finitely presented and flat means finite locally free]
 \label{lem:pc-fp-flat-finite-projective}
 Let $A$ be a ring and $M$ an $A$-module.  The following are equivalent:
@@ -10321,29 +10284,29 @@ flat, and free over a local ring).  Mathlib carries the tag on
 string ``(1) $\Rightarrow$ (2)'': from \texttt{Module.Flat} and
 \texttt{Module.FinitePresentation} it concludes
 \texttt{Module.Projective}, i.e.\ the first clause above implies the
-second.  That is the direction both users of this node take --- in
-\Cref{lem:pc-flf-properties} and in
-\Cref{lem:pc-rf-perfect-base-change} the hypothesis is finite
-presentation together with flatness and the conclusion is finite
-projectivity.  The reverse implications and the further two clauses are
-not decomposed here.
-% No \uses for the three lemmas cited above, deliberately; none of them is a
-% hypothesis of this proof, whose only input is tag 00NX.
-%  * \Cref{lem:pc-rf-perfect-base-change} would close a cycle: it already
-%    \uses{lem:pc-fp-flat-finite-projective}, so the edge makes the 2-cycle
-%      lem:pc-fp-flat-finite-projective -> lem:pc-rf-perfect-base-change
-%        -> lem:pc-fp-flat-finite-projective.
-%  * \Cref{lem:pc-flf-properties} is cited in the same breath and for the same
-%    reason -- both are named as *users* of this node, so the edge would point
-%    backwards.  It happens not to close a cycle today only because that node
-%    reaches finite local freeness through lem:pc-finite-flat-fp-locally-free
-%    instead; do not add it.
+second.  That is the direction this node's user takes --- in
+\Cref{lem:pc-flf-properties} the hypothesis is finite presentation
+together with flatness and the conclusion is finite projectivity.  The
+reverse implications and the further two clauses are not decomposed
+here.
+% No \uses for the two lemmas cited above, deliberately; neither is a
+% hypothesis of this proof, whose only input is tag `00NX'.
+%  * \Cref{lem:pc-flf-properties} is named as a *user* of this node, so
+%    the edge would point backwards.  It happens not to close a cycle
+%    today only because that node reaches finite local freeness through
+%    lem:pc-finite-flat-fp-locally-free instead; do not add it.
 %  * \Cref{lem:pc-finite-projective-module} is cited as the converse statement,
 %    which is not a premise of this one.
 \end{proof}
 
 % ---------------------------------------------------------------------------
 % Cited.
+% Consumer-in-degree 0 since the perfectness repair at
+% \Cref{lem:pc-rf-perfect-base-change}, whose proof was this node's
+% only consumer and no longer reads perfectness off the terms of a
+% Čech complex.  The node stays, in the idiom of
+% \Cref{lem:pc-going-down-flat}: it is a correct external input,
+% backed in Mathlib by the name below.
 \begin{lemma}[A finite flat module over a local ring is free]
 \label{lem:pc-finite-flat-local-free}
 Let $A$ be a local ring and $M$ a finite flat $A$-module.  Then $M$ is
