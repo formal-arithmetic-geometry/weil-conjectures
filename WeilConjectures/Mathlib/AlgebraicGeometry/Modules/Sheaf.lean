@@ -271,4 +271,81 @@ noncomputable def pullbackOverObjIso (M : Y.Modules) :
 
 end Pullback
 
+/-!
+## Pulling back sections along a morphism of schemes
+-/
+
+noncomputable section PushforwardPullback
+
+variable {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) (M : Z.Modules)
+
+/-- The canonical morphism `b_* b^* M ⟶ (a ≫ b)_* (a ≫ b)^* M`, obtained by applying `b_*`
+to the unit of the adjunction `a^* ⊣ a_*`. -/
+noncomputable def pushforwardPullbackComp :
+    (pushforward b).obj ((pullback b).obj M) ⟶
+      (pushforward (a ≫ b)).obj ((pullback (a ≫ b)).obj M) :=
+  (pushforward b).map ((pullbackPushforwardAdjunction a).unit.app ((pullback b).obj M)) ≫
+    (pushforwardComp a b).hom.app ((pullback a).obj ((pullback b).obj M)) ≫
+      (pushforward (a ≫ b)).map ((pullbackComp a b).hom.app M)
+
+/-- The morphism `b_* b^* M ⟶ (a ≫ b)_* (a ≫ b)^* M` is compatible with the units of the
+adjunctions, so that the section `s` of `M` over an open subset has the same image in
+`Γ((a ≫ b)^* M, _)` whether it is pulled back in one step or in two. -/
+@[reassoc (attr := simp)]
+lemma unit_pushforwardPullbackComp :
+    (pullbackPushforwardAdjunction b).unit.app M ≫ pushforwardPullbackComp a b M =
+      (pullbackPushforwardAdjunction (a ≫ b)).unit.app M := by
+  have h := unit_conjugateEquiv ((pullbackPushforwardAdjunction b).comp
+    (pullbackPushforwardAdjunction a)) (pullbackPushforwardAdjunction (a ≫ b))
+    (pullbackComp a b).inv M
+  rw [conjugateEquiv_pullbackComp_inv, Adjunction.comp_unit_app] at h
+  simp only [Functor.comp_obj] at h
+  rw [pushforwardPullbackComp, ← Category.assoc, ← Category.assoc, h, Category.assoc,
+    ← Functor.map_comp]
+  simp
+
+lemma pushforward_smul {X Y : Scheme.{u}} (a : X ⟶ Y) (N : X.Modules) (U : Y.Opens)
+    (r : Γ(Y, U)) :
+    ((pushforward a).obj N).smul (U := U) r = N.smul (a.app U r) := rfl
+
+lemma eqToHom_pushforward_smul {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : X'.Modules) (U : Y'.Opens)
+    (r : Γ(Y', U)) (y : Γ((pushforward a).obj N, U)) :
+    eqToHom (pushforward_obj_obj a N U) (r • y) =
+      a.app U r • eqToHom (pushforward_obj_obj a N U) y := rfl
+
+/-- The restriction map `Γ(X', a ⁻¹ᵁ ⊤) ⟶ Γ(X', ⊤)` is the identity, so that restricting
+the pullback of a global function gives the pullback of functions on global sections. -/
+lemma map_le_top_app_top {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (r : Γ(Y', ⊤)) :
+    X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op (a.app ⊤ r) =
+      a.appTop r := by
+  have h : X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op = 𝟙 Γ(X', ⊤) :=
+    (congrArg (fun i : (op (a ⁻¹ᵁ ⊤) : X'.Opensᵒᵖ) ⟶ op ⊤ ↦ X'.presheaf.map i)
+      (Subsingleton.elim _ (𝟙 (op (⊤ : X'.Opens))))).trans (X'.presheaf.map_id _)
+  exact (ConcreteCategory.congr_hom h _).trans rfl
+
+/-- The pullback of global sections along a morphism of schemes: the image of a global section
+of `N` under the unit `N ⟶ a_* a^* N`, read as a global section of `a^* N`. -/
+noncomputable def sectionsPullback {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules) :
+    Γ(N, ⊤) ⟶ Γ((pullback a).obj N, ⊤) :=
+  ((pullbackPushforwardAdjunction a).unit.app N).app ⊤ ≫
+    eqToHom (pushforward_obj_obj a ((pullback a).obj N) ⊤) ≫
+    ((pullback a).obj N).presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op
+
+/-- The pullback of global sections is semilinear over the pullback of functions. -/
+lemma sectionsPullback_smul {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules)
+    (r : Γ(Y', ⊤)) (s : Γ(N, ⊤)) :
+    sectionsPullback a N (r • s) = a.appTop r • sectionsPullback a N s := by
+  rw [sectionsPullback]
+  simp only [ConcreteCategory.comp_apply, Functor.id_obj, Functor.comp_obj, Hom.app_smul,
+    eqToHom_pushforward_smul, map_smul]
+  rw [map_le_top_app_top]
+
+lemma pushforwardPullbackComp_app (V : Z.Opens) :
+    (pushforwardPullbackComp a b M).app V =
+      ((pullbackPushforwardAdjunction a).unit.app ((pullback b).obj M)).app (b ⁻¹ᵁ V) ≫
+        ((pullbackComp a b).hom.app M).app ((a ≫ b) ⁻¹ᵁ V) := by
+  simp [pushforwardPullbackComp]
+
+end PushforwardPullback
+
 end AlgebraicGeometry.Scheme.Modules

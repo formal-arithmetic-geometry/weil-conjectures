@@ -257,4 +257,37 @@ theorem finite_map_maximalIdeal_pow [IsNoetherianRing (X.presheaf.stalk x)]
 
 end Finite
 
+section Points
+
+variable (X : Scheme.{u}) (x : X) (n : ℕ)
+
+/-- The maximal ideal of `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is nilpotent. -/
+lemma maximalIdeal_infinitesimalRing_pow :
+    maximalIdeal (X.infinitesimalRing x n) ^ (n + 1) = ⊥ := by
+  have h : maximalIdeal (X.infinitesimalRing x n) =
+      (maximalIdeal (X.presheaf.stalk x)).map (Ideal.Quotient.mk _) :=
+    (IsLocalRing.map_maximalIdeal_quotient_pow n).symm
+  rw [h, ← Ideal.map_pow, Ideal.map_eq_bot_iff_le_ker, Ideal.mk_ker]
+
+/-- The `n`-th infinitesimal neighbourhood of `x` has a single point. -/
+lemma eq_closedPoint_infinitesimalNeighborhood
+    (z : PrimeSpectrum (X.infinitesimalRing x n)) :
+    z = closedPoint (X.infinitesimalRing x n) := by
+  have hmax : (closedPoint (X.infinitesimalRing x n)).asIdeal =
+    maximalIdeal (X.infinitesimalRing x n) := rfl
+  refine PrimeSpectrum.ext (le_antisymm (IsLocalRing.le_maximalIdeal z.2.ne_top)
+    (Ideal.IsPrime.le_of_pow_le (n := n + 1) ?_))
+  rw [hmax, X.maximalIdeal_infinitesimalRing_pow x n]
+  exact bot_le
+
+/-- Every point of the `n`-th infinitesimal neighbourhood of `x` maps to `x`. -/
+@[simp]
+lemma fromInfinitesimalNeighborhood_apply (z : X.infinitesimalNeighborhood x n) :
+    X.fromInfinitesimalNeighborhood x n z = x := by
+  rw [fromInfinitesimalNeighborhood, Scheme.Hom.comp_apply,
+    X.eq_closedPoint_infinitesimalNeighborhood x n z, Spec_closedPoint,
+    fromSpecStalk_closedPoint]
+
+end Points
+
 end AlgebraicGeometry.Scheme
