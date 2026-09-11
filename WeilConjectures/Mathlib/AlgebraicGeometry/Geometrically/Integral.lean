@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Varieties over a field, and their global sections
@@ -64,8 +65,7 @@ blueprint.
 - `AlgebraicGeometry.isPushout_appTop_of_flat` (blueprint
   `prop:cube-global-sections-flat-base-change`, Stacks tag `02KH` in degree zero) — for a
   quasi-compact separated `R`-scheme `X` and a flat `R ⟶ R'`, the square of global sections is a
-  pushout of commutative rings, that is `Γ(X ×_{Spec R} Spec R', 𝒪) = Γ(X, 𝒪_X) ⊗[R] R'`. **This
-  is `sorry` by design**; see the implementation notes.
+  pushout of commutative rings, that is `Γ(X ×_{Spec R} Spec R', 𝒪) = Γ(X, 𝒪_X) ⊗[R] R'`.
 - `AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_appTop_of_geometricallyIntegral` (blueprint
   `lem:cube-global-sections-general`, Stacks tag `0BUG` part (8)) — for `X` proper and
   geometrically integral over a field `K`, the structure map `K ⟶ Γ(X, 𝒪_X)` is an isomorphism.
@@ -75,12 +75,12 @@ blueprint.
 
 ## Implementation notes
 
-* `AlgebraicGeometry.isPushout_appTop_of_flat` is stated with a deliberate `sorry`: it is the one
-  open obligation of the theorem-of-the-cube chapter that needs no cohomology, namely the
-  degree-zero case of Stacks tag `02KH`, blueprint `prop:cube-global-sections-flat-base-change`.
-  Its intended proof writes `Γ(X, 𝒪_X)` as the equaliser of the Čech complex of a finite affine
-  cover — the pairwise intersections being affine because `X` is separated — and tensors that
-  equaliser with the flat `R'`. Everything else in this file is proved.
+* `AlgebraicGeometry.isPushout_appTop_of_flat` is the special case `U = ⊤` of
+  `AlgebraicGeometry.isPushout_app_of_isCompact`, proved in
+  `WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks` by induction on a finite affine cover:
+  `Γ(X, 𝒪_X)` is the equaliser of the two restriction maps between the sections over the members
+  of the cover and the sections over their pairwise intersections — affine again because `X` is
+  separated — and a flat base change preserves that equaliser.
 * The canonical map of `prop:cube-global-sections-flat-base-change` is packaged as a
   `CategoryTheory.IsPushout` square in `CommRingCat` rather than as an explicit ring map out of a
   tensor product. This needs no auxiliary definition and no algebra instances on `Γ(X, 𝒪_X)`:
@@ -275,15 +275,17 @@ global sections
 ```
 is a pushout of commutative rings, that is `Γ(X ×_{Spec R} Spec R', 𝒪) = Γ(X, 𝒪_X) ⊗[R] R'`.
 
-This is `prop:cube-global-sections-flat-base-change` of the blueprint, the degree-zero case of
-Stacks tag `02KH`, and it is **`sorry` by design**: this file only states it. -/
+This is `prop:cube-global-sections-flat-base-change` of the blueprint, and the degree-zero case
+of Stacks tag `02KH`. -/
 @[stacks 02KH]
 theorem isPushout_appTop_of_flat {R R' : CommRingCat.{u}} (φ : R ⟶ R') [Flat (Spec.map φ)]
     (f : X ⟶ Spec R) [QuasiCompact f] [IsSeparated f] :
     IsPushout ((Scheme.ΓSpecIso R).inv ≫ f.appTop) φ
       (pullback.fst f (Spec.map φ)).appTop
-      ((Scheme.ΓSpecIso R').inv ≫ (pullback.snd f (Spec.map φ)).appTop) :=
-  sorry
+      ((Scheme.ΓSpecIso R').inv ≫ (pullback.snd f (Spec.map φ)).appTop) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have h := isPushout_app_of_isCompact φ f (U := ⊤) (by simpa using isCompact_univ)
+  simpa [Scheme.Hom.appTop, ← Scheme.Hom.appLE_eq_app] using h
 
 /-- **The global sections of a proper geometrically integral scheme over a field.**
 
