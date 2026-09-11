@@ -156,6 +156,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
@@ -240,6 +241,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Binomial
