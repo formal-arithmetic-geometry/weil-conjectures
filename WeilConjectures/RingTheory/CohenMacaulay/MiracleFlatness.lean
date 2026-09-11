@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.RingHom.QuasiFinite
 public import WeilConjectures.RingTheory.CohenMacaulay.Basic
 
 /-!
@@ -18,6 +19,9 @@ ring `S ⧸ m_R S` has dimension exactly `dim S - dim R`: under these hypotheses
 ## Main definitions and results
 
 * `RingHom.fiberRing`: the fibre ring `S ⧸ m_R S` of a local homomorphism `f : R →+* S`.
+* `RingHom.QuasiFinite.ringKrullDim_fiberRing_eq_zero`: the fibre ring of a quasi-finite local
+  homomorphism is zero dimensional. This is the hypothesis on the fibre that a finite, or more
+  generally a locally quasi-finite, morphism of schemes supplies.
 * `RingHom.Flat.of_ringKrullDim_eq_add_fiberRing`: miracle flatness. **This is stated with a
   deliberate `sorry`**; see the `TODO` below.
 * `RingHom.Flat.of_ringKrullDim_eq_add_of_ker_eq`: the same criterion with the fibre ring
@@ -74,6 +78,37 @@ For `f` the stalk map of a morphism of schemes `f : X ⟶ Y` at a point `x` with
 this is the local ring `𝒪_{X_y, x}` of the scheme-theoretic fibre `X_y` at `x`. -/
 abbrev RingHom.fiberRing [IsLocalRing R] (f : R →+* S) : Type v :=
   S ⧸ (maximalIdeal R).map f
+
+/-- The fibre ring of a **quasi-finite** local homomorphism of local rings is zero dimensional.
+
+The fibre ring is a finite-dimensional algebra over the residue field of the source, hence
+Artinian, hence of Krull dimension zero. This is the hypothesis on the fibre that a finite, or
+more generally a locally quasi-finite, morphism of schemes supplies for the miracle-flatness
+criterion. -/
+theorem RingHom.QuasiFinite.ringKrullDim_fiberRing_eq_zero [IsLocalRing R] [IsLocalRing S]
+    {f : R →+* S} [IsLocalHom f] (hf : f.QuasiFinite) :
+    ringKrullDim f.fiberRing = 0 := by
+  let : Algebra R S := f.toAlgebra
+  have : Algebra.QuasiFinite R S := hf
+  have hmap : (maximalIdeal R).map f ≤ maximalIdeal S :=
+    ((local_hom_TFAE f).out 0 2 rfl rfl).mp ‹_›
+  have hne : (maximalIdeal R).map f ≠ ⊤ :=
+    (hmap.trans_lt (maximalIdeal.isMaximal S).lt_top).ne
+  have : Nontrivial f.fiberRing := Ideal.Quotient.nontrivial_iff.mpr hne
+  let : Algebra (ResidueField R) f.fiberRing :=
+    (Ideal.Quotient.lift (maximalIdeal R)
+      ((Ideal.Quotient.mk ((maximalIdeal R).map f)).comp f)
+      fun _ ha ↦ Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_map_of_mem f ha)).toAlgebra
+  have : IsScalarTower R (ResidueField R) f.fiberRing :=
+    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : Algebra.QuasiFinite (ResidueField R) f.fiberRing :=
+    Algebra.QuasiFinite.of_restrictScalars R _ _
+  have : Module.Finite (ResidueField R) f.fiberRing :=
+    Algebra.QuasiFinite.iff_of_isArtinianRing.mp inferInstance
+  have : IsArtinianRing f.fiberRing := .of_finite (ResidueField R) _
+  have : Ring.KrullDimLE 0 f.fiberRing :=
+    .mk₀ fun I hI ↦ (IsArtinianRing.isPrime_iff_isMaximal I).mp hI
+  exact ringKrullDimZero_iff_ringKrullDim_eq_zero.mp inferInstance
 
 /-- **Miracle flatness**: a local homomorphism `f : R →+* S` of Noetherian local rings with `R`
 regular, `S` Cohen–Macaulay and `dim S = dim R + dim (S ⧸ m_R S)` is flat.

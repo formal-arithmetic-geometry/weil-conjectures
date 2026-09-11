@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.RingTheory.CohenMacaulay.MiracleFlatness
 
 /-!
@@ -26,6 +27,12 @@ and `dim 𝒪_{X,x} = dim 𝒪_{Y,f x} + dim 𝒪_{X_{f x}, x}`.
   fibres are zero dimensional and the two stalks have equal dimension. This is the shape in which
   the criterion is applied to a finite surjective morphism of smooth varieties of the same
   dimension.
+* `AlgebraicGeometry.Scheme.Hom.ringKrullDim_fiberRing_stalkMap_eq_zero`: the fibre rings of a
+  locally quasi-finite morphism, in particular of a finite morphism, are zero dimensional.
+* `AlgebraicGeometry.Flat.of_locallyQuasiFinite_of_ringKrullDim_stalk_eq`: **miracle flatness for
+  a quasi-finite morphism**, the form in which the criterion is meant to be used: a locally
+  quasi-finite morphism with regular target stalks, Cohen–Macaulay source stalks and stalks of
+  equal dimension is flat.
 
 ## Design
 
@@ -47,9 +54,12 @@ arguments there.
 
 This file implements the scheme-level half of `prop:deg-miracle-flatness` of the curve-estimates
 blueprint. The last sentence of that proposition, that a finite surjective morphism between
-smooth varieties of the same dimension over a field is flat, is *not* proved here: it needs a
-smooth variety to have regular local rings and needs the two stalks to have equal dimension,
-neither of which mathlib `v4.33.1` supports.
+smooth varieties of the same dimension over a field is flat, is *not* proved here: of its three
+ingredients, only the zero dimensionality of the fibres is available. The two missing ones are
+that a smooth variety has regular local rings, and that a morphism between varieties of the same
+dimension has stalks of equal dimension; the latter rests on the dimension formula
+`dim A = height p + dim (A ⧸ p)` for a finitely generated domain over a field, which mathlib
+`v4.33.1` does not have.
 -/
 
 @[expose] public section
@@ -98,5 +108,27 @@ theorem Flat.of_ringKrullDim_stalk_eq (hY : ∀ y : Y, IsRegularLocalRing (Y.pre
     (h : ∀ x : X, ringKrullDim (X.presheaf.stalk x) = ringKrullDim (Y.presheaf.stalk (f x))) :
     Flat f :=
   .of_ringKrullDim_eq f hY hX fun x ↦ by rw [h x, hfib x, add_zero]
+
+/-- The fibre rings of a **locally quasi-finite** morphism are zero dimensional.
+
+This is the hypothesis on the fibres of `AlgebraicGeometry.Flat.of_ringKrullDim_stalk_eq`, and it
+holds in particular for a finite morphism. The fibre ring at `x` is a finite-dimensional algebra
+over the residue field of `f x`, hence Artinian. -/
+theorem Scheme.Hom.ringKrullDim_fiberRing_stalkMap_eq_zero [LocallyQuasiFinite f] (x : X) :
+    ringKrullDim (f.stalkMap x).hom.fiberRing = 0 :=
+  (f.quasiFiniteAt x).ringKrullDim_fiberRing_eq_zero
+
+/-- **Miracle flatness for a quasi-finite morphism**: a locally quasi-finite morphism of schemes
+with regular target stalks, Cohen–Macaulay source stalks and stalks of equal dimension is flat.
+
+This is the form in which the criterion applies to a finite surjective morphism between smooth
+varieties of the same dimension over a field: finiteness makes the morphism quasi-finite, and the
+two varieties having the same dimension makes the stalks have equal dimension. -/
+theorem Flat.of_locallyQuasiFinite_of_ringKrullDim_stalk_eq [LocallyQuasiFinite f]
+    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y))
+    (hX : ∀ x : X, IsCohenMacaulayLocalRing (X.presheaf.stalk x))
+    (h : ∀ x : X, ringKrullDim (X.presheaf.stalk x) = ringKrullDim (Y.presheaf.stalk (f x))) :
+    Flat f :=
+  .of_ringKrullDim_stalk_eq f hY hX f.ringKrullDim_fiberRing_stalkMap_eq_zero h
 
 end AlgebraicGeometry
