@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
+public import WeilConjectures.AlgebraicGeometry.MiracleFlatness
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
@@ -275,6 +276,7 @@ public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.CohenMacaulay.Basic
+public import WeilConjectures.RingTheory.CohenMacaulay.MiracleFlatness
 public import WeilConjectures.RingTheory.Depth.Basic
 public import WeilConjectures.RingTheory.MvPolynomial.HomogeneousLocalization
 public import WeilConjectures.RingTheory.NewtonExpansion
