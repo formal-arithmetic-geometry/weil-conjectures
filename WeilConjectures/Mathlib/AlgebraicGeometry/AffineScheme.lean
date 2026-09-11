@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 # `Spec` of a restriction map and the canonical isomorphisms of affine opens
 
 We record that `Spec` of a restriction map between affine opens intertwines the canonical
-isomorphisms `Spec Γ(X, U) ≅ U` with the inclusion of opens, and that the algebra map
+isomorphisms `Spec Γ(X, U) ≅ U` with the inclusion of opens, that the algebra map
 realizing `Γ(X, X.basicOpen f)` as a localization is the restriction map of the structure
 sheaf.
 
@@ -61,5 +61,12 @@ lemma toSpecΓ_resLE_basicOpenIsoSpecAway (r : Γ(X, ⊤)) :
     Category.assoc, Category.assoc, basicOpenIsoSpecAway_hom_SpecMap, Scheme.Hom.resLE_comp_ι,
     ← Spec.map_comp, ← CommRingCat.ofHom_comp, IsLocalization.Away.lift_comp]
   exact (Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top _).symm
+/-- Distinct points of an affine open have distinct associated primes. -/
+lemma IsAffineOpen.primeIdealOf_injective {U : X.Opens} (hU : IsAffineOpen U) :
+    Function.Injective fun x : U ↦ (hU.primeIdealOf x).asIdeal := by
+  intro a b hab
+  have h : hU.fromSpec (hU.primeIdealOf a) = hU.fromSpec (hU.primeIdealOf b) := by
+    rw [PrimeSpectrum.ext hab]
+  rwa [hU.fromSpec_primeIdealOf, hU.fromSpec_primeIdealOf, ← Subtype.ext_iff] at h
 
 end AlgebraicGeometry

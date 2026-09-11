@@ -1,0 +1,2333 @@
+% This file is a chapter fragment, in the same style as the other files under
+% version/detailed/.  It is included by version/detailed.tex and must not
+% contain a preamble of its own.
+%
+% Contents: the chapter in which the theorem of the cube is proved.  It
+% contains two preparatory theorems -- the rigidity theorem, which prepares the
+% theory of homomorphisms of abelian varieties, and the seesaw theorem, whose
+% closed-locus corollary the classical proof of the cube consumes -- then the
+% theorem of the cube itself in the general form for proper varieties, then its
+% abelian-variety corollary [n]^*L = L^(n^2) for a symmetric line bundle,
+% together with the cohomological inputs they rest on and a count of what
+% Mathlib is missing for the whole chapter.  The cube and its corollary
+% discharge the open obligations on \Cref{thm:av-cube} and
+% \Cref{thm:av-mulby-pullback}.
+%
+% Labels follow the project convention <type>:cube-<topic>.
+
+\chapter{The theorem of the cube}
+\label{chap:cube}
+
+This chapter proves the theorem of the cube in the general form for proper
+varieties, and not only in the abelian-variety special case
+$[n]^*L\cong L^{\otimes n^2}$.  It contains five theorems:
+
+\begin{itemize}
+  \item the \emph{rigidity theorem}, \Cref{thm:cube-rigidity}: a morphism out
+  of a product $X\times Y$ with $Y$ proper which collapses one fibre
+  $\{x_0\}\times Y$ to a point does not depend on the second variable at all;
+  \item the \emph{seesaw theorem}, \Cref{thm:cube-seesaw}: a line bundle on
+  $X\times T$ with $X$ proper whose restriction to every fibre $X_t$ is
+  trivial is the pullback of a line bundle on $T$, together with its
+  triviality criterion \Cref{cor:cube-seesaw-trivial} and the closedness of
+  the triviality locus, \Cref{cor:cube-triviality-closed};
+  \item the \emph{theorem of the cube}, \Cref{thm:cube-cube}: for $X$ and $Y$
+  proper varieties and $Z$ connected, a line bundle on $X\times Y\times Z$
+  trivial on the three coordinate slices through a triple of base points is
+  trivial;
+  \item its \emph{abelian-variety form}, \Cref{thm:cube-abelian}: the
+  seven-fold alternating pullback of a line bundle $L$ along the partial sums
+  on $A\times A\times A$ is trivial;
+  \item the resulting formula for $[n]^*L$, \Cref{thm:cube-mulby-pullback},
+  which for a symmetric line bundle reads $[n]^*L\cong L^{\otimes n^2}$.
+\end{itemize}
+
+Only the second of the first two is an input to the proof of the cube, and the
+form of it that the cube consumes is \Cref{cor:cube-triviality-closed}.
+Rigidity is preparatory for \Cref{chap:av-isogeny} instead --- it is what makes
+a morphism of abelian varieties preserving the identity a homomorphism --- and
+plays no part in the proof of the cube; no line bundle occurs in its statement.
+
+Nothing in this chapter is unproved except seven statements, each of which is
+stated as its own numbered statement and marked as an open obligation: the
+four inputs isolated in \Cref{sec:cube-inputs} and the three further inputs of
+\Cref{sec:cube-cube}.  Six of the seven rest on one missing theory, the
+cohomology of sheaves on a scheme and the direct images of a coherent sheaf
+along a proper morphism --- in every degree for a sheaf of modules, and in
+degree one only for the sheaf of units, which is where
+\Cref{prop:cube-picard-square-zero} sits.  The seventh,
+\Cref{prop:cube-global-sections-flat-base-change}, is a single cheap
+base-change compatibility that needs no cohomology at all.
+\Cref{sec:cube-cost} counts what all of this would cost to formalise.
+
+\Cref{thm:cube-cube} and \Cref{thm:cube-mulby-pullback} discharge the open
+obligations that \Cref{chap:av-isogeny} carried on \Cref{thm:av-cube} and
+\Cref{thm:av-mulby-pullback}, which now cite them; \Cref{rem:cube-discharged}
+says what is and is not discharged thereby.
+
+The theorems below are the classical ones and the proofs are the classical
+proofs: \cite[\S4]{MumfordAbelianVarieties} and
+\cite[I, \S1]{MilneAbelianVarieties} for rigidity,
+\cite[\S5]{MumfordAbelianVarieties} for the seesaw theorem, and
+\cite[\S6]{MumfordAbelianVarieties} with
+\cite[I, \S\S5--7]{MilneAbelianVarieties} for the cube and its corollary.
+The
+cohomological inputs are stated for \emph{proper} morphisms, which is what
+this chapter needs, and are therefore cited to the Stacks Project;
+\cite[III, \S12]{Hartshorne} proves the same statements but under the
+standing hypothesis that the morphism is projective, so it is quoted below
+only as a secondary reference.  Everything is written out in full, on the
+assumption that the reader has to formalise from it and should not have to
+consult anything else.
+
+\begin{remark}[Two routes to the cube]\label{rem:cube-two-routes}
+The route prepared here is the classical one: rigidity, then the seesaw
+theorem, then the cube.  It is not the only one.  The Stacks Project proves a
+more general cube --- over an arbitrary base scheme $S$, for $X\to S$ and
+$Y\to S$ flat and proper of finite presentation with geometrically integral
+fibres --- as \stacksproject{0BF4}, by way of the representability of the
+diagonal of the Picard functor; that proof needs deformation theory and the
+theory of the Picard functor rather than semicontinuity.  The classical route
+is the one chosen here because its ingredients --- global sections of a proper
+variety, semicontinuity, and cohomology and base change --- are needed anyway
+for the intersection-number layer on which the degree formula
+\Cref{thm:av-degree-formula} rests, whereas the Picard functor is not.  The
+classical route does use one piece of deformation theory, the classification of
+the line bundles on a square-zero thickening by degree-one cohomology,
+\Cref{prop:cube-picard-square-zero}; what it avoids is having to represent the
+Picard functor by a scheme, which is where the cost of the Stacks route sits.
+\end{remark}
+
+\statusnote{Whether this project builds the layer of algebraic geometry that
+this chapter prices --- invertible sheaves and the Picard group of a scheme,
+cohomology of coherent sheaves, semicontinuity and base change --- is recorded
+in \Cref{sec:av-cube} as an open scope question that has not been decided, the
+alternative there being to quote \Cref{prop:av-isogeny} as an external input.
+This chapter chooses between the classical and the Stacks route to the cube
+(\Cref{rem:cube-two-routes}) and prices the classical one.  Two things have
+since been settled and are settled here: that the theorem of the cube is to be
+proved in this project in full generality, as \Cref{thm:cube-cube}, and not
+only in the special case $[n]^*L\cong L^{\otimes n^2}$; and that the classical
+route is the one to take.  What is \emph{not} settled, here or anywhere, is
+whether the Lean layer that \Cref{sec:cube-cost} prices will actually be
+built.  That section is written so that the decision can be taken on its
+numbers.}
+
+\section{Conventions}\label{sec:cube-conventions}
+
+Throughout this chapter $k$ is an algebraically closed field.  A
+\emph{variety} over $k$ is a $k$-scheme which is separated, of finite type and
+geometrically integral over $k$; in particular it is integral, hence reduced,
+irreducible, connected and non-empty.  A \emph{proper variety} is a variety
+whose structure morphism to $\Spec k$ is proper.  Since $k$ is algebraically
+closed and a variety is of finite type over $k$, the closed points of a
+variety are exactly its $k$-rational points and they are dense in it; a
+variety therefore has a $k$-rational point.  We write $X(k)$ for the set of
+$k$-rational points of $X$.
+
+For $k$-schemes $X$ and $Y$ we write $X\times Y:=X\times_kY$ and
+$p_X\colon X\times Y\to X$, $p_Y\colon X\times Y\to Y$ for the two
+projections.  For a point $x\in X$ we write $\{x\}\times Y:=p_X^{-1}(x)$ for
+the fibre of $p_X$ over $x$, and for a point $y\in Y$ we write
+$X_y:=p_Y^{-1}(y)$ for the fibre of $p_Y$ over $y$.  The classical notation
+for the latter is $X\times\{y\}$; in a two-fold product this chapter uses
+$X_y$ throughout, so that one symbol denotes one thing.  In a \emph{triple}
+product $X\times Y\times Z$ the abbreviation is not available, there being
+three projections and no way to read off a subscript which of them is meant,
+so the classical notation is used there instead: $\{x_0\}\times Y\times Z$,
+$X\times\{y_0\}\times Z$ and $X\times Y\times\{z_0\}$ denote the fibres of
+the first, the second and the third projection over $x_0$, $y_0$ and $z_0$
+respectively.  When a triple product is read as a two-fold product
+$W\times Z$ with $W:=X\times Y$, as it is throughout \Cref{sec:cube-cube},
+the two notations agree: $W_z=X\times Y\times\{z\}$.  When $x$ is a
+$k$-rational point the fibre
+$\{x\}\times Y$ is canonically isomorphic to $Y$ as a $k$-scheme, being the
+base change of $Y\to\Spec k$ along $x\colon\Spec k\to X$, and likewise
+$X_y\cong X$ for $y\in Y(k)$.  For a $k$-rational point
+$y_0\in Y(k)$ we write $\sigma_{y_0}\colon X\to X\times Y$ for the section of
+$p_X$ determined by $\mathrm{id}_X$ and $y_0$, so that
+$p_X\circ\sigma_{y_0}=\mathrm{id}_X$.
+
+A \emph{line bundle} on a scheme $S$ is an invertible sheaf of
+$\O_S$-modules, that is a sheaf of $\O_S$-modules which is locally free of
+rank one.  We write $L\otimes N$ for the tensor product of two line bundles,
+$L^{-1}$ for the inverse of $L$, $u^*L$ for the pullback of $L$ along a
+morphism $u$, and $\mathrm{Pic}(S)$ for the group of isomorphism classes of
+line bundles on $S$.  A line bundle is \emph{trivial} if it is isomorphic to
+$\O_S$.  For a sheaf of $\O_S$-modules $F$ and a point $s\in S$ we write
+$F(s)$ for the \emph{fibre} of $F$ at $s$, that is the $\kappa(s)$-vector
+space obtained from the stalk of $F$ at $s$ by tensoring it with the residue
+field $\kappa(s)$ over $\O_{S,s}$.  The stalk itself is never given a symbol
+of its own here.  Separately, for a morphism $W\to T$, a point $t\in T$ with
+fibre $W_t$ and a sheaf of $\O_W$-modules $F$, we write $F_t$ for the
+restriction of $F$ to $W_t$; the two notations $F(s)$ and $F_t$ live on
+different objects and are never used for the same thing.
+
+\begin{warning}[Composition order]\label{warn:cube-composition-order}
+Composition is written in the classical order: $g\circ f$ means ``first $f$,
+then $g$''.  This is the convention of \Cref{chap:av-isogeny} and it is the
+opposite of the one used in the Lean sources, which write the same morphism as
+\texttt{f} $\gg$ \texttt{g}.  Every composite in this chapter therefore
+appears reversed in Lean.
+\end{warning}
+
+\begin{warning}[What the parallel layer supplies]
+\label{warn:cube-parallel-layer}
+The tensor product of sheaves of modules over a scheme, invertible sheaves and
+the Picard group $\mathrm{Pic}(X)$ are being built in this project in parallel
+with this chapter, so they are treated here as available and are \emph{not}
+counted as missing in \Cref{sec:cube-cost}; that section counts only what sits
+above them.
+\end{warning}
+
+\section{The cohomological inputs}\label{sec:cube-inputs}
+
+This section isolates, as four separate propositions, every fact that
+\Cref{thm:cube-seesaw} and its two corollaries rest on and that this project
+does not have.  Three are cohomological ---
+\Cref{prop:cube-proper-pushforward-coherent},
+\Cref{prop:cube-semicontinuity} and \Cref{prop:cube-grauert} --- and the
+fourth, \Cref{prop:cube-global-sections-flat-base-change}, is not: it is the
+compatibility of global sections with a flat base change of the ground ring.
+\Cref{thm:cube-rigidity} rests on none of them: its one non-formal ingredient
+is $\Gamma(X,\O_X)=k$ for a proper variety $X$, and that is already available
+in Mathlib \texttt{v4.33.1} (\Cref{lem:cube-global-sections}).  None of the
+three cohomological propositions can currently be stated in Lean, and each is
+therefore marked as an open obligation naming the theory it needs; the fourth
+can be stated today, and it is only its proof that is missing.  Nothing below
+hides an input inside prose: no later proof in this chapter appeals to a
+cohomological fact that is not one of these or a consequence of them proved
+here.
+
+Only the degree-zero part of the theory is needed \emph{for the seesaw
+theorem}.  None of the four inputs above mentions $H^i$ for $i\geq1$: the
+first is about the direct image $f_*F$ and its degree-zero consequence, the
+finite-dimensionality of the space of \emph{global sections}, and the second
+and third concern $h^0$ in a family.  Higher cohomology enters into their
+\emph{proofs}, which are not given here, and into the Euler
+characteristics that the intersection-number layer of a later chapter will
+need.  It also enters, this time into the statements, in
+\Cref{sec:cube-cube}: as \Cref{rem:cube-what-the-cube-uses} explains and
+\Cref{prop:cube-kunneth-h1} and \Cref{prop:cube-picard-square-zero} bear out,
+the theorem of the cube needs cohomology in degree one, and
+\Cref{sec:cube-cost} charges it.
+
+\begin{proposition}[Coherence of the direct image along a proper morphism]
+\label{prop:cube-proper-pushforward-coherent}
+Let $T$ be a locally noetherian scheme, let $f\colon W\to T$ be a proper
+morphism and let $F$ be a coherent sheaf of $\O_W$-modules.  Then the direct
+image $f_*F$ is a coherent sheaf of $\O_T$-modules.
+\openobligation{AlgebraicGeometry: coherence of a sheaf of modules on a
+locally noetherian scheme, and coherence of the direct image of a coherent
+sheaf along a proper morphism. This is the degree-zero case of the coherence
+of the higher direct images, Stacks Project Tag 02O5.}
+\end{proposition}
+\begin{proof}
+Not proved here.  This is the case $i=0$ of \stacksproject{02O5}; see also
+\cite[III, \S8]{Hartshorne}.  The degree-zero case is not appreciably easier
+than the general one: the standard proof is a devissage over a finite affine
+cover which computes all degrees at once, so a Lean subtree that buys the
+statement above buys the higher direct images with it.  Only the degree-zero
+case is used in this chapter, and it is used twice: for
+\Cref{prop:cube-coherent-finiteness}, which is the case $T=\Spec K$, and for
+the coherence of $f_*L$ in the proof of
+\Cref{prop:cube-formal-triviality}.
+\end{proof}
+
+\begin{proposition}[Finiteness of global sections on a proper scheme]
+\label{prop:cube-coherent-finiteness}
+Let $K$ be a field, let $X$ be a proper $K$-scheme and let $F$ be a coherent
+sheaf of $\O_X$-modules.  Then $\Gamma(X,F)$ is a finite-dimensional
+$K$-vector space.
+\end{proposition}
+\begin{proof}
+\uses{prop:cube-proper-pushforward-coherent}
+Apply \Cref{prop:cube-proper-pushforward-coherent} to the structure morphism
+$f\colon X\to\Spec K$, which is proper over the noetherian scheme $\Spec K$:
+the direct image $f_*F$ is a coherent sheaf on $\Spec K$.  A coherent sheaf on
+the spectrum of a field is a finite-dimensional $K$-vector space, and
+$\Gamma(X,F)=\Gamma(\Spec K,f_*F)$ by the definition of the direct image.
+
+The case $F=\O_X$ with $X$ integral does not need any of this and does not go
+through coherence at all --- it is \Cref{lem:cube-global-sections}, and it is
+already in Mathlib --- but the chapter still needs the general case, because
+\Cref{prop:cube-semicontinuity} needs $\dim_{\kappa(t)}\Gamma(X_t,L_t)$ to be
+finite for a line bundle $L$ and not only for the structure sheaf.
+\end{proof}
+
+\begin{proposition}[Semicontinuity of $h^0$ in a proper family]
+\label{prop:cube-semicontinuity}
+Let $T$ be a noetherian scheme, let $f\colon W\to T$ be a proper morphism and
+let $F$ be a coherent sheaf on $W$ which is flat over $T$.  For $t\in T$ let
+$W_t:=W\times_T\Spec\kappa(t)$ be the fibre, let $F_t$ be the restriction of
+$F$ to it, and put
+\[
+  h^0(t):=\dim_{\kappa(t)}\Gamma(W_t,F_t).
+\]
+Then $h^0$ is a well-defined function $T\to\N$ and it is upper
+semicontinuous: for every $n\in\N$ the set $\{t\in T:h^0(t)\geq n\}$ is closed
+in $T$.
+\openobligation{AlgebraicGeometry: cohomology of a sheaf of modules on a
+scheme in all degrees, flatness of a sheaf of modules over the base of a
+morphism, and the semicontinuity theorem for the fibrewise cohomology of a
+coherent sheaf flat over the base of a proper morphism.}
+\end{proposition}
+\begin{proof}
+\uses{prop:cube-coherent-finiteness}
+Not proved here, apart from the finiteness of the values.  That $h^0(t)$ is a
+natural number is \Cref{prop:cube-coherent-finiteness} applied to the proper
+$\kappa(t)$-scheme $W_t$ and the coherent sheaf $F_t$.  The semicontinuity
+statement for a proper morphism is \stacksproject{0BDN}, which is stated there
+for $f$ proper of finite presentation and $F$ of finite presentation and flat
+over the base --- over a noetherian base these are exactly the hypotheses
+above.  \cite[III, Theorem 12.8]{Hartshorne} is the same statement under the
+standing hypothesis of that section that $f$ is \emph{projective}, so it does
+not cover the statement above: the varieties of this chapter are not assumed
+projective.  The proof computes the cohomology of all the fibres from
+a single perfect complex on the base, so it needs $H^i$ in every degree and
+not only $H^0$.
+\end{proof}
+
+\begin{proposition}[Cohomology and base change in degree zero, after Grauert]
+\label{prop:cube-grauert}
+\uses{prop:cube-semicontinuity}
+Let $T$ be a reduced noetherian scheme, let $f\colon W\to T$ be a proper
+morphism and let $F$ be a coherent sheaf on $W$ which is flat over $T$.
+Suppose that the function $h^0$ of \Cref{prop:cube-semicontinuity} is constant
+equal to $r$ on $T$.  Then:
+\begin{enumerate}
+  \item $f_*F$ is a locally free sheaf of $\O_T$-modules of rank $r$;
+  \item for every $t\in T$ the canonical base change map
+  \[
+    (f_*F)(t)\longrightarrow\Gamma(W_t,F_t)
+  \]
+  from the fibre of $f_*F$ at $t$ to the global sections of $F_t$ is an
+  isomorphism of $\kappa(t)$-vector spaces.
+\end{enumerate}
+\openobligation{AlgebraicGeometry: cohomology of a sheaf of modules on a
+scheme, the base change map for the pushforward of a coherent sheaf along a
+proper morphism, and cohomology and base change in the form of the theorem of
+Grauert for a proper morphism over a reduced base.}
+\end{proposition}
+\begin{proof}
+\uses{prop:cube-semicontinuity, prop:cube-coherent-finiteness}
+Not proved here.  This is Grauert's theorem.  For a proper morphism it follows
+from cohomology and base change in the form \stacksproject{0B91} --- for $f$
+proper of finite presentation and $F$ of finite presentation and flat over the
+base, $Rf_*F$ is a perfect complex on $T$ whose formation commutes with
+arbitrary base change --- together with the fact that a perfect complex on a
+reduced noetherian scheme whose degree-zero Betti number is constant has
+locally free degree-zero cohomology; see also
+\cite[\S5]{MumfordAbelianVarieties}, where the statement is given for proper
+morphisms in the form used below.  \cite[III, Theorem 12.11]{Hartshorne} is
+the same statement under the standing hypothesis of that section that $f$ is
+\emph{projective}, and with the base assumed integral.
+
+Two hypotheses that are often quoted with this theorem are deliberately
+absent.  Flatness of $f$ itself plays no role: what is needed is flatness of
+$F$ over $T$.  And the base is assumed only reduced, not integral;
+connectedness of $T$ is used in the classical statement only to speak of a
+single rank $r$, and here the rank is fixed by hypothesis.
+\end{proof}
+
+\begin{lemma}[The counit on a fibre is the evaluation map]
+\label{lem:cube-counit-fibre}
+\uses{prop:cube-grauert}
+In the situation of \Cref{prop:cube-grauert}, let $t\in T$ and let
+$\varepsilon\colon f^*f_*F\to F$ be the counit of the adjunction
+$f^*\dashv f_*$.  Then the square
+\[
+  \begin{CD}
+    (f^*f_*F)|_{W_t} @>{\varepsilon|_{W_t}}>> F_t \\
+    @V{\wr}VV @| \\
+    \Gamma(W_t,F_t)\otimes_{\kappa(t)}\O_{W_t} @>{\mathrm{ev}}>> F_t
+  \end{CD}
+\]
+commutes, where the left vertical map is the composite of the canonical
+identification $(f^*f_*F)|_{W_t}\cong(f_*F)(t)\otimes_{\kappa(t)}\O_{W_t}$
+with the isomorphism of \Cref{prop:cube-grauert}(2), and $\mathrm{ev}$ sends
+$s\otimes1$ to $s$.
+\end{lemma}
+\begin{proof}
+\uses{prop:cube-grauert}
+This is a compatibility rather than a further input, and it is proved by
+unwinding definitions.  Pullback commutes with base change, so restricting
+$f^*f_*F$ to the fibre $W_t$ gives $f_t^*\bigl((f_*F)(t)\bigr)$, and the
+pullback along $f_t\colon W_t\to\Spec\kappa(t)$ of a $\kappa(t)$-vector
+space $V$ is $V\otimes_{\kappa(t)}\O_{W_t}$; this is the canonical
+identification on the left.  The counit $\varepsilon$ is by definition the
+morphism adjoint to $\mathrm{id}_{f_*F}$, so its restriction to $W_t$ is
+adjoint to the map $(f_*F)(t)\to\Gamma(W_t,F_t)$ induced on fibres by
+$\varepsilon$, which is exactly the base change map of
+\Cref{prop:cube-grauert}(2).  Being adjoint to a map $V\to\Gamma(W_t,F_t)$
+means being the evaluation map on $V\otimes_{\kappa(t)}\O_{W_t}$, which is
+the assertion.
+
+The reason this is stated separately rather than folded into
+\Cref{prop:cube-grauert} is that a formaliser has to know how much of the
+obligation is the hard theorem and how much is definitional glue: the hard
+theorem is parts (1) and (2), and everything in this lemma is the definition
+of the base change map.  \Cref{thm:cube-seesaw} uses it essentially.
+\end{proof}
+
+The global sections of a proper integral scheme are the next thing needed.
+Over the algebraically closed field $k$ this costs nothing --- Mathlib has it
+--- and over a general field it is the one further open obligation of the
+chapter.
+
+\begin{lemma}[Global sections of a proper variety]
+\label{lem:cube-global-sections}
+\lean{AlgebraicGeometry.isField_of_universallyClosed,
+AlgebraicGeometry.finite_appTop_of_universallyClosed}
+Let $X$ be a proper integral scheme over the algebraically closed field $k$
+--- in particular, a proper variety over $k$.  Then the structure map
+$k\to\Gamma(X,\O_X)$ is an isomorphism; that is, $\Gamma(X,\O_X)=k$ and
+$\dim_k\Gamma(X,\O_X)=1$.
+\end{lemma}
+\begin{proof}
+This needs nothing from \Cref{sec:cube-inputs}: it is already available in
+Mathlib \texttt{v4.33.1}, in
+\texttt{Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}.  There,
+\texttt{AlgebraicGeometry.isField\_of\_universallyClosed} says that for a
+field $K$ and an integral scheme $X$ universally closed over $\Spec K$ the
+ring $\Gamma(X,\O_X)$ is a field, and
+\texttt{AlgebraicGeometry.finite\_appTop\_of\_universallyClosed} says that if
+moreover the structure morphism is locally of finite type then
+$K\to\Gamma(X,\O_X)$ is finite.  A proper morphism is universally closed and
+locally of finite type, so together, applied with $K=k$, they make
+$\Gamma(X,\O_X)$ a finite field extension of $k$; since $k$ is algebraically
+closed, that extension is trivial.
+
+The classical argument is the same one written out by hand: $\Gamma(X,\O_X)$
+is a finite-dimensional $k$-algebra, a subring of the function field of the
+integral scheme $X$ and hence a domain, and a finite-dimensional domain over a
+field is a field.  What is worth recording is that neither route passes
+through \Cref{prop:cube-coherent-finiteness}: the finiteness above is proved
+in Mathlib from integrality of the structure map on global sections and the
+Jacobson property, not from the coherence of the direct images.  There is a
+second elementary route, the one in Milne's \emph{Algebraic Geometry}: a
+global function on a proper integral $X$ over an algebraically closed $k$ is a
+morphism $X\to\mathbf A^1\subseteq\mathbf P^1$ whose image is closed,
+irreducible and misses $\infty$, hence a point.
+\end{proof}
+
+\begin{proposition}[Global sections and flat base change of the ground ring]
+\label{prop:cube-global-sections-flat-base-change}
+Let $R$ be a ring, let $X$ be a quasi-compact separated $R$-scheme and let
+$R\to R'$ be a flat ring homomorphism.  Then the canonical map
+\[
+  \Gamma(X,\O_X)\otimes_RR'\;\longrightarrow\;
+  \Gamma\bigl(X\times_{\Spec R}\Spec R',\O\bigr)
+\]
+is an isomorphism of $R'$-algebras.
+\openobligation{AlgebraicGeometry: the compatibility of the global sections
+functor with a flat base change of the ground ring, for a quasi-compact
+separated scheme. This is the degree-zero case of Stacks Project Tag 02KH. It
+is the only input of the chapter that needs no cohomology, and it can already
+be stated in Lean; it is only its proof that is missing.}
+\end{proposition}
+\begin{proof}
+Not proved here.  This is the case $i=0$ of \stacksproject{02KH}, and in that
+degree it is elementary: choose a finite affine open cover of $X$, write
+$\Gamma(X,\O_X)$ as the equaliser of the two maps between the products of the
+sections over the members of the cover and over their pairwise intersections
+--- which are again affine, $X$ being separated --- and tensor that equaliser
+with the flat $R$-module $R'$, which preserves equalisers of finite
+products.  The base change
+$X\times_{\Spec R}\Spec R'$ is covered by the base changes of the members,
+and their rings of sections are the tensor products, so the tensored equaliser
+is the one computing the right-hand side.  Mathlib \texttt{v4.33.1} does not
+have this; the two lemmas that follow are the only two forms of it that this
+chapter uses.
+\end{proof}
+
+\begin{lemma}[Global sections over a general field]
+\label{lem:cube-global-sections-general}
+Let $K$ be a field and let $X$ be a proper geometrically integral
+$K$-scheme.  Then the structure map $K\to\Gamma(X,\O_X)$ is an isomorphism.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-global-sections, prop:cube-global-sections-flat-base-change}
+As in \Cref{lem:cube-global-sections}, Mathlib gives that
+$A:=\Gamma(X,\O_X)$ is a field and that $K\to A$ is finite; this part holds
+for $X$ merely integral.  Geometric integrality is what forces $A=K$, and it
+cannot be dropped: for $X=\Spec A$ with $A/K$ a non-trivial finite extension,
+$X$ is proper and integral and $\Gamma(X,\O_X)=A$.
+
+Let $\overline K$ be an algebraic closure of $K$.  The base change
+$X_{\overline K}$ is proper over $\overline K$, and it is integral because
+$X$ is geometrically integral; so
+$\Gamma(X_{\overline K},\O_{X_{\overline K}})=\overline K$ by
+\Cref{lem:cube-global-sections}.  On the other hand $X$ is quasi-compact and
+separated, being proper, and $K\to\overline K$ is flat, being a field
+extension, so
+\Cref{prop:cube-global-sections-flat-base-change} identifies that ring with
+$A\otimes_K\overline K$.  Thus $A\otimes_K\overline K=\overline K$, which
+for a finite field extension $A/K$ forces $A=K$: a finite extension of degree
+$d$ gives $\dim_{\overline K}(A\otimes_K\overline K)=d$, so $d=1$.  The
+statement is \stacksproject{0BUG}, part (8); see also \stacksproject{0FD2}.
+\end{proof}
+
+\begin{lemma}[Global sections after a base change of the ground field]
+\label{lem:cube-global-sections-base-change}
+Let $X$ be a proper variety over $k$ and let $A$ be a $k$-algebra.  Then the
+structure map is an isomorphism
+\[
+  A\;\xrightarrow{\ \sim\ }\;\Gamma\bigl(X\times_k\Spec A,\O\bigr).
+\]
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-global-sections, prop:cube-global-sections-flat-base-change}
+Every $k$-algebra is flat over the field $k$, and $X$ is quasi-compact and
+separated, so \Cref{prop:cube-global-sections-flat-base-change} identifies
+$\Gamma(X\times_k\Spec A,\O)$ with $\Gamma(X,\O_X)\otimes_kA$.  By
+\Cref{lem:cube-global-sections} that is $k\otimes_kA=A$, and the resulting
+isomorphism is the structure map.  Only the case of a finite-dimensional local
+$k$-algebra $A$ with residue field $k$ is used below.
+\end{proof}
+
+\begin{remark}[Where the general field is and is not needed]
+\label{rem:cube-general-field}
+\Cref{thm:cube-rigidity} and \Cref{thm:cube-seesaw} use only
+\Cref{lem:cube-global-sections}, over the algebraically closed $k$: every
+scheme they apply it to is a proper variety over $k$ itself or a fibre over a
+$k$-rational point, and such a fibre again has $k$ as its residue field.  This
+is why \Cref{lem:cube-h0-constant} is arranged to compute $h^0$ only at
+closed points and to reach the remaining points of the base by
+semicontinuity.
+
+The general-field version is not avoided outright, only postponed: it is
+needed at the very next step.  \Cref{cor:cube-triviality-closed}, which is the
+form of the seesaw theorem that the theorem of the cube consumes, applies the
+triviality criterion \Cref{lem:cube-triviality-criterion} at \emph{every}
+point $t$ of the base, and at a non-closed $t$ the fibre $X_t$ is a proper
+geometrically integral scheme over $\kappa(t)$, which is not algebraically
+closed.  So \Cref{lem:cube-global-sections-general} is the price of the
+arrangement chosen here; it is proved above from
+\Cref{prop:cube-global-sections-flat-base-change}, which
+\Cref{sec:cube-cost} counts as the one open obligation of the chapter that
+needs no cohomology.
+\end{remark}
+
+\begin{lemma}[Sections of a trivial line bundle on a proper variety]
+\label{lem:cube-nowhere-vanishing}
+Let $X$ be a proper integral scheme over $k$ and let $L$ be a trivial line
+bundle on $X$.  Then $\dim_k\Gamma(X,L)=1$, and every non-zero global section
+$s\in\Gamma(X,L)$ generates $L$ at every point of $X$; equivalently, the image
+of $s$ in the fibre $L(x)$ is non-zero for every $x\in X$.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-global-sections}
+Both assertions are invariant under isomorphism of line bundles, so we may
+choose an isomorphism $L\cong\O_X$ and assume $L=\O_X$.  Then
+$\Gamma(X,L)=\Gamma(X,\O_X)=k$ by \Cref{lem:cube-global-sections}, which gives
+the dimension.  A non-zero section is then a non-zero element $c\in k$, hence
+a unit of $\Gamma(X,\O_X)$ and so a unit in every local ring $\O_{X,x}$; a
+unit generates $\O_{X,x}$ as a module over itself, and its image in
+$\O_{X,x}/\m_x=\kappa(x)$ is non-zero.
+\end{proof}
+
+\section{Rigidity}\label{sec:cube-rigidity}
+
+The rigidity theorem says that a morphism out of a product cannot collapse one
+fibre of a projection whose fibre direction is proper without collapsing all
+of them.  The two steps of the proof are recorded separately: the properness
+step, which produces an open subset of the base on which the collapse already
+happens, and the density step, which propagates it to the whole source.
+
+\begin{lemma}[A morphism from a proper variety to an affine scheme is
+constant]\label{lem:cube-constant-to-affine}
+Let $Y$ be a proper integral scheme over $k$ and let $g\colon Y\to V$ be a
+morphism of $k$-schemes with $V$ affine.  Then $g$ factors as
+\[
+  Y\xrightarrow{\ \pi\ }\Spec k\xrightarrow{\ v\ }V
+\]
+for a unique $k$-rational point $v\in V(k)$, where $\pi$ is the structure
+morphism.  In particular the set-theoretic image of $g$ is the single point
+$v$.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-global-sections}
+Write $V=\Spec A$ with $A$ a $k$-algebra.  By the adjunction between the
+global sections functor and $\Spec$, morphisms of $k$-schemes $Y\to\Spec A$
+correspond bijectively to morphisms of $k$-algebras $A\to\Gamma(Y,\O_Y)$.  By
+\Cref{lem:cube-global-sections} we have $\Gamma(Y,\O_Y)=k$, so such a
+morphism is a $k$-algebra map $A\to k$, that is a $k$-rational point $v$ of
+$V$; and the morphism $Y\to\Spec A$ it corresponds to is by construction the
+composite of $\pi$ with $v$.  Uniqueness of $v$ is the injectivity half of the
+same bijection.
+\end{proof}
+
+\begin{lemma}[Properness makes the collapsing locus open]
+\label{lem:cube-collapse-neighbourhood}
+Let $X$ and $Z$ be $k$-schemes, let $Y$ be a proper $k$-scheme and let
+$f\colon X\times Y\to Z$ be a morphism.  Let $x_0\in X$ and let $U\subseteq Z$
+be an open subset with $f(\{x_0\}\times Y)\subseteq U$.  Then there is an open
+subset $V\subseteq X$ with $x_0\in V$ and
+\[
+  f\bigl(p_X^{-1}(V)\bigr)\subseteq U .
+\]
+\end{lemma}
+\begin{proof}
+The projection $p_X\colon X\times Y\to X$ is the base change of
+$Y\to\Spec k$ along $X\to\Spec k$, so it is proper, hence universally closed,
+hence a closed map of the underlying topological spaces.
+
+Put $W:=f^{-1}(Z\setminus U)$, a closed subset of $X\times Y$.  Then
+$p_X(W)$ is closed in $X$, and $x_0\notin p_X(W)$: a point of
+$W\cap p_X^{-1}(x_0)$ would be a point of $\{x_0\}\times Y$ whose image under
+$f$ lies outside $U$, contradicting the hypothesis.  So
+$V:=X\setminus p_X(W)$ is an open subset of $X$ containing $x_0$, and
+$p_X^{-1}(V)$ is disjoint from $W$, which is exactly the assertion
+$f(p_X^{-1}(V))\subseteq U$.
+\end{proof}
+
+\begin{theorem}[Rigidity]\label{thm:cube-rigidity}
+Let $X$ be a variety over $k$, let $Y$ be a proper variety over $k$ and let
+$Z$ be a separated $k$-scheme, locally of finite type over $k$.  Let
+$f\colon X\times Y\to Z$ be a morphism of $k$-schemes and suppose that for
+some point $x_0\in X$ the image $f(\{x_0\}\times Y)$ is a single point of $Z$.
+Then there is a unique morphism $h\colon X\to Z$ making
+\[
+  \begin{CD}
+    X\times Y @>{f}>> Z \\
+    @V{p_X}VV @| \\
+    X @>{h}>> Z
+  \end{CD}
+\]
+commute, that is with $f=h\circ p_X$; namely $h=f\circ\sigma_{y_0}$ for any
+$y_0\in Y(k)$.  In particular $f$ does not depend on the second variable.
+\end{theorem}
+\begin{proof}
+\uses{lem:cube-constant-to-affine, lem:cube-collapse-neighbourhood}
+Uniqueness is immediate.  The variety $Y$ has a $k$-rational point $y_0$, and
+$\sigma_{y_0}$ is a section of $p_X$, so $f=h\circ p_X$ forces
+$h=h\circ p_X\circ\sigma_{y_0}=f\circ\sigma_{y_0}$.  Fix such a $y_0$ and put
+\[
+  h:=f\circ\sigma_{y_0}\colon X\to Z .
+\]
+It remains to prove $f=h\circ p_X$.
+
+\emph{Step 1: an open set on which the collapse happens.}  Let $z_0$ be the
+point with $f(\{x_0\}\times Y)=\{z_0\}$ and choose an affine open subset
+$U\subseteq Z$ containing $z_0$.  By
+\Cref{lem:cube-collapse-neighbourhood} there is an open subset $V\subseteq X$
+with $x_0\in V$ and $f(p_X^{-1}(V))\subseteq U$.  A morphism whose
+set-theoretic image lies in an open subset factors through that open subset as
+an open subscheme, so the restriction of $f$ to $p_X^{-1}(V)$ factors through
+$U$.
+
+\emph{Step 2: $f$ and $h\circ p_X$ agree at the $k$-rational points of
+$p_X^{-1}(V)$.}  Let $x\in V(k)$ and $y\in Y(k)$.  The fibre
+$\{x\}\times Y$ is isomorphic to $Y$ as a $k$-scheme, because $x$ is a
+$k$-rational point, and by Step 1 the restriction of $f$ to it factors through
+the affine open $U$.  So \Cref{lem:cube-constant-to-affine}, applied to the
+proper integral $k$-scheme $Y$ and the morphism $\{x\}\times Y\to U$, shows
+that this restriction is constant.  Its value at
+$(x,y_0)=\sigma_{y_0}(x)$ is $h(x)$, so its value at $(x,y)$ is $h(x)$ as
+well; that is, $f(x,y)=h(x)=(h\circ p_X)(x,y)$.  Every $k$-rational point of
+$p_X^{-1}(V)$ is of this form, so $f$ and $h\circ p_X$ agree at all of them.
+
+\emph{Step 3: propagation by density.}  The scheme $X\times Y$ is a variety
+over $k$, being a product of two geometrically integral $k$-schemes of finite
+type; in particular it is irreducible and reduced.  The subset
+$p_X^{-1}(V)=V\times Y$ is open in $X\times Y$ and non-empty, hence dense.
+Its closed points are its $k$-rational points, because $k$ is algebraically
+closed and $X\times Y$ is of finite type over $k$.  By Step 2 the two
+morphisms $f$ and $h\circ p_X$ agree at every closed point of the dense open
+subset $p_X^{-1}(V)$; both are morphisms of $k$-schemes into the separated
+$k$-scheme $Z$, and $X\times Y$ is reduced.  Hence $f=h\circ p_X$.
+\end{proof}
+
+\begin{remark}[The Lean shape of the proof]\label{rem:cube-rigidity-mathlib}
+Every ingredient of this proof is available in Mathlib \texttt{v4.33.1}, so
+\Cref{thm:cube-rigidity} can be formalised today.  For Step 3, the statement
+that two $K$-morphisms out of a reduced $K$-scheme locally of finite type into
+a separated $K$-scheme locally of finite type are equal as soon as they agree
+at the closed points of a dense locally closed subset, for $K$ algebraically
+closed, is \texttt{AlgebraicGeometry.ext\_of\_apply\_eq} in
+\texttt{Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean}; the identification of
+closed points with $k$-rational points is
+\texttt{AlgebraicGeometry.pointEquivClosedPoint} in the same file, and their
+density is the Jacobson property of a scheme locally of finite type over a
+field.  For Step 1, properness is stable under base change in Mathlib,
+\texttt{AlgebraicGeometry.Scheme.Hom.isClosedMap} turns a universally closed
+morphism into a closed map, and the factorisation of a morphism whose
+set-theoretic image lies in an open subset through that open subscheme is
+\texttt{AlgebraicGeometry.IsOpenImmersion.lift}, of which
+\texttt{Scheme.Hom.resLE} is the packaged form.  And
+\Cref{lem:cube-constant-to-affine} rests only on
+\Cref{lem:cube-global-sections}, which as noted there is itself already in
+Mathlib.
+
+The nearest existing Lean argument of this shape is
+\texttt{AlgebraicGeometry.isCommMonObj\_of\_isProper\_of\_isIntegral\_tensorObj\_of\_isAlgClosed}
+in \texttt{Mathlib/AlgebraicGeometry/Group/Abelian.lean}, which proves that a
+proper geometrically integral group scheme over a field is commutative by
+collapsing a fibre of a projection and propagating along closed points of a
+Jacobson space, using \texttt{ext\_of\_apply\_eq} exactly as Step 3 does.  It
+is the natural template to copy, the more so as it substitutes Zariski's main
+theorem for $\Gamma(Y,\O_Y)=k$ and so shows the argument does not need any
+coherent-sheaf theory.
+\end{remark}
+
+\begin{warning}[Properness is needed on the factor that gets collapsed]
+\label{warn:cube-proper-factor}
+In \Cref{thm:cube-rigidity} the properness hypothesis is on $Y$, the factor
+whose fibre $\{x_0\}\times Y$ is assumed to collapse, and not on $X$.  It
+cannot be moved: with $X$ proper and $Y$ merely connected the statement is
+false.  For a counterexample take $X=Z=\mathbf P^1_k$ and
+$Y=\mathbf A^1_k$ and let
+\[
+  f\colon\mathbf P^1_k\times\mathbf A^1_k\to\mathbf P^1_k,\qquad
+  f\bigl([u:v],t\bigr)=[u:v+tu] ,
+\]
+which is a morphism because $u=0$ forces $v\neq0$ and then $v+tu=v\neq0$.
+Take $x_0=[0:1]$.  Then $f(\{x_0\}\times Y)=\{[0:1]\}$ is a single point, $X$
+is proper and connected and $Y$ is connected; but $f([1:0],t)=[1:t]$ depends
+on $t$, so $f$ does not factor through $p_X$.  What properness of $Y$ is used
+for is exactly that $p_X$ is a closed map, in
+\Cref{lem:cube-collapse-neighbourhood}.  In the application that
+\Cref{chap:av-isogeny} makes of rigidity both factors are abelian varieties
+and so both are proper, which is why the distinction is invisible there; it
+matters when the statement is formalised, because the hypothesis would
+otherwise be attached to the wrong variable.
+\end{warning}
+
+\begin{remark}[Weaker hypotheses]\label{rem:cube-rigidity-weaker}
+Irreducibility of $X$ is used only for the density of $V\times Y$ in Step 3,
+and reducedness of $X\times Y$ only in the last sentence of that step; with
+$X$ merely connected and reduced the conclusion still holds, propagating the
+collapse along a connected chain of irreducible components, but the argument
+is longer and the version above is all that the theory of abelian varieties
+needs.
+Integrality of $Y$, by contrast, is essential: it is what makes
+$\Gamma(Y,\O_Y)=k$ in \Cref{lem:cube-global-sections}, and hence what makes a
+morphism from $Y$ to an affine scheme constant.
+\end{remark}
+
+\section{The seesaw theorem}\label{sec:cube-seesaw}
+
+The seesaw theorem says that triviality on every fibre of a projection whose
+fibre direction is proper forces the bundle to come from the base.  Four
+auxiliary statements come first: that the projection is a proper flat family,
+the closedness of the degeneracy locus of a morphism of line bundles, the
+fibrewise criterion for such a morphism to be an isomorphism, and the
+constancy of $h^0$.  The section ends with the two corollaries that the
+theorem of the cube will consume, \Cref{cor:cube-seesaw-trivial} and
+\Cref{cor:cube-triviality-closed}.
+
+\begin{lemma}[The projection is a proper flat family]
+\label{lem:cube-projection-proper-flat}
+Let $X$ be a proper variety over $k$ and let $T$ be a noetherian $k$-scheme.
+Then:
+\begin{enumerate}
+  \item $X\times T$ is a noetherian scheme, of finite type over $k$ whenever
+  $T$ is;
+  \item $p_T\colon X\times T\to T$ is proper, flat and of finite type, and it
+  is a closed map;
+  \item for $t\in T$ the fibre $X_t=p_T^{-1}(t)$ is the base change
+  $X\times_k\Spec\kappa(t)$, a proper geometrically integral
+  $\kappa(t)$-scheme; for $t\in T(k)$ it is isomorphic to $X$ as a
+  $k$-scheme;
+  \item every line bundle $L$ on $X\times T$ is coherent and flat over $T$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+For (1): $X\times T\to T$ is of finite type and $T$ is noetherian, so
+$X\times T$ is noetherian; finite type over $k$ is stable under products.  For
+(2): $p_T$ is the base change of $X\to\Spec k$ along $T\to\Spec k$, and
+properness, flatness and finite type are all stable under base change ---
+flatness because every morphism to the spectrum of a field is flat.  A proper
+morphism is universally closed and hence a closed map.  For (3): the fibre of
+a base change is the base change of the fibre, so the fibre of $p_T$ over $t$
+is $X\times_k\Spec\kappa(t)$, which is proper over $\kappa(t)$ because
+properness is stable under base change and geometrically integral over
+$\kappa(t)$ because geometric integrality is; for $t\in T(k)$ we have
+$\kappa(t)=k$ and the fibre is $X$ itself.  For (4): $L$ is locally free of
+rank one, hence coherent on the noetherian scheme $X\times T$, and a locally
+free sheaf is flat over $X\times T$, hence flat over $T$ because $p_T$ is flat
+by (2).
+
+Every item here is an instance in Lean rather than a statement someone has to
+prove; the lemma exists to name the standing facts that the rest of the
+section uses, in the manner of \Cref{prop:av-basic} in \Cref{chap:av-isogeny}.
+\end{proof}
+
+\begin{lemma}[The degeneracy locus of a morphism of line bundles is closed]
+\label{lem:cube-degeneracy-closed}
+Let $S$ be a scheme, let $M$ and $N$ be line bundles on $S$ and let
+$\varphi\colon M\to N$ be a morphism of $\O_S$-modules.  Then
+\[
+  \{s\in S:\varphi(s)=0\}
+\]
+is a closed subset of $S$, where $\varphi(s)\colon M(s)\to N(s)$ is the
+induced $\kappa(s)$-linear map on fibres.
+\end{lemma}
+\begin{proof}
+The assertion is local on $S$, so it suffices to treat an open subset
+$U\subseteq S$ on which both $M$ and $N$ are free of rank one; let $m$ and $n$
+be generators.  Then $\varphi(m)=a\cdot n$ for a unique
+$a\in\Gamma(U,\O_U)$, and for $s\in U$ the map $\varphi(s)$ sends the basis
+vector $\overline m$ of the one-dimensional space $M(s)$ to
+$\overline a\cdot\overline n$, where $\overline a$ is the image of $a$ in
+$\kappa(s)$.  So $\varphi(s)=0$ if and only if $\overline a=0$, that is
+$a\in\m_s$; the degeneracy locus of $\varphi$ on $U$ is therefore the zero set
+of the section $a$, which is closed in $U$.  Such opens cover $S$, and a
+subset whose intersection with each member of an open cover is closed in that
+member is closed.
+\end{proof}
+
+\begin{lemma}[Fibrewise criterion for a morphism of line bundles]
+\label{lem:cube-invertible-fibrewise}
+Let $S$ be a scheme, let $M$ and $N$ be line bundles on $S$ and let
+$\varphi\colon M\to N$ be a morphism of $\O_S$-modules.  Suppose that for
+every point $s\in S$ the induced $\kappa(s)$-linear map on fibres
+$\varphi(s)\colon M(s)\to N(s)$ is non-zero.  Then $\varphi$ is an
+isomorphism.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-degeneracy-closed}
+Being an isomorphism is local on $S$, so we may work on an open subset
+$U\subseteq S$ on which $M$ and $N$ are free of rank one with generators $m$
+and $n$, and write $\varphi(m)=a\cdot n$ with $a\in\Gamma(U,\O_U)$ as in the
+proof of \Cref{lem:cube-degeneracy-closed}.  The hypothesis says that
+$a\notin\m_s$ for every $s\in U$, that is that $a$ is a unit in every local
+ring $\O_{S,s}$ with $s\in U$.  A section of $\O_U$ which is a unit in every
+local ring of $U$ is a unit of $\Gamma(U,\O_U)$: it is invertible on an open
+cover, and the local inverses agree on overlaps because inverses are unique,
+so they glue.  Hence $\varphi|_U$ is the isomorphism sending $m$ to $n$
+followed by multiplication by a unit, and is therefore an isomorphism.
+\end{proof}
+
+\begin{lemma}[$h^0$ is identically one]\label{lem:cube-h0-constant}
+\uses{prop:cube-semicontinuity}
+Let $X$ be a proper variety over $k$, let $T$ be a scheme of finite type over
+$k$ and let $L$ be a line bundle on $X\times T$ whose restriction $L_t$ to
+$X_t$ is trivial for every $t\in T(k)$.  Then the function $h^0$ of
+\Cref{prop:cube-semicontinuity}, formed for $p_T\colon X\times T\to T$ and
+$F=L$, is constant equal to $1$ on all of $T$, and not only at the
+$k$-rational points.
+\end{lemma}
+\begin{proof}
+\uses{prop:cube-semicontinuity, lem:cube-nowhere-vanishing,
+lem:cube-projection-proper-flat}
+By \Cref{lem:cube-projection-proper-flat} the morphism $p_T$ is proper and
+$L$ is coherent and flat over $T$, and $T$ is noetherian, so $h^0$ is defined
+and upper semicontinuous by \Cref{prop:cube-semicontinuity}.
+
+For $t\in T(k)$ the fibre is $X$ and $L_t$ is trivial by hypothesis, so
+$h^0(t)=\dim_k\Gamma(X,L_t)=1$ by \Cref{lem:cube-nowhere-vanishing}.  Thus
+$h^0$ takes the value $1$ at every closed point of $T$.
+
+Now let $t\in T$ be arbitrary.  The set $\{h^0\geq2\}$ is closed by
+semicontinuity; if it contained $t$ it would contain the closure of $\{t\}$,
+and that closure contains a closed point of $T$, because $T$ is of finite type
+over a field and hence a Jacobson scheme.  That contradicts $h^0=1$ at closed
+points, so $h^0(t)\leq1$.  The set $\{h^0\geq1\}$ is closed as well and
+contains every closed point of $T$; the closed points are dense, so this set
+is all of $T$ and $h^0(t)\geq1$.  Hence $h^0(t)=1$.
+
+Nothing here uses reducedness or irreducibility of $T$: only that $T$ is
+noetherian, that it is a Jacobson scheme whose closed points are exactly its
+$k$-rational points, and that those are dense.
+\end{proof}
+
+\begin{theorem}[Seesaw theorem]\label{thm:cube-seesaw}
+Let $X$ be a proper variety over $k$, let $T$ be a \emph{reduced} scheme of
+finite type over $k$ and let $L$ be a line bundle on $X\times T$ whose
+restriction to $X_t$ is trivial for every $t\in T(k)$.  Then
+\[
+  M:=p_{T*}L
+\]
+is a line bundle on $T$ and the counit of the adjunction
+$p_T^*\dashv p_{T*}$ is an isomorphism
+\[
+  \varepsilon\colon p_T^*M\;\xrightarrow{\ \sim\ }\;L .
+\]
+In particular $L$ is the pullback along $p_T$ of a line bundle on $T$.
+\end{theorem}
+\begin{proof}
+\uses{lem:cube-h0-constant, prop:cube-grauert, lem:cube-counit-fibre,
+lem:cube-degeneracy-closed, lem:cube-invertible-fibrewise,
+lem:cube-nowhere-vanishing, lem:cube-projection-proper-flat}
+By \Cref{lem:cube-projection-proper-flat} the morphism
+$p_T\colon X\times T\to T$ is proper, $L$ is coherent and flat over $T$, and
+$T$ is a reduced noetherian scheme.  By \Cref{lem:cube-h0-constant} the
+function $h^0$ is constant equal to $1$ on $T$.  So \Cref{prop:cube-grauert}
+applies with $r=1$: the sheaf $M=p_{T*}L$ is locally free of rank one, that is
+a line bundle, and for every $t\in T$ the base change map
+$M(t)\to\Gamma(X_t,L_t)$ is an isomorphism of one-dimensional
+$\kappa(t)$-vector spaces.  By \Cref{lem:cube-counit-fibre} the restriction of
+$\varepsilon\colon p_T^*M\to L$ to the fibre over $t$ is, under that
+identification, the evaluation map
+\[
+  \Gamma(X_t,L_t)\otimes_{\kappa(t)}\O_{X_t}\longrightarrow L_t .
+\]
+
+It remains to prove that $\varepsilon$, which is a morphism of line bundles on
+$X\times T$, is an isomorphism.  By \Cref{lem:cube-invertible-fibrewise} it is
+enough to show that $\varepsilon(w)\neq0$ for every point
+$w\in X\times T$.  Let
+\[
+  N:=\{w\in X\times T:\varepsilon(w)=0\} ,
+\]
+which is a closed subset of $X\times T$ by \Cref{lem:cube-degeneracy-closed}.
+
+First, $N$ misses every fibre over a $k$-rational point.  Indeed, let
+$t\in T(k)$; then $X_t\cong X$ is a proper integral $k$-scheme and $L_t$ is
+trivial by hypothesis, so by \Cref{lem:cube-nowhere-vanishing} the space
+$\Gamma(X_t,L_t)$ is one-dimensional and any basis vector $s$ of it is nowhere
+vanishing on $X_t$.  By the description of the restriction of $\varepsilon$
+above, for $w\in X_t$ the map $\varepsilon(w)$ sends the basis vector
+$s\otimes1$ of the one-dimensional space $(p_T^*M)(w)$ to the image of $s$ in
+$L_t(w)$, which is non-zero.  So $\varepsilon(w)\neq0$ and
+$w\notin N$.
+
+Second, $p_T$ is a closed map by \Cref{lem:cube-projection-proper-flat}, so
+$p_T(N)$ is a closed subset of $T$.  By the previous paragraph it contains no
+$k$-rational point of $T$, hence no closed point of $T$.  A non-empty closed
+subset of $T$ contains a closed point of $T$, because $T$ is of finite type
+over a field and hence a Jacobson scheme; therefore $p_T(N)=\emptyset$ and
+so $N=\emptyset$.
+
+Thus $\varepsilon(w)\neq0$ for every $w\in X\times T$, and
+\Cref{lem:cube-invertible-fibrewise} shows that $\varepsilon$ is an
+isomorphism.
+\end{proof}
+
+\begin{corollary}[Seesaw, triviality form]\label{cor:cube-seesaw-trivial}
+Let $X$ be a proper variety over $k$, let $T$ be a reduced scheme of finite
+type over $k$ and let $L$ be a line bundle on $X\times T$.  Suppose that
+\begin{enumerate}
+  \item the restriction $L_t$ of $L$ to $X_t$ is trivial for every
+  $t\in T(k)$, and
+  \item the restriction of $L$ to $\{x_0\}\times T$ is trivial for some
+  $x_0\in X(k)$.
+\end{enumerate}
+Then $L$ is trivial.
+\end{corollary}
+\begin{proof}
+\uses{thm:cube-seesaw}
+By \Cref{thm:cube-seesaw} there are a line bundle $M$ on $T$ and an
+isomorphism $p_T^*M\cong L$.  Let $\sigma\colon T\to X\times T$ be the section
+of $p_T$ determined by $x_0$ and $\mathrm{id}_T$, so that
+\[
+  \begin{CD}
+    T @>{\sigma}>> X\times T \\
+    @| @V{p_T}VV \\
+    T @= T
+  \end{CD}
+\]
+commutes and $\sigma$ identifies $T$ with $\{x_0\}\times T$.  Pulling the
+isomorphism back along $\sigma$ gives
+\[
+  M\cong(p_T\circ\sigma)^*M\cong\sigma^*p_T^*M\cong\sigma^*L ,
+\]
+and $\sigma^*L$ is the restriction of $L$ to $\{x_0\}\times T$, which is
+trivial by hypothesis (2).  So $M$ is trivial and therefore
+$L\cong p_T^*M\cong p_T^*\O_T=\O_{X\times T}$.
+\end{proof}
+
+The second corollary is the one the theorem of the cube consumes.  It needs a
+triviality criterion valid over a field that is not algebraically closed,
+because it is applied at every point of the base and not only at the
+$k$-rational ones.
+
+\begin{lemma}[Triviality criterion]\label{lem:cube-triviality-criterion}
+Let $K$ be a field, let $X$ be a proper geometrically integral $K$-scheme and
+let $L$ be a line bundle on $X$.  Then $L$ is trivial if and only if
+\[
+  \Gamma(X,L)\neq0\quad\text{and}\quad\Gamma(X,L^{-1})\neq0 .
+\]
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-global-sections-general, lem:cube-invertible-fibrewise}
+If $L$ is trivial then so is $L^{-1}$, and both spaces of global sections are
+one-dimensional over $K$ by \Cref{lem:cube-global-sections-general}.
+
+Conversely, let $s\in\Gamma(X,L)$ and $u\in\Gamma(X,L^{-1})$ be non-zero and
+let $\eta$ be the generic point of the integral scheme $X$.  A non-zero global
+section of a line bundle on an integral scheme has non-zero germ at $\eta$:
+choosing an open $U\ni\eta$ trivialising the bundle turns the section into a
+section $a$ of $\O_U$, and if $a$ vanished in $\O_{X,\eta}$ --- a field, so
+that its maximal ideal is zero --- then $a$ would be zero in $\Gamma(U,\O_U)$
+by the injectivity of $\Gamma(U,\O_U)\to\O_{X,\eta}$ on an integral scheme,
+and the section would vanish on the dense open $U$ and hence everywhere.  The
+stalks $L_\eta$ and $(L^{-1})_\eta$ are one-dimensional over the field
+$\O_{X,\eta}$ and the pairing between them is perfect, so the germ at $\eta$
+of the global section
+\[
+  s\otimes u\;\in\;\Gamma(X,L\otimes L^{-1})\;\cong\;\Gamma(X,\O_X)
+\]
+is non-zero, where the isomorphism is the canonical one
+$L\otimes L^{-1}\cong\O_X$.  By \Cref{lem:cube-global-sections-general},
+$\Gamma(X,\O_X)=K$, so $s\otimes u$ is a non-zero element $c$ of $K$, hence a
+unit of $\Gamma(X,\O_X)$.
+
+Consequently $s$ does not vanish at any point $x\in X$: if it did, the image
+of $s\otimes u$ in $\kappa(x)$ would be zero, whereas $c$ is a unit.  So the
+morphism $\O_X\to L$, $1\mapsto s$, is non-zero on every fibre, and
+\Cref{lem:cube-invertible-fibrewise} makes it an isomorphism.
+\end{proof}
+
+\begin{corollary}[The triviality locus is closed]
+\label{cor:cube-triviality-closed}
+Let $X$ be a proper variety over $k$, let $T$ be a noetherian $k$-scheme and
+let $L$ be a line bundle on $X\times T$.  Then
+\[
+  \{t\in T:L_t\text{ is a trivial line bundle on }X_t\}
+\]
+is a closed subset of $T$.
+\end{corollary}
+\begin{proof}
+\uses{prop:cube-semicontinuity, lem:cube-triviality-criterion,
+lem:cube-projection-proper-flat}
+By \Cref{lem:cube-projection-proper-flat} the morphism $p_T$ is proper, both
+$L$ and $L^{-1}$ are coherent and flat over $T$, and every fibre $X_t$ is a
+proper geometrically integral $\kappa(t)$-scheme.  Restriction to a fibre is a
+pullback and therefore commutes with the inverse of a line bundle, so
+$(L^{-1})_t=(L_t)^{-1}$.  By \Cref{lem:cube-triviality-criterion}, $L_t$ is
+trivial if and only if
+\[
+  \dim_{\kappa(t)}\Gamma(X_t,L_t)\geq1
+  \quad\text{and}\quad
+  \dim_{\kappa(t)}\Gamma\bigl(X_t,(L^{-1})_t\bigr)\geq1 ,
+\]
+that is if and only if $t$ lies in both of the sets $\{h^0\geq1\}$ formed for
+$L$ and for $L^{-1}$.  Each is closed by \Cref{prop:cube-semicontinuity}, and
+so is their intersection.
+\end{proof}
+
+\begin{remark}[What the base has to satisfy]\label{rem:cube-seesaw-base}
+Only two things are asked of $T$ in \Cref{thm:cube-seesaw}, and irreducibility
+is not one of them.  Finite type over $k$ is used for the Jacobson property,
+for the identification of the closed points of $T$ with $T(k)$ and for their
+density; this is all that \Cref{lem:cube-h0-constant} and the last step of the
+proof of \Cref{thm:cube-seesaw} need.  Reducedness is used once, as a
+hypothesis of \Cref{prop:cube-grauert}: over a non-reduced base a constant
+$h^0$ does not force the pushforward to be locally free.  In particular the
+theorem applies to a connected but possibly reducible parameter space, which
+is what the theorem of the cube provides: the $Z$ of \Cref{thm:cube-cube} is
+a connected reduced scheme of finite type over $k$ and need not be
+irreducible.  \Cref{cor:cube-triviality-closed} asks even less --- only that
+$T$ be noetherian --- because it never invokes Grauert.
+\end{remark}
+
+\begin{remark}[What the cube uses]
+\label{rem:cube-what-the-cube-uses}
+The form of the seesaw theorem that the proof of the cube consumes
+is \Cref{cor:cube-triviality-closed}: for a line bundle $L$ on $X\times Z$
+with $X$ a proper variety, the locus $\{z\in Z:L_z\text{ trivial}\}$ is closed
+in $Z$.  Applied with $X$ the product of the first two factors and $Z$ the
+third, and with $Z$ connected, it reduces the theorem of the cube to showing
+that this locus is also \emph{open}; it is non-empty by the hypothesis at
+$z_0$, so it is then all of $Z$, and \Cref{cor:cube-seesaw-trivial} finishes
+the argument.
+
+That openness is where the difficulty of the cube sits, and it is proved in
+\Cref{sec:cube-cube} --- by \Cref{lem:cube-thickening-trivial} and
+\Cref{prop:cube-formal-triviality} together, in Steps 2 and 3 of the proof of
+\Cref{thm:cube-cube}.  It is not supplied by
+\Cref{thm:cube-rigidity}: rigidity is a statement about morphisms out of a
+product, no line bundle occurs in its statement or its conclusion, and in
+\cite{MumfordAbelianVarieties} and \cite{MilneAbelianVarieties} it is used for
+the theory of homomorphisms of abelian varieties, not inside the proof of the
+cube.  Nor is it supplied by the hypotheses of \Cref{thm:av-cube} directly:
+those give triviality of $L$ on the single slice $X\times Y\times\{z_0\}$
+together with $\{x_0\}\times Y\times Z$ and $X\times\{y_0\}\times Z$, and a
+line bundle on $X\times Y$ trivial on $\{x_0\}\times Y$ and on
+$X\times\{y_0\}$ need not be trivial --- the Poincar\'e bundle on
+$A\times\widehat A$ is the standard example.  Passing from ``trivial at
+$z_0$'' to ``trivial at every $z$'' is the whole content of the cube.
+
+The proof of that step goes through degree-one cohomology, in two ways: the
+obstruction to extending $L$ over a square-zero thickening of $z_0$ lives in
+$H^1(X\times Y,\O_{X\times Y})$, and it is killed by the two remaining
+hypotheses of the cube through the K\"unneth decomposition
+\Cref{prop:cube-kunneth-h1}; and the passage from the resulting formal
+triviality to triviality on a neighbourhood is the theorem on formal functions,
+\Cref{prop:cube-formal-triviality}.  See
+\cite[\S6]{MumfordAbelianVarieties} and \cite[I, \S5]{MilneAbelianVarieties}.
+This is why the degree-zero remark of \Cref{sec:cube-inputs} is a remark about
+the seesaw theorem and not about the chapter, and it is the reason
+\Cref{sec:cube-cost} charges the cohomology of sheaves of modules in full.
+\Cref{sec:cube-cube} discharges the open obligation that
+\Cref{chap:av-isogeny} carried on \Cref{thm:av-cube}, and
+\Cref{sec:cube-abelian} the one it carried on \Cref{thm:av-mulby-pullback},
+the abelian-variety corollary $[n]^*L\cong L^{\otimes n^2}$ for symmetric
+$L$.
+\end{remark}
+
+\section{The theorem of the cube}\label{sec:cube-cube}
+
+This section proves the theorem of the cube, \Cref{thm:cube-cube}, in the
+general form: for $X$ and $Y$ proper varieties and $Z$ connected, a line
+bundle on $X\times Y\times Z$ trivial on the three coordinate slices through a
+triple of base points is trivial.  \Cref{sec:cube-abelian} then derives the
+abelian-variety corollary $[n]^*L\cong L^{\otimes n^2}$ from it.
+
+The shape of the argument is the one announced in
+\Cref{rem:cube-what-the-cube-uses}.  Write $W:=X\times Y$ and regard $L$ as a
+family of line bundles on the proper variety $W$ parametrised by $Z$.  Its
+triviality locus
+\[
+  Z':=\{z\in Z:L_z\text{ is trivial on }W_z\}
+\]
+is closed by \Cref{cor:cube-triviality-closed} and contains $z_0$.  The whole
+content of the theorem is that $Z'$ is also \emph{open}; $Z$ being connected,
+$Z'$ is then all of $Z$ and \Cref{cor:cube-seesaw-trivial} finishes the
+argument.  Openness is proved in two steps: first
+\Cref{lem:cube-thickening-trivial} shows that $L$ is trivial on every
+infinitesimal neighbourhood of a point of $Z'$, and then
+\Cref{prop:cube-formal-triviality} converts that into triviality on the fibres
+over a whole neighbourhood.
+
+The first step is where the two remaining hypotheses of the cube --- triviality
+on $\{x_0\}\times Y\times Z$ and on $X\times\{y_0\}\times Z$ --- are consumed,
+and it is the reason the cube is true while the naked statement ``the
+triviality locus is open'' is false.  It is false: the Poincar\'e bundle on
+$A\times\widehat A$ has triviality locus the single point $0$ of $\widehat A$,
+which is closed and not open.  What the two hypotheses buy is that the
+obstruction to extending $L$ over a square-zero thickening, an element of
+$H^1(W,\O_W)$ tensored with the ideal, is killed by the K\"unneth
+decomposition
+\[
+  H^1(X\times Y,\O_{X\times Y})\;\cong\;H^1(X,\O_X)\oplus H^1(Y,\O_Y):
+\]
+each hypothesis kills one summand.  This is the point at which degree-one
+cohomology enters the chapter, exactly as \Cref{rem:cube-what-the-cube-uses}
+predicted, and \Cref{sec:cube-cost} charges it.
+
+\Cref{thm:cube-rigidity} is not used anywhere in this section.  That is not an
+oversight: as \Cref{rem:cube-what-the-cube-uses} records, no line bundle occurs
+in the statement of rigidity, and in \cite{MumfordAbelianVarieties} and
+\cite{MilneAbelianVarieties} rigidity is used for the theory of homomorphisms
+of abelian varieties and not inside the proof of the cube.  Rigidity remains in
+this chapter as preparation for \Cref{chap:av-isogeny}.
+
+Throughout this section, for $k$-rational points $x_0\in X(k)$ and
+$y_0\in Y(k)$ we write
+\[
+  j_{y_0}\colon X\longrightarrow X\times Y,\qquad
+  j_{x_0}\colon Y\longrightarrow X\times Y
+\]
+for the two slice inclusions, that is $j_{y_0}=\sigma_{y_0}$ in the notation of
+\Cref{sec:cube-conventions} and $j_{x_0}$ for the corresponding section of
+$p_Y$.  They are closed immersions with images $X\times\{y_0\}$ and
+$\{x_0\}\times Y$.
+
+\subsection*{The three new inputs}
+
+Three statements are needed that the chapter does not yet contain, and each is
+isolated here as its own numbered statement with an open obligation, in the
+manner of \Cref{sec:cube-inputs}.  None of the three can currently be stated
+in Lean.  Nothing else in this section is unproved: the two remaining
+ingredients that the argument needs beyond
+\Cref{sec:cube-inputs} --- the base-change computation
+\Cref{lem:cube-global-sections-base-change} of the global sections of
+$X\times_k\Spec A$, and the passage
+\Cref{prop:cube-formal-triviality} from formal triviality to triviality near
+the point --- are proved, the first in \Cref{sec:cube-inputs} and the second
+below.
+
+\begin{proposition}[Line bundles on a square-zero thickening]
+\label{prop:cube-picard-square-zero}
+Let $W$ be a scheme and let $i\colon W_0\to W$ be a closed immersion defined by
+a quasi-coherent ideal $I\subseteq\O_W$ with $I^2=0$, so that $I$ is a sheaf of
+$\O_{W_0}$-modules.  Then:
+\begin{enumerate}
+  \item the sequence of abelian groups
+  \[
+    \Gamma(W,\O_W^\times)\longrightarrow\Gamma(W_0,\O_{W_0}^\times)
+    \longrightarrow H^1(W_0,I)\longrightarrow\mathrm{Pic}(W)
+    \xrightarrow{\ i^*\ }\mathrm{Pic}(W_0)
+  \]
+  is exact;
+  \item it is natural in the thickening.  Precisely, let
+  $i'\colon W_0'\to W'$ be a second closed immersion defined by a
+  quasi-coherent ideal $I'$ with $(I')^2=0$, and let
+  \[
+    \begin{CD}
+      W_0'  @>{i'}>>  W'  \\
+      @VVV            @VVV \\
+      W_0   @>{i}>>   W
+    \end{CD}
+  \]
+  be a commutative square whose right vertical map pulls the ideal $I$ back
+  onto $I'$.  Then the square induces a morphism from the exact sequence of
+  (1) formed for $i$ to the one formed for $i'$: a commutative ladder whose
+  vertical maps are the restrictions
+  $\Gamma(W,\O_W^\times)\to\Gamma(W',\O_{W'}^\times)$ and
+  $\Gamma(W_0,\O_{W_0}^\times)\to\Gamma(W_0',\O_{W_0'}^\times)$, the
+  pullback $H^1(W_0,I)\to H^1(W_0',I')$ on the third term, and the pullbacks
+  $\mathrm{Pic}(W)\to\mathrm{Pic}(W')$ and
+  $\mathrm{Pic}(W_0)\to\mathrm{Pic}(W_0')$ on the last two.
+\end{enumerate}
+\openobligation{AlgebraicGeometry: cohomology of a sheaf of abelian groups on a
+scheme in degree one, the identification of the Picard group of a scheme with
+the degree-one cohomology of the sheaf of units, and the long exact cohomology
+sequence of the truncated exponential sequence of a square-zero thickening,
+together with its naturality.}
+\end{proposition}
+\begin{proof}
+Not proved here.  The input is the short exact sequence of sheaves of abelian
+groups on $W$
+\[
+  1\longrightarrow I\longrightarrow\O_W^\times\longrightarrow
+  i_*\O_{W_0}^\times\longrightarrow1 ,
+\]
+in which the first map is $a\mapsto1+a$ --- a homomorphism from the additive
+group of $I$ to the multiplicative group $\O_W^\times$ precisely because
+$I^2=0$, since $(1+a)(1+b)=1+a+b$, and this is why the sequence is written
+multiplicatively at both ends --- and the second is restriction, which is
+surjective as a map of sheaves because a section of $\O_W$ lifting a unit of
+$\O_{W_0}$ is itself a unit, the local ring of $W$ at a point of $W_0$ having
+the same residue field as the local ring of $W_0$ there.  Taking cohomology
+gives the five-term sequence of
+(1), once $\mathrm{Pic}$ is identified with $H^1$ of the sheaf of units and
+once $H^1(W,I)$ is identified with $H^1(W_0,I)$, which holds because the
+pushforward along a closed immersion is exact and preserves cohomology.  Part
+(2) is the naturality of the long exact sequence in the short exact sequence of
+sheaves.  See \stacksproject{0BEQ} and \cite[III, Exercise 4.6]{Hartshorne}.
+
+Nothing here is deep; what is missing is the whole apparatus, since Mathlib
+\texttt{v4.33.1} has neither the Picard group of a scheme nor the comparison of
+it with degree-one cohomology.  The cohomology itself is less far away than the
+rest: \texttt{CategoryTheory.Sheaf.H} does compute the cohomology of a sheaf of
+abelian groups on an arbitrary site, and $\O_W^\times$ is such a sheaf, so this
+proposition is the one input of the chapter that could be phrased with what is
+already in Mathlib once the Picard group is in place.
+\end{proof}
+
+\begin{proposition}[K\"unneth in degree one]\label{prop:cube-kunneth-h1}
+Let $X$ and $Y$ be proper varieties over $k$ and let $x_0\in X(k)$,
+$y_0\in Y(k)$.  Then the map
+\[
+  H^1(X\times Y,\O_{X\times Y})\longrightarrow
+  H^1(X,\O_X)\oplus H^1(Y,\O_Y),\qquad
+  \alpha\longmapsto\bigl(j_{y_0}^*\alpha,\;j_{x_0}^*\alpha\bigr),
+\]
+is an isomorphism of $k$-vector spaces.  Only its injectivity is used below;
+no route to that injectivity cheaper than the isomorphism itself is available,
+so \Cref{sec:cube-cost} charges the K\"unneth formula in full.
+\openobligation{AlgebraicGeometry: cohomology of a sheaf of modules on a
+scheme in degree one, and the Kuenneth formula in degree one for a product of
+two proper varieties over an algebraically closed field, in the form that the
+two slice restrictions together are injective.}
+\end{proposition}
+\begin{proof}
+\uses{lem:cube-global-sections}
+Not proved here.  The K\"unneth formula \stacksproject{0BEC} gives, in degree
+one and for the structure sheaves,
+\[
+  H^1(X\times Y,\O_{X\times Y})\;\cong\;
+  \bigl(H^0(X,\O_X)\otimes_kH^1(Y,\O_Y)\bigr)\oplus
+  \bigl(H^1(X,\O_X)\otimes_kH^0(Y,\O_Y)\bigr),
+\]
+and $H^0(X,\O_X)=H^0(Y,\O_Y)=k$ by \Cref{lem:cube-global-sections}, which
+turns the right-hand side into $H^1(X,\O_X)\oplus H^1(Y,\O_Y)$ once the two
+summands are written in the order of the statement.  That the
+isomorphism is the one written above --- that the two projections of the
+K\"unneth decomposition are the restrictions along the two slice inclusions ---
+is the standard compatibility of the K\"unneth map with pullback along
+$j_{y_0}$ and $j_{x_0}$, together with $j_{y_0}^*p_X^*=\mathrm{id}$ and
+$j_{y_0}^*p_Y^*=0$ on positive-degree cohomology, the latter because
+$p_Y\circ j_{y_0}$ is the constant morphism at $y_0$ and so factors through
+$\Spec k$, which has no cohomology in positive degrees.  See also
+\cite[\S6]{MumfordAbelianVarieties}, where the decomposition is used in exactly
+this form.
+
+Two remarks for the formaliser.  Only injectivity is used --- it says that a
+class trivial on both slices is trivial --- but that is not a cheaper
+statement: the only argument given here, and the only one the references give,
+produces the whole decomposition, so a Lean subtree has to buy K\"unneth in
+full.  What it does \emph{not} have to buy is generality in the sheaf: only
+the case of the structure sheaf is used, and the K\"unneth formula for a pair
+of arbitrary coherent sheaves is not needed.
+\end{proof}
+
+\begin{proposition}[The theorem on formal functions, in degree zero]
+\label{prop:cube-formal-functions}
+Let $T$ be a noetherian scheme, let $f\colon W\to T$ be a proper morphism, let
+$F$ be a coherent sheaf on $W$ and let $t\in T$.  For $n\in\N$ put
+$T_n:=\Spec\bigl(\O_{T,t}/\m_t^{n+1}\bigr)$, with its canonical morphism
+$T_n\to T$, and write $F^{(n)}$ for the pullback of $F$ to $W\times_TT_n$.
+Then the canonical map
+\[
+  \bigl((f_*F)_t\bigr)^{\wedge}\;\longrightarrow\;
+  \varprojlim_n\Gamma\bigl(W\times_TT_n,F^{(n)}\bigr)
+\]
+from the $\m_t$-adic completion of the stalk of $f_*F$ at $t$ to the inverse
+limit of the sections over the infinitesimal neighbourhoods is an isomorphism.
+\openobligation{AlgebraicGeometry: cohomology of a sheaf of modules on a
+scheme, and the theorem on formal functions for a proper morphism, Stacks
+Project Tag 02OC, in degree zero.}
+\end{proposition}
+\begin{proof}
+\uses{prop:cube-proper-pushforward-coherent}
+Not proved here.  This is the case $i=0$ of \stacksproject{02OC}; see also
+\cite[III, Theorem 11.1]{Hartshorne}, where it is proved under the standing
+hypothesis of that section that $f$ is projective.  The two sides make sense
+because $f_*F$ is coherent by
+\Cref{prop:cube-proper-pushforward-coherent}, so its stalk at $t$ is a finite
+module over the noetherian local ring $\O_{T,t}$.  As with
+\Cref{prop:cube-proper-pushforward-coherent}, the degree-zero case is not
+appreciably cheaper than the general one: the proof runs the comparison
+through a Cech complex in all degrees at once.  This is the only place in the
+chapter where the theorem is used, and it is used in
+\Cref{prop:cube-formal-triviality}.
+\end{proof}
+
+\subsection*{The proof}
+
+\begin{lemma}[A product of proper varieties is a proper variety]
+\label{lem:cube-product-variety}
+Let $X$ and $Y$ be proper varieties over $k$.  Then $X\times Y$ is a proper
+variety over $k$, and for $x_0\in X(k)$ and $y_0\in Y(k)$ the slice inclusions
+$j_{y_0}\colon X\to X\times Y$ and $j_{x_0}\colon Y\to X\times Y$ are closed
+immersions of $k$-schemes.
+\end{lemma}
+\begin{proof}
+Separatedness, finite type, properness and geometric integrality are all stable
+under products of $k$-schemes: for the first three because they are stable
+under base change and composition, and for geometric integrality because a
+product of two geometrically integral $k$-schemes is geometrically integral.
+So $X\times Y$ is a proper variety.  For the slice inclusions,
+$j_{y_0}$ is the base change of $y_0\colon\Spec k\to Y$ along
+$p_Y\colon X\times Y\to Y$, and $y_0$ is a closed immersion because it is a
+section of the separated morphism $Y\to\Spec k$ and a section of a separated
+morphism is a closed immersion; closed immersions are stable under base change,
+so $j_{y_0}$ is one.  The same argument applies to $j_{x_0}$.
+
+Like \Cref{lem:cube-projection-proper-flat} this is a list of instances rather
+than a piece of mathematics, and it is stated only to name the standing facts.
+\end{proof}
+
+\begin{lemma}[Triviality over the infinitesimal neighbourhoods]
+\label{lem:cube-thickening-trivial}
+Let $X$ and $Y$ be proper varieties over $k$, let $x_0\in X(k)$ and
+$y_0\in Y(k)$, let $Z$ be a noetherian $k$-scheme and let $z_0\in Z(k)$.  Let
+$L$ be a line bundle on $X\times Y\times Z$ whose restrictions to
+\[
+  X\times Y\times\{z_0\},\qquad
+  \{x_0\}\times Y\times Z,\qquad
+  X\times\{y_0\}\times Z
+\]
+are all trivial.  For $n\in\N$ put
+$Z_n:=\Spec\bigl(\O_{Z,z_0}/\m_{z_0}^{n+1}\bigr)$, with its canonical morphism
+$Z_n\to Z$.  Then the pullback of $L$ to $(X\times Y)\times Z_n$ is trivial for
+every $n\in\N$.
+\end{lemma}
+\begin{proof}
+\uses{prop:cube-picard-square-zero, prop:cube-kunneth-h1,
+lem:cube-global-sections-base-change, lem:cube-product-variety}
+Write $W:=X\times Y$, a proper variety over $k$ by
+\Cref{lem:cube-product-variety}, and put
+$A_n:=\O_{Z,z_0}/\m_{z_0}^{n+1}$, a local $k$-algebra which is
+finite-dimensional over $k$ because $\O_{Z,z_0}$ is noetherian and whose
+residue field is $\kappa(z_0)=k$, the point $z_0$ being $k$-rational.  Write
+$L^{(n)}$ for the pullback of $L$ to $W\times Z_n$, and likewise
+$L_X^{(n)}$ and $L_Y^{(n)}$ for the pullbacks of $L$ to $X\times Z_n$ and
+$Y\times Z_n$ along the two slice inclusions of \Cref{lem:cube-product-variety}
+crossed with $Z_n$.  We argue by induction on $n$.
+
+\emph{Base case.}  For $n=0$ we have $A_0=k$ and $Z_0=\Spec k$, whose morphism
+to $Z$ is $z_0$; so $W\times Z_0=X\times Y\times\{z_0\}$ and $L^{(0)}$ is the
+restriction of $L$ to that slice, which is trivial by hypothesis.
+
+\emph{Induction step.}  Let $n\geq1$ and suppose $L^{(n-1)}$ trivial.  The
+surjection $A_n\to A_{n-1}$ has kernel $I_n:=\m_{z_0}^n/\m_{z_0}^{n+1}$, which
+is annihilated by the maximal ideal of $A_n$ and is therefore a
+finite-dimensional $k$-vector space; in particular $I_n^2=0$.  So
+\[
+  W\times Z_{n-1}\hookrightarrow W\times Z_n
+\]
+is a closed immersion defined by a square-zero quasi-coherent ideal, and that
+ideal, as a sheaf of modules on $W\times Z_{n-1}$, is annihilated by
+$\m_{z_0}$ and hence is the pushforward to $W\times Z_{n-1}$ of the sheaf
+$\O_W\otimes_kI_n$ on $W=W\times Z_0$.  Consequently
+\[
+  H^1\bigl(W\times Z_{n-1},\O_W\otimes_kI_n\bigr)
+  \;=\;H^1(W,\O_W)\otimes_kI_n ,
+\]
+in two steps: cohomology is unchanged by pushforward along the closed
+immersion $W\times Z_0\hookrightarrow W\times Z_{n-1}$, which is exact, and
+the cohomology of a finite direct sum of copies of $\O_W$ is the direct sum
+of the cohomologies, $I_n$ being a finite-dimensional $k$-vector space.
+
+Apply \Cref{prop:cube-picard-square-zero}(1) to this thickening.  Its first map
+is
+\[
+  \Gamma\bigl(W\times Z_n,\O^\times\bigr)\longrightarrow
+  \Gamma\bigl(W\times Z_{n-1},\O^\times\bigr),
+\]
+which by \Cref{lem:cube-global-sections-base-change} is the map
+$A_n^\times\to A_{n-1}^\times$ induced by the surjection $A_n\to A_{n-1}$ ---
+the global sections of the sheaf of units being the units of the ring of global
+sections; and
+that map is surjective, because a preimage in $A_n$ of a unit of $A_{n-1}$ lies
+outside the maximal ideal of the local ring $A_n$ and is therefore itself a
+unit.  Exactness at the second term then makes the third map injective, so
+\[
+  0\longrightarrow H^1(W,\O_W)\otimes_kI_n\longrightarrow
+  \mathrm{Pic}(W\times Z_n)\longrightarrow\mathrm{Pic}(W\times Z_{n-1})
+\]
+is exact.  The restriction of $L^{(n)}$ to $W\times Z_{n-1}$ is $L^{(n-1)}$,
+since $Z_{n-1}\to Z$ factors through $Z_n\to Z$; by the induction hypothesis it
+is trivial, so the class of $L^{(n)}$ dies in $\mathrm{Pic}(W\times Z_{n-1})$
+and there is a unique
+\[
+  \alpha\in H^1(W,\O_W)\otimes_kI_n
+\]
+whose image in $\mathrm{Pic}(W\times Z_n)$ is the class of $L^{(n)}$.
+
+Now compare with the two slices.  The closed immersion
+$X\times Z_{n-1}\hookrightarrow X\times Z_n$ is again a square-zero thickening
+with ideal $\O_X\otimes_kI_n$, and $j_{y_0}\times\mathrm{id}$ carries the one
+into the other and pulls the ideal back onto the ideal.  Since $X$ is a proper
+variety, \Cref{lem:cube-global-sections-base-change} applies to it as well, so
+the same argument makes
+\[
+  0\longrightarrow H^1(X,\O_X)\otimes_kI_n\longrightarrow
+  \mathrm{Pic}(X\times Z_n)\longrightarrow\mathrm{Pic}(X\times Z_{n-1})
+\]
+exact.  By \Cref{prop:cube-picard-square-zero}(2) the square
+\[
+  \begin{CD}
+    H^1(W,\O_W)\otimes_kI_n @>>> \mathrm{Pic}(W\times Z_n) \\
+    @V{j_{y_0}^*\otimes\mathrm{id}}VV @VVV \\
+    H^1(X,\O_X)\otimes_kI_n @>>> \mathrm{Pic}(X\times Z_n)
+  \end{CD}
+\]
+commutes, the right vertical map being restriction along
+$j_{y_0}\times\mathrm{id}$.  The class of $L^{(n)}$ restricts to the class of
+$L_X^{(n)}$, and $L_X^{(n)}$ is trivial: it is a pullback of the restriction of
+$L$ to $X\times\{y_0\}\times Z$, which is trivial by hypothesis.  So
+$(j_{y_0}^*\otimes\mathrm{id})(\alpha)$ has trivial image in
+$\mathrm{Pic}(X\times Z_n)$ and therefore vanishes, by the injectivity just
+proved.  That is,
+\[
+  j_{y_0}^*\alpha=0\quad\text{in }H^1(X,\O_X)\otimes_kI_n .
+\]
+The same argument with $\{x_0\}\times Y\times Z$ in place of
+$X\times\{y_0\}\times Z$ gives $j_{x_0}^*\alpha=0$ in
+$H^1(Y,\O_Y)\otimes_kI_n$.
+
+By \Cref{prop:cube-kunneth-h1} the map
+$\alpha\mapsto(j_{y_0}^*\alpha,j_{x_0}^*\alpha)$ is injective on
+$H^1(W,\O_W)$, hence --- tensoring the injection with the finite-dimensional
+$k$-vector space $I_n$, which preserves injectivity --- injective on
+$H^1(W,\O_W)\otimes_kI_n$.  Therefore $\alpha=0$ and the class of $L^{(n)}$ in
+$\mathrm{Pic}(W\times Z_n)$ is trivial, which is the assertion for $n$.
+\end{proof}
+
+\begin{proposition}[Formal triviality is triviality near the point]
+\label{prop:cube-formal-triviality}
+Let $X$ be a proper variety over $k$, let $T$ be a scheme of finite type over
+$k$, let $t_0\in T(k)$ and let $L$ be a line bundle on $X\times T$.  For
+$n\in\N$ put
+\[
+  T_n:=\Spec\bigl(\O_{T,t_0}/\m_{t_0}^{n+1}\bigr),
+\]
+with its canonical morphism $T_n\to T$, and let $L^{(n)}$ be the pullback of
+$L$ to $X\times T_n$.  Suppose that $L^{(n)}$ is trivial for every $n\in\N$.
+Then there is an open subset $V\subseteq T$ with $t_0\in V$ such that $L_t$ is
+trivial on $X_t$ for every $t\in V$.
+\end{proposition}
+\begin{proof}
+\uses{prop:cube-formal-functions, prop:cube-proper-pushforward-coherent,
+lem:cube-global-sections-base-change, lem:cube-projection-proper-flat,
+lem:cube-nowhere-vanishing, lem:cube-triviality-criterion}
+Write $f:=p_T\colon X\times T\to T$, which is proper and along which $L$ and
+$L^{-1}$ are coherent and flat by \Cref{lem:cube-projection-proper-flat}; the
+scheme $T$ is noetherian, being of finite type over $k$.  Put
+$A_n:=\O_{T,t_0}/\m_{t_0}^{n+1}$, a local ring with residue field
+$\kappa(t_0)=k$, and
+\[
+  M_n:=\Gamma\bigl(X\times T_n,L^{(n)}\bigr).
+\]
+Note that $X\times T_0=X_{t_0}$ and $L^{(0)}=L_{t_0}$.
+
+\emph{Step 1: each $M_n$ is free of rank one over $A_n$, and $M_n\to M_0$ is
+surjective.}  Fix an isomorphism $L^{(n)}\cong\O_{X\times T_n}$.  It carries
+$M_n$ isomorphically onto $\Gamma(X\times T_n,\O)$, which is $A_n$ by
+\Cref{lem:cube-global-sections-base-change}, applied to the proper variety $X$
+and the $k$-algebra $A_n$.  So $M_n$ is free of rank one over $A_n$.  The
+chosen isomorphism restricts to an isomorphism
+$L^{(0)}\cong\O_{X\times T_0}$, so under it the restriction map $M_n\to M_0$
+becomes the map $A_n\to A_0=k$ induced by $A_n\to A_0$, which is surjective.
+In particular a generator of $M_n$ has non-zero image in $M_0$.
+
+\emph{Step 2: the generators can be chosen compatibly.}  We construct
+generators $s_n$ of $M_n$ with $s_n\mapsto s_{n-1}$ under $M_n\to M_{n-1}$.
+Take for $s_0$ any generator of the one-dimensional $k$-vector space $M_0$.
+Given $s_{n-1}$, choose any generator $w$ of $M_n$ and write its image in
+$M_{n-1}$ as $c\cdot s_{n-1}$ with $c\in A_{n-1}$.  The restriction
+$M_n\to M_0$ factors through $M_{n-1}$, and by Step 1 it carries $w$ to a
+non-zero element of $M_0$; since $s_{n-1}$ also has non-zero image in $M_0$,
+the scalar $c$ cannot lie in the maximal ideal of the local ring $A_{n-1}$,
+so it is a unit.  A preimage in $A_n$ of a unit of $A_{n-1}$ is again a unit,
+$A_n$ being local, so $c$ lifts to some $\tilde c\in A_n^\times$, and
+$s_n:=\tilde c^{-1}w$ is a generator of $M_n$ mapping to $s_{n-1}$.  This is
+the step at which triviality of the $L^{(n)}$ one $n$ at a time is upgraded
+to a statement about the tower, and it is the only place where compatibility
+is needed; without it the inverse limit could be smaller than
+$\varprojlim_nA_n$.
+
+\emph{Step 3: the stalk of $f_*L$ at $t_0$ is free of rank one.}  By
+\Cref{prop:cube-formal-functions} the $\m_{t_0}$-adic completion of
+$(f_*L)_{t_0}$ is $\varprojlim_nM_n$, and by Step 2 the compatible system
+$(s_n)$ is an element of that limit generating each $M_n$; since
+$\varprojlim_nA_n$ is the completion $\widehat{\O_{T,t_0}}$ and each
+$M_n\cong A_n$ compatibly, the limit is free of rank one on $(s_n)$.  A finite
+module over a noetherian local ring whose completion is free of rank one is
+itself free of rank one, because completion is faithfully flat over that ring;
+$(f_*L)_{t_0}$ is such a module, $f_*L$ being coherent by
+\Cref{prop:cube-proper-pushforward-coherent}.  So $(f_*L)_{t_0}$ is free of
+rank one; let $s$ be a generator.  The canonical restriction
+$(f_*L)_{t_0}\to M_0=\Gamma(X_{t_0},L_{t_0})$ is the composite of the
+completion map with the projection of $\varprojlim_nM_n$ to its level-zero
+term, and completion carries a generator of a free module of rank one to a
+generator; so the image of $s$ in $M_0$ is a generator of $M_0\cong k$ and in
+particular non-zero.  Coherence of $f_*L$ then spreads $s$ out: there is an
+open $V_1\ni t_0$ on which $s$ is a section of $f_*L$ generating it, that is
+$s\in\Gamma(X\times V_1,L)$.
+
+\emph{Step 4: the same for $L^{-1}$, and the pairing.}  Steps 1 to 3 apply
+verbatim to $L^{-1}$, whose pullback to $X\times T_n$ is $(L^{(n)})^{-1}$ and
+hence trivial as well; they produce an open $V_2\ni t_0$ and
+$u\in\Gamma(X\times V_2,L^{-1})$ generating $f_*(L^{-1})$ there and with
+non-zero image in $\Gamma(X_{t_0},(L_{t_0})^{-1})$.  Shrink $V:=V_1\cap V_2$
+to an affine open neighbourhood of $t_0$ and consider
+\[
+  s\otimes u\;\in\;\Gamma\bigl(X\times V,L\otimes L^{-1}\bigr)
+  \;\cong\;\Gamma(X\times V,\O)\;\cong\;\Gamma(V,\O_V),
+\]
+the last isomorphism by \Cref{lem:cube-global-sections-base-change} again.
+Its value at $t_0$ is the image of $s\otimes u$ under restriction to the fibre
+$X_{t_0}$, that is the product of the images of $s$ and of $u$ in
+$\Gamma(X_{t_0},L_{t_0})$ and $\Gamma(X_{t_0},(L_{t_0})^{-1})$ under the
+canonical pairing.  The bundle $L_{t_0}=L^{(0)}$ is trivial, so by
+\Cref{lem:cube-nowhere-vanishing} both spaces are one-dimensional over $k$ and
+the pairing is the multiplication of $k$; both images are non-zero, so the
+value of $s\otimes u$ at $t_0$ is non-zero.
+
+\emph{Step 5: conclusion.}  A section of $\O_V$ whose value at $t_0$ is
+non-zero is a unit on some open $V'\subseteq V$ containing $t_0$.  Let
+$t\in V'$.  Restricting to the fibre $X_t$ is a homomorphism of rings
+$\Gamma(V',\O_{V'})\to\Gamma(X_t,\O_{X_t})$ carrying $s\otimes u$ to the
+product of $s|_{X_t}\in\Gamma(X_t,L_t)$ and
+$u|_{X_t}\in\Gamma(X_t,(L_t)^{-1})$, and a unit to a unit; the fibre $X_t$ is
+non-empty, so that product is non-zero.  Hence $\Gamma(X_t,L_t)\neq0$ and
+$\Gamma(X_t,(L_t)^{-1})\neq0$, and \Cref{lem:cube-triviality-criterion} ---
+applicable because $X_t$ is a proper geometrically integral
+$\kappa(t)$-scheme by \Cref{lem:cube-projection-proper-flat}(3) --- makes
+$L_t$ trivial.  So $V'$ is the required neighbourhood.
+\end{proof}
+
+\begin{remark}[What this proposition is]\label{rem:cube-formal-triviality}
+\Cref{prop:cube-formal-triviality} is the exact converse direction to
+\Cref{cor:cube-triviality-closed}: that corollary says the triviality locus is
+closed, this proposition says it is open at any point at which the bundle is
+formally trivial, and the theorem of the cube is the assertion that its
+hypotheses make every point of the locus such a point.  The only unproved
+input it uses is \Cref{prop:cube-formal-functions}, which is the one input of
+the chapter that no other statement needs.
+
+Note that upper semicontinuity, \Cref{prop:cube-semicontinuity}, is of no use
+here and is not used: it bounds $h^0$ from \emph{above} on a neighbourhood,
+whereas what is wanted is the lower bound $h^0\geq1$ on an open set.  The
+pairing of Steps 4 and 5 is what supplies that, and it is the same
+$s\otimes u$ argument as in the proof of
+\Cref{lem:cube-triviality-criterion}.
+\end{remark}
+
+\begin{theorem}[Theorem of the cube]\label{thm:cube-cube}
+Let $X$ and $Y$ be proper varieties over $k$, let $Z$ be a connected reduced
+scheme of finite type over $k$, and let $x_0\in X(k)$, $y_0\in Y(k)$,
+$z_0\in Z(k)$.  Let $L$ be a line bundle on $X\times Y\times Z$ whose
+restrictions to
+\[
+  \{x_0\}\times Y\times Z,\qquad X\times\{y_0\}\times Z,\qquad
+  X\times Y\times\{z_0\}
+\]
+are all trivial.  Then $L$ is trivial.
+\end{theorem}
+\begin{proof}
+\uses{lem:cube-thickening-trivial, prop:cube-formal-triviality,
+cor:cube-triviality-closed, cor:cube-seesaw-trivial,
+lem:cube-product-variety}
+Write $W:=X\times Y$, a proper variety over $k$ by
+\Cref{lem:cube-product-variety}, and read $X\times Y\times Z$ as $W\times Z$.
+Put
+\[
+  Z':=\{z\in Z:L_z\text{ is a trivial line bundle on }W_z\} .
+\]
+
+\emph{Step 1: $Z'$ is closed and contains $z_0$.}  The scheme $Z$ is
+noetherian, being of finite type over the field $k$; this is what
+\Cref{cor:cube-triviality-closed} and \Cref{lem:cube-thickening-trivial} ask
+of it, and it is used without further comment below.  Closedness is
+\Cref{cor:cube-triviality-closed}, applied to the proper variety $W$, the
+noetherian $k$-scheme $Z$ and the line bundle $L$.  That $z_0\in Z'$ is the
+third hypothesis, since $W_{z_0}=X\times Y\times\{z_0\}$.
+
+\emph{Step 2: every $k$-rational point of $Z'$ is interior to $Z'$.}  Let
+$z\in Z'\cap Z(k)$.  The hypotheses of \Cref{lem:cube-thickening-trivial} hold
+for $L$ with $z$ in place of $z_0$: the restrictions to $\{x_0\}\times Y\times
+Z$ and $X\times\{y_0\}\times Z$ are trivial by hypothesis and do not depend on
+the choice of base point in $Z$, and the restriction to
+$X\times Y\times\{z\}$ is trivial because $z\in Z'$.  So the pullback of $L$ to
+$W\times Z_n$ is trivial for every $n$, where
+$Z_n=\Spec(\O_{Z,z}/\m_z^{n+1})$.  By \Cref{prop:cube-formal-triviality},
+applied to the proper variety $W$, the finite type $k$-scheme $Z$ and the point
+$z$, there is an open $V\subseteq Z$ with $z\in V$ and $L_{z'}$ trivial for
+every $z'\in V$; that is, $z\in V\subseteq Z'$.
+
+\emph{Step 3: $Z'$ is open.}  Let $U$ be the union of the open sets produced in
+Step 2, one for each $k$-rational point of $Z'$.  Then $U$ is open,
+$U\subseteq Z'$, and $U$ contains every $k$-rational point of $Z'$.  The
+difference $Z'\setminus U$ is closed in $Z'$, hence closed in $Z$ by Step 1,
+and it contains no closed point of $Z$: the closed points of $Z$ are exactly
+its $k$-rational points, $k$ being algebraically closed and $Z$ of finite type
+over $k$, and every $k$-rational point of $Z'$ lies in $U$.  A non-empty closed
+subset of $Z$ contains a closed point of $Z$, because $Z$ is of finite type
+over a field and hence a Jacobson scheme.  Therefore
+$Z'\setminus U=\emptyset$ and $Z'=U$ is open.
+
+\emph{Step 4: $Z'=Z$.}  By Steps 1 and 3 the subset $Z'$ is closed, open and
+non-empty in the connected space $Z$, so $Z'=Z$.  In particular $L_z$ is
+trivial for every $z\in Z(k)$.
+
+\emph{Step 5: conclusion.}  Apply \Cref{cor:cube-seesaw-trivial} to the proper
+variety $W$, the reduced scheme $Z$ of finite type over $k$, the line bundle
+$L$ on $W\times Z$ and the $k$-rational point $(x_0,y_0)\in W(k)$.  Its first
+hypothesis is Step 4.  Its second is that the restriction of $L$ to
+$\{(x_0,y_0)\}\times Z$ is trivial, and that holds because this restriction is
+in turn the restriction, along $\{(x_0,y_0)\}\times Z\subseteq
+\{x_0\}\times Y\times Z$, of the restriction of $L$ to
+$\{x_0\}\times Y\times Z$, which is trivial by hypothesis.  So $L$ is trivial.
+\end{proof}
+
+\begin{remark}[Hypotheses, and the form used elsewhere]
+\label{rem:cube-cube-hypotheses}
+\Cref{thm:cube-cube} is stated for $Z$ a connected reduced $k$-scheme of finite
+type rather than for a connected variety, because that is what the proof uses
+and because, as \Cref{rem:cube-seesaw-base} explains, irreducibility of the
+parameter space plays no part.  \Cref{thm:av-cube}, the form quoted in
+\Cref{chap:av-isogeny}, asks exactly the same of $Z$ and is a re-statement of
+this theorem, not a special case of it; it is worded that way here so that the
+two agree word for word and no argument is needed to pass between them.
+
+Properness is asked of $X$ and $Y$ and not of $Z$, and it cannot be moved to
+$Z$: the three factors do not enter symmetrically, since the proof runs the
+first two through the K\"unneth formula \Cref{prop:cube-kunneth-h1} and the
+third through the seesaw theorem.  Connectedness of $Z$, on the other hand, is
+essential --- on a disconnected $Z$ the bundle can be trivial on the component
+of $z_0$ and arbitrary on the others.  The classical statement of the theorem
+in \cite[\S6]{MumfordAbelianVarieties} and \cite[I, \S5]{MilneAbelianVarieties}
+asks that $X$ and $Y$ be complete and that $Z$ be a connected variety.  What is
+proved here asks of $Z$ neither more nor less than reducedness, finite type and
+connectedness: it drops irreducibility, and it does not drop reducedness or
+finite type, both of which the proof uses --- reducedness through
+\Cref{cor:cube-seesaw-trivial} and finite type through the Jacobson argument
+of Step 3.
+\end{remark}
+
+\section{The corollary for abelian varieties}\label{sec:cube-abelian}
+
+This section derives from \Cref{thm:cube-cube} the two statements that
+\Cref{chap:av-isogeny} needs: the cube identity on $A\times A\times A$,
+\Cref{thm:cube-abelian}, and the formula for $[n]^*L$,
+\Cref{thm:cube-mulby-pullback}, which for a symmetric line bundle reads
+$[n]^*L\cong L^{\otimes n^2}$.  This last is the statement on which the degree
+computation of \Cref{thm:av-degree-formula} rests.  The references are
+\cite[\S6]{MumfordAbelianVarieties} and
+\cite[I, \S\S5--7]{MilneAbelianVarieties}.
+
+Throughout, $A$ is an abelian variety over $k$ in the sense of
+\Cref{def:av-abelian-variety}: a group scheme over $k$ whose structure morphism
+is proper and geometrically integral.  By \Cref{prop:av-basic} the scheme $A$
+is integral and the group is commutative, so $A$ is in particular a proper
+variety over $k$ in the sense of \Cref{sec:cube-conventions} and every group
+$A(S)$ is abelian.  We write $e\in A(k)$ for the identity and, for a
+$k$-scheme $S$ and $u,v\in A(S)$, we write $u+v$ for the product of $u$ and
+$v$ in the abelian group $A(S)$; the group law itself is
+$m\colon A\times A\to A$, so that $u+v=m\circ(u,v)$.  We write
+$[n]\colon A\to A$ for the multiplication-by-$n$ endomorphism; this section
+needs it for every $n\in\Z$ and not only for $n\in\N$, so it is defined
+afresh as \Cref{def:cube-mulby-int} and its algebra is recorded as
+\Cref{lem:cube-mulby-int-points}.  On the product $A\times A\times A$ we
+write $p_1,p_2,p_3$ for
+the three projections and, for a non-empty subset $S\subseteq\{1,2,3\}$,
+$m_S\colon A\times A\times A\to A$ for the sum of the coordinates indexed by
+$S$; thus $m_{\{1\}}=p_1$, $m_{\{1,2\}}=m\circ(p_1,p_2)$ and
+$m_{\{1,2,3\}}$ is the total sum.  As elsewhere in this chapter, and as
+\Cref{warn:cube-composition-order} requires, composites are written in the
+classical order.
+
+\begin{definition}[The multiplication-by-$n$ endomorphism for $n\in\Z$]
+\label{def:cube-mulby-int}
+\uses{def:av-abelian-variety, def:av-mulby}
+\lean{CategoryTheory.GrpObj.zpow}
+Let $G$ be a commutative group scheme over $k$ and let $n\in\Z$.  The
+\emph{multiplication-by-$n$ endomorphism} $[n]\colon G\to G$ is the $n$-th
+power of the identity in the group $G(G)=\Hom_k(G,G)$.  For $n\in\N$ it is
+\Cref{def:av-mulby}, the two agreeing because the $n$-th power of an element
+of a group is the same whether the exponent is read in $\N$ or in $\Z$.
+\end{definition}
+
+\begin{lemma}[Basic algebra of $[n]$ for $n\in\Z$]
+\label{lem:cube-mulby-int-points}
+\uses{def:cube-mulby-int}
+Let $G$ be a commutative group scheme over $k$, let $S$ be a $k$-scheme and
+let $u\in G(S)$.  Then $[n]\circ u=u^n$ in $G(S)$ for every $n\in\Z$.
+Consequently, in the abelian group $G(G)$,
+\[
+  [m]+[n]=[m+n]\qquad(m,n\in\Z),
+\]
+and $[0]=e\circ\pi$ is the constant morphism at the identity,
+$[1]=\mathrm{id}_G$, $[-1]$ is the inversion morphism, and
+$[m]\circ[n]=[mn]$.
+\end{lemma}
+\begin{proof}
+\uses{def:cube-mulby-int, lem:av-mulby-points}
+Exactly as for \Cref{lem:av-mulby-points}, of which this is the $\Z$-valued
+form.  Precomposition with a fixed $u$ is the group homomorphism
+$G(G)\to G(S)$ induced by $u$; it sends $\mathrm{id}_G$ to $u$, hence
+$\mathrm{id}_G^{\,n}$ to $u^n$, which is the identity $[n]\circ u=u^n$.  Every
+remaining assertion is the corresponding identity for integer powers in the
+abstract group $G(T)$, applied for all $T$ simultaneously and transported back
+by Yoneda: $[m]+[n]=[m+n]$ is $\mathrm{id}^m\cdot\mathrm{id}^n
+=\mathrm{id}^{m+n}$, the values at $0$, $1$ and $-1$ are
+$\mathrm{id}^0=1$, $\mathrm{id}^1=\mathrm{id}$ and
+$\mathrm{id}^{-1}=\mathrm{id}^{-1}$, and $[m]\circ[n]=[mn]$ follows from
+$[n]\circ u=u^n$ applied to $u=[m]$.
+\end{proof}
+
+\begin{lemma}[A line bundle pulled back along a constant morphism is trivial]
+\label{lem:cube-pullback-constant}
+Let $S$ be a $k$-scheme, let $V$ be a $k$-scheme, let $v\in V(k)$ and let
+$u\colon S\to V$ be the constant morphism at $v$, that is
+$u=v\circ\pi$ for the structure morphism $\pi\colon S\to\Spec k$.  Then
+$u^*N$ is trivial for every line bundle $N$ on $V$.
+\end{lemma}
+\begin{proof}
+Pullback is pseudofunctorial, so $u^*N\cong\pi^*v^*N$.  Now $v^*N$ is a line
+bundle on $\Spec k$, and a line bundle on the spectrum of a field is trivial: a
+locally free module of rank one over a field is a one-dimensional vector space,
+and a choice of basis vector is an isomorphism with the field itself.  Hence
+$v^*N\cong\O_{\Spec k}$ and $u^*N\cong\pi^*\O_{\Spec k}\cong\O_S$.
+\end{proof}
+
+\begin{theorem}[The cube identity on an abelian variety]
+\label{thm:cube-abelian}
+\uses{def:av-abelian-variety}
+Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
+Then the line bundle
+\[
+  \Theta(L):=m_{\{1,2,3\}}^*L\otimes m_{\{1,2\}}^*L^{-1}\otimes
+  m_{\{1,3\}}^*L^{-1}\otimes m_{\{2,3\}}^*L^{-1}\otimes
+  p_1^*L\otimes p_2^*L\otimes p_3^*L
+\]
+on $A\times A\times A$ is trivial.  Equivalently, for every $k$-scheme $S$ and
+all $f,g,h\in A(S)$,
+\[
+  (f+g+h)^*L\otimes(f+g)^*L^{-1}\otimes(f+h)^*L^{-1}\otimes(g+h)^*L^{-1}
+  \otimes f^*L\otimes g^*L\otimes h^*L\;\cong\;\O_S .
+\]
+\end{theorem}
+\begin{proof}
+\uses{thm:cube-cube, lem:cube-pullback-constant, def:av-abelian-variety,
+prop:av-basic}
+Apply \Cref{thm:cube-cube} with $X=Y=Z=A$ and $x_0=y_0=z_0=e$.  The hypotheses
+are met: $A$ is a proper variety over $k$ and in particular a connected reduced
+scheme of finite type over $k$, by \Cref{def:av-abelian-variety} and
+\Cref{prop:av-basic}, and $e$ is a $k$-rational point.  What has to be checked
+is that $\Theta(L)$ restricts trivially to the three coordinate slices.
+
+The expression defining $\Theta(L)$ is symmetric under permuting the three
+factors of $A\times A\times A$, since the indexing sets $\{1,2\}$, $\{1,3\}$,
+$\{2,3\}$ and the projections $p_1,p_2,p_3$ are permuted among themselves.  So
+it is enough to treat one slice, say $\{e\}\times A\times A$, and the other two
+follow by symmetry.
+
+Identify $\{e\}\times A\times A$ with $A\times A$, with coordinates written
+$(y,z)$, and let $\iota\colon A\times A\to A\times A\times A$ be the
+corresponding closed immersion, so that $p_1\circ\iota$ is the constant
+morphism at $e$, $p_2\circ\iota=q_1$ and $p_3\circ\iota=q_2$ for the two
+projections $q_1,q_2$ of $A\times A$.  Composing with $\iota$ turns the seven
+morphisms occurring in $\Theta(L)$ into
+\[
+  m_{\{1,2,3\}}\circ\iota=q_1+q_2,\quad
+  m_{\{1,2\}}\circ\iota=q_1,\quad
+  m_{\{1,3\}}\circ\iota=q_2,\quad
+  m_{\{2,3\}}\circ\iota=q_1+q_2,
+\]
+\[
+  p_1\circ\iota=e\circ\pi,\quad p_2\circ\iota=q_1,\quad p_3\circ\iota=q_2 ,
+\]
+using $e+u=u$ in the group $A(A\times A)$ for the first three.  Since pullback
+of line bundles is compatible with composition and with tensor products and
+inverses,
+\[
+  \iota^*\Theta(L)\;\cong\;
+  (q_1+q_2)^*L\otimes q_1^*L^{-1}\otimes q_2^*L^{-1}\otimes
+  (q_1+q_2)^*L^{-1}\otimes(e\circ\pi)^*L\otimes q_1^*L\otimes q_2^*L .
+\]
+The first and fourth factors cancel, as do the second with the sixth and the
+third with the seventh, leaving $\iota^*\Theta(L)\cong(e\circ\pi)^*L$, which is
+trivial by \Cref{lem:cube-pullback-constant}.  So $\Theta(L)$ restricts
+trivially to each of the three slices, and \Cref{thm:cube-cube} makes it
+trivial.
+
+For the second form, let $S$ be a $k$-scheme and $f,g,h\in A(S)$, and let
+$(f,g,h)\colon S\to A\times A\times A$ be the induced morphism.  Then
+$m_T\circ(f,g,h)$ is the sum in $A(S)$ of the members of $\{f,g,h\}$ indexed by
+$T$, and $p_i\circ(f,g,h)$ is the $i$-th of $f,g,h$; pulling the isomorphism
+$\Theta(L)\cong\O_{A\times A\times A}$ back along $(f,g,h)$ therefore gives
+exactly the displayed isomorphism on $S$.
+\end{proof}
+
+\begin{corollary}[The recursion for $[n]^*L$]\label{cor:cube-mulby-recursion}
+\uses{def:av-abelian-variety, def:cube-mulby-int}
+Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
+Then for every $n\in\Z$
+\[
+  [n+1]^*L\otimes[n-1]^*L\;\cong\;
+  \bigl([n]^*L\bigr)^{\otimes2}\otimes L\otimes[-1]^*L .
+\]
+\end{corollary}
+\begin{proof}
+\uses{thm:cube-abelian, lem:cube-pullback-constant, def:cube-mulby-int,
+lem:cube-mulby-int-points}
+Apply the second form of \Cref{thm:cube-abelian} with $S=A$ and
+\[
+  f:=[n],\qquad g:=[1]=\mathrm{id}_A,\qquad h:=[-1],
+\]
+all three regarded as elements of the abelian group $A(A)$.  There
+$f+g=[n+1]$, $f+h=[n-1]$, $g+h=[0]$ and $f+g+h=[n]$, by the identity
+$[m]+[m']=[m+m']$ of \Cref{lem:cube-mulby-int-points}.  The isomorphism of
+\Cref{thm:cube-abelian} reads
+\[
+  [n]^*L\otimes[n+1]^*L^{-1}\otimes[n-1]^*L^{-1}\otimes[0]^*L^{-1}
+  \otimes[n]^*L\otimes[1]^*L\otimes[-1]^*L\;\cong\;\O_A .
+\]
+Now $[0]$ is the constant morphism at $e$ by
+\Cref{lem:cube-mulby-int-points}, so $[0]^*L$ is trivial by
+\Cref{lem:cube-pullback-constant}, and $[1]^*L=L$.  Rearranging the remaining
+factors and using $[m]^*L^{-1}\cong([m]^*L)^{-1}$ gives the stated
+isomorphism.
+\end{proof}
+
+\begin{theorem}[Pullback of a line bundle along $[n]$]
+\label{thm:cube-mulby-pullback}
+\uses{def:av-abelian-variety, def:cube-mulby-int}
+Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
+Then for every $n\in\Z$
+\[
+  [n]^*L\;\cong\;L^{\otimes\frac{n^2+n}2}\otimes
+  \bigl([-1]^*L\bigr)^{\otimes\frac{n^2-n}2} .
+\]
+In particular, if $L$ is \emph{symmetric}, that is $[-1]^*L\cong L$, then
+\[
+  [n]^*L\;\cong\;L^{\otimes n^2} .
+\]
+\end{theorem}
+\begin{proof}
+\uses{cor:cube-mulby-recursion, lem:cube-pullback-constant,
+def:cube-mulby-int, lem:cube-mulby-int-points}
+Write $N:=[-1]^*L$ and, for $n\in\Z$,
+\[
+  a(n):=\frac{n^2+n}2=\frac{n(n+1)}2,\qquad
+  b(n):=\frac{n^2-n}2=\frac{n(n-1)}2 .
+\]
+Both are non-negative integers for every $n\in\Z$, being products of two
+consecutive integers divided by two, so the tensor powers $L^{\otimes a(n)}$
+and $N^{\otimes b(n)}$ are ordinary tensor powers.  Let $P(n)$ be the assertion
+\[
+  [n]^*L\;\cong\;L^{\otimes a(n)}\otimes N^{\otimes b(n)} .
+\]
+
+\emph{Three base cases.}  $P(0)$: $a(0)=b(0)=0$ and $[0]$ is the constant
+morphism at $e$ by \Cref{lem:cube-mulby-int-points}, so $[0]^*L$ is trivial by
+\Cref{lem:cube-pullback-constant}, which is $L^{\otimes0}\otimes N^{\otimes0}$.
+$P(1)$: $a(1)=1$, $b(1)=0$ and $[1]=\mathrm{id}_A$.  $P(-1)$: $a(-1)=0$,
+$b(-1)=1$ and $[-1]^*L=N$ by definition of $N$.
+
+\emph{The arithmetic of the exponents.}  Both $a$ and $b$ are polynomials of
+degree two in $n$ with leading coefficient $\tfrac12$, so their second
+differences are constant equal to $2\cdot\tfrac12=1$:
+\[
+  a(n+1)+a(n-1)=2a(n)+1,\qquad b(n+1)+b(n-1)=2b(n)+1
+  \qquad(n\in\Z).
+\]
+This can also be checked directly: $a(n+1)+a(n-1)-2a(n)$ equals
+$\tfrac12\bigl((n+1)(n+2)+(n-1)n-2n(n+1)\bigr)=\tfrac12\cdot2=1$, and likewise
+for $b$.
+
+\emph{Induction upwards.}  Suppose $n\geq1$ and that $P(n-1)$ and $P(n)$ hold.
+By \Cref{cor:cube-mulby-recursion},
+\[
+  [n+1]^*L\;\cong\;\bigl([n]^*L\bigr)^{\otimes2}\otimes L\otimes N\otimes
+  \bigl([n-1]^*L\bigr)^{-1} .
+\]
+Substituting $P(n)$ and $P(n-1)$ turns the right-hand side into
+\[
+  L^{\otimes\left(2a(n)+1-a(n-1)\right)}\otimes
+  N^{\otimes\left(2b(n)+1-b(n-1)\right)} ,
+\]
+and by the identity above the two exponents are $a(n+1)$ and $b(n+1)$.  So
+$P(n+1)$ holds.  Starting from $P(0)$ and $P(1)$ this proves $P(n)$ for every
+$n\geq0$.
+
+\emph{Induction downwards.}  Suppose $n\leq0$ and that $P(n)$ and $P(n+1)$
+hold.  \Cref{cor:cube-mulby-recursion} applied at $n$ can be read as
+\[
+  [n-1]^*L\;\cong\;\bigl([n]^*L\bigr)^{\otimes2}\otimes L\otimes N\otimes
+  \bigl([n+1]^*L\bigr)^{-1} ,
+\]
+and the same substitution, using $a(n-1)=2a(n)+1-a(n+1)$ and
+$b(n-1)=2b(n)+1-b(n+1)$, gives $P(n-1)$.  Starting from $P(0)$ and $P(-1)$
+this proves $P(n)$ for every $n\leq0$.
+
+Together the two inductions give $P(n)$ for every $n\in\Z$, which is the stated
+formula.  If moreover $[-1]^*L\cong L$, that is $N\cong L$, the formula becomes
+$[n]^*L\cong L^{\otimes(a(n)+b(n))}=L^{\otimes n^2}$.
+\end{proof}
+
+\begin{remark}[What this discharges, and what it does not]
+\label{rem:cube-discharged}
+\Cref{thm:cube-cube} and \Cref{thm:cube-mulby-pullback} are the two statements
+that \Cref{chap:av-isogeny} carried as open obligations, \Cref{thm:av-cube} and
+\Cref{thm:av-mulby-pullback}; that chapter now cites these instead.  Nothing
+else in \Cref{sec:av-cube} is discharged: \Cref{prop:av-symmetric-ample},
+\Cref{prop:av-ample-self-intersection} and \Cref{prop:av-degree-intersection}
+need ampleness and intersection numbers, neither of which this chapter builds,
+and the degree formula \Cref{thm:av-degree-formula} rests on all three.
+
+Nor does this section make \Cref{thm:av-mulby-pullback} formalisable.  Every
+statement of this section is above the three open obligations of
+\Cref{sec:cube-cube} --- \Cref{prop:cube-picard-square-zero},
+\Cref{prop:cube-kunneth-h1} and \Cref{prop:cube-formal-functions} --- and
+hence above all seven of the chapter.  All three rest on theory that Mathlib
+\texttt{v4.33.1} does not have in any form: the cohomology of sheaves on a
+scheme, and the direct images of a coherent sheaf along a proper morphism.
+\Cref{sec:cube-cost} says what that costs.
+\end{remark}
+
+\section{Formalisation cost}\label{sec:cube-cost}
+
+This section counts what Mathlib \texttt{v4.33.1} does not have and this
+chapter needs.  It is scoped to the \emph{whole} chapter: to
+\Cref{thm:cube-rigidity}, \Cref{thm:cube-seesaw}, \Cref{thm:cube-cube},
+\Cref{thm:cube-abelian} and \Cref{thm:cube-mulby-pullback}, together with
+every statement they use.  The intersection-number layer behind
+\Cref{thm:av-degree-formula} is not counted here at all, and neither is
+anything else in \Cref{sec:av-cube} beyond the two obligations this chapter
+discharges.
+
+\statusnote{Which part of the count is new, and how the earlier numbers map
+onto these.  The first version of this section was scoped to rigidity and the
+seesaw theorem only, and reported six definitions of which four carry content,
+four statements left open and fourteen proved.  This version reports ten
+definitions of which seven carry content, seven statements left open and
+twenty-five proved.  Two things happened, and they should be kept apart.
+First, the sections on the theorem of the cube and its abelian-variety
+corollary added four definitions and three open obligations, all of them
+consequences of one thing: the cube needs cohomology in degree \emph{one},
+which the earlier scope did not, exactly as
+\Cref{rem:cube-what-the-cube-uses} predicted.  Second, three statements that
+the earlier scope carried as open obligations ---
+\Cref{prop:cube-coherent-finiteness},
+\Cref{lem:cube-global-sections-general} and, in the first draft of
+\Cref{sec:cube-cube}, \Cref{prop:cube-formal-triviality} --- are now
+\emph{proved} here from three more atomic inputs stated in their place:
+\Cref{prop:cube-proper-pushforward-coherent},
+\Cref{prop:cube-global-sections-flat-base-change} and
+\Cref{prop:cube-formal-functions}.  That re-cutting leaves the earlier scope
+with the same four open obligations it had, but with sixteen proved statements
+rather than fourteen.  No estimate below has been revised downwards.}
+
+As said in \Cref{warn:cube-parallel-layer}, the tensor product of sheaves of
+modules over a scheme, invertible sheaves and the Picard group of a scheme are
+being built in this project in parallel and are not counted as missing.  That
+exclusion is read narrowly: it covers the group $\mathrm{Pic}(S)$ of one
+scheme, and it does not cover the pullback homomorphism
+$\mathrm{Pic}(V)\to\mathrm{Pic}(S)$ along a morphism $S\to V$, which is counted
+below as notion (N3).
+
+\subsection*{What is already available}
+
+So that the count below is honest, here is what is available and used.  Items
+(1) to (5) are in Mathlib \texttt{v4.33.1}; item (6) is partly in Mathlib and
+partly in this project's own sources, and says which is which.
+\begin{enumerate}
+  \item \texttt{AlgebraicGeometry.Scheme.Modules}, the abelian category of
+  sheaves of modules over a scheme, in
+  \texttt{Mathlib/AlgebraicGeometry/Modules/Sheaf.lean}, with
+  \texttt{pullback} and \texttt{pushforward}, their adjunction --- whose
+  counit is the map $\varepsilon$ of \Cref{thm:cube-seesaw} --- and full
+  pseudofunctoriality.
+  \item \texttt{SheafOfModules.IsLocallyFree} and
+  \texttt{SheafOfModules.IsQuasicoherent}, in
+  \texttt{Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean} and
+  \texttt{Quasicoherent.lean}; a monoidal structure on \emph{presheaves} of
+  modules and their sheafification; and \texttt{CommRing.Pic} together with
+  \texttt{Module.Invertible} for a ring, in
+  \texttt{Mathlib/RingTheory/PicardGroup.lean}.
+  \item \texttt{CategoryTheory.Sheaf.H}, the cohomology of an \emph{abelian}
+  sheaf on an arbitrary site, defined as $\mathrm{Ext}$ from the constant
+  sheaf, with the Cech and Mayer--Vietoris machinery, in
+  \texttt{Mathlib/CategoryTheory/Sites/SheafCohomology/}; and the Euler
+  characteristic of a homological complex in
+  \texttt{Mathlib/Algebra/Homology/EulerCharacteristic.lean}.  Neither is
+  applied to schemes or to sheaves of modules anywhere in Mathlib, which is
+  precisely the gap the cohomological open obligations sit in.  This is the
+  one piece of the missing theory that is genuinely close: the sheaf of units
+  $\O_S^\times$ of a scheme \emph{is} a sheaf of abelian groups on a site, so
+  the $H^1$ of \Cref{prop:cube-picard-square-zero} is within reach of what is
+  there, in a way that the $H^i$ of a sheaf of modules is not.
+  \item Everything topological and morphism-theoretic that the proofs above
+  use: \texttt{IsProper} and its stability under base change,
+  \texttt{Scheme.Hom.isClosedMap} for a universally closed morphism,
+  \texttt{Flat} and its stability under base change,
+  \texttt{GeometricallyIntegral} with the instances for the two projections of
+  a product, the Jacobson property of a scheme locally of finite type over a
+  field together with the density of closed points,
+  \texttt{AlgebraicGeometry.pointEquivClosedPoint} and
+  \texttt{AlgebraicGeometry.ext\_of\_apply\_eq} over an algebraically closed
+  base field, \texttt{AlgebraicGeometry.ext\_of\_isDominant}, the adjunction
+  between global sections and $\Spec$, \texttt{Scheme.residueField},
+  \texttt{Scheme.fromSpecStalk} in
+  \texttt{Mathlib/AlgebraicGeometry/Stalk.lean} --- which gives the morphism
+  $Z_n\to Z$ of \Cref{lem:cube-thickening-trivial} --- and
+  \texttt{AlgebraicGeometry.IsOpenImmersion.lift} together with
+  \texttt{Scheme.Hom.resLE}, which factor a morphism whose set-theoretic
+  image lies in an open subset through that open subscheme --- used in Step 1
+  of \Cref{thm:cube-rigidity} and in
+  \Cref{lem:cube-collapse-neighbourhood}.
+  \item The global sections of a proper integral scheme over a field:
+  \texttt{AlgebraicGeometry.isField\_of\_universallyClosed} and
+  \texttt{AlgebraicGeometry.finite\_appTop\_of\_universallyClosed} in
+  \texttt{Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}, which between them
+  make $\Gamma(X,\O_X)$ a finite field extension of the base field and hence
+  give \Cref{lem:cube-global-sections} outright.  This is the reason
+  \Cref{thm:cube-rigidity} needs nothing from \Cref{sec:cube-inputs}.
+  \item The group-object theory that \Cref{sec:cube-abelian} needs.  From
+  Mathlib: the group structure on the points of a group object,
+  \texttt{CategoryTheory.Hom.group}, together with
+  \texttt{CategoryTheory.GrpObj.zpow\_comp} and
+  \texttt{CategoryTheory.GrpObj.comp\_zpow}, in
+  \texttt{Mathlib/CategoryTheory/Monoidal/Cartesian/Grp.lean}; and
+  \texttt{AlgebraicGeometry.isCommMonObj\_of\_isProper\_of\_isIntegral\_tensorObj\_of\_isAlgClosed}
+  in \texttt{Mathlib/AlgebraicGeometry/Group/Abelian.lean}, a worked Lean
+  argument of the shape of \Cref{thm:cube-rigidity}, discussed in
+  \Cref{rem:cube-rigidity-mathlib}.  From this project, not from Mathlib:
+  \texttt{AlgebraicGeometry.IsAbelianVariety} in
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Group/Abelian.lean},
+  \texttt{AlgebraicGeometry.IsAbelianVariety.mulBy} in
+  \texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Isogeny.lean}, and
+  \texttt{CategoryTheory.GrpObj.npow} and
+  \texttt{CategoryTheory.GrpObj.zpow} in
+  \texttt{WeilConjectures/Mathlib/CategoryTheory/Monoidal/Cartesian/Grp.lean}.
+  The last of these \emph{is} the $\Z$-valued $[n]$ of
+  \Cref{def:cube-mulby-int}, so that definition costs nothing; it is not
+  covered by \Cref{def:av-mulby}, which is the $\N$-valued one, and it is
+  listed here rather than among the missing definitions only because the
+  project already has it.
+\end{enumerate}
+
+\subsection*{The missing notions, one by one}
+
+Seven notions are missing.  For each: which statements of this chapter need
+it, how many definitions and how many lemmas it is, and the file it would live
+in.  The lemma counts are estimates of the API a usable version needs, not of
+the individual proof steps; they are stated so that the Lean subtree can be cut
+from them.
+
+\begin{enumerate}
+  \item[(N1)] \emph{Coherence of a sheaf of modules on a locally noetherian
+  scheme.}  Needed to state \Cref{prop:cube-proper-pushforward-coherent},
+  \Cref{prop:cube-semicontinuity}, \Cref{prop:cube-grauert} and
+  \Cref{prop:cube-formal-functions}, and used in
+  \Cref{prop:cube-coherent-finiteness},
+  \Cref{lem:cube-projection-proper-flat} and
+  \Cref{prop:cube-formal-triviality}.  \emph{One definition}
+  (\texttt{SheafOfModules.IsCoherent}) and \emph{about six lemmas}: coherence
+  is stable under pullback and under pushforward along a closed immersion, a
+  locally free sheaf of finite rank is coherent, the coherent sheaves form an
+  abelian subcategory, and on a noetherian affine scheme coherence is finite
+  generation of the module.  In
+  \texttt{WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean},
+  next to \texttt{IsQuasicoherent}; the more natural file name
+  \texttt{.../Sheaf/Coherent.lean} is not allowed, because a file under
+  \texttt{WeilConjectures/Mathlib/} has to mirror a file that already exists in
+  Mathlib and that one does not.
+  \item[(N2)] \emph{The fibre of a sheaf of modules at a point, and the
+  restriction of a sheaf of modules to a fibre of a morphism.}  Needed to
+  state \Cref{lem:cube-invertible-fibrewise} and \Cref{prop:cube-grauert}(2),
+  and used in \Cref{lem:cube-degeneracy-closed},
+  \Cref{lem:cube-nowhere-vanishing}, \Cref{lem:cube-triviality-criterion},
+  \Cref{thm:cube-seesaw} and \Cref{cor:cube-triviality-closed}.  \emph{Two
+  definitions} --- the fibre $F(s)$ as a vector space over the residue field,
+  which carries content, and the restriction $F_t$, which is an abbreviation
+  for the pullback along the fibre inclusion of
+  \texttt{Mathlib/AlgebraicGeometry/Fiber.lean} --- and \emph{about five
+  lemmas}: functoriality in $F$, compatibility with pullback, with tensor
+  products and with inverses of line bundles, and the fibre of a locally free
+  sheaf of rank one being one-dimensional.  In
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean}.
+  \item[(N3)] \emph{Pullback of line bundles beyond what
+  \texttt{Scheme.Modules.pullback} gives, and the induced homomorphism of
+  Picard groups.}  Needed by every statement of
+  \Cref{sec:cube-seesaw}, \Cref{sec:cube-cube} and \Cref{sec:cube-abelian};
+  \Cref{lem:cube-pullback-constant}, \Cref{thm:cube-abelian},
+  \Cref{cor:cube-mulby-recursion} and \Cref{thm:cube-mulby-pullback} are
+  almost nothing but manipulations of it.  \emph{One definition}, the group
+  homomorphism $u^*\colon\mathrm{Pic}(V)\to\mathrm{Pic}(S)$, and \emph{about
+  five lemmas}: pullback preserves local freeness of rank one; $u^*$ is
+  compatible with tensor products and with inverses;
+  $\mathrm{id}^*=\mathrm{id}$ and $(v\circ u)^*=u^*\circ v^*$, which come from
+  the pseudofunctoriality Mathlib already has; and a line bundle on the
+  spectrum of a field is trivial.  In
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean},
+  beside (N2), unless the parallel layer of \Cref{warn:cube-parallel-layer}
+  supplies it first.
+  \item[(N4)] \emph{Cohomology of a sheaf of modules on a scheme, in all
+  degrees.}  Needed to state \Cref{prop:cube-picard-square-zero},
+  \Cref{prop:cube-kunneth-h1} and \Cref{lem:cube-thickening-trivial}, and used
+  in the proofs of \Cref{prop:cube-proper-pushforward-coherent},
+  \Cref{prop:cube-semicontinuity}, \Cref{prop:cube-grauert} and
+  \Cref{prop:cube-formal-functions}.  \emph{Two definitions} --- $H^i(S,F)$
+  for a sheaf of $\O_S$-modules, as a module over $\Gamma(S,\O_S)$, and the
+  sheaf of units $\O_S^\times$ as a sheaf of abelian groups together with its
+  $H^1$ --- and \emph{about twelve lemmas}: the long exact sequence of a short
+  exact sequence of sheaves and its naturality; additivity over finite direct
+  sums, which is what turns
+  $H^1(W,\O_W\otimes_kI)$ into $H^1(W,\O_W)\otimes_kI$ in
+  \Cref{lem:cube-thickening-trivial}; the Cech computation on a separated
+  scheme with a finite affine cover; the vanishing of $H^i$ for $i\geq1$ on an
+  affine scheme for a quasi-coherent sheaf; invariance under pushforward along
+  a closed immersion; the comparison
+  $\mathrm{Pic}(S)\cong H^1(S,\O_S^\times)$; and the truncated exponential
+  sequence of a square-zero thickening.  In a new file
+  \texttt{WeilConjectures/AlgebraicGeometry/Cohomology/Basic.lean}, which
+  mirrors no Mathlib file.  \emph{This is the largest single item in the
+  count, and it is new to this version of the section:} the earlier scope
+  mentioned $H^i$ only inside the proofs of its cohomological open obligations
+  and therefore did not charge it.
+  \item[(N5)] \emph{The projection formula and the K\"unneth formula.}  No
+  statement of this chapter mentions the projection formula; it is charged
+  here because the proofs of \Cref{prop:cube-kunneth-h1} and
+  \Cref{prop:cube-grauert} both need it, and the issue of what the chapter
+  costs is not settled by what its statements happen to name.
+  \Cref{prop:cube-kunneth-h1} is the one statement that names K\"unneth.
+  \emph{No definitions} and \emph{about four lemmas}: the projection formula
+  $Rf_*(F\otimes f^*G)\cong Rf_*F\otimes G$ for $G$ locally free of finite
+  rank; the K\"unneth formula for a product of two proper schemes over a
+  field; its degree-one case; and the identification of the two K\"unneth
+  summands with the restrictions along the two slice inclusions, which is the
+  form \Cref{lem:cube-thickening-trivial} consumes.  In a new file
+  \texttt{WeilConjectures/AlgebraicGeometry/Cohomology/Kunneth.lean}.
+  \item[(N6)] \emph{The direct images along a proper morphism, and base
+  change for them.}  Needed to state
+  \Cref{prop:cube-proper-pushforward-coherent},
+  \Cref{prop:cube-semicontinuity}, \Cref{prop:cube-grauert},
+  \Cref{lem:cube-counit-fibre} and \Cref{prop:cube-formal-functions}, and
+  used by \Cref{thm:cube-seesaw}, \Cref{cor:cube-triviality-closed},
+  \Cref{lem:cube-h0-constant}, \Cref{prop:cube-formal-triviality} and hence
+  by \Cref{thm:cube-cube}.  \emph{Two
+  definitions} --- the base change map $(f_*F)(t)\to\Gamma(W_t,F_t)$ and the
+  fibrewise dimension function $h^0\colon T\to\N$ --- and \emph{about ten
+  lemmas}: coherence of the higher direct images along a proper morphism,
+  \stacksproject{02O5}; semicontinuity, \stacksproject{0BDN}; Grauert's
+  theorem over a reduced base; the perfection of $Rf_*F$ and its compatibility
+  with arbitrary base change, \stacksproject{0B91}; and the theorem on formal
+  functions, \stacksproject{02OC}, with the identification of the completed
+  stalk of $f_*F$ that \Cref{prop:cube-formal-functions} states.  In four new
+  files under \texttt{WeilConjectures/AlgebraicGeometry/Cohomology/}:
+  \texttt{Proper.lean}, \texttt{Semicontinuity.lean}, \texttt{BaseChange.lean}
+  and \texttt{FormalFunctions.lean}.  Only the last of the four is new to this
+  version of the section.
+  \item[(N7)] \emph{Global sections and flat base change of the ground ring.}
+  Needed to state \Cref{prop:cube-global-sections-flat-base-change} and used
+  by \Cref{lem:cube-global-sections-general} and
+  \Cref{lem:cube-global-sections-base-change}, and hence by
+  \Cref{lem:cube-triviality-criterion}, \Cref{cor:cube-triviality-closed},
+  \Cref{lem:cube-thickening-trivial} and \Cref{prop:cube-formal-triviality}.
+  \emph{No definitions} and \emph{three lemmas}: that $\Gamma$ commutes with a
+  flat base change of the ground ring for a quasi-compact separated scheme,
+  which is the open obligation
+  \Cref{prop:cube-global-sections-flat-base-change}; and its two consequences
+  $\Gamma(X\times_k\Spec A,\O)=A$ for a proper variety $X$ over $k$, and
+  $\Gamma=K$ for a proper geometrically integral scheme over a field $K$
+  (\stacksproject{0BUG} part (8)), both of which are proved here from it.  In
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Geometrically/Integral.lean}.
+  This is much the cheapest of the seven and needs no cohomology at all.
+\end{enumerate}
+
+Adding the columns: \emph{eight definitions} and \emph{about forty-five lemmas
+of supporting API}, on top of which the seven open obligations of the chapter
+sit.  Two further definitions belong to no notion above --- the infinitesimal
+neighbourhood $Z_n$ and the abbreviation for a variety over a field, both of
+them glue --- and they bring the definition count to ten.  The $\Z$-valued
+$[n]$ of \Cref{def:cube-mulby-int} is deliberately not among them: it is
+\texttt{CategoryTheory.GrpObj.zpow}, which the project already has, and it is
+listed under what is already available above.
+
+\subsection*{Definitions missing: ten, of which seven carry content}
+
+\begin{enumerate}
+  \item \emph{Coherence of a sheaf of modules}, from (N1).
+  \item \emph{The fibre of a sheaf of modules at a point}, $F(s)$, from (N2).
+  \item \emph{The base change map} $(f_*F)(t)\to\Gamma(W_t,F_t)$, from (N6).
+  \item \emph{The fibrewise dimension function} $h^0$, from (N6).
+  \item \emph{The cohomology $H^i(S,F)$ of a sheaf of modules on a scheme},
+  from (N4).  New to this version of the section.
+  \item \emph{The sheaf of units $\O_S^\times$ of a scheme and its $H^1$},
+  from (N4).  New.
+  \item \emph{The pullback homomorphism of Picard groups}
+  $u^*\colon\mathrm{Pic}(V)\to\mathrm{Pic}(S)$, from (N3).  New.
+  \item \emph{The restriction of a sheaf of modules to a fibre}, $F_t$, from
+  (N2).  Glue: the pullback functor along the fibre inclusion.
+  \item \emph{The infinitesimal neighbourhood}
+  $Z_n=\Spec(\O_{Z,z}/\m_z^{n+1})$ with its morphism $Z_n\to Z$, used in
+  \Cref{lem:cube-thickening-trivial}, \Cref{prop:cube-formal-triviality} and
+  \Cref{thm:cube-cube}.  Glue: \texttt{Scheme.fromSpecStalk} composed with
+  \texttt{Spec.map} of the quotient map.  New.
+  \item \emph{Variety over a field}: an abbreviation for separated, of finite
+  type and geometrically integral, with the derived instances of integrality,
+  irreducibility and connectedness.  Glue --- all three predicates are in
+  Mathlib.  Needed by every statement of this chapter.  In
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Geometrically/Integral.lean}.
+\end{enumerate}
+Items (1) to (7) carry content; items (8) to (10) are abbreviations over what
+Mathlib already has.  The earlier scope had six of these, four with content;
+items (5), (6), (7) and (9) are the four added by the sections on the cube.
+
+\subsection*{Statements missing: seven left open, twenty-five proved here}
+
+Seven statements are left open, and they are the only unproved statements in
+the chapter.  The first four belong to \Cref{sec:cube-inputs} and are the four
+the earlier scope already had, two of them re-cut as the status note at the
+head of this section explains; the last three are new, and all three belong to
+\Cref{sec:cube-cube}.
+\begin{enumerate}
+  \item \Cref{prop:cube-proper-pushforward-coherent} needs (N1) and (N6): the
+  coherence of the direct image of a coherent sheaf along a proper morphism,
+  \stacksproject{02O5} in degree zero.  Used by
+  \Cref{prop:cube-coherent-finiteness},
+  \Cref{prop:cube-formal-functions} and
+  \Cref{prop:cube-formal-triviality}.
+  \item \Cref{prop:cube-semicontinuity} needs (N1), (N4) and (N6).  Used by
+  \Cref{lem:cube-h0-constant} and \Cref{cor:cube-triviality-closed}.
+  \item \Cref{prop:cube-grauert} needs (N1), (N2), (N4) and (N6).  Used by
+  \Cref{lem:cube-counit-fibre} and \Cref{thm:cube-seesaw}.
+  \item \Cref{prop:cube-global-sections-flat-base-change} needs (N7), and
+  nothing else; it is the one open obligation of the chapter that needs no
+  cohomology.  Used by \Cref{lem:cube-global-sections-general} and
+  \Cref{lem:cube-global-sections-base-change}.
+  \item \Cref{prop:cube-picard-square-zero} needs (N4): the cohomology of the
+  sheaf of units, the comparison with the Picard group, and the long exact
+  sequence of the truncated exponential sequence with its naturality.  Used by
+  \Cref{lem:cube-thickening-trivial}.
+  \item \Cref{prop:cube-kunneth-h1} needs (N4) and (N5).  Used by
+  \Cref{lem:cube-thickening-trivial}.  Only injectivity is used, but no
+  cheaper route to it than the full K\"unneth isomorphism is available, so
+  (N5) is charged in full.
+  \item \Cref{prop:cube-formal-functions} needs (N1) and (N6), and in
+  particular the theorem on formal functions, which is the one input of the
+  chapter that no other statement needs.  Used by
+  \Cref{prop:cube-formal-triviality} and hence by \Cref{thm:cube-cube}.
+\end{enumerate}
+
+Twenty-five statements are proved here in full and are new to Lean.  Sixteen
+belong to the earlier scope ---
+\Cref{prop:cube-coherent-finiteness},
+\Cref{lem:cube-counit-fibre},
+\Cref{lem:cube-global-sections},
+\Cref{lem:cube-global-sections-general},
+\Cref{lem:cube-nowhere-vanishing},
+\Cref{lem:cube-constant-to-affine},
+\Cref{lem:cube-collapse-neighbourhood},
+\Cref{thm:cube-rigidity},
+\Cref{lem:cube-projection-proper-flat},
+\Cref{lem:cube-degeneracy-closed},
+\Cref{lem:cube-invertible-fibrewise},
+\Cref{lem:cube-h0-constant},
+\Cref{thm:cube-seesaw},
+\Cref{cor:cube-seesaw-trivial},
+\Cref{lem:cube-triviality-criterion} and
+\Cref{cor:cube-triviality-closed} --- and nine are new:
+\Cref{lem:cube-global-sections-base-change},
+\Cref{lem:cube-product-variety},
+\Cref{lem:cube-thickening-trivial},
+\Cref{prop:cube-formal-triviality},
+\Cref{thm:cube-cube},
+\Cref{lem:cube-pullback-constant},
+\Cref{thm:cube-abelian},
+\Cref{cor:cube-mulby-recursion} and
+\Cref{thm:cube-mulby-pullback}.  Five are theorems, three are corollaries,
+two are propositions and fifteen are supporting lemmas.  Two of the
+twenty-five are not really declarations at all:
+\Cref{lem:cube-projection-proper-flat} and
+\Cref{lem:cube-product-variety} are lists of stability properties that
+typeclass inference supplies as instances, and are stated only to name the
+standing facts.  So twenty-three of the twenty-five are real formalisation
+work.
+
+Of the nine new ones, \Cref{lem:cube-thickening-trivial} is much the longest
+--- an induction over infinitesimal neighbourhoods with a naturality diagram at
+each step --- and \Cref{thm:cube-mulby-pullback} is the only one whose
+difficulty is arithmetic rather than geometric: a two-sided induction on
+$n\in\Z$ with three base cases, whose whole content is the second-difference
+identity for $n\mapsto(n^2+n)/2$.
+
+Nine of the twenty-five use nothing that is missing beyond the definitions
+listed above and can therefore be formalised today:
+\Cref{lem:cube-global-sections},
+\Cref{lem:cube-nowhere-vanishing},
+\Cref{lem:cube-constant-to-affine},
+\Cref{lem:cube-collapse-neighbourhood},
+\Cref{thm:cube-rigidity},
+\Cref{lem:cube-projection-proper-flat},
+\Cref{lem:cube-degeneracy-closed},
+\Cref{lem:cube-invertible-fibrewise} and
+\Cref{lem:cube-product-variety}.  A tenth,
+\Cref{lem:cube-pullback-constant}, needs from the missing list only the last
+lemma of (N3), that a line bundle on the spectrum of a field is trivial, which
+the parallel layer of \Cref{warn:cube-parallel-layer} may well supply itself.
+The first of the five theorems of the chapter, \Cref{thm:cube-rigidity}, is
+formalisable today; none of the other four is.
+
+\subsection*{Summary}
+
+Ten definitions, of which seven carry content and three are abbreviations over
+what Mathlib already has; about forty-five lemmas of supporting API in the
+seven missing notions (N1) to (N7); seven statements left open; and
+twenty-five statements proved in full here, nine of which are formalisable
+immediately.
+
+The seven open obligations are not seven independent theories.  Six of them ---
+\Cref{prop:cube-proper-pushforward-coherent}, \Cref{prop:cube-semicontinuity},
+\Cref{prop:cube-grauert}, \Cref{prop:cube-picard-square-zero},
+\Cref{prop:cube-kunneth-h1} and \Cref{prop:cube-formal-functions} --- rest on
+one thing, the cohomology of sheaves on a scheme and its behaviour along a
+proper morphism, that is on (N4) together with (N1), (N5) and (N6).  The
+seventh, \Cref{prop:cube-global-sections-flat-base-change}, rests on (N7)
+alone, a single cheap base-change compatibility that needs no cohomology.
+
+Of the five theorems, \Cref{thm:cube-rigidity} needs no missing mathematical
+input at all and can be formalised as soon as the ``variety over a field''
+abbreviation is in place.  \Cref{thm:cube-seesaw} needs finiteness of global
+sections, semicontinuity, and cohomology and base change in degree zero.
+\Cref{thm:cube-cube} needs, on top of that, all of degree one: the Picard group
+as $H^1$ of the units sheaf, K\"unneth in degree one, and the theorem on formal
+functions.  \Cref{thm:cube-abelian} and \Cref{thm:cube-mulby-pullback} need
+nothing beyond \Cref{thm:cube-cube} and (N3).  So the cost of the chapter is,
+almost exactly, the cost of the cohomology of coherent sheaves on a scheme in
+degrees zero and one, plus proper base change for it; and
+\Cref{thm:cube-mulby-pullback}, the statement on which the degree formula
+\Cref{thm:av-degree-formula} rests, sits at the very top of that stack.

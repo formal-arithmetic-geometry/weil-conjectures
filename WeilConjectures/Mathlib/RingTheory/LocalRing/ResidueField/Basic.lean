@@ -5,14 +5,18 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
 
 /-!
-# Descending a map to a local ring through a surjection
+# Residue fields of local rings
 
-If `π : P →+* K` is surjective and `ρ : P →+* V` maps `RingHom.ker π` into the maximal
-ideal of a local ring `V`, then the residue map of `ρ` factors through `π`
-(`IsLocalRing.exists_comp_eq_residue_comp`).
+* `IsLocalRing.exists_comp_eq_residue_comp`: if `π : P →+* K` is surjective and `ρ : P →+* V`
+  maps `RingHom.ker π` into the maximal ideal of a local ring `V`, then the residue map of `ρ`
+  factors through `π`.
+* `IsLocalRing.isSepClosed_residueField_of_finite`: the residue field of a local ring finite
+  over a local ring with separably closed residue field is separably closed.
 -/
 
 @[expose] public section
@@ -36,5 +40,17 @@ theorem exists_comp_eq_residue_comp {P K V : Type*} [CommRing P] [CommRing K] [C
     exact (RingHom.kerLift_mk π a).symm
   simp only [RingHom.comp_apply]
   rw [hmk, Ideal.Quotient.lift_mk, RingHom.comp_apply]
+
+/-- The residue field of a local ring which is finite over a local ring with separably closed
+residue field is separably closed: it is a finite, hence purely inseparable, extension. -/
+theorem isSepClosed_residueField_of_finite (R B : Type*) [CommRing R] [IsLocalRing R]
+    [IsSepClosed (ResidueField R)] [CommRing B] [IsLocalRing B] [Algebra R B]
+    [Module.Finite R B] : IsSepClosed (ResidueField B) := by
+  have : Algebra.IsIntegral R B := Algebra.IsIntegral.of_finite R B
+  have : IsLocalHom (algebraMap R B) := isLocalHom_algebraMap_of_isIntegral R B
+  have : Module.Finite (ResidueField R) (ResidueField B) :=
+    IsLocalRing.ResidueField.finite_of_module_finite
+  have : Algebra.IsAlgebraic (ResidueField R) (ResidueField B) := Algebra.IsAlgebraic.of_finite _ _
+  exact Algebra.IsAlgebraic.isSepClosed (F := ResidueField R)
 
 end IsLocalRing
