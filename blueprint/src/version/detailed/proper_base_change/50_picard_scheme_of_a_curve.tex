@@ -10176,6 +10176,12 @@ is an isomorphism in $D(\cO_T)$.
 % complex, which does not work -- see the paragraph beginning
 % ``Perfectness does not follow'' below.  lem:pc-flat-source-local
 % is added: it is the criterion the flatness step uses.
+% Both appeals to lem:pc-affine-morphism-hi below name only the
+% quasi-coherence clause of that node's statement.  The description of
+% the pushforward on an affine target sits in that node's proof and not
+% in its statement, so it is derived inline here instead of being
+% attributed to the node.  Neither edge moves: the node is still cited,
+% for quasi-coherence.
 Both assertions are Zariski-local in $S$ (the object $Rf_*\cG$
 restricts to the corresponding object for the restricted morphism and
 the base change map localizes in $T$), so assume $S=\Spec(A)$ affine.
@@ -10195,12 +10201,20 @@ Rf_*\cG\;\cong\;\Bigl(\;\cdots\;\to\prod_{|J|=1}(f\circ j_J)_*\cG|_{U_J}
 \to\prod_{|J|=2}(f\circ j_J)_*\cG|_{U_J}\to\cdots\Bigr),
 \]
 a bounded complex (length $\le t$) of quasi-coherent, flat
-$\cO_S$-modules: each
-$(f\circ j_J)_*\cG|_{U_J}$ is quasi-coherent (affine morphism,
-\Cref{lem:pc-affine-morphism-hi}) with value on $\Spec(A)$ the
-$A$-module $\Gamma(U_J,\cG)$ (affine: $(f\circ j_J)$ is affine since
-$U_J$ is affine and $S$ affine, so the direct image of the
-quasi-coherent $\cG|_{U_J}$ is $\widetilde{\Gamma(U_J,\cG)}$).  For the
+$\cO_S$-modules.  For the quasi-coherence: $U_J$ is affine and
+$S=\Spec(A)$ is affine, so $f\circ j_J$ is an affine morphism, and
+each $(f\circ j_J)_*\cG|_{U_J}$ is therefore quasi-coherent by
+\Cref{lem:pc-affine-morphism-hi} --- it is the quasi-coherence clause
+of that lemma that is used, not the vanishing of the higher direct
+images.  Its value on $\Spec(A)$ is then the $A$-module
+$\Gamma(U_J,\cG)$: a quasi-coherent module on an affine scheme is the
+module associated with its global sections, and those global sections
+are
+$\Gamma(\Spec(A),(f\circ j_J)_*\cG|_{U_J})=\Gamma(U_J,\cG|_{U_J})
+=\Gamma(U_J,\cG)$
+by the definition of the pushforward, since
+$(f\circ j_J)^{-1}(\Spec(A))=U_J$.  So the term is
+$\widetilde{\Gamma(U_J,\cG)}$.  For the
 flatness, write $U_J=\Spec(B_J)$ with $B_J$ a finite type $A$-algebra
 and $\cG|_{U_J}=\widetilde N$ with $N$ a finite $B_J$-module, so that
 $N=\Gamma(U_J,\cG)$.  Since $U_J\subseteq X$ is open, a prime
@@ -10252,9 +10266,16 @@ $g$, and hence $A\to B$, is arbitrary.  The terms are pushforwards of a
 quasi-coherent module along an affine morphism, and the formation of
 such a pushforward commutes with arbitrary affine base change.  Indeed
 $U_J$ and $\Spec A$ are affine, so $f\circ j_J$ is an affine morphism
-and $(f\circ j_J)_*\cG|_{U_J}=\widetilde{\Gamma(U_J,\cG)}$ on $\Spec A$
-by \Cref{lem:pc-affine-morphism-hi}; likewise $U_{J,B}$ and $\Spec B$
-are affine, so $(f_B\circ j_{U_{J,B}})_*\cG_B|_{U_{J,B}}
+and $(f\circ j_J)_*\cG|_{U_J}$ is quasi-coherent by
+\Cref{lem:pc-affine-morphism-hi}, again by the quasi-coherence clause
+of that lemma alone.  A quasi-coherent module on an affine scheme is
+the module associated with its global sections, and
+$\Gamma(\Spec A,(f\circ j_J)_*\cG|_{U_J})=\Gamma(U_J,\cG)$ by the
+definition of the pushforward, so
+$(f\circ j_J)_*\cG|_{U_J}=\widetilde{\Gamma(U_J,\cG)}$ on $\Spec A$.
+The same chain applies after base change: $U_{J,B}$ and $\Spec B$
+are affine, so $f_B\circ j_{U_{J,B}}$ is an affine morphism and
+$(f_B\circ j_{U_{J,B}})_*\cG_B|_{U_{J,B}}
 =\widetilde{\Gamma(U_{J,B},\cG_B)}$ on $\Spec B$.  So the identification
 is the direct computation
 $\Gamma(U_{J,B},\cG_B)=\Gamma(U_J,\cG)\otimes_AB$, which is the
