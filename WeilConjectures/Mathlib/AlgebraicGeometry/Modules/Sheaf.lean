@@ -44,6 +44,7 @@ contained in `U` and sheaves of `𝒪_X|_U`-modules on the scheme `U`.
 - `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
 - `AlgebraicGeometry.Scheme.Modules.germₗ`: the germ map `Γ(F, U) →ₗ[Γ(X, U)] F_x`.
 - `AlgebraicGeometry.Scheme.Modules.pushforwardCompRestrictFunctorIso`
+- `AlgebraicGeometry.Scheme.Modules.restrictFunctorCompMorphismRestrictIso`
 - `AlgebraicGeometry.Scheme.Modules.overEquivInverseRestrictIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
@@ -174,6 +175,22 @@ variable {f} in
 def restrictFunctorCompInvIso [IsIso f] :
     restrictFunctor f ⋙ restrictFunctor (inv f) ≅ 𝟭 Y.Modules :=
   (restrictFunctorComp (inv f) f).symm ≪≫ restrictFunctorCongr (by simp) ≪≫ restrictFunctorId
+
+/-- Restricting along the inverse of an isomorphism of schemes and then along the isomorphism
+itself is the identity. -/
+def restrictFunctorInvCompIso (e : X ≅ Y) :
+    restrictFunctor e.inv ⋙ restrictFunctor e.hom ≅ 𝟭 X.Modules :=
+  (restrictFunctorComp e.hom e.inv).symm ≪≫ restrictFunctorCongr e.hom_inv_id ≪≫
+    restrictFunctorId
+
+/-- **Base change for the restriction of sheaves of modules to an open subscheme.** Restricting
+`M` to an open `U` of `Y` and then along an open immersion `f : X ⟶ Y` is the same as restricting
+`M` along `f` and then to `f ⁻¹ᵁ U`. -/
+def restrictFunctorCompMorphismRestrictIso [IsOpenImmersion f] :
+    restrictFunctor U.ι ⋙ restrictFunctor (f ∣_ U) ≅
+      restrictFunctor f ⋙ restrictFunctor (f ⁻¹ᵁ U).ι :=
+  (restrictFunctorComp (f ∣_ U) U.ι).symm ≪≫
+    restrictFunctorCongr (morphismRestrict_ι f U) ≪≫ restrictFunctorComp (f ⁻¹ᵁ U).ι f
 
 end Pushforward
 
