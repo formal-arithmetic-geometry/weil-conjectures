@@ -11,9 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 # `Spec` of a restriction map and the canonical isomorphisms of affine opens
 
 We record that `Spec` of a restriction map between affine opens intertwines the canonical
-isomorphisms `Spec Γ(X, U) ≅ U` with the inclusion of opens, and that the algebra map
+isomorphisms `Spec Γ(X, U) ≅ U` with the inclusion of opens, that the algebra map
 realizing `Γ(X, X.basicOpen f)` as a localization is the restriction map of the structure
-sheaf.
+sheaf, and that a point of an affine open is determined by its prime ideal.
 -/
 
 @[expose] public section
@@ -41,5 +41,13 @@ lemma algebraMap_basicOpen_eq {U : X.Opens} (f : Γ(X, U)) :
     algebraMap Γ(X, U) Γ(X, X.basicOpen f) =
       (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom :=
   rfl
+
+/-- Distinct points of an affine open have distinct associated primes. -/
+lemma IsAffineOpen.primeIdealOf_injective {U : X.Opens} (hU : IsAffineOpen U) :
+    Function.Injective fun x : U ↦ (hU.primeIdealOf x).asIdeal := by
+  intro a b hab
+  have h : hU.fromSpec (hU.primeIdealOf a) = hU.fromSpec (hU.primeIdealOf b) := by
+    rw [PrimeSpectrum.ext hab]
+  rwa [hU.fromSpec_primeIdealOf, hU.fromSpec_primeIdealOf, ← Subtype.ext_iff] at h
 
 end AlgebraicGeometry

@@ -63,6 +63,13 @@ theorem isFiniteType {M : SheafOfModules.{u} R} (q : M.LocalGeneratorsData) [q.I
     M.IsFiniteType :=
   ⟨q.shrink, inferInstance⟩
 
+omit [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] in
+/-- The form of `SheafOfModules.LocalGeneratorsData.isFiniteType` which takes the finiteness of
+each family of generators as an ordinary hypothesis. -/
+theorem isFiniteType_of_forall {M : SheafOfModules.{u} R} (q : M.LocalGeneratorsData)
+    (h : ∀ i, (q.generators i).IsFiniteType) : M.IsFiniteType :=
+  ⟨q.shrink, ⟨fun i ↦ h i.2.choose⟩⟩
+
 end LocalGeneratorsData
 
 omit [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] in
