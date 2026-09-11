@@ -17,6 +17,9 @@ right adjoint automatically preserves the braiding. This is an instance of doctr
 adjunction; the braided axiom for `G` follows from the one for `F` by transposition
 through the adjunction.
 
+We also record that right whiskering is the conjugate of left whiskering by the braiding
+(`CategoryTheory.whiskerRight_eq_braiding_conj`).
+
 ## Main definitions
 
 - `CategoryTheory.Adjunction.rightAdjointLaxBraided`: the lax braided structure on the
@@ -27,7 +30,18 @@ through the adjunction.
 
 universe v₁ v₂ u₁ u₂
 
-namespace CategoryTheory.Adjunction
+namespace CategoryTheory
+
+open MonoidalCategory
+
+/-- In a braided monoidal category, right whiskering by `Y` is the conjugate of left
+whiskering by `Y` under the braiding. -/
+lemma whiskerRight_eq_braiding_conj {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+    [BraidedCategory C] {X₁ X₂ : C} (f : X₁ ⟶ X₂) (Y : C) :
+    f ▷ Y = (β_ X₁ Y).hom ≫ Y ◁ f ≫ (β_ X₂ Y).inv := by
+  simp
+
+namespace Adjunction
 
 open Functor.LaxMonoidal Functor.OplaxMonoidal
 
@@ -49,4 +63,6 @@ def rightAdjointLaxBraided : G.LaxBraided where
       BraidedCategory.braiding_naturality, Functor.map_braiding, Category.assoc,
       Category.assoc, Functor.Monoidal.μ_δ_assoc]
 
-end CategoryTheory.Adjunction
+end Adjunction
+
+end CategoryTheory

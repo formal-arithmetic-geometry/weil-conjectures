@@ -1,0 +1,1510 @@
+% This file is a chapter fragment, in the same style as the other files under
+% version/detailed/.  It is included by version/detailed.tex and must not
+% contain a preamble of its own.
+%
+% Contents: section 2.6 of the curve estimates -- the multiplication-by-n
+% endomorphism [n] of an abelian variety, its n-torsion subgroup scheme A[n],
+% and the divisibility of the group of rational points.  This is the LaTeX
+% source for the three propositions that until now existed only inside
+% blueprint/curve_estimates.pdf, together with a proof-level account of the
+% route to etaleness of [n] in the good characteristic.
+
+\chapter{The multiplication-by-$n$ isogeny of an abelian variety}
+\label{chap:av-isogeny}
+
+The goal of this chapter is \Cref{prop:av-isogeny}: for an abelian variety $A$
+of dimension $g$ over a field $K$ and an integer $n\neq0$, the
+multiplication-by-$n$ endomorphism $[n]\colon A\to A$ is an isogeny, that is, it
+is finite, flat and surjective, and its degree is $n^{2g}$.  Two consequences
+are drawn from it: \Cref{prop:av-etale-torsion}, that for $n$ invertible in $K$
+the $n$-torsion subgroup scheme $A[n]=\ker[n]$ is finite \'etale of rank
+$n^{2g}$, so that over an algebraically closed field
+$A[n](K)\cong(\Z/n)^{2g}$; and \Cref{prop:av-divisibility}, that over an
+algebraically closed field the group $A(K)$ of rational points is
+$n$-divisible.  These are Propositions 2.7, 2.8 and 2.9 of \S2.6 of the curve
+estimates, and the labels \texttt{prop:av-isogeny},
+\texttt{prop:av-etale-torsion} and \texttt{prop:av-divisibility} are the ones
+already used there.
+
+The chapter is written for a reader who has to formalise from it, and is
+organised so that such a reader needs to consult nothing else.
+\Cref{sec:av-conventions} fixes the conventions and lists the facts that are
+already available in Lean, each with the name of the declaration that provides
+it.  \Cref{sec:av-three-propositions} states the three propositions and gives
+the proofs of \Cref{prop:av-etale-torsion} and \Cref{prop:av-divisibility} from
+\Cref{prop:av-isogeny}; those two proofs are complete in Lean.
+\Cref{sec:av-etale-route} is the heart: a complete, step-by-step proof that
+$[n]$ is \'etale, and then finite, flat and surjective, whenever $n$ is
+invertible in $K$, using only deformation theory and the smoothness of $A$, and
+in particular using nothing about line bundles.  This is the part that has
+since been formalised; it is written so that every step there is a labelled
+statement with its own proof, with no step left as ``standard'', and the status
+note at the head of that section records where the Lean proof departs from the
+decomposition written here.  \Cref{sec:av-cube} treats what the \'etale route
+does not give --- the degree $n^{2g}$, and the case where $n$ is divisible by
+the characteristic --- in the form of five inputs from the theory of line
+bundles on abelian varieties, stated with proof sketches and citations,
+each marked as an open obligation because Mathlib has none of the theory they
+need.  \Cref{sec:av-status} records the formalisation status of every statement
+of the chapter.
+
+\section{Conventions and standing facts}\label{sec:av-conventions}
+
+Throughout this chapter $K$ is a field.  A \emph{group scheme over $K$} is an
+object $G$ of the cartesian monoidal category of $K$-schemes together with a
+group-object structure on it; we write $\mu\colon G\times_KG\to G$ for the
+multiplication, $e\colon\Spec K\to G$ for the identity section and
+$\iota\colon G\to G$ for the inverse.  For a $K$-scheme $T$ we write
+$G(T):=\Hom_K(T,G)$ for the group of $T$-points, with multiplication
+$u\cdot v:=\mu\circ(u,v)$; for a $K$-algebra $R$ we abbreviate
+$G(R):=G(\Spec R)$.  All the arguments below are carried out on points, that
+is, in the groups $G(T)$; this is also how they are carried out in Lean.
+
+Composition is written in the classical order: $g\circ f$ means ``first $f$,
+then $g$''.  The Lean sources use the categorical order and write the same
+morphism as \texttt{f} $\gg$ \texttt{g}, so every composite below appears
+reversed there.
+
+\begin{definition}[Abelian variety]\label{def:av-abelian-variety}
+\lean{AlgebraicGeometry.IsAbelianVariety}
+\leanok
+An \emph{abelian variety} over $K$ is a group scheme $A$ over $K$ whose
+structure morphism $A\to\Spec K$ is proper and geometrically integral.
+\end{definition}
+
+The dimension of an abelian variety is deliberately not part of the definition.
+Instead, whenever a dimension $g$ is needed it is carried as the hypothesis
+that $A\to\Spec K$ is smooth of relative dimension $g$; this is legitimate by
+\Cref{prop:av-basic}, and it is how the Lean statements are phrased.
+
+\begin{proposition}[An abelian variety is integral, commutative and smooth]
+\label{prop:av-basic}
+\uses{def:av-abelian-variety}
+\lean{AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral,
+AlgebraicGeometry.smooth_of_grpObj}
+\leanok
+Let $A$ be an abelian variety over $K$.  Then the scheme $A$ is integral, in
+particular irreducible, connected and non-empty; the structure morphism
+$A\to\Spec K$ is separated, quasi-compact and locally of finite type; the group
+scheme $A$ is commutative; and $A\to\Spec K$ is smooth, hence flat and locally
+of finite presentation.
+\end{proposition}
+\begin{proof}
+\leanok
+Integrality is geometric integrality applied to the trivial field extension,
+and the listed properties of $A\to\Spec K$ follow from properness and from
+finite type.  Commutativity is \stacksproject{0BFD}.  Smoothness holds because
+a geometrically reduced group scheme locally of finite type over a field is
+smooth.  All of this is already in Mathlib and in the project's mirror file
+\texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Group/Abelian.lean}, which
+registers each item as an instance.
+\end{proof}
+
+\begin{definition}[The multiplication-by-$n$ endomorphism]\label{def:av-mulby}
+\uses{def:av-abelian-variety}
+\lean{AlgebraicGeometry.IsAbelianVariety.mulBy, CategoryTheory.GrpObj.npow}
+\leanok
+Let $G$ be a group scheme over $K$ and $n\in\N$.  The
+\emph{multiplication-by-$n$ endomorphism} $[n]\colon G\to G$ is the $n$-th
+power of the identity in the group $G(G)=\Hom_K(G,G)$, that is, the unique
+morphism whose effect on points is $x\mapsto x^n$.
+\end{definition}
+
+\begin{lemma}[Basic algebra of $[n]$]\label{lem:av-mulby-points}
+\uses{def:av-mulby}
+\lean{CategoryTheory.GrpObj.comp_npow, CategoryTheory.GrpObj.npow_comp,
+CategoryTheory.GrpObj.npow_comp_npow}
+\leanok
+Let $G$ be a group scheme over $K$, let $T$ be a $K$-scheme and let
+$u\in G(T)$.  Then $[n]\circ u=u^n$ in $G(T)$.  Consequently $[0]$ is the
+constant morphism at the identity, $[1]=\mathrm{id}$, $[m]\circ[n]=[mn]$, and
+if $f\colon G\to H$ is a homomorphism of group schemes then $f\circ[n]=[n]\circ
+f$.  If $G$ is commutative then $[n]$ is itself a homomorphism of group
+schemes.
+\end{lemma}
+\begin{proof}
+\leanok
+The identity $[n]\circ u=u^n$ is the defining property of $[n]$: precomposition
+with a fixed $u$ is the group homomorphism $G(G)\to G(T)$ induced by $u$, and
+it sends $\mathrm{id}$ to $u$, hence $\mathrm{id}^n$ to $u^n$.  Every remaining
+assertion is the corresponding identity in the abstract groups $G(T)$, applied
+for all $T$ simultaneously and then transported back by Yoneda; for the last
+one, $x\mapsto x^n$ is a group homomorphism exactly when the group is
+commutative.
+\end{proof}
+
+\begin{definition}[The $n$-torsion subgroup scheme]\label{def:av-torsion}
+\uses{def:av-mulby, prop:av-basic}
+\lean{AlgebraicGeometry.IsAbelianVariety.torsion}
+\leanok
+Let $A$ be an abelian variety over $K$ and $n\in\N$.  Since $A$ is commutative,
+$[n]\colon A\to A$ is a homomorphism of group schemes, and its \emph{kernel}
+\[
+  A[n]:=\ker[n]:=A\times_{[n],\,A,\,e}\Spec K
+\]
+is again a group scheme over $K$, the \emph{$n$-torsion subgroup scheme} of
+$A$.
+\end{definition}
+
+\begin{lemma}[The defining square of $A[n]$]\label{lem:av-torsion-pullback}
+\uses{def:av-torsion}
+\lean{AlgebraicGeometry.IsAbelianVariety.isPullback_torsion,
+AlgebraicGeometry.IsAbelianVariety.torsionHomMulEquiv}
+\leanok
+The square
+\[
+  \begin{CD}
+    A[n]      @>>>     A\\
+    @VVV               @VV{[n]}V\\
+    \Spec K   @>{e}>>  A
+  \end{CD}
+\]
+is cartesian.  In particular $A[n]\to\Spec K$ is the base change of $[n]$ along
+the identity section, so every property of morphisms of schemes that is stable
+under base change passes from $[n]$ to $A[n]\to\Spec K$.  On points, for every
+$K$-scheme $T$ the group $A[n](T)$ is the subgroup $\{u\in A(T):u^n=1\}$ of
+$A(T)$; taking $T=\Spec K$, the group $A[n](K)$ is the $n$-torsion of $A(K)$.
+\end{lemma}
+\begin{proof}
+\leanok
+The square is cartesian by the definition of the kernel as a fibre product.
+The description on points is the universal property of that fibre product
+combined with $\Hom_K(T,\Spec K)$ being a singleton: a $T$-point of $A[n]$ is a
+$T$-point $u$ of $A$ with $[n]\circ u=1$, and $[n]\circ u=u^n$ by
+\Cref{lem:av-mulby-points}.
+\end{proof}
+
+\begin{definition}[Degree of a finite flat morphism]\label{def:av-degree}
+\lean{AlgebraicGeometry.Scheme.Hom.finrank}
+\leanok
+Let $f\colon X\to Y$ be a morphism of schemes and $y\in Y$.  When $f$ is finite
+and flat, $f_*\O_X$ is locally free of finite rank, and we write $\deg_yf$ for
+the rank of $(f_*\O_X)_y$ over $\O_{Y,y}$.  If $Y$ is connected this is
+independent of $y$ and is written $\deg f$.
+\end{definition}
+
+\begin{lemma}[The degree is invariant under base change]
+\label{lem:av-degree-base-change}
+\uses{def:av-degree}
+\lean{AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback,
+AlgebraicGeometry.Scheme.Hom.one_le_finrank_iff_surjective}
+\leanok
+Let
+\[
+  \begin{CD}
+    X'     @>>>   X\\
+    @V{f'}VV      @VV{f}V\\
+    Y'     @>{g}>> Y
+  \end{CD}
+\]
+be a cartesian square with $f$ finite and flat.  Then $f'$ is finite and flat
+and $\deg_{y'}f'=\deg_{g(y')}f$ for every $y'\in Y'$.  Moreover a finite flat
+morphism is surjective if and only if its degree is everywhere at least $1$.
+\end{lemma}
+\begin{proof}
+\leanok
+Finiteness and flatness are stable under base change, and the formation of
+$f_*\O_X$ commutes with flat base change, so this is the invariance of the rank
+of a finitely generated projective module under base change.  Both statements
+are in Mathlib.
+\end{proof}
+
+\begin{theorem}[Zariski's main theorem, finiteness form]
+\label{thm:av-zariski-main}
+\lean{AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite}
+\leanok
+A proper, locally quasi-finite morphism of schemes is finite.
+\end{theorem}
+\begin{proof}
+\leanok
+This is \stacksproject{02LS}; it is in Mathlib.
+\end{proof}
+
+\begin{proposition}[Finite \'etale schemes over a separably closed field]
+\label{prop:av-finite-etale-points}
+\lean{AlgebraicGeometry.Scheme.Hom.finrank_eq_natCard, AlgebraicGeometry.pointEquiv,
+AlgebraicGeometry.natCard_pointHom_eq_finrank}
+\leanok
+Let $K$ be separably closed and let $X\to\Spec K$ be finite and \'etale.  Then
+$X$ is affine, $\Gamma(X,\O_X)\cong K^{\pi_0}$ as a $K$-algebra for a finite
+set $\pi_0$ in bijection with the points of $X$, and hence
+$\deg(X\to\Spec K)=\#X$.  If moreover $K$ is algebraically closed, the
+$K$-points of $X$ are exactly its points, so the number of $K$-points of $X$
+equals $\deg(X\to\Spec K)$.
+\end{proposition}
+\begin{proof}
+\leanok
+A finite morphism to an affine scheme has affine source, so $X=\Spec S$ with
+$S$ a finite \'etale $K$-algebra.  A finite \'etale algebra over a separably
+closed field is a finite product of copies of the field: this is
+\texttt{Algebra.FormallyEtale.equivPiOfIsSepClosed} in Mathlib.  The rank over
+$K$ of $K^{\pi_0}$ is $\#\pi_0$, and the points of $\Spec K^{\pi_0}$ are the
+$\#\pi_0$ primitive idempotents.  Over an algebraically closed field, a point
+of a $K$-scheme locally of finite type whose residue field is $K$ is the same
+thing as a $K$-point, which identifies $X(K)$ with $X$.
+\end{proof}
+
+\begin{theorem}[Recognising $(\Z/n)^r$]\label{thm:av-finite-abelian-group}
+\lean{CommGroup.nonempty_equiv_pi_multiplicative_zmod_of_card_torsion,
+AddCommGroup.nonempty_equiv_pi_zmod_of_card_torsion}
+\leanok
+Let $H$ be a finite abelian group, let $n\geq1$ and $r\geq0$, suppose that
+$x^n=1$ for every $x\in H$, and suppose that for every $m$ dividing $n$ the
+subgroup $\{x\in H:x^m=1\}$ has exactly $m^r$ elements.  Then $H\cong(\Z/n)^r$.
+\end{theorem}
+\begin{proof}
+\leanok
+By the structure theorem for finite abelian groups, $H\cong\prod_i\Z/p_i^{e_i}$
+for primes $p_i$ and exponents $e_i\geq1$.  Each factor is killed by $n$, so
+$p_i^{e_i}\mid n$.  Counting $m$-torsion in a product gives
+$\#\{x\in H:x^m=1\}=\prod_i\gcd(m,p_i^{e_i})$.  Fix a prime $p$, let $k$ be
+maximal with $p^k\mid n$ and take $m=p^k$; comparing with $m^r=p^{kr}$ forces
+the number of indices $i$ with $p_i=p$ to be exactly $r$ and each of those
+factors to be $\Z/p^k$.  Doing this for every prime dividing $n$ and
+reassembling by the Chinese remainder theorem gives $H\cong(\Z/n)^r$.  This is
+in the project's mirror file
+\texttt{WeilConjectures/Mathlib/GroupTheory/FiniteAbelian/Basic.lean}.
+\end{proof}
+
+\section{The three propositions}\label{sec:av-three-propositions}
+
+\begin{proposition}[Proposition 2.7: $[n]$ is an isogeny of degree $n^{2g}$]
+\label{prop:av-isogeny}
+\uses{def:av-mulby, def:av-degree, prop:av-basic}
+\lean{AlgebraicGeometry.IsAbelianVariety.isFinite_mulBy,
+AlgebraicGeometry.IsAbelianVariety.flat_mulBy,
+AlgebraicGeometry.IsAbelianVariety.surjective_mulBy,
+AlgebraicGeometry.IsAbelianVariety.finrank_mulBy}
+Let $A$ be an abelian variety over a field $K$, smooth of relative dimension
+$g$ over $K$, and let $n\neq0$ be a natural number.  Then $[n]\colon A\to A$ is
+finite, flat and surjective, and $\deg[n]=n^{2g}$.
+\end{proposition}
+\begin{proof}
+\uses{thm:av-mulby-etale-corollaries, thm:av-degree-formula,
+thm:av-isogeny-general}
+For $n$ invertible in $K$ the finiteness, flatness and surjectivity are proved
+in \Cref{thm:av-mulby-etale-corollaries} by the deformation-theoretic route of
+\Cref{sec:av-etale-route}, which uses no theory of line bundles.  The degree,
+and the case where $n$ is divisible by the characteristic of $K$, are
+\Cref{thm:av-degree-formula} and \Cref{thm:av-isogeny-general}; those rest on
+the theorem of the cube and on intersection theory, and their five inputs are
+listed as open obligations in \Cref{sec:av-cube}.
+\end{proof}
+
+\begin{proposition}[Proposition 2.8: the $n$-torsion is finite \'etale of rank
+$n^{2g}$]
+\label{prop:av-etale-torsion}
+\uses{def:av-torsion, def:av-degree}
+\lean{AlgebraicGeometry.IsAbelianVariety.isFinite_torsion,
+AlgebraicGeometry.IsAbelianVariety.flat_torsion,
+AlgebraicGeometry.IsAbelianVariety.finrank_torsion,
+AlgebraicGeometry.IsAbelianVariety.etale_torsion,
+AlgebraicGeometry.IsAbelianVariety.natCard_torsionHom,
+AlgebraicGeometry.IsAbelianVariety.nonempty_torsionHom_mulEquiv_pi}
+\leanok
+Let $A$ be an abelian variety over $K$, smooth of relative dimension $g$ over
+$K$, and let $n\neq0$ be invertible in $K$.  Then $A[n]\to\Spec K$ is finite,
+flat and \'etale of rank $n^{2g}$.  If moreover $K$ is algebraically closed,
+then $A[n](K)$ has exactly $n^{2g}$ elements and
+\[
+  A[n](K)\;\cong\;(\Z/n)^{2g}.
+\]
+\end{proposition}
+\begin{proof}
+\uses{prop:av-isogeny, lem:av-torsion-pullback, lem:av-degree-base-change,
+thm:av-mulby-etale, prop:av-finite-etale-points, thm:av-finite-abelian-group}
+\leanok
+By \Cref{lem:av-torsion-pullback} the morphism $A[n]\to\Spec K$ is the base
+change of $[n]$ along $e\colon\Spec K\to A$.  By \Cref{prop:av-isogeny} the
+morphism $[n]$ is finite and flat of degree $n^{2g}$, and by
+\Cref{thm:av-mulby-etale} it is \'etale because $n$ is invertible in $K$.  All
+four properties are stable under base change, and the degree is preserved by
+\Cref{lem:av-degree-base-change}; hence $A[n]\to\Spec K$ is finite, flat and
+\'etale of rank $n^{2g}$.
+
+Now let $K$ be algebraically closed.  By \Cref{prop:av-finite-etale-points}
+applied to the finite \'etale $K$-scheme $A[n]$, the group $A[n](K)$ is finite
+of cardinality equal to the rank of $A[n]$, that is $n^{2g}$.  By
+\Cref{lem:av-torsion-pullback}, $A[n](K)=\{x\in A(K):x^n=1\}$; in particular
+every element of $A[n](K)$ is killed by $n$, and for $m$ dividing $n$
+\[
+  \{x\in A[n](K):x^m=1\}=\{x\in A(K):x^m=1\}=A[m](K),
+\]
+because $x^m=1$ already implies $x^n=1$.  Such an $m$ is again invertible in
+$K$, since a divisor of an integer invertible in a field is invertible in that
+field, so the count just made applies to $m$ as well and gives
+$\#A[m](K)=m^{2g}$.  Thus $A[n](K)$ is a finite abelian group killed by $n$
+whose $m$-torsion has exactly $m^{2g}$ elements for every $m$ dividing $n$, and
+\Cref{thm:av-finite-abelian-group} gives $A[n](K)\cong(\Z/n)^{2g}$.
+\end{proof}
+
+\begin{proposition}[Proposition 2.9: $A(K)$ is $n$-divisible]
+\label{prop:av-divisibility}
+\uses{def:av-abelian-variety}
+\lean{AlgebraicGeometry.IsAbelianVariety.exists_npow_eq,
+AlgebraicGeometry.IsAbelianVariety.rootableBy}
+\leanok
+Let $A$ be an abelian variety over an algebraically closed field $K$ and let
+$n\neq0$.  Then every element of $A(K)$ is an $n$-th power; equivalently
+$A(K)/n\cdot A(K)=0$.
+\end{proposition}
+\begin{proof}
+\uses{prop:av-isogeny, lem:av-mulby-points, prop:av-basic}
+\leanok
+By \Cref{prop:av-isogeny} the morphism $[n]\colon A\to A$ is finite and
+surjective.  Let $x\in A(K)$.  Since $K$ is algebraically closed and $A$ is
+locally of finite type over $K$, the $K$-points of $A$ are exactly the closed
+points of the scheme $A$; write $x_0\in A$ for the closed point corresponding
+to $x$.  By surjectivity there is $z\in A$ with $[n](z)=x_0$.
+
+The point $z$ is closed.  Indeed $\{x_0\}$ is closed, so $[n]^{-1}(\{x_0\})$ is
+closed, and it is finite because $[n]$ is a finite morphism; and $A$ is a
+Jacobson space, being locally of finite type over a field, so a finite closed
+subset of $A$ consists of closed points.  Hence $z$ is a closed point of $A$
+and therefore corresponds to a $K$-point $y\in A(K)$ with $[n]\circ y=x$.  By
+\Cref{lem:av-mulby-points}, $[n]\circ y=y^n$, so $y^n=x$.
+\end{proof}
+
+\begin{remark}[What the \'etale route does and does not give]
+\label{rem:av-etale-route-scope}
+\uses{prop:av-isogeny, thm:av-mulby-etale-corollaries}
+\Cref{sec:av-etale-route} proves finiteness, flatness and surjectivity of $[n]$
+for $n$ invertible in $K$, over an arbitrary field.  It does \emph{not} prove
+that $\deg[n]=n^{2g}$: nothing in a deformation-theoretic argument sees the
+dimension $g$.  Consequently the rank statement of
+\Cref{prop:av-etale-torsion}, and with it the isomorphism
+$A[n](K)\cong(\Z/n)^{2g}$, genuinely depends on \Cref{sec:av-cube}, whereas the
+finiteness and \'etaleness of $A[n]$ do not.
+\end{remark}
+
+\section{The \'etale route}\label{sec:av-etale-route}
+
+Throughout this section $A$ is an abelian variety over a field $K$ and $n$ is a
+natural number that is invertible in $K$, that is, $n\neq0$ in $K$.  No
+hypothesis is placed on $K$ unless it is stated; \Cref{rem:av-field-hypotheses}
+records, statement by statement, which of them need $K$ algebraically closed,
+which need $K$ perfect and which hold over an arbitrary field.  It will turn out
+that everything from \Cref{sec:av-etale-kernel} onwards holds over an arbitrary
+field.
+
+The plan is: the kernel of $A(T)\to A(T_0)$ along a square-zero thickening is a
+$K$-vector space (\Cref{sec:av-etale-kernel}); therefore $x\mapsto x^n$ is
+bijective on it; therefore $[n]$ is formally unramified and formally smooth
+(\Cref{sec:av-etale-unramified,sec:av-etale-smooth}); therefore $[n]$ is
+\'etale (\Cref{sec:av-etale-conclusion}); therefore, using properness of $A$
+and Zariski's main theorem, $[n]$ is finite, flat and surjective
+(\Cref{sec:av-etale-corollaries}).
+
+\statusnote{The results of this section are formalised, but not by the
+decomposition written here.  The Lean sources are
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Infinitesimal.lean}, which
+proves \Cref{cor:av-kernel-npow} for an arbitrary group scheme over $K$,
+commutative or not, and
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}, which proves
+\Cref{thm:av-mulby-formally-unramified} for a commutative group scheme over
+$K$ and \Cref{thm:av-mulby-formally-smooth} for a commutative group scheme
+that is moreover smooth over $K$.  None of the three needs properness or
+integrality, so all of them hold well beyond abelian varieties; restating them
+here in that generality is left for later.  There are three points where the
+Lean route departs from the text below.  \emph{First}, \Cref{cor:av-kernel-npow}
+is proved directly, by a product formula for ring maps out of an affine chart
+around the identity, with no cotangent space and no module structure anywhere;
+so the statement of \Cref{cor:av-kernel-npow} is formalised (as
+\texttt{AlgebraicGeometry.GrpObj.eq\_one\_of\_pow\_eq\_one} and
+\texttt{AlgebraicGeometry.GrpObj.exists\_pow\_eq}) while the cotangent-space
+material of \Cref{sec:av-etale-kernel} that the proof below runs through ---
+\Cref{def:av-cotangent} to \Cref{cor:av-kernel-module} --- has no Lean
+counterpart and is not on the path to \Cref{thm:av-mulby-etale}.  That direct
+argument is not written out in this chapter; writing it out, and keeping the
+cotangent route as the classical account, is a follow-up.  \emph{Second},
+\Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp} are packaged
+into the single declaration
+\texttt{AlgebraicGeometry.GrpObj.smooth\_npow\_left}, because Mathlib's
+\texttt{AlgebraicGeometry.Smooth} is formal smoothness together with local
+finite presentation.  That packaging also saddles \Cref{lem:av-mulby-lfp} with
+the hypothesis that $n$ be invertible in $K$, which it does not need; an
+unconditional Lean lemma for it is a follow-up.  \emph{Third}, the three open
+obligations formerly recorded at \Cref{thm:av-mulby-formally-unramified},
+\Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp} are removed,
+but the Mathlib gaps they recorded are circumvented rather than filled:
+Mathlib \texttt{v4.33.1} still has no infinitesimal lifting criterion for
+\texttt{AlgebraicGeometry.FormallyUnramified}, no
+\texttt{AlgebraicGeometry.FormallySmooth} and no cancellation instance for
+\texttt{LocallyOfFinitePresentation}.  The formalisation sidesteps the first
+two by working on affine charts, in the form described in
+\Cref{rem:av-unramified-affine-local} and \Cref{rem:av-smooth-affine-local},
+and the third by cancelling finite presentation at ring level with
+\texttt{RingHom.FinitePresentation.of\_comp\_finiteType}.}
+
+\subsection{Translations}\label{sec:av-etale-translations}
+
+\begin{construction}[Translation by a rational point]\label{def:av-translation}
+\uses{def:av-abelian-variety}
+Let $G$ be a group scheme over $K$ with structure morphism $\pi\colon G\to\Spec
+K$, and let $a\in G(K)$.  Write $a_G:=a\circ\pi\in G(G)$ for the constant
+$G$-point at $a$.  The \emph{translation} $t_a\colon G\to G$ is the $G$-point
+$a_G\cdot\mathrm{id}$ of $G$; its effect on points is $x\mapsto a\cdot x$.
+\end{construction}
+
+\begin{lemma}[Translations are isomorphisms]\label{lem:av-translation}
+\uses{def:av-translation}
+Let $G$ be a group scheme over $K$ and $a,b\in G(K)$.  Then $t_a\circ
+t_b=t_{ab}$ and $t_1=\mathrm{id}$; in particular $t_a$ is an isomorphism with
+inverse $t_{a^{-1}}$.  This holds over an arbitrary field.
+\end{lemma}
+\begin{proof}
+For a $K$-scheme $T$ write $a_T:=a\circ(T\to\Spec K)\in G(T)$; then
+$a\mapsto a_T$ is a group homomorphism $G(K)\to G(T)$.  Directly from the
+construction, $t_a\circ u=a_T\cdot u$ for every $u\in G(T)$.  Hence for every
+$T$ and every $u\in G(T)$,
+\[
+  (t_a\circ t_b)\circ u=t_a\circ(t_b\circ u)=a_T\cdot(b_T\cdot u)
+  =(ab)_T\cdot u=t_{ab}\circ u .
+\]
+Taking $T=G$ and $u=\mathrm{id}$ gives $t_a\circ t_b=t_{ab}$.  Also
+$t_1\circ u=1\cdot u=u$, so $t_1=\mathrm{id}$.  Taking $b=a^{-1}$ gives the
+last claim.
+\end{proof}
+
+\begin{lemma}[Translations intertwine $[n]$]
+\label{lem:av-translation-intertwines}
+\uses{def:av-translation, def:av-mulby}
+Let $G$ be a \emph{commutative} group scheme over $K$, let $a\in G(K)$ and let
+$n\in\N$.  Then
+\[
+  [n]\circ t_a\;=\;t_{a^n}\circ[n].
+\]
+This holds over an arbitrary field.
+\end{lemma}
+\begin{proof}
+\uses{lem:av-mulby-points, lem:av-translation}
+For $u\in G(T)$ one has, using \Cref{lem:av-mulby-points} and the notation of
+the previous proof,
+\[
+  ([n]\circ t_a)\circ u=(a_T\cdot u)^n=(a_T)^n\cdot u^n=(a^n)_T\cdot u^n
+  =(t_{a^n}\circ[n])\circ u,
+\]
+the middle equality because $G(T)$ is commutative.  Take $T=G$ and
+$u=\mathrm{id}$.
+\end{proof}
+
+\begin{lemma}[Spreading a property of $[n]$ out by translation]
+\label{lem:av-translation-spreading}
+\uses{lem:av-translation-intertwines}
+Let $A$ be an abelian variety over $K$ and let $P$ be a property of morphisms
+of schemes that is local on source and target and stable under pre- and
+post-composition with isomorphisms.  Let
+\[
+  V:=\{x\in A:\ [n]\ \text{has}\ P\ \text{at}\ x\}.
+\]
+Then $t_a(V)=V$ for every $a\in A(K)$.  If moreover $V$ is open and non-empty
+and $K$ is algebraically closed, then $V=A$.
+\end{lemma}
+\begin{proof}
+\uses{lem:av-translation, lem:av-translation-intertwines}
+\emph{Stability under translation.}  By
+\Cref{lem:av-translation-intertwines}, $[n]=t_{a^n}\circ[n]\circ t_a^{-1}$, and
+$t_a$ and $t_{a^n}$ are isomorphisms by \Cref{lem:av-translation}.  Since $P$
+is local and stable under composing with isomorphisms on either side, $[n]$ has
+$P$ at $t_a(x)$ if and only if it has $P$ at $x$; that is $t_a(V)=V$.
+
+\emph{Conclusion when $K=\bar K$.}  Over an algebraically closed field the
+closed points of $A$ are exactly the $K$-points.  Pick a $K$-point $v$ whose
+image lies in $V$ --- possible because $V$ is a non-empty open of a scheme
+locally of finite type over $K$, hence contains a closed point.  Let $x$ be any
+closed point of $A$, corresponding to $b\in A(K)$.  Then
+$x=t_{bv^{-1}}(v)\in t_{bv^{-1}}(V)=V$.  So $V$ contains every closed point of
+$A$; its complement is closed and contains no closed point, hence is empty
+because $A$ is a Jacobson space.  Thus $V=A$.
+\end{proof}
+
+\begin{remark}[Translations are not used below]\label{rem:av-translation-unused}
+\uses{lem:av-translation-spreading}
+\Cref{lem:av-translation-spreading} is the classical device for reducing a
+statement about $[n]$ to its behaviour at the identity, and it is what one uses
+if one computes the differential of $[n]$ at the identity and wants to conclude
+everywhere.  The route taken in
+\Cref{sec:av-etale-kernel,sec:av-etale-unramified,sec:av-etale-smooth,sec:av-etale-conclusion}
+does not use it: those arguments treat all points at once, being statements
+about lifting $T$-points for arbitrary affine $T$, and they need no hypothesis
+on $K$.  This matters for the formalisation, because
+\Cref{lem:av-translation-spreading} is the only step of this section that would
+require $K$ to be algebraically closed, while the Lean statements are over an
+arbitrary field.  The translation lemmas are recorded here because they are
+cheap, because they are needed to compare with the classical accounts, and
+because \Cref{lem:av-translation-intertwines} is used in \Cref{sec:av-cube} to
+see that every fibre of $[n]$ is a translate of $A[n]$.
+\end{remark}
+
+\subsection{The kernel of $A(R)\to A(R/I)$}\label{sec:av-etale-kernel}
+
+This subsection is the one step of the \'etale route that is real work.  Fix a
+group scheme $G$ over $K$; properness, integrality and smoothness are \emph{not}
+used anywhere in this subsection.  We describe the kernel of the restriction map
+on points along a square-zero thickening, and in particular give it a
+$K$-vector space structure.
+
+\begin{definition}[Cotangent space at a rational point]\label{def:av-cotangent}
+Let $X$ be a $K$-scheme and $x\in X(K)$ a $K$-rational point, with image the
+point $\xi\in X$; write $\m_\xi\subseteq\O_{X,\xi}$ for the maximal ideal, so
+that $\O_{X,\xi}/\m_\xi=K$.  The \emph{cotangent space} of $X$ at $x$ is the
+$K$-vector space
+\[
+  \mathfrak c(X,x):=\m_\xi/\m_\xi^2 .
+\]
+A morphism $f\colon X\to Y$ of $K$-schemes with $f\circ x=y$ induces a
+$K$-linear map $\mathfrak c(f)\colon\mathfrak c(Y,y)\to\mathfrak c(X,x)$,
+because $f$ induces a local homomorphism $\O_{Y,\eta}\to\O_{X,\xi}$ of local
+rings.  Thus $\mathfrak c(-)$ is a contravariant functor on $K$-schemes
+equipped with a $K$-rational point.
+\end{definition}
+
+\begin{lemma}[Cotangent space computed on an affine open]
+\label{lem:av-cotangent-affine}
+\uses{def:av-cotangent}
+In the situation of \Cref{def:av-cotangent}, let $U=\Spec S\subseteq X$ be an
+affine open containing $\xi$ and let $\m:=\ker(x^\sharp\colon S\to K)$ be the
+corresponding maximal ideal.  Then the localisation map induces an isomorphism
+of $K$-vector spaces
+\[
+  \m/\m^2\;\xrightarrow{\ \sim\ }\;\mathfrak c(X,x).
+\]
+In particular $\mathfrak c(X,x)$ may be computed in any affine open containing
+$\xi$.
+\end{lemma}
+\begin{proof}
+Localisation is exact, so $(\m/\m^2)_\m=\m_\xi/\m_\xi^2$.  The $S$-module
+$M:=\m/\m^2$ is annihilated by $\m$, hence is a module over $S/\m=K$; and an
+element $s\in S\setminus\m$ acts on $M$ as multiplication by its class in
+$S/\m=K$, which is non-zero, hence invertibly.  Therefore $M\to M_\m$ is an
+isomorphism.
+\end{proof}
+
+\begin{lemma}[Cotangent space of a product]\label{lem:av-cotangent-product}
+\uses{def:av-cotangent}
+Let $X,Y$ be $K$-schemes with $K$-points $x,y$, and let $(x,y)$ be the induced
+$K$-point of $X\times_KY$.  Then the two projections $p_1,p_2$ induce an
+isomorphism
+\[
+  \bigl(\mathfrak c(p_1),\mathfrak c(p_2)\bigr)\colon
+  \mathfrak c(X,x)\oplus\mathfrak c(Y,y)\;\xrightarrow{\ \sim\ }\;
+  \mathfrak c(X\times_KY,(x,y)),
+\]
+whose inverse has components $\mathfrak c(j_1)$ and $\mathfrak c(j_2)$, where
+$j_1:=(\mathrm{id}_X,y)\colon X\to X\times_KY$ and
+$j_2:=(x,\mathrm{id}_Y)\colon Y\to X\times_KY$.
+\end{lemma}
+\begin{proof}
+\uses{lem:av-cotangent-affine}
+By \Cref{lem:av-cotangent-affine} we may compute in affine opens: choose
+$U=\Spec S$ containing the image of $x$ and $V=\Spec S'$ containing the image
+of $y$, so that $U\times_KV=\Spec(S\otimes_KS')$ is an affine open of
+$X\times_KY$ containing the image of $(x,y)$.  Write $\varepsilon\colon S\to K$
+and $\varepsilon'\colon S'\to K$ for the two augmentations,
+$\m=\ker\varepsilon$ and $\m'=\ker\varepsilon'$.  As $K$-modules $S=K\oplus\m$
+and $S'=K\oplus\m'$, so
+\[
+  S\otimes_KS'=K\ \oplus\ (\m\otimes_KK)\ \oplus\ (K\otimes_K\m')\ \oplus\
+  (\m\otimes_K\m'),
+\]
+and the augmentation ideal $\mathfrak n:=\ker(\varepsilon\otimes\varepsilon')$
+is the sum of the last three summands.  Multiplying out and using
+$(\m\otimes1)\cdot(1\otimes\m')=\m\otimes\m'$,
+\[
+  \mathfrak n^2=(\m^2\otimes_KK)\ \oplus\ (\m\otimes_K\m')\ \oplus\
+  (K\otimes_K(\m')^2).
+\]
+Hence $\mathfrak n/\mathfrak n^2\cong\m/\m^2\oplus\m'/(\m')^2$.  The ring maps of
+$p_1$ and $p_2$ are $s\mapsto s\otimes1$ and $t\mapsto1\otimes t$, so under
+this decomposition $\mathfrak c(p_1)$ and $\mathfrak c(p_2)$ are the two
+inclusions; the ring maps of $j_1$ and $j_2$ are
+$s\otimes t\mapsto\varepsilon'(t)s$ and $s\otimes t\mapsto\varepsilon(s)t$, so
+$\mathfrak c(j_1)$ and $\mathfrak c(j_2)$ are the two projections.  These are
+mutually inverse.
+\end{proof}
+
+\begin{lemma}[The cotangent space sees the group law]
+\label{lem:av-cotangent-group-law}
+\uses{lem:av-cotangent-product, def:av-abelian-variety}
+Let $G$ be a group scheme over $K$ with identity section $e$, and write
+$\mathfrak c:=\mathfrak c(G,e)$.  Identify $\mathfrak c(G\times_KG,(e,e))$ with
+$\mathfrak c\oplus\mathfrak c$ by \Cref{lem:av-cotangent-product}.  Then the
+multiplication $\mu$ induces
+\[
+  \mathfrak c(\mu)\colon\mathfrak c\longrightarrow\mathfrak c\oplus\mathfrak c,
+  \qquad \mathfrak c(\mu)(s)=(s,s).
+\]
+\end{lemma}
+\begin{proof}
+\uses{lem:av-cotangent-product}
+The morphism $\mu$ sends the $K$-point $(e,e)$ to $e$, so $\mathfrak c(\mu)$ is
+defined.  By \Cref{lem:av-cotangent-product} the components of an element of
+$\mathfrak c(G\times_KG,(e,e))$ are read off by applying $\mathfrak c(j_1)$ and
+$\mathfrak c(j_2)$, where $j_1=(\mathrm{id}_G,e)$ and $j_2=(e,\mathrm{id}_G)$.
+So the two components of $\mathfrak c(\mu)$ are $\mathfrak c(j_1)\circ\mathfrak
+c(\mu)=\mathfrak c(\mu\circ j_1)$ and likewise $\mathfrak c(\mu\circ j_2)$.
+The unit axioms of a group object say exactly $\mu\circ
+j_1=\mathrm{id}_G=\mu\circ j_2$, so by functoriality both components are the
+identity of $\mathfrak c$.
+\end{proof}
+
+\begin{lemma}[The kernel along a square-zero thickening]
+\label{lem:av-kernel-cotangent}
+\uses{def:av-cotangent, lem:av-cotangent-affine}
+Let $G$ be a group scheme over $K$, let $R$ be a $K$-algebra and let
+$I\subseteq R$ be an ideal with $I^2=0$; put $R_0:=R/I$, $T:=\Spec R$ and
+$T_0:=\Spec R_0$.  Write
+\[
+  N(R,I):=\ker\bigl(G(R)\longrightarrow G(R_0)\bigr).
+\]
+Choose an affine open $U=\Spec S$ of $G$ containing the image $\eta$ of $e$,
+let $\varepsilon\colon S\to K$ be the augmentation given by $e$, let
+$\m=\ker\varepsilon$, and let $\varepsilon_R\colon S\to R$ be $\varepsilon$
+followed by the structure map $K\to R$.  Then every $w\in N(R,I)$ factors
+through $U$ and so is given by a $K$-algebra map $\varphi_w\colon S\to R$; the
+difference $D_w:=\varphi_w-\varepsilon_R$ takes values in $I$, vanishes on
+$K\subseteq S$ and on $\m^2$, and the assignment
+\[
+  \Theta\colon w\longmapsto\bigl(\text{the induced map }
+  \m/\m^2=\mathfrak c(G,e)\to I\bigr)
+\]
+is a bijection
+$\Theta\colon N(R,I)\xrightarrow{\ \sim\ }\Hom_K(\mathfrak c(G,e),I)$.
+\end{lemma}
+\begin{proof}
+\uses{lem:av-cotangent-affine}
+\emph{Step 1: $w$ factors through $U$.}  Since $I$ is nilpotent, the closed
+immersion $T_0\hookrightarrow T$ is a homeomorphism on underlying spaces.  The
+restriction of $w$ to $T_0$ is the trivial point, that is $e$ composed with
+$T_0\to\Spec K$, whose image is $\{\eta\}$.  Hence the image of the continuous
+map underlying $w$ is $\{\eta\}\subseteq U$, so $w^{-1}(U)=T$ and $w$ factors
+uniquely through the open subscheme $U$.  As $U$ is affine, morphisms $T\to U$
+correspond bijectively to $K$-algebra maps $S\to R$; write $\varphi_w$ for the
+one corresponding to $w$.
+
+\emph{Step 2: $D_w$ is a derivation into $I$.}  That $w$ restricts to the
+trivial point on $T_0$ says precisely that $\varphi_w$ followed by $R\to R_0$
+equals $\varepsilon$ followed by $K\to R_0$; that is,
+$D_w:=\varphi_w-\varepsilon_R$ takes values in $I$.  It is $K$-linear, and for
+$s,t\in S$
+\[
+  D_w(st)=\varphi_w(s)\varphi_w(t)-\varepsilon_R(s)\varepsilon_R(t)
+  =\varepsilon_R(s)D_w(t)+\varepsilon_R(t)D_w(s)+D_w(s)D_w(t),
+\]
+where the last term lies in $I^2=0$.  So $D_w$ is a $K$-derivation of $S$ into
+$I$, the $S$-module structure on $I$ being through $\varepsilon$.  In
+particular $D_w(1)=\varphi_w(1)-1=0$, so $D_w$ vanishes on the image of $K$,
+and $D_w(\m^2)=0$ because $\varepsilon(\m)=0$.  Since $S=K\oplus\m$ as a
+$K$-module, $D_w$ is determined by the induced $K$-linear map $\m/\m^2\to I$,
+which is $\Theta(w)$; it is a map out of $\mathfrak c(G,e)$ by
+\Cref{lem:av-cotangent-affine}.
+
+\emph{Step 3: $\Theta$ is bijective.}  Injectivity is Step 2: $D_w$, hence
+$\varphi_w$, hence $w$, is determined by $\Theta(w)$.  For surjectivity let
+$\delta\colon\m/\m^2\to I$ be $K$-linear, define $\tilde\delta\colon S\to I$ as
+the composite
+$S=K\oplus\m\twoheadrightarrow\m\twoheadrightarrow\m/\m^2
+\xrightarrow{\ \delta\ }I$
+and put $\varphi:=\varepsilon_R+\tilde\delta$.  Then $\varphi$ is $K$-linear
+and $\varphi(1)=1$.  For $s,t\in S$ write $s=\varepsilon(s)+s_0$ and
+$t=\varepsilon(t)+t_0$ with $s_0,t_0\in\m$; then
+$st=\varepsilon(s)\varepsilon(t)+\varepsilon(s)t_0+\varepsilon(t)s_0+s_0t_0$
+with $s_0t_0\in\m^2$, so
+\[
+  \tilde\delta(st)=\varepsilon(s)\tilde\delta(t)+\varepsilon(t)\tilde\delta(s),
+\]
+and therefore
+\[
+  \varphi(s)\varphi(t)
+  =\varepsilon_R(s)\varepsilon_R(t)+\varepsilon_R(s)\tilde\delta(t)
+   +\varepsilon_R(t)\tilde\delta(s)+\tilde\delta(s)\tilde\delta(t)
+  =\varepsilon_R(st)+\tilde\delta(st)=\varphi(st),
+\]
+the term $\tilde\delta(s)\tilde\delta(t)$ vanishing because $I^2=0$.  So
+$\varphi$ is a $K$-algebra map; the corresponding morphism $T\to U\subseteq G$
+restricts on $T_0$ to the trivial point because $\tilde\delta$ has values in
+$I$, hence lies in $N(R,I)$, and $\Theta$ sends it to $\delta$.
+\end{proof}
+
+\begin{lemma}[$\Theta$ is a group isomorphism]\label{lem:av-kernel-group-law}
+\uses{lem:av-kernel-cotangent, lem:av-cotangent-group-law}
+In the situation of \Cref{lem:av-kernel-cotangent}, $N(R,I)$ is a subgroup of
+$G(R)$ and
+\[
+  \Theta\colon N(R,I)\;\xrightarrow{\ \sim\ }\;
+  \bigl(\Hom_K(\mathfrak c(G,e),I),\,+\bigr)
+\]
+is an isomorphism of groups.  In particular $N(R,I)$ is abelian, whether or not
+$G$ is.
+\end{lemma}
+\begin{proof}
+\uses{lem:av-kernel-cotangent, lem:av-cotangent-group-law,
+lem:av-cotangent-product}
+\emph{Step 0: naturality of $\Theta$.}  Let $h\colon G'\to G$ be a morphism of
+$K$-schemes with $h\circ e'=e$, where $e'$ is the identity section of a group
+scheme $G'$.  If $w'\in G'(R)$ restricts on $T_0$ to the trivial point, then so
+does $h\circ w'$, and directly from the description of $\Theta$ as ``the map
+induced by $\varphi-\varepsilon_R$ on $\m/\m^2$'' one gets
+\[
+  \Theta(h\circ w')=\Theta(w')\circ\mathfrak c(h),
+\]
+where $\mathfrak c(h)\colon\mathfrak c(G,e)\to\mathfrak c(G',e')$.  Indeed the
+ring map of $h\circ w'$ is $\varphi_{w'}\circ h^\sharp$, so its difference from
+the augmentation is $D_{w'}\circ h^\sharp$, and passing to $\m/\m^2$ turns
+$h^\sharp$ into $\mathfrak c(h)$.  Here $\Theta$ on the left is the map of
+\Cref{lem:av-kernel-cotangent} for $G$ and on the right the one for $G'$; note
+that \Cref{lem:av-kernel-cotangent} used nothing about $G$ beyond the pointed
+scheme $(G,e)$, so it applies to $G\times_KG$ with the point $(e,e)$ as well.
+
+\emph{Step 1: the pair $(w_1,w_2)$.}  That $N(R,I)$ is a subgroup is clear,
+being the kernel of the group homomorphism $G(R)\to G(R_0)$.  Let
+$w_1,w_2\in N(R,I)$ and put $D_i:=\Theta(w_i)$.  The morphism
+$(w_1,w_2)\colon T\to G\times_KG$ restricts on $T_0$ to the trivial point of
+$G\times_KG$, so it lies in the corresponding kernel and has an invariant
+\[
+  \beta:=\Theta\bigl((w_1,w_2)\bigr)\in
+  \Hom_K\bigl(\mathfrak c(G\times_KG,(e,e)),I\bigr).
+\]
+Applying Step 0 to $h=p_1$ and $h=p_2$ gives
+$\beta\circ\mathfrak c(p_1)=\Theta(p_1\circ(w_1,w_2))=\Theta(w_1)=D_1$ and
+likewise $\beta\circ\mathfrak c(p_2)=D_2$.  Under the identification
+$\mathfrak c(G\times_KG,(e,e))\cong\mathfrak c\oplus\mathfrak c$ of
+\Cref{lem:av-cotangent-product}, whose two inclusions are $\mathfrak c(p_1)$
+and $\mathfrak c(p_2)$, this says $\beta(a,b)=D_1(a)+D_2(b)$.
+
+\emph{Step 2: conclusion.}  By definition $w_1\cdot w_2=\mu\circ(w_1,w_2)$, so
+Step 0 applied to $h=\mu$ and \Cref{lem:av-cotangent-group-law} give
+\[
+  \Theta(w_1\cdot w_2)=\beta\circ\mathfrak c(\mu)
+  =\bigl(s\mapsto\beta(s,s)\bigr)=D_1+D_2=\Theta(w_1)+\Theta(w_2).
+\]
+So $\Theta$ is a group homomorphism, and it is bijective by
+\Cref{lem:av-kernel-cotangent}.  A group isomorphic to an abelian group is
+abelian.
+\end{proof}
+
+\begin{corollary}[The kernel is an $R_0$-module, in particular a $K$-vector
+space]
+\label{cor:av-kernel-module}
+\uses{lem:av-kernel-group-law}
+In the situation of \Cref{lem:av-kernel-cotangent}, $N(R,I)$ carries a natural
+structure of module over $R_0=R/I$, in particular of $K$-vector space, whose
+underlying additive group is $N(R,I)$ written additively.
+\end{corollary}
+\begin{proof}
+\uses{lem:av-kernel-group-law}
+The ideal $I$ is killed by $I$, so its $R$-module structure factors through
+$R_0$.  The $R_0$-action on $I$ is $K$-linear, so it induces an $R_0$-module
+structure on $\Hom_K(\mathfrak c(G,e),I)$ by acting on the target, compatible
+with the addition used in \Cref{lem:av-kernel-group-law}.  Transport this
+structure along the group isomorphism $\Theta$.  The $K$-vector space structure
+is its restriction along $K\to R_0$; explicitly, $\lambda\cdot w$ is the
+element of $N(R,I)$ with $\Theta(\lambda\cdot w)=\lambda\,\Theta(w)$.
+\end{proof}
+
+\begin{corollary}[$n$-th powers on the kernel]\label{cor:av-kernel-npow}
+\lean{AlgebraicGeometry.GrpObj.eq_one_of_pow_eq_one,
+AlgebraicGeometry.GrpObj.exists_pow_eq}
+\leanok
+Let $G$ be a group scheme over $K$, let $R$ be a $K$-algebra, let $I\subseteq R$
+be an ideal with $I^2=0$, let $n$ be invertible in $K$, and write
+$N(R,I)=\ker\bigl(G(R)\to G(R/I)\bigr)$.  Then
+\begin{enumerate}
+  \item if $w\in N(R,I)$ satisfies $w^n=1$ then $w=1$; and
+  \item every $w\in N(R,I)$ is the $n$-th power of an element of $N(R,I)$.
+\end{enumerate}
+Since $N(R,I)$ is abelian (\Cref{lem:av-kernel-group-law}), the two together
+say that
+\[
+  N(R,I)\longrightarrow N(R,I),\qquad w\longmapsto w^n,
+\]
+is bijective.  This holds over an arbitrary field.
+\end{corollary}
+\begin{proof}
+\uses{cor:av-kernel-module, lem:av-kernel-group-law}
+Under the group isomorphism $\Theta$ of \Cref{lem:av-kernel-group-law} the map
+$w\mapsto w^n$ becomes $D\mapsto nD$ on $\Hom_K(\mathfrak c(G,e),I)$, and by
+\Cref{cor:av-kernel-module} this is multiplication by the image of $n$ in $K$,
+which is a unit.  So it is bijective, and in particular (1) and (2) hold.
+\end{proof}
+\statusnote{This is not the Lean proof.  In Lean (1) and (2) are proved
+directly, in an affine chart around the identity and with no commutativity
+assumption on $G$, so the cotangent space plays no part; see the status note at
+the head of \Cref{sec:av-etale-route}.}
+
+\begin{remark}[Where the vector space structure comes from]
+\label{rem:av-kernel-source}
+\uses{cor:av-kernel-module}
+It is worth isolating the point, because it is the only place in this section
+where anything happens.  The group $N(R,I)$ is a group of $R$-points; there is
+no scalar multiplication on $A(R)$ and none on $A(R_0)$.  Scalars appear only
+after $N(R,I)$ has been identified with
+$\Hom_K(\mathfrak c(A,e),I)$, and there they come from the \emph{target} $I$:
+an ideal with $I^2=0$ in a $K$-algebra is a module over $R/I$ and \emph{a
+fortiori} a $K$-vector space, and $\Hom_K(-,I)$ inherits that.  The content of
+\Cref{lem:av-kernel-group-law} is that the multiplication of $A(R)$, restricted
+to $N(R,I)$, becomes the addition of $\Hom_K(-,I)$; and that in turn is the
+unit axiom of the group object, read on cotangent spaces
+(\Cref{lem:av-cotangent-group-law}).  Nothing about $A$ beyond its being a
+group scheme over $K$ is used --- not properness, not integrality, not even
+smoothness.
+\end{remark}
+
+\subsection{$[n]$ is formally unramified}\label{sec:av-etale-unramified}
+
+\begin{lemma}[Lifts land in a prescribed affine open]
+\label{lem:av-lift-lands-in-open}
+Let $T_0\hookrightarrow T$ be a closed immersion of schemes defined by a
+nilpotent ideal, let $X$ be a scheme, let $a\colon T_0\to X$ be a morphism
+whose image lies in an open subscheme $U\subseteq X$, and let $u\colon T\to X$
+satisfy $u|_{T_0}=a$.  Then $u$ factors through $U$.
+\end{lemma}
+\begin{proof}
+The closed immersion $T_0\hookrightarrow T$ is a homeomorphism on underlying
+spaces because its ideal is nilpotent.  Hence the image of the continuous map
+underlying $u$ equals the image of the one underlying $a$, which lies in $U$.
+So $u^{-1}(U)=T$ and $u$ factors uniquely through the open subscheme $U$.
+\end{proof}
+
+\begin{theorem}[$[n]$ is formally unramified]
+\label{thm:av-mulby-formally-unramified}
+\uses{def:av-mulby, cor:av-kernel-npow}
+\lean{AlgebraicGeometry.GrpObj.formallyUnramified_npow_left}
+\leanok
+Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
+$K$.  Let $R$ be a $K$-algebra, let $I\subseteq R$ be an ideal with $I^2=0$,
+and put $T=\Spec R$ and $T_0=\Spec R/I$.  Let $u,v\colon T\to A$ be morphisms
+of $K$-schemes with
+\[
+  [n]\circ u=[n]\circ v\qquad\text{and}\qquad u|_{T_0}=v|_{T_0}.
+\]
+Then $u=v$.  Consequently $[n]$ is formally unramified.  This holds over an
+arbitrary field.
+\end{theorem}
+\begin{proof}
+\uses{cor:av-kernel-npow, lem:av-mulby-points, prop:av-basic,
+lem:av-kernel-group-law}
+Work in the group $A(R)=\Hom_K(T,A)$, which is commutative by
+\Cref{prop:av-basic}.  Put $w:=u\cdot v^{-1}\in A(R)$.  Restriction to $T_0$ is
+a group homomorphism $A(R)\to A(R/I)$, and $u|_{T_0}=v|_{T_0}$, so $w$ lies in
+$N(R,I)=\ker\bigl(A(R)\to A(R/I)\bigr)$.  By \Cref{lem:av-mulby-points},
+$[n]\circ u=u^n$ and $[n]\circ v=v^n$, so $u^n=v^n$, and by commutativity
+\[
+  w^n=(u\cdot v^{-1})^n=u^n\cdot(v^n)^{-1}=1 .
+\]
+By \Cref{cor:av-kernel-npow} the map $w\mapsto w^n$ is injective on $N(R,I)$
+and sends $1$ to $1$, so $w=1$, that is $u=v$.
+
+For the last sentence: formal unramifiedness of $[n]$ is the assertion that in
+every commutative square consisting of a square-zero thickening
+$T_0\hookrightarrow T$ of affine schemes, a morphism $T_0\to A$ into the source
+copy and a morphism $T\to A$ into the target copy, there is at most one
+diagonal filler; a diagonal filler is a morphism $u\colon T\to A$ with
+$u|_{T_0}$ and $[n]\circ u$ prescribed, so two of them satisfy the hypotheses
+above and therefore coincide.
+\end{proof}
+
+\begin{remark}[Reading this affine-locally]
+\label{rem:av-unramified-affine-local}
+\uses{thm:av-mulby-formally-unramified, lem:av-lift-lands-in-open}
+Mathlib's \texttt{AlgebraicGeometry.FormallyUnramified} is obtained by
+\texttt{HasRingHomProperty} from \texttt{RingHom.FormallyUnramified}, so
+concretely one must show, for affine opens $U,V\subseteq A$ with
+$[n](U)\subseteq V$, that $\Gamma(U,\O)$ is formally unramified over
+$\Gamma(V,\O)$: for every $\Gamma(V,\O)$-algebra $B$ and every square-zero
+ideal $I\subseteq B$, the restriction map
+$\Hom_{\Gamma(V,\O)}(\Gamma(U,\O),B)\to\Hom_{\Gamma(V,\O)}(\Gamma(U,\O),B/I)$
+is injective.  Two elements of the source are two morphisms
+$u,v\colon\Spec B\to U$ that agree on $\Spec B/I$ and have the same composite
+with $[n]$; since $U\hookrightarrow A$ is a monomorphism it suffices to prove
+$u=v$ as morphisms to $A$, which is \Cref{thm:av-mulby-formally-unramified}.
+\end{remark}
+
+\subsection{$[n]$ is formally smooth}\label{sec:av-etale-smooth}
+
+\begin{theorem}[$[n]$ is formally smooth]\label{thm:av-mulby-formally-smooth}
+\uses{def:av-mulby, cor:av-kernel-npow, prop:av-basic}
+\lean{AlgebraicGeometry.GrpObj.smooth_npow_left}
+\leanok
+Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
+$K$.  Let $R$ be a $K$-algebra, let $I\subseteq R$ be an ideal with $I^2=0$,
+and put $T=\Spec R$ and $T_0=\Spec R/I$.  Let $a\colon T_0\to A$ and
+$b\colon T\to A$ be morphisms of $K$-schemes with $[n]\circ a=b|_{T_0}$.  Then
+there is $u\colon T\to A$ with
+\[
+  u|_{T_0}=a\qquad\text{and}\qquad[n]\circ u=b .
+\]
+This holds over an arbitrary field.
+\end{theorem}
+\begin{proof}
+\uses{cor:av-kernel-npow, lem:av-mulby-points, prop:av-basic,
+lem:av-lift-lands-in-open, lem:av-kernel-group-law}
+\emph{Step 1: lift $a$ along $A\to\Spec K$.}  By \Cref{prop:av-basic} the
+structure morphism $A\to\Spec K$ is smooth, hence formally smooth, so there is
+$\tilde u\colon T\to A$ over $K$ with $\tilde u|_{T_0}=a$.  (When the image of
+$a$ lies in a single affine open $U\subseteq A$ --- which is the only case
+needed for the affine-local reading of \Cref{rem:av-smooth-affine-local} ---
+this is just the lifting property of the formally smooth $K$-algebra
+$\Gamma(U,\O)$, and by \Cref{lem:av-lift-lands-in-open} the lift again lands in
+$U$.)
+
+\emph{Step 2: measure the error.}  Both $[n]\circ\tilde u$ and $b$ are elements
+of $A(R)$, and they have the same restriction to $T_0$: indeed
+$([n]\circ\tilde u)|_{T_0}=[n]\circ(\tilde u|_{T_0})=[n]\circ a=b|_{T_0}$.
+Hence
+\[
+  c:=([n]\circ\tilde u)\cdot b^{-1}\in
+  N(R,I)=\ker\bigl(A(R)\to A(R/I)\bigr).
+\]
+
+\emph{Step 3: correct the error.}  By \Cref{cor:av-kernel-npow} the map
+$w\mapsto w^n$ is \emph{surjective} on $N(R,I)$, so there is $w\in N(R,I)$ with
+$w^n=c^{-1}$.  Put $u:=\tilde u\cdot w$.  Then $u|_{T_0}=a\cdot1=a$, because
+$w|_{T_0}=1$.  Moreover, using \Cref{lem:av-mulby-points} and the commutativity
+of $A(R)$ (\Cref{prop:av-basic}),
+\[
+  [n]\circ u=u^n=\tilde u^{\,n}\cdot w^n=([n]\circ\tilde u)\cdot c^{-1}
+  =([n]\circ\tilde u)\cdot\bigl(([n]\circ\tilde u)^{-1}\cdot b\bigr)=b .
+\]
+So $u$ is the required lift.
+\end{proof}
+
+\begin{remark}[Reading this affine-locally]\label{rem:av-smooth-affine-local}
+\uses{thm:av-mulby-formally-smooth, lem:av-lift-lands-in-open}
+The proof above is written with target $A$, but for the formalisation one wants
+it for a pair of affine opens.  Let $U,V\subseteq A$ be affine opens with
+$[n](U)\subseteq V$, let $B$ be a $\Gamma(V,\O)$-algebra, let $I\subseteq B$ be
+a square-zero ideal and let $\Gamma(U,\O)\to B/I$ be a
+$\Gamma(V,\O)$-algebra map.  Geometrically this is a morphism
+$a\colon\Spec B/I\to U$ together with $b\colon\Spec B\to V$ as in the theorem.
+Two observations make the affine-local statement follow from the proof above.
+\begin{enumerate}
+  \item In Step 1 the morphism $a$ lands in the affine open $U$, so only the
+    lifting property of the $K$-algebra $\Gamma(U,\O)$ is needed --- that is,
+    only formal smoothness of $\Gamma(U,\O)$ over $K$, which Mathlib provides
+    from smoothness of $A\to\Spec K$ through \texttt{HasRingHomProperty}.  No
+    formal smoothness for morphisms of schemes is required.
+  \item The lift $u$ produced in Step 3 need not visibly land in $U$, but it
+    does: $u|_{T_0}=a$ lands in $U$, so \Cref{lem:av-lift-lands-in-open}
+    applies.
+\end{enumerate}
+Thus the whole of \Cref{sec:av-etale-unramified,sec:av-etale-smooth} can be
+carried out with only ring-level formal smoothness and formal unramifiedness,
+which is what Mathlib has.
+\end{remark}
+
+\subsection{$[n]$ is \'etale}\label{sec:av-etale-conclusion}
+
+\begin{lemma}[$[n]$ is locally of finite presentation]\label{lem:av-mulby-lfp}
+\uses{prop:av-basic, def:av-mulby}
+\lean{AlgebraicGeometry.GrpObj.smooth_npow_left}
+\leanok
+The morphism $[n]\colon A\to A$ is locally of finite presentation.
+\end{lemma}
+\begin{proof}
+\uses{prop:av-basic}
+\leanok
+By \Cref{prop:av-basic} the structure morphism $\pi\colon A\to\Spec K$ is
+smooth, hence locally of finite presentation.  Now $[n]$ is a morphism of
+$K$-schemes, so $\pi\circ[n]=\pi$; and a morphism $f\colon X\to Y$ of schemes
+over $S$ with $X\to S$ and $Y\to S$ locally of finite presentation is itself
+locally of finite presentation, by \stacksproject{02FV}.  Affine-locally this
+is the statement that if $B$ and $C$ are finitely presented $K$-algebras then
+$C$ is a finitely presented $B$-algebra for any $K$-algebra map $B\to C$, and
+that is the form the formalisation uses: Mathlib \texttt{v4.33.1} has no
+cancellation for \texttt{LocallyOfFinitePresentation} at the level of schemes,
+so the Lean proof cancels at ring level with
+\texttt{RingHom.FinitePresentation.of\_comp\_finiteType} applied to the
+structure map $K\to\Gamma(V,\O)$ of an affine chart.
+\end{proof}
+
+\begin{theorem}[$[n]$ is \'etale for $n$ invertible]\label{thm:av-mulby-etale}
+\uses{thm:av-mulby-formally-unramified, thm:av-mulby-formally-smooth,
+lem:av-mulby-lfp}
+\lean{AlgebraicGeometry.IsAbelianVariety.etale_mulBy,
+AlgebraicGeometry.GrpObj.etale_npow_left}
+\leanok
+Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
+$K$.  Then $[n]\colon A\to A$ is \'etale.  This holds over an arbitrary field.
+\end{theorem}
+\begin{proof}
+\uses{thm:av-mulby-formally-unramified, thm:av-mulby-formally-smooth,
+lem:av-mulby-lfp}
+\leanok
+By \Cref{thm:av-mulby-formally-smooth} the morphism $[n]$ is formally smooth,
+and by \Cref{lem:av-mulby-lfp} it is locally of finite presentation; a formally
+smooth morphism that is locally of finite presentation is smooth
+(\stacksproject{02H6}), and a smooth morphism is flat.  \emph{This is where
+flatness comes from in the route written here: from
+\Cref{thm:av-mulby-formally-smooth}, not from a dimension count and not from
+miracle flatness.}  By \Cref{thm:av-mulby-formally-unramified} the morphism
+$[n]$ is formally unramified.  Now
+\[
+  \text{Flat}\ +\ \text{FormallyUnramified}\ +\
+  \text{LocallyOfFinitePresentation}\ \Longrightarrow\ \text{\'etale},
+\]
+which in Mathlib is
+\texttt{AlgebraicGeometry.Etale.of\_formallyUnramified\_of\_flat}.
+Equivalently one may use
+\texttt{AlgebraicGeometry.Etale.eq\_smoothOfRelativeDimension\_zero}, which
+identifies the \'etale morphisms with the smooth ones of relative dimension
+$0$; on that route one has to produce the relative dimension $0$ instead, which
+is no easier.
+\end{proof}
+
+\begin{remark}[The cheapest formalisation route]
+\label{rem:av-etale-formalisation-route}
+\uses{thm:av-mulby-etale, rem:av-smooth-affine-local,
+rem:av-unramified-affine-local}
+There is a shorter path that introduces no new class for schemes at all.  For
+each pair of affine opens $U,V\subseteq A$ with $[n](U)\subseteq V$, prove
+formal unramifiedness of $\Gamma(U,\O)$ over $\Gamma(V,\O)$ by
+\Cref{thm:av-mulby-formally-unramified} read through
+\Cref{rem:av-unramified-affine-local}, and formal smoothness of $\Gamma(U,\O)$
+over $\Gamma(V,\O)$ by \Cref{thm:av-mulby-formally-smooth} read through
+\Cref{rem:av-smooth-affine-local}.  Together these are
+\texttt{Algebra.FormallyEtale}; with finite presentation
+(\Cref{lem:av-mulby-lfp}) they are \texttt{Algebra.Etale}; and
+\texttt{HasRingHomProperty} for \texttt{AlgebraicGeometry.Etale} and
+\texttt{RingHom.Etale} promotes that to \'etaleness of $[n]$.  The
+formalisation, in
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}, follows this
+affine-local strategy but assembles it differently: it establishes the
+scheme-level classes \texttt{AlgebraicGeometry.FormallyUnramified} and
+\texttt{AlgebraicGeometry.Smooth} for $[n]$ chart by chart through
+\texttt{HasRingHomProperty.iff\_appLE}, so that only
+\texttt{Algebra.FormallyUnramified} and \texttt{Algebra.FormallySmooth} appear
+at ring level, and concludes with
+\texttt{AlgebraicGeometry.Etale.of\_formallyUnramified\_of\_flat} rather than
+building \texttt{Algebra.Etale}.  Either way the mathematical content is
+entirely \Cref{cor:av-kernel-npow}.
+\end{remark}
+
+\subsection{Corollaries for $n$ invertible}\label{sec:av-etale-corollaries}
+
+\begin{theorem}[$[n]$ is finite, flat and surjective for $n$ invertible]
+\label{thm:av-mulby-etale-corollaries}
+\uses{thm:av-mulby-etale, thm:av-zariski-main, prop:av-basic}
+\lean{AlgebraicGeometry.IsAbelianVariety.isFinite_mulBy_of_natCast_ne_zero,
+AlgebraicGeometry.IsAbelianVariety.flat_mulBy_of_natCast_ne_zero,
+AlgebraicGeometry.IsAbelianVariety.surjective_mulBy_of_natCast_ne_zero}
+\leanok
+Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
+$K$.  Then $[n]\colon A\to A$ is finite, flat and surjective.  This holds over
+an arbitrary field.
+\end{theorem}
+\begin{proof}
+\uses{thm:av-mulby-etale, thm:av-zariski-main, prop:av-basic, lem:av-mulby-lfp}
+\leanok
+\emph{Flat and locally quasi-finite.}  By \Cref{thm:av-mulby-etale} the
+morphism $[n]$ is \'etale, hence flat, and hence locally quasi-finite: an
+\'etale morphism is formally unramified and locally of finite type, and a
+formally unramified morphism locally of finite type is locally quasi-finite.
+
+\emph{Proper.}  Write $\pi\colon A\to\Spec K$ for the structure morphism, so
+that $\pi\circ[n]=\pi$.  By \Cref{prop:av-basic}, $\pi$ is proper and
+separated.  If $g\circ f$ is proper and $g$ is separated then $f$ is proper
+(\stacksproject{01W6}); applying this with $f=[n]$ and $g=\pi$ shows that $[n]$
+is proper.
+
+\emph{Finite.}  By \Cref{thm:av-zariski-main} a proper, locally quasi-finite
+morphism is finite; so $[n]$ is finite.
+
+\emph{Surjective.}  The image $[n](A)$ is closed, because a finite morphism is
+closed.  It is also open, because $[n]$ is flat and locally of finite
+presentation (\Cref{lem:av-mulby-lfp}), and a flat morphism locally of finite
+presentation is open (\stacksproject{01UA}).  Finally $[n](A)$ is non-empty and
+$A$ is connected, both by \Cref{prop:av-basic}; a non-empty subset of a
+connected space that is both open and closed is the whole space, so
+$[n](A)=A$.
+\end{proof}
+
+\begin{corollary}[$A[n]$ is finite \'etale for $n$ invertible]
+\label{cor:av-torsion-finite-etale}
+\uses{thm:av-mulby-etale-corollaries, lem:av-torsion-pullback}
+\lean{AlgebraicGeometry.IsAbelianVariety.isFinite_torsion_of_natCast_ne_zero,
+AlgebraicGeometry.IsAbelianVariety.flat_torsion_of_natCast_ne_zero,
+AlgebraicGeometry.IsAbelianVariety.etale_torsion}
+\leanok
+Let $A$ be an abelian variety over a field $K$ and let $n$ be invertible in
+$K$.  Then $A[n]\to\Spec K$ is finite, flat and \'etale, of rank $\deg[n]$.
+This holds over an arbitrary field.
+\end{corollary}
+\begin{proof}
+\uses{thm:av-mulby-etale-corollaries, thm:av-mulby-etale,
+lem:av-torsion-pullback, lem:av-degree-base-change}
+\leanok
+By \Cref{lem:av-torsion-pullback} the morphism $A[n]\to\Spec K$ is the base
+change of $[n]$ along the identity section.  Finiteness, flatness and
+\'etaleness are stable under base change and hold for $[n]$ by
+\Cref{thm:av-mulby-etale-corollaries} and \Cref{thm:av-mulby-etale}; the rank
+is preserved by \Cref{lem:av-degree-base-change}.
+\end{proof}
+
+\begin{remark}[Which statements need which field]\label{rem:av-field-hypotheses}
+\uses{lem:av-translation, lem:av-translation-intertwines,
+lem:av-translation-spreading, lem:av-kernel-cotangent, lem:av-kernel-group-law,
+cor:av-kernel-npow, thm:av-mulby-formally-unramified,
+thm:av-mulby-formally-smooth, thm:av-mulby-etale,
+thm:av-mulby-etale-corollaries, cor:av-torsion-finite-etale,
+prop:av-etale-torsion, prop:av-divisibility, prop:av-finite-etale-points}
+This is where a blueprint earns its keep, because the Lean statements are all
+over an arbitrary field while the classical accounts are all over an
+algebraically closed one.
+\begin{itemize}
+  \item \textbf{Arbitrary field, no hypothesis at all.}
+    \Cref{lem:av-translation} and \Cref{lem:av-translation-intertwines}, the
+    existence of translations and the intertwining identity;
+    \Cref{def:av-cotangent}, \Cref{lem:av-cotangent-affine},
+    \Cref{lem:av-cotangent-product} and \Cref{lem:av-cotangent-group-law};
+    \Cref{lem:av-kernel-cotangent}, \Cref{lem:av-kernel-group-law},
+    \Cref{cor:av-kernel-module} and \Cref{cor:av-kernel-npow};
+    \Cref{lem:av-lift-lands-in-open},
+    \Cref{thm:av-mulby-formally-unramified},
+    \Cref{thm:av-mulby-formally-smooth}, \Cref{lem:av-mulby-lfp},
+    \Cref{thm:av-mulby-etale}, \Cref{thm:av-mulby-etale-corollaries} and
+    \Cref{cor:av-torsion-finite-etale}.  In particular the \emph{whole} of the
+    \'etale route is valid over an arbitrary field, and the ``$n$ prime to the
+    characteristic'' of the classical statement of Proposition 2.8 is used only
+    through ``$n$ is invertible in $K$'', which over a field is the same
+    condition.
+  \item \textbf{Algebraically closed.}  Only three statements need it.
+    \Cref{lem:av-translation-spreading}, because it identifies the $K$-points
+    with the closed points; \Cref{prop:av-divisibility}, for the same reason;
+    and the second half of \Cref{prop:av-etale-torsion}, the count of
+    $A[n](K)$ and the isomorphism $A[n](K)\cong(\Z/n)^{2g}$, because a finite
+    \'etale $K$-scheme of rank $r$ has $r$ rational points only when $K$ is
+    separably closed.  The first half of \Cref{prop:av-etale-torsion} --- that
+    $A[n]$ is finite \'etale of rank $n^{2g}$ as a scheme --- needs no
+    hypothesis on $K$.
+  \item \textbf{Separably closed suffices.}  In
+    \Cref{prop:av-finite-etale-points} the decomposition of a finite \'etale
+    algebra as a product of copies of the base field needs only that $K$ is
+    separably closed, and that is how Mathlib states it; the residue fields of
+    a finite \'etale $K$-scheme are separable over $K$, so the passage from
+    points of the scheme to $K$-points needs only separable closedness as well.
+    We state the proposition over an algebraically closed field because that is
+    the hypothesis carried by \Cref{prop:av-divisibility}.
+  \item \textbf{Perfect.}  Nothing in this chapter needs $K$ perfect.  It is
+    worth saying why, because Mathlib's tools for smoothness over a field ---
+    \texttt{genericPoint\_mem\_smoothLocus\_of\_perfectField} and
+    \texttt{dense\_smoothLocus\_of\_perfectField} --- are stated for morphisms
+    to the spectrum of a perfect field, and would be the natural entry point
+    for an argument through the smooth locus.  They do not apply to
+    $[n]\colon A\to A$, whose target is not the spectrum of a field, and the
+    route above avoids the smooth locus altogether.
+\end{itemize}
+\end{remark}
+
+\section{The general case: the theorem of the cube}\label{sec:av-cube}
+
+The \'etale route says nothing about the degree of $[n]$, and nothing at all
+when $n$ is divisible by the characteristic of $K$.  Both come from the theory
+of line bundles on abelian varieties.  This section states the five inputs that
+are needed, with proof sketches and references, and derives the remaining parts
+of \Cref{prop:av-isogeny} from them.  Two of the five, \Cref{thm:av-cube} and
+\Cref{thm:av-mulby-pullback}, are proved in \Cref{chap:cube} and are quoted
+here from there.  The other three are proved in \Cref{chap:deg} and are
+likewise quoted here.  Mathlib \texttt{v4.33.1} has no invertible sheaves on a
+scheme, no Picard group of a scheme, no ampleness, no cohomology of coherent
+sheaves and no intersection numbers, so \emph{none} of the five can currently
+even be stated in Lean; \Cref{sec:cube-cost} and \Cref{sec:deg-cost} count
+between them what all five would cost.  The statements below carry full labels
+so that a later chapter can depend on them.
+
+\statusnote{Whether this project builds the layer of algebraic geometry that
+the five inputs of this section require --- invertible sheaves and the Picard
+group of a scheme, ampleness, cohomology of coherent sheaves, intersection
+numbers --- was an open scope question when this section was written.  It has
+since been settled in favour of building it, and the mathematics has been
+written out: \Cref{chap:cube} proves \Cref{thm:av-cube} and
+\Cref{thm:av-mulby-pullback}, and \Cref{chap:deg} proves the other three
+inputs together with \Cref{thm:av-degree-formula} and
+\Cref{thm:av-isogeny-general} themselves.  Nothing in this section is
+conditional any more.  What remains open is the Lean layer beneath it, counted
+in \Cref{sec:cube-cost} and \Cref{sec:deg-cost}; until it exists, the Lean
+declarations listed in \Cref{sec:av-status} as deliberate placeholders stay
+unproved.}
+
+\begin{theorem}[Theorem of the cube]\label{thm:av-cube}
+Let $X$ and $Y$ be proper varieties over an algebraically closed field $K$, let
+$Z$ be a connected reduced scheme of finite type over $K$, and let
+$x_0\in X$, $y_0\in Y$, $z_0\in Z$ be rational points.  Let $L$ be a line
+bundle on $X\times Y\times Z$ whose restrictions to
+\[
+  \{x_0\}\times Y\times Z,\qquad X\times\{y_0\}\times Z,\qquad
+  X\times Y\times\{z_0\}
+\]
+are all trivial.  Then $L$ is trivial.
+\end{theorem}
+\begin{proof}
+\uses{thm:cube-cube}
+This is \Cref{thm:cube-cube}, word for word; it is proved in
+\Cref{chap:cube} and is restated here so that \Cref{sec:av-cube} reads on its
+own.  The proof there is the classical one of
+\cite[\S6]{MumfordAbelianVarieties} and \cite[I, \S5]{MilneAbelianVarieties}:
+the locus in $Z$ over which $L$ is trivial is closed by the seesaw theorem and
+open by a K\"unneth argument on the square-zero thickenings of a point of it
+together with the theorem on formal functions, hence is all of $Z$.
+\end{proof}
+
+\begin{theorem}[Pullback of a symmetric line bundle along $[n]$]
+\label{thm:av-mulby-pullback}
+\uses{def:av-mulby}
+Let $A$ be an abelian variety over an algebraically closed field $K$ and let
+$L$ be a line bundle on $A$.  Then for every $n\in\Z$
+\[
+  [n]^*L\;\cong\;L^{\otimes\frac{n^2+n}2}\otimes
+  \bigl([-1]^*L\bigr)^{\otimes\frac{n^2-n}2}.
+\]
+In particular, if $L$ is \emph{symmetric}, that is $[-1]^*L\cong L$, then
+$[n]^*L\cong L^{\otimes n^2}$.
+\end{theorem}
+\begin{proof}
+\uses{thm:cube-mulby-pullback}
+This is \Cref{thm:cube-mulby-pullback}, proved in \Cref{sec:cube-abelian};
+what follows is a sketch of the argument given there, not a second proof, so
+the statements it mentions are recorded as dependencies of
+\Cref{thm:cube-mulby-pullback} in \Cref{chap:cube} and not again here.  Apply
+\Cref{thm:av-cube} on
+$A\times A\times A$ to the line bundle
+\[
+  m_{123}^*L\otimes m_{12}^*L^{-1}\otimes m_{13}^*L^{-1}\otimes
+  m_{23}^*L^{-1}\otimes p_1^*L\otimes p_2^*L\otimes p_3^*L,
+\]
+where $m_S$ denotes the sum of the coordinates indexed by $S$ and $p_i$ the
+projections: its restrictions to the three coordinate slices are trivial, so it
+is trivial; that is \Cref{thm:cube-abelian}.  Evaluating the resulting identity
+at the three points $[n]$, $[1]$ and $[-1]$ of the group $A(A)$ turns it into
+the recursion
+\[
+  [n+1]^*L\otimes[n-1]^*L\cong\bigl([n]^*L\bigr)^{\otimes2}\otimes L\otimes
+  [-1]^*L,
+\]
+of \Cref{cor:cube-mulby-recursion}, and the stated formula follows by a
+two-sided induction on $n\in\Z$ from the three base cases $[0]^*L\cong\O_A$,
+$[1]^*L\cong L$ and $[-1]^*L$.  See \cite[\S6]{MumfordAbelianVarieties} and
+\cite[I, \S5]{MilneAbelianVarieties}.
+\end{proof}
+
+\begin{proposition}[Existence of a symmetric ample line bundle]
+\label{prop:av-symmetric-ample}
+Every abelian variety $A$ over an algebraically closed field carries an ample
+line bundle $L$ with $[-1]^*L\cong L$.
+\end{proposition}
+\begin{proof}
+\uses{prop:deg-symmetric-ample}
+This is \Cref{prop:deg-symmetric-ample}, proved in \Cref{sec:deg-positivity}
+of \Cref{chap:deg}; what follows is a sketch of the argument given there, not
+a second proof.  An abelian variety is projective, so it carries some ample
+line bundle $L_0$ --- that is \Cref{prop:deg-abelian-projective}, following
+\cite[I, \S7]{MilneAbelianVarieties}.  Then $L:=L_0\otimes[-1]^*L_0$ is ample,
+being a tensor product of ample bundles --- $[-1]$ is an isomorphism, so
+$[-1]^*L_0$ is ample --- and it is symmetric because $[-1]$ is an involution.
+\end{proof}
+
+\begin{proposition}[Positivity of the top self-intersection of an ample bundle]
+\label{prop:av-ample-self-intersection}
+Let $X$ be a proper variety of dimension $g$ over an algebraically closed field
+and let $L$ be an ample line bundle on $X$.  Then the self-intersection number
+$(L^g)$ is a positive integer.
+\end{proposition}
+\begin{proof}
+\uses{prop:deg-ample-positive}
+This is \Cref{prop:deg-ample-positive}, proved in \Cref{sec:deg-positivity} of
+\Cref{chap:deg}; what follows is a sketch of the argument given there, not a
+second proof.  By Snapper's theorem the function
+$m\mapsto\chi(X,L^{\otimes m})$ is a numerical polynomial of degree at most
+$g$, and $(L^g)$ is its $g$-th difference, a constant.  Replacing $L$ by a very
+ample power and cutting with a hyperplane section $D$ that avoids the
+associated points identifies that constant with the corresponding one on $D$,
+which has dimension $g-1$; the induction ends at $g=0$, where the number is
+$\dim_K\Gamma(X,\O_X)>0$.
+\end{proof}
+
+\begin{proposition}[Degree and intersection numbers]
+\label{prop:av-degree-intersection}
+\uses{def:av-degree}
+Let $f\colon X\to Y$ be a finite, flat, surjective morphism of proper varieties
+of the same dimension $g$ over an algebraically closed field, of degree $d$.
+Then for every line bundle $L$ on $Y$
+\[
+  \bigl((f^*L)^g\bigr)=d\cdot\bigl(L^g\bigr).
+\]
+\end{proposition}
+\begin{proof}
+\uses{prop:deg-projection-formula}
+This is \Cref{prop:deg-projection-formula}, proved in
+\Cref{sec:deg-intersection} of \Cref{chap:deg}; what follows is a sketch of
+the argument given there, not a second proof.  By the projection formula
+$f_*\bigl((f^*L)^{\otimes m}\bigr)\cong L^{\otimes m}\otimes f_*\O_X$, and
+$f_*\O_X$ is locally free of rank $d$ because $f$ is finite and flat of degree
+$d$.  Since $f$ is finite, cohomology is unchanged by $f_*$, so
+$\chi\bigl(X,(f^*L)^{\otimes m}\bigr)=\chi\bigl(Y,L^{\otimes m}\otimes
+f_*\O_X\bigr)$, whose Snapper polynomial has degree-$g$ coefficient
+$d\cdot(L^g)/g!$.  Comparing leading coefficients gives the identity.  See
+\cite[\S5]{MumfordAbelianVarieties}.
+\end{proof}
+
+\begin{theorem}[The degree of $[n]$]\label{thm:av-degree-formula}
+\uses{thm:av-mulby-pullback, prop:av-symmetric-ample,
+prop:av-ample-self-intersection, prop:av-degree-intersection, def:av-degree}
+Let $A$ be an abelian variety of dimension $g$ over an algebraically closed
+field $K$ and let $n\neq0$.  Suppose $[n]$ is finite, flat and surjective.
+Then $\deg[n]=n^{2g}$.  The hypothesis is automatic: it is
+\Cref{thm:av-isogeny-general}.
+\end{theorem}
+\begin{proof}
+\uses{thm:deg-degree-formula, thm:av-mulby-pullback,
+prop:av-symmetric-ample, prop:av-ample-self-intersection,
+prop:av-degree-intersection}
+This is \Cref{thm:deg-degree-formula}, proved in \Cref{sec:deg-degree} of
+\Cref{chap:deg}; what follows is a sketch of the argument given there, not a
+second proof.  Choose a symmetric ample $L$ by
+\Cref{prop:av-symmetric-ample}.  By \Cref{thm:av-mulby-pullback},
+$[n]^*L\cong L^{\otimes n^2}$, so
+$\bigl(([n]^*L)^g\bigr)=n^{2g}(L^g)$ by multilinearity of the intersection
+number.  On the other hand $[n]$ is finite, flat and surjective between proper
+varieties of dimension $g$, so \Cref{prop:av-degree-intersection} gives
+$\bigl(([n]^*L)^g\bigr)=\deg[n]\cdot(L^g)$.  By
+\Cref{prop:av-ample-self-intersection} we have $(L^g)>0$, so it may be
+cancelled, and $\deg[n]=n^{2g}$.
+\end{proof}
+
+\begin{theorem}[$[n]$ is an isogeny for every $n\neq0$]
+\label{thm:av-isogeny-general}
+\uses{thm:av-mulby-pullback, prop:av-symmetric-ample, thm:av-zariski-main,
+prop:av-basic, lem:av-translation-intertwines}
+Let $A$ be an abelian variety of dimension $g$ over an algebraically closed
+field $K$ and let $n\neq0$ be a natural number, possibly divisible by the
+characteristic of $K$.  Then $[n]$ is finite, flat and surjective.
+\end{theorem}
+\begin{proof}
+\uses{thm:deg-isogeny, thm:av-mulby-pullback, prop:av-symmetric-ample,
+thm:av-zariski-main, prop:av-basic, lem:av-translation-intertwines,
+lem:av-torsion-pullback}
+This is \Cref{thm:deg-isogeny}, proved in \Cref{sec:deg-isogeny} of
+\Cref{chap:deg}; what follows is a sketch of the argument given there, not a
+second proof.  Choose a symmetric ample $L$ by
+\Cref{prop:av-symmetric-ample}.  By \Cref{thm:av-mulby-pullback},
+$[n]^*L\cong L^{\otimes n^2}$, which is ample because $n\neq0$.  The
+restriction of $[n]^*L$ to $A[n]$ is trivial, because $[n]$ maps $A[n]$ to the
+identity point (\Cref{lem:av-torsion-pullback}).  So $A[n]$ is a proper scheme
+carrying a line bundle that is at once ample and trivial, which forces
+$\dim A[n]=0$; being proper over $K$ as well, $A[n]$ is finite.  By
+\Cref{lem:av-translation-intertwines} every fibre of $[n]$ over a rational
+point is a translate of $A[n]$, hence finite, so $[n]$ is locally
+quasi-finite; it is proper by the cancellation argument in the proof of
+\Cref{thm:av-mulby-etale-corollaries}; hence it is finite by
+\Cref{thm:av-zariski-main}.  Surjectivity follows because the image is closed
+of dimension $g=\dim A-\dim A[n]$ while $A$ is irreducible
+(\Cref{prop:av-basic}).  Flatness follows from miracle flatness: $[n]$ is a
+finite surjective morphism between smooth, hence regular, varieties of the same
+dimension --- which is \Cref{prop:deg-miracle-flatness}, the one input of
+\Cref{chap:deg} that is pure commutative algebra and the only thing left open
+about this theorem.  See \cite[\S6]{MumfordAbelianVarieties} and
+\cite[I, \S7]{MilneAbelianVarieties}.
+\end{proof}
+
+\begin{remark}[Descending to an arbitrary field]
+\label{rem:av-descent-to-any-field}
+\uses{thm:av-isogeny-general, thm:av-degree-formula, def:av-abelian-variety}
+\Cref{thm:av-degree-formula} and \Cref{thm:av-isogeny-general} are stated over
+an algebraically closed field, as in \cite[\S6]{MumfordAbelianVarieties}, while
+\Cref{prop:av-isogeny} is over an arbitrary field.  The passage is by descent:
+an abelian variety over $K$ stays an abelian variety after base change along
+$\Spec\bar K\to\Spec K$, the formation of $[n]$ commutes with that base change,
+and finiteness, flatness, surjectivity and the degree of a morphism may all be
+checked after the faithfully flat base change $\Spec\bar K\to\Spec K$.  The
+stability of \Cref{def:av-abelian-variety} under base change along an extension
+of the ground field is already an instance in
+\texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Group/Abelian.lean}.
+\end{remark}
+
+\section{Formalisation status}\label{sec:av-status}
+
+The Lean sources are
+\texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Isogeny.lean},
+\texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Torsion.lean},
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Infinitesimal.lean} and
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}, together with the
+mirror files under \texttt{WeilConjectures/Mathlib/}.
+
+\emph{Formalised, with a complete Lean proof.}
+\Cref{def:av-abelian-variety}; \Cref{prop:av-basic}; \Cref{def:av-mulby};
+\Cref{lem:av-mulby-points}; \Cref{def:av-torsion} and
+\Cref{lem:av-torsion-pullback}; \Cref{def:av-degree} and
+\Cref{lem:av-degree-base-change}; \Cref{thm:av-zariski-main};
+\Cref{prop:av-finite-etale-points}; \Cref{thm:av-finite-abelian-group};
+\Cref{thm:av-mulby-formally-unramified},
+\Cref{thm:av-mulby-formally-smooth} and \Cref{lem:av-mulby-lfp}, the last two
+packaged into one declaration; \Cref{thm:av-mulby-etale};
+\Cref{thm:av-mulby-etale-corollaries};
+\Cref{cor:av-torsion-finite-etale}; and the two derivations
+\Cref{prop:av-etale-torsion} and \Cref{prop:av-divisibility}.  The Lean proofs
+of the last two are complete \emph{given} the four statements listed next,
+which is exactly the sense in which a blueprint node can be green above a red
+one.
+
+\emph{Formalised as a deliberate \texttt{sorry}.}  Four declarations in
+\texttt{WeilConjectures/AlgebraicGeometry/AbelianVariety/Isogeny.lean}:
+\begin{itemize}
+  \item \texttt{AlgebraicGeometry.IsAbelianVariety.isFinite\_mulBy} ---
+    finiteness of $[n]$, part of \Cref{prop:av-isogeny};
+  \item \texttt{AlgebraicGeometry.IsAbelianVariety.flat\_mulBy} --- flatness of
+    $[n]$, part of \Cref{prop:av-isogeny};
+  \item \texttt{AlgebraicGeometry.IsAbelianVariety.surjective\_mulBy} ---
+    surjectivity of $[n]$, part of \Cref{prop:av-isogeny};
+  \item \texttt{AlgebraicGeometry.IsAbelianVariety.finrank\_mulBy} ---
+    $\deg[n]=n^{2g}$, that is \Cref{thm:av-degree-formula}.
+\end{itemize}
+All four are the content of \Cref{sec:av-cube}, are owned by issue 776, and
+are blocked on the scope question recorded in the status note there.
+
+The good-characteristic case, by contrast, is complete.  The first three of the
+four are open only when $n$ is divisible by the characteristic of $K$:
+\Cref{thm:av-mulby-etale-corollaries} gives finiteness, flatness and
+surjectivity of $[n]$ for $n$ invertible in $K$ independently of
+\Cref{sec:av-cube}, and those statements are formalised without a
+\texttt{sorry} as \texttt{isFinite\_mulBy\_of\_natCast\_ne\_zero},
+\texttt{flat\_mulBy\_of\_natCast\_ne\_zero} and
+\texttt{surjective\_mulBy\_of\_natCast\_ne\_zero} in the same file, as is the
+properness of $[n]$ that the first and third of them rest on (the general
+\texttt{AlgebraicGeometry.isProper\_left} in
+\texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}).
+Consequently \Cref{prop:av-divisibility} is proved with no \texttt{sorry} for
+$n$ invertible in $K$ --- that is
+\texttt{exists\_npow\_eq\_of\_natCast\_ne\_zero}, which like the node itself
+still asks for $K$ algebraically closed --- and so is the finite-flat-\'etale
+half of \Cref{prop:av-etale-torsion}, which is
+\Cref{cor:av-torsion-finite-etale}.  What does \emph{not} follow for $n$
+invertible is the rank $n^{2g}$, because \texttt{finrank\_mulBy} is open in
+every characteristic; see \Cref{rem:av-etale-route-scope}.
+
+\emph{Statement formalised, but proved by a different argument.}
+\Cref{cor:av-kernel-npow}, as
+\texttt{AlgebraicGeometry.GrpObj.eq\_one\_of\_pow\_eq\_one} and
+\texttt{AlgebraicGeometry.GrpObj.exists\_pow\_eq}, both without a
+\texttt{sorry}.  The Lean proof does not go through the cotangent space, so the
+proof written here is not the formalised one and is left unmarked; the status
+note at the head of \Cref{sec:av-etale-route} records the difference, and
+writing the formalised argument out as a node of its own is a follow-up.
+
+\emph{No Lean statement yet.}  Everything else in \Cref{sec:av-etale-route}:
+the translations
+\Cref{def:av-translation}, \Cref{lem:av-translation},
+\Cref{lem:av-translation-intertwines} and
+\Cref{lem:av-translation-spreading}; the cotangent-space material
+\Cref{def:av-cotangent}, \Cref{lem:av-cotangent-affine},
+\Cref{lem:av-cotangent-product} and \Cref{lem:av-cotangent-group-law}; the
+kernel computation \Cref{lem:av-kernel-cotangent},
+\Cref{lem:av-kernel-group-law} and \Cref{cor:av-kernel-module}; and
+\Cref{lem:av-lift-lands-in-open}, which has no declaration of its own but whose
+content the Lean proof does use, inline in the divisibility step of
+\texttt{WeilConjectures/AlgebraicGeometry/Group/Etale.lean}.  And
+everything in \Cref{sec:av-cube}:
+\Cref{thm:av-cube}, \Cref{thm:av-mulby-pullback},
+\Cref{prop:av-symmetric-ample}, \Cref{prop:av-ample-self-intersection},
+\Cref{prop:av-degree-intersection}, \Cref{thm:av-degree-formula} and
+\Cref{thm:av-isogeny-general} --- none of which can be stated in Mathlib
+\texttt{v4.33.1} at all.
