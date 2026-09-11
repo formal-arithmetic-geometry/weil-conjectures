@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Stalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
@@ -287,6 +288,26 @@ lemma fromInfinitesimalNeighborhood_apply (z : X.infinitesimalNeighborhood x n) 
   rw [fromInfinitesimalNeighborhood, Scheme.Hom.comp_apply,
     X.eq_closedPoint_infinitesimalNeighborhood x n z, Spec_closedPoint,
     fromSpecStalk_closedPoint]
+
+/-- The `n`-th infinitesimal neighbourhood of `x` lies over every open neighbourhood of `x`. -/
+lemma preimage_fromInfinitesimalNeighborhood_eq_top {U : X.Opens} (hxU : x ∈ U) :
+    X.fromInfinitesimalNeighborhood x n ⁻¹ᵁ U = ⊤ := by
+  ext z
+  simpa using hxU
+
+/-- Pulling a function on an open neighbourhood `U` of `x` back to the `n`-th infinitesimal
+neighbourhood of `x` is taking its germ at `x` and reducing modulo `𝔪_x ^ (n + 1)`. -/
+lemma fromInfinitesimalNeighborhood_appLE {U : X.Opens} (hxU : x ∈ U)
+    (h : (⊤ : (X.infinitesimalNeighborhood x n).Opens) ≤
+      X.fromInfinitesimalNeighborhood x n ⁻¹ᵁ U) :
+    (X.fromInfinitesimalNeighborhood x n).appLE U ⊤ h =
+      X.presheaf.germ U x hxU ≫ X.toInfinitesimalRing x n ≫
+        (ΓSpecIso (X.infinitesimalRing x n)).inv := by
+  have hdef : X.fromInfinitesimalNeighborhood x n =
+      Spec.map (X.toInfinitesimalRing x n) ≫ X.fromSpecStalk x := rfl
+  rw [Scheme.Hom.appLE_congr_hom hdef U ⊤ h h, Scheme.Hom.comp_appLE, fromSpecStalk_app hxU,
+    Category.assoc, Category.assoc, Scheme.Hom.map_appLE, Scheme.Hom.appLE_top_top,
+    ← ΓSpecIso_inv_naturality]
 
 end Points
 

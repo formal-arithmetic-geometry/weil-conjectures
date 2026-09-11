@@ -145,6 +145,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.Retract
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
@@ -240,6 +241,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
+public import WeilConjectures.Mathlib.LinearAlgebra.Quotient.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Binomial
