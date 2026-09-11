@@ -1205,4 +1205,51 @@ theorem Scheme.Modules.isCoherent_iff (M : (Spec R).Modules) [M.IsQuasicoherent]
     SheafOfModules.isFiniteType_of_iso.{u, u, u} (asIso M.fromTildeΓ).symm
   exact tilde.finite_of_isFiniteType _
 
+namespace Scheme.Modules
+
+variable {X : Scheme.{u}}
+
+/-- Sections over the image of an open immersion `ψ : Spec S ⟶ X` are finite over
+`Γ(X, _)` as soon as they are finite over `S`. -/
+lemma finite_sections_of_finite_restrict' {S : CommRingCat.{u}} (ψ : Spec S ⟶ X)
+    [IsOpenImmersion ψ] (M : X.Modules) [Module.Finite S Γ(M.restrict ψ, ⊤)] :
+    Module.Finite Γ(X, ψ ''ᵁ ⊤) Γ(M, ψ ''ᵁ ⊤) := by
+  let σ : S ⟶ Γ(X, ψ ''ᵁ ⊤) := (Scheme.ΓSpecIso S).inv ≫ (ψ.appIso ⊤).inv
+  have hσ : Function.Bijective σ.hom := ConcreteCategory.bijective_of_isIso σ
+  have : RingHomSurjective σ.hom := ⟨hσ.surjective⟩
+  refine (LinearMap.finite_iff_of_bijective
+    ({ toFun := id, map_add' := fun _ _ ↦ rfl, map_smul' := ?_ } :
+      Γ(M.restrict ψ, ⊤) →ₛₗ[σ.hom] Γ(M, ψ ''ᵁ ⊤))
+    ⟨fun _ _ h ↦ h, fun y ↦ ⟨y, rfl⟩⟩).mp inferInstance
+  intro a x
+  change _ = σ.hom a • _
+  rw [smul_Spec_def, Subsingleton.elim (⊤ : (Spec S).Opens).leTop (𝟙 _)]
+  rfl
+
+/-- **The stalk of a coherent sheaf of modules is a finite module over the local ring.** -/
+theorem finite_stalk (M : X.Modules) [M.IsCoherent] (x : X) :
+    Module.Finite (X.presheaf.stalk x) (M.presheaf.stalk x) := by
+  obtain ⟨ι, U, hU', hcov, hfin⟩ := exists_isOpenCover_finite M inferInstance
+  obtain ⟨i, hi⟩ := hcov.exists_mem x
+  have him : (hU' i).fromSpec ''ᵁ ⊤ = U i := by
+    ext y
+    simp
+  have haff : IsAffineOpen ((hU' i).fromSpec ''ᵁ ⊤) := by rw [him]; exact hU' i
+  have hx : x ∈ (hU' i).fromSpec ''ᵁ ⊤ := by rw [him]; exact hi
+  have hfin' : Module.Finite Γ(X, U i) Γ(M.restrict (hU' i).fromSpec, ⊤) := hfin i
+  have hsec := finite_sections_of_finite_restrict' (hU' i).fromSpec M
+  let _ : Algebra Γ(X, (hU' i).fromSpec ''ᵁ ⊤) (X.presheaf.stalk x) :=
+    TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x, hx⟩
+  let _ : Module Γ(X, (hU' i).fromSpec ''ᵁ ⊤) (M.presheaf.stalk x) :=
+    module_section_stalk M ⟨x, hx⟩
+  let _ : IsScalarTower Γ(X, (hU' i).fromSpec ''ᵁ ⊤) (X.presheaf.stalk x) (M.presheaf.stalk x) :=
+    isScalarTower_section_stalk M ⟨x, hx⟩
+  have hloc : IsLocalization.AtPrime (X.presheaf.stalk x)
+      (haff.primeIdealOf ⟨x, hx⟩).asIdeal := haff.isLocalization_stalk ⟨x, hx⟩
+  have hlm := isLocalizedModule_germₗ M haff ⟨x, hx⟩
+  exact Module.Finite.of_isLocalizedModule (haff.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
+    (germₗ M ⟨x, hx⟩)
+
+end Scheme.Modules
+
 end AlgebraicGeometry
