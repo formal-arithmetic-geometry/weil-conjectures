@@ -44,6 +44,7 @@ sequences at all on the zero module, not even the empty one), rather than the va
 * `Module.depth_quotSMulTop_add_one`: dividing by a regular element in `I` drops the depth by one.
 * `Module.depth_le_supportDim`: the depth is at most the dimension of the support; in particular
   `Module.depth_le_ringKrullDim` for the ring itself.
+* `Module.exists_isRegular_length_eq_depth`: the supremum defining the depth is attained.
 
 -/
 
@@ -196,6 +197,24 @@ theorem depth_ne_top : depth I M ≠ ⊤ := by
   rw [h] at hle
   exact absurd (le_antisymm le_top
     (le_trans (by simpa using hle) (supportDim_le_ringKrullDim R M))) ringKrullDim_lt_top.ne
+
+/-- The supremum defining the depth is attained: there is an `M`-regular sequence in `I` whose
+length is `Module.depth I M`. -/
+theorem exists_isRegular_length_eq_depth :
+    ∃ rs : List R, (∀ r ∈ rs, r ∈ I) ∧ IsRegular M rs ∧ (rs.length : ℕ∞) = depth I M := by
+  obtain ⟨n, hn⟩ := ENat.ne_top_iff_exists.mp (depth_ne_top (I := I) (M := M))
+  match n, hn with
+  | 0, hn => exact ⟨[], by simp, IsRegular.nil R M, by simp [← hn]⟩
+  | (m + 1), hn =>
+    have hlt : ¬ depth I M ≤ (m : ℕ∞) := by
+      rw [← hn]
+      exact_mod_cast (Nat.lt_succ_self m).not_ge
+    rw [depth_le_iff] at hlt
+    push Not at hlt
+    obtain ⟨rs, mem, reg, hrs⟩ := hlt
+    refine ⟨rs, mem, reg, le_antisymm (le_depth_of_isRegular mem reg) ?_⟩
+    rw [← hn]
+    exact_mod_cast Nat.succ_le_of_lt (by exact_mod_cast hrs)
 
 variable (hI : I ≤ maximalIdeal R)
 include hI

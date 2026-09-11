@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Basic
@@ -28,6 +29,10 @@ itself. It is finite here, so the comparison with `ringKrullDim A : WithBot ℕ�
   which is a finitely generated algebra over a field `k`.
 * `ringKrullDim_eq_trdeg_of_isFractionRing`: the same with the transcendence degree taken over the
   field of fractions of `A`, `ringKrullDim A = Cardinal.toNat (Algebra.trdeg k K)`.
+* `Algebra.FiniteType.exists_ringKrullDim_le`: a finitely generated algebra over a field has
+  finite Krull dimension.
+* `ringKrullDim_quotient_lt`: quotienting a finitely generated domain over a field by a nonzero
+  prime strictly drops the Krull dimension.
 
 Both are proved from Noether normalization: `A` is finite, hence integral, over a polynomial ring
 `k[X₀, …, X_{s-1}]` embedded in it, and both sides of the equality are unchanged on passing to
@@ -75,3 +80,37 @@ theorem ringKrullDim_eq_trdeg_of_isFractionRing (K : Type*) [Field K] [Algebra A
   have h : Cardinal.toNat (Algebra.trdeg k K) = Cardinal.toNat (Algebra.trdeg k A) := by
     simpa using congrArg Cardinal.toNat (IsFractionRing.lift_trdeg_eq k A K)
   rw [h, ringKrullDim_eq_trdeg k A]
+
+/-- A finitely generated algebra over a field has finite Krull dimension: it is a quotient of a
+polynomial ring in finitely many variables. -/
+theorem Algebra.FiniteType.exists_ringKrullDim_le (k : Type*) (A : Type*) [Field k] [CommRing A]
+    [Algebra k A] [Algebra.FiniteType k A] : ∃ n : ℕ, ringKrullDim A ≤ n := by
+  obtain ⟨n, φ, hφ⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.mp ‹_›
+  refine ⟨n, ?_⟩
+  rw [← MvPolynomial.ringKrullDim_fin_of_field k n]
+  exact ringKrullDim_le_of_surjective φ.toRingHom hφ
+
+/-- A ring which is of finite type over a field has finite Krull dimension. -/
+theorem RingHom.FiniteType.exists_ringKrullDim_le {k A : Type*} [Field k] [CommRing A]
+    {φ : k →+* A} (hφ : φ.FiniteType) : ∃ n : ℕ, ringKrullDim A ≤ n :=
+  let _ : Algebra k A := φ.toAlgebra
+  have : Algebra.FiniteType k A := hφ
+  Algebra.FiniteType.exists_ringKrullDim_le k A
+
+include k in
+/-- **Quotienting by a nonzero prime lowers the dimension.**
+
+If `A` is a domain which is a finitely generated algebra over a field `k` and `p` is a nonzero
+prime ideal of `A`, then `dim (A ⧸ p) < dim A`.
+
+A nonzero element of `p` is a nonzero divisor of `A`, so any chain of primes of `A ⧸ p` extends
+by the zero ideal to a chain of primes of `A` of length one more; the dimension of `A ⧸ p` is
+finite because `A ⧸ p` is again a finitely generated `k`-algebra. -/
+theorem ringKrullDim_quotient_lt (p : Ideal A) [p.IsPrime] (hp : p ≠ ⊥) :
+    ringKrullDim (A ⧸ p) < ringKrullDim A := by
+  obtain ⟨r, hrp, hr0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hp
+  have hle : ringKrullDim (A ⧸ p) + 1 ≤ ringKrullDim A :=
+    ringKrullDim_succ_le_of_surjective (Ideal.Quotient.mk p) Ideal.Quotient.mk_surjective
+      (mem_nonZeroDivisors_of_ne_zero hr0) (Ideal.Quotient.eq_zero_iff_mem.mpr hrp)
+  rw [ringKrullDim_eq_trdeg k (A ⧸ p)] at hle ⊢
+  exact ENat.WithBot.add_one_le_iff.mp hle
