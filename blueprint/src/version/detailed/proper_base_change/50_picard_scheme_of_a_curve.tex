@@ -12976,14 +12976,28 @@ covering of $T'$.
 This is a cited external input: Topologies, Section~34.7 (The fppf topology),
 Lemma~34.7.3 (\stacksproject{021O}).  It is the fppf analogue of
 \Cref{lem:pc-fpqc-covering-stability} and is stated separately because it is
-not implied by it: an \termref{def:pc-fppf-site}{fppf covering} is a jointly
-surjective family of flat morphisms locally of finite presentation, an
-\termref{def:pc-fpqc-covering}{fpqc covering} a flat family satisfying a
-quasi-compactness condition, and neither notion contains the other.  It is not
-decomposed here.
+not implied by it: every \termref{def:pc-fppf-site}{fppf covering} is an
+\termref{def:pc-fpqc-covering}{fpqc covering} (Topologies, Lemma~34.9.7,
+\stacksproject{022C}), and the containment is strict, but it runs the wrong way
+for the present purpose, since clauses (2) and (3) above conclude that the
+composite and the base change are again \emph{fppf} coverings, which the fpqc
+lemma does not give.  It is not decomposed here.
 % No \uses for \Cref{lem:pc-fpqc-covering-stability}, deliberately: the sentence above
 % cites it to say that this lemma is *not* implied by it, so it is not a hypothesis.
 % Adding the edge would be acyclic but would record a dependency that does not exist.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Every fppf covering is an fpqc covering]
+\label{lem:pc-fppf-covering-is-fpqc}
+Let $T$ be a scheme.  Every \termref{def:pc-fppf-site}{fppf covering} of $T$ is
+an \termref{def:pc-fpqc-covering}{fpqc covering} of $T$.
+\uses{def:pc-fppf-site,def:pc-fpqc-covering}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Topologies, Section~34.9 (The fpqc topology),
+Lemma~34.9.7 (\stacksproject{022C}).  It is not decomposed here.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -13710,7 +13724,7 @@ canonical map).
 \uses{def:pc-picard-functor,def:pc-picard-group,def:pc-invertible-module,def:pc-fppf-site,lem:pc-pic-group-valued}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-fpqc-descent,lem:pc-fppf-covering-stability}
+\uses{lem:pc-fpqc-descent,lem:pc-fppf-covering-stability,lem:pc-fppf-covering-is-fpqc}
 By base change we may assume $T=S$.  \emph{Injectivity.}  Let $\cN$ be an
 invertible $\cO_S$-module with $f^*\cN\cong\cO_X$.  Then
 $f_*f^*\cN\cong f_*\cO_X\cong\cO_S$ by hypothesis.  The canonical map
@@ -13734,10 +13748,10 @@ f_{ij}\in\Gamma(X_{S_i\times_SS_j},\cO^*)
 inverse on global sections, applied to
 $T=S_i\times_SS_j$).  The $f_{ij}$ satisfy the cocycle condition on
 $S_i\times_SS_j\times_SS_k$, hence define a descent datum on invertible
-sheaves for the fppf (in particular fpqc) covering
-$\{S_i\to S\}$; by \Cref{lem:pc-fpqc-descent} there is an invertible
-$\cO_S$-module $\cN$ with trivializations over $S_i$ whose associated
-descent datum is $\{f_{ij}\}$.  Then $f^*\cN\cong\cL$, as both are
+sheaves for the fppf covering $\{S_i\to S\}$, which is an fpqc covering by
+\Cref{lem:pc-fppf-covering-is-fpqc}; by \Cref{lem:pc-fpqc-descent} there is an
+invertible $\cO_S$-module $\cN$ with trivializations over $S_i$ whose
+associated descent datum is $\{f_{ij}\}$.  Then $f^*\cN\cong\cL$, as both are
 invertible modules with the same descent datum for the covering
 $\{X_{S_i}\to X\}$ (the pullback of $\{S_i\to S\}$ along $f:X\to S$; base
 changes of fppf coverings are fppf coverings,
@@ -13763,7 +13777,7 @@ satisfies the sheaf property for fppf coverings.
 \uses{def:pc-picard-functor,def:pc-pic-sigma-functor,def:pc-subfunctor,def:pc-fppf-site}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-fpqc-descent,def:pc-base-change}
+\uses{lem:pc-fpqc-descent,def:pc-base-change,lem:pc-fppf-covering-is-fpqc}
 Let $\{T_i\to T\}_{i\in I}$ be an fppf covering and let
 $\cL_i\in K(T_i)$ with $\cL_i$ and $\cL_j$ mapping to the same element of
 $K(T_i\times_TT_j)$.
@@ -13814,10 +13828,10 @@ $\psi_{ki}|_{T_{ijk}}\circ\psi_{jk}|_{T_{ijk}}\circ\psi_{ij}|_{T_{ijk}}
 $v_{ijk}=\sigma_{T_{ijk}}^*(u_{ijk})=1$ and therefore
 $u_{ijk}=f_{T_{ijk}}^*(1)=1$, so the $\varphi_{ij}$ satisfy the cocycle
 condition.  Thus $\{\cL_i|_{X_{T_i}},\varphi_{ij}\}$ is a descent datum
-for invertible modules on the fppf (in particular fpqc) covering
-$\{X_{T_i}\to X_T\}$; by \Cref{lem:pc-fpqc-descent} there exists an
-invertible $\cO_{X_T}$-module $\cL$ with
-$\cL|_{X_{T_i}}=\cL_i$ (with the given gluing isomorphisms).  Since the
+for invertible modules on the fppf covering $\{X_{T_i}\to X_T\}$, which is an
+fpqc covering by \Cref{lem:pc-fppf-covering-is-fpqc}; by
+\Cref{lem:pc-fpqc-descent} there exists an invertible $\cO_{X_T}$-module
+$\cL$ with $\cL|_{X_{T_i}}=\cL_i$ (with the given gluing isomorphisms).  Since the
 gluing isomorphisms are compatible with the trivializations $\alpha_i$,
 the module $\sigma_T^*\cL$ restricts to the trivial module on $T_i$ in a
 compatible way, so $\sigma_T^*\cL\cong\cO_T$ by descent: hence
