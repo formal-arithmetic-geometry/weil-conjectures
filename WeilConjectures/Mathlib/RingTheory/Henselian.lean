@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.LocalRing.Module
@@ -24,6 +25,11 @@ public import WeilConjectures.Mathlib.RingTheory.PrincipalIdealDomain
 
 A finite algebra `S` over a Henselian local ring `R` is a finite product of local rings, each
 of which is again Henselian and finite over `R`, and strictly Henselian if `R` is.
+
+## Main definitions
+
+* `IsStrictlyHenselianLocalRing`: a Henselian local ring whose residue field is separably
+  closed.
 
 ## Main results
 
@@ -53,6 +59,16 @@ the `proetale` files cannot be imported from a Lean module.
 universe u
 
 open Polynomial IsLocalRing
+
+/-- A **strictly Henselian local ring** is a Henselian local ring whose residue field is
+separably closed. -/
+class IsStrictlyHenselianLocalRing (R : Type*) [CommRing R] : Prop
+    extends HenselianLocalRing R where
+  isSepClosed_residueField : IsSepClosed (ResidueField R)
+
+instance (R : Type*) [CommRing R] [IsStrictlyHenselianLocalRing R] :
+    IsSepClosed (ResidueField R) :=
+  IsStrictlyHenselianLocalRing.isSepClosed_residueField
 
 /-- A commutative ring is local if it is local modulo an ideal contained in the Jacobson
 radical. -/
