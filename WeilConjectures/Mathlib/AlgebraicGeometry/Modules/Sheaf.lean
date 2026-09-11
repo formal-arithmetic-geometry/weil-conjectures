@@ -6,38 +6,17 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-
-/-!
-# Stalks and sections of `𝒪_X`-modules
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-public import Mathlib.AlgebraicGeometry.Modules.Presheaf
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Restrict
-
-/-!
-# Sections of a kernel of `𝒪_X`-modules, and pushforward of `𝒪_X`-modules
-
-The first half of this file describes the sections of a categorical kernel.
-Limits in `X.Modules` are computed section-wise, because evaluation at an open subset
-preserves finite limits (`SheafOfModules.Finite.evaluationPreservesFiniteLimits`). This file
-records the resulting concrete description of the sections of a categorical kernel: over any
-open `U`, the sections of `kernel f` are exactly the sections of the source that `f` kills.
-
-This is the tool that turns a sheaf of modules defined as a kernel — as the ideal sheaf of a
-`Scheme.IdealSheafData` is in `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module` —
-into a computable object.
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
 /-!
-# Sections of a kernel of `𝒪_X`-modules, and pullback of `𝒪_X`-modules
+# Sections, stalks and restrictions of `𝒪_X`-modules
 
-The first half of this file describes the sections of a categorical kernel. Limits in
-`X.Modules` are computed section-wise, because evaluation at an open subset preserves finite
-limits (`SheafOfModules.Finite.evaluationPreservesFiniteLimits`): over any open `U`, the
-sections of `kernel f` are exactly the sections of the source that `f` kills.
+This file collects three groups of results about sheaves of modules over a scheme.
 
 The first is a concrete description of the sections of a categorical kernel. Limits in
 `X.Modules` are computed section-wise, because evaluation at an open subset preserves finite
@@ -46,38 +25,19 @@ of `kernel f` are exactly the sections of the source that `f` kills. This is the
 a sheaf of modules defined as a kernel — as the ideal sheaf of a `Scheme.IdealSheafData` is in
 `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module` — into a computable object.
 
-The second is the **fibre `F(x)` of a sheaf of modules at a point**, as a vector space over the
-residue field `κ(x)`, together with the **restriction `F_y` of a sheaf of modules to a fibre of a
-morphism**. Since Mathlib has no module structure on the stalk of a sheaf of modules, the fibre is
-defined not as `F_x ⊗_{𝒪_{X,x}} κ(x)` but by pullback: `F(x)` is the module of global sections of
-the pullback of `F` along `Spec κ(x) ⟶ X`. The two agree for quasi-coherent `F`.
+The second transports the module structure on the stalk of a presheaf of modules
+(`PresheafOfModules.instModule`) to `X.Modules`: the stalk `F_x` of a sheaf of `𝒪_X`-modules is a
+module over the local ring `𝒪_{X, x}`, and, for `x` in an open `U`, over `Γ(X, U)` by restriction
+of scalars along the germ map.
 
-## Main definitions
-
-- `AlgebraicGeometry.Scheme.Modules.fiberFunctor`, `AlgebraicGeometry.Scheme.Modules.fiber`: the
-  fibre `F(x)` of a sheaf of `𝒪_X`-modules at a point `x`, as a `κ(x)`-vector space, and its
-  functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
-- `AlgebraicGeometry.Scheme.Modules.restrictToFiber`: the restriction `F ↦ F_y` of sheaves of
-  modules to the scheme-theoretic fibre of a morphism over a point.
-
-The second half provides the material needed to compare the pullback functor
-`Scheme.Modules.pullback f` along `f : X ⟶ Y` with restriction to open subsets. The key point
-is that the pullback of `𝒪_Y` is `𝒪_X`, and that the pullback commutes with restricting to an
-open `U` of `Y` and to its preimage. These are packaged as a functor `Scheme.Modules.pullbackOver`
-between the categories of modules over the restricted structure sheaves, which is what
-quasi-coherence and finite type are formulated in terms of.
-
-The second half compares the pushforward functor `Scheme.Modules.pushforward f` along
-`f : X ⟶ Y` with restriction to open subsets: restricting `f _* M` to an open `U` of `Y` is the
-pushforward of the restriction of `M` to `f ⁻¹ᵁ U` along `f ∣_ U`. It also records the
-dictionary between sheaves of modules over `𝒪_X` restricted to the site of opens contained in
-`U` — which is what quasi-coherence and finite type are formulated in terms of — and sheaves of
-`𝒪_X|_U`-modules on the scheme `U`.
-
-The second half of the file transports the module structure on the stalk of a presheaf of
-modules (`PresheafOfModules.instModule`) to `X.Modules`: the stalk `F_x` of a sheaf of
-`𝒪_X`-modules is a module over the local ring `𝒪_{X, x}`, and, for `x` in an open `U`, over
-`Γ(X, U)` by restriction of scalars along the germ map.
+The third compares the pushforward and pullback functors along `f : X ⟶ Y` with restriction to
+open subsets: restricting `f _* M` to an open `U` of `Y` is the pushforward of the restriction of
+`M` to `f ⁻¹ᵁ U` along `f ∣_ U`, the pullback of `𝒪_Y` is `𝒪_X`, and the pullback commutes with
+restricting to an open `U` of `Y` and to its preimage. The latter is packaged as a functor
+`Scheme.Modules.pullbackOver` between the categories of modules over the restricted structure
+sheaves, which is what quasi-coherence and finite type are formulated in terms of. This group
+also records the dictionary between sheaves of modules over `𝒪_X` restricted to the site of opens
+contained in `U` and sheaves of `𝒪_X|_U`-modules on the scheme `U`.
 
 ## Main results
 
@@ -89,7 +49,6 @@ modules (`PresheafOfModules.instModule`) to `X.Modules`: the stalk `F_x` of a sh
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
 -/
-
 @[expose] public section
 
 universe u
