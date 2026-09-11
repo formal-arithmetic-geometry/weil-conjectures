@@ -6,11 +6,13 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
+# Coherence of `M^~` on an affine scheme, and quasi-coherence of a pushforward
 # Coherence of `M^~` on an affine scheme, and stability of coherence under pullback
 
 For a commutative ring `R` and an `R`-module `M`, the quasi-coherent sheaf `M^~` on `Spec R` is
@@ -26,6 +28,12 @@ generating `M^~` generates `M`.
   sections generating `M^~` exhibits `M` as a finite `R`-module.
 - `AlgebraicGeometry.Scheme.Modules.isCoherent_of_finite`: a quasi-coherent sheaf of modules on
   `Spec R` whose module of global sections is finite is coherent.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_presentation_of_isAffine`: a quasi-coherent sheaf
+  of modules on an affine scheme has a global presentation.
+- `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_isAffineOpenCover`: quasi-coherence is
+  local on the base, tested on a cover by affine opens.
+- `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward`: quasi-coherence is stable
+  under pushforward along an affine morphism, in particular along a closed immersion.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback`,
   `AlgebraicGeometry.Scheme.Modules.isFiniteType_pullback` and
   `AlgebraicGeometry.Scheme.Modules.isCoherent_pullback`: quasi-coherence, finite type and
@@ -116,6 +124,113 @@ theorem Scheme.Modules.isCoherent_of_finite (M : (Spec R).Modules) [M.IsQuasicoh
     inferInstance
 
 namespace Scheme.Modules
+
+variable {X Y : Scheme.{u}}
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A presentation of `M.restrict U.ι` gives a presentation of `M` over the open `U`. -/
+def presentationOver (U : X.Opens) (M : X.Modules) (P : (M.restrict U.ι).Presentation) :
+    (M.over U).Presentation :=
+  have : PreservesColimitsOfSize.{u, u} ((overEquiv U).inverse) := inferInstance
+  SheafOfModules.Presentation.ofIsIso (overEquivInverseRestrictIso U M).hom
+    (P.map (overEquiv U).inverse (overEquivInverseUnitIso U))
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A presentation of the restriction of `M` along an isomorphism of schemes gives a
+presentation of `M`. -/
+def presentationOfRestrictIsIso (f : X ⟶ Y) [IsIso f] (M : Y.Modules)
+    (P : (M.restrict f).Presentation) : M.Presentation :=
+  have : PreservesColimitsOfSize.{u, u} (restrictFunctor (inv f)) := inferInstance
+  SheafOfModules.Presentation.ofIsIso (restrictFunctorCompInvIso.app M).hom
+    (P.map (restrictFunctor (inv f)) (restrictUnitIso _).symm)
+
+/-- **A quasi-coherent sheaf of modules on an affine scheme has a global presentation**: it is
+the cokernel of a morphism between free sheaves of modules.
+
+On `Spec R` this is the presentation of `Γ(M)^~` coming from a presentation of the `R`-module
+`Γ(M)`; the general case follows by transporting it along `X ≅ Spec Γ(X, ⊤)`. -/
+lemma nonempty_presentation_of_isAffine [IsAffine X] (M : X.Modules) [M.IsQuasicoherent] :
+    Nonempty M.Presentation :=
+  have : (M.restrict X.isoSpec.inv).IsQuasicoherent := inferInstance
+  have : IsIso (M.restrict X.isoSpec.inv).fromTildeΓ := isIso_fromTildeΓ_of_isQuasicoherent _
+  ⟨presentationOfRestrictIsIso X.isoSpec.inv M
+    (SheafOfModules.Presentation.ofIsIso (M.restrict X.isoSpec.inv).fromTildeΓ
+      (presentationTilde.{u} _ .univ (by simp) _ (Submodule.span_eq _)))⟩
+
+/-- **Quasi-coherence is local on the base**: a sheaf of modules which is quasi-coherent after
+restriction to each member of a cover of `X` by affine opens is quasi-coherent. -/
+lemma isQuasicoherent_of_isAffineOpenCover (M : X.Modules) {ι : Type u} (U : ι → X.Opens)
+    (hU : IsOpenCover U) (hU' : ∀ i, IsAffineOpen (U i))
+    (h : ∀ i, (M.restrict (U i).ι).IsQuasicoherent) : M.IsQuasicoherent := by
+  refine SheafOfModules.QuasicoherentData.isQuasicoherent (M := M)
+    { I := ι
+      X := U
+      coversTop := (Opens.coversTop_iff _ U).mpr hU
+      presentation := fun i ↦ ?_ }
+  have : IsAffine (U i).toScheme := hU' i
+  exact presentationOver (U i) M (nonempty_presentation_of_isAffine _).some
+
+/-- **Quasi-coherence is stable under pushforward along a morphism of affine spectra.** This is
+`AlgebraicGeometry.isIso_fromTildeΓ_pushforward` combined with the characterisation of
+quasi-coherence on an affine scheme. -/
+instance isQuasicoherent_pushforward_specMap {S : CommRingCat.{u}} (φ : R ⟶ S)
+    (M : (Spec S).Modules) [M.IsQuasicoherent] :
+    ((pushforward (Spec.map φ)).obj M).IsQuasicoherent := by
+  have : IsIso M.fromTildeΓ := isIso_fromTildeΓ_of_isQuasicoherent M
+  rw [isQuasicoherent_iff_isIso_fromTildeΓ]
+  exact isIso_fromTildeΓ_pushforward φ M
+
+/-- Quasi-coherence may be checked after restricting along an isomorphism of schemes. -/
+lemma isQuasicoherent_of_restrict_isIso (f : X ⟶ Y) [IsIso f] (M : Y.Modules)
+    [(M.restrict f).IsQuasicoherent] : M.IsQuasicoherent := by
+  refine (SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso
+    ((restrictFunctorCompInvIso (f := f)).app M) ?_
+  exact (inferInstance : ((M.restrict f).restrict (inv f)).IsQuasicoherent)
+
+/-- **Quasi-coherence is stable under pushforward along an isomorphism.** -/
+instance isQuasicoherent_pushforward_of_isIso (f : X ⟶ Y) [IsIso f] (M : X.Modules)
+    [M.IsQuasicoherent] : ((pushforward f).obj M).IsQuasicoherent := by
+  have h : (((pushforward f).obj M).restrict f).IsQuasicoherent := by
+    refine (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
+      ((restrictFunctorAdjCounitIso f).app M).symm ?_
+    exact (inferInstance : M.IsQuasicoherent)
+  exact isQuasicoherent_of_restrict_isIso f _
+
+/-- **Quasi-coherence is stable under pushforward along a morphism of affine schemes.** -/
+lemma isQuasicoherent_pushforward_of_isAffine [IsAffine X] [IsAffine Y] (f : X ⟶ Y)
+    (M : X.Modules) [M.IsQuasicoherent] : ((pushforward f).obj M).IsQuasicoherent := by
+  have hf : X.isoSpec.hom ≫ Spec.map f.appTop ≫ Y.isoSpec.inv = f := by
+    rw [Scheme.isoSpec_inv_naturality]
+    simp
+  have e : pushforward X.isoSpec.hom ⋙
+      pushforward (Spec.map f.appTop) ⋙ pushforward Y.isoSpec.inv ≅ pushforward f :=
+    Functor.isoWhiskerLeft _ (pushforwardComp _ _) ≪≫ pushforwardComp _ _ ≪≫
+      pushforwardCongr hf
+  refine (SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso (e.app M) ?_
+  exact (inferInstance : ((pushforward Y.isoSpec.inv).obj ((pushforward (Spec.map f.appTop)).obj
+    ((pushforward X.isoSpec.hom).obj M))).IsQuasicoherent)
+
+/-- The restriction of `f _* M` to an affine open `U` of `Y` is quasi-coherent, if `f` is an
+affine morphism and `M` is quasi-coherent. -/
+lemma isQuasicoherent_restrict_pushforward (f : X ⟶ Y) [IsAffineHom f] (M : X.Modules)
+    [M.IsQuasicoherent] {U : Y.Opens} (hU : IsAffineOpen U) :
+    (((pushforward f).obj M).restrict U.ι).IsQuasicoherent := by
+  have : IsAffine U.toScheme := hU
+  have : IsAffine (f ⁻¹ᵁ U).toScheme := hU.preimage f
+  have h : ((pushforward (f ∣_ U)).obj (M.restrict (f ⁻¹ᵁ U).ι)).IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_isAffine (f ∣_ U) (M.restrict (f ⁻¹ᵁ U).ι)
+  exact (SheafOfModules.isQuasicoherent U.toScheme.ringCatSheaf).prop_of_iso
+    ((pushforwardCompRestrictFunctorIso f U).app M).symm h
+
+/-- **Quasi-coherence is stable under pushforward along an affine morphism**, in particular
+along a closed immersion. -/
+instance isQuasicoherent_pushforward (f : X ⟶ Y) [IsAffineHom f] (M : X.Modules)
+    [M.IsQuasicoherent] : ((pushforward f).obj M).IsQuasicoherent :=
+  isQuasicoherent_of_isAffineOpenCover _ (fun i ↦ (Y.affineOpenCover.f i).opensRange)
+    Y.affineOpenCover.openCover.iSup_opensRange (fun _ ↦ isAffineOpen_opensRange _)
+    fun _ ↦ isQuasicoherent_restrict_pushforward f M (isAffineOpen_opensRange _)
+
+end Scheme.Modules
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
 
