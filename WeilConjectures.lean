@@ -5,6 +5,8 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalFunctions
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharacteristic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
@@ -12,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AnalyticAux
@@ -146,6 +149,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullba
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
@@ -156,6 +160,8 @@ public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
@@ -264,6 +270,7 @@ public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
+public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.CohenMacaulay.Basic
 public import WeilConjectures.RingTheory.Depth.Basic

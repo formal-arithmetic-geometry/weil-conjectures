@@ -11,10 +11,11 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
-# Noetherian schemes and associated points
+# Noetherian schemes, associated points, and the dévissage of a coherent sheaf
 
 The first part of this file records that a base change of a morphism locally of finite type has
 locally noetherian source.
@@ -23,6 +24,10 @@ The second part defines the *associated points* of a sheaf of modules on a schem
 is associated to `F` when the maximal ideal of `𝒪_{X, x}` is an associated prime of the stalk
 `F_x`. This is manifestly intrinsic; the content of the file is that on a locally Noetherian
 scheme it is the affine-local notion, and the consequences of that.
+
+The third part states the **dévissage** of a coherent sheaf on a Noetherian scheme: a finite
+filtration whose graded pieces are pushforwards of non-zero ideal sheaves on integral closed
+subschemes. It is `sorry` by design; see the implementation note below.
 
 ## Main statements
 
@@ -40,10 +45,34 @@ scheme it is the affine-local notion, and the consequences of that.
 - `AlgebraicGeometry.Scheme.Modules.isSMulRegular_iff_associatedPoints_subset_basicOpen` and
   `AlgebraicGeometry.Scheme.Modules.injective_smul_iff_associatedPoints_subset`: a section of
   `𝒪_X` is a nonzerodivisor on `F` if and only if its zero locus misses the associated points.
+- `AlgebraicGeometry.Scheme.Modules.exists_devissage`: the **dévissage** of a coherent sheaf on
+  a Noetherian scheme, stated in terms of
+  `AlgebraicGeometry.Scheme.Modules.IsPushforwardIdealSheaf`.
+
+## Implementation notes
+
+`AlgebraicGeometry.Scheme.Modules.exists_devissage` is `sorry` by design: this file only
+*states* it, following the convention of `WeilConjectures.AlgebraicGeometry.ChowLemma`. It is
+the one open obligation of the blueprint's notion (N12), listed there as `lem:deg-devissage`.
+
+## TODO
+
+Prove `AlgebraicGeometry.Scheme.Modules.exists_devissage`. The standard route is Noetherian
+induction on the support of `F`: take `Z₁` an irreducible component of `Supp F` of maximal
+dimension with its reduced structure and `F₁ ⊆ F` the subsheaf of sections supported on `Z₁`
+whose restriction to `Z₁` has no embedded contribution, so that `F₁` is the pushforward of a
+non-zero ideal sheaf on `Z₁`, and apply the induction hypothesis to `F / F₁`, whose support is
+strictly smaller. See the section *Dévissage of coherent sheaves* of the chapter *Cohomology of
+schemes* in the Stacks project, and [Hartshorne, III, §5].
 
 Mathlib's `AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian` is a theorem rather than an
 instance, because the morphism cannot be recovered from its source. For a pullback it can, so the
 first two statements below are instances.
+
+## Blueprint
+
+`AlgebraicGeometry.Scheme.Modules.exists_devissage` implements `lem:deg-devissage` of the
+degree-of-the-isogeny chapter.
 -/
 
 @[expose] public section
@@ -311,6 +340,45 @@ theorem injective_smul_iff_associatedPoints_subset [IsLocallyNoetherian X] [F.Is
     have hab' : X.presheaf.map V.leTop.op g • a = X.presheaf.map V.leTop.op g • b := hab
     have : X.presheaf.map V.leTop.op g • (a - b) = 0 := by rw [smul_sub, hab', sub_self]
     simpa [sub_eq_zero] using hzero _ this
+
+/-!
+## Dévissage of a coherent sheaf
+
+Every coherent sheaf on a Noetherian scheme admits a finite filtration whose graded pieces are
+pushforwards of non-zero ideal sheaves on integral closed subschemes. This is the engine of the
+finiteness theorem for coherent cohomology, and of the computation of a top intersection number
+in terms of the generic rank.
+-/
+
+/-- A sheaf of modules on `X` is the **pushforward of a non-zero ideal sheaf on an integral
+closed subscheme** if it is isomorphic to `ι_* 𝓘` for a closed immersion `ι : Z ⟶ X` with `Z`
+integral and a non-zero ideal sheaf `𝓘 ⊆ 𝒪_Z`.
+
+These are the graded pieces of the dévissage of a coherent sheaf,
+`AlgebraicGeometry.Scheme.Modules.exists_devissage`. -/
+def IsPushforwardIdealSheaf (G : X.Modules) : Prop :=
+  ∃ (Z : Scheme.{u}) (ι : Z ⟶ X) (_ : IsClosedImmersion ι) (_ : IsIntegral Z)
+    (I : Z.IdealSheafData), I ≠ ⊥ ∧ Nonempty (G ≅ (Modules.pushforward ι).obj I.toModules)
+
+/-- **Dévissage of a coherent sheaf.** A coherent sheaf `F` on a Noetherian scheme `X` has a
+finite filtration by coherent subsheaves
+
+`0 = F₀ ⊆ F₁ ⊆ ⋯ ⊆ F_t = F`
+
+whose graded pieces `F_j / F_{j-1}` are pushforwards `(ι_j)_* 𝓘_j` of non-zero ideal sheaves
+`𝓘_j ⊆ 𝒪_{Z_j}` along closed immersions `ι_j : Z_j ⟶ X` of integral schemes.
+
+The filtration is presented as a chain of monomorphisms `F₀ ⟶ F₁ ⟶ ⋯ ⟶ F_t` with `F₀` zero and
+`F_t ≅ F`, the graded pieces being the cokernels of the successive monomorphisms.
+
+This statement is `sorry` by design; see the implementation notes of this file.
+(blueprint: `lem:deg-devissage`) -/
+theorem exists_devissage [IsNoetherian X] (F : X.Modules) [F.IsCoherent] :
+    ∃ (t : ℕ) (G : Fin (t + 1) → X.Modules) (φ : ∀ j : Fin t, G j.castSucc ⟶ G j.succ),
+      IsZero (G 0) ∧ Nonempty (G (Fin.last t) ≅ F) ∧
+        ∀ j : Fin t, (G j.succ).IsCoherent ∧ Mono (φ j) ∧
+          IsPushforwardIdealSheaf (cokernel (φ j)) :=
+  sorry
 
 end Scheme.Modules
 

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Module.LocalizedModule.Away
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -68,6 +69,12 @@ affine opens, it is quasi-coherent with finitely generated module of sections.
   finite `R`-module. No Noetherian hypothesis is needed.
 - `AlgebraicGeometry.tilde.isCoherent_iff` and `AlgebraicGeometry.Scheme.Modules.isCoherent_iff`:
   the resulting characterisation of coherence on an affine scheme.
+- `AlgebraicGeometry.Scheme.Modules.isFiniteType_restrictFunctor`: being of finite type is
+  stable under restriction to an open subscheme.
+- `AlgebraicGeometry.Scheme.Modules.isFiniteType_pushforward` and
+  `AlgebraicGeometry.Scheme.Modules.isCoherent_pushforward_of_isClosedImmersion`: finite type
+  and coherence of sheaves of modules are stable under pushforward along a closed immersion.
+  No Noetherian hypothesis is needed.
 -/
 
 @[expose] public noncomputable section
