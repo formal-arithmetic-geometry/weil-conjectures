@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Restrictions of morphisms of schemes along open immersions
@@ -15,7 +16,9 @@ We record:
 - `AlgebraicGeometry.morphismRestrictArrowIso` — transport of a morphism restriction along
   compatible open immersions;
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
-  — membership and preimage formulas for the ranges of inclusions of opens.
+  — membership and preimage formulas for the ranges of inclusions of opens;
+- `AlgebraicGeometry.Scheme.Opens.isUnit_ι_appTop` — a section is a unit on an open subscheme
+  contained in its basic open.
 -/
 
 @[expose] public section
@@ -58,5 +61,12 @@ lemma homOfLE_preimage_opensRange {X : Scheme.{u}} {U V W : X.Opens} (hWU : W �
       (X.homOfLE hWU).opensRange := by
   rw [Scheme.opensRange_homOfLE, Scheme.opensRange_homOfLE, ← Scheme.Hom.comp_preimage,
     Scheme.homOfLE_ι]
+
+/-- If `U ≤ X.basicOpen s`, then `s` restricts to a unit in the global sections of the open
+subscheme `U`. -/
+lemma Scheme.Opens.isUnit_ι_appTop {X : Scheme.{u}} (U : X.Opens) {s : Γ(X, ⊤)}
+    (hU : U ≤ X.basicOpen s) : IsUnit (U.ι.appTop.hom s) := by
+  rw [Scheme.Opens.ι_appTop]
+  exact Scheme.isUnit_res_of_le_basicOpen (U.ι_image_top.le.trans hU)
 
 end AlgebraicGeometry

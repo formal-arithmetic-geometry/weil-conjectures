@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # `Spec` of a restriction map and the canonical isomorphisms of affine opens
@@ -13,7 +14,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 We record that `Spec` of a restriction map between affine opens intertwines the canonical
 isomorphisms `Spec Γ(X, U) ≅ U` with the inclusion of opens, that the algebra map
 realizing `Γ(X, X.basicOpen f)` as a localization is the restriction map of the structure
-sheaf, and that a point of an affine open is determined by its prime ideal.
+sheaf.
+
+We also compute the restriction of `X.toSpecΓ` over a basic open `D(r) ⊆ Spec Γ(X, ⊤)`:
+it is `Spec` of the localization map `Γ(X, ⊤)[1/r] →+* Γ(X, X.basicOpen r)`, see
+`AlgebraicGeometry.toSpecΓ_resLE_basicOpenIsoSpecAway`.
 -/
 
 @[expose] public section
@@ -42,6 +47,20 @@ lemma algebraMap_basicOpen_eq {U : X.Opens} (f : Γ(X, U)) :
       (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom :=
   rfl
 
+/-- Restricting the canonical morphism `X ⟶ Spec Γ(X, ⊤)` over the basic open `D(r)`
+identifies the morphism `X.basicOpen r ⟶ Spec Γ(X, ⊤)[1/r]` with `Spec` of the canonical
+localization map `Γ(X, ⊤)[1/r] →+* Γ(X, X.basicOpen r)`. -/
+@[reassoc]
+lemma toSpecΓ_resLE_basicOpenIsoSpecAway (r : Γ(X, ⊤)) :
+    X.toSpecΓ.resLE (PrimeSpectrum.basicOpen r) (X.basicOpen r)
+        (X.toSpecΓ_preimage_basicOpen r).ge ≫ (basicOpenIsoSpecAway r).hom =
+      (X.basicOpen r).toSpecΓ ≫ Spec.map (CommRingCat.ofHom
+        (IsLocalization.Away.lift (S := Localization.Away r) r
+          (Scheme.isUnit_algebraMap_basicOpen r))) := by
+  rw [← cancel_mono (Spec.map (CommRingCat.ofHom (algebraMap Γ(X, ⊤) (Localization.Away r)))),
+    Category.assoc, Category.assoc, basicOpenIsoSpecAway_hom_SpecMap, Scheme.Hom.resLE_comp_ι,
+    ← Spec.map_comp, ← CommRingCat.ofHom_comp, IsLocalization.Away.lift_comp]
+  exact (Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top _).symm
 /-- Distinct points of an affine open have distinct associated primes. -/
 lemma IsAffineOpen.primeIdealOf_injective {U : X.Opens} (hU : IsAffineOpen U) :
     Function.Injective fun x : U ↦ (hU.primeIdealOf x).asIdeal := by
