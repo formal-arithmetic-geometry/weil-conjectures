@@ -20,9 +20,26 @@ The first half of this file describes the sections of a categorical kernel. Limi
 limits (`SheafOfModules.Finite.evaluationPreservesFiniteLimits`): over any open `U`, the
 sections of `kernel f` are exactly the sections of the source that `f` kills.
 
-This is the tool that turns a sheaf of modules defined as a kernel — as the ideal sheaf of a
-`Scheme.IdealSheafData` is in `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module` —
-into a computable object.
+The first is a concrete description of the sections of a categorical kernel. Limits in
+`X.Modules` are computed section-wise, because evaluation at an open subset preserves finite
+limits (`SheafOfModules.Finite.evaluationPreservesFiniteLimits`): over any open `U`, the sections
+of `kernel f` are exactly the sections of the source that `f` kills. This is the tool that turns
+a sheaf of modules defined as a kernel — as the ideal sheaf of a `Scheme.IdealSheafData` is in
+`WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module` — into a computable object.
+
+The second is the **fibre `F(x)` of a sheaf of modules at a point**, as a vector space over the
+residue field `κ(x)`, together with the **restriction `F_y` of a sheaf of modules to a fibre of a
+morphism**. Since Mathlib has no module structure on the stalk of a sheaf of modules, the fibre is
+defined not as `F_x ⊗_{𝒪_{X,x}} κ(x)` but by pullback: `F(x)` is the module of global sections of
+the pullback of `F` along `Spec κ(x) ⟶ X`. The two agree for quasi-coherent `F`.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.Modules.fiberFunctor`, `AlgebraicGeometry.Scheme.Modules.fiber`: the
+  fibre `F(x)` of a sheaf of `𝒪_X`-modules at a point `x`, as a `κ(x)`-vector space, and its
+  functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
+- `AlgebraicGeometry.Scheme.Modules.restrictToFiber`: the restriction `F ↦ F_y` of sheaves of
+  modules to the scheme-theoretic fibre of a morphism over a point.
 
 The second half provides the material needed to compare the pullback functor
 `Scheme.Modules.pullback f` along `f : X ⟶ Y` with restriction to open subsets. The key point
