@@ -4841,6 +4841,34 @@ complex; the last assertion is the case of the complex concentrated in degree $0
 not decomposed here.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The relative Leray spectral sequence]
+\label{lem:pc-relative-leray-spectral-sequence}
+Let $f:X\to Y$ and $g:Y\to Z$ be morphisms of ringed spaces and let $\cF$ be an
+$\cO_X$-module.  Then there is a spectral sequence
+\[
+E_2^{p,q}=R^pg_*\bigl(R^qf_*\cF\bigr)
+\qquad\text{converging to}\qquad R^{p+q}(g\circ f)_*\cF,
+\]
+functorial in $\cF$, and there is a version for bounded below complexes of
+$\cO_X$-modules.
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-derived-direct-image}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Cohomology of Sheaves, Section~20.13 (The Leray spectral
+sequence), Lemma~20.13.8 (\stacksproject{01F6}), which is the Grothendieck spectral
+sequence for the composition of the two pushforward functors.  It is not decomposed here.
+% Mathlib: not present, and no \mathlibok marker.  grep -rn "stacks 01F6" over
+% .lake/packages/mathlib is empty, and the string Leray does not occur anywhere in
+% .lake/packages/mathlib/Mathlib at the pinned revision 0df444a3 (v4.33.1).  Neither
+% a Grothendieck spectral sequence for a composition of functors nor the higher direct
+% images $R^qf_*$ of a sheaf of modules is among the declarations there:
+% Mathlib/Algebra/Homology/SpectralSequence/ carries only Basic.lean and
+% ComplexShape.lean, which are the general machinery with no construction of a
+% spectral sequence for pushforward along a morphism of ringed spaces.
+\end{proof}
+
 % Decomposed.
 \begin{theorem}[Serre duality for smooth projective curves]
 \label{thm:pc-serre-duality-curve}
@@ -10096,11 +10124,14 @@ $R^qf_*(j_*\cF)=0$ for $q>0$;
 \uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-morphism-hi,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-morphism-hi,lem:pc-affine-vanishing}
+\uses{lem:pc-affine-morphism-hi,lem:pc-affine-vanishing,lem:pc-leray-spectral-sequence,lem:pc-relative-leray-spectral-sequence}
 (1) By assumption $j$ is an affine morphism, so this is
 \Cref{lem:pc-affine-morphism-hi} applied to $j$.
 
-(2) The Leray spectral sequence of the composite $f\circ j$ reads
+(2) The relative Leray spectral sequence of the composite $f\circ j$
+(\Cref{lem:pc-relative-leray-spectral-sequence}, applied to the two
+morphisms $j:U\to X$ and $f:X\to S$ of ringed spaces and to the
+$\cO_U$-module $\cF$) reads
 $E_2^{p,q}=R^pf_*(R^qj_*\cF)\Rightarrow R^{p+q}(f\circ j)_*\cF$.  By
 (1) its $E_2$-page is concentrated in the row $q=0$, so it degenerates
 and the edge map $R^qf_*(j_*\cF)\to R^q(f\circ j)_*\cF$ is an
@@ -10109,7 +10140,9 @@ isomorphism for every $q$.  If moreover $f\circ j$ is affine, then
 $R^q(f\circ j)_*\cF=0$ for $q>0$ and the quasi-coherence of
 $(f\circ j)_*\cF$.
 
-(3) Likewise the Leray spectral sequence of $j$ for global sections,
+(3) Likewise the Leray spectral sequence of $j$ for global sections
+(\Cref{lem:pc-leray-spectral-sequence}, applied to the morphism
+$j:U\to X$ of ringed spaces and to the single $\cO_U$-module $\cF$),
 $E_2^{p,q}=H^p(X,R^qj_*\cF)\Rightarrow H^{p+q}(U,\cF)$, degenerates by
 (1) and gives $H^q(X,j_*\cF)=H^q(U,\cF)$; the right-hand side vanishes
 for $q>0$ by \Cref{lem:pc-affine-vanishing} because $U$ is affine and
