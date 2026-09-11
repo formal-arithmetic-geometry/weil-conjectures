@@ -12987,6 +12987,28 @@ morphism of schemes, then $\{T'\times_TT_i\to T'\}_{i\in I}$ is an fpqc
 covering of $T'$.
 \end{enumerate}
 \uses{def:pc-fpqc-covering,def:pc-scheme,def:pc-base-change}
+% Mathlib: one declaration per clause, all three of them instances derived for
+% AlgebraicGeometry.Scheme.fpqcPrecoverage by the deriving clause of its own
+% definition (Mathlib/AlgebraicGeometry/Sites/Fpqc.lean ll. 60--63 at the pinned
+% rev 0df444a360eaa60ab8c11dca51a86af692955474).
+% Clause (1) is instHasIsosFpqcPrecoverage, i.e. CategoryTheory.Precoverage.HasIsos,
+% whose single field mem_coverings_of_isIso says that the singleton presieve on an
+% isomorphism is a covering family.
+% Clause (2) is instIsStableUnderCompositionFpqcPrecoverage, i.e.
+% CategoryTheory.Precoverage.IsStableUnderComposition, whose field comp_mem_coverings
+% is this clause verbatim, the composite family being indexed by the sigma type of
+% the two index families.
+% Clause (3) is instIsStableUnderBaseChangeFpqcPrecoverage, i.e.
+% CategoryTheory.Precoverage.IsStableUnderBaseChange, whose field
+% mem_coverings_of_isPullback is this clause, stated for an arbitrary pullback square
+% over each $T_i$ rather than for a chosen fibre product, hence slightly more general.
+% Coverage is total: no clause of this node is left to the reader.  As for
+% \Cref{def:pc-fpqc-covering}, which is markered with fpqcPrecoverage itself, the
+% statement is absolute -- over the category of schemes, not over $(\mathit{Sch}/S)$ --
+% and so is this node, so nothing is lost in the match.
+\mathlibok\ \lean{AlgebraicGeometry.Scheme.instHasIsosFpqcPrecoverage,
+AlgebraicGeometry.Scheme.instIsStableUnderCompositionFpqcPrecoverage,
+AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFpqcPrecoverage}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Topologies, Section~34.9 (The fpqc topology),
@@ -13009,6 +13031,34 @@ morphism of schemes, then $\{T'\times_TT_i\to T'\}_{i\in I}$ is an fppf
 covering of $T'$.
 \end{enumerate}
 \uses{def:pc-fppf-site,def:pc-scheme,def:pc-base-change}
+% Mathlib: one declaration per clause, for
+% AlgebraicGeometry.Scheme.fppfPrecoverage, but not all three from the same place.
+% Clauses (2) and (3) are instIsStableUnderCompositionFppfPrecoverage and
+% instIsStableUnderBaseChangeFppfPrecoverage, derived by the deriving clause of the
+% definition of fppfPrecoverage (Mathlib/AlgebraicGeometry/Sites/Fpqc.lean ll. 40--42
+% at the pinned rev 0df444a360eaa60ab8c11dca51a86af692955474); they are the same two
+% classes, read the same way, as for \Cref{lem:pc-fpqc-covering-stability} above.
+% Clause (1) is NOT among them.  That deriving clause omits
+% CategoryTheory.Precoverage.HasIsos -- the fpqc one at ll. 62--63 has it, this one
+% at l. 42 does not -- and the instance cannot be recovered by synthesis either:
+% the general instance (AlgebraicGeometry.Scheme.precoverage P).HasIsos of
+% Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean does not fire, fppfPrecoverage
+% being a def and so not unfolded by instance search.  Checked against the pin:
+% "#synth Precoverage.HasIsos (fppfPrecoverage.{0})" fails, and there is no
+% declaration instHasIsosFppfPrecoverage in the environment.
+% What carries clause (1) instead is
+% AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage, in the same file: the
+% singleton presieve on a flat, surjective morphism locally of finite presentation is
+% an fppf covering.  An isomorphism is all three, by instances the pin already has, so
+% clause (1) is that lemma's specialisation and needs nothing else; checked against
+% the pin by elaborating it with "[IsIso f]" as the only hypothesis.
+% So the marker below names a declaration for each of the three clauses, and no clause
+% of this node is left to the reader.  As for \Cref{def:pc-fppf-site}, which is
+% markered with fppfPrecoverage itself, Mathlib's notion is absolute -- over the
+% category of schemes, not over $(\mathit{Sch}/S)$ -- and so is this node.
+\mathlibok\ \lean{AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage,
+AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage,
+AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Topologies, Section~34.7 (The fppf topology),
@@ -13032,6 +13082,18 @@ lemma does not give.  It is not decomposed here.
 Let $T$ be a scheme.  Every \termref{def:pc-fppf-site}{fppf covering} of $T$ is
 an \termref{def:pc-fpqc-covering}{fpqc covering} of $T$.
 \uses{def:pc-fppf-site,def:pc-fpqc-covering}
+% Mathlib: AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage
+% (Mathlib/AlgebraicGeometry/Sites/Fpqc.lean l. 66 at the pinned rev
+% 0df444a360eaa60ab8c11dca51a86af692955474) states
+% fppfPrecoverage <= fpqcPrecoverage, and <= of precoverages is pointwise containment
+% of the sets of covering families, so it is this node's statement: every family which
+% is an fppf covering of $T$ is an fpqc covering of $T$.  It is stated for precisely
+% the two declarations this chapter's own definitions are markered with --
+% fppfPrecoverage for \Cref{def:pc-fppf-site} and fpqcPrecoverage for
+% \Cref{def:pc-fpqc-covering} -- and the absolute-versus-$(\mathit{Sch}/S)$ caveat
+% that \Cref{def:pc-fppf-site}'s own comment records does not bite here, this node
+% being stated absolutely, as Mathlib's lemma is.
+\mathlibok\ \lean{AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Topologies, Section~34.9 (The fpqc topology),
