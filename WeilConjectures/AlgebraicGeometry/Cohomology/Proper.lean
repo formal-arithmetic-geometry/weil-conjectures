@@ -9,13 +9,16 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # Coherence of the direct image along a proper morphism
 
 The cohomological input of the chapter on the theorem of the cube is the finiteness theorem for
 proper morphisms: for a proper morphism `f : W ⟶ T` onto a locally Noetherian scheme, the direct
-image of a coherent sheaf is coherent. This file states that theorem in degree zero.
+image of a coherent sheaf is coherent. This file states that theorem in degree zero, and deduces
+from it the case the chapter actually uses: over a field, the global sections of a coherent sheaf
+on a proper scheme form a finite-dimensional vector space.
 
 ## Main statements
 
@@ -23,6 +26,11 @@ image of a coherent sheaf is coherent. This file states that theorem in degree z
   `prop:cube-proper-pushforward-coherent`): for `T` locally Noetherian, `f : W ⟶ T` proper and
   `F` a coherent sheaf of `𝒪_W`-modules, the direct image `f_* F` is a coherent sheaf of
   `𝒪_T`-modules. This is `sorry` by design; see the implementation notes.
+- `AlgebraicGeometry.Scheme.Modules.finiteDimensional_sections` (blueprint
+  `prop:cube-coherent-finiteness`): for a field `K`, a proper `K`-scheme `f : X ⟶ Spec K` and
+  `F` a coherent sheaf of `𝒪_X`-modules, the global sections `Γ(X, F)` form a finite-dimensional
+  `K`-vector space. The `K`-vector space structure is
+  `AlgebraicGeometry.Scheme.Modules.sectionsModule`.
 
 ## Implementation notes
 
@@ -41,15 +49,10 @@ image of a coherent sheaf is coherent. This file states that theorem in degree z
   `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent`, namely quasi-coherent
   and of finite type; over the locally Noetherian schemes of this statement it agrees with the
   usual notion of coherence.
-
-## TODO
-
-* Deduce `prop:cube-coherent-finiteness`: for `X` proper over a field `K` and `F` coherent,
-  `Γ(X, F)` is a finite-dimensional `K`-vector space. Applying `isCoherent_pushforward` to the
-  structure morphism `X ⟶ Spec K` makes `f_* F` coherent on `Spec K`, and `Γ(X, F)` is
-  `Γ(Spec K, f_* F)` by definition of the direct image; what is still missing is the remaining
-  half of the affine characterisation of coherence, that a sheaf of finite type on an affine
-  scheme has a finitely generated module of global sections.
+* The `K`-vector space structure on `Γ(X, F)` used by `finiteDimensional_sections` is not an
+  instance: it depends on the structure morphism `f`, which typeclass inference cannot recover
+  from `Γ(F, ⊤)`. It is packaged as the `def` `sectionsModule` and introduced by `letI` in the
+  statement of the theorem.
 
 ## References
 
@@ -58,8 +61,9 @@ image of a coherent sheaf is coherent. This file states that theorem in degree z
 
 ## Blueprint
 
-`isCoherent_pushforward` implements `prop:cube-proper-pushforward-coherent` of the chapter on
-the theorem of the cube.
+`isCoherent_pushforward` implements `prop:cube-proper-pushforward-coherent` and
+`finiteDimensional_sections` implements `prop:cube-coherent-finiteness` of the chapter on the
+theorem of the cube.
 -/
 
 @[expose] public section
@@ -83,5 +87,35 @@ theorem isCoherent_pushforward {W T : Scheme.{u}} (f : W ⟶ T) [IsLocallyNoethe
     [IsProper f] (F : W.Modules) [F.IsCoherent] :
     ((pushforward f).obj F).IsCoherent :=
   sorry
+
+variable {K : Type u} [Field K] {X : Scheme.{u}}
+
+/-- The `K`-vector space structure on the global sections of a sheaf of modules `F` on a
+`K`-scheme `f : X ⟶ Spec K`: the sections `Γ(F, ⊤)` are a module over `Γ(X, 𝒪_X)`, and scalars
+are restricted along `K ≅ Γ(Spec K, 𝒪) ⟶ Γ(X, 𝒪_X)`.
+
+Equivalently, and this is how it is defined, `Γ(F, ⊤)` is the module of global sections of the
+direct image `f_* F` on `Spec K`. -/
+@[instance_reducible]
+noncomputable def sectionsModule (f : X ⟶ Spec (.of K)) (F : X.Modules) : Module K Γ(F, ⊤) :=
+  ((moduleSpecΓFunctor (R := .of K)).obj ((pushforward f).obj F)).isModule
+
+/-- **Finiteness of the global sections of a coherent sheaf on a proper scheme over a field.**
+
+For a field `K`, a proper `K`-scheme `f : X ⟶ Spec K` and a coherent sheaf of `𝒪_X`-modules `F`,
+the global sections `Γ(X, F)` form a finite-dimensional `K`-vector space. This is
+`prop:cube-coherent-finiteness` of the blueprint.
+
+The proof applies `isCoherent_pushforward` to `f`, which is proper over the Noetherian scheme
+`Spec K`, so that `f_* F` is coherent on `Spec K`; a coherent sheaf on an affine scheme has a
+finite module of global sections, and `Γ(Spec K, f_* F) = Γ(X, F)` by definition of the direct
+image. It therefore inherits the `sorry` of `isCoherent_pushforward`. -/
+theorem finiteDimensional_sections (f : X ⟶ Spec (.of K)) [IsProper f] (F : X.Modules)
+    [F.IsCoherent] :
+    letI := sectionsModule f F
+    FiniteDimensional K Γ(F, ⊤) := by
+  have : ((pushforward f).obj F).IsCoherent := isCoherent_pushforward f F
+  change Module.Finite K ((moduleSpecΓFunctor (R := .of K)).obj ((pushforward f).obj F))
+  exact (Scheme.Modules.isCoherent_iff _).mp this
 
 end AlgebraicGeometry.Scheme.Modules
