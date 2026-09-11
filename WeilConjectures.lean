@@ -4,6 +4,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
@@ -142,6 +143,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Change
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
