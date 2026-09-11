@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
@@ -13,7 +14,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicohe
 
 A sheaf of modules which is locally free of finite rank — that is, one admitting local
 generators which are simultaneously a basis and finite in number — is coherent:
-`SheafOfModules.LocalGeneratorsData.isCoherent`.
+`SheafOfModules.LocalGeneratorsData.isCoherent`. In particular the unit `SheafOfModules.unit R`,
+which over a scheme is the structure sheaf, is coherent.
 -/
 
 @[expose] public section
@@ -39,6 +41,10 @@ instance (ι : Type u) [Finite ι] : (free (R := R) ι).IsFiniteType :=
 
 /-- A finite free sheaf of modules is coherent. -/
 instance (ι : Type u) [Finite ι] : (free (R := R) ι).IsCoherent where
+
+/-- The unit sheaf of modules — over a scheme, the structure sheaf — is coherent. -/
+instance : (unit R).IsCoherent :=
+  (isCoherent R).prop_of_iso (freeUniqueIso PUnit.{u + 1}) inferInstance
 
 end
 
