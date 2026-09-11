@@ -8,9 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
-# Coherence of `M^~` on an affine scheme
+# Coherence of `M^~` on an affine scheme, and stability of coherence under pullback
 
 For a commutative ring `R` and an `R`-module `M`, the quasi-coherent sheaf `M^~` on `Spec R` is
 coherent as soon as `M` is a finite `R`-module, and conversely a finite family of global sections
@@ -25,6 +26,11 @@ generating `M^~` generates `M`.
   sections generating `M^~` exhibits `M` as a finite `R`-module.
 - `AlgebraicGeometry.Scheme.Modules.isCoherent_of_finite`: a quasi-coherent sheaf of modules on
   `Spec R` whose module of global sections is finite is coherent.
+- `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback`,
+  `AlgebraicGeometry.Scheme.Modules.isFiniteType_pullback` and
+  `AlgebraicGeometry.Scheme.Modules.isCoherent_pullback`: quasi-coherence, finite type and
+  hence coherence of sheaves of modules are stable under pullback along an arbitrary morphism
+  of schemes. No Noetherian hypothesis is needed.
 - `AlgebraicGeometry.tilde.finite_of_isFiniteType`: if `M^~` is of finite type, then `M` is a
   finite `R`-module. No Noetherian hypothesis is needed.
 - `AlgebraicGeometry.tilde.isCoherent_iff` and `AlgebraicGeometry.Scheme.Modules.isCoherent_iff`:
@@ -35,7 +41,7 @@ generating `M^~` generates `M`.
 
 universe u
 
-open CategoryTheory Limits SheafOfModules
+open CategoryTheory Limits SheafOfModules TopologicalSpace
 
 namespace AlgebraicGeometry
 
@@ -111,6 +117,74 @@ theorem Scheme.Modules.isCoherent_of_finite (M : (Spec R).Modules) [M.IsQuasicoh
 
 namespace Scheme.Modules
 
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A presentation of `M` over an open `U` of `Y` pulls back to a presentation of the pullback
+of `M` over `f ⁻¹ᵁ U`. -/
+def presentationPullbackOver {M : Y.Modules} (p : (M.over U).Presentation) :
+    (((pullback f).obj M).over (f ⁻¹ᵁ U)).Presentation :=
+  SheafOfModules.Presentation.ofIsIso (pullbackOverObjIso f U M).hom
+    (p.map (pullbackOver f U) (pullbackOverUnitIso f U))
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Sections generating `M` over an open `U` of `Y` pull back to sections generating the
+pullback of `M` over `f ⁻¹ᵁ U`. -/
+def generatingSectionsPullbackOver {M : Y.Modules} (G : (M.over U).GeneratingSections) :
+    (((pullback f).obj M).over (f ⁻¹ᵁ U)).GeneratingSections :=
+  (G.map (pullbackOver f U) (pullbackOverUnitIso f U)).ofEpi (pullbackOverObjIso f U M).hom
+
+set_option backward.isDefEq.respectTransparency false in
+instance {M : Y.Modules} (G : (M.over U).GeneratingSections) [G.IsFiniteType] :
+    (generatingSectionsPullbackOver f U G).IsFiniteType := by
+  unfold generatingSectionsPullbackOver
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Quasi-coherent data for `M` pulls back to quasi-coherent data for the pullback of `M`,
+on the preimage of the given covering. -/
+def quasicoherentDataPullback {M : Y.Modules} (q : M.QuasicoherentData.{u}) :
+    ((pullback f).obj M).QuasicoherentData.{u} where
+  I := q.I
+  X i := f ⁻¹ᵁ q.X i
+  coversTop := Opens.coversTop_map f.base q.coversTop
+  presentation i := presentationPullbackOver f _ (q.presentation i)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Local generators for `M` pull back to local generators for the pullback of `M`,
+on the preimage of the given covering. -/
+def localGeneratorsDataPullback {M : Y.Modules} (q : M.LocalGeneratorsData.{u}) :
+    ((pullback f).obj M).LocalGeneratorsData.{u} where
+  I := q.I
+  X i := f ⁻¹ᵁ q.X i
+  coversTop := Opens.coversTop_map f.base q.coversTop
+  generators i := generatingSectionsPullbackOver f _ (q.generators i)
+
+instance {M : Y.Modules} (q : M.LocalGeneratorsData.{u}) [q.IsFiniteType] :
+    (localGeneratorsDataPullback f q).IsFiniteType where
+  isFiniteType i := by
+    have := ‹q.IsFiniteType›.isFiniteType i
+    exact inferInstanceAs
+      ((generatingSectionsPullbackOver f _ (q.generators i)).IsFiniteType)
+
+/-- **Quasi-coherence is stable under pullback.** -/
+instance isQuasicoherent_pullback (M : Y.Modules) [M.IsQuasicoherent] :
+    ((pullback f).obj M).IsQuasicoherent :=
+  (quasicoherentDataPullback f
+    SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData.some).isQuasicoherent
+
+/-- **Being of finite type is stable under pullback.** -/
+instance isFiniteType_pullback (M : Y.Modules) [M.IsFiniteType] :
+    ((pullback f).obj M).IsFiniteType where
+  exists_localGeneratorsData := by
+    obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData M
+    exact ⟨localGeneratorsDataPullback f q, inferInstance⟩
+
+/-- **Coherence is stable under pullback**, with no hypothesis on the schemes involved. -/
+instance isCoherent_pullback (M : Y.Modules) [M.IsCoherent] :
+    ((pullback f).obj M).IsCoherent where
+
+end Scheme.Modules
 variable {X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in

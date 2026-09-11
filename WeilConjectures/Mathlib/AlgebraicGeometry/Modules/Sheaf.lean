@@ -6,14 +6,19 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.AlgebraicGeometry.Modules.Presheaf
-public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
 /-!
-# Kernels and fibres of `𝒪_X`-modules
+# Sections of a kernel of `𝒪_X`-modules, and pullback of `𝒪_X`-modules
 
-Two independent additions to the theory of sheaves of modules on a scheme.
+The first half of this file describes the sections of a categorical kernel. Limits in
+`X.Modules` are computed section-wise, because evaluation at an open subset preserves finite
+limits (`SheafOfModules.Finite.evaluationPreservesFiniteLimits`): over any open `U`, the
+sections of `kernel f` are exactly the sections of the source that `f` kills.
 
 The first is a concrete description of the sections of a categorical kernel. Limits in
 `X.Modules` are computed section-wise, because evaluation at an open subset preserves finite
@@ -36,31 +41,30 @@ the pullback of `F` along `Spec κ(x) ⟶ X`. The two agree for quasi-coherent `
 - `AlgebraicGeometry.Scheme.Modules.restrictToFiber`: the restriction `F ↦ F_y` of sheaves of
   modules to the scheme-theoretic fibre of a morphism over a point.
 
+The second half provides the material needed to compare the pullback functor
+`Scheme.Modules.pullback f` along `f : X ⟶ Y` with restriction to open subsets. The key point
+is that the pullback of `𝒪_Y` is `𝒪_X`, and that the pullback commutes with restricting to an
+open `U` of `Y` and to its preimage. These are packaged as a functor `Scheme.Modules.pullbackOver`
+between the categories of modules over the restricted structure sheaves, which is what
+quasi-coherence and finite type are formulated in terms of.
+
 ## Main results
 
 - `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
-- `AlgebraicGeometry.Scheme.Modules.fiberFunctorPullbackIso`,
-  `AlgebraicGeometry.Scheme.Modules.fiberPullbackIso`: compatibility of the fibre with pullback,
-  for a morphism `u` inducing an isomorphism on residue fields at the point in question.
-- `AlgebraicGeometry.Scheme.Modules.fiberRestrictToFiberIso`: the fibre of `F_y` at a point `x`
-  of the fibre is the fibre of `F` at `f.fiberι y x`.
-
-## Blueprint
-
-The fibre and the restriction to a fibre are notion **(N2)** of `sec:cube-cost`, the formalisation
-count of the theorem-of-the-cube chapter. Deferred to later issues, because they need the monoidal
-structure on sheaves of modules and the notion of an invertible sheaf, neither of which is
-available: the compatibility of the fibre with tensor products and with inverses of line bundles,
-and the one-dimensionality of the fibre of a locally free sheaf of rank one.
+- `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
+- `AlgebraicGeometry.Scheme.Modules.pullbackOver`
+- `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite SheafOfModules TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+section Kernel
 
 variable {X : Scheme.{u}} (U : X.Opens)
   {M N : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ N)
@@ -105,131 +109,65 @@ lemma injective_map_kernelι :
     Function.Injective ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι f)) :=
   (ModuleCat.mono_iff_injective _).mp inferInstance
 
-section BaseChange
+end Kernel
 
-variable {R S : CommRingCat.{u}}
+section Pullback
 
-/-- Taking global sections of a sheaf of modules on `Spec S` and restricting scalars along
-`φ : R ⟶ S` is the same as pushing forward along `Spec φ` and taking global sections there. -/
-noncomputable def moduleSpecΓPushforwardIso (φ : R ⟶ S) :
-    Modules.pushforward (Spec.map φ) ⋙ moduleSpecΓFunctor (R := R) ≅
-      moduleSpecΓFunctor (R := S) ⋙ ModuleCat.restrictScalars φ.hom :=
-  NatIso.ofComponents (fun N ↦
-    { hom := ModuleCat.homEquiv.symm
-        { toFun := id
-          map_add' := fun _ _ ↦ rfl
-          map_smul' := by
-            intro r x
-            obtain ⟨y, rfl⟩ : ∃ y : Γ(N, ⊤), y = x := ⟨x, rfl⟩
-            change ((Spec.map φ).appTop ((Scheme.ΓSpecIso R).inv r)) • y =
-              ((Scheme.ΓSpecIso S).inv (φ r)) • y
-            have h := congr($(Scheme.ΓSpecIso_inv_naturality φ) r)
-            simp only [CommRingCat.comp_apply] at h
-            rw [← h] }
-      inv := ModuleCat.homEquiv.symm
-        { toFun := id
-          map_add' := fun _ _ ↦ rfl
-          map_smul' := by
-            intro r x
-            obtain ⟨y, rfl⟩ : ∃ y : Γ(N, ⊤), y = x := ⟨x, rfl⟩
-            change ((Scheme.ΓSpecIso S).inv (φ r)) • y =
-              ((Spec.map φ).appTop ((Scheme.ΓSpecIso R).inv r)) • y
-            have h := congr($(Scheme.ΓSpecIso_inv_naturality φ) r)
-            simp only [CommRingCat.comp_apply] at h
-            rw [h] }
-      hom_inv_id := rfl
-      inv_hom_id := rfl }) (fun _ ↦ rfl)
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
 
-variable {X Y : Scheme.{u}}
+/-- The pullback of the structure sheaf `𝒪_Y` along a morphism of schemes `f : X ⟶ Y`
+is the structure sheaf `𝒪_X`. -/
+noncomputable def pullbackUnitIso :
+    (pullback f).obj (SheafOfModules.unit.{u} Y.ringCatSheaf) ≅
+      SheafOfModules.unit.{u} X.ringCatSheaf :=
+  have : (SheafOfModules.pushforward f.toRingCatSheafHom).IsRightAdjoint :=
+    inferInstanceAs (Modules.pushforward f).IsRightAdjoint
+  have := SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal (φ := f.toRingCatSheafHom)
+  asIso (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom)
 
-/-- The pullback of sheaves of modules along an isomorphism is the pushforward along its
-inverse. -/
-noncomputable def pullbackIsoPushforwardInv (f : X ⟶ Y) [IsIso f] :
-    Modules.pullback f ≅ Modules.pushforward (inv f) :=
-  Adjunction.rightAdjointUniq
-    (CategoryTheory.Equivalence.mk (Modules.pullback f) (Modules.pullback (inv f))
-      (pullbackComp (inv f) f ≪≫ pullbackCongr (by simp) ≪≫ pullbackId Y).symm
-      (pullbackComp f (inv f) ≪≫ pullbackCongr (by simp) ≪≫ pullbackId X)).symm.toAdjunction
-    (pullbackPushforwardAdjunction (inv f))
+set_option backward.isDefEq.respectTransparency false in
+/-- **Base change for the pullback of sheaves of modules.** Restricting the pullback of `M`
+along `f : X ⟶ Y` to `f ⁻¹ᵁ U` is the pullback of the restriction of `M` to `U` along the
+induced morphism `f ⁻¹ᵁ U ⟶ U`. -/
+noncomputable def restrictFunctorCompPullbackIso :
+    restrictFunctor U.ι ⋙ pullback (f.resLE U (f ⁻¹ᵁ U) le_rfl) ≅
+      pullback f ⋙ restrictFunctor (f ⁻¹ᵁ U).ι :=
+  Functor.isoWhiskerRight (restrictFunctorIsoPullback U.ι) _ ≪≫
+    pullbackComp _ _ ≪≫ pullbackCongr (f.resLE_comp_ι le_rfl) ≪≫ (pullbackComp _ _).symm ≪≫
+    Functor.isoWhiskerLeft _ (restrictFunctorIsoPullback (f ⁻¹ᵁ U).ι).symm
 
-/-- **Base change of global sections along an isomorphism of rings.** For `φ : R ⟶ S` an
-isomorphism, pulling a sheaf of modules on `Spec R` back along `Spec φ` and taking global
-sections is restricting the scalars of its global sections along `φ⁻¹`. -/
-noncomputable def moduleSpecΓPullbackIso (φ : R ⟶ S) [IsIso φ] :
-    Modules.pullback (Spec.map φ) ⋙ moduleSpecΓFunctor (R := S) ≅
-      moduleSpecΓFunctor (R := R) ⋙ ModuleCat.restrictScalars (inv φ).hom :=
-  Functor.isoWhiskerRight (pullbackIsoPushforwardInv (Spec.map φ)) _ ≪≫
-    Functor.isoWhiskerRight (pushforwardCongr (Spec.map_inv φ).symm) _ ≪≫
-    moduleSpecΓPushforwardIso (inv φ)
+/-- The pullback functor on the level of the slices: it takes a sheaf of modules over
+`𝒪_Y` restricted to `U` to a sheaf of modules over `𝒪_X` restricted to `f ⁻¹ᵁ U`. -/
+noncomputable def pullbackOver :
+    SheafOfModules.{u} (Y.ringCatSheaf.over U) ⥤
+      SheafOfModules.{u} (X.ringCatSheaf.over (f ⁻¹ᵁ U)) :=
+  (overEquiv U).functor ⋙ pullback (f.resLE U (f ⁻¹ᵁ U) le_rfl) ⋙
+    (overEquiv (f ⁻¹ᵁ U)).inverse
 
-end BaseChange
+instance : PreservesColimitsOfSize.{u, u} (pullbackOver f U) := by
+  unfold pullbackOver
+  infer_instance
 
-section Fiber
+/-- `Scheme.Modules.pullbackOver` sends the structure sheaf to the structure sheaf. -/
+noncomputable def pullbackOverUnitIso :
+    SheafOfModules.unit.{u} (X.ringCatSheaf.over (f ⁻¹ᵁ U)) ≅
+      (pullbackOver f U).obj (SheafOfModules.unit.{u} (Y.ringCatSheaf.over U)) :=
+  ((f ⁻¹ᵁ U).sheafOfModulesEquivOverInverseUnit X.ringCatSheaf).symm ≪≫
+    (overEquiv (f ⁻¹ᵁ U)).inverse.mapIso
+      ((pullbackUnitIso (f.resLE U (f ⁻¹ᵁ U) le_rfl)).symm ≪≫
+        (pullback (f.resLE U (f ⁻¹ᵁ U) le_rfl)).mapIso
+          (U.sheafOfModulesEquivOverUnit Y.ringCatSheaf).symm)
 
-variable {X Y : Scheme.{u}}
+/-- `Scheme.Modules.pullbackOver` computes the restriction to `f ⁻¹ᵁ U` of the pullback
+of `M` in terms of the restriction of `M` to `U`. -/
+noncomputable def pullbackOverObjIso (M : Y.Modules) :
+    (pullbackOver f U).obj (M.over U) ≅ ((pullback f).obj M).over (f ⁻¹ᵁ U) :=
+  (overEquiv (f ⁻¹ᵁ U)).inverse.mapIso
+      ((pullback (f.resLE U (f ⁻¹ᵁ U) le_rfl)).mapIso ((overFunctorEquiv U).app M) ≪≫
+        (restrictFunctorCompPullbackIso f U).app M ≪≫
+        ((overFunctorEquiv (f ⁻¹ᵁ U)).app ((pullback f).obj M)).symm) ≪≫
+    ((overEquiv (f ⁻¹ᵁ U)).unitIso.app (((pullback f).obj M).over (f ⁻¹ᵁ U))).symm
 
-/-- The fibre functor at a point `x` of a scheme `X`: it sends a sheaf of `𝒪_X`-modules `F` to
-the `κ(x)`-vector space `F(x)`, obtained by pulling `F` back along `Spec κ(x) ⟶ X` and taking
-global sections. -/
-noncomputable def fiberFunctor (X : Scheme.{u}) (x : X) :
-    X.Modules ⥤ ModuleCat (X.residueField x) :=
-  Modules.pullback (X.fromSpecResidueField x) ⋙ moduleSpecΓFunctor (R := X.residueField x)
-
-/-- The fibre `F(x)` of a sheaf of `𝒪_X`-modules at a point `x`, as a `κ(x)`-vector space. -/
-noncomputable abbrev fiber (F : X.Modules) (x : X) : ModuleCat (X.residueField x) :=
-  (fiberFunctor X x).obj F
-
-/-- The `κ(x)`-linear map `φ(x) : F(x) ⟶ G(x)` induced by a morphism `φ : F ⟶ G` of sheaves of
-`𝒪_X`-modules. -/
-noncomputable abbrev fiberMap {F G : X.Modules} (φ : F ⟶ G) (x : X) : F.fiber x ⟶ G.fiber x :=
-  (fiberFunctor X x).map φ
-
-@[simp]
-lemma fiberMap_id (F : X.Modules) (x : X) : fiberMap (𝟙 F) x = 𝟙 (F.fiber x) :=
-  (fiberFunctor X x).map_id F
-
-@[simp]
-lemma fiberMap_comp {F G H : X.Modules} (φ : F ⟶ G) (ψ : G ⟶ H) (x : X) :
-    fiberMap (φ ≫ ψ) x = fiberMap φ x ≫ fiberMap ψ x :=
-  (fiberFunctor X x).map_comp φ ψ
-
-/-- The restriction `F ↦ F_y` of sheaves of modules to the scheme-theoretic fibre of
-`f : X ⟶ Y` over a point `y : Y`, that is, the pullback along `f.fiberι y`. -/
-noncomputable abbrev restrictToFiber (f : X ⟶ Y) (y : Y) : X.Modules ⥤ (f.fiber y).Modules :=
-  Modules.pullback (f.fiberι y)
-
-/-- **The fibre of a pullback.** If `u : X ⟶ Y` induces an isomorphism `κ(u x) ≅ κ(x)` on
-residue fields, then the fibre of `u^* F` at `x` is the fibre of `F` at `u x`, viewed as a
-`κ(x)`-vector space along `κ(u x) ≅ κ(x)`. -/
-noncomputable def fiberFunctorPullbackIso (u : X ⟶ Y) (x : X) [IsIso (u.residueFieldMap x)] :
-    Modules.pullback u ⋙ fiberFunctor X x ≅
-      fiberFunctor Y (u x) ⋙ ModuleCat.restrictScalars (inv (u.residueFieldMap x)).hom :=
-  Functor.isoWhiskerRight (pullbackComp (X.fromSpecResidueField x) u)
-      (moduleSpecΓFunctor (R := X.residueField x)) ≪≫
-    Functor.isoWhiskerRight (pullbackCongr (u.SpecMap_residueFieldMap_fromSpecResidueField x).symm)
-      (moduleSpecΓFunctor (R := X.residueField x)) ≪≫
-    Functor.isoWhiskerRight
-      (pullbackComp (Spec.map (u.residueFieldMap x)) (Y.fromSpecResidueField (u x))).symm
-      (moduleSpecΓFunctor (R := X.residueField x)) ≪≫
-    Functor.isoWhiskerLeft (Modules.pullback (Y.fromSpecResidueField (u x)))
-      (moduleSpecΓPullbackIso (u.residueFieldMap x))
-
-/-- The fibre of `u^* F` at `x`, for `u` inducing an isomorphism on the residue field at `x`. -/
-noncomputable def fiberPullbackIso (u : X ⟶ Y) (F : Y.Modules) (x : X)
-    [IsIso (u.residueFieldMap x)] :
-    ((Modules.pullback u).obj F).fiber x ≅
-      (ModuleCat.restrictScalars (inv (u.residueFieldMap x)).hom).obj (F.fiber (u x)) :=
-  (fiberFunctorPullbackIso u x).app F
-
-/-- **The fibre of a restriction to a fibre.** The fibre of `F_y` at a point `x` of the
-scheme-theoretic fibre of `f` over `y` is the fibre of `F` at `f.fiberι y x`; the residue fields
-`κ(f.fiberι y x)` and `κ(x)` agree because `f.fiberι y` is a preimmersion. -/
-noncomputable def fiberRestrictToFiberIso (f : X ⟶ Y) (y : Y) (F : X.Modules) (x : f.fiber y) :
-    ((restrictToFiber f y).obj F).fiber x ≅
-      (ModuleCat.restrictScalars (inv ((f.fiberι y).residueFieldMap x)).hom).obj
-        (F.fiber (f.fiberι y x)) :=
-  fiberPullbackIso (f.fiberι y) F x
-
-end Fiber
+end Pullback
 
 end AlgebraicGeometry.Scheme.Modules
