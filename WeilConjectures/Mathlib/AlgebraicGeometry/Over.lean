@@ -40,4 +40,19 @@ lemma overRingHom_apply (r : R) :
     overRingHom R X r = (X ↘ Spec (.of R)).appTop ((Scheme.ΓSpecIso (.of R)).inv r) :=
   rfl
 
+section
+
+variable {X} {Y : Scheme.{u}} [Y.Over (Spec (.of R))] (f : X ⟶ Y) [f.IsOver (Spec (.of R))]
+
+/-- The structure maps `R → Γ(-, 𝒪)` of two schemes over `Spec R` are compatible with a
+morphism over `Spec R` between them. -/
+lemma appTop_overRingHom (r : R) :
+    f.appTop.hom (overRingHom R Y r) = overRingHom R X r := by
+  have h : (X ↘ Spec (.of R)).appTop = (Y ↘ Spec (.of R)).appTop ≫ f.appTop := by
+    rw [← Scheme.Hom.comp_appTop, comp_over]
+  rw [overRingHom_apply, overRingHom_apply, h]
+  rfl
+
+end
+
 end AlgebraicGeometry.Scheme
