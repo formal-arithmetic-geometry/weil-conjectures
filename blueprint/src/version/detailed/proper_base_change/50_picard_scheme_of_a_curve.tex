@@ -7841,7 +7841,7 @@ $\cF'$ on $X'=S'\times_SX$).
 \uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-vanishing,lem:pc-cech-computes,lem:pc-affine-intersection-separated,lem:pc-base-change-affine}
+\uses{lem:pc-affine-vanishing,lem:pc-cech-computes,lem:pcb-cech-spectral,lem:pc-affine-intersection-separated,lem:pc-base-change-affine}
 It suffices to prove the statements on affine open subschemes
 $V=\Spec(A)$ of $S$ (the sheaf $R^if_*\cF$ is determined by its
 sections on affines, and $(R^if_*\cF)|_V=R^i(f|_V)_*\cF|$): after
@@ -7877,34 +7877,41 @@ affine opens ($m=1$) and every quasi-compact open subscheme of an
 affine open of $X$, in particular every $U_i\cap U_j$.  We prove by
 induction on $t$ the assertion $P(t)$: $U_1\cup\dots\cup U_t$ is good.
 For $t=1$ this is \Cref{lem:pc-affine-vanishing}.  For $t>1$ write
-$U=U_1$, $V=U_2\cup\cdots\cup U_t$ (good by the induction hypothesis)
-and consider the short exact sequence of sheaves on $X$
+$U=U_1$ and $V=U_2\cup\cdots\cup U_t$ (good by the induction
+hypothesis), so that $\mathcal U':X=U\cup V$ is an open covering of
+$X$ with two members, and apply the Čech-to-cohomology spectral
+sequence of \Cref{lem:pcb-cech-spectral} -- which holds for an
+arbitrary covering of a site, here the Zariski site of $X$, and an
+arbitrary abelian sheaf, so no affineness is needed -- to
+$\mathcal U'$ and $\cF$:
 \[
-0\to\cF\longrightarrow j_{U,*}\cF|_U\oplus j_{V,*}\cF|_V
-\longrightarrow j_{U\cap V,*}\cF|_{U\cap V}\to0
+E_2^{p,q}=\check H^p(\mathcal U',\underline H^q(\cF))
+\Longrightarrow H^{p+q}(X,\cF),\qquad
+\underline H^q(\cF):W\longmapsto H^q(W,\cF).
 \]
-(exactness is immediate on stalks, and since $X=U\cup V$ there are
-exactly three cases.  For $x\in U\cap V$ all three stalks are $\cF_x$
-and the sequence is $0\to\cF_x\to\cF_x\oplus\cF_x\to\cF_x\to0$, with
-the maps the diagonal and the difference.  For $x\in U\setminus V$ the
-neighbourhoods $W\subseteq U$ of $x$ are cofinal among all
-neighbourhoods of $x$, and they satisfy $W\cap V=W\cap U\cap V$; hence
-$(j_{U,*}\cF|_U)_x=\cF_x$, while the last two stalks
-$(j_{V,*}\cF|_V)_x=\operatorname{colim}_{W\ni x}\cF(W\cap V)$ and
-$(j_{U\cap V,*}\cF|_{U\cap V})_x
-=\operatorname{colim}_{W\ni x}\cF(W\cap U\cap V)$ are one and the same
-module $Q_x$ -- in general nonzero -- and the map between them is an
-isomorphism.  So the sequence reads
-$0\to\cF_x\to\cF_x\oplus Q_x\to Q_x\to0$, with the maps
-$s\mapsto(s,\rho(s))$ and $(a,b)\mapsto\rho(a)-b$ for
-$\rho:\cF_x\to Q_x$ the canonical map, and this is exact.  The
-remaining case $x\in V\setminus U$ is symmetric.)  Its long exact
-cohomology sequence, together with
-the vanishing of $H^p(U,\cdot)$, $H^p(V,\cdot)$ and $H^p(U\cap V,\cdot)$
-in large degrees -- $U$ is affine, $V$ is good by the induction
-hypothesis, and $U\cap V=\bigcup_{i\ge2}(U_1\cap U_i)$ is a
-quasi-compact open subscheme of the affine $U_1$, hence good by the
-previous paragraph -- shows that $X=U\cup V$ is good, with
+The alternating Čech complex of a covering with two members is
+concentrated in degrees $0$ and $1$, where it reads
+$\underline H^q(\cF)(U)\oplus\underline H^q(\cF)(V)\to
+\underline H^q(\cF)(U\cap V)$; hence $E_2^{p,q}=0$ for $p\ge2$, the
+spectral sequence degenerates, and $H^n(X,\cF)$ carries a filtration
+with graded pieces
+\[
+E_2^{0,n}=\ker\bigl(H^n(U,\cF)\oplus H^n(V,\cF)\to
+H^n(U\cap V,\cF)\bigr),\qquad
+E_2^{1,n-1}=\operatorname{coker}\bigl(H^{n-1}(U,\cF)\oplus
+H^{n-1}(V,\cF)\to H^{n-1}(U\cap V,\cF)\bigr).
+\]
+This is the Mayer--Vietoris sequence of the covering $\{U,V\}$, and it
+relates exactly the terms the devissage needs: the cohomologies of
+$U$, $V$ and $U\cap V$ themselves.
+
+Now $U$ is affine, $V$ is good by the induction hypothesis, and
+$U\cap V=\bigcup_{i\ge2}(U_1\cap U_i)$ is a quasi-compact open
+subscheme of the affine $U_1$, hence good by the previous paragraph.
+So $E_2^{0,n}=0$ as soon as $n\ge n(U)$ and $n\ge n(V)$, and
+$E_2^{1,n-1}=0$ as soon as $n-1\ge n(U\cap V)$; both graded pieces
+vanish for $n\ge\max\{n(U),n(V),n(U\cap V)+1\}$, so $X=U\cup V$ is
+good with
 $n(X)=\max\{n(U),n(V),n(U\cap V)+1\}$; and when all the $U_i\cap U_j$
 happen to be affine, so that $\mathcal U$ itself has affine
 intersections, the same devissage gives the sharp bound $n(X)=t$
@@ -7913,6 +7920,27 @@ $H^p(X,\cF)=\check H^p(\mathcal U,\cF)$ for all $p$ (the classical
 devissage of Cohomology of Schemes, Lemma 30.4.5,
 \stacksproject{01XJ}, which also uses \Cref{lem:pc-cech-computes} for
 the Čech comparison).
+
+The Čech spectral sequence, rather than a short exact sequence of
+sheaves on $X$, is what the devissage requires.  The sequence
+$0\to\cF\to j_{U,*}\cF|_U\oplus j_{V,*}\cF|_V\to
+j_{U\cap V,*}\cF|_{U\cap V}\to0$ is exact, but the terms of its long
+exact cohomology sequence are the $H^p(X,j_{U,*}\cF|_U)$ and
+$H^p(X,j_{U\cap V,*}\cF|_{U\cap V})$, and identifying these with
+$H^p(U,\cF)$ and $H^p(U\cap V,\cF)$ would require
+$R^qj_{U,*}(\cF|_U)=0$ for $q>0$.  That fails precisely in the
+quasi-separated, non-separated situation this lemma has to cover: take
+$X$ the affine plane with doubled origin over $k$, let $U,V$ be its
+two standard charts and let $x\in U$ be the origin of $U$.  The opens
+$W\subseteq U$ containing $x$ are cofinal among the open
+neighbourhoods of $x$ and satisfy $W\cap V=W\setminus\{x\}$, so
+\[
+(R^1j_{V,*}\cO_V)_x=\colim_{W\ni x}H^1(W\setminus\{x\},\cO_X)
+=H^2_{\mathfrak m_x}(\cO_{X,x})\ne0
+\]
+by Grothendieck's non-vanishing theorem, $\cO_{X,x}$ being
+two-dimensional.
+
 This proves (1) and the first statement of (2), with the integer
 $n=n(X)$ produced by the induction.
 The base-change uniformity: the vanishing $R^p(f')_*\cF'=0$ is local
