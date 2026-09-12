@@ -52,6 +52,8 @@ homogeneous coordinates on the integral model, by the pullback map on global sec
   `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso_hom_app_homogeneousCoord`: the
   global sections attached to homogeneous polynomials, and in particular the homogeneous
   coordinates, are compatible with base change.
+- `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso_hom_comp`: the base-change
+  isomorphisms are compatible with composing two morphisms of base schemes.
 - `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso_hom_app_smul`: base change of
   global sections of `𝒪(d)` is semilinear over the pullback of functions
   `Γ(T, 𝒪_T) ⟶ Γ(S, 𝒪_S)`. Together with additivity this is what base-changes a hyperplane
@@ -190,6 +192,21 @@ lemma pullbackTwistingSheafIso_hom_app_homogeneousCoord (i : n)
           (homogeneousCoord i T)) =
       homogeneousCoord i S :=
   pullbackTwistingSheafIso_hom_app_homogeneousSection _ f
+
+variable (n) in
+/-- **The base-change isomorphisms are compatible with composition**: for `f : S ⟶ T` and
+`g : T ⟶ U`, pulling `𝒪(d)` back along `map n g` and then along `map n f` is pulling it back
+along `map n (f ≫ g)`. This is the associativity coherence of the pullback pseudofunctor,
+applied to the two triangles `map n g ≫ toProjInt n U = toProjInt n T` and
+`map n f ≫ toProjInt n T = toProjInt n S`. -/
+lemma pullbackTwistingSheafIso_hom_comp {S T U : Scheme.{u}} (f : S ⟶ T) (g : T ⟶ U) (d : ℤ) :
+    (Scheme.Modules.pullback (map n f)).map (pullbackTwistingSheafIso n g d).hom ≫
+        (pullbackTwistingSheafIso n f d).hom =
+      (Scheme.Modules.pullbackComp (map n f) (map n g)).hom.app (twistingSheaf n U d) ≫
+        (Scheme.Modules.pullbackCongr (map_comp n f g).symm).hom.app (twistingSheaf n U d) ≫
+          (pullbackTwistingSheafIso n (f ≫ g) d).hom :=
+  Scheme.Modules.pullbackTriangle_comp_hom_app (map_comp n f g) (map_toProjInt n g)
+    (map_toProjInt n f) (map_toProjInt n (f ≫ g)) _
 
 variable (n) in
 /-- **Base change of global sections of `𝒪(d)` is semilinear** over the pullback of functions
