@@ -175,4 +175,39 @@ lemma IsUniversalSection.tensorObj (hm : IsUniversalSection m) (hm' : IsUniversa
 
 end
 
+section Evaluation
+
+variable (R) (X : Cᵒᵖ)
+
+/-- Evaluation at an object is a monoidal functor: the tensor product of presheaves of modules
+is computed sectionwise. -/
+noncomputable instance evaluationMonoidal :
+    (evaluation.{u} (R ⋙ forget₂ CommRingCat RingCat.{u}) X).Monoidal :=
+  Functor.CoreMonoidal.toMonoidal
+    { εIso := Iso.refl _
+      μIso := fun _ _ ↦ Iso.refl _
+      μIso_hom_natural_left := by
+        intros
+        simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+        rfl
+      μIso_hom_natural_right := by
+        intros
+        simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+        rfl
+      associativity := by
+        intros
+        simp only [Iso.refl_hom, MonoidalCategory.whiskerLeft_id,
+          MonoidalCategory.id_whiskerRight, Category.id_comp, Category.comp_id]
+        rfl
+      left_unitality := by
+        intros
+        simp only [Iso.refl_hom, MonoidalCategory.id_whiskerRight, Category.id_comp]
+        rfl
+      right_unitality := by
+        intros
+        simp only [Iso.refl_hom, MonoidalCategory.whiskerLeft_id, Category.id_comp]
+        rfl }
+
+end Evaluation
+
 end PresheafOfModules

@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.MiracleFlatness
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
