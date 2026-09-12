@@ -10,23 +10,32 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 /-!
 # Composing a map out of a quotient module with a linear map
 
-We record that postcomposing `Submodule.liftQ` with a linear map is again a `Submodule.liftQ`,
-through the map `Submodule.factor` between the quotients.
+We record two compatibilities of `Submodule.liftQ` with composition: postcomposing
+`Submodule.liftQ` with a linear map is again a `Submodule.liftQ`, and precomposing it with
+`Submodule.factor` is the `Submodule.liftQ` over the smaller submodule.
 -/
 
 @[expose] public section
 
 namespace Submodule
 
-variable {R M N N' : Type*} [Ring R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N]
-  [AddCommGroup N'] [Module R N'] {p p' : Submodule R M}
+variable {R R₂ R₃ M M₂ M₃ : Type*} [Ring R] [Ring R₂] [Ring R₃] [AddCommGroup M] [Module R M]
+  [AddCommGroup M₂] [Module R₂ M₂] [AddCommGroup M₃] [Module R₃ M₃] {τ₁₂ : R →+* R₂}
+  {τ₂₃ : R₂ →+* R₃} {τ₁₃ : R →+* R₃} [RingHomCompTriple τ₁₂ τ₂₃ τ₁₃] {p p' : Submodule R M}
 
-/-- Postcomposing `Submodule.liftQ` with a linear map `k` is the `Submodule.liftQ` of the
-composite, read through `Submodule.factor`. -/
-theorem comp_liftQ (hpp' : p ≤ p') {L : M →ₗ[R] N} (hL : p ≤ LinearMap.ker L) (k : N →ₗ[R] N')
-    {L' : M →ₗ[R] N'} (hL' : p' ≤ LinearMap.ker L') (hk : k.comp L = L') :
-    k.comp (p.liftQ L hL) = (p'.liftQ L' hL').comp (factor hpp') := by
+/-- Postcomposing `Submodule.liftQ` with a linear map is the `Submodule.liftQ` of the
+composite. -/
+theorem comp_liftQ (L : M →ₛₗ[τ₁₂] M₂) (hL : p ≤ LinearMap.ker L) (k : M₂ →ₛₗ[τ₂₃] M₃) :
+    k.comp (p.liftQ L hL) =
+      p.liftQ (k.comp L) (hL.trans (LinearMap.ker_le_ker_comp L k)) := by
   ext y
-  simpa using congr($hk y)
+  rfl
+
+/-- Precomposing `Submodule.liftQ` over `p'` with the map `M ⧸ p ⟶ M ⧸ p'` of
+`Submodule.factor` is `Submodule.liftQ` over `p`. -/
+theorem liftQ_comp_factor (hpp' : p ≤ p') (L : M →ₛₗ[τ₁₂] M₂) (hL : p' ≤ LinearMap.ker L) :
+    (p'.liftQ L hL).comp (factor hpp') = p.liftQ L (hpp'.trans hL) := by
+  ext y
+  rfl
 
 end Submodule

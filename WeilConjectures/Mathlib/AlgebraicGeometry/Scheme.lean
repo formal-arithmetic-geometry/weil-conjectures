@@ -47,10 +47,11 @@ variable {Y : Scheme.{u}}
 /-- `Scheme.Hom.appLE` only depends on the morphism up to equality. -/
 lemma appLE_congr_hom {c d : X ⟶ Y} (hcd : c = d) (U : Y.Opens) (V : X.Opens)
     (ec : V ≤ c ⁻¹ᵁ U) (ed : V ≤ d ⁻¹ᵁ U) : c.appLE U V ec = d.appLE U V ed := by
-  subst hcd; rfl
+  subst hcd
+  rfl
 
 /-- `Scheme.Hom.appLE` from the top open to the top open is `Scheme.Hom.appTop`. -/
-lemma appLE_top_top (a : X ⟶ Y) (e : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤) : a.appLE ⊤ ⊤ e = a.appTop := by
+lemma appLE_eq_appTop (a : X ⟶ Y) (e : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤) : a.appLE ⊤ ⊤ e = a.appTop := by
   have h : (homOfLE e).op = 𝟙 (op (a ⁻¹ᵁ ⊤) : X.Opensᵒᵖ) := Subsingleton.elim _ _
   rw [Hom.appLE, h, X.presheaf.map_id, Category.comp_id]
 

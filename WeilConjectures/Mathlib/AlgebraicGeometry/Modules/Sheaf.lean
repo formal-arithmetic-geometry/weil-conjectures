@@ -12,8 +12,11 @@ public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
+public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Sections, stalks, restrictions and fibres of `𝒪_X`-modules
@@ -179,6 +182,67 @@ lemma germₗ_apply (x : U) (m : Γ(F, U)) :
 end Stalk
 end Kernel
 
+noncomputable section StalkDesc
+
+variable {X : Scheme.{u}} (G : X.Modules) (x : X) (A : Ab.{u})
+  (c : ∀ U : X.Opens, x ∈ U → (Γ(G, U) ⟶ A))
+  (hc : ∀ (U V : X.Opens) (hU : x ∈ U) (hV : x ∈ V) (i : op U ⟶ op V),
+    G.presheaf.map i ≫ c V hV = c U hU)
+  {S : CommRingCat.{u}} (φ : X.presheaf.stalk x ⟶ S) [Module S A]
+  (hφ : ∀ (U : X.Opens) (hU : x ∈ U) (r : Γ(X, U)) (s : Γ(G, U)),
+    c U hU (r • s) = φ (X.presheaf.germ U x hU r) • c U hU s)
+
+include hφ in
+/-- The map out of the stalk of `G` at `x` given by a family of maps which is semilinear over a
+ring map `φ : 𝒪_{X, x} ⟶ S` is itself semilinear over `φ`. -/
+lemma stalkDesc_smul (r : X.presheaf.stalk x) (z : G.presheaf.stalk x) :
+    G.presheaf.stalkDesc x A c hc (r • z) = φ r • G.presheaf.stalkDesc x A c hc z := by
+  obtain ⟨U, hU, s, rfl⟩ := G.presheaf.exists_germ_eq z
+  obtain ⟨V, hV, r₀, rfl⟩ := X.presheaf.exists_germ_eq r
+  rw [← X.presheaf.germ_res_apply (homOfLE inf_le_right : U ⊓ V ⟶ V) x ⟨hU, hV⟩ r₀,
+    ← G.presheaf.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) x ⟨hU, hV⟩ s,
+    ← germ_smul, TopCat.Presheaf.stalkDesc_germ, TopCat.Presheaf.stalkDesc_germ, hφ]
+
+/-- The `𝒪_{X, x}`-linear map out of the stalk of `G` at `x` induced by a compatible family of
+maps out of the sections of `G` over the open neighbourhoods of `x` which is semilinear over a
+ring map `φ : 𝒪_{X, x} ⟶ S`. -/
+def stalkDescₗ :
+    G.presheaf.stalk x →ₗ[X.presheaf.stalk x]
+      (ModuleCat.restrictScalars φ.hom).obj (ModuleCat.of S A) where
+  toFun := G.presheaf.stalkDesc x A c hc
+  map_add' := map_add _
+  map_smul' := stalkDesc_smul G x A c hc φ hφ
+
+@[simp]
+lemma stalkDescₗ_apply (z : G.presheaf.stalk x) :
+    stalkDescₗ G x A c hc φ hφ z = G.presheaf.stalkDesc x A c hc z := rfl
+
+include hφ in
+/-- Composing the linear map out of the stalk with a semilinear map of the targets is the linear
+map out of the stalk for the composed family.
+
+This is stated for a variable `G` so that it can be instantiated at a concrete sheaf of modules
+without the kernel having to redo the argument by `TopCat.Presheaf.stalk_hom_ext` there. -/
+lemma ofSemilinear_comp_stalkDescₗ {S' : CommRingCat.{u}} (ψ : X.presheaf.stalk x ⟶ S')
+    (A' : Ab.{u}) [Module S' A'] (c' : ∀ U : X.Opens, x ∈ U → (Γ(G, U) ⟶ A'))
+    (hc' : ∀ (U V : X.Opens) (hU : x ∈ U) (hV : x ∈ V) (i : op U ⟶ op V),
+      G.presheaf.map i ≫ c' V hV = c' U hU)
+    (hψ : ∀ (U : X.Opens) (hU : x ∈ U) (r : Γ(X, U)) (s : Γ(G, U)),
+      c' U hU (r • s) = ψ (X.presheaf.germ U x hU r) • c' U hU s)
+    (g : A ⟶ A') (hg : ∀ (r : X.presheaf.stalk x) (a : A), g (φ r • a) = ψ r • g a)
+    (hgc : ∀ (U : X.Opens) (hU : x ∈ U), c U hU ≫ g = c' U hU) :
+    (ModuleCat.ofSemilinear φ ψ g hg).hom.comp (stalkDescₗ G x A c hc φ hφ) =
+      stalkDescₗ G x A' c' hc' ψ hψ := by
+  have hcomp : G.presheaf.stalkDesc x A c hc ≫ g = G.presheaf.stalkDesc x A' c' hc' :=
+    TopCat.Presheaf.stalk_hom_ext _ fun U hU ↦ by
+      rw [← Category.assoc, TopCat.Presheaf.germ_comp_stalkDesc,
+        TopCat.Presheaf.germ_comp_stalkDesc, hgc]
+  exact LinearMap.ext fun z ↦ (ModuleCat.ofSemilinear_apply _ _ g hg _).trans
+    ((ConcreteCategory.comp_apply (G.presheaf.stalkDesc x A c hc) g z).symm.trans
+      (ConcreteCategory.congr_hom hcomp z))
+
+end StalkDesc
+
 noncomputable section Pushforward
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
@@ -311,7 +375,22 @@ end Pullback
 
 noncomputable section PushforwardPullback
 
-variable {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) (M : Z.Modules)
+/-- The `app` of a morphism of sheaves of modules is natural in the open subset:
+
+```
+  Γ(M, U) --- φ.app U ---> Γ(N, U)
+     |                        |
+     | M.presheaf.map i       | N.presheaf.map i
+     v                        v
+  Γ(M, V) --- φ.app V ---> Γ(N, V)
+```
+-/
+@[reassoc]
+lemma Hom.naturality {X : Scheme.{u}} {M N : X.Modules} (φ : M ⟶ N) {U V : X.Opens}
+    (i : op U ⟶ op V) : M.presheaf.map i ≫ φ.app V = φ.app U ≫ N.presheaf.map i := by
+  simpa only [mapPresheaf_app] using φ.mapPresheaf.naturality i
+
+variable {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) (N : Y.Modules) (M : Z.Modules)
 
 /-- The canonical morphism `b_* b^* M ⟶ (a ≫ b)_* (a ≫ b)^* M`, obtained by applying `b_*`
 to the unit of the adjunction `a^* ⊣ a_*`. -/
@@ -347,38 +426,204 @@ lemma eqToHom_pushforward_smul {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : X'.Modu
     eqToHom (pushforward_obj_obj a N U) (r • y) =
       a.app U r • eqToHom (pushforward_obj_obj a N U) y := rfl
 
-/-- The restriction map `Γ(X', a ⁻¹ᵁ ⊤) ⟶ Γ(X', ⊤)` is the identity, so that restricting
-the pullback of a global function gives the pullback of functions on global sections. -/
-lemma map_le_top_app_top {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (r : Γ(Y', ⊤)) :
-    X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op (a.app ⊤ r) =
-      a.appTop r := by
-  have h : X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op = 𝟙 Γ(X', ⊤) :=
-    (congrArg (fun i : (op (a ⁻¹ᵁ ⊤) : X'.Opensᵒᵖ) ⟶ op ⊤ ↦ X'.presheaf.map i)
-      (Subsingleton.elim _ (𝟙 (op (⊤ : X'.Opens))))).trans (X'.presheaf.map_id _)
-  exact (ConcreteCategory.congr_hom h _).trans rfl
-
-/-- The pullback of global sections along a morphism of schemes: the image of a global section
-of `N` under the unit `N ⟶ a_* a^* N`, read as a global section of `a^* N`. -/
-noncomputable def sectionsPullback {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules) :
-    Γ(N, ⊤) ⟶ Γ((pullback a).obj N, ⊤) :=
-  ((pullbackPushforwardAdjunction a).unit.app N).app ⊤ ≫
-    eqToHom (pushforward_obj_obj a ((pullback a).obj N) ⊤) ≫
-    ((pullback a).obj N).presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op
-
-/-- The pullback of global sections is semilinear over the pullback of functions. -/
-lemma sectionsPullback_smul {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules)
-    (r : Γ(Y', ⊤)) (s : Γ(N, ⊤)) :
-    sectionsPullback a N (r • s) = a.appTop r • sectionsPullback a N s := by
-  rw [sectionsPullback]
-  simp only [ConcreteCategory.comp_apply, Functor.id_obj, Functor.comp_obj, Hom.app_smul,
-    eqToHom_pushforward_smul, map_smul]
-  rw [map_le_top_app_top]
-
 lemma pushforwardPullbackComp_app (V : Z.Opens) :
     (pushforwardPullbackComp a b M).app V =
       ((pullbackPushforwardAdjunction a).unit.app ((pullback b).obj M)).app (b ⁻¹ᵁ V) ≫
         ((pullbackComp a b).hom.app M).app ((a ≫ b) ⁻¹ᵁ V) := by
   simp [pushforwardPullbackComp]
+
+/-- The unit of the adjunction `(𝟙 X)^* ⊣ (𝟙 X)_*` is the identification of `N` with
+`(𝟙 X)_* (𝟙 X)^* N`. -/
+@[reassoc (attr := simp)]
+lemma unit_pushforwardId :
+    (pullbackPushforwardAdjunction (𝟙 Y)).unit.app N ≫
+        (pushforward (𝟙 Y)).map ((pullbackId Y).hom.app N) = (pushforwardId Y).inv.app N := by
+  have h := unit_conjugateEquiv .id (pullbackPushforwardAdjunction (𝟙 Y)) (pullbackId Y).hom N
+  rw [conjugateEquiv_pullbackId_hom] at h
+  simpa using h.symm
+
+/-- The sections of `a_* M` over `U` are the sections of `M` over `a ⁻¹ᵁ U` by definition, so
+the identification of the two is the identity.
+
+It is nevertheless spelled out in `AlgebraicGeometry.Scheme.Modules.sectionsPullbackLE`: letting
+the two be identified silently makes elaboration unfold the scheme `a ⁻¹ᵁ U` is an open subset
+of, which is expensive when that scheme is a pullback. -/
+lemma eqToHom_pushforward_obj_obj (P : X.Modules) (U : Y.Opens) :
+    eqToHom (pushforward_obj_obj a P U) = 𝟙 Γ((pushforward a).obj P, U) := rfl
+
+/-- The identification of `Γ(a_* P, U)` with `Γ(P, a ⁻¹ᵁ U)` is compatible with restriction; see
+`AlgebraicGeometry.Scheme.Modules.eqToHom_pushforward_obj_obj` for why it is spelled out. -/
+lemma eqToHom_pushforward_map (P : X.Modules) {U U' : Y.Opens} (i : op U' ⟶ op U) :
+    ((pushforward a).obj P).presheaf.map i ≫ eqToHom (pushforward_obj_obj a P U) =
+      eqToHom (pushforward_obj_obj a P U') ≫
+        P.presheaf.map ((Opens.map a.base).map i.unop).op := rfl
+
+/-- The pullback of sections along `a : X ⟶ Y`, from an open `U` of `Y` to an open `V` of `X`
+contained in `a ⁻¹ᵁ U`: the image of a section under the unit `N ⟶ a_* a^* N`, read as a section
+of `a^* N` over `a ⁻¹ᵁ U` and restricted to `V`. -/
+noncomputable def sectionsPullbackLE {U : Y.Opens} {V : X.Opens} (h : V ≤ a ⁻¹ᵁ U) :
+    Γ(N, U) ⟶ Γ((pullback a).obj N, V) :=
+  ((pullbackPushforwardAdjunction a).unit.app N).app U ≫
+    eqToHom (pushforward_obj_obj a ((pullback a).obj N) U) ≫
+    ((pullback a).obj N).presheaf.map (homOfLE h).op
+
+/-- Restricting further after pulling back is pulling back to the smaller open:
+
+```
+                  sectionsPullbackLE a N h
+  Γ(N, U) ------------------------------------> Γ(a^* N, V)
+         ╲                                            |
+          ╲  sectionsPullbackLE a N (h' : V' ≤ V ≤ ..)| (a^* N).presheaf.map i
+           ╲                                          v
+            ────────────────────────────────> Γ(a^* N, V')
+```
+-/
+@[reassoc]
+lemma sectionsPullbackLE_map {U : Y.Opens} {V V' : X.Opens} (h : V ≤ a ⁻¹ᵁ U) (i : op V ⟶ op V') :
+    sectionsPullbackLE a N h ≫ ((pullback a).obj N).presheaf.map i =
+      sectionsPullbackLE a N (i.unop.le.trans h) := by
+  rw [sectionsPullbackLE, sectionsPullbackLE, Category.assoc, Category.assoc,
+    ← Functor.map_comp]
+  congr 1
+
+/-- Pulling back the restriction of a section is the pullback of the section:
+
+```
+  Γ(N, U) --- sectionsPullbackLE a N h ---> Γ(a^* N, V)
+     |                                            ^
+     | N.presheaf.map i                          ╱
+     v                                          ╱ sectionsPullbackLE a N h'
+  Γ(N, U') ────────────────────────────────────
+```
+-/
+@[reassoc]
+lemma map_sectionsPullbackLE {U U' : Y.Opens} {V : X.Opens} (h : V ≤ a ⁻¹ᵁ U) (i : op U' ⟶ op U) :
+    N.presheaf.map i ≫ sectionsPullbackLE a N h =
+      sectionsPullbackLE a N (h.trans ((Opens.map a.base).map i.unop).le) := by
+  have hnat := ((pullbackPushforwardAdjunction a).unit.app N).mapPresheaf.naturality i
+  simp only [mapPresheaf_app, Functor.id_obj, Functor.comp_obj] at hnat
+  rw [sectionsPullbackLE, sectionsPullbackLE, ← Category.assoc, ← Category.assoc, hnat,
+    Category.assoc, Category.assoc]
+  congr 1
+  rw [← Category.assoc, eqToHom_pushforward_map, Category.assoc, ← Functor.map_comp]
+  congr 1
+
+/-- The pullback of sections is semilinear over `AlgebraicGeometry.Scheme.Hom.appLE`. -/
+lemma sectionsPullbackLE_smul {U : Y.Opens} {V : X.Opens} (h : V ≤ a ⁻¹ᵁ U)
+    (r : Γ(Y, U)) (r' : Γ(X, V)) (hr : a.appLE U V h r = r') (s : Γ(N, U)) :
+    sectionsPullbackLE a N h (r • s) = r' • sectionsPullbackLE a N h s := by
+  subst hr
+  rw [Scheme.Hom.appLE, ConcreteCategory.comp_apply, sectionsPullbackLE]
+  simp only [ConcreteCategory.comp_apply, Functor.id_obj, Functor.comp_obj, Hom.app_smul,
+    eqToHom_pushforward_smul, map_smul]
+
+/-- Pulling a section back along the identity is restricting it:
+
+```
+                  sectionsPullbackLE (𝟙 Y) N h
+  Γ(N, U) ---------------------------------------> Γ((𝟙 Y)^* N, V)
+         ╲                                                |
+          ╲  N.presheaf.map (homOfLE h').op               | (pullbackId Y).hom.app N at V
+           ╲                                              v
+            ──────────────────────────────────────> Γ(N, V)
+```
+-/
+@[reassoc]
+lemma sectionsPullbackLE_id {U V : Y.Opens} (h : V ≤ (𝟙 Y) ⁻¹ᵁ U) (h' : V ≤ U) :
+    sectionsPullbackLE (𝟙 Y) N h ≫ ((pullbackId Y).hom.app N).app V =
+      N.presheaf.map (homOfLE h').op := by
+  have hu := congrArg (fun φ ↦ Hom.app φ U) (unit_pushforwardId N)
+  simp only [Hom.comp_app, pushforwardId_inv_app_app] at hu
+  simp only [pushforward_map_app] at hu
+  have hu' : (Hom.app ((pullbackPushforwardAdjunction (𝟙 Y)).unit.app N) U ≫
+      eqToHom (pushforward_obj_obj (𝟙 Y) ((pullback (𝟙 Y)).obj N) U)) ≫
+      Hom.app ((pullbackId Y).hom.app N) (𝟙 Y ⁻¹ᵁ U) = 𝟙 Γ(N, U) := hu
+  rw [sectionsPullbackLE, Category.assoc, Category.assoc, Hom.naturality, ← Category.assoc,
+    ← Category.assoc, hu', Category.id_comp]
+  exact congrArg N.presheaf.map (Subsingleton.elim _ _)
+
+/-- Pulling a section back to the full preimage in two steps agrees with pulling it back in
+one. -/
+@[reassoc]
+lemma sectionsPullbackLE_comp_pullbackComp_app (U : Z.Opens) :
+    sectionsPullbackLE b M (le_refl (b ⁻¹ᵁ U)) ≫
+        sectionsPullbackLE a ((pullback b).obj M) (le_refl (a ⁻¹ᵁ (b ⁻¹ᵁ U))) ≫
+          ((pullbackComp a b).hom.app M).app (a ⁻¹ᵁ (b ⁻¹ᵁ U)) =
+      sectionsPullbackLE (a ≫ b) M (le_refl ((a ≫ b) ⁻¹ᵁ U)) := by
+  have h := congrArg (fun φ ↦ Hom.app φ U) (unit_pushforwardPullbackComp a b M)
+  simp only [Hom.comp_app, pushforwardPullbackComp_app] at h
+  simp only [sectionsPullbackLE, homOfLE_refl, op_id, CategoryTheory.Functor.map_id,
+    Category.comp_id]
+  rw [eqToHom_pushforward_obj_obj b ((pullback b).obj M) U,
+    eqToHom_pushforward_obj_obj a ((pullback a).obj ((pullback b).obj M)) (b ⁻¹ᵁ U),
+    eqToHom_pushforward_obj_obj (a ≫ b) ((pullback (a ≫ b)).obj M) U]
+  simpa using h
+
+/-- Pulling a section back in two steps agrees with pulling it back in one:
+
+```
+                sectionsPullbackLE b M h₁
+  Γ(M, U) ---------------------------------> Γ(b^* M, V)
+         ╲                                         |
+          ╲                                        | sectionsPullbackLE a (b^* M) h₂
+           ╲ sectionsPullbackLE (a ≫ b) M h₃       v
+            ╲                                Γ(a^* (b^* M), V')
+             ╲                                     |
+              ╲                                    | (pullbackComp a b).hom.app M at V'
+               ────────────────────────────> Γ((a ≫ b)^* M, V')
+```
+-/
+@[reassoc]
+lemma sectionsPullbackLE_comp {U : Z.Opens} {V : Y.Opens} {V' : X.Opens}
+    (h₁ : V ≤ b ⁻¹ᵁ U) (h₂ : V' ≤ a ⁻¹ᵁ V) (h₃ : V' ≤ (a ≫ b) ⁻¹ᵁ U) :
+    sectionsPullbackLE b M h₁ ≫ sectionsPullbackLE a ((pullback b).obj M) h₂ ≫
+        ((pullbackComp a b).hom.app M).app V' =
+      sectionsPullbackLE (a ≫ b) M h₃ := by
+  rw [← sectionsPullbackLE_map b M (le_refl (b ⁻¹ᵁ U)) (homOfLE h₁).op, Category.assoc,
+    map_sectionsPullbackLE_assoc,
+    ← sectionsPullbackLE_map a ((pullback b).obj M) (le_refl (a ⁻¹ᵁ (b ⁻¹ᵁ U)))
+      (homOfLE (h₂.trans ((Opens.map a.base).map (homOfLE h₁)).le)).op,
+    Category.assoc, Hom.naturality, sectionsPullbackLE_comp_pullbackComp_app_assoc,
+    sectionsPullbackLE_map]
+
+/-- Pulling back sections along equal morphisms:
+
+```
+                sectionsPullbackLE c N hc
+  Γ(N, U) ---------------------------------> Γ(c^* N, V)
+         ╲                                         |
+          ╲  sectionsPullbackLE d N hd             | (pullbackCongr hcd).hom.app N at V
+           ╲                                       v
+            ───────────────────────────────> Γ(d^* N, V)
+```
+-/
+lemma sectionsPullbackLE_congr {c d : X ⟶ Y} (hcd : c = d) {U : Y.Opens} {V : X.Opens}
+    (hc : V ≤ c ⁻¹ᵁ U) (hd : V ≤ d ⁻¹ᵁ U) :
+    sectionsPullbackLE c N hc ≫ ((pullbackCongr hcd).hom.app N).app V =
+      sectionsPullbackLE d N hd := by
+  subst hcd
+  simp [pullbackCongr]
+
+/-- The pullback of global sections along a morphism of schemes: the image of a global section
+of `N` under the unit `N ⟶ a_* a^* N`, read as a global section of `a^* N`. -/
+noncomputable def sectionsPullback : Γ(N, ⊤) ⟶ Γ((pullback a).obj N, ⊤) :=
+  sectionsPullbackLE a N (by simp : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤)
+
+/-- The pullback of global sections is semilinear over the pullback of functions. -/
+lemma sectionsPullback_smul (r : Γ(Y, ⊤)) (s : Γ(N, ⊤)) :
+    sectionsPullback a N (r • s) = a.appTop r • sectionsPullback a N s :=
+  sectionsPullbackLE_smul a N _ r _ (Scheme.Hom.appLE_eq_appTop a _ ▸ rfl) s
+
+/-- The pullback of global sections followed by a morphism out of `a^* N` is again semilinear
+over `AlgebraicGeometry.Scheme.Hom.appTop`.
+
+This is stated for a variable `a` so that it can be instantiated at a concrete morphism without
+the kernel having to redo the element-level rewriting there. -/
+lemma sectionsPullback_comp_app_smul {P : X.Modules} (e : (pullback a).obj N ⟶ P) (r : Γ(Y, ⊤))
+    (r' : Γ(X, ⊤)) (hr : a.appTop r = r') (s : Γ(N, ⊤)) :
+    (sectionsPullback a N ≫ e.app ⊤) (r • s) = r' • (sectionsPullback a N ≫ e.app ⊤) s := by
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, sectionsPullback_smul,
+    Hom.app_smul, hr]
 
 end PushforwardPullback
 

@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Away
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -1256,6 +1257,17 @@ theorem finite_stalk (M : X.Modules) [M.IsCoherent] (x : X) :
   have hlm := isLocalizedModule_germₗ M haff ⟨x, hx⟩
   exact Module.Finite.of_isLocalizedModule (haff.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
     (germₗ M ⟨x, hx⟩)
+
+/-- The `𝔪_x`-adic completion of the stalk of a sheaf of `𝒪_X`-modules at `x`. By
+`AlgebraicGeometry.Scheme.Modules.finite_stalk` this is, for a coherent sheaf on a locally
+noetherian scheme, the completion of a finite module over a noetherian local ring. -/
+noncomputable abbrev completedStalk (M : X.Modules) (x : X) : Type u :=
+  AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (M.presheaf.stalk x)
+
+/-- The canonical map from the stalk of `M` at `x` to its `𝔪_x`-adic completion. -/
+noncomputable abbrev toCompletedStalk (M : X.Modules) (x : X) :
+    M.presheaf.stalk x →ₗ[X.presheaf.stalk x] completedStalk M x :=
+  AdicCompletion.of _ _
 
 end Scheme.Modules
 

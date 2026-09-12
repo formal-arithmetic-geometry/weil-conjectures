@@ -23,17 +23,17 @@ this is what makes the construction usable without ever unfolding the map.
 
 @[expose] public section
 
-universe u
+universe v
 
 open CategoryTheory
 
 namespace ModuleCat
 
 /-- An additive map from an `S`-module to an `S'`-module which is semilinear over two ring maps
-`φ : R ⟶ S` and `ψ : R ⟶ S'` out of a common ring `R`, as a morphism of `R`-modules between the
-restrictions of scalars. -/
-noncomputable def ofSemilinear {R S S' : CommRingCat.{u}} (φ : R ⟶ S) (ψ : R ⟶ S')
-    {A B : Ab.{u}} [Module S A] [Module S' B] (g : A ⟶ B)
+`φ : R ⟶ S` and `ψ : R ⟶ S'` out of a common ring `R`, as a morphism of `R`-modules between
+the restrictions of scalars. -/
+noncomputable def ofSemilinear {R S S' : CommRingCat.{v}} (φ : R ⟶ S)
+    (ψ : R ⟶ S') {A B : Ab.{v}} [Module S A] [Module S' B] (g : A ⟶ B)
     (hg : ∀ (r : R) (a : A), g (φ r • a) = ψ r • g a) :
     (restrictScalars φ.hom).obj (of S A) ⟶ (restrictScalars ψ.hom).obj (of S' B) :=
   ofHom (X := (restrictScalars φ.hom).obj (of S A))
@@ -43,16 +43,15 @@ noncomputable def ofSemilinear {R S S' : CommRingCat.{u}} (φ : R ⟶ S) (ψ : R
       map_smul' := hg }
 
 @[simp]
-lemma ofSemilinear_apply {R S S' : CommRingCat.{u}} (φ : R ⟶ S) (ψ : R ⟶ S')
-    {A B : Ab.{u}} [Module S A] [Module S' B] (g : A ⟶ B)
+lemma ofSemilinear_apply {R S S' : CommRingCat.{v}} (φ : R ⟶ S)
+    (ψ : R ⟶ S') {A B : Ab.{v}} [Module S A] [Module S' B] (g : A ⟶ B)
     (hg : ∀ (r : R) (a : A), g (φ r • a) = ψ r • g a) (a : A) :
     (ofSemilinear φ ψ g hg).hom a = g a := rfl
 
-/-- An element of `R` killed by `φ : R ⟶ S` acts as zero on the restriction of scalars
+/-- An element of `R` killed by `φ : R →+* S` acts as zero on the restriction of scalars
 along `φ`. -/
-lemma smul_restrictScalars_eq_zero {R S : CommRingCat.{u}} (φ : R ⟶ S) (A : Ab.{u}) [Module S A]
-    {r : R} (hr : φ r = 0) (y : (restrictScalars φ.hom).obj (of S A)) : r • y = 0 := by
-  change φ r • (y : A) = 0
-  rw [hr, zero_smul]
+lemma restrictScalars.smul_eq_zero {R S : Type*} [Ring R] [Ring S] (φ : R →+* S)
+    (M : ModuleCat.{v} S) {r : R} (hr : φ r = 0) (m : (restrictScalars φ).obj M) : r • m = 0 := by
+  rw [restrictScalars.smul_def, hr, zero_smul]
 
 end ModuleCat
