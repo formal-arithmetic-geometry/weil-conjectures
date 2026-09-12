@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
 /-!
@@ -67,6 +68,10 @@ after restriction of scalars along `φ : R ⟶ S`.
 - `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
+- `AlgebraicGeometry.Scheme.Modules.pullbackTriangle`: the pullback functors along a commuting
+  triangle `h ≫ v = u`, namely `v^* ⋙ h^* ≅ u^*`, together with its compatibility
+  `AlgebraicGeometry.Scheme.Modules.pullbackTriangle_hom_app_sectionsPullback` with the pullback
+  of global sections.
 - `AlgebraicGeometry.Scheme.Modules.moduleSpecΓPushforwardIso`,
   `AlgebraicGeometry.Scheme.Modules.moduleSpecΓPullbackIso`: base change of the global sections
   of a sheaf of modules on `Spec S` along `φ : R ⟶ S`.
@@ -352,10 +357,8 @@ the pullback of a global function gives the pullback of functions on global sect
 lemma map_le_top_app_top {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (r : Γ(Y', ⊤)) :
     X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op (a.app ⊤ r) =
       a.appTop r := by
-  have h : X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op = 𝟙 Γ(X', ⊤) :=
-    (congrArg (fun i : (op (a ⁻¹ᵁ ⊤) : X'.Opensᵒᵖ) ⟶ op ⊤ ↦ X'.presheaf.map i)
-      (Subsingleton.elim _ (𝟙 (op (⊤ : X'.Opens))))).trans (X'.presheaf.map_id _)
-  exact (ConcreteCategory.congr_hom h _).trans rfl
+  exact (ConcreteCategory.congr_hom
+    (Scheme.presheaf_map_homOfLE_preimage_top_eq_id X'.presheaf a) _).trans rfl
 
 /-- The pullback of global sections along a morphism of schemes: the image of a global section
 of `N` under the unit `N ⟶ a_* a^* N`, read as a global section of `a^* N`. -/
@@ -380,7 +383,84 @@ lemma pushforwardPullbackComp_app (V : Z.Opens) :
         ((pullbackComp a b).hom.app M).app ((a ≫ b) ⁻¹ᵁ V) := by
   simp [pushforwardPullbackComp]
 
+/-- Pulling back a global section in two steps, along `a` and then along `b`, agrees with
+pulling it back in one step along `a ≫ b`, under the identification `a^* b^* M ≅ (a ≫ b)^* M`:
+
+```
+                 sectionsPullback b
+         Γ(M, ⊤) ───────────────────→ Γ(b^* M, ⊤)
+            │                              │
+            │ sectionsPullback (a ≫ b)     │ sectionsPullback a
+            ↓                              ↓
+  Γ((a ≫ b)^* M, ⊤) ←──────────────── Γ(a^* b^* M, ⊤)
+                      (pullbackComp a b).hom
+```
+-/
+@[simp]
+lemma pullbackComp_hom_app_sectionsPullback (s : Γ(M, ⊤)) :
+    Hom.app ((pullbackComp a b).hom.app M) ⊤
+        (sectionsPullback a ((pullback b).obj M) (sectionsPullback b M s)) =
+      sectionsPullback (a ≫ b) M s := by
+  have key := congrArg (fun ψ ↦ Hom.app ψ ⊤ s) (unit_pushforwardPullbackComp a b M)
+  simp only [Hom.comp_app, pushforwardPullbackComp_app] at key
+  simp only [sectionsPullback, ConcreteCategory.comp_apply,
+    Scheme.presheaf_map_homOfLE_preimage_top_eq_id]
+  exact key
+
+/-- Pulling back a global section along equal morphisms gives the same section, under the
+identification `c^* M ≅ d^* M`:
+
+```
+                  sectionsPullback c
+          Γ(N, ⊤) ──────────────────→ Γ(c^* N, ⊤)
+              ╲                            │
+               ╲ sectionsPullback d        │ (pullbackCongr h).hom
+                ↘                          ↓
+                             Γ(d^* N, ⊤)
+```
+-/
+@[simp]
+lemma pullbackCongr_hom_app_sectionsPullback {c d : X ⟶ Y} (h : c = d) (N : Y.Modules)
+    (s : Γ(N, ⊤)) :
+    Hom.app ((pullbackCongr h).hom.app N) ⊤ (sectionsPullback c N s) = sectionsPullback d N s := by
+  subst h
+  rfl
+
 end PushforwardPullback
+
+noncomputable section Triangle
+
+/-! ### The pullback functors along a commuting triangle -/
+
+variable {X Y Z : Scheme.{u}} {h : X ⟶ Y} {v : Y ⟶ Z} {u : X ⟶ Z}
+
+/-- **The pullback functors along a commuting triangle**: for `h ≫ v = u`, that is, for
+
+```
+          h
+    X ─────────→ Y
+      ╲          │
+       ╲ u       │ v
+        ↘        ↓
+                 Z
+```
+
+commuting, pulling back along `v` and then along `h` is pulling back along `u`. -/
+def pullbackTriangle (w : h ≫ v = u) : pullback v ⋙ pullback h ≅ pullback u :=
+  pullbackComp h v ≪≫ pullbackCongr w
+
+/-- Under the identification `h^* v^* M ≅ u^* M` of `Scheme.Modules.pullbackTriangle`, pulling
+a global section back along `v` and then along `h` agrees with pulling it back along `u`. -/
+@[simp]
+lemma pullbackTriangle_hom_app_sectionsPullback (w : h ≫ v = u) (M : Z.Modules) (s : Γ(M, ⊤)) :
+    Hom.app ((pullbackTriangle w).hom.app M) ⊤
+        (sectionsPullback h ((pullback v).obj M) (sectionsPullback v M s)) =
+      sectionsPullback u M s := by
+  simp only [pullbackTriangle, Iso.trans_hom, NatTrans.comp_app, Hom.comp_app,
+    ConcreteCategory.comp_apply, pullbackComp_hom_app_sectionsPullback,
+    pullbackCongr_hom_app_sectionsPullback]
+
+end Triangle
 
 section BaseChange
 

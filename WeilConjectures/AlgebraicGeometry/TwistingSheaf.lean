@@ -52,9 +52,10 @@ set `D₊(f)`, with inverse the division by `f`. In particular, on
   product of sheaves of modules and the sectionwise tensor product.
 - The fibrewise description of a global section: for `a` homogeneous of degree `j`, the section
   `homogeneousSection a` of `𝒪(j)` vanishes at a point `x` if and only if `a ∈ x`.
-- The transfer of `𝒪(1)` to the relative projective space `ℙ(n; S)` of
-  `WeilConjectures/AlgebraicGeometry/ProjectiveSpace.lean`, by pulling back along the map to
-  the integral model, and the compatibility with base change.
+
+The transfer of `𝒪(d)` to the relative projective space `ℙ(n; S)`, by pulling back along the
+map to the integral model, and its compatibility with base change, are in
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf`.
 -/
 
 @[expose] public section
