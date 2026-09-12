@@ -5,11 +5,13 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+public import Mathlib.Topology.Sheaves.LocallySurjective
 public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
-# Stalks of a pushforward
+# Stalks of a pushforward, and exactness properties of stalks
 
 Let `f : X ⟶ Y` be a continuous map of topological spaces.
 
@@ -21,6 +23,12 @@ Let `f : X ⟶ Y` be a continuous map of topological spaces.
 * `TopCat.Sheaf.isZero_stalk_pushforward_of_notMem_range`: if the range of `f` is closed,
   the stalk of `f _* F` at a point outside the range of `f` vanishes, for `F` a sheaf with
   values in a category with a zero object.
+
+The last section records that taking stalks is left exact, because a stalk is a filtered
+colimit, and that an epimorphism of sheaves is surjective on stalks.
+
+* `TopCat.Presheaf.stalkFunctor_preservesFiniteLimits`
+* `TopCat.Sheaf.surjective_stalkFunctor_map_of_epi`
 
 -/
 
@@ -87,5 +95,46 @@ lemma isZero_stalk_pushforward_of_notMem_range {f : X ⟶ Y} (hf : IsClosed (Set
       ((F.isTerminalOfEqEmpty hbot).uniqueUpToIso (isZero_zero C).isTerminal)
   rw [Category.comp_id, comp_zero, ← germ_res G (homOfLE inf_le_left) y hmem,
     hzero.eq_zero_of_tgt (G.map (homOfLE (inf_le_left (a := U) (b := V))).op), zero_comp]
+
+end TopCat.Sheaf
+
+namespace TopCat.Presheaf
+
+variable {C : Type u} [Category.{v} C] {FC : C → C → Type*} {CC : C → Type v}
+  [∀ X Y, FunLike (FC X Y) (CC X) (CC Y)] [ConcreteCategory.{v} C FC]
+  [HasColimits.{v} C] [HasFiniteLimits C]
+  [PreservesFiniteLimits (CategoryTheory.forget C)]
+  [PreservesFilteredColimits (CategoryTheory.forget C)]
+  [(CategoryTheory.forget C).ReflectsIsomorphisms] {X : TopCat.{v}}
+
+/-- Taking stalks at a point is left exact: the stalk at `x` is the colimit over the filtered
+category of open neighbourhoods of `x`, and filtered colimits commute with finite limits. -/
+instance stalkFunctor_preservesFiniteLimits (x : X) :
+    PreservesFiniteLimits (stalkFunctor C x) :=
+  letI : PreservesFiniteLimits
+      ((Functor.whiskeringLeft (OpenNhds x)ᵒᵖ (Opens X)ᵒᵖ C).obj (OpenNhds.inclusion x).op) :=
+    inferInstance
+  letI : PreservesFiniteLimits (colim : ((OpenNhds x)ᵒᵖ ⥤ C) ⥤ C) := inferInstance
+  comp_preservesFiniteLimits _ _
+
+end TopCat.Presheaf
+
+namespace TopCat.Sheaf
+
+variable {C : Type u} [Category.{v} C] {FC : C → C → Type*} {CC : C → Type v}
+  [∀ X Y, FunLike (FC X Y) (CC X) (CC Y)] [ConcreteCategory.{v} C FC]
+  [HasColimits.{v} C] [PreservesFilteredColimits (CategoryTheory.forget C)] {X : TopCat.{v}}
+  [Balanced (CategoryTheory.Sheaf (Opens.grothendieckTopology X) C)]
+  [(Opens.grothendieckTopology X).HasSheafCompose (CategoryTheory.forget C)]
+  [HasSheafify (Opens.grothendieckTopology X) C]
+  [(Opens.grothendieckTopology X).WEqualsLocallyBijective C]
+  [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization C]
+
+/-- An epimorphism of sheaves is surjective on stalks: it is locally surjective, and a stalk
+only remembers arbitrarily small neighbourhoods. -/
+lemma surjective_stalkFunctor_map_of_epi {F G : TopCat.Sheaf C X} (φ : F ⟶ G) [Epi φ] (x : X) :
+    Function.Surjective ((Presheaf.stalkFunctor C x).map φ.hom) :=
+  (Presheaf.locally_surjective_iff_surjective_on_stalks _).1
+    ((TopCat.Sheaf.isLocallySurjective_iff_epi φ).2 inferInstance) x
 
 end TopCat.Sheaf
