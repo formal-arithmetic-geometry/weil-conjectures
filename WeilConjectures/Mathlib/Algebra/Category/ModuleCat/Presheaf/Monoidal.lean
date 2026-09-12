@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 
 /-!
-# Tensor products of free presheaves of modules on Yoneda presheaves
+# Tensor products of presheaves of modules: free presheaves, and sections
 
 Let `R` be a presheaf of commutative rings on a category `C`, and let `U` and `V` be two
 objects of `C` which admit a binary product. The tensor product of the free presheaves of
@@ -23,22 +23,40 @@ In terms of universal sections (see
 tensor product of two presheaves of modules which are free of rank one on a section over `U`,
 resp. over `V`, is free of rank one over `U ⨯ V`.
 
+We also record that the tensor product of presheaves of modules is computed sectionwise, so
+that evaluation at an object of `C` is a monoidal functor.
+
 ## Main declarations
 
 - `PresheafOfModules.freeYonedaProdIso` and
   `PresheafOfModules.IsUniversalSection.tensorObj`
 - `PresheafOfModules.freeYonedaTerminalIso` and
   `PresheafOfModules.isUniversalSection_unit_one`
+- `PresheafOfModules.evaluationMonoidal`: evaluation at an object is a monoidal functor
 
 -/
 
 @[expose] public section
 
-universe u u₁
+universe v₁ u u₁
 
 open CategoryTheory MonoidalCategory Limits Opposite
 
 namespace PresheafOfModules
+
+section Evaluation
+
+variable {C : Type u₁} [Category.{v₁} C] (R : Cᵒᵖ ⥤ CommRingCat.{u}) (X : Cᵒᵖ)
+
+/-- **Evaluation at an object is a monoidal functor**: the tensor product of presheaves of
+modules is computed sectionwise. -/
+noncomputable instance evaluationMonoidal :
+    (evaluation.{u} (R ⋙ forget₂ CommRingCat RingCat.{u}) X).Monoidal :=
+  Functor.CoreMonoidal.toMonoidal
+    { εIso := Iso.refl _
+      μIso := fun _ _ ↦ Iso.refl _ }
+
+end Evaluation
 
 variable {C : Type u₁} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}} (U V : C)
   [HasBinaryProduct U V]

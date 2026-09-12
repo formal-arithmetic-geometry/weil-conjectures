@@ -18,7 +18,7 @@ public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 /-!
 # Sections, stalks, restrictions and fibres of `𝒪_X`-modules
 
-This file collects three groups of results about sheaves of modules over a scheme.
+This file collects five groups of results about sheaves of modules over a scheme.
 
 The first is a concrete description of the sections of a categorical kernel. Limits in
 `X.Modules` are computed section-wise, because evaluation at an open subset preserves finite
@@ -49,6 +49,12 @@ of the pullback of `F` along `Spec κ(x) ⟶ X`. The two agree for quasi-coheren
 a base change section, comparing global sections on `Spec S` with global sections on `Spec R`
 after restriction of scalars along `φ : R ⟶ S`.
 
+The fifth concerns a scheme `X` **with at most one point**, such as the spectrum of a field. The
+only open subsets of such an `X` are `⊥` and `⊤`, and all sections over `⊥` vanish, so a morphism
+of `𝒪ₓ`-modules is an isomorphism as soon as it is one on global sections. In particular a global
+section `m` of `M` such that `r ↦ r • m` is bijective trivialises `M`.
+
+
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.fiberFunctor`, `AlgebraicGeometry.Scheme.Modules.fiber`: the
@@ -56,6 +62,8 @@ after restriction of scalars along `φ : R ⟶ S`.
   functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
 - `AlgebraicGeometry.Scheme.Modules.restrictToFiber`: the restriction `F ↦ F_y` of sheaves of
   modules to the scheme-theoretic fibre of a morphism over a point.
+- `AlgebraicGeometry.Scheme.Modules.homOfSectionTop`: the morphism `𝒪ₓ ⟶ M` determined by a global
+  section of `M`.
 
 ## Main results
 
@@ -75,6 +83,10 @@ after restriction of scalars along `φ : R ⟶ S`.
   for a morphism `u` inducing an isomorphism on residue fields at the point in question.
 - `AlgebraicGeometry.Scheme.Modules.fiberRestrictToFiberIso`: the fibre of `F_y` at a point `x`
   of the fibre is the fibre of `F` at `f.fiberι y x`.
+- `AlgebraicGeometry.Scheme.Modules.isIso_of_isIso_app_top`,
+  `AlgebraicGeometry.Scheme.Modules.isIso_homOfSectionTop`: on a scheme with at most one point, a
+  morphism of `𝒪ₓ`-modules which is an isomorphism on global sections is an isomorphism, and a
+  generating global section trivialises the module.
 
 ## Blueprint
 
@@ -508,5 +520,66 @@ noncomputable def fiberRestrictToFiberIso (f : X ⟶ Y) (y : Y) (F : X.Modules) 
   fiberPullbackIso (f.fiberι y) F x
 
 end Fiber
+
+section Subsingleton
+
+variable {X : Scheme.{u}}
+
+instance subsingleton_sections_bot (M : X.Modules) : Subsingleton Γ(M, ⊥) :=
+  Module.subsingleton Γ(X, ⊥) Γ(M, ⊥)
+
+instance subsingleton_sections_top_of_isEmpty [IsEmpty X] (M : X.Modules) :
+    Subsingleton Γ(M, ⊤) := by
+  have h : (⊤ : X.Opens) = ⊥ := by ext x; exact (IsEmpty.false x).elim
+  rw [h]
+  infer_instance
+
+/-- On a scheme with at most one point, a morphism of `𝒪ₓ`-modules is an isomorphism as soon as
+it is one on sections over `⊤`. -/
+theorem isIso_of_isIso_app_top [Subsingleton X] {M N : X.Modules} (φ : M ⟶ N)
+    (h : IsIso (φ.app ⊤)) : IsIso φ := by
+  rw [Hom.isIso_iff_isIso_app]
+  intro U
+  -- the only open subsets of `X` are `⊥` and `⊤`, and all sections over `⊥` vanish
+  rcases U.eq_bot_or_top with rfl | rfl
+  · rw [ConcreteCategory.isIso_iff_bijective]
+    exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun _ ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+  · exact h
+
+/-- The compatible family of sections of an `𝒪ₓ`-module cut out by a single global section, by
+restriction to the various open subsets. -/
+noncomputable def sectionsMkTop (M : X.Modules) (m : Γ(M, ⊤)) : M.sections :=
+  PresheafOfModules.sectionsMk (fun _ ↦ M.val.map (homOfLE le_top).op m) (fun _ _ _ ↦ by
+    rw [← PresheafOfModules.map_comp_apply]
+    exact M.val.congr_map_apply (Subsingleton.elim _ _) m)
+
+/-- The morphism `𝒪ₓ ⟶ M` of `𝒪ₓ`-modules determined by a global section `m` of `M`; it sends
+a section `r` of the structure sheaf to `r • m`, see
+`AlgebraicGeometry.Scheme.Modules.homOfSectionTop_app_top`. -/
+noncomputable def homOfSectionTop (M : X.Modules) (m : Γ(M, ⊤)) :
+    SheafOfModules.unit X.ringCatSheaf ⟶ M :=
+  M.unitHomEquiv.symm (sectionsMkTop M m)
+
+@[simp]
+theorem homOfSectionTop_app_top (M : X.Modules) (m : Γ(M, ⊤)) (r : Γ(X, ⊤)) :
+    Hom.app (homOfSectionTop M m) ⊤ r = r • m := by
+  have h₀ := SheafOfModules.unitHomEquiv_apply_coe M (homOfSectionTop M m) (.op ⊤)
+  simp only [homOfSectionTop, Equiv.apply_symm_apply] at h₀
+  have h : Hom.app (homOfSectionTop M m) ⊤ (1 : Γ(X, ⊤)) = m :=
+    h₀.symm.trans (by simp [sectionsMkTop])
+  calc Hom.app (homOfSectionTop M m) ⊤ r
+      = Hom.app (homOfSectionTop M m) ⊤ (r • (1 : Γ(X, ⊤))) := by rw [smul_eq_mul, mul_one]
+    _ = r • m := by rw [Hom.app_smul, h]
+
+/-- **On a scheme with at most one point, a global section that generates the global sections
+trivialises the module**: if `r ↦ r • m` is bijective on global sections, then the morphism
+`𝒪ₓ ⟶ M` determined by `m` is an isomorphism. -/
+theorem isIso_homOfSectionTop [Subsingleton X] {M : X.Modules} (m : Γ(M, ⊤))
+    (hm : Function.Bijective fun r : Γ(X, ⊤) ↦ r • m) : IsIso (homOfSectionTop M m) := by
+  refine isIso_of_isIso_app_top _ ?_
+  rw [ConcreteCategory.isIso_iff_bijective, funext (homOfSectionTop_app_top M m)]
+  exact hm
+
+end Subsingleton
 
 end AlgebraicGeometry.Scheme.Modules

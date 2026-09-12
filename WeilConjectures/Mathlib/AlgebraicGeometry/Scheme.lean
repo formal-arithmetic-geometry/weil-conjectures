@@ -8,17 +8,18 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
-# Units among the sections over a basic open
+# Units among the sections over a basic open, and schemes with one point
 
 We record that the restriction of a section `s` of the structure sheaf to any open contained
-in `X.basicOpen s` is a unit.
+in `X.basicOpen s` is a unit, and that the ring of global sections of a scheme with exactly one
+point is local, being the stalk at that point.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
@@ -38,5 +39,16 @@ lemma Scheme.isUnit_res_of_le_basicOpen {s : Γ(X, ⊤)} {U : X.Opens} (hU : U �
 lemma Scheme.isUnit_algebraMap_basicOpen {U : X.Opens} (f : Γ(X, U)) :
     IsUnit (algebraMap Γ(X, U) Γ(X, X.basicOpen f) f) :=
   X.toRingedSpace.isUnit_res_basicOpen f
+
+/-- **The ring of global sections of a scheme with exactly one point is local**: the only open
+neighbourhood of the point is `⊤`, so the global sections are the stalk there. -/
+instance Scheme.isLocalRing_sections_top [Subsingleton X] [Nonempty X] : IsLocalRing Γ(X, ⊤) := by
+  obtain ⟨x⟩ := ‹Nonempty X›
+  have hle (V : OpenNhds x) : (⊤ : X.Opens) ≤ V.1 := fun y _ ↦ Subsingleton.elim y x ▸ V.2
+  have ht : IsTerminal (op (⟨⊤, trivial⟩ : OpenNhds x)) :=
+    IsTerminal.ofUniqueHom (fun V ↦ (homOfLE (hle V.unop)).op) fun _ _ ↦ Subsingleton.elim _ _
+  have : IsIso (X.presheaf.germ ⊤ x trivial) :=
+    (colimit.isColimit _).isIso_ι_app_of_isTerminal _ ht
+  exact (asIso (X.presheaf.germ ⊤ x trivial)).symm.commRingCatIsoToRingEquiv.isLocalRing
 
 end AlgebraicGeometry

@@ -5,232 +5,114 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.RingTheory.PicardGroup
-public import Mathlib.Topology.Sheaves.PUnit
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
+public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
-# Line bundles on the spectrum of a field are trivial
+# Line bundles on a scheme with at most one point are trivial
 
-Let `X` be a scheme whose underlying topological space has at most one point, e.g. the spectrum
-of a field. Then the only open subsets of `X` are `⊥` and `⊤`, the sections of any `𝒪ₓ`-module
-over `⊥` are zero, and every presheaf of `𝒪ₓ`-modules is automatically a sheaf. Consequently the
-functor of sections over `⊤` is monoidal, and it identifies invertible `𝒪ₓ`-modules with
-invertible `Γ(X, ⊤)`-modules. When `Γ(X, ⊤)` is a local ring, for instance when `X = Spec K` for
-a field `K`, invertible modules over it are free of rank one, and we conclude that every line
-bundle on `X` is trivial.
+Let `X` be a scheme whose underlying topological space has at most one point, for instance the
+spectrum of a field. The only open subsets of `X` are `⊥` and `⊤`, the sections of any
+`𝒪ₓ`-module over `⊥` are zero, and every presheaf of `𝒪ₓ`-modules is automatically a sheaf.
+Consequently the tensor product of `𝒪ₓ`-modules is computed on global sections, so the global
+sections of an invertible `𝒪ₓ`-module form an invertible `Γ(X, ⊤)`-module. If `X` is moreover
+nonempty then `Γ(X, ⊤)` is a local ring, over which an invertible module is free of rank one, and
+a generator gives the desired trivialisation. If `X` is empty every `𝒪ₓ`-module is zero, and the
+conclusion holds trivially. In both cases the Picard group of `X` is trivial.
+
+The Picard group of the spectrum of a general *local* ring is trivial too, but that is out of
+scope here: its space has more than one point, so the argument below does not apply, and one
+has to know instead that an invertible sheaf is locally isomorphic to the structure sheaf.
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorUnit_of_invertible`: on a scheme with at
-  most one point whose ring of global sections is local, in particular on the spectrum of a
-  field, every invertible sheaf of modules is isomorphic to the structure sheaf.
-- `AlgebraicGeometry.Scheme.subsingleton_pic` and
-  `AlgebraicGeometry.Scheme.subsingleton_pic_spec_field`: the Picard group of such a scheme, in
-  particular of the spectrum of a field, is trivial.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorUnit_of_invertible` (`sec:cube-cost`,
+  (N3)): on a scheme with at most one point every invertible `𝒪ₓ`-module is isomorphic to the
+  structure sheaf.
+- `AlgebraicGeometry.Scheme.Pic.subsingleton` (`sec:cube-cost`, (N3)): the Picard group of a
+  scheme with at most one point — in particular of the spectrum of a field — is trivial.
 
 -/
 
 @[expose] public section
 
-open CategoryTheory MonoidalCategory Limits TopologicalSpace
+open AlgebraicGeometry CategoryTheory MonoidalCategory Opposite TopologicalSpace
 
 universe u
 
-namespace AlgebraicGeometry.Scheme.Modules
+namespace SheafOfModules
 
 variable {X : Scheme.{u}}
 
-section Sections
+/-- **On a scheme with at most one point, the global sections of an invertible `𝒪ₓ`-module form an
+invertible `Γ(X, ⊤)`-module**: taking global sections is a monoidal functor, so it sends a pair of
+tensor-inverse modules to a pair of tensor-inverse modules. -/
+theorem Invertible.module_sections_top [Subsingleton X] {M : X.Modules} (hM : M.Invertible) :
+    Module.Invertible Γ(X, ⊤) Γ(M, ⊤) := by
+  obtain ⟨N, ⟨e⟩⟩ := (invertible_iff_exists (R := X.sheaf)).1 hM
+  exact .left (Functor.Monoidal.mapIsoTensorUnit
+    (SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) e).toLinearEquiv
 
-instance subsingleton_sections_bot (M : X.Modules) : Subsingleton Γ(M, ⊥) :=
-  Module.subsingleton Γ(X, ⊥) Γ(M, ⊥)
-
-/-- On a scheme with at most one point, a morphism of `𝒪ₓ`-modules is an isomorphism as soon as
-it is one on sections over `⊤`: the only other open subset is `⊥`, where all sections vanish. -/
-theorem isIso_of_isIso_app_top [Subsingleton X] {M N : X.Modules} (φ : M ⟶ N)
-    (h : IsIso (φ.app ⊤)) : IsIso φ := by
-  rw [Hom.isIso_iff_isIso_app]
-  intro U
-  rcases U.eq_bot_or_top with rfl | rfl
-  · rw [ConcreteCategory.isIso_iff_bijective]
-    exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun _ ↦ ⟨0, Subsingleton.elim _ _⟩⟩
-  · exact h
-
-end Sections
-
-section Sheafification
-
-variable (P : _root_.PresheafOfModules.{u} (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}))
-
-/-- On a scheme with at most one point, every presheaf of `𝒪ₓ`-modules is a sheaf: the only
-open subsets are `⊥` and `⊤`, and the sections over `⊥` form the zero module. -/
-theorem isSheaf_presheaf [Subsingleton X] :
-    TopCat.Presheaf.IsSheaf (X := X) P.presheaf := by
-  refine TopCat.Presheaf.isSheaf_of_isTerminal_of_indiscrete (IndiscreteTopology.eq_top _) _ ?_
-  have h : Subsingleton (P.obj (.op ⊥)) := Module.subsingleton Γ(X, ⊥) _
-  exact (@AddCommGrpCat.isZero_of_subsingleton _ h).isTerminal
-
-/-- On a scheme with at most one point, the unit of the sheafification adjunction for presheaves
-of modules is an isomorphism. -/
-theorem isIso_sheafificationAdjunction_unit_app [Subsingleton X] :
-    IsIso ((_root_.PresheafOfModules.sheafificationAdjunction
-      (𝟙 X.ringCatSheaf.obj)).unit.app P) := by
-  have h₁ : IsIso (toSheafify (Opens.grothendieckTopology X) P.presheaf) :=
-    isIso_toSheafify _ (isSheaf_presheaf P)
-  have h₂ : IsIso ((_root_.PresheafOfModules.toPresheaf _).map
-      ((_root_.PresheafOfModules.sheafificationAdjunction
-        (𝟙 X.ringCatSheaf.obj)).unit.app P)) := by
-    rw [_root_.PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
-    exact h₁
-  exact isIso_of_reflects_iso _ (_root_.PresheafOfModules.toPresheaf _)
-
-/-- On a scheme with at most one point, a presheaf of `𝒪ₓ`-modules is isomorphic to its
-sheafification. -/
-noncomputable def sheafificationUnitIso [Subsingleton X] :
-    P ≅ (SheafOfModules.forget _).obj ((SheafOfModules.sheafification X.sheaf).obj P) :=
-  have := isIso_sheafificationAdjunction_unit_app P
-  asIso ((_root_.PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app P)
-
-end Sheafification
-
-section Tensor
-
-/-- An `𝒪ₓ`-module is the sheafification of its underlying presheaf of modules. -/
-noncomputable def sheafificationCounitIso (M : X.Modules) :
-    (SheafOfModules.sheafification X.sheaf).obj ((SheafOfModules.forget _).obj M) ≅ M :=
-  (asIso (_root_.PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit).app M
-
-/-- The tensor product of two `𝒪ₓ`-modules is the sheafification of the presheaf tensor product
-of their underlying presheaves of modules. -/
-noncomputable def tensorIsoSheafification (M N : X.Modules) :
-    M ⊗ N ≅ (SheafOfModules.sheafification X.sheaf).obj
-      ((SheafOfModules.forget _).obj M ⊗ (SheafOfModules.forget _).obj N) :=
-  ((sheafificationCounitIso M).symm ⊗ᵢ (sheafificationCounitIso N).symm) ≪≫
-    Functor.Monoidal.μIso (SheafOfModules.sheafification X.sheaf) _ _
-
-/-- On a scheme with at most one point, the sections over `⊤` of a tensor product of
-`𝒪ₓ`-modules are the tensor product of the sections over `⊤`. -/
-noncomputable def tensorSectionsTopIso [Subsingleton X] (M N : X.Modules) :
-    (M ⊗ N).val.obj (.op ⊤) ≅ M.val.obj (.op ⊤) ⊗ N.val.obj (.op ⊤) :=
-  (SheafOfModules.evaluation _ (.op ⊤)).mapIso (tensorIsoSheafification M N) ≪≫
-    (_root_.PresheafOfModules.evaluation _ (.op ⊤)).mapIso
-      (sheafificationUnitIso
-        ((SheafOfModules.forget _).obj M ⊗ (SheafOfModules.forget _).obj N)).symm
-
-variable (X) in
-/-- The sections over `⊤` of the tensor unit of `X.Modules` form the ring `Γ(X, ⊤)`. -/
-noncomputable def tensorUnitSectionsTopIso :
-    (𝟙_ X.Modules).val.obj (.op ⊤) ≅ ModuleCat.of Γ(X, ⊤) Γ(X, ⊤) :=
-  (SheafOfModules.evaluation _ (.op ⊤)).mapIso (SheafOfModules.tensorUnitIso X.sheaf)
-
-/-- On a scheme with at most one point, the sections over `⊤` of an invertible `𝒪ₓ`-module form
-an invertible `Γ(X, ⊤)`-module. -/
-theorem module_invertible_sections_top [Subsingleton X] {M : X.Modules}
-    (hM : M.Invertible) : Module.Invertible Γ(X, ⊤) Γ(M, ⊤) := by
-  obtain ⟨N, ⟨e⟩⟩ := (SheafOfModules.invertible_iff_exists (R := X.sheaf)).1 hM
-  exact .left (((tensorSectionsTopIso M N).symm ≪≫
-    (SheafOfModules.evaluation _ (.op ⊤)).mapIso e ≪≫ tensorUnitSectionsTopIso X).toLinearEquiv)
-
-end Tensor
-
-section OfSection
-
-/-- The section of an `𝒪ₓ`-module determined by a global section, i.e. a section over `⊤`. -/
-noncomputable def sectionsOfTop (M : X.Modules) (m : Γ(M, ⊤)) : M.sections :=
-  _root_.PresheafOfModules.sectionsMk (fun _ ↦ M.val.map (homOfLE le_top).op m)
-    (fun _ _ _ ↦ by
-      rw [← _root_.PresheafOfModules.map_comp_apply]
-      exact M.val.congr_map_apply (Subsingleton.elim _ _) m)
-
-/-- The morphism from the free `𝒪ₓ`-module of rank one to `M` determined by a global section
-of `M`. -/
-noncomputable def homOfSectionTop (M : X.Modules) (m : Γ(M, ⊤)) :
-    SheafOfModules.unit X.ringCatSheaf ⟶ M :=
-  M.unitHomEquiv.symm (sectionsOfTop M m)
-
-theorem homOfSectionTop_app_top_one (M : X.Modules) (m : Γ(M, ⊤)) :
-    (homOfSectionTop M m).val.app (.op ⊤) (1 : Γ(X, ⊤)) = m := by
-  have h := SheafOfModules.unitHomEquiv_apply_coe M (homOfSectionTop M m) (.op ⊤)
-  rw [← h, homOfSectionTop, Equiv.apply_symm_apply]
-  simp [sectionsOfTop]
-
-@[simp]
-theorem homOfSectionTop_app_top (M : X.Modules) (m : Γ(M, ⊤)) (r : Γ(X, ⊤)) :
-    (homOfSectionTop M m).val.app (.op ⊤) r = r • m := by
-  have h := ((homOfSectionTop M m).val.app (.op ⊤)).hom.map_smul r (1 : Γ(X, ⊤))
-  rw [smul_eq_mul, mul_one] at h
-  rw [h, homOfSectionTop_app_top_one]
-
-/-- On a scheme with at most one point, an `𝒪ₓ`-module whose global sections are free of rank
-one is isomorphic to the free `𝒪ₓ`-module of rank one. -/
-theorem nonempty_iso_unit_of_linearEquiv [Subsingleton X] (M : X.Modules)
-    (f : Γ(M, ⊤) ≃ₗ[Γ(X, ⊤)] Γ(X, ⊤)) :
-    Nonempty (SheafOfModules.unit X.ringCatSheaf ≅ M) := by
-  have hfun : ∀ r : Γ(X, ⊤), Hom.app (homOfSectionTop M (f.symm 1)) ⊤ r = f.symm r := by
-    intro r
-    change (homOfSectionTop M (f.symm 1)).val.app (.op ⊤) r = _
-    have hr : f.symm r = r • f.symm 1 := by
-      rw [← LinearEquiv.map_smul, smul_eq_mul, mul_one]
-    rw [homOfSectionTop_app_top, hr]
-  have h : IsIso (Hom.app (homOfSectionTop M (f.symm 1)) ⊤) := by
-    rw [ConcreteCategory.isIso_iff_bijective]
-    have : ⇑(Hom.app (homOfSectionTop M (f.symm 1)) ⊤) = ⇑f.symm := funext hfun
-    rw [this]
-    exact f.symm.bijective
-  have := isIso_of_isIso_app_top _ h
-  exact ⟨asIso (homOfSectionTop M (f.symm 1))⟩
-
-end OfSection
-
-section Main
-
-/-- On a scheme `X` with at most one point whose ring of global sections is local — for instance
-the spectrum of a field — every invertible `𝒪ₓ`-module is isomorphic to the structure sheaf. -/
-theorem nonempty_iso_tensorUnit_of_invertible [Subsingleton X]
-    [IsLocalRing Γ(X, ⊤)] {M : X.Modules} (hM : M.Invertible) :
-    Nonempty (M ≅ 𝟙_ X.Modules) := by
-  have := module_invertible_sections_top hM
-  obtain ⟨f⟩ := Module.Invertible.free_iff_linearEquiv.1
-    (inferInstance : Module.Free Γ(X, ⊤) Γ(M, ⊤))
-  obtain ⟨e⟩ := nonempty_iso_unit_of_linearEquiv M f
-  exact ⟨e.symm ≪≫ (SheafOfModules.tensorUnitIso X.sheaf).symm⟩
-
-end Main
-
-end AlgebraicGeometry.Scheme.Modules
+end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}}
 
-/-- The Picard group of a scheme with at most one point whose ring of global sections is local
-is trivial. -/
-theorem subsingleton_pic [Subsingleton X] [IsLocalRing Γ(X, ⊤)] :
-    Subsingleton X.Pic := by
-  have h : Subsingleton (Skeleton X.Modules)ˣ :=
+/-- On a scheme with an empty underlying space every `𝒪ₓ`-module is zero, hence isomorphic to the
+tensor unit. -/
+theorem Modules.nonempty_iso_tensorUnit_of_isEmpty [IsEmpty X] (M : X.Modules) :
+    Nonempty (M ≅ 𝟙_ X.Modules) :=
+  have : IsIso ((0 : M ⟶ 𝟙_ X.Modules).app ⊤) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun _ ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+  have := Modules.isIso_of_isIso_app_top (0 : M ⟶ 𝟙_ X.Modules) this
+  ⟨asIso (0 : M ⟶ 𝟙_ X.Modules)⟩
+
+/-- **On a scheme `X` with at most one point — for instance on the spectrum of a field — every
+invertible `𝒪ₓ`-module is isomorphic to the structure sheaf.** The global sections of `M` form an
+invertible module over the local ring `Γ(X, ⊤)`, hence are free of rank one, and a generator
+trivialises `M`. -/
+theorem Modules.nonempty_iso_tensorUnit_of_invertible [Subsingleton X] {M : X.Modules}
+    (hM : M.Invertible) : Nonempty (M ≅ 𝟙_ X.Modules) := by
+  rcases isEmpty_or_nonempty X with _ | _
+  · exact Modules.nonempty_iso_tensorUnit_of_isEmpty M
+  have := hM.module_sections_top
+  obtain ⟨f⟩ :=
+    Module.Invertible.free_iff_linearEquiv.1 (inferInstance : Module.Free Γ(X, ⊤) Γ(M, ⊤))
+  have hf : Function.Bijective fun r : Γ(X, ⊤) ↦ r • f.symm 1 := by
+    have h : (fun r : Γ(X, ⊤) ↦ r • f.symm 1) = f.symm := by
+      ext r
+      rw [← _root_.map_smul f.symm r (1 : Γ(X, ⊤)), smul_eq_mul, mul_one]
+    rw [h]
+    exact f.symm.bijective
+  have := Modules.isIso_homOfSectionTop (f.symm 1) hf
+  exact ⟨(asIso (Modules.homOfSectionTop M (f.symm 1))).symm ≪≫
+    (SheafOfModules.tensorUnitIso X.sheaf).symm⟩
+
+/-- **The Picard group of a scheme with at most one point is trivial.** -/
+instance Pic.subsingleton [Subsingleton X] : Subsingleton X.Pic :=
+  show Subsingleton (Skeleton X.Modules)ˣ from
     subsingleton_of_forall_eq 1 fun u ↦ Units.ext <| by
-      have hu : ((fromSkeleton X.Modules).obj (u : Skeleton X.Modules)).Invertible := by
-        change IsUnit (toSkeleton ((fromSkeleton X.Modules).obj (u : Skeleton X.Modules)))
+      have h : IsUnit (toSkeleton ((fromSkeleton X.Modules).obj (u : Skeleton X.Modules))) := by
         rw [toSkeleton_fromSkeleton_obj]
         exact u.isUnit
+      have hu : ((fromSkeleton X.Modules).obj (u : Skeleton X.Modules)).Invertible :=
+        (SheafOfModules.invertible_iff_isUnit (R := X.sheaf)).2 h
       calc (u : Skeleton X.Modules)
           = toSkeleton ((fromSkeleton X.Modules).obj (u : Skeleton X.Modules)) :=
             (toSkeleton_fromSkeleton_obj _).symm
         _ = toSkeleton (𝟙_ X.Modules) :=
             toSkeleton_eq_toSkeleton_iff.2 (Modules.nonempty_iso_tensorUnit_of_invertible hu)
         _ = 1 := Skeleton.one_eq.symm
-  exact h
 
-instance isLocalRing_sections_top_spec (R : CommRingCat.{u}) [IsLocalRing R] :
-    IsLocalRing Γ(Spec R, ⊤) :=
-  ((ΓSpecIso R).commRingCatIsoToRingEquiv).symm.isLocalRing
-
-/-- The Picard group of the spectrum of a field is trivial: every line bundle on `Spec K` is
+/-- **The Picard group of the spectrum of a field is trivial**: every line bundle on `Spec K` is
 trivial. -/
-instance subsingleton_pic_spec_field {K : Type u} [Field K] :
-    Subsingleton (Spec (CommRingCat.of K)).Pic :=
-  subsingleton_pic
+instance Pic.subsingleton_spec_field {K : Type u} [Field K] :
+    Subsingleton (Spec (CommRingCat.of K)).Pic := inferInstance
 
 end AlgebraicGeometry.Scheme
