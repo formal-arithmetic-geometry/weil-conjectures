@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
@@ -12,14 +13,18 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 # Properness of morphisms of schemes over a base
 
 Cancellation for properness, packaged for the category `Over S` of schemes over a base scheme
-`S`: a morphism of `S`-schemes with proper source and separated target is proper. Together with
-the global sections of a proper integral scheme over an algebraically closed field, which
-Mathlib's `AlgebraicGeometry.isIntegral_appTop_of_universallyClosed` gives outright.
+`S`: a morphism of `S`-schemes with proper source and separated target is proper. Properness of
+the structure morphism of a scheme-theoretic fibre, which is properness base changed along
+`Spec κ(y) ⟶ Y`. Together with the global sections of a proper integral scheme over an
+algebraically closed field, which Mathlib's
+`AlgebraicGeometry.isIntegral_appTop_of_universallyClosed` gives outright.
 
 ## Main results
 
 - `AlgebraicGeometry.isProper_left`: a morphism `f : X ⟶ Y` in `Over S` with `X` proper over `S`
   and `Y` separated over `S` is proper.
+- `AlgebraicGeometry.isProper_fiberToSpecResidueField`: the structure morphism
+  `X_y ⟶ Spec κ(y)` of the scheme-theoretic fibre of a proper morphism is proper.
 - `AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_appTop` (blueprint `lem:cube-global-sections`): for
   `X` proper and integral over an algebraically closed field `K`, the structure map
   `K ⟶ Γ(X, 𝒪_X)` is an isomorphism.
@@ -51,6 +56,21 @@ instance (priority := low) isProper_left {S : Scheme.{u}} {X Y : Over S} (f : X 
     rw [Over.w f]
     infer_instance
   exact IsProper.of_comp _ Y.hom
+
+/-- The structure morphism `X_y ⟶ Spec κ(y)` of the scheme-theoretic fibre of a proper morphism
+`f : X ⟶ Y` over `y : Y` is proper, being the base change of `f` along `Spec κ(y) ⟶ Y`.
+
+```
+    X_y ─────→ X
+     │         │
+     │         │ f
+     ↓         ↓
+ Spec κ(y) ──→ Y
+```
+-/
+instance isProper_fiberToSpecResidueField {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (y : Y) :
+    IsProper (f.fiberToSpecResidueField y) :=
+  MorphismProperty.pullback_snd _ _ inferInstance
 
 /-- **The global sections of a proper integral scheme over an algebraically closed field.**
 
