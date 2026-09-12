@@ -11,6 +11,44 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
 # An invertible sheaf of modules is locally isomorphic to the structure sheaf
+
+A sheaf of modules `M` on a scheme `X` is invertible, in the sense of
+`WeilConjectures.AlgebraicGeometry.Modules.Picard`, when there is a sheaf of modules `N` and an
+isomorphism `M ⊗ N ≅ 𝒪ₓ`. This file proves that such an `M` is a line bundle in the geometric
+sense: every point of `X` has an open neighbourhood `W` on which `M` is isomorphic to the
+structure sheaf.
+
+The proof has two halves.
+
+The first is a comparison between the tensor product of two sheaves of modules and the
+*sectionwise* tensor product of the underlying presheaves of modules. The former is by
+construction the sheafification of the latter, so there is a canonical morphism
+`SheafOfModules.tensorPresheafHom` from the sectionwise tensor product to `M ⊗ N`, and it becomes
+an isomorphism after sheafification; over a topological space this makes it locally surjective.
+Composing it with an isomorphism `M ⊗ N ≅ 𝒪ₓ` gives a pairing
+`AlgebraicGeometry.Scheme.Modules.tensorPairing` of a section of `M` and a section of `N` over an
+open `U` with values in `Γ(X, U)`, and local surjectivity says that `1` is locally a finite sum of
+such products. Since the local rings of `X` are local rings, one of the summands has a germ which
+is a unit at any prescribed point, and shrinking to a basic open set makes that product itself a
+unit: this is `AlgebraicGeometry.Scheme.Modules.exists_tensorPairing_eq_one`.
+
+The second half is formal. Two sections `m` of `M` and `n` of `N` over `W` whose product is `1`
+give a morphism `𝒪_W ⟶ M|_W`, multiplication by `m`, and a morphism `M|_W ⟶ 𝒪_W`, pairing with
+`n`, whose composite is the identity of `𝒪_W`. A split monomorphism from the tensor unit to an
+invertible object of a monoidal category is an isomorphism
+(`CategoryTheory.MonoidalCategory.isIso_of_comp_eq_id`), and `M|_W` is invertible because the
+pullback of an invertible sheaf of modules is invertible.
+
+## Main declarations
+
+- `SheafOfModules.tensorPresheafHom`: the comparison morphism from the sectionwise tensor product
+  of the underlying presheaves of modules of `F` and `G` to the underlying presheaf of modules of
+  `F ⊗ G`, together with `SheafOfModules.w_toPresheaf_map_tensorPresheafHom`, the statement that
+  it becomes an isomorphism after sheafification.
+- `AlgebraicGeometry.Scheme.Modules.tensorPairing`: the pairing on sections determined by an
+  isomorphism `M ⊗ N ≅ 𝒪ₓ`.
+- `SheafOfModules.Invertible.exists_restrict_iso_unit`: **an invertible sheaf of modules on a
+  scheme is locally isomorphic to the structure sheaf.**
 -/
 
 @[expose] public section
@@ -236,6 +274,9 @@ noncomputable def smulRestrictHom (m : Γ(M, W)) :
       (fun U' r z ↦ smulSection_smul m _ _ ((W.ι.appIso U'.unop).inv r) z)
 
 set_option maxHeartbeats 2000000 in
+-- The naturality of the pairing is checked up to the definitional unfolding of
+-- `AlgebraicGeometry.Scheme.Modules.tensorPairing`, which goes through the sheafification of the
+-- sectionwise tensor product and is therefore expensive.
 set_option backward.isDefEq.respectTransparency false in
 /-- Pairing with a section `n` of `N` over `W`, as a morphism `M|_W ⟶ 𝒪_X|_W`. -/
 noncomputable def pairRestrictHom (n : Γ(N, W)) :
@@ -266,7 +307,8 @@ noncomputable def tensorUnitRestrictIso (W : X.Opens) :
 
 /-- **An invertible sheaf of modules on a scheme is locally trivial**: every point has an open
 neighbourhood on which the sheaf is isomorphic to the structure sheaf. -/
-theorem exists_mem_nonempty_restrict_iso_unit {M : X.Modules} (hM : M.Invertible) (x : X) :
+theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_unit {M : X.Modules}
+    (hM : M.Invertible) (x : X) :
     ∃ W : X.Opens, x ∈ W ∧
       Nonempty (M.restrict W.ι ≅ SheafOfModules.unit W.toScheme.ringCatSheaf) := by
   obtain ⟨N, ⟨e₀⟩⟩ := SheafOfModules.invertible_iff_exists.{u, u, u}.1 hM
@@ -288,5 +330,12 @@ theorem exists_mem_nonempty_restrict_iso_unit {M : X.Modules} (hM : M.Invertible
     MonoidalCategory.isIso_of_comp_eq_id eW (β_ N' (M.restrict W.ι) ≪≫ eW) key
   exact ⟨(asIso ((tensorUnitRestrictIso W).hom ≫ smulRestrictHom m)).symm ≪≫
     SheafOfModules.tensorUnitIso W.toScheme.sheaf⟩
+
+/-- An invertible sheaf of modules on a scheme is locally isomorphic to the tensor unit. -/
+theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_tensorUnit {M : X.Modules}
+    (hM : M.Invertible) (x : X) :
+    ∃ W : X.Opens, x ∈ W ∧ Nonempty (M.restrict W.ι ≅ 𝟙_ W.toScheme.Modules) := by
+  obtain ⟨W, hxW, ⟨i⟩⟩ := hM.exists_restrict_iso_unit x
+  exact ⟨W, hxW, ⟨i ≪≫ (SheafOfModules.tensorUnitIso W.toScheme.sheaf).symm⟩⟩
 
 end AlgebraicGeometry.Scheme.Modules
