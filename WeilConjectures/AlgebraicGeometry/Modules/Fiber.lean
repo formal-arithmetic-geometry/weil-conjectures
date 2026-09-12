@@ -73,9 +73,13 @@ theorem isSheaf_presheaf_of_subsingleton [Subsingleton X] :
   have h : Subsingleton (P.obj (op ⊥)) := Module.subsingleton Γ(X, ⊥) _
   exact (@AddCommGrpCat.isZero_of_subsingleton _ h).isTerminal
 
+-- PR #716 lands this same fact in `WeilConjectures/AlgebraicGeometry/Modules/PicardField.lean`
+-- under the unsuffixed name `isIso_sheafificationAdjunction_unit_app`. The two copies exist only
+-- because the two pull requests were written concurrently and each was forbidden from touching
+-- the other's files. Issue 928 item 4 owns collapsing them to one once both have landed.
 /-- On a scheme with at most one point, the unit of the sheafification adjunction for presheaves
 of modules is an isomorphism. -/
-theorem isIso_sheafificationAdjunction_unit_app [Subsingleton X] :
+theorem isIso_sheafificationAdjunction_unit_app_of_subsingleton [Subsingleton X] :
     IsIso ((_root_.PresheafOfModules.sheafificationAdjunction
       (𝟙 X.ringCatSheaf.obj)).unit.app P) := by
   have h₁ : IsIso (toSheafify (Opens.grothendieckTopology X) P.presheaf) :=
@@ -93,7 +97,7 @@ variable (X) in
 already a sheaf. -/
 noncomputable def sheafificationEquivalence [Subsingleton X] :
     _root_.PresheafOfModules.{u} (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}) ≌ X.Modules :=
-  have := fun P ↦ isIso_sheafificationAdjunction_unit_app (X := X) P
+  have := fun P ↦ isIso_sheafificationAdjunction_unit_app_of_subsingleton (X := X) P
   (_root_.PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).toEquivalence
 
 variable (X) in
