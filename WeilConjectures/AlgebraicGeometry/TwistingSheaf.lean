@@ -53,6 +53,10 @@ set `D₊(f)`, with inverse the division by `f`. In particular, on
 
 - The fibrewise description of a global section: for `a` homogeneous of degree `j`, the section
   `homogeneousSection a` of `𝒪(j)` vanishes at a point `x` if and only if `a ∈ x`.
+- The compatibility of `AlgebraicGeometry.Proj.twistingSheafTensorIso` with global sections: the
+  image of `homogeneousSection a ⊗ homogeneousSection b` under `𝒪(i) ⊗ 𝒪(j) ≅ 𝒪(i + j)` should
+  be `homogeneousSection (a * b)`. This is what associativity of the tensor isomorphisms and the
+  computation of the induced map `ℤ → Pic (Proj 𝒜)` will need.
 - The transfer of `𝒪(1)` to the relative projective space `ℙ(n; S)` of
   `WeilConjectures/AlgebraicGeometry/ProjectiveSpace.lean`, by pulling back along the map to
   the integral model, and the compatibility with base change.
@@ -381,7 +385,6 @@ def unitToPresheafInAbZero :
   naturality _ _ _ := rfl
 
 end Zero
-
 
 section Generator
 

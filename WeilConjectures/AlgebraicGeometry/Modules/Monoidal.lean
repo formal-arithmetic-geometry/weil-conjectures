@@ -191,6 +191,22 @@ noncomputable def tensorIsoOfIsLocallyBijective
   tensorIso eF.symm eG.symm ≪≫ Functor.Monoidal.μIso (sheafification R) P Q ≪≫
     asIso ((sheafification R).map φ) ≪≫ eH
 
+/-- `SheafOfModules.tensorIsoOfIsLocallyBijective` is the isomorphism induced by `φ`: this
+records the four steps of the diagram in its definition. -/
+theorem tensorIsoOfIsLocallyBijective_hom
+    {P Q S : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat.{u})}
+    {F G H : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
+    (eF : (sheafification R).obj P ≅ F) (eG : (sheafification R).obj Q ≅ G)
+    (eH : (sheafification R).obj S ≅ H) (φ : P ⊗ Q ⟶ S)
+    [Presheaf.IsLocallyInjective J ((PresheafOfModules.toPresheaf
+      (R.obj ⋙ forget₂ CommRingCat RingCat.{u})).map φ)]
+    [Presheaf.IsLocallySurjective J ((PresheafOfModules.toPresheaf
+      (R.obj ⋙ forget₂ CommRingCat RingCat.{u})).map φ)] :
+    (tensorIsoOfIsLocallyBijective eF eG eH φ).hom =
+      (tensorIso eF.symm eG.symm).hom ≫ (Functor.Monoidal.μIso (sheafification R) P Q).hom ≫
+        (sheafification R).map φ ≫ eH.hom :=
+  rfl
+
 end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme
