@@ -173,4 +173,120 @@ lemma exists_tensorPairing_eq_one (x : X) :
   rw [_root_.map_smul, ← map_tensorPairing, ← hu, smul_eq_mul]
   exact u.inv_mul
 
+section Restrict
+
+variable (e) {W : X.Opens}
+
+/-- Multiplication by the restriction of a section `m` of `M` over `W` to a smaller open `V`. -/
+noncomputable def smulSection (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) : Γ(X, V) →+ Γ(M, V) :=
+  AddMonoidHom.mk' (fun r ↦ r • M.presheaf.map (homOfLE hV).op m) (fun r r' ↦ add_smul r r' _)
+
+lemma smulSection_smul (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r z : Γ(X, V)) :
+    smulSection m V hV (r • z) = r • smulSection m V hV z :=
+  mul_smul r z _
+
+lemma map_smulSection (m : Γ(M, W)) {V V' : X.Opens} (hV : V ≤ W) (hV' : V' ≤ W) (i : V' ⟶ V)
+    (r : Γ(X, V)) :
+    M.presheaf.map i.op (smulSection m V hV r) = smulSection m V' hV' (X.presheaf.map i.op r) := by
+  rw [smulSection, smulSection]
+  simp only [AddMonoidHom.mk'_apply]
+  rw [Scheme.Modules.map_smul, ← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  congr 2
+
+/-- Pairing with the restriction of a section `n` of `N` over `W` to a smaller open `V`. -/
+noncomputable def pairSection (n : Γ(N, W)) (V : X.Opens) (hV : V ≤ W) : Γ(M, V) →+ Γ(X, V) :=
+  AddMonoidHom.mk' (fun z ↦ tensorPairing e V z (N.presheaf.map (homOfLE hV).op n))
+    (fun z z' ↦ by rw [map_add]; rfl)
+
+lemma pairSection_smul (n : Γ(N, W)) (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V)) (z : Γ(M, V)) :
+    pairSection e n V hV (r • z) = r • pairSection e n V hV z := by
+  rw [pairSection]
+  simp only [AddMonoidHom.mk'_apply]
+  rw [_root_.map_smul]
+  rfl
+
+lemma map_pairSection (n : Γ(N, W)) {V V' : X.Opens} (hV : V ≤ W) (hV' : V' ≤ W) (i : V' ⟶ V)
+    (z : Γ(M, V)) :
+    X.presheaf.map i.op (pairSection e n V hV z) =
+      pairSection e n V' hV' (M.presheaf.map i.op z) := by
+  rw [pairSection, pairSection]
+  simp only [AddMonoidHom.mk'_apply]
+  rw [map_tensorPairing, ← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  congr 3
+
+lemma pairSection_smulSection (m : Γ(M, W)) (n : Γ(N, W)) (h : tensorPairing e W m n = 1)
+    (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V)) :
+    pairSection e n V hV (smulSection m V hV r) = r := by
+  rw [smulSection]
+  simp only [AddMonoidHom.mk'_apply]
+  rw [pairSection_smul, pairSection]
+  simp only [AddMonoidHom.mk'_apply, smul_eq_mul]
+  rw [← map_tensorPairing, h, map_one, mul_one]
+
+/-- Multiplication by a section `m` of `M` over `W`, as a morphism `𝒪_X|_W ⟶ M|_W` of sheaves
+of modules on the open subscheme `W`. -/
+noncomputable def smulRestrictHom (m : Γ(M, W)) :
+    restrict (SheafOfModules.unit X.ringCatSheaf) W.ι ⟶ restrict M W.ι :=
+  (SheafOfModules.fullyFaithfulForget _).preimage <|
+    PresheafOfModules.homMk
+      { app := fun U' ↦ AddCommGrpCat.ofHom (smulSection m (W.ι ''ᵁ U'.unop) (W.ι_image_le _))
+        naturality := fun {U' V'} f ↦ by
+          ext r
+          exact (map_smulSection m _ _ _ r).symm }
+      (fun U' r z ↦ smulSection_smul m _ _ ((W.ι.appIso U'.unop).inv r) z)
+
+set_option maxHeartbeats 2000000 in
+set_option backward.isDefEq.respectTransparency false in
+/-- Pairing with a section `n` of `N` over `W`, as a morphism `M|_W ⟶ 𝒪_X|_W`. -/
+noncomputable def pairRestrictHom (n : Γ(N, W)) :
+    restrict M W.ι ⟶ restrict (SheafOfModules.unit X.ringCatSheaf) W.ι :=
+  (SheafOfModules.fullyFaithfulForget _).preimage <|
+    PresheafOfModules.homMk
+      { app := fun U' ↦ AddCommGrpCat.ofHom (pairSection e n (W.ι ''ᵁ U'.unop) (W.ι_image_le _))
+        naturality := fun {_U' _V'} _f ↦ AddCommGrpCat.hom_ext
+          (AddMonoidHom.ext fun z ↦ (map_pairSection e n _ _ _ z).symm) }
+      (fun U' r z ↦ pairSection_smul e n _ _ ((W.ι.appIso U'.unop).inv r) z)
+
+/-- If the sections `m` of `M` and `n` of `N` over `W` pair to `1`, then multiplication by `m`
+is a split monomorphism `𝒪_X|_W ⟶ M|_W`. -/
+lemma smulRestrictHom_comp_pairRestrictHom (m : Γ(M, W)) (n : Γ(N, W))
+    (h : tensorPairing e W m n = 1) :
+    smulRestrictHom m ≫ pairRestrictHom e n = 𝟙 _ := by
+  apply (SheafOfModules.fullyFaithfulForget _).map_injective
+  ext U' r
+  exact pairSection_smulSection e m n h _ _ r
+
+end Restrict
+
+/-- The tensor unit of the category of `𝒪_W`-modules on an open subscheme `W` of `X` is the
+restriction of the structure sheaf of `X`. -/
+noncomputable def tensorUnitRestrictIso (W : X.Opens) :
+    𝟙_ W.toScheme.Modules ≅ restrict (SheafOfModules.unit X.ringCatSheaf) W.ι :=
+  SheafOfModules.tensorUnitIso W.toScheme.sheaf ≪≫ (restrictUnitIso W.ι).symm
+
+/-- **An invertible sheaf of modules on a scheme is locally trivial**: every point has an open
+neighbourhood on which the sheaf is isomorphic to the structure sheaf. -/
+theorem exists_mem_nonempty_restrict_iso_unit {M : X.Modules} (hM : M.Invertible) (x : X) :
+    ∃ W : X.Opens, x ∈ W ∧
+      Nonempty (M.restrict W.ι ≅ SheafOfModules.unit W.toScheme.ringCatSheaf) := by
+  obtain ⟨N, ⟨e₀⟩⟩ := SheafOfModules.invertible_iff_exists.{u, u, u}.1 hM
+  obtain ⟨W, hxW, m, n, h⟩ :=
+    exists_tensorPairing_eq_one (e := e₀ ≪≫ SheafOfModules.tensorUnitIso X.sheaf) x
+  refine ⟨W, hxW, ?_⟩
+  have hMW : (M.restrict W.ι).Invertible :=
+    (hM.pullback W.ι).of_iso ((restrictFunctorIsoPullback W.ι).app M).symm
+  obtain ⟨N', ⟨eW⟩⟩ : ∃ N' : W.toScheme.Modules,
+      Nonempty (M.restrict W.ι ⊗ N' ≅ 𝟙_ W.toScheme.Modules) :=
+    SheafOfModules.invertible_iff_exists.{u, u, u}.1 hMW
+  have key : ((tensorUnitRestrictIso W).hom ≫ smulRestrictHom m) ≫
+      (pairRestrictHom (e₀ ≪≫ SheafOfModules.tensorUnitIso X.sheaf) n ≫
+        (tensorUnitRestrictIso W).inv) = 𝟙 _ := by
+    rw [Category.assoc, ← Category.assoc (smulRestrictHom m),
+      smulRestrictHom_comp_pairRestrictHom _ m n h, Category.id_comp,
+      (tensorUnitRestrictIso W).hom_inv_id]
+  have : IsIso ((tensorUnitRestrictIso W).hom ≫ smulRestrictHom m) :=
+    MonoidalCategory.isIso_of_comp_eq_id eW (β_ N' (M.restrict W.ι) ≪≫ eW) key
+  exact ⟨(asIso ((tensorUnitRestrictIso W).hom ≫ smulRestrictHom m)).symm ≪≫
+    SheafOfModules.tensorUnitIso W.toScheme.sheaf⟩
+
 end AlgebraicGeometry.Scheme.Modules
