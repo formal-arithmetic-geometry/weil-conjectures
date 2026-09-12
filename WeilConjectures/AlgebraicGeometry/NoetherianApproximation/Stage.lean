@@ -403,7 +403,7 @@ lemma Stage.isLocalization_away (T : E.Stage) (l : E.σ) :
       have ht := congrArg (E.resLimit T.j) hk'
       rw [map_mul, map_pow, map_zero, T.hr] at ht
       rw [map_mul, map_pow, map_sub, T.resV_eq_resLimit_of_mem a.2,
-      T.resV_eq_resLimit_of_mem a'.2, ← map_sub]
+        T.resV_eq_resLimit_of_mem a'.2, ← map_sub]
       exact ht
     obtain ⟨K, hK⟩ := E.exists_pow_mul_eq_zero_of_resV_eq_zero l hV0
     refine ⟨⟨T.gen l ^ (K + k), K + k, rfl⟩, Subtype.ext (Prod.ext ?_ ?_)⟩
@@ -494,7 +494,7 @@ lemma basicOpen_resV (E : ExtensionData.{u}) (l : E.σ) :
   simp only [ExtensionData.resV, Scheme.basicOpen_appLE, top_inf_eq]
 
 /-- The basic opens of the chosen generators cover `W`. -/
-lemma iSup_basicOpen_sV (E : ExtensionData.{u}) :
+lemma iSup_basicOpen_resV (E : ExtensionData.{u}) :
     ⨆ l, E.Wc.pt.basicOpen (E.resV (E.b l)) = ⊤ := by
   simp_rw [E.basicOpen_resV]
   rw [← Scheme.Hom.preimage_iSup, ← E.inf_eq_iSup_basicOpen]
@@ -524,7 +524,7 @@ variable (E) in
 /-- Restricting a global section of `W` to the basic open of `resV (b l)`
 factors through the restriction to the pullback of `X.basicOpen (b l)`; the two opens are
 equal by `basicOpen_resV`. -/
-lemma restrict_basicOpen_sV_eq (l : E.σ) (x : Γ(E.Wc.pt, ⊤)) :
+lemma restrict_basicOpen_resV_eq (l : E.σ) (x : Γ(E.Wc.pt, ⊤)) :
     x |_ E.Wc.pt.basicOpen (E.resV (E.b l)) =
       (E.Wc.pt.presheaf.map (eqToHom (E.basicOpen_resV l)).op)
         ((E.Wc.pt.presheaf.map (homOfLE le_top).op) x) := by
@@ -581,7 +581,7 @@ lemma exists_mem_fiberProduct_res_eq_mul_pow (E : ExtensionData.{u}) {j : Over E
   -- `resV v₀` and `resLimit (rl ^ K * y)` agree on the basic open of `resV (b l)`.
   have h6 : E.resV v₀ |_ E.Wc.pt.basicOpen (E.resV (E.b l)) =
       E.resLimit j (rl ^ K * y) |_ E.Wc.pt.basicOpen (E.resV (E.b l)) := by
-    rw [E.restrict_basicOpen_sV_eq, E.restrict_basicOpen_sV_eq]
+    rw [E.restrict_basicOpen_resV_eq, E.restrict_basicOpen_resV_eq]
     congr 1
     rw [map_mul, map_pow, hrl, map_mul, map_pow]
     linear_combination -e₁'
@@ -842,7 +842,7 @@ lemma exists_r (j₀ : Over E.i₀) :
 
 /-- The basic opens of the limit lifts of the generators are affine: they
 are the basic opens of the affine `V`, transported into the limit `W`. -/
-lemma isAffineOpen_basicOpen_sV (l : E.σ) :
+lemma isAffineOpen_basicOpen_resV (l : E.σ) :
     IsAffineOpen (E.Wc.pt.basicOpen (E.resV (E.b l))) := by
   rw [E.basicOpen_resV]
   exact (E.hV.basicOpen (E.b l)).preimage_of_isOpenImmersion _
@@ -863,7 +863,7 @@ lemma exists_preStage_hom (j₀ : Over E.i₀) :
     simp_rw [Scheme.preimage_basicOpen_top]
     have h (l : E.σ) : (E.Wc.π.app j₁).appTop (r l) = E.resV (E.b l) := hr l
     simp_rw [h]
-    exact E.iSup_basicOpen_sV
+    exact E.iSup_basicOpen_resV
   obtain ⟨j₂, k₂, hk₂⟩ := exists_map_eq_top E.WD E.Wc E.isLimitWc _ hU
   set r₂ : E.σ → Γ(E.WD.obj j₂, ⊤) := fun l ↦ E.res k₂ (r l) with hr₂def
   have hr₂ (l : E.σ) : E.resLimit j₂ (r₂ l) = E.resV (E.b l) := by rw [hr₂def, E.resLimit_res, hr]
@@ -875,7 +875,7 @@ lemma exists_preStage_hom (j₀ : Over E.i₀) :
       ∃ (ja : Over E.i₀) (ka : ja ⟶ j),
         IsAffineOpen ((E.WD.obj ja).basicOpen (E.res (ka ≫ k) (r₂ l))) := by
     obtain ⟨i, O, hO, hOeq⟩ := exists_isAffineOpen_preimage_eq E.WD E.Wc E.isLimitWc _
-      (E.isAffineOpen_basicOpen_sV l)
+      (E.isAffineOpen_basicOpen_resV l)
     obtain ⟨j', kj, ki, -⟩ := IsCofilteredOrEmpty.cone_objs j i
     have hpre : E.Wc.π.app j' ⁻¹ᵁ ((E.WD.obj j').basicOpen (E.res (kj ≫ k) (r₂ l))) =
         E.Wc.π.app j' ⁻¹ᵁ (E.WD.map ki ⁻¹ᵁ O) := by
