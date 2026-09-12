@@ -169,6 +169,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalC
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Funext
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Monad
+public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Variables
 public import WeilConjectures.Mathlib.Algebra.Ring.Equiv
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
@@ -241,6 +242,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
+public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Binomial
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
@@ -248,8 +250,8 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingDown
 public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Height
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
@@ -258,6 +260,7 @@ public import WeilConjectures.Mathlib.RingTheory.Jacobson.Ideal
 public import WeilConjectures.Mathlib.RingTheory.Jacobson.Radical
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Field
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
