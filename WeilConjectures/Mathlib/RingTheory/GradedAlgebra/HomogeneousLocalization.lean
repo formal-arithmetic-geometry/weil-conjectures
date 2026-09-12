@@ -21,6 +21,9 @@ degree-zero part of the localization away from `f`, sending `a / fⁿ` to `φ a 
 Its main properties are compatibility with postcomposition (`Away.comp_lift`) and
 invariance under rescaling `φ` on `𝒜 n` by the `n`-th power of a fixed unit
 (`Away.lift_eq_lift_of_eq_unit_pow_mul`).
+
+Finally, `HomogeneousLocalization.isUnit_mk_iff` records that a fraction `a / f` in the
+homogeneous localization at a homogeneous prime ideal `𝔭` is a unit exactly when `a ∉ 𝔭`.
 -/
 
 @[expose] public section
@@ -172,5 +175,20 @@ instance : IsScalarTower R (HomogeneousLocalization 𝒜 x) (Localization x) :=
   .of_algebraMap_eq fun r ↦ (val_algebraMap 𝒜 x r).symm
 
 end Algebra
+
+section AtPrime
+
+variable {ι σ A : Type*} [AddCommMonoid ι] [DecidableEq ι] [CommRing A] [SetLike σ A]
+  [AddSubgroupClass σ A] {𝒜 : ι → σ} [GradedRing 𝒜] (𝔭 : Ideal A) [𝔭.IsPrime]
+
+/-- A fraction `a / f` in the homogeneous localization of `A` at a homogeneous prime ideal `𝔭`
+is a unit if and only if its numerator avoids `𝔭`. -/
+theorem isUnit_mk_iff (y : NumDenSameDeg 𝒜 𝔭.primeCompl) :
+    IsUnit (mk y : AtPrime 𝒜 𝔭) ↔ (y.num : A) ∉ 𝔭 := by
+  rw [← isUnit_iff_isUnit_val, val_mk, Localization.mk_eq_mk'_apply,
+    IsLocalization.AtPrime.isUnit_mk'_iff]
+  exact Iff.rfl
+
+end AtPrime
 
 end HomogeneousLocalization

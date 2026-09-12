@@ -67,6 +67,8 @@ after restriction of scalars along `φ : R ⟶ S`.
 - `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
+- `AlgebraicGeometry.Scheme.Modules.sectionsPullback_naturality`: the restriction
+  `Γ(N, ⊤) ⟶ Γ(a^* N, ⊤)` of a global section along `a : X ⟶ Y` is natural in `N`.
 - `AlgebraicGeometry.Scheme.Modules.moduleSpecΓPushforwardIso`,
   `AlgebraicGeometry.Scheme.Modules.moduleSpecΓPullbackIso`: base change of the global sections
   of a sheaf of modules on `Spec S` along `φ : R ⟶ S`.
@@ -373,6 +375,39 @@ lemma sectionsPullback_smul {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules
   simp only [ConcreteCategory.comp_apply, Functor.id_obj, Functor.comp_obj, Hom.app_smul,
     eqToHom_pushforward_smul, map_smul]
   rw [map_le_top_app_top]
+
+/-- A morphism of sheaves of modules commutes with the restriction maps. -/
+@[reassoc]
+lemma Hom.app_naturality {X' : Scheme.{u}} {N N' : X'.Modules} (φ : N ⟶ N') {U V : X'.Opens}
+    (i : U ⟶ V) :
+    N.presheaf.map i.op ≫ φ.app U = φ.app V ≫ N'.presheaf.map i.op :=
+  φ.mapPresheaf.naturality i.op
+
+/-- The pullback of a global section is the image of the section under the unit of the
+adjunction, restricted from `a ⁻¹ᵁ ⊤` to `⊤`. -/
+lemma sectionsPullback_apply {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules) (s : Γ(N, ⊤))
+    (i : (⊤ : X'.Opens) ⟶ a ⁻¹ᵁ ⊤) :
+    sectionsPullback a N s =
+      ((pullback a).obj N).presheaf.map i.op
+        (((pullbackPushforwardAdjunction a).unit.app N).app ⊤ s) :=
+  rfl
+
+/-- Pulling back a global section commutes with applying a morphism of sheaves of modules: the
+pullback of sections is natural in the sheaf of modules. -/
+lemma sectionsPullback_naturality {X' Y' : Scheme.{u}} (a : X' ⟶ Y') {N N' : Y'.Modules}
+    (φ : N ⟶ N') (s : Γ(N, ⊤)) :
+    ((pullback a).map φ).app ⊤ (sectionsPullback a N s) = sectionsPullback a N' (φ.app ⊤ s) := by
+  have h := ConcreteCategory.congr_hom
+    (congrArg (fun ψ : N ⟶ (pushforward a).obj ((pullback a).obj N') ↦ ψ.app ⊤)
+      ((pullbackPushforwardAdjunction a).unit.naturality φ).symm) s
+  simp only [Functor.comp_map, Functor.id_map, Hom.comp_app, ConcreteCategory.comp_apply,
+    pushforward_map_app] at h
+  have i : (⊤ : X'.Opens) ⟶ a ⁻¹ᵁ ⊤ := homOfLE (by simp)
+  have key := ConcreteCategory.congr_hom (Hom.app_naturality ((pullback a).map φ) i)
+    (((pullbackPushforwardAdjunction a).unit.app N).app ⊤ s)
+  simp only [ConcreteCategory.comp_apply] at key
+  rw [sectionsPullback_apply a N s i, sectionsPullback_apply a N' _ i, key]
+  exact congrArg _ h
 
 lemma pushforwardPullbackComp_app (V : Z.Opens) :
     (pushforwardPullbackComp a b M).app V =
