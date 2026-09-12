@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Localization.Finiteness
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
@@ -69,6 +70,8 @@ affine opens, it is quasi-coherent with finitely generated module of sections.
   finite `R`-module. No Noetherian hypothesis is needed.
 - `AlgebraicGeometry.tilde.isCoherent_iff` and `AlgebraicGeometry.Scheme.Modules.isCoherent_iff`:
   the resulting characterisation of coherence on an affine scheme.
+- `AlgebraicGeometry.Scheme.Modules.isLocallyFree_of_generatingSections`: being locally free is
+  local on the base.
 - `AlgebraicGeometry.Scheme.Modules.isFiniteType_restrictFunctor`: being of finite type is
   stable under restriction to an open subscheme.
 - `AlgebraicGeometry.Scheme.Modules.isFiniteType_pushforward` and
@@ -722,6 +725,12 @@ instance (G : (M.restrict U.ι).GeneratingSections) [G.IsFiniteType] :
     (overGeneratingSections M U G).IsFiniteType :=
   ⟨‹G.IsFiniteType›.finite⟩
 
+instance (G : (M.restrict U.ι).GeneratingSections) [IsIso G.π] :
+    IsIso (overGeneratingSections M U G).π := by
+  rw [overGeneratingSections, SheafOfModules.GeneratingSections.equivOfIso,
+    Equiv.coe_fn_mk, SheafOfModules.GeneratingSections.ofEpi_π]
+  infer_instance
+
 /-- A presentation of `M.restrict U.ι` gives a presentation of `M.over U`. -/
 noncomputable def overPresentation (P : (M.restrict U.ι).Presentation) :
     (M.over U).Presentation :=
@@ -768,6 +777,22 @@ theorem isFiniteType_of_generatingSections (hU : IsOpenCover U)
     (.mk (M := M) ι U ((Opens.coversTop_iff _ U).mpr hU)
       fun i ↦ overGeneratingSections M (U i) (G i))
     fun i ↦ ⟨(hG i).finite⟩
+
+/-- **Being locally free is local**: a sheaf of modules whose restriction to each member of an
+open cover is free on a family of generating sections is locally free. -/
+theorem isLocallyFree_of_generatingSections (hU : IsOpenCover U)
+    (G : ∀ i, (M.restrict (U i).ι).GeneratingSections) (hG : ∀ i, IsIso (G i).π) :
+    M.IsLocallyFree := by
+  have (i : ι) : IsIso (G i).π := hG i
+  have h : (SheafOfModules.LocalGeneratorsData.mk (M := M) ι U
+      ((Opens.coversTop_iff _ U).mpr hU)
+      fun i ↦ overGeneratingSections M (U i) (G i)).IsLocallyFreeData := by
+    constructor
+    intro i
+    exact inferInstanceAs (IsIso (overGeneratingSections M (U i) (G i)).π)
+  exact SheafOfModules.LocalGeneratorsData.isLocallyFree (M := M)
+    (.mk (M := M) ι U ((Opens.coversTop_iff _ U).mpr hU)
+      fun i ↦ overGeneratingSections M (U i) (G i))
 
 /-- **Being quasi-coherent is local**: a sheaf of modules admitting a presentation over each
 member of an open cover is quasi-coherent. -/

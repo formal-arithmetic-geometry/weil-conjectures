@@ -27,6 +27,8 @@ presheaf tensor product.
   `SheafOfModules.symmetricCategory`: the symmetric monoidal structure on `SheafOfModules R'`,
   for which the sheafification functor `SheafOfModules.sheafification R` is monoidal and braided.
 - `SheafOfModules.tensorUnitIso`: the tensor unit is the free sheaf of modules of rank one.
+- `AlgebraicGeometry.Scheme.Modules.restrictTensorUnitIso`: the restriction of the structure
+  sheaf along an open immersion is the tensor unit.
 - `AlgebraicGeometry.Scheme.Modules.monoidalCategory`,
   `AlgebraicGeometry.Scheme.Modules.braidedCategory` and
   `AlgebraicGeometry.Scheme.Modules.symmetricCategory`: the corresponding structures on the
@@ -161,6 +163,14 @@ noncomputable instance Modules.braidedCategory : BraidedCategory X.Modules :=
 /-- The tensor product of `𝒪ₓ`-modules is symmetric. -/
 noncomputable instance Modules.symmetricCategory : SymmetricCategory X.Modules :=
   inferInstanceAs (SymmetricCategory (SheafOfModules.{u} X.ringCatSheaf))
+
+variable {X}
+
+/-- The restriction of the structure sheaf `𝒪ᵧ` along an open immersion `f : X ⟶ Y` is the
+tensor unit of the category of `𝒪ₓ`-modules. -/
+noncomputable def Modules.restrictTensorUnitIso {Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] :
+    Modules.restrict (SheafOfModules.unit Y.ringCatSheaf) f ≅ 𝟙_ X.Modules :=
+  Modules.restrictUnitIso f ≪≫ (SheafOfModules.tensorUnitIso X.sheaf).symm
 
 end AlgebraicGeometry.Scheme
 
