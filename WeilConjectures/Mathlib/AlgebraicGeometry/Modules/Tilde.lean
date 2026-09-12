@@ -1314,15 +1314,6 @@ theorem exists_generatingSections_of_isAffine [IsAffine X] (P : X.Modules) [P.Is
   obtain ⟨G', hG'⟩ := exists_generatingSections_restrict X.isoSpec.hom _ G
   exact ⟨G'.ofEpi ((restrictFunctorInvCompIso X.isoSpec).app P).hom, inferInstance⟩
 
-/-- **The global sections of a pushforward along a morphism of affine spectra**: they are the
-global sections of the original sheaf, with the base ring acting through the ring map. -/
-def moduleSpecΓPushforwardIso (φ : R ⟶ S) (P : (Spec S).Modules) :
-    moduleSpecΓFunctor.obj ((pushforward (Spec.map φ)).obj P) ≅
-      (ModuleCat.restrictScalars φ.hom).obj (moduleSpecΓFunctor.obj P) :=
-  (TopCat.Sheaf.forget (ModuleCat R) (Spec R) ⋙
-      (CategoryTheory.evaluation _ _).obj (op ⊤)).mapIso
-    ((pushforwardCompModulesSpecToSheafIso φ).app P)
-
 open scoped ModuleCat.Algebra in
 /-- **Being of finite type is stable under pushforward along a surjection of affine
 spectra.** Surjectivity enters through `Module.Finite.trans`: the global sections are already
@@ -1344,9 +1335,12 @@ theorem isFiniteType_pushforward_specMap (φ : R ⟶ S) (hφ : Function.Surjecti
         ((ModuleCat.restrictScalars φ.hom).obj (moduleSpecΓFunctor.obj P)) :=
       inferInstanceAs (Module.Finite S (moduleSpecΓFunctor.obj P))
     exact Module.Finite.trans S _
+  -- the source of `(moduleSpecΓPushforwardIso φ).app P` is spelled as a composite of functors
+  have h₂ : Module.Finite R
+      ((moduleSpecΓFunctor ⋙ ModuleCat.restrictScalars φ.hom).obj P) := h₁
   have hfin : Module.Finite R
       (moduleSpecΓFunctor.obj ((pushforward (Spec.map φ)).obj P)) :=
-    Module.Finite.equiv (moduleSpecΓPushforwardIso φ P).symm.toLinearEquiv
+    Module.Finite.equiv ((moduleSpecΓPushforwardIso φ).app P).symm.toLinearEquiv
   -- the source of `fromTildeΓ` is definitionally, but not syntactically, `moduleSpecΓFunctor`
   have : Module.Finite R ((modulesSpecToSheaf.obj
     ((pushforward (Spec.map φ)).obj P)).presheaf.obj (.op ⊤)) := ‹_›
