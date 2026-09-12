@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 
 /-!
-# `HomogeneousLocalization.Away.map` and `HomogeneousLocalization.Away.lift`
+# Complements on homogeneous localization
 
 We show that `HomogeneousLocalization.Away.map` is compatible with the canonical ring
 homomorphisms from the degree-zero subrings, and that it is surjective as soon as the
@@ -22,8 +22,12 @@ Its main properties are compatibility with postcomposition (`Away.comp_lift`) an
 invariance under rescaling `φ` on `𝒜 n` by the `n`-th power of a fixed unit
 (`Away.lift_eq_lift_of_eq_unit_pow_mul`).
 
-Finally, `HomogeneousLocalization.isUnit_mk_iff` records that a fraction `a / f` in the
-homogeneous localization at a homogeneous prime ideal `𝔭` is a unit exactly when `a ∉ 𝔭`.
+Finally, for a prime ideal `𝔭` of `A`, not necessarily homogeneous, we characterise the units
+and the maximal ideal of the homogeneous localization `HomogeneousLocalization.AtPrime 𝒜 𝔭`: an
+element is a unit exactly when its numerator avoids `𝔭` (`HomogeneousLocalization.isUnit_iff`,
+`HomogeneousLocalization.isUnit_mk_iff`), and lies in the maximal ideal exactly when its
+numerator lies in `𝔭` (`HomogeneousLocalization.mem_maximalIdeal_iff`,
+`HomogeneousLocalization.mk_mem_maximalIdeal_iff`).
 -/
 
 @[expose] public section
@@ -179,15 +183,34 @@ end Algebra
 section AtPrime
 
 variable {ι σ A : Type*} [AddCommMonoid ι] [DecidableEq ι] [CommRing A] [SetLike σ A]
-  [AddSubgroupClass σ A] {𝒜 : ι → σ} [GradedRing 𝒜] (𝔭 : Ideal A) [𝔭.IsPrime]
+  [AddSubgroupClass σ A] (𝒜 : ι → σ) [GradedRing 𝒜] (𝔭 : Ideal A) [𝔭.IsPrime]
 
-/-- A fraction `a / f` in the homogeneous localization of `A` at a homogeneous prime ideal `𝔭`
-is a unit if and only if its numerator avoids `𝔭`. -/
+/-- A fraction `a / f` in the homogeneous localization of `A` at a prime ideal `𝔭` is a unit if
+and only if its numerator avoids `𝔭`. -/
 theorem isUnit_mk_iff (y : NumDenSameDeg 𝒜 𝔭.primeCompl) :
     IsUnit (mk y : AtPrime 𝒜 𝔭) ↔ (y.num : A) ∉ 𝔭 := by
   rw [← isUnit_iff_isUnit_val, val_mk, Localization.mk_eq_mk'_apply,
     IsLocalization.AtPrime.isUnit_mk'_iff]
-  exact Iff.rfl
+  exact Ideal.mem_primeCompl_iff
+
+/-- An element of the homogeneous localization of `A` at a prime ideal `𝔭` is a unit if and only
+if its numerator avoids `𝔭`. -/
+theorem isUnit_iff (f : AtPrime 𝒜 𝔭) : IsUnit f ↔ f.num ∉ 𝔭 := by
+  rw [← isUnit_iff_isUnit_val, eq_num_div_den, Localization.mk_eq_mk'_apply,
+    IsLocalization.AtPrime.isUnit_mk'_iff]
+  exact Ideal.mem_primeCompl_iff
+
+/-- A fraction `a / f` in the homogeneous localization of `A` at a prime ideal `𝔭` lies in the
+maximal ideal if and only if its numerator lies in `𝔭`. -/
+theorem mk_mem_maximalIdeal_iff (y : NumDenSameDeg 𝒜 𝔭.primeCompl) :
+    (mk y : AtPrime 𝒜 𝔭) ∈ IsLocalRing.maximalIdeal (AtPrime 𝒜 𝔭) ↔ (y.num : A) ∈ 𝔭 := by
+  rw [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, isUnit_mk_iff, not_not]
+
+/-- An element of the homogeneous localization of `A` at a prime ideal `𝔭` lies in the maximal
+ideal if and only if its numerator lies in `𝔭`. -/
+theorem mem_maximalIdeal_iff (f : AtPrime 𝒜 𝔭) :
+    f ∈ IsLocalRing.maximalIdeal (AtPrime 𝒜 𝔭) ↔ f.num ∈ 𝔭 := by
+  rw [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, isUnit_iff, not_not]
 
 end AtPrime
 
