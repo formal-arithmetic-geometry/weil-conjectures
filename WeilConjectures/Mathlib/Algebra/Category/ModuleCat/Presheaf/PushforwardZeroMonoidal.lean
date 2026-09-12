@@ -24,8 +24,8 @@ braided functor `PresheafOfModules.restrictScalars φ`.
   braided;
 * `PresheafOfModules.pushforwardLaxMonoidal` and `PresheafOfModules.pushforwardLaxBraided`:
   `pushforward φ` is lax monoidal, and even lax braided;
-* `PresheafOfModules.pushforward_ε_app` and `PresheafOfModules.pushforward_μ_app` identify
-  the structure maps objectwise.
+* `PresheafOfModules.pushforward_ε_app`, `PresheafOfModules.pushforward_μ_app` and
+  `PresheafOfModules.pushforward_μ_app_tmul` identify the structure maps objectwise.
 
 ## Implementation notes
 
@@ -81,6 +81,16 @@ lemma pushforward_μ_app (M₁ M₂ : PresheafOfModules.{u} (R ⋙ forget₂ Com
         (S := S ⋙ forget₂ CommRingCat RingCat) φ) M₁ M₂).app X =
       μ (ModuleCat.restrictScalars (φ.app X).hom)
         (M₁.obj (F.op.obj X)) (M₂.obj (F.op.obj X)) :=
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+@[simp]
+lemma pushforward_μ_app_tmul (M₁ M₂ : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat))
+    (X : Cᵒᵖ) (m₁ : M₁.obj (F.op.obj X)) (m₂ : M₂.obj (F.op.obj X)) :
+    (μ (pushforward.{u} (F := F) (R := R ⋙ forget₂ CommRingCat RingCat)
+        (S := S ⋙ forget₂ CommRingCat RingCat) φ) M₁ M₂).app X (m₁ ⊗ₜ m₂) = m₁ ⊗ₜ m₂ := by
+  rw [pushforward_μ_app]
+  erw [ModuleCat.restrictScalars_μ_tmul]
   rfl
 
 /-- The pushforward of presheaves of modules along `φ` is lax braided, i.e. lax symmetric

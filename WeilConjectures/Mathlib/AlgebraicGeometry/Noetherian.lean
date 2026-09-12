@@ -5,17 +5,20 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
-# Noetherian schemes, associated points, and the dévissage of a coherent sheaf
+# Noetherian schemes, associated points, dévissage, and the generic rank
 
 The first part of this file records that a base change of a morphism locally of finite type has
 locally noetherian source.
@@ -28,6 +31,11 @@ scheme it is the affine-local notion, and the consequences of that.
 The third part states the **dévissage** of a coherent sheaf on a Noetherian scheme: a finite
 filtration whose graded pieces are pushforwards of non-zero ideal sheaves on integral closed
 subschemes. It is `sorry` by design; see the implementation note below.
+
+The fourth part defines the **generic rank** of a sheaf of modules on an irreducible scheme,
+`dim_{κ(η)} F_η`, and computes it in the two cases the dévissage needs: it is `1` for the
+structure sheaf and for a non-zero ideal sheaf on an integral scheme. It is additive along a
+short exact sequence, because taking stalks is exact.
 
 ## Main statements
 
@@ -48,6 +56,12 @@ subschemes. It is `sorry` by design; see the implementation note below.
 - `AlgebraicGeometry.Scheme.Modules.exists_devissage`: the **dévissage** of a coherent sheaf on
   a Noetherian scheme, stated in terms of
   `AlgebraicGeometry.Scheme.Modules.IsPushforwardIdealSheaf`.
+- `AlgebraicGeometry.Scheme.Modules.genericRank`: the generic rank of a sheaf of modules.
+- `AlgebraicGeometry.Scheme.Modules.genericRank_unit` and
+  `AlgebraicGeometry.Scheme.IdealSheafData.genericRank_toModules`: the generic rank of `𝒪_X`,
+  and of a non-zero ideal sheaf on an integral scheme, is `1`.
+- `CategoryTheory.ShortComplex.ShortExact.genericRank_add`: the generic rank is additive along
+  a short exact sequence.
 
 ## Implementation notes
 
@@ -72,12 +86,14 @@ first two statements below are instances.
 ## Blueprint
 
 `AlgebraicGeometry.Scheme.Modules.exists_devissage` implements `lem:deg-devissage` of the
-degree-of-the-isogeny chapter.
+degree-of-the-isogeny chapter. The generic rank and its three properties are the remaining
+half of notion (N12) of `sec:deg-cost`; they are what the proof of
+`prop:deg-intersection-rank` uses.
 -/
 
 @[expose] public section
 
-open CategoryTheory Limits
+open CategoryTheory Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
@@ -380,6 +396,157 @@ theorem exists_devissage [IsNoetherian X] (F : X.Modules) [F.IsCoherent] :
           IsPushforwardIdealSheaf (cokernel (φ j)) :=
   sorry
 
+/-!
+## The generic rank
+
+The **generic rank** of a sheaf of modules `F` on an irreducible scheme `X` is
+`dim_{κ(η)} F_η`, the dimension of the stalk at the generic point over the function field.
+On an integral scheme the local ring at the generic point *is* `κ(η)`, so no fibre is needed:
+the definition is literally the blueprint's `dim_{κ(η)} F_η`.
+-/
+
+section GenericRank
+
+variable {X : Scheme.{u}}
+
+/-- The **generic rank** of a sheaf of modules on an irreducible scheme: the dimension
+`dim_{κ(η)} F_η` of its stalk at the generic point, as a vector space over the function field.
+(blueprint: `prop:deg-intersection-rank`) -/
+noncomputable def genericRank [IrreducibleSpace X] (F : X.Modules) : ℕ :=
+  Module.finrank X.functionField (F.presheaf.stalk (genericPoint X))
+
+/-- On an integral scheme, a section of `𝒪_X` — viewed as a section of the sheaf of modules
+`SheafOfModules.unit` — is determined by its germ at any point of its domain.
+
+This is `AlgebraicGeometry.germ_injective_of_isIntegral` transported across the forgetful
+functor: the two germ maps are the same colimit taken in two different categories, so the
+statement has to be reproved rather than rewritten. -/
+lemma injective_germ_unit [IsIntegral X] {U : X.Opens} (x : X) (hx : x ∈ U) :
+    Function.Injective
+      ((presheaf (X := X) (SheafOfModules.unit X.ringCatSheaf)).germ U x hx) := by
+  intro a b hab
+  obtain ⟨W, hxW, iU, iV, e⟩ := TopCat.Presheaf.germ_eq (C := Ab.{u}) _ x hx hx a b hab
+  cases Subsingleton.elim iU iV
+  have e' : X.presheaf.map iU.op a = X.presheaf.map iU.op b := e
+  have h1 : X.presheaf.germ W x hxW (X.presheaf.map iU.op a)
+      = X.presheaf.germ W x hxW (X.presheaf.map iU.op b) := by rw [e']
+  rw [TopCat.Presheaf.germ_res_apply, TopCat.Presheaf.germ_res_apply] at h1
+  exact germ_injective_of_isIntegral X x hx h1
+
+/-- **The generic rank of the structure sheaf is `1`.** Indeed `𝒪_{X, η} = κ(η)`, and the
+germ of `1` is a basis: every germ `germ_U a` is `germ_U a • germ_U 1`. -/
+lemma genericRank_unit [IsIntegral X] :
+    genericRank (X := X) (SheafOfModules.unit X.ringCatSheaf) = 1 := by
+  have hη : genericPoint X ∈ (⊤ : X.Opens) := trivial
+  have hne : (presheaf (X := X) (SheafOfModules.unit X.ringCatSheaf)).germ ⊤ (genericPoint X) hη
+      (1 : Γ(X, ⊤)) ≠ 0 := by
+    intro h
+    refine one_ne_zero (α := Γ(X, ⊤)) (injective_germ_unit (genericPoint X) hη ?_)
+    rw [h, map_zero]
+  rw [genericRank, finrank_eq_one_iff_of_nonzero' _ hne]
+  intro w
+  obtain ⟨U, hxU, a, rfl⟩ := TopCat.Presheaf.exists_germ_eq (C := Ab.{u}) _ w
+  refine ⟨X.presheaf.germ U (genericPoint X) hxU a, ?_⟩
+  have h1 : (presheaf (X := X) (SheafOfModules.unit X.ringCatSheaf)).germ ⊤ (genericPoint X) hη
+        (1 : Γ(X, ⊤)) =
+      (presheaf (X := X) (SheafOfModules.unit X.ringCatSheaf)).germ U (genericPoint X) hxU
+        (1 : Γ(X, U)) := by
+    rw [← TopCat.Presheaf.germ_res_apply (presheaf (X := X) (SheafOfModules.unit X.ringCatSheaf))
+      (homOfLE (le_top : U ≤ ⊤)) _ hxU (1 : Γ(X, ⊤))]
+    congr 1
+    exact PresheafOfModules.unit_map_one _ _
+  rw [h1, ← germ_smul]
+  congr 1
+  exact mul_one (M := Γ(X, U)) a
+
+end GenericRank
+
 end Scheme.Modules
 
+namespace Scheme.IdealSheafData
+
+open Scheme.Modules
+
+variable {X : Scheme.{u}} [IsIntegral X] {J : X.IdealSheafData}
+
+/-- **The generic rank of a non-zero ideal sheaf on an integral scheme is `1`.** The stalk at
+the generic point is a non-zero ideal of the field `κ(η)`, hence `κ(η)` itself. -/
+theorem genericRank_toModules (hJ : J ≠ ⊥) : genericRank J.toModules = 1 := by
+  obtain ⟨U, hU⟩ : ∃ U : X.affineOpens, J.ideal U ≠ ⊥ :=
+    Function.ne_iff.1 fun hc => hJ (Scheme.IdealSheafData.ext hc)
+  obtain ⟨a, haJ, ha0⟩ := (Submodule.ne_bot_iff _).1 hU
+  have hUne : (U.1 : Set X).Nonempty := by
+    rw [Set.nonempty_iff_ne_empty]
+    intro h
+    have hb : U.1 = ⊥ := TopologicalSpace.Opens.ext (by simpa using h)
+    have : Subsingleton Γ(X, U.1) := by rw [hb]; infer_instance
+    exact ha0 (Subsingleton.elim _ _)
+  have hη : genericPoint X ∈ U.1 :=
+    ((genericPoint_spec X).mem_open_set_iff U.1.isOpen).mpr (by simpa using hUne)
+  obtain ⟨s, hs⟩ : ∃ s, J.toModulesι.app U.1 s = a := by
+    have hr := J.range_toModulesι_app U
+    rw [Set.ext_iff] at hr
+    exact (hr a).2 haJ
+  have hLgerm : PresheafOfModules.stalkMapₗ (J.toModulesι).val (genericPoint X)
+        (J.toModules.presheaf.germ U.1 (genericPoint X) hη s) =
+      (presheaf (X := X) (SheafOfModules.unit X.ringCatSheaf)).germ U.1 (genericPoint X) hη a := by
+    rw [← hs, PresheafOfModules.stalkMapₗ_apply]
+    exact TopCat.Presheaf.stalkFunctor_map_germ_apply _ _ _ _ _
+  have hfa : (presheaf (X := X) (SheafOfModules.unit X.ringCatSheaf)).germ U.1
+      (genericPoint X) hη a ≠ 0 := by
+    intro h
+    refine ha0 (injective_germ_unit (genericPoint X) hη ?_)
+    rw [h, map_zero]
+  have hinj : Function.Injective
+      (PresheafOfModules.stalkMapₗ (J.toModulesι).val (genericPoint X)) := by
+    have hmono₀ : Mono J.toModulesι := inferInstance
+    have hmono : Mono (C := SheafOfModules.{u} X.ringCatSheaf) J.toModulesι := hmono₀
+    have hm : Mono ((SheafOfModules.stalkFunctor X.ringCatSheaf (genericPoint X)).map
+      J.toModulesι) := (SheafOfModules.stalkFunctor X.ringCatSheaf (genericPoint X)).map_mono _
+    exact (AddCommGrpCat.mono_iff_injective _).1 hm
+  have hv : J.toModules.presheaf.germ U.1 (genericPoint X) hη s ≠ 0 := fun h =>
+    hfa (by rw [← hLgerm, h, map_zero])
+  have hunit := genericRank_unit (X := X)
+  rw [genericRank] at hunit ⊢
+  rw [finrank_eq_one_iff_of_nonzero' _ hv]
+  intro w
+  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' _ (hLgerm ▸ hfa)).1 hunit
+    (PresheafOfModules.stalkMapₗ (J.toModulesι).val (genericPoint X) w)
+  exact ⟨c, hinj (by rw [_root_.map_smul, hc])⟩
+
+end Scheme.IdealSheafData
+
 end AlgebraicGeometry
+
+namespace CategoryTheory.ShortComplex.ShortExact
+
+open AlgebraicGeometry Scheme.Modules
+
+universe u
+
+variable {X : Scheme.{u}} [IsIntegral X] {S : ShortComplex X.Modules}
+
+/-- **The generic rank is additive along a short exact sequence.** This is the step that the
+proof of `prop:deg-intersection-rank` calls "taking stalks at `η` is exact"; the finiteness
+hypothesis on the middle term is what makes the dimensions add up as natural numbers. -/
+theorem genericRank_add (hS : S.ShortExact)
+    [FiniteDimensional X.functionField (S.X₂.presheaf.stalk (genericPoint X))] :
+    genericRank S.X₂ = genericRank S.X₁ + genericRank S.X₃ := by
+  have hst := map_stalkFunctor (R := X.ringCatSheaf) hS (genericPoint X)
+  have hinj : Function.Injective (PresheafOfModules.stalkMapₗ S.f.val (genericPoint X)) :=
+    (AddCommGrpCat.mono_iff_injective _).1 hst.mono_f
+  have hsurj : Function.Surjective (PresheafOfModules.stalkMapₗ S.g.val (genericPoint X)) :=
+    (AddCommGrpCat.epi_iff_surjective _).1 hst.epi_g
+  have hrange : LinearMap.range (PresheafOfModules.stalkMapₗ S.f.val (genericPoint X)) =
+      LinearMap.ker (PresheafOfModules.stalkMapₗ S.g.val (genericPoint X)) := by
+    refine le_antisymm ?_ ?_
+    · rintro _ ⟨x, rfl⟩
+      rw [LinearMap.mem_ker]
+      exact ConcreteCategory.congr_hom
+        (ShortComplex.map (C := SheafOfModules.{u} X.ringCatSheaf) S
+          (SheafOfModules.stalkFunctor X.ringCatSheaf (genericPoint X))).zero x
+    · exact fun y hy => (ShortComplex.ab_exact_iff _).1 hst.exact y hy
+  exact LinearMap.finrank_add_finrank_of_exact _ _ hinj hsurj hrange
+
+end CategoryTheory.ShortComplex.ShortExact
+
