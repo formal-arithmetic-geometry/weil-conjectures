@@ -62,9 +62,9 @@ theorem. The base change `W ×_T T_n` itself, its transition morphisms and the r
   comparison through a Čech complex in all degrees at once — so this file states it and leaves
   the proof to a subtree of its own. It is the only input of the chapter on the theorem of the
   cube that no other statement of that chapter needs: it is consumed only by
-  `prop:cube-formal-triviality`. In the classification of the thirteen open obligations of the
-  cube and degree chapters recorded on issue 837 it is obligation 2, rated "sorry (deep)". The
-  statement of `prop:cube-proper-pushforward-coherent` in
+  `prop:cube-formal-triviality`. It is one of the thirteen open obligations of the cube and
+  degree chapters classified on issue 837. The statement of
+  `prop:cube-proper-pushforward-coherent` in
   `WeilConjectures.AlgebraicGeometry.Cohomology.Proper` is `sorry` for the same reason, and this
   file follows its style.
 * It is stated as a `theorem` rather than an `instance` on purpose: a statement that rests on a
@@ -102,14 +102,6 @@ noncomputable section FormalSections
 
 variable {W T : Scheme.{u}} (f : W ⟶ T) (t : T) (F : W.Modules)
 
-/-- The comparison isomorphism `u^* F^{(n)} ≅ F^{(m)}` between the pullback of `F^{(n)}` along
-`W ×_T T_m ⟶ W ×_T T_n` and `F^{(m)}`. -/
-def infinitesimalPullbackCompIso {m n : ℕ} (h : m ≤ n) :
-    (pullback (infinitesimalBaseChangeMap f t h)).obj
-        ((pullback (infinitesimalBaseChangeFst f t n)).obj F) ≅
-      (pullback (infinitesimalBaseChangeFst f t m)).obj F :=
-  (pullbackComp _ _).app F ≪≫ (pullbackCongr (infinitesimalBaseChangeMap_fst f t h)).app F
-
 /-- `Γ(W ×_T T_n, F^{(n)})`, as a module over the local ring `𝒪_{T, t}`. -/
 def formalSections (n : ℕ) : ModuleCat (T.presheaf.stalk t) :=
   (ModuleCat.restrictScalars (toInfinitesimalBaseChangeΓ f t n).hom).obj
@@ -130,9 +122,8 @@ lemma formalSections_eq_evaluation (n : ℕ) :
 def formalSectionsFun {m n : ℕ} (h : m ≤ n) :
     Γ((pullback (infinitesimalBaseChangeFst f t n)).obj F, ⊤) ⟶
       Γ((pullback (infinitesimalBaseChangeFst f t m)).obj F, ⊤) :=
-  sectionsPullback (infinitesimalBaseChangeMap f t h)
-      ((pullback (infinitesimalBaseChangeFst f t n)).obj F) ≫
-    (infinitesimalPullbackCompIso f t F h).hom.app ⊤
+  sectionsPullbackOver (infinitesimalBaseChangeMap f t h)
+    (infinitesimalBaseChangeMap_fst f t h) F
 
 /-- The transition map is `𝒪_{T, t}`-linear: it is semilinear over the pullback of functions
 along `W ×_T T_m ⟶ W ×_T T_n`, which is compatible with the two actions of `𝒪_{T, t}`. -/
@@ -140,8 +131,22 @@ lemma formalSectionsFun_smul {m n : ℕ} (h : m ≤ n) (r : T.presheaf.stalk t)
     (s : Γ((pullback (infinitesimalBaseChangeFst f t n)).obj F, ⊤)) :
     formalSectionsFun f t F h (toInfinitesimalBaseChangeΓ f t n r • s) =
       toInfinitesimalBaseChangeΓ f t m r • formalSectionsFun f t F h s :=
-  sectionsPullback_comp_app_smul _ _ _ _ _
+  sectionsPullbackOver_smul _ _ _ _ _
     (by rw [← CommRingCat.comp_apply, toInfinitesimalBaseChangeΓ_comp_appTop]) _
+
+/-- The transition map at `m = n` is the identity. -/
+@[simp]
+lemma formalSectionsFun_refl (n : ℕ) : formalSectionsFun f t F (le_refl n) = 𝟙 _ := by
+  rw [formalSectionsFun]
+  simp only [infinitesimalBaseChangeMap_refl]
+  exact sectionsPullbackOver_id _ _
+
+/-- The transition maps compose. -/
+lemma formalSectionsFun_comp {l m n : ℕ} (h₁ : l ≤ m) (h₂ : m ≤ n) :
+    formalSectionsFun f t F h₂ ≫ formalSectionsFun f t F h₁ =
+      formalSectionsFun f t F (h₁.trans h₂) := by
+  rw [formalSectionsFun, formalSectionsFun, formalSectionsFun, sectionsPullbackOver_comp]
+  simp only [infinitesimalBaseChangeMap_comp]
 
 /-- The transition map `Γ(W ×_T T_n, F^{(n)}) ⟶ Γ(W ×_T T_m, F^{(m)})` of the inverse system,
 as a map of `𝒪_{T, t}`-modules. -/
@@ -150,14 +155,42 @@ def formalSectionsMap {m n : ℕ} (h : m ≤ n) :
   ModuleCat.ofSemilinear (toInfinitesimalBaseChangeΓ f t n) (toInfinitesimalBaseChangeΓ f t m)
     (formalSectionsFun f t F h) (formalSectionsFun_smul f t F h)
 
+/-- The transition map at `m = n` is the identity. -/
+@[simp]
+lemma formalSectionsMap_refl (n : ℕ) : formalSectionsMap f t F (le_refl n) = 𝟙 _ :=
+  ModuleCat.ofSemilinear_eq_id _ _ _ (formalSectionsFun_refl f t F n)
+
+/-- The transition maps compose. -/
+lemma formalSectionsMap_comp {l m n : ℕ} (h₁ : l ≤ m) (h₂ : m ≤ n) :
+    formalSectionsMap f t F h₂ ≫ formalSectionsMap f t F h₁ =
+      formalSectionsMap f t F (h₁.trans h₂) :=
+  ModuleCat.ofSemilinear_comp _ _ _ _ _ _ _ _ _ (formalSectionsFun_comp f t F h₁ h₂)
+
 /-- The inverse system `n ↦ Γ(W ×_T T_n, F^{(n)})` of `𝒪_{T, t}`-modules. -/
 def formalSectionsSystem : ℕᵒᵖ ⥤ ModuleCat (T.presheaf.stalk t) :=
   Functor.ofOpSequence fun n ↦ formalSectionsMap f t F n.le_succ
 
 @[simp]
+lemma formalSectionsSystem_obj (n : ℕ) :
+    (formalSectionsSystem f t F).obj (op n) = formalSections f t F n :=
+  rfl
+
 lemma formalSectionsSystem_map_succ (n : ℕ) :
     (formalSectionsSystem f t F).map (homOfLE n.le_succ).op = formalSectionsMap f t F n.le_succ :=
   Functor.ofOpSequence_map_homOfLE_succ _ n
+
+/-- The transition maps of the inverse system are the maps
+`AlgebraicGeometry.Scheme.Modules.formalSectionsMap`, for every `m ≤ n` and not only for
+consecutive indices. -/
+@[simp]
+lemma formalSectionsSystem_map {m n : ℕ} (h : m ≤ n) :
+    (formalSectionsSystem f t F).map (homOfLE h).op = formalSectionsMap f t F h := by
+  induction n, h using Nat.le_induction with
+  | base => simp
+  | succ n hmn ih =>
+    rw [show (homOfLE (hmn.trans n.le_succ) : m ⟶ n + 1).op =
+        (homOfLE n.le_succ).op ≫ (homOfLE hmn).op from Subsingleton.elim _ _,
+      Functor.map_comp, ih, formalSectionsSystem_map_succ, formalSectionsMap_comp]
 
 /-- The map sending a section of `f_* F` over an open neighbourhood `U` of `t` to the
 corresponding global section of `F^{(n)}`, which makes sense because `W ×_T T_n` lies over
@@ -213,9 +246,8 @@ lemma formalSectionsOfNhds_comp {m n : ℕ} (h : m ≤ n) (U : T.Opens) (hU : t 
     exact (preimage_infinitesimalBaseChangeFst_eq_top f t m hU).ge
   rw [formalSectionsOfNhds, formalSectionsOfNhds, Category.assoc]
   congr 1
-  rw [formalSectionsFun, sectionsPullback, infinitesimalPullbackCompIso, Iso.trans_hom,
-    Iso.app_hom, Iso.app_hom, Hom.comp_app, sectionsPullbackLE_comp_assoc _ _ F _ _ h₃,
-    sectionsPullbackLE_congr]
+  rw [formalSectionsFun, sectionsPullbackOver, sectionsPullback,
+    sectionsPullbackLE_comp_assoc _ _ F _ _ h₃, sectionsPullbackLE_congr]
 
 /-- The canonical map from the stalk of `f_* F` at `t` to `Γ(W ×_T T_n, F^{(n)})`, as a map of
 `𝒪_{T, t}`-modules. -/
@@ -239,14 +271,6 @@ lemma formalSectionsMap_comp_stalkToFormalSections {m n : ℕ} (h : m ≤ n) :
     (formalSectionsMap f t F h).hom.comp (stalkToFormalSections f t F n) =
       stalkToFormalSections f t F m :=
   ofSemilinear_comp_stalkDescₗ (hgc := fun U hU ↦ formalSectionsOfNhds_comp f t F h U hU) ..
-
-/-- An element of `𝔪_t ^ (n + 1)` acts as zero on `Γ(W ×_T T_n, 𝒪)`, because the action of
-`𝒪_{T, t}` factors through `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`. -/
-lemma toInfinitesimalBaseChangeΓ_eq_zero (n : ℕ) {r : T.presheaf.stalk t}
-    (hr : r ∈ maximalIdeal (T.presheaf.stalk t) ^ (n + 1)) :
-    toInfinitesimalBaseChangeΓ f t n r = 0 := by
-  have h0 : T.toInfinitesimalRing t n r = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr hr
-  rw [toInfinitesimalBaseChangeΓ, CommRingCat.comp_apply, h0, map_zero]
 
 /-- The map out of the stalk kills `𝔪_t ^ (n + 1)`, so that it factors through the quotient of
 the stalk by `𝔪_t ^ (n + 1)`. -/

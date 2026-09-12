@@ -461,7 +461,7 @@ lemma eqToHom_pushforward_map (P : X.Modules) {U U' : Y.Opens} (i : op U' ⟶ op
 /-- The pullback of sections along `a : X ⟶ Y`, from an open `U` of `Y` to an open `V` of `X`
 contained in `a ⁻¹ᵁ U`: the image of a section under the unit `N ⟶ a_* a^* N`, read as a section
 of `a^* N` over `a ⁻¹ᵁ U` and restricted to `V`. -/
-noncomputable def sectionsPullbackLE {U : Y.Opens} {V : X.Opens} (h : V ≤ a ⁻¹ᵁ U) :
+def sectionsPullbackLE {U : Y.Opens} {V : X.Opens} (h : V ≤ a ⁻¹ᵁ U) :
     Γ(N, U) ⟶ Γ((pullback a).obj N, V) :=
   ((pullbackPushforwardAdjunction a).unit.app N).app U ≫
     eqToHom (pushforward_obj_obj a ((pullback a).obj N) U) ≫
@@ -543,7 +543,20 @@ lemma sectionsPullbackLE_id {U V : Y.Opens} (h : V ≤ (𝟙 Y) ⁻¹ᵁ U) (h' 
   exact congrArg N.presheaf.map (Subsingleton.elim _ _)
 
 /-- Pulling a section back to the full preimage in two steps agrees with pulling it back in
-one. -/
+one:
+
+```
+             sectionsPullbackLE b M le_rfl
+  Γ(M, U) ---------------------------------> Γ(b^* M, b ⁻¹ᵁ U)
+         ╲                                          |
+          ╲                                         | sectionsPullbackLE a (b^* M) le_rfl
+           ╲ sectionsPullbackLE (a ≫ b) M le_rfl    v
+            ╲                       Γ(a^* (b^* M), a ⁻¹ᵁ b ⁻¹ᵁ U)
+             ╲                                      |
+              ╲                                     | (pullbackComp a b).hom.app M
+               ─────────────────────────> Γ((a ≫ b)^* M, (a ≫ b) ⁻¹ᵁ U)
+```
+-/
 @[reassoc]
 lemma sectionsPullbackLE_comp_pullbackComp_app (U : Z.Opens) :
     sectionsPullbackLE b M (le_refl (b ⁻¹ᵁ U)) ≫
@@ -606,7 +619,7 @@ lemma sectionsPullbackLE_congr {c d : X ⟶ Y} (hcd : c = d) {U : Y.Opens} {V : 
 
 /-- The pullback of global sections along a morphism of schemes: the image of a global section
 of `N` under the unit `N ⟶ a_* a^* N`, read as a global section of `a^* N`. -/
-noncomputable def sectionsPullback : Γ(N, ⊤) ⟶ Γ((pullback a).obj N, ⊤) :=
+def sectionsPullback : Γ(N, ⊤) ⟶ Γ((pullback a).obj N, ⊤) :=
   sectionsPullbackLE a N (by simp : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤)
 
 /-- The pullback of global sections is semilinear over the pullback of functions. -/
@@ -614,18 +627,118 @@ lemma sectionsPullback_smul (r : Γ(Y, ⊤)) (s : Γ(N, ⊤)) :
     sectionsPullback a N (r • s) = a.appTop r • sectionsPullback a N s :=
   sectionsPullbackLE_smul a N _ r _ (Scheme.Hom.appLE_eq_appTop a _ ▸ rfl) s
 
-/-- The pullback of global sections followed by a morphism out of `a^* N` is again semilinear
-over `AlgebraicGeometry.Scheme.Hom.appTop`.
+/-- The pullback of sections is natural in the sheaf of modules:
 
-This is stated for a variable `a` so that it can be instantiated at a concrete morphism without
-the kernel having to redo the element-level rewriting there. -/
-lemma sectionsPullback_comp_app_smul {P : X.Modules} (e : (pullback a).obj N ⟶ P) (r : Γ(Y, ⊤))
-    (r' : Γ(X, ⊤)) (hr : a.appTop r = r') (s : Γ(N, ⊤)) :
-    (sectionsPullback a N ≫ e.app ⊤) (r • s) = r' • (sectionsPullback a N ≫ e.app ⊤) s := by
-  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, sectionsPullback_smul,
-    Hom.app_smul, hr]
+```
+  Γ(N, U) --- sectionsPullbackLE a N h ---> Γ(a^* N, V)
+     |                                            |
+     | ψ.app U                                    | ((pullback a).map ψ).app V
+     v                                            v
+  Γ(N', U) --- sectionsPullbackLE a N' h --> Γ(a^* N', V)
+```
+-/
+@[reassoc]
+lemma sectionsPullbackLE_naturality {N' : Y.Modules} (ψ : N ⟶ N') {U : Y.Opens} {V : X.Opens}
+    (h : V ≤ a ⁻¹ᵁ U) :
+    ψ.app U ≫ sectionsPullbackLE a N' h =
+      sectionsPullbackLE a N h ≫ ((pullback a).map ψ).app V := by
+  have hnat := congrArg (fun φ ↦ Hom.app φ U) ((pullbackPushforwardAdjunction a).unit.naturality ψ)
+  simp only [Hom.comp_app, Functor.id_map, Functor.comp_map, pushforward_map_app] at hnat
+  rw [sectionsPullbackLE, sectionsPullbackLE, ← Category.assoc, ← Category.assoc, hnat]
+  simp only [Category.assoc]
+  rw [Hom.naturality]
+  rfl
 
 end PushforwardPullback
+
+/-!
+## Pulling back sections along a morphism over a base
+-/
+
+noncomputable section PullbackOver
+
+variable {X X' X'' W : Scheme.{u}}
+
+/-- The pullback of global sections along a morphism `u : X ⟶ X'` over a fixed base `W`: a
+global section of the pullback of `F` to `X'` gives a global section of the pullback of `F` to
+`X`, using that `u ≫ p' = p`.
+
+This is the form in which the pullback of sections is functorial, by
+`AlgebraicGeometry.Scheme.Modules.sectionsPullbackOver_id` and
+`AlgebraicGeometry.Scheme.Modules.sectionsPullbackOver_comp`. -/
+def sectionsPullbackOver (u : X ⟶ X') {p : X ⟶ W} {p' : X' ⟶ W}
+    (hu : u ≫ p' = p) (F : W.Modules) :
+    Γ((pullback p').obj F, ⊤) ⟶ Γ((pullback p).obj F, ⊤) :=
+  sectionsPullback u ((pullback p').obj F) ≫
+    ((pullbackComp u p').hom.app F).app ⊤ ≫ ((pullbackCongr hu).hom.app F).app ⊤
+
+/-- The pullback of global sections over a base is semilinear over
+`AlgebraicGeometry.Scheme.Hom.appTop`.
+
+This is stated for a variable `u` so that it can be instantiated at a concrete morphism without
+the kernel having to redo the element-level rewriting there. -/
+lemma sectionsPullbackOver_smul (u : X ⟶ X') {p : X ⟶ W} {p' : X' ⟶ W} (hu : u ≫ p' = p)
+    (F : W.Modules) (r : Γ(X', ⊤)) (r' : Γ(X, ⊤)) (hr : u.appTop r = r')
+    (s : Γ((pullback p').obj F, ⊤)) :
+    sectionsPullbackOver u hu F (r • s) = r' • sectionsPullbackOver u hu F s := by
+  simp only [sectionsPullbackOver, ConcreteCategory.comp_apply, sectionsPullback_smul, hr,
+    Functor.comp_obj, Hom.app_smul]
+
+/-- Pulling back sections along the identity is the identity. -/
+@[simp]
+lemma sectionsPullbackOver_id {p : X ⟶ W} (hu : 𝟙 X ≫ p = p) (F : W.Modules) :
+    sectionsPullbackOver (𝟙 X) hu F = 𝟙 _ := by
+  have key : ((pullbackComp (𝟙 X) p).hom.app F) ≫ ((pullbackCongr hu).hom.app F)
+      = (pullbackId X).hom.app ((pullback p).obj F) := by
+    have h := pseudofunctor_right_unitality (f := p)
+    rw [Iso.inv_comp_eq] at h
+    have h2 := congrArg (fun φ ↦ NatTrans.app φ F) h
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app] at h2
+    rw [pullbackCongr]
+    simpa using h2.symm
+  rw [sectionsPullbackOver, ← Hom.comp_app, key, sectionsPullback,
+    sectionsPullbackLE_id _ _ le_rfl]
+  simp
+
+/-- Pulling back sections over a base in two steps agrees with pulling them back in one:
+
+```
+                     sectionsPullbackOver u' hu' F
+  Γ(p''^* F, ⊤) -----------------------------------> Γ(p'^* F, ⊤)
+               ╲                                            |
+                ╲  sectionsPullbackOver (u ≫ u') _ F        | sectionsPullbackOver u hu F
+                 ╲                                          v
+                  ────────────────────────────────> Γ(p^* F, ⊤)
+```
+-/
+lemma sectionsPullbackOver_comp (u : X ⟶ X') (u' : X' ⟶ X'') {p : X ⟶ W} {p' : X' ⟶ W}
+    {p'' : X'' ⟶ W} (hu : u ≫ p' = p) (hu' : u' ≫ p'' = p') (F : W.Modules) :
+    sectionsPullbackOver u' hu' F ≫ sectionsPullbackOver u hu F =
+      sectionsPullbackOver (u ≫ u') (by rw [Category.assoc, hu', hu]) F := by
+  subst hu'
+  subst hu
+  simp only [sectionsPullbackOver, sectionsPullback, pullbackCongr, eqToIso_refl, Iso.refl_hom,
+    NatTrans.id_app, Hom.id_app, Category.comp_id, Category.assoc]
+  rw [← sectionsPullbackLE_comp u u' ((pullback p'').obj F)
+      (by simp : (⊤ : X'.Opens) ≤ u' ⁻¹ᵁ ⊤) (by simp : (⊤ : X.Opens) ≤ u ⁻¹ᵁ ⊤) (by simp),
+    sectionsPullbackLE_naturality_assoc]
+  have key := congrArg (fun φ ↦ NatTrans.app φ F)
+    (pseudofunctor_associativity (f := u) (g := u') (h := p''))
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp, eqToHom_refl] at key
+  have hZ := congrArg ((pullbackComp u (u' ≫ p'')).hom.app F ≫ ·) key
+  simp only [← Category.assoc, ← NatTrans.comp_app, Iso.hom_inv_id, NatTrans.id_app,
+    Category.id_comp, Category.comp_id] at hZ
+  have key2 : (pullback u).map ((pullbackComp u' p'').hom.app F) ≫
+        (pullbackComp u (u' ≫ p'')).hom.app F =
+      (pullbackComp u u').hom.app ((pullback p'').obj F) ≫
+        (pullbackComp (u ≫ u') p'').hom.app F := by
+    refine (congrArg ((pullback u).map ((pullbackComp u' p'').hom.app F) ≫ ·) hZ.symm).trans ?_
+    simp
+  simp only [Functor.comp_obj, Category.assoc, ← Hom.comp_app]
+  rw [key2]
+
+end PullbackOver
 
 section BaseChange
 

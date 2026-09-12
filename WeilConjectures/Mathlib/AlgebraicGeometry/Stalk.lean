@@ -473,6 +473,14 @@ lemma infinitesimalBaseChangeFst_comp_appLE (n : ℕ) {U : T.Opens} (hU : t ∈ 
     T.fromInfinitesimalNeighborhood_appLE t n hU, Scheme.Hom.appLE_eq_appTop,
     toInfinitesimalBaseChangeΓ, Category.assoc, Category.assoc]
 
+/-- An element of `𝔪_t ^ (n + 1)` acts as zero on `Γ(W ×_T Tₙ, 𝒪)`, because the action of
+`𝒪_{T, t}` factors through `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`. -/
+lemma toInfinitesimalBaseChangeΓ_eq_zero (n : ℕ) {r : T.presheaf.stalk t}
+    (hr : r ∈ maximalIdeal (T.presheaf.stalk t) ^ (n + 1)) :
+    toInfinitesimalBaseChangeΓ f t n r = 0 := by
+  have h0 : T.toInfinitesimalRing t n r = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr hr
+  rw [toInfinitesimalBaseChangeΓ, CommRingCat.comp_apply, h0, map_zero]
+
 end InfinitesimalBaseChange
 
 end AlgebraicGeometry.Scheme
