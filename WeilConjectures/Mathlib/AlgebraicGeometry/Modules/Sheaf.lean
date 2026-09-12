@@ -79,10 +79,11 @@ after restriction of scalars along `φ : R ⟶ S`.
 ## Blueprint
 
 The fibre and the restriction to a fibre are notion **(N2)** of `sec:cube-cost`, the formalisation
-count of the theorem-of-the-cube chapter. Deferred to later issues, because they need the monoidal
-structure on sheaves of modules and the notion of an invertible sheaf, neither of which is
-available: the compatibility of the fibre with tensor products and with inverses of line bundles,
-and the one-dimensionality of the fibre of a locally free sheaf of rank one.
+count of the theorem-of-the-cube chapter. The remaining half of (N2) — the compatibility of the
+fibre with tensor products and with inverses of line bundles, and the one-dimensionality of the
+fibre of an invertible sheaf — is in `WeilConjectures.AlgebraicGeometry.Modules.Fiber`: it needs
+the monoidal structure on sheaves of modules and the notion of an invertible sheaf, which a file
+under `WeilConjectures/Mathlib/` may not import.
 -/
 @[expose] public section
 

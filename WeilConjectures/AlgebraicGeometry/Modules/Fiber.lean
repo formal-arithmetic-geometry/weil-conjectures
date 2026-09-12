@@ -1,0 +1,154 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.RingTheory.PicardGroup
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+
+/-!
+# The fibre of a sheaf of modules: tensor products, inverses and rank one
+
+Let `X` be a scheme and `x` a point of `X`. The fibre functor
+`AlgebraicGeometry.Scheme.Modules.fiberFunctor X x` sends an `𝒪ₓ`-module `F` to the
+`κ(x)`-vector space `F(x)`, obtained by pulling `F` back along `Spec κ(x) ⟶ X` and taking global
+sections. We show that this functor is monoidal, so that `(F ⊗ G)(x)` is `F(x) ⊗_{κ(x)} G(x)`
+and the fibre of the structure sheaf is `κ(x)`.
+
+Both halves of the composite are monoidal: the pullback of `𝒪ₓ`-modules by
+`WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal`, and the global sections functor on
+`Spec κ(x)` by `WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal`, the latter because
+`Spec κ(x)` has a single point.
+
+As a consequence, if `L` is an invertible `𝒪ₓ`-module with tensor inverse `N`, then `L(x)` and
+`N(x)` are inverse invertible `κ(x)`-modules — they pair to `κ(x)`, and `N(x)` is the dual of
+`L(x)` — and `L(x)` is a one-dimensional `κ(x)`-vector space.
+
+## Main declarations
+
+- `AlgebraicGeometry.Scheme.Modules.fiberFunctorMonoidal`: the fibre functor is monoidal, with
+  the isomorphisms `AlgebraicGeometry.Scheme.Modules.fiberTensorIso` for a tensor product,
+  `AlgebraicGeometry.Scheme.Modules.fiberTensorUnitIso` for the tensor unit and
+  `AlgebraicGeometry.Scheme.Modules.fiberUnitIso` for the structure sheaf itself.
+- `AlgebraicGeometry.Scheme.Modules.fiberTensorIsoTensorUnit` and
+  `AlgebraicGeometry.Scheme.Modules.fiberLinearEquivDual`: the fibres of an invertible sheaf and
+  of its inverse pair to `κ(x)`, and the second is the dual of the first; with
+  `AlgebraicGeometry.Scheme.Modules.module_invertible_fiber`, the fibre of an invertible sheaf
+  is an invertible `κ(x)`-module.
+- `AlgebraicGeometry.Scheme.Modules.finrank_fiber_eq_one`: the fibre of an invertible sheaf of
+  modules is a one-dimensional `κ(x)`-vector space, with
+  `AlgebraicGeometry.Scheme.Modules.rank_fiber_eq_one` for the cardinal-valued rank.
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory MonoidalCategory
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+variable {X : Scheme.{u}}
+
+/-- **The fibre functor is monoidal.** It is the pullback along `Spec κ(x) ⟶ X`, which is
+monoidal, followed by the global sections functor on `Spec κ(x)`, which is monoidal because
+`Spec κ(x)` has a single point.
+
+```
+     X.Modules ── pullback (X.fromSpecResidueField x) ──> (Spec κ(x)).Modules
+           │                                                      │
+   fiberFunctor X x                                     moduleSpecΓFunctor
+           ↓                                                      ↓
+   ModuleCat κ(x) ═══════════════════════════════════════ ModuleCat κ(x)
+```
+-/
+noncomputable instance fiberFunctorMonoidal (X : Scheme.{u}) (x : X) :
+    (fiberFunctor X x).Monoidal :=
+  inferInstanceAs (Modules.pullback (X.fromSpecResidueField x) ⋙
+    moduleSpecΓFunctor (R := X.residueField x)).Monoidal
+
+/-- **The fibre of a tensor product** of sheaves of `𝒪ₓ`-modules is the tensor product over
+`κ(x)` of the fibres. -/
+noncomputable def fiberTensorIso (F G : X.Modules) (x : X) :
+    (F ⊗ G).fiber x ≅ F.fiber x ⊗ G.fiber x :=
+  (Functor.Monoidal.μIso (fiberFunctor X x) F G).symm
+
+@[simp]
+lemma fiberTensorIso_hom (F G : X.Modules) (x : X) :
+    (fiberTensorIso F G x).hom = Functor.OplaxMonoidal.δ (fiberFunctor X x) F G :=
+  rfl
+
+@[simp]
+lemma fiberTensorIso_inv (F G : X.Modules) (x : X) :
+    (fiberTensorIso F G x).inv = Functor.LaxMonoidal.μ (fiberFunctor X x) F G :=
+  rfl
+
+/-- **The fibre of a tensor product is natural** in both arguments. -/
+@[reassoc]
+lemma fiberTensorIso_hom_naturality {F F' G G' : X.Modules} (φ : F ⟶ F') (ψ : G ⟶ G') (x : X) :
+    (fiberTensorIso F G x).hom ≫ (fiberMap φ x ⊗ₘ fiberMap ψ x) =
+      fiberMap (φ ⊗ₘ ψ) x ≫ (fiberTensorIso F' G' x).hom :=
+  Functor.OplaxMonoidal.δ_natural (fiberFunctor X x) φ ψ
+
+/-- **The fibre of the tensor unit** is `κ(x)`. -/
+noncomputable def fiberTensorUnitIso (X : Scheme.{u}) (x : X) :
+    (𝟙_ X.Modules).fiber x ≅ 𝟙_ (ModuleCat (X.residueField x)) :=
+  (Functor.Monoidal.εIso (fiberFunctor X x)).symm
+
+@[simp]
+lemma fiberTensorUnitIso_hom (X : Scheme.{u}) (x : X) :
+    (fiberTensorUnitIso X x).hom = Functor.OplaxMonoidal.η (fiberFunctor X x) :=
+  rfl
+
+@[simp]
+lemma fiberTensorUnitIso_inv (X : Scheme.{u}) (x : X) :
+    (fiberTensorUnitIso X x).inv = Functor.LaxMonoidal.ε (fiberFunctor X x) :=
+  rfl
+
+/-- **The fibre of the structure sheaf** at `x` is the residue field `κ(x)`. This is
+`fiberTensorUnitIso` written for `SheafOfModules.unit`, the free `𝒪ₓ`-module of rank one, rather
+than for the tensor unit. -/
+noncomputable def fiberUnitIso (X : Scheme.{u}) (x : X) :
+    fiber (X := X) (SheafOfModules.unit X.ringCatSheaf) x ≅
+      ModuleCat.of (X.residueField x) (X.residueField x) :=
+  (fiberFunctor X x).mapIso (SheafOfModules.tensorUnitIso X.sheaf).symm ≪≫
+    fiberTensorUnitIso X x
+
+/-- **The pairing between the fibres of an invertible sheaf and of its inverse.** If `L ⊗ N` is
+isomorphic to the structure sheaf, then `L(x) ⊗ N(x)` is isomorphic to `κ(x)`. -/
+noncomputable def fiberTensorIsoTensorUnit {L N : X.Modules} (e : L ⊗ N ≅ 𝟙_ X.Modules) (x : X) :
+    L.fiber x ⊗ N.fiber x ≅ 𝟙_ (ModuleCat (X.residueField x)) :=
+  Functor.Monoidal.mapIsoTensorUnit (fiberFunctor X x) e
+
+/-- **The fibre of the inverse of an invertible sheaf is the dual of the fibre.** If `L ⊗ N` is
+isomorphic to the structure sheaf, then `N(x)` is the `κ(x)`-linear dual of `L(x)`. -/
+noncomputable def fiberLinearEquivDual {L N : X.Modules} (e : L ⊗ N ≅ 𝟙_ X.Modules) (x : X) :
+    N.fiber x ≃ₗ[X.residueField x] Module.Dual (X.residueField x) (L.fiber x) :=
+  Module.Invertible.linearEquivDual
+    ((β_ (N.fiber x) (L.fiber x) ≪≫ fiberTensorIsoTensorUnit e x).toLinearEquiv)
+
+/-- **The fibre of an invertible sheaf of modules is an invertible `κ(x)`-vector space.** -/
+theorem module_invertible_fiber {L : X.Modules} (hL : L.Invertible) (x : X) :
+    Module.Invertible (X.residueField x) (L.fiber x) := by
+  obtain ⟨N, ⟨e⟩⟩ := (SheafOfModules.invertible_iff_exists (R := X.sheaf)).1 hL
+  exact .left (fiberTensorIsoTensorUnit e x).toLinearEquiv
+
+/-- **The fibre of an invertible sheaf of modules is a one-dimensional `κ(x)`-vector space.** -/
+theorem finrank_fiber_eq_one {L : X.Modules} (hL : L.Invertible) (x : X) :
+    Module.finrank (X.residueField x) (L.fiber x) = 1 :=
+  have := module_invertible_fiber hL x
+  Module.Invertible.finrank_eq_one _ _
+
+/-- The `Cardinal`-valued version of `finrank_fiber_eq_one`: the fibre of an invertible sheaf of
+modules has `Module.rank` equal to one. -/
+theorem rank_fiber_eq_one {L : X.Modules} (hL : L.Invertible) (x : X) :
+    Module.rank (X.residueField x) (L.fiber x) = 1 :=
+  have := module_invertible_fiber hL x
+  Module.Invertible.rank_eq_one _ _
+
+end AlgebraicGeometry.Scheme.Modules
