@@ -20,7 +20,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-public import WeilConjectures.AlgebraicGeometry.Smooth.Regular
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
@@ -205,6 +204,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Over
@@ -279,7 +279,10 @@ public import WeilConjectures.Mathlib.RingTheory.PrincipalIdealDomain
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.RingHom.QuasiFinite
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
+public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
@@ -296,7 +299,6 @@ public import WeilConjectures.RingTheory.Depth.Basic
 public import WeilConjectures.RingTheory.MvPolynomial.HomogeneousLocalization
 public import WeilConjectures.RingTheory.NewtonExpansion
 public import WeilConjectures.RingTheory.NumericalPolynomial
-public import WeilConjectures.RingTheory.Smooth.Regular
 public import WeilConjectures.SixFunctors.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.LowerShriek.Comparison
