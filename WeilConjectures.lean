@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.MiracleFlatness
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
@@ -228,6 +229,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Localization.Monoidal.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
