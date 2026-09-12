@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
-public import WeilConjectures.AlgebraicGeometry.Modules.Sheafification
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 
 /-!
@@ -21,19 +20,19 @@ bijective, hence that it identifies the tensor product of sheaves of modules
 
 Local bijectivity holds over a basic open set `D₊(f)` with `f` homogeneous of degree `m` dividing
 both `d` and `e`: there `𝒪(d)`, `𝒪(e)` and `𝒪(d + e)` are free of rank one on `f ^ (d / m)`,
-`f ^ (e / m)` and `f ^ (d / m + e / m)`, and multiplication is the obvious bijection. The
-hypothesis that such basic open sets cover `Proj 𝒜` is `Proj.IsCoveredByDvdDegree`; it holds for
-all `d` and `e` when the irrelevant ideal of `𝒜` is generated in degree one, for instance for a
-polynomial ring.
+`f ^ (e / m)` and `f ^ (d / m + e / m)` by
+`AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.sectionPowEquiv`, and multiplication is the
+obvious bijection. The hypothesis that such basic open sets cover `Proj 𝒜` is
+`Proj.IsCoveredByDvdDegree 𝒜 (Int.gcd d e)`; it holds for all degrees when the irrelevant ideal
+of `𝒜` is generated in degree one, for instance for a polynomial ring.
 
 Taking `e = -d` and using `𝒪(0) ≅ 𝒪` then shows that `𝒪(d)` is an invertible sheaf.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Proj.IsCoveredByDvdDegree`: the condition that `Proj 𝒜` is covered by the
-  basic open sets `D₊(f)` for `f` homogeneous of a degree dividing both `d` and `e`.
-- `AlgebraicGeometry.Proj.twistingSheafTensorIso`: the isomorphism
-  `𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`.
+  basic open sets `D₊(f)` for `f` homogeneous of a degree dividing `d`.
+- `AlgebraicGeometry.Proj.twistingSheafTensorIso`: the isomorphism `𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`.
 
 ## Main results
 
@@ -55,198 +54,12 @@ variable (𝒜 : ℕ → σ) [GradedRing 𝒜]
 
 namespace ProjectiveSpectrum.TwistingSheaf
 
-/-- The ring of sections of the structure sheaf of `Proj 𝒜` over `U`, spelled as the value at `U`
-of the presheaf of rings over which the twisting presheaves are presheaves of modules, so that
-scalar multiplication on their sections is found by instance resolution. -/
-abbrev sectionRing (U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ) : RingCat :=
-  ((Proj 𝒜).sheaf.obj ⋙ forget₂ CommRingCat RingCat).obj U
-
-/-- The `d`-th twisting presheaf as a presheaf of `𝒪`-modules on `Proj 𝒜`, spelled over the
-presheaf of rings `𝒪 ⋙ forget₂ CommRingCat RingCat` so that the monoidal structure on presheaves
-of modules is found by instance resolution. -/
-abbrev twistingPresheaf (d : ℤ) :
-    PresheafOfModules ((Proj 𝒜).sheaf.obj ⋙ forget₂ CommRingCat RingCat) :=
-  presheafOfModules 𝒜 d
-
-/-- The sections of the `d`-th twisting presheaf over `U`. -/
-abbrev sectionModule (d : ℤ) (U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ) :
-    ModuleCat (sectionRing 𝒜 U) :=
-  (twistingPresheaf 𝒜 d).obj U
-
-variable {𝒜}
-
-/-- The product of a local fraction of degree `d` and a local fraction of degree `e` is a local
-fraction of degree `d + e`. -/
-theorem mul_mem'' {d e c : ℤ} (hc : d + e = c) {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
-    {a b : ∀ x : U.unop, atPoint 𝒜 x.1}
-    (ha : (isLocallyFraction 𝒜 d).pred a) (hb : (isLocallyFraction 𝒜 e).pred b) :
-    (isLocallyFraction 𝒜 c).pred (fun x ↦ a x * b x) := by
-  subst hc
-  intro x
-  obtain ⟨V₁, m₁, e₁, i₁, j₁, h₁, ⟨r₁, hr₁⟩, ⟨s₁, hs₁⟩, hw₁, w₁⟩ := ha x
-  obtain ⟨V₂, m₂, e₂, i₂, j₂, h₂, ⟨r₂, hr₂⟩, ⟨s₂, hs₂⟩, hw₂, w₂⟩ := hb x
-  refine ⟨V₁ ⊓ V₂, ⟨m₁, m₂⟩, Opens.infLELeft _ _ ≫ e₁, i₁ + i₂, j₁ + j₂, by push_cast; omega,
-    ⟨r₁ * r₂, SetLike.mul_mem_graded hr₁ hr₂⟩, ⟨s₁ * s₂, SetLike.mul_mem_graded hs₁ hs₂⟩,
-    fun y ↦ y.1.asHomogeneousIdeal.toIdeal.primeCompl.mul_mem (hw₁ ⟨y.1, y.2.1⟩)
-      (hw₂ ⟨y.1, y.2.2⟩), ?_⟩
-  rintro ⟨y, hy⟩
-  simp only [Subtype.forall, Opens.apply_mk] at w₁ w₂
-  simp [w₁ y hy.1, w₂ y hy.2, Localization.mk_mul]
-  rfl
-
-section Apply
-
-variable {d : ℤ} {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
-
-@[simp]
-theorem sectionModule_smul_apply (c : sectionRing 𝒜 U) (a : sectionModule 𝒜 d U) (x : U.unop) :
-    (c • a).1 x = (c.1 x).val * a.1 x := rfl
-
-@[simp]
-theorem sectionModule_add_apply (a b : sectionModule 𝒜 d U) (x : U.unop) :
-    (a + b).1 x = a.1 x + b.1 x := rfl
-
-@[simp]
-theorem sectionModule_zero_apply (x : U.unop) : (0 : sectionModule 𝒜 d U).1 x = 0 := rfl
-
-@[simp]
-theorem val_mul_apply (g h : sectionRing 𝒜 U) (x : U.unop) :
-    ((g * h).1 x).val = (g.1 x).val * (h.1 x).val :=
-  HomogeneousLocalization.val_mul _ _
-
-@[simp]
-theorem val_add_apply (g h : sectionRing 𝒜 U) (x : U.unop) :
-    ((g + h).1 x).val = (g.1 x).val + (h.1 x).val :=
-  HomogeneousLocalization.val_add _ _
-
-@[simp]
-theorem val_zero_apply (x : U.unop) : ((0 : sectionRing 𝒜 U).1 x).val = 0 :=
-  HomogeneousLocalization.val_zero
-
-end Apply
-
-section Generator
-
-variable {m : ℕ} {f : A} (hf : f ∈ 𝒜 m) {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
-  (hU : ∀ x : U.unop, f ∉ x.1.asHomogeneousIdeal.toIdeal)
-
-/-- If a homogeneous element `f` does not belong to a point `x` of `Proj 𝒜`, then the fraction
-`f / 1` is a unit of the localization `A_x`. -/
-def unitAtPoint {x : ProjectiveSpectrum 𝒜} (hx : f ∉ x.asHomogeneousIdeal.toIdeal) :
-    (atPoint 𝒜 x)ˣ where
-  val := Localization.mk f 1
-  inv := Localization.mk 1 ⟨f, hx⟩
-  val_inv := by rw [mul_comm]; exact Localization.mk_one_mul_mk_one ⟨f, hx⟩
-  inv_val := Localization.mk_one_mul_mk_one ⟨f, hx⟩
-
-/-- The integral power `f ^ k` of an element `f` which is invertible at every point of the open
-set `U`, as a dependent function on `U`. When `f` is homogeneous of degree `m`, this is a section
-of `𝒪(m * k)`, see `AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.powFun_mem`. -/
-def powFun (k : ℤ) (x : U.unop) : atPoint 𝒜 x.1 :=
-  ((unitAtPoint (hU x)) ^ k : (atPoint 𝒜 x.1)ˣ)
-
-theorem powFun_add (k l : ℤ) (x : U.unop) :
-    powFun hU (k + l) x = powFun hU k x * powFun hU l x := by
-  simp [powFun, zpow_add]
-
-@[simp]
-theorem powFun_zero (x : U.unop) : powFun hU 0 x = 1 := by simp [powFun]
-
-theorem powFun_natCast (n : ℕ) (x : U.unop) :
-    powFun hU (n : ℤ) x = Localization.mk (f ^ n) 1 := by
-  simp [powFun, unitAtPoint, Localization.mk_pow]
-
-theorem powFun_neg_natCast (n : ℕ) (x : U.unop)
-    (hx : f ^ n ∉ x.1.asHomogeneousIdeal.toIdeal) :
-    powFun hU (-(n : ℤ)) x = Localization.mk 1 ⟨f ^ n, hx⟩ := by
-  rw [powFun, zpow_neg, zpow_natCast, ← inv_pow, Units.val_pow_eq_pow_val]
-  simp only [unitAtPoint, Units.inv_mk, Localization.mk_pow, one_pow]
-  rfl
-
-include hU in
-theorem pow_notMem (n : ℕ) (x : U.unop) : f ^ n ∉ x.1.asHomogeneousIdeal.toIdeal := by
-  induction n with
-  | zero => simpa using (Ideal.ne_top_iff_one _).mp x.1.isPrime.ne_top
-  | succ n ih =>
-    rw [pow_succ]
-    exact fun h ↦ (x.1.isPrime.mem_or_mem h).elim ih (hU x)
-
-include hf in
-theorem powFun_mem (k : ℤ) {c : ℤ} (hc : c = m * k) :
-    (isLocallyFraction 𝒜 c).pred (powFun hU k) := by
-  apply PrelocalPredicate.sheafifyOf
-  obtain ⟨n, rfl | rfl⟩ := k.eq_nat_or_neg
-  · exact ⟨0, n * m, by subst hc; push_cast; ring, ⟨f ^ n, by
-      simpa [smul_eq_mul] using SetLike.pow_mem_graded n hf⟩, ⟨1, SetLike.one_mem_graded 𝒜⟩,
-      fun y ↦ (Ideal.ne_top_iff_one _).mp y.1.isPrime.ne_top,
-      fun y ↦ (powFun_natCast hU n y).trans rfl⟩
-  · exact ⟨n * m, 0, by subst hc; push_cast; ring, ⟨1, SetLike.one_mem_graded 𝒜⟩, ⟨f ^ n, by
-      simpa [smul_eq_mul] using SetLike.pow_mem_graded n hf⟩,
-      fun y ↦ pow_notMem hU n y, fun y ↦ powFun_neg_natCast hU n y _⟩
-
-include hf
-
-/-- The generator `f ^ k` of the sections of `𝒪(m * k)` over an open set on which the
-homogeneous element `f` of degree `m` is invertible. -/
-def sectionPow (k : ℤ) {c : ℤ} (hc : c = m * k) : sectionModule 𝒜 c U :=
-  ⟨powFun hU k, powFun_mem hf hU k hc⟩
-
-@[simp]
-theorem sectionPow_apply (k : ℤ) {c : ℤ} (hc : c = m * k) (x : U.unop) :
-    (sectionPow hf hU k hc).1 x = powFun hU k x := rfl
-
-/-- The coefficient of a section of `𝒪(m * k)` with respect to the generator `f ^ k`, over an
-open set on which the homogeneous element `f` of degree `m` is invertible. -/
-def powCoeff (k : ℤ) {c : ℤ} (hc : c = m * k) (s : sectionModule 𝒜 c U) : sectionRing 𝒜 U :=
-  sectionsZeroInv ⟨fun x ↦ s.1 x * powFun hU (-k) x,
-    mul_mem'' (by rw [hc]; ring) s.2 (powFun_mem hf hU (-k) rfl)⟩
-
-@[simp]
-theorem val_powCoeff (k : ℤ) {c : ℤ} (hc : c = m * k) (s : sectionModule 𝒜 c U) (x : U.unop) :
-    ((powCoeff hf hU k hc s).1 x).val = s.1 x * powFun hU (-k) x :=
-  val_sectionsZeroInv _ x
-
-theorem powCoeff_smul (k : ℤ) {c : ℤ} (hc : c = m * k) (s : sectionModule 𝒜 c U) :
-    powCoeff hf hU k hc s • sectionPow hf hU k hc = s := by
-  refine Subtype.ext (funext fun x ↦ ?_)
-  rw [sectionModule_smul_apply, sectionPow_apply, val_powCoeff, mul_assoc, ← powFun_add]
-  simp
-
-theorem powCoeff_smul_gen (k : ℤ) {c : ℤ} (hc : c = m * k) (g : sectionRing 𝒜 U) :
-    powCoeff hf hU k hc (g • sectionPow hf hU k hc) = g := by
-  refine Subtype.ext (funext fun x ↦ HomogeneousLocalization.val_injective _ ?_)
-  rw [val_powCoeff, sectionModule_smul_apply, sectionPow_apply, mul_assoc, ← powFun_add]
-  simp
-
-theorem powCoeff_add (k : ℤ) {c : ℤ} (hc : c = m * k) (s t : sectionModule 𝒜 c U) :
-    powCoeff hf hU k hc (s + t) = powCoeff hf hU k hc s + powCoeff hf hU k hc t := by
-  refine Subtype.ext (funext fun x ↦ HomogeneousLocalization.val_injective _ ?_)
-  rw [val_powCoeff, val_add_apply, val_powCoeff, val_powCoeff, sectionModule_add_apply]
-  exact add_mul _ _ _
-
-theorem powCoeff_zero (k : ℤ) {c : ℤ} (hc : c = m * k) : powCoeff hf hU k hc 0 = 0 := by
-  refine Subtype.ext (funext fun x ↦ HomogeneousLocalization.val_injective _ ?_)
-  rw [val_powCoeff, val_zero_apply, sectionModule_zero_apply]
-  exact zero_mul _
-
-theorem powCoeff_mul {c d e a b : ℤ} (hd : d = m * a) (he : e = m * b) (hc : c = m * (a + b))
-    (hde : d + e = c) (s : sectionModule 𝒜 d U) (t : sectionModule 𝒜 e U) :
-    powCoeff hf hU (a + b) hc ⟨fun x ↦ s.1 x * t.1 x, mul_mem'' hde s.2 t.2⟩ =
-      powCoeff hf hU a hd s * powCoeff hf hU b he t := by
-  refine Subtype.ext (funext fun x ↦ HomogeneousLocalization.val_injective _ ?_)
-  rw [val_powCoeff, val_mul_apply, val_powCoeff, val_powCoeff, neg_add, powFun_add]
-  ring
-
-end Generator
-
-variable (𝒜)
-
 /-- Sectionwise multiplication, as a morphism of presheaves of `𝒪`-modules on `Proj 𝒜` from the
-sectionwise tensor product of `𝒪(d)` and `𝒪(e)` to `𝒪(d + e)`. -/
-def tensorMulHom (d e : ℤ) :
-    twistingPresheaf 𝒜 d ⊗ twistingPresheaf 𝒜 e ⟶ twistingPresheaf 𝒜 (d + e) where
+sectionwise tensor product of `𝒪(d)` and `𝒪(e)` to `𝒪(c)`, where `d + e = c`. -/
+def tensorMulHom {d e c : ℤ} (hc : d + e = c) :
+    twistingPresheaf 𝒜 d ⊗ twistingPresheaf 𝒜 e ⟶ twistingPresheaf 𝒜 c where
   app U := ModuleCat.MonoidalCategory.tensorLift
-    (fun s t ↦ (⟨fun x ↦ s.1 x * t.1 x, mul_mem'' rfl s.2 t.2⟩ : sectionModule 𝒜 (d + e) U))
+    (fun s t ↦ (⟨fun x ↦ s.1 x * t.1 x, mul_mem hc s.2 t.2⟩ : sectionModule 𝒜 c U))
     (fun _ _ _ ↦ Subtype.ext (funext fun _ ↦ add_mul _ _ _))
     (fun _ _ _ ↦ Subtype.ext (funext fun _ ↦ mul_assoc _ _ _))
     (fun _ _ _ ↦ Subtype.ext (funext fun _ ↦ mul_add _ _ _))
@@ -255,10 +68,11 @@ def tensorMulHom (d e : ℤ) :
 
 variable {𝒜}
 
-theorem tensorMulHom_app_tmul {d e : ℤ} {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
+theorem tensorMulHom_app_tmul {d e c : ℤ} (hc : d + e = c)
+    {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
     (s : sectionModule 𝒜 d U) (t : sectionModule 𝒜 e U) :
-    ((tensorMulHom 𝒜 d e).app U).hom (s ⊗ₜ t) =
-      ⟨fun x ↦ s.1 x * t.1 x, mul_mem'' rfl s.2 t.2⟩ := rfl
+    ((tensorMulHom 𝒜 hc).app U).hom (s ⊗ₜ t) =
+      ⟨fun x ↦ s.1 x * t.1 x, mul_mem hc s.2 t.2⟩ := rfl
 
 section Bijective
 
@@ -270,34 +84,39 @@ include hf hU in
 element `f` of degree `m` is invertible, and when `m` divides both `d` and `e`, sectionwise
 multiplication is a bijection from the tensor product of the sections of `𝒪(d)` and `𝒪(e)` onto
 the sections of `𝒪(d + e)`. Indeed both are free of rank one, generated by `f ^ a ⊗ f ^ b` and
-`f ^ (a + b)` respectively. -/
-theorem bijective_tensorMulHom_app {d e a b : ℤ} (hd : d = m * a) (he : e = m * b) :
-    Function.Bijective ((tensorMulHom 𝒜 d e).app U).hom := by
-  have hde : d + e = (m : ℤ) * (a + b) := by rw [hd, he]; ring
-  have hgen : ((tensorMulHom 𝒜 d e).app U).hom
-      (sectionPow hf hU a hd ⊗ₜ sectionPow hf hU b he) = sectionPow hf hU (a + b) hde := by
+`f ^ (a + b)` respectively, see
+`AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.sectionPowEquiv`. -/
+theorem bijective_tensorMulHom_app {d e c a b : ℤ} (hc : d + e = c) (hd : d = m * a)
+    (he : e = m * b) : Function.Bijective ((tensorMulHom 𝒜 hc).app U).hom := by
+  have hcm : c = (m : ℤ) * (a + b) := by rw [← hc, hd, he]; ring
+  have hgen : ((tensorMulHom 𝒜 hc).app U).hom
+      (sectionPow hf hU a hd ⊗ₜ sectionPow hf hU b he) = sectionPow hf hU (a + b) hcm := by
     rw [tensorMulHom_app_tmul]
     exact Subtype.ext (funext fun x ↦ (powFun_add hU a b x).symm)
   have key : ∀ t : ((twistingPresheaf 𝒜 d ⊗ twistingPresheaf 𝒜 e).obj U : Type _),
-      powCoeff hf hU (a + b) hde (((tensorMulHom 𝒜 d e).app U).hom t) •
+      powCoeff hf hU (a + b) hcm (((tensorMulHom 𝒜 hc).app U).hom t) •
         (sectionPow hf hU a hd ⊗ₜ sectionPow hf hU b he) = t := by
     intro t
     induction t using TensorProduct.induction_on with
     | zero => rw [map_zero, powCoeff_zero, zero_smul]
     | tmul p q =>
-      rw [tensorMulHom_app_tmul, powCoeff_mul hf hU hd he hde rfl,
-        ← TensorProduct.smul_tmul_smul, powCoeff_smul, powCoeff_smul]
+      rw [tensorMulHom_app_tmul, powCoeff_mul hf hU hd he hcm hc,
+        ← TensorProduct.smul_tmul_smul, powCoeff_smul_sectionPow, powCoeff_smul_sectionPow]
     | add p q hp hq => rw [map_add, powCoeff_add, add_smul, hp, hq]
-  exact ⟨fun p q hpq ↦ by rw [← key p, ← key q, hpq], fun s ↦
-    ⟨powCoeff hf hU (a + b) hde s • (sectionPow hf hU a hd ⊗ₜ sectionPow hf hU b he), by
-      rw [map_smul, hgen, powCoeff_smul]⟩⟩
+  refine ⟨fun p q hpq ↦ ?_, fun s ↦ ⟨powCoeff hf hU (a + b) hcm s •
+    (sectionPow hf hU a hd ⊗ₜ sectionPow hf hU b he), ?_⟩⟩
+  · rw [← key p, ← key q, hpq]
+  · rw [map_smul, hgen, powCoeff_smul_sectionPow]
 
 include hf hU in
-theorem bijective_toPresheaf_map_tensorMulHom_app {d e a b : ℤ} (hd : d = m * a)
-    (he : e = m * b) :
+/-- `AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.bijective_tensorMulHom_app` transported
+through `PresheafOfModules.toPresheaf`, which is the form in which local bijectivity of
+`tensorMulHom` is checked. -/
+theorem bijective_toPresheaf_map_tensorMulHom_app {d e c a b : ℤ} (hc : d + e = c)
+    (hd : d = m * a) (he : e = m * b) :
     Function.Bijective
-      (((PresheafOfModules.toPresheaf _).map (tensorMulHom 𝒜 d e)).app U) :=
-  bijective_tensorMulHom_app hf hU hd he
+      (((PresheafOfModules.toPresheaf _).map (tensorMulHom 𝒜 hc)).app U) :=
+  bijective_tensorMulHom_app hf hU hc hd he
 
 end Bijective
 
@@ -307,100 +126,135 @@ namespace Proj
 
 open ProjectiveSpectrum.TwistingSheaf
 
+/-- The condition that every point of `Proj 𝒜` lies in a basic open set `D₊(f)` attached to a
+homogeneous element `f` of some degree `m` dividing `d`.
+
+Over such a `D₊(f)` the twisting sheaf `𝒪(d)` is free of rank one, generated by the integral
+power `f ^ (d / m)`. The condition holds for all `d` as soon as the irrelevant ideal of `𝒜` is
+generated in degree one, see
+`AlgebraicGeometry.Proj.isCoveredByDvdDegree_of_irrelevant_le_span_degreeOne`. -/
+def IsCoveredByDvdDegree (d : ℤ) : Prop :=
+  ∀ x : ProjectiveSpectrum 𝒜, ∃ (m : ℕ) (f : A), f ∈ 𝒜 m ∧
+    x ∈ ProjectiveSpectrum.basicOpen 𝒜 f ∧ (m : ℤ) ∣ d
+
 variable {𝒜}
 
-/-- The condition that every point of `Proj 𝒜` lies in a basic open set `D₊(f)` attached to a
-homogeneous element `f` of some degree `m` dividing both `d` and `e`.
+/-- A degree covered by divisors covers all its multiples. -/
+theorem IsCoveredByDvdDegree.mono {d e : ℤ} (H : IsCoveredByDvdDegree 𝒜 d) (hde : d ∣ e) :
+    IsCoveredByDvdDegree 𝒜 e := fun x ↦ by
+  obtain ⟨m, f, hf, hfx, hm⟩ := H x
+  exact ⟨m, f, hf, hfx, hm.trans hde⟩
 
-Over such a `D₊(f)` the twisting sheaves `𝒪(d)`, `𝒪(e)` and `𝒪(d + e)` are free of rank one,
-generated by the integral powers `f ^ (d / m)`, `f ^ (e / m)` and `f ^ (d / m + e / m)`, and
-sectionwise multiplication `𝒪(d) ⊗ 𝒪(e) ⟶ 𝒪(d + e)` is bijective. The condition holds for all
-`d` and `e` as soon as the irrelevant ideal of `𝒜` is generated in degree one, see
-`AlgebraicGeometry.Proj.isCoveredByDvdDegree_of_irrelevant_le_span`. -/
-def IsCoveredByDvdDegree (𝒜 : ℕ → σ) [GradedRing 𝒜] (d e : ℤ) : Prop :=
-  ∀ x : ProjectiveSpectrum 𝒜, ∃ (m : ℕ) (f : A), f ∈ 𝒜 m ∧ f ∉ x.asHomogeneousIdeal ∧
-    (m : ℤ) ∣ d ∧ (m : ℤ) ∣ e
+variable {d e c : ℤ}
 
-theorem IsCoveredByDvdDegree.neg_right {d e : ℤ} (H : IsCoveredByDvdDegree 𝒜 d e) :
-    IsCoveredByDvdDegree 𝒜 d (-e) := fun x ↦
-  (H x).imp fun _ h ↦ h.imp fun _ h ↦ ⟨h.1, h.2.1, h.2.2.1, h.2.2.2.neg_right⟩
-
-variable {d e : ℤ}
-
-theorem isLocallyInjective_tensorMulHom (H : IsCoveredByDvdDegree 𝒜 d e) :
+/-- **Local injectivity of sectionwise multiplication**: over each basic open set `D₊(f)` given
+by the covering hypothesis, multiplication is injective by
+`AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.bijective_tensorMulHom_app`. -/
+theorem isLocallyInjective_tensorMulHom (hc : d + e = c)
+    (H : IsCoveredByDvdDegree 𝒜 (Int.gcd d e)) :
     Presheaf.IsLocallyInjective (Opens.grothendieckTopology ↥(Proj 𝒜))
-      ((PresheafOfModules.toPresheaf _).map (tensorMulHom 𝒜 d e)) where
+      ((PresheafOfModules.toPresheaf _).map (tensorMulHom 𝒜 hc)) where
   equalizerSieve_mem {U} s t h x hx := by
-    obtain ⟨m, f, hf, hfx, ⟨a, ha⟩, ⟨b, hb⟩⟩ := H x
+    obtain ⟨m, f, hf, hfx, hm⟩ := H x
+    obtain ⟨a, ha⟩ := hm.trans (Int.gcd_dvd_left d e)
+    obtain ⟨b, hb⟩ := hm.trans (Int.gcd_dvd_right d e)
     refine ⟨U.unop ⊓ ProjectiveSpectrum.basicOpen 𝒜 f, homOfLE inf_le_left, ?_, hx, hfx⟩
     refine (bijective_toPresheaf_map_tensorMulHom_app
-      (U := op (U.unop ⊓ ProjectiveSpectrum.basicOpen 𝒜 f)) hf (fun y ↦ y.2.2) ha hb).injective ?_
+      (U := op (U.unop ⊓ ProjectiveSpectrum.basicOpen 𝒜 f)) hf (fun y ↦ y.2.2)
+      hc ha hb).injective ?_
     rw [NatTrans.naturality_apply, NatTrans.naturality_apply, h]
 
-theorem isLocallySurjective_tensorMulHom (H : IsCoveredByDvdDegree 𝒜 d e) :
+/-- **Local surjectivity of sectionwise multiplication**: over each basic open set `D₊(f)` given
+by the covering hypothesis, multiplication is surjective by
+`AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.bijective_tensorMulHom_app`. -/
+theorem isLocallySurjective_tensorMulHom (hc : d + e = c)
+    (H : IsCoveredByDvdDegree 𝒜 (Int.gcd d e)) :
     Presheaf.IsLocallySurjective (Opens.grothendieckTopology ↥(Proj 𝒜))
-      ((PresheafOfModules.toPresheaf _).map (tensorMulHom 𝒜 d e)) where
+      ((PresheafOfModules.toPresheaf _).map (tensorMulHom 𝒜 hc)) where
   imageSieve_mem {U} s x hx := by
-    obtain ⟨m, f, hf, hfx, ⟨a, ha⟩, ⟨b, hb⟩⟩ := H x
+    obtain ⟨m, f, hf, hfx, hm⟩ := H x
+    obtain ⟨a, ha⟩ := hm.trans (Int.gcd_dvd_left d e)
+    obtain ⟨b, hb⟩ := hm.trans (Int.gcd_dvd_right d e)
     refine ⟨U ⊓ ProjectiveSpectrum.basicOpen 𝒜 f, homOfLE inf_le_left, ?_, hx, hfx⟩
     exact (bijective_toPresheaf_map_tensorMulHom_app
-      (U := op (U ⊓ ProjectiveSpectrum.basicOpen 𝒜 f)) hf (fun y ↦ y.2.2) ha hb).surjective _
+      (U := op (U ⊓ ProjectiveSpectrum.basicOpen 𝒜 f)) hf (fun y ↦ y.2.2)
+      hc ha hb).surjective _
 
 /-- **`𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`**: under the covering hypothesis
 `AlgebraicGeometry.Proj.IsCoveredByDvdDegree`, multiplication of fractions identifies the tensor
-product of the twisting sheaves `𝒪(d)` and `𝒪(e)` with `𝒪(d + e)`. -/
-def twistingSheafTensorIso (H : IsCoveredByDvdDegree 𝒜 d e) :
-    twistingSheaf 𝒜 d ⊗ twistingSheaf 𝒜 e ≅ twistingSheaf 𝒜 (d + e) :=
-  SheafOfModules.tensorIsoOfW (R := (Proj 𝒜).sheaf) (F := twistingSheaf 𝒜 d)
-    (G := twistingSheaf 𝒜 e) (H := twistingSheaf 𝒜 (d + e))
+product of the twisting sheaves `𝒪(d)` and `𝒪(e)` with `𝒪(c)`, `c = d + e`. The isomorphism is
+the one induced by the sectionwise multiplication `tensorMulHom` through
+`SheafOfModules.tensorIsoOfIsLocallyBijective`:
+
+```text
+                          μ                       a (tensorMulHom)
+  a 𝒪(d) ⊗ a 𝒪(e) ──────────────→ a (𝒪(d) ⊗ 𝒪(e)) ──────────────────→ a 𝒪(c)
+         │                                                               │
+         │                                                               │
+         ↓                                                               ↓
+    𝒪(d) ⊗ 𝒪(e) ───────────────────────────────────────────────────────→ 𝒪(c)
+```
+
+Here `a` is sheafification and the vertical maps are the counit
+`SheafOfModules.sheafificationObjIso` of the sheafification adjunction. -/
+def twistingSheafTensorIso (hc : d + e = c) (H : IsCoveredByDvdDegree 𝒜 (Int.gcd d e)) :
+    twistingSheaf 𝒜 d ⊗ twistingSheaf 𝒜 e ≅ twistingSheaf 𝒜 c :=
+  have := isLocallyInjective_tensorMulHom hc H
+  have := isLocallySurjective_tensorMulHom hc H
+  SheafOfModules.tensorIsoOfIsLocallyBijective (R := (Proj 𝒜).sheaf)
     (SheafOfModules.sheafificationObjIso (Proj 𝒜).sheaf (twistingSheaf 𝒜 d))
     (SheafOfModules.sheafificationObjIso (Proj 𝒜).sheaf (twistingSheaf 𝒜 e))
-    (SheafOfModules.sheafificationObjIso (Proj 𝒜).sheaf (twistingSheaf 𝒜 (d + e)))
-    (tensorMulHom 𝒜 d e)
-    (by
-      have := isLocallyInjective_tensorMulHom H
-      have := isLocallySurjective_tensorMulHom H
-      exact GrothendieckTopology.W_of_isLocallyBijective _ _)
+    (SheafOfModules.sheafificationObjIso (Proj 𝒜).sheaf (twistingSheaf 𝒜 c))
+    (tensorMulHom 𝒜 hc)
 
 /-- **The twisting sheaf `𝒪(d)` is invertible**, i.e. is a line bundle, as soon as `Proj 𝒜` is
 covered by basic open sets `D₊(f)` with `f` homogeneous of a degree dividing `d`: its inverse is
 `𝒪(-d)`. -/
-theorem invertible_twistingSheaf (d : ℤ) (H : IsCoveredByDvdDegree 𝒜 d d) :
+theorem invertible_twistingSheaf (H : IsCoveredByDvdDegree 𝒜 d) :
     (twistingSheaf 𝒜 d).Invertible :=
+  have H' : IsCoveredByDvdDegree 𝒜 (Int.gcd d (-d)) :=
+    H.mono (by simp [Int.gcd])
   SheafOfModules.Invertible.left (R := (Proj 𝒜).sheaf) (M := twistingSheaf 𝒜 d)
     (N := twistingSheaf 𝒜 (-d))
-    (twistingSheafTensorIso H.neg_right ≪≫
-      eqToIso (congrArg (twistingSheaf 𝒜) (add_neg_cancel d)) ≪≫ twistingSheafZeroIso ≪≫
+    (twistingSheafTensorIso (add_neg_cancel d) H' ≪≫ twistingSheafZeroIso ≪≫
       (SheafOfModules.tensorUnitIso (Proj 𝒜).sheaf).symm)
 
-section DegreeOne
+section Span
+
+variable {ι : Type*} {g : ι → A} {n : ι → ℕ}
+
+/-- If the irrelevant ideal of `𝒜` is spanned by a family of homogeneous elements whose degrees
+divide `d`, then the covering hypothesis `AlgebraicGeometry.Proj.IsCoveredByDvdDegree` holds for
+`d`: the basic open sets of such a family cover `Proj 𝒜` by
+`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`. -/
+theorem isCoveredByDvdDegree_of_irrelevant_le_span (hg : ∀ i, g i ∈ 𝒜 (n i))
+    (hspan : (HomogeneousIdeal.irrelevant 𝒜).toIdeal ≤ Ideal.span (Set.range g))
+    (hd : ∀ i, (n i : ℤ) ∣ d) : IsCoveredByDvdDegree 𝒜 d := fun x ↦ by
+  have hx : x ∈ (⨆ i, Proj.basicOpen 𝒜 (g i) : (Proj 𝒜).Opens) := by
+    rw [Proj.iSup_basicOpen_eq_top 𝒜 g hspan]
+    trivial
+  obtain ⟨i, hi⟩ := Opens.mem_iSup.1 hx
+  exact ⟨n i, g i, hg i, hi, hd i⟩
 
 variable (hspan : (HomogeneousIdeal.irrelevant 𝒜).toIdeal ≤ Ideal.span {a : A | a ∈ 𝒜 1})
 
 include hspan
 
-/-- If the irrelevant ideal of `𝒜` is generated by elements of degree one, then no point of
-`Proj 𝒜` contains all of `𝒜 1`. -/
-theorem exists_degreeOne_notMem (x : ProjectiveSpectrum 𝒜) :
-    ∃ f ∈ 𝒜 1, f ∉ x.asHomogeneousIdeal := by
-  by_contra! hx
-  exact x.not_irrelevant_le fun a ha ↦ Ideal.span_le.2 (fun b hb ↦ hx b hb) (hspan ha)
-
 /-- If the irrelevant ideal of `𝒜` is generated by elements of degree one, then `Proj 𝒜` is
 covered by the basic open sets of the elements of degree one, so that the covering hypothesis
-`AlgebraicGeometry.Proj.IsCoveredByDvdDegree` holds for every pair of degrees. -/
-theorem isCoveredByDvdDegree_of_irrelevant_le_span (d e : ℤ) : IsCoveredByDvdDegree 𝒜 d e :=
-  fun x ↦ by
-    obtain ⟨f, hf, hfx⟩ := exists_degreeOne_notMem hspan x
-    exact ⟨1, f, hf, hfx, by simp, by simp⟩
+`AlgebraicGeometry.Proj.IsCoveredByDvdDegree` holds for every degree. -/
+theorem isCoveredByDvdDegree_of_irrelevant_le_span_degreeOne (d : ℤ) :
+    IsCoveredByDvdDegree 𝒜 d :=
+  isCoveredByDvdDegree_of_irrelevant_le_span (g := ((↑) : {a : A // a ∈ 𝒜 1} → A))
+    (n := fun _ ↦ 1) (fun i ↦ i.2) (by rwa [Subtype.range_coe_subtype]) (fun _ ↦ one_dvd d)
 
 /-- **On `Proj` of a graded ring whose irrelevant ideal is generated in degree one — for instance
 a polynomial ring — every twisting sheaf `𝒪(d)`, `d : ℤ`, is invertible.** -/
 theorem invertible_twistingSheaf_of_irrelevant_le_span (d : ℤ) :
     (twistingSheaf 𝒜 d).Invertible :=
-  invertible_twistingSheaf d (isCoveredByDvdDegree_of_irrelevant_le_span hspan d d)
+  invertible_twistingSheaf (isCoveredByDvdDegree_of_irrelevant_le_span_degreeOne hspan d)
 
-end DegreeOne
+end Span
 
 end Proj
 

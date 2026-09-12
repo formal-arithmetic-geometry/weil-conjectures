@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
-public import WeilConjectures.AlgebraicGeometry.Modules.Sheafification
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
@@ -155,6 +154,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Genera
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free

@@ -44,6 +44,10 @@ set `D₊(f)`, with inverse the division by `f`. In particular, on
 - `AlgebraicGeometry.Proj.twistingSheafRestrictIso`: **local triviality**, multiplication by a
   homogeneous element `f` of degree `m` is an isomorphism `𝒪(d) ≅ 𝒪(d + m)` over `D₊(f)`.
 - `AlgebraicGeometry.Proj.twistingSheafZeroIso`: `𝒪(0)` is the structure sheaf.
+- `AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.sectionPowEquiv`: **local freeness**, over
+  an open set on which a homogeneous element `f` of degree `m` is invertible, the sections of
+  `𝒪(m * k)`, `k : ℤ`, form a free module of rank one over the sections of the structure sheaf,
+  on the generator `f ^ k`.
 
 ## TODO
 
@@ -162,6 +166,36 @@ theorem smul_mem' (d : ℤ) (U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ)
   simp only [Subtype.forall, Opens.apply_mk] at w₀ w
   simp [smul_apply, w y hy.2, w₀ y hy.1, Localization.mk_mul]
 
+/-- A dependent function which on all of `U` is the quotient of a homogeneous element of degree
+`j` by a homogeneous element of degree `i` invertible on `U` is a local fraction of degree
+`j - i`. -/
+theorem mk_mem {i j : ℕ} {r s : A} (hr : r ∈ 𝒜 j) (hs : s ∈ 𝒜 i) {c : ℤ} (hc : (j : ℤ) - i = c)
+    {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
+    (hs' : ∀ x : U.unop, s ∉ x.1.asHomogeneousIdeal.toIdeal)
+    {a : ∀ x : U.unop, atPoint 𝒜 x.1} (ha : ∀ x, a x = Localization.mk r ⟨s, hs' x⟩) :
+    (isLocallyFraction 𝒜 c).pred a :=
+  PrelocalPredicate.sheafifyOf ⟨i, j, by omega, ⟨r, hr⟩, ⟨s, hs⟩, hs', ha⟩
+
+/-- The product of a local fraction of degree `d` and a local fraction of degree `e` is a local
+fraction of degree `d + e`. -/
+theorem mul_mem {d e c : ℤ} (hc : d + e = c) {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
+    {a b : ∀ x : U.unop, atPoint 𝒜 x.1}
+    (ha : (isLocallyFraction 𝒜 d).pred a) (hb : (isLocallyFraction 𝒜 e).pred b) :
+    (isLocallyFraction 𝒜 c).pred (fun x ↦ a x * b x) := by
+  subst hc
+  intro x
+  obtain ⟨V₁, m₁, e₁, i₁, j₁, h₁, ⟨r₁, hr₁⟩, ⟨s₁, hs₁⟩, hw₁, w₁⟩ := ha x
+  obtain ⟨V₂, m₂, e₂, i₂, j₂, h₂, ⟨r₂, hr₂⟩, ⟨s₂, hs₂⟩, hw₂, w₂⟩ := hb x
+  refine ⟨V₁ ⊓ V₂, ⟨m₁, m₂⟩, Opens.infLELeft _ _ ≫ e₁, i₁ + i₂, j₁ + j₂, by push_cast; omega,
+    ⟨r₁ * r₂, SetLike.mul_mem_graded hr₁ hr₂⟩, ⟨s₁ * s₂, SetLike.mul_mem_graded hs₁ hs₂⟩,
+    fun y ↦ y.1.asHomogeneousIdeal.toIdeal.primeCompl.mul_mem (hw₁ ⟨y.1, y.2.1⟩)
+      (hw₂ ⟨y.1, y.2.2⟩), ?_⟩
+  rintro ⟨y, hy⟩
+  simp only [Subtype.forall, Opens.apply_mk] at w₁ w₂
+  change a ⟨y, _⟩ * b ⟨y, _⟩ = _
+  rw [w₁ y hy.1, w₂ y hy.2, Localization.mk_mul]
+  rfl
+
 end Sections
 
 variable (d : ℤ)
@@ -211,32 +245,71 @@ theorem isSheaf_presheafInAb : (presheafInAb 𝒜 d).IsSheaf :=
 variable {𝒜} in
 theorem mul_mem' {m : ℕ} {f : A} (hf : f ∈ 𝒜 m) (U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ)
     (a : ∀ x : U.unop, atPoint 𝒜 x.1) (ha : (isLocallyFraction 𝒜 d).pred a) :
-    (isLocallyFraction 𝒜 (d + m)).pred (fun x ↦ Localization.mk f 1 * a x) := by
-  intro x
-  obtain ⟨V, hxV, e, i, j, hij, ⟨r, hr⟩, ⟨t, ht⟩, hw, w⟩ := ha x
-  refine ⟨V, hxV, e, i, m + j, by push_cast; omega, ⟨f * r, SetLike.mul_mem_graded hf hr⟩,
-    ⟨t, ht⟩, hw, fun y ↦ ?_⟩
-  simp only [Subtype.forall] at w
-  simp [w y.1 y.2, Localization.mk_mul]
+    (isLocallyFraction 𝒜 (d + m)).pred (fun x ↦ Localization.mk f 1 * a x) :=
+  mul_mem (d := (m : ℤ)) (e := d) (by omega)
+    (mk_mem hf (SetLike.one_mem_graded 𝒜) (by simp)
+      (fun y ↦ (Ideal.ne_top_iff_one _).mp y.1.isPrime.ne_top) (fun _ ↦ rfl)) ha
 
 variable {𝒜} in
 theorem div_mem' {m : ℕ} {f : A} (hf : f ∈ 𝒜 m) (U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ)
     (hU : ∀ x : U.unop, f ∉ x.1.asHomogeneousIdeal.toIdeal)
     (a : ∀ x : U.unop, atPoint 𝒜 x.1) (ha : (isLocallyFraction 𝒜 (d + m)).pred a) :
-    (isLocallyFraction 𝒜 d).pred (fun x ↦ Localization.mk 1 ⟨f, hU x⟩ * a x) := by
-  intro x
-  obtain ⟨V, hxV, e, i, j, hij, ⟨r, hr⟩, ⟨t, ht⟩, hw, w⟩ := ha x
-  refine ⟨V, hxV, e, m + i, j, by push_cast; omega, ⟨r, hr⟩,
-    ⟨f * t, SetLike.mul_mem_graded hf ht⟩,
-    fun y ↦ (y.1 : ProjectiveSpectrum 𝒜).asHomogeneousIdeal.toIdeal.primeCompl.mul_mem
-      (hU (e y)) (hw y), fun y ↦ ?_⟩
-  simp only [Subtype.forall] at w
-  simp [w y.1 y.2, Localization.mk_mul]
-  rfl
+    (isLocallyFraction 𝒜 d).pred (fun x ↦ Localization.mk 1 ⟨f, hU x⟩ * a x) :=
+  mul_mem (d := -(m : ℤ)) (e := d + m) (by omega)
+    (mk_mem (SetLike.one_mem_graded 𝒜) hf (by simp) hU (fun _ ↦ rfl)) ha
 
 /-- The `d`-th twisting presheaf as a presheaf of `𝒪`-modules on `Proj 𝒜`. -/
 def presheafOfModules : (Proj 𝒜).PresheafOfModules :=
   PresheafOfModules.ofPresheaf (presheafInAb 𝒜 d) (by intros; rfl)
+
+/-- The ring of sections of the structure sheaf of `Proj 𝒜` over `U`, spelled as the value at
+`U` of the presheaf of rings over which the twisting presheaves are presheaves of modules, so
+that scalar multiplication on their sections is found by instance resolution. -/
+abbrev sectionRing (U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ) : RingCat :=
+  ((Proj 𝒜).sheaf.obj ⋙ forget₂ CommRingCat RingCat).obj U
+
+/-- The `d`-th twisting presheaf as a presheaf of `𝒪`-modules on `Proj 𝒜`, spelled over the
+presheaf of rings `𝒪 ⋙ forget₂ CommRingCat RingCat` so that the monoidal structure on presheaves
+of modules is found by instance resolution. -/
+abbrev twistingPresheaf :
+    PresheafOfModules ((Proj 𝒜).sheaf.obj ⋙ forget₂ CommRingCat RingCat) :=
+  presheafOfModules 𝒜 d
+
+/-- The sections of the `d`-th twisting presheaf over `U`. -/
+abbrev sectionModule (U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ) :
+    ModuleCat (sectionRing 𝒜 U) :=
+  (twistingPresheaf 𝒜 d).obj U
+
+section Apply
+
+variable {𝒜} {d : ℤ} {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
+
+@[simp]
+theorem sectionModule_smul_apply (c : sectionRing 𝒜 U) (a : sectionModule 𝒜 d U) (x : U.unop) :
+    (c • a).1 x = (c.1 x).val * a.1 x := rfl
+
+@[simp]
+theorem sectionModule_add_apply (a b : sectionModule 𝒜 d U) (x : U.unop) :
+    (a + b).1 x = a.1 x + b.1 x := rfl
+
+@[simp]
+theorem sectionModule_zero_apply (x : U.unop) : (0 : sectionModule 𝒜 d U).1 x = 0 := rfl
+
+@[simp]
+theorem sectionRing_val_mul_apply (g h : sectionRing 𝒜 U) (x : U.unop) :
+    ((g * h).1 x).val = (g.1 x).val * (h.1 x).val :=
+  HomogeneousLocalization.val_mul _ _
+
+@[simp]
+theorem sectionRing_val_add_apply (g h : sectionRing 𝒜 U) (x : U.unop) :
+    ((g + h).1 x).val = (g.1 x).val + (h.1 x).val :=
+  HomogeneousLocalization.val_add _ _
+
+@[simp]
+theorem sectionRing_val_zero_apply (x : U.unop) : ((0 : sectionRing 𝒜 U).1 x).val = 0 :=
+  HomogeneousLocalization.val_zero
+
+end Apply
 
 variable {𝒜}
 
@@ -308,6 +381,137 @@ def unitToPresheafInAbZero :
   naturality _ _ _ := rfl
 
 end Zero
+
+
+section Generator
+
+variable {m : ℕ} {f : A} (hf : f ∈ 𝒜 m) {U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ}
+  (hU : ∀ x : U.unop, f ∉ x.1.asHomogeneousIdeal.toIdeal)
+
+/-- If an element `f` does not belong to a point `x` of `Proj 𝒜`, then the fraction `f / 1` is a
+unit of the localization `A_x`. This is `IsLocalization.map_units`, spelled so that both the
+unit `f / 1` and its inverse `1 / f` are explicit fractions. -/
+def unitAtPoint {x : ProjectiveSpectrum 𝒜} (hx : f ∉ x.asHomogeneousIdeal.toIdeal) :
+    (atPoint 𝒜 x)ˣ where
+  val := Localization.mk f 1
+  inv := Localization.mk 1 ⟨f, hx⟩
+  val_inv := by
+    rw [mul_comm]
+    exact Localization.mk_one_mul_mk_one ⟨f, hx⟩
+  inv_val := Localization.mk_one_mul_mk_one ⟨f, hx⟩
+
+/-- The integral power `f ^ k` of an element `f` which is invertible at every point of the open
+set `U`, as a dependent function on `U`. When `f` is homogeneous of degree `m`, this is a section
+of `𝒪(m * k)`, see `AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.powFun_mem`. -/
+def powFun (k : ℤ) (x : U.unop) : atPoint 𝒜 x.1 :=
+  (unitAtPoint (hU x) ^ k).val
+
+theorem powFun_add (k l : ℤ) (x : U.unop) :
+    powFun hU (k + l) x = powFun hU k x * powFun hU l x := by
+  simp [powFun, zpow_add]
+
+@[simp]
+theorem powFun_zero (x : U.unop) : powFun hU 0 x = 1 := by simp [powFun]
+
+theorem powFun_natCast (n : ℕ) (x : U.unop) :
+    powFun hU (n : ℤ) x = Localization.mk (f ^ n) 1 := by
+  simp [powFun, unitAtPoint, Localization.mk_pow]
+
+theorem powFun_neg_natCast (n : ℕ) (x : U.unop)
+    (hx : f ^ n ∉ x.1.asHomogeneousIdeal.toIdeal) :
+    powFun hU (-(n : ℤ)) x = Localization.mk 1 ⟨f ^ n, hx⟩ := by
+  rw [powFun, zpow_neg, zpow_natCast, ← inv_pow, Units.val_pow_eq_pow_val]
+  simp only [unitAtPoint, Units.inv_mk, Localization.mk_pow, one_pow]
+  rfl
+
+include hf in
+/-- The integral power `f ^ k` of a homogeneous element `f` of degree `m` which is invertible on
+`U` is a section of `𝒪(m * k)` over `U`. -/
+theorem powFun_mem (k : ℤ) {c : ℤ} (hc : c = m * k) :
+    (isLocallyFraction 𝒜 c).pred (powFun hU k) := by
+  obtain ⟨n, rfl | rfl⟩ := k.eq_nat_or_neg
+  · exact mk_mem (by simpa [smul_eq_mul] using SetLike.pow_mem_graded n hf)
+      (SetLike.one_mem_graded 𝒜) (by subst hc; push_cast; ring)
+      (fun y ↦ (Ideal.ne_top_iff_one _).mp y.1.isPrime.ne_top) (powFun_natCast hU n)
+  · exact mk_mem (SetLike.one_mem_graded 𝒜)
+      (by simpa [smul_eq_mul] using SetLike.pow_mem_graded n hf)
+      (by subst hc; push_cast; ring)
+      (fun y h ↦ hU y (y.1.isPrime.mem_of_pow_mem n h))
+      (fun y ↦ powFun_neg_natCast hU n y _)
+
+include hf in
+/-- The generator `f ^ k` of the sections of `𝒪(m * k)` over an open set on which the
+homogeneous element `f` of degree `m` is invertible. -/
+def sectionPow (k : ℤ) {c : ℤ} (hc : c = m * k) : sectionModule 𝒜 c U :=
+  ⟨powFun hU k, powFun_mem hf hU k hc⟩
+
+@[simp]
+theorem sectionPow_apply (k : ℤ) {c : ℤ} (hc : c = m * k) (x : U.unop) :
+    (sectionPow hf hU k hc).1 x = powFun hU k x := rfl
+
+include hf in
+/-- The coefficient of a section of `𝒪(m * k)` with respect to the generator `f ^ k`, over an
+open set on which the homogeneous element `f` of degree `m` is invertible. -/
+def powCoeff (k : ℤ) {c : ℤ} (hc : c = m * k) (s : sectionModule 𝒜 c U) : sectionRing 𝒜 U :=
+  sectionsZeroInv ⟨fun x ↦ s.1 x * powFun hU (-k) x,
+    mul_mem (by rw [hc]; ring) s.2 (powFun_mem hf hU (-k) rfl)⟩
+
+@[simp]
+theorem val_powCoeff (k : ℤ) {c : ℤ} (hc : c = m * k) (s : sectionModule 𝒜 c U) (x : U.unop) :
+    ((powCoeff hf hU k hc s).1 x).val = s.1 x * powFun hU (-k) x :=
+  val_sectionsZeroInv _ x
+
+theorem powCoeff_smul_sectionPow (k : ℤ) {c : ℤ} (hc : c = m * k) (s : sectionModule 𝒜 c U) :
+    powCoeff hf hU k hc s • sectionPow hf hU k hc = s := by
+  refine Subtype.ext (funext fun x ↦ ?_)
+  rw [sectionModule_smul_apply, sectionPow_apply, val_powCoeff, mul_assoc, ← powFun_add]
+  simp
+
+theorem powCoeff_smul_sectionPow_self (k : ℤ) {c : ℤ} (hc : c = m * k) (g : sectionRing 𝒜 U) :
+    powCoeff hf hU k hc (g • sectionPow hf hU k hc) = g := by
+  refine Subtype.ext (funext fun x ↦ HomogeneousLocalization.val_injective _ ?_)
+  rw [val_powCoeff, sectionModule_smul_apply, sectionPow_apply, mul_assoc, ← powFun_add]
+  simp
+
+include hf in
+/-- **Local freeness of the twisting sheaves.** Over an open set `U` on which a homogeneous
+element `f` of degree `m` is invertible, the sections of `𝒪(m * k)`, `k : ℤ`, form a free module
+of rank one over the sections of the structure sheaf, on the generator `f ^ k`. -/
+def sectionPowEquiv (k : ℤ) {c : ℤ} (hc : c = m * k) :
+    sectionRing 𝒜 U ≃ₗ[sectionRing 𝒜 U] sectionModule 𝒜 c U where
+  toFun g := g • sectionPow hf hU k hc
+  map_add' g g' := add_smul g g' _
+  map_smul' g g' := mul_smul g g' _
+  invFun := powCoeff hf hU k hc
+  left_inv := powCoeff_smul_sectionPow_self hf hU k hc
+  right_inv := powCoeff_smul_sectionPow hf hU k hc
+
+@[simp]
+theorem sectionPowEquiv_apply (k : ℤ) {c : ℤ} (hc : c = m * k) (g : sectionRing 𝒜 U) :
+    sectionPowEquiv hf hU k hc g = g • sectionPow hf hU k hc := rfl
+
+@[simp]
+theorem sectionPowEquiv_symm_apply (k : ℤ) {c : ℤ} (hc : c = m * k) (s : sectionModule 𝒜 c U) :
+    (sectionPowEquiv hf hU k hc).symm s = powCoeff hf hU k hc s := rfl
+
+theorem powCoeff_add (k : ℤ) {c : ℤ} (hc : c = m * k) (s t : sectionModule 𝒜 c U) :
+    powCoeff hf hU k hc (s + t) = powCoeff hf hU k hc s + powCoeff hf hU k hc t :=
+  map_add (sectionPowEquiv hf hU k hc).symm s t
+
+theorem powCoeff_zero (k : ℤ) {c : ℤ} (hc : c = m * k) : powCoeff hf hU k hc 0 = 0 :=
+  map_zero (sectionPowEquiv hf hU k hc).symm
+
+/-- The coefficient with respect to the generator `f ^ (a + b)` of a product of sections is the
+product of the coefficients with respect to `f ^ a` and `f ^ b`. -/
+theorem powCoeff_mul {c d e a b : ℤ} (hd : d = m * a) (he : e = m * b) (hc : c = m * (a + b))
+    (hde : d + e = c) (s : sectionModule 𝒜 d U) (t : sectionModule 𝒜 e U) :
+    powCoeff hf hU (a + b) hc ⟨fun x ↦ s.1 x * t.1 x, mul_mem hde s.2 t.2⟩ =
+      powCoeff hf hU a hd s * powCoeff hf hU b he t := by
+  refine Subtype.ext (funext fun x ↦ HomogeneousLocalization.val_injective _ ?_)
+  rw [val_powCoeff, sectionRing_val_mul_apply, val_powCoeff, val_powCoeff, neg_add, powFun_add]
+  ring
+
+end Generator
 
 end ProjectiveSpectrum.TwistingSheaf
 
