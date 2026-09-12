@@ -54,11 +54,14 @@ lemma comp_eq_comp_leftUnitor_conj (φ : 𝟙_ C ⟶ 𝟙_ C) (ψ : 𝟙_ C ⟶ 
     rw [← cancel_mono (λ_ M).hom, assoc, assoc, Iso.inv_hom_id, comp_id,
       leftUnitor_naturality, ← assoc, unitors_equal, Iso.inv_hom_id, id_comp]
   calc φ ≫ ψ = φ ≫ ((ρ_ (𝟙_ C)).inv ≫ 𝟙_ C ◁ ψ) ≫ (λ_ M).hom := by
-        rw [key]; simp
+        rw [key]
+        simp
     _ = ((ρ_ (𝟙_ C)).inv ≫ φ ▷ 𝟙_ C ≫ 𝟙_ C ◁ ψ) ≫ (λ_ M).hom := by
         simp only [← assoc, rightUnitor_inv_naturality]
     _ = ((ρ_ (𝟙_ C)).inv ≫ 𝟙_ C ◁ ψ ≫ φ ▷ M) ≫ (λ_ M).hom := by rw [whisker_exchange]
-    _ = ψ ≫ (λ_ M).inv ≫ φ ▷ M ≫ (λ_ M).hom := by rw [← assoc, key]; simp
+    _ = ψ ≫ (λ_ M).inv ≫ φ ▷ M ≫ (λ_ M).hom := by
+        rw [← assoc, key]
+        simp
 
 /-- **A split monomorphism from the tensor unit to an invertible object is an isomorphism.** -/
 lemma isIso_of_comp_eq_id (e : M ⊗ N ≅ 𝟙_ C) (e' : N ⊗ M ≅ 𝟙_ C) {f : 𝟙_ C ⟶ M}

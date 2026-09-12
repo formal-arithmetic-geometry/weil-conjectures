@@ -7,7 +7,9 @@ module
 
 public import Mathlib.Topology.Sheaves.LocallySurjective
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 
 /-!
 # An invertible sheaf of modules is locally isomorphic to the structure sheaf
@@ -15,8 +17,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 A sheaf of modules `M` on a scheme `X` is invertible, in the sense of
 `WeilConjectures.AlgebraicGeometry.Modules.Picard`, when there is a sheaf of modules `N` and an
 isomorphism `M ⊗ N ≅ 𝒪ₓ`. This file proves that such an `M` is a line bundle in the geometric
-sense: every point of `X` has an open neighbourhood `W` on which `M` is isomorphic to the
-structure sheaf.
+sense: it is locally free of rank one. Concretely, every point of `X` has an open neighbourhood
+`W` carrying a section `m` of `M` such that multiplication by `m` is an isomorphism
+`𝒪_W ≅ M|_W`; in particular `M` is `SheafOfModules.IsLocallyFree` and
+`SheafOfModules.IsFiniteType`, which is this project's spelling of "line bundle".
 
 The proof has two halves.
 
@@ -47,8 +51,14 @@ pullback of an invertible sheaf of modules is invertible.
   it becomes an isomorphism after sheafification.
 - `AlgebraicGeometry.Scheme.Modules.tensorPairing`: the pairing on sections determined by an
   isomorphism `M ⊗ N ≅ 𝒪ₓ`.
-- `SheafOfModules.Invertible.exists_restrict_iso_unit`: **an invertible sheaf of modules on a
-  scheme is locally isomorphic to the structure sheaf.**
+- `SheafOfModules.Invertible.exists_isIso_unitSmulRestrictHom`: **an invertible sheaf of modules
+  on a scheme is trivialised near every point by an explicit section**, multiplication by which
+  is an isomorphism `𝒪_W ≅ M|_W`.
+- `SheafOfModules.Invertible.isLocallyFree` and `SheafOfModules.Invertible.isFiniteType`: **an
+  invertible sheaf of modules on a scheme is a line bundle**, in the sense used elsewhere in the
+  project.
+- `SheafOfModules.Invertible.exists_restrict_iso_unit`: the same statement in the explicit local
+  form, an isomorphism `M|_W ≅ 𝒪_W`.
 -/
 
 @[expose] public section
@@ -72,21 +82,43 @@ over the underlying presheaf of rings of `R`, so that the monoidal structure of
 abbrev presheafOfModules : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat.{u} RingCat.{u}) :=
   (SheafOfModules.forget _).obj F
 
-/-- The sheafification of the underlying presheaf of modules of a sheaf of modules is that
-sheaf of modules; this is the counit of the sheafification adjunction. -/
-noncomputable def sheafificationObjIso : (sheafification R).obj (presheafOfModules F) ≅ F :=
-  (asIso (PresheafOfModules.sheafificationAdjunction
-    (𝟙 (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj))).counit).app F
-
 /-- **The tensor product of two sheaves of modules is the sheafification of the sectionwise
-tensor product** of the underlying presheaves of modules. -/
+tensor product** of the underlying presheaves of modules:
+
+```
+a (F₀ ⊗ G₀) --μ⁻¹--> a F₀ ⊗ a G₀ --ε ⊗ ε--> F ⊗ G
+```
+
+where `F₀` is the underlying presheaf of modules of `F`, `a` is sheafification, `μ` is its
+monoidal structure map and `ε` is the counit of the sheafification adjunction.
+
+The counit isomorphism `a F₀ ≅ F` is written out rather than named, because the open pull request
+#723 declares it as `SheafOfModules.sheafificationObjIso` in
+`WeilConjectures/AlgebraicGeometry/Modules/Sheafification.lean`, which is its proper home; issue
+928 will move the material below there. -/
 noncomputable def tensorSheafificationIso :
     (sheafification R).obj (presheafOfModules F ⊗ presheafOfModules G) ≅ F ⊗ G :=
   (Functor.Monoidal.μIso (sheafification R) _ _).symm ≪≫
-    tensorIso (sheafificationObjIso F) (sheafificationObjIso G)
+    tensorIso
+      ((asIso (PresheafOfModules.sheafificationAdjunction
+        (𝟙 (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj))).counit).app F)
+      ((asIso (PresheafOfModules.sheafificationAdjunction
+        (𝟙 (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj))).counit).app G)
 
 /-- The canonical morphism from the sectionwise tensor product of the underlying presheaves of
-modules of `F` and `G` to the underlying presheaf of modules of `F ⊗ G`. -/
+modules of `F` and `G` to the underlying presheaf of modules of `F ⊗ G`. It is the transpose of
+`SheafOfModules.tensorSheafificationIso` under the sheafification adjunction, so that the square
+
+```
+     F₀ ⊗ G₀ --tensorPresheafHom--> (F ⊗ G)₀
+        |                              ‖
+  toSheafify                           ‖
+        |                              ‖
+        v                              ‖
+   a (F₀ ⊗ G₀) --tensorSheafificationIso--> F ⊗ G
+```
+
+commutes; this is `SheafOfModules.toPresheaf_map_tensorPresheafHom`. -/
 noncomputable def tensorPresheafHom :
     presheafOfModules F ⊗ presheafOfModules G ⟶
       (PresheafOfModules.restrictScalars
@@ -125,11 +157,20 @@ instance (U : X.Opens) (M : X.Modules) :
 
 variable (e : M ⊗ N ≅ SheafOfModules.unit X.ringCatSheaf)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The pairing of sections of `M` and of `N` over an open `U` determined by an isomorphism
-`M ⊗ N ≅ 𝒪_X`: a section of `M` and a section of `N` over `U` have a product in `Γ(X, U)`,
+`e : M ⊗ N ≅ 𝒪_X`: a section of `M` and a section of `N` over `U` have a product in `Γ(X, U)`,
 obtained by pushing their tensor product through the comparison morphism
-`SheafOfModules.tensorPresheafHom` and then through `e`. -/
+`SheafOfModules.tensorPresheafHom` and then through `e`:
+
+```
+Γ(M, U) × Γ(N, U) --⊗ₜ--> Γ(M, U) ⊗[Γ(X, U)] Γ(N, U)
+                                        |
+                            tensorPresheafHom
+                                        |
+                                        v
+                       Γ(X, U) <--e--  Γ(M ⊗ N, U)
+```
+-/
 noncomputable def tensorPairing (U : X.Opens) :
     Γ(M, U) →ₗ[Γ(X, U)] Γ(N, U) →ₗ[Γ(X, U)] Γ(X, U) :=
   LinearMap.compr₂ (TensorProduct.mk Γ(X, U) Γ(M, U) Γ(N, U))
@@ -145,7 +186,6 @@ lemma tensorPairing_apply (U : X.Opens) (m : Γ(M, U)) (n : Γ(N, U)) :
         (m ⊗ₜ[Γ(X, U)] n)) :=
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
 lemma tensorPairing_tmul (U : X.Opens) (t : Γ(M, U) ⊗[Γ(X, U)] Γ(N, U)) :
     Hom.app e.hom U (((SheafOfModules.tensorPresheafHom M N).app (op U)).hom t) =
       TensorProduct.lift (tensorPairing e U) t := by
@@ -154,7 +194,6 @@ lemma tensorPairing_tmul (U : X.Opens) (t : Γ(M, U) ⊗[Γ(X, U)] Γ(N, U)) :
   | tmul m n => rfl
   | add t t' h h' => rw [map_add, map_add, map_add, h, h']
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The pairing of sections is compatible with restriction to a smaller open subset. -/
 lemma map_tensorPairing {U V : X.Opens} (i : V ⟶ U) (m : Γ(M, U)) (n : Γ(N, U)) :
     X.presheaf.map i.op (tensorPairing e U m n) =
@@ -168,10 +207,9 @@ lemma map_tensorPairing {U V : X.Opens} (i : V ⟶ U) (m : Γ(M, U)) (n : Γ(N, 
   refine h₁.symm.trans ?_
   exact congrArg (ConcreteCategory.hom (Hom.app e.hom V)) h₂.symm
 
-set_option backward.isDefEq.respectTransparency false in
 /-- **Any point has a neighbourhood on which `M` and `N` have sections pairing to `1`.** -/
 lemma exists_tensorPairing_eq_one (x : X) :
-    ∃ (V : X.Opens) (_ : x ∈ V) (m : Γ(M, V)) (n : Γ(N, V)), tensorPairing e V m n = 1 := by
+    ∃ V : X.Opens, x ∈ V ∧ ∃ (m : Γ(M, V)) (n : Γ(N, V)), tensorPairing e V m n = 1 := by
   have h1 : TopCat.Presheaf.IsLocallySurjective
       ((PresheafOfModules.toPresheaf _).map (SheafOfModules.tensorPresheafHom M N)) :=
     (SheafOfModules.w_toPresheaf_map_tensorPresheafHom M N).isLocallySurjective
@@ -234,14 +272,13 @@ lemma map_smulSection (m : Γ(M, W)) {V V' : X.Opens} (hV : V ≤ W) (hV' : V' �
 /-- Pairing with the restriction of a section `n` of `N` over `W` to a smaller open `V`. -/
 noncomputable def pairSection (n : Γ(N, W)) (V : X.Opens) (hV : V ≤ W) : Γ(M, V) →+ Γ(X, V) :=
   AddMonoidHom.mk' (fun z ↦ tensorPairing e V z (N.presheaf.map (homOfLE hV).op n))
-    (fun z z' ↦ by rw [map_add]; rfl)
+    (fun z z' ↦ by rw [map_add, LinearMap.add_apply])
 
 lemma pairSection_smul (n : Γ(N, W)) (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V)) (z : Γ(M, V)) :
     pairSection e n V hV (r • z) = r • pairSection e n V hV z := by
   rw [pairSection]
   simp only [AddMonoidHom.mk'_apply]
-  rw [_root_.map_smul]
-  rfl
+  rw [_root_.map_smul, LinearMap.smul_apply]
 
 lemma map_pairSection (n : Γ(N, W)) {V V' : X.Opens} (hV : V ≤ W) (hV' : V' ≤ W) (i : V' ⟶ V)
     (z : Γ(M, V)) :
@@ -273,19 +310,16 @@ noncomputable def smulRestrictHom (m : Γ(M, W)) :
           exact (map_smulSection m _ _ _ r).symm }
       (fun U' r z ↦ smulSection_smul m _ _ ((W.ι.appIso U'.unop).inv r) z)
 
-set_option maxHeartbeats 2000000 in
--- The naturality of the pairing is checked up to the definitional unfolding of
--- `AlgebraicGeometry.Scheme.Modules.tensorPairing`, which goes through the sheafification of the
--- sectionwise tensor product and is therefore expensive.
-set_option backward.isDefEq.respectTransparency false in
 /-- Pairing with a section `n` of `N` over `W`, as a morphism `M|_W ⟶ 𝒪_X|_W`. -/
 noncomputable def pairRestrictHom (n : Γ(N, W)) :
     restrict M W.ι ⟶ restrict (SheafOfModules.unit X.ringCatSheaf) W.ι :=
   (SheafOfModules.fullyFaithfulForget _).preimage <|
     PresheafOfModules.homMk
       { app := fun U' ↦ AddCommGrpCat.ofHom (pairSection e n (W.ι ''ᵁ U'.unop) (W.ι_image_le _))
-        naturality := fun {_U' _V'} _f ↦ AddCommGrpCat.hom_ext
-          (AddMonoidHom.ext fun z ↦ (map_pairSection e n _ _ _ z).symm) }
+        naturality := fun {_U' _V'} f ↦ by
+          ext z
+          exact (map_pairSection e n (W.ι_image_le _) (W.ι_image_le _)
+            (W.ι.opensFunctor.map f.unop) z).symm }
       (fun U' r z ↦ pairSection_smul e n _ _ ((W.ι.appIso U'.unop).inv r) z)
 
 /-- If the sections `m` of `M` and `n` of `N` over `W` pair to `1`, then multiplication by `m`
@@ -297,6 +331,15 @@ lemma smulRestrictHom_comp_pairRestrictHom (m : Γ(M, W)) (n : Γ(N, W))
   ext U' r
   exact pairSection_smulSection e m n h _ _ r
 
+/-- **Multiplication by a section `m` of `M` over `W`**, as a morphism `𝒪_W ⟶ M|_W` of sheaves
+of modules on the open subscheme `W`. This is the morphism `SheafOfModules.unitHomEquiv.symm`
+would produce from the section of `M|_W` determined by `m`; it is built by hand because the
+scalars on `M.restrict W.ι` are twisted by `(W.ι.appIso _).inv`, which no amount of unfolding
+identifies with the identity. -/
+noncomputable def unitSmulRestrictHom (m : Γ(M, W)) :
+    SheafOfModules.unit W.toScheme.ringCatSheaf ⟶ restrict M W.ι :=
+  (restrictUnitIso W.ι).inv ≫ smulRestrictHom m
+
 end Restrict
 
 /-- The tensor unit of the category of `𝒪_W`-modules on an open subscheme `W` of `X` is the
@@ -305,16 +348,17 @@ noncomputable def tensorUnitRestrictIso (W : X.Opens) :
     𝟙_ W.toScheme.Modules ≅ restrict (SheafOfModules.unit X.ringCatSheaf) W.ι :=
   SheafOfModules.tensorUnitIso W.toScheme.sheaf ≪≫ (restrictUnitIso W.ι).symm
 
-/-- **An invertible sheaf of modules on a scheme is locally trivial**: every point has an open
-neighbourhood on which the sheaf is isomorphic to the structure sheaf. -/
-theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_unit {M : X.Modules}
+/-- **An invertible sheaf of modules on a scheme is locally trivial, with an explicit
+trivialising section**: every point `x` has an open neighbourhood `W` carrying a section `m` of
+`M` such that multiplication by `m` is an isomorphism `𝒪_W ≅ M|_W`. In other words `m` is a
+generator of `M` over `W`. -/
+theorem _root_.SheafOfModules.Invertible.exists_isIso_unitSmulRestrictHom {M : X.Modules}
     (hM : M.Invertible) (x : X) :
-    ∃ W : X.Opens, x ∈ W ∧
-      Nonempty (M.restrict W.ι ≅ SheafOfModules.unit W.toScheme.ringCatSheaf) := by
+    ∃ W : X.Opens, x ∈ W ∧ ∃ m : Γ(M, W), IsIso (unitSmulRestrictHom m) := by
   obtain ⟨N, ⟨e₀⟩⟩ := SheafOfModules.invertible_iff_exists.{u, u, u}.1 hM
   obtain ⟨W, hxW, m, n, h⟩ :=
     exists_tensorPairing_eq_one (e := e₀ ≪≫ SheafOfModules.tensorUnitIso X.sheaf) x
-  refine ⟨W, hxW, ?_⟩
+  refine ⟨W, hxW, m, ?_⟩
   have hMW : (M.restrict W.ι).Invertible :=
     (hM.pullback W.ι).of_iso ((restrictFunctorIsoPullback W.ι).app M).symm
   obtain ⟨N', ⟨eW⟩⟩ : ∃ N' : W.toScheme.Modules,
@@ -326,10 +370,23 @@ theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_unit {M : X.Modules
     rw [Category.assoc, ← Category.assoc (smulRestrictHom m),
       smulRestrictHom_comp_pairRestrictHom _ m n h, Category.id_comp,
       (tensorUnitRestrictIso W).hom_inv_id]
-  have : IsIso ((tensorUnitRestrictIso W).hom ≫ smulRestrictHom m) :=
+  have hcomp : IsIso ((tensorUnitRestrictIso W).hom ≫ smulRestrictHom m) :=
     MonoidalCategory.isIso_of_comp_eq_id eW (β_ N' (M.restrict W.ι) ≪≫ eW) key
-  exact ⟨(asIso ((tensorUnitRestrictIso W).hom ≫ smulRestrictHom m)).symm ≪≫
-    SheafOfModules.tensorUnitIso W.toScheme.sheaf⟩
+  have hfac : unitSmulRestrictHom m = (SheafOfModules.tensorUnitIso W.toScheme.sheaf).inv ≫
+      (tensorUnitRestrictIso W).hom ≫ smulRestrictHom m := by
+    rw [tensorUnitRestrictIso, Iso.trans_hom, Category.assoc, ← Category.assoc,
+      Iso.inv_hom_id, Category.id_comp, Iso.symm_hom, unitSmulRestrictHom]
+  rw [hfac]
+  infer_instance
+
+/-- **An invertible sheaf of modules on a scheme is locally trivial**: every point has an open
+neighbourhood on which the sheaf is isomorphic to the structure sheaf. -/
+theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_unit {M : X.Modules}
+    (hM : M.Invertible) (x : X) :
+    ∃ W : X.Opens, x ∈ W ∧
+      Nonempty (M.restrict W.ι ≅ SheafOfModules.unit W.toScheme.ringCatSheaf) := by
+  obtain ⟨W, hxW, m, hm⟩ := hM.exists_isIso_unitSmulRestrictHom x
+  exact ⟨W, hxW, ⟨(asIso (unitSmulRestrictHom m)).symm⟩⟩
 
 /-- An invertible sheaf of modules on a scheme is locally isomorphic to the tensor unit. -/
 theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_tensorUnit {M : X.Modules}
@@ -337,5 +394,93 @@ theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_tensorUnit {M : X.M
     ∃ W : X.Opens, x ∈ W ∧ Nonempty (M.restrict W.ι ≅ 𝟙_ W.toScheme.Modules) := by
   obtain ⟨W, hxW, ⟨i⟩⟩ := hM.exists_restrict_iso_unit x
   exact ⟨W, hxW, ⟨i ≪≫ (SheafOfModules.tensorUnitIso W.toScheme.sheaf).symm⟩⟩
+
+section LocallyFree
+
+open TopologicalSpace
+
+/-- Transporting generating sections along an isomorphism of sheaves of modules preserves being
+a basis. -/
+lemma _root_.SheafOfModules.GeneratingSections.isIso_π_equivOfIso {C : Type u₁} [Category.{v₁} C]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {P Q : SheafOfModules.{u} R} (i : P ≅ Q) (σ : P.GeneratingSections) [IsIso σ.π] :
+    IsIso (SheafOfModules.GeneratingSections.equivOfIso i σ).π := by
+  have h : (SheafOfModules.GeneratingSections.equivOfIso i σ).π = σ.π ≫ i.hom :=
+    SheafOfModules.GeneratingSections.ofEpi_π σ i.hom
+  rw [h]
+  infer_instance
+
+/-- The section `m` of `M` over `W`, seen as a family of generating sections of `M|_W` indexed by
+a one-point type, when multiplication by `m` is an isomorphism `𝒪_W ≅ M|_W`. -/
+noncomputable def generatingSectionsOfIsIso {W : X.Opens} (m : Γ(M, W))
+    [IsIso (unitSmulRestrictHom m)] : (M.restrict W.ι).GeneratingSections :=
+  SheafOfModules.GeneratingSections.equivOfIso
+    (SheafOfModules.freeUniqueIso PUnit.{u + 1} ≪≫ asIso (unitSmulRestrictHom m))
+    (SheafOfModules.free.generatingSections PUnit.{u + 1})
+
+instance {W : X.Opens} (m : Γ(M, W)) [IsIso (unitSmulRestrictHom m)] :
+    IsIso (generatingSectionsOfIsIso m).π :=
+  SheafOfModules.GeneratingSections.isIso_π_equivOfIso _ _
+
+instance {W : X.Opens} (m : Γ(M, W)) [IsIso (unitSmulRestrictHom m)] :
+    (generatingSectionsOfIsIso m).IsFiniteType :=
+  ⟨inferInstanceAs (Finite PUnit.{u + 1})⟩
+
+variable (M)
+
+/-- Generating sections of `M|_W` which form a basis stay a basis when transported to the
+restriction of `M` to the slice site over `W`. -/
+lemma isIso_overGeneratingSections_π {W : X.Opens} (G : (M.restrict W.ι).GeneratingSections)
+    (hG : IsIso G.π) : IsIso (overGeneratingSections M W G).π := by
+  have := hG
+  exact SheafOfModules.GeneratingSections.isIso_π_equivOfIso _ _
+
+/-- Local generators of `M` attached to generating sections over each member of an open cover. -/
+noncomputable def localGeneratorsDataOfCover {ι : Type u} (U : ι → X.Opens) (hU : IsOpenCover U)
+    (G : ∀ i, (M.restrict (U i).ι).GeneratingSections) :
+    SheafOfModules.LocalGeneratorsData.{u} M :=
+  .mk (M := M) ι U ((Opens.coversTop_iff _ U).mpr hU)
+    fun i ↦ overGeneratingSections M (U i) (G i)
+
+lemma isLocallyFreeData_localGeneratorsDataOfCover {ι : Type u} (U : ι → X.Opens)
+    (hU : IsOpenCover U) (G : ∀ i, (M.restrict (U i).ι).GeneratingSections)
+    (hG : ∀ i, IsIso (G i).π) :
+    (localGeneratorsDataOfCover.{u} M U hU G).IsLocallyFreeData where
+  isIso i := isIso_overGeneratingSections_π M (G i) (hG i)
+
+/-- **Being locally free is local**: a sheaf of modules which over each member of an open cover
+has generating sections forming a basis is locally free. -/
+theorem isLocallyFree_of_generatingSections {ι : Type u} (U : ι → X.Opens) (hU : IsOpenCover U)
+    (G : ∀ i, (M.restrict (U i).ι).GeneratingSections) (hG : ∀ i, IsIso (G i).π) :
+    M.IsLocallyFree :=
+  have := isLocallyFreeData_localGeneratorsDataOfCover.{u} M U hU G hG
+  (localGeneratorsDataOfCover.{u} M U hU G).isLocallyFree
+
+variable {M}
+
+/-- **An invertible sheaf of modules on a scheme is a line bundle**: it is locally free.
+
+Together with `SheafOfModules.Invertible.isFiniteType` this is the project's spelling of "`M` is
+a line bundle on `X`", as used for instance by the projection formula. -/
+theorem _root_.SheafOfModules.Invertible.isLocallyFree {M : X.Modules} (hM : M.Invertible) :
+    M.IsLocallyFree := by
+  choose W hW m hm using hM.exists_isIso_unitSmulRestrictHom
+  have hU : IsOpenCover W :=
+    .mk (eq_top_iff.2 fun x _ ↦ Opens.mem_iSup.2 ⟨x, hW x⟩)
+  exact isLocallyFree_of_generatingSections M W hU (fun x ↦ generatingSectionsOfIsIso (m x))
+    fun x ↦ inferInstance
+
+/-- **An invertible sheaf of modules on a scheme is of finite type**: locally it is generated by
+a single section. -/
+theorem _root_.SheafOfModules.Invertible.isFiniteType {M : X.Modules} (hM : M.Invertible) :
+    M.IsFiniteType := by
+  choose W hW m hm using hM.exists_isIso_unitSmulRestrictHom
+  have hU : IsOpenCover W :=
+    .mk (eq_top_iff.2 fun x _ ↦ Opens.mem_iSup.2 ⟨x, hW x⟩)
+  exact isFiniteType_of_generatingSections M W hU (fun x ↦ generatingSectionsOfIsIso (m x))
+    fun x ↦ inferInstance
+
+end LocallyFree
 
 end AlgebraicGeometry.Scheme.Modules
