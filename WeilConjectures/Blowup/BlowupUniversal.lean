@@ -5,9 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Blowup.Chart
 public import WeilConjectures.Blowup.FiniteDegree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
 
@@ -48,10 +48,7 @@ On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
   `HomogeneousLocalization.Away.isLocalization_mul`;
 - `Scheme.IdealSheafData.exists_lift_blowup`: existence of the universal lift
   (Stacks Project Tag 0806); together with `hom_ext_of_isInvertible_comap` above
-  this is the universal property of blowing up;
-- `Scheme.IdealSheafData.exists_mem_range_chart_sup`: for a sum of two centers, the
-  charts at degree-one elements coming from local sections of one summand cover the
-  blow-up.
+  this is the universal property of blowing up.
 
 Elaboration-performance conventions follow
 `WeilConjectures.Compactification.FiniteDegree`: chart probes keep their section
@@ -1341,52 +1338,5 @@ theorem Scheme.IdealSheafData.exists_lift_blowup (I : X.IdealSheafData)
   rfl
 
 end Existence
-
-section ChartCover
-
-/-- **The charts at pure degree-one elements cover the blow-up of a sum**: every point
-of `Bl_{I₁ ⊔ I₂}(X)` lies in a chart at a degree-one element coming from a local
-section of `I₁` or of `I₂`, since `D₊(b₁ + b₂) ⊆ D₊(b₁) ∪ D₊(b₂)`. -/
-lemma Scheme.IdealSheafData.exists_mem_range_chart_sup {X : Scheme.{u}}
-    (I₁ I₂ : X.IdealSheafData) (x : (I₁ ⊔ I₂).blowup) :
-    ∃ (U : X.affineOpens) (b : Γ(X, U.1)) (hb : b ∈ (I₁ ⊔ I₂).ideal U),
-      (b ∈ I₁.ideal U ∨ b ∈ I₂.ideal U) ∧
-      x ∈ Set.range ((I₁ ⊔ I₂).blowupChart U hb) := by
-  have hx : (I₁ ⊔ I₂).blowupMap x ∈ (⊤ : X.Opens) := trivial
-  rw [← iSup_affineOpens_eq_top X] at hx
-  obtain ⟨U, hU⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
-  have hx2 : x ∈ (I₁ ⊔ I₂).blowupMap ⁻¹ᵁ U.1 := hU
-  rw [(I₁ ⊔ I₂).blowupMap_preimage U] at hx2
-  obtain ⟨y, rfl⟩ := hx2
-  have hy : y ∈ (⊤ : (AffineBlowup ((I₁ ⊔ I₂).ideal U)).Opens) := trivial
-  rw [← AffineBlowup.iSup_basicOpen_reesX_eq_top ((I₁ ⊔ I₂).ideal U)] at hy
-  obtain ⟨a, hy⟩ := TopologicalSpace.Opens.mem_iSup.mp hy
-  obtain ⟨av, hav⟩ := a
-  have hsup : (I₁ ⊔ I₂).ideal U = I₁.ideal U ⊔ I₂.ideal U := by
-    rw [congrFun (Scheme.IdealSheafData.ideal_sup (I := I₁) (J := I₂)) U, Pi.sup_apply]
-  have hav' : av ∈ I₁.ideal U ⊔ I₂.ideal U := hsup ▸ hav
-  obtain ⟨b₁, hb₁, b₂, hb₂, hsum⟩ := Submodule.mem_sup.mp hav'
-  subst hsum
-  have hb₁K : b₁ ∈ (I₁ ⊔ I₂).ideal U := by
-    rw [hsup]
-    exact Submodule.mem_sup_left hb₁
-  have hb₂K : b₂ ∈ (I₁ ⊔ I₂).ideal U := by
-    rw [hsup]
-    exact Submodule.mem_sup_right hb₂
-  rw [show reesX ((I₁ ⊔ I₂).ideal U) (b₁ + b₂) hav =
-    reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K + reesX ((I₁ ⊔ I₂).ideal U) b₂ hb₂K from
-    reesX_add _ hb₁K hb₂K] at hy
-  have hy' := TopologicalSpace.Opens.mem_sup.mp (Proj.basicOpen_add_le _ _ _ hy)
-  rcases hy' with h | h
-  · rw [← AffineBlowup.opensRange_chart ((I₁ ⊔ I₂).ideal U)
-      (reesX ((I₁ ⊔ I₂).ideal U) b₁ hb₁K) (reesX_mem _ b₁ hb₁K)] at h
-    obtain ⟨z, rfl⟩ := h
-    exact ⟨U, b₁, hb₁K, Or.inl hb₁, ⟨z, (I₁ ⊔ I₂).blowupChart_apply U hb₁K z⟩⟩
-  · rw [← AffineBlowup.opensRange_chart ((I₁ ⊔ I₂).ideal U)
-      (reesX ((I₁ ⊔ I₂).ideal U) b₂ hb₂K) (reesX_mem _ b₂ hb₂K)] at h
-    obtain ⟨z, rfl⟩ := h
-    exact ⟨U, b₂, hb₂K, Or.inr hb₂, ⟨z, (I₁ ⊔ I₂).blowupChart_apply U hb₂K z⟩⟩
-
-end ChartCover
 
 end AlgebraicGeometry
