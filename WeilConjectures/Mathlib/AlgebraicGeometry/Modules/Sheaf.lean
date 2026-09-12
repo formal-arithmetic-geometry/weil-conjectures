@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
 /-!
@@ -56,6 +57,10 @@ after restriction of scalars along `φ : R ⟶ S`.
   functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
 - `AlgebraicGeometry.Scheme.Modules.restrictToFiber`: the restriction `F ↦ F_y` of sheaves of
   modules to the scheme-theoretic fibre of a morphism over a point.
+- `AlgebraicGeometry.Scheme.Modules.sectionsEquivOfIso`: an isomorphism of sheaves of modules
+  identifies their sections over any open subset.
+- `AlgebraicGeometry.Scheme.Modules.fiberMk`: the image `s(x) ∈ F(x)` of a global section `s` of
+  `F` in the fibre at `x`, as a map semilinear over the evaluation `Γ(X, 𝒪_X) ⟶ κ(x)`.
 
 ## Main results
 
@@ -75,6 +80,13 @@ after restriction of scalars along `φ : R ⟶ S`.
   for a morphism `u` inducing an isomorphism on residue fields at the point in question.
 - `AlgebraicGeometry.Scheme.Modules.fiberRestrictToFiberIso`: the fibre of `F_y` at a point `x`
   of the fibre is the fibre of `F` at `f.fiberι y x`.
+- `AlgebraicGeometry.Scheme.Modules.sectionsPullback_naturality`,
+  `AlgebraicGeometry.Scheme.Modules.app_pullbackUnitIso_hom_sectionsPullback`: the pullback of
+  global sections is natural in the sheaf of modules, and on the structure sheaf it is the map
+  on global functions.
+- `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_iff`: the fibre of the structure sheaf
+  at `x` is the residue field `κ(x)`, so a global function has zero image in it exactly when it
+  vanishes at `x`.
 
 ## Blueprint
 
@@ -178,6 +190,36 @@ lemma germₗ_apply (x : U) (m : Γ(F, U)) :
 
 end Stalk
 end Kernel
+
+section Sections
+
+variable {X : Scheme.{u}} {F G : X.Modules}
+
+/-- **An isomorphism of sheaves of modules identifies their sections.** An isomorphism
+`e : F ≅ G` of sheaves of `𝒪_X`-modules induces a `Γ(X, U)`-linear isomorphism
+`Γ(F, U) ≃ₗ[Γ(X, U)] Γ(G, U)` on the sections over any open `U`. -/
+noncomputable def sectionsEquivOfIso (e : F ≅ G) (U : X.Opens) :
+    Γ(F, U) ≃ₗ[Γ(X, U)] Γ(G, U) where
+  toFun := Hom.app e.hom U
+  map_add' := map_add _
+  map_smul' r m := Hom.app_smul e.hom r m
+  invFun := Hom.app e.inv U
+  left_inv m := by
+    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, e.hom_inv_id, Hom.id_app]
+    rfl
+  right_inv m := by
+    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, e.inv_hom_id, Hom.id_app]
+    rfl
+
+@[simp]
+lemma sectionsEquivOfIso_apply (e : F ≅ G) (U : X.Opens) (s : Γ(F, U)) :
+    sectionsEquivOfIso e U s = Hom.app e.hom U s := rfl
+
+@[simp]
+lemma sectionsEquivOfIso_symm_apply (e : F ≅ G) (U : X.Opens) (s : Γ(G, U)) :
+    (sectionsEquivOfIso e U).symm s = Hom.app e.inv U s := rfl
+
+end Sections
 
 noncomputable section Pushforward
 
@@ -374,6 +416,68 @@ lemma sectionsPullback_smul {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules
     eqToHom_pushforward_smul, map_smul]
   rw [map_le_top_app_top]
 
+/-- **The pullback of global sections is natural in the sheaf of modules.**
+
+```
+                 Hom.app ψ ⊤
+     Γ(N, ⊤) ----------------------> Γ(N', ⊤)
+        |                                |
+        | sectionsPullback a N           | sectionsPullback a N'
+        v                                v
+  Γ(a ^* N, ⊤) ------------------> Γ(a ^* N', ⊤)
+               Hom.app ((pullback a).map ψ) ⊤
+```
+-/
+lemma sectionsPullback_naturality {X' Y' : Scheme.{u}} (a : X' ⟶ Y') {N N' : Y'.Modules}
+    (ψ : N ⟶ N') (s : Γ(N, ⊤)) :
+    Hom.app ((pullback a).map ψ) ⊤ (sectionsPullback a N s) =
+      sectionsPullback a N' (Hom.app ψ ⊤ s) := by
+  have hle : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤ := by simp
+  have hnat := ((pullback a).map ψ).mapPresheaf.naturality (homOfLE hle).op
+  have hunit := congrArg (fun f ↦ Hom.app f ⊤) ((pullbackPushforwardAdjunction a).unit.naturality ψ)
+  rw [Hom.comp_app, Hom.comp_app, Functor.id_map, Functor.comp_map, pushforward_map_app] at hunit
+  replace hunit := ConcreteCategory.congr_hom hunit s
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hunit
+  simp only [sectionsPullback, ConcreteCategory.comp_apply]
+  conv_lhs => rw [← ConcreteCategory.comp_apply, ← mapPresheaf_app, hnat]
+  simp only [ConcreteCategory.comp_apply, mapPresheaf_app]
+  exact (congrArg (ConcreteCategory.hom (((pullback a).obj N').presheaf.map
+    (homOfLE hle).op)) hunit).symm
+
+/-- **The pullback of sections of the structure sheaf is the map on functions.**
+
+```
+                sectionsPullback a
+     Γ(Y, 𝒪_Y) -------------------> Γ(a ^* 𝒪_Y, ⊤)
+             \                            |
+              \                           | Hom.app (pullbackUnitIso a).hom ⊤
+     a.appTop  \                          v
+                `----------------> Γ(X, 𝒪_X)
+```
+-/
+lemma app_pullbackUnitIso_hom_sectionsPullback {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (r : Γ(Y', ⊤)) :
+    Hom.app (pullbackUnitIso a).hom ⊤ (sectionsPullback a (unit Y'.ringCatSheaf) r) =
+      a.appTop r := by
+  have hle : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤ := by simp
+  have : (SheafOfModules.pushforward a.toRingCatSheafHom).IsRightAdjoint :=
+    inferInstanceAs (Modules.pushforward a).IsRightAdjoint
+  have hkey : (pullbackPushforwardAdjunction a).unit.app (unit Y'.ringCatSheaf) ≫
+      (pushforward a).map (pullbackUnitIso a).hom =
+        unitToPushforwardObjUnit a.toRingCatSheafHom := by
+    have h := SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit
+      (φ := a.toRingCatSheafHom)
+    rwa [Adjunction.homEquiv_unit] at h
+  have hnat := ((pullbackUnitIso a).hom.mapPresheaf).naturality (homOfLE hle).op
+  have happ := congrArg (fun f ↦ Hom.app f ⊤) hkey
+  rw [Hom.comp_app, pushforward_map_app] at happ
+  replace happ := ConcreteCategory.congr_hom happ r
+  rw [ConcreteCategory.comp_apply] at happ
+  simp only [sectionsPullback, ConcreteCategory.comp_apply]
+  rw [← ConcreteCategory.comp_apply, ← mapPresheaf_app, hnat]
+  simp only [ConcreteCategory.comp_apply, mapPresheaf_app]
+  exact (congrArg (ConcreteCategory.hom ((presheaf (unit X'.ringCatSheaf)).map
+    (homOfLE hle).op)) happ).trans (map_le_top_app_top a r)
+
 lemma pushforwardPullbackComp_app (V : Z.Opens) :
     (pushforwardPullbackComp a b M).app V =
       ((pullbackPushforwardAdjunction a).unit.app ((pullback b).obj M)).app (b ⁻¹ᵁ V) ≫
@@ -506,6 +610,67 @@ noncomputable def fiberRestrictToFiberIso (f : X ⟶ Y) (y : Y) (F : X.Modules) 
       (ModuleCat.restrictScalars (inv ((f.fiberι y).residueFieldMap x)).hom).obj
         (F.fiber (f.fiberι y x)) :=
   fiberPullbackIso (f.fiberι y) F x
+
+/-- **The image `s(x)` of a global section in a fibre.** The fibre of `F` at `x` is the module of
+global sections of the pullback of `F` along `Spec κ(x) ⟶ X`, so the image of a global section of
+`F` in it is the pullback of sections along that morphism. It is semilinear over the evaluation
+`Γ(X, 𝒪_X) ⟶ κ(x)` at `x`. -/
+noncomputable def fiberMk (F : X.Modules) (x : X) :
+    Γ(F, ⊤) →ₛₗ[(X.Γevaluation x).hom] F.fiber x where
+  toFun := sectionsPullback (X.fromSpecResidueField x) F
+  map_add' := map_add _
+  map_smul' r s := by
+    have h : (X.fromSpecResidueField x).appTop r =
+        (Scheme.ΓSpecIso (X.residueField x)).inv (X.Γevaluation x r) := by
+      rw [← ConcreteCategory.congr_hom (Scheme.fromSpecResidueField_appTop X x) r,
+        ← ConcreteCategory.comp_apply, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    refine (sectionsPullback_smul _ _ r s).trans ?_
+    rw [h]
+    rfl
+
+lemma fiberMk_apply (F : X.Modules) (x : X) (s : Γ(F, ⊤)) :
+    fiberMk F x s = sectionsPullback (X.fromSpecResidueField x) F s := rfl
+
+/-- **The image in a fibre is natural in the sheaf of modules.**
+
+```
+              fiberMk F x
+     Γ(F, ⊤) -------------> F(x)
+        |                     |
+        | Hom.app ψ ⊤         | fiberMap ψ x
+        v                     v
+     Γ(G, ⊤) -------------> G(x)
+              fiberMk G x
+```
+-/
+@[simp]
+lemma fiberMap_fiberMk {F G : X.Modules} (ψ : F ⟶ G) (x : X) (s : Γ(F, ⊤)) :
+    fiberMap ψ x (fiberMk F x s) = fiberMk G x (Hom.app ψ ⊤ s) :=
+  sectionsPullback_naturality (X.fromSpecResidueField x) ψ s
+
+/-- **The fibre of the structure sheaf is the residue field.** A global function of `X` has zero
+image in the fibre `𝒪_X(x) = κ(x)` exactly when it vanishes at `x`. -/
+lemma fiberMk_unit_eq_zero_iff (x : X) (r : Γ(X, ⊤)) :
+    fiberMk (unit X.ringCatSheaf) x r = 0 ↔ X.Γevaluation x r = 0 := by
+  have hinj : Function.Injective
+      (Hom.app (pullbackUnitIso (X.fromSpecResidueField x)).hom ⊤) :=
+    (sectionsEquivOfIso (pullbackUnitIso (X.fromSpecResidueField x)) ⊤).injective
+  have hΓinj : Function.Injective
+      (ConcreteCategory.hom (Scheme.ΓSpecIso (X.residueField x)).hom) :=
+    (Scheme.ΓSpecIso (X.residueField x)).commRingCatIsoToRingEquiv.injective
+  have hmk : Hom.app (pullbackUnitIso (X.fromSpecResidueField x)).hom ⊤
+      (fiberMk (unit X.ringCatSheaf) x r) = (X.fromSpecResidueField x).appTop r :=
+    app_pullbackUnitIso_hom_sectionsPullback _ r
+  have hev : X.Γevaluation x r =
+      (Scheme.ΓSpecIso (X.residueField x)).hom ((X.fromSpecResidueField x).appTop r) :=
+    (ConcreteCategory.congr_hom (Scheme.fromSpecResidueField_appTop X x) r).symm
+  rw [hev, map_eq_zero_iff _ hΓinj, ← hmk, map_eq_zero_iff _ hinj]
+
+/-- **A global function which is a unit does not vanish at any point.** The image in the fibre
+`𝒪_X(x) = κ(x)` of a unit of `Γ(X, 𝒪_X)` is non-zero. -/
+lemma fiberMk_unit_ne_zero_of_isUnit {r : Γ(X, ⊤)} (hr : IsUnit r) (x : X) :
+    fiberMk (unit X.ringCatSheaf) x r ≠ 0 :=
+  fun h ↦ (hr.map (X.Γevaluation x).hom).ne_zero ((fiberMk_unit_eq_zero_iff x r).mp h)
 
 end Fiber
 
