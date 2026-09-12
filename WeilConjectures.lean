@@ -17,10 +17,12 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.Sheafification
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
+public import WeilConjectures.AlgebraicGeometry.TwistingSheafInvertible
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.Defs

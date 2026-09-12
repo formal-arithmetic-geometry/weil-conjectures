@@ -47,9 +47,6 @@ set `D₊(f)`, with inverse the division by `f`. In particular, on
 
 ## TODO
 
-- `𝒪(d)` is an invertible sheaf, i.e. `SheafOfModules.Invertible (Proj.twistingSheaf 𝒜 d)`.
-  This needs the isomorphism `𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`, hence the comparison between the tensor
-  product of sheaves of modules and the sectionwise tensor product.
 - The fibrewise description of a global section: for `a` homogeneous of degree `j`, the section
   `homogeneousSection a` of `𝒪(j)` vanishes at a point `x` if and only if `a ∈ x`.
 - The transfer of `𝒪(1)` to the relative projective space `ℙ(n; S)` of
