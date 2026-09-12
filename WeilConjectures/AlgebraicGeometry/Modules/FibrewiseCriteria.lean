@@ -98,8 +98,16 @@ lemma app_pullbackUnitIso_hom_sectionsPullback (a : X ⟶ Y) (r : Γ(Y, ⊤)) :
   exact (congrArg (ConcreteCategory.hom ((presheaf (unit X.ringCatSheaf)).map
     (homOfLE (by simp : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤)).op)) h3).trans (map_le_top_app_top a r)
 
-/-- The pullback of global sections along `a : X ⟶ Y` is natural in the sheaf of modules. -/
-lemma sectionsPullback_naturality (a : X ⟶ Y) {N N' : Y.Modules} (ψ : N ⟶ N') (s : Γ(N, ⊤)) :
+/-- The pullback of global sections along `a : X ⟶ Y` is natural in the sheaf of modules.
+
+This is a private copy: the same lemma is landed under the name
+`AlgebraicGeometry.Scheme.Modules.sectionsPullback_naturality` — stated the other way round — in
+the mirror file `WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean` by PR #721, which
+was still unmerged when this file was written, so the top-level name is left to that pull request
+to avoid a duplicate declaration. Issue 928 owns deleting this copy and re-pointing
+`fiberMap_fiberMk` at the mirror's version once both have landed. -/
+private lemma sectionsPullback_naturality_aux (a : X ⟶ Y) {N N' : Y.Modules} (ψ : N ⟶ N')
+    (s : Γ(N, ⊤)) :
     sectionsPullback a N' (Hom.app ψ ⊤ s) =
       Hom.app ((pullback a).map ψ) ⊤ (sectionsPullback a N s) := by
   have hnat := ((pullback a).map ψ).mapPresheaf.naturality
@@ -136,7 +144,7 @@ lemma fiberMk_add (F : X.Modules) (x : X) (s t : Γ(F, ⊤)) :
 modules is the image of the section under the induced map on fibres. -/
 lemma fiberMap_fiberMk {F G : X.Modules} (ψ : F ⟶ G) (x : X) (s : Γ(F, ⊤)) :
     fiberMap ψ x (fiberMk F x s) = fiberMk G x (Hom.app ψ ⊤ s) := by
-  rw [fiberMk, fiberMk, sectionsPullback_naturality]
+  rw [fiberMk, fiberMk, sectionsPullback_naturality_aux]
   rfl
 
 instance (x : X) : Nontrivial Γ(Spec (X.residueField x), ⊤) :=
