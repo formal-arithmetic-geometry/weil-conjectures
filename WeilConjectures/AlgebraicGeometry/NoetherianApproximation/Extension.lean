@@ -270,8 +270,8 @@ lemma top_le_preimage_V (E : ExtensionData.{u}) :
     (⊤ : E.Wc.pt.Opens) ≤ (E.WU.ι ≫ E.U.ι) ⁻¹ᵁ E.V := by
   rw [Scheme.Hom.comp_preimage, ← E.hW₀, Scheme.Opens.ι_preimage_self]
 
-lemma sV_eq (E : ExtensionData.{u}) :
-    E.sV = (E.WU.ι ≫ E.U.ι).appLE E.V ⊤ E.top_le_preimage_V := rfl
+lemma resV_eq (E : ExtensionData.{u}) :
+    E.resV = (E.WU.ι ≫ E.U.ι).appLE E.V ⊤ E.top_le_preimage_V := rfl
 
 lemma range_WUι_comp_Uι_subset (E : ExtensionData.{u}) :
     Set.range (E.WU.ι ≫ E.U.ι) ⊆ Set.range E.V.ι := by
@@ -293,7 +293,7 @@ lemma Wc_π_Wι (E : ExtensionData.{u}) (j : Over E.i₀) :
   Scheme.Hom.resLE_comp_ι _ _
 
 lemma toSpecΓ_interToV (E : ExtensionData.{u}) :
-    E.interToV ≫ E.V.toSpecΓ = E.Wc.pt.toSpecΓ ≫ Spec.map E.sV := by
+    E.interToV ≫ E.V.toSpecΓ = E.Wc.pt.toSpecΓ ≫ Spec.map E.resV := by
   have : IsIso ((⊤ : E.Wc.pt.Opens).ι) := by
     rw [← Scheme.topIso_hom]
     infer_instance
@@ -302,7 +302,7 @@ lemma toSpecΓ_interToV (E : ExtensionData.{u}) :
     rw [← cancel_mono E.V.ι, Scheme.Hom.resLE_comp_ι, Category.assoc, E.interToV_ι]
   have h := Scheme.Opens.toSpecΓ_SpecMap_appLE (E.WU.ι ≫ E.U.ι) E.V (⊤ : E.Wc.pt.Opens)
     E.top_le_preimage_V
-  rw [← E.sV_eq, hres, Scheme.Opens.toSpecΓ_top, Category.assoc, Category.assoc] at h
+  rw [← E.resV_eq, hres, Scheme.Opens.toSpecΓ_top, Category.assoc, Category.assoc] at h
   exact ((cancel_epi ((⊤ : E.Wc.pt.Opens).ι)).mp h).symm
 
 /-- Comparing `W` with `Spec A` via `V` and via `Wⱼ` gives the same morphism:
@@ -326,7 +326,7 @@ lemma Stage.interToV_toSpecΓ_SpecMap_toSectionsV (T : E.Stage) :
   congr 2
   ext a
   rw [CommRingCat.comp_apply, CommRingCat.comp_apply]
-  exact T.sV_eq_t_of_mem a.2
+  exact T.resV_eq_resLimit_of_mem a.2
 
 /-- The open cover of `X` by `U` and `V`. -/
 noncomputable def cover (E : ExtensionData.{u}) : E.X.OpenCover :=
@@ -514,7 +514,7 @@ lemma Stage.fromX_preimage_chartU (T : E.Stage) : T.fromX ⁻¹ᵁ T.chartU = E.
       rw [hb] at hl'
       have : x' ∈ E.V.toSpecΓ ⁻¹ᵁ PrimeSpectrum.basicOpen (E.b l) := hl'
       rw [Scheme.Opens.toSpecΓ_preimage_basicOpen] at this
-      exact ((E.basicOpen_b_le l) this).1
+      exact ((E.basicOpen_b_le_inf l) this).1
   · change T.fromX x ∈ T.chartU
     have h1 : T.fromX x = pushout.inl (E.Wι T.j) T.toSpec
         (E.N.π.app T.j.left (⟨x, hx⟩ : E.U.toScheme)) :=
@@ -677,10 +677,10 @@ noncomputable def isLimitOpensConeInter (E : ExtensionData.{u}) (T₀ : E.Stage)
 lemma exists_stage_mem_A (E : ExtensionData.{u}) (β : Γ(E.X, E.V)) :
     ∃ (T : E.Stage) (a : ↥T.A), (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1 = β := by
   obtain ⟨T₁⟩ := (inferInstance : Nonempty E.Stage)
-  obtain ⟨j₁, x₁, hx₁⟩ := exists_appTop_π_eq_of_isLimit E.WD E.Wc E.isLimitWc (E.sV β)
+  obtain ⟨j₁, x₁, hx₁⟩ := exists_appTop_π_eq_of_isLimit E.WD E.Wc E.isLimitWc (E.resV β)
   obtain ⟨j₂, k₁, k₂, -⟩ := IsCofilteredOrEmpty.cone_objs T₁.j j₁
-  have hxt : E.t j₂ (E.res k₂ x₁) = E.sV β := by
-    rw [E.t_res]
+  have hxt : E.resLimit j₂ (E.res k₂ x₁) = E.resV β := by
+    rw [E.resLimit_res]
     exact hx₁.symm
   have hle : Algebra.adjoin ℤ {(β, E.res k₂ x₁)} ≤ E.fiberProduct j₂ :=
     Algebra.adjoin_le (by
@@ -709,9 +709,9 @@ lemma exists_hom_algHom_eq (E : ExtensionData.{u}) (T : E.Stage) (a b : ↥T.A)
     (h : (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1 =
       (b : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1) :
     ∃ (T' : E.Stage) (f : T' ⟶ T), f.algHom a = f.algHom b := by
-  have ht : E.t T.j (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 =
-      E.t T.j (b : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 := by
-    rw [← T.sV_eq_t_of_mem a.2, ← T.sV_eq_t_of_mem b.2, h]
+  have ht : E.resLimit T.j (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 =
+      E.resLimit T.j (b : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 := by
+    rw [← T.resV_eq_resLimit_of_mem a.2, ← T.resV_eq_resLimit_of_mem b.2, h]
   have hcpt : IsCompact ((⊤ : (E.WD.obj T.j).Opens) : Set (E.WD.obj T.j)) := isCompact_univ
   obtain ⟨j', k, hk⟩ := exists_app_map_eq_map_of_isLimit E.WD E.Wc E.isLimitWc hcpt _ _ ht
   exact ⟨T.restrict k ⊥ bot_le Subalgebra.fg_bot,

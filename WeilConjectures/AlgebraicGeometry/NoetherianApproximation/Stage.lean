@@ -118,7 +118,7 @@ attribute [instance] qs finite
 variable (E : ExtensionData.{u})
 
 /-- Each chosen generator has its basic open inside the intersection. -/
-lemma basicOpen_b_le (E : ExtensionData.{u}) (l : E.σ) : E.X.basicOpen (E.b l) ≤ E.U ⊓ E.V :=
+lemma basicOpen_b_le_inf (E : ExtensionData.{u}) (l : E.σ) : E.X.basicOpen (E.b l) ≤ E.U ⊓ E.V :=
   E.inf_eq_iSup_basicOpen ▸ le_iSup (fun l ↦ E.X.basicOpen (E.b l)) l
 
 /-- The limit cone of the approximation of `U`. -/
@@ -152,15 +152,15 @@ instance (j : Over E.i₀) : IsNoetherian (E.WD.obj j) := ⟨⟩
 
 /-- The restriction of a section of `V` to `W`, viewed inside the limit of
 the `Wⱼ`. -/
-noncomputable def sV : Γ(E.X, E.V) ⟶ Γ(E.Wc.pt, ⊤) :=
+noncomputable def resV : Γ(E.X, E.V) ⟶ Γ(E.Wc.pt, ⊤) :=
   (E.WU.ι ≫ E.U.ι).appLE E.V ⊤ (by
     rw [Scheme.Hom.comp_preimage, ← E.hW₀, Scheme.Opens.ι_preimage_self])
 
 /-- The restriction of a section at the stage `j` to the limit `W`. -/
-noncomputable def t (j : Over E.i₀) : Γ(E.WD.obj j, ⊤) ⟶ Γ(E.Wc.pt, ⊤) :=
+noncomputable def resLimit (j : Over E.i₀) : Γ(E.WD.obj j, ⊤) ⟶ Γ(E.Wc.pt, ⊤) :=
   (E.Wc.π.app j).appTop
 
-lemma t_def (j : Over E.i₀) : E.t j = (E.Wc.π.app j).appTop := rfl
+lemma resLimit_def (j : Over E.i₀) : E.resLimit j = (E.Wc.π.app j).appTop := rfl
 
 /-- The transition map on sections of the system `Wⱼ`. -/
 noncomputable def res {j j' : Over E.i₀} (f : j' ⟶ j) :
@@ -169,9 +169,10 @@ noncomputable def res {j j' : Over E.i₀} (f : j' ⟶ j) :
 
 lemma res_def {j j' : Over E.i₀} (f : j' ⟶ j) : E.res f = (E.WD.map f).appTop := rfl
 
-lemma t_res {j j' : Over E.i₀} (f : j' ⟶ j) (x : Γ(E.WD.obj j, ⊤)) :
-    E.t j' (E.res f x) = E.t j x := by
-  rw [t_def, res_def, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, E.Wc.w f, t_def]
+lemma resLimit_res {j j' : Over E.i₀} (f : j' ⟶ j) (x : Γ(E.WD.obj j, ⊤)) :
+    E.resLimit j' (E.res f x) = E.resLimit j x := by
+  rw [resLimit_def, res_def, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, E.Wc.w f,
+    resLimit_def]
 
 lemma res_res {j j' j'' : Over E.i₀} (f : j' ⟶ j) (g : j'' ⟶ j') (x : Γ(E.WD.obj j, ⊤)) :
     E.res g (E.res f x) = E.res (g ≫ f) x := by
@@ -185,12 +186,12 @@ sections agreeing on `W`, as a subalgebra of the product ring. The coefficient a
 stage at `j` is a finitely generated subalgebra of it. -/
 noncomputable def fiberProduct (E : ExtensionData.{u}) (j : Over E.i₀) :
     Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)) :=
-  AlgHom.equalizer (E.sV.hom.comp (RingHom.fst _ _)).toIntAlgHom
-    ((E.t j).hom.comp (RingHom.snd _ _)).toIntAlgHom
+  AlgHom.equalizer (E.resV.hom.comp (RingHom.fst _ _)).toIntAlgHom
+    ((E.resLimit j).hom.comp (RingHom.snd _ _)).toIntAlgHom
 
 lemma mem_fiberProduct_iff (E : ExtensionData.{u}) {j : Over E.i₀}
     (p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)) :
-    p ∈ E.fiberProduct j ↔ E.sV p.1 = E.t j p.2 := Iff.rfl
+    p ∈ E.fiberProduct j ↔ E.resV p.1 = E.resLimit j p.2 := Iff.rfl
 
 /-- The identity on the `V`-component times restriction on the section
 component, as a morphism of `ℤ`-algebras. It maps the fiber product at `j` into the fiber
@@ -207,7 +208,7 @@ lemma resAlgHom_mem_fiberProduct {j j' : Over E.i₀} (k : j' ⟶ j)
     {p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)} (hp : p ∈ E.fiberProduct j) :
     resAlgHom k p ∈ E.fiberProduct j' := by
   rw [E.mem_fiberProduct_iff] at hp ⊢
-  rw [resAlgHom_apply, E.t_res]
+  rw [resAlgHom_apply, E.resLimit_res]
   exact hp
 
 variable (E)
@@ -224,7 +225,7 @@ structure Stage where
   /-- The lifts of the generators of the intersection. -/
   r : E.σ → Γ(E.WD.obj j, ⊤)
   /-- The lifts restrict to the chosen generators on the limit `W`. -/
-  hr (l : E.σ) : E.t j (r l) = E.sV (E.b l)
+  hr (l : E.σ) : E.resLimit j (r l) = E.resV (E.b l)
   /-- The basic opens of the lifts cover `Wⱼ`. -/
   hcov : ⨆ l, (E.WD.obj j).basicOpen (r l) = ⊤
   /-- The basic opens of the lifts are affine, so they form an affine cover of `Wⱼ`. -/
@@ -290,8 +291,8 @@ variable {E}
 
 /-- The two components of an element of the coefficient algebra of a stage agree on the
 intersection `W`. -/
-lemma Stage.sV_eq_t_of_mem (T : E.Stage) {p : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)}
-    (hp : p ∈ T.A) : E.sV p.1 = E.t T.j p.2 :=
+lemma Stage.resV_eq_resLimit_of_mem (T : E.Stage) {p : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)}
+    (hp : p ∈ T.A) : E.resV p.1 = E.resLimit T.j p.2 :=
   (E.mem_fiberProduct_iff p).mp (T.A_le_fiberProduct hp)
 
 /-- The ring map from the coefficient algebra of a stage to the sections
@@ -339,23 +340,23 @@ lemma opensRange_WUι_comp_Uι (E : ExtensionData.{u}) :
 
 lemma basicOpen_le_opensRange (E : ExtensionData.{u}) (l : E.σ) :
     E.X.basicOpen (E.b l) ≤ (E.WU.ι ≫ E.U.ι).opensRange :=
-  (E.basicOpen_b_le l).trans E.opensRange_WUι_comp_Uι.ge
+  (E.basicOpen_b_le_inf l).trans E.opensRange_WUι_comp_Uι.ge
 
 /-- Restricting a section of `V` to `X.basicOpen (b l)` and pulling back
 to `W` agrees with restricting the pullback to `W`. -/
-lemma res_app_eq_sV_res (E : ExtensionData.{u}) (l : E.σ) :
+lemma res_app_eq_resV_res (E : ExtensionData.{u}) (l : E.σ) :
     E.X.presheaf.map (homOfLE (E.X.basicOpen_le (E.b l))).op ≫
       (E.WU.ι ≫ E.U.ι).app (E.X.basicOpen (E.b l)) =
-      E.sV ≫ E.WU.toScheme.presheaf.map (homOfLE le_top).op := by
-  simp only [ExtensionData.sV, Scheme.Hom.app_eq_appLE, Scheme.Hom.map_appLE,
+      E.resV ≫ E.WU.toScheme.presheaf.map (homOfLE le_top).op := by
+  simp only [ExtensionData.resV, Scheme.Hom.app_eq_appLE, Scheme.Hom.map_appLE,
     Scheme.Hom.appLE_map]
 
 /-- A section of `V` restricting to zero on `W` is annihilated by a power
 of each of the chosen generators `b l`: the restriction `Γ(X, V) ⟶ Γ(W, 𝒪)` factors through
 the localization `Γ(X, V) ⟶ Γ(X, X.basicOpen (b l))` because `X.basicOpen (b l) ≤ U ⊓ V`.
 This is the key cancellation step in the proof of Stacks 01Z9. -/
-lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : E.σ) {y : Γ(E.X, E.V)}
-    (hy : E.sV y = 0) : ∃ K, E.b l ^ K * y = 0 := by
+lemma exists_pow_mul_eq_zero_of_resV_eq_zero (l : E.σ) {y : Γ(E.X, E.V)}
+    (hy : E.resV y = 0) : ∃ K, E.b l ^ K * y = 0 := by
   have := E.hV.isLocalization_basicOpen (E.b l)
   suffices h0 : (E.X.presheaf.map (homOfLE (E.X.basicOpen_le (E.b l))).op) y = 0 by
     obtain ⟨⟨_, K, rfl⟩, hK⟩ := (IsLocalization.map_eq_zero_iff
@@ -364,7 +365,7 @@ lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : E.σ) {y : Γ(E.X, E.V)}
   have := (E.WU.ι ≫ E.U.ι).isIso_app _ (E.basicOpen_le_opensRange l)
   apply (ConcreteCategory.bijective_of_isIso
     ((E.WU.ι ≫ E.U.ι).app (E.X.basicOpen (E.b l)))).1
-  rw [map_zero, ← CommRingCat.comp_apply, E.res_app_eq_sV_res l, CommRingCat.comp_apply, hy,
+  rw [map_zero, ← CommRingCat.comp_apply, E.res_app_eq_resV_res l, CommRingCat.comp_apply, hy,
     map_zero]
 
 set_option maxHeartbeats 1600000 in
@@ -373,7 +374,7 @@ set_option maxHeartbeats 1600000 in
 /-- The sections over the basic open `Wⱼ(r l)` are the
 localization of the coefficient algebra of the stage away from the tautological element
 `(b l, r l)`. Surjectivity is the condition `hgen` of the stage; injectivity combines the
-qcqs lemma on `Wⱼ` with `exists_pow_mul_eq_zero_of_sV_eq_zero` on the `V`-component. -/
+qcqs lemma on `Wⱼ` with `exists_pow_mul_eq_zero_of_resV_eq_zero` on the `V`-component. -/
 @[stacks 01Z9]
 lemma Stage.isLocalization_away (T : E.Stage) (l : E.σ) :
     letI := (T.toSectionsRes l).hom.toAlgebra
@@ -398,12 +399,13 @@ lemma Stage.isLocalization_away (T : E.Stage) (l : E.σ) :
       rw [mul_sub, sub_eq_zero]
       exact hk
     -- Push down to the intersection `W` and cancel the first components there.
-    have hV0 : E.sV (E.b l ^ k * (a.1.1 - a'.1.1)) = 0 := by
-      have ht := congrArg (E.t T.j) hk'
+    have hV0 : E.resV (E.b l ^ k * (a.1.1 - a'.1.1)) = 0 := by
+      have ht := congrArg (E.resLimit T.j) hk'
       rw [map_mul, map_pow, map_zero, T.hr] at ht
-      rw [map_mul, map_pow, map_sub, T.sV_eq_t_of_mem a.2, T.sV_eq_t_of_mem a'.2, ← map_sub]
+      rw [map_mul, map_pow, map_sub, T.resV_eq_resLimit_of_mem a.2,
+      T.resV_eq_resLimit_of_mem a'.2, ← map_sub]
       exact ht
-    obtain ⟨K, hK⟩ := E.exists_pow_mul_eq_zero_of_sV_eq_zero l hV0
+    obtain ⟨K, hK⟩ := E.exists_pow_mul_eq_zero_of_resV_eq_zero l hV0
     refine ⟨⟨T.gen l ^ (K + k), K + k, rfl⟩, Subtype.ext (Prod.ext ?_ ?_)⟩
     · simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, Stage.coe_gen, Prod.fst_mul,
         Prod.pow_fst]
@@ -486,15 +488,15 @@ these elements to any finitely generated subalgebra of the fiber product yields 
 
 /-- The basic open of `W` attached to a generator `b l` is the pullback of
 the basic open of `X` attached to it. -/
-lemma basicOpen_sV (E : ExtensionData.{u}) (l : E.σ) :
-    E.Wc.pt.basicOpen (E.sV (E.b l)) =
+lemma basicOpen_resV (E : ExtensionData.{u}) (l : E.σ) :
+    E.Wc.pt.basicOpen (E.resV (E.b l)) =
       (E.WU.ι ≫ E.U.ι) ⁻¹ᵁ E.X.basicOpen (E.b l) := by
-  simp only [ExtensionData.sV, Scheme.basicOpen_appLE, top_inf_eq]
+  simp only [ExtensionData.resV, Scheme.basicOpen_appLE, top_inf_eq]
 
 /-- The basic opens of the chosen generators cover `W`. -/
 lemma iSup_basicOpen_sV (E : ExtensionData.{u}) :
-    ⨆ l, E.Wc.pt.basicOpen (E.sV (E.b l)) = ⊤ := by
-  simp_rw [E.basicOpen_sV]
+    ⨆ l, E.Wc.pt.basicOpen (E.resV (E.b l)) = ⊤ := by
+  simp_rw [E.basicOpen_resV]
   rw [← Scheme.Hom.preimage_iSup, ← E.inf_eq_iSup_basicOpen]
   refine eq_top_iff.mpr fun x _ ↦ ?_
   have : (E.WU.ι ≫ E.U.ι) x ∈ (E.WU.ι ≫ E.U.ι).opensRange := ⟨x, rfl⟩
@@ -519,16 +521,16 @@ instance : QuasiSeparatedSpace E.Wc.pt := by
   exact (isQuasiSeparated_iff_quasiSeparatedSpace _ E.WU.2).mp (.of_quasiSeparatedSpace _)
 
 variable (E) in
-/-- Restricting a global section of `W` to the basic open of `sV (b l)`
+/-- Restricting a global section of `W` to the basic open of `resV (b l)`
 factors through the restriction to the pullback of `X.basicOpen (b l)`; the two opens are
-equal by `basicOpen_sV`. -/
+equal by `basicOpen_resV`. -/
 lemma restrict_basicOpen_sV_eq (l : E.σ) (x : Γ(E.Wc.pt, ⊤)) :
-    x |_ E.Wc.pt.basicOpen (E.sV (E.b l)) =
-      (E.Wc.pt.presheaf.map (eqToHom (E.basicOpen_sV l)).op)
+    x |_ E.Wc.pt.basicOpen (E.resV (E.b l)) =
+      (E.Wc.pt.presheaf.map (eqToHom (E.basicOpen_resV l)).op)
         ((E.Wc.pt.presheaf.map (homOfLE le_top).op) x) := by
   rw [← CommRingCat.comp_apply, ← Functor.map_comp, ← op_comp]
   exact congrArg
-    (fun f : E.Wc.pt.basicOpen (E.sV (E.b l)) ⟶ (⊤ : E.Wc.pt.Opens) ↦
+    (fun f : E.Wc.pt.basicOpen (E.resV (E.b l)) ⟶ (⊤ : E.Wc.pt.Opens) ↦
       (E.Wc.pt.presheaf.map f.op).hom x)
     (Subsingleton.elim _ _)
 
@@ -537,7 +539,7 @@ power of `r l`, the restriction of the second component of an element of the fib
 `Γ(X, V) ×_{Γ(W)} Γ(Wⱼ)`. -/
 @[stacks 01Z7]
 lemma exists_mem_fiberProduct_res_eq_mul_pow (E : ExtensionData.{u}) {j : Over E.i₀}
-    {l : E.σ} {rl : Γ(E.WD.obj j, ⊤)} (hrl : E.t j rl = E.sV (E.b l))
+    {l : E.σ} {rl : Γ(E.WD.obj j, ⊤)} (hrl : E.resLimit j rl = E.resV (E.b l))
     (z : Γ(E.WD.obj j, (E.WD.obj j).basicOpen rl)) :
     ∃ (m : ℕ) (p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)), p ∈ E.fiberProduct j ∧
       ((E.WD.obj j).presheaf.map (homOfLE le_top).op) p.2 =
@@ -546,12 +548,12 @@ lemma exists_mem_fiberProduct_res_eq_mul_pow (E : ExtensionData.{u}) {j : Over E
   -- Lift `z` to a global section `y` of `Wⱼ`, up to a power of `rl`.
   obtain ⟨m₀, y, hy⟩ := exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated
     (E.WD.obj j) ⊤ isCompact_univ isQuasiSeparated_univ rl z
-  -- The restriction of `t y` to the basic open of `W` comes from a section `zV` of
+  -- The restriction of `resLimit y` to the basic open of `W` comes from a section `zV` of
   -- `X.basicOpen (b l)`.
   have hiso := (E.WU.ι ≫ E.U.ι).isIso_app _ (E.basicOpen_le_opensRange l)
   obtain ⟨zV, hzV⟩ := (ConcreteCategory.bijective_of_isIso
     ((E.WU.ι ≫ E.U.ι).app (E.X.basicOpen (E.b l)))).2
-    ((E.WU.toScheme.presheaf.map (homOfLE le_top).op) (E.t j y))
+    ((E.WU.toScheme.presheaf.map (homOfLE le_top).op) (E.resLimit j y))
   -- Write `zV` as `v₀ / (b l) ^ K` using that `V` is affine.
   have := E.hV.isLocalization_basicOpen (E.b l)
   obtain ⟨⟨v₀, ⟨_, K, rfl⟩⟩, hv⟩ := IsLocalization.surj (M := Submonoid.powers (E.b l)) zV
@@ -561,29 +563,29 @@ lemma exists_mem_fiberProduct_res_eq_mul_pow (E : ExtensionData.{u}) {j : Over E
   have happ (x : Γ(E.X, E.V)) :
       ((E.WU.ι ≫ E.U.ι).app (E.X.basicOpen (E.b l)))
         ((algebraMap Γ(E.X, E.V) Γ(E.X, E.X.basicOpen (E.b l))) x) =
-      (E.WU.toScheme.presheaf.map (homOfLE le_top).op) (E.sV x) := by
+      (E.WU.toScheme.presheaf.map (homOfLE le_top).op) (E.resV x) := by
     have h := congrArg
       (fun f : Γ(E.X, E.V) ⟶
           Γ(E.WU.toScheme, (E.WU.ι ≫ E.U.ι) ⁻¹ᵁ E.X.basicOpen (E.b l)) ↦ f x)
-      (E.res_app_eq_sV_res l)
+      (E.res_app_eq_resV_res l)
     dsimp only at h
     rwa [CommRingCat.comp_apply, CommRingCat.comp_apply] at h
   -- Transport the localization relation along the pullback to `W`.
   have e₁ := congrArg ((E.WU.ι ≫ E.U.ι).app (E.X.basicOpen (E.b l)) ·) hv
   dsimp only at e₁
   rw [map_mul, map_pow, happ, happ, hzV] at e₁
-  have e₁' : (E.Wc.pt.presheaf.map (homOfLE le_top).op) (E.t j y) *
-        (E.Wc.pt.presheaf.map (homOfLE le_top).op) (E.sV (E.b l)) ^ K =
+  have e₁' : (E.Wc.pt.presheaf.map (homOfLE le_top).op) (E.resLimit j y) *
+        (E.Wc.pt.presheaf.map (homOfLE le_top).op) (E.resV (E.b l)) ^ K =
       (E.Wc.pt.presheaf.map (homOfLE (le_top :
-        (E.WU.ι ≫ E.U.ι) ⁻¹ᵁ E.X.basicOpen (E.b l) ≤ ⊤)).op) (E.sV v₀) := e₁
-  -- `sV v₀` and `t (rl ^ K * y)` agree on the basic open of `sV (b l)`.
-  have h6 : E.sV v₀ |_ E.Wc.pt.basicOpen (E.sV (E.b l)) =
-      E.t j (rl ^ K * y) |_ E.Wc.pt.basicOpen (E.sV (E.b l)) := by
+        (E.WU.ι ≫ E.U.ι) ⁻¹ᵁ E.X.basicOpen (E.b l) ≤ ⊤)).op) (E.resV v₀) := e₁
+  -- `resV v₀` and `resLimit (rl ^ K * y)` agree on the basic open of `resV (b l)`.
+  have h6 : E.resV v₀ |_ E.Wc.pt.basicOpen (E.resV (E.b l)) =
+      E.resLimit j (rl ^ K * y) |_ E.Wc.pt.basicOpen (E.resV (E.b l)) := by
     rw [E.restrict_basicOpen_sV_eq, E.restrict_basicOpen_sV_eq]
     congr 1
     rw [map_mul, map_pow, hrl, map_mul, map_pow]
     linear_combination -e₁'
-  -- Hence they agree after multiplication by a power of `sV (b l)`.
+  -- Hence they agree after multiplication by a power of `resV (b l)`.
   obtain ⟨M, hM⟩ := exists_of_res_eq_of_qcqs_of_top (X := E.Wc.pt) h6
   -- Assemble the element of the fiber product.
   refine ⟨M + K + m₀, (E.b l ^ M * v₀, rl ^ (M + K) * y), ?_, ?_⟩
@@ -618,7 +620,7 @@ structure PreStage where
   /-- The lifts of the generators of the intersection. -/
   r : E.σ → Γ(E.WD.obj j, ⊤)
   /-- The lifts restrict to the chosen generators on the limit `W`. -/
-  hr (l : E.σ) : E.t j (r l) = E.sV (E.b l)
+  hr (l : E.σ) : E.resLimit j (r l) = E.resV (E.b l)
   /-- The basic opens of the lifts cover `Wⱼ`. -/
   hcov : ⨆ l, (E.WD.obj j).basicOpen (r l) = ⊤
   /-- The basic opens of the lifts are affine. -/
@@ -640,7 +642,7 @@ noncomputable def PreStage.restrict (P : E.PreStage) {j' : Over E.i₀} (k : j' 
     E.PreStage where
   j := j'
   r l := E.res k (P.r l)
-  hr l := by rw [E.t_res, P.hr]
+  hr l := by rw [E.resLimit_res, P.hr]
   hcov := by
     simp_rw [basicOpen_res, ← Scheme.Hom.preimage_iSup, P.hcov, Scheme.Hom.preimage_top]
   haff l := by
@@ -816,20 +818,21 @@ variable (E)
 index below any given index. -/
 lemma exists_r (j₀ : Over E.i₀) :
     ∃ (j : Over E.i₀) (_ : j ⟶ j₀) (r : E.σ → Γ(E.WD.obj j, ⊤)),
-      ∀ l, E.t j (r l) = E.sV (E.b l) := by
+      ∀ l, E.resLimit j (r l) = E.resV (E.b l) := by
   have hex (j : Over E.i₀) (l : E.σ) :
-      ∃ (j' : Over E.i₀) (_ : j' ⟶ j) (r : Γ(E.WD.obj j', ⊤)), E.t j' r = E.sV (E.b l) := by
-    obtain ⟨i, r₀, hr₀⟩ := exists_appTop_π_eq_of_isLimit E.WD E.Wc E.isLimitWc (E.sV (E.b l))
+      ∃ (j' : Over E.i₀) (_ : j' ⟶ j) (r : Γ(E.WD.obj j', ⊤)),
+        E.resLimit j' r = E.resV (E.b l) := by
+    obtain ⟨i, r₀, hr₀⟩ := exists_appTop_π_eq_of_isLimit E.WD E.Wc E.isLimitWc (E.resV (E.b l))
     obtain ⟨j', kj, ki, -⟩ := IsCofilteredOrEmpty.cone_objs j i
     exact ⟨j', kj, E.res ki r₀, by
-      rw [E.t_res]
+      rw [E.resLimit_res]
       exact hr₀.symm⟩
   obtain ⟨j, k, h⟩ := exists_hom_forall (j₂ := j₀)
-    (fun j' _ l ↦ ∃ r, E.t j' r = E.sV (E.b l))
+    (fun j' _ l ↦ ∃ r, E.resLimit j' r = E.resV (E.b l))
     (fun {j j'} k' k l hl ↦ by
       obtain ⟨r, hr⟩ := hl
       exact ⟨E.res k' r, by
-        rw [E.t_res]
+        rw [E.resLimit_res]
         exact hr⟩)
     (fun j k l ↦ by
       obtain ⟨j', k', r, hr⟩ := hex j l
@@ -840,12 +843,12 @@ lemma exists_r (j₀ : Over E.i₀) :
 /-- The basic opens of the limit lifts of the generators are affine: they
 are the basic opens of the affine `V`, transported into the limit `W`. -/
 lemma isAffineOpen_basicOpen_sV (l : E.σ) :
-    IsAffineOpen (E.Wc.pt.basicOpen (E.sV (E.b l))) := by
-  rw [E.basicOpen_sV]
+    IsAffineOpen (E.Wc.pt.basicOpen (E.resV (E.b l))) := by
+  rw [E.basicOpen_resV]
   exact (E.hV.basicOpen (E.b l)).preimage_of_isOpenImmersion _
     (by
       rw [E.opensRange_WUι_comp_Uι]
-      exact E.basicOpen_b_le l)
+      exact E.basicOpen_b_le_inf l)
 
 /-- Below any index, there is a pre-stage: lifts of the generators whose
 basic opens are affine and cover. The covering condition descends from the limit by
@@ -858,12 +861,12 @@ lemma exists_preStage_hom (j₀ : Over E.i₀) :
   have hU : E.Wc.π.app j₁ ⁻¹ᵁ (⨆ l, (E.WD.obj j₁).basicOpen (r l)) = ⊤ := by
     rw [Scheme.Hom.preimage_iSup]
     simp_rw [Scheme.preimage_basicOpen_top]
-    have h (l : E.σ) : (E.Wc.π.app j₁).appTop (r l) = E.sV (E.b l) := hr l
+    have h (l : E.σ) : (E.Wc.π.app j₁).appTop (r l) = E.resV (E.b l) := hr l
     simp_rw [h]
     exact E.iSup_basicOpen_sV
   obtain ⟨j₂, k₂, hk₂⟩ := exists_map_eq_top E.WD E.Wc E.isLimitWc _ hU
   set r₂ : E.σ → Γ(E.WD.obj j₂, ⊤) := fun l ↦ E.res k₂ (r l) with hr₂def
-  have hr₂ (l : E.σ) : E.t j₂ (r₂ l) = E.sV (E.b l) := by rw [hr₂def, E.t_res, hr]
+  have hr₂ (l : E.σ) : E.resLimit j₂ (r₂ l) = E.resV (E.b l) := by rw [hr₂def, E.resLimit_res, hr]
   have hcov₂ : ⨆ l, (E.WD.obj j₂).basicOpen (r₂ l) = ⊤ := by
     simp_rw [hr₂def, basicOpen_res, ← Scheme.Hom.preimage_iSup, hk₂]
   -- Step 2: affineness of the basic opens, by descending the affine limit basic open
@@ -878,7 +881,7 @@ lemma exists_preStage_hom (j₀ : Over E.i₀) :
         E.Wc.π.app j' ⁻¹ᵁ (E.WD.map ki ⁻¹ᵁ O) := by
       rw [Scheme.preimage_basicOpen_top, ← Scheme.Hom.comp_preimage, E.Wc.w ki, hOeq]
       congr 1
-      exact (E.t_res (kj ≫ k) (r₂ l)).trans (hr₂ l)
+      exact (E.resLimit_res (kj ≫ k) (r₂ l)).trans (hr₂ l)
     obtain ⟨j'', k'', heq⟩ := exists_map_preimage_eq_map_preimage E.WD E.Wc E.isLimitWc
       (TopologicalSpace.NoetherianSpace.isCompact _)
       (TopologicalSpace.NoetherianSpace.isCompact _) hpre
@@ -904,13 +907,13 @@ lemma exists_preStage_hom (j₀ : Over E.i₀) :
     hex
   have hcov₃ : ⨆ l, (E.WD.obj j₃).basicOpen (E.res k₃ (r₂ l)) = ⊤ := by
     simp_rw [basicOpen_res, ← Scheme.Hom.preimage_iSup, hcov₂, Scheme.Hom.preimage_top]
-  exact ⟨⟨j₃, fun l ↦ E.res k₃ (r₂ l), fun l ↦ by rw [E.t_res, hr₂], hcov₃, h₃⟩,
+  exact ⟨⟨j₃, fun l ↦ E.res k₃ (r₂ l), fun l ↦ by rw [E.resLimit_res, hr₂], hcov₃, h₃⟩,
     ⟨(k₃ ≫ k₂) ≫ k₁⟩⟩
 
 /-- Equalize two families of sections with equal limit restrictions at a
 common finer index. -/
 lemma exists_hom_res_eq {j₂ : Over E.i₀} (x y : E.σ → Γ(E.WD.obj j₂, ⊤))
-    (h : ∀ l, E.t j₂ (x l) = E.t j₂ (y l)) :
+    (h : ∀ l, E.resLimit j₂ (x l) = E.resLimit j₂ (y l)) :
     ∃ (j : Over E.i₀) (k : j ⟶ j₂), ∀ l, E.res k (x l) = E.res k (y l) := by
   apply exists_hom_forall (fun j k l ↦ E.res k (x l) = E.res k (y l))
   · intro j j' k' k l hl
@@ -920,7 +923,8 @@ lemma exists_hom_res_eq {j₂ : Over E.i₀} (x y : E.σ → Γ(E.WD.obj j₂, �
     have hcpt : IsCompact ((⊤ : (E.WD.obj j).Opens) : Set (E.WD.obj j)) := isCompact_univ
     obtain ⟨j', k', hk'⟩ := exists_app_map_eq_map_of_isLimit E.WD E.Wc E.isLimitWc hcpt
       (E.res k (x l)) (E.res k (y l))
-      (show E.t j (E.res k (x l)) = E.t j (E.res k (y l)) by rw [E.t_res, E.t_res, h])
+      (show E.resLimit j (E.res k (x l)) = E.resLimit j (E.res k (y l)) by
+        rw [E.resLimit_res, E.resLimit_res, h])
     refine ⟨j', k', ?_⟩
     exact (E.res_res k k' _).symm.trans (hk'.trans (E.res_res k k' _))
 
@@ -932,7 +936,7 @@ instance : IsCofilteredOrEmpty E.Stage where
   cone_objs T₁ T₂ := by
     obtain ⟨j', k₁, k₂, -⟩ := IsCofilteredOrEmpty.cone_objs T₁.j T₂.j
     obtain ⟨j, k, hk⟩ := E.exists_hom_res_eq (fun l ↦ E.res k₁ (T₁.r l))
-      (fun l ↦ E.res k₂ (T₂.r l)) (fun l ↦ by rw [E.t_res, E.t_res, T₁.hr, T₂.hr])
+      (fun l ↦ E.res k₂ (T₂.r l)) (fun l ↦ by rw [E.resLimit_res, E.resLimit_res, T₁.hr, T₂.hr])
     have hmap : T₂.A.map (resAlgHom (k ≫ k₂)) ≤ E.fiberProduct j := by
       rintro p ⟨q, hq, rfl⟩
       exact resAlgHom_mem_fiberProduct _ (T₂.A_le_fiberProduct hq)
