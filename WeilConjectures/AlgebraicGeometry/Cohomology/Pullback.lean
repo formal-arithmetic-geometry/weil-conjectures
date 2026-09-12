@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
 
@@ -41,6 +42,10 @@ is assembled from three ingredients:
   `f^{-1}(G^♭) ⟶ (f^* G)^♭`.
 * `AlgebraicGeometry.Scheme.Modules.H.pullbackMap` — the pullback map
   `H^n(Y, G) ⟶ H^n(X, f^* G)`, semilinear over `f.appTop`.
+* `AlgebraicGeometry.Scheme.Modules.H.pullbackMapOver` — the same map for a morphism of
+  schemes over `Spec R`, where it is `R`-linear, and
+  `AlgebraicGeometry.Scheme.Modules.H.structurePullbackMapOver`, its composite with the
+  identification `f^* 𝒪_Y ≅ 𝒪_X`.
 
 ## TODO
 
@@ -200,6 +205,48 @@ noncomputable def H.pullbackMap (G : Y.Modules) (n : ℕ) :
 lemma H.pullbackMap_apply (G : Y.Modules) (n : ℕ) (e : G.H n) :
     H.pullbackMap f G n e = H.pullbackAddHom f G n e :=
   rfl
+
+/-! ### The pullback map for schemes over a base ring -/
+
+section OverBase
+
+variable (R : Type u) [CommRing R] [X.Over (Spec (.of R))] [Y.Over (Spec (.of R))]
+  [f.IsOver (Spec (.of R))]
+
+/-- The pullback map on cohomology is `R`-linear for a morphism of schemes over `Spec R`. -/
+lemma H.pullbackAddHom_smul_over (G : Y.Modules) (n : ℕ) (r : R) (e : G.H n) :
+    H.pullbackAddHom f G n (r • e) = r • H.pullbackAddHom f G n e := by
+  rw [H.smul_over_def R Y, H.pullbackAddHom_smul, Scheme.appTop_overRingHom R f,
+    ← H.smul_over_def R X]
+
+/-- The pullback map `H^n(Y, G) ⟶ H^n(X, f^* G)` on the cohomology of a sheaf of modules, as an
+`R`-linear map for a morphism `f : X ⟶ Y` of schemes over `Spec R`. -/
+noncomputable def H.pullbackMapOver (G : Y.Modules) (n : ℕ) :
+    G.H n →ₗ[R] ((pullback f).obj G).H n where
+  toFun := H.pullbackAddHom f G n
+  map_add' := (H.pullbackAddHom f G n).map_add
+  map_smul' := H.pullbackAddHom_smul_over f R G n
+
+@[simp]
+lemma H.pullbackMapOver_apply (G : Y.Modules) (n : ℕ) (e : G.H n) :
+    H.pullbackMapOver f R G n e = H.pullbackAddHom f G n e :=
+  rfl
+
+/-- **The pullback map `H^n(Y, 𝒪_Y) ⟶ H^n(X, 𝒪_X)` on the cohomology of the structure
+sheaves** attached to a morphism `f : X ⟶ Y` of schemes over `Spec R`, as an `R`-linear map:
+the pullback map `AlgebraicGeometry.Scheme.Modules.H.pullbackMapOver` followed by the
+identification `f^* 𝒪_Y ≅ 𝒪_X` of
+`AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`. -/
+noncomputable def H.structurePullbackMapOver (n : ℕ) :
+    Y.structureModules.H n →ₗ[R] X.structureModules.H n :=
+  (H.mapOver R (pullbackUnitIso f).hom n).comp (H.pullbackMapOver f R Y.structureModules n)
+
+lemma H.structurePullbackMapOver_apply (n : ℕ) (e : Y.structureModules.H n) :
+    H.structurePullbackMapOver f R n e = H.mapAddHom (pullbackUnitIso f).hom n
+      (H.pullbackAddHom f Y.structureModules n e) :=
+  rfl
+
+end OverBase
 
 end Scheme.Modules
 

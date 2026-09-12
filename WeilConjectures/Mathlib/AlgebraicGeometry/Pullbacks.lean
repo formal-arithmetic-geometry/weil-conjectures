@@ -283,4 +283,40 @@ theorem isPushout_app_of_isCompact (φ : R ⟶ R') (f : X ⟶ Spec R) [IsSeparat
   obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp ha
   exact i.2
 
+section Over
+
+variable (S T U : Scheme.{u}) [T.Over S] [U.Over S]
+
+/-- **The fibre product of two `S`-schemes is an `S`-scheme**: the structure morphism is the
+first projection followed by the structure morphism of the first factor.
+
+Mathlib records the fibre product `pullback (T ↘ S) f` as a scheme over the *target* of `f`
+(`AlgebraicGeometry.Scheme.canonicallyOverPullback`, through the second projection), but not
+over the base `S`.
+
+This is deliberately not a global instance: when `U = S` and `U ↘ S = 𝟙 S`, the fibre product
+already carries an `Over S` structure through `canonicallyOverPullback`, namely the second
+projection, and the two agree only up to `pullback.condition`. Write
+`open AlgebraicGeometry.OverPullback` to switch it on. -/
+@[instance_reducible]
+noncomputable def Scheme.overPullback : (pullback (T ↘ S) (U ↘ S)).Over S :=
+  ⟨pullback.fst _ _ ≫ T ↘ S⟩
+
+namespace OverPullback
+
+attribute [scoped instance] Scheme.overPullback
+
+@[simp]
+lemma overPullback_over : pullback (T ↘ S) (U ↘ S) ↘ S = pullback.fst _ _ ≫ T ↘ S :=
+  rfl
+
+scoped instance : (pullback.fst (T ↘ S) (U ↘ S)).IsOver S := ⟨rfl⟩
+
+scoped instance : (pullback.snd (T ↘ S) (U ↘ S)).IsOver S :=
+  ⟨(pullback.condition (f := T ↘ S) (g := U ↘ S)).symm⟩
+
+end OverPullback
+
+end Over
+
 end AlgebraicGeometry

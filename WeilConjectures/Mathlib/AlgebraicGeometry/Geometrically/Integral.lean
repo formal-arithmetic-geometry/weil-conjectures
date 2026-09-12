@@ -220,6 +220,48 @@ instance [IsSeparated πX] (x₀ : Spec (.of K) ⟶ X) (hx₀ : x₀ ≫ πX = �
 
 end Product
 
+section SliceInclusionOver
+
+open OverPullback
+
+variable {K : Type u} [Field K] [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))]
+
+/-- **The slice inclusion `j_{y₀} : X ⟶ X × Y` is a morphism of `K`-schemes**, for the
+structure morphism of `X × Y` given by `AlgebraicGeometry.Scheme.overPullback`:
+
+```
+  X ─────j_{y₀}─────▶ X ×_K Y
+    ╲                ╱
+      ╲            ╱  pr₁ ≫ (X ↘ Spec K)
+        ▼        ▼
+          Spec K
+```
+-/
+instance isOver_sliceInclusionFst (y₀ : Spec (.of K) ⟶ Y)
+    (hy₀ : y₀ ≫ Y ↘ Spec (.of K) = 𝟙 _) :
+    (sliceInclusionFst (X ↘ Spec (.of K)) (Y ↘ Spec (.of K)) y₀ hy₀).IsOver (Spec (.of K)) :=
+  ⟨by rw [overPullback_over, ← Category.assoc, sliceInclusionFst_fst, Category.id_comp]⟩
+
+/-- **The slice inclusion `j_{x₀} : Y ⟶ X × Y` is a morphism of `K`-schemes**, for the
+structure morphism of `X × Y` given by `AlgebraicGeometry.Scheme.overPullback`:
+
+```
+  Y ─────j_{x₀}─────▶ X ×_K Y
+    ╲                ╱
+      ╲            ╱  pr₂ ≫ (Y ↘ Spec K)
+        ▼        ▼
+          Spec K
+```
+-/
+instance isOver_sliceInclusionSnd (x₀ : Spec (.of K) ⟶ X)
+    (hx₀ : x₀ ≫ X ↘ Spec (.of K) = 𝟙 _) :
+    (sliceInclusionSnd (X ↘ Spec (.of K)) (Y ↘ Spec (.of K)) x₀ hx₀).IsOver (Spec (.of K)) :=
+  ⟨by
+    rw [overPullback_over, pullback.condition, ← Category.assoc, sliceInclusionSnd_snd,
+      Category.id_comp]⟩
+
+end SliceInclusionOver
+
 section Projection
 
 variable {T : Scheme.{u}} {K : Type u} [Field K] (πX : X ⟶ Spec (.of K)) (t : T ⟶ Spec (.of K))

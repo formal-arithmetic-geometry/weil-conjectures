@@ -28,7 +28,7 @@ is simply the dimension of the space of global sections.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.eulerChar` — the Euler characteristic `χ(X, F)`.
-- `AlgebraicGeometry.Scheme.Modules.H.mapOver` and
+- `AlgebraicGeometry.Scheme.Modules.H.mapLinearEquivOver` and
   `AlgebraicGeometry.Scheme.Modules.H.δOver` — the maps of the long exact cohomology sequence,
   as `k`-linear maps rather than `Γ(X, 𝒪_X)`-linear ones.
 
@@ -200,18 +200,6 @@ theorem H.exists_forall_subsingleton [IsProper (X ↘ Spec (.of k))] :
 end Proper
 
 /-! ### The maps of the long exact sequence as `k`-linear maps -/
-
-/-- Functoriality of `H^n(X, -)` as a `k`-linear map, for `X` a scheme over `Spec k`. The
-`Γ(X, 𝒪_X)`-linear version is `AlgebraicGeometry.Scheme.Modules.H.map`. -/
-noncomputable def H.mapOver (φ : M ⟶ N) (n : ℕ) : M.H n →ₗ[k] N.H n where
-  toFun x := H.map φ n x
-  map_add' x y := LinearMap.map_add _ x y
-  map_smul' r x := by
-    rw [RingHom.id_apply, H.smul_over_def k X, H.smul_over_def k X, LinearMap.map_smul]
-
-@[simp]
-lemma H.mapOver_apply (φ : M ⟶ N) (n : ℕ) (x : M.H n) : H.mapOver k φ n x = H.map φ n x :=
-  rfl
 
 @[simp]
 lemma H.mapOver_id (M : X.Modules) (n : ℕ) :

@@ -33,7 +33,8 @@ section `r` of the structure sheaf multiplies `M` by `r`, which is an endomorphi
 - `AlgebraicGeometry.Scheme.Modules.H` — the cohomology `H^n(X, M)` of a sheaf of modules,
   a module over `Γ(X, 𝒪_X)`.
 - `AlgebraicGeometry.Scheme.Modules.H.map` — functoriality of `H^n(X, -)`, as a
-  `Γ(X, 𝒪_X)`-linear map.
+  `Γ(X, 𝒪_X)`-linear map, and `AlgebraicGeometry.Scheme.Modules.H.mapOver`, its `R`-linear
+  refinement for a scheme over `Spec R`.
 
 ## Main results
 
@@ -325,6 +326,28 @@ noncomputable instance (M : X.Modules) (n : ℕ) : Module R (M.H n) :=
 
 lemma H.smul_over_def {M : X.Modules} {n : ℕ} (r : R) (x : M.H n) :
     r • x = Scheme.overRingHom R X r • x :=
+  rfl
+
+variable {X} in
+/-- The map induced on cohomology by a morphism of sheaves of modules is `R`-linear for the
+module structure coming from the base ring. -/
+lemma H.mapAddHom_smul_over {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (r : R) (x : M.H n) :
+    H.mapAddHom φ n (r • x) = r • H.mapAddHom φ n x := by
+  rw [H.smul_over_def R X, H.smul_over_def R X, ← H.map_apply, LinearMap.map_smul,
+    H.map_apply]
+
+variable {X} in
+/-- Functoriality of `H^n(X, -)` as an `R`-linear map, for `X` a scheme over `Spec R`. The
+`Γ(X, 𝒪_X)`-linear version is `AlgebraicGeometry.Scheme.Modules.H.map`. -/
+noncomputable def H.mapOver {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) : M.H n →ₗ[R] N.H n where
+  toFun x := H.map φ n x
+  map_add' := (H.mapAddHom φ n).map_add
+  map_smul' := H.mapAddHom_smul_over R φ n
+
+variable {X} in
+@[simp]
+lemma H.mapOver_apply {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
+    H.mapOver R φ n x = H.map φ n x :=
   rfl
 
 end OverBase
