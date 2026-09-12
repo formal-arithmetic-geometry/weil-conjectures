@@ -18,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
@@ -154,6 +155,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Genera
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
@@ -285,6 +287,7 @@ public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
+public import WeilConjectures.Mathlib.Topology.Sheaves.PUnit
 public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.CohenMacaulay.Basic
