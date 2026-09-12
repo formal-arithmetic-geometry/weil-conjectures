@@ -252,12 +252,12 @@ noncomputable def smulRestrictHom (m : Γ(M, W)) :
           exact (map_smulSection m _ _ _ r).symm }
       (fun U' r z ↦ smulSection_smul m _ (W.ι_image_le _) ((W.ι.appIso U'.unop).inv r) z)
 
+set_option maxHeartbeats 2000000 in
 -- Elaborating the naturality of the pairing means checking it against the restriction maps of
 -- `M|_W` and `𝒪_X|_W`, which unfolds the pushforward along `W.ι` that computes them. Neither
 -- making `tensorPairing` irreducible nor abstracting the family of pairings away removes this
 -- cost; it would take building `pairRestrictHom` from the monoidal structure on restriction
 -- instead of sectionwise.
-set_option maxHeartbeats 2000000 in
 /-- Pairing with a section `n` of `N` over `W`, as a morphism `M|_W ⟶ 𝒪_X|_W`. -/
 noncomputable def pairRestrictHom (n : Γ(N, W)) :
     restrict M W.ι ⟶ restrict (SheafOfModules.unit X.ringCatSheaf) W.ι :=
