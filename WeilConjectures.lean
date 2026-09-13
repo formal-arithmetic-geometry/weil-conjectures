@@ -29,6 +29,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafInvertible
 public import WeilConjectures.AnalyticAux

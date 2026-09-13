@@ -69,7 +69,9 @@ Proved rather than assumed are the two squares of the ladder that do not involve
 connecting maps, `AlgebraicGeometry.Scheme.IdealSheafData.unitsMap_subschemeι_naturality` and
 `pic_map_subschemeι_naturality`, and the consequence that the chapter actually consumes,
 `AlgebraicGeometry.Scheme.IdealSheafData.injective_pic_map_subschemeι_of_subsingleton`: if
-`H¹(W, I)` vanishes, a line bundle on `W` trivial on `W₀` is trivial.
+`H¹(W, I)` vanishes, a line bundle on `W` trivial on `W₀` is trivial. Also proved is
+`AlgebraicGeometry.Scheme.IdealSheafData.injective_h1ToPic`: if every unit on `W₀` extends to
+`W`, then a deformation class is determined by the line bundle it glues.
 
 ## Implementation notes
 
@@ -107,10 +109,9 @@ connecting maps, `AlgebraicGeometry.Scheme.IdealSheafData.unitsMap_subschemeι_n
   together with the comparison morphism `φ : g^* I ⟶ I'` of `𝒪_{W'}`-modules. The hypothesis
   `hφ` says that `φ` is compatible with the two inclusions into the structure sheaves; it is
   the precise form of "the right vertical map pulls `I` back onto `I'`", and it determines `φ`
-  uniquely, since `I' ⟶ 𝒪_{W'}` is a monomorphism. Constructing `φ` from `hg` — rather than
-  taking it as a parameter — is left for later: it amounts to factoring
-  `g^* I ⟶ g^* 𝒪_W ≅ 𝒪_{W'}` through the kernel `I'`, which is a statement about a morphism
-  out of a pullback and has to be checked through the adjunction `g^* ⊣ g_*`.
+  uniquely, since `I' ⟶ 𝒪_{W'}` is a monomorphism. Such a `φ` is constructed from `hg` by
+  `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap`, and `comapModulesMap_toModulesι`
+  is the hypothesis `hφ` for it.
 -/
 
 @[expose] public section
@@ -252,5 +253,25 @@ include hφ in
 theorem h1ToPic_naturality :
     (Pic.map g).comp (I.h1ToPic hI) = (I'.h1ToPic hI').comp (h1Map I I' g φ) :=
   sorry
+
+/-! ### Injectivity of the map to the Picard group -/
+
+section Injective
+
+/-- **If every unit on the closed subscheme extends to the thickening, a deformation class is
+determined by the line bundle it glues**: the map `H¹(W, I) ⟶ Pic W` of the five-term
+sequence of a square-zero thickening is injective as soon as
+`Γ(W, 𝒪)ˣ ⟶ Γ(W₀, 𝒪)ˣ` is surjective. -/
+lemma injective_h1ToPic (hI : I ^ 2 = 0)
+    (hsurj : Function.Surjective (Hom.unitsMap I.subschemeι)) :
+    Function.Injective (I.h1ToPic hI) := by
+  rw [← MonoidHom.ker_eq_bot_iff, ← range_unitsToH1_eq_ker I hI, Subgroup.eq_bot_iff_forall]
+  rintro x ⟨y, rfl⟩
+  have hy : y ∈ (I.unitsToH1 hI).ker := by
+    rw [← range_unitsMap_subschemeι_eq_ker I hI]
+    exact MonoidHom.mem_range.mpr (hsurj y)
+  exact hy
+
+end Injective
 
 end AlgebraicGeometry.Scheme.IdealSheafData

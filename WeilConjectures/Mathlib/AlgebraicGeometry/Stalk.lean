@@ -9,7 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Stalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
@@ -47,6 +49,9 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
   noetherian scheme, `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is a finite-dimensional `k`-algebra.
 - `AlgebraicGeometry.Scheme.preimage_infinitesimalBaseChangeFst_eq_top`: every point of
   `W ×_T Tₙ` lies over `t`, so `W ×_T Tₙ` lies over every open neighbourhood of `t`.
+- `AlgebraicGeometry.Scheme.sq_thickeningIdeal`: the closed immersion
+  `W ×_T Tₙ ↪ W ×_T T_{n+1}` is a square-zero thickening, cut out by
+  `AlgebraicGeometry.Scheme.thickeningIdeal`.
 -/
 
 @[expose] public section
@@ -482,5 +487,103 @@ lemma toInfinitesimalBaseChangeΓ_eq_zero (n : ℕ) {r : T.presheaf.stalk t}
   rw [toInfinitesimalBaseChangeΓ, CommRingCat.comp_apply, h0, map_zero]
 
 end InfinitesimalBaseChange
+
+section Thickening
+
+open Limits
+
+/-! ### The square-zero thickenings of an infinitesimal base change -/
+
+variable {W T : Scheme.{u}} (f : W ⟶ T) (t : T)
+
+/-- **The transition squares of the infinitesimal base change are cartesian**: `W ×_T Tₘ` is
+the base change of `Tₘ ⟶ Tₙ` along `W ×_T Tₙ ⟶ Tₙ`. -/
+lemma isPullback_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n) :
+    IsPullback (infinitesimalBaseChangeMap f t h) (infinitesimalBaseChangeSnd f t m)
+      (infinitesimalBaseChangeSnd f t n) (T.infinitesimalNeighborhoodMap t h) := by
+  refine IsPullback.of_right ?_ (infinitesimalBaseChangeMap_snd f t h)
+    (IsPullback.of_hasPullback f (T.fromInfinitesimalNeighborhood t n))
+  rw [infinitesimalBaseChangeMap_fst,
+    T.infinitesimalNeighborhoodMap_fromInfinitesimalNeighborhood t h]
+  exact IsPullback.of_hasPullback f (T.fromInfinitesimalNeighborhood t m)
+
+instance {m n : ℕ} (h : m ≤ n) : IsClosedImmersion (infinitesimalBaseChangeMap f t h) :=
+  MorphismProperty.of_isPullback (isPullback_infinitesimalBaseChangeMap f t h).flip
+    inferInstance
+
+/-- The kernel ideal sheaf of `W ×_T Tₘ ↪ W ×_T Tₙ` is the pullback of the kernel ideal sheaf
+of `Tₘ ↪ Tₙ`. -/
+lemma ker_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n) :
+    (infinitesimalBaseChangeMap f t h).ker =
+      (T.infinitesimalNeighborhoodMap t h).ker.comap (infinitesimalBaseChangeSnd f t n) := by
+  have H := isPullback_infinitesimalBaseChangeMap f t h
+  rw [← H.isoPullback_hom_fst, Hom.ker_comp_of_isIso,
+    IdealSheafData.ker_fst_of_isClosedImmersion]
+
+/-- **The thickening ideal**: the kernel ideal sheaf of the closed immersion
+`W ×_T Tₙ ↪ W ×_T T_{n+1}`. It is square zero
+(`AlgebraicGeometry.Scheme.sq_thickeningIdeal`). -/
+noncomputable def thickeningIdeal (n : ℕ) :
+    (infinitesimalBaseChange f t (n + 1)).IdealSheafData :=
+  (infinitesimalBaseChangeMap f t (Nat.le_succ n)).ker
+
+/-- **The thickening `W ×_T Tₙ ↪ W ×_T T_{n+1}` is square zero.** -/
+lemma sq_thickeningIdeal (n : ℕ) : thickeningIdeal f t n ^ 2 = 0 := by
+  rw [thickeningIdeal, ker_infinitesimalBaseChangeMap]
+  refine IdealSheafData.pow_comap_eq_zero_of_isAffine ?_ _
+  exact IdealSheafData.pow_ker_spec_map_eq_zero _ (T.sq_ker_infinitesimalRingMap t n)
+
+/-- The closed subscheme cut out by the thickening ideal is `W ×_T Tₙ`. -/
+noncomputable def thickeningIso (n : ℕ) :
+    infinitesimalBaseChange f t n ≅ (thickeningIdeal f t n).subscheme :=
+  asIso (infinitesimalBaseChangeMap f t (Nat.le_succ n)).toImage
+
+@[reassoc (attr := simp)]
+lemma thickeningIso_hom_subschemeι (n : ℕ) :
+    (thickeningIso f t n).hom ≫ (thickeningIdeal f t n).subschemeι =
+      infinitesimalBaseChangeMap f t (Nat.le_succ n) :=
+  (infinitesimalBaseChangeMap f t (Nat.le_succ n)).toImage_imageι
+
+/-! ### Base change of a morphism over `T` to the infinitesimal neighbourhoods -/
+
+variable {Z V V' : Scheme.{u}} (p : V ⟶ Z) (p' : V' ⟶ Z) (u : V' ⟶ V) (hu : u ≫ p = p') (t : Z)
+
+/-- The base change `V' ×_Z Zₙ ⟶ V ×_Z Zₙ` of a morphism `u : V' ⟶ V` over `Z`. -/
+noncomputable def infinitesimalBaseChangeMapOver (n : ℕ) :
+    infinitesimalBaseChange p' t n ⟶ infinitesimalBaseChange p t n :=
+  pullback.map p' (Z.fromInfinitesimalNeighborhood t n) p (Z.fromInfinitesimalNeighborhood t n)
+    u (𝟙 _) (𝟙 _) (by simp [hu]) (by simp)
+
+@[reassoc (attr := simp)]
+lemma infinitesimalBaseChangeMapOver_fst (n : ℕ) :
+    infinitesimalBaseChangeMapOver p p' u hu t n ≫ infinitesimalBaseChangeFst p t n =
+      infinitesimalBaseChangeFst p' t n ≫ u := by
+  simp [infinitesimalBaseChangeMapOver]
+
+@[reassoc (attr := simp)]
+lemma infinitesimalBaseChangeMapOver_snd (n : ℕ) :
+    infinitesimalBaseChangeMapOver p p' u hu t n ≫ infinitesimalBaseChangeSnd p t n =
+      infinitesimalBaseChangeSnd p' t n := by
+  simp [infinitesimalBaseChangeMapOver]
+
+/-- The base change of `u` commutes with the transition morphisms of the infinitesimal
+neighbourhoods. -/
+@[reassoc (attr := simp)]
+lemma infinitesimalBaseChangeMap_comp_mapOver {m n : ℕ} (h : m ≤ n) :
+    infinitesimalBaseChangeMap p' t h ≫ infinitesimalBaseChangeMapOver p p' u hu t n =
+      infinitesimalBaseChangeMapOver p p' u hu t m ≫ infinitesimalBaseChangeMap p t h := by
+  apply pullback.hom_ext <;> simp [infinitesimalBaseChangeMapOver_snd_assoc]
+
+/-- The base change of `u` pulls the thickening ideal of `V` into the thickening ideal of
+`V'`. -/
+lemma comap_thickeningIdeal_le (n : ℕ) :
+    (thickeningIdeal p t n).comap (infinitesimalBaseChangeMapOver p p' u hu t (n + 1)) ≤
+      thickeningIdeal p' t n := by
+  refine IdealSheafData.le_map_iff_comap_le.mp ?_
+  rw [IdealSheafData.map, ← Hom.ker_comp_of_isIso (thickeningIso p' t n).hom,
+    ← Category.assoc, thickeningIso_hom_subschemeι, infinitesimalBaseChangeMap_comp_mapOver]
+  exact Hom.le_ker_comp _ _
+
+end Thickening
 
 end AlgebraicGeometry.Scheme

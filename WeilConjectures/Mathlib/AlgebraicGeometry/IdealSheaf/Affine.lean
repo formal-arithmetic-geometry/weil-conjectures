@@ -27,6 +27,11 @@ and on an affine scheme ideal sheaves are order-isomorphic to ideals of the glob
 - `AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_map_of_isAffine`
 - `AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_comap_of_isAffine`
 - `AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_appLE`
+
+A last group records that a vanishing power of an ideal sheaf on an affine scheme is
+inherited by its pullback along an arbitrary morphism
+(`AlgebraicGeometry.Scheme.IdealSheafData.pow_comap_eq_zero_of_isAffine`); this is how a
+square-zero thickening of an affine scheme stays square zero after base change.
 -/
 
 @[expose] public section
@@ -95,6 +100,51 @@ lemma ideal_comap_appLE {Z : Scheme.{u}} (J : X.IdealSheafData) (f : Z ⟶ X)
   congr 1
   simp only [Scheme.Hom.appTop, Scheme.Hom.resLE_app_top, Category.assoc,
     Iso.inv_hom_id, Category.comp_id]
+
+/-! ### Powers of an ideal sheaf -/
+
+/-- Over an affine scheme, an ideal sheaf has vanishing `n`-th power as soon as the ideal of
+global sections does. -/
+lemma pow_eq_zero_of_isAffine [IsAffine X] {I : X.IdealSheafData} {n : ℕ}
+    (h : I.ideal ⟨⊤, isAffineOpen_top X⟩ ^ n = ⊥) : I ^ n = 0 :=
+  ext_of_isAffine (by rw [show (I ^ n).ideal ⟨⊤, isAffineOpen_top X⟩ =
+    I.ideal ⟨⊤, isAffineOpen_top X⟩ ^ n from rfl, h]; rfl)
+
+/-- **A power of an ideal sheaf on an affine scheme stays zero after pullback.** If `J` is an
+ideal sheaf on an affine scheme `Y` with `J ^ n = 0`, then `(J.comap f) ^ n = 0` for every
+morphism `f : X ⟶ Y`. -/
+lemma pow_comap_eq_zero_of_isAffine [IsAffine Y] {J : Y.IdealSheafData} {n : ℕ}
+    (hJ : J ^ n = 0) (f : X ⟶ Y) : J.comap f ^ n = 0 := by
+  refine IdealSheafData.ext (funext fun U ↦ ?_)
+  have h : (J.comap f).ideal U =
+      (J.ideal ⟨⊤, isAffineOpen_top Y⟩).map (f.appLE ⊤ U.1 le_top).hom :=
+    ideal_comap_appLE J f ⟨⊤, isAffineOpen_top Y⟩ U le_top
+  have hJ' : J.ideal ⟨⊤, isAffineOpen_top Y⟩ ^ n = ⊥ := by
+    rw [show J.ideal ⟨⊤, isAffineOpen_top Y⟩ ^ n = (J ^ n).ideal ⟨⊤, isAffineOpen_top Y⟩ from rfl,
+      hJ]; rfl
+  rw [show (J.comap f ^ n).ideal U = (J.comap f).ideal U ^ n from rfl, h, ← Ideal.map_pow, hJ']
+  simp
+
+/-- If the kernel of a ring homomorphism `φ` has vanishing `n`-th power, so does the kernel
+ideal sheaf of `Spec φ`. -/
+lemma pow_ker_spec_map_eq_zero {R S : CommRingCat.{u}} {n : ℕ} (φ : R ⟶ S)
+    (hφ : RingHom.ker φ.hom ^ n = ⊥) :
+    (Spec.map φ).ker ^ n = 0 := by
+  refine IdealSheafData.pow_eq_zero_of_isAffine ?_
+  have hinj : Function.Injective (ΓSpecIso S).inv.hom :=
+    ((ConcreteCategory.isIso_iff_bijective (ΓSpecIso S).inv).mp inferInstance).injective
+  have he : (Spec.map φ).appTop = (ΓSpecIso R).hom ≫ φ ≫ (ΓSpecIso S).inv := by
+    rw [ΓSpecIso_inv_naturality, Iso.hom_inv_id_assoc]
+  have hk : RingHom.ker (Spec.map φ).appTop.hom =
+      (RingHom.ker φ.hom).comap (ΓSpecIso R).hom.hom := by
+    ext x
+    simp only [he, CommRingCat.hom_comp, RingHom.mem_ker, RingHom.coe_comp, Function.comp_apply,
+      Ideal.mem_comap]
+    exact ⟨fun hx ↦ hinj (by simpa using hx), fun hx ↦ by simp [hx]⟩
+  rw [Hom.ker_apply, show (Spec.map φ).app ⊤ = (Spec.map φ).appTop from rfl, hk]
+  refine le_bot_iff.mp ((Ideal.le_comap_pow _ n).trans ?_)
+  rw [hφ, ← RingHom.ker_eq_comap_bot]
+  exact le_of_eq (RingHom.ker_coe_equiv (ΓSpecIso R).commRingCatIsoToRingEquiv)
 
 end AlgebraicGeometry.Scheme.IdealSheafData
 
