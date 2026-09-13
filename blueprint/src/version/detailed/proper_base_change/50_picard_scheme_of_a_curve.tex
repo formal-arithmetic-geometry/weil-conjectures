@@ -4693,7 +4693,7 @@ twisting that identification by $\cM^{-1}$
 \uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-ext}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-morphism-hi,lem:pc-closed-immersion-affine,lem:pc-leray-spectral-sequence,def:pc-ext,lem:pc-koszul-resolution,lem:pc-conormal-sequence-smooth,lem:pc-smooth-immersion-regular,def:pc-dimension,lem:pc-det-short-exact-sequence,lem:pc-omega-line-bundle,lem:pc-projective-space-smooth}
+\uses{lem:pc-affine-morphism-hi,lem:pc-closed-immersion-affine,lem:pc-leray-spectral-sequence,lem:pc-local-global-ext,def:pc-ext,lem:pc-koszul-resolution,lem:pc-conormal-sequence-smooth,lem:pc-smooth-immersion-regular,def:pc-dimension,lem:pc-det-short-exact-sequence,lem:pc-omega-line-bundle,lem:pc-projective-space-smooth}
 Let $\cK:=\cI_X/\cI_X^2$ be the conormal sheaf of the immersion and
 $\cN:=\mathcal{H}om(\cK,\cO_X)$ the normal bundle.  Both $\mathbf P^N_k$
 and $X$ are smooth over $k$, with the relative dimensions we shall need:
@@ -4820,7 +4820,10 @@ morphism, \Cref{lem:pc-closed-immersion-affine}, so $R^qi_*\cG=0$ for
 $q>0$) and the Leray spectral sequence of $i$
 (\Cref{lem:pc-leray-spectral-sequence}), which therefore degenerates
 to $H^p(\mathbf P^N,i_*\cG)=H^p(X,\cG)$ for all $p$, together with the
-local-global Ext spectral sequence of $i_*\cM$ (whose $E_2$-page is
+local-to-global Ext spectral sequence, which is
+\Cref{lem:pc-local-global-ext} taken on the ringed space
+$\mathbf P^N$ with $F=i_*\cM$ and $G=\omega_{\mathbf P^N}$
+(whose $E_2$-page is
 concentrated in the row $q=r$ by the computation above):
 \[
 \operatorname{Ext}^{r}_{\mathbf P^N}\bigl(i_*\cM,\omega_{\mathbf P^N}\bigr)
@@ -4879,6 +4882,32 @@ sequence for the composition of the two pushforward functors.  It is not decompo
 % Mathlib/Algebra/Homology/SpectralSequence/ carries only Basic.lean and
 % ComplexShape.lean, which are the general machinery with no construction of a
 % spectral sequence for pushforward along a morphism of ringed spaces.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The local-to-global Ext spectral sequence]
+\label{lem:pc-local-global-ext}
+Let $(X,\cO_X)$ be a ringed space and let $F,G$ be $\cO_X$-modules.  Then there
+is a spectral sequence
+\[
+E_2^{p,q}=H^p\bigl(X,\;\mathcal{E}xt^{q}_{\cO_X}(F,G)\bigr)
+\qquad\text{converging to}\qquad
+\operatorname{Ext}^{p+q}_{\cO_X}(F,G),
+\]
+the sheaf $\mathcal{E}xt^{q}_{\cO_X}(F,G)$ and the group
+$\operatorname{Ext}^{p+q}_{\cO_X}(F,G)$ being the ones of
+\Cref{def:pc-ext}.
+\uses{def:pc-scheme,def:pc-ext}
+\end{lemma}
+\begin{proof}
+This is a cited external input: Cohomology of Sheaves, Section~20.43 (Ext
+sheaves) (\stacksproject{0BQP}).  That section states the spectral sequence for
+objects $K,L$ of $D(\cO_X)$, with abutment
+$\operatorname{Ext}^{p+q}_{D(\cO_X)}(K,L)$ --- which is the Ext group of
+\Cref{def:pc-ext} --- and records that it converges when $L$ is bounded below
+and $K$ is bounded above; the modules $F$ and $G$ above, read as complexes
+concentrated in degree $0$, meet both conditions.  It is not decomposed here.
 \end{proof}
 
 % Decomposed.
