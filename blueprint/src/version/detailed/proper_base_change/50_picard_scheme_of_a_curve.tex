@@ -4889,12 +4889,20 @@ H^1(X,\cM)^{\vee}\;\cong\;H^0\bigl(X,\;\Omega^1_{X/k}\otimes\cM^{-1}\bigr).
 \uses{def:pc-curve,def:pc-kahler-differentials,def:pc-invertible-module,def:pc-projective-morphism}
 \end{theorem}
 \begin{proof}
-\uses{def:pc-projective-morphism,lem:pc-affine-morphism-hi,lem:pc-closed-immersion-affine,lem:pc-leray-spectral-sequence,lem:pc-omega-identity,thm:pc-serre-duality-pn,def:pc-ext,def:pc-curve}
+\uses{def:pc-projective-morphism,def:pc-morphism-conventions,def:pc-dimension,lem:pc-affine-morphism-hi,lem:pc-closed-immersion-affine,lem:pc-leray-spectral-sequence,lem:pc-omega-identity,lem:pc-omega-top-projective-space,thm:pc-serre-duality-pn,def:pc-ext,def:pc-curve}
 By \Cref{def:pc-projective-morphism} there is a closed immersion
-$i:X\hookrightarrow\mathbf P^N_k$.  \emph{Case $N=1$:} then $X$ is a
+$i:X\hookrightarrow\mathbf P^N_k$.  Necessarily $N\ge1$.  Indeed
+$\mathbf P^0_k=\operatorname{Proj}(k[x_0])=\Spec(k)$ is affine
+(\Cref{lem:pc-omega-top-projective-space}, Step~2), so a closed
+immersion $X\hookrightarrow\mathbf P^0_k$ would exhibit $X$ as
+$\Spec(k/I)$ for an ideal $I\subseteq k$
+(\Cref{lem:pc-closed-immersion-affine}), whence $\dim X\le0$
+(\Cref{def:pc-dimension}), whereas $X$ is integral of dimension $1$
+(\Cref{def:pc-curve}).
+\emph{Case $N=1$:} then $X$ is a
 closed subscheme of dimension $1$ of $\mathbf P^1_k$, hence
-$i(X)=\mathbf P^1_k$ \emph{as sets}: $X$ is integral of dimension one
-(\Cref{def:pc-curve}), so $i(X)$ is an irreducible closed subset of
+$i(X)=\mathbf P^1_k$ \emph{as sets}: $X$ being integral of dimension
+one, $i(X)$ is an irreducible closed subset of
 dimension one inside the irreducible one-dimensional $\mathbf P^1_k$.  A
 \emph{surjective} closed immersion whose target is \emph{reduced} is an
 isomorphism --- it cuts its target out by a quasi-coherent ideal
@@ -4909,7 +4917,7 @@ isomorphism):
 \[
 H^1(X,\cM)^{\vee}\cong
 \operatorname{Ext}^0_{\mathbf P^1}\bigl(i_*\cM,\Omega^1_{\mathbf P^1/k}\bigr)
-=H^0\bigl(\mathbf P^1,\Omega^1_{\mathbf P^1/k}\otimes i_*\cM^{-1}\bigr)
+=H^0\bigl(\mathbf P^1,\Omega^1_{\mathbf P^1/k}\otimes i_*(\cM^{-1})\bigr)
 =H^0\bigl(X,\Omega^1_{X/k}\otimes\cM^{-1}\bigr).
 \]
 \emph{Case $N\ge2$:} set $r:=N-1$.  By
@@ -4922,14 +4930,12 @@ $\omega:=\Omega^N_{\mathbf P^N_k/k}$,
 \[
 H^1(X,\cM)^{\vee}
 \cong\operatorname{Ext}^{r}_{\mathbf P^N}\bigl(i_*\cM,\omega\bigr)
-=i_*\operatorname{Ext}^{0}_{X}\bigl(\cM,\Omega^1_{X/k}\bigr)
-=i_*\bigl(\Omega^1_{X/k}\otimes\cM^{-1}\bigr)
+=H^0\bigl(X,\;\Omega^1_{X/k}\otimes\cM^{-1}\bigr)
 \]
 (the first isomorphism is \Cref{thm:pc-serre-duality-pn} with
 $N-q=r$, i.e.\ $q=1$; the second is
-\Cref{lem:pc-omega-identity} (with the Ext notation of \Cref{def:pc-ext}); the last as $\cM$ is a line
-bundle, so $\mathcal{H}om(\cM,\omega)=\omega\otimes\cM^{-1}$).  Taking global
-sections gives the claim.
+\Cref{lem:pc-omega-identity}, with the Ext notation of
+\Cref{def:pc-ext}), which is the claim.
 \end{proof}
 
 % Decomposed.
