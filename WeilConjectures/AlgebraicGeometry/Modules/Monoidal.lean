@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Localization.Monoidal.Braided
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 
 /-!
@@ -27,6 +28,9 @@ presheaf tensor product.
   `SheafOfModules.symmetricCategory`: the symmetric monoidal structure on `SheafOfModules R'`,
   for which the sheafification functor `SheafOfModules.sheafification R` is monoidal and braided.
 - `SheafOfModules.tensorUnitIso`: the tensor unit is the free sheaf of modules of rank one.
+- `SheafOfModules.tensorIsoOfIsLocallyBijective`: a locally bijective morphism `P ⊗ Q ⟶ S` from
+  the sectionwise tensor product of two presheaves of modules identifies the tensor product of
+  the sheafifications of `P` and `Q` with the sheafification of `S`.
 - `AlgebraicGeometry.Scheme.Modules.monoidalCategory`,
   `AlgebraicGeometry.Scheme.Modules.braidedCategory` and
   `AlgebraicGeometry.Scheme.Modules.symmetricCategory`: the corresponding structures on the
@@ -56,6 +60,17 @@ noncomputable abbrev sheafification :
     PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat.{u}) ⥤
       SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) :=
   PresheafOfModules.sheafification (𝟙 _)
+
+/-- Sheafifying the underlying presheaf of modules of a sheaf of modules `F` gives `F` back.
+This is the counit of the sheafification adjunction,
+`PresheafOfModules.sheafificationCounitIso`, evaluated at `F`. -/
+noncomputable def sheafificationObjIso
+    (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)) :
+    (sheafification R).obj
+      ((SheafOfModules.forget
+        ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)).obj F) ≅ F :=
+  (PresheafOfModules.sheafificationCounitIso
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R).obj)).app F
 
 /-- The monoidal category structure on the category of sheaves of modules over a sheaf of
 commutative rings `R`, obtained by localizing the monoidal category structure on presheaves of
@@ -142,6 +157,55 @@ noncomputable def tensorUnitIso :
     𝟙_ (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)) ≅
       unit ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) :=
   asIso (unitHom R)
+
+variable {R}
+
+/-- **Recognising a tensor product of sheaves of modules.** Let `φ : P ⊗ Q ⟶ S` be a locally
+bijective morphism out of the sectionwise tensor product of two presheaves of modules, and let
+`eF`, `eG`, `eH` identify the sheafifications of `P`, `Q`, `S` with sheaves of modules `F`, `G`,
+`H`. Then `φ` identifies `F ⊗ G` with `H`:
+
+```text
+                   μ                  a φ
+  a P ⊗ a Q ──────────────→ a (P ⊗ Q) ─────→ a S
+      │                                       │
+      │ eF ⊗ eG                               │ eH
+      ↓                                       ↓
+    F ⊗ G ────────────────────────────────────→ H
+```
+
+Here `a` is the sheafification functor `SheafOfModules.sheafification R` and `μ` is its monoidal
+structure. -/
+noncomputable def tensorIsoOfIsLocallyBijective
+    {P Q S : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat.{u})}
+    {F G H : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
+    (eF : (sheafification R).obj P ≅ F) (eG : (sheafification R).obj Q ≅ G)
+    (eH : (sheafification R).obj S ≅ H) (φ : P ⊗ Q ⟶ S)
+    [Presheaf.IsLocallyInjective J ((PresheafOfModules.toPresheaf
+      (R.obj ⋙ forget₂ CommRingCat RingCat.{u})).map φ)]
+    [Presheaf.IsLocallySurjective J ((PresheafOfModules.toPresheaf
+      (R.obj ⋙ forget₂ CommRingCat RingCat.{u})).map φ)] :
+    F ⊗ G ≅ H :=
+  have : IsIso ((sheafification R).map φ) :=
+    PresheafOfModules.isIso_sheafification_map J _ φ (J.W_of_isLocallyBijective _)
+  tensorIso eF.symm eG.symm ≪≫ Functor.Monoidal.μIso (sheafification R) P Q ≪≫
+    asIso ((sheafification R).map φ) ≪≫ eH
+
+/-- `SheafOfModules.tensorIsoOfIsLocallyBijective` is the isomorphism induced by `φ`: this
+records the four steps of the diagram in its definition. -/
+theorem tensorIsoOfIsLocallyBijective_hom
+    {P Q S : PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat.{u})}
+    {F G H : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
+    (eF : (sheafification R).obj P ≅ F) (eG : (sheafification R).obj Q ≅ G)
+    (eH : (sheafification R).obj S ≅ H) (φ : P ⊗ Q ⟶ S)
+    [Presheaf.IsLocallyInjective J ((PresheafOfModules.toPresheaf
+      (R.obj ⋙ forget₂ CommRingCat RingCat.{u})).map φ)]
+    [Presheaf.IsLocallySurjective J ((PresheafOfModules.toPresheaf
+      (R.obj ⋙ forget₂ CommRingCat RingCat.{u})).map φ)] :
+    (tensorIsoOfIsLocallyBijective eF eG eH φ).hom =
+      (tensorIso eF.symm eG.symm).hom ≫ (Functor.Monoidal.μIso (sheafification R) P Q).hom ≫
+        (sheafification R).map φ ≫ eH.hom :=
+  rfl
 
 end SheafOfModules
 

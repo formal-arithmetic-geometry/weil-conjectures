@@ -245,11 +245,10 @@ example [IsProper πX] : IsProper (pullback.snd πX t) ∧ Flat (pullback.snd π
 `lem:cube-projection-proper-flat`(2). -/
 example [IsProper πX] : IsClosedMap (pullback.snd πX t) := (pullback.snd πX t).isClosedMap
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The fibre of `p_T : X × T ⟶ T` over `s : T` is proper over the residue field `κ(s)`; this is
 part of `lem:cube-projection-proper-flat`(3). -/
 example [IsProper πX] (s : T) : IsProper ((pullback.snd πX t).fiberToSpecResidueField s) :=
-  MorphismProperty.pullback_snd _ _ inferInstance
+  inferInstance
 
 /-- The fibre of `p_T : X × T ⟶ T` over `s : T` is geometrically integral over the residue field
 `κ(s)`, hence integral; this is the rest of `lem:cube-projection-proper-flat`(3). -/

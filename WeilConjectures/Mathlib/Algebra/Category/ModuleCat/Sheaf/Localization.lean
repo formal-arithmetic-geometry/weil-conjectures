@@ -39,6 +39,8 @@ that class.
   a fixed presheaf of modules gives a locally injective morphism.
 - `PresheafOfModules.inverseImage_W_toPresheaf_isMonoidal`: the class
   `J.W.inverseImage (toPresheaf (R ⋙ forget₂ _ _))` is monoidal.
+- `PresheafOfModules.isIso_sheafification_map_iff`: a morphism of presheaves of modules becomes
+  an isomorphism after sheafification if and only if it is locally bijective.
 
 Note that, unlike the case of sheaves with values in a fixed monoidal category
 (`Mathlib/CategoryTheory/Sites/Monoidal.lean`), no monoidal closedness is used: there is no
@@ -227,6 +229,31 @@ instance inverseImage_W_toPresheaf_isMonoidal :
     have := hg.isLocallySurjective
     have := isLocallyInjective_whiskerLeft J M g
     exact J.W_of_isLocallyBijective _
+
+end
+
+section
+
+variable {R₀ : Cᵒᵖ ⥤ RingCat.{u}} {S : Sheaf J RingCat.{u}} (α : R₀ ⟶ S.obj)
+  [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+
+/-- A morphism of presheaves of modules becomes an isomorphism after sheafification if and only
+if the underlying morphism of presheaves of abelian groups becomes an isomorphism after
+sheafification. -/
+theorem isIso_sheafification_map_iff {P Q : PresheafOfModules.{u} R₀} (φ : P ⟶ Q) :
+    IsIso ((sheafification.{u} α).map φ) ↔ J.W ((toPresheaf R₀).map φ) := by
+  have h : J.W.inverseImage (toPresheaf R₀) φ ↔
+      (MorphismProperty.isomorphisms _).inverseImage (sheafification.{u} α) φ := by
+    rw [inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms α]
+  simpa only [MorphismProperty.inverseImage_iff, MorphismProperty.isomorphisms.iff] using h.symm
+
+/-- A morphism of presheaves of modules whose underlying morphism of presheaves of abelian
+groups becomes an isomorphism after sheafification induces an isomorphism of the
+sheafifications. -/
+theorem isIso_sheafification_map {P Q : PresheafOfModules.{u} R₀} (φ : P ⟶ Q)
+    (hφ : J.W ((toPresheaf R₀).map φ)) : IsIso ((sheafification.{u} α).map φ) :=
+  (isIso_sheafification_map_iff J α φ).2 hφ
 
 end
 
