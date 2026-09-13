@@ -25,6 +25,9 @@ then the two dimensions agree.
 * `Algebra.IsIntegral.ringKrullDim_eq`: `dim S = dim R`, the conjunction of the two.
 * `ringKrullDim_eq_of_isIntegral_of_injective`: the same statement for an injective integral
   ring homomorphism `f : R →+* S`.
+* `Algebra.IsIntegral.ringKrullDim_quotient_eq`: `dim (S ⧸ P) = dim (R ⧸ P ∩ R)` for an integral
+  algebra and an ideal `P` of `S`; the extension `R ⧸ P ∩ R ⊆ S ⧸ P` is again integral, and it is
+  injective by construction.
 -/
 
 @[expose] public section
@@ -71,3 +74,11 @@ theorem ringKrullDim_eq_of_isIntegral_of_injective {R S : Type*} [CommRing R] [C
   have : Algebra.IsIntegral R S := ⟨hf⟩
   have : FaithfulSMul R S := (faithfulSMul_iff_algebraMap_injective R S).mpr hinj
   Algebra.IsIntegral.ringKrullDim_eq R S
+
+/-- For an integral algebra `S` over `R` and an ideal `P` of `S`, the quotient `S ⧸ P` has the
+same Krull dimension as `R ⧸ P ∩ R`. -/
+theorem Algebra.IsIntegral.ringKrullDim_quotient_eq [Algebra.IsIntegral R S] (P : Ideal S) :
+    ringKrullDim (S ⧸ P) = ringKrullDim (R ⧸ P.under R) :=
+  have : FaithfulSMul (R ⧸ P.under R) (S ⧸ P) :=
+    (faithfulSMul_iff_algebraMap_injective _ _).mpr Ideal.algebraMap_quotient_injective
+  Algebra.IsIntegral.ringKrullDim_eq (R ⧸ P.under R) (S ⧸ P)
