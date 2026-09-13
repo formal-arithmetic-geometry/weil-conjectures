@@ -87,9 +87,10 @@ graded ring no element of `𝒜 j` need avoid a given `x`, whereas
   survives pulling `𝒪(j)` back along a morphism, which is what the blueprint consumes; it needs
   a description of the pullback of `𝒪(j)` along `Spec κ(x) ⟶ Proj 𝒜`, which is not available
   yet. `Proj.isUnit_homogeneousSection_apply_iff` is the proof ingredient for it.
-- The transfer of `𝒪(1)` to the relative projective space `ℙ(n; S)` of
-  `WeilConjectures/AlgebraicGeometry/ProjectiveSpace.lean`, by pulling back along the map to
-  the integral model, and the compatibility with base change.
+
+The transfer of `𝒪(d)` to the relative projective space `ℙ(n; S)`, by pulling back along the
+map to the integral model, and its compatibility with base change, are in
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf`.
 
 ## Blueprint
 
