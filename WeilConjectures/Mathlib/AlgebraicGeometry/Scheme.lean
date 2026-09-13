@@ -8,11 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
-# Units among the sections over a basic open, and the preimage of `⊤`
+# Units among the sections over a basic open, `Scheme.Hom.appLE`, and the preimage of `⊤`
 
 We record that the restriction of a section `s` of the structure sheaf to any open contained
-in `X.basicOpen s` is a unit, and that any presheaf on `X` sends the inclusion `⊤ ≤ a ⁻¹ᵁ ⊤`
-to the identity, the preimage of `⊤` under a morphism of schemes being `⊤`.
+in `X.basicOpen s` is a unit, that `Scheme.Hom.appLE` only depends on the morphism up to
+equality, that `Scheme.Hom.appLE` between the top opens is `Scheme.Hom.appTop`, and that any
+presheaf on `X` sends the inclusion `⊤ ≤ a ⁻¹ᵁ ⊤` to the identity, the preimage of `⊤` under a
+morphism of schemes being `⊤`.
 -/
 
 @[expose] public section
@@ -48,5 +50,22 @@ lemma Scheme.isUnit_res_of_le_basicOpen {s : Γ(X, ⊤)} {U : X.Opens} (hU : U �
 lemma Scheme.isUnit_algebraMap_basicOpen {U : X.Opens} (f : Γ(X, U)) :
     IsUnit (algebraMap Γ(X, U) Γ(X, X.basicOpen f) f) :=
   X.toRingedSpace.isUnit_res_basicOpen f
+
+namespace Scheme.Hom
+
+variable {Y : Scheme.{u}}
+
+/-- `Scheme.Hom.appLE` only depends on the morphism up to equality. -/
+lemma appLE_congr_hom {c d : X ⟶ Y} (hcd : c = d) (U : Y.Opens) (V : X.Opens)
+    (ec : V ≤ c ⁻¹ᵁ U) (ed : V ≤ d ⁻¹ᵁ U) : c.appLE U V ec = d.appLE U V ed := by
+  subst hcd
+  rfl
+
+/-- `Scheme.Hom.appLE` from the top open to the top open is `Scheme.Hom.appTop`. -/
+lemma appLE_eq_appTop (a : X ⟶ Y) (e : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤) : a.appLE ⊤ ⊤ e = a.appTop := by
+  have h : (homOfLE e).op = 𝟙 (op (a ⁻¹ᵁ ⊤) : X.Opensᵒᵖ) := Subsingleton.elim _ _
+  rw [Hom.appLE, h, X.presheaf.map_id, Category.comp_id]
+
+end Scheme.Hom
 
 end AlgebraicGeometry

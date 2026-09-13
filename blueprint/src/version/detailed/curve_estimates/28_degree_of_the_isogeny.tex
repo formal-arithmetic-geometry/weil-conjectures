@@ -1113,6 +1113,28 @@ so $L$ is symmetric.
 
 \section{$[n]$ is finite, flat and surjective}\label{sec:deg-isogeny}
 
+\begin{lemma}[A smooth scheme over a field is regular]
+\label{lem:deg-smooth-regular}
+\lean{AlgebraicGeometry.isRegularLocalRing_stalk_of_smooth}
+\leanok
+Let $k$ be a field and let $X\to\Spec k$ be a smooth morphism of schemes.  Then
+the local ring $\O_{X,x}$ is regular for every $x\in X$.
+\end{lemma}
+\begin{proof}
+\leanok
+A smooth morphism is standard smooth on a neighbourhood of every point, so $x$
+has an affine open neighbourhood $V$ with
+$\O_X(V)=k[x_1,\dots,x_n]/(f_1,\dots,f_c)$ for relations whose Jacobian matrix
+is invertible.  Let $\q$ be the prime of $\O_X(V)$ corresponding to $x$ and let
+$Q$ be its contraction to $P:=k[x_1,\dots,x_n]$.  A polynomial ring over a
+regular ring is regular, so $P_Q$ is a regular local ring, and
+$\O_{X,x}=P_Q/(f_1,\dots,f_c)$.  The partial derivatives are $k$-derivations of
+$P$, hence map $Q^2$ into $Q$; since the Jacobian determinant is nonzero in the
+domain $P/Q$, the classes of $f_1,\dots,f_c$ in the cotangent space
+$QP_Q/Q^2P_Q$ are linearly independent.  Cutting a regular local ring down by
+such a family leaves a regular local ring, by Krull's height theorem.
+\end{proof}
+
 \begin{proposition}[Miracle flatness]\label{prop:deg-miracle-flatness}
 Let $f\colon X\to Y$ be a morphism locally of finite type between locally
 noetherian schemes, let $x\in X$ and $y:=f(x)$.  Suppose that $\O_{X,x}$ is
@@ -1130,6 +1152,7 @@ dimensions. Mathlib v4.33.1 has neither the Cohen-Macaulay condition nor this
 criterion.}
 \end{proposition}
 \begin{proof}
+\uses{lem:deg-smooth-regular}
 Not proved here.  This is the standard local criterion for flatness; see
 \cite[\S23]{MatsumuraCRT} and the section \emph{Flatness and dimension} of the
 chapter \emph{Commutative algebra} in \cite{stacks-project}.  For the last

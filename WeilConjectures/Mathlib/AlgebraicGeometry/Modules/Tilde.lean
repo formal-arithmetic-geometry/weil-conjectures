@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Away
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -17,6 +18,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 # Coherence of `M^~` on an affine scheme, and affine-locality of coherence
 # Coherence of `M^~` on an affine scheme, and quasi-coherence of a pushforward
 # Coherence of `M^~` on an affine scheme, and stability of coherence under pullback
+# Coherence of `M^~` on an affine scheme, and the free sheaf on a fibre
 
 For a commutative ring `R` and an `R`-module `M`, the quasi-coherent sheaf `M^~` on `Spec R` is
 coherent as soon as `M` is a finite `R`-module, and conversely a finite family of global sections
@@ -75,6 +77,14 @@ affine opens, it is quasi-coherent with finitely generated module of sections.
   `AlgebraicGeometry.Scheme.Modules.isCoherent_pushforward_of_isClosedImmersion`: finite type
   and coherence of sheaves of modules are stable under pushforward along a closed immersion.
   No Noetherian hypothesis is needed.
+- `AlgebraicGeometry.Scheme.Modules.fiberFreeFunctor` and
+  `AlgebraicGeometry.Scheme.Modules.fiberFreeAdjunction`: the functor `V ↦ V ⊗_{κ(y)} 𝒪_{X_y}`
+  from `κ(y)`-vector spaces to sheaves of modules on a scheme-theoretic fibre, and its right
+  adjoint, the global sections on the fibre; the counit is the evaluation map.
+- `AlgebraicGeometry.Scheme.Modules.fiberFreeComparison` and
+  `AlgebraicGeometry.Scheme.Modules.isIso_fiberFreeComparison`: the comparison
+  `N(y) ⊗_{κ(y)} 𝒪_{X_y} ⟶ (f^* N)|_{X_y}`, and the fact that it is an isomorphism as soon as
+  the restriction of `N` to `Spec κ(y)` is quasi-coherent.
 -/
 
 @[expose] public noncomputable section
@@ -1257,6 +1267,17 @@ theorem finite_stalk (M : X.Modules) [M.IsCoherent] (x : X) :
   exact Module.Finite.of_isLocalizedModule (haff.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
     (germₗ M ⟨x, hx⟩)
 
+/-- The `𝔪_x`-adic completion of the stalk of a sheaf of `𝒪_X`-modules at `x`. By
+`AlgebraicGeometry.Scheme.Modules.finite_stalk` this is, for a coherent sheaf on a locally
+noetherian scheme, the completion of a finite module over a noetherian local ring. -/
+noncomputable abbrev completedStalk (M : X.Modules) (x : X) : Type u :=
+  AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (M.presheaf.stalk x)
+
+/-- The canonical map from the stalk of `M` at `x` to its `𝔪_x`-adic completion. -/
+noncomputable abbrev toCompletedStalk (M : X.Modules) (x : X) :
+    M.presheaf.stalk x →ₗ[X.presheaf.stalk x] completedStalk M x :=
+  AdicCompletion.of _ _
+
 end Scheme.Modules
 
 /-!
@@ -1425,6 +1446,89 @@ hypothesis on the schemes involved. -/
 instance isCoherent_pushforward_of_isClosedImmersion (f : X ⟶ Y) [IsClosedImmersion f]
     (P : X.Modules)
     [P.IsCoherent] : ((pushforward f).obj P).IsCoherent where
+
+end Scheme.Modules
+
+namespace Scheme.Modules
+
+section FiberFree
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
+
+/-- The functor `V ↦ V ⊗_{κ(y)} 𝒪_{X_y}` from `κ(y)`-vector spaces to sheaves of modules on the
+scheme-theoretic fibre `X_y` of `f : X ⟶ Y` over `y`: the pullback along `X_y ⟶ Spec κ(y)` of
+the quasi-coherent sheaf `V^~` attached to `V`. -/
+def fiberFreeFunctor : ModuleCat (Y.residueField y) ⥤ (f.fiber y).Modules :=
+  tilde.functor (R := Y.residueField y) ⋙ Modules.pullback (f.fiberToSpecResidueField y)
+
+/-- `V ↦ V ⊗_{κ(y)} 𝒪_{X_y}` on morphisms, with the composition of functors spelled out. -/
+lemma fiberFreeFunctor_map {V V' : ModuleCat (Y.residueField y)} (β : V ⟶ V') :
+    (fiberFreeFunctor f y).map β =
+      (Modules.pullback (f.fiberToSpecResidueField y)).map
+        ((tilde.functor (R := Y.residueField y)).map β) :=
+  rfl
+
+/-- `V ↦ V ⊗_{κ(y)} 𝒪_{X_y}` is left adjoint to taking global sections on the fibre. The counit
+of this adjunction at a sheaf `G` on `X_y` is the **evaluation map**
+`Γ(X_y, G) ⊗_{κ(y)} 𝒪_{X_y} ⟶ G`, which sends `s ⊗ 1` to `s`. -/
+def fiberFreeAdjunction : fiberFreeFunctor f y ⊣ fiberSectionsFunctor f y :=
+  (tilde.adjunction (R := Y.residueField y)).comp
+    (pullbackPushforwardAdjunction (f.fiberToSpecResidueField y))
+
+/-- The evaluation map `Γ(X_y, G) ⊗_{κ(y)} 𝒪_{X_y} ⟶ G`, spelled out as the counit of the
+composite of the tilde-Gamma adjunction on `Spec κ(y)` with `g^* ⊣ g_*`. -/
+lemma fiberFreeAdjunction_counit_app (G : (f.fiber y).Modules) :
+    (fiberFreeAdjunction f y).counit.app G =
+      (Modules.pullback (f.fiberToSpecResidueField y)).map
+          ((tilde.adjunction (R := Y.residueField y)).counit.app
+            ((pushforward (f.fiberToSpecResidueField y)).obj G)) ≫
+        (pullbackPushforwardAdjunction (f.fiberToSpecResidueField y)).counit.app G :=
+  Adjunction.comp_counit_app _ _ _
+
+/-- **The canonical comparison** `N(y) ⊗_{κ(y)} 𝒪_{X_y} ⟶ (f^* N)|_{X_y}` for a sheaf of
+`𝒪_Y`-modules `N`: the sheaf on `Spec κ(y)` attached to the fibre `N(y)` maps to `u^* N` by the
+counit of the tilde-Gamma adjunction, and pulling that back to the fibre and composing with
+`AlgebraicGeometry.Scheme.Modules.pullbackTwoSquare` lands in the restriction of `f^* N`.
+
+```
+   N(y)^~ ⊗ 𝒪_{X_y} ── g^*(ε) ──→ g^* u^* N ── comparison ──→ v^* f^* N
+```
+
+It is an isomorphism as soon as `u^* N` is quasi-coherent; see
+`AlgebraicGeometry.Scheme.Modules.isIso_fiberFreeComparison`. -/
+def fiberFreeComparison (N : Y.Modules) :
+    (fiberFreeFunctor f y).obj (N.fiber y) ⟶
+      (restrictToFiber f y).obj ((Modules.pullback f).obj N) :=
+  (Modules.pullback (f.fiberToSpecResidueField y)).map
+      ((tilde.adjunction (R := Y.residueField y)).counit.app
+        ((Modules.pullback (Y.fromSpecResidueField y)).obj N)) ≫
+    (pullbackTwoSquare (f.fiber_fac y)).natTrans.app N
+
+/-- **The comparison `N(y) ⊗_{κ(y)} 𝒪_{X_y} ⟶ (f^* N)|_{X_y}` is an isomorphism** whenever the
+restriction `u^* N` of `N` to `Spec κ(y)` is quasi-coherent: the comparison of pullbacks is
+always an isomorphism, and the counit of the tilde-Gamma adjunction is one exactly on the
+quasi-coherent sheaves.
+
+In particular this applies when `N` is locally free, as it is under the hypotheses of Grauert's
+theorem. -/
+instance isIso_fiberFreeComparison (N : Y.Modules)
+    [((Modules.pullback (Y.fromSpecResidueField y)).obj N).IsQuasicoherent] :
+    IsIso (fiberFreeComparison f y N) := by
+  -- the counit of the tilde-Gamma adjunction *is* `fromTildeΓ`, but only definitionally
+  have h : IsIso ((fromTildeΓNatTrans (R := Y.residueField y)).app
+      ((Modules.pullback (Y.fromSpecResidueField y)).obj N)) :=
+    inferInstanceAs (IsIso (fromTildeΓ (R := Y.residueField y)
+      ((Modules.pullback (Y.fromSpecResidueField y)).obj N)))
+  have hε : IsIso ((tilde.adjunction (R := Y.residueField y)).counit.app
+      ((Modules.pullback (Y.fromSpecResidueField y)).obj N)) := h
+  have h₁ : IsIso ((Modules.pullback (f.fiberToSpecResidueField y)).map
+      ((tilde.adjunction (R := Y.residueField y)).counit.app
+        ((Modules.pullback (Y.fromSpecResidueField y)).obj N))) := inferInstance
+  have h₂ : IsIso ((pullbackTwoSquare (f.fiber_fac y)).natTrans.app N) := inferInstance
+  unfold fiberFreeComparison
+  exact IsIso.comp_isIso' h₁ h₂
+
+end FiberFree
 
 end Scheme.Modules
 

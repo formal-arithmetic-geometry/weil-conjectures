@@ -8,15 +8,20 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
-# Transport of a lax monoidal structure along a natural isomorphism
+# Transport of a lax monoidal structure, and the image of a tensor-inverse pair
 
 `CategoryTheory.Functor.Monoidal.transport` transports a strong monoidal structure along a
 natural isomorphism of functors. Here we do the same for lax monoidal structures.
+
+We also record that a monoidal functor sends a pair of objects whose tensor product is the unit
+to a pair of objects whose tensor product is the unit.
 
 ## Main definitions
 
 - `CategoryTheory.Functor.LaxMonoidal.transport`: the lax monoidal structure on a functor
   that is isomorphic to a lax monoidal functor.
+- `CategoryTheory.Functor.Monoidal.mapIsoTensorUnit`: the image under a monoidal functor of an
+  isomorphism `L ⊗ N ≅ 𝟙_ C`.
 -/
 
 @[expose] public section
@@ -77,3 +82,19 @@ lemma transport_μ {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) (X Y : C) :
   rfl
 
 end CategoryTheory.Functor.LaxMonoidal
+
+namespace CategoryTheory.Functor.Monoidal
+
+open MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+/-- **A monoidal functor sends a tensor-inverse pair to a tensor-inverse pair.** If `L ⊗ N` is
+isomorphic to the tensor unit of `C`, then `F.obj L ⊗ F.obj N` is isomorphic to the tensor unit
+of `D`. -/
+noncomputable def mapIsoTensorUnit (F : C ⥤ D) [F.Monoidal] {L N : C} (e : L ⊗ N ≅ 𝟙_ C) :
+    F.obj L ⊗ F.obj N ≅ 𝟙_ D :=
+  μIso F L N ≪≫ F.mapIso e ≪≫ (εIso F).symm
+
+end CategoryTheory.Functor.Monoidal
