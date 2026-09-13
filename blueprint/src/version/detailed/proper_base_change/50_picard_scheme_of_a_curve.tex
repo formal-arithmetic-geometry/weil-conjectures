@@ -44,23 +44,26 @@ claims no more than that comment does.
 % THIS CHAPTER'S CENSUSES USE (i) AND (ii) TOGETHER.  Measured at this commit over
 % the proof-position \stacksproject occurrences that sit inside `% Decomposed.'
 % nodes outside `sec:basis', with % comments stripped over the whole file, the tags
-% that no node owns under that convention number 12, in 9 nodes:
+% that no node owns under that convention number 11, in 9 nodes:
 %
 %   01V8 (lem:pc-smooth-characterization), 01XD (lem:pc-cech-computes),
 %   01XK and 02KH (lem:pc-flat-base-change-cohom),
-%   023L, 023M, 023N (lem:pc-fpqc-descent), 08AA (lem:pc-euler-additive),
+%   023L and 023N (lem:pc-fpqc-descent), 08AA (lem:pc-euler-additive),
 %   0B8L (lem:pc-pic-group-valued), 0B91 (lem:pc-rf-perfect-base-change),
 %   0BDK (lem:pc-perfect-locus), 0G6T (lem:pc-cech-resolution).
 %
 % Dropping (ii) and counting only citation-node ownership gives 14, in 11 nodes.
-% The two extra are exactly 01XJ and 01JY, and they are the only two sites at which
-% the readings differ:
+% The three extra are exactly 01XJ, 01JY and 023M, and they are the only three
+% sites at which the readings differ:
 %
 %   01XJ is printed in \Cref{lem:pc-finite-support-hi}'s proof and again in the
 %     statement of \Cref{lem:pc-coherent-hi}, a `% Decomposed.' node, which that
 %     statement attributes to it;
 %   01JY is printed in \Cref{lem:pc-closed-imm-base-change}'s proof and again in
-%     that same `% Decomposed.' node's own statement, which attributes it to the tag.
+%     that same `% Decomposed.' node's own statement, which attributes it to the tag;
+%   023M is printed in \Cref{lem:pc-fpqc-descent}'s proof and again in the statement
+%     of \Cref{lem:pc-cech-exact}, a `% Decomposed.' node, which is this chapter's
+%     decomposed proof of that tag.
 %
 % Both readings are defensible and neither difference is a defect; what a census
 % must not do is leave which one it used unstated.  Quote the counts above with the
@@ -73,7 +76,7 @@ claims no more than that comment does.
 % some node of this chapter stands for it under (i) or (ii), wherever that node
 % sits.  This is what produces the figure of 11 above.  Mirroring the domain
 % restriction onto the owner side instead -- accepting only owners that themselves
-% sit outside `sec:basis' -- gives 14, in 10 nodes, and the two extra tags are
+% sit outside `sec:basis' -- gives 13, in 10 nodes, and the two extra tags are
 % exactly 00DV and 00O0:
 %
 %   00DV is owned by \Cref{lem:pcb-nakayama}, a `% Cited.' node inside `sec:basis',
@@ -82,12 +85,13 @@ claims no more than that comment does.
 %     node inside `sec:basis', and is likewise printed in
 %     \Cref{lem:pc-hilb-representable}'s proof.
 %
-% Note that this 14 is not the 14 of the paragraph above: that one keeps ownership
-% chapter-wide and drops reading (ii), and its two extra tags are 01XJ and 01JY, in
-% 11 nodes.  The three figures -- 12 in 9 nodes (domain outside `sec:basis',
-% ownership chapter-wide, readings (i) and (ii)), 14 in 11 nodes ((i) only), 14 in
-% 10 nodes (ownership also restricted to outside `sec:basis') -- were all re-measured
-% at this commit, and each agrees with the tag list printed for it.
+% Note that this 13 is not the 14 of the paragraph above: that one keeps ownership
+% chapter-wide and drops reading (ii), and its three extra tags are 01XJ, 01JY and
+% 023M, in 11 nodes.  The three figures -- 11 in 9 nodes (domain outside
+% `sec:basis', ownership chapter-wide, readings (i) and (ii)), 14 in 11 nodes
+% ((i) only), 13 in 10 nodes (ownership also restricted to outside `sec:basis') --
+% were all re-measured at this commit, and each agrees with the tag list printed
+% for it.
 %
 % SCOPE OF THE ONE-TAG-ONE-NODE INVARIANT (issue 625).  That invariant -- no Stacks
 % tag is stood for by two nodes -- is PER CHAPTER.  It is about this chapter's own
@@ -7604,33 +7608,62 @@ $\cO_T\to f_{T,*}\cO_{X_T}$ is an isomorphism.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+\begin{lemma}[Faithfully flat base change detects exactness]
+\label{lem:pc-ff-detects-exactness}
+Let $A$ be a ring, $B$ a flat $A$-module and $C^\bullet$ a complex of
+$A$-modules.  Then
+\[
+H^i(B\otimes_AC^\bullet)=B\otimes_AH^i(C^\bullet)
+\]
+for every $i$.  If $B$ is moreover faithfully flat over $A$, then
+$H^i(B\otimes_AC^\bullet)=0$ implies $H^i(C^\bullet)=0$; in particular
+$C^\bullet$ is exact as soon as $B\otimes_AC^\bullet$ is.
+% No \uses here, and none on the proof: the statement and the proof are
+% commutative algebra about a ring, a module and a complex of modules, and
+% name no node of this chapter.
+\end{lemma}
+\begin{proof}
+Flatness of $B$ says that $B\otimes_A-$ is exact, hence commutes with
+the kernels, images and cokernels out of which cohomology is formed;
+that is the displayed identity, and it holds for every complex
+$C^\bullet$, no hypothesis being made on its terms.  Suppose $B$ is
+moreover faithfully flat and $H^i(B\otimes_AC^\bullet)=0$.  Then
+$B\otimes_AH^i(C^\bullet)=0$ by that identity, and faithfulness of
+$B\otimes_A-$ -- that $B\otimes_AN=0$ forces $N=0$ for an $A$-module
+$N$ -- gives $H^i(C^\bullet)=0$.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Decomposed.
 \begin{lemma}[The Amitsur complex of a faithfully flat ring map]
 \label{lem:pc-cech-exact}
-Let $A\to A'$ be a faithfully flat ring map and $M$ an $A$-module.
-Then the augmented Amitsur (Čech) complex
+(Descent, Lemma~35.3.6, \stacksproject{023M}.)  Let $A\to A'$ be a
+faithfully flat ring map and $M$ an $A$-module.  Then the augmented
+Amitsur (Čech) complex
 \[
 0\longrightarrow M\longrightarrow M\otimes_AA'
-\longrightarrow M\otimes_AA'\otimes_AA'\longrightarrow\cdots
+\longrightarrow M\otimes_AA'\otimes_AA'\longrightarrow\cdots,
 \]
-is exact.
+with $M\otimes_AA'^{\otimes n}$ in degree $n\ge0$ and differential
+\[
+d(m\otimes a_1\otimes\cdots\otimes a_n)=\sum_{j=0}^{n}(-1)^{j}\,
+m\otimes a_1\otimes\cdots\otimes a_j\otimes1\otimes a_{j+1}
+\otimes\cdots\otimes a_n
+\]
+(so that in degree $0$ the differential is $m\mapsto m\otimes1$), is
+exact.
 \uses{def:pc-scheme}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-morphism-conventions}
-\emph{Detection over a faithfully flat base.}  For a complex
-$C^\bullet$ of flat $A$-modules, $H^i(C^\bullet\otimes_AB)
-=H^i(C^\bullet)\otimes_AB$ for every $A$-algebra $B$: this is the
-standard K-flat statement for bounded degreewise flat complexes,
-proved by induction on the length of the complex from the degree-one
-case: for $0\to F^0\to F^1\to0$ flat, the short exact sequences
-$0\to H^0\to F^0\to H^1\to0$ and the exactness of $\otimes_AB$ give
-$H^0(C\otimes B)=H^0\otimes B$ and
-$H^1(C\otimes B)=(F^0\otimes B)/(H^0\otimes B)=(F^0/H^0)\otimes B
-=H^1\otimes B$.  If $B$ is faithfully flat over $A$, then
-$H^i\otimes_AB=0$ implies $H^i=0$ (faithfulness of $\otimes_AB$:
-$N\otimes_AB=0$ for a module $N$ and a faithfully flat $A\to B$ forces
-$N=0$).
-
+\uses{def:pc-morphism-conventions,lem:pc-ff-detects-exactness}
+% No \uses for \Cref{lem:pc-flat-base-change-cohom} here, deliberately: that
+% node states the same detection principle for the higher direct images of a
+% morphism, but the edge would close the 5-cycle
+%   lem:pc-cech-exact -> lem:pc-flat-base-change-cohom -> lem:pc-cech-computes
+%     -> lem:pc-affine-vanishing -> lem:pc-affine-cech-complex
+%     -> lem:pc-cech-exact.
+% The detection step is carried instead by lem:pc-ff-detects-exactness, which
+% is commutative algebra and sits below every node of that chain.
 \emph{The contracting homotopy.}  Base change along $A\to A'$ gives the
 complex of $A'$-modules
 \[
@@ -7661,10 +7694,27 @@ s\partial x=x+\sum_{i\ge2}(-1)^{i+1}\delta_{i-1}sx
 (Multiplying the \emph{last} two factors instead would not contract this
 complex: on $a_1\otimes a_2$ the two terms of $s\partial$ cancel, leaving
 $\partial s+s\partial=\partial(a_1a_2)=a_1a_2\otimes1\ne a_1\otimes a_2$.)
-Hence the base-changed complex is exact (it is split exact), so the
-original complex is exact by faithfully flat detection.  Tensoring the exact complex
-$0\to A\to A'^{\otimes\bullet}$ with $M$ (all terms flat over $A$) and
-using the detection step once more gives the general $M$-statement.
+Hence the base-changed complex is split exact.
+
+\emph{Descent to $M$.}  The contraction $s$ is $A'$-linear, hence in
+particular $A$-linear, so the additive functor $M\otimes_A-$ may be
+applied to the split exact complex above; split exactness is preserved
+by any additive functor, so the result is split exact.  Its term in
+degree $n$ is $M\otimes_AA'^{\otimes n+1}$ with differential
+$\id_M\otimes\partial$, and the swap of the first two tensor factors
+\[
+M\otimes_AA'\otimes_AA'^{\otimes n}\;\xrightarrow{\ \sim\ }\;
+A'\otimes_AM\otimes_AA'^{\otimes n}
+\]
+carries that complex to the base change along $A\to A'$ of the complex
+in the statement: the face $\delta_i$, which inserts $1$ after the
+$i$-th factor of $A'^{\otimes n+1}$, becomes the face of $d$ inserting
+$1$ after the $j$-th of the trailing factors with $j=i-1$ -- the slot
+consumed by the base change is the leading one on both sides -- and the
+signs agree, $(-1)^{i+1}=(-1)^{j}$.  So the base change along $A\to A'$
+of the complex in the statement is exact, and
+\Cref{lem:pc-ff-detects-exactness}, applied to the faithfully flat
+$A$-module $A'$, gives the exactness of that complex itself.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -13246,7 +13296,7 @@ module is trivial.
 \uses{def:pc-invertible-module}
 \end{lemma}
 \begin{proof}
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-fpqc-covering,lem:pc-descent-datum-refinement,lem:pc-tensor-dual-invertible,lem:pc-fpqc-covering-stability,lem:pc-open-covering-descent}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-fpqc-covering,lem:pc-descent-datum-refinement,lem:pc-ff-detects-exactness,lem:pc-tensor-dual-invertible,lem:pc-fpqc-covering-stability,lem:pc-open-covering-descent}
 \emph{Step 1: the affine case for modules.}  Let $A\to B$ be a faithfully
 flat ring map, and let
 \[
@@ -13524,10 +13574,9 @@ base change of an $A$-module, so it is not transported to $C^\bullet$
 below -- and it is what the paragraph \emph{The descended module} uses;
 exactness at $D^{-1}$, i.e.\ the injectivity of $\widetilde\psi$, is not
 claimed here, and is proved there by a separate argument.  Since $B$ is
-flat over $A$, kernels and images commute with $-\otimes_AB$ and hence
-$H^r(B\otimes_AC^\bullet)=B\otimes_AH^r(C^\bullet)$; since $B$ is
-moreover faithfully flat, $B\otimes_AH^r(C^\bullet)=0$ forces
-$H^r(C^\bullet)=0$.  So $C^\bullet$ is exact in every degree $r\ge1$,
+faithfully flat over $A$, \Cref{lem:pc-ff-detects-exactness} turns the
+vanishing of $H^r(B\otimes_AC^\bullet)$ into the vanishing of
+$H^r(C^\bullet)$.  So $C^\bullet$ is exact in every degree $r\ge1$,
 and it is exact at $N_0$ and at $C^0$ by the definition $N_0=\ker d^0$.
 Hence the augmented complex above is exact -- and, as the paragraph
 \emph{The split exactness} below shows, split exact after the
