@@ -41,12 +41,13 @@ rather than a predicate on a ring already known to be Noetherian local.
 
 Prove `IsRegularLocalRing.isCohenMacaulayLocalRing` and make it an instance. The mathematical
 route is standard but it needs two results about regular local rings that mathlib does not have at
-`v4.33.1`, and which have to be proved by a simultaneous induction on the dimension: a regular
-local ring is a domain, and the quotient of a regular local ring by an element of
-`maximalIdeal R \ (maximalIdeal R) ^ 2` is again regular local. Given those two, the
-induction here is short: in dimension zero the maximal ideal is `⊥`, so `R` is a field and both
-sides vanish; in positive dimension pick `x ∈ maximalIdeal R` outside the square, note that it is
-a nonzerodivisor because `R` is a domain, and combine
+`v4.33.1`: a regular local ring is a domain, and the quotient of a regular local ring by an element
+of `maximalIdeal R \ (maximalIdeal R) ^ 2` is again regular local. The second is available in this
+repository as `IsRegularLocalRing.quotient_span_singleton`
+(`WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs`); only the first is still missing.
+Given both, the induction here is short: in dimension zero the maximal ideal is `⊥`, so `R` is a
+field and both sides vanish; in positive dimension pick `x ∈ maximalIdeal R` outside the square,
+note that it is a nonzerodivisor because `R` is a domain, and combine
 `ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim` with
 `Module.depth_quotSMulTop_add_one`.
 -/
