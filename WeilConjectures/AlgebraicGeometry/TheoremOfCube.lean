@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PicardSquareZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 
@@ -46,6 +47,9 @@ an obstruction class `α ∈ H¹(W ×_Z Z_{n+1}, Iₙ)` whose image is the class
 - `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one`
   (blueprint: `lem:cube-thickening-trivial`) — the specialisation to the triple product of the
   cube.
+- `AlgebraicGeometry.Scheme.surjective_unitsMap_subschemeι_thickeningIdeal_pullbackSnd` — the
+  unit-extension input `hX`, `hY` above, for a proper geometrically integral variety `X` over a
+  field `k` and an arbitrary `k`-scheme `Z`.
 
 ## Implementation notes
 
@@ -54,7 +58,8 @@ an obstruction class `α ∈ H¹(W ×_Z Z_{n+1}, Iₙ)` whose image is the class
   - `hX`, `hY`: that `Γ(VX ×_Z Z_{n+1}, 𝒪)ˣ ⟶ Γ(VX ×_Z Zₙ, 𝒪)ˣ` is surjective, and likewise
     for `VY`. In the blueprint this is the surjection `Aₙ₊₁^× ⟶ Aₙ^×` of the local artinian
     rings, obtained from `lem:cube-global-sections-base-change` together with
-    `Γ(𝒪^×) = Γ(𝒪)^×`.
+    `Γ(𝒪^×) = Γ(𝒪)^×`. It is discharged in the case the cube needs by the last section of
+    this file.
   - `hkunneth`: that a deformation class on `V ×_Z Z_{n+1}` restricting to zero on both
     slices is zero. In the blueprint this is three things together: `prop:cube-kunneth-h1`,
     the identification of the ideal of the thickening with `𝒪_W ⊗_k Iₙ` and hence of its `H¹`
@@ -188,5 +193,71 @@ theorem Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one
     Pic.map_comp_apply, hLz, map_one]
 
 end Cube
+
+/-! ### Units of the thickenings of a proper variety -/
+
+section Units
+
+variable {K : Type u} [Field K] {X Z : Scheme.{u}}
+
+/-- **The global sections of `(X ×_k Z) ×_Z Zₙ` are the infinitesimal ring `Aₙ`.**
+
+For `X` a proper geometrically integral variety over a field `k`, `Z` a `k`-scheme and `t` a
+point of `Z`, the `n`-th infinitesimal base change of `X ×_k Z ⟶ Z` along `Zₙ ⟶ Z` is
+`X ×_k Spec Aₙ` with `Aₙ = 𝒪_{Z, t} ⧸ 𝔪_t ^ (n + 1)`, so its global sections are `Aₙ` by
+`AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_snd_appTop` (blueprint:
+`lem:cube-global-sections-base-change`). -/
+theorem bijective_infinitesimalRingToΓ_pullbackSnd (πX : X ⟶ Spec (.of K)) [IsProper πX]
+    [GeometricallyIntegral πX] (πZ : Z ⟶ Spec (.of K)) (t : Z) (n : ℕ) :
+    Function.Bijective (infinitesimalRingToΓ (pullback.snd πX πZ) t n) := by
+  set φ := Spec.preimage (Z.fromInfinitesimalNeighborhood t n ≫ πZ)
+  have hφ : Z.fromInfinitesimalNeighborhood t n ≫ πZ = Spec.map φ := (Spec.map_preimage _).symm
+  -- `(X ×_k Z) ×_Z Zₙ ≅ X ×_k Spec Aₙ`, by pasting the two cartesian squares
+  have H := (IsPullback.of_hasPullback (pullback.snd πX πZ)
+    (Z.fromInfinitesimalNeighborhood t n)).paste_horiz (IsPullback.of_hasPullback πX πZ)
+  rw [hφ] at H
+  have key : IsIso ((Scheme.ΓSpecIso (Z.infinitesimalRing t n)).inv ≫
+      (pullback.snd πX (Spec.map φ)).appTop) := by
+    let _ : Algebra K (Z.infinitesimalRing t n) := φ.hom.toAlgebra
+    exact isIso_ΓSpecIso_inv_comp_snd_appTop πX (Z.infinitesimalRing t n)
+  rw [← ConcreteCategory.isIso_iff_bijective, infinitesimalRingToΓ]
+  change IsIso ((Scheme.ΓSpecIso (Z.infinitesimalRing t n)).inv ≫
+    (pullback.snd (pullback.snd πX πZ) (Z.fromInfinitesimalNeighborhood t n)).appTop)
+  rw [← H.isoPullback_hom_snd, Scheme.Hom.comp_appTop, ← Category.assoc]
+  infer_instance
+
+/-- **Units of an infinitesimal thickening lift** (blueprint: the surjection `Aₙ₊₁^× ↠ Aₙ^×`
+in the proof of `lem:cube-thickening-trivial`).
+
+For `X` a proper geometrically integral variety over a field `k`, `Z` a `k`-scheme and `t` a
+point of `Z`, every unit on the `n`-th infinitesimal thickening `(X ×_k Z) ×_Z Zₙ` extends to
+the `(n + 1)`-st. This is the hypothesis `hX` (and, for `Y` in place of `X`, `hY`) of
+`AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one`.
+-/
+theorem surjective_unitsMap_subschemeι_thickeningIdeal_pullbackSnd (πX : X ⟶ Spec (.of K))
+    [IsProper πX] [GeometricallyIntegral πX] (πZ : Z ⟶ Spec (.of K)) (t : Z) (n : ℕ) :
+    Function.Surjective
+      (Hom.unitsMap (thickeningIdeal (pullback.snd πX πZ) t n).subschemeι) := by
+  intro y
+  -- transport the problem along `(X ×_k Z) ×_Z Zₙ ≅ V(Iₙ)`
+  have hcomp : (Hom.unitsMap (thickeningIso (pullback.snd πX πZ) t n).hom).comp
+      (Hom.unitsMap (thickeningIdeal (pullback.snd πX πZ) t n).subschemeι) =
+      Hom.unitsMap (infinitesimalBaseChangeMap (pullback.snd πX πZ) t (Nat.le_succ n)) := by
+    rw [← Hom.unitsMap_comp, thickeningIso_hom_subschemeι]
+  have hinj : Function.Injective
+      (Hom.unitsMap (thickeningIso (pullback.snd πX πZ) t n).hom) := by
+    refine Function.LeftInverse.injective
+      (g := Hom.unitsMap (thickeningIso (pullback.snd πX πZ) t n).inv) fun u ↦ ?_
+    rw [← MonoidHom.comp_apply, ← Hom.unitsMap_comp, Iso.inv_hom_id, Hom.unitsMap_id,
+      MonoidHom.id_apply]
+  -- lift the unit through `Γ(- , 𝒪) = Aₙ`
+  obtain ⟨b, hbu, hb⟩ := exists_isUnit_appTop_infinitesimalBaseChangeMap (pullback.snd πX πZ) t
+    (Nat.le_succ n) (bijective_infinitesimalRingToΓ_pullbackSnd πX πZ t n)
+    ((Hom.unitsMap (thickeningIso (pullback.snd πX πZ) t n).hom y).isUnit)
+  refine ⟨hbu.unit, hinj ?_⟩
+  rw [← MonoidHom.comp_apply, hcomp]
+  exact Units.ext hb
+
+end Units
 
 end AlgebraicGeometry.Scheme

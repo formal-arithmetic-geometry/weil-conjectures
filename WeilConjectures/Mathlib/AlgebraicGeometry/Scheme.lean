@@ -12,9 +12,10 @@ public import Mathlib.AlgebraicGeometry.Scheme
 
 We record that the restriction of a section `s` of the structure sheaf to any open contained
 in `X.basicOpen s` is a unit, that `Scheme.Hom.appLE` only depends on the morphism up to
-equality, that `Scheme.Hom.appLE` between the top opens is `Scheme.Hom.appTop`, and that any
-presheaf on `X` sends the inclusion `⊤ ≤ a ⁻¹ᵁ ⊤` to the identity, the preimage of `⊤` under a
-morphism of schemes being `⊤`.
+equality, that `Scheme.Hom.appLE` between the top opens is `Scheme.Hom.appTop`, that an
+isomorphism of schemes induces an isomorphism on global sections, and that any presheaf on `X`
+sends the inclusion `⊤ ≤ a ⁻¹ᵁ ⊤` to the identity, the preimage of `⊤` under a morphism of
+schemes being `⊤`.
 -/
 
 @[expose] public section
@@ -65,6 +66,10 @@ lemma appLE_congr_hom {c d : X ⟶ Y} (hcd : c = d) (U : Y.Opens) (V : X.Opens)
 lemma appLE_eq_appTop (a : X ⟶ Y) (e : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤) : a.appLE ⊤ ⊤ e = a.appTop := by
   have h : (homOfLE e).op = 𝟙 (op (a ⁻¹ᵁ ⊤) : X.Opensᵒᵖ) := Subsingleton.elim _ _
   rw [Hom.appLE, h, X.presheaf.map_id, Category.comp_id]
+
+/-- An isomorphism of schemes induces an isomorphism on global sections. -/
+instance (a : X ⟶ Y) [IsIso a] : IsIso a.appTop :=
+  inferInstanceAs (IsIso (a.app ⊤))
 
 end Scheme.Hom
 

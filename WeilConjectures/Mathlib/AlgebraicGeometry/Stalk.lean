@@ -39,7 +39,8 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
   `AlgebraicGeometry.Scheme.infinitesimalBaseChangeSnd` and the transition morphisms
   `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap`.
 - `AlgebraicGeometry.Scheme.toInfinitesimalBaseChangeΓ`: the ring map
-  `𝒪_{T, t} ⟶ Γ(W ×_T Tₙ, 𝒪)`.
+  `𝒪_{T, t} ⟶ Γ(W ×_T Tₙ, 𝒪)`, and `AlgebraicGeometry.Scheme.infinitesimalRingToΓ`, the ring
+  map `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ Γ(W ×_T Tₙ, 𝒪)` it factors through.
 
 ## Main results
 
@@ -56,6 +57,9 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.sq_thickeningIdeal`: the closed immersion
   `W ×_T Tₙ ↪ W ×_T T_{n+1}` is a square-zero thickening, cut out by
   `AlgebraicGeometry.Scheme.thickeningIdeal`.
+- `AlgebraicGeometry.Scheme.exists_isUnit_appTop_infinitesimalBaseChangeMap`: if the global
+  sections of `W ×_T Tₘ` are `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)`, then every unit of `Γ(W ×_T Tₘ, 𝒪)`
+  extends to a unit of `Γ(W ×_T Tₙ, 𝒪)` for `m ≤ n`.
 - `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver`: the base change
   `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
   `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
@@ -539,6 +543,58 @@ lemma toInfinitesimalBaseChangeΓ_eq_zero (n : ℕ) {r : T.presheaf.stalk t}
     toInfinitesimalBaseChangeΓ f t n r = 0 := by
   have h0 : T.toInfinitesimalRing t n r = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr hr
   rw [toInfinitesimalBaseChangeΓ, CommRingCat.comp_apply, h0, map_zero]
+
+/-- The ring homomorphism `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ Γ(W ×_T Tₙ, 𝒪)` induced by the
+projection `W ×_T Tₙ ⟶ Tₙ`, through which `AlgebraicGeometry.Scheme.toInfinitesimalBaseChangeΓ`
+factors. -/
+noncomputable def infinitesimalRingToΓ (n : ℕ) :
+    T.infinitesimalRing t n ⟶ Γ(infinitesimalBaseChange f t n, ⊤) :=
+  (Scheme.ΓSpecIso _).inv ≫ (infinitesimalBaseChangeSnd f t n).appTop
+
+lemma toInfinitesimalRing_comp_infinitesimalRingToΓ (n : ℕ) :
+    T.toInfinitesimalRing t n ≫ infinitesimalRingToΓ f t n =
+      toInfinitesimalBaseChangeΓ f t n := rfl
+
+/-- The action of `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` on the sections over `W ×_T Tₙ` is compatible with
+the transition morphisms:
+
+```
+                    infinitesimalRingToΓ f t n
+  𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ──────────────────────▶ Γ(W ×_T Tₙ, 𝒪)
+             │                                             │
+             │ infinitesimalRingMap t h                    │ appTop of
+             ▼                                             ▼ infinitesimalBaseChangeMap f t h
+  𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1) ──────────────────────▶ Γ(W ×_T Tₘ, 𝒪)
+                    infinitesimalRingToΓ f t m
+```
+-/
+@[reassoc]
+lemma infinitesimalRingToΓ_comp_appTop {m n : ℕ} (h : m ≤ n) :
+    infinitesimalRingToΓ f t n ≫ (infinitesimalBaseChangeMap f t h).appTop =
+      T.infinitesimalRingMap t h ≫ infinitesimalRingToΓ f t m := by
+  rw [infinitesimalRingToΓ, infinitesimalRingToΓ, Category.assoc,
+    ← Scheme.Hom.comp_appTop, infinitesimalBaseChangeMap_snd, Scheme.Hom.comp_appTop,
+    ← Category.assoc, Scheme.infinitesimalNeighborhoodMap, ← Scheme.ΓSpecIso_inv_naturality,
+    Category.assoc]
+
+/-- **Units lift along the infinitesimal base changes.**
+
+If the global sections of `W ×_T Tₘ` are the ring `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)` of the `m`-th
+infinitesimal neighbourhood, then for `m ≤ n` every unit of `Γ(W ×_T Tₘ, 𝒪)` is the restriction
+of a unit of `Γ(W ×_T Tₙ, 𝒪)`: a unit of `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)` lifts to a unit of
+`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`, the latter being a local ring. -/
+lemma exists_isUnit_appTop_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n)
+    (hm : Function.Bijective (infinitesimalRingToΓ f t m))
+    {a : Γ(infinitesimalBaseChange f t m, ⊤)} (ha : IsUnit a) :
+    ∃ b : Γ(infinitesimalBaseChange f t n, ⊤), IsUnit b ∧
+      (infinitesimalBaseChangeMap f t h).appTop b = a := by
+  set e := RingEquiv.ofBijective (infinitesimalRingToΓ f t m).hom hm
+  have ha₀ : IsUnit (e.symm a) := ha.map e.symm
+  obtain ⟨c, hc⟩ := T.infinitesimalRingMap_surjective t h (e.symm a)
+  have hcu : IsUnit c := T.isUnit_of_isUnit_infinitesimalRingMap t h c (hc ▸ ha₀)
+  refine ⟨infinitesimalRingToΓ f t n c, hcu.map (infinitesimalRingToΓ f t n).hom, ?_⟩
+  rw [← CommRingCat.comp_apply, infinitesimalRingToΓ_comp_appTop, CommRingCat.comp_apply, hc]
+  exact e.apply_symm_apply a
 
 end InfinitesimalBaseChange
 
