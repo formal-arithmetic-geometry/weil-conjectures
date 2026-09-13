@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
 # Transport of a lax monoidal structure, and the image of a tensor-inverse pair
@@ -14,7 +15,8 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 natural isomorphism of functors. Here we do the same for lax monoidal structures.
 
 We also record that a monoidal functor sends a pair of objects whose tensor product is the unit
-to a pair of objects whose tensor product is the unit.
+to a pair of objects whose tensor product is the unit, and that it commutes with the tensor
+powers of `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category`.
 
 ## Main definitions
 
@@ -22,6 +24,8 @@ to a pair of objects whose tensor product is the unit.
   that is isomorphic to a lax monoidal functor.
 - `CategoryTheory.Functor.Monoidal.mapIsoTensorUnit`: the image under a monoidal functor of an
   isomorphism `L ⊗ N ≅ 𝟙_ C`.
+- `CategoryTheory.Functor.Monoidal.mapTensorPowIso`: the image of a tensor power under a
+  monoidal functor is the tensor power of the image.
 -/
 
 @[expose] public section
@@ -96,5 +100,12 @@ of `D`. -/
 noncomputable def mapIsoTensorUnit (F : C ⥤ D) [F.Monoidal] {L N : C} (e : L ⊗ N ≅ 𝟙_ C) :
     F.obj L ⊗ F.obj N ≅ 𝟙_ D :=
   μIso F L N ≪≫ F.mapIso e ≪≫ (εIso F).symm
+
+/-- **A monoidal functor commutes with tensor powers**: the image of `X ^⊗ n` is the `n`-th
+tensor power of the image of `X`. -/
+noncomputable def mapTensorPowIso (F : C ⥤ D) [F.Monoidal] (X : C) :
+    ∀ n : ℕ, F.obj (X ^⊗ n) ≅ F.obj X ^⊗ n
+  | 0 => (εIso F).symm
+  | n + 1 => (μIso F (X ^⊗ n) X).symm ≪≫ tensorIso (mapTensorPowIso F X n) (Iso.refl _)
 
 end CategoryTheory.Functor.Monoidal
