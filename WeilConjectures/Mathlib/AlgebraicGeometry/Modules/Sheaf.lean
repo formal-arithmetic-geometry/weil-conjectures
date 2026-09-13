@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
@@ -46,11 +47,18 @@ contained in `U` and sheaves of `𝒪_X|_U`-modules on the scheme `U`.
 
 The fourth is the **fibre `F(x)` of a sheaf of modules at a point**, as a vector space over the
 residue field `κ(x)`, together with the **restriction `F_y` of a sheaf of modules to a fibre of a
-morphism**. Since Mathlib has no module structure on the stalk of a sheaf of modules, the fibre is
+morphism** and the **global sections `Γ(X_y, F_y)` on a fibre**. Since Mathlib has no module
+structure on the stalk of a sheaf of modules, the fibre is
 defined not as `F_x ⊗_{𝒪_{X,x}} κ(x)` but by pullback: `F(x)` is the module of global sections
 of the pullback of `F` along `Spec κ(x) ⟶ X`. The two agree for quasi-coherent `F`. It is built on
 a base change section, comparing global sections on `Spec S` with global sections on `Spec R`
 after restriction of scalars along `φ : R ⟶ S`.
+
+The fifth is **base change for the direct image**: for a commutative square `v ≫ f = g ≫ u` of
+schemes, the pullbacks along the two sides are compared by an isomorphism `g^* u^* ≅ v^* f^*`,
+and the mate of that comparison is the base change transformation `u^* f_* ⟶ g_* v^*`. Applied
+to the fibre square of `f : X ⟶ Y` over `y : Y` and evaluated on global sections, this is the
+base change map `(f_* F)(y) ⟶ Γ(X_y, F_y)`.
 
 ## Main definitions
 
@@ -59,6 +67,17 @@ after restriction of scalars along `φ : R ⟶ S`.
   functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
 - `AlgebraicGeometry.Scheme.Modules.restrictToFiber`: the restriction `F ↦ F_y` of sheaves of
   modules to the scheme-theoretic fibre of a morphism over a point.
+- `AlgebraicGeometry.Scheme.Modules.fiberSectionsFunctor`,
+  `AlgebraicGeometry.Scheme.Modules.fiberSections`: the global sections `Γ(X_y, F_y)` on the
+  scheme-theoretic fibre, as a `κ(y)`-vector space.
+- `AlgebraicGeometry.Scheme.Modules.moduleStalkBase`: the module structure on a stalk of a sheaf
+  of `𝒪_X`-modules over the local ring of the base of a morphism `f : X ⟶ Y`.
+- `AlgebraicGeometry.Scheme.Modules.pullbackTwoSquare`,
+  `AlgebraicGeometry.Scheme.Modules.baseChange`: the comparison of pullbacks around a commutative
+  square of schemes, and its mate, the base change transformation `u^* f_* ⟶ g_* v^*`.
+- `AlgebraicGeometry.Scheme.Modules.fiberBaseChangeMap`: **the base change map**
+  `(f_* F)(y) ⟶ Γ(X_y, F_y)`, the specialisation of `baseChange` to a fibre square, on global
+  sections.
 
 ## Main results
 
@@ -70,6 +89,10 @@ after restriction of scalars along `φ : R ⟶ S`.
 - `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
+- `AlgebraicGeometry.Scheme.Modules.Hom.naturality`: a morphism of sheaves of modules commutes
+  with the restriction maps.
+- `AlgebraicGeometry.Scheme.Modules.sectionsPullback_naturality`: the pullback
+  `Γ(N, ⊤) ⟶ Γ(a^* N, ⊤)` of global sections along `a : X ⟶ Y` is natural in `N`.
 - `AlgebraicGeometry.Scheme.Modules.moduleSpecΓPushforwardIso`,
   `AlgebraicGeometry.Scheme.Modules.moduleSpecΓPullbackIso`: base change of the global sections
   of a sheaf of modules on `Spec S` along `φ : R ⟶ S`.
@@ -78,14 +101,19 @@ after restriction of scalars along `φ : R ⟶ S`.
   for a morphism `u` inducing an isomorphism on residue fields at the point in question.
 - `AlgebraicGeometry.Scheme.Modules.fiberRestrictToFiberIso`: the fibre of `F_y` at a point `x`
   of the fibre is the fibre of `F` at `f.fiberι y x`.
+- `AlgebraicGeometry.Scheme.Modules.map_baseChange_comp_counit`: the mate identity satisfied by
+  the base change transformation.
+- `AlgebraicGeometry.Scheme.Modules.fiberBaseChangeMap_naturality`: naturality of the base change
+  map in the sheaf.
 
 ## Blueprint
 
 The fibre and the restriction to a fibre are notion **(N2)** of `sec:cube-cost`, the formalisation
-count of the theorem-of-the-cube chapter. Deferred to later issues, because they need the monoidal
-structure on sheaves of modules and the notion of an invertible sheaf, neither of which is
-available: the compatibility of the fibre with tensor products and with inverses of line bundles,
-and the one-dimensionality of the fibre of a locally free sheaf of rank one.
+count of the theorem-of-the-cube chapter. The remaining half of (N2) — the compatibility of the
+fibre with tensor products and with inverses of line bundles, and the one-dimensionality of the
+fibre of an invertible sheaf — is in `WeilConjectures.AlgebraicGeometry.Modules.Fiber`: it needs
+the monoidal structure on sheaves of modules and the notion of an invertible sheaf, which a file
+under `WeilConjectures/Mathlib/` may not import.
 -/
 @[expose] public section
 
@@ -94,6 +122,33 @@ universe u
 open CategoryTheory Limits Opposite SheafOfModules TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+section Restriction
+
+variable {X : Scheme.{u}} {M N : X.Modules}
+
+/-- A morphism of sheaves of modules commutes with the restriction maps: for `i : U ⟶ V`,
+
+```
+Γ(M, V) --- φ.app V ---> Γ(N, V)
+   |                        |
+  res                      res
+   v                        v
+Γ(M, U) --- φ.app U ---> Γ(N, U)
+```
+-/
+@[reassoc (attr := simp)]
+lemma Hom.naturality (φ : M ⟶ N) {U V : X.Opens} (i : U ⟶ V) :
+    M.presheaf.map i.op ≫ φ.app U = φ.app V ≫ N.presheaf.map i.op :=
+  φ.mapPresheaf.naturality i.op
+
+/-- Elementwise version of `AlgebraicGeometry.Scheme.Modules.Hom.naturality`: applying a
+morphism of sheaves of modules commutes with restricting a section. -/
+lemma Hom.naturality_apply (φ : M ⟶ N) {U V : X.Opens} (i : U ⟶ V) (s : Γ(M, V)) :
+    φ.app U (M.presheaf.map i.op s) = N.presheaf.map i.op (φ.app V s) :=
+  ConcreteCategory.congr_hom (φ.naturality i) s
+
+end Restriction
 
 section Kernel
 
@@ -242,6 +297,21 @@ lemma ofSemilinear_comp_stalkDescₗ {S' : CommRingCat.{u}} (ψ : X.presheaf.sta
       (ConcreteCategory.congr_hom hcomp z))
 
 end StalkDesc
+section StalkBase
+
+variable {X Y : Scheme.{u}}
+
+/-- The module structure on the stalk `F_x` of a sheaf of `𝒪_X`-modules over the local ring
+`𝒪_{Y, f x}` of the base of `f : X ⟶ Y`, by restriction of scalars along `f.stalkMap x`.
+
+This is the companion of `AlgebraicGeometry.Scheme.Modules.moduleStalk`, which is the case of
+the identity morphism: there the scalars are the local ring of `X` itself. -/
+@[instance_reducible]
+noncomputable def moduleStalkBase (F : X.Modules) (f : X ⟶ Y) (x : X) :
+    Module (Y.presheaf.stalk (f.base x)) (F.presheaf.stalk x) :=
+  Module.compHom _ (f.stalkMap x).hom
+
+end StalkBase
 
 noncomputable section Pushforward
 
@@ -375,21 +445,6 @@ end Pullback
 
 noncomputable section PushforwardPullback
 
-/-- The `app` of a morphism of sheaves of modules is natural in the open subset:
-
-```
-  Γ(M, U) --- φ.app U ---> Γ(N, U)
-     |                        |
-     | M.presheaf.map i       | N.presheaf.map i
-     v                        v
-  Γ(M, V) --- φ.app V ---> Γ(N, V)
-```
--/
-@[reassoc]
-lemma Hom.naturality {X : Scheme.{u}} {M N : X.Modules} (φ : M ⟶ N) {U V : X.Opens}
-    (i : op U ⟶ op V) : M.presheaf.map i ≫ φ.app V = φ.app U ≫ N.presheaf.map i := by
-  simpa only [mapPresheaf_app] using φ.mapPresheaf.naturality i
-
 variable {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) (N : Y.Modules) (M : Z.Modules)
 
 /-- The canonical morphism `b_* b^* M ⟶ (a ≫ b)_* (a ≫ b)^* M`, obtained by applying `b_*`
@@ -425,6 +480,16 @@ lemma eqToHom_pushforward_smul {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : X'.Modu
     (r : Γ(Y', U)) (y : Γ((pushforward a).obj N, U)) :
     eqToHom (pushforward_obj_obj a N U) (r • y) =
       a.app U r • eqToHom (pushforward_obj_obj a N U) y := rfl
+
+/-- The restriction map `Γ(X', a ⁻¹ᵁ ⊤) ⟶ Γ(X', ⊤)` is the identity, so that restricting
+the pullback of a global function gives the pullback of functions on global sections. -/
+lemma map_le_top_app_top {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (r : Γ(Y', ⊤)) :
+    X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op (a.app ⊤ r) =
+      a.appTop r := by
+  have h : X'.presheaf.map (homOfLE (by simp : (⊤ : X'.Opens) ≤ a ⁻¹ᵁ ⊤)).op = 𝟙 Γ(X', ⊤) :=
+    (congrArg (fun i : (op (a ⁻¹ᵁ ⊤) : X'.Opensᵒᵖ) ⟶ op ⊤ ↦ X'.presheaf.map i)
+      (Subsingleton.elim _ (𝟙 (op (⊤ : X'.Opens))))).trans (X'.presheaf.map_id _)
+  exact (ConcreteCategory.congr_hom h _).trans rfl
 
 lemma pushforwardPullbackComp_app (V : Z.Opens) :
     (pushforwardPullbackComp a b M).app V =
@@ -626,6 +691,48 @@ def sectionsPullback : Γ(N, ⊤) ⟶ Γ((pullback a).obj N, ⊤) :=
 lemma sectionsPullback_smul (r : Γ(Y, ⊤)) (s : Γ(N, ⊤)) :
     sectionsPullback a N (r • s) = a.appTop r • sectionsPullback a N s :=
   sectionsPullbackLE_smul a N _ r _ (Scheme.Hom.appLE_eq_appTop a _ ▸ rfl) s
+
+/-- The pullback of a global section is the image of the section under the unit of the
+adjunction, restricted from `a ⁻¹ᵁ ⊤` to `⊤`. -/
+lemma sectionsPullback_apply {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Modules) (s : Γ(N, ⊤))
+    (i : (⊤ : X'.Opens) ⟶ a ⁻¹ᵁ ⊤) :
+    sectionsPullback a N s =
+      ((pullback a).obj N).presheaf.map i.op
+        (((pullbackPushforwardAdjunction a).unit.app N).app ⊤ s) :=
+  rfl
+
+/-- **The pullback of global sections is natural in the sheaf of modules.** For `a : X' ⟶ Y'`
+and `φ : N ⟶ N'`, the square
+
+```
+    Γ(N, ⊤)  ------------- φ.app ⊤ ------------->  Γ(N', ⊤)
+       |                                              |
+sectionsPullback a N                       sectionsPullback a N'
+       v                                              v
+Γ(a ^* N, ⊤) -- ((pullback a).map φ).app ⊤ --> Γ(a ^* N', ⊤)
+```
+
+commutes. -/
+@[reassoc]
+lemma sectionsPullback_naturality {X' Y' : Scheme.{u}} (a : X' ⟶ Y') {N N' : Y'.Modules}
+    (φ : N ⟶ N') :
+    sectionsPullback a N ≫ ((pullback a).map φ).app ⊤ = φ.app ⊤ ≫ sectionsPullback a N' := by
+  ext s
+  have h := ConcreteCategory.congr_hom
+    congr(Hom.app $(((pullbackPushforwardAdjunction a).unit.naturality φ).symm) ⊤) s
+  simp only [Functor.comp_map, Functor.id_map, Hom.comp_app, ConcreteCategory.comp_apply,
+    pushforward_map_app] at h
+  simp only [ConcreteCategory.comp_apply,
+    sectionsPullback_apply a N s (homOfLE (by simp)),
+    sectionsPullback_apply a N' _ (homOfLE (by simp)), Hom.naturality_apply]
+  exact congrArg _ h
+
+/-- Elementwise version of
+`AlgebraicGeometry.Scheme.Modules.sectionsPullback_naturality`. -/
+lemma sectionsPullback_naturality_apply {X' Y' : Scheme.{u}} (a : X' ⟶ Y') {N N' : Y'.Modules}
+    (φ : N ⟶ N') (s : Γ(N, ⊤)) :
+    ((pullback a).map φ).app ⊤ (sectionsPullback a N s) = sectionsPullback a N' (φ.app ⊤ s) :=
+  ConcreteCategory.congr_hom (sectionsPullback_naturality a φ) s
 
 /-- The pullback of sections is natural in the sheaf of modules:
 
@@ -865,6 +972,156 @@ noncomputable def fiberRestrictToFiberIso (f : X ⟶ Y) (y : Y) (F : X.Modules) 
         (F.fiber (f.fiberι y x)) :=
   fiberPullbackIso (f.fiberι y) F x
 
+/-- The global sections of a sheaf of modules on the scheme-theoretic fibre `X_y` of
+`f : X ⟶ Y` over `y : Y`, as a functor to `κ(y)`-vector spaces: the fibre is a scheme over
+`Spec κ(y)`, and this is the direct image along that structure morphism, evaluated at the top
+open. -/
+noncomputable def fiberSectionsFunctor (f : X ⟶ Y) (y : Y) :
+    (f.fiber y).Modules ⥤ ModuleCat (Y.residueField y) :=
+  pushforward (f.fiberToSpecResidueField y) ⋙ moduleSpecΓFunctor (R := Y.residueField y)
+
+/-- The `κ(y)`-vector space `Γ(X_y, F_y)` of global sections of the restriction of a sheaf of
+`𝒪_X`-modules `F` to the fibre of `f : X ⟶ Y` over `y : Y`. -/
+noncomputable abbrev fiberSections (f : X ⟶ Y) (F : X.Modules) (y : Y) :
+    ModuleCat (Y.residueField y) :=
+  (fiberSectionsFunctor f y).obj ((restrictToFiber f y).obj F)
+
 end Fiber
+
+section BaseChangeSquare
+
+variable {X Y S T : Scheme.{u}} {v : X ⟶ Y} {f : Y ⟶ T} {g : X ⟶ S} {u : S ⟶ T}
+
+/-- **The comparison of pullbacks around a commutative square** `v ≫ f = g ≫ u` of schemes:
+pulling back along `u` and then along `g` is pulling back along `f` and then along `v`.
+
+```
+            v
+      X ─────────→ Y                X.Modules ←─── v^* ─── Y.Modules
+      │            │                    ↑                      ↑
+    g │            │ f              g^* │          ⟸           │ f^*
+      ↓            ↓                    │                      │
+      S ─────────→ T                S.Modules ←─── u^* ─── T.Modules
+            u
+```
+
+It is an isomorphism (`AlgebraicGeometry.Scheme.Modules.isIso_natTrans_pullbackTwoSquare`), but
+it is packaged as a 2-square so that the base change transformation
+`AlgebraicGeometry.Scheme.Modules.baseChange` can be obtained as its mate. -/
+noncomputable def pullbackTwoSquare (w : v ≫ f = g ≫ u) :
+    TwoSquare (Modules.pullback u) (Modules.pullback f) (Modules.pullback g)
+      (Modules.pullback v) :=
+  TwoSquare.mk _ _ _ _
+    ((pullbackComp g u).hom ≫ (pullbackCongr w.symm).hom ≫ (pullbackComp v f).inv)
+
+/-- The comparison of pullbacks around a commutative square is an isomorphism: it is a composite
+of isomorphisms. -/
+instance isIso_natTrans_pullbackTwoSquare (w : v ≫ f = g ≫ u) :
+    IsIso (pullbackTwoSquare w).natTrans :=
+  inferInstanceAs (IsIso ((pullbackComp g u).hom ≫ (pullbackCongr w.symm).hom ≫
+    (pullbackComp v f).inv))
+
+/-- **The base change transformation** `u^* ∘ f_* ⟶ g_* ∘ v^*` attached to a commutative square
+`v ≫ f = g ≫ u` of schemes: the mate of the comparison of pullbacks
+`AlgebraicGeometry.Scheme.Modules.pullbackTwoSquare`.
+
+```
+   Y.Modules ─────── f_* ──────→ T.Modules
+       │                             │
+   v^* │              ⟹              │ u^*
+       ↓                             ↓
+   X.Modules ─────── g_* ──────→ S.Modules
+```
+-/
+noncomputable def baseChange (w : v ≫ f = g ≫ u) :
+    TwoSquare (pushforward f) (Modules.pullback v) (Modules.pullback u) (pushforward g) :=
+  mateEquiv (pullbackPushforwardAdjunction f) (pullbackPushforwardAdjunction g)
+    (pullbackTwoSquare w)
+
+/-- **The mate identity for the base change transformation**: the base change map, pulled back
+along `g` and followed by the counit of `g^* ⊣ g_*`, is the comparison of pullbacks followed by
+the pullback along `v` of the counit of `f^* ⊣ f_*`.
+
+```
+   g^* u^* f_* M ─── g^*(bc) ───→ g^* g_* v^* M
+         │                              │
+         │ comparison                   │ ε_g
+         ↓                              ↓
+   v^* f^* f_* M ─── v^*(ε_f) ──→     v^* M
+```
+-/
+@[reassoc]
+lemma map_baseChange_comp_counit (w : v ≫ f = g ≫ u) (M : Y.Modules) :
+    (Modules.pullback g).map ((baseChange w).natTrans.app M) ≫
+        (pullbackPushforwardAdjunction g).counit.app ((Modules.pullback v).obj M) =
+      (pullbackTwoSquare w).natTrans.app ((pushforward f).obj M) ≫
+        (Modules.pullback v).map ((pullbackPushforwardAdjunction f).counit.app M) :=
+  mateEquiv_counit _ _ _ M
+
+end BaseChangeSquare
+
+section FiberBaseChange
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) (y : Y)
+
+/-- **The base change transformation for a scheme-theoretic fibre**: the specialisation of
+`AlgebraicGeometry.Scheme.Modules.baseChange` to the fibre square of `f : X ⟶ Y` over `y : Y`.
+
+```
+   X.Modules ────────── f_* ─────────→ Y.Modules
+       │                                   │
+   v^* │                ⟹                  │ u^*
+       ↓                                   ↓
+ (X_y).Modules ─── g_* ───→ (Spec κ(y)).Modules
+```
+
+Here `v = f.fiberι y`, `u = Y.fromSpecResidueField y` and `g = f.fiberToSpecResidueField y`. -/
+noncomputable abbrev fiberBaseChange :
+    TwoSquare (pushforward f) (restrictToFiber f y)
+      (Modules.pullback (Y.fromSpecResidueField y))
+      (pushforward (f.fiberToSpecResidueField y)) :=
+  baseChange (f.fiber_fac y)
+
+/-- **The base change map for a fibre, as a natural transformation** from the fibre at `y` of
+the direct image to the global sections on the fibre `X_y`: the global sections on `Spec κ(y)`
+of `AlgebraicGeometry.Scheme.Modules.fiberBaseChange`.
+
+```
+   X.Modules ────────── f_* ⋙ (–)(y) ─────────→ ModuleCat κ(y)
+       │                                              ║
+   F ↦ F_y │                    ⟹                     ║
+       ↓                                              ║
+ (X_y).Modules ────── Γ(X_y, –) ────────────→ ModuleCat κ(y)
+```
+-/
+noncomputable def fiberBaseChangeNatTrans :
+    pushforward f ⋙ fiberFunctor Y y ⟶ restrictToFiber f y ⋙ fiberSectionsFunctor f y :=
+  Functor.whiskerRight (fiberBaseChange f y).natTrans
+    (moduleSpecΓFunctor (R := Y.residueField y))
+
+/-- **The base change map** `(f_* F)(y) ⟶ Γ(X_y, F_y)`, from the fibre at `y` of the direct
+image of `F` along `f : X ⟶ Y` to the global sections of the restriction of `F` to the fibre
+`X_y`. It is a `κ(y)`-linear map, and it is natural in `F` by
+`AlgebraicGeometry.Scheme.Modules.fiberBaseChangeMap_naturality`. -/
+noncomputable def fiberBaseChangeMap :
+    ((pushforward f).obj F).fiber y ⟶ fiberSections f F y :=
+  (fiberBaseChangeNatTrans f y).app F
+
+/-- The base change map is the image of the base change transformation under global sections
+on `Spec κ(y)`. -/
+lemma fiberBaseChangeMap_eq :
+    fiberBaseChangeMap f F y =
+      (moduleSpecΓFunctor (R := Y.residueField y)).map ((fiberBaseChange f y).natTrans.app F) :=
+  rfl
+
+variable {F} in
+/-- **The base change map is natural in `F`.** -/
+@[reassoc]
+lemma fiberBaseChangeMap_naturality {G : X.Modules} (φ : F ⟶ G) :
+    fiberMap ((pushforward f).map φ) y ≫ fiberBaseChangeMap f G y =
+      fiberBaseChangeMap f F y ≫ (fiberSectionsFunctor f y).map ((restrictToFiber f y).map φ) :=
+  (fiberBaseChangeNatTrans f y).naturality φ
+
+end FiberBaseChange
 
 end AlgebraicGeometry.Scheme.Modules

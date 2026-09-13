@@ -257,6 +257,7 @@ finite for a line bundle $L$ and not only for the structure sheaf.
 
 \begin{proposition}[Semicontinuity of $h^0$ in a proper family]
 \label{prop:cube-semicontinuity}
+\lean{AlgebraicGeometry.Scheme.Modules.isClosed_setOf_le_finrankFiberSections}
 Let $T$ be a noetherian scheme, let $f\colon W\to T$ be a proper morphism and
 let $F$ be a coherent sheaf on $W$ which is flat over $T$.  For $t\in T$ let
 $W_t:=W\times_T\Spec\kappa(t)$ be the fibre, let $F_t$ be the restriction of
@@ -291,6 +292,10 @@ not only $H^0$.
 \begin{proposition}[Cohomology and base change in degree zero, after Grauert]
 \label{prop:cube-grauert}
 \uses{prop:cube-semicontinuity}
+\lean{AlgebraicGeometry.Scheme.Modules.isLocallyFree_pushforward_of_finrankFiberSections_eq,
+AlgebraicGeometry.Scheme.Modules.finrank_fiber_pushforward_of_finrankFiberSections_eq,
+AlgebraicGeometry.Scheme.Modules.isIso_fiberBaseChangeMap_of_finrankFiberSections_eq,
+AlgebraicGeometry.Scheme.Modules.invertible_pushforward_of_finrankFiberSections_eq_one}
 Let $T$ be a reduced noetherian scheme, let $f\colon W\to T$ be a proper
 morphism and let $F$ be a coherent sheaf on $W$ which is flat over $T$.
 Suppose that the function $h^0$ of \Cref{prop:cube-semicontinuity} is constant
@@ -323,6 +328,18 @@ morphisms in the form used below.  \cite[III, Theorem 12.11]{Hartshorne} is
 the same statement under the standing hypothesis of that section that $f$ is
 \emph{projective}, and with the base assumed integral.
 
+In the formalisation, statement (1) is split in two, because sheaves of
+modules carry no rank function there: local freeness of $f_*F$ is
+\texttt{isLocallyFree\_pushforward\_of\_finrankFiberSections\_eq}, and the
+rank is recorded as
+\texttt{finrank\_fiber\_pushforward\_of\_finrankFiberSections\_eq}, the
+assertion that every fibre of $f_*F$ is $r$-dimensional --- which is proved
+from (2).  For $r=1$ the chapter uses the stronger conclusion that $f_*F$ is
+\emph{invertible}, formalised separately as
+\texttt{invertible\_pushforward\_of\_finrankFiberSections\_eq\_one}, because
+the passage from "locally free with one-dimensional fibres" to "invertible"
+is not yet available.
+
 Two hypotheses that are often quoted with this theorem are deliberately
 absent.  Flatness of $f$ itself plays no role: what is needed is flatness of
 $F$ over $T$.  And the base is assumed only reduced, not integral;
@@ -333,6 +350,8 @@ single rank $r$, and here the rank is fixed by hypothesis.
 \begin{lemma}[The counit on a fibre is the evaluation map]
 \label{lem:cube-counit-fibre}
 \uses{prop:cube-grauert}
+\lean{AlgebraicGeometry.Scheme.Modules.fiberFreeComparison_comp_map_counit}
+\leanok
 In the situation of \Cref{prop:cube-grauert}, let $t\in T$ and let
 $\varepsilon\colon f^*f_*F\to F$ be the counit of the adjunction
 $f^*\dashv f_*$.  Then the square
@@ -350,6 +369,7 @@ $s\otimes1$ to $s$.
 \end{lemma}
 \begin{proof}
 \uses{prop:cube-grauert}
+\leanok
 This is a compatibility rather than a further input, and it is proved by
 unwinding definitions.  Pullback commutes with base change, so restricting
 $f^*f_*F$ to the fibre $W_t$ gives $f_t^*\bigl((f_*F)(t)\bigr)$, and the
@@ -2075,11 +2095,21 @@ from them.
   definitions} --- the fibre $F(s)$ as a vector space over the residue field,
   which carries content, and the restriction $F_t$, which is an abbreviation
   for the pullback along the fibre inclusion of
-  \texttt{Mathlib/AlgebraicGeometry/Fiber.lean} --- and \emph{about five
+  \texttt{Mathlib/AlgebraicGeometry/Fiber.lean} --- and \emph{about seven
   lemmas}: functoriality in $F$, compatibility with pullback, with tensor
-  products and with inverses of line bundles, and the fibre of a locally free
-  sheaf of rank one being one-dimensional.  In
-  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean}.
+  products and with inverses of line bundles, the fibre of a locally free
+  sheaf of rank one being one-dimensional, and, underlying the last three, the
+  monoidality of the global sections functor on the spectrum of a ring with at
+  most one prime ideal, which in turn rests on every presheaf of modules on a
+  space with at most one point being a sheaf.  The fibre itself and the
+  restriction to a fibre are in
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean}; the
+  tensor, inverse and rank-one statements are in
+  \texttt{WeilConjectures/AlgebraicGeometry/Modules/Fiber.lean} and
+  \texttt{WeilConjectures/AlgebraicGeometry/Modules/SectionsMonoidal.lean}
+  instead, because they need the monoidal structure on sheaves of modules and
+  the notion of an invertible sheaf, which a file under
+  \texttt{WeilConjectures/Mathlib/} may not import.
   \item[(N3)] \emph{Pullback of line bundles beyond what
   \texttt{Scheme.Modules.pullback} gives, and the induced homomorphism of
   Picard groups.}  Needed by every statement of
