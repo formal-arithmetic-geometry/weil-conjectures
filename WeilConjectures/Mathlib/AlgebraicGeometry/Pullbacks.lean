@@ -10,10 +10,21 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Topology.Sheaves.CommRingCat
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 
 /-!
-# Global sections and flat base change of the ground ring
+# Fibre products of schemes: slice inclusions, and flat base change of global sections
+
+## Slice inclusions
+
+A section `y₀ : S ⟶ Y` of `πY : Y ⟶ S` cuts out a *slice* `X × {y₀} ⊆ X ×_S Y`: the morphism
+`AlgebraicGeometry.sliceInclusionFst` induced by `𝟙 X` and `πX ≫ y₀`. It is a section of the
+first projection, hence a closed immersion as soon as `πY` is separated, and it is a morphism of
+`S`-schemes for the structure morphism `AlgebraicGeometry.Scheme.canonicallyOverPullback` puts
+on `X ×_S Y`.
+
+## Flat base change of global sections
 
 Let `X` be a separated scheme over `Spec R`, let `φ : R ⟶ R'` be a flat ring map and let
 `p : X ×_{Spec R} Spec R' ⟶ X` be the first projection. For a quasi-compact open `U ⊆ X`, the
@@ -33,6 +44,8 @@ of two affine opens is affine, so an induction on the number of members of the c
 
 ## Main results
 
+- `AlgebraicGeometry.sliceInclusionFst`, `AlgebraicGeometry.sliceInclusionSnd` and their
+  `IsClosedImmersion` and `IsOver` instances
 - `AlgebraicGeometry.isPushout_app_of_isAffineOpen`
 - `AlgebraicGeometry.isPushout_app_of_isCompact`
 
@@ -283,39 +296,99 @@ theorem isPushout_app_of_isCompact (φ : R ⟶ R') (f : X ⟶ Spec R) [IsSeparat
   obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp ha
   exact i.2
 
+section SliceInclusion
+
+variable {Y S : Scheme.{u}} (πX : X ⟶ S) (πY : Y ⟶ S)
+
+/-- The slice inclusion `j_{y₀} : X ⟶ X ×_S Y` determined by a section `y₀` of `πY`. -/
+noncomputable def sliceInclusionFst (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) : X ⟶ pullback πX πY :=
+  pullback.lift (𝟙 X) (πX ≫ y₀) (by simp [hy₀])
+
+@[reassoc (attr := simp)]
+lemma sliceInclusionFst_fst (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
+    sliceInclusionFst πX πY y₀ hy₀ ≫ pullback.fst πX πY = 𝟙 X := by
+  simp [sliceInclusionFst]
+
+@[reassoc (attr := simp)]
+lemma sliceInclusionFst_snd (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
+    sliceInclusionFst πX πY y₀ hy₀ ≫ pullback.snd πX πY = πX ≫ y₀ := by
+  simp [sliceInclusionFst]
+
+/-- The slice inclusion `j_{x₀} : Y ⟶ X ×_S Y` determined by a section `x₀` of `πX`. -/
+noncomputable def sliceInclusionSnd (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) : Y ⟶ pullback πX πY :=
+  pullback.lift (πY ≫ x₀) (𝟙 Y) (by simp [hx₀])
+
+@[reassoc (attr := simp)]
+lemma sliceInclusionSnd_fst (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
+    sliceInclusionSnd πX πY x₀ hx₀ ≫ pullback.fst πX πY = πY ≫ x₀ := by
+  simp [sliceInclusionSnd]
+
+@[reassoc (attr := simp)]
+lemma sliceInclusionSnd_snd (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
+    sliceInclusionSnd πX πY x₀ hx₀ ≫ pullback.snd πX πY = 𝟙 Y := by
+  simp [sliceInclusionSnd]
+
+/-- **A slice inclusion is a closed immersion**, being a section of the projection
+`pr₁ : X ×_S Y ⟶ X`, which is separated because `πY` is. -/
+instance [IsSeparated πY] (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
+    IsClosedImmersion (sliceInclusionFst πX πY y₀ hy₀) :=
+  IsClosedImmersion.of_comp_eq_id (f := pullback.fst πX πY) (by simp)
+
+/-- **A slice inclusion is a closed immersion**, being a section of the projection
+`pr₂ : X ×_S Y ⟶ Y`, which is separated because `πX` is. -/
+instance [IsSeparated πX] (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
+    IsClosedImmersion (sliceInclusionSnd πX πY x₀ hx₀) :=
+  IsClosedImmersion.of_comp_eq_id (f := pullback.snd πX πY) (by simp)
+
+end SliceInclusion
+
 section Over
 
-variable (S T U : Scheme.{u}) [T.Over S] [U.Over S]
+variable {Y S : Scheme.{u}} [X.Over S] [Y.Over S]
 
-/-- **The fibre product of two `S`-schemes is an `S`-scheme**: the structure morphism is the
-first projection followed by the structure morphism of the first factor.
+/-- The first projection of a fibre product of two `S`-schemes is a morphism of `S`-schemes.
+The structure morphism of `X ×_S Y` is the *second* projection followed by `Y ↘ S`
+(`AlgebraicGeometry.Scheme.canonicallyOverPullback`), so this is `pullback.condition`. -/
+instance : (pullback.fst (X ↘ S) (Y ↘ S)).IsOver S := ⟨pullback.condition⟩
 
-Mathlib records the fibre product `pullback (T ↘ S) f` as a scheme over the *target* of `f`
-(`AlgebraicGeometry.Scheme.canonicallyOverPullback`, through the second projection), but not
-over the base `S`.
+/-- The second projection of a fibre product of two `S`-schemes is a morphism of `S`-schemes. -/
+instance : (pullback.snd (X ↘ S) (Y ↘ S)).IsOver S := ⟨rfl⟩
 
-This is deliberately not a global instance: when `U = S` and `U ↘ S = 𝟙 S`, the fibre product
-already carries an `Over S` structure through `canonicallyOverPullback`, namely the second
-projection, and the two agree only up to `pullback.condition`. Write
-`open AlgebraicGeometry.OverPullback` to switch it on. -/
-@[instance_reducible]
-noncomputable def Scheme.overPullback : (pullback (T ↘ S) (U ↘ S)).Over S :=
-  ⟨pullback.fst _ _ ≫ T ↘ S⟩
+/-- **The slice inclusion `j_{y₀} : X ⟶ X ×_S Y` is a morphism of `S`-schemes**:
 
-namespace OverPullback
+```
+  X ─────j_{y₀}─────▶ X ×_S Y
+    ╲                ╱
+      ╲            ╱  pr₂ ≫ (Y ↘ S)
+  X ↘ S ╲        ╱      (the structure morphism of `X ×_S Y`)
+          ▼    ▼
+            S
+```
 
-attribute [scoped instance] Scheme.overPullback
+The triangle commutes because `pr₂ ∘ j_{y₀} = (X ↘ S) ≫ y₀` and `y₀` is a section of `Y ↘ S`. -/
+instance isOver_sliceInclusionFst (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ Y ↘ S = 𝟙 _) :
+    (sliceInclusionFst (X ↘ S) (Y ↘ S) y₀ hy₀).IsOver S :=
+  ⟨by
+    change sliceInclusionFst (X ↘ S) (Y ↘ S) y₀ hy₀ ≫ pullback.snd _ _ ≫ Y ↘ S = X ↘ S
+    rw [← Category.assoc, sliceInclusionFst_snd, Category.assoc, hy₀, Category.comp_id]⟩
 
-@[simp]
-lemma overPullback_over : pullback (T ↘ S) (U ↘ S) ↘ S = pullback.fst _ _ ≫ T ↘ S :=
-  rfl
+/-- **The slice inclusion `j_{x₀} : Y ⟶ X ×_S Y` is a morphism of `S`-schemes**:
 
-scoped instance : (pullback.fst (T ↘ S) (U ↘ S)).IsOver S := ⟨rfl⟩
+```
+  Y ─────j_{x₀}─────▶ X ×_S Y
+    ╲                ╱
+      ╲            ╱  pr₂ ≫ (Y ↘ S)
+  Y ↘ S ╲        ╱      (the structure morphism of `X ×_S Y`)
+          ▼    ▼
+            S
+```
 
-scoped instance : (pullback.snd (T ↘ S) (U ↘ S)).IsOver S :=
-  ⟨(pullback.condition (f := T ↘ S) (g := U ↘ S)).symm⟩
-
-end OverPullback
+The triangle commutes because `pr₂ ∘ j_{x₀} = 𝟙 Y`. -/
+instance isOver_sliceInclusionSnd (x₀ : S ⟶ X) (hx₀ : x₀ ≫ X ↘ S = 𝟙 _) :
+    (sliceInclusionSnd (X ↘ S) (Y ↘ S) x₀ hx₀).IsOver S :=
+  ⟨by
+    change sliceInclusionSnd (X ↘ S) (Y ↘ S) x₀ hx₀ ≫ pullback.snd _ _ ≫ Y ↘ S = Y ↘ S
+    rw [← Category.assoc, sliceInclusionSnd_snd, Category.id_comp]⟩
 
 end Over
 

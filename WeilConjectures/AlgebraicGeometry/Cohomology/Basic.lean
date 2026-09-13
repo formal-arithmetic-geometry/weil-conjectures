@@ -34,7 +34,8 @@ section `r` of the structure sheaf multiplies `M` by `r`, which is an endomorphi
   a module over `Γ(X, 𝒪_X)`.
 - `AlgebraicGeometry.Scheme.Modules.H.map` — functoriality of `H^n(X, -)`, as a
   `Γ(X, 𝒪_X)`-linear map, and `AlgebraicGeometry.Scheme.Modules.H.mapOver`, its `R`-linear
-  refinement for a scheme over `Spec R`.
+  refinement for a scheme over `Spec R`, together with the identity and composition laws and
+  the induced isomorphism `AlgebraicGeometry.Scheme.Modules.H.mapLinearEquivOver`.
 
 ## Main results
 
@@ -328,7 +329,10 @@ lemma H.smul_over_def {M : X.Modules} {n : ℕ} (r : R) (x : M.H n) :
     r • x = Scheme.overRingHom R X r • x :=
   rfl
 
-variable {X} in
+section
+
+variable {X}
+
 /-- The map induced on cohomology by a morphism of sheaves of modules is `R`-linear for the
 module structure coming from the base ring. -/
 lemma H.mapAddHom_smul_over {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (r : R) (x : M.H n) :
@@ -336,19 +340,37 @@ lemma H.mapAddHom_smul_over {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (r : R) (
   rw [H.smul_over_def R X, H.smul_over_def R X, ← H.map_apply, LinearMap.map_smul,
     H.map_apply]
 
-variable {X} in
 /-- Functoriality of `H^n(X, -)` as an `R`-linear map, for `X` a scheme over `Spec R`. The
 `Γ(X, 𝒪_X)`-linear version is `AlgebraicGeometry.Scheme.Modules.H.map`. -/
 noncomputable def H.mapOver {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) : M.H n →ₗ[R] N.H n where
-  toFun x := H.map φ n x
+  toFun := H.mapAddHom φ n
   map_add' := (H.mapAddHom φ n).map_add
   map_smul' := H.mapAddHom_smul_over R φ n
 
-variable {X} in
 @[simp]
 lemma H.mapOver_apply {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
     H.mapOver R φ n x = H.map φ n x :=
   rfl
+
+@[simp]
+lemma H.mapOver_id (M : X.Modules) (n : ℕ) :
+    H.mapOver R (𝟙 M) n = LinearMap.id := by
+  ext x
+  simp
+
+lemma H.mapOver_comp {M N P : X.Modules} (φ : M ⟶ N) (ψ : N ⟶ P) (n : ℕ) :
+    H.mapOver R (φ ≫ ψ) n = (H.mapOver R ψ n).comp (H.mapOver R φ n) := by
+  ext x
+  simp [H.map_comp]
+
+/-- An isomorphism of sheaves of modules induces an `R`-linear isomorphism on cohomology. -/
+noncomputable def H.mapLinearEquivOver {M N : X.Modules} (e : M ≅ N) (n : ℕ) :
+    M.H n ≃ₗ[R] N.H n :=
+  LinearEquiv.ofLinearMap (H.mapOver R e.hom n) (H.mapOver R e.inv n)
+    (by rw [← H.mapOver_comp, e.inv_hom_id, H.mapOver_id])
+    (by rw [← H.mapOver_comp, e.hom_inv_id, H.mapOver_id])
+
+end
 
 end OverBase
 

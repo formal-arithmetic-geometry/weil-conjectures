@@ -28,9 +28,10 @@ is simply the dimension of the space of global sections.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.eulerChar` — the Euler characteristic `χ(X, F)`.
-- `AlgebraicGeometry.Scheme.Modules.H.mapLinearEquivOver` and
-  `AlgebraicGeometry.Scheme.Modules.H.δOver` — the maps of the long exact cohomology sequence,
-  as `k`-linear maps rather than `Γ(X, 𝒪_X)`-linear ones.
+- `AlgebraicGeometry.Scheme.Modules.H.δOver` — the connecting homomorphism of the long exact
+  cohomology sequence, as a `k`-linear map rather than a `Γ(X, 𝒪_X)`-linear one; the other map
+  of the sequence, `AlgebraicGeometry.Scheme.Modules.H.mapOver`, is in
+  `WeilConjectures.AlgebraicGeometry.Cohomology.Basic`.
 
 ## Main results
 
@@ -200,23 +201,6 @@ theorem H.exists_forall_subsingleton [IsProper (X ↘ Spec (.of k))] :
 end Proper
 
 /-! ### The maps of the long exact sequence as `k`-linear maps -/
-
-@[simp]
-lemma H.mapOver_id (M : X.Modules) (n : ℕ) :
-    H.mapOver k (𝟙 M) n = LinearMap.id := by
-  ext x
-  simp
-
-lemma H.mapOver_comp (φ : M ⟶ N) (ψ : N ⟶ P) (n : ℕ) :
-    H.mapOver k (φ ≫ ψ) n = (H.mapOver k ψ n).comp (H.mapOver k φ n) := by
-  ext x
-  simp [H.map_comp]
-
-/-- An isomorphism of sheaves of modules induces a `k`-linear isomorphism on cohomology. -/
-noncomputable def H.mapLinearEquivOver (e : M ≅ N) (n : ℕ) : M.H n ≃ₗ[k] N.H n :=
-  LinearEquiv.ofLinearMap (H.mapOver k e.hom n) (H.mapOver k e.inv n)
-    (by rw [← H.mapOver_comp, e.inv_hom_id, H.mapOver_id])
-    (by rw [← H.mapOver_comp, e.hom_inv_id, H.mapOver_id])
 
 /-- The connecting homomorphism of a short exact sequence as a `k`-linear map, for `X` a scheme
 over `Spec k`. The `Γ(X, 𝒪_X)`-linear version is `AlgebraicGeometry.Scheme.Modules.H.δ`. -/
