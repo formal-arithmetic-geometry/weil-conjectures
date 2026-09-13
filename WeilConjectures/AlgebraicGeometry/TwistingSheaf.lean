@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
+public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.Localization.Defs
 
 /-!
@@ -30,12 +31,29 @@ set `D₊(f)`, with inverse the division by `f`. In particular, on
 `ℙᴺ_A = Proj A[T₀, …, T_N]` the sheaf `𝒪(1)` is trivial on each of the standard affine charts
 `D₊(Tᵢ)`, the transition functions being the units `Tᵢ / Tⱼ`.
 
+Because the construction is pointwise, the locus where a global section does not vanish is
+described pointwise as well: for `a ∈ 𝒜 j`, the value of `homogeneousSection ha` at a point `x`
+is a **unit** of the local ring `A_x = Localization.AtPrime x.asHomogeneousIdeal.toIdeal` — the
+localization of the whole graded ring `A` at `x`, not the local ring `𝒪_{Proj 𝒜, x}` of the
+scheme `Proj 𝒜` — exactly when `a ∉ x`, that is, exactly on the basic open set `D₊(a)`. Being a
+unit, rather than being nonzero, is the right test: the value `a / 1` can be nonzero in `A_x`
+while lying in the maximal ideal, which is what "`a` vanishes at `x`" means.
+
+If moreover some `f ∈ 𝒜 j` avoids `x`, then `f` trivialises `𝒪(j)` near `x` (this is
+`Proj.isIso_app_twistingSheafMul`) and `Proj.homogeneousSection_apply_eq_mul` identifies the
+value of `homogeneousSection ha` at `x` with `a / f` times the local generator attached to `f`,
+where now `a / f` does lie in `𝒪_{Proj 𝒜, x}`. The two non-vanishing criteria agree
+(`Proj.isUnit_homogeneousSection_apply_iff_isUnit_mk`), but only conditionally: for a general
+graded ring no element of `𝒜 j` need avoid a given `x`, whereas
+`Proj.isUnit_homogeneousSection_apply_iff` is unconditional.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Proj.twistingSheaf`: the twisting sheaf `𝒪(d)` on `Proj 𝒜`, for `d : ℤ`.
 - `AlgebraicGeometry.Proj.homogeneousSection`: the global section of `𝒪(j)` attached to a
   homogeneous element of degree `j`. On `ℙᴺ` these are the homogeneous coordinates
-  `T₀, …, T_N ∈ Γ(ℙᴺ, 𝒪(1))`.
+  `T₀, …, T_N ∈ Γ(ℙᴺ, 𝒪(1))`. `AlgebraicGeometry.Proj.homogeneousSectionHom` bundles this
+  construction as an additive monoid homomorphism `↥(𝒜 j) →+ Γ(𝒪(j), ⊤)`.
 - `AlgebraicGeometry.Proj.twistingSheafMul`: multiplication by a homogeneous element `f` of
   degree `m`, as a morphism `𝒪(d) ⟶ 𝒪(d + m)`.
 
@@ -44,6 +62,12 @@ set `D₊(f)`, with inverse the division by `f`. In particular, on
 - `AlgebraicGeometry.Proj.twistingSheafRestrictIso`: **local triviality**, multiplication by a
   homogeneous element `f` of degree `m` is an isomorphism `𝒪(d) ≅ 𝒪(d + m)` over `D₊(f)`.
 - `AlgebraicGeometry.Proj.twistingSheafZeroIso`: `𝒪(0)` is the structure sheaf.
+- `AlgebraicGeometry.Proj.isUnit_homogeneousSection_apply_iff`: the section of `𝒪(j)` attached
+  to `a ∈ 𝒜 j` does not vanish at a point `x` if and only if `x ∈ D₊(a)`. Dually,
+  `AlgebraicGeometry.Proj.homogeneousSection_apply_mem_maximalIdeal_iff` says that it vanishes
+  at `x` if and only if `a` lies in the homogeneous prime ideal of `x`.
+- `AlgebraicGeometry.Proj.homogeneousSection_apply_eq_mul`: near a point `x` avoided by some
+  `f ∈ 𝒜 j`, the section attached to `a` is `a / f` times the local generator attached to `f`.
 - `AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.sectionPowEquiv`: **local freeness**, over
   an open set on which a homogeneous element `f` of degree `m` is invertible, the sections of
   `𝒪(m * k)`, `k : ℤ`, form a free module of rank one over the sections of the structure sheaf,
@@ -51,15 +75,29 @@ set `D₊(f)`, with inverse the division by `f`. In particular, on
 
 ## TODO
 
-- The fibrewise description of a global section: for `a` homogeneous of degree `j`, the section
-  `homogeneousSection a` of `𝒪(j)` vanishes at a point `x` if and only if `a ∈ x`.
 - The compatibility of `AlgebraicGeometry.Proj.twistingSheafTensorIso` with global sections: the
   image of `homogeneousSection a ⊗ homogeneousSection b` under `𝒪(i) ⊗ 𝒪(j) ≅ 𝒪(i + j)` should
   be `homogeneousSection (a * b)`. This is what associativity of the tensor isomorphisms and the
   computation of the induced map `ℤ → Pic (Proj 𝒜)` will need.
+- The *fibrewise* description of a global section, in the sense of
+  `AlgebraicGeometry.Scheme.Modules.fiber`: for `a ∈ 𝒜 j`, the image of
+  `homogeneousSection ha` under
+  `Scheme.Modules.sectionsPullback ((Proj 𝒜).fromSpecResidueField x) (twistingSheaf 𝒜 j)`
+  vanishes if and only if `a ∈ x`. Unlike the pointwise criterion proved here, this form
+  survives pulling `𝒪(j)` back along a morphism, which is what the blueprint consumes; it needs
+  a description of the pullback of `𝒪(j)` along `Spec κ(x) ⟶ Proj 𝒜`, which is not available
+  yet. `Proj.isUnit_homogeneousSection_apply_iff` is the proof ingredient for it.
 - The transfer of `𝒪(1)` to the relative projective space `ℙ(n; S)` of
   `WeilConjectures/AlgebraicGeometry/ProjectiveSpace.lean`, by pulling back along the map to
   the integral model, and the compatibility with base change.
+
+## Blueprint
+
+`Proj.isUnit_homogeneousSection_apply_iff` and `Proj.homogeneousSection_apply_mem_maximalIdeal_iff`
+are inputs to `lem:deg-general-hyperplane`, the existence of a hyperplane section avoiding the
+associated points of a coherent sheaf. They are the `Proj`-level half of the statement used
+there, that on `ℙᴺ` the hyperplane `V(∑ⱼ aⱼ Tⱼ)` contains a point with homogeneous coordinates
+`ξ` exactly when `∑ⱼ aⱼ ξⱼ` vanishes in its residue field. The lemma itself is not proved here.
 -/
 
 @[expose] public section
@@ -567,8 +605,34 @@ theorem homogeneousSection_add {j : ℕ} {a b : A} (ha : a ∈ 𝒜 j) (hb : b �
   Subtype.ext (funext fun _ ↦ (Localization.add_mk_self a 1 b).symm)
 
 @[simp]
+theorem homogeneousSection_zero (j : ℕ) :
+    homogeneousSection (𝒜 := 𝒜) (zero_mem (𝒜 j)) = 0 :=
+  Subtype.ext (funext fun _ ↦ Localization.mk_zero _)
+
+@[simp]
 theorem homogeneousSection_apply {j : ℕ} {a : A} (ha : a ∈ 𝒜 j) (x : (⊤ : (Proj 𝒜).Opens)) :
     (homogeneousSection ha).1 x = Localization.mk a 1 := rfl
+
+variable (𝒜) in
+/-- The homogeneous elements of degree `j` map additively to the global sections of `𝒪(j)`;
+this is `AlgebraicGeometry.Proj.homogeneousSection` as an additive monoid homomorphism. -/
+def homogeneousSectionHom (j : ℕ) : ↥(𝒜 j) →+ Γ(twistingSheaf 𝒜 j, ⊤) where
+  toFun a := homogeneousSection a.2
+  map_zero' := homogeneousSection_zero j
+  map_add' a b := homogeneousSection_add a.2 b.2
+
+@[simp]
+theorem homogeneousSectionHom_apply {j : ℕ} (a : ↥(𝒜 j)) :
+    homogeneousSectionHom 𝒜 j a = homogeneousSection a.2 :=
+  rfl
+
+/-- A finite sum of homogeneous elements of degree `j` gives the sum of the corresponding
+sections of `𝒪(j)`: on `ℙᴺ` this expresses the section `∑ⱼ cⱼ Tⱼ` in terms of the homogeneous
+coordinates. -/
+theorem homogeneousSection_sum {j : ℕ} {ι : Type*} (a : ι → ↥(𝒜 j)) (s : Finset ι) :
+    homogeneousSection (𝒜 := 𝒜) (∑ i ∈ s, a i).2 =
+      ∑ i ∈ s, homogeneousSection (a i).2 :=
+  map_sum (homogeneousSectionHom 𝒜 j) a s
 
 /-- Multiplication by a homogeneous element `f` of degree `m` is a morphism of `𝒪`-modules
 `𝒪(d) ⟶ 𝒪(d + m)` on `Proj 𝒜`. -/
@@ -633,6 +697,81 @@ noncomputable def twistingSheafRestrictIso {m : ℕ} {f : A} (hf : f ∈ 𝒜 m)
     (twistingSheaf 𝒜 d).restrict (Proj.basicOpen 𝒜 f).ι ≅
       (twistingSheaf 𝒜 (d + m)).restrict (Proj.basicOpen 𝒜 f).ι :=
   asIso ((Scheme.Modules.restrictFunctor (Proj.basicOpen 𝒜 f).ι).map (twistingSheafMul hf d))
+
+section Vanishing
+
+variable {j : ℕ} {a : A} (ha : a ∈ 𝒜 j) (x : Proj 𝒜)
+
+/-- The value of `homogeneousSection ha` at a point `x` is the image of `a` in the local ring
+`A_x`. -/
+theorem homogeneousSection_apply_eq_algebraMap :
+    (homogeneousSection ha).1 ⟨x, trivial⟩ = algebraMap A (atPoint 𝒜 x) a :=
+  Localization.mk_one_eq_algebraMap a
+
+/-- **Pointwise non-vanishing.** The global section of `𝒪(j)` attached to a homogeneous element
+`a` of degree `j` does not vanish at a point `x` of `Proj 𝒜` — that is, its value at `x` is a
+unit of the local ring `A_x` — if and only if `x` lies in the basic open set `D₊(a)`. -/
+theorem isUnit_homogeneousSection_apply_iff :
+    IsUnit ((homogeneousSection ha).1 ⟨x, trivial⟩) ↔ x ∈ Proj.basicOpen 𝒜 a := by
+  rw [homogeneousSection_apply_eq_algebraMap ha x,
+    IsLocalization.AtPrime.isUnit_to_map_iff (atPoint 𝒜 x) x.asHomogeneousIdeal.toIdeal a]
+  exact Ideal.mem_primeCompl_iff.trans (Proj.mem_basicOpen 𝒜 a x).symm
+
+/-- **Pointwise vanishing.** The global section of `𝒪(j)` attached to a homogeneous element `a`
+of degree `j` vanishes at a point `x` of `Proj 𝒜` — that is, its value at `x` lies in the
+maximal ideal of the local ring `A_x` — if and only if `a` lies in the homogeneous prime ideal
+of `x`. -/
+theorem homogeneousSection_apply_mem_maximalIdeal_iff :
+    (homogeneousSection ha).1 ⟨x, trivial⟩ ∈ IsLocalRing.maximalIdeal (atPoint 𝒜 x) ↔
+      a ∈ x.asHomogeneousIdeal := by
+  rw [homogeneousSection_apply_eq_algebraMap ha x]
+  exact IsLocalization.AtPrime.to_map_mem_maximal_iff (atPoint 𝒜 x)
+    x.asHomogeneousIdeal.toIdeal a
+
+/-- The non-vanishing locus of the global section of `𝒪(j)` attached to a homogeneous element
+`a` of degree `j` is the basic open set `D₊(a)`. -/
+theorem setOf_isUnit_homogeneousSection_apply :
+    {y : Proj 𝒜 | IsUnit ((homogeneousSection ha).1 ⟨y, trivial⟩)} =
+      (Proj.basicOpen 𝒜 a : Set (Proj 𝒜)) :=
+  Set.ext fun y ↦ isUnit_homogeneousSection_apply_iff ha y
+
+section LocalGenerator
+
+variable {f : A} (hf : f ∈ 𝒜 j) (hfx : f ∉ x.asHomogeneousIdeal)
+
+/-- Near a point `x` avoided by a homogeneous element `f` of degree `j`, the section of `𝒪(j)`
+attached to `f` is a local generator, and the section attached to `a ∈ 𝒜 j` is `a / f` times it.
+Here `a / f` is an element of the local ring `𝒪_{Proj 𝒜, x}` of `Proj 𝒜` at `x`, acting on the
+value at `x` through `HomogeneousLocalization.val`. -/
+theorem homogeneousSection_apply_eq_mul :
+    (homogeneousSection ha).1 ⟨x, trivial⟩ =
+      (HomogeneousLocalization.mk ⟨j, ⟨a, ha⟩, ⟨f, hf⟩, hfx⟩ :
+        HomogeneousLocalization.AtPrime 𝒜 x.asHomogeneousIdeal.toIdeal).val *
+        (homogeneousSection hf).1 ⟨x, trivial⟩ := by
+  simp only [homogeneousSection_apply, HomogeneousLocalization.val_mk, Localization.mk_mul,
+    mul_one]
+  exact (Localization.mk_eq_mk_iff.mpr (Localization.r_of_eq (by simp [mul_comm]))).symm
+
+/-- The element `a / f` of the local ring `𝒪_{Proj 𝒜, x}` is a unit if and only if `x` lies in
+the basic open set `D₊(a)`, i.e. if and only if `a` avoids the homogeneous prime ideal of `x`. -/
+theorem isUnit_mk_iff_mem_basicOpen :
+    IsUnit (HomogeneousLocalization.mk ⟨j, ⟨a, ha⟩, ⟨f, hf⟩, hfx⟩ :
+        HomogeneousLocalization.AtPrime 𝒜 x.asHomogeneousIdeal.toIdeal) ↔
+      x ∈ Proj.basicOpen 𝒜 a :=
+  (HomogeneousLocalization.isUnit_mk_iff 𝒜 _ _).trans (Proj.mem_basicOpen 𝒜 a x).symm
+
+/-- **The two readings of non-vanishing at `x` agree**: the value of `homogeneousSection ha` at
+`x` is a unit of `A_x` if and only if the coefficient `a / f` of that value with respect to the
+local generator attached to `f` is a unit of `𝒪_{Proj 𝒜, x}`. -/
+theorem isUnit_homogeneousSection_apply_iff_isUnit_mk :
+    IsUnit ((homogeneousSection ha).1 ⟨x, trivial⟩) ↔
+      IsUnit (HomogeneousLocalization.mk ⟨j, ⟨a, ha⟩, ⟨f, hf⟩, hfx⟩ :
+        HomogeneousLocalization.AtPrime 𝒜 x.asHomogeneousIdeal.toIdeal) :=
+  (isUnit_homogeneousSection_apply_iff ha x).trans (isUnit_mk_iff_mem_basicOpen ha x hf hfx).symm
+
+end LocalGenerator
+
+end Vanishing
 
 end Proj
 
