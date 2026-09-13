@@ -490,6 +490,8 @@ statement is \stacksproject{0BUG}, part (8); see also \stacksproject{0FD2}.
 
 \begin{lemma}[Global sections after a base change of the ground field]
 \label{lem:cube-global-sections-base-change}
+\lean{AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_snd_appTop}
+\leanok
 Let $X$ be a proper variety over $k$ and let $A$ be a $k$-algebra.  Then the
 structure map is an isomorphism
 \[
@@ -498,12 +500,40 @@ structure map is an isomorphism
 \end{lemma}
 \begin{proof}
 \uses{lem:cube-global-sections, prop:cube-global-sections-flat-base-change}
+\leanok
 Every $k$-algebra is flat over the field $k$, and $X$ is quasi-compact and
 separated, so \Cref{prop:cube-global-sections-flat-base-change} identifies
 $\Gamma(X\times_k\Spec A,\O)$ with $\Gamma(X,\O_X)\otimes_kA$.  By
 \Cref{lem:cube-global-sections} that is $k\otimes_kA=A$, and the resulting
 isomorphism is the structure map.  Only the case of a finite-dimensional local
 $k$-algebra $A$ with residue field $k$ is used below.
+\end{proof}
+
+\begin{lemma}[Units of the infinitesimal thickenings of a proper variety]
+\label{lem:cube-thickening-units}
+\lean{AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective}
+\leanok
+Let $X$ be a proper variety over $k$, let $Z$ be a $k$-scheme and let $t\in Z$.
+Put $A_n:=\O_{Z,t}/\m_t^{n+1}$ and $Z_n:=\Spec A_n$.  Then for every $n\in\N$
+the restriction map on units
+\[
+  \Gamma\bigl((X\times_kZ)\times_ZZ_{n+1},\O\bigr)^\times
+  \;\twoheadrightarrow\;
+  \Gamma\bigl((X\times_kZ)\times_ZZ_n,\O\bigr)^\times
+\]
+is surjective.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-global-sections-base-change}
+\leanok
+Pasting the two cartesian squares identifies $(X\times_kZ)\times_ZZ_n$ with
+$X\times_k\Spec A_n$, so \Cref{lem:cube-global-sections-base-change} gives
+$\Gamma\bigl((X\times_kZ)\times_ZZ_n,\O\bigr)=A_n$, and likewise in degree
+$n+1$; under these identifications the restriction map is the quotient map
+$A_{n+1}\to A_n$.  That map is surjective, and $A_{n+1}$ is a local ring whose
+maximal ideal is the preimage of the maximal ideal of $A_n$, so any lift of a
+unit of $A_n$ lies outside the maximal ideal of $A_{n+1}$ and is therefore a
+unit.  Neither $Z$ noetherian nor $t$ rational is needed.
 \end{proof}
 
 \begin{remark}[Where the general field is and is not needed]
@@ -1360,22 +1390,23 @@ every $n\in\N$.
 \openobligation{AlgebraicGeometry: the Lean declaration tagged above proves the
 induction of this lemma over an arbitrary base scheme, and carries as
 hypotheses the two places where properness, the variety hypothesis,
-noetherianness and the base field enter.  They are: that
+noetherianness and the base field enter.  The first of them, that
 $\Gamma(X\times Z_{n+1},\O)^\times\to\Gamma(X\times Z_n,\O)^\times$ is
-surjective and likewise for $Y$, which is
-\texttt{lem:cube-global-sections-base-change} together with the surjectivity of
-$\O_{Z,z_0}/\m_{z_0}^{n+2}\to\O_{Z,z_0}/\m_{z_0}^{n+1}$ on units; and that a
-deformation class on $(X\times Y)\times Z_{n+1}$ restricting to zero on both
-slices is zero, which is \texttt{prop:cube-kunneth-h1} together with the
-identification of the ideal of the thickening with
+surjective and likewise for $Y$, is \Cref{lem:cube-thickening-units} and is
+now discharged: the Lean corollary that fills it in over a field is
+\texttt{Pic.map\_infinitesimalBaseChangeFst\_pullbackMapSliceInclusion\_eq\_one\_of\_isProper}
+in the namespace \texttt{AlgebraicGeometry.Scheme}.  What remains is the
+second: that a deformation class on $(X\times Y)\times Z_{n+1}$ restricting to
+zero on both slices is zero, which is \texttt{prop:cube-kunneth-h1} together
+with the identification of the ideal of the thickening with
 $\O_{X\times Y}\otimes_k\m_{z_0}^{n+1}/\m_{z_0}^{n+2}$ and the invariance of
 $H^1$ under pushforward along
-$(X\times Y)\times Z_0\hookrightarrow(X\times Y)\times Z_{n+1}$.  What remains
-is to discharge those two hypotheses in the setting of this lemma.}
+$(X\times Y)\times Z_0\hookrightarrow(X\times Y)\times Z_{n+1}$.}
 \end{lemma}
 \begin{proof}
 \uses{prop:cube-picard-square-zero, prop:cube-kunneth-h1,
-lem:cube-global-sections-base-change, lem:cube-product-variety}
+lem:cube-global-sections-base-change, lem:cube-thickening-units,
+lem:cube-product-variety}
 Write $W:=X\times Y$, a proper variety over $k$ by
 \Cref{lem:cube-product-variety}, and put
 $A_n:=\O_{Z,z_0}/\m_{z_0}^{n+1}$, a local $k$-algebra which is

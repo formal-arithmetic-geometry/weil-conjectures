@@ -75,6 +75,9 @@ blueprint.
 - `AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_snd_appTop` (blueprint
   `lem:cube-global-sections-base-change`) — for such an `X` and a `K`-algebra `A`, the structure
   map `A ⟶ Γ(X ×_K Spec A, 𝒪)` is an isomorphism.
+- `AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_snd_appTop_pullbackSnd` — the same for the base
+  change of `X ×_K Z ⟶ Z` along an arbitrary `g : Spec A ⟶ Z`, `Z` a `K`-scheme: pasting the
+  two cartesian squares reduces it to the previous statement.
 
 ## Implementation notes
 
@@ -320,6 +323,38 @@ theorem isIso_ΓSpecIso_inv_comp_snd_appTop (π : X ⟶ Spec (.of K)) [IsProper 
       (pullback.snd π (Spec.map (CommRingCat.ofHom (algebraMap K A)))).appTop) :=
   (isPushout_appTop_of_flat (CommRingCat.ofHom (algebraMap K A)) π).isIso_inr_of_isIso
     (isIso_ΓSpecIso_inv_comp_appTop_of_geometricallyIntegral π)
+
+/-- **The global sections of the base change of a proper variety crossed with a `K`-scheme.**
+
+Let `X` be a proper geometrically integral variety over a field `K`, let `Z` be a `K`-scheme and
+let `g : Spec A ⟶ Z` be any morphism. Then the projection identifies `A` with the global
+sections of the base change of `X ×_K Z ⟶ Z` along `g`:
+
+```
+  (X ×_K Z) ×_Z Spec A ─────▶ X ×_K Z ─────▶ X
+            │                     │            │ π
+            ▼                     ▼            ▼
+         Spec A ─── g ───▶        Z ─── πZ ──▶ Spec K
+```
+
+Pasting the two cartesian squares identifies `(X ×_K Z) ×_Z Spec A` with `X ×_K Spec A` for the
+`K`-algebra structure on `A` given by `g ≫ πZ`, and
+`AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_snd_appTop` computes the global sections of the
+latter. -/
+theorem isIso_ΓSpecIso_inv_comp_snd_appTop_pullbackSnd (π : X ⟶ Spec (.of K)) [IsProper π]
+    [GeometricallyIntegral π] (πZ : Z ⟶ Spec (.of K)) {A : CommRingCat.{u}} (g : Spec A ⟶ Z) :
+    IsIso ((Scheme.ΓSpecIso A).inv ≫ (pullback.snd (pullback.snd π πZ) g).appTop) := by
+  set φ := Spec.preimage (g ≫ πZ) with hφdef
+  have hφ : g ≫ πZ = Spec.map φ := (Spec.map_preimage _).symm
+  -- `(X ×_K Z) ×_Z Spec A ≅ X ×_K Spec A`, by pasting the two cartesian squares
+  have H := (IsPullback.of_hasPullback (pullback.snd π πZ) g).paste_horiz
+    (IsPullback.of_hasPullback π πZ)
+  rw [hφ] at H
+  have : IsIso ((Scheme.ΓSpecIso A).inv ≫ (pullback.snd π (Spec.map φ)).appTop) := by
+    algebraize [φ.hom]
+    exact isIso_ΓSpecIso_inv_comp_snd_appTop π A
+  rw [← H.isoPullback_hom_snd, Scheme.Hom.comp_appTop, ← Category.assoc]
+  infer_instance
 
 end GlobalSections
 

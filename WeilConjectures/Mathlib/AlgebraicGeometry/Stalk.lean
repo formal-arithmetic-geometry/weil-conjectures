@@ -481,11 +481,58 @@ lemma preimage_infinitesimalBaseChangeFst_eq_top (n : ℕ) {U : T.Opens} (hU : t
   ext w
   simpa [apply_infinitesimalBaseChangeFst f t n w] using hU
 
+/-- The ring homomorphism `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ Γ(W ×_T Tₙ, 𝒪)` induced by the
+projection `W ×_T Tₙ ⟶ Tₙ`, through which `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` acts on the sections of a
+sheaf on `W ×_T Tₙ`. -/
+noncomputable def infinitesimalRingToΓ (n : ℕ) :
+    T.infinitesimalRing t n ⟶ Γ(infinitesimalBaseChange f t n, ⊤) :=
+  (Scheme.ΓSpecIso _).inv ≫ (infinitesimalBaseChangeSnd f t n).appTop
+
+/-- The action of `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` on the sections over `W ×_T Tₙ` is compatible with
+the transition morphisms:
+
+```
+                    infinitesimalRingToΓ f t n
+  𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ──────────────────────▶ Γ(W ×_T Tₙ, 𝒪)
+             │                                             │
+             │ infinitesimalRingMap t h                    │ appTop of
+             │                                             │ infinitesimalBaseChangeMap f t h
+             ▼                                             ▼
+  𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1) ──────────────────────▶ Γ(W ×_T Tₘ, 𝒪)
+                    infinitesimalRingToΓ f t m
+```
+-/
+@[reassoc (attr := simp)]
+lemma infinitesimalRingToΓ_comp_appTop {m n : ℕ} (h : m ≤ n) :
+    infinitesimalRingToΓ f t n ≫ (infinitesimalBaseChangeMap f t h).appTop =
+      T.infinitesimalRingMap t h ≫ infinitesimalRingToΓ f t m := by
+  rw [infinitesimalRingToΓ, infinitesimalRingToΓ, Category.assoc,
+    ← Scheme.Hom.comp_appTop, infinitesimalBaseChangeMap_snd, Scheme.Hom.comp_appTop,
+    ← Category.assoc, Scheme.infinitesimalNeighborhoodMap, ← Scheme.ΓSpecIso_inv_naturality,
+    Category.assoc]
+
 /-- The ring homomorphism `𝒪_{T, t} ⟶ Γ(W ×_T Tₙ, 𝒪)`, through which `𝒪_{T, t}` acts on the
-sections of a sheaf on `W ×_T Tₙ`. -/
+sections of a sheaf on `W ×_T Tₙ`: the quotient map to `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` followed by
+`AlgebraicGeometry.Scheme.infinitesimalRingToΓ`. -/
 noncomputable def toInfinitesimalBaseChangeΓ (n : ℕ) :
     T.presheaf.stalk t ⟶ Γ(infinitesimalBaseChange f t n, ⊤) :=
-  T.toInfinitesimalRing t n ≫ (Scheme.ΓSpecIso _).inv ≫ (infinitesimalBaseChangeSnd f t n).appTop
+  T.toInfinitesimalRing t n ≫ infinitesimalRingToΓ f t n
+
+/-- The action of `𝒪_{T, t}` on the sections over `W ×_T Tₙ` factors through the quotient
+`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`:
+
+```
+  𝒪_{T, t} ──────── toInfinitesimalRing t n ───────▶ 𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)
+          ╲                                                   │
+           ╲  toInfinitesimalBaseChangeΓ f t n                │ infinitesimalRingToΓ f t n
+            ╲                                                 ▼
+             ──────────────────────────────────▶ Γ(W ×_T Tₙ, 𝒪)
+```
+-/
+@[reassoc]
+lemma toInfinitesimalRing_comp_infinitesimalRingToΓ (n : ℕ) :
+    T.toInfinitesimalRing t n ≫ infinitesimalRingToΓ f t n =
+      toInfinitesimalBaseChangeΓ f t n := rfl
 
 /-- The action of `𝒪_{T, t}` on the sections over `W ×_T Tₙ` is compatible with the transition
 morphisms:
@@ -504,11 +551,10 @@ morphisms:
 lemma toInfinitesimalBaseChangeΓ_comp_appTop {m n : ℕ} (h : m ≤ n) :
     toInfinitesimalBaseChangeΓ f t n ≫ (infinitesimalBaseChangeMap f t h).appTop =
       toInfinitesimalBaseChangeΓ f t m := by
-  rw [toInfinitesimalBaseChangeΓ, toInfinitesimalBaseChangeΓ, Category.assoc, Category.assoc,
-    ← Scheme.Hom.comp_appTop, infinitesimalBaseChangeMap_snd, Scheme.Hom.comp_appTop,
-    ← Category.assoc ((Scheme.ΓSpecIso _).inv), Scheme.infinitesimalNeighborhoodMap,
-    ← Scheme.ΓSpecIso_inv_naturality, ← Category.assoc, ← Category.assoc,
-    Scheme.toInfinitesimalRing_infinitesimalRingMap, Category.assoc]
+  rw [← toInfinitesimalRing_comp_infinitesimalRingToΓ, Category.assoc,
+    infinitesimalRingToΓ_comp_appTop, ← Category.assoc,
+    Scheme.toInfinitesimalRing_infinitesimalRingMap,
+    toInfinitesimalRing_comp_infinitesimalRingToΓ]
 
 /-- Pulling a function on an open neighbourhood `U` of `t` back to `W ×_T Tₙ` is taking its
 germ at `t` and mapping it by `𝒪_{T, t} ⟶ Γ(W ×_T Tₙ, 𝒪)`:
@@ -534,7 +580,7 @@ lemma infinitesimalBaseChangeFst_comp_appLE (n : ℕ) {U : T.Opens} (hU : t ∈ 
       (T.fromInfinitesimalNeighborhood t n) U ⊤ ⊤
       (T.preimage_fromInfinitesimalNeighborhood_eq_top t n hU).ge (by simp),
     T.fromInfinitesimalNeighborhood_appLE t n hU, Scheme.Hom.appLE_eq_appTop,
-    toInfinitesimalBaseChangeΓ, Category.assoc, Category.assoc]
+    toInfinitesimalBaseChangeΓ, infinitesimalRingToΓ, Category.assoc, Category.assoc]
 
 /-- An element of `𝔪_t ^ (n + 1)` acts as zero on `Γ(W ×_T Tₙ, 𝒪)`, because the action of
 `𝒪_{T, t}` factors through `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`. -/
@@ -544,39 +590,6 @@ lemma toInfinitesimalBaseChangeΓ_eq_zero (n : ℕ) {r : T.presheaf.stalk t}
   have h0 : T.toInfinitesimalRing t n r = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr hr
   rw [toInfinitesimalBaseChangeΓ, CommRingCat.comp_apply, h0, map_zero]
 
-/-- The ring homomorphism `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ Γ(W ×_T Tₙ, 𝒪)` induced by the
-projection `W ×_T Tₙ ⟶ Tₙ`, through which `AlgebraicGeometry.Scheme.toInfinitesimalBaseChangeΓ`
-factors. -/
-noncomputable def infinitesimalRingToΓ (n : ℕ) :
-    T.infinitesimalRing t n ⟶ Γ(infinitesimalBaseChange f t n, ⊤) :=
-  (Scheme.ΓSpecIso _).inv ≫ (infinitesimalBaseChangeSnd f t n).appTop
-
-lemma toInfinitesimalRing_comp_infinitesimalRingToΓ (n : ℕ) :
-    T.toInfinitesimalRing t n ≫ infinitesimalRingToΓ f t n =
-      toInfinitesimalBaseChangeΓ f t n := rfl
-
-/-- The action of `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` on the sections over `W ×_T Tₙ` is compatible with
-the transition morphisms:
-
-```
-                    infinitesimalRingToΓ f t n
-  𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ──────────────────────▶ Γ(W ×_T Tₙ, 𝒪)
-             │                                             │
-             │ infinitesimalRingMap t h                    │ appTop of
-             ▼                                             ▼ infinitesimalBaseChangeMap f t h
-  𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1) ──────────────────────▶ Γ(W ×_T Tₘ, 𝒪)
-                    infinitesimalRingToΓ f t m
-```
--/
-@[reassoc]
-lemma infinitesimalRingToΓ_comp_appTop {m n : ℕ} (h : m ≤ n) :
-    infinitesimalRingToΓ f t n ≫ (infinitesimalBaseChangeMap f t h).appTop =
-      T.infinitesimalRingMap t h ≫ infinitesimalRingToΓ f t m := by
-  rw [infinitesimalRingToΓ, infinitesimalRingToΓ, Category.assoc,
-    ← Scheme.Hom.comp_appTop, infinitesimalBaseChangeMap_snd, Scheme.Hom.comp_appTop,
-    ← Category.assoc, Scheme.infinitesimalNeighborhoodMap, ← Scheme.ΓSpecIso_inv_naturality,
-    Category.assoc]
-
 /-- **Units lift along the infinitesimal base changes.**
 
 If the global sections of `W ×_T Tₘ` are the ring `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)` of the `m`-th
@@ -584,11 +597,11 @@ infinitesimal neighbourhood, then for `m ≤ n` every unit of `Γ(W ×_T Tₘ, �
 of a unit of `Γ(W ×_T Tₙ, 𝒪)`: a unit of `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)` lifts to a unit of
 `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`, the latter being a local ring. -/
 lemma exists_isUnit_appTop_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n)
-    (hm : Function.Bijective (infinitesimalRingToΓ f t m))
+    (hm : IsIso (infinitesimalRingToΓ f t m))
     {a : Γ(infinitesimalBaseChange f t m, ⊤)} (ha : IsUnit a) :
     ∃ b : Γ(infinitesimalBaseChange f t n, ⊤), IsUnit b ∧
       (infinitesimalBaseChangeMap f t h).appTop b = a := by
-  set e := RingEquiv.ofBijective (infinitesimalRingToΓ f t m).hom hm
+  let e := (asIso (infinitesimalRingToΓ f t m)).commRingCatIsoToRingEquiv
   have ha₀ : IsUnit (e.symm a) := ha.map e.symm
   obtain ⟨c, hc⟩ := T.infinitesimalRingMap_surjective t h (e.symm a)
   have hcu : IsUnit c := T.isUnit_of_isUnit_infinitesimalRingMap t h c (hc ▸ ha₀)
