@@ -27,8 +27,8 @@ this answer does not depend on the chart, it is also the dimension of the whole 
 * `AlgebraicGeometry.IsAffineOpen.ringKrullDim_eq_topologicalKrullDim`: consequently the sections
   over a nonempty affine open have Krull dimension the dimension of the whole scheme.
 
-Both are stated for the `k`-algebra structure on the function field induced by the given morphism
-to `Spec k`, namely `AlgebraicGeometry.Scheme.Hom.functionFieldAlgebra`.
+The first two are stated for the `k`-algebra structure on the function field induced by the given
+morphism to `Spec k`, namely `AlgebraicGeometry.Scheme.Hom.functionFieldAlgebra`.
 -/
 
 @[expose] public section
@@ -118,9 +118,10 @@ theorem topologicalKrullDim_eq_trdeg_functionField :
     letI := f.functionFieldAlgebra
     topologicalKrullDim X = Cardinal.toNat (Algebra.trdeg k X.functionField) := by
   let _ := f.functionFieldAlgebra
-  have hchart : ∀ x : X, ∃ U : X.Opens, ∃ _ : IsAffineOpen U, ∃ _ : Nonempty U, x ∈ U :=
-    fun x ↦ ⟨(X.affineCover.f (X.affineCover.idx x)).opensRange, isAffineOpen_opensRange _,
-      ⟨⟨x, X.affineCover.covers x⟩⟩, X.affineCover.covers x⟩
+  have hchart : ∀ x : X, ∃ U : X.Opens, ∃ _ : IsAffineOpen U, ∃ _ : Nonempty U, x ∈ U := by
+    intro x
+    obtain ⟨U, hU, hx, -⟩ := exists_isAffineOpen_mem_and_subset (Opens.mem_top x)
+    exact ⟨U, hU, ⟨⟨x, hx⟩⟩, hx⟩
   have key : ∀ (U : X.Opens) (hU : IsAffineOpen U) (_ : Nonempty U),
       topologicalKrullDim U.toScheme =
         (Cardinal.toNat (Algebra.trdeg k X.functionField) : WithBot ℕ∞) := by

@@ -215,6 +215,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersio
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite

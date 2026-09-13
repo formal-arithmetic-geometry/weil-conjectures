@@ -147,6 +147,12 @@ theorem IsAffineOpen.coheight_fromSpec {X : Scheme.{u}} {U : X.Opens} (hU : IsAf
   rw [idealHeight_eq_coheight Γ(X, U) p]
   exact hU.fromSpec.isOpenEmbedding.coheight_eq
 
+/-- The codimension of a point of an affine open subset of a scheme is the height of the prime
+ideal of the ring of sections that corresponds to it. -/
+theorem IsAffineOpen.coheight_eq_height_primeIdealOf {X : Scheme.{u}} {U : X.Opens}
+    (hU : IsAffineOpen U) (x : U) : coheight x.1 = (hU.primeIdealOf x).asIdeal.height := by
+  rw [← hU.coheight_fromSpec (hU.primeIdealOf x), hU.fromSpec_primeIdealOf]
+
 /-- **Krull's principal ideal theorem for schemes.** Let `f` be a section of `𝒪_X` over an open
 `U` of a locally Noetherian scheme `X`, and let `z ∈ U` be a point where `f` vanishes such that
 no other point of `U` at which `f` vanishes generalizes to `z` — that is, `z` is the generic
