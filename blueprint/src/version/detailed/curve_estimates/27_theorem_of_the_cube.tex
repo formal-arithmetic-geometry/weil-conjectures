@@ -1221,6 +1221,9 @@ already in Mathlib once the Picard group is in place.
 \end{proof}
 
 \begin{proposition}[K\"unneth in degree one]\label{prop:cube-kunneth-h1}
+\lean{AlgebraicGeometry.sliceRestrictionMap,
+AlgebraicGeometry.bijective_sliceRestrictionMap_one,
+AlgebraicGeometry.kunnethLinearEquivOne}
 Let $X$ and $Y$ be proper varieties over $k$ and let $x_0\in X(k)$,
 $y_0\in Y(k)$.  Then the map
 \[
@@ -1231,13 +1234,16 @@ $y_0\in Y(k)$.  Then the map
 is an isomorphism of $k$-vector spaces.  Only its injectivity is used below;
 no route to that injectivity cheaper than the isomorphism itself is available,
 so \Cref{sec:cube-cost} charges the K\"unneth formula in full.
-\openobligation{AlgebraicGeometry: cohomology of a sheaf of modules on a
-scheme in degree one, and the Kuenneth formula in degree one for a product of
-two proper varieties over an algebraically closed field, in the form that the
-two slice restrictions together are injective.}
+\openobligation{AlgebraicGeometry: the Kuenneth formula in degree one for a
+product of two proper varieties over a field, in the form that the two slice
+restrictions together are bijective.  The statement and the map are formalised;
+what remains is the proof, and before it the identity and composition laws for
+the pullback map on cohomology, which Mathlib cannot yet supply because
+\texttt{CategoryTheory.Abelian.Ext.mapExactFunctor} is not functorial in the
+exact functor.}
 \end{proposition}
 \begin{proof}
-\uses{lem:cube-global-sections}
+\uses{lem:cube-global-sections-general}
 Not proved here.  The K\"unneth formula \stacksproject{0BEC} gives, in degree
 one and for the structure sheaves,
 \[
@@ -1245,9 +1251,11 @@ one and for the structure sheaves,
   \bigl(H^0(X,\O_X)\otimes_kH^1(Y,\O_Y)\bigr)\oplus
   \bigl(H^1(X,\O_X)\otimes_kH^0(Y,\O_Y)\bigr),
 \]
-and $H^0(X,\O_X)=H^0(Y,\O_Y)=k$ by \Cref{lem:cube-global-sections}, which
-turns the right-hand side into $H^1(X,\O_X)\oplus H^1(Y,\O_Y)$ once the two
-summands are written in the order of the statement.  That the
+and $H^0(X,\O_X)=H^0(Y,\O_Y)=k$ by \Cref{lem:cube-global-sections-general},
+which needs only that $X$ and $Y$ are proper and geometrically integral and so
+does not use that $k$ is algebraically closed; that turns the right-hand side
+into $H^1(X,\O_X)\oplus H^1(Y,\O_Y)$ once the two summands are written in the
+order of the statement.  That the
 isomorphism is the one written above --- that the two projections of the
 K\"unneth decomposition are the restrictions along the two slice inclusions ---
 is the standard compatibility of the K\"unneth map with pullback along
@@ -2134,8 +2142,12 @@ from them.
   \Cref{prop:cube-formal-functions}.  \emph{Two definitions} --- $H^i(S,F)$
   for a sheaf of $\O_S$-modules, as a module over $\Gamma(S,\O_S)$, and the
   sheaf of units $\O_S^\times$ as a sheaf of abelian groups together with its
-  $H^1$ --- and \emph{about twelve lemmas}: the long exact sequence of a short
-  exact sequence of sheaves and its naturality; additivity over finite direct
+  $H^1$ --- and \emph{about fourteen lemmas}: the long exact sequence of a
+  short exact sequence of sheaves and its naturality; the pullback map
+  $f^*\colon H^i(T,G)\to H^i(S,f^*G)$ along a morphism of schemes together
+  with its identity and composition laws, which is what
+  \Cref{prop:cube-kunneth-h1} restricts along the two slice inclusions;
+  additivity over finite direct
   sums, which is what turns
   $H^1(W,\O_W\otimes_kI)$ into $H^1(W,\O_W)\otimes_kI$ in
   \Cref{lem:cube-thickening-trivial}; the Cech computation on a separated

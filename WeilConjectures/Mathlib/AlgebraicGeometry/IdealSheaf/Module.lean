@@ -73,14 +73,14 @@ variable {X : Scheme.{u}} (J : X.IdealSheafData)
 immersion `J.subschemeι` of the closed subscheme cut out by `J`. Its kernel is the ideal
 sheaf; see `AlgebraicGeometry.Scheme.IdealSheafData.toModules`. -/
 noncomputable def toPushforwardSubscheme :
-    SheafOfModules.unit X.ringCatSheaf ⟶
+    X.structureModules ⟶
       (SheafOfModules.pushforward J.subschemeι.toRingCatSheafHom).obj
-        (SheafOfModules.unit J.subscheme.ringCatSheaf) :=
+        J.subscheme.structureModules :=
   SheafOfModules.unitToPushforwardObjUnit _
 
 @[simp]
 lemma map_toPushforwardSubscheme (U : X.Opens)
-    (x : Γ((SheafOfModules.unit X.ringCatSheaf : X.Modules), U)) :
+    (x : Γ(X.structureModules, U)) :
     (SheafOfModules.evaluation X.ringCatSheaf (op U)).map J.toPushforwardSubscheme x =
       J.subschemeι.app U x :=
   rfl
@@ -94,7 +94,7 @@ noncomputable def toModules : X.Modules := kernel J.toPushforwardSubscheme
 
 /-- The inclusion of the ideal sheaf into the structure sheaf. -/
 noncomputable def toModulesι :
-    J.toModules ⟶ (SheafOfModules.unit X.ringCatSheaf : X.Modules) :=
+    J.toModules ⟶ X.structureModules :=
   kernel.ι _
 
 lemma map_kernelι_eq_toModulesι_app (U : X.Opens) (x : Γ(J.toModules, U)) :

@@ -52,9 +52,12 @@ blueprint.
 - `AlgebraicGeometry.IsVariety.comp_fst` (blueprint `lem:cube-product-variety`) — a product of
   two varieties over a field is a variety; together with the properness of the projections this
   makes a product of *proper* varieties a proper variety.
-- `AlgebraicGeometry.sliceInclusionFst`, `AlgebraicGeometry.sliceInclusionSnd` and their
-  `IsClosedImmersion` instances (blueprint `lem:cube-product-variety`) — the slice inclusions
-  `X ⟶ X × Y` and `Y ⟶ X × Y` through a rational point are closed immersions.
+- the second half of `lem:cube-product-variety` — that the slice inclusions
+  `X ⟶ X × Y` and `Y ⟶ X × Y` through a rational point are closed immersions of `K`-schemes —
+  needs no field: `AlgebraicGeometry.sliceInclusionFst`, `AlgebraicGeometry.sliceInclusionSnd`
+  and their `IsClosedImmersion` and `IsOver` instances are stated over an arbitrary base scheme
+  in `WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks`, and the `example` in the `Product`
+  section below spells the field case out.
 - `lem:cube-projection-proper-flat`(1)–(3) are entirely available to typeclass inference; the
   `example`s in the `Projection` section below spell them out. Part (1) uses the two instances of
   `WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian`.
@@ -185,38 +188,19 @@ instance IsVariety.comp_fst [IsVariety πX] [IsVariety πY] :
 example [IsVariety πX] [IsVariety πY] [IsProper πX] [IsProper πY] :
     IsProper (pullback.fst πX πY ≫ πX) := inferInstance
 
-/-- The slice inclusion `j_{y₀} : X ⟶ X × Y` determined by a rational point `y₀` of `Y`. -/
-def sliceInclusionFst (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) : X ⟶ pullback πX πY :=
-  pullback.lift (𝟙 X) (πX ≫ y₀) (by simp [hy₀])
-
-@[reassoc (attr := simp)]
-lemma sliceInclusionFst_fst (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
-    sliceInclusionFst πX πY y₀ hy₀ ≫ pullback.fst πX πY = 𝟙 X := by
-  simp [sliceInclusionFst]
-
-/-- The slice inclusion `j_{x₀} : Y ⟶ X × Y` determined by a rational point `x₀` of `X`. -/
-def sliceInclusionSnd (x₀ : Spec (.of K) ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) : Y ⟶ pullback πX πY :=
-  pullback.lift (πY ≫ x₀) (𝟙 Y) (by simp [hx₀])
-
-@[reassoc (attr := simp)]
-lemma sliceInclusionSnd_snd (x₀ : Spec (.of K) ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
-    sliceInclusionSnd πX πY x₀ hx₀ ≫ pullback.snd πX πY = 𝟙 Y := by
-  simp [sliceInclusionSnd]
-
 /-- A rational point of a `K`-scheme is a closed immersion; Mathlib knows this already, since
 `Spec K` is a subsingleton. -/
 example (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) : IsClosedImmersion y₀ :=
   isClosedImmersion_of_comp_eq_id πY y₀ hy₀
 
-/-- **A slice inclusion is a closed immersion.** -/
-instance [IsSeparated πY] (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
-    IsClosedImmersion (sliceInclusionFst πX πY y₀ hy₀) :=
-  IsClosedImmersion.of_comp_eq_id (f := pullback.fst πX πY) (by simp)
-
-/-- **A slice inclusion is a closed immersion.** -/
-instance [IsSeparated πX] (x₀ : Spec (.of K) ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
-    IsClosedImmersion (sliceInclusionSnd πX πY x₀ hx₀) :=
-  IsClosedImmersion.of_comp_eq_id (f := pullback.snd πX πY) (by simp)
+/-- **The slice inclusions of a product of two varieties are closed immersions of `K`-schemes.**
+This is the second half of `lem:cube-product-variety`; both statements hold over an arbitrary
+base scheme and are proved in `WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks`. -/
+example [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))] [IsSeparated (Y ↘ Spec (.of K))]
+    (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ Y ↘ Spec (.of K) = 𝟙 _) :
+    IsClosedImmersion (sliceInclusionFst (X ↘ Spec (.of K)) (Y ↘ Spec (.of K)) y₀ hy₀) ∧
+      (sliceInclusionFst (X ↘ Spec (.of K)) (Y ↘ Spec (.of K)) y₀ hy₀).IsOver (Spec (.of K)) :=
+  ⟨inferInstance, inferInstance⟩
 
 end Product
 
