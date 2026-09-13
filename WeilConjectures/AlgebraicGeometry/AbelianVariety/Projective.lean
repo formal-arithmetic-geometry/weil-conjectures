@@ -33,7 +33,8 @@ inversion `[-1]` is `(CategoryTheory.GrpObj.zpow G (-1)).left`.
 ## Main definitions
 
 - `AlgebraicGeometry.IsAbelianVariety.IsSymmetric`: a sheaf of modules `L` on a group scheme
-  `G` is symmetric if `[-1]^* L ≅ L` (blueprint: glue item 12 of `sec:deg-cost`).
+  `G` is symmetric if `[-1]^* L ≅ L` (blueprint: part of `def:deg-ample`, the twelfth
+  definition counted in `sec:deg-cost`).
 
 ## Main statements
 
@@ -123,7 +124,7 @@ along the inversion, that is, if `[-1]^* L ≅ L`.
 
 This is intended for a line bundle `L`; invertibility is not part of the definition, and is
 carried as a hypothesis by the statements that need it.
-(blueprint: glue item 12 of `sec:deg-cost`) -/
+(blueprint: part of `def:deg-ample`, the twelfth definition counted in `sec:deg-cost`) -/
 def IsSymmetric (L : G.left.Modules) : Prop :=
   Nonempty ((Scheme.Modules.pullback (GrpObj.zpow G (-1)).left).obj L ≅ L)
 
