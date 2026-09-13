@@ -1146,37 +1146,58 @@ such a family leaves a regular local ring, by Krull's height theorem.
 \end{proof}
 
 \begin{proposition}[Miracle flatness]\label{prop:deg-miracle-flatness}
+\lean{AlgebraicGeometry.Flat.of_ringKrullDim_eq}
 Let $f\colon X\to Y$ be a morphism locally of finite type between locally
 noetherian schemes, let $x\in X$ and $y:=f(x)$.  Suppose that $\O_{X,x}$ is
 Cohen--Macaulay, that $\O_{Y,y}$ is regular and that
 \[
   \dim\O_{X,x}=\dim\O_{Y,y}+\dim\O_{X_y,x},
 \]
-where $X_y$ is the fibre of $f$ over $y$.  Then $f$ is flat at $x$.  In
-particular a finite surjective morphism between smooth varieties of the same
-dimension over $k$ is flat.
-\openobligation{CommutativeAlgebra: miracle flatness, that is, the local
-criterion for flatness of a morphism whose source is Cohen-Macaulay and whose
-target is regular and whose fibre dimension is the difference of the
-dimensions. Mathlib v4.33.1 has neither the Cohen-Macaulay condition nor this
-criterion.}
+where $X_y$ is the fibre of $f$ over $y$.  Then $f$ is flat at $x$.
+\openobligation{CommutativeAlgebra: the local criterion for flatness of a ring
+map whose source is Cohen-Macaulay and whose target is regular and whose fibre
+dimension is the difference of the dimensions, stated as
+RingHom.Flat.of_ringKrullDim_eq_add_fiberRing in
+WeilConjectures/RingTheory/CohenMacaulay/MiracleFlatness.lean with a deliberate
+sorry. The Cohen-Macaulay condition itself, which Mathlib v4.33.1 also lacks,
+is built in WeilConjectures/RingTheory/CohenMacaulay/; only the criterion is
+left open.}
 \end{proposition}
 \begin{proof}
-\uses{lem:deg-smooth-regular}
 Not proved here.  This is the standard local criterion for flatness; see
 \cite[\S23]{MatsumuraCRT} and the section \emph{Flatness and dimension} of the
-chapter \emph{Commutative algebra} in \cite{stacks-project}.  For the last
-sentence: a
-smooth $k$-variety is regular, hence Cohen--Macaulay, and its local ring at a
-closed point has dimension equal to the dimension of the variety; a finite
-morphism has $0$-dimensional fibres, so the displayed equality reads
-$g=g+0$ for a finite surjective morphism between $g$-dimensional smooth
-varieties, and flatness at every point follows.  Flatness at the non-closed
-points follows from flatness at the closed points because the closed points are
-dense and flatness is an open condition for a morphism of finite type between
-noetherian schemes; alternatively, apply the criterion verbatim at every point,
-the two local rings there having equal dimension because both schemes are
-irreducible and catenary.
+chapter \emph{Commutative algebra} in \cite{stacks-project}.
+\end{proof}
+
+\begin{corollary}[A finite morphism between smooth varieties of the same
+dimension is flat]
+\label{cor:deg-finite-smooth-flat}
+\lean{AlgebraicGeometry.Flat.of_isFinite_of_smooth_of_topologicalKrullDim_eq}
+Let $f\colon X\to Y$ be a finite morphism between integral schemes smooth over
+$k$ with $\dim X=\dim Y$.  Then $f$ is flat.
+\end{corollary}
+\begin{proof}
+\uses{prop:deg-miracle-flatness, lem:deg-smooth-regular}
+A smooth $k$-variety is regular by \Cref{lem:deg-smooth-regular}, hence
+Cohen--Macaulay, so the source and the target of $f$ satisfy the local
+hypotheses of \Cref{prop:deg-miracle-flatness} at every point.  A finite
+morphism is quasi-finite, so the fibre $X_{f(x)}$ is $0$-dimensional and the
+displayed equality of that proposition reduces to
+$\dim\O_{X,x}=\dim\O_{Y,f(x)}$.  This last equality holds at every point,
+closed or not.  Indeed, let $V$ be an affine open of $Y$ containing $f(x)$ and
+let $U:=f^{-1}(V)$, which is affine because $f$ is; then $\O_Y(V)$ and
+$\O_X(U)$ are finitely generated domains over $k$, the second integral over the
+first, and both have the dimension of the variety they chart.  The point $x$
+corresponds to a prime $\q$ of $\O_X(U)$ and $f(x)$ to its contraction
+$\q\cap\O_Y(V)$.  The dimension formula
+$\operatorname{ht}\p+\dim(A/\p)=\dim A$ for a finitely generated domain $A$
+over $k$, applied in each of the two rings, together with the invariance of the
+dimension of a quotient under an integral extension, gives
+$\operatorname{ht}(\q\cap\O_Y(V))=\operatorname{ht}\q$; and those two heights
+are the dimensions of $\O_{Y,f(x)}$ and of $\O_{X,x}$.
+
+Surjectivity of $f$ is not needed: it is automatic, the image of $f$ being a
+closed irreducible subset of $Y$ of the same dimension as $Y$.
 \end{proof}
 
 \begin{lemma}[The $n$-torsion is finite]\label{lem:deg-torsion-finite}
@@ -1246,7 +1267,7 @@ $n\neq0$.  Then $[n]\colon A\to A$ is finite, flat and surjective.
 \end{theorem}
 \begin{proof}
 \uses{lem:deg-torsion-finite, lem:deg-mulby-proper, thm:av-zariski-main,
-lem:av-translation-spreading, prop:av-basic, prop:deg-miracle-flatness,
+lem:av-translation-spreading, prop:av-basic, cor:deg-finite-smooth-flat,
 lem:av-torsion-pullback}
 \emph{Locally quasi-finite.}  By \Cref{lem:deg-torsion-finite} the scheme
 $A[n]$ is finite over $k$, and by \Cref{lem:av-torsion-pullback} it is the
@@ -1280,7 +1301,7 @@ field has strictly smaller dimension.  So $Z=A$ and $[n]$ is surjective.
 \emph{Flat.}  By \Cref{prop:av-basic} the abelian variety $A$ is smooth over
 $k$ and irreducible of dimension $g$; so $[n]\colon A\to A$ is a finite
 surjective morphism between smooth $k$-varieties of the same dimension $g$.  By
-\Cref{prop:deg-miracle-flatness} it is flat.
+\Cref{cor:deg-finite-smooth-flat} it is flat.
 \end{proof}
 
 \section{The degree formula}\label{sec:deg-degree}

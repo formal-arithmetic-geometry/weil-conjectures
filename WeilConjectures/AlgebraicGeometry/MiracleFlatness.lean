@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.RingTheory.CohenMacaulay.MiracleFlatness
 
 /-!
@@ -24,10 +26,14 @@ and `dim 𝒪_{X,x} = dim 𝒪_{Y,f x} + dim 𝒪_{X_{f x}, x}`.
 * `AlgebraicGeometry.Flat.of_ringKrullDim_eq`: miracle flatness at every point, that is,
   flatness of `f`.
 * `AlgebraicGeometry.Flat.of_locallyQuasiFinite_of_ringKrullDim_stalk_eq`: **miracle flatness for
-  a quasi-finite morphism**, the form in which the criterion applies to a finite surjective
-  morphism between smooth varieties of the same dimension: quasi-finiteness makes the fibres zero
-  dimensional and the two varieties having the same dimension makes the stalks have equal
-  dimension.
+  a quasi-finite morphism**: quasi-finiteness makes the fibres zero dimensional, so that the
+  dimension hypothesis becomes the equality of the dimensions of the two stalks.
+* `AlgebraicGeometry.Flat.of_isFinite_of_topologicalKrullDim_eq`: **miracle flatness for a finite
+  morphism of varieties**, that is, a finite morphism between integral schemes of finite type over
+  a field and of the same dimension, with Cohen–Macaulay source stalks and smooth target, is flat.
+* `AlgebraicGeometry.Flat.of_isFinite_of_smooth_of_topologicalKrullDim_eq`: **a finite morphism
+  between integral schemes smooth over a field and of the same dimension is flat**, the last
+  sentence of `prop:deg-miracle-flatness`.
 
 ## Design
 
@@ -45,20 +51,15 @@ The Cohen–Macaulay and regularity conditions are taken as plain hypotheses rat
 arguments in the statements quantified over all points, since they cannot be stated as instance
 arguments there.
 
-## TODO
-
-Deduce the last sentence of `prop:deg-miracle-flatness`, that a finite surjective morphism
-between smooth varieties of the same dimension over a field is flat. Of its three ingredients
-only the zero dimensionality of the fibres is available. The two missing ones are that a smooth
-variety has regular local rings, and that a morphism between varieties of the same dimension has
-stalks of equal dimension; the latter rests on the dimension formula
-`dim A = height p + dim (A ⧸ p)` for a finitely generated domain over a field, which mathlib
-`v4.33.1` does not have.
-
 ## Blueprint
 
-This file implements the scheme-level half of `prop:deg-miracle-flatness` of the curve-estimates
-blueprint.
+This file implements `prop:deg-miracle-flatness` of the curve-estimates blueprint at the level of
+schemes, and its last sentence `cor:deg-finite-smooth-flat`.
+
+Everything here rests on the ring-level criterion
+`RingHom.Flat.of_ringKrullDim_eq_add_fiberRing` of
+`WeilConjectures.RingTheory.CohenMacaulay.MiracleFlatness`, which is stated with a deliberate
+`sorry`; the results below are therefore conditional on it.
 -/
 
 @[expose] public section
@@ -98,10 +99,8 @@ theorem Flat.of_ringKrullDim_eq (hY : ∀ x : X, IsRegularLocalRing (Y.presheaf.
 with regular stalks at the image points, Cohen–Macaulay source stalks and stalks of equal
 dimension is flat.
 
-This is the form in which the criterion applies to a finite surjective morphism between smooth
-varieties of the same dimension over a field: finiteness makes the morphism quasi-finite, hence
-the fibres zero dimensional, and the two varieties having the same dimension makes the stalks
-have equal dimension. -/
+Quasi-finiteness makes the fibres zero dimensional, so the dimension hypothesis of miracle
+flatness reads `dim 𝒪_{X,x} = dim 𝒪_{Y,f x} + 0`. -/
 theorem Flat.of_locallyQuasiFinite_of_ringKrullDim_stalk_eq [LocallyQuasiFinite f]
     (hY : ∀ x : X, IsRegularLocalRing (Y.presheaf.stalk (f x)))
     (hX : ∀ x : X, IsCohenMacaulayLocalRing (X.presheaf.stalk x))
@@ -109,5 +108,39 @@ theorem Flat.of_locallyQuasiFinite_of_ringKrullDim_stalk_eq [LocallyQuasiFinite 
     Flat f :=
   .of_ringKrullDim_eq f hY hX fun x ↦ by
     rw [h x, f.ringKrullDim_fiberRing_stalkMap_eq_zero x, add_zero]
+
+/-- **Miracle flatness for a finite morphism of varieties**: a finite morphism `f : X ⟶ Y` between
+integral schemes of finite type over a field, of the same dimension, whose source has
+Cohen–Macaulay local rings and whose target is smooth, is flat.
+
+Two of the three hypotheses of miracle flatness come for free: a finite morphism is quasi-finite,
+so its fibres are zero dimensional; and the local rings of the source and of the target at a point
+and its image have the same dimension because the two varieties have the same dimension.
+
+Surjectivity of `f`, part of the blueprint statement, is not needed: it is automatic, the image of
+`f` being a closed irreducible subset of `Y` of the same dimension as `Y`. -/
+theorem Flat.of_isFinite_of_topologicalKrullDim_eq {k : Type u} [Field k] [IsIntegral X]
+    [IsIntegral Y] [IsFinite f] (sX : X ⟶ Spec (.of k)) (sY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType sX] [Smooth sY]
+    (hX : ∀ x : X, IsCohenMacaulayLocalRing (X.presheaf.stalk x))
+    (hdim : topologicalKrullDim X = topologicalKrullDim Y) :
+    Flat f :=
+  .of_locallyQuasiFinite_of_ringKrullDim_stalk_eq f
+    (fun x ↦ isRegularLocalRing_stalk_of_smooth sY (f x)) hX
+    (ringKrullDim_stalk_eq_of_isIntegralHom f sX sY hdim)
+
+/-- **A finite morphism between smooth varieties of the same dimension over a field is flat.**
+
+A smooth scheme over a field has regular, hence Cohen–Macaulay, local rings, so this is the
+previous theorem with the Cohen–Macaulay hypothesis on the source discharged. -/
+theorem Flat.of_isFinite_of_smooth_of_topologicalKrullDim_eq {k : Type u} [Field k] [IsIntegral X]
+    [IsIntegral Y] [IsFinite f] (sX : X ⟶ Spec (.of k)) (sY : Y ⟶ Spec (.of k)) [Smooth sX]
+    [Smooth sY] (hdim : topologicalKrullDim X = topologicalKrullDim Y) :
+    Flat f :=
+  .of_isFinite_of_topologicalKrullDim_eq f sX sY
+    (fun x ↦
+      have := isRegularLocalRing_stalk_of_smooth sX x
+      IsRegularLocalRing.isCohenMacaulayLocalRing _)
+    hdim
 
 end AlgebraicGeometry

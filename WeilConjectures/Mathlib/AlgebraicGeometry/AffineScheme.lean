@@ -19,6 +19,10 @@ sheaf.
 We also compute the restriction of `X.toSpecΓ` over a basic open `D(r) ⊆ Spec Γ(X, ⊤)`:
 it is `Spec` of the localization map `Γ(X, ⊤)[1/r] →+* Γ(X, X.basicOpen r)`, see
 `AlgebraicGeometry.toSpecΓ_resLE_basicOpenIsoSpecAway`.
+
+Finally we record two facts about the prime `AlgebraicGeometry.IsAffineOpen.primeIdealOf x` of a
+point `x` of an affine open: distinct points have distinct primes, and along a morphism the prime
+of the image of `x` is the contraction of the prime of `x`.
 -/
 
 @[expose] public section
@@ -68,5 +72,19 @@ lemma IsAffineOpen.primeIdealOf_injective {U : X.Opens} (hU : IsAffineOpen U) :
   have h : hU.fromSpec (hU.primeIdealOf a) = hU.fromSpec (hU.primeIdealOf b) := by
     rw [PrimeSpectrum.ext hab]
   rwa [hU.fromSpec_primeIdealOf, hU.fromSpec_primeIdealOf, ← Subtype.ext_iff] at h
+
+variable {Y : Scheme.{u}}
+
+/-- **Comparing the primes of a point and of its image.** Let `f : X ⟶ Y`, let `U` be an affine
+open of `Y` whose preimage is affine and let `x` be a point of that preimage. Then the prime of
+`Γ(Y, U)` corresponding to `f x` is the contraction along `f.app U` of the prime of
+`Γ(X, f ⁻¹ᵁ U)` corresponding to `x`. -/
+lemma IsAffineOpen.under_primeIdealOf (f : X ⟶ Y) {U : Y.Opens} (hU : IsAffineOpen U)
+    (hU' : IsAffineOpen (f ⁻¹ᵁ U)) {x : X} (hx : x ∈ f ⁻¹ᵁ U) :
+    letI := (f.app U).hom.toAlgebra
+    (hU'.primeIdealOf ⟨x, hx⟩).asIdeal.under Γ(Y, U) = (hU.primeIdealOf ⟨f x, hx⟩).asIdeal := by
+  have h := IsAffineOpen.comap_primeIdealOf_appLE (f := f) U hU (f ⁻¹ᵁ U) hU' le_rfl hx
+  rw [← f.app_eq_appLE] at h
+  exact congrArg PrimeSpectrum.asIdeal h
 
 end AlgebraicGeometry
