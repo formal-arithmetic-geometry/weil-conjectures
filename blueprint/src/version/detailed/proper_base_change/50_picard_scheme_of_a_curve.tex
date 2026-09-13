@@ -13062,40 +13062,49 @@ morphism of schemes, then $\{T'\times_TT_i\to T'\}_{i\in I}$ is an fpqc
 covering of $T'$.
 \end{enumerate}
 \uses{def:pc-fpqc-covering,def:pc-scheme,def:pc-base-change}
-% Mathlib: one declaration per clause, all three of them instances derived for
+% Mathlib: one instance per clause, all three of them derived for
 % AlgebraicGeometry.Scheme.fpqcPrecoverage by the deriving clause of its own
 % definition (Mathlib/AlgebraicGeometry/Sites/Fpqc.lean ll. 60--63 at the pinned
-% rev 0df444a360eaa60ab8c11dca51a86af692955474).
+% rev 0df444a360eaa60ab8c11dca51a86af692955474), plus, for clauses (2) and (3), the
+% two wrappers that state those instances' fields at this node's generality.
 % Clause (1) is instHasIsosFpqcPrecoverage, i.e. CategoryTheory.Precoverage.HasIsos,
 % whose single field mem_coverings_of_isIso says that the singleton presieve on an
 % isomorphism is a covering family.
 % Clause (2) is instIsStableUnderCompositionFpqcPrecoverage, i.e.
 % CategoryTheory.Precoverage.IsStableUnderComposition, whose field comp_mem_coverings
-% is this clause for index families in Type (max u v), the composite family being
-% indexed by the sigma type of the two index families.
+% is this clause, the composite family being indexed by the sigma type of the two
+% index families.
 % Clause (3) is instIsStableUnderBaseChangeFpqcPrecoverage, i.e.
 % CategoryTheory.Precoverage.IsStableUnderBaseChange, whose field
 % mem_coverings_of_isPullback is this clause, stated for an arbitrary pullback square
 % over each $T_i$ rather than for a chosen fibre product, hence slightly more general.
-% Both fields carry the same universe restriction, Type (max u v), on the index type, and
-% the composition field carries it on the fibre families too (Precoverage.lean ll. 108 and
-% 110 at the pin), where this node's index sets and fibre families are both arbitrary.
-% What lifts both binders is the pair of wrappers
+% Both fields restrict the index type to Type (max u v) -- base change at
+% Mathlib/CategoryTheory/Sites/Precoverage.lean l. 96, composition at l. 108 -- and
+% the composition field restricts the fibre index sets $J_i$ as well (l. 110 at the
+% pin), where this node's index set $I$ and fibre index sets $J_i$ are all arbitrary.
+% What lifts these restrictions is the pair of wrappers
 % CategoryTheory.Precoverage.comp_mem_coverings and
-% CategoryTheory.Precoverage.mem_coverings_of_isPullback
-% (Mathlib/CategoryTheory/Sites/Precoverage.lean ll. 154 and 132 at the pin, and named
-% for this purpose by the two classes' own docstrings): each takes the instance as a
-% hypothesis and restates its field for an index type in an arbitrary universe, and the
-% composition wrapper takes the fibre families in a second universe independent of it.
-% Checked against the pin: over Scheme.{0}, where the fields demand an index type in
-% Type 1, both wrappers elaborate against a Type 0 index set and both fields do not.
+% CategoryTheory.Precoverage.mem_coverings_of_isPullback (Precoverage.lean ll. 154 and
+% 132 at the pin, and named for this purpose by the two classes' own docstrings): each
+% takes the instance as a hypothesis and restates its field for an index type in an
+% arbitrary universe, and the composition wrapper takes the fibre index sets in a
+% second universe independent of the index type's (l. 156).  That is why the marker
+% below names the wrappers beside the instances: for clauses (2) and (3) it is the
+% wrapper, not the instance's field, that states the clause as this node states it.
+% Checked against the pin, over Scheme.{0}, where the fields demand Type 1: both
+% wrappers elaborate against a Type 0 index set and both fields do not, and
+% comp_mem_coverings elaborates with Type 0 fibre index sets too, where its field
+% rejects them even for an index set in Type 1 -- the field's Type 1 / Type 1 form is
+% the firing decoy beside that negative.
 % Coverage is total: no clause of this node is left to the reader.  As for
 % \Cref{def:pc-fpqc-covering}, which is markered with fpqcPrecoverage itself, the
 % statement is absolute -- over the category of schemes, not over $(\mathit{Sch}/S)$ --
 % and so is this node, so nothing is lost in the match.
 \mathlibok\ \lean{AlgebraicGeometry.Scheme.instHasIsosFpqcPrecoverage,
 AlgebraicGeometry.Scheme.instIsStableUnderCompositionFpqcPrecoverage,
-AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFpqcPrecoverage}
+AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFpqcPrecoverage,
+CategoryTheory.Precoverage.comp_mem_coverings,
+CategoryTheory.Precoverage.mem_coverings_of_isPullback}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Topologies, Section~34.9 (The fpqc topology),
@@ -13118,32 +13127,33 @@ morphism of schemes, then $\{T'\times_TT_i\to T'\}_{i\in I}$ is an fppf
 covering of $T'$.
 \end{enumerate}
 \uses{def:pc-fppf-site,def:pc-scheme,def:pc-base-change}
-% Mathlib: one declaration per clause, for
+% Mathlib: a declaration for each clause, for
 % AlgebraicGeometry.Scheme.fppfPrecoverage, but not all three from the same place.
 % Clauses (2) and (3) are instIsStableUnderCompositionFppfPrecoverage and
 % instIsStableUnderBaseChangeFppfPrecoverage, derived by the deriving clause of the
 % definition of fppfPrecoverage (Mathlib/AlgebraicGeometry/Sites/Fpqc.lean ll. 40--42
 % at the pinned rev 0df444a360eaa60ab8c11dca51a86af692955474); they are the same two
-% classes, read the same way, as for \Cref{lem:pc-fpqc-covering-stability} above.
+% classes, carry the same universe restrictions, and are lifted to this node's
+% generality by the same two wrappers, as for \Cref{lem:pc-fpqc-covering-stability}
+% above, so the marker names those wrappers here too.
 % Clause (1) is NOT among them.  That deriving clause omits
 % CategoryTheory.Precoverage.HasIsos -- the fpqc one at ll. 62--63 has it, this one
 % at l. 42 does not -- and the instance cannot be recovered by synthesis either:
 % the general instance (AlgebraicGeometry.Scheme.precoverage P).HasIsos of
-% Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean l. 105 does not fire, and one
-% reason, the one that accounts for the unfolded form failing too, is that its own
-% hypotheses are unavailable at the pin: neither
-% MorphismProperty.ContainsIdentities nor MorphismProperty.RespectsIso synthesises for
-% @Flat, for @LocallyOfFinitePresentation, or for their infimum as morphism properties
-% -- this although IsMultiplicative @Flat does resolve, to
-% Flat.instIsMultiplicativeScheme.  Unfolding is not what is missing: with the def
+% Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean l. 105 does not fire, for two
+% independent reasons.  The first is that its own hypotheses are unavailable at the
+% pin: neither MorphismProperty.ContainsIdentities nor MorphismProperty.RespectsIso
+% synthesises for @Flat, for @LocallyOfFinitePresentation, or for their infimum as
+% morphism properties -- this although IsMultiplicative @Flat does resolve, to
+% Flat.instIsMultiplicativeScheme.  Unfolding alone is not enough: with the def
 % replaced by hand by Scheme.precoverage of that infimum, "#synth
 % Precoverage.HasIsos" still fails, and it is supplying the two hypotheses as instances
-% that makes it succeed.  That fppfPrecoverage is a def where zariskiPrecoverage is a
-% reducible abbrev is a second and independent obstruction -- with both hypotheses
-% supplied the def form still fails where the unfolded form succeeds -- so neither
-% unfolding nor a reducibility setting would recover the instance.  Checked against the
-% pin: "#synth Precoverage.HasIsos (fppfPrecoverage.{0})" fails, and there is no
-% declaration instHasIsosFppfPrecoverage in the environment.
+% that makes it succeed.  The second is that fppfPrecoverage is a def where
+% zariskiPrecoverage is a reducible abbrev -- with both hypotheses supplied the def
+% form still fails where the unfolded form succeeds.  So neither unfolding nor a
+% reducibility setting would recover the instance.  Checked against the pin: "#synth
+% Precoverage.HasIsos (fppfPrecoverage.{0})" fails, and there is no declaration
+% instHasIsosFppfPrecoverage in the environment.
 % What carries clause (1) instead is
 % AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage, in the same file: the
 % singleton presieve on a flat, surjective morphism locally of finite presentation is
@@ -13156,7 +13166,9 @@ covering of $T'$.
 % category of schemes, not over $(\mathit{Sch}/S)$ -- and so is this node.
 \mathlibok\ \lean{AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage,
 AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage,
-AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage}
+AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage,
+CategoryTheory.Precoverage.comp_mem_coverings,
+CategoryTheory.Precoverage.mem_coverings_of_isPullback}
 \end{lemma}
 \begin{proof}
 This is a cited external input: Topologies, Section~34.7 (The fppf topology),
