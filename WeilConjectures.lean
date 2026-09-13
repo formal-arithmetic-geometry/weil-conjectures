@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharacteristic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalFunctions
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Kunneth
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
