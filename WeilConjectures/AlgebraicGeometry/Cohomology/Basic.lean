@@ -285,8 +285,9 @@ lemma H.mapLinearEquiv_symm_apply (e : M ≅ N) (n : ℕ) (x : N.H n) :
 
 /-! ### Additivity -/
 
-/-- Cohomology takes a finite direct sum of sheaves of modules to the direct sum of the
-cohomologies. -/
+/-- Cohomology takes the direct sum of two sheaves of modules to the direct sum of the
+cohomologies. See `AlgebraicGeometry.Scheme.Modules.H.biproductLinearEquiv` for an arbitrary
+finite family. -/
 noncomputable def H.biprodLinearEquiv (M N : X.Modules) (n : ℕ) :
     (M ⊞ N).H n ≃ₗ[Γ(X, ⊤)] M.H n × N.H n where
   toFun x := (H.map biprod.fst n x, H.map biprod.snd n x)
