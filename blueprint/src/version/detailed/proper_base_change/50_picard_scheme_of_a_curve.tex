@@ -13077,13 +13077,16 @@ covering of $T'$.
 % CategoryTheory.Precoverage.IsStableUnderBaseChange, whose field
 % mem_coverings_of_isPullback is this clause, stated for an arbitrary pullback square
 % over each $T_i$ rather than for a chosen fibre product, hence slightly more general.
-% Both fields carry the same universe restriction on the index type, Type (max u v),
-% where this node's index sets are arbitrary.  What lifts it is the pair of wrappers
+% Both fields carry the same universe restriction, Type (max u v), on the index type, and
+% the composition field carries it on the fibre families too (Precoverage.lean ll. 108 and
+% 110 at the pin), where this node's index sets and fibre families are both arbitrary.
+% What lifts both binders is the pair of wrappers
 % CategoryTheory.Precoverage.comp_mem_coverings and
 % CategoryTheory.Precoverage.mem_coverings_of_isPullback
 % (Mathlib/CategoryTheory/Sites/Precoverage.lean ll. 154 and 132 at the pin, and named
 % for this purpose by the two classes' own docstrings): each takes the instance as a
-% hypothesis and restates its field for an index type in an arbitrary universe.
+% hypothesis and restates its field for an index type in an arbitrary universe, and the
+% composition wrapper takes the fibre families in a second universe independent of it.
 % Checked against the pin: over Scheme.{0}, where the fields demand an index type in
 % Type 1, both wrappers elaborate against a Type 0 index set and both fields do not.
 % Coverage is total: no clause of this node is left to the reader.  As for
@@ -13126,8 +13129,9 @@ covering of $T'$.
 % CategoryTheory.Precoverage.HasIsos -- the fpqc one at ll. 62--63 has it, this one
 % at l. 42 does not -- and the instance cannot be recovered by synthesis either:
 % the general instance (AlgebraicGeometry.Scheme.precoverage P).HasIsos of
-% Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean l. 105 does not fire, and the
-% reason is that its own hypotheses are unavailable at the pin: neither
+% Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean l. 105 does not fire, and one
+% reason, the one that accounts for the unfolded form failing too, is that its own
+% hypotheses are unavailable at the pin: neither
 % MorphismProperty.ContainsIdentities nor MorphismProperty.RespectsIso synthesises for
 % @Flat, for @LocallyOfFinitePresentation, or for their infimum as morphism properties
 % -- this although IsMultiplicative @Flat does resolve, to
