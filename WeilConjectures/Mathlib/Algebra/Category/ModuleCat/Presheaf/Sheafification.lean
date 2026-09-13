@@ -8,18 +8,20 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
-# Sheafification of presheaves of modules that are already sheaves
+# Sheafification of presheaves of modules
 
 Let `α : R₀ ⟶ R.val` be a locally bijective morphism from a presheaf of rings to (the underlying
 presheaf of) a sheaf of rings on a site `(C, J)`. The sheafification of presheaves of modules
 `PresheafOfModules R₀ ⥤ SheafOfModules R` is left adjoint to the forgetful functor, and its
-counit is always an isomorphism. We record that the unit is an isomorphism at a presheaf of
-modules whose underlying presheaf is a sheaf, so that if *every* presheaf of `R₀`-modules is a
-sheaf — as happens over a topological space with at most one point — the sheafification is an
-equivalence of categories.
+counit is always an isomorphism; we package that counit as a natural isomorphism. We also record
+that the unit is an isomorphism at a presheaf of modules whose underlying presheaf is a sheaf, so
+that if *every* presheaf of `R₀`-modules is a sheaf — as happens over a topological space with at
+most one point — the sheafification is an equivalence of categories.
 
 ## Main declarations
 
+- `PresheafOfModules.sheafificationCounitIso`: the counit of the sheafification adjunction, as a
+  natural isomorphism.
 - `PresheafOfModules.isIso_sheafificationAdjunction_unit_app`: the unit of the sheafification
   adjunction is an isomorphism at a presheaf of modules which is a sheaf.
 - `PresheafOfModules.sheafificationEquivalenceOfIsSheaf`: if every presheaf of `R₀`-modules is a
@@ -39,6 +41,12 @@ variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{v}] [HasWeakSheafify J AddCommGrpCat.{v}]
 
 namespace PresheafOfModules
+
+/-- Sheafifying the underlying presheaf of modules of a sheaf of modules gives the sheaf back:
+the counit of the sheafification adjunction is a natural isomorphism. -/
+noncomputable def sheafificationCounitIso :
+    (SheafOfModules.forget.{v} R ⋙ restrictScalars α) ⋙ sheafification.{v} α ≅ 𝟭 _ :=
+  asIso (sheafificationAdjunction.{v} α).counit
 
 /-- The unit of the sheafification adjunction for presheaves of modules is an isomorphism at a
 presheaf of modules whose underlying presheaf is already a sheaf. -/
