@@ -15,6 +15,9 @@ public import Mathlib.Topology.Sheaves.Stalks
 
 Let `f : X ⟶ Y` be a continuous map of topological spaces.
 
+* `TopCat.Presheaf.stalkDesc`: the universal property of the stalk, namely the map
+  `F.stalk x ⟶ M` induced by a family of maps `F.obj (op U) ⟶ M`, for `U` an open
+  neighbourhood of `x`, compatible with the restriction maps.
 * `TopCat.Presheaf.pushforwardCompStalkFunctor` upgrades
   `TopCat.Presheaf.stalkPushforward` to a morphism of functors
   `f _* (-) ⋙ stalkFunctor C (f x) ⟶ stalkFunctor C x`, and
@@ -43,6 +46,40 @@ open scoped AlgebraicGeometry
 noncomputable section
 
 namespace TopCat.Presheaf
+
+section StalkDesc
+
+variable {C : Type u} [Category.{v} C] [HasColimits.{v} C] {X : TopCat.{v}} (F : X.Presheaf C)
+  (x : X) (M : C) (c : ∀ U : Opens X, x ∈ U → (F.obj (op U) ⟶ M))
+  (hc : ∀ (U V : Opens X) (hU : x ∈ U) (hV : x ∈ V) (i : op U ⟶ op V),
+    F.map i ≫ c V hV = c U hU)
+
+/-- The cocone on the diagram computing the stalk of `F` at `x` given by a compatible family of
+maps out of the sections of `F` over the open neighbourhoods of `x`. -/
+def stalkCocone : Cocone ((OpenNhds.inclusion x).op ⋙ F) where
+  pt := M
+  ι :=
+    { app U := c U.unop.1 U.unop.2
+      naturality U V i := by
+        simpa using hc U.unop.1 V.unop.1 U.unop.2 V.unop.2 ((OpenNhds.inclusion x).op.map i) }
+
+/-- **The universal property of the stalk**: the map out of the stalk of `F` at `x` induced by a
+compatible family of maps out of the sections of `F` over the open neighbourhoods of `x`. -/
+def stalkDesc : F.stalk x ⟶ M :=
+  colimit.desc _ (stalkCocone F x M c hc)
+
+@[reassoc (attr := simp)]
+lemma germ_comp_stalkDesc (U : Opens X) (hU : x ∈ U) :
+    F.germ U x hU ≫ stalkDesc F x M c hc = c U hU :=
+  colimit.ι_desc (stalkCocone F x M c hc) (op ⟨U, hU⟩)
+
+@[simp]
+lemma stalkDesc_germ {FC : C → C → Type*} {CC : C → Type v}
+    [∀ X Y, FunLike (FC X Y) (CC X) (CC Y)] [ConcreteCategory.{v} C FC] (U : Opens X) (hU : x ∈ U)
+    (s : ToType (F.obj (op U))) : stalkDesc F x M c hc (F.germ U x hU s) = c U hU s := by
+  rw [← ConcreteCategory.comp_apply, germ_comp_stalkDesc]
+
+end StalkDesc
 
 variable {C : Type u} [Category.{v} C] [HasColimits.{v} C] {X Y : TopCat.{v}}
 
