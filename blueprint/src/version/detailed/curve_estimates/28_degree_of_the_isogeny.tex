@@ -437,11 +437,12 @@ section fixes the definition and collects the standard permanence properties;
 they are quoted, not proved, and \Cref{sec:deg-cost} counts them.
 
 \begin{definition}[Ample, very ample]\label{def:deg-ample}
+\uses{def:cube-mulby-int}
 \lean{SheafOfModules.IsGloballyGenerated,
 AlgebraicGeometry.Scheme.Modules.IsVeryAmple,
 AlgebraicGeometry.Scheme.Modules.IsAmple,
 AlgebraicGeometry.Scheme.Modules.IsVeryAmple.exists_isClosedImmersion,
-AlgebraicGeometry.IsAbelianVariety.IsSymmetric}
+AlgebraicGeometry.Scheme.Modules.IsSymmetric}
 Let $X$ be a scheme of finite type over $k$ and let $L$ be a line bundle on
 $X$.
 \begin{itemize}
@@ -452,9 +453,10 @@ $X$.
   $i\colon X\to\mathbf P^N$ with $i^*\O(1)\cong L$.  If $X$ is proper over $k$
   such an immersion is automatically a closed immersion.
 \end{itemize}
-A \emph{symmetric} line bundle on a commutative group scheme $G$ over $k$ is a
-line bundle $L$ with $[-1]^*L\cong L$, where $[-1]$ is the inversion morphism
-of \Cref{def:cube-mulby-int}.
+A \emph{symmetric} line bundle on a group scheme $G$ over $k$ is a line bundle
+$L$ with $[-1]^*L\cong L$, where $[-1]$ is the inversion morphism of
+\Cref{def:cube-mulby-int}.  (Commutativity of $G$ plays no part, and the
+formalisation does not assume it.)
 \end{definition}
 
 \begin{lemma}[Permanence properties of ampleness]\label{lem:deg-ample-basic}
@@ -1074,7 +1076,8 @@ quasi-finite, and it is proper; by
 \begin{proposition}[An abelian variety is projective]
 \label{prop:deg-abelian-projective}
 \uses{def:av-abelian-variety, def:deg-ample}
-\lean{AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple}
+\lean{AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple,
+AlgebraicGeometry.IsAbelianVariety.exists_isClosedImmersion}
 Every abelian variety $A$ over $k$ is projective; equivalently, by
 \Cref{lem:deg-ample-basic}(4), it carries an ample line bundle.
 \openobligation{AlgebraicGeometry: the projectivity of an abelian variety over
@@ -1112,9 +1115,11 @@ in particular $[-1]$ is an isomorphism, equal to its own inverse.  Put
 \[
   L:=L_0\otimes[-1]^*L_0 .
 \]
-Then $[-1]^*L_0$ is ample by \Cref{lem:deg-ample-basic}(3) applied to the
-isomorphism $[-1]$, and $L$ is ample by \Cref{lem:deg-ample-basic}(1) as a
-tensor product of two ample bundles.  Finally, pullback is pseudofunctorial and
+Then $[-1]^*L_0$ is ample because ampleness is invariant under pullback along an
+isomorphism --- which is formal, needing neither properness nor
+\Cref{lem:deg-ample-basic}(4), and so is proved directly rather than quoted from
+\Cref{lem:deg-ample-basic}(3) --- and $L$ is ample by
+\Cref{lem:deg-ample-basic}(1) as a tensor product of two ample bundles.  Finally, pullback is pseudofunctorial and
 compatible with tensor products, so
 \[
   [-1]^*L\cong[-1]^*L_0\otimes[-1]^*[-1]^*L_0

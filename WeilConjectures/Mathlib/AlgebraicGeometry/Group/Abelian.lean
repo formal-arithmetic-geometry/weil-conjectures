@@ -26,9 +26,9 @@ Following `Mathlib.CategoryTheory.Monoidal.Cartesian.Grp`, a group scheme over `
 
 Everything in this file is bookkeeping: we record as instances the properties that later files
 infer from `IsAbelianVariety G`. Besides the two defining properties themselves, these are that
-`G.left` is an integral scheme, that `G` is commutative (`IsCommMonObj G`, hence `CommGrpObj G`),
-that `G.hom` is smooth, and that abelian varieties are stable under base change along an
-extension of the ground field.
+`G.left` is an integral scheme, that `G.left` is proper over the base field in the `↘` phrasing,
+that `G` is commutative (`IsCommMonObj G`, hence `CommGrpObj G`), that `G.hom` is smooth, and
+that abelian varieties are stable under base change along an extension of the ground field.
 
 ## Dimension convention
 
@@ -65,6 +65,12 @@ example : Nonempty G.left := inferInstance
 example : IsSeparated G.hom := inferInstance
 example : QuasiCompact G.hom := inferInstance
 example : LocallyOfFiniteType G.hom := inferInstance
+
+/-- The underlying scheme of an abelian variety is proper over the base field. This is
+`AlgebraicGeometry.IsAbelianVariety.isProper` phrased with the `↘` notation, which is the form
+the theory of ample line bundles takes its properness hypotheses in. -/
+instance : IsProper (G.left ↘ Spec (.of K)) :=
+  IsAbelianVariety.isProper
 
 /-- An abelian variety is commutative. -/
 instance : IsCommMonObj G :=

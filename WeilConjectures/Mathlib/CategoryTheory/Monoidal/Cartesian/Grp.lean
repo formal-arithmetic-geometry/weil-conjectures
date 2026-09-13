@@ -99,9 +99,17 @@ lemma npow_add (m n : ℕ) : npow G (m + n) = lift (npow G m) (npow G n) ≫ μ 
 lemma npow_comp_npow (m n : ℕ) : npow G m ≫ npow G n = npow G (m * n) := by
   rw [comp_npow, npow, npow, pow_mul]
 
+@[to_additive (attr := simp)]
+lemma zpow_zero : zpow G 0 = toUnit G ≫ η := by
+  rw [zpow, _root_.zpow_zero, Hom.one_def]
+
 @[to_additive (attr := simp) zsmul_one]
 lemma zpow_one : zpow G 1 = 𝟙 G :=
   _root_.zpow_one _
+
+@[to_additive]
+lemma zpow_add (m n : ℤ) : zpow G (m + n) = lift (zpow G m) (zpow G n) ≫ μ := by
+  rw [← Hom.mul_def, zpow, zpow, zpow, _root_.zpow_add]
 
 @[to_additive (attr := reassoc)]
 lemma zpow_comp_zpow (m n : ℤ) : zpow G m ≫ zpow G n = zpow G (m * n) := by

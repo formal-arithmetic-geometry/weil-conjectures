@@ -6,76 +6,64 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.CategoryTheory.Comma.Over.Basic
 
 /-!
-# Projectivity of an abelian variety and a symmetric ample line bundle
+# Projectivity of an abelian variety, and a symmetric ample line bundle
 
-An abelian variety `A` over a field `K` is projective: it carries an ample line bundle. This
-is the one input of the degree chapter that is specific to abelian varieties, and it is stated
-here without proof.
+An abelian variety `G` over a field `K` is projective: the scheme `G.left` carries an ample line
+bundle, equivalently it admits a closed immersion over `K` into a projective space over `K`.
+This is the one input of the degree chapter that is specific to abelian varieties, and it is
+stated here without proof.
 
-Granting it, `A` carries an ample line bundle which is moreover *symmetric*, that is, is fixed
-by pullback along the inversion `[-1] : A ⟶ A`. Indeed, if `L₀` is ample then so is
-`[-1]^* L₀`, since `[-1]` is an isomorphism, hence so is `L := L₀ ⊗ [-1]^* L₀`; and
-`[-1]^* L ≅ [-1]^* L₀ ⊗ ([-1] ∘ [-1])^* L₀ = [-1]^* L₀ ⊗ L₀ ≅ L`, because `[-1] ∘ [-1] = 𝟙`.
-A symmetric ample line bundle is what the theorem of the cube is applied to in order to compute
-the degree of the isogeny `[n]`.
+Granting it, `G.left` carries an ample line bundle which is moreover *symmetric* in the sense of
+`AlgebraicGeometry.Scheme.Modules.IsSymmetric`, that is, fixed by pullback along the inversion
+`ι` of `G`. Indeed, if `L₀` is ample then so is `ι^* L₀`, since `ι` is an isomorphism, hence so
+is `L := L₀ ⊗ ι^* L₀`; and `L` is symmetric by
+`AlgebraicGeometry.Scheme.Modules.isSymmetric_tensorObj_pullback`. A symmetric ample line bundle
+is what the theorem of the cube is applied to in order to compute the degree of the isogeny
+`[n]`.
 
-Throughout, `A` is a group scheme in the sense of
-`WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian`: an object `G : Over (Spec (.of K))`
-with a `CategoryTheory.GrpObj G` structure, so that the underlying scheme is `G.left` and the
-inversion `[-1]` is `(CategoryTheory.GrpObj.zpow G (-1)).left`.
-
-## Main definitions
-
-- `AlgebraicGeometry.IsAbelianVariety.IsSymmetric`: a sheaf of modules `L` on a group scheme
-  `G` is symmetric if `[-1]^* L ≅ L` (blueprint: part of `def:deg-ample`, the twelfth
-  definition counted in `sec:deg-cost`).
+Throughout, a group scheme is an object `G : Over (Spec (.of K))` carrying a
+`CategoryTheory.GrpObj G` structure, as in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian`: its underlying scheme is `G.left`,
+and its inversion `[-1]` is `ι[G]`, the two being equal by
+`CategoryTheory.GrpObj.zpow_neg_one`.
 
 ## Main statements
 
-- `AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple` — **an abelian variety is
-  projective**: it carries an ample line bundle. This is `sorry` by design; see the
-  implementation notes below (blueprint: `prop:deg-abelian-projective`).
+- `AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple` — an abelian variety carries an
+  ample line bundle (blueprint: `prop:deg-abelian-projective`).
+- `AlgebraicGeometry.IsAbelianVariety.exists_isClosedImmersion` — **an abelian variety is
+  projective**: it admits a closed immersion over `K` into a projective space over `K`
+  (blueprint: `prop:deg-abelian-projective`).
 - `AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple_isSymmetric` — **an abelian
   variety carries a symmetric ample line bundle** (blueprint: `prop:deg-symmetric-ample`).
 
 ## Implementation notes
 
-* **A deliberate `sorry`.** `AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple` is
-  stated and not proved, exactly as `WeilConjectures.AlgebraicGeometry.ChowLemma` states
-  Chow's lemma without proving it. It is an open obligation of the degree chapter, and the one
-  obligation of that chapter which is specific to abelian varieties: no general-purpose
-  Mathlib development will supply it. The classical route is
-  [Mumford][MumfordAbelianVarieties], §6. Choose an affine open `U ⊆ A` containing the
-  identity `e`. Since `A` is smooth and the complement of an affine open in a smooth variety
-  is of pure codimension one, the reduced complement `D := A \ U` is an effective divisor with
-  `A \ Supp D = U` affine; one then shows that `𝒪_A(3 D)` is very ample, translating `D` by
-  the theorem of the square to separate any pair of points and any tangent vector. The
-  argument uses only the group law and the affineness of `U`, not the theorem of the cube,
-  which is why it belongs to the degree chapter.
-
-* **Everything else here is proved.**
-  `AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple_isSymmetric` of course
-  inherits the `sorry` above, and the further `sorry` of
-  `AlgebraicGeometry.Scheme.Modules.IsAmple.tensorObj`, the permanence property
-  `lem:deg-ample-basic` (1) that is left open in
-  `WeilConjectures.AlgebraicGeometry.Ample`. Neither is a gap in the argument given here.
+* `AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple` is an open obligation of the
+  degree chapter: it is stated and left `sorry`, exactly as
+  `WeilConjectures.AlgebraicGeometry.ChowLemma` states Chow's lemma without proving it. The
+  other two statements are proved from it, and inherit its `sorry`.
 
 * **Generality.** The blueprint chapter works throughout over an algebraically closed field.
-  Nothing in either statement below needs that, and neither does the classical proof of
-  projectivity, so both are stated over an arbitrary field `K`; a consumer working over an
+  Nothing in the statements below needs that, and neither does the classical proof of
+  projectivity, so all are stated over an arbitrary field `K`; a consumer working over an
   algebraically closed field can use them unchanged.
 
-* `[-1]` is `(CategoryTheory.GrpObj.zpow G (-1)).left`, and is an isomorphism because it is its
-  own inverse, `AlgebraicGeometry.IsAbelianVariety.zpow_neg_one_comp_self`. Being an
-  isomorphism it is an immersion, which is what
-  `AlgebraicGeometry.Scheme.Modules.IsAmple.pullback_of_isImmersion` needs in order to make
-  `[-1]^* L₀` ample.
+## TODO
+
+* Prove `AlgebraicGeometry.IsAbelianVariety.exists_invertible_isAmple`, following Mumford,
+  *Abelian Varieties*, §6. Choose an affine open `U ⊆ G.left` containing the identity. Since
+  `G.left` is smooth and the complement of an affine open in a smooth variety is of pure
+  codimension one, the reduced complement `D := G.left \ U` is an effective divisor with
+  `G.left \ Supp D = U` affine; one then shows that `𝒪(3 D)` is very ample, translating `D` by
+  the theorem of the square to separate any pair of points and any tangent vector. The argument
+  uses only the group law and the affineness of `U`, not the theorem of the cube, which is why
+  it belongs to the degree chapter.
 
 ## References
 
@@ -92,71 +80,43 @@ This file states `prop:deg-abelian-projective` and proves `prop:deg-symmetric-am
 
 universe u
 
-open CategoryTheory MonoidalCategory AlgebraicGeometry.Scheme.Modules
-
 namespace AlgebraicGeometry.IsAbelianVariety
 
-variable {K : Type u} [Field K] (G : Over (Spec (.of K))) [GrpObj G]
+open CategoryTheory MonoidalCategory Scheme.Modules
 
-section Inversion
+open scoped MonObj
 
-/-- **`[-1]` is its own inverse**: `[-1] ∘ [-1] = [1] = 𝟙`. -/
-lemma zpow_neg_one_comp_self : GrpObj.zpow G (-1) ≫ GrpObj.zpow G (-1) = 𝟙 G := by
-  rw [GrpObj.zpow_comp_zpow, show (-1 : ℤ) * (-1) = 1 by norm_num, GrpObj.zpow_one]
+variable {K : Type u} [Field K] (G : Over (Spec (.of K))) [GrpObj G] [IsAbelianVariety G]
 
-/-- `[-1]` is an isomorphism of group schemes, being its own inverse. -/
-instance isIso_zpow_neg_one : IsIso (GrpObj.zpow G (-1)) :=
-  ⟨GrpObj.zpow G (-1), zpow_neg_one_comp_self G, zpow_neg_one_comp_self G⟩
+/-- **An abelian variety carries an ample line bundle**, that is, it is projective.
 
-/-- On underlying schemes, `[-1] ∘ [-1] = 𝟙`. -/
-lemma left_zpow_neg_one_comp_self :
-    (GrpObj.zpow G (-1)).left ≫ (GrpObj.zpow G (-1)).left = 𝟙 G.left := by
-  rw [← Over.comp_left, zpow_neg_one_comp_self, Over.id_left]
-
-/-- The inversion `[-1] : A ⟶ A` of a group scheme is an isomorphism of schemes. -/
-instance isIso_left_zpow_neg_one : IsIso (GrpObj.zpow G (-1)).left :=
-  ⟨(GrpObj.zpow G (-1)).left, left_zpow_neg_one_comp_self G, left_zpow_neg_one_comp_self G⟩
-
-end Inversion
-
-/-- A sheaf of modules `L` on a group scheme `A` is **symmetric** if it is fixed by pullback
-along the inversion, that is, if `[-1]^* L ≅ L`.
-
-This is intended for a line bundle `L`; invertibility is not part of the definition, and is
-carried as a hypothesis by the statements that need it.
-(blueprint: part of `def:deg-ample`, the twelfth definition counted in `sec:deg-cost`) -/
-def IsSymmetric (L : G.left.Modules) : Prop :=
-  Nonempty ((Scheme.Modules.pullback (GrpObj.zpow G (-1)).left).obj L ≅ L)
-
-variable [IsAbelianVariety G]
-
-/-- **An abelian variety is projective**: it carries an ample line bundle.
-
-This is `sorry` by design; see the implementation notes of this file. The classical proof is
-[Mumford][MumfordAbelianVarieties], §6: the complement of an affine open neighbourhood `U` of
-the identity is an effective divisor `D`, and `𝒪(3 D)` is very ample by the theorem of the
-square.
+The classical proof is Mumford, *Abelian Varieties*, §6: the complement of an affine open
+neighbourhood `U` of the identity is an effective divisor `D`, and `𝒪(3 D)` is very ample by
+the theorem of the square.
 (blueprint: `prop:deg-abelian-projective`) -/
 theorem exists_invertible_isAmple :
     ∃ L : G.left.Modules, L.Invertible ∧ L.IsAmple :=
   sorry
 
-/-- **An abelian variety carries a symmetric ample line bundle.** If `L₀` is an ample line
-bundle on `A`, then `L := L₀ ⊗ [-1]^* L₀` is ample, and it is symmetric because
-`[-1] ∘ [-1] = 𝟙`.
+/-- **An abelian variety is projective**: it admits a closed immersion over `K` into a
+projective space over `K`, namely the one cut out by a power of an ample line bundle on it.
+(blueprint: `prop:deg-abelian-projective`) -/
+theorem exists_isClosedImmersion :
+    ∃ (N : ℕ) (i : G.left ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of K))),
+      IsClosedImmersion i ∧ i.IsOver (Spec (.of K)) := by
+  obtain ⟨L, hL, hLa⟩ := exists_invertible_isAmple G
+  obtain ⟨_, N, _, i, hi, hio, _⟩ := hLa.exists_isClosedImmersion K hL
+  exact ⟨N, i, hi, hio⟩
+
+/-- **An abelian variety carries a symmetric ample line bundle.**
 (blueprint: `prop:deg-symmetric-ample`) -/
 theorem exists_invertible_isAmple_isSymmetric :
-    ∃ L : G.left.Modules, L.Invertible ∧ L.IsAmple ∧ IsSymmetric G L := by
+    ∃ L : G.left.Modules, L.Invertible ∧ L.IsAmple ∧ L.IsSymmetric G := by
   obtain ⟨L₀, hL₀, hL₀a⟩ := exists_invertible_isAmple G
-  have hproper : IsProper (G.left ↘ Spec (.of K)) := IsAbelianVariety.isProper
-  set e : G.left ⟶ G.left := (GrpObj.zpow G (-1)).left
-  have hpb : ((Scheme.Modules.pullback e).obj L₀).Invertible := hL₀.pullback e
-  refine ⟨L₀ ⊗ (Scheme.Modules.pullback e).obj L₀, hL₀.tensorObj hpb,
-    IsAmple.tensorObj hL₀ hpb hL₀a (IsAmple.pullback_of_isImmersion K e hL₀ hL₀a), ⟨?_⟩⟩
-  -- `[-1]^* (L₀ ⊗ [-1]^* L₀) ≅ [-1]^* L₀ ⊗ ([-1] ∘ [-1])^* L₀ ≅ [-1]^* L₀ ⊗ L₀ ≅ L₀ ⊗ [-1]^* L₀`
-  exact (Functor.Monoidal.μIso (Scheme.Modules.pullback e) _ _).symm ≪≫
-    tensorIso (Iso.refl _)
-      ((Scheme.Modules.pullbackTriangle (left_zpow_neg_one_comp_self G)).app L₀ ≪≫
-        (Scheme.Modules.pullbackId G.left).app L₀) ≪≫ β_ _ _
+  -- `L₀ ⊗ ι^* L₀` is ample as a tensor product of ample line bundles, `ι` being an isomorphism,
+  -- and symmetric because `ι ≫ ι = 𝟙`.
+  exact ⟨L₀ ⊗ (pullback ι[G].left).obj L₀, hL₀.tensorObj (hL₀.pullback _),
+    IsAmple.tensorObj hL₀ (hL₀.pullback _) hL₀a (hL₀a.pullback_of_isIso _),
+    isSymmetric_tensorObj_pullback G L₀⟩
 
 end AlgebraicGeometry.IsAbelianVariety
