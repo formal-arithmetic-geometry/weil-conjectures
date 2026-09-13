@@ -27,6 +27,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.Rigidity
@@ -232,6 +233,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topol
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale

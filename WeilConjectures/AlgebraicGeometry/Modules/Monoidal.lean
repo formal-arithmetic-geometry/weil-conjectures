@@ -35,6 +35,8 @@ presheaf tensor product.
   `AlgebraicGeometry.Scheme.Modules.braidedCategory` and
   `AlgebraicGeometry.Scheme.Modules.symmetricCategory`: the corresponding structures on the
   category `X.Modules` of `𝒪ₓ`-modules over a scheme `X`.
+- `AlgebraicGeometry.Scheme.Modules.tensorUnitIsoUnit`: the tensor unit of `X.Modules` is the
+  structure sheaf `𝒪ₓ`.
 
 -/
 
@@ -225,6 +227,10 @@ noncomputable instance Modules.braidedCategory : BraidedCategory X.Modules :=
 /-- The tensor product of `𝒪ₓ`-modules is symmetric. -/
 noncomputable instance Modules.symmetricCategory : SymmetricCategory X.Modules :=
   inferInstanceAs (SymmetricCategory (SheafOfModules.{u} X.ringCatSheaf))
+
+/-- The structure sheaf `𝒪ₓ` is the tensor unit of the monoidal category of `𝒪ₓ`-modules. -/
+noncomputable def Modules.tensorUnitIsoUnit : 𝟙_ X.Modules ≅ SheafOfModules.unit X.ringCatSheaf :=
+  SheafOfModules.tensorUnitIso X.sheaf
 
 end AlgebraicGeometry.Scheme
 

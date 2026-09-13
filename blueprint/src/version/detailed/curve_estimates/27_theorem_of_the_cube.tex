@@ -397,16 +397,17 @@ chapter.
 
 \begin{lemma}[Global sections of a proper variety]
 \label{lem:cube-global-sections}
-\lean{AlgebraicGeometry.isField_of_universallyClosed,
-AlgebraicGeometry.finite_appTop_of_universallyClosed}
+\lean{AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_appTop}
+\leanok
 Let $X$ be a proper integral scheme over the algebraically closed field $k$
 --- in particular, a proper variety over $k$.  Then the structure map
 $k\to\Gamma(X,\O_X)$ is an isomorphism; that is, $\Gamma(X,\O_X)=k$ and
 $\dim_k\Gamma(X,\O_X)=1$.
 \end{lemma}
 \begin{proof}
-This needs nothing from \Cref{sec:cube-inputs}: it is already available in
-Mathlib \texttt{v4.33.1}, in
+\leanok
+This needs nothing from \Cref{sec:cube-inputs}: the two ingredients are
+already available in Mathlib \texttt{v4.33.1}, in
 \texttt{Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}.  There,
 \texttt{AlgebraicGeometry.isField\_of\_universallyClosed} says that for a
 field $K$ and an integral scheme $X$ universally closed over $\Spec K$ the
@@ -416,7 +417,9 @@ moreover the structure morphism is locally of finite type then
 $K\to\Gamma(X,\O_X)$ is finite.  A proper morphism is universally closed and
 locally of finite type, so together, applied with $K=k$, they make
 $\Gamma(X,\O_X)$ a finite field extension of $k$; since $k$ is algebraically
-closed, that extension is trivial.
+closed, that extension is trivial.  The statement of this lemma --- that the
+structure map is an isomorphism --- is assembled from them in
+\texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}.
 
 The classical argument is the same one written out by hand: $\Gamma(X,\O_X)$
 is a finite-dimensional $k$-algebra, a subring of the function field of the
@@ -531,20 +534,34 @@ needs no cohomology.
 
 \begin{lemma}[Sections of a trivial line bundle on a proper variety]
 \label{lem:cube-nowhere-vanishing}
+\lean{AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit_of_isAlgClosed,
+AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_universallyClosed}
+\leanok
 Let $X$ be a proper integral scheme over $k$ and let $L$ be a trivial line
-bundle on $X$.  Then $\dim_k\Gamma(X,L)=1$, and every non-zero global section
-$s\in\Gamma(X,L)$ generates $L$ at every point of $X$; equivalently, the image
-of $s$ in the fibre $L(x)$ is non-zero for every $x\in X$.
+bundle on $X$.  Then $\dim_k\Gamma(X,L)=1$, and for every non-zero global
+section $s\in\Gamma(X,L)$ and every $x\in X$ the image of $s$ in the fibre
+$L(x)$ is non-zero.
+
+Two refinements are worth recording.  The second assertion uses only that
+$\Gamma(X,\O_X)$ is a field, so it holds over an arbitrary field $K$ in place
+of $k$, and indeed for $X$ merely universally closed over $K$; this is the
+form \Cref{lem:cube-triviality-criterion} needs, where it is applied over the
+residue field $\kappa(t)$ of a point of the base, which is not algebraically
+closed.  And the second assertion is equivalent to saying that $s$ generates
+$L$ at every point of $X$, but that equivalence needs a local trivialisation
+of $L$ at $x$, the same ingredient that \Cref{lem:cube-degeneracy-closed} and
+\Cref{lem:cube-invertible-fibrewise} rest on; it is not proved here.
 \end{lemma}
 \begin{proof}
 \uses{lem:cube-global-sections}
+\leanok
 Both assertions are invariant under isomorphism of line bundles, so we may
 choose an isomorphism $L\cong\O_X$ and assume $L=\O_X$.  Then
 $\Gamma(X,L)=\Gamma(X,\O_X)=k$ by \Cref{lem:cube-global-sections}, which gives
 the dimension.  A non-zero section is then a non-zero element $c\in k$, hence
-a unit of $\Gamma(X,\O_X)$ and so a unit in every local ring $\O_{X,x}$; a
-unit generates $\O_{X,x}$ as a module over itself, and its image in
-$\O_{X,x}/\m_x=\kappa(x)$ is non-zero.
+a unit of $\Gamma(X,\O_X)$, and its image in $\kappa(x)$ under the evaluation
+map $\Gamma(X,\O_X)\to\kappa(x)$ is again a unit, hence non-zero; the fibre
+$\O_X(x)$ is $\kappa(x)$.
 \end{proof}
 
 \section{Rigidity}\label{sec:cube-rigidity}
