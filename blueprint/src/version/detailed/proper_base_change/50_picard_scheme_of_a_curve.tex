@@ -2263,11 +2263,13 @@ is multiplication by the element \(s\) of \(k(C)\), and
 \begin{lemma}[Flat base change for coherent cohomology]
 \label{lem:pcb-flat-base-change-coherent}
 Let \(X\) be a proper scheme over a field \(k\), \(k\to k'\) a flat
-\(k\)-algebra (e.g.\ a field extension) and \(\mathcal F\) a
+\(k\)-algebra (e.g.\ a field extension; over a field the flatness is
+automatic, \Cref{lem:pc-flat-field}) and \(\mathcal F\) a
 quasi-coherent sheaf on \(X\).  Write \(f\colon X\to\Spec(k)\) and
 \(f'\colon X_{k'}\to\Spec(k')\) for the structure morphisms and
 \(g\colon\Spec(k')\to\Spec(k)\), \(g'\colon X_{k'}\to X\) for the two
-projections; both \(g\) and \(g'\) are flat, so
+projections; \(g\) is flat (\Cref{lem:pc-flat-field}) and hence so is
+its base change \(g'\) (\Cref{lem:pc-flat-stable-base-change}), so
 \Cref{lem:pc-base-change-map} applies to this square and gives canonical
 base change maps \(g^*R^if_*\mathcal F\to R^if'_*\mathcal F_{k'}\).
 Taking global sections over the affine scheme \(\Spec(k')\), these are
@@ -2302,10 +2304,10 @@ closed fields and \(\mathcal F=\mathcal O_X\), then
 \[
  \dim_{k'}H^i(X_{k'},\mathcal O_{X_{k'}})=\dim_kH^i(X,\mathcal O_X).
 \]
-\uses{lem:pc-base-change-map}
+\uses{lem:pc-base-change-map,lem:pc-flat-field,lem:pc-flat-stable-base-change}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-cech-spectral,lem:pc-base-change-map,lem:pc-affine-vanishing}
+\uses{lem:pcb-cech-spectral,lem:pc-base-change-map,lem:pc-affine-vanishing,lem:pc-flat-field}
 Since \(X\) is proper over \(k\), it is quasi-compact and
 quasi-separated, hence covered by finitely many affine open subsets
 \(U_1,\dots,U_r\), and their base changes \(U_{j,k'}\) cover
@@ -2362,7 +2364,8 @@ of \(\mathfrak U_{k'}\) and both maps are extension of scalars on
 sections over the \(U_J\).
 The dimension statement follows: a \(k\)-basis of
 \(H^i(X,\mathcal F)\) remains a \(k'\)-basis after extension of
-scalars, because the field extension \(k\to k'\) is flat (injective).
+scalars, because \((-)\otimes_kk'\) carries a free \(k\)-module to a
+free \(k'\)-module on the image of the basis.
 \end{proof}
 
 % ---------------------------------------------------------------------------
@@ -7547,13 +7550,13 @@ $X_K$ is a curve in the sense of \Cref{def:pcb-curves}.
 \uses{def:pc-genus,lem:pcb-flat-base-change-coherent,def:pc-base-change,def:pc-smooth-projective-curve,def:pcb-curves}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-proper-base-change,lem:pcb-flat-base-change-coherent}
+\uses{lem:pc-proper-base-change,lem:pcb-flat-base-change-coherent,lem:pc-flat-field}
 The base change $X_K=X\times_{\Spec k}\Spec K$ is proper over $K$
 (base change of proper \Cref{lem:pc-proper-base-change}), and the
 structure morphism $X\to\Spec k$ is proper, so by
 \Cref{lem:pcb-flat-base-change-coherent} (the affine/flat base change
 case, already decomposed in file 06, applied with the flat $k$-algebra
-$K$):
+$K$, \Cref{lem:pc-flat-field}):
 \[
 H^1(X_K,\cO_{X_K})\cong H^1(X,\cO_X)\otimes_kK,
 \]
@@ -7572,7 +7575,7 @@ $f_T:X_T\to T$ is the structure morphism of the base change.
 \uses{def:pc-base-change,def:pc-morphism-conventions,lem:pcb-flat-base-change-coherent,lem:pc-finite-support-hi,def:pc-picard-presheaf,def:pc-smooth-projective-curve}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-finite-support-hi,lem:pcb-flat-base-change-coherent}
+\uses{lem:pc-finite-support-hi,lem:pcb-flat-base-change-coherent,lem:pc-flat-field}
 Since $X$ is proper over $k$, $f_T$ is proper, hence quasi-compact and
 quasi-separated, so $f_{T,*}\cO_{X_T}$ is quasi-coherent
 (\Cref{lem:pc-finite-support-hi}(1)).  Both $\cO_T$ and $f_{T,*}\cO_{X_T}$
@@ -7580,7 +7583,7 @@ being quasi-coherent, the canonical map $\cO_T\to f_{T,*}\cO_{X_T}$ is an
 isomorphism as soon as it is bijective on sections over every affine open
 $V=\Spec(A)\subseteq T$: by
 \Cref{lem:pcb-flat-base-change-coherent} applied to $X$ proper over $k$,
-the flat $k$-algebra $A$ and $\cF=\cO_X$,
+the flat $k$-algebra $A$ (\Cref{lem:pc-flat-field}) and $\cF=\cO_X$,
 \[
 \Gamma(X_V,\cO_{X_V})=H^0(X_V,\cO_{X_V})\cong H^0(X,\cO_X)\otimes_kA
 =k\otimes_kA=A ,
@@ -8101,10 +8104,10 @@ $H^0(X,\cO_X)$ is a finite field extension of $k$.
 \item If $X$ is geometrically integral over $k$, then
 $H^0(X,\cO_X)=k$.
 \end{enumerate}
-\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-coherent-hi,lem:pcb-flat-base-change-coherent,lem:pc-finite-extension-alg-closed,def:pc-curve,def:pc-geometrically-irreducible}
+\uses{def:pc-scheme,def:pc-morphism-conventions,lem:pc-coherent-hi,lem:pcb-flat-base-change-coherent,lem:pc-finite-extension-alg-closed,def:pc-curve,def:pc-geometrically-irreducible,def:pc-field-tower,lem:pc-flat-field}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent,lem:pc-artinian-product-local,lem:pc-proper-base-change}
+\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent,lem:pc-artinian-product-local,lem:pc-proper-base-change,lem:pc-flat-field,def:pc-field-tower}
 (1) Put $A=H^0(X,\cO_X)$.  The structure morphism $f:X\to\Spec(k)$ is
 proper, so by \Cref{lem:pc-coherent-hi} (with $S=\Spec(k)$, the
 lemma's Noetherian ring equal to $k$, and $\cF=\cO_X$) the $k$-vector
@@ -8125,7 +8128,9 @@ itself), hence a finite product of local Artinian rings
 factor, so it is a local Artinian domain, i.e.\ a field.  Hence $A$ is a finite field extension
 of $k$.
 
-(2) Since $X$ is proper over $k$ and $k\to\bar k$ is a flat ring map,
+(2) Let $\bar k$ be an algebraic closure of $k$
+(\Cref{def:pc-field-tower}).  Since $X$ is proper over $k$ and
+$\bar k$ is a flat $k$-algebra (\Cref{lem:pc-flat-field}),
 \Cref{lem:pcb-flat-base-change-coherent} gives
 $H^0(X_{\bar k},\cO_{X_{\bar k}})=A\otimes_k\bar k$.  Part (1) applies
 over the algebraically closed field $\bar k$: since $X$ is
@@ -8156,9 +8161,10 @@ geometrically connected.
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-geometrically-irreducible,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent}
+\uses{lem:pc-coherent-hi,lem:pc-finite-extension-alg-closed,lem:pcb-flat-base-change-coherent,lem:pc-flat-field,def:pc-field-tower}
 ($\Rightarrow$) Let $k'/k$ be a field extension and set
-$A_{k'}:=H^0(X_{k'},\cO_{X_{k'}})$; by \Cref{lem:pcb-flat-base-change-coherent}
+$A_{k'}:=H^0(X_{k'},\cO_{X_{k'}})$; since $k'$ is a flat $k$-algebra
+(\Cref{lem:pc-flat-field}), \Cref{lem:pcb-flat-base-change-coherent} gives
 $A_{k'}=H^0(X,\cO_X)\otimes_kk'=k'$.  A scheme $Y$ is connected if and
 only if every idempotent of $H^0(Y,\cO_Y)$ equals $0$ or $1$
 (the standard: an idempotent $e$ decomposes $Y=V(e)\sqcup V(1-e)$,
@@ -8169,7 +8175,9 @@ idempotents, so $X_{k'}$ is connected for every $k'$, i.e.\ $X$ is
 geometrically connected.
 
 ($\Leftarrow$) Assume $X$ is geometrically connected.  Put
-$\Omega=\bar k$; $X_\Omega$ is connected and (geometrically reduced,
+$\Omega=\bar k$, an algebraic closure of $k$
+(\Cref{def:pc-field-tower}) and hence again a flat $k$-algebra
+(\Cref{lem:pc-flat-field}); $X_\Omega$ is connected and (geometrically reduced,
 hence) reduced.  By \Cref{lem:pcb-flat-base-change-coherent},
 $H^0(X_\Omega,\cO_{X_\Omega})=H^0(X,\cO_X)\otimes_k\Omega$, so by
 \Cref{lem:pc-coherent-hi} (proper $X_\Omega$ over the field $\Omega$)
@@ -9815,15 +9823,20 @@ here.
 \end{proof}
 
 % Decomposed.
-\begin{lemma}[Every morphism to a field is flat]\label{lem:pc-flat-field}
-Let $k$ be a field and $T$ a scheme over $k$.  Then $T\to\Spec(k)$ is
-flat: every $k$-module is free, hence flat.
+\begin{lemma}[Everything over a field is flat]\label{lem:pc-flat-field}
+Let $k$ be a field.  Then every $k$-module is free, hence flat; in
+particular every $k$-algebra $A$ is flat over $k$, and for every scheme
+$T$ over $k$ the structure morphism $T\to\Spec(k)$ is flat.
 \uses{def:pc-morphism-conventions}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-morphism-conventions}
-Affine-locally the structure morphism is given by a ring map
-$k\to A$; as a $k$-vector space $A$ is free.
+Every $k$-module has a basis, hence is free, hence flat; a $k$-algebra
+$A$ is in particular a $k$-module, so it is flat over $k$.  For the
+morphism statement, flatness of $T\to\Spec(k)$ means
+(\Cref{def:pc-morphism-conventions}) that every induced local-ring map
+is flat, and every such map is a map $k\to\cO_{T,t}$ of $k$-modules,
+whose target is free as a $k$-vector space by the first sentence.
 \end{proof}
 
 % Cited.
@@ -11179,12 +11192,13 @@ is the last formula of (2), at
 % pass read this block and ruled it sound on exactly this ground; sound it is,
 % and the ``cf.'' now says why out loud rather than leaving it to be re-derived.
 \begin{proof}
-\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flasque-acyclic,lem:pc-flat-base-change-cohom,lem:pc-proper-base-change,lem:pcb-dvr-quotient-dimension,lem:pcb-smooth-curve-local-dvr}
+\uses{def:pc-base-change,def:pc-degree-line-bundle,def:pc-divisor-line-bundle,def:pc-euler-characteristic,def:pcb-divisor,def:pc-effective-cartier-divisor,lem:pc-euler-additive,lem:pc-euler-characteristic-well-defined,lem:pc-finite-support-hi,lem:pc-flasque-acyclic,lem:pc-flat-base-change-cohom,lem:pc-flat-field,lem:pc-proper-base-change,lem:pcb-dvr-quotient-dimension,lem:pcb-smooth-curve-local-dvr}
 \emph{(3).}  This is exactly \Cref{lem:pc-euler-additive}.
 
 \emph{(1).}  For the field extension $K/k$ put $X_K:=X\times_{\Spec(k)}\Spec(K)$ (\Cref{def:pc-base-change}).
 By flat base change for cohomology (\Cref{lem:pc-flat-base-change-cohom},
-along the flat morphism $\Spec(K)\to\Spec(k)$) one has
+along the morphism $\Spec(K)\to\Spec(k)$, which is flat by
+\Cref{lem:pc-flat-field}) one has
 $H^i(X_K,\cL\otimes_kK)=H^i(X,\cL)\otimes_kK$ and
 $H^i(X_K,\cO_{X_K})=H^i(X,\cO_X)\otimes_kK$ for all $i$; the $H^i$ are
 finite-dimensional ($X$ proper over $k$: the well-definedness of the
@@ -11474,13 +11488,14 @@ $K/k$.  Then $\cL$ is very ample on $X$; in particular $\cL$ is
 \uses{def:pcb-ample,def:pc-base-change,def:pc-morphism-conventions,def:pc-invertible-module,lem:pcb-flat-base-change-coherent,def:pc-picard-presheaf}
 \end{lemma}
 \begin{proof}
-\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-coherent-hi,lem:pc-immersion-closed-image,lem:pc-locally-noetherian-quasi-separated,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
+\uses{def:pcb-ample,lem:pc-qc-immersion-fpqc-local,lem:pc-relative-very-ample-criterion,lem:pc-very-ample-ample,lem:pcb-flat-base-change-coherent,lem:pc-flat-field,lem:pc-coherent-hi,lem:pc-immersion-closed-image,lem:pc-locally-noetherian-quasi-separated,lem:pc-proper-to-separated-target,lem:pc-projective-space-separated}
 By definition of very ampleness there is an immersion
 $i:X_K\to\mathbf P^N_K$ with $i^*\cO_{\mathbf P^N}(1)=\cL_K$.  The
 sections $x_1,\dots,x_N$ of $\cO_{\mathbf P^N}(1)$ pull back to
 sections $s_j$ of $\cL_K$ which $K$-linearly generate
 $H^0(X_K,\cL_K)=H^0(X,\cL)\otimes_kK$
-(\Cref{lem:pcb-flat-base-change-coherent}; the finite generation of the
+(\Cref{lem:pcb-flat-base-change-coherent}, applied with the flat
+$k$-algebra $K$, \Cref{lem:pc-flat-field}; the finite generation of the
 sections of $i^*\cO(1)$: the morphism $i$ is the morphism of the
 sections; more precisely the immersion $i$ is given by base point free
 sections $t_0,\dots,t_N\in H^0(X_K,\cL_K)$ separating points and
