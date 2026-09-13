@@ -24,6 +24,8 @@ this answer does not depend on the chart, it is also the dimension of the whole 
   that is locally of finite type.
 * `AlgebraicGeometry.IsAffineOpen.ringKrullDim_eq_trdeg_functionField`: the same for the ring of
   sections of a nonempty affine open, which is the affine case of the above.
+* `AlgebraicGeometry.IsAffineOpen.ringKrullDim_eq_topologicalKrullDim`: consequently the sections
+  over a nonempty affine open have Krull dimension the dimension of the whole scheme.
 
 Both are stated for the `k`-algebra structure on the function field induced by the given morphism
 to `Spec k`, namely `AlgebraicGeometry.Scheme.Hom.functionFieldAlgebra`.
@@ -138,5 +140,14 @@ theorem topologicalKrullDim_eq_trdeg_functionField :
     obtain ⟨U, hU, hne, hx⟩ := hchart x
     rw [← key U hU hne]
     exact U.ι.isOpenEmbedding.isEmbedding.isInducing.topologicalKrullDim_le
+
+include f in
+/-- **The dimension of an integral scheme of finite type over a field is computed on any nonempty
+affine chart**: the Krull dimension of the sections over a nonempty affine open is the dimension
+of the whole scheme. -/
+theorem IsAffineOpen.ringKrullDim_eq_topologicalKrullDim {U : X.Opens} (hU : IsAffineOpen U)
+    [Nonempty U] : ringKrullDim Γ(X, U) = topologicalKrullDim X := by
+  let _ := f.functionFieldAlgebra
+  rw [hU.ringKrullDim_eq_trdeg_functionField f, topologicalKrullDim_eq_trdeg_functionField f]
 
 end AlgebraicGeometry

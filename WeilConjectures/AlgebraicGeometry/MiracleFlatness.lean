@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.RingTheory.CohenMacaulay.MiracleFlatness
 
 /-!
@@ -45,20 +47,10 @@ The Cohen–Macaulay and regularity conditions are taken as plain hypotheses rat
 arguments in the statements quantified over all points, since they cannot be stated as instance
 arguments there.
 
-## TODO
-
-Deduce the last sentence of `prop:deg-miracle-flatness`, that a finite surjective morphism
-between smooth varieties of the same dimension over a field is flat. Of its three ingredients
-only the zero dimensionality of the fibres is available. The two missing ones are that a smooth
-variety has regular local rings, and that a morphism between varieties of the same dimension has
-stalks of equal dimension; the latter rests on the dimension formula
-`dim A = height p + dim (A ⧸ p)` for a finitely generated domain over a field, which mathlib
-`v4.33.1` does not have.
-
 ## Blueprint
 
-This file implements the scheme-level half of `prop:deg-miracle-flatness` of the curve-estimates
-blueprint.
+This file implements `prop:deg-miracle-flatness` of the curve-estimates blueprint at the level of
+schemes, including its last sentence.
 -/
 
 @[expose] public section
@@ -109,5 +101,25 @@ theorem Flat.of_locallyQuasiFinite_of_ringKrullDim_stalk_eq [LocallyQuasiFinite 
     Flat f :=
   .of_ringKrullDim_eq f hY hX fun x ↦ by
     rw [h x, f.ringKrullDim_fiberRing_stalkMap_eq_zero x, add_zero]
+
+/-- **A finite morphism between smooth varieties of the same dimension over a field is flat.**
+
+The three hypotheses of miracle flatness all come for free: a smooth scheme over a field has
+regular, hence Cohen–Macaulay, local rings; a finite morphism is quasi-finite, so its fibres are
+zero dimensional; and the local rings of the source and of the target at a point and its image
+have the same dimension because the two varieties have the same dimension.
+
+Surjectivity of `f`, part of the blueprint statement, is not needed: it is automatic, the image of
+`f` being a closed irreducible subset of `Y` of the same dimension as `Y`. -/
+theorem Flat.of_isFinite_of_topologicalKrullDim_eq {k : Type u} [Field k] [IsIntegral X]
+    [IsIntegral Y] [IsFinite f] (sX : X ⟶ Spec (.of k)) (sY : Y ⟶ Spec (.of k)) [Smooth sX]
+    [Smooth sY] (hdim : topologicalKrullDim X = topologicalKrullDim Y) :
+    Flat f :=
+  .of_locallyQuasiFinite_of_ringKrullDim_stalk_eq f
+    (fun x ↦ isRegularLocalRing_stalk_of_smooth sY (f x))
+    (fun x ↦
+      have := isRegularLocalRing_stalk_of_smooth sX x
+      IsRegularLocalRing.isCohenMacaulayLocalRing _)
+    (ringKrullDim_stalk_eq_of_isFinite f sX sY hdim)
 
 end AlgebraicGeometry

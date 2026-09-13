@@ -51,6 +51,10 @@ The same normalization, now combined with going down, gives the dimension formul
   domain `A` which is a finitely generated algebra over a field `k`.
 * `Ideal.height_eq_ringKrullDim_of_isMaximal`: every maximal ideal of such an `A` has height
   `dim A`; equivalently, the local ring of `A` at a closed point has dimension `dim A`.
+* `Ideal.height_under_eq_of_ringKrullDim_eq`: if `B` is an integral algebra over `A`, both being
+  finitely generated domains over `k` of the same dimension, then a prime of `B` and its
+  contraction to `A` have the same height. This is the algebraic form of the statement that a
+  finite morphism between varieties of the same dimension preserves codimension.
 
 Only the inequality `height p + dim (A ⧸ p) ≥ dim A` has content: the reverse one holds over an
 arbitrary commutative ring by concatenation of chains, and is
@@ -105,6 +109,14 @@ theorem ringKrullDim_eq_trdeg_of_isFractionRing (K : Type*) [Field K] [Algebra A
   have h : Cardinal.toNat (Algebra.trdeg k K) = Cardinal.toNat (Algebra.trdeg k A) := by
     simpa using congrArg Cardinal.toNat (IsFractionRing.lift_trdeg_eq k A K)
   rw [h, ringKrullDim_eq_trdeg k A]
+
+include k in
+/-- A domain which is a finitely generated algebra over a field has finite Krull dimension. -/
+theorem finiteRingKrullDim_of_finiteType : FiniteRingKrullDim A := by
+  have hA : ringKrullDim A = (Cardinal.toNat (Algebra.trdeg k A) : ℕ) := ringKrullDim_eq_trdeg k A
+  refine finiteRingKrullDim_iff_ne_bot_and_top.mpr ⟨by simp [hA], ?_⟩
+  rw [hA, ← WithBot.coe_natCast, Ne, WithBot.coe_eq_top]
+  exact ENat.natCast_ne_top _
 
 /-- A finitely generated algebra over a field has finite Krull dimension: it is a quotient of a
 polynomial ring in finitely many variables. -/
@@ -255,12 +267,7 @@ ideal of `A`, then `height p + dim (A ⧸ p) = dim A`. -/
 @[stacks 00P1]
 theorem Ideal.height_add_ringKrullDim_quotient (p : Ideal A) [p.IsPrime] :
     (p.height : WithBot ℕ∞) + ringKrullDim (A ⧸ p) = ringKrullDim A := by
-  have hA : ringKrullDim A = (Cardinal.toNat (Algebra.trdeg k A) : ℕ) := ringKrullDim_eq_trdeg k A
-  have : FiniteRingKrullDim A := by
-    refine finiteRingKrullDim_iff_ne_bot_and_top.mpr ⟨?_, ?_⟩
-    · simp [hA]
-    · rw [hA, ← WithBot.coe_natCast, Ne, WithBot.coe_eq_top]
-      exact ENat.natCast_ne_top _
+  have : FiniteRingKrullDim A := finiteRingKrullDim_of_finiteType k A
   obtain ⟨N, hN⟩ := ENat.ne_top_iff_exists.mp (Ideal.height_ne_top_of_isPrime (I := p))
   exact height_add_ringKrullDim_quotient_aux k N p hN.symm
 
@@ -277,3 +284,47 @@ theorem Ideal.height_eq_ringKrullDim_of_isMaximal (m : Ideal A) [m.IsMaximal] :
   rwa [hzero, add_zero] at h
 
 end DimensionFormula
+
+section IntegralExtension
+
+/-- **Contraction preserves height along an integral extension of finitely generated domains of
+the same dimension.**
+
+Let `A` and `B` be domains which are finitely generated algebras over a field `k`, with `B`
+integral over `A`, and suppose that `A` and `B` have the same Krull dimension. Then every prime
+`q` of `B` has the same height as its contraction `q ∩ A`.
+
+Note that `A → B` is not assumed injective, and that going down — which would need `A` to be
+integrally closed — is not used: the dimension formula in each of `A` and `B` reduces the claim to
+`dim (A ⧸ q ∩ A) = dim (B ⧸ q)`, which holds because `A ⧸ q ∩ A → B ⧸ q` is an injective integral
+extension. -/
+theorem Ideal.height_under_eq_of_ringKrullDim_eq (k : Type*) [Field k] {A B : Type*} [CommRing A]
+    [CommRing B] [IsDomain A] [IsDomain B] [Algebra k A] [Algebra k B] [Algebra.FiniteType k A]
+    [Algebra.FiniteType k B] [Algebra A B] [Algebra.IsIntegral A B]
+    (hdim : ringKrullDim A = ringKrullDim B) (q : Ideal B) [q.IsPrime] :
+    (q.under A).height = q.height := by
+  -- the two quotients are finitely generated domains over `k` of the same dimension
+  have : Algebra.FiniteType k (A ⧸ q.under A) :=
+    .of_surjective (Ideal.Quotient.mkₐ k (q.under A)) Ideal.Quotient.mk_surjective
+  have hquot : ringKrullDim (B ⧸ q) = ringKrullDim (A ⧸ q.under A) :=
+    Algebra.IsIntegral.ringKrullDim_quotient_eq A B q
+  -- that common dimension is a natural number
+  obtain ⟨n, hn⟩ : ∃ n : ℕ, ringKrullDim (A ⧸ q.under A) = (n : ℕ) :=
+    ⟨_, ringKrullDim_eq_trdeg k (A ⧸ q.under A)⟩
+  -- and so are the two heights
+  have : FiniteRingKrullDim A := finiteRingKrullDim_of_finiteType k A
+  have : FiniteRingKrullDim B := finiteRingKrullDim_of_finiteType k B
+  obtain ⟨a, ha⟩ := ENat.ne_top_iff_exists.mp (Ideal.height_ne_top_of_isPrime (I := q.under A))
+  obtain ⟨b, hb⟩ := ENat.ne_top_iff_exists.mp (Ideal.height_ne_top_of_isPrime (I := q))
+  -- the dimension formula in `A` and in `B` now differ only by the height
+  have hA := Ideal.height_add_ringKrullDim_quotient k (q.under A)
+  have hB := Ideal.height_add_ringKrullDim_quotient k q
+  rw [hn, ← ha, hdim] at hA
+  rw [hquot, hn, ← hb] at hB
+  have key : ((a : ℕ∞) : WithBot ℕ∞) + (n : WithBot ℕ∞) = ((b : ℕ∞) : WithBot ℕ∞) +
+      (n : WithBot ℕ∞) := hA.trans hB.symm
+  rw [← ha, ← hb]
+  have hab : a + n = b + n := by exact_mod_cast key
+  rw [Nat.add_right_cancel hab]
+
+end IntegralExtension
