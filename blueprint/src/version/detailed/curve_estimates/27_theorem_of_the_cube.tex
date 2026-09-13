@@ -1158,8 +1158,10 @@ $\{x_0\}\times Y$.
 
 Three statements are needed that the chapter does not yet contain, and each is
 isolated here as its own numbered statement with an open obligation, in the
-manner of \Cref{sec:cube-inputs}.  None of the three can currently be stated
-in Lean.  Nothing else in this section is unproved: the two remaining
+manner of \Cref{sec:cube-inputs}.  The first two,
+\Cref{prop:cube-picard-square-zero} and \Cref{prop:cube-kunneth-h1}, are now
+stated in Lean, together with the maps they speak about; only their proofs are
+open.  \Cref{prop:cube-formal-functions} is not yet stated.  Nothing else in this section is unproved: the two remaining
 ingredients that the argument needs beyond
 \Cref{sec:cube-inputs} --- the base-change computation
 \Cref{lem:cube-global-sections-base-change} of the global sections of
@@ -1170,6 +1172,10 @@ below.
 
 \begin{proposition}[Line bundles on a square-zero thickening]
 \label{prop:cube-picard-square-zero}
+\lean{AlgebraicGeometry.Scheme.IdealSheafData.unitsToH1,
+AlgebraicGeometry.Scheme.IdealSheafData.h1ToPic,
+AlgebraicGeometry.Scheme.IdealSheafData.range_unitsToH1_eq_ker,
+AlgebraicGeometry.Scheme.IdealSheafData.unitsToH1_naturality}
 Let $W$ be a scheme and let $i\colon W_0\to W$ be a closed immersion defined by
 a quasi-coherent ideal $I\subseteq\O_W$ with $I^2=0$, so that $I$ is a sheaf of
 $\O_{W_0}$-modules.  Then:
@@ -1177,7 +1183,7 @@ $\O_{W_0}$-modules.  Then:
   \item the sequence of abelian groups
   \[
     \Gamma(W,\O_W^\times)\longrightarrow\Gamma(W_0,\O_{W_0}^\times)
-    \longrightarrow H^1(W_0,I)\longrightarrow\mathrm{Pic}(W)
+    \longrightarrow H^1(W,I)\longrightarrow\mathrm{Pic}(W)
     \xrightarrow{\ i^*\ }\mathrm{Pic}(W_0)
   \]
   is exact;
@@ -1197,15 +1203,16 @@ $\O_{W_0}$-modules.  Then:
   vertical maps are the restrictions
   $\Gamma(W,\O_W^\times)\to\Gamma(W',\O_{W'}^\times)$ and
   $\Gamma(W_0,\O_{W_0}^\times)\to\Gamma(W_0',\O_{W_0'}^\times)$, the
-  pullback $H^1(W_0,I)\to H^1(W_0',I')$ on the third term, and the pullbacks
+  pullback $H^1(W,I)\to H^1(W',I')$ on the third term, and the pullbacks
   $\mathrm{Pic}(W)\to\mathrm{Pic}(W')$ and
   $\mathrm{Pic}(W_0)\to\mathrm{Pic}(W_0')$ on the last two.
 \end{enumerate}
-\openobligation{AlgebraicGeometry: cohomology of a sheaf of abelian groups on a
-scheme in degree one, the identification of the Picard group of a scheme with
-the degree-one cohomology of the sheaf of units, and the long exact cohomology
-sequence of the truncated exponential sequence of a square-zero thickening,
-together with its naturality.}
+\openobligation{AlgebraicGeometry: the identification of the Picard group of a
+scheme with the degree-one cohomology of the sheaf of units, naturally in the
+scheme, and the long exact cohomology sequence of the truncated exponential
+sequence of a square-zero thickening, together with its naturality.  The
+statement, the two connecting maps and the sheaf of units are formalised; the
+two squares of the ladder that do not involve the connecting maps are proved.}
 \end{proposition}
 \begin{proof}
 Not proved here.  The input is the short exact sequence of sheaves of abelian
@@ -1222,9 +1229,11 @@ surjective as a map of sheaves because a section of $\O_W$ lifting a unit of
 $\O_{W_0}$ is itself a unit, the local ring of $W$ at a point of $W_0$ having
 the same residue field as the local ring of $W_0$ there.  Taking cohomology
 gives the five-term sequence of
-(1), once $\mathrm{Pic}$ is identified with $H^1$ of the sheaf of units and
-once $H^1(W,I)$ is identified with $H^1(W_0,I)$, which holds because the
-pushforward along a closed immersion is exact and preserves cohomology.  Part
+(1), once $\mathrm{Pic}$ is identified with $H^1$ of the sheaf of units.  The
+third term is written $H^1(W,I)$, with $I$ regarded as a sheaf of
+$\O_W$-modules, which is the form the Lean statement takes; it agrees with
+$H^1(W_0,I)$ because the pushforward along a closed immersion is exact and
+preserves cohomology.  Part
 (2) is the naturality of the long exact sequence in the short exact sequence of
 sheaves.  See \stacksproject{0BEQ} and \cite[III, Exercise 4.6]{Hartshorne}.
 
@@ -1238,6 +1247,9 @@ already in Mathlib once the Picard group is in place.
 \end{proof}
 
 \begin{proposition}[K\"unneth in degree one]\label{prop:cube-kunneth-h1}
+\lean{AlgebraicGeometry.sliceRestrictionMap,
+AlgebraicGeometry.bijective_sliceRestrictionMap_one,
+AlgebraicGeometry.kunnethLinearEquivOne}
 Let $X$ and $Y$ be proper varieties over $k$ and let $x_0\in X(k)$,
 $y_0\in Y(k)$.  Then the map
 \[
@@ -1248,13 +1260,16 @@ $y_0\in Y(k)$.  Then the map
 is an isomorphism of $k$-vector spaces.  Only its injectivity is used below;
 no route to that injectivity cheaper than the isomorphism itself is available,
 so \Cref{sec:cube-cost} charges the K\"unneth formula in full.
-\openobligation{AlgebraicGeometry: cohomology of a sheaf of modules on a
-scheme in degree one, and the Kuenneth formula in degree one for a product of
-two proper varieties over an algebraically closed field, in the form that the
-two slice restrictions together are injective.}
+\openobligation{AlgebraicGeometry: the Kuenneth formula in degree one for a
+product of two proper varieties over a field, in the form that the two slice
+restrictions together are bijective.  The statement and the map are formalised;
+what remains is the proof, and before it the identity and composition laws for
+the pullback map on cohomology, which Mathlib cannot yet supply because
+\texttt{CategoryTheory.Abelian.Ext.mapExactFunctor} is not functorial in the
+exact functor.}
 \end{proposition}
 \begin{proof}
-\uses{lem:cube-global-sections}
+\uses{lem:cube-global-sections-general}
 Not proved here.  The K\"unneth formula \stacksproject{0BEC} gives, in degree
 one and for the structure sheaves,
 \[
@@ -1262,9 +1277,11 @@ one and for the structure sheaves,
   \bigl(H^0(X,\O_X)\otimes_kH^1(Y,\O_Y)\bigr)\oplus
   \bigl(H^1(X,\O_X)\otimes_kH^0(Y,\O_Y)\bigr),
 \]
-and $H^0(X,\O_X)=H^0(Y,\O_Y)=k$ by \Cref{lem:cube-global-sections}, which
-turns the right-hand side into $H^1(X,\O_X)\oplus H^1(Y,\O_Y)$ once the two
-summands are written in the order of the statement.  That the
+and $H^0(X,\O_X)=H^0(Y,\O_Y)=k$ by \Cref{lem:cube-global-sections-general},
+which needs only that $X$ and $Y$ are proper and geometrically integral and so
+does not use that $k$ is algebraically closed; that turns the right-hand side
+into $H^1(X,\O_X)\oplus H^1(Y,\O_Y)$ once the two summands are written in the
+order of the statement.  That the
 isomorphism is the one written above --- that the two projections of the
 K\"unneth decomposition are the restrictions along the two slice inclusions ---
 is the standard compatibility of the K\"unneth map with pullback along
@@ -2151,8 +2168,12 @@ from them.
   \Cref{prop:cube-formal-functions}.  \emph{Two definitions} --- $H^i(S,F)$
   for a sheaf of $\O_S$-modules, as a module over $\Gamma(S,\O_S)$, and the
   sheaf of units $\O_S^\times$ as a sheaf of abelian groups together with its
-  $H^1$ --- and \emph{about twelve lemmas}: the long exact sequence of a short
-  exact sequence of sheaves and its naturality; additivity over finite direct
+  $H^1$ --- and \emph{about fourteen lemmas}: the long exact sequence of a
+  short exact sequence of sheaves and its naturality; the pullback map
+  $f^*\colon H^i(T,G)\to H^i(S,f^*G)$ along a morphism of schemes together
+  with its identity and composition laws, which is what
+  \Cref{prop:cube-kunneth-h1} restricts along the two slice inclusions;
+  additivity over finite direct
   sums, which is what turns
   $H^1(W,\O_W\otimes_kI)$ into $H^1(W,\O_W)\otimes_kI$ in
   \Cref{lem:cube-thickening-trivial}; the Cech computation on a separated

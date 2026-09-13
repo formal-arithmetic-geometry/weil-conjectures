@@ -63,6 +63,8 @@ base change map `(f_* F)(y) ⟶ Γ(X_y, F_y)`.
 
 ## Main definitions
 
+- `AlgebraicGeometry.Scheme.structureModules`: the structure sheaf of a scheme, as a sheaf of
+  modules over itself.
 - `AlgebraicGeometry.Scheme.Modules.fiberFunctor`, `AlgebraicGeometry.Scheme.Modules.fiber`: the
   fibre `F(x)` of a sheaf of `𝒪_X`-modules at a point `x`, as a `κ(x)`-vector space, and its
   functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
@@ -131,7 +133,17 @@ universe u
 
 open CategoryTheory Limits Opposite SheafOfModules TopologicalSpace
 
-namespace AlgebraicGeometry.Scheme.Modules
+namespace AlgebraicGeometry
+
+/-- The structure sheaf `𝒪_X` of a scheme `X`, as a sheaf of modules over itself: the tensor
+unit of `X.Modules`.
+
+The abbreviation is needed because dot notation on `SheafOfModules.unit X.ringCatSheaf`
+resolves in `SheafOfModules _` rather than in `X.Modules`. -/
+noncomputable abbrev Scheme.structureModules (X : Scheme.{u}) : X.Modules :=
+  SheafOfModules.unit X.ringCatSheaf
+
+namespace Scheme.Modules
 
 section Restriction
 
@@ -427,8 +439,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
 /-- The pullback of the structure sheaf `𝒪_Y` along a morphism of schemes `f : X ⟶ Y`
 is the structure sheaf `𝒪_X`. -/
 noncomputable def pullbackUnitIso :
-    (pullback f).obj (SheafOfModules.unit.{u} Y.ringCatSheaf) ≅
-      SheafOfModules.unit.{u} X.ringCatSheaf :=
+    (pullback f).obj Y.structureModules ≅ X.structureModules :=
   have : (SheafOfModules.pushforward f.toRingCatSheafHom).IsRightAdjoint :=
     inferInstanceAs (Modules.pushforward f).IsRightAdjoint
   have := SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal (φ := f.toRingCatSheafHom)
@@ -1259,4 +1270,6 @@ lemma fiberBaseChangeMap_naturality {G : X.Modules} (φ : F ⟶ G) :
 
 end FiberBaseChange
 
-end AlgebraicGeometry.Scheme.Modules
+end Scheme.Modules
+
+end AlgebraicGeometry

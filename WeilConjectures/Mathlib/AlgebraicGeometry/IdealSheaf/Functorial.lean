@@ -33,6 +33,8 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
 - `AlgebraicGeometry.Scheme.Hom.comap_ker_self`: `j.ker.comap j = ⊥` for every `j`;
 - `AlgebraicGeometry.Scheme.IdealSheafData.fg_ideal_comap_iff`: finite generation of the
   ideal of sections transfers across an open immersion;
+- `AlgebraicGeometry.Scheme.IdealSheafData.subschemeMapOfComapLe`: the morphism of closed
+  subschemes `V(J) ⟶ V(I)` induced by a morphism `f` with `I.comap f ≤ J`;
 - `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_of_isPullback`: flat base change, with
   `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_opens` (restriction to an open) and
   `AlgebraicGeometry.Scheme.IdealSheafData.comap_map` (a quasi-compact flat monomorphism)
@@ -186,5 +188,33 @@ theorem comap_map (f : X ⟶ Y) [QuasiCompact f] [Flat f] [Mono f] (J : X.IdealS
   rw [map_comap_of_isPullback J (IsKernelPair.id_of_mono f), comap_id, map_id]
 
 end FlatBaseChange
+
+section Subscheme
+
+/-- The morphism `V(J) ⟶ V(I)` of closed subschemes induced by a morphism `f : X ⟶ Y` that
+pulls the ideal `I` into the ideal `J`. It is
+`AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap` fed through the Galois connection
+`AlgebraicGeometry.Scheme.IdealSheafData.le_map_iff_comap_le`. -/
+noncomputable def subschemeMapOfComapLe {X Y : Scheme.{u}} (I : Y.IdealSheafData)
+    (J : X.IdealSheafData) (f : X ⟶ Y) (hf : I.comap f ≤ J) : J.subscheme ⟶ I.subscheme :=
+  subschemeMap J I f (le_map_iff_comap_le.mpr hf)
+
+/-- The morphism of closed subschemes lies over `f`:
+
+```
+  V(J) ──subschemeMapOfComapLe──▶ V(I)
+    │                               │
+    │ J.subschemeι                  │ I.subschemeι
+    ▼                               ▼
+    X ────────────f───────────────▶ Y
+```
+-/
+@[reassoc (attr := simp)]
+lemma subschemeMapOfComapLe_subschemeι {X Y : Scheme.{u}} (I : Y.IdealSheafData)
+    (J : X.IdealSheafData) (f : X ⟶ Y) (hf : I.comap f ≤ J) :
+    subschemeMapOfComapLe I J f hf ≫ I.subschemeι = J.subschemeι ≫ f :=
+  subschemeMap_subschemeι _ _ _ _
+
+end Subscheme
 
 end AlgebraicGeometry.Scheme.IdealSheafData
