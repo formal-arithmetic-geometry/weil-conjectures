@@ -51,7 +51,9 @@ written down with what is available.
   `Γ(W₀, 𝒪^×) ⟶ H¹(W, I)`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.h1ToPic` — the map `H¹(W, I) ⟶ Pic W`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.h1Map` — the vertical map
-  `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder.
+  `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder, and
+  `AlgebraicGeometry.Scheme.IdealSheafData.h1MapOfComapLe`, its value at the canonical
+  comparison morphism `g^* I ⟶ I'`.
 
 ## Main statements
 
@@ -69,7 +71,10 @@ Proved rather than assumed are the two squares of the ladder that do not involve
 connecting maps, `AlgebraicGeometry.Scheme.IdealSheafData.unitsMap_subschemeι_naturality` and
 `pic_map_subschemeι_naturality`, and the consequence that the chapter actually consumes,
 `AlgebraicGeometry.Scheme.IdealSheafData.injective_pic_map_subschemeι_of_subsingleton`: if
-`H¹(W, I)` vanishes, a line bundle on `W` trivial on `W₀` is trivial.
+`H¹(W, I)` vanishes, a line bundle on `W` trivial on `W₀` is trivial. Also proved is
+`AlgebraicGeometry.Scheme.IdealSheafData.injective_h1ToPic_of_surjective_unitsMap`: if every
+unit on `W₀` extends to `W`, then a deformation class is determined by the line bundle it
+glues.
 
 ## Implementation notes
 
@@ -107,10 +112,9 @@ connecting maps, `AlgebraicGeometry.Scheme.IdealSheafData.unitsMap_subschemeι_n
   together with the comparison morphism `φ : g^* I ⟶ I'` of `𝒪_{W'}`-modules. The hypothesis
   `hφ` says that `φ` is compatible with the two inclusions into the structure sheaves; it is
   the precise form of "the right vertical map pulls `I` back onto `I'`", and it determines `φ`
-  uniquely, since `I' ⟶ 𝒪_{W'}` is a monomorphism. Constructing `φ` from `hg` — rather than
-  taking it as a parameter — is left for later: it amounts to factoring
-  `g^* I ⟶ g^* 𝒪_W ≅ 𝒪_{W'}` through the kernel `I'`, which is a statement about a morphism
-  out of a pullback and has to be checked through the adjunction `g^* ⊣ g_*`.
+  uniquely, since `I' ⟶ 𝒪_{W'}` is a monomorphism. Such a `φ` is constructed from `hg` by
+  `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap`, and `comapModulesMap_toModulesι`
+  is the hypothesis `hφ` for it.
 -/
 
 @[expose] public section
@@ -173,6 +177,17 @@ theorem injective_pic_map_subschemeι_of_subsingleton (hI : I ^ 2 = 0)
   rintro x ⟨y, rfl⟩
   rw [Subsingleton.elim y 1, map_one]
 
+/-- **If every unit on the closed subscheme extends to the thickening, a deformation class is
+determined by the line bundle it glues**: the map `H¹(W, I) ⟶ Pic W` of the five-term
+sequence of a square-zero thickening is injective as soon as
+`Γ(W, 𝒪)ˣ ⟶ Γ(W₀, 𝒪)ˣ` is surjective. -/
+lemma injective_h1ToPic_of_surjective_unitsMap (hI : I ^ 2 = 0)
+    (hsurj : Function.Surjective (Hom.unitsMap I.subschemeι)) :
+    Function.Injective (I.h1ToPic hI) := by
+  rw [← MonoidHom.ker_eq_bot_iff, ← range_unitsToH1_eq_ker I hI, Subgroup.eq_bot_iff_forall]
+  rintro x ⟨y, rfl⟩
+  exact (range_unitsMap_subschemeι_eq_ker I hI).le (MonoidHom.mem_range.mpr (hsurj y))
+
 /-! ### Naturality in the thickening -/
 
 variable (I' : W'.IdealSheafData) (g : W' ⟶ W)
@@ -218,6 +233,14 @@ noncomputable def h1Map :
   AddMonoidHom.toMultiplicative
     ((Modules.H.mapAddHom φ 1).comp (Modules.H.pullbackAddHom g I.toModules 1))
 
+/-- The vertical map `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder, taken at the canonical
+comparison morphism `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap`. This is the map
+the two naturality squares hold for without any further hypothesis; see
+`unitsToH1_naturality_comapModulesMap` and `h1ToPic_naturality_comapModulesMap`. -/
+noncomputable def h1MapOfComapLe (hg : I.comap g ≤ I') :
+    Multiplicative (I.toModules.H 1) →* Multiplicative (I'.toModules.H 1) :=
+  h1Map I I' g (comapModulesMap I I' g hg)
+
 variable (hI : I ^ 2 = 0) (hI' : I' ^ 2 = 0) (hg : I.comap g ≤ I')
   (hφ : (Modules.pullback g).map I.toModulesι ≫ (Modules.pullbackUnitIso g).hom =
     φ ≫ I'.toModulesι)
@@ -252,5 +275,20 @@ include hφ in
 theorem h1ToPic_naturality :
     (Pic.map g).comp (I.h1ToPic hI) = (I'.h1ToPic hI').comp (h1Map I I' g φ) :=
   sorry
+
+/-- The square of the naturality ladder around the connecting homomorphism, for the canonical
+comparison morphism `g^* I ⟶ I'`. -/
+theorem unitsToH1_naturality_comapModulesMap :
+    (I'.unitsToH1 hI').comp (Hom.unitsMap (subschemeMapOfComapLe I I' g hg)) =
+      (h1MapOfComapLe I I' g hg).comp (I.unitsToH1 hI) :=
+  unitsToH1_naturality I I' g (comapModulesMap I I' g hg) hI hI' hg
+    (comapModulesMap_toModulesι I I' g hg).symm
+
+/-- The square of the naturality ladder around the map `H¹(W, I) ⟶ Pic W`, for the canonical
+comparison morphism `g^* I ⟶ I'`. -/
+theorem h1ToPic_naturality_comapModulesMap :
+    (Pic.map g).comp (I.h1ToPic hI) = (I'.h1ToPic hI').comp (h1MapOfComapLe I I' g hg) :=
+  h1ToPic_naturality I I' g (comapModulesMap I I' g hg) hI hI'
+    (comapModulesMap_toModulesι I I' g hg).symm
 
 end AlgebraicGeometry.Scheme.IdealSheafData

@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-!
 # Push- and pullback of ideal sheaves on affine opens
@@ -27,6 +28,10 @@ and on an affine scheme ideal sheaves are order-isomorphic to ideals of the glob
 - `AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_map_of_isAffine`
 - `AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_comap_of_isAffine`
 - `AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_appLE`
+- `AlgebraicGeometry.Scheme.IdealSheafData.pow_comap_eq_zero_of_isAffine`: a vanishing power
+  of an ideal sheaf on an affine scheme is inherited by its pullback along an arbitrary
+  morphism; this is how a square-zero thickening of an affine scheme stays square zero after
+  base change.
 -/
 
 @[expose] public section
@@ -95,6 +100,22 @@ lemma ideal_comap_appLE {Z : Scheme.{u}} (J : X.IdealSheafData) (f : Z ⟶ X)
   congr 1
   simp only [Scheme.Hom.appTop, Scheme.Hom.resLE_app_top, Category.assoc,
     Iso.inv_hom_id, Category.comp_id]
+
+/-! ### Powers of an ideal sheaf -/
+
+/-- **A power of an ideal sheaf on an affine scheme stays zero after pullback.** If `J` is an
+ideal sheaf on an affine scheme `Y` with `J ^ n = 0`, then `(J.comap f) ^ n = 0` for every
+morphism `f : X ⟶ Y`.
+
+TODO: the hypothesis `[IsAffine Y]` is an artefact of this proof, not of the mathematics:
+`(J.comap f) ^ n = 0` whenever `J ^ n = 0`, because both sides are local on `Y`. Dropping it
+needs `comap_pow` for `AlgebraicGeometry.Scheme.IdealSheafData`, which Mathlib does not have. -/
+lemma pow_comap_eq_zero_of_isAffine [IsAffine Y] {J : Y.IdealSheafData} {n : ℕ}
+    (hJ : J ^ n = 0) (f : X ⟶ Y) : J.comap f ^ n = 0 := by
+  ext U : 2
+  rw [ideal_pow, Pi.pow_apply, ideal_comap_appLE J f ⟨⊤, isAffineOpen_top Y⟩ U le_top,
+    ← Ideal.map_pow, (pow_eq_zero_iff_of_isAffine J).mp hJ, Ideal.map_bot]
+  simp
 
 end AlgebraicGeometry.Scheme.IdealSheafData
 

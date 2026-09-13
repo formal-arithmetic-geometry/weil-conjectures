@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.PicardSquareZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Semicontinuity
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Units
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
@@ -30,6 +31,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafInvertible
 public import WeilConjectures.AnalyticAux
