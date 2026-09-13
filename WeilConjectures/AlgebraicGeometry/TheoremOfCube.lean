@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PicardSquareZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
+public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 
@@ -46,6 +47,9 @@ an obstruction class `α ∈ H¹(W ×_Z Z_{n+1}, Iₙ)` whose image is the class
 - `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one`
   (blueprint: `lem:cube-thickening-trivial`) — the specialisation to the triple product of the
   cube.
+- `Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper`, in the
+  same namespace — the same over a field, for proper geometrically integral varieties `X` and
+  `Y`, where the unit-extension input is a theorem rather than a hypothesis.
 
 ## Implementation notes
 
@@ -54,7 +58,9 @@ an obstruction class `α ∈ H¹(W ×_Z Z_{n+1}, Iₙ)` whose image is the class
   - `hX`, `hY`: that `Γ(VX ×_Z Z_{n+1}, 𝒪)ˣ ⟶ Γ(VX ×_Z Zₙ, 𝒪)ˣ` is surjective, and likewise
     for `VY`. In the blueprint this is the surjection `Aₙ₊₁^× ⟶ Aₙ^×` of the local artinian
     rings, obtained from `lem:cube-global-sections-base-change` together with
-    `Γ(𝒪^×) = Γ(𝒪)^×`.
+    `Γ(𝒪^×) = Γ(𝒪)^×`. For proper varieties over a field it is discharged by
+    `AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective`, in
+    `WeilConjectures.AlgebraicGeometry.ThickeningUnits`.
   - `hkunneth`: that a deformation class on `V ×_Z Z_{n+1}` restricting to zero on both
     slices is zero. In the blueprint this is three things together: `prop:cube-kunneth-h1`,
     the identification of the ideal of the thickening with `𝒪_W ⊗_k Iₙ` and hence of its `H¹`
@@ -76,7 +82,7 @@ an obstruction class `α ∈ H¹(W ×_Z Z_{n+1}, Iₙ)` whose image is the class
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory IsLocalRing Limits
 
 namespace AlgebraicGeometry.Scheme
 
@@ -188,5 +194,52 @@ theorem Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one
     Pic.map_comp_apply, hLz, map_one]
 
 end Cube
+
+/-! ### The theorem of the cube over a field -/
+
+section Variety
+
+variable {K : Type u} [Field K] {X Y Z : Scheme.{u}}
+
+/-- **Triviality over the infinitesimal neighbourhoods, for proper varieties over a field**
+(blueprint: `lem:cube-thickening-trivial`).
+
+The specialisation of
+`AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one`
+to proper geometrically integral varieties `X` and `Y` over a field `K`, an arbitrary
+`K`-scheme `Z` and the point of `Z` picked out by a rational point `z₀`. The unit-extension
+hypotheses `hX` and `hY` are discharged by
+`AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective` and the
+hypothesis `ht` on the base point by
+`AlgebraicGeometry.Scheme.fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id`, leaving the
+Künneth input `hkunneth` as the only hypothesis of the blueprint's proof that is not yet a
+theorem. -/
+theorem Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper
+    (πX : X ⟶ Spec (.of K)) [IsProper πX] [GeometricallyIntegral πX]
+    (πY : Y ⟶ Spec (.of K)) [IsProper πY] [GeometricallyIntegral πY] (πZ : Z ⟶ Spec (.of K))
+    (x₀ : Spec (.of K) ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _)
+    (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _)
+    (z₀ : Spec (.of K) ⟶ Z) (hz₀ : z₀ ≫ πZ = 𝟙 _)
+    (hkunneth : ∀ n, Function.Injective
+      ((thickeningH1Map (pullback.snd (pullback.fst πX πY ≫ πX) πZ) (pullback.snd πX πZ)
+            (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀)
+            (pullbackMapSliceInclusionFst_snd πX πY πZ y₀ hy₀) (z₀ (closedPoint K)) n).prod
+        (thickeningH1Map (pullback.snd (pullback.fst πX πY ≫ πX) πZ) (pullback.snd πY πZ)
+            (pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀)
+            (pullbackMapSliceInclusionSnd_snd πX πY πZ x₀ hx₀) (z₀ (closedPoint K)) n)))
+    {L : (pullback (pullback.fst πX πY ≫ πX) πZ).Modules} (hL : L.Invertible)
+    (hLz : Pic.map (sliceInclusionFst (pullback.fst πX πY ≫ πX) πZ z₀ hz₀) (Pic.mk L hL) = 1)
+    (hLX : Pic.map (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀) (Pic.mk L hL) = 1)
+    (hLY : Pic.map (pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀) (Pic.mk L hL) = 1)
+    (n : ℕ) :
+    Pic.map (infinitesimalBaseChangeFst (pullback.snd (pullback.fst πX πY ≫ πX) πZ)
+      (z₀ (closedPoint K)) n) (Pic.mk L hL) = 1 :=
+  Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one πX πY πZ x₀ hx₀ y₀ hy₀
+    z₀ hz₀ _ (fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id Z K πZ z₀ hz₀)
+    (fun n ↦ unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective πX πZ _ n)
+    (fun n ↦ unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective πY πZ _ n)
+    hkunneth hL hLz hLX hLY n
+
+end Variety
 
 end AlgebraicGeometry.Scheme
