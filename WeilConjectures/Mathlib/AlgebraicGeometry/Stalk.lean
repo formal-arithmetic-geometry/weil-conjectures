@@ -5,13 +5,14 @@ Authors: Weil conjectures project
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
@@ -45,6 +46,9 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.infinitesimalNeighborhoodIsoSpecResidueField`: `X₀ ≅ Spec κ(x)`,
   and `AlgebraicGeometry.Scheme.descResidueField_fromInfinitesimalNeighborhood_zero`, which says
   that a `K`-rational point `Spec K ⟶ X` factors through `X₀ ⟶ X`.
+- `AlgebraicGeometry.Scheme.fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id`: if
+  `f : Spec K ⟶ X` is a section of `π : X ⟶ Spec K` and `x` is the point it picks out, then
+  `X₀ ⟶ X` is unchanged by composing with `X ⟶ Spec K ⟶ X`.
 - `AlgebraicGeometry.Scheme.finite_infinitesimalRing`: for a `k`-rational point of a locally
   noetherian scheme, `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is a finite-dimensional `k`-algebra.
 - `AlgebraicGeometry.Scheme.preimage_infinitesimalBaseChangeFst_eq_top`: every point of
@@ -52,6 +56,10 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.sq_thickeningIdeal`: the closed immersion
   `W ×_T Tₙ ↪ W ×_T T_{n+1}` is a square-zero thickening, cut out by
   `AlgebraicGeometry.Scheme.thickeningIdeal`.
+- `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver`: the base change
+  `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
+  `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
+  ideal of `W` into the thickening ideal of `W'`.
 -/
 
 @[expose] public section
@@ -216,6 +224,52 @@ lemma descResidueField_fromInfinitesimalNeighborhood_zero (K : Type u) [Field K]
   rw [fromInfinitesimalNeighborhood, ← Spec.map_comp_assoc, ← Category.assoc,
     toInfinitesimalRing_infinitesimalRingIsoResidueField_hom, Spec.map_comp, Category.assoc]
   exact h
+
+/-- **A rational point is fixed by the retraction it defines on the zeroth infinitesimal
+neighbourhood.** Let `π : X ⟶ Spec K` be a morphism to the spectrum of a field and let
+`f : Spec K ⟶ X` be a section of it, cutting out the point `x`. Then composing `X₀ ⟶ X` with
+`X ⟶ Spec K ⟶ X` changes nothing, because `X₀ ≅ Spec κ(x)` and `f` identifies `κ(x)` with `K`.
+
+This is the form in which "`x` is the point `f` picks out" is used in the theorem of the
+cube. -/
+lemma fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id (K : Type u) [Field K]
+    (π : X ⟶ Spec (.of K)) (f : Spec (.of K) ⟶ X) (hf : f ≫ π = 𝟙 _) :
+    X.fromInfinitesimalNeighborhood (f (closedPoint K)) 0 ≫ π ≫ f =
+      X.fromInfinitesimalNeighborhood (f (closedPoint K)) 0 := by
+  set y := f (closedPoint K) with hydef
+  set ι := X.fromInfinitesimalNeighborhood y 0 with hιdef
+  set ψ : X.infinitesimalRing y 0 ⟶ .of K :=
+    (X.infinitesimalRingIsoResidueField y).hom ≫
+      X.descResidueField (Scheme.stalkClosedPointTo f) with hψdef
+  have hs : Spec.map ψ ≫ ι = f := descResidueField_fromInfinitesimalNeighborhood_zero X K f
+  have hsg : Spec.map ψ ≫ ι ≫ π = 𝟙 _ := by rw [← Category.assoc, hs, hf]
+  -- `ψ` is injective, being a ring homomorphism out of a field
+  have hinj : Function.Injective ψ.hom := by
+    rw [hψdef, CommRingCat.hom_comp]
+    exact (X.descResidueField (Scheme.stalkClosedPointTo f)).hom.injective.comp
+      ((ConcreteCategory.bijective_of_isIso (X.infinitesimalRingIsoResidueField y).hom).1)
+  -- `ψ` is surjective, because `Spec ψ` has a retraction
+  have hΓ : (ΓSpecIso (X.infinitesimalRing y 0)).inv ≫ (Spec.map ψ).appTop ≫
+      (ΓSpecIso (CommRingCat.of K)).hom = ψ := by
+    rw [ΓSpecIso_naturality, Iso.inv_hom_id_assoc]
+  have hsurj : Function.Surjective ψ.hom := by
+    have h1 : Function.Surjective (Spec.map ψ).appTop.hom := fun y ↦
+      ⟨(ι ≫ π).appTop y, by
+        simpa using ConcreteCategory.congr_hom (congrArg Scheme.Hom.appTop hsg) y⟩
+    intro a
+    obtain ⟨z, hz⟩ := h1 ((ΓSpecIso (CommRingCat.of K)).inv a)
+    refine ⟨(ΓSpecIso (X.infinitesimalRing y 0)).hom z, ?_⟩
+    have h2 := ConcreteCategory.congr_hom hΓ ((ΓSpecIso (X.infinitesimalRing y 0)).hom z)
+    simp only [ConcreteCategory.comp_apply] at h2
+    rw [← h2]
+    simp [hz]
+  have : IsIso ψ := (ConcreteCategory.isIso_iff_bijective ψ).mpr ⟨hinj, hsurj⟩
+  have hg : ι ≫ π = inv (Spec.map ψ) := by
+    rw [← Category.id_comp (ι ≫ π), ← IsIso.inv_hom_id (Spec.map ψ), Category.assoc, hsg,
+      Category.comp_id]
+  calc ι ≫ π ≫ f = (ι ≫ π) ≫ f := (Category.assoc _ _ _).symm
+    _ = inv (Spec.map ψ) ≫ Spec.map ψ ≫ ι := by rw [hg, hs]
+    _ = ι := by rw [← Category.assoc, IsIso.inv_hom_id, Category.id_comp]
 
 end Neighborhood
 
@@ -497,7 +551,16 @@ open Limits
 variable {W T : Scheme.{u}} (f : W ⟶ T) (t : T)
 
 /-- **The transition squares of the infinitesimal base change are cartesian**: `W ×_T Tₘ` is
-the base change of `Tₘ ⟶ Tₙ` along `W ×_T Tₙ ⟶ Tₙ`. -/
+the base change of `Tₘ ⟶ Tₙ` along `W ×_T Tₙ ⟶ Tₙ`.
+
+```
+  W ×_T Tₘ ──infinitesimalBaseChangeMap──▶ W ×_T Tₙ
+      │                                        │
+      │ pr₂                                    │ pr₂
+      ▼                                        ▼
+     Tₘ ───infinitesimalNeighborhoodMap──────▶ Tₙ
+```
+-/
 lemma isPullback_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n) :
     IsPullback (infinitesimalBaseChangeMap f t h) (infinitesimalBaseChangeSnd f t m)
       (infinitesimalBaseChangeSnd f t n) (T.infinitesimalNeighborhoodMap t h) := by
@@ -531,59 +594,152 @@ noncomputable def thickeningIdeal (n : ℕ) :
 lemma sq_thickeningIdeal (n : ℕ) : thickeningIdeal f t n ^ 2 = 0 := by
   rw [thickeningIdeal, ker_infinitesimalBaseChangeMap]
   refine IdealSheafData.pow_comap_eq_zero_of_isAffine ?_ _
-  exact IdealSheafData.pow_ker_spec_map_eq_zero _ (T.sq_ker_infinitesimalRingMap t n)
+  exact Hom.pow_ker_SpecMap_eq_zero _ (T.sq_ker_infinitesimalRingMap t n)
 
-/-- The closed subscheme cut out by the thickening ideal is `W ×_T Tₙ`. -/
+/-- The canonical isomorphism `W ×_T Tₙ ≅ V(Iₙ)` between the `n`-th infinitesimal base change
+and the closed subscheme of `W ×_T T_{n+1}` cut out by the thickening ideal. -/
 noncomputable def thickeningIso (n : ℕ) :
     infinitesimalBaseChange f t n ≅ (thickeningIdeal f t n).subscheme :=
   asIso (infinitesimalBaseChangeMap f t (Nat.le_succ n)).toImage
 
+/-- The isomorphism `W ×_T Tₙ ≅ V(Iₙ)` is compatible with the two closed immersions into
+`W ×_T T_{n+1}`:
+
+```
+  W ×_T Tₙ ────≅────▶ V(Iₙ)
+        ╲              │
+         ╲             │ subschemeι
+          ╲            ▼
+           ───────▶ W ×_T T_{n+1}
+```
+-/
 @[reassoc (attr := simp)]
 lemma thickeningIso_hom_subschemeι (n : ℕ) :
     (thickeningIso f t n).hom ≫ (thickeningIdeal f t n).subschemeι =
       infinitesimalBaseChangeMap f t (Nat.le_succ n) :=
   (infinitesimalBaseChangeMap f t (Nat.le_succ n)).toImage_imageι
 
+/-- The other half of the triangle of `thickeningIso_hom_subschemeι`: the closed immersion of
+`V(Iₙ)` is the transition morphism read through the isomorphism `W ×_T Tₙ ≅ V(Iₙ)`. -/
+@[reassoc (attr := simp)]
+lemma thickeningIso_inv_infinitesimalBaseChangeMap (n : ℕ) :
+    (thickeningIso f t n).inv ≫ infinitesimalBaseChangeMap f t (Nat.le_succ n) =
+      (thickeningIdeal f t n).subschemeι := by
+  rw [← thickeningIso_hom_subschemeι f t n, Iso.inv_hom_id_assoc]
+
+end Thickening
+
+section BaseChangeOver
+
+open Limits
+
 /-! ### Base change of a morphism over `T` to the infinitesimal neighbourhoods -/
 
-variable {Z V V' : Scheme.{u}} (p : V ⟶ Z) (p' : V' ⟶ Z) (u : V' ⟶ V) (hu : u ≫ p = p') (t : Z)
+variable {W W' T : Scheme.{u}} (f : W ⟶ T) (f' : W' ⟶ T) (u : W' ⟶ W) (hu : u ≫ f = f') (t : T)
 
-/-- The base change `V' ×_Z Zₙ ⟶ V ×_Z Zₙ` of a morphism `u : V' ⟶ V` over `Z`. -/
+/-- **The base change `W' ×_T Tₙ ⟶ W ×_T Tₙ`** of a morphism `u : W' ⟶ W` over `T`:
+
+```
+                infinitesimalBaseChangeMapOver
+  W' ×_T Tₙ ──────────────────────────────▶ W ×_T Tₙ
+      │     ╲                            ╱      │
+  pr₁ │       ╲ pr₂                pr₂ ╱        │ pr₁
+      ▼         ▼                    ▼          ▼
+      W' ──────▶ Tₙ ═══════════════ Tₙ ◀─────── W
+            u ▶
+```
+-/
 noncomputable def infinitesimalBaseChangeMapOver (n : ℕ) :
-    infinitesimalBaseChange p' t n ⟶ infinitesimalBaseChange p t n :=
-  pullback.map p' (Z.fromInfinitesimalNeighborhood t n) p (Z.fromInfinitesimalNeighborhood t n)
+    infinitesimalBaseChange f' t n ⟶ infinitesimalBaseChange f t n :=
+  pullback.map f' (T.fromInfinitesimalNeighborhood t n) f (T.fromInfinitesimalNeighborhood t n)
     u (𝟙 _) (𝟙 _) (by simp [hu]) (by simp)
 
 @[reassoc (attr := simp)]
 lemma infinitesimalBaseChangeMapOver_fst (n : ℕ) :
-    infinitesimalBaseChangeMapOver p p' u hu t n ≫ infinitesimalBaseChangeFst p t n =
-      infinitesimalBaseChangeFst p' t n ≫ u := by
+    infinitesimalBaseChangeMapOver f f' u hu t n ≫ infinitesimalBaseChangeFst f t n =
+      infinitesimalBaseChangeFst f' t n ≫ u := by
   simp [infinitesimalBaseChangeMapOver]
 
 @[reassoc (attr := simp)]
 lemma infinitesimalBaseChangeMapOver_snd (n : ℕ) :
-    infinitesimalBaseChangeMapOver p p' u hu t n ≫ infinitesimalBaseChangeSnd p t n =
-      infinitesimalBaseChangeSnd p' t n := by
+    infinitesimalBaseChangeMapOver f f' u hu t n ≫ infinitesimalBaseChangeSnd f t n =
+      infinitesimalBaseChangeSnd f' t n := by
   simp [infinitesimalBaseChangeMapOver]
 
 /-- The base change of `u` commutes with the transition morphisms of the infinitesimal
-neighbourhoods. -/
+neighbourhoods:
+
+```
+  W' ×_T Tₘ ──infinitesimalBaseChangeMap──▶ W' ×_T Tₙ
+      │                                          │
+      │ infinitesimalBaseChangeMapOver           │ infinitesimalBaseChangeMapOver
+      ▼                                          ▼
+  W ×_T Tₘ ───infinitesimalBaseChangeMap───▶ W ×_T Tₙ
+```
+-/
 @[reassoc (attr := simp)]
 lemma infinitesimalBaseChangeMap_comp_mapOver {m n : ℕ} (h : m ≤ n) :
-    infinitesimalBaseChangeMap p' t h ≫ infinitesimalBaseChangeMapOver p p' u hu t n =
-      infinitesimalBaseChangeMapOver p p' u hu t m ≫ infinitesimalBaseChangeMap p t h := by
+    infinitesimalBaseChangeMap f' t h ≫ infinitesimalBaseChangeMapOver f f' u hu t n =
+      infinitesimalBaseChangeMapOver f f' u hu t m ≫ infinitesimalBaseChangeMap f t h := by
   apply pullback.hom_ext <;> simp [infinitesimalBaseChangeMapOver_snd_assoc]
 
-/-- The base change of `u` pulls the thickening ideal of `V` into the thickening ideal of
-`V'`. -/
+/-- **The base change of `u` pulls the thickening ideal of `W` into the thickening ideal of
+`W'`**: it carries the square of `infinitesimalBaseChangeMap_comp_mapOver` for `n ≤ n + 1`,
+
+```
+  W' ×_T Tₙ ─────────▶ W' ×_T T_{n+1}
+      │                      │
+      ▼                      ▼
+  W ×_T Tₙ ──────────▶ W ×_T T_{n+1}
+```
+
+and the ideal of a closed immersion pulls back into the ideal of the closed immersion it
+factors through. -/
 lemma comap_thickeningIdeal_le (n : ℕ) :
-    (thickeningIdeal p t n).comap (infinitesimalBaseChangeMapOver p p' u hu t (n + 1)) ≤
-      thickeningIdeal p' t n := by
+    (thickeningIdeal f t n).comap (infinitesimalBaseChangeMapOver f f' u hu t (n + 1)) ≤
+      thickeningIdeal f' t n := by
   refine IdealSheafData.le_map_iff_comap_le.mp ?_
-  rw [IdealSheafData.map, ← Hom.ker_comp_of_isIso (thickeningIso p' t n).hom,
+  rw [IdealSheafData.map, ← Hom.ker_comp_of_isIso (thickeningIso f' t n).hom,
     ← Category.assoc, thickeningIso_hom_subschemeι, infinitesimalBaseChangeMap_comp_mapOver]
   exact Hom.le_ker_comp _ _
 
-end Thickening
+end BaseChangeOver
+
+section SliceInclusion
+
+open Limits
+
+/-! ### The zeroth infinitesimal base change of a product and a slice -/
+
+variable {S Z V : Scheme.{u}} (πV : V ⟶ S) (πZ : Z ⟶ S)
+
+/-- **The zeroth infinitesimal base change `(V ×_S Z) ×_Z Z₀ ⟶ V ×_S Z` factors through the
+slice `V ⟶ V ×_S Z`** at a section `z₀` of `πZ`, provided `t` is the point `z₀` picks out, in
+the precise sense that `Z₀ ⟶ Z` is unchanged by `Z ⟶ S ⟶ Z`:
+
+```
+  (V ×_S Z) ×_Z Z₀ ──pr₁──▶ V ×_S Z ──pr₁──▶ V
+        ╲                                    │
+          ╲                                  │ sliceInclusionFst
+            ╲                                ▼
+              ─────────────pr₁────────▶ V ×_S Z
+```
+-/
+lemma infinitesimalBaseChangeFst_zero_comp_sliceInclusionFst
+    (z₀ : S ⟶ Z) (hz₀ : z₀ ≫ πZ = 𝟙 S) (t : Z)
+    (ht : Z.fromInfinitesimalNeighborhood t 0 ≫ πZ ≫ z₀ =
+      Z.fromInfinitesimalNeighborhood t 0) :
+    (infinitesimalBaseChangeFst (pullback.snd πV πZ) t 0 ≫ pullback.fst πV πZ) ≫
+      sliceInclusionFst πV πZ z₀ hz₀ = infinitesimalBaseChangeFst (pullback.snd πV πZ) t 0 := by
+  refine pullback.hom_ext (by simp) ?_
+  have h1 : pullback.fst πV πZ ≫ πV = pullback.snd πV πZ ≫ πZ := pullback.condition
+  have h2 : infinitesimalBaseChangeFst (pullback.snd πV πZ) t 0 ≫ pullback.snd πV πZ =
+      infinitesimalBaseChangeSnd (pullback.snd πV πZ) t 0 ≫
+        Z.fromInfinitesimalNeighborhood t 0 := pullback.condition
+  rw [Category.assoc, Category.assoc, sliceInclusionFst_snd,
+    ← Category.assoc (pullback.fst πV πZ), h1, Category.assoc,
+    ← Category.assoc (infinitesimalBaseChangeFst (pullback.snd πV πZ) t 0), h2, Category.assoc, ht]
+
+end SliceInclusion
 
 end AlgebraicGeometry.Scheme

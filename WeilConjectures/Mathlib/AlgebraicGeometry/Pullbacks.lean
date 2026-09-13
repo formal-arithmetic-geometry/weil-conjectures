@@ -22,7 +22,9 @@ A section `y₀ : S ⟶ Y` of `πY : Y ⟶ S` cuts out a *slice* `X × {y₀} �
 `AlgebraicGeometry.sliceInclusionFst` induced by `𝟙 X` and `πX ≫ y₀`. It is a section of the
 first projection, hence a closed immersion as soon as `πY` is separated, and it is a morphism of
 `S`-schemes for the structure morphism `AlgebraicGeometry.Scheme.canonicallyOverPullback` puts
-on `X ×_S Y`.
+on `X ×_S Y`. Base changing it along a third `S`-scheme `Z` gives the slice
+`X ×_S Z ⟶ (X ×_S Y) ×_S Z` of a triple product
+(`AlgebraicGeometry.pullbackMapSliceInclusionFst`).
 
 ## Flat base change of global sections
 
@@ -339,6 +341,76 @@ instance [IsSeparated πY] (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
 instance [IsSeparated πX] (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
     IsClosedImmersion (sliceInclusionSnd πX πY x₀ hx₀) :=
   IsClosedImmersion.of_comp_eq_id (f := pullback.snd πX πY) (by simp)
+
+/-! ### Base change of a slice inclusion -/
+
+variable {Z : Scheme.{u}} (πZ : Z ⟶ S)
+
+/-- **A slice inclusion base changed along `πZ : Z ⟶ S`**: the morphism
+`j_{y₀} ×_S 𝟙_Z : X ×_S Z ⟶ (X ×_S Y) ×_S Z`, where `X ×_S Y` is regarded as an `S`-scheme
+through its first projection.
+
+```
+                 pullbackMapSliceInclusionFst
+        X ×_S Z ───────────────────────▶ (X ×_S Y) ×_S Z
+          │   ╲                            ╱   │
+      pr₁ │     ╲ pr₂                pr₂ ╱     │ pr₁
+          ▼       ▼                    ▼       ▼
+          X ────▶ Z ══════════════════ Z ◀──── X ×_S Y
+             j_{y₀} ▶
+```
+-/
+noncomputable def pullbackMapSliceInclusionFst (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
+    pullback πX πZ ⟶ pullback (pullback.fst πX πY ≫ πX) πZ :=
+  pullback.map πX πZ (pullback.fst πX πY ≫ πX) πZ (sliceInclusionFst πX πY y₀ hy₀) (𝟙 Z) (𝟙 S)
+    (by simp) (by simp)
+
+@[reassoc (attr := simp)]
+lemma pullbackMapSliceInclusionFst_fst (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
+    pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀ ≫
+        pullback.fst (pullback.fst πX πY ≫ πX) πZ =
+      pullback.fst πX πZ ≫ sliceInclusionFst πX πY y₀ hy₀ := by
+  simp [pullbackMapSliceInclusionFst]
+
+@[reassoc (attr := simp)]
+lemma pullbackMapSliceInclusionFst_snd (y₀ : S ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) :
+    pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀ ≫
+        pullback.snd (pullback.fst πX πY ≫ πX) πZ =
+      pullback.snd πX πZ := by
+  simp [pullbackMapSliceInclusionFst]
+
+/-- **A slice inclusion base changed along `πZ : Z ⟶ S`**: the morphism
+`j_{x₀} ×_S 𝟙_Z : Y ×_S Z ⟶ (X ×_S Y) ×_S Z`, where `X ×_S Y` is regarded as an `S`-scheme
+through its first projection.
+
+```
+                 pullbackMapSliceInclusionSnd
+        Y ×_S Z ───────────────────────▶ (X ×_S Y) ×_S Z
+          │   ╲                            ╱   │
+      pr₁ │     ╲ pr₂                pr₂ ╱     │ pr₁
+          ▼       ▼                    ▼       ▼
+          Y ────▶ Z ══════════════════ Z ◀──── X ×_S Y
+             j_{x₀} ▶
+```
+-/
+noncomputable def pullbackMapSliceInclusionSnd (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
+    pullback πY πZ ⟶ pullback (pullback.fst πX πY ≫ πX) πZ :=
+  pullback.map πY πZ (pullback.fst πX πY ≫ πX) πZ (sliceInclusionSnd πX πY x₀ hx₀) (𝟙 Z) (𝟙 S)
+    (by simp [hx₀]) (by simp)
+
+@[reassoc (attr := simp)]
+lemma pullbackMapSliceInclusionSnd_fst (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
+    pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀ ≫
+        pullback.fst (pullback.fst πX πY ≫ πX) πZ =
+      pullback.fst πY πZ ≫ sliceInclusionSnd πX πY x₀ hx₀ := by
+  simp [pullbackMapSliceInclusionSnd]
+
+@[reassoc (attr := simp)]
+lemma pullbackMapSliceInclusionSnd_snd (x₀ : S ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _) :
+    pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀ ≫
+        pullback.snd (pullback.fst πX πY ≫ πX) πZ =
+      pullback.snd πY πZ := by
+  simp [pullbackMapSliceInclusionSnd]
 
 end SliceInclusion
 

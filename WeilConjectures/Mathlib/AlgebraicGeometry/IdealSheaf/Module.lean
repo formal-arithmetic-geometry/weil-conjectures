@@ -50,7 +50,7 @@ sheaf-condition argument that the kernel description gets for free.
   injective on sections over every open, affine or not.
 - `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap` — the comparison morphism
   `g^* I ⟶ I'` for a morphism `g` pulling the ideal `I` into the ideal `I'`, together with
-  `comapModulesMap_toModulesι`, which determines it.
+  `comapModulesMap_toModulesι` and `eq_comapModulesMap`, which determine it.
 
 ## TODO
 
@@ -153,13 +153,21 @@ lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModules�
 
 variable {W W' : Scheme.{u}} (I : W.IdealSheafData) (I' : W'.IdealSheafData) (g : W' ⟶ W)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- If `g : W' ⟶ W` pulls the ideal `I` into the ideal `I'`, then the composite
-`g^* I ⟶ g^* 𝒪_W ≅ 𝒪_{W'}` dies in `(i')_* 𝒪_{V(I')}`, hence factors through `I'`. -/
-lemma pullback_toModulesι_comp_toPushforwardSubscheme (hg : I.comap g ≤ I') :
+`g^* I ⟶ g^* 𝒪_W ≅ 𝒪_{W'}` dies in `(i')_* 𝒪_{V(I')}`, hence factors through `I'`.
+
+```
+  g^* I ──g^* ι──▶ g^* 𝒪_W ──≅──▶ 𝒪_{W'} ──▶ (i')_* 𝒪_{V(I')}
+                                     ▲
+                                     │ I'.toModulesι
+                                     │
+                                     I'
+```
+-/
+lemma pullback_toModulesι_comp_toPushforwardSubscheme_eq_zero (hg : I.comap g ≤ I') :
     ((Modules.pullback g).map I.toModulesι ≫ (Modules.pullbackUnitIso g).hom) ≫
       I'.toPushforwardSubscheme = 0 := by
-  set adj := Modules.pullbackPushforwardAdjunction g with hadj
+  set adj := Modules.pullbackPushforwardAdjunction g
   apply (adj.homEquiv _ _).injective
   have hnat : adj.unit.app I.toModules ≫
       (Modules.pushforward g).map ((Modules.pullback g).map I.toModulesι) =
@@ -174,41 +182,52 @@ lemma pullback_toModulesι_comp_toPushforwardSubscheme (hg : I.comap g ≤ I') :
     SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit _
   rw [← Category.assoc (adj.unit.app W.structureModules), hu]
   ext U x
-  simp only [Modules.pushforward_obj_obj, Functor.id_obj, Modules.Hom.comp_app,
-    Modules.pushforward_map_app, AddCommGrpCat.hom_comp, AddMonoidHom.coe_comp,
-    Function.comp_apply, Modules.Hom.zero_app, AddCommGrpCat.hom_zero, AddMonoidHom.zero_apply]
-  set a := Modules.Hom.app I.toModulesι U x with ha'
-  change I'.subschemeι.app (g ⁻¹ᵁ U) (g.app U a) = 0
-  have ha : I.subschemeι.app U a = 0 := by
-    have hmem : a ∈ Set.range (Modules.Hom.app I.toModulesι U) := ⟨x, rfl⟩
-    rw [I.range_toModulesι_app_eq U] at hmem
-    exact hmem
+  -- the section `a := ι(x)` of `𝒪_W` dies in `𝒪_{V(I)}`, hence so does `g^♯ a` in `𝒪_{V(I')}`
+  have ha : I.subschemeι.app U (Modules.Hom.app I.toModulesι U x) = 0 :=
+    (I.range_toModulesι_app_eq U).le ⟨x, rfl⟩
   have hcongr := ConcreteCategory.congr_hom (Scheme.Hom.congr_app
-    (subschemeMapOfComapLe_subschemeι I I' g hg).symm U) a
-  rw [Scheme.Hom.comp_app, Scheme.Hom.comp_app] at hcongr
-  simp only [CommRingCat.comp_apply] at hcongr
-  rw [ha, map_zero, map_zero] at hcongr
-  simpa using hcongr
+    (subschemeMapOfComapLe_subschemeι I I' g hg).symm U) (Modules.Hom.app I.toModulesι U x)
+  simp only [Scheme.Hom.comp_app, CommRingCat.comp_apply, ha, map_zero] at hcongr
+  simp only [Modules.Hom.comp_app, Modules.Hom.zero_app, AddCommGrpCat.hom_comp,
+    AddMonoidHom.coe_comp, Function.comp_apply, AddCommGrpCat.hom_zero, AddMonoidHom.zero_apply]
+  exact hcongr
 
 /-- **The comparison morphism `g^* I ⟶ I'` of ideal sheaves** attached to a morphism
 `g : W' ⟶ W` pulling the ideal `I` into the ideal `I'`: the factorisation of
 `g^* I ⟶ g^* 𝒪_W ≅ 𝒪_{W'}` through the kernel `I' = ker(𝒪_{W'} ⟶ (i')_* 𝒪_{V(I')})`.
 
+```
+  g^* I ──g^* ι──▶ g^* 𝒪_W ──≅──▶ 𝒪_{W'} ──▶ (i')_* 𝒪_{V(I')}
+     │                                ▲
+     │ comapModulesMap                │ I'.toModulesι
+     └───────────────▶ I' ────────────┘
+```
+
 This is the morphism `φ` that the naturality statements of
 `AlgebraicGeometry.Scheme.IdealSheafData.unitsToH1_naturality` and `h1ToPic_naturality` take
 as a parameter; `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap_toModulesι` is the
-hypothesis `hφ` those statements require, and it determines `φ` uniquely because
-`I'.toModulesι` is a monomorphism. -/
+hypothesis `hφ` those statements require, and it determines `φ` uniquely
+(`AlgebraicGeometry.Scheme.IdealSheafData.eq_comapModulesMap`) because `I'.toModulesι` is a
+monomorphism. -/
 noncomputable def comapModulesMap (hg : I.comap g ≤ I') :
     (Modules.pullback g).obj I.toModules ⟶ I'.toModules :=
   kernel.lift I'.toPushforwardSubscheme
     ((Modules.pullback g).map I.toModulesι ≫ (Modules.pullbackUnitIso g).hom)
-    (pullback_toModulesι_comp_toPushforwardSubscheme I I' g hg)
+    (pullback_toModulesι_comp_toPushforwardSubscheme_eq_zero I I' g hg)
 
 @[reassoc (attr := simp)]
 lemma comapModulesMap_toModulesι (hg : I.comap g ≤ I') :
     comapModulesMap I I' g hg ≫ I'.toModulesι =
       (Modules.pullback g).map I.toModulesι ≫ (Modules.pullbackUnitIso g).hom :=
   kernel.lift_ι _ _ _
+
+/-- **The comparison morphism is the only one compatible with the two inclusions into the
+structure sheaves**, because `I'.toModulesι` is a monomorphism. -/
+lemma eq_comapModulesMap (hg : I.comap g ≤ I')
+    (φ : (Modules.pullback g).obj I.toModules ⟶ I'.toModules)
+    (hφ : (Modules.pullback g).map I.toModulesι ≫ (Modules.pullbackUnitIso g).hom =
+      φ ≫ I'.toModulesι) :
+    φ = comapModulesMap I I' g hg :=
+  (cancel_mono I'.toModulesι).mp (by rw [← hφ, comapModulesMap_toModulesι])
 
 end AlgebraicGeometry.Scheme.IdealSheafData

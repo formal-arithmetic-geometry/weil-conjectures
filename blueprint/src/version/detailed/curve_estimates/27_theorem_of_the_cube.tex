@@ -1344,7 +1344,7 @@ than a piece of mathematics, and it is stated only to name the standing facts.
 
 \begin{lemma}[Triviality over the infinitesimal neighbourhoods]
 \label{lem:cube-thickening-trivial}
-\lean{AlgebraicGeometry.pic_map_cube_infinitesimalBaseChangeFst_eq_one}
+\lean{AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one}
 Let $X$ and $Y$ be proper varieties over $k$, let $x_0\in X(k)$ and
 $y_0\in Y(k)$, let $Z$ be a noetherian $k$-scheme and let $z_0\in Z(k)$.  Let
 $L$ be a line bundle on $X\times Y\times Z$ whose restrictions to
@@ -1357,6 +1357,21 @@ are all trivial.  For $n\in\N$ put
 $Z_n:=\Spec\bigl(\O_{Z,z_0}/\m_{z_0}^{n+1}\bigr)$, with its canonical morphism
 $Z_n\to Z$.  Then the pullback of $L$ to $(X\times Y)\times Z_n$ is trivial for
 every $n\in\N$.
+\openobligation{AlgebraicGeometry: the Lean declaration tagged above proves the
+induction of this lemma over an arbitrary base scheme, and carries as
+hypotheses the two places where properness, the variety hypothesis,
+noetherianness and the base field enter.  They are: that
+$\Gamma(X\times Z_{n+1},\O)^\times\to\Gamma(X\times Z_n,\O)^\times$ is
+surjective and likewise for $Y$, which is
+\texttt{lem:cube-global-sections-base-change} together with the surjectivity of
+$\O_{Z,z_0}/\m_{z_0}^{n+2}\to\O_{Z,z_0}/\m_{z_0}^{n+1}$ on units; and that a
+deformation class on $(X\times Y)\times Z_{n+1}$ restricting to zero on both
+slices is zero, which is \texttt{prop:cube-kunneth-h1} together with the
+identification of the ideal of the thickening with
+$\O_{X\times Y}\otimes_k\m_{z_0}^{n+1}/\m_{z_0}^{n+2}$ and the invariance of
+$H^1$ under pushforward along
+$(X\times Y)\times Z_0\hookrightarrow(X\times Y)\times Z_{n+1}$.  What remains
+is to discharge those two hypotheses in the setting of this lemma.}
 \end{lemma}
 \begin{proof}
 \uses{prop:cube-picard-square-zero, prop:cube-kunneth-h1,
@@ -1395,38 +1410,36 @@ immersion $W\times Z_0\hookrightarrow W\times Z_{n-1}$, which is exact, and
 the cohomology of a finite direct sum of copies of $\O_W$ is the direct sum
 of the cohomologies, $I_n$ being a finite-dimensional $k$-vector space.
 
-Apply \Cref{prop:cube-picard-square-zero}(1) to this thickening.  Its first map
-is
+Apply \Cref{prop:cube-picard-square-zero}(1) to this thickening.  All that is
+needed of it here is exactness of
 \[
-  \Gamma\bigl(W\times Z_n,\O^\times\bigr)\longrightarrow
-  \Gamma\bigl(W\times Z_{n-1},\O^\times\bigr),
-\]
-which by \Cref{lem:cube-global-sections-base-change} is the map
-$A_n^\times\to A_{n-1}^\times$ induced by the surjection $A_n\to A_{n-1}$ ---
-the global sections of the sheaf of units being the units of the ring of global
-sections; and
-that map is surjective, because a preimage in $A_n$ of a unit of $A_{n-1}$ lies
-outside the maximal ideal of the local ring $A_n$ and is therefore itself a
-unit.  Exactness at the second term then makes the third map injective, so
-\[
-  0\longrightarrow H^1(W,\O_W)\otimes_kI_n\longrightarrow
+  H^1(W,\O_W)\otimes_kI_n\longrightarrow
   \mathrm{Pic}(W\times Z_n)\longrightarrow\mathrm{Pic}(W\times Z_{n-1})
 \]
-is exact.  The restriction of $L^{(n)}$ to $W\times Z_{n-1}$ is $L^{(n-1)}$,
-since $Z_{n-1}\to Z$ factors through $Z_n\to Z$; by the induction hypothesis it
-is trivial, so the class of $L^{(n)}$ dies in $\mathrm{Pic}(W\times Z_{n-1})$
-and there is a unique
+at the middle term.  The restriction of $L^{(n)}$ to $W\times Z_{n-1}$ is
+$L^{(n-1)}$, since $Z_{n-1}\to Z$ factors through $Z_n\to Z$; by the induction
+hypothesis it is trivial, so the class of $L^{(n)}$ dies in
+$\mathrm{Pic}(W\times Z_{n-1})$ and we may choose some
 \[
   \alpha\in H^1(W,\O_W)\otimes_kI_n
 \]
-whose image in $\mathrm{Pic}(W\times Z_n)$ is the class of $L^{(n)}$.
+whose image in $\mathrm{Pic}(W\times Z_n)$ is the class of $L^{(n)}$.  No
+uniqueness of $\alpha$ is needed, so
+\Cref{lem:cube-global-sections-base-change} is not applied to $W$ itself, only
+to the two slices below.
 
 Now compare with the two slices.  The closed immersion
 $X\times Z_{n-1}\hookrightarrow X\times Z_n$ is again a square-zero thickening
 with ideal $\O_X\otimes_kI_n$, and $j_{y_0}\times\mathrm{id}$ carries the one
 into the other and pulls the ideal back onto the ideal.  Since $X$ is a proper
-variety, \Cref{lem:cube-global-sections-base-change} applies to it as well, so
-the same argument makes
+variety, \Cref{lem:cube-global-sections-base-change} identifies the first map of
+\Cref{prop:cube-picard-square-zero}(1) for this thickening with the map
+$A_n^\times\to A_{n-1}^\times$ induced by the surjection $A_n\to A_{n-1}$ ---
+the global sections of the sheaf of units being the units of the ring of global
+sections --- and that map is surjective, because a preimage in $A_n$ of a unit
+of $A_{n-1}$ lies outside the maximal ideal of the local ring $A_n$ and is
+therefore itself a unit.  Exactness at the second term then makes the third map
+injective, so
 \[
   0\longrightarrow H^1(X,\O_X)\otimes_kI_n\longrightarrow
   \mathrm{Pic}(X\times Z_n)\longrightarrow\mathrm{Pic}(X\times Z_{n-1})
