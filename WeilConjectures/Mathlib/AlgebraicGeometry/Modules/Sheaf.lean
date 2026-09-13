@@ -65,6 +65,8 @@ base change map `(f_* F)(y) ⟶ Γ(X_y, F_y)`.
 
 - `AlgebraicGeometry.Scheme.structureModules`: the structure sheaf of a scheme, as a sheaf of
   modules over itself.
+- `AlgebraicGeometry.Scheme.freeModules`: the free sheaf of `𝒪_X`-modules on a type, that is a
+  direct sum of copies of the structure sheaf.
 - `AlgebraicGeometry.Scheme.Modules.fiberFunctor`, `AlgebraicGeometry.Scheme.Modules.fiber`: the
   fibre `F(x)` of a sheaf of `𝒪_X`-modules at a point `x`, as a `κ(x)`-vector space, and its
   functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
@@ -147,6 +149,18 @@ The abbreviation is needed because dot notation on `SheafOfModules.unit X.ringCa
 resolves in `SheafOfModules _` rather than in `X.Modules`. -/
 noncomputable abbrev Scheme.structureModules (X : Scheme.{u}) : X.Modules :=
   SheafOfModules.unit X.ringCatSheaf
+
+/-- The free sheaf of `𝒪_X`-modules on a type `ι`, that is a direct sum of copies of `𝒪_X`
+indexed by `ι`.
+
+As for `AlgebraicGeometry.Scheme.structureModules`, the abbreviation is needed because dot
+notation on `SheafOfModules.free ι` resolves in `SheafOfModules _` rather than in
+`X.Modules`. -/
+noncomputable abbrev Scheme.freeModules (X : Scheme.{u}) (ι : Type u) : X.Modules :=
+  SheafOfModules.free (R := X.ringCatSheaf) ι
+
+instance (X : Scheme.{u}) : HasFiniteBiproducts X.Modules :=
+  HasFiniteBiproducts.of_hasFiniteProducts
 
 namespace Scheme.Modules
 
