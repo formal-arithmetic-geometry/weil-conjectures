@@ -779,7 +779,7 @@ lemma pullbackComp_hom_app_sectionsPullback (s : Γ(M, ⊤)) :
       sectionsPullback (a ≫ b) M s := by
   have key := congrArg (fun ψ ↦ Hom.app ψ ⊤ s) (unit_pushforwardPullbackComp a b M)
   simp only [Hom.comp_app, pushforwardPullbackComp_app] at key
-  simp only [sectionsPullback, ConcreteCategory.comp_apply,
+  simp only [sectionsPullback, sectionsPullbackLE, ConcreteCategory.comp_apply,
     Scheme.presheaf_map_homOfLE_preimage_top_eq_id]
   exact key
 
