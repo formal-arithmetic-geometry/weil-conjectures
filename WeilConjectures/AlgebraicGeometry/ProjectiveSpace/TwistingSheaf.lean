@@ -1,0 +1,233 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
+public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+
+/-!
+# The twisting sheaves `𝒪(d)` on the relative projective space `ℙ(n; S)`
+
+The projective `n`-space `ℙ(n; S)` over a base scheme `S` is defined in
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic` as the base change
+`S ×_{Spec ℤ} ℙⁿ_ℤ` of the integral model `ℙⁿ_ℤ = Proj ℤ[T]`. Its twisting sheaves are
+defined here by pulling back the twisting sheaves of the integral model, constructed in
+`WeilConjectures.AlgebraicGeometry.TwistingSheaf`, along the canonical map
+`ProjectiveSpace.toProjInt n S : ℙ(n; S) ⟶ ℙⁿ_ℤ`.
+
+This is the cheap and canonical definition: there is as yet no comparison
+`ℙ(n; Spec A) ≅ Proj.projectiveSpaceOverAffine n A` (it needs `Proj` to commute with base
+change, which Mathlib does not have), so `𝒪(d)` on `ℙ(n; S)` cannot be read off from a `Proj`
+presentation of `ℙ(n; S)` itself. Pulling back along `toProjInt` costs nothing and makes base
+change compatibility formal: `toProjInt` is compatible with the functoriality
+`ProjectiveSpace.map n f` of `ℙ(n; -)` in the base, so `(map n f)^* 𝒪(d) ≅ 𝒪(d)` follows from
+the pseudofunctoriality of pullback, in the form
+`AlgebraicGeometry.Scheme.Modules.pullbackTriangle`.
+
+The homogeneous coordinates `T₀, …, T_N ∈ Γ(ℙ(n; S), 𝒪(1))` are likewise obtained from the
+homogeneous coordinates on the integral model, by the pullback map on global sections
+`AlgebraicGeometry.Scheme.Modules.sectionsPullback`.
+
+## Main definitions
+
+- `AlgebraicGeometry.Proj.twistingSheafOverAffine`: the twisting sheaf `𝒪(d)` on the projective
+  space `ℙ^σ_A` over an affine base.
+- `AlgebraicGeometry.ProjectiveSpace.twistingSheaf`: the twisting sheaf `𝒪(d)` on `ℙ(n; S)`,
+  for `d : ℤ`.
+- `AlgebraicGeometry.ProjectiveSpace.homogeneousSection`: the global section of `𝒪(j)` on
+  `ℙ(n; S)` attached to a homogeneous polynomial of degree `j` in `ℤ[T]`.
+- `AlgebraicGeometry.ProjectiveSpace.homogeneousCoord`: the homogeneous coordinates
+  `T₀, …, T_N ∈ Γ(ℙ(n; S), 𝒪(1))`.
+- `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso`: **compatibility with base
+  change**, `(map n f)^* 𝒪(d) ≅ 𝒪(d)` for a morphism `f : S ⟶ T` of base schemes.
+- `AlgebraicGeometry.ProjectiveSpace.twistingSheafZeroIso`: `𝒪(0)` is the structure sheaf.
+
+## Main results
+
+- `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso_hom_app_homogeneousSection`,
+  `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso_hom_app_homogeneousCoord`: the
+  global sections attached to homogeneous polynomials, and in particular the homogeneous
+  coordinates, are compatible with base change.
+- `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso_hom_comp`: the base-change
+  isomorphisms are compatible with composing two morphisms of base schemes.
+- `AlgebraicGeometry.ProjectiveSpace.pullbackTwistingSheafIso_hom_app_smul`: base change of
+  global sections of `𝒪(d)` is semilinear over the pullback of functions
+  `Γ(T, 𝒪_T) ⟶ Γ(S, 𝒪_S)`. Together with additivity this is what base-changes a hyperplane
+  `∑ᵢ aᵢ Tᵢ` with coefficients `aᵢ ∈ Γ(T, 𝒪_T)` to the corresponding hyperplane on `ℙ(n; S)`.
+
+## Implementation notes
+
+`Proj.twistingSheafOverAffine` is a sheaf of modules on `Proj.projectiveSpaceOverAffine σ A`,
+which is a plain definition unfolding to `Proj` of the total-degree grading of `A[T]`; the type
+ascription therefore relies on that unfolding, recorded as
+`AlgebraicGeometry.Proj.projectiveSpaceOverAffine_eq`. For the same reason the total-degree
+grading has to be re-enabled as a local instance here, exactly as in
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic`.
+
+## TODO
+
+- `𝒪(d)` is an invertible sheaf on `ℙ(n; S)`. Since the pullback of sheaves of modules is
+  monoidal (`AlgebraicGeometry.Scheme.Modules.pullback f` is `Functor.Monoidal`), hence
+  preserves invertible objects by `SheafOfModules.Invertible.pullback`, this is immediate from
+  the invertibility of `Proj.twistingSheaf`, which is not yet available.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Opposite
+
+noncomputable section
+
+namespace AlgebraicGeometry
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+/-- **The twisting sheaf `𝒪(d)` on the projective space `ℙ^σ_A` over an affine base**, that is,
+the twisting sheaf of `Proj` of the total-degree grading of `A[T]`. -/
+def Proj.twistingSheafOverAffine (σ A : Type u) [CommRing A] (d : ℤ) :
+    (Proj.projectiveSpaceOverAffine σ A).Modules :=
+  Proj.twistingSheaf (Proj.projectiveSpaceOverAffineGrading σ A) d
+
+namespace ProjectiveSpace
+
+variable (n : Type u)
+
+/-- The twisting sheaf `𝒪(d)` of the integral model `ℙⁿ_ℤ` of `ℙ(n; S)`. -/
+abbrev twistingSheafInt (d : ℤ) : (Proj.projectiveSpaceOverAffine n (ULift.{u} ℤ)).Modules :=
+  Proj.twistingSheafOverAffine n (ULift.{u} ℤ) d
+
+section Sheaf
+
+variable (S : Scheme.{u})
+
+/-- **The twisting sheaf `𝒪(d)` on `ℙ(n; S)`**, defined as the pullback along
+`toProjInt n S : ℙ(n; S) ⟶ ℙⁿ_ℤ` of the twisting sheaf `𝒪(d)` of the integral model. -/
+def twistingSheaf (d : ℤ) : ℙ(n; S).Modules :=
+  (Scheme.Modules.pullback (toProjInt n S)).obj (twistingSheafInt n d)
+
+/-- **`𝒪(0)` is the structure sheaf** of `ℙ(n; S)`: the zeroth twisting sheaf of the integral
+model is the structure sheaf of `ℙⁿ_ℤ`, and the pullback of a structure sheaf is a structure
+sheaf. -/
+def twistingSheafZeroIso :
+    twistingSheaf n S 0 ≅ (SheafOfModules.unit ℙ(n; S).ringCatSheaf : ℙ(n; S).Modules) :=
+  (Scheme.Modules.pullback (toProjInt n S)).mapIso Proj.twistingSheafZeroIso ≪≫
+    Scheme.Modules.pullbackUnitIso (toProjInt n S)
+
+end Sheaf
+
+variable {n}
+
+/-- A homogeneous polynomial `a` of degree `j` in `ℤ[T]` defines a global section of `𝒪(j)` on
+`ℙ(n; S)`, the pullback of the corresponding global section of `𝒪(j)` on the integral model
+`ℙⁿ_ℤ`. -/
+def homogeneousSection {j : ℕ} {a : MvPolynomial n (ULift.{u} ℤ)}
+    (ha : a ∈ Proj.projectiveSpaceOverAffineGrading n (ULift.{u} ℤ) j) (S : Scheme.{u}) :
+    Γ(twistingSheaf n S j, ⊤) :=
+  Scheme.Modules.sectionsPullback (toProjInt n S) (twistingSheafInt n j)
+    (Proj.homogeneousSection ha)
+
+/-- The section of `𝒪(j)` attached to a homogeneous polynomial is additive in the polynomial,
+since pulling back global sections is. -/
+@[simp]
+lemma homogeneousSection_add {j : ℕ} {a b : MvPolynomial n (ULift.{u} ℤ)}
+    (ha : a ∈ Proj.projectiveSpaceOverAffineGrading n (ULift.{u} ℤ) j)
+    (hb : b ∈ Proj.projectiveSpaceOverAffineGrading n (ULift.{u} ℤ) j) (S : Scheme.{u}) :
+    homogeneousSection (add_mem ha hb) S = homogeneousSection ha S + homogeneousSection hb S :=
+  (congrArg (Scheme.Modules.sectionsPullback (toProjInt n S) (twistingSheafInt n j))
+    (Proj.homogeneousSection_add ha hb)).trans (map_add _ _ _)
+
+/-- **The homogeneous coordinates** `T₀, …, T_N ∈ Γ(ℙ(n; S), 𝒪(1))`, the global sections of
+`𝒪(1)` attached to the variables of `ℤ[T]`. -/
+def homogeneousCoord (i : n) (S : Scheme.{u}) : Γ(twistingSheaf n S 1, ⊤) :=
+  homogeneousSection ((MvPolynomial.mem_homogeneousSubmodule _ _).2
+    (MvPolynomial.isHomogeneous_X _ i)) S
+
+variable (n) in
+/-- **The twisting sheaves are compatible with base change**: for a morphism `f : S ⟶ T` of
+base schemes, the pullback of `𝒪(d)` on `ℙ(n; T)` along `map n f : ℙ(n; S) ⟶ ℙ(n; T)` is
+`𝒪(d)` on `ℙ(n; S)`. This holds because both are pullbacks of the twisting sheaf of the
+integral model, along the two sides of the commuting triangle
+
+```
+                 map n f
+      ℙ(n; S) ──────────────→ ℙ(n; T)
+           ╲                   ╱
+            ╲                 ╱
+  toProjInt n S         toProjInt n T
+              ╲             ╱
+               ↘           ↙
+                   ℙⁿ_ℤ
+```
+-/
+def pullbackTwistingSheafIso {S T : Scheme.{u}} (f : S ⟶ T) (d : ℤ) :
+    (Scheme.Modules.pullback (map n f)).obj (twistingSheaf n T d) ≅ twistingSheaf n S d :=
+  (Scheme.Modules.pullbackTriangle (map_toProjInt n f)).app _
+
+/-- **The homogeneous sections are compatible with base change**: the global section of
+`𝒪(j)` on `ℙ(n; S)` attached to a homogeneous polynomial `a` is the pullback along
+`map n f` of the corresponding section on `ℙ(n; T)`. -/
+lemma pullbackTwistingSheafIso_hom_app_homogeneousSection {j : ℕ}
+    {a : MvPolynomial n (ULift.{u} ℤ)}
+    (ha : a ∈ Proj.projectiveSpaceOverAffineGrading n (ULift.{u} ℤ) j)
+    {S T : Scheme.{u}} (f : S ⟶ T) :
+    Scheme.Modules.Hom.app (pullbackTwistingSheafIso n f j).hom ⊤
+        (Scheme.Modules.sectionsPullback (map n f) (twistingSheaf n T j)
+          (homogeneousSection ha T)) =
+      homogeneousSection ha S :=
+  Scheme.Modules.pullbackTriangle_hom_app_sectionsPullback (map_toProjInt n f) _ _
+
+/-- **The homogeneous coordinates are compatible with base change**: the `i`-th homogeneous
+coordinate of `ℙ(n; S)` is the pullback along `map n f` of the `i`-th homogeneous coordinate
+of `ℙ(n; T)`. -/
+lemma pullbackTwistingSheafIso_hom_app_homogeneousCoord (i : n)
+    {S T : Scheme.{u}} (f : S ⟶ T) :
+    Scheme.Modules.Hom.app (pullbackTwistingSheafIso n f 1).hom ⊤
+        (Scheme.Modules.sectionsPullback (map n f) (twistingSheaf n T 1)
+          (homogeneousCoord i T)) =
+      homogeneousCoord i S :=
+  pullbackTwistingSheafIso_hom_app_homogeneousSection _ f
+
+variable (n) in
+/-- **The base-change isomorphisms are compatible with composition**: for `f : S ⟶ T` and
+`g : T ⟶ U`, pulling `𝒪(d)` back along `map n g` and then along `map n f` is pulling it back
+along `map n (f ≫ g)`. This is the associativity coherence of the pullback pseudofunctor,
+applied to the two triangles `map n g ≫ toProjInt n U = toProjInt n T` and
+`map n f ≫ toProjInt n T = toProjInt n S`. -/
+lemma pullbackTwistingSheafIso_hom_comp {S T U : Scheme.{u}} (f : S ⟶ T) (g : T ⟶ U) (d : ℤ) :
+    (Scheme.Modules.pullback (map n f)).map (pullbackTwistingSheafIso n g d).hom ≫
+        (pullbackTwistingSheafIso n f d).hom =
+      (Scheme.Modules.pullbackComp (map n f) (map n g)).hom.app (twistingSheaf n U d) ≫
+        (Scheme.Modules.pullbackCongr (map_comp n f g).symm).hom.app (twistingSheaf n U d) ≫
+          (pullbackTwistingSheafIso n (f ≫ g) d).hom :=
+  Scheme.Modules.pullbackTriangle_comp_hom_app (map_comp n f g) (map_toProjInt n g)
+    (map_toProjInt n f) (map_toProjInt n (f ≫ g)) _
+
+variable (n) in
+/-- **Base change of global sections of `𝒪(d)` is semilinear** over the pullback of functions
+`Γ(T, 𝒪_T) ⟶ Γ(S, 𝒪_S)`, the module structure on `Γ(ℙ(n; S), 𝒪(d))` over `Γ(S, 𝒪_S)` being
+the one obtained by restriction of scalars along the structure morphism `ℙ(n; S) ↘ S`.
+Together with `AlgebraicGeometry.ProjectiveSpace.homogeneousSection_add` this base-changes a
+hyperplane `∑ᵢ aᵢ Tᵢ` with coefficients `aᵢ ∈ Γ(T, 𝒪_T)` to the corresponding hyperplane
+on `ℙ(n; S)`. -/
+lemma pullbackTwistingSheafIso_hom_app_smul {S T : Scheme.{u}} (f : S ⟶ T)
+    (d : ℤ) (r : Γ(T, ⊤)) (s : Γ(twistingSheaf n T d, ⊤)) :
+    Scheme.Modules.Hom.app (pullbackTwistingSheafIso n f d).hom ⊤
+        (Scheme.Modules.sectionsPullback (map n f) (twistingSheaf n T d)
+          ((ℙ(n; T) ↘ T).appTop r • s)) =
+      (ℙ(n; S) ↘ S).appTop (f.appTop r) •
+        Scheme.Modules.Hom.app (pullbackTwistingSheafIso n f d).hom ⊤
+          (Scheme.Modules.sectionsPullback (map n f) (twistingSheaf n T d) s) := by
+  have h : (map n f).appTop ((ℙ(n; T) ↘ T).appTop r) = (ℙ(n; S) ↘ S).appTop (f.appTop r) := by
+    rw [← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, map_over,
+      Scheme.Hom.comp_appTop, ConcreteCategory.comp_apply]
+  rw [Scheme.Modules.sectionsPullback_smul, Scheme.Modules.Hom.app_smul, h]
+
+end ProjectiveSpace
+
+end AlgebraicGeometry

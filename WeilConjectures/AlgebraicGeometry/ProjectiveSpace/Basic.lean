@@ -27,6 +27,8 @@ so everything below is new; the integral model itself is
 
 ## Main definitions
 
+- `AlgebraicGeometry.Proj.projectiveSpaceOverAffineGrading` — the total-degree grading of the
+  polynomial ring `A[T]`.
 - `AlgebraicGeometry.Proj.projectiveSpaceOverAffine` — the projective space `ℙ^σ_A` over an
   affine base, i.e. `Proj` of the polynomial ring `A[T]` with its total-degree grading.
 - `AlgebraicGeometry.Proj.projectiveSpaceOverAffineToSpec` — its structure morphism
@@ -50,7 +52,10 @@ Mathlib does not make the total-degree grading of `MvPolynomial σ A` a global i
 one may want to grade by another weight function; it is enabled here as a local instance. To
 keep it out of the statements of the results below, `Proj.projectiveSpaceOverAffine σ A` is a plain
 definition rather than an abbreviation, so that downstream files need not re-enable the
-instance.
+instance. A file that does need to see `ℙ^σ_A` as a `Proj` — as
+`WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf` does — has to re-enable the
+local instance and unfold the definition, which is what `Proj.projectiveSpaceOverAffine_eq`
+records.
 
 Defining `ℙ(n; S)` by base change is the cheap route: it needs no gluing, and properness of
 `ℙ(n; S) ↘ S` follows from properness of the integral model by base change. The blueprint's
@@ -97,15 +102,27 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 variable (σ : Type u) (A : Type u) [CommRing A]
 
+/-- The total-degree grading of the polynomial ring `A[T]` in the variables `σ`, the graded
+ring whose `Proj` is the projective space `ℙ^σ_A`. -/
+abbrev Proj.projectiveSpaceOverAffineGrading : ℕ → Submodule A (MvPolynomial σ A) :=
+  MvPolynomial.homogeneousSubmodule σ A
+
 /-- The projective space `ℙ^σ_A` over an affine base, defined as `Proj` of the polynomial
 ring `A[T]` in the variables `σ` with its total-degree grading.
 (blueprint: `def:nagata-affine-proj`, for a polynomial ring) -/
 def Proj.projectiveSpaceOverAffine : Scheme.{u} :=
-  Proj (MvPolynomial.homogeneousSubmodule σ A)
+  Proj (Proj.projectiveSpaceOverAffineGrading σ A)
+
+/-- `ℙ^σ_A` is `Proj` of the total-degree grading of `A[T]`, by definition. This is the lemma
+to rewrite with in a file that needs to see `ℙ^σ_A` as a `Proj`, since
+`Proj.projectiveSpaceOverAffine` is a plain definition; see the implementation notes. -/
+lemma Proj.projectiveSpaceOverAffine_eq :
+    Proj.projectiveSpaceOverAffine σ A = Proj (Proj.projectiveSpaceOverAffineGrading σ A) :=
+  rfl
 
 /-- The structure morphism `ℙ^σ_A ⟶ Spec A` of the projective space over an affine base. -/
 def Proj.projectiveSpaceOverAffineToSpec : Proj.projectiveSpaceOverAffine σ A ⟶ Spec (.of A) :=
-  Proj.toSpecZero (MvPolynomial.homogeneousSubmodule σ A) ≫
+  Proj.toSpecZero (Proj.projectiveSpaceOverAffineGrading σ A) ≫
     Spec.map (CommRingCat.ofHom (MvPolynomial.homogeneousSubmoduleZeroEquiv σ A).toRingHom)
 
 /-- **Projective space over an affine base is proper**: for a finite index type `σ`, the
