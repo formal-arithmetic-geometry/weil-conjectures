@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.Sheaves.Abelian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Over
 
 /-!
@@ -42,6 +43,10 @@ section `r` of the structure sheaf multiplies `M` by `r`, which is an endomorphi
 - `AlgebraicGeometry.Scheme.Modules.H.linearEquiv₀` — `H^0(X, M) ≅ Γ(X, M)` as
   `Γ(X, 𝒪_X)`-modules.
 - `AlgebraicGeometry.Scheme.Modules.H.biprodLinearEquiv` — `H^n(X, M ⊞ N) ≅ H^n(X, M) × H^n(X, N)`.
+- `AlgebraicGeometry.Scheme.Modules.H.biproductLinearEquiv` — **cohomology commutes with finite
+  direct sums**: `H^n(X, ⨁ i, M i) ≅ ∀ i, H^n(X, M i)` for a finite family of sheaves of
+  modules, and `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv`, its specialisation
+  `H^n(X, 𝒪_X^ι) ≅ (ι → H^n(X, 𝒪_X))` to a free sheaf of finite rank.
 
 -/
 
@@ -314,6 +319,88 @@ lemma H.biprodLinearEquiv_symm_apply (M N : X.Modules) (n : ℕ) (p : M.H n × N
     (H.biprodLinearEquiv M N n).symm p = H.map biprod.inl n p.1 + H.map biprod.inr n p.2 :=
   rfl
 
+/-- The map induced on cohomology by a finite sum of morphisms of sheaves of modules is the
+sum of the induced maps. -/
+lemma H.map_sum {ι : Type*} (s : Finset ι) (φ : ι → (M ⟶ N)) (n : ℕ) :
+    H.map (∑ i ∈ s, φ i) n = ∑ i ∈ s, H.map (φ i) n := by
+  classical
+  induction s using Finset.induction with
+  | empty => simp
+  | insert a s ha ih => rw [Finset.sum_insert ha, Finset.sum_insert ha, H.map_add, ih]
+
+section Biproduct
+
+variable {ι : Type*} [Fintype ι] (M : ι → X.Modules) (n : ℕ)
+
+/-- Restricting a cohomology class on a finite direct sum to the summands and adding the
+results back up recovers the class. -/
+lemma H.sum_map_ι_map_π (x : (⨁ M).H n) :
+    ∑ i : ι, H.map (biproduct.ι M i) n (H.map (biproduct.π M i) n x) = x := by
+  classical
+  have h : ∑ i : ι, biproduct.π M i ≫ biproduct.ι M i = 𝟙 (⨁ M) := by
+    refine biproduct.hom_ext' _ _ fun j ↦ ?_
+    rw [Category.comp_id, Preadditive.comp_sum, Finset.sum_eq_single j]
+    · rw [← Category.assoc, biproduct.ι_π_self, Category.id_comp]
+    · intro b _ hb
+      rw [← Category.assoc, biproduct.ι_π_ne _ (Ne.symm hb), Limits.zero_comp]
+    · simp
+  have h' : ∀ i : ι, H.map (biproduct.ι M i) n (H.map (biproduct.π M i) n x) =
+      H.map (biproduct.π M i ≫ biproduct.ι M i) n x := by
+    intro i
+    rw [H.map_comp]
+    rfl
+  simp only [h']
+  rw [← LinearMap.sum_apply, ← H.map_sum, h, H.map_id, LinearMap.id_apply]
+
+/-- **Cohomology commutes with finite direct sums**: `H^n(X, ⨁ i, M i) ≅ ∀ i, H^n(X, M i)`
+for a finite family `M` of sheaves of modules, the restriction maps to the summands taken
+together. It is `AlgebraicGeometry.Scheme.Modules.H.biprodLinearEquiv` for an arbitrary
+finite family instead of a pair. -/
+noncomputable def H.biproductLinearEquiv :
+    (⨁ M).H n ≃ₗ[Γ(X, ⊤)] ∀ i, (M i).H n where
+  toFun x i := H.map (biproduct.π M i) n x
+  map_add' x y := by ext i; simp
+  map_smul' r x := by ext i; simp
+  invFun p := ∑ i : ι, H.map (biproduct.ι M i) n (p i)
+  left_inv x := H.sum_map_ι_map_π M n x
+  right_inv p := by
+    classical
+    ext j
+    change H.map (biproduct.π M j) n (∑ i : ι, H.map (biproduct.ι M i) n (p i)) = p j
+    rw [_root_.map_sum, Finset.sum_eq_single j]
+    · rw [← LinearMap.comp_apply, ← H.map_comp, biproduct.ι_π_self, H.map_id, LinearMap.id_apply]
+    · intro b _ hb
+      rw [← LinearMap.comp_apply, ← H.map_comp, biproduct.ι_π_ne _ hb, H.map_zero,
+        LinearMap.zero_apply]
+    · simp
+
+@[simp]
+lemma H.biproductLinearEquiv_apply (x : (⨁ M).H n) (i : ι) :
+    H.biproductLinearEquiv M n x i = H.map (biproduct.π M i) n x :=
+  rfl
+
+@[simp]
+lemma H.biproductLinearEquiv_symm_apply (p : ∀ i, (M i).H n) :
+    (H.biproductLinearEquiv M n).symm p = ∑ i : ι, H.map (biproduct.ι M i) n (p i) :=
+  rfl
+
+end Biproduct
+
+section Free
+
+variable (X) (ι : Type u) [Fintype ι] (n : ℕ)
+
+/-- **The cohomology of a free sheaf of finite rank**:
+`H^n(X, 𝒪_X^ι) ≅ (ι → H^n(X, 𝒪_X))`, the specialisation of
+`AlgebraicGeometry.Scheme.Modules.H.biproductLinearEquiv` to a direct sum of copies of the
+structure sheaf. -/
+noncomputable def H.freeLinearEquiv :
+    (X.freeModules ι).H n ≃ₗ[Γ(X, ⊤)] (ι → X.structureModules.H n) :=
+  (H.mapLinearEquiv (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules) n).symm.trans
+    (H.biproductLinearEquiv (fun _ : ι ↦ X.structureModules) n)
+
+end Free
+
 /-! ### Schemes over a base ring -/
 
 section OverBase
@@ -370,7 +457,31 @@ noncomputable def H.mapLinearEquivOver {M N : X.Modules} (e : M ≅ N) (n : ℕ)
     (by rw [← H.mapOver_comp, e.inv_hom_id, H.mapOver_id])
     (by rw [← H.mapOver_comp, e.hom_inv_id, H.mapOver_id])
 
+/-- Cohomology commutes with finite direct sums, `R`-linearly for a scheme over `Spec R`. The
+`Γ(X, 𝒪_X)`-linear version is
+`AlgebraicGeometry.Scheme.Modules.H.biproductLinearEquiv`. -/
+noncomputable def H.biproductLinearEquivOver {ι : Type*} [Fintype ι] (M : ι → X.Modules)
+    (n : ℕ) : (⨁ M).H n ≃ₗ[R] ∀ i, (M i).H n :=
+  AddEquiv.toLinearEquiv (H.biproductLinearEquiv M n).toAddEquiv fun r x ↦ by
+    ext i
+    change H.mapAddHom (biproduct.π M i) n (r • x) = r • H.mapAddHom (biproduct.π M i) n x
+    exact H.mapAddHom_smul_over R _ n r x
+
+@[simp]
+lemma H.biproductLinearEquivOver_apply {ι : Type*} [Fintype ι] (M : ι → X.Modules) (n : ℕ)
+    (x : (⨁ M).H n) (i : ι) :
+    H.biproductLinearEquivOver R M n x i = H.map (biproduct.π M i) n x :=
+  rfl
+
 end
+
+/-- The cohomology of a free sheaf of finite rank, `R`-linearly for a scheme over `Spec R`.
+The `Γ(X, 𝒪_X)`-linear version is
+`AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv`. -/
+noncomputable def H.freeLinearEquivOver (ι : Type u) [Fintype ι] (n : ℕ) :
+    (X.freeModules ι).H n ≃ₗ[R] (ι → X.structureModules.H n) :=
+  (H.mapLinearEquivOver R (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules) n).symm.trans
+    (H.biproductLinearEquivOver R (fun _ : ι ↦ X.structureModules) n)
 
 end OverBase
 
