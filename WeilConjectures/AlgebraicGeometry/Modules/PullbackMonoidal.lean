@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Presheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Skeleton
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 
@@ -54,9 +55,8 @@ functor is monoidal. -/
 noncomputable instance :
     (PresheafOfModules.pullbackOfCommRingCat f.toRingCatPresheafHom ⋙
       SheafOfModules.sheafification X.sheaf).Monoidal :=
-  Functor.Monoidal.instComp
-    (F := PresheafOfModules.pullbackOfCommRingCat f.toRingCatPresheafHom)
-    (G := SheafOfModules.sheafification X.sheaf)
+  inferInstanceAs (PresheafOfModules.pullbackOfCommRingCat f.toRingCatPresheafHom ⋙
+    SheafOfModules.sheafification X.sheaf).Monoidal
 
 /-- The pullback functor on sheaves of modules lifts, along the sheafification functor, the
 composition of the pullback functor on presheaves of modules with the sheafification. -/
@@ -86,8 +86,7 @@ lemma _root_.SheafOfModules.Invertible.pullback {M : Y.Modules} (hM : M.Invertib
     ((Modules.pullback f).obj M).Invertible := by
   obtain ⟨N, ⟨e⟩⟩ := SheafOfModules.invertible_iff_exists.{u, u, u}.1 hM
   exact SheafOfModules.Invertible.left.{u, u, u} (N := (Modules.pullback f).obj N)
-    (Functor.Monoidal.μIso (Modules.pullback f) M N ≪≫ (Modules.pullback f).mapIso e ≪≫
-      (Functor.Monoidal.εIso (Modules.pullback f)).symm)
+    (Functor.Monoidal.mapIsoTensorUnit (Modules.pullback f) e)
 
 /-- The pullback homomorphism on Picard groups attached to a morphism of schemes: the class of
 an invertible `𝒪ᵧ`-module is sent to the class of its pullback. -/

@@ -8,11 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
-# Units among the sections over a basic open, and schemes with one point
+# Units among the sections over a basic open, lemmas on `Scheme.Hom.appLE`, and schemes with
+one point
 
 We record that the restriction of a section `s` of the structure sheaf to any open contained
-in `X.basicOpen s` is a unit, and that the ring of global sections of a scheme with exactly one
-point is local, being the stalk at that point.
+in `X.basicOpen s` is a unit, that `Scheme.Hom.appLE` only depends on the morphism up to
+equality, that `Scheme.Hom.appLE` between the top opens is `Scheme.Hom.appTop`, and that the
+ring of global sections of a scheme with exactly one point is local, being the stalk at that
+point.
 -/
 
 @[expose] public section
@@ -50,5 +53,22 @@ instance Scheme.isLocalRing_sections_top [Subsingleton X] [Nonempty X] : IsLocal
   have : IsIso (X.presheaf.germ ⊤ x trivial) :=
     (colimit.isColimit _).isIso_ι_app_of_isTerminal _ ht
   exact (asIso (X.presheaf.germ ⊤ x trivial)).symm.commRingCatIsoToRingEquiv.isLocalRing
+
+namespace Scheme.Hom
+
+variable {Y : Scheme.{u}}
+
+/-- `Scheme.Hom.appLE` only depends on the morphism up to equality. -/
+lemma appLE_congr_hom {c d : X ⟶ Y} (hcd : c = d) (U : Y.Opens) (V : X.Opens)
+    (ec : V ≤ c ⁻¹ᵁ U) (ed : V ≤ d ⁻¹ᵁ U) : c.appLE U V ec = d.appLE U V ed := by
+  subst hcd
+  rfl
+
+/-- `Scheme.Hom.appLE` from the top open to the top open is `Scheme.Hom.appTop`. -/
+lemma appLE_eq_appTop (a : X ⟶ Y) (e : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤) : a.appLE ⊤ ⊤ e = a.appTop := by
+  have h : (homOfLE e).op = 𝟙 (op (a ⁻¹ᵁ ⊤) : X.Opensᵒᵖ) := Subsingleton.elim _ _
+  rw [Hom.appLE, h, X.presheaf.map_id, Category.comp_id]
+
+end Scheme.Hom
 
 end AlgebraicGeometry

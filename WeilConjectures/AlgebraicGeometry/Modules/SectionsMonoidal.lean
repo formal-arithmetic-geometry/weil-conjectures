@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Mathlib.Topology.Sheaves.PUnit
@@ -21,8 +22,9 @@ which happens over a topological space with at most one point: there every presh
 is already a sheaf.
 
 The case of interest is the spectrum of a ring with at most one prime ideal, for instance the
-spectrum of a field: the global sections of a tensor product of two sheaves of modules are then
-the tensor product of their global sections.
+spectrum of a field, or of the residue field of a point of a scheme: the global sections functor
+`Γ : (Spec R).Modules ⥤ ModuleCat R` is then monoidal. This is what makes the fibre functor of
+`WeilConjectures.AlgebraicGeometry.Modules.Fiber` monoidal.
 
 ## Main declarations
 
@@ -30,6 +32,8 @@ the tensor product of their global sections.
   evaluation of sheaves of `R`-modules at an object is monoidal.
 - `AlgebraicGeometry.Scheme.Modules.evaluationMonoidal`: on a scheme with at most one point,
   the sections of `𝒪ₓ`-modules over an open subset are monoidal.
+- `AlgebraicGeometry.moduleSpecΓFunctorMonoidal`: on the spectrum of a ring with at most one
+  prime ideal, the global sections functor `(Spec R).Modules ⥤ ModuleCat R` is monoidal.
 
 -/
 
@@ -92,5 +96,31 @@ noncomputable instance Scheme.Modules.evaluationMonoidal (U : (Opens X)ᵒᵖ) :
     (SheafOfModules.evaluation X.ringCatSheaf U).Monoidal :=
   SheafOfModules.evaluationMonoidalOfIsSheaf X.sheaf
     (PresheafOfModules.isSheaf_of_subsingleton X.sheaf) U
+
+variable (R : CommRingCat.{u}) [Subsingleton (Spec R)]
+
+/-- **On the spectrum of a ring with at most one prime ideal**, for instance on the spectrum of a
+field, **the global sections functor `(Spec R).Modules ⥤ ModuleCat R` is monoidal**: the global
+sections of a tensor product are the tensor product of the global sections.
+
+```
+  (Spec R).Modules ── evaluation (op ⊤) ──> ModuleCat Γ(Spec R, ⊤)
+           │                                          │
+  moduleSpecΓFunctor              restrictScalars (ΓSpecIso R).inv
+           ↓                                          ↓
+     ModuleCat R ═════════════════════════════ ModuleCat R
+```
+
+The source category is given explicitly: `moduleSpecΓFunctor (R := R)` has source spelled
+`(Spec (CommRingCat.of ↑R)).Modules`, whereas at the use sites it is composed with a functor
+landing in `(Spec R).Modules`. The two monoidal structures are definitionally equal but not
+syntactically so, and instance resolution needs the second spelling. -/
+@[instance_reducible]
+noncomputable instance moduleSpecΓFunctorMonoidal :
+    Functor.Monoidal (C := (Spec R).Modules) (moduleSpecΓFunctor (R := R)) :=
+  letI := ModuleCat.restrictScalarsMonoidalOfBijective (Scheme.ΓSpecIso R).inv.hom
+    (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso R).inv)
+  inferInstanceAs (SheafOfModules.evaluation (Spec R).ringCatSheaf (op ⊤) ⋙
+    ModuleCat.restrictScalars (Scheme.ΓSpecIso R).inv.hom).Monoidal
 
 end AlgebraicGeometry
