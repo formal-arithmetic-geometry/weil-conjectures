@@ -29,6 +29,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardField
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackConstant
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
