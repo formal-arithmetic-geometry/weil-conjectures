@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.GloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
@@ -57,8 +59,10 @@ from part (4); see the implementation notes and the `TODO` below.
   `AlgebraicGeometry.Scheme.Modules.IsAmple.tensorPow`.
 - `AlgebraicGeometry.Scheme.Modules.IsAmple.pullback_of_isFinite` — part (3): the pullback of
   an ample line bundle along a finite morphism of proper `k`-schemes is ample. The case of an
-  immersion, which is the one used downstream, is proved from part (4) as
-  `AlgebraicGeometry.Scheme.Modules.IsAmple.pullback_of_isImmersion`.
+  immersion is derived from part (4) as
+  `AlgebraicGeometry.Scheme.Modules.IsAmple.pullback_of_isImmersion`; the case of an
+  isomorphism is proved outright, over no base and with no properness hypothesis, as
+  `AlgebraicGeometry.Scheme.Modules.IsAmple.pullback_of_isIso`.
 - `AlgebraicGeometry.Scheme.Modules.isAmple_iff_exists_isVeryAmple_tensorPow` — part (4): `L`
   is ample if and only if some positive power of `L` is very ample.
 - `AlgebraicGeometry.Scheme.Modules.IsAmple.exists_isVeryAmple_tensorObj_tensorPow` — part
@@ -148,7 +152,8 @@ def IsAmple (L : X.Modules) : Prop :=
 theorem IsAmple.of_iso (hL : L.IsAmple) (e : L ≅ M) : M.IsAmple := by
   intro F _
   obtain ⟨n₀, hn₀⟩ := hL F
-  exact ⟨n₀, fun n hn ↦ (hn₀ n hn).of_iso (tensorIso (Iso.refl F) (tensorPowIso e n))⟩
+  exact ⟨n₀, fun n hn ↦
+    (hn₀ n hn).of_iso (tensorIso (C := X.Modules) (Iso.refl F) (tensorPowIso e n))⟩
 
 /-- Isomorphic sheaves of modules are ample together. -/
 theorem isAmple_congr (e : L ≅ M) : L.IsAmple ↔ M.IsAmple :=
@@ -163,7 +168,7 @@ theorem IsAmple.tensorPow (hL : L.IsAmple) {n : ℕ} (hn : 1 ≤ n) : (L ^⊗ n)
   obtain ⟨n₀, hn₀⟩ := hL F
   refine ⟨n₀, fun m hm ↦ ?_⟩
   have hnm : n₀ ≤ n * m := hm.trans (Nat.le_mul_of_pos_left m hn)
-  exact (hn₀ (n * m) hnm).of_iso (tensorIso (Iso.refl F) (tensorPowMulIso L n m))
+  exact (hn₀ (n * m) hnm).of_iso (tensorIso (C := X.Modules) (Iso.refl F) (tensorPowMulIso L n m))
 
 end Ample
 
@@ -254,6 +259,27 @@ theorem IsAmple.tensorObj (hL : L.Invertible) (hM : M.Invertible)
 theorem isAmple_tensorPow_iff (hL : L.Invertible) {n : ℕ} (hn : 1 ≤ n) :
     (L ^⊗ n).IsAmple ↔ L.IsAmple :=
   ⟨sorry, fun hLa ↦ hLa.tensorPow hn⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **Ampleness is preserved by pullback along an isomorphism of schemes.** Unlike the case of a
+general immersion this is formal, and needs neither a base field nor a properness hypothesis:
+pulling back along `u` preserves coherence, tensor products and global generation, and every
+coherent sheaf `F` on the source is the pullback of one on the target, namely of `(u⁻¹)^* F`.
+(blueprint: `lem:deg-ample-basic` (3)) -/
+theorem IsAmple.pullback_of_isIso {X' : Scheme.{u}} (u : X' ⟶ X) [IsIso u] (hLa : L.IsAmple) :
+    ((pullback u).obj L).IsAmple := by
+  intro F hF
+  have : F.IsCoherent := hF
+  obtain ⟨n₀, hn₀⟩ := hLa ((pullback (inv u)).obj F)
+  refine ⟨n₀, fun n hn ↦ ?_⟩
+  have : ((pullback (inv u)).obj F ⊗ L ^⊗ n).IsGloballyGenerated := hn₀ n hn
+  have : ((pullback u).obj ((pullback (inv u)).obj F ⊗ L ^⊗ n)).IsGloballyGenerated :=
+    isGloballyGenerated_pullback _
+  -- `u^* ((u⁻¹)^* F ⊗ L^{⊗n}) ≅ (u ≫ u⁻¹)^* F ⊗ (u^* L)^{⊗n} ≅ F ⊗ (u^* L)^{⊗n}`
+  exact this.of_iso ((Functor.Monoidal.μIso (pullback u) _ _).symm ≪≫
+    tensorIso ((pullbackTriangle (IsIso.hom_inv_id u)).app F ≪≫ (pullbackId X').app F)
+      (Functor.Monoidal.mapTensorPowIso (pullback u) L n))
 
 variable (k : Type u) [Field k] [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
 
