@@ -8593,12 +8593,18 @@ is quasi-compact and quasi-separated.  Then:
 g^*R^if_*\cF\;\longrightarrow\;R^if'_*\cF'
 \]
 is an isomorphism for all $i\ge0$.
-\item (Affine case) If $S=\Spec(A)$ and $S'=\Spec(B)$, then
+\item (Affine case) If $S=\Spec(A)$ and $S'=\Spec(B)$, then the base
+change maps of \Cref{lem:pc-base-change-map} induce on global sections
+over the affine $S'$ canonical $B$-linear maps
 \[
-H^i(X,\cF)\otimes_AB\;\cong\;H^i(X',\cF')\qquad\text{for all }i .
+H^i(X,\cF)\otimes_AB\;\longrightarrow\;H^i(X',\cF')
 \]
+(the two higher direct images are quasi-coherent by
+\Cref{lem:pc-finite-support-hi}(1), so that over the affine bases their
+global sections are $H^i(X,\cF)$ and $H^i(X',\cF')$, and $g^*$ becomes
+$\otimes_AB$), and these maps are isomorphisms for all $i\ge0$.
 \end{enumerate}
-\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-finite-support-hi,lem:pc-cech-computes,lem:pc-affine-vanishing}
+\uses{def:pc-scheme,def:pc-morphism-conventions,def:pc-base-change,lem:pc-affine-morphism-hi,lem:pc-base-change-map,lem:pc-finite-support-hi,lem:pc-cech-computes,lem:pc-affine-vanishing}
 \end{lemma}
 \begin{proof}
 \uses{lem:pc-affine-vanishing,lem:pc-base-change-map,lem:pc-cech-computes,lem:pc-finite-support-hi,lem:pc-five-lemma,lem:pc-leray-spectral-sequence,lem:pc-separated-permanence,lem:pcb-cech-spectral}
@@ -8616,47 +8622,119 @@ H^p(X_B,\cF_B)=\check H^p(\mathcal U_B,\cF_B).
 \]
 For a multi-index $J$ with $U_J=\Spec(C)$ and $\cF|_{U_J}=\widetilde M$,
 the base change $(U_J)_B=\Spec(C\otimes_AB)$ carries
-$\cF_B|=\widetilde{M\otimes_AB}$ and the localization
-identifications give
-$\cF(U_J)\otimes_AB=\cF_B((U_J)_B)$; consequently
+$\cF_B|=\widetilde{M\otimes_AB}$, and the localization identifications
+say that extension of scalars on sections,
 \[
-\check C^\bullet(\mathcal U_B,\cF_B)
-=\check C^\bullet(\mathcal U,\cF)\otimes_AB .
+\cF(U_J)\otimes_AB\;\longrightarrow\;\cF_B((U_J)_B),\qquad
+s\otimes b\longmapsto b\cdot(g')^*s ,
 \]
+is bijective.  These maps commute with the Čech differentials, so they
+assemble into a map of complexes of $B$-modules
+\[
+\check C^\bullet(\mathcal U,\cF)\otimes_AB
+\;\longrightarrow\;\check C^\bullet(\mathcal U_B,\cF_B)
+\]
+which is bijective in every degree.
 For a flat ring map $A\to B$ and any complex $C^\bullet$ of
-$A$-modules,
+$A$-modules, the canonical map
 \[
-H^i(C^\bullet\otimes_AB)=H^i(C^\bullet)\otimes_AB:
+H^i(C^\bullet)\otimes_AB\;\longrightarrow\;H^i(C^\bullet\otimes_AB)
 \]
-the proof is by induction on the number of terms (via the
-truncations $0\to C^{\ge n+1}\to C^{\ge n}\to C^n[-n]\to0$ and the
-five lemma (\Cref{lem:pc-five-lemma}) applied to the long exact
-sequences of the short exact
-sequences, both for $C^\bullet$ and for $C^\bullet\otimes_AB$ -- the
-base changed sequences are exact because $A\to B$ is flat, so no
-$\mathrm{Tor}_1$-terms occur).  Combining gives (2) for separated $X$.
+is an isomorphism: the proof is by induction on the number of terms
+(via the truncations $0\to C^{\ge n+1}\to C^{\ge n}\to C^n[-n]\to0$ and
+the five lemma (\Cref{lem:pc-five-lemma}), applied to the map from the
+long exact sequence of such a short exact sequence tensored with $B$ to
+the long exact sequence of its base change -- the base changed
+sequences are exact because $A\to B$ is flat, so no
+$\mathrm{Tor}_1$-terms occur, and what the five lemma concludes of is
+that comparison map itself).  Combining the two displays with
+\Cref{lem:pc-cech-computes}, the composite
+\[
+H^i(X,\cF)\otimes_AB=\check H^i(\mathcal U,\cF)\otimes_AB
+\;\longrightarrow\;\check H^i(\mathcal U_B,\cF_B)=H^i(X_B,\cF_B)
+\]
+is an isomorphism, and it is the map of (2).  Two things go into that
+last assertion.  First, over an affine base the base change maps of
+\Cref{lem:pc-base-change-map} are, in every cohomological degree, the
+$B$-linear extension of pullback along $g'$, being induced by
+$\cF\to Rg'_*\cF'$; in cohomological degree $0$, and on an affine open,
+that is the extension of scalars on sections displayed above, which is
+the map the middle arrow is built from in each Čech degree.  Second,
+the two outer identifications -- those of \Cref{lem:pc-cech-computes}
+-- are compatible with pullback along $g'$.
+For that second point, and for the comparison of spectral sequences
+used in the next step, one construction serves: since $(g')^*$ is
+exact, $g'_*$ carries an injective resolution $\cF_B\to\cK^\bullet$ on
+$X_B$ to a bounded below complex of injective $\cO_X$-modules, so the
+map $\cF\to g'_*\cF_B\to g'_*\cK^\bullet$ extends over an injective
+resolution $\cF\to\cI^\bullet$ to a map $\cI^\bullet\to
+g'_*\cK^\bullet$ of complexes; applying
+$\check C^\bullet(\mathcal U,-)$ together with
+$\Gamma(U_J,g'_*\cK^q)=\Gamma((U_J)_B,\cK^q)$ gives a map from the
+double complex out of which \Cref{lem:pcb-cech-spectral} builds the
+spectral sequence of $(\mathcal U,\cF)$ to the one it builds for
+$(\mathcal U_B,\cF_B)$, hence a map of those two spectral sequences,
+which induces pullback along $g'$ on the abutments and is compatible
+with their edge maps, that is, with the identifications of
+\Cref{lem:pc-cech-computes}.  This proves (2) for separated $X$.
 
 \emph{The affine case (2), $X$ quasi-separated.}  Take a finite affine
-open covering $\mathcal U$ of $X$ (quasi-compactness) and use the
-Čech-to-cohomology spectral sequence
+open covering $\mathcal U:X=U_1\cup\dots\cup U_t$ (quasi-compactness)
+and use the Čech-to-cohomology spectral sequence
 (\Cref{lem:pcb-cech-spectral}): with
 $\underline H^q=\underline H^q(\cF)$,
 \[
 E_2^{p,q}=\check H^p(\mathcal U,\underline H^q(\cF))
-\Longrightarrow H^{p+q}(X,\cF).
+\Longrightarrow H^{p+q}(X,\cF),
 \]
-The intersections $U_{i_0\dots i_p}$ are quasi-compact and separated,
-so by the separated case
+and likewise for $(\mathcal U_B,\cF_B)$ over $B$.  The construction at
+the end of the separated case supplies a map from the first spectral
+sequence to the second, inducing pullback along $g'$ on the abutments;
+it is $A$-linear with target a spectral sequence of $B$-modules, so it
+extends to a map
 \[
-\check H^p(\mathcal U_B,\underline H^q(\cF_B))
-=\check H^p(\mathcal U,\underline H^q(\cF))\otimes_AB .
+E_r^{p,q}(\mathcal U,\cF)\otimes_AB\;\longrightarrow\;
+E_r^{p,q}(\mathcal U_B,\cF_B)
 \]
-The abutment follows from $A\to B$ flat (the spectral sequences and
-their base changes are compatible in the sense that the filtration
-pieces of $H^n$ base-change and are the base changes of the filtration
-pieces of $H^n(X,\cF)$; the two filtrations have the same lengths and
-the identification of the graded pieces gives the identification of
-the filtered objects at each degree).  This proves (2) in general.
+whose source is again a spectral sequence, with abutment
+$H^{p+q}(X,\cF)\otimes_AB$ carrying the tensored filtration: $A\to B$
+is flat, so $\otimes_AB$ commutes with the kernels, images and
+subquotients out of which the pages and the filtration are formed.  On
+the abutments this map is the map of (2), by the description of the
+base change map recorded in the separated case.
+
+The intersections $U_{i_0\dots i_p}$ are quasi-compact open subschemes
+of the affine $U_{i_0}$, hence quasi-compact and separated, so the
+separated case applies to each of them and makes
+$\underline H^q(\cF)(U_J)\otimes_AB\to\underline H^q(\cF_B)((U_J)_B)$
+an isomorphism for every multi-index $J$.  These are the terms of the
+two finite Čech complexes, and $\otimes_AB$ commutes with their
+cohomology because $A\to B$ is flat, so
+\[
+\check H^p(\mathcal U,\underline H^q(\cF))\otimes_AB
+\;\longrightarrow\;\check H^p(\mathcal U_B,\underline H^q(\cF_B))
+\]
+is an isomorphism for all $p,q$: the comparison is an isomorphism on
+$E_2$.  Since $\otimes_AB$ is exact it commutes with the kernels and
+images that produce $E_{r+1}$ from $E_r$, so induction on $r$ gives
+that the comparison is an isomorphism on every page, in particular on
+$E_\infty$.  Finally $\mathcal U$ has $t$ members, so $E_2^{p,q}=0$ for
+$p\ge t$ and both spectral sequences are bounded: the filtration of
+$H^n$ is finite with graded pieces $E_\infty^{p,n-p}$, and after
+$\otimes_AB$ the filtration of $H^n(X,\cF)\otimes_AB$ is finite of the
+same length with graded pieces $E_\infty^{p,n-p}\otimes_AB$.  The
+comparison respects both filtrations and is an isomorphism on the
+graded pieces, so descending induction on $p$ and the five lemma
+(\Cref{lem:pc-five-lemma}) -- applied to the map from the short exact
+sequence
+\[
+0\to F^{p+1}H^n(X,\cF)\otimes_AB\to F^pH^n(X,\cF)\otimes_AB\to
+E_\infty^{p,n-p}\otimes_AB\to0 ,
+\]
+exact because $A\to B$ is flat, to its counterpart for
+$(\mathcal U_B,\cF_B)$ -- give that
+$H^n(X,\cF)\otimes_AB\to H^n(X_B,\cF_B)$ is an isomorphism.  This
+proves (2) in general.
 
 \emph{The sheaf statement (1).}  The base change map is local in $S'$,
 so we may assume $S'=\Spec(B)$; further base changing (and being
@@ -8673,11 +8751,14 @@ $E_2^{p,q}=0$ for $p>0$ by \Cref{lem:pc-affine-vanishing} (affine $S$)
 and the quasi-coherence just noted, so it degenerates at $E_2$, giving
 $H^i(X,\cF)=H^0(S,R^if_*\cF)$; this is Cohomology of Schemes,
 Lemma 30.4.6, \stacksproject{01XK}).
-Pullback of quasi-coherent modules corresponds to $\otimes_AB$; by
-(2) the two quasi-coherent $\cO_{S'}$-modules are associated with the
-same $B$-module, so the canonical base change map of
-\Cref{lem:pc-base-change-map} is an isomorphism.  (The result proved
-here is Cohomology of Schemes, Lemma 30.5.2,
+Pullback of quasi-coherent modules corresponds to $\otimes_AB$, so
+$g^*R^if_*\cF$ is the quasi-coherent $\cO_{S'}$-module associated with
+$H^i(X,\cF)\otimes_AB$ and $R^if'_*\cF'$ the one associated with
+$H^i(X',\cF')$.  On the affine $S'$ a map of quasi-coherent modules is
+an isomorphism as soon as the map it induces on global sections is, and
+for the canonical base change map of \Cref{lem:pc-base-change-map} that
+induced map is precisely the one (2) says is an isomorphism.  (The
+result proved here is Cohomology of Schemes, Lemma 30.5.2,
 \stacksproject{02KH}.)
 \end{proof}
 
