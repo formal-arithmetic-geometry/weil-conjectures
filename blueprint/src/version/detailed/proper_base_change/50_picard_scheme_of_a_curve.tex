@@ -4701,7 +4701,7 @@ twisting that identification by $\cM^{-1}$
 \uses{def:pc-kahler-differentials,def:pc-curve,def:pc-morphism-conventions,def:pc-invertible-module,def:pc-ext}
 \end{lemma}
 \begin{proof}
-\uses{lem:pc-affine-morphism-hi,lem:pc-closed-immersion-affine,lem:pc-leray-spectral-sequence,def:pc-ext,lem:pc-koszul-resolution,lem:pc-conormal-sequence-smooth,lem:pc-smooth-immersion-regular,def:pc-dimension,lem:pc-det-short-exact-sequence,lem:pc-omega-line-bundle,lem:pc-projective-space-smooth}
+\uses{lem:pc-affine-morphism-hi,lem:pc-closed-immersion-affine,lem:pc-leray-spectral-sequence,lem:pc-local-to-global-ext,lem:pc-ext-locally-free-resolution,def:pc-ext,lem:pc-koszul-resolution,lem:pc-conormal-sequence-smooth,lem:pc-smooth-immersion-regular,def:pc-dimension,lem:pc-det-short-exact-sequence,lem:pc-omega-line-bundle,lem:pc-projective-space-smooth}
 Let $\cK:=\cI_X/\cI_X^2$ be the conormal sheaf of the immersion and
 $\cN:=\mathcal{H}om(\cK,\cO_X)$ the normal bundle.  Both $\mathbf P^N_k$
 and $X$ are smooth over $k$, with the relative dimensions we shall need:
@@ -4739,9 +4739,14 @@ $\cO_{\mathbf P^N}$-modules of length $r$; the conormal sheaf $\cK$
 does not occur among these terms, and indeed no term of a locally
 free resolution over $\cO_{\mathbf P^N}$ can be an $\cO_X$-module,
 since such a module is supported on the proper closed subscheme $X$.
-As $\mathcal{E}xt$ is local and may be computed from a locally free
-resolution of its first argument (\Cref{def:pc-ext}), these local
-resolutions give
+Now $\mathcal{E}xt$ is local and may be computed from a finite locally free
+resolution of its first argument: this is
+\Cref{lem:pc-ext-locally-free-resolution}, whose part~(1) lets the computation
+be made on the members of an open cover of $\mathbf P^N$ and whose part~(2),
+applied on each such $U$ to the Koszul resolution reindexed cohomologically,
+$\mathcal E^{-j}:=K_j=\Lambda^j(\cO_U^{\oplus r})$ for $0\le j\le r$ --- these
+terms being finite free --- computes it there.  So these
+local resolutions give
 $\mathcal{E}xt^{q}_{\cO_{\mathbf P^N}}(i_*\cM,\omega_{\mathbf P^N})=0$
 for $q\ne r$ (with $\omega_{\mathbf P^N}:=\Omega^N_{\mathbf P^N/k}$)
 and
@@ -4822,20 +4827,33 @@ gives $\Lambda^N\Omega^1_{\mathbf P^N}|_X
 tensoring by its dual inverts it, and
 $(\Lambda^r\cK)^{\vee}=\Lambda^r\cN$ by the determinants-of-duals
 identification made above).
-Let $\cG$ be a quasi-coherent $\cO_X$-module.  By
-\Cref{lem:pc-affine-morphism-hi} (a closed immersion is an affine
-morphism, \Cref{lem:pc-closed-immersion-affine}, so $R^qi_*\cG=0$ for
-$q>0$) and the Leray spectral sequence of $i$
-(\Cref{lem:pc-leray-spectral-sequence}), which therefore degenerates
-to $H^p(\mathbf P^N,i_*\cG)=H^p(X,\cG)$ for all $p$, together with the
-local-global Ext spectral sequence of $i_*\cM$ (whose $E_2$-page is
-concentrated in the row $q=r$ by the computation above):
+Let $\cG$ be a quasi-coherent $\cO_X$-module.  \Cref{lem:pc-affine-morphism-hi}
+(a closed immersion is an affine morphism,
+\Cref{lem:pc-closed-immersion-affine}, so $R^qi_*\cG=0$ for $q>0$) makes the
+Leray spectral sequence of $i$ (\Cref{lem:pc-leray-spectral-sequence})
+degenerate to $H^p(\mathbf P^N,i_*\cG)=H^p(X,\cG)$ for all $p$.  The
+local-to-global Ext spectral sequence --- \Cref{lem:pc-local-to-global-ext} on
+$\mathbf P^N_k$, with first argument $i_*\cM$ and second argument
+$\omega_{\mathbf P^N}$ --- has its $E_2$-page concentrated in the row $q=r$ by
+the computation above, so it too degenerates:
+\[
+\operatorname{Ext}^{n}_{\mathbf P^N}\bigl(i_*\cM,\omega_{\mathbf P^N}\bigr)
+=E_2^{\,n-r,\,r}
+=H^{n-r}\Bigl(\mathbf P^N,\;
+\mathcal{E}xt^{r}_{\cO_{\mathbf P^N}}\bigl(i_*\cM,\omega_{\mathbf P^N}\bigr)
+\Bigr)
+\qquad\text{for every }n.
+\]
+For $n<r$ the right-hand side is cohomology in the negative degree $n-r$, hence
+$0$: that is the first assertion of the lemma.  For $n=r$, substituting the
+identification of $\mathcal{E}xt^{r}$ computed above and then applying the
+Leray degeneration with $\cG=\Omega^1_{X/k}\otimes\cM^{-1}$ gives
 \[
 \operatorname{Ext}^{r}_{\mathbf P^N}\bigl(i_*\cM,\omega_{\mathbf P^N}\bigr)
 =H^0\Bigl(\mathbf P^N,\;i_*\bigl(\Omega^1_{X/k}\otimes\cM^{-1}\bigr)\Bigr)
 =H^0\bigl(X,\;\Omega^1_{X/k}\otimes\cM^{-1}\bigr),
 \]
-and the vanishing for $q<r$.  This proves the lemma.
+which is the second.  This proves the lemma.
 \end{proof}
 
 
@@ -4889,6 +4907,149 @@ sequence for the composition of the two pushforward functors.  It is not decompo
 % spectral sequence for pushforward along a morphism of ringed spaces.
 \end{proof}
 
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[The local-to-global Ext spectral sequence]
+\label{lem:pc-local-to-global-ext}
+Let $(X,\cO_X)$ be a ringed space and let $K,L$ be objects of $D(\cO_X)$
+(\Cref{def:pc-derived-category}) such that $R\mathcal{H}om_{\cO_X}(K,L)$ is
+bounded below.  Then there is a bounded, hence convergent, spectral sequence
+\[
+E_2^{p,q}=H^p\bigl(X,\;\mathcal{E}xt^{q}_{\cO_X}(K,L)\bigr)
+\qquad\text{converging to}\qquad
+\operatorname{Ext}^{p+q}_{\cO_X}(K,L),
+\]
+where $\mathcal{E}xt^{q}_{\cO_X}(K,L):=H^qR\mathcal{H}om_{\cO_X}(K,L)$ is the
+$q$-th cohomology sheaf of the derived inner hom and
+$\operatorname{Ext}^{n}_{\cO_X}(K,L):=\Hom_{D(\cO_X)}(K,L[n])$.
+In particular, for $\cO_X$-modules $F,G$ (viewed as complexes concentrated in
+degree $0$) the hypothesis holds and there is a first-quadrant spectral
+sequence
+\[
+E_2^{p,q}=H^p\bigl(X,\;\mathcal{E}xt^{q}_{\cO_X}(F,G)\bigr)
+\qquad\text{converging to}\qquad
+\operatorname{Ext}^{p+q}_{\cO_X}(F,G),
+\]
+the sheaf $\mathcal{E}xt^{q}_{\cO_X}(F,G)$ and the group
+$\operatorname{Ext}^{p+q}_{\cO_X}(F,G)$ being the ones of
+\Cref{def:pc-ext}.
+\uses{def:pc-scheme,def:pc-ext,def:pc-derived-category}
+% The \uses above points a ringed-space statement at \Cref{def:pc-scheme}
+% deliberately: that node fixes the chapter's scheme and morphism conventions and
+% no scheme hypothesis is being depended on here.  The two sibling
+% spectral-sequence nodes, \Cref{lem:pc-leray-spectral-sequence} and
+% \Cref{lem:pc-relative-leray-spectral-sequence}, are stated for ringed spaces and
+% list it in exactly the same way.  \Cref{def:pc-ext} needs no such ruling: its
+% $\cO_X$-notation is fixed at ringed-space generality.  The only consumer of this
+% node, \Cref{lem:pc-omega-identity}, takes $X=\mathbf P^N_k$ in any case.
+\end{lemma}
+\begin{proof}
+\uses{def:pc-ext,def:pc-derived-category}
+This is a cited external input.  Cohomology of Sheaves, Section~20.43 (Ext
+sheaves) (\stacksproject{0BQP}) is the section where this spectral sequence is
+assembled, but it carries no numbered statement of it, and its convergence
+clause is the informal ``converging to
+$\operatorname{Ext}^{p+q}_{D(\cO_X)}(K,L)$ in favorable situations (for example
+if $L$ is bounded below and $K$ is bounded above)''.  So what is cited here are
+the two numbered statements that section assembles it from.
+\begin{itemize}
+\item Cohomology of Sheaves, Section~20.29 (Cohomology of filtered complexes),
+Example~20.29.3 (\stacksproject{0BKM}): for any object $M$ of $D(\cO_X)$ there
+is a spectral sequence with $(E'_2)^{i,j}=H^i(X,H^j(M))$, and if $M$ is bounded
+below then it is bounded and converges to $H^{i+j}(X,M)$.  Applied to
+$M=R\mathcal{H}om_{\cO_X}(K,L)$, whose $j$-th cohomology sheaf is
+$\mathcal{E}xt^{j}_{\cO_X}(K,L)$ by definition, this gives the displayed
+$E_2$-page, and the boundedness required of $M$ is the hypothesis assumed.
+\item Cohomology of Sheaves, Section~20.42 (Internal hom in the derived
+category), Lemma~20.42.1 (\stacksproject{08DK}):
+$H^0\bigl(X,R\mathcal{H}om_{\cO_X}(A,B)\bigr)=\Hom_{D(\cO_X)}(A,B)$.  Applied
+to $A=K$ and $B=L[n]$, together with
+$R\mathcal{H}om_{\cO_X}(K,L)[n]=R\mathcal{H}om_{\cO_X}(K,L[n])$, this
+identifies the abutment $H^{n}\bigl(X,R\mathcal{H}om_{\cO_X}(K,L)\bigr)$ with
+$\Hom_{D(\cO_X)}(K,L[n])=\operatorname{Ext}^{n}_{\cO_X}(K,L)$, the Ext group of
+\Cref{def:pc-ext}.
+\end{itemize}
+For the last assertion take $K=F$ and $L=G$.  If $G\to I^\bullet$ is an
+injective resolution then $I^\bullet$, hence also
+$R\mathcal{H}om_{\cO_X}(F,G)=\mathcal{H}om^{\bullet}_{\cO_X}(F,I^\bullet)$, is
+concentrated in degrees $\ge0$; so that object is bounded below, which is the
+hypothesis, and $\mathcal{E}xt^{q}_{\cO_X}(F,G)=0$ for $q<0$, so the spectral
+sequence lies in the first quadrant.  Its two entries are the ones of
+\Cref{def:pc-ext}: the abutment by the second item above, and the $E_2$-page
+because that node's $\mathcal{E}xt^{q}_{\cO_X}(F,G)
+=H^q\mathcal{H}om^{\bullet}_{\cO_X}(F,G)$ is by definition the $q$-th
+cohomology sheaf of the derived inner hom.  It is not decomposed here.
+% Mathlib: not present, and no \mathlibok marker.  \Cref{def:pc-ext} already
+% records the reason: Mathlib has no declaration for a sheaf Ext, and no derived
+% inner hom of sheaves of modules for such a thing to be the cohomology of, so
+% neither the $E_2$-page of this spectral sequence nor the spectral sequence
+% itself has anything in Mathlib to be discharged by.
+\end{proof}
+
+% ---------------------------------------------------------------------------
+% Cited.
+\begin{lemma}[Ext sheaves are local and are computed by a finite locally free resolution]
+\label{lem:pc-ext-locally-free-resolution}
+Let $(X,\cO_X)$ be a ringed space and let $F,G$ be $\cO_X$-modules.
+\begin{enumerate}
+\item (Locality.)  For every open $U\subseteq X$ and every $q$,
+\[
+\mathcal{E}xt^{q}_{\cO_X}(F,G)\big|_U
+=\mathcal{E}xt^{q}_{\cO_U}\bigl(F|_U,\;G|_U\bigr).
+\]
+\item (Computation from a resolution of the \emph{first} argument.)  Let
+$r\ge0$ and let
+\[
+0\to\mathcal E^{-r}\to\cdots\to\mathcal E^{-1}\to\mathcal E^{0}\to F\to0
+\]
+be a resolution of $F$ in which every $\mathcal E^{-j}$ is a direct summand of
+a finite free $\cO_X$-module.  Then
+$R\mathcal{H}om_{\cO_X}(F,G)$ is represented by the Hom complex
+$\mathcal{H}om^{\bullet}_{\cO_X}(\mathcal E^\bullet,G)$, whose term in degree
+$n$ is $\mathcal{H}om_{\cO_X}(\mathcal E^{-n},G)$; hence
+\[
+\mathcal{E}xt^{q}_{\cO_X}(F,G)
+=H^{q}\Bigl(\mathcal{H}om^{\bullet}_{\cO_X}\bigl(\mathcal E^\bullet,G\bigr)\Bigr),
+\]
+and in particular $\mathcal{E}xt^{q}_{\cO_X}(F,G)=0$ for $q>r$.
+\end{enumerate}
+\uses{def:pc-scheme,def:pc-ext}
+% As for \Cref{lem:pc-local-to-global-ext}, the \uses above points a ringed-space
+% statement at \Cref{def:pc-scheme} deliberately, for the same reason and with the
+% same siblings as precedent; and \Cref{def:pc-ext} supplies the sheaf
+% $\mathcal{E}xt$ at ringed-space generality, so no scheme hypothesis is used.
+\end{lemma}
+\begin{proof}
+\uses{def:pc-ext}
+This is a cited external input.  Part~(1) is Cohomology of Sheaves,
+Section~20.42 (Internal hom in the derived category), Lemma~20.42.3
+(\stacksproject{08DL}): the construction of the derived inner hom commutes with
+restriction to opens, $R\mathcal{H}om_{\cO_U}(K|_U,L|_U)
+=R\mathcal{H}om_{\cO_X}(K,L)|_U$ for objects $K,L$ of $D(\cO_X)$.  Taking
+$q$-th cohomology sheaves, which commutes with restriction to an open because
+restriction is exact, turns this into the displayed equality.
+Part~(2) is Cohomology of Sheaves, Section~20.46 (Strictly perfect complexes),
+Lemma~20.46.9 (\stacksproject{08DM}): for a complex $\mathcal E^\bullet$ which
+is \emph{strictly perfect} --- all but finitely many terms zero, each term a
+direct summand of a finite free $\cO_X$-module, which is Definition~20.46.1
+(\stacksproject{08C4}) and is exactly the hypothesis above ---
+$R\mathcal{H}om_{\cO_X}(\mathcal E^\bullet,\mathcal F^\bullet)$ is represented
+by the Hom complex with terms
+$\bigoplus_{n=p+q}\mathcal{H}om_{\cO_X}(\mathcal E^{-q},\mathcal F^{p})$.
+Taking $\mathcal F^\bullet=G$ concentrated in degree $0$ leaves
+$\mathcal{H}om_{\cO_X}(\mathcal E^{-n},G)$ in degree $n$, and
+$\mathcal E^\bullet\to F$ being a resolution, $\mathcal E^\bullet$ and $F$ are
+the same object of $D(\cO_X)$; so the Hom complex represents
+$R\mathcal{H}om_{\cO_X}(F,G)$ and its $q$-th cohomology is
+$\mathcal{E}xt^{q}_{\cO_X}(F,G)$.  It vanishes in degrees $q>r$ because
+$\mathcal E^{-q}=0$ there.  It is not decomposed here.
+% Mathlib: not present, and no \mathlibok marker, for the reason recorded in
+% \Cref{def:pc-ext}: Mathlib has no declaration for a sheaf Ext and no derived
+% inner hom of sheaves of modules, so neither clause of this node has anything
+% there to be discharged by.
+\end{proof}
+
+% ---------------------------------------------------------------------------
 % Decomposed.
 \begin{theorem}[Serre duality for smooth projective curves]
 \label{thm:pc-serre-duality-curve}
@@ -5856,9 +6017,9 @@ the quotient gives \(H^{i}(\Hom^{\bullet}_{\mathcal A}(F,I^\bullet))
 % Decomposed.
 \begin{definition}[Extensions]
 \label{def:pc-ext}
-Let $\mathcal A$ be an abelian category (for a scheme $X$: the category
-of $\cO_X$-modules, or any abelian subcategory of it closed under the
-operations below) and let $F,G$ be objects of $\mathcal A$ and
+Let $\mathcal A$ be an abelian category (for a ringed space
+$(X,\cO_X)$: the category of $\cO_X$-modules, or any abelian
+subcategory of it closed under the operations below) and let $F,G$ be objects of $\mathcal A$ and
 $i\ge0$.  The \emph{$i$-th Ext group} is
 \[
 \operatorname{Ext}^{i}_{\mathcal A}(F,G)
@@ -5875,7 +6036,7 @@ cohomology of the complex computing $\mathbf R\Hom(F,G)$: this is
 the classical description via an injective resolution of $G$, and
 the identification of the two descriptions is
 \Cref{lem:pc-ext-injective-resolution}.  For sheaves on a
-scheme $X$ one writes $\operatorname{Ext}^{i}_{\cO_X}(-,-)$ (or
+ringed space $(X,\cO_X)$ one writes $\operatorname{Ext}^{i}_{\cO_X}(-,-)$ (or
 $\operatorname{Ext}^{i}_X(-,-)$) for the case
 $\mathcal A$ the category of $\cO_X$-modules, and
 \[
@@ -5884,6 +6045,14 @@ $\mathcal A$ the category of $\cO_X$-modules, and
 denotes the associated sheaf ($\mathcal{H}om^{\bullet}$ the derived
 inner hom of sheaves).
 \uses{def:pc-derived-category,lem:pc-ext-injective-resolution}
+% The $\cO_X$-notation of the last two displays is fixed here at ringed-space
+% generality, not scheme generality: that is the generality of the Stacks
+% definition of the Ext sheaf, both displayed formulas are verbatim correct
+% there, and the scheme case -- the only one used elsewhere in this chapter --
+% is an instance of it.  Two consumers need the wider reading:
+% \Cref{lem:pc-local-to-global-ext} and
+% \Cref{lem:pc-ext-locally-free-resolution} are both stated for a ringed space
+% and both point at the notation made here.
 % Mathlib: the four names cover the Ext group only.  CategoryTheory.Abelian.Ext
 % X Y n is the displayed definition: Ext.homEquiv identifies it with the shifted
 % homs from X to Y in the derived category, which is this node's own formula, and
