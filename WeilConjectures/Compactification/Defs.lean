@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 
@@ -28,6 +29,8 @@ We derive the properties of the morphisms involved in a compactification:
 - `Compactification.isProper_openImmersion`, `Compactification.isClosedImmersion_openImmersion`
   and `Compactification.isClopen_range_openImmersion`: if `f` is proper, then `i` is proper,
   hence a closed immersion with clopen range;
+- `Compactification.isNoetherian_Z`: the ambient scheme of a compactification of a morphism
+  to a Noetherian scheme is Noetherian;
 - `Compactification.ofIsProper`: a proper morphism is a compactification of itself.
 
 Finally, we define the class `AlgebraicGeometry.HasCompactification f`, asserting
@@ -105,6 +108,11 @@ theorem quasiCompact_openImmersion (hf : QuasiCompact f) : QuasiCompact c.i := b
 compactified morphism is. -/
 theorem quasiCompact_openImmersion_iff : QuasiCompact c.i ↔ QuasiCompact f :=
   ⟨c.quasiCompact, c.quasiCompact_openImmersion⟩
+
+/-- The ambient scheme of a compactification of a morphism to a Noetherian scheme is
+Noetherian, its structure morphism being proper. -/
+theorem isNoetherian_Z [IsNoetherian Y] : IsNoetherian c.Z :=
+  LocallyOfFiniteType.isNoetherian c.g
 
 /-- The open immersion into a compactification of a **proper** morphism is itself proper:
 `c.i` is proper as soon as `c.i ≫ c.g` is, because `c.g` is separated. -/

@@ -54,7 +54,11 @@ inclusion `U.ι` is scheme-theoretically dominant:
 - `AlgebraicGeometry.IsSchemeTheoreticallyDominant.preimage_ι_of_le`: if `f : X' ⟶ X`
   restricts to an isomorphism over `W`, the open `f ⁻¹ᵁ W` is scheme-theoretically
   dense in `X'` and `U ≤ W` is scheme-theoretically dense in `X`, then `f ⁻¹ᵁ U` is
-  scheme-theoretically dense in `X'`.
+  scheme-theoretically dense in `X'`;
+- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iso_comp_iff`: dominance is invariant
+  under precomposition with an isomorphism, whence
+  `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_opensRange_ι`: an open immersion is
+  scheme-theoretically dominant if and only if its open range is scheme-theoretically dense.
 -/
 
 @[expose] public section
@@ -245,21 +249,23 @@ theorem IsSchemeTheoreticallyDominant.preimage_ι_of_le (f : X' ⟶ X) {U W : X.
   rw [he]
   infer_instance
 
+/-- **Scheme-theoretic dominance is invariant under precomposition with an isomorphism**:
+isomorphisms are scheme-theoretically dominant and dominance is stable under composition, in
+both directions. -/
+theorem isSchemeTheoreticallyDominant_iso_comp_iff {X'' : Scheme.{u}} (e : X'' ≅ X')
+    (f : X' ⟶ X) :
+    IsSchemeTheoreticallyDominant (e.hom ≫ f) ↔ IsSchemeTheoreticallyDominant f := by
+  refine ⟨fun h ↦ ?_, fun h ↦ inferInstance⟩
+  rw [show f = e.inv ≫ e.hom ≫ f by rw [Iso.inv_hom_id_assoc]]
+  infer_instance
+
 /-- An open immersion is scheme-theoretically dominant if and only if its open range is
-scheme-theoretically dense. -/
-theorem isSchemeTheoreticallyDominant_iff_opensRange_ι {X Y : Scheme.{u}} (f : Y ⟶ X)
-    [IsOpenImmersion f] :
+scheme-theoretically dense: the two morphisms differ by the isomorphism
+`AlgebraicGeometry.Scheme.Hom.isoOpensRange` between their sources. -/
+theorem isSchemeTheoreticallyDominant_iff_opensRange_ι (f : X' ⟶ X) [IsOpenImmersion f] :
     IsSchemeTheoreticallyDominant f ↔ IsSchemeTheoreticallyDominant f.opensRange.ι := by
-  have he : inv f.isoOpensRange.hom ≫ f = f.opensRange.ι := by
-    rw [IsIso.inv_comp_eq, Scheme.Hom.isoOpensRange_hom_ι]
-  constructor
-  · intro h
-    have h' : IsSchemeTheoreticallyDominant (inv f.isoOpensRange.hom ≫ f) := inferInstance
-    rwa [he] at h'
-  · intro h
-    have h' : IsSchemeTheoreticallyDominant (f.isoOpensRange.hom ≫ f.opensRange.ι) :=
-      inferInstance
-    rwa [Scheme.Hom.isoOpensRange_hom_ι] at h'
+  have h := isSchemeTheoreticallyDominant_iso_comp_iff f.isoOpensRange f.opensRange.ι
+  rwa [Scheme.Hom.isoOpensRange_hom_ι] at h
 
 end Opens
 

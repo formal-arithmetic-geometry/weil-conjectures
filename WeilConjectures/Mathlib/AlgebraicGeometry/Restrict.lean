@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import WeilConjectures.Mathlib.Data.Set.Image
 
 /-!
 # Restrictions of morphisms of schemes along open immersions
@@ -16,11 +18,17 @@ We record:
   compatible open immersions;
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
   — membership and preimage formulas for the ranges of inclusions of opens;
-- the **lift of an open immersion along a partial isomorphism**
-  `AlgebraicGeometry.liftOfIsIsoRestrict`: if `π : T ⟶ X` is an isomorphism over the range of
-  an open immersion `j : Z ⟶ X`, then `j` lifts to an open immersion `Z ⟶ T` onto the inverse
-  image of the range of `j`, and any lift of `j` along `π` is this one
-  (`AlgebraicGeometry.eq_liftOfIsIsoRestrict`).
+- the **lift of an open immersion along a partial isomorphism**: if `π : T ⟶ X` is an
+  isomorphism over the range of an open immersion `j : Z ⟶ X`, then `j` lifts through `π`
+  (`AlgebraicGeometry.liftOfIsIsoRestrict`, built from
+  `AlgebraicGeometry.isoPreimageOpensRange`), and the resulting triangle is cartesian
+  (`AlgebraicGeometry.isPullback_liftOfIsIsoRestrict`). Everything else in the section is read
+  off that square: the lift is unique (`AlgebraicGeometry.eq_liftOfIsIsoRestrict`), hence any
+  morphism over `j` is an open immersion
+  (`AlgebraicGeometry.isOpenImmersion_of_comp_eq`) with range the full inverse image of the
+  range of `j` (`AlgebraicGeometry.range_eq_preimage_range_of_comp_eq` and
+  `AlgebraicGeometry.opensRange_eq_preimage_opensRange_of_comp_eq`), and it computes images as
+  inverse images (`AlgebraicGeometry.image_eq_preimage_image_of_comp_eq`).
 -/
 
 @[expose] public section
@@ -70,6 +78,13 @@ section LiftAlongPartialIso
 
 variable {T : Scheme.{u}} (π : T ⟶ X)
 
+/-- A morphism which is an isomorphism over an open `W` is an isomorphism over the range of
+the inclusion of `W`. -/
+instance isIso_morphismRestrict_opensRange_ι (W : X.Opens) [IsIso (π ∣_ W)] :
+    IsIso (π ∣_ W.ι.opensRange) := by
+  rw [Scheme.Opens.opensRange_ι]
+  infer_instance
+
 section
 
 variable (j : Z ⟶ X) [IsOpenImmersion j] [IsIso (π ∣_ j.opensRange)]
@@ -84,19 +99,19 @@ isomorphism over the range of an open immersion `j : Z ⟶ X`, then `j` lifts th
 inverse image of the range of `j`.
 
 ```
-        q
-   Z ───────→ T
-    ╲         │
-   j ╲        │ π       q ≫ π = j, with π an isomorphism over the range of j
-      ↘       ↓
-              X
+        liftOfIsIsoRestrict π j
+   Z ───────────────────────────→ T
+    ╲                             │
+   j ╲                            │ π
+      ↘                           ↓
+                                  X
 ```
 -/
 def liftOfIsIsoRestrict : Z ⟶ T :=
   (isoPreimageOpensRange π j).hom ≫ (π ⁻¹ᵁ j.opensRange).ι
 
-instance : IsOpenImmersion (liftOfIsIsoRestrict π j) := by
-  rw [liftOfIsIsoRestrict]
+instance isOpenImmersion_liftOfIsIsoRestrict : IsOpenImmersion (liftOfIsIsoRestrict π j) := by
+  delta liftOfIsIsoRestrict
   infer_instance
 
 @[reassoc (attr := simp)]
@@ -105,69 +120,86 @@ lemma liftOfIsIsoRestrict_comp : liftOfIsIsoRestrict π j ≫ π = j := by
     Category.assoc, Category.assoc, ← morphismRestrict_ι, IsIso.inv_hom_id_assoc,
     Scheme.Hom.isoOpensRange_hom_ι]
 
+/-- The lift of an open immersion along a partial isomorphism has as range the full inverse
+image of the range of the open immersion. -/
+@[simp]
+lemma opensRange_liftOfIsIsoRestrict :
+    (liftOfIsIsoRestrict π j).opensRange = π ⁻¹ᵁ j.opensRange := by
+  have hsurj : Function.Surjective ⇑(isoPreimageOpensRange π j).hom :=
+    (Scheme.homeoOfIso (isoPreimageOpensRange π j)).surjective
+  refine TopologicalSpace.Opens.ext ?_
+  rw [Scheme.Hom.coe_opensRange, liftOfIsIsoRestrict, Scheme.Hom.comp_base, TopCat.coe_comp,
+    Set.range_comp, hsurj.range_eq, Set.image_univ, Scheme.Opens.range_ι]
+
+/-- **The lift of an open immersion along a partial isomorphism is cartesian**: the triangle
+
+```
+        liftOfIsIsoRestrict π j
+   Z ───────────────────────────→ T
+    ╲                             │
+   j ╲                            │ π
+      ↘                           ↓
+                                  X
+```
+
+exhibits `Z` as the fibre product of `j` and `π`, since the lift is an open immersion whose
+range is the full inverse image of the range of `j`. -/
+theorem isPullback_liftOfIsIsoRestrict :
+    IsPullback (𝟙 Z) (liftOfIsIsoRestrict π j) j π :=
+  IsOpenImmersion.isPullback _ _ _ _
+    (by rw [liftOfIsIsoRestrict_comp, Category.id_comp])
+    (opensRange_liftOfIsIsoRestrict π j).symm
+
 end
 
 variable (q : Z ⟶ T) {j : Z ⟶ X} [IsOpenImmersion j] [IsIso (π ∣_ j.opensRange)]
 
 /-- **Uniqueness of the lift of an open immersion along a partial isomorphism**: any `q` with
-`q ≫ π = j` is the lift `liftOfIsIsoRestrict π j`. -/
-theorem eq_liftOfIsIsoRestrict (hq : q ≫ π = j) : q = liftOfIsIsoRestrict π j := by
-  have hqπ (z : Z) : π (q z) = j z := by rw [← Scheme.Hom.comp_apply, hq]
-  have hrange : Set.range q ⊆ ((π ⁻¹ᵁ j.opensRange : T.Opens) : Set T) := by
-    rintro - ⟨z, rfl⟩
-    exact ⟨z, (hqπ z).symm⟩
-  set q' : Z ⟶ (π ⁻¹ᵁ j.opensRange).toScheme :=
-    IsOpenImmersion.lift (π ⁻¹ᵁ j.opensRange).ι q (by rwa [Scheme.Opens.range_ι])
-  have hq' : q' ≫ (π ⁻¹ᵁ j.opensRange).ι = q := IsOpenImmersion.lift_fac _ _ _
-  have hfac : q' ≫ (π ∣_ j.opensRange) = j.isoOpensRange.hom := by
-    rw [← cancel_mono j.opensRange.ι, Category.assoc, morphismRestrict_ι, ← Category.assoc, hq',
-      hq, Scheme.Hom.isoOpensRange_hom_ι]
-  have hiso : q' = (isoPreimageOpensRange π j).hom := by
-    rw [isoPreimageOpensRange, Iso.trans_hom, Iso.symm_hom, asIso_inv, ← hfac, Category.assoc,
-      IsIso.hom_inv_id, Category.comp_id]
-  rw [← hq', hiso, liftOfIsIsoRestrict]
+`q ≫ π = j` is the lift `liftOfIsIsoRestrict π j`.
+
+```
+        q
+   Z ───────→ T
+    ╲         │
+   j ╲        │ π       q ≫ π = j, with π an isomorphism over the range of j
+      ↘       ↓
+              X
+```
+-/
+theorem eq_liftOfIsIsoRestrict (hq : q ≫ π = j) : q = liftOfIsIsoRestrict π j :=
+  (isPullback_liftOfIsIsoRestrict π j).eq_of_comp_eq hq
 
 /-- **A lift of an open immersion along a partial isomorphism is an open immersion**: if
 `q ≫ π = j` with `j` an open immersion and `π` an isomorphism over the range of `j`, then `q`
-is an open immersion. -/
+is an open immersion, being the unique lift `liftOfIsIsoRestrict π j` (see
+`AlgebraicGeometry.eq_liftOfIsIsoRestrict` for the triangle). -/
 theorem isOpenImmersion_of_comp_eq (hq : q ≫ π = j) : IsOpenImmersion q := by
   rw [eq_liftOfIsIsoRestrict π q hq]
   infer_instance
 
 /-- **The range of a lift of an open immersion along a partial isomorphism** is the full inverse
-image of the range of the open immersion. -/
+image of the range of the open immersion (see `AlgebraicGeometry.eq_liftOfIsIsoRestrict` for the
+triangle). -/
 theorem range_eq_preimage_range_of_comp_eq (hq : q ≫ π = j) :
     Set.range q = π ⁻¹' Set.range j := by
-  have hcoe : ⇑((isoPreimageOpensRange π j).hom ≫ (π ⁻¹ᵁ j.opensRange).ι) =
-      ⇑(π ⁻¹ᵁ j.opensRange).ι ∘ ⇑(isoPreimageOpensRange π j).hom :=
-    funext fun z ↦ Scheme.Hom.comp_apply _ _ _
-  have hsurj : Function.Surjective ⇑(isoPreimageOpensRange π j).hom :=
-    (Scheme.homeoOfIso (isoPreimageOpensRange π j)).surjective
-  rw [eq_liftOfIsIsoRestrict π q hq, liftOfIsIsoRestrict, hcoe, hsurj.range_comp,
-    Scheme.Opens.range_ι]
+  rw [eq_liftOfIsIsoRestrict π q hq, ← Scheme.Hom.coe_opensRange,
+    opensRange_liftOfIsIsoRestrict]
   simp
 
 /-- **The range of a lift of an open immersion along a partial isomorphism** is the full inverse
-image of the range of the open immersion, as opens. -/
-theorem opensRange_eq_preimage_of_comp_eq [IsOpenImmersion q] (hq : q ≫ π = j) :
+image of the range of the open immersion, as opens (see
+`AlgebraicGeometry.eq_liftOfIsIsoRestrict` for the triangle). -/
+theorem opensRange_eq_preimage_opensRange_of_comp_eq [IsOpenImmersion q] (hq : q ≫ π = j) :
     q.opensRange = π ⁻¹ᵁ j.opensRange :=
   TopologicalSpace.Opens.ext (by simpa using range_eq_preimage_range_of_comp_eq π q hq)
 
 /-- **A lift of an open immersion along a partial isomorphism computes images as preimages**:
 the image under `q` of a subset of `Z` is the full inverse image under `π` of its image
-under `j`. -/
+under `j` (see `AlgebraicGeometry.eq_liftOfIsIsoRestrict` for the triangle). -/
 theorem image_eq_preimage_image_of_comp_eq (hq : q ≫ π = j) (A : Set Z) :
-    q '' A = π ⁻¹' (j '' A) := by
-  have hqπ (z : Z) : π (q z) = j z := by rw [← Scheme.Hom.comp_apply, hq]
-  ext x
-  refine ⟨?_, ?_⟩
-  · rintro ⟨z, hz, rfl⟩
-    exact ⟨z, hz, (hqπ z).symm⟩
-  · rintro ⟨z, hz, hx⟩
-    obtain ⟨z', rfl⟩ : x ∈ Set.range q := by
-      rw [range_eq_preimage_range_of_comp_eq π q hq]
-      exact ⟨z, hx⟩
-    exact ⟨z', j.isOpenEmbedding.injective (hx.trans (hqπ z')) ▸ hz, rfl⟩
+    q '' A = π ⁻¹' (j '' A) :=
+  Set.image_eq_preimage_image (fun z ↦ by rw [← Scheme.Hom.comp_apply, hq])
+    j.isOpenEmbedding.injective (range_eq_preimage_range_of_comp_eq π q hq) A
 
 end LiftAlongPartialIso
 

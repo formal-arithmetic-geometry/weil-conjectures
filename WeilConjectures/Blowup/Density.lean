@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 
@@ -126,12 +127,9 @@ theorem isSchemeTheoreticallyDominant_preimage_ι [QuasiCompact U.ι]
 
 /-- The blown-up scheme of an admissible blow-up of a Noetherian scheme is
 Noetherian. -/
-theorem isNoetherian_blowup [IsNoetherian X] : IsNoetherian B.I.blowup := by
+theorem isNoetherian_blowup [IsNoetherian X] : IsNoetherian B.I.blowup :=
   have := B.isProper_blowupMap
-  have : IsLocallyNoetherian B.I.blowup :=
-    LocallyOfFiniteType.isLocallyNoetherian B.I.blowupMap
-  have : CompactSpace B.I.blowup := QuasiCompact.compactSpace_of_compactSpace B.I.blowupMap
-  exact ⟨⟩
+  LocallyOfFiniteType.isNoetherian B.I.blowupMap
 
 /-- **Topological density transports through an admissible blow-up**: the inverse
 image of a dense subset of a Noetherian scheme is dense in any admissible blow-up.

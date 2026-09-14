@@ -47,6 +47,8 @@ principalization theorem `Scheme.IdealSheafData.isInvertible_comap_blowupMap`
 
 - `AlgebraicGeometry.IsAdmissible.isIso_blowupMap_restrict`: a `U`-admissible blow-up
   is an isomorphism over `U` (blueprint: `lemma:nagata-admissible-blowup-over-open`);
+- `AlgebraicGeometry.IsAdmissible.mono`: a `U`-admissible blow-up is `W`-admissible for
+  every open `W ≤ U`;
 - `AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary` and its fully proved
   locally Noetherian instance
   `exists_admissibleBlowup_cartierBoundary_of_isLocallyNoetherian`: preparation of a
@@ -154,6 +156,16 @@ center (`Scheme.IdealSheafData.isProper_blowupMap`, blueprint
 admissibility. -/
 theorem isProper_blowupMap : IsProper B.I.blowupMap :=
   B.I.isProper_blowupMap fun U ↦ B.finiteType U le_top
+
+/-- **A `U`-admissible blow-up is `W`-admissible for any smaller open `W`**: the center is
+disjoint from `U`, hence from `W`. -/
+def mono {W : X.Opens} (h : W ≤ U) : IsAdmissible X W where
+  I := B.I
+  finiteType := B.finiteType
+  disjoint_support := B.disjoint_support.mono_left h
+
+@[simp]
+lemma mono_I {W : X.Opens} (h : W ≤ U) : (B.mono h).I = B.I := rfl
 
 /-- A `U`-admissible blow-up is an isomorphism over `U`: the blow-up complement
 theorem (`thm:nagata-global-blowup-complement`) applied to the disjointness of the

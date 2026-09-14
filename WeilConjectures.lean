@@ -36,6 +36,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.ClosedPoints
+public import WeilConjectures.Compactification.AdmissibleBlowup
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.CompactifiedProperExtension
 public import WeilConjectures.Compactification.Defs
@@ -149,9 +150,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
@@ -163,6 +164,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
@@ -179,6 +181,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
