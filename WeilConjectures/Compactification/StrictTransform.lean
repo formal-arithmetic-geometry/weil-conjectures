@@ -379,8 +379,9 @@ theorem ker_eq_ker_strictTransformMap {V : Scheme.{u}} (h : V ⟶ X) [QuasiCompa
   have hkrange : Set.range (k ≫ pullback.snd h.imageι π) ⊆ ((π ⁻¹ᵁ U : X'.Opens) : Set X') := by
     rw [hksnd, ← Scheme.Opens.range_ι]
     exact range_subset_range_preimage_ι π U h' (by rwa [hlift])
-  set m := (pullback.snd h.imageι π).liftPreimage (π ⁻¹ᵁ U) k hkrange
-  have hmfac : m ≫ L.ι = k := (pullback.snd h.imageι π).liftPreimage_ι (π ⁻¹ᵁ U) k hkrange
+  set m := IsOpenImmersion.lift L.ι k
+    (range_subset_range_preimage_ι (pullback.snd h.imageι π) (π ⁻¹ᵁ U) k hkrange)
+  have hmfac : m ≫ L.ι = k := IsOpenImmersion.lift_fac _ _ _
   -- The projection of the open locus to `SIm(h)` is a base change of the open immersion
   -- `U ⟶ X`, so `V` sits inside the open locus as a flat base change of `V ⟶ SIm(h)`,
   -- and scheme-theoretic dominance descends.
