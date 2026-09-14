@@ -185,10 +185,13 @@ claims no more than that comment does.
 % chapter, `tags/tags' for tag -> label): sections counted in order, and `theorem',
 % `proposition', `lemma', `definition', `example', `exercise', `situation', `remark',
 % `remarks' and `subsection' sharing one counter per section, as the Stacks preamble
-% declares them.  FIRING CONTROL: on the 257 sites of this chapter that carry BOTH a
+% declares them.  FIRING CONTROL: on the 258 sites of this chapter that carry BOTH a
 % three-part number AND an adjacent tag macro (number bound to tag only
 % across separators), the rebuilt number agrees with the tag's own statement at
-% 257 of 257, 0 disagreements.  Decoys planted at end of file, outside every block
+% 258 of 258, 0 disagreements.  (The 258th site is the "Lemma~31.23.11" beside
+% `067U' in \Cref{lem:pc-smooth-immersion-regular}, added after the sweep and read
+% off the Stacks source: chapter 31 Divisors, section 23 "Relative regular
+% immersions", item 11.)  Decoys planted at end of file, outside every block
 % measured below, all three fired: a right tag beside a wrong number (1), a right
 % section number beside a wrong title (1), and a section number that does not exist
 % (1); the real file reads 0 on each.
@@ -231,11 +234,15 @@ claims no more than that comment does.
 %       parse the macro; that is why fifteen tag sweeps went past both.
 %
 %   (c) TWO-PART REFERENCES -- "Section~29.35", "Chapter~44".  Never swept before.
-%       Population 89 section references (12 with an adjacent tag, 77 without) and 4
-%       bare chapter references.  ALL 93 name the right chapter and the right section
-%       or chapter number.  Of the 89, 71 carry a parenthetical section title and ALL
-%       71 REPRODUCE THE STACKS SECTION TITLE EXACTLY; 16 carry no title; 2 carry a
+%       Population 90 section references (12 with an adjacent tag, 78 without) and 4
+%       bare chapter references.  ALL 94 name the right chapter and the right section
+%       or chapter number.  Of the 90, 72 carry a parenthetical section title and ALL
+%       72 REPRODUCE THE STACKS SECTION TITLE EXACTLY; 16 carry no title; 2 carry a
 %       parenthesis that is a tag or a `\Cref', not a title claim.  RESIDUE 0.
+%       (The 90th, untagged and titled, is the "Divisors, Section~31.23 (Relative
+%       regular immersions)" added beside `067U' in
+%       \Cref{lem:pc-smooth-immersion-regular}; the section number and the title
+%       were read off the Stacks source.)
 %       Normalise whitespace before matching a chapter name: line-wrapped names such
 %       as "Morphisms of\n Schemes" are false mismatches, and the chapter correctly
 %       uses the Stacks SHORT names in cross-references ("Algebra" for Commutative
@@ -4534,6 +4541,27 @@ here.
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+% Ruling (attribution does not collapse the decomposition): clause (1) is
+% attributed to Divisors, Lemma 31.23.11 (`067U') in the statement, and the six
+% numbered steps are kept as they stand.  `067U' is proved in Stacks as the
+% special case of Divisors, Lemma 31.23.10 obtained from "smooth implies
+% syntomic", which is the route Steps 1--3 walk by hand, and Steps 4--5 add a
+% locally Noetherian detour that `067U', carrying no Noetherian hypothesis, does
+% not need.  The longer route is deliberate: it decomposes the assertion through
+% nodes this chapter owns -- \Cref{lem:pc-smooth-syntomic},
+% \Cref{lem:pc-flat-lci-syntomic}, \Cref{lem:pc-lci-immersion-koszul},
+% \Cref{lem:pc-finite-type-locally-noetherian} and
+% \Cref{lem:pc-regular-immersion-noetherian}, whose only consumer in the chapter
+% is this node -- and it ends in the unwound local form that clause (1) states
+% and `067U' does not.  Two consequences are recorded rather than left to be
+% rediscovered.  (i) The field is load-bearing for the chapter's route and not
+% for the tag: Step 4 uses $S=\Spec(k)$ to make $P$ locally Noetherian, so
+% Steps 1--5 do not generalise to the base $S$ at which `067U' holds, whereas
+% clause (1) as stated is over a field, which is all the endgoal needs.
+% (ii) Whether to collapse Steps 1--5 into the citation plus the unwinding of
+% Divisors, Definitions 31.22.1 and 31.21.2, retiring those five nodes, is left
+% open here: it would rewrite the \uses graph of this node and of five others,
+% which an attribution does not.
 \begin{lemma}[An immersion between smooth schemes over a field is a regular immersion]
 \label{lem:pc-smooth-immersion-regular}
 Let $k$ be a field and let $i:X\to P$ be an
@@ -4552,11 +4580,29 @@ $\mathcal C_{X/P}=\cI/\cI^2$ is a locally free $\cO_X$-module of rank
 $n-d$, and the neighbourhood $U$ in~(1) can be chosen with $c=n-d$.  That
 is, $i$ is a regular immersion \emph{of codimension $n-d$}.
 \end{enumerate}
+% Ruling: `067U' is cited bare in the statement and is NOT given a `% Cited.'
+% node of its own.  This chapter's test for a step is that the proof does not go
+% through without it, and the proof below consumes `067U' nowhere: it is
+% attribution for what clause (1) asserts, not an input to any step.  Same idiom
+% as the clause-(4) attribution of \Cref{lem:pc-degree-base-change} to `0AYY'.
+% The section is named here, against the chapter's commoner bare "Chapter,
+% Lemma~X.Y.Z" form, because `067U' sits in Divisors, Section 31.23, whereas
+% every other Divisors citation of this node is in Section 31.22 or 31.21.
+(Clause (1) is Divisors, Section~31.23 (Relative regular immersions),
+Lemma~31.23.11, \stacksproject{067U}, which states at a general base $S$
+that an immersion over $S$ between two schemes smooth over $S$ is a
+regular immersion.  The case $S=\Spec(k)$ gives the word ``regular
+immersion'' for $i$; Step~5 below unwinds that word into the explicit
+local condition that~(1) states, and so proves~(1).)
 \uses{def:pc-scheme,def:pc-morphism-conventions,def:pcb-scheme-conventions,def:pc-smooth-morphism,def:pc-dimension}
 \end{lemma}
 \begin{proof}
 \uses{def:pc-smooth-morphism,def:pc-kahler-differentials,lem:pc-conormal-sequence-smooth,lem:pc-omega-line-bundle,lem:pc-smooth-syntomic,lem:pc-flat-lci-syntomic,lem:pc-lci-immersion-koszul,lem:pc-finite-type-locally-noetherian,lem:pc-regular-immersion-noetherian,def:pc-regular-immersion,def:pc-regular-ideal-sheaf,lem:pc-regular-quasi-regular}
-No single Stacks tag states this; the proof is a chain of six steps.
+No single Stacks tag states both assertions.  Steps~1--5 prove
+assertion~(1): they re-derive from this chapter's own nodes the word
+``regular immersion'' that the tag cited in the statement gives, and
+unwind it into the explicit local condition that~(1) states.  Step~6
+proves the codimension of assertion~(2), which that tag does not state.
 Write $S=\Spec(k)$.
 
 \emph{Step 1: $X\to S$ is syntomic.}  Consumes the smoothness of $X$ over
