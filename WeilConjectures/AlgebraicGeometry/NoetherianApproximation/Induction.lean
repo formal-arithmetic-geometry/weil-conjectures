@@ -6,9 +6,9 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import Mathlib.Tactic.Algebraize
+public import Mathlib.Algebra.Algebra.Tower
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
@@ -18,9 +18,9 @@ The general case of absolute Noetherian approximation (Stacks Project Tag 01ZA) 
 by induction over a finite affine cover, extending an approximation of a quasi-compact
 open `U` of a quasi-separated scheme `X` across one more affine open `V` (Stacks Project
 Tag 07RN). The data of one induction step is bundled into
-`AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData`, and the index category
+`AlgebraicGeometry.Scheme.NoetherianApproximation.InductionData`, and the index category
 of the extended system is the category
-`AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData.Stage` of *stages*: a
+`AlgebraicGeometry.Scheme.NoetherianApproximation.InductionData.Stage` of *stages*: a
 stage consists of an index `j` of the approximation of `U`, lifts to the stage `j` of
 finitely many sections of `V` whose basic opens cover `W = U ⊓ V`, and a finitely
 generated `ℤ`-subalgebra `A` of the fiber product `Γ(X, V) ×_{Γ(W, 𝒪)} Γ(Wⱼ, 𝒪)` big
@@ -33,13 +33,13 @@ limit cone and the resulting approximation are in
 
 ## Main declarations
 
-* `AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData`: the setup of one
+* `AlgebraicGeometry.Scheme.NoetherianApproximation.InductionData`: the setup of one
   induction step.
-* `AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData.Stage`: a stage of the
+* `AlgebraicGeometry.Scheme.NoetherianApproximation.InductionData.Stage`: a stage of the
   extended system, and its category structure.
-* `AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData.Stage.isOpenImmersion_toSpec`:
+* `AlgebraicGeometry.Scheme.NoetherianApproximation.InductionData.Stage.isOpenImmersion_toSpec`:
   the morphism `Wⱼ ⟶ Spec A` attached to a stage is an open immersion (Tags 01Z7, 01Z9).
-* `AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData.stageIndex`: the functor
+* `AlgebraicGeometry.Scheme.NoetherianApproximation.InductionData.stageIndex`: the functor
   remembering the underlying index; it is initial, so limits over the system of the `Wⱼ`
   may be computed over the category of stages.
 
@@ -78,7 +78,7 @@ generators of `W = U ⊓ V` to sections at the stage `j`, and a finitely generat
 carrying a Noetherian approximation `N` and an affine open `V`; the intersection `U ⊓ V`
 is descended to a quasi-compact open `W₀` at a stage `i₀` of `N`, and is exhibited as a
 finite union of basic opens of sections `b l` of `V`. -/
-structure ExtensionData where
+structure InductionData where
   /-- The ambient scheme. -/
   X : Scheme.{u}
   /-- The ambient scheme is quasi-separated. -/
@@ -111,14 +111,14 @@ structure ExtensionData where
   /-- The basic opens of the chosen generators cover the intersection. -/
   inf_eq_iSup_basicOpen : U ⊓ V = ⨆ l, X.basicOpen (b l)
 
-namespace ExtensionData
+namespace InductionData
 
 attribute [instance] qs finite
 
-variable (E : ExtensionData.{u})
+variable (E : InductionData.{u})
 
 /-- Each chosen generator has its basic open inside the intersection. -/
-lemma basicOpen_b_le_inf (E : ExtensionData.{u}) (l : E.σ) : E.X.basicOpen (E.b l) ≤ E.U ⊓ E.V :=
+lemma basicOpen_b_le_inf (E : InductionData.{u}) (l : E.σ) : E.X.basicOpen (E.b l) ≤ E.U ⊓ E.V :=
   E.inf_eq_iSup_basicOpen ▸ le_iSup (fun l ↦ E.X.basicOpen (E.b l)) l
 
 /-- The limit cone of the approximation of `U`. -/
@@ -184,12 +184,12 @@ variable {E}
 /-- The fiber product `Γ(X, V) ×_{Γ(W, 𝒪)} Γ(Wⱼ, 𝒪)`, i.e. the pairs of
 sections agreeing on `W`, as a subalgebra of the product ring. The coefficient algebra of a
 stage at `j` is a finitely generated subalgebra of it. -/
-noncomputable def fiberProduct (E : ExtensionData.{u}) (j : Over E.i₀) :
+noncomputable def fiberProduct (E : InductionData.{u}) (j : Over E.i₀) :
     Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)) :=
   AlgHom.equalizer (E.resV.hom.comp (RingHom.fst _ _)).toIntAlgHom
     ((E.resLimit j).hom.comp (RingHom.snd _ _)).toIntAlgHom
 
-lemma mem_fiberProduct_iff (E : ExtensionData.{u}) {j : Over E.i₀}
+lemma mem_fiberProduct_iff (E : InductionData.{u}) {j : Over E.i₀}
     (p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)) :
     p ∈ E.fiberProduct j ↔ E.resV p.1 = E.resLimit j p.2 := Iff.rfl
 
@@ -283,7 +283,7 @@ instance : Category E.Stage where
 @[simp] lemma comp_base {T T' T'' : E.Stage} (f : T ⟶ T') (g : T' ⟶ T'') :
     (f ≫ g).base = f.base ≫ g.base := rfl
 
-@[ext] lemma Stage.hom_ext {E : ExtensionData.{u}} {T T' : E.Stage} {f g : T ⟶ T'}
+@[ext] lemma Stage.hom_ext {E : InductionData.{u}} {T T' : E.Stage} {f g : T ⟶ T'}
     (h : f.base = g.base) : f = g :=
   Stage.Hom.ext h
 
@@ -332,23 +332,35 @@ noncomputable def Stage.toSectionsRes (T : E.Stage) (l : E.σ) :
 @[simp] lemma Stage.toSectionsRes_apply (T : E.Stage) (l : E.σ) (a : ↥T.A) :
     (T.toSectionsRes l).hom a = ((E.WD.obj T.j).presheaf.map (homOfLE le_top).op).hom a.1.2 := rfl
 
+/-- The sections of `Wⱼ` over the basic open `Wⱼ(r l)` as an algebra over the coefficient
+algebra of the stage, via `Stage.toSectionsRes`. This is the algebra structure in which
+`Stage.isLocalization_away` is stated. -/
+noncomputable instance Stage.algebraSectionsRes (T : E.Stage) (l : E.σ) :
+    Algebra ↥T.A Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) :=
+  (T.toSectionsRes l).hom.toAlgebra
+
+@[simp] lemma Stage.algebraMap_apply (T : E.Stage) (l : E.σ) (a : ↥T.A) :
+    algebraMap ↥T.A Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) a =
+      (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 |_ (E.WD.obj T.j).basicOpen (T.r l) :=
+  rfl
+
 /-- The image of `W = U ⊓ V` in `X`. -/
-lemma opensRange_WUι_comp_Uι (E : ExtensionData.{u}) :
+lemma opensRange_WUι_comp_Uι (E : InductionData.{u}) :
     (E.WU.ι ≫ E.U.ι).opensRange = E.U ⊓ E.V := by
-  rw [Scheme.Hom.opensRange_comp, Scheme.Opens.opensRange_ι, ExtensionData.WU, E.hW₀,
+  rw [Scheme.Hom.opensRange_comp, Scheme.Opens.opensRange_ι, InductionData.WU, E.hW₀,
     Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
 
-lemma basicOpen_le_opensRange (E : ExtensionData.{u}) (l : E.σ) :
+lemma basicOpen_le_opensRange (E : InductionData.{u}) (l : E.σ) :
     E.X.basicOpen (E.b l) ≤ (E.WU.ι ≫ E.U.ι).opensRange :=
   (E.basicOpen_b_le_inf l).trans E.opensRange_WUι_comp_Uι.ge
 
 /-- Restricting a section of `V` to `X.basicOpen (b l)` and pulling back
 to `W` agrees with restricting the pullback to `W`. -/
-lemma res_app_eq_resV_res (E : ExtensionData.{u}) (l : E.σ) :
+lemma res_app_eq_resV_res (E : InductionData.{u}) (l : E.σ) :
     E.X.presheaf.map (homOfLE (E.X.basicOpen_le (E.b l))).op ≫
       (E.WU.ι ≫ E.U.ι).app (E.X.basicOpen (E.b l)) =
       E.resV ≫ E.WU.toScheme.presheaf.map (homOfLE le_top).op := by
-  simp only [ExtensionData.resV, Scheme.Hom.app_eq_appLE, Scheme.Hom.map_appLE,
+  simp only [InductionData.resV, Scheme.Hom.app_eq_appLE, Scheme.Hom.map_appLE,
     Scheme.Hom.appLE_map]
 
 /-- A section of `V` restricting to zero on `W` is annihilated by a power
@@ -368,52 +380,54 @@ lemma exists_pow_mul_eq_zero_of_resV_eq_zero (l : E.σ) {y : Γ(E.X, E.V)}
   rw [map_zero, ← CommRingCat.comp_apply, E.res_app_eq_resV_res l, CommRingCat.comp_apply, hy,
     map_zero]
 
-set_option maxHeartbeats 1600000 in
--- The defeq checks between `algebraMap`s of the two `Algebra` structures in scope and the
--- structure sheaf restriction maps are expensive on the opens diagram of the approximation.
+/-- Injectivity input for `Stage.isLocalization_away`: two elements of the coefficient
+algebra of a stage with the same restriction to the basic open `Wⱼ(r l)` become equal after
+multiplication by a power of the tautological element `(b l, r l)`. On the `Wⱼ`-component
+this is the qcqs lemma on `Wⱼ`, and on the `V`-component it is
+`exists_pow_mul_eq_zero_of_resV_eq_zero`. -/
+lemma Stage.exists_pow_gen_mul_eq (T : E.Stage) (l : E.σ) {a a' : ↥T.A}
+    (hd : algebraMap ↥T.A Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) a =
+      algebraMap ↥T.A Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) a') :
+    ∃ c : Submonoid.powers (T.gen l), (c : ↥T.A) * a = (c : ↥T.A) * a' := by
+  -- The second components agree after multiplication by a power of `r l`.
+  have hres : (a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 |_ (E.WD.obj T.j).basicOpen (T.r l) =
+      (a' : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 |_ (E.WD.obj T.j).basicOpen (T.r l) := hd
+  obtain ⟨k, hk⟩ := exists_of_res_eq_of_qcqs_of_top hres
+  have hk' : T.r l ^ k * ((a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).2 - a'.1.2) = 0 := by
+    rw [mul_sub, sub_eq_zero]
+    exact hk
+  -- Push down to the intersection `W` and cancel the first components there.
+  have hV0 : E.resV (E.b l ^ k * ((a : Γ(E.X, E.V) × Γ(E.WD.obj T.j, ⊤)).1 - a'.1.1)) = 0 := by
+    have ht := congrArg (E.resLimit T.j) hk'
+    rw [map_mul, map_pow, map_zero, T.hr] at ht
+    rw [map_mul, map_pow, map_sub, T.resV_eq_resLimit_of_mem a.2,
+      T.resV_eq_resLimit_of_mem a'.2, ← map_sub]
+    exact ht
+  obtain ⟨K, hK⟩ := E.exists_pow_mul_eq_zero_of_resV_eq_zero l hV0
+  refine ⟨⟨T.gen l ^ (K + k), K + k, rfl⟩, Subtype.ext (Prod.ext ?_ ?_)⟩
+  · simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, Stage.coe_gen, Prod.fst_mul,
+      Prod.pow_fst]
+    rw [← sub_eq_zero, ← mul_sub, pow_add, mul_assoc]
+    exact hK
+  · simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, Stage.coe_gen, Prod.snd_mul,
+      Prod.pow_snd]
+    rw [← sub_eq_zero, ← mul_sub, pow_add, mul_assoc, hk', mul_zero]
+
 /-- The sections over the basic open `Wⱼ(r l)` are the
 localization of the coefficient algebra of the stage away from the tautological element
-`(b l, r l)`. Surjectivity is the condition `hgen` of the stage; injectivity combines the
-qcqs lemma on `Wⱼ` with `exists_pow_mul_eq_zero_of_resV_eq_zero` on the `V`-component. -/
+`(b l, r l)`. Surjectivity is the condition `hgen` of the stage; injectivity is
+`Stage.exists_pow_gen_mul_eq`. -/
 @[stacks 01Z9]
 lemma Stage.isLocalization_away (T : E.Stage) (l : E.σ) :
-    letI := (T.toSectionsRes l).hom.toAlgebra
     IsLocalization.Away (T.gen l)
       Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := by
-  algebraize [(T.toSectionsRes l).hom]
-  have := isLocalization_basicOpen_of_qcqs (X := E.WD.obj T.j) (U := ⊤)
-    isCompact_univ isQuasiSeparated_univ (T.r l)
-  refine ⟨fun ⟨_, m, rfl⟩ ↦ ?_, fun z ↦ ?_, fun {a a'} hd ↦ ?_⟩
-  · simp only [RingHom.algebraMap_toAlgebra, map_pow]
-    refine IsUnit.pow _ ?_
-    exact RingedSpace.isUnit_res_basicOpen (E.WD.obj T.j).toRingedSpace (T.r l)
+  refine ⟨fun ⟨_, m, rfl⟩ ↦ ?_, fun z ↦ ?_, fun hd ↦ T.exists_pow_gen_mul_eq l hd⟩
+  · simp only [map_pow, Stage.algebraMap_apply, Stage.coe_gen]
+    exact (RingedSpace.isUnit_res_basicOpen (E.WD.obj T.j).toRingedSpace (T.r l)).pow m
   · obtain ⟨m, p, hp, hres⟩ := T.hgen l z
     refine ⟨(⟨p, hp⟩, ⟨T.gen l ^ m, m, rfl⟩), ?_⟩
-    simp only [RingHom.algebraMap_toAlgebra, map_pow]
+    simp only [map_pow, Stage.algebraMap_apply, Stage.coe_gen]
     exact hres.symm
-  · -- The second components agree after multiplication by a power of `r l`.
-    have hres : a.1.2 |_ (E.WD.obj T.j).basicOpen (T.r l) =
-        a'.1.2 |_ (E.WD.obj T.j).basicOpen (T.r l) := hd
-    obtain ⟨k, hk⟩ := exists_of_res_eq_of_qcqs_of_top hres
-    have hk' : T.r l ^ k * (a.1.2 - a'.1.2) = 0 := by
-      rw [mul_sub, sub_eq_zero]
-      exact hk
-    -- Push down to the intersection `W` and cancel the first components there.
-    have hV0 : E.resV (E.b l ^ k * (a.1.1 - a'.1.1)) = 0 := by
-      have ht := congrArg (E.resLimit T.j) hk'
-      rw [map_mul, map_pow, map_zero, T.hr] at ht
-      rw [map_mul, map_pow, map_sub, T.resV_eq_resLimit_of_mem a.2,
-        T.resV_eq_resLimit_of_mem a'.2, ← map_sub]
-      exact ht
-    obtain ⟨K, hK⟩ := E.exists_pow_mul_eq_zero_of_resV_eq_zero l hV0
-    refine ⟨⟨T.gen l ^ (K + k), K + k, rfl⟩, Subtype.ext (Prod.ext ?_ ?_)⟩
-    · simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, Stage.coe_gen, Prod.fst_mul,
-        Prod.pow_fst]
-      rw [← sub_eq_zero, ← mul_sub, pow_add, mul_assoc]
-      exact hK
-    · simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, Stage.coe_gen, Prod.snd_mul,
-        Prod.pow_snd]
-      rw [← sub_eq_zero, ← mul_sub, pow_add, mul_assoc, hk', mul_zero]
 
 /-- The heart of Stacks 07RN (via Tags 01Z7 and 01Z9): the morphism from
 `Wⱼ` to the spectrum of the coefficient algebra of a stage is an open immersion. -/
@@ -432,9 +446,7 @@ instance Stage.isOpenImmersion_toSpec (T : E.Stage) : IsOpenImmersion T.toSpec :
     rw [Stage.toSpec, ← Category.assoc, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top,
       Category.assoc, ← Spec.map_comp, Stage.toSectionsRes]
   rw [e]
-  algebraize [(T.toSectionsRes l).hom]
-  have : IsLocalization.Away (T.gen l)
-      Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := T.isLocalization_away l
+  have := T.isLocalization_away l
   exact MorphismProperty.comp_mem _ (T.haff l).isoSpec.hom _ inferInstance
     (IsOpenImmersion.of_isLocalization (T.gen l))
 
@@ -453,9 +465,7 @@ lemma Stage.opensRange_toSpec (T : E.Stage) :
         ((E.WD.obj T.j).basicOpen (T.r l)).toSpecΓ ≫ Spec.map (T.toSectionsRes l) := by
       rw [Stage.toSpec, ← Category.assoc, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top,
         Category.assoc, ← Spec.map_comp, Stage.toSectionsRes]
-    algebraize [(T.toSectionsRes l).hom]
-    have : IsLocalization.Away (T.gen l)
-        Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := T.isLocalization_away l
+    have := T.isLocalization_away l
     have : IsIso (((E.WD.obj T.j).basicOpen (T.r l)).toSpecΓ) := by
       rw [← IsAffineOpen.isoSpec_hom (T.haff l)]
       infer_instance
@@ -488,13 +498,13 @@ these elements to any finitely generated subalgebra of the fiber product yields 
 
 /-- The basic open of `W` attached to a generator `b l` is the pullback of
 the basic open of `X` attached to it. -/
-lemma basicOpen_resV (E : ExtensionData.{u}) (l : E.σ) :
+lemma basicOpen_resV (E : InductionData.{u}) (l : E.σ) :
     E.Wc.pt.basicOpen (E.resV (E.b l)) =
       (E.WU.ι ≫ E.U.ι) ⁻¹ᵁ E.X.basicOpen (E.b l) := by
-  simp only [ExtensionData.resV, Scheme.basicOpen_appLE, top_inf_eq]
+  simp only [InductionData.resV, Scheme.basicOpen_appLE, top_inf_eq]
 
 /-- The basic opens of the chosen generators cover `W`. -/
-lemma iSup_basicOpen_resV (E : ExtensionData.{u}) :
+lemma iSup_basicOpen_resV (E : InductionData.{u}) :
     ⨆ l, E.Wc.pt.basicOpen (E.resV (E.b l)) = ⊤ := by
   simp_rw [E.basicOpen_resV]
   rw [← Scheme.Hom.preimage_iSup, ← E.inf_eq_iSup_basicOpen]
@@ -538,7 +548,7 @@ lemma restrict_basicOpen_resV_eq (l : E.σ) (x : Γ(E.Wc.pt, ⊤)) :
 power of `r l`, the restriction of the second component of an element of the fiber product
 `Γ(X, V) ×_{Γ(W)} Γ(Wⱼ)`. -/
 @[stacks 01Z7]
-lemma exists_mem_fiberProduct_res_eq_mul_pow (E : ExtensionData.{u}) {j : Over E.i₀}
+lemma exists_mem_fiberProduct_res_eq_mul_pow (E : InductionData.{u}) {j : Over E.i₀}
     {l : E.σ} {rl : Γ(E.WD.obj j, ⊤)} (hrl : E.resLimit j rl = E.resV (E.b l))
     (z : Γ(E.WD.obj j, (E.WD.obj j).basicOpen rl)) :
     ∃ (m : ℕ) (p : Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤)), p ∈ E.fiberProduct j ∧
@@ -707,7 +717,7 @@ lemma PreStage.exists_finset_hgen (P : E.PreStage) (l : E.σ) :
     exact hS (hs₀ ▸ Algebra.mem_top (R := ℤ) (x := z))
 
 /-- The finite subset of the fiber product chosen by
-`AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData.PreStage.exists_finset_hgen`:
+`AlgebraicGeometry.Scheme.NoetherianApproximation.InductionData.PreStage.exists_finset_hgen`:
 adjoining it to a subalgebra containing `(b l, r l)` makes the generation condition of a
 stage hold at `l`. -/
 noncomputable def PreStage.genFinset (P : E.PreStage) (l : E.σ) :
@@ -827,7 +837,7 @@ lemma exists_r (j₀ : Over E.i₀) :
     exact ⟨j', kj, E.res ki r₀, by
       rw [E.resLimit_res]
       exact hr₀.symm⟩
-  obtain ⟨j, k, h⟩ := exists_hom_forall (j₂ := j₀)
+  obtain ⟨j, k, h⟩ := exists_hom_forall_of_stableUnderPrecomp_of_forall_exists_hom (i := j₀)
     (fun j' _ l ↦ ∃ r, E.resLimit j' r = E.resV (E.b l))
     (fun {j j'} k' k l hl ↦ by
       obtain ⟨r, hr⟩ := hl
@@ -894,7 +904,7 @@ lemma exists_preStage_hom (j₀ : Over E.i₀) :
       exact (E.res_res (kj ≫ k) k'' _).symm
     rw [e, heq]
     exact (hO.preimage (E.WD.map ki)).preimage (E.WD.map k'')
-  obtain ⟨j₃, k₃, h₃⟩ := exists_hom_forall (j₂ := j₂)
+  obtain ⟨j₃, k₃, h₃⟩ := exists_hom_forall_of_stableUnderPrecomp_of_forall_exists_hom (i := j₂)
     (fun j' k l ↦ IsAffineOpen ((E.WD.obj j').basicOpen (E.res k (r₂ l))))
     (fun {j j'} k' k l hl ↦ by
       have e : (E.WD.obj j').basicOpen (E.res (k' ≫ k) (r₂ l)) =
@@ -915,7 +925,8 @@ common finer index. -/
 lemma exists_hom_res_eq {j₂ : Over E.i₀} (x y : E.σ → Γ(E.WD.obj j₂, ⊤))
     (h : ∀ l, E.resLimit j₂ (x l) = E.resLimit j₂ (y l)) :
     ∃ (j : Over E.i₀) (k : j ⟶ j₂), ∀ l, E.res k (x l) = E.res k (y l) := by
-  apply exists_hom_forall (fun j k l ↦ E.res k (x l) = E.res k (y l))
+  apply exists_hom_forall_of_stableUnderPrecomp_of_forall_exists_hom
+    (fun j k l ↦ E.res k (x l) = E.res k (y l))
   · intro j j' k' k l hl
     exact (E.res_res k k' _).symm.trans
       ((congrArg (fun z ↦ E.res k' z) hl).trans (E.res_res k k' _))
@@ -967,7 +978,7 @@ instance : E.stageIndex.Initial := by
     obtain ⟨j', k, hk⟩ := IsCofilteredOrEmpty.cone_maps s s'
     exact ⟨T.restrict k ⊥ bot_le Subalgebra.fg_bot, T.restrictHom _ _ _ _, by simpa using hk⟩
 
-end ExtensionData
+end InductionData
 
 end Scheme.NoetherianApproximation
 

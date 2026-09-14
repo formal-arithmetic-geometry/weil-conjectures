@@ -21,9 +21,9 @@ records the basic geometry of this pushout:
 ## Main results
 
 - the inclusions `pushout.inl`/`pushout.inr` are open immersions and are jointly
-  surjective (`AlgebraicGeometry.range_pushout_inl_union_range_pushout_inr`);
+  surjective (`AlgebraicGeometry.range_pushout_inl_union_range_inr`);
 - `CompactSpace` transfers from the two charts to the pushout;
-- `AlgebraicGeometry.IsZariskiLocalAtSource.pushout_desc`: a source-local property holds
+- `AlgebraicGeometry.IsZariskiLocalAtSource.pushoutDesc`: a source-local property holds
   for `pushout.desc h k w` as soon as it holds for `h` and `k`;
 - `AlgebraicGeometry.isPullback_pushout_map_inl_of_isPullback` and
   `AlgebraicGeometry.isPullback_pushout_map_inr_of_isPullback`: for a morphism of spans of
@@ -53,7 +53,7 @@ instance : IsOpenImmersion (pushout.inr f g) :=
   inferInstanceAs (IsOpenImmersion (colimit.ι (span f g) WalkingSpan.right))
 
 /-- The two charts of the pushout of two open immersions cover the pushout. -/
-lemma range_pushout_inl_union_range_pushout_inr :
+lemma range_pushout_inl_union_range_inr :
     Set.range (pushout.inl f g) ∪ Set.range (pushout.inr f g) = Set.univ := by
   rw [Set.eq_univ_iff_forall]
   intro x
@@ -71,19 +71,19 @@ lemma range_pushout_inl_union_range_pushout_inr :
 
 instance [CompactSpace X] [CompactSpace Y] : CompactSpace ↑(pushout f g) := by
   constructor
-  rw [← range_pushout_inl_union_range_pushout_inr f g]
+  rw [← range_pushout_inl_union_range_inr f g]
   exact (isCompact_range (pushout.inl f g).continuous).union
     (isCompact_range (pushout.inr f g).continuous)
 
 /-- The two charts `X` and `Y` as an open cover of the pushout `X ⊔_U Y`. -/
 @[simps! I₀ X f]
-def IsOpenImmersion.pushoutCover : (pushout f g).OpenCover :=
+def Scheme.pushoutCover : (pushout f g).OpenCover :=
   Scheme.Cover.mkOfCovers WalkingPair (fun j ↦ WalkingPair.casesOn j X Y)
     (fun j ↦ WalkingPair.casesOn j (pushout.inl f g) (pushout.inr f g))
     (fun x ↦ by
       obtain ⟨y, hy⟩ | ⟨y, hy⟩ :
           x ∈ Set.range (pushout.inl f g) ∪ Set.range (pushout.inr f g) :=
-        (range_pushout_inl_union_range_pushout_inr f g).ge (Set.mem_univ x)
+        (range_pushout_inl_union_range_inr f g).ge (Set.mem_univ x)
       exacts [⟨WalkingPair.left, y, hy⟩, ⟨WalkingPair.right, y, hy⟩])
     (fun j ↦ by cases j <;> infer_instance)
 
@@ -99,14 +99,14 @@ for the glued morphism `pushout.desc h k w : X ⊔_U Y ⟶ S`:
           ──▶  S  ◀──
 ```
 -/
-lemma IsZariskiLocalAtSource.pushout_desc {P : MorphismProperty Scheme.{u}}
+lemma IsZariskiLocalAtSource.pushoutDesc {P : MorphismProperty Scheme.{u}}
     [IsZariskiLocalAtSource P] {S : Scheme.{u}} {h : X ⟶ S} {k : Y ⟶ S}
     (w : f ≫ h = g ≫ k) (hh : P h) (hk : P k) : P (pushout.desc h k w) := by
-  rw [IsZariskiLocalAtSource.iff_of_openCover (P := P) (IsOpenImmersion.pushoutCover f g)]
+  rw [IsZariskiLocalAtSource.iff_of_openCover (P := P) (Scheme.pushoutCover f g)]
   intro i
   cases i with
-  | left => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inl_desc] using hh
-  | right => simpa only [IsOpenImmersion.pushoutCover_f, pushout.inr_desc] using hk
+  | left => simpa only [Scheme.pushoutCover_f, pushout.inl_desc] using hh
+  | right => simpa only [Scheme.pushoutCover_f, pushout.inr_desc] using hk
 
 section PointsAndMap
 
@@ -137,12 +137,12 @@ lemma pushout_inl_eq_inr_iff (x : X) (y : Y) :
     exact ⟨WalkingSpan.zero, WalkingSpan.Hom.fst, WalkingSpan.Hom.snd, u, hx, hy⟩
 
 /-- The two charts of the pushout of two open immersions cover it. -/
-lemma opensRange_pushout_inl_sup_opensRange_pushout_inr :
+lemma opensRange_pushout_inl_sup_opensRange_inr :
     (pushout.inl f g).opensRange ⊔ (pushout.inr f g).opensRange = ⊤ := by
   rw [eq_top_iff]
   rintro x -
   rw [TopologicalSpace.Opens.mem_sup]
-  exact Set.eq_univ_iff_forall.mp (range_pushout_inl_union_range_pushout_inr f g) x
+  exact Set.eq_univ_iff_forall.mp (range_pushout_inl_union_range_inr f g) x
 
 /-- The preimage of the chart `Y` under the chart `X` of the pushout `X ⊔_U Y` is the
 image of `U` in `X`. -/
@@ -170,7 +170,7 @@ lemma pushout_map_preimage_opensRange_inl_of_isPullback (H : IsPullback γ g' g 
   apply le_antisymm
   · rintro p hp
     have : p ∈ (pushout.inl f' g').opensRange ⊔ (pushout.inr f' g').opensRange := by
-      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]
+      rw [opensRange_pushout_inl_sup_opensRange_inr]
       trivial
     obtain (hmem | ⟨z', rfl⟩) := this
     · exact hmem
@@ -216,7 +216,7 @@ lemma pushout_map_preimage_opensRange_inr_of_isPullback (H : IsPullback γ f' f 
   apply le_antisymm
   · rintro p hp
     have : p ∈ (pushout.inl f' g').opensRange ⊔ (pushout.inr f' g').opensRange := by
-      rw [opensRange_pushout_inl_sup_opensRange_pushout_inr]
+      rw [opensRange_pushout_inl_sup_opensRange_inr]
       trivial
     obtain (⟨y', rfl⟩ | hmem) := this
     · replace hp : (pushout.inl f' g' ≫ pushout.map f' g' f g α β γ hf.symm hg.symm) y' ∈

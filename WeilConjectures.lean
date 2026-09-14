@@ -1,8 +1,9 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
+public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Defs
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Extension
-public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Stage
+public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Induction
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
