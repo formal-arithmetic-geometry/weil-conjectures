@@ -35,6 +35,7 @@ braided; the Picard group is then the group of units of that commutative monoid.
 
 - `SheafOfModules.invertible_iff_exists`: `M` is invertible if and only if there exists `N` such
   that `M ⊗ N` is isomorphic to the tensor unit.
+- `SheafOfModules.invertible_iff_isUnit`: unfolding lemma for `SheafOfModules.Invertible`.
 - `SheafOfModules.Invertible.tensorObj` and `SheafOfModules.Invertible.tensorPow`: a tensor
   product and a tensor power of invertible sheaves of modules are invertible.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`: two invertible `𝒪ₓ`-modules have the same class
@@ -68,6 +69,9 @@ protected def Invertible
 
 variable {M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
 
+/-- `SheafOfModules.Invertible` unfolds to the invertibility of the class in the skeleton. -/
+theorem invertible_iff_isUnit : M.Invertible ↔ IsUnit (toSkeleton M) := Iff.rfl
+
 /-- A sheaf of modules is invertible if and only if it admits a tensor inverse. -/
 theorem invertible_iff_exists : M.Invertible ↔ ∃ N, Nonempty (M ⊗ N ≅ 𝟙_ _) := by
   constructor
@@ -84,8 +88,7 @@ theorem invertible_iff_exists : M.Invertible ↔ ∃ N, Nonempty (M ⊗ N ≅ �
 
 /-- Invertibility is invariant under isomorphism. -/
 theorem Invertible.of_iso (hM : M.Invertible) (e : M ≅ N) : N.Invertible := by
-  change IsUnit (toSkeleton N)
-  rw [← congr_toSkeleton_of_iso e]
+  rw [invertible_iff_isUnit, ← congr_toSkeleton_of_iso e]
   exact hM
 
 /-- Isomorphic sheaves of modules are invertible together. -/
@@ -117,8 +120,7 @@ theorem invertible_unit :
 /-- A tensor product of invertible sheaves of modules is invertible. -/
 theorem Invertible.tensorObj (hM : M.Invertible) (hN : N.Invertible) :
     SheafOfModules.Invertible (M ⊗ N) := by
-  change IsUnit (toSkeleton (M ⊗ N))
-  rw [Skeleton.toSkeleton_tensorObj]
+  rw [invertible_iff_isUnit, Skeleton.toSkeleton_tensorObj]
   exact IsUnit.mul hM hN
 
 /-- A tensor power of an invertible sheaf of modules is invertible. -/
