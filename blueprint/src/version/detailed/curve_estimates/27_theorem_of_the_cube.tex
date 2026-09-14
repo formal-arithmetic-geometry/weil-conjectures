@@ -397,16 +397,17 @@ chapter.
 
 \begin{lemma}[Global sections of a proper variety]
 \label{lem:cube-global-sections}
-\lean{AlgebraicGeometry.isField_of_universallyClosed,
-AlgebraicGeometry.finite_appTop_of_universallyClosed}
+\lean{AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_appTop}
+\leanok
 Let $X$ be a proper integral scheme over the algebraically closed field $k$
 --- in particular, a proper variety over $k$.  Then the structure map
 $k\to\Gamma(X,\O_X)$ is an isomorphism; that is, $\Gamma(X,\O_X)=k$ and
 $\dim_k\Gamma(X,\O_X)=1$.
 \end{lemma}
 \begin{proof}
-This needs nothing from \Cref{sec:cube-inputs}: it is already available in
-Mathlib \texttt{v4.33.1}, in
+\leanok
+This needs nothing from \Cref{sec:cube-inputs}: the two ingredients are
+already available in Mathlib \texttt{v4.33.1}, in
 \texttt{Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}.  There,
 \texttt{AlgebraicGeometry.isField\_of\_universallyClosed} says that for a
 field $K$ and an integral scheme $X$ universally closed over $\Spec K$ the
@@ -416,7 +417,9 @@ moreover the structure morphism is locally of finite type then
 $K\to\Gamma(X,\O_X)$ is finite.  A proper morphism is universally closed and
 locally of finite type, so together, applied with $K=k$, they make
 $\Gamma(X,\O_X)$ a finite field extension of $k$; since $k$ is algebraically
-closed, that extension is trivial.
+closed, that extension is trivial.  The statement of this lemma --- that the
+structure map is an isomorphism --- is assembled from them in
+\texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}.
 
 The classical argument is the same one written out by hand: $\Gamma(X,\O_X)$
 is a finite-dimensional $k$-algebra, a subring of the function field of the
@@ -490,6 +493,8 @@ statement is \stacksproject{0BUG}, part (8); see also \stacksproject{0FD2}.
 
 \begin{lemma}[Global sections after a base change of the ground field]
 \label{lem:cube-global-sections-base-change}
+\lean{AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_snd_appTop}
+\leanok
 Let $X$ be a proper variety over $k$ and let $A$ be a $k$-algebra.  Then the
 structure map is an isomorphism
 \[
@@ -498,12 +503,40 @@ structure map is an isomorphism
 \end{lemma}
 \begin{proof}
 \uses{lem:cube-global-sections, prop:cube-global-sections-flat-base-change}
+\leanok
 Every $k$-algebra is flat over the field $k$, and $X$ is quasi-compact and
 separated, so \Cref{prop:cube-global-sections-flat-base-change} identifies
 $\Gamma(X\times_k\Spec A,\O)$ with $\Gamma(X,\O_X)\otimes_kA$.  By
 \Cref{lem:cube-global-sections} that is $k\otimes_kA=A$, and the resulting
 isomorphism is the structure map.  Only the case of a finite-dimensional local
 $k$-algebra $A$ with residue field $k$ is used below.
+\end{proof}
+
+\begin{lemma}[Units of the infinitesimal thickenings of a proper variety]
+\label{lem:cube-thickening-units}
+\lean{AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective}
+\leanok
+Let $X$ be a proper variety over $k$, let $Z$ be a $k$-scheme and let $t\in Z$.
+Put $A_n:=\O_{Z,t}/\m_t^{n+1}$ and $Z_n:=\Spec A_n$.  Then for every $n\in\N$
+the restriction map on units
+\[
+  \Gamma\bigl((X\times_kZ)\times_ZZ_{n+1},\O\bigr)^\times
+  \;\twoheadrightarrow\;
+  \Gamma\bigl((X\times_kZ)\times_ZZ_n,\O\bigr)^\times
+\]
+is surjective.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-global-sections-base-change}
+\leanok
+Pasting the two cartesian squares identifies $(X\times_kZ)\times_ZZ_n$ with
+$X\times_k\Spec A_n$, so \Cref{lem:cube-global-sections-base-change} gives
+$\Gamma\bigl((X\times_kZ)\times_ZZ_n,\O\bigr)=A_n$, and likewise in degree
+$n+1$; under these identifications the restriction map is the quotient map
+$A_{n+1}\to A_n$.  That map is surjective, and $A_{n+1}$ is a local ring whose
+maximal ideal is the preimage of the maximal ideal of $A_n$, so any lift of a
+unit of $A_n$ lies outside the maximal ideal of $A_{n+1}$ and is therefore a
+unit.  Neither $Z$ noetherian nor $t$ rational is needed.
 \end{proof}
 
 \begin{remark}[Where the general field is and is not needed]
@@ -531,20 +564,34 @@ needs no cohomology.
 
 \begin{lemma}[Sections of a trivial line bundle on a proper variety]
 \label{lem:cube-nowhere-vanishing}
+\lean{AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit_of_isAlgClosed,
+AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_universallyClosed}
+\leanok
 Let $X$ be a proper integral scheme over $k$ and let $L$ be a trivial line
-bundle on $X$.  Then $\dim_k\Gamma(X,L)=1$, and every non-zero global section
-$s\in\Gamma(X,L)$ generates $L$ at every point of $X$; equivalently, the image
-of $s$ in the fibre $L(x)$ is non-zero for every $x\in X$.
+bundle on $X$.  Then $\dim_k\Gamma(X,L)=1$, and for every non-zero global
+section $s\in\Gamma(X,L)$ and every $x\in X$ the image of $s$ in the fibre
+$L(x)$ is non-zero.
+
+Two refinements are worth recording.  The second assertion uses only that
+$\Gamma(X,\O_X)$ is a field, so it holds over an arbitrary field $K$ in place
+of $k$, and indeed for $X$ merely universally closed over $K$; this is the
+form \Cref{lem:cube-triviality-criterion} needs, where it is applied over the
+residue field $\kappa(t)$ of a point of the base, which is not algebraically
+closed.  And the second assertion is equivalent to saying that $s$ generates
+$L$ at every point of $X$, but that equivalence needs a local trivialisation
+of $L$ at $x$, the same ingredient that \Cref{lem:cube-degeneracy-closed} and
+\Cref{lem:cube-invertible-fibrewise} rest on; it is not proved here.
 \end{lemma}
 \begin{proof}
 \uses{lem:cube-global-sections}
+\leanok
 Both assertions are invariant under isomorphism of line bundles, so we may
 choose an isomorphism $L\cong\O_X$ and assume $L=\O_X$.  Then
 $\Gamma(X,L)=\Gamma(X,\O_X)=k$ by \Cref{lem:cube-global-sections}, which gives
 the dimension.  A non-zero section is then a non-zero element $c\in k$, hence
-a unit of $\Gamma(X,\O_X)$ and so a unit in every local ring $\O_{X,x}$; a
-unit generates $\O_{X,x}$ as a module over itself, and its image in
-$\O_{X,x}/\m_x=\kappa(x)$ is non-zero.
+a unit of $\Gamma(X,\O_X)$, and its image in $\kappa(x)$ under the evaluation
+map $\Gamma(X,\O_X)\to\kappa(x)$ is again a unit, hence non-zero; the fibre
+$\O_X(x)$ is $\kappa(x)$.
 \end{proof}
 
 \section{Rigidity}\label{sec:cube-rigidity}
@@ -1344,6 +1391,7 @@ than a piece of mathematics, and it is stated only to name the standing facts.
 
 \begin{lemma}[Triviality over the infinitesimal neighbourhoods]
 \label{lem:cube-thickening-trivial}
+\lean{AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one}
 Let $X$ and $Y$ be proper varieties over $k$, let $x_0\in X(k)$ and
 $y_0\in Y(k)$, let $Z$ be a noetherian $k$-scheme and let $z_0\in Z(k)$.  Let
 $L$ be a line bundle on $X\times Y\times Z$ whose restrictions to
@@ -1356,10 +1404,26 @@ are all trivial.  For $n\in\N$ put
 $Z_n:=\Spec\bigl(\O_{Z,z_0}/\m_{z_0}^{n+1}\bigr)$, with its canonical morphism
 $Z_n\to Z$.  Then the pullback of $L$ to $(X\times Y)\times Z_n$ is trivial for
 every $n\in\N$.
+\openobligation{AlgebraicGeometry: the Lean declaration tagged above proves the
+induction of this lemma over an arbitrary base scheme, and carries as
+hypotheses the two places where properness, the variety hypothesis,
+noetherianness and the base field enter.  The first of them, that
+$\Gamma(X\times Z_{n+1},\O)^\times\to\Gamma(X\times Z_n,\O)^\times$ is
+surjective and likewise for $Y$, is \Cref{lem:cube-thickening-units} and is
+now discharged: the Lean corollary that fills it in over a field is
+\texttt{Pic.map\_infinitesimalBaseChangeFst\_pullbackMapSliceInclusion\_eq\_one\_of\_isProper}
+in the namespace \texttt{AlgebraicGeometry.Scheme}.  What remains is the
+second: that a deformation class on $(X\times Y)\times Z_{n+1}$ restricting to
+zero on both slices is zero, which is \texttt{prop:cube-kunneth-h1} together
+with the identification of the ideal of the thickening with
+$\O_{X\times Y}\otimes_k\m_{z_0}^{n+1}/\m_{z_0}^{n+2}$ and the invariance of
+$H^1$ under pushforward along
+$(X\times Y)\times Z_0\hookrightarrow(X\times Y)\times Z_{n+1}$.}
 \end{lemma}
 \begin{proof}
 \uses{prop:cube-picard-square-zero, prop:cube-kunneth-h1,
-lem:cube-global-sections-base-change, lem:cube-product-variety}
+lem:cube-global-sections-base-change, lem:cube-thickening-units,
+lem:cube-product-variety}
 Write $W:=X\times Y$, a proper variety over $k$ by
 \Cref{lem:cube-product-variety}, and put
 $A_n:=\O_{Z,z_0}/\m_{z_0}^{n+1}$, a local $k$-algebra which is
@@ -1394,38 +1458,36 @@ immersion $W\times Z_0\hookrightarrow W\times Z_{n-1}$, which is exact, and
 the cohomology of a finite direct sum of copies of $\O_W$ is the direct sum
 of the cohomologies, $I_n$ being a finite-dimensional $k$-vector space.
 
-Apply \Cref{prop:cube-picard-square-zero}(1) to this thickening.  Its first map
-is
+Apply \Cref{prop:cube-picard-square-zero}(1) to this thickening.  All that is
+needed of it here is exactness of
 \[
-  \Gamma\bigl(W\times Z_n,\O^\times\bigr)\longrightarrow
-  \Gamma\bigl(W\times Z_{n-1},\O^\times\bigr),
-\]
-which by \Cref{lem:cube-global-sections-base-change} is the map
-$A_n^\times\to A_{n-1}^\times$ induced by the surjection $A_n\to A_{n-1}$ ---
-the global sections of the sheaf of units being the units of the ring of global
-sections; and
-that map is surjective, because a preimage in $A_n$ of a unit of $A_{n-1}$ lies
-outside the maximal ideal of the local ring $A_n$ and is therefore itself a
-unit.  Exactness at the second term then makes the third map injective, so
-\[
-  0\longrightarrow H^1(W,\O_W)\otimes_kI_n\longrightarrow
+  H^1(W,\O_W)\otimes_kI_n\longrightarrow
   \mathrm{Pic}(W\times Z_n)\longrightarrow\mathrm{Pic}(W\times Z_{n-1})
 \]
-is exact.  The restriction of $L^{(n)}$ to $W\times Z_{n-1}$ is $L^{(n-1)}$,
-since $Z_{n-1}\to Z$ factors through $Z_n\to Z$; by the induction hypothesis it
-is trivial, so the class of $L^{(n)}$ dies in $\mathrm{Pic}(W\times Z_{n-1})$
-and there is a unique
+at the middle term.  The restriction of $L^{(n)}$ to $W\times Z_{n-1}$ is
+$L^{(n-1)}$, since $Z_{n-1}\to Z$ factors through $Z_n\to Z$; by the induction
+hypothesis it is trivial, so the class of $L^{(n)}$ dies in
+$\mathrm{Pic}(W\times Z_{n-1})$ and we may choose some
 \[
   \alpha\in H^1(W,\O_W)\otimes_kI_n
 \]
-whose image in $\mathrm{Pic}(W\times Z_n)$ is the class of $L^{(n)}$.
+whose image in $\mathrm{Pic}(W\times Z_n)$ is the class of $L^{(n)}$.  No
+uniqueness of $\alpha$ is needed, so
+\Cref{lem:cube-global-sections-base-change} is not applied to $W$ itself, only
+to the two slices below.
 
 Now compare with the two slices.  The closed immersion
 $X\times Z_{n-1}\hookrightarrow X\times Z_n$ is again a square-zero thickening
 with ideal $\O_X\otimes_kI_n$, and $j_{y_0}\times\mathrm{id}$ carries the one
 into the other and pulls the ideal back onto the ideal.  Since $X$ is a proper
-variety, \Cref{lem:cube-global-sections-base-change} applies to it as well, so
-the same argument makes
+variety, \Cref{lem:cube-global-sections-base-change} identifies the first map of
+\Cref{prop:cube-picard-square-zero}(1) for this thickening with the map
+$A_n^\times\to A_{n-1}^\times$ induced by the surjection $A_n\to A_{n-1}$ ---
+the global sections of the sheaf of units being the units of the ring of global
+sections --- and that map is surjective, because a preimage in $A_n$ of a unit
+of $A_{n-1}$ lies outside the maximal ideal of the local ring $A_n$ and is
+therefore itself a unit.  Exactness at the second term then makes the third map
+injective, so
 \[
   0\longrightarrow H^1(X,\O_X)\otimes_kI_n\longrightarrow
   \mathrm{Pic}(X\times Z_n)\longrightarrow\mathrm{Pic}(X\times Z_{n-1})

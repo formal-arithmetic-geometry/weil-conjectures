@@ -144,4 +144,10 @@ lemma Hom.unitsMap_comp {Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (f ≫ g).unitsMap = f.unitsMap.comp g.unitsMap :=
   congrArg CommGrpCat.Hom.hom (unitsFunctor.map_comp g.op f.op)
 
+/-- An isomorphism of schemes induces a bijection on the units of the global sections, being
+the action of `AlgebraicGeometry.Scheme.unitsFunctor` on an isomorphism. -/
+lemma Hom.unitsMap_bijective {Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] :
+    Function.Bijective f.unitsMap :=
+  ConcreteCategory.bijective_of_isIso (unitsFunctor.map f.op)
+
 end AlgebraicGeometry.Scheme

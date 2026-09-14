@@ -107,6 +107,12 @@ lemma Pic.map_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
     Skeleton.monoidHom_comp, Units.map_comp]
 
 @[simp]
+lemma Pic.map_comp_apply {Z : Scheme.{u}} (g : Y ⟶ Z) (x : Z.Pic) :
+    Pic.map (f ≫ g) x = Pic.map f (Pic.map g x) := by
+  rw [Pic.map_comp]
+  rfl
+
+@[simp]
 lemma Pic.map_mk {M : Y.Modules} (hM : M.Invertible) :
     Pic.map f (Pic.mk M hM) = Pic.mk ((Modules.pullback f).obj M) (hM.pullback f) := by
   change Units.map (Skeleton.monoidHom (Modules.pullback f)) hM.unit = (hM.pullback f).unit

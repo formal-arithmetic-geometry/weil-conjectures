@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Skeleton
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
 # Invertible sheaves of modules and the Picard group
@@ -35,6 +36,8 @@ braided; the Picard group is then the group of units of that commutative monoid.
 - `SheafOfModules.invertible_iff_exists`: `M` is invertible if and only if there exists `N` such
   that `M ⊗ N` is isomorphic to the tensor unit.
 - `SheafOfModules.invertible_iff_isUnit`: unfolding lemma for `SheafOfModules.Invertible`.
+- `SheafOfModules.Invertible.tensorObj` and `SheafOfModules.Invertible.tensorPow`: a tensor
+  product and a tensor power of invertible sheaves of modules are invertible.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`: two invertible `𝒪ₓ`-modules have the same class
   in the Picard group of `X` if and only if they are isomorphic.
 
@@ -119,6 +122,11 @@ theorem Invertible.tensorObj (hM : M.Invertible) (hN : N.Invertible) :
     SheafOfModules.Invertible (M ⊗ N) := by
   rw [invertible_iff_isUnit, Skeleton.toSkeleton_tensorObj]
   exact IsUnit.mul hM hN
+
+/-- A tensor power of an invertible sheaf of modules is invertible. -/
+theorem Invertible.tensorPow (hM : M.Invertible) : ∀ n : ℕ, SheafOfModules.Invertible (M ^⊗ n)
+  | 0 => invertible_tensorUnit R
+  | n + 1 => (hM.tensorPow n).tensorObj hM
 
 variable (R) in
 /-- The Picard group of a sheaf of commutative rings `R` on a site: the group of isomorphism
