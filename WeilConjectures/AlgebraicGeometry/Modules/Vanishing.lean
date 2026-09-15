@@ -131,8 +131,8 @@ theorem exists_not_vanishesAt (F : X.Modules) (x : X) (hx : Nontrivial (F.preshe
     (hfin : Module.Finite (X.presheaf.stalk x) (F.presheaf.stalk x))
     (hgg : F.IsGloballyGeneratedAt x) :
     ∃ s : Γ(F, ⊤), ¬ F.VanishesAt s x := by
-  have := hx
-  have := hfin
+  have : Nontrivial (F.presheaf.stalk x) := hx
+  have : Module.Finite (X.presheaf.stalk x) (F.presheaf.stalk x) := hfin
   by_contra h
   push Not at h
   have hsub : Set.range (germₗ F (⟨x, trivial⟩ : (⊤ : X.Opens))) ≤
