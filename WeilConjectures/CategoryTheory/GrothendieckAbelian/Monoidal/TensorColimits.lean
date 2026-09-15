@@ -21,7 +21,14 @@ to interact well with the coproducts defining the tensor product of complexes an
 preservation of `ℤ`-indexed colimits in each variable — unfold to the statement that
 `tensorLeft X` or `tensorRight X` preserves a colimit of size `0`. This file proves the
 single instance they all follow from, for the monoidal structure of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`.
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`: that the étale sheaf
+category is monoidal closed.
+
+Nothing here is specific to the three graded-object conditions: closedness together with
+the braiding of `Defs` gives those in any monoidal category, which is what the sibling
+file `HasGoodTensor` records. What is left sheaf-specific below is the `ℤ`-indexed
+statement for `tensorRight`; for `tensorLeft` mathlib's `MonoidalClosed` instance already
+supplies it.
 
 The proof is Day's reflection theorem
 (`CategoryTheory.Monoidal.Reflective.monoidalClosed`), which makes
@@ -52,8 +59,8 @@ cartesian closed.
 
 - `AlgebraicGeometry.Etale.sheafMonoidalClosed`: the category of `A`-valued étale sheaves
   is monoidal closed.
-- `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`: tensoring on the
-  left with a fixed étale sheaf preserves colimits of size `0`.
+- `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorRight_sheaf`: tensoring on the
+  right with a fixed étale sheaf preserves colimits of size `0`.
 
 -/
 
@@ -89,16 +96,13 @@ noncomputable instance Etale.sheafMonoidalClosed :
     MonoidalClosed (Sheaf Y.smallEtaleTopology A) :=
   Monoidal.Reflective.monoidalClosed (sheafificationAdjunction Y.smallEtaleTopology A)
 
-/-- Tensoring on the left with a fixed `A`-valued étale sheaf preserves colimits of size
-`0`, since it is left adjoint to the internal hom of `Etale.sheafMonoidalClosed`.
-Together with the braiding this gives every compatibility between the tensor product of
-étale sheaves and colimits that the K-flat left derivability structure asks for. -/
-instance Etale.preservesColimitsOfSize_tensorLeft_sheaf (X : Sheaf Y.smallEtaleTopology A) :
-    PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
-  inferInstance
-
 /-- Tensoring on the right with a fixed `A`-valued étale sheaf preserves colimits of size
-`0`, by `Etale.preservesColimitsOfSize_tensorLeft_sheaf` and the braiding. -/
+`0`: tensoring on the *left* is left adjoint to the internal hom of
+`Etale.sheafMonoidalClosed`, hence colimit preserving, and the braiding of
+`Etale.sheafBraidedCategory` carries this over to the right. Together with
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.HasGoodTensor` this gives
+every compatibility between the tensor product of étale sheaves and colimits that the
+K-flat left derivability structure asks for. -/
 instance Etale.preservesColimitsOfSize_tensorRight_sheaf (X : Sheaf Y.smallEtaleTopology A) :
     PreservesColimitsOfSize.{0, 0} (tensorRight X) where
   preservesColimitsOfShape := ⟨inferInstance⟩
