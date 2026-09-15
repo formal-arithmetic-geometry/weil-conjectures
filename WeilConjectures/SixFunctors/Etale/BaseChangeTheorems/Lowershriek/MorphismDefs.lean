@@ -212,17 +212,31 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
-    (sq : IsPullback g' f' f g) :
+noncomputable def Etale.lowerShriekBaseChange (c : Compactification f) (c' : Compactification f')
+    (g'' : c'.Z ⟶ c.Z) (isp : IsPullback g' c'.i c.i g'') (sq : CommSq g'' c'.g c.g g) :
     Rf_!(c)[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
-    (g')^*[A].mapDerivedCategoryPlus ⋙ Rf_!(c.baseChange sq)[A]+ :=
+    (g')^*[A].mapDerivedCategoryPlus ⋙ Rf_!(c')[A]+ :=
   (Functor.associator _ _ _).hom ≫
-  Functor.whiskerLeft (c.i)_!open[A].mapDerivedCategoryPlus
-  (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq)
+  Functor.whiskerLeft (c.i)_!open[A].mapDerivedCategoryPlus (Etale.baseChange A sq)
   ≫ (Functor.associator _ _ _).inv ≫
-  (Functor.whiskerRight
-  (Etale.openImmersionLowerShriekBaseChangeIso A (c.baseChange_isPullback_i sq)).hom
-  R((c.baseChange sq).g)_*[A]+)
+  (Functor.whiskerRight (Etale.openImmersionLowerShriekBaseChangeIso A isp).hom R((c').g)_*[A]+)
   ≫ (Functor.associator _ _ _).hom
+
+attribute [local implicit_reducible] rightDerivedLowerStarPlus
+  rightDerivedLowerShriekOfCompactificationPlus
+
+set_option linter.tacticCheckInstances true
+lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (c' : Compactification f')
+    (g'' : c'.Z ⟶ c.Z) (isp : IsPullback g' c'.i c.i g'') (sq : CommSq g'' c'.g c.g g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.lowerShriekBaseChange A c c' g'' isp sq).app K =
+      (Etale.baseChange A sq).app ((c.i)_!open[A].mapDerivedCategoryPlus.obj K) ≫
+        R(c'.g)_*[A]+.map ((Etale.openImmersionLowerShriekBaseChangeIso A isp).hom.app K) := by
+  simp only [Etale.lowerShriekBaseChange]
+  dsimp only [Functor.comp_obj]
+  -- [Functor.associator_hom_app]
+  -- [Functor.whiskerLeft_app]
+  -- [Functor.whiskerRight_app]
+  sorry
 
 end AlgebraicGeometry
