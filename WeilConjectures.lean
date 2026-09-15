@@ -33,10 +33,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
+public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.Rigidity
-public import WeilConjectures.AlgebraicGeometry.Snapper
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
