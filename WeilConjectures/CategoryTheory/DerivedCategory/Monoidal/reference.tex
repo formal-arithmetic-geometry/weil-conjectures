@@ -1,0 +1,174 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[left=17mm,right=17mm,top=15mm,bottom=16mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.18em}
+\setlist[itemize]{leftmargin=1.7em,itemsep=0.1em,topsep=0.2em}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue!55!black}
+
+\newcommand{\K}{\mathrm K(A)}
+\newcommand{\D}{\mathrm D(A)}
+\newcommand{\Ch}{\mathrm{Ch}(A)}
+\newcommand{\Ltensor}{\otimes^{\mathbf L}}
+\newcommand{\Tot}{\operatorname{Tot}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries From Derived Tensor to Braided and Symmetric Derived Categories}
+\end{center}
+\vspace{0.2em}
+
+\paragraph{Setup and goal.}
+Let $A$ be a Grothendieck abelian monoidal category, with the additive hypotheses needed to form tensor products of complexes. Assume that the derived category
+\[
+  Q_h : \K \longrightarrow \D
+\]
+has already been constructed, and that $\D$ already carries the derived monoidal structure: the tensor product
+\[
+  X \Ltensor Y
+\]
+is the binary left derived functor of the tensor product on $\K$. In the language of the localization development, this means that the relevant \emph{derived monoidal} hypothesis for $Q_h$ is already available. Functorial flat resolutions may be used to produce this hypothesis, but they play no further role in the construction of a braiding.
+
+The problem is to determine what is additionally needed to obtain a braided or symmetric structure on $\D$. The main point is that no new K-flat hypothesis is required. Once the homotopy category $\K$ has the correct Koszul braiding, the universal properties already built into the derived tensor are strong enough to transport the braiding, the two hexagon identities, and, in the symmetric case, the involutivity relation to $\D$.
+
+\section*{1. Abstract conditions and the concrete reduction}
+
+At the abstract level, suppose that $C$ is a braided monoidal category, $W$ is a class of morphisms, and $L:C\to D$ is a localization for which a derived monoidal structure has already been constructed. Write
+\[
+  T = (-\otimes-) : C\times C\to C,
+  \qquad
+  T^{\mathbf L}:D\times D\to D
+\]
+for the original and derived tensor products. A braiding on $C$ is equivalently a natural isomorphism
+\[
+  \beta:T\xRightarrow{\sim}T^{\mathrm{flip}}.
+\]
+Since $T^{\mathbf L}$ is a binary left derived functor of $T$, and $(T^{\mathbf L})^{\mathrm{flip}}$ should be a binary left derived functor of $T^{\mathrm{flip}}$, the universal property of binary left derived functors should produce a canonical isomorphism
+\[
+  \beta^{\mathbf L}:T^{\mathbf L}\xRightarrow{\sim}(T^{\mathbf L})^{\mathrm{flip}}.
+\]
+The two hexagon identities are identities between natural transformations in three variables. They should therefore be checked by the uniqueness principle for ternary left derived functors. If $C$ is symmetric, the relation
+\[
+  \beta_{X,Y}\,\beta_{Y,X}=\mathrm{id}
+\]
+is only a two-variable identity, so binary left-derived uniqueness is enough to transport it to $D$.
+
+Thus the expected abstract sufficient hypothesis is simply
+\[
+  \boxed{\text{$C$ braided (respectively symmetric)}
+  \quad + \quad
+  \text{$L$ carries a derived monoidal structure}.}
+\]
+A small amount of API glue may still be required, most notably a lemma saying that flipping a binary left derived functor gives a binary left derived functor of the flipped source bifunctor.
+
+For an actual derived category the source category here is $C=\K$, not $A$ itself. Hence the concrete problem separates into two stages:
+\[
+  A \text{ braided/symmetric}
+  \Longrightarrow
+  \K \text{ braided/symmetric}
+  \Longrightarrow
+  \D \text{ braided/symmetric}.
+\]
+A convenient sufficient setup is: $A$ is Grothendieck abelian, monoidal preadditive, monoidal closed, and braided; for a symmetric conclusion, assume $A$ symmetric. Monoidal closedness is not logically part of the definition of a braiding, but together with braidedness it ensures that tensoring on either side preserves the coproducts needed by the graded tensor construction. This is precisely what is needed to discharge the various ``GoodTensor'' conditions occurring in the graded and complex monoidal structures.
+
+\section*{2. The substantial step: the Koszul braiding on complexes}
+
+The braiding on $A$ cannot be transferred degreewise to cochain complexes without modification. On the homogeneous summand $X^p\otimes Y^q$, the correct map is
+\[
+  X^p\otimes Y^q \longrightarrow Y^q\otimes X^p,
+  \qquad
+  x\otimes y \longmapsto (-1)^{pq}\,\beta^A_{X^p,Y^q}(x\otimes y).
+\]
+The factor $(-1)^{pq}$ is the Koszul sign, and it is exactly what makes the flip compatible with the total differential.
+
+The branch behind PR \#25848 already contains most of the difficult infrastructure for this step. The complex-shape sign formalism supplies
+\[
+  \sigma(p,q)=(-1)^{pq}
+\]
+for cochain complexes. The total-complex symmetry construction gives a canonical isomorphism between the total complex of a bicomplex and the total complex obtained after exchanging the two directions, with the correct sign inserted. The bifunctor-flip construction packages this further: applying a bifunctor after exchanging the two complex variables is canonically isomorphic to applying the original bifunctor, again with the Koszul sign built into the totalization.
+
+Consequently, the complex-level braiding should be assembled rather than rebuilt from scratch. One combines the flip isomorphism for the totalized bifunctor with the original braiding
+\[
+  -\otimes- \xRightarrow{\sim} (-\otimes-)^{\mathrm{flip}}
+\]
+on $A$. Depending on the exact API available in the migrated version, one may need a small lemma transporting a natural isomorphism of bifunctors through the complex-level \emph{mapBifunctor} construction. This is glue, not a new sign computation.
+
+The braided axioms can then be checked on homogeneous summands. The categorical part reduces to the two hexagon identities in $A$, while the scalar signs reduce to
+\[
+  (-1)^{p(q+r)}=(-1)^{pq}(-1)^{pr},
+  \qquad
+  (-1)^{(p+q)r}=(-1)^{pr}(-1)^{qr}.
+\]
+If $A$ is symmetric, exchanging twice contributes
+\[
+  (-1)^{pq}(-1)^{qp}=(-1)^{2pq}=1,
+\]
+and the remaining equality is exactly the symmetry axiom in $A$. This yields a braided, respectively symmetric, monoidal structure on cochain complexes.
+
+\section*{3. Passing to the homotopy category}
+
+Once the complex category has the Koszul braiding, the passage to $\K$ should be comparatively thin. The braiding is an honest chain isomorphism, so it can be mapped by the quotient functor to the homotopy category. Naturality, the hexagons, and the symmetry relation are equalities of chain maps; applying the quotient functor preserves these equalities.
+
+The branch already contains the relevant compatibility between bifunctors and homotopies, as well as the monoidal structure on the homotopy category. Thus the additional work at this stage should consist mainly of defining the quotient braiding and verifying that it is compatible with the already constructed associator and unitors on $\K$. The expected result is
+\[
+  A\text{ braided} \Longrightarrow \K\text{ braided},
+  \qquad
+  A\text{ symmetric} \Longrightarrow \K\text{ symmetric}.
+\]
+No localization or K-flat argument is needed here; this is still a statement about the ordinary homotopy category.
+
+\section*{4. Transporting the braiding through the derived tensor}
+
+Now let
+\[
+  T=\operatorname{curriedTensor}(\K),
+  \qquad
+  T^{\mathbf L}=\operatorname{curriedTensor}(\D).
+\]
+The derived-monoidal hypothesis says that $T^{\mathbf L}$ is the binary left derived functor of $T$. The braiding on $\K$ gives an isomorphism $T\cong T^{\mathrm{flip}}$. The cleanest derived construction is therefore to first prove that $(T^{\mathbf L})^{\mathrm{flip}}$ is a binary left derived functor of $T^{\mathrm{flip}}$, and then use the binary derived lifting property in both directions to construct
+\[
+  \beta^{\mathbf L}:T^{\mathbf L}\xRightarrow{\sim}(T^{\mathbf L})^{\mathrm{flip}}.
+\]
+The fact that the two lifted maps are inverse follows from binary left-derived uniqueness.
+
+The two derived hexagon identities should then be proved by ternary left-derived extensionality. Both sides of a hexagon are natural transformations in three variables. After restricting along $Q_h$ in all variables and expanding the characterizing equations for the derived associator and the derived braiding, the desired equality becomes the original hexagon in $\K$. This is the same proof pattern already used in the derived-monoidal development for coherence identities: higher-variable derived uniqueness replaces direct manipulation inside the localization.
+
+If $\K$ is symmetric, the symmetry axiom on $\D$ is easier. The equality
+\[
+  \beta^{\mathbf L}_{X,Y}\circ\beta^{\mathbf L}_{Y,X}=\mathrm{id}
+\]
+is binary, so binary left-derived extensionality reduces it immediately to the corresponding equality in $\K$. No additional ternary or quaternary derivability assumption is needed beyond what is already present in the derived-monoidal structure.
+
+\section*{5. Files from PR \#25848 that are especially useful}
+
+Assuming the main derived-monoidal chain has already been migrated, the most useful additional files to confirm or migrate are:
+\begin{itemize}
+  \item \emph{ComplexShapeSigns}: the Koszul sign formalism, in particular $\sigma(p,q)=(-1)^{pq}$ for cochain complexes;
+  \item \emph{TotalComplexSymmetry}: the isomorphism obtained by exchanging the two directions of a bicomplex before totalization;
+  \item \emph{BifunctorFlip}, together with its dependencies on the bifunctor and total-complex constructions: this packages the flip at the level of complexes;
+  \item \emph{GradedObject/Braiding}: not a substitute for the Koszul braiding on complexes, but a useful model for the organization of the braiding, the hexagons, symmetry, and the associated GoodTensor assumptions;
+  \item \emph{BifunctorHomotopy}: useful for descending tensor-related constructions to the homotopy category.
+\end{itemize}
+
+A practical implementation strategy is to use three compile-time checkpoints. First, construct braided/symmetric instances on cochain complexes. Second, obtain the corresponding instances on the homotopy category. Third, prove the abstract theorem that a braided/symmetric source together with a derived-monoidal localization yields a braided/symmetric derived monoidal category, and apply it to $Q_h$. This separation isolates the three genuinely different issues: Koszul signs, homotopy quotienting, and derived universal properties.
+
+\paragraph{Summary.}
+In the intended setup, the new mathematical input is only that $A$ is braided or symmetric. Grothendieck abelianity, monoidal closedness, and the GoodTensor hypotheses ensure that the tensor product of complexes is well behaved, while functorial flat resolutions are used earlier to construct the derived tensor. The new formalization work is therefore concentrated in the chain
+\[
+  \text{Koszul braiding on complexes}
+  \longrightarrow
+  \text{braiding on }\K
+  \longrightarrow
+  \text{derived braiding via left-derived uniqueness}.
+\]
+The first step carries the sign content; the last step is the most reusable and should ideally be formulated as a completely abstract theorem about derived monoidal localizations.
+
+\end{document}
