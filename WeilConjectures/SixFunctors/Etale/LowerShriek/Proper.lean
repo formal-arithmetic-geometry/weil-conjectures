@@ -5,14 +5,14 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Conservative
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conservative
 
 /-!
 # The comparison `f_! ⟶ f_*` is an isomorphism for a proper morphism
 
 For a proper morphism `f : X ⟶ Y` admitting a compactification, the canonical comparison
-`ι_f : f_! ⟶ f_*` of `WeilConjectures.SixFunctors.LowerShriek.Comparison` is an isomorphism.
+`ι_f : f_! ⟶ f_*` of `WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison` is an isomorphism.
 It is deduced from the case of an open immersion with closed range, applied to the open
 immersion of a compactification of `f`.
 
