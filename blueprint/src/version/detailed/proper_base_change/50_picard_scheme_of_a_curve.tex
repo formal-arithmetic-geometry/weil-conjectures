@@ -2378,7 +2378,14 @@ closed fields and \(\mathcal F=\mathcal O_X\), then
 \uses{lem:pc-base-change-map,lem:pc-flat-field,lem:pc-flat-stable-base-change}
 \end{lemma}
 \begin{proof}
-\uses{lem:pcb-cech-spectral,lem:pc-base-change-map,lem:pc-affine-vanishing,lem:pc-flat-field,lem:pc-flat-base-change-cohom}
+\uses{lem:pcb-cech-spectral,lem:pc-base-change-map,lem:pc-affine-vanishing,lem:pc-flat-field,lem:pc-flat-base-change-cohom,def:pc-base-change}
+% \Cref{lem:pc-flat-base-change-cohom}(2) gives the isomorphy clause of this
+% statement as well, at $A=k$ and $B=k'$: its hypotheses ($f$ quasi-compact
+% and quasi-separated, $g$ flat, both bases affine) are weaker than the ones
+% assumed here.  The Cech proof below is kept on purpose: it is the map of
+% complexes it produces that the two naturality clauses and the dimension
+% clause are read off.  The isomorphy is cited alongside it rather than left
+% looking unavailable by citation.
 Since \(X\) is proper over \(k\), it is quasi-compact and
 quasi-separated, hence covered by finitely many affine open subsets
 \(U_1,\dots,U_r\), and their base changes \(U_{j,k'}\) cover
@@ -2421,25 +2428,17 @@ component is the displayed identification
 \Gamma(U_{J,k'},\mathcal F_{k'})\) on each multi-index \(J\); this is the
 base change map of \Cref{lem:pc-base-change-map} in each degree, so the
 isomorphism it induces on cohomology is the base change map of the
-statement.
-The statement's description of that map -- the passage to global
-sections over the affine \(\Spec(k')\), turning the sheaf maps
-\(g^*R^if_*\mathcal F\to R^if'_*\mathcal F_{k'}\) into \(k'\)-linear
-maps \(H^i(X,\mathcal F)\otimes_kk'\to H^i(X_{k'},\mathcal F_{k'})\) --
-is cited rather than taken for granted.  The hypotheses of
-\Cref{lem:pc-flat-base-change-cohom} are met here with \(A=k\) and
-\(B=k'\): the base \(\Spec(k)\) is affine and \(X\) is quasi-compact
-and quasi-separated, as recorded at the start of this proof, so \(f\) is
-quasi-compact and quasi-separated, and \(g\) is a flat morphism of
-affine schemes.  The proof of that lemma derives the description in
-question for any quasi-compact, quasi-separated morphism to an affine
-base \(\Spec(A)\) and any flat \(A\to B\), the source and the target of
-the resulting \(B\)-linear map
-\(H^i(X,\mathcal F)\otimes_AB\to H^i(X_B,\mathcal F_B)\) being read off
-by degenerating the Leray spectral sequence at \(E_2\) over an affine
-base; so it covers the present case.  Only that description is
-borrowed, the isomorphy being what is proved here.
-Naturality is inherited from this map of complexes: a
+statement.  The description of that map given in the statement -- the
+passage to global sections over the affine \(\Spec(k')\) -- is
+\Cref{lem:pc-flat-base-change-cohom}(2) applied with \(A=k\) and
+\(B=k'\), whose hypotheses hold here: the square is cartesian with
+\(\mathcal F_{k'}=(g')^*\mathcal F\) (\Cref{def:pc-base-change}), both
+bases are affine, \(f\) is proper, hence quasi-compact and
+quasi-separated, and \(g\) is flat (\Cref{lem:pc-flat-field}).  That
+clause gives the isomorphy in this generality too; the Cech argument
+above proves it here independently, and supplies the map of complexes
+the naturality clauses need.
+Naturality is inherited from that map of complexes: a
 morphism \(\mathcal F\to\mathcal G\) induces a map of Cech complexes
 commuting with it degreewise, and a \(k\)-algebra map \(k'\to k''\)
 between flat \(k\)-algebras induces
