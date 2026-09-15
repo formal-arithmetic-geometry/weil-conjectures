@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
@@ -254,5 +255,63 @@ noncomputable def singleFunctorCompLeftDerivedUpperStarIso :
 end Etale
 
 end DerivedUpperStar
+
+section DerivedUpperLowerStarAdjunction
+
+/-!
+## The derived adjunction `Lg^* ⊣ Rg_*`
+
+The adjunction `g^* ⊣ g_*` between the pullback and the pushforward of étale sheaves
+induces an adjunction `Lg^* ⊣ Rg_*` between their total derived functors on the
+unbounded derived categories, by
+`CategoryTheory.Adjunction.derivedAdjunction`
+(`WeilConjectures.CategoryTheory.DerivedCategory.Adjunction`): the left adjoint is
+derived via the K-flat left derivability structure on `D(Y_ét)` and the right adjoint
+via the K-injective right derivability structure on `D(Z_ét)`, and the two
+"absoluteness" hypotheses of mathlib's abstract theorem `Adjunction.derived` hold
+because the derived-functor comparison maps are isomorphisms on K-flat, respectively
+K-injective, complexes.
+
+The hypotheses of this section are those of the section `DerivedUpperStar`: the
+K-injective resolutions on the pushforward side are supplied by the sheaf category
+being Grothendieck abelian.
+-/
+
+open MonoidalCategory Etale
+
+variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
+/- The closed symmetric preadditive monoidal structure on the coefficient category, as in
+the section `DerivedUpperStar`; it is what the monoidal transport instances of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian` are stated under. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+
+/- Functorial flat resolutions on the coefficient category, as in the section
+`DerivedUpperStar`. -/
+variable [Abelian.HasFunctorialFlatResolution A]
+
+namespace Etale
+
+/-- The derived adjunction `Lg^* ⊣ Rg_*` between the total derived functors of the
+pullback and the pushforward along an arbitrary morphism `g : Z ⟶ Y` on the unbounded
+derived categories of étale sheaves, induced by the adjunction `g^* ⊣ g_*`. -/
+noncomputable def derivedUpperStarLowerStarAdjunction :
+    L(g)^*[A] ⊣ R(g)_*[A] :=
+  (Etale.upperStarLowerStarAdjunction A g).derivedAdjunction
+
+/-- The bounded below version of `Etale.derivedUpperStarLowerStarAdjunction`: since the
+pullback `g^*` on étale sheaves is exact, its derived functor on the bounded below
+derived categories is the restriction `(g^*).mapDerivedCategoryPlus` of the functor
+induced by `g^*`, and it is left adjoint to the right derived functor
+`(g_*).rightDerivedFunctorPlus` of the pushforward on the bounded below derived
+categories. The right adjoint is derived via injective resolutions, which exist since
+the étale sheaf category is Grothendieck abelian. -/
+noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
+    (g)^*[A].mapDerivedCategoryPlus ⊣ R(g)_*[A]+ :=
+  (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
+
+end Etale
+
+end DerivedUpperLowerStarAdjunction
 
 end AlgebraicGeometry

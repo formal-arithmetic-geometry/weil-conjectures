@@ -20,6 +20,7 @@ public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
@@ -195,6 +196,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
