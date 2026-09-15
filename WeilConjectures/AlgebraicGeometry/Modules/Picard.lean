@@ -40,6 +40,8 @@ braided; the Picard group is then the group of units of that commutative monoid.
   product and a tensor power of invertible sheaves of modules are invertible.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`: two invertible `𝒪ₓ`-modules have the same class
   in the Picard group of `X` if and only if they are isomorphic.
+- `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
+  the Picard group of `X` if and only if it is isomorphic to the structure sheaf.
 
 -/
 
@@ -200,5 +202,18 @@ theorem Pic.mk_tensorObj {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertibl
   change (hM.tensorObj hN).unit = hM.unit * hN.unit
   rw [← Units.val_inj, IsUnit.unit_spec, Units.val_mul, IsUnit.unit_spec, IsUnit.unit_spec,
     Skeleton.toSkeleton_tensorObj]
+
+variable (X) in
+/-- The class of the structure sheaf is the unit of the Picard group of `X`. -/
+theorem Pic.mk_tensorUnit :
+    Pic.mk (𝟙_ X.Modules) (SheafOfModules.invertible_tensorUnit X.sheaf) = 1 := by
+  change (SheafOfModules.invertible_tensorUnit X.sheaf).unit = 1
+  rw [← Units.val_inj, IsUnit.unit_spec, Units.val_one, Skeleton.one_eq]
+
+/-- An invertible `𝒪ₓ`-module has trivial class in the Picard group of `X` if and only if it is
+isomorphic to the structure sheaf. -/
+theorem Pic.mk_eq_one_iff {M : X.Modules} {hM : M.Invertible} :
+    Pic.mk M hM = 1 ↔ Nonempty (M ≅ 𝟙_ X.Modules) := by
+  rw [← Pic.mk_tensorUnit X, Pic.mk_eq_mk_iff]
 
 end AlgebraicGeometry.Scheme
