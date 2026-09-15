@@ -92,18 +92,11 @@ a (F₀ ⊗ G₀) --μ⁻¹--> a F₀ ⊗ a G₀ --ε ⊗ ε--> F ⊗ G
 where `F₀` is the underlying presheaf of modules of `F`, `a` is sheafification, `μ` is its
 monoidal structure map and `ε` is the counit of the sheafification adjunction.
 
-The counit isomorphism `a F₀ ≅ F` is written out rather than named, because the open pull request
-#723 declares it as `SheafOfModules.sheafificationObjIso` in
-`WeilConjectures/AlgebraicGeometry/Modules/Sheafification.lean`, which is its proper home; issue
-928 will move the material below there. -/
+The counit isomorphism `a F₀ ≅ F` is `SheafOfModules.sheafificationObjIso`. -/
 noncomputable def tensorSheafificationIso :
     (sheafification R).obj (presheafOfModules F ⊗ presheafOfModules G) ≅ F ⊗ G :=
   (Functor.Monoidal.μIso (sheafification R) _ _).symm ≪≫
-    tensorIso
-      ((asIso (PresheafOfModules.sheafificationAdjunction
-        (𝟙 (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj))).counit).app F)
-      ((asIso (PresheafOfModules.sheafificationAdjunction
-        (𝟙 (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj))).counit).app G)
+    tensorIso (sheafificationObjIso R F) (sheafificationObjIso R G)
 
 /-- The canonical morphism from the sectionwise tensor product of the underlying presheaves of
 modules of `F` and `G` to the underlying presheaf of modules of `F ⊗ G`. It is the transpose of

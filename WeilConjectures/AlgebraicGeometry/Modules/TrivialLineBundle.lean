@@ -32,10 +32,13 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.Modules.finrank_sections_unit_eq_one`: `h⁰(X, 𝒪ₓ) = 1` for a scheme
-  whose structure morphism identifies the base ring `R` with `Γ(X, 𝒪ₓ)`.
-- `AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit`: for such an `X` and
-  `L ≅ 𝒪ₓ`, the `R`-module `Γ(X, L)` is free of rank one.
+- `AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit`: for a scheme `X` whose
+  structure morphism identifies the base ring `R` with `Γ(X, 𝒪ₓ)`, and `L ≅ 𝒪ₓ`, the `R`-module
+  `Γ(X, L)` is free of rank one. It reduces to
+  `AlgebraicGeometry.Scheme.Modules.finrank_sections_unit_eq_one`, the case `L = 𝒪ₓ`, which is
+  general enough to live in `WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf` together
+  with the `R`-module structure `AlgebraicGeometry.Scheme.Modules.module_sections` on the global
+  sections of a sheaf of modules on a scheme over `Spec R`.
 - `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isUnit` and
   `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isField`: a global section of a trivial
   line bundle whose image in `Γ(X, 𝒪ₓ)` is a unit — for instance any non-zero section, when
@@ -109,42 +112,7 @@ end Trivial
 
 section OverBase
 
-variable (R : Type u) [CommRing R] [X.Over (Spec (.of R))]
-
-/-- The global sections of a sheaf of modules on a scheme over `Spec R` form an `R`-module, by
-restriction of scalars along the structure map `R → Γ(X, 𝒪ₓ)`. -/
-noncomputable instance module_sections (F : X.Modules) : Module R Γ(F, ⊤) :=
-  Module.compHom _ (Scheme.overRingHom R X)
-
-lemma smul_sections_def (F : X.Modules) (r : R) (s : Γ(F, ⊤)) :
-    r • s = Scheme.overRingHom R X r • s :=
-  rfl
-
-/-- An isomorphism of sheaves of modules on a scheme over `Spec R` identifies their global
-sections as `R`-modules. -/
-noncomputable def sectionsBaseEquivOfIso {F G : X.Modules} (e : F ≅ G) : Γ(F, ⊤) ≃ₗ[R] Γ(G, ⊤) :=
-  { (sectionsEquivOfIso e ⊤).toAddEquiv with
-    map_smul' := fun r s ↦ (sectionsEquivOfIso e ⊤).map_smul (Scheme.overRingHom R X r) s }
-
-variable {R}
-
-/-- **The global functions of `X` are free of rank one over the base ring.** If the structure
-morphism of `X` over `Spec R` identifies `R` with `Γ(X, 𝒪ₓ)`, then `Γ(X, 𝒪ₓ)` is a free
-`R`-module of rank one, a generator being the unit. -/
-noncomputable def sectionsUnitEquiv
-    (hπ : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) :
-    R ≃ₗ[R] Γ(unit X.ringCatSheaf, ⊤) :=
-  letI := hπ
-  letI φ := (asIso ((Scheme.ΓSpecIso (.of R)).inv ≫
-    (X ↘ Spec (.of R)).appTop)).commRingCatIsoToRingEquiv
-  { φ.toAddEquiv with map_smul' := fun c d ↦ map_mul φ c d }
-
-/-- **`h⁰(X, 𝒪ₓ) = 1`.** If the structure morphism of `X` over `Spec R` identifies `R` with
-`Γ(X, 𝒪ₓ)`, the global functions of `X` are a one-dimensional `R`-module. -/
-theorem finrank_sections_unit_eq_one [Nontrivial R]
-    (hπ : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) :
-    Module.finrank R Γ(unit X.ringCatSheaf, ⊤) = 1 := by
-  rw [← (sectionsUnitEquiv hπ).finrank_eq, Module.finrank_self]
+variable {R : Type u} [CommRing R] [X.Over (Spec (.of R))]
 
 /-- **The space of global sections of a trivial line bundle is one-dimensional.** If the
 structure morphism of `X` over `Spec R` identifies `R` with `Γ(X, 𝒪ₓ)` and `L ≅ 𝒪ₓ`, the
