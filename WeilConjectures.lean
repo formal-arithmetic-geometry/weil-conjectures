@@ -280,6 +280,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
+public import WeilConjectures.Mathlib.GroupTheory.CosetCover
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Quotient.Basic

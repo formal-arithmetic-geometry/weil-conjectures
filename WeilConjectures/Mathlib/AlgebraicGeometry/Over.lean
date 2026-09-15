@@ -19,6 +19,8 @@ which needs no affineness hypothesis.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.overRingHom`: the ring homomorphism `R → Γ(X, 𝒪_X)`.
+- `AlgebraicGeometry.Scheme.module_sectionsTop`: the `R`-module structure on `Γ(X, 𝒪_X)` obtained
+  by restricting scalars along it.
 -/
 
 @[expose] public section
@@ -39,6 +41,13 @@ noncomputable def overRingHom : R →+* Γ(X, ⊤) :=
 lemma overRingHom_apply (r : R) :
     overRingHom R X r = (X ↘ Spec (.of R)).appTop ((Scheme.ΓSpecIso (.of R)).inv r) :=
   rfl
+
+/-- The global functions of a scheme over `Spec R` form an `R`-module, by restriction of scalars
+along the structure map `R → Γ(X, 𝒪_X)`. -/
+noncomputable instance module_sectionsTop : Module R Γ(X, ⊤) :=
+  Module.compHom _ (overRingHom R X)
+
+lemma smul_sectionsTop_def (r : R) (t : Γ(X, ⊤)) : r • t = overRingHom R X r * t := rfl
 
 section
 

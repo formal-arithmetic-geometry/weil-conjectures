@@ -111,15 +111,6 @@ section OverBase
 
 variable (R : Type u) [CommRing R] [X.Over (Spec (.of R))]
 
-/-- The global sections of a sheaf of modules on a scheme over `Spec R` form an `R`-module, by
-restriction of scalars along the structure map `R → Γ(X, 𝒪ₓ)`. -/
-noncomputable instance module_sections (F : X.Modules) : Module R Γ(F, ⊤) :=
-  Module.compHom _ (Scheme.overRingHom R X)
-
-lemma smul_sections_def (F : X.Modules) (r : R) (s : Γ(F, ⊤)) :
-    r • s = Scheme.overRingHom R X r • s :=
-  rfl
-
 /-- An isomorphism of sheaves of modules on a scheme over `Spec R` identifies their global
 sections as `R`-modules. -/
 noncomputable def sectionsBaseEquivOfIso {F G : X.Modules} (e : F ≅ G) : Γ(F, ⊤) ≃ₗ[R] Γ(G, ⊤) :=
