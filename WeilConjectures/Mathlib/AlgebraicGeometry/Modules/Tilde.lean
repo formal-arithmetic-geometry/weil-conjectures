@@ -1258,7 +1258,7 @@ theorem finite_stalk (M : X.Modules) [M.IsCoherent] (x : X) :
   let _ : Algebra Γ(X, (hU' i).fromSpec ''ᵁ ⊤) (X.presheaf.stalk x) :=
     TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x, hx⟩
   let _ : Module Γ(X, (hU' i).fromSpec ''ᵁ ⊤) (M.presheaf.stalk x) :=
-    module_section_stalk M ⟨x, hx⟩
+    moduleSectionStalk M ⟨x, hx⟩
   let _ : IsScalarTower Γ(X, (hU' i).fromSpec ''ᵁ ⊤) (X.presheaf.stalk x) (M.presheaf.stalk x) :=
     isScalarTower_section_stalk M ⟨x, hx⟩
   have hloc : IsLocalization.AtPrime (X.presheaf.stalk x)

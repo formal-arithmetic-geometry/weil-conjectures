@@ -90,13 +90,17 @@ section `m` of `M` such that `r ↦ r • m` is bijective trivialises `M`.
 - `AlgebraicGeometry.Scheme.Modules.pullbackTwoSquare`,
   `AlgebraicGeometry.Scheme.Modules.baseChange`: the comparison of pullbacks around a commutative
   square of schemes, and its mate, the base change transformation `u^* f_* ⟶ g_* v^*`.
-- `AlgebraicGeometry.Scheme.Modules.module_sections`: the `R`-module structure on the global
-  sections of a sheaf of modules on a scheme over `Spec R`.
 - `AlgebraicGeometry.Scheme.Modules.fiberBaseChangeMap`: **the base change map**
   `(f_* F)(y) ⟶ Γ(X_y, F_y)`, the specialisation of `baseChange` to a fibre square, on global
   sections.
 - `AlgebraicGeometry.Scheme.Modules.sectionsEquivOfIso`: an isomorphism of sheaves of modules
   identifies their sections over any open subset.
+- `AlgebraicGeometry.Scheme.Modules.moduleSections`: the `R`-module structure on the global
+  sections of a sheaf of modules on a scheme over `Spec R`.
+- `AlgebraicGeometry.Scheme.Modules.sectionsBaseEquivOfIso`: an isomorphism of sheaves of modules
+  on a scheme over `Spec R` identifies their global sections as `R`-modules.
+- `AlgebraicGeometry.Scheme.Modules.sectionsUnitEquiv`: the global functions of `X` are free of
+  rank one over the base ring, when the structure morphism identifies the two.
 - `AlgebraicGeometry.Scheme.Modules.fiberMk`: the image `s(x) ∈ F(x)` of a global section `s` of
   `F` in the fibre at `x`, as a map semilinear over the evaluation `Γ(X, 𝒪_X) ⟶ κ(x)`.
 - `AlgebraicGeometry.Scheme.Modules.homOfSectionTop`: the morphism `𝒪ₓ ⟶ M` determined by a global
@@ -271,7 +275,7 @@ lemma germ_smul (x : X) (hx : x ∈ U) (r : Γ(X, U)) (m : Γ(F, U)) :
 
 /-- The stalk of a sheaf of `𝒪_X`-modules at a point of `U` is a module over `Γ(X, U)`,
 by restriction of scalars along the germ map. -/
-noncomputable instance module_section_stalk (x : U) : Module Γ(X, U) (F.presheaf.stalk x.1) :=
+noncomputable instance moduleSectionStalk (x : U) : Module Γ(X, U) (F.presheaf.stalk x.1) :=
   Module.compHom _ (X.presheaf.germ U x.1 x.2).hom
 
 lemma smul_stalk_def (x : U) (r : Γ(X, U)) (m : F.presheaf.stalk x.1) :
@@ -403,47 +407,6 @@ lemma sectionsEquivOfIso_symm_apply (e : F ≅ G) (U : X.Opens) (s : Γ(G, U)) :
     (sectionsEquivOfIso e U).symm s = Hom.app e.inv U s := rfl
 
 end Sections
-
-section SectionsOverBase
-
-variable {X : Scheme.{u}} (R : Type u) [CommRing R] [X.Over (Spec (.of R))]
-
-/-- The global sections of a sheaf of modules on a scheme over `Spec R` form an `R`-module, by
-restriction of scalars along the structure map `R → Γ(X, 𝒪ₓ)`. -/
-noncomputable instance module_sections (F : X.Modules) : Module R Γ(F, ⊤) :=
-  Module.compHom _ (Scheme.overRingHom R X)
-
-lemma smul_sections_def (F : X.Modules) (r : R) (s : Γ(F, ⊤)) :
-    r • s = Scheme.overRingHom R X r • s :=
-  rfl
-
-/-- An isomorphism of sheaves of modules on a scheme over `Spec R` identifies their global
-sections as `R`-modules. -/
-noncomputable def sectionsBaseEquivOfIso {F G : X.Modules} (e : F ≅ G) : Γ(F, ⊤) ≃ₗ[R] Γ(G, ⊤) :=
-  { (sectionsEquivOfIso e ⊤).toAddEquiv with
-    map_smul' := fun r s ↦ (sectionsEquivOfIso e ⊤).map_smul (Scheme.overRingHom R X r) s }
-
-variable {R}
-
-/-- **The global functions of `X` are free of rank one over the base ring.** If the structure
-morphism of `X` over `Spec R` identifies `R` with `Γ(X, 𝒪ₓ)`, then `Γ(X, 𝒪ₓ)` is a free
-`R`-module of rank one, a generator being the unit. -/
-noncomputable def sectionsUnitEquiv
-    (hπ : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) :
-    R ≃ₗ[R] Γ(unit X.ringCatSheaf, ⊤) :=
-  letI := hπ
-  letI φ := (asIso ((Scheme.ΓSpecIso (.of R)).inv ≫
-    (X ↘ Spec (.of R)).appTop)).commRingCatIsoToRingEquiv
-  { φ.toAddEquiv with map_smul' := fun c d ↦ map_mul φ c d }
-
-/-- **`h⁰(X, 𝒪ₓ) = 1`.** If the structure morphism of `X` over `Spec R` identifies `R` with
-`Γ(X, 𝒪ₓ)`, the global functions of `X` are a one-dimensional `R`-module. -/
-theorem finrank_sections_unit_eq_one [Nontrivial R]
-    (hπ : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) :
-    Module.finrank R Γ(unit X.ringCatSheaf, ⊤) = 1 := by
-  rw [← (sectionsUnitEquiv hπ).finrank_eq, Module.finrank_self]
-
-end SectionsOverBase
 
 noncomputable section Pushforward
 
@@ -1474,6 +1437,59 @@ lemma fiberBaseChangeMap_naturality {G : X.Modules} (φ : F ⟶ G) :
   (fiberBaseChangeNatTrans f y).naturality φ
 
 end FiberBaseChange
+
+section SectionsOverBase
+
+variable {X : Scheme.{u}} (R : Type u) [CommRing R] [X.Over (Spec (.of R))]
+
+/-- The global sections of a sheaf of modules on a scheme over `Spec R` form an `R`-module, by
+restriction of scalars along the structure map `R → Γ(X, 𝒪ₓ)`.
+
+Mathlib leaves `Module.compHom` a reducible non-instance, because a restriction-of-scalars
+structure along an arbitrary ring homomorphism clashes with the structures already carried by
+the target. Here the ring homomorphism is not a parameter: it is determined by `R` and by the
+`X.Over (Spec (.of R))` instance, both of which typeclass inference reads off the goal, and
+`Γ(F, ⊤)` carries no other `R`-module structure. So this one is declared as an instance.
+
+Only sections over `⊤` carry this structure: the analogous structure over an open `U` would
+restrict scalars along `R → Γ(X, ⊤) → Γ(X, U)` and would give a second, non-definitionally-equal
+`R`-module structure on `Γ(F, ⊤)` for `U = ⊤`. There is also no companion
+`IsScalarTower R Γ(X, ⊤) Γ(F, ⊤)`, because `Γ(X, ⊤)` carries no `R`-action; see the
+implementation notes of `WeilConjectures.Mathlib.AlgebraicGeometry.Over` for why that action is
+not declared. -/
+noncomputable instance moduleSections (F : X.Modules) : Module R Γ(F, ⊤) :=
+  Module.compHom _ (Scheme.overRingHom R X)
+
+lemma smul_sections_def (F : X.Modules) (r : R) (s : Γ(F, ⊤)) :
+    r • s = Scheme.overRingHom R X r • s :=
+  rfl
+
+/-- An isomorphism of sheaves of modules on a scheme over `Spec R` identifies their global
+sections as `R`-modules. -/
+noncomputable def sectionsBaseEquivOfIso {F G : X.Modules} (e : F ≅ G) :
+    Γ(F, ⊤) ≃ₗ[R] Γ(G, ⊤) where
+  __ := (sectionsEquivOfIso e ⊤).toAddEquiv
+  map_smul' r s := (sectionsEquivOfIso e ⊤).map_smul (Scheme.overRingHom R X r) s
+
+variable {R}
+
+/-- **The global functions of `X` are free of rank one over the base ring.** If the structure
+morphism of `X` over `Spec R` identifies `R` with `Γ(X, 𝒪ₓ)`, then `Γ(X, 𝒪ₓ)` is a free
+`R`-module of rank one, a generator being the unit. -/
+noncomputable def sectionsUnitEquiv
+    (hπ : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) :
+    R ≃ₗ[R] Γ(unit X.ringCatSheaf, ⊤) where
+  __ := (Scheme.overRingEquiv R X hπ).toAddEquiv
+  map_smul' := map_mul (Scheme.overRingEquiv R X hπ)
+
+/-- **`h⁰(X, 𝒪ₓ) = 1`.** If the structure morphism of `X` over `Spec R` identifies `R` with
+`Γ(X, 𝒪ₓ)`, the global functions of `X` are a one-dimensional `R`-module. -/
+theorem finrank_sections_unit_eq_one [Nontrivial R]
+    (hπ : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) :
+    Module.finrank R Γ(unit X.ringCatSheaf, ⊤) = 1 := by
+  rw [← (sectionsUnitEquiv hπ).finrank_eq, Module.finrank_self]
+
+end SectionsOverBase
 
 section Subsingleton
 

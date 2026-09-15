@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Over
 
 /-!
 # Global sections of a trivial line bundle, read on the fibres
@@ -34,11 +33,7 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
 
 - `AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit`: for a scheme `X` whose
   structure morphism identifies the base ring `R` with `Γ(X, 𝒪ₓ)`, and `L ≅ 𝒪ₓ`, the `R`-module
-  `Γ(X, L)` is free of rank one. It reduces to
-  `AlgebraicGeometry.Scheme.Modules.finrank_sections_unit_eq_one`, the case `L = 𝒪ₓ`, which is
-  general enough to live in `WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf` together
-  with the `R`-module structure `AlgebraicGeometry.Scheme.Modules.module_sections` on the global
-  sections of a sheaf of modules on a scheme over `Spec R`.
+  `Γ(X, L)` is free of rank one.
 - `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isUnit` and
   `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isField`: a global section of a trivial
   line bundle whose image in `Γ(X, 𝒪ₓ)` is a unit — for instance any non-zero section, when
@@ -46,7 +41,8 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
 
 A line bundle is usually trivialised by an isomorphism `L ≅ 𝟙_ X.Modules` with the tensor unit;
 `AlgebraicGeometry.Scheme.Modules.tensorUnitIsoUnit` turns that into the isomorphism `L ≅ 𝒪ₓ`
-these statements take.
+these statements take. The `R`-module structure on global sections and the case `L = 𝒪ₓ` are in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf`.
 
 ## Blueprint
 

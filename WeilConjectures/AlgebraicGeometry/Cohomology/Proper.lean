@@ -52,7 +52,9 @@ on a proper scheme form a finite-dimensional vector space.
 * The `K`-vector space structure on `Γ(X, F)` used by `finiteDimensional_sections` is not an
   instance: it depends on the structure morphism `f`, which typeclass inference cannot recover
   from `Γ(F, ⊤)`. It is packaged as the `def` `sectionsModule` and introduced by `letI` in the
-  statement of the theorem.
+  statement of the theorem. If `X` does come with an `X.Over (Spec K)` instance, so that the
+  structure morphism *is* recoverable, this is the instance
+  `AlgebraicGeometry.Scheme.Modules.moduleSections`, by `sectionsModule_eq_moduleSections`.
 
 ## References
 
@@ -99,6 +101,13 @@ direct image `f_* F` on `Spec K`. -/
 @[instance_reducible]
 noncomputable def sectionsModule (f : X ⟶ Spec (.of K)) (F : X.Modules) : Module K Γ(F, ⊤) :=
   ((moduleSpecΓFunctor (R := .of K)).obj ((pushforward f).obj F)).isModule
+
+/-- For a scheme over `Spec K`, the vector space structure `sectionsModule` along the structure
+morphism is the restriction-of-scalars instance
+`AlgebraicGeometry.Scheme.Modules.moduleSections`. -/
+lemma sectionsModule_eq_moduleSections [X.Over (Spec (.of K))] (F : X.Modules) :
+    sectionsModule (X ↘ Spec (.of K)) F = moduleSections K F :=
+  rfl
 
 /-- **Finiteness of the global sections of a coherent sheaf on a proper scheme over a field.**
 

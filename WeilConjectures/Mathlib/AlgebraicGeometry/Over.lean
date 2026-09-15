@@ -19,6 +19,20 @@ which needs no affineness hypothesis.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.overRingHom`: the ring homomorphism `R → Γ(X, 𝒪_X)`.
+- `AlgebraicGeometry.Scheme.overRingEquiv`: that ring homomorphism as a ring isomorphism, when
+  the structure morphism identifies `R` with `Γ(X, 𝒪_X)`.
+
+## Implementation notes
+
+The ring homomorphism is deliberately *not* packaged as an `Algebra R Γ(X, ⊤)` instance. Mathlib
+already has such an instance for `X` affine over `Spec R`, in
+`Mathlib.AlgebraicGeometry.Group.Affine`, and it is built along a different route: its
+`algebraMap` is `Spec.fullyFaithful.preimage (X.isoSpec.inv ≫ X ↘ Spec R)`, by
+`AlgebraicGeometry.Scheme.algebraMap_presheafObj`, which is not definitionally
+`AlgebraicGeometry.Scheme.overRingHom`. A second, hypothesis-free global instance would
+therefore put two unrelated `R`-algebra structures on the global functions of an affine scheme
+over `Spec R`. Dropping the affineness hypothesis from Mathlib's instance is the right fix, and
+belongs upstream.
 -/
 
 @[expose] public section
@@ -38,6 +52,19 @@ noncomputable def overRingHom : R →+* Γ(X, ⊤) :=
 
 lemma overRingHom_apply (r : R) :
     overRingHom R X r = (X ↘ Spec (.of R)).appTop ((Scheme.ΓSpecIso (.of R)).inv r) :=
+  rfl
+
+/-- If the structure morphism of `X` over `Spec R` identifies `R` with the ring of global
+functions of `X`, then `AlgebraicGeometry.Scheme.overRingHom` is a ring isomorphism. -/
+noncomputable def overRingEquiv
+    (h : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) : R ≃+* Γ(X, ⊤) :=
+  haveI := h
+  (asIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)).commRingCatIsoToRingEquiv
+
+@[simp]
+lemma overRingEquiv_apply
+    (h : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) (r : R) :
+    overRingEquiv R X h r = overRingHom R X r :=
   rfl
 
 section

@@ -90,9 +90,8 @@ a (F₀ ⊗ G₀) --μ⁻¹--> a F₀ ⊗ a G₀ --ε ⊗ ε--> F ⊗ G
 ```
 
 where `F₀` is the underlying presheaf of modules of `F`, `a` is sheafification, `μ` is its
-monoidal structure map and `ε` is the counit of the sheafification adjunction.
-
-The counit isomorphism `a F₀ ≅ F` is `SheafOfModules.sheafificationObjIso`. -/
+monoidal structure map and `ε` is the counit of the sheafification adjunction,
+`SheafOfModules.sheafificationObjIso`. -/
 noncomputable def tensorSheafificationIso :
     (sheafification R).obj (presheafOfModules F ⊗ presheafOfModules G) ≅ F ⊗ G :=
   (Functor.Monoidal.μIso (sheafification R) _ _).symm ≪≫
