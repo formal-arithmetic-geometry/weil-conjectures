@@ -5765,13 +5765,27 @@ Definition~34.9.1, \stacksproject{022B}).
 % Decomposed.
 \begin{definition}[Zariski sheaf property of a functor]
 \label{def:pc-zariski-sheaf-property}
-Let $F:(\mathit{Sch})^{\mathrm{op}}\to\textit{Sets}$ be a functor.  $F$
+Let $\mathcal D$ be either the category $\Sch$ of all schemes or the
+category $\Sch/S$ of schemes over a base scheme $S$, and let
+$F:\mathcal D^{\mathrm{op}}\to\textit{Sets}$ be a functor.  $F$
 \emph{satisfies the sheaf property for the Zariski topology} if for every
-scheme $T$, every open covering $T=\bigcup_{i\in I}U_i$ and every
-collection $\xi_i\in F(U_i)$ with
+object $T$ of $\mathcal D$, every open covering $T=\bigcup_{i\in I}U_i$ by
+open subschemes --- read as objects of $\mathcal D$, which when
+$\mathcal D=\Sch/S$ means with the restriction of the structure morphism of
+$T$ --- and every collection $\xi_i\in F(U_i)$ with
 $\xi_i|_{U_i\cap U_j}=\xi_j|_{U_i\cap U_j}$ there is a unique
 $\xi\in F(T)$ with $\xi|_{U_i}=\xi_i$ (Schemes, Definition~26.15.3,
 \stacksproject{01JI}).
+The cited source states the absolute case $\mathcal D=\Sch$ only; the
+relative case $\mathcal D=\Sch/S$ is the same condition read through the
+forgetful functor $\Sch/S\to\Sch$, which changes neither the underlying
+schemes nor their open coverings.  A functor
+$G:\mathcal D^{\mathrm{op}}\to\textit{Groups}$ satisfies the sheaf property
+for the Zariski topology if the set-valued functor obtained by composing $G$
+with the forgetful functor $\textit{Groups}\to\textit{Sets}$ does; that
+forgetful functor changes neither the sets $G(T)$ nor the restriction maps,
+so for such a $G$ the condition is again unique gluing of compatible
+collections, as above.
 \uses{def:pc-scheme}
 \end{definition}
 
@@ -14252,7 +14266,8 @@ decomposed here.
 \stacksproject{01JJ}.)  Let
 $F:(\Sch/S)^{\mathrm{op}}\to\textit{Sets}$ be a functor and suppose:
 \begin{description}
-\item[(1)] $F$ satisfies the sheaf property for the Zariski topology;
+\item[(1)] $F$ \termref{def:pc-zariski-sheaf-property}{satisfies the sheaf
+property for the Zariski topology};
 \item[(2)(a)] there exists a family $(F_i)_{i\in I}$ of subfunctors of
 $F$ each of which is representable;
 \item[(2)(b)] each inclusion $F_i\subseteq F$ is
