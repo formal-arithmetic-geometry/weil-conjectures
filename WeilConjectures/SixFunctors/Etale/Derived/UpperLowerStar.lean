@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.HasGoodTensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -114,23 +113,11 @@ supplied for the sheaf categories by the instances of the folder
 compatibility with colimits provided by its `Monoidal` subfolder, and its preadditivity
 by `CategoryTheory.Sheaf.monoidalPreadditive`, which holds for any sheaf category.
 
-Among the graded-object side conditions of the derivability structure, the three
-`GradedObject.HasTensor₄ObjExt`, `GradedObject.HasGoodTensor₁₂Tensor` and
-`GradedObject.HasGoodTensorTensor₂₃` are no longer obtained from anything specific to
-sheaves: they are the general instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.HasGoodTensor`, which
-deduces them for *any* closed braided monoidal category, the étale sheaf categories being
-one by `AlgebraicGeometry.Etale.sheafMonoidalClosed` and
-`AlgebraicGeometry.Etale.sheafBraidedCategory`. The remaining tensor-colimit input, the
-preservation of `ℤ`-indexed colimits by `tensorRight`, is still the sheaf-level
-`AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorRight_sheaf`, proved by Day's
-reflection theorem in the sibling file `TensorColimits`.
-
-Two of these inputs are still `sorry`ed, so everything below depends on them:
+One of those instances is still `sorry`ed, so everything below depends on it:
 `AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf` (functorial flat resolutions
-of étale sheaves), discussed in the module docstring of the file that states it, and the
-three instances of `...GrothendieckAbelian.Monoidal.HasGoodTensor` just mentioned, whose
-proofs are recorded as `TODO` there.
+of étale sheaves), discussed in the module docstring of the file that states it. The
+tensor-colimit input is no longer among them: it is now proved, by Day's reflection
+theorem, in `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`.
 
 The additivity and exactness of `g^*` are `Etale.additive_upperStar`,
 `Etale.preservesFiniteLimits_upperStar` and `Etale.preservesHomology_upperStar` of

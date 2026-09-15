@@ -36,7 +36,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.HasGoodTensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
