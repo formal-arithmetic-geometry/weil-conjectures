@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Derives
 
@@ -47,14 +48,15 @@ the single `PreservesKFlatQuasiIso` statement for `f^*`.
 
 @[expose] public section
 
+universe uC uD vC vD wC wD
+
 open CategoryTheory Limits MonoidalCategory
 
 namespace CategoryTheory.Functor
 
-variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelian C] [Abelian D]
   [MonoidalCategory C] [MonoidalPreadditive C]
-  [∀ (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) C]
+  [HasCountableCoproducts C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
@@ -92,7 +94,7 @@ instance (priority := 100) [F.PreservesHomology] : F.PreservesKFlatQuasiIso wher
 
 section
 
-variable [HasDerivedCategory D] [F.PreservesKFlatQuasiIso]
+variable [HasDerivedCategory.{wD} D] [F.PreservesKFlatQuasiIso]
 
 lemma isIso_Qh_map_mapHomotopyCategory_map
     {X Y : HomotopyCategory C (ComplexShape.up ℤ)}
@@ -131,12 +133,11 @@ variable [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution C]
-  [HasDerivedCategory C] [HasDerivedCategory D]
+  [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
   [F.PreservesKFlatQuasiIso]
 
-instance :
-    (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).HasLeftDerivedFunctor
-      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) :=
+instance : (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).HasLeftDerivedFunctor
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) :=
   F.derives_kFlat.hasLeftDerivedFunctor
 
 /-- The total left derived functor `DerivedCategory C ⥤ DerivedCategory D`
@@ -158,9 +159,8 @@ noncomputable def leftDerivedFunctorCounit :
   (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).totalLeftDerivedCounit
     DerivedCategory.Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
 
-instance :
-    F.leftDerivedFunctor.IsLeftDerivedFunctor
-      F.leftDerivedFunctorCounit (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) := by
+instance : F.leftDerivedFunctor.IsLeftDerivedFunctor
+    F.leftDerivedFunctorCounit (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) := by
   dsimp only [leftDerivedFunctor, leftDerivedFunctorCounit]
   infer_instance
 
