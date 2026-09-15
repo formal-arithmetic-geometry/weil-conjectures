@@ -5806,6 +5806,57 @@ Definition~34.9.1, \stacksproject{022B}).
 
 % ---------------------------------------------------------------------------
 % Decomposed.
+\begin{remark}[The absolute and relative readings of Schemes, Definition~26.15.3]
+\label{rem:pc-absolute-relative-reading}
+\Cref{def:pc-zariski-sheaf-property}, \Cref{def:pc-subfunctor},
+\Cref{def:pc-open-subfunctor} and \Cref{def:pc-cover} carve up a single
+source, Schemes, Definition~26.15.3, and each of the four is stated for
+$\mathcal D$ either the category $\Sch$ of all schemes or the category
+$\Sch/S$ of schemes over a base scheme $S$.  What those two cases mean is
+fixed here, once for all four.  The source states the absolute case
+$\mathcal D=\Sch$ only, and for set-valued functors only; that case is the
+source as written.  The case $\mathcal D=\Sch/S$ is the same words read in
+the ambient category $\mathcal D$ itself, whose objects are the schemes over
+$S$ and whose morphisms are the $S$-morphisms: the objects quantified over in
+a condition are the objects of $\mathcal D$, the morphisms quantified over
+are the morphisms of $\mathcal D$, and an open subscheme of an object $T$ of
+$\mathcal D$ is again read as an object of $\mathcal D$, with the restriction
+of the structure morphism of $T$.
+
+The relative reading is not the same as imposing the absolute condition on a
+functor obtained by restricting along the forgetful functor
+$\Sch/S\to\Sch$.  That functor is faithful but not full, so that
+$\Hom_S(T',T)$ is in general a proper subset of $\Hom(T',T)$ for schemes
+$T,T'$ over $S$; hence even when a functor on $\Sch/S$ is such a restriction,
+a subfunctor of it need not be the restriction of a subfunctor on $\Sch$.
+The two readings therefore part company at the conditions that quantify over
+morphisms of $\mathcal D$, which are \Cref{def:pc-subfunctor} and
+\Cref{def:pc-open-subfunctor}.  The sheaf property of
+\Cref{def:pc-zariski-sheaf-property} is the condition where the two readings
+agree: its quantifiers range over objects and open coverings only, an open
+covering of an object of $\Sch/S$ is an open covering of the underlying
+scheme, and the restriction maps it involves are already $S$-morphisms.
+
+All of the above concerns the ambient category $\mathcal D$; the value
+category is a separate matter.  A functor
+$G:\mathcal D^{\mathrm{op}}\to\textit{Groups}$ satisfies each of the four
+conditions if the set-valued functor obtained by composing $G$ with the
+forgetful functor $\textit{Groups}\to\textit{Sets}$ does.  That forgetful
+functor changes neither the sets $G(T)$ nor the restriction maps, so for such
+a $G$ the sheaf property is again unique gluing of compatible collections.
+\uses{def:pc-scheme}
+\end{remark}
+% \Cref{def:pc-zariski-sheaf-property}, \Cref{def:pc-subfunctor},
+% \Cref{def:pc-open-subfunctor} and \Cref{def:pc-cover} are named in the prose
+% of \Cref{rem:pc-absolute-relative-reading} and carry no \uses edge from that
+% remark, deliberately.  Each of those four definitions cites
+% \Cref{rem:pc-absolute-relative-reading}, so an edge from the remark to any of
+% them would close a two-node cycle, for instance
+% rem:pc-absolute-relative-reading -> def:pc-subfunctor ->
+% rem:pc-absolute-relative-reading.
+
+% ---------------------------------------------------------------------------
+% Decomposed.
 \begin{definition}[Zariski sheaf property of a functor]
 \label{def:pc-zariski-sheaf-property}
 Let $\mathcal D$ be either the category $\Sch$ of all schemes or the
@@ -5819,27 +5870,10 @@ $T$ --- and every collection $\xi_i\in F(U_i)$ with
 $\xi_i|_{U_i\cap U_j}=\xi_j|_{U_i\cap U_j}$ there is a unique
 $\xi\in F(T)$ with $\xi|_{U_i}=\xi_i$ (Schemes, Definition~26.15.3,
 \stacksproject{01JI}).
-The cited source states the absolute case $\mathcal D=\Sch$ only, and for
-set-valued functors only.  The following reading is fixed once here, for
-this definition and for the three definitions that follow it, which carve up
-the same source.  The case $\mathcal D=\Sch$ is the source as written.  The
-case $\mathcal D=\Sch/S$ is the same words read in the ambient category
-$\mathcal D$ itself, whose objects are the schemes over $S$ and whose
-morphisms are the $S$-morphisms: the objects quantified over in a condition
-are the objects of $\mathcal D$, the morphisms quantified over are the
-morphisms of $\mathcal D$, and an open subscheme of an object $T$ of
-$\mathcal D$ is again read as an object of $\mathcal D$, with the
-restriction of the structure morphism of $T$.  It is not a composition with
-the forgetful functor $\Sch/S\to\Sch$: that functor is faithful but not
-full, so $\Hom_{\Sch/S}(T',T)$ is in general a proper subset of
-$\Hom_{\Sch}(T',T)$, and a subfunctor over $\Sch/S$ is in general not the
-restriction of one over $\Sch$.  A functor
-$G:\mathcal D^{\mathrm{op}}\to\textit{Groups}$ is read through the forgetful
-functor $\textit{Groups}\to\textit{Sets}$, which changes neither the sets
-$G(T)$ nor the restriction maps; each of the four conditions is applied to
-the resulting set-valued functor, so for such a $G$ the sheaf property is
-again unique gluing of compatible collections, as above.
-\uses{def:pc-scheme}
+The reading of the two cases $\mathcal D=\Sch$ and $\mathcal D=\Sch/S$ is
+fixed in \Cref{rem:pc-absolute-relative-reading}, which records that this is
+the one of the four conditions for which the two readings agree.
+\uses{def:pc-scheme,rem:pc-absolute-relative-reading}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -5853,10 +5887,10 @@ $T\mapsto H(T)\subseteq F(T)$ on the objects $T$ of $\mathcal D$ such
 that the maps $F(f):F(T)\to F(T')$ send $H(T)$ into $H(T')$ for all
 morphisms $f:T'\to T$ of $\mathcal D$ (Schemes, Definition~26.15.3,
 \stacksproject{01JI}).
-The absolute and relative readings, the group-valued reading, and the
-reading of open subschemes as objects of $\mathcal D$, are the ones fixed in
-\Cref{def:pc-zariski-sheaf-property}.
-\uses{def:pc-scheme}
+Here, when $\mathcal D=\Sch/S$, the morphisms $f$ quantified over are the
+$S$-morphisms; the reading of the two cases is fixed in
+\Cref{rem:pc-absolute-relative-reading}.
+\uses{def:pc-scheme,rem:pc-absolute-relative-reading}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -5873,10 +5907,10 @@ an open subscheme $U_\xi\subseteq T$ such that a morphism $f:T'\to T$ of
 $\mathcal D$ factors through $U_\xi$ if and only if $f^*\xi\in H(T')$
 (Schemes, Definition~26.15.3,
 \stacksproject{01JI}).
-The absolute and relative readings, the group-valued reading, and the
-reading of $U_\xi$ as an object of $\mathcal D$, are the ones fixed in
-\Cref{def:pc-zariski-sheaf-property}.
-\uses{def:pc-scheme,def:pc-subfunctor}
+Here, when $\mathcal D=\Sch/S$, the morphisms $f$ quantified over are the
+$S$-morphisms and $U_\xi$ is read as an object of $\mathcal D$; the reading of
+the two cases is fixed in \Cref{rem:pc-absolute-relative-reading}.
+\uses{def:pc-scheme,def:pc-subfunctor,rem:pc-absolute-relative-reading}
 \end{definition}
 
 % ---------------------------------------------------------------------------
@@ -5891,10 +5925,10 @@ let $(H_i)_{i\in I}$ be a family of
 $\xi\in F(T)$ there is an open covering $T=\bigcup_{i\in I}U_i$ with
 $\xi|_{U_i}\in H_i(U_i)$ (Schemes, Definition~26.15.3,
 \stacksproject{01JI}).
-The absolute and relative readings, the group-valued reading, and the
-reading of the $U_i$ as objects of $\mathcal D$, are the ones fixed in
-\Cref{def:pc-zariski-sheaf-property}.
-\uses{def:pc-scheme,def:pc-subfunctor}
+Here, when $\mathcal D=\Sch/S$, the $U_i$ are read as objects of
+$\mathcal D$; the reading of the two cases is fixed in
+\Cref{rem:pc-absolute-relative-reading}.
+\uses{def:pc-scheme,def:pc-subfunctor,rem:pc-absolute-relative-reading}
 \end{definition}
 
 % ---------------------------------------------------------------------------
