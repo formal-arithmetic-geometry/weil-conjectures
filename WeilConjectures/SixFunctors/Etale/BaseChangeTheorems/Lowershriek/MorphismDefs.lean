@@ -198,6 +198,7 @@ theorem Etale.isIso_openImmersionShriekBaseChange (sq : IsPullback g' j' j g) :
     IsIso (Etale.openImmersionLowerShriekBaseChange A sq.toCommSq) :=
   sorry
 
+-- variable (j g j' g') in
 noncomputable def Etale.openImmersionLowerShriekBaseChangeIso (sq : IsPullback g' j' j g) :
     (j)_!open[A].mapDerivedCategoryPlus ⋙ (g)^*[A].mapDerivedCategoryPlus ≅
       (g')^*[A].mapDerivedCategoryPlus ⋙ (j')_!open[A].mapDerivedCategoryPlus :=
@@ -212,6 +213,16 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+attribute [local implicit_reducible] rightDerivedLowerStarPlus
+rightDerivedLowerShriekOfCompactificationPlus
+AlgebraicGeometry.Compactification.baseChange
+AlgebraicGeometry.Etale.baseChange
+
+variable (c : Compactification f)
+    (sq : IsPullback g' f' f g)
+
+variable (f g f' g') in
+@[implicit_reducible]
 noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g) :
     Rf_!(c)[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
@@ -224,5 +235,27 @@ noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
   (Etale.openImmersionLowerShriekBaseChangeIso A (c.baseChange_isPullback_i sq)).hom
   R((c.baseChange sq).g)_*[A]+)
   ≫ (Functor.associator _ _ _).hom
+
+-- The following will timeout
+-- lemma foo1 (c : Compactification f) (sq : IsPullback g' f' f g)
+--   (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) (F : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory.Plus (Sheaf c.Z.smallEtaleTopology A)) :
+--   (F.whiskerLeft (baseChange A (lowerShriekBaseChange._proof_20 f g f' g' c sq))).app K =
+--   (baseChange A (Compactification.baseChange_isPullback_g c sq).toCommSq).app (F.obj K) := by
+--   rw [Functor.whiskerLeft_app]
+
+-- The following will not timeout if make 2 proofs the same
+lemma foo2 (c : Compactification f) (sq : IsPullback g' f' f g)
+  (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) (F : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory.Plus (Sheaf c.Z.smallEtaleTopology A)) :
+  (F.whiskerLeft (baseChange A (Compactification.baseChange_isPullback_g c sq).toCommSq)).app K =
+  (baseChange A (Compactification.baseChange_isPullback_g c sq).toCommSq).app (F.obj K) := by
+  rw [Functor.whiskerLeft_app]
+
+set_option linter.tacticCheckInstances true
+lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (sq : IsPullback g' f' f g)
+  (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+  (Etale.lowerShriekBaseChange A f g f' g' c sq ).app K = (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq).app ((c.i)_!open[A].mapDerivedCategoryPlus.obj K) ≫
+    R((c.baseChange sq).g)_*[A]+.map ((Etale.openImmersionLowerShriekBaseChangeIso A (c.baseChange_isPullback_i sq)).hom.app K) := by
+  sorry
+
 
 end AlgebraicGeometry

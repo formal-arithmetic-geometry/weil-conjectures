@@ -105,6 +105,14 @@ noncomputable def baseChange : Compactification f' where
     MorphismProperty.of_isPullback (c.isPullback_baseChangeOpenImmersion sq)
       c.isOpenImmersion
 
+instance : IsProper (pullback.snd c.g g) := inferInstance
+
+instance : IsOpenImmersion (c.baseChangeOpenImmersion sq) :=
+  MorphismProperty.of_isPullback (c.isPullback_baseChangeOpenImmersion sq)
+    c.isOpenImmersion
+
+instance : IsOpenImmersion ((c.baseChange sq).i) := inferInstance
+
 @[simp] lemma baseChange_Z : (c.baseChange sq).Z = pullback c.g g := rfl
 
 @[simp] lemma baseChange_g : (c.baseChange sq).g = pullback.snd c.g g := rfl
