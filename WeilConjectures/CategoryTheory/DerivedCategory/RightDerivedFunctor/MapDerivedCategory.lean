@@ -5,9 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # The total right derived functor of an exact functor is `mapDerivedCategory`
@@ -61,17 +60,22 @@ right derivation via K-injective resolutions only requires
 
 @[expose] public section
 
+universe wC wD wE vC vD vE uC uD uE
+
 open CategoryTheory Abelian Limits
 
 namespace CategoryTheory.Functor
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelian C] [Abelian D]
+  [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
+
 section Compatibility
 
-variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions C]
-  (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+variable [HasKInjectiveResolutions C]
+
+variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 /-- The functor `F.mapDerivedCategory` induced by an exact functor `F` is a right derived
 functor of `F.mapHomotopyCategory ⋙ Qh`, with unit the inverse of the comparison
@@ -138,9 +142,7 @@ end Compatibility
 
 section Composition
 
-variable {C D E : Type*} [Category C] [Category D] [Category E]
-  [Abelian C] [Abelian D] [Abelian E]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+variable {E : Type uE} [Category.{vE} E] [Abelian E] [HasDerivedCategory.{wE} E]
   [HasKInjectiveResolutions C] [HasKInjectiveResolutions D]
 
 /-- The composition isomorphism
