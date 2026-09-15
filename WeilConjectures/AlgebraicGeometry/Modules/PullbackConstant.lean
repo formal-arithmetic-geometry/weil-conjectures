@@ -14,30 +14,60 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 
 Let `K` be a field, let `S` and `V` be `K`-schemes and let `v ∈ V(K)` be a `K`-rational point of
 `V`. The *constant morphism at `v`* is the composite `π ≫ v : S ⟶ V` of the structure morphism
-`π : S ⟶ Spec K` with `v : Spec K ⟶ V`. This file proves that every line bundle on `V` pulls
-back along it to the structure sheaf of `S`.
+`π : S ⟶ Spec K` with `v : Spec K ⟶ V`:
 
-The proof is the one of the blueprint: pullback is pseudofunctorial, so `(π ≫ v)^* N` is
-`π^* (v^* N)`; the line bundle `v^* N` on `Spec K` is trivial because the Picard group of the
-spectrum of a field is trivial; and `π^*` is monoidal, so it takes the structure sheaf of
-`Spec K` to the structure sheaf of `S`.
+```
+              π                v
+       S ──────────→ Spec K ──────────→ V
+        ╲                              ↗
+         ╲─────────── π ≫ v ──────────╱
+```
 
-The two corollaries are the forms used later, on the category `Over (Spec (CommRingCat.of K))`
-of `K`-schemes: the constant morphism at a `K`-point `v : 𝟙_ _ ⟶ V`, and, when `V` carries a
-group structure, the constant morphism at its identity section `η[V]`.
+This file proves that every line bundle on `V` pulls back along such a composite to the
+structure sheaf of `S`.
+
+Nothing about fields is used. The only thing the argument needs is that the Picard group of the
+intermediate scheme is trivial, so the statements below are made for an arbitrary intermediate
+scheme `T` with `[Subsingleton T.Pic]`. The `K`-scheme form is recovered by instance search at
+`T := Spec K`, through `AlgebraicGeometry.Scheme.Pic.subsingleton_spec_field`.
+
+The proof is the blueprint's, read in the Picard group: pullback is pseudofunctorial, so
+`Pic.map (π ≫ v) = Pic.map π ∘ Pic.map v`, and `Pic.map v` takes its values in the trivial
+group `T.Pic`. Unwinding the Picard classes turns this into the chain of isomorphisms
+
+```
+   (π ≫ v)^* N  ≅  π^* (v^* N)  ≅  π^* 𝒪_T  ≅  𝒪_S
+```
+
+whose middle step is the triviality of the line bundle `v^* N` on `T` and whose last step is the
+monoidality of `π^*`.
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.Modules.nonempty_pullback_iso_tensorUnit_of_comp`
-  (`lem:cube-pullback-constant`): the pullback of a line bundle along a constant morphism
-  `π ≫ v : S ⟶ V` of `K`-schemes is isomorphic to the structure sheaf of `S`.
-- `AlgebraicGeometry.Scheme.Modules.nonempty_pullback_iso_tensorUnit_of_toUnit_comp`
-  (`lem:cube-pullback-constant`): the same statement for `K`-schemes `S` and `V` in
-  `Over (Spec (CommRingCat.of K))` and a `K`-point `v` of `V`.
-- `AlgebraicGeometry.Scheme.Modules.nonempty_pullback_iso_tensorUnit_of_toUnit_comp_one`
-  (`lem:cube-pullback-constant`): the same statement for the constant morphism at the identity
-  section of a group scheme over `K`.
+- `AlgebraicGeometry.Scheme.Pic.map_comp_eq_one`: pullback along `π ≫ v` is the trivial
+  homomorphism `V.Pic →* S.Pic`, as soon as `T.Pic` is trivial.
+- `SheafOfModules.Invertible.nonempty_pullback_comp_iso_tensorUnit`: the same statement read on
+  line bundles, the pullback of a line bundle `N` on `V` along `π ≫ v` being isomorphic to the
+  structure sheaf of `S`.
+- `SheafOfModules.Invertible.nonempty_pullback_toUnit_comp_iso_tensorUnit`: the same, for `S`
+  and `V` presented as objects of `Over B` and a section `v : 𝟙_ (Over B) ⟶ V`, the constant
+  morphism at `v` being `toUnit S ≫ v`.
 
+## Implementation notes
+
+The trivialisations are isomorphisms with the tensor unit `𝟙_ S.Modules`.
+`AlgebraicGeometry.Scheme.Modules.tensorUnitIsoUnit` turns such an isomorphism into one with the
+structure sheaf `SheafOfModules.unit S.ringCatSheaf`, which is the form the statements of
+`WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle` consume.
+
+## Blueprint
+
+This file proves `lem:cube-pullback-constant` of the theorem-of-the-cube chapter,
+`blueprint/src/version/detailed/curve_estimates/27_theorem_of_the_cube.tex`, in the
+tensor-invertible spelling of a line bundle: `SheafOfModules.Invertible`, rather than local
+freeness of rank one. That is the spelling in which the input from `sec:cube-cost` (N3) — the
+triviality of the Picard group of the spectrum of a field — is available, and the spelling in
+which the consumers of the chapter state ampleness, so no bridge between the two is needed.
 -/
 
 @[expose] public section
@@ -46,42 +76,56 @@ universe u
 
 open CategoryTheory MonoidalCategory CartesianMonoidalCategory
 
-open scoped MonObj
-
 namespace AlgebraicGeometry.Scheme
 
-variable {K : Type u} [Field K]
+variable {S T V : Scheme.{u}} [Subsingleton T.Pic]
 
-/-- **A line bundle pulled back along a constant morphism is trivial.** Let `S` and `V` be
-`K`-schemes, let `v : Spec K ⟶ V` be a `K`-rational point of `V` and let `π ≫ v : S ⟶ V` be the
-constant morphism at `v`, `π : S ⟶ Spec K` being the structure morphism of `S`. Then the
-pullback of a line bundle `N` on `V` along `π ≫ v` is isomorphic to the structure sheaf of `S`.
+/-- **The pullback along a morphism which factors through a scheme with trivial Picard group
+kills every Picard class.** If `π : S ⟶ T` and `v : T ⟶ V` and the Picard group of `T` is
+trivial — for instance `T = Spec K` for a field `K` — then the class of a line bundle `N` on `V`
+pulls back to the trivial class on `S`. -/
+theorem Pic.map_comp_apply_eq_one (π : S ⟶ T) (v : T ⟶ V) (x : V.Pic) :
+    Pic.map (π ≫ v) x = 1 := by
+  rw [Pic.map_comp_apply, Subsingleton.elim (Pic.map v x) 1, map_one]
 
-This is `lem:cube-pullback-constant` of the theorem-of-the-cube chapter. -/
-theorem Modules.nonempty_pullback_iso_tensorUnit_of_comp {S V : Scheme.{u}}
-    (π : S ⟶ Spec (.of K)) (v : Spec (.of K) ⟶ V) {N : V.Modules} (hN : N.Invertible) :
-    Nonempty ((Modules.pullback (π ≫ v)).obj N ≅ 𝟙_ S.Modules) := by
-  obtain ⟨e⟩ := Modules.nonempty_iso_tensorUnit_of_invertible (hN.pullback v)
-  exact ⟨(Modules.pullbackComp π v).symm.app N ≪≫ (Modules.pullback π).mapIso e ≪≫
-    (Functor.Monoidal.εIso (Modules.pullback π)).symm⟩
+/-- **Pullback along a morphism which factors through a scheme with trivial Picard group is the
+trivial homomorphism of Picard groups.** -/
+theorem Pic.map_comp_eq_one (π : S ⟶ T) (v : T ⟶ V) : Pic.map (π ≫ v) = 1 :=
+  MonoidHom.ext fun x ↦ (Pic.map_comp_apply_eq_one π v x).trans (MonoidHom.one_apply x).symm
 
-variable {S V : Over (Spec (.of K))}
+/-- **A line bundle pulled back along a constant morphism is trivial.** Let `π : S ⟶ T` and
+`v : T ⟶ V` be morphisms of schemes and assume the Picard group of `T` is trivial — for instance
+`T = Spec K` for a field `K`, `π` the structure morphism of a `K`-scheme `S` and `v` a
+`K`-rational point of `V`, so that `π ≫ v` is the constant morphism at `v`:
 
-/-- **A line bundle pulled back along a constant morphism is trivial**, for `K`-schemes `S` and
-`V` presented as objects of `Over (Spec (CommRingCat.of K))` and a `K`-point `v` of `V`, the
-constant morphism at `v` being `toUnit S ≫ v`. -/
-theorem Modules.nonempty_pullback_iso_tensorUnit_of_toUnit_comp (v : 𝟙_ (Over (Spec (.of K))) ⟶ V)
-    {N : V.left.Modules} (hN : N.Invertible) :
+```
+              π              v
+       S ──────────→ T ──────────→ V
+        ╲                         ↗
+         ╲────────── π ≫ v ──────╱
+```
+
+Then the pullback of a line bundle `N` on `V` along `π ≫ v` is isomorphic to the structure sheaf
+of `S`. -/
+theorem _root_.SheafOfModules.Invertible.nonempty_pullback_comp_iso_tensorUnit {N : V.Modules}
+    (hN : N.Invertible) (π : S ⟶ T) (v : T ⟶ V) :
+    Nonempty ((Modules.pullback (π ≫ v)).obj N ≅ 𝟙_ S.Modules) :=
+  (Pic.mk_eq_one_iff (hM := hN.pullback (π ≫ v))).1 <| by
+    rw [← Pic.map_mk (π ≫ v) hN, Pic.map_comp_apply_eq_one]
+
+section OverBase
+
+variable {B : Scheme.{u}} [Subsingleton B.Pic] {S V : Over B}
+
+/-- **A line bundle pulled back along a constant morphism is trivial**, for `S` and `V` presented
+as objects of `Over B` over a base scheme `B` with trivial Picard group — for instance
+`B = Spec K` for a field `K` — and a section `v : 𝟙_ (Over B) ⟶ V`, the constant morphism at `v`
+being `toUnit S ≫ v`. -/
+theorem _root_.SheafOfModules.Invertible.nonempty_pullback_toUnit_comp_iso_tensorUnit
+    {N : V.left.Modules} (hN : N.Invertible) (v : 𝟙_ (Over B) ⟶ V) :
     Nonempty ((Modules.pullback (toUnit S ≫ v).left).obj N ≅ 𝟙_ S.left.Modules) :=
-  Modules.nonempty_pullback_iso_tensorUnit_of_comp S.hom v.left hN
+  hN.nonempty_pullback_comp_iso_tensorUnit S.hom v.left
 
-/-- **A line bundle pulled back along the constant morphism at the identity section of a group
-scheme is trivial.** If `V` is a group scheme over `K` with identity section `η[V]` and `S` is a
-`K`-scheme, the pullback of a line bundle on `V` along `toUnit S ≫ η[V]` is isomorphic to the
-structure sheaf of `S`. -/
-theorem Modules.nonempty_pullback_iso_tensorUnit_of_toUnit_comp_one [GrpObj V]
-    {N : V.left.Modules} (hN : N.Invertible) :
-    Nonempty ((Modules.pullback (toUnit S ≫ η[V]).left).obj N ≅ 𝟙_ S.left.Modules) :=
-  Modules.nonempty_pullback_iso_tensorUnit_of_toUnit_comp η[V] hN
+end OverBase
 
 end AlgebraicGeometry.Scheme
