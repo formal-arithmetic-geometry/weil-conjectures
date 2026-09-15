@@ -8771,8 +8771,63 @@ H^i(X,\cF)\otimes_AB=\check H^i(\mathcal U,\cF)\otimes_AB
 is an isomorphism, and it is the map of (2).  Two things go into that
 last assertion.  First, over an affine base the base change maps of
 \Cref{lem:pc-base-change-map} are, in every cohomological degree, the
-$B$-linear extension of pullback along $g'$, being induced by
-$\cF\to Rg'_*\cF'$; in cohomological degree $0$, and on an affine open,
+$B$-linear extension of pullback along $g'$ -- and this for any
+quasi-compact, quasi-separated $f:X\to\Spec(A)$ and any flat $A\to B$,
+so that the same description serves the quasi-separated case below.
+Write $f_B:X_B\to\Spec(B)$ for the base change of $f$ and
+$g:\Spec(B)\to\Spec(A)$ for the given flat map.  The map of
+\Cref{lem:pc-base-change-map} is the one adjoint, under
+$g^*\dashv g_*$, to the map
+\[
+Rf_*\cF\;\longrightarrow\;Rf_*Rg'_*\cF_B=Rg_*R(f_B)_*\cF_B
+\]
+induced by the unit $\cF\to Rg'_*\cF_B$ (the equality is the
+commutativity of the square), and the maps
+$g^*R^if_*\cF\to R^i(f_B)_*\cF_B$ are its cohomology sheaves.  The
+sheaves $R^if_*\cF$ and $R^i(f_B)_*\cF_B$ are quasi-coherent by
+\Cref{lem:pc-finite-support-hi}(1) -- $f_B$ is quasi-separated by
+\Cref{lem:pc-separated-permanence}(4), and quasi-compact because $X_B$
+is covered by the base changes of the members of a finite affine open
+covering of $X$ -- and so is
+$\mathcal H^i(g^*Rf_*\cF)=g^*R^if_*\cF$, the equality holding because
+$g$ is flat and $g^*$ therefore exact.  Apply
+\Cref{lem:pc-leray-spectral-sequence} to the identity morphism of
+$\Spec(B)$, whose higher direct images are the cohomology sheaves: a
+bounded below complex $\cG$ of $\cO_{\Spec B}$-modules has a spectral
+sequence
+$E_2^{p,q}=H^p(\Spec B,\mathcal H^q(\cG))\Rightarrow
+H^{p+q}(\Spec B,\cG)$, natural in $\cG$ because a map of bounded below
+complexes lifts to injective resolutions uniquely up to homotopy, and
+its edge map in bidegree $(0,i)$ is
+$H^i(\Spec B,\cG)\to H^0(\Spec B,\mathcal H^i(\cG))$.  For
+$\cG=g^*Rf_*\cF$ and for $\cG=R(f_B)_*\cF_B$ the terms $E_2^{p,q}$
+with $p>0$ vanish by \Cref{lem:pc-affine-vanishing}, so both spectral
+sequences degenerate at $E_2$ and both edge maps are isomorphisms; this
+is the degeneration argument the proof of (1) gives below, which rests
+on \Cref{lem:pc-finite-support-hi} and \Cref{lem:pc-affine-vanishing}
+alone and not on (2).  By naturality of the edge map, the map induced
+on global sections over $\Spec(B)$ by the base change map in degree $i$
+is therefore identified with $H^i$ of $R\Gamma(\Spec B,-)$ applied to
+$g^*Rf_*\cF\to R(f_B)_*\cF_B$; the target of the latter is
+$H^i(X_B,\cF_B)$, and its source is $H^i(X,\cF)\otimes_AB$ by the same
+degeneration over $\Spec(A)$ together with the fact that $g^*$ of a
+quasi-coherent sheaf is $\otimes_AB$.  It is $B$-linear, and
+precomposing it with the unit
+\[
+R\Gamma(\Spec A,Rf_*\cF)\;\longrightarrow\;
+R\Gamma(\Spec A,Rg_*g^*Rf_*\cF)=R\Gamma(\Spec B,g^*Rf_*\cF)
+\]
+-- the equality because $\Gamma(\Spec A,-)\circ g_*=\Gamma(\Spec B,-)$
+and $g_*$ preserves injectives -- returns, by the adjunction that
+defined the base change map, the image under $R\Gamma(\Spec A,-)$ of
+the display above, that is the map
+$R\Gamma(X,\cF)\to R\Gamma(X_B,\cF_B)$ induced by
+$\cF\to Rg'_*\cF_B$, whose degree $i$ part is pullback along $g'$.  On
+$H^i(X,\cF)\otimes_AB$ that precomposition is $m\mapsto m\otimes1$,
+and a $B$-linear map out of $M\otimes_AB$ is determined by its
+restriction along $m\mapsto m\otimes1$; so the map in degree $i$ is the
+$B$-linear extension of pullback along $g'$, as claimed.  In
+cohomological degree $0$, and on an affine open,
 that is the extension of scalars on sections displayed above, which is
 the map the middle arrow is built from in each Čech degree.  Second,
 the two outer identifications -- those of \Cref{lem:pc-cech-computes}
@@ -8855,7 +8910,15 @@ proves (2) in general.
 so we may assume $S'=\Spec(B)$; further base changing (and being
 allowed to assume $S$ affine since the statement is local on both $S$
 and $S'$ and $g^*R^if_*\cF$ is the pullback of a quasi-coherent
-sheaf) we may assume $S=\Spec(A)$.  By
+sheaf) we may assume $S=\Spec(A)$.  Both hypotheses on $f$ are local on
+$S$, so $f$ is still quasi-compact and quasi-separated after that
+reduction, and $f'$ is so as well: it is quasi-separated as a base
+change of $f$ (\Cref{lem:pc-separated-permanence}(4)), and it is
+quasi-compact because $X$, the preimage of the affine $S$ under the
+quasi-compact $f$, is quasi-compact and so carries a finite affine open
+covering $X=U_1\cup\dots\cup U_t$, whence the preimage in $X'$ of an
+affine open $W\subseteq S'$ is covered by the finitely many affine
+schemes $U_i\times_SW$.  By
 \Cref{lem:pc-finite-support-hi}(1) the sheaves $R^if_*\cF$ and
 $R^if'_*\cF'$ are quasi-coherent.  On $S$ affine, the quasi-coherent
 sheaf $R^if_*\cF$ is $\widetilde{H^0(S,R^if_*\cF)}$ and
