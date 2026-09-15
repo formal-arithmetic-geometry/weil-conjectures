@@ -143,7 +143,10 @@ claims no more than that comment does.
 % else marking it as an attribution --- and that is exactly the form in which a
 % `% Decomposed.' node carries an ordinary source reference, as
 % \Cref{def:pc-zariski-sheaf-property} and \Cref{def:pc-subfunctor}, both
-% `% Decomposed.', do in the next two nodes.  What separates them is the `% Cited.'
+% `% Decomposed.', do in the next two nodes.  Each of those two closes the
+% parenthetical with the scope qualifier ``, for $\mathcal D=\Sch$'', recording how
+% much of the node the source covers; that qualifier is no more an attribution
+% marker than the bare form is.  What separates them is the `% Cited.'
 % or `% Decomposed.' marker line standing above the node, and A CHECK OVER THE TEXT
 % MUST KEY ON THAT MARKER, NOT ON THE PARENTHETICAL: the paragraph above says the
 % dependency graph does not see the difference; this one says where a reader of the
@@ -5740,8 +5743,9 @@ topology refines the Zariski topology is \Cref{lem:pc-zariski-coverings-are-fppf
 % "(forall x, exists i, x in range (f i)) and (forall i, P (f i))").
 % AlgebraicGeometry.Scheme.fppfTopology, defined as fppfPrecoverage.toGrothendieck,
 % is the site itself, as a topology of sieves.  Both are stated for the absolute
-% category of schemes, not for (Sch/S); as with the representable-functor
-% definition below, take that category to be the category of schemes over S.
+% category of schemes, not for (Sch/S); read that category as the category of
+% schemes over S, which is the ambient-category convention stated in
+% \Cref{def:pc-zariski-sheaf-property}.
 \mathlibok\ \lean{AlgebraicGeometry.Scheme.fppfPrecoverage,
 AlgebraicGeometry.Scheme.fppfTopology}
 \end{definition}
@@ -5765,74 +5769,78 @@ Definition~34.9.1, \stacksproject{022B}).
 % Decomposed.
 \begin{definition}[Zariski sheaf property of a functor]
 \label{def:pc-zariski-sheaf-property}
-Let $\mathcal D$ be either the category $\Sch$ of all schemes or the
-category $\Sch/S$ of schemes over a base scheme $S$, and let
-$F:\mathcal D^{\mathrm{op}}\to\textit{Sets}$ be a functor.  $F$
+Two conventions are fixed here, and are inherited by the definitions below
+that cite this one.  First, $\mathcal D$ is a category of schemes, or of
+schemes over a base scheme, closed under passing to open subschemes: if $T$
+is an object of $\mathcal D$ and $U\subseteq T$ is an open subscheme, then
+$U$ --- carrying, in the relative case, the restriction to $U$ of the
+structure morphism of $T$ --- is again an object of $\mathcal D$, and the
+inclusion $U\to T$ a morphism of $\mathcal D$.  The case used below is
+$\mathcal D=\Sch/S$ for a base scheme $S$, with $\Sch/k:=\Sch/\Spec(k)$ for a
+field $k$; the absolute case $\mathcal D=\Sch$ is the one the sources cited
+state.  Second, a notion defined for functors
+$\mathcal D^{\mathrm{op}}\to\textit{Sets}$ is applied to a functor
+$G:\mathcal D^{\mathrm{op}}\to\textit{Groups}$ by composing $G$ with the
+forgetful functor $\textit{Groups}\to\textit{Sets}$.
+
+Let $F:\mathcal D^{\mathrm{op}}\to\textit{Sets}$ be a functor.  $F$
 \emph{satisfies the sheaf property for the Zariski topology} if for every
-object $T$ of $\mathcal D$, every open covering $T=\bigcup_{i\in I}U_i$ by
-open subschemes --- read as objects of $\mathcal D$, which when
-$\mathcal D=\Sch/S$ means with the restriction of the structure morphism of
-$T$ --- and every collection $\xi_i\in F(U_i)$ with
-$\xi_i|_{U_i\cap U_j}=\xi_j|_{U_i\cap U_j}$ there is a unique
-$\xi\in F(T)$ with $\xi|_{U_i}=\xi_i$ (Schemes, Definition~26.15.3,
-\stacksproject{01JI}).
-The cited source states the absolute case $\mathcal D=\Sch$ only; the
-relative case $\mathcal D=\Sch/S$ is the same condition read through the
-forgetful functor $\Sch/S\to\Sch$, which changes neither the underlying
-schemes nor their open coverings.  A functor
-$G:\mathcal D^{\mathrm{op}}\to\textit{Groups}$ satisfies the sheaf property
-for the Zariski topology if the set-valued functor obtained by composing $G$
-with the forgetful functor $\textit{Groups}\to\textit{Sets}$ does; that
-forgetful functor changes neither the sets $G(T)$ nor the restriction maps,
-so for such a $G$ the condition is again unique gluing of compatible
-collections, as above.
+object $T$ of $\mathcal D$, every covering $T=\bigcup_{i\in I}U_i$ of the
+underlying scheme of $T$ by open subschemes $U_i$, and every collection
+$\xi_i\in F(U_i)$ with $\xi_i|_{U_i\cap U_j}=\xi_j|_{U_i\cap U_j}$ there is
+a unique $\xi\in F(T)$ with $\xi|_{U_i}=\xi_i$ (Schemes, Definition~26.15.3,
+\stacksproject{01JI}, for $\mathcal D=\Sch$).
 \uses{def:pc-scheme}
 \end{definition}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{definition}[Subfunctors]\label{def:pc-subfunctor}
-Let $F:(\mathit{Sch})^{\mathrm{op}}\to\textit{Sets}$ be a functor.  A
+Let $\mathcal D$ be as in \Cref{def:pc-zariski-sheaf-property} and let
+$F:\mathcal D^{\mathrm{op}}\to\textit{Sets}$ be a functor.  A
 \emph{subfunctor} $H\subseteq F$ is an assignment
-$T\mapsto H(T)\subseteq F(T)$ such that the maps $F(f):F(T)\to F(T')$
-send $H(T)$ into $H(T')$ for all morphisms $f:T'\to T$ (Schemes,
-Definition~26.15.3,
-\stacksproject{01JI}).
-\uses{def:pc-scheme}
+$T\mapsto H(T)\subseteq F(T)$, for objects $T$ of $\mathcal D$, such that
+the maps $F(f):F(T)\to F(T')$ send $H(T)$ into $H(T')$ for all morphisms
+$f:T'\to T$ of $\mathcal D$ (Schemes, Definition~26.15.3,
+\stacksproject{01JI}, for $\mathcal D=\Sch$).
+\uses{def:pc-scheme,def:pc-zariski-sheaf-property}
 \end{definition}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{definition}[Subfunctors representable by open immersions]
 \label{def:pc-open-subfunctor}
-Let $F:(\mathit{Sch})^{\mathrm{op}}\to\textit{Sets}$ be a functor and
-$H\subseteq F$ a \termref{def:pc-subfunctor}{subfunctor}.  $H\subseteq
+Let $\mathcal D$ be as in \Cref{def:pc-zariski-sheaf-property}, let
+$F:\mathcal D^{\mathrm{op}}\to\textit{Sets}$ be a functor and let
+$H\subseteq F$ be a \termref{def:pc-subfunctor}{subfunctor}.  $H\subseteq
 F$ is \emph{representable by open immersions} if for all pairs
-$(T,\xi)$ with $T$ a scheme and $\xi\in F(T)$ there is an open
-subscheme $U_\xi\subseteq T$ such that a morphism $f:T'\to T$ factors
-through $U_\xi$ if and only if $f^*\xi\in H(T')$ (Schemes,
-Definition~26.15.3,
-\stacksproject{01JI}).
-\uses{def:pc-scheme,def:pc-subfunctor}
+$(T,\xi)$ with $T$ an object of $\mathcal D$ and $\xi\in F(T)$ there is an
+open subscheme $U_\xi\subseteq T$ such that a morphism $f:T'\to T$ of
+$\mathcal D$ factors through $U_\xi$ if and only if $f^*\xi\in H(T')$
+(Schemes, Definition~26.15.3,
+\stacksproject{01JI}, for $\mathcal D=\Sch$).
+\uses{def:pc-scheme,def:pc-subfunctor,def:pc-zariski-sheaf-property}
 \end{definition}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{definition}[Covers of a functor]\label{def:pc-cover}
-Let $F:(\mathit{Sch})^{\mathrm{op}}\to\textit{Sets}$ be a functor and
+Let $\mathcal D$ be as in \Cref{def:pc-zariski-sheaf-property}, let
+$F:\mathcal D^{\mathrm{op}}\to\textit{Sets}$ be a functor and
 let $(H_i)_{i\in I}$ be a family of
 \termref{def:pc-subfunctor}{subfunctors} of $F$.  The family
-\emph{covers} $F$ if for every $\xi\in F(T)$ there is an open covering
-$T=\bigcup_{i\in I}U_i$ with $\xi|_{U_i}\in H_i(U_i)$ (Schemes,
+\emph{covers} $F$ if for every object $T$ of $\mathcal D$ and every
+$\xi\in F(T)$ there is a covering $T=\bigcup_{i\in I}U_i$ of the underlying
+scheme of $T$ by open subschemes with $\xi|_{U_i}\in H_i(U_i)$ (Schemes,
 Definition~26.15.3,
-\stacksproject{01JI}).
-\uses{def:pc-scheme,def:pc-subfunctor}
+\stacksproject{01JI}, for $\mathcal D=\Sch$).
+\uses{def:pc-scheme,def:pc-subfunctor,def:pc-zariski-sheaf-property}
 \end{definition}
 
 % ---------------------------------------------------------------------------
 % Decomposed.
 \begin{definition}[Representable functors]\label{def:pc-representable-functor}
-Let $F:(\mathit{Sch}/S)^{\mathrm{op}}\to\textit{Sets}$ be a functor.  The
+Let $F:(\Sch/S)^{\mathrm{op}}\to\textit{Sets}$ be a functor.  The
 \emph{functor of points} of a scheme $X$ over $S$ is
 $h_X=\operatorname{Hom}_S(\bullet,X)$; $F$ is \emph{representable by a
 scheme} if $F\cong h_P$ for some scheme $P$ over $S$
@@ -5843,7 +5851,8 @@ $\underline{\Hilb}$ etc.; uniqueness of the representing scheme is
 \Cref{lem:pc-representable-unique}.
 % Mathlib: \texttt{RepresentableBy} is the datum of an isomorphism \(F\cong h_X\) and
 % \texttt{IsRepresentable} the existence of one, for a presheaf of types on any
-% category; take that category to be the category of schemes over \(S\).
+% category; take that category to be the category of schemes over \(S\), as the
+% ambient-category convention of \Cref{def:pc-zariski-sheaf-property} does.
 \mathlibok\ \lean{CategoryTheory.Functor.RepresentableBy, CategoryTheory.Functor.IsRepresentable}
 \uses{def:pc-scheme}
 \end{definition}
@@ -14268,11 +14277,13 @@ $F:(\Sch/S)^{\mathrm{op}}\to\textit{Sets}$ be a functor and suppose:
 \begin{description}
 \item[(1)] $F$ \termref{def:pc-zariski-sheaf-property}{satisfies the sheaf
 property for the Zariski topology};
-\item[(2)(a)] there exists a family $(F_i)_{i\in I}$ of subfunctors of
-$F$ each of which is representable;
+\item[(2)(a)] there exists a family $(F_i)_{i\in I}$ of
+\termref{def:pc-subfunctor}{subfunctors} of $F$ each of which is
+\termref{def:pc-representable-functor}{representable};
 \item[(2)(b)] each inclusion $F_i\subseteq F$ is
 \termref{def:pc-open-subfunctor}{representable by open immersions};
-\item[(2)(c)] the family $(F_i)_{i\in I}$ covers $F$.
+\item[(2)(c)] the family $(F_i)_{i\in I}$
+\termref{def:pc-cover}{covers} $F$.
 \end{description}
 Then $F$ is representable by a scheme over $S$.
 The cited lemma is stated absolutely --- for a contravariant functor on the
@@ -14280,7 +14291,7 @@ category of all schemes, with the conclusion that $F$ is representable ---
 whereas the statement here is its relative version over
 $(\Sch/S)^{\mathrm{op}}$, and it is the proof below that supplies that
 relative statement.
-\uses{def:pc-subfunctor,def:pc-open-subfunctor,def:pc-representable-functor}
+\uses{def:pc-subfunctor,def:pc-open-subfunctor,def:pc-representable-functor,def:pc-cover,def:pc-zariski-sheaf-property}
 % Mathlib: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable
 % (Mathlib/AlgebraicGeometry/Sites/Representability.lean) carries this tag and
 % takes exactly the four hypotheses above -- a sheaf for the Zariski topology,
@@ -15309,15 +15320,15 @@ $\dim_KH^0=1$, $H^1=0$.  This proves the lemma.
 (Picard Schemes of Curves, Lemma~44.5.1,
 \stacksproject{0B9Q}.)
 Let $k$ be a field and let
-$G:(\Sch/k)^{\mathrm{op}}\to\textit{Groups}$ be a functor.  With the
-terminology of
-Definitions~\ref{def:pc-subfunctor} and~\ref{def:pc-open-subfunctor}, assume:
+$G:(\Sch/k)^{\mathrm{op}}\to\textit{Groups}$ be a functor.  Assume:
 \begin{description}
 \item[(1)] $G$ \termref{def:pc-zariski-sheaf-property}{satisfies the sheaf
 property for the Zariski topology};
-\item[(2)(a)] there exists a subfunctor $F\subseteq G$ such that $F$ is
-representable;
-\item[(2)(b)] $F\subseteq G$ is representable by open immersions;
+\item[(2)(a)] there exists a \termref{def:pc-subfunctor}{subfunctor}
+$F\subseteq G$ such that $F$ is
+\termref{def:pc-representable-functor}{representable};
+\item[(2)(b)] $F\subseteq G$ is
+\termref{def:pc-open-subfunctor}{representable by open immersions};
 \item[(2)(c)] for every field extension $K$ of $k$ and every
 $g\in G(K)$ there exists $g'\in G(k)$ such that $g'g\in F(K)$.
 \end{description}
