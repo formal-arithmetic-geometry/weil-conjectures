@@ -1,0 +1,149 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,left=17mm,right=17mm,top=14mm,bottom=15mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.20em}
+\setlist[enumerate]{leftmargin=1.9em,itemsep=0.25em,topsep=0.25em}
+\setlist[itemize]{leftmargin=1.8em,itemsep=0.15em,topsep=0.2em}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{0.65em}{0.28em}
+\linespread{0.99}
+
+\newcommand{\C}{\mathcal C}
+\newcommand{\K}{\mathcal K}
+\newcommand{\D}{\mathcal D}
+\newcommand{\R}{\mathbf R}
+\newcommand{\Lder}{\mathbf L}
+\newcommand{\iHom}{\underline{\operatorname{Hom}}}
+
+\title{\vspace{-2.0em}\Large From Derived Tensor to Monoidal Closed: A Proof Route in the Grothendieck Abelian Case}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.3em}
+
+\section*{1. Current Setup, and What Really Needs to Be Proved}
+
+Let $\C$ be a Grothendieck abelian, monoidal closed category, and assume that the compatibility between the monoidal structure and the additive structure needed to construct the complex Tensor has already been established. Write
+\[
+  \K=K(\C),\qquad \D=D(\C),\qquad Q:\K\longrightarrow\D
+\]
+for the homotopy category of unbounded complexes, the derived category, and the localization with respect to quasi-isomorphisms.
+
+In the current development, the following three items may be taken as solved inputs. First, $\D$ already has a derived Tensor, and it is indeed the binary left derived functor of the Tensor on $\K$, so $X\otimes^{\mathbf L}Y$ is already an available monoidal product. Second, in the Grothendieck abelian case we directly assume that there are enough K-injectives, so later right derived functors can be constructed using K-injective replacement; here we no longer seek a more general existence theorem than this assumption. Third, there is already a one-variable version of the ``derived functors preserve adjunctions'' theorem: if $F\dashv G$, and the required left and right derived functors exist, then one obtains
+\[
+  \Lder F\dashv \R G.
+\]
+
+The goal is to use these ready-made tools to prove that $\D$ is monoidal closed. The most important simplification here is: one does not need to manually construct a binary $\mathrm{RHom}$ from the start. According to the definition of a closed monoidal structure, it suffices to construct, for each $X\in\D$, a right adjoint of
+\[
+  X\otimes^{\mathbf L}- : \D\longrightarrow\D.
+\]
+Once all these objectwise right adjoints exist, the bifunctoriality of the internal Hom can be organized uniformly by the closed structure itself. Therefore the current task should be understood as ``prove that every derived object is closed'', rather than ``first define the complete RHom bifunctor''.
+
+\section*{2. First Gap: First Obtain the Tensor--Hom Adjunction on the Homotopy Category}
+
+Fix $P\in\K$. In order to use the derived adjunction theorem later, we first need an ordinary adjunction before localization:
+\[
+  P\otimes-\;\dashv\;H_P
+  \qquad\text{on }\K.
+\]
+This step is the most substantial part of the remaining work. Although $\C$ itself is already monoidal closed, this does not automatically make $K(\C)$ monoidal closed; one must also lift the internal Hom in $\C$ to a complex-level internal Hom.
+
+For cochain complexes $P,Y$, the expected object in degree $n$ is
+\[
+  \iHom^{\bullet}(P,Y)^n
+  =\prod_{p\in\mathbb Z}\iHom_{\C}\!\left(P^p,Y^{p+n}\right),
+\]
+with the standard differential
+\[
+  d(f)=d_Y\circ f-(-1)^n f\circ d_P.
+\]
+Here the Grothendieck assumption is very convenient: the products needed for the unbounded internal Hom can be used directly, and one need not introduce additional abstraction for the weakest completeness assumptions. What really needs to be formalized is: that the above differential indeed squares to zero; that evaluation and currying can be defined at the level of complexes; and that they give a natural Tensor--Hom adjunction
+\[
+  \operatorname{Hom}(P\otimes X,Y)
+  \cong
+  \operatorname{Hom}\!\left(X,\iHom^{\bullet}(P,Y)\right).
+\]
+Finally, one must check that this correspondence respects chain homotopy, so that it descends to $\K$. Once this is done, one obtains, for each $P\in\K$, a right adjoint $H_P$. If desired, one may at this point first package these right adjoints into a monoidal closed structure on $\K$; but for the later derived step, having an adjoint for each individual $P$ is already enough.
+
+\section*{3. Second Gap: Fix One Variable of the Binary Derived Tensor}
+
+Now consider the left adjoint
+\[
+  T_P=P\otimes-:\K\longrightarrow\K.
+\]
+We already know that the binary left derived functor of the whole Tensor bifunctor is the derived Tensor on $\D$, so mathematically one should have
+\[
+  \Lder T_P\simeq Q(P)\otimes^{\mathbf L}-.
+\]
+The remaining issue is mainly at the API level: one needs to turn the conclusion about the ``binary left derived functor'', after fixing the first variable $P$, into an ordinary unary left derived conclusion. This step involves no new homological algebra; it merely restricts the already transported universal property of the derived Tensor to a single variable.
+
+If the existing interface can directly derive the unary derived property from the binary derived property, this step is just a short lemma. Even if the interface does not provide this for the moment, one can first independently construct the left derived functor of $T_P$, and then use the uniqueness of left derived functors to prove that it is naturally isomorphic to $Q(P)\otimes^{\mathbf L}-$. Therefore this item should be regarded as a ``small bridge'', not a new mathematical construction.
+
+\newpage
+\section*{4. Third Gap: Use K-Injectives and the Existing Derived Adjunction Theorem}
+
+The first step has given
+\[
+  P\otimes-\dashv H_P
+  \qquad\text{on }\K.
+\]
+The right-hand $H_P$ needs a right derived functor, but within the current scope this is no longer an unsolved problem. We already allow the use of enough K-injectives, so after taking a K-injective replacement one obtains
+\[
+  \R H_P:\D\longrightarrow\D.
+\]
+Combining this with the identification in the previous section, the original adjunction, after left and right deriving, becomes
+\[
+  Q(P)\otimes^{\mathbf L}-
+  \dashv
+  \R H_P.
+\]
+This is precisely the meaning of saying that $Q(P)$ is closed in $\D$. Hence for all objects coming from $\K$, we have already obtained the required closed structure:
+\[
+  \boxed{\text{$Q(P)$ is closed for every $P\in\K$.}}
+\]
+
+It is worth emphasizing here that $\R H_P$ for the moment only needs to exist separately for each fixed $P$. We do not yet need to prove that these right derived functors vary contravariantly with $P$ and form a binary functor; nor do we need at this point to identify it with some pre-defined $\mathrm{RHom}$. These additional functorialities will be handled uniformly by general theory after the monoidal closed structure has been established. Therefore the only role played by the K-injective machinery at this stage is to guarantee that the right derived functor of each $H_P$ is available.
+
+\section*{5. Fourth Gap: From $Q(P)$ to an Arbitrary Derived Object}
+
+Finally, one still needs to pass from ``all $Q(P)$ are closed'' to ``all $X\in\D$ are closed''. This step uses the essential surjectivity of the localization functor $Q$. Given any $X\in\D$, one can choose $P\in\K$ and an isomorphism
+\[
+  e:Q(P)\xrightarrow{\sim}X.
+\]
+From $e$ one obtains a natural isomorphism between the two Tensor functors
+\[
+  Q(P)\otimes^{\mathbf L}-
+  \cong
+  X\otimes^{\mathbf L}-.
+\]
+Therefore one can transport the adjunction
+\[
+  Q(P)\otimes^{\mathbf L}-\dashv\R H_P
+\]
+along this natural isomorphism to obtain a right adjoint of $X\otimes^{\mathbf L}-$. In other words, closedness only needs to be transferred once along an object isomorphism, and then, together with the essential surjectivity of $Q$, this covers all objects in $\D$.
+
+When formalizing, it is best to write ``closedness transfers along an object isomorphism'' as a separate very thin category-theoretic helper. Then the final instance construction is almost just: choose a preimage $Q(P)\cong X$ for $X$, take the already existing right adjoint for $Q(P)$, and move it across along the isomorphism. The fact that the choice is not canonical does not matter, because here one is only constructing the right-adjoint data required for the closed structure.
+
+\section*{6. What Then Actually Remains to Be Done}
+
+Under the current Grothendieck abelian + enough K-injectives setup, the originally more general route can be reorganized into the following four points:
+
+\begin{enumerate}
+  \item \textbf{Closedness at the homotopy level (main work).} Construct the complex internal Hom, prove the Tensor--Hom adjunction, and make it descend to $K(\C)$. This is the only part involving a fair amount of new object construction, notation, and homotopy compatibility.
+  \item \textbf{The derived-Tensor bridge for a fixed variable (small work).} From the already existing binary derived Tensor, obtain that $Q(P)\otimes^{\mathbf L}-$ is the unary left derived functor of $P\otimes-$.
+  \item \textbf{Derived adjunction gives closedness of $Q(P)$ (basically glue).} The right derived functor is provided by enough K-injectives; apply the already existing ``left and right derived functors preserve adjunctions'' theorem.
+  \item \textbf{Essential surjectivity and isomorphism transport (small work).} Extend the closedness of $Q(P)$ to an arbitrary $X\in D(\C)$, thereby obtaining the full monoidal closed structure.
+\end{enumerate}
+
+Therefore, compared with the most general case, one can now completely remove ``prove that the right derived functor exists'' from the project list. The remaining core bottleneck is actually concentrated in point 1; points 2--4 are mainly about connecting the already available derived Tensor, K-injective right derived functors, and the derived-adjunction theorem. Once the monoidal closed structure on $D(\C)$ is finally obtained, its internal Hom is the object-level derived internal Hom. After that, proving that it agrees with the concrete Hom-complex + K-injective model is the further work of identifying and developing the $\mathrm{RHom}$ API.
+
+\end{document}
