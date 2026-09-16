@@ -60,14 +60,20 @@ sheaf-condition argument that the kernel description gets for free.
 
 ## TODO
 
-Local freeness of rank one for an invertible ideal sheaf. Half of the criterion this needs is
-now available: `Scheme.Modules.Hom.isIso_of_isIso_stalkMap` checks a *given* morphism
-`𝒪_U ⟶ I|_U` on stalks, and `mem_range_stalkMap_toModulesι_iff` below describes the stalk it
-has to hit. What is still missing is the other half — producing the open `U` and the morphism,
-that is, a generator of the stalk `I_x` together with a section over some `U` extending it —
-and the transport of `isIso_of_isIso_stalkMap` along `Scheme.Modules.restrictFunctor` to `U`
-viewed as a scheme. Note also that Mathlib's `SheafOfModules.IsLocallyFree` carries no rank
-information, so "rank one" has to be spelled out separately.
+Local freeness of rank one for an invertible ideal sheaf. Several halves of the criterion this
+needs are now available. `Scheme.Modules.Hom.isIso_iff_isIso_app` quantifies over *all* opens,
+which is not usable directly, but `Scheme.Modules.Hom.isIso_of_isIso_stalkMap` checks a *given*
+morphism `𝒪_U ⟶ I|_U` on stalks, `mem_range_stalkMap_toModulesι_iff` below describes the stalk
+it has to hit, and the local forms `Scheme.Modules.isIso_of_forall_exists_isIso_app` (invertible
+on every open small enough) and `Scheme.Modules.isIso_of_isOpenCover_restrict` (invertible after
+restriction to each member of an open cover) are there too. What is still missing is the
+criterion on a basis of opens, whose proof has to go through separatedness and gluing because a
+basis is not closed under intersection with an arbitrary open; the production of the open `U` and
+the morphism, that is, a generator of the stalk `I_x` together with a section over some `U`
+extending it; and the transport of `isIso_of_isIso_stalkMap` along
+`Scheme.Modules.restrictFunctor` to `U` viewed as a scheme. Note also that Mathlib's
+`SheafOfModules.IsLocallyFree` carries no rank information, so "rank one" has to be spelled out
+separately.
 -/
 
 @[expose] public section

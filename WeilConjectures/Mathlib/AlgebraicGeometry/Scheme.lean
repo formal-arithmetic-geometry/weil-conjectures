@@ -12,7 +12,8 @@ public import Mathlib.AlgebraicGeometry.Scheme
 schemes with one point
 
 We record that the restriction of a section `s` of the structure sheaf to any open contained
-in `X.basicOpen s` is a unit, that `Scheme.Hom.appLE` only depends on the morphism up to
+in `X.basicOpen s` is a unit, that a global function is a unit exactly when its basic open
+subset is everything, that `Scheme.Hom.appLE` only depends on the morphism up to
 equality, that `Scheme.Hom.appLE` between the top opens is `Scheme.Hom.appTop`, that an
 isomorphism of schemes induces an isomorphism on global sections, that any presheaf on `X` sends
 the inclusion `⊤ ≤ a ⁻¹ᵁ ⊤` to the identity, the preimage of `⊤` under a morphism of schemes
@@ -38,6 +39,14 @@ lemma Scheme.presheaf_map_homOfLE_preimage_top_eq_id {C : Type*} [Category C] {Y
     F.map (homOfLE (by simp : (⊤ : X.Opens) ≤ a ⁻¹ᵁ ⊤)).op = 𝟙 (F.obj (op ⊤)) :=
   (congrArg (fun i : (op (a ⁻¹ᵁ ⊤) : X.Opensᵒᵖ) ⟶ op ⊤ ↦ F.map i)
     (Subsingleton.elim _ (𝟙 (op (⊤ : X.Opens))))).trans (F.map_id _)
+
+/-- **A global function is a unit exactly when its basic open subset is everything**, that is,
+exactly when it is a unit in every local ring of `X`. This is the global-sections form of
+`AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ`. -/
+lemma Scheme.isUnit_iff_basicOpen_eq_top (s : Γ(X, ⊤)) : IsUnit s ↔ X.basicOpen s = ⊤ := by
+  refine ⟨X.basicOpen_of_isUnit, fun hs ↦ ?_⟩
+  refine RingedSpace.isUnit_of_isUnit_germ X.toRingedSpace ⊤ s fun x _ ↦ ?_
+  exact (X.mem_basicOpen s x trivial).1 (hs.ge (Opens.mem_top x))
 
 /-- The restriction of a section `s` to any open contained in `X.basicOpen s` is a unit. -/
 lemma Scheme.isUnit_res_of_le_basicOpen {s : Γ(X, ⊤)} {U : X.Opens} (hU : U ≤ X.basicOpen s) :

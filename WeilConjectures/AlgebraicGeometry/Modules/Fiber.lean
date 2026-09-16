@@ -42,6 +42,13 @@ As a consequence, if `L` is an invertible `𝒪ₓ`-module with tensor inverse `
 - `AlgebraicGeometry.Scheme.Modules.finrank_fiber_eq_one`: the fibre of an invertible sheaf of
   modules is a one-dimensional `κ(x)`-vector space, with
   `AlgebraicGeometry.Scheme.Modules.rank_fiber_eq_one` for the cardinal-valued rank.
+- `AlgebraicGeometry.Scheme.Modules.span_fiberMk_oneSection`: the fibre of the structure sheaf
+  is spanned by the image of the unit function, whence
+  `AlgebraicGeometry.Scheme.Modules.fiberMap_homOfSectionTop_apply`, the fibre of multiplication
+  by a global function is multiplication by its value, and
+  `AlgebraicGeometry.Scheme.Modules.fiberMap_eq_zero_iff_evaluation_endSection`: the fibre of an
+  endomorphism of the structure sheaf vanishes at `x` exactly when the corresponding global
+  function does.
 
 -/
 
@@ -118,6 +125,64 @@ noncomputable def fiberUnitIso (X : Scheme.{u}) (x : X) :
       ModuleCat.of (X.residueField x) (X.residueField x) :=
   (fiberFunctor X x).mapIso (SheafOfModules.tensorUnitIso X.sheaf).symm ≪≫
     fiberTensorUnitIso X x
+
+/-- **The fibre of the structure sheaf is one-dimensional.** -/
+@[simp]
+theorem finrank_fiber_structureModules (X : Scheme.{u}) (x : X) :
+    Module.finrank (X.residueField x) (fiber X.structureModules x) = 1 := by
+  rw [(fiberUnitIso X x).toLinearEquiv.finrank_eq, Module.finrank_self]
+
+instance finiteDimensional_fiber_structureModules (X : Scheme.{u}) (x : X) :
+    FiniteDimensional (X.residueField x) (fiber X.structureModules x) :=
+  Module.finite_of_finrank_pos (by simp)
+
+/-- **The fibre of the structure sheaf is spanned by the image of the unit function.** This is
+the fibrewise analogue of `AlgebraicGeometry.Scheme.Modules.span_germ_oneSection`. -/
+lemma span_fiberMk_oneSection (X : Scheme.{u}) (x : X) :
+    Submodule.span (X.residueField x) {fiberMk X.structureModules x (oneSection X ⊤)} = ⊤ := by
+  have hv : fiberMk X.structureModules x (oneSection X ⊤) ≠ 0 :=
+    fiberMk_unit_ne_zero_of_isUnit isUnit_one x
+  refine Submodule.eq_top_of_finrank_eq ?_
+  rw [finrank_span_singleton hv, finrank_fiber_structureModules]
+
+/-- **The fibre of multiplication by a global function is multiplication by its value**: the
+fibre at `x` of the endomorphism `· a` of the structure sheaf acts on `𝒪ₓ(x) = κ(x)` as the
+value `a(x)`. -/
+lemma fiberMap_homOfSectionTop_apply (X : Scheme.{u}) (a : Γ(X, ⊤)) (x : X)
+    (v : fiber X.structureModules x) :
+    fiberMap (homOfSectionTop X.structureModules a) x v = X.Γevaluation x a • v := by
+  obtain ⟨c, rfl⟩ := Submodule.mem_span_singleton.1
+    ((span_fiberMk_oneSection X x).ge (Submodule.mem_top (x := v)))
+  have hsm : fiberMap (homOfSectionTop X.structureModules a) x
+      (c • fiberMk X.structureModules x (oneSection X ⊤)) =
+      c • fiberMap (homOfSectionTop X.structureModules a) x
+        (fiberMk X.structureModules x (oneSection X ⊤)) :=
+    (fiberMap (homOfSectionTop X.structureModules a) x).hom.map_smul c _
+  rw [hsm, fiberMap_fiberMk, app_homOfSectionTop_oneSection, fiberMk_structureModules_eq_smul,
+    smul_comm]
+
+/-- **The fibre of an endomorphism of the structure sheaf vanishes at `x` exactly when the
+corresponding global function does.** -/
+lemma fiberMap_eq_zero_iff_evaluation_endSection (ψ : X.structureModules ⟶ X.structureModules)
+    (x : X) : fiberMap ψ x = 0 ↔ X.Γevaluation x (endSection ψ) = 0 := by
+  have happ : fiberMap ψ x (fiberMk X.structureModules x (oneSection X ⊤)) =
+      fiberMk X.structureModules x (endSection ψ) := fiberMap_fiberMk ψ x _
+  rw [← fiberMk_unit_eq_zero_iff x (endSection ψ)]
+  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+  · rw [← happ, h]
+    simp
+  · refine ModuleCat.hom_ext (LinearMap.ext_on (span_fiberMk_oneSection X x) ?_)
+    intro w hw
+    rw [Set.mem_singleton_iff] at hw
+    subst hw
+    rw [happ, h]
+    simp
+
+/-- **The fibre of multiplication by a global function** vanishes at `x` exactly when the
+function does. -/
+lemma fiberMap_homOfSectionTop_eq_zero_iff (X : Scheme.{u}) (a : Γ(X, ⊤)) (x : X) :
+    fiberMap (homOfSectionTop X.structureModules a) x = 0 ↔ X.Γevaluation x a = 0 := by
+  rw [fiberMap_eq_zero_iff_evaluation_endSection, endSection_homOfSectionTop]
 
 /-- **The pairing between the fibres of an invertible sheaf and of its inverse.** If `L ⊗ N` is
 isomorphic to the structure sheaf, then `L(x) ⊗ N(x)` is isomorphic to `κ(x)`. -/
