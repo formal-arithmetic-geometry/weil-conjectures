@@ -65,6 +65,20 @@ section Sheafify
 
 variable {M : SheafOfModules.{u} R} {I : Type u} (s : I → M.sections)
 
+/-- **Every linear combination of the sections `s i` over an object of the site is in the image
+of the morphism `free I ⟶ M` they classify**: the tautological section `i` of
+`SheafOfModules.free I` is sent to `s i`, by
+`SheafOfModules.sectionsMap_freeHomEquiv_symm_freeSection`. This is the sheaf-level counterpart
+of `PresheafOfModules.range_freeObjHom_app`, and is what makes that morphism locally surjective
+when the `s i` span the sections of `M` locally. -/
+lemma span_le_range_freeHomEquiv_symm_app (U : Cᵒᵖ) :
+    Submodule.span (R.obj.obj U) (Set.range fun i ↦ sections.eval (s i) U) ≤
+      LinearMap.range (Hom.app (M.freeHomEquiv.symm s).val U).hom := by
+  rw [Submodule.span_le]
+  rintro _ ⟨i, rfl⟩
+  exact ⟨sections.eval (freeSection (R := R) i) U,
+    congrArg (fun σ ↦ sections.eval σ U) (sectionsMap_freeHomEquiv_symm_freeSection s i)⟩
+
 variable (R I) in
 /-- The sheafification of the free presheaf of modules on the constant presheaf of types with
 value `I`. -/

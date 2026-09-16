@@ -45,6 +45,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
+public import WeilConjectures.AlgebraicGeometry.TwistingSheafGloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafInvertible
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup

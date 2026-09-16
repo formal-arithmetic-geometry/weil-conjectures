@@ -72,6 +72,11 @@ graded ring no element of `𝒜 j` need avoid a given `x`, whereas
   an open set on which a homogeneous element `f` of degree `m` is invertible, the sections of
   `𝒪(m * k)`, `k : ℤ`, form a free module of rank one over the sections of the structure sheaf,
   on the generator `f ^ k`.
+- `AlgebraicGeometry.Proj.mem_span_res_homogeneousSection`: local freeness read as a spanning
+  statement, for `k : ℕ`: over such an open set every section of `𝒪(m * k)` is a multiple of the
+  restriction of the *global* section attached to `f ^ k`. This is what makes `𝒪(d)` generated
+  by its global sections, in
+  `WeilConjectures.AlgebraicGeometry.TwistingSheafGloballyGenerated`.
 
 ## TODO
 
@@ -634,6 +639,35 @@ theorem homogeneousSection_sum {j : ℕ} {ι : Type*} (a : ι → ↥(𝒜 j)) (
     homogeneousSection (𝒜 := 𝒜) (∑ i ∈ s, a i).2 =
       ∑ i ∈ s, homogeneousSection (a i).2 :=
   map_sum (homogeneousSectionHom 𝒜 j) a s
+
+/-- **Over an open subset on which a homogeneous element `f` of degree `m` is invertible, the
+global section of `𝒪(m * k)` attached to `f ^ k` restricts to the tautological generator
+`ProjectiveSpectrum.TwistingSheaf.sectionPow` there.** -/
+lemma res_homogeneousSection_eq_sectionPow {m : ℕ} {f : A} (hf : f ∈ 𝒜 m)
+    {U : (Proj 𝒜).Opens} (hU : U ≤ Proj.basicOpen 𝒜 f) (k : ℕ) {j : ℕ} (hj : j = m * k)
+    (hfk : f ^ k ∈ 𝒜 j) :
+    (twistingSheaf 𝒜 j).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (homogeneousSection hfk) =
+      sectionPow hf (fun x ↦ hU x.2) k (by exact_mod_cast hj) := by
+  -- both sides are the dependent function `x ↦ f ^ k / 1`
+  refine Subtype.ext (funext fun x ↦ ?_)
+  rw [sectionPow_apply, powFun_natCast]
+  rfl
+
+/-- **Over an open subset on which a homogeneous element `f` of degree `m` is invertible, every
+section of `𝒪(m * k)` is a multiple of the restriction of the global section attached to
+`f ^ k`.** Such sections form a free module of rank one on the tautological generator
+(`AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.powCoeff_smul_sectionPow`), and that
+generator is the restriction of `AlgebraicGeometry.Proj.homogeneousSection hfk`. -/
+lemma mem_span_res_homogeneousSection {m : ℕ} {f : A} (hf : f ∈ 𝒜 m)
+    {U : (Proj 𝒜).Opens} (hU : U ≤ Proj.basicOpen 𝒜 f) (k : ℕ) {j : ℕ} (hj : j = m * k)
+    (hfk : f ^ k ∈ 𝒜 j) (t : Γ(twistingSheaf 𝒜 j, U)) :
+    t ∈ Submodule.span Γ(Proj 𝒜, U)
+      {(twistingSheaf 𝒜 j).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op
+        (homogeneousSection hfk)} := by
+  have hc : (j : ℤ) = m * k := by exact_mod_cast hj
+  rw [res_homogeneousSection_eq_sectionPow hf hU k hj hfk]
+  exact Submodule.mem_span_singleton.2 ⟨powCoeff hf (fun x ↦ hU x.2) k hc t,
+    powCoeff_smul_sectionPow hf (fun x ↦ hU x.2) k hc t⟩
 
 /-- Multiplication by a homogeneous element `f` of degree `m` is a morphism of `𝒪`-modules
 `𝒪(d) ⟶ 𝒪(d + m)` on `Proj 𝒜`. -/
