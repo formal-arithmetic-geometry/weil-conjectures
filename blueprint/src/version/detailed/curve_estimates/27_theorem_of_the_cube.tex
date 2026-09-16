@@ -821,6 +821,29 @@ prove; the lemma exists to name the standing facts that the rest of the
 section uses, in the manner of \Cref{prop:av-basic} in \Cref{chap:av-isogeny}.
 \end{proof}
 
+\begin{lemma}[Local normal form of a morphism of line bundles]
+\label{lem:cube-trivialising-open}
+\lean{AlgebraicGeometry.Scheme.Modules.exists_restrict_eq_homOfSectionTop}
+\leanok
+Let $S$ be a scheme, let $M$ and $N$ be line bundles on $S$, let
+$\varphi\colon M\to N$ be a morphism of $\O_S$-modules and let $s\in S$.  Then
+there are an open neighbourhood $U$ of $s$, trivialisations
+$e_M\colon M|_U\to\O_U$ and $e_N\colon N|_U\to\O_U$, and a function
+$a\in\Gamma(U,\O_U)$, such that $\varphi|_U=e_N^{-1}\circ a\circ e_M$, where the
+middle map is multiplication by $a$ on $\O_U$.
+\end{lemma}
+\begin{proof}
+\leanok
+Choose an open neighbourhood of $s$ on which $M$ is free of rank one and one on
+which $N$ is, and let $U$ be their intersection; write $e_M$ and $e_N$ for the
+resulting trivialisations.  Then $e_N\circ\varphi|_U\circ e_M^{-1}$ is an
+endomorphism of $\O_U$ as a sheaf of modules over itself, and every such
+endomorphism is multiplication by its value $a\in\Gamma(U,\O_U)$ on the unit
+section: a morphism $\O_U\to F$ of $\O_U$-modules is determined by the global
+section of $F$ which is the image of $1$, and every global section of $F$ arises
+this way.
+\end{proof}
+
 \begin{lemma}[The degeneracy locus of a morphism of line bundles is closed]
 \label{lem:cube-degeneracy-closed}
 \lean{AlgebraicGeometry.Scheme.Modules.isClosed_setOf_fiberMap_eq_zero}
@@ -834,6 +857,7 @@ is a closed subset of $S$, where $\varphi(s)\colon M(s)\to N(s)$ is the
 induced $\kappa(s)$-linear map on fibres.
 \end{lemma}
 \begin{proof}
+\uses{lem:cube-trivialising-open}
 \leanok
 The assertion is local on $S$, so it suffices to treat an open subset
 $U\subseteq S$ on which both $M$ and $N$ are free of rank one; let $m$ and $n$
@@ -859,12 +883,12 @@ $\varphi(s)\colon M(s)\to N(s)$ is non-zero.  Then $\varphi$ is an
 isomorphism.
 \end{lemma}
 \begin{proof}
-\uses{lem:cube-degeneracy-closed}
+\uses{lem:cube-trivialising-open}
 \leanok
 Being an isomorphism is local on $S$, so we may work on an open subset
 $U\subseteq S$ on which $M$ and $N$ are free of rank one with generators $m$
-and $n$, and write $\varphi(m)=a\cdot n$ with $a\in\Gamma(U,\O_U)$ as in the
-proof of \Cref{lem:cube-degeneracy-closed}.  The hypothesis says that
+and $n$, and write $\varphi(m)=a\cdot n$ with $a\in\Gamma(U,\O_U)$ as in
+\Cref{lem:cube-trivialising-open}.  The hypothesis says that
 $a\notin\m_s$ for every $s\in U$, that is that $a$ is a unit in every local
 ring $\O_{S,s}$ with $s\in U$.  A section of $\O_U$ which is a unit in every
 local ring of $U$ is a unit of $\Gamma(U,\O_U)$: it is invertible on an open
