@@ -25,6 +25,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.Flat
 public import WeilConjectures.AlgebraicGeometry.Modules.GloballyGenerated
+public import WeilConjectures.AlgebraicGeometry.Modules.HyperplaneSection
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
@@ -35,6 +36,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
+public import WeilConjectures.AlgebraicGeometry.Modules.ZPow
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.Rigidity
@@ -282,6 +284,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
+public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover
