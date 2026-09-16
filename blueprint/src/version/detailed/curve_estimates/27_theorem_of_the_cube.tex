@@ -1813,17 +1813,31 @@ $[n]\circ u=u^n$ applied to $u=[m]$.
 
 \begin{lemma}[A line bundle pulled back along a constant morphism is trivial]
 \label{lem:cube-pullback-constant}
+\lean{AlgebraicGeometry.Scheme.Pic.map_comp_eq_one,
+SheafOfModules.Invertible.nonempty_pullback_comp_iso_tensorUnit}
+\leanok
 Let $S$ be a $k$-scheme, let $V$ be a $k$-scheme, let $v\in V(k)$ and let
 $u\colon S\to V$ be the constant morphism at $v$, that is
 $u=v\circ\pi$ for the structure morphism $\pi\colon S\to\Spec k$.  Then
 $u^*N$ is trivial for every line bundle $N$ on $V$.
+
+One refinement is worth recording, because the formalisation is stated in that
+form.  Nothing about $k$ is used beyond $\mathrm{Pic}(\Spec k)=1$, so the
+statement holds for any factorisation $u=v\circ\pi$ through a scheme $T$ with
+trivial Picard group, $\pi\colon S\to T$ and $v\colon T\to V$; the case of a
+$k$-scheme is the case $T=\Spec k$.
 \end{lemma}
 \begin{proof}
-Pullback is pseudofunctorial, so $u^*N\cong\pi^*v^*N$.  Now $v^*N$ is a line
-bundle on $\Spec k$, and a line bundle on the spectrum of a field is trivial: a
-locally free module of rank one over a field is a one-dimensional vector space,
-and a choice of basis vector is an isomorphism with the field itself.  Hence
-$v^*N\cong\O_{\Spec k}$ and $u^*N\cong\pi^*\O_{\Spec k}\cong\O_S$.
+\leanok
+Pullback is pseudofunctorial, so $u^*=\pi^*\circ v^*$ as homomorphisms
+$\mathrm{Pic}(V)\to\mathrm{Pic}(S)$.  Now $v^*$ takes its values in
+$\mathrm{Pic}(\Spec k)$, which is trivial by the last lemma of (N3) in
+\Cref{sec:cube-cost}, so $u^*$ is the trivial homomorphism: the class of
+$u^*N$ in $\mathrm{Pic}(S)$ is that of $\O_S$, which is to say
+$u^*N\cong\O_S$.  Read on sheaves rather than on classes, this is the chain
+$u^*N\cong\pi^*v^*N\cong\pi^*\O_{\Spec k}\cong\O_S$, whose middle step is the
+triviality of the line bundle $v^*N$ on $\Spec k$ and whose last step is the
+monoidality of $\pi^*$.
 \end{proof}
 
 \begin{theorem}[The cube identity on an abelian variety]
@@ -2212,10 +2226,20 @@ from them.
   scheme whose underlying space has at most one point is trivial, so in
   particular that of the spectrum of a field is.  It is stated for the
   tensor-invertible notion of line bundle of the parallel layer of
-  \Cref{warn:cube-parallel-layer}, so before it can be used in the proof of
-  \Cref{lem:cube-pullback-constant} that notion has still to be identified
-  with local freeness of rank one, which is part of that same layer.  The rest
-  is in \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean},
+  \Cref{warn:cube-parallel-layer}, and so is the homomorphism $u^*$ itself:
+  \texttt{AlgebraicGeometry.Scheme.Pic.map}, in
+  \texttt{WeilConjectures/AlgebraicGeometry/Modules/PullbackMonoidal.lean},
+  with $\mathrm{id}^*=\mathrm{id}$ and $(v\circ u)^*=u^*\circ v^*$ beside it;
+  being a homomorphism of groups, it is compatible with tensor products and
+  with inverses for free.  Together these prove
+  \Cref{lem:cube-pullback-constant} outright, in
+  \texttt{WeilConjectures/AlgebraicGeometry/Modules/PullbackConstant.lean}: no
+  identification of the tensor-invertible notion with local freeness of rank
+  one is needed for it, the whole argument staying inside the former, which is
+  also the notion in which this chapter's consumers state ampleness.  What is
+  still missing from the list is the first lemma, that pullback preserves
+  local freeness of rank one; it belongs in
+  \texttt{WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean},
   beside (N2), unless the parallel layer supplies it first.
   \item[(N4)] \emph{Cohomology of a sheaf of modules on a scheme, in all
   degrees.}  Needed to state \Cref{prop:cube-picard-square-zero},
@@ -2422,9 +2446,10 @@ listed above and can therefore be formalised today:
 \Cref{lem:cube-degeneracy-closed},
 \Cref{lem:cube-invertible-fibrewise} and
 \Cref{lem:cube-product-variety}.  A tenth,
-\Cref{lem:cube-pullback-constant}, needs from the missing list only the last
-lemma of (N3), that a line bundle on the spectrum of a field is trivial, which
-the parallel layer of \Cref{warn:cube-parallel-layer} may well supply itself.
+\Cref{lem:cube-pullback-constant}, needed from the missing list only the last
+lemma of (N3), that a line bundle on the spectrum of a field is trivial; the
+parallel layer of \Cref{warn:cube-parallel-layer} has since supplied that
+lemma, and the two are now formalised.
 The first of the five theorems of the chapter, \Cref{thm:cube-rigidity}, is
 formalisable today; none of the other four is.
 

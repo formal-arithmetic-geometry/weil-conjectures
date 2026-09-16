@@ -21,6 +21,8 @@ which needs no affineness hypothesis.
 - `AlgebraicGeometry.Scheme.overRingHom`: the ring homomorphism `R → Γ(X, 𝒪_X)`.
 - `AlgebraicGeometry.Scheme.overRingEquiv`: that ring homomorphism as a ring isomorphism, when
   the structure morphism identifies `R` with `Γ(X, 𝒪_X)`.
+- `AlgebraicGeometry.Scheme.module_sectionsTop`: the `R`-module structure on `Γ(X, 𝒪_X)` obtained
+  by restricting scalars along it.
 
 ## Implementation notes
 
@@ -66,6 +68,13 @@ lemma overRingEquiv_apply
     (h : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) (r : R) :
     overRingEquiv R X h r = overRingHom R X r :=
   rfl
+
+/-- The global functions of a scheme over `Spec R` form an `R`-module, by restriction of scalars
+along the structure map `R → Γ(X, 𝒪_X)`. -/
+noncomputable instance module_sectionsTop : Module R Γ(X, ⊤) :=
+  Module.compHom _ (overRingHom R X)
+
+lemma smul_sectionsTop_def (r : R) (t : Γ(X, ⊤)) : r • t = overRingHom R X r * t := rfl
 
 section
 
