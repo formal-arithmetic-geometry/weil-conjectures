@@ -37,6 +37,12 @@ morphism of schemes.
 - `SheafOfModules.Invertible.pullback`: the pullback of an invertible module is invertible.
 - `AlgebraicGeometry.Scheme.Pic.map`: the pullback homomorphism `Pic(Y) →* Pic(X)`, with
   `AlgebraicGeometry.Scheme.Pic.map_id` and `AlgebraicGeometry.Scheme.Pic.map_comp`.
+- `AlgebraicGeometry.Scheme.Modules.restrictFunctor f` is monoidal (an instance), obtained by
+  transporting the monoidal structure of the pullback functor along
+  `AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback`. Its structure maps are
+  `CategoryTheory.Functor.Monoidal.εIso` and `CategoryTheory.Functor.Monoidal.μIso`.
+- `AlgebraicGeometry.Scheme.Modules.restrictTensorIsoOfRestrictIsoTensorUnit`: on an open
+  subscheme trivialising `L`, the restriction of `F ⊗ L` is isomorphic to that of `F`.
 
 -/
 
@@ -119,5 +125,37 @@ lemma Pic.map_mk {M : Y.Modules} (hM : M.Invertible) :
   rw [← Units.val_inj, Units.coe_map, IsUnit.unit_spec, IsUnit.unit_spec,
     Skeleton.monoidHom_toSkeleton]
   rfl
+
+section Restrict
+
+variable [IsOpenImmersion f]
+
+/-- **Restriction along an open immersion is monoidal.** It is isomorphic to the pullback
+functor, which is monoidal, so the monoidal structure transports along
+`AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback`.
+
+In particular `CategoryTheory.Functor.Monoidal.μIso (Modules.restrictFunctor f) M N` is an
+isomorphism `M|ₓ ⊗ N|ₓ ≅ (M ⊗ N)|ₓ` and `CategoryTheory.Functor.Monoidal.εIso` is an
+isomorphism `𝟙_ X.Modules ≅ (𝟙_ Y.Modules)|ₓ`; both are natural and satisfy the associativity
+and unitality constraints. The `SheafOfModules.unit` version of the latter is
+`AlgebraicGeometry.Scheme.Modules.restrictUnitIso`. -/
+noncomputable instance : (Modules.restrictFunctor f).Monoidal :=
+  .transport (Modules.restrictFunctorIsoPullback f).symm
+
+/-- On an open subscheme trivialising `L`, the restriction of `F ⊗ L` is isomorphic to the
+restriction of `F`:
+
+```text
+                 μ⁻¹                 1 ⊗ e                ρ
+  (F ⊗ L)|ₓ ────────────▸ F|ₓ ⊗ L|ₓ ────────▸ F|ₓ ⊗ 𝟙_ ─────▸ F|ₓ
+```
+-/
+noncomputable def Modules.restrictTensorIsoOfRestrictIsoTensorUnit (F : Y.Modules)
+    {L : Y.Modules} (e : L.restrict f ≅ 𝟙_ X.Modules) :
+    (F ⊗ L).restrict f ≅ F.restrict f :=
+  (Functor.Monoidal.μIso (Modules.restrictFunctor f) F L).symm ≪≫
+    tensorIso (Iso.refl _) e ≪≫ ρ_ _
+
+end Restrict
 
 end AlgebraicGeometry.Scheme
