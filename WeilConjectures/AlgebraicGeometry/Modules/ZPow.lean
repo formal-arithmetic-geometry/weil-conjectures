@@ -211,18 +211,19 @@ family `L` of invertible sheaves of modules and an integer vector `m`.
 This is the sheaf whose Euler characteristic is the subject of Snapper's theorem. -/
 noncomputable def tensorZPow {r : ℕ} (F : X.Modules) {L : Fin r → X.Modules}
     (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) : X.Modules :=
-  Fin.foldr r (fun j N ↦ N ⊗ (hL j).zpow (m j)) F
+  Fin.foldl r (fun N j ↦ N ⊗ (hL j).zpow (m j)) F
 
 @[simp]
 lemma tensorZPow_zero (F : X.Modules) {L : Fin 0 → X.Modules} (hL : ∀ j, (L j).Invertible)
     (m : Fin 0 → ℤ) : tensorZPow F hL m = F :=
-  Fin.foldr_zero _ _
+  Fin.foldl_zero _ _
 
 lemma tensorZPow_succ {r : ℕ} (F : X.Modules) {L : Fin (r + 1) → X.Modules}
     (hL : ∀ j, (L j).Invertible) (m : Fin (r + 1) → ℤ) :
     tensorZPow F hL m =
-      tensorZPow F (fun j ↦ hL j.succ) (fun j ↦ m j.succ) ⊗ (hL 0).zpow (m 0) := by
-  rw [tensorZPow, Fin.foldr_succ]
+      tensorZPow F (fun j ↦ hL j.castSucc) (fun j ↦ m j.castSucc) ⊗
+        (hL (Fin.last r)).zpow (m (Fin.last r)) := by
+  rw [tensorZPow, Fin.foldl_succ_last]
   rfl
 
 /-- **The sheaf `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` is coherent** when `F` is coherent and the `Lⱼ`
@@ -233,9 +234,9 @@ theorem isCoherent_tensorZPow {r : ℕ} (F : X.Modules) [F.IsCoherent] {L : Fin 
   | zero => rw [tensorZPow_zero]; infer_instance
   | succ r ih =>
     rw [tensorZPow_succ]
-    have : (tensorZPow F (fun j ↦ hL j.succ) fun j ↦ m j.succ).IsCoherent :=
-      ih (fun j ↦ hL j.succ) fun j ↦ m j.succ
-    exact isCoherent_tensorObj_zpow _ (hL 0) (m 0)
+    have : (tensorZPow F (fun j ↦ hL j.castSucc) fun j ↦ m j.castSucc).IsCoherent :=
+      ih (fun j ↦ hL j.castSucc) fun j ↦ m j.castSucc
+    exact isCoherent_tensorObj_zpow _ (hL (Fin.last r)) (m (Fin.last r))
 
 end Modules
 
