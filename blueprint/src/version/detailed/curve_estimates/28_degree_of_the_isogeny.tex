@@ -428,6 +428,36 @@ the second identity,
 \]
 \end{proof}
 
+\begin{lemma}[Substitution of linear forms]
+\label{lem:deg-numerical-substitution}
+\uses{def:deg-numerical}
+\lean{IsNumericalPolynomial.comp_addHom,
+IsNumericalPolynomial.comp_append_neg}
+\leanok
+Let $P\colon\Z^s\to\Z$ be a numerical polynomial of total degree at most $d$ and
+let $f\colon\Z^r\to\Z^s$ be additive.  Then $P\circ f$ is a numerical polynomial
+of total degree at most $d$.  In particular, if $Q\colon\Z^{2r}\to\Z$ is a
+numerical polynomial of total degree at most $d$, then so is
+$\underline m\mapsto Q(m_1,\dots,m_r,-m_1,\dots,-m_r)$.
+\end{lemma}
+\begin{proof}
+\uses{lem:deg-difference-lowers-degree, lem:deg-difference-criterion}
+\leanok
+An additive $f$ is precisely a tuple of $s$ integer linear forms in $r$
+variables, since $\Z^r$ and $\Z^s$ are free.  For $v\in\Z^r$ one has
+\[
+  \Delta_v(P\circ f)=(\Delta_{f(v)}P)\circ f ,
+\]
+because $f(\underline m+v)=f(\underline m)+f(v)$; iterating, any composite of
+$d+1$ difference operators applied to $P\circ f$ is a composite of $d+1$
+difference operators applied to $P$, in the directions $f(e_1),\dots$,
+precomposed with $f$.  Those vanish by
+\Cref{lem:deg-difference-lowers-degree}(1), so
+\Cref{lem:deg-difference-criterion} shows that $P\circ f$ is a numerical
+polynomial of total degree at most $d$.  The last sentence is the case
+$f(\underline m)=(m_1,\dots,m_r,-m_1,\dots,-m_r)$.
+\end{proof}
+
 \section{Ample and very ample line bundles}\label{sec:deg-ample}
 
 Ampleness is used twice: to produce, on an abelian variety, a line bundle whose
@@ -618,7 +648,7 @@ is a numerical polynomial of total degree at most $\dim F$.
 \begin{proof}
 \uses{lem:deg-euler-additive, lem:deg-difference-criterion,
 lem:deg-difference-lowers-degree, lem:deg-general-hyperplane,
-lem:deg-ample-basic}
+lem:deg-ample-basic, lem:deg-numerical-substitution}
 Write $d:=\dim F$.  We argue by induction on $d$, the statement being proved
 simultaneously for all $X$, all $r$, all tuples $\underline L$ and all
 coherent $F$ with $\dim F\leq d$.
@@ -642,9 +672,9 @@ at most $d$ on $\Z^{2r}$.  Then
   \bigotimes_jN_j^{\otimes(-m_j)}\Bigr)
   =Q(m_1,\dots,m_r,-m_1,\dots,-m_r),
 \]
-and substituting the linear forms $m_j$ and $-m_j$ into a polynomial of total
-degree at most $d$ yields a polynomial of total degree at most $d$.  So it is
-enough to prove the theorem when every $L_j$ is very ample.
+and $P_{F,\underline L}$ is a numerical polynomial of total degree at most $d$
+by \Cref{lem:deg-numerical-substitution}.  So it is enough to prove the
+theorem when every $L_j$ is very ample.
 
 \emph{The inductive step.}  Let $d\geq0$ and assume the theorem for all
 coherent sheaves of dimension at most $d-1$; let $F$ have $\dim F\leq d$ and

@@ -31,6 +31,11 @@ for it.
   function killed by every composite of `d + 1` standard-basis difference operators is a numerical
   polynomial of total degree at most `d`. The resulting characterisation is
   `isNumericalPolynomial_iff_fwdDiffComp_eq_zero`.
+* `IsNumericalPolynomial.comp_addHom`: substituting an additive map, equivalently a tuple
+  of integer linear forms, into a numerical polynomial of total degree at most `d` gives a
+  numerical polynomial of total degree at most `d` (`lem:deg-numerical-substitution`), with the
+  special case `IsNumericalPolynomial.comp_append_neg` used in the reduction to very ample line
+  bundles in the proof of `thm:deg-snapper`.
 
 The alternating sum expansion of a composite of difference operators
 (`lem:deg-difference-explicit`) is `fwdDiffComp_eq_sum_powerset` in
@@ -312,3 +317,34 @@ theorem isNumericalPolynomial_iff_fwdDiffComp_eq_zero {P : (Fin r → ℤ) → �
     isNumericalPolynomial_of_fwdDiffComp_eq_zero⟩
 
 end Criterion
+
+namespace IsNumericalPolynomial
+
+variable {d s : ℕ} {P : (Fin s → ℤ) → ℤ}
+
+/-- **Substituting a linear map into a numerical polynomial.** If `P` is a numerical polynomial of
+total degree at most `d` in `s` variables and `f : ℤ ^ r → ℤ ^ s` is additive, then `P ∘ f` is a
+numerical polynomial of total degree at most `d` in `r` variables.
+
+Since `ℤ ^ r` and `ℤ ^ s` are free `ℤ`-modules, an additive `f` is precisely a tuple of `s` integer
+linear forms in `r` variables, so this covers every substitution of integer linear forms. This is
+`lem:deg-numerical-substitution` of the blueprint. -/
+theorem comp_addHom (hP : IsNumericalPolynomial d P) (f : (Fin r → ℤ) →ₙ+ (Fin s → ℤ)) :
+    IsNumericalPolynomial d (P ∘ f) :=
+  isNumericalPolynomial_of_fwdDiffComp_eq_zero fun j ↦ by
+    rw [fwdDiffComp_comp_addHom, hP.fwdDiffComp_eq_zero]
+    rfl
+
+/-- **Substituting `m` and `-m` into a numerical polynomial.** If `Q` is a numerical polynomial of
+total degree at most `d` in `r + r` variables, then `m ↦ Q (m₁, …, m_r, -m₁, …, -m_r)` is a
+numerical polynomial of total degree at most `d` in `r` variables. This is the substitution
+performed in the reduction to very ample line bundles in the proof of `thm:deg-snapper` of the
+blueprint. -/
+theorem comp_append_neg {Q : (Fin (r + r) → ℤ) → ℤ} (hQ : IsNumericalPolynomial d Q) :
+    IsNumericalPolynomial d fun m ↦ Q (Fin.append m (-m)) :=
+  hQ.comp_addHom <| AddHom.mk (fun m ↦ Fin.append m (-m)) fun m m' ↦ by
+    funext i
+    refine Fin.addCases (fun i ↦ ?_) (fun i ↦ ?_) i <;>
+      simp only [Fin.append_left, Fin.append_right, Pi.add_apply, Pi.neg_apply, neg_add]
+
+end IsNumericalPolynomial

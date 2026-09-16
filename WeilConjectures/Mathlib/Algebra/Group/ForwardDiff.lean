@@ -24,6 +24,9 @@ forward difference operator. This file collects the facts one needs about compos
   `Module.End ℤ (M → G)`, applied to `f`;
 * `fwdDiffComp_eq_sum_powerset`: the expansion of that composite as an alternating sum over the
   subsets of `Fin d`;
+* `fwdDiff_comp_addHom`, `fwdDiffComp_comp_addHom`: difference operators and their composites
+  transport along an additive map `φ`, in the sense that `Δ_[v] (f ∘ φ) = Δ_[φ v] f ∘ φ` and
+  `fwdDiffComp v (f ∘ φ) = fwdDiffComp (φ ∘ v) f ∘ φ`;
 * `fwdDiff_iter_sub`: the iterates `Δ_[h]^[n]` are compatible with subtraction;
 * `fwdDiffList`: the same composite indexed by a list of directions instead, so that
   concatenating two families of directions is `fwdDiffList_append`;
@@ -102,6 +105,29 @@ lemma fwdDiffComp_succ' (v : Fin (d + 1) → M) (f : M → G) :
   simp only [fwdDiffComp, List.ofFn_succ, List.prod_cons]
   rw [hc]
   simp only [Module.End.mul_apply, coe_fwdDiffₗ]
+
+section Comp
+
+variable {N : Type*} [AddCommMonoid N]
+
+/-- Forward differences transport along an additive map: differencing `f ∘ φ` in the direction `v`
+is differencing `f` in the direction `φ v`, in the sense that `Δ_[v] (f ∘ φ) = Δ_[φ v] f ∘ φ`. -/
+lemma fwdDiff_comp_addHom (φ : M →ₙ+ N) (f : N → G) (v : M) :
+    Δ_[v] (f ∘ φ) = (Δ_[φ v] f) ∘ φ := by
+  funext m
+  simp [fwdDiff, map_add]
+
+/-- Composites of forward difference operators transport along an additive map, in the sense that
+`fwdDiffComp v (f ∘ φ) = fwdDiffComp (φ ∘ v) f ∘ φ`. -/
+lemma fwdDiffComp_comp_addHom (φ : M →ₙ+ N) (f : N → G) (v : Fin d → M) :
+    fwdDiffComp v (f ∘ φ) = (fwdDiffComp (⇑φ ∘ v) f) ∘ φ := by
+  induction d generalizing f with
+  | zero => simp
+  | succ d ih =>
+    rw [fwdDiffComp_succ' v (f ∘ φ), fwdDiff_comp_addHom, ih, fwdDiffComp_succ' (⇑φ ∘ v) f]
+    rfl
+
+end Comp
 
 /-- Iterated forward difference operators are compatible with subtraction. -/
 @[simp] lemma fwdDiff_iter_sub (h : M) (f g : M → G) (n : ℕ) :
