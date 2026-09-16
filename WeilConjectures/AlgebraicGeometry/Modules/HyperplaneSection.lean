@@ -254,6 +254,100 @@ theorem vanishesAt_iff_notMem_basicOpen (m : Γ(L, W)) [IsIso (unitSmulRestrictH
     exact Submodule.smul_mem_smul
       ((IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 h)) Submodule.mem_top
 
+
+/-- **Multiplication by a trivialising section, as a linear equivalence on sections.** -/
+noncomputable def smulSectionEquiv (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    {V : X.Opens} (hV : V ≤ W) : Γ(X, V) ≃ₗ[Γ(X, V)] Γ(L, V) :=
+  LinearEquiv.ofBijective
+    { toFun := smulSection m V hV
+      map_add' := (smulSection m V hV).map_add
+      map_smul' := smulSection_smul m V hV }
+    (bijective_smulSection m hV)
+
+@[simp]
+lemma smulSectionEquiv_apply (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    {V : X.Opens} (hV : V ≤ W) (r : Γ(X, V)) :
+    smulSectionEquiv m hV r = smulSection m V hV r := rfl
+
+/-- **Contracting the second factor of `F ⊗ L` against a trivialisation of `L`.** Over an open
+subset on which `m` trivialises `L`, the sectionwise tensor product `Γ(F, V) ⊗ Γ(L, V)` maps to
+`Γ(F, V)` by using `m` to read a section of `L` as a function. -/
+noncomputable def tensorContract (F : X.Modules) (m : Γ(L, W))
+    [IsIso (unitSmulRestrictHom m)] {V : X.Opens} (hV : V ≤ W) :
+    Γ(F, V) ⊗[Γ(X, V)] Γ(L, V) →ₗ[Γ(X, V)] Γ(F, V) :=
+  TensorProduct.lift (LinearMap.mk₂ Γ(X, V)
+    (fun (a : Γ(F, V)) (l : Γ(L, V)) ↦ (smulSectionEquiv m hV).symm l • a)
+    (fun _ _ _ ↦ smul_add _ _ _) (fun _ _ _ ↦ smul_comm _ _ _)
+    (fun _ _ _ ↦ by rw [map_add, add_smul])
+    (fun _ _ _ ↦ by rw [_root_.map_smul, smul_eq_mul, mul_smul]))
+
+lemma tensorContract_tmul (F : X.Modules) (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    {V : X.Opens} (hV : V ≤ W) (a : Γ(F, V)) (l : Γ(L, V)) :
+    tensorContract F m hV (a ⊗ₜ[Γ(X, V)] l) = (smulSectionEquiv m hV).symm l • a := rfl
+
+/-- **A vanishing tensor against a trivialised section is a vanishing product.** -/
+theorem smul_eq_zero_of_tmul_eq_zero (F : X.Modules) (m : Γ(L, W))
+    [IsIso (unitSmulRestrictHom m)] {V : X.Opens} (hV : V ≤ W) (a : Γ(F, V)) (r : Γ(X, V))
+    (h : a ⊗ₜ[Γ(X, V)] smulSection m V hV r = 0) : r • a = 0 := by
+  have h' := congrArg (tensorContract F m hV) h
+  rwa [map_zero, tensorContract_tmul, ← smulSectionEquiv_apply,
+    LinearEquiv.symm_apply_apply] at h'
+
 end Trivialisation
+
+/-- **The nonzerodivisor criterion for an invertible sheaf: sufficiency.** If `L` is invertible
+and the global section `s` of `L` vanishes at no associated point of the quasi-coherent sheaf
+`F`, then multiplication by `s` is a monomorphism `F ⟶ F ⊗ L`. -/
+theorem mono_mulSection_of_forall_not_vanishesAt [IsLocallyNoetherian X] {L : X.Modules}
+    (hL : L.Invertible) (F : X.Modules) [F.IsQuasicoherent] (s : Γ(L, ⊤))
+    (hs : ∀ x ∈ F.associatedPoints, ¬ L.VanishesAt s x) :
+    Mono (mulSection F s) := by
+  have hres : ∀ (A : X.Modules) {V V' : X.Opens} (h : V ≤ V') (a : Γ(A, ⊤)),
+      A.presheaf.map (homOfLE h).op (A.presheaf.map V'.leTop.op a) =
+        A.presheaf.map V.leTop.op a := by
+    intro A V V' h a
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
+    congr 2
+  refine mono_of_injective_app _ fun U ↦ ?_
+  have hzero : ∀ t : Γ(F, U), Hom.app (mulSection F s) U t = 0 → t = 0 := by
+    intro t ht
+    rw [app_mulSection] at ht
+    refine TopCat.Presheaf.section_ext ⟨F.presheaf, F.isSheaf⟩ U t 0 fun x hxU ↦ ?_
+    obtain ⟨V₀, hV₀U, hxV₀, hker⟩ :=
+      exists_restrict_tmul_eq_zero t (L.presheaf.map U.leTop.op s) ht hxU
+    obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
+    have hmi : IsIso (unitSmulRestrictHom m) := hm
+    obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
+    have hgW : L.presheaf.map W.leTop.op s = g • m := by
+      rw [← hg, smulSection]
+      simp only [AddMonoidHom.mk'_apply]
+      congr 1
+      rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
+      simp
+    obtain ⟨-, ⟨V, hVaff, rfl⟩, hxV, hVsub⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+      (show x ∈ ((V₀ ⊓ W : X.Opens) : Set X) from ⟨hxV₀, hxW⟩) (V₀ ⊓ W).2
+    have hVV₀ : V ≤ V₀ := fun y hy ↦ (hVsub hy).1
+    have hVW : V ≤ W := fun y hy ↦ (hVsub hy).2
+    have hsV : L.presheaf.map (homOfLE (hVV₀.trans hV₀U)).op (L.presheaf.map U.leTop.op s) =
+        smulSection m V hVW (X.presheaf.map (homOfLE hVW).op g) := by
+      rw [hres L, ← map_smulSection m (le_refl W) hVW (homOfLE hVW) g, hg, hres L]
+    have hkey : X.presheaf.map (homOfLE hVW).op g •
+        F.presheaf.map (homOfLE (hVV₀.trans hV₀U)).op t = 0 :=
+      smul_eq_zero_of_tmul_eq_zero F m hVW _ _ (hsV ▸ hker V hVV₀)
+    have hnoeth : IsNoetherianRing Γ(X, V) := IsLocallyNoetherian.component_noetherian ⟨V, hVaff⟩
+    have hreg : IsSMulRegular Γ(F, V) (X.presheaf.map (homOfLE hVW).op g) := by
+      rw [isSMulRegular_iff_associatedPoints_subset_basicOpen F hVaff]
+      rintro y ⟨hy, hyV⟩
+      rw [Scheme.basicOpen_res]
+      refine ⟨hyV, ?_⟩
+      by_contra hyb
+      exact hs y hy ((vanishesAt_iff_notMem_basicOpen m s g hgW (hVW hyV)).2 hyb)
+    have ht0 : F.presheaf.map (homOfLE (hVV₀.trans hV₀U)).op t = 0 :=
+      hreg (hkey.trans (smul_zero _).symm)
+    rw [map_zero, ← TopCat.Presheaf.germ_res_apply F.presheaf
+      (homOfLE (hVV₀.trans hV₀U)) x hxV t, ht0, map_zero]
+  intro a b hab
+  have hsub : Hom.app (mulSection F s) U (a - b) = 0 := by rw [map_sub, hab, sub_self]
+  simpa [sub_eq_zero] using hzero _ hsub
 
 end AlgebraicGeometry.Scheme.Modules
