@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
@@ -1691,6 +1692,50 @@ lemma vanishesAt_structureModules_iff (x : X) (r : Γ(X, ⊤)) :
     exact Submodule.smul_mem_smul h Submodule.mem_top
 
 end Vanishing
+
+section Support
+
+variable {X : Scheme.{u}} (F : X.Modules)
+
+/-- The support of a sheaf of modules: the set of points where the stalk is nonzero. -/
+def support : Set X := {x | Nontrivial (F.presheaf.stalk x)}
+
+lemma mem_support_iff (x : X) : x ∈ F.support ↔ Nontrivial (F.presheaf.stalk x) := Iff.rfl
+
+/-- **A sheaf of modules on a scheme has empty support if and only if it is a zero object**,
+that is, if and only if all of its stalks vanish.
+
+Mathlib's `TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero` is the same statement for a sheaf of
+abelian groups. Using it here would mean transporting it along the forgetful functor from
+`X.Modules` to `TopCat.Sheaf AddCommGrpCat X` and checking that the latter reflects zero objects;
+the direct argument below is shorter. -/
+theorem support_eq_empty_iff_isZero : F.support = ∅ ↔ IsZero F := by
+  constructor
+  · intro hsupp
+    -- a section of a sheaf all of whose germs vanish is zero
+    have hst (x : X) : Subsingleton (F.presheaf.stalk x) :=
+      not_nontrivial_iff_subsingleton.1 fun hx ↦ by
+        simpa [hsupp] using (mem_support_iff F x).2 hx
+    rw [IsZero.iff_id_eq_zero]
+    refine hom_ext _ _ fun U ↦ ?_
+    rw [Hom.id_app, Hom.zero_app, ← IsZero.iff_id_eq_zero,
+      AddCommGrpCat.isZero_iff_subsingleton]
+    exact ⟨fun s t ↦ TopCat.Presheaf.section_ext ⟨F.presheaf, F.isSheaf⟩ U s t fun x _ ↦
+      Subsingleton.elim _ _⟩
+  · intro hF
+    have hsec (U : X.Opens) : Subsingleton Γ(F, U) := by
+      rw [← AddCommGrpCat.isZero_iff_subsingleton, IsZero.iff_id_eq_zero]
+      simpa using congrArg (fun φ : F ⟶ F ↦ φ.app U) (hF.eq_of_src (𝟙 F) 0)
+    refine Set.eq_empty_iff_forall_notMem.mpr fun x hx ↦ ?_
+    rw [mem_support_iff, ← not_subsingleton_iff_nontrivial] at hx
+    refine hx ⟨fun a b ↦ ?_⟩
+    obtain ⟨U, hxU, s, rfl⟩ := F.presheaf.exists_germ_eq a
+    obtain ⟨V, hxV, t, rfl⟩ := F.presheaf.exists_germ_eq b
+    have := hsec U
+    have := hsec V
+    rw [Subsingleton.elim s 0, Subsingleton.elim t 0, map_zero, map_zero]
+
+end Support
 
 end Scheme.Modules
 

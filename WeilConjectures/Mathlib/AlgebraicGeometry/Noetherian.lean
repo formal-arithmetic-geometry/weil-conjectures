@@ -42,7 +42,7 @@ short exact sequence, because taking stalks is exact.
 - `AlgebraicGeometry.instIsLocallyNoetherianPullback` and its symmetric variant: `X ×ₛ T` is
   locally noetherian as soon as `T` is locally noetherian and `X ⟶ S` is locally of finite type.
 - `AlgebraicGeometry.Scheme.Modules.IsAssociatedPoint`: the associated points of a sheaf of
-  modules, and `AlgebraicGeometry.Scheme.Modules.support`, its support.
+  modules.
 - `AlgebraicGeometry.Scheme.Modules.isAssociatedPoint_iff_mem_associatedPrimes`: over an affine
   open with Noetherian ring of sections, associated points of a quasi-coherent sheaf are the
   associated primes of its module of sections.
@@ -132,11 +132,6 @@ def IsAssociatedPoint (F : X.Modules) (x : X) : Prop :=
 def associatedPoints (F : X.Modules) : Set X := {x | F.IsAssociatedPoint x}
 
 lemma mem_associatedPoints_iff (x : X) : x ∈ F.associatedPoints ↔ F.IsAssociatedPoint x := Iff.rfl
-
-/-- The support of a sheaf of modules: the set of points where the stalk is nonzero. -/
-def support (F : X.Modules) : Set X := {x | Nontrivial (F.presheaf.stalk x)}
-
-lemma mem_support_iff (x : X) : x ∈ F.support ↔ Nontrivial (F.presheaf.stalk x) := Iff.rfl
 
 section Affine
 

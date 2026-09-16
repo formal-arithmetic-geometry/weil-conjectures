@@ -14,14 +14,16 @@ public import Mathlib.Topology.Irreducible
 A subset `V` of a subspace `S` of a topological space `X` can be seen either as a subset of `X`
 contained in `S`, or as a subset of the space `↥S`. This file records that the two points of
 view agree on irreducibility, and consequently that the irreducible components of the space
-`↥S` are, seen in `X`, the maximal irreducible subsets of `S`.
+`↥S` are, seen in `X`, exactly the maximal irreducible subsets of `S`.
 
 ## Main results
 
 * `isIrreducible_preimage_val_iff`: for `V ⊆ S`, the subset `S ↓∩ V` of `↥S` is irreducible if
   and only if `V` is irreducible.
-* `maximal_isIrreducible_image_val`: the image in `X` of an irreducible component of `↥S` is a
-  maximal irreducible subset of `S`.
+* `maximal_isIrreducible_iff_preimage_val_mem_irreducibleComponents`: a subset of `S` is a
+  maximal irreducible subset of `S` if and only if it is an irreducible component of `↥S`.
+* `eq_univ_of_maximal_isIrreducible`: in an irreducible space the only maximal irreducible
+  subset of `univ` is `univ` itself.
 -/
 
 @[expose] public section
@@ -40,12 +42,37 @@ theorem isIrreducible_preimage_val_iff (h : V ⊆ S) :
 
 /-- The image in `X` of an irreducible component of a subspace `S` is a maximal irreducible
 subset of `S`. -/
-theorem maximal_isIrreducible_image_val {T : Set S} (hT : T ∈ irreducibleComponents S) :
+theorem maximal_isIrreducible_image_val_of_mem_irreducibleComponents {T : Set S}
+    (hT : T ∈ irreducibleComponents S) :
     Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) ((↑) '' T) := by
   refine ⟨⟨hT.1.image _ continuous_subtype_val.continuousOn, Subtype.coe_image_subset S T⟩, ?_⟩
   rintro W ⟨hWirr, hWS⟩ hTW
   have hW : IsIrreducible (S ↓∩ W) := (isIrreducible_preimage_val_iff hWS).2 hWirr
-  have hTW' : T ⊆ S ↓∩ W := fun x hx ↦ hTW ⟨x, hx, rfl⟩
-  calc W = (↑) '' (S ↓∩ W) := by
-        rw [Subtype.image_preimage_coe, Set.inter_eq_right.2 hWS]
-    _ ⊆ (↑) '' T := Set.image_mono (hT.2 hW hTW')
+  calc
+    W = (↑) '' (S ↓∩ W) := by rw [Subtype.image_preimage_coe, inter_eq_right.2 hWS]
+    _ ⊆ (↑) '' T := image_mono (hT.2 hW (image_subset_iff.1 hTW))
+
+/-- A maximal irreducible subset of a subspace `S` of `X` is, seen in `↥S`, an irreducible
+component of `↥S`. -/
+theorem preimage_val_mem_irreducibleComponents
+    (hV : Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) V) : S ↓∩ V ∈ irreducibleComponents S := by
+  refine ⟨(isIrreducible_preimage_val_iff hV.1.2).2 hV.1.1, fun U hU hVU ↦ ?_⟩
+  have hsub : ((↑) '' U : Set X) ⊆ V := by
+    refine hV.2 ⟨hU.image _ continuous_subtype_val.continuousOn, Subtype.coe_image_subset S U⟩ ?_
+    calc
+      V = (↑) '' (S ↓∩ V) := by rw [Subtype.image_preimage_coe, inter_eq_right.2 hV.1.2]
+      _ ⊆ (↑) '' U := image_mono hVU
+  exact image_subset_iff.1 hsub
+
+/-- **The maximal irreducible subsets of a subspace `S` are its irreducible components**, seen
+in the ambient space. -/
+theorem maximal_isIrreducible_iff_preimage_val_mem_irreducibleComponents (h : V ⊆ S) :
+    Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) V ↔ S ↓∩ V ∈ irreducibleComponents S := by
+  refine ⟨preimage_val_mem_irreducibleComponents, fun hV ↦ ?_⟩
+  have hmax := maximal_isIrreducible_image_val_of_mem_irreducibleComponents hV
+  rwa [Subtype.image_preimage_coe, inter_eq_right.2 h] at hmax
+
+/-- In an irreducible space the only maximal irreducible subset of `univ` is `univ` itself. -/
+theorem eq_univ_of_maximal_isIrreducible [IrreducibleSpace X] {T : Set X}
+    (hT : Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ (univ : Set X)) T) : T = univ :=
+  univ_subset_iff.1 (hT.2 ⟨IrreducibleSpace.isIrreducible_univ X, Subset.rfl⟩ (subset_univ T))

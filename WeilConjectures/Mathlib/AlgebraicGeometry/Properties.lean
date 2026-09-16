@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import WeilConjectures.Mathlib.Data.ENat.Basic
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Field
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
@@ -21,7 +22,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
   field has finite Krull dimension.
 * `AlgebraicGeometry.topologicalKrullDim_lt_of_ne_univ`: **passing to a proper closed subset
   lowers the dimension.** If `X` is an irreducible quasi-compact scheme of finite type over a
-  field and `Z` is a proper irreducible closed subset of `X`, then `dim Z < dim X`.
+  field and `Z` is a closed subset of `X` other than `X` itself, then `dim Z < dim X`.
 * `AlgebraicGeometry.topologicalKrullDim_eq_zero_of_finite`: a nonempty scheme of finite type over
   a field with finitely many points has dimension `0`.
 * `AlgebraicGeometry.coheight_le_one_of_minimal_notMem_basicOpen` and
@@ -94,24 +95,22 @@ theorem exists_topologicalKrullDim_le {k : Type u} [Field k] {X : Scheme.{u}} [C
 /-- **A proper closed subset of an irreducible scheme of finite type over a field has strictly
 smaller dimension.**
 
-If `X` is an irreducible quasi-compact scheme of finite type over a field and `Z` is an
-irreducible closed subset of `X` other than `X` itself, then `dim Z < dim X`. -/
+If `X` is an irreducible quasi-compact scheme of finite type over a field and `Z` is a closed
+subset of `X` other than `X` itself, then `dim Z < dim X`.
+
+This is the case `S = univ` of `topologicalKrullDim_lt_of_forall_maximal`: in an irreducible
+space the only maximal irreducible subset of `univ` is `univ` itself. -/
 theorem topologicalKrullDim_lt_of_ne_univ {k : Type u} [Field k] {X : Scheme.{u}}
     [IrreducibleSpace X] [CompactSpace X] (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f]
-    {Z : Set X} (hZc : IsClosed Z) (hZi : IsIrreducible Z) (hZ : Z ≠ Set.univ) :
+    {Z : Set X} (hZc : IsClosed Z) (hZ : Z ≠ Set.univ) :
     topologicalKrullDim Z < topologicalKrullDim X := by
   obtain ⟨n, hn⟩ := exists_topologicalKrullDim_le f
-  have hle := topologicalKrullDim_add_one_le hZc hZi hZ
-  have hZn : topologicalKrullDim Z ≤ (n : ℕ) := (topologicalKrullDim_subspace_le X Z).trans hn
-  have hne : topologicalKrullDim Z ≠ ⊥ := by
-    have : Nonempty Z := hZi.nonempty.to_subtype
-    have : Nonempty (IrreducibleCloseds Z) :=
-      ⟨⟨closure {Classical.arbitrary Z}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
-    exact (Order.krullDim_ne_bot_iff).mpr inferInstance
-  lift topologicalKrullDim Z to ℕ∞ using hne with d hd
-  have hdn : d ≤ (n : ℕ∞) := by exact_mod_cast hZn
-  lift d to ℕ using ne_top_of_le_ne_top (ENat.natCast_ne_top n) hdn with j
-  exact ENat.WithBot.add_one_le_iff.mp hle
+  rw [← topologicalKrullDim_univ X]
+  refine topologicalKrullDim_lt_of_forall_maximal (Set.subset_univ Z)
+    (hZc.preimage continuous_subtype_val) Set.univ_nonempty ?_
+    fun _ hT hTZ ↦ hZ (Set.univ_subset_iff.1 (eq_univ_of_maximal_isIrreducible hT ▸ hTZ))
+  rw [topologicalKrullDim_univ]
+  exact ne_top_of_le_ne_top (ENat.WithBot.natCast_ne_top n) hn
 
 /-- A nonempty scheme of finite type over a field with finitely many points has dimension `0`.
 

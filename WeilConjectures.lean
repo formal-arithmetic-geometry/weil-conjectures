@@ -284,6 +284,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
+public import WeilConjectures.Mathlib.Data.ENat.Basic
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
@@ -336,6 +337,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.Mathlib.Topology.Sheaves.PUnit
 public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
+public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.CohenMacaulay.Basic
 public import WeilConjectures.RingTheory.CohenMacaulay.MiracleFlatness
