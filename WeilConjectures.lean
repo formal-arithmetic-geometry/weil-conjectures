@@ -24,6 +24,7 @@ public import WeilConjectures.AlgebraicGeometry.MiracleFlatness
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Dimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
+public import WeilConjectures.AlgebraicGeometry.Modules.FibrewiseCriteria
 public import WeilConjectures.AlgebraicGeometry.Modules.Flat
 public import WeilConjectures.AlgebraicGeometry.Modules.GloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.Modules.HyperplaneSection
@@ -173,9 +174,11 @@ public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
@@ -284,6 +287,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
+public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.ENat.Basic
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover

@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.Grp.Zero
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.Topology.Sober
 
@@ -42,6 +43,8 @@ itself is free of hypotheses on the scheme.
 
 ## Main results
 
+- `AlgebraicGeometry.Scheme.Modules.support_eq_empty_iff_isZero`: a sheaf of modules has empty
+  support if and only if it is a zero object.
 - `AlgebraicGeometry.Scheme.Modules.supportDim_eq_bot_iff`: `dim F = ⊥` if and only if `F` is a
   zero object. This is the base case of the induction.
 - `AlgebraicGeometry.Scheme.Modules.supportDim_add_one_le_supportDim_of_forall_minimal` and its
@@ -55,8 +58,7 @@ itself is free of hypotheses on the scheme.
 This is the notation `dim F := dim Supp F` of the chapter `chap:deg` on the degree of the
 isogeny, where the blueprint sets `dim ∅ = -1` so that `dim F = -1` exactly when `F = 0`; here
 the empty support has dimension `⊥`, the bottom of `WithBot ℕ∞`. The two results are the two
-steps of the induction on `dim F` in the proof of Snapper's theorem `thm:deg-snapper`:
-`def:deg-dim`, `lem:deg-dim-eq-bot` and `lem:deg-dim-lt`.
+steps of the induction on `dim F` in the proof of Snapper's theorem `thm:deg-snapper`.
 -/
 
 @[expose] public section
@@ -68,6 +70,39 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} (F : X.Modules)
+
+/-- **A sheaf of modules on a scheme has empty support if and only if it is a zero object**,
+that is, if and only if all of its stalks vanish.
+
+Mathlib's `TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero` is the same statement for a sheaf of
+abelian groups. Using it here would mean transporting it along the forgetful functor from
+`X.Modules` to `TopCat.Sheaf AddCommGrpCat X` and checking that the latter reflects zero objects;
+the direct argument below is shorter. -/
+theorem support_eq_empty_iff_isZero : F.support = ∅ ↔ IsZero F := by
+  constructor
+  · intro hsupp
+    -- a section of a sheaf all of whose germs vanish is zero
+    have hst (x : X) : Subsingleton (F.presheaf.stalk x) :=
+      not_nontrivial_iff_subsingleton.1 fun hx ↦ by
+        simpa [hsupp] using (mem_support_iff F x).2 hx
+    rw [IsZero.iff_id_eq_zero]
+    refine hom_ext _ _ fun U ↦ ?_
+    rw [Hom.id_app, Hom.zero_app, ← IsZero.iff_id_eq_zero,
+      AddCommGrpCat.isZero_iff_subsingleton]
+    exact ⟨fun s t ↦ TopCat.Presheaf.section_ext ⟨F.presheaf, F.isSheaf⟩ U s t fun x _ ↦
+      Subsingleton.elim _ _⟩
+  · intro hF
+    have hsec (U : X.Opens) : Subsingleton Γ(F, U) := by
+      rw [← AddCommGrpCat.isZero_iff_subsingleton, IsZero.iff_id_eq_zero]
+      simpa using congrArg (fun φ : F ⟶ F ↦ φ.app U) (hF.eq_of_src (𝟙 F) 0)
+    refine Set.eq_empty_iff_forall_notMem.mpr fun x hx ↦ ?_
+    rw [mem_support_iff, ← not_subsingleton_iff_nontrivial] at hx
+    refine hx ⟨fun a b ↦ ?_⟩
+    obtain ⟨U, hxU, s, rfl⟩ := F.presheaf.exists_germ_eq a
+    obtain ⟨V, hxV, t, rfl⟩ := F.presheaf.exists_germ_eq b
+    have := hsec U
+    have := hsec V
+    rw [Subsingleton.elim s 0, Subsingleton.elim t 0, map_zero, map_zero]
 
 /-- The dimension of a sheaf of modules `F`: the Krull dimension of its support
 `{x | F_x ≠ 0}`, for the topology induced from the underlying space of the scheme. -/
