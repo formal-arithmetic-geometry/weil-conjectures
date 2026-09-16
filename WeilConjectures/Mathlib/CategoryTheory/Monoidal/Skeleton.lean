@@ -6,9 +6,13 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Skeleton
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
-# Functoriality of the monoid homomorphism induced on skeleta
+# Tensor powers and the monoid homomorphism induced on skeleta
+
+The class of a tensor power `X ^⊗ n` in the skeleton of a monoidal category is the `n`-th power
+of the class of `X`.
 
 A monoidal functor `F : C ⥤ D` induces a monoid homomorphism
 `CategoryTheory.Skeleton.monoidHom F : Skeleton C →* Skeleton D`. We record that this
@@ -17,6 +21,7 @@ identity functor and with the composition of functors.
 
 ## Main results
 
+- `CategoryTheory.Skeleton.toSkeleton_tensorPow`
 - `CategoryTheory.Skeleton.monoidHom_congr`
 - `CategoryTheory.Skeleton.monoidHom_id`
 - `CategoryTheory.Skeleton.monoidHom_comp`
@@ -29,6 +34,13 @@ namespace CategoryTheory
 
 variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
   [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]
+
+open MonoidalCategory in
+@[simp]
+lemma Skeleton.toSkeleton_tensorPow (X : C) : ∀ n : ℕ, toSkeleton (X ^⊗ n) = toSkeleton X ^ n
+  | 0 => Skeleton.one_eq.symm
+  | n + 1 => by
+    rw [tensorPow_succ, Skeleton.toSkeleton_tensorObj, Skeleton.toSkeleton_tensorPow X n, pow_succ]
 
 @[simp]
 lemma Skeleton.monoidHom_toSkeleton (F : C ⥤ D) [F.Monoidal] (X : C) :

@@ -37,6 +37,9 @@ morphism of schemes.
 - `SheafOfModules.Invertible.pullback`: the pullback of an invertible module is invertible.
 - `AlgebraicGeometry.Scheme.Pic.map`: the pullback homomorphism `Pic(Y) →* Pic(X)`, with
   `AlgebraicGeometry.Scheme.Pic.map_id` and `AlgebraicGeometry.Scheme.Pic.map_comp`.
+- `AlgebraicGeometry.Scheme.Modules.restrictTensorIso` and
+  `AlgebraicGeometry.Scheme.Modules.restrictTensorUnitIso`: the same statements for the
+  restriction functor along an open immersion, which is isomorphic to the pullback functor.
 
 -/
 
@@ -119,5 +122,26 @@ lemma Pic.map_mk {M : Y.Modules} (hM : M.Invertible) :
   rw [← Units.val_inj, Units.coe_map, IsUnit.unit_spec, IsUnit.unit_spec,
     Skeleton.monoidHom_toSkeleton]
   rfl
+
+section Restrict
+
+variable [IsOpenImmersion f]
+
+/-- Restriction along an open immersion turns a tensor product of `𝒪ᵧ`-modules into the tensor
+product of the restrictions. -/
+noncomputable def Modules.restrictTensorIso (M N : Y.Modules) :
+    (M ⊗ N).restrict f ≅ M.restrict f ⊗ N.restrict f :=
+  (Modules.restrictFunctorIsoPullback f).app (M ⊗ N) ≪≫
+    (Functor.Monoidal.μIso (Modules.pullback f) M N).symm ≪≫
+      tensorIso ((Modules.restrictFunctorIsoPullback f).app M).symm
+        ((Modules.restrictFunctorIsoPullback f).app N).symm
+
+/-- Restriction along an open immersion sends the structure sheaf to the structure sheaf. -/
+noncomputable def Modules.restrictTensorUnitIso :
+    (𝟙_ Y.Modules).restrict f ≅ 𝟙_ X.Modules :=
+  (Modules.restrictFunctorIsoPullback f).app _ ≪≫
+    (Functor.Monoidal.εIso (Modules.pullback f)).symm
+
+end Restrict
 
 end AlgebraicGeometry.Scheme
