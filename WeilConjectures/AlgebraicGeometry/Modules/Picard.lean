@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Skeleton
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Skeleton
 
 /-!
 # Invertible sheaves of modules and the Picard group
@@ -27,6 +28,12 @@ braided; the Picard group is then the group of units of that commutative monoid.
 ## Main definitions
 
 - `SheafOfModules.Invertible`: the predicate that a sheaf of modules is invertible.
+- `SheafOfModules.Invertible.tensorInv`: a tensor inverse of an invertible sheaf of modules,
+  together with `SheafOfModules.Invertible.tensorInvIso`, an isomorphism
+  `M ⊗ hM.tensorInv ≅ 𝟙_`.
+- `SheafOfModules.Invertible.zpow`: the `m`-th tensor power of an invertible sheaf of modules,
+  for an integer exponent `m`, together with the comparison isomorphisms
+  `SheafOfModules.Invertible.zpowAddIso`, `zpowNegIso`, `zpowTensorObjIso` and `zpowIso`.
 - `SheafOfModules.Pic`: the Picard group of a sheaf of commutative rings on a site.
 - `AlgebraicGeometry.Scheme.Pic`: the Picard group of a scheme `X`, i.e. the group of isomorphism
   classes of invertible `𝒪ₓ`-modules under the tensor product.
@@ -38,6 +45,9 @@ braided; the Picard group is then the group of units of that commutative monoid.
 - `SheafOfModules.invertible_iff_isUnit`: unfolding lemma for `SheafOfModules.Invertible`.
 - `SheafOfModules.Invertible.tensorObj` and `SheafOfModules.Invertible.tensorPow`: a tensor
   product and a tensor power of invertible sheaves of modules are invertible.
+- `SheafOfModules.invertible_zpow`: an integer tensor power of an invertible sheaf of modules is
+  invertible, with `SheafOfModules.Pic.mk_zpow` recording the corresponding equality in the
+  Picard group.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`: two invertible `𝒪ₓ`-modules have the same class
   in the Picard group of `X` if and only if they are isomorphic.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
@@ -130,6 +140,92 @@ theorem Invertible.tensorPow (hM : M.Invertible) : ∀ n : ℕ, SheafOfModules.I
   | 0 => invertible_tensorUnit R
   | n + 1 => (hM.tensorPow n).tensorObj hM
 
+section ZPow
+
+/-- A tensor inverse of an invertible sheaf of modules: the sheaf of modules attached to the
+inverse of the class of `M` in the skeleton. -/
+noncomputable def Invertible.tensorInv (hM : M.Invertible) :
+    SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) :=
+  IsUnit.tensorInv hM
+
+/-- A tensor inverse of an invertible sheaf of modules is invertible. -/
+theorem invertible_tensorInv (hM : M.Invertible) : hM.tensorInv.Invertible :=
+  isUnit_toSkeleton_tensorInv hM
+
+/-- **`hM.tensorInv` is a tensor inverse of `M`.**
+
+This is an arbitrary choice of isomorphism, see `CategoryTheory.isoOfToSkeletonEq`. -/
+noncomputable def Invertible.tensorInvIso (hM : M.Invertible) : M ⊗ hM.tensorInv ≅ 𝟙_ _ :=
+  IsUnit.tensorInvIso hM
+
+/-- The `m`-th tensor power of an invertible sheaf of modules `M`, for an integer exponent `m`:
+the `m`-th tensor power of `M` itself when `m ≥ 0`, and the `(-m)`-th tensor power of the tensor
+inverse `SheafOfModules.Invertible.tensorInv` when `m < 0`. -/
+noncomputable def Invertible.zpow (hM : M.Invertible) (m : ℤ) :
+    SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) :=
+  IsUnit.tensorZPow hM m
+
+/-- Integer tensor powers agree with `CategoryTheory.MonoidalCategory.tensorPow` on natural
+exponents. -/
+@[simp]
+lemma Invertible.zpow_natCast (hM : M.Invertible) (n : ℕ) : hM.zpow n = M ^⊗ n := rfl
+
+/-- The zeroth integer tensor power is the tensor unit. -/
+@[simp]
+lemma Invertible.zpow_zero (hM : M.Invertible) : hM.zpow 0 = 𝟙_ _ := rfl
+
+/-- The first integer tensor power is the first tensor power. -/
+lemma Invertible.zpow_one (hM : M.Invertible) : hM.zpow 1 = M ^⊗ 1 := rfl
+
+/-- A negative integer tensor power is a tensor power of the tensor inverse. -/
+lemma Invertible.zpow_negSucc (hM : M.Invertible) (n : ℕ) :
+    hM.zpow (Int.negSucc n) = hM.tensorInv ^⊗ (n + 1) :=
+  rfl
+
+/-- **The class of `hM.zpow m` in the skeleton is the `m`-th power of the class of `M`.** Every
+comparison isomorphism between integer tensor powers is read off from this computation. -/
+theorem Invertible.toSkeleton_zpow (hM : M.Invertible) (m : ℤ) :
+    toSkeleton (hM.zpow m) = ↑(hM.unit ^ m) :=
+  toSkeleton_tensorZPow hM m
+
+/-- **An integer tensor power of an invertible sheaf of modules is invertible.** -/
+theorem invertible_zpow (hM : M.Invertible) (m : ℤ) : (hM.zpow m).Invertible :=
+  isUnit_toSkeleton_tensorZPow hM m
+
+/-- **Integer tensor powers turn addition of exponents into the tensor product.**
+
+This is an arbitrary choice of isomorphism, see `CategoryTheory.isoOfToSkeletonEq`; in
+particular it does not agree with `CategoryTheory.MonoidalCategory.tensorPowAddIso` when `m` and
+`m'` are non-negative. -/
+noncomputable def Invertible.zpowAddIso (hM : M.Invertible) (m m' : ℤ) :
+    hM.zpow (m + m') ≅ hM.zpow m ⊗ hM.zpow m' :=
+  IsUnit.tensorZPowAddIso hM m m'
+
+/-- **A negative integer tensor power of `M` is the corresponding power of a tensor inverse
+of `M`.**
+
+This is an arbitrary choice of isomorphism, see `CategoryTheory.isoOfToSkeletonEq`. -/
+noncomputable def Invertible.zpowNegIso (hM : M.Invertible) (m : ℤ) :
+    hM.zpow (-m) ≅ (invertible_tensorInv hM).zpow m :=
+  IsUnit.tensorZPowNegIso hM m
+
+/-- **Isomorphic invertible sheaves of modules have isomorphic integer tensor powers.**
+
+This is an arbitrary choice of isomorphism, see `CategoryTheory.isoOfToSkeletonEq`. -/
+noncomputable def Invertible.zpowIso (hM : M.Invertible) (hN : N.Invertible) (e : M ≅ N)
+    (m : ℤ) : hM.zpow m ≅ hN.zpow m :=
+  IsUnit.tensorZPowIso hM hN e m
+
+/-- **An integer tensor power of a tensor product is the tensor product of the integer tensor
+powers.**
+
+This is an arbitrary choice of isomorphism, see `CategoryTheory.isoOfToSkeletonEq`. -/
+noncomputable def Invertible.zpowTensorObjIso (hM : M.Invertible) (hN : N.Invertible) (m : ℤ) :
+    (hM.tensorObj hN).zpow m ≅ hM.zpow m ⊗ hN.zpow m :=
+  IsUnit.tensorZPowTensorObjIso hM hN m
+
+end ZPow
+
 variable (R) in
 /-- The Picard group of a sheaf of commutative rings `R` on a site: the group of isomorphism
 classes of invertible sheaves of `R`-modules, under the tensor product.
@@ -156,14 +252,23 @@ theorem Pic.mk_eq_mk_iff {hM : M.Invertible} {hN : N.Invertible} :
   rw [← Units.val_inj, hM.unit_spec, hN.unit_spec, toSkeleton_eq_toSkeleton_iff]
 
 /-- The class of a tensor product is the product of the classes. -/
+@[simp]
 theorem Pic.mk_tensorObj {hM : M.Invertible} {hN : N.Invertible} :
     Pic.mk (M ⊗ N) (hM.tensorObj hN) = Pic.mk M hM * Pic.mk N hN := by
   change (hM.tensorObj hN).unit = hM.unit * hN.unit
   rw [← Units.val_inj, IsUnit.unit_spec, Units.val_mul, IsUnit.unit_spec, IsUnit.unit_spec,
     Skeleton.toSkeleton_tensorObj]
 
+/-- The class of an integer tensor power is the corresponding power of the class. -/
+@[simp]
+theorem Pic.mk_zpow {hM : M.Invertible} (m : ℤ) :
+    Pic.mk (hM.zpow m) (invertible_zpow hM m) = Pic.mk M hM ^ m := by
+  change (invertible_zpow hM m).unit = hM.unit ^ m
+  exact IsUnit.unit_tensorZPow hM m
+
 variable (R) in
 /-- The class of the tensor unit is the unit of the Picard group. -/
+@[simp]
 theorem Pic.mk_tensorUnit : Pic.mk _ (invertible_tensorUnit R) = 1 := by
   change (invertible_tensorUnit R).unit = 1
   rw [← Units.val_inj, IsUnit.unit_spec, Units.val_one, Skeleton.one_eq]
@@ -197,14 +302,24 @@ theorem Pic.mk_eq_mk_iff {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertibl
   rw [← Units.val_inj, hM.unit_spec, hN.unit_spec, toSkeleton_eq_toSkeleton_iff]
 
 /-- The class of a tensor product of invertible `𝒪ₓ`-modules is the product of the classes. -/
+@[simp]
 theorem Pic.mk_tensorObj {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertible} :
     Pic.mk (M ⊗ N) (hM.tensorObj hN) = Pic.mk M hM * Pic.mk N hN := by
   change (hM.tensorObj hN).unit = hM.unit * hN.unit
   rw [← Units.val_inj, IsUnit.unit_spec, Units.val_mul, IsUnit.unit_spec, IsUnit.unit_spec,
     Skeleton.toSkeleton_tensorObj]
 
+/-- The class of an integer tensor power of an invertible `𝒪ₓ`-module is the corresponding power
+of the class. -/
+@[simp]
+theorem Pic.mk_zpow {M : X.Modules} {hM : M.Invertible} (m : ℤ) :
+    Pic.mk (hM.zpow m) (SheafOfModules.invertible_zpow hM m) = Pic.mk M hM ^ m := by
+  change (SheafOfModules.invertible_zpow hM m).unit = hM.unit ^ m
+  exact IsUnit.unit_tensorZPow hM m
+
 variable (X) in
 /-- The class of the structure sheaf is the unit of the Picard group of `X`. -/
+@[simp]
 theorem Pic.mk_tensorUnit :
     Pic.mk (𝟙_ X.Modules) (SheafOfModules.invertible_tensorUnit X.sheaf) = 1 := by
   change (SheafOfModules.invertible_tensorUnit X.sheaf).unit = 1

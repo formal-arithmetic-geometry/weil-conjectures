@@ -7,237 +7,139 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
-public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 
 /-!
-# Integer tensor powers of an invertible sheaf of modules
+# Twisting a sheaf of modules by integer tensor powers of invertible sheaves
 
-Let `X` be a scheme and `L` an invertible `𝒪ₓ`-module, that is, a sheaf of modules admitting a
-tensor inverse in the sense of `SheafOfModules.Invertible`. The tensor power `L ^⊗ n` is defined
-for `n : ℕ` by `CategoryTheory.MonoidalCategory.tensorPow`; this file extends it to an integer
-exponent.
+Let `X` be a scheme, `F` a sheaf of `𝒪ₓ`-modules, `L₁, …, L_r` invertible `𝒪ₓ`-modules and
+`m : Fin r → ℤ` an integer vector. This file defines the twisted sheaf
+`F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` and shows that it is coherent when `F` is. This is the sheaf
+whose Euler characteristic is the subject of Snapper's theorem.
 
-The construction chooses a tensor inverse `hL.inv` of `L` — the class of `L` in the skeleton of
-`X.Modules` is a unit, and `hL.inv` is the object attached to the inverse unit — and sets
-`hL.zpow m` to be `L ^⊗ m` for `m ≥ 0` and `hL.inv ^⊗ (-m)` for `m < 0`. All the comparison
-isomorphisms are then read off from the single computation
-`SheafOfModules.Invertible.toSkeleton_zpow`, which says that the class of `hL.zpow m` in the
-skeleton is the `m`-th power of the class of `L`; an equality of classes in the skeleton is
-turned back into an isomorphism of sheaves of modules by `CategoryTheory.isoOfToSkeletonEq`.
-Note that the results below are stated as *isomorphisms of sheaves of modules*, not as equalities
-in the Picard group: what consumes them applies additive invariants such as the Euler
-characteristic to the objects themselves.
+The integer tensor power `hL.zpow m` of a single invertible sheaf of modules is defined in
+`WeilConjectures.AlgebraicGeometry.Modules.Picard`, and tensoring by an invertible sheaf of
+modules preserves quasi-coherence, being of finite type and coherence by
+`AlgebraicGeometry.Scheme.Modules.isCoherent_tensorObj_of_invertible`, proved in
+`WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial`. So the only thing left to do here is
+to package the twisting factor `L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` as a single invertible sheaf of
+modules `AlgebraicGeometry.Scheme.Modules.zpowProd`, whose class in the Picard group is
+`∏ j, Pic.mk (L j) (hL j) ^ m j`; coherence of the twist is then one application of
+`isCoherent_tensorObj_of_invertible`.
 
-Tensoring a coherent sheaf of modules by an invertible one preserves coherence: on an open
-subset trivialising `L` the tensor product `F ⊗ L` is isomorphic to `F`, and both quasi-coherence
-and being of finite type are local on the base. Consequently the sheaf
-`F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` attached to a finite family of invertible sheaves and an integer
-vector `m : Fin r → ℤ` is coherent; this is the sheaf whose Euler characteristic is the subject
-of Snapper's theorem.
+Recording the class of `zpowProd L hL m` in the Picard group is what makes the twist usable:
+the comparison isomorphisms Snapper's proof needs — bumping one exponent, concatenating two
+families, negating a block, permuting the factors — are all instances of
+`AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff` applied to an identity between products in the
+Picard group, and none of them requires an induction on `r`.
+
+Not here, and needed before Snapper's theorem can be proved: tensoring a short exact sequence of
+sheaves of modules by an invertible one keeps it exact.
 
 ## Main definitions
 
-- `SheafOfModules.Invertible.toUnit`: the class of an invertible sheaf of modules as a unit of
-  the skeleton of `X.Modules`.
-- `SheafOfModules.Invertible.inv`: a tensor inverse of an invertible sheaf of modules.
-- `SheafOfModules.Invertible.zpow`: the `m`-th tensor power `hL.zpow m` of an invertible sheaf
-  of modules, for `m : ℤ`.
-- `AlgebraicGeometry.Scheme.Modules.tensorZPow`: the sheaf `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r`
-  attached to a coherent sheaf `F`, a finite family of invertible sheaves `L` and an integer
-  vector `m`.
+- `AlgebraicGeometry.Scheme.Modules.zpowProd`: the invertible sheaf of modules
+  `L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r`.
+- `AlgebraicGeometry.Scheme.Modules.tensorZPow`: the sheaf `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r`,
+  together with `tensorZPowZeroIso` and `tensorZPowSuccIso`, which peel off the last factor.
 
 ## Main results
 
-- `SheafOfModules.Invertible.zpow_natCast`: `hL.zpow n` is `L ^⊗ n` for a natural number `n`.
-- `SheafOfModules.Invertible.zpowAddIso`: `hL.zpow (m + m') ≅ hL.zpow m ⊗ hL.zpow m'`.
-- `SheafOfModules.Invertible.zpowZeroIso`: `hL.zpow 0 ≅ 𝒪ₓ`.
-- `SheafOfModules.Invertible.invertible_zpow`: an integer tensor power of an invertible sheaf of
-  modules is invertible.
-- `AlgebraicGeometry.Scheme.Modules.isCoherent_tensorObj_of_invertible`: the tensor product of a
-  coherent sheaf of modules with an invertible one is coherent.
-- `AlgebraicGeometry.Scheme.Modules.isCoherent_tensorZPow`: the sheaf
-  `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` is coherent.
+- `AlgebraicGeometry.Scheme.Modules.invertible_zpowProd`: the twisting factor is invertible, and
+  `AlgebraicGeometry.Scheme.Pic.mk_zpowProd`: its class in the Picard group is
+  `∏ j, Pic.mk (L j) (hL j) ^ m j`.
+- `AlgebraicGeometry.Scheme.Modules.isCoherent_tensorZPow`: **the sheaf
+  `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` is coherent** when `F` is.
 -/
 
 @[expose] public section
 
-open CategoryTheory MonoidalCategory TopologicalSpace
+open CategoryTheory MonoidalCategory SheafOfModules
 
 universe u
 
-namespace SheafOfModules
+namespace AlgebraicGeometry.Scheme.Modules
 
-open AlgebraicGeometry
+variable {X : Scheme.{u}} {r : ℕ}
 
-variable {X : Scheme.{u}} {L : X.Modules}
-
-/-- The class of an invertible sheaf of modules as a unit of the skeleton of `X.Modules`.
-
-This is `AlgebraicGeometry.Scheme.Pic.mk`, with its type spelled out so that the unit and its
-coercion are literally about `Skeleton X.Modules`. -/
-noncomputable def Invertible.toUnit (hL : L.Invertible) : (Skeleton X.Modules)ˣ := hL.unit
-
-@[simp]
-lemma Invertible.val_toUnit (hL : L.Invertible) : ↑hL.toUnit = toSkeleton L := hL.unit_spec
-
-/-- A tensor inverse of an invertible sheaf of modules on a scheme: the object of `X.Modules`
-attached to the inverse of the class of `L` in the skeleton of `X.Modules`. -/
-noncomputable def Invertible.inv (hL : L.Invertible) : X.Modules :=
-  (fromSkeleton X.Modules).obj ↑hL.toUnit⁻¹
+/-- The invertible sheaf of modules `L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` attached to a finite family `L`
+of invertible sheaves of modules and an integer vector `m`, with the factors in the stated
+order. -/
+noncomputable def zpowProd : ∀ {r : ℕ} (L : Fin r → X.Modules), (∀ j, (L j).Invertible) →
+    (Fin r → ℤ) → X.Modules
+  | 0, _, _, _ => 𝟙_ X.Modules
+  | r + 1, L, hL, m =>
+    zpowProd (fun j ↦ L j.castSucc) (fun j ↦ hL j.castSucc) (fun j ↦ m j.castSucc) ⊗
+      (hL (Fin.last r)).zpow (m (Fin.last r))
 
 @[simp]
-lemma Invertible.toSkeleton_inv (hL : L.Invertible) : toSkeleton hL.inv = ↑hL.toUnit⁻¹ :=
-  toSkeleton_fromSkeleton_obj _
+lemma zpowProd_zero (L : Fin 0 → X.Modules) (hL : ∀ j, (L j).Invertible) (m : Fin 0 → ℤ) :
+    zpowProd L hL m = 𝟙_ X.Modules :=
+  rfl
 
-/-- A tensor inverse of an invertible sheaf of modules is invertible. -/
-theorem Invertible.invertible_inv (hL : L.Invertible) : hL.inv.Invertible := by
-  change IsUnit (toSkeleton hL.inv)
-  rw [hL.toSkeleton_inv]
-  exact Units.isUnit _
+/-- The last factor of the twisting factor may be peeled off. -/
+lemma zpowProd_succ (L : Fin (r + 1) → X.Modules) (hL : ∀ j, (L j).Invertible)
+    (m : Fin (r + 1) → ℤ) :
+    zpowProd L hL m =
+      zpowProd (fun j ↦ L j.castSucc) (fun j ↦ hL j.castSucc) (fun j ↦ m j.castSucc) ⊗
+        (hL (Fin.last r)).zpow (m (Fin.last r)) :=
+  rfl
 
-/-- The `m`-th tensor power of an invertible sheaf of modules `L` on a scheme, for an integer
-exponent `m`: the `m`-th tensor power of `L` itself when `m ≥ 0`, and the `(-m)`-th tensor power
-of a tensor inverse of `L` when `m < 0`. -/
-noncomputable def Invertible.zpow (hL : L.Invertible) : ℤ → X.Modules
-  | .ofNat n => L ^⊗ n
-  | .negSucc n => hL.inv ^⊗ (n + 1)
+/-- **The twisting factor `L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` is invertible.** -/
+theorem invertible_zpowProd : ∀ {r : ℕ} (L : Fin r → X.Modules) (hL : ∀ j, (L j).Invertible)
+    (m : Fin r → ℤ), (zpowProd L hL m).Invertible
+  | 0, _, _, _ => SheafOfModules.invertible_tensorUnit X.sheaf
+  | r + 1, L, hL, m =>
+    (invertible_zpowProd (fun j ↦ L j.castSucc) (fun j ↦ hL j.castSucc)
+        (fun j ↦ m j.castSucc)).tensorObj
+      (SheafOfModules.invertible_zpow (hL (Fin.last r)) (m (Fin.last r)))
 
-/-- **Integer tensor powers agree with `tensorPow` on natural exponents.** -/
+/-- **The class of the twisting factor in the Picard group of `X` is
+`∏ j, Pic.mk (L j) (hL j) ^ m j`.** Every comparison between twisting factors — bumping one
+exponent, concatenating two families, negating a block, permuting the factors — follows from
+this computation and `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`, with no induction on `r`. -/
 @[simp]
-lemma Invertible.zpow_natCast (hL : L.Invertible) (n : ℕ) : hL.zpow n = L ^⊗ n := rfl
-
-lemma Invertible.zpow_ofNat (hL : L.Invertible) (n : ℕ) :
-    hL.zpow (Int.ofNat n) = L ^⊗ n := rfl
-
-/-- The zeroth integer tensor power is the tensor unit. -/
-@[simp]
-lemma Invertible.zpow_zero (hL : L.Invertible) : hL.zpow 0 = 𝟙_ X.Modules := rfl
-
-lemma Invertible.zpow_negSucc (hL : L.Invertible) (n : ℕ) :
-    hL.zpow (Int.negSucc n) = hL.inv ^⊗ (n + 1) := rfl
-
-/-- **The class of `hL.zpow m` in the skeleton of `X.Modules` is the `m`-th power of the class
-of `L`.** Every comparison isomorphism below is read off from this computation. -/
-theorem Invertible.toSkeleton_zpow (hL : L.Invertible) (m : ℤ) :
-    toSkeleton (hL.zpow m) = ↑(hL.toUnit ^ m) := by
-  obtain n | n := m
-  · rw [Invertible.zpow_ofNat, Skeleton.toSkeleton_tensorPow, Int.ofNat_eq_natCast,
-      _root_.zpow_natCast, Units.val_pow_eq_pow_val, hL.val_toUnit]
-  · have hneg : hL.toUnit ^ (Int.negSucc n) = hL.toUnit⁻¹ ^ (n + 1) := by
-      rw [← _root_.zpow_natCast hL.toUnit⁻¹ (n + 1), inv_zpow, ← zpow_neg]
-      congr 1
-    rw [Invertible.zpow_negSucc, Skeleton.toSkeleton_tensorPow, hL.toSkeleton_inv, hneg,
-      Units.val_pow_eq_pow_val]
-
-/-- **An integer tensor power of an invertible sheaf of modules is invertible.** -/
-theorem Invertible.invertible_zpow (hL : L.Invertible) (m : ℤ) : (hL.zpow m).Invertible := by
-  change IsUnit (toSkeleton (hL.zpow m))
-  rw [hL.toSkeleton_zpow]
-  exact Units.isUnit _
-
-/-- **Integer tensor powers turn addition of exponents into the tensor product.** -/
-noncomputable def Invertible.zpowAddIso (hL : L.Invertible) (m m' : ℤ) :
-    hL.zpow (m + m') ≅ hL.zpow m ⊗ hL.zpow m' :=
-  isoOfToSkeletonEq (by
-    rw [hL.toSkeleton_zpow, Skeleton.toSkeleton_tensorObj, hL.toSkeleton_zpow,
-      hL.toSkeleton_zpow, ← Units.val_mul, zpow_add])
-
-/-- **The zeroth integer tensor power is the structure sheaf.** -/
-noncomputable def Invertible.zpowZeroIso (hL : L.Invertible) :
-    hL.zpow 0 ≅ unit X.ringCatSheaf :=
-  Scheme.Modules.tensorUnitIsoUnit X
-
-/-- The first integer tensor power is `L` itself. -/
-noncomputable def Invertible.zpowOneIso (hL : L.Invertible) : hL.zpow 1 ≅ L :=
-  tensorPowOneIso L
-
-end SheafOfModules
-
-namespace AlgebraicGeometry.Scheme
-
-variable {X : Scheme.{u}} {L : X.Modules}
-
-/-- The class of an integer tensor power in the Picard group is the corresponding power of the
-class. -/
-@[simp]
-theorem Pic.mk_zpow (hL : L.Invertible) (m : ℤ) :
-    Pic.mk (hL.zpow m) (hL.invertible_zpow m) = Pic.mk L hL ^ m := by
-  change (hL.invertible_zpow m).unit = hL.unit ^ m
-  rw [← Units.val_inj, IsUnit.unit_spec]
-  exact hL.toSkeleton_zpow m
-
-namespace Modules
-
-/-- On an open subset trivialising the invertible sheaf `L`, the restriction of `F ⊗ L` is
-isomorphic to the restriction of `F`. -/
-noncomputable def tensorRestrictIsoOfRestrictIso (F : X.Modules) {U : X.Opens}
-    (e : L.restrict U.ι ≅ 𝟙_ U.toScheme.Modules) :
-    (F ⊗ L).restrict U.ι ≅ F.restrict U.ι :=
-  restrictTensorIso U.ι F L ≪≫ tensorIso (Iso.refl _) e ≪≫ ρ_ _
-
-/-- **Tensoring a coherent sheaf of modules with an invertible one preserves coherence.** -/
-theorem isCoherent_tensorObj_of_invertible (F : X.Modules) [F.IsCoherent] (hL : L.Invertible) :
-    (F ⊗ L).IsCoherent := by
-  choose W hxW hW using fun x : X ↦ hL.exists_restrict_iso_tensorUnit x
-  have hWcover : IsOpenCover W :=
-    IsOpenCover.mk (eq_top_iff.2 fun x _ ↦ Opens.mem_iSup.2 ⟨x, hxW x⟩)
-  obtain ⟨ι, U, r, G, hU, hU', hUle, hG⟩ :=
-    exists_isOpenCover_generatingSections_le F W hWcover
-  have et : ∀ i, L.restrict (U i).ι ≅ 𝟙_ (U i).toScheme.Modules := fun i ↦
-    (restrictRestrictIso L (hUle i)).symm ≪≫
-      (restrictFunctor' (X.homOfLE (hUle i))).mapIso (hW (r i)).some ≪≫
-        restrictTensorUnitIso (X.homOfLE (hUle i))
-  have e : ∀ i, (F ⊗ L).restrict (U i).ι ≅ F.restrict (U i).ι := fun i ↦
-    tensorRestrictIsoOfRestrictIso F (et i)
-  have hq : (F ⊗ L).IsQuasicoherent :=
-    isQuasicoherent_of_isAffineOpenCover _ U hU hU' fun i ↦
-      (SheafOfModules.isQuasicoherent (U i).toScheme.ringCatSheaf).prop_of_iso (e i).symm
-        inferInstance
-  have hf : (F ⊗ L).IsFiniteType :=
-    isFiniteType_of_generatingSections _ U hU
-      (fun i ↦ SheafOfModules.GeneratingSections.equivOfIso (e i).symm (G i))
-      fun i ↦ ⟨(hG i).finite⟩
-  constructor
-
-/-- **An integer tensor power of an invertible sheaf of modules is coherent after tensoring a
-coherent sheaf with it.** -/
-theorem isCoherent_tensorObj_zpow (F : X.Modules) [F.IsCoherent] (hL : L.Invertible) (m : ℤ) :
-    (F ⊗ hL.zpow m).IsCoherent :=
-  isCoherent_tensorObj_of_invertible F (hL.invertible_zpow m)
+theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd :
+    ∀ {r : ℕ} (L : Fin r → X.Modules) (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ),
+      Pic.mk (zpowProd L hL m) (invertible_zpowProd L hL m) = ∏ j, Pic.mk (L j) (hL j) ^ m j
+  | 0, _, _, _ => by
+    rw [Fin.prod_univ_zero]
+    exact Pic.mk_tensorUnit X
+  | r + 1, L, hL, m => by
+    have ih := Pic.mk_zpowProd (fun j ↦ L j.castSucc) (fun j ↦ hL j.castSucc)
+      (fun j ↦ m j.castSucc)
+    rw [Fin.prod_univ_castSucc, ← ih, ← Pic.mk_zpow]
+    exact Pic.mk_tensorObj
 
 /-- The sheaf `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` attached to a sheaf of modules `F`, a finite
 family `L` of invertible sheaves of modules and an integer vector `m`.
 
 This is the sheaf whose Euler characteristic is the subject of Snapper's theorem. -/
-noncomputable def tensorZPow {r : ℕ} (F : X.Modules) {L : Fin r → X.Modules}
+noncomputable def tensorZPow (F : X.Modules) (L : Fin r → X.Modules)
     (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) : X.Modules :=
-  Fin.foldl r (fun N j ↦ N ⊗ (hL j).zpow (m j)) F
+  F ⊗ zpowProd L hL m
 
-@[simp]
-lemma tensorZPow_zero (F : X.Modules) {L : Fin 0 → X.Modules} (hL : ∀ j, (L j).Invertible)
-    (m : Fin 0 → ℤ) : tensorZPow F hL m = F :=
-  Fin.foldl_zero _ _
+/-- The empty twist of `F` is `F`. -/
+noncomputable def tensorZPowZeroIso (F : X.Modules) (L : Fin 0 → X.Modules)
+    (hL : ∀ j, (L j).Invertible) (m : Fin 0 → ℤ) : tensorZPow F L hL m ≅ F :=
+  ρ_ F
 
-lemma tensorZPow_succ {r : ℕ} (F : X.Modules) {L : Fin (r + 1) → X.Modules}
+/-- The last factor of a twist may be peeled off:
+
+```text
+  F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r ≅ (F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_{r-1} ^⊗ m_{r-1}) ⊗ L_r ^⊗ m_r
+```
+-/
+noncomputable def tensorZPowSuccIso (F : X.Modules) (L : Fin (r + 1) → X.Modules)
     (hL : ∀ j, (L j).Invertible) (m : Fin (r + 1) → ℤ) :
-    tensorZPow F hL m =
-      tensorZPow F (fun j ↦ hL j.castSucc) (fun j ↦ m j.castSucc) ⊗
-        (hL (Fin.last r)).zpow (m (Fin.last r)) := by
-  rw [tensorZPow, Fin.foldl_succ_last]
-  rfl
+    tensorZPow F L hL m ≅
+      tensorZPow F (fun j ↦ L j.castSucc) (fun j ↦ hL j.castSucc) (fun j ↦ m j.castSucc) ⊗
+        (hL (Fin.last r)).zpow (m (Fin.last r)) :=
+  (α_ _ _ _).symm
 
 /-- **The sheaf `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` is coherent** when `F` is coherent and the `Lⱼ`
 are invertible. -/
-theorem isCoherent_tensorZPow {r : ℕ} (F : X.Modules) [F.IsCoherent] {L : Fin r → X.Modules}
-    (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) : (tensorZPow F hL m).IsCoherent := by
-  induction r with
-  | zero => rw [tensorZPow_zero]; infer_instance
-  | succ r ih =>
-    rw [tensorZPow_succ]
-    have : (tensorZPow F (fun j ↦ hL j.castSucc) fun j ↦ m j.castSucc).IsCoherent :=
-      ih (fun j ↦ hL j.castSucc) fun j ↦ m j.castSucc
-    exact isCoherent_tensorObj_zpow _ (hL (Fin.last r)) (m (Fin.last r))
+theorem isCoherent_tensorZPow (F : X.Modules) [F.IsCoherent] (L : Fin r → X.Modules)
+    (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) : (tensorZPow F L hL m).IsCoherent :=
+  isCoherent_tensorObj_of_invertible F (invertible_zpowProd L hL m)
 
-end Modules
-
-end AlgebraicGeometry.Scheme
+end AlgebraicGeometry.Scheme.Modules
