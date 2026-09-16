@@ -409,4 +409,94 @@ theorem mono_mulSection_of_forall_not_vanishesAt [IsLocallyNoetherian X] {L : X.
   have hsub : Hom.app (mulSection F s) U (a - b) = 0 := by rw [map_sub, hab, sub_self]
   simpa [sub_eq_zero] using hzero _ hsub
 
+section Support
+
+variable {L : X.Modules}
+
+/-- **A tensor product with an invertible sheaf has trivial stalk wherever the first factor
+does.** -/
+theorem eq_zero_of_subsingleton_stalk (hL : L.Invertible) (F : X.Modules) {x : X}
+    (hx : Subsingleton (F.presheaf.stalk x)) (y : (F ⊗ L).presheaf.stalk x) : y = 0 := by
+  obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
+  have hmi : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨U, hxU, y₀, rfl⟩ := (F ⊗ L).presheaf.exists_germ_eq y
+  have hxUW : x ∈ U ⊓ W := ⟨hxU, hxW⟩
+  rw [← (F ⊗ L).presheaf.germ_res_apply (homOfLE (inf_le_left : U ⊓ W ≤ U)) x hxUW y₀]
+  obtain ⟨V, hVU, hxV, b, hb⟩ := exists_tensorMk_eq F m (inf_le_right : U ⊓ W ≤ W)
+    ((F ⊗ L).presheaf.map (homOfLE (inf_le_left : U ⊓ W ≤ U)).op y₀) hxUW
+  rw [← (F ⊗ L).presheaf.germ_res_apply (homOfLE hVU) x hxV _, hb]
+  obtain ⟨V', hxV', i, i', hbb⟩ :=
+    F.presheaf.germ_eq x hxV hxV b 0 (Subsingleton.elim _ _)
+  rw [map_zero] at hbb
+  rw [← (F ⊗ L).presheaf.germ_res_apply i x hxV' _, map_tensorMk, hbb, tensorMk_zero_left,
+    map_zero]
+
+/-- **The support of `F ⊗ L` is contained in the support of `F`** when `L` is invertible. -/
+theorem support_tensor_subset (hL : L.Invertible) (F : X.Modules) :
+    (F ⊗ L).support ⊆ F.support := by
+  intro x hx
+  by_contra hxF
+  have hsubF : Subsingleton (F.presheaf.stalk x) :=
+    not_nontrivial_iff_subsingleton.1 (fun h ↦ hxF h)
+  obtain ⟨a, b, hab⟩ := (mem_support_iff (F ⊗ L) x).1 hx
+  exact hab ((eq_zero_of_subsingleton_stalk hL F hsubF a).trans
+    (eq_zero_of_subsingleton_stalk hL F hsubF b).symm)
+
+/-- **At a point where the section does not vanish, multiplication by it is surjective on
+stalks.** -/
+theorem surjective_stalkFunctor_map_mulSection (hL : L.Invertible) (F : X.Modules) (s : Γ(L, ⊤))
+    {x : X} (hx : ¬ L.VanishesAt s x) :
+    Function.Surjective
+      ((SheafOfModules.stalkFunctor X.ringCatSheaf x).map (mulSection F s)) := by
+  obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
+  have hmi : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
+  have hgW : L.presheaf.map W.leTop.op s = g • m := by
+    rw [← hg, smulSection]
+    simp only [AddMonoidHom.mk'_apply]
+    congr 1
+    rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
+    simp
+  have hxg : x ∈ X.basicOpen g := by
+    by_contra h
+    exact hx ((vanishesAt_iff_notMem_basicOpen m s g hgW hxW).2 h)
+  intro y
+  obtain ⟨U, hxU, y₀, rfl⟩ := (F ⊗ L).presheaf.exists_germ_eq y
+  have hxB : x ∈ U ⊓ X.basicOpen g := ⟨hxU, hxg⟩
+  have hBW : U ⊓ X.basicOpen g ≤ W := inf_le_right.trans (X.basicOpen_le g)
+  rw [← (F ⊗ L).presheaf.germ_res_apply
+    (homOfLE (inf_le_left : U ⊓ X.basicOpen g ≤ U)) x hxB y₀]
+  obtain ⟨V, hVB, hxV, b, hb⟩ := exists_tensorMk_eq F m hBW
+    ((F ⊗ L).presheaf.map (homOfLE (inf_le_left : U ⊓ X.basicOpen g ≤ U)).op y₀) hxB
+  rw [← (F ⊗ L).presheaf.germ_res_apply (homOfLE hVB) x hxV _, hb]
+  have hVW : V ≤ W := hVB.trans hBW
+  have hVg : V ≤ X.basicOpen g := hVB.trans inf_le_right
+  obtain ⟨u, hu⟩ : IsUnit (X.presheaf.map (homOfLE hVW).op g) := by
+    have h₀ : IsUnit (X.presheaf.map (homOfLE (X.basicOpen_le g)).op g) :=
+      X.toRingedSpace.isUnit_res_basicOpen g
+    have h₂ : X.presheaf.map (homOfLE hVW).op g =
+        X.presheaf.map (homOfLE hVg).op
+          (X.presheaf.map (homOfLE (X.basicOpen_le g)).op g) := by
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
+      congr 2
+    rw [h₂]
+    exact h₀.map _
+  have hmV : L.presheaf.map (homOfLE hVW).op m = ((u⁻¹ : Γ(X, V)ˣ) : Γ(X, V)) •
+      L.presheaf.map V.leTop.op s := by
+    have h₁ : L.presheaf.map V.leTop.op s =
+        X.presheaf.map (homOfLE hVW).op g • L.presheaf.map (homOfLE hVW).op m := by
+      rw [show L.presheaf.map V.leTop.op s =
+        L.presheaf.map (homOfLE hVW).op (L.presheaf.map W.leTop.op s) from by
+          rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]; congr 2,
+        hgW, Scheme.Modules.map_smul]
+    rw [h₁, ← hu, smul_smul, Units.inv_mul, one_smul]
+  refine ⟨F.presheaf.germ V x hxV (((u⁻¹ : Γ(X, V)ˣ) : Γ(X, V)) • b), ?_⟩
+  refine (TopCat.Presheaf.stalkFunctor_map_germ_apply V x hxV
+    (mulSection F s).mapPresheaf (((u⁻¹ : Γ(X, V)ˣ) : Γ(X, V)) • b)).trans ?_
+  congr 1
+  change Hom.app (mulSection F s) V _ = _
+  rw [app_mulSection, tensorMk_smul_left, ← tensorMk_smul_right, ← hmV]
+
+end Support
+
 end AlgebraicGeometry.Scheme.Modules
