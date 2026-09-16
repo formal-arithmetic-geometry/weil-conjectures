@@ -64,6 +64,13 @@ theorem epsilon_forgetRestrict_comp_map_tensorUnitIso :
   rw [PresheafOfModules.sheafificationAdjunction_homEquiv_apply]
   exact (PresheafOfModules.sheafificationHomEquiv _).apply_symm_apply _
 
+/-- The tensorator of the lax monoidal forgetful functor is locally bijective: the tensor product
+of sheaves of modules is the sheafification of the sectionwise tensor product. -/
+lemma w_toPresheaf_map_mu :
+    J.W ((PresheafOfModules.toPresheaf _).map (μ (forgetRestrict (R := R)) F G)) := by
+  rw [mu_eq_tensorPresheafHom]
+  exact w_toPresheaf_map_tensorPresheafHom F G
+
 end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
@@ -121,5 +128,46 @@ theorem app_mulSection {L : X.Modules} (s : Γ(L, ⊤)) (U : X.Opens) (t : Γ(F,
   have h := Hom.naturality_apply (homOfSectionTop L s) U.leTop (oneSection X ⊤)
   rw [map_oneSection, homOfSectionTop_app_top] at h
   simpa [oneSection] using h
+
+/-- **A product of sections that vanishes, vanishes locally in the sectionwise tensor product**:
+if `t ⊗ g` is zero as a section of `F ⊗ G` over `U`, then around every point of `U` there is an
+open subset on which the restrictions of `t` and `g` have zero tensor product already in
+`Γ(F, V) ⊗ Γ(G, V)`. -/
+theorem exists_restrict_tmul_eq_zero {F G : X.Modules} {U : X.Opens} (t : Γ(F, U)) (g : Γ(G, U))
+    (h : tensorMk U t g = 0) {x : X} (hx : x ∈ U) :
+    ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧
+      F.presheaf.map (homOfLE hVU).op t ⊗ₜ[Γ(X, V)] G.presheaf.map (homOfLE hVU).op g = 0 := by
+  have := (SheafOfModules.w_toPresheaf_map_mu (R := X.sheaf) F G).isLocallyInjective
+  have hz : ((PresheafOfModules.toPresheaf _).map
+      (μ (SheafOfModules.forgetRestrict (R := X.sheaf)) F G)).app (op U)
+        (t ⊗ₜ[Γ(X, U)] g) =
+      ((PresheafOfModules.toPresheaf _).map
+      (μ (SheafOfModules.forgetRestrict (R := X.sheaf)) F G)).app (op U) 0 := by
+    rw [map_zero]
+    exact h
+  obtain ⟨V, f, hf, hxV⟩ :=
+    Presheaf.equalizerSieve_mem (Opens.grothendieckTopology X) _ _ _ hz x hx
+  refine ⟨V, f.le, hxV, ?_⟩
+  have hf' : _ = _ := hf
+  rw [map_zero] at hf'
+  exact hf'
+
+/-- **A trivialising section generates the sections over every smaller open subset.** If
+multiplication by `m : Γ(L, W)` is an isomorphism `𝒪_W ≅ L|_W`, then for every open `V ≤ W`
+multiplication by the restriction of `m` is a bijection of `Γ(X, V)` onto `Γ(L, V)`. -/
+theorem bijective_smulSection {L : X.Modules} {W : X.Opens} (m : Γ(L, W))
+    [IsIso (unitSmulRestrictHom m)] {V : X.Opens} (hV : V ≤ W) :
+    Function.Bijective (smulSection m V hV) := by
+  have hiso : IsIso (smulRestrictHom m) := by
+    have h : smulRestrictHom m = (restrictUnitIso W.ι).hom ≫ unitSmulRestrictHom m := by
+      rw [unitSmulRestrictHom, ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    rw [h]
+    infer_instance
+  obtain ⟨V', rfl⟩ : ∃ V' : W.toScheme.Opens, W.ι ''ᵁ V' = V :=
+    ⟨W.ι ⁻¹ᵁ V, by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+        inf_eq_right.2 hV]⟩
+  exact ConcreteCategory.bijective_of_isIso
+    ((SheafOfModules.evaluation W.toScheme.ringCatSheaf (op V')).map (smulRestrictHom m))
 
 end AlgebraicGeometry.Scheme.Modules
