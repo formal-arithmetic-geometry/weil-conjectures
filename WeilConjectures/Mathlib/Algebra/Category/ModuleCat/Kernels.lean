@@ -18,7 +18,7 @@ of the *elements* of the kernel, and its image under a kernel preserving functor
 
 ## Main results
 
-* `ModuleCat.range_kernel_ι`: the image of `kernel.ι f` is the set of elements killed by `f`.
+* `ModuleCat.range_kernelι`: the image of `kernel.ι f` is the set of elements killed by `f`.
 * `ModuleCat.range_map_kernelι`: the same statement for the image of `kernel.ι f` under a
   functor `G` into `ModuleCat R` preserving the kernel of `f`; this is the form in which the
   description is used for a functor computing sections, stalks or fibres of a sheaf.
@@ -35,7 +35,7 @@ namespace ModuleCat
 variable {R : Type u} [Ring R]
 
 /-- **The elements of a categorical kernel in `ModuleCat` are the elements killed by `f`.** -/
-lemma range_kernel_ι {M N : ModuleCat.{v} R} (f : M ⟶ N) :
+lemma range_kernelι {M N : ModuleCat.{v} R} (f : M ⟶ N) :
     Set.range (kernel.ι f) = { x | f x = 0 } := by
   ext x
   constructor
@@ -51,7 +51,7 @@ lemma range_map_kernelι {C : Type*} [Category C] [HasZeroMorphisms C] {M N : C}
     [HasKernel f] (G : C ⥤ ModuleCat.{v} R) [G.PreservesZeroMorphisms]
     [PreservesLimit (parallelPair f 0) G] :
     Set.range (G.map (kernel.ι f)) = { x | G.map f x = 0 } := by
-  rw [map_kernelι_eq, ← range_kernel_ι (G.map f)]
+  rw [map_kernelι_eq, ← range_kernelι (G.map f)]
   exact (ConcreteCategory.bijective_of_isIso (PreservesKernel.iso G f).hom).2.range_comp _
 
 end ModuleCat
