@@ -24,6 +24,8 @@ forward difference operator. This file collects the facts one needs about compos
   `Module.End ℤ (M → G)`, applied to `f`;
 * `fwdDiffComp_eq_sum_powerset`: the expansion of that composite as an alternating sum over the
   subsets of `Fin d`;
+* `fwdDiffComp_comp_addMonoidHom`: composites of difference operators transport along an
+  additive map `f`, in the sense that `fwdDiffComp v (g ∘ f) = fwdDiffComp (f ∘ v) g ∘ f`;
 * `fwdDiff_iter_sub`: the iterates `Δ_[h]^[n]` are compatible with subtraction;
 * `fwdDiffList`: the same composite indexed by a list of directions instead, so that
   concatenating two families of directions is `fwdDiffList_append`;
@@ -169,6 +171,28 @@ lemma fwdDiffList_replicate (n : ℕ) (a : M) (f : M → G) :
   induction n generalizing f with
   | zero => simp
   | succ n ih => rw [List.replicate_succ, fwdDiffList_cons, ih, Function.iterate_succ_apply']
+
+section Comp
+
+variable {N : Type*} [AddCommMonoid N]
+
+/-- Forward differences transport along an additive map: differencing `g ∘ f` in the direction `v`
+is differencing `g` in the direction `f v`. -/
+lemma fwdDiff_comp_addMonoidHom (f : M →+ N) (g : N → G) (v : M) :
+    Δ_[v] (g ∘ f) = Δ_[f v] g ∘ f := by
+  funext m
+  simp [fwdDiff, map_add]
+
+/-- Composites of forward difference operators transport along an additive map. -/
+lemma fwdDiffComp_comp_addMonoidHom (f : M →+ N) (g : N → G) (v : Fin d → M) :
+    fwdDiffComp v (g ∘ f) = fwdDiffComp (fun i ↦ f (v i)) g ∘ f := by
+  induction d generalizing g with
+  | zero => simp
+  | succ d ih =>
+    rw [fwdDiffComp_succ' v (g ∘ f), fwdDiff_comp_addMonoidHom, ih,
+      fwdDiffComp_succ' (fun i ↦ f (v i)) g]
+
+end Comp
 
 lemma fwdDiffComp_eq_fwdDiffList (v : Fin d → M) (f : M → G) :
     fwdDiffComp v f = fwdDiffList (List.ofFn v) f := by
