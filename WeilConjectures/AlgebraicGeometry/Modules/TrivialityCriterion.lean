@@ -138,7 +138,6 @@ theorem isIso_fiberMap_of_ne_zero {M N : X.Modules} (hM : M.Invertible) (hN : N.
   exact ⟨(LinearMap.injective_iff_surjective_of_finrank_eq_finrank
     (hM1.trans hN1.symm)).2 hsurj, hsurj⟩
 
-
 /-- **A trivial line bundle has a non-zero global section**, as soon as the ring of global
 functions of `X` is non-trivial: an isomorphism `M ≅ 𝒪ₓ` carries the unit function to one. -/
 theorem exists_ne_zero_of_iso_tensorUnit [Nontrivial Γ(X, ⊤)] {M : X.Modules}
@@ -180,9 +179,9 @@ theorem nonempty_iso_tensorUnit_iff_of_isField [IsIntegral X] (hfield : IsField 
       rw [hzero] at hval
       simp only [Hom.zero_app] at hval
       exact hm (by simpa using hval.symm)
-    set t : 𝟙_ X.Modules ≅ X.structureModules := tensorUnitIso X.sheaf with ht
-    set σ : X.structureModules ⟶ L := homOfSectionTop L s with hσdef
-    set τ : X.structureModules ⟶ N := homOfSectionTop N v with hτdef
+    set t : 𝟙_ X.Modules ≅ X.structureModules := tensorUnitIso X.sheaf
+    set σ : X.structureModules ⟶ L := homOfSectionTop L s
+    set τ : X.structureModules ⟶ N := homOfSectionTop N v
     set g : 𝟙_ X.Modules ⟶ L := t.hom ≫ σ with hg
     set h : 𝟙_ X.Modules ⟶ N := t.hom ≫ τ with hh
     set ψ : L ⟶ 𝟙_ X.Modules := (ρ_ L).inv ≫ (L ◁ h) ≫ e.hom with hψ
