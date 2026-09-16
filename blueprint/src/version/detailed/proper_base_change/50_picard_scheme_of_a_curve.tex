@@ -5810,10 +5810,10 @@ Definition~34.9.1, \stacksproject{022B}).
 \label{def:pc-absolute-relative-reading}
 \Cref{def:pc-zariski-sheaf-property}, \Cref{def:pc-subfunctor},
 \Cref{def:pc-open-subfunctor} and \Cref{def:pc-cover} carve up a single
-source, Schemes, Definition~26.15.3, \stacksproject{01JI}, and each of the
-four is stated for $\mathcal D$ either the category $\Sch$ of all schemes or
-the category $\Sch/S$ of schemes over a base scheme $S$.  What those two
-cases mean is fixed here, once for all four.  The source states the absolute
+source, Schemes, Definition~26.15.3, and each of the four is stated for
+$\mathcal D$ either the category $\Sch$ of all schemes or the category
+$\Sch/S$ of schemes over a base scheme $S$.  What those two cases mean is
+fixed here, once for all four.  The source states the absolute
 case $\mathcal D=\Sch$ only, and for set-valued functors only; that case is
 the source as written.  The case $\mathcal D=\Sch/S$ is the same words read
 in the ambient category $\mathcal D$ itself, whose objects are the schemes
@@ -5868,17 +5868,28 @@ a $G$ the sheaf property is again unique gluing of compatible collections;
 and a subfunctor $H\subseteq G$ of such a $G$ is a rule of \emph{subsets}
 $H(T)\subseteq G(T)$, which is not required to take subgroup values.
 \uses{def:pc-scheme}
-\end{definition}
+% No \uses for \Cref{def:pc-zariski-sheaf-property}, \Cref{def:pc-subfunctor},
+% \Cref{def:pc-open-subfunctor} or \Cref{def:pc-cover} here, deliberately: an
+% edge to any one of those four definitions would close a cycle.
 % \Cref{def:pc-zariski-sheaf-property}, \Cref{def:pc-subfunctor},
-% \Cref{def:pc-open-subfunctor} and \Cref{def:pc-cover} are named in the prose
-% of \Cref{def:pc-absolute-relative-reading} and carry no \uses edge from it,
-% deliberately.  Each of those four definitions uses
-% \Cref{def:pc-absolute-relative-reading}, so an edge from this node to any of
-% them would close a two-node cycle, for instance
-% def:pc-absolute-relative-reading -> def:pc-subfunctor ->
-% def:pc-absolute-relative-reading.  \Cref{lem:pc-schemes-criterion} is named
-% here only as a forward pointer and likewise carries no \uses edge, per the
-% convention stated in \Cref{rem:pc-conventions}.
+% \Cref{def:pc-open-subfunctor} and \Cref{def:pc-cover} each already declare
+% \Cref{def:pc-absolute-relative-reading} among their dependencies, so an edge
+% from \Cref{def:pc-absolute-relative-reading} to any one of the four makes a
+% 2-cycle:
+%   def:pc-absolute-relative-reading -> def:pc-zariski-sheaf-property
+%     -> def:pc-absolute-relative-reading,
+%   def:pc-absolute-relative-reading -> def:pc-subfunctor
+%     -> def:pc-absolute-relative-reading,
+%   def:pc-absolute-relative-reading -> def:pc-open-subfunctor
+%     -> def:pc-absolute-relative-reading,
+%   def:pc-absolute-relative-reading -> def:pc-cover
+%     -> def:pc-absolute-relative-reading.
+% \Cref{lem:pc-schemes-criterion} likewise carries no \uses edge from
+% \Cref{def:pc-absolute-relative-reading}, deliberately:
+% \Cref{def:pc-absolute-relative-reading} names \Cref{lem:pc-schemes-criterion}
+% only as a forward pointer, which \Cref{rem:pc-conventions} excludes from
+% these lists.
+\end{definition}
 % This node is a definition and not a remark because the four definitions are
 % meant to depend on it: plastexdepgraph builds no dependency-graph node for a
 % remark, so a \uses naming one is silently dropped and no edge exists.  The
@@ -15522,10 +15533,8 @@ $\dim_KH^0=1$, $H^1=0$.  This proves the lemma.
 (Picard Schemes of Curves, Lemma~44.5.1,
 \stacksproject{0B9Q}.)
 Let $k$ be a field and let
-$G:(\Sch/k)^{\mathrm{op}}\to\textit{Groups}$ be a functor; the four conditions
-below are applied to $G$ with $\mathcal D=\Sch/k$ and for a group-valued
-functor, both as fixed in \Cref{def:pc-absolute-relative-reading}.
-With the terminology of
+$G:(\Sch/k)^{\mathrm{op}}\to\textit{Groups}$ be a functor.  With the
+terminology of
 Definitions~\ref{def:pc-subfunctor} and~\ref{def:pc-open-subfunctor}, assume:
 \begin{description}
 \item[(1)] $G$ \termref{def:pc-zariski-sheaf-property}{satisfies the sheaf
@@ -15537,7 +15546,7 @@ representable;
 $g\in G(K)$ there exists $g'\in G(k)$ such that $g'g\in F(K)$.
 \end{description}
 Then $G$ is representable by a group scheme over $k$.
-\uses{def:pc-subfunctor,def:pc-open-subfunctor,def:pc-representable-functor,def:pc-zariski-sheaf-property,def:pcb-group-scheme,def:pc-absolute-relative-reading}
+\uses{def:pc-subfunctor,def:pc-open-subfunctor,def:pc-representable-functor,def:pc-zariski-sheaf-property,def:pcb-group-scheme}
 \end{theorem}
 \begin{proof}
 \uses{def:pc-representable-functor,def:pc-subfunctor,def:pc-cover,lem:pc-representable-unique,lem:pc-schemes-criterion}
