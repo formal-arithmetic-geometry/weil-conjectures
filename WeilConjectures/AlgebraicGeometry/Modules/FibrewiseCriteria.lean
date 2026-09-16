@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Fibrewise criteria for a morphism of line bundles
@@ -32,12 +31,14 @@ the second statement says that `a` is a unit in every local ring of `W`, hence a
   bundles which is non-zero on every fibre is an isomorphism**, with the characterisation
   `AlgebraicGeometry.Scheme.Modules.isIso_iff_forall_fiberMap_ne_zero`.
 
-Along the way the file records what an endomorphism of the structure sheaf is: it is
-multiplication by the global function `AlgebraicGeometry.Scheme.Modules.endSection`, by
-`AlgebraicGeometry.Scheme.Modules.app_eq_mul_endSection`, it is an isomorphism as soon as that
-function is a unit (`AlgebraicGeometry.Scheme.Modules.isIso_of_isUnit_endSection`), and its fibre
-at `x` vanishes exactly when that function does
-(`AlgebraicGeometry.Scheme.Modules.fiberMap_eq_zero_iff_evaluation_endSection`).
+The description of an endomorphism of the structure sheaf as multiplication by a global function
+`AlgebraicGeometry.Scheme.Modules.endSection`, and the two local-to-global steps
+`AlgebraicGeometry.Scheme.Modules.isIso_of_forall_exists_isIso_app` and
+`AlgebraicGeometry.Scheme.Modules.fiberMap_restrictFunctor_map_eq_zero_iff`, mention no
+invertible sheaf and are in the Mathlib mirror
+`WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf`. What is left here is
+`AlgebraicGeometry.Scheme.Modules.fiberMap_eq_zero_iff_evaluation_endSection`, the fibre of such
+an endomorphism, which needs the monoidal description of the fibre of the structure sheaf.
 
 ## Blueprint
 
@@ -49,75 +50,21 @@ at `x` vanishes exactly when that function does
 
 universe u
 
-open CategoryTheory MonoidalCategory Opposite SheafOfModules TopologicalSpace
+open CategoryTheory SheafOfModules TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
-section StructureSheafEnd
-
-/-- The global function attached to an endomorphism of the structure sheaf of a scheme: the
-image of the unit function. The endomorphism is multiplication by it, see
-`AlgebraicGeometry.Scheme.Modules.app_eq_mul_endSection`. -/
-noncomputable def endSection (ψ : X.structureModules ⟶ X.structureModules) : Γ(X, ⊤) :=
-  Hom.app ψ ⊤ (oneSection X ⊤)
-
-/-- **An endomorphism of the structure sheaf is multiplication by a global function**, namely by
-`AlgebraicGeometry.Scheme.Modules.endSection`. -/
-lemma app_eq_mul_endSection (ψ : X.structureModules ⟶ X.structureModules) (U : X.Opens)
-    (r : Γ(X, U)) :
-    (Hom.app ψ U r : Γ(X, U)) =
-      r * X.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (endSection ψ) := by
-  have hnat := Hom.naturality_apply ψ (homOfLE (le_top : U ≤ ⊤)) (oneSection X ⊤)
-  rw [map_oneSection] at hnat
-  conv_lhs => rw [show (r : Γ(X.structureModules, U)) = r • oneSection X U from (mul_one r).symm]
-  rw [Hom.app_smul, hnat]
-  rfl
-
-/-- **An endomorphism of the structure sheaf is determined by the corresponding global
-function.** -/
-lemma endSection_injective {ψ ψ' : X.structureModules ⟶ X.structureModules}
-    (h : endSection ψ = endSection ψ') : ψ = ψ' := by
-  refine hom_ext ψ ψ' fun U ↦ ?_
-  ext z
-  rw [app_eq_mul_endSection ψ U z, app_eq_mul_endSection ψ' U z, h]
-
-@[simp]
-lemma endSection_id : endSection (𝟙 X.structureModules) = 1 := rfl
-
-/-- Multiplication by a global function, as an endomorphism of the structure sheaf. It is the
-inverse of `AlgebraicGeometry.Scheme.Modules.endSection`. -/
-noncomputable def endOfSection (X : Scheme.{u}) (a : Γ(X, ⊤)) :
-    X.structureModules ⟶ X.structureModules :=
-  homOfSectionTop X.structureModules a
-
-@[simp]
-lemma endSection_endOfSection (a : Γ(X, ⊤)) : endSection (endOfSection X a) = a :=
-  (homOfSectionTop_app_top X.structureModules a (1 : Γ(X, ⊤))).trans (one_smul _ _)
-
-@[simp]
-lemma endSection_comp (ψ ψ' : X.structureModules ⟶ X.structureModules) :
-    endSection (ψ ≫ ψ') = endSection ψ * endSection ψ' := by
-  have h : endSection (ψ ≫ ψ') = Hom.app ψ' ⊤ (endSection ψ) := rfl
-  rw [h, app_eq_mul_endSection ψ' ⊤ (endSection ψ),
-    show (homOfLE (le_top : (⊤ : X.Opens) ≤ ⊤)).op = 𝟙 (op (⊤ : X.Opens)) from rfl,
-    CategoryTheory.Functor.map_id]
-  rfl
-
-/-- **An endomorphism of the structure sheaf given by a unit is an isomorphism**, the inverse
-being multiplication by the inverse function. -/
-theorem isIso_of_isUnit_endSection {ψ : X.structureModules ⟶ X.structureModules}
-    (h : IsUnit (endSection ψ)) : IsIso ψ := by
-  obtain ⟨b, hb⟩ : ∃ b : Γ(X, ⊤), endSection ψ * b = 1 := by
-    obtain ⟨u, hu⟩ := h
-    exact ⟨((u⁻¹ : Γ(X, ⊤)ˣ) : Γ(X, ⊤)), by rw [← hu]; exact u.mul_inv⟩
-  refine ⟨⟨endOfSection X b, endSection_injective ?_, endSection_injective ?_⟩⟩
-  · rw [endSection_comp, endSection_endOfSection, endSection_id, hb]
-  · rw [endSection_comp, endSection_endOfSection, endSection_id, mul_comm, hb]
+section Fiber
 
 /-- **The fibre of an endomorphism of the structure sheaf vanishes at `x` exactly when the
-corresponding global function does.** -/
+corresponding global function does.**
+
+This is the one statement of the fibrewise criteria that cannot live in the Mathlib mirror: it
+needs the identification `AlgebraicGeometry.Scheme.Modules.fiberUnitIso` of the fibre of the
+structure sheaf with the residue field, which is proved with the monoidal structure on sheaves
+of modules and so lives outside `WeilConjectures/Mathlib/`. -/
 lemma fiberMap_eq_zero_iff_evaluation_endSection (ψ : X.structureModules ⟶ X.structureModules)
     (x : X) : fiberMap ψ x = 0 ↔ X.Γevaluation x (endSection ψ) = 0 := by
   have hv : fiberMk X.structureModules x (oneSection X ⊤) ≠ 0 := by
@@ -148,72 +95,7 @@ lemma fiberMap_eq_zero_iff_evaluation_endSection (ψ : X.structureModules ⟶ X.
     change (fiberMap ψ x) (c • fiberMk X.structureModules x (oneSection X ⊤)) = 0
     rw [hsm, happ, h, smul_zero]
 
-end StructureSheafEnd
-
-section Local
-
-variable {M N : X.Modules}
-
-/-- **The fibre of a restriction to an open subscheme.** A morphism of sheaves of modules
-vanishes on the fibre at a point of an open subscheme exactly when its restriction does. -/
-lemma fiberMap_restrictFunctor_map_eq_zero_iff {Y : Scheme.{u}} (f : Y ⟶ X) [IsOpenImmersion f]
-    (φ : M ⟶ N) (y : Y) :
-    fiberMap ((restrictFunctor f).map φ) y = 0 ↔ fiberMap φ (f y) = 0 := by
-  have h₁ : fiberMap ((restrictFunctor f).map φ) y ≫
-      fiberMap ((restrictFunctorIsoPullback f).hom.app N) y =
-      fiberMap ((restrictFunctorIsoPullback f).hom.app M) y ≫
-        fiberMap ((Modules.pullback f).map φ) y := by
-    rw [← fiberMap_comp, ← fiberMap_comp, (restrictFunctorIsoPullback f).hom.naturality φ]
-  have h₂ : fiberMap ((Modules.pullback f).map φ) y ≫ (fiberFunctorPullbackIso f y).hom.app N =
-      (fiberFunctorPullbackIso f y).hom.app M ≫
-        (ModuleCat.restrictScalars (inv (f.residueFieldMap y)).hom).map (fiberMap φ (f y)) :=
-    (fiberFunctorPullbackIso f y).hom.naturality φ
-  have e₁ : fiberMap ((restrictFunctor f).map φ) y = 0 ↔
-      fiberMap ((Modules.pullback f).map φ) y = 0 := by
-    constructor
-    · intro h
-      exact (Preadditive.IsIso.comp_left_eq_zero
-        (fiberMap ((restrictFunctorIsoPullback f).hom.app M) y)
-        (fiberMap ((Modules.pullback f).map φ) y)).1 (by rw [← h₁, h, Limits.zero_comp])
-    · intro h
-      exact (Preadditive.IsIso.comp_right_eq_zero
-        (fiberMap ((restrictFunctor f).map φ) y)
-        (fiberMap ((restrictFunctorIsoPullback f).hom.app N) y)).1
-          (by rw [h₁, h, Limits.comp_zero])
-  have e₂ : fiberMap ((Modules.pullback f).map φ) y = 0 ↔
-      (ModuleCat.restrictScalars (inv (f.residueFieldMap y)).hom).map (fiberMap φ (f y)) = 0 := by
-    constructor
-    · intro h
-      exact (Preadditive.IsIso.comp_left_eq_zero ((fiberFunctorPullbackIso f y).hom.app M)
-        ((ModuleCat.restrictScalars (inv (f.residueFieldMap y)).hom).map
-          (fiberMap φ (f y)))).1 (by rw [← h₂, h, Limits.zero_comp])
-    · intro h
-      exact (Preadditive.IsIso.comp_right_eq_zero (fiberMap ((Modules.pullback f).map φ) y)
-        ((fiberFunctorPullbackIso f y).hom.app N)).1 (by rw [h₂, h, Limits.comp_zero])
-  rw [e₁, e₂, Functor.map_eq_zero_iff]
-
-/-- **A morphism of sheaves of modules which is locally an isomorphism is an isomorphism**: if
-every point has an open neighbourhood `W` such that the morphism is invertible on sections over
-every open subset of `W`, then it is an isomorphism. -/
-theorem isIso_of_forall_exists_isIso_app (φ : M ⟶ N)
-    (h : ∀ x : X, ∃ W : X.Opens, x ∈ W ∧ ∀ V : X.Opens, V ≤ W → IsIso (Hom.app φ V)) :
-    IsIso φ := by
-  choose W hxW hW using h
-  rw [Hom.isIso_iff_isIso_app]
-  intro U
-  let S : Sieve U :=
-    { arrows := fun V _ ↦ ∃ x : X, V ≤ W x
-      downward_closed := by
-        intro V V' f hV g
-        exact hV.imp fun _ hx ↦ le_trans (leOfHom g) hx }
-  have hS : S ∈ Opens.grothendieckTopology X U :=
-    fun x hx ↦ ⟨U ⊓ W x, homOfLE inf_le_left, ⟨x, inf_le_right⟩, hx, hxW x⟩
-  refine Presheaf.isIso_app_of_isIso_app_of_mem (Opens.grothendieckTopology X)
-    M.isSheaf N.isSheaf φ.mapPresheaf S hS fun V f hV ↦ ?_
-  obtain ⟨x, hx⟩ := hV
-  exact hW x V hx
-
-end Local
+end Fiber
 
 section Fibrewise
 
@@ -270,8 +152,7 @@ theorem isClosed_setOf_fiberMap_eq_zero (hM : M.Invertible) (hN : N.Invertible) 
     change fiberMap φ ((W i).ι y) = 0 ↔ y ∉ (W i).toScheme.basicOpen (a i)
     rw [ha i y]
     exact (W i).toScheme.evaluation_eq_zero_iff_notMem_basicOpen (U := ⊤) y trivial (a i)
-  exact Eq.mpr (congrArg IsClosed hset)
-    ((W i).toScheme.basicOpen (a i)).isOpen.isClosed_compl
+  exact hset ▸ ((W i).toScheme.basicOpen (a i)).isOpen.isClosed_compl
 
 /-- **A morphism of line bundles which is non-zero on every fibre is an isomorphism.** For a
 morphism `φ : M ⟶ N` of invertible sheaves of modules on a scheme `X`, if the induced map

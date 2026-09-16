@@ -23,6 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.MiracleFlatness
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
+public import WeilConjectures.AlgebraicGeometry.Modules.FibrewiseCriteria
 public import WeilConjectures.AlgebraicGeometry.Modules.Flat
 public import WeilConjectures.AlgebraicGeometry.Modules.GloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.Modules.HyperplaneSection
