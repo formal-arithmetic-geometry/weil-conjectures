@@ -57,7 +57,12 @@ sheaf-condition argument that the kernel description gets for free.
 Local freeness of rank one for an invertible ideal sheaf. What is missing is a criterion for
 a morphism in `X.Modules` to be an isomorphism that can be checked on a basis of opens or on
 stalks: `Scheme.Modules.Hom.isIso_iff_isIso_app` quantifies over *all* opens, which is not
-usable directly, and Mathlib has no stalkwise criterion phrased for `X.Modules` (only
+usable directly. The local forms `Scheme.Modules.isIso_of_forall_exists_isIso_app` (invertible
+on every open small enough) and `Scheme.Modules.isIso_of_isOpenCover_restrict` (invertible after
+restriction to each member of an open cover) are available; what is still missing is the
+criterion on a basis of opens, whose proof has to go through separatedness and gluing because a
+basis is not closed under intersection with an arbitrary open, and the stalkwise criterion,
+which Mathlib does not have phrased for `X.Modules` (only
 `Scheme.Modules.restrictStalkNatIso`). Note also that Mathlib's
 `SheafOfModules.IsLocallyFree` carries no rank information, so "rank one" has to be spelled
 out separately.
