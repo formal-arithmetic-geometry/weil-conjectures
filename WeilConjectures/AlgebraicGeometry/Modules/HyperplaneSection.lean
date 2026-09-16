@@ -97,6 +97,37 @@ theorem app_rightUnitor_inv (U : X.Opens) (t : Γ(F, U)) :
   (congrArg (fun φ ↦ (φ.app (op U)).hom t)
     (right_unitality_inv (F := SheafOfModules.forgetRestrict (R := X.sheaf)) F)).symm
 
+@[simp]
+lemma tensorMk_zero_left {G : X.Modules} (U : X.Opens) (l : Γ(G, U)) :
+    tensorMk (F := F) U 0 l = 0 := by
+  have h : (0 : Γ(F, U)) ⊗ₜ[Γ(X, U)] l = 0 := TensorProduct.zero_tmul _ l
+  rw [tensorMk, h, map_zero]
+
+lemma tensorMk_add_left {G : X.Modules} (U : X.Opens) (t t' : Γ(F, U)) (l : Γ(G, U)) :
+    tensorMk U (t + t') l = tensorMk U t l + tensorMk U t' l := by
+  have h : (t + t') ⊗ₜ[Γ(X, U)] l = t ⊗ₜ[Γ(X, U)] l + t' ⊗ₜ[Γ(X, U)] l :=
+    TensorProduct.add_tmul t t' l
+  rw [tensorMk, tensorMk, tensorMk, h, map_add]
+
+lemma tensorMk_smul_left {G : X.Modules} (U : X.Opens) (r : Γ(X, U)) (t : Γ(F, U)) (l : Γ(G, U)) :
+    tensorMk U (r • t) l = r • tensorMk U t l := by
+  have h : (r • t) ⊗ₜ[Γ(X, U)] l = r • (t ⊗ₜ[Γ(X, U)] l) := TensorProduct.smul_tmul' r t l
+  rw [tensorMk, tensorMk, h]
+  exact LinearMap.map_smul _ r _
+
+lemma tensorMk_smul_right {G : X.Modules} (U : X.Opens) (r : Γ(X, U)) (t : Γ(F, U))
+    (l : Γ(G, U)) : tensorMk U t (r • l) = r • tensorMk U t l := by
+  have h : t ⊗ₜ[Γ(X, U)] (r • l) = r • (t ⊗ₜ[Γ(X, U)] l) := TensorProduct.tmul_smul r t l
+  rw [tensorMk, tensorMk, h]
+  exact LinearMap.map_smul _ r _
+
+lemma map_tensorMk {G : X.Modules} {U V : X.Opens} (i : V ⟶ U) (t : Γ(F, U)) (l : Γ(G, U)) :
+    (F ⊗ G).presheaf.map i.op (tensorMk U t l) =
+      tensorMk V (F.presheaf.map i.op t) (G.presheaf.map i.op l) := by
+  have h := PresheafOfModules.naturality_apply
+    (μ (SheafOfModules.forgetRestrict (R := X.sheaf)) F G) i.op (t ⊗ₜ[Γ(X, U)] l)
+  exact h.symm
+
 /-- **Whiskering acts on the second factor of a product of sections.** -/
 theorem app_whiskerLeft {M N : X.Modules} (ψ : M ⟶ N) (U : X.Opens) (t : Γ(F, U)) (m : Γ(M, U)) :
     Hom.app (F ◁ ψ) U (tensorMk U t m) = tensorMk U t (Hom.app ψ U m) :=
@@ -292,6 +323,34 @@ theorem smul_eq_zero_of_tmul_eq_zero (F : X.Modules) (m : Γ(L, W))
   have h' := congrArg (tensorContract F m hV) h
   rwa [map_zero, tensorContract_tmul, ← smulSectionEquiv_apply,
     LinearEquiv.symm_apply_apply] at h'
+
+/-- **Over a trivialising open every element of the sectionwise tensor product is a product with
+the trivialising section.** -/
+theorem app_mu_eq_tensorMk (F : X.Modules) (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    {V : X.Opens} (hV : V ≤ W) (z : Γ(F, V) ⊗[Γ(X, V)] Γ(L, V)) :
+    ((μ (SheafOfModules.forgetRestrict (R := X.sheaf)) F L).app (op V)).hom z =
+      tensorMk V (tensorContract F m hV z) (L.presheaf.map (homOfLE hV).op m) := by
+  induction z with
+  | zero => rw [map_zero, map_zero, tensorMk_zero_left]
+  | tmul a l =>
+    have hl : (smulSectionEquiv m hV).symm l • L.presheaf.map (homOfLE hV).op m = l :=
+      (smulSectionEquiv m hV).apply_symm_apply l
+    rw [tensorContract_tmul, tensorMk_smul_left, ← tensorMk_smul_right, hl]
+    rfl
+  | add z z' hz hz' => rw [map_add, hz, hz', map_add, tensorMk_add_left]
+
+/-- **Local description of the sections of `F ⊗ L` over a trivialising open**: every section is,
+after restriction to a neighbourhood of any of its points, the product of a section of `F` with
+the trivialising section. -/
+theorem exists_tensorMk_eq (F : X.Modules) (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    {U : X.Opens} (hUW : U ≤ W) (y : Γ(F ⊗ L, U)) {x : X} (hx : x ∈ U) :
+    ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧ ∃ b : Γ(F, V),
+      (F ⊗ L).presheaf.map (homOfLE hVU).op y =
+        tensorMk V b (L.presheaf.map (homOfLE (hVU.trans hUW)).op m) := by
+  have hls := (SheafOfModules.w_toPresheaf_map_mu (R := X.sheaf) F L).isLocallySurjective
+  obtain ⟨V, hVU, ⟨z, hz⟩, hxV⟩ := (TopCat.Presheaf.isLocallySurjective_iff _).1 hls U y x hx
+  exact ⟨V, hVU, hxV, tensorContract F m (hVU.trans hUW) z,
+    hz.symm.trans (app_mu_eq_tensorMk F m (hVU.trans hUW) z)⟩
 
 end Trivialisation
 
