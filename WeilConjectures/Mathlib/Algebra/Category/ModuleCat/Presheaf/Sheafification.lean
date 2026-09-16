@@ -38,7 +38,7 @@ universe v v' u u'
 
 open CategoryTheory
 
-section PresheafOfModules
+section LocallyBijective
 
 variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C}
   {R₀ : Cᵒᵖ ⥤ RingCat.{u}} {R : Sheaf J RingCat.{u}} (α : R₀ ⟶ R.obj)
@@ -73,9 +73,9 @@ noncomputable def sheafificationEquivalenceOfIsSheaf
 
 end PresheafOfModules
 
-end PresheafOfModules
+end LocallyBijective
 
-section SheafOfModules
+section CommRing
 
 variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
@@ -107,4 +107,4 @@ noncomputable def sheafificationObjIso
 
 end SheafOfModules
 
-end SheafOfModules
+end CommRing

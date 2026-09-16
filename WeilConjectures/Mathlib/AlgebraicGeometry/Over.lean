@@ -60,7 +60,7 @@ lemma overRingHom_apply (r : R) :
 functions of `X`, then `AlgebraicGeometry.Scheme.overRingHom` is a ring isomorphism. -/
 noncomputable def overRingEquiv
     (h : IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)) : R ≃+* Γ(X, ⊤) :=
-  haveI := h
+  have := h
   (asIso ((Scheme.ΓSpecIso (.of R)).inv ≫ (X ↘ Spec (.of R)).appTop)).commRingCatIsoToRingEquiv
 
 @[simp]

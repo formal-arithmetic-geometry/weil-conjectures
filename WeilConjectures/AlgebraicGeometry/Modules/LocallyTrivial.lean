@@ -59,6 +59,17 @@ pullback of an invertible sheaf of modules is invertible.
   project.
 - `SheafOfModules.Invertible.exists_restrict_iso_unit`: the same statement in the explicit local
   form, an isomorphism `M|_W ≅ 𝒪_W`.
+- `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensorObj_of_invertible`,
+  `isFiniteType_tensorObj_of_invertible` and `isCoherent_tensorObj_of_invertible`: **tensoring
+  by an invertible sheaf of modules preserves quasi-coherence, being of finite type, and
+  coherence.**
+
+Invertibility of the second factor is a deliberate simplification in the last three statements.
+Both halves hold for a general second factor — a tensor product of quasi-coherent sheaves of
+modules is quasi-coherent, and a tensor product of sheaves of finite type is of finite type —
+but the quasi-coherent half in that generality needs the comparison `(M ⊗ N)~ ≅ M~ ⊗ N~` on
+affines, which is not available here and is not needed by Snapper's theorem. For an invertible
+second factor local triviality replaces it.
 -/
 
 @[expose] public section
@@ -474,5 +485,75 @@ theorem _root_.SheafOfModules.Invertible.isFiniteType {M : X.Modules} (hM : M.In
     fun x ↦ inferInstance
 
 end LocallyFree
+
+section TensorInvertible
+
+open TopologicalSpace
+
+variable {L : X.Modules}
+
+/-- A trivialisation of `L` over an open `W` restricts to a trivialisation over a smaller
+open `V`. -/
+noncomputable def restrictIsoTensorUnitOfLE {W : X.Opens}
+    (e : L.restrict W.ι ≅ 𝟙_ W.toScheme.Modules) {V : X.Opens} (h : V ≤ W) :
+    L.restrict V.ι ≅ 𝟙_ V.toScheme.Modules :=
+  (restrictRestrictIso L h).symm ≪≫ (restrictFunctor' (X.homOfLE h)).mapIso e ≪≫
+    (Functor.Monoidal.εIso (restrictFunctor (X.homOfLE h))).symm
+
+/-- **An invertible sheaf of modules on a scheme is trivial over each member of some cover of
+`X` by affine opens**: the trivialising opens given by
+`SheafOfModules.Invertible.exists_restrict_iso_tensorUnit` are refined by affine opens, over
+which the trivialisation restricts. -/
+theorem _root_.SheafOfModules.Invertible.exists_isAffineOpenCover_restrict_iso_tensorUnit
+    (hL : L.Invertible) :
+    ∃ (ι : Type u) (U : ι → X.Opens), IsOpenCover U ∧ (∀ i, IsAffineOpen (U i)) ∧
+      ∀ i, Nonempty (L.restrict (U i).ι ≅ 𝟙_ (U i).toScheme.Modules) := by
+  choose W hxW hW using hL.exists_restrict_iso_tensorUnit
+  choose κ hκ hWeq using fun x : X ↦ Opens.isBasis_iff_cover.mp X.isBasis_affineOpens (W x)
+  have hle (j : Σ x : X, κ x) : (j.2 : X.Opens) ≤ W j.1 := by
+    rw [hWeq j.1]
+    exact le_sSup j.2.2
+  refine ⟨Σ x : X, κ x, fun j ↦ (j.2 : X.Opens), ?_, fun j ↦ hκ _ j.2.2, fun j ↦ ⟨?_⟩⟩
+  · have hcov : ⨆ x : X, W x = ⊤ := eq_top_iff.2 fun x _ ↦ Opens.mem_iSup.2 ⟨x, hxW x⟩
+    rw [IsOpenCover, iSup_sigma, ← hcov]
+    exact iSup_congr fun x ↦ by rw [hWeq x, sSup_eq_iSup']
+  · exact restrictIsoTensorUnitOfLE (hW j.1).some (hle j)
+
+/-- **Tensoring a quasi-coherent sheaf of modules with an invertible one preserves
+quasi-coherence.** Over an affine open trivialising `L` the restriction of `F ⊗ L` is
+isomorphic to that of `F`, and quasi-coherence is local on the base. -/
+theorem isQuasicoherent_tensorObj_of_invertible (F : X.Modules) [F.IsQuasicoherent]
+    (hL : L.Invertible) : (F ⊗ L).IsQuasicoherent := by
+  obtain ⟨ι, U, hU, hU', e⟩ := hL.exists_isAffineOpenCover_restrict_iso_tensorUnit
+  refine isQuasicoherent_of_isAffineOpenCover _ U hU hU' fun i ↦ ?_
+  exact (SheafOfModules.isQuasicoherent (U i).toScheme.ringCatSheaf).prop_of_iso
+    (restrictTensorIsoOfRestrictIsoTensorUnit (U i).ι F (e i).some).symm inferInstance
+
+/-- **Tensoring a sheaf of modules of finite type with an invertible one preserves being of
+finite type.** Over an open trivialising `L` the restriction of `F ⊗ L` is isomorphic to that of
+`F`, so the generating sections of `F` transport, and being of finite type is local on the
+base. -/
+theorem isFiniteType_tensorObj_of_invertible (F : X.Modules) [F.IsFiniteType]
+    (hL : L.Invertible) : (F ⊗ L).IsFiniteType := by
+  choose W hxW hW using hL.exists_restrict_iso_tensorUnit
+  have hWcover : IsOpenCover W := .mk (eq_top_iff.2 fun x _ ↦ Opens.mem_iSup.2 ⟨x, hxW x⟩)
+  obtain ⟨ι, U, r, G, hU, -, hUle, hG⟩ := exists_isOpenCover_generatingSections_le F W hWcover
+  have e (i : ι) : (F ⊗ L).restrict (U i).ι ≅ F.restrict (U i).ι :=
+    restrictTensorIsoOfRestrictIsoTensorUnit (U i).ι F
+      (restrictIsoTensorUnitOfLE (hW (r i)).some (hUle i))
+  exact isFiniteType_of_generatingSections _ U hU
+    (fun i ↦ SheafOfModules.GeneratingSections.equivOfIso (e i).symm (G i))
+    fun i ↦ ⟨(hG i).finite⟩
+
+/-- **Tensoring a coherent sheaf of modules with an invertible one preserves coherence.** -/
+theorem isCoherent_tensorObj_of_invertible (F : X.Modules) [F.IsCoherent] (hL : L.Invertible) :
+    (F ⊗ L).IsCoherent := by
+  -- `SheafOfModules.IsCoherent` has no explicit fields: it is `IsQuasicoherent` together with
+  -- `IsFiniteType`, and instance search assembles it out of the two halves below.
+  have := isQuasicoherent_tensorObj_of_invertible F hL
+  have := isFiniteType_tensorObj_of_invertible F hL
+  constructor
+
+end TensorInvertible
 
 end AlgebraicGeometry.Scheme.Modules
