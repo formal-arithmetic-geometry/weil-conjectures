@@ -48,19 +48,21 @@ sheaf-condition argument that the kernel description gets for free.
   the right one.
 - `AlgebraicGeometry.Scheme.IdealSheafData.injective_toModulesι_app` — the inclusion is
   injective on sections over every open, affine or not.
+- `AlgebraicGeometry.Scheme.IdealSheafData.mem_range_stalkMap_toModulesι_iff` — the stalk of
+  the ideal sheaf is the set of germs of sections lying in the ideal, and
+  `AlgebraicGeometry.Scheme.IdealSheafData.injective_stalkMap_toModulesι` — the inclusion is
+  injective on stalks.
 - `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap` — the comparison morphism
   `g^* I ⟶ I'` for a morphism `g` pulling the ideal `I` into the ideal `I'`, together with
   `comapModulesMap_toModulesι` and `eq_comapModulesMap`, which determine it.
 
 ## TODO
 
-Local freeness of rank one for an invertible ideal sheaf. What is missing is a criterion for
-a morphism in `X.Modules` to be an isomorphism that can be checked on a basis of opens or on
-stalks: `Scheme.Modules.Hom.isIso_iff_isIso_app` quantifies over *all* opens, which is not
-usable directly, and Mathlib has no stalkwise criterion phrased for `X.Modules` (only
-`Scheme.Modules.restrictStalkNatIso`). Note also that Mathlib's
-`SheafOfModules.IsLocallyFree` carries no rank information, so "rank one" has to be spelled
-out separately.
+Local freeness of rank one for an invertible ideal sheaf. The isomorphism criterion this needs
+is now available — `Scheme.Modules.Hom.isIso_of_isIso_stalkMap`, together with the description
+`mem_range_stalkMap_toModulesι_iff` of the stalk of the ideal sheaf proved below — but Mathlib's
+`SheafOfModules.IsLocallyFree` carries no rank information, so "rank one" still has to be
+spelled out separately.
 -/
 
 @[expose] public section
@@ -148,6 +150,43 @@ instance : Mono J.toModulesι := by
 over every open subset, not merely a categorical monomorphism. -/
 lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModulesι.app U) :=
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
+
+/-! ### The stalks of the ideal sheaf -/
+
+section Stalk
+
+variable (x : X)
+
+/-- **The ideal sheaf is a subsheaf of `𝒪_X` on stalks too**: its inclusion into the structure
+sheaf is injective on every stalk. -/
+lemma injective_stalkMap_toModulesι : Function.Injective (J.toModulesι.stalkMap x) :=
+  Modules.injective_stalkMap_kernelι J.toPushforwardSubscheme x
+
+/-- **The stalk of the ideal sheaf** is the set of germs killed by the restriction to the closed
+subscheme cut out by `J`. -/
+lemma range_stalkMap_toModulesι :
+    Set.range (J.toModulesι.stalkMap x) = { z | J.toPushforwardSubscheme.stalkMap x z = 0 } :=
+  Modules.range_stalkMap_kernelι J.toPushforwardSubscheme x
+
+/-- **The stalk of the ideal sheaf consists exactly of the germs of the sections of `𝒪_X` lying
+in the ideal.** This is the stalkwise counterpart of
+`AlgebraicGeometry.Scheme.IdealSheafData.range_toModulesι_app_eq_idealOfOpens`, and it is what
+makes the stalk of the ideal sheaf computable: no sheaf condition is involved, because a germ is
+already the germ of a section over some open neighbourhood. -/
+lemma mem_range_stalkMap_toModulesι_iff (z : X.structureModules.presheaf.stalk x) :
+    z ∈ Set.range (J.toModulesι.stalkMap x) ↔
+      ∃ (U : X.Opens) (hx : x ∈ U) (s : Γ(X, U)), s ∈ J.idealOfOpens U ∧
+        X.structureModules.presheaf.germ U x hx s = z := by
+  constructor
+  · rintro ⟨w, rfl⟩
+    obtain ⟨U, hx, t, rfl⟩ := J.toModules.presheaf.exists_germ_eq w
+    exact ⟨U, hx, J.toModulesι.app U t, (J.range_toModulesι_app_eq_idealOfOpens U).le ⟨t, rfl⟩,
+      (J.toModulesι.stalkMap_germ x hx t).symm⟩
+  · rintro ⟨U, hx, s, hs, rfl⟩
+    obtain ⟨t, ht⟩ := (J.range_toModulesι_app_eq_idealOfOpens U).ge hs
+    exact ⟨J.toModules.presheaf.germ U x hx t, by rw [Modules.Hom.stalkMap_germ, ht]⟩
+
+end Stalk
 
 /-! ### The comparison morphism of ideal sheaves attached to a morphism of thickenings -/
 
