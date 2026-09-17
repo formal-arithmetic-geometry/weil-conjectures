@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalFunctions
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.Mathlib.Logic.Function.Basic
@@ -36,9 +37,11 @@ proof, and it is the half that consumes the theorem on formal functions.
   `AlgebraicGeometry.Scheme.Modules.isIso_formalFunctionsComparison`, which is `sorry` by design.
 - `AlgebraicGeometry.Scheme.Modules.exists_formalSectionsOfNhds_zero_ne_zero`: the same, spelled
   out as a section of `F` over `f ⁻¹ᵁ V` for an open neighbourhood `V` of `t`.
-- `AlgebraicGeometry.Scheme.Modules.exists_formalSectionsOfNhds_zero_ne_zero_of_isProper`: the
-  above for the projection `X × T ⟶ T` of a proper variety `X` over a field, where the two
-  hypotheses on the rings of the infinitesimal base changes are automatic.
+- `AlgebraicGeometry.Scheme.Modules.exists_fiberSectionsOfNhds_ne_zero`: the same, read on the
+  scheme-theoretic fibre `W_t` rather than on `W ×_T T₀`.
+- `AlgebraicGeometry.Scheme.Modules.exists_fiberSectionsOfNhds_ne_zero_of_isProper`: the above
+  for the projection `X × T ⟶ T` of a proper variety `X` over a field, where the two hypotheses
+  on the rings of the infinitesimal base changes are automatic.
 
 ## Implementation notes
 
@@ -275,6 +278,44 @@ theorem exists_formalSectionsOfNhds_zero_ne_zero [IsLocallyNoetherian T] [IsProp
     TopCat.Presheaf.stalkDesc_germ _ _ _ _ _ V hV s
   rwa [key] at hz
 
+/-- **Restricting a section of `f_* F` near `t` to the scheme-theoretic fibre `W_t`.** A section
+of `f_* F` over an open neighbourhood `V` of `t` is a section of `F` over `f ⁻¹ᵁ V`, which
+contains the whole fibre over `t`, so it restricts to a global section of `F_t`. -/
+def fiberSectionsOfNhds (V : T.Opens) (hV : t ∈ V) :
+    Γ((pushforward f).obj F, V) ⟶ Γ((restrictToFiber f t).obj F, ⊤) :=
+  eqToHom (pushforward_obj_obj f F V) ≫
+    sectionsPullbackLE (f.fiberι t) F (f.preimage_fiberι_eq_top hV).ge
+
+/-- Restricting to the fibre `W_t` and then transporting along the isomorphism
+`W ×_T T₀ ≅ W_t` is restricting to `W ×_T T₀`. -/
+lemma fiberSectionsOfNhds_comp (V : T.Opens) (hV : t ∈ V) :
+    fiberSectionsOfNhds f t F V hV ≫
+        sectionsPullbackOver (infinitesimalBaseChangeZeroIsoFiber f t).hom
+          (infinitesimalBaseChangeZeroIsoFiber_hom_fiberι f t) F =
+      formalSectionsOfNhds f t F 0 V hV := by
+  have h₃ : (⊤ : (infinitesimalBaseChange f t 0).Opens) ≤
+      ((infinitesimalBaseChangeZeroIsoFiber f t).hom ≫ f.fiberι t) ⁻¹ᵁ (f ⁻¹ᵁ V) := by
+    rw [infinitesimalBaseChangeZeroIsoFiber_hom_fiberι]
+    exact (preimage_infinitesimalBaseChangeFst_eq_top f t 0 hV).ge
+  rw [fiberSectionsOfNhds, formalSectionsOfNhds, Category.assoc]
+  congr 1
+  rw [sectionsPullbackOver, sectionsPullback,
+    sectionsPullbackLE_comp_assoc _ _ F _ _ h₃, sectionsPullbackLE_congr]
+
+/-- **Formal triviality gives a section of `F` near `t` which is non-zero on the fibre `W_t`.**
+
+This is `AlgebraicGeometry.Scheme.Modules.exists_formalSectionsOfNhds_zero_ne_zero` read on the
+scheme-theoretic fibre, which is the form in which steps 4 and 5 of the blueprint proof of
+`prop:cube-formal-triviality` use it. -/
+theorem exists_fiberSectionsOfNhds_ne_zero [IsLocallyNoetherian T] [IsProper f] [F.IsCoherent]
+    (h0 : Nontrivial (formalSections f t F 0))
+    (hsurj : ∀ n : ℕ, Function.Surjective (formalSectionsMap f t F n.le_succ)) :
+    ∃ (V : T.Opens) (hV : t ∈ V) (s : Γ((pushforward f).obj F, V)),
+      fiberSectionsOfNhds f t F V hV s ≠ 0 := by
+  obtain ⟨V, hV, s, hs⟩ := exists_formalSectionsOfNhds_zero_ne_zero f t F h0 hsurj
+  exact ⟨V, hV, s, AddCommGrpCat.apply_ne_zero_of_comp_apply_ne_zero
+    (fiberSectionsOfNhds_comp f t F V hV) s hs⟩
+
 end FormalSections
 
 /-!
@@ -304,7 +345,7 @@ open neighbourhood `V` of `t`, whose restriction to the fibre over `t` is non-ze
 This is steps 1 to 3 of the proof of `prop:cube-formal-triviality` of the blueprint. It rests on
 `AlgebraicGeometry.Scheme.Modules.isIso_formalFunctionsComparison`, which is `sorry` by
 design. -/
-theorem exists_formalSectionsOfNhds_zero_ne_zero_of_isProper (πX : X ⟶ Spec (.of K))
+theorem exists_fiberSectionsOfNhds_ne_zero_of_isProper (πX : X ⟶ Spec (.of K))
     [IsProper πX] [GeometricallyIntegral πX] (πT : T ⟶ Spec (.of K)) [IsLocallyNoetherian T]
     (t : T) (F : (Limits.pullback πX πT).Modules) [F.IsCoherent]
     (hF : ∀ n : ℕ, Nonempty
@@ -312,14 +353,14 @@ theorem exists_formalSectionsOfNhds_zero_ne_zero_of_isProper (πX : X ⟶ Spec (
         (infinitesimalBaseChange (Limits.pullback.snd πX πT) t n).structureModules)) :
     ∃ (V : T.Opens) (hV : t ∈ V)
       (s : Γ((pushforward (Limits.pullback.snd πX πT)).obj F, V)),
-      formalSectionsOfNhds (Limits.pullback.snd πX πT) t F 0 V hV s ≠ 0 := by
+      fiberSectionsOfNhds (Limits.pullback.snd πX πT) t F V hV s ≠ 0 := by
   set f := Limits.pullback.snd πX πT with hf
   have hiso : ∀ n : ℕ, IsIso (infinitesimalRingToΓ f t n) :=
     fun n ↦ isIso_infinitesimalRingToΓ_pullbackSnd πX πT t n
   have hsurjΓ : ∀ n : ℕ, Function.Surjective (infinitesimalRingToΓ f t n) := fun n ↦
     have := hiso n
     (ConcreteCategory.bijective_of_isIso (infinitesimalRingToΓ f t n)).surjective
-  exact exists_formalSectionsOfNhds_zero_ne_zero f t F
+  exact exists_fiberSectionsOfNhds_ne_zero f t F
     (nontrivial_formalSections_zero f t F (hiso 0) (hF 0).some)
     (fun n ↦ surjective_formalSectionsMap f t F n.le_succ (hF (n + 1)).some (hsurjΓ n))
 

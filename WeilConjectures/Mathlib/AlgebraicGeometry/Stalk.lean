@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Stalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
@@ -608,6 +609,28 @@ lemma exists_isUnit_appTop_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n)
   refine ⟨infinitesimalRingToΓ f t n c, hcu.map (infinitesimalRingToΓ f t n).hom, ?_⟩
   rw [← CommRingCat.comp_apply, infinitesimalRingToΓ_comp_appTop, CommRingCat.comp_apply, hc]
   exact e.apply_symm_apply a
+
+/-- **The zeroth infinitesimal base change is the scheme-theoretic fibre.** The zeroth
+infinitesimal neighbourhood of `t` is `Spec κ(t)`, so `W ×_T T₀` is the fibre of `f` over
+`t`. -/
+noncomputable def infinitesimalBaseChangeZeroIsoFiber :
+    infinitesimalBaseChange f t 0 ≅ f.fiber t where
+  hom := Limits.pullback.map f (T.fromInfinitesimalNeighborhood t 0) f (T.fromSpecResidueField t)
+    (𝟙 W) (T.infinitesimalNeighborhoodIsoSpecResidueField t).hom (𝟙 T) (by simp) (by simp)
+  inv := Limits.pullback.map f (T.fromSpecResidueField t) f (T.fromInfinitesimalNeighborhood t 0)
+    (𝟙 W) (T.infinitesimalNeighborhoodIsoSpecResidueField t).inv (𝟙 T) (by simp) (by
+      rw [Category.comp_id,
+        ← T.infinitesimalNeighborhoodIsoSpecResidueField_hom_fromSpecResidueField t,
+        Iso.inv_hom_id_assoc])
+  hom_inv_id := by apply Limits.pullback.hom_ext <;> simp
+  inv_hom_id := by apply Limits.pullback.hom_ext <;> simp
+
+/-- The isomorphism `W ×_T T₀ ≅ W_t` commutes with the two projections to `W`. -/
+@[reassoc (attr := simp)]
+lemma infinitesimalBaseChangeZeroIsoFiber_hom_fiberι :
+    (infinitesimalBaseChangeZeroIsoFiber f t).hom ≫ f.fiberι t =
+      infinitesimalBaseChangeFst f t 0 := by
+  simp [infinitesimalBaseChangeZeroIsoFiber, Scheme.Hom.fiberι]
 
 end InfinitesimalBaseChange
 

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 
 /-!
-# Residue fields along a morphism surjective on stalks
+# The scheme-theoretic fibre: residue fields and open neighbourhoods of the base point
 
 If `f : X ⟶ Y` is surjective on stalks — for instance a preimmersion, and in particular the
 inclusion `f.fiberι y` of a scheme-theoretic fibre — then the induced map `κ(f x) ⟶ κ(x)` on
@@ -18,6 +18,8 @@ residue fields is an isomorphism.
 
 - `AlgebraicGeometry.Scheme.Hom.surjective_residueFieldMap`
 - `AlgebraicGeometry.isIso_residueFieldMap`
+- `AlgebraicGeometry.Scheme.Hom.preimage_fiberι_eq_top`: the fibre over `y` lies over every open
+  neighbourhood of `y`.
 
 This is stated in the mirror of `Mathlib/AlgebraicGeometry/Fiber.lean` because that is the first
 file of Mathlib that imports both `Mathlib/AlgebraicGeometry/ResidueField.lean`, where
@@ -49,5 +51,22 @@ it is a ring homomorphism between fields. -/
 instance isIso_residueFieldMap : IsIso (f.residueFieldMap x) :=
   (ConcreteCategory.isIso_iff_bijective _).mpr
     ⟨(f.residueFieldMap x).hom.injective, f.surjective_residueFieldMap x⟩
+
+section Fiber
+
+variable {X Y : Scheme.{u}}
+
+/-- Every point of the fibre of `f` over `y` lies over `y`. -/
+lemma Scheme.Hom.apply_fiberι (f : X ⟶ Y) (y : Y) (x : f.fiber y) : f (f.fiberι y x) = y := by
+  have hx : f.fiberι y x ∈ f ⁻¹' {y} := f.range_fiberι y ▸ Set.mem_range_self x
+  simpa using hx
+
+/-- **The fibre of `f` over `y` lies over every open neighbourhood of `y`.** -/
+lemma Scheme.Hom.preimage_fiberι_eq_top (f : X ⟶ Y) {y : Y} {U : Y.Opens} (hU : y ∈ U) :
+    f.fiberι y ⁻¹ᵁ (f ⁻¹ᵁ U) = ⊤ := by
+  ext x
+  simpa [f.apply_fiberι y x] using hU
+
+end Fiber
 
 end AlgebraicGeometry
