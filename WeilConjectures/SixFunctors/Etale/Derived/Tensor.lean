@@ -7,8 +7,11 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 
 /-!
 
@@ -63,14 +66,11 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
 
-variable (X : Scheme.{u}) [(X.smallEtaleTopology.W (A := A)).IsMonoidal]
+variable (X : Scheme.{u})
 
-attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
-
-variable [MonoidalClosed (Sheaf X.smallEtaleTopology A)]
-  [Abelian.HasFunctorialFlatResolution (Sheaf X.smallEtaleTopology A)]
+variable [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
 
 namespace Etale
 
@@ -86,6 +86,14 @@ noncomputable def derivedTensor :
 @[inherit_doc derivedTensor]
 scoped notation "(" X ")⊗ᴸ[" A "]" => derivedTensor A X
 
+noncomputable instance laxMonoidal_Q :
+    (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
+  DerivedCategory.laxMonidalQ (Sheaf X.smallEtaleTopology A)
+
+noncomputable instance laxMonoidal_Qh :
+    (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
+  DerivedCategory.laxMonidalQh (Sheaf X.smallEtaleTopology A)
+
 /-- The derived tensor product on `D(X_ét)` is the total left derived functor, in two
 variables, of the tensor product of étale sheaves. -/
 instance isLeftDerivedFunctor₂_derivedTensor :
@@ -93,19 +101,7 @@ instance isLeftDerivedFunctor₂_derivedTensor :
       (Functor.LaxMonoidal.μNatTrans DerivedCategory.Qh)
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) :=
-  inferInstanceAs ((curriedTensor _).IsLeftDerivedFunctor₂ _ _ _)
-
-/-- The localization functor `Q : C(X_ét) ⥤ D(X_ét)` from cochain complexes of étale
-sheaves to the derived category is lax monoidal. -/
-noncomputable instance laxMonoidal_Q :
-    (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
-  inferInstance
-
-/-- The localization functor `Qh : K(X_ét) ⥤ D(X_ét)` from the homotopy category of étale
-sheaves to the derived category is lax monoidal. -/
-noncomputable instance laxMonoidal_Qh :
-    (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
-  inferInstance
+  DerivedCategory.isLeftDerivedFunctor₂CurriedTensor (Sheaf X.smallEtaleTopology A)
 
 end Etale
 

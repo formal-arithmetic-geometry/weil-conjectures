@@ -76,11 +76,8 @@ noncomputable instance : MonoidalCategory (HomotopyCategory A (ComplexShape.up �
 resolutions, the localization functor `Qh : K(A) ⥤ D(A)` admits a derived monoidal
 structure with respect to quasi-isomorphisms. Consequently `DerivedCategory A` is monoidal,
 with tensor product the derived tensor product `- ⊗ᴸ -`. -/
-instance hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
+instance (priority := 2000) hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
     Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
   sorry
-
-noncomputable instance [Abelian.HasFunctorialFlatResolution A] :
-  MonoidalCategory (DerivedCategory A) := inferInstance
 
 end DerivedCategory
