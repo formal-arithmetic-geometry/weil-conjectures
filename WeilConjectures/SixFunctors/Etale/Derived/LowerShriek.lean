@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
@@ -52,6 +53,8 @@ universe u' u
 
 open CategoryTheory Abelian Limits
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry
 
 open Scheme
@@ -80,7 +83,7 @@ homology is `f_!`. Deligne made explicit calculations on $A^1$, see SGA. -/
 noncomputable def rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  (c.i)_!open[A].mapDerivedCategory ⋙ (c.g)_*[A].rightDerivedFunctor
+  D((c.i)_!open[A]) ⋙ R((c.g)_*[A])
 
 /-- The derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the *bounded below* derived categories of étale sheaves:
@@ -90,7 +93,7 @@ below right derived pushforward. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationPlus :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  (c.i)_!open[A].mapDerivedCategoryPlus ⋙ (c.g)_*[A].rightDerivedFunctorPlus
+  D+((c.i)_!open[A]) ⋙ R+((c.g)_*[A])
 
 @[inherit_doc rightDerivedLowerShriekOfCompactification]
 scoped notation "Rf_!("c")[" A "]" =>
@@ -108,11 +111,11 @@ bounded below derived categories: on the `Di_!` factor this is
 noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
     Rf_!(c)[A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ Rf_!(c)[A] :=
   Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft ((c.i)_!open[A]).mapDerivedCategoryPlus
+    Functor.isoWhiskerLeft D+((c.i)_!open[A])
       ((c.g)_*[A]).rightDerivedFunctorPlusCompatibility ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight ((c.i)_!open[A]).mapDerivedCategoryPlusCompatibility
-      ((c.g)_*[A]).rightDerivedFunctor ≪≫
+      R((c.g)_*[A]) ≪≫
     Functor.associator _ _ _
 
 end Etale
@@ -183,7 +186,7 @@ functor of the global sections functor on étale sheaves, which exists since the
 étale site has a terminal object. -/
 noncomputable def rightDerivedGlobalSections :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
-  (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor
+  R(Sheaf.Γ X.smallEtaleTopology A)
 
 end Etale
 
