@@ -12,11 +12,10 @@ public import Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Adjunction.Mates
-public import Mathlib.Topology.Sheaves.LocallySurjective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Kernels
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Over
@@ -25,6 +24,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
+public import WeilConjectures.Mathlib.Topology.Sheaves.LocallySurjective
 public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
 
 /-!
@@ -98,6 +98,9 @@ opens being a basis. The motivating example is the comparison morphism `𝒪_X �
 closed immersion `g : Y ⟶ X`: it is surjective over an affine open and almost never over a
 general one, and being an epimorphism is exactly what makes `g_* 𝒪_Y` the quotient of `𝒪_X` by
 the ideal sheaf of `Y`, so that a morphism out of `𝒪_X` killing that ideal descends to `g_* 𝒪_Y`.
+That `𝒪_X ⟶ g_* 𝒪_Y` is an epimorphism for a closed immersion `g` is proved in
+`WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion`, which is where the
+surjectivity over an affine open subset lives.
 
 ## Main definitions
 
@@ -151,12 +154,10 @@ the ideal sheaf of `Y`, so that a morphism out of `𝒪_X` killing that ideal de
   sections span the stalk there.
 - `AlgebraicGeometry.Scheme.Modules.oneSection`: the unit function of `X`, as a section of the
   structure sheaf viewed as a sheaf of modules.
-- `AlgebraicGeometry.Scheme.Modules.toSheaf`: the forgetful functor from sheaves of
-  `𝒪_X`-modules to sheaves of abelian groups.
 - `AlgebraicGeometry.Scheme.Hom.toPushforwardStructure`: the comparison morphism
   `𝒪_X ⟶ g_* 𝒪_Y` of `𝒪_X`-modules attached to a morphism of schemes `g : Y ⟶ X`, and
   `AlgebraicGeometry.Scheme.Hom.descPushforwardStructure`, the descent of a morphism out of
-  `𝒪_X` through it when `g` is a closed immersion.
+  `𝒪_X` through it when the comparison morphism is an epimorphism.
 
 ## Main results
 
@@ -233,14 +234,19 @@ the ideal sheaf of `Y`, so that a morphism out of `𝒪_X` killing that ideal de
   morphism of `𝒪ₓ`-modules which is an isomorphism on global sections is an isomorphism, and a
   generating global section trivialises the module.
 
-- `AlgebraicGeometry.Scheme.Modules.epi_of_surjective_app`: **a morphism of sheaves of
-  `𝒪_X`-modules surjective on the sections over every affine open subset is an epimorphism**,
-  through the local surjectivity criterion
-  `AlgebraicGeometry.Scheme.Modules.epi_of_isLocallySurjective`.
+- `AlgebraicGeometry.Scheme.Modules.epi_iff_isLocallySurjective` and
+  `AlgebraicGeometry.Scheme.Modules.epi_iff_surjective_stalkMap`: **a morphism of sheaves of
+  `𝒪_X`-modules is an epimorphism exactly when it is locally surjective**, equivalently when it
+  is surjective on every stalk; `AlgebraicGeometry.Scheme.Modules.epi_of_surjective_app` is the
+  sufficient criterion that surjectivity over every affine open subset gives.
 - `AlgebraicGeometry.Scheme.Hom.toPushforwardStructure_descPushforwardStructure` and
   `AlgebraicGeometry.Scheme.Hom.eq_descPushforwardStructure`: the universal property of
-  `𝒪_X ⟶ g_* 𝒪_Y` for a closed immersion `g` — a morphism out of `𝒪_X` killing the functions
-  that vanish on `Y` factors through it, uniquely.
+  `𝒪_X ⟶ g_* 𝒪_Y` when that morphism is an epimorphism — a morphism out of `𝒪_X` killing its
+  kernel factors through it, uniquely — together with
+  `AlgebraicGeometry.Scheme.Hom.shortExact_kernelSequence_toPushforwardStructure`, which packages
+  it as the short exact sequence `0 ⟶ ker (𝒪_X ⟶ g_* 𝒪_Y) ⟶ 𝒪_X ⟶ g_* 𝒪_Y ⟶ 0`, and
+  `AlgebraicGeometry.Scheme.Hom.kernelι_toPushforwardStructure_comp_eq_zero_iff`, which reads
+  the hypothesis section-wise: killing the kernel means killing every function vanishing on `Y`.
 
 ## Blueprint
 
@@ -388,47 +394,6 @@ lemma germₛₗ_apply (x : U) (m : Γ(F, U)) :
     germₛₗ F x m = F.presheaf.germ U x.1 x.2 m := rfl
 
 end Stalk
-section Epi
-
-variable {X : Scheme.{u}} {M N : X.Modules}
-
-variable (X) in
-/-- The forgetful functor from sheaves of `𝒪_X`-modules to **sheaves** of abelian groups.
-
-Unlike `AlgebraicGeometry.Scheme.Modules.toPresheaf` this one lands in sheaves, which is what
-makes it usable for epimorphisms: an epimorphism of sheaves is a locally surjective morphism of
-presheaves, not a surjective one. -/
-noncomputable def toSheaf : X.Modules ⥤ TopCat.Sheaf Ab.{u} X :=
-  ObjectProperty.lift _ (toPresheaf X) fun M ↦ M.isSheaf
-
-instance : (toSheaf X).Faithful :=
-  inferInstanceAs (ObjectProperty.lift _ (toPresheaf X) _).Faithful
-
-@[simp]
-lemma toSheaf_map_hom (φ : M ⟶ N) : ((toSheaf X).map φ).hom = φ.mapPresheaf := rfl
-
-/-- **A locally surjective morphism of sheaves of `𝒪_X`-modules is an epimorphism.** -/
-theorem epi_of_isLocallySurjective (φ : M ⟶ N)
-    (h : TopCat.Presheaf.IsLocallySurjective φ.mapPresheaf) : Epi φ :=
-  (toSheaf X).epi_of_epi_map
-    ((TopCat.Sheaf.isLocallySurjective_iff_epi ((toSheaf X).map φ)).mp h)
-
-/-- **A morphism of sheaves of `𝒪_X`-modules surjective on the sections over every affine open
-subset is an epimorphism.**
-
-Surjectivity over *all* opens would be far too strong a demand — it already fails for the
-restriction `𝒪_X ⟶ g_* 𝒪_Y` to a closed subscheme — whereas the affine opens form a basis, so
-surjectivity over them is exactly local surjectivity. -/
-theorem epi_of_surjective_app (φ : M ⟶ N)
-    (h : ∀ U : X.Opens, IsAffineOpen U → Function.Surjective (φ.app U)) : Epi φ := by
-  refine epi_of_isLocallySurjective φ ?_
-  rw [TopCat.Presheaf.isLocallySurjective_iff]
-  intro U t x hx
-  obtain ⟨V, hV, hxV, hVU⟩ := Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens hx
-  obtain ⟨s, hs⟩ := h V hV (N.presheaf.map (homOfLE hVU).op t)
-  exact ⟨V, hVU, ⟨s, hs⟩, hxV⟩
-
-end Epi
 
 end Kernel
 
@@ -2300,11 +2265,46 @@ lemma fiberMk_structureModules_eq_smul (x : X) (r : Γ(X, ⊤)) :
 
 end UnitHom
 
+/-! ### Epimorphisms of sheaves of modules -/
+
+section Epi
+
+variable {X : Scheme.{u}} {M N : X.Modules}
+
+/-- **A morphism of sheaves of `𝒪_X`-modules is an epimorphism exactly when it is locally
+surjective**, that is, when every section of the target is, near every point, the image of a
+section of the source. -/
+theorem epi_iff_isLocallySurjective (φ : M ⟶ N) :
+    Epi φ ↔ TopCat.Presheaf.IsLocallySurjective φ.mapPresheaf :=
+  SheafOfModules.epi_iff_isLocallySurjective φ
+
+/-- **A morphism of sheaves of `𝒪_X`-modules is an epimorphism exactly when it is surjective on
+every stalk.** -/
+theorem epi_iff_surjective_stalkMap (φ : M ⟶ N) :
+    Epi φ ↔ ∀ x : X, Function.Surjective (φ.stalkMap x) :=
+  (epi_iff_isLocallySurjective φ).trans
+    (TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks φ.mapPresheaf)
+
+/-- **A morphism of sheaves of `𝒪_X`-modules surjective on the sections over every affine open
+subset is an epimorphism.**
+
+Surjectivity over *all* opens would be far too strong a demand — it already fails for the
+restriction `𝒪_X ⟶ g_* 𝒪_Y` to a closed subscheme — whereas the affine opens form a basis, so
+surjectivity over them implies the local surjectivity that being an epimorphism means. The
+converse fails in general: lifting a section over an affine `U` needs `H¹(U, ker φ)` to vanish,
+which holds for a quasi-coherent kernel but not for an arbitrary one. -/
+theorem epi_of_surjective_app (φ : M ⟶ N)
+    (h : ∀ U : X.Opens, IsAffineOpen U → Function.Surjective (φ.app U)) : Epi φ :=
+  (epi_iff_isLocallySurjective φ).mpr
+    (TopCat.Presheaf.isLocallySurjective_of_isBasis X.isBasis_affineOpens _ h)
+
+end Epi
+
 end Scheme.Modules
 
-namespace Scheme.Hom
-
 /-! ### The comparison morphism `𝒪_X ⟶ g_* 𝒪_Y` -/
+
+namespace Scheme.Hom
 
 variable {X Y : Scheme.{u}} (g : Y ⟶ X)
 
@@ -2316,59 +2316,98 @@ noncomputable def toPushforwardStructure :
   SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom
 
 @[simp]
-lemma app_toPushforwardStructure (U : X.Opens) (s : Γ(X.structureModules, U)) :
+lemma toPushforwardStructure_app (U : X.Opens) (s : Γ(X.structureModules, U)) :
     g.toPushforwardStructure.app U s = g.app U s :=
   rfl
 
 variable {P : X.Modules} (ψ : X.structureModules ⟶ P)
 
-/-- A morphism `𝒪_X ⟶ P` killing every function that vanishes on `Y` kills the kernel of the
-comparison morphism `𝒪_X ⟶ g_* 𝒪_Y`. -/
-lemma kernelι_toPushforwardStructure_comp_eq_zero
-    (hψ : ∀ (U : X.Opens) (s : Γ(X.structureModules, U)), g.app U s = 0 → ψ.app U s = 0) :
-    kernel.ι g.toPushforwardStructure ≫ ψ = 0 := by
-  refine Modules.hom_ext _ _ fun U ↦ ?_
-  rw [Modules.Hom.comp_app, Modules.Hom.zero_app]
-  refine ConcreteCategory.hom_ext _ _ fun z ↦ ?_
-  have hz : g.app U ((kernel.ι g.toPushforwardStructure).app U z) = 0 := by
-    rw [← app_toPushforwardStructure g U, ← ConcreteCategory.comp_apply,
-      ← Modules.Hom.comp_app, kernel.condition, Modules.Hom.zero_app]
-    rfl
-  rw [ConcreteCategory.comp_apply]
-  exact hψ U _ hz
+/-- **A morphism out of `𝒪_X` kills the kernel of `𝒪_X ⟶ g_* 𝒪_Y` exactly when it kills every
+function vanishing on `Y`**: the sections of that kernel over an open subset `U` are precisely
+the sections of `𝒪_X` over `U` killed by `g.app U`.
 
-variable [IsClosedImmersion g]
+```
+  ker (𝒪_X ⟶ g_* 𝒪_Y) --- kernel.ι ---> 𝒪_X --- ψ ---> P
+```
+-/
+lemma kernelι_toPushforwardStructure_comp_eq_zero_iff :
+    kernel.ι g.toPushforwardStructure ≫ ψ = 0 ↔
+      ∀ (U : X.Opens) (s : Γ(X.structureModules, U)), g.app U s = 0 → ψ.app U s = 0 := by
+  have key (U : X.Opens) : Set.range ((kernel.ι g.toPushforwardStructure).app U) =
+      { s : Γ(X.structureModules, U) | g.app U s = 0 } :=
+    Modules.range_map_kernelι U g.toPushforwardStructure
+  constructor
+  · intro h U s hs
+    obtain ⟨z, rfl⟩ := (key U).ge hs
+    have hz : (kernel.ι g.toPushforwardStructure ≫ ψ).app U z = 0 := by rw [h]; simp
+    simpa using hz
+  · intro hψ
+    ext U z
+    exact hψ U _ ((key U).le ⟨z, rfl⟩)
 
-/-- **The structure sheaf of `X` surjects onto the pushforward of the structure sheaf of a
-closed subscheme.** Over an affine open subset the restriction of functions to a closed
-subscheme is surjective, and the affine opens form a basis. -/
-instance : Epi g.toPushforwardStructure :=
-  Modules.epi_of_surjective_app _ fun U hU ↦ g.app_surjective U hU
+variable [Epi g.toPushforwardStructure]
 
-/-- **The descent of a morphism through `𝒪_X ⟶ g_* 𝒪_Y`** for a closed immersion `g`: since
-that morphism is an epimorphism in the abelian category `X.Modules`, it is the cokernel of its
-kernel, so a morphism `𝒪_X ⟶ P` killing the functions that vanish on `Y` factors through it. -/
+/-- **The descent of a morphism through `𝒪_X ⟶ g_* 𝒪_Y`**: a morphism `ψ : 𝒪_X ⟶ P` killing the
+kernel of the comparison morphism factors through it.
+
+```
+            ψ
+  𝒪_X ---------------> P
+   |                  ↗
+   |                 /
+   |   descPushforwardStructure ψ hψ
+   v                /
+  g_* 𝒪_Y ---------
+```
+-/
 noncomputable def descPushforwardStructure
-    (hψ : ∀ (U : X.Opens) (s : Γ(X.structureModules, U)), g.app U s = 0 → ψ.app U s = 0) :
+    (hψ : kernel.ι g.toPushforwardStructure ≫ ψ = 0) :
     (Modules.pushforward g).obj Y.structureModules ⟶ P :=
-  Abelian.epiDesc g.toPushforwardStructure ψ
-    (g.kernelι_toPushforwardStructure_comp_eq_zero ψ hψ)
+  -- an epimorphism in an abelian category is the cokernel of its kernel
+  Abelian.epiDesc g.toPushforwardStructure ψ hψ
 
+/-- The defining property of `AlgebraicGeometry.Scheme.Hom.descPushforwardStructure`: the upper
+triangle
+```
+            ψ
+  𝒪_X ---------------> P
+   |                  ↗
+   v                 /
+  g_* 𝒪_Y ---------
+```
+commutes. -/
 @[reassoc (attr := simp)]
 lemma toPushforwardStructure_descPushforwardStructure
-    (hψ : ∀ (U : X.Opens) (s : Γ(X.structureModules, U)), g.app U s = 0 → ψ.app U s = 0) :
+    (hψ : kernel.ι g.toPushforwardStructure ≫ ψ = 0) :
     g.toPushforwardStructure ≫ g.descPushforwardStructure ψ hψ = ψ :=
   Abelian.comp_epiDesc _ _ _
 
-/-- The descent of `AlgebraicGeometry.Scheme.Hom.descPushforwardStructure` is the only morphism
-out of `g_* 𝒪_Y` restricting to the given one. -/
-lemma eq_descPushforwardStructure
-    (hψ : ∀ (U : X.Opens) (s : Γ(X.structureModules, U)), g.app U s = 0 → ψ.app U s = 0)
+/-- **The descent through `𝒪_X ⟶ g_* 𝒪_Y` is unique**: any `χ : g_* 𝒪_Y ⟶ P` making
+```
+            ψ
+  𝒪_X ---------------> P
+   |                  ↗
+   v         χ       /
+  g_* 𝒪_Y ---------
+```
+commute is `AlgebraicGeometry.Scheme.Hom.descPushforwardStructure`. -/
+lemma eq_descPushforwardStructure (hψ : kernel.ι g.toPushforwardStructure ≫ ψ = 0)
     (χ : (Modules.pushforward g).obj Y.structureModules ⟶ P)
     (hχ : g.toPushforwardStructure ≫ χ = ψ) :
     χ = g.descPushforwardStructure ψ hψ := by
   rw [← cancel_epi g.toPushforwardStructure, hχ,
     toPushforwardStructure_descPushforwardStructure]
+
+/-- **`g_* 𝒪_Y` is the quotient of `𝒪_X` by the ideal sheaf of `Y`**: the sequence
+```
+0 ⟶ ker (𝒪_X ⟶ g_* 𝒪_Y) ⟶ 𝒪_X ⟶ g_* 𝒪_Y ⟶ 0
+```
+is a short exact sequence of sheaves of `𝒪_X`-modules. -/
+lemma shortExact_kernelSequence_toPushforwardStructure :
+    (ShortComplex.kernelSequence g.toPushforwardStructure).ShortExact where
+  exact := ShortComplex.kernelSequence_exact _
+  mono_f := inferInstance
+  epi_g := ‹_›
 
 end Scheme.Hom
 

@@ -6,11 +6,14 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Category.Grp.EpiMono
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-!
 # The forgetful functor from sheaves of modules to abelian sheaves is exact
@@ -18,7 +21,8 @@ public import Mathlib.CategoryTheory.Sites.Abelian
 Mathlib knows that `SheafOfModules.toSheaf R : SheafOfModules R ⥤ Sheaf J AddCommGrpCat`
 preserves finite limits. Here we show that it also preserves epimorphisms, and deduce that
 it sends short exact sequences of sheaves of modules to short exact sequences of abelian
-sheaves.
+sheaves and that a morphism of sheaves of modules is an epimorphism precisely when it is
+locally surjective.
 
 A cokernel in `SheafOfModules R` is the sheafification of the cokernel computed in
 `PresheafOfModules R.val`, and likewise in `Sheaf J AddCommGrpCat`; the two sheafifications
@@ -27,6 +31,7 @@ are compared by `PresheafOfModules.sheafificationCompToSheaf`.
 ## Main results
 
 - `SheafOfModules.toSheaf_preservesEpimorphisms`
+- `SheafOfModules.epi_iff_isLocallySurjective`
 - `CategoryTheory.ShortComplex.ShortExact.map_toSheaf`
 
 -/
@@ -82,6 +87,14 @@ instance toSheaf_preservesEpimorphisms : (toSheaf.{v} R).PreservesEpimorphisms w
       have := h₂
       exact epi_comp _ _
     exact epi_of_epi ((toSheaf R).map (adj.counit.app M)) _
+
+/-- **A morphism of sheaves of modules is an epimorphism exactly when it is locally
+surjective.** Being an epimorphism of sheaves is not being surjective on sections: it only
+means that every section of the target is locally in the image. -/
+theorem epi_iff_isLocallySurjective {M N : SheafOfModules.{v} R} (φ : M ⟶ N) :
+    Epi φ ↔ Sheaf.IsLocallySurjective ((toSheaf R).map φ) :=
+  ⟨fun _ ↦ (Sheaf.isLocallySurjective_iff_epi' _ _).mpr ((toSheaf R).map_epi φ),
+    fun h ↦ (toSheaf R).epi_of_epi_map ((Sheaf.isLocallySurjective_iff_epi' _ _).mp h)⟩
 
 end SheafOfModules
 
