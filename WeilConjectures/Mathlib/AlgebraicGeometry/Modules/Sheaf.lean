@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Kernels
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Over
@@ -39,7 +40,11 @@ a sheaf of modules defined as a kernel — as the ideal sheaf of a `Scheme.Ideal
 The second transports the module structure on the stalk of a presheaf of modules
 (`PresheafOfModules.instModule`) to `X.Modules`: the stalk `F_x` of a sheaf of `𝒪_X`-modules is a
 module over the local ring `𝒪_{X, x}`, and, for `x` in an open `U`, over `Γ(X, U)` by restriction
-of scalars along the germ map.
+of scalars along the germ map. Taking stalks at a fixed point is a left exact functor
+`X.Modules ⥤ ModuleCat 𝒪_{X, x}`, and it **detects isomorphisms**: a morphism of sheaves of
+modules which is an isomorphism on every stalk is an isomorphism. This is the criterion that
+`Scheme.Modules.Hom.isIso_iff_isIso_app` cannot replace, since the latter quantifies over all
+opens, including the non-affine ones over which sections are not computable.
 
 The third compares the pushforward and pullback functors along `f : X ⟶ Y` with restriction to
 open subsets: restricting `f _* M` to an open `U` of `Y` is the pushforward of the restriction of
@@ -100,6 +105,9 @@ and taking germs turns such a combination into a linear combination over the loc
   scheme-theoretic fibre, as a `κ(y)`-vector space.
 - `AlgebraicGeometry.Scheme.Modules.moduleStalkBase`: the module structure on a stalk of a sheaf
   of `𝒪_X`-modules over the local ring of the base of a morphism `f : X ⟶ Y`.
+- `AlgebraicGeometry.Scheme.Modules.stalkFunctor`, `AlgebraicGeometry.Scheme.Modules.Hom.stalkMap`:
+  the stalk of a sheaf of `𝒪_X`-modules at a point, as a functor to `𝒪_{X, x}`-modules, and the
+  map it induces on stalks.
 - `AlgebraicGeometry.Scheme.Modules.pullbackTwoSquare`,
   `AlgebraicGeometry.Scheme.Modules.baseChange`: the comparison of pullbacks around a commutative
   square of schemes, and its mate, the base change transformation `u^* f_* ⟶ g_* v^*`.
@@ -136,7 +144,14 @@ and taking germs turns such a combination into a linear combination over the loc
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`
+- `AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_isIso_stalkMap`,
+  `AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_stalkMap`: **a morphism of sheaves of
+  `𝒪_X`-modules is an isomorphism exactly when it is one on every stalk.**
+- `AlgebraicGeometry.Scheme.Modules.range_map_kernelι`,
+  `AlgebraicGeometry.Scheme.Modules.range_stalkMap_kernelι`: the sections, respectively the germs,
+  of a kernel are the sections, respectively the germs, killed by the morphism.
+- `AlgebraicGeometry.Scheme.Modules.Hom.range_stalkMap`: the germs in the image of a morphism
+  are the germs of the sections in its image.
 - `AlgebraicGeometry.Scheme.Modules.germₗ`, `AlgebraicGeometry.Scheme.Modules.germₛₗ`: the germ
   map `Γ(F, U) →ₗ[Γ(X, U)] F_x`, and its variant semilinear over the germ map on functions.
 - `AlgebraicGeometry.Scheme.Modules.pushforwardCompRestrictFunctorIso`
@@ -280,29 +295,8 @@ This is stated for `SheafOfModules X.ringCatSheaf` rather than for the definitio
 `X.Modules`, because instance search for `PreservesLimit` does not see through the latter. -/
 lemma range_map_kernelι :
     Set.range ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι f)) =
-      { x | (SheafOfModules.evaluation X.ringCatSheaf (op U)).map f x = 0 } := by
-  set G := SheafOfModules.evaluation X.ringCatSheaf (op U) with hG
-  have key : ((PreservesKernel.iso G f ≪≫ ModuleCat.kernelIsoKer (G.map f)).inv ≫
-      G.map (kernel.ι f)) = ModuleCat.ofHom (LinearMap.ker (G.map f).hom).subtype := by
-    simp [ModuleCat.kernelIsoKer_inv_kernel_ι]
-  ext x
-  constructor
-  · rintro ⟨y, rfl⟩
-    change G.map f (G.map (kernel.ι f) y) = 0
-    rw [← ConcreteCategory.comp_apply, ← G.map_comp, kernel.condition, G.map_zero]
-    rfl
-  · intro hx
-    refine ⟨(PreservesKernel.iso G f ≪≫ ModuleCat.kernelIsoKer (G.map f)).inv ⟨x, hx⟩, ?_⟩
-    have h2 := ConcreteCategory.congr_hom key ⟨x, hx⟩
-    simp only [Iso.trans_inv, ConcreteCategory.comp_apply] at h2
-    exact h2
-
-lemma map_kernelι_eq :
-    (SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι f) =
-      (PreservesKernel.iso (SheafOfModules.evaluation X.ringCatSheaf (op U)) f).hom ≫
-        kernel.ι _ := by
-  rw [← PreservesKernel.iso_inv_ι]
-  simp
+      { x | (SheafOfModules.evaluation X.ringCatSheaf (op U)).map f x = 0 } :=
+  ModuleCat.range_map_kernelι f _
 
 instance : Mono ((SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι f)) := by
   rw [map_kernelι_eq]
@@ -370,6 +364,181 @@ lemma germₛₗ_apply (x : U) (m : Γ(F, U)) :
 
 end Stalk
 end Kernel
+
+section StalkFunctor
+
+variable {X : Scheme.{u}} {M N K : X.Modules}
+
+variable (X) in
+/-- **The stalk of a sheaf of `𝒪_X`-modules at a point**, as a functor to modules over the local
+ring `𝒪_{X, x}`:
+
+```
+X.Modules ⥤ ModuleCat 𝒪_{X, x},    M ↦ M_x
+```
+
+The module structure on the stalk is `AlgebraicGeometry.Scheme.Modules.moduleStalk`; forgetting
+it leaves the composite `toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab x`, which is the functor
+on which Mathlib's `AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso` is stated. -/
+noncomputable def stalkFunctor (x : X) : X.Modules ⥤ ModuleCat.{u} (X.presheaf.stalk x) where
+  obj M := ModuleCat.of _ (M.presheaf.stalk x)
+  map φ := ModuleCat.ofHom (PresheafOfModules.stalkMapₗ φ.val x)
+  map_id M := by
+    ext z
+    exact ConcreteCategory.congr_hom
+      ((toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).map_id M) z
+  map_comp φ ψ := by
+    ext z
+    exact ConcreteCategory.congr_hom
+      ((toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).map_comp φ ψ) z
+
+@[simp]
+lemma stalkFunctor_obj (x : X) (M : X.Modules) :
+    (stalkFunctor X x).obj M = ModuleCat.of _ (M.presheaf.stalk x) :=
+  rfl
+
+/-- Forgetting the module structure on the stalks leaves the stalk of the underlying presheaf of
+abelian groups. -/
+lemma stalkFunctor_comp_forget₂ (x : X) :
+    stalkFunctor X x ⋙ forget₂ (ModuleCat.{u} (X.presheaf.stalk x)) Ab.{u} =
+      toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x :=
+  rfl
+
+/-- Taking stalks is left exact. -/
+instance (x : X) : PreservesFiniteLimits (stalkFunctor X x) := by
+  -- after forgetting the module structure this is the stalk of a presheaf of abelian groups,
+  -- which is a filtered colimit, and the forgetful functor reflects limits
+  have : PreservesFiniteLimits
+      (stalkFunctor X x ⋙ forget₂ (ModuleCat.{u} (X.presheaf.stalk x)) Ab.{u}) := by
+    rw [stalkFunctor_comp_forget₂]
+    exact comp_preservesFiniteLimits _ _
+  exact ⟨fun _ _ _ ↦ ⟨fun {_} ↦ preservesLimit_of_reflects_of_preserves _ (forget₂ _ Ab.{u})⟩⟩
+
+/-- The map `M_x ⟶ N_x` on stalks at `x` induced by a morphism `M ⟶ N` of sheaves of
+`𝒪_X`-modules, as a map of abelian groups.
+
+`AlgebraicGeometry.Scheme.Modules.stalkFunctor` refines it to an `𝒪_{X, x}`-linear map; it is
+the underlying map of abelian groups that composes with the germ maps, which are semilinear
+over the germ maps of `𝒪_X` rather than linear. -/
+noncomputable def Hom.stalkMap (φ : M ⟶ N) (x : X) :
+    M.presheaf.stalk x ⟶ N.presheaf.stalk x :=
+  (TopCat.Presheaf.stalkFunctor Ab.{u} x).map φ.mapPresheaf
+
+@[simp]
+lemma stalkFunctor_map_apply (φ : M ⟶ N) (x : X) (z : M.presheaf.stalk x) :
+    (stalkFunctor X x).map φ z = φ.stalkMap x z :=
+  rfl
+
+/-- The map on stalks is `𝒪_{X, x}`-linear. -/
+lemma Hom.stalkMap_smul (φ : M ⟶ N) (x : X) (r : X.presheaf.stalk x) (z : M.presheaf.stalk x) :
+    φ.stalkMap x (r • z) = r • φ.stalkMap x z :=
+  LinearMap.map_smul ((stalkFunctor X x).map φ).hom r z
+
+/-- The map on stalks is compatible with the germ maps:
+
+```
+Γ(M, U) --- φ.app U ---> Γ(N, U)
+   |                        |
+  germ                     germ
+   v                        v
+  M_x --- φ.stalkMap x ---> N_x
+```
+-/
+@[reassoc (attr := simp)]
+lemma Hom.germ_stalkMap (φ : M ⟶ N) {U : X.Opens} (x : X) (hx : x ∈ U) :
+    M.presheaf.germ U x hx ≫ φ.stalkMap x = φ.app U ≫ N.presheaf.germ U x hx :=
+  TopCat.Presheaf.stalkFunctor_map_germ U x hx φ.mapPresheaf
+
+/-- Elementwise version of `AlgebraicGeometry.Scheme.Modules.Hom.germ_stalkMap`. -/
+@[simp]
+lemma Hom.germ_stalkMap_apply (φ : M ⟶ N) {U : X.Opens} (x : X) (hx : x ∈ U) (s : Γ(M, U)) :
+    φ.stalkMap x (M.presheaf.germ U x hx s) = N.presheaf.germ U x hx (φ.app U s) :=
+  TopCat.Presheaf.stalkFunctor_map_germ_apply U x hx φ.mapPresheaf s
+
+@[simp]
+lemma Hom.stalkMap_id (M : X.Modules) (x : X) : (𝟙 M :).stalkMap x = 𝟙 _ :=
+  (toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).map_id M
+
+@[reassoc (attr := simp)]
+lemma Hom.stalkMap_comp (φ : M ⟶ N) (ψ : N ⟶ K) (x : X) :
+    (φ ≫ ψ).stalkMap x = φ.stalkMap x ≫ ψ.stalkMap x :=
+  (toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).map_comp φ ψ
+
+/-- Elementwise version of `AlgebraicGeometry.Scheme.Modules.Hom.stalkMap_comp`. -/
+lemma Hom.stalkMap_comp_apply (φ : M ⟶ N) (ψ : N ⟶ K) (x : X) (z : M.presheaf.stalk x) :
+    (φ ≫ ψ).stalkMap x z = ψ.stalkMap x (φ.stalkMap x z) :=
+  ConcreteCategory.congr_hom (φ.stalkMap_comp ψ x) z
+
+instance (φ : M ⟶ N) [IsIso φ] (x : X) : IsIso (φ.stalkMap x) :=
+  (toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).map_isIso φ
+
+/-- **The germs in the image of a morphism are the germs of the sections in its image.** Since
+every element of a stalk is the germ of a section over some open neighbourhood, the image of
+`φ` on the stalk at `x` is the union over the open neighbourhoods `U` of `x` of the germs of the
+sections of `N` over `U` in the image of `φ.app U`. -/
+lemma Hom.range_stalkMap (φ : M ⟶ N) (x : X) :
+    Set.range (φ.stalkMap x) =
+      ⋃ (U : X.Opens) (hx : x ∈ U), N.presheaf.germ U x hx '' Set.range (φ.app U) := by
+  ext z
+  simp only [Set.mem_range, Set.mem_iUnion, Set.mem_image]
+  constructor
+  · rintro ⟨w, rfl⟩
+    obtain ⟨U, hx, t, rfl⟩ := M.presheaf.exists_germ_eq w
+    exact ⟨U, hx, φ.app U t, ⟨t, rfl⟩, (φ.germ_stalkMap_apply x hx t).symm⟩
+  · rintro ⟨U, hx, _, ⟨t, rfl⟩, rfl⟩
+    exact ⟨M.presheaf.germ U x hx t, φ.germ_stalkMap_apply x hx t⟩
+
+/-- **A morphism of sheaves of `𝒪_X`-modules which is an isomorphism on every stalk is an
+isomorphism.**
+
+This is the criterion that `AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app` cannot
+replace: the latter quantifies over *all* opens, and the sections of a sheaf over a non-affine
+open are rarely computable, whereas stalks always are. -/
+theorem Hom.isIso_of_isIso_stalkMap (φ : M ⟶ N) (h : ∀ x : X, IsIso (φ.stalkMap x)) :
+    IsIso φ := by
+  -- the forgetful functor to presheaves of abelian groups reflects isomorphisms, and for a
+  -- morphism of *sheaves* of abelian groups `TopCat.Presheaf.isIso_of_stalkFunctor_map_iso`
+  -- turns the hypothesis on stalks into an isomorphism
+  let ψ : (⟨M.presheaf, M.isSheaf⟩ : TopCat.Sheaf Ab.{u} X) ⟶ ⟨N.presheaf, N.isSheaf⟩ :=
+    ObjectProperty.homMk φ.mapPresheaf
+  -- `φ.stalkMap x` is by definition the map on stalks of `ψ.hom`
+  have : ∀ x : X, IsIso ((TopCat.Presheaf.stalkFunctor Ab.{u} x).map ψ.hom) := h
+  have : IsIso ψ := TopCat.Presheaf.isIso_of_stalkFunctor_map_iso ψ
+  have : IsIso ((toPresheaf X).map φ) := (TopCat.Sheaf.forget Ab.{u} X).map_isIso ψ
+  exact isIso_of_reflects_iso φ (toPresheaf X)
+
+/-- **A morphism of sheaves of `𝒪_X`-modules is an isomorphism if and only if it is one on
+every stalk.** -/
+theorem Hom.isIso_iff_isIso_stalkMap (φ : M ⟶ N) : IsIso φ ↔ ∀ x : X, IsIso (φ.stalkMap x) :=
+  ⟨fun _ _x ↦ inferInstance, φ.isIso_of_isIso_stalkMap⟩
+
+section StalkKernel
+
+variable (f : M ⟶ N) (x : X)
+
+/-- **The stalk of a kernel is the kernel of the stalk.** At every point, the image of
+`kernel.ι f` on stalks is the set of germs killed by `f`:
+
+```
+0 ⟶ (kernel f)_x --- (kernel.ι f).stalkMap x ---> M_x --- f.stalkMap x ---> N_x
+```
+
+This is the stalkwise counterpart of
+`AlgebraicGeometry.Scheme.Modules.range_map_kernelι`. -/
+lemma range_stalkMap_kernelι :
+    Set.range ((kernel.ι f).stalkMap x) = { z | f.stalkMap x z = 0 } :=
+  ModuleCat.range_map_kernelι f (stalkFunctor X x)
+
+/-- `kernel.ι f` is injective on stalks, not merely a monomorphism. -/
+lemma injective_stalkMap_kernelι : Function.Injective ((kernel.ι f).stalkMap x) :=
+  (ModuleCat.mono_iff_injective _).mp ((stalkFunctor X x).map_mono (kernel.ι f))
+
+instance : Mono ((kernel.ι f).stalkMap x) :=
+  (AddCommGrpCat.mono_iff_injective _).mpr (injective_stalkMap_kernelι f x)
+
+end StalkKernel
+
+end StalkFunctor
 
 noncomputable section StalkDesc
 
