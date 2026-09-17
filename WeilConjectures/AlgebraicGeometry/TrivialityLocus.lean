@@ -91,8 +91,8 @@ theorem nonempty_restrictToFiber_iso_structureModules_iff (f : W ⟶ T) [IsPrope
     [GeometricallyIntegral (f.fiberToSpecResidueField t)] :
     Nonempty ((restrictToFiber f t).obj L ≅ (f.fiber t).structureModules) ↔
       1 ≤ finrankFiberSections f L t ∧ 1 ≤ finrankFiberSections f N t := by
-  have hL : L.IsCoherent := (SheafOfModules.Invertible.left (R := W.sheaf) e).isCoherent
-  have hN : N.IsCoherent := (SheafOfModules.Invertible.right (R := W.sheaf) e).isCoherent
+  have : L.IsCoherent := (SheafOfModules.Invertible.left (R := W.sheaf) e).isCoherent
+  have : N.IsCoherent := (SheafOfModules.Invertible.right (R := W.sheaf) e).isCoherent
   let _ : (f.fiber t).Over (Spec (.of ↥(T.residueField t))) := ⟨f.fiberToSpecResidueField t⟩
   have : IsProper ((f.fiber t) ↘ Spec (.of ↥(T.residueField t))) :=
     inferInstanceAs (IsProper (f.fiberToSpecResidueField t))
