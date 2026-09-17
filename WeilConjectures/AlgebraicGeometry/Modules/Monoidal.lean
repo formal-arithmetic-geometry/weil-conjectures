@@ -22,6 +22,11 @@ monoidal class of morphisms. We may therefore transport the symmetric monoidal s
 `SheafOfModules R'`: the tensor product of two sheaves of modules is the sheafification of the
 presheaf tensor product.
 
+The sheafification functor `SheafOfModules.sheafification` itself, and the counit isomorphism
+`SheafOfModules.sheafificationObjIso` identifying the sheafification of the underlying presheaf
+of modules of a sheaf of modules with that sheaf, carry no monoidal content and are in
+`WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification`.
+
 ## Main results
 
 - `SheafOfModules.monoidalCategory`, `SheafOfModules.braidedCategory` and
@@ -52,27 +57,6 @@ variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   (R : Sheaf J CommRingCat.{u})
-
-/-- The sheafification functor from presheaves of modules over the underlying presheaf of rings
-of a sheaf of commutative rings `R` to sheaves of modules over `R`. This is
-`PresheafOfModules.sheafification` for the identity of the underlying presheaf of rings; it is
-spelled with the domain `PresheafOfModules (R.obj ⋙ forget₂ _ _)` so that the monoidal structure
-on presheaves of modules is found by instance resolution. -/
-noncomputable abbrev sheafification :
-    PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat.{u}) ⥤
-      SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) :=
-  PresheafOfModules.sheafification (𝟙 _)
-
-/-- Sheafifying the underlying presheaf of modules of a sheaf of modules `F` gives `F` back.
-This is the counit of the sheafification adjunction,
-`PresheafOfModules.sheafificationCounitIso`, evaluated at `F`. -/
-noncomputable def sheafificationObjIso
-    (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)) :
-    (sheafification R).obj
-      ((SheafOfModules.forget
-        ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)).obj F) ≅ F :=
-  (PresheafOfModules.sheafificationCounitIso
-    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R).obj)).app F
 
 /-- The monoidal category structure on the category of sheaves of modules over a sheaf of
 commutative rings `R`, obtained by localizing the monoidal category structure on presheaves of

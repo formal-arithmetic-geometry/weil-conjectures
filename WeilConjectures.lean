@@ -22,6 +22,7 @@ public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.MiracleFlatness
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.Dimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.FibrewiseCriteria
 public import WeilConjectures.AlgebraicGeometry.Modules.Flat
@@ -176,6 +177,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFu
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Kernels
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
@@ -260,6 +262,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunc
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Localization.Monoidal.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
@@ -288,6 +291,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
+public import WeilConjectures.Mathlib.Data.ENat.Basic
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
@@ -334,11 +338,13 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
+public import WeilConjectures.Mathlib.Topology.Irreducible
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.Mathlib.Topology.Sheaves.PUnit
 public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
+public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.CohenMacaulay.Basic
 public import WeilConjectures.RingTheory.CohenMacaulay.MiracleFlatness

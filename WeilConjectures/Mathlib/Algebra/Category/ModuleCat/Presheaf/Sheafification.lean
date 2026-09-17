@@ -26,6 +26,9 @@ most one point — the sheafification is an equivalence of categories.
   adjunction is an isomorphism at a presheaf of modules which is a sheaf.
 - `PresheafOfModules.sheafificationEquivalenceOfIsSheaf`: if every presheaf of `R₀`-modules is a
   sheaf, the sheafification is an equivalence of categories.
+- `SheafOfModules.sheafification`: the sheafification of presheaves of modules over the
+  underlying presheaf of rings of a sheaf of commutative rings, and
+  `SheafOfModules.sheafificationObjIso`, the counit isomorphism at a sheaf of modules.
 
 -/
 
@@ -34,6 +37,8 @@ most one point — the sheafification is an equivalence of categories.
 universe v v' u u'
 
 open CategoryTheory
+
+section LocallyBijective
 
 variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C}
   {R₀ : Cᵒᵖ ⥤ RingCat.{u}} {R : Sheaf J RingCat.{u}} (α : R₀ ⟶ R.obj)
@@ -67,3 +72,39 @@ noncomputable def sheafificationEquivalenceOfIsSheaf
   (sheafificationAdjunction α).toEquivalence
 
 end PresheafOfModules
+
+end LocallyBijective
+
+section CommRing
+
+variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+  [HasWeakSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  (R : Sheaf J CommRingCat.{u})
+
+namespace SheafOfModules
+
+/-- The sheafification functor from presheaves of modules over the underlying presheaf of rings
+of a sheaf of commutative rings `R` to sheaves of modules over `R`. This is
+`PresheafOfModules.sheafification` for the identity of the underlying presheaf of rings; it is
+spelled with the domain `PresheafOfModules (R.obj ⋙ forget₂ _ _)` so that the monoidal structure
+on presheaves of modules is found by instance resolution. -/
+noncomputable abbrev sheafification :
+    PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat.{u}) ⥤
+      SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) :=
+  PresheafOfModules.sheafification (𝟙 _)
+
+/-- Sheafifying the underlying presheaf of modules of a sheaf of modules `F` gives `F` back.
+This is the counit of the sheafification adjunction,
+`PresheafOfModules.sheafificationCounitIso`, evaluated at `F`. -/
+noncomputable def sheafificationObjIso
+    (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)) :
+    (sheafification R).obj
+      ((SheafOfModules.forget
+        ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)).obj F) ≅ F :=
+  (PresheafOfModules.sheafificationCounitIso
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R).obj)).app F
+
+end SheafOfModules
+
+end CommRing
