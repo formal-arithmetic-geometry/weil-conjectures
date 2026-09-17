@@ -166,6 +166,87 @@ over every open subset, not merely a categorical monomorphism. -/
 lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModulesι.app U) :=
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
 
+/-- The section of the ideal sheaf lying over a section of `𝒪_X` that belongs to the ideal. -/
+noncomputable def sectionOfMem {U : X.Opens} {x : Γ(X, U)} (hx : x ∈ J.idealOfOpens U) :
+    Γ(J.toModules, U) :=
+  ((J.range_toModulesι_app_eq_idealOfOpens U).ge hx).choose
+
+@[simp]
+lemma toModulesι_app_sectionOfMem {U : X.Opens} {x : Γ(X, U)} (hx : x ∈ J.idealOfOpens U) :
+    J.toModulesι.app U (J.sectionOfMem hx) = x :=
+  ((J.range_toModulesι_app_eq_idealOfOpens U).ge hx).choose_spec
+
+/-! ### The ideal on an arbitrary open is determined by the affine opens it contains -/
+
+/-- Membership in the ideal cut out on an open subset is stable under restriction. -/
+lemma map_mem_idealOfOpens {U V : X.Opens} (h : V ≤ U) {x : Γ(X, U)}
+    (hx : x ∈ J.idealOfOpens U) :
+    X.presheaf.map (homOfLE h).op x ∈ J.idealOfOpens V := by
+  rw [mem_idealOfOpens_iff] at hx ⊢
+  have hnat := ConcreteCategory.congr_hom (J.subschemeι.naturality (homOfLE h).op) x
+  simp only [CommRingCat.comp_apply] at hnat
+  rw [hnat, hx, map_zero]
+
+/-- **The ideal cut out on an arbitrary open subset is detected on the affine opens it
+contains**: a section of `𝒪_X` over `U` lies in `J.idealOfOpens U` exactly when its restriction
+to every affine open `V ≤ U` lies in `J.ideal V`.
+
+This is what makes `AlgebraicGeometry.Scheme.IdealSheafData.idealOfOpens` computable from the
+data recorded by `J`, which is only the family of ideals over the affine opens. -/
+lemma mem_idealOfOpens_iff_forall_affineOpens {U : X.Opens} {x : Γ(X, U)} :
+    x ∈ J.idealOfOpens U ↔
+      ∀ (V : X.affineOpens) (h : V.1 ≤ U), X.presheaf.map (homOfLE h).op x ∈ J.ideal V := by
+  refine ⟨fun hx V h ↦ ?_, fun H ↦ ?_⟩
+  · rw [← idealOfOpens_eq_ideal]
+    exact J.map_mem_idealOfOpens h hx
+  · rw [mem_idealOfOpens_iff]
+    refine TopCat.Presheaf.section_ext ⟨J.subscheme.presheaf, J.subscheme.sheaf.2⟩ _ _ 0
+      fun y hy ↦ ?_
+    obtain ⟨_, ⟨V, hV, rfl⟩, hyV, hVU⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open (u := U.1) hy U.2
+    have hVU' : V ≤ U := hVU
+    have hle : J.subschemeι ⁻¹ᵁ V ≤ J.subschemeι ⁻¹ᵁ U := fun z hz ↦ hVU' hz
+    have hnat := ConcreteCategory.congr_hom (J.subschemeι.naturality (homOfLE hVU').op) x
+    simp only [CommRingCat.comp_apply, Quiver.Hom.unop_op] at hnat
+    have hmem : X.presheaf.map (homOfLE hVU').op x ∈ J.idealOfOpens V := by
+      rw [idealOfOpens_eq_ideal J ⟨V, hV⟩]
+      exact H ⟨V, hV⟩ hVU'
+    have hres : J.subscheme.presheaf.map (homOfLE hle).op (J.subschemeι.app U x) = 0 := by
+      rw [show (homOfLE hle : J.subschemeι ⁻¹ᵁ V ⟶ J.subschemeι ⁻¹ᵁ U) =
+        (TopologicalSpace.Opens.map J.subschemeι.base).map (homOfLE hVU') from
+          Subsingleton.elim _ _, ← hnat, (mem_idealOfOpens_iff (J := J)).mp hmem]
+    have hgerm := TopCat.Presheaf.germ_res_apply J.subscheme.presheaf (homOfLE hle) y hyV
+      (J.subschemeι.app U x)
+    rw [hres, map_zero] at hgerm
+    simpa only [map_zero] using hgerm.symm
+
+/-- **Two ideal sheaves whose product vanishes annihilate each other on sections**, over an
+arbitrary open subset: if `I * J = 0` and `a`, `b` are sections of `𝒪_X` over `U` lying in `I`
+and in `J` respectively, then `a * b = 0`.
+
+Multiplication of ideal sheaves is defined on the affine opens only, so the proof restricts to
+an affine open, where it is `Ideal.mul_mem_mul`, and then uses the sheaf condition. -/
+lemma mul_eq_zero_of_mem_idealOfOpens {I J : X.IdealSheafData} (hIJ : I * J = 0) {U : X.Opens}
+    {a b : Γ(X, U)} (ha : a ∈ I.idealOfOpens U) (hb : b ∈ J.idealOfOpens U) : a * b = 0 := by
+  refine TopCat.Presheaf.section_ext ⟨X.presheaf, X.sheaf.2⟩ U _ 0 fun y hy ↦ ?_
+  obtain ⟨_, ⟨V, hV, rfl⟩, hyV, hVU⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open hy U.2
+  have hVU' : V ≤ U := hVU
+  have ha' : X.presheaf.map (homOfLE hVU').op a ∈ I.ideal ⟨V, hV⟩ := by
+    rw [← idealOfOpens_eq_ideal]
+    exact I.map_mem_idealOfOpens hVU' ha
+  have hb' : X.presheaf.map (homOfLE hVU').op b ∈ J.ideal ⟨V, hV⟩ := by
+    rw [← idealOfOpens_eq_ideal]
+    exact J.map_mem_idealOfOpens hVU' hb
+  have hbot : I.ideal ⟨V, hV⟩ * J.ideal ⟨V, hV⟩ = ⊥ := by
+    rw [show I.ideal ⟨V, hV⟩ * J.ideal ⟨V, hV⟩ = (I * J).ideal ⟨V, hV⟩ from rfl, hIJ]
+    rfl
+  have hmul : X.presheaf.map (homOfLE hVU').op (a * b) = 0 := by
+    rw [map_mul]
+    simpa [hbot] using Ideal.mul_mem_mul ha' hb'
+  have hgerm := TopCat.Presheaf.germ_res_apply X.presheaf (homOfLE hVU') y hyV (a * b)
+  rw [hmul] at hgerm
+  simpa only [map_zero] using hgerm.symm
+
 /-! ### The pushforward of the structure sheaf of the closed subscheme is the quotient -/
 
 section ShortExact
@@ -309,3 +390,24 @@ lemma eq_comapModulesMap (hg : I.comap g ≤ I')
   (cancel_mono I'.toModulesι).mp (by rw [← hφ, comapModulesMap_toModulesι])
 
 end AlgebraicGeometry.Scheme.IdealSheafData
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+open IdealSheafData
+
+variable {X Y : Scheme.{u}} (g : Y ⟶ X) [QuasiCompact g]
+
+/-- **A section of `𝒪_X` killed by `g` lies in the kernel ideal sheaf of `g`**, over an
+arbitrary open subset. Over an affine open this is `AlgebraicGeometry.Scheme.Hom.ker_apply`;
+the general case follows because `AlgebraicGeometry.Scheme.IdealSheafData.idealOfOpens` is
+detected on affine opens. -/
+lemma mem_idealOfOpens_ker {U : X.Opens} {x : Γ(X, U)} (hx : g.app U x = 0) :
+    x ∈ g.ker.idealOfOpens U := by
+  rw [mem_idealOfOpens_iff_forall_affineOpens]
+  intro V h
+  rw [ker_apply, RingHom.mem_ker]
+  have hnat := ConcreteCategory.congr_hom (g.naturality (homOfLE h).op) x
+  simp only [CommRingCat.comp_apply] at hnat
+  rw [hnat, hx, map_zero]
+
+end AlgebraicGeometry.Scheme.Hom
