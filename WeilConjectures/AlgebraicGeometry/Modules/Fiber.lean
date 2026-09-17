@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # The fibre of a sheaf of modules: tensor products, inverses and rank one
@@ -41,7 +42,11 @@ As a consequence, if `L` is an invertible `𝒪ₓ`-module with tensor inverse `
   is an invertible `κ(x)`-module.
 - `AlgebraicGeometry.Scheme.Modules.finrank_fiber_eq_one`: the fibre of an invertible sheaf of
   modules is a one-dimensional `κ(x)`-vector space, with
-  `AlgebraicGeometry.Scheme.Modules.rank_fiber_eq_one` for the cardinal-valued rank.
+  `AlgebraicGeometry.Scheme.Modules.rank_fiber_eq_one` for the cardinal-valued rank and
+  `AlgebraicGeometry.Scheme.Modules.finiteDimensional_fiber`,
+  `AlgebraicGeometry.Scheme.Modules.nontrivial_fiber` for the two consequences used downstream.
+- `AlgebraicGeometry.Scheme.Modules.isIso_fiberMap_of_ne_zero`: a non-zero map between the fibres
+  of two line bundles is an isomorphism.
 - `AlgebraicGeometry.Scheme.Modules.span_fiberMk_oneSection`: the fibre of the structure sheaf
   is spanned by the image of the unit function, whence
   `AlgebraicGeometry.Scheme.Modules.fiberMap_homOfSectionTop_apply`, the fibre of multiplication
@@ -136,6 +141,10 @@ instance finiteDimensional_fiber_structureModules (X : Scheme.{u}) (x : X) :
     FiniteDimensional (X.residueField x) (fiber X.structureModules x) :=
   Module.finite_of_finrank_pos (by simp)
 
+instance nontrivial_fiber_structureModules (X : Scheme.{u}) (x : X) :
+    Nontrivial (fiber X.structureModules x) :=
+  Module.nontrivial_of_finrank_pos (R := X.residueField x) (by simp)
+
 /-- **The fibre of the structure sheaf is spanned by the image of the unit function.** This is
 the fibrewise analogue of `AlgebraicGeometry.Scheme.Modules.span_germ_oneSection`. -/
 lemma span_fiberMk_oneSection (X : Scheme.{u}) (x : X) :
@@ -215,5 +224,25 @@ theorem rank_fiber_eq_one {L : X.Modules} (hL : L.Invertible) (x : X) :
     Module.rank (X.residueField x) (L.fiber x) = 1 :=
   have := module_invertible_fiber hL x
   Module.Invertible.rank_eq_one _ _
+
+/-- **The fibre of an invertible sheaf of modules is a finite-dimensional `κ(x)`-vector
+space.** -/
+theorem finiteDimensional_fiber {L : X.Modules} (hL : L.Invertible) (x : X) :
+    FiniteDimensional (X.residueField x) (L.fiber x) :=
+  Module.finite_of_finrank_pos (by simp [finrank_fiber_eq_one hL x])
+
+/-- **The fibre of an invertible sheaf of modules is non-trivial.** -/
+theorem nontrivial_fiber {L : X.Modules} (hL : L.Invertible) (x : X) :
+    Nontrivial (L.fiber x) :=
+  Module.nontrivial_of_finrank_pos (R := X.residueField x)
+    (by simp [finrank_fiber_eq_one hL x])
+
+/-- **A non-zero map between the fibres of two line bundles is an isomorphism**: both fibres are
+one-dimensional over the residue field. -/
+theorem isIso_fiberMap_of_ne_zero {M N : X.Modules} (hM : M.Invertible) (hN : N.Invertible)
+    (φ : M ⟶ N) {x : X} (hφ : fiberMap φ x ≠ 0) : IsIso (fiberMap φ x) := by
+  rw [ConcreteCategory.isIso_iff_bijective]
+  exact LinearMap.bijective_of_ne_zero_of_finrank_eq_one (finrank_fiber_eq_one hM x)
+    (finrank_fiber_eq_one hN x) fun hz ↦ hφ (ModuleCat.hom_ext hz)
 
 end AlgebraicGeometry.Scheme.Modules

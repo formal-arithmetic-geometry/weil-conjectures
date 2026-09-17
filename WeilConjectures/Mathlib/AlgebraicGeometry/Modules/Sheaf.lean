@@ -22,6 +22,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Over
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence
@@ -241,7 +242,9 @@ surjectivity over an affine open subset lives.
 - `AlgebraicGeometry.Scheme.Modules.isIso_of_forall_exists_isIso_app` and
   `AlgebraicGeometry.Scheme.Modules.isIso_of_isOpenCover_restrict`: a morphism of sheaves of
   modules which is invertible on sections over every small enough open subset is an isomorphism,
-  and being an isomorphism is local on the base.
+  and being an isomorphism is local on the base; with the additive companions
+  `AlgebraicGeometry.Scheme.Modules.eq_zero_of_forall_exists_app_eq_zero` and
+  `AlgebraicGeometry.Scheme.Modules.eq_zero_of_isOpenCover_restrict`.
 - `AlgebraicGeometry.Scheme.Modules.Hom.app_eq_smul_res` and
   `AlgebraicGeometry.Scheme.Modules.endSectionRingEquiv`: a morphism `𝒪ₓ ⟶ M` is multiplication
   by a global section of `M`, and the endomorphism ring of `𝒪ₓ` is the ring `Γ(X, 𝒪ₓ)` of global
@@ -853,6 +856,14 @@ def restrictFunctorCompMorphismRestrictIso [IsOpenImmersion f] :
       restrictFunctor f ⋙ restrictFunctor (f ⁻¹ᵁ U).ι :=
   (restrictFunctorComp (f ∣_ U) U.ι).symm ≪≫
     restrictFunctorCongr (morphismRestrict_ι f U) ≪≫ restrictFunctorComp (f ⁻¹ᵁ U).ι f
+
+/-- **Sections of a morphism restricted to an open subscheme.** Over an open `V` of the open
+subscheme `U`, the restriction of `φ` to `U` acts as `φ` itself over the image `U.ι ''ᵁ V`. -/
+@[simp]
+lemma Hom.app_restrictFunctor_ι_map {V : Y.Opens} {M N : Y.Modules} (φ : M ⟶ N)
+    (W : V.toScheme.Opens) :
+    Hom.app ((restrictFunctor V.ι).map φ) W = Hom.app φ (V.ι ''ᵁ W) :=
+  rfl
 
 end Pushforward
 
@@ -1600,6 +1611,11 @@ lemma fiberMap_comp {F G H : X.Modules} (φ : F ⟶ G) (ψ : G ⟶ H) (x : X) :
     fiberMap (φ ≫ ψ) x = fiberMap φ x ≫ fiberMap ψ x :=
   (fiberFunctor X x).map_comp φ ψ
 
+@[simp]
+lemma fiberMap_zero (F G : X.Modules) (x : X) : fiberMap (0 : F ⟶ G) x = 0 :=
+  (congrArg (moduleSpecΓFunctor (R := X.residueField x)).map
+    ((Modules.pullback (X.fromSpecResidueField x)).map_zero F G)).trans rfl
+
 /-- The restriction `F ↦ F_y` of sheaves of modules to the scheme-theoretic fibre of
 `f : X ⟶ Y` over a point `y : Y`, that is, the pullback along `f.fiberι y`. -/
 noncomputable abbrev restrictToFiber (f : X ⟶ Y) (y : Y) : X.Modules ⥤ (f.fiber y).Modules :=
@@ -1748,14 +1764,19 @@ lemma fiberMk_unit_eq_zero_iff (x : X) (r : Γ(X, ⊤)) :
     (ConcreteCategory.congr_hom (Scheme.fromSpecResidueField_appTop X x) r).symm
   rw [hev, map_eq_zero_iff _ hΓinj, ← hmk, map_eq_zero_iff _ hinj]
 
-/-- **An isomorphism is non-zero on every non-trivial fibre.** -/
-lemma fiberMap_ne_zero_of_isIso {M N : X.Modules} (φ : M ⟶ N) [IsIso φ] (x : X)
-    [Nontrivial (M.fiber x)] : fiberMap φ x ≠ 0 := by
+/-- **A morphism which is invertible on a non-trivial fibre is non-zero there.** -/
+lemma fiberMap_ne_zero_of_isIso_fiberMap {M N : X.Modules} (φ : M ⟶ N) (x : X)
+    [Nontrivial (M.fiber x)] (h : IsIso (fiberMap φ x)) : fiberMap φ x ≠ 0 := by
   intro hz
   obtain ⟨v, hv⟩ := exists_ne (0 : M.fiber x)
   have hinj : Function.Injective (fiberMap φ x) :=
-    ((ConcreteCategory.isIso_iff_bijective (fiberMap φ x)).1 inferInstance).1
+    ((ConcreteCategory.isIso_iff_bijective (fiberMap φ x)).1 h).1
   exact hv (hinj (by simp [hz]))
+
+/-- **An isomorphism is non-zero on every non-trivial fibre.** -/
+lemma fiberMap_ne_zero_of_isIso {M N : X.Modules} (φ : M ⟶ N) [IsIso φ] (x : X)
+    [Nontrivial (M.fiber x)] : fiberMap φ x ≠ 0 :=
+  fiberMap_ne_zero_of_isIso_fiberMap φ x inferInstance
 
 /-- **A global function which is a unit does not vanish at any point.** The image in the fibre
 `𝒪_X(x) = κ(x)` of a unit of `Γ(X, 𝒪_X)` is non-zero. -/
@@ -2035,12 +2056,38 @@ theorem isIso_of_isOpenCover_restrict {ι : Type*} {U : ι → X.Opens} (hU : Is
   refine isIso_of_forall_exists_isIso_app φ fun x ↦ ?_
   obtain ⟨i, hi⟩ := Opens.mem_iSup.1 (hU.iSup_eq_top.ge (Opens.mem_top x))
   refine ⟨U i, hi, fun V hV ↦ ?_⟩
-  obtain ⟨V', rfl⟩ : ∃ V' : (U i).toScheme.Opens, (U i).ι ''ᵁ V' = V :=
-    ⟨(U i).ι ⁻¹ᵁ V, by
-      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
-        inf_eq_right.2 hV]⟩
-  have hi := h i
-  exact (inferInstance : IsIso (Hom.app ((restrictFunctor (U i).ι).map φ) V'))
+  obtain ⟨V', rfl⟩ := Scheme.Opens.exists_image_eq_of_le hV
+  rw [← Hom.app_restrictFunctor_ι_map φ V']
+  have := h i
+  infer_instance
+
+/-- **A morphism of sheaves of modules which vanishes on the sections over every small enough
+open subset is zero.** This is the additive companion of
+`AlgebraicGeometry.Scheme.Modules.isIso_of_forall_exists_isIso_app`. -/
+theorem eq_zero_of_forall_exists_app_eq_zero (φ : M ⟶ N)
+    (h : ∀ x : X, ∃ W : X.Opens, x ∈ W ∧ ∀ V : X.Opens, V ≤ W → Hom.app φ V = 0) : φ = 0 := by
+  choose W hxW hW using h
+  have key (V : X.Opens) (m : Γ(M, V)) : Hom.app φ V m = 0 := by
+    refine N.isSheaf.section_ext (U := .op V) (s := Hom.app φ V m) (t := 0) fun x hx ↦
+      ⟨V ⊓ W x, inf_le_left, ⟨hx, hxW x⟩, ?_⟩
+    have hnat := ConcreteCategory.congr_hom
+      (φ.mapPresheaf.naturality (homOfLE (inf_le_left : V ⊓ W x ≤ V)).op) m
+    simp only [mapPresheaf_app, ConcreteCategory.comp_apply] at hnat
+    rw [← hnat, hW x (V ⊓ W x) inf_le_right]
+    simp
+  ext V m
+  simpa using key V m
+
+/-- **Vanishing is local on the base**: a morphism of sheaves of modules whose restriction to
+every member of an open cover of `X` is zero is zero. This is the additive companion of
+`AlgebraicGeometry.Scheme.Modules.isIso_of_isOpenCover_restrict`. -/
+theorem eq_zero_of_isOpenCover_restrict {ι : Type*} {U : ι → X.Opens} (hU : IsOpenCover U)
+    (φ : M ⟶ N) (h : ∀ i, (restrictFunctor (U i).ι).map φ = 0) : φ = 0 := by
+  refine eq_zero_of_forall_exists_app_eq_zero φ fun x ↦ ?_
+  obtain ⟨i, hi⟩ := Opens.mem_iSup.1 (hU.iSup_eq_top.ge (Opens.mem_top x))
+  refine ⟨U i, hi, fun V hV ↦ ?_⟩
+  obtain ⟨V', rfl⟩ := Scheme.Opens.exists_image_eq_of_le hV
+  rw [← Hom.app_restrictFunctor_ι_map φ V', h i, Hom.zero_app]
 
 end IsIsoLocal
 
@@ -2407,6 +2454,18 @@ lemma unitHomEquivTop_symm_apply (m : Γ(M, ⊤)) :
 lemma app_homOfSectionTop_oneSection (M : X.Modules) (m : Γ(M, ⊤)) :
     Hom.app (homOfSectionTop M m) ⊤ (oneSection X ⊤) = m :=
   (unitHomEquivTop M).apply_symm_apply m
+
+/-- **Multiplication by a global section is zero exactly when the section is.** -/
+@[simp]
+lemma homOfSectionTop_eq_zero_iff (M : X.Modules) (m : Γ(M, ⊤)) :
+    homOfSectionTop M m = 0 ↔ m = 0 := by
+  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+  · have hval := app_homOfSectionTop_oneSection M m
+    rw [h, Hom.zero_app] at hval
+    simpa using hval.symm
+  · subst h
+    refine (unitHomEquivTop M).injective ?_
+    simp
 
 /-- **A morphism from the structure sheaf is multiplication by a global section**: over any open
 `U` it sends a function `r` to `r` acting on the restriction to `U` of the global section
