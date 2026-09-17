@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 
 /-!
 
@@ -63,41 +64,19 @@ namespace DerivedCategory
 
 variable (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
-  [Abelian.HasFunctorialFlatResolution A] [HasDerivedCategory.{w} A]
+  [HasDerivedCategory.{w} A]
 
-/-! ### Side conditions
+instance (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := inferInstance
 
-The following ambient conditions are what make the tensor product of graded objects, and
-hence of cochain complexes, well defined. They should all follow from `MonoidalClosed A`
-(so that tensoring preserves colimits) together with `IsGrothendieckAbelian A` (so that the
-relevant coproducts exist); they are recorded here as instances so that the monoidal
-structure on `HomotopyCategory A (.up ℤ)`, and therefore the statement of
-`DerivedCategory.hasDerivedMonoidalCategory` below, elaborates. -/
-
-/-- Graded objects of `A` indexed by `ℤ` have a tensor product. -/
-instance hasTensor (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := sorry
-
-/-- The fourfold tensor product of `ℤ`-graded objects of `A` is well behaved. -/
-instance hasTensor₄ObjExt (X₁ X₂ X₃ X₄ : GradedObject ℤ A) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := sorry
-
-/-- The tensor product `(X₁ ⊗ X₂) ⊗ X₃` of `ℤ`-graded objects of `A` is well behaved. -/
-instance hasGoodTensor₁₂Tensor (X₁ X₂ X₃ : GradedObject ℤ A) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := sorry
-
-/-- The tensor product `X₁ ⊗ (X₂ ⊗ X₃)` of `ℤ`-graded objects of `A` is well behaved. -/
-instance hasGoodTensorTensor₂₃ (X₁ X₂ X₃ : GradedObject ℤ A) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := sorry
-
-/-- The total complex of the tensor product bicomplex of two cochain complexes exists. -/
-instance hasMapBifunctor (K₁ K₂ : HomologicalComplex A (ComplexShape.up ℤ)) :
-    HomologicalComplex.HasMapBifunctor K₁ K₂ (curriedTensor A) (ComplexShape.up ℤ) := sorry
+noncomputable instance : MonoidalCategory (HomotopyCategory A (ComplexShape.up ℤ)) :=
+  have (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := inferInstance
+  inferInstance
 
 /-- For a monoidal closed Grothendieck abelian category `A` admitting functorial flat
 resolutions, the localization functor `Qh : K(A) ⥤ D(A)` admits a derived monoidal
 structure with respect to quasi-isomorphisms. Consequently `DerivedCategory A` is monoidal,
 with tensor product the derived tensor product `- ⊗ᴸ -`. -/
-instance hasDerivedMonoidalCategory :
+instance (priority := 2000) hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
     Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
   sorry
 

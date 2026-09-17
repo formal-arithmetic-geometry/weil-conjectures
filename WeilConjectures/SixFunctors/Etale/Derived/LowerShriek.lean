@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -34,6 +35,11 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus` : `Rf_!` on bounded below derived
   category specifying to the chosen compcatification `HasCompactification.compactification`,
   with scoped notation `R(f)_![A]+`.
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility` and
+  `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompatibility` : the bounded below
+  `Rf_!` is the restriction of the unbounded `Rf_!` along the inclusions
+  `DerivedCategory.Plus.ι` of the bounded below derived categories.
 
 - `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`, with scoped notation
   `H_c(f)[A](i)`.
@@ -94,6 +100,21 @@ scoped notation "Rf_!("c")[" A "]" =>
 scoped notation "Rf_!("c")[" A "]+" =>
   rightDerivedLowerShriekOfCompactificationPlus A c
 
+/-- The bounded below derived lower shriek attached to a compactification
+`c = (X ⟶[i] Z ⟶[g] Y)` is the restriction of the unbounded one along the inclusions of the
+bounded below derived categories: on the `Di_!` factor this is
+`Functor.mapDerivedCategoryPlusCompatibility` (`i_!` is exact), on the `Rg_*` factor it is
+`Functor.rightDerivedFunctorPlusCompatibility`. -/
+noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
+    Rf_!(c)[A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ Rf_!(c)[A] :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft ((c.i)_!open[A]).mapDerivedCategoryPlus
+      ((c.g)_*[A]).rightDerivedFunctorPlusCompatibility ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight ((c.i)_!open[A]).mapDerivedCategoryPlusCompatibility
+      ((c.g)_*[A]).rightDerivedFunctor ≪≫
+    Functor.associator _ _ _
+
 end Etale
 
 end OfCompactification
@@ -132,6 +153,14 @@ lemma rightDerivedLowerShriek_eq : R(f)_![A] =
 
 lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
     Rf_!(HasCompactification.compactification f)[A]+ := rfl
+
+/-- The bounded below derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` is the restriction
+of the unbounded `Rf_! : D(X_ét) ⥤ D(Y_ét)` along the inclusions of the bounded below
+derived categories. -/
+noncomputable def rightDerivedLowerShriekPlusCompatibility :
+    R(f)_![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)_![A] :=
+  rightDerivedLowerShriekOfCompactificationPlusCompatibility A
+    (HasCompactification.compactification f)
 
 end Etale
 
