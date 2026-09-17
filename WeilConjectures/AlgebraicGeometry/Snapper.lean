@@ -72,6 +72,12 @@ open CategoryTheory Limits MonoidalCategory SheafOfModules fwdDiff
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+/-- Equal invertible sheaves of modules have equal classes in the Picard group, whatever
+proofs of invertibility they are given. -/
+private lemma Pic.mk_congr {X : Scheme.{u}} {A B : X.Modules} (hA : A.Invertible)
+    (hB : B.Invertible) (h : A = B) : Pic.mk A hA = Pic.mk B hB := by
+  subst h; rfl
+
 /-- Only `⊥` lies below `0` in `WithBot ℕ∞`. -/
 private lemma eq_bot_of_lt_natCast_zero {a : WithBot ℕ∞} (h : a < ((0 : ℕ) : WithBot ℕ∞)) :
     a = ⊥ := by
@@ -252,11 +258,85 @@ theorem fwdDiffComp_eulerChar_tensorZPow_eq_zero :
             fun m ↦ eulerChar k (tensorZPow G L (fun i ↦ (hL i).invertible) m) := by
         funext m
         have h := hstep m
-        show eulerChar k (tensorZPow F L (fun i ↦ (hL i).invertible) (m + Pi.single (j 0) 1)) -
+        change eulerChar k (tensorZPow F L (fun i ↦ (hL i).invertible) (m + Pi.single (j 0) 1)) -
           eulerChar k (tensorZPow F L (fun i ↦ (hL i).invertible) m) = _
         omega
       rw [fwdDiffComp_succ', hdiff]
       exact ih G hGcoh hGn L hL fun a ↦ j a.succ
+
+/-- **Snapper's theorem for very ample line bundles**, the case the general one is reduced to:
+if `L₁, …, L_r` are very ample and `F` is coherent with `dim F ≤ d`, then
+`m ↦ χ(F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r)` is a numerical polynomial of total degree at most `d`. -/
+theorem isNumericalPolynomial_eulerChar_tensorZPow_of_isVeryAmple (F : X.Modules) [F.IsCoherent]
+    {r : ℕ} (L : Fin r → X.Modules) (hL : ∀ j, IsVeryAmple (Spec (.of k)) (L j)) (d : ℕ)
+    (hd : F.supportDim ≤ ((d : ℕ) : WithBot ℕ∞)) :
+    IsNumericalPolynomial d
+      (fun m ↦ eulerChar k (tensorZPow F L (fun i ↦ (hL i).invertible) m)) :=
+  isNumericalPolynomial_of_fwdDiffComp_eq_zero fun j ↦
+    fwdDiffComp_eulerChar_tensorZPow_eq_zero k (d + 1) F inferInstance
+      (lt_of_le_of_lt hd (WithBot.coe_lt_coe.2 (Nat.cast_lt.2 (Nat.lt_succ_self d)))) L hL j
+
+/-- **Snapper's theorem** (`thm:deg-snapper`). Let `X` be a projective scheme over an infinite
+field `k` — proper, with an ample line bundle `A` — let `F` be a coherent sheaf of `𝒪ₓ`-modules
+and let `L₁, …, L_r` be line bundles on `X`. Then
+
+`m ↦ χ(X, F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r)`
+
+is a numerical polynomial on `ℤ ^ r` of total degree at most the dimension `dim F` of the support
+of `F`, the bound being spelled as any natural number `d` with `dim F ≤ d`.
+
+The proof reduces to the very ample case
+`AlgebraicGeometry.Scheme.Modules.isNumericalPolynomial_eulerChar_tensorZPow_of_isVeryAmple`:
+for `n` large both `Mⱼ := Lⱼ ⊗ A ^⊗ n` and `Nⱼ := A ^⊗ n` are very ample, and the polynomial of
+the `2r`-tuple `M₁ … M_r N₁ … N_r` evaluated at `(m, -m)` is the polynomial of `L₁ … L_r` at `m`,
+because the two twisting factors have the same class in the Picard group. -/
+theorem isNumericalPolynomial_eulerChar_tensorZPow {A : X.Modules} (hA : A.Invertible)
+    (hAa : A.IsAmple) (F : X.Modules) [F.IsCoherent] {r : ℕ} (L : Fin r → X.Modules)
+    (hL : ∀ j, (L j).Invertible) (d : ℕ) (hd : F.supportDim ≤ ((d : ℕ) : WithBot ℕ∞)) :
+    IsNumericalPolynomial d (fun m ↦ eulerChar k (tensorZPow F L hL m)) := by
+  -- for each `i`, both `L i ⊗ A ^⊗ n` and `A ^⊗ n` are very ample once `n` is large
+  have hchoice : ∀ i : Fin r, ∃ n : ℕ, IsVeryAmple (Spec (.of k)) (L i ⊗ A ^⊗ n) ∧
+      IsVeryAmple (Spec (.of k)) (A ^⊗ n) := by
+    intro i
+    obtain ⟨n₁, hn₁⟩ := hAa.exists_isVeryAmple_tensorObj_tensorPow k hA (hL i)
+    obtain ⟨n₂, hn₂⟩ := hAa.exists_isVeryAmple_tensorObj_tensorPow k hA
+      (SheafOfModules.invertible_tensorUnit X.sheaf)
+    exact ⟨max n₁ n₂, hn₁ _ (le_max_left _ _),
+      (hn₂ _ (le_max_right _ _)).of_iso (λ_ (A ^⊗ max n₁ n₂))⟩
+  choose n hMva hNva using hchoice
+  -- the `2r`-tuple of very ample line bundles
+  have hMN : ∀ i : Fin (r + r),
+      IsVeryAmple (Spec (.of k)) (Fin.append (fun i ↦ L i ⊗ A ^⊗ n i) (fun i ↦ A ^⊗ n i) i) := by
+    intro i
+    induction i using Fin.addCases with
+    | left i => rw [Fin.append_left]; exact hMva i
+    | right i => rw [Fin.append_right]; exact hNva i
+  have hQ := isNumericalPolynomial_eulerChar_tensorZPow_of_isVeryAmple k F _ hMN d hd
+  -- the class of `A ^⊗ n` in the Picard group
+  have hApow : ∀ (N : ℕ) (h : (A ^⊗ N).Invertible),
+      Pic.mk (A ^⊗ N) h = Pic.mk A hA ^ (N : ℤ) := fun N h ↦ by
+    rw [← Pic.mk_zpow (hM := hA) (N : ℤ)]
+    exact Pic.mk_congr _ _ (hA.zpow_natCast N).symm
+  refine (funext fun m ↦ ?_ : (fun m ↦ eulerChar k
+    (tensorZPow F _ (fun i ↦ (hMN i).invertible) (Fin.append m (-m)))) =
+      fun m ↦ eulerChar k (tensorZPow F L hL m)) ▸ hQ.comp_append_neg
+  refine eulerChar_tensorObj_congr F
+    (invertible_zpowProd _ (fun i ↦ (hMN i).invertible) (Fin.append m (-m)))
+    (invertible_zpowProd L hL m) ?_
+  rw [Pic.mk_zpowProd, Pic.mk_zpowProd, Fin.prod_univ_add, ← Finset.prod_mul_distrib]
+  refine Finset.prod_congr rfl fun i _ ↦ ?_
+  have hleft : Pic.mk (Fin.append (fun i ↦ L i ⊗ A ^⊗ n i) (fun i ↦ A ^⊗ n i)
+        (Fin.castAdd r i)) ((hMN _).invertible) =
+      Pic.mk (L i) (hL i) * Pic.mk A hA ^ (n i : ℤ) := by
+    rw [Pic.mk_congr _ ((hL i).tensorObj (hA.tensorPow (n i))) (Fin.append_left _ _ i),
+      Pic.mk_tensorObj (hM := hL i) (hN := hA.tensorPow (n i)),
+      hApow (n i) (hA.tensorPow (n i))]
+  have hright : Pic.mk (Fin.append (fun i ↦ L i ⊗ A ^⊗ n i) (fun i ↦ A ^⊗ n i)
+        (Fin.natAdd r i)) ((hMN _).invertible) = Pic.mk A hA ^ (n i : ℤ) := by
+    rw [Pic.mk_congr _ (hA.tensorPow (n i)) (Fin.append_right _ _ i),
+      hApow (n i) (hA.tensorPow (n i))]
+  rw [hleft, hright, Fin.append_left, Fin.append_right, Pi.neg_apply, mul_zpow, zpow_neg,
+    mul_assoc, mul_inv_cancel, mul_one]
 
 end VeryAmple
 

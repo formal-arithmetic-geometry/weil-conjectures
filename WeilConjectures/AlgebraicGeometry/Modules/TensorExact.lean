@@ -47,7 +47,7 @@ noncomputable def tensorRightCompIso (e : N ⊗ N' ≅ 𝟙_ X.Modules) :
     tensorRight N ⋙ tensorRight N' ≅ 𝟭 X.Modules :=
   NatIso.ofComponents (fun Y ↦ α_ Y N N' ≪≫ whiskerLeftIso Y e ≪≫ ρ_ Y) (by
     intro A B f
-    show f ▷ N ▷ N' ≫ _ = _
+    change f ▷ N ▷ N' ≫ _ = _
     simp only [Iso.trans_hom, whiskerLeftIso_hom, Functor.id_map, Category.assoc]
     rw [← Category.assoc (f ▷ N ▷ N'), associator_naturality_left, Category.assoc,
       ← Category.assoc (f ▷ (N ⊗ N')), ← whisker_exchange, Category.assoc]
