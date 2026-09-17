@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Stalk
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
@@ -54,9 +54,14 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
   noetherian scheme, `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is a finite-dimensional `k`-algebra.
 - `AlgebraicGeometry.Scheme.preimage_infinitesimalBaseChangeFst_eq_top`: every point of
   `W ×_T Tₙ` lies over `t`, so `W ×_T Tₙ` lies over every open neighbourhood of `t`.
-- `AlgebraicGeometry.Scheme.sq_thickeningIdeal`: the closed immersion
-  `W ×_T Tₙ ↪ W ×_T T_{n+1}` is a square-zero thickening, cut out by
-  `AlgebraicGeometry.Scheme.thickeningIdeal`.
+- `AlgebraicGeometry.Scheme.thickeningIdeal`: the ideal sheaf cutting out the closed immersion
+  `W ×_T Tₙ ↪ W ×_T T_{n+1}`.
+- `AlgebraicGeometry.Scheme.mul_ker_infinitesimalBaseChangeMap`: the kernel ideal sheaves of
+  `W ×_T T_{m₁} ↪ W ×_T Tₙ` and `W ×_T T_{m₂} ↪ W ×_T Tₙ` annihilate each other as soon as
+  `n ≤ m₁ + m₂ + 1`; `AlgebraicGeometry.Scheme.sq_thickeningIdeal` and
+  `AlgebraicGeometry.Scheme.ker_mul_thickeningIdeal_eq_zero`, which says that the thickening
+  ideal is annihilated by the kernel ideal sheaf of `W ×_T T₀ ↪ W ×_T T_{n+1}`, are the two
+  cases of it that are used.
 - `AlgebraicGeometry.Scheme.exists_isUnit_appTop_infinitesimalBaseChangeMap`: if the global
   sections of `W ×_T Tₘ` are `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)`, then every unit of `Γ(W ×_T Tₘ, 𝒪)`
   extends to a unit of `Γ(W ×_T Tₙ, 𝒪)` for `m ≤ n`.
@@ -279,33 +284,46 @@ end Neighborhood
 
 section Kernel
 
-variable (n : ℕ)
+/-- The kernel of the transition map `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1) ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (m + 1)`
+is the image of `𝔪_x ^ (m + 1)`, that is, `𝔪_x ^ (m + 1) ⧸ 𝔪_x ^ (n + 1)`. -/
+lemma ker_infinitesimalRingMap {m n : ℕ} (h : m ≤ n) :
+    RingHom.ker (X.infinitesimalRingMap x h).hom =
+      (maximalIdeal (X.presheaf.stalk x) ^ (m + 1)).map
+        (Ideal.Quotient.mk (maximalIdeal (X.presheaf.stalk x) ^ (n + 1))) :=
+  Ideal.Quotient.factor_ker (Ideal.pow_le_pow_right (Nat.succ_le_succ h))
 
-/-- The kernel of the transition map `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 2) ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)`
-is the image of `𝔪_x ^ (n + 1)`, that is, `𝔪_x ^ (n + 1) ⧸ 𝔪_x ^ (n + 2)`. -/
-lemma ker_infinitesimalRingMap :
-    RingHom.ker (X.infinitesimalRingMap x (Nat.le_succ n)).hom =
-      (maximalIdeal (X.presheaf.stalk x) ^ (n + 1)).map
-        (Ideal.Quotient.mk (maximalIdeal (X.presheaf.stalk x) ^ (n + 1 + 1))) :=
-  Ideal.Quotient.factor_ker (Ideal.pow_le_pow_right (Nat.succ_le_succ (Nat.le_succ n)))
+/-- The kernel of the transition map `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1) ⟶ 𝒪_{X, x} ⧸ 𝔪_x` down to the
+zeroth infinitesimal neighbourhood is the maximal ideal of `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)`. -/
+lemma ker_infinitesimalRingMap_zero_eq_maximalIdeal (n : ℕ) :
+    RingHom.ker (X.infinitesimalRingMap x (Nat.zero_le n)).hom =
+      maximalIdeal (X.infinitesimalRing x n) := by
+  rw [ker_infinitesimalRingMap, zero_add, pow_one]
+  exact IsLocalRing.map_maximalIdeal_quotient_pow n
+
+/-- **The kernels of two transition maps out of `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` annihilate each
+other** as soon as the two neighbourhoods they go down to are large enough, namely
+`n ≤ m₁ + m₂ + 1`: the kernels are the images of `𝔪_x ^ (m₁ + 1)` and `𝔪_x ^ (m₂ + 1)`, whose
+product lands in `𝔪_x ^ (n + 1)`. -/
+lemma mul_ker_infinitesimalRingMap {m₁ m₂ n : ℕ} (h₁ : m₁ ≤ n) (h₂ : m₂ ≤ n)
+    (h : n ≤ m₁ + m₂ + 1) :
+    RingHom.ker (X.infinitesimalRingMap x h₁).hom *
+      RingHom.ker (X.infinitesimalRingMap x h₂).hom = ⊥ := by
+  rw [ker_infinitesimalRingMap, ker_infinitesimalRingMap]
+  exact Ideal.map_pow_mul_map_pow_eq_bot _ (by omega)
 
 /-- The kernel of `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 2) ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is square zero. -/
-lemma sq_ker_infinitesimalRingMap :
+lemma sq_ker_infinitesimalRingMap (n : ℕ) :
     RingHom.ker (X.infinitesimalRingMap x (Nat.le_succ n)).hom ^ 2 = ⊥ := by
-  rw [ker_infinitesimalRingMap]
-  exact Ideal.sq_map_pow_eq_bot _ n.succ_ne_zero
+  rw [sq]
+  exact X.mul_ker_infinitesimalRingMap x (Nat.le_succ n) (Nat.le_succ n) (by omega)
 
 /-- The kernel of `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 2) ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is annihilated by the
 maximal ideal. -/
-lemma maximalIdeal_mul_ker_infinitesimalRingMap :
+lemma maximalIdeal_mul_ker_infinitesimalRingMap (n : ℕ) :
     maximalIdeal (X.infinitesimalRing x (n + 1)) *
       RingHom.ker (X.infinitesimalRingMap x (Nat.le_succ n)).hom = ⊥ := by
-  have hm : maximalIdeal (X.infinitesimalRing x (n + 1)) =
-      (maximalIdeal (X.presheaf.stalk x)).map
-        (Ideal.Quotient.mk (maximalIdeal (X.presheaf.stalk x) ^ (n + 1 + 1))) :=
-    (IsLocalRing.map_maximalIdeal_quotient_pow (n + 1)).symm
-  rw [hm, ker_infinitesimalRingMap]
-  exact Ideal.map_mul_map_pow_eq_bot _ (n + 1)
+  rw [← X.ker_infinitesimalRingMap_zero_eq_maximalIdeal x (n + 1)]
+  exact X.mul_ker_infinitesimalRingMap x (Nat.zero_le (n + 1)) (Nat.le_succ n) (by omega)
 
 end Kernel
 
@@ -652,6 +670,31 @@ lemma ker_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n) :
   rw [← H.isoPullback_hom_fst, Hom.ker_comp_of_isIso,
     IdealSheafData.ker_fst_of_isClosedImmersion]
 
+/-- **The kernel ideal sheaves of two infinitesimal base changes annihilate each other** as
+soon as the two neighbourhoods they come from are large enough, namely `n ≤ m₁ + m₂ + 1`:
+
+```
+  W ×_T T_{m₁}                W ×_T T_{m₂}
+          ╲                        ╱
+       J₁  ╲                      ╱  J₂
+            ╲                    ╱
+             ───▶ W ×_T Tₙ ◀────
+```
+
+This is the sheaf-level form of
+`AlgebraicGeometry.Scheme.mul_ker_infinitesimalRingMap`, from which it is obtained by
+descending to the affine neighbourhoods `Tₘ ↪ Tₙ` and pulling back along the projection
+`W ×_T Tₙ ⟶ Tₙ`. -/
+lemma mul_ker_infinitesimalBaseChangeMap {m₁ m₂ n : ℕ} (h₁ : m₁ ≤ n) (h₂ : m₂ ≤ n)
+    (h : n ≤ m₁ + m₂ + 1) :
+    (infinitesimalBaseChangeMap f t h₁).ker * (infinitesimalBaseChangeMap f t h₂).ker = 0 := by
+  have hT : (T.infinitesimalNeighborhoodMap t h₁).ker *
+      (T.infinitesimalNeighborhoodMap t h₂).ker = 0 :=
+    Hom.mul_ker_specMap_eq_zero _ _ (T.mul_ker_infinitesimalRingMap t h₁ h₂ h)
+  rw [ker_infinitesimalBaseChangeMap, ker_infinitesimalBaseChangeMap,
+    ← IdealSheafData.comap_mul, hT]
+  simp
+
 /-- **The thickening ideal**: the kernel ideal sheaf of the closed immersion
 `W ×_T Tₙ ↪ W ×_T T_{n+1}`. It is square zero
 (`AlgebraicGeometry.Scheme.sq_thickeningIdeal`). -/
@@ -661,9 +704,24 @@ noncomputable def thickeningIdeal (n : ℕ) :
 
 /-- **The thickening `W ×_T Tₙ ↪ W ×_T T_{n+1}` is square zero.** -/
 lemma sq_thickeningIdeal (n : ℕ) : thickeningIdeal f t n ^ 2 = 0 := by
-  rw [thickeningIdeal, ker_infinitesimalBaseChangeMap]
-  refine IdealSheafData.pow_comap_eq_zero_of_isAffine ?_ _
-  exact Hom.pow_ker_SpecMap_eq_zero _ (T.sq_ker_infinitesimalRingMap t n)
+  rw [thickeningIdeal, sq]
+  exact mul_ker_infinitesimalBaseChangeMap f t (Nat.le_succ n) (Nat.le_succ n) (by omega)
+
+/-- **The thickening ideal is annihilated by the ideal of the zeroth infinitesimal
+neighbourhood.** Writing `J` for the kernel ideal sheaf of `W ×_T T₀ ↪ W ×_T T_{n+1}` and `Iₙ`
+for the thickening ideal, `J * Iₙ = 0`; this is the sheaf-level form of `𝔪 · Iₙ = 0`.
+
+```
+  W ×_T T₀                      W ×_T Tₙ
+         ╲                        ╱
+       J  ╲                      ╱  Iₙ
+           ╲                    ╱
+            ──▶ W ×_T T_{n+1} ◀──
+```
+-/
+lemma ker_mul_thickeningIdeal_eq_zero (n : ℕ) :
+    (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))).ker * thickeningIdeal f t n = 0 :=
+  mul_ker_infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1)) (Nat.le_succ n) (by omega)
 
 /-- The canonical isomorphism `W ×_T Tₙ ≅ V(Iₙ)` between the `n`-th infinitesimal base change
 and the closed subscheme of `W ×_T T_{n+1}` cut out by the thickening ideal. -/

@@ -7,12 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # Complements on pullback and pushforward of ideal sheaves
 
-Three groups of complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Functorial`.
+Four groups of complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Functorial`.
 
 The first computes the pullback of an ideal sheaf along the inclusion of its own closed
 subscheme, which vanishes; as a consequence a morphism is scheme-theoretically dense in
@@ -26,6 +28,17 @@ The third is flat base change: for a quasi-compact `g` and a cartesian square wi
 right-hand edge, pushforward along `g` commutes with pullback along the base change. This
 is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
 
+The fourth computes push- and pullback on affine opens, and deduces from this local
+description that pullback commutes with products. For a morphism `f : X ⟶ Y` of schemes
+with affine target, the pushforward `I.map f` is on global sections the preimage ideal along
+`f.appTop`; dually, for a morphism of affine schemes the pullback `J.comap f` is the extended
+ideal, that is `Ideal.map` along `f.appTop`. The affine statement is not proved by computing
+the fibre product of the two affine schemes involved: `Scheme.IdealSheafData.comap` is a left
+adjoint (`Scheme.IdealSheafData.map_gc`) and on an affine scheme ideal sheaves are
+order-isomorphic to ideals of the global sections (`Scheme.IdealSheafData.equivOfIsAffine`).
+Under these identifications the right adjoint is `Ideal.comap`, hence the left adjoint is
+`Ideal.map`.
+
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.coe_support_comap`: the set-level form of
@@ -38,7 +51,16 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
 - `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_of_isPullback`: flat base change, with
   `AlgebraicGeometry.Scheme.IdealSheafData.map_comap_opens` (restriction to an open) and
   `AlgebraicGeometry.Scheme.IdealSheafData.comap_map` (a quasi-compact flat monomorphism)
-  as special cases.
+  as special cases;
+- `AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_map_of_isAffine` and
+  `AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_comap_of_isAffine`: push- and pullback on
+  global sections of affine schemes, with
+  `AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_appLE` the relative form used in
+  practice and `AlgebraicGeometry.Scheme.IdealSheafData.ideal_top_comap_specMap_fromSpec` the
+  form on an affine chart;
+- `AlgebraicGeometry.Scheme.IdealSheafData.comap_mul` and
+  `AlgebraicGeometry.Scheme.IdealSheafData.comap_pow`: pullback of ideal sheaves commutes with
+  products and powers.
 -/
 
 @[expose] public section
@@ -216,5 +238,112 @@ lemma subschemeMapOfComapLe_subschemeι {X Y : Scheme.{u}} (I : Y.IdealSheafData
   subschemeMap_subschemeι _ _ _ _
 
 end Subscheme
+
+section AffineOpens
+
+/-- The pushforward of an ideal sheaf along a morphism of affine schemes is, on global
+sections, the preimage ideal. -/
+lemma ideal_top_map_of_isAffine [IsAffine X] [IsAffine Y] (I : X.IdealSheafData) (f : X ⟶ Y) :
+    (I.map f).ideal ⟨⊤, isAffineOpen_top Y⟩ =
+      (I.ideal ⟨⊤, isAffineOpen_top X⟩).comap f.appTop.hom := by
+  rw [map, ker_of_isAffine]
+  simp only [ofIdealTop_ideal, homOfLE_refl, op_id, CategoryTheory.Functor.map_id,
+    CommRingCat.hom_id, Ideal.map_id]
+  rw [Scheme.Hom.comp_appTop, CommRingCat.hom_comp, ← RingHom.comap_ker,
+    ker_subschemeι_app I ⟨⊤, isAffineOpen_top X⟩]
+
+/-- The pullback of an ideal sheaf along a morphism of affine schemes is, on global sections,
+the extended ideal. -/
+lemma ideal_top_comap_of_isAffine [IsAffine X] [IsAffine Y] (J : Y.IdealSheafData) (f : X ⟶ Y) :
+    (J.comap f).ideal ⟨⊤, isAffineOpen_top X⟩ =
+      (J.ideal ⟨⊤, isAffineOpen_top Y⟩).map f.appTop.hom := by
+  refine le_antisymm ?_ ?_
+  · have h : J.comap f ≤ ofIdealTop ((J.ideal ⟨⊤, isAffineOpen_top Y⟩).map f.appTop.hom) :=
+      le_map_iff_comap_le.mp <| le_of_isAffine <| by
+        rw [ideal_top_map_of_isAffine]
+        simpa using Ideal.le_comap_map
+    simpa using h ⟨⊤, isAffineOpen_top X⟩
+  · rw [Ideal.map_le_iff_le_comap, ← ideal_top_map_of_isAffine]
+    exact le_map_comap J f ⟨⊤, isAffineOpen_top Y⟩
+
+/-- Restricting an ideal sheaf to an affine open subscheme recovers its ideal there. -/
+lemma map_topIso_ideal_top_comap_ι (J : X.IdealSheafData) (U : X.affineOpens) :
+    haveI : IsAffine U.1.toScheme := U.2
+    ((J.comap U.1.ι).ideal ⟨⊤, isAffineOpen_top U.1.toScheme⟩).map U.1.topIso.hom.hom =
+      J.ideal U := by
+  have : IsAffine U.1.toScheme := U.2
+  rw [ideal_comap_of_isOpenImmersion, Scheme.Opens.ι_appIso]
+  simp only [Iso.refl_inv]
+  rw [Scheme.Opens.topIso_hom]
+  exact map_ideal' (I := J)
+    (V := ⟨U.1.ι ''ᵁ ⊤, (isAffineOpen_top U.1.toScheme).image_of_isOpenImmersion U.1.ι⟩)
+    (U := U) _
+
+/-- **The pullback of an ideal sheaf is the extended ideal.** If `V` is an affine open of `Z`
+lying over the affine open `U` of `X`, then the ideal of `J.comap f` on `V` is the ideal of
+`J` on `U` extended along `f.appLE U V`. -/
+lemma ideal_comap_appLE {Z : Scheme.{u}} (J : X.IdealSheafData) (f : Z ⟶ X)
+    (U : X.affineOpens) (V : Z.affineOpens) (e : V.1 ≤ f ⁻¹ᵁ U.1) :
+    (J.comap f).ideal V = (J.ideal U).map (f.appLE U.1 V.1 e).hom := by
+  have : IsAffine U.1.toScheme := U.2
+  have : IsAffine V.1.toScheme := V.2
+  have hres : (J.comap f).comap V.1.ι = (J.comap U.1.ι).comap (f.resLE U.1 V.1 e) := by
+    rw [← comap_comp, ← comap_comp, Scheme.Hom.resLE_comp_ι]
+  rw [← map_topIso_ideal_top_comap_ι (J.comap f) V, hres,
+    ideal_top_comap_of_isAffine, Ideal.map_map, ← map_topIso_ideal_top_comap_ι J U,
+    Ideal.map_map]
+  congr 1
+  rw [← CommRingCat.hom_comp, ← CommRingCat.hom_comp]
+  congr 1
+  simp only [Scheme.Hom.appTop, Scheme.Hom.resLE_app_top, Category.assoc,
+    Iso.inv_hom_id, Category.comp_id]
+
+/-- **The extended ideal on an affine chart.** If a morphism `Spec R ⟶ X` factors as `Spec ψ`
+followed by the canonical morphism of an affine open `U`, then the pullback of an ideal sheaf
+`J` along it is the extension of `J.ideal U` along `ψ`. -/
+lemma ideal_top_comap_specMap_fromSpec (J : X.IdealSheafData) (U : X.affineOpens)
+    {R : CommRingCat.{u}} (ψ : Γ(X, U.1) ⟶ R) :
+    (J.comap (Spec.map ψ ≫ U.2.fromSpec)).ideal ⟨⊤, isAffineOpen_top (Spec R)⟩ =
+      ((J.ideal U).map ψ.hom).map (Scheme.ΓSpecIso R).inv.hom := by
+  rw [ideal_comap_appLE J _ U ⟨⊤, isAffineOpen_top (Spec R)⟩
+      (top_le_preimage_specMap_fromSpec U ψ),
+    appLE_top_specMap_fromSpec, CommRingCat.hom_comp, ← Ideal.map_map]
+
+/-- The unbundled form of `ideal_top_comap_specMap_fromSpec`. -/
+lemma ideal_top_comap_specMap_ofHom_fromSpec (J : X.IdealSheafData) (U : X.affineOpens)
+    {R : Type u} [CommRing R] (ψ : Γ(X, U.1) →+* R) :
+    (J.comap (Spec.map (CommRingCat.ofHom ψ) ≫ U.2.fromSpec)).ideal
+        ⟨⊤, isAffineOpen_top (Spec (CommRingCat.of R))⟩ =
+      ((J.ideal U).map ψ).map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom :=
+  ideal_top_comap_specMap_fromSpec J U (CommRingCat.ofHom ψ)
+
+end AffineOpens
+
+section Products
+
+/-- **Inverse images of ideal sheaves commute with products.** Both sides are computed on an
+affine open `W` of `X` lying over an affine open `V` of `Y` by
+`AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_appLE`, where the statement becomes
+multiplicativity of `Ideal.map`; such pairs `W ≤ f ⁻¹ᵁ V` cover `X`. -/
+theorem comap_mul (I J : Y.IdealSheafData) (f : X ⟶ Y) :
+    (I * J).comap f = I.comap f * J.comap f := by
+  refine ext_of_iSup_eq_top
+    (ι := {p : Y.affineOpens × X.affineOpens // p.2.1 ≤ f ⁻¹ᵁ p.1.1}) (fun p ↦ p.1.2) ?_ ?_
+  · rw [eq_top_iff]
+    intro x _
+    obtain ⟨V, W, hle, hxW⟩ := exists_affineOpens_le_preimage f x
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(V, W), hle⟩, hxW⟩
+  · rintro ⟨⟨V, W⟩, hle⟩
+    rw [ideal_comap_appLE (I * J) f V W hle, ideal_mul, Pi.mul_apply, Ideal.map_mul,
+      ideal_mul, Pi.mul_apply, ideal_comap_appLE I f V W hle, ideal_comap_appLE J f V W hle]
+
+/-- **Inverse images of ideal sheaves commute with powers.** -/
+theorem comap_pow (I : Y.IdealSheafData) (f : X ⟶ Y) (n : ℕ) :
+    (I ^ n).comap f = I.comap f ^ n := by
+  induction n with
+  | zero => simp [comap_top]
+  | succ n ih => rw [pow_succ, comap_mul, ih, ← pow_succ]
+
+end Products
 
 end AlgebraicGeometry.Scheme.IdealSheafData

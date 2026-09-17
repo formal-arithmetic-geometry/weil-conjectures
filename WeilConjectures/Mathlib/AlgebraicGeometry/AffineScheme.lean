@@ -20,9 +20,16 @@ We also compute the restriction of `X.toSpecΓ` over a basic open `D(r) ⊆ Spec
 it is `Spec` of the localization map `Γ(X, ⊤)[1/r] →+* Γ(X, X.basicOpen r)`, see
 `AlgebraicGeometry.toSpecΓ_resLE_basicOpenIsoSpecAway`.
 
-Finally we record two facts about the prime `AlgebraicGeometry.IsAffineOpen.primeIdealOf x` of a
+We record two facts about the prime `AlgebraicGeometry.IsAffineOpen.primeIdealOf x` of a
 point `x` of an affine open: distinct points have distinct primes, and along a morphism the prime
 of the image of `x` is the contraction of the prime of `x`.
+
+`AlgebraicGeometry.appLE_top_specMap_fromSpec` computes the sections of a morphism
+`Spec R ⟶ X` that factors as `Spec ψ` followed by the canonical morphism `Spec Γ(X, U) ⟶ X` of
+an affine open `U`.
+
+Finally, `AlgebraicGeometry.exists_affineOpens_le_preimage` says that the affine opens lying
+over an affine open of the target cover the source.
 -/
 
 @[expose] public section
@@ -86,5 +93,33 @@ lemma IsAffineOpen.under_primeIdealOf (f : X ⟶ Y) {U : Y.Opens} (hU : IsAffine
   have h := IsAffineOpen.comap_primeIdealOf_appLE (f := f) U hU (f ⁻¹ᵁ U) hU' le_rfl hx
   rw [← f.app_eq_appLE] at h
   exact congrArg PrimeSpectrum.asIdeal h
+
+/-- Every point of `Spec R` lies over `U` for a morphism `Spec R ⟶ X` that factors through the
+canonical morphism `Spec Γ(X, U) ⟶ X` of an affine open `U`. -/
+lemma top_le_preimage_specMap_fromSpec {R : CommRingCat.{u}} (U : X.affineOpens)
+    (ψ : Γ(X, U.1) ⟶ R) : (⊤ : (Spec R).Opens) ≤ (Spec.map ψ ≫ U.2.fromSpec) ⁻¹ᵁ U.1 := by
+  rw [Scheme.Hom.comp_preimage, IsAffineOpen.fromSpec_preimage_self]
+  simp
+
+/-- A morphism `Spec R ⟶ X` that factors as `Spec ψ` followed by the canonical morphism
+`Spec Γ(X, U) ⟶ X` of an affine open `U` induces `ψ` on sections over `U`. -/
+lemma appLE_top_specMap_fromSpec {R : CommRingCat.{u}} (U : X.affineOpens)
+    (ψ : Γ(X, U.1) ⟶ R) (e : (⊤ : (Spec R).Opens) ≤ (Spec.map ψ ≫ U.2.fromSpec) ⁻¹ᵁ U.1) :
+    (Spec.map ψ ≫ U.2.fromSpec).appLE U.1 ⊤ e = ψ ≫ (Scheme.ΓSpecIso R).inv := by
+  apply Spec.map_injective
+  rw [← cancel_mono U.2.fromSpec,
+    IsAffineOpen.SpecMap_appLE_fromSpec _ U.2 (isAffineOpen_top (Spec R)),
+    IsAffineOpen.fromSpec_top, Scheme.isoSpec_Spec_inv, Spec.map_comp, Category.assoc]
+
+/-- Every point of `Y` lies in an affine open contained in the preimage of an affine
+open of `X`. -/
+lemma exists_affineOpens_le_preimage (f : Y ⟶ X) (y : Y) :
+    ∃ (V : X.affineOpens) (W : Y.affineOpens), W.1 ≤ f ⁻¹ᵁ V.1 ∧ y ∈ W.1 := by
+  have hfy : f y ∈ (⊤ : X.Opens) := trivial
+  rw [← iSup_affineOpens_eq_top X] at hfy
+  obtain ⟨V, hV⟩ := TopologicalSpace.Opens.mem_iSup.mp hfy
+  obtain ⟨-, ⟨W₀, hW₀, rfl⟩, hyW₀, hsub⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
+    (show y ∈ ((f ⁻¹ᵁ V.1 : Y.Opens) : Set Y) from hV) (f ⁻¹ᵁ V.1).isOpen
+  exact ⟨V, ⟨W₀, hW₀⟩, fun z hz ↦ hsub hz, hyW₀⟩
 
 end AlgebraicGeometry
