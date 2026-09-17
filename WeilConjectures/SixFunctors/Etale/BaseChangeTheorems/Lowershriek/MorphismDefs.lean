@@ -207,15 +207,14 @@ variable {X Y X' Y' : Scheme.{u}}
 
 noncomputable def Etale.lowerShriekBaseChange (c : Compactification f) (c' : Compactification f')
     (g'' : c'.Z ⟶ c.Z) (isp : IsPullback g' c'.i c.i g'') (sq : CommSq g'' c'.g c.g g) :
-    Rf_!(c)[A]+ ⋙ (g)^*[A].mapDerivedCategoryPlus ⟶
-    (g')^*[A].mapDerivedCategoryPlus ⋙ Rf_!(c')[A]+ :=
+    Rf_!(c)[A]+ ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ Rf_!(c')[A]+ :=
   (Functor.associator _ _ _).hom ≫
-  Functor.whiskerLeft (c.i)_!open[A].mapDerivedCategoryPlus (Etale.baseChange A sq)
+  Functor.whiskerLeft D+((c.i)_!open[A]) (Etale.baseChange A sq)
   ≫ (Functor.associator _ _ _).inv ≫
-  (Functor.whiskerRight (Etale.openImmersionLowerShriekBaseChangeIso A isp).hom R((c').g)_*[A]+)
+  (Functor.whiskerRight (Etale.openImmersionLowerShriekBaseChangeIso A isp).hom R+((c'.g)_*[A]))
   ≫ (Functor.associator _ _ _).hom
 
-attribute [local implicit_reducible] rightDerivedLowerStarPlus
+attribute [local implicit_reducible] Functor.rightDerivedFunctorPlus
   rightDerivedLowerShriekOfCompactificationPlus
 
 set_option linter.tacticCheckInstances true
@@ -223,8 +222,8 @@ lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (c' : Compactific
     (g'' : c'.Z ⟶ c.Z) (isp : IsPullback g' c'.i c.i g'') (sq : CommSq g'' c'.g c.g g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
     (Etale.lowerShriekBaseChange A c c' g'' isp sq).app K =
-      (Etale.baseChange A sq).app ((c.i)_!open[A].mapDerivedCategoryPlus.obj K) ≫
-        R(c'.g)_*[A]+.map ((Etale.openImmersionLowerShriekBaseChangeIso A isp).hom.app K) := by
+      (Etale.baseChange A sq).app (D+((c.i)_!open[A]).obj K) ≫
+        R+((c'.g)_*[A]).map ((Etale.openImmersionLowerShriekBaseChangeIso A isp).hom.app K) := by
   simp only [Etale.lowerShriekBaseChange]
   dsimp only [Functor.comp_obj]
   -- [Functor.associator_hom_app]
