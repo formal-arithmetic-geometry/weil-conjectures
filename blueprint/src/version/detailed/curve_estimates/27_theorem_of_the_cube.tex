@@ -821,17 +821,9 @@ rank one, hence coherent on the noetherian scheme $X\times T$, and a locally
 free sheaf is flat over $X\times T$, hence flat over $T$ because $p_T$ is flat
 by (2).
 
-In Lean, items (2) and (3) are instances: properness, flatness, finite type
-and geometric integrality are stable under base change, and the fibre of a base
-change is the base change of the fibre, so instance search discharges them
-wherever they are used.  Item (1) is
-\texttt{AlgebraicGeometry.isNoetherian\_of\_locallyOfFiniteType}.  Item (4) is
-the only one that needs an argument, and it is two statements:
-\texttt{SheafOfModules.Invertible.isCoherent}, which assembles coherence out of
-local freeness and finite type, and
-\texttt{SheafOfModules.Invertible.flatOver}, which identifies the stalks of a
-line bundle with the local rings of the source and then uses that those are
-flat over the local rings of the base.
+Every item here is an instance in Lean rather than a statement someone has to
+prove; the lemma exists to name the standing facts that the rest of the
+section uses, in the manner of \Cref{prop:av-basic} in \Cref{chap:av-isogeny}.
 \end{proof}
 
 \begin{lemma}[Local normal form of a morphism of line bundles]
@@ -915,12 +907,11 @@ followed by multiplication by a unit, and is therefore an isomorphism.
 \uses{prop:cube-semicontinuity}
 Let $X$ be a proper variety over $k$, let $T$ be a scheme of finite type over
 $k$ and let $L$ be a line bundle on $X\times T$ whose restriction $L_t$ to
-$X_t$ is trivial for every \emph{closed point} $t$ of $T$.  Then the function
-$h^0$ of \Cref{prop:cube-semicontinuity}, formed for $p_T\colon X\times T\to T$
-and $F=L$, is constant equal to $1$ on all of $T$, and not only at the closed
-points.
+$X_t$ is trivial for every $t\in T(k)$.  Then the function $h^0$ of
+\Cref{prop:cube-semicontinuity}, formed for $p_T\colon X\times T\to T$ and
+$F=L$, is constant equal to $1$ on all of $T$, and not only at the
+$k$-rational points.
 \end{lemma}
-
 \begin{proof}
 \uses{prop:cube-semicontinuity, lem:cube-nowhere-vanishing,
 lem:cube-projection-proper-flat}
@@ -928,12 +919,9 @@ By \Cref{lem:cube-projection-proper-flat} the morphism $p_T$ is proper and
 $L$ is coherent and flat over $T$, and $T$ is noetherian, so $h^0$ is defined
 and upper semicontinuous by \Cref{prop:cube-semicontinuity}.
 
-For a closed point $t$ of $T$ the fibre $X_t$ is a proper geometrically
-integral $\kappa(t)$-scheme by \Cref{lem:cube-projection-proper-flat}(3) and
-$L_t$ is trivial by hypothesis, so
-$h^0(t)=\dim_{\kappa(t)}\Gamma(X_t,L_t)=1$ by
-\Cref{lem:cube-nowhere-vanishing}.  Thus $h^0$ takes the value $1$ at every
-closed point of $T$.
+For $t\in T(k)$ the fibre is $X$ and $L_t$ is trivial by hypothesis, so
+$h^0(t)=\dim_k\Gamma(X,L_t)=1$ by \Cref{lem:cube-nowhere-vanishing}.  Thus
+$h^0$ takes the value $1$ at every closed point of $T$.
 
 Now let $t\in T$ be arbitrary.  The set $\{h^0\geq2\}$ is closed by
 semicontinuity; if it contained $t$ it would contain the closure of $\{t\}$,
@@ -944,11 +932,8 @@ contains every closed point of $T$; the closed points are dense, so this set
 is all of $T$ and $h^0(t)\geq1$.  Hence $h^0(t)=1$.
 
 Nothing here uses reducedness or irreducibility of $T$: only that $T$ is
-noetherian, that it is a Jacobson scheme, and that its closed points are
-dense.  Nor does the value $1$ play any role: the same argument shows that a
-fibrewise dimension which is constant equal to $n$ on the closed points is
-constant equal to $n$ on all of $T$, and that is the form in which it is
-formalised.
+noetherian, that it is a Jacobson scheme whose closed points are exactly its
+$k$-rational points, and that those are dense.
 \end{proof}
 
 \statusnote{The hypothesis is stated at the closed points of $T$ rather than at
@@ -967,7 +952,7 @@ these three nodes: their Lean proofs consume
 AlgebraicGeometry.Scheme.Modules.isIso_counit_pullbackSnd}
 Let $X$ be a proper variety over $k$, let $T$ be a \emph{reduced} scheme of
 finite type over $k$ and let $L$ be a line bundle on $X\times T$ whose
-restriction to $X_t$ is trivial for every closed point $t$ of $T$.  Then
+restriction to $X_t$ is trivial for every $t\in T(k)$.  Then
 \[
   M:=p_{T*}L
 \]
@@ -1005,9 +990,8 @@ $w\in X\times T$.  Let
 \]
 which is a closed subset of $X\times T$ by \Cref{lem:cube-degeneracy-closed}.
 
-First, $N$ misses every fibre over a closed point.  Indeed, let $t$ be a
-closed point of $T$; then $X_t$ is a proper geometrically integral
-$\kappa(t)$-scheme by \Cref{lem:cube-projection-proper-flat}(3) and $L_t$ is
+First, $N$ misses every fibre over a $k$-rational point.  Indeed, let
+$t\in T(k)$; then $X_t\cong X$ is a proper integral $k$-scheme and $L_t$ is
 trivial by hypothesis, so by \Cref{lem:cube-nowhere-vanishing} the space
 $\Gamma(X_t,L_t)$ is one-dimensional and any basis vector $s$ of it is nowhere
 vanishing on $X_t$.  By the description of the restriction of $\varepsilon$
@@ -1018,8 +1002,8 @@ $w\notin N$.
 
 Second, $p_T$ is a closed map by \Cref{lem:cube-projection-proper-flat}, so
 $p_T(N)$ is a closed subset of $T$.  By the previous paragraph it contains no
-closed point of $T$.  A non-empty closed subset of $T$ contains a closed point
-of $T$, because $T$ is of finite type
+$k$-rational point of $T$, hence no closed point of $T$.  A non-empty closed
+subset of $T$ contains a closed point of $T$, because $T$ is of finite type
 over a field and hence a Jacobson scheme; therefore $p_T(N)=\emptyset$ and
 so $N=\emptyset$.
 
@@ -1028,29 +1012,13 @@ Thus $\varepsilon(w)\neq0$ for every $w\in X\times T$, and
 isomorphism.
 \end{proof}
 
-\begin{remark}[The form that was formalised]
-\label{rem:cube-seesaw-general}
-Nothing in \Cref{lem:cube-h0-constant} or in the proof of
-\Cref{thm:cube-seesaw} uses that the family is a projection.  What is used is
-that $f\colon W\to T$ is proper, that $L$ is a line bundle on $W$ which is
-coherent and flat over $T$, that the fibre of $f$ over a closed point is a
-proper geometrically integral scheme over the residue field, and that $T$ is
-reduced, noetherian and Jacobson.  The Lean development is arranged that way:
-\texttt{finrankFiberSections\_eq\_of\_forall\_closedPoint},
-\texttt{isIso\_counit\_of\_restrictToFiber\_iso} and
-\texttt{nonempty\_iso\_structureModules\_of\_section} are stated for an
-arbitrary such $f$, and the four \texttt{pullbackSnd} declarations named at the
-nodes above are their specialisations to $p_T$, obtained by discharging those
-hypotheses from \Cref{lem:cube-projection-proper-flat}.
-\end{remark}
-
 \begin{corollary}[Seesaw, triviality form]\label{cor:cube-seesaw-trivial}
 \lean{AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_pullbackSnd}
 Let $X$ be a proper variety over $k$, let $T$ be a reduced scheme of finite
 type over $k$ and let $L$ be a line bundle on $X\times T$.  Suppose that
 \begin{enumerate}
-  \item the restriction $L_t$ of $L$ to $X_t$ is trivial for every closed
-  point $t$ of $T$, and
+  \item the restriction $L_t$ of $L$ to $X_t$ is trivial for every
+  $t\in T(k)$, and
   \item the restriction of $L$ to $\{x_0\}\times T$ is trivial for some
   $x_0\in X(k)$.
 \end{enumerate}
@@ -1150,13 +1118,10 @@ so is their intersection.
 
 \begin{remark}[What the base has to satisfy]\label{rem:cube-seesaw-base}
 Only two things are asked of $T$ in \Cref{thm:cube-seesaw}, and irreducibility
-is not one of them.  Finite type over $k$ is used for the Jacobson property
-and for the density of the closed points; this is all that
-\Cref{lem:cube-h0-constant} and the last step of the proof of
-\Cref{thm:cube-seesaw} need.  The identification of the closed points of $T$
-with $T(k)$ is not among them: both statements are arranged at the closed
-points of $T$ from the start, which is what lets them be proved over an
-arbitrary base field.  Reducedness is used once, as a
+is not one of them.  Finite type over $k$ is used for the Jacobson property,
+for the identification of the closed points of $T$ with $T(k)$ and for their
+density; this is all that \Cref{lem:cube-h0-constant} and the last step of the
+proof of \Cref{thm:cube-seesaw} need.  Reducedness is used once, as a
 hypothesis of \Cref{prop:cube-grauert}: over a non-reduced base a constant
 $h^0$ does not force the pushforward to be locally free.  In particular the
 theorem applies to a connected but possibly reducible parameter space, which
