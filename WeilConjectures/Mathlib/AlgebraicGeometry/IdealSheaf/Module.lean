@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # The ideal sheaf of a `Scheme.IdealSheafData` as a sheaf of modules
@@ -54,6 +55,11 @@ sheaf-condition argument that the kernel description gets for free.
   is, the set of germs of sections lying in the ideal, and
   `AlgebraicGeometry.Scheme.IdealSheafData.injective_stalkMap_toModulesι` — the inclusion is
   injective on stalks.
+- `AlgebraicGeometry.Scheme.IdealSheafData.shortExact_toModulesι_toPushforwardSubscheme` —
+  **`0 ⟶ J.toModules ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is a short exact sequence**, so that
+  `(ι_J)_* 𝒪_{V(J)}` is the quotient of `𝒪_X` by the ideal sheaf and a morphism out of `𝒪_X`
+  killing the ideal sheaf descends to it through
+  `AlgebraicGeometry.Scheme.Hom.descPushforwardStructure`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap` — the comparison morphism
   `g^* I ⟶ I'` for a morphism `g` pulling the ideal `I` into the ideal `I'`, together with
   `comapModulesMap_toModulesι` and `eq_comapModulesMap`, which determine it.
@@ -90,10 +96,8 @@ variable {X : Scheme.{u}} (J : X.IdealSheafData)
 immersion `J.subschemeι` of the closed subscheme cut out by `J`. Its kernel is the ideal
 sheaf; see `AlgebraicGeometry.Scheme.IdealSheafData.toModules`. -/
 noncomputable def toPushforwardSubscheme :
-    X.structureModules ⟶
-      (SheafOfModules.pushforward J.subschemeι.toRingCatSheafHom).obj
-        J.subscheme.structureModules :=
-  SheafOfModules.unitToPushforwardObjUnit _
+    X.structureModules ⟶ (Modules.pushforward J.subschemeι).obj J.subscheme.structureModules :=
+  J.subschemeι.toPushforwardStructure
 
 @[simp]
 lemma map_toPushforwardSubscheme (U : X.Opens)
@@ -161,6 +165,29 @@ instance : Mono J.toModulesι := by
 over every open subset, not merely a categorical monomorphism. -/
 lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModulesι.app U) :=
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
+
+/-! ### The pushforward of the structure sheaf of the closed subscheme is the quotient -/
+
+section ShortExact
+
+@[reassoc (attr := simp)]
+lemma toModulesι_comp_toPushforwardSubscheme :
+    J.toModulesι ≫ J.toPushforwardSubscheme = 0 :=
+  kernel.condition _
+
+/-- **`(ι_J)_* 𝒪_{V(J)}` is the quotient of `𝒪_X` by the ideal sheaf of `J`**: the sequence
+```
+0 ⟶ J.toModules ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0
+```
+is a short exact sequence of sheaves of `𝒪_X`-modules. The ideal sheaf is the kernel of the
+comparison morphism by definition, and the comparison morphism is an epimorphism because
+`J.subschemeι` is a closed immersion. -/
+lemma shortExact_toModulesι_toPushforwardSubscheme :
+    (ShortComplex.mk J.toModulesι J.toPushforwardSubscheme
+      J.toModulesι_comp_toPushforwardSubscheme).ShortExact :=
+  J.subschemeι.shortExact_kernelSequence_toPushforwardStructure
+
+end ShortExact
 
 /-! ### The stalks of the ideal sheaf -/
 

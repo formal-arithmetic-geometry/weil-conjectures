@@ -343,6 +343,7 @@ public import WeilConjectures.Mathlib.Topology.Irreducible
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
+public import WeilConjectures.Mathlib.Topology.Sheaves.LocallySurjective
 public import WeilConjectures.Mathlib.Topology.Sheaves.PUnit
 public import WeilConjectures.Mathlib.Topology.Sheaves.Stalks
 public import WeilConjectures.Mathlib.Topology.Sober
