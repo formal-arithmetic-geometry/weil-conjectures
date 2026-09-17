@@ -81,7 +81,7 @@ Steps 1 to 3 of the proof of `prop:cube-formal-triviality`, stated as
 
 universe u
 
-open CategoryTheory Limits Opposite IsLocalRing SheafOfModules
+open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.Modules
 
