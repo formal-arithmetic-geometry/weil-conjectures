@@ -85,7 +85,7 @@ structure `Etale.sheafMonoidalCategory` of the sibling file `Defs`.
 This is Day's reflection theorem applied to the sheafification adjunction
 `presheafToSheaf ⊣ sheafToPresheaf`: the left adjoint is monoidal, the right adjoint is
 fully faithful, and the presheaf category is symmetric monoidal closed. -/
-noncomputable instance Etale.sheafMonoidalClosed :
+noncomputable instance (priority := 2000) Etale.sheafMonoidalClosed :
     MonoidalClosed (Sheaf Y.smallEtaleTopology A) :=
   Monoidal.Reflective.monoidalClosed (sheafificationAdjunction Y.smallEtaleTopology A)
 
