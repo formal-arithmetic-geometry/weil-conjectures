@@ -33,8 +33,6 @@ The proof is chart-local, with the algebraic core the universal property of the
 
 On the scheme side we prove, for a quasi-coherent ideal `I` on `X`:
 
-- `Scheme.IdealSheafData.comap_mul`: inverse images commute with products of ideal
-  sheaves (for arbitrary morphisms);
 - the invertible-ideal lemma kit: local presentations on a basis
   (`IsInvertible.exists_presentation_le`), stability under products, factors of
   products (`IsInvertible.of_mul_left/right`, the "factor of an invertible product
@@ -414,51 +412,6 @@ theorem awayAlgebraMap_mem_nonZeroDivisors_of_mem {a : A} (ha : a ∈ I₀) {s :
 end AffineBlowup
 
 end NonZeroDivisorTransfer
-
-section ComapAffineLocality
-
-/-! ### Multiplicativity of the inverse image ideal sheaf
-
-For an arbitrary morphism `f : Y ⟶ X` and affine opens `W ≤ f ⁻¹ᵁ V`, the pullback
-ideal `(I.comap f)(W)` is the extension of `I(V)` along the section map `f.appLE V W`
-(`Scheme.IdealSheafData.ideal_comap_appLE`); this yields multiplicativity of
-`comap`. -/
-
-variable {Y X : Scheme.{u}}
-
-/-- Every point of `Y` lies in an affine open contained in the preimage of an affine
-open of `X`. -/
-lemma exists_affineOpens_le_preimage (f : Y ⟶ X) (y : Y) :
-    ∃ (V : X.affineOpens) (W : Y.affineOpens), W.1 ≤ f ⁻¹ᵁ V.1 ∧ y ∈ W.1 := by
-  have hfy : f y ∈ (⊤ : X.Opens) := trivial
-  rw [← iSup_affineOpens_eq_top X] at hfy
-  obtain ⟨V, hV⟩ := TopologicalSpace.Opens.mem_iSup.mp hfy
-  obtain ⟨-, ⟨W₀, hW₀, rfl⟩, hyW₀, hsub⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
-    (show y ∈ ((f ⁻¹ᵁ V.1 : Y.Opens) : Set Y) from hV) (f ⁻¹ᵁ V.1).isOpen
-  exact ⟨V, ⟨W₀, hW₀⟩, fun z hz ↦ hsub hz, hyW₀⟩
-
-/-- **Inverse images of ideal sheaves commute with products** (for arbitrary
-morphisms). -/
-theorem Scheme.IdealSheafData.comap_mul (f : Y ⟶ X) (I J : X.IdealSheafData) :
-    (I * J).comap f = I.comap f * J.comap f := by
-  refine Scheme.IdealSheafData.ext_of_iSup_eq_top
-    (ι := {p : X.affineOpens × Y.affineOpens // p.2.1 ≤ f ⁻¹ᵁ p.1.1})
-    (fun p ↦ p.1.2) ?_ ?_
-  · rw [eq_top_iff]
-    intro y _
-    obtain ⟨V, W, hle, hyW⟩ := exists_affineOpens_le_preimage f y
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨(V, W), hle⟩, hyW⟩
-  · rintro ⟨⟨V, W⟩, hle⟩
-    have hmul : (I * J).ideal V = I.ideal V * J.ideal V := by
-      rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
-    have hmul' : (I.comap f * J.comap f).ideal W =
-        (I.comap f).ideal W * (J.comap f).ideal W := by
-      rw [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
-    rw [Scheme.IdealSheafData.ideal_comap_appLE (I * J) f V W hle, hmul, hmul',
-      Ideal.map_mul, Scheme.IdealSheafData.ideal_comap_appLE I f V W hle,
-      Scheme.IdealSheafData.ideal_comap_appLE J f V W hle]
-
-end ComapAffineLocality
 
 section InvertibleKit
 

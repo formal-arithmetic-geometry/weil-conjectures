@@ -37,6 +37,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
+public import WeilConjectures.AlgebraicGeometry.Modules.TrivialityCriterion
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Modules.ZPow
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
@@ -222,7 +223,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Abelian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
@@ -305,6 +305,7 @@ public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.Transcende
 public import WeilConjectures.Mathlib.RingTheory.Binomial
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+public import WeilConjectures.Mathlib.RingTheory.Flat.EquationalCriterion
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
