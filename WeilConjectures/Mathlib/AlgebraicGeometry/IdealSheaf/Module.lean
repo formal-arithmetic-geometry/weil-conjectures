@@ -41,6 +41,8 @@ sheaf-condition argument that the kernel description gets for free.
 - `AlgebraicGeometry.Scheme.IdealSheafData.toModulesι` — its inclusion into `𝒪_X`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.idealOfOpens` — the ideal cut out on an arbitrary
   open subset, extending `J.ideal` off the affine opens.
+- `AlgebraicGeometry.Scheme.IdealSheafData.sectionOfMem` — the section of the ideal sheaf
+  lying over a section of `𝒪_X` that belongs to the ideal.
 
 ## Main results
 
@@ -49,6 +51,14 @@ sheaf-condition argument that the kernel description gets for free.
   the right one.
 - `AlgebraicGeometry.Scheme.IdealSheafData.injective_toModulesι_app` — the inclusion is
   injective on sections over every open, affine or not.
+- `AlgebraicGeometry.Scheme.IdealSheafData.mem_idealOfOpens_iff_forall_affineOpens` — the
+  ideal cut out on an arbitrary open subset is detected on the affine opens it contains, and
+  `AlgebraicGeometry.Scheme.IdealSheafData.map_mem_idealOfOpens` — it is stable under
+  restriction.
+- `AlgebraicGeometry.Scheme.IdealSheafData.mul_eq_zero_of_mem_idealOfOpens` — **two ideal
+  sheaves whose product vanishes annihilate each other on sections**, over an arbitrary open
+  subset; together with `AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker`, which says that a
+  section killed by a quasi-compact morphism lies in its kernel ideal sheaf.
 - `AlgebraicGeometry.Scheme.IdealSheafData.range_stalkMap_toModulesι` and
   `AlgebraicGeometry.Scheme.IdealSheafData.mem_range_stalkMap_toModulesι_iff` — the stalk of
   the ideal sheaf is the set of germs killed by the restriction to the closed subscheme, that

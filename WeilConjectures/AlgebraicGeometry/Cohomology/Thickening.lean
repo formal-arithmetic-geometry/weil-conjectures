@@ -33,10 +33,28 @@ and the lemma that reads off the ladder: an obstruction class whose image in
 `Pic (W ×_T T_{n+1})` is the class of a line bundle trivial on `W'` has trivial
 `W'`-component.
 
+The second half of the file describes the thickening ideal `Iₙ` itself as a module over the
+zeroth infinitesimal neighbourhood. Since `𝔪_t · Iₙ = 0`
+(`AlgebraicGeometry.Scheme.ker_mul_thickeningIdeal_eq_zero`), multiplication by a global
+section `m` of `Iₙ` kills the ideal sheaf of `W ×_T T₀ ↪ W ×_T T_{n+1}` and therefore descends
+to a morphism `(i₀)_* 𝒪_{W ×_T T₀} ⟶ Iₙ`. Taking a family `m : ι → Γ(Iₙ, ⊤)` and using that
+the pushforward is additive assembles these into the comparison morphism
+
+```
+  (i₀)_* (𝒪_{W ×_T T₀} ^ ι) ⟶ Iₙ
+```
+
+which is an isomorphism when the classes of the `m j` form a basis of `Iₙ / 𝔪_t Iₙ` over the
+residue field.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.thickeningH1Map` — the map on deformation classes induced by a
   morphism over `T`.
+- `AlgebraicGeometry.Scheme.pushforwardStructureToThickeningIdeal` — multiplication by a
+  global section of the thickening ideal, as a morphism `(i₀)_* 𝒪_{W ×_T T₀} ⟶ Iₙ`.
+- `AlgebraicGeometry.Scheme.pushforwardFreeToThickeningIdeal` — the comparison morphism
+  `(i₀)_* (𝒪_{W ×_T T₀}^ι) ⟶ Iₙ` attached to a family of global sections of `Iₙ`.
 
 ## Main statements
 
@@ -45,6 +63,9 @@ and the lemma that reads off the ladder: an obstruction class whose image in
 - `AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_surjective` — the hypothesis
   that the previous lemma needs: if the global sections of `W ×_T Tₙ` are the infinitesimal
   ring `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`, then every unit on `W ×_T Tₙ` extends to `W ×_T T_{n+1}`.
+- `AlgebraicGeometry.Scheme.smul_thickeningIdealSection_eq_zero` — a function on
+  `W ×_T T_{n+1}` vanishing on `W ×_T T₀` annihilates the thickening ideal; this is what makes
+  multiplication by a section of `Iₙ` descend to `W ×_T T₀`.
 -/
 
 @[expose] public section

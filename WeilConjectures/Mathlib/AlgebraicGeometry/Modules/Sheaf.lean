@@ -117,6 +117,13 @@ surjectivity over an affine open subset lives.
   modules over itself.
 - `AlgebraicGeometry.Scheme.freeModules`: the free sheaf of `𝒪_X`-modules on a type, that is a
   direct sum of copies of the structure sheaf.
+- `AlgebraicGeometry.Scheme.freeModulesCofan` and
+  `AlgebraicGeometry.Scheme.isColimitFreeModulesCofan`: `X.freeModules ι` is the coproduct of
+  copies of `𝒪ₓ` indexed by `ι`, in the category `X.Modules`.
+- `AlgebraicGeometry.Scheme.Modules.pushforwardFreeDesc`: the morphism
+  `g_* (𝒪_Y^ι) ⟶ P` assembled from a family of morphisms `g_* 𝒪_Y ⟶ P`, with
+  `AlgebraicGeometry.Scheme.Modules.pushforwardFree_hom_ext` and
+  `AlgebraicGeometry.Scheme.Modules.eq_pushforwardFreeDesc` determining it.
 - `AlgebraicGeometry.Scheme.Modules.fiberFunctor`, `AlgebraicGeometry.Scheme.Modules.fiber`: the
   fibre `F(x)` of a sheaf of `𝒪_X`-modules at a point `x`, as a `κ(x)`-vector space, and its
   functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
