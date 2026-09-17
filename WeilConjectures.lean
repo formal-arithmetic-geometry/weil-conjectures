@@ -180,8 +180,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFu
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Adjunctions
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Kernels
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
@@ -302,7 +302,7 @@ public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Quotient.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
-public import WeilConjectures.Mathlib.Logic.Function.Basic
+public import WeilConjectures.Mathlib.Order.KonigLemma
 public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Binomial
