@@ -786,6 +786,10 @@ theorem of the cube will consume, \Cref{cor:cube-seesaw-trivial} and
 
 \begin{lemma}[The projection is a proper flat family]
 \label{lem:cube-projection-proper-flat}
+\lean{AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType,
+SheafOfModules.Invertible.isCoherent,
+SheafOfModules.Invertible.flatOver}
+\leanok
 Let $X$ be a proper variety over $k$ and let $T$ be a noetherian $k$-scheme.
 Then:
 \begin{enumerate}
@@ -801,6 +805,7 @@ Then:
 \end{enumerate}
 \end{lemma}
 \begin{proof}
+\leanok
 For (1): $X\times T\to T$ is of finite type and $T$ is noetherian, so
 $X\times T$ is noetherian; finite type over $k$ is stable under products.  For
 (2): $p_T$ is the base change of $X\to\Spec k$ along $T\to\Spec k$, and
@@ -898,6 +903,7 @@ followed by multiplication by a unit, and is therefore an isomorphism.
 \end{proof}
 
 \begin{lemma}[$h^0$ is identically one]\label{lem:cube-h0-constant}
+\lean{AlgebraicGeometry.Scheme.Modules.finrankFiberSections_pullbackSnd_eq_one}
 \uses{prop:cube-semicontinuity}
 Let $X$ be a proper variety over $k$, let $T$ be a scheme of finite type over
 $k$ and let $L$ be a line bundle on $X\times T$ whose restriction $L_t$ to
@@ -930,7 +936,20 @@ noetherian, that it is a Jacobson scheme whose closed points are exactly its
 $k$-rational points, and that those are dense.
 \end{proof}
 
+\statusnote{The hypothesis is stated at the closed points of $T$ rather than at
+$T(k)$.  Over the algebraically closed $k$ of this chapter the two sets
+coincide, but the closed-point form is the one the proof uses and the one that
+holds over an arbitrary base field, and it is the form that was formalised.
+The Lean statement is correspondingly free of any algebraic closedness
+hypothesis; the same applies to \Cref{thm:cube-seesaw} and
+\Cref{cor:cube-seesaw-trivial}.  No \texttt{\textbackslash leanok} is claimed for
+these three nodes: their Lean proofs consume
+\Cref{prop:cube-semicontinuity} and \Cref{prop:cube-grauert}, which are
+\texttt{sorry} by design.}
+
 \begin{theorem}[Seesaw theorem]\label{thm:cube-seesaw}
+\lean{AlgebraicGeometry.Scheme.Modules.invertible_pushforward_pullbackSnd,
+AlgebraicGeometry.Scheme.Modules.isIso_counit_pullbackSnd}
 Let $X$ be a proper variety over $k$, let $T$ be a \emph{reduced} scheme of
 finite type over $k$ and let $L$ be a line bundle on $X\times T$ whose
 restriction to $X_t$ is trivial for every $t\in T(k)$.  Then
@@ -994,6 +1013,7 @@ isomorphism.
 \end{proof}
 
 \begin{corollary}[Seesaw, triviality form]\label{cor:cube-seesaw-trivial}
+\lean{AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_pullbackSnd}
 Let $X$ be a proper variety over $k$, let $T$ be a reduced scheme of finite
 type over $k$ and let $L$ be a line bundle on $X\times T$.  Suppose that
 \begin{enumerate}
