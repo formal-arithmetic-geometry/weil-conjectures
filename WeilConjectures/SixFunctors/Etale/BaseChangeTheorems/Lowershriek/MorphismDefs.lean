@@ -214,8 +214,7 @@ noncomputable def Etale.lowerShriekBaseChange (c : Compactification f) (c' : Com
   (Functor.whiskerRight (Etale.openImmersionLowerShriekBaseChangeIso A isp).hom R+((c'.g)_*[A]))
   ≫ (Functor.associator _ _ _).hom
 
-attribute [local implicit_reducible] Functor.rightDerivedFunctorPlus
-  rightDerivedLowerShriekOfCompactificationPlus
+attribute [local implicit_reducible] rightDerivedLowerShriekOfCompactificationPlus
 
 set_option linter.tacticCheckInstances true
 lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (c' : Compactification f')
@@ -224,11 +223,9 @@ lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (c' : Compactific
     (Etale.lowerShriekBaseChange A c c' g'' isp sq).app K =
       (Etale.baseChange A sq).app (D+((c.i)_!open[A]).obj K) ≫
         R+((c'.g)_*[A]).map ((Etale.openImmersionLowerShriekBaseChangeIso A isp).hom.app K) := by
-  simp only [Etale.lowerShriekBaseChange]
-  dsimp only [Functor.comp_obj]
-  -- [Functor.associator_hom_app]
-  -- [Functor.whiskerLeft_app]
-  -- [Functor.whiskerRight_app]
-  sorry
+  simp only [Functor.comp_obj, lowerShriekBaseChange, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app, Category.comp_id,
+    Category.id_comp]
+  exact Category.id_comp _
 
 end AlgebraicGeometry
