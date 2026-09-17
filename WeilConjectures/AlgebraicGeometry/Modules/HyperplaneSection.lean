@@ -734,7 +734,7 @@ theorem exists_shortExact_supportDim_add_one_le (k : Type u) [Field k] [Infinite
   obtain ⟨s, hs⟩ := exists_forall_associatedPoints_not_vanishesAt_of_invertible k F hL
   obtain ⟨G, hG, u, v, hw, hSE, hGF, hmin⟩ :=
     exists_shortExact_tensor_of_forall_not_vanishesAt hL F s hs
-  have := hG
+  have : G.IsCoherent := hG
   exact ⟨G, hG, u, v, hw, hSE,
     supportDim_add_one_le_supportDim_of_forall_minimal hGF fun x hx hmin' ↦
       hmin x hx fun y hy hyx ↦ hmin' y hy hyx⟩
