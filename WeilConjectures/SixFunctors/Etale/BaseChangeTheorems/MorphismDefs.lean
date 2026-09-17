@@ -96,7 +96,6 @@ variable {C₁ C₂ C₃ C₃' C₄ C₅ : Type*} [Category* C₁] [Category* C�
 `(R ⋙ G₁) ⋙ (G₂ ⋙ R') ≅ (R ⋙ G₃) ⋙ (G₄ ⋙ R')` obtained by whiskering `θ` and
 reassociating. Its component at `K` is `R'.mapIso (θ.app (R.obj K))`, see
 `Functor.squareTransport_app`. -/
-@[no_expose]
 def squareTransport (R : C₁ ⥤ C₂) (R' : C₄ ⥤ C₅) (θ : G₁ ⋙ G₂ ≅ G₃ ⋙ G₄) :
     (R ⋙ G₁) ⋙ (G₂ ⋙ R') ≅ (R ⋙ G₃) ⋙ (G₄ ⋙ R') :=
   associator R G₁ (G₂ ⋙ R') ≪≫ isoWhiskerLeft R
