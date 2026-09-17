@@ -36,7 +36,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackConstant
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
-public import WeilConjectures.AlgebraicGeometry.Modules.TensorExact
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Modules.ZPow

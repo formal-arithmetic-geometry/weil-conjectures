@@ -1447,34 +1447,25 @@ instance isCoherent_pushforward_of_isClosedImmersion (f : X ⟶ Y) [IsClosedImme
     (P : X.Modules)
     [P.IsCoherent] : ((pushforward f).obj P).IsCoherent where
 
-end Scheme.Modules
-
-namespace Scheme.Modules
-
-section Sections
-
-variable {X : Scheme.{u}}
-
 set_option backward.isDefEq.respectTransparency false in
 /-- **The sections of a coherent sheaf of modules over an affine open form a finite module**
-over the sections of the structure sheaf there.
-
-This is what "coherent" is expected to mean on an affine chart, and is the hypothesis that
-`AlgebraicGeometry.Scheme.Modules.finite_associatedPoints` and its relatives carry explicitly. -/
+over the sections of the structure sheaf there. -/
 theorem finite_sections (M : X.Modules) [M.IsCoherent] (V : X.affineOpens) :
     Module.Finite Γ(X, V.1) Γ(M, V.1) := by
   have hV := V.2
-  have him : hV.fromSpec ''ᵁ ⊤ = V.1 := by ext y; simp
-  have hq : (M.restrict hV.fromSpec).IsQuasicoherent := inferInstance
-  have hft : (M.restrict hV.fromSpec).IsFiniteType := inferInstance
+  have him : hV.fromSpec ''ᵁ ⊤ = V.1 := by
+    ext y
+    simp
   have hcoh : (M.restrict hV.fromSpec).IsCoherent :=
-    (SheafOfModules.isCoherent_iff (M.restrict hV.fromSpec)).mpr ⟨hq, hft⟩
+    (SheafOfModules.isCoherent_iff (M.restrict hV.fromSpec)).mpr ⟨inferInstance, inferInstance⟩
   have : Module.Finite Γ(X, V.1) Γ(M.restrict hV.fromSpec, ⊤) :=
     (Scheme.Modules.isCoherent_iff (M.restrict hV.fromSpec)).mp hcoh
   have h := finite_sections_of_finite_restrict' hV.fromSpec M
   rwa [him] at h
 
-end Sections
+end Scheme.Modules
+
+namespace Scheme.Modules
 
 section FiberFree
 

@@ -185,9 +185,8 @@ theorem mem_support_iff_mem_module_support (x : U) :
 include hU in
 /-- **A coherent sheaf on a Noetherian affine open has finitely many associated points there.**
 
-Coherence enters through the hypothesis `Module.Finite Γ(X, U) Γ(F, U)`: that a sheaf of finite
-type has finitely generated sections over an affine open is not yet available, so it is taken as
-a hypothesis here. -/
+Coherence enters through the hypothesis `Module.Finite Γ(X, U) Γ(F, U)`, which for a coherent
+sheaf is `AlgebraicGeometry.Scheme.Modules.finite_sections`. -/
 theorem finite_associatedPoints_inter [IsNoetherianRing Γ(X, U)]
     [Module.Finite Γ(X, U) Γ(F, U)] : (F.associatedPoints ∩ (U : Set X)).Finite := by
   have hsub : (fun x : U ↦ (hU.primeIdealOf x).asIdeal) '' {x : U | F.IsAssociatedPoint x.1} ⊆
@@ -287,44 +286,9 @@ theorem isSMulRegular_iff_associatedPoints_subset_basicOpen [IsNoetherianRing Γ
 
 end Affine
 
-set_option backward.isDefEq.respectTransparency false in
-/-- **The support of a coherent sheaf of modules is closed.**
-
-On an affine open `U` the support meets `U` in the support of the `Γ(X, U)`-module `Γ(F, U)`,
-which is the zero locus of its annihilator because that module is finite
-(`Module.support_eq_zeroLocus`); closedness is local, and the affine opens cover `X`. -/
-theorem isClosed_support [F.IsCoherent] : IsClosed F.support := by
-  rw [← isOpen_compl_iff, isOpen_iff_forall_mem_open]
-  intro x hx
-  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
-    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
-  have : Module.Finite Γ(X, U) Γ(F, U) := finite_sections F ⟨U, hU⟩
-  have hclosed : IsClosed (Module.support Γ(X, U) Γ(F, U)) := by
-    rw [Module.support_eq_zeroLocus]
-    exact PrimeSpectrum.isClosed_zeroLocus _
-  have hinj : Function.Injective hU.fromSpec.base := hU.fromSpec.isOpenEmbedding.injective
-  refine ⟨hU.fromSpec.base '' (Module.support Γ(X, U) Γ(F, U))ᶜ, ?_, ?_, ?_⟩
-  · rintro _ ⟨p, hp, rfl⟩
-    have hmem : hU.fromSpec p ∈ U := by
-      have hr : hU.fromSpec p ∈ Set.range hU.fromSpec.base := Set.mem_range_self _
-      rwa [hU.range_fromSpec] at hr
-    have hpio : hU.primeIdealOf ⟨hU.fromSpec p, hmem⟩ = p :=
-      hinj (hU.fromSpec_primeIdealOf ⟨_, hmem⟩)
-    simp only [Set.mem_compl_iff]
-    rw [mem_support_iff_mem_module_support F hU ⟨_, hmem⟩, hpio]
-    exact hp
-  · exact hU.fromSpec.isOpenEmbedding.isOpenMap _ hclosed.isOpen_compl
-  · refine ⟨hU.primeIdealOf ⟨x, hxU⟩, ?_, hU.fromSpec_primeIdealOf ⟨x, hxU⟩⟩
-    simpa [← mem_support_iff_mem_module_support F hU ⟨x, hxU⟩] using hx
-
 /-- **A coherent sheaf on a quasi-compact locally Noetherian scheme has finitely many
-associated points.**
-
-As in `AlgebraicGeometry.Scheme.Modules.finite_associatedPoints_inter`, coherence enters through
-the hypothesis that the sections over each affine open form a finite module; that this follows
-from `SheafOfModules.IsFiniteType` is not yet available. -/
-theorem finite_associatedPoints [CompactSpace X] [IsLocallyNoetherian X] [F.IsQuasicoherent]
-    (hfin : ∀ V : X.affineOpens, Module.Finite Γ(X, V.1) Γ(F, V.1)) :
+associated points.** -/
+theorem finite_associatedPoints [CompactSpace X] [IsLocallyNoetherian X] [F.IsCoherent] :
     F.associatedPoints.Finite := by
   have hcov : (Set.univ : Set X) ⊆ ⋃ V : X.affineOpens, (V.1 : Set X) := by
     intro x _
@@ -336,7 +300,7 @@ theorem finite_associatedPoints [CompactSpace X] [IsLocallyNoetherian X] [F.IsQu
   have hfinite : ∀ V ∈ s, (F.associatedPoints ∩ (V.1 : Set X)).Finite := by
     intro V _
     have : IsNoetherianRing Γ(X, V.1) := IsLocallyNoetherian.component_noetherian V
-    have : Module.Finite Γ(X, V.1) Γ(F, V.1) := hfin V
+    have : Module.Finite Γ(X, V.1) Γ(F, V.1) := finite_sections F V
     exact finite_associatedPoints_inter F V.2
   refine (s.finite_toSet.biUnion hfinite).subset fun x hx ↦ ?_
   obtain ⟨V, hV, hxV⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))

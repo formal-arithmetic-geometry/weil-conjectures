@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.Dimension
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
 
@@ -64,12 +66,18 @@ vanishes at a point exactly where `g` does.
   associated point of `F`.
 - `AlgebraicGeometry.Scheme.Modules.exists_shortExact_tensor_of_forall_not_vanishesAt`: **the
   hyperplane exact sequence**, with the support conditions on its cokernel.
+- `AlgebraicGeometry.Scheme.Modules.exists_shortExact_supportDim_add_one_le`:
+  **`lem:deg-general-hyperplane`**, the hyperplane exact sequence attached to a globally
+  generated line bundle on a scheme over an infinite field, with the drop of the dimension of
+  the support.
 
 ## Blueprint
 
-This file contributes the second half of `lem:deg-general-hyperplane` of
-`curve_estimates/28_degree_of_the_isogeny.tex`; the genericity half, producing a section that
-avoids the associated points, is `WeilConjectures/AlgebraicGeometry/Modules/Vanishing.lean`.
+This file contributes `lem:deg-general-hyperplane` of
+`curve_estimates/28_degree_of_the_isogeny.tex`, assembling it from the genericity half — the
+production of a section avoiding the associated points, which is
+`WeilConjectures/AlgebraicGeometry/Modules/Vanishing.lean` — and the exact sequence proved
+here.
 
 ## TODO
 
@@ -669,31 +677,31 @@ theorem mono_mulSection_iff [IsLocallyNoetherian X] {L : X.Modules} (hL : L.Inve
     mono_mulSection_of_forall_not_vanishesAt hL F s⟩
 
 /-- **The hyperplane exact sequence.** Let `F` be a coherent sheaf on a locally Noetherian
-scheme `X` — coherence entering, as everywhere in this development, through the hypothesis that
-the sections of `F` over each affine open form a finite module — and let `L` be an invertible
-sheaf with a global section `s` vanishing at no associated point of `F`. Then there is a short
-exact sequence
+scheme `X` and let `L` be an invertible sheaf with a global section `s` vanishing at no
+associated point of `F`. Then there is a short exact sequence
 
 ```
 0 ⟶ F ⟶ F ⊗ L ⟶ G ⟶ 0
 ```
 
-in which the first map is multiplication by `s`, the support of `G` is contained in the support
-of `F`, and `G` is not supported at any generic point of an irreducible component of the support
-of `F` — that is, at any point of the support of `F` to which no other point of the support
-specialises.
+in which `G` is coherent, the first map is multiplication by `s`, the support of `G` is
+contained in the support of `F`, and `G` is not supported at any generic point of an irreducible
+component of the support of `F` — that is, at any point of the support of `F` to which no other
+point of the support specialises.
 
-This is `lem:deg-general-hyperplane` in the form consumed by Snapper's induction: the sequence
-is the one along which the Euler characteristic is additive, and the last condition is what makes
-the support of `G` strictly smaller than that of `F`. -/
+This is the form consumed by `exists_shortExact_supportDim_add_one_le` below: the sequence is
+the one along which the Euler characteristic is additive, and the last condition is what makes
+the dimension of the support of `G` drop. -/
 theorem exists_shortExact_tensor_of_forall_not_vanishesAt [IsLocallyNoetherian X]
-    {L : X.Modules} (hL : L.Invertible) (F : X.Modules) [F.IsQuasicoherent]
-    (hFfin : ∀ V : X.affineOpens, Module.Finite Γ(X, V.1) Γ(F, V.1)) (s : Γ(L, ⊤))
+    {L : X.Modules} (hL : L.Invertible) (F : X.Modules) [F.IsCoherent] (s : Γ(L, ⊤))
     (hs : ∀ x ∈ F.associatedPoints, ¬ L.VanishesAt s x) :
-    ∃ (G : X.Modules) (u : F ⟶ F ⊗ L) (v : F ⊗ L ⟶ G) (hw : u ≫ v = 0),
+    ∃ (G : X.Modules) (_ : G.IsCoherent) (u : F ⟶ F ⊗ L) (v : F ⊗ L ⟶ G) (hw : u ≫ v = 0),
       (ShortComplex.mk u v hw).ShortExact ∧ G.support ⊆ F.support ∧
         ∀ x ∈ F.support, (∀ y : X, y ∈ F.support → y ⤳ x → y = x) → x ∉ G.support := by
-  refine ⟨cokernel (mulSection F s), mulSection F s, cokernel.π _, cokernel.condition _,
+  have hFL : (F ⊗ L).IsCoherent := isCoherent_tensorObj_of_invertible F hL
+  refine ⟨cokernel (mulSection F s),
+    isCoherent_cokernel (mulSection F s) inferInstance hFL,
+    mulSection F s, cokernel.π _, cokernel.condition _,
     { exact := ShortComplex.exact_cokernel _
       mono_f := mono_mulSection_of_forall_not_vanishesAt hL F s hs
       epi_g := inferInstance },
@@ -703,8 +711,32 @@ theorem exists_shortExact_tensor_of_forall_not_vanishesAt [IsLocallyNoetherian X
       X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
     exact ⟨U, hU, hxU⟩
   have hnoeth : IsNoetherianRing Γ(X, U) := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
-  have hfin : Module.Finite Γ(X, U) Γ(F, U) := hFfin ⟨U, hU⟩
+  have hfin : Module.Finite Γ(X, U) Γ(F, U) := finite_sections F ⟨U, hU⟩
   exact notMem_support_cokernel_mulSection hL F s
     (hs x (isAssociatedPoint_of_minimal_mem_support F hU ⟨x, hxU⟩ hx hmin))
+
+/-- **`lem:deg-general-hyperplane`: a hyperplane section avoiding the associated points.** Let
+`X` be a quasi-compact locally Noetherian scheme over an infinite field `k`, let `F` be a
+coherent sheaf of `𝒪ₓ`-modules and let `L` be a globally generated line bundle on `X` — a very
+ample one, in the application. Then there is a short exact sequence
+
+```
+0 ⟶ F ⟶ F ⊗ L ⟶ G ⟶ 0
+```
+
+whose first map is multiplication by a global section of `L`, with `G` coherent and
+`dim G + 1 ≤ dim F`. -/
+theorem exists_shortExact_supportDim_add_one_le (k : Type u) [Field k] [Infinite k]
+    [X.Over (Spec (.of k))] [CompactSpace X] [IsLocallyNoetherian X] (F : X.Modules)
+    [F.IsCoherent] {L : X.Modules} (hL : L.Invertible) [L.IsGloballyGenerated] :
+    ∃ (G : X.Modules) (_ : G.IsCoherent) (u : F ⟶ F ⊗ L) (v : F ⊗ L ⟶ G) (hw : u ≫ v = 0),
+      (ShortComplex.mk u v hw).ShortExact ∧ G.supportDim + 1 ≤ F.supportDim := by
+  obtain ⟨s, hs⟩ := exists_forall_associatedPoints_not_vanishesAt_of_invertible k F hL
+  obtain ⟨G, hG, u, v, hw, hSE, hGF, hmin⟩ :=
+    exists_shortExact_tensor_of_forall_not_vanishesAt hL F s hs
+  have := hG
+  exact ⟨G, hG, u, v, hw, hSE,
+    supportDim_add_one_le_supportDim_of_forall_minimal hGF fun x hx hmin' ↦
+      hmin x hx fun y hy hyx ↦ hmin' y hy hyx⟩
 
 end AlgebraicGeometry.Scheme.Modules

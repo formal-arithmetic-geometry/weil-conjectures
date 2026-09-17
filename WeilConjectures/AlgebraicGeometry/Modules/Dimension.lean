@@ -45,13 +45,14 @@ itself is free of hypotheses on the scheme.
 
 - `AlgebraicGeometry.Scheme.Modules.support_eq_empty_iff_isZero`: a sheaf of modules has empty
   support if and only if it is a zero object.
+- `AlgebraicGeometry.Scheme.Modules.isClosed_support`: the support of a coherent sheaf of
+  modules is closed.
 - `AlgebraicGeometry.Scheme.Modules.supportDim_eq_bot_iff`: `dim F = ⊥` if and only if `F` is a
   zero object. This is the base case of the induction.
 - `AlgebraicGeometry.Scheme.Modules.supportDim_add_one_le_supportDim_of_forall_minimal` and its
   strict form `AlgebraicGeometry.Scheme.Modules.supportDim_lt_supportDim_of_forall_minimal`: if
-  `Supp G` is a closed subset of the closed set `Supp F` containing no point of `Supp F`
-  minimal for specialization, then `dim G + 1 ≤ dim F`, and `dim G < dim F` when `dim F ≠ ⊤`.
-  This is the inductive step.
+  `Supp G` is a subset of `Supp F` containing no point of `Supp F` minimal for specialization,
+  then `dim G + 1 ≤ dim F`, and `dim G < dim F` when `dim F ≠ ⊤`. This is the inductive step.
 
 ## Blueprint
 
@@ -104,6 +105,34 @@ theorem support_eq_empty_iff_isZero : F.support = ∅ ↔ IsZero F := by
     have := hsec V
     rw [Subsingleton.elim s 0, Subsingleton.elim t 0, map_zero, map_zero]
 
+set_option backward.isDefEq.respectTransparency false in
+/-- **The support of a coherent sheaf of modules is closed.** -/
+theorem isClosed_support [F.IsCoherent] : IsClosed F.support := by
+  -- on an affine open `U` the support meets `U` in the support of the `Γ(X, U)`-module
+  -- `Γ(F, U)`, which is the zero locus of its annihilator because that module is finite
+  rw [← isOpen_compl_iff, isOpen_iff_forall_mem_open]
+  intro x hx
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  have : Module.Finite Γ(X, U) Γ(F, U) := finite_sections F ⟨U, hU⟩
+  have hclosed : IsClosed (Module.support Γ(X, U) Γ(F, U)) := by
+    rw [Module.support_eq_zeroLocus]
+    exact PrimeSpectrum.isClosed_zeroLocus _
+  have hinj : Function.Injective hU.fromSpec.base := hU.fromSpec.isOpenEmbedding.injective
+  refine ⟨hU.fromSpec.base '' (Module.support Γ(X, U) Γ(F, U))ᶜ, ?_, ?_, ?_⟩
+  · rintro _ ⟨p, hp, rfl⟩
+    have hmem : hU.fromSpec p ∈ U := by
+      have hr : hU.fromSpec p ∈ Set.range hU.fromSpec.base := Set.mem_range_self _
+      rwa [hU.range_fromSpec] at hr
+    have hpio : hU.primeIdealOf ⟨hU.fromSpec p, hmem⟩ = p :=
+      hinj (hU.fromSpec_primeIdealOf ⟨_, hmem⟩)
+    simp only [Set.mem_compl_iff]
+    rw [mem_support_iff_mem_module_support F hU ⟨_, hmem⟩, hpio]
+    exact hp
+  · exact hU.fromSpec.isOpenEmbedding.isOpenMap _ hclosed.isOpen_compl
+  · refine ⟨hU.primeIdealOf ⟨x, hxU⟩, ?_, hU.fromSpec_primeIdealOf ⟨x, hxU⟩⟩
+    simpa [← mem_support_iff_mem_module_support F hU ⟨x, hxU⟩] using hx
+
 /-- The dimension of a sheaf of modules `F`: the Krull dimension of its support
 `{x | F_x ≠ 0}`, for the topology induced from the underlying space of the scheme. -/
 noncomputable def supportDim : WithBot ℕ∞ := topologicalKrullDim F.support
@@ -143,27 +172,34 @@ theorem supportDim_lt_supportDim_of_forall_maximal {G : X.Modules}
     G.supportDim < F.supportDim :=
   topologicalKrullDim_lt_of_forall_maximal hGF (hG.preimage continuous_subtype_val) hFne hfin h
 
-/-- **The inductive step of an induction on the dimension of a sheaf of modules**: if `Supp F`
-is closed and `Supp G` is a closed subset of it containing no point of `Supp F` minimal for
-specialization — that is, no generic point of an irreducible component of `Supp F` — then
-`dim G + 1 ≤ dim F`. -/
-theorem supportDim_add_one_le_supportDim_of_forall_minimal {G : X.Modules}
-    (hF : IsClosed F.support) (hGF : G.support ⊆ F.support) (hG : IsClosed G.support)
+/-- **The inductive step of an induction on the dimension of a sheaf of modules**: if `Supp G`
+is a subset of `Supp F` containing no point of `Supp F` minimal for specialization — that is,
+no generic point of an irreducible component of `Supp F` — then `dim G + 1 ≤ dim F`.
+
+Closedness of the two supports, which the topological statement
+`supportDim_add_one_le_supportDim_of_forall_maximal` takes as a hypothesis, is automatic for
+coherent sheaves by `AlgebraicGeometry.Scheme.Modules.isClosed_support`. -/
+theorem supportDim_add_one_le_supportDim_of_forall_minimal [F.IsCoherent] {G : X.Modules}
+    [G.IsCoherent] (hGF : G.support ⊆ F.support)
     (h : ∀ x ∈ F.support, (∀ y ∈ F.support, y ⤳ x → y = x) → x ∉ G.support) :
     G.supportDim + 1 ≤ F.supportDim := by
-  refine supportDim_add_one_le_supportDim_of_forall_maximal hGF hG fun T hT hTG ↦ ?_
-  obtain ⟨x, hxT, hxmin⟩ := exists_mem_minimal_specializes_of_maximal_isIrreducible hF hT
+  refine supportDim_add_one_le_supportDim_of_forall_maximal hGF (isClosed_support G)
+    fun T hT hTG ↦ ?_
+  obtain ⟨x, hxT, hxmin⟩ :=
+    exists_mem_minimal_specializes_of_maximal_isIrreducible (isClosed_support F) hT
   exact h x (hT.1.2 hxT) hxmin (hTG hxT)
 
 /-- The strict form of `supportDim_add_one_le_supportDim_of_forall_minimal`, for a sheaf `F`
 with nonempty support of finite dimension. -/
-theorem supportDim_lt_supportDim_of_forall_minimal {G : X.Modules} (hF : IsClosed F.support)
-    (hGF : G.support ⊆ F.support) (hG : IsClosed G.support) (hFne : F.support.Nonempty)
+theorem supportDim_lt_supportDim_of_forall_minimal [F.IsCoherent] {G : X.Modules}
+    [G.IsCoherent] (hGF : G.support ⊆ F.support) (hFne : F.support.Nonempty)
     (hfin : F.supportDim ≠ ⊤)
     (h : ∀ x ∈ F.support, (∀ y ∈ F.support, y ⤳ x → y = x) → x ∉ G.support) :
     G.supportDim < F.supportDim := by
-  refine supportDim_lt_supportDim_of_forall_maximal hGF hG hFne hfin fun T hT hTG ↦ ?_
-  obtain ⟨x, hxT, hxmin⟩ := exists_mem_minimal_specializes_of_maximal_isIrreducible hF hT
+  refine supportDim_lt_supportDim_of_forall_maximal hGF (isClosed_support G) hFne hfin
+    fun T hT hTG ↦ ?_
+  obtain ⟨x, hxT, hxmin⟩ :=
+    exists_mem_minimal_specializes_of_maximal_isIrreducible (isClosed_support F) hT
   exact h x (hT.1.2 hxT) hxmin (hTG hxT)
 
 end AlgebraicGeometry.Scheme.Modules

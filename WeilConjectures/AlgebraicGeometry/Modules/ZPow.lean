@@ -32,8 +32,11 @@ families, negating a block, permuting the factors — are all instances of
 `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff` applied to an identity between products in the
 Picard group, and none of them requires an induction on `r`.
 
-Not here, and needed before Snapper's theorem can be proved: tensoring a short exact sequence of
-sheaves of modules by an invertible one keeps it exact.
+Tensoring a short exact sequence of sheaves of modules by an invertible one keeps it exact,
+which is the other thing Snapper's induction needs: this is
+`SheafOfModules.Invertible.isEquivalence_tensorRight` of
+`WeilConjectures.AlgebraicGeometry.Modules.Picard` together with
+`CategoryTheory.ShortComplex.ShortExact.map_of_exact`.
 
 ## Main definitions
 
@@ -47,6 +50,9 @@ sheaves of modules by an invertible one keeps it exact.
 - `AlgebraicGeometry.Scheme.Modules.invertible_zpowProd`: the twisting factor is invertible, and
   `AlgebraicGeometry.Scheme.Pic.mk_zpowProd`: its class in the Picard group is
   `∏ j, Pic.mk (L j) (hL j) ^ m j`.
+- `AlgebraicGeometry.Scheme.Pic.mk_zpowProd_add_single` and
+  `AlgebraicGeometry.Scheme.Pic.mk_zpowProd_append`: the two comparisons Snapper's proof makes,
+  bumping one exponent and concatenating two families.
 - `AlgebraicGeometry.Scheme.Modules.isCoherent_tensorZPow`: **the sheaf
   `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` is coherent** when `F` is.
 -/
@@ -109,6 +115,48 @@ theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd :
       (fun j ↦ m j.castSucc)
     rw [Fin.prod_univ_castSucc, ← ih, ← Pic.mk_zpow]
     exact Pic.mk_tensorObj
+
+/-- **Bumping one exponent of the twisting factor** multiplies its class in the Picard group by
+the class of the corresponding line bundle. -/
+theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_add_single (L : Fin r → X.Modules)
+    (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) (j : Fin r) :
+    Pic.mk (zpowProd L hL (m + Pi.single j 1)) (invertible_zpowProd L hL _) =
+      Pic.mk (L j) (hL j) * Pic.mk (zpowProd L hL m) (invertible_zpowProd L hL m) := by
+  have hsingle : ∏ i, Pic.mk (L i) (hL i) ^ (Pi.single j 1 : Fin r → ℤ) i =
+      Pic.mk (L j) (hL j) := by
+    rw [Finset.prod_eq_single j (fun b _ hb ↦ by rw [Pi.single_eq_of_ne hb, zpow_zero])
+      (fun hb ↦ absurd (Finset.mem_univ _) hb), Pi.single_eq_same, zpow_one]
+  rw [Pic.mk_zpowProd, Pic.mk_zpowProd, ← hsingle, ← Finset.prod_mul_distrib]
+  exact Finset.prod_congr rfl fun i _ ↦ by rw [Pi.add_apply, zpow_add, mul_comm]
+
+/-- The concatenation of two families of invertible sheaves of modules is a family of invertible
+sheaves of modules. -/
+theorem invertible_append {r' : ℕ} {M : Fin r → X.Modules} {N : Fin r' → X.Modules}
+    (hM : ∀ i, (M i).Invertible) (hN : ∀ i, (N i).Invertible) (j : Fin (r + r')) :
+    (Fin.append M N j).Invertible := by
+  induction j using Fin.addCases with
+  | left i =>
+    rw [Fin.append_left]
+    exact hM i
+  | right i =>
+    rw [Fin.append_right]
+    exact hN i
+
+/-- **Concatenating two families of line bundles and their exponent vectors** multiplies the
+classes of the two twisting factors in the Picard group. -/
+theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_append {r' : ℕ} {M : Fin r → X.Modules}
+    {N : Fin r' → X.Modules} (hM : ∀ i, (M i).Invertible) (hN : ∀ i, (N i).Invertible)
+    (h : ∀ j, (Fin.append M N j).Invertible) (m : Fin r → ℤ) (m' : Fin r' → ℤ) :
+    Pic.mk (zpowProd (Fin.append M N) h (Fin.append m m'))
+        (invertible_zpowProd _ _ _) =
+      (∏ i, Pic.mk (M i) (hM i) ^ m i) * ∏ i, Pic.mk (N i) (hN i) ^ m' i := by
+  rw [Pic.mk_zpowProd, Fin.prod_univ_add]
+  refine congrArg₂ (· * ·) (Finset.prod_congr rfl fun i _ ↦ ?_)
+    (Finset.prod_congr rfl fun i _ ↦ ?_)
+  · rw [show Fin.append m m' (Fin.castAdd r' i) = m i from Fin.append_left m m' i]
+    exact congrArg (· ^ m i) (Pic.mk_congr (Fin.append_left M N i))
+  · rw [show Fin.append m m' (Fin.natAdd r i) = m' i from Fin.append_right m m' i]
+    exact congrArg (· ^ m' i) (Pic.mk_congr (Fin.append_right M N i))
 
 /-- The sheaf `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` attached to a sheaf of modules `F`, a finite
 family `L` of invertible sheaves of modules and an integer vector `m`.

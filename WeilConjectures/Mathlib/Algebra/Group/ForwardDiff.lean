@@ -16,6 +16,7 @@ Mathlib's `Mathlib/Algebra/Group/ForwardDiff.lean` studies the iterates `Δ_[h]^
 forward difference operator. This file collects the facts one needs about composites
 `Δ_[v 0] ∘ ⋯ ∘ Δ_[v (d - 1)]` of difference operators in *different* directions:
 
+* `fwdDiff_apply`: the defining formula `Δ_[h] f y = f (y + h) - f y`;
 * `fwdDiff_comm`: the operators `Δ_[h₁]` and `Δ_[h₂]` commute;
 * `fwdDiff_aux.shiftₗ_add`: `h ↦ shiftₗ h` turns addition into multiplication;
 * `fwdDiff_add_arg`: `Δ_[h₁ + h₂] f = Δ_[h₁] f + Δ_[h₂] f + Δ_[h₁] (Δ_[h₂] f)`;
@@ -42,6 +43,9 @@ degree of an isogeny.
 open Finset Function fwdDiff fwdDiff_aux
 
 variable {M G : Type*} [AddCommMonoid M] [AddCommGroup G] {d : ℕ}
+
+/-- The defining formula for a forward difference operator. -/
+lemma fwdDiff_apply (h : M) (f : M → G) (y : M) : Δ_[h] f y = f (y + h) - f y := rfl
 
 /-- Forward difference operators in different directions commute. -/
 lemma fwdDiff_comm (h₁ h₂ : M) (f : M → G) : Δ_[h₁] (Δ_[h₂] f) = Δ_[h₂] (Δ_[h₁] f) := by
