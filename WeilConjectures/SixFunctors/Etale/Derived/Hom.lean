@@ -57,14 +57,10 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
 
-variable (X : Scheme.{u}) [(X.smallEtaleTopology.W (A := A)).IsMonoidal]
-
-attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
-
-variable [MonoidalClosed (Sheaf X.smallEtaleTopology A)]
-  [Abelian.HasFunctorialFlatResolution (Sheaf X.smallEtaleTopology A)]
+variable (X : Scheme.{u})
 
 namespace Etale
 
