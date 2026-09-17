@@ -84,12 +84,6 @@ open CategoryTheory Limits MonoidalCategory SheafOfModules fwdDiff
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Equal invertible sheaves of modules have equal classes in the Picard group, whatever
-proofs of invertibility they are given. -/
-private lemma Pic.mk_congr {X : Scheme.{u}} {A B : X.Modules} (hA : A.Invertible)
-    (hB : B.Invertible) (h : A = B) : Pic.mk A hA = Pic.mk B hB := by
-  subst h; rfl
-
 /-- Only `⊥` lies below `0` in `WithBot ℕ∞`. -/
 private lemma eq_bot_of_lt_natCast_zero {a : WithBot ℕ∞} (h : a < ((0 : ℕ) : WithBot ℕ∞)) :
     a = ⊥ := by

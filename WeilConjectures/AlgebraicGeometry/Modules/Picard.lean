@@ -301,6 +301,12 @@ theorem Pic.mk_eq_mk_iff {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertibl
   change hM.unit = hN.unit ↔ _
   rw [← Units.val_inj, hM.unit_spec, hN.unit_spec, toSkeleton_eq_toSkeleton_iff]
 
+/-- Equal invertible `𝒪ₓ`-modules have equal classes in the Picard group of `X`, whichever
+proofs of invertibility they are given. -/
+theorem Pic.mk_congr {M N : X.Modules} (hM : M.Invertible) (hN : N.Invertible) (h : M = N) :
+    Pic.mk M hM = Pic.mk N hN := by
+  subst h; rfl
+
 /-- The class of a tensor product of invertible `𝒪ₓ`-modules is the product of the classes. -/
 @[simp]
 theorem Pic.mk_tensorObj {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertible} :
