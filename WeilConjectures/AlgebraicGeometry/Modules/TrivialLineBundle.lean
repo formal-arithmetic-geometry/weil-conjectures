@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -31,6 +32,8 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
 
 ## Main results
 
+- `AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_iff`: `L` is isomorphic to the
+  structure sheaf `𝒪ₓ` if and only if it is isomorphic to the tensor unit of `X.Modules`.
 - `AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit`: for a scheme `X` whose
   structure morphism identifies the base ring `R` with `Γ(X, 𝒪ₓ)`, and `L ≅ 𝒪ₓ`, the `R`-module
   `Γ(X, L)` is free of rank one.
@@ -45,8 +48,10 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
 
 A line bundle is usually trivialised by an isomorphism `L ≅ 𝟙_ X.Modules` with the tensor unit;
 `AlgebraicGeometry.Scheme.Modules.tensorUnitIsoUnit` turns that into the isomorphism `L ≅ 𝒪ₓ`
-these statements take. The `R`-module structure on global sections and the case `L = 𝒪ₓ` are in
-`WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf`.
+these statements take, and
+`AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_iff` is the resulting equivalence
+of the two spellings of triviality. The `R`-module structure on global sections and the case
+`L = 𝒪ₓ` are in `WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf`.
 
 ## Blueprint
 
@@ -61,11 +66,18 @@ to later work.
 
 universe u
 
-open CategoryTheory SheafOfModules
+open CategoryTheory MonoidalCategory SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} {L : X.Modules}
+
+/-- **A sheaf of `𝒪ₓ`-modules is isomorphic to the structure sheaf exactly when it is isomorphic
+to the tensor unit** of `X.Modules`: the two spellings of triviality differ by
+`AlgebraicGeometry.Scheme.Modules.tensorUnitIsoUnit`. -/
+theorem nonempty_iso_structureModules_iff :
+    Nonempty (L ≅ X.structureModules) ↔ Nonempty (L ≅ 𝟙_ X.Modules) :=
+  ⟨fun ⟨i⟩ ↦ ⟨i ≪≫ (tensorUnitIsoUnit X).symm⟩, fun ⟨i⟩ ↦ ⟨i ≪≫ tensorUnitIsoUnit X⟩⟩
 
 section Trivial
 
