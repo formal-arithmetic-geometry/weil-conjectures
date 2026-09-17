@@ -36,6 +36,8 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
   whose structure morphism identifies the base ring `R` with `Γ(X, 𝒪ₓ)`.
 - `AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit`: for such an `X` and
   `L ≅ 𝒪ₓ`, the `R`-module `Γ(X, L)` is free of rank one.
+- `AlgebraicGeometry.Scheme.Modules.exists_forall_fiberMk_ne_zero`: a trivial line bundle has a
+  global section with non-zero image in every fibre.
 - `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isUnit` and
   `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isField`: a global section of a trivial
   line bundle whose image in `Γ(X, 𝒪ₓ)` is a unit — for instance any non-zero section, when
@@ -85,6 +87,14 @@ theorem fiberMk_ne_zero_of_isUnit (e : L ≅ unit X.ringCatSheaf) {s : Γ(L, ⊤
   refine fiberMk_unit_ne_zero_of_isUnit hs x ((fiberMap_fiberMk e.hom x s).symm.trans ?_)
   rw [h]
   exact map_zero _
+
+/-- **A trivial line bundle has a nowhere vanishing global section**: the section corresponding
+to the unit function under the trivialisation. This is the fibrewise half of
+`lem:cube-nowhere-vanishing` of the blueprint, read off from the trivialisation instead of from
+a dimension count. -/
+theorem exists_forall_fiberMk_ne_zero (e : L ≅ unit X.ringCatSheaf) :
+    ∃ s : Γ(L, ⊤), ∀ x : X, fiberMk L x s ≠ 0 :=
+  ⟨(sectionsEquivOfIsoUnit e).symm 1, fun x ↦ fiberMk_ne_zero_of_isUnit e (by simp) x⟩
 
 /-- **A non-zero global section of a trivial line bundle vanishes nowhere.** If the ring of
 global functions of `X` is a field — for instance if `X` is an integral scheme, proper over a

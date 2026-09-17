@@ -21,7 +21,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 # Noetherian schemes, associated points, dévissage, and the generic rank
 
 The first part of this file records that a base change of a morphism locally of finite type has
-locally noetherian source.
+locally noetherian source, and that the source of a quasi-compact morphism locally of finite type
+with noetherian target is a noetherian scheme.
 
 The second part defines the *associated points* of a sheaf of modules on a scheme: a point `x`
 is associated to `F` when the maximal ideal of `𝒪_{X, x}` is an associated prime of the stalk
@@ -106,6 +107,16 @@ instance [LocallyOfFiniteType f] [IsLocallyNoetherian T] : IsLocallyNoetherian (
 
 instance [LocallyOfFiniteType g] [IsLocallyNoetherian X] : IsLocallyNoetherian (pullback f g) :=
   LocallyOfFiniteType.isLocallyNoetherian (pullback.fst f g)
+
+/-- **The source of a quasi-compact morphism locally of finite type with noetherian target is a
+noetherian scheme.** Being locally noetherian is inherited along a morphism locally of finite
+type, and quasi-compactness of the morphism transports compactness of the target. -/
+theorem isNoetherian_of_locallyOfFiniteType {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsLocallyNoetherian Y] [CompactSpace Y] [LocallyOfFiniteType f] [QuasiCompact f] :
+    IsNoetherian X :=
+  have := LocallyOfFiniteType.isLocallyNoetherian f
+  have := QuasiCompact.compactSpace_of_compactSpace f
+  ⟨⟩
 
 /-!
 ## Associated points of a sheaf of modules

@@ -56,7 +56,7 @@ pullback of an invertible sheaf of modules is invertible.
   is an isomorphism `𝒪_W ≅ M|_W`.
 - `SheafOfModules.Invertible.isLocallyFree` and `SheafOfModules.Invertible.isFiniteType`: **an
   invertible sheaf of modules on a scheme is a line bundle**, in the sense used elsewhere in the
-  project.
+  project, and `SheafOfModules.Invertible.isCoherent`: it is therefore coherent.
 - `SheafOfModules.Invertible.exists_restrict_iso_unit`: the same statement in the explicit local
   form, an isomorphism `M|_W ≅ 𝒪_W`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensorObj_of_invertible`,
@@ -491,6 +491,14 @@ theorem _root_.SheafOfModules.Invertible.isFiniteType {M : X.Modules} (hM : M.In
     .mk (eq_top_iff.2 fun x _ ↦ Opens.mem_iSup.2 ⟨x, hW x⟩)
   exact isFiniteType_of_generatingSections M W hU (fun x ↦ generatingSectionsOfIsIso (m x))
     fun x ↦ inferInstance
+
+/-- **An invertible sheaf of modules on a scheme is coherent**: it is locally free, hence
+quasi-coherent, and of finite type. -/
+theorem _root_.SheafOfModules.Invertible.isCoherent {M : X.Modules} (hM : M.Invertible) :
+    M.IsCoherent :=
+  have := hM.isLocallyFree
+  have := hM.isFiniteType
+  inferInstance
 
 end LocallyFree
 
