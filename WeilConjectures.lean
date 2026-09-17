@@ -47,7 +47,9 @@ public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Seesaw
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
+public import WeilConjectures.AlgebraicGeometry.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
+public import WeilConjectures.AlgebraicGeometry.TrivialityLocus
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafGloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafInvertible

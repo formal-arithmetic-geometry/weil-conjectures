@@ -58,7 +58,9 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.preimage_infinitesimalBaseChangeFst_eq_top`: every point of
   `W ×_T Tₙ` lies over `t`, so `W ×_T Tₙ` lies over every open neighbourhood of `t`.
 - `AlgebraicGeometry.Scheme.thickeningIdeal`: the ideal sheaf cutting out the closed immersion
-  `W ×_T Tₙ ↪ W ×_T T_{n+1}`.
+  `W ×_T Tₙ ↪ W ×_T T_{n+1}`, and
+  `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapZero`: the closed immersion
+  `W ×_T T₀ ↪ W ×_T T_{n+1}` of the zeroth infinitesimal neighbourhood.
 - `AlgebraicGeometry.Scheme.mul_ker_infinitesimalBaseChangeMap`: the kernel ideal sheaves of
   `W ×_T T_{m₁} ↪ W ×_T Tₙ` and `W ×_T T_{m₂} ↪ W ×_T Tₙ` annihilate each other as soon as
   `n ≤ m₁ + m₂ + 1`; `AlgebraicGeometry.Scheme.sq_thickeningIdeal` and
@@ -773,6 +775,13 @@ lemma sq_thickeningIdeal (n : ℕ) : thickeningIdeal f t n ^ 2 = 0 := by
   rw [thickeningIdeal, sq]
   exact mul_ker_infinitesimalBaseChangeMap f t (Nat.le_succ n) (Nat.le_succ n) (by omega)
 
+/-- The closed immersion `i₀ : W ×_T T₀ ↪ W ×_T T_{n+1}` of the zeroth infinitesimal
+neighbourhood, abbreviating
+`AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))`. -/
+noncomputable abbrev infinitesimalBaseChangeMapZero (n : ℕ) :
+    infinitesimalBaseChange f t 0 ⟶ infinitesimalBaseChange f t (n + 1) :=
+  infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))
+
 /-- **The thickening ideal is annihilated by the ideal of the zeroth infinitesimal
 neighbourhood.** Writing `J` for the kernel ideal sheaf of `W ×_T T₀ ↪ W ×_T T_{n+1}` and `Iₙ`
 for the thickening ideal, `J * Iₙ = 0`; this is the sheaf-level form of `𝔪 · Iₙ = 0`.
@@ -786,7 +795,7 @@ for the thickening ideal, `J * Iₙ = 0`; this is the sheaf-level form of `𝔪 
 ```
 -/
 lemma ker_mul_thickeningIdeal_eq_zero (n : ℕ) :
-    (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))).ker * thickeningIdeal f t n = 0 :=
+    (infinitesimalBaseChangeMapZero f t n).ker * thickeningIdeal f t n = 0 :=
   mul_ker_infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1)) (Nat.le_succ n) (by omega)
 
 /-- The canonical isomorphism `W ×_T Tₙ ≅ V(Iₙ)` between the `n`-th infinitesimal base change

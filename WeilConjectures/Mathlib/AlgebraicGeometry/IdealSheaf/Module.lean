@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
@@ -39,8 +40,10 @@ sheaf-condition argument that the kernel description gets for free.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.toModules` — the ideal sheaf as an `𝒪_X`-module.
 - `AlgebraicGeometry.Scheme.IdealSheafData.toModulesι` — its inclusion into `𝒪_X`.
-- `AlgebraicGeometry.Scheme.IdealSheafData.idealOfOpens` — the ideal cut out on an arbitrary
-  open subset, extending `J.ideal` off the affine opens.
+- `AlgebraicGeometry.Scheme.IdealSheafData.pushforwardStructureDesc` and
+  `AlgebraicGeometry.Scheme.IdealSheafData.pushforwardFreeDesc` — the morphisms
+  `g_* 𝒪_Y ⟶ J` and `g_* (𝒪_Y^ι) ⟶ J` given by multiplication by a global section of `J`,
+  respectively by a family of them, when `g.ker * J = 0`.
 
 ## Main results
 
@@ -49,6 +52,8 @@ sheaf-condition argument that the kernel description gets for free.
   the right one.
 - `AlgebraicGeometry.Scheme.IdealSheafData.injective_toModulesι_app` — the inclusion is
   injective on sections over every open, affine or not.
+- `AlgebraicGeometry.Scheme.IdealSheafData.smul_eq_zero_of_mul_eq_zero` — **an ideal sheaf
+  `I` with `I * J = 0` annihilates the sections of `J`**, over an arbitrary open subset.
 - `AlgebraicGeometry.Scheme.IdealSheafData.range_stalkMap_toModulesι` and
   `AlgebraicGeometry.Scheme.IdealSheafData.mem_range_stalkMap_toModulesι_iff` — the stalk of
   the ideal sheaf is the set of germs killed by the restriction to the closed subscheme, that
@@ -123,23 +128,6 @@ lemma map_kernelι_eq_toModulesι_app (U : X.Opens) (x : Γ(J.toModules, U)) :
       J.toModulesι.app U x :=
   rfl
 
-/-- The ideal cut out by `J` on an **arbitrary** open subset, not just an affine one: the
-kernel of the restriction map to the closed subscheme.
-
-`Scheme.IdealSheafData` itself only records ideals on affine opens, so this is the extension
-of `J.ideal` to all of `X.Opens`, and `idealOfOpens_eq_ideal` says the extension is
-compatible. -/
-noncomputable def idealOfOpens (U : X.Opens) : Ideal Γ(X, U) :=
-  RingHom.ker (J.subschemeι.app U).hom
-
-@[simp]
-lemma idealOfOpens_eq_ideal (U : X.affineOpens) : J.idealOfOpens U.1 = J.ideal U :=
-  J.ker_subschemeι_app U
-
-lemma mem_idealOfOpens_iff {U : X.Opens} {x : Γ(X, U)} :
-    x ∈ J.idealOfOpens U ↔ J.subschemeι.app U x = 0 :=
-  RingHom.mem_ker
-
 /-- Over any open subset, the sections of the ideal sheaf are exactly the sections of `𝒪_X`
 killed by the restriction to the closed subscheme cut out by `J`. -/
 lemma range_toModulesι_app_eq (U : X.Opens) :
@@ -165,6 +153,16 @@ instance : Mono J.toModulesι := by
 over every open subset, not merely a categorical monomorphism. -/
 lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModulesι.app U) :=
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
+
+/-- **A function lying in an ideal sheaf `I` annihilates the sections of an ideal sheaf `J`
+with `I * J = 0`.** This is the section-level form of the vanishing `I * J = 0`, which is
+recorded on affine opens only. -/
+lemma smul_eq_zero_of_mul_eq_zero {I J : X.IdealSheafData} (hIJ : I * J = 0) {U : X.Opens}
+    {r : Γ(X, U)} (hr : r ∈ I.idealOfOpens U) (m : Γ(J.toModules, U)) : r • m = 0 := by
+  refine J.injective_toModulesι_app U ?_
+  rw [Modules.Hom.app_smul, map_zero]
+  exact mul_eq_zero_of_mem_idealOfOpens hIJ hr
+    ((J.range_toModulesι_app_eq_idealOfOpens U).le ⟨m, rfl⟩)
 
 /-! ### The pushforward of the structure sheaf of the closed subscheme is the quotient -/
 
@@ -307,5 +305,102 @@ lemma eq_comapModulesMap (hg : I.comap g ≤ I')
       φ ≫ I'.toModulesι) :
     φ = comapModulesMap I I' g hg :=
   (cancel_mono I'.toModulesι).mp (by rw [← hφ, comapModulesMap_toModulesι])
+
+/-! ### Multiplication by a section of an ideal sheaf killed by the kernel of a morphism -/
+
+section PushforwardDesc
+
+variable {X Y : Scheme.{u}} (g : Y ⟶ X) [QuasiCompact g] [Epi g.toPushforwardStructure]
+  {J : X.IdealSheafData}
+
+omit [Epi g.toPushforwardStructure] in
+/-- **Multiplication by a global section of an ideal sheaf `J` with `g.ker * J = 0` kills the
+kernel of `𝒪_X ⟶ g_* 𝒪_Y`**, which is what makes it descend to `g_* 𝒪_Y`. -/
+lemma kernelι_toPushforwardStructure_comp_homOfSectionTop_eq_zero (hJ : g.ker * J = 0)
+    (m : Γ(J.toModules, ⊤)) :
+    kernel.ι g.toPushforwardStructure ≫ Modules.homOfSectionTop J.toModules m = 0 :=
+  (g.kernelι_toPushforwardStructure_comp_eq_zero_iff _).mpr fun U s hs ↦ by
+    rw [Modules.Hom.app_homOfSectionTop]
+    exact smul_eq_zero_of_mul_eq_zero hJ (g.mem_idealOfOpens_ker_iff.mpr hs) _
+
+/-- **Multiplication by a global section `m` of an ideal sheaf `J` with `g.ker * J = 0`**, as a
+morphism `g_* 𝒪_Y ⟶ J`.
+
+Multiplication by `m` is a morphism `𝒪_X ⟶ J` to begin with, and `g.ker * J = 0` says that it
+kills every function vanishing on `Y`, so it factors through the quotient `g_* 𝒪_Y` of `𝒪_X`.
+
+```
+  𝒪_X ──toPushforwardStructure──▶ g_* 𝒪_Y
+      ╲                              │
+   · m ╲                             │ pushforwardStructureDesc g hJ m
+        ╲                            ▼
+         ╲─────────────────────────▶ J
+```
+-/
+noncomputable def pushforwardStructureDesc (hJ : g.ker * J = 0) (m : Γ(J.toModules, ⊤)) :
+    (Modules.pushforward g).obj Y.structureModules ⟶ J.toModules :=
+  g.descPushforwardStructure _
+    (kernelι_toPushforwardStructure_comp_homOfSectionTop_eq_zero g hJ m)
+
+/-- **The descended morphism is still multiplication by `m`**: the triangle
+
+```
+  𝒪_X ──toPushforwardStructure──▶ g_* 𝒪_Y
+      ╲                              │
+   · m ╲                             │ pushforwardStructureDesc g hJ m
+        ╲                            ▼
+         ╲─────────────────────────▶ J
+```
+
+commutes. -/
+@[reassoc (attr := simp)]
+lemma toPushforwardStructure_comp_pushforwardStructureDesc (hJ : g.ker * J = 0)
+    (m : Γ(J.toModules, ⊤)) :
+    g.toPushforwardStructure ≫ pushforwardStructureDesc g hJ m =
+      Modules.homOfSectionTop J.toModules m :=
+  Hom.toPushforwardStructure_descPushforwardStructure _ _ _
+
+/-- **The factorisation is unique**, because `𝒪_X ⟶ g_* 𝒪_Y` is an epimorphism. -/
+lemma eq_pushforwardStructureDesc (hJ : g.ker * J = 0) (m : Γ(J.toModules, ⊤))
+    (χ : (Modules.pushforward g).obj Y.structureModules ⟶ J.toModules)
+    (hχ : g.toPushforwardStructure ≫ χ = Modules.homOfSectionTop J.toModules m) :
+    χ = pushforwardStructureDesc g hJ m :=
+  Hom.eq_descPushforwardStructure _ _ _ _ hχ
+
+/-- **The comparison morphism `g_* (𝒪_Y^ι) ⟶ J` attached to a family `m` of global sections of
+an ideal sheaf `J` with `g.ker * J = 0`**: on the `j`-th summand it is multiplication by `m j`.
+
+```
+  g_* 𝒪_Y ──g_* (ιFree j)──▶ g_* (𝒪_Y^ι)
+        ╲                         │
+  · m j  ╲                        │ pushforwardFreeDesc g hJ m
+          ╲                       ▼
+           ╲────────────────────▶ J
+```
+-/
+noncomputable def pushforwardFreeDesc {ι : Type u} [Finite ι] (hJ : g.ker * J = 0)
+    (m : ι → Γ(J.toModules, ⊤)) :
+    (Modules.pushforward g).obj (Y.freeModules ι) ⟶ J.toModules :=
+  Modules.pushforwardFreeDesc g fun j ↦ pushforwardStructureDesc g hJ (m j)
+
+/-- **On the `j`-th summand the comparison morphism is multiplication by `m j`.** -/
+@[reassoc (attr := simp)]
+lemma map_ιFree_comp_pushforwardFreeDesc {ι : Type u} [Finite ι] (hJ : g.ker * J = 0)
+    (m : ι → Γ(J.toModules, ⊤)) (j : ι) :
+    (Modules.pushforward g).map (SheafOfModules.ιFree j) ≫ pushforwardFreeDesc g hJ m =
+      pushforwardStructureDesc g hJ (m j) :=
+  Modules.map_ιFree_comp_pushforwardFreeDesc _ _ _
+
+/-- **The comparison morphism is the only one that is multiplication by `m j` on the `j`-th
+summand.** -/
+lemma eq_pushforwardFreeDesc {ι : Type u} [Finite ι] (hJ : g.ker * J = 0)
+    (m : ι → Γ(J.toModules, ⊤))
+    (χ : (Modules.pushforward g).obj (Y.freeModules ι) ⟶ J.toModules)
+    (hχ : ∀ j : ι, (Modules.pushforward g).map (SheafOfModules.ιFree j) ≫ χ =
+      pushforwardStructureDesc g hJ (m j)) :
+    χ = pushforwardFreeDesc g hJ m :=
+  Modules.eq_pushforwardFreeDesc _ _ _ hχ
+
+end PushforwardDesc
 
 end AlgebraicGeometry.Scheme.IdealSheafData
