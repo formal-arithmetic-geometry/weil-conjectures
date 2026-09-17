@@ -205,6 +205,7 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+@[no_expose]
 noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
     (sq : IsPullback g' f' f g) :
     Rf_!(c)[A]+ ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ Rf_!(c.baseChange sq)[A]+ :=
@@ -216,5 +217,21 @@ noncomputable def Etale.lowerShriekBaseChange (c : Compactification f)
   (Etale.openImmersionLowerShriekBaseChangeIso A (c.baseChange_isPullback_i sq)).hom
   R+(((c.baseChange sq).g)_*[A]))
   ≫ (Functor.associator _ _ _).hom
+
+attribute [local implicit_reducible] rightDerivedLowerShriekOfCompactificationPlus
+  Compactification.baseChange
+
+lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (sq : IsPullback g' f' f g)
+  (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+  (Etale.lowerShriekBaseChange A c sq).app K =
+    (Etale.baseChange A (c.baseChange_isPullback_g sq).toCommSq).app
+      ((c.i)_!open[A].mapDerivedCategoryPlus.obj K) ≫
+        R+(((c.baseChange sq).g)_*[A]).map ((Etale.openImmersionLowerShriekBaseChangeIso A
+          (c.baseChange_isPullback_i sq)).hom.app K) := by
+  simp only [Functor.comp_obj, lowerShriekBaseChange, Compactification.baseChange_g,
+    Compactification.baseChange_Z, Compactification.baseChange_i, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
+    Functor.whiskerRight_app, Category.comp_id, Category.id_comp]
+  exact Category.id_comp _
 
 end AlgebraicGeometry
