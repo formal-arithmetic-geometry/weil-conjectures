@@ -303,6 +303,7 @@ public import WeilConjectures.Mathlib.RingTheory.AlgebraicIndependent.Transcende
 public import WeilConjectures.Mathlib.RingTheory.Binomial
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+public import WeilConjectures.Mathlib.RingTheory.Flat.EquationalCriterion
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
