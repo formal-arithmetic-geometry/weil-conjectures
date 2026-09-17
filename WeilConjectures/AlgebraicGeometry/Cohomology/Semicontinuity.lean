@@ -111,12 +111,17 @@ noncomputable def finrankFiberSections (f : W ⟶ T) (F : W.Modules) (t : T) : �
 
 /-- **The fibrewise dimension is at least one exactly when the fibrewise sections do not
 vanish.** This is `Module.finrank_pos_iff` for the finite-dimensional `κ(t)`-vector space
-`Γ(W_t, F_t)`, whose finite-dimensionality is `finiteDimensional_fiberSections`. -/
+`Γ(W_t, F_t)`, whose finite-dimensionality is `finiteDimensional_fiberSections`.
+
+The right-hand side is spelled with `Γ(_, ⊤)` rather than with `fiberSections` — the two are
+definitionally equal — so that the lemma rewrites against the triviality criterion
+`AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorUnit_iff_of_universallyClosed`, which
+produces the `Γ` form. -/
 theorem one_le_finrankFiberSections_iff (f : W ⟶ T) [IsProper f] (F : W.Modules) [F.IsCoherent]
     (t : T) :
-    1 ≤ finrankFiberSections f F t ↔ Nontrivial Γ((restrictToFiber f t).obj F, ⊤) := by
+    1 ≤ finrankFiberSections f F t ↔ Nontrivial Γ((restrictToFiber f t).obj F, ⊤) :=
   have := finiteDimensional_fiberSections f F t
-  exact Module.finrank_pos_iff (R := T.residueField t) (M := fiberSections f F t)
+  Module.finrank_pos_iff (R := T.residueField t) (M := fiberSections f F t)
 
 /-- **Semicontinuity of the fibrewise dimension of the global sections.**
 
