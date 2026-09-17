@@ -398,6 +398,29 @@ theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_tensorUnit {M : X.M
   obtain ⟨W, hxW, ⟨i⟩⟩ := hM.exists_restrict_iso_unit x
   exact ⟨W, hxW, ⟨i ≪≫ (SheafOfModules.tensorUnitIso W.toScheme.sheaf).symm⟩⟩
 
+/-- **An invertible sheaf of modules has non-zero stalks.** Locally it is isomorphic to the
+structure sheaf, whose stalks are the local rings of the scheme; the argument below reads that
+off the sections `m` of `M` and `n` of `N` with `m · n = 1` supplied by
+`AlgebraicGeometry.Scheme.Modules.exists_tensorPairing_eq_one`, which cannot both have vanishing
+germ at a point. -/
+theorem _root_.SheafOfModules.Invertible.nontrivial_stalk {M : X.Modules} (hM : M.Invertible)
+    (x : X) : Nontrivial (M.presheaf.stalk x) := by
+  rw [← not_subsingleton_iff_nontrivial]
+  intro hsub
+  obtain ⟨N, ⟨e₀⟩⟩ := SheafOfModules.invertible_iff_exists.{u, u, u}.1 hM
+  obtain ⟨V, hxV, m, n, hmn⟩ :=
+    exists_tensorPairing_eq_one (e := e₀ ≪≫ SheafOfModules.tensorUnitIso X.sheaf) x
+  have hgerm : M.presheaf.germ V x hxV m = M.presheaf.germ V x hxV 0 := Subsingleton.elim _ _
+  obtain ⟨W, hxW, iWV, iWV', hW⟩ := M.presheaf.germ_eq x hxV hxV m 0 hgerm
+  have hzero : M.presheaf.map iWV.op m = 0 := by rw [hW, map_zero]
+  have key : (1 : Γ(X, W)) = 0 := by
+    have h := map_tensorPairing (e := e₀ ≪≫ SheafOfModules.tensorUnitIso X.sheaf) iWV m n
+    rw [hmn, hzero, map_one, map_zero, LinearMap.zero_apply] at h
+    exact h
+  have hone : (1 : X.presheaf.stalk x) = 0 := by
+    rw [← map_one (X.presheaf.germ W x hxW).hom, key, map_zero]
+  exact one_ne_zero hone
+
 section LocallyFree
 
 open TopologicalSpace

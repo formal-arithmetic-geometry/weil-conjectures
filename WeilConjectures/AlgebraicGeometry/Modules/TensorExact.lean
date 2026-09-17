@@ -27,6 +27,8 @@ twisting factor `L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` before the Euler chara
   modules is an equivalence of categories.
 - `AlgebraicGeometry.Scheme.Modules.shortExact_tensorRightShortComplex`: a short exact sequence
   of sheaves of modules stays short exact after tensoring by an invertible sheaf.
+- `AlgebraicGeometry.Scheme.Modules.isZero_tensorObj_of_isZero`: tensoring a zero sheaf of
+  modules by an invertible sheaf gives a zero sheaf.
 -/
 
 @[expose] public section
@@ -68,6 +70,10 @@ lemma isEquivalence_tensorRight : (MonoidalCategory.tensorRight N).IsEquivalence
 lemma zero_whiskerRight {A B : X.Modules} : (0 : A ⟶ B) ▷ N = 0 := by
   have : (MonoidalCategory.tensorRight N).IsEquivalence := isEquivalence_tensorRight hN
   exact (MonoidalCategory.tensorRight N).map_zero A B
+
+/-- **Tensoring a zero sheaf of modules by an invertible sheaf gives a zero sheaf.** -/
+lemma isZero_tensorObj_of_isZero {F : X.Modules} (hF : IsZero F) : IsZero (F ⊗ N) := by
+  rw [IsZero.iff_id_eq_zero, ← id_whiskerRight F N, hF.eq_of_src (𝟙 F) 0, zero_whiskerRight hN]
 
 variable (S : ShortComplex X.Modules)
 

@@ -287,6 +287,36 @@ theorem isSMulRegular_iff_associatedPoints_subset_basicOpen [IsNoetherianRing Γ
 
 end Affine
 
+set_option backward.isDefEq.respectTransparency false in
+/-- **The support of a coherent sheaf of modules is closed.**
+
+On an affine open `U` the support meets `U` in the support of the `Γ(X, U)`-module `Γ(F, U)`,
+which is the zero locus of its annihilator because that module is finite
+(`Module.support_eq_zeroLocus`); closedness is local, and the affine opens cover `X`. -/
+theorem isClosed_support [F.IsCoherent] : IsClosed F.support := by
+  rw [← isOpen_compl_iff, isOpen_iff_forall_mem_open]
+  intro x hx
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  have : Module.Finite Γ(X, U) Γ(F, U) := finite_sections F ⟨U, hU⟩
+  have hclosed : IsClosed (Module.support Γ(X, U) Γ(F, U)) := by
+    rw [Module.support_eq_zeroLocus]
+    exact PrimeSpectrum.isClosed_zeroLocus _
+  have hinj : Function.Injective hU.fromSpec.base := hU.fromSpec.isOpenEmbedding.injective
+  refine ⟨hU.fromSpec.base '' (Module.support Γ(X, U) Γ(F, U))ᶜ, ?_, ?_, ?_⟩
+  · rintro _ ⟨p, hp, rfl⟩
+    have hmem : hU.fromSpec p ∈ U := by
+      have hr : hU.fromSpec p ∈ Set.range hU.fromSpec.base := Set.mem_range_self _
+      rwa [hU.range_fromSpec] at hr
+    have hpio : hU.primeIdealOf ⟨hU.fromSpec p, hmem⟩ = p :=
+      hinj (hU.fromSpec_primeIdealOf ⟨_, hmem⟩)
+    simp only [Set.mem_compl_iff]
+    rw [mem_support_iff_mem_module_support F hU ⟨_, hmem⟩, hpio]
+    exact hp
+  · exact hU.fromSpec.isOpenEmbedding.isOpenMap _ hclosed.isOpen_compl
+  · refine ⟨hU.primeIdealOf ⟨x, hxU⟩, ?_, hU.fromSpec_primeIdealOf ⟨x, hxU⟩⟩
+    simpa [← mem_support_iff_mem_module_support F hU ⟨x, hxU⟩] using hx
+
 /-- **A coherent sheaf on a quasi-compact locally Noetherian scheme has finitely many
 associated points.**
 
