@@ -80,7 +80,7 @@ Warning: It is deliberately *not* the total right derived functor of the composi
 `i_! ⋙ g_* = Etale.lowerShriek`. In general, `i_!` does not sends injective sheaves to
 `g_*`-acyclic ones, and `Rf_!` is not the derived functor of `f_!`, through its zeroth
 homology is `f_!`. Deligne made explicit calculations on $A^1$, see SGA. -/
-noncomputable def rightDerivedLowerShriekOfCompactification :
+noncomputable abbrev rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
   D((c.i)_!open[A]) ⋙ R((c.g)_*[A])
@@ -90,7 +90,7 @@ noncomputable def rightDerivedLowerShriekOfCompactification :
 the bounded below counterpart of `rightDerivedLowerShriekOfCompactification`, with `Di_!` the
 functor `Functor.mapDerivedCategoryPlus` induced by the exact `i_!` and `R⁺g_*` the bounded
 below right derived pushforward. -/
-noncomputable def rightDerivedLowerShriekOfCompactificationPlus :
+noncomputable abbrev rightDerivedLowerShriekOfCompactificationPlus :
     DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
   D+((c.i)_!open[A]) ⋙ R+((c.g)_*[A])
