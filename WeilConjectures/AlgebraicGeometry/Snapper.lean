@@ -33,7 +33,7 @@ The proof is the one of the blueprint, an induction on `dim F` with two prelimin
 * **The base case** is `dim F = -1`, that is `F = 0`
   (`AlgebraicGeometry.Scheme.Modules.supportDim_eq_bot_iff`), where `P` vanishes identically.
 * **The reduction to very ample `Lⱼ`** writes `Lⱼ ≅ Mⱼ ⊗ Nⱼ⁻¹` with `Mⱼ := Lⱼ ⊗ A ^⊗ nⱼ` and
-  `Nⱼ := 𝒪ₓ ⊗ A ^⊗ nⱼ` both very ample, `A` being an ample line bundle on `X` and `nⱼ` large
+  `Nⱼ := A ^⊗ nⱼ` both very ample, `A` being an ample line bundle on `X` and `nⱼ` large
   (`AlgebraicGeometry.Scheme.Modules.IsAmple.exists_isVeryAmple_tensorObj_tensorPow`). Snapper's
   theorem for the `2r` very ample bundles `M₁ … M_r N₁ … N_r` gives a numerical polynomial `Q` on
   `ℤ ^ (r + r)` with `P(m) = Q(m, -m)`, and `IsNumericalPolynomial.comp_append_neg` concludes.
@@ -60,8 +60,20 @@ hyperplane section; this is the same hypothesis `lem:deg-generic-section` is for
 - `AlgebraicGeometry.Scheme.Modules.exists_shortExact_supportDim_lt`:
   **`lem:deg-general-hyperplane`**, the hyperplane exact sequence with a strict drop of the
   dimension of the support.
-- `AlgebraicGeometry.Scheme.Modules.isNumericalPolynomial_eulerChar_tensorZPow`:
-  **`thm:deg-snapper`**, Snapper's theorem.
+- `AlgebraicGeometry.Scheme.Modules.isNumericalPolynomial_eulerChar_tensorZPow_of_isVeryAmple`
+  and `AlgebraicGeometry.Scheme.Modules.isNumericalPolynomial_eulerChar_tensorZPow`:
+  **`thm:deg-snapper`**, Snapper's theorem, first for very ample `Lⱼ` and then in general.
+
+## TODO
+
+Neither node is `\leanok` in the blueprint. Snapper's theorem rests on the two sorried
+statements `AlgebraicGeometry.Scheme.Modules.H.finite` and
+`AlgebraicGeometry.Scheme.Modules.H.subsingleton_of_topologicalKrullDim_lt` behind the Euler
+characteristic, and on the sorried
+`AlgebraicGeometry.Scheme.Modules.IsAmple.exists_isVeryAmple_tensorObj_tensorPow`; and
+`lem:deg-general-hyperplane`, although proved here without `sorry`, is formalised without the
+identification of the cokernel with `(F ⊗ L)|_D`, which is the open TODO of
+`WeilConjectures.AlgebraicGeometry.Modules.HyperplaneSection`.
 -/
 
 @[expose] public section
