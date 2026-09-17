@@ -5,12 +5,14 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Complements on closed immersions
 
-Two unrelated groups of small results.
+Three unrelated groups of small results.
 
 The first is about **open immersions that are universally closed**. An open immersion whose
 underlying map is closed — for instance a proper one — is also a closed immersion, and its
@@ -28,6 +30,12 @@ scheme-theoretic image in the form stated in the Nagata blueprint
 the scheme-theoretic image is the smallest closed subscheme of the target through which
 the morphism factors.
 
+The third is that the comparison morphism `𝒪_Y ⟶ g_* 𝒪_X` of sheaves of `𝒪_Y`-modules attached
+to a closed immersion `g : X ⟶ Y` is an **epimorphism**, so that `g_* 𝒪_X` is the quotient of
+`𝒪_Y` by the ideal sheaf of `X` and a morphism out of `𝒪_Y` killing that ideal descends to
+`g_* 𝒪_X`; the descent itself is
+`AlgebraicGeometry.Scheme.Hom.descPushforwardStructure`.
+
 ## Main results
 
 - `AlgebraicGeometry.IsClosedImmersion.of_isOpenImmersion` — an open immersion with closed
@@ -43,7 +51,9 @@ the morphism factors.
   `AlgebraicGeometry.Scheme.Hom.ker_le_ker_imageι_comp` supplying its hypothesis;
 - `AlgebraicGeometry.Scheme.Hom.ker_le_ker_iff_existsUnique_fac` — a closed subscheme
   contains the scheme-theoretic image of `g` if and only if `g` factors through it, and
-  then uniquely.
+  then uniquely;
+- `AlgebraicGeometry.epi_toPushforwardStructure` — the comparison morphism `𝒪_Y ⟶ g_* 𝒪_X`
+  of a closed immersion is an epimorphism.
 -/
 
 @[expose] public section
@@ -130,5 +140,22 @@ theorem Scheme.Hom.ker_le_ker_iff_existsUnique_fac (g : X ⟶ Y) (z : Z ⟶ Y)
     exact Scheme.Hom.le_ker_comp h z
 
 end Lift
+
+/-! ### The comparison morphism `𝒪_Y ⟶ g_* 𝒪_X` of a closed immersion -/
+
+section Structure
+
+/-- **The structure sheaf of `Y` surjects onto the pushforward of the structure sheaf of a
+closed subscheme**: the comparison morphism `𝒪_Y ⟶ g_* 𝒪_X` of a closed immersion `g : X ⟶ Y`
+is an epimorphism of sheaves of `𝒪_Y`-modules.
+
+Being an epimorphism of sheaves is local surjectivity, not surjectivity: over a general open
+subset the restriction of functions to a closed subscheme is rarely onto. -/
+instance epi_toPushforwardStructure (g : X ⟶ Y) [IsClosedImmersion g] :
+    Epi g.toPushforwardStructure :=
+  -- over an affine open subset the restriction *is* onto, and the affine opens form a basis
+  Scheme.Modules.epi_of_surjective_app _ fun U hU ↦ g.app_surjective U hU
+
+end Structure
 
 end AlgebraicGeometry
