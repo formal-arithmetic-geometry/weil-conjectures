@@ -17,6 +17,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
@@ -24,22 +25,31 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 
 # Derived Upper Star and Lower Star
 
+The derived pullback and pushforward of étale sheaves are *not* given definitions of
+their own: they are the generic derived-functor constructions of the folder
+`WeilConjectures.CategoryTheory.DerivedCategory` applied to the underived pullback
+`(g)^*[A]` and pushforward `(g)_*[A]`, and they are written by nesting the generic
+notations inside the underived ones:
+
+| derived functor | notation | meaning |
+| --- | --- | --- |
+| `Rg_* : D(Z_ét) ⥤ D(Y_ét)` | `R((g)_*[A])` | `(g)_*[A].rightDerivedFunctor` |
+| `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` | `R+((g)_*[A])` | `(g)_*[A].rightDerivedFunctorPlus` |
+| `Lg^* : D(Y_ét) ⥤ D(Z_ét)` | `L((g)^*[A])` | `(g)^*[A].leftDerivedFunctor` |
+| `g^* : D(Y_ét) ⥤ D(Z_ét)` | `D((g)^*[A])` | `(g)^*[A].mapDerivedCategory` |
+| `g^* : D⁺(Y_ét) ⥤ D⁺(Z_ét)` | `D+((g)^*[A])` | `(g)^*[A].mapDerivedCategoryPlus` |
+
+The generic notations `R(-)`, `R+(-)`, `L(-)`, `D(-)` and `D+(-)` are scoped in the
+`CategoryTheory.Functor` namespace, so a file using them needs
+`open scoped CategoryTheory.Functor`. Each row above is recorded below as an `example`,
+at the place where a definition of the corresponding functor would have stood, so that
+the type of the functor is spelled out.
+
 ## Main results
 
-- `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star, with
-  scoped notation `R(g)_*[A]`, prefixing the notation `(g)_*[A]` of the underived
-  pushforward by `R`.
-
-- `AlgebraicGeometry.Etale.rightDerivedLowerStarPlus` : total right derived of lower star on
-  bounded below derived category, with scoped notation `R(g)_*[A]+`.
-
-- `AlgebraicGeometry.Etale.leftDerivedUpperStar` : total left derivation of upper star, with
-  scoped notation `L(g)^*[A]`, prefixing the notation `(g)^*[A]` of the underived pullback
-  by `L`.
-
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory` : the derived
-  pullback `Lg^*` is the functor `(g)^*[A].mapDerivedCategory` induced levelwise by the
-  exact functor `g^*`.
+  pullback `L((g)^*[A])` is the functor `D((g)^*[A])` induced levelwise by the exact
+  functor `g^*`.
 
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarComp` : the composition isomorphism
   `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`.
@@ -51,6 +61,10 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
   pullback of a sheaf placed in degree `0` is the pullback of the sheaf placed in degree
   `0`.
 
+- `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunction` and
+  `AlgebraicGeometry.Etale.derivedUpperStarLowerStarAdjunctionPlus` : the derived
+  adjunctions `L((g)^*[A]) ⊣ R((g)_*[A])` and `D+((g)^*[A]) ⊣ R+((g)_*[A])`.
+
 -/
 
 @[expose] public section
@@ -58,6 +72,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 universe u' u
 
 open CategoryTheory Abelian Limits
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -71,28 +87,24 @@ namespace Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/-- The total right derived functor `Rg_* : D(Z_ét) ⥤ D(Y_ét)` of the pushforward
-`g_*` along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of
-étale sheaves. -/
-noncomputable def rightDerivedLowerStar :
+/-- The total right derived functor `Rg_* : D(Z_ét) ⥤ D(Y_ét)` of the pushforward `g_*`
+along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of étale
+sheaves.
+
+It is not a definition of its own: it is the generic `Functor.rightDerivedFunctor`,
+written `R(-)`, applied to the underived pushforward `(g)_*[A]`. -/
+noncomputable example :
     DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  (g)_*[A].rightDerivedFunctor
+  R((g)_*[A])
 
-@[inherit_doc rightDerivedLowerStar]
-scoped notation "R(" g ")_*[" A "]" =>
-  rightDerivedLowerStar A g
-
-/-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on the
-*bounded below* derived categories of étale sheaves. -/
-noncomputable def rightDerivedLowerStarPlus :
+/-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on
+the *bounded below* derived categories of étale sheaves: the generic
+`Functor.rightDerivedFunctorPlus`, written `R+(-)`, applied to `(g)_*[A]`. -/
+noncomputable example :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  (g)_*[A].rightDerivedFunctorPlus
-
-@[inherit_doc rightDerivedLowerStarPlus]
-scoped notation "R(" g ")_*[" A "]+" =>
-  rightDerivedLowerStarPlus A g
+  R+((g)_*[A])
 
 end Etale
 
@@ -158,18 +170,17 @@ along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of
 sheaves, defined via the K-flat left derivability structure: `Lg^*` is computed by
 applying `g^*` to a K-flat resolution.
 
+It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`,
+written `L(-)`, applied to the underived pullback `(g)^*[A]`.
+
 Since `g^*` is exact, the counit `Lg^* ∘ Q ⟶ Q ∘ g^*` is in fact an isomorphism
 everywhere; the construction via the derivability structure is uniform in the functor
 and applies verbatim once `g^*` is replaced by a non-exact functor (e.g. the pullback
 of sheaves of modules over a varying sheaf of rings). -/
-noncomputable def leftDerivedUpperStar :
+noncomputable example :
     DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
-  (g)^*[A].leftDerivedFunctor
-
-@[inherit_doc leftDerivedUpperStar]
-scoped notation "L(" g ")^*[" A "]" =>
-  leftDerivedUpperStar A g
+  L((g)^*[A])
 
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
 derived functor `Lg^*`, computed via K-flat resolutions, is canonically isomorphic to
@@ -180,13 +191,12 @@ the functor induced by the exact functor `g^*` on the derived categories.
                  -------------------->
         D(Y_ét)            ≅             D(Z_ét)
                  -------------------->
-          (g)^*[A].mapDerivedCategory
+                     D((g)^*[A])
 ```
 
-This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`, restated in terms of
-the notation `L(g)^*[A]`, which the general statement does not mention. -/
+This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`. -/
 noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
-    L(g)^*[A] ≅ (g)^*[A].mapDerivedCategory :=
+    L((g)^*[A]) ≅ D((g)^*[A]) :=
   (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory
 
 /-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks,
@@ -199,12 +209,12 @@ D(R_ét) -------------------------------> D(T_ét)
       |                                    ^
       |                                    |
       +---------> D(S_ét) -----------------+
-        L(g₂)^*            L(g₁)^*
+        Lg₂^*              Lg₁^*
 ```
 -/
 noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
     (g₁ : T ⟶ S) (g₂ : S ⟶ R) :
-    L(g₁ ≫ g₂)^*[A] ≅ L(g₂)^*[A] ⋙ L(g₁)^*[A] :=
+    L((g₁ ≫ g₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
   Functor.leftDerivedFunctorNatIso _ (Etale.upperStarComp A g₁ g₂) ≪≫
     Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
 
@@ -216,18 +226,17 @@ derived category computes the `n`-th homology sheaf of the derived pullback.
                 H^n
 D(Y_ét) -----------------> Sh(Y_ét)
    |                           |
- L(g)^*                      (g)^*
+ Lg^*                        g^*
    |                           |
    v                           v
 D(Z_ét) -----------------> Sh(Z_ét)
                 H^n
 ```
 
-This is `Functor.leftDerivedFunctorHomologyFunctorIso` at `g^*`, restated in terms of the
-notation `L(g)^*[A]`, which the general statement does not mention. -/
+This is `Functor.leftDerivedFunctorHomologyFunctorIso` at `g^*`. -/
 noncomputable def leftDerivedUpperStarHomologyFunctorIso (n : ℤ) :
     DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology A) n ⋙ (g)^*[A] ≅
-      L(g)^*[A] ⋙ DerivedCategory.homologyFunctor (Sheaf Z.smallEtaleTopology A) n :=
+      L((g)^*[A]) ⋙ DerivedCategory.homologyFunctor (Sheaf Z.smallEtaleTopology A) n :=
   (g)^*[A].leftDerivedFunctorHomologyFunctorIso n
 
 /-- The single-degree comparison for the derived pullback: since the underived pullback
@@ -238,17 +247,16 @@ the pullback of the sheaf placed in degree `0`, `Lg^*(F[0]) ≅ (g^* F)[0]`.
                 (-)[0]
 Sh(Y_ét) -----------------> D(Y_ét)
     |                           |
-  (g)^*                      L(g)^*
+    g^*                       Lg^*
     |                           |
     v                           v
 Sh(Z_ét) -----------------> D(Z_ét)
                 (-)[0]
 ```
 
-This is `Functor.singleFunctorCompLeftDerivedFunctorIso` at `g^*`, restated in terms of
-the notation `L(g)^*[A]`, which the general statement does not mention. -/
+This is `Functor.singleFunctorCompLeftDerivedFunctorIso` at `g^*`. -/
 noncomputable def singleFunctorCompLeftDerivedUpperStarIso :
-    DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology A) 0 ⋙ L(g)^*[A] ≅
+    DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology A) 0 ⋙ L((g)^*[A]) ≅
       (g)^*[A] ⋙ DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology A) 0 :=
   (g)^*[A].singleFunctorCompLeftDerivedFunctorIso
 
@@ -296,18 +304,17 @@ namespace Etale
 pullback and the pushforward along an arbitrary morphism `g : Z ⟶ Y` on the unbounded
 derived categories of étale sheaves, induced by the adjunction `g^* ⊣ g_*`. -/
 noncomputable def derivedUpperStarLowerStarAdjunction :
-    L(g)^*[A] ⊣ R(g)_*[A] :=
+    L((g)^*[A]) ⊣ R((g)_*[A]) :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunction
 
 /-- The bounded below version of `Etale.derivedUpperStarLowerStarAdjunction`: since the
 pullback `g^*` on étale sheaves is exact, its derived functor on the bounded below
-derived categories is the restriction `(g^*).mapDerivedCategoryPlus` of the functor
-induced by `g^*`, and it is left adjoint to the right derived functor
-`(g_*).rightDerivedFunctorPlus` of the pushforward on the bounded below derived
-categories. The right adjoint is derived via injective resolutions, which exist since
-the étale sheaf category is Grothendieck abelian. -/
+derived categories is the restriction `D+((g)^*[A])` of the functor induced by `g^*`,
+and it is left adjoint to the right derived functor `R+((g)_*[A])` of the pushforward on
+the bounded below derived categories. The right adjoint is derived via injective
+resolutions, which exist since the étale sheaf category is Grothendieck abelian. -/
 noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
-    (g)^*[A].mapDerivedCategoryPlus ⊣ R(g)_*[A]+ :=
+    D+((g)^*[A]) ⊣ R+((g)_*[A]) :=
   (Etale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
 
 end Etale
