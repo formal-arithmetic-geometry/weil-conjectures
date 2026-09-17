@@ -32,6 +32,8 @@ stated, and is `sorry` by design.
 - `AlgebraicGeometry.Scheme.Modules.finiteDimensional_fiberSections`: for `f` proper and `F`
   coherent, `Γ(W_t, F_t)` is a finite-dimensional `κ(t)`-vector space, so that
   `finrankFiberSections` really is the dimension of that space.
+- `AlgebraicGeometry.Scheme.Modules.one_le_finrankFiberSections_iff`: `h⁰(t)` is at least one
+  exactly when `Γ(W_t, F_t)` is non-zero.
 - `AlgebraicGeometry.Scheme.Modules.isClosed_setOf_le_finrankFiberSections` (blueprint
   `prop:cube-semicontinuity`): **semicontinuity**. For `T` Noetherian, `f : W ⟶ T` proper and `F`
   coherent and flat over `T`, the set `{t | n ≤ h⁰(t)}` is closed in `T`, for every `n`. This is
@@ -106,6 +108,15 @@ takes the junk value `0` when `Γ(W_t, F_t)` is not finite dimensional; for `f` 
 coherent that never happens, by `finiteDimensional_fiberSections`. -/
 noncomputable def finrankFiberSections (f : W ⟶ T) (F : W.Modules) (t : T) : ℕ :=
   Module.finrank (T.residueField t) (fiberSections f F t)
+
+/-- **The fibrewise dimension is at least one exactly when the fibrewise sections do not
+vanish.** This is `Module.finrank_pos_iff` for the finite-dimensional `κ(t)`-vector space
+`Γ(W_t, F_t)`, whose finite-dimensionality is `finiteDimensional_fiberSections`. -/
+theorem one_le_finrankFiberSections_iff (f : W ⟶ T) [IsProper f] (F : W.Modules) [F.IsCoherent]
+    (t : T) :
+    1 ≤ finrankFiberSections f F t ↔ Nontrivial Γ((restrictToFiber f t).obj F, ⊤) := by
+  have := finiteDimensional_fiberSections f F t
+  exact Module.finrank_pos_iff (R := T.residueField t) (M := fiberSections f F t)
 
 /-- **Semicontinuity of the fibrewise dimension of the global sections.**
 
