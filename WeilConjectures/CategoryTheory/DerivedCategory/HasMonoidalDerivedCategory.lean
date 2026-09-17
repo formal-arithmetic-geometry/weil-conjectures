@@ -64,7 +64,9 @@ namespace DerivedCategory
 
 variable (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
-  [Abelian.HasFunctorialFlatResolution A] [HasDerivedCategory.{w} A]
+  [HasDerivedCategory.{w} A]
+
+instance (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := inferInstance
 
 noncomputable instance : MonoidalCategory (HomotopyCategory A (ComplexShape.up ℤ)) :=
   have (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := inferInstance
@@ -74,8 +76,11 @@ noncomputable instance : MonoidalCategory (HomotopyCategory A (ComplexShape.up �
 resolutions, the localization functor `Qh : K(A) ⥤ D(A)` admits a derived monoidal
 structure with respect to quasi-isomorphisms. Consequently `DerivedCategory A` is monoidal,
 with tensor product the derived tensor product `- ⊗ᴸ -`. -/
-instance hasDerivedMonoidalCategory :
+instance hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
     Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
   sorry
+
+noncomputable instance [Abelian.HasFunctorialFlatResolution A] :
+  MonoidalCategory (DerivedCategory A) := inferInstance
 
 end DerivedCategory
