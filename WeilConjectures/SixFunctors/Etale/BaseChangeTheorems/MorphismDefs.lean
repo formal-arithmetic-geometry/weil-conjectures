@@ -96,6 +96,7 @@ variable {C₁ C₂ C₃ C₃' C₄ C₅ : Type*} [Category* C₁] [Category* C�
 `(R ⋙ G₁) ⋙ (G₂ ⋙ R') ≅ (R ⋙ G₃) ⋙ (G₄ ⋙ R')` obtained by whiskering `θ` and
 reassociating. Its component at `K` is `R'.mapIso (θ.app (R.obj K))`, see
 `Functor.squareTransport_app`. -/
+@[no_expose]
 def squareTransport (R : C₁ ⥤ C₂) (R' : C₄ ⥤ C₅) (θ : G₁ ⋙ G₂ ≅ G₃ ⋙ G₄) :
     (R ⋙ G₁) ⋙ (G₂ ⋙ R') ≅ (R ⋙ G₃) ⋙ (G₄ ⋙ R') :=
   associator R G₁ (G₂ ⋙ R') ≪≫ isoWhiskerLeft R
@@ -239,10 +240,17 @@ the counit contraction.
 Proper base change and smooth base change assert that this single morphism is an
 isomorphism under two different sets of geometric hypotheses; no such hypothesis is
 built into the definition. -/
+@[no_expose]
 noncomputable def Etale.baseChange (sq : CommSq g' f' f g) :
     R+((f)_*[A]) ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ R+((f')_*[A]) :=
   (Etale.baseChangeUnitStep A f g f') ≫ (Etale.baseChangeSquareStep A sq).hom ≫
     (Etale.baseChangeCounitStep A f f' g')
+
+lemma Etale.baseChange_app (sq : CommSq g' f' f g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.baseChange A sq).app K = (baseChangeUnitStep A f g f').app K ≫
+      (baseChangeSquareStep A sq).hom.app K ≫ (baseChangeCounitStep A f f' g').app K := by
+  simp [Etale.baseChange]
 
 end BaseChangeTransformation
 
