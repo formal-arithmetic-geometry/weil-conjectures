@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalFunctions
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
+public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
@@ -326,15 +327,6 @@ section Projection
 
 variable {X T : Scheme.{u}} {K : Type u} [Field K]
 
-/-- **The global functions of an infinitesimal base change of `X × T ⟶ T`.** For `X` a proper
-variety over `K`, the global functions of `(X × T) ×_T Tₙ` are the ring
-`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`. This is `lem:cube-global-sections-base-change` of the blueprint,
-read at the infinitesimal neighbourhoods of `t`. -/
-theorem isIso_infinitesimalRingToΓ_pullbackSnd (πX : X ⟶ Spec (.of K)) [IsProper πX]
-    [GeometricallyIntegral πX] (πT : T ⟶ Spec (.of K)) (t : T) (n : ℕ) :
-    IsIso (infinitesimalRingToΓ (Limits.pullback.snd πX πT) t n) :=
-  isIso_ΓSpecIso_inv_comp_snd_appTop_pullbackSnd πX πT (T.fromInfinitesimalNeighborhood t n)
-
 /-- **Formal triviality is a section near the point, for the projection of a proper variety.**
 
 Let `X` be a proper variety over a field `K`, let `T` be a locally noetherian `K`-scheme, let
@@ -356,7 +348,7 @@ theorem exists_fiberSectionsOfNhds_ne_zero_of_isProper (πX : X ⟶ Spec (.of K)
       fiberSectionsOfNhds (Limits.pullback.snd πX πT) t F V hV s ≠ 0 := by
   set f := Limits.pullback.snd πX πT with hf
   have hiso : ∀ n : ℕ, IsIso (infinitesimalRingToΓ f t n) :=
-    fun n ↦ isIso_infinitesimalRingToΓ_pullbackSnd πX πT t n
+    fun n ↦ Scheme.isIso_infinitesimalRingToΓ_pullbackSnd πX πT t n
   have hsurjΓ : ∀ n : ℕ, Function.Surjective (infinitesimalRingToΓ f t n) := fun n ↦
     have := hiso n
     (ConcreteCategory.bijective_of_isIso (infinitesimalRingToΓ f t n)).surjective
