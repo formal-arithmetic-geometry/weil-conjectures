@@ -36,6 +36,8 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
   whose structure morphism identifies the base ring `R` with `Γ(X, 𝒪ₓ)`.
 - `AlgebraicGeometry.Scheme.Modules.finrank_sections_eq_one_of_iso_unit`: for such an `X` and
   `L ≅ 𝒪ₓ`, the `R`-module `Γ(X, L)` is free of rank one.
+- `AlgebraicGeometry.Scheme.Modules.nontrivial_sections_of_iso_unit`: a trivial line bundle on a
+  scheme with a non-trivial ring of global functions has a non-zero global section.
 - `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isUnit` and
   `AlgebraicGeometry.Scheme.Modules.fiberMk_ne_zero_of_isField`: a global section of a trivial
   line bundle whose image in `Γ(X, 𝒪ₓ)` is a unit — for instance any non-zero section, when
@@ -75,6 +77,12 @@ noncomputable def sectionsEquivOfIsoUnit (e : L ≅ unit X.ringCatSheaf) :
 @[simp]
 lemma sectionsEquivOfIsoUnit_apply (e : L ≅ unit X.ringCatSheaf) (s : Γ(L, ⊤)) :
     sectionsEquivOfIsoUnit e s = Hom.app e.hom ⊤ s := rfl
+
+/-- **A trivial line bundle has a non-zero global section**, as soon as the ring of global
+functions of `X` is non-trivial. -/
+theorem nontrivial_sections_of_iso_unit [Nontrivial Γ(X, ⊤)] (e : L ≅ unit X.ringCatSheaf) :
+    Nontrivial Γ(L, ⊤) :=
+  (sectionsEquivOfIsoUnit e).toEquiv.nontrivial
 
 /-- **A global section of a trivial line bundle which is a unit vanishes nowhere.** If `L ≅ 𝒪ₓ`
 and the corresponding global function is a unit of `Γ(X, 𝒪ₓ)`, then the section has non-zero

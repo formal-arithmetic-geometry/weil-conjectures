@@ -18,7 +18,9 @@ We record:
 - `AlgebraicGeometry.mem_opensRange_homOfLE` / `AlgebraicGeometry.homOfLE_preimage_opensRange`
   — membership and preimage formulas for the ranges of inclusions of opens;
 - `AlgebraicGeometry.Scheme.Opens.isUnit_ι_appTop` — a section is a unit on an open subscheme
-  contained in its basic open.
+  contained in its basic open;
+- `AlgebraicGeometry.Scheme.Opens.exists_image_eq_of_le` — an open subset of an open subscheme
+  comes from that subscheme.
 -/
 
 @[expose] public section
@@ -61,6 +63,14 @@ lemma homOfLE_preimage_opensRange {X : Scheme.{u}} {U V W : X.Opens} (hWU : W �
       (X.homOfLE hWU).opensRange := by
   rw [Scheme.opensRange_homOfLE, Scheme.opensRange_homOfLE, ← Scheme.Hom.comp_preimage,
     Scheme.homOfLE_ι]
+
+/-- **An open subset of an open subscheme comes from that subscheme.** If `V ≤ U` then `V` is
+the image under `U.ι` of an open subset of the open subscheme `U`. -/
+lemma Scheme.Opens.exists_image_eq_of_le {X : Scheme.{u}} {U V : X.Opens} (hV : V ≤ U) :
+    ∃ V' : U.toScheme.Opens, U.ι ''ᵁ V' = V :=
+  ⟨U.ι ⁻¹ᵁ V, by
+    rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+      inf_eq_right.2 hV]⟩
 
 /-- If `U ≤ X.basicOpen s`, then `s` restricts to a unit in the global sections of the open
 subscheme `U`. -/

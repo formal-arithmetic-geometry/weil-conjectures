@@ -897,6 +897,29 @@ so they glue.  Hence $\varphi|_U$ is the isomorphism sending $m$ to $n$
 followed by multiplication by a unit, and is therefore an isomorphism.
 \end{proof}
 
+\begin{lemma}[Fibrewise criterion for the vanishing of a morphism of line
+bundles]\label{lem:cube-vanishing-fibrewise}
+\lean{AlgebraicGeometry.Scheme.Modules.eq_zero_of_forall_fiberMap_eq_zero}
+\leanok
+Let $S$ be a reduced scheme, let $M$ and $N$ be line bundles on $S$ and let
+$\varphi\colon M\to N$ be a morphism of $\O_S$-modules.  Suppose that for
+every point $s\in S$ the induced map on fibres $\varphi(s)\colon M(s)\to N(s)$
+is zero.  Then $\varphi=0$.  In particular a global section of a line bundle
+on a reduced scheme whose image in every fibre is zero is itself zero.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-trivialising-open}
+\leanok
+Being zero is local on $S$, so we may work on an open subset $U\subseteq S$ on
+which $\varphi$ is multiplication by a function $a\in\Gamma(U,\O_U)$ as in
+\Cref{lem:cube-trivialising-open}.  The hypothesis says that $a$ lies in
+$\m_s$ for every $s\in U$, that is that the basic open subset $U_a$ is empty;
+on a reduced scheme this forces $a=0$.  Hence $\varphi|_U=0$, and such opens
+cover $S$.  The statement about a global section $m$ of a line bundle $M$ is
+the case of the morphism $\O_S\to M$ sending $1$ to $m$, which is zero exactly
+when $m$ is.
+\end{proof}
+
 \begin{lemma}[$h^0$ is identically one]\label{lem:cube-h0-constant}
 \uses{prop:cube-semicontinuity}
 Let $X$ be a proper variety over $k$, let $T$ be a scheme of finite type over
@@ -1035,40 +1058,45 @@ $k$-rational ones.
 \lean{AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorUnit_iff_of_geometricallyIntegral}
 \leanok
 Let $K$ be a field, let $X$ be a proper geometrically integral $K$-scheme and
-let $L$ be a line bundle on $X$.  Then $L$ is trivial if and only if
+let $L$ and $N$ be line bundles on $X$ with $L\otimes N\cong\O_X$.  Then $L$ is
+trivial if and only if
 \[
-  \Gamma(X,L)\neq0\quad\text{and}\quad\Gamma(X,L^{-1})\neq0 .
+  \Gamma(X,L)\neq0\quad\text{and}\quad\Gamma(X,N)\neq0 .
 \]
+The formalised statement quantifies over a tensor inverse $N$ in this way
+rather than fixing $N=L^{-1}$, so that a caller may supply whichever inverse it
+already has.  Only integrality of $X$ and universal closedness of $X\to\Spec K$
+enter the proof; the formalisation records that generality separately, and this
+is the shape the chapter consumes.
 \end{lemma}
 \begin{proof}
-\uses{lem:cube-global-sections-general, lem:cube-invertible-fibrewise}
+\uses{lem:cube-vanishing-fibrewise, lem:cube-degeneracy-closed,
+lem:cube-invertible-fibrewise}
 \leanok
-If $L$ is trivial then so is $L^{-1}$, and both spaces of global sections are
-one-dimensional over $K$ by \Cref{lem:cube-global-sections-general}.
+If $L$ is trivial then so is $N$, and both spaces of global sections are
+isomorphic to $\Gamma(X,\O_X)$, which is a field --- $X$ is integral and proper
+over $K$ --- and in particular non-zero.
 
-Conversely, let $s\in\Gamma(X,L)$ and $u\in\Gamma(X,L^{-1})$ be non-zero and
-let $\eta$ be the generic point of the integral scheme $X$.  A non-zero global
-section of a line bundle on an integral scheme has non-zero germ at $\eta$:
-choosing an open $U\ni\eta$ trivialising the bundle turns the section into a
-section $a$ of $\O_U$, and if $a$ vanished in $\O_{X,\eta}$ --- a field, so
-that its maximal ideal is zero --- then $a$ would be zero in $\Gamma(U,\O_U)$
-by the injectivity of $\Gamma(U,\O_U)\to\O_{X,\eta}$ on an integral scheme,
-and the section would vanish on the dense open $U$ and hence everywhere.  The
-stalks $L_\eta$ and $(L^{-1})_\eta$ are one-dimensional over the field
-$\O_{X,\eta}$ and the pairing between them is perfect, so the germ at $\eta$
-of the global section
+Conversely, let $s\in\Gamma(X,L)$ and $u\in\Gamma(X,N)$ be non-zero, and write
+$g\colon\O_X\to L$ and $h\colon\O_X\to N$ for the morphisms they determine.
+Since $X$ is reduced, \Cref{lem:cube-vanishing-fibrewise} makes $g$ non-zero on
+the fibre at some point, and likewise $h$; by \Cref{lem:cube-degeneracy-closed}
+the two loci where $g$ and $h$ are non-zero on the fibre are open.  They are
+therefore two non-empty open subsets of the irreducible space $X$, so they meet
+at a point $x_0$.
+
+At $x_0$ both $g(x_0)$ and $h(x_0)$ are non-zero maps between one-dimensional
+$\kappa(x_0)$-vector spaces, hence isomorphisms, hence so is
+$g(x_0)\otimes h(x_0)$ and therefore so is the fibre at $x_0$ of the composite
 \[
-  s\otimes u\;\in\;\Gamma(X,L\otimes L^{-1})\;\cong\;\Gamma(X,\O_X)
+  c\colon\O_X\;\cong\;\O_X\otimes\O_X\;\xrightarrow{\;g\otimes h\;}\;
+  L\otimes N\;\cong\;\O_X .
 \]
-is non-zero, where the isomorphism is the canonical one
-$L\otimes L^{-1}\cong\O_X$.  By \Cref{lem:cube-global-sections-general},
-$\Gamma(X,\O_X)=K$, so $s\otimes u$ is a non-zero element $c$ of $K$, hence a
-unit of $\Gamma(X,\O_X)$.
-
-Consequently $s$ does not vanish at any point $x\in X$: if it did, the image
-of $s\otimes u$ in $\kappa(x)$ would be zero, whereas $c$ is a unit.  So the
-morphism $\O_X\to L$, $1\mapsto s$, is non-zero on every fibre, and
-\Cref{lem:cube-invertible-fibrewise} makes it an isomorphism.
+That composite is multiplication by a global function, again written $c$, which
+therefore does not vanish at $x_0$, so $c\neq0$; as $\Gamma(X,\O_X)$ is a field,
+$c$ is a unit and the composite is an isomorphism.  It factors through $g$, so
+$g$ is non-zero on every fibre and \Cref{lem:cube-invertible-fibrewise} makes
+it an isomorphism.
 \end{proof}
 
 \begin{corollary}[The triviality locus is closed]
