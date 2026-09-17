@@ -40,6 +40,8 @@ sheaf-condition argument that the kernel description gets for free.
 - `AlgebraicGeometry.Scheme.IdealSheafData.toModulesι` — its inclusion into `𝒪_X`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.idealOfOpens` — the ideal cut out on an arbitrary
   open subset, extending `J.ideal` off the affine opens.
+- `AlgebraicGeometry.Scheme.IdealSheafData.descPushforwardSubscheme` — the descent of a
+  morphism out of `𝒪_X` killing the ideal sheaf through `𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}`.
 
 ## Main results
 
@@ -54,6 +56,11 @@ sheaf-condition argument that the kernel description gets for free.
   is, the set of germs of sections lying in the ideal, and
   `AlgebraicGeometry.Scheme.IdealSheafData.injective_stalkMap_toModulesι` — the inclusion is
   injective on stalks.
+- `AlgebraicGeometry.Scheme.IdealSheafData.isColimitCokernelCoforkToPushforwardSubscheme` —
+  **`(ι_J)_* 𝒪_{V(J)}` is the cokernel of the ideal sheaf**, so that
+  `0 ⟶ J.toModules ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is exact. The content is that the comparison
+  morphism is an epimorphism, which is local surjectivity, not surjectivity: over a non-affine
+  open subset the restriction of functions to `V(J)` is rarely onto.
 - `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap` — the comparison morphism
   `g^* I ⟶ I'` for a morphism `g` pulling the ideal `I` into the ideal `I'`, together with
   `comapModulesMap_toModulesι` and `eq_comapModulesMap`, which determine it.
@@ -161,6 +168,65 @@ instance : Mono J.toModulesι := by
 over every open subset, not merely a categorical monomorphism. -/
 lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModulesι.app U) :=
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
+
+/-! ### The pushforward of the structure sheaf of the closed subscheme is the quotient -/
+
+section Cokernel
+
+lemma app_toPushforwardSubscheme (U : X.Opens) (s : Γ(X.structureModules, U)) :
+    J.toPushforwardSubscheme.app U s = J.subschemeι.app U s :=
+  rfl
+
+/-- **The structure sheaf of `X` surjects onto the pushforward of the structure sheaf of the
+closed subscheme cut out by `J`.** Over an affine open subset the restriction of functions to
+`V(J)` is surjective, and the affine opens form a basis. -/
+instance : Epi J.toPushforwardSubscheme :=
+  Modules.epi_of_surjective_app _ fun U hU ↦ J.subschemeι_app_surjective ⟨U, hU⟩
+
+@[reassoc (attr := simp)]
+lemma toModulesι_comp_toPushforwardSubscheme :
+    J.toModulesι ≫ J.toPushforwardSubscheme = 0 :=
+  kernel.condition _
+
+/-- **The pushforward `(ι_J)_* 𝒪_{V(J)}` is the cokernel of the ideal sheaf of `J`**, so that
+```
+0 ⟶ J.toModules ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0
+```
+is a short exact sequence of sheaves of `𝒪_X`-modules: the ideal sheaf is the kernel by
+definition, and the comparison morphism is an epimorphism, hence in the abelian category
+`X.Modules` the cokernel of its kernel. -/
+noncomputable def isColimitCokernelCoforkToPushforwardSubscheme :
+    IsColimit (CokernelCofork.ofπ J.toPushforwardSubscheme
+      J.toModulesι_comp_toPushforwardSubscheme) :=
+  Abelian.epiIsCokernelOfKernel
+    (Fork.ofι (kernel.ι J.toPushforwardSubscheme) (kernel.condition _))
+    (kernelIsKernel J.toPushforwardSubscheme)
+
+/-- **The descent of a morphism through `𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}`**: a morphism out of the
+structure sheaf killing the ideal sheaf of `J` factors through the pushforward of the structure
+sheaf of the closed subscheme cut out by `J`. -/
+noncomputable def descPushforwardSubscheme {P : X.Modules} (ψ : X.structureModules ⟶ P)
+    (hψ : J.toModulesι ≫ ψ = 0) :
+    (SheafOfModules.pushforward J.subschemeι.toRingCatSheafHom).obj
+      J.subscheme.structureModules ⟶ P :=
+  Abelian.epiDesc J.toPushforwardSubscheme ψ hψ
+
+@[reassoc (attr := simp)]
+lemma toPushforwardSubscheme_descPushforwardSubscheme {P : X.Modules}
+    (ψ : X.structureModules ⟶ P) (hψ : J.toModulesι ≫ ψ = 0) :
+    J.toPushforwardSubscheme ≫ J.descPushforwardSubscheme ψ hψ = ψ :=
+  Abelian.comp_epiDesc _ _ _
+
+/-- The descent of `AlgebraicGeometry.Scheme.IdealSheafData.descPushforwardSubscheme` is the
+only morphism out of `(ι_J)_* 𝒪_{V(J)}` restricting to the given one. -/
+lemma eq_descPushforwardSubscheme {P : X.Modules} (ψ : X.structureModules ⟶ P)
+    (hψ : J.toModulesι ≫ ψ = 0)
+    (χ : (SheafOfModules.pushforward J.subschemeι.toRingCatSheafHom).obj
+      J.subscheme.structureModules ⟶ P) (hχ : J.toPushforwardSubscheme ≫ χ = ψ) :
+    χ = J.descPushforwardSubscheme ψ hψ := by
+  rw [← cancel_epi J.toPushforwardSubscheme, hχ, toPushforwardSubscheme_descPushforwardSubscheme]
+
+end Cokernel
 
 /-! ### The stalks of the ideal sheaf -/
 
