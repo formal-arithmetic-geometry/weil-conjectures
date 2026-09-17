@@ -33,28 +33,10 @@ and the lemma that reads off the ladder: an obstruction class whose image in
 `Pic (W ×_T T_{n+1})` is the class of a line bundle trivial on `W'` has trivial
 `W'`-component.
 
-The second half of the file describes the thickening ideal `Iₙ` itself as a module over the
-zeroth infinitesimal neighbourhood. Since `𝔪_t · Iₙ = 0`
-(`AlgebraicGeometry.Scheme.ker_mul_thickeningIdeal_eq_zero`), multiplication by a global
-section `m` of `Iₙ` kills the ideal sheaf of `W ×_T T₀ ↪ W ×_T T_{n+1}` and therefore descends
-to a morphism `(i₀)_* 𝒪_{W ×_T T₀} ⟶ Iₙ`. Taking a family `m : ι → Γ(Iₙ, ⊤)` and using that
-the pushforward is additive assembles these into the comparison morphism
-
-```
-  (i₀)_* (𝒪_{W ×_T T₀} ^ ι) ⟶ Iₙ
-```
-
-which is an isomorphism when the classes of the `m j` form a basis of `Iₙ / 𝔪_t Iₙ` over the
-residue field.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.thickeningH1Map` — the map on deformation classes induced by a
   morphism over `T`.
-- `AlgebraicGeometry.Scheme.pushforwardStructureToThickeningIdeal` — multiplication by a
-  global section of the thickening ideal, as a morphism `(i₀)_* 𝒪_{W ×_T T₀} ⟶ Iₙ`.
-- `AlgebraicGeometry.Scheme.pushforwardFreeToThickeningIdeal` — the comparison morphism
-  `(i₀)_* (𝒪_{W ×_T T₀}^ι) ⟶ Iₙ` attached to a family of global sections of `Iₙ`.
 
 ## Main statements
 
@@ -63,9 +45,6 @@ residue field.
 - `AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_surjective` — the hypothesis
   that the previous lemma needs: if the global sections of `W ×_T Tₙ` are the infinitesimal
   ring `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`, then every unit on `W ×_T Tₙ` extends to `W ×_T T_{n+1}`.
-- `AlgebraicGeometry.Scheme.smul_thickeningIdealSection_eq_zero` — a function on
-  `W ×_T T_{n+1}` vanishing on `W ×_T T₀` annihilates the thickening ideal; this is what makes
-  multiplication by a section of `Iₙ` descend to `W ×_T T₀`.
 -/
 
 @[expose] public section
@@ -150,123 +129,5 @@ lemma unitsMap_subschemeι_thickeningIdeal_surjective (n : ℕ)
   refine ⟨b, ?_⟩
   rw [← thickeningIso_inv_infinitesimalBaseChangeMap, Hom.unitsMap_comp, MonoidHom.comp_apply,
     hb, hc]
-
-
-/-! ### The comparison morphism from a free module on the zeroth neighbourhood -/
-
-section Free
-
-variable (n : ℕ)
-
-/-- **A function on `W ×_T T_{n+1}` that vanishes on `W ×_T T₀` annihilates the thickening
-ideal.** Here `m` is a global section of `Iₙ` and the statement is about its restriction to the
-open `U` on which `r` lives.
-
-This is the section-level form of `AlgebraicGeometry.Scheme.ker_mul_thickeningIdeal_eq_zero`,
-and it is the vanishing that lets multiplication by `m` descend to `W ×_T T₀`; see
-`AlgebraicGeometry.Scheme.pushforwardStructureToThickeningIdeal`. -/
-lemma smul_thickeningIdealSection_eq_zero (m : Γ((thickeningIdeal f t n).toModules, ⊤))
-    {U : (infinitesimalBaseChange f t (n + 1)).Opens}
-    (r : Γ(infinitesimalBaseChange f t (n + 1), U))
-    (hr : (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))).app U r = 0) :
-    r • (thickeningIdeal f t n).toModules.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op m = 0 := by
-  refine (thickeningIdeal f t n).injective_toModulesι_app U ?_
-  have hmem : (thickeningIdeal f t n).toModulesι.app ⊤ m ∈ (thickeningIdeal f t n).idealOfOpens ⊤ :=
-    ((thickeningIdeal f t n).range_toModulesι_app_eq_idealOfOpens ⊤).le ⟨m, rfl⟩
-  have hres := (thickeningIdeal f t n).map_mem_idealOfOpens (le_top : U ≤ ⊤) hmem
-  have hker := (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))).mem_idealOfOpens_ker hr
-  calc (thickeningIdeal f t n).toModulesι.app U
-          (r • (thickeningIdeal f t n).toModules.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op m)
-      = r • (thickeningIdeal f t n).toModulesι.app U
-          ((thickeningIdeal f t n).toModules.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op m) :=
-        Modules.Hom.app_smul _ _ _
-    _ = r • (infinitesimalBaseChange f t (n + 1)).structureModules.presheaf.map
-          (homOfLE (le_top : U ≤ ⊤)).op ((thickeningIdeal f t n).toModulesι.app ⊤ m) := by
-        rw [Modules.Hom.naturality_apply]
-    _ = 0 :=
-        IdealSheafData.mul_eq_zero_of_mem_idealOfOpens (ker_mul_thickeningIdeal_eq_zero f t n)
-          hker hres
-    _ = (thickeningIdeal f t n).toModulesι.app U 0 := (map_zero _).symm
-
-/-- **Multiplication by a global section `m` of the thickening ideal**, as a morphism
-`(i₀)_* 𝒪_{W ×_T T₀} ⟶ Iₙ`, where `i₀ : W ×_T T₀ ↪ W ×_T T_{n+1}` is the closed immersion of
-the zeroth infinitesimal neighbourhood.
-
-Multiplication by `m` is a morphism `𝒪_{W ×_T T_{n+1}} ⟶ Iₙ` to begin with, and it kills the
-ideal sheaf of `W ×_T T₀` by `AlgebraicGeometry.Scheme.ker_mul_thickeningIdeal_eq_zero`, so it
-factors through the quotient `(i₀)_* 𝒪_{W ×_T T₀}` of `𝒪_{W ×_T T_{n+1}}`. -/
-noncomputable def pushforwardStructureToThickeningIdeal
-    (m : Γ((thickeningIdeal f t n).toModules, ⊤)) :
-    (Modules.pushforward (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1)))).obj
-        (infinitesimalBaseChange f t 0).structureModules ⟶ (thickeningIdeal f t n).toModules :=
-  (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))).descPushforwardStructure
-    ((Modules.unitHomEquivTop _).symm m)
-    (((infinitesimalBaseChangeMap f t
-        (Nat.zero_le (n + 1))).kernelι_toPushforwardStructure_comp_eq_zero_iff _).mpr
-      fun U s hs ↦ by
-        have happ := Modules.Hom.app_eq_smul_res
-          ((Modules.unitHomEquivTop (thickeningIdeal f t n).toModules).symm m) U s
-        rw [Equiv.apply_symm_apply] at happ
-        exact happ.trans (smul_thickeningIdealSection_eq_zero f t n m s hs))
-
-/-- **Multiplication by `m` is the factorisation of multiplication by `m` through the
-quotient.** -/
-@[reassoc (attr := simp)]
-lemma toPushforwardStructure_comp_pushforwardStructureToThickeningIdeal
-    (m : Γ((thickeningIdeal f t n).toModules, ⊤)) :
-    (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))).toPushforwardStructure ≫
-        pushforwardStructureToThickeningIdeal f t n m =
-      (Modules.unitHomEquivTop _).symm m :=
-  Hom.toPushforwardStructure_descPushforwardStructure _ _ _
-
-/-- **The factorisation is unique**, because `𝒪_{W ×_T T_{n+1}} ⟶ (i₀)_* 𝒪_{W ×_T T₀}` is an
-epimorphism. -/
-lemma eq_pushforwardStructureToThickeningIdeal (m : Γ((thickeningIdeal f t n).toModules, ⊤))
-    (χ : (Modules.pushforward (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1)))).obj
-        (infinitesimalBaseChange f t 0).structureModules ⟶ (thickeningIdeal f t n).toModules)
-    (hχ : (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1))).toPushforwardStructure ≫ χ =
-      (Modules.unitHomEquivTop _).symm m) :
-    χ = pushforwardStructureToThickeningIdeal f t n m :=
-  Hom.eq_descPushforwardStructure _ _ _ _ hχ
-
-/-- **The comparison morphism `(i₀)_* (𝒪_{W ×_T T₀}^ι) ⟶ Iₙ` attached to a family `m` of global
-sections of the thickening ideal**: on the `j`-th summand it is multiplication by `m j`.
-
-The source is a pushforward, so the morphism cannot be written down on sections; it is
-assembled from the family by
-`AlgebraicGeometry.Scheme.Modules.pushforwardFreeDesc`, which uses that
-`Modules.pushforward` is additive and therefore turns the free module `𝒪_{W ×_T T₀}^ι` into a
-coproduct of `ι` copies of `(i₀)_* 𝒪_{W ×_T T₀}`.
-
-When the classes of the `m j` form a basis of `Iₙ / 𝔪 Iₙ` over the residue field this morphism
-is an isomorphism. -/
-noncomputable def pushforwardFreeToThickeningIdeal {ι : Type u} [Finite ι]
-    (m : ι → Γ((thickeningIdeal f t n).toModules, ⊤)) :
-    (Modules.pushforward (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1)))).obj
-        ((infinitesimalBaseChange f t 0).freeModules ι) ⟶ (thickeningIdeal f t n).toModules :=
-  Modules.pushforwardFreeDesc _ fun j ↦ pushforwardStructureToThickeningIdeal f t n (m j)
-
-/-- **On the `j`-th summand the comparison morphism is multiplication by `m j`.** -/
-@[reassoc (attr := simp)]
-lemma map_ιFree_comp_pushforwardFreeToThickeningIdeal {ι : Type u} [Finite ι]
-    (m : ι → Γ((thickeningIdeal f t n).toModules, ⊤)) (j : ι) :
-    (Modules.pushforward (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1)))).map
-        (SheafOfModules.ιFree j) ≫ pushforwardFreeToThickeningIdeal f t n m =
-      pushforwardStructureToThickeningIdeal f t n (m j) :=
-  Modules.map_ιFree_comp_pushforwardFreeDesc _ _ _
-
-/-- **The comparison morphism is the only one that is multiplication by `m j` on the `j`-th
-summand.** -/
-lemma eq_pushforwardFreeToThickeningIdeal {ι : Type u} [Finite ι]
-    (m : ι → Γ((thickeningIdeal f t n).toModules, ⊤))
-    (χ : (Modules.pushforward (infinitesimalBaseChangeMap f t (Nat.zero_le (n + 1)))).obj
-        ((infinitesimalBaseChange f t 0).freeModules ι) ⟶ (thickeningIdeal f t n).toModules)
-    (hχ : ∀ j : ι, (Modules.pushforward (infinitesimalBaseChangeMap f t
-        (Nat.zero_le (n + 1)))).map (SheafOfModules.ιFree j) ≫ χ =
-      pushforwardStructureToThickeningIdeal f t n (m j)) :
-    χ = pushforwardFreeToThickeningIdeal f t n m :=
-  Modules.eq_pushforwardFreeDesc _ _ _ hχ
-
-end Free
 
 end AlgebraicGeometry.Scheme

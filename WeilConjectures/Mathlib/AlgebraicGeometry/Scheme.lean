@@ -14,7 +14,8 @@ schemes with one point
 We record that the restriction of a section `s` of the structure sheaf to any open contained
 in `X.basicOpen s` is a unit, that a global function is a unit exactly when its basic open
 subset is everything, that `Scheme.Hom.appLE` only depends on the morphism up to
-equality, that `Scheme.Hom.appLE` between the top opens is `Scheme.Hom.appTop`, that an
+equality, that `Scheme.Hom.appLE` between the top opens is `Scheme.Hom.appTop`, that pulling
+back a function along a morphism of schemes commutes with restriction, that an
 isomorphism of schemes induces an isomorphism on global sections, that any presheaf on `X` sends
 the inclusion `⊤ ≤ a ⁻¹ᵁ ⊤` to the identity, the preimage of `⊤` under a morphism of schemes
 being `⊤`, and that the ring of global sections of a scheme with exactly one point is local,
@@ -77,6 +78,14 @@ instance Scheme.isLocalRing_sections_top [Subsingleton X] [Nonempty X] : IsLocal
 namespace Scheme.Hom
 
 variable {Y : Scheme.{u}}
+
+/-- **Pulling back a function along a morphism of schemes commutes with restriction**, in the
+form of an equality of sections rather than of morphisms: this is the naturality of
+`AlgebraicGeometry.Scheme.Hom.app` evaluated at a section. -/
+lemma map_app_apply (g : X ⟶ Y) {U V : Y.Opens} (h : V ≤ U) (x : Γ(Y, U)) :
+    X.presheaf.map ((Opens.map g.base).map (homOfLE h)).op (g.app U x) =
+      g.app V (Y.presheaf.map (homOfLE h).op x) :=
+  (ConcreteCategory.congr_hom (g.naturality (homOfLE h).op) x).symm
 
 /-- `Scheme.Hom.appLE` only depends on the morphism up to equality. -/
 lemma appLE_congr_hom {c d : X ⟶ Y} (hcd : c = d) (U : Y.Opens) (V : X.Opens)

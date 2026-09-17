@@ -120,7 +120,9 @@ surjectivity over an affine open subset lives.
 - `AlgebraicGeometry.Scheme.freeModulesCofan` and
   `AlgebraicGeometry.Scheme.isColimitFreeModulesCofan`: `X.freeModules ι` is the coproduct of
   copies of `𝒪ₓ` indexed by `ι`, in the category `X.Modules`.
-- `AlgebraicGeometry.Scheme.Modules.pushforwardFreeDesc`: the morphism
+- `AlgebraicGeometry.Scheme.Modules.isColimitMapFreeModulesCofan`: `g_* (𝒪_Y^ι)` is the
+  coproduct of `ι` copies of `g_* 𝒪_Y`, and
+  `AlgebraicGeometry.Scheme.Modules.pushforwardFreeDesc`: the morphism
   `g_* (𝒪_Y^ι) ⟶ P` assembled from a family of morphisms `g_* 𝒪_Y ⟶ P`, with
   `AlgebraicGeometry.Scheme.Modules.pushforwardFree_hom_ext` and
   `AlgebraicGeometry.Scheme.Modules.eq_pushforwardFreeDesc` determining it.
@@ -314,12 +316,13 @@ noncomputable abbrev Scheme.freeModules (X : Scheme.{u}) (ι : Type u) : X.Modul
 indexed by `ι`, in the category `X.Modules`.
 
 This is Mathlib's `SheafOfModules.freeCofan`, taken in `X.Modules` rather than in
-`SheafOfModules X.ringCatSheaf`; the two categories are definitionally equal but not
-syntactically so, which is what stops the Mathlib version from being usable with functors
-between the categories of modules of schemes. -/
+`SheafOfModules X.ringCatSheaf`. It typechecks because `AlgebraicGeometry.Scheme.Modules`
+unfolds to `SheafOfModules X.ringCatSheaf`; downstream proofs should go through
+`AlgebraicGeometry.Scheme.freeModulesCofan_inj` rather than rely on that unfolding
+themselves. -/
 noncomputable def Scheme.freeModulesCofan (X : Scheme.{u}) (ι : Type u) :
-    Limits.Cofan (fun _ : ι ↦ X.structureModules) :=
-  Limits.Cofan.mk (X.freeModules ι) SheafOfModules.ιFree
+    Cofan (fun _ : ι ↦ X.structureModules) :=
+  Cofan.mk (X.freeModules ι) SheafOfModules.ιFree
 
 @[simp]
 lemma Scheme.freeModulesCofan_inj (X : Scheme.{u}) (ι : Type u) (j : ι) :
@@ -328,7 +331,7 @@ lemma Scheme.freeModulesCofan_inj (X : Scheme.{u}) (ι : Type u) (j : ι) :
 
 /-- **The free sheaf of modules on `ι` is the coproduct of copies of `𝒪ₓ`.** -/
 noncomputable def Scheme.isColimitFreeModulesCofan (X : Scheme.{u}) (ι : Type u) :
-    Limits.IsColimit (X.freeModulesCofan ι) :=
+    IsColimit (X.freeModulesCofan ι) :=
   SheafOfModules.isColimitFreeCofan ι
 
 instance (X : Scheme.{u}) : HasFiniteBiproducts X.Modules :=
@@ -2507,6 +2510,15 @@ lemma Hom.app_eq_smul_res (φ : X.structureModules ⟶ M) (U : X.Opens) (r : Γ(
   rw [Hom.app_smul, hnat]
   rfl
 
+/-- **Multiplication by a global section acts on sections by scalar multiplication**: over an
+open `U` the morphism `AlgebraicGeometry.Scheme.Modules.homOfSectionTop M m` sends a function
+`r` to `r` acting on the restriction of `m` to `U`. -/
+@[simp]
+lemma Hom.app_homOfSectionTop (M : X.Modules) (m : Γ(M, ⊤)) (U : X.Opens) (r : Γ(X, U)) :
+    Hom.app (homOfSectionTop M m) U r =
+      r • M.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op m := by
+  rw [Hom.app_eq_smul_res, ← unitHomEquivTop_symm_apply, Equiv.apply_symm_apply]
+
 /-- The global function attached to an endomorphism of the structure sheaf of a scheme: the
 image of the unit function. The endomorphism is multiplication by it, see
 `AlgebraicGeometry.Scheme.Modules.Hom.app_eq_mul_endSection`, and this identifies the
@@ -2633,6 +2645,12 @@ section PushforwardFree
 
 variable {X Y : Scheme.{u}} (g : Y ⟶ X) {ι : Type u} [Finite ι] {P : X.Modules}
 
+/-- **The pushforward of a free sheaf of modules is a coproduct of copies of `g_* 𝒪_Y`.**
+`Modules.pushforward g` is additive, hence preserves finite coproducts. -/
+noncomputable def isColimitMapFreeModulesCofan :
+    IsColimit ((pushforward g).mapCocone (Y.freeModulesCofan ι)) :=
+  isColimitOfPreserves (pushforward g) (Y.isColimitFreeModulesCofan ι)
+
 /-- **A morphism out of the pushforward of a free sheaf of modules is the same thing as a
 family of morphisms out of the pushforward of the structure sheaf.**
 
@@ -2640,25 +2658,43 @@ A morphism out of `g_* M` cannot be written down on sections, because over a non
 `U` the sections `Γ(𝒪_Y, g ⁻¹ᵁ U)` are not built from `Γ(𝒪_X, U)`. But `𝒪_Y^ι` is the coproduct
 of `ι` copies of `𝒪_Y` and `Modules.pushforward g` is additive, hence preserves finite
 coproducts, so `g_* (𝒪_Y^ι)` is the coproduct of `ι` copies of `g_* 𝒪_Y` and a morphism out of
-it is a family of morphisms out of `g_* 𝒪_Y`. -/
+it is a family of morphisms out of `g_* 𝒪_Y`.
+
+```
+  g_* 𝒪_Y ──g_* (ιFree j)──▶ g_* (𝒪_Y^ι)
+        ╲                         │
+   β j   ╲                        │ pushforwardFreeDesc g β
+          ╲                       ▼
+           ╲────────────────────▶ P
+```
+-/
 noncomputable def pushforwardFreeDesc (β : ι → ((pushforward g).obj Y.structureModules ⟶ P)) :
     (pushforward g).obj (Y.freeModules ι) ⟶ P :=
-  (Limits.isColimitOfPreserves (pushforward g) (Y.isColimitFreeModulesCofan ι)).desc
-    (Limits.Cocone.mk P (Discrete.natTrans fun j ↦ β j.as))
+  (isColimitMapFreeModulesCofan g).desc (Cocone.mk P (Discrete.natTrans fun j ↦ β j.as))
 
+/-- **The `j`-th component of the descended morphism is `β j`**: the triangle
+
+```
+  g_* 𝒪_Y ──g_* (ιFree j)──▶ g_* (𝒪_Y^ι)
+        ╲                         │
+   β j   ╲                        │ pushforwardFreeDesc g β
+          ╲                       ▼
+           ╲────────────────────▶ P
+```
+
+commutes. -/
 @[reassoc (attr := simp)]
 lemma map_ιFree_comp_pushforwardFreeDesc
     (β : ι → ((pushforward g).obj Y.structureModules ⟶ P)) (j : ι) :
     (pushforward g).map (SheafOfModules.ιFree j) ≫ pushforwardFreeDesc g β = β j :=
-  (Limits.isColimitOfPreserves (pushforward g) (Y.isColimitFreeModulesCofan ι)).fac _ ⟨j⟩
+  (isColimitMapFreeModulesCofan g).fac _ ⟨j⟩
 
 /-- **Two morphisms out of the pushforward of a free sheaf of modules agreeing on every
 summand are equal.** -/
 lemma pushforwardFree_hom_ext {χ χ' : (pushforward g).obj (Y.freeModules ι) ⟶ P}
     (h : ∀ j : ι, (pushforward g).map (SheafOfModules.ιFree j) ≫ χ =
       (pushforward g).map (SheafOfModules.ιFree j) ≫ χ') : χ = χ' :=
-  (Limits.isColimitOfPreserves (pushforward g)
-    (Y.isColimitFreeModulesCofan ι)).hom_ext fun j ↦ h j.as
+  (isColimitMapFreeModulesCofan g).hom_ext fun j ↦ h j.as
 
 /-- **The descended morphism is the only one restricting to the given family on the
 summands.** -/
@@ -2766,6 +2802,16 @@ lemma eq_descPushforwardStructure (hψ : kernel.ι g.toPushforwardStructure ≫ 
     (hχ : g.toPushforwardStructure ≫ χ = ψ) :
     χ = g.descPushforwardStructure ψ hψ := by
   rw [← cancel_epi g.toPushforwardStructure, hχ,
+    toPushforwardStructure_descPushforwardStructure]
+
+/-- **The descent computes on the functions pulled back from `X`.** Together with
+`AlgebraicGeometry.Scheme.Hom.eq_descPushforwardStructure` this is what pins the descent down
+on sections: over an open on which `g.app` is surjective it determines it completely. -/
+@[simp]
+lemma app_descPushforwardStructure_app (hψ : kernel.ι g.toPushforwardStructure ≫ ψ = 0)
+    (U : X.Opens) (s : Γ(X.structureModules, U)) :
+    (g.descPushforwardStructure ψ hψ).app U (g.toPushforwardStructure.app U s) = ψ.app U s := by
+  rw [← ConcreteCategory.comp_apply, ← Modules.Hom.comp_app,
     toPushforwardStructure_descPushforwardStructure]
 
 /-- **`g_* 𝒪_Y` is the quotient of `𝒪_X` by the ideal sheaf of `Y`**: the sequence
