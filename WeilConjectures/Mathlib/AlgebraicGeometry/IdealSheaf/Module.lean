@@ -65,13 +65,17 @@ sheaf-condition argument that the kernel description gets for free.
   `(ι_J)_* 𝒪_{V(J)}` is the quotient of `𝒪_X` by the ideal sheaf and a morphism out of `𝒪_X`
   killing the ideal sheaf descends to it through
   `AlgebraicGeometry.Scheme.Hom.descPushforwardStructure`.
-- `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc_of_germ` — **the
+- `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc_of_stalkIdeal` — **the
   stalkwise criterion for `g_* (𝒪_Y^ι) ⟶ J` to be an isomorphism**: it suffices that at every
-  point the germs of the `m j` generate the stalk of `J` and that their only relations have
-  coefficients in the stalk of `g.ker`. Its unpackaged form is
-  `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc`, and
+  point `x` the germs of the `m j` generate the ideal `J_x` of `𝒪_{X, x}` and that their only
+  relations have coefficients in the stalk of `g.ker`. The intermediate forms
+  `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc_of_germ` and
+  `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc` are also available, and
   `AlgebraicGeometry.Scheme.IdealSheafData.stalkMap_pushforwardFreeDesc` computes the
   comparison morphism on a stalk.
+- `AlgebraicGeometry.Scheme.IdealSheafData.range_stalkIdealι` — the stalk of the ideal sheaf
+  sits in the local ring `𝒪_{X, x}` as the ideal
+  `AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap` — the comparison morphism
   `g^* I ⟶ I'` for a morphism `g` pulling the ideal `I` into the ideal `I'`, together with
   `comapModulesMap_toModulesι` and `eq_comapModulesMap`, which determine it.
@@ -229,6 +233,44 @@ lemma mem_range_stalkMap_toModulesι_iff (z : X.structureModules.presheaf.stalk 
   simp only [J.range_toModulesι_app_eq_idealOfOpens, Set.mem_iUnion, Set.mem_image,
     SetLike.mem_coe]
   rfl
+
+/-- **The stalk of the ideal sheaf, as a submodule of the local ring `𝒪_{X, x}`**: the
+inclusion `J.toModulesι` on the stalk at `x`, read through the identification
+`AlgebraicGeometry.Scheme.Modules.stalkStructureModulesLinearEquiv` of the stalk of `𝒪_X`
+viewed as a sheaf of modules with the local ring. Its range is
+`AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`. -/
+noncomputable def stalkIdealι :
+    J.toModules.presheaf.stalk x →ₗ[X.presheaf.stalk x] X.presheaf.stalk x :=
+  (Modules.stalkStructureModulesLinearEquiv X x).toLinearMap ∘ₗ
+    ((Modules.stalkFunctor X x).map J.toModulesι).hom
+
+@[simp]
+lemma stalkIdealι_germ {U : X.Opens} (hx : x ∈ U) (t : Γ(J.toModules, U)) :
+    J.stalkIdealι x (J.toModules.presheaf.germ U x hx t) =
+      X.presheaf.germ U x hx (J.toModulesι.app U t) := by
+  change Modules.stalkStructureModulesLinearEquiv X x
+    (J.toModulesι.stalkMap x (J.toModules.presheaf.germ U x hx t)) = _
+  rw [Modules.Hom.germ_stalkMap_apply, Modules.stalkStructureModulesLinearEquiv_germ]
+
+lemma injective_stalkIdealι : Function.Injective (J.stalkIdealι x) :=
+  (Modules.stalkStructureModulesLinearEquiv X x).injective.comp
+    (J.injective_stalkMap_toModulesι x)
+
+/-- **The stalk of the ideal sheaf is the ideal of germs of sections lying in `J`.** -/
+lemma range_stalkIdealι : LinearMap.range (J.stalkIdealι x) = J.stalkIdeal x := by
+  ext r
+  simp only [LinearMap.mem_range]
+  constructor
+  · rintro ⟨v, rfl⟩
+    obtain ⟨U, hx, s, hs, hsv⟩ := (J.mem_range_stalkMap_toModulesι_iff x _).mp ⟨v, rfl⟩
+    change Modules.stalkStructureModulesLinearEquiv X x (J.toModulesι.stalkMap x v) ∈ _
+    rw [← hsv, Modules.stalkStructureModulesLinearEquiv_germ]
+    exact J.germ_mem_stalkIdeal x hx hs
+  · rintro ⟨U, hx, s, hs, rfl⟩
+    obtain ⟨v, hv⟩ := (J.mem_range_stalkMap_toModulesι_iff x _).mpr ⟨U, hx, s, hs, rfl⟩
+    refine ⟨v, ?_⟩
+    change Modules.stalkStructureModulesLinearEquiv X x (J.toModulesι.stalkMap x v) = _
+    rw [hv, Modules.stalkStructureModulesLinearEquiv_germ]
 
 end Stalk
 
@@ -522,6 +564,44 @@ theorem isIso_pushforwardFreeDesc_of_germ (hJ : g.ker * J = 0) (m : ι → Γ(J.
   · obtain ⟨c, hc⟩ := hspan x v
     refine ⟨fun j ↦ (Modules.stalkStructureModulesLinearEquiv X x).symm (c j), ?_⟩
     simpa only [Modules.Hom.stalkMap_homOfSectionTop, LinearEquiv.apply_symm_apply] using hc
+
+/-- **The comparison morphism `g_* (𝒪_Y^ι) ⟶ J` attached to a family `m` of global sections of
+an ideal sheaf `J` with `g.ker * J = 0` is an isomorphism as soon as, at every point `x` of
+`X`, the germs `aⱼ` of the `m j` generate the stalk `J_x ≤ 𝒪_{X, x}` and their only relations
+`∑ⱼ cⱼ aⱼ = 0` have all their coefficients in the stalk of `g.ker`.**
+
+This is the geometric half of the identification of an ideal sheaf killed by `g.ker` with a
+free module on the closed subscheme cut out by `g.ker`: both hypotheses are statements about
+ideals of the single local ring `𝒪_{X, x}`, in the shape that the equational criterion of
+flatness produces (`Ideal.ker_linearCombination_eq_pi` and
+`Ideal.range_linearCombination_algebraMap`). -/
+theorem isIso_pushforwardFreeDesc_of_stalkIdeal (hJ : g.ker * J = 0)
+    (m : ι → Γ(J.toModules, ⊤))
+    (hker : ∀ (x : X) (c : ι → X.presheaf.stalk x),
+      ∑ j : ι, c j * X.presheaf.germ ⊤ x trivial (J.toModulesι.app ⊤ (m j)) = 0 →
+        ∀ j, c j ∈ g.ker.stalkIdeal x)
+    (hspan : ∀ x : X, J.stalkIdeal x =
+      Ideal.span (Set.range fun j : ι ↦
+        X.presheaf.germ ⊤ x trivial (J.toModulesι.app ⊤ (m j)))) :
+    IsIso (pushforwardFreeDesc g hJ m) := by
+  have key : ∀ (x : X) (c : ι → X.presheaf.stalk x),
+      J.stalkIdealι x (∑ j : ι, c j • J.toModules.presheaf.germ ⊤ x trivial (m j)) =
+        ∑ j : ι, c j * X.presheaf.germ ⊤ x trivial (J.toModulesι.app ⊤ (m j)) := by
+    intro x c
+    rw [map_sum]
+    exact Finset.sum_congr rfl fun j _ ↦ by
+      rw [LinearMap.map_smul, stalkIdealι_germ, smul_eq_mul]
+  refine isIso_pushforwardFreeDesc_of_germ g hJ m (fun x c hc j ↦ ?_) fun x v ↦ ?_
+  · refine hker x c ?_ j
+    rw [← key x c, hc, map_zero]
+  · have hv : J.stalkIdealι x v ∈ Ideal.span (Set.range fun j : ι ↦
+        X.presheaf.germ ⊤ x trivial (J.toModulesι.app ⊤ (m j))) := by
+      rw [← hspan x, ← J.range_stalkIdealι x]
+      exact LinearMap.mem_range_self _ v
+    obtain ⟨c, hc⟩ := (Submodule.mem_span_range_iff_exists_fun _).mp hv
+    refine ⟨c, J.injective_stalkIdealι x ?_⟩
+    rw [key x c, ← hc]
+    exact Finset.sum_congr rfl fun j _ ↦ (smul_eq_mul _ _).symm
 
 end PushforwardDesc
 
