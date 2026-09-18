@@ -84,7 +84,7 @@ noncomputable def derivedTensor :
   curriedTensor _
 
 @[inherit_doc derivedTensor]
-scoped notation "(" X ")⊗ᴸ[" A "]" => derivedTensor A X
+scoped notation "-⊗ᴸ-(" X ")[" A "]" => derivedTensor A X
 
 noncomputable instance laxMonoidal_Q :
     (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
@@ -96,7 +96,7 @@ noncomputable instance laxMonoidal_Qh :
 
 /-- This is a slow instance -/
 instance isLeftDerivedFunctor₂_derivedTensor :
-    ((X)⊗ᴸ[A]).IsLeftDerivedFunctor₂
+    -⊗ᴸ-(X)[A].IsLeftDerivedFunctor₂
       (Functor.LaxMonoidal.μNatTrans DerivedCategory.Qh)
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) :=
