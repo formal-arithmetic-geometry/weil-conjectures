@@ -28,14 +28,16 @@ about the triviality locus
 
 `Z' := {t : Z | L restricted to the fibre W_t is trivial}`.
 
-* `Z'` is **closed**, by `cor:cube-triviality-closed`
-  (`AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_restrictToFiber_pullbackSnd_iso_structureModules`).
+* `Z'` is **closed**, by `cor:cube-triviality-closed`, which is
+  `isClosed_setOf_nonempty_restrictToFiber_pullbackSnd_iso_structureModules` in the namespace
+  `AlgebraicGeometry.Scheme.Modules`.
 * `Z'` is **open**: at a point `t` of `Z'`, `lem:cube-thickening-trivial`
   (`AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_eq_one_of_isProper`) makes `L`
   trivial on every infinitesimal neighbourhood `W ×_Z Zₙ` of the fibre, and
-  `prop:cube-formal-triviality`
-  (`AlgebraicGeometry.Scheme.Modules.exists_mem_forall_nonempty_restrictToFiber_pullbackSnd_iso_structureModules`)
-  turns that into triviality on the fibres over a whole neighbourhood of `t`.
+  `prop:cube-formal-triviality`, which is
+  `exists_mem_forall_nonempty_restrictToFiber_pullbackSnd_iso_structureModules` in the namespace
+  `AlgebraicGeometry.Scheme.Modules`, turns that into triviality on the fibres over a whole
+  neighbourhood of `t`.
 * `Z'` contains the point picked out by `z₀`, by the third hypothesis.
 * Hence `Z' = Z`, `Z` being connected, and `cor:cube-seesaw-trivial`
   (`AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_pullbackSnd`) applied to the
@@ -43,16 +45,17 @@ about the triviality locus
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.isOpen_setOf_nonempty_restrictToFiber_pullbackSnd_iso_structureModules`
-  — the triviality locus of `L` on `Z` is open. This is Steps 2 and 3 of the blueprint's proof.
+- `isOpen_setOf_nonempty_restrictToFiber_pullbackSnd_iso_structureModules`, in the namespace
+  `AlgebraicGeometry.Scheme.Modules` — the triviality locus of `L` on `Z` is open. This is
+  Steps 2 and 3 of the blueprint's proof.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_pullbackMapSliceInclusion`
   (blueprint: `thm:cube-cube`) — the theorem of the cube itself.
 
 ## Implementation notes
 
 * **The Künneth hypothesis is carried, not discharged.** Both statements take the hypothesis
-  `hkunneth` of
-  `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper`
+  `hkunneth` of `map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper`,
+  in the namespace `AlgebraicGeometry.Scheme.Pic`
   — that a deformation class on `(W ×_K Z) ×_Z Z_{n+1}` restricting to zero on both slices is
   zero — and pass it straight on, exactly as `WeilConjectures.AlgebraicGeometry.TheoremOfCube`
   carries it; see the implementation notes of that file for what it is and where it comes from
@@ -74,7 +77,12 @@ about the triviality locus
   `AlgebraicGeometry.Scheme.Pic.map_eq_one_iff`, which says that the class of the pullback of
   `L` along `f` is trivial in the Picard group exactly when `f^* L ≅ 𝒪`, and by
   `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_zero_eq_one_iff`, which
-  identifies the zeroth infinitesimal base change `W ×_Z Z₀` with the fibre `W_t`.
+  identifies the zeroth infinitesimal base change `W ×_Z Z₀` with the fibre `W_t`. Both live
+  here rather than beside `AlgebraicGeometry.Scheme.Pic.map` in
+  `WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal`, because they need the trivial
+  line bundles of `WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle`, which that
+  file does not import, and because adding an import there disturbs the resolution of the
+  monoidal structure on `X.Modules` in the proofs that follow it.
 * Everything here is `sorryAx`-tainted, through the seesaw theorem and through
   `prop:cube-formal-triviality`, both of which rest on the project's deferred semicontinuity
   and Grauert statements. This is why nothing in this area carries `\leanok`.
@@ -123,7 +131,7 @@ theorem Pic.map_infinitesimalBaseChangeFst_zero_eq_one_iff (f : W ⟶ T) (t : T)
     (hL : L.Invertible) :
     Pic.map (infinitesimalBaseChangeFst f t 0) (Pic.mk L hL) = 1 ↔
       Nonempty ((Modules.restrictToFiber f t).obj L ≅ (f.fiber t).structureModules) := by
-  rw [← Pic.map_eq_one_iff, ← infinitesimalBaseChangeZeroIsoFiber_hom_fiberι f t,
+  rw [← Pic.map_eq_one_iff _ hL, ← infinitesimalBaseChangeZeroIsoFiber_hom_fiberι f t,
     Pic.map_comp_apply]
   refine ⟨fun h ↦ Pic.map_injective_of_isIso _ (h.trans (map_one _).symm), fun h ↦ ?_⟩
   rw [h, map_one]
@@ -153,8 +161,8 @@ the restriction of `L` to the fibre `(X × Y)_t` is trivial is open.
 
 At such a `t`, `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_eq_one_of_isProper`
 makes `L` trivial on every infinitesimal neighbourhood of the fibre, and
-`AlgebraicGeometry.Scheme.Modules.exists_mem_forall_nonempty_restrictToFiber_pullbackSnd_iso_structureModules`
-turns that into triviality on the fibres over a neighbourhood of `t`.
+`exists_mem_forall_nonempty_restrictToFiber_pullbackSnd_iso_structureModules`, in the same
+namespace, turns that into triviality on the fibres over a neighbourhood of `t`.
 
 The Künneth hypothesis `hkunneth` is carried, not discharged; see the implementation notes of
 this file. -/
@@ -245,7 +253,7 @@ theorem nonempty_iso_structureModules_of_pullbackMapSliceInclusion [IsReduced Z]
   have hcomp : sliceInclusionSnd πY πZ y₀ hy₀ ≫ pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀ =
       sliceInclusionSnd (Limits.pullback.fst πX πY ≫ πX) πZ w₀ hw₀ := by
     refine Limits.pullback.hom_ext ?_ ?_ <;>
-      simp [← Category.assoc, ← hy, Category.assoc]
+      simp [← hy, Category.assoc]
   refine nonempty_iso_structureModules_pullbackSnd _ πZ hL
     (fun t _ ↦ huniv.ge (Set.mem_univ t)) w₀ hw₀ ((Pic.map_eq_one_iff _ hL).1 ?_)
   rw [← hcomp, Pic.map_comp_apply, hLY, map_one]

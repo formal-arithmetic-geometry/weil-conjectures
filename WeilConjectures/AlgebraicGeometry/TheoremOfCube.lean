@@ -217,9 +217,9 @@ the Künneth input `hkunneth` and the base case `hL0` of the induction.
 
 The base case is triviality of `L` on `(X ×_K Y) ×_K Z` restricted to the zeroth infinitesimal
 base change, that is, on the fibre over `t`; unlike in
-`AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper`
-it is not asked in the form of a slice through a rational point of `Z`, and `t` accordingly
-need not be a rational point. -/
+`Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper` below it is
+not asked in the form of a slice through a rational point of `Z`, and `t` accordingly need not
+be a rational point. -/
 theorem Pic.map_infinitesimalBaseChangeFst_eq_one_of_isProper
     (πX : X ⟶ Spec (.of K)) [IsProper πX] [GeometricallyIntegral πX]
     (πY : Y ⟶ Spec (.of K)) [IsProper πY] [GeometricallyIntegral πY] (πZ : Z ⟶ Spec (.of K))
