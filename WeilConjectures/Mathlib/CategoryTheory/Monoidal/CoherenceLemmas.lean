@@ -12,18 +12,29 @@ public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 # Invertible objects of a monoidal category
 
 An object `M` of a monoidal category is *invertible* when there is an object `N` together with
-isomorphisms `M ⊗ N ≅ 𝟙_` and `N ⊗ M ≅ 𝟙_`. This file records three consequences of
+isomorphisms `M ⊗ N ≅ 𝟙_` and `N ⊗ M ≅ 𝟙_`. This file records four consequences of
 invertibility:
 
 * tensoring on the right by an invertible object is an equivalence of categories, hence in
   particular carries zero objects to zero objects and, being exact, short exact sequences to
   short exact sequences (`CategoryTheory.ShortComplex.ShortExact.map_of_exact`),
-* a morphism `𝟙_ ⟶ M` to an invertible object which is a split monomorphism is an isomorphism.
+* a morphism `𝟙_ ⟶ M` to an invertible object which is a split monomorphism is an isomorphism,
+* a tensor inverse of an object isomorphic to the tensor unit is itself isomorphic to the unit,
+* two morphisms `𝟙_ ⟶ M` and `𝟙_ ⟶ N` out of the tensor unit have a **product**
+  `CategoryTheory.MonoidalCategory.pairing`, an endomorphism of `𝟙_`, determined by a chosen
+  isomorphism `e : M ⊗ N ≅ 𝟙_`.
 
 The second is the categorical form of the fact that a surjective linear map onto an invertible
 module over a commutative ring is bijective (`Module.Invertible.bijective_of_surjective`): every
 endomorphism of `M` is multiplication by an endomorphism of `𝟙_`, and multiplication by a scalar
 commutes with every morphism out of `𝟙_`, so a one-sided inverse is a two-sided inverse.
+
+## Main definitions
+
+- `CategoryTheory.MonoidalCategory.isoTensorUnitOfTensorIso`
+- `CategoryTheory.MonoidalCategory.pairing`, with
+  `CategoryTheory.MonoidalCategory.pairing_eq` rewriting it as a tensor product of the two
+  factors.
 
 ## Main results
 
@@ -94,6 +105,37 @@ lemma isIso_of_comp_eq_id (e : M ⊗ N ≅ 𝟙_ C) (e' : N ⊗ M ≅ 𝟙_ C) {
     exact h
   refine ⟨s, h, ?_⟩
   rw [← hw', h₂]
+  simp
+
+/-- **A tensor inverse of an object isomorphic to the tensor unit is isomorphic to the unit**: for
+`e : M ⊗ N ≅ 𝟙_ C` and `i : M ≅ 𝟙_ C`, the composite
+
+```
+        (λ_ N).symm        i.symm ▷ N          e
+    N ─────────────→ 𝟙_ ⊗ N ─────────→ M ⊗ N ─────→ 𝟙_
+```
+-/
+def isoTensorUnitOfTensorIso (e : M ⊗ N ≅ 𝟙_ C) (i : M ≅ 𝟙_ C) : N ≅ 𝟙_ C :=
+  (λ_ N).symm ≪≫ (i.symm ⊗ᵢ Iso.refl N) ≪≫ e
+
+/-- **The product of two morphisms out of the tensor unit** determined by an isomorphism
+`e : M ⊗ N ≅ 𝟙_ C`: the composite
+
+```
+        g        (ρ_ M).inv        M ◁ h          e
+   𝟙_ ─────→ M ──────────→ M ⊗ 𝟙_ ───────→ M ⊗ N ───→ 𝟙_
+```
+
+By `CategoryTheory.MonoidalCategory.pairing_eq` it is also `g ⊗ₘ h` read through the unitor and
+`e`, which is the symmetric description. -/
+def pairing (e : M ⊗ N ≅ 𝟙_ C) (g : 𝟙_ C ⟶ M) (h : 𝟙_ C ⟶ N) : 𝟙_ C ⟶ 𝟙_ C :=
+  g ≫ (ρ_ M).inv ≫ (M ◁ h) ≫ e.hom
+
+/-- **The product of two morphisms out of the tensor unit is their tensor product**, read through
+the left unitor and `e`. -/
+lemma pairing_eq (e : M ⊗ N ≅ 𝟙_ C) (g : 𝟙_ C ⟶ M) (h : 𝟙_ C ⟶ N) :
+    pairing e g h = (λ_ (𝟙_ C)).inv ≫ (g ⊗ₘ h) ≫ e.hom := by
+  rw [pairing, rightUnitor_inv_naturality_assoc, tensorHom_def, unitors_inv_equal]
   simp
 
 end CategoryTheory.MonoidalCategory

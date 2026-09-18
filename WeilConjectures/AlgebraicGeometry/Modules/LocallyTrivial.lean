@@ -173,7 +173,10 @@ obtained by pushing their tensor product through the comparison morphism
                                         v
                        Γ(X, U) <--e--  Γ(M ⊗ N, U)
 ```
--/
+
+`AlgebraicGeometry.Scheme.Modules.pairingHom` is the same product of two *global* sections, taken
+as an endomorphism of the structure sheaf rather than as a global function; that is the form which
+pulls back along a morphism of schemes, which a section does not. -/
 noncomputable def tensorPairing (U : X.Opens) :
     Γ(M, U) →ₗ[Γ(X, U)] Γ(N, U) →ₗ[Γ(X, U)] Γ(X, U) :=
   LinearMap.compr₂ (TensorProduct.mk Γ(X, U) Γ(M, U) Γ(N, U))

@@ -16,11 +16,10 @@ Let `X` be a proper geometrically integral variety over a field `K`, let `T` be 
 `K`-scheme and let `L` be a line bundle on `X × T`. The set of points `t` of `T` at which the
 restriction `L_t` of `L` to the fibre `X_t` is a trivial line bundle is **closed** in `T`.
 
-The proof is the one of the blueprint. By the triviality criterion over a field
-(`AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorUnit_iff_of_universallyClosed`), applied on
-the fibre `X_t` over the residue field `κ(t)` — which is not assumed algebraically closed — the
-bundle `L_t` is trivial exactly when both `Γ(X_t, L_t)` and `Γ(X_t, N_t)` are non-zero, where `N`
-is a tensor inverse of `L`. Non-vanishing of a fibrewise space of sections is the inequality
+The proof is the one of the blueprint. By the triviality criterion read on a fibre
+(`AlgebraicGeometry.Scheme.Modules.nonempty_restrictToFiber_iso_structureModules_iff_nontrivial`),
+the bundle `L_t` is trivial exactly when both `Γ(X_t, L_t)` and `Γ(X_t, N_t)` are non-zero, where
+`N` is a tensor inverse of `L`. Non-vanishing of a fibrewise space of sections is the inequality
 `1 ≤ h⁰`, and each of the two loci `{t | 1 ≤ h⁰}` is closed by the semicontinuity of `h⁰`
 (`AlgebraicGeometry.Scheme.Modules.isClosed_setOf_le_finrankFiberSections`). The triviality locus
 is their intersection.
@@ -72,13 +71,12 @@ section General
 
 variable {W T : Scheme.{u}}
 
-/-- **Triviality of `L` on the fibre over `t` is the non-vanishing of the two fibrewise spaces of
-sections** `Γ(W_t, L_t)` and `Γ(W_t, N_t)`, where `N` is a tensor inverse of `L`.
+/-- **Triviality of `L` on the fibre over `t` is the inequality `1 ≤ h⁰` for the two fibrewise
+spaces of sections** `Γ(W_t, L_t)` and `Γ(W_t, N_t)`, where `N` is a tensor inverse of `L`.
 
-This is the triviality criterion over a field
-(`AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorUnit_iff_of_universallyClosed`) read on the
-fibre `W_t`, which is integral and proper over the residue field `κ(t)`, with the non-vanishing
-of a finite-dimensional space rewritten as `1 ≤ h⁰`. -/
+This is
+`AlgebraicGeometry.Scheme.Modules.nonempty_restrictToFiber_iso_structureModules_iff_nontrivial`
+with the non-vanishing of a finite-dimensional space rewritten as `1 ≤ h⁰`. -/
 theorem nonempty_restrictToFiber_iso_structureModules_iff (f : W ⟶ T) [IsProper f]
     {L N : W.Modules} (e : L ⊗ N ≅ 𝟙_ W.Modules) (t : T)
     [GeometricallyIntegral (f.fiberToSpecResidueField t)] :
@@ -86,10 +84,7 @@ theorem nonempty_restrictToFiber_iso_structureModules_iff (f : W ⟶ T) [IsPrope
       1 ≤ finrankFiberSections f L t ∧ 1 ≤ finrankFiberSections f N t := by
   have : L.IsCoherent := (SheafOfModules.Invertible.left (R := W.sheaf) e).isCoherent
   have : N.IsCoherent := (SheafOfModules.Invertible.right (R := W.sheaf) e).isCoherent
-  have : IsIntegral (f.fiber t) := GeometricallyIntegral.isIntegral (f.fiberToSpecResidueField t)
-  rw [nonempty_iso_structureModules_iff,
-    nonempty_iso_tensorUnit_iff_of_universallyClosed (f.fiberToSpecResidueField t)
-      (Functor.Monoidal.mapIsoTensorUnit (restrictToFiber f t) e),
+  rw [nonempty_restrictToFiber_iso_structureModules_iff_nontrivial f e t,
     one_le_finrankFiberSections_iff f L t, one_le_finrankFiberSections_iff f N t]
 
 /-- **The triviality locus of a line bundle is closed**, for a proper flat morphism `f : W ⟶ T`
