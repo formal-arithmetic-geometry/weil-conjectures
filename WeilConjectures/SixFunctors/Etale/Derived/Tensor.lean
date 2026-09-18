@@ -88,11 +88,11 @@ scoped notation "(" X ")⊗ᴸ[" A "]" => derivedTensor A X
 
 noncomputable instance laxMonoidal_Q :
     (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
-  DerivedCategory.laxMonidalQ (Sheaf X.smallEtaleTopology A)
+  DerivedCategory.laxMonoidalQ (Sheaf X.smallEtaleTopology A)
 
 noncomputable instance laxMonoidal_Qh :
     (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
-  DerivedCategory.laxMonidalQh (Sheaf X.smallEtaleTopology A)
+  DerivedCategory.laxMonoidalQh (Sheaf X.smallEtaleTopology A)
 
 /-- The derived tensor product on `D(X_ét)` is the total left derived functor, in two
 variables, of the tensor product of étale sheaves. -/
