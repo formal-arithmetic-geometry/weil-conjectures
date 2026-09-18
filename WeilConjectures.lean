@@ -216,6 +216,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBi
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
+public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Funext
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Monad
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Variables
