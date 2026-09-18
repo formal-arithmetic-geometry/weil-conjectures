@@ -92,4 +92,204 @@ lemma genericRank_le_of_mono [IsIntegral X] {G H : X.Modules} (u : G ⟶ H) [Mon
 
 end GenericRank
 
+section Rank
+
+variable (k : Type u) [Field k] {Y : Scheme.{u}} [Y.Over (Spec (.of k))]
+
+/-- A zero sheaf of modules is coherent. -/
+lemma isCoherent_of_isZero {G : Y.Modules} (h : IsZero G) : G.IsCoherent :=
+  haveI : Y.structureModules.IsCoherent := (SheafOfModules.invertible_unit Y.sheaf).isCoherent
+  (SheafOfModules.isCoherent Y.ringCatSheaf).prop_of_iso
+    ((isZero_cokernel_of_epi (𝟙 Y.structureModules)).iso h)
+    (isCoherent_cokernel (𝟙 Y.structureModules) inferInstance inferInstance)
+
+/-- **The intersection number depends on the coefficient sheaf only through its isomorphism
+class.** -/
+lemma intersectionNumber_congr_left {F F' : Y.Modules} (e : F ≅ F') {d : ℕ}
+    (L : Fin d → Y.Modules) (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k F L hL = intersectionNumber k F' L hL := by
+  rw [intersectionNumber, intersectionNumber]
+  refine Finset.sum_congr rfl fun S _ ↦ ?_
+  congr 1
+  exact eulerChar_congr k (tensorIso e (Iso.refl _))
+
+/-- **The intersection number of a zero sheaf vanishes.** -/
+lemma intersectionNumber_eq_zero_of_isZero {F : Y.Modules} (hF : IsZero F) {d : ℕ}
+    (L : Fin d → Y.Modules) (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k F L hL = 0 := by
+  rw [intersectionNumber]
+  refine Finset.sum_eq_zero fun S _ ↦ ?_
+  exact mul_eq_zero_of_right _
+    (eulerChar_eq_zero_of_isZero k ((invertible_zpowProd L hL _).isZero_tensorObj hF))
+
+end Rank
+
+section GenericRankAux
+
+variable {X : Scheme.{u}}
+
+/-- **The generic rank depends on a sheaf only through its isomorphism class.** -/
+lemma genericRank_congr [IrreducibleSpace X] {F F' : X.Modules} (e : F ≅ F') :
+    genericRank F = genericRank F' :=
+  (((stalkFunctor X (genericPoint X)).mapIso e).toLinearEquiv).finrank_eq
+
+/-- **The generic rank of a zero sheaf vanishes.** -/
+lemma genericRank_eq_zero_of_isZero [IrreducibleSpace X] {F : X.Modules} (h : IsZero F) :
+    genericRank F = 0 := by
+  have : Subsingleton (F.presheaf.stalk (genericPoint X)) := by
+    rw [← not_nontrivial_iff_subsingleton]
+    intro hnt
+    have : genericPoint X ∈ F.support := hnt
+    simp [(support_eq_empty_iff_isZero F).2 h] at this
+  exact (Module.finrank_eq_zero_iff_of_free _ _).mpr this
+
+/-- **The generic rank of the tensor unit is `1`**, the tensor unit being the structure sheaf. -/
+lemma genericRank_tensorUnit [IsIntegral X] : genericRank (𝟙_ X.Modules) = 1 :=
+  (genericRank_congr (Modules.tensorUnitIsoUnit (X := X))).trans genericRank_unit
+
+end GenericRankAux
+
+section PushforwardIso
+
+variable {Z Y : Scheme.{u}} (ι : Z ⟶ Y) [IsIso ι]
+
+/-- **Pulling back along an isomorphism is an equivalence** of the categories of sheaves of
+modules, with inverse the pullback along the inverse isomorphism. -/
+noncomputable def pullbackEquivOfIsIso : Y.Modules ≌ Z.Modules :=
+  .mk (pullback ι) (pullback (inv ι))
+    ((pullbackComp (inv ι) ι ≪≫ eqToIso (congrArg Modules.pullback (IsIso.inv_hom_id ι)) ≪≫
+      pullbackId Y).symm)
+    (pullbackComp ι (inv ι) ≪≫ eqToIso (congrArg Modules.pullback (IsIso.hom_inv_id ι)) ≪≫
+      pullbackId Z)
+
+/-- **The direct image along an isomorphism is the inverse image along its inverse**, both being
+right adjoint to the inverse image along the isomorphism. -/
+noncomputable def pushforwardIsoPullbackInv : pushforward ι ≅ pullback (inv ι) :=
+  (pullbackPushforwardAdjunction ι).rightAdjointUniq (pullbackEquivOfIsIso ι).toAdjunction
+
+/-- **The direct image of the structure sheaf along an isomorphism is the structure sheaf.** -/
+noncomputable def pushforwardStructureModulesIso :
+    (pushforward ι).obj Z.structureModules ≅ Y.structureModules :=
+  (pushforwardIsoPullbackInv ι).app _ ≪≫ pullbackUnitIso (inv ι)
+
+end PushforwardIso
+
+section IntersectionRank
+
+variable (k : Type u) [Field k] {Y : Scheme.{u}} [Y.Over (Spec (.of k))] [Infinite k]
+  [IsProper (Y ↘ Spec (.of k))] [IsIntegral Y] {A : Y.Modules} (hA : A.Invertible)
+  (hAa : A.IsAmple) {d : ℕ} (hd : topologicalKrullDim Y = (d : WithBot ℕ∞))
+
+include hA hAa hd
+
+/-- **A coherent sheaf whose generic rank vanishes has vanishing top intersection number**: its
+support is then a proper closed subset of `Y`, hence of dimension `< d`. -/
+theorem intersectionNumber_eq_zero_of_genericRank_eq_zero (F : Y.Modules) [F.IsCoherent]
+    (L : Fin d → Y.Modules) (hL : ∀ j, (L j).Invertible) (hr : genericRank F = 0) :
+    intersectionNumber k F L hL = 0 := by
+  have hcpt : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  refine intersectionNumber_eq_zero_of_supportDim_lt k hA hAa F L hL ?_
+  have hns : genericPoint Y ∉ F.support := (genericRank_eq_zero_iff F).1 hr
+  rw [supportDim_def, ← hd]
+  exact topologicalKrullDim_lt_of_ne_univ (Y ↘ Spec (.of k)) (isClosed_support F)
+    fun h ↦ hns (h ▸ Set.mem_univ _)
+
+/-- **A subsheaf of the same generic rank has the same top intersection number**: the quotient
+has generic rank zero, so its own intersection number vanishes. -/
+theorem intersectionNumber_eq_of_mono {G H : Y.Modules} [G.IsCoherent] [H.IsCoherent]
+    (u : G ⟶ H) [Mono u] (hrk : genericRank G = genericRank H) (L : Fin d → Y.Modules)
+    (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k G L hL = intersectionNumber k H L hL := by
+  have hcohc : (cokernel u).IsCoherent := isCoherent_cokernel u inferInstance inferInstance
+  have hSE : (ShortComplex.mk u (cokernel.π u) (by simp)).ShortExact :=
+    { exact := ShortComplex.exact_cokernel u }
+  have hrk' : genericRank H = genericRank G + genericRank (cokernel u) := hSE.genericRank_add
+  have hz : genericRank (cokernel u) = 0 := by omega
+  have h0 := intersectionNumber_eq_zero_of_genericRank_eq_zero k hA hAa hd (cokernel u) L hL hz
+  have hadd : intersectionNumber k G L hL + intersectionNumber k (cokernel u) L hL
+      = intersectionNumber k H L hL := intersectionNumber_add_intersectionNumber k hSE L hL
+  omega
+
+/-- **The top intersection number of a graded piece of the dévissage.** A pushforward of a
+non-zero ideal sheaf on an integral closed subscheme `Z ⊆ Y` either misses the generic point of
+`Y`, and then both sides vanish, or `Z = Y`, and then it is a non-zero ideal sheaf on `Y`, of
+generic rank one and with the same intersection number as `𝒪_Y`. -/
+theorem intersectionNumber_eq_genericRank_mul_of_isPushforwardIdealSheaf (P : Y.Modules)
+    [P.IsCoherent] (hP : IsPushforwardIdealSheaf P) (L : Fin d → Y.Modules)
+    (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k P L hL
+      = (genericRank P : ℤ) * intersectionNumber k (𝟙_ Y.Modules) L hL := by
+  have hunit : (𝟙_ Y.Modules).IsCoherent :=
+    (SheafOfModules.invertible_tensorUnit Y.sheaf).isCoherent
+  obtain ⟨Z, ι, hι, hZ, I, hI, ⟨e⟩⟩ := hP
+  have hι' : IsClosedImmersion ι := hι
+  have hZ' : IsIntegral Z := hZ
+  by_cases hr : genericRank P = 0
+  · rw [hr, intersectionNumber_eq_zero_of_genericRank_eq_zero k hA hAa hd P L hL hr]
+    simp
+  have hmem : genericPoint Y ∈ Set.range ι.base := by
+    by_contra hn
+    have hss : Subsingleton (((pushforward ι).obj I.toModules).presheaf.stalk (genericPoint Y)) :=
+      subsingleton_stalk_pushforward_of_notMem_range ι I.toModules
+        ι.isClosedEmbedding.isClosed_range hn
+    exact hr ((genericRank_congr e).trans ((Module.finrank_eq_zero_iff_of_free _ _).mpr hss))
+  have hrange : Set.range ι.base = Set.univ := by
+    refine Set.eq_univ_of_univ_subset ?_
+    rw [← genericPoint_closure Y]
+    exact ι.isClosedEmbedding.isClosed_range.closure_subset_iff.2 (by simpa using hmem)
+  have hsurj : Surjective ι := ⟨Set.range_eq_univ.1 hrange⟩
+  have hiso : IsIso ι := isIso_of_isClosedImmersion_of_surjective ι
+  set u : P ⟶ 𝟙_ Y.Modules := e.hom ≫ (pushforward ι).map I.toModulesι ≫
+    (pushforwardStructureModulesIso ι).hom ≫ (Modules.tensorUnitIsoUnit (X := Y)).inv with hu
+  have hmono : Mono u := by rw [hu]; infer_instance
+  have hle : genericRank P ≤ 1 := by
+    have := genericRank_le_of_mono u
+    rwa [genericRank_tensorUnit] at this
+  have hP1 : genericRank P = 1 := le_antisymm hle (Nat.one_le_iff_ne_zero.2 hr)
+  rw [hP1, Nat.cast_one, one_mul]
+  exact intersectionNumber_eq_of_mono k hA hAa hd u (by rw [hP1, genericRank_tensorUnit]) L hL
+
+/-- **The top intersection number sees only the generic rank** (`prop:deg-intersection-rank`).
+
+For `Y` an integral scheme of dimension `d`, proper over the field `k` and carrying an ample
+invertible sheaf, for `L₁, …, L_d` invertible and `F` coherent of generic rank `r`,
+
+`(L₁ ⋯ L_d · F) = r · (L₁ ⋯ L_d)`. -/
+theorem intersectionNumber_eq_genericRank_mul [IsNoetherian Y] (F : Y.Modules) [F.IsCoherent]
+    (L : Fin d → Y.Modules) (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k F L hL
+      = (genericRank F : ℤ) * intersectionNumber k (𝟙_ Y.Modules) L hL := by
+  obtain ⟨t, G, φ, hG0, ⟨eF⟩, hstep⟩ := exists_devissage F
+  have key : ∀ j : Fin (t + 1), (G j).IsCoherent ∧
+      intersectionNumber k (G j) L hL
+        = (genericRank (G j) : ℤ) * intersectionNumber k (𝟙_ Y.Modules) L hL := by
+    refine Fin.induction ⟨isCoherent_of_isZero hG0, ?_⟩ ?_
+    · rw [intersectionNumber_eq_zero_of_isZero k hG0, genericRank_eq_zero_of_isZero hG0]
+      simp
+    · rintro j ⟨hcoh, ih⟩
+      obtain ⟨hcohs, hmono, hpush⟩ := hstep j
+      have hcoh1 : (G j.castSucc).IsCoherent := hcoh
+      have hcoh2 : (G j.succ).IsCoherent := hcohs
+      have hmono' : Mono (φ j) := hmono
+      have hcohc : (cokernel (φ j)).IsCoherent :=
+        isCoherent_cokernel (φ j) inferInstance hcohs
+      have hSE : (ShortComplex.mk (φ j) (cokernel.π (φ j)) (by simp)).ShortExact :=
+        { exact := ShortComplex.exact_cokernel (φ j) }
+      have hrk : genericRank (G j.succ)
+          = genericRank (G j.castSucc) + genericRank (cokernel (φ j)) := hSE.genericRank_add
+      have hadd : intersectionNumber k (G j.castSucc) L hL
+            + intersectionNumber k (cokernel (φ j)) L hL
+          = intersectionNumber k (G j.succ) L hL :=
+        intersectionNumber_add_intersectionNumber k hSE L hL
+      have hcok := intersectionNumber_eq_genericRank_mul_of_isPushforwardIdealSheaf k hA hAa hd
+        (cokernel (φ j)) hpush L hL
+      refine ⟨hcohs, ?_⟩
+      rw [← hadd, ih, hcok, hrk]
+      push_cast
+      ring
+  obtain ⟨-, hlast⟩ := key (Fin.last t)
+  rw [← intersectionNumber_congr_left k eF L hL, hlast, genericRank_congr eF]
+
+end IntersectionRank
+
 end AlgebraicGeometry.Scheme.Modules
