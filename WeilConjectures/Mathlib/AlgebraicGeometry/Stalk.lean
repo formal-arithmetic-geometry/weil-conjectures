@@ -972,11 +972,12 @@ from `AlgebraicGeometry.Scheme.infinitesimalRingToStalk` has to be introduced at
 with
 
 ```
-letI := (infinitesimalRingToStalk f t n x).hom.toAlgebra
-haveI := flat_stalk_infinitesimalBaseChange f t n x
+let _ := (infinitesimalRingToStalk f t n x).hom.toAlgebra
+have _ := flat_stalk_infinitesimalBaseChange f t n x
 ```
 
-after which the `Module.Flat` hypothesis of, for instance,
+inside a proof, or the `letI` / `haveI` spellings of the same in term mode, after which the
+`Module.Flat` hypothesis of, for instance,
 `Module.Flat.ker_linearCombination_algebraMap` is available. The `CommRing` instances on the
 two rings, and the `IsLocalRing` instance on `T.infinitesimalRing t n`, are global. -/
 lemma flat_stalk_infinitesimalBaseChange [Flat f] (n : ℕ)
