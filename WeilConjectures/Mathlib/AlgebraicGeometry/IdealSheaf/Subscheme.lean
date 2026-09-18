@@ -24,10 +24,15 @@ affine opens contained in `U` (`mem_idealOfOpens_iff_forall_affineOpens`), which
 statements about `I.ideal` into statements about sections over arbitrary opens: the product of
 two ideal sheaves, recorded on affine opens only, still multiplies sections over any open
 (`mul_mem_mul_idealOfOpens`), and the kernel ideal sheaf of a quasi-compact morphism consists
-of the sections killed by it (`AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`). The
-germs at a point of those sections form an ideal of the local ring there
-(`AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`), which for a closed immersion is the
-kernel of the induced map of local rings (`AlgebraicGeometry.Scheme.Hom.ker_stalkIdeal`).
+of the sections killed by it (`AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`).
+
+## The stalk of an ideal sheaf
+
+The germs at a point `x` of the sections of `𝒪_X` lying in an ideal sheaf `J` form an ideal
+`AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal` of the local ring `𝒪_{X, x}`. For the kernel
+ideal sheaf of a quasi-compact morphism `f` with `f.base` inducing — an immersion, for instance —
+it is the kernel of the induced map of local rings
+(`AlgebraicGeometry.Scheme.Hom.ker_stalkIdeal`).
 
 ## Base change of the subscheme cut out by an ideal sheaf
 
@@ -140,44 +145,49 @@ lemma mem_idealOfOpens_iff_forall_affineOpens {U : X.Opens} {x : Γ(X, U)} :
       idealOfOpens_eq_ideal J ⟨V, hV⟩]
     exact H ⟨V, hV⟩ hVU'
 
+end IdealOfOpens
+
 /-! ### The stalk of an ideal sheaf -/
+
+section Stalk
+
+variable (J : X.IdealSheafData)
 
 /-- **The stalk of an ideal sheaf at a point**, as an ideal of the local ring `𝒪_{X, x}`: the
 germs at `x` of the sections of `𝒪_X` lying in `J`.
 
 This is the image in `𝒪_{X, x}` of the stalk of `J` viewed as a sheaf of modules; see
 `AlgebraicGeometry.Scheme.IdealSheafData.mem_range_stalkMap_toModulesι_iff`. -/
-noncomputable def stalkIdeal (J : X.IdealSheafData) (x : X) : Ideal (X.presheaf.stalk x) where
+noncomputable def stalkIdeal (x : X) : Ideal (X.presheaf.stalk x) where
   carrier := {r | ∃ (U : X.Opens) (hx : x ∈ U) (s : Γ(X, U)),
     s ∈ J.idealOfOpens U ∧ X.presheaf.germ U x hx s = r}
-  add_mem' := by
-    rintro a b ⟨U, hU, s, hs, rfl⟩ ⟨V, hV, t, ht, rfl⟩
+  add_mem' {a b} := by
+    rintro ⟨U, hU, s, hs, rfl⟩ ⟨V, hV, t, ht, rfl⟩
     refine ⟨U ⊓ V, ⟨hU, hV⟩, X.presheaf.map (homOfLE inf_le_left).op s +
       X.presheaf.map (homOfLE inf_le_right).op t,
       add_mem (J.map_mem_idealOfOpens inf_le_left hs) (J.map_mem_idealOfOpens inf_le_right ht),
       ?_⟩
     rw [map_add, X.presheaf.germ_res_apply, X.presheaf.germ_res_apply]
   zero_mem' := ⟨⊤, trivial, 0, zero_mem _, map_zero _⟩
-  smul_mem' := by
-    rintro c a ⟨U, hU, s, hs, rfl⟩
+  smul_mem' c {a} := by
+    rintro ⟨U, hU, s, hs, rfl⟩
     obtain ⟨V, hV, b, rfl⟩ := X.presheaf.exists_germ_eq c
     refine ⟨U ⊓ V, ⟨hU, hV⟩, X.presheaf.map (homOfLE inf_le_right).op b *
       X.presheaf.map (homOfLE inf_le_left).op s,
       Ideal.mul_mem_left _ _ (J.map_mem_idealOfOpens inf_le_left hs), ?_⟩
-    rw [map_mul, X.presheaf.germ_res_apply, X.presheaf.germ_res_apply]
-    rfl
+    rw [map_mul, X.presheaf.germ_res_apply, X.presheaf.germ_res_apply, smul_eq_mul]
 
-lemma mem_stalkIdeal_iff (J : X.IdealSheafData) (x : X) (r : X.presheaf.stalk x) :
+lemma mem_stalkIdeal_iff (x : X) (r : X.presheaf.stalk x) :
     r ∈ J.stalkIdeal x ↔ ∃ (U : X.Opens) (hx : x ∈ U) (s : Γ(X, U)),
       s ∈ J.idealOfOpens U ∧ X.presheaf.germ U x hx s = r :=
   Iff.rfl
 
-lemma germ_mem_stalkIdeal (J : X.IdealSheafData) (x : X) {U : X.Opens} (hx : x ∈ U)
-    {s : Γ(X, U)} (hs : s ∈ J.idealOfOpens U) :
+lemma germ_mem_stalkIdeal (x : X) {U : X.Opens} (hx : x ∈ U) {s : Γ(X, U)}
+    (hs : s ∈ J.idealOfOpens U) :
     X.presheaf.germ U x hx s ∈ J.stalkIdeal x :=
   ⟨U, hx, s, hs, rfl⟩
 
-end IdealOfOpens
+end Stalk
 
 /-- **The product of two ideal sheaves multiplies sections**, over an arbitrary open subset:
 if `a` is a section of `I` and `b` a section of `J` over `U` then `a * b` is a section of
@@ -254,46 +264,37 @@ lemma mem_idealOfOpens_ker_iff [QuasiCompact f] {U : Y.Opens} {x : Γ(Y, U)} :
     rw [ker_apply, RingHom.mem_ker, ← map_app_apply, hx, map_zero]
 
 open IdealSheafData in
-/-- **The stalk of the kernel ideal sheaf of a closed immersion is the kernel of the induced
-map of local rings.**
-
-The inclusion `⊇` is where the closed immersion is used: a germ killed by `g.stalkMap y` is
-killed by a section over some open subset of `Y`, and only because `g` is an embedding is that
-open subset the preimage of an open subset of `X`. -/
-lemma ker_stalkIdeal {X Y : Scheme.{u}} (g : Y ⟶ X) [IsClosedImmersion g] (y : Y) :
-    g.ker.stalkIdeal (g.base y) = RingHom.ker (g.stalkMap y).hom := by
+/-- **The stalk of the kernel ideal sheaf of a morphism inducing a topological embedding is the
+kernel of the induced map of local rings.** A closed immersion, or more generally an immersion,
+supplies the two hypotheses. -/
+lemma ker_stalkIdeal [QuasiCompact f] (hf : Topology.IsInducing f.base) (x : X) :
+    f.ker.stalkIdeal (f.base x) = RingHom.ker (f.stalkMap x).hom := by
   ext r
   constructor
   · rintro ⟨U, hx, s, hs, rfl⟩
     rw [RingHom.mem_ker]
-    change g.stalkMap y (X.presheaf.germ U (g.base y) hx s) = 0
-    rw [Scheme.Hom.germ_stalkMap_apply, g.mem_idealOfOpens_ker_iff.mp hs, map_zero]
+    change f.stalkMap x (Y.presheaf.germ U (f.base x) hx s) = 0
+    rw [Scheme.Hom.germ_stalkMap_apply, f.mem_idealOfOpens_ker_iff.mp hs, map_zero]
   · intro hr
     rw [RingHom.mem_ker] at hr
-    obtain ⟨U, hx, s, rfl⟩ := X.presheaf.exists_germ_eq r
-    rw [Scheme.Hom.germ_stalkMap_apply] at hr
-    rw [show (0 : Y.presheaf.stalk y) =
-      Y.presheaf.germ ⊤ y (show y ∈ (⊤ : Y.Opens) from trivial) 0 by simp] at hr
-    obtain ⟨W, hW, iW1, iW2, he⟩ := Y.presheaf.germ_eq y hx _ _ _ hr
+    obtain ⟨U, hx, s, rfl⟩ := Y.presheaf.exists_germ_eq r
+    -- a germ killed by `f.stalkMap x` is killed by a section over some open subset `W` of `X`
+    rw [Scheme.Hom.germ_stalkMap_apply,
+      ← map_zero (ConcreteCategory.hom (X.presheaf.germ ⊤ x trivial))] at hr
+    obtain ⟨W, hW, iWU, _, he⟩ := X.presheaf.germ_eq x hx _ _ _ hr
     rw [map_zero] at he
-    -- `W` is the preimage of an open subset `t` of `X` because `g` is an embedding
-    obtain ⟨t, ht, htW⟩ := g.isClosedEmbedding.isInducing.isOpen_iff.mp W.2
-    have hyV : g.base y ∈ (⟨t, ht⟩ : X.Opens) := by
-      have : y ∈ g.base ⁻¹' t := by rw [htW]; exact hW
-      exact this
-    have hU' : U ⊓ (⟨t, ht⟩ : X.Opens) ≤ U := inf_le_left
-    have hgU' : (g ⁻¹ᵁ (U ⊓ (⟨t, ht⟩ : X.Opens))) ≤ W := by
-      intro z hz
-      have : z ∈ g.base ⁻¹' t := hz.2
-      rw [htW] at this
-      exact this
-    refine ⟨U ⊓ (⟨t, ht⟩ : X.Opens), ⟨hx, hyV⟩, X.presheaf.map (homOfLE hU').op s, ?_, ?_⟩
-    · rw [g.mem_idealOfOpens_ker_iff, ← Scheme.Hom.map_app_apply g hU' s]
-      -- the two restriction maps agree because `Y.Opens` has at most one morphism per pair
-      have hj : ((Opens.map g.base).map (homOfLE hU')).op = iW1.op ≫ (homOfLE hgU').op :=
+    -- and `W` is the preimage of an open subset `t` of `Y` because `f.base` is inducing
+    obtain ⟨t, ht, htW⟩ := hf.isOpen_iff.mp W.2
+    have hxt : f.base x ∈ (⟨t, ht⟩ : Y.Opens) := htW.ge hW
+    have hU' : U ⊓ (⟨t, ht⟩ : Y.Opens) ≤ U := inf_le_left
+    have hfU' : (f ⁻¹ᵁ (U ⊓ (⟨t, ht⟩ : Y.Opens))) ≤ W := fun z hz ↦ htW.le hz.2
+    refine ⟨U ⊓ (⟨t, ht⟩ : Y.Opens), ⟨hx, hxt⟩, Y.presheaf.map (homOfLE hU').op s, ?_, ?_⟩
+    · rw [f.mem_idealOfOpens_ker_iff, ← Scheme.Hom.map_app_apply f hU' s]
+      -- the two restriction maps agree because `X.Opens` has at most one morphism per pair
+      have hj : ((Opens.map f.base).map (homOfLE hU')).op = iWU.op ≫ (homOfLE hfU').op :=
         Subsingleton.elim _ _
-      rw [hj, Y.presheaf.map_comp, CommRingCat.comp_apply, he, map_zero]
-    · rw [X.presheaf.germ_res_apply]
+      rw [hj, X.presheaf.map_comp, CommRingCat.comp_apply, he, map_zero]
+    · rw [Y.presheaf.germ_res_apply]
 
 /-- The kernel of the map to the scheme-theoretic image is trivial: no closed subscheme of
 `f.image` strictly smaller than `f.image` contains the image of `f`. -/
