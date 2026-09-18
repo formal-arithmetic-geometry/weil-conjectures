@@ -57,8 +57,7 @@ variable [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
 /-- Functorial flat resolutions of `A`-valued étale sheaves, obtained by applying
 extension by zero to a functorial flat resolution of the sections; see the module
 docstring. -/
-instance Etale.hasFunctorialFlatResolution_sheaf
-    [Abelian.HasFunctorialFlatResolution A] :
+instance Etale.hasFunctorialFlatResolution_sheaf [Abelian.HasFunctorialFlatResolution A] :
     Abelian.HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A) :=
   sorry
 
