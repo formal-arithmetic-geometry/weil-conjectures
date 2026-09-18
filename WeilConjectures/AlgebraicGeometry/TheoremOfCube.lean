@@ -47,9 +47,13 @@ an obstruction class `α ∈ H¹(W ×_Z Z_{n+1}, Iₙ)` whose image is the class
 - `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one`
   (blueprint: `lem:cube-thickening-trivial`) — the specialisation to the triple product of the
   cube.
+- `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_eq_one_of_isProper` — the
+  induction over a field, for proper geometrically integral varieties `X` and `Y` and an
+  arbitrary point `t` of `Z`, where the unit-extension input is a theorem rather than a
+  hypothesis and the base case is asked on the fibre over `t`.
 - `Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper`, in the
-  same namespace — the same over a field, for proper geometrically integral varieties `X` and
-  `Y`, where the unit-extension input is a theorem rather than a hypothesis.
+  same namespace — the same at the point picked out by a rational point `z₀` of `Z`, with the
+  base case asked in the form of the slice `X × Y × {z₀}`.
 
 ## Implementation notes
 
@@ -201,6 +205,47 @@ section Variety
 
 variable {K : Type u} [Field K] {X Y Z : Scheme.{u}}
 
+/-- **Triviality over the infinitesimal neighbourhoods at an arbitrary point of `Z`**, for
+proper varieties over a field.
+
+The specialisation of
+`AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_eq_one` to proper geometrically
+integral varieties `X` and `Y` over a field `K`, an arbitrary `K`-scheme `Z` and an arbitrary
+point `t` of `Z`: the unit-extension hypotheses `hX` and `hY` are discharged by
+`AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective`, leaving
+the Künneth input `hkunneth` and the base case `hL0` of the induction.
+
+The base case is triviality of `L` on `(X ×_K Y) ×_K Z` restricted to the zeroth infinitesimal
+base change, that is, on the fibre over `t`; unlike in
+`AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_isProper`
+it is not asked in the form of a slice through a rational point of `Z`, and `t` accordingly
+need not be a rational point. -/
+theorem Pic.map_infinitesimalBaseChangeFst_eq_one_of_isProper
+    (πX : X ⟶ Spec (.of K)) [IsProper πX] [GeometricallyIntegral πX]
+    (πY : Y ⟶ Spec (.of K)) [IsProper πY] [GeometricallyIntegral πY] (πZ : Z ⟶ Spec (.of K))
+    (x₀ : Spec (.of K) ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _)
+    (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _) (t : Z)
+    (hkunneth : ∀ n, Function.Injective
+      ((thickeningH1Map (pullback.snd (pullback.fst πX πY ≫ πX) πZ) (pullback.snd πX πZ)
+            (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀)
+            (pullbackMapSliceInclusionFst_snd πX πY πZ y₀ hy₀) t n).prod
+        (thickeningH1Map (pullback.snd (pullback.fst πX πY ≫ πX) πZ) (pullback.snd πY πZ)
+            (pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀)
+            (pullbackMapSliceInclusionSnd_snd πX πY πZ x₀ hx₀) t n)))
+    {L : (pullback (pullback.fst πX πY ≫ πX) πZ).Modules} (hL : L.Invertible)
+    (hLX : Pic.map (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀) (Pic.mk L hL) = 1)
+    (hLY : Pic.map (pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀) (Pic.mk L hL) = 1)
+    (hL0 : Pic.map (infinitesimalBaseChangeFst (pullback.snd (pullback.fst πX πY ≫ πX) πZ) t 0)
+      (Pic.mk L hL) = 1) (n : ℕ) :
+    Pic.map (infinitesimalBaseChangeFst (pullback.snd (pullback.fst πX πY ≫ πX) πZ) t n)
+      (Pic.mk L hL) = 1 :=
+  Pic.map_infinitesimalBaseChangeFst_eq_one _ _ _ _
+    (pullbackMapSliceInclusionFst_snd πX πY πZ y₀ hy₀) _
+    (pullbackMapSliceInclusionSnd_snd πX πY πZ x₀ hx₀) t
+    (fun n ↦ unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective πX πZ t n)
+    (fun n ↦ unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective πY πZ t n)
+    hkunneth hL hLX hLY hL0 n
+
 /-- **Triviality over the infinitesimal neighbourhoods, for proper varieties over a field**
 (blueprint: `lem:cube-thickening-trivial`).
 
@@ -234,11 +279,11 @@ theorem Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one_of_i
     (n : ℕ) :
     Pic.map (infinitesimalBaseChangeFst (pullback.snd (pullback.fst πX πY ≫ πX) πZ)
       (z₀ (closedPoint K)) n) (Pic.mk L hL) = 1 :=
-  Pic.map_infinitesimalBaseChangeFst_pullbackMapSliceInclusion_eq_one πX πY πZ x₀ hx₀ y₀ hy₀
-    z₀ hz₀ _ (fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id Z K πZ z₀ hz₀)
-    (fun n ↦ unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective πX πZ _ n)
-    (fun n ↦ unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective πY πZ _ n)
-    hkunneth hL hLz hLX hLY n
+  Pic.map_infinitesimalBaseChangeFst_eq_one_of_isProper πX πY πZ x₀ hx₀ y₀ hy₀ _ hkunneth hL
+    hLX hLY (by
+      rw [← infinitesimalBaseChangeFst_zero_comp_sliceInclusionFst _ πZ z₀ hz₀ _
+          (fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id Z K πZ z₀ hz₀),
+        Pic.map_comp_apply, hLz, map_one]) n
 
 end Variety
 
