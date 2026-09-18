@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
-public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Monoidal
 
 /-!
 
@@ -41,6 +41,24 @@ Together these give the K-flat left derivability structure, which is what
   `Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (.up ℤ))`, from which
   `MonoidalCategory (DerivedCategory A)` follows by
   `WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal`.
+
+## Shortcut instances
+
+The second half of the file records what that instance gives: `DerivedCategory.monoidalCategory`,
+the lax monoidal structures `DerivedCategory.laxMonoidalQh` and `DerivedCategory.laxMonoidalQ` of
+the two localization functors, and `DerivedCategory.isLeftDerivedFunctor₂CurriedTensor`, which
+says that the derived tensor product is the binary left derived functor of the tensor product of
+`K(A)`.
+
+All four hold by `inferInstance`, but only in a context as small as this one. The instances of
+`WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal` they come from are stated
+under `∀`-quantified `GradedObject` hypotheses, and at the use sites of this development instance
+search does not get through those: for the category of étale sheaves of
+`WeilConjectures.SixFunctors.Etale.Derived.Tensor`, synthesizing
+`MonoidalCategory (DerivedCategory (Sheaf X.smallEtaleTopology A))` exhausts the default budget
+of 20000 `synthInstance` heartbeats after some 15 seconds. The same is done one level down in
+`WeilConjectures.CategoryTheory.HomotopyCategory.Monoidal` and
+`WeilConjectures.Mathlib.Algebra.Homology.Monoidal`.
 
 ## TODO
 
@@ -74,5 +92,44 @@ with tensor product the derived tensor product `- ⊗ᴸ -`. -/
 instance hasDerivedMonoidalCategory [Abelian.HasFunctorialFlatResolution A] :
     Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
   sorry
+
+section ShortcutInstances
+
+variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (ComplexShape.up ℤ))]
+
+/-- Shortcut instance: `D(A)` is monoidal, for the derived tensor product. This is the
+instance of `WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal` with its
+`GradedObject` hypotheses discharged from `MonoidalClosed A` and the colimits of `A`. -/
+noncomputable instance monoidalCategory : MonoidalCategory (DerivedCategory A) := inferInstance
+
+/-- Shortcut instance: the localization functor `Qh : K(A) ⥤ D(A)` is lax monoidal, the
+structure map `μ` being the comparison `Qh X ⊗ᴸ Qh Y ⟶ Qh (X ⊗ Y)`. -/
+noncomputable instance laxMonoidalQh : (Qh (C := A)).LaxMonoidal := inferInstance
+
+/-- Shortcut instance: the derived tensor product on `D(A)` is the left derived functor in
+two variables of the tensor product on `K(A)`, along the localization functor `Qh` and with
+respect to quasi-isomorphisms; the structural 2-cell is the lax monoidal structure of `Qh`:
+
+```
+K(A) × K(A) ---- ⊗ ----> K(A)
+    |                      |
+ Qh × Qh    μNatTrans Qh   Qh
+    |          ⟹           |
+    v                      v
+D(A) × D(A) --- ⊗ᴸ ----> D(A)
+```
+-/
+instance isLeftDerivedFunctor₂CurriedTensor :
+    (curriedTensor (DerivedCategory A)).IsLeftDerivedFunctor₂
+      (Functor.LaxMonoidal.μNatTrans Qh)
+      (HomotopyCategory.quasiIso A (ComplexShape.up ℤ))
+      (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) :=
+  inferInstance
+
+/-- Shortcut instance: the localization functor `Q : C(A) ⥤ D(A)` is lax monoidal; it is
+`Qh` precomposed with the quotient functor `C(A) ⥤ K(A)`. -/
+noncomputable instance laxMonoidalQ : (Q (C := A)).LaxMonoidal := inferInstance
+
+end ShortcutInstances
 
 end DerivedCategory
