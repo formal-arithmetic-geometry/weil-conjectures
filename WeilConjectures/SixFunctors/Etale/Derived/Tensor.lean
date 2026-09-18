@@ -94,8 +94,7 @@ noncomputable instance laxMonoidal_Qh :
     (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
   DerivedCategory.laxMonoidalQh (Sheaf X.smallEtaleTopology A)
 
-/-- The derived tensor product on `D(X_ét)` is the total left derived functor, in two
-variables, of the tensor product of étale sheaves. -/
+/-- This is a slow instance -/
 instance isLeftDerivedFunctor₂_derivedTensor :
     ((X)⊗ᴸ[A]).IsLeftDerivedFunctor₂
       (Functor.LaxMonoidal.μNatTrans DerivedCategory.Qh)

@@ -27,7 +27,7 @@ open CategoryTheory Limits MonoidalCategory
 variable (A : Type u) [Category.{v} A] [Abelian A] [HasColimitsOfSize.{0, 0} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
 
-noncomputable instance (priority := 2000) :
+noncomputable instance :
     MonoidalCategory (HomologicalComplex A (ComplexShape.up ℤ)) :=
   have (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := inferInstance
   inferInstance
