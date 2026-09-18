@@ -67,6 +67,7 @@ namespace Etale
 /-- The derived hom `RHom(-, -) : D(X_ét)ᵒᵖ ⥤ D(X_ét) ⥤ D(X_ét)` on the unbounded derived
 category of `A`-valued étale sheaves on `X`: the internal hom of the monoidal closed
 structure on `D(X_ét)`, i.e. the right adjoint of the derived tensor product `- ⊗ᴸ -`. -/
+@[implicit_reducible]
 noncomputable def derivedHom :
     (DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
