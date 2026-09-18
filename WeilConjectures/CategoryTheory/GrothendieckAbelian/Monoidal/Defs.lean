@@ -87,13 +87,13 @@ variable [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
 /-- The monoidal structure on `A`-valued étale sheaves induced by a monoidal structure
 on the coefficient category `A`: the sheafification of the objectwise tensor product of
 presheaves. -/
-noncomputable instance (priority := 2000) Etale.sheafMonoidalCategory :
+noncomputable instance Etale.sheafMonoidalCategory :
     MonoidalCategory (Sheaf Y.smallEtaleTopology A) :=
   Sheaf.monoidalCategory _ _
 
 /-- The braiding of the monoidal structure on `A`-valued étale sheaves, induced by the
 braiding of the coefficient category `A`. -/
-noncomputable instance (priority := 2000) Etale.sheafBraidedCategory :
+noncomputable instance Etale.sheafBraidedCategory :
     BraidedCategory (Sheaf Y.smallEtaleTopology A) :=
   Sheaf.braidedCategory _ _
 

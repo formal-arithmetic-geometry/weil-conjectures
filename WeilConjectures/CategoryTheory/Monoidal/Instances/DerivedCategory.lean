@@ -31,19 +31,19 @@ variable [HasDerivedCategory.{w} C]
 variable [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
   [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
-noncomputable instance (priority := 2000) monoidalCategoryOfMonoidalClosedBraidedCategory :
+noncomputable instance monoidalCategoryOfMonoidalClosedBraidedCategory :
   MonoidalCategory (DerivedCategory C) := inferInstance
 
-noncomputable instance (priority := 2000) laxMonoidalQh : (Qh (C := C)).LaxMonoidal := inferInstance
+noncomputable instance laxMonoidalQh : (Qh (C := C)).LaxMonoidal := inferInstance
 
-instance (priority := 2000) isLeftDerivedFunctor₂CurriedTensor :
+instance isLeftDerivedFunctor₂CurriedTensor :
   (curriedTensor (DerivedCategory C)).IsLeftDerivedFunctor₂
     (Functor.LaxMonoidal.μNatTrans Qh) (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) := inferInstance
 
-noncomputable instance (priority := 2000) laxMonoidalQ : (Q (C := C)).LaxMonoidal := inferInstance
+noncomputable instance laxMonoidalQ : (Q (C := C)).LaxMonoidal := inferInstance
 
-noncomputable instance (priority := 2000) monoidalClosedOfMonoidalClosedBraidedCategorg :
+noncomputable instance monoidalClosedOfMonoidalClosedBraidedCategorg :
   MonoidalClosed (DerivedCategory C) := sorry
 
 end DerivedCategory
