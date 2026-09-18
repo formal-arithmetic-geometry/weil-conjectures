@@ -172,6 +172,9 @@ noncomputable def rightDerivedFunctor :
   (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).totalRightDerived
     DerivedCategory.Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
 
+@[inherit_doc rightDerivedFunctor]
+scoped notation "R(" F ")" => rightDerivedFunctor F
+
 /-- The natural transformation that is part of the data of
 the right derived functor `DerivedCategory C ⥤ DerivedCategory D`
 when `F : C ⥤ D` is an additive functor between abelian categories and

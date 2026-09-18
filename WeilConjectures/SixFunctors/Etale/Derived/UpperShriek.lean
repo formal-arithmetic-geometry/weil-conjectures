@@ -59,7 +59,7 @@ of the bounded below `Rf_!`, is then a theorem.
   ambiguity between "the right adjoint of `Rf_!` on `D⁺`" and "the restriction to `D⁺` of the
   right adjoint of `Rf_!` on `D`".
 * There is no underived `f^!`, but the notation still carries the `R` of `R(f)_![A]` and
-  `R(g)_*[A]`, to mark that it lives on derived categories rather than on sheaves.
+  `R((g)_*[A])`, to mark that it lives on derived categories rather than on sheaves.
 
 ## TODO
 
