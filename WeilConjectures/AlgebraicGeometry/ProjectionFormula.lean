@@ -11,6 +11,72 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 
 /-!
 # The generic rank and the projection formula for intersection numbers
+
+Let `Y` be an integral scheme of dimension `d`, proper over a field `k` and carrying an ample
+invertible sheaf, and let `L₁, …, L_d` be invertible sheaves on `Y`. The top intersection number
+`(L₁ ⋯ L_d · F)` of `L₁, …, L_d` with coefficients in a coherent sheaf `F` sees `F` only through
+its *generic rank* `r = dim_{κ(η)} F_η`:
+
+`(L₁ ⋯ L_d · F) = r · (L₁ ⋯ L_d)`.
+
+Applied to `F = f_* 𝒪_X` for a finite morphism `f : X ⟶ Y`, together with the invariance of the
+Euler characteristic along a finite morphism and the projection formula for the direct image,
+this gives the projection formula for intersection numbers:
+
+`(f^* L₁ ⋯ f^* L_d)_X = deg f · (L₁ ⋯ L_d)_Y`,  `deg f := dim_{κ(η_Y)} (f_* 𝒪_X)_{η_Y}`.
+
+## Main definitions
+
+* `AlgebraicGeometry.Scheme.Hom.degree`: the degree `deg f` of a finite morphism onto an
+  irreducible scheme, the generic rank of `f_* 𝒪_X`.
+
+## Main results
+
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_genericRank_mul`:
+  **`prop:deg-intersection-rank`**, the top intersection number sees only the generic rank.
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_pullback_eq_degree_mul`:
+  **`prop:deg-projection-formula`**, the projection formula for a finite morphism.
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_pullback_structureModules`: its
+  sheaf-theoretic half, that `(f^* L₁ ⋯ f^* L_d · 𝒪_X) = (L₁ ⋯ L_d · f_* 𝒪_X)`.
+
+## Implementation notes
+
+The dimension of `Y` enters as the hypothesis `topologicalKrullDim Y = d`, and properness and
+ampleness as the hypotheses of Snapper's theorem — `X` proper over `k` with an ample invertible
+sheaf `A`, and `k` infinite — in place of the blueprint's "projective over an algebraically
+closed field". The blueprint's `(L₁ ⋯ L_d)` is the case `F = 𝟙_ Y.Modules` of the intersection
+number, the tensor unit of `Y.Modules` being the structure sheaf.
+
+The proof of `intersectionNumber_eq_genericRank_mul` runs the blueprint's two inductions — the
+one computing the intersection number and the one computing the generic rank — as a single
+induction along the dévissage `AlgebraicGeometry.Scheme.Modules.exists_devissage`, whose graded
+pieces are handled by
+`intersectionNumber_eq_genericRank_mul_of_isPushforwardIdealSheaf`. There the dichotomy of the
+blueprint — either `dim Z_j < d` or `Z_j = Y` — is run on the generic rank instead of on the
+dimension: a graded piece `ι_* 𝓘` of generic rank zero has both sides zero, and a graded piece
+of non-zero generic rank has the generic point of `Y` in the image of `ι`, whence `ι` is a
+surjective closed immersion onto a reduced scheme, hence an isomorphism, and `ι_* 𝓘` is a
+subsheaf of `𝒪_Y` of generic rank one.
+
+The projection formula is proved for any finite `f`, surjectivity not being needed: without it
+`deg f` is zero and both sides vanish. No hypothesis on the dimension of `X` is used either.
+
+## TODO
+
+The last two sentences of `prop:deg-projection-formula` are not formalised here:
+
+* that `deg f = [κ(η_X) : κ(η_Y)]` for `f` finite surjective between integral schemes. This needs
+  the identification of the stalk of `f_* 𝒪_X` at `η_Y` with the ring of the generic fibre of
+  `f`, that is with the function field of `X`; it is a body of work of its own and has been split
+  off rather than done here.
+* that for flat `f` the degree agrees with the rank of the locally free sheaf `f_* 𝒪_X`, the
+  degree of `def:av-degree`. This needs the constancy of the rank of a locally free sheaf on a
+  connected scheme.
+
+## References
+
+* The blueprint chapter on the degree of an isogeny, section `sec:deg-intersection`:
+  `prop:deg-intersection-rank` and `prop:deg-projection-formula`.
 -/
 
 @[expose] public section
@@ -52,7 +118,8 @@ lemma subsingleton_stalk_pushforward {y : Y} {W : Y.Opens} (hy : y ∈ W) (hW : 
       (homOfLE (inf_le_left.trans inf_le_right) : U ⊓ V ⊓ W ⟶ V) y hyW t]
   exact congrArg _ (Subsingleton.elim _ _)
 
-/-- **The stalk of a direct image along a closed immersion vanishes off the image.** -/
+/-- **The stalk of a direct image vanishes off the image**, when that image is closed — for
+instance for a closed immersion. -/
 lemma subsingleton_stalk_pushforward_of_notMem_range (hf : IsClosed (Set.range f.base)) {y : Y}
     (hy : y ∉ Set.range f.base) :
     Subsingleton (((pushforward f).obj P).presheaf.stalk y) :=
@@ -353,18 +420,21 @@ over `k` and carrying an ample invertible sheaf, and for `L₁, …, L_d` invert
 
 `(f^* L₁ ⋯ f^* L_d)_X = deg f · (L₁ ⋯ L_d)_Y`,
 
-where `deg f` is the generic rank of `f_* 𝒪_X`. -/
+where `deg f` is the generic rank of `f_* 𝒪_X` and, on both sides, the intersection number with
+no coefficient sheaf is the one with coefficients in the tensor unit, that is in the structure
+sheaf. -/
 theorem intersectionNumber_pullback_eq_degree_mul [Infinite k] [IsProper (Y ↘ Spec (.of k))]
     [IsIntegral Y] [IsNoetherian Y] {A : Y.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
     {d : ℕ} (hd : topologicalKrullDim Y = (d : WithBot ℕ∞)) (L : Fin d → Y.Modules)
     (hL : ∀ j, (L j).Invertible) :
-    intersectionNumber k X.structureModules (fun j ↦ (pullback f).obj (L j))
+    intersectionNumber k (𝟙_ X.Modules) (fun j ↦ (pullback f).obj (L j))
         (fun j ↦ (hL j).pullback f)
       = (f.degree : ℤ) * intersectionNumber k (𝟙_ Y.Modules) L hL := by
   have hXc : X.structureModules.IsCoherent := (SheafOfModules.invertible_unit X.sheaf).isCoherent
   have hc : ((pushforward f).obj X.structureModules).IsCoherent :=
     isCoherent_pushforward_of_isFinite f X.structureModules
-  rw [intersectionNumber_pullback_structureModules k f L hL]
+  rw [intersectionNumber_congr_left k (Modules.tensorUnitIsoUnit (X := X)) _ _,
+    intersectionNumber_pullback_structureModules k f L hL]
   exact intersectionNumber_eq_genericRank_mul k hA hAa hd _ L hL
 
 end ProjectionFormula
