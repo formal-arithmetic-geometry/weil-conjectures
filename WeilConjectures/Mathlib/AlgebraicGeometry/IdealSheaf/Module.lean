@@ -65,6 +65,13 @@ sheaf-condition argument that the kernel description gets for free.
   `(ι_J)_* 𝒪_{V(J)}` is the quotient of `𝒪_X` by the ideal sheaf and a morphism out of `𝒪_X`
   killing the ideal sheaf descends to it through
   `AlgebraicGeometry.Scheme.Hom.descPushforwardStructure`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc_of_germ` — **the
+  stalkwise criterion for `g_* (𝒪_Y^ι) ⟶ J` to be an isomorphism**: it suffices that at every
+  point the germs of the `m j` generate the stalk of `J` and that their only relations have
+  coefficients in the stalk of `g.ker`. Its unpackaged form is
+  `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc`, and
+  `AlgebraicGeometry.Scheme.IdealSheafData.stalkMap_pushforwardFreeDesc` computes the
+  comparison morphism on a stalk.
 - `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap` — the comparison morphism
   `g^* I ⟶ I'` for a morphism `g` pulling the ideal `I` into the ideal `I'`, together with
   `comapModulesMap_toModulesι` and `eq_comapModulesMap`, which determine it.
@@ -400,6 +407,121 @@ lemma eq_pushforwardFreeDesc {ι : Type u} [Finite ι] (hJ : g.ker * J = 0)
       pushforwardStructureDesc g hJ (m j)) :
     χ = pushforwardFreeDesc g hJ m :=
   Modules.eq_pushforwardFreeDesc _ _ _ hχ
+
+/-! #### The comparison morphism on stalks -/
+
+omit [Epi g.toPushforwardStructure] in
+/-- **The kernel of `𝒪_X ⟶ g_* 𝒪_Y` on the stalk at `x` is the stalk of the kernel ideal
+sheaf of `g`.** -/
+lemma stalkMap_toPushforwardStructure_eq_zero_iff (x : X)
+    (z : X.structureModules.presheaf.stalk x) :
+    Modules.Hom.stalkMap g.toPushforwardStructure x z = 0 ↔
+      Modules.stalkStructureModulesLinearEquiv X x z ∈ g.ker.stalkIdeal x := by
+  obtain ⟨U, hx, s, rfl⟩ := X.structureModules.presheaf.exists_germ_eq z
+  rw [Modules.stalkStructureModulesLinearEquiv_germ]
+  set P := (Modules.pushforward g).obj Y.structureModules with hP
+  constructor
+  · rw [Modules.Hom.germ_stalkMap_apply]
+    intro h
+    rw [show (0 : P.presheaf.stalk x) =
+      P.presheaf.germ ⊤ x (show x ∈ (⊤ : X.Opens) from trivial) 0 by simp] at h
+    obtain ⟨W, hW, iWU, iWT, he⟩ := P.presheaf.germ_eq x hx _ _ _ h
+    rw [map_zero, ← Modules.Hom.naturality_apply] at he
+    rw [← X.presheaf.germ_res_apply iWU x hW s]
+    exact germ_mem_stalkIdeal _ _ hW (g.mem_idealOfOpens_ker_iff.mpr he)
+  · intro hmem
+    obtain ⟨V, hV, t, ht, hvt⟩ := (mem_stalkIdeal_iff _ _ _).mp hmem
+    obtain ⟨W, hW, iWV, iWU, he⟩ := X.presheaf.germ_eq x hV hx t s hvt
+    have hzero : Hom.app g W (X.presheaf.map iWU.op s) = 0 := by
+      rw [← he]
+      exact g.mem_idealOfOpens_ker_iff.mp (map_mem_idealOfOpens _ iWV.le ht)
+    rw [← X.structureModules.presheaf.germ_res_apply iWU x hW s,
+      Modules.Hom.germ_stalkMap_apply,
+      show Modules.Hom.app g.toPushforwardStructure W
+        (X.structureModules.presheaf.map iWU.op s) = 0 from hzero, map_zero]
+
+variable {ι : Type u} [Fintype ι]
+
+/-- **The comparison morphism `g_* (𝒪_Y^ι) ⟶ J` on a stalk is `c ↦ ∑ⱼ cⱼ · mⱼ`**, computed
+through a lift `c` of the components of a germ along the surjection `𝒪_X ⟶ g_* 𝒪_Y` on
+stalks. -/
+lemma stalkMap_pushforwardFreeDesc (hJ : g.ker * J = 0) (m : ι → Γ(J.toModules, ⊤)) (x : X)
+    (w : ((Modules.pushforward g).obj (Y.freeModules ι)).presheaf.stalk x)
+    (c : ι → X.structureModules.presheaf.stalk x)
+    (hc : ∀ j, Modules.Hom.stalkMap g.toPushforwardStructure x (c j) =
+      Modules.Hom.stalkMap ((Modules.pushforward g).map (Y.πFree j)) x w) :
+    Modules.Hom.stalkMap (pushforwardFreeDesc g hJ m) x w =
+      ∑ j : ι, Modules.Hom.stalkMap (Modules.homOfSectionTop J.toModules (m j)) x (c j) := by
+  conv_lhs => rw [← Modules.sum_stalkMap_map_ιFree g x w]
+  rw [map_sum (ConcreteCategory.hom
+    (Modules.Hom.stalkMap (pushforwardFreeDesc g hJ m) x))]
+  refine Finset.sum_congr rfl fun j _ ↦ ?_
+  rw [← hc j, ← Modules.Hom.stalkMap_comp_apply, ← Modules.Hom.stalkMap_comp_apply,
+    map_ιFree_comp_pushforwardFreeDesc g hJ m j,
+    toPushforwardStructure_comp_pushforwardStructureDesc g hJ (m j)]
+
+/-- **The stalkwise criterion for the comparison morphism `g_* (𝒪_Y^ι) ⟶ J` to be an
+isomorphism**, in terms of the stalks of `𝒪_X` viewed as a sheaf of modules over itself.
+
+See `AlgebraicGeometry.Scheme.IdealSheafData.isIso_pushforwardFreeDesc_of_germ` for the form
+in which the two hypotheses are statements about the local ring `𝒪_{X, x}`. -/
+theorem isIso_pushforwardFreeDesc (hJ : g.ker * J = 0) (m : ι → Γ(J.toModules, ⊤))
+    (hker : ∀ (x : X) (c : ι → X.structureModules.presheaf.stalk x),
+      ∑ j : ι, Modules.Hom.stalkMap (Modules.homOfSectionTop J.toModules (m j)) x (c j) = 0 →
+        ∀ j, Modules.Hom.stalkMap g.toPushforwardStructure x (c j) = 0)
+    (hspan : ∀ (x : X) (v : J.toModules.presheaf.stalk x),
+      ∃ c : ι → X.structureModules.presheaf.stalk x,
+        ∑ j : ι, Modules.Hom.stalkMap (Modules.homOfSectionTop J.toModules (m j)) x (c j) = v) :
+    IsIso (pushforwardFreeDesc g hJ m) := by
+  refine Modules.Hom.isIso_of_isIso_stalkMap _ fun x ↦ ?_
+  rw [ConcreteCategory.isIso_iff_bijective]
+  have hsurj : Function.Surjective (Modules.Hom.stalkMap g.toPushforwardStructure x) :=
+    (Modules.epi_iff_surjective_stalkMap _).mp inferInstance x
+  constructor
+  · rw [injective_iff_map_eq_zero]
+    intro w hw
+    obtain ⟨c, hc⟩ : ∃ c : ι → X.structureModules.presheaf.stalk x, ∀ j,
+        Modules.Hom.stalkMap g.toPushforwardStructure x (c j) =
+          Modules.Hom.stalkMap ((Modules.pushforward g).map (Y.πFree j)) x w :=
+      ⟨fun j ↦ (hsurj _).choose, fun j ↦ (hsurj _).choose_spec⟩
+    have h0 := stalkMap_pushforwardFreeDesc g hJ m x w c hc
+    rw [hw] at h0
+    rw [← Modules.sum_stalkMap_map_ιFree g x w]
+    exact Finset.sum_eq_zero fun j _ ↦ by rw [← hc j, hker x c h0.symm j, map_zero]
+  · intro v
+    obtain ⟨c, hc⟩ := hspan x v
+    refine ⟨∑ j : ι, Modules.Hom.stalkMap ((Modules.pushforward g).map
+      (SheafOfModules.ιFree j)) x
+      (Modules.Hom.stalkMap g.toPushforwardStructure x (c j)), ?_⟩
+    rw [map_sum, ← hc]
+    refine Finset.sum_congr rfl fun j _ ↦ ?_
+    rw [← Modules.Hom.stalkMap_comp_apply, ← Modules.Hom.stalkMap_comp_apply,
+      map_ιFree_comp_pushforwardFreeDesc,
+      toPushforwardStructure_comp_pushforwardStructureDesc]
+
+/-- **The comparison morphism `g_* (𝒪_Y^ι) ⟶ J` attached to a family `m` of global sections of
+`J` is an isomorphism as soon as, at every point `x`, the germs of the `m j` generate the
+stalk of `J` over `𝒪_{X, x}` and their only relations have coefficients in the stalk of the
+kernel ideal sheaf of `g`.**
+
+This is the geometric half of the identification of an ideal sheaf killed by `g.ker` with a
+free module on the closed subscheme cut out by `g.ker`: what remains is the commutative
+algebra of the two hypotheses at a single point. -/
+theorem isIso_pushforwardFreeDesc_of_germ (hJ : g.ker * J = 0) (m : ι → Γ(J.toModules, ⊤))
+    (hker : ∀ (x : X) (c : ι → X.presheaf.stalk x),
+      ∑ j : ι, c j • J.toModules.presheaf.germ ⊤ x trivial (m j) = 0 →
+        ∀ j, c j ∈ g.ker.stalkIdeal x)
+    (hspan : ∀ (x : X) (v : J.toModules.presheaf.stalk x),
+      ∃ c : ι → X.presheaf.stalk x,
+        ∑ j : ι, c j • J.toModules.presheaf.germ ⊤ x trivial (m j) = v) :
+    IsIso (pushforwardFreeDesc g hJ m) := by
+  refine isIso_pushforwardFreeDesc g hJ m (fun x c hc j ↦ ?_) fun x v ↦ ?_
+  · rw [stalkMap_toPushforwardStructure_eq_zero_iff]
+    refine hker x (fun k ↦ Modules.stalkStructureModulesLinearEquiv X x (c k)) ?_ j
+    simpa only [Modules.Hom.stalkMap_homOfSectionTop] using hc
+  · obtain ⟨c, hc⟩ := hspan x v
+    refine ⟨fun j ↦ (Modules.stalkStructureModulesLinearEquiv X x).symm (c j), ?_⟩
+    simpa only [Modules.Hom.stalkMap_homOfSectionTop, LinearEquiv.apply_symm_apply] using hc
 
 end PushforwardDesc
 

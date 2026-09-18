@@ -24,7 +24,9 @@ affine opens contained in `U` (`mem_idealOfOpens_iff_forall_affineOpens`), which
 statements about `I.ideal` into statements about sections over arbitrary opens: the product of
 two ideal sheaves, recorded on affine opens only, still multiplies sections over any open
 (`mul_mem_mul_idealOfOpens`), and the kernel ideal sheaf of a quasi-compact morphism consists
-of the sections killed by it (`AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`).
+of the sections killed by it (`AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`). The
+germs at a point of those sections form an ideal of the local ring there
+(`AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`).
 
 ## Base change of the subscheme cut out by an ideal sheaf
 
@@ -55,6 +57,7 @@ the kernel ideal vanishes on a cover by affine opens.
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.mem_idealOfOpens_iff_forall_affineOpens`
+- `AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`
 - `AlgebraicGeometry.Scheme.IdealSheafData.mul_mem_mul_idealOfOpens`
 - `AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
@@ -134,6 +137,43 @@ lemma mem_idealOfOpens_iff_forall_affineOpens {U : X.Opens} {x : Γ(X, U)} :
     rw [he, map_zero, Hom.map_app_apply, ← mem_idealOfOpens_iff,
       idealOfOpens_eq_ideal J ⟨V, hV⟩]
     exact H ⟨V, hV⟩ hVU'
+
+/-! ### The stalk of an ideal sheaf -/
+
+/-- **The stalk of an ideal sheaf at a point**, as an ideal of the local ring `𝒪_{X, x}`: the
+germs at `x` of the sections of `𝒪_X` lying in `J`.
+
+This is the image in `𝒪_{X, x}` of the stalk of `J` viewed as a sheaf of modules; see
+`AlgebraicGeometry.Scheme.IdealSheafData.mem_range_stalkMap_toModulesι_iff`. -/
+noncomputable def stalkIdeal (J : X.IdealSheafData) (x : X) : Ideal (X.presheaf.stalk x) where
+  carrier := {r | ∃ (U : X.Opens) (hx : x ∈ U) (s : Γ(X, U)),
+    s ∈ J.idealOfOpens U ∧ X.presheaf.germ U x hx s = r}
+  add_mem' := by
+    rintro a b ⟨U, hU, s, hs, rfl⟩ ⟨V, hV, t, ht, rfl⟩
+    refine ⟨U ⊓ V, ⟨hU, hV⟩, X.presheaf.map (homOfLE inf_le_left).op s +
+      X.presheaf.map (homOfLE inf_le_right).op t,
+      add_mem (J.map_mem_idealOfOpens inf_le_left hs) (J.map_mem_idealOfOpens inf_le_right ht),
+      ?_⟩
+    rw [map_add, X.presheaf.germ_res_apply, X.presheaf.germ_res_apply]
+  zero_mem' := ⟨⊤, trivial, 0, zero_mem _, map_zero _⟩
+  smul_mem' := by
+    rintro c a ⟨U, hU, s, hs, rfl⟩
+    obtain ⟨V, hV, b, rfl⟩ := X.presheaf.exists_germ_eq c
+    refine ⟨U ⊓ V, ⟨hU, hV⟩, X.presheaf.map (homOfLE inf_le_right).op b *
+      X.presheaf.map (homOfLE inf_le_left).op s,
+      Ideal.mul_mem_left _ _ (J.map_mem_idealOfOpens inf_le_left hs), ?_⟩
+    rw [map_mul, X.presheaf.germ_res_apply, X.presheaf.germ_res_apply]
+    rfl
+
+lemma mem_stalkIdeal_iff (J : X.IdealSheafData) (x : X) (r : X.presheaf.stalk x) :
+    r ∈ J.stalkIdeal x ↔ ∃ (U : X.Opens) (hx : x ∈ U) (s : Γ(X, U)),
+      s ∈ J.idealOfOpens U ∧ X.presheaf.germ U x hx s = r :=
+  Iff.rfl
+
+lemma germ_mem_stalkIdeal (J : X.IdealSheafData) (x : X) {U : X.Opens} (hx : x ∈ U)
+    {s : Γ(X, U)} (hs : s ∈ J.idealOfOpens U) :
+    X.presheaf.germ U x hx s ∈ J.stalkIdeal x :=
+  ⟨U, hx, s, hs, rfl⟩
 
 end IdealOfOpens
 

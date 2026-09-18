@@ -343,6 +343,47 @@ noncomputable def Scheme.isColimitFreeModulesCofan (X : Scheme.{u}) (ι : Type u
 instance (X : Scheme.{u}) : HasFiniteBiproducts X.Modules :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
+open scoped Classical in
+/-- **The `j`-th projection `𝒪ₓ^ι ⟶ 𝒪ₓ` of the free sheaf of modules on `ι`**, defined on the
+`k`-th summand as the identity if `k = j` and as zero otherwise.
+
+Together with the injections `SheafOfModules.ιFree` it exhibits `X.freeModules ι` as the
+biproduct of `ι` copies of `𝒪ₓ` when `ι` is finite; see
+`AlgebraicGeometry.Scheme.sum_πFree_comp_ιFree`. -/
+noncomputable def Scheme.πFree (X : Scheme.{u}) {ι : Type u} (j : ι) :
+    X.freeModules ι ⟶ X.structureModules :=
+  Cofan.IsColimit.desc (X.isColimitFreeModulesCofan ι) fun k ↦ if k = j then 𝟙 _ else 0
+
+@[reassoc (attr := simp)]
+lemma Scheme.ιFree_comp_πFree_self {X : Scheme.{u}} {ι : Type u} (j : ι) :
+    SheafOfModules.ιFree (R := X.ringCatSheaf) j ≫ X.πFree j = 𝟙 X.structureModules := by
+  classical
+  rw [Scheme.πFree, ← X.freeModulesCofan_inj ι j, Cofan.IsColimit.fac]
+  simp
+
+@[reassoc (attr := simp)]
+lemma Scheme.ιFree_comp_πFree_of_ne {X : Scheme.{u}} {ι : Type u} {k j : ι} (h : k ≠ j) :
+    SheafOfModules.ιFree (R := X.ringCatSheaf) k ≫ X.πFree j = 0 := by
+  classical
+  rw [Scheme.πFree, ← X.freeModulesCofan_inj ι k, Cofan.IsColimit.fac]
+  simp [h]
+
+/-- **The free sheaf of modules on a finite type is the biproduct of copies of `𝒪ₓ`**: the
+injections and the projections compose to the identity. -/
+lemma Scheme.sum_πFree_comp_ιFree (X : Scheme.{u}) (ι : Type u) [Fintype ι] :
+    ∑ j : ι, X.πFree j ≫ SheafOfModules.ιFree (R := X.ringCatSheaf) j =
+      𝟙 (X.freeModules ι) := by
+  classical
+  refine Cofan.IsColimit.hom_ext (X.isColimitFreeModulesCofan ι) _ _ fun k ↦ ?_
+  simp only [Scheme.freeModulesCofan_inj, Preadditive.comp_sum, ← Category.assoc]
+  rw [Finset.sum_eq_single k]
+  · rw [X.ιFree_comp_πFree_self k, Category.id_comp]
+    exact (Category.comp_id _).symm
+  · intro b _ hb
+    rw [X.ιFree_comp_πFree_of_ne hb.symm, Limits.zero_comp]
+  · intro h
+    exact absurd (Finset.mem_univ k) h
+
 namespace Scheme.Modules
 
 section Restriction
@@ -558,6 +599,33 @@ lemma Hom.stalkMap_comp (φ : M ⟶ N) (ψ : N ⟶ K) (x : X) :
 lemma Hom.stalkMap_comp_apply (φ : M ⟶ N) (ψ : N ⟶ K) (x : X) (z : M.presheaf.stalk x) :
     (φ ≫ ψ).stalkMap x z = ψ.stalkMap x (φ.stalkMap x z) :=
   ConcreteCategory.congr_hom (φ.stalkMap_comp ψ x) z
+
+/-- **Taking stalks is an additive functor.** -/
+instance additive_stalkFunctor (x : X) : (stalkFunctor X x).Additive where
+  map_add {M N f g} := by
+    ext z
+    obtain ⟨U, hU, s, rfl⟩ := M.presheaf.exists_germ_eq z
+    simp only [stalkFunctor_map_apply, Hom.germ_stalkMap_apply, ModuleCat.hom_add,
+      LinearMap.add_apply]
+    change N.presheaf.germ U x hU (Hom.app f U s + Hom.app g U s) = _
+    rw [map_add]
+
+@[simp]
+lemma Hom.stalkMap_add (φ ψ : M ⟶ N) (x : X) (z : M.presheaf.stalk x) :
+    (φ + ψ).stalkMap x z = φ.stalkMap x z + ψ.stalkMap x z :=
+  ConcreteCategory.congr_hom ((stalkFunctor X x).map_add (f := φ) (g := ψ)) z
+
+@[simp]
+lemma Hom.stalkMap_zero (x : X) (z : M.presheaf.stalk x) : (0 : M ⟶ N).stalkMap x z = 0 :=
+  ConcreteCategory.congr_hom ((stalkFunctor X x).map_zero M N) z
+
+lemma Hom.stalkMap_sum {κ : Type*} (s : Finset κ) (φ : κ → (M ⟶ N)) (x : X)
+    (z : M.presheaf.stalk x) :
+    (∑ j ∈ s, φ j).stalkMap x z = ∑ j ∈ s, (φ j).stalkMap x z := by
+  classical
+  induction s using Finset.induction with
+  | empty => simp
+  | insert j s hj ih => rw [Finset.sum_insert hj, Finset.sum_insert hj, Hom.stalkMap_add, ih]
 
 instance (φ : M ⟶ N) [IsIso φ] (x : X) : IsIso (φ.stalkMap x) :=
   (toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).map_isIso φ
@@ -2455,6 +2523,20 @@ noncomputable def stalkStructureModulesLinearEquiv (X : Scheme.{u}) (x : X) :
       rw [← LinearMap.range_eq_top, ← LinearMap.span_singleton_eq_range]
       exact span_germ_oneSection x⟩).symm
 
+/-- Under the identification of the stalk of the structure sheaf as a sheaf of modules with the
+local ring, the germ of a function is its germ. -/
+@[simp]
+lemma stalkStructureModulesLinearEquiv_germ (x : X) (U : X.Opens) (hx : x ∈ U) (s : Γ(X, U)) :
+    stalkStructureModulesLinearEquiv X x (X.structureModules.presheaf.germ U x hx s) =
+      X.presheaf.germ U x hx s := by
+  apply (stalkStructureModulesLinearEquiv X x).symm.injective
+  rw [LinearEquiv.symm_apply_apply]
+  change X.structureModules.presheaf.germ U x hx s =
+    LinearMap.toSpanSingleton _ _ (X.structureModules.presheaf.germ ⊤ x trivial (oneSection X ⊤))
+      (X.presheaf.germ U x hx s)
+  rw [LinearMap.toSpanSingleton_apply, germ_oneSection_res x U hx,
+    germ_structureModules_eq_smul x U hx s]
+
 instance flat_stalk_structureModules (x : X) :
     Module.Flat (X.presheaf.stalk x) (X.structureModules.presheaf.stalk x) :=
   Module.Flat.of_linearEquiv (stalkStructureModulesLinearEquiv X x)
@@ -2550,6 +2632,17 @@ lemma unitHomEquivTop_symm_apply (m : Γ(M, ⊤)) :
 lemma app_homOfSectionTop_oneSection (M : X.Modules) (m : Γ(M, ⊤)) :
     Hom.app (homOfSectionTop M m) ⊤ (oneSection X ⊤) = m :=
   (unitHomEquivTop M).apply_symm_apply m
+
+/-- **On stalks, multiplication by a global section `m` is multiplication by the germ of `m`.**
+-/
+lemma Hom.stalkMap_homOfSectionTop (M : X.Modules) (m : Γ(M, ⊤)) (x : X)
+    (z : X.structureModules.presheaf.stalk x) :
+    Hom.stalkMap (homOfSectionTop M m) x z =
+      stalkStructureModulesLinearEquiv X x z • M.presheaf.germ ⊤ x trivial m := by
+  obtain ⟨U, hx, s, rfl⟩ := X.structureModules.presheaf.exists_germ_eq z
+  rw [stalkStructureModulesLinearEquiv_germ, germ_structureModules_eq_smul x U hx s,
+    Hom.stalkMap_smul, ← germ_oneSection_res x U hx, Hom.germ_stalkMap_apply,
+    app_homOfSectionTop_oneSection]
 
 /-- **Multiplication by a global section is zero exactly when the section is.** -/
 @[simp]
@@ -2768,6 +2861,24 @@ lemma eq_pushforwardFreeDesc (β : ι → ((pushforward g).obj Y.structureModule
     (hχ : ∀ j : ι, (pushforward g).map (SheafOfModules.ιFree j) ≫ χ = β j) :
     χ = pushforwardFreeDesc g β :=
   pushforwardFree_hom_ext g fun j ↦ by rw [hχ, map_ιFree_comp_pushforwardFreeDesc]
+
+/-- **Every germ of the pushforward of a free sheaf of modules is the sum of its components.**
+The pushforward is additive, so it takes the biproduct decomposition
+`AlgebraicGeometry.Scheme.sum_πFree_comp_ιFree` of `𝒪_Y^ι` to one of `g_* (𝒪_Y^ι)`. -/
+lemma sum_stalkMap_map_ιFree {κ : Type u} [Fintype κ] (x : X)
+    (w : ((pushforward g).obj (Y.freeModules κ)).presheaf.stalk x) :
+    ∑ j : κ, Hom.stalkMap ((pushforward g).map (SheafOfModules.ιFree j)) x
+      (Hom.stalkMap ((pushforward g).map (Y.πFree j)) x w) = w := by
+  have h : ∑ j : κ, (pushforward g).map (Y.πFree j) ≫
+      (pushforward g).map (SheafOfModules.ιFree (R := Y.ringCatSheaf) j) =
+      𝟙 ((pushforward g).obj (Y.freeModules κ)) := by
+    rw [← CategoryTheory.Functor.map_id (pushforward g) (Y.freeModules κ),
+      ← Y.sum_πFree_comp_ιFree κ, Functor.map_sum]
+    exact Finset.sum_congr rfl fun j _ ↦ ((pushforward g).map_comp _ _).symm
+  have h2 := congrArg (fun χ : ((pushforward g).obj (Y.freeModules κ) ⟶
+      (pushforward g).obj (Y.freeModules κ)) ↦ Hom.stalkMap χ x w) h
+  simpa only [Hom.stalkMap_sum, Hom.stalkMap_comp_apply, Hom.stalkMap_id,
+    ConcreteCategory.id_apply] using h2
 
 end PushforwardFree
 
