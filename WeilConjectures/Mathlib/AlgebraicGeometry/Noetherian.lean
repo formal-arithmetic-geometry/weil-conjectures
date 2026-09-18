@@ -185,9 +185,8 @@ theorem mem_support_iff_mem_module_support (x : U) :
 include hU in
 /-- **A coherent sheaf on a Noetherian affine open has finitely many associated points there.**
 
-Coherence enters through the hypothesis `Module.Finite Γ(X, U) Γ(F, U)`: that a sheaf of finite
-type has finitely generated sections over an affine open is not yet available, so it is taken as
-a hypothesis here. -/
+Coherence enters through the hypothesis `Module.Finite Γ(X, U) Γ(F, U)`, which for a coherent
+sheaf is `AlgebraicGeometry.Scheme.Modules.finite_sections`. -/
 theorem finite_associatedPoints_inter [IsNoetherianRing Γ(X, U)]
     [Module.Finite Γ(X, U) Γ(F, U)] : (F.associatedPoints ∩ (U : Set X)).Finite := by
   have hsub : (fun x : U ↦ (hU.primeIdealOf x).asIdeal) '' {x : U | F.IsAssociatedPoint x.1} ⊆
@@ -288,13 +287,8 @@ theorem isSMulRegular_iff_associatedPoints_subset_basicOpen [IsNoetherianRing Γ
 end Affine
 
 /-- **A coherent sheaf on a quasi-compact locally Noetherian scheme has finitely many
-associated points.**
-
-As in `AlgebraicGeometry.Scheme.Modules.finite_associatedPoints_inter`, coherence enters through
-the hypothesis that the sections over each affine open form a finite module; that this follows
-from `SheafOfModules.IsFiniteType` is not yet available. -/
-theorem finite_associatedPoints [CompactSpace X] [IsLocallyNoetherian X] [F.IsQuasicoherent]
-    (hfin : ∀ V : X.affineOpens, Module.Finite Γ(X, V.1) Γ(F, V.1)) :
+associated points.** -/
+theorem finite_associatedPoints [CompactSpace X] [IsLocallyNoetherian X] [F.IsCoherent] :
     F.associatedPoints.Finite := by
   have hcov : (Set.univ : Set X) ⊆ ⋃ V : X.affineOpens, (V.1 : Set X) := by
     intro x _
@@ -306,7 +300,7 @@ theorem finite_associatedPoints [CompactSpace X] [IsLocallyNoetherian X] [F.IsQu
   have hfinite : ∀ V ∈ s, (F.associatedPoints ∩ (V.1 : Set X)).Finite := by
     intro V _
     have : IsNoetherianRing Γ(X, V.1) := IsLocallyNoetherian.component_noetherian V
-    have : Module.Finite Γ(X, V.1) Γ(F, V.1) := hfin V
+    have : Module.Finite Γ(X, V.1) Γ(F, V.1) := finite_sections F V
     exact finite_associatedPoints_inter F V.2
   refine (s.finite_toSet.biUnion hfinite).subset fun x hx ↦ ?_
   obtain ⟨V, hV, hxV⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))

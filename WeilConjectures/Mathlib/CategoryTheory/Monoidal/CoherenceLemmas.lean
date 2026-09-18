@@ -5,16 +5,19 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 
 /-!
 # Invertible objects of a monoidal category
 
 An object `M` of a monoidal category is *invertible* when there is an object `N` together with
-isomorphisms `M ⊗ N ≅ 𝟙_` and `N ⊗ M ≅ 𝟙_`. This file records two consequences of
+isomorphisms `M ⊗ N ≅ 𝟙_` and `N ⊗ M ≅ 𝟙_`. This file records three consequences of
 invertibility:
 
-* tensoring on the right by an invertible object is an equivalence of categories, and
+* tensoring on the right by an invertible object is an equivalence of categories, hence in
+  particular carries zero objects to zero objects and, being exact, short exact sequences to
+  short exact sequences (`CategoryTheory.ShortComplex.ShortExact.map_of_exact`),
 * a morphism `𝟙_ ⟶ M` to an invertible object which is a split monomorphism is an isomorphism.
 
 The second is the categorical form of the fact that a surjective linear map onto an invertible
@@ -25,6 +28,7 @@ commutes with every morphism out of `𝟙_`, so a one-sided inverse is a two-sid
 ## Main results
 
 - `CategoryTheory.MonoidalCategory.tensorRightEquivalence`
+- `CategoryTheory.MonoidalCategory.isZero_tensorObj_of_isZero`
 - `CategoryTheory.MonoidalCategory.isIso_of_comp_eq_id`
 
 -/
@@ -35,7 +39,7 @@ universe v u
 
 namespace CategoryTheory.MonoidalCategory
 
-open Category
+open Category Limits
 
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C] {M N : C}
 
@@ -45,6 +49,17 @@ noncomputable def tensorRightEquivalence (e : M ⊗ N ≅ 𝟙_ C) (e' : N ⊗ M
   .mk (tensorRight M) (tensorRight N)
     ((rightUnitorNatIso C).symm ≪≫ ((tensoringRight C).mapIso e).symm ≪≫ tensorRightTensor M N)
     ((tensorRightTensor N M).symm ≪≫ (tensoringRight C).mapIso e' ≪≫ rightUnitorNatIso C)
+
+/-- **Tensoring on the right by an invertible object is an equivalence.** -/
+lemma isEquivalence_tensorRight (e : M ⊗ N ≅ 𝟙_ C) (e' : N ⊗ M ≅ 𝟙_ C) :
+    (tensorRight M).IsEquivalence :=
+  (tensorRightEquivalence e e').isEquivalence_functor
+
+/-- **Tensoring a zero object by an invertible object gives a zero object.** -/
+lemma isZero_tensorObj_of_isZero [HasZeroMorphisms C] (e : M ⊗ N ≅ 𝟙_ C) (e' : N ⊗ M ≅ 𝟙_ C)
+    {A : C} (hA : IsZero A) : IsZero (A ⊗ M) :=
+  have : (tensorRight M).IsEquivalence := isEquivalence_tensorRight e e'
+  (tensorRight M).map_isZero hA
 
 /-- Every endomorphism `φ` of the tensor unit acts on an object `M` as an endomorphism of `M`,
 and this action commutes with every morphism `𝟙_ ⟶ M`. -/
@@ -66,7 +81,7 @@ lemma comp_eq_comp_leftUnitor_conj (φ : 𝟙_ C ⟶ 𝟙_ C) (ψ : 𝟙_ C ⟶ 
 /-- **A split monomorphism from the tensor unit to an invertible object is an isomorphism.** -/
 lemma isIso_of_comp_eq_id (e : M ⊗ N ≅ 𝟙_ C) (e' : N ⊗ M ≅ 𝟙_ C) {f : 𝟙_ C ⟶ M}
     {s : M ⟶ 𝟙_ C} (h : f ≫ s = 𝟙 _) : IsIso f := by
-  have : (tensorRight M).IsEquivalence := (tensorRightEquivalence e e').isEquivalence_functor
+  have := isEquivalence_tensorRight e e'
   obtain ⟨w, hw⟩ := (tensorRight M).map_surjective ((λ_ M).hom ≫ s ≫ f ≫ (λ_ M).inv)
   have hw' : (λ_ M).inv ≫ w ▷ M ≫ (λ_ M).hom = s ≫ f := by
     have h' : w ▷ M = (λ_ M).hom ≫ s ≫ f ≫ (λ_ M).inv := hw

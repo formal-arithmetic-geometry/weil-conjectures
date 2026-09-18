@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Skeleton
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Skeleton
 
 /-!
@@ -45,6 +46,9 @@ braided; the Picard group is then the group of units of that commutative monoid.
 - `SheafOfModules.invertible_iff_isUnit`: unfolding lemma for `SheafOfModules.Invertible`.
 - `SheafOfModules.Invertible.tensorObj` and `SheafOfModules.Invertible.tensorPow`: a tensor
   product and a tensor power of invertible sheaves of modules are invertible.
+- `SheafOfModules.Invertible.isEquivalence_tensorRight`: **tensoring by an invertible sheaf of
+  modules is an equivalence of categories**, hence exact; and
+  `SheafOfModules.Invertible.isZero_tensorObj`, that it carries zero sheaves to zero sheaves.
 - `SheafOfModules.invertible_zpow`: an integer tensor power of an invertible sheaf of modules is
   invertible, with `SheafOfModules.Pic.mk_zpow` recording the corresponding equality in the
   Picard group.
@@ -53,6 +57,14 @@ braided; the Picard group is then the group of units of that commutative monoid.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
   the Picard group of `X` if and only if it is isomorphic to the structure sheaf.
 
+## TODO
+
+- Provide the instance `MonoidalPreadditive (SheafOfModules R')`, equivalently the additivity of
+  `CategoryTheory.MonoidalCategory.tensorRight`. The exactness of tensoring recorded here is
+  deduced from invertibility, through `SheafOfModules.Invertible.isEquivalence_tensorRight`;
+  additivity would give it for an arbitrary `N`, as
+  `CategoryTheory.Sheaf.monoidalPreadditive` does for sheaves with values in a monoidal abelian
+  category.
 -/
 
 @[expose] public section
@@ -157,6 +169,20 @@ theorem invertible_tensorInv (hM : M.Invertible) : hM.tensorInv.Invertible :=
 This is an arbitrary choice of isomorphism, see `CategoryTheory.isoOfToSkeletonEq`. -/
 noncomputable def Invertible.tensorInvIso (hM : M.Invertible) : M ⊗ hM.tensorInv ≅ 𝟙_ _ :=
   IsUnit.tensorInvIso hM
+
+/-- **Tensoring by an invertible sheaf of modules is an equivalence of categories**, the inverse
+being tensoring by a tensor inverse. In particular it is exact, so it carries a short exact
+sequence of sheaves of modules to a short exact sequence by
+`CategoryTheory.ShortComplex.ShortExact.map_of_exact`. -/
+lemma Invertible.isEquivalence_tensorRight (hM : M.Invertible) :
+    (MonoidalCategory.tensorRight M).IsEquivalence :=
+  MonoidalCategory.isEquivalence_tensorRight hM.tensorInvIso (β_ _ _ ≪≫ hM.tensorInvIso)
+
+/-- **Tensoring a zero sheaf of modules by an invertible one gives a zero sheaf.** -/
+lemma Invertible.isZero_tensorObj (hM : M.Invertible)
+    {A : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
+    (hA : Limits.IsZero A) : Limits.IsZero (A ⊗ M) :=
+  MonoidalCategory.isZero_tensorObj_of_isZero hM.tensorInvIso (β_ _ _ ≪≫ hM.tensorInvIso) hA
 
 /-- The `m`-th tensor power of an invertible sheaf of modules `M`, for an integer exponent `m`:
 the `m`-th tensor power of `M` itself when `m ≥ 0`, and the `(-m)`-th tensor power of the tensor
@@ -301,6 +327,13 @@ theorem Pic.mk_eq_mk_iff {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertibl
   change hM.unit = hN.unit ↔ _
   rw [← Units.val_inj, hM.unit_spec, hN.unit_spec, toSkeleton_eq_toSkeleton_iff]
 
+/-- Equal invertible `𝒪ₓ`-modules have equal classes in the Picard group of `X`, whichever
+proofs of invertibility they are given. -/
+theorem Pic.mk_congr {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertible} (h : M = N) :
+    Pic.mk M hM = Pic.mk N hN := by
+  subst h
+  rfl
+
 /-- The class of a tensor product of invertible `𝒪ₓ`-modules is the product of the classes. -/
 @[simp]
 theorem Pic.mk_tensorObj {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertible} :
@@ -316,6 +349,13 @@ theorem Pic.mk_zpow {M : X.Modules} {hM : M.Invertible} (m : ℤ) :
     Pic.mk (hM.zpow m) (SheafOfModules.invertible_zpow hM m) = Pic.mk M hM ^ m := by
   change (SheafOfModules.invertible_zpow hM m).unit = hM.unit ^ m
   exact IsUnit.unit_tensorZPow hM m
+
+/-- The class of a tensor power of an invertible `𝒪ₓ`-module is the corresponding power of the
+class. -/
+@[simp]
+theorem Pic.mk_tensorPow {M : X.Modules} {hM : M.Invertible} (n : ℕ) :
+    Pic.mk (M ^⊗ n) (hM.tensorPow n) = Pic.mk M hM ^ (n : ℤ) :=
+  Pic.mk_zpow (hM := hM) (n : ℤ)
 
 variable (X) in
 /-- The class of the structure sheaf is the unit of the Picard group of `X`. -/
