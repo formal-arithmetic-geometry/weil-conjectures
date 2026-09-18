@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
@@ -77,6 +78,12 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
   `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
   `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
   ideal of `W` into the thickening ideal of `W'`.
+- `AlgebraicGeometry.Scheme.surjective_infinitesimalBaseChangeMap`: for `m ≤ n` the transition
+  morphism `W ×_T Tₘ ⟶ W ×_T Tₙ` is surjective, because `Tₘ ⟶ Tₙ` is surjective and
+  surjectivity is stable under base change.
+- `AlgebraicGeometry.Scheme.infinitesimalRingToStalk`: the ring homomorphism
+  `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ 𝒪_{W ×_T Tₙ, x}` acting on a stalk of `W ×_T Tₙ`, and
+  `AlgebraicGeometry.Scheme.flat_infinitesimalRingToStalk`: it is flat if `f` is flat.
 -/
 
 @[expose] public section
@@ -88,6 +95,30 @@ open CategoryTheory IsLocalRing
 namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{u}) (x : X)
+
+section SpecLocalRing
+
+/-! ### The stalk of the spectrum of a local ring at its unique closed point -/
+
+/-- **The stalk of `Spec R` at the closed point of a local ring `R` is `R`**, in the form in
+which it is used below: the composite
+
+```
+  R ---- (ΓSpecIso R).inv ----> Γ(Spec R, 𝒪) ---- germ ⊤ y ----> 𝒪_{Spec R, y}
+```
+
+is an isomorphism for every point `y` of `Spec R` equal to the closed point. The point is a
+hypothesis rather than `IsLocalRing.closedPoint R` itself so that the lemma applies to a point
+that is only propositionally the closed point, as happens for the image of a point under a
+morphism to `Spec R`. -/
+lemma isIso_ΓSpecIso_inv_comp_germ {R : CommRingCat.{u}} [IsLocalRing R] (y : Spec R)
+    (hy : y = closedPoint R) :
+    IsIso ((Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ y trivial) := by
+  subst hy
+  rw [← ΓSpecIso_hom_stalkClosedPointIso_inv, ← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+  infer_instance
+
+end SpecLocalRing
 
 section Ring
 
@@ -422,6 +453,29 @@ lemma fromInfinitesimalNeighborhood_appLE {U : X.Opens} (hxU : x ∈ U)
     Scheme.Hom.map_appLE, Scheme.Hom.appLE_eq_appTop, ← ΓSpecIso_inv_naturality]
 
 end Points
+
+section Singleton
+
+/-! ### The infinitesimal neighbourhoods are one-point schemes -/
+
+variable (X : Scheme.{u}) (x : X)
+
+instance (n : ℕ) : Subsingleton (X.infinitesimalNeighborhood x n) :=
+  ⟨fun z z' ↦ (X.eq_closedPoint_infinitesimalNeighborhood x n z).trans
+    (X.eq_closedPoint_infinitesimalNeighborhood x n z').symm⟩
+
+instance (n : ℕ) : Nonempty (X.infinitesimalNeighborhood x n) := ⟨closedPoint _⟩
+
+/-- **The transition morphism `Xₘ ⟶ Xₙ` of the infinitesimal neighbourhoods is surjective**:
+both schemes have exactly one point. -/
+instance {m n : ℕ} (h : m ≤ n) : Surjective (X.infinitesimalNeighborhoodMap x h) :=
+  ⟨Function.surjective_to_subsingleton _⟩
+
+lemma surjective_infinitesimalNeighborhoodMap {m n : ℕ} (h : m ≤ n) :
+    Function.Surjective (X.infinitesimalNeighborhoodMap x h).base :=
+  (X.infinitesimalNeighborhoodMap x h).surjective
+
+end Singleton
 
 section InfinitesimalBaseChange
 
@@ -830,6 +884,111 @@ lemma thickeningIso_inv_infinitesimalBaseChangeMap (n : ℕ) :
   rw [← thickeningIso_hom_subschemeι f t n, Iso.inv_hom_id_assoc]
 
 end Thickening
+
+section SurjectiveBaseChange
+
+/-! ### Surjectivity of the transition morphisms of the infinitesimal base change -/
+
+variable {W T : Scheme.{u}} (f : W ⟶ T) (t : T)
+
+/-- **The transition morphism `W ×_T Tₘ ⟶ W ×_T Tₙ` is surjective.** It is the base change of
+`Tₘ ⟶ Tₙ` along the projection `W ×_T Tₙ ⟶ Tₙ`, and `Tₘ ⟶ Tₙ` is surjective because both
+infinitesimal neighbourhoods have exactly one point. -/
+instance {m n : ℕ} (h : m ≤ n) : Surjective (infinitesimalBaseChangeMap f t h) :=
+  MorphismProperty.of_isPullback (isPullback_infinitesimalBaseChangeMap f t h).flip inferInstance
+
+lemma surjective_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n) :
+    Function.Surjective (infinitesimalBaseChangeMap f t h).base :=
+  (infinitesimalBaseChangeMap f t h).surjective
+
+end SurjectiveBaseChange
+
+section FlatStalk
+
+/-! ### The stalks of the infinitesimal base change of a flat morphism -/
+
+variable {W T : Scheme.{u}} (f : W ⟶ T) (t : T)
+
+/-- The ring homomorphism `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ 𝒪_{W ×_T Tₙ, x}` obtained from
+`AlgebraicGeometry.Scheme.infinitesimalRingToΓ` by taking germs at `x`; it is the map through
+which `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` acts on a stalk of `W ×_T Tₙ`:
+
+```
+                    infinitesimalRingToΓ f t n                germ ⊤ x
+  𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ──────────────▶ Γ(W ×_T Tₙ, 𝒪) ──────────▶ 𝒪_{W ×_T Tₙ, x}
+```
+-/
+noncomputable def infinitesimalRingToStalk (n : ℕ) (x : infinitesimalBaseChange f t n) :
+    T.infinitesimalRing t n ⟶ (infinitesimalBaseChange f t n).presheaf.stalk x :=
+  infinitesimalRingToΓ f t n ≫ (infinitesimalBaseChange f t n).presheaf.germ ⊤ x trivial
+
+/-- Every point of `W ×_T Tₙ` lies over the closed point of `Tₙ`, since `Tₙ` has a single
+point. -/
+lemma infinitesimalBaseChangeSnd_base (n : ℕ) (x : infinitesimalBaseChange f t n) :
+    (infinitesimalBaseChangeSnd f t n).base x = closedPoint (T.infinitesimalRing t n) :=
+  T.eq_closedPoint_infinitesimalNeighborhood t n _
+
+/-- The action of `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` on the stalk of `W ×_T Tₙ` at `x` is the stalk map
+of the projection `W ×_T Tₙ ⟶ Tₙ`, read through the identification of `Tₙ = Spec 𝒪_{T, t} ⧸
+𝔪_t ^ (n + 1)` with its own stalk:
+
+```
+                                germ ⊤ (pr₂ x)                     stalkMap x
+  𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ── ΓSpecIso.inv ──▶ 𝒪_{Tₙ, pr₂ x} ──────────────▶ 𝒪_{W ×_T Tₙ, x}
+```
+
+The first arrow is an isomorphism by
+`AlgebraicGeometry.Scheme.isIso_ΓSpecIso_inv_comp_germ`. -/
+lemma infinitesimalRingToStalk_eq (n : ℕ) (x : infinitesimalBaseChange f t n) :
+    infinitesimalRingToStalk f t n x =
+      ((Scheme.ΓSpecIso (T.infinitesimalRing t n)).inv ≫
+        (T.infinitesimalNeighborhood t n).presheaf.germ ⊤
+          ((infinitesimalBaseChangeSnd f t n).base x) trivial) ≫
+        (infinitesimalBaseChangeSnd f t n).stalkMap x := by
+  have h := Scheme.Hom.germ_stalkMap (infinitesimalBaseChangeSnd f t n) ⊤ x trivial
+  rw [infinitesimalRingToStalk, infinitesimalRingToΓ, Category.assoc, Category.assoc, h]
+  rfl
+
+/-- **The stalks of `W ×_T Tₙ` are flat over `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`** when `f` is flat: the
+projection `W ×_T Tₙ ⟶ Tₙ` is a base change of `f`, hence flat, so its stalk maps are flat, and
+`AlgebraicGeometry.Scheme.infinitesimalRingToStalk` is one of them composed with an
+isomorphism. -/
+lemma flat_infinitesimalRingToStalk [Flat f] (n : ℕ) (x : infinitesimalBaseChange f t n) :
+    (infinitesimalRingToStalk f t n x).hom.Flat := by
+  have hiso : IsIso ((Scheme.ΓSpecIso (T.infinitesimalRing t n)).inv ≫
+      (T.infinitesimalNeighborhood t n).presheaf.germ ⊤
+        ((infinitesimalBaseChangeSnd f t n).base x) trivial) :=
+    isIso_ΓSpecIso_inv_comp_germ _ (infinitesimalBaseChangeSnd_base f t n x)
+  rw [infinitesimalRingToStalk_eq, CommRingCat.hom_comp]
+  exact RingHom.Flat.comp (RingHom.Flat.of_bijective (ConcreteCategory.bijective_of_isIso _))
+    (AlgebraicGeometry.Flat.stalkMap _ x)
+
+/-- **The stalks of `W ×_T Tₙ` are flat modules over `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)`** when `f` is
+flat: the `Module.Flat` form of `AlgebraicGeometry.Scheme.flat_infinitesimalRingToStalk`.
+
+There is no global `Algebra (T.infinitesimalRing t n) 𝒪_{W ×_T Tₙ, x}` instance: a stalk of a
+scheme carries no canonical algebra structure over the base, so the algebra structure coming
+from `AlgebraicGeometry.Scheme.infinitesimalRingToStalk` has to be introduced at the call site
+with
+
+```
+letI := (infinitesimalRingToStalk f t n x).hom.toAlgebra
+haveI := flat_stalk_infinitesimalBaseChange f t n x
+```
+
+after which the `Module.Flat` hypothesis of, for instance,
+`Module.Flat.ker_linearCombination_algebraMap` is available. The `CommRing` instances on the
+two rings, and the `IsLocalRing` instance on `T.infinitesimalRing t n`, are global. -/
+lemma flat_stalk_infinitesimalBaseChange [Flat f] (n : ℕ)
+    (x : infinitesimalBaseChange f t n) :
+    letI : Algebra (T.infinitesimalRing t n)
+      ((infinitesimalBaseChange f t n).presheaf.stalk x) :=
+      (infinitesimalRingToStalk f t n x).hom.toAlgebra
+    Module.Flat (T.infinitesimalRing t n)
+      ((infinitesimalBaseChange f t n).presheaf.stalk x) :=
+  flat_infinitesimalRingToStalk f t n x
+
+end FlatStalk
 
 section BaseChangeOver
 
