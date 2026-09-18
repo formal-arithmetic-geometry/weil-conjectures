@@ -146,15 +146,6 @@ theorem invertible_update {L : Fin r → X.Modules} (hL : ∀ i, (L i).Invertibl
   · rw [Function.update_self]; exact hM
   · rw [Function.update_of_ne h]; exact hL i
 
-/-- **The classes in the Picard group of a family of invertible sheaves of modules with one
-member prepended** are the classes of the original family with the class of the new member
-prepended. -/
-theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_cons {M : X.Modules} (hM : M.Invertible)
-    {L : Fin r → X.Modules} (hL : ∀ i, (L i).Invertible) (i : Fin (r + 1)) :
-    Pic.mk ((Fin.cons M L : Fin (r + 1) → X.Modules) i) (invertible_cons hM hL i) =
-      (Fin.cons (Pic.mk M hM) (fun i ↦ Pic.mk (L i) (hL i)) : Fin (r + 1) → X.Pic) i := by
-  induction i using Fin.cases <;> rfl
-
 /-- The concatenation of two families of invertible sheaves of modules is a family of invertible
 sheaves of modules. -/
 theorem invertible_append {r' : ℕ} {M : Fin r → X.Modules} {N : Fin r' → X.Modules}
