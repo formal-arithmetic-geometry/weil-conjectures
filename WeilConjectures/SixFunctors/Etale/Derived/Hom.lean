@@ -74,11 +74,11 @@ noncomputable def derivedHom :
   MonoidalClosed.internalHom
 
 @[inherit_doc derivedHom]
-scoped notation "(" X ")RHom[" A "]" => derivedHom A X
+scoped notation "RHom(" X ")[" A "]" => derivedHom A X
 
 /-- The derived hom of étale sheaves is right adjoint to the derived tensor product, as an
 adjunction with a parameter: `- ⊗ᴸ - ⊣₂ RHom(-, -)`. -/
-noncomputable def derivedTensorHomAdjunction₂ : (X)⊗ᴸ[A] ⊣₂ (X)RHom[A] :=
+noncomputable def derivedTensorHomAdjunction₂ : -⊗ᴸ-(X)[A] ⊣₂ RHom(X)[A] :=
   MonoidalClosed.internalHomAdjunction₂
 
 variable {X}
@@ -86,21 +86,14 @@ variable {X}
 /-- For a fixed `K : D(X_ét)`, the derived tensor product `K ⊗ᴸ -` is left adjoint to the
 derived hom `RHom(K, -)`. -/
 noncomputable def derivedTensorHomAdjunction (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((X)⊗ᴸ[A]).obj K ⊣ ((X)RHom[A]).obj (op K) :=
+    (-⊗ᴸ-(X)[A]).obj K ⊣ (RHom(X)[A]).obj (op K) :=
   (derivedTensorHomAdjunction₂ A X).adj K
 
 /-- The derived hom `RHom(K, -)` is a right adjoint. -/
 instance isRightAdjoint_derivedHom_obj
     (K : (DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ) :
-    (((X)RHom[A]).obj K).IsRightAdjoint :=
+    ((RHom(X)[A]).obj K).IsRightAdjoint :=
   (derivedTensorHomAdjunction A K.unop).isRightAdjoint
-
-/-- The derived tensor-hom adjunction: morphisms `K ⊗ᴸ L ⟶ M` in `D(X_ét)` correspond
-naturally to morphisms `L ⟶ RHom(K, M)`. -/
-noncomputable def derivedHomEquiv
-    {K L M : DerivedCategory (Sheaf X.smallEtaleTopology A)} :
-    ((((X)⊗ᴸ[A]).obj K).obj L ⟶ M) ≃ (L ⟶ (((X)RHom[A]).obj (op K)).obj M) :=
-  (derivedTensorHomAdjunction₂ A X).homEquiv
 
 end Etale
 
