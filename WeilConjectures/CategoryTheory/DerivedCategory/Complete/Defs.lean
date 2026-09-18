@@ -5,30 +5,34 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.RingTheory.AdicCompletion.Basic
 
 /-!
 
-# Derived complete objects of the derived category of sheaves of modules
+# Derived complete objects of the derived category of étale sheaves of modules
 
-Let `(C, J)` be an (essentially small) site, let `R` be a commutative ring and let `I` be
-an ideal of `R`, the intended case being that `R` is `I`-adically complete — for instance
-the ring of integers `𝒪_E` of a finite extension of `ℚ_ℓ`, with `I` its maximal ideal.
-This file defines what it means for an object `K` of the derived category
+Let `X` be a scheme, let `R` be a commutative ring and let `I` be an ideal of `R`, the
+intended case being that `R` is `I`-adically complete — for instance the ring of integers
+`𝒪_E` of a finite extension of `ℚ_ℓ`, with `I` its maximal ideal. This file defines what it
+means for an object `K` of the derived category
 
 ```
-  D(J, R) := DerivedCategory (Sheaf J (ModuleCat R))
+  D(X_ét, R) := DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat R))
 ```
 
-of sheaves of `R`-modules on `(C, J)` to be *derived complete*: that `K` is the limit of
+of étale sheaves of `R`-modules on `X` to be *derived complete*: that `K` is the limit of
 its reductions `K ⊗ᴸ R/Iⁿ`.
 
 The tower of reductions and the maps into it are built as a chain of cones, each the image
@@ -39,19 +43,21 @@ of the previous one under a functor:
   `𝟙_ (ModuleCat R) = R`. If `R` is `I`-adically complete this cone is a limit cone
   (`Ideal.isLimitQuotPowCone`), which is the classical completeness of `R` in the language
   of limits;
-* `CategoryTheory.Sheaf.quotPowCone J I`, its image under `constantSheaf J (ModuleCat R)`,
-  whose point is the monoidal unit of `Sheaf J (ModuleCat R)`, the constant sheaf on
-  `R = 𝟙_ (ModuleCat R)` being that unit;
-* `DerivedCategory.derivedCompletionCone J I K`, the image of the previous cone under
-  `DerivedCategory.singleFunctor _ 0` and then `- ⊗ᴸ K`, whose point is moved to `K` itself
-  along
+* `AlgebraicGeometry.Etale.quotPowCone I X`, its image under the constant sheaf functor
+  `constantSheaf X.smallEtaleTopology (ModuleCat R)`, whose point is the monoidal unit of
+  the category of étale sheaves, the constant sheaf on `R = 𝟙_ (ModuleCat R)` being that
+  unit;
+* `AlgebraicGeometry.Etale.derivedCompletionCone I X K`, the image of the previous cone
+  under `DerivedCategory.singleFunctor _ 0` and then `K ⊗ᴸ -`, with its point moved to `K`
+  itself along
 
   ```
-    K  ≅  K ⊗ᴸ 𝟙_ D(J, R)  ⟶  K ⊗ᴸ (R in degree 0),
+    K  ≅  K ⊗ᴸ 𝟙_ D(X_ét, R)  ⟶  K ⊗ᴸ (R in degree 0),
   ```
 
-  the second map coming from `DerivedCategory.εSingleFunctorZero`. Its legs are therefore
-  the reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, and its point is `K`.
+  the second map coming from the unit `ε` of the lax monoidal structure of the localization
+  functor `Q`. Its legs are therefore the reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, and its point is
+  `K`.
 
 The object `K` is *derived complete* when this last cone is a limit cone, i.e. when the
 canonical map
@@ -62,30 +68,42 @@ canonical map
 
 is an isomorphism. Asking that the cone be a limit cone, rather than that a map into a
 chosen limit be invertible, means the definition does not have to assume that the limit
-exists; `DerivedCategory.derivedComplete_iff_isIso_lift` gives the isomorphism statement
-whenever it does. Derived completeness of `K` does not presuppose completeness of `R`, and
-the definition does not assume `IsAdicComplete I R`.
+exists; `AlgebraicGeometry.Etale.derivedComplete_iff_isIso_lift` gives the isomorphism
+statement whenever it does. Derived completeness of `K` does not presuppose completeness of
+`R`, and the definition does not assume `IsAdicComplete I R`.
 
 ## Main definitions
 
 - `Ideal.quotPowFunctor` and `Ideal.quotPowCone` : the tower `n ↦ R ⧸ Iⁿ` in `ModuleCat R`
   and the cone over it given by the quotient maps out of the monoidal unit.
-- `CategoryTheory.Sheaf.quotPowFunctor` and `CategoryTheory.Sheaf.quotPowCone` : the same
-  tower and cone in the category of sheaves of `R`-modules, through the constant sheaf
-  functor.
-- `DerivedCategory.quotPowFunctor` : the tower `n ↦ R/Iⁿ` in the derived category.
-- `DerivedCategory.derivedCompletionCone` : the cone `K ⟶ K ⊗ᴸ R/Iⁿ`, with point `K`.
-- `DerivedCategory.derivedComplete` : the object property of being derived complete.
+- `AlgebraicGeometry.Etale.quotPowFunctor` and `AlgebraicGeometry.Etale.quotPowCone` : the
+  same tower and cone in the category of étale sheaves of `R`-modules, through the constant
+  sheaf functor.
+- `AlgebraicGeometry.Etale.derivedQuotPowFunctor` : the tower `n ↦ R/Iⁿ` in `D(X_ét, R)`.
+- `AlgebraicGeometry.Etale.derivedCompletionCone` : the cone `K ⟶ K ⊗ᴸ R/Iⁿ`, with point
+  `K`.
+- `AlgebraicGeometry.Etale.derivedComplete` : the object property of being derived complete.
 
 ## Main results
 
 - `Ideal.isLimitQuotPowCone` : if `R` is `I`-adically complete then `R` is the limit of the
   tower `n ↦ R ⧸ Iⁿ`.
-- `DerivedCategory.derivedComplete_iff_isIso_lift` : when `R lim_n (K ⊗ᴸ R/Iⁿ)` exists,
-  derived completeness of `K` says exactly that the canonical map
+- `AlgebraicGeometry.Etale.derivedComplete_iff_isIso_lift` : when `R lim_n (K ⊗ᴸ R/Iⁿ)`
+  exists, derived completeness of `K` says exactly that the canonical map
   `K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)` is an isomorphism.
 
 ## Implementation notes
+
+The development is stated for the small étale site, which is the site for which this
+repository supplies the whole monoidal package as global instances: the monoidal structure
+on étale sheaves (`AlgebraicGeometry.Etale.sheafMonoidalCategory`), its braiding and
+closedness (`AlgebraicGeometry.Etale.sheafMonoidalClosed`) and functorial flat resolutions
+(`AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf`), from which
+`DerivedCategory.hasDerivedMonoidalCategory` produces the derived tensor product on
+`D(X_ét, R)` and the lax monoidal structure of `Q`. Nothing here activates a local instance
+or assumes extra structure on the sheaf category: the only hypothesis beyond `X` and `R` is
+`Abelian.HasFunctorialFlatResolution (ModuleCat R)`, on the *coefficient* category, which
+is what the étale instance above takes as input.
 
 Mathlib's `IsAdicComplete` API is phrased in terms of the quotients `M ⧸ (Iⁿ • ⊤)` of a
 module `M`, whereas the tower here is phrased in terms of the ideal quotients `R ⧸ Iⁿ`,
@@ -94,37 +112,13 @@ which is the form in which it is tensored downstream. The two are compared by
 compatibility with it holds by `rfl`, both sides being quotients of `R` by propositionally
 equal submodules.
 
-The monoidal structure on `Sheaf J (ModuleCat R)` is `CategoryTheory.Sheaf.monoidalCategory`
-(the sheafification of the objectwise tensor product), which mathlib deliberately does not
-register as an instance; as in `WeilConjectures.SixFunctors.Etale.Derived.Tensor` it is
-activated here by `attribute [local instance]`. For the small étale site the repository
-does register it globally, as `AlgebraicGeometry.Etale.sheafMonoidalCategory`, so étale
-applications need no local activation. Note that the type of `derivedComplete` mentions the
-monoidal structure of the derived category but not that of the sheaf category.
-
-Two hypotheses on the sheaf category are assumed rather than built here, because the
-repository only supplies them for the small étale site:
-
-* `MonoidalClosed (Sheaf J (ModuleCat R))`, which for the small étale site is
-  `AlgebraicGeometry.Etale.sheafMonoidalClosed`, obtained from Day's reflection theorem —
-  an argument that applies verbatim to any site;
-* `DerivedCategory.Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso _ _)`, the
-  K-flat derived monoidal structure, which follows from functorial flat resolutions
-  (`AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf` in the étale case) through
-  `DerivedCategory.hasDerivedMonoidalCategory`.
-
-Both are found by instance search at étale use sites. All the remaining structure — that
-the sheaf category is Grothendieck abelian, has a derived category, and that the derived
-category is monoidal with `Q` lax monoidal — the repository supplies for any essentially
-small site.
-
 -/
 
 @[expose] public section
 
-universe w v' u' u
+universe w v₁ u₁ u
 
-open CategoryTheory Limits MonoidalCategory Opposite
+open CategoryTheory Limits MonoidalCategory Opposite AlgebraicGeometry
 
 namespace Ideal
 
@@ -199,7 +193,15 @@ end Ideal
 
 section Aux
 
-variable (A : Type u') [Category.{v'} A] [Abelian A] [HasColimitsOfSize.{0, 0} A]
+/- An auxiliary construction, stated for a variable category rather than for the concrete
+category of étale sheaves. This is not gratuitous generality: once `A` is the concrete
+category of étale sheaves, the monoidal unit of `CochainComplex A ℤ` is a term the kernel
+cannot unfold within the default budget, so the concrete development below never mentions
+it and only applies this definition. -/
+
+section SingleFunctor
+
+variable (A : Type u₁) [Category.{v₁} A] [Abelian A] [HasColimitsOfSize.{0, 0} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{w} A]
   [DerivedCategory.Qh.HasDerivedMonoidalCategory
@@ -209,109 +211,102 @@ variable (A : Type u') [Category.{v'} A] [Abelian A] [HasColimitsOfSize.{0, 0} A
 unit of `A` placed in degree `0`. It is the unit of the lax monoidal structure of the
 localization functor `Q`: the monoidal unit of `CochainComplex A ℤ` is by definition the
 unit of `A` in degree `0`, and `Q` of a complex concentrated in degree `0` is by definition
-`DerivedCategory.singleFunctor A 0` of its value.
-
-This is the only place where the monoidal structure on cochain complexes appears. Stating
-it here, for a variable `A`, keeps the definitional unfolding of `𝟙_ (CochainComplex A ℤ)`
-out of the concrete sheaf-theoretic terms below, where checking it is prohibitively
-expensive. -/
+`DerivedCategory.singleFunctor A 0` of its value. -/
 noncomputable def DerivedCategory.εSingleFunctorZero :
     𝟙_ (DerivedCategory A) ⟶ (DerivedCategory.singleFunctor A 0).obj (𝟙_ A) :=
   Functor.LaxMonoidal.ε DerivedCategory.Q
 
+end SingleFunctor
+
 end Aux
 
-attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+namespace AlgebraicGeometry.Etale
 
-variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-  (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R] (I : Ideal R)
+open Scheme
 
-/-- The tower `n ↦ R/Iⁿ` of constant sheaves of `R`-modules on a site, the image of the
+variable {R : Type (u + 1)} [CommRing R] (I : Ideal R) (X : Scheme.{u})
+
+/-- The tower `n ↦ R/Iⁿ` of constant étale sheaves of `R`-modules on `X`, the image of the
 tower `Ideal.quotPowFunctor` under the constant sheaf functor. -/
-noncomputable def CategoryTheory.Sheaf.quotPowFunctor : ℕᵒᵖ ⥤ Sheaf J (ModuleCat.{u + 1} R) :=
-  Ideal.quotPowFunctor I ⋙ constantSheaf J (ModuleCat.{u + 1} R)
+noncomputable def quotPowFunctor :
+    ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) :=
+  Ideal.quotPowFunctor I ⋙ constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)
 
-/-- The tower `n ↦ R/Iⁿ` of constant sheaves together with the quotient maps out of the
-monoidal unit, the image of `Ideal.quotPowCone` under the constant sheaf functor. Its point
-is `𝟙_ (Sheaf J (ModuleCat R))`, since the constant sheaf on `R = 𝟙_ (ModuleCat R)` is the
-monoidal unit of the sheaf category. -/
-noncomputable def CategoryTheory.Sheaf.quotPowCone : Cone (Sheaf.quotPowFunctor J I) :=
-  (constantSheaf J (ModuleCat.{u + 1} R)).mapCone (Ideal.quotPowCone I)
+/-- The tower `n ↦ R/Iⁿ` of constant étale sheaves together with the quotient maps out of
+the monoidal unit, the image of `Ideal.quotPowCone` under the constant sheaf functor. Its
+point is `𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat R))`, since the constant sheaf on
+`R = 𝟙_ (ModuleCat R)` is the monoidal unit of the category of étale sheaves. -/
+noncomputable def quotPowCone : Cone (quotPowFunctor I X) :=
+  (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)).mapCone (Ideal.quotPowCone I)
 
 @[simp]
-lemma CategoryTheory.Sheaf.quotPowCone_pt :
-    (Sheaf.quotPowCone J I).pt = 𝟙_ (Sheaf J (ModuleCat.{u + 1} R)) := rfl
+lemma quotPowCone_pt :
+    (quotPowCone I X).pt = 𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) := rfl
 
-section Derived
+variable [Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} R)]
 
-/- The two pieces of structure on the sheaf category that this repository does not supply
-for a general site; see the implementation notes. -/
-variable [MonoidalClosed (Sheaf J (ModuleCat.{u + 1} R))]
-  [DerivedCategory.Qh.HasDerivedMonoidalCategory
-    (HomotopyCategory.quasiIso (Sheaf J (ModuleCat.{u + 1} R)) (ComplexShape.up ℤ))]
-
-/- The colimits of size `0` asked for by the monoidal structure on cochain complexes, as in
-`WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory`; they are the ones of
-the Grothendieck abelian structure, shrunk. -/
-local instance : HasColimitsOfSize.{0, 0} (Sheaf J (ModuleCat.{u + 1} R)) :=
-  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} R)) :=
-    IsGrothendieckAbelian.hasColimits _
-  hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
-
-/-- The tower `n ↦ R/Iⁿ` of constant sheaves, viewed in the derived category of sheaves of
-`R`-modules through `DerivedCategory.singleFunctor _ 0`. -/
-noncomputable def DerivedCategory.quotPowFunctor :
-    ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
-  Sheaf.quotPowFunctor J I ⋙ DerivedCategory.singleFunctor _ 0
+/-- The tower `n ↦ R/Iⁿ` of constant étale sheaves, viewed in the derived category
+`D(X_ét, R)` through `DerivedCategory.singleFunctor _ 0`. -/
+noncomputable def derivedQuotPowFunctor :
+    ℕᵒᵖ ⥤ DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
+  quotPowFunctor I X ⋙ DerivedCategory.singleFunctor _ 0
 /-
-/-- The reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, as a cone over the tower
-`DerivedCategory.quotPowFunctor` **whose point is `K` itself**: the cone
-`Sheaf.quotPowCone` pushed into the derived category by `DerivedCategory.singleFunctor _ 0`
-and tensored on the left with `K`, its point moved from `K ⊗ᴸ (R in degree 0)` to `K` along
-the inverse right unitor followed by `DerivedCategory.εSingleFunctorZero`. -/
-noncomputable def DerivedCategory.derivedCompletionCone
-    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    Cone (DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K) :=
-  ((tensorLeft K).mapCone
-      ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I))).extend
-    ((ρ_ K).inv ≫ K ◁ DerivedCategory.εSingleFunctorZero _)
+/-- The reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, as a cone over `derivedQuotPowFunctor` **whose
+point is `K` itself**: the cone `Etale.quotPowCone` pushed into the derived category by
+`DerivedCategory.singleFunctor _ 0` and tensored on the left with `K`, with `K` itself as
+its point: the leg at `n` is
+
+```
+  K  ≅  K ⊗ᴸ 𝟙_ D(X_ét, R)  ⟶  K ⊗ᴸ (R in degree 0)  ⟶  K ⊗ᴸ R/Iⁿ,
+```
+
+the middle map being `DerivedCategory.εSingleFunctorZero`. -/
+noncomputable def derivedCompletionCone
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    Cone (derivedQuotPowFunctor I X ⋙ tensorLeft K) where
+  pt := K
+  π :=
+    { app n := (ρ_ K).inv ≫ K ◁ (DerivedCategory.εSingleFunctorZero _ ≫
+        (DerivedCategory.singleFunctor _ 0).map ((quotPowCone I X).π.app n))
+      naturality _ _ _ := by
+        simp [derivedQuotPowFunctor, ← MonoidalCategory.whiskerLeft_comp,
+          ← Functor.map_comp] }
 
 @[simp]
-lemma DerivedCategory.derivedCompletionCone_pt
-    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    (DerivedCategory.derivedCompletionCone J I K).pt = K := rfl
+lemma derivedCompletionCone_pt
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (derivedCompletionCone I X K).pt = K := rfl
 
-/-- An object `K` of the derived category of sheaves of `R`-modules on `(C, J)` is *derived
-complete* with respect to the ideal `I` if the cone `K ⟶ K ⊗ᴸ R/Iⁿ` of
-`DerivedCategory.derivedCompletionCone`, whose point is `K`, is a limit cone: `K` is the
-limit of its reductions modulo the powers of `I`. Equivalently, when that limit exists,
+/-- An object `K` of the derived category of étale sheaves of `R`-modules on `X` is
+*derived complete* with respect to the ideal `I` if the cone `K ⟶ K ⊗ᴸ R/Iⁿ` of
+`Etale.derivedCompletionCone`, whose point is `K`, is a limit cone: `K` is the limit of its
+reductions modulo the powers of `I`. Equivalently, when that limit exists,
 
 ```
   K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)
 ```
 
-is an isomorphism (`DerivedCategory.derivedComplete_iff_isIso_lift`). The intended setting
-is that `R` is `I`-adically complete, which by `Ideal.isLimitQuotPowCone` says that `R` is
-itself the limit of the tower `n ↦ R/Iⁿ`; the definition does not need that hypothesis. -/
-noncomputable def DerivedCategory.derivedComplete :
-    ObjectProperty (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
-  fun K ↦ Nonempty (IsLimit (DerivedCategory.derivedCompletionCone J I K))
+is an isomorphism (`Etale.derivedComplete_iff_isIso_lift`). The intended setting is that
+`R` is `I`-adically complete, which by `Ideal.isLimitQuotPowCone` says that `R` is itself
+the limit of the tower `n ↦ R/Iⁿ`; the definition does not need that hypothesis. -/
+noncomputable def derivedComplete :
+    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :=
+  fun K ↦ Nonempty (IsLimit (derivedCompletionCone I X K))
 
-namespace DerivedCategory
+variable {I X}
 
-variable {J I}
-
-lemma derivedComplete_iff (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    derivedComplete J I K ↔ Nonempty (IsLimit (derivedCompletionCone J I K)) := Iff.rfl
+lemma derivedComplete_iff
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    derivedComplete I X K ↔ Nonempty (IsLimit (derivedCompletionCone I X K)) := Iff.rfl
 
 /-- If the limit `R lim_n (K ⊗ᴸ R/Iⁿ)` exists, then `K` is derived complete precisely when
 the canonical map `K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)` is an isomorphism. -/
-lemma derivedComplete_iff_isIso_lift (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
-    [HasLimit (quotPowFunctor J I ⋙ tensorLeft K)] :
-    derivedComplete J I K ↔
-      IsIso (limit.lift (quotPowFunctor J I ⋙ tensorLeft K)
-        (derivedCompletionCone J I K)) :=
-  (limit.isLimit (quotPowFunctor J I ⋙ tensorLeft K)).nonempty_isLimit_iff_isIso_lift
-end DerivedCategory
+lemma derivedComplete_iff_isIso_lift
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))
+    [HasLimit (derivedQuotPowFunctor I X ⋙ tensorLeft K)] :
+    derivedComplete I X K ↔
+      IsIso (limit.lift (derivedQuotPowFunctor I X ⋙ tensorLeft K)
+        (derivedCompletionCone I X K)) :=
+  (limit.isLimit (derivedQuotPowFunctor I X ⋙ tensorLeft K)).nonempty_isLimit_iff_isIso_lift
 -/
-end Derived
+end AlgebraicGeometry.Etale
