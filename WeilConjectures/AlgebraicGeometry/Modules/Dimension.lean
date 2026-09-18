@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.Zero
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
+public import WeilConjectures.Mathlib.Data.ENat.Basic
 public import WeilConjectures.Mathlib.Topology.Sober
 
 /-!
@@ -48,7 +49,9 @@ itself is free of hypotheses on the scheme.
 - `AlgebraicGeometry.Scheme.Modules.isClosed_support`: the support of a coherent sheaf of
   modules is closed.
 - `AlgebraicGeometry.Scheme.Modules.supportDim_eq_bot_iff`: `dim F = ⊥` if and only if `F` is a
-  zero object. This is the base case of the induction.
+  zero object, and its consequence
+  `AlgebraicGeometry.Scheme.Modules.isZero_of_supportDim_lt_zero`. This is the base case of the
+  induction.
 - `AlgebraicGeometry.Scheme.Modules.supportDim_add_one_le_supportDim_of_forall_minimal` and its
   strict form `AlgebraicGeometry.Scheme.Modules.supportDim_lt_supportDim_of_forall_minimal`: if
   `Supp G` is a subset of `Supp F` containing no point of `Supp F` minimal for specialization,
@@ -143,6 +146,11 @@ lemma supportDim_def : F.supportDim = topologicalKrullDim F.support := rfl
 theorem supportDim_eq_bot_iff : F.supportDim = ⊥ ↔ IsZero F := by
   rw [supportDim_def, topologicalKrullDim_eq_bot_iff, Set.isEmpty_coe_sort,
     support_eq_empty_iff_isZero]
+
+/-- A sheaf of modules whose dimension is below `0` is a zero object: nothing but `⊥` lies below
+`0` in `WithBot ℕ∞`. This is the form the base case of an induction on `dim F` is used in. -/
+theorem isZero_of_supportDim_lt_zero (h : F.supportDim < ((0 : ℕ) : WithBot ℕ∞)) : IsZero F :=
+  (supportDim_eq_bot_iff F).1 (ENat.WithBot.lt_natCast_zero_iff.1 h)
 
 /-- A sheaf of modules on a quasi-compact scheme of finite type over a field has finite
 dimension, because such a scheme does. -/

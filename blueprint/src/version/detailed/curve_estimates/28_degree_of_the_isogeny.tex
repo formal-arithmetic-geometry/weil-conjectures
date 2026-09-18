@@ -739,7 +739,23 @@ scheme is $A[n]$ and the ample bundle is the restriction of one on $A$.
 
 \section{Intersection numbers}\label{sec:deg-intersection}
 
+\begin{remark}[Hypotheses of the formalised statements]
+\label{rem:deg-intersection-hypotheses}
+The statements of this section are read, in their formalised counterparts, with
+the hypotheses \Cref{thm:deg-snapper} is formalised with: ``projective over
+$k$'' is properness together with a given ample line bundle on $X$
+(\Cref{rem:deg-snapper-proper}), and of the algebraic closedness of $k$ only
+its infiniteness is used.  Those hypotheses are carried only by what consumes
+\Cref{thm:deg-snapper}; \Cref{def:deg-intersection}, the first formula of
+\Cref{lem:deg-intersection-is-top-difference} and
+\Cref{lem:deg-intersection-symmetric} are formalised for an arbitrary sheaf of
+modules on an arbitrary $k$-scheme, and \Cref{lem:deg-intersection-additive}
+only for $X$ proper over $k$.
+\end{remark}
+
 \begin{definition}[Intersection number]\label{def:deg-intersection}
+\lean{AlgebraicGeometry.Scheme.Modules.intersectionNumber}
+\leanok
 \uses{def:deg-euler}
 Let $X$ be a projective scheme over $k$, let $d\geq0$, let $L_1,\dots,L_d$ be
 line bundles on $X$ and let $F$ be a coherent sheaf on $X$.  The
@@ -756,6 +772,8 @@ $L$.  For $d=0$ the empty intersection number is $(\,\cdot\,F)=\chi(X,F)$.
 
 \begin{lemma}[The intersection number is the top difference of the Snapper
 polynomial]\label{lem:deg-intersection-is-top-difference}
+\lean{AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_zero,
+AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_of_supportDim_le}
 \uses{def:deg-intersection, thm:deg-snapper}
 In the situation of \Cref{def:deg-intersection},
 \[
@@ -764,9 +782,7 @@ In the situation of \Cref{def:deg-intersection},
 \]
 If moreover $\dim F\leq d$, then $\Delta_1\cdots\Delta_dP_{F,\underline L}$ is
 a constant function, so the same formula holds with $0$ replaced by any
-$\underline m\in\Z^d$, and $(L_1\cdots L_d\cdot F)$ is the coefficient of the
-monomial $T_1T_2\cdots T_d$ in the polynomial representing
-$P_{F,\underline L}$.
+$\underline m\in\Z^d$.
 \end{lemma}
 \begin{proof}
 \uses{lem:deg-difference-explicit, lem:deg-difference-lowers-degree,
@@ -782,24 +798,43 @@ which is the definition of $(L_1\cdots L_d\cdot F)$.  Suppose now
 $\dim F\leq d$.  By \Cref{thm:deg-snapper}, $P_{F,\underline L}$ is a numerical
 polynomial of total degree at most $\dim F\leq d$, so by
 \Cref{lem:deg-difference-lowers-degree}(2) the function
-$\Delta_1\cdots\Delta_dP_{F,\underline L}$ is constant.  For the last
-assertion, write the representing polynomial as
+$\Delta_1\cdots\Delta_dP_{F,\underline L}$ is constant.
+\end{proof}
+
+\begin{lemma}[The intersection number is the top coefficient of the Snapper
+polynomial]\label{lem:deg-intersection-top-coefficient}
+\uses{lem:deg-intersection-is-top-difference, thm:deg-snapper}
+In the situation of \Cref{def:deg-intersection} with $\dim F\leq d$, the
+intersection number $(L_1\cdots L_d\cdot F)$ is the coefficient of the monomial
+$T_1T_2\cdots T_d$ in the polynomial representing $P_{F,\underline L}$.
+\end{lemma}
+\begin{proof}
+\uses{lem:deg-intersection-is-top-difference,
+lem:deg-difference-lowers-degree, thm:deg-snapper}
+Write the representing polynomial as
 $\widetilde P=\sum_{\underline i}c_{\underline i}T^{\underline i}$, of total
 degree at most $d$.  The operator $\Delta_1\cdots\Delta_d$ lowers the degree in
 each variable $T_j$ by one, so it kills every monomial in which some $T_j$ does
 not occur; a monomial in which every one of the $d$ variables occurs has total
 degree at least $d$, hence exactly $d$, hence is $T_1T_2\cdots T_d$; and
-$\Delta_1\cdots\Delta_d(T_1\cdots T_d)=1$.  So the constant equals
-$c_{(1,\dots,1)}$.
+$\Delta_1\cdots\Delta_d(T_1\cdots T_d)=1$.  So the constant function
+$\Delta_1\cdots\Delta_dP_{F,\underline L}$ of
+\Cref{lem:deg-intersection-is-top-difference} equals $c_{(1,\dots,1)}$, and by
+that same lemma its value is $(L_1\cdots L_d\cdot F)$.
 \end{proof}
 
 \begin{lemma}[Symmetry]\label{lem:deg-intersection-symmetric}
+\lean{AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr_perm,
+AlgebraicGeometry.Scheme.Modules.intersectionNumber_comp_perm,
+AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr}
+\leanok
 \uses{def:deg-intersection}
 The intersection number $(L_1\cdots L_d\cdot F)$ is unchanged by permuting
 $L_1,\dots,L_d$, and depends on each $L_i$ only through its isomorphism class.
 \end{lemma}
 \begin{proof}
 \uses{def:deg-intersection, lem:deg-euler-additive}
+\leanok
 The defining sum runs over the subsets of $\{1,\dots,d\}$ and its terms depend
 only on the unordered family $\{L_i\}_{i\in S}$, so a permutation of the
 indices merely permutes the terms.  Isomorphic line bundles give isomorphic
@@ -809,6 +844,7 @@ tensor products, hence equal Euler characteristics by
 
 \begin{lemma}[Additivity in the coefficient sheaf]
 \label{lem:deg-intersection-additive}
+\lean{AlgebraicGeometry.Scheme.Modules.intersectionNumber_add_intersectionNumber}
 \uses{def:deg-intersection}
 Let $0\to F'\to F\to F''\to0$ be a short exact sequence of coherent sheaves on
 the projective $k$-scheme $X$ and let $L_1,\dots,L_d$ be line bundles.  Then
@@ -825,11 +861,9 @@ defining sum.
 
 \begin{lemma}[Vanishing in small dimension]
 \label{lem:deg-intersection-small-support}
+\lean{AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_zero_of_supportDim_lt}
 \uses{def:deg-intersection}
-If $\dim F<d$ then $(L_1\cdots L_d\cdot F)=0$.  In particular
-$(L_1\cdots L_d\cdot F)=0$ whenever $F$ is supported on a closed subset of
-dimension less than $d$, and $(L_1\cdots L_d)=0$ on a projective $k$-scheme of
-dimension less than $d$.
+If $\dim F<d$ then $(L_1\cdots L_d\cdot F)=0$.
 \end{lemma}
 \begin{proof}
 \uses{thm:deg-snapper, lem:deg-difference-lowers-degree,
@@ -840,6 +874,16 @@ polynomial of total degree at most $\dim F\leq d-1$, so by
 $\Delta_1,\dots,\Delta_d$ annihilates it.  Now apply
 \Cref{lem:deg-intersection-is-top-difference}.
 \end{proof}
+
+\begin{remark}[Two readings of the vanishing]
+\label{rem:deg-intersection-small-support}
+\Cref{lem:deg-intersection-small-support} says in particular that
+$(L_1\cdots L_d\cdot F)=0$ whenever $F$ is supported on a closed subset of
+dimension less than $d$, and that $(L_1\cdots L_d)=0$ on a projective
+$k$-scheme of dimension less than $d$.  The second reading is the first applied
+to $F=\O_X$, whose support is all of $X$; it is not formalised, the dimension
+of the support of $\O_X$ not having been identified with $\dim X$.
+\end{remark}
 
 \begin{theorem}[Multilinearity]\label{thm:deg-intersection-multilinear}
 \uses{def:deg-intersection}

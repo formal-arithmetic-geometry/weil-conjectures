@@ -59,6 +59,12 @@ hyperplane section; this is the same hypothesis `lem:deg-generic-section` is for
   and `AlgebraicGeometry.Scheme.Modules.isNumericalPolynomial_eulerChar_tensorZPow`:
   **`thm:deg-snapper`**, Snapper's theorem, first for very ample `Lⱼ` and then in general.
 
+Along the way, the two facts about the Euler characteristic of a twist that the proof and its
+consumers rest on: `AlgebraicGeometry.Scheme.Modules.eulerChar_tensorZPow_congr`, that the twist
+only matters through the Picard class of the twisting factor, and
+`AlgebraicGeometry.Scheme.Modules.eulerChar_tensorObj_add`, additivity along a short exact
+sequence twisted by an invertible sheaf of modules.
+
 ## TODO
 
 The blueprint node `thm:deg-snapper` is not `\leanok`: Snapper's theorem rests on the two sorried
@@ -88,6 +94,39 @@ lemma eulerChar_tensorObj_congr (F : X.Modules) {A B : X.Modules} (hA : A.Invert
     (hB : B.Invertible) (h : Pic.mk A hA = Pic.mk B hB) :
     eulerChar k (F ⊗ A) = eulerChar k (F ⊗ B) :=
   eulerChar_congr k (tensorIso (Iso.refl F) (Pic.mk_eq_mk_iff.1 h).some)
+
+/-- Twists `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_d ^⊗ m_d` and `F ⊗ L'₁ ^⊗ m'₁ ⊗ ⋯ ⊗ L'_{d'} ^⊗ m'_{d'}` of a
+sheaf of modules whose twisting factors have the same class in the Picard group of `X` have the
+same Euler characteristic. The two families need not have the same length. -/
+lemma eulerChar_tensorZPow_congr (F : X.Modules) {d d' : ℕ} {L : Fin d → X.Modules}
+    {L' : Fin d' → X.Modules} (hL : ∀ j, (L j).Invertible) (hL' : ∀ j, (L' j).Invertible)
+    {m : Fin d → ℤ} {m' : Fin d' → ℤ}
+    (h : ∏ j, Pic.mk (L j) (hL j) ^ m j = ∏ j, Pic.mk (L' j) (hL' j) ^ m' j) :
+    eulerChar k (tensorZPow F L hL m) = eulerChar k (tensorZPow F L' hL' m') :=
+  eulerChar_tensorObj_congr F (invertible_zpowProd L hL m) (invertible_zpowProd L' hL' m')
+    (by rwa [Pic.mk_zpowProd, Pic.mk_zpowProd])
+
+/-- **The Euler characteristic is additive along a short exact sequence twisted by an invertible
+sheaf of modules**: if
+
+```text
+  0 ⟶ C.X₁ ⟶ C.X₂ ⟶ C.X₃ ⟶ 0
+```
+
+is a short exact sequence of coherent sheaves of modules on a scheme proper over a field and `N`
+is invertible, then `χ(C.X₁ ⊗ N) + χ(C.X₃ ⊗ N) = χ(C.X₂ ⊗ N)`. -/
+lemma eulerChar_tensorObj_add [IsProper (X ↘ Spec (.of k))] {C : ShortComplex X.Modules}
+    (hC : C.ShortExact) [C.X₁.IsCoherent] [C.X₂.IsCoherent] [C.X₃.IsCoherent] {N : X.Modules}
+    (hN : N.Invertible) :
+    eulerChar k (C.X₁ ⊗ N) + eulerChar k (C.X₃ ⊗ N) = eulerChar k (C.X₂ ⊗ N) := by
+  -- tensoring by an invertible sheaf of modules is an equivalence of categories, hence exact
+  have : (tensorRight N).IsEquivalence := hN.isEquivalence_tensorRight
+  have : (C.map (tensorRight N)).X₁.IsCoherent := isCoherent_tensorObj_of_invertible C.X₁ hN
+  have : (C.map (tensorRight N)).X₂.IsCoherent := isCoherent_tensorObj_of_invertible C.X₂ hN
+  have : (C.map (tensorRight N)).X₃.IsCoherent := isCoherent_tensorObj_of_invertible C.X₃ hN
+  simpa only [ShortComplex.map_X₁, ShortComplex.map_X₂, ShortComplex.map_X₃,
+    Functor.flip_obj_obj, curriedTensor_obj_obj] using
+    eulerChar_add_eulerChar k (hC.map_of_exact (tensorRight N))
 
 variable (k)
 
@@ -121,7 +160,7 @@ private theorem fwdDiffComp_eulerChar_tensorZPow_eq_zero_aux {r : ℕ} (L : Fin 
     rw [fwdDiffComp_zero]
     funext m
     exact eulerChar_eq_zero_of_isZero k ((invertible_zpowProd L hL' m).isZero_tensorObj
-      ((supportDim_eq_bot_iff F).1 (ENat.WithBot.lt_natCast_zero_iff.1 hd)))
+      (isZero_of_supportDim_lt_zero F hd))
   | succ n ih =>
     have := (hL (j 0)).isGloballyGenerated
     obtain ⟨G, hG, u, v, hw, hSE, hGle⟩ :=
@@ -132,18 +171,9 @@ private theorem fwdDiffComp_eulerChar_tensorZPow_eq_zero_aux {r : ℕ} (L : Fin 
     have hstep : ∀ m : Fin r → ℤ,
         eulerChar k (tensorZPow F L hL' m) + eulerChar k (tensorZPow G L hL' m) =
           eulerChar k (tensorZPow F L hL' (m + Pi.single (j 0) 1)) := by
+      have : (F ⊗ L (j 0)).IsCoherent := isCoherent_tensorObj_of_invertible F (hL' (j 0))
       intro m
-      have hEq : (tensorRight (zpowProd L hL' m)).IsEquivalence :=
-        (invertible_zpowProd L hL' m).isEquivalence_tensorRight
-      have e₁ : ((ShortComplex.mk u v hw).map (tensorRight (zpowProd L hL' m))).X₁.IsCoherent :=
-        isCoherent_tensorObj_of_invertible F (invertible_zpowProd L hL' m)
-      have e₂ : ((ShortComplex.mk u v hw).map (tensorRight (zpowProd L hL' m))).X₂.IsCoherent :=
-        have : (F ⊗ L (j 0)).IsCoherent := isCoherent_tensorObj_of_invertible F (hL' (j 0))
-        isCoherent_tensorObj_of_invertible _ (invertible_zpowProd L hL' m)
-      have e₃ : ((ShortComplex.mk u v hw).map (tensorRight (zpowProd L hL' m))).X₃.IsCoherent :=
-        isCoherent_tensorObj_of_invertible G (invertible_zpowProd L hL' m)
-      refine (eulerChar_add_eulerChar k
-        (hSE.map_of_exact (tensorRight (zpowProd L hL' m)))).trans ?_
+      refine (eulerChar_tensorObj_add hSE (invertible_zpowProd L hL' m)).trans ?_
       refine (eulerChar_congr k (α_ F (L (j 0)) (zpowProd L hL' m))).trans ?_
       refine eulerChar_tensorObj_congr F ((hL' (j 0)).tensorObj (invertible_zpowProd L hL' m))
         (invertible_zpowProd L hL' (m + Pi.single (j 0) 1)) ?_
