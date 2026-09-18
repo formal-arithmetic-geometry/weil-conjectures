@@ -2771,6 +2771,188 @@ lemma eq_pushforwardFreeDesc (β : ι → ((pushforward g).obj Y.structureModule
 
 end PushforwardFree
 
+
+/-!
+## Pulling back the morphism attached to a global section
+
+A global section `m` of `M` is a morphism `𝒪ₓ ⟶ M`
+(`AlgebraicGeometry.Scheme.Modules.homOfSectionTop`), and pulling that morphism back along
+`a : X ⟶ Y` is multiplication by the pulled back section. This is what transports the
+non-vanishing of a section to a fibre, through
+`AlgebraicGeometry.Scheme.Modules.fiberMap_homOfSectionTop_eq_zero_iff_over`.
+-/
+
+section SectionHom
+
+variable {X Y : Scheme.{u}}
+
+/-- **Composing multiplication by a global section with a morphism** is multiplication by the
+image of that section. -/
+lemma homOfSectionTop_comp {M M' : X.Modules} (m : Γ(M, ⊤)) (φ : M ⟶ M') :
+    homOfSectionTop M m ≫ φ = homOfSectionTop M' (Hom.app φ ⊤ m) :=
+  (unitHomEquivTop M').injective <|
+    ((ConcreteCategory.congr_hom (Hom.comp_app (homOfSectionTop M m) φ (U := ⊤))
+        (oneSection X ⊤)).trans ((ConcreteCategory.comp_apply _ _ _).trans
+      (congrArg (ConcreteCategory.hom (Hom.app φ ⊤)) (app_homOfSectionTop_oneSection M m)))).trans
+      (app_homOfSectionTop_oneSection M' _).symm
+
+/-- The unit section pulls back to the unit section. -/
+lemma app_pullbackUnitIso_inv_oneSection (a : X ⟶ Y) :
+    Hom.app (pullbackUnitIso a).inv ⊤ (oneSection X ⊤) =
+      sectionsPullback a (unit Y.ringCatSheaf) (oneSection Y ⊤) := by
+  have h1 : Hom.app (pullbackUnitIso a).hom ⊤
+      (Hom.app (pullbackUnitIso a).inv ⊤ (oneSection X ⊤)) = oneSection X ⊤ := by
+    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Iso.inv_hom_id, Hom.id_app,
+      ConcreteCategory.id_apply]
+  have h2 : Hom.app (pullbackUnitIso a).hom ⊤
+      (sectionsPullback a (unit Y.ringCatSheaf) (oneSection Y ⊤)) = oneSection X ⊤ :=
+    (app_pullbackUnitIso_hom_sectionsPullback a (oneSection Y ⊤)).trans
+      (map_one (ConcreteCategory.hom a.appTop))
+  exact (sectionsEquivOfIso (pullbackUnitIso a) ⊤).injective (h1.trans h2.symm)
+
+/-- **The pullback of multiplication by a global section** is multiplication by the pullback of
+that section, under the identification `a^* 𝒪ᵧ ≅ 𝒪ₓ`. -/
+lemma map_homOfSectionTop (a : X ⟶ Y) (M : Y.Modules) (m : Γ(M, ⊤)) :
+    (pullbackUnitIso a).inv ≫ (pullback a).map (homOfSectionTop M m) =
+      homOfSectionTop ((pullback a).obj M) (sectionsPullback a M m) := by
+  refine (unitHomEquivTop _).injective ?_
+  have h1 : Hom.app ((pullbackUnitIso a).inv ≫
+      (pullback a).map (homOfSectionTop M m)) ⊤ (oneSection X ⊤) =
+      Hom.app ((pullback a).map (homOfSectionTop M m)) ⊤
+        (Hom.app (pullbackUnitIso a).inv ⊤ (oneSection X ⊤)) :=
+    (ConcreteCategory.congr_hom (Hom.comp_app (pullbackUnitIso a).inv
+      ((pullback a).map (homOfSectionTop M m)) (U := ⊤)) (oneSection X ⊤)).trans
+      (ConcreteCategory.comp_apply _ _ _)
+  have h2 : Hom.app ((pullback a).map (homOfSectionTop M m)) ⊤
+      (Hom.app (pullbackUnitIso a).inv ⊤ (oneSection X ⊤)) = sectionsPullback a M m :=
+    (congrArg (ConcreteCategory.hom
+        (Hom.app ((pullback a).map (homOfSectionTop M m)) ⊤))
+      (app_pullbackUnitIso_inv_oneSection a)).trans
+      ((sectionsPullback_naturality_apply a (homOfSectionTop M m) (oneSection Y ⊤)).trans
+        (congrArg (ConcreteCategory.hom (sectionsPullback a M))
+          (app_homOfSectionTop_oneSection M m)))
+  exact (h1.trans h2).trans (app_homOfSectionTop_oneSection _ _).symm
+
+/-- A morphism whose fibre at `x` vanishes has vanishing fibre after composing on the right. -/
+lemma fiberMap_comp_eq_zero_of_left {M M' M'' : X.Modules} (φ : M ⟶ M') (ψ : M' ⟶ M'') (x : X)
+    (h : fiberMap φ x = 0) : fiberMap (φ ≫ ψ) x = 0 := by
+  rw [fiberMap_comp, h, Limits.zero_comp]
+
+/-- A morphism whose fibre at `x` vanishes has vanishing fibre after composing on the left. -/
+lemma fiberMap_comp_eq_zero_of_right {M M' M'' : X.Modules} (φ : M ⟶ M') (ψ : M' ⟶ M'') (x : X)
+    (h : fiberMap ψ x = 0) : fiberMap (φ ≫ ψ) x = 0 := by
+  rw [fiberMap_comp, h, Limits.comp_zero]
+
+/-- Composing with an isomorphism on the left does not change the vanishing of a fibre. -/
+lemma fiberMap_isoComp_left_eq_zero_iff {M M' M'' : X.Modules} (i : M ≅ M') (φ : M' ⟶ M'')
+    (x : X) : fiberMap (i.hom ≫ φ) x = 0 ↔ fiberMap φ x = 0 := by
+  rw [fiberMap_comp, Preadditive.IsIso.comp_left_eq_zero]
+
+/-- Composing with isomorphisms on both sides does not change the vanishing of a fibre. -/
+lemma fiberMap_isoComp_eq_zero_iff {M M' P Q : X.Modules} (φ : M ⟶ M') (i : P ≅ M) (j : M' ≅ Q)
+    (x : X) : fiberMap (i.hom ≫ φ ≫ j.hom) x = 0 ↔ fiberMap φ x = 0 := by
+  rw [fiberMap_comp, fiberMap_comp, Preadditive.IsIso.comp_left_eq_zero,
+    Preadditive.IsIso.comp_right_eq_zero]
+
+end SectionHom
+
+section SectionHomOver
+
+variable {X X' W : Scheme.{u}}
+
+/-- The comparison isomorphism implicit in
+`AlgebraicGeometry.Scheme.Modules.sectionsPullbackOver`: for `u : X ⟶ X'` over `W`, pulling a
+sheaf on `W` back to `X'` and then to `X` is pulling it back to `X`. -/
+noncomputable def pullbackOverIso (u : X ⟶ X') {p : X ⟶ W} {p' : X' ⟶ W} (hu : u ≫ p' = p)
+    (F : W.Modules) : (pullback u).obj ((pullback p').obj F) ≅ (pullback p).obj F :=
+  (pullbackComp u p').app F ≪≫ (pullbackCongr hu).app F
+
+lemma sectionsPullbackOver_eq (u : X ⟶ X') {p : X ⟶ W} {p' : X' ⟶ W} (hu : u ≫ p' = p)
+    (F : W.Modules) (m : Γ((pullback p').obj F, ⊤)) :
+    sectionsPullbackOver u hu F m =
+      Hom.app (pullbackOverIso u hu F).hom ⊤ (sectionsPullback u ((pullback p').obj F) m) := by
+  rw [pullbackOverIso, Iso.trans_hom, Hom.comp_app, sectionsPullbackOver]
+  simp
+
+/-- **The pullback over a base of multiplication by a global section** is multiplication by the
+pullback of that section. -/
+lemma map_homOfSectionTop_over (u : X ⟶ X') {p : X ⟶ W} {p' : X' ⟶ W} (hu : u ≫ p' = p)
+    (F : W.Modules) (m : Γ((pullback p').obj F, ⊤)) :
+    (pullbackUnitIso u).inv ≫ (pullback u).map (homOfSectionTop ((pullback p').obj F) m) ≫
+        (pullbackOverIso u hu F).hom =
+      homOfSectionTop ((pullback p).obj F) (sectionsPullbackOver u hu F m) := by
+  rw [← Category.assoc, map_homOfSectionTop]
+  exact (homOfSectionTop_comp _ _).trans
+    (congrArg (homOfSectionTop ((pullback p).obj F)) (sectionsPullbackOver_eq u hu F m).symm)
+
+/-- **Multiplication by a global section vanishes on the fibre at `u x` exactly when
+multiplication by the pulled back section vanishes on the fibre at `x`.** -/
+lemma fiberMap_homOfSectionTop_eq_zero_iff_over (u : X ⟶ X') {p : X ⟶ W} {p' : X' ⟶ W}
+    (hu : u ≫ p' = p) (F : W.Modules) (m : Γ((pullback p').obj F, ⊤)) (x : X)
+    [IsIso (u.residueFieldMap x)] :
+    fiberMap (homOfSectionTop ((pullback p').obj F) m) (u x) = 0 ↔
+      fiberMap (homOfSectionTop ((pullback p).obj F) (sectionsPullbackOver u hu F m)) x = 0 := by
+  refine (fiberMap_pullback_map_eq_zero_iff u x
+    (homOfSectionTop ((pullback p').obj F) m)).symm.trans ?_
+  refine (fiberMap_isoComp_eq_zero_iff ((pullback u).map (homOfSectionTop ((pullback p').obj F) m))
+    (pullbackUnitIso u).symm (pullbackOverIso u hu F) x).symm.trans ?_
+  exact Iff.of_eq (congrArg (fun ψ ↦ fiberMap ψ x = 0) (map_homOfSectionTop_over u hu F m))
+
+end SectionHomOver
+
+/-!
+## Restricting a section near a point of the base to the fibre over that point
+
+A section of `f _* F` over an open neighbourhood `V` of `y` is a section of `F` over `f ⁻¹ᵁ V`,
+that is a *global* section of the restriction of `F` to the open subscheme `f ⁻¹ᵁ V`, and
+restricting it to the fibre `X_y` factors through that restriction.
+-/
+
+section SectionOfNhds
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) {V : Y.Opens}
+
+/-- **A section of `f _* F` over `V`, read as a global section of the restriction of `F` to the
+open subscheme `f ⁻¹ᵁ V`.** -/
+noncomputable def sectionOfNhds (z : Γ((pushforward f).obj F, V)) :
+    Γ((pullback (f ⁻¹ᵁ V).ι).obj F, ⊤) :=
+  sectionsPullbackLE (f ⁻¹ᵁ V).ι F (f ⁻¹ᵁ V).ι_preimage_self.ge
+    (eqToHom (pushforward_obj_obj f F V) z)
+
+variable {y : Y} (hy : y ∈ V)
+
+/-- Restricting a section of `f _* F` near `y` to the fibre `X_y` factors through the open
+subscheme `f ⁻¹ᵁ V`. -/
+lemma fiberSectionsOfNhds_comp_fiberLift :
+    (eqToHom (pushforward_obj_obj f F V) ≫
+        sectionsPullbackLE (f ⁻¹ᵁ V).ι F (f ⁻¹ᵁ V).ι_preimage_self.ge) ≫
+      sectionsPullbackOver (f.fiberLift hy) (f.fiberLift_ι hy) F =
+    fiberSectionsOfNhds f F y V hy := by
+  have h₃ : (⊤ : (f.fiber y).Opens) ≤ (f.fiberLift hy ≫ (f ⁻¹ᵁ V).ι) ⁻¹ᵁ (f ⁻¹ᵁ V) := by
+    rw [f.fiberLift_ι hy]
+    exact (f.preimage_fiberι_eq_top hy).ge
+  rw [fiberSectionsOfNhds, Category.assoc]
+  congr 1
+  rw [sectionsPullbackOver, sectionsPullback,
+    sectionsPullbackLE_comp_assoc _ _ F _ _ h₃, sectionsPullbackLE_congr]
+
+lemma sectionsPullbackOver_fiberLift_sectionOfNhds (z : Γ((pushforward f).obj F, V)) :
+    sectionsPullbackOver (f.fiberLift hy) (f.fiberLift_ι hy) F (sectionOfNhds f F z) =
+      fiberSectionsOfNhds f F y V hy z := by
+  have h1 := ConcreteCategory.congr_hom (fiberSectionsOfNhds_comp_fiberLift f F hy) z
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h1
+  exact h1
+
+/-- Restricting a section of `f _* F` to the fibre over `y` does not depend on the open
+neighbourhood of `y` it is taken over. -/
+lemma fiberSectionsOfNhds_map {V' : Y.Opens} (hVV' : V' ≤ V) (hy' : y ∈ V') :
+    ((pushforward f).obj F).presheaf.map (homOfLE hVV').op ≫ fiberSectionsOfNhds f F y V' hy' =
+      fiberSectionsOfNhds f F y V hy := by
+  rw [fiberSectionsOfNhds, fiberSectionsOfNhds, ← Category.assoc, eqToHom_pushforward_map,
+    Category.assoc, map_sectionsPullbackLE]
+
+end SectionOfNhds
+
 end Scheme.Modules
 
 /-! ### The comparison morphism `𝒪_X ⟶ g_* 𝒪_Y` -/

@@ -51,6 +51,7 @@ public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
 public import WeilConjectures.AlgebraicGeometry.TrivialityLocus
+public import WeilConjectures.AlgebraicGeometry.TrivialityNearPoint
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafGloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafInvertible
