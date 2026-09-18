@@ -27,15 +27,16 @@ properties.
 ## Main results
 
 * `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_zero` and
-  `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp`:
+  `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_of_supportDim_le`:
   **`lem:deg-intersection-is-top-difference`**, the intersection number is the value at `0` of the
   composite `Δ₁ ⋯ Δ_d` of the `d` standard difference operators applied to the Snapper function
   `m ↦ χ(X, F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_d ^⊗ m_d)`, and — once `dim F ≤ d`, so that Snapper's theorem
   makes that composite constant — the value at *any* `m`.
-* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr` and
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr_perm`, with its two special cases
+  `AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr` and
   `AlgebraicGeometry.Scheme.Modules.intersectionNumber_comp_perm`:
-  **`lem:deg-intersection-symmetric`**, the intersection number depends on each `Lⱼ` only through
-  its isomorphism class, and is invariant under a permutation of the `Lⱼ`.
+  **`lem:deg-intersection-symmetric`**, the intersection number depends on `L₁, …, L_d` only
+  through the multiset of their classes in the Picard group of `X`.
 * `AlgebraicGeometry.Scheme.Modules.intersectionNumber_add_intersectionNumber`:
   **`lem:deg-intersection-additive`**, additivity of the intersection number along a short exact
   sequence of coherent sheaves.
@@ -43,13 +44,15 @@ properties.
   **`lem:deg-intersection-small-support`**, the intersection number vanishes when the support of
   `F` has dimension less than `d`.
 
-## Hypotheses
+## Implementation notes
 
-The unconditional half of `lem:deg-intersection-is-top-difference` is pure difference calculus and
-is stated with no hypothesis on `X` at all. The two statements that consume Snapper's theorem
-carry its hypotheses, which are weaker than the blueprint's "projective over an algebraically
-closed field": `X` proper over `k` with an ample invertible sheaf `A`, and `k` infinite. See the
-module docstring of `WeilConjectures.AlgebraicGeometry.Snapper`.
+The definition, the unconditional half of `lem:deg-intersection-is-top-difference` and symmetry
+are stated with no hypothesis on `X`, on `F` or on the `Lⱼ` beyond invertibility: they are pure
+difference calculus and bookkeeping in the Picard group. The results in the `Snapper` section
+below consume Snapper's theorem, so they carry its hypotheses — `X` proper over `k` with an ample
+invertible sheaf `A`, and `k` infinite, in place of the blueprint's "projective over an
+algebraically closed field" — and they inherit the deferrals listed in the `TODO` of
+`WeilConjectures.AlgebraicGeometry.Snapper`. See the module docstring of that file.
 
 ## TODO
 
@@ -58,20 +61,18 @@ coefficient of the monomial `T₁ ⋯ T_d` in the polynomial representing the Sn
 not formalised here. It needs the interaction of `fwdDiffComp` with `MvPolynomial` coefficients,
 which is a piece of polynomial algebra of its own.
 
-Nothing in this file is `\leanok`: everything that consumes Snapper's theorem inherits the
-`sorryAx` of the three deliberate deferrals listed in the `TODO` of
-`WeilConjectures.AlgebraicGeometry.Snapper`.
-
 ## References
 
-The blueprint chapter on the degree of an isogeny, section `sec:deg-intersection`.
+* S. L. Kleiman, *Toward a numerical theory of ampleness*, Ann. of Math. (2) **84** (1966),
+  293–344, §1.
+* The blueprint chapter on the degree of an isogeny, section `sec:deg-intersection`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory SheafOfModules fwdDiff
+open CategoryTheory MonoidalCategory fwdDiff
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -89,7 +90,7 @@ The subset `S` enters through its indicator vector, so that the twist `F ⊗ ⨂
 sheaf `AlgebraicGeometry.Scheme.Modules.tensorZPow` whose Euler characteristic Snapper's theorem
 is about. Taking `F = 𝟙_ X.Modules` gives the intersection number `(L₁ ⋯ L_d)` of the blueprint,
 and `d = 0` gives `χ(X, F)` by
-`AlgebraicGeometry.Scheme.Modules.intersectionNumber_of_isEmpty`.
+`AlgebraicGeometry.Scheme.Modules.intersectionNumber_fin_zero`.
 
 This is `def:deg-intersection` of the blueprint. -/
 noncomputable def intersectionNumber (F : X.Modules) {d : ℕ} (L : Fin d → X.Modules)
@@ -99,111 +100,104 @@ noncomputable def intersectionNumber (F : X.Modules) {d : ℕ} (L : Fin d → X.
 
 /-- **The empty intersection number is the Euler characteristic.** -/
 @[simp]
-lemma intersectionNumber_of_isEmpty (F : X.Modules) (L : Fin 0 → X.Modules)
+lemma intersectionNumber_fin_zero (F : X.Modules) (L : Fin 0 → X.Modules)
     (hL : ∀ j, (L j).Invertible) : intersectionNumber k F L hL = eulerChar k F := by
-  have huniv : (Finset.univ : Finset (Finset (Fin 0))) = {∅} := by decide
-  rw [intersectionNumber, huniv, Finset.sum_singleton, Finset.card_empty]
+  rw [intersectionNumber,
+    show (Finset.univ : Finset (Finset (Fin 0))) = {∅} from Finset.univ_unique,
+    Finset.sum_singleton, Finset.card_empty]
   simpa using eulerChar_congr k (tensorZPowZeroIso F L hL _)
 
 /-! ### The intersection number as a top difference -/
-
-/-- The indicator vector of a subset of `Fin d` is the sum of the corresponding standard basis
-vectors of `ℤ ^ d`. -/
-private lemma sum_pi_single (d : ℕ) (S : Finset (Fin d)) :
-    ∑ i ∈ S, (Pi.single i 1 : Fin d → ℤ) = fun j ↦ if j ∈ S then 1 else 0 := by
-  funext j
-  rw [Finset.sum_apply]
-  simp [Pi.single_apply]
 
 /-- **The intersection number is the top iterated forward difference of the Snapper function**,
 evaluated at `0`: applying the `d` standard difference operators `Δ₁, …, Δ_d` to
 `m ↦ χ(X, F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_d ^⊗ m_d)` and evaluating at `0` gives `(L₁ ⋯ L_d · F)`.
 
-This half of `lem:deg-intersection-is-top-difference` is pure difference calculus: it is the
-expansion `fwdDiffComp_eq_sum_powerset` of a composite of difference operators as an alternating
-sum over subsets, and needs no hypothesis on `X`, `F` or the `Lⱼ`. -/
+This half of `lem:deg-intersection-is-top-difference` needs no hypothesis on `X`, `F` or the
+`Lⱼ`. -/
 theorem intersectionNumber_eq_fwdDiffComp_zero (F : X.Modules) {d : ℕ} (L : Fin d → X.Modules)
     (hL : ∀ j, (L j).Invertible) :
     intersectionNumber k F L hL =
       fwdDiffComp (fun j ↦ Pi.single j 1) (fun m ↦ eulerChar k (tensorZPow F L hL m)) 0 := by
+  -- both sides are alternating sums over the subsets of `Fin d`, by `fwdDiffComp_eq_sum_powerset`
   rw [fwdDiffComp_eq_sum_powerset, intersectionNumber]
   refine Finset.sum_congr rfl fun S _ ↦ ?_
-  rw [zsmul_eq_mul, Int.cast_id, zero_add, sum_pi_single]
+  -- the twist attached to `S` is the same on both sides: the indicator vector of `S` is the sum
+  -- of the standard basis vectors `Pi.single i 1` for `i ∈ S`
+  have hS : (∑ i ∈ S, (Pi.single i 1 : Fin d → ℤ)) = fun j ↦ if j ∈ S then 1 else 0 := by
+    funext j
+    simp
+  rw [zsmul_eq_mul, Int.cast_id, zero_add, hS]
 
 /-! ### Symmetry -/
 
-/-- Two twists of `F` whose twisting factors have the same class in the Picard group of `X` have
-the same Euler characteristic. -/
-private lemma eulerChar_tensorZPow_congr (F : X.Modules) {d : ℕ} {L L' : Fin d → X.Modules}
-    (hL : ∀ j, (L j).Invertible) (hL' : ∀ j, (L' j).Invertible) {m m' : Fin d → ℤ}
-    (h : ∏ j, Pic.mk (L j) (hL j) ^ m j = ∏ j, Pic.mk (L' j) (hL' j) ^ m' j) :
-    eulerChar k (tensorZPow F L hL m) = eulerChar k (tensorZPow F L' hL' m') :=
-  eulerChar_tensorObj_congr F (invertible_zpowProd L hL m) (invertible_zpowProd L' hL' m')
-    (by rw [Pic.mk_zpowProd, Pic.mk_zpowProd]; exact h)
+/-- **The intersection number depends on `L₁, …, L_d` only through the multiset of their classes
+in the Picard group of `X`**: if some permutation `σ` matches the classes of the `Lⱼ` with those
+of the `L'ⱼ`, the two intersection numbers agree.
 
-/-- **The intersection number depends on each `Lⱼ` only through its isomorphism class.**
+This is `lem:deg-intersection-symmetric` of the blueprint; its two halves are
+`AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr` and
+`AlgebraicGeometry.Scheme.Modules.intersectionNumber_comp_perm` below. -/
+theorem intersectionNumber_congr_perm (F : X.Modules) {d : ℕ} {L L' : Fin d → X.Modules}
+    (hL : ∀ j, (L j).Invertible) (hL' : ∀ j, (L' j).Invertible) (σ : Equiv.Perm (Fin d))
+    (h : ∀ j, Pic.mk (L (σ j)) (hL (σ j)) = Pic.mk (L' j) (hL' j)) :
+    intersectionNumber k F L hL = intersectionNumber k F L' hL' := by
+  rw [intersectionNumber, intersectionNumber]
+  -- `σ` carries the subset indexing a term on the right to the one indexing the equal term on
+  -- the left
+  refine Fintype.sum_equiv (Equiv.finsetCongr σ.symm) _ _ fun S ↦ ?_
+  rw [Equiv.finsetCongr_apply, Finset.card_map]
+  congr 1
+  refine eulerChar_tensorZPow_congr F hL hL' (Fintype.prod_equiv σ.symm _ _ fun j ↦ ?_)
+  rw [← h (σ.symm j), Equiv.apply_symm_apply]
+  congr 1
+  simp
+
+/-- **The intersection number depends on each `Lⱼ` only through its class in the Picard group of
+`X`**, hence, by `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`, only through its isomorphism class.
 
 This is half of `lem:deg-intersection-symmetric` of the blueprint. -/
 theorem intersectionNumber_congr (F : X.Modules) {d : ℕ} {L L' : Fin d → X.Modules}
-    (hL : ∀ j, (L j).Invertible) (hL' : ∀ j, (L' j).Invertible) (e : ∀ j, L j ≅ L' j) :
-    intersectionNumber k F L hL = intersectionNumber k F L' hL' := by
-  rw [intersectionNumber, intersectionNumber]
-  refine Finset.sum_congr rfl fun S _ ↦ ?_
-  congr 1
-  exact eulerChar_tensorZPow_congr k F hL hL' (Finset.prod_congr rfl fun j _ ↦
-    congrArg (· ^ (if j ∈ S then (1 : ℤ) else 0))
-      ((Pic.mk_eq_mk_iff (hM := hL j) (hN := hL' j)).2 ⟨e j⟩))
+    (hL : ∀ j, (L j).Invertible) (hL' : ∀ j, (L' j).Invertible)
+    (h : ∀ j, Pic.mk (L j) (hL j) = Pic.mk (L' j) (hL' j)) :
+    intersectionNumber k F L hL = intersectionNumber k F L' hL' :=
+  intersectionNumber_congr_perm k F hL hL' (Equiv.refl _) h
 
 /-- **The intersection number is invariant under a permutation of `L₁, …, L_d`.**
 
 This is the other half of `lem:deg-intersection-symmetric` of the blueprint. -/
 theorem intersectionNumber_comp_perm (F : X.Modules) {d : ℕ} (L : Fin d → X.Modules)
     (hL : ∀ j, (L j).Invertible) (σ : Equiv.Perm (Fin d)) :
-    intersectionNumber k F (L ∘ σ) (fun j ↦ hL (σ j)) = intersectionNumber k F L hL := by
-  rw [intersectionNumber, intersectionNumber]
-  refine Fintype.sum_equiv (Equiv.finsetCongr σ) _ _ fun S ↦ ?_
-  have hcard : (Equiv.finsetCongr σ S).card = S.card := by
-    simp [Equiv.finsetCongr]
-  rw [hcard]
-  congr 1
-  refine eulerChar_tensorZPow_congr k F _ hL (Fintype.prod_equiv σ _ _ fun j ↦ ?_)
-  congr 1
-  simp [Equiv.finsetCongr]
+    intersectionNumber k F (L ∘ σ) (fun j ↦ hL (σ j)) = intersectionNumber k F L hL :=
+  intersectionNumber_congr_perm k F _ hL σ.symm fun _ ↦ Pic.mk_congr (by simp)
 
 /-! ### Additivity in the coefficient sheaf -/
 
 section Additive
 
-variable {S : ShortComplex X.Modules} [IsProper (X ↘ Spec (.of k))]
-
-/-- The Euler characteristic is additive along a short exact sequence twisted by an invertible
-sheaf of modules: tensoring by an invertible sheaf is an equivalence of categories, hence exact. -/
-private lemma eulerChar_tensorObj_add (hS : S.ShortExact) [S.X₁.IsCoherent] [S.X₂.IsCoherent]
-    [S.X₃.IsCoherent] {N : X.Modules} (hN : N.Invertible) :
-    eulerChar k (S.X₁ ⊗ N) + eulerChar k (S.X₃ ⊗ N) = eulerChar k (S.X₂ ⊗ N) := by
-  have hEq : (tensorRight N).IsEquivalence := hN.isEquivalence_tensorRight
-  have hSE : (S.map (tensorRight N)).ShortExact := hS.map_of_exact (tensorRight N)
-  have h₁ : (S.map (tensorRight N)).X₁.IsCoherent := isCoherent_tensorObj_of_invertible S.X₁ hN
-  have h₂ : (S.map (tensorRight N)).X₂.IsCoherent := isCoherent_tensorObj_of_invertible S.X₂ hN
-  have h₃ : (S.map (tensorRight N)).X₃.IsCoherent := isCoherent_tensorObj_of_invertible S.X₃ hN
-  have key := eulerChar_add_eulerChar k hSE
-  simp only [ShortComplex.map_X₁, ShortComplex.map_X₂, ShortComplex.map_X₃] at key
-  exact key
+variable {C : ShortComplex X.Modules} [IsProper (X ↘ Spec (.of k))]
 
 /-- **The intersection number is additive in the coefficient sheaf** along a short exact sequence
-`0 ⟶ F' ⟶ F ⟶ F'' ⟶ 0` of coherent sheaves on a scheme proper over a field.
+
+```text
+  0 ⟶ C.X₁ ⟶ C.X₂ ⟶ C.X₃ ⟶ 0
+```
+
+of coherent sheaves on a scheme proper over a field.
 
 This is `lem:deg-intersection-additive` of the blueprint. -/
-theorem intersectionNumber_add_intersectionNumber (hS : S.ShortExact) [S.X₁.IsCoherent]
-    [S.X₂.IsCoherent] [S.X₃.IsCoherent] {d : ℕ} (L : Fin d → X.Modules)
+theorem intersectionNumber_add_intersectionNumber (hC : C.ShortExact) [C.X₁.IsCoherent]
+    [C.X₂.IsCoherent] [C.X₃.IsCoherent] {d : ℕ} (L : Fin d → X.Modules)
     (hL : ∀ j, (L j).Invertible) :
-    intersectionNumber k S.X₁ L hL + intersectionNumber k S.X₃ L hL =
-      intersectionNumber k S.X₂ L hL := by
+    intersectionNumber k C.X₁ L hL + intersectionNumber k C.X₃ L hL =
+      intersectionNumber k C.X₂ L hL := by
+  -- termwise in the defining sum, by additivity of the Euler characteristic along the sequence
+  -- twisted by the invertible sheaf `⨂_{i ∈ S} Lᵢ`
   rw [intersectionNumber, intersectionNumber, intersectionNumber, ← Finset.sum_add_distrib]
-  refine Finset.sum_congr rfl fun T _ ↦ ?_
+  refine Finset.sum_congr rfl fun S _ ↦ ?_
   rw [← mul_add]
   congr 1
-  exact eulerChar_tensorObj_add k hS (invertible_zpowProd L hL _)
+  exact eulerChar_tensorObj_add hC (invertible_zpowProd L hL _)
 
 end Additive
 
@@ -219,35 +213,36 @@ variable [Infinite k] [IsProper (X ↘ Spec (.of k))]
 This is the second half of `lem:deg-intersection-is-top-difference` of the blueprint; it consumes
 Snapper's theorem, so it carries its hypotheses: `X` is proper over the infinite field `k` and
 carries an ample invertible sheaf `A`. -/
-theorem intersectionNumber_eq_fwdDiffComp {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
-    (F : X.Modules) [F.IsCoherent] {d : ℕ} (L : Fin d → X.Modules) (hL : ∀ j, (L j).Invertible)
-    (hd : F.supportDim ≤ (d : WithBot ℕ∞)) (m : Fin d → ℤ) :
+theorem intersectionNumber_eq_fwdDiffComp_of_supportDim_le {A : X.Modules} (hA : A.Invertible)
+    (hAa : A.IsAmple) (F : X.Modules) [F.IsCoherent] {d : ℕ} (L : Fin d → X.Modules)
+    (hL : ∀ j, (L j).Invertible) (hd : F.supportDim ≤ (d : WithBot ℕ∞)) (m : Fin d → ℤ) :
     intersectionNumber k F L hL =
-      fwdDiffComp (fun j ↦ Pi.single j 1) (fun m ↦ eulerChar k (tensorZPow F L hL m)) m := by
+      fwdDiffComp (fun j ↦ Pi.single j 1) (fun n ↦ eulerChar k (tensorZPow F L hL n)) m := by
+  -- by Snapper's theorem the Snapper function is a numerical polynomial of total degree at most
+  -- `dim F ≤ d`, so the composite of the `d` difference operators is constant
   obtain ⟨c, hc⟩ := (isNumericalPolynomial_eulerChar_tensorZPow k hA hAa F L hL d
     hd).exists_fwdDiffComp_eq_const fun j ↦ Pi.single j 1
-  rw [intersectionNumber_eq_fwdDiffComp_zero k F L hL, hc]
-  rfl
+  rw [intersectionNumber_eq_fwdDiffComp_zero k F L hL]
+  simp [hc]
 
 /-- **The intersection number vanishes when the support of `F` has dimension less than `d`.**
 
-This is `lem:deg-intersection-small-support` of the blueprint: by Snapper's theorem the Snapper
-function is a numerical polynomial of total degree at most `dim F ≤ d - 1`, so the composite of
-`d` difference operators annihilates it. -/
+This is `lem:deg-intersection-small-support` of the blueprint. -/
 theorem intersectionNumber_eq_zero_of_supportDim_lt {A : X.Modules} (hA : A.Invertible)
     (hAa : A.IsAmple) (F : X.Modules) [F.IsCoherent] {d : ℕ} (L : Fin d → X.Modules)
     (hL : ∀ j, (L j).Invertible) (hd : F.supportDim < (d : WithBot ℕ∞)) :
     intersectionNumber k F L hL = 0 := by
   obtain _ | e := d
   · -- there is nothing below `0` but `⊥`, so `F` is a zero sheaf
-    rw [intersectionNumber_of_isEmpty]
-    exact eulerChar_eq_zero_of_isZero k ((supportDim_eq_bot_iff F).1
-      (ENat.WithBot.lt_natCast_zero_iff.1 hd))
-  · have hd' : F.supportDim ≤ (e : WithBot ℕ∞) := ENat.WithBot.lt_natCast_add_one_iff.1 hd
+    rw [intersectionNumber_fin_zero]
+    exact eulerChar_eq_zero_of_isZero k (isZero_of_supportDim_lt_zero F hd)
+  · -- by Snapper's theorem the Snapper function is a numerical polynomial of total degree at most
+    -- `dim F ≤ d - 1`, so the composite of the `d` difference operators annihilates it
+    have hd' : F.supportDim ≤ (e : WithBot ℕ∞) := ENat.WithBot.lt_natCast_add_one_iff.1 hd
     rw [intersectionNumber_eq_fwdDiffComp_zero k F L hL,
       (isNumericalPolynomial_eulerChar_tensorZPow k hA hAa F L hL e hd').fwdDiffComp_eq_zero
         fun j ↦ Pi.single j 1]
-    rfl
+    simp
 
 end Snapper
 
