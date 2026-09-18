@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 
 /-!
 
@@ -65,12 +66,6 @@ namespace DerivedCategory
 variable (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{w} A]
-
-instance (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := inferInstance
-
-noncomputable instance : MonoidalCategory (HomotopyCategory A (ComplexShape.up ℤ)) :=
-  have (X₁ X₂ : GradedObject ℤ A) : X₁.HasTensor X₂ := inferInstance
-  inferInstance
 
 /-- For a monoidal closed Grothendieck abelian category `A` admitting functorial flat
 resolutions, the localization functor `Qh : K(A) ⥤ D(A)` admits a derived monoidal
