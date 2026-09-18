@@ -26,7 +26,8 @@ two ideal sheaves, recorded on affine opens only, still multiplies sections over
 (`mul_mem_mul_idealOfOpens`), and the kernel ideal sheaf of a quasi-compact morphism consists
 of the sections killed by it (`AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`). The
 germs at a point of those sections form an ideal of the local ring there
-(`AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`).
+(`AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`), which for a closed immersion is the
+kernel of the induced map of local rings (`AlgebraicGeometry.Scheme.Hom.ker_stalkIdeal`).
 
 ## Base change of the subscheme cut out by an ideal sheaf
 
@@ -58,6 +59,7 @@ the kernel ideal vanishes on a cover by affine opens.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.mem_idealOfOpens_iff_forall_affineOpens`
 - `AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`
+- `AlgebraicGeometry.Scheme.Hom.ker_stalkIdeal`
 - `AlgebraicGeometry.Scheme.IdealSheafData.mul_mem_mul_idealOfOpens`
 - `AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
@@ -250,6 +252,48 @@ lemma mem_idealOfOpens_ker_iff [QuasiCompact f] {U : Y.Opens} {x : Γ(Y, U)} :
   · rw [mem_idealOfOpens_iff_forall_affineOpens]
     intro V h
     rw [ker_apply, RingHom.mem_ker, ← map_app_apply, hx, map_zero]
+
+open IdealSheafData in
+/-- **The stalk of the kernel ideal sheaf of a closed immersion is the kernel of the induced
+map of local rings.**
+
+The inclusion `⊇` is where the closed immersion is used: a germ killed by `g.stalkMap y` is
+killed by a section over some open subset of `Y`, and only because `g` is an embedding is that
+open subset the preimage of an open subset of `X`. -/
+lemma ker_stalkIdeal {X Y : Scheme.{u}} (g : Y ⟶ X) [IsClosedImmersion g] (y : Y) :
+    g.ker.stalkIdeal (g.base y) = RingHom.ker (g.stalkMap y).hom := by
+  ext r
+  constructor
+  · rintro ⟨U, hx, s, hs, rfl⟩
+    rw [RingHom.mem_ker]
+    change g.stalkMap y (X.presheaf.germ U (g.base y) hx s) = 0
+    rw [Scheme.Hom.germ_stalkMap_apply, g.mem_idealOfOpens_ker_iff.mp hs, map_zero]
+  · intro hr
+    rw [RingHom.mem_ker] at hr
+    obtain ⟨U, hx, s, rfl⟩ := X.presheaf.exists_germ_eq r
+    rw [Scheme.Hom.germ_stalkMap_apply] at hr
+    rw [show (0 : Y.presheaf.stalk y) =
+      Y.presheaf.germ ⊤ y (show y ∈ (⊤ : Y.Opens) from trivial) 0 by simp] at hr
+    obtain ⟨W, hW, iW1, iW2, he⟩ := Y.presheaf.germ_eq y hx _ _ _ hr
+    rw [map_zero] at he
+    -- `W` is the preimage of an open subset `t` of `X` because `g` is an embedding
+    obtain ⟨t, ht, htW⟩ := g.isClosedEmbedding.isInducing.isOpen_iff.mp W.2
+    have hyV : g.base y ∈ (⟨t, ht⟩ : X.Opens) := by
+      have : y ∈ g.base ⁻¹' t := by rw [htW]; exact hW
+      exact this
+    have hU' : U ⊓ (⟨t, ht⟩ : X.Opens) ≤ U := inf_le_left
+    have hgU' : (g ⁻¹ᵁ (U ⊓ (⟨t, ht⟩ : X.Opens))) ≤ W := by
+      intro z hz
+      have : z ∈ g.base ⁻¹' t := hz.2
+      rw [htW] at this
+      exact this
+    refine ⟨U ⊓ (⟨t, ht⟩ : X.Opens), ⟨hx, hyV⟩, X.presheaf.map (homOfLE hU').op s, ?_, ?_⟩
+    · rw [g.mem_idealOfOpens_ker_iff, ← Scheme.Hom.map_app_apply g hU' s]
+      -- the two restriction maps agree because `Y.Opens` has at most one morphism per pair
+      have hj : ((Opens.map g.base).map (homOfLE hU')).op = iW1.op ≫ (homOfLE hgU').op :=
+        Subsingleton.elim _ _
+      rw [hj, Y.presheaf.map_comp, CommRingCat.comp_apply, he, map_zero]
+    · rw [X.presheaf.germ_res_apply]
 
 /-- The kernel of the map to the scheme-theoretic image is trivial: no closed subscheme of
 `f.image` strictly smaller than `f.image` contains the image of `f`. -/
