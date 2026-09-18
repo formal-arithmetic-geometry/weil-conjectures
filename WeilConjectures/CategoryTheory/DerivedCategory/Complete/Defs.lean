@@ -250,14 +250,6 @@ variable [MonoidalClosed (Sheaf J (ModuleCat.{u + 1} R))]
   [DerivedCategory.Qh.HasDerivedMonoidalCategory
     (HomotopyCategory.quasiIso (Sheaf J (ModuleCat.{u + 1} R)) (ComplexShape.up ℤ))]
 
-/- The colimits of size `0` asked for by the monoidal structure on cochain complexes, as in
-`WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory`; they are the ones of
-the Grothendieck abelian structure, shrunk. -/
-local instance : HasColimitsOfSize.{0, 0} (Sheaf J (ModuleCat.{u + 1} R)) :=
-  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} R)) :=
-    IsGrothendieckAbelian.hasColimits _
-  hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
-
 /-- The tower `n ↦ R/Iⁿ` of constant sheaves, viewed in the derived category of sheaves of
 `R`-modules through `DerivedCategory.singleFunctor _ 0`. -/
 noncomputable def DerivedCategory.quotPowFunctor :
