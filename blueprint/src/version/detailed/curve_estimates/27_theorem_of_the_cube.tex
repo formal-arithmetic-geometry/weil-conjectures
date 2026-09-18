@@ -1604,6 +1604,64 @@ $H^1(W,\O_W)\otimes_kI_n$.  Therefore $\alpha=0$ and the class of $L^{(n)}$ in
 $\mathrm{Pic}(W\times Z_n)$ is trivial, which is the assertion for $n$.
 \end{proof}
 
+\begin{lemma}[Formal triviality gives a section near the point]
+\label{lem:cube-formal-section-near-point}
+\lean{AlgebraicGeometry.Scheme.Modules.exists_fiberSectionsOfNhds_pullbackSnd_ne_zero}
+Let $X$ be a proper variety over $k$, let $T$ be a locally noetherian
+$k$-scheme, let $t_0\in T$ and let $F$ be a coherent sheaf on $X\times T$.  For
+$n\in\N$ put $T_n:=\Spec\bigl(\O_{T,t_0}/\m_{t_0}^{n+1}\bigr)$, with its
+canonical morphism $T_n\to T$, and let $F^{(n)}$ be the pullback of $F$ to
+$X\times T_n$.  Suppose that $F^{(n)}$ is trivial for every $n\in\N$.  Then
+there are an open subset $V\subseteq T$ with $t_0\in V$ and a section
+$s\in\Gamma(X\times V,F)$ whose restriction to the fibre $X_{t_0}$ is non-zero.
+\end{lemma}
+\begin{proof}
+\uses{prop:cube-formal-functions, prop:cube-proper-pushforward-coherent,
+lem:cube-global-sections-base-change}
+Write $f:=p_T\colon X\times T\to T$, put $A_n:=\O_{T,t_0}/\m_{t_0}^{n+1}$ and
+\[
+  M_n:=\Gamma\bigl(X\times T_n,F^{(n)}\bigr).
+\]
+Note that $X\times T_0=X_{t_0}$ and $F^{(0)}=F_{t_0}$.
+
+\emph{Step 1: the transition maps $M_n\to M_m$ are surjective for $m\leq n$.}
+Fix an isomorphism $F^{(n)}\cong\O_{X\times T_n}$.  It restricts along the
+closed immersion $X\times T_m\hookrightarrow X\times T_n$ to an isomorphism
+$F^{(m)}\cong\O_{X\times T_m}$, and under the two of them the restriction map
+$M_n\to M_m$ becomes the map on functions
+$\Gamma(X\times T_n,\O)\to\Gamma(X\times T_m,\O)$.  By
+\Cref{lem:cube-global-sections-base-change} that map is the quotient map
+$A_n\to A_m$, which is surjective.
+
+\emph{Step 2: a compatible family with prescribed level-zero term.}  Given
+$s_0\in M_0$, lifting it successively through the surjections
+$M_{n+1}\to M_n$ of Step 1 produces $s_n\in M_n$ with $s_n\mapsto s_{n-1}$ and
+with the prescribed term at level zero.  A single trivialisation at each level
+therefore suffices: no compatible choice of \emph{generators} is needed, and
+freeness of $M_n$ over $A_n$ is not used.
+
+\emph{Step 3: the stalk of $f_*F$ at $t_0$ surjects onto $M_0$.}  The family
+$(s_n)$ is the image of $1$ under the map $\O_{T,t_0}\to\varprojlim_nM_n$
+carrying $r$ to $(r\cdot s_n)_n$, so it is an element of the inverse limit.  By
+\Cref{prop:cube-formal-functions} that limit is the $\m_{t_0}$-adic completion
+of $(f_*F)_{t_0}$, which is a finite module over the noetherian local ring
+$\O_{T,t_0}$ because $f_*F$ is coherent by
+\Cref{prop:cube-proper-pushforward-coherent}.  The map from the completion to
+$M_0$ kills $\m_{t_0}$ and therefore factors through
+$(f_*F)_{t_0}/\m_{t_0}(f_*F)_{t_0}$; evaluation of the completion at level one
+and the quotient map of the stalk have the same image, namely that quotient, so
+the completion and the stalk itself have the same image in $M_0$.  Hence
+$(f_*F)_{t_0}\to M_0$ is surjective, and $s_0$ has a preimage.  Faithful
+flatness of completion is not needed, and freeness of $(f_*F)_{t_0}$ is neither
+proved nor used.
+
+Now take $s_0\neq0$, which is possible because $F^{(0)}$ is trivial and
+$\Gamma(X\times T_0,\O)=A_0=\kappa(t_0)$ is a non-zero ring, and let $z$ be a
+germ of $f_*F$ at $t_0$ mapping to it.  A germ is represented by a section over
+some open $V\ni t_0$, that is by an element $s\in\Gamma(X\times V,F)$, and
+$X\times T_0=X_{t_0}$, so the restriction of $s$ to $X_{t_0}$ is $s_0\neq0$.
+\end{proof}
+
 \begin{proposition}[Formal triviality is triviality near the point]
 \label{prop:cube-formal-triviality}
 Let $X$ be a proper variety over $k$, let $T$ be a scheme of finite type over
@@ -1618,9 +1676,9 @@ Then there is an open subset $V\subseteq T$ with $t_0\in V$ such that $L_t$ is
 trivial on $X_t$ for every $t\in V$.
 \end{proposition}
 \begin{proof}
-\uses{prop:cube-formal-functions, prop:cube-proper-pushforward-coherent,
-lem:cube-global-sections-base-change, lem:cube-projection-proper-flat,
-lem:cube-nowhere-vanishing, lem:cube-triviality-criterion}
+\uses{lem:cube-formal-section-near-point, lem:cube-global-sections-base-change,
+lem:cube-projection-proper-flat, lem:cube-nowhere-vanishing,
+lem:cube-triviality-criterion}
 Write $f:=p_T\colon X\times T\to T$, which is proper and along which $L$ and
 $L^{-1}$ are coherent and flat by \Cref{lem:cube-projection-proper-flat}; the
 scheme $T$ is noetherian, being of finite type over $k$.  Put
@@ -1631,56 +1689,21 @@ $\kappa(t_0)=k$, and
 \]
 Note that $X\times T_0=X_{t_0}$ and $L^{(0)}=L_{t_0}$.
 
-\emph{Step 1: each $M_n$ is free of rank one over $A_n$, and $M_n\to M_0$ is
-surjective.}  Fix an isomorphism $L^{(n)}\cong\O_{X\times T_n}$.  It carries
-$M_n$ isomorphically onto $\Gamma(X\times T_n,\O)$, which is $A_n$ by
-\Cref{lem:cube-global-sections-base-change}, applied to the proper variety $X$
-and the $k$-algebra $A_n$.  So $M_n$ is free of rank one over $A_n$.  The
-chosen isomorphism restricts to an isomorphism
-$L^{(0)}\cong\O_{X\times T_0}$, so under it the restriction map $M_n\to M_0$
-becomes the map $A_n\to A_0=k$ induced by $A_n\to A_0$, which is surjective.
-In particular a generator of $M_n$ has non-zero image in $M_0$.
+\emph{Steps 1 to 3: a section of $L$ near $t_0$, non-zero on $X_{t_0}$.}  This
+is \Cref{lem:cube-formal-section-near-point} applied to $F:=L$: there are an
+open $V_1\ni t_0$ and $s\in\Gamma(X\times V_1,L)$ whose restriction to
+$X_{t_0}$ is a non-zero element of $M_0$.  What that lemma proves is that the
+transition maps $M_n\to M_m$ are surjective and that $(f_*L)_{t_0}\to M_0$ is
+surjective; neither freeness of $M_n$ over $A_n$ nor freeness of
+$(f_*L)_{t_0}$, and hence neither a compatible choice of generators nor the
+faithful flatness of completion, is used.  Only non-vanishing of the image in
+$M_0$ is consumed below.
 
-\emph{Step 2: the generators can be chosen compatibly.}  We construct
-generators $s_n$ of $M_n$ with $s_n\mapsto s_{n-1}$ under $M_n\to M_{n-1}$.
-Take for $s_0$ any generator of the one-dimensional $k$-vector space $M_0$.
-Given $s_{n-1}$, choose any generator $w$ of $M_n$ and write its image in
-$M_{n-1}$ as $c\cdot s_{n-1}$ with $c\in A_{n-1}$.  The restriction
-$M_n\to M_0$ factors through $M_{n-1}$, and by Step 1 it carries $w$ to a
-non-zero element of $M_0$; since $s_{n-1}$ also has non-zero image in $M_0$,
-the scalar $c$ cannot lie in the maximal ideal of the local ring $A_{n-1}$,
-so it is a unit.  A preimage in $A_n$ of a unit of $A_{n-1}$ is again a unit,
-$A_n$ being local, so $c$ lifts to some $\tilde c\in A_n^\times$, and
-$s_n:=\tilde c^{-1}w$ is a generator of $M_n$ mapping to $s_{n-1}$.  This is
-the step at which triviality of the $L^{(n)}$ one $n$ at a time is upgraded
-to a statement about the tower, and it is the only place where compatibility
-is needed; without it the inverse limit could be smaller than
-$\varprojlim_nA_n$.
-
-\emph{Step 3: the stalk of $f_*L$ at $t_0$ is free of rank one.}  By
-\Cref{prop:cube-formal-functions} the $\m_{t_0}$-adic completion of
-$(f_*L)_{t_0}$ is $\varprojlim_nM_n$, and by Step 2 the compatible system
-$(s_n)$ is an element of that limit generating each $M_n$; since
-$\varprojlim_nA_n$ is the completion $\widehat{\O_{T,t_0}}$ and each
-$M_n\cong A_n$ compatibly, the limit is free of rank one on $(s_n)$.  A finite
-module over a noetherian local ring whose completion is free of rank one is
-itself free of rank one, because completion is faithfully flat over that ring;
-$(f_*L)_{t_0}$ is such a module, $f_*L$ being coherent by
-\Cref{prop:cube-proper-pushforward-coherent}.  So $(f_*L)_{t_0}$ is free of
-rank one; let $s$ be a generator.  The canonical restriction
-$(f_*L)_{t_0}\to M_0=\Gamma(X_{t_0},L_{t_0})$ is the composite of the
-completion map with the projection of $\varprojlim_nM_n$ to its level-zero
-term, and completion carries a generator of a free module of rank one to a
-generator; so the image of $s$ in $M_0$ is a generator of $M_0\cong k$ and in
-particular non-zero.  Coherence of $f_*L$ then spreads $s$ out: there is an
-open $V_1\ni t_0$ on which $s$ is a section of $f_*L$ generating it, that is
-$s\in\Gamma(X\times V_1,L)$.
-
-\emph{Step 4: the same for $L^{-1}$, and the pairing.}  Steps 1 to 3 apply
-verbatim to $L^{-1}$, whose pullback to $X\times T_n$ is $(L^{(n)})^{-1}$ and
-hence trivial as well; they produce an open $V_2\ni t_0$ and
-$u\in\Gamma(X\times V_2,L^{-1})$ generating $f_*(L^{-1})$ there and with
-non-zero image in $\Gamma(X_{t_0},(L_{t_0})^{-1})$.  Shrink $V:=V_1\cap V_2$
+\emph{Step 4: the same for $L^{-1}$, and the pairing.}  The same lemma applies
+to $L^{-1}$, whose pullback to $X\times T_n$ is $(L^{(n)})^{-1}$ and hence
+trivial as well; it produces an open $V_2\ni t_0$ and
+$u\in\Gamma(X\times V_2,L^{-1})$ with non-zero image in
+$\Gamma(X_{t_0},(L_{t_0})^{-1})$.  Shrink $V:=V_1\cap V_2$
 to an affine open neighbourhood of $t_0$ and consider
 \[
   s\otimes u\;\in\;\Gamma\bigl(X\times V,L\otimes L^{-1}\bigr)

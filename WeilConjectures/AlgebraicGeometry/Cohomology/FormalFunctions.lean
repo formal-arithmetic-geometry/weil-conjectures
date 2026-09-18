@@ -49,6 +49,8 @@ theorem. The base change `W ×_T T_n` itself, its transition morphisms and the r
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Modules.range_completedStalkToFormalSections`: the completed stalk
+  and the stalk itself have the same image in `Γ(W ×_T T_n, F^{(n)})`.
 - `AlgebraicGeometry.Scheme.Modules.isIso_formalFunctionsComparison` (blueprint
   `prop:cube-formal-functions`): for `T` locally noetherian, `f : W ⟶ T` proper and `F`
   coherent, the comparison map `formalFunctionsComparison` is an isomorphism. This is `sorry`
@@ -301,6 +303,26 @@ lemma completedStalkToFormalSections_comp_toCompletedStalk (n : ℕ) :
     rw [LinearMap.comp_apply, completedStalkToFormalSections, LinearMap.comp_apply,
       AdicCompletion.eval_of, Submodule.mkQ_apply, Submodule.liftQ_apply]
 
+/-- **The completed stalk and the stalk have the same image in the formal sections.** The
+inclusion `≥` is
+`AlgebraicGeometry.Scheme.Modules.completedStalkToFormalSections_comp_toCompletedStalk`; the
+inclusion `≤` holds because `AdicCompletion.eval` at level `n + 1` and the quotient map of the
+stalk have the same image, namely all of `(f_* F)_t ⧸ 𝔪_t ^ (n + 1)`. -/
+lemma range_completedStalkToFormalSections (n : ℕ) :
+    LinearMap.range (completedStalkToFormalSections f t F n) =
+      LinearMap.range (stalkToFormalSections f t F n) := by
+  refine le_antisymm ?_ ?_
+  · rintro _ ⟨y, rfl⟩
+    obtain ⟨z, hz⟩ := Submodule.mkQ_surjective
+      (maximalIdeal (T.presheaf.stalk t) ^ (n + 1) •
+        (⊤ : Submodule (T.presheaf.stalk t) (((pushforward f).obj F).presheaf.stalk t)))
+      (AdicCompletion.eval (maximalIdeal (T.presheaf.stalk t)) _ (n + 1) y)
+    refine ⟨z, ?_⟩
+    rw [completedStalkToFormalSections, LinearMap.comp_apply, ← hz, Submodule.mkQ_apply,
+      Submodule.liftQ_apply]
+  · rw [← completedStalkToFormalSections_comp_toCompletedStalk]
+    exact LinearMap.range_comp_le_range _ _
+
 /-- The maps out of the completed stalk are compatible with the transition maps of the inverse
 system:
 
@@ -334,6 +356,11 @@ def completedStalkToFormalSectionsHom (n : ℕ) :
   ConcreteCategory.ofHom (C := ModuleCat (T.presheaf.stalk t))
     (X := ModuleCat.of (T.presheaf.stalk t) (completedStalk ((pushforward f).obj F) t))
     (Y := formalSections f t F n) (completedStalkToFormalSections f t F n)
+
+@[simp]
+lemma completedStalkToFormalSectionsHom_apply (n : ℕ)
+    (y : completedStalk ((pushforward f).obj F) t) :
+    completedStalkToFormalSectionsHom f t F n y = completedStalkToFormalSections f t F n y := rfl
 
 /-- The cone on the inverse system `n ↦ Γ(W ×_T T_n, F^{(n)})` with vertex the `𝔪_t`-adic
 completion of the stalk of `f_* F` at `t`. -/

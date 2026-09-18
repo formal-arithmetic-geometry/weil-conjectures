@@ -130,7 +130,9 @@ surjectivity over an affine open subset lives.
   fibre `F(x)` of a sheaf of `𝒪_X`-modules at a point `x`, as a `κ(x)`-vector space, and its
   functoriality `AlgebraicGeometry.Scheme.Modules.fiberMap` in `F`.
 - `AlgebraicGeometry.Scheme.Modules.restrictToFiber`: the restriction `F ↦ F_y` of sheaves of
-  modules to the scheme-theoretic fibre of a morphism over a point.
+  modules to the scheme-theoretic fibre of a morphism over a point, and
+  `AlgebraicGeometry.Scheme.Modules.fiberSectionsOfNhds`, the restriction to `X_y` of a section
+  of `f_* F` over an open neighbourhood of `y`.
 - `AlgebraicGeometry.Scheme.Modules.fiberSectionsFunctor`,
   `AlgebraicGeometry.Scheme.Modules.fiberSections`: the global sections `Γ(X_y, F_y)` on the
   scheme-theoretic fibre, as a `κ(y)`-vector space.
@@ -226,6 +228,10 @@ surjectivity over an affine open subset lives.
   map in the sheaf.
 - `AlgebraicGeometry.Scheme.Modules.app_pullbackUnitIso_hom_sectionsPullback`: the pullback of
   global sections of the structure sheaf along `a : X ⟶ Y` is the map on global functions.
+- `AlgebraicGeometry.Scheme.Modules.surjective_sectionsPullback_of_iso_structureModules` and
+  `AlgebraicGeometry.Scheme.Modules.surjective_sectionsPullbackOver_of_iso_structureModules`:
+  pulling back the global sections of a *trivial* sheaf of modules, absolutely or over a base,
+  is as surjective as pulling back functions.
 - `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_iff`: the fibre of the structure sheaf
   at `x` is the residue field `κ(x)`, so a global function has zero image in it exactly when it
   vanishes at `x`.
@@ -1366,6 +1372,29 @@ lemma app_pullbackUnitIso_hom_sectionsPullback {X' Y' : Scheme.{u}} (a : X' ⟶ 
   exact (congrArg (ConcreteCategory.hom ((presheaf (unit X'.ringCatSheaf)).map
     (homOfLE hle).op)) happ).trans (map_le_top_app_top a r)
 
+/-- **Pulling back the global sections of a trivial sheaf is as surjective as pulling back
+functions.** If `N` is isomorphic to the structure sheaf of `Y`, then the pullback of global
+sections along `a : X ⟶ Y` is surjective as soon as `a.appTop` is. -/
+theorem surjective_sectionsPullback_of_iso_structureModules (e : N ≅ Y.structureModules)
+    (ha : Function.Surjective a.appTop) :
+    Function.Surjective (sectionsPullback a N) := by
+  have key (s : Γ(N, ⊤)) :
+      Hom.app (pullbackUnitIso a).hom ⊤
+          (Hom.app ((pullback a).mapIso e).hom ⊤ (sectionsPullback a N s)) =
+        a.appTop (Hom.app e.hom ⊤ s) := by
+    rw [Functor.mapIso_hom, sectionsPullback_naturality_apply a e.hom s,
+      app_pullbackUnitIso_hom_sectionsPullback]
+  intro y
+  obtain ⟨r, hr⟩ := ha (Hom.app (pullbackUnitIso a).hom ⊤
+    (Hom.app ((pullback a).mapIso e).hom ⊤ y))
+  refine ⟨Hom.app e.inv ⊤ r, ?_⟩
+  have h₁ : Hom.app e.hom ⊤ (Hom.app e.inv ⊤ r) = r :=
+    (sectionsEquivOfIso e ⊤).apply_symm_apply r
+  have h₂ := key (Hom.app e.inv ⊤ r)
+  rw [h₁, hr] at h₂
+  exact (sectionsEquivOfIso ((pullback a).mapIso e) ⊤).injective
+    ((sectionsEquivOfIso (pullbackUnitIso a) ⊤).injective h₂)
+
 end PushforwardPullback
 
 /-!
@@ -1554,6 +1583,33 @@ noncomputable def pullbackSectionIso {W T : Scheme.{u}} (f : W ⟶ T) (s : T ⟶
 
 end Triangle
 
+/-! ### Pulling back the sections of a trivial sheaf over a base -/
+
+noncomputable section PullbackTrivial
+
+variable {X X' W : Scheme.{u}}
+
+/-- **Pulling back the global sections of a trivial sheaf over a base.** If the pullback of `F`
+to `X'` is trivial, then pulling sections back along a morphism `u : X ⟶ X'` over the base is
+surjective as soon as `u.appTop` is. -/
+theorem surjective_sectionsPullbackOver_of_iso_structureModules (u : X ⟶ X') {p : X ⟶ W}
+    {p' : X' ⟶ W} (hu : u ≫ p' = p) (F : W.Modules)
+    (e : (pullback p').obj F ≅ X'.structureModules)
+    (hu' : Function.Surjective u.appTop) :
+    Function.Surjective (sectionsPullbackOver u hu F) := by
+  intro y
+  set α : (pullback u).obj ((pullback p').obj F) ≅ (pullback p).obj F :=
+    (pullbackTriangle hu).app F
+  have key (s : Γ((pullback p').obj F, ⊤)) : sectionsPullbackOver u hu F s =
+      Hom.app α.hom ⊤ (sectionsPullback u ((pullback p').obj F) s) := rfl
+  obtain ⟨s, hs⟩ := surjective_sectionsPullback_of_iso_structureModules u _ e hu'
+    ((sectionsEquivOfIso α ⊤).symm y)
+  refine ⟨s, ?_⟩
+  rw [key, hs]
+  exact (sectionsEquivOfIso α ⊤).apply_symm_apply y
+
+end PullbackTrivial
+
 section BaseChange
 
 variable {R S : CommRingCat.{u}}
@@ -1651,6 +1707,15 @@ lemma fiberMap_zero (F G : X.Modules) (x : X) : fiberMap (0 : F ⟶ G) x = 0 :=
 `f : X ⟶ Y` over a point `y : Y`, that is, the pullback along `f.fiberι y`. -/
 noncomputable abbrev restrictToFiber (f : X ⟶ Y) (y : Y) : X.Modules ⥤ (f.fiber y).Modules :=
   Modules.pullback (f.fiberι y)
+
+/-- **Restricting a section of `f_* F` near `y` to the scheme-theoretic fibre `X_y`.** A section
+of `f_* F` over an open neighbourhood `U` of `y` is a section of `F` over `f ⁻¹ᵁ U`, which
+contains the whole fibre over `y`, so it restricts to a global section of `F_y`. -/
+noncomputable def fiberSectionsOfNhds (f : X ⟶ Y) (F : X.Modules) (y : Y) (U : Y.Opens)
+    (hU : y ∈ U) :
+    Γ((pushforward f).obj F, U) ⟶ Γ((restrictToFiber f y).obj F, ⊤) :=
+  eqToHom (pushforward_obj_obj f F U) ≫
+    sectionsPullbackLE (f.fiberι y) F (f.preimage_fiberι_eq_top hU).ge
 
 /-- **The fibre of a pullback.** If `u : X ⟶ Y` induces an isomorphism `κ(u x) ≅ κ(x)` on
 residue fields, then the fibre of `u^* F` at `x` is the fibre of `F` at `u x`, viewed as a

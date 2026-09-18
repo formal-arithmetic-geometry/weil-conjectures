@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Stalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
@@ -41,6 +42,8 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.toInfinitesimalBaseChangeΓ`: the ring map
   `𝒪_{T, t} ⟶ Γ(W ×_T Tₙ, 𝒪)`, and `AlgebraicGeometry.Scheme.infinitesimalRingToΓ`, the ring
   map `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ Γ(W ×_T Tₙ, 𝒪)` it factors through.
+- `AlgebraicGeometry.Scheme.infinitesimalBaseChangeZeroIsoFiber`: the identification
+  `W ×_T T₀ ≅ W_t` of the zeroth infinitesimal base change with the scheme-theoretic fibre.
 
 ## Main results
 
@@ -64,9 +67,12 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
   `AlgebraicGeometry.Scheme.ker_mul_thickeningIdeal_eq_zero`, which says that the thickening
   ideal is annihilated by the kernel ideal sheaf of `W ×_T T₀ ↪ W ×_T T_{n+1}`, are the two
   cases of it that are used.
-- `AlgebraicGeometry.Scheme.exists_isUnit_appTop_infinitesimalBaseChangeMap`: if the global
-  sections of `W ×_T Tₘ` are `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)`, then every unit of `Γ(W ×_T Tₘ, 𝒪)`
-  extends to a unit of `Γ(W ×_T Tₙ, 𝒪)` for `m ≤ n`.
+- `AlgebraicGeometry.Scheme.surjective_appTop_infinitesimalBaseChangeMap` and
+  `AlgebraicGeometry.Scheme.exists_isUnit_appTop_infinitesimalBaseChangeMap`: if the global
+  sections of `W ×_T Tₘ` are `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)`, then every function on `W ×_T Tₘ`,
+  and every unit of `Γ(W ×_T Tₘ, 𝒪)` as a unit, extends to `W ×_T Tₙ` for `m ≤ n`;
+  `AlgebraicGeometry.Scheme.nontrivial_infinitesimalBaseChangeΓ` says that `Γ(W ×_T Tₙ, 𝒪)` is
+  then non-trivial.
 - `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver`: the base change
   `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
   `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
@@ -610,6 +616,26 @@ lemma toInfinitesimalBaseChangeΓ_eq_zero (n : ℕ) {r : T.presheaf.stalk t}
   have h0 : T.toInfinitesimalRing t n r = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr hr
   rw [toInfinitesimalBaseChangeΓ, CommRingCat.comp_apply, h0, map_zero]
 
+/-- **Functions lift along the infinitesimal base changes.** If the global sections of
+`W ×_T Tₘ` are the ring `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)`, then for `m ≤ n` every function on
+`W ×_T Tₘ` is the restriction of a function on `W ×_T Tₙ`, because
+`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ⟶ 𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)` is surjective. -/
+lemma surjective_appTop_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n)
+    (hm : Function.Surjective (infinitesimalRingToΓ f t m)) :
+    Function.Surjective (infinitesimalBaseChangeMap f t h).appTop := by
+  intro y
+  obtain ⟨b, rfl⟩ := hm y
+  obtain ⟨c, rfl⟩ := T.infinitesimalRingMap_surjective t h b
+  refine ⟨infinitesimalRingToΓ f t n c, ?_⟩
+  rw [← CommRingCat.comp_apply, infinitesimalRingToΓ_comp_appTop, CommRingCat.comp_apply]
+
+/-- **The sections over an infinitesimal base change form a non-trivial ring**, as soon as they
+are the ring `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` of the `n`-th infinitesimal neighbourhood: the latter is
+a local ring, hence non-trivial. Geometrically this says that `W ×_T Tₙ` is non-empty. -/
+lemma nontrivial_infinitesimalBaseChangeΓ (n : ℕ) (hn : IsIso (infinitesimalRingToΓ f t n)) :
+    Nontrivial Γ(infinitesimalBaseChange f t n, ⊤) :=
+  (asIso (infinitesimalRingToΓ f t n)).commRingCatIsoToRingEquiv.toEquiv.symm.nontrivial
+
 /-- **Units lift along the infinitesimal base changes.**
 
 If the global sections of `W ×_T Tₘ` are the ring `𝒪_{T, t} ⧸ 𝔪_t ^ (m + 1)` of the `m`-th
@@ -628,6 +654,46 @@ lemma exists_isUnit_appTop_infinitesimalBaseChangeMap {m n : ℕ} (h : m ≤ n)
   refine ⟨infinitesimalRingToΓ f t n c, hcu.map (infinitesimalRingToΓ f t n).hom, ?_⟩
   rw [← CommRingCat.comp_apply, infinitesimalRingToΓ_comp_appTop, CommRingCat.comp_apply, hc]
   exact e.apply_symm_apply a
+
+/-- **The zeroth infinitesimal base change is the scheme-theoretic fibre.** The zeroth
+infinitesimal neighbourhood of `t` is `Spec κ(t)`, so the map of pullback squares
+
+```
+  W ×_T T₀ ────────▶ T₀ = Spec (𝒪_{T, t} ⧸ 𝔪_t)
+      │   ╲              │   ╲
+      │    ╲             │    ╲ infinitesimalNeighborhoodIsoSpecResidueField t
+      │     ▼            │     ▼
+      │    W_t ─────────────▶ Spec κ(t)
+      ▼     │            ▼     │
+      W ════╪══════════▶ T ════╪═════▶ T
+       ╲    ▼             ╲    ▼
+        ──▶ W ─────────────────────▶ T
+```
+
+induced by the identity of `W`, the identity of `T` and that isomorphism is an isomorphism
+`W ×_T T₀ ≅ W_t`. -/
+noncomputable def infinitesimalBaseChangeZeroIsoFiber :
+    infinitesimalBaseChange f t 0 ≅ f.fiber t :=
+  asIso (Limits.pullback.map f (T.fromInfinitesimalNeighborhood t 0) f
+    (T.fromSpecResidueField t) (𝟙 W) (T.infinitesimalNeighborhoodIsoSpecResidueField t).hom
+    (𝟙 T) (by simp) (by simp))
+
+/-- The isomorphism `W ×_T T₀ ≅ W_t` commutes with the two projections to `W`:
+
+```
+                  infinitesimalBaseChangeZeroIsoFiber f t
+  W ×_T T₀ ----------------------------------------------------> W_t
+           ╲                                                      |
+            ╲  infinitesimalBaseChangeFst f t 0                   | f.fiberι t
+             ╲                                                    v
+              ──────────────────────────────────────────────────> W
+```
+-/
+@[reassoc (attr := simp)]
+lemma infinitesimalBaseChangeZeroIsoFiber_hom_fiberι :
+    (infinitesimalBaseChangeZeroIsoFiber f t).hom ≫ f.fiberι t =
+      infinitesimalBaseChangeFst f t 0 := by
+  simp [infinitesimalBaseChangeZeroIsoFiber, Scheme.Hom.fiberι]
 
 end InfinitesimalBaseChange
 
