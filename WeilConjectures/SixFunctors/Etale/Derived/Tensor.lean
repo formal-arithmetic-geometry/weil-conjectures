@@ -77,6 +77,7 @@ namespace Etale
 /-- The derived tensor product `- ⊗ᴸ - : D(X_ét) ⥤ D(X_ét) ⥤ D(X_ét)` on the unbounded
 derived category of `A`-valued étale sheaves on `X`: the tensor product of the monoidal
 structure on `D(X_ét)` obtained from the K-flat left derivability structure. -/
+@[implicit_reducible]
 noncomputable def derivedTensor :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤

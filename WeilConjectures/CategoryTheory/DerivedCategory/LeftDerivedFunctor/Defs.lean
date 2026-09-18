@@ -151,6 +151,9 @@ noncomputable def leftDerivedFunctor : DerivedCategory C ⥤ DerivedCategory D :
   (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).totalLeftDerived
     DerivedCategory.Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
 
+@[inherit_doc leftDerivedFunctor]
+scoped notation "L(" F ")" => leftDerivedFunctor F
+
 /-- The counit natural transformation that is part of the data of the total
 left derived functor `F.leftDerivedFunctor : DerivedCategory C ⥤ DerivedCategory D`. -/
 noncomputable def leftDerivedFunctorCounit :
