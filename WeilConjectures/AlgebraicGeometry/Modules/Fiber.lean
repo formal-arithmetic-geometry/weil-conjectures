@@ -47,6 +47,9 @@ As a consequence, if `L` is an invertible `𝒪ₓ`-module with tensor inverse `
   `AlgebraicGeometry.Scheme.Modules.nontrivial_fiber` for the two consequences used downstream.
 - `AlgebraicGeometry.Scheme.Modules.isIso_fiberMap_of_ne_zero`: a non-zero map between the fibres
   of two line bundles is an isomorphism.
+- `AlgebraicGeometry.Scheme.Modules.fiberMap_tensorHom_eq_zero_of_left` and
+  `AlgebraicGeometry.Scheme.Modules.fiberMap_tensorHom_eq_zero_of_right`: a tensor product of
+  morphisms vanishes on a fibre as soon as one of its factors does.
 - `AlgebraicGeometry.Scheme.Modules.span_fiberMk_oneSection`: the fibre of the structure sheaf
   is spanned by the image of the unit function, whence
   `AlgebraicGeometry.Scheme.Modules.fiberMap_homOfSectionTop_apply`, the fibre of multiplication
@@ -106,6 +109,20 @@ lemma fiberTensorIso_hom_naturality {F F' G G' : X.Modules} (φ : F ⟶ F') (ψ 
     (fiberTensorIso F G x).hom ≫ (fiberMap φ x ⊗ₘ fiberMap ψ x) =
       fiberMap (φ ⊗ₘ ψ) x ≫ (fiberTensorIso F' G' x).hom :=
   Functor.OplaxMonoidal.δ_natural (fiberFunctor X x) φ ψ
+
+/-- **A tensor product of morphisms vanishes on the fibre at `x` if its second factor does.** -/
+lemma fiberMap_tensorHom_eq_zero_of_right {F F' G G' : X.Modules} (φ : F ⟶ F') (ψ : G ⟶ G')
+    {x : X} (hψ : fiberMap ψ x = 0) : fiberMap (φ ⊗ₘ ψ) x = 0 := by
+  have hnat := fiberTensorIso_hom_naturality φ ψ x
+  rw [hψ, MonoidalPreadditive.tensor_zero, Limits.comp_zero] at hnat
+  exact (Preadditive.IsIso.comp_right_eq_zero _ (fiberTensorIso F' G' x).hom).1 hnat.symm
+
+/-- **A tensor product of morphisms vanishes on the fibre at `x` if its first factor does.** -/
+lemma fiberMap_tensorHom_eq_zero_of_left {F F' G G' : X.Modules} (φ : F ⟶ F') (ψ : G ⟶ G')
+    {x : X} (hφ : fiberMap φ x = 0) : fiberMap (φ ⊗ₘ ψ) x = 0 := by
+  have hnat := fiberTensorIso_hom_naturality φ ψ x
+  rw [hφ, MonoidalPreadditive.zero_tensor, Limits.comp_zero] at hnat
+  exact (Preadditive.IsIso.comp_right_eq_zero _ (fiberTensorIso F' G' x).hom).1 hnat.symm
 
 /-- **The fibre of the tensor unit** is `κ(x)`. -/
 noncomputable def fiberTensorUnitIso (X : Scheme.{u}) (x : X) :

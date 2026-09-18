@@ -1664,8 +1664,9 @@ $X\times T_0=X_{t_0}$, so the restriction of $s$ to $X_{t_0}$ is $s_0\neq0$.
 
 \begin{proposition}[Formal triviality is triviality near the point]
 \label{prop:cube-formal-triviality}
-Let $X$ be a proper variety over $k$, let $T$ be a scheme of finite type over
-$k$, let $t_0\in T(k)$ and let $L$ be a line bundle on $X\times T$.  For
+\lean{AlgebraicGeometry.Scheme.Modules.exists_mem_forall_nonempty_restrictToFiber_pullbackSnd_iso_structureModules}
+Let $X$ be a proper variety over $k$, let $T$ be a locally noetherian
+$k$-scheme, let $t_0\in T$ and let $L$ be a line bundle on $X\times T$.  For
 $n\in\N$ put
 \[
   T_n:=\Spec\bigl(\O_{T,t_0}/\m_{t_0}^{n+1}\bigr),
@@ -1676,14 +1677,15 @@ Then there is an open subset $V\subseteq T$ with $t_0\in V$ such that $L_t$ is
 trivial on $X_t$ for every $t\in V$.
 \end{proposition}
 \begin{proof}
-\uses{lem:cube-formal-section-near-point, lem:cube-global-sections-base-change,
+\uses{lem:cube-formal-section-near-point, lem:cube-degeneracy-closed,
 lem:cube-projection-proper-flat, lem:cube-nowhere-vanishing,
 lem:cube-triviality-criterion}
 Write $f:=p_T\colon X\times T\to T$, which is proper and along which $L$ and
-$L^{-1}$ are coherent and flat by \Cref{lem:cube-projection-proper-flat}; the
-scheme $T$ is noetherian, being of finite type over $k$.  Put
-$A_n:=\O_{T,t_0}/\m_{t_0}^{n+1}$, a local ring with residue field
-$\kappa(t_0)=k$, and
+$L^{-1}$ are coherent by \Cref{lem:cube-projection-proper-flat}.  Only
+properness of $f$ --- in fact only that $f$ is a closed map --- and the
+geometric integrality of its fibres are used below; flatness of $f$ is not.
+Put $A_n:=\O_{T,t_0}/\m_{t_0}^{n+1}$, a local ring with residue field
+$\kappa(t_0)$, and
 \[
   M_n:=\Gamma\bigl(X\times T_n,L^{(n)}\bigr).
 \]
@@ -1703,32 +1705,39 @@ $M_0$ is consumed below.
 to $L^{-1}$, whose pullback to $X\times T_n$ is $(L^{(n)})^{-1}$ and hence
 trivial as well; it produces an open $V_2\ni t_0$ and
 $u\in\Gamma(X\times V_2,L^{-1})$ with non-zero image in
-$\Gamma(X_{t_0},(L_{t_0})^{-1})$.  Shrink $V:=V_1\cap V_2$
-to an affine open neighbourhood of $t_0$ and consider
+$\Gamma(X_{t_0},(L_{t_0})^{-1})$.  Put $V:=V_1\cap V_2$ and consider the
+product
 \[
   s\otimes u\;\in\;\Gamma\bigl(X\times V,L\otimes L^{-1}\bigr)
-  \;\cong\;\Gamma(X\times V,\O)\;\cong\;\Gamma(V,\O_V),
+  \;\cong\;\Gamma(X\times V,\O),
 \]
-the last isomorphism by \Cref{lem:cube-global-sections-base-change} again.
-Its value at $t_0$ is the image of $s\otimes u$ under restriction to the fibre
-$X_{t_0}$, that is the product of the images of $s$ and of $u$ in
-$\Gamma(X_{t_0},L_{t_0})$ and $\Gamma(X_{t_0},(L_{t_0})^{-1})$ under the
-canonical pairing.  The bundle $L_{t_0}=L^{(0)}$ is trivial, so by
-\Cref{lem:cube-nowhere-vanishing} both spaces are one-dimensional over $k$ and
-the pairing is the multiplication of $k$; both images are non-zero, so the
-value of $s\otimes u$ at $t_0$ is non-zero.
+read through the trivialisation $L\otimes L^{-1}\cong\O$.  It is a morphism
+$\O\to\O$ of sheaves of modules on $X\times V$, and as such it restricts to
+every fibre $X_t$ with $t\in V$: the restriction is the product of
+$s|_{X_t}\in\Gamma(X_t,L_t)$ and $u|_{X_t}\in\Gamma(X_t,(L_t)^{-1})$.  The
+bundle $L_{t_0}=L^{(0)}$ is trivial, hence so is $(L_{t_0})^{-1}$, so by
+\Cref{lem:cube-nowhere-vanishing} the sections $s|_{X_{t_0}}$ and
+$u|_{X_{t_0}}$ --- which are non-zero --- vanish at no point of $X_{t_0}$; the
+same is then true of their product, because at a point of $X_{t_0}$ both
+factors are isomorphisms of one-dimensional $\kappa(t_0)$-vector spaces.
 
-\emph{Step 5: conclusion.}  A section of $\O_V$ whose value at $t_0$ is
-non-zero is a unit on some open $V'\subseteq V$ containing $t_0$.  Let
-$t\in V'$.  Restricting to the fibre $X_t$ is a homomorphism of rings
-$\Gamma(V',\O_{V'})\to\Gamma(X_t,\O_{X_t})$ carrying $s\otimes u$ to the
-product of $s|_{X_t}\in\Gamma(X_t,L_t)$ and
-$u|_{X_t}\in\Gamma(X_t,(L_t)^{-1})$, and a unit to a unit; the fibre $X_t$ is
-non-empty, so that product is non-zero.  Hence $\Gamma(X_t,L_t)\neq0$ and
-$\Gamma(X_t,(L_t)^{-1})\neq0$, and \Cref{lem:cube-triviality-criterion} ---
+\emph{Step 5: conclusion.}  Let $\Omega\subseteq X\times V$ be the locus on
+which $s\otimes u$ does not vanish.  It is open by
+\Cref{lem:cube-degeneracy-closed}, and it contains the whole fibre
+$X_{t_0}$ by Step 4.  Since $f$ is proper, hence a closed map, the tube lemma
+applies: there is an open $V'\subseteq V$ with $t_0\in V'$ whose whole preimage
+is contained in $\Omega$.  Let $t\in V'$.  The fibre $X_t$ is non-empty, being
+integral, so there is a point of $X_t$ at which $s\otimes u$ does not vanish;
+both factors are then non-zero on $X_t$, that is $\Gamma(X_t,L_t)\neq0$ and
+$\Gamma(X_t,(L_t)^{-1})\neq0$.  Now \Cref{lem:cube-triviality-criterion} ---
 applicable because $X_t$ is a proper geometrically integral
 $\kappa(t)$-scheme by \Cref{lem:cube-projection-proper-flat}(3) --- makes
 $L_t$ trivial.  So $V'$ is the required neighbourhood.
+
+Neither the shrinking of $V$ to an affine open nor the identification of
+$\Gamma(X\times V,\O)$ with $\Gamma(V,\O_V)$ is needed: the non-vanishing locus
+of $s\otimes u$ is taken upstairs, on $X\times V$, and closedness of $f$ brings
+it down to a neighbourhood of $t_0$.
 \end{proof}
 
 \begin{remark}[What this proposition is]\label{rem:cube-formal-triviality}
@@ -1743,9 +1752,9 @@ the chapter that no other statement needs.
 Note that upper semicontinuity, \Cref{prop:cube-semicontinuity}, is of no use
 here and is not used: it bounds $h^0$ from \emph{above} on a neighbourhood,
 whereas what is wanted is the lower bound $h^0\geq1$ on an open set.  The
-pairing of Steps 4 and 5 is what supplies that, and it is the same
-$s\otimes u$ argument as in the proof of
-\Cref{lem:cube-triviality-criterion}.
+pairing of Steps 4 and 5 is what supplies that: it is literally the same
+product $s\otimes u$ as in the proof of
+\Cref{lem:cube-triviality-criterion}, and the two proofs share it.
 \end{remark}
 
 \begin{theorem}[Theorem of the cube]\label{thm:cube-cube}

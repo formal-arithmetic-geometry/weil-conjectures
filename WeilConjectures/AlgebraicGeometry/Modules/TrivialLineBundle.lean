@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
@@ -29,6 +30,8 @@ with the residue field, `AlgebraicGeometry.Scheme.Modules.fiberMk_unit_eq_zero_i
 - `AlgebraicGeometry.Scheme.Modules.sectionsEquivOfIsoUnit`: an isomorphism `L ≅ 𝒪ₓ` identifies
   `Γ(X, L)` with `Γ(X, 𝒪ₓ)`, so the global sections of a trivial line bundle are a free
   `Γ(X, 𝒪ₓ)`-module of rank one.
+- `AlgebraicGeometry.Scheme.Modules.isoStructureModulesOfTensorIso`: a tensor inverse of a trivial
+  sheaf of modules is trivial.
 
 ## Main results
 
@@ -78,6 +81,13 @@ to the tensor unit** of `X.Modules`: the two spellings of triviality differ by
 theorem nonempty_iso_structureModules_iff :
     Nonempty (L ≅ X.structureModules) ↔ Nonempty (L ≅ 𝟙_ X.Modules) :=
   ⟨fun ⟨i⟩ ↦ ⟨i ≪≫ (tensorUnitIsoUnit X).symm⟩, fun ⟨i⟩ ↦ ⟨i ≪≫ tensorUnitIsoUnit X⟩⟩
+
+/-- **A tensor inverse of a trivial sheaf of modules is trivial.** This is
+`CategoryTheory.MonoidalCategory.isoTensorUnitOfTensorIso` read through
+`AlgebraicGeometry.Scheme.Modules.tensorUnitIsoUnit`. -/
+noncomputable def isoStructureModulesOfTensorIso {M M' : X.Modules} (e : M ⊗ M' ≅ 𝟙_ X.Modules)
+    (i : M ≅ X.structureModules) : M' ≅ X.structureModules :=
+  isoTensorUnitOfTensorIso e (i ≪≫ (tensorUnitIsoUnit X).symm) ≪≫ tensorUnitIsoUnit X
 
 section Trivial
 

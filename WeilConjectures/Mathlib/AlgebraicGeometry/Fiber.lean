@@ -24,6 +24,8 @@ neighbourhood of `y` in `Y`.
 - `AlgebraicGeometry.Scheme.Hom.apply_fiberι`: a point of the fibre over `y` lies over `y`.
 - `AlgebraicGeometry.Scheme.Hom.preimage_fiberι_eq_top`: the fibre over `y` lies over every open
   neighbourhood of `y`.
+- `AlgebraicGeometry.Scheme.Hom.fiberLift`: the resulting morphism from the fibre over `y` to the
+  open subscheme `f ⁻¹ᵁ V`, for an open neighbourhood `V` of `y`.
 
 The residue field statements are in the mirror of `Mathlib/AlgebraicGeometry/Fiber.lean` because
 that is the first file of Mathlib that imports both
@@ -76,5 +78,46 @@ lemma Scheme.Hom.preimage_fiberι_eq_top (f : X ⟶ Y) {y : Y} {U : Y.Opens} (hU
   simpa using hU
 
 end Fiber
+
+section FiberLift
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) {V : Y.Opens} {y : Y} (hy : y ∈ V)
+
+/-- **The fibre of `f` over a point of `V` as a scheme over the open subscheme `f ⁻¹ᵁ V`.** Every
+point of the fibre over `y` lies over `y`, hence over `V`, so the inclusion of the fibre factors
+through the open immersion `f ⁻¹ᵁ V ⟶ X`:
+
+```
+              fiberι y
+    f.fiber y ───────────────→ X
+            ╲                 ↗
+   fiberLift ╲               ╱ ι
+              ↘             ╱
+            (f ⁻¹ᵁ V).toScheme
+```
+-/
+noncomputable def Scheme.Hom.fiberLift : f.fiber y ⟶ (f ⁻¹ᵁ V).toScheme :=
+  IsOpenImmersion.lift (f ⁻¹ᵁ V).ι (f.fiberι y) (by
+    rw [Scheme.Opens.range_ι, f.range_fiberι]
+    rintro x (hx : f.base x = y)
+    simpa [hx] using hy)
+
+@[reassoc (attr := simp)]
+lemma Scheme.Hom.fiberLift_ι : f.fiberLift hy ≫ (f ⁻¹ᵁ V).ι = f.fiberι y :=
+  IsOpenImmersion.lift_fac _ _ _
+
+@[simp]
+lemma Scheme.Hom.fiberLift_apply (x : f.fiber y) :
+    (f ⁻¹ᵁ V).ι (f.fiberLift hy x) = f.fiberι y x := by
+  rw [← f.fiberLift_ι hy]
+  rfl
+
+instance : IsPreimmersion (f.fiberLift hy) :=
+  have : IsPreimmersion (f.fiberLift hy ≫ (f ⁻¹ᵁ V).ι) := by
+    rw [f.fiberLift_ι hy]
+    infer_instance
+  IsPreimmersion.of_comp (f.fiberLift hy) (f ⁻¹ᵁ V).ι
+
+end FiberLift
 
 end AlgebraicGeometry
