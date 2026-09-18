@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 
 /-!
@@ -16,6 +17,16 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 so for a one-element type `I` it is the unit itself. This is
 `SheafOfModules.freeUniqueIso`, which is how properties proved for the free sheaves of modules
 are transported to the structure sheaf.
+
+## The free sheaf of modules on a finite type is a biproduct
+
+The category of sheaves of modules is preadditive, so for a finite `I` the coproduct decomposition
+of `SheafOfModules.free I` is also a product decomposition: `SheafOfModules.freeBicone` is the
+bicone with point `free I` whose injections are `SheafOfModules.ιFree`, and
+`SheafOfModules.isBilimitFreeBicone` says it is a bilimit. This is what makes the projections
+`SheafOfModules.πFree` available and gives `SheafOfModules.sum_πFree_comp_ιFree`, the identity
+that decomposes any section — or any germ, after applying an additive functor — into its `I`
+components.
 
 Sheafifying the free *presheaf* of modules on the constant presheaf of types with value `I`
 gives `SheafOfModules.sheafifyFreeObj R I`, and a family `s : I → M.sections` of sections of a
@@ -28,6 +39,9 @@ transferred from `SheafOfModules.free I` to the sheafification of `freeObj (cons
 ## Main declarations
 
 - `SheafOfModules.freeUniqueIso`: the free sheaf of modules on a one-element type is the unit.
+- `SheafOfModules.πFree`, `SheafOfModules.isBilimitFreeBicone`,
+  `SheafOfModules.sum_πFree_comp_ιFree`: the projections of the free sheaf of modules on a
+  finite type, and the bilimit structure they come from.
 - `SheafOfModules.sheafifyFreeObj`, `SheafOfModules.sheafifyFreeObjDesc`: the sheafification of
   the free presheaf of modules on the constant presheaf with value `I`, and the morphism out of
   it attached to a family of sections.
@@ -60,6 +74,59 @@ variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : S
 /-- The free sheaf of modules on a one-element type is the unit. -/
 noncomputable def freeUniqueIso (I : Type u) [Unique I] : free (R := R) I ≅ unit R :=
   coproductUniqueIso (fun (_ : I) ↦ unit R)
+
+section Biproduct
+
+variable (I : Type u)
+
+/-- **The bicone with point `free I` whose injections are `SheafOfModules.ιFree`.** For a finite
+`I` it is a bilimit (`SheafOfModules.isBilimitFreeBicone`), so it exhibits `free I` as the
+biproduct of `I` copies of `unit R`. -/
+noncomputable def freeBicone : Bicone (fun _ : I ↦ unit R) :=
+  Bicone.ofColimitCocone (isColimitFreeCofan (R := R) I)
+
+@[simp]
+lemma freeBicone_ι (i : I) : (freeBicone (R := R) I).ι i = ιFree i := rfl
+
+/-- **The free sheaf of modules on a finite type is the biproduct of copies of `unit R`.** -/
+noncomputable def isBilimitFreeBicone [Fintype I] : (freeBicone (R := R) I).IsBilimit :=
+  biconeIsBilimitOfColimitCoconeOfIsColimit (isColimitFreeCofan I)
+
+variable {I}
+
+/-- **The `j`-th projection `free I ⟶ unit R` of the free sheaf of modules on `I`**, the
+identity on the `j`-th summand and zero on the others:
+
+```
+  unit R ──ιFree k──▶ free I
+        ╲                │
+  δ k j  ╲               │ πFree j
+          ╲              ▼
+           ╲───────────▶ unit R
+```
+
+commutes with `δ k j = 𝟙` for `k = j` (`SheafOfModules.ιFree_πFree_self`) and `δ k j = 0`
+otherwise (`SheafOfModules.ιFree_πFree_of_ne`). -/
+noncomputable def πFree (j : I) : free (R := R) I ⟶ unit R :=
+  (freeBicone I).π j
+
+@[reassoc (attr := simp)]
+lemma ιFree_πFree_self (j : I) : ιFree (R := R) j ≫ πFree j = 𝟙 (unit R) := by
+  simpa [πFree] using (freeBicone (R := R) I).ι_π j j
+
+@[reassoc (attr := simp)]
+lemma ιFree_πFree_of_ne {k j : I} (h : k ≠ j) : ιFree (R := R) k ≫ πFree j = 0 := by
+  simpa [πFree, h] using (freeBicone (R := R) I).ι_π k j
+
+variable (I)
+
+/-- **The injections and the projections of the free sheaf of modules on a finite type compose
+to the identity.** -/
+lemma sum_πFree_comp_ιFree [Fintype I] :
+    ∑ j : I, πFree (R := R) j ≫ ιFree j = 𝟙 (free I) :=
+  IsBilimit.total (isBilimitFreeBicone (R := R) I)
+
+end Biproduct
 
 section Sheafify
 
