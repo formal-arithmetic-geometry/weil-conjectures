@@ -292,4 +292,81 @@ theorem intersectionNumber_eq_genericRank_mul [IsNoetherian Y] (F : Y.Modules) [
 
 end IntersectionRank
 
+section ProjectionFormula
+
+variable (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))]
+  [Y.Over (Spec (.of k))] (f : X ⟶ Y) [IsFinite f] [f.IsOver (Spec (.of k))]
+
+/-- **The degree of a finite morphism** onto an irreducible scheme: the generic rank of the
+direct image `f_* 𝒪_X` of the structure sheaf. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.Hom.degree {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IrreducibleSpace Y] : ℕ :=
+  genericRank ((pushforward f).obj X.structureModules)
+
+/-- **The Euler characteristic of a twist of `𝒪_X` by an inverse image** is the Euler
+characteristic of the corresponding twist of `f_* 𝒪_X`: this is the invariance of the Euler
+characteristic along a finite morphism together with the projection formula. -/
+lemma eulerChar_tensorObj_pullback (N : Y.Modules) (hN : N.Invertible) :
+    eulerChar k (X.structureModules ⊗ (pullback f).obj N)
+      = eulerChar k ((pushforward f).obj X.structureModules ⊗ N) := by
+  have hXc : X.structureModules.IsCoherent := (SheafOfModules.invertible_unit X.sheaf).isCoherent
+  have hNl : N.IsLocallyFree := hN.isLocallyFree
+  have hNf : N.IsFiniteType := hN.isFiniteType
+  have hc : (X.structureModules ⊗ (pullback f).obj N).IsCoherent :=
+    isCoherent_tensorObj_of_invertible X.structureModules (hN.pullback f)
+  rw [← eulerChar_pushforward k f (X.structureModules ⊗ (pullback f).obj N)]
+  exact eulerChar_congr k (pushforwardTensorPullbackIso f X.structureModules N)
+
+/-- **The intersection number of the inverse images is the intersection number on the target
+with coefficients in `f_* 𝒪_X`.** This is the sheaf-theoretic half of the projection formula. -/
+theorem intersectionNumber_pullback_structureModules {d : ℕ} (L : Fin d → Y.Modules)
+    (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k X.structureModules (fun j ↦ (pullback f).obj (L j))
+        (fun j ↦ (hL j).pullback f)
+      = intersectionNumber k ((pushforward f).obj X.structureModules) L hL := by
+  rw [intersectionNumber, intersectionNumber]
+  refine Finset.sum_congr rfl fun S _ ↦ ?_
+  congr 1
+  have hpic : Pic.mk (zpowProd (fun j ↦ (pullback f).obj (L j)) (fun j ↦ (hL j).pullback f)
+        (fun j ↦ if j ∈ S then 1 else 0)) (invertible_zpowProd _ _ _)
+      = Pic.mk ((pullback f).obj (zpowProd L hL fun j ↦ if j ∈ S then 1 else 0))
+        ((invertible_zpowProd L hL _).pullback f) := by
+    rw [Pic.mk_zpowProd, ← Pic.map_mk (hM := invertible_zpowProd L hL _), Pic.mk_zpowProd,
+      map_prod]
+    exact Finset.prod_congr rfl fun j _ ↦ by rw [map_zpow, Pic.map_mk]
+  obtain ⟨eZ⟩ := Pic.mk_eq_mk_iff.1 hpic
+  calc eulerChar k (tensorZPow X.structureModules (fun j ↦ (pullback f).obj (L j))
+          (fun j ↦ (hL j).pullback f) fun j ↦ if j ∈ S then 1 else 0)
+      = eulerChar k (X.structureModules ⊗
+          (pullback f).obj (zpowProd L hL fun j ↦ if j ∈ S then 1 else 0)) :=
+        eulerChar_congr k (tensorIso (Iso.refl _) eZ)
+    _ = eulerChar k ((pushforward f).obj X.structureModules ⊗
+          zpowProd L hL fun j ↦ if j ∈ S then 1 else 0) :=
+        eulerChar_tensorObj_pullback k f _ (invertible_zpowProd L hL _)
+    _ = eulerChar k (tensorZPow ((pushforward f).obj X.structureModules) L hL
+          fun j ↦ if j ∈ S then 1 else 0) := rfl
+
+/-- **The projection formula for intersection numbers** (`prop:deg-projection-formula`).
+
+For a finite morphism `f : X ⟶ Y` of schemes over `k` with `Y` integral of dimension `d`, proper
+over `k` and carrying an ample invertible sheaf, and for `L₁, …, L_d` invertible on `Y`,
+
+`(f^* L₁ ⋯ f^* L_d)_X = deg f · (L₁ ⋯ L_d)_Y`,
+
+where `deg f` is the generic rank of `f_* 𝒪_X`. -/
+theorem intersectionNumber_pullback_eq_degree_mul [Infinite k] [IsProper (Y ↘ Spec (.of k))]
+    [IsIntegral Y] [IsNoetherian Y] {A : Y.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
+    {d : ℕ} (hd : topologicalKrullDim Y = (d : WithBot ℕ∞)) (L : Fin d → Y.Modules)
+    (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k X.structureModules (fun j ↦ (pullback f).obj (L j))
+        (fun j ↦ (hL j).pullback f)
+      = (f.degree : ℤ) * intersectionNumber k (𝟙_ Y.Modules) L hL := by
+  have hXc : X.structureModules.IsCoherent := (SheafOfModules.invertible_unit X.sheaf).isCoherent
+  have hc : ((pushforward f).obj X.structureModules).IsCoherent :=
+    isCoherent_pushforward_of_isFinite f X.structureModules
+  rw [intersectionNumber_pullback_structureModules k f L hL]
+  exact intersectionNumber_eq_genericRank_mul k hA hAa hd _ L hL
+
+end ProjectionFormula
+
 end AlgebraicGeometry.Scheme.Modules
