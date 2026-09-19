@@ -129,6 +129,23 @@ theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_add_single (L : Fin r �
   rw [Pic.mk_zpowProd, Pic.mk_zpowProd, ← hsingle, ← Finset.prod_mul_distrib]
   exact Finset.prod_congr rfl fun i _ ↦ by rw [Pi.add_apply, zpow_add, mul_comm]
 
+/-- Prepending an invertible sheaf of modules to a family of invertible sheaves of modules gives
+a family of invertible sheaves of modules. -/
+theorem invertible_cons {M : X.Modules} (hM : M.Invertible) {L : Fin r → X.Modules}
+    (hL : ∀ i, (L i).Invertible) (i : Fin (r + 1)) :
+    ((Fin.cons M L : Fin (r + 1) → X.Modules) i).Invertible := by
+  induction i using Fin.cases with
+  | zero => rw [Fin.cons_zero]; exact hM
+  | succ i => rw [Fin.cons_succ]; exact hL i
+
+/-- Replacing one member of a family of invertible sheaves of modules by an invertible sheaf of
+modules gives a family of invertible sheaves of modules. -/
+theorem invertible_update {L : Fin r → X.Modules} (hL : ∀ i, (L i).Invertible) {j : Fin r}
+    {M : X.Modules} (hM : M.Invertible) (i : Fin r) : (Function.update L j M i).Invertible := by
+  rcases eq_or_ne i j with rfl | h
+  · rw [Function.update_self]; exact hM
+  · rw [Function.update_of_ne h]; exact hL i
+
 /-- The concatenation of two families of invertible sheaves of modules is a family of invertible
 sheaves of modules. -/
 theorem invertible_append {r' : ℕ} {M : Fin r → X.Modules} {N : Fin r' → X.Modules}

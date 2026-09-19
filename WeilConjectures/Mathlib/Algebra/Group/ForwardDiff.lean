@@ -23,6 +23,11 @@ forward difference operator. This file collects the facts one needs about compos
 * `fwdDiffComp`: the composite `Δ_[v 0] ∘ ⋯ ∘ Δ_[v (d - 1)]` attached to a family
   `v : Fin d → M`, defined as the product of the `fwdDiffₗ (v i)` in the endomorphism ring
   `Module.End ℤ (M → G)`, applied to `f`;
+* `fwdDiffComp_add`, `fwdDiffComp_zero_fun`: a composite of difference operators is additive in
+  the function it is applied to;
+* `fwdDiffComp_cons_add_arg`: the composite attached to a family whose leading direction is a sum
+  `a + b` splits as the sum of the composites for `a`, for `b` and for `a` and `b` in
+  succession;
 * `fwdDiffComp_eq_sum_powerset`: the expansion of that composite as an alternating sum over the
   subsets of `Fin d`;
 * `fwdDiff_comp_addHom`, `fwdDiffComp_comp_addHom`: difference operators and their composites
@@ -109,6 +114,28 @@ lemma fwdDiffComp_succ' (v : Fin (d + 1) → M) (f : M → G) :
   simp only [fwdDiffComp, List.ofFn_succ, List.prod_cons]
   rw [hc]
   simp only [Module.End.mul_apply, coe_fwdDiffₗ]
+
+/-- A composite of forward difference operators is additive in the function it is applied to. -/
+lemma fwdDiffComp_add (v : Fin d → M) (f g : M → G) :
+    fwdDiffComp v (f + g) = fwdDiffComp v f + fwdDiffComp v g :=
+  map_add (List.ofFn fun i ↦ fwdDiffₗ M G (v i)).prod f g
+
+/-- A composite of forward difference operators kills the zero function. -/
+@[simp] lemma fwdDiffComp_zero_fun (v : Fin d → M) : fwdDiffComp v (0 : M → G) = 0 :=
+  map_zero (List.ofFn fun i ↦ fwdDiffₗ M G (v i)).prod
+
+/-- **Splitting the leading direction of a composite of difference operators.** Differencing in
+the direction `a + b` first is differencing in the direction `a`, plus differencing in the
+direction `b`, plus differencing in both directions in succession.
+
+This is `fwdDiff_add_arg` propagated through a composite of further difference operators; it is
+the operator identity behind the multilinearity of intersection numbers. -/
+lemma fwdDiffComp_cons_add_arg (a b : M) (v : Fin d → M) (f : M → G) :
+    fwdDiffComp (Fin.cons (a + b) v) f =
+      fwdDiffComp (Fin.cons a v) f + fwdDiffComp (Fin.cons b v) f +
+        fwdDiffComp (Fin.cons a (Fin.cons b v)) f := by
+  simp only [fwdDiffComp_succ', Fin.cons_zero, Fin.cons_succ]
+  rw [fwdDiff_add_arg, fwdDiffComp_add, fwdDiffComp_add, fwdDiff_comm a b]
 
 section Comp
 
