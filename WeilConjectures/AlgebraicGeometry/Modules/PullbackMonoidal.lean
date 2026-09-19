@@ -37,6 +37,9 @@ morphism of schemes.
 - `SheafOfModules.Invertible.pullback`: the pullback of an invertible module is invertible.
 - `AlgebraicGeometry.Scheme.Pic.map`: the pullback homomorphism `Pic(Y) →* Pic(X)`, with
   `AlgebraicGeometry.Scheme.Pic.map_id` and `AlgebraicGeometry.Scheme.Pic.map_comp`.
+- `AlgebraicGeometry.Scheme.Pic.mapMulEquiv`: pullback along an isomorphism of schemes is an
+  isomorphism of Picard groups, whence
+  `AlgebraicGeometry.Scheme.Pic.map_injective_of_isIso`.
 - `AlgebraicGeometry.Scheme.Modules.restrictFunctor f` is monoidal (an instance), obtained by
   transporting the monoidal structure of the pullback functor along
   `AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback`. Its structure maps are
@@ -117,6 +120,20 @@ lemma Pic.map_comp_apply {Z : Scheme.{u}} (g : Y ⟶ Z) (x : Z.Pic) :
     Pic.map (f ≫ g) x = Pic.map f (Pic.map g x) := by
   rw [Pic.map_comp]
   rfl
+
+/-- **Pullback along an isomorphism of schemes is an isomorphism of Picard groups**, the
+inverse being pullback along the inverse isomorphism. -/
+@[simps! apply]
+noncomputable def Pic.mapMulEquiv (e : X ≅ Y) : Y.Pic ≃* X.Pic where
+  toFun := Pic.map e.hom
+  invFun := Pic.map e.inv
+  left_inv _ := by simp [← Pic.map_comp_apply]
+  right_inv _ := by simp [← Pic.map_comp_apply]
+  map_mul' := map_mul _
+
+/-- **Pullback along an isomorphism is injective on Picard groups.** -/
+theorem Pic.map_injective_of_isIso [IsIso f] : Function.Injective (Pic.map f) :=
+  (Pic.mapMulEquiv (asIso f)).injective
 
 @[simp]
 lemma Pic.map_mk {M : Y.Modules} (hM : M.Invertible) :
