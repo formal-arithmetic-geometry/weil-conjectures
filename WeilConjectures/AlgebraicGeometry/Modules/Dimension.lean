@@ -48,6 +48,13 @@ itself is free of hypotheses on the scheme.
   support if and only if it is a zero object.
 - `AlgebraicGeometry.Scheme.Modules.isClosed_support`: the support of a coherent sheaf of
   modules is closed.
+- `AlgebraicGeometry.Scheme.Modules.support_subset_of_mono`,
+  `AlgebraicGeometry.Scheme.Modules.support_cokernel_subset` and
+  `AlgebraicGeometry.Scheme.Modules.support_congr`: the support of the source of a
+  monomorphism and the support of a cokernel are contained in the support of the target, and
+  the support is an isomorphism invariant. Together with
+  `AlgebraicGeometry.Scheme.Modules.supportDim_le_of_support_subset`, the monotonicity of the
+  dimension in the support, these are what an induction along a filtration consumes.
 - `AlgebraicGeometry.Scheme.Modules.supportDim_eq_bot_iff`: `dim F = ⊥` if and only if `F` is a
   zero object, and its consequence
   `AlgebraicGeometry.Scheme.Modules.isZero_of_supportDim_lt_zero`. This is the base case of the
@@ -136,11 +143,56 @@ theorem isClosed_support [F.IsCoherent] : IsClosed F.support := by
   · refine ⟨hU.primeIdealOf ⟨x, hxU⟩, ?_, hU.fromSpec_primeIdealOf ⟨x, hxU⟩⟩
     simpa [← mem_support_iff_mem_module_support F hU ⟨x, hxU⟩] using hx
 
+/-- **The support of the source of a monomorphism is contained in the support of its target**:
+taking stalks preserves monomorphisms, so a point where the source has a non-zero stalk is a
+point where the target has one. -/
+theorem support_subset_of_mono {M N : X.Modules} (u : M ⟶ N) [Mono u] :
+    M.support ⊆ N.support := by
+  intro x hx
+  have hmono : Mono (C := SheafOfModules.{u} X.ringCatSheaf) u := inferInstanceAs (Mono u)
+  have hm : Mono ((SheafOfModules.stalkFunctor X.ringCatSheaf x).map u) :=
+    (SheafOfModules.stalkFunctor X.ringCatSheaf x).map_mono _
+  have hinj : Function.Injective (PresheafOfModules.stalkMapₗ u.val x) :=
+    (AddCommGrpCat.mono_iff_injective _).1 hm
+  obtain ⟨a, b, hab⟩ := (mem_support_iff _ x).1 hx
+  exact (mem_support_iff _ x).2 ⟨_, _, fun h ↦ hab (hinj h)⟩
+
+/-- **The support of the cokernel of a morphism is contained in the support of its target**:
+taking stalks preserves epimorphisms, so the stalks of the cokernel are quotients of those of
+the target. -/
+theorem support_cokernel_subset {M N : X.Modules} (u : M ⟶ N) :
+    (cokernel u).support ⊆ N.support := by
+  intro x hx
+  by_contra hxN
+  have hsub : Subsingleton (N.presheaf.stalk x) :=
+    not_nontrivial_iff_subsingleton.1 fun h ↦ hxN ((mem_support_iff _ x).2 h)
+  have hepi : Epi (C := SheafOfModules.{u} X.ringCatSheaf) (cokernel.π u) :=
+    inferInstanceAs (Epi (cokernel.π u))
+  have he : Epi ((SheafOfModules.stalkFunctor X.ringCatSheaf x).map (cokernel.π u)) :=
+    (SheafOfModules.stalkFunctor X.ringCatSheaf x).map_epi _
+  have hsurj : Function.Surjective (PresheafOfModules.stalkMapₗ (cokernel.π u).val x) :=
+    (AddCommGrpCat.epi_iff_surjective _).1 he
+  obtain ⟨a, b, hab⟩ := (mem_support_iff _ x).1 hx
+  obtain ⟨a', rfl⟩ := hsurj a
+  obtain ⟨b', rfl⟩ := hsurj b
+  exact hab (congrArg _ (@Subsingleton.elim _ hsub a' b'))
+
+/-- **Isomorphic sheaves of modules have the same support.** -/
+theorem support_congr {M N : X.Modules} (e : M ≅ N) : M.support = N.support := by
+  ext x
+  exact ((stalkFunctor X x).mapIso e).toLinearEquiv.toEquiv.nontrivial_congr
+
 /-- The dimension of a sheaf of modules `F`: the Krull dimension of its support
 `{x | F_x ≠ 0}`, for the topology induced from the underlying space of the scheme. -/
 noncomputable def supportDim : WithBot ℕ∞ := topologicalKrullDim F.support
 
 lemma supportDim_def : F.supportDim = topologicalKrullDim F.support := rfl
+
+/-- **The dimension of a sheaf of modules is monotone in its support**: a subspace of a
+topological space has no longer chain of irreducible closed subsets than the space itself. -/
+theorem supportDim_le_of_support_subset {M N : X.Modules} (h : M.support ⊆ N.support) :
+    M.supportDim ≤ N.supportDim :=
+  (Topology.IsEmbedding.inclusion h).isInducing.topologicalKrullDim_le
 
 /-- The dimension of a sheaf of modules is `⊥` if and only if the sheaf is a zero object. -/
 theorem supportDim_eq_bot_iff : F.supportDim = ⊥ ↔ IsZero F := by
