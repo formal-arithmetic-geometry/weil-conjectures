@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntersectionNumber
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 
 /-!
 # The generic rank and the projection formula for intersection numbers
@@ -38,6 +39,9 @@ this gives the projection formula for intersection numbers:
   **`prop:deg-projection-formula`**, the projection formula for a finite morphism.
 * `AlgebraicGeometry.Scheme.Modules.intersectionNumber_pullback_structureModules`: its
   sheaf-theoretic half, that `(f^* L₁ ⋯ f^* L_d · 𝒪_X) = (L₁ ⋯ L_d · f_* 𝒪_X)`.
+* `AlgebraicGeometry.Scheme.Hom.degree_eq_finrank`: for a finite flat morphism of finite
+  presentation onto an integral scheme, the degree is the rank `Scheme.Hom.finrank` of the
+  morphism at every point of the target.
 
 ## Implementation notes
 
@@ -63,15 +67,16 @@ The projection formula is proved for any finite `f`, surjectivity not being need
 
 ## TODO
 
-The last two sentences of `prop:deg-projection-formula` are not formalised here:
+One sentence of `prop:deg-projection-formula` is not formalised here:
 
 * that `deg f = [κ(η_X) : κ(η_Y)]` for `f` finite surjective between integral schemes. This needs
   the identification of the stalk of `f_* 𝒪_X` at `η_Y` with the ring of the generic fibre of
   `f`, that is with the function field of `X`; it is a body of work of its own and has been split
   off rather than done here.
-* that for flat `f` the degree agrees with the rank of the locally free sheaf `f_* 𝒪_X`, the
-  degree of `def:av-degree`. This needs the constancy of the rank of a locally free sheaf on a
-  connected scheme.
+
+The other sentence, that for flat `f` the degree agrees with the rank of the locally free sheaf
+`f_* 𝒪_X` — the degree of `def:av-degree` — is
+`AlgebraicGeometry.Scheme.Hom.degree_eq_finrank` below (issue 1014).
 
 ## References
 
@@ -438,5 +443,38 @@ theorem intersectionNumber_pullback_eq_degree_mul [Infinite k] [IsProper (Y ↘ 
   exact intersectionNumber_eq_genericRank_mul k hA hAa hd _ L hL
 
 end ProjectionFormula
+
+section Degree
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- **The degree of a finite flat morphism is its rank at every point of the target**: the
+generic rank of `f_* 𝒪_X` is the rank `AlgebraicGeometry.Scheme.Hom.finrank` of `f`, the degree of
+`def:av-degree`.
+
+The proof needs `f` finite and flat — so that both ranks are defined — locally of finite
+presentation, for the rank of `f` to be locally constant and hence constant on the connected
+space `Y`, and `Y` integral rather than merely irreducible, so that the stalk of `f_* 𝒪_X` at the
+generic point is a vector space over the function field: over a field a module is free, and the
+rank at a stalk of a free module is its dimension. -/
+theorem _root_.AlgebraicGeometry.Scheme.Hom.degree_eq_finrank [IsFinite f] [Flat f]
+    [LocallyOfFinitePresentation f] [IsIntegral Y] (y : Y) :
+    f.degree = f.finrank y := by
+  have hconst : f.finrank y = f.finrank (genericPoint Y) :=
+    f.isLocallyConstant_finrank.apply_eq_of_preconnectedSpace y (genericPoint Y)
+  obtain ⟨U, hU, hyU, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := Y) (x := genericPoint Y) (U := ⊤) trivial
+  have hXc : X.structureModules.IsCoherent := (SheafOfModules.invertible_unit X.sheaf).isCoherent
+  have hq : ((pushforward f).obj X.structureModules).IsQuasicoherent :=
+    isQuasicoherent_pushforward f X.structureModules
+  -- `Γ(f_* 𝒪_X, U)` is `Γ(X, f ⁻¹ᵁ U)` with the `Γ(Y, U)`-module structure given by `f.app U`,
+  -- so the finiteness and flatness of that ring map are literally the ones needed here.
+  have hfin : Module.Finite Γ(Y, U) Γ((pushforward f).obj X.structureModules, U) :=
+    f.finite_app U hU
+  have hflat : Module.Flat Γ(Y, U) Γ((pushforward f).obj X.structureModules, U) := f.flat_app hU
+  rw [hconst, f.finrank_eq_finrank_app hU ⟨genericPoint Y, hyU⟩]
+  exact genericRank_eq_rankAtStalk (X := Y) ((pushforward f).obj X.structureModules) hU hyU
+
+end Degree
 
 end AlgebraicGeometry.Scheme.Modules
