@@ -21,6 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Units
 public import WeilConjectures.AlgebraicGeometry.CubeTheorem
+public import WeilConjectures.AlgebraicGeometry.EulerCharacteristicPositivity
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.IntersectionNumber
