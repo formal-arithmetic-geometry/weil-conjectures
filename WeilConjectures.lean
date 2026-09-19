@@ -18,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Units
 public import WeilConjectures.AlgebraicGeometry.CubeTheorem
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
