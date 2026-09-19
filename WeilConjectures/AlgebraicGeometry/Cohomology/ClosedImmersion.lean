@@ -47,6 +47,10 @@ statement to prove is `Ext^n_W(ℤ_W, i_♭ G) ≅ Ext^n_{W₀}(ℤ_{W₀}, G)` 
 * `AlgebraicGeometry.Scheme.Modules.H.pushforwardAddEquiv_map` — naturality in `F`.
 * `AlgebraicGeometry.Scheme.Modules.H.pushforwardMap_smul_over` — `R`-linearity for schemes
   over `Spec R`.
+* `AlgebraicGeometry.Scheme.Modules.H.pushforwardFreeAddEquiv` — the specialisation to a free
+  module of finite rank, `H^n(W, i_* (𝒪_{W₀} ^ ι)) ≃+ (ι → H^n(W₀, 𝒪_{W₀}))`, together with
+  its `R`-linear form
+  `AlgebraicGeometry.Scheme.Modules.H.pushforwardFreeLinearEquivOver`.
 
 -/
 
@@ -70,6 +74,8 @@ lemma preservesFiniteColimits_pushforwardAb [IsClosedImmersion i] :
 end Scheme.Hom
 
 namespace Scheme.Modules
+
+section
 
 variable {W₀ W : Scheme.{u}} (i : W₀ ⟶ W) [IsClosedImmersion i] (F G : W₀.Modules) (n : ℕ)
 
@@ -163,6 +169,86 @@ lemma H.pushforwardMap_smul_over (r : R) (y : ((pushforward i).obj F).H n) :
   exact (H.pushforwardMap i F n).map_smulₛₗ _ y
 
 end OverBase
+
+end
+
+/-! ### The pushforward of a free module -/
+
+section Free
+
+variable {W₀ W : Scheme.{u}} (i : W₀ ⟶ W) [IsClosedImmersion i] (ι : Type u) [Fintype ι] (n : ℕ)
+
+/-- **The cohomology of the pushforward of a free module of finite rank along a closed
+immersion** `i : W₀ ⟶ W`: `H^n(W, i_* (𝒪_{W₀} ^ ι)) ≃+ (ι → H^n(W₀, 𝒪_{W₀}))`.
+
+```
+  H^n(W, i_* (𝒪_{W₀} ^ ι)) ──pushforwardMap──▶ H^n(W₀, 𝒪_{W₀} ^ ι)
+                         ╲                              │
+   pushforwardFreeAddEquiv ╲                             │ freeLinearEquiv
+                            ╲                            ▼
+                             ╲──────────────────────────▶ (ι → H^n(W₀, 𝒪_{W₀}))
+```
+
+The two sides are modules over `Γ(W, 𝒪_W)` and `Γ(W₀, 𝒪_{W₀})` respectively and the map is
+semilinear over `i.appTop` (`AlgebraicGeometry.Scheme.Modules.H.pushforwardFreeAddEquiv_smul`);
+the `R`-linear form for schemes over `Spec R` is
+`AlgebraicGeometry.Scheme.Modules.H.pushforwardFreeLinearEquivOver`. -/
+noncomputable def H.pushforwardFreeAddEquiv :
+    ((pushforward i).obj (W₀.freeModules ι)).H n ≃+ (ι → W₀.structureModules.H n) :=
+  (H.pushforwardAddEquiv i (W₀.freeModules ι) n).symm.trans
+    (H.freeLinearEquiv W₀ ι n).toAddEquiv
+
+lemma H.pushforwardFreeAddEquiv_apply (y : ((pushforward i).obj (W₀.freeModules ι)).H n) :
+    H.pushforwardFreeAddEquiv i ι n y =
+      H.freeLinearEquiv W₀ ι n (H.pushforwardMap i (W₀.freeModules ι) n y) :=
+  rfl
+
+lemma H.pushforwardFreeAddEquiv_symm_apply (p : ι → W₀.structureModules.H n) :
+    (H.pushforwardFreeAddEquiv i ι n).symm p =
+      H.pushforwardAddEquiv i (W₀.freeModules ι) n ((H.freeLinearEquiv W₀ ι n).symm p) :=
+  rfl
+
+/-- `H^n(W, i_* (𝒪_{W₀} ^ ι)) ≃+ (ι → H^n(W₀, 𝒪_{W₀}))` is semilinear over
+`i.appTop : Γ(W, 𝒪_W) ⟶ Γ(W₀, 𝒪_{W₀})`. -/
+lemma H.pushforwardFreeAddEquiv_smul (r : Γ(W, ⊤))
+    (y : ((pushforward i).obj (W₀.freeModules ι)).H n) :
+    H.pushforwardFreeAddEquiv i ι n (r • y) =
+      i.appTop.hom r • H.pushforwardFreeAddEquiv i ι n y := by
+  rw [H.pushforwardFreeAddEquiv_apply, H.pushforwardFreeAddEquiv_apply,
+    (H.pushforwardMap i (W₀.freeModules ι) n).map_smulₛₗ r y]
+  exact (H.freeLinearEquiv W₀ ι n).map_smul _ _
+
+end Free
+
+section FreeOverBase
+
+variable (R : Type u) [CommRing R] {W₀ W : Scheme.{u}} (i : W₀ ⟶ W) [IsClosedImmersion i]
+  [W.Over (Spec (.of R))] [W₀.Over (Spec (.of R))] [i.IsOver (Spec (.of R))] (ι : Type u)
+  [Fintype ι] (n : ℕ)
+
+/-- The cohomology of the pushforward of a free module of finite rank along a closed
+immersion, `R`-linearly for schemes over `Spec R`:
+`H^n(W, i_* (𝒪_{W₀} ^ ι)) ≃ₗ[R] (ι → H^n(W₀, 𝒪_{W₀}))`. The semilinear version is
+`AlgebraicGeometry.Scheme.Modules.H.pushforwardFreeAddEquiv`. -/
+noncomputable def H.pushforwardFreeLinearEquivOver :
+    ((pushforward i).obj (W₀.freeModules ι)).H n ≃ₗ[R] (ι → W₀.structureModules.H n) :=
+  AddEquiv.toLinearEquiv (H.pushforwardFreeAddEquiv i ι n) fun r y ↦ by
+    rw [H.smul_over_def R W r y, H.pushforwardFreeAddEquiv_smul, Scheme.appTop_overRingHom]
+    rfl
+
+@[simp]
+lemma H.pushforwardFreeLinearEquivOver_apply
+    (y : ((pushforward i).obj (W₀.freeModules ι)).H n) :
+    H.pushforwardFreeLinearEquivOver R i ι n y = H.pushforwardFreeAddEquiv i ι n y :=
+  rfl
+
+@[simp]
+lemma H.pushforwardFreeLinearEquivOver_symm_apply (p : ι → W₀.structureModules.H n) :
+    (H.pushforwardFreeLinearEquivOver R i ι n).symm p =
+      (H.pushforwardFreeAddEquiv i ι n).symm p :=
+  rfl
+
+end FreeOverBase
 
 end Scheme.Modules
 

@@ -1500,7 +1500,19 @@ zero on both slices is zero, which is \texttt{prop:cube-kunneth-h1} together
 with the identification of the ideal of the thickening with
 $\O_{X\times Y}\otimes_k\m_{z_0}^{n+1}/\m_{z_0}^{n+2}$ and the invariance of
 $H^1$ under pushforward along
-$(X\times Y)\times Z_0\hookrightarrow(X\times Y)\times Z_{n+1}$.}
+$(X\times Y)\times Z_0\hookrightarrow(X\times Y)\times Z_{n+1}$.  The second
+half of that identification, the invariance under pushforward together with
+the passage from a finite direct sum to a product, is available in Lean as
+\texttt{thickeningIdealHFreeAddEquiv} and its $R$-linear form
+\texttt{thickeningIdealHFreeLinearEquiv} in the namespace
+\texttt{AlgebraicGeometry.Scheme}, in every degree and over an arbitrary base,
+but only conditionally: it assumes that the comparison morphism
+\texttt{pushforwardFreeToThickeningIdeal} attached to a chosen family of global
+sections of the ideal is an isomorphism.  So what is still outstanding is
+exactly (i) that this comparison morphism is an isomorphism when the family is
+a $k$-basis of $\m_{z_0}^{n+1}/\m_{z_0}^{n+2}$, and (ii) the naturality of the
+resulting identification in the two slice inclusions, without which it cannot
+transport the injectivity supplied by \texttt{prop:cube-kunneth-h1}.}
 \end{lemma}
 \begin{proof}
 \uses{prop:cube-picard-square-zero, prop:cube-kunneth-h1,
@@ -1528,17 +1540,27 @@ finite-dimensional $k$-vector space; in particular $I_n^2=0$.  So
   W\times Z_{n-1}\hookrightarrow W\times Z_n
 \]
 is a closed immersion defined by a square-zero quasi-coherent ideal, and that
-ideal, as a sheaf of modules on $W\times Z_{n-1}$, is annihilated by
-$\m_{z_0}$ and hence is the pushforward to $W\times Z_{n-1}$ of the sheaf
+ideal is annihilated by $\m_{z_0}$ and hence is the pushforward along the
+closed immersion $W\times Z_0\hookrightarrow W\times Z_n$ of the sheaf
 $\O_W\otimes_kI_n$ on $W=W\times Z_0$.  Consequently
 \[
-  H^1\bigl(W\times Z_{n-1},\O_W\otimes_kI_n\bigr)
+  H^1\bigl(W\times Z_n,\ker(\O_{W\times Z_n}\to\O_{W\times Z_{n-1}})\bigr)
   \;=\;H^1(W,\O_W)\otimes_kI_n ,
 \]
 in two steps: cohomology is unchanged by pushforward along the closed
-immersion $W\times Z_0\hookrightarrow W\times Z_{n-1}$, which is exact, and
+immersion $W\times Z_0\hookrightarrow W\times Z_n$, which is exact, and
 the cohomology of a finite direct sum of copies of $\O_W$ is the direct sum
 of the cohomologies, $I_n$ being a finite-dimensional $k$-vector space.
+
+Both steps are formalised, in the form
+\texttt{AlgebraicGeometry.Scheme.thickeningIdealHFreeAddEquiv}; the ideal is
+kept there as a sheaf on the ambient $W\times Z_n$ rather than descended to
+$W\times Z_{n-1}$, and the second step is taken through a chosen $k$-basis of
+$I_n$, so that the tensor product $H^1(W,\O_W)\otimes_kI_n$ is replaced by the
+corresponding finite power of $H^1(W,\O_W)$.  What the choice of basis has to
+satisfy is that the comparison morphism from $\bigoplus_j\O_{W\times Z_0}$ to
+the ideal given by multiplication by the chosen sections is an isomorphism;
+that is the outstanding point (i) of the obligation above.
 
 Apply \Cref{prop:cube-picard-square-zero}(1) to this thickening.  All that is
 needed of it here is exactness of
