@@ -37,6 +37,10 @@ properties.
   `AlgebraicGeometry.Scheme.Modules.intersectionNumber_comp_perm`:
   **`lem:deg-intersection-symmetric`**, the intersection number depends on `L₁, …, L_d` only
   through the multiset of their classes in the Picard group of `X`.
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr_coeff` and
+  `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_zero_of_isZero`: the intersection
+  number depends on the coefficient sheaf only through its isomorphism class, and vanishes when
+  the coefficient sheaf is zero.
 * `AlgebraicGeometry.Scheme.Modules.intersectionNumber_add_intersectionNumber`:
   **`lem:deg-intersection-additive`**, additivity of the intersection number along a short exact
   sequence of coherent sheaves.
@@ -190,6 +194,27 @@ theorem intersectionNumber_comp_perm (F : X.Modules) {d : ℕ} (L : Fin d → X.
     (hL : ∀ j, (L j).Invertible) (σ : Equiv.Perm (Fin d)) :
     intersectionNumber k F (L ∘ σ) (fun j ↦ hL (σ j)) = intersectionNumber k F L hL :=
   intersectionNumber_congr_perm k F _ hL σ.symm fun _ ↦ Pic.mk_congr (by simp)
+
+/-! ### Dependence on the coefficient sheaf -/
+
+/-- **The intersection number depends on the coefficient sheaf only through its isomorphism
+class.** -/
+lemma intersectionNumber_congr_coeff {F F' : X.Modules} (e : F ≅ F') {d : ℕ}
+    (L : Fin d → X.Modules) (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k F L hL = intersectionNumber k F' L hL := by
+  simp only [intersectionNumber]
+  refine Finset.sum_congr rfl fun S _ ↦ ?_
+  congr 1
+  exact eulerChar_congr k (tensorIso e (Iso.refl _))
+
+/-- **The intersection number of a zero coefficient sheaf vanishes.** -/
+lemma intersectionNumber_eq_zero_of_isZero {F : X.Modules} (hF : Limits.IsZero F) {d : ℕ}
+    (L : Fin d → X.Modules) (hL : ∀ j, (L j).Invertible) :
+    intersectionNumber k F L hL = 0 := by
+  rw [intersectionNumber]
+  refine Finset.sum_eq_zero fun S _ ↦ ?_
+  exact mul_eq_zero_of_right _
+    (eulerChar_eq_zero_of_isZero k ((invertible_zpowProd L hL _).isZero_tensorObj hF))
 
 /-! ### Additivity in the coefficient sheaf -/
 

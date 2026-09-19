@@ -46,6 +46,8 @@ is simply the dimension of the space of global sections.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar_pushforward` — the Euler characteristic is
   unchanged by the direct image along a finite morphism, granted the sorried isomorphism
   `H.pushforwardLinearEquiv` on cohomology.
+- `AlgebraicGeometry.Scheme.Modules.eulerChar_tensorObj_pullback` — the two previous items
+  combined: `χ(X, F ⊗ f^* N) = χ(Y, f_* F ⊗ N)` for a finite morphism `f : X ⟶ Y`.
 
 ## Implementation notes
 
@@ -462,6 +464,30 @@ lemma pushforwardTensorPullbackIso_naturality_right [IsFinite f] (F : X.Modules)
   sorry
 
 end ProjectionFormula
+
+/-! ### The Euler characteristic of a twist along a finite morphism -/
+
+section EulerCharProjectionFormula
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] (f : X ⟶ Y)
+  [IsFinite f] [f.IsOver (Spec (.of k))]
+
+/-- **The Euler characteristic of a twist by an inverse image**:
+
+```text
+  χ(X, F ⊗ f^* N) = χ(Y, f_* F ⊗ N).
+```
+
+This is the invariance of the Euler characteristic along a finite morphism,
+`AlgebraicGeometry.Scheme.Modules.eulerChar_pushforward`, applied to the projection formula
+`AlgebraicGeometry.Scheme.Modules.pushforwardTensorPullbackIso`. -/
+lemma eulerChar_tensorObj_pullback (F : X.Modules) [F.IsCoherent] (N : Y.Modules)
+    [N.IsLocallyFree] [N.IsFiniteType] [(F ⊗ (pullback f).obj N).IsCoherent] :
+    eulerChar k (F ⊗ (pullback f).obj N) = eulerChar k ((pushforward f).obj F ⊗ N) := by
+  rw [← eulerChar_pushforward k f (F ⊗ (pullback f).obj N)]
+  exact eulerChar_congr k (pushforwardTensorPullbackIso f F N)
+
+end EulerCharProjectionFormula
 
 end Scheme.Modules
 

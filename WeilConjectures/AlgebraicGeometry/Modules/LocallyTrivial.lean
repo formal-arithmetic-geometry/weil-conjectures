@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Topology.Sheaves.LocallySurjective
+public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -56,7 +57,9 @@ pullback of an invertible sheaf of modules is invertible.
   is an isomorphism `𝒪_W ≅ M|_W`.
 - `SheafOfModules.Invertible.isLocallyFree` and `SheafOfModules.Invertible.isFiniteType`: **an
   invertible sheaf of modules on a scheme is a line bundle**, in the sense used elsewhere in the
-  project, and `SheafOfModules.Invertible.isCoherent`: it is therefore coherent.
+  project, and `SheafOfModules.Invertible.isCoherent`: it is therefore coherent. In particular
+  the structure sheaf and the tensor unit of `X.Modules` are coherent, and so is a zero sheaf
+  (`AlgebraicGeometry.Scheme.Modules.isCoherent_of_isZero`).
 - `SheafOfModules.Invertible.exists_restrict_iso_unit`: the same statement in the explicit local
   form, an isomorphism `M|_W ≅ 𝒪_W`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensorObj_of_invertible`,
@@ -513,6 +516,21 @@ theorem _root_.SheafOfModules.Invertible.isCoherent {M : X.Modules} (hM : M.Inve
   have := hM.isLocallyFree
   have := hM.isFiniteType
   inferInstance
+
+/-- **The structure sheaf of a scheme is coherent**, being invertible. -/
+instance isCoherent_structureModules : X.structureModules.IsCoherent :=
+  (SheafOfModules.invertible_unit X.sheaf).isCoherent
+
+/-- **The tensor unit of `X.Modules` is coherent**, being the structure sheaf. -/
+instance isCoherent_tensorUnit : (𝟙_ X.Modules).IsCoherent :=
+  (SheafOfModules.invertible_tensorUnit X.sheaf).isCoherent
+
+/-- **A zero sheaf of modules is coherent**: it is the cokernel of the identity of the structure
+sheaf, which is coherent. -/
+lemma isCoherent_of_isZero {M : X.Modules} (h : Limits.IsZero M) : M.IsCoherent :=
+  (SheafOfModules.isCoherent X.ringCatSheaf).prop_of_iso
+    ((Limits.isZero_cokernel_of_epi (𝟙 X.structureModules)).iso h)
+    (isCoherent_cokernel (𝟙 X.structureModules) inferInstance inferInstance)
 
 end LocallyFree
 

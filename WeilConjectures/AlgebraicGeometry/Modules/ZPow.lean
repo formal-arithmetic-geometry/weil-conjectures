@@ -175,6 +175,25 @@ theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_append {r' : ℕ} {M : F
   · rw [show Fin.append m m' (Fin.natAdd r i) = m' i from Fin.append_right m m' i]
     exact congrArg (· ^ m' i) (Pic.mk_congr (Fin.append_right M N i))
 
+section Pullback
+
+variable {Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- **The inverse image of a twisting factor is the twisting factor of the inverse images**:
+`f^* (L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r)` and `(f^* L₁) ^⊗ m₁ ⊗ ⋯ ⊗ (f^* L_r) ^⊗ m_r` have the same
+class in the Picard group of `X`, hence are isomorphic by
+`AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`. -/
+theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_pullback (L : Fin r → Y.Modules)
+    (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) :
+    Pic.mk (zpowProd (fun j ↦ (pullback f).obj (L j)) (fun j ↦ (hL j).pullback f) m)
+        (invertible_zpowProd _ _ _) =
+      Pic.mk ((pullback f).obj (zpowProd L hL m)) ((invertible_zpowProd L hL m).pullback f) := by
+  rw [Pic.mk_zpowProd, ← Pic.map_mk (hM := invertible_zpowProd L hL m), Pic.mk_zpowProd,
+    map_prod]
+  exact Finset.prod_congr rfl fun j _ ↦ by rw [map_zpow, Pic.map_mk]
+
+end Pullback
+
 /-- The sheaf `F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_r ^⊗ m_r` attached to a sheaf of modules `F`, a finite
 family `L` of invertible sheaves of modules and an integer vector `m`.
 

@@ -464,6 +464,43 @@ lemma genericRank_unit [IsIntegral X] :
   congr 1
   exact mul_one (M := Γ(X, U)) a
 
+/-- **The generic rank depends on a sheaf only through its isomorphism class.** -/
+lemma genericRank_congr [IrreducibleSpace X] {F F' : X.Modules} (e : F ≅ F') :
+    genericRank F = genericRank F' :=
+  ((stalkFunctor X (genericPoint X)).mapIso e).toLinearEquiv.finrank_eq
+
+/-- **The generic rank vanishes when the stalk at the generic point does.** -/
+lemma genericRank_eq_zero_of_subsingleton [IrreducibleSpace X] {F : X.Modules}
+    (h : Subsingleton (F.presheaf.stalk (genericPoint X))) : genericRank F = 0 :=
+  (Module.finrank_eq_zero_iff_of_free _ _).mpr h
+
+/-- **The generic rank of a zero sheaf vanishes**: taking stalks is an additive functor, so it
+sends a zero object to a zero object. -/
+lemma genericRank_eq_zero_of_isZero [IrreducibleSpace X] {F : X.Modules} (h : IsZero F) :
+    genericRank F = 0 :=
+  genericRank_eq_zero_of_subsingleton
+    (ModuleCat.subsingleton_of_isZero ((stalkFunctor X (genericPoint X)).map_isZero h))
+
+/-- **The stalk of a coherent sheaf at the generic point of an integral scheme is a
+finite-dimensional vector space over the function field**, so that the generic rank is the
+dimension of a finite-dimensional space. -/
+instance finiteDimensional_stalk_genericPoint [IsIntegral X] (F : X.Modules) [F.IsCoherent] :
+    FiniteDimensional X.functionField (F.presheaf.stalk (genericPoint X)) :=
+  finite_stalk F (genericPoint X)
+
+/-- **The generic rank of a coherent sheaf vanishes exactly when the generic point is not in its
+support.** -/
+lemma genericRank_eq_zero_iff [IsIntegral X] (F : X.Modules) [F.IsCoherent] :
+    genericRank F = 0 ↔ genericPoint X ∉ F.support := by
+  rw [genericRank, Module.finrank_zero_iff, support, Set.mem_ofPred_eq,
+    not_nontrivial_iff_subsingleton]
+
+/-- **The generic rank is monotone along a monomorphism** of sheaves of modules on an integral
+scheme. -/
+lemma genericRank_le_of_mono [IsIntegral X] {G H : X.Modules} (u : G ⟶ H) [Mono u]
+    [H.IsCoherent] : genericRank G ≤ genericRank H :=
+  LinearMap.finrank_le_finrank_of_injective (injective_stalkMapₗ_of_mono u (genericPoint X))
+
 end GenericRank
 
 end Scheme.Modules
@@ -503,12 +540,8 @@ theorem genericRank_toModules (hJ : J ≠ ⊥) : genericRank J.toModules = 1 := 
     refine ha0 (injective_germ_unit (genericPoint X) hη ?_)
     rw [h, map_zero]
   have hinj : Function.Injective
-      (PresheafOfModules.stalkMapₗ (J.toModulesι).val (genericPoint X)) := by
-    have hmono₀ : Mono J.toModulesι := inferInstance
-    have hmono : Mono (C := SheafOfModules.{u} X.ringCatSheaf) J.toModulesι := hmono₀
-    have hm : Mono ((SheafOfModules.stalkFunctor X.ringCatSheaf (genericPoint X)).map
-      J.toModulesι) := (SheafOfModules.stalkFunctor X.ringCatSheaf (genericPoint X)).map_mono _
-    exact (AddCommGrpCat.mono_iff_injective _).1 hm
+      (PresheafOfModules.stalkMapₗ (J.toModulesι).val (genericPoint X)) :=
+    injective_stalkMapₗ_of_mono J.toModulesι (genericPoint X)
   have hv : J.toModules.presheaf.germ U.1 (genericPoint X) hη s ≠ 0 := fun h =>
     hfa (by rw [← hLgerm, h, map_zero])
   have hunit := genericRank_unit (X := X)
@@ -539,7 +572,8 @@ theorem genericRank_add (hS : S.ShortExact)
     genericRank S.X₂ = genericRank S.X₁ + genericRank S.X₃ := by
   have hst := map_stalkFunctor (R := X.ringCatSheaf) hS (genericPoint X)
   have hinj : Function.Injective (PresheafOfModules.stalkMapₗ S.f.val (genericPoint X)) :=
-    (AddCommGrpCat.mono_iff_injective _).1 hst.mono_f
+    have := hS.mono_f
+    injective_stalkMapₗ_of_mono S.f (genericPoint X)
   have hsurj : Function.Surjective (PresheafOfModules.stalkMapₗ S.g.val (genericPoint X)) :=
     (AddCommGrpCat.epi_iff_surjective _).1 hst.epi_g
   have hrange : LinearMap.range (PresheafOfModules.stalkMapₗ S.f.val (genericPoint X)) =

@@ -613,6 +613,14 @@ lemma Hom.stalkMap_sum {κ : Type*} (s : Finset κ) (φ : κ → (M ⟶ N)) (x :
 instance (φ : M ⟶ N) [IsIso φ] (x : X) : IsIso (φ.stalkMap x) :=
   (toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).map_isIso φ
 
+/-- **A monomorphism of sheaves of modules is injective on stalks.** Taking stalks is left
+exact, so it preserves monomorphisms, and a monomorphism of abelian groups is injective. -/
+lemma injective_stalkMapₗ_of_mono (φ : M ⟶ N) [Mono φ] (x : X) :
+    Function.Injective (PresheafOfModules.stalkMapₗ φ.val x) :=
+  have : Mono (C := SheafOfModules.{u} X.ringCatSheaf) φ := inferInstance
+  (AddCommGrpCat.mono_iff_injective _).1
+    ((SheafOfModules.stalkFunctor X.ringCatSheaf x).map_mono φ)
+
 /-- **The germs in the image of a morphism are the germs of the sections in its image.** Since
 every element of a stalk is the germ of a section over some open neighbourhood, the image of
 `φ` on the stalk at `x` is the union over the open neighbourhoods `U` of `x` of the germs of the
@@ -985,6 +993,56 @@ noncomputable def pullbackUnitIso :
     inferInstanceAs (Modules.pushforward f).IsRightAdjoint
   have := SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal (φ := f.toRingCatSheafHom)
   asIso (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom)
+
+section IsIso
+
+variable {Z : Scheme.{u}} (ι : Z ⟶ Y) [IsIso ι]
+
+/-- **Pulling back along an isomorphism is an equivalence** of the categories of sheaves of
+modules, with inverse the pullback along the inverse isomorphism:
+
+```text
+                    pullback ι
+      Y.Modules  ───────────────▶  Z.Modules
+          ▲                            │
+          └────────────────────────────┘
+                 pullback (inv ι)
+
+  pullback ι ⋙ pullback (inv ι) ≅ pullback (inv ι ≫ ι) = pullback (𝟙 Y) ≅ 𝟭 Y.Modules
+  pullback (inv ι) ⋙ pullback ι ≅ pullback (ι ≫ inv ι) = pullback (𝟙 Z) ≅ 𝟭 Z.Modules
+```
+-/
+noncomputable def pullbackEquivOfIsIso : Y.Modules ≌ Z.Modules :=
+  .mk (pullback ι) (pullback (inv ι))
+    ((pullbackComp (inv ι) ι ≪≫ pullbackCongr (IsIso.inv_hom_id ι) ≪≫ pullbackId Y).symm)
+    (pullbackComp ι (inv ι) ≪≫ pullbackCongr (IsIso.hom_inv_id ι) ≪≫ pullbackId Z)
+
+/-- **The direct image along an isomorphism is the inverse image along its inverse**, both being
+right adjoint to the inverse image along the isomorphism:
+
+```text
+      pullback ι ⊣ pushforward ι        pullback ι ⊣ pullback (inv ι)
+
+                   pullback ι
+      Y.Modules  ───────────────▶  Z.Modules
+                 ◀───────────────
+           pushforward ι  ≅  pullback (inv ι)
+```
+-/
+noncomputable def pushforwardIsoPullbackInv : pushforward ι ≅ pullback (inv ι) :=
+  (pullbackPushforwardAdjunction ι).rightAdjointUniq (pullbackEquivOfIsIso ι).toAdjunction
+
+/-- **The direct image of the structure sheaf along an isomorphism is the structure sheaf**:
+
+```text
+  (pushforward ι).obj 𝒪_Z  ≅  (pullback (inv ι)).obj 𝒪_Z  ≅  𝒪_Y
+```
+-/
+noncomputable def pushforwardStructureModulesIso :
+    (pushforward ι).obj Z.structureModules ≅ Y.structureModules :=
+  (pushforwardIsoPullbackInv ι).app _ ≪≫ pullbackUnitIso (inv ι)
+
+end IsIso
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **Base change for the pullback of sheaves of modules.** Restricting the pullback of `M`
@@ -2382,6 +2440,56 @@ theorem isIso_homOfSectionTop [Subsingleton X] {M : X.Modules} (m : Γ(M, ⊤))
   refine isIso_of_isIso_app_top _ ?_
   rw [ConcreteCategory.isIso_iff_bijective, funext (homOfSectionTop_app_top M m)]
   exact hm
+
+section Pushforward
+
+variable {Y : Scheme.{u}} (f : X ⟶ Y) (M : X.Modules)
+
+/-- The sections of a direct image over an open whose preimage is empty vanish. -/
+lemma subsingleton_sections_pushforward_of_preimage_eq_bot {W : Y.Opens} (hW : f ⁻¹ᵁ W = ⊥) :
+    Subsingleton Γ((pushforward f).obj M, W) := by
+  have h : Γ((pushforward f).obj M, W) = Γ(M, ⊥) := by
+    rw [pushforward_obj_obj f M W, hW]
+  rw [h]
+  infer_instance
+
+/-- **The stalk of a direct image vanishes at a point having a neighbourhood with empty
+preimage.** -/
+lemma subsingleton_stalk_pushforward_of_preimage_eq_bot {y : Y} {W : Y.Opens} (hy : y ∈ W)
+    (hW : f ⁻¹ᵁ W = ⊥) : Subsingleton (((pushforward f).obj M).presheaf.stalk y) := by
+  refine ⟨fun a b ↦ ?_⟩
+  obtain ⟨U, hyU, s, rfl⟩ := ((pushforward f).obj M).presheaf.exists_germ_eq a
+  obtain ⟨V, hyV, t, rfl⟩ := ((pushforward f).obj M).presheaf.exists_germ_eq b
+  have hyW : y ∈ U ⊓ V ⊓ W := ⟨⟨hyU, hyV⟩, hy⟩
+  have hbot : f ⁻¹ᵁ (U ⊓ V ⊓ W) = ⊥ := by
+    rw [← le_bot_iff, ← hW]
+    exact fun x hx ↦ hx.2
+  have : Subsingleton Γ((pushforward f).obj M, U ⊓ V ⊓ W) :=
+    subsingleton_sections_pushforward_of_preimage_eq_bot f M hbot
+  rw [← TopCat.Presheaf.germ_res_apply ((pushforward f).obj M).presheaf
+      (homOfLE (inf_le_left.trans inf_le_left) : U ⊓ V ⊓ W ⟶ U) y hyW s,
+    ← TopCat.Presheaf.germ_res_apply ((pushforward f).obj M).presheaf
+      (homOfLE (inf_le_left.trans inf_le_right) : U ⊓ V ⊓ W ⟶ V) y hyW t]
+  exact congrArg _ (Subsingleton.elim _ _)
+
+/-- **The stalks of a direct image vanish off the closure of the image.** -/
+lemma subsingleton_stalk_pushforward_of_notMem_closure_range {y : Y}
+    (hy : y ∉ closure (Set.range f.base)) :
+    Subsingleton (((pushforward f).obj M).presheaf.stalk y) :=
+  subsingleton_stalk_pushforward_of_preimage_eq_bot f M
+    (W := ⟨(closure (Set.range f.base))ᶜ, isClosed_closure.isOpen_compl⟩) hy
+    (by
+      ext x
+      simpa using subset_closure (Set.mem_range_self x))
+
+/-- **The stalks of a direct image vanish off the image**, when that image is closed — for
+instance for a closed immersion. -/
+lemma subsingleton_stalk_pushforward_of_notMem_range (hf : IsClosed (Set.range f.base)) {y : Y}
+    (hy : y ∉ Set.range f.base) :
+    Subsingleton (((pushforward f).obj M).presheaf.stalk y) :=
+  subsingleton_stalk_pushforward_of_notMem_closure_range f M (by rwa [hf.closure_eq])
+
+end Pushforward
 
 end Subsingleton
 

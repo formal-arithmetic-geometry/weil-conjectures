@@ -21,6 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Units
 public import WeilConjectures.AlgebraicGeometry.CubeTheorem
+public import WeilConjectures.AlgebraicGeometry.Degree
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.IntersectionNumber
@@ -30,6 +31,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.FibrewiseCriteria
 public import WeilConjectures.AlgebraicGeometry.Modules.Flat
+public import WeilConjectures.AlgebraicGeometry.Modules.GenericRank
 public import WeilConjectures.AlgebraicGeometry.Modules.GloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.Modules.HyperplaneSection
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
@@ -269,6 +271,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
