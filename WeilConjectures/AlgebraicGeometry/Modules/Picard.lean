@@ -54,6 +54,10 @@ braided; the Picard group is then the group of units of that commutative monoid.
   Picard group.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`: two invertible `𝒪ₓ`-modules have the same class
   in the Picard group of `X` if and only if they are isomorphic.
+- `AlgebraicGeometry.Scheme.Modules.invertible_cons`,
+  `AlgebraicGeometry.Scheme.Modules.invertible_update` and
+  `AlgebraicGeometry.Scheme.Modules.invertible_append`: prepending, replacing one member of and
+  concatenating families of invertible `𝒪ₓ`-modules.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
   the Picard group of `X` if and only if it is isomorphic to the structure sheaf.
 
@@ -370,5 +374,44 @@ isomorphic to the structure sheaf. -/
 theorem Pic.mk_eq_one_iff {M : X.Modules} {hM : M.Invertible} :
     Pic.mk M hM = 1 ↔ Nonempty (M ≅ 𝟙_ X.Modules) := by
   rw [← Pic.mk_tensorUnit X, Pic.mk_eq_mk_iff]
+
+namespace Modules
+
+variable {r : ℕ}
+
+/-- Prepending an invertible `𝒪ₓ`-module to a family of invertible `𝒪ₓ`-modules gives a family
+of invertible `𝒪ₓ`-modules. -/
+theorem invertible_cons {M : X.Modules} (hM : M.Invertible) {L : Fin r → X.Modules}
+    (hL : ∀ i, (L i).Invertible) (i : Fin (r + 1)) :
+    ((Fin.cons M L : Fin (r + 1) → X.Modules) i).Invertible := by
+  induction i using Fin.cases with
+  | zero => rwa [Fin.cons_zero]
+  | succ i =>
+    rw [Fin.cons_succ]
+    exact hL i
+
+/-- Replacing one member of a family of invertible `𝒪ₓ`-modules by an invertible `𝒪ₓ`-module
+gives a family of invertible `𝒪ₓ`-modules. -/
+theorem invertible_update {L : Fin r → X.Modules} (hL : ∀ i, (L i).Invertible) {j : Fin r}
+    {M : X.Modules} (hM : M.Invertible) (i : Fin r) : (Function.update L j M i).Invertible := by
+  rcases eq_or_ne i j with rfl | h
+  · rwa [Function.update_self]
+  · rw [Function.update_of_ne h]
+    exact hL i
+
+/-- The concatenation of two families of invertible `𝒪ₓ`-modules is a family of invertible
+`𝒪ₓ`-modules. -/
+theorem invertible_append {r' : ℕ} {M : Fin r → X.Modules} {N : Fin r' → X.Modules}
+    (hM : ∀ i, (M i).Invertible) (hN : ∀ i, (N i).Invertible) (j : Fin (r + r')) :
+    (Fin.append M N j).Invertible := by
+  induction j using Fin.addCases with
+  | left i =>
+    rw [Fin.append_left]
+    exact hM i
+  | right i =>
+    rw [Fin.append_right]
+    exact hN i
+
+end Modules
 
 end AlgebraicGeometry.Scheme

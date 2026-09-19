@@ -892,7 +892,7 @@ AlgebraicGeometry.Scheme.Modules.intersectionNumber_cons_zpow,
 AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_tensorObj,
 AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_tensorUnit,
 AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_zpow}
-\uses{def:deg-intersection}
+\uses{def:deg-intersection, lem:deg-intersection-symmetric}
 Let $X$ be a projective scheme over $k$, let $F$ be coherent with $\dim F\leq
 d$, let $M,N,L_2,\dots,L_d$ be line bundles on $X$ and let $n\in\Z$.  Then
 \begin{enumerate}
@@ -902,9 +902,10 @@ d$, let $M,N,L_2,\dots,L_d$ be line bundles on $X$ and let $n\in\Z$.  Then
   \item $(M^{\otimes n}\cdot L_2\cdots L_d\cdot F)
         =n\,(M\cdot L_2\cdots L_d\cdot F)$.
 \end{enumerate}
-By \Cref{lem:deg-intersection-symmetric} the same holds in every slot; thus
-$(L_1\cdots L_d\cdot F)$ is a symmetric $\Z$-multilinear function of the
-classes of $L_1,\dots,L_d$ in $\mathrm{Pic}(X)$.
+Part (2) needs none of the hypotheses of the statement: it holds for an
+arbitrary scheme $X$ over $k$, an arbitrary $\O_X$-module $F$ and arbitrary
+line bundles $L_2,\dots,L_d$.  By \Cref{lem:deg-intersection-symmetric} all
+three statements hold in every slot, and not only in the first.
 \end{theorem}
 \begin{proof}
 \uses{thm:deg-snapper, lem:deg-difference-explicit,
@@ -947,13 +948,26 @@ not depend on its first variable, since $\O_X^{\otimes m_1}=\O_X$ for every
 $m_1$.  Hence $\Delta_1$ annihilates it, and
 \Cref{lem:deg-intersection-is-top-difference} gives (2).
 
-\emph{(3).}  For $n\geq0$ this follows from (1) and (2) by induction on $n$,
-writing $M^{\otimes n}=M^{\otimes(n-1)}\otimes M$ and $M^{\otimes0}=\O_X$.  For
-$n=-1$, apply (1) to $M$ and $M^{-1}$ and use (2):
-$0=(\O_X\cdot\cdots)=(M\cdot\cdots)+(M^{-1}\cdot\cdots)$, so
-$(M^{-1}\cdot\cdots)=-(M\cdot\cdots)$.  The case of general $n<0$ follows by
-applying the non-negative case to $M^{-1}$.
+\emph{(3).}  The class of $M^{\otimes(x+y)}$ in $\mathrm{Pic}(X)$ is that of
+$M^{\otimes x}\otimes M^{\otimes y}$, so by (1) the function
+$n\mapsto(M^{\otimes n}\cdot L_2\cdots L_d\cdot F)$ is a homomorphism of
+additive groups $\Z\to\Z$.  Such a homomorphism is multiplication by its value
+at $1$, which is $(M\cdot L_2\cdots L_d\cdot F)$.  This treats every integer
+$n$ at once, negative ones included, and uses neither (2) nor an induction.
 \end{proof}
+
+\begin{remark}[Multilinearity as a multilinear map]
+\label{rem:deg-intersection-multilinear-map}
+\uses{thm:deg-intersection-multilinear, lem:deg-intersection-symmetric}
+Taken together, \Cref{thm:deg-intersection-multilinear} and
+\Cref{lem:deg-intersection-symmetric} say that $(L_1\cdots L_d\cdot F)$ is a
+symmetric $\Z$-multilinear function of the classes of $L_1,\dots,L_d$ in
+$\mathrm{Pic}(X)$.  This reading is not formalised: exhibiting an actual
+multilinear map on $\mathrm{Pic}(X)^d$ means choosing a representative line
+bundle for each class, which the skeleton of the category of $\O_X$-modules
+allows but which is separate work.  What is formalised is the statement in
+terms of the line bundles themselves, in every slot.
+\end{remark}
 
 \begin{corollary}[Scaling the top self-intersection]
 \label{cor:deg-intersection-powers}
@@ -967,12 +981,16 @@ bundle on $X$ and let $n\in\Z$.  Then
 \end{corollary}
 \begin{proof}
 \uses{thm:deg-intersection-multilinear, lem:deg-intersection-symmetric}
-Apply \Cref{thm:deg-intersection-multilinear}(3) in the first slot, then in the
-second, and so on; by \Cref{lem:deg-intersection-symmetric} each application is
-legitimate and each contributes a factor $n$.  Formally: induction on
-$0\leq j\leq g$ shows
-$\bigl((L^{\otimes n})^j\cdot L^{g-j}\bigr)=n^j(L^g)$, the inductive step being
-\Cref{thm:deg-intersection-multilinear}(3) in the $(j+1)$-st slot.
+Replace the copies of $L$ by copies of $L^{\otimes n}$ one slot at a time,
+each replacement being \Cref{thm:deg-intersection-multilinear}(3) in that slot
+and contributing a factor $n$.  Formally, index the slots already replaced by a
+subset $s\subseteq\{1,\dots,g\}$ and induct on $s$; no slot ever has to be
+moved into position, so \Cref{lem:deg-intersection-symmetric} is used only
+inside \Cref{thm:deg-intersection-multilinear}(3) itself.  The same induction
+proves the more general statement
+$\bigl(L_1^{\otimes n_1}\cdots L_g^{\otimes n_g}\bigr)
+=n_1\cdots n_g\,(L_1\cdots L_g)$ for line bundles $L_1,\dots,L_g$ and integers
+$n_1,\dots,n_g$, of which the displayed formula is the constant case.
 \end{proof}
 
 \begin{lemma}[D\'evissage of a coherent sheaf]\label{lem:deg-devissage}
