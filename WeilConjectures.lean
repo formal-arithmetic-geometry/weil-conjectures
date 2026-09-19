@@ -24,6 +24,7 @@ public import WeilConjectures.AlgebraicGeometry.CubeTheorem
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.IntersectionNumber
+public import WeilConjectures.AlgebraicGeometry.IntersectionPositivity
 public import WeilConjectures.AlgebraicGeometry.MiracleFlatness
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Dimension
