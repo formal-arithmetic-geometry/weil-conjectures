@@ -89,6 +89,7 @@ variable (k : Type u) [Field k] {Y : Scheme.{u}} [Y.Over (Spec (.of k))] [Infini
   [IsProper (Y ↘ Spec (.of k))] [IsIntegral Y] {A : Y.Modules} (hA : A.Invertible)
   (hAa : A.IsAmple) {d : ℕ} (hd : topologicalKrullDim Y = (d : WithBot ℕ∞))
 
+omit [Infinite k] in
 /-- **The identity `(L₁ ⋯ L_d · F) = rk F · (L₁ ⋯ L_d)` is stable under extensions**: if the two
 outer terms of a short exact sequence of coherent sheaves satisfy it, so does the middle term.
 Both sides are additive along a short exact sequence — the intersection number by
@@ -196,7 +197,7 @@ theorem intersectionNumber_eq_genericRank_mul (F : Y.Modules) [F.IsCoherent]
       obtain ⟨hcohs, hmono, hpush⟩ := hstep j
       have hcohc : (cokernel (φ j)).IsCoherent :=
         isCoherent_cokernel (φ j) inferInstance hcohs
-      refine ⟨hcohs, intersectionNumber_eq_genericRank_mul_of_shortExact k hA hAa hd
+      refine ⟨hcohs, intersectionNumber_eq_genericRank_mul_of_shortExact k
         (ShortComplex.shortExact_mk_cokernelπ (φ j)) L hL ih ?_⟩
       exact intersectionNumber_eq_genericRank_mul_of_isPushforwardIdealSheaf k hA hAa hd
         (cokernel (φ j)) hpush L hL
