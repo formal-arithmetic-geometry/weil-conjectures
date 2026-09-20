@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import WeilConjectures.AlgebraicGeometry.Group.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardField
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 
@@ -52,6 +53,8 @@ monoidality of `π^*`.
 - `SheafOfModules.Invertible.nonempty_pullback_toUnit_comp_iso_tensorUnit`: the same, for `S`
   and `V` presented as objects of `Over B` and a section `v : 𝟙_ (Over B) ⟶ V`, the constant
   morphism at `v` being `toUnit S ≫ v`.
+- `AlgebraicGeometry.Scheme.Pic.map_one_left`: the special case of a monoid scheme `G` over `B`
+  and its unit section, so that the constant morphism is the trivial `W`-point `1 : W ⟶ G`.
 
 ## Implementation notes
 
@@ -75,6 +78,8 @@ which the consumers of the chapter state ampleness, so no bridge between the two
 universe u
 
 open CategoryTheory MonoidalCategory CartesianMonoidalCategory
+
+open scoped MonObj
 
 namespace AlgebraicGeometry.Scheme
 
@@ -125,6 +130,17 @@ theorem _root_.SheafOfModules.Invertible.nonempty_pullback_toUnit_comp_iso_tenso
     {N : V.left.Modules} (hN : N.Invertible) (v : 𝟙_ (Over B) ⟶ V) :
     Nonempty ((Modules.pullback (toUnit S ≫ v).left).obj N ≅ 𝟙_ S.left.Modules) :=
   hN.nonempty_pullback_comp_iso_tensorUnit S.hom v.left
+
+/-- **A Picard class pulled back along the constant morphism at the unit of a monoid scheme is
+trivial.** For a monoid scheme `G` over a base `B` with trivial Picard group, the trivial
+`W`-point `1 : W ⟶ G` is, on underlying schemes, the constant morphism at the unit section
+`η[G].left` (`AlgebraicGeometry.MonObj.one_left`), so this is the case `v = η[G]` of
+`AlgebraicGeometry.Scheme.Pic.map_comp_apply_eq_one`. -/
+@[simp]
+theorem Pic.map_one_left {G W : Over B} [MonObj G] (ℓ : G.left.Pic) :
+    Pic.map (1 : W ⟶ G).left ℓ = 1 := by
+  rw [MonObj.one_left]
+  exact Pic.map_comp_apply_eq_one W.hom η[G].left ℓ
 
 end OverBase
 

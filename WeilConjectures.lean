@@ -22,6 +22,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Units
 public import WeilConjectures.AlgebraicGeometry.EulerCharacteristicPositivity
+public import WeilConjectures.AlgebraicGeometry.Group.Basic
+public import WeilConjectures.AlgebraicGeometry.Group.CubeClass
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
 public import WeilConjectures.AlgebraicGeometry.IntersectionNumber
@@ -231,6 +233,7 @@ public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Funext
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Monad
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Variables
 public import WeilConjectures.Mathlib.Algebra.Ring.Equiv
+public import WeilConjectures.Mathlib.Algebra.Ring.Int.Parity
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic

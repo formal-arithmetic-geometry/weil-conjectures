@@ -26,6 +26,12 @@ on `X ×_S Y`. Base changing it along a third `S`-scheme `Z` gives the slice
 `X ×_S Z ⟶ (X ×_S Y) ×_S Z` of a triple product
 (`AlgebraicGeometry.pullbackMapSliceInclusionFst`).
 
+When `X`, `Y` and `Z` are presented as objects of the cartesian monoidal category `Over S` and
+the base points as sections `𝟙_ (Over S) ⟶ _`, the three slices of the triple product
+`(X ⊗ Y) ⊗ Z` are the evident cartesian lifts; that is
+`AlgebraicGeometry.sliceInclusionFst_eq_lift` and its two companions, which is what lets a
+statement about slices of a triple product be applied to a group object in `Over S`.
+
 ## Flat base change of global sections
 
 Let `X` be a separated scheme over `Spec R`, let `φ : R ⟶ R'` be a flat ring map and let
@@ -463,5 +469,80 @@ instance isOver_sliceInclusionSnd (x₀ : S ⟶ X) (hx₀ : x₀ ≫ X ↘ S = �
     rw [← Category.assoc, sliceInclusionSnd_snd, Category.id_comp]⟩
 
 end Over
+
+section OverCartesian
+
+open MonoidalCategory CartesianMonoidalCategory
+
+variable {S : Scheme.{u}} (A B C : Over S)
+
+/-- **The slice `A × B × {z₀}` of a triple product is a cartesian lift.** For three objects
+`A`, `B`, `C` of `Over S` and a section `z₀ : 𝟙_ (Over S) ⟶ C`, the slice inclusion of the
+triple product `(A ×_S B) ×_S C` through `z₀` is, on underlying schemes, the morphism
+`⟨𝟙, z₀⟩ : A ⊗ B ⟶ (A ⊗ B) ⊗ C` of `Over S`. Both sides are determined by their two
+projections:
+
+```
+            j = ⟨𝟙, z₀⟩                                j = ⟨𝟙, z₀⟩
+ A ⊗ B ──────────────────▶ (A⊗B) ⊗ C       A ⊗ B ──────────────────▶ (A⊗B) ⊗ C
+    ╲                          │              ╲                          │
+  𝟙  ╲                         │ pr₁           ╲ toUnit ≫ z₀             │ pr₂
+      ◥                        ▼                 ◥                       ▼
+       ──────────────────▶ A ⊗ B                  ──────────────────────▶ C
+```
+-/
+theorem sliceInclusionFst_eq_lift (z₀ : 𝟙_ (Over S) ⟶ C) :
+    sliceInclusionFst (pullback.fst A.hom B.hom ≫ A.hom) C.hom z₀.left (Over.w z₀) =
+      (lift (𝟙 (A ⊗ B)) (toUnit (A ⊗ B) ≫ z₀) : A ⊗ B ⟶ (A ⊗ B) ⊗ C).left := by
+  refine pullback.hom_ext ?_ ?_ <;>
+    simp [sliceInclusionFst, Over.lift_left, Over.comp_left, Over.toUnit_left]
+
+/-- **The slice `A × {y₀} × C` of a triple product is a cartesian lift.** For three objects
+`A`, `B`, `C` of `Over S` and a section `y₀ : 𝟙_ (Over S) ⟶ B`, the base change along `C` of
+the slice inclusion of `A ×_S B` through `y₀` is, on underlying schemes, the morphism
+`⟨⟨pr₁, y₀⟩, pr₂⟩ : A ⊗ C ⟶ (A ⊗ B) ⊗ C` of `Over S`. Both sides are determined by their three
+projections:
+
+```
+                 j                              j                            j
+  A ⊗ C ──────────────▶ (A⊗B) ⊗ C   A ⊗ C ─────────▶ (A⊗B) ⊗ C   A ⊗ C ─────────▶ (A⊗B) ⊗ C
+     ╲                      │          ╲                 │          ╲                 │
+  pr₁ ╲              pr₁ ≫ pr₁          ╲ toUnit ≫ y₀    │ pr₁≫pr₂    ╲ pr₂           │ pr₂
+       ◥                    ▼             ◥              ▼             ◥               ▼
+        ─────────────────▶ A               ──────────▶ B                ──────────────▶ C
+```
+-/
+theorem pullbackMapSliceInclusionFst_eq_lift (y₀ : 𝟙_ (Over S) ⟶ B) :
+    pullbackMapSliceInclusionFst A.hom B.hom C.hom y₀.left (Over.w y₀) =
+      (lift (lift (fst A C) (toUnit (A ⊗ C) ≫ y₀)) (snd A C) :
+        A ⊗ C ⟶ (A ⊗ B) ⊗ C).left := by
+  refine pullback.hom_ext (pullback.hom_ext ?_ ?_) ?_ <;>
+    simp [pullbackMapSliceInclusionFst, sliceInclusionFst, Over.lift_left, Over.comp_left,
+      Over.toUnit_left]
+
+/-- **The slice `{x₀} × B × C` of a triple product is a cartesian lift.** For three objects
+`A`, `B`, `C` of `Over S` and a section `x₀ : 𝟙_ (Over S) ⟶ A`, the base change along `C` of
+the slice inclusion of `A ×_S B` through `x₀` is, on underlying schemes, the morphism
+`⟨⟨x₀, pr₁⟩, pr₂⟩ : B ⊗ C ⟶ (A ⊗ B) ⊗ C` of `Over S`. Both sides are determined by their three
+projections:
+
+```
+                 j                              j                            j
+  B ⊗ C ──────────────▶ (A⊗B) ⊗ C   B ⊗ C ─────────▶ (A⊗B) ⊗ C   B ⊗ C ─────────▶ (A⊗B) ⊗ C
+     ╲                      │          ╲                 │          ╲                 │
+      ╲ toUnit ≫ x₀  pr₁ ≫ pr₁          ╲ pr₁            │ pr₁≫pr₂    ╲ pr₂           │ pr₂
+       ◥                    ▼             ◥              ▼             ◥               ▼
+        ─────────────────▶ A               ──────────▶ B                ──────────────▶ C
+```
+-/
+theorem pullbackMapSliceInclusionSnd_eq_lift (x₀ : 𝟙_ (Over S) ⟶ A) :
+    pullbackMapSliceInclusionSnd A.hom B.hom C.hom x₀.left (Over.w x₀) =
+      (lift (lift (toUnit (B ⊗ C) ≫ x₀) (fst B C)) (snd B C) :
+        B ⊗ C ⟶ (A ⊗ B) ⊗ C).left := by
+  refine pullback.hom_ext (pullback.hom_ext ?_ ?_) ?_ <;>
+    simp [pullbackMapSliceInclusionSnd, sliceInclusionSnd, Over.lift_left, Over.comp_left,
+      Over.toUnit_left]
+
+end OverCartesian
 
 end AlgebraicGeometry

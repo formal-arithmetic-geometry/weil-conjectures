@@ -37,7 +37,10 @@ forward difference operator. This file collects the facts one needs about compos
 * `fwdDiffList`: the same composite indexed by a list of directions instead, so that
   concatenating two families of directions is `fwdDiffList_append`;
 * `eq_zero_of_fwdDiff_iter_eq_zero`: a function on `ℤ` killed by `Δ_[1]^[n + 1]` and with
-  vanishing differences `Δ_[1]^[j] Q 0` for `j ≤ n` is identically zero.
+  vanishing differences `Δ_[1]^[j] Q 0` for `j ≤ n` is identically zero;
+* `eq_one_of_add_one_mul_sub_one_eq_sq`: the multiplicative form of the case `n = 1`, that a
+  solution `u : ℤ → H` of the second-order recursion `u (m + 1) * u (m - 1) = u m ^ 2` in a
+  commutative group is determined by `u 0` and `u 1`.
 
 These are the operator identities of `lem:deg-difference-explicit` in the blueprint chapter on the
 degree of an isogeny.
@@ -288,3 +291,37 @@ theorem fwdDiffComp_eq_sum_powerset (v : Fin d → M) (f : M → G) (y : M) :
       show d + 1 - (S.card + 1) = d - S.card from by omega, ← add_assoc]
     simp only [neg_smul]
     abel
+
+/-- **Rigidity of the second-order multiplicative recursion.** A function `u : ℤ → H` with values
+in a commutative group which satisfies `u (m + 1) * u (m - 1) = u m ^ 2` for every `m` and is
+trivial at `0` and at `1` is trivial everywhere.
+
+There is no third base case: in a *group* the recursion at `m = 0` determines `u (-1)` from
+`u 0` and `u 1`, so `u (-1) = 1` is a consequence of the two hypotheses and not an extra one.
+
+Additively, the hypothesis says that the second difference `Δ_[1]^[2] u` vanishes and that `u`
+and `Δ_[1] u` vanish at `0`, so this is `eq_zero_of_fwdDiff_iter_eq_zero` at `n = 1`, read in
+`Additive H`. -/
+theorem eq_one_of_add_one_mul_sub_one_eq_sq {H : Type*} [CommGroup H] {u : ℤ → H}
+    (hu : ∀ m : ℤ, u (m + 1) * u (m - 1) = u m ^ 2) (h0 : u 0 = 1) (h1 : u 1 = 1) : u = 1 := by
+  have key : (fun m : ℤ ↦ Additive.ofMul (u m)) = 0 := by
+    refine eq_zero_of_fwdDiff_iter_eq_zero (n := 1) ?_ fun j hj ↦ ?_
+    · -- the recursion at `m + 1` is the vanishing of the second difference at `m`
+      funext m
+      have h := hu (m + 1)
+      rw [add_sub_cancel_right, pow_two] at h
+      replace h := congrArg Additive.ofMul h
+      simp only [ofMul_mul] at h
+      simp only [Function.iterate_succ_apply', Function.iterate_zero_apply, fwdDiff_apply,
+        Pi.zero_apply]
+      set a := Additive.ofMul (u (m + 1 + 1))
+      set b := Additive.ofMul (u (m + 1))
+      set c := Additive.ofMul (u m)
+      rw [show a - b - (b - c) = a + c - (b + b) by abel, h, sub_self]
+    · -- the two base cases are `u 0 = 1` and `u 1 = 1`
+      have hj' : j = 0 ∨ j = 1 := by omega
+      rcases hj' with rfl | rfl <;> simp [fwdDiff_apply, h0, h1]
+  funext m
+  have h := congrFun key m
+  simp only [Pi.zero_apply] at h
+  simpa using Additive.ofMul.injective (h.trans ofMul_one.symm)

@@ -54,8 +54,8 @@ braided; the Picard group is then the group of units of that commutative monoid.
   Picard group.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`: two invertible `𝒪ₓ`-modules have the same class
   in the Picard group of `X` if and only if they are isomorphic.
-- `AlgebraicGeometry.Scheme.Pic.exists_mk`: every class in the Picard group of `X` is the class
-  of an invertible `𝒪ₓ`-module.
+- `SheafOfModules.Pic.exists_mk` and `AlgebraicGeometry.Scheme.Pic.exists_mk`: every class in
+  the Picard group is the class of an invertible sheaf of modules.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
   the Picard group of `X` if and only if it is isomorphic to the structure sheaf.
 
@@ -278,6 +278,19 @@ theorem Pic.mk_eq_mk_iff {hM : M.Invertible} {hN : N.Invertible} :
     Pic.mk M hM = Pic.mk N hN ↔ Nonempty (M ≅ N) := by
   change hM.unit = hN.unit ↔ _
   rw [← Units.val_inj, hM.unit_spec, hN.unit_spec, toSkeleton_eq_toSkeleton_iff]
+
+/-- **Every class in the Picard group is the class of an invertible sheaf of modules**: a
+representative is the chosen representative of the isomorphism class in the skeleton. -/
+theorem Pic.exists_mk (x : Pic R) :
+    ∃ (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R))
+      (hM : M.Invertible), Pic.mk M hM = x := by
+  have hx : IsUnit (toSkeleton ((fromSkeleton _).obj
+      (x : (Skeleton (SheafOfModules.{u}
+        ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)))ˣ).val)) := by
+    rw [toSkeleton_fromSkeleton_obj]
+    exact (x : (Skeleton (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)))ˣ).isUnit
+  exact ⟨_, hx, Units.ext (hx.unit_spec.trans (toSkeleton_fromSkeleton_obj _))⟩
 
 /-- The class of a tensor product is the product of the classes. -/
 @[simp]

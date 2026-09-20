@@ -1841,7 +1841,8 @@ clopen, which is Steps 1 to 3 of the proof of \Cref{thm:cube-cube} below.
 \end{remark}
 
 \begin{theorem}[Theorem of the cube]\label{thm:cube-cube}
-\lean{AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_map_sliceInclusion_eq_one}
+\lean{AlgebraicGeometry.Scheme.Pic.eq_one_of_map_sliceInclusion_eq_one,
+AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_map_sliceInclusion_eq_one}
 Let $X$ and $Y$ be proper varieties over $k$, let $Z$ be a connected reduced
 scheme of finite type over $k$, and let $x_0\in X(k)$, $y_0\in Y(k)$,
 $z_0\in Z(k)$.  Let $L$ be a line bundle on $X\times Y\times Z$ whose
@@ -2051,8 +2052,9 @@ monoidality of $\pi^*$.
 \begin{theorem}[The cube identity on an abelian variety]
 \label{thm:cube-abelian}
 \uses{def:av-abelian-variety}
-\lean{AlgebraicGeometry.IsAbelianVariety.cubeClass_eq_one,
-AlgebraicGeometry.IsAbelianVariety.nonempty_cube_iso}
+\lean{AlgebraicGeometry.Scheme.Pic.cubeClass_proj_eq_one,
+AlgebraicGeometry.Scheme.Pic.cubeClass_eq_one,
+AlgebraicGeometry.IsAbelianVariety.nonempty_pullback_tensor_iso_tensor_pullback}
 Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
 Then the line bundle
 \[
@@ -2066,6 +2068,14 @@ all $f,g,h\in A(S)$,
   (f+g+h)^*L\otimes(f+g)^*L^{-1}\otimes(f+h)^*L^{-1}\otimes(g+h)^*L^{-1}
   \otimes f^*L\otimes g^*L\otimes h^*L\;\cong\;\O_S .
 \]
+The formalised statements are read in the Picard group of $S$, where the three
+inverses are honest inverses of classes.  The sheaf-level Lean statement is the
+equivalent rearrangement
+\[
+  (f+g+h)^*L\otimes f^*L\otimes g^*L\otimes h^*L\;\cong\;
+  (f+g)^*L\otimes(f+h)^*L\otimes(g+h)^*L ,
+\]
+which names no tensor inverse.
 \end{theorem}
 \begin{proof}
 \uses{thm:cube-cube, lem:cube-pullback-constant, def:av-abelian-variety,
@@ -2076,11 +2086,14 @@ scheme of finite type over $k$, by \Cref{def:av-abelian-variety} and
 \Cref{prop:av-basic}, and $e$ is a $k$-rational point.  What has to be checked
 is that $\Theta(L)$ restricts trivially to the three coordinate slices.
 
-The expression defining $\Theta(L)$ is symmetric under permuting the three
-factors of $A\times A\times A$, since the indexing sets $\{1,2\}$, $\{1,3\}$,
-$\{2,3\}$ and the projections $p_1,p_2,p_3$ are permuted among themselves.  So
-it is enough to treat one slice, say $\{e\}\times A\times A$, and the other two
-follow by symmetry.
+Write $\Theta(L)(f,g,h)$ for the class obtained from three $S$-points
+$f,g,h\in A(S)$ by the displayed seven-fold expression, so that $\Theta(L)$
+itself is $\Theta(L)(p_1,p_2,p_3)$.  This expression is symmetric under
+permuting $f$, $g$ and $h$, since the pairs $\{f,g\}$, $\{f,h\}$, $\{g,h\}$ and
+the three single points are permuted among themselves.  Each of the three
+slices sends one of $p_1,p_2,p_3$ to the constant point $e$, so all three
+computations reduce, by that symmetry, to the single computation with the first
+point equal to $e$.
 
 Identify $\{e\}\times A\times A$ with $A\times A$, with coordinates written
 $(y,z)$, and let $\iota\colon A\times A\to A\times A\times A$ be the
@@ -2121,7 +2134,7 @@ exactly the displayed isomorphism on $S$.
 
 \begin{corollary}[The recursion for $[n]^*L$]\label{cor:cube-mulby-recursion}
 \uses{def:av-abelian-variety, def:cube-mulby-int}
-\lean{AlgebraicGeometry.IsAbelianVariety.map_zpow_add_one_mul_map_zpow_sub_one}
+\lean{AlgebraicGeometry.Scheme.Pic.map_zpow_add_one_mul_map_zpow_sub_one}
 Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
 Then for every $n\in\Z$
 \[
@@ -2154,8 +2167,8 @@ isomorphism.
 \begin{theorem}[Pullback of a line bundle along $[n]$]
 \label{thm:cube-mulby-pullback}
 \uses{def:av-abelian-variety, def:cube-mulby-int}
-\lean{AlgebraicGeometry.IsAbelianVariety.map_zpow,
-AlgebraicGeometry.IsAbelianVariety.map_zpow_of_isSymmetric,
+\lean{AlgebraicGeometry.Scheme.Pic.map_zpow_left_eq_zpow_mul_zpow,
+AlgebraicGeometry.Scheme.Pic.map_zpow_left_eq_zpow_of_isSymmetric,
 AlgebraicGeometry.IsAbelianVariety.nonempty_pullback_mulBy_iso_tensorPow}
 Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
 Then for every $n\in\Z$
@@ -2183,11 +2196,13 @@ and $N^{\otimes b(n)}$ are ordinary tensor powers.  Let $P(n)$ be the assertion
   [n]^*L\;\cong\;L^{\otimes a(n)}\otimes N^{\otimes b(n)} .
 \]
 
-\emph{Three base cases.}  $P(0)$: $a(0)=b(0)=0$ and $[0]$ is the constant
+\emph{Two base cases.}  $P(0)$: $a(0)=b(0)=0$ and $[0]$ is the constant
 morphism at $e$ by \Cref{lem:cube-mulby-int-points}, so $[0]^*L$ is trivial by
 \Cref{lem:cube-pullback-constant}, which is $L^{\otimes0}\otimes N^{\otimes0}$.
-$P(1)$: $a(1)=1$, $b(1)=0$ and $[1]=\mathrm{id}_A$.  $P(-1)$: $a(-1)=0$,
-$b(-1)=1$ and $[-1]^*L=N$ by definition of $N$.
+$P(1)$: $a(1)=1$, $b(1)=0$ and $[1]=\mathrm{id}_A$.  There is no third base
+case: $P(-1)$ is the case $n=0$ of the downward recursion below, because in the
+group $\Pic(A)$ the relation at $n=0$ determines $[-1]^*L$ from $[0]^*L$ and
+$[1]^*L$.
 
 \emph{The arithmetic of the exponents.}  Both $a$ and $b$ are polynomials of
 degree two in $n$ with leading coefficient $\tfrac12$, so their second
@@ -2222,8 +2237,9 @@ hold.  \Cref{cor:cube-mulby-recursion} applied at $n$ can be read as
   \bigl([n+1]^*L\bigr)^{-1} ,
 \]
 and the same substitution, using $a(n-1)=2a(n)+1-a(n+1)$ and
-$b(n-1)=2b(n)+1-b(n+1)$, gives $P(n-1)$.  Starting from $P(0)$ and $P(-1)$
-this proves $P(n)$ for every $n\leq0$.
+$b(n-1)=2b(n)+1-b(n+1)$, gives $P(n-1)$.  Starting from $P(1)$ and $P(0)$, the
+case $n=0$ gives $P(-1)$ and the recursion then proves $P(n)$ for every
+$n\leq0$.
 
 Together the two inductions give $P(n)$ for every $n\in\Z$, which is the stated
 formula.  If moreover $[-1]^*L\cong L$, that is $N\cong L$, the formula becomes

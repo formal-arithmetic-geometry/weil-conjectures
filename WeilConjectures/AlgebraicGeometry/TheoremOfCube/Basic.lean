@@ -59,15 +59,19 @@ inside the base `Z` of the projection `p := pullback.snd (pullback.fst πX πY �
 
 ## Main statements
 
-All three are in the namespace `AlgebraicGeometry.Scheme.Modules`.
+All are in the namespace `AlgebraicGeometry.Scheme.Modules`, except for the Picard-group form
+of the theorem of the cube, which is in `AlgebraicGeometry.Scheme.Pic`.
 
 - `isOpen_setOf_nonempty_restrictToFiber_pullbackSnd_iso_structureModules_of_sliceInclusion` —
   the triviality locus of `L` on `Z` is open. This is Steps 2 and 3 of the blueprint's proof.
 - `nonempty_iso_structureModules_of_nonempty_restrictToFiber_pullbackSnd` — the theorem of the
   cube, asking triviality of `L` on the fibre over an arbitrary point of `Z`.
-- `nonempty_iso_structureModules_of_map_sliceInclusion_eq_one` (blueprint: `thm:cube-cube`) —
-  the theorem of the cube in the form the blueprint states it, asking triviality of `L` on the
-  slice `X × Y × {z₀}` through a rational point `z₀`.
+- `AlgebraicGeometry.Scheme.Pic.eq_one_of_map_sliceInclusion_eq_one` (blueprint:
+  `thm:cube-cube`) — the theorem of the cube in the form the blueprint states it, asking
+  triviality on the slice `X × Y × {z₀}` through a rational point `z₀`, and read in the Picard
+  group. This is the form the theorem is proved in.
+- `nonempty_iso_structureModules_of_map_sliceInclusion_eq_one` — the same statement read on
+  sheaves, a corollary of the previous one.
 
 ## Implementation notes
 
@@ -229,6 +233,49 @@ theorem nonempty_iso_structureModules_of_nonempty_restrictToFiber_pullbackSnd
     (fun t _ ↦ huniv.ge (Set.mem_univ t)) _ hw₀ ((Pic.map_mk_eq_one_iff _ hL).1 ?_)
   rw [← hcomp, Pic.map_comp_apply, hLY, map_one]
 
+/-- **The theorem of the cube, in the Picard group** (blueprint: `thm:cube-cube`).
+
+Let `X` and `Y` be proper geometrically integral varieties over a field `K`, let `Z` be a
+connected reduced `K`-scheme of finite type, and let `x₀`, `y₀` and `z₀` be rational points of
+`X`, `Y` and `Z`. Let `x` be a class in the Picard group of `X × Y × Z` whose restrictions to
+the three slices are trivial:
+
+```
+   X × {y₀} × Z ───▶   (X ×_K Y) ×_K Z   ◀─── {x₀} × Y × Z
+                              ▲
+                              │
+                        X × Y × {z₀}
+```
+
+Then `x = 1`.
+
+This is the form the theorem is proved in, the sheaf-level form
+`AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_map_sliceInclusion_eq_one`
+being its corollary: an arbitrary Picard class is the class of a line bundle
+(`AlgebraicGeometry.Scheme.Pic.exists_mk`), so nothing is lost, and the group-theoretic form is
+what the applications of the theorem — where the class is built out of several line bundles —
+are stated in.
+
+The Künneth hypothesis `hkunneth` is carried, not discharged; see the implementation notes of
+this file. -/
+theorem _root_.AlgebraicGeometry.Scheme.Pic.eq_one_of_map_sliceInclusion_eq_one
+    (z₀ : Spec (.of K) ⟶ Z) (hz₀ : z₀ ≫ πZ = 𝟙 _)
+    (x : (Limits.pullback (Limits.pullback.fst πX πY ≫ πX) πZ).Pic)
+    (hz : Pic.map (sliceInclusionFst (Limits.pullback.fst πX πY ≫ πX) πZ z₀ hz₀) x = 1)
+    (hX : Pic.map (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀) x = 1)
+    (hY : Pic.map (pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀) x = 1) :
+    x = 1 := by
+  obtain ⟨L, hL, rfl⟩ := Pic.exists_mk x
+  rw [Pic.mk_eq_one_iff, ← nonempty_iso_structureModules_iff]
+  -- the point of `Z` cut out by `z₀` lies in the triviality locus, because the restriction of
+  -- `L` to the slice through `z₀` is trivial
+  exact nonempty_iso_structureModules_of_nonempty_restrictToFiber_pullbackSnd πX πY πZ x₀ hx₀
+    y₀ hy₀ hkunneth hL (z₀ (IsLocalRing.closedPoint K))
+    ((Pic.map_infinitesimalBaseChangeFst_zero_mk_eq_one_iff _ _ hL).1
+      (Pic.map_infinitesimalBaseChangeFst_zero_eq_one_of_sliceInclusionFst _ πZ z₀ hz₀ _
+        (fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id Z K πZ z₀ hz₀) hL hz))
+    hX hY
+
 /-- **The theorem of the cube** (blueprint: `thm:cube-cube`).
 
 Let `X` and `Y` be proper geometrically integral varieties over a field `K`, let `Z` be a
@@ -245,6 +292,9 @@ slices are trivial:
 
 Then `L` is trivial.
 
+This is `AlgebraicGeometry.Scheme.Pic.eq_one_of_map_sliceInclusion_eq_one` read on sheaves
+through `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`.
+
 The Künneth hypothesis `hkunneth` is carried, not discharged; see the implementation notes of
 this file. -/
 theorem nonempty_iso_structureModules_of_map_sliceInclusion_eq_one
@@ -254,13 +304,10 @@ theorem nonempty_iso_structureModules_of_map_sliceInclusion_eq_one
       (Pic.mk L hL) = 1)
     (hLX : Pic.map (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀) (Pic.mk L hL) = 1)
     (hLY : Pic.map (pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀) (Pic.mk L hL) = 1) :
-    Nonempty (L ≅ (Limits.pullback (Limits.pullback.fst πX πY ≫ πX) πZ).structureModules) :=
-  nonempty_iso_structureModules_of_nonempty_restrictToFiber_pullbackSnd πX πY πZ x₀ hx₀ y₀ hy₀
-    hkunneth hL (z₀ (IsLocalRing.closedPoint K))
-    ((Pic.map_infinitesimalBaseChangeFst_zero_mk_eq_one_iff _ _ hL).1
-      (Pic.map_infinitesimalBaseChangeFst_zero_eq_one_of_sliceInclusionFst _ πZ z₀ hz₀ _
-        (fromInfinitesimalNeighborhood_zero_comp_of_comp_eq_id Z K πZ z₀ hz₀) hL hLz))
-    hLX hLY
+    Nonempty (L ≅ (Limits.pullback (Limits.pullback.fst πX πY ≫ πX) πZ).structureModules) := by
+  rw [nonempty_iso_structureModules_iff, ← Pic.mk_eq_one_iff (hM := hL)]
+  exact Pic.eq_one_of_map_sliceInclusion_eq_one πX πY πZ x₀ hx₀ y₀ hy₀ hkunneth z₀ hz₀ _
+    hLz hLX hLY
 
 end Cube
 
