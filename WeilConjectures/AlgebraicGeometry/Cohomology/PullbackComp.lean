@@ -228,6 +228,15 @@ lemma pullbackAddHom_comp (a : Z ⟶ X) (b : X ⟶ Y)
   rw [← Ext.mk₀_comp_mk₀, ← Ext.mk₀_comp_mk₀]
   simp only [Ext.comp_assoc_of_second_deg_zero]
 
+/-- The pullback map on cohomology transported along an equality of morphisms of schemes. -/
+lemma pullbackAddHom_eqToHom {c₁ c₂ : Z ⟶ Y} (h : c₁ = c₂)
+    (𝒢 : Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}) (n : ℕ) (e : 𝒢.H n) :
+    (pullbackAddHom c₁ 𝒢 n e).comp
+        (Ext.mk₀ (eqToHom (congrArg (fun m : Z ⟶ Y ↦ m.pullbackAb.obj 𝒢) h))) (add_zero n) =
+      pullbackAddHom c₂ 𝒢 n e := by
+  subst h
+  simp
+
 end H
 
 end Hom

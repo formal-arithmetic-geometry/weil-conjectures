@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.Cohomology.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersionBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharacteristic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalFunctions
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalTriviality
