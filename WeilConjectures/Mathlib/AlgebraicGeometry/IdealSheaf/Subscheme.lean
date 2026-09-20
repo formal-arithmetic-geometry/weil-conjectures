@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 /-!
 # Complements on the subscheme cut out by an ideal sheaf
 
-This file adds four independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
+This file adds five independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
 
 ## The ideal cut out on an arbitrary open subset
 
@@ -55,6 +55,17 @@ computes the base change of `I.subschemeι` along an arbitrary affine probe
 `Spec.map φ ≫ U.2.fromSpec`: it is the closed immersion cut out by the extended ideal
 `I(U)·S` (`AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`).
 
+## The reduced induced closed subscheme on a closed subset
+
+Mathlib defines the vanishing ideal sheaf `IdealSheafData.vanishingIdeal Z` of a closed subset
+`Z` of `X` and the closed subscheme `V(I).subscheme` it cuts out, but records nothing about
+its reducedness. The subscheme cut out by a radical ideal sheaf is reduced
+(`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme`), because on an affine open `U`
+it is `Spec (Γ(X, U) ⧸ I(U))`; and the vanishing ideal sheaf is radical, so
+`(vanishingIdeal Z).subscheme` — the *reduced induced closed subscheme structure* on `Z` — is
+reduced. Its underlying space is `Z`, so if `Z` is irreducible the subscheme is integral
+(`AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_vanishingIdeal`).
+
 ## The map to the scheme-theoretic image is scheme-theoretically dominant
 
 For a quasi-compact `f : X ⟶ Y`, Mathlib factors `f` as `f.toImage ≫ f.imageι` through the
@@ -80,6 +91,8 @@ the kernel ideal vanishes on a cover by affine opens.
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
+- `AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme`
+- `AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_vanishingIdeal`
 -/
 
 @[expose] public section
@@ -279,7 +292,6 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
   (isPullback_SpecMap_of_isPushout _ _ _ _
     (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
       (I.isPullback_subschemeCover_map U)
-
 
 /-! ### The reduced induced closed subscheme on a closed subset -/
 
