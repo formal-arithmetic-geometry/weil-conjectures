@@ -20,8 +20,9 @@ Let `f : W ⟶ T` be a morphism of schemes, let `t` be a point of `T`, write
 A finite family `m : ι → Γ(Iₙ, ⊤)` of global sections of the thickening ideal gives the
 comparison morphism `Φ : (i₀)_* (𝒪_{W₀} ^ ι) ⟶ Iₙ` of
 `AlgebraicGeometry.Scheme.pushforwardFreeToThickeningIdeal`. **Whenever `Φ` is an
-isomorphism** — which happens when the `m j` are the images of a `κ(t)`-basis of
-`𝔪_t ^ (n + 1) ⧸ 𝔪_t ^ (n + 2)`, and which is *not* proved here — the cohomology of the
+isomorphism** — which happens when `f` is flat and the `m j` are the images of a `κ(t)`-basis
+of `𝔪_t ^ (n + 1) ⧸ 𝔪_t ^ (n + 2)`, by
+`AlgebraicGeometry.Scheme.isIso_pushforwardFreeToThickeningIdeal` — the cohomology of the
 thickening ideal is an `ι`-fold power of the cohomology of the structure sheaf of the zeroth
 neighbourhood:
 

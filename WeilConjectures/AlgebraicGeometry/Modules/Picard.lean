@@ -54,12 +54,14 @@ braided; the Picard group is then the group of units of that commutative monoid.
   Picard group.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_mk_iff`: two invertible `𝒪ₓ`-modules have the same class
   in the Picard group of `X` if and only if they are isomorphic.
+- `AlgebraicGeometry.Scheme.Pic.exists_mk`: every class in the Picard group of `X` is the class
+  of an invertible `𝒪ₓ`-module.
+- `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
+  the Picard group of `X` if and only if it is isomorphic to the structure sheaf.
 - `AlgebraicGeometry.Scheme.Modules.invertible_cons`,
   `AlgebraicGeometry.Scheme.Modules.invertible_update` and
   `AlgebraicGeometry.Scheme.Modules.invertible_append`: prepending, replacing one member of and
   concatenating families of invertible `𝒪ₓ`-modules.
-- `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
-  the Picard group of `X` if and only if it is isomorphic to the structure sheaf.
 
 ## TODO
 
@@ -330,6 +332,16 @@ theorem Pic.mk_eq_mk_iff {M N : X.Modules} {hM : M.Invertible} {hN : N.Invertibl
     Pic.mk M hM = Pic.mk N hN ↔ Nonempty (M ≅ N) := by
   change hM.unit = hN.unit ↔ _
   rw [← Units.val_inj, hM.unit_spec, hN.unit_spec, toSkeleton_eq_toSkeleton_iff]
+
+/-- **Every class in the Picard group of `X` is the class of an invertible `𝒪ₓ`-module**: a
+representative is the chosen representative of the isomorphism class in the skeleton. -/
+theorem Pic.exists_mk (x : X.Pic) :
+    ∃ (M : X.Modules) (hM : M.Invertible), Pic.mk M hM = x := by
+  have hx : IsUnit (toSkeleton ((fromSkeleton X.Modules).obj (x : (Skeleton X.Modules)ˣ).val)) := by
+    rw [toSkeleton_fromSkeleton_obj]
+    exact (x : (Skeleton X.Modules)ˣ).isUnit
+  exact ⟨_, hx, Units.ext (α := Skeleton X.Modules)
+    (hx.unit_spec.trans (toSkeleton_fromSkeleton_obj _))⟩
 
 /-- Equal invertible `𝒪ₓ`-modules have equal classes in the Picard group of `X`, whichever
 proofs of invertibility they are given. -/
