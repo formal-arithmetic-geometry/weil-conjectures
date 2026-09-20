@@ -1493,8 +1493,13 @@ noetherianness and the base field enter.  The first of them, that
 $\Gamma(X\times Z_{n+1},\O)^\times\to\Gamma(X\times Z_n,\O)^\times$ is
 surjective and likewise for $Y$, is \Cref{lem:cube-thickening-units} and is
 now discharged: the Lean corollary that fills it in over a field is
-\texttt{Pic.map\_infinitesimalBaseChangeFst\_pullbackMapSliceInclusion\_eq\_one\_of\_isProper}
-in the namespace \texttt{AlgebraicGeometry.Scheme}.  What remains is the
+\texttt{Pic.map\_infinitesimalBaseChangeFst\_eq\_one\_of\_isProper} in the
+namespace \texttt{AlgebraicGeometry.Scheme}, which is what the rest of the
+chapter consumes and which is tagged on
+\Cref{lem:cube-thickening-trivial-fibre} below; the form tagged here, with the
+base case asked as the slice $X\times Y\times\{z_0\}$, is its corollary
+\texttt{Pic.map\_infinitesimalBaseChangeFst\_pullbackMapSliceInclusion\_eq\_one\_of\_isProper}.
+What remains is the
 second: that a deformation class on $(X\times Y)\times Z_{n+1}$ restricting to
 zero on both slices is zero, which is \texttt{prop:cube-kunneth-h1} together
 with the identification of the ideal of the thickening with
@@ -1602,6 +1607,41 @@ $H^1(W,\O_W)$, hence --- tensoring the injection with the finite-dimensional
 $k$-vector space $I_n$, which preserves injectivity --- injective on
 $H^1(W,\O_W)\otimes_kI_n$.  Therefore $\alpha=0$ and the class of $L^{(n)}$ in
 $\mathrm{Pic}(W\times Z_n)$ is trivial, which is the assertion for $n$.
+\end{proof}
+
+\begin{lemma}[Triviality over the infinitesimal neighbourhoods of an arbitrary
+point]\label{lem:cube-thickening-trivial-fibre}
+\lean{AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_eq_one_of_isProper}
+Let $X$ and $Y$ be proper varieties over $k$, let $x_0\in X(k)$ and
+$y_0\in Y(k)$, let $Z$ be a noetherian $k$-scheme and let $t\in Z$ be an
+\emph{arbitrary} point.  Let $L$ be a line bundle on $X\times Y\times Z$ whose
+restrictions to
+\[
+  \{x_0\}\times Y\times Z,\qquad
+  X\times\{y_0\}\times Z
+\]
+are trivial and which restricts to a trivial bundle on the fibre
+$(X\times Y)_t$.  For $n\in\N$ put $Z_n:=\Spec(\O_{Z,t}/\m_t^{n+1})$, with its
+canonical morphism $Z_n\to Z$.  Then the pullback of $L$ to
+$(X\times Y)\times Z_n$ is trivial for every $n\in\N$.
+\openobligation{AlgebraicGeometry: as for
+\Cref{lem:cube-thickening-trivial}, the Lean declaration tagged above carries
+the Kuenneth input as a hypothesis, spelled once as
+\texttt{AlgebraicGeometry.Scheme.IsCubeKunneth}.  The unit-extension input is
+discharged.}
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-thickening-trivial}
+This is the induction of \Cref{lem:cube-thickening-trivial} verbatim.  The
+$k$-rationality of $z_0$ is used there in the base case only, to identify
+$W\times Z_0$ with the slice $X\times Y\times\{z_0\}$; here the base case is
+asked directly on $W\times Z_0=(X\times Y)_t$, so no rational point of $Z$ is
+needed and $t$ may be any point.  The induction step uses nothing about $t$
+beyond the local ring $\O_{Z,t}$, which is again noetherian.
+
+\Cref{lem:cube-thickening-trivial} is recovered from this by taking
+$t$ to be the point picked out by $z_0$ and noting that
+$W\times Z_0=X\times Y\times\{z_0\}$ for a $k$-rational $z_0$.
 \end{proof}
 
 \begin{lemma}[Formal triviality gives a section near the point]
@@ -1757,7 +1797,51 @@ product $s\otimes u$ as in the proof of
 \Cref{lem:cube-triviality-criterion}, and the two proofs share it.
 \end{remark}
 
+\begin{lemma}[The triviality locus is open]
+\label{lem:cube-triviality-open}
+\lean{AlgebraicGeometry.Scheme.Modules.isOpen_setOf_nonempty_restrictToFiber_pullbackSnd_iso_structureModules_of_sliceInclusion}
+Let $X$ and $Y$ be proper varieties over $k$, let $x_0\in X(k)$ and
+$y_0\in Y(k)$, let $Z$ be a $k$-scheme of finite type and let $L$ be a line
+bundle on $X\times Y\times Z$ whose restrictions to
+\[
+  \{x_0\}\times Y\times Z,\qquad X\times\{y_0\}\times Z
+\]
+are trivial.  Write $W:=X\times Y$.  Then
+\[
+  Z':=\{z\in Z:L_z\text{ is a trivial line bundle on }W_z\}
+\]
+is open in $Z$.
+\openobligation{AlgebraicGeometry: the Lean declaration tagged above carries
+the Kuenneth input of \Cref{lem:cube-thickening-trivial-fibre} as a
+hypothesis, quantified over the point of $Z$ as well as over $n$.}
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-thickening-trivial-fibre, prop:cube-formal-triviality,
+lem:cube-product-variety}
+Let $z\in Z'$.  The hypotheses of \Cref{lem:cube-thickening-trivial-fibre}
+hold for $L$ at $z$: the restrictions to the two slices are trivial by
+hypothesis and do not depend on a base point of $Z$, and $L_z$ is trivial on
+$W_z$ because $z\in Z'$.  So the pullback of $L$ to $W\times Z_n$ is trivial
+for every $n$, where $Z_n=\Spec(\O_{Z,z}/\m_z^{n+1})$.  By
+\Cref{prop:cube-formal-triviality}, applied to the proper variety $W$ of
+\Cref{lem:cube-product-variety}, the finite type --- hence locally noetherian
+--- $k$-scheme $Z$ and the point $z$, there is an open $V\subseteq Z$ with
+$z\in V$ and $L_{z'}$ trivial for every $z'\in V$; that is,
+$z\in V\subseteq Z'$.
+\end{proof}
+
+\begin{remark}[The exact converse of \Cref{cor:cube-triviality-closed}]
+\label{rem:cube-triviality-open}
+\Cref{lem:cube-triviality-open} is the converse of
+\Cref{cor:cube-triviality-closed}, as \Cref{rem:cube-formal-triviality}
+anticipates, but the two are not parallel: closedness holds for any line
+bundle on any $W\times Z$, whereas openness needs the triple product, the two
+slice trivialisations and the K\"unneth formula.  Together they make $Z'$
+clopen, which is Steps 1 to 3 of the proof of \Cref{thm:cube-cube} below.
+\end{remark}
+
 \begin{theorem}[Theorem of the cube]\label{thm:cube-cube}
+\lean{AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_map_sliceInclusion_eq_one}
 Let $X$ and $Y$ be proper varieties over $k$, let $Z$ be a connected reduced
 scheme of finite type over $k$, and let $x_0\in X(k)$, $y_0\in Y(k)$,
 $z_0\in Z(k)$.  Let $L$ be a line bundle on $X\times Y\times Z$ whose
@@ -1767,11 +1851,20 @@ restrictions to
   X\times Y\times\{z_0\}
 \]
 are all trivial.  Then $L$ is trivial.
+\openobligation{AlgebraicGeometry: the Lean declaration tagged above is not
+the statement above but that statement with one extra hypothesis, the
+Kuenneth input of \Cref{lem:cube-thickening-trivial-fibre} quantified over the
+point of $Z$ and over $n$ and spelled as
+\texttt{AlgebraicGeometry.Scheme.IsCubeKunneth}.  It is carried unchanged from
+\Cref{lem:cube-thickening-trivial} through \Cref{lem:cube-triviality-open}.
+Discharging it there, which is \Cref{prop:cube-kunneth-h1} together with the
+identification of the ideal of the thickening, makes the Lean statement the
+statement above, with no other change.}
 \end{theorem}
 \begin{proof}
-\uses{lem:cube-thickening-trivial, prop:cube-formal-triviality,
-cor:cube-triviality-closed, cor:cube-seesaw-trivial,
-lem:cube-product-variety}
+\uses{lem:cube-thickening-trivial-fibre, lem:cube-triviality-open,
+prop:cube-formal-triviality, cor:cube-triviality-closed,
+cor:cube-seesaw-trivial, lem:cube-product-variety}
 Write $W:=X\times Y$, a proper variety over $k$ by
 \Cref{lem:cube-product-variety}, and read $X\times Y\times Z$ as $W\times Z$.
 Put
@@ -1787,32 +1880,24 @@ of it, and it is used without further comment below.  Closedness is
 noetherian $k$-scheme $Z$ and the line bundle $L$.  That $z_0\in Z'$ is the
 third hypothesis, since $W_{z_0}=X\times Y\times\{z_0\}$.
 
-\emph{Step 2: every $k$-rational point of $Z'$ is interior to $Z'$.}  Let
-$z\in Z'\cap Z(k)$.  The hypotheses of \Cref{lem:cube-thickening-trivial} hold
-for $L$ with $z$ in place of $z_0$: the restrictions to $\{x_0\}\times Y\times
-Z$ and $X\times\{y_0\}\times Z$ are trivial by hypothesis and do not depend on
-the choice of base point in $Z$, and the restriction to
-$X\times Y\times\{z\}$ is trivial because $z\in Z'$.  So the pullback of $L$ to
-$W\times Z_n$ is trivial for every $n$, where
-$Z_n=\Spec(\O_{Z,z}/\m_z^{n+1})$.  By \Cref{prop:cube-formal-triviality},
-applied to the proper variety $W$, the finite type $k$-scheme $Z$ and the point
-$z$, there is an open $V\subseteq Z$ with $z\in V$ and $L_{z'}$ trivial for
-every $z'\in V$; that is, $z\in V\subseteq Z'$.
+\emph{Step 2: every point of $Z'$ is interior to $Z'$.}  This is
+\Cref{lem:cube-triviality-open}, whose hypotheses are those of the theorem
+without the third slice: at a point $z\in Z'$ the bundle $L$ is trivial on the
+fibre $W_z$, so \Cref{lem:cube-thickening-trivial-fibre} makes it trivial on
+every $W\times Z_n$ with $Z_n=\Spec(\O_{Z,z}/\m_z^{n+1})$, and
+\Cref{prop:cube-formal-triviality} then produces an open $V$ with
+$z\in V\subseteq Z'$.
 
-\emph{Step 3: $Z'$ is open.}  Let $U$ be the union of the open sets produced in
-Step 2, one for each $k$-rational point of $Z'$.  Then $U$ is open,
-$U\subseteq Z'$, and $U$ contains every $k$-rational point of $Z'$.  The
-difference $Z'\setminus U$ is closed in $Z'$, hence closed in $Z$ by Step 1,
-and it contains no closed point of $Z$: the closed points of $Z$ are exactly
-its $k$-rational points, $k$ being algebraically closed and $Z$ of finite type
-over $k$, and every $k$-rational point of $Z'$ lies in $U$.  A non-empty closed
-subset of $Z$ contains a closed point of $Z$, because $Z$ is of finite type
-over a field and hence a Jacobson scheme.  Therefore
-$Z'\setminus U=\emptyset$ and $Z'=U$ is open.
+\emph{Step 3: $Z'$ is open.}  Immediate from Step 2, $Z'$ being the union of
+the open sets it produces.  No density of the $k$-rational points among the
+closed points and no Jacobson argument is needed, because
+\Cref{lem:cube-thickening-trivial-fibre} and
+\Cref{prop:cube-formal-triviality} both hold at an arbitrary point of $Z$ and
+not only at a $k$-rational one.
 
 \emph{Step 4: $Z'=Z$.}  By Steps 1 and 3 the subset $Z'$ is closed, open and
 non-empty in the connected space $Z$, so $Z'=Z$.  In particular $L_z$ is
-trivial for every $z\in Z(k)$.
+trivial for every $z\in Z$.
 
 \emph{Step 5: conclusion.}  Apply \Cref{cor:cube-seesaw-trivial} to the proper
 variety $W$, the reduced scheme $Z$ of finite type over $k$, the line bundle
@@ -1845,8 +1930,17 @@ asks that $X$ and $Y$ be complete and that $Z$ be a connected variety.  What is
 proved here asks of $Z$ neither more nor less than reducedness, finite type and
 connectedness: it drops irreducibility, and it does not drop reducedness or
 finite type, both of which the proof uses --- reducedness through
-\Cref{cor:cube-seesaw-trivial} and finite type through the Jacobson argument
-of Step 3.
+\Cref{cor:cube-seesaw-trivial}, and finite type twice over, through
+noetherianness of $Z$, which \Cref{cor:cube-triviality-closed} asks of it in
+Step 1, and through the Jacobson property of $Z$, which
+\Cref{cor:cube-seesaw-trivial} uses in Step 5 to pass from the closed points
+of $Z$ to all of $Z$.
+
+Finally, although \Cref{sec:cube-conventions} fixes $k$ algebraically closed
+throughout this chapter, the proof above does not use it: with Steps 2 and 3
+run at an arbitrary point of $Z$ rather than at a $k$-rational one, the only
+rational points the argument needs are $x_0$, $y_0$ and $z_0$, which are
+hypotheses.  The Lean statement is accordingly over an arbitrary field.
 \end{remark}
 
 \section{The corollary for abelian varieties}\label{sec:cube-abelian}
@@ -1957,6 +2051,8 @@ monoidality of $\pi^*$.
 \begin{theorem}[The cube identity on an abelian variety]
 \label{thm:cube-abelian}
 \uses{def:av-abelian-variety}
+\lean{AlgebraicGeometry.IsAbelianVariety.cubeClass_eq_one,
+AlgebraicGeometry.IsAbelianVariety.nonempty_cube_iso}
 Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
 Then the line bundle
 \[
@@ -2025,6 +2121,7 @@ exactly the displayed isomorphism on $S$.
 
 \begin{corollary}[The recursion for $[n]^*L$]\label{cor:cube-mulby-recursion}
 \uses{def:av-abelian-variety, def:cube-mulby-int}
+\lean{AlgebraicGeometry.IsAbelianVariety.map_zpow_add_one_mul_map_zpow_sub_one}
 Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
 Then for every $n\in\Z$
 \[
@@ -2057,6 +2154,9 @@ isomorphism.
 \begin{theorem}[Pullback of a line bundle along $[n]$]
 \label{thm:cube-mulby-pullback}
 \uses{def:av-abelian-variety, def:cube-mulby-int}
+\lean{AlgebraicGeometry.IsAbelianVariety.map_zpow,
+AlgebraicGeometry.IsAbelianVariety.map_zpow_of_isSymmetric,
+AlgebraicGeometry.IsAbelianVariety.nonempty_pullback_mulBy_iso_tensorPow}
 Let $A$ be an abelian variety over $k$ and let $L$ be a line bundle on $A$.
 Then for every $n\in\Z$
 \[
