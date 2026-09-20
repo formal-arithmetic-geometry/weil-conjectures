@@ -25,7 +25,8 @@ public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 For a scheme `X` and a point `x : X` we define the `n`-th infinitesimal neighbourhood
 `Xₙ = Spec (𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1))` of `x` in `X`, together with its canonical morphism to `X`.
 
-A preliminary section records the stalk of `Spec R` at the closed point of a local ring `R`.
+Two preliminary sections record the flatness of `R ⟶ 𝒪_{X, x}` for a flat morphism
+`X ⟶ Spec R`, and the stalk of `Spec R` at the closed point of a local ring `R`.
 The last sections base change a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a point `t` of `T`.
 
 ## Main definitions
@@ -83,11 +84,13 @@ The last sections base change a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
   `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
   `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
   ideal of `W` into the thickening ideal of `W'`.
+- `AlgebraicGeometry.flat_ΓSpecIso_inv_comp_appTop_comp_germ`: for a flat morphism
+  `g : X ⟶ Spec R` and any point `x` of `X`, the map `R ⟶ 𝒪_{X, x}` is flat; the special case
+  `AlgebraicGeometry.flat_ΓSpecIso_inv_comp_germ` says that `R ⟶ 𝒪_{Spec R, y}` is flat,
+  being a localisation of `R`.
 - `AlgebraicGeometry.ΓSpecIso_inv_comp_germ_closedPoint`: for a local ring `R`, the composite
   `R ⟶ Γ(Spec R, 𝒪) ⟶ 𝒪_{Spec R, 𝔪}` is the inverse of
-  `AlgebraicGeometry.stalkClosedPointIso`;
-  `AlgebraicGeometry.flat_ΓSpecIso_inv_comp_appTop_comp_germ` says that the corresponding map
-  `R ⟶ 𝒪_{X, x}` is flat for a flat morphism `X ⟶ Spec R` and a point `x` over `𝔪`.
+  `AlgebraicGeometry.stalkClosedPointIso`.
 - the `AlgebraicGeometry.Surjective` instance on
   `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap`: for `m ≤ n` the transition morphism
   `W ×_T Tₘ ⟶ W ×_T Tₙ` is surjective.
@@ -112,35 +115,32 @@ open CategoryTheory IsLocalRing
 
 namespace AlgebraicGeometry
 
-section SpecLocalRing
+section SpecStalk
 
-/-! ### Stalks of a scheme over the spectrum of a local ring -/
+/-! ### Stalks of a scheme over the spectrum of a ring -/
 
-variable (R : CommRingCat.{u}) [IsLocalRing R] {X : Scheme.{u}}
+variable (R : CommRingCat.{u}) {X : Scheme.{u}}
 
-/-- **The stalk of `Spec R` at the closed point of a local ring `R` is `R`**: the composite
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The composite `R ⟶ Γ(Spec R, 𝒪) ⟶ 𝒪_{Spec R, y}` is the localisation map `R ⟶ R_y`. -/
+lemma ΓSpecIso_inv_comp_germ_eq_toStalk (y : Spec R) :
+    (Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ y trivial =
+      StructureSheaf.toStalk R y :=
+  rfl
 
-```
-  R ---- ΓSpecIso.inv ----> Γ(Spec R, 𝒪) ---- germ ⊤ 𝔪 ----> 𝒪_{Spec R, 𝔪}
-```
-
-is the inverse of `AlgebraicGeometry.stalkClosedPointIso`. -/
-lemma ΓSpecIso_inv_comp_germ_closedPoint :
-    (Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ (closedPoint R) trivial =
-      (stalkClosedPointIso R).inv := by
-  rw [← ΓSpecIso_hom_stalkClosedPointIso_inv, ← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **The ring homomorphism `R ⟶ 𝒪_{Spec R, y}` is flat** for every point `y` of `Spec R`: it is
+the localisation of `R` at the prime `y`. -/
+lemma flat_ΓSpecIso_inv_comp_germ (y : Spec R) :
+    ((Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ y trivial).hom.Flat := by
+  have : y.asIdeal.IsPrime := y.isPrime
+  rw [ΓSpecIso_inv_comp_germ_eq_toStalk]
+  exact (RingHom.flat_algebraMap_iff
+      (R := R) (S := (Spec.structureSheaf R).presheaf.stalk y)).mpr
+    (IsLocalization.flat _ y.asIdeal.primeCompl)
 
 variable {R}
 
-/-- The composite `R ⟶ Γ(Spec R, 𝒪) ⟶ 𝒪_{Spec R, y}` is an isomorphism for a point `y` of
-`Spec R` that is the closed point of the local ring `R`. -/
-lemma isIso_ΓSpecIso_inv_comp_germ_of_eq_closedPoint (y : Spec R) (hy : y = closedPoint R) :
-    IsIso ((Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ y trivial) := by
-  subst hy
-  rw [ΓSpecIso_inv_comp_germ_closedPoint]
-  infer_instance
-
-omit [IsLocalRing R] in
 /-- For a morphism `g : X ⟶ Spec R` and a point `x` of `X`, the ring homomorphism
 `R ⟶ 𝒪_{X, x}` obtained by taking global sections and then the germ at `x` is the stalk map of
 `g` at `x`, precomposed with the germ at the image of `x`:
@@ -159,17 +159,33 @@ lemma ΓSpecIso_inv_comp_appTop_comp_germ (g : X ⟶ Spec R) (x : X) :
   rw [Category.assoc, Scheme.Hom.germ_stalkMap g ⊤ x trivial]
   rfl
 
-/-- **The ring homomorphism `R ⟶ 𝒪_{X, x}` induced by a flat morphism `g : X ⟶ Spec R` to the
-spectrum of a local ring is flat**, at a point `x` lying over the closed point: it is the stalk
-map of `g`, which is flat, composed with an isomorphism. -/
-lemma flat_ΓSpecIso_inv_comp_appTop_comp_germ (g : X ⟶ Spec R) [Flat g] (x : X)
-    (hx : g.base x = closedPoint R) :
+/-- **The ring homomorphism `R ⟶ 𝒪_{X, x}` induced by a flat morphism `g : X ⟶ Spec R` is
+flat**: it is the localisation map `R ⟶ 𝒪_{Spec R, g x}`, which is flat, composed with the stalk
+map of `g`, which is flat because `g` is. -/
+lemma flat_ΓSpecIso_inv_comp_appTop_comp_germ (g : X ⟶ Spec R) [Flat g] (x : X) :
     ((Scheme.ΓSpecIso R).inv ≫ g.appTop ≫ X.presheaf.germ ⊤ x trivial).hom.Flat := by
-  have : IsIso ((Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ (g.base x) trivial) :=
-    isIso_ΓSpecIso_inv_comp_germ_of_eq_closedPoint _ hx
   rw [ΓSpecIso_inv_comp_appTop_comp_germ, CommRingCat.hom_comp]
-  exact RingHom.Flat.comp (RingHom.Flat.of_bijective (ConcreteCategory.bijective_of_isIso _))
-    (Flat.stalkMap _ x)
+  exact RingHom.Flat.comp (flat_ΓSpecIso_inv_comp_germ R _) (Flat.stalkMap _ x)
+
+end SpecStalk
+
+section SpecLocalRing
+
+/-! ### The stalk of `Spec R` at the closed point of a local ring -/
+
+variable (R : CommRingCat.{u}) [IsLocalRing R]
+
+/-- **The stalk of `Spec R` at the closed point of a local ring `R` is `R`**: the composite
+
+```
+  R ---- ΓSpecIso.inv ----> Γ(Spec R, 𝒪) ---- germ ⊤ 𝔪 ----> 𝒪_{Spec R, 𝔪}
+```
+
+is the inverse of `AlgebraicGeometry.stalkClosedPointIso`. -/
+lemma ΓSpecIso_inv_comp_germ_closedPoint :
+    (Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ (closedPoint R) trivial =
+      (stalkClosedPointIso R).inv := by
+  rw [← ΓSpecIso_hom_stalkClosedPointIso_inv, ← Category.assoc, Iso.inv_hom_id, Category.id_comp]
 
 end SpecLocalRing
 
@@ -466,7 +482,8 @@ lemma maximalIdeal_infinitesimalRing_pow :
   rw [h, ← Ideal.map_pow, Ideal.map_eq_bot_iff_le_ker, Ideal.mk_ker]
 
 instance : Ring.KrullDimLE 0 (X.infinitesimalRing x n) :=
-  .of_isNilpotent_maximalIdeal ⟨n + 1, by simp [X.maximalIdeal_infinitesimalRing_pow x n]⟩
+  .of_maximalIdeal_le_nilradical fun a ha ↦ mem_nilradical.mpr ⟨n + 1, by
+    simpa [X.maximalIdeal_infinitesimalRing_pow x n] using Ideal.pow_mem_pow ha (n + 1)⟩
 
 /-- The `n`-th infinitesimal neighbourhood of `x` has a single point. -/
 lemma eq_closedPoint_infinitesimalNeighborhood
@@ -1013,7 +1030,7 @@ The `Module.Flat` form is obtained at the call site by introducing the algebra s
 lemma flat_infinitesimalRingToStalk [Flat f] (n : ℕ) (x : infinitesimalBaseChange f t n) :
     (infinitesimalRingToStalk f t n x).hom.Flat := by
   rw [infinitesimalRingToStalk, infinitesimalRingToΓ, Category.assoc]
-  exact flat_ΓSpecIso_inv_comp_appTop_comp_germ _ x (infinitesimalBaseChangeSnd_apply f t n x)
+  exact flat_ΓSpecIso_inv_comp_appTop_comp_germ _ x
 
 end FlatStalk
 

@@ -8,24 +8,23 @@ module
 public import Mathlib.RingTheory.KrullDimension.Zero
 
 /-!
-# Local rings with nilpotent maximal ideal are zero-dimensional
+# Local rings whose maximal ideal consists of nilpotents are zero-dimensional
 
 ## Main results
 
-- `Ring.KrullDimLE.of_isNilpotent_maximalIdeal`: a local ring whose maximal ideal is nilpotent
-  has Krull dimension at most `0`.
+- `Ring.KrullDimLE.of_maximalIdeal_le_nilradical`: a local ring whose maximal ideal is contained
+  in the nilradical has Krull dimension at most `0`.
 -/
 
 @[expose] public section
 
 open IsLocalRing
 
-/-- A local ring whose maximal ideal is nilpotent is zero-dimensional. -/
-lemma Ring.KrullDimLE.of_isNilpotent_maximalIdeal {R : Type*} [CommRing R] [IsLocalRing R]
-    (h : IsNilpotent (maximalIdeal R)) : Ring.KrullDimLE 0 R := by
-  obtain ⟨n, hn⟩ := h
-  refine Ring.KrullDimLE.mk₀ fun I hI ↦ ?_
-  -- a prime `I` contains a power of the maximal ideal, hence the maximal ideal itself
-  have hle : maximalIdeal R ≤ I := Ideal.IsPrime.le_of_pow_le (n := n) (by simp [hn])
-  have : I = maximalIdeal R := le_antisymm (le_maximalIdeal hI.ne_top) hle
-  exact this ▸ maximalIdeal.isMaximal R
+/-- A local ring whose maximal ideal is contained in the nilradical is zero-dimensional.
+
+The converse holds too: it is `(Ring.KrullDimLE.nilradical_eq_maximalIdeal R).ge`. -/
+lemma Ring.KrullDimLE.of_maximalIdeal_le_nilradical {R : Type*} [CommRing R] [IsLocalRing R]
+    (h : maximalIdeal R ≤ nilradical R) : Ring.KrullDimLE 0 R :=
+  have : (nilradical R).IsMaximal :=
+    le_antisymm (nilradical_le_prime _) h ▸ maximalIdeal.isMaximal R
+  .of_isMaximal_nilradical R
