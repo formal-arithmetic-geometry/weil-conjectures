@@ -61,6 +61,11 @@ vanishes at a point exactly where `g` does.
   on sections.
 - `AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen`: vanishing of a section of
   an invertible sheaf is, in a trivialisation, the complement of a basic open subset.
+- `AlgebraicGeometry.Scheme.Modules.coheight_le_one_of_minimal_vanishesAt`: **Krull's principal
+  ideal theorem for a section of a line bundle**, every irreducible component of the zero locus
+  of a global section of an invertible sheaf on a locally Noetherian scheme has codimension at
+  most one. This is `AlgebraicGeometry.coheight_le_one_of_minimal_notMem_basicOpen` read through
+  the trivialisation.
 - `AlgebraicGeometry.Scheme.Modules.mono_mulSection_iff`: **the nonzerodivisor criterion**,
   multiplication by `s` is a monomorphism `F ⟶ F ⊗ L` if and only if `s` vanishes at no
   associated point of `F`.
@@ -368,6 +373,33 @@ theorem vanishesAt_iff_notMem_basicOpen (m : Γ(L, W)) [IsIso (unitSmulRestrictH
     exact Submodule.smul_mem_smul
       ((IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 h)) Submodule.mem_top
 
+
+/-- **Krull's principal ideal theorem for a section of a line bundle.** Let `s` be a global
+section of an invertible sheaf `L` on a locally Noetherian scheme `X`, and let `z` be a point at
+which `s` vanishes such that the only point where `s` vanishes generalizing to `z` is `z` itself
+— that is, `z` is the generic point of an irreducible component of the zero locus of `s`. Then
+`z` has codimension at most one in `X`.
+
+Trivialising `L` on an open neighbourhood `W` of `z` writes `s|_W` as `g • m` for a function `g`
+on `W` with the same zero locus, by
+`AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen`, and the statement becomes
+`AlgebraicGeometry.coheight_le_one_of_minimal_notMem_basicOpen`. -/
+theorem coheight_le_one_of_minimal_vanishesAt [IsLocallyNoetherian X] (hL : L.Invertible)
+    (s : Γ(L, ⊤)) {z : X} (hz : L.VanishesAt s z)
+    (hmin : ∀ y, L.VanishesAt s y → y ⤳ z → y = z) :
+    Order.coheight z ≤ 1 := by
+  obtain ⟨V, hzV, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom z
+  have hmi : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl V)).2 (L.presheaf.map V.leTop.op s)
+  have hgV : L.presheaf.map V.leTop.op s = g • m := by
+    rw [← hg, smulSection]
+    simp only [AddMonoidHom.mk'_apply]
+    congr 1
+    rw [show (homOfLE (le_refl V)).op = 𝟙 (op V) from Subsingleton.elim _ _]
+    simp
+  exact coheight_le_one_of_minimal_notMem_basicOpen g hzV
+    ((vanishesAt_iff_notMem_basicOpen m s g hgV hzV).1 hz)
+    fun y hyV hy hyz ↦ hmin y ((vanishesAt_iff_notMem_basicOpen m s g hgV hyV).2 hy) hyz
 
 /-- **Multiplication by a trivialising section, as a linear equivalence on sections.** -/
 noncomputable def smulSectionEquiv (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
