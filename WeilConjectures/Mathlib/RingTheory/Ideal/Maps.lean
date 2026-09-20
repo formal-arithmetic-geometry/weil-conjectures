@@ -5,6 +5,8 @@ Authors: Christian Merten, Claude
 -/
 module
 
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.LinearAlgebra.Basis.Basic
 public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 public import Mathlib.RingTheory.Ideal.Maps
 public import Mathlib.RingTheory.Finiteness.Basic
@@ -23,6 +25,13 @@ coefficients in `Ideal.map φ J` annihilate the images of the `e i` as soon as `
 the `e i`; and it describes the relations between the `e i` themselves when `J * I = ⊥` for an
 ideal `I` containing them.
 
+The families to which this applies are produced by reading a basis of a quotient back in the
+ring. If `κ` is a quotient of `R` acting on an `R`-module `M`, a `κ`-basis of `M` spans it over
+`R` as well, and the `R`-linear relations between the members of a `κ`-linearly independent
+family have all their coefficients in the kernel of `R → κ`. For `M` an ideal `I` of `R` this
+produces a family of elements of `R` spanning `I`, whose relations have their coefficients in
+`RingHom.ker (algebraMap R κ)`.
+
 ## Main results
 
 - `Ideal.exists_finset_subset_span_image_eq`: a finitely generated `Ideal.map φ N` is
@@ -36,7 +45,12 @@ ideal `I` containing them.
   relation between the `e i` has its coefficients in `J`, the relations between the `e i` are
   exactly the families of coefficients in `J`;
 - `Ideal.range_linearCombination_algebraMap`: the image of `r ↦ ∑ i, r i * e i` over an
-  `R`-algebra `S` is the extension of the ideal spanned by the `e i`.
+  `R`-algebra `S` is the extension of the ideal spanned by the `e i`;
+- `linearIndependent_iff_forall_mem_ker`: over a surjective map of scalars `R → κ`, linear
+  independence over `κ` is the statement that every `R`-linear relation has its coefficients
+  in the kernel;
+- `Ideal.span_range_basis_eq` and `Ideal.mem_ker_of_sum_mul_eq_zero`: a `κ`-basis of an ideal
+  `I`, read in `R`, spans `I` and has all the coefficients of its relations in the kernel.
 -/
 
 @[expose] public section
@@ -149,3 +163,49 @@ theorem range_linearCombination_algebraMap [Algebra R S] :
 end LinearCombination
 
 end Ideal
+
+section QuotientBasis
+
+variable {R κ : Type*} [CommRing R] [CommRing κ] [Algebra R κ] {ι : Type*}
+
+/-- **Linear independence over a quotient of the scalars, read in the ring.** If the structure
+map `R → κ` is surjective, a finite family in a `κ`-module is `κ`-linearly independent exactly
+when every `R`-linear relation between its members has all its coefficients in the kernel of
+`R → κ`. -/
+theorem linearIndependent_iff_forall_mem_ker {M : Type*} [AddCommGroup M] [Module R M]
+    [Module κ M] [IsScalarTower R κ M] [Fintype ι]
+    (hsur : Function.Surjective (algebraMap R κ)) (v : ι → M) :
+    LinearIndependent κ v ↔
+      ∀ c : ι → R, ∑ i, c i • v i = 0 → ∀ i, c i ∈ RingHom.ker (algebraMap R κ) := by
+  rw [Fintype.linearIndependent_iff]
+  refine ⟨fun H c hc i ↦ RingHom.mem_ker.mpr
+    (H (fun i ↦ algebraMap R κ (c i)) (by simpa only [algebraMap_smul] using hc) i),
+    fun H g hg i ↦ ?_⟩
+  choose c hc using fun i ↦ hsur (g i)
+  rw [← hc i]
+  exact RingHom.mem_ker.mp (H c (by simpa only [← hc, algebraMap_smul] using hg) i)
+
+variable {I : Ideal R} [Module κ I] [IsScalarTower R κ I]
+
+/-- **A `κ`-basis of an ideal `I`, read in `R`, spans `I`.** No Nakayama is needed: the scalars
+`R → κ` being surjective, a `κ`-spanning set of a module is already an `R`-spanning set. -/
+theorem Ideal.span_range_basis_eq (hsur : Function.Surjective (algebraMap R κ))
+    (b : Module.Basis ι κ I) : Ideal.span (Set.range fun i ↦ (b i : R)) = I := by
+  have h : Submodule.span R (Set.range b) = ⊤ := by
+    rw [← Submodule.restrictScalars_span R κ hsur, b.span_eq, Submodule.restrictScalars_top]
+  -- push the spanning statement forward along the inclusion `I ↪ R`
+  have h2 := congrArg (Submodule.map I.subtype) h
+  rwa [Submodule.map_span, Submodule.map_top, Submodule.range_subtype, ← Set.range_comp] at h2
+
+/-- **The relations, read in `R`, between the members of a `κ`-linearly independent family in an
+ideal `I` have all their coefficients in the kernel of `R → κ`.** -/
+theorem Ideal.mem_ker_of_sum_mul_eq_zero [Fintype ι]
+    (hsur : Function.Surjective (algebraMap R κ)) {v : ι → I} (hv : LinearIndependent κ v)
+    {c : ι → R} (hc : ∑ i, c i * (v i : R) = 0) (i : ι) :
+    c i ∈ RingHom.ker (algebraMap R κ) := by
+  refine (linearIndependent_iff_forall_mem_ker hsur v).mp hv c ?_ i
+  ext
+  push_cast
+  simpa using hc
+
+end QuotientBasis

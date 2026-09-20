@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Ideal.Cotangent
+public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 
 /-!
 # Finite families in the cotangent space of a local ring
@@ -63,22 +65,14 @@ theorem linearIndependent_toCotangent_iff [Fintype σ] (f : σ → A)
       ∀ a : σ → A, (∑ i, a i * f i) ∈ maximalIdeal A ^ 2 → ∀ i, a i ∈ maximalIdeal A := by
   have hsum : ∀ a : σ → A, ∑ i, a i * f i ∈ maximalIdeal A := fun a ↦
     Ideal.sum_mem _ fun i _ ↦ Ideal.mul_mem_left _ _ (hmem i)
-  rw [Fintype.linearIndependent_iff]
-  constructor
-  · intro H a ha i
-    have h0 : ∑ i, Ideal.Quotient.mk (maximalIdeal A) (a i) •
-        (maximalIdeal A).toCotangent ⟨f i, hmem i⟩ = 0 := by
-      rw [← toCotangent_sum_mul f hmem a (hsum a), Ideal.toCotangent_eq_zero]
-      exact ha
-    exact Ideal.Quotient.eq_zero_iff_mem.mp (H _ h0 i)
-  · intro H g hg i
-    choose a ha using fun i ↦ Ideal.Quotient.mk_surjective (I := maximalIdeal A) (g i)
-    have h0 : (maximalIdeal A).toCotangent ⟨∑ i, a i * f i, hsum a⟩ = 0 := by
-      rw [toCotangent_sum_mul f hmem a (hsum a)]
-      simpa only [ha] using hg
-    rw [Ideal.toCotangent_eq_zero] at h0
-    rw [← ha i]
-    exact Ideal.Quotient.eq_zero_iff_mem.mpr (H a h0 i)
+  -- a relation with coefficients `a` in `A` is the class of `∑ aᵢ fᵢ` in the cotangent space
+  have key : ∀ a : σ → A, ∑ i, a i • (maximalIdeal A).toCotangent ⟨f i, hmem i⟩ =
+      (maximalIdeal A).toCotangent ⟨∑ i, a i * f i, hsum a⟩ := fun a ↦ by
+    rw [toCotangent_sum_mul f hmem a (hsum a)]
+    exact Finset.sum_congr rfl fun i _ ↦ (algebraMap_smul (ResidueField A) (a i) _).symm
+  simp only [linearIndependent_iff_forall_mem_ker
+    (ResidueField.algebraMap_eq (R := A) ▸ residue_surjective), key, Ideal.toCotangent_eq_zero,
+    ResidueField.algebraMap_eq, ker_residue]
 
 /-- A finite family in the maximal ideal of a Noetherian local ring whose classes in the
 cotangent space are linearly independent extends to a generating family of the maximal ideal
@@ -144,12 +138,8 @@ variable {B : Type u} [CommRing B] [IsLocalRing B] {I : Ideal B}
 /-- **An ideal annihilated by the maximal ideal is a module over the residue field**: it is a
 torsion module for `𝔪`, so `Module.IsTorsionBySet.module` turns it into a `B ⧸ 𝔪`-module. -/
 theorem isTorsionBySet_maximalIdeal_of_mul_eq_bot (h : maximalIdeal B * I = ⊥) :
-    Module.IsTorsionBySet B I (maximalIdeal B : Set B) := by
-  intro x a
-  refine Subtype.ext ?_
-  change (a : B) • (x : B) = 0
-  rw [smul_eq_mul]
-  exact Ideal.mem_bot.mp (h.le (Ideal.mul_mem_mul a.2 x.2))
+    Module.IsTorsionBySet B I (maximalIdeal B : Set B) :=
+  Ideal.isTorsionBySet_of_mul_eq_bot h
 
 /-- **A residue-field basis of an ideal annihilated by the maximal ideal, read in `B`.** If
 `𝔪 * I = ⊥` and `I` is finitely generated, a `κ`-basis of `I` lifts to a finite family `e` of
@@ -174,31 +164,14 @@ theorem exists_span_eq_of_maximalIdeal_mul_eq_bot (h : maximalIdeal B * I = ⊥)
   have : Module.Finite (B ⧸ maximalIdeal B) I :=
     Module.Finite.of_restrictScalars_finite B _ _
   set b := Module.Free.chooseBasis (B ⧸ maximalIdeal B) I
-  refine ⟨Module.Free.ChooseBasisIndex (B ⧸ maximalIdeal B) I, inferInstance,
-    fun i ↦ (b i : B), ?_, ?_, ?_⟩
-  · refine le_antisymm (Ideal.span_le.mpr ?_) fun x hx ↦ ?_
-    · rintro _ ⟨i, rfl⟩
-      exact (b i).2
-    · obtain ⟨c, hc⟩ : ∃ c : Module.Free.ChooseBasisIndex (B ⧸ maximalIdeal B) I → B,
-          ∀ i, Ideal.Quotient.mk (maximalIdeal B) (c i) = b.repr ⟨x, hx⟩ i :=
-        ⟨fun i ↦ (Ideal.Quotient.mk_surjective (b.repr ⟨x, hx⟩ i)).choose,
-          fun i ↦ (Ideal.Quotient.mk_surjective (b.repr ⟨x, hx⟩ i)).choose_spec⟩
-      have hsum : ((∑ i, c i • b i : I) : B) = x := by
-        have : ∑ i, c i • b i = (⟨x, hx⟩ : I) := by
-          conv_rhs => rw [← b.sum_repr ⟨x, hx⟩]
-          exact Finset.sum_congr rfl fun i _ ↦ by rw [← hc i, Module.IsTorsionBySet.mk_smul]
-        rw [this]
-      rw [← hsum]
-      push_cast
-      exact Ideal.sum_mem _ fun i _ ↦ Ideal.mul_mem_left _ _
-        (Ideal.subset_span ⟨i, rfl⟩)
-  · intro c hc i
-    have h0 : ∑ j, Ideal.Quotient.mk (maximalIdeal B) (c j) • b j = 0 := by
-      refine Subtype.ext ?_
-      push_cast [Module.IsTorsionBySet.mk_smul]
-      simpa using hc
-    have := Fintype.linearIndependent_iff.mp b.linearIndependent _ h0 i
-    rwa [Ideal.Quotient.eq_zero_iff_mem] at this
+  have hsur : Function.Surjective (algebraMap B (B ⧸ maximalIdeal B)) := by
+    rw [Ideal.Quotient.algebraMap_eq]
+    exact Ideal.Quotient.mk_surjective
+  have hker : RingHom.ker (algebraMap B (B ⧸ maximalIdeal B)) = maximalIdeal B := by
+    rw [Ideal.Quotient.algebraMap_eq, Ideal.mk_ker]
+  refine ⟨Module.Free.ChooseBasisIndex (B ⧸ maximalIdeal B) I, inferInstance, fun i ↦ (b i : B),
+    Ideal.span_range_basis_eq hsur b, fun c hc i ↦ ?_, ?_⟩
+  · exact hker ▸ Ideal.mem_ker_of_sum_mul_eq_zero hsur b.linearIndependent hc i
   · rw [Nat.card_eq_fintype_card, Module.finrank_eq_card_chooseBasisIndex]
 
 end MulEqBot
