@@ -62,7 +62,7 @@ homogeneous coordinate to vanish nowhere on `T`, so that `T` lies in a standard 
 
 universe u
 
-open CategoryTheory SheafOfModules
+open CategoryTheory Opposite SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -108,11 +108,14 @@ theorem isIso_homOfSectionTop_of_forall_not_vanishesAt (hL : L.Invertible) (s : 
     rw [Hom.app_homOfSectionTop, hres, smulSection]
     simp only [AddMonoidHom.mk'_apply]
     rw [smul_smul]
+  have hmul : Function.Bijective
+      (fun r : Γ(X, V) ↦ r * X.presheaf.map (homOfLE hV).op g) := by
+    rw [← hu]
+    refine ⟨fun a b hab ↦ ?_, fun b ↦ ⟨b * ((u⁻¹ : Γ(X, V)ˣ) : Γ(X, V)), ?_⟩⟩
+    · simpa [mul_assoc] using congrArg (fun z ↦ z * ((u⁻¹ : Γ(X, V)ˣ) : Γ(X, V))) hab
+    · simp [mul_assoc]
   rw [ConcreteCategory.isIso_iff_bijective, funext happ]
-  refine (bijective_smulSection m hV).comp ⟨fun a b hab ↦ ?_, fun b ↦ ⟨b * ↑u⁻¹, ?_⟩⟩
-  · have := congrArg (fun z ↦ z * ((u⁻¹ : Γ(X, V)ˣ) : Γ(X, V))) hab
-    simpa only [hu.symm ▸ rfl, mul_assoc, Units.mul_inv, mul_one, ← hu] using this
-  · rw [mul_assoc, ← hu, Units.inv_mul, mul_one]
+  exact (bijective_smulSection m hV).comp hmul
 
 /-- **The trivialisation of a line bundle by a nowhere vanishing global section.** -/
 noncomputable def isoUnitOfForallNotVanishesAt (hL : L.Invertible) (s : Γ(L, ⊤))
@@ -123,7 +126,7 @@ noncomputable def isoUnitOfForallNotVanishesAt (hL : L.Invertible) (s : Γ(L, �
 /-- **Every global section of a line bundle is a multiple of a nowhere vanishing one.** -/
 theorem exists_smul_eq_of_forall_not_vanishesAt (hL : L.Invertible) {s : Γ(L, ⊤)}
     (hs : ∀ x : X, ¬ L.VanishesAt s x) (t : Γ(L, ⊤)) : ∃ g : Γ(X, ⊤), g • s = t := by
-  haveI := isIso_homOfSectionTop_of_forall_not_vanishesAt hL s hs
+  have := isIso_homOfSectionTop_of_forall_not_vanishesAt hL s hs
   obtain ⟨g, hg⟩ :=
     (ConcreteCategory.bijective_of_isIso (Hom.app (homOfSectionTop L s) ⊤)).2 t
   exact ⟨g, by rw [← hg, homOfSectionTop_app_top]⟩
@@ -151,8 +154,9 @@ theorem forall_not_vanishesAt_of_isField (hX : IsField Γ(X, ⊤)) (hL : L.Inver
     rintro rfl
     exact ht (zero_smul _ _)
   have hgu : IsUnit g := isUnit_iff_exists_inv.2 (hX.mul_inv_cancel hg)
-  rw [vanishesAt_smul_iff_notMem_basicOpen hs, not_not]
-  exact (X.isUnit_iff_basicOpen_eq_top g).1 hgu ▸ trivial
+  rw [vanishesAt_smul_iff_notMem_basicOpen hs, not_not,
+    (X.isUnit_iff_basicOpen_eq_top g).1 hgu]
+  trivial
 
 /-- **The Liouville dichotomy.** On a scheme whose ring of global functions is a field, once one
 global section of an invertible sheaf vanishes nowhere, every global section is either zero or

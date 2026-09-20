@@ -36,6 +36,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.Modules.HyperplaneSection
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.NowhereVanishing
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardField
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackConstant
