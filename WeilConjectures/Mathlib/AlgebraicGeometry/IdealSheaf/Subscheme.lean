@@ -7,12 +7,13 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Complements on the subscheme cut out by an ideal sheaf
 
-This file adds three independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
+This file adds four independent complements to `Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`.
 
 ## The ideal cut out on an arbitrary open subset
 
@@ -33,6 +34,13 @@ The germs at a point `x` of the sections of `𝒪_X` lying in an ideal sheaf `J`
 ideal sheaf of a quasi-compact morphism `f` with `f.base` inducing — an immersion, for instance —
 it is the kernel of the induced map of local rings
 (`AlgebraicGeometry.Scheme.Hom.ker_stalkIdeal`).
+
+The stalk ideal is computed on any single affine open `U` containing `x`: it is the extension of
+`J(U)` along the germ map (`AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal_eq_map_germ`),
+because the ideals of an ideal sheaf on two nested affine opens are related by extension
+(`Scheme.IdealSheafData.map_ideal`). On an affine scheme this reads off the stalk ideal of the
+kernel ideal sheaf of `Spec φ` as the extension of `ker φ`
+(`AlgebraicGeometry.Scheme.Hom.stalkIdeal_ker_specMap`).
 
 ## Base change of the subscheme cut out by an ideal sheaf
 
@@ -64,7 +72,9 @@ the kernel ideal vanishes on a cover by affine opens.
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.mem_idealOfOpens_iff_forall_affineOpens`
 - `AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal`
+- `AlgebraicGeometry.Scheme.IdealSheafData.stalkIdeal_eq_map_germ`
 - `AlgebraicGeometry.Scheme.Hom.ker_stalkIdeal`
+- `AlgebraicGeometry.Scheme.Hom.stalkIdeal_ker_specMap`
 - `AlgebraicGeometry.Scheme.IdealSheafData.mul_mem_mul_idealOfOpens`
 - `AlgebraicGeometry.Scheme.Hom.mem_idealOfOpens_ker_iff`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeCover_map`
@@ -187,6 +197,41 @@ lemma germ_mem_stalkIdeal (x : X) {U : X.Opens} (hx : x ∈ U) {s : Γ(X, U)}
     X.presheaf.germ U x hx s ∈ J.stalkIdeal x :=
   ⟨U, hx, s, hs, rfl⟩
 
+/-- **The stalk of an ideal sheaf is computed on a single affine open**: for any affine open
+`U` containing `x`, the stalk ideal at `x` is the extension of `J(U)` along the germ map
+`Γ(X, U) ⟶ 𝒪_{X, x}`. Every germ at `x` of a section of `J` is a germ of a section over a
+smaller affine open `V'` of `U`, along the triangle
+
+```
+  Γ(X, U) ───── res ─────▶ Γ(X, V')
+        ╲                    │
+         ╲ germ U x          │ germ V' x
+          ╲                  ▼
+           ────────────────▶ 𝒪_{X, x}
+```
+-/
+lemma stalkIdeal_eq_map_germ (x : X) (U : X.affineOpens) (hx : x ∈ U.1) :
+    J.stalkIdeal x = (J.ideal U).map (X.presheaf.germ U.1 x hx).hom := by
+  refine le_antisymm ?_ ?_
+  -- the definition of `stalkIdeal` ranges over all opens containing `x`; cut the family down to
+  -- one affine open, using that the ideals on two nested affine opens are related by extension
+  · rintro _ ⟨V, hxV, s, hs, rfl⟩
+    -- shrink `V` to an affine open `V'` contained in `U` as well
+    obtain ⟨_, ⟨V', hV', rfl⟩, hxV', hVU⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open (u := (V ⊓ U.1 : X.Opens))
+        ⟨hxV, hx⟩ (V ⊓ U.1).2
+    have hVU' : (V' : X.Opens) ≤ V ⊓ U.1 := hVU
+    have h1 : (⟨V', hV'⟩ : X.affineOpens) ≤ U := hVU'.trans inf_le_right
+    have hmem : X.presheaf.map (homOfLE (hVU'.trans inf_le_left)).op s ∈ J.ideal ⟨V', hV'⟩ := by
+      rw [← idealOfOpens_eq_ideal]
+      exact J.map_mem_idealOfOpens _ hs
+    rw [← map_ideal J h1] at hmem
+    rw [← X.presheaf.germ_res_apply (homOfLE (hVU'.trans inf_le_left)) x hxV' s,
+      ← X.presheaf.germ_res (homOfLE h1) x hxV', CommRingCat.hom_comp, ← Ideal.map_map]
+    exact Ideal.mem_map_of_mem _ hmem
+  · exact Ideal.map_le_iff_le_comap.mpr fun s hs ↦
+      J.germ_mem_stalkIdeal x hx (by rwa [idealOfOpens_eq_ideal])
+
 end Stalk
 
 /-- **The product of two ideal sheaves multiplies sections**, over an arbitrary open subset:
@@ -295,6 +340,31 @@ lemma ker_stalkIdeal [QuasiCompact f] (hf : Topology.IsInducing f.base) (x : X) 
         Subsingleton.elim _ _
       rw [hj, X.presheaf.map_comp, CommRingCat.comp_apply, he, map_zero]
     · rw [Y.presheaf.germ_res_apply]
+
+open IdealSheafData in
+/-- **The stalk of the kernel ideal sheaf of a morphism of affine schemes is the extension of
+the kernel of the ring map.** No hypothesis on `φ` is needed, and `y` may be any point of
+`Spec R`, not just the closed one. This extends the square of
+`AlgebraicGeometry.Scheme.Hom.ker_appTop_specMap` by the germ map at `y`:
+
+```
+      R ─────────── φ ──────────────▶ S
+      │                               │
+      │ (ΓSpecIso R).inv              │ (ΓSpecIso S).inv
+      ▼                               ▼
+Γ(Spec R, ⊤) ─(Spec φ).appTop─▶ Γ(Spec S, ⊤)
+      │
+      │ germ ⊤ y
+      ▼
+𝒪_{Spec R, y}
+```
+-/
+lemma stalkIdeal_ker_specMap {R S : CommRingCat.{u}} (φ : R ⟶ S) (y : Spec R) :
+    (Spec.map φ).ker.stalkIdeal y =
+      (RingHom.ker φ.hom).map
+        ((ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ y trivial).hom := by
+  rw [stalkIdeal_eq_map_germ _ y ⟨⊤, isAffineOpen_top (Spec R)⟩ trivial,
+    ideal_top_ker_specMap, Ideal.map_map, ← CommRingCat.hom_comp]
 
 /-- The kernel of the map to the scheme-theoretic image is trivial: no closed subscheme of
 `f.image` strictly smaller than `f.image` contains the image of `f`. -/
