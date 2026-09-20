@@ -45,6 +45,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialityCriterion
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
+public import WeilConjectures.AlgebraicGeometry.Modules.VanishingPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.ZPow
 public import WeilConjectures.AlgebraicGeometry.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
