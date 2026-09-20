@@ -16,6 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PicardSquareZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ThickeningFree
@@ -276,6 +277,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
