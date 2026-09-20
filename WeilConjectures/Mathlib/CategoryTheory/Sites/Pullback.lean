@@ -101,10 +101,12 @@ lemma unit_sheafPullbackComp_hom_app (ℱ : Sheaf J A) :
           ((F.sheafPullbackComp G A J K L).hom.app ℱ) =
       (F.sheafAdjunctionContinuous A J K).unit.app ℱ ≫
         (F.sheafPushforwardContinuous A J K).map
-          ((G.sheafAdjunctionContinuous A K L).unit.app ((F.sheafPullback A J K).obj ℱ)) :=
-  NatTrans.congr_app
+          ((G.sheafAdjunctionContinuous A K L).unit.app ((F.sheafPullback A J K).obj ℱ)) := by
+  have h := NatTrans.congr_app
     (((F ⋙ G).sheafAdjunctionContinuous A J L).unit_leftAdjointUniq_hom
       ((F.sheafAdjunctionContinuous A J K).comp (G.sheafAdjunctionContinuous A K L))) ℱ
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Adjunction.comp_unit_app] at h
+  exact h
 
 end Comp
 

@@ -116,6 +116,21 @@ def Functor.constantSheafsheafPullbackIso {T : C} (hT : IsTerminal T)
     constantSheaf J A ⋙ G.sheafPullback A J K ≅ constantSheaf K A :=
   (G.constantSheafsheafPullbackAdjunction A J K hT).leftAdjointUniq (constantSheafAdj K A hGT)
 
+omit [HasWeakSheafify K A] in
+/-- The unit of `CategoryTheory.Functor.constantSheafsheafPullbackAdjunction` is the unit of
+the constant sheaf adjunction on `(C, J)` followed by the sections of the unit of
+`G^{-1} ⊣ G_*`. -/
+lemma Functor.constantSheafsheafPullbackAdjunction_unit_app {T : C} (hT : IsTerminal T)
+    (a : A) :
+    (G.constantSheafsheafPullbackAdjunction A J K hT).unit.app a =
+      (constantSheafAdj J A hT).unit.app a ≫ ((sheafSections J A).obj (op T)).map
+        ((G.sheafAdjunctionContinuous A J K).unit.app ((constantSheaf J A).obj a)) := by
+  simp only [Functor.constantSheafsheafPullbackAdjunction, Adjunction.ofNatIsoRight_unit,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Adjunction.comp_unit_app,
+    Functor.sheafPushforwardContinuousCompSheafSectionsObjIso, NatIso.ofComponents_hom_app,
+    Iso.refl_hom]
+  exact Category.comp_id _
+
 /-- `CategoryTheory.Functor.constantSheafsheafPullbackIso` is the unique identification
 compatible with the units of the two constant sheaf adjunctions:
 
@@ -137,7 +152,8 @@ lemma Functor.unit_constantSheafsheafPullbackIso_hom_app {T : C} (hT : IsTermina
   have h := NatTrans.congr_app
     ((G.constantSheafsheafPullbackAdjunction A J K hT).unit_leftAdjointUniq_hom
       (constantSheafAdj K A hGT)) a
-  simp only [NatTrans.comp_app] at h
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app,
+    G.constantSheafsheafPullbackAdjunction_unit_app A J K hT a, Category.assoc] at h
   exact h
 
 variable {A J K} in
@@ -188,14 +204,7 @@ lemma Functor.constantSheafsheafPullbackIso_comp :
   refine Adjunction.eq_leftAdjointUniq_hom
     ((F ⋙ G).constantSheafsheafPullbackAdjunction A J L hT) (constantSheafAdj L A hGFT)
     _ fun a ↦ ?_
-  have hu : ((F ⋙ G).constantSheafsheafPullbackAdjunction A J L hT).unit.app a =
-      (constantSheafAdj J A hT).unit.app a ≫ ((sheafSections J A).obj (op T)).map
-        (((F ⋙ G).sheafAdjunctionContinuous A J L).unit.app ((constantSheaf J A).obj a)) := by
-    simp only [Functor.constantSheafsheafPullbackAdjunction, Adjunction.ofNatIsoRight_unit,
-      NatTrans.comp_app, Functor.whiskerLeft_app, Adjunction.comp_unit_app,
-      Functor.sheafPushforwardContinuousCompSheafSectionsObjIso, NatIso.ofComponents_hom_app,
-      Iso.refl_hom]
-    rfl
+  have hu := (F ⋙ G).constantSheafsheafPullbackAdjunction_unit_app A J L hT a
   have hg : ((sheafSections J A).obj (op T)).map
         (((F ⋙ G).sheafAdjunctionContinuous A J L).unit.app ((constantSheaf J A).obj a)) ≫
       ((sheafSections L A).obj (op (G.obj (F.obj T)))).map
@@ -225,7 +234,7 @@ lemma Functor.constantSheafsheafPullbackIso_comp :
     simp only [Functor.map_comp, Functor.comp_map, Functor.id_map] at h3
     exact h3
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.map_comp]
+    Functor.map_comp, Functor.comp_obj]
   rw [hu, Category.assoc, reassoc_of% hg, reassoc_of% hnat,
     ← G.unit_constantSheafsheafPullbackIso_hom_app A K L hFT hGFT a,
     ← F.unit_constantSheafsheafPullbackIso_hom_app A J K hT hFT a]
@@ -255,7 +264,9 @@ lemma Functor.constantSheafsheafPullbackIso_inv_app_comp (a : A) :
     simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h0
     exact h0
   refine (cancel_epi (((F ⋙ G).constantSheafsheafPullbackIso A J L hT hGFT).hom.app a)).1 ?_
-  rw [← h]
+  rw [Iso.hom_inv_id_app, ← h]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app]
   simp
 
 end PullbackComp
