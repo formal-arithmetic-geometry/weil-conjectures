@@ -126,9 +126,9 @@ theorem exists_isIso_pushforwardFreeToThickeningIdeal [Flat f]
 
 /-- **The thickening ideal of a flat infinitesimal thickening, as a sheaf of modules, is the
 pushforward of a free module of finite rank on the zeroth infinitesimal neighbourhood.** This
-is the isomorphism form of
-`AlgebraicGeometry.Scheme.exists_isIso_pushforwardFreeToThickeningIdeal`, which keeps track of
-the fact that the isomorphism is the comparison morphism. -/
+is the bare isomorphism statement; the isomorphism produced is the comparison morphism of
+`AlgebraicGeometry.Scheme.exists_isIso_pushforwardFreeToThickeningIdeal`, which is the form to
+use when the sections `m` matter. -/
 theorem exists_nonempty_iso_thickeningIdeal_toModules [Flat f]
     (hfg : (RingHom.ker (T.infinitesimalRingMap t (Nat.le_succ n)).hom).FG) :
     ∃ (ι : Type u) (_ : Fintype ι),
