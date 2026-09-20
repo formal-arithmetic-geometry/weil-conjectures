@@ -934,6 +934,16 @@ noncomputable def infinitesimalRingToStalk (n : ℕ) (x : infinitesimalBaseChang
     T.infinitesimalRing t n ⟶ (infinitesimalBaseChange f t n).presheaf.stalk x :=
   infinitesimalRingToΓ f t n ≫ (infinitesimalBaseChange f t n).presheaf.germ ⊤ x trivial
 
+/-- **The germ at `x` of the global section attached to an element of
+`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` is its image under
+`AlgebraicGeometry.Scheme.infinitesimalRingToStalk`**, by definition of the latter. -/
+@[simp]
+lemma germ_infinitesimalRingToΓ (n : ℕ) (x : infinitesimalBaseChange f t n)
+    (b : T.infinitesimalRing t n) :
+    (infinitesimalBaseChange f t n).presheaf.germ ⊤ x trivial
+        (infinitesimalRingToΓ f t n b) = infinitesimalRingToStalk f t n x b :=
+  rfl
+
 /-- Every point of `W ×_T Tₙ` lies over the closed point of `Tₙ`, since `Tₙ` has a single
 point. -/
 lemma infinitesimalBaseChangeSnd_base (n : ℕ) (x : infinitesimalBaseChange f t n) :

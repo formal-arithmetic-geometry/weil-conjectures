@@ -54,6 +54,7 @@ public import WeilConjectures.AlgebraicGeometry.Seesaw
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.Snapper
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
+public import WeilConjectures.AlgebraicGeometry.ThickeningFlat
 public import WeilConjectures.AlgebraicGeometry.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
 public import WeilConjectures.AlgebraicGeometry.TrivialityLocus
