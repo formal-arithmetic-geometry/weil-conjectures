@@ -151,6 +151,7 @@ noncomputable def extAddHomInv (A : D) (B : C) (n : ℕ) :
   map_zero' := by simp
   map_add' d d' := by simp [Ext.add_comp]
 
+omit [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R] in
 @[simp]
 lemma extAddHomInv_apply (A : D) (B : C) (n : ℕ) (d : Ext.{w'} A (R.obj B) n) :
     adj.extAddHomInv A B n d =

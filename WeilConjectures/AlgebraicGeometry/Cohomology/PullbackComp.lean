@@ -285,9 +285,9 @@ lemma pullbackAbComparison_comp (a : Z ⟶ X) (b : X ⟶ Y) (M : Y.Modules) :
       (pullbackPushforwardAdjunction (a ≫ b)).unit.app M ≫
         (pushforward (a ≫ b)).map ((pullbackComp a b).inv.app M) := by
     have h := unit_pushforwardPullbackComp a b M
-    rw [pushforwardPullbackComp, hid, Category.id_comp] at h
-    rw [← h, Category.assoc, ← Functor.map_comp]
-    simp
+    rw [← h, pushforwardPullbackComp]
+    simp only [hid, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+    exact (Category.comp_id _).symm
   rw [hinner, unit_comp_map_pullbackAbComparison_comp,
     unit_comp_map_pullbackAbComparison_comp]
   exact congrArg ((toSheafAb Y).map) hmod
