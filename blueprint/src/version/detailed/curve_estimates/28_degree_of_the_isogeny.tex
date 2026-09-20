@@ -533,24 +533,29 @@ of a closed immersion and the case of an isomorphism are used below.
 
 \begin{lemma}[A proper affine scheme is finite]
 \label{lem:deg-proper-affine-finite}
-\lean{AlgebraicGeometry.isFinite_of_isAffineHom,
-AlgebraicGeometry.finite_ΓSpecIso_inv_comp_appTop,
-AlgebraicGeometry.isFinite_of_isAffine,
-AlgebraicGeometry.topologicalKrullDim_le_zero_of_isAffine}
+\lean{AlgebraicGeometry.IsFinite.finite_ΓSpecIso_inv_comp_appTop,
+AlgebraicGeometry.isArtinianScheme_of_isProper,
+AlgebraicGeometry.topologicalKrullDim_le_zero_of_isProper}
 \leanok
 Let $X$ be a $k$-scheme which is proper over $k$ and affine.  Then
 $\Gamma(X,\O_X)$ is a finite-dimensional $k$-algebra, $X\cong\Spec
-\Gamma(X,\O_X)$ is finite over $k$, and $\dim X\leq0$.
+\Gamma(X,\O_X)$ is finite over $k$, and $X$ is a finite discrete space; in
+particular $\dim X\leq0$.
 \end{lemma}
 \begin{proof}
-Since $X$ is affine, the counit of the adjunction between global sections and
-$\Spec$ is an isomorphism $X\cong\Spec\Gamma(X,\O_X)$.  Since $X\to\Spec k$ is
-universally closed and of finite type, $\Gamma(X,\O_X)$ is a finite
-$k$-algebra; this is
-\texttt{AlgebraicGeometry.finite\_appTop\_of\_universallyClosed}, which is in
-Mathlib \texttt{v4.33.1} and is already listed among the available inputs in
-\Cref{sec:cube-cost}.  A finite-dimensional $k$-algebra is artinian, so its
-spectrum is a finite discrete space and has dimension at most $0$.
+\leanok
+A morphism of schemes is finite exactly when it is proper and affine, so
+$X\to\Spec k$ is finite; this is
+\texttt{AlgebraicGeometry.IsFinite.iff\_isProper\_and\_isAffineHom}, which is
+in Mathlib \texttt{v4.33.1}.  A finite morphism into an affine scheme makes the
+global sections a finite algebra over the base, so $\Gamma(X,\O_X)$ is a finite
+$k$-algebra, hence artinian.  Since $X$ is affine, the counit of the adjunction
+between global sections and $\Spec$ is an isomorphism
+$X\cong\Spec\Gamma(X,\O_X)$, so $X$ is the spectrum of an artinian ring: a
+finite discrete space, and therefore of dimension at most $0$.
+
+Nothing here uses that $k$ is a field beyond its being artinian, and the
+formalisation is stated over an arbitrary artinian base ring.
 \end{proof}
 
 \section{Snapper's theorem}\label{sec:deg-snapper}
@@ -1582,9 +1587,10 @@ there is charged again here.  Concretely:
 Beyond items (1) to (6) of the corresponding list in \Cref{sec:cube-cost},
 which are not repeated, three further things exist and are used.
 \begin{enumerate}
-  \item \texttt{AlgebraicGeometry.finite\_appTop\_of\_universallyClosed} in
-  \texttt{Mathlib/AlgebraicGeometry/Morphisms/Proper.lean}, which is the whole
-  of \Cref{lem:deg-proper-affine-finite} once combined with the
+  \item \texttt{AlgebraicGeometry.IsFinite.iff\_isProper\_and\_isAffineHom} in
+  \texttt{Mathlib/AlgebraicGeometry/Morphisms/Proper.lean} together with
+  \texttt{Mathlib/AlgebraicGeometry/Artinian.lean}, which are the whole of
+  \Cref{lem:deg-proper-affine-finite} once combined with the
   $\Gamma\dashv\Spec$ adjunction; and
   \texttt{AlgebraicGeometry.IsFinite.of\_isProper\_of\_locallyQuasiFinite},
   which is \Cref{thm:av-zariski-main} and is used twice here.

@@ -10,7 +10,9 @@ public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Affine
 
 /-!
-# Schemes finite over a field
+# Schemes finite over a base
+
+The global sections of a scheme finite over an affine scheme `Spec R` form a finite `R`-algebra.
 
 A scheme `X` finite over a field `K` is affine, and its ring of global sections `Γ(X, ⊤)` is a
 finite `K`-module, hence an artinian ring. Since the prime spectrum of an artinian ring is finite
@@ -18,6 +20,8 @@ and discrete, `X` is a finite discrete space, all of whose points are closed.
 
 ## Main results
 
+- `AlgebraicGeometry.IsFinite.finite_ΓSpecIso_inv_comp_appTop`: for `f : X ⟶ Spec R` finite, the
+  ring map `R ⟶ Γ(X, 𝒪_X)` is finite.
 - `AlgebraicGeometry.isAffine_of_isFinite_over_field`: a scheme finite over a field is affine.
 - `AlgebraicGeometry.module_finite_presheafObj`: `Γ(X, ⊤)` is a finite `K`-module.
 - `AlgebraicGeometry.finite_of_isFinite_over_field`,
@@ -33,6 +37,12 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+/-- For a finite morphism `f : X ⟶ Spec R`, the induced ring map `R ⟶ Γ(X, 𝒪_X)` is finite. -/
+theorem IsFinite.finite_ΓSpecIso_inv_comp_appTop {R : CommRingCat.{u}} {X : Scheme.{u}}
+    (f : X ⟶ Spec R) [IsFinite f] : ((Scheme.ΓSpecIso R).inv ≫ f.appTop).hom.Finite :=
+  RingHom.finite_respectsIso.2 (e := (Scheme.ΓSpecIso _).symm.commRingCatIsoToRingEquiv) _
+    f.finite_appTop
 
 variable {K : Type u} [Field K] {X : Scheme.{u}}
 
