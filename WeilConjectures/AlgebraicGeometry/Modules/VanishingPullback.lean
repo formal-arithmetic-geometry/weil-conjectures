@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Vanishing of a section of a line bundle is compatible with pullback
@@ -59,27 +60,18 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X Y : Scheme.{u}}
 
-lemma mem_smul_top_of_semilinear {R S : Type u} [CommRing R] [CommRing S]
-    {M N : Type u} [AddCommGroup M] [Module R M] [AddCommGroup N] [Module S N]
-    (σ : R →+* S) (f : M →+ N) (hf : ∀ (r : R) (m : M), f (r • m) = σ r • f m)
-    (I : Ideal R) (J : Ideal S) (hIJ : ∀ r ∈ I, σ r ∈ J) {z : M}
-    (hz : z ∈ I • (⊤ : Submodule R M)) : f z ∈ J • (⊤ : Submodule S N) := by
-  refine Submodule.smul_induction_on hz (fun r hr n _ ↦ ?_) (fun p q hp hq ↦ ?_)
-  · rw [hf]
-    exact Submodule.smul_mem_smul (hIJ r hr) trivial
-  · rw [map_add]
-    exact Submodule.add_mem _ hp hq
-
+/-- **Vanishing at a point is invariant under an isomorphism** of sheaves of modules: an
+isomorphism is linear on the stalk at `x`, hence carries `𝔪ₓ Mₓ` onto `𝔪ₓ Nₓ`. -/
 lemma vanishesAt_iff_of_iso {M N : X.Modules} (e : M ≅ N) (m : Γ(M, ⊤)) (x : X) :
     N.VanishesAt (Hom.app e.hom ⊤ m) x ↔ M.VanishesAt m x := by
   have hgerm : N.presheaf.germ ⊤ x trivial (Hom.app e.hom ⊤ m)
       = e.hom.stalkMap x (M.presheaf.germ ⊤ x trivial m) :=
     (Hom.germ_stalkMap_apply e.hom (U := ⊤) x trivial m).symm
   rw [vanishesAt_iff, vanishesAt_iff, hgerm]
-  refine ⟨fun h ↦ ?_, fun h ↦ mem_smul_top_of_semilinear (RingHom.id _)
+  refine ⟨fun h ↦ ?_, fun h ↦ Submodule.mem_smul_top_of_semilinear (RingHom.id _)
     (AddMonoidHom.mk' (fun z ↦ e.hom.stalkMap x z) (fun _ _ ↦ map_add _ _ _))
     (fun r z ↦ Hom.stalkMap_smul e.hom x r z) _ _ (fun r hr ↦ hr) h⟩
-  have key := mem_smul_top_of_semilinear (RingHom.id (X.presheaf.stalk x))
+  have key := Submodule.mem_smul_top_of_semilinear (RingHom.id (X.presheaf.stalk x))
     (AddMonoidHom.mk' (fun z ↦ e.inv.stalkMap x z) (fun _ _ ↦ map_add _ _ _))
     (fun r z ↦ Hom.stalkMap_smul e.inv x r z)
     (IsLocalRing.maximalIdeal (X.presheaf.stalk x))
@@ -88,10 +80,18 @@ lemma vanishesAt_iff_of_iso {M N : X.Modules} (e : M ≅ N) (m : Γ(M, ⊤)) (x 
   rwa [← Hom.stalkMap_comp_apply, e.hom_inv_id, Hom.stalkMap_id,
     ConcreteCategory.id_apply] at key
 
+/-- A global section of `F`, read as a global section of the restriction of `F` along an open
+immersion `j`: the sections of `F.restrict j` over `⊤` are the sections of `F` over the image
+of `⊤`, so this is a restriction map of `F`. -/
 noncomputable def restrictSectionTop (j : Y ⟶ X) [IsOpenImmersion j] (F : X.Modules)
     (s : Γ(F, ⊤)) : Γ((restrictFunctor j).obj F, ⊤) :=
   F.presheaf.map (homOfLE (j.image_preimage_le ⊤)).op s
 
+/-- **The comparison between restriction and pullback along an open immersion, read on global
+sections**: the isomorphism `F|_Y ≅ j^* F` of
+`AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback` carries the restriction of a
+global section of `F` to its pullback. Both are the unit of the respective adjunction, so this
+is `CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app`. -/
 lemma restrictFunctorIsoPullback_hom_app_app_top (j : Y ⟶ X) [IsOpenImmersion j]
     (F : X.Modules) (s : Γ(F, ⊤)) :
     Hom.app ((restrictFunctorIsoPullback j).hom.app F) ⊤ (restrictSectionTop j F s)
@@ -109,6 +109,10 @@ lemma restrictFunctorIsoPullback_hom_app_app_top (j : Y ⟶ X) [IsOpenImmersion 
     sectionsPullback_apply j F s (homOfLE (by simp : (⊤ : Y.Opens) ≤ j ⁻¹ᵁ ⊤)), hid]
   exact h
 
+/-- **Vanishing is compatible with restriction to an open subscheme.** Restriction along an
+open immersion does not change stalks
+(`AlgebraicGeometry.Scheme.Modules.restrictStalkEquiv`), and the comparison is semilinear over
+an isomorphism of local rings, so it matches the two maximal ideals. -/
 lemma vanishesAt_restrictSectionTop_iff (j : Y ⟶ X) [IsOpenImmersion j] (F : X.Modules)
     (s : Γ(F, ⊤)) (y : Y) :
     ((restrictFunctor j).obj F).VanishesAt (restrictSectionTop j F s) y ↔
@@ -137,7 +141,7 @@ lemma vanishesAt_restrictSectionTop_iff (j : Y ⟶ X) [IsOpenImmersion j] (F : X
       (inv (j.stalkMap y) : Y.presheaf.stalk y ⟶ X.presheaf.stalk (j.base y)))
     rwa [← ConcreteCategory.comp_apply, IsIso.hom_inv_id, ConcreteCategory.id_apply] at this
   rw [vanishesAt_iff, vanishesAt_iff, ← hg]
-  refine ⟨fun h ↦ mem_smul_top_of_semilinear _
+  refine ⟨fun h ↦ Submodule.mem_smul_top_of_semilinear _
     (restrictStalkEquiv j y F).toAddMonoidHom
     (fun r z ↦ restrictStalkEquiv_smul j y F r z) _ _ hmem h, fun h ↦ ?_⟩
   have hsym : ∀ (r : X.presheaf.stalk (j.base y)) (w : F.presheaf.stalk (j.base y)),
@@ -149,7 +153,7 @@ lemma vanishesAt_restrictSectionTop_iff (j : Y ⟶ X) [IsOpenImmersion j] (F : X
     simp only [AddEquiv.toAddMonoidHom_eq_coe, AddMonoidHom.coe_coe]
     rw [AddEquiv.apply_symm_apply, restrictStalkEquiv_smul, AddEquiv.apply_symm_apply,
       ← ConcreteCategory.comp_apply, IsIso.hom_inv_id, ConcreteCategory.id_apply]
-  have key := mem_smul_top_of_semilinear
+  have key := Submodule.mem_smul_top_of_semilinear
     (ConcreteCategory.hom (j.stalkMap y) :
       X.presheaf.stalk (j.base y) →+* Y.presheaf.stalk y)
     (restrictStalkEquiv j y F).symm.toAddMonoidHom hsym _ _ hmem' h
