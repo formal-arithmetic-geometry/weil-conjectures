@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
-public import WeilConjectures.AlgebraicGeometry.CubeTheorem
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardField
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackConstant
 public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
@@ -63,11 +63,11 @@ Also proved, as the bridge to the theorem of the cube:
 ## Implementation notes
 
 * **The Künneth hypothesis is carried, not discharged.** Every statement below whose proof goes
-  through the theorem of the cube takes the hypothesis `hkunneth` of
-  `AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_pullbackMapSliceInclusion`,
-  instantiated at `X = Y = Z = A` and `x₀ = y₀ = e`, and passes it straight on, exactly as
-  `WeilConjectures.AlgebraicGeometry.CubeTheorem` carries it. Discharging it is the work of a
-  separate issue, after which it can be stripped from all of these signatures at once.
+  through the theorem of the cube takes the hypothesis `hkunneth`, the predicate
+  `AlgebraicGeometry.Scheme.IsCubeKunneth` instantiated at `X = Y = Z = A` and `x₀ = y₀ = e`,
+  and passes it straight on, exactly as
+  `WeilConjectures.AlgebraicGeometry.TheoremOfCube.Basic` carries it. Discharging it is the
+  work of a separate issue, after which it can be stripped from all of these signatures at once.
 * **Everything is stated in the Picard group.** The seven-fold cancellation that the proof of
   the cube identity comes down to is a computation in the abelian group `Pic`, not a coherence
   argument about seven tensor isomorphisms, so the Picard group is what the statements are
@@ -115,13 +115,13 @@ variable {K : Type u} [Field K] {X Y Z : Scheme.{u}}
 /-- **The theorem of the cube, read in the Picard group** (blueprint: `thm:cube-cube`).
 
 This is the theorem of the cube,
-`AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_pullbackMapSliceInclusion`,
+`AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_of_map_sliceInclusion_eq_one`,
 with "trivial" spelled as "of trivial class in the Picard group" throughout; the two spellings
 are exchanged by `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`, and every class in the Picard
 group is the class of a line bundle by `AlgebraicGeometry.Scheme.Pic.exists_mk`.
 
 The Künneth hypothesis `hkunneth` is carried, not discharged; see the implementation notes of
-`WeilConjectures.AlgebraicGeometry.CubeTheorem`. -/
+`WeilConjectures.AlgebraicGeometry.TheoremOfCube.Basic`. -/
 theorem eq_one_of_map_sliceInclusion_eq_one
     (πX : X ⟶ Spec (.of K)) [IsProper πX] [GeometricallyIntegral πX]
     (πY : Y ⟶ Spec (.of K)) [IsProper πY] [GeometricallyIntegral πY]
@@ -130,13 +130,7 @@ theorem eq_one_of_map_sliceInclusion_eq_one
     (x₀ : Spec (.of K) ⟶ X) (hx₀ : x₀ ≫ πX = 𝟙 _)
     (y₀ : Spec (.of K) ⟶ Y) (hy₀ : y₀ ≫ πY = 𝟙 _)
     (z₀ : Spec (.of K) ⟶ Z) (hz₀ : z₀ ≫ πZ = 𝟙 _)
-    (hkunneth : ∀ (t : Z) (n : ℕ), Function.Injective
-      ((thickeningH1Map (Limits.pullback.snd (Limits.pullback.fst πX πY ≫ πX) πZ)
-            (Limits.pullback.snd πX πZ) (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀)
-            (pullbackMapSliceInclusionFst_snd πX πY πZ y₀ hy₀) t n).prod
-        (thickeningH1Map (Limits.pullback.snd (Limits.pullback.fst πX πY ≫ πX) πZ)
-            (Limits.pullback.snd πY πZ) (pullbackMapSliceInclusionSnd πX πY πZ x₀ hx₀)
-            (pullbackMapSliceInclusionSnd_snd πX πY πZ x₀ hx₀) t n)))
+    (hkunneth : ∀ (t : Z) (n : ℕ), IsCubeKunneth πX πY πZ x₀ hx₀ y₀ hy₀ t n)
     (x : (Limits.pullback (Limits.pullback.fst πX πY ≫ πX) πZ).Pic)
     (hz : Pic.map (sliceInclusionFst (Limits.pullback.fst πX πY ≫ πX) πZ z₀ hz₀) x = 1)
     (hX : Pic.map (pullbackMapSliceInclusionFst πX πY πZ y₀ hy₀) x = 1)
@@ -144,8 +138,8 @@ theorem eq_one_of_map_sliceInclusion_eq_one
     x = 1 := by
   obtain ⟨L, hL, rfl⟩ := Pic.exists_mk x
   rw [Pic.mk_eq_one_iff, ← Modules.nonempty_iso_structureModules_iff]
-  exact Modules.nonempty_iso_structureModules_of_pullbackMapSliceInclusion
-    πX πY πZ x₀ hx₀ y₀ hy₀ z₀ hz₀ hkunneth hL hz hX hY
+  exact Modules.nonempty_iso_structureModules_of_map_sliceInclusion_eq_one
+    πX πY πZ x₀ hx₀ y₀ hy₀ hkunneth z₀ hz₀ hL hz hX hY
 
 end Scheme.Pic
 
@@ -249,17 +243,8 @@ theorem pullbackMapSliceInclusionSnd_eq_lift :
 
 variable [IsAbelianVariety G]
 
-variable (hkunneth : ∀ (t : G.left) (n : ℕ), Function.Injective
-  ((thickeningH1Map (Limits.pullback.snd (Limits.pullback.fst G.hom G.hom ≫ G.hom) G.hom)
-        (Limits.pullback.snd G.hom G.hom)
-        (pullbackMapSliceInclusionFst G.hom G.hom G.hom η[G].left (one_left_comp_hom G))
-        (pullbackMapSliceInclusionFst_snd G.hom G.hom G.hom η[G].left (one_left_comp_hom G))
-        t n).prod
-    (thickeningH1Map (Limits.pullback.snd (Limits.pullback.fst G.hom G.hom ≫ G.hom) G.hom)
-        (Limits.pullback.snd G.hom G.hom)
-        (pullbackMapSliceInclusionSnd G.hom G.hom G.hom η[G].left (one_left_comp_hom G))
-        (pullbackMapSliceInclusionSnd_snd G.hom G.hom G.hom η[G].left (one_left_comp_hom G))
-        t n)))
+variable (hkunneth : ∀ (t : G.left) (n : ℕ), Scheme.IsCubeKunneth G.hom G.hom G.hom
+  η[G].left (one_left_comp_hom G) η[G].left (one_left_comp_hom G) t n)
 
 include hkunneth
 
