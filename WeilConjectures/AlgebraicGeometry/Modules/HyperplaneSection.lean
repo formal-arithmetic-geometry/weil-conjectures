@@ -64,6 +64,8 @@ vanishes at a point exactly where `g` does.
 - `AlgebraicGeometry.Scheme.Modules.mono_mulSection_iff`: **the nonzerodivisor criterion**,
   multiplication by `s` is a monomorphism `F ⟶ F ⊗ L` if and only if `s` vanishes at no
   associated point of `F`.
+- `AlgebraicGeometry.Scheme.Modules.support_cokernel_mulSection`: **the support of the cokernel
+  is `Supp F ∩ Z(s)`**, the intersection of the support of `F` with the zero locus of `s`.
 - `AlgebraicGeometry.Scheme.Modules.exists_shortExact_tensor_of_forall_not_vanishesAt`: **the
   hyperplane exact sequence**, with the support conditions on its cokernel.
 - `AlgebraicGeometry.Scheme.Modules.exists_shortExact_supportDim_add_one_le`:
@@ -81,9 +83,9 @@ here.
 
 ## TODO
 
-- Identify the cokernel `G` with `(F ⊗ L)|_D`, where `D` is the zero scheme of `s`, and its
-  support with `Supp F ∩ D`. This is the geometric description of the sequence; the analytic
-  content used by Snapper's induction is the support statement proved here.
+- Identify the cokernel `G` with `(F ⊗ L)|_D`, where `D` is the zero scheme of `s`. This is the
+  geometric description of the sequence; its support is already computed here, as
+  `AlgebraicGeometry.Scheme.Modules.support_cokernel_mulSection`.
 -/
 
 @[expose] public section
@@ -797,10 +799,10 @@ associated point of `F`. Then there is a short exact sequence
 0 ⟶ F ⟶ F ⊗ L ⟶ G ⟶ 0
 ```
 
-in which `G` is coherent, the first map is multiplication by `s`, the support of `G` is
-contained in the support of `F`, and `G` is not supported at any generic point of an irreducible
-component of the support of `F` — that is, at any point of the support of `F` to which no other
-point of the support specialises.
+in which `G` is coherent, the first map is multiplication by `s`, the support of `G` is the
+intersection of the support of `F` with the zero locus of `s`, and `G` is not supported at any
+generic point of an irreducible component of the support of `F` — that is, at any point of the
+support of `F` to which no other point of the support specialises.
 
 This is the form consumed by `exists_shortExact_supportDim_add_one_le` below: the sequence is
 the one along which the Euler characteristic is additive, and the last condition is what makes
@@ -809,7 +811,7 @@ theorem exists_shortExact_tensor_of_forall_not_vanishesAt [IsLocallyNoetherian X
     {L : X.Modules} (hL : L.Invertible) (F : X.Modules) [F.IsCoherent] (s : Γ(L, ⊤))
     (hs : ∀ x ∈ F.associatedPoints, ¬ L.VanishesAt s x) :
     ∃ (G : X.Modules) (_ : G.IsCoherent) (u : F ⟶ F ⊗ L) (v : F ⊗ L ⟶ G) (hw : u ≫ v = 0),
-      (ShortComplex.mk u v hw).ShortExact ∧ G.support ⊆ F.support ∧
+      (ShortComplex.mk u v hw).ShortExact ∧ G.support = F.support ∩ {x | L.VanishesAt s x} ∧
         ∀ x ∈ F.support, (∀ y : X, y ∈ F.support → y ⤳ x → y = x) → x ∉ G.support := by
   have hFL : (F ⊗ L).IsCoherent := isCoherent_tensorObj_of_invertible F hL
   refine ⟨cokernel (mulSection F s),
@@ -818,7 +820,8 @@ theorem exists_shortExact_tensor_of_forall_not_vanishesAt [IsLocallyNoetherian X
     { exact := ShortComplex.exact_cokernel _
       mono_f := mono_mulSection_of_forall_not_vanishesAt hL F s hs
       epi_g := inferInstance },
-    support_cokernel_mulSection_subset hL F s, fun x hx hmin ↦ ?_⟩
+    support_cokernel_mulSection hL F s (mono_mulSection_of_forall_not_vanishesAt hL F s hs),
+    fun x hx hmin ↦ ?_⟩
   obtain ⟨U, hU, hxU⟩ : ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U := by
     obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
       X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
@@ -849,7 +852,8 @@ theorem exists_shortExact_supportDim_add_one_le (k : Type u) [Field k] [Infinite
     exists_shortExact_tensor_of_forall_not_vanishesAt hL F s hs
   have : G.IsCoherent := hG
   exact ⟨G, hG, u, v, hw, hSE,
-    supportDim_add_one_le_supportDim_of_forall_minimal hGF fun x hx hmin' ↦
+    supportDim_add_one_le_supportDim_of_forall_minimal
+      (hGF.subset.trans Set.inter_subset_left) fun x hx hmin' ↦
       hmin x hx fun y hy hyx ↦ hmin' y hy hyx⟩
 
 end AlgebraicGeometry.Scheme.Modules
