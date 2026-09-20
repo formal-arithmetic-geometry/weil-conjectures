@@ -1,5 +1,6 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.CubeIdentity
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
