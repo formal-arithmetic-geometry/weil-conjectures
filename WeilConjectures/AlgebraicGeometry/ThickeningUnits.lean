@@ -30,7 +30,7 @@ local ring surjecting onto `Aₙ`, units lift along each step of the tower.
 - `AlgebraicGeometry.Scheme.unitsMap_subschemeι_thickeningIdeal_pullbackSnd_surjective` — every
   unit on `(X ×_K Z) ×_Z Zₙ` is the restriction of a unit on `(X ×_K Z) ×_Z Z_{n+1}`. This is
   the unit-extension hypothesis of the theorem of the cube, in
-  `WeilConjectures.AlgebraicGeometry.TheoremOfCube`.
+  `WeilConjectures.AlgebraicGeometry.TheoremOfCube.Tower`.
 -/
 
 @[expose] public section

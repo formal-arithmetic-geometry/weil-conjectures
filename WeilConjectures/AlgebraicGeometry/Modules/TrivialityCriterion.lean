@@ -39,6 +39,8 @@ field of a point of the base.
 
 ## Main results
 
+- `AlgebraicGeometry.Scheme.Pic.map_mk_eq_one_iff`: the class of `f ^* L` is trivial in the
+  Picard group exactly when `f ^* L` is isomorphic to the structure sheaf.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorUnit_iff_of_isField`: **the triviality
   criterion**, under the hypotheses that `X` is integral and that its ring of global functions is
   a field.
@@ -78,7 +80,19 @@ universe u
 
 open CategoryTheory MonoidalCategory SheafOfModules
 
-namespace AlgebraicGeometry.Scheme.Modules
+namespace AlgebraicGeometry.Scheme
+
+/-- **The class of a pullback is trivial in the Picard group exactly when the pullback is
+isomorphic to the structure sheaf.** This is the bridge between the `Pic`-theoretic spelling of
+"`L` is trivial" and the sheaf-theoretic one: it is
+`AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff` composed with
+`AlgebraicGeometry.Scheme.Modules.nonempty_iso_structureModules_iff`. -/
+theorem Pic.map_mk_eq_one_iff {X Y : Scheme.{u}} (f : X ⟶ Y) {L : Y.Modules} (hL : L.Invertible) :
+    Pic.map f (Pic.mk L hL) = 1 ↔
+      Nonempty ((Modules.pullback f).obj L ≅ X.structureModules) := by
+  rw [Pic.map_mk, Pic.mk_eq_one_iff, Modules.nonempty_iso_structureModules_iff]
+
+namespace Modules
 
 variable {X : Scheme.{u}} {L N : X.Modules}
 
@@ -348,4 +362,6 @@ theorem nonempty_restrictToFiber_iso_structureModules_iff_nontrivial (f : W ⟶ 
 
 end Fibre
 
-end AlgebraicGeometry.Scheme.Modules
+end Modules
+
+end AlgebraicGeometry.Scheme

@@ -31,10 +31,11 @@ of `𝒪_{W ×_T T_{n+1}}`-modules. Both are instances of the general constructi
 `AlgebraicGeometry.Scheme.IdealSheafData.pushforwardFreeDesc`, which needs nothing about
 thickenings beyond the vanishing `g.ker * Iₙ = 0`.
 
-The point of the comparison morphism is that it is an isomorphism when the `m j` are the
-images of a `κ(t)`-basis of `𝔪_t ^ (n + 1) ⧸ 𝔪_t ^ (n + 2)`: the ideal `Iₙ` is the pullback to
-`W ×_T T₀` of that vector space. This is **not** proved here, and is the subject of a later
-file.
+The point of the comparison morphism is that it is an isomorphism when `f` is flat and the
+`m j` are the images of a `κ(t)`-basis of `𝔪_t ^ (n + 1) ⧸ 𝔪_t ^ (n + 2)`: the ideal `Iₙ` is
+the pullback to `W ×_T T₀` of that vector space. This is **not** proved here; it is
+`AlgebraicGeometry.Scheme.isIso_pushforwardFreeToThickeningIdeal`, in
+`WeilConjectures.AlgebraicGeometry.ThickeningFlat`.
 
 The family of global sections to feed to the comparison morphism is produced here, though.
 Writing `B = 𝒪_{T, t} ⧸ 𝔪_t ^ (n + 2)` and `K = ker (B ⟶ 𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1))`, the ideal
@@ -110,8 +111,10 @@ This is `AlgebraicGeometry.Scheme.IdealSheafData.pushforwardFreeDesc` for the va
 `IdealSheafData.eq_pushforwardFreeDesc` apply to it and say that the triangles above
 determine it.
 
-It is an isomorphism when the `m j` are the images of a `κ(t)`-basis of
-`𝔪_t ^ (n + 1) ⧸ 𝔪_t ^ (n + 2)`; that is not proved here. -/
+It is an isomorphism when `f` is flat and the `m j` are the images of a `κ(t)`-basis of
+`𝔪_t ^ (n + 1) ⧸ 𝔪_t ^ (n + 2)`; that is
+`AlgebraicGeometry.Scheme.isIso_pushforwardFreeToThickeningIdeal`, proved in
+`WeilConjectures.AlgebraicGeometry.ThickeningFlat`. -/
 noncomputable abbrev pushforwardFreeToThickeningIdeal {ι : Type u} [Finite ι]
     (m : ι → Γ((thickeningIdeal f t n).toModules, ⊤)) :
     (Modules.pushforward (infinitesimalBaseChangeMapZero f t n)).obj
