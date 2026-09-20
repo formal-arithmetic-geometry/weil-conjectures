@@ -27,7 +27,10 @@ of the blueprint proof.
 
 ## Main statements
 
-Both are in the namespace `AlgebraicGeometry.Scheme.Modules`.
+- `AlgebraicGeometry.Scheme.Pic.map_infinitesimalBaseChangeFst_zero_mk_eq_one_iff`: triviality
+  of `L` on `W ×_T T₀` is triviality of `L` on the fibre `W_t`.
+
+The next two are in the namespace `AlgebraicGeometry.Scheme.Modules`.
 
 - `eventually_nonempty_restrictToFiber_iso_structureModules`: for an arbitrary universally closed
   morphism `f : W ⟶ T` with geometrically integral fibres and sections of `f _* L` and `f _* N`
@@ -67,7 +70,32 @@ universe u
 
 open CategoryTheory MonoidalCategory
 
-namespace AlgebraicGeometry.Scheme.Modules
+namespace AlgebraicGeometry.Scheme
+
+/-- **Triviality on the zeroth infinitesimal base change is triviality on the fibre**: the two
+are carried into each other by the identification
+`AlgebraicGeometry.Scheme.infinitesimalBaseChangeZeroIsoFiber` of `W ×_T T₀` with `W_t`, which
+commutes with the two morphisms to `W`.
+
+```
+   W ×_T T₀ ──────────────≅─────────────▶ W_t
+         ╲                                 │
+           ╲                               │ f.fiberι t
+             ╲  ibcFst f t 0               │
+               ╲                           ▼
+                 ──────────────────────▶   W
+```
+
+Here `ibcFst f t 0` is `AlgebraicGeometry.Scheme.infinitesimalBaseChangeFst f t 0`. -/
+theorem Pic.map_infinitesimalBaseChangeFst_zero_mk_eq_one_iff {W T : Scheme.{u}} (f : W ⟶ T)
+    (t : T) {L : W.Modules} (hL : L.Invertible) :
+    Pic.map (infinitesimalBaseChangeFst f t 0) (Pic.mk L hL) = 1 ↔
+      Nonempty ((Modules.restrictToFiber f t).obj L ≅ (f.fiber t).structureModules) := by
+  rw [← Pic.map_mk_eq_one_iff _ hL, ← infinitesimalBaseChangeZeroIsoFiber_hom_fiberι f t,
+    Pic.map_comp_apply]
+  exact _root_.map_eq_one_iff _ (Pic.map_injective_of_isIso _)
+
+namespace Modules
 
 noncomputable section
 
@@ -204,4 +232,6 @@ end Projection
 
 end
 
-end AlgebraicGeometry.Scheme.Modules
+end Modules
+
+end AlgebraicGeometry.Scheme

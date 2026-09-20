@@ -20,7 +20,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Units
-public import WeilConjectures.AlgebraicGeometry.CubeTheorem
 public import WeilConjectures.AlgebraicGeometry.EulerCharacteristicPositivity
 public import WeilConjectures.AlgebraicGeometry.Group.Etale
 public import WeilConjectures.AlgebraicGeometry.Group.Infinitesimal
@@ -53,7 +52,8 @@ public import WeilConjectures.AlgebraicGeometry.Rigidity
 public import WeilConjectures.AlgebraicGeometry.Seesaw
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.Snapper
-public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Basic
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Tower
 public import WeilConjectures.AlgebraicGeometry.ThickeningFree
 public import WeilConjectures.AlgebraicGeometry.ThickeningUnits
 public import WeilConjectures.AlgebraicGeometry.TrivialityLocus
