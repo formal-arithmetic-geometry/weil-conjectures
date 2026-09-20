@@ -72,43 +72,49 @@ section Trivialisation
 
 variable {m : ℕ} {f : A} (hf : f ∈ 𝒜 m)
 
-/-- The tautological generator of `𝒪(m * k)` over a basic open set restricts to the tautological
-generator over any smaller open set. -/
-lemma map_sectionPow {U V : (Proj 𝒜).Opens} (hUV : V ≤ U)
-    (hU : ∀ x : (op U).unop, f ∉ x.1.asHomogeneousIdeal.toIdeal) (k : ℤ) {c : ℤ}
+include hf in
+/-- The tautological generator of `𝒪(m * k)` over an open set on which a homogeneous element `f`
+of degree `m` is invertible restricts to the tautological generator over any smaller open set. -/
+lemma map_sectionPow {U V : (Proj 𝒜).Opens} (hVU : V ≤ U)
+    (hU : ∀ x : (op U).unop, f ∉ x.1.asHomogeneousIdeal.toIdeal)
+    (hV : ∀ x : (op V).unop, f ∉ x.1.asHomogeneousIdeal.toIdeal) (k : ℤ) {c : ℤ}
     (hc : c = m * k) :
-    (twistingSheaf 𝒜 c).presheaf.map (homOfLE hUV).op (sectionPow hf hU k hc) =
-      sectionPow hf (fun x ↦ hU ⟨x.1, hUV x.2⟩) k hc :=
+    (twistingSheaf 𝒜 c).presheaf.map (homOfLE hVU).op (sectionPow hf hU k hc) =
+      sectionPow hf hV k hc :=
   Subtype.ext (funext fun _ ↦ rfl)
 
 include hf in
-/-- **Multiplication by the tautological generator is an isomorphism over a basic open set.** If
-`f` is homogeneous of degree `m`, then multiplication by `f ^ k` is an isomorphism
-`𝒪_{D₊(f)} ≅ 𝒪(m * k)|_{D₊(f)}` of sheaves of modules on the open subscheme `D₊(f)`. -/
-lemma isIso_unitSmulRestrictHom_sectionPow (k : ℤ) {c : ℤ} (hc : c = m * k) :
-    IsIso (unitSmulRestrictHom (M := twistingSheaf 𝒜 c)
-      (W := Proj.basicOpen 𝒜 f) (sectionPow hf (fun x ↦ x.2) k hc)) := by
-  have hiso : IsIso (smulRestrictHom (M := twistingSheaf 𝒜 c) (W := Proj.basicOpen 𝒜 f)
-      (sectionPow hf (fun x ↦ x.2) k hc)) := by
+/-- **Multiplication by the tautological generator is an isomorphism over a trivialising open
+set.** If `f` is homogeneous of degree `m` and invertible on `W`, then multiplication by `f ^ k`
+is an isomorphism `𝒪_W ≅ 𝒪(m * k)|_W` of sheaves of modules on the open subscheme `W`. -/
+lemma isIso_unitSmulRestrictHom_sectionPow {W : (Proj 𝒜).Opens}
+    (hW : ∀ x : (op W).unop, f ∉ x.1.asHomogeneousIdeal.toIdeal) (k : ℤ) {c : ℤ}
+    (hc : c = m * k) :
+    IsIso (unitSmulRestrictHom (M := twistingSheaf 𝒜 c) (W := W) (sectionPow hf hW k hc)) := by
+  have hiso : IsIso (smulRestrictHom (M := twistingSheaf 𝒜 c) (W := W)
+      (sectionPow hf hW k hc)) := by
     rw [Scheme.Modules.Hom.isIso_iff_isIso_app]
     intro V
     rw [ConcreteCategory.isIso_iff_bijective]
-    have hle : (Proj.basicOpen 𝒜 f).ι ''ᵁ V ≤ Proj.basicOpen 𝒜 f :=
-      (Proj.basicOpen 𝒜 f).ι_image_le V
-    have happ : ∀ r, (smulRestrictHom (M := twistingSheaf 𝒜 c) (W := Proj.basicOpen 𝒜 f)
-        (sectionPow hf (fun x ↦ x.2) k hc)).app V r =
-        smulSection (sectionPow hf (fun x ↦ x.2) k hc) _ hle r := fun _ ↦ rfl
-    simp only [happ]
-    have hsmul : ∀ r, smulSection (M := twistingSheaf 𝒜 c)
-        (sectionPow hf (fun x ↦ x.2) k hc) _ hle r =
-        sectionPowEquiv hf (fun x ↦ hle x.2) k hc r := by
+    have hle : W.ι ''ᵁ V ≤ W := W.ι_image_le V
+    have hV : ∀ x : (op (W.ι ''ᵁ V)).unop, f ∉ x.1.asHomogeneousIdeal.toIdeal :=
+      fun x ↦ hW ⟨x.1, hle x.2⟩
+    have happ : ∀ r, (smulRestrictHom (M := twistingSheaf 𝒜 c) (W := W)
+        (sectionPow hf hW k hc)).app V r = sectionPowEquiv hf hV k hc r := by
       intro r
+      change smulSection (M := twistingSheaf 𝒜 c) (sectionPow hf hW k hc) _ hle r = _
       rw [smulSection]
       simp only [AddMonoidHom.mk'_apply, sectionPowEquiv_apply]
-      rw [map_sectionPow hf hle (fun x ↦ x.2) k hc]
-    simp only [hsmul]
-    exact (sectionPowEquiv hf (fun x ↦ hle x.2) k hc).bijective
-  rw [unitSmulRestrictHom]
+      rw [map_sectionPow hf hle hW hV k hc]
+    have hbij := (sectionPowEquiv hf hV k hc).bijective
+    refine ⟨fun r r' h ↦ hbij.1 ?_, fun t ↦ ?_⟩
+    · rw [← happ, ← happ, h]
+    · obtain ⟨r, hr⟩ := hbij.2 t
+      exact ⟨r, by rw [happ, hr]⟩
+  have hfac : unitSmulRestrictHom (M := twistingSheaf 𝒜 c) (W := W) (sectionPow hf hW k hc) =
+      (restrictUnitIso W.ι).inv ≫
+        smulRestrictHom (M := twistingSheaf 𝒜 c) (W := W) (sectionPow hf hW k hc) := rfl
+  rw [hfac]
   infer_instance
 
 end Trivialisation
@@ -125,38 +131,43 @@ theorem vanishesAt_homogeneousSection_iff_of_mem_basicOpen {m : ℕ} {f : A} (hf
     {k : ℕ} (hjk : j = m * k) {x : Proj 𝒜} (hx : x ∈ Proj.basicOpen 𝒜 f) :
     (twistingSheaf 𝒜 j).VanishesAt (homogeneousSection ha) x ↔ x ∉ Proj.basicOpen 𝒜 a := by
   have hc : (j : ℤ) = m * (k : ℤ) := by exact_mod_cast hjk
-  set W : (Proj 𝒜).Opens := Proj.basicOpen 𝒜 f with hW
-  set g : Γ(twistingSheaf 𝒜 j, W) := sectionPow hf (fun x ↦ x.2) (k : ℤ) hc with hg
-  haveI : IsIso (unitSmulRestrictHom g) := isIso_unitSmulRestrictHom_sectionPow hf (k : ℤ) hc
+  have hW : ∀ y : (op (Proj.basicOpen 𝒜 f)).unop, f ∉ y.1.asHomogeneousIdeal.toIdeal :=
+    fun y ↦ y.2
+  set W : (Proj 𝒜).Opens := Proj.basicOpen 𝒜 f with hWdef
+  set g : Γ(twistingSheaf 𝒜 j, W) := sectionPow hf hW (k : ℤ) hc with hgdef
+  have : IsIso (unitSmulRestrictHom g) := isIso_unitSmulRestrictHom_sectionPow hf hW (k : ℤ) hc
   set r : Γ(Proj 𝒜, W) :=
-    powCoeff hf (fun x ↦ x.2) (k : ℤ) hc
-      ((twistingSheaf 𝒜 j).presheaf.map W.leTop.op (homogeneousSection ha)) with hr
+    powCoeff hf hW (k : ℤ) hc
+      ((twistingSheaf 𝒜 j).presheaf.map W.leTop.op (homogeneousSection ha)) with hrdef
   have hres : (twistingSheaf 𝒜 j).presheaf.map W.leTop.op (homogeneousSection ha) = r • g :=
-    (powCoeff_smul_sectionPow hf (fun x ↦ x.2) (k : ℤ) hc _).symm
+    (powCoeff_smul_sectionPow hf hW (k : ℤ) hc _).symm
   rw [vanishesAt_iff_notMem_basicOpen g (homogeneousSection ha) r hres hx]
   -- it remains to identify the basic open set of the coefficient `a / f ^ k` with `D₊(a)`
   have hfk : f ^ k ∉ x.asHomogeneousIdeal := fun h ↦ hx (x.isPrime.mem_of_pow_mem k h)
   have hfkd : f ^ k ∈ 𝒜 j := by
-    simpa [hjk, smul_eq_mul] using SetLike.pow_mem_graded k hf
+    rw [hjk, mul_comm]
+    simpa [smul_eq_mul] using SetLike.pow_mem_graded k hf
   have hval : r.1 ⟨x, hx⟩ =
       (HomogeneousLocalization.mk ⟨j, ⟨a, ha⟩, ⟨f ^ k, hfkd⟩, hfk⟩ :
         HomogeneousLocalization.AtPrime 𝒜 x.asHomogeneousIdeal.toIdeal) := by
+    have hsx : ((twistingSheaf 𝒜 j).presheaf.map W.leTop.op (homogeneousSection ha)).1
+        ⟨x, hx⟩ = Localization.mk a 1 := rfl
     refine HomogeneousLocalization.val_injective _ ?_
-    rw [hr, val_powCoeff, HomogeneousLocalization.val_mk,
-      powFun_neg_natCast (fun x ↦ x.2) k ⟨x, hx⟩ hfk]
+    rw [hrdef, val_powCoeff, HomogeneousLocalization.val_mk,
+      powFun_neg_natCast hW k ⟨x, hx⟩ hfk, hsx]
     simp [Localization.mk_mul]
+  have hgerm : Proj.stalkIso' 𝒜 x ((Proj 𝒜).presheaf.germ W x hx r) = r.1 ⟨x, hx⟩ :=
+    Proj.stalkIso'_germ 𝒜 W x hx r
   refine not_congr ?_
-  rw [Scheme.mem_basicOpen _ r x hx, ← isUnit_mk_iff_mem_basicOpen ha x hfkd hfk, ← hval]
-  exact ⟨fun h ↦ by simpa [Proj.stalkIso'_germ] using h.map (Proj.stalkIso' 𝒜 x),
-    fun h ↦ by
-      have := h.map (Proj.stalkIso' 𝒜 x).symm
-      rwa [← Proj.stalkIso'_germ 𝒜 W x hx r, RingEquiv.symm_apply_apply] at this⟩
+  rw [Scheme.mem_basicOpen _ r x hx, ← isUnit_mk_iff_mem_basicOpen ha x hfkd hfk, ← hval, ← hgerm]
+  exact ⟨fun h ↦ h.map (Proj.stalkIso' 𝒜 x), fun h ↦ by
+    simpa using h.map (Proj.stalkIso' 𝒜 x).symm⟩
 
 include ha in
 /-- **A homogeneous element does not vanish, as a section of `𝒪(j)`, on its own basic open
 set.** Unlike
 `AlgebraicGeometry.Proj.vanishesAt_homogeneousSection_iff_of_mem_basicOpen`, this direction
-needs no trivialising element: `a` itself trivialises `𝒪(j)` on `D₊(a)`. -/
+needs no auxiliary trivialising element: `a` itself trivialises `𝒪(j)` on `D₊(a)`. -/
 theorem not_vanishesAt_homogeneousSection {x : Proj 𝒜} (hx : x ∈ Proj.basicOpen 𝒜 a) :
     ¬ (twistingSheaf 𝒜 j).VanishesAt (homogeneousSection ha) x := fun h ↦
   (vanishesAt_homogeneousSection_iff_of_mem_basicOpen ha ha (k := 1)
