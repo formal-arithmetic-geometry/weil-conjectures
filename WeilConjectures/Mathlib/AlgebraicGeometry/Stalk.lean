@@ -16,6 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
@@ -55,7 +56,9 @@ The last section base changes a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
   `f : Spec K ⟶ X` is a section of `π : X ⟶ Spec K` and `x` is the point it picks out, then
   `X₀ ⟶ X` is unchanged by composing with `X ⟶ Spec K ⟶ X`.
 - `AlgebraicGeometry.Scheme.finite_infinitesimalRing`: for a `k`-rational point of a locally
-  noetherian scheme, `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is a finite-dimensional `k`-algebra.
+  noetherian scheme, `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is a finite-dimensional `k`-algebra, and
+  `AlgebraicGeometry.Scheme.fg_ker_infinitesimalRingMap`: a noetherian stalk makes the kernel
+  of a transition map finitely generated.
 - `AlgebraicGeometry.Scheme.preimage_infinitesimalBaseChangeFst_eq_top`: every point of
   `W ×_T Tₙ` lies over `t`, so `W ×_T Tₙ` lies over every open neighbourhood of `t`.
 - `AlgebraicGeometry.Scheme.thickeningIdeal`: the ideal sheaf cutting out the closed immersion
@@ -138,6 +141,11 @@ noncomputable def infinitesimalRing (n : ℕ) : CommRingCat.{u} :=
 instance (n : ℕ) : IsLocalRing (X.infinitesimalRing x n) :=
   inferInstanceAs
     (IsLocalRing (X.presheaf.stalk x ⧸ maximalIdeal (X.presheaf.stalk x) ^ (n + 1)))
+
+instance [IsNoetherianRing (X.presheaf.stalk x)] (n : ℕ) :
+    IsNoetherianRing (X.infinitesimalRing x n) :=
+  inferInstanceAs
+    (IsNoetherianRing (X.presheaf.stalk x ⧸ maximalIdeal (X.presheaf.stalk x) ^ (n + 1)))
 
 /-- The quotient map `𝒪_{X, x} ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)`. -/
 noncomputable def toInfinitesimalRing (n : ℕ) : X.presheaf.stalk x ⟶ X.infinitesimalRing x n :=
@@ -375,6 +383,25 @@ lemma maximalIdeal_mul_ker_infinitesimalRingMap (n : ℕ) :
       RingHom.ker (X.infinitesimalRingMap x (Nat.le_succ n)).hom = ⊥ := by
   rw [← X.ker_infinitesimalRingMap_zero_eq_maximalIdeal x (n + 1)]
   exact X.mul_ker_infinitesimalRingMap x (Nat.zero_le (n + 1)) (Nat.le_succ n) (by omega)
+
+/-- **The kernel of `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 2) ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)` is a vector space
+over the residue field** of `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 2)`: it is annihilated by the maximal ideal
+(`AlgebraicGeometry.Scheme.maximalIdeal_mul_ker_infinitesimalRingMap`), so
+`Module.IsTorsionBySet.module` makes it a module over the quotient by it. This is the
+structure whose dimension counts the rank of the thickening ideal in
+`WeilConjectures.AlgebraicGeometry.ThickeningFlat`. -/
+noncomputable instance (n : ℕ) :
+    Module (X.infinitesimalRing x (n + 1) ⧸ maximalIdeal (X.infinitesimalRing x (n + 1)))
+      (RingHom.ker (X.infinitesimalRingMap x (Nat.le_succ n)).hom) :=
+  (IsLocalRing.isTorsionBySet_maximalIdeal_of_mul_eq_bot
+    (X.maximalIdeal_mul_ker_infinitesimalRingMap x n)).module
+
+/-- The kernel of a transition map `𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1) ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (m + 1)` is
+finitely generated as soon as the stalk `𝒪_{X, x}` is noetherian, since it is an ideal of a
+quotient of `𝒪_{X, x}`. -/
+lemma fg_ker_infinitesimalRingMap [IsNoetherianRing (X.presheaf.stalk x)] {m n : ℕ} (h : m ≤ n) :
+    (RingHom.ker (X.infinitesimalRingMap x h).hom).FG :=
+  IsNoetherian.noetherian _
 
 end Kernel
 
@@ -936,7 +963,9 @@ noncomputable def infinitesimalRingToStalk (n : ℕ) (x : infinitesimalBaseChang
 
 /-- **The germ at `x` of the global section attached to an element of
 `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` is its image under
-`AlgebraicGeometry.Scheme.infinitesimalRingToStalk`**, by definition of the latter. -/
+`AlgebraicGeometry.Scheme.infinitesimalRingToStalk`.** This is the bridge between the global
+sections produced by `AlgebraicGeometry.Scheme.exists_span_eq_and_forall_toModulesι_app_eq` and
+the stalk ideals of `AlgebraicGeometry.Scheme.stalkIdeal_thickeningIdeal`. -/
 @[simp]
 lemma germ_infinitesimalRingToΓ (n : ℕ) (x : infinitesimalBaseChange f t n)
     (b : T.infinitesimalRing t n) :

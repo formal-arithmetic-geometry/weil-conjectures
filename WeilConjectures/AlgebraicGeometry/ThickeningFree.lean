@@ -57,8 +57,8 @@ of it lifts to a family `e : ι → B` spanning `K` and with all relations havin
 - `AlgebraicGeometry.Scheme.exists_forall_toModulesι_app_eq_infinitesimalRingToΓ` — a family of
   elements of `K` is realized by a family of global sections of `Iₙ`.
 - `AlgebraicGeometry.Scheme.exists_span_eq_and_forall_toModulesι_app_eq` — the two together: a
-  finite family `e` spanning `K` with all relations having coefficients in `𝔪_B`, and a family
-  `m` of global sections of `Iₙ` lying over it.
+  finite family `e` spanning `K` with all relations having coefficients in `𝔪_B`, indexed by a
+  type of cardinality `dim_{κ(t)} K`, and a family `m` of global sections of `Iₙ` lying over it.
 -/
 
 @[expose] public section
@@ -165,8 +165,9 @@ thickening ideal.** The index type lives in the universe of the schemes, so that
 can be fed to `AlgebraicGeometry.Scheme.pushforwardFreeToThickeningIdeal`.
 
 The spanning and independence statements are exactly the hypotheses of
-`Ideal.range_linearCombination_algebraMap` and `Ideal.ker_linearCombination_eq_pi`, and the last
-one is what identifies the sections `m j` with the elements `e j` of `B`. -/
+`Ideal.range_linearCombination_algebraMap` and `Ideal.ker_linearCombination_eq_pi`, the third one
+identifies the sections `m j` with the elements `e j` of `B`, and the last one says that `ι`
+indexes a basis: its cardinality is `dim_{κ(t)} K`. -/
 theorem exists_span_eq_and_forall_toModulesι_app_eq
     (hfg : (RingHom.ker (T.infinitesimalRingMap t (Nat.le_succ n)).hom).FG) :
     ∃ (ι : Type u) (_ : Fintype ι) (e : ι → T.infinitesimalRing t (n + 1))
@@ -176,13 +177,16 @@ theorem exists_span_eq_and_forall_toModulesι_app_eq
       (∀ c : ι → T.infinitesimalRing t (n + 1), ∑ i, c i * e i = 0 →
         ∀ i, c i ∈ IsLocalRing.maximalIdeal (T.infinitesimalRing t (n + 1))) ∧
       (∀ j, (thickeningIdeal f t n).toModulesι.app ⊤ (m j) =
-        infinitesimalRingToΓ f t (n + 1) (e j)) := by
-  obtain ⟨ι, hι, e, hspan, hind, -⟩ :=
+        infinitesimalRingToΓ f t (n + 1) (e j)) ∧
+      Nat.card ι = Module.finrank (T.infinitesimalRing t (n + 1) ⧸
+          IsLocalRing.maximalIdeal (T.infinitesimalRing t (n + 1)))
+        (RingHom.ker (T.infinitesimalRingMap t (Nat.le_succ n)).hom) := by
+  obtain ⟨ι, hι, e, hspan, hind, hrank⟩ :=
     IsLocalRing.exists_span_eq_of_maximalIdeal_mul_eq_bot
       (T.maximalIdeal_mul_ker_infinitesimalRingMap t n) hfg
   obtain ⟨m, hm⟩ := exists_forall_toModulesι_app_eq_infinitesimalRingToΓ f t n e
     fun j ↦ hspan ▸ Ideal.subset_span ⟨j, rfl⟩
-  exact ⟨ι, hι, e, m, hspan, hind, hm⟩
+  exact ⟨ι, hι, e, m, hspan, hind, hm, hrank⟩
 
 end Sections
 
