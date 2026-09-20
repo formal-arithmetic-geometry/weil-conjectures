@@ -39,7 +39,8 @@ is assembled from three ingredients:
 * `AlgebraicGeometry.Scheme.Hom.pullbackAb`, `AlgebraicGeometry.Scheme.Hom.pushforwardAb` —
   the pullback and the pushforward of sheaves of abelian groups along `f`.
 * `AlgebraicGeometry.Scheme.Modules.pullbackAbComparison` — the comparison map
-  `f^{-1}(G^♭) ⟶ (f^* G)^♭`.
+  `f^{-1}(G^♭) ⟶ (f^* G)^♭`, together with its compatibility with the units and counits of the
+  two adjunctions.
 * `AlgebraicGeometry.Scheme.Modules.H.pullbackMap` — the pullback map
   `H^n(Y, G) ⟶ H^n(X, f^* G)`, semilinear over `f.appTop`.
 * `AlgebraicGeometry.Scheme.Modules.H.structurePullbackMap` — the composite of the pullback
@@ -51,10 +52,12 @@ is assembled from three ingredients:
 
 ## TODO
 
-The identity and composition laws for `H.pullbackMap` (`f = 𝟙` gives the identity, and
-`(f ≫ g)^*` is the composite modulo the canonical isomorphism `(f ≫ g)^* ≅ f^* ∘ g^*`)
-require `CategoryTheory.Abelian.Ext.mapExactFunctor` to be functorial in the exact functor,
-which Mathlib does not provide.
+The composition law for the pullback map on the cohomology of an *abelian sheaf* is
+`AlgebraicGeometry.Scheme.Hom.H.pullbackAddHom_comp`, in
+`WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp`. What is still missing is its
+transport to sheaves of modules: the composition law for `H.pullbackMap` itself
+(`(f ≫ g)^*` is the composite modulo the canonical isomorphism `(f ≫ g)^* ≅ f^* ∘ g^*`),
+and the identity law (`f = 𝟙` gives the identity).
 
 -/
 
@@ -66,7 +69,19 @@ open CategoryTheory Limits Opposite TopologicalSpace Abelian
 
 namespace AlgebraicGeometry
 
-namespace Scheme.Hom
+namespace Scheme
+
+/-- The constant sheaf functor of abelian groups on a scheme:
+
+```
+AddCommGrpCat ⥤ Sheaf (Opens.grothendieckTopology W) AddCommGrpCat,    A ↦ A_W
+```
+-/
+noncomputable abbrev constantSheafAb (W : Scheme.{u}) :
+    AddCommGrpCat.{u} ⥤ Sheaf (Opens.grothendieckTopology W) AddCommGrpCat.{u} :=
+  constantSheaf (Opens.grothendieckTopology W) AddCommGrpCat.{u}
+
+namespace Hom
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
@@ -99,7 +114,24 @@ noncomputable def pullbackAbConstantSheafIso (A : AddCommGrpCat.{u}) :
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
     isTerminalTop isTerminalTop).app A
 
-end Scheme.Hom
+/-- **The pushforward of abelian sheaves composes strictly**: `(a ≫ b)_♭` is `a_♭ ⋙ b_♭`, not
+merely isomorphic to it.
+
+```
+Sheaf Z --a_♭--> Sheaf X --b_♭--> Sheaf Y
+   |                                 ^
+   +------------(a ≫ b)_♭------------+
+```
+
+Contrast `AlgebraicGeometry.Scheme.Hom.pullbackAbComp`: the pullback, being defined as *a*
+left adjoint, only composes up to a canonical isomorphism. -/
+lemma pushforwardAb_comp_map {Z : Scheme.{u}} {a : Z ⟶ X} {b : X ⟶ Y}
+    {𝒩 𝒩' : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}} (ψ : 𝒩 ⟶ 𝒩') :
+    (a ≫ b).pushforwardAb.map ψ = b.pushforwardAb.map (a.pushforwardAb.map ψ) := rfl
+
+end Hom
+
+end Scheme
 
 namespace Scheme.Modules
 
@@ -160,6 +192,82 @@ lemma pullbackAb_map_smulEnd_comp_pullbackAbComparison (G : Y.Modules) (r : Γ(Y
     pushforwardAb_map_toSheafAb_map]
   congr 1
   rw [← Functor.map_comp, ← Functor.map_comp, smulEnd_comp, smulEnd_pushforward]
+
+/-! ### The comparison map and the adjunctions -/
+
+section Comparison
+
+variable {Z : Scheme.{u}}
+
+/-- **The counit of the adjunction `f^{-1} ⊣ f_♭` for abelian sheaves, read on a sheaf of
+modules**: it is the comparison map followed by the counit of the adjunction `f^* ⊣ f_*` for
+sheaves of modules.
+
+```
+f^{-1}((f_* M)^♭) --pullbackAbComparison--> (f^* f_* M)^♭ --(counit)^♭--> M^♭
+        |                                                                 ^
+        +-----------------------------counit------------------------------+
+```
+-/
+lemma pullbackPushforwardAbAdjunction_counit_app_toSheafAb_obj (f : X ⟶ Y) (M : X.Modules) :
+    f.pullbackPushforwardAbAdjunction.counit.app ((toSheafAb X).obj M) =
+      (pullbackAbComparison f).app ((pushforward f).obj M) ≫
+        (toSheafAb X).map ((pullbackPushforwardAdjunction f).counit.app M) := by
+  simp only [pullbackAbComparison]
+  rw [← Adjunction.homEquiv_naturality_right_symm, pushforwardAb_map_toSheafAb_map,
+    ← Functor.map_comp, Adjunction.right_triangle_components]
+  simp [Adjunction.homEquiv_counit]
+
+/-- **The comparison map is the transpose of the unit** of the adjunction `f^* ⊣ f_*` for
+sheaves of modules.
+
+```
+G^♭ --unit--> f_♭ f^{-1}(G^♭) --f_♭ pullbackAbComparison--> f_♭ ((f^* G)^♭)
+ |                                                                ^
+ +-----------------------------(unit)^♭---------------------------+
+```
+-/
+lemma unit_comp_map_pullbackAbComparison (f : X ⟶ Y) (G : Y.Modules) :
+    f.pullbackPushforwardAbAdjunction.unit.app ((toSheafAb Y).obj G) ≫
+        f.pushforwardAb.map ((pullbackAbComparison f).app G) =
+      (toSheafAb Y).map ((pullbackPushforwardAdjunction f).unit.app G) :=
+  Equiv.apply_symm_apply (f.pullbackPushforwardAbAdjunction.homEquiv _ _) _
+
+/-- The variant of `AlgebraicGeometry.Scheme.Modules.unit_comp_map_pullbackAbComparison` with a
+morphism `ψ : f^* M ⟶ N` of sheaves of modules appended:
+
+```
+M^♭ --unit--> f_♭ f^{-1}(M^♭) --f_♭ (pullbackAbComparison ≫ ψ^♭)--> f_♭ (N^♭)
+ |                                                                       ^
+ +-----------------------(unit ≫ f_* ψ)^♭--------------------------------+
+```
+-/
+lemma unit_comp_map_pullbackAbComparison_comp (f : X ⟶ Y) (M : Y.Modules) {N : X.Modules}
+    (ψ : (pullback f).obj M ⟶ N) :
+    f.pullbackPushforwardAbAdjunction.unit.app ((toSheafAb Y).obj M) ≫
+        f.pushforwardAb.map ((pullbackAbComparison f).app M ≫ (toSheafAb X).map ψ) =
+      (toSheafAb Y).map ((pullbackPushforwardAdjunction f).unit.app M ≫
+        (pushforward f).map ψ) := by
+  rw [Functor.map_comp, ← Category.assoc, unit_comp_map_pullbackAbComparison,
+    pushforwardAb_map_toSheafAb_map, ← Functor.map_comp]
+
+/-- The comparison map is compatible with transport along an equality `c₁ = c₂` of morphisms of
+schemes:
+
+```
+c₁^{-1}(M^♭) --eqToHom--> c₂^{-1}(M^♭) --pullbackAbComparison--> (c₂^* M)^♭
+      |                                                              ^
+      +--pullbackAbComparison--> (c₁^* M)^♭ --(pullbackCongr h)^♭----+
+```
+-/
+lemma pullbackAbComparison_congr {c₁ c₂ : Z ⟶ Y} (h : c₁ = c₂) (M : Y.Modules) :
+    eqToHom (congrArg (fun m : Z ⟶ Y ↦ m.pullbackAb.obj ((toSheafAb Y).obj M)) h) ≫
+        (pullbackAbComparison c₂).app M =
+      (pullbackAbComparison c₁).app M ≫ (toSheafAb Z).map ((pullbackCongr h).hom.app M) := by
+  subst h
+  simp [pullbackCongr]
+
+end Comparison
 
 /-! ### The pullback map on cohomology -/
 

@@ -134,15 +134,39 @@ noncomputable def extAddEquiv [L.PreservesMonomorphisms] [EnoughInjectives C] (A
     (n : ℕ) : Ext.{w} (L.obj A) B n ≃+ Ext.{w'} A (R.obj B) n :=
   AddEquiv.ofBijective (adj.extAddHom A B n) (adj.extAddHom_bijective A B n)
 
-/-- The map inverse to `Adjunction.extAddHom`, before it is known to be inverse: applying the
-left adjoint `L` and composing with the counit of the adjunction sends `Ext^n A (R.obj B)` to
-`Ext^n (L.obj A) B`. -/
-noncomputable def extAddHomInv [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    (A : D) (B : C) (n : ℕ) (d : Ext.{w'} A (R.obj B) n) : Ext.{w} (L.obj A) B n :=
-  (d.mapExactFunctor L).comp (Ext.mk₀ (adj.counit.app B)) (add_zero n)
-
 variable [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
 
+/-- The map inverse to `Adjunction.extAddHom`, before it is known to be inverse: applying the
+left adjoint `L` and composing with the counit of the adjunction sends `Ext^n A (R.obj B)` to
+`Ext^n (L.obj A) B`.
+
+```
+Ext^n A (R.obj B) --mapExactFunctor L--> Ext^n (L.obj A) (L.obj (R.obj B))
+                  --compose with counit--> Ext^n (L.obj A) B
+```
+-/
+noncomputable def extAddHomInv (A : D) (B : C) (n : ℕ) :
+    Ext.{w'} A (R.obj B) n →+ Ext.{w} (L.obj A) B n where
+  toFun d := (d.mapExactFunctor L).comp (Ext.mk₀ (adj.counit.app B)) (add_zero n)
+  map_zero' := by simp
+  map_add' d d' := by simp [Ext.add_comp]
+
+@[simp]
+lemma extAddHomInv_apply (A : D) (B : C) (n : ℕ) (d : Ext.{w'} A (R.obj B) n) :
+    adj.extAddHomInv A B n d =
+      (d.mapExactFunctor L).comp (Ext.mk₀ (adj.counit.app B)) (add_zero n) :=
+  rfl
+
+/-- `Adjunction.extAddHomInv` commutes with the connecting maps of a short exact sequence:
+
+```
+Ext^{n₀} A ((S.map R).X₃) --extClass--> Ext^{n₁} A ((S.map R).X₁)
+        |                                        |
+   extAddHomInv                            extAddHomInv
+        v                                        v
+Ext^{n₀} (L.obj A) S.X₃ ----extClass---> Ext^{n₁} (L.obj A) S.X₁
+```
+-/
 lemma extAddHomInv_comp_extClass {S : ShortComplex C} (hS : S.ShortExact) (A : D)
     {n₀ n₁ : ℕ} (h : n₀ + 1 = n₁) (d : Ext.{w'} A ((S.map R).X₃) n₀) :
     adj.extAddHomInv A S.X₁ n₁ (d.comp (hS.map_of_exact R).extClass h) =
@@ -155,7 +179,7 @@ lemma extAddHomInv_comp_extClass {S : ShortComplex C} (hS : S.ShortExact) (A : D
       comm₁₂ := (adj.counit.naturality S.f).symm
       comm₂₃ := (adj.counit.naturality S.g).symm }
   have hnat := Ext.mapExactFunctor_extClass L (hS.map_of_exact R)
-  rw [extAddHomInv, extAddHomInv, Ext.mapExactFunctor_comp,
+  rw [extAddHomInv_apply, extAddHomInv_apply, Ext.mapExactFunctor_comp,
     Ext.comp_assoc_of_third_deg_zero, hnat,
     show ((hS.map_of_exact R).map_of_exact L).extClass.comp
         (Ext.mk₀ (adj.counit.app S.X₁)) (add_zero 1) =
@@ -178,7 +202,7 @@ lemma extAddHom_extAddHomInv [L.PreservesMonomorphisms] [EnoughInjectives C] (A 
   induction n generalizing B with
   | zero =>
     obtain ⟨g, rfl⟩ := (Ext.mk₀_bijective A (R.obj B)).2 d
-    rw [extAddHomInv, Ext.mapExactFunctor_mk₀, Ext.mk₀_comp_mk₀, adj.extAddHom_mk₀,
+    rw [extAddHomInv_apply, Ext.mapExactFunctor_mk₀, Ext.mk₀_comp_mk₀, adj.extAddHom_mk₀,
       show L.map g ≫ adj.counit.app B = (adj.homEquiv A B).symm g from
         (adj.homEquiv_counit A B g).symm,
       Equiv.apply_symm_apply]
