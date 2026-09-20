@@ -133,8 +133,8 @@ theorem vanishesAt_homogeneousSection_iff_of_mem_basicOpen {m : ℕ} {f : A} (hf
   have hc : (j : ℤ) = m * (k : ℤ) := by exact_mod_cast hjk
   have hW : ∀ y : (op (Proj.basicOpen 𝒜 f)).unop, f ∉ y.1.asHomogeneousIdeal.toIdeal :=
     fun y ↦ y.2
-  set W : (Proj 𝒜).Opens := Proj.basicOpen 𝒜 f with hWdef
-  set g : Γ(twistingSheaf 𝒜 j, W) := sectionPow hf hW (k : ℤ) hc with hgdef
+  set W : (Proj 𝒜).Opens := Proj.basicOpen 𝒜 f
+  set g : Γ(twistingSheaf 𝒜 j, W) := sectionPow hf hW (k : ℤ) hc
   have : IsIso (unitSmulRestrictHom g) := isIso_unitSmulRestrictHom_sectionPow hf hW (k : ℤ) hc
   set r : Γ(Proj 𝒜, W) :=
     powCoeff hf hW (k : ℤ) hc
