@@ -622,7 +622,6 @@ theorem notMem_support_cokernel_mulSection (hL : L.Invertible) (F : X.Modules) (
     rfl
   exact hab ((key a).trans (key b).symm)
 
-
 /-- **The support of `F` is contained in the support of `F ⊗ L`** when `L` is invertible:
 tensoring by a tensor inverse of `L` turns `F ⊗ L` back into `F`, and tensoring cannot enlarge
 the support by `AlgebraicGeometry.Scheme.Modules.support_tensor_subset`. -/
