@@ -42,7 +42,9 @@ last formula is what the degree computation for the isogeny `[n]` rests on.
 
 - `AlgebraicGeometry.IsAbelianVariety.cubeClass_eq_one` (blueprint: `thm:cube-abelian`) — the
   cube identity, in the Picard group and in the `S`-points form. The corresponding statement on
-  sheaves is `AlgebraicGeometry.IsAbelianVariety.nonempty_cube_iso`.
+  sheaves is `AlgebraicGeometry.IsAbelianVariety.nonempty_cube_iso`, and the statement on
+  `A × A × A` itself, which the `S`-points form is pulled back from, is
+  `AlgebraicGeometry.IsAbelianVariety.cubeClass_proj_eq_one`.
 - `AlgebraicGeometry.IsAbelianVariety.map_zpow_add_one_mul_map_zpow_sub_one` (blueprint:
   `cor:cube-mulby-recursion`) — the recursion for `[n]^*L`.
 - `AlgebraicGeometry.IsAbelianVariety.map_zpow` (blueprint: `thm:cube-mulby-pullback`) — the
