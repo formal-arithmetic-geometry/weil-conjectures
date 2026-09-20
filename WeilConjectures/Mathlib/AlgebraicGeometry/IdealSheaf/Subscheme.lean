@@ -280,6 +280,63 @@ lemma isPullback_subschemeι_specMap_fromSpec {S : CommRingCat.{u}} (φ : Γ(X, 
     (CommRingCat.isPushout_quotient φ (I.ideal U))).paste_horiz
       (I.isPullback_subschemeCover_map U)
 
+
+/-! ### The reduced induced closed subscheme on a closed subset -/
+
+section Reduced
+
+@[simp]
+lemma support_vanishingIdeal (Z : Closeds X) : (vanishingIdeal Z).support = Z := rfl
+
+@[simp]
+lemma radical_vanishingIdeal (Z : Closeds X) :
+    (vanishingIdeal Z).radical = vanishingIdeal Z := by
+  rw [← vanishingIdeal_support, support_vanishingIdeal]
+
+/-- **The subscheme cut out by a radical ideal sheaf is reduced.** On an affine open `U` the
+subscheme is `Spec (Γ(X, U) ⧸ I(U))`, and a quotient by a radical ideal is reduced. -/
+lemma isReduced_subscheme {J : X.IdealSheafData} (hJ : J.radical = J) : IsReduced J.subscheme := by
+  have h (V : X.affineOpens) : _root_.IsReduced (Γ(X, V.1) ⧸ J.ideal V) := by
+    rw [← Ideal.isRadical_iff_quotient_reduced, ← Ideal.radical_eq_iff]
+    have := congr(($hJ).ideal V)
+    rwa [radical_ideal] at this
+  have (V : X.affineOpens) : IsReduced (J.subschemeCover.openCover.X V) := by
+    rw [AffineOpenCover.openCover_X]
+    have : _root_.IsReduced (J.subschemeCover.X V) := h V
+    infer_instance
+  exact .of_openCover _ J.subschemeCover.openCover
+
+/-- **The subscheme cut out by an ideal sheaf with irreducible support is irreducible**, since
+its inclusion into `X` is an embedding with image the support. -/
+lemma irreducibleSpace_subscheme {J : X.IdealSheafData}
+    (hJ : IsIrreducible (J.support : Set X)) : IrreducibleSpace J.subscheme :=
+  (J.subschemeι.isEmbedding.toHomeomorph.trans
+    (Homeomorph.setCongr J.range_subschemeι)).irreducibleSpace_iff.mpr
+      (isIrreducible_iff_irreducibleSpace.mp hJ)
+
+/-- The reduced induced closed subscheme structure on a closed subset `Z` of `X`, namely the
+subscheme cut out by the vanishing ideal sheaf of `Z`, is reduced. -/
+instance isReduced_subscheme_vanishingIdeal (Z : Closeds X) :
+    IsReduced (vanishingIdeal Z).subscheme :=
+  isReduced_subscheme (radical_vanishingIdeal Z)
+
+@[simp]
+lemma range_subschemeι_vanishingIdeal (Z : Closeds X) :
+    Set.range (vanishingIdeal Z).subschemeι = Z := by
+  rw [range_subschemeι, support_vanishingIdeal]
+
+/-- **The reduced induced closed subscheme on an irreducible closed subset is integral.**
+The closed subscheme `V(I(Z)) ⟶ X` cut out by the vanishing ideal sheaf of an irreducible
+closed subset `Z` has underlying space `Z`, hence is irreducible, and it is reduced because
+the vanishing ideal sheaf is radical. -/
+lemma isIntegral_subscheme_vanishingIdeal {Z : Closeds X} (hZ : IsIrreducible (Z : Set X)) :
+    IsIntegral (vanishingIdeal Z).subscheme :=
+  have : IrreducibleSpace (vanishingIdeal Z).subscheme :=
+    irreducibleSpace_subscheme (by rwa [support_vanishingIdeal])
+  isIntegral_of_irreducibleSpace_of_isReduced _
+
+end Reduced
+
 end AlgebraicGeometry.Scheme.IdealSheafData
 
 namespace AlgebraicGeometry.Scheme.Hom
