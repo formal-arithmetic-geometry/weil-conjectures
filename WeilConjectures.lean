@@ -63,6 +63,7 @@ public import WeilConjectures.AlgebraicGeometry.TrivialityNearPoint
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafGloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.TwistingSheafInvertible
+public import WeilConjectures.AlgebraicGeometry.TwistingSheafVanishing
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.Defs
