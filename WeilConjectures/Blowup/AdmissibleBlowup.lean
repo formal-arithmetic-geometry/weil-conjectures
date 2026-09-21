@@ -477,7 +477,7 @@ theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl
     rw [← Scheme.IdealSheafData.support_eq_bot_iff]
     ext1
     rw [Scheme.IdealSheafData.support_comap, TopologicalSpace.Closeds.coe_preimage,
-      hH₀def, Scheme.IdealSheafData.coe_support_vanishingIdeal]
+      hH₀def, Scheme.IdealSheafData.support_vanishingIdeal]
     ext x
     simp
   -- the finite-type approximation of the vanishing ideal (Stacks Tag 01PF)
@@ -498,7 +498,7 @@ theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl
       Set.image_empty]
   · -- `I` is contained in the vanishing ideal of the boundary, so its support covers it
     have h4 : (H₀.support : Set X) = (U : Set X)ᶜ := by
-      rw [hH₀def, Scheme.IdealSheafData.coe_support_vanishingIdeal]
+      rw [hH₀def, Scheme.IdealSheafData.support_vanishingIdeal]
       rfl
     rw [← h4]
     exact Scheme.IdealSheafData.support_antitone hle
