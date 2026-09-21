@@ -58,11 +58,14 @@ computes the base change of `I.subschemeι` along an arbitrary affine probe
 ## Reducedness and irreducibility of the subscheme cut out by an ideal sheaf
 
 The subscheme `V(J)` cut out by an ideal sheaf `J` is reduced exactly when `J` is radical
-(`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_iff_radical_eq`): `J` is the
-kernel ideal sheaf of `J.subschemeι`, and the kernel ideal sheaf of a morphism from a reduced
-scheme is radical; conversely over an affine open `U` the subscheme is `Spec (Γ(X, U) ⧸ J(U))`,
-and a quotient by a radical ideal is reduced. Its underlying space *is* the support of `J`, by
-construction, so `V(J)` is irreducible exactly when the support is
+(`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_iff_radical_eq`): both sides are
+affine-local, and over an affine open `U` the subscheme is `Spec (Γ(X, U) ⧸ J(U))`, which is
+reduced exactly when `J(U)` is a radical ideal. Equivalently, `J` is then the vanishing ideal
+sheaf of its own support
+(`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_iff_eq_vanishingIdeal`), so the
+reduced closed subschemes of `X` are exactly the ones cut out by a vanishing ideal sheaf. The
+underlying space of `V(J)` *is* the support of `J`, by construction, so `V(J)` is irreducible
+exactly when the support is
 (`AlgebraicGeometry.Scheme.IdealSheafData.irreducibleSpace_subscheme_iff_isIrreducible_support`)
 and has the Krull dimension of the support
 (`AlgebraicGeometry.Scheme.IdealSheafData.topologicalKrullDim_subscheme`). Putting the two
@@ -76,7 +79,9 @@ Mathlib defines the vanishing ideal sheaf `IdealSheafData.vanishingIdeal Z` of a
 induced closed subscheme structure* on `Z` — but records nothing about its reducedness. The
 vanishing ideal sheaf is radical, so the subscheme is indeed reduced; its underlying space is
 `Z`, so the subscheme is integral exactly when `Z` is irreducible
-(`AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_vanishingIdeal_iff`).
+(`AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_vanishingIdeal_iff`) and has the
+Krull dimension of `Z`
+(`AlgebraicGeometry.Scheme.IdealSheafData.topologicalKrullDim_subscheme_vanishingIdeal`).
 
 This is not the subscheme structure `Scheme.irreducibleComponent` that Mathlib puts on an
 irreducible component: that one is cut out by the kernel of the restriction to the complement
@@ -110,6 +115,7 @@ the kernel ideal vanishes on a cover by affine opens.
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_subschemeι_specMap_fromSpec`
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_iff_radical_eq`
+- `AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_iff_eq_vanishingIdeal`
 - `AlgebraicGeometry.Scheme.IdealSheafData.irreducibleSpace_subscheme_iff_isIrreducible_support`
 - `AlgebraicGeometry.Scheme.IdealSheafData.topologicalKrullDim_subscheme`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_iff`
@@ -345,24 +351,16 @@ section ReducedIrreducible
 variable {J : X.IdealSheafData}
 
 /-- **The subscheme cut out by an ideal sheaf is reduced exactly when the ideal sheaf is
-radical.** If `V(J)` is reduced then `J`, being the kernel ideal sheaf of `J.subschemeι`, is
-radical. Conversely, over an affine open `U` the subscheme is `Spec (Γ(X, U) ⧸ J(U))`, and a
-quotient by a radical ideal is reduced. -/
+radical.** Both statements are affine-local: over an affine open `U` the subscheme is
+`Spec (Γ(X, U) ⧸ J(U))`, which is reduced exactly when `J(U)` is a radical ideal. -/
 lemma isReduced_subscheme_iff_radical_eq : IsReduced J.subscheme ↔ J.radical = J := by
-  refine ⟨fun _ ↦ ?_, fun hJ ↦ ?_⟩
-  · rw [← ker_subschemeι J]
-    exact radical_ker _
-  · have hring (V : X.affineOpens) : _root_.IsReduced (J.subschemeCover.X V) := by
-      -- the chart of the subscheme over `V` is `Spec (Γ(X, V) ⧸ J(V))`; `change`, not `show`,
-      -- because the goal genuinely changes (`linter.style.show`)
-      change _root_.IsReduced (Γ(X, V.1) ⧸ J.ideal V)
-      rw [← Ideal.isRadical_iff_quotient_reduced, ← Ideal.radical_eq_iff, ← radical_ideal]
-      exact congr(($hJ).ideal V)
-    have hSpec (V : X.affineOpens) : IsReduced (J.subschemeCover.openCover.X V) := by
-      rw [AffineOpenCover.openCover_X]
-      -- `hring V` is the local instance that `infer_instance` picks up here
-      infer_instance
-    exact .of_openCover _ J.subschemeCover.openCover
+  rw [IsReduced.iff_of_openCover _ J.subschemeCover.openCover, IdealSheafData.ext_iff, funext_iff]
+  -- the chart of the subscheme over `U` is `Spec (Γ(X, U) ⧸ J(U))`; `change`, not `show`,
+  -- because the goal genuinely changes (`linter.style.show`)
+  change (∀ U : X.affineOpens, IsReduced (Spec (.of (Γ(X, U.1) ⧸ J.ideal U)))) ↔ _
+  exact forall_congr' fun U ↦ by
+    rw [affine_isReduced_iff, radical_ideal, Ideal.radical_eq_iff,
+      Ideal.isRadical_iff_quotient_reduced]
 
 -- The two statements below are `rfl`-level because the carrier of `J.subscheme` *is*
 -- `↥J.support`: `IdealSheafData.subscheme` is the restriction of the glued space along the
@@ -388,6 +386,18 @@ lemma isIntegral_subscheme_iff :
     irreducibleSpace_subscheme_iff_isIrreducible_support, isReduced_subscheme_iff_radical_eq,
     and_comm]
 
+/-- **The reduced closed subschemes of `X` are exactly the ones cut out by a vanishing ideal
+sheaf.** Since the vanishing ideal sheaf of a closed subset has that subset as its support,
+this says that `(vanishingIdeal Z).subscheme` is the unique reduced closed subscheme with
+underlying space `Z`. -/
+lemma isReduced_subscheme_iff_eq_vanishingIdeal :
+    IsReduced J.subscheme ↔ J = vanishingIdeal J.support := by
+  rw [isReduced_subscheme_iff_radical_eq, vanishingIdeal_support, eq_comm]
+
+/-- The subscheme cut out by the radical of an ideal sheaf is reduced. -/
+instance isReduced_subscheme_radical : IsReduced J.radical.subscheme :=
+  isReduced_subscheme_iff_radical_eq.mpr J.radical_radical
+
 end ReducedIrreducible
 
 /-! ### The reduced induced closed subscheme on a closed subset -/
@@ -408,6 +418,11 @@ because the vanishing ideal sheaf is radical. -/
 lemma isIntegral_subscheme_vanishingIdeal_iff :
     IsIntegral (vanishingIdeal Z).subscheme ↔ IsIrreducible (Z : Set X) := by
   simp [isIntegral_subscheme_iff]
+
+/-- **The reduced induced closed subscheme on a closed subset has the Krull dimension of that
+subset**, whose underlying space it is. -/
+lemma topologicalKrullDim_subscheme_vanishingIdeal :
+    topologicalKrullDim (vanishingIdeal Z).subscheme = topologicalKrullDim (Z : Set X) := rfl
 
 end VanishingIdeal
 
