@@ -46,6 +46,9 @@ braided; the Picard group is then the group of units of that commutative monoid.
 - `SheafOfModules.invertible_iff_isUnit`: unfolding lemma for `SheafOfModules.Invertible`.
 - `SheafOfModules.Invertible.tensorObj` and `SheafOfModules.Invertible.tensorPow`: a tensor
   product and a tensor power of invertible sheaves of modules are invertible.
+- `SheafOfModules.invertible_cons` and `SheafOfModules.invertible_update`: prepending an
+  invertible sheaf of modules to, and replacing one member of, a family of invertible sheaves of
+  modules.
 - `SheafOfModules.Invertible.isEquivalence_tensorRight`: **tensoring by an invertible sheaf of
   modules is an equivalence of categories**, hence exact; and
   `SheafOfModules.Invertible.isZero_tensorObj`, that it carries zero sheaves to zero sheaves.
@@ -58,10 +61,6 @@ braided; the Picard group is then the group of units of that commutative monoid.
   of an invertible `𝒪ₓ`-module.
 - `AlgebraicGeometry.Scheme.Pic.mk_eq_one_iff`: an invertible `𝒪ₓ`-module has trivial class in
   the Picard group of `X` if and only if it is isomorphic to the structure sheaf.
-- `AlgebraicGeometry.Scheme.Modules.invertible_cons`,
-  `AlgebraicGeometry.Scheme.Modules.invertible_update` and
-  `AlgebraicGeometry.Scheme.Modules.invertible_append`: prepending, replacing one member of and
-  concatenating families of invertible `𝒪ₓ`-modules.
 
 ## TODO
 
@@ -157,6 +156,26 @@ theorem Invertible.tensorObj (hM : M.Invertible) (hN : N.Invertible) :
 theorem Invertible.tensorPow (hM : M.Invertible) : ∀ n : ℕ, SheafOfModules.Invertible (M ^⊗ n)
   | 0 => invertible_tensorUnit R
   | n + 1 => (hM.tensorPow n).tensorObj hM
+
+/-- Prepending an invertible sheaf of modules to a family of invertible sheaves of modules gives
+a family of invertible sheaves of modules. -/
+theorem invertible_cons {r : ℕ} (hM : M.Invertible)
+    {L : Fin r → SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
+    (hL : ∀ i, (L i).Invertible) (i : Fin (r + 1)) :
+    ((Fin.cons M L : Fin (r + 1) → _) i).Invertible := by
+  induction i using Fin.cases with
+  | zero => rwa [Fin.cons_zero]
+  | succ i =>
+    rw [Fin.cons_succ]
+    exact hL i
+
+/-- Replacing one member of a family of invertible sheaves of modules by an invertible sheaf of
+modules gives a family of invertible sheaves of modules. -/
+theorem invertible_update {r : ℕ}
+    {L : Fin r → SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
+    (hL : ∀ i, (L i).Invertible) {j : Fin r} (hM : M.Invertible) (i : Fin r) :
+    (Function.update L j M i).Invertible :=
+  (Function.forall_update_iff L fun _ N ↦ N.Invertible).2 ⟨hM, fun i _ ↦ hL i⟩ i
 
 section ZPow
 
@@ -386,44 +405,5 @@ isomorphic to the structure sheaf. -/
 theorem Pic.mk_eq_one_iff {M : X.Modules} {hM : M.Invertible} :
     Pic.mk M hM = 1 ↔ Nonempty (M ≅ 𝟙_ X.Modules) := by
   rw [← Pic.mk_tensorUnit X, Pic.mk_eq_mk_iff]
-
-namespace Modules
-
-variable {r : ℕ}
-
-/-- Prepending an invertible `𝒪ₓ`-module to a family of invertible `𝒪ₓ`-modules gives a family
-of invertible `𝒪ₓ`-modules. -/
-theorem invertible_cons {M : X.Modules} (hM : M.Invertible) {L : Fin r → X.Modules}
-    (hL : ∀ i, (L i).Invertible) (i : Fin (r + 1)) :
-    ((Fin.cons M L : Fin (r + 1) → X.Modules) i).Invertible := by
-  induction i using Fin.cases with
-  | zero => rwa [Fin.cons_zero]
-  | succ i =>
-    rw [Fin.cons_succ]
-    exact hL i
-
-/-- Replacing one member of a family of invertible `𝒪ₓ`-modules by an invertible `𝒪ₓ`-module
-gives a family of invertible `𝒪ₓ`-modules. -/
-theorem invertible_update {L : Fin r → X.Modules} (hL : ∀ i, (L i).Invertible) {j : Fin r}
-    {M : X.Modules} (hM : M.Invertible) (i : Fin r) : (Function.update L j M i).Invertible := by
-  rcases eq_or_ne i j with rfl | h
-  · rwa [Function.update_self]
-  · rw [Function.update_of_ne h]
-    exact hL i
-
-/-- The concatenation of two families of invertible `𝒪ₓ`-modules is a family of invertible
-`𝒪ₓ`-modules. -/
-theorem invertible_append {r' : ℕ} {M : Fin r → X.Modules} {N : Fin r' → X.Modules}
-    (hM : ∀ i, (M i).Invertible) (hN : ∀ i, (N i).Invertible) (j : Fin (r + r')) :
-    (Fin.append M N j).Invertible := by
-  induction j using Fin.addCases with
-  | left i =>
-    rw [Fin.append_left]
-    exact hM i
-  | right i =>
-    rw [Fin.append_right]
-    exact hN i
-
-end Modules
 
 end AlgebraicGeometry.Scheme

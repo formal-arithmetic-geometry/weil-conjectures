@@ -81,7 +81,7 @@ own.
 
 universe u
 
-open CategoryTheory MonoidalCategory fwdDiff
+open CategoryTheory MonoidalCategory SheafOfModules fwdDiff
 
 namespace AlgebraicGeometry.Scheme.Modules
 

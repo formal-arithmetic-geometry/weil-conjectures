@@ -31,6 +31,11 @@ for it.
   function killed by every composite of `d + 1` standard-basis difference operators is a numerical
   polynomial of total degree at most `d`. The resulting characterisation is
   `isNumericalPolynomial_iff_fwdDiffComp_eq_zero`.
+* `IsNumericalPolynomial.fwdDiffComp_cons_add_arg` and
+  `IsNumericalPolynomial.fwdDiffComp_zsmul_arg`: on a numerical polynomial of total degree at most
+  `d`, the composite of `d` difference operators is additive and homogeneous in each of its `d`
+  directions; homogeneity in all `d` directions at once multiplies the composite by the product of
+  the scalars.
 * `IsNumericalPolynomial.comp_addHom`: substituting an additive map, equivalently a tuple
   of integer linear forms, into a numerical polynomial of total degree at most `d` gives a
   numerical polynomial of total degree at most `d` (`lem:deg-numerical-substitution`), with the
@@ -147,6 +152,57 @@ theorem exists_fwdDiffComp_eq_const (h : IsNumericalPolynomial d P) (v : Fin d �
     ∃ c : ℤ, _root_.fwdDiffComp v P = Function.const _ c := by
   have h' : IsNumericalPolynomial (0 + d) P := by rwa [Nat.zero_add]
   exact (h'.fwdDiffComp v).exists_eq_const
+
+/-- **The top difference is additive in each of its directions.** For a numerical polynomial of
+total degree at most `d + 1`, the composite of `d + 1` difference operators whose leading
+direction is a sum `a + b` is the sum of the composites for `a` and for `b`: the remainder
+`Δ_[a] Δ_[b] ⋯` left by the operator identity `Δ_[a + b] = Δ_[a] + Δ_[b] + Δ_[a] Δ_[b]` is a
+composite of `d + 2` difference operators, hence vanishes. -/
+theorem fwdDiffComp_cons_add_arg (h : IsNumericalPolynomial (d + 1) P) (a b : Fin r → ℤ)
+    (v : Fin d → (Fin r → ℤ)) :
+    _root_.fwdDiffComp (Fin.cons (a + b) v) P =
+      _root_.fwdDiffComp (Fin.cons a v) P + _root_.fwdDiffComp (Fin.cons b v) P := by
+  rw [_root_.fwdDiffComp_cons_add_arg, h.fwdDiffComp_eq_zero (Fin.cons a (Fin.cons b v)), add_zero]
+
+/-- **The top difference is homogeneous in its leading direction**: scaling it by an integer `n`
+multiplies the composite by `n`. This is additivity in that direction, read as additivity of the
+map `n ↦ Δ_[n • a] Δ_[v 0] ⋯ Δ_[v (d - 1)] P` on `ℤ`, so it covers negative `n` as well. -/
+theorem fwdDiffComp_cons_zsmul_arg (h : IsNumericalPolynomial (d + 1) P) (n : ℤ) (a : Fin r → ℤ)
+    (v : Fin d → (Fin r → ℤ)) :
+    _root_.fwdDiffComp (Fin.cons (n • a) v) P = n • _root_.fwdDiffComp (Fin.cons a v) P := by
+  have hadd : ∀ x y : ℤ, _root_.fwdDiffComp (Fin.cons ((x + y) • a) v) P =
+      _root_.fwdDiffComp (Fin.cons (x • a) v) P + _root_.fwdDiffComp (Fin.cons (y • a) v) P :=
+    fun x y ↦ by rw [add_smul, h.fwdDiffComp_cons_add_arg]
+  simpa using (AddMonoidHom.mk' (fun x : ℤ ↦ _root_.fwdDiffComp (Fin.cons (x • a) v) P)
+    hadd).map_zsmul n 1
+
+/-- **The top difference is homogeneous in every direction at once**: scaling the `d` directions
+of a composite of `d` difference operators by integers `n₀, …, n_{d-1}` multiplies the composite
+by `n₀ ⋯ n_{d-1}`, on a numerical polynomial of total degree at most `d`.
+
+This is what makes the intersection number homogeneous in every slot at once. -/
+theorem fwdDiffComp_zsmul_arg : ∀ {d : ℕ} {P : (Fin r → ℤ) → ℤ}, IsNumericalPolynomial d P →
+    ∀ (n : Fin d → ℤ) (v : Fin d → (Fin r → ℤ)),
+      _root_.fwdDiffComp (fun j ↦ n j • v j) P = (∏ j, n j) • _root_.fwdDiffComp v P
+  | 0, _, _, _, _ => by simp
+  | d + 1, P, h, n, v => by
+    -- peel off the leading direction `n 0 • v 0` and apply the induction hypothesis to the rest
+    have hcons : (fun j ↦ n j • v j) = Fin.cons (n 0 • v 0) fun i ↦ n i.succ • v i.succ := by
+      funext j
+      induction j using Fin.cases with
+      | zero => simp
+      | succ i => simp
+    -- the leading direction contributes the factor `n 0`, by homogeneity in one direction
+    have hlead : _root_.fwdDiffComp (fun i ↦ v i.succ) (Δ_[n 0 • v 0] P) =
+        n 0 • _root_.fwdDiffComp v P := by
+      have h1 := h.fwdDiffComp_cons_zsmul_arg (n 0) (v 0) fun i ↦ v i.succ
+      rw [fwdDiffComp_succ' (Fin.cons (n 0 • v 0) _), fwdDiffComp_succ' (Fin.cons (v 0) _)] at h1
+      simp only [Fin.cons_zero, Fin.cons_succ] at h1
+      rw [h1, ← fwdDiffComp_succ']
+    rw [hcons, fwdDiffComp_succ' (Fin.cons (n 0 • v 0) _)]
+    simp only [Fin.cons_zero, Fin.cons_succ]
+    rw [fwdDiffComp_zsmul_arg (h.fwdDiff (n 0 • v 0)), hlead, smul_smul, Fin.prod_univ_succ,
+      mul_comm]
 
 end IsNumericalPolynomial
 
