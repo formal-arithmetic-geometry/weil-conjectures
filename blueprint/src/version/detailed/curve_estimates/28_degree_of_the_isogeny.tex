@@ -612,6 +612,25 @@ injective on the sections of $F$ over every open subset exactly when the
 associated points of $F$ lie in $X_g$.
 \end{proof}
 
+\begin{lemma}[An invertible sheaf is trivialised by a global section locally]
+\label{lem:deg-invertible-locally-trivial}
+\lean{SheafOfModules.Invertible.exists_isIso_homOfSectionTop}
+\leanok
+Let $L$ be an invertible sheaf on a scheme $Y$ and let $y\in Y$.  Then there
+are an open neighbourhood $W$ of $y$ and a global section $t$ of $L|_W$ such
+that $r\mapsto rt$ is an isomorphism $\O_W\to L|_W$.
+\end{lemma}
+\begin{proof}
+\leanok
+An invertible sheaf has a tensor inverse $N$, so $L\otimes N\cong\O_Y$.  The
+section of $L\otimes N$ corresponding to $1$ is, near $y$, a finite sum
+$\sum_im_i\otimes n_i$ of products of sections, so for some $i$ the function
+$m_i\cdot n_i$ is a unit on an open $W\ni y$.  Then $r\mapsto rm_i$ and the
+pairing with $(m_i\cdot n_i)^{-1}n_i$ exhibit $\O_W$ as a direct summand of
+$L|_W$, and a split monomorphism from the tensor unit to an invertible object
+of a monoidal category is an isomorphism.
+\end{proof}
+
 \begin{lemma}[Vanishing is compatible with pullback]
 \label{lem:deg-vanishing-pullback}
 \lean{AlgebraicGeometry.Scheme.Modules.vanishesAt_sectionsPullback_iff}
@@ -621,14 +640,30 @@ and let $s\in\Gamma(Y,L)$.  Then the pullback $a^*s\in\Gamma(X,a^*L)$ vanishes
 at a point $x$ of $X$ if and only if $s$ vanishes at $a(x)$.
 \end{lemma}
 \begin{proof}
+\uses{lem:deg-invertible-locally-trivial}
 \leanok
-The question is local on $Y$, so we may assume that $L$ is trivialised by a
-global section $t$, that is that $r\mapsto rt$ is an isomorphism
-$\O_Y\to L$.  Then $s=gt$ for a unique $g\in\Gamma(Y,\O_Y)$, and
-$a^*s=(a^*g)(a^*t)$ with $a^*t$ again a trivialising section.  Both sides
-therefore say that the point in question lies outside a basic open subset, and
-$a^{-1}(Y_g)=X_{a^*g}$.
+Vanishing at a point depends only on the stalk there, and restriction to an
+open neighbourhood changes neither the stalk of $L$ at $a(x)$ nor that of
+$a^*L$ at $x$.  So the question is local both on $Y$ and on $X$, and we may
+replace $a$ by its restriction $a^{-1}(W)\to W$ over an open $W\ni a(x)$ on
+which $L$ is trivialised by a global section $t$, that is on which
+$r\mapsto rt$ is an isomorphism $\O_W\to L|_W$.  Then $s=gt$ for a
+$g\in\Gamma(W,\O_W)$, and $a^*s=(a^*g)(a^*t)$ with $a^*t$ again a trivialising
+section.  Both sides therefore say that the point in question lies outside a
+basic open subset, and $a^{-1}(W_g)=(a^{-1}W)_{a^*g}$.
 \end{proof}
+
+\begin{remark}[Invertibility is not needed]
+\label{rem:deg-vanishing-pullback-general}
+\Cref{lem:deg-vanishing-pullback} holds for an arbitrary $\O_Y$-module $M$ in
+place of the line bundle $L$: vanishing at $x$ is the vanishing of the image
+of the germ in the fibre $(a^*M)_x\otimes\kappa(x)$, and
+$(a^*M)_x\cong\O_{X,x}\otimes_{\O_{Y,a(x)}}M_{a(x)}$, so the fibre of $a^*M$ at
+$x$ is the fibre of $M$ at $a(x)$ extended along the field extension
+$\kappa(x)/\kappa(a(x))$, which is faithfully flat.  The formalisation goes
+through a local trivialisation only because that base-change comparison for
+stalks is not yet available.
+\end{remark}
 
 \begin{lemma}[A hyperplane section avoiding the associated points]
 \label{lem:deg-general-hyperplane}
@@ -664,7 +699,8 @@ $s\in\Gamma(X,L)$ be the image of the corresponding section
 $\sum_ja_jT_j\in\Gamma(\mathbf P^N,\O(1))$ under
 $\Gamma(\mathbf P^N,\O(1))\to\Gamma(X,i^*\O(1))=\Gamma(X,L)$.
 
-By \Cref{lem:deg-vanishing-pullback} the section $s$ vanishes at $x_l$ exactly
+By \Cref{lem:deg-vanishing-pullback}, and since vanishing is invariant under
+the isomorphism $L\cong i^*\O(1)$, the section $s$ vanishes at $x_l$ exactly
 when $\sum_ja_jT_j$ vanishes at $i(x_l)$, which by the choice of $\underline a$
 it does not; so the zero scheme $D$ of $s$ contains no associated point of
 $F$.  Injectivity of $s\colon F\to F\otimes L$ may be checked on stalks; at a

@@ -335,6 +335,13 @@ theorem eq_zero_of_smul_germ_eq_zero (m : Γ(L, W)) [IsIso (unitSmulRestrictHom 
     (hreg.trans (map_zero _).symm)
   rw [← X.presheaf.germ_res_apply i x hxV'' _, this, map_zero]
 
+/-- **The germ of a trivialising section is non-zero**, since no non-zero element of the local
+ring kills it. In particular the stalk of `L` at a point of the trivialising open is
+non-zero. -/
+theorem germ_ne_zero (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)] {x : X} (hx : x ∈ W) :
+    L.presheaf.germ W x hx m ≠ 0 := fun h0 ↦
+  one_ne_zero (eq_zero_of_smul_germ_eq_zero m hx (by rw [h0, smul_zero]))
+
 /-- **The bridge between vanishing and basic open subsets.** If `s` restricts to `g • m` on a
 trivialising open `W`, then `s` vanishes at a point of `W` exactly when that point lies outside
 the basic open subset of `g`.
@@ -348,9 +355,8 @@ theorem vanishesAt_iff_notMem_basicOpen (m : Γ(L, W)) [IsIso (unitSmulRestrictH
     (s : Γ(L, ⊤)) (g : Γ(X, W)) (hg : L.presheaf.map W.leTop.op s = g • m)
     {x : X} (hx : x ∈ W) :
     L.VanishesAt s x ↔ x ∉ X.basicOpen g :=
-  vanishesAt_iff_notMem_basicOpen_of_span_germ_eq_top hx (span_germ_eq_top m hx)
-    (fun h0 ↦ one_ne_zero (eq_zero_of_smul_germ_eq_zero m hx (by rw [h0, smul_zero]))) s g hg
-
+  have : Nontrivial (L.presheaf.stalk x) := nontrivial_of_ne _ _ (germ_ne_zero m hx)
+  vanishesAt_iff_notMem_basicOpen_of_span_germ_eq_top hx (span_germ_eq_top m hx) s g hg
 
 /-- **Krull's principal ideal theorem for a section of a line bundle.** Let `s` be a global
 section of an invertible sheaf `L` on a locally Noetherian scheme `X`, and let `z` be a point at

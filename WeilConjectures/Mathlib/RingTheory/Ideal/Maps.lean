@@ -24,8 +24,10 @@ the `e i`; and it describes the relations between the `e i` themselves when `J *
 ideal `I` containing them.
 
 Extension of ideals also controls the transport of `I • N` along a map `M →ₛₗ[σ] M'` which is
-semilinear over a ring map `σ`, the variant of `Submodule.map_smul''` needed when the two
-modules live over different rings.
+semilinear over a ring map `σ`, the variant of `Submodule.smul_comap_le_comap_smul` needed when
+the two modules live over different rings. Its siblings in Mathlib live in
+`Mathlib.RingTheory.Ideal.Operations`, but the statement mentions `Ideal.map`, which is only
+introduced in `Mathlib.RingTheory.Ideal.Maps`; hence its home here.
 
 ## Main results
 
@@ -43,7 +45,8 @@ modules live over different rings.
   `R`-algebra `S` is the extension of the ideal spanned by the `e i`;
 - `Submodule.smul_le_comap_smul`: the extension of an ideal along `σ : R →+* S` controls the
   image of `I • N` under a map semilinear over `σ`. This is the semilinear counterpart of
-  `Submodule.map_smul''`, which is the case of an `R`-linear map.
+  `Submodule.smul_comap_le_comap_smul` and of `Submodule.smul_top_le_comap_smul_top`, which are
+  the cases of an `R`-linear map.
 -/
 
 @[expose] public section
@@ -166,21 +169,16 @@ variable {R S M M' : Type*} [Semiring R] [Semiring S] [AddCommMonoid M] [Module 
 submodule `N` into the submodule `P` carries `I • N` into `J • P`, as soon as the ring map `σ`
 carries the ideal `I` into the ideal `J`.
 
-This is the semilinear counterpart of `Submodule.map_smul''`, which is the case of an
-`R`-linear map. It is stated with `Submodule.comap` rather than `Submodule.map` because the
-latter would require `σ` to be surjective. -/
+This is the semilinear counterpart of `Submodule.smul_comap_le_comap_smul`, and of its case
+`N = P = ⊤`, `Submodule.smul_top_le_comap_smul_top`; both are the case of an `R`-linear map.
+Like them it is stated with `Submodule.comap` rather than `Submodule.map`. The `map` form
+`(I • N).map f ≤ Ideal.map σ I • N.map f` also holds, and is sharper; only the reverse
+inclusion, and hence the equality of `Submodule.map_smul''`, needs `σ` surjective. -/
 theorem smul_le_comap_smul {σ : R →+* S} (f : M →ₛₗ[σ] M') {I : Ideal R} {J : Ideal S}
     (hIJ : Ideal.map σ I ≤ J) {N : Submodule R M} {P : Submodule S M'} (hNP : N ≤ P.comap f) :
     I • N ≤ (J • P).comap f :=
   smul_le.2 fun r hr n hn ↦ by
     rw [mem_comap, map_smulₛₗ]
     exact smul_mem_smul (hIJ (Ideal.mem_map_of_mem _ hr)) (hNP hn)
-
-/-- **Membership in `I • ⊤` transports along a semilinear map**, the case `N = P = ⊤` of
-`Submodule.smul_le_comap_smul`. -/
-theorem mem_smul_top_of_semilinear {σ : R →+* S} (f : M →ₛₗ[σ] M') {I : Ideal R} {J : Ideal S}
-    (hIJ : Ideal.map σ I ≤ J) {z : M} (hz : z ∈ I • (⊤ : Submodule R M)) :
-    f z ∈ J • (⊤ : Submodule S M') :=
-  smul_le_comap_smul f hIJ (by simp) hz
 
 end Submodule

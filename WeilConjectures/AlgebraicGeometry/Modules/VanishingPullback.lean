@@ -23,10 +23,12 @@ vanishes at `x` exactly when `s` vanishes at `a x`.
 
 ## Blueprint
 
-This supplies a step which the informal proof of `lem:deg-general-hyperplane` of
-`curve_estimates/28_degree_of_the_isogeny.tex` leaves implicit: the hyperplane there is chosen
-on `𝐏ᴺ`, by a condition in the residue field at `i(xₗ)`, and the resulting section of
-`L = i^* 𝒪(1)` has to be recognised as non-vanishing at `xₗ`.
+The theorem below is `lem:deg-vanishing-pullback` of
+`curve_estimates/28_degree_of_the_isogeny.tex`. It supplies a step which the informal proof of
+`lem:deg-general-hyperplane` there leaves implicit: the hyperplane is chosen on `𝐏ᴺ`, by a
+condition in the residue field at `i(xₗ)`, and the resulting section of `L = i^* 𝒪(1)` has to
+be recognised as non-vanishing at `xₗ`. The `## TODO` below is recorded in the blueprint as
+`rem:deg-vanishing-pullback-general`.
 
 ## Implementation notes
 
@@ -44,7 +46,8 @@ The proof has three ingredients, all of them general statements living in the Ma
 * **Localisation.** An invertible sheaf is trivialised by a global section after restriction to
   some open `W` around `a x` (`SheafOfModules.Invertible.exists_isIso_homOfSectionTop`), and the
   commuting square of the theorem below reads the pullback along `a`, localised at `x`, as a
-  pullback of a trivialised sheaf followed by two open immersions.
+  pullback of a trivialised sheaf followed by two open immersions. The two readings are matched
+  by `AlgebraicGeometry.Scheme.Modules.vanishesAt_sectionsPullback_triangle_iff`.
 
 ## TODO
 
@@ -95,16 +98,14 @@ theorem vanishesAt_sectionsPullback_iff (a : X ⟶ Y) {L : Y.Modules} (hL : L.In
   -- restrict to the open subscheme `a ⁻¹ᵁ W` of `X`
   have h1 := (vanishesAt_sectionsPullback_iff_of_isOpenImmersion (a ⁻¹ᵁ W).ι
     ((pullback a).obj L) (sectionsPullback a L s) ⟨x, hxW⟩).symm
-  -- read the two-step pullback along `(a ⁻¹ᵁ W).ι ≫ a` in two ways
-  have h2 := vanishesAt_sectionsPullback_comp_iff (a ⁻¹ᵁ W).ι a L s ⟨x, hxW⟩
-  have h3 : ((pullback (a ∣_ W)).obj ((pullback W.ι).obj L)).VanishesAt
-        (sectionsPullback (a ∣_ W) _ (sectionsPullback W.ι L s)) ⟨x, hxW⟩ ↔
-      ((pullback ((a ⁻¹ᵁ W).ι ≫ a)).obj L).VanishesAt
-        (sectionsPullback ((a ⁻¹ᵁ W).ι ≫ a) L s) ⟨x, hxW⟩ := by
-    rw [← pullbackTriangle_hom_app_sectionsPullback hu L s]
-    exact (vanishesAt_iff_of_iso ((pullbackTriangle hu).app L) _ ⟨x, hxW⟩).symm
+  -- read the two-step pullback along `(a ⁻¹ᵁ W).ι ≫ a` in two ways: first as a pullback
+  -- along `a` followed by a pullback along the open immersion `(a ⁻¹ᵁ W).ι` …
+  have h2 := vanishesAt_sectionsPullback_triangle_iff
+    (rfl : (a ⁻¹ᵁ W).ι ≫ a = (a ⁻¹ᵁ W).ι ≫ a) L s ⟨x, hxW⟩
+  -- … and then as a pullback to the trivialising open `W` followed by a pullback along `a ∣_ W`
+  have h3 := vanishesAt_sectionsPullback_triangle_iff hu L s ⟨x, hxW⟩
   refine h1.trans (h2.trans (h3.symm.trans ?_))
-  rw [vanishesAt_sectionsPullback_iff_of_isIso_homOfSectionTop (a ∣_ W) (t := t),
+  rw [vanishesAt_sectionsPullback_iff_of_isIso_homOfSectionTop (a ∣_ W) t,
     vanishesAt_sectionsPullback_iff_of_isOpenImmersion W.ι L s]
   simp
 

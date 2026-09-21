@@ -58,7 +58,9 @@ pullback of an invertible sheaf of modules is invertible.
   invertible sheaf of modules on a scheme is a line bundle**, in the sense used elsewhere in the
   project, and `SheafOfModules.Invertible.isCoherent`: it is therefore coherent.
 - `SheafOfModules.Invertible.exists_restrict_iso_unit`: the same statement in the explicit local
-  form, an isomorphism `M|_W ≅ 𝒪_W`.
+  form, an isomorphism `M|_W ≅ 𝒪_W`, and
+  `SheafOfModules.Invertible.exists_isIso_homOfSectionTop`: the form in which the trivialising
+  section is a *global* section of the pullback `W.ι^* M`.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensorObj_of_invertible`,
   `isFiniteType_tensorObj_of_invertible` and `isCoherent_tensorObj_of_invertible`: **tensoring
   by an invertible sheaf of modules preserves quasi-coherence, being of finite type, and
@@ -395,16 +397,18 @@ theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_unit {M : X.Modules
   exact ⟨W, hxW, ⟨(asIso (unitSmulRestrictHom m)).symm⟩⟩
 
 /-- **An invertible sheaf of modules is trivialised by a *global* section near every point**:
-every point has an open neighbourhood `W` such that the pullback of `M` to `W` carries a global
-section `t` with `r ↦ r • t` an isomorphism `𝒪_W ≅ M|_W`.
+every point has an open neighbourhood `W` such that the pullback `W.ι^* M` carries a global
+section `t` with `r ↦ r • t` an isomorphism `𝒪_W ≅ W.ι^* M`.
 
 This is `SheafOfModules.Invertible.exists_isIso_unitSmulRestrictHom` in the
 `AlgebraicGeometry.Scheme.Modules.homOfSectionTop` form, which is the one that arguments about
-global sections use. -/
+global sections use; the two differ by the comparison
+`AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback` between `M.restrict W.ι` and
+`W.ι^* M`. -/
 theorem _root_.SheafOfModules.Invertible.exists_isIso_homOfSectionTop {M : X.Modules}
     (hM : M.Invertible) (x : X) :
     ∃ W : X.Opens, x ∈ W ∧ ∃ t : Γ((Modules.pullback W.ι).obj M, ⊤),
-      IsIso (Modules.homOfSectionTop _ t) := by
+      IsIso (Modules.homOfSectionTop ((Modules.pullback W.ι).obj M) t) := by
   obtain ⟨W, hxW, m, hm⟩ := hM.exists_isIso_unitSmulRestrictHom x
   refine ⟨W, hxW, Hom.app (asIso (unitSmulRestrictHom m) ≪≫
     (restrictFunctorIsoPullback W.ι).app M).hom ⊤ (oneSection W.toScheme ⊤), ?_⟩
