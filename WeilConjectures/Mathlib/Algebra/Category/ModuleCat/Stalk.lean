@@ -124,23 +124,39 @@ instance (x : X) : (stalkFunctor R x).PreservesEpimorphisms where
     exact (AddCommGrpCat.epi_iff_surjective _).2
       (TopCat.Sheaf.surjective_stalkFunctor_map_of_epi ((toSheaf R).map φ) x)
 
+/-- **Taking stalks preserves finite colimits.** A short exact sequence of sheaves of modules is
+sent to an exact sequence of stalks by left exactness, and its epimorphism stays an epimorphism;
+for an additive functor between abelian categories that is right exactness. -/
+instance (x : X) : PreservesFiniteColimits (stalkFunctor R x) :=
+  (Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi _).2 fun S hS ↦ by
+    have := hS.epi_g
+    exact ⟨((Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono
+      (stalkFunctor R x)).1 inferInstance S hS).1, (stalkFunctor R x).map_epi _⟩
+
 end SheafOfModules
 
-namespace CategoryTheory.ShortComplex.ShortExact
+namespace CategoryTheory.ShortComplex
 
 variable {X : TopCat.{u}} {R : TopCat.Sheaf RingCat.{u} X}
 
 /-- **Taking stalks is exact**: a short exact sequence of sheaves of modules induces a short
 exact sequence of stalks at every point. -/
-lemma map_stalkFunctor {S : ShortComplex (SheafOfModules.{u} R)} (hS : S.ShortExact) (x : X) :
-    (S.map (SheafOfModules.stalkFunctor R x)).ShortExact := by
+lemma ShortExact.map_stalkFunctor {S : ShortComplex (SheafOfModules.{u} R)} (hS : S.ShortExact)
+    (x : X) : (S.map (SheafOfModules.stalkFunctor R x)).ShortExact := by
   have := hS.mono_f
   have := hS.epi_g
   have h := (Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono
     (SheafOfModules.stalkFunctor R x)).1 inferInstance S hS
   exact { exact := h.1, mono_f := h.2, epi_g := (SheafOfModules.stalkFunctor R x).map_epi _ }
 
-end CategoryTheory.ShortComplex.ShortExact
+/-- **Taking stalks is exact**, in the form that needs no hypothesis on the two maps: an exact
+sequence `M ⟶ N ⟶ P` of sheaves of modules induces an exact sequence `Mₓ ⟶ Nₓ ⟶ Pₓ` of stalks
+at every point. -/
+lemma Exact.map_stalkFunctor {S : ShortComplex (SheafOfModules.{u} R)} (hS : S.Exact) (x : X) :
+    (S.map (SheafOfModules.stalkFunctor R x)).Exact :=
+  hS.map _
+
+end CategoryTheory.ShortComplex
 
 namespace SheafOfModules
 

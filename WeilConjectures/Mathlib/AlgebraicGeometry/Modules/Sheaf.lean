@@ -543,6 +543,13 @@ lemma stalkFunctor_map_apply (φ : M ⟶ N) (x : X) (z : M.presheaf.stalk x) :
     (stalkFunctor X x).map φ z = φ.stalkMap x z :=
   rfl
 
+/-- **The two spellings of the map induced on stalks agree.** The stalk functor of
+`SheafOfModules` over the sheaf of rings `𝒪ₓ` forgets the module structure on the stalks, so the
+map it induces is `AlgebraicGeometry.Scheme.Modules.Hom.stalkMap`. -/
+lemma sheafOfModules_stalkFunctor_map_apply (φ : M ⟶ N) (x : X) (z : M.presheaf.stalk x) :
+    (SheafOfModules.stalkFunctor X.ringCatSheaf x).map φ z = φ.stalkMap x z :=
+  rfl
+
 /-- The map on stalks is `𝒪_{X, x}`-linear. -/
 lemma Hom.stalkMap_smul (φ : M ⟶ N) (x : X) (r : X.presheaf.stalk x) (z : M.presheaf.stalk x) :
     φ.stalkMap x (r • z) = r • φ.stalkMap x z :=
@@ -2402,6 +2409,19 @@ lemma vanishesAt_iff (F : X.Modules) (s : Γ(F, ⊤)) (x : X) :
     F.VanishesAt s x ↔ F.presheaf.germ ⊤ x trivial s ∈
       IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
         (⊤ : Submodule (X.presheaf.stalk x) (F.presheaf.stalk x)) :=
+  Iff.rfl
+
+/-- **The zero locus `Z(s)` of a global section** of a sheaf of `𝒪ₓ`-modules: the set of points
+at which it vanishes.
+
+For the structure sheaf this is `AlgebraicGeometry.Scheme.zeroLocus`, the complement of the
+basic open subset of `s`, by
+`AlgebraicGeometry.Scheme.Modules.vanishesAt_structureModules_iff`. -/
+def zeroLocus (F : X.Modules) (s : Γ(F, ⊤)) : Set X := {x | F.VanishesAt s x}
+
+@[simp]
+lemma mem_zeroLocus {F : X.Modules} {s : Γ(F, ⊤)} {x : X} :
+    x ∈ F.zeroLocus s ↔ F.VanishesAt s x :=
   Iff.rfl
 
 /-- **The global sections vanishing at a point form a submodule** of `Γ(X, F)` over the global
