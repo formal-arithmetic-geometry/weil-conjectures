@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.Irreducible
+public import WeilConjectures.Mathlib.Topology.Sets.Closeds
 
 /-!
 # The Krull dimension of a subset, and of a proper closed subset
@@ -25,11 +26,14 @@ public import WeilConjectures.Mathlib.Topology.Irreducible
   finite dimension.
 * `topologicalKrullDim_add_one_le`: the special case of an irreducible ambient space, where the
   hypothesis on `Z` reads `Z ≠ univ`.
-* `topologicalKrullDim_le_of_subset`: the Krull dimension of a subset is monotone in the subset.
-* `topologicalKrullDim_le_of_forall_maximal`: **the dimension of a subset is controlled by the
-  dimensions of its maximal irreducible subsets.** A chain of irreducible closed subsets of `S`
-  has its largest member inside some maximal irreducible subset of `S`, and therefore lies
-  entirely inside it.
+* `topologicalKrullDim_le_of_isInducing_of_range_subset`: a space that embeds into a subset `S`
+  of a topological space has dimension at most `dim S`; `topologicalKrullDim_mono`, the
+  monotonicity of `dim` in the subset, is the special case of an inclusion.
+* `height_eq_topologicalKrullDim`: the height of an irreducible closed subset `T` of a subspace
+  `S` is the dimension of `T`, seen as a subspace of the ambient space.
+* `topologicalKrullDim_eq_iSup_maximal`: **the dimension of a subset is the supremum of the
+  dimensions of its maximal irreducible subsets.** `topologicalKrullDim_le_of_forall_maximal` is
+  the resulting bound on `dim S`.
 -/
 
 @[expose] public section
@@ -127,49 +131,57 @@ theorem topologicalKrullDim_add_one_le {X : Type*} [TopologicalSpace X] [Irreduc
     (hZc.preimage continuous_subtype_val)
     fun _ hT hTZ ↦ hZ (univ_subset_iff.1 (eq_univ_of_maximal_isIrreducible hT ▸ hTZ))
 
-/-- **The Krull dimension of a subset is monotone in the subset.** -/
-theorem topologicalKrullDim_le_of_subset {X : Type*} [TopologicalSpace X] {Z S : Set X}
+/-- A space that embeds into a subset `S` of a topological space has Krull dimension at most
+that of `S`. -/
+theorem topologicalKrullDim_le_of_isInducing_of_range_subset {Y X : Type*} [TopologicalSpace Y]
+    [TopologicalSpace X] {f : Y → X} (hf : Topology.IsInducing f) {S : Set X}
+    (hfS : range f ⊆ S) : topologicalKrullDim Y ≤ topologicalKrullDim S :=
+  (Topology.IsInducing.of_comp (hf.continuous.subtype_mk fun y ↦ hfS ⟨y, rfl⟩)
+    continuous_subtype_val hf).topologicalKrullDim_le
+
+/-- The Krull dimension of a subset is monotone in the subset. -/
+theorem topologicalKrullDim_mono {X : Type*} [TopologicalSpace X] {Z S : Set X}
     (hZS : Z ⊆ S) : topologicalKrullDim Z ≤ topologicalKrullDim S :=
-  (Topology.IsEmbedding.inclusion hZS).isInducing.topologicalKrullDim_le
+  topologicalKrullDim_le_of_isInducing_of_range_subset Topology.IsEmbedding.subtypeVal.isInducing
+    (Subtype.range_coe.trans_subset hZS)
+
+/-- The height of an irreducible closed subset `T` of a subspace `S` is the Krull dimension of
+`T`, seen as a subspace of the ambient space: the irreducible closed subsets of `T` are exactly
+the irreducible closed subsets of `S` contained in `T`. -/
+theorem height_eq_topologicalKrullDim {X : Type*} [TopologicalSpace X] {S : Set X}
+    (T : IrreducibleCloseds S) :
+    (height T : WithBot ℕ∞) = topologicalKrullDim ((↑) '' (T : Set S) : Set X) := by
+  rw [height_eq_krullDim_Iic, ← krullDim_eq_of_orderIso (IrreducibleCloseds.orderIsoIic T),
+    ← topologicalKrullDim]
+  exact IsHomeomorph.topologicalKrullDim_eq _
+    (Topology.IsEmbedding.subtypeVal.homeomorphImage (T : Set S)).isHomeomorph
+
+/-- **The dimension of a subset is the supremum of the dimensions of its maximal irreducible
+subsets.**
+
+Every irreducible closed subset of `S` is contained in a maximal irreducible subset `T` of `S`,
+so its height is at most `dim T` by `height_eq_topologicalKrullDim`; conversely every such `T`
+is a subset of `S`. -/
+theorem topologicalKrullDim_eq_iSup_maximal {X : Type*} [TopologicalSpace X] {S : Set X} :
+    topologicalKrullDim S =
+      ⨆ T ∈ {T : Set X | Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) T}, topologicalKrullDim T := by
+  refine le_antisymm ?_ (iSup₂_le fun T hT ↦ topologicalKrullDim_mono hT.1.2)
+  rw [topologicalKrullDim, krullDim_eq_iSup_height]
+  refine iSup_le fun W ↦ ?_
+  obtain ⟨T, hTmem, hTsub⟩ :=
+    exists_mem_irreducibleComponents_subset_of_isIrreducible (W : Set S) W.isIrreducible
+  let T' : IrreducibleCloseds S := ⟨T, hTmem.1, isClosed_of_mem_irreducibleComponents T hTmem⟩
+  calc (height W : WithBot ℕ∞) ≤ (height T' : WithBot ℕ∞) := by
+        exact_mod_cast height_mono (show W ≤ T' from hTsub)
+    _ = topologicalKrullDim ((↑) '' (T' : Set S) : Set X) := height_eq_topologicalKrullDim T'
+    _ ≤ _ := le_biSup (fun Z : Set X ↦ topologicalKrullDim Z)
+        (maximal_isIrreducible_image_val_of_mem_irreducibleComponents hTmem)
 
 /-- **The dimension of a subset is controlled by the dimensions of its maximal irreducible
 subsets**: to bound `dim S` it is enough to bound `dim T` for every maximal irreducible subset
-`T` of `S`.
-
-A chain of irreducible closed subsets of `S` has its largest member contained in some maximal
-irreducible subset `T` of `S`; the whole chain then lies in `T`, and intersecting it with `T`
-gives a chain of the same length of irreducible closed subsets of `T`. -/
+`T` of `S`. -/
 theorem topologicalKrullDim_le_of_forall_maximal {X : Type*} [TopologicalSpace X] {S : Set X}
     {d : WithBot ℕ∞}
     (h : ∀ T, Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) T → topologicalKrullDim T ≤ d) :
-    topologicalKrullDim S ≤ d := by
-  rw [topologicalKrullDim, krullDim]
-  refine iSup_le fun l ↦ ?_
-  obtain ⟨T, hTmem, hTsub⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible
-    (l.last : Set S) l.last.isIrreducible
-  have hsub : ∀ i, (l i : Set S) ⊆ T := fun i ↦
-    (SetLike.coe_subset_coe.2 (l.monotone (Fin.le_last i))).trans hTsub
-  have himg : ∀ i, ((↑) '' (T ↓∩ (l i : Set S)) : Set S) = (l i : Set S) := fun i ↦ by
-    rw [Subtype.image_preimage_coe, Set.inter_eq_right.2 (hsub i)]
-  let f : Fin (l.length + 1) → IrreducibleCloseds T := fun i ↦
-    ⟨T ↓∩ (l i : Set S), (isIrreducible_preimage_val_iff (hsub i)).2 (l i).isIrreducible,
-      (l i).isClosed.preimage continuous_subtype_val⟩
-  have hfinj : ∀ i j, f i = f j → l i = l j := fun i j hij ↦ by
-    refine IrreducibleCloseds.ext ?_
-    rw [← himg i, ← himg j]
-    exact congrArg _ (congrArg (fun Z : IrreducibleCloseds T ↦ (Z : Set T)) hij)
-  let l' : LTSeries (IrreducibleCloseds T) :=
-    { length := l.length
-      toFun := f
-      step := fun i ↦ by
-        have hst : l i.castSucc < l i.succ := l.step i
-        have hcoe : ((l i.castSucc : Set S)) ⊆ (l i.succ : Set S) := hst.le
-        have hle : f i.castSucc ≤ f i.succ := fun x hx ↦ hcoe hx
-        change f i.castSucc < f i.succ
-        exact lt_of_le_of_ne hle fun heq ↦ hst.ne (hfinj _ _ heq) }
-  calc (l.length : WithBot ℕ∞) = (l'.length : WithBot ℕ∞) := rfl
-    _ ≤ krullDim (IrreducibleCloseds T) := l'.length_le_krullDim
-    _ = topologicalKrullDim (((↑) '' T : Set X)) :=
-        IsHomeomorph.topologicalKrullDim_eq _
-          (Topology.IsEmbedding.subtypeVal.homeomorphImage T).isHomeomorph
-    _ ≤ d := h _ (maximal_isIrreducible_image_val_of_mem_irreducibleComponents hTmem)
+    topologicalKrullDim S ≤ d :=
+  topologicalKrullDim_eq_iSup_maximal.trans_le (iSup₂_le h)

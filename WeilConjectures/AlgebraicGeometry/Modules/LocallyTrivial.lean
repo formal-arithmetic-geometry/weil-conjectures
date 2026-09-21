@@ -263,6 +263,14 @@ variable (e) {W : X.Opens}
 noncomputable def smulSection (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) : Γ(X, V) →+ Γ(M, V) :=
   AddMonoidHom.mk' (fun r ↦ r • M.presheaf.map (homOfLE hV).op m) (fun r r' ↦ add_smul r r' _)
 
+@[simp] lemma smulSection_apply (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V)) :
+    smulSection m V hV r = r • M.presheaf.map (homOfLE hV).op m := rfl
+
+lemma smulSection_self (m : Γ(M, W)) (r : Γ(X, W)) : smulSection m W le_rfl r = r • m := by
+  have hid : (homOfLE (le_refl W)).op = 𝟙 (op W) := Subsingleton.elim _ _
+  rw [smulSection_apply, hid]
+  simp
+
 lemma smulSection_smul (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r z : Γ(X, V)) :
     smulSection m V hV (r • z) = r • smulSection m V hV z :=
   mul_smul r z _
@@ -270,9 +278,8 @@ lemma smulSection_smul (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r z : Γ(X, 
 lemma map_smulSection (m : Γ(M, W)) {V V' : X.Opens} (hV : V ≤ W) (hV' : V' ≤ W) (i : V' ⟶ V)
     (r : Γ(X, V)) :
     M.presheaf.map i.op (smulSection m V hV r) = smulSection m V' hV' (X.presheaf.map i.op r) := by
-  rw [smulSection, smulSection]
-  simp only [AddMonoidHom.mk'_apply]
-  rw [Scheme.Modules.map_smul, ← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  rw [smulSection_apply, smulSection_apply, Scheme.Modules.map_smul,
+    ← ConcreteCategory.comp_apply, ← Functor.map_comp]
   congr 2
 
 /-- Pairing with the restriction of a section `n` of `N` over `W` to a smaller open `V`. -/
@@ -298,9 +305,7 @@ lemma map_pairSection (n : Γ(N, W)) {V V' : X.Opens} (hV : V ≤ W) (hV' : V' �
 lemma pairSection_smulSection (m : Γ(M, W)) (n : Γ(N, W)) (h : tensorPairing e W m n = 1)
     (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V)) :
     pairSection e n V hV (smulSection m V hV r) = r := by
-  rw [smulSection]
-  simp only [AddMonoidHom.mk'_apply]
-  rw [pairSection_smul, pairSection]
+  rw [smulSection_apply, pairSection_smul, pairSection]
   simp only [AddMonoidHom.mk'_apply, smul_eq_mul]
   rw [← map_tensorPairing, h, map_one, mul_one]
 

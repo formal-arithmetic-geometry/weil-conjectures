@@ -192,7 +192,7 @@ lemma supportDim_def : F.supportDim = topologicalKrullDim F.support := rfl
 topological space has no longer chain of irreducible closed subsets than the space itself. -/
 theorem supportDim_le_of_support_subset {M N : X.Modules} (h : M.support ⊆ N.support) :
     M.supportDim ≤ N.supportDim :=
-  (Topology.IsEmbedding.inclusion h).isInducing.topologicalKrullDim_le
+  topologicalKrullDim_mono h
 
 /-- The dimension of a sheaf of modules is `⊥` if and only if the sheaf is a zero object. -/
 theorem supportDim_eq_bot_iff : F.supportDim = ⊥ ↔ IsZero F := by

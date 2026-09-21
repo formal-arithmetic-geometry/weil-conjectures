@@ -296,6 +296,14 @@ section Trivialisation
 
 variable {L : X.Modules} {W : X.Opens}
 
+/-- **A global section of an invertible sheaf is a function times a trivialising section.** If
+multiplication by `m : Γ(L, W)` is an isomorphism `𝒪_W ≅ L|_W`, then every global section `s` of
+`L` restricts on `W` to `g • m` for some function `g` on `W`. -/
+theorem exists_smul_eq_restrict (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)] (s : Γ(L, ⊤)) :
+    ∃ g : Γ(X, W), L.presheaf.map W.leTop.op s = g • m := by
+  obtain ⟨g, hg⟩ := (bijective_smulSection m le_rfl).2 (L.presheaf.map W.leTop.op s)
+  exact ⟨g, by rw [← hg, smulSection_self]⟩
+
 /-- **A trivialising section generates every stalk over the trivialising open.** -/
 theorem span_germ_eq_top (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)] {x : X} (hx : x ∈ W) :
     Submodule.span (X.presheaf.stalk x) {L.presheaf.germ W x hx m} = ⊤ := by
@@ -325,9 +333,7 @@ theorem eq_zero_of_smul_germ_eq_zero (m : Γ(L, W)) [IsIso (unitSmulRestrictHom 
   rw [map_zero, Scheme.Modules.map_smul] at hzz
   have hreg : smulSection m V'' (i.le.trans inf_le_right)
       (X.presheaf.map i.op (X.presheaf.map (homOfLE (inf_le_left : V ⊓ W ≤ V)).op r)) = 0 := by
-    rw [smulSection]
-    simp only [AddMonoidHom.mk'_apply]
-    rw [← hzz]
+    rw [smulSection_apply, ← hzz]
     congr 1
     rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
     congr 2
@@ -375,33 +381,6 @@ theorem vanishesAt_iff_notMem_basicOpen (m : Γ(L, W)) [IsIso (unitSmulRestrictH
     exact Submodule.smul_mem_smul
       ((IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 h)) Submodule.mem_top
 
-
-/-- **Krull's principal ideal theorem for a section of a line bundle.** Let `s` be a global
-section of an invertible sheaf `L` on a locally Noetherian scheme `X`, and let `z` be a point at
-which `s` vanishes such that the only point where `s` vanishes generalizing to `z` is `z` itself
-— that is, `z` is the generic point of an irreducible component of the zero locus of `s`. Then
-`z` has codimension at most one in `X`.
-
-Trivialising `L` on an open neighbourhood `W` of `z` writes `s|_W` as `g • m` for a function `g`
-on `W` with the same zero locus, by
-`AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen`, and the statement becomes
-`AlgebraicGeometry.coheight_le_one_of_minimal_notMem_basicOpen`. -/
-theorem coheight_le_one_of_minimal_vanishesAt [IsLocallyNoetherian X] (hL : L.Invertible)
-    (s : Γ(L, ⊤)) {z : X} (hz : L.VanishesAt s z)
-    (hmin : ∀ y, L.VanishesAt s y → y ⤳ z → y = z) :
-    Order.coheight z ≤ 1 := by
-  obtain ⟨V, hzV, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom z
-  have hmi : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl V)).2 (L.presheaf.map V.leTop.op s)
-  have hgV : L.presheaf.map V.leTop.op s = g • m := by
-    rw [← hg, smulSection]
-    simp only [AddMonoidHom.mk'_apply]
-    congr 1
-    rw [show (homOfLE (le_refl V)).op = 𝟙 (op V) from Subsingleton.elim _ _]
-    simp
-  exact coheight_le_one_of_minimal_notMem_basicOpen g hzV
-    ((vanishesAt_iff_notMem_basicOpen m s g hgV hzV).1 hz)
-    fun y hyV hy hyz ↦ hmin y ((vanishesAt_iff_notMem_basicOpen m s g hgV hyV).2 hy) hyz
 
 /-- **Multiplication by a trivialising section, as a linear equivalence on sections.** -/
 noncomputable def smulSectionEquiv (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
@@ -469,6 +448,27 @@ theorem exists_tensorMk_eq (F : X.Modules) (m : Γ(L, W)) [IsIso (unitSmulRestri
   exact ⟨V, hVU, hxV, tensorContract F m (hVU.trans hUW) z,
     hz.symm.trans (app_mu_eq_tensorMk F m (hVU.trans hUW) z)⟩
 
+/-- **Krull's principal ideal theorem for a section of a line bundle.** Let `s` be a global
+section of an invertible sheaf `L` on a locally Noetherian scheme `X`, and let `z` be a point at
+which `s` vanishes such that the only point where `s` vanishes generalizing to `z` is `z` itself
+— that is, `z` is the generic point of an irreducible component of the zero locus of `s`. Then
+`z` has codimension at most one in `X`.
+
+Trivialising `L` on an open neighbourhood `W` of `z` writes `s|_W` as `g • m` for a function `g`
+on `W` with the same zero locus, by
+`AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen`, and the statement becomes
+`AlgebraicGeometry.coheight_le_one_of_minimal_notMem_basicOpen`. -/
+theorem coheight_le_one_of_minimal_vanishesAt [IsLocallyNoetherian X] (hL : L.Invertible)
+    (s : Γ(L, ⊤)) {z : X} (hz : L.VanishesAt s z)
+    (hmin : ∀ y, L.VanishesAt s y → y ⤳ z → y = z) :
+    Order.coheight z ≤ 1 := by
+  obtain ⟨V, hzV, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom z
+  have : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hgV⟩ := exists_smul_eq_restrict m s
+  exact coheight_le_one_of_minimal_notMem_basicOpen g hzV
+    ((vanishesAt_iff_notMem_basicOpen m s g hgV hzV).1 hz)
+    fun y hyV hy hyz ↦ hmin y ((vanishesAt_iff_notMem_basicOpen m s g hgV hyV).2 hy) hyz
+
 end Trivialisation
 
 /-- **The nonzerodivisor criterion for an invertible sheaf: sufficiency.** If `L` is invertible
@@ -492,21 +492,16 @@ theorem mono_mulSection_of_forall_not_vanishesAt [IsLocallyNoetherian X] {L : X.
     obtain ⟨V₀, hV₀U, hxV₀, hker⟩ :=
       exists_restrict_tmul_eq_zero t (L.presheaf.map U.leTop.op s) ht hxU
     obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
-    have hmi : IsIso (unitSmulRestrictHom m) := hm
-    obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
-    have hgW : L.presheaf.map W.leTop.op s = g • m := by
-      rw [← hg, smulSection]
-      simp only [AddMonoidHom.mk'_apply]
-      congr 1
-      rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
-      simp
+    have : IsIso (unitSmulRestrictHom m) := hm
+    obtain ⟨g, hgW⟩ := exists_smul_eq_restrict m s
     obtain ⟨-, ⟨V, hVaff, rfl⟩, hxV, hVsub⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
       (show x ∈ ((V₀ ⊓ W : X.Opens) : Set X) from ⟨hxV₀, hxW⟩) (V₀ ⊓ W).2
     have hVV₀ : V ≤ V₀ := fun y hy ↦ (hVsub hy).1
     have hVW : V ≤ W := fun y hy ↦ (hVsub hy).2
     have hsV : L.presheaf.map (homOfLE (hVV₀.trans hV₀U)).op (L.presheaf.map U.leTop.op s) =
         smulSection m V hVW (X.presheaf.map (homOfLE hVW).op g) := by
-      rw [hres L, ← map_smulSection m (le_refl W) hVW (homOfLE hVW) g, hg, hres L]
+      rw [hres L, ← map_smulSection m le_rfl hVW (homOfLE hVW) g, smulSection_self, ← hgW,
+        hres L]
     have hkey : X.presheaf.map (homOfLE hVW).op g •
         F.presheaf.map (homOfLE (hVV₀.trans hV₀U)).op t = 0 :=
       smul_eq_zero_of_tmul_eq_zero F m hVW _ _ (hsV ▸ hker V hVV₀)
@@ -535,7 +530,7 @@ does.** -/
 theorem eq_zero_of_subsingleton_stalk (hL : L.Invertible) (F : X.Modules) {x : X}
     (hx : Subsingleton (F.presheaf.stalk x)) (y : (F ⊗ L).presheaf.stalk x) : y = 0 := by
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
-  have hmi : IsIso (unitSmulRestrictHom m) := hm
+  have : IsIso (unitSmulRestrictHom m) := hm
   obtain ⟨U, hxU, y₀, rfl⟩ := (F ⊗ L).presheaf.exists_germ_eq y
   have hxUW : x ∈ U ⊓ W := ⟨hxU, hxW⟩
   rw [← (F ⊗ L).presheaf.germ_res_apply (homOfLE (inf_le_left : U ⊓ W ≤ U)) x hxUW y₀]
@@ -566,14 +561,8 @@ theorem surjective_stalkFunctor_map_mulSection (hL : L.Invertible) (F : X.Module
     Function.Surjective
       ((SheafOfModules.stalkFunctor X.ringCatSheaf x).map (mulSection F s)) := by
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
-  have hmi : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
-  have hgW : L.presheaf.map W.leTop.op s = g • m := by
-    rw [← hg, smulSection]
-    simp only [AddMonoidHom.mk'_apply]
-    congr 1
-    rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
-    simp
+  have : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hgW⟩ := exists_smul_eq_restrict m s
   have hxg : x ∈ X.basicOpen g := by
     by_contra h
     exact hx ((vanishesAt_iff_notMem_basicOpen m s g hgW hxW).2 h)
@@ -679,14 +668,8 @@ theorem stalkMap_mulSection_mem_smul_maximalIdeal (hL : L.Invertible) (F : X.Mod
       IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
         (⊤ : Submodule (X.presheaf.stalk x) ((F ⊗ L).presheaf.stalk x)) := by
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
-  have hmi : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
-  have hgW : L.presheaf.map W.leTop.op s = g • m := by
-    rw [← hg, smulSection]
-    simp only [AddMonoidHom.mk'_apply]
-    congr 1
-    rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
-    simp
+  have : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hgW⟩ := exists_smul_eq_restrict m s
   have hgmax : X.presheaf.germ W x hxW g ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x) := by
     have hxg : x ∉ X.basicOpen g := (vanishesAt_iff_notMem_basicOpen m s g hgW hxW).1 hx
     rw [Scheme.mem_basicOpen X g x hxW] at hxg
@@ -776,14 +759,8 @@ theorem forall_not_vanishesAt_of_mono_mulSection [IsLocallyNoetherian X] {L : X.
     (hmono : Mono (mulSection F s)) : ∀ x ∈ F.associatedPoints, ¬ L.VanishesAt s x := by
   intro x hx hvan
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
-  have hmi : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
-  have hgW : L.presheaf.map W.leTop.op s = g • m := by
-    rw [← hg, smulSection]
-    simp only [AddMonoidHom.mk'_apply]
-    congr 1
-    rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
-    simp
+  have : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hgW⟩ := exists_smul_eq_restrict m s
   have hxg : x ∉ X.basicOpen g := (vanishesAt_iff_notMem_basicOpen m s g hgW hxW).1 hvan
   obtain ⟨-, ⟨V, hVaff, rfl⟩, hxV, hVsub⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
     (show x ∈ (W : Set X) from hxW) W.2
@@ -802,16 +779,14 @@ theorem forall_not_vanishesAt_of_mono_mulSection [IsLocallyNoetherian X] {L : X.
       X.presheaf.map (homOfLE hVW).op g • c from hbc, sub_self]
   have hres : L.presheaf.map V.leTop.op s =
       smulSection m V hVW (X.presheaf.map (homOfLE hVW).op g) := by
-    rw [← map_smulSection m (le_refl W) hVW (homOfLE hVW) g, hg,
+    rw [← map_smulSection m le_rfl hVW (homOfLE hVW) g, smulSection_self, ← hgW,
       ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
     congr 2
   have hinj : Function.Injective (Hom.app (mulSection F s) V) :=
     injective_app_of_mono (M := F) (N := F ⊗ L) (mulSection F s) hmono V
   refine hinj ?_
-  rw [app_mulSection, hres, map_zero]
-  rw [smulSection]
-  simp only [AddMonoidHom.mk'_apply]
-  rw [tensorMk_smul_right, ← tensorMk_smul_left, ha, tensorMk_zero_left]
+  rw [app_mulSection, hres, map_zero, smulSection_apply, tensorMk_smul_right,
+    ← tensorMk_smul_left, ha, tensorMk_zero_left]
 
 /-- **The nonzerodivisor criterion for an invertible sheaf.** For `L` invertible and `F`
 quasi-coherent on a locally Noetherian scheme, multiplication by a global section `s` of `L` is a

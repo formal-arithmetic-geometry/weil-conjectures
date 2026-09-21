@@ -374,6 +374,7 @@ public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.Irreducible
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.Sets.Closeds
 public import WeilConjectures.Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.Mathlib.Topology.Sheaves.LocallySurjective
 public import WeilConjectures.Mathlib.Topology.Sheaves.PUnit
