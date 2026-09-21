@@ -48,6 +48,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialisationBySection
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialityCriterion
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
+public import WeilConjectures.AlgebraicGeometry.Modules.VanishingFibre
 public import WeilConjectures.AlgebraicGeometry.Modules.VanishingPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.ZPow
 public import WeilConjectures.AlgebraicGeometry.ProjectionFormula
