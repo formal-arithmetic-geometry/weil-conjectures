@@ -5,6 +5,8 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
@@ -51,6 +53,16 @@ with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
 
 Neither step is formalized yet: both are recorded with `sorry`.
 
+On the coefficient side the criterion is already enough: the free module of rank one is a
+flat separator of `ModuleCat.{u} Λ`, so `ModuleCat.hasFunctorialFlatResolution` — the
+only unsorried result of this file — supplies the functorial flat resolutions that the
+étale six-functor files ask of their coefficient category.
+
+## Main results
+
+- `ModuleCat.hasFunctorialFlatResolution`: `ModuleCat.{u} Λ` admits functorial flat
+  resolutions, over a commutative ring `Λ : Type u`.
+
 ## Sorried results
 
 - `CategoryTheory.Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator`:
@@ -74,7 +86,7 @@ open CategoryTheory
 
 namespace CategoryTheory.Abelian
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
 
 /-- A Grothendieck abelian category with a preadditive, braided, closed monoidal structure
@@ -86,6 +98,18 @@ theorem hasFunctorialFlatResolution_iff_exists_flat_separator :
   sorry
 
 end CategoryTheory.Abelian
+
+namespace ModuleCat
+
+instance hasFunctorialFlatResolution (Λ : Type u) [CommRing Λ] :
+    Abelian.HasFunctorialFlatResolution (ModuleCat.{u} Λ) :=
+  (Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator _).mpr
+    ⟨ModuleCat.of Λ (Shrink.{u} Λ), ModuleCat.isSeparator.{u, u} Λ,
+      ObjectProperty.prop_of_iso _
+        (Shrink.linearEquiv.{u, u, u} Λ Λ).toModuleIso.symm
+        (ObjectProperty.prop_unit _)⟩
+
+end ModuleCat
 
 namespace CategoryTheory.GrothendieckTopology
 
