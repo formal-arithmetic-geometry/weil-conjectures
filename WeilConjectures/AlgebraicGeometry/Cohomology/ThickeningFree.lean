@@ -55,10 +55,6 @@ multiplicative form is `AlgebraicGeometry.Scheme.thickeningH1FreeMulEquiv`.
 - `AlgebraicGeometry.Scheme.thickeningH1FreeMulEquiv` — the same identification between the
   multiplicative versions of the two groups, the form in which
   `AlgebraicGeometry.Scheme.thickeningH1Map` takes its values.
-- `AlgebraicGeometry.Scheme.IsPushforwardFreeToThickeningIdealBaseChange` — the compatibility
-  of the comparison morphisms of `W` and of `W'` across the base change of a morphism
-  `u : W' ⟶ W` over `T`, the hypothesis of the naturality statements below.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.thickeningH1FreeAddEquiv_symm_naturality` — the identification is
@@ -86,14 +82,11 @@ One hypothesis is needed, because the identification depends on a datum that `u`
 determine: the comparison morphisms `Φ` on `W` and `Φ'` on `W'` are attached to two families
 `m` and `m'` of global sections chosen independently, so they have to be assumed compatible
 across the base change. That hypothesis is
-`AlgebraicGeometry.Scheme.IsPushforwardFreeToThickeningIdealBaseChange`.
-
-**Nothing in this repository discharges that hypothesis yet**, so the three naturality
-statements cannot be applied as they stand. In the situation the identification is built for
-the families `m` and `m'` both come from one family of elements of
-`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 2)` on the base, through
-`AlgebraicGeometry.Scheme.exists_span_eq_and_forall_toModulesι_app_eq`, and the compatibility
-is then a lemma rather than a hypothesis; proving it is left to a follow-up.
+`AlgebraicGeometry.Scheme.IsPushforwardFreeToThickeningIdealBaseChange`, and
+`AlgebraicGeometry.Scheme.isPushforwardFreeToThickeningIdealBaseChange_of_toModulesι_app_eq`
+discharges it whenever the two families lie over one family of elements of
+`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 2)` on the base — which is what
+`AlgebraicGeometry.Scheme.exists_span_eq_and_forall_toModulesι_app_eq` produces.
 
 -/
 
@@ -209,40 +202,6 @@ variable {T W W' : Scheme.{u}} (f : W ⟶ T) (f' : W' ⟶ T) (u : W' ⟶ W) (hu 
   [IsIso (pushforwardFreeToThickeningIdeal f t n m)]
   [IsIso (pushforwardFreeToThickeningIdeal f' t n m')]
   (k : ℕ)
-
-/-- **The comparison morphisms of `W` and of `W'` agree across the base change of `u`**: the
-hypothesis under which the identification of `H^k` of the thickening ideal is natural.
-
-Write `g := infinitesimalBaseChangeMapOver f f' u hu t (n + 1)` and
-`g₀ := infinitesimalBaseChangeMapOver f f' u hu t 0` for the base changes of `u` to the
-`(n + 1)`-st and the zeroth infinitesimal neighbourhood, and
-`Φ := pushforwardFreeToThickeningIdeal f t n m`, `Φ' := pushforwardFreeToThickeningIdeal f' t n m'`
-for the two comparison morphisms. The square is
-
-```
-  g^*((i₀)_*(𝒪_{W₀}^ι)) ──g^* Φ──▶ g^* Iₙ ──comapModulesMap──▶ I'ₙ
-            │                                                   ▲
-            │ baseChange                                        │ Φ'
-            ▼                                                   │
-  (i'₀)_*(g₀^*(𝒪_{W₀}^ι)) ──(i'₀)_* pullbackFreeIso──▶ (i'₀)_*(𝒪_{W'₀}^ι)
-```
-
-It is the only piece of data that the identification depends on and that the morphism `u` does
-not determine: the two families `m` and `m'` of global sections are chosen independently on `W`
-and on `W'`. Nothing in this repository produces a term of this type yet; see the naturality
-discussion in the module docstring. -/
-abbrev IsPushforwardFreeToThickeningIdealBaseChange : Prop :=
-  (Modules.pullback (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))).map
-        (pushforwardFreeToThickeningIdeal f t n m) ≫
-      IdealSheafData.comapModulesMap (thickeningIdeal f t n) (thickeningIdeal f' t n)
-        (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
-        (comap_thickeningIdeal_le f f' u hu t n) =
-    (Modules.baseChange
-          (infinitesimalBaseChangeMapOver_comp_mapZero f f' u hu t n)).natTrans.app
-        ((infinitesimalBaseChange f t 0).freeModules ι) ≫
-      (Modules.pushforward (infinitesimalBaseChangeMapZero f' t n)).map
-          (Modules.pullbackFreeIso (infinitesimalBaseChangeMapOver f f' u hu t 0) ι).hom ≫
-        pushforwardFreeToThickeningIdeal f' t n m'
 
 variable (hΦ : IsPushforwardFreeToThickeningIdealBaseChange f f' u hu t n m m')
 

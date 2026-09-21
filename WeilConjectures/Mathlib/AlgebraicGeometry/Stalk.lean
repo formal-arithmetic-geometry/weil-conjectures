@@ -90,7 +90,9 @@ The last sections base change a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver`: the base change
   `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
   `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
-  ideal of `W` into the thickening ideal of `W'`.
+  ideal of `W` into the thickening ideal of `W'`, and
+  `AlgebraicGeometry.Scheme.infinitesimalRingToΓ_comp_mapOver_appTop`, its compatibility with
+  the action of the infinitesimal ring on sections.
 - the `AlgebraicGeometry.Surjective` instance on
   `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap`: for `m ≤ n` the transition morphism
   `W ×_T Tₘ ⟶ W ×_T Tₙ` is surjective.
@@ -1151,6 +1153,26 @@ lemma infinitesimalBaseChangeMapOver_comp_mapZero (n : ℕ) :
       infinitesimalBaseChangeMapZero f' t n ≫
         infinitesimalBaseChangeMapOver f f' u hu t (n + 1) :=
   (infinitesimalBaseChangeMap_comp_mapOver f f' u hu t (Nat.zero_le (n + 1))).symm
+
+/-- **The action of `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1)` on the sections is compatible with the base
+change of a morphism `u : W' ⟶ W` over `T`.**
+
+```
+                    infinitesimalRingToΓ f t n
+  𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1) ──────────────────────▶ Γ(W ×_T Tₙ, 𝒪)
+             ╲                                             │
+              ╲                                            │ appTop of
+               ╲ infinitesimalRingToΓ f' t n               │ infinitesimalBaseChangeMapOver
+                ╲                                          ▼
+                 ╲────────────────────────────────▶ Γ(W' ×_T Tₙ, 𝒪)
+```
+-/
+@[reassoc (attr := simp)]
+lemma infinitesimalRingToΓ_comp_mapOver_appTop (n : ℕ) :
+    infinitesimalRingToΓ f t n ≫ (infinitesimalBaseChangeMapOver f f' u hu t n).appTop =
+      infinitesimalRingToΓ f' t n := by
+  rw [infinitesimalRingToΓ, infinitesimalRingToΓ, Category.assoc, ← Scheme.Hom.comp_appTop,
+    infinitesimalBaseChangeMapOver_snd]
 
 end BaseChangeOver
 

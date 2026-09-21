@@ -224,6 +224,12 @@ restriction to the fibre does not depend on the neighbourhood the section is tak
 - `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackFreeIso`: the pullback of a free sheaf is free,
   compatibly with `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso` on each summand.
+- `AlgebraicGeometry.Scheme.Modules.pullback_map_toPushforwardStructure_comp_baseChange`: **the
+  comparison morphism `𝒪 ⟶ g_* 𝒪` commutes with base change**, together with the trivialisation
+  identities `pullbackComp_hom_app_comp_pullbackUnitIso_hom` and
+  `pullbackTwoSquare_natTrans_app_structureModules_comp` it rests on.
+- `AlgebraicGeometry.Scheme.Modules.pullback_pushforwardFree_hom_ext`: two morphisms out of the
+  pullback of the pushforward of a free sheaf agreeing on every summand are equal.
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
 - `AlgebraicGeometry.Scheme.Modules.Hom.naturality`: a morphism of sheaves of modules commutes
@@ -3258,5 +3264,149 @@ lemma shortExact_kernelSequence_toPushforwardStructure :
   epi_g := ‹_›
 
 end Scheme.Hom
+
+namespace Scheme.Hom
+
+/-- **The comparison morphism `𝒪_X ⟶ a_* 𝒪_Y` is the unit of the adjunction `a^* ⊣ a_*` at the
+structure sheaf**, followed by the identification `a^* 𝒪_X ≅ 𝒪_Y`. -/
+lemma toPushforwardStructure_eq_unit_comp {X Y : Scheme.{u}} (a : Y ⟶ X) :
+    a.toPushforwardStructure =
+      (Modules.pullbackPushforwardAdjunction a).unit.app X.structureModules ≫
+        (Modules.pushforward a).map (Modules.pullbackUnitIso a).hom := by
+  have h := SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit
+    (φ := a.toRingCatSheafHom)
+  rw [Adjunction.homEquiv_unit] at h
+  exact h.symm
+
+end Scheme.Hom
+
+/-! ### Base change for the comparison morphism `𝒪 ⟶ g_* 𝒪` -/
+
+namespace Scheme.Modules
+
+section StructureTrivialisation
+
+variable {X Y Z : Scheme.{u}}
+
+/-- **The identification `a^* 𝒪 ≅ 𝒪` is compatible with the composition of pullbacks**:
+trivialising `a^* b^* 𝒪_Z` one step at a time is trivialising `(a ≫ b)^* 𝒪_Z` through
+`AlgebraicGeometry.Scheme.Modules.pullbackComp`. -/
+@[reassoc]
+lemma pullbackComp_hom_app_comp_pullbackUnitIso_hom (a : X ⟶ Y) (b : Y ⟶ Z) :
+    (pullbackComp a b).hom.app Z.structureModules ≫ (pullbackUnitIso (a ≫ b)).hom =
+      (pullback a).map (pullbackUnitIso b).hom ≫ (pullbackUnitIso a).hom := by
+  have he : ((pullbackUnitIso a).symm ≪≫
+      (pullback a).mapIso (pullbackUnitIso b).symm).hom ≫
+      (pullback a).map (pullbackUnitIso b).hom ≫ (pullbackUnitIso a).hom =
+      𝟙 X.structureModules := by
+    simp
+  refine (cancel_epi ((pullbackUnitIso a).symm ≪≫
+    (pullback a).mapIso (pullbackUnitIso b).symm).hom).mp ?_
+  rw [he]
+  refine (unitHomEquivTop X.structureModules).injective ?_
+  simp only [unitHomEquivTop_apply, Hom.id_app, ConcreteCategory.id_apply, Iso.trans_hom,
+    Iso.symm_hom, Functor.mapIso_hom, Hom.comp_app, ConcreteCategory.comp_apply,
+    app_pullbackUnitIso_inv_oneSection, sectionsPullback_naturality_apply]
+  have hcomp : Hom.app ((pullbackComp a b).hom.app Z.structureModules) ⊤
+      (sectionsPullback a ((pullback b).obj Z.structureModules)
+        (sectionsPullback b Z.structureModules (oneSection Z ⊤))) =
+      sectionsPullback (a ≫ b) Z.structureModules (oneSection Z ⊤) := by
+    apply pullbackComp_hom_app_sectionsPullback
+  exact (congrArg (ConcreteCategory.hom (Hom.app (pullbackUnitIso (a ≫ b)).hom ⊤)) hcomp).trans
+    ((app_pullbackUnitIso_hom_sectionsPullback (a ≫ b) (oneSection Z ⊤)).trans
+      (map_one (ConcreteCategory.hom (a ≫ b).appTop)))
+
+/-- **The identification `a^* 𝒪 ≅ 𝒪` is compatible with
+`AlgebraicGeometry.Scheme.Modules.pullbackCongr`.** -/
+@[reassoc]
+lemma pullbackCongr_hom_app_comp_pullbackUnitIso_hom {c d : X ⟶ Y} (h : c = d) :
+    (pullbackCongr h).hom.app Y.structureModules ≫ (pullbackUnitIso d).hom =
+      (pullbackUnitIso c).hom := by
+  subst h
+  simp [pullbackCongr]
+
+end StructureTrivialisation
+
+section BaseChangeStructure
+
+variable {X Y S T : Scheme.{u}} {v : X ⟶ Y} {f : Y ⟶ T} {g : X ⟶ S} {u : S ⟶ T}
+
+/-- **The comparison of pullbacks around a commutative square is compatible with the
+trivialisation of the pullback of the structure sheaf**: going around the square either way
+identifies `g^* u^* 𝒪_T` with `𝒪_X` in the same way. -/
+lemma pullbackTwoSquare_natTrans_app_structureModules_comp (w : v ≫ f = g ≫ u) :
+    (pullbackTwoSquare w).natTrans.app T.structureModules ≫
+        (pullback v).map (pullbackUnitIso f).hom ≫ (pullbackUnitIso v).hom =
+      (pullback g).map (pullbackUnitIso u).hom ≫ (pullbackUnitIso g).hom := by
+  have happ : (pullbackTwoSquare w).natTrans.app T.structureModules =
+      (pullbackComp g u).hom.app T.structureModules ≫
+        (pullbackCongr w.symm).hom.app T.structureModules ≫
+        (pullbackComp v f).inv.app T.structureModules := rfl
+  rw [happ, Category.assoc, Category.assoc,
+    ← pullbackComp_hom_app_comp_pullbackUnitIso_hom v f, Iso.inv_hom_id_app_assoc,
+    pullbackCongr_hom_app_comp_pullbackUnitIso_hom,
+    pullbackComp_hom_app_comp_pullbackUnitIso_hom]
+
+/-- **The comparison morphism `𝒪 ⟶ f_* 𝒪` commutes with base change**: for a commutative square
+`v ≫ f = g ≫ u` of schemes,
+
+```
+  u^* 𝒪_T ──u^*(𝒪_T ⟶ f_* 𝒪_Y)──▶ u^*(f_* 𝒪_Y) ──baseChange──▶ g_*(v^* 𝒪_Y)
+     │                                                                │
+     │ pullbackUnitIso                                  g_*(pullbackUnitIso)
+     ▼                                                                ▼
+    𝒪_S ─────────────────────𝒪_S ⟶ g_* 𝒪_X─────────────────────▶ g_* 𝒪_X
+```
+
+commutes. -/
+lemma pullback_map_toPushforwardStructure_comp_baseChange (w : v ≫ f = g ≫ u) :
+    (pullback u).map f.toPushforwardStructure ≫
+        (baseChange w).natTrans.app Y.structureModules ≫
+        (pushforward g).map (pullbackUnitIso v).hom =
+      (pullbackUnitIso u).hom ≫ g.toPushforwardStructure := by
+  have hmate : (pullback u).map
+        ((pullbackPushforwardAdjunction f).unit.app T.structureModules) ≫
+        (baseChange w).natTrans.app ((pullback f).obj T.structureModules) =
+      (pullbackPushforwardAdjunction g).unit.app ((pullback u).obj T.structureModules) ≫
+        (pushforward g).map ((pullbackTwoSquare w).natTrans.app T.structureModules) :=
+    unit_mateEquiv _ _ _ _
+  have hnat : (pushforward f ⋙ pullback u).map (pullbackUnitIso f).hom ≫
+      (baseChange w).natTrans.app Y.structureModules ≫
+        (pushforward g).map (pullbackUnitIso v).hom =
+      (baseChange w).natTrans.app ((pullback f).obj T.structureModules) ≫
+        (pullback v ⋙ pushforward g).map (pullbackUnitIso f).hom ≫
+          (pushforward g).map (pullbackUnitIso v).hom := by
+    rw [← Category.assoc, (baseChange w).natTrans.naturality, Category.assoc]
+  have hunit : (pullbackUnitIso u).hom ≫
+      (pullbackPushforwardAdjunction g).unit.app S.structureModules =
+      (pullbackPushforwardAdjunction g).unit.app ((pullback u).obj T.structureModules) ≫
+        (pushforward g).map ((pullback g).map (pullbackUnitIso u).hom) :=
+    (pullbackPushforwardAdjunction g).unit.naturality (pullbackUnitIso u).hom
+  rw [Hom.toPushforwardStructure_eq_unit_comp f, Hom.toPushforwardStructure_eq_unit_comp g,
+    Functor.map_comp, Category.assoc, ← Functor.comp_map, hnat, reassoc_of% hmate,
+    reassoc_of% hunit, Functor.comp_map, ← Functor.map_comp, ← Functor.map_comp,
+    pullbackTwoSquare_natTrans_app_structureModules_comp, Functor.map_comp]
+
+end BaseChangeStructure
+
+section PullbackPushforwardFree
+
+variable {W₀ W₁ W'₁ : Scheme.{u}} (i₀ : W₀ ⟶ W₁) (g : W'₁ ⟶ W₁) {ι : Type u} [Finite ι]
+  {P : W'₁.Modules}
+
+/-- **Two morphisms out of the pullback of the pushforward of a free sheaf of modules agreeing
+on every summand are equal**: the pullback is a left adjoint, so it takes the coproduct
+decomposition of `AlgebraicGeometry.Scheme.Modules.isColimitMapFreeModulesCofan` to one of
+`g^*(i₀_*(𝒪^ι))`. -/
+lemma pullback_pushforwardFree_hom_ext
+    {χ χ' : (pullback g).obj ((pushforward i₀).obj (W₀.freeModules ι)) ⟶ P}
+    (h : ∀ j : ι, (pullback g).map ((pushforward i₀).map (SheafOfModules.ιFree j)) ≫ χ =
+      (pullback g).map ((pushforward i₀).map (SheafOfModules.ιFree j)) ≫ χ') : χ = χ' :=
+  (isColimitOfPreserves (pullback g)
+    (isColimitMapFreeModulesCofan i₀ (ι := ι))).hom_ext fun j ↦ h j.as
+
+end PullbackPushforwardFree
+
+end Scheme.Modules
 
 end AlgebraicGeometry

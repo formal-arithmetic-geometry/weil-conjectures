@@ -59,6 +59,12 @@ of it lifts to a family `e : ι → B` spanning `K` and with all relations havin
 - `AlgebraicGeometry.Scheme.exists_span_eq_and_forall_toModulesι_app_eq` — the two together: a
   finite family `e` spanning `K` with all relations having coefficients in `𝔪_B`, and a family
   `m` of global sections of `Iₙ` lying over it.
+- `AlgebraicGeometry.Scheme.isPushforwardFreeToThickeningIdealBaseChange_of_toModulesι_app_eq`
+  — **the comparison morphisms of `W` and of `W'` agree across the base change of a morphism
+  `u : W' ⟶ W` over `T`**, as soon as the two families of global sections lie over one family
+  `e` of elements of `B`. Since `e` is a datum on the base `(T, t)`, which `f` and `f'` share,
+  this is what the previous item produces. The statement of the compatibility is
+  `AlgebraicGeometry.Scheme.IsPushforwardFreeToThickeningIdealBaseChange`.
 -/
 
 @[expose] public section
@@ -68,6 +74,8 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
+
+section Comparison
 
 variable {T W : Scheme.{u}} (f : W ⟶ T) (t : T) (n : ℕ)
 
@@ -185,5 +193,81 @@ theorem exists_span_eq_and_forall_toModulesι_app_eq
   exact ⟨ι, hι, e, m, hspan, hind, hm⟩
 
 end Sections
+
+end Comparison
+
+/-! ### Base change in the scheme -/
+
+section BaseChange
+
+variable {T W W' : Scheme.{u}} (f : W ⟶ T) (f' : W' ⟶ T) (u : W' ⟶ W) (hu : u ≫ f = f')
+  (t : T) (n : ℕ) {ι : Type u} [Finite ι]
+  (m : ι → Γ((thickeningIdeal f t n).toModules, ⊤))
+  (m' : ι → Γ((thickeningIdeal f' t n).toModules, ⊤))
+
+/-- **The comparison morphisms of `W` and of `W'` agree across the base change of a morphism
+`u : W' ⟶ W` over `T`.**
+
+Write `g` and `g₀` for the base changes of `u` to the `(n + 1)`-st and to the zeroth
+infinitesimal neighbourhood, and `Φ` and `Φ'` for the comparison morphisms
+`AlgebraicGeometry.Scheme.pushforwardFreeToThickeningIdeal` attached to `m` on `W` and to `m'`
+on `W'`. The square is
+
+```
+  g^*((i₀)_*(𝒪_{W₀}^ι)) ──g^* Φ──▶ g^* Iₙ ──comapModulesMap──▶ I'ₙ
+            │                                                   ▲
+            │ baseChange                                        │ Φ'
+            ▼                                                   │
+  (i'₀)_*(g₀^*(𝒪_{W₀}^ι)) ──(i'₀)_* pullbackFreeIso──▶ (i'₀)_*(𝒪_{W'₀}^ι)
+```
+
+It holds as soon as the two families `m` and `m'` lie over one family of elements of
+`𝒪_{T, t} ⧸ 𝔪_t ^ (n + 2)`, by
+`AlgebraicGeometry.Scheme.isPushforwardFreeToThickeningIdealBaseChange_of_toModulesι_app_eq`. -/
+abbrev IsPushforwardFreeToThickeningIdealBaseChange : Prop :=
+  (Modules.pullback (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))).map
+        (pushforwardFreeToThickeningIdeal f t n m) ≫
+      IdealSheafData.comapModulesMap (thickeningIdeal f t n) (thickeningIdeal f' t n)
+        (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
+        (comap_thickeningIdeal_le f f' u hu t n) =
+    (Modules.baseChange
+          (infinitesimalBaseChangeMapOver_comp_mapZero f f' u hu t n)).natTrans.app
+        ((infinitesimalBaseChange f t 0).freeModules ι) ≫
+      (Modules.pushforward (infinitesimalBaseChangeMapZero f' t n)).map
+          (Modules.pullbackFreeIso (infinitesimalBaseChangeMapOver f f' u hu t 0) ι).hom ≫
+        pushforwardFreeToThickeningIdeal f' t n m'
+
+/-- **The comparison morphisms agree across the base change of `u` as soon as the two families
+of global sections do**, section by section: this is
+`AlgebraicGeometry.Scheme.IdealSheafData.pullback_map_pushforwardFreeDesc_comp_comapModulesMap`
+for the thickening ideal. -/
+theorem isPushforwardFreeToThickeningIdealBaseChange_of_appTop_toModulesι_app_eq
+    (hmm' : ∀ j, (infinitesimalBaseChangeMapOver f f' u hu t (n + 1)).appTop
+        (Modules.Hom.app (thickeningIdeal f t n).toModulesι ⊤ (m j)) =
+      Modules.Hom.app (thickeningIdeal f' t n).toModulesι ⊤ (m' j)) :
+    IsPushforwardFreeToThickeningIdealBaseChange f f' u hu t n m m' :=
+  IdealSheafData.pullback_map_pushforwardFreeDesc_comp_comapModulesMap
+    (ker_mul_thickeningIdeal_eq_zero f t n) (ker_mul_thickeningIdeal_eq_zero f' t n)
+    (comap_thickeningIdeal_le f f' u hu t n)
+    (infinitesimalBaseChangeMapOver_comp_mapZero f f' u hu t n) m m' hmm'
+
+/-- **The comparison morphisms agree across the base change of `u` when the two families of
+global sections lie over one family `e` of elements of `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 2)`.**
+
+That is the situation the comparison morphism is built for:
+`AlgebraicGeometry.Scheme.exists_span_eq_and_forall_toModulesι_app_eq` produces `e` on the base
+`(T, t)`, which `f` and `f'` share, and a family `m` lying over it for each of them. -/
+theorem isPushforwardFreeToThickeningIdealBaseChange_of_toModulesι_app_eq
+    {e : ι → T.infinitesimalRing t (n + 1)}
+    (hm : ∀ j, Modules.Hom.app (thickeningIdeal f t n).toModulesι ⊤ (m j) =
+      infinitesimalRingToΓ f t (n + 1) (e j))
+    (hm' : ∀ j, Modules.Hom.app (thickeningIdeal f' t n).toModulesι ⊤ (m' j) =
+      infinitesimalRingToΓ f' t (n + 1) (e j)) :
+    IsPushforwardFreeToThickeningIdealBaseChange f f' u hu t n m m' :=
+  isPushforwardFreeToThickeningIdealBaseChange_of_appTop_toModulesι_app_eq f f' u hu t n m m'
+    fun j ↦ by
+      rw [hm, hm', ← CommRingCat.comp_apply, infinitesimalRingToΓ_comp_mapOver_appTop]
+
+end BaseChange
 
 end AlgebraicGeometry.Scheme

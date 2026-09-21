@@ -79,6 +79,10 @@ sheaf-condition argument that the kernel description gets for free.
 - `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap` — the comparison morphism
   `g^* I ⟶ I'` for a morphism `g` pulling the ideal `I` into the ideal `I'`, together with
   `comapModulesMap_toModulesι` and `eq_comapModulesMap`, which determine it.
+- `AlgebraicGeometry.Scheme.IdealSheafData.pullback_map_pushforwardFreeDesc_comp_comapModulesMap`
+  — **the comparison morphism attached to a family of global sections commutes with base
+  change**, provided the two families correspond under the pullback of functions; with its
+  one-section form `pullback_map_pushforwardStructureDesc_comp_comapModulesMap`.
 
 ## TODO
 
@@ -650,5 +654,98 @@ theorem isIso_pushforwardFreeDesc (hJ : g.ker * J = 0) (m : ι → Γ(J.toModule
     exact Finset.sum_congr rfl fun j _ ↦ (smul_eq_mul _ _).symm
 
 end PushforwardDesc
+
+/-! ### Base change for the comparison morphism -/
+
+section BaseChange
+
+variable {W₀ W₁ W'₀ W'₁ : Scheme.{u}} {i₀ : W₀ ⟶ W₁} {g : W'₁ ⟶ W₁} {g₀ : W'₀ ⟶ W₀}
+  {i'₀ : W'₀ ⟶ W'₁} [QuasiCompact i₀] [Epi i₀.toPushforwardStructure] [QuasiCompact i'₀]
+  [Epi i'₀.toPushforwardStructure] {J : W₁.IdealSheafData} {J' : W'₁.IdealSheafData}
+
+/-- **Multiplication by a global section of an ideal sheaf commutes with base change.**
+
+Let `g₀ ≫ i₀ = i'₀ ≫ g` be a commutative square, let `J` and `J'` be ideal sheaves killed by
+the kernels of `i₀` and of `i'₀`, with `g` pulling `J` into `J'`, and let `s` and `s'` be global
+sections of `J` and of `J'` that correspond under `g`. Then multiplication by `s` and
+multiplication by `s'` agree across the square:
+
+```
+  g^*(i₀_* 𝒪_{W₀}) ──g^*(· s)──▶ g^* J ──comapModulesMap──▶ J'
+          │                                                 ▲
+          │ baseChange                                      │ · s'
+          ▼                                                 │
+  i'₀_*(g₀^* 𝒪_{W₀}) ───i'₀_* pullbackUnitIso───▶ i'₀_* 𝒪_{W'₀}
+```
+
+Both sides are computed by cancelling the epimorphism `g^*(𝒪_{W₁} ⟶ i₀_* 𝒪_{W₀})`, which turns
+them into multiplication by the two sections read in the structure sheaves; there
+`AlgebraicGeometry.Scheme.Modules.pullback_map_toPushforwardStructure_comp_baseChange` moves the
+base change morphism out of the way. -/
+lemma pullback_map_pushforwardStructureDesc_comp_comapModulesMap
+    (hJ : i₀.ker * J = 0) (hJ' : i'₀.ker * J' = 0) (hg : J.comap g ≤ J') (w : g₀ ≫ i₀ = i'₀ ≫ g)
+    (s : Γ(J.toModules, ⊤)) (s' : Γ(J'.toModules, ⊤))
+    (hss' : g.appTop (Modules.Hom.app J.toModulesι ⊤ s) = Modules.Hom.app J'.toModulesι ⊤ s') :
+    (Modules.pullback g).map (pushforwardStructureDesc i₀ hJ s) ≫ comapModulesMap J J' g hg =
+      (Modules.baseChange w).natTrans.app W₀.structureModules ≫
+        (Modules.pushforward i'₀).map (Modules.pullbackUnitIso g₀).hom ≫
+          pushforwardStructureDesc i'₀ hJ' s' := by
+  have hfinal : (Modules.pullback g).map
+        (Modules.homOfSectionTop W₁.structureModules (Modules.Hom.app J.toModulesι ⊤ s)) ≫
+        (Modules.pullbackUnitIso g).hom =
+      (Modules.pullbackUnitIso g).hom ≫
+        Modules.homOfSectionTop W'₁.structureModules (Modules.Hom.app J'.toModulesι ⊤ s') := by
+    refine ((Modules.pullbackUnitIso g).inv_comp_eq).mp ?_
+    rw [← Category.assoc, Modules.map_homOfSectionTop, Modules.homOfSectionTop_comp]
+    exact congrArg (Modules.homOfSectionTop W'₁.structureModules)
+      ((Modules.app_pullbackUnitIso_hom_sectionsPullback g
+        (Modules.Hom.app J.toModulesι ⊤ s)).trans hss')
+  rw [← cancel_epi ((Modules.pullback g).map i₀.toPushforwardStructure),
+    ← Category.assoc ((Modules.pullback g).map i₀.toPushforwardStructure), ← Functor.map_comp,
+    toPushforwardStructure_comp_pushforwardStructureDesc,
+    reassoc_of% (Modules.pullback_map_toPushforwardStructure_comp_baseChange w),
+    toPushforwardStructure_comp_pushforwardStructureDesc,
+    ← cancel_mono J'.toModulesι, Category.assoc, Category.assoc, comapModulesMap_toModulesι,
+    Modules.homOfSectionTop_comp, ← Category.assoc, ← Functor.map_comp,
+    Modules.homOfSectionTop_comp, hfinal]
+
+/-- **The comparison morphism attached to a family of global sections of an ideal sheaf commutes
+with base change**: the free version of
+`IdealSheafData.pullback_map_pushforwardStructureDesc_comp_comapModulesMap`, obtained from it
+summand by summand.
+
+```
+  g^*(i₀_*(𝒪_{W₀}^ι)) ──g^* Φ──▶ g^* J ──comapModulesMap──▶ J'
+            │                                               ▲
+            │ baseChange                                    │ Φ'
+            ▼                                               │
+  i'₀_*(g₀^*(𝒪_{W₀}^ι)) ──i'₀_* pullbackFreeIso──▶ i'₀_*(𝒪_{W'₀}^ι)
+```
+-/
+lemma pullback_map_pushforwardFreeDesc_comp_comapModulesMap {ι : Type u} [Finite ι]
+    (hJ : i₀.ker * J = 0) (hJ' : i'₀.ker * J' = 0) (hg : J.comap g ≤ J') (w : g₀ ≫ i₀ = i'₀ ≫ g)
+    (m : ι → Γ(J.toModules, ⊤)) (m' : ι → Γ(J'.toModules, ⊤))
+    (hmm' : ∀ j, g.appTop (Modules.Hom.app J.toModulesι ⊤ (m j)) =
+      Modules.Hom.app J'.toModulesι ⊤ (m' j)) :
+    (Modules.pullback g).map (pushforwardFreeDesc i₀ hJ m) ≫ comapModulesMap J J' g hg =
+      (Modules.baseChange w).natTrans.app (W₀.freeModules ι) ≫
+        (Modules.pushforward i'₀).map (Modules.pullbackFreeIso g₀ ι).hom ≫
+          pushforwardFreeDesc i'₀ hJ' m' := by
+  refine Modules.pullback_pushforwardFree_hom_ext i₀ g fun j ↦ ?_
+  have key : (Modules.pullback g).map ((Modules.pushforward i₀).map
+        (SheafOfModules.ιFree (R := W₀.ringCatSheaf) (I := ι) j)) ≫
+      (Modules.baseChange w).natTrans.app (W₀.freeModules ι) =
+      (Modules.baseChange w).natTrans.app W₀.structureModules ≫
+        (Modules.pushforward i'₀).map ((Modules.pullback g₀).map (SheafOfModules.ιFree j)) :=
+    (Modules.baseChange w).natTrans.naturality _
+  rw [← Category.assoc ((Modules.pullback g).map ((Modules.pushforward i₀).map
+      (SheafOfModules.ιFree j))), ← Functor.map_comp, map_ιFree_comp_pushforwardFreeDesc,
+    reassoc_of% key, ← Functor.map_comp_assoc,
+    Modules.pullback_map_ιFree_comp_pullbackFreeIso_hom, Functor.map_comp_assoc,
+    map_ιFree_comp_pushforwardFreeDesc]
+  exact pullback_map_pushforwardStructureDesc_comp_comapModulesMap hJ hJ' hg w (m j) (m' j)
+    (hmm' j)
+
+end BaseChange
 
 end AlgebraicGeometry.Scheme.IdealSheafData

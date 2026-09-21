@@ -321,7 +321,8 @@ theorem H.freeLinearEquiv_symm_baseChange {ι : Type u} [Fintype ι] (w : g₀ �
       H.pushforwardAddEquiv i'₀ (W'₀.freeModules ι) k
         ((H.freeLinearEquiv W'₀ ι k).symm fun j ↦ H.structurePullbackMap g₀ k (p j)) := by
     rw [← H.pushforwardAddEquiv_map, H.freeLinearEquiv_symm_naturality]
-  rw [H.map_comp, LinearMap.comp_apply, hbaseChange, hfree]
+  rw [H.map_comp, LinearMap.comp_apply, hbaseChange]
+  exact hfree
 
 /-- **A comparison morphism out of the pushforward of a free sheaf is carried along the base
 change square**, provided it is itself compatible with base change.
@@ -354,7 +355,8 @@ theorem H.map_freeLinearEquiv_symm_baseChange {ι : Type u} [Fintype ι]
       H.map Φ' k (H.pushforwardAddEquiv i'₀ (W'₀.freeModules ι) k
         ((H.freeLinearEquiv W'₀ ι k).symm fun j ↦ H.structurePullbackMap g₀ k (p j))) := by
   rw [H.pullbackAddHom_map, ← LinearMap.comp_apply, ← H.map_comp, hΦ, ← Category.assoc,
-    H.map_comp, LinearMap.comp_apply, H.freeLinearEquiv_symm_baseChange]
+    H.map_comp, LinearMap.comp_apply]
+  exact congrArg (fun z ↦ H.map Φ' k z) (H.freeLinearEquiv_symm_baseChange w k p)
 
 end BaseChange
 

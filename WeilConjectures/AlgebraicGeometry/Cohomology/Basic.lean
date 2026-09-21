@@ -407,9 +407,10 @@ the map induced by the `i`-th projection `SheafOfModules.πFree`. -/
 @[simp]
 lemma H.freeLinearEquiv_apply (x : (X.freeModules ι).H n) (i : ι) :
     H.freeLinearEquiv X ι n x i = H.map (SheafOfModules.πFree i) n x := by
-  rw [H.freeLinearEquiv, LinearEquiv.trans_apply, H.mapLinearEquiv_symm_apply,
-    H.biproductLinearEquiv_apply, ← LinearMap.comp_apply, ← H.map_comp,
-    X.isoCoproduct_inv_comp_biproduct_π]
+  change H.map (biproduct.π (fun _ : ι ↦ X.structureModules) i) n
+      (H.map (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).inv n x) = _
+  rw [← LinearMap.comp_apply, ← H.map_comp, X.isoCoproduct_inv_comp_biproduct_π]
+  rfl
 
 /-- **A family of classes on `𝒪_X` assembles into a class on `𝒪_X^ι` summand by summand**: the
 inverse of `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv` is the sum over the summands of
@@ -417,10 +418,12 @@ the maps induced by their inclusions `SheafOfModules.ιFree`. -/
 @[simp]
 lemma H.freeLinearEquiv_symm_apply (p : ι → X.structureModules.H n) :
     (H.freeLinearEquiv X ι n).symm p = ∑ i : ι, H.map (SheafOfModules.ιFree i) n (p i) := by
-  rw [H.freeLinearEquiv, LinearEquiv.symm_trans_apply, LinearEquiv.symm_symm,
-    H.biproductLinearEquiv_symm_apply, H.mapLinearEquiv_apply, _root_.map_sum]
+  change H.map (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).hom n
+      (∑ i : ι, H.map (biproduct.ι (fun _ : ι ↦ X.structureModules) i) n (p i)) = _
+  rw [_root_.map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [← LinearMap.comp_apply, ← H.map_comp, X.biproduct_ι_comp_isoCoproduct_hom]
+  rfl
 
 end Free
 
