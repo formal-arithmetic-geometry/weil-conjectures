@@ -63,6 +63,13 @@ pullback of an invertible sheaf of modules is invertible.
   `isFiniteType_tensorObj_of_invertible` and `isCoherent_tensorObj_of_invertible`: **tensoring
   by an invertible sheaf of modules preserves quasi-coherence, being of finite type, and
   coherence.**
+- `AlgebraicGeometry.Scheme.Modules.bijective_smulSection` and
+  `AlgebraicGeometry.Scheme.Modules.exists_map_leTop_eq_smul`: over a trivialising open `W`,
+  multiplication by the trivialising section `m` is a bijection on sections, so every global
+  section of `M` restricts to `g • m` for a function `g ∈ Γ(X, W)`.
+- `AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen`: **vanishing of a section
+  of a line bundle is vanishing of its local equation**: written as `g • m` on a trivialising
+  open, a section vanishes at a point of `W` exactly outside the basic open subset of `g`.
 
 Invertibility of the second factor is a deliberate simplification in the last three statements.
 Both halves hold for a general second factor — a tensor product of quasi-coherent sheaves of
@@ -266,6 +273,13 @@ noncomputable def smulSection (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) : Γ(X
 lemma smulSection_smul (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r z : Γ(X, V)) :
     smulSection m V hV (r • z) = r • smulSection m V hV z :=
   mul_smul r z _
+
+/-- Multiplication by a section over the trivialising open itself is multiplication by that
+section. -/
+@[simp]
+lemma smulSection_le_rfl (m : Γ(M, W)) (r : Γ(X, W)) : smulSection m W le_rfl r = r • m := by
+  rw [smulSection]
+  simp
 
 lemma map_smulSection (m : Γ(M, W)) {V V' : X.Opens} (hV : V ≤ W) (hV' : V' ≤ W) (i : V' ⟶ V)
     (r : Γ(X, V)) :
@@ -585,5 +599,117 @@ theorem isCoherent_tensorObj_of_invertible (F : X.Modules) [F.IsCoherent] (hL : 
   constructor
 
 end TensorInvertible
+
+section Trivialisation
+
+variable {L : X.Modules} {W : X.Opens}
+
+/-- **A trivialising section generates the sections over every smaller open subset.** If
+multiplication by `m : Γ(L, W)` is an isomorphism `𝒪_W ≅ L|_W`, then for every open `V ≤ W`
+multiplication by the restriction of `m` is a bijection of `Γ(X, V)` onto `Γ(L, V)`. -/
+theorem bijective_smulSection (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    {V : X.Opens} (hV : V ≤ W) :
+    Function.Bijective (smulSection m V hV) := by
+  have hiso : IsIso (smulRestrictHom m) := by
+    have h : smulRestrictHom m = (restrictUnitIso W.ι).hom ≫ unitSmulRestrictHom m := by
+      rw [unitSmulRestrictHom, ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    rw [h]
+    infer_instance
+  obtain ⟨V', rfl⟩ : ∃ V' : W.toScheme.Opens, W.ι ''ᵁ V' = V :=
+    ⟨W.ι ⁻¹ᵁ V, by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+        inf_eq_right.2 hV]⟩
+  exact ConcreteCategory.bijective_of_isIso
+    ((SheafOfModules.evaluation W.toScheme.ringCatSheaf (op V')).map (smulRestrictHom m))
+
+/-- **A global section is a multiple of a trivialising section over the trivialising open.** If
+multiplication by `m : Γ(L, W)` is an isomorphism `𝒪_W ≅ L|_W`, then the restriction to `W` of a
+global section `s` of `L` is `g • m` for a function `g ∈ Γ(X, W)`. -/
+theorem exists_map_leTop_eq_smul (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)] (s : Γ(L, ⊤)) :
+    ∃ g : Γ(X, W), L.presheaf.map W.leTop.op s = g • m := by
+  obtain ⟨g, hg⟩ := (bijective_smulSection m le_rfl).2 (L.presheaf.map W.leTop.op s)
+  exact ⟨g, by rw [← hg, smulSection_le_rfl]⟩
+
+/-- **A trivialising section generates every stalk over the trivialising open.** -/
+theorem span_germ_eq_top (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)] {x : X} (hx : x ∈ W) :
+    Submodule.span (X.presheaf.stalk x) {L.presheaf.germ W x hx m} = ⊤ := by
+  refine eq_top_iff.2 fun y _ ↦ ?_
+  obtain ⟨V, hxV, t, rfl⟩ := L.presheaf.exists_germ_eq y
+  have hxV' : x ∈ V ⊓ W := ⟨hxV, hx⟩
+  rw [← L.presheaf.germ_res_apply (homOfLE (inf_le_left : V ⊓ W ≤ V)) x hxV' t]
+  obtain ⟨r, hr⟩ := (bijective_smulSection m (V := V ⊓ W) inf_le_right).2
+    (L.presheaf.map (homOfLE (inf_le_left : V ⊓ W ≤ V)).op t)
+  rw [← hr]
+  change L.presheaf.germ (V ⊓ W) x hxV' (r • L.presheaf.map (homOfLE inf_le_right).op m) ∈ _
+  rw [germ_smul L x hxV' r, L.presheaf.germ_res_apply]
+  exact Submodule.smul_mem _ _ (Submodule.mem_span_singleton_self _)
+
+/-- **A trivialising section is a free generator of every stalk over the trivialising open**:
+no nonzero element of the local ring kills it. -/
+theorem eq_zero_of_smul_germ_eq_zero (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    {x : X} (hx : x ∈ W) {z : X.presheaf.stalk x} (hz : z • L.presheaf.germ W x hx m = 0) :
+    z = 0 := by
+  obtain ⟨V, hxV, r, rfl⟩ := X.presheaf.exists_germ_eq z
+  have hxV' : x ∈ V ⊓ W := ⟨hxV, hx⟩
+  rw [← X.presheaf.germ_res_apply (homOfLE (inf_le_left : V ⊓ W ≤ V)) x hxV' r] at hz ⊢
+  rw [← L.presheaf.germ_res_apply (homOfLE (inf_le_right : V ⊓ W ≤ W)) x hxV' m,
+    ← germ_smul L x hxV'] at hz
+  obtain ⟨V'', hxV'', i, i', hzz⟩ :=
+    L.presheaf.germ_eq (U := V ⊓ W) (V := V ⊓ W) x hxV' hxV' _ 0 (by simpa using hz)
+  rw [map_zero, Scheme.Modules.map_smul] at hzz
+  have hreg : smulSection m V'' (i.le.trans inf_le_right)
+      (X.presheaf.map i.op (X.presheaf.map (homOfLE (inf_le_left : V ⊓ W ≤ V)).op r)) = 0 := by
+    rw [smulSection]
+    simp only [AddMonoidHom.mk'_apply]
+    rw [← hzz]
+    congr 1
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
+    congr 2
+  have := (bijective_smulSection m (V := V'') (i.le.trans inf_le_right)).1
+    (hreg.trans (map_zero _).symm)
+  rw [← X.presheaf.germ_res_apply i x hxV'' _, this, map_zero]
+
+/-- **The bridge between vanishing and basic open subsets.** If `s` restricts to `g • m` on a
+trivialising open `W`, then `s` vanishes at a point of `W` exactly when that point lies outside
+the basic open subset of `g`.
+
+This identifies `AlgebraicGeometry.Scheme.Modules.VanishesAt` for an invertible sheaf with the
+hypothesis of
+`AlgebraicGeometry.Scheme.Modules.isSMulRegular_iff_associatedPoints_subset_basicOpen`, and
+generalises `AlgebraicGeometry.Scheme.Modules.vanishesAt_structureModules_iff`. -/
+theorem vanishesAt_iff_notMem_basicOpen (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
+    (s : Γ(L, ⊤)) (g : Γ(X, W)) (hg : L.presheaf.map W.leTop.op s = g • m)
+    {x : X} (hx : x ∈ W) :
+    L.VanishesAt s x ↔ x ∉ X.basicOpen g := by
+  have he : L.presheaf.germ ⊤ x trivial s
+      = X.presheaf.germ W x hx g • L.presheaf.germ W x hx m := by
+    rw [← L.presheaf.germ_res_apply W.leTop x hx s, hg, germ_smul L x hx]
+  have hne : L.presheaf.germ W x hx m ≠ 0 := fun h0 ↦
+    one_ne_zero (eq_zero_of_smul_germ_eq_zero m hx (by rw [h0, smul_zero]))
+  have hnt : Nontrivial (L.presheaf.stalk x) := nontrivial_of_ne _ _ hne
+  have hfin : Module.Finite (X.presheaf.stalk x) (L.presheaf.stalk x) :=
+    ⟨span_germ_eq_top m hx ▸ Submodule.fg_span_singleton _⟩
+  rw [vanishesAt_iff, he, Scheme.mem_basicOpen X g x hx]
+  constructor
+  · intro h hu
+    obtain ⟨u, hu⟩ := hu
+    have hmem := Submodule.smul_mem (IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
+      (⊤ : Submodule (X.presheaf.stalk x) (L.presheaf.stalk x)))
+      ((u⁻¹ : (X.presheaf.stalk x)ˣ) : X.presheaf.stalk x) h
+    rw [smul_smul, ← hu, Units.inv_mul, one_smul] at hmem
+    have hspan : Submodule.span (X.presheaf.stalk x) {L.presheaf.germ W x hx m} ≤
+        IsLocalRing.maximalIdeal (X.presheaf.stalk x) • ⊤ :=
+      Submodule.span_le.2 (Set.singleton_subset_iff.2 hmem)
+    rw [span_germ_eq_top m hx] at hspan
+    exact absurd (le_antisymm le_top hspan)
+      (Submodule.ideal_smul_top_lt_top (R := X.presheaf.stalk x)
+        (M := L.presheaf.stalk x)
+        (I := IsLocalRing.maximalIdeal (X.presheaf.stalk x)) le_rfl).ne
+  · intro h
+    exact Submodule.smul_mem_smul
+      ((IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 h)) Submodule.mem_top
+
+
+end Trivialisation
 
 end AlgebraicGeometry.Scheme.Modules

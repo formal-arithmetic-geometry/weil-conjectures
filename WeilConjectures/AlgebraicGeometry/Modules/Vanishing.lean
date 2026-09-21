@@ -64,10 +64,11 @@ on the sections of `F` over every open subset.
 ## TODO
 
 - Reconcile `AlgebraicGeometry.Scheme.Modules.VanishesAt` with
-  `AlgebraicGeometry.Scheme.Modules.fiberMk`, in which the project states the nowhere-vanishing
-  of a section of a line bundle (`lem:cube-nowhere-vanishing`). The blocking input is the
-  comparison `F(x) ≅ Fₓ / 𝔪ₓ Fₓ` of the fibre with the stalk, which is available neither here
-  nor in Mathlib; only the case of the structure sheaf is settled, by
+  `AlgebraicGeometry.Scheme.Modules.fiberMk` for an arbitrary sheaf of modules. The blocking
+  input is the comparison `F(x) ≅ Fₓ / 𝔪ₓ Fₓ` of the fibre with the stalk, which is available
+  neither here nor in Mathlib. For an invertible sheaf the comparison can be bypassed, and the
+  two spellings are identified by
+  `AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_fiberMk_eq_zero`; for the structure sheaf by
   `AlgebraicGeometry.Scheme.Modules.vanishesAt_structureModules_iff`.
 - Show that the stalk of an invertible sheaf is free of rank one. Only its non-vanishing
   (`SheafOfModules.Invertible.nontrivial_stalk`) and its finiteness (`finite_stalk`) are

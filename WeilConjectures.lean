@@ -38,7 +38,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GloballyGenerated
 public import WeilConjectures.AlgebraicGeometry.Modules.HyperplaneSection
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.Monoidal
-public import WeilConjectures.AlgebraicGeometry.Modules.NowhereVanishing
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardField
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackConstant
@@ -46,6 +45,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionsMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
+public import WeilConjectures.AlgebraicGeometry.Modules.TrivialisationBySection
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialityCriterion
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Modules.VanishingPullback

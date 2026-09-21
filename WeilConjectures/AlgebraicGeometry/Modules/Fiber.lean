@@ -57,6 +57,10 @@ As a consequence, if `L` is an invertible `𝒪ₓ`-module with tensor inverse `
   `AlgebraicGeometry.Scheme.Modules.fiberMap_eq_zero_iff_evaluation_endSection`: the fibre of an
   endomorphism of the structure sheaf vanishes at `x` exactly when the corresponding global
   function does.
+- `AlgebraicGeometry.Scheme.Modules.fiberMk_eq_zero_iff_fiberMap_homOfSectionTop`: a global
+  section has zero image in the fibre at `x` exactly when multiplication by it does, and
+  `AlgebraicGeometry.Scheme.Modules.fiberMk_sectionsPullback_eq_zero_iff`: this is compatible
+  with pullback along a morphism which is an isomorphism on the residue field at `x`.
 
 -/
 
@@ -209,6 +213,36 @@ function does. -/
 lemma fiberMap_homOfSectionTop_eq_zero_iff (X : Scheme.{u}) (a : Γ(X, ⊤)) (x : X) :
     fiberMap (homOfSectionTop X.structureModules a) x = 0 ↔ X.Γevaluation x a = 0 := by
   rw [fiberMap_eq_zero_iff_evaluation_endSection, endSection_homOfSectionTop]
+
+/-- **The image of a global section in a fibre, read on multiplication by that section.** The
+image of `s` in `F(x)` is zero exactly when the fibre at `x` of multiplication by `s` is the
+zero map, because the fibre of the structure sheaf is spanned by the image of the unit
+function. -/
+lemma fiberMk_eq_zero_iff_fiberMap_homOfSectionTop (F : X.Modules) (s : Γ(F, ⊤)) (x : X) :
+    fiberMk F x s = 0 ↔ fiberMap (homOfSectionTop F s) x = 0 := by
+  have happ : fiberMap (homOfSectionTop F s) x
+      (fiberMk X.structureModules x (oneSection X ⊤)) = fiberMk F x s := by
+    rw [fiberMap_fiberMk, app_homOfSectionTop_oneSection]
+  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+  · refine ModuleCat.hom_ext (LinearMap.ext_on (span_fiberMk_oneSection X x) ?_)
+    intro w hw
+    rw [Set.mem_singleton_iff] at hw
+    subst hw
+    rw [happ, h]
+    simp
+  · rw [← happ, h]
+    simp
+
+/-- **The image of a global section in a fibre is compatible with pullback**, along a morphism
+inducing an isomorphism on the residue field at the point considered — an open immersion, for
+instance. This is `AlgebraicGeometry.Scheme.Modules.fiberMap_pullback_map_eq_zero_iff` read on
+sections through `AlgebraicGeometry.Scheme.Modules.map_homOfSectionTop`. -/
+lemma fiberMk_sectionsPullback_eq_zero_iff {Y : Scheme.{u}} (u : Y ⟶ X) (y : Y)
+    [IsIso (u.residueFieldMap y)] (F : X.Modules) (s : Γ(F, ⊤)) :
+    fiberMk ((pullback u).obj F) y (sectionsPullback u F s) = 0 ↔ fiberMk F (u.base y) s = 0 := by
+  rw [fiberMk_eq_zero_iff_fiberMap_homOfSectionTop, fiberMk_eq_zero_iff_fiberMap_homOfSectionTop,
+    ← map_homOfSectionTop, fiberMap_comp, Preadditive.IsIso.comp_left_eq_zero,
+    fiberMap_pullback_map_eq_zero_iff]
 
 /-- **The pairing between the fibres of an invertible sheaf and of its inverse.** If `L ⊗ N` is
 isomorphic to the structure sheaf, then `L(x) ⊗ N(x)` is isomorphic to `κ(x)`. -/

@@ -1126,6 +1126,49 @@ $\eta_Y$, where it is $r$.
 
 \section{Positivity}\label{sec:deg-positivity}
 
+\begin{lemma}[Liouville dichotomy for sections of a line bundle]
+\label{lem:deg-liouville-dichotomy}
+\lean{AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_fiberMk_eq_zero,
+AlgebraicGeometry.Scheme.Modules.isIso_homOfSectionTop_of_forall_not_vanishesAt,
+AlgebraicGeometry.Scheme.Modules.eq_zero_or_forall_not_vanishesAt_of_universallyClosed}
+\leanok
+\uses{lem:cube-nowhere-vanishing, lem:cube-invertible-fibrewise}
+Let $T$ be a scheme and let $M$ be a line bundle on $T$.  A global section of
+$M$ vanishes at a point $x$ — its germ lies in $\mathfrak m_xM_x$ — exactly
+when its image in the fibre $M(x)$ is zero, which is the sense of vanishing
+used in \Cref{lem:cube-nowhere-vanishing}.
+
+If $M$ carries a global section $s$ vanishing at no point of $T$, then
+multiplication by $s$ is an isomorphism $\O_T\to M$, so $M$ is trivial and
+every global section of $M$ is $g\cdot s$ for a unique $g\in\Gamma(T,\O_T)$.
+
+If moreover $T$ is integral and universally closed over a field $K$ — for
+instance proper over $K$ — then $\Gamma(T,\O_T)$ is a field, and every global
+section of $M$ is either zero or vanishes at no point of $T$.  This is the
+\emph{Liouville dichotomy}: on such a $T$, a single nowhere vanishing section
+forces every other non-zero section to vanish nowhere.
+\end{lemma}
+\begin{proof}
+\uses{lem:cube-nowhere-vanishing, lem:cube-invertible-fibrewise}
+\leanok
+Both notions of vanishing are local at $x$ and invariant under isomorphism of
+line bundles, so for the first assertion one may replace $T$ by an open subset
+over which $M$ is trivial and $M$ by $\O_T$; there both notions say that $x$
+lies outside the basic open subset of the corresponding function.
+
+Granted that, a nowhere vanishing $s$ makes multiplication by $s$ non-zero on
+every fibre, and \Cref{lem:cube-invertible-fibrewise} turns a morphism of line
+bundles which is non-zero on every fibre into an isomorphism; this gives
+$\O_T\cong M$, whence also the description of the global sections of $M$.
+
+For the dichotomy, $\Gamma(T,\O_T)$ is a field because $T$ is integral and
+universally closed over $K$, which is the input already used in
+\Cref{lem:cube-nowhere-vanishing}; that lemma then says that a non-zero global
+section of the trivial bundle $M$ is non-zero in every fibre, that is, vanishes
+nowhere.
+\end{proof}
+
+
 \begin{proposition}[The top self-intersection of an ample bundle is positive]
 \label{prop:deg-ample-positive}
 \uses{def:deg-intersection, def:deg-ample}
@@ -1138,6 +1181,7 @@ ample line bundle on $X$.  Then $X$ is projective and
 \begin{proof}
 \uses{lem:deg-ample-basic, cor:deg-intersection-powers,
 lem:deg-general-hyperplane, lem:deg-proper-affine-finite,
+lem:deg-liouville-dichotomy,
 lem:deg-euler-additive, lem:deg-euler-affine, thm:deg-snapper,
 lem:deg-difference-explicit, lem:deg-difference-lowers-degree,
 lem:deg-intersection-is-top-difference, prop:deg-euler-finite-morphism}
@@ -1170,9 +1214,15 @@ component of $X$ and for which
 is exact.  Call this sequence the \emph{hyperplane sequence}.
 
 \emph{The divisor $D$ has dimension exactly $g-1$.}  Let $X_1$ be an
-irreducible component of $X$ of dimension $g$.  If $D\cap X_1$ were empty then
-$X_1$ would be a closed subscheme of $\mathbf P^N\setminus H\cong\mathbf A^N$,
-where $H$ is the hyperplane cutting out $s$; a closed subscheme of an affine
+irreducible component of $X$ of dimension $g$, taken with its reduced induced
+structure, so that $X_1$ is integral and proper over $k$.  Suppose $D\cap X_1$
+were empty, that is, that $s|_{X_1}$ vanished at no point of $X_1$.  The
+homogeneous coordinates $T_0,\dots,T_N$ restrict to global sections of
+$\O(1)|_{X_1}$ generating it, so at least one of them, say $T_j$, is non-zero;
+by \Cref{lem:deg-liouville-dichotomy} applied to $\O(1)|_{X_1}$ and the nowhere
+vanishing section $s|_{X_1}$, that $T_j$ vanishes at no point of $X_1$ either.
+Hence $X_1$ is a closed subscheme of the standard affine chart
+$D_+(T_j)\cong\mathbf A^N$; a closed subscheme of an affine
 scheme is affine, and $X_1$ is proper over $k$, so
 \Cref{lem:deg-proper-affine-finite} would give $\dim X_1\leq0$, contradicting
 $\dim X_1=g\geq1$.  So $D\cap X_1\neq\emptyset$; it is cut out in $X_1$ by one
