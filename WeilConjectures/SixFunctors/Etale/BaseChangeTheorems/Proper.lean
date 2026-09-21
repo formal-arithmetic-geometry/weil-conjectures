@@ -77,26 +77,6 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/- The K-flat resolution package on the coefficient category `ModuleCat.{u + 1} Λ`, as
-in `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs`. Most of it is
-covered by mathlib and by instance search:
-
-- `ModuleCat.{u + 1} Λ` is Grothendieck abelian and symmetric monoidal closed over the
-  commutative ring `Λ`, hence in particular braided and preadditive; mathlib insists
-  that the ring and the modules live in the same universe, which is why `Λ` is taken in
-  `Type (u + 1)`;
-- it has all colimits of size `u + 1`, hence — being `Category.{u + 1}` — of size `u` as
-  well, by `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize`;
-- being symmetric monoidal *closed* is exactly what
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits` needs to
-  make the étale sheaf categories monoidal closed by Day's reflection theorem, hence to
-  make tensoring by a fixed sheaf preserve colimits; no tensor-colimit hypothesis on the
-  coefficient category itself is required.
-
-What remains is the functorial flat resolutions, recorded here with `sorry`. -/
-instance : Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} Λ) :=
-  sorry
-
 /-- `ℤ`-indexed colimits of `Λ`-modules are exact: `ℤ` is a filtered category, and
 `ModuleCat.{u + 1} Λ` is Grothendieck abelian, hence satisfies `AB5` for shapes of size
 `u + 1`; `AB5OfSize_of_univLE` brings that down to the shapes of size `0` in which `ℤ`
