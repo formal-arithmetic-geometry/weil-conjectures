@@ -44,6 +44,6 @@ instance isLeftDerivedFunctor₂CurriedTensor :
 noncomputable instance laxMonoidalQ : (Q (C := C)).LaxMonoidal := inferInstance
 
 noncomputable instance monoidalClosedOfMonoidalClosedBraidedCategorg :
-  MonoidalClosed (DerivedCategory C) := sorry
+  MonoidalClosed (DerivedCategory C) := DerivedCategory.monoidalClosed C
 
 end DerivedCategory

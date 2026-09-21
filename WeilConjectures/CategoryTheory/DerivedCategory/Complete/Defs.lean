@@ -5,7 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
@@ -221,8 +224,6 @@ noncomputable def DerivedCategory.εSingleFunctorZero :
 
 end Aux
 
-attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
-
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R] (I : Ideal R)
 
@@ -244,17 +245,20 @@ lemma CategoryTheory.Sheaf.quotPowCone_pt :
 
 section Derived
 
-/- The two pieces of structure on the sheaf category that this repository does not supply
-for a general site; see the implementation notes. -/
-variable [MonoidalClosed (Sheaf J (ModuleCat.{u + 1} R))]
-  [DerivedCategory.Qh.HasDerivedMonoidalCategory
-    (HomotopyCategory.quasiIso (Sheaf J (ModuleCat.{u + 1} R)) (ComplexShape.up ℤ))]
-
 /-- The tower `n ↦ R/Iⁿ` of constant sheaves, viewed in the derived category of sheaves of
 `R`-modules through `DerivedCategory.singleFunctor _ 0`. -/
 noncomputable def DerivedCategory.quotPowFunctor :
     ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
   Sheaf.quotPowFunctor J I ⋙ DerivedCategory.singleFunctor _ 0
+
+instance : Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} R) := sorry
+
+--#synth MonoidalCategory (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
+
+variable (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
+
+#check Cone (DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K)
+
 /-
 /-- The reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, as a cone over the tower
 `DerivedCategory.quotPowFunctor` **whose point is `K` itself**: the cone
@@ -264,10 +268,17 @@ the inverse right unitor followed by `DerivedCategory.εSingleFunctorZero`. -/
 noncomputable def DerivedCategory.derivedCompletionCone
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     Cone (DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K) :=
-  ((tensorLeft K).mapCone
-      ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I))).extend
-    ((ρ_ K).inv ≫ K ◁ DerivedCategory.εSingleFunctorZero _)
+  sorry
+-/
+  -- ((tensorLeft K).mapCone
+  --     ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I))).extend
+  --   ((ρ_ K).inv ≫ K ◁ DerivedCategory.εSingleFunctorZero _)
 
+
+
+
+
+/-
 @[simp]
 lemma DerivedCategory.derivedCompletionCone_pt
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
