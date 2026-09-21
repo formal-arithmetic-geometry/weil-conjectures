@@ -222,6 +222,9 @@ restriction to the fibre does not depend on the neighbourhood the section is tak
 - `AlgebraicGeometry.Scheme.Modules.restrictFunctorCompMorphismRestrictIso`
 - `AlgebraicGeometry.Scheme.Modules.overEquivInverseRestrictIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
+- `AlgebraicGeometry.Scheme.Modules.pullbackFreeIso`: the pullback of a free sheaf of finite
+  rank is free, compatibly with `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso` on each
+  summand.
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
 - `AlgebraicGeometry.Scheme.Modules.Hom.naturality`: a morphism of sheaves of modules commutes
@@ -985,6 +988,33 @@ noncomputable def pullbackUnitIso :
     inferInstanceAs (Modules.pushforward f).IsRightAdjoint
   have := SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal (φ := f.toRingCatSheafHom)
   asIso (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom)
+
+/-- The pullback of the free sheaf `𝒪_Y^ι` of finite rank along a morphism of schemes
+`f : X ⟶ Y` is the free sheaf `𝒪_X^ι`. It is `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
+on each summand, by
+`AlgebraicGeometry.Scheme.Modules.pullback_map_ιFree_comp_pullbackFreeIso_hom`. -/
+noncomputable def pullbackFreeIso (ι : Type u) :
+    (pullback f).obj (Y.freeModules ι) ≅ X.freeModules ι :=
+  have : (SheafOfModules.pushforward f.toRingCatSheafHom).IsRightAdjoint :=
+    inferInstanceAs (Modules.pushforward f).IsRightAdjoint
+  SheafOfModules.pullbackObjFreeIso f.toRingCatSheafHom ι
+
+/-- **The identification `f^*(𝒪_Y^ι) ≅ 𝒪_X^ι` is the identification `f^* 𝒪_Y ≅ 𝒪_X` on each
+summand**:
+
+```
+  f^*(𝒪_Y) ──f^*(ιFree i)──▶ f^*(𝒪_Y^ι)
+      │                           │ pullbackFreeIso
+      │ pullbackUnitIso           ▼
+      ▼                        𝒪_X^ι
+     𝒪_X ──────ιFree i──────────▶
+```
+-/
+@[reassoc (attr := simp)]
+lemma pullback_map_ιFree_comp_pullbackFreeIso_hom (ι : Type u) (i : ι) :
+    (pullback f).map (SheafOfModules.ιFree i) ≫ (pullbackFreeIso f ι).hom =
+      (pullbackUnitIso f).hom ≫ SheafOfModules.ιFree i :=
+  SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom f.toRingCatSheafHom i
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **Base change for the pullback of sheaves of modules.** Restricting the pullback of `M`

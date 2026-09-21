@@ -90,7 +90,9 @@ The last sections base change a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver`: the base change
   `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
   `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
-  ideal of `W` into the thickening ideal of `W'`.
+  ideal of `W` into the thickening ideal of `W'`, and
+  `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver_comp_mapZero`, the commutative square
+  it forms with the closed immersion of the zeroth neighbourhood.
 - the `AlgebraicGeometry.Surjective` instance on
   `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap`: for `m ≤ n` the transition morphism
   `W ×_T Tₘ ⟶ W ×_T Tₙ` is surjective.
@@ -1129,6 +1131,26 @@ lemma comap_thickeningIdeal_le (n : ℕ) :
   rw [IdealSheafData.map, ← Hom.ker_comp_of_isIso (thickeningIso f' t n).hom,
     ← Category.assoc, thickeningIso_hom_subschemeι, infinitesimalBaseChangeMap_comp_mapOver]
   exact Hom.le_ker_comp _ _
+
+/-- **The closed immersion of the zeroth infinitesimal neighbourhood commutes with the base
+change of a morphism `u : W' ⟶ W` over `T`.**
+
+```
+  W' ×_T T₀ ──infinitesimalBaseChangeMapZero──▶ W' ×_T T_{n+1}
+      │                                                │
+      │ infinitesimalBaseChangeMapOver                 │ infinitesimalBaseChangeMapOver
+      ▼                                                ▼
+  W ×_T T₀ ───infinitesimalBaseChangeMapZero───▶ W ×_T T_{n+1}
+```
+
+This is `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap_comp_mapOver` for `0 ≤ n + 1`, in
+the direction in which `AlgebraicGeometry.Scheme.Modules.baseChange` reads a commutative
+square. -/
+lemma infinitesimalBaseChangeMapOver_comp_mapZero (n : ℕ) :
+    infinitesimalBaseChangeMapOver f f' u hu t 0 ≫ infinitesimalBaseChangeMapZero f t n =
+      infinitesimalBaseChangeMapZero f' t n ≫
+        infinitesimalBaseChangeMapOver f f' u hu t (n + 1) :=
+  (infinitesimalBaseChangeMap_comp_mapOver f f' u hu t (Nat.zero_le (n + 1))).symm
 
 end BaseChangeOver
 

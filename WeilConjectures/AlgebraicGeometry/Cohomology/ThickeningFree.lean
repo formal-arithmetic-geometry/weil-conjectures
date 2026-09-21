@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersionBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.ThickeningFree
 
@@ -56,16 +56,31 @@ multiplicative form is `AlgebraicGeometry.Scheme.thickeningH1FreeMulEquiv`.
   multiplicative versions of the two groups, the form in which
   `AlgebraicGeometry.Scheme.thickeningH1Map` takes its values.
 
-## Naturality
+## Naturality in the scheme
 
-The naturality of this identification in a morphism `u : W' ⟶ W` over `T` — the square
-relating it to `AlgebraicGeometry.Scheme.thickeningH1Map` — is not proved here: it needs the
-compatibility of the two isomorphisms of steps 1 and 2 with the pullback map on cohomology
-along the base change of `u`, and for step 2 no such compatibility is available (the
-pushforward isomorphism comes from an adjunction and the pullback map from
-`CategoryTheory.Abelian.Ext.mapExactFunctor`, which Mathlib does not know to be functorial
-in the exact functor; compare the TODO of
-`WeilConjectures.AlgebraicGeometry.Cohomology.Pullback`).
+A morphism `u : W' ⟶ W` over `T` base changes to `W' ×_T Tₘ ⟶ W ×_T Tₘ` for every `m`, and the
+identification is natural for it: the last section of this file proves that it intertwines
+`AlgebraicGeometry.Scheme.thickeningH1Map` with the `ι`-fold power of the pullback map on `H^k`
+of the structure sheaf of the zeroth neighbourhood.
+
+Each of the three steps above is natural — steps 1 and 3 through
+`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_map` and step 2 through
+`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_pushforwardAddEquiv`, base change for
+cohomology along a closed immersion — and the three are composed in
+`AlgebraicGeometry.Scheme.Modules.H.map_pullbackAddHom_pushforwardAddEquiv_freeLinearEquiv_symm`.
+
+One hypothesis is needed, because the identification depends on a datum that `u` does not
+determine: the comparison morphisms `Φ` on `W` and `Φ'` on `W'` are attached to two families
+`m` and `m'` of global sections chosen independently, so they have to be assumed compatible
+across the base change. That hypothesis is
+`AlgebraicGeometry.Scheme.PushforwardFreeToThickeningIdealBaseChange`.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.thickeningH1FreeAddEquiv_naturality` — the identification is natural
+  in the scheme.
+- `AlgebraicGeometry.Scheme.toAdd_thickeningH1FreeMulEquiv_thickeningH1Map` — the same square
+  for `AlgebraicGeometry.Scheme.thickeningH1Map`, in multiplicative form.
 -/
 
 @[expose] public section
@@ -164,5 +179,113 @@ lemma thickeningH1FreeLinearEquiv_apply (x : (thickeningIdeal f t n).toModules.H
   rfl
 
 end OverBase
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+/-! ### Naturality in the scheme -/
+
+variable {T W W' : Scheme.{u}} (f : W ⟶ T) (f' : W' ⟶ T) (u : W' ⟶ W) (hu : u ≫ f = f')
+  (t : T) (n : ℕ) {ι : Type u} [Fintype ι]
+  (m : ι → Γ((thickeningIdeal f t n).toModules, ⊤))
+  (m' : ι → Γ((thickeningIdeal f' t n).toModules, ⊤))
+  [IsIso (pushforwardFreeToThickeningIdeal f t n m)]
+  [IsIso (pushforwardFreeToThickeningIdeal f' t n m')]
+  (k : ℕ)
+
+/-- **The comparison morphisms of `W` and of `W'` agree across the base change of `u`**: the
+hypothesis under which the identification of `H^k` of the thickening ideal is natural.
+
+```
+  g^*((i₀)_* (𝒪_{W ×_T T₀} ^ ι)) ──g^* Φ──▶ g^* Iₙ
+              │                                 │ comapModulesMap
+   baseChange │                                 ▼
+              ▼                                 │
+  (i'₀)_* (g₀^* (𝒪_{W ×_T T₀} ^ ι)) ──(i'₀)_* pullbackFreeIso──▶ (i'₀)_* (𝒪_{W' ×_T T₀} ^ ι)
+                                                                  ──Φ'──▶ I'ₙ
+```
+
+It is the only piece of data that the identification depends on and that the morphism `u` does
+not determine: the two families `m` and `m'` of global sections are chosen independently on `W`
+and on `W'`. -/
+abbrev PushforwardFreeToThickeningIdealBaseChange : Prop :=
+  (Modules.pullback (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))).map
+        (pushforwardFreeToThickeningIdeal f t n m) ≫
+      IdealSheafData.comapModulesMap (thickeningIdeal f t n) (thickeningIdeal f' t n)
+        (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
+        (comap_thickeningIdeal_le f f' u hu t n) =
+    (Modules.baseChange
+          (infinitesimalBaseChangeMapOver_comp_mapZero f f' u hu t n)).natTrans.app
+        ((infinitesimalBaseChange f t 0).freeModules ι) ≫
+      (Modules.pushforward (infinitesimalBaseChangeMapZero f' t n)).map
+          (Modules.pullbackFreeIso (infinitesimalBaseChangeMapOver f f' u hu t 0) ι).hom ≫
+        pushforwardFreeToThickeningIdeal f' t n m'
+
+variable (hΦ : PushforwardFreeToThickeningIdealBaseChange f f' u hu t n m m')
+
+include hΦ
+
+/-- **The identification of `H^k` of a free thickening ideal is natural in the scheme**, in the
+form that assembles a family of classes on the zeroth neighbourhood: pulling the assembled class
+back along the base change of `u : W' ⟶ W` is assembling the pullbacks of the members of the
+family. -/
+theorem thickeningH1FreeAddEquiv_symm_naturality
+    (p : ι → (infinitesimalBaseChange f t 0).structureModules.H k) :
+    Modules.H.map
+        (IdealSheafData.comapModulesMap (thickeningIdeal f t n) (thickeningIdeal f' t n)
+          (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
+          (comap_thickeningIdeal_le f f' u hu t n)) k
+        (Modules.H.pullbackAddHom (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
+          (thickeningIdeal f t n).toModules k
+          ((thickeningH1FreeAddEquiv f t n m k).symm p)) =
+      (thickeningH1FreeAddEquiv f' t n m' k).symm fun j ↦
+        Modules.H.structurePullbackMap (infinitesimalBaseChangeMapOver f f' u hu t 0) k (p j) := by
+  rw [thickeningH1FreeAddEquiv_symm_apply, thickeningH1FreeAddEquiv_symm_apply]
+  exact Modules.H.map_pullbackAddHom_pushforwardAddEquiv_freeLinearEquiv_symm
+    (infinitesimalBaseChangeMapOver_comp_mapZero f f' u hu t n) _ _ _ hΦ k p
+
+/-- **The identification of `H^k` of a free thickening ideal is natural in the scheme**: the
+`j`-th component of the identification of a class pulled back along the base change of
+`u : W' ⟶ W` is the pullback of the `j`-th component of the identification of the class.
+
+```
+  H^k(W ×_T T_{n+1}, Iₙ) ──thickeningH1FreeAddEquiv──▶ (ι → H^k(W ×_T T₀, 𝒪))
+            │                                                   │
+            │ pullback along the base change of `u`             │ structurePullbackMap
+            ▼                                                   ▼
+  H^k(W' ×_T T_{n+1}, I'ₙ) ─thickeningH1FreeAddEquiv─▶ (ι → H^k(W' ×_T T₀, 𝒪))
+```
+-/
+theorem thickeningH1FreeAddEquiv_naturality
+    (x : (thickeningIdeal f t n).toModules.H k) (j : ι) :
+    thickeningH1FreeAddEquiv f' t n m' k
+        (Modules.H.map
+          (IdealSheafData.comapModulesMap (thickeningIdeal f t n) (thickeningIdeal f' t n)
+            (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
+            (comap_thickeningIdeal_le f f' u hu t n)) k
+          (Modules.H.pullbackAddHom (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
+            (thickeningIdeal f t n).toModules k x)) j =
+      Modules.H.structurePullbackMap (infinitesimalBaseChangeMapOver f f' u hu t 0) k
+        (thickeningH1FreeAddEquiv f t n m k x j) := by
+  have h := thickeningH1FreeAddEquiv_symm_naturality f f' u hu t n m m' k hΦ
+    (thickeningH1FreeAddEquiv f t n m k x)
+  rw [AddEquiv.symm_apply_apply] at h
+  rw [h, AddEquiv.apply_symm_apply]
+
+/-- **The identification of `H¹` of a free thickening ideal intertwines
+`AlgebraicGeometry.Scheme.thickeningH1Map` with the `ι`-fold power of the pullback map on `H¹`
+of the structure sheaf of the zeroth infinitesimal neighbourhood.**
+
+This is `AlgebraicGeometry.Scheme.thickeningH1FreeAddEquiv_naturality` in the multiplicative
+form in which the group of deformation classes enters the naturality ladder of
+`WeilConjectures.AlgebraicGeometry.Cohomology.Thickening`. -/
+theorem toAdd_thickeningH1FreeMulEquiv_thickeningH1Map
+    (x : Multiplicative ((thickeningIdeal f t n).toModules.H 1)) (j : ι) :
+    Multiplicative.toAdd
+        (thickeningH1FreeMulEquiv f' t n m' 1 (thickeningH1Map f f' u hu t n x)) j =
+      Modules.H.structurePullbackMap (infinitesimalBaseChangeMapOver f f' u hu t 0) 1
+        (Multiplicative.toAdd (thickeningH1FreeMulEquiv f t n m 1 x) j) :=
+  thickeningH1FreeAddEquiv_naturality f f' u hu t n m m' 1 hΦ (Multiplicative.toAdd x) j
 
 end AlgebraicGeometry.Scheme

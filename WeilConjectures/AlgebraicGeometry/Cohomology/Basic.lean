@@ -400,6 +400,26 @@ noncomputable def H.freeLinearEquiv :
   (H.mapLinearEquiv (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules) n).symm.trans
     (H.biproductLinearEquiv (fun _ : ι ↦ X.structureModules) n)
 
+variable {X ι n}
+
+/-- **A family of classes on `𝒪_X` assembles into a class on `𝒪_X^ι` summand by summand**: the
+inverse of `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv` is the sum over the summands of
+the maps induced by their inclusions `SheafOfModules.ιFree`. -/
+lemma H.freeLinearEquiv_symm_apply_eq_sum (p : ι → X.structureModules.H n) :
+    (H.freeLinearEquiv X ι n).symm p = ∑ i : ι, H.map (SheafOfModules.ιFree i) n (p i) := by
+  have hι : ∀ i : ι, biproduct.ι (fun _ : ι ↦ X.structureModules) i ≫
+      (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).hom =
+      (SheafOfModules.ιFree i : X.structureModules ⟶ X.freeModules ι) := fun i ↦ by
+    rw [biproduct.isoCoproduct_hom, biproduct.ι_desc]
+    rfl
+  have key : (H.freeLinearEquiv X ι n).symm p =
+      H.map (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).hom n
+        (∑ i : ι, H.map (biproduct.ι (fun _ : ι ↦ X.structureModules) i) n (p i)) := rfl
+  rw [key, _root_.map_sum]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [← LinearMap.comp_apply, ← H.map_comp]
+  exact congrArg (fun φ ↦ H.map φ n (p i)) (hι i)
+
 end Free
 
 /-! ### Schemes over a base ring -/
