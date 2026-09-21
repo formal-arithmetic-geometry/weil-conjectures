@@ -72,7 +72,7 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallEtaleTopology` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, a slice of an
   essentially small site being again essentially small; it is a case of the sorried
-  `CategoryTheory.GrothendieckTopology.hasSheafify_essentiallySmall` there. This replaces
+  `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there. This replaces
   what used to be a `HasWeakSheafify` hypothesis quantified over all schemes and all étale `U`, the
   quantification being forced by the existential quantifier over stratifications.
 - Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the

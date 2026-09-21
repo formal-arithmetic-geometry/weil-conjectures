@@ -41,7 +41,7 @@ essentially small in `u + 1`, exactly as in the sibling file `Defs`:
 * `presheafToSheaf` is monoidal and `sheafToPresheaf` is fully faithful, both instances
   of `CategoryTheory.Sheaf.monoidalCategory`'s file for the monoidal structure of `Defs`.
 
-Note that the resulting `monoidalClosed_sheaf_essentiallySmall` is over the monoidal
+Note that the resulting `monoidalClosed_sheaf_of_essentiallySmall` is over the monoidal
 structure of `Defs` (the sheafification of the objectwise tensor product), *not* over a
 cartesian one: mathlib's `instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite` produces a
 monoidal closed structure for the cartesian tensor on a full monoidal subcategory of
@@ -54,7 +54,7 @@ obtained from the general ones by `inferInstance`.
 
 ## Main results
 
-- `CategoryTheory.GrothendieckTopology.monoidalClosed_sheaf_essentiallySmall`: the category
+- `CategoryTheory.GrothendieckTopology.monoidalClosed_sheaf_of_essentiallySmall`: the category
   of `A`-valued sheaves on an essentially small site is monoidal closed.
 - `CategoryTheory.GrothendieckTopology.preservesColimitsOfSize_tensorLeft_sheaf_of_essentiallySmall`
   and its right variant: tensoring with a fixed sheaf preserves colimits of size `0`.
@@ -86,19 +86,19 @@ the intended application `A = ModuleCat.{u + 1} Λ` with `Λ` a commutative ring
 variable [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
 
 /-- The category of `A`-valued sheaves on an essentially small site is monoidal closed,
-for the monoidal structure `monoidalCategory_sheaf_essentiallySmall` of the sibling file
+for the monoidal structure `monoidalCategory_sheaf_of_essentiallySmall` of the sibling file
 `Defs`.
 
 This is Day's reflection theorem applied to the sheafification adjunction
 `presheafToSheaf ⊣ sheafToPresheaf`: the left adjoint is monoidal, the right adjoint is
 fully faithful, and the presheaf category is symmetric monoidal closed. -/
-noncomputable instance monoidalClosed_sheaf_essentiallySmall :
+noncomputable instance monoidalClosed_sheaf_of_essentiallySmall :
     MonoidalClosed (Sheaf J A) :=
   Monoidal.Reflective.monoidalClosed (sheafificationAdjunction J A)
 
 /-- Tensoring on the left with a fixed `A`-valued sheaf on an essentially small site
 preserves colimits of size `0`, since it is left adjoint to the internal hom of
-`monoidalClosed_sheaf_essentiallySmall`. Together with the braiding this gives every
+`monoidalClosed_sheaf_of_essentiallySmall`. Together with the braiding this gives every
 compatibility between the tensor product of sheaves and colimits that the K-flat left
 derivability structure asks for. -/
 instance preservesColimitsOfSize_tensorLeft_sheaf_of_essentiallySmall (X : Sheaf J A) :

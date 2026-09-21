@@ -54,7 +54,7 @@ coefficient category.
 ## The sheaf case (sorried)
 
 With the criterion in hand, the sheaf statement reduces to the transfer of flat
-separators along the site, `exists_flat_separator_sheaf_essentiallySmall`, which is the
+separators along the site, `exists_flat_separator_sheaf_of_essentiallySmall`, which is the
 one `sorry` left in this file. As in the sibling files it is stated for an arbitrary site
 `C` with `Hom`-types in the universe `u` and objects in `u + 1` which is essentially
 small in `u + 1`; the small étale site is such a site, so the étale instance is obtained
@@ -79,12 +79,12 @@ with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
 
 ## Sorried results
 
-- `CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_essentiallySmall`:
+- `CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall`:
   a flat separator of the coefficient category induces one of the sheaf category.
 
 ## Sorried instances
 
-- `CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_essentiallySmall`:
+- `CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_of_essentiallySmall`:
   the category of `A`-valued sheaves on an essentially small site admits functorial flat
   resolutions. It is not sorried directly: it is deduced from the criterion and the
   sorried transfer of flat separators above.
@@ -164,20 +164,20 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 /-- A flat separator of the coefficient category `A` induces a flat separator of the
 category of `A`-valued sheaves on an essentially small site, obtained by applying
 extension by zero to it and summing over the site; see the module docstring. -/
-theorem exists_flat_separator_sheaf_essentiallySmall
+theorem exists_flat_separator_sheaf_of_essentiallySmall
     (hA : ∃ G : A, IsSeparator G ∧ ObjectProperty.flat G) :
     ∃ G : Sheaf J A, IsSeparator G ∧ ObjectProperty.flat G :=
   sorry
 
 /-- Functorial flat resolutions of `A`-valued sheaves on an essentially small site: by
 `Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator` this is the existence of a
-flat separator of `Sheaf J A`, which `exists_flat_separator_sheaf_essentiallySmall`
+flat separator of `Sheaf J A`, which `exists_flat_separator_sheaf_of_essentiallySmall`
 produces from a flat separator of `A`. -/
-instance hasFunctorialFlatResolution_sheaf_essentiallySmall
+instance hasFunctorialFlatResolution_sheaf_of_essentiallySmall
     [Abelian.HasFunctorialFlatResolution A] :
     Abelian.HasFunctorialFlatResolution (Sheaf J A) :=
   (Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator _).2
-    (exists_flat_separator_sheaf_essentiallySmall A J
+    (exists_flat_separator_sheaf_of_essentiallySmall A J
       ((Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator A).1 ‹_›))
 
 end CategoryTheory.GrothendieckTopology
