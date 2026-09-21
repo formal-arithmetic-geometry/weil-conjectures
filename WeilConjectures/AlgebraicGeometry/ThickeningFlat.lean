@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.ThickeningFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.RingTheory.Flat.EquationalCriterion
 
 /-!
@@ -40,7 +41,7 @@ extended from `B` along `AlgebraicGeometry.Scheme.infinitesimalRingToStalk`:
 * **relations.** The stalk of the kernel ideal sheaf of `i₀` is the extension `𝔪_B S`
   (`AlgebraicGeometry.Scheme.stalkIdeal_ker_infinitesimalBaseChangeMapZero`), and the
   relations between the `e j` over `B` all have their coefficients in `𝔪_B`. Flatness of
-  `S` over `B` (`AlgebraicGeometry.Scheme.flat_stalk_infinitesimalBaseChange`) transports
+  `S` over `B` (`AlgebraicGeometry.Scheme.flat_infinitesimalRingToStalk`) transports
   that to `S` by the equational criterion, in the form
   `Module.Flat.mem_ideal_map_of_sum_mul_eq_zero`.
 
@@ -96,10 +97,8 @@ theorem isIso_pushforwardFreeToThickeningIdeal [Flat f] {ι : Type u} [Fintype �
     rw [hm j, germ_infinitesimalRingToΓ]
   refine IdealSheafData.isIso_pushforwardFreeDesc _ _ m (fun x c hc j ↦ ?_) fun x ↦ ?_
   · -- the relations between the `m j` on the stalk have coefficients in `𝔪_B S`
-    let _ : Algebra (T.infinitesimalRing t (n + 1))
-        ((infinitesimalBaseChange f t (n + 1)).presheaf.stalk x) :=
-      (infinitesimalRingToStalk f t (n + 1) x).hom.toAlgebra
-    have _ := flat_stalk_infinitesimalBaseChange f t (n + 1) x
+    have := flat_infinitesimalRingToStalk f t (n + 1) x
+    algebraize [(infinitesimalRingToStalk f t (n + 1) x).hom]
     rw [stalkIdeal_ker_infinitesimalBaseChangeMapZero]
     exact Module.Flat.mem_ideal_map_of_sum_mul_eq_zero hind
       (by simpa only [hgerm x, RingHom.algebraMap_toAlgebra] using hc) j
