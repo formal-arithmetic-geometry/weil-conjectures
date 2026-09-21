@@ -44,19 +44,22 @@ The definition of `DerivedCategory'` sits in a nested `@[expose] section` so tha
 what allows the declarations below to be defined by transport along the (locally available)
 definitional equality `DerivedCategory' C = DerivedCategory C`.
 
+Two definitions are exceptions and carry `@[expose]`: `Qh` and, building on it, `singleFunctors`
+(together with the isomorphisms relating them to `Q`). They are built *intrinsically* — `Qh` as
+the functor induced by `Q` on the homotopy category, via `CategoryTheory.Quotient.lift` — so
+their bodies never mention `DerivedCategory` and can be exposed even though `DerivedCategory'`
+cannot. This matters downstream: it keeps
+`HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh` definitionally equal to `Q`, which a
+number of constructions in the mathlib files below this one rely on.
+
+`Q` itself is irreducibly non-exposed: a functor into the opaque type `DerivedCategory' C` can
+only be produced by transport. So any downstream construction that mathlib obtains by unfolding
+`DerivedCategory` down to `HomologicalComplexUpToQuasiIso` has to be redone through the
+universal property of `Q` (`Localization.lift`, `Localization.fac`, …).
+
 For interoperability with the mathlib API,
 `DerivedCategory'.equivDerivedCategory : DerivedCategory' C ≌ DerivedCategory C` is provided.
 It is the identity equivalence, but it has to be used explicitly.
-
-Compared to `Mathlib/Algebra/Homology/DerivedCategory/Basic.lean`, the object-level `rfl`-lemmas
-`DerivedCategory.Qh_obj_singleFunctors_obj` and `DerivedCategory.Q_obj_single_obj` are
-deliberately *not* ported: they only hold by definitional unfolding of the localized category,
-which is exactly what `DerivedCategory'` is meant to prevent. Use the isomorphisms
-`DerivedCategory'.singleFunctorsPostcompQhIso`, `DerivedCategory'.singleFunctorsPostcompQIso`
-and `DerivedCategory'.singleFunctorIsoCompQ` instead. For the same reason,
-`DerivedCategory'.singleFunctorsPostcompQIso_hom_hom` and its `inv` counterpart identify the
-components of `singleFunctorsPostcompQIso` with those of `singleFunctorIsoCompQ`, rather than
-with identity morphisms as in mathlib.
 -/
 
 public section
@@ -92,9 +95,6 @@ variable {C}
 /-- The localization functor `CochainComplex C ℤ ⥤ DerivedCategory' C`. -/
 def Q : CochainComplex C ℤ ⥤ DerivedCategory' C := DerivedCategory.Q
 
-/-- The localization functor `HomotopyCategory C (ComplexShape.up ℤ) ⥤ DerivedCategory' C`. -/
-def Qh : HomotopyCategory C (ComplexShape.up ℤ) ⥤ DerivedCategory' C := DerivedCategory.Qh
-
 set_option backward.isDefEq.respectTransparency false in
 instance : (Q (C := C)).IsLocalization
     (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) :=
@@ -105,10 +105,26 @@ instance {K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] :
   Localization.inverts Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) _
     (inferInstanceAs (QuasiIso f))
 
+lemma Q_map_eq_of_homotopy {K L : CochainComplex C ℤ} {f g : K ⟶ L} (h : Homotopy f g) :
+    (Q (C := C)).map f = Q.map g :=
+  HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy h
+
+/-- The localization functor `HomotopyCategory C (ComplexShape.up ℤ) ⥤ DerivedCategory' C`.
+
+Contrary to `Q`, this is defined *intrinsically* from `Q` (as the functor induced on the
+homotopy category), rather than by transport from `DerivedCategory.Qh`. This makes it possible
+to expose it, so that `HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh` is still
+definitionally `Q` downstream. -/
+@[expose] def Qh : HomotopyCategory C (ComplexShape.up ℤ) ⥤ DerivedCategory' C :=
+  CategoryTheory.Quotient.lift _ Q (by
+    rintro K L f g ⟨h⟩
+    exact Q_map_eq_of_homotopy h)
+
 variable (C) in
 /-- The natural isomorphism `HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh ≅ Q`. -/
-def quotientCompQhIso : HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh ≅ Q :=
-  HomologicalComplexUpToQuasiIso.quotientCompQhIso C (ComplexShape.up ℤ)
+@[expose] def quotientCompQhIso :
+    HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh ≅ Q :=
+  CategoryTheory.Quotient.lift.isLift _ _ _
 
 @[reassoc (attr := simp)]
 lemma quotientCompQhIso_hom_naturality {K L : CochainComplex C ℤ} (f : K ⟶ L) :
@@ -122,10 +138,17 @@ lemma quotientCompQhIso_inv_naturality {K L : CochainComplex C ℤ} (f : K ⟶ L
       (quotientCompQhIso C).inv.app K ≫ Qh.map ((HomotopyCategory.quotient _ _).map f) :=
   (quotientCompQhIso C).inv.naturality f
 
-set_option backward.isDefEq.respectTransparency false in
-instance : Qh.IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) :=
-  inferInstanceAs (DerivedCategory.Qh.IsLocalization _)
+instance : (HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh).IsLocalization
+    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) :=
+  Functor.IsLocalization.of_iso _ (quotientCompQhIso C).symm
 
+instance : (Qh (C := C)).IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) :=
+  Functor.IsLocalization.of_comp (HomotopyCategory.quotient C (ComplexShape.up ℤ)) Qh
+    (HomologicalComplex.homotopyEquivalences C (ComplexShape.up ℤ))
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+    (homotopyEquivalences_le_quasiIso C (ComplexShape.up ℤ))
+    (HomotopyCategory.quasiIso_eq_quasiIso_map_quotient C (ComplexShape.up ℤ))
 instance : Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW := by
   rw [← HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic]
   infer_instance
@@ -226,7 +249,7 @@ variable (C)
 
 /-- The single functors `C ⥤ DerivedCategory' C` for all `n : ℤ` along with
 their compatibilities with shifts. -/
-def singleFunctors : SingleFunctors C (DerivedCategory' C) ℤ :=
+@[expose] def singleFunctors : SingleFunctors C (DerivedCategory' C) ℤ :=
   (HomotopyCategory.singleFunctors C).postcomp Qh
 
 /-- The single functor `C ⥤ DerivedCategory' C` which sends `X : C` to the
@@ -238,16 +261,29 @@ instance (n : ℤ) : (singleFunctor C n).Additive := by
   dsimp [singleFunctor, singleFunctors]
   infer_instance
 
+-- The object level definitional equality underlying `singleFunctorsPostcompQhIso`.
+@[simp] theorem Qh_obj_singleFunctors_obj (n : ℤ) (X : C) :
+    Qh.obj (((HomotopyCategory.singleFunctors C).functor n).obj X) = (singleFunctor C n).obj X :=
+  rfl
+
+@[simp] theorem Q_obj_single_obj (n : ℤ) (X : C) :
+    Q.obj ((HomologicalComplex.single C _ n).obj X) = (singleFunctor C n).obj X :=
+  rfl
+
+/-- The isomorphism `singleFunctor C n ≅ HomotopyCategory.singleFunctor C n ⋙ Qh`. -/
+@[expose] def singleFunctorIsoCompQh (n : ℤ) :
+    singleFunctor C n ≅ HomotopyCategory.singleFunctor C n ⋙ Qh := Iso.refl _
+
 /-- The isomorphism
 `DerivedCategory'.singleFunctors C ≅ (HomotopyCategory.singleFunctors C).postcomp Qh` given
 by the definition of `DerivedCategory'.singleFunctors`. -/
-def singleFunctorsPostcompQhIso :
+@[expose] def singleFunctorsPostcompQhIso :
     singleFunctors C ≅ (HomotopyCategory.singleFunctors C).postcomp Qh :=
   Iso.refl _
 
 /-- The isomorphism
 `DerivedCategory'.singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp Q`. -/
-def singleFunctorsPostcompQIso :
+@[expose] def singleFunctorsPostcompQIso :
     singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp Q :=
   (SingleFunctors.postcompFunctor C ℤ (Qh : _ ⥤ DerivedCategory' C)).mapIso
     (HomotopyCategory.singleFunctorsPostcompQuotientIso C) ≪≫
@@ -256,17 +292,16 @@ def singleFunctorsPostcompQIso :
         (CochainComplex.singleFunctors C) (quotientCompQhIso C)
 
 /-- The isomorphism `singleFunctor C n ≅ CochainComplex.singleFunctor C n ⋙ Q`. -/
-def singleFunctorIsoCompQ (n : ℤ) :
+@[expose] def singleFunctorIsoCompQ (n : ℤ) :
     singleFunctor C n ≅ CochainComplex.singleFunctor C n ⋙ Q := Iso.refl _
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 lemma singleFunctorsPostcompQIso_hom_hom (n : ℤ) :
-    (singleFunctorsPostcompQIso C).hom.hom n = (singleFunctorIsoCompQ C n).hom := by
+    (singleFunctorsPostcompQIso C).hom.hom n = 𝟙 _ := by
   ext X
-  dsimp [singleFunctorsPostcompQIso, singleFunctorIsoCompQ,
-    HomotopyCategory.singleFunctorsPostcompQuotientIso,
-    quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso]
+  dsimp [singleFunctorsPostcompQIso, HomotopyCategory.singleFunctorsPostcompQuotientIso,
+    quotientCompQhIso]
   rw [CategoryTheory.Functor.map_id, Category.id_comp]
   erw [Category.id_comp]
   rfl
@@ -274,10 +309,9 @@ lemma singleFunctorsPostcompQIso_hom_hom (n : ℤ) :
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 lemma singleFunctorsPostcompQIso_inv_hom (n : ℤ) :
-    (singleFunctorsPostcompQIso C).inv.hom n = (singleFunctorIsoCompQ C n).inv := by
+    (singleFunctorsPostcompQIso C).inv.hom n = 𝟙 _ := by
   ext X
-  simp [singleFunctorsPostcompQIso, singleFunctorIsoCompQ,
-    HomotopyCategory.singleFunctorsPostcompQuotientIso]
+  simp [singleFunctorsPostcompQIso, HomotopyCategory.singleFunctorsPostcompQuotientIso]
   rfl
 
 variable {C}
@@ -285,10 +319,6 @@ variable {C}
 lemma isIso_Q_map_iff_quasiIso {K L : CochainComplex C ℤ} (φ : K ⟶ L) :
     IsIso (Q.map φ) ↔ QuasiIso φ :=
   HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso φ
-
-lemma Q_map_eq_of_homotopy {K L : CochainComplex C ℤ} {f g : K ⟶ L} (h : Homotopy f g) :
-    (Q (C := C)).map f = Q.map g :=
-  HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy h
 
 end DerivedCategory'
 

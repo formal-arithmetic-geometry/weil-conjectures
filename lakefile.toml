@@ -1,7 +1,7 @@
 name = "weil-conjectures"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["WeilConjectures", "Challenge", "Solution"]
+defaultTargets = ["WeilConjectures", "EditMathlib", "Challenge", "Solution"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -32,6 +32,14 @@ git = "https://github.com/PatrickMassot/checkdecls.git"
 
 [[lean_lib]]
 name = "WeilConjectures"
+
+# Ports of the `Mathlib.Algebra.Homology.DerivedCategory.*` files onto the opaque
+# `DerivedCategory'` wrapper, see `WeilConjectures/EditMathlib.lean`. This is a separate
+# library because a ported module declares the same names as the mathlib module it replaces,
+# and so must not be imported together with it.
+[[lean_lib]]
+name = "EditMathlib"
+roots = ["WeilConjectures.EditMathlib"]
 
 # Comparator (leanprover/comparator) challenge/solution pair for the Weil conjectures,
 # see Comparator/config.json. The `Definitions` library contains the mathlib-only
