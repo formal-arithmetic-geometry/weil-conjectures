@@ -162,12 +162,8 @@ a family of invertible sheaves of modules. -/
 theorem invertible_cons {r : ℕ} (hM : M.Invertible)
     {L : Fin r → SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
     (hL : ∀ i, (L i).Invertible) (i : Fin (r + 1)) :
-    ((Fin.cons M L : Fin (r + 1) → _) i).Invertible := by
-  induction i using Fin.cases with
-  | zero => rwa [Fin.cons_zero]
-  | succ i =>
-    rw [Fin.cons_succ]
-    exact hL i
+    ((Fin.cons M L : Fin (r + 1) → _) i).Invertible :=
+  Fin.cases hM hL i
 
 /-- Replacing one member of a family of invertible sheaves of modules by an invertible sheaf of
 modules gives a family of invertible sheaves of modules. -/

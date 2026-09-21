@@ -6,8 +6,11 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.BigOperators.Group.Finset.Powerset
+public import Mathlib.Algebra.BigOperators.Group.List.Lemmas
 public import Mathlib.Algebra.Group.ForwardDiff
 public import Mathlib.Data.Fintype.Powerset
+public import Mathlib.Data.List.FinRange
+public import Mathlib.Logic.Equiv.Basic
 
 /-!
 # Composites of forward difference operators in different directions
@@ -28,6 +31,9 @@ forward difference operator. This file collects the facts one needs about compos
 * `fwdDiffComp_cons_add_arg`: the composite attached to a family whose leading direction is a sum
   `a + b` splits as the sum of the composites for `a`, for `b` and for `a` and `b` in
   succession;
+* `fwdDiffComp_comp_perm`, `fwdDiffComp_update_eq_cons`: the composite does not depend on the
+  order of its directions, so any one direction can be moved to the front;
+* `fwdDiffComp_eq_zero_of_eq_zero`: a composite one of whose directions is zero vanishes;
 * `fwdDiffComp_eq_sum_powerset`: the expansion of that composite as an alternating sum over the
   subsets of `Fin d`;
 * `fwdDiff_comp_addHom`, `fwdDiffComp_comp_addHom`: difference operators and their composites
@@ -149,6 +155,39 @@ lemma fwdDiffComp_cons_add_arg (a b : M) (v : Fin d → M) (f : M → G) :
   -- `fwdDiff_add_arg` propagated through the composite of the remaining difference operators
   simp only [fwdDiffComp_succ', Fin.cons_zero, Fin.cons_succ]
   rw [fwdDiff_add_arg, fwdDiffComp_add, fwdDiffComp_add, fwdDiff_comm a b]
+
+/-- **A composite of difference operators does not depend on the order of its directions**, the
+operators `Δ_[v i]` commuting with one another. -/
+lemma fwdDiffCompₗ_comp_perm (v : Fin d → M) (σ : Equiv.Perm (Fin d)) :
+    fwdDiffCompₗ M G (v ∘ σ) = fwdDiffCompₗ M G v :=
+  List.Perm.prod_eq' (σ.ofFn_comp_perm fun i ↦ fwdDiffₗ M G (v i))
+    (List.pairwise_ofFn.2 fun _ _ _ ↦ commute_fwdDiffₗ _ _)
+
+/-- **A composite of difference operators does not depend on the order of its directions.** -/
+lemma fwdDiffComp_comp_perm (v : Fin d → M) (σ : Equiv.Perm (Fin d)) (f : M → G) :
+    fwdDiffComp (v ∘ σ) f = fwdDiffComp v f := by
+  rw [fwdDiffComp, fwdDiffComp, fwdDiffCompₗ_comp_perm]
+
+/-- **Moving one direction to the front.** Replacing the `j`-th direction of a composite of
+difference operators by `a` gives the same composite as putting `a` first and permuting the
+remaining directions accordingly. -/
+lemma fwdDiffComp_update_eq_cons (v : Fin (d + 1) → M) (j : Fin (d + 1)) (a : M) (f : M → G) :
+    fwdDiffComp (Function.update v j a) f =
+      fwdDiffComp (Fin.cons a fun i ↦ v (Equiv.swap 0 j i.succ)) f := by
+  rw [← fwdDiffComp_comp_perm (Function.update v j a) (Equiv.swap 0 j)]
+  congr 1
+  funext i
+  refine Fin.cases ?_ (fun i ↦ ?_) i
+  · simp
+  · have hne : Equiv.swap (0 : Fin (d + 1)) j i.succ ≠ j := fun h ↦ Fin.succ_ne_zero i (by
+      rw [← Equiv.swap_apply_self (0 : Fin (d + 1)) j i.succ, h, Equiv.swap_apply_right])
+    simp [Function.update_of_ne hne]
+
+/-- **A composite of difference operators one of whose directions is zero vanishes.** -/
+lemma fwdDiffComp_eq_zero_of_eq_zero (v : Fin (d + 1) → M) (j : Fin (d + 1)) (hj : v j = 0)
+    (f : M → G) : fwdDiffComp v f = 0 := by
+  have hv : v = Function.update v j 0 := by rw [← hj, Function.update_eq_self]
+  rw [hv, fwdDiffComp_update_eq_cons, fwdDiffComp_succ, Fin.cons_zero, fwdDiff_zero_arg]
 
 section Comp
 

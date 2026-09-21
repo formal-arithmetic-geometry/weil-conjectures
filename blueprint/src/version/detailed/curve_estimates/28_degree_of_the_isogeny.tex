@@ -403,6 +403,8 @@ total degree at most $\max_i\bigl((d-i)+i\bigr)=d$.
 \begin{lemma}[The top difference as an alternating sum]
 \label{lem:deg-difference-explicit}
 \uses{def:deg-numerical}
+\lean{fwdDiffComp_eq_sum_powerset, fwdDiff_add_arg}
+\leanok
 Let $P\colon\Z^r\to\Z$ be any function and let $v_1,\dots,v_d\in\Z^r$.  Then
 \[
   (\Delta_{v_1}\cdots\Delta_{v_d}P)(\underline m)
@@ -426,13 +428,15 @@ the second identity,
   =(T_v-\mathrm{id})+(T_w-\mathrm{id})+(T_v-\mathrm{id})(T_w-\mathrm{id})
   =T_vT_w-\mathrm{id}=T_{v+w}-\mathrm{id}=\Delta_{v+w}.
 \]
+\leanok
 \end{proof}
 
-\begin{lemma}[The top difference is multilinear in its directions]
+\begin{lemma}[The top difference is additive in one direction and homogeneous
+in all of them]
 \label{lem:deg-difference-multilinear}
 \uses{def:deg-numerical}
 \lean{IsNumericalPolynomial.fwdDiffComp_cons_add_arg,
-IsNumericalPolynomial.fwdDiffComp_cons_zsmul_arg,
+IsNumericalPolynomial.fwdDiffComp_update_add_arg,
 IsNumericalPolynomial.fwdDiffComp_zsmul_arg}
 \leanok
 Let $P\colon\Z^r\to\Z$ be a numerical polynomial of total degree at most $d+1$
@@ -443,12 +447,16 @@ and let $a,b,v_1,\dots,v_d\in\Z^r$.  Then
   +\Delta_b\Delta_{v_1}\cdots\Delta_{v_d}P ,
 \]
 and $\Delta_{na}\Delta_{v_1}\cdots\Delta_{v_d}P
-=n\,\Delta_a\Delta_{v_1}\cdots\Delta_{v_d}P$ for every $n\in\Z$.
-Consequently, if $P$ has total degree at most $d$ and
-$n_1,\dots,n_d\in\Z$, then
+=n\,\Delta_a\Delta_{v_1}\cdots\Delta_{v_d}P$ for every $n\in\Z$.  A composite
+of difference operators does not depend on the order of its directions, so the
+first identity also holds with the direction $a+b$ in any one of the $d+1$
+slots, and not only in the leading one.
+
+Consequently, if $Q\colon\Z^r\to\Z$ is a numerical polynomial of total degree
+at most $e$ and $w_1,\dots,w_e\in\Z^r$, $n_1,\dots,n_e\in\Z$, then
 \[
-  \Delta_{n_1v_1}\cdots\Delta_{n_dv_d}P
-  =n_1\cdots n_d\,\Delta_{v_1}\cdots\Delta_{v_d}P .
+  \Delta_{n_1w_1}\cdots\Delta_{n_ew_e}Q
+  =n_1\cdots n_e\,\Delta_{w_1}\cdots\Delta_{w_e}Q .
 \]
 \end{lemma}
 \begin{proof}
@@ -462,10 +470,13 @@ $d+1$, hence vanishes by \Cref{lem:deg-difference-lowers-degree}(1).  This is
 the first identity.  It makes
 $n\mapsto\Delta_{na}\Delta_{v_1}\cdots\Delta_{v_d}P$ a homomorphism of additive
 groups $\Z\to\Z^{\Z^r}$, which is therefore multiplication by its value at $1$;
-this is the second identity, negative $n$ included.  The last identity follows
-by induction on $d$: peel off the leading operator $\Delta_{n_1v_1}$ using the
-second identity and apply the inductive hypothesis to $\Delta_{n_1v_1}P$, which
-has total degree at most $d-1$ by \Cref{lem:deg-difference-lowers-degree}.
+this is the second identity, negative $n$ included.  The operators
+$\Delta_{v}$ commute with one another, so the composite is unchanged by a
+permutation of $v_1,\dots,v_{d+1}$; bringing the slot in question to the front
+gives the first identity in an arbitrary slot.  The last identity follows by
+induction on $e$: peel off the leading operator $\Delta_{n_1w_1}$ using the
+second identity and apply the inductive hypothesis to $\Delta_{w_1}Q$, which
+has total degree at most $e-1$ by \Cref{lem:deg-difference-lowers-degree}.
 \end{proof}
 
 \begin{lemma}[Substitution of linear forms]
@@ -846,7 +857,8 @@ hypothesis on $X$, on $F$ or on the $L_j$ beyond invertibility: they are pure
 difference calculus and bookkeeping in $\mathrm{Pic}(X)$.
 \end{lemma}
 \begin{proof}
-\uses{lem:deg-difference-explicit, def:deg-intersection}
+\uses{lem:deg-difference-explicit, def:deg-intersection,
+lem:deg-numerical-substitution}
 \leanok
 By \Cref{lem:deg-difference-explicit} with $v_i=e_i$,
 \[
@@ -856,11 +868,13 @@ By \Cref{lem:deg-difference-explicit} with $v_i=e_i$,
   =\sum_S(-1)^{d-\#S}\chi\Bigl(F\otimes\bigotimes_{i\in S}L_i\Bigr),
 \]
 which is the definition of $(L_1\cdots L_d\cdot F)$.  For the second formula,
-the substitution $\underline m\mapsto\sum_jm_jv_j$ is an additive map
+the substitution $f\colon\underline m\mapsto\sum_jm_jv_j$ is an additive map
 $\Z^d\to\Z^s$ carrying $P_{F,\underline K}$ to $P_{F,\underline L}$, because the
 substituted exponent vector names a twisting factor of the same class in
-$\mathrm{Pic}(X)$; difference operators transport along it, sending $e_j$ to
-$v_j$.
+$\mathrm{Pic}(X)$.  Difference operators transport along $f$ by the identity
+$\Delta_v(P\circ f)=(\Delta_{f(v)}P)\circ f$ of the proof of
+\Cref{lem:deg-numerical-substitution}, which sends $e_j$ to $v_j$; evaluating
+at $\underline m=0$ and using $f(0)=0$ gives the second formula.
 \end{proof}
 
 \begin{lemma}[The top difference is constant]
@@ -985,14 +999,14 @@ and likewise with $\O_X$ in any one of the $d$ slots.  This is part (2) of
 that theorem: neither properness, nor coherence of $F$, nor $\dim F\leq d$.
 \end{lemma}
 \begin{proof}
-\uses{lem:deg-intersection-is-top-difference, lem:deg-intersection-symmetric}
+\uses{lem:deg-intersection-is-top-difference}
 \leanok
 By \Cref{lem:deg-intersection-is-top-difference}, $(\O_X\cdot L_2\cdots
 L_d\cdot F)$ is read off the Snapper polynomial of $(L_2,\dots,L_d)$ alone: the
 structure sheaf is the empty monomial, so its exponent vector is $0$, and the
 remaining slots keep the standard directions $e_2,\dots,e_d$.  Differencing in
-the zero direction gives zero, whence the vanishing.  An arbitrary slot is
-brought to the front by \Cref{lem:deg-intersection-symmetric}.
+the zero direction gives zero, whence the vanishing.  For an arbitrary slot,
+put the zero exponent vector in that slot instead; no slot has to be moved.
 \end{proof}
 
 \begin{theorem}[Multilinearity]\label{thm:deg-intersection-multilinear}
@@ -1000,7 +1014,8 @@ brought to the front by \Cref{lem:deg-intersection-symmetric}.
 AlgebraicGeometry.Scheme.Modules.intersectionNumber_cons_zpow,
 AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_tensorObj,
 AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_zpow}
-\uses{def:deg-intersection, lem:deg-intersection-structure-sheaf}
+\uses{def:deg-intersection, lem:deg-intersection-symmetric,
+lem:deg-intersection-structure-sheaf}
 Let $X$ be a projective scheme over $k$, let $F$ be coherent with $\dim F\leq
 d$, let $M,N,L_2,\dots,L_d$ be line bundles on $X$ and let $n\in\Z$.  Then
 \begin{enumerate}
@@ -1016,7 +1031,7 @@ slot, and not only in the first.
 \end{theorem}
 \begin{proof}
 \uses{thm:deg-snapper, lem:deg-difference-multilinear,
-lem:deg-intersection-is-top-difference, lem:deg-intersection-symmetric}
+lem:deg-intersection-is-top-difference, cor:deg-intersection-powers}
 Consider the tuple $\underline K:=(M,N,L_2,\dots,L_d)$ of $d+1$ line bundles,
 with the variables of $\Z^{d+1}$ indexed by $0,1,2,\dots,d$, and put
 $Q:=P_{F,\underline K}$, so that
@@ -1040,10 +1055,10 @@ $(N\cdot L_2\cdots L_d\cdot F)=(\Delta_1\Delta_2\cdots\Delta_dQ)(0)$.  Now (1)
 and (3) are the additivity and the homogeneity of
 \Cref{lem:deg-difference-multilinear}, applied to $Q$ in the leading direction.
 The homogeneity treats every integer $n$ at once, negative ones included, and
-uses neither (2) nor an induction.  An arbitrary slot is brought to the front
-by \Cref{lem:deg-intersection-symmetric}; for (3) the formalisation instead
-reads off the one-slot case of \Cref{cor:deg-intersection-powers}, which needs
-no such move.
+uses neither (2) nor an induction.  No slot ever has to be moved: for (1) the
+formalisation applies the additivity of
+\Cref{lem:deg-difference-multilinear} in the slot in question, and for (3) it
+reads off the one-slot case of \Cref{cor:deg-intersection-powers}.
 \end{proof}
 
 \begin{remark}[Multilinearity as a multilinear map]
@@ -1324,13 +1339,11 @@ ample and trivial, that is $L\cong\O_X$.  Then $X$ is finite over $k$; in
 particular $\dim X\leq0$ and $X$ has finitely many points.
 \end{corollary}
 \begin{proof}
-\uses{prop:deg-ample-positive, thm:deg-snapper,
-lem:deg-intersection-is-top-difference, lem:deg-difference-lowers-degree,
-thm:av-zariski-main}
-Let $g:=\dim X$ and suppose $g\geq1$.  The Snapper polynomial of the tuple
-$(L,\dots,L)$ with $L\cong\O_X$ is the constant function
-$\underline m\mapsto\chi(X,\O_X)$, so any single difference operator
-annihilates it and, by \Cref{lem:deg-intersection-is-top-difference},
+\uses{prop:deg-ample-positive, lem:deg-intersection-structure-sheaf,
+lem:deg-intersection-symmetric, thm:av-zariski-main}
+Let $g:=\dim X$ and suppose $g\geq1$.  Since $L\cong\O_X$,
+\Cref{lem:deg-intersection-symmetric} replaces every slot of $(L^g)$ by
+$\O_X$, and then \Cref{lem:deg-intersection-structure-sheaf} gives
 $(L^g)=0$.  But $L$ is ample and $\dim X=g$, so
 \Cref{prop:deg-ample-positive} gives $(L^g)>0$; a contradiction.  Hence
 $g\leq0$.  If $X=\emptyset$ there is nothing to prove.  Otherwise $g=0$, so
@@ -1790,11 +1803,14 @@ steps.
   hence \Cref{thm:deg-degree-formula}.  \emph{Two definitions} --- the
   intersection number $(L_1\cdots L_d\cdot F)$ with coefficients in a coherent
   sheaf and the abbreviation $(L^d)$ for the top self-intersection --- and
-  \emph{about eight lemmas}: the identification with the top difference of the
-  Snapper polynomial (\Cref{lem:deg-intersection-is-top-difference}); symmetry
+  \emph{about ten lemmas}: the identification with the top difference of the
+  Snapper polynomial (\Cref{lem:deg-intersection-is-top-difference}) and the
+  constancy of that difference
+  (\Cref{lem:deg-intersection-top-difference-constant}); symmetry
   (\Cref{lem:deg-intersection-symmetric}); additivity in the coefficient sheaf
   (\Cref{lem:deg-intersection-additive}); vanishing below the dimension
-  (\Cref{lem:deg-intersection-small-support}); the three parts of
+  (\Cref{lem:deg-intersection-small-support}); vanishing at the structure sheaf
+  (\Cref{lem:deg-intersection-structure-sheaf}); the three parts of
   multilinearity (\Cref{thm:deg-intersection-multilinear}); and the scaling
   rule (\Cref{cor:deg-intersection-powers}).  In a new file
   \texttt{WeilConjectures/AlgebraicGeometry/IntersectionNumber.lean}.
@@ -1923,20 +1939,24 @@ chapter.
   clause of \Cref{thm:deg-isogeny} only.
 \end{enumerate}
 
-Twenty-two statements are proved here in full and are new to Lean:
+Twenty-six statements are proved here in full and are new to Lean:
 \Cref{def:deg-euler} and \Cref{lem:deg-euler-additive},
 \Cref{lem:deg-euler-affine},
 \Cref{lem:deg-numerical-unique},
 \Cref{lem:deg-difference-lowers-degree},
 \Cref{lem:deg-difference-criterion},
 \Cref{lem:deg-difference-explicit},
+\Cref{lem:deg-difference-multilinear},
+\Cref{lem:deg-numerical-substitution},
 \Cref{lem:deg-proper-affine-finite},
 \Cref{lem:deg-general-hyperplane},
 \Cref{thm:deg-snapper},
 \Cref{lem:deg-intersection-is-top-difference},
+\Cref{lem:deg-intersection-top-difference-constant},
 \Cref{lem:deg-intersection-symmetric},
 \Cref{lem:deg-intersection-additive},
 \Cref{lem:deg-intersection-small-support},
+\Cref{lem:deg-intersection-structure-sheaf},
 \Cref{thm:deg-intersection-multilinear},
 \Cref{cor:deg-intersection-powers},
 \Cref{prop:deg-intersection-rank},
@@ -1947,21 +1967,23 @@ Twenty-two statements are proved here in full and are new to Lean:
 \Cref{lem:deg-torsion-finite},
 \Cref{lem:deg-mulby-proper},
 \Cref{thm:deg-isogeny} and
-\Cref{thm:deg-degree-formula} --- twenty-five items, of which
+\Cref{thm:deg-degree-formula} --- twenty-nine items, of which
 \Cref{def:deg-euler} is a definition and \Cref{lem:deg-mulby-proper} and
 \Cref{lem:deg-euler-affine} are one-line consequences of facts Mathlib already
-has, leaving twenty-two of real formalisation work.  Four are theorems, two are
-corollaries, four are propositions and the remaining twelve are supporting
+has, leaving twenty-six of real formalisation work.  Four are theorems, two are
+corollaries, four are propositions and the remaining sixteen are supporting
 lemmas.
 
-Four of the twenty-two use nothing that is missing beyond the definitions
+Six of the twenty-six use nothing that is missing beyond the definitions
 listed above and can therefore be formalised today:
 \Cref{lem:deg-numerical-unique},
 \Cref{lem:deg-difference-lowers-degree},
-\Cref{lem:deg-difference-criterion} and
-\Cref{lem:deg-difference-explicit} --- the whole of
+\Cref{lem:deg-difference-criterion},
+\Cref{lem:deg-difference-explicit},
+\Cref{lem:deg-difference-multilinear} and
+\Cref{lem:deg-numerical-substitution} --- the whole of
 \Cref{sec:deg-numerical}, which is notion (N9) and is self-contained
-combinatorics.  A fifth, \Cref{lem:deg-proper-affine-finite}, needs only what
+combinatorics.  A seventh, \Cref{lem:deg-proper-affine-finite}, needs only what
 Mathlib already has.  None of the others is formalisable before (N8) and (N11)
 exist.
 

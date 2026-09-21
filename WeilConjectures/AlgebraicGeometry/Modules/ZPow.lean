@@ -121,33 +121,31 @@ theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd :
 
 /-- **The class of the twisting factor in the Picard group of `X`, as an additive function of the
 exponent vector.** Its value at `m` is the class of
-`AlgebraicGeometry.Scheme.Modules.zpowProd L hL m`, which is
-`∏ j, Pic.mk (L j) (hL j) ^ m j` by `AlgebraicGeometry.Scheme.Pic.mk_zpowProd`. -/
+`AlgebraicGeometry.Scheme.Modules.zpowProd L hL m`, by
+`AlgebraicGeometry.Scheme.Pic.mk_zpowProd`. -/
 noncomputable def _root_.AlgebraicGeometry.Scheme.Pic.zpowProdHom (L : Fin r → X.Modules)
     (hL : ∀ j, (L j).Invertible) : (Fin r → ℤ) →+ Additive X.Pic :=
-  AddMonoidHom.mk' (fun m ↦ Additive.ofMul
-    (Pic.mk (zpowProd L hL m) (invertible_zpowProd L hL m))) fun m m' ↦ by
-    simp only [Pic.mk_zpowProd, Pi.add_apply, zpow_add]
+  AddMonoidHom.mk' (fun m ↦ Additive.ofMul (∏ j, Pic.mk (L j) (hL j) ^ m j)) fun m m' ↦ by
+    simp only [Pi.add_apply, zpow_add]
     rw [Finset.prod_mul_distrib]
-    rfl
+    exact ofMul_mul _ _
 
 @[simp]
 theorem _root_.AlgebraicGeometry.Scheme.Pic.zpowProdHom_apply (L : Fin r → X.Modules)
     (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) :
-    Pic.zpowProdHom L hL m = Additive.ofMul (∏ j, Pic.mk (L j) (hL j) ^ m j) :=
-  congrArg Additive.ofMul (Pic.mk_zpowProd L hL m)
+    Pic.zpowProdHom L hL m = Additive.ofMul (∏ j, Pic.mk (L j) (hL j) ^ m j) := rfl
 
 /-- **Bumping one exponent of the twisting factor** multiplies its class in the Picard group by
-the class of the corresponding line bundle. This is additivity of
-`AlgebraicGeometry.Scheme.Pic.zpowProdHom` at `m` and `Pi.single j 1`. -/
+the class of the corresponding line bundle. -/
 theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_add_single (L : Fin r → X.Modules)
     (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) (j : Fin r) :
     Pic.mk (zpowProd L hL (m + Pi.single j 1)) (invertible_zpowProd L hL _) =
       Pic.mk (L j) (hL j) * Pic.mk (zpowProd L hL m) (invertible_zpowProd L hL m) := by
-  refine Additive.ofMul.injective ?_
-  rw [Pic.mk_zpowProd, Pic.mk_zpowProd, ofMul_mul, ← Pic.zpowProdHom_apply,
-    ← Pic.zpowProdHom_apply, map_add, add_comm (Pic.zpowProdHom L hL m),
-    Pic.zpowProdHom_apply L hL (Pi.single j 1), Fintype.prod_zpow_pi_single, zpow_one]
+  have hsingle : ∏ i, Pic.mk (L i) (hL i) ^ (Pi.single j 1 : Fin r → ℤ) i =
+      Pic.mk (L j) (hL j) := by
+    rw [Fintype.prod_zpow_pi_single, zpow_one]
+  rw [Pic.mk_zpowProd, Pic.mk_zpowProd, ← hsingle, ← Finset.prod_mul_distrib]
+  exact Finset.prod_congr rfl fun i _ ↦ by rw [Pi.add_apply, zpow_add, mul_comm]
 
 /-- **Concatenating two families of line bundles and their exponent vectors** multiplies the
 classes of the two twisting factors in the Picard group. -/
