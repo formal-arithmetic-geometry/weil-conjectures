@@ -63,8 +63,12 @@ its reducedness. The subscheme cut out by a radical ideal sheaf is reduced
 (`AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme`), because on an affine open `U`
 it is `Spec (Γ(X, U) ⧸ I(U))`; and the vanishing ideal sheaf is radical, so
 `(vanishingIdeal Z).subscheme` — the *reduced induced closed subscheme structure* on `Z` — is
-reduced. Its underlying space is `Z`, so if `Z` is irreducible the subscheme is integral
-(`AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_vanishingIdeal`).
+reduced. Its underlying space is `Z`
+(`AlgebraicGeometry.Scheme.IdealSheafData.subschemeHomeomorphSupport`), so if `Z` is irreducible
+the subscheme is integral
+(`AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_vanishingIdeal`), and it has the
+Krull dimension of `Z`
+(`AlgebraicGeometry.Scheme.IdealSheafData.topologicalKrullDim_subscheme_vanishingIdeal`).
 
 ## The map to the scheme-theoretic image is scheme-theoretically dominant
 
@@ -93,6 +97,7 @@ the kernel ideal vanishes on a cover by affine opens.
 - `AlgebraicGeometry.Scheme.Hom.ker_toImage`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme`
 - `AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_subscheme_vanishingIdeal`
+- `AlgebraicGeometry.Scheme.IdealSheafData.topologicalKrullDim_subscheme_vanishingIdeal`
 -/
 
 @[expose] public section
@@ -318,13 +323,18 @@ lemma isReduced_subscheme {J : X.IdealSheafData} (hJ : J.radical = J) : IsReduce
     infer_instance
   exact .of_openCover _ J.subschemeCover.openCover
 
+/-- **The underlying space of the subscheme cut out by an ideal sheaf is its support.** The
+inclusion `V(J) ⟶ X` is a closed immersion, hence an embedding with image `J.support`, so it
+identifies the space of `V(J)` with the closed subset `J.support` of `X`. -/
+noncomputable def subschemeHomeomorphSupport (J : X.IdealSheafData) :
+    J.subscheme ≃ₜ (J.support : Set X) :=
+  J.subschemeι.isEmbedding.toHomeomorph.trans (Homeomorph.setCongr J.range_subschemeι)
+
 /-- **The subscheme cut out by an ideal sheaf with irreducible support is irreducible**, since
-its inclusion into `X` is an embedding with image the support. -/
+its underlying space is the support. -/
 lemma irreducibleSpace_subscheme {J : X.IdealSheafData}
     (hJ : IsIrreducible (J.support : Set X)) : IrreducibleSpace J.subscheme :=
-  (J.subschemeι.isEmbedding.toHomeomorph.trans
-    (Homeomorph.setCongr J.range_subschemeι)).irreducibleSpace_iff.mpr
-      (isIrreducible_iff_irreducibleSpace.mp hJ)
+  J.subschemeHomeomorphSupport.irreducibleSpace_iff.mpr (isIrreducible_iff_irreducibleSpace.mp hJ)
 
 /-- The reduced induced closed subscheme structure on a closed subset `Z` of `X`, namely the
 subscheme cut out by the vanishing ideal sheaf of `Z`, is reduced. -/
@@ -336,6 +346,13 @@ instance isReduced_subscheme_vanishingIdeal (Z : Closeds X) :
 lemma range_subschemeι_vanishingIdeal (Z : Closeds X) :
     Set.range (vanishingIdeal Z).subschemeι = Z := by
   rw [range_subschemeι, support_vanishingIdeal]
+
+/-- **The reduced induced closed subscheme on a closed subset has the dimension of the
+subset.** Its underlying space is `Z`, and the Krull dimension of a topological space is a
+homeomorphism invariant. -/
+lemma topologicalKrullDim_subscheme_vanishingIdeal (Z : Closeds X) :
+    topologicalKrullDim (vanishingIdeal Z).subscheme = topologicalKrullDim (Z : Set X) :=
+  (subschemeHomeomorphSupport (vanishingIdeal Z)).isHomeomorph.topologicalKrullDim_eq _
 
 /-- **The reduced induced closed subscheme on an irreducible closed subset is integral.**
 The closed subscheme `V(I(Z)) ⟶ X` cut out by the vanishing ideal sheaf of an irreducible
