@@ -23,6 +23,10 @@ coefficients in `Ideal.map φ J` annihilate the images of the `e i` as soon as `
 the `e i`; and it describes the relations between the `e i` themselves when `J * I = ⊥` for an
 ideal `I` containing them.
 
+Extension of ideals also controls the transport of `I • N` along a map `M →ₛₗ[σ] M'` which is
+semilinear over a ring map `σ`, the variant of `Submodule.map_smul''` needed when the two
+modules live over different rings.
+
 ## Main results
 
 - `Ideal.exists_finset_subset_span_image_eq`: a finitely generated `Ideal.map φ N` is
@@ -36,7 +40,10 @@ ideal `I` containing them.
   relation between the `e i` has its coefficients in `J`, the relations between the `e i` are
   exactly the families of coefficients in `J`;
 - `Ideal.range_linearCombination_algebraMap`: the image of `r ↦ ∑ i, r i * e i` over an
-  `R`-algebra `S` is the extension of the ideal spanned by the `e i`.
+  `R`-algebra `S` is the extension of the ideal spanned by the `e i`;
+- `Submodule.smul_le_comap_smul`: the extension of an ideal along `σ : R →+* S` controls the
+  image of `I • N` under a map semilinear over `σ`. This is the semilinear counterpart of
+  `Submodule.map_smul''`, which is the case of an `R`-linear map.
 -/
 
 @[expose] public section
@@ -149,3 +156,31 @@ theorem range_linearCombination_algebraMap [Algebra R S] :
 end LinearCombination
 
 end Ideal
+
+namespace Submodule
+
+variable {R S M M' : Type*} [Semiring R] [Semiring S] [AddCommMonoid M] [Module R M]
+  [AddCommMonoid M'] [Module S M']
+
+/-- **`I • N` transports along a semilinear map.** A map `f : M →ₛₗ[σ] M'` carrying the
+submodule `N` into the submodule `P` carries `I • N` into `J • P`, as soon as the ring map `σ`
+carries the ideal `I` into the ideal `J`.
+
+This is the semilinear counterpart of `Submodule.map_smul''`, which is the case of an
+`R`-linear map. It is stated with `Submodule.comap` rather than `Submodule.map` because the
+latter would require `σ` to be surjective. -/
+theorem smul_le_comap_smul {σ : R →+* S} (f : M →ₛₗ[σ] M') {I : Ideal R} {J : Ideal S}
+    (hIJ : Ideal.map σ I ≤ J) {N : Submodule R M} {P : Submodule S M'} (hNP : N ≤ P.comap f) :
+    I • N ≤ (J • P).comap f :=
+  smul_le.2 fun r hr n hn ↦ by
+    rw [mem_comap, map_smulₛₗ]
+    exact smul_mem_smul (hIJ (Ideal.mem_map_of_mem _ hr)) (hNP hn)
+
+/-- **Membership in `I • ⊤` transports along a semilinear map**, the case `N = P = ⊤` of
+`Submodule.smul_le_comap_smul`. -/
+theorem mem_smul_top_of_semilinear {σ : R →+* S} (f : M →ₛₗ[σ] M') {I : Ideal R} {J : Ideal S}
+    (hIJ : Ideal.map σ I ≤ J) {z : M} (hz : z ∈ I • (⊤ : Submodule R M)) :
+    f z ∈ J • (⊤ : Submodule S M') :=
+  smul_le_comap_smul f hIJ (by simp) hz
+
+end Submodule

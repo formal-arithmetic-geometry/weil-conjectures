@@ -394,6 +394,23 @@ theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_unit {M : X.Modules
   obtain ⟨W, hxW, m, hm⟩ := hM.exists_isIso_unitSmulRestrictHom x
   exact ⟨W, hxW, ⟨(asIso (unitSmulRestrictHom m)).symm⟩⟩
 
+/-- **An invertible sheaf of modules is trivialised by a *global* section near every point**:
+every point has an open neighbourhood `W` such that the pullback of `M` to `W` carries a global
+section `t` with `r ↦ r • t` an isomorphism `𝒪_W ≅ M|_W`.
+
+This is `SheafOfModules.Invertible.exists_isIso_unitSmulRestrictHom` in the
+`AlgebraicGeometry.Scheme.Modules.homOfSectionTop` form, which is the one that arguments about
+global sections use. -/
+theorem _root_.SheafOfModules.Invertible.exists_isIso_homOfSectionTop {M : X.Modules}
+    (hM : M.Invertible) (x : X) :
+    ∃ W : X.Opens, x ∈ W ∧ ∃ t : Γ((Modules.pullback W.ι).obj M, ⊤),
+      IsIso (Modules.homOfSectionTop _ t) := by
+  obtain ⟨W, hxW, m, hm⟩ := hM.exists_isIso_unitSmulRestrictHom x
+  refine ⟨W, hxW, Hom.app (asIso (unitSmulRestrictHom m) ≪≫
+    (restrictFunctorIsoPullback W.ι).app M).hom ⊤ (oneSection W.toScheme ⊤), ?_⟩
+  rw [← unitHomEquivTop_apply, ← unitHomEquivTop_symm_apply, Equiv.symm_apply_apply]
+  infer_instance
+
 /-- An invertible sheaf of modules on a scheme is locally isomorphic to the tensor unit. -/
 theorem _root_.SheafOfModules.Invertible.exists_restrict_iso_tensorUnit {M : X.Modules}
     (hM : M.Invertible) (x : X) :

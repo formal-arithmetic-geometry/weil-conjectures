@@ -26,6 +26,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 public import WeilConjectures.Mathlib.Topology.Sheaves.LocallySurjective
@@ -163,7 +164,10 @@ restriction to the fibre does not depend on the neighbourhood the section is tak
 - `AlgebraicGeometry.Scheme.Modules.restrictStalkEquiv`,
   `AlgebraicGeometry.Scheme.Modules.stalkLinearEquivOfRestrictIso`: the comparison of stalks
   under restriction along an open immersion, and the resulting identification of the stalks of
-  two sheaves of modules which agree on a neighbourhood of a point.
+  two sheaves of modules which agree on a neighbourhood of a point. The comparison and its
+  inverse are also bundled as semilinear maps,
+  `AlgebraicGeometry.Scheme.Modules.restrictStalkEquivₛₗ` and
+  `AlgebraicGeometry.Scheme.Modules.restrictStalkEquivSymmₛₗ`.
 - `AlgebraicGeometry.Scheme.Modules.stalkStructureModulesLinearEquiv`: the stalk of the structure
   sheaf, viewed as a sheaf of modules over itself, is the local ring.
 - `AlgebraicGeometry.Scheme.Modules.pullbackSectionIso`: pulling a sheaf of modules back along a
@@ -174,6 +178,10 @@ restriction to the fibre does not depend on the neighbourhood the section is tak
 - `AlgebraicGeometry.Scheme.Modules.fiberBaseChangeMap`: **the base change map**
   `(f_* F)(y) ⟶ Γ(X_y, F_y)`, the specialisation of `baseChange` to a fibre square, on global
   sections.
+- `AlgebraicGeometry.Scheme.Modules.sectionsRestrict`,
+  `AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback_hom_app_app_top`: the
+  restriction of a global section to an open subscheme, and its agreement with the pullback of
+  that section.
 - `AlgebraicGeometry.Scheme.Modules.sectionsEquivOfIso`: an isomorphism of sheaves of modules
   identifies their sections over any open subset.
 - `AlgebraicGeometry.Scheme.Modules.sectionsBaseEquivOfIso`: an isomorphism of sheaves of modules
@@ -195,6 +203,14 @@ restriction to the fibre does not depend on the neighbourhood the section is tak
 - `AlgebraicGeometry.Scheme.Modules.module_sections`: the `R`-module structure on `Γ(X, F)` for a
   scheme `X` over `Spec R`.
 - `AlgebraicGeometry.Scheme.Modules.VanishesAt`: a global section vanishes at a point.
+- `AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen_of_span_germ_eq_top`: a
+  section which is a multiple of a free generator of a stalk vanishes exactly where the
+  multiplier does.
+- `AlgebraicGeometry.Scheme.Modules.vanishesAt_sectionsRestrict_iff`,
+  `AlgebraicGeometry.Scheme.Modules.vanishesAt_sectionsPullback_iff_of_isOpenImmersion`,
+  `AlgebraicGeometry.Scheme.Modules.vanishesAt_sectionsPullback_iff_of_isIso_homOfSectionTop`:
+  vanishing of a global section is compatible with restriction to an open subscheme, with
+  pullback along an open immersion, and with pullback for a globally trivialised sheaf.
 - `AlgebraicGeometry.Scheme.Modules.vanishingSubmodule`: the global sections vanishing at a point,
   as a `Γ(X, 𝒪ₓ)`-submodule of `Γ(X, F)`.
 - `AlgebraicGeometry.Scheme.Modules.IsGloballyGeneratedAt`: the germs at a point of the global
@@ -808,6 +824,35 @@ lemma restrictStalkEquiv_symm_smul (M : W.Modules) (r : W.presheaf.stalk (f y))
     ← ConcreteCategory.comp_apply, IsIso.hom_inv_id]
   rfl
 
+/-- `AlgebraicGeometry.Scheme.Modules.restrictStalkEquiv`, bundled as a map semilinear over the
+inverse of the stalk map of the open immersion `f`. -/
+noncomputable def restrictStalkEquivₛₗ (M : W.Modules) :
+    ((restrictFunctor f).obj M).presheaf.stalk y →ₛₗ[(inv (f.stalkMap y)).hom]
+      M.presheaf.stalk (f y) where
+  toFun := restrictStalkEquiv f y M
+  map_add' := map_add _
+  map_smul' := restrictStalkEquiv_smul f y M
+
+@[simp]
+lemma restrictStalkEquivₛₗ_apply (M : W.Modules)
+    (z : ((restrictFunctor f).obj M).presheaf.stalk y) :
+    restrictStalkEquivₛₗ f y M z = restrictStalkEquiv f y M z :=
+  rfl
+
+/-- The inverse of `AlgebraicGeometry.Scheme.Modules.restrictStalkEquiv`, bundled as a map
+semilinear over the stalk map of the open immersion `f`. -/
+noncomputable def restrictStalkEquivSymmₛₗ (M : W.Modules) :
+    M.presheaf.stalk (f y) →ₛₗ[(f.stalkMap y).hom]
+      ((restrictFunctor f).obj M).presheaf.stalk y where
+  toFun := (restrictStalkEquiv f y M).symm
+  map_add' := map_add _
+  map_smul' := restrictStalkEquiv_symm_smul f y M
+
+@[simp]
+lemma restrictStalkEquivSymmₛₗ_apply (M : W.Modules) (z : M.presheaf.stalk (f y)) :
+    restrictStalkEquivSymmₛₗ f y M z = (restrictStalkEquiv f y M).symm z :=
+  rfl
+
 /-- The linear map on stalks induced by a morphism between the restrictions of two sheaves of
 modules to an open subscheme.
 
@@ -1290,6 +1335,49 @@ lemma sectionsPullback_apply {X' Y' : Scheme.{u}} (a : X' ⟶ Y') (N : Y'.Module
       ((pullback a).obj N).presheaf.map i.op
         (((pullbackPushforwardAdjunction a).unit.app N).app ⊤ s) :=
   rfl
+
+/-- **The restriction of a global section to an open subscheme**: the sections of `F|_X` over
+`⊤` are the sections of `F` over the image of `⊤`, so this is a restriction map of `F`.
+
+This is the counterpart for restriction of
+`AlgebraicGeometry.Scheme.Modules.sectionsPullback`, with which it agrees under
+`AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback`. -/
+noncomputable def sectionsRestrict (j : X ⟶ Y) [IsOpenImmersion j] (F : Y.Modules) :
+    Γ(F, ⊤) ⟶ Γ((restrictFunctor j).obj F, ⊤) :=
+  F.presheaf.map (homOfLE (j.image_preimage_le ⊤)).op
+
+/-- **The comparison between restriction and pullback along an open immersion, read on global
+sections**: the isomorphism `F|_X ≅ j^* F` of
+`AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback` carries the restriction of a
+global section of `F` to its pullback.
+
+```text
+                     sectionsRestrict j F
+           Γ(F, ⊤) ───────────────────────→ Γ(F|_X, ⊤)
+              ╲                                  │
+               ╲  sectionsPullback j F           │ (restrictFunctorIsoPullback j).hom.app F
+                ↘                                ↓
+                             Γ(j^* F, ⊤)
+```
+-/
+lemma restrictFunctorIsoPullback_hom_app_app_top (j : X ⟶ Y) [IsOpenImmersion j]
+    (F : Y.Modules) (s : Γ(F, ⊤)) :
+    Hom.app ((restrictFunctorIsoPullback j).hom.app F) ⊤ (sectionsRestrict j F s)
+      = sectionsPullback j F s := by
+  -- both sides are the unit of the respective adjunction, so this is
+  -- `CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app`
+  have h := congrArg (fun φ : F ⟶ (pushforward j).obj ((pullback j).obj F) ↦
+      ConcreteCategory.hom (Hom.app φ ⊤) s)
+    (Adjunction.unit_leftAdjointUniq_hom_app (restrictAdjunction j)
+      (pullbackPushforwardAdjunction j) F)
+  simp only [Hom.comp_app, restrictAdjunction_unit_app_app, pushforward_map_app,
+    ConcreteCategory.comp_apply] at h
+  have hid := ConcreteCategory.congr_hom
+    (Scheme.presheaf_map_homOfLE_preimage_top_eq_id ((pullback j).obj F).presheaf j)
+    (((pullbackPushforwardAdjunction j).unit.app F).app ⊤ s)
+  rw [sectionsRestrict, restrictFunctorIsoPullback,
+    sectionsPullback_apply j F s (homOfLE (by simp : (⊤ : X.Opens) ≤ j ⁻¹ᵁ ⊤)), hid]
+  exact h
 
 /-- **The pullback of global sections is natural in the sheaf of modules.** For `a : X' ⟶ Y'`
 and `φ : N ⟶ N'`, the square
@@ -2404,6 +2492,63 @@ lemma vanishesAt_iff (F : X.Modules) (s : Γ(F, ⊤)) (x : X) :
         (⊤ : Submodule (X.presheaf.stalk x) (F.presheaf.stalk x)) :=
   Iff.rfl
 
+/-- **Vanishing at a point is preserved by every morphism** of sheaves of modules. -/
+lemma vanishesAt_app {M N : X.Modules} (φ : M ⟶ N) (m : Γ(M, ⊤)) (x : X)
+    (h : M.VanishesAt m x) : N.VanishesAt (Hom.app φ ⊤ m) x := by
+  -- the map on stalks is `𝒪_{X, x}`-linear, so it carries `𝔪ₓ Mₓ` into `𝔪ₓ Nₓ`
+  rw [vanishesAt_iff, ← Hom.germ_stalkMap_apply φ (U := ⊤) x trivial m,
+    ← stalkFunctor_map_apply]
+  exact Submodule.mem_smul_top_of_semilinear ((stalkFunctor X x).map φ).hom (by simp) h
+
+/-- **Vanishing at a point is invariant under an isomorphism** of sheaves of modules. -/
+lemma vanishesAt_iff_of_iso {M N : X.Modules} (e : M ≅ N) (m : Γ(M, ⊤)) (x : X) :
+    N.VanishesAt (Hom.app e.hom ⊤ m) x ↔ M.VanishesAt m x := by
+  refine ⟨fun h ↦ ?_, vanishesAt_app e.hom m x⟩
+  have key := vanishesAt_app e.inv _ x h
+  rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, e.hom_inv_id] at key
+  simpa using key
+
+/-- **A section which is a multiple of a free generator of a stalk vanishes exactly where the
+multiplier does.** Let `m` be a section of `L` over an open `W` whose germ at a point `x` of
+`W` is non-zero and spans the stalk `Lₓ` over `𝒪_{X, x}`. Then a global section of `L`
+restricting to `g • m` on `W` vanishes at `x` exactly when `x` lies outside the basic open
+subset of `g`.
+
+This is the common content of
+`AlgebraicGeometry.Scheme.Modules.vanishesAt_structureModules_iff` and, for an invertible sheaf
+of modules, of `AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen`. -/
+theorem vanishesAt_iff_notMem_basicOpen_of_span_germ_eq_top {L : X.Modules} {W : X.Opens}
+    {x : X} (hx : x ∈ W) {m : Γ(L, W)}
+    (hspan : Submodule.span (X.presheaf.stalk x) {L.presheaf.germ W x hx m} = ⊤)
+    (hne : L.presheaf.germ W x hx m ≠ 0) (s : Γ(L, ⊤)) (g : Γ(X, W))
+    (hg : L.presheaf.map W.leTop.op s = g • m) :
+    L.VanishesAt s x ↔ x ∉ X.basicOpen g := by
+  have he : L.presheaf.germ ⊤ x trivial s
+      = X.presheaf.germ W x hx g • L.presheaf.germ W x hx m := by
+    rw [← L.presheaf.germ_res_apply W.leTop x hx s, hg, germ_smul L x hx]
+  have hnt : Nontrivial (L.presheaf.stalk x) := nontrivial_of_ne _ _ hne
+  have hfin : Module.Finite (X.presheaf.stalk x) (L.presheaf.stalk x) :=
+    ⟨hspan ▸ Submodule.fg_span_singleton _⟩
+  rw [vanishesAt_iff, he, Scheme.mem_basicOpen X g x hx]
+  constructor
+  · intro h hu
+    obtain ⟨u, hu⟩ := hu
+    -- were the multiplier a unit, the generator would lie in `𝔪ₓ Lₓ`, hence so would `Lₓ`
+    have hmem := Submodule.smul_mem (IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
+      (⊤ : Submodule (X.presheaf.stalk x) (L.presheaf.stalk x)))
+      ((u⁻¹ : (X.presheaf.stalk x)ˣ) : X.presheaf.stalk x) h
+    rw [smul_smul, ← hu, Units.inv_mul, one_smul] at hmem
+    have hle : Submodule.span (X.presheaf.stalk x) {L.presheaf.germ W x hx m} ≤
+        IsLocalRing.maximalIdeal (X.presheaf.stalk x) • ⊤ :=
+      Submodule.span_le.2 (Set.singleton_subset_iff.2 hmem)
+    rw [hspan] at hle
+    exact absurd (le_antisymm le_top hle)
+      (Submodule.ideal_smul_top_lt_top (R := X.presheaf.stalk x) (M := L.presheaf.stalk x)
+        (I := IsLocalRing.maximalIdeal (X.presheaf.stalk x)) le_rfl).ne
+  · intro h
+    exact Submodule.smul_mem_smul
+      ((IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 h)) Submodule.mem_top
+
 /-- **The global sections vanishing at a point form a submodule** of `Γ(X, F)` over the global
 functions `Γ(X, 𝒪ₓ)`. -/
 noncomputable def vanishingSubmodule (F : X.Modules) (x : X) : Submodule Γ(X, ⊤) Γ(F, ⊤) where
@@ -2628,37 +2773,10 @@ theorem isGloballyGeneratedAt_structureModules (x : X) :
 identifies `AlgebraicGeometry.Scheme.Modules.VanishesAt` for the structure sheaf with the notion
 of vanishing used by `AlgebraicGeometry.Scheme.basicOpen`. -/
 lemma vanishesAt_structureModules_iff (x : X) (r : Γ(X, ⊤)) :
-    X.structureModules.VanishesAt r x ↔ x ∉ X.basicOpen r := by
-  rw [Scheme.mem_basicOpen_top, ← mem_nonunits_iff, ← IsLocalRing.mem_maximalIdeal]
-  have hr := germ_structureModules_eq_smul x ⊤ trivial r
-  constructor
-  · intro h
-    replace h : X.structureModules.presheaf.germ ⊤ x trivial r ∈
-      IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
-        (⊤ : Submodule (X.presheaf.stalk x) (X.structureModules.presheaf.stalk x)) := h
-    by_contra hu
-    rw [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, not_not] at hu
-    obtain ⟨u, hu⟩ := hu
-    -- the germ of `r` is a unit, so the germ of `1` would lie in `𝔪ₓ 𝒪_{X, x}` as well
-    have hmem := Submodule.smul_mem (IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
-      (⊤ : Submodule (X.presheaf.stalk x) (X.structureModules.presheaf.stalk x)))
-      ((u⁻¹ : (X.presheaf.stalk x)ˣ) : X.presheaf.stalk x) h
-    rw [hr, ← hu, smul_smul, Units.inv_mul, one_smul] at hmem
-    have hspan : Submodule.span (X.presheaf.stalk x)
-        {X.structureModules.presheaf.germ ⊤ x trivial (oneSection X ⊤)} ≤
-        IsLocalRing.maximalIdeal (X.presheaf.stalk x) • ⊤ :=
-      Submodule.span_le.2 (Set.singleton_subset_iff.2 hmem)
-    rw [span_germ_oneSection] at hspan
-    exact absurd (le_antisymm le_top hspan)
-      (Submodule.ideal_smul_top_lt_top (R := X.presheaf.stalk x)
-        (M := X.structureModules.presheaf.stalk x)
-        (I := IsLocalRing.maximalIdeal (X.presheaf.stalk x)) le_rfl).ne
-  · intro h
-    change X.structureModules.presheaf.germ ⊤ x trivial r ∈
-      IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
-        (⊤ : Submodule (X.presheaf.stalk x) (X.structureModules.presheaf.stalk x))
-    rw [hr]
-    exact Submodule.smul_mem_smul h Submodule.mem_top
+    X.structureModules.VanishesAt r x ↔ x ∉ X.basicOpen r :=
+  vanishesAt_iff_notMem_basicOpen_of_span_germ_eq_top (L := X.structureModules) (W := ⊤)
+    (m := oneSection X ⊤) trivial (span_germ_oneSection x) (germ_oneSection_ne_zero x) r r
+    (by rw [Subsingleton.elim (Opens.leTop (⊤ : X.Opens)) (𝟙 _)]; simp [oneSection])
 
 end Vanishing
 
@@ -2949,6 +3067,78 @@ lemma fiberMap_homOfSectionTop_eq_zero_iff_over (u : X ⟶ X') {p : X ⟶ W} {p'
 end Over
 
 end SectionHom
+
+/-! ### Vanishing of a global section and pullback -/
+
+section VanishingPullback
+
+variable {X Y : Scheme.{u}}
+
+/-- **Vanishing is compatible with restriction to an open subscheme.** -/
+lemma vanishesAt_sectionsRestrict_iff (j : X ⟶ Y) [IsOpenImmersion j] (F : Y.Modules)
+    (s : Γ(F, ⊤)) (x : X) :
+    ((restrictFunctor j).obj F).VanishesAt (sectionsRestrict j F s) x ↔
+      F.VanishesAt s (j.base x) := by
+  -- restriction along an open immersion does not change stalks, and the comparison is
+  -- semilinear over an isomorphism of local rings, so it matches the two maximal ideals
+  have hg : restrictStalkEquiv j x F
+      (((restrictFunctor j).obj F).presheaf.germ ⊤ x trivial (sectionsRestrict j F s))
+      = F.presheaf.germ ⊤ (j.base x) trivial s :=
+    (restrictStalkEquiv_germ j x F (U := ⊤) trivial (sectionsRestrict j F s)).trans
+      (F.presheaf.germ_res_apply _ _ _ s)
+  rw [vanishesAt_iff, vanishesAt_iff, ← hg]
+  refine ⟨fun h ↦ Submodule.mem_smul_top_of_semilinear (restrictStalkEquivₛₗ j x F)
+    (IsLocalRing.map_maximalIdeal_le _) h, fun h ↦ ?_⟩
+  simpa only [restrictStalkEquivSymmₛₗ_apply, AddEquiv.symm_apply_apply] using
+    Submodule.mem_smul_top_of_semilinear (restrictStalkEquivSymmₛₗ j x F)
+      (IsLocalRing.map_maximalIdeal_le _) h
+
+/-- **Vanishing is compatible with pullback along an open immersion.** -/
+lemma vanishesAt_sectionsPullback_iff_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j]
+    (F : Y.Modules) (s : Γ(F, ⊤)) (x : X) :
+    ((pullback j).obj F).VanishesAt (sectionsPullback j F s) x ↔ F.VanishesAt s (j.base x) := by
+  rw [← restrictFunctorIsoPullback_hom_app_app_top j F s]
+  exact (vanishesAt_iff_of_iso ((restrictFunctorIsoPullback j).app F) _ x).trans
+    (vanishesAt_sectionsRestrict_iff j F s x)
+
+/-- **Vanishing does not depend on whether a two-step pullback is read in one step or two**,
+under the identification `AlgebraicGeometry.Scheme.Modules.pullbackComp`. -/
+lemma vanishesAt_sectionsPullback_comp_iff {Z : Scheme.{u}} (u : X ⟶ Y) (v : Y ⟶ Z)
+    (F : Z.Modules) (s : Γ(F, ⊤)) (x : X) :
+    ((pullback u).obj ((pullback v).obj F)).VanishesAt
+        (sectionsPullback u ((pullback v).obj F) (sectionsPullback v F s)) x ↔
+      ((pullback (u ≫ v)).obj F).VanishesAt (sectionsPullback (u ≫ v) F s) x := by
+  rw [← pullbackComp_hom_app_sectionsPullback u v F s]
+  exact (vanishesAt_iff_of_iso ((pullbackComp u v).app F) _ x).symm
+
+/-- **A multiple of a trivialising global section vanishes exactly outside the basic open
+subset of the multiplier.** -/
+lemma vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop {M : X.Modules}
+    {t : Γ(M, ⊤)} [IsIso (homOfSectionTop M t)] (g : Γ(X, ⊤)) (x : X) :
+    M.VanishesAt (g • t) x ↔ x ∉ X.basicOpen g := by
+  have h := vanishesAt_iff_of_iso (asIso (homOfSectionTop M t)) g x
+  rw [asIso_hom, homOfSectionTop_app_top] at h
+  exact h.trans (vanishesAt_structureModules_iff x g)
+
+/-- **Vanishing is compatible with pullback, for a sheaf of modules trivialised by a global
+section.** Every global section of such a sheaf is `g • t`, and both sides say that the
+corresponding basic open subsets are avoided. -/
+lemma vanishesAt_sectionsPullback_iff_of_isIso_homOfSectionTop (a : X ⟶ Y) {M : Y.Modules}
+    {t : Γ(M, ⊤)} [IsIso (homOfSectionTop M t)] (s : Γ(M, ⊤)) (x : X) :
+    ((pullback a).obj M).VanishesAt (sectionsPullback a M s) x ↔ M.VanishesAt s (a.base x) := by
+  obtain ⟨g, rfl⟩ : ∃ g : Γ(Y, ⊤), g • t = s := by
+    obtain ⟨g, hg⟩ := (sectionsEquivOfIso (asIso (homOfSectionTop M t)) ⊤).surjective s
+    exact ⟨g, (homOfSectionTop_app_top M t g).symm.trans hg⟩
+  -- multiplication by `t` pulls back to multiplication by `a^* t`
+  have ht' : IsIso (homOfSectionTop ((pullback a).obj M) (sectionsPullback a M t)) := by
+    rw [← map_homOfSectionTop]
+    infer_instance
+  rw [sectionsPullback_smul, vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop,
+    vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop, not_iff_not,
+    ← Scheme.preimage_basicOpen_top]
+  rfl
+
+end VanishingPullback
 
 /-! ### Epimorphisms of sheaves of modules -/
 

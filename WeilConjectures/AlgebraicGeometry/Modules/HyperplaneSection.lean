@@ -341,39 +341,15 @@ the basic open subset of `g`.
 
 This identifies `AlgebraicGeometry.Scheme.Modules.VanishesAt` for an invertible sheaf with the
 hypothesis of
-`AlgebraicGeometry.Scheme.Modules.isSMulRegular_iff_associatedPoints_subset_basicOpen`, and
-generalises `AlgebraicGeometry.Scheme.Modules.vanishesAt_structureModules_iff`. -/
+`AlgebraicGeometry.Scheme.Modules.isSMulRegular_iff_associatedPoints_subset_basicOpen`, and is
+the case of a trivialising section of
+`AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen_of_span_germ_eq_top`. -/
 theorem vanishesAt_iff_notMem_basicOpen (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
     (s : Γ(L, ⊤)) (g : Γ(X, W)) (hg : L.presheaf.map W.leTop.op s = g • m)
     {x : X} (hx : x ∈ W) :
-    L.VanishesAt s x ↔ x ∉ X.basicOpen g := by
-  have he : L.presheaf.germ ⊤ x trivial s
-      = X.presheaf.germ W x hx g • L.presheaf.germ W x hx m := by
-    rw [← L.presheaf.germ_res_apply W.leTop x hx s, hg, germ_smul L x hx]
-  have hne : L.presheaf.germ W x hx m ≠ 0 := fun h0 ↦
-    one_ne_zero (eq_zero_of_smul_germ_eq_zero m hx (by rw [h0, smul_zero]))
-  have hnt : Nontrivial (L.presheaf.stalk x) := nontrivial_of_ne _ _ hne
-  have hfin : Module.Finite (X.presheaf.stalk x) (L.presheaf.stalk x) :=
-    ⟨span_germ_eq_top m hx ▸ Submodule.fg_span_singleton _⟩
-  rw [vanishesAt_iff, he, Scheme.mem_basicOpen X g x hx]
-  constructor
-  · intro h hu
-    obtain ⟨u, hu⟩ := hu
-    have hmem := Submodule.smul_mem (IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
-      (⊤ : Submodule (X.presheaf.stalk x) (L.presheaf.stalk x)))
-      ((u⁻¹ : (X.presheaf.stalk x)ˣ) : X.presheaf.stalk x) h
-    rw [smul_smul, ← hu, Units.inv_mul, one_smul] at hmem
-    have hspan : Submodule.span (X.presheaf.stalk x) {L.presheaf.germ W x hx m} ≤
-        IsLocalRing.maximalIdeal (X.presheaf.stalk x) • ⊤ :=
-      Submodule.span_le.2 (Set.singleton_subset_iff.2 hmem)
-    rw [span_germ_eq_top m hx] at hspan
-    exact absurd (le_antisymm le_top hspan)
-      (Submodule.ideal_smul_top_lt_top (R := X.presheaf.stalk x)
-        (M := L.presheaf.stalk x)
-        (I := IsLocalRing.maximalIdeal (X.presheaf.stalk x)) le_rfl).ne
-  · intro h
-    exact Submodule.smul_mem_smul
-      ((IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 h)) Submodule.mem_top
+    L.VanishesAt s x ↔ x ∉ X.basicOpen g :=
+  vanishesAt_iff_notMem_basicOpen_of_span_germ_eq_top hx (span_germ_eq_top m hx)
+    (fun h0 ↦ one_ne_zero (eq_zero_of_smul_germ_eq_zero m hx (by rw [h0, smul_zero]))) s g hg
 
 
 /-- **Krull's principal ideal theorem for a section of a line bundle.** Let `s` be a global

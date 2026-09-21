@@ -612,6 +612,24 @@ injective on the sections of $F$ over every open subset exactly when the
 associated points of $F$ lie in $X_g$.
 \end{proof}
 
+\begin{lemma}[Vanishing is compatible with pullback]
+\label{lem:deg-vanishing-pullback}
+\lean{AlgebraicGeometry.Scheme.Modules.vanishesAt_sectionsPullback_iff}
+\leanok
+Let $a\colon X\to Y$ be a morphism of schemes, let $L$ be a line bundle on $Y$
+and let $s\in\Gamma(Y,L)$.  Then the pullback $a^*s\in\Gamma(X,a^*L)$ vanishes
+at a point $x$ of $X$ if and only if $s$ vanishes at $a(x)$.
+\end{lemma}
+\begin{proof}
+\leanok
+The question is local on $Y$, so we may assume that $L$ is trivialised by a
+global section $t$, that is that $r\mapsto rt$ is an isomorphism
+$\O_Y\to L$.  Then $s=gt$ for a unique $g\in\Gamma(Y,\O_Y)$, and
+$a^*s=(a^*g)(a^*t)$ with $a^*t$ again a trivialising section.  Both sides
+therefore say that the point in question lies outside a basic open subset, and
+$a^{-1}(Y_g)=X_{a^*g}$.
+\end{proof}
+
 \begin{lemma}[A hyperplane section avoiding the associated points]
 \label{lem:deg-general-hyperplane}
 \lean{AlgebraicGeometry.Scheme.Modules.exists_shortExact_supportDim_add_one_le}
@@ -629,7 +647,7 @@ L)|_D\bigr)=\operatorname{Supp}F\cap D$ contains no generic point of an
 irreducible component of $\operatorname{Supp}F$.
 \end{lemma}
 \begin{proof}
-\uses{lem:deg-generic-section}
+\uses{lem:deg-generic-section, lem:deg-vanishing-pullback}
 A noetherian scheme has only finitely many associated points --- the points
 $x$ whose local ring has $\m_x$ among the associated primes of $F_x$ --- and
 every generic point of an irreducible component of $\operatorname{Supp}F$ is
@@ -646,7 +664,9 @@ $s\in\Gamma(X,L)$ be the image of the corresponding section
 $\sum_ja_jT_j\in\Gamma(\mathbf P^N,\O(1))$ under
 $\Gamma(\mathbf P^N,\O(1))\to\Gamma(X,i^*\O(1))=\Gamma(X,L)$.
 
-By construction the zero scheme $D$ of $s$ contains no associated point of
+By \Cref{lem:deg-vanishing-pullback} the section $s$ vanishes at $x_l$ exactly
+when $\sum_ja_jT_j$ vanishes at $i(x_l)$, which by the choice of $\underline a$
+it does not; so the zero scheme $D$ of $s$ contains no associated point of
 $F$.  Injectivity of $s\colon F\to F\otimes L$ may be checked on stalks; at a
 point $x$ the map is, after trivialising $L$ near $x$, multiplication by an
 element $\sigma\in\O_{X,x}$ on $F_x$, and the kernel of that multiplication is
