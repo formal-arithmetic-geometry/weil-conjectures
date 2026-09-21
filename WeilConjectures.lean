@@ -47,6 +47,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialityCriterion
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
+public import WeilConjectures.AlgebraicGeometry.Modules.VanishingPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.ZPow
 public import WeilConjectures.AlgebraicGeometry.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
@@ -338,6 +339,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
 public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Height
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.Idempotents
