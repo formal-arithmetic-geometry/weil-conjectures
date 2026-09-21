@@ -9,43 +9,52 @@ public import Mathlib.Topology.Sets.Closeds
 public import WeilConjectures.Mathlib.Topology.Irreducible
 
 /-!
-# Irreducible closed subsets of an irreducible closed subspace
+# Irreducible closed subsets of a closed subspace
 
-An irreducible closed subset `T` of a topological space `α` is itself a topological space, and
-its irreducible closed subsets are exactly the irreducible closed subsets of `α` contained in
-`T`. This file records that bijection as an order isomorphism.
+A closed subspace of a topological space `α` has for irreducible closed subsets exactly the
+irreducible closed subsets of `α` that it contains. This file records that bijection as an order
+isomorphism, in the shape of the open counterpart
+`TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding` already in Mathlib.
 
-## Main results
+## Main definitions
 
-* `TopologicalSpace.IrreducibleCloseds.orderIsoIic`: the order isomorphism
-  `IrreducibleCloseds ↥T ≃o Set.Iic T`, for `T` an irreducible closed subset of `α`.
+* `TopologicalSpace.IrreducibleCloseds.orderIsoOfIsClosedEmbedding`: for a closed embedding
+  `f : β → α`, the order isomorphism between `IrreducibleCloseds β` and the irreducible closed
+  subsets of `α` contained in the range of `f`.
+* `TopologicalSpace.IrreducibleCloseds.orderIsoIic`: its form for the inclusion of an
+  irreducible closed subset `T` of `α`, namely `IrreducibleCloseds ↥T ≃o Iic T`.
 -/
 
 @[expose] public section
 
-open Set Set.Notation
+open Set Topology
 
 namespace TopologicalSpace.IrreducibleCloseds
 
-variable {α : Type*} [TopologicalSpace α]
+variable {α β : Type*} [TopologicalSpace α] [TopologicalSpace β]
+
+/-- Along a closed embedding `f : β → α`, the irreducible closed subsets of `β` are order
+isomorphic to the irreducible closed subsets of `α` contained in the range of `f`. -/
+def orderIsoOfIsClosedEmbedding (f : β → α) (hf : IsClosedEmbedding f) :
+    IrreducibleCloseds β ≃o {V : IrreducibleCloseds α | (V : Set α) ⊆ range f} where
+  toFun V :=
+    ⟨{ carrier := f '' V
+       isIrreducible' := V.isIrreducible.image f hf.continuous.continuousOn
+       isClosed' := hf.isClosedMap _ V.isClosed },
+      image_subset_range f V⟩
+  invFun V :=
+    { carrier := f ⁻¹' V
+      isIrreducible' := (hf.isEmbedding.isIrreducible_preimage_iff V.2).2 V.1.isIrreducible
+      isClosed' := V.1.isClosed.preimage hf.continuous }
+  left_inv _ := IrreducibleCloseds.ext (hf.injective.preimage_image _)
+  right_inv V := Subtype.ext (IrreducibleCloseds.ext (image_preimage_eq_of_subset V.2))
+  map_rel_iff' := image_subset_image_iff hf.injective
 
 /-- The irreducible closed subsets of an irreducible closed subspace `T` of `α` are order
-isomorphic to the irreducible closed subsets of `α` contained in `T`. -/
-def orderIsoIic (T : IrreducibleCloseds α) : IrreducibleCloseds (T : Set α) ≃o Set.Iic T where
-  toFun V :=
-    ⟨⟨Subtype.val '' (V : Set (T : Set α)),
-      V.isIrreducible.image _ continuous_subtype_val.continuousOn,
-      by exact T.isClosed.isClosedMap_subtype_val _ V.isClosed⟩,
-      by exact Subtype.coe_image_subset _ _⟩
-  invFun W :=
-    ⟨(T : Set α) ↓∩ (W : Set α),
-      (isIrreducible_preimage_val_iff
-        (SetLike.coe_subset_coe.2 (Set.mem_Iic.1 W.2))).2 W.1.isIrreducible,
-      W.1.isClosed.preimage continuous_subtype_val⟩
-  left_inv V := IrreducibleCloseds.ext (preimage_image_eq _ Subtype.val_injective)
-  right_inv W := Subtype.ext <| IrreducibleCloseds.ext <|
-    (Subtype.image_preimage_coe _ _).trans
-      (inter_eq_right.2 (SetLike.coe_subset_coe.2 (Set.mem_Iic.1 W.2)))
-  map_rel_iff' {V V'} := by exact image_subset_image_iff Subtype.val_injective
+isomorphic to the irreducible closed subsets of `α` contained in `T`. Irreducibility of `T` is
+used only to phrase the codomain as an interval of `IrreducibleCloseds α`. -/
+def orderIsoIic (T : IrreducibleCloseds α) : IrreducibleCloseds (T : Set α) ≃o Iic T :=
+  (orderIsoOfIsClosedEmbedding _ T.isClosed.isClosedEmbedding_subtypeVal).trans
+    (OrderIso.setCongr _ _ (by ext V; simp [← SetLike.coe_subset_coe]))
 
 end TopologicalSpace.IrreducibleCloseds

@@ -18,6 +18,8 @@ view agree on irreducibility, and consequently that the irreducible components o
 
 ## Main results
 
+* `Topology.IsEmbedding.isIrreducible_preimage_iff`: along an embedding `f`, a subset of the
+  range of `f` is irreducible if and only if its preimage is.
 * `isIrreducible_preimage_val_iff`: for `V ⊆ S`, the subset `S ↓∩ V` of `↥S` is irreducible if
   and only if `V` is irreducible.
 * `maximal_isIrreducible_iff_preimage_val_mem_irreducibleComponents`: a subset of `S` is a
@@ -30,15 +32,21 @@ view agree on irreducibility, and consequently that the irreducible components o
 
 open Set Set.Notation Topology
 
-variable {X : Type*} [TopologicalSpace X] {S V : Set X}
+variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] {S V : Set X}
+
+/-- A subset of the range of an embedding `f` is irreducible if and only if its preimage under
+`f` is: the preimage is homeomorphic to the subset. -/
+theorem Topology.IsEmbedding.isIrreducible_preimage_iff {f : Y → X} (hf : IsEmbedding f)
+    (h : V ⊆ range f) : IsIrreducible (f ⁻¹' V) ↔ IsIrreducible V := by
+  rw [isIrreducible_iff_irreducibleSpace, isIrreducible_iff_irreducibleSpace]
+  exact Homeomorph.irreducibleSpace_iff
+    ((hf.homeomorphImage _).trans (Homeomorph.setCongr (image_preimage_eq_of_subset h)))
 
 /-- For a subset `V` of a subspace `S` of `X`, being irreducible in `↥S` and being irreducible
 in `X` are the same thing. -/
 theorem isIrreducible_preimage_val_iff (h : V ⊆ S) :
-    IsIrreducible (S ↓∩ V) ↔ IsIrreducible V := by
-  rw [isIrreducible_iff_irreducibleSpace, isIrreducible_iff_irreducibleSpace]
-  exact Homeomorph.irreducibleSpace_iff
-    (IsEmbedding.subtypeVal.homeomorphOfSubsetRange (by rwa [Subtype.range_coe]))
+    IsIrreducible (S ↓∩ V) ↔ IsIrreducible V :=
+  IsEmbedding.subtypeVal.isIrreducible_preimage_iff (by rwa [Subtype.range_coe])
 
 /-- The image in `X` of an irreducible component of a subspace `S` is a maximal irreducible
 subset of `S`. -/

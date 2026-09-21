@@ -263,12 +263,11 @@ variable (e) {W : X.Opens}
 noncomputable def smulSection (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) : Γ(X, V) →+ Γ(M, V) :=
   AddMonoidHom.mk' (fun r ↦ r • M.presheaf.map (homOfLE hV).op m) (fun r r' ↦ add_smul r r' _)
 
-@[simp] lemma smulSection_apply (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V)) :
+lemma smulSection_apply (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V)) :
     smulSection m V hV r = r • M.presheaf.map (homOfLE hV).op m := rfl
 
 lemma smulSection_self (m : Γ(M, W)) (r : Γ(X, W)) : smulSection m W le_rfl r = r • m := by
-  have hid : (homOfLE (le_refl W)).op = 𝟙 (op W) := Subsingleton.elim _ _
-  rw [smulSection_apply, hid]
+  rw [smulSection_apply, Subsingleton.elim (homOfLE (le_rfl : W ≤ W)).op (𝟙 (op W))]
   simp
 
 lemma smulSection_smul (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r z : Γ(X, V)) :
