@@ -193,6 +193,12 @@ categories with both `L` and `R` exact, applying `L` and composing with the coun
 of `Adjunction.extAddHom`. Together with `Adjunction.extAddHom_bijective` this identifies the
 inverse of `Adjunction.extAddEquiv`, see `Adjunction.extAddEquiv_symm_apply`.
 
+```
+Ext^n A (R.obj B) --extAddHomInv--> Ext^n (L.obj A) B --extAddHom--> Ext^n A (R.obj B)
+        |                                                                   ^
+        +-------------------------------id----------------------------------+
+```
+
 The proof is by dimension shifting along an injective presentation of `B`, exactly as for
 `Adjunction.extAddHom_bijective`; in degree `0` the statement is the triangle identity. -/
 lemma extAddHom_extAddHomInv [L.PreservesMonomorphisms] [EnoughInjectives C] (A : D) (B : C)

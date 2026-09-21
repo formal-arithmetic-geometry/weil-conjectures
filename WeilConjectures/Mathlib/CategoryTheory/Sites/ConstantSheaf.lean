@@ -119,7 +119,14 @@ def Functor.constantSheafsheafPullbackIso {T : C} (hT : IsTerminal T)
 omit [HasWeakSheafify K A] in
 /-- The unit of `CategoryTheory.Functor.constantSheafsheafPullbackAdjunction` is the unit of
 the constant sheaf adjunction on `(C, J)` followed by the sections of the unit of
-`G^{-1} ⊣ G_*`. -/
+`G^{-1} ⊣ G_*`:
+
+```
+a --unit--> Γ(T, a_C) --Γ(T, unit)--> Γ(T, G_* G^{-1} a_C) = Γ(G.obj T, G^{-1} a_C)
+|                                                                    ^
++----------------------------unit------------------------------------+
+```
+-/
 lemma Functor.constantSheafsheafPullbackAdjunction_unit_app {T : C} (hT : IsTerminal T)
     (a : A) :
     (G.constantSheafsheafPullbackAdjunction A J K hT).unit.app a =
