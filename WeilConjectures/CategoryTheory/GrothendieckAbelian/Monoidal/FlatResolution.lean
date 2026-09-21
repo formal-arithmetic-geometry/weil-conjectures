@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
@@ -14,34 +15,52 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-!
 
-# Functorial flat resolutions of sheaves on an essentially small site (sorried)
+# Functorial flat resolutions and flat separators
 
 The K-flat left derivability structure computes the derived pullback on a K-flat
 resolution, so it requires the sheaf categories to admit functorial flat resolutions
 for the monoidal structure of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`.
 
-As in the sibling files, the statement is for an arbitrary site `C` with `Hom`-types in
-the universe `u` and objects in `u + 1` which is essentially small in `u + 1`; the small
-étale site is such a site, so the étale instance is obtained from the general one by
-`inferInstance`.
-
-## The reduction to a flat separator
+## The criterion
 
 The file is organized around the criterion
 `CategoryTheory.Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator`: a
-Grothendieck abelian category with a preadditive, braided, closed monoidal structure
-admits functorial flat resolutions if and only if it has a *flat separator*. The
-implication that matters here is the backward one: from a flat separator `G` one builds
-the functorial flat cover of `F` as the coproduct `⨿_{g : G ⟶ F} G`, which is flat
-because flat objects are stable under coproducts in a Grothendieck abelian category and
-is an epimorphism because `G` is a separator; iterating gives a functorial flat
-resolution. The forward implication reads off a flat separator from a functorial flat
-resolution of an arbitrary separator.
+Grothendieck abelian category with a braided closed monoidal structure
+admits functorial flat resolutions if and only if it has a *flat separator*.
 
-With that criterion in hand, the sheaf statement reduces to the transfer of flat
-separators along the site, `exists_flat_separator_sheaf_essentiallySmall`. The intended
-proof of the latter combines a flat separator of the coefficient category with the site.
+The backward implication is the useful one. Given a flat separator `G`, the copower
+adjunction `CategoryTheory.Limits.sigmaConstAdj G : (∐_{-} G) ⊣ Hom(G, -)` already has
+everything: its counit at `X` is the canonical map `∐_{g : G ⟶ X} G ⟶ X`, which is an
+epimorphism exactly because `G` is a separator (`isSeparator_iff_epi`), and it is
+functorial in `X` by construction, so the only thing left to check is that its source is
+flat. That is `ObjectProperty.flat_coproduct`: `tensoring on the left` with `∐ f` is,
+since `curriedTensor A` preserves the coproduct, the colimit of the `tensorLeft (f i)`
+computed pointwise, and a colimit of shape `Discrete I` of left exact functors is left
+exact because a Grothendieck abelian category satisfies `AB4`. The forward implication
+reads off a flat separator from a functorial flat resolution of an arbitrary separator:
+the flat cover of a separator is again a separator, since it maps onto it epimorphically.
+
+Only left exactness has to be tracked in all of this: in a *closed* monoidal category
+`tensorLeft X` is a left adjoint, hence automatically preserves colimits, and the
+braiding carries everything from `tensorLeft` to `tensorRight`. This is
+`ObjectProperty.flat_iff_preservesFiniteLimits`.
+
+On the coefficient side the criterion is immediately enough: the free module of rank one
+is a flat separator of `ModuleCat.{u} Λ`, so `ModuleCat.hasFunctorialFlatResolution`
+supplies the functorial flat resolutions that the étale six-functor files ask of their
+coefficient category.
+
+## The sheaf case (sorried)
+
+With the criterion in hand, the sheaf statement reduces to the transfer of flat
+separators along the site, `exists_flat_separator_sheaf_essentiallySmall`, which is the
+one `sorry` left in this file. As in the sibling files it is stated for an arbitrary site
+`C` with `Hom`-types in the universe `u` and objects in `u + 1` which is essentially
+small in `u + 1`; the small étale site is such a site, so the étale instance is obtained
+from the general one by `inferInstance`.
+
+The intended proof combines a flat separator of the coefficient category with the site.
 For an object `U` of `C` write `j_{U!}` for the extension by zero along the localization
 of the site at `U`; it is exact, left adjoint to the restriction `(-)|_U`, and satisfies
 `j_{U!} P ⊗ G ≅ j_{U!} (P ⊗ G|_U)`, so `j_{U!} P` is a flat sheaf as soon as `P` is a flat
@@ -51,22 +70,16 @@ family, and their coproduct is a flat separator of `Sheaf J A`. On the small ét
 with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
 `⊕ j_{U!} Λ_U` of the Stacks Project, Tag 06YL.
 
-Neither step is formalized yet: both are recorded with `sorry`.
-
-On the coefficient side the criterion is already enough: the free module of rank one is a
-flat separator of `ModuleCat.{u} Λ`, so `ModuleCat.hasFunctorialFlatResolution` — the
-only unsorried result of this file — supplies the functorial flat resolutions that the
-étale six-functor files ask of their coefficient category.
-
 ## Main results
 
+- `CategoryTheory.ObjectProperty.flat_coproduct`: a coproduct of flat objects is flat.
+- `CategoryTheory.Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator`:
+  functorial flat resolutions exist exactly when there is a flat separator.
 - `ModuleCat.hasFunctorialFlatResolution`: `ModuleCat.{u} Λ` admits functorial flat
   resolutions, over a commutative ring `Λ : Type u`.
 
 ## Sorried results
 
-- `CategoryTheory.Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator`:
-  functorial flat resolutions exist exactly when there is a flat separator.
 - `CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_essentiallySmall`:
   a flat separator of the coefficient category induces one of the sheaf category.
 
@@ -74,7 +87,8 @@ only unsorried result of this file — supplies the functorial flat resolutions 
 
 - `CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_essentiallySmall`:
   the category of `A`-valued sheaves on an essentially small site admits functorial flat
-  resolutions. It is no longer sorried directly: it is deduced from the two results above.
+  resolutions. It is not sorried directly: it is deduced from the criterion and the
+  sorried transfer of flat separators above.
 
 -/
 
@@ -82,20 +96,84 @@ only unsorried result of this file — supplies the functorial flat resolutions 
 
 universe u' u
 
-open CategoryTheory
+open CategoryTheory Limits MonoidalCategory Opposite
+
+namespace CategoryTheory.ObjectProperty
+
+variable {A : Type u'} [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+  [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
+
+omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
+/-- In a braided *closed* monoidal category, flatness is left exactness of tensoring:
+`tensorLeft X` is a left adjoint, so it preserves colimits for free, and the braiding
+identifies `tensorLeft X` with `tensorRight X`. -/
+lemma flat_iff_preservesFiniteLimits (X : A) :
+    flat X ↔ PreservesFiniteLimits (tensorLeft X) := by
+  refine ⟨fun h ↦ h.1.1, fun h ↦ ⟨⟨h, ?_⟩, ?_, ?_⟩⟩
+  · exact inferInstanceAs (PreservesFiniteColimits (tensorLeft X))
+  · exact preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight X)
+  · exact preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight X)
+
+/-- A coproduct of flat objects of a Grothendieck abelian braided closed monoidal category
+is flat.
+
+`curriedTensor A` preserves the coproduct — colimits in `A ⥤ A` are pointwise, and in
+each variable tensoring is a left adjoint — so `tensorLeft (∐ f)` is the colimit of the
+`tensorLeft (f i)`, that is, the composite of `A ⥤ Discrete I ⥤ A` with
+`colim : (Discrete I ⥤ A) ⥤ A`. The first factor is left exact because each
+`tensorLeft (f i)` is, and `colim` is left exact by `AB4`. -/
+lemma flat_coproduct {I : Type u} (f : I → A) (hf : ∀ i, flat (f i)) :
+    flat (∐ f) := by
+  have (i : I) : PreservesFiniteLimits (tensorLeft (f i)) :=
+    (flat_iff_preservesFiniteLimits (f i)).1 (hf i)
+  rw [flat_iff_preservesFiniteLimits]
+  have : PreservesColimit (Discrete.functor f) (curriedTensor A) :=
+    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+  have e : tensorLeft (∐ f) ≅ (Discrete.functor f ⋙ curriedTensor A).flip ⋙ colim :=
+    preservesColimitIso (curriedTensor A) (Discrete.functor f) ≪≫ colimitIsoFlipCompColim _
+  have : PreservesFiniteLimits ((Discrete.functor f ⋙ curriedTensor A).flip) :=
+    preservesFiniteLimits_of_evaluation _ (fun j ↦
+      inferInstanceAs (PreservesFiniteLimits (tensorLeft (f j.as))))
+  exact preservesFiniteLimits_of_natIso e.symm
+
+end CategoryTheory.ObjectProperty
 
 namespace CategoryTheory.Abelian
 
 variable (A : Type u') [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [BraidedCategory A] [MonoidalClosed A]
+  [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
 
-/-- A Grothendieck abelian category with a preadditive, braided, closed monoidal structure
+/-- A flat separator gives functorial flat resolutions: the counit of the copower
+adjunction `sigmaConstAdj G` is the functorial map `∐_{g : G ⟶ X} G ⟶ X`, an epimorphism
+because `G` is a separator and with flat source because `G` is flat. -/
+theorem hasFunctorialFlatResolution_of_flat_separator {G : A} (hG : IsSeparator G)
+    (hG' : ObjectProperty.flat G) : HasFunctorialFlatResolution A :=
+  ⟨{ F := ObjectProperty.lift _ (coyoneda.obj (op G) ⋙ sigmaConst.obj G)
+        (fun _ ↦ ObjectProperty.flat_coproduct _ (fun _ ↦ hG'))
+     π := (sigmaConstAdj G).counit
+     epi_π_app X := (isSeparator_iff_epi G).1 hG X }⟩
+
+omit [BraidedCategory A] [MonoidalClosed A] in
+/-- Functorial flat resolutions give a flat separator: resolve an arbitrary separator, and
+use that anything mapping epimorphically onto a separator is a separator. -/
+theorem exists_flat_separator_of_hasFunctorialFlatResolution
+    [h : HasFunctorialFlatResolution A] :
+    ∃ G : A, IsSeparator G ∧ ObjectProperty.flat G := by
+  obtain ⟨Λ⟩ := h
+  refine ⟨(Λ.F.obj (separator A)).obj, ?_, (Λ.F.obj (separator A)).property⟩
+  rw [isSeparator_def]
+  intro X Y f g hfg
+  refine (isSeparator_separator A).def f g (fun k ↦ ?_)
+  have := hfg (Λ.π.app (separator A) ≫ k)
+  simpa using (cancel_epi (Λ.π.app (separator A))).1 (by simpa using this)
+
+/-- A Grothendieck abelian category with a braided closed monoidal structure
 admits functorial flat resolutions if and only if it has a flat separator; see the module
 docstring. -/
 theorem hasFunctorialFlatResolution_iff_exists_flat_separator :
-    Abelian.HasFunctorialFlatResolution A ↔
-      ∃ G : A, IsSeparator G ∧ ObjectProperty.flat G := by
-  sorry
+    HasFunctorialFlatResolution A ↔ ∃ G : A, IsSeparator G ∧ ObjectProperty.flat G :=
+  ⟨fun _ ↦ exists_flat_separator_of_hasFunctorialFlatResolution A,
+    fun ⟨_, hG, hG'⟩ ↦ hasFunctorialFlatResolution_of_flat_separator A hG hG'⟩
 
 end CategoryTheory.Abelian
 
