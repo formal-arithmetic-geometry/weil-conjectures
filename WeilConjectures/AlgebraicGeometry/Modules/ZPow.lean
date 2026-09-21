@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
+public import WeilConjectures.Mathlib.Data.Fintype.BigOperators
 
 /-!
 # Twisting a sheaf of modules by integer tensor powers of invertible sheaves
@@ -50,6 +51,8 @@ which is the other thing Snapper's induction needs: this is
 - `AlgebraicGeometry.Scheme.Modules.invertible_zpowProd`: the twisting factor is invertible, and
   `AlgebraicGeometry.Scheme.Pic.mk_zpowProd`: its class in the Picard group is
   `∏ j, Pic.mk (L j) (hL j) ^ m j`.
+- `AlgebraicGeometry.Scheme.Pic.zpowProdHom`: that class, bundled as an additive map from the
+  exponent vectors to the Picard group written additively.
 - `AlgebraicGeometry.Scheme.Pic.mk_zpowProd_add_single` and
   `AlgebraicGeometry.Scheme.Pic.mk_zpowProd_append`: the two comparisons Snapper's proof makes,
   bumping one exponent and concatenating two families.
@@ -116,6 +119,22 @@ theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd :
     rw [Fin.prod_univ_castSucc, ← ih, ← Pic.mk_zpow]
     exact Pic.mk_tensorObj
 
+/-- **The class of the twisting factor in the Picard group of `X`, as an additive function of the
+exponent vector.** Its value at `m` is the class of
+`AlgebraicGeometry.Scheme.Modules.zpowProd L hL m`, by
+`AlgebraicGeometry.Scheme.Pic.mk_zpowProd`. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.Pic.zpowProdHom (L : Fin r → X.Modules)
+    (hL : ∀ j, (L j).Invertible) : (Fin r → ℤ) →+ Additive X.Pic :=
+  AddMonoidHom.mk' (fun m ↦ Additive.ofMul (∏ j, Pic.mk (L j) (hL j) ^ m j)) fun m m' ↦ by
+    simp only [Pi.add_apply, zpow_add]
+    rw [Finset.prod_mul_distrib]
+    rfl
+
+@[simp]
+theorem _root_.AlgebraicGeometry.Scheme.Pic.zpowProdHom_apply (L : Fin r → X.Modules)
+    (hL : ∀ j, (L j).Invertible) (m : Fin r → ℤ) :
+    Pic.zpowProdHom L hL m = Additive.ofMul (∏ j, Pic.mk (L j) (hL j) ^ m j) := rfl
+
 /-- **Bumping one exponent of the twisting factor** multiplies its class in the Picard group by
 the class of the corresponding line bundle. -/
 theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_add_single (L : Fin r → X.Modules)
@@ -124,40 +143,9 @@ theorem _root_.AlgebraicGeometry.Scheme.Pic.mk_zpowProd_add_single (L : Fin r �
       Pic.mk (L j) (hL j) * Pic.mk (zpowProd L hL m) (invertible_zpowProd L hL m) := by
   have hsingle : ∏ i, Pic.mk (L i) (hL i) ^ (Pi.single j 1 : Fin r → ℤ) i =
       Pic.mk (L j) (hL j) := by
-    rw [Finset.prod_eq_single j (fun b _ hb ↦ by rw [Pi.single_eq_of_ne hb, zpow_zero])
-      (fun hb ↦ absurd (Finset.mem_univ _) hb), Pi.single_eq_same, zpow_one]
+    rw [Fintype.prod_zpow_pi_single, zpow_one]
   rw [Pic.mk_zpowProd, Pic.mk_zpowProd, ← hsingle, ← Finset.prod_mul_distrib]
   exact Finset.prod_congr rfl fun i _ ↦ by rw [Pi.add_apply, zpow_add, mul_comm]
-
-/-- Prepending an invertible sheaf of modules to a family of invertible sheaves of modules gives
-a family of invertible sheaves of modules. -/
-theorem invertible_cons {M : X.Modules} (hM : M.Invertible) {L : Fin r → X.Modules}
-    (hL : ∀ i, (L i).Invertible) (i : Fin (r + 1)) :
-    ((Fin.cons M L : Fin (r + 1) → X.Modules) i).Invertible := by
-  induction i using Fin.cases with
-  | zero => rw [Fin.cons_zero]; exact hM
-  | succ i => rw [Fin.cons_succ]; exact hL i
-
-/-- Replacing one member of a family of invertible sheaves of modules by an invertible sheaf of
-modules gives a family of invertible sheaves of modules. -/
-theorem invertible_update {L : Fin r → X.Modules} (hL : ∀ i, (L i).Invertible) {j : Fin r}
-    {M : X.Modules} (hM : M.Invertible) (i : Fin r) : (Function.update L j M i).Invertible := by
-  rcases eq_or_ne i j with rfl | h
-  · rw [Function.update_self]; exact hM
-  · rw [Function.update_of_ne h]; exact hL i
-
-/-- The concatenation of two families of invertible sheaves of modules is a family of invertible
-sheaves of modules. -/
-theorem invertible_append {r' : ℕ} {M : Fin r → X.Modules} {N : Fin r' → X.Modules}
-    (hM : ∀ i, (M i).Invertible) (hN : ∀ i, (N i).Invertible) (j : Fin (r + r')) :
-    (Fin.append M N j).Invertible := by
-  induction j using Fin.addCases with
-  | left i =>
-    rw [Fin.append_left]
-    exact hM i
-  | right i =>
-    rw [Fin.append_right]
-    exact hN i
 
 /-- **Concatenating two families of line bundles and their exponent vectors** multiplies the
 classes of the two twisting factors in the Picard group. -/
