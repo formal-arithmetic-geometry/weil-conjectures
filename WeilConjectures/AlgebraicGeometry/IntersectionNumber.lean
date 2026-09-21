@@ -26,12 +26,13 @@ properties.
 
 ## Main results
 
-* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_zero` and
-  `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_of_supportDim_le`:
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_zero`:
   **`lem:deg-intersection-is-top-difference`**, the intersection number is the value at `0` of the
   composite `Δ₁ ⋯ Δ_d` of the `d` standard difference operators applied to the Snapper function
-  `m ↦ χ(X, F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_d ^⊗ m_d)`, and — once `dim F ≤ d`, so that Snapper's theorem
-  makes that composite constant — the value at *any* `m`.
+  `m ↦ χ(X, F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_d ^⊗ m_d)`.
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_of_supportDim_le`:
+  **`lem:deg-intersection-top-difference-constant`**, that composite is constant once
+  `dim F ≤ d`, by Snapper's theorem, so the intersection number is its value at *any* `m`.
 * `AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr_perm`, with its two special cases
   `AlgebraicGeometry.Scheme.Modules.intersectionNumber_congr` and
   `AlgebraicGeometry.Scheme.Modules.intersectionNumber_comp_perm`:
@@ -43,8 +44,9 @@ properties.
 * `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_zero_of_supportDim_lt`:
   **`lem:deg-intersection-small-support`**, the intersection number vanishes when the support of
   `F` has dimension less than `d`.
-* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_of_prod_zpow_eq`: the last
-  part of **`lem:deg-intersection-is-top-difference`**, that the intersection numbers of all the
+* `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_of_prod_zpow_eq`: the
+  second formula of **`lem:deg-intersection-is-top-difference`**, that the intersection numbers of
+  all the
   monomials `⨂ᵢ Kᵢ ^⊗ v j i` in a fixed family of line bundles `K₁, …, K_s` are read off one and
   the same Snapper function, that of `K`. This is the engine of the multilinearity results below;
   it generalises `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_zero`.
@@ -54,8 +56,7 @@ properties.
   **`thm:deg-intersection-multilinear`** and **`lem:deg-intersection-structure-sheaf`**, the
   intersection number is additive in a line bundle, vanishes when a line bundle is the structure
   sheaf, and is multiplied by `n` when a line bundle is replaced by its `n`-th tensor power, for
-  every integer `n`. The three statements are proved
-  for the first line bundle and then transported to an arbitrary slot by symmetry, in
+  every integer `n`, with the same three statements in an arbitrary slot in
   `AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_tensorObj`,
   `AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_tensorUnit` and
   `AlgebraicGeometry.Scheme.Modules.intersectionNumber_update_zpow`. Their reading as saying that
@@ -68,9 +69,10 @@ properties.
 
 ## Implementation notes
 
-The definition, the unconditional half of `lem:deg-intersection-is-top-difference` and symmetry
-are stated with no hypothesis on `X`, on `F` or on the `Lⱼ` beyond invertibility: they are pure
-difference calculus and bookkeeping in the Picard group. The results in the `Snapper` section
+The definition, `lem:deg-intersection-is-top-difference`, symmetry and
+`lem:deg-intersection-structure-sheaf` are stated with no hypothesis on `X`, on `F` or on the
+`Lⱼ` beyond invertibility: they are pure difference calculus and bookkeeping in the Picard
+group. The results in the `Snapper` section
 below consume Snapper's theorem, so they carry its hypotheses — `X` proper over `k` with an ample
 invertible sheaf `A`, and `k` infinite, in place of the blueprint's "projective over an
 algebraically closed field" — and they inherit the deferrals listed in the `TODO` of
@@ -78,10 +80,10 @@ algebraically closed field" — and they inherit the deferrals listed in the `TO
 
 ## TODO
 
-The last sentence of `lem:deg-intersection-is-top-difference` — that `(L₁ ⋯ L_d · F)` is the
-coefficient of the monomial `T₁ ⋯ T_d` in the polynomial representing the Snapper function — is
-not formalised here. It needs the interaction of `fwdDiffComp` with `MvPolynomial` coefficients,
-which is a piece of polynomial algebra of its own.
+`lem:deg-intersection-top-coefficient` — that `(L₁ ⋯ L_d · F)` is the coefficient of the
+monomial `T₁ ⋯ T_d` in the polynomial representing the Snapper function — is not formalised
+here. It needs the interaction of `fwdDiffComp` with `MvPolynomial` coefficients, which is a
+piece of polynomial algebra of its own.
 
 Multilinearity is stated in terms of the sheaves themselves, not of their classes in the Picard
 group: there is no `d`-linear map `(Fin d → X.Pic) → ℤ` here, so the last sentence of
@@ -143,8 +145,8 @@ lemma intersectionNumber_fin_zero (F : X.Modules) (L : Fin 0 → X.Modules)
 evaluated at `0`: applying the `d` standard difference operators `Δ₁, …, Δ_d` to
 `m ↦ χ(X, F ⊗ L₁ ^⊗ m₁ ⊗ ⋯ ⊗ L_d ^⊗ m_d)` and evaluating at `0` gives `(L₁ ⋯ L_d · F)`.
 
-This half of `lem:deg-intersection-is-top-difference` needs no hypothesis on `X`, `F` or the
-`Lⱼ`. -/
+This first half of `lem:deg-intersection-is-top-difference` needs no hypothesis on `X`, `F` or
+the `Lⱼ`. -/
 theorem intersectionNumber_eq_fwdDiffComp_zero (F : X.Modules) {d : ℕ} (L : Fin d → X.Modules)
     (hL : ∀ j, (L j).Invertible) :
     intersectionNumber k F L hL =
@@ -240,7 +242,7 @@ variable [Infinite k] [IsProper (X ↘ Spec (.of k))]
 /-- **The top iterated forward difference of the Snapper function is constant** once
 `dim F ≤ d`, so `(L₁ ⋯ L_d · F)` is its value at *any* `m`, not only at `0`.
 
-This is the second half of `lem:deg-intersection-is-top-difference` of the blueprint; it consumes
+This is `lem:deg-intersection-top-difference-constant` of the blueprint; it consumes
 Snapper's theorem, so it carries its hypotheses: `X` is proper over the infinite field `k` and
 carries an ample invertible sheaf `A`. -/
 theorem intersectionNumber_eq_fwdDiffComp_of_supportDim_le {A : X.Modules} (hA : A.Invertible)
@@ -284,7 +286,7 @@ an integer matrix such that `⨂ᵢ Kᵢ ^⊗ v j i` has the class of `Lⱼ` in 
 every `j`. Then `(L₁ ⋯ L_r · F)` is the composite of the `r` difference operators in the
 directions `v 1, …, v r` applied to the Snapper function of `K`, evaluated at `0`.
 
-This is the last part of `lem:deg-intersection-is-top-difference` of the blueprint — the
+This is the second formula of `lem:deg-intersection-is-top-difference` of the blueprint — the
 statement, Kleiman §1, that all the intersection numbers of monomials in a fixed family of line
 bundles are read off one and the same Snapper function. It generalises
 `AlgebraicGeometry.Scheme.Modules.intersectionNumber_eq_fwdDiffComp_zero`, which is the case
@@ -309,8 +311,7 @@ theorem intersectionNumber_eq_fwdDiffComp_of_prod_zpow_eq (F : X.Modules) {r s :
     funext m
     refine eulerChar_tensorZPow_congr F hK hL (Additive.ofMul.injective ?_)
     rw [← Pic.zpowProdHom_apply, ofMul_prod]
-    simp only [φ, AddHom.coe_mk]
-    rw [map_sum]
+    simp only [φ, AddHom.coe_mk, map_sum]
     refine Finset.sum_congr rfl fun j _ ↦ ?_
     rw [map_zsmul (Pic.zpowProdHom K hK), Pic.zpowProdHom_apply, hv j, ← ofMul_zpow]
   -- and difference operators transport along a substitution, by `fwdDiffComp_comp_addHom`
@@ -329,23 +330,23 @@ This is `lem:deg-intersection-structure-sheaf` of the blueprint, part (2) of
 theorem intersectionNumber_cons_tensorUnit (F : X.Modules) {r : ℕ} (L : Fin r → X.Modules)
     (hL : ∀ j, (L j).Invertible) :
     intersectionNumber k F (Fin.cons (𝟙_ X.Modules) L)
-        (invertible_cons (SheafOfModules.invertible_tensorUnit X.sheaf) hL) = 0 := by
-  have hK : ∀ i, ((Fin.cons (𝟙_ X.Modules) L : Fin (r + 1) → X.Modules) i).Invertible :=
-    invertible_cons (SheafOfModules.invertible_tensorUnit X.sheaf) hL
-  have h0 : Pic.mk ((Fin.cons (𝟙_ X.Modules) L : Fin (r + 1) → X.Modules) 0) (hK 0) = 1 := by
-    simp
-  -- the Snapper function of `(𝒪ₓ, L₁, …, L_r)` does not depend on its first variable, the first
-  -- factor having trivial class in the Picard group
-  have hΔ : Δ_[(Pi.single (0 : Fin (r + 1)) 1 : Fin (r + 1) → ℤ)]
-      (fun m ↦ eulerChar k (tensorZPow F (Fin.cons (𝟙_ X.Modules) L) hK m)) = 0 := by
-    funext m
-    rw [fwdDiff_apply, Pi.zero_apply, sub_eq_zero]
-    refine eulerChar_tensorZPow_congr F hK hK ?_
-    simp only [Pi.add_apply, zpow_add]
-    rw [Finset.prod_mul_distrib, Fintype.prod_zpow_pi_single, zpow_one, h0, mul_one]
-  -- so the first of the `r + 1` difference operators already annihilates it
-  rw [intersectionNumber_eq_fwdDiffComp_zero k F _ hK, fwdDiffComp_succ']
-  simp [hΔ]
+        (invertible_cons (invertible_tensorUnit X.sheaf) hL) = 0 := by
+  -- `(𝒪ₓ, L₁, …, L_r)` is presented inside the Snapper function of `(L₁, …, L_r)` by the
+  -- exponent matrix whose first row is `0` — the structure sheaf is the empty monomial — and
+  -- whose remaining rows are the standard directions
+  set v : Fin (r + 1) → (Fin r → ℤ) := Fin.cons 0 fun i ↦ Pi.single i 1 with hvdef
+  have hv : ∀ j : Fin (r + 1), ∏ i, Pic.mk (L i) (hL i) ^ v j i =
+      Pic.mk ((Fin.cons (𝟙_ X.Modules) L : Fin (r + 1) → X.Modules) j)
+        (invertible_cons (invertible_tensorUnit X.sheaf) hL j) := by
+    intro j
+    rw [hvdef]
+    induction j using Fin.cases with
+    | zero => simp
+    | succ i => simpa using (Fintype.prod_zpow_pi_single _ i 1).trans (zpow_one _)
+  -- differencing in the zero direction annihilates the Snapper function
+  rw [intersectionNumber_eq_fwdDiffComp_of_prod_zpow_eq k F _ _ L hL v hv, fwdDiffComp_succ,
+    hvdef]
+  simp
 
 /-! ### Moving a slot to the front -/
 
@@ -373,9 +374,9 @@ this being `lem:deg-intersection-structure-sheaf` of the blueprint in an arbitra
 theorem intersectionNumber_update_tensorUnit (F : X.Modules) {d : ℕ} (L : Fin d → X.Modules)
     (hL : ∀ i, (L i).Invertible) (j : Fin d) :
     intersectionNumber k F (Function.update L j (𝟙_ X.Modules))
-      (invertible_update hL (SheafOfModules.invertible_tensorUnit X.sheaf)) = 0 := by
+      (invertible_update hL (invertible_tensorUnit X.sheaf)) = 0 := by
   obtain ⟨r, rfl⟩ : ∃ r, d = r + 1 := ⟨d - 1, (Nat.succ_pred_eq_of_pos j.pos).symm⟩
-  have hu : (𝟙_ X.Modules).Invertible := SheafOfModules.invertible_tensorUnit X.sheaf
+  have hu : (𝟙_ X.Modules).Invertible := invertible_tensorUnit X.sheaf
   rw [intersectionNumber_update_eq_cons k F L hL j hu]
   exact intersectionNumber_cons_tensorUnit k F _ fun i ↦ hL (Equiv.swap 0 j i.succ)
 
@@ -391,10 +392,7 @@ variable [Infinite k] [IsProper (X ↘ Spec (.of k))]
 
 for a coherent sheaf `F` with `dim F ≤ r + 1`.
 
-This is part (1) of `thm:deg-intersection-multilinear` of the blueprint. It is additivity of the
-top difference of the Snapper function of `(M, N, L₁, …, L_r)` in its leading direction,
-`IsNumericalPolynomial.fwdDiffComp_cons_add_arg`: summing that direction is what replaces `M` and
-`N` by `M ⊗ N`. -/
+This is part (1) of `thm:deg-intersection-multilinear` of the blueprint. -/
 theorem intersectionNumber_cons_tensorObj {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
     (F : X.Modules) [F.IsCoherent] {r : ℕ} {M N : X.Modules} (hM : M.Invertible)
     (hN : N.Invertible) (L : Fin r → X.Modules) (hL : ∀ j, (L j).Invertible)
@@ -403,7 +401,9 @@ theorem intersectionNumber_cons_tensorObj {A : X.Modules} (hA : A.Invertible) (h
       intersectionNumber k F (Fin.cons M L) (invertible_cons hM hL) +
         intersectionNumber k F (Fin.cons N L) (invertible_cons hN hL) := by
   -- the three intersection numbers are compared inside the Snapper function of the `(r + 2)`-tuple
-  -- `K = (M, N, L₁, …, L_r)`, whose exponent vectors are indexed by `0`, `1` and `2, …, r + 1`
+  -- `K = (M, N, L₁, …, L_r)`, whose exponent vectors are indexed by `0`, `1` and `2, …, r + 1`;
+  -- summing the leading direction is what replaces `M` and `N` by `M ⊗ N`, by additivity of the
+  -- top difference, `IsNumericalPolynomial.fwdDiffComp_cons_add_arg`
   set K : Fin (r + 2) → X.Modules := Fin.cons M (Fin.cons N L) with hKdef
   set a : Fin (r + 2) → ℤ := Pi.single 0 1 with hadef
   set b : Fin (r + 2) → ℤ := Pi.single (0 : Fin (r + 1)).succ 1 with hbdef
@@ -446,7 +446,7 @@ theorem intersectionNumber_cons_tensorObj {A : X.Modules} (hA : A.Invertible) (h
     | succ i =>
       rw [Fin.cons_succ, hT]
       simp
-  have hvMN := hcons (a + b) _ _ hab
+  have hvMN := hcons (a + b) (M ⊗ N) (hM.tensorObj hN) hab
   have hvM := hcons a M hM ha
   have hvN := hcons b N hN hb
   rw [intersectionNumber_eq_fwdDiffComp_of_prod_zpow_eq k F _ _ K hK _ hvMN,
@@ -455,54 +455,6 @@ theorem intersectionNumber_cons_tensorObj {A : X.Modules} (hA : A.Invertible) (h
     (isNumericalPolynomial_eulerChar_tensorZPow k hA hAa F K hK (r + 1)
       hd).fwdDiffComp_cons_add_arg]
   simp
-
-/-- **The intersection number is homogeneous of degree one in the first line bundle**:
-
-`(M ^⊗ n · L₁ ⋯ L_r · F) = n · (M · L₁ ⋯ L_r · F)`
-
-for a coherent sheaf `F` with `dim F ≤ r + 1` and **every** integer `n`, negative included.
-
-This is part (3) of `thm:deg-intersection-multilinear` of the blueprint. It is homogeneity of the
-top difference of the Snapper function of `(M, L₁, …, L_r)` in its leading direction,
-`IsNumericalPolynomial.fwdDiffComp_cons_zsmul_arg`: scaling that direction by `n` is what replaces
-`M` by `M ^⊗ n`. -/
-theorem intersectionNumber_cons_zpow {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
-    (F : X.Modules) [F.IsCoherent] {r : ℕ} {M : X.Modules} (hM : M.Invertible)
-    (L : Fin r → X.Modules) (hL : ∀ j, (L j).Invertible)
-    (hd : F.supportDim ≤ ((r + 1 : ℕ) : WithBot ℕ∞)) (n : ℤ) :
-    intersectionNumber k F (Fin.cons (hM.zpow n) L)
-        (invertible_cons (SheafOfModules.invertible_zpow hM n) hL) =
-      n * intersectionNumber k F (Fin.cons M L) (invertible_cons hM hL) := by
-  -- the exponent matrix with rows `n • e₀, e₁, …, e_r` presents `(M ^⊗ n, L₁, …, L_r)` inside the
-  -- Snapper function of `(M, L₁, …, L_r)`
-  have hv : ∀ j : Fin (r + 1),
-      ∏ i, Pic.mk ((Fin.cons M L : Fin (r + 1) → X.Modules) i) (invertible_cons hM hL i) ^
-          ((Fin.cons (n • (Pi.single 0 1 : Fin (r + 1) → ℤ))
-            fun i : Fin r ↦ (Pi.single i.succ 1 : Fin (r + 1) → ℤ)) :
-              Fin (r + 1) → Fin (r + 1) → ℤ) j i =
-        Pic.mk ((Fin.cons (hM.zpow n) L : Fin (r + 1) → X.Modules) j)
-          (invertible_cons (SheafOfModules.invertible_zpow hM n) hL j) := by
-    intro j
-    induction j using Fin.cases with
-    | zero =>
-      rw [Fin.cons_zero, ← Pi.single_smul', smul_eq_mul, mul_one, Fintype.prod_zpow_pi_single]
-      simp
-    | succ i =>
-      rw [Fin.cons_succ, Fintype.prod_zpow_pi_single]
-      simp
-  -- undoing the scaling gives back the standard directions `e₀, …, e_r`
-  have hstd : ((Fin.cons (Pi.single (0 : Fin (r + 1)) (1 : ℤ))
-      fun i : Fin r ↦ (Pi.single i.succ 1 : Fin (r + 1) → ℤ)) :
-        Fin (r + 1) → Fin (r + 1) → ℤ) = fun j ↦ Pi.single j 1 := by
-    funext j
-    induction j using Fin.cases with
-    | zero => rw [Fin.cons_zero]
-    | succ i => rw [Fin.cons_succ]
-  rw [intersectionNumber_eq_fwdDiffComp_of_prod_zpow_eq k F _ _ (Fin.cons M L)
-      (invertible_cons hM hL) _ hv,
-    (isNumericalPolynomial_eulerChar_tensorZPow k hA hAa F (Fin.cons M L) (invertible_cons hM hL)
-      (r + 1) hd).fwdDiffComp_cons_zsmul_arg,
-    hstd, Pi.smul_apply, smul_eq_mul, ← intersectionNumber_eq_fwdDiffComp_zero]
 
 /-- **The intersection number is additive in each of the line bundles**, this being part (1) of
 `thm:deg-intersection-multilinear` of the blueprint in an arbitrary slot. -/
@@ -520,21 +472,6 @@ theorem intersectionNumber_update_tensorObj {A : X.Modules} (hA : A.Invertible) 
   exact intersectionNumber_cons_tensorObj k hA hAa F hM hN _
     (fun i ↦ hL (Equiv.swap 0 j i.succ)) hd
 
-/-- **Replacing one of the line bundles by the `n`-th tensor power of a line bundle `M`
-multiplies the intersection number by `n`**, this being part (3) of
-`thm:deg-intersection-multilinear` of the blueprint in an arbitrary slot. -/
-theorem intersectionNumber_update_zpow {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
-    (F : X.Modules) [F.IsCoherent] {d : ℕ} (L : Fin d → X.Modules)
-    (hL : ∀ i, (L i).Invertible) (j : Fin d) {M : X.Modules} (hM : M.Invertible)
-    (hd : F.supportDim ≤ (d : WithBot ℕ∞)) (n : ℤ) :
-    intersectionNumber k F (Function.update L j (hM.zpow n))
-        (invertible_update hL (SheafOfModules.invertible_zpow hM n)) =
-      n * intersectionNumber k F (Function.update L j M) (invertible_update hL hM) := by
-  obtain ⟨r, rfl⟩ : ∃ r, d = r + 1 := ⟨d - 1, (Nat.succ_pred_eq_of_pos j.pos).symm⟩
-  rw [intersectionNumber_update_eq_cons k F L hL j (SheafOfModules.invertible_zpow hM n),
-    intersectionNumber_update_eq_cons k F L hL j hM,
-    intersectionNumber_cons_zpow k hA hAa F hM _ (fun i ↦ hL (Equiv.swap 0 j i.succ)) hd n]
-
 /-- **Homogeneity of the intersection number in every slot at once**:
 
 `(L₁ ^⊗ n₁ ⋯ L_g ^⊗ n_g · F) = n₁ ⋯ n_g · (L₁ ⋯ L_g · F)`
@@ -542,19 +479,20 @@ theorem intersectionNumber_update_zpow {A : X.Modules} (hA : A.Invertible) (hAa 
 for a coherent sheaf `F` with `dim F ≤ g` and every family `n : Fin g → ℤ` of integer exponents,
 negative ones included.
 
-This is `cor:deg-intersection-powers` of the blueprint. It is homogeneity of the top difference of
-the Snapper function of `L` in all `g` directions at once,
-`IsNumericalPolynomial.fwdDiffComp_zsmul_arg`: scaling the `j`-th standard direction by `n j` is
-what replaces `L j` by `L j ^⊗ n j`, so no slot ever has to be moved into position. -/
+This is `cor:deg-intersection-powers` of the blueprint, and part (3) of
+`thm:deg-intersection-multilinear` follows from it. -/
 theorem intersectionNumber_zpow {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
     (F : X.Modules) [F.IsCoherent] {g : ℕ} (L : Fin g → X.Modules) (hL : ∀ i, (L i).Invertible)
     (hd : F.supportDim ≤ (g : WithBot ℕ∞)) (n : Fin g → ℤ) :
     intersectionNumber k F (fun i ↦ (hL i).zpow (n i))
-        (fun i ↦ SheafOfModules.invertible_zpow (hL i) (n i)) =
+        (fun i ↦ invertible_zpow (hL i) (n i)) =
       (∏ i, n i) * intersectionNumber k F L hL := by
-  -- the exponent vector `n j • eⱼ = Pi.single j (n j)` presents `L j ^⊗ n j`
+  -- the exponent vector `n j • eⱼ = Pi.single j (n j)` presents `L j ^⊗ n j`, so scaling the `g`
+  -- standard directions is what raises the `L j` to their powers; the factor `n₁ ⋯ n_g` then
+  -- comes out by homogeneity of the top difference in all its directions at once,
+  -- `IsNumericalPolynomial.fwdDiffComp_zsmul_arg`
   have hv : ∀ j, ∏ i, Pic.mk (L i) (hL i) ^ (n j • (Pi.single j 1 : Fin g → ℤ)) i =
-      Pic.mk ((hL j).zpow (n j)) (SheafOfModules.invertible_zpow (hL j) (n j)) := fun j ↦ by
+      Pic.mk ((hL j).zpow (n j)) (invertible_zpow (hL j) (n j)) := fun j ↦ by
     rw [← Pi.single_smul', smul_eq_mul, mul_one, Fintype.prod_zpow_pi_single, Pic.mk_zpow]
   rw [intersectionNumber_eq_fwdDiffComp_of_prod_zpow_eq k F _ _ L hL _ hv,
     (isNumericalPolynomial_eulerChar_tensorZPow k hA hAa F L hL g hd).fwdDiffComp_zsmul_arg,
@@ -570,10 +508,53 @@ constant case of `AlgebraicGeometry.Scheme.Modules.intersectionNumber_zpow`. -/
 theorem intersectionNumber_const_zpow {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
     (F : X.Modules) [F.IsCoherent] {g : ℕ} {L : X.Modules} (hL : L.Invertible)
     (hd : F.supportDim ≤ (g : WithBot ℕ∞)) (n : ℤ) :
-    intersectionNumber k F (fun _ : Fin g ↦ hL.zpow n)
-        (fun _ ↦ SheafOfModules.invertible_zpow hL n) =
+    intersectionNumber k F (fun _ : Fin g ↦ hL.zpow n) (fun _ ↦ invertible_zpow hL n) =
       n ^ g * intersectionNumber k F (fun _ : Fin g ↦ L) fun _ ↦ hL := by
   simpa using intersectionNumber_zpow k hA hAa F (fun _ : Fin g ↦ L) (fun _ ↦ hL) hd fun _ ↦ n
+
+/-- **The intersection number is homogeneous of degree one in the first line bundle**:
+
+`(M ^⊗ n · L₁ ⋯ L_r · F) = n · (M · L₁ ⋯ L_r · F)`
+
+for a coherent sheaf `F` with `dim F ≤ r + 1` and **every** integer `n`, negative included.
+
+This is part (3) of `thm:deg-intersection-multilinear` of the blueprint. -/
+theorem intersectionNumber_cons_zpow {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
+    (F : X.Modules) [F.IsCoherent] {r : ℕ} {M : X.Modules} (hM : M.Invertible)
+    (L : Fin r → X.Modules) (hL : ∀ j, (L j).Invertible)
+    (hd : F.supportDim ≤ ((r + 1 : ℕ) : WithBot ℕ∞)) (n : ℤ) :
+    intersectionNumber k F (Fin.cons (hM.zpow n) L) (invertible_cons (invertible_zpow hM n) hL) =
+      n * intersectionNumber k F (Fin.cons M L) (invertible_cons hM hL) := by
+  -- the exponent family `(n, 1, …, 1)` scales the first slot and leaves the others alone
+  have h := intersectionNumber_zpow k hA hAa F (Fin.cons M L) (invertible_cons hM hL) hd
+    (Fin.cons n fun _ ↦ 1)
+  rw [Fin.prod_cons, Finset.prod_const_one, mul_one] at h
+  rw [← h]
+  refine intersectionNumber_congr k F _ _ fun j ↦ ?_
+  induction j using Fin.cases with
+  | zero => simp [Pic.mk_zpow]
+  | succ i => simp [Pic.mk_zpow]
+
+/-- **Replacing one of the line bundles by the `n`-th tensor power of a line bundle `M`
+multiplies the intersection number by `n`**, this being part (3) of
+`thm:deg-intersection-multilinear` of the blueprint in an arbitrary slot. -/
+theorem intersectionNumber_update_zpow {A : X.Modules} (hA : A.Invertible) (hAa : A.IsAmple)
+    (F : X.Modules) [F.IsCoherent] {d : ℕ} (L : Fin d → X.Modules)
+    (hL : ∀ i, (L i).Invertible) (j : Fin d) {M : X.Modules} (hM : M.Invertible)
+    (hd : F.supportDim ≤ (d : WithBot ℕ∞)) (n : ℤ) :
+    intersectionNumber k F (Function.update L j (hM.zpow n))
+        (invertible_update hL (invertible_zpow hM n)) =
+      n * intersectionNumber k F (Function.update L j M) (invertible_update hL hM) := by
+  -- the exponent family concentrated at `j` scales that slot only, so no slot has to be moved
+  -- into position
+  have h := intersectionNumber_zpow k hA hAa F (Function.update L j M) (invertible_update hL hM)
+    hd (Function.update (fun _ ↦ (1 : ℤ)) j n)
+  rw [Finset.prod_update_of_mem (Finset.mem_univ j), Finset.prod_const_one, mul_one] at h
+  rw [← h]
+  refine intersectionNumber_congr k F _ _ fun i ↦ ?_
+  rcases eq_or_ne i j with rfl | hne
+  · simp [Pic.mk_zpow]
+  · simp [Function.update_of_ne hne, Pic.mk_zpow]
 
 end Multilinear
 

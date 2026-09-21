@@ -171,9 +171,9 @@ theorem invertible_cons {r : ℕ} (hM : M.Invertible)
 
 /-- Replacing one member of a family of invertible sheaves of modules by an invertible sheaf of
 modules gives a family of invertible sheaves of modules. -/
-theorem invertible_update {r : ℕ}
-    {L : Fin r → SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
-    (hL : ∀ i, (L i).Invertible) {j : Fin r} (hM : M.Invertible) (i : Fin r) :
+theorem invertible_update {ι : Type*} [DecidableEq ι]
+    {L : ι → SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)}
+    (hL : ∀ i, (L i).Invertible) {j : ι} (hM : M.Invertible) (i : ι) :
     (Function.update L j M i).Invertible :=
   (Function.forall_update_iff L fun _ N ↦ N.Invertible).2 ⟨hM, fun i _ ↦ hL i⟩ i
 

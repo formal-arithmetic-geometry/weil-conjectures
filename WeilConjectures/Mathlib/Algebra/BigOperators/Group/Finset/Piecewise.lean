@@ -34,10 +34,8 @@ factor. -/
 the `j`-th summand. -/]
 theorem prod_zpow_pi_single [DivisionCommMonoid G] (f : ι → G) (j : ι) (n : ℤ) :
     ∏ i, f i ^ (Pi.single j n : ι → ℤ) i = f j ^ n := by
-  rw [← prod_pi_mulSingle' j (f j ^ n)]
-  refine Finset.prod_congr rfl fun i _ ↦ ?_
-  rcases eq_or_ne i j with rfl | h
-  · rw [Pi.single_eq_same, Pi.mulSingle_eq_same]
-  · rw [Pi.single_eq_of_ne h, zpow_zero, Pi.mulSingle_eq_of_ne h]
+  rw [Finset.prod_eq_single_of_mem j (Finset.mem_univ j)
+      fun i _ hi ↦ by rw [Pi.single_eq_of_ne hi, zpow_zero],
+    Pi.single_eq_same]
 
 end Fintype
