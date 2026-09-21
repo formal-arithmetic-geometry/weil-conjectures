@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.ThickeningFree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.RingTheory.Flat.EquationalCriterion
 
 /-!
@@ -96,7 +97,7 @@ theorem isIso_pushforwardFreeToThickeningIdeal [Flat f] {ι : Type u} [Fintype �
     rw [hm j, germ_infinitesimalRingToΓ]
   refine IdealSheafData.isIso_pushforwardFreeDesc _ _ m (fun x c hc j ↦ ?_) fun x ↦ ?_
   · -- the relations between the `m j` on the stalk have coefficients in `𝔪_B S`
-    have _ := flat_infinitesimalRingToStalk f t (n + 1) x
+    have := flat_infinitesimalRingToStalk f t (n + 1) x
     algebraize [(infinitesimalRingToStalk f t (n + 1) x).hom]
     rw [stalkIdeal_ker_infinitesimalBaseChangeMapZero]
     exact Module.Flat.mem_ideal_map_of_sum_mul_eq_zero hind

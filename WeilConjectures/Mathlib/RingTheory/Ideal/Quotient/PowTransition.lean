@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import Mathlib.RingTheory.LocalRing.Quotient
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Noetherian.Basic
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 
 /-!
 # Quotients of a local ring by the powers of its maximal ideal
@@ -24,6 +25,8 @@ scheme are built from.
   the kernel of `R ⧸ I ^ (n + 1) → R ⧸ I ^ n`, is a square-zero ideal annihilated by `I`.
 - `IsLocalRing.isLocalRing_quotient_maximalIdeal_pow`: `R ⧸ 𝔪 ^ (n + 1)` is again local, and
   `IsLocalRing.residueFieldQuotientMaximalIdealPow` identifies its residue field with that of `R`.
+- `IsLocalRing.pow_maximalIdeal_quotient_maximalIdeal_pow`: the maximal ideal of `R ⧸ 𝔪 ^ (n + 1)`
+  is nilpotent, so `R ⧸ 𝔪 ^ (n + 1)` has Krull dimension at most `0`.
 - `Module.Finite.quotient_pow`: if `R` is a noetherian `k`-algebra with `R = k + I`, then
   `R ⧸ I ^ n` is a finite-dimensional `k`-vector space.
 -/
@@ -83,6 +86,17 @@ theorem map_maximalIdeal_quotient_pow (n : ℕ) :
     (maximalIdeal R).map (Ideal.Quotient.mk (maximalIdeal R ^ (n + 1))) =
       maximalIdeal (R ⧸ maximalIdeal R ^ (n + 1)) :=
   map_maximalIdeal_of_surjective _ Ideal.Quotient.mk_surjective
+
+/-- The maximal ideal of `R ⧸ 𝔪 ^ (n + 1)` is nilpotent: its `(n + 1)`-st power vanishes. -/
+theorem pow_maximalIdeal_quotient_maximalIdeal_pow (n : ℕ) :
+    maximalIdeal (R ⧸ maximalIdeal R ^ (n + 1)) ^ (n + 1) = ⊥ := by
+  rw [← map_maximalIdeal_quotient_pow, ← Ideal.map_pow, Ideal.map_eq_bot_iff_le_ker, Ideal.mk_ker]
+
+instance krullDimLE_quotient_maximalIdeal_pow (n : ℕ) :
+    Ring.KrullDimLE 0 (R ⧸ maximalIdeal R ^ (n + 1)) :=
+  .of_maximalIdeal_le_nilradical fun a ha ↦ mem_nilradical.mpr ⟨n + 1, by
+    simpa [pow_maximalIdeal_quotient_maximalIdeal_pow (R := R) n]
+      using Ideal.pow_mem_pow ha (n + 1)⟩
 
 /-- The residue field of `R ⧸ 𝔪 ^ (n + 1)` is the residue field of `R`. -/
 noncomputable def residueFieldQuotientMaximalIdealPow (n : ℕ) :
