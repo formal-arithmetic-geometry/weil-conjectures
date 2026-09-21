@@ -47,6 +47,11 @@ where now `a / f` does lie in `𝒪_{Proj 𝒜, x}`. The two non-vanishing crite
 graded ring no element of `𝒜 j` need avoid a given `x`, whereas
 `Proj.isUnit_homogeneousSection_apply_iff` is unconditional.
 
+The scheme-theoretic form of non-vanishing — the germ of the section at `x` in the sense of
+`AlgebraicGeometry.Scheme.Modules.VanishesAt`, which is what the theory of invertible sheaves
+consumes — is deduced from the criteria proved here in
+`WeilConjectures/AlgebraicGeometry/TwistingSheafVanishing.lean`.
+
 ## Main definitions
 
 - `AlgebraicGeometry.Proj.twistingSheaf`: the twisting sheaf `𝒪(d)` on `Proj 𝒜`, for `d : ℤ`.
@@ -67,7 +72,9 @@ graded ring no element of `𝒜 j` need avoid a given `x`, whereas
   `AlgebraicGeometry.Proj.homogeneousSection_apply_mem_maximalIdeal_iff` says that it vanishes
   at `x` if and only if `a` lies in the homogeneous prime ideal of `x`.
 - `AlgebraicGeometry.Proj.homogeneousSection_apply_eq_mul`: near a point `x` avoided by some
-  `f ∈ 𝒜 j`, the section attached to `a` is `a / f` times the local generator attached to `f`.
+  `f ∈ 𝒜 j`, the section attached to `a` is `a / f` times the local generator attached to `f`,
+  and `AlgebraicGeometry.Proj.powCoeff_res_homogeneousSection_apply`: the same computation over
+  an open set, for a generator `f ^ k` of arbitrary degree.
 - `AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.sectionPowEquiv`: **local freeness**, over
   an open set on which a homogeneous element `f` of degree `m` is invertible, the sections of
   `𝒪(m * k)`, `k : ℤ`, form a free module of rank one over the sections of the structure sheaf,
@@ -88,10 +95,13 @@ graded ring no element of `𝒜 j` need avoid a given `x`, whereas
   `AlgebraicGeometry.Scheme.Modules.fiber`: for `a ∈ 𝒜 j`, the image of
   `homogeneousSection ha` under
   `Scheme.Modules.sectionsPullback ((Proj 𝒜).fromSpecResidueField x) (twistingSheaf 𝒜 j)`
-  vanishes if and only if `a ∈ x`. Unlike the pointwise criterion proved here, this form
-  survives pulling `𝒪(j)` back along a morphism, which is what the blueprint consumes; it needs
-  a description of the pullback of `𝒪(j)` along `Spec κ(x) ⟶ Proj 𝒜`, which is not available
-  yet. `Proj.isUnit_homogeneousSection_apply_iff` is the proof ingredient for it.
+  vanishes if and only if `a ∈ x`. The germ form of this statement is
+  `AlgebraicGeometry.Proj.vanishesAt_homogeneousSection_iff` in
+  `WeilConjectures.AlgebraicGeometry.TwistingSheafVanishing`; what is still missing is general
+  and has nothing to do with `Proj`, namely the bridge between the two spellings of vanishing —
+  `Scheme.Modules.VanishesAt` of a section against the vanishing of its image in the fibre — and
+  the compatibility of `Scheme.Modules.VanishesAt` with `Scheme.Modules.sectionsPullback` along
+  an arbitrary morphism of schemes, which is the form the blueprint consumes.
 
 The transfer of `𝒪(d)` to the relative projective space `ℙ(n; S)`, by pulling back along the
 map to the integral model, and its compatibility with base change, are in
@@ -669,6 +679,47 @@ lemma mem_span_res_homogeneousSection {m : ℕ} {f : A} (hf : f ∈ 𝒜 m)
   exact Submodule.mem_span_singleton.2 ⟨powCoeff hf (fun x ↦ hU x.2) k hc t,
     powCoeff_smul_sectionPow hf (fun x ↦ hU x.2) k hc t⟩
 
+/-- **The tautological generator of `𝒪(m * k)` over an open set on which a homogeneous element
+`f` of degree `m` is invertible restricts to the tautological generator over any smaller open
+set.**
+
+```text
+                  res
+  Γ(𝒪(m · k), U) ───────> Γ(𝒪(m · k), V)
+        ∪                        ∪
+      f ^ k        ↦           f ^ k
+```
+-/
+lemma map_sectionPow {m : ℕ} {f : A} (hf : f ∈ 𝒜 m) {U V : (Proj 𝒜).Opens} (hVU : V ≤ U)
+    (hU : U ≤ Proj.basicOpen 𝒜 f) (k : ℤ) {c : ℤ} (hc : c = m * k) :
+    (twistingSheaf 𝒜 c).presheaf.map (homOfLE hVU).op (sectionPow hf (fun x ↦ hU x.2) k hc) =
+      sectionPow hf (fun x ↦ (hVU.trans hU) x.2) k hc :=
+  Subtype.ext (funext fun _ ↦ rfl)
+
+/-- The restriction of the global section of `𝒪(j)` attached to `a ∈ 𝒜 j` to an open subset
+still has value `a / 1` at every point. -/
+@[simp]
+lemma res_homogeneousSection_apply {j : ℕ} {a : A} (ha : a ∈ 𝒜 j) {U : (Proj 𝒜).Opens} (x : U) :
+    ((twistingSheaf 𝒜 j).presheaf.map U.leTop.op (homogeneousSection ha)).1 x =
+      Localization.mk a 1 := rfl
+
+/-- **The coefficient of a homogeneous section with respect to the tautological generator.**
+Over an open subset `U` on which a homogeneous element `f` of degree `m` is invertible, and with
+`j = m * k`, the coefficient of the restriction to `U` of the global section of `𝒪(j)` attached
+to `a ∈ 𝒜 j` with respect to the generator `f ^ k` has value `a / f ^ k` at every point. This is
+`AlgebraicGeometry.Proj.homogeneousSection_apply_eq_mul` for a generator of arbitrary degree. -/
+lemma powCoeff_res_homogeneousSection_apply {m : ℕ} {f : A} (hf : f ∈ 𝒜 m)
+    {U : (Proj 𝒜).Opens} (hU : U ≤ Proj.basicOpen 𝒜 f) {j : ℕ} {a : A} (ha : a ∈ 𝒜 j) (k : ℕ)
+    (hj : j = m * k) (hfk : f ^ k ∈ 𝒜 j) (x : U)
+    (hfx : f ^ k ∉ x.1.asHomogeneousIdeal.toIdeal) :
+    (powCoeff hf (fun y ↦ hU y.2) (k : ℤ) (mod_cast hj)
+        ((twistingSheaf 𝒜 j).presheaf.map U.leTop.op (homogeneousSection ha))).1 x =
+      HomogeneousLocalization.mk ⟨j, ⟨a, ha⟩, ⟨f ^ k, hfk⟩, hfx⟩ := by
+  refine HomogeneousLocalization.val_injective _ ?_
+  rw [val_powCoeff, HomogeneousLocalization.val_mk, powFun_neg_natCast _ k x hfx,
+    res_homogeneousSection_apply]
+  simp [Localization.mk_mul]
+
 /-- Multiplication by a homogeneous element `f` of degree `m` is a morphism of `𝒪`-modules
 `𝒪(d) ⟶ 𝒪(d + m)` on `Proj 𝒜`. -/
 def twistingSheafMul {m : ℕ} {f : A} (hf : f ∈ 𝒜 m) (d : ℤ) :
@@ -762,13 +813,6 @@ theorem homogeneousSection_apply_mem_maximalIdeal_iff :
   rw [homogeneousSection_apply_eq_algebraMap ha x]
   exact IsLocalization.AtPrime.to_map_mem_maximal_iff (atPoint 𝒜 x)
     x.asHomogeneousIdeal.toIdeal a
-
-/-- The non-vanishing locus of the global section of `𝒪(j)` attached to a homogeneous element
-`a` of degree `j` is the basic open set `D₊(a)`. -/
-theorem setOf_isUnit_homogeneousSection_apply :
-    {y : Proj 𝒜 | IsUnit ((homogeneousSection ha).1 ⟨y, trivial⟩)} =
-      (Proj.basicOpen 𝒜 a : Set (Proj 𝒜)) :=
-  Set.ext fun y ↦ isUnit_homogeneousSection_apply_iff ha y
 
 section LocalGenerator
 

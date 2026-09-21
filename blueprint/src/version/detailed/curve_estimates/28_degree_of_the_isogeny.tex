@@ -1126,6 +1126,22 @@ $\eta_Y$, where it is $r$.
 
 \section{Positivity}\label{sec:deg-positivity}
 
+\begin{lemma}[The complement of a hyperplane in $\mathbf P^N$ is affine]
+\label{lem:deg-hyperplane-complement-affine}
+\lean{AlgebraicGeometry.Proj.vanishesAt_homogeneousSection_iff,
+AlgebraicGeometry.Proj.setOf_not_vanishesAt_homogeneousSection}
+\leanok
+Let $A$ be a graded ring whose irrelevant ideal is generated in degree one ---
+for instance a polynomial ring, so that $\operatorname{Proj}A=\mathbf P^N$ ---
+and let $a\in A_j$ be homogeneous of degree $j$, giving a global section of
+$\O(j)$ on $\operatorname{Proj}A$; for $j=1$ and $a=\sum_i a_iT_i$ this is a
+hyperplane form.  That section vanishes at a point $x$, in the sense that its
+germ lies in $\mathfrak m_x\O(j)_x$, exactly when $x\notin D_+(a)$.  Its
+non-vanishing locus --- the complement $\mathbf P^N\setminus H$ of the
+hyperplane $H$ cut out by $a$ --- is therefore the basic open set $D_+(a)$,
+which is affine for $j\geq1$.
+\end{lemma}
+
 \begin{proposition}[The top self-intersection of an ample bundle is positive]
 \label{prop:deg-ample-positive}
 \uses{def:deg-intersection, def:deg-ample}
@@ -1137,7 +1153,8 @@ ample line bundle on $X$.  Then $X$ is projective and
 \end{proposition}
 \begin{proof}
 \uses{lem:deg-ample-basic, cor:deg-intersection-powers,
-lem:deg-general-hyperplane, lem:deg-proper-affine-finite,
+lem:deg-general-hyperplane, lem:deg-hyperplane-complement-affine,
+lem:deg-proper-affine-finite,
 lem:deg-euler-additive, lem:deg-euler-affine, thm:deg-snapper,
 lem:deg-difference-explicit, lem:deg-difference-lowers-degree,
 lem:deg-intersection-is-top-difference, prop:deg-euler-finite-morphism}

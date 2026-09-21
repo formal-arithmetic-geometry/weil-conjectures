@@ -54,6 +54,10 @@ pullback of an invertible sheaf of modules is invertible.
 - `SheafOfModules.Invertible.exists_isIso_unitSmulRestrictHom`: **an invertible sheaf of modules
   on a scheme is trivialised near every point by an explicit section**, multiplication by which
   is an isomorphism `𝒪_W ≅ M|_W`.
+- `AlgebraicGeometry.Scheme.Modules.isIso_unitSmulRestrictHom_of_bijective_smulSection`: the
+  converse criterion, **a section which multiplies bijectively over every open subset of `W`
+  trivialises `M` over `W`**. This is what an explicitly trivialised sheaf of modules, such as a
+  twisting sheaf on `Proj`, provides.
 - `SheafOfModules.Invertible.isLocallyFree` and `SheafOfModules.Invertible.isFiniteType`: **an
   invertible sheaf of modules on a scheme is a line bundle**, in the sense used elsewhere in the
   project, and `SheafOfModules.Invertible.isCoherent`: it is therefore coherent.
@@ -345,6 +349,40 @@ identifies with the identity. -/
 noncomputable def unitSmulRestrictHom (m : Γ(M, W)) :
     SheafOfModules.unit W.toScheme.ringCatSheaf ⟶ restrict M W.ι :=
   (restrictUnitIso W.ι).inv ≫ smulRestrictHom m
+
+/-- Multiplication by a section `m` of `M` over `W`, read on the sections over an open subset
+of the open subscheme `W`. -/
+@[simp]
+lemma smulRestrictHom_app (m : Γ(M, W)) (V : W.toScheme.Opens)
+    (r : Γ(restrict (SheafOfModules.unit X.ringCatSheaf) W.ι, V)) :
+    (smulRestrictHom m).app V r = smulSection m (W.ι ''ᵁ V) (W.ι_image_le V) r := rfl
+
+/-- **A section which multiplies bijectively over every open subset of `W` trivialises `M` over
+`W`**: multiplication by it is an isomorphism `𝒪_W ≅ M|_W`. The factorisation used is
+
+```text
+                          smulRestrictHom m
+     𝒪_X|_W ─────────────────────────────────────────> M|_W
+        ↑                                               ↗
+        │ (restrictUnitIso W.ι).inv                    ╱
+        │                              unitSmulRestrictHom m
+       𝒪_W ────────────────────────────────────────────╯
+```
+-/
+lemma isIso_unitSmulRestrictHom_of_bijective_smulSection (m : Γ(M, W))
+    (h : ∀ (V : X.Opens) (hV : V ≤ W), Function.Bijective (smulSection m V hV)) :
+    IsIso (unitSmulRestrictHom m) := by
+  have hiso : IsIso (smulRestrictHom m) := by
+    rw [Scheme.Modules.Hom.isIso_iff_isIso_app]
+    intro V
+    rw [ConcreteCategory.isIso_iff_bijective]
+    have happ : ⇑((smulRestrictHom m).app V) =
+        ⇑(smulSection m (W.ι ''ᵁ V) (W.ι_image_le V)) :=
+      funext fun r ↦ smulRestrictHom_app m V r
+    rw [happ]
+    exact h _ (W.ι_image_le V)
+  rw [unitSmulRestrictHom]
+  infer_instance
 
 end Restrict
 

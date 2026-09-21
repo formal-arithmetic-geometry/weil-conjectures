@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.Modules.Picard
 public import WeilConjectures.AlgebraicGeometry.TwistingSheaf
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
@@ -38,10 +39,21 @@ Taking `e = -d` and using `𝒪(0) ≅ 𝒪` then shows that `𝒪(d)` is an inv
 ## Main results
 
 - `AlgebraicGeometry.Proj.invertible_twistingSheaf`: `𝒪(d)` is an invertible sheaf of modules.
+- `AlgebraicGeometry.Proj.isIso_unitSmulRestrictHom_sectionPow`: **explicit local triviality**,
+  over an open set on which a homogeneous element `f` of degree `m` is invertible,
+  multiplication by `f ^ k` is an isomorphism `𝒪_W ≅ 𝒪(m * k)|_W`.
 - `AlgebraicGeometry.Proj.invertible_twistingSheaf_of_irrelevant_le_span`: on `Proj` of a graded
   ring whose irrelevant ideal is generated in degree one, `𝒪(d)` is invertible for every `d : ℤ`.
 - `AlgebraicGeometry.Proj.invertible_twistingSheaf_homogeneousSubmodule`: on the projective
   space `Proj B[Xᵢ]` over an affine base, `𝒪(d)` is invertible for every `d : ℤ`.
+
+## TODO
+
+- Deduce `AlgebraicGeometry.Proj.invertible_twistingSheaf` from the explicit local triviality
+  `AlgebraicGeometry.Proj.isIso_unitSmulRestrictHom_sectionPow` rather than from the tensor
+  isomorphism `𝒪(d) ⊗ 𝒪(-d) ≅ 𝒪(0) ≅ 𝒪`. This needs the converse of the main result of
+  `WeilConjectures/AlgebraicGeometry/Modules/LocallyTrivial.lean`: a sheaf of modules which is
+  locally isomorphic to the structure sheaf is invertible. That converse is not available yet.
 -/
 
 @[expose] public section
@@ -221,6 +233,42 @@ theorem invertible_twistingSheaf (H : IsCoveredByDvdDegree 𝒜 d) :
     (N := twistingSheaf 𝒜 (-d))
     (twistingSheafTensorIso (add_neg_cancel d) H' ≪≫ twistingSheafZeroIso ≪≫
       (SheafOfModules.tensorUnitIso (Proj 𝒜).sheaf).symm)
+
+section Trivialisation
+
+open Scheme.Modules
+
+/-- **Multiplication by the tautological generator is an isomorphism over a trivialising open
+set.** If `f` is homogeneous of degree `m` and invertible on `W`, then multiplication by `f ^ k`
+is an isomorphism `𝒪_W ≅ 𝒪(m * k)|_W` of sheaves of modules on the open subscheme `W`. This is
+the sheaf-level form of the local freeness
+`AlgebraicGeometry.ProjectiveSpectrum.TwistingSheaf.sectionPowEquiv`.
+
+```text
+                          · f ^ k
+     𝒪_{Proj 𝒜}|_W ────────────────────> 𝒪(m · k)|_W
+        ↑                                   ↗
+        │ (restrictUnitIso W.ι).inv        ╱
+        │                unitSmulRestrictHom (f ^ k)
+       𝒪_W ─────────────────────────────────╯
+```
+-/
+lemma isIso_unitSmulRestrictHom_sectionPow {m : ℕ} {f : A} (hf : f ∈ 𝒜 m) {W : (Proj 𝒜).Opens}
+    (hW : W ≤ Proj.basicOpen 𝒜 f) (k : ℤ) {c : ℤ} (hc : c = m * k) :
+    IsIso (unitSmulRestrictHom (M := twistingSheaf 𝒜 c)
+      (sectionPow hf (fun x ↦ hW x.2) k hc)) := by
+  refine isIso_unitSmulRestrictHom_of_bijective_smulSection _ fun V hV ↦ ?_
+  have happ : ⇑(smulSection (M := twistingSheaf 𝒜 c)
+        (sectionPow hf (fun x ↦ hW x.2) k hc) V hV) =
+      sectionPowEquiv hf (fun x ↦ (hV.trans hW) x.2) k hc := by
+    refine funext fun r ↦ ?_
+    rw [smulSection]
+    simp only [AddMonoidHom.mk'_apply, sectionPowEquiv_apply]
+    rw [map_sectionPow hf hV hW k hc]
+  rw [happ]
+  exact (sectionPowEquiv hf (fun x ↦ (hV.trans hW) x.2) k hc).bijective
+
+end Trivialisation
 
 section Span
 
