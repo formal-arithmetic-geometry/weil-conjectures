@@ -6,8 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Ideal.Cotangent
+public import WeilConjectures.Mathlib.Algebra.Algebra.Tower
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
-public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
+public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.Basic
 
 /-!
 # Finite families in the cotangent space of a local ring
@@ -40,21 +41,17 @@ namespace IsLocalRing
 variable {A : Type*} [CommRing A] [IsLocalRing A] {σ : Type*}
 
 /-- The class in the cotangent space of a linear combination `∑ aᵢ fᵢ` of elements of the maximal
-ideal is the corresponding combination of the classes of the `fᵢ`, with coefficients the residues
-of the `aᵢ`. -/
+ideal is the corresponding combination of the classes of the `fᵢ`. -/
 theorem toCotangent_sum_mul [Fintype σ] (f : σ → A) (hmem : ∀ i, f i ∈ maximalIdeal A) (a : σ → A)
     (hsum : ∑ i, a i * f i ∈ maximalIdeal A) :
     (maximalIdeal A).toCotangent ⟨∑ i, a i * f i, hsum⟩
-      = ∑ i, Ideal.Quotient.mk (maximalIdeal A) (a i) •
-          (maximalIdeal A).toCotangent ⟨f i, hmem i⟩ := by
+      = ∑ i, a i • (maximalIdeal A).toCotangent ⟨f i, hmem i⟩ := by
   have hsmul : (⟨∑ i, a i * f i, hsum⟩ : maximalIdeal A)
       = ∑ i, a i • (⟨f i, hmem i⟩ : maximalIdeal A) := by
     ext
     simp
   rw [hsmul, map_sum]
-  refine Finset.sum_congr rfl fun i _ ↦ ?_
-  rw [map_smul]
-  exact (algebraMap_smul (ResidueField A) (a i) _).symm
+  exact Finset.sum_congr rfl fun i _ ↦ map_smul _ _ _
 
 /-- A finite family of elements of the maximal ideal of a local ring is linearly independent
 in the cotangent space if and only if every relation `∑ aᵢ fᵢ ∈ 𝔪 ^ 2` has all `aᵢ ∈ 𝔪`. -/
@@ -65,14 +62,15 @@ theorem linearIndependent_toCotangent_iff [Fintype σ] (f : σ → A)
       ∀ a : σ → A, (∑ i, a i * f i) ∈ maximalIdeal A ^ 2 → ∀ i, a i ∈ maximalIdeal A := by
   have hsum : ∀ a : σ → A, ∑ i, a i * f i ∈ maximalIdeal A := fun a ↦
     Ideal.sum_mem _ fun i _ ↦ Ideal.mul_mem_left _ _ (hmem i)
+  have hsur : Function.Surjective (algebraMap A (ResidueField A)) := by
+    rw [ResidueField.algebraMap_eq]
+    exact residue_surjective
   -- a relation with coefficients `a` in `A` is the class of `∑ aᵢ fᵢ` in the cotangent space
-  have key : ∀ a : σ → A, ∑ i, a i • (maximalIdeal A).toCotangent ⟨f i, hmem i⟩ =
-      (maximalIdeal A).toCotangent ⟨∑ i, a i * f i, hsum a⟩ := fun a ↦ by
-    rw [toCotangent_sum_mul f hmem a (hsum a)]
-    exact Finset.sum_congr rfl fun i _ ↦ (algebraMap_smul (ResidueField A) (a i) _).symm
-  simp only [linearIndependent_iff_forall_mem_ker
-    (ResidueField.algebraMap_eq (R := A) ▸ residue_surjective), key, Ideal.toCotangent_eq_zero,
-    ResidueField.algebraMap_eq, ker_residue]
+  have key (a : σ → A) : ∑ i, a i • (maximalIdeal A).toCotangent ⟨f i, hmem i⟩ =
+      (maximalIdeal A).toCotangent ⟨∑ i, a i * f i, hsum a⟩ :=
+    (toCotangent_sum_mul f hmem a (hsum a)).symm
+  simp only [Fintype.linearIndependent_iff_forall_mem_ker_algebraMap hsur, key,
+    Ideal.toCotangent_eq_zero, ResidueField.algebraMap_eq, ker_residue]
 
 /-- A finite family in the maximal ideal of a Noetherian local ring whose classes in the
 cotangent space are linearly independent extends to a generating family of the maximal ideal
@@ -108,9 +106,8 @@ theorem exists_span_union_range_eq_maximalIdeal [IsNoetherianRing A] [Finite σ]
     simpa using Set.union_sdiff_cancel hsub
   have hspans : Submodule.span A s = ⊤ := by
     rw [← IsLocalRing.CotangentSpace.span_image_eq_top_iff, himg, hspan]
-  have key : Ideal.span ((↑) '' s) = maximalIdeal A := by
-    have := congrArg (Submodule.map (Submodule.subtype (maximalIdeal A))) hspans
-    rwa [Submodule.map_span, Submodule.map_top, Submodule.range_subtype] at this
+  have key : Ideal.span ((↑) '' s) = maximalIdeal A :=
+    Submodule.span_image_coe_eq_self_of_span_eq_top (κ := A) (fun x ↦ ⟨x, rfl⟩) hspans
   have himg2 : ((↑) : maximalIdeal A → A) '' s
       = (fun x ↦ ((g x : maximalIdeal A) : A)) '' (b \ Set.range v) ∪ Set.range f := by
     rw [hs, Set.image_union, ← Set.range_comp, ← Set.image_comp, Set.union_comm]
@@ -135,44 +132,42 @@ section MulEqBot
 
 variable {B : Type u} [CommRing B] [IsLocalRing B] {I : Ideal B}
 
-/-- **An ideal annihilated by the maximal ideal is a module over the residue field**: it is a
-torsion module for `𝔪`, so `Module.IsTorsionBySet.module` turns it into a `B ⧸ 𝔪`-module. -/
-theorem isTorsionBySet_maximalIdeal_of_mul_eq_bot (h : maximalIdeal B * I = ⊥) :
-    Module.IsTorsionBySet B I (maximalIdeal B : Set B) :=
-  Ideal.isTorsionBySet_of_mul_eq_bot h
-
 /-- **A residue-field basis of an ideal annihilated by the maximal ideal, read in `B`.** If
 `𝔪 * I = ⊥` and `I` is finitely generated, a `κ`-basis of `I` lifts to a finite family `e` of
-elements of `B` which spans `I` on the nose — no Nakayama is needed, since the correction term
-`𝔪 * I` vanishes — and whose relations all have their coefficients in `𝔪`. The index type has
-`Nat.card` the `κ`-dimension of `I`.
+elements of `B` which spans `I` on the nose and whose relations all have their coefficients
+in `𝔪`.
 
-The two middle conclusions are exactly the hypotheses of
+The two conclusions are exactly the hypotheses of
 `Ideal.range_linearCombination_algebraMap` and `Ideal.ker_linearCombination_eq_pi`. -/
 theorem exists_span_eq_of_maximalIdeal_mul_eq_bot (h : maximalIdeal B * I = ⊥) (hI : I.FG) :
     ∃ (ι : Type u) (_ : Fintype ι) (e : ι → B),
       Ideal.span (Set.range e) = I ∧
-      (∀ c : ι → B, ∑ i, c i * e i = 0 → ∀ i, c i ∈ maximalIdeal B) ∧
-      (letI := (isTorsionBySet_maximalIdeal_of_mul_eq_bot h).module;
-        Nat.card ι = Module.finrank (B ⧸ maximalIdeal B) I) := by
+      ∀ c : ι → B, ∑ i, c i * e i = 0 → ∀ i, c i ∈ maximalIdeal B := by
   classical
+  have htors : Module.IsTorsionBySet B I (maximalIdeal B : Set B) :=
+    Module.isTorsionBySet_iff_smul_eq_bot.mpr h
   let _ := Ideal.Quotient.field (maximalIdeal B)
-  let _ := (isTorsionBySet_maximalIdeal_of_mul_eq_bot h).module
-  have : IsScalarTower B (B ⧸ maximalIdeal B) I :=
-    Module.IsTorsionBySet.isScalarTower (isTorsionBySet_maximalIdeal_of_mul_eq_bot h)
+  let _ := htors.module
+  have : IsScalarTower B (B ⧸ maximalIdeal B) I := htors.isScalarTower
   have : Module.Finite B I := Module.Finite.iff_fg.mpr hI
   have : Module.Finite (B ⧸ maximalIdeal B) I :=
     Module.Finite.of_restrictScalars_finite B _ _
-  set b := Module.Free.chooseBasis (B ⧸ maximalIdeal B) I
+  -- `𝔪 * I = ⊥` makes `I` a `κ`-vector space, and it is finite dimensional since `I` is `FG`
+  let b := Module.Free.chooseBasis (B ⧸ maximalIdeal B) I
   have hsur : Function.Surjective (algebraMap B (B ⧸ maximalIdeal B)) := by
     rw [Ideal.Quotient.algebraMap_eq]
     exact Ideal.Quotient.mk_surjective
   have hker : RingHom.ker (algebraMap B (B ⧸ maximalIdeal B)) = maximalIdeal B := by
     rw [Ideal.Quotient.algebraMap_eq, Ideal.mk_ker]
   refine ⟨Module.Free.ChooseBasisIndex (B ⧸ maximalIdeal B) I, inferInstance, fun i ↦ (b i : B),
-    Ideal.span_range_basis_eq hsur b, fun c hc i ↦ ?_, ?_⟩
-  · exact hker ▸ Ideal.mem_ker_of_sum_mul_eq_zero hsur b.linearIndependent hc i
-  · rw [Nat.card_eq_fintype_card, Module.finrank_eq_card_chooseBasisIndex]
+    ?_, fun c hc i ↦ hker ▸
+      LinearIndependent.mem_ker_algebraMap_of_sum_mul_eq_zero b.linearIndependent hsur hc i⟩
+  -- no Nakayama is needed: the scalars `B → κ` being surjective, a `κ`-spanning set of `I` is
+  -- already a `B`-spanning set
+  have hrange : (Set.range fun i ↦ ((b i : I) : B)) = ((↑) : I → B) '' Set.range b :=
+    Set.range_comp _ _
+  rw [hrange]
+  exact Submodule.span_image_coe_eq_self_of_span_eq_top hsur b.span_eq
 
 end MulEqBot
 

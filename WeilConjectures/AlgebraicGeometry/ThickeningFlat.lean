@@ -113,14 +113,14 @@ zeroth infinitesimal neighbourhood**: there is a finite index type `ι` and a fa
 global sections of `Iₙ` for which the comparison morphism
 `(i₀)_* (𝒪_{W₀} ^ ι) ⟶ Iₙ` is an isomorphism.
 
-The hypothesis is that `K = ker (B ⟶ 𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1))` is finitely generated, which
-holds for instance when `𝒪_{T, t}` is noetherian; it is what bounds the rank. -/
+The noetherian hypothesis on the stalk makes `K = ker (B ⟶ 𝒪_{T, t} ⧸ 𝔪_t ^ (n + 1))` finitely
+generated, which is what bounds the rank. -/
 theorem exists_isIso_pushforwardFreeToThickeningIdeal [Flat f]
-    (hfg : (RingHom.ker (T.infinitesimalRingMap t (Nat.le_succ n)).hom).FG) :
+    [IsNoetherianRing (T.presheaf.stalk t)] :
     ∃ (ι : Type u) (_ : Fintype ι) (m : ι → Γ((thickeningIdeal f t n).toModules, ⊤)),
       IsIso (pushforwardFreeToThickeningIdeal f t n m) := by
   obtain ⟨ι, hι, e, m, hspan, hind, hm⟩ :=
-    exists_span_eq_and_forall_toModulesι_app_eq f t n hfg
+    exists_span_eq_and_forall_toModulesι_app_eq f t n
   exact ⟨ι, hι, m, isIso_pushforwardFreeToThickeningIdeal f t n m hspan hind hm⟩
 
 /-- **The thickening ideal of a flat infinitesimal thickening, as a sheaf of modules, is the
@@ -129,11 +129,11 @@ is the bare isomorphism statement; the isomorphism produced is the comparison mo
 `AlgebraicGeometry.Scheme.exists_isIso_pushforwardFreeToThickeningIdeal`, which is the form to
 use when the sections `m` matter. -/
 theorem exists_nonempty_iso_thickeningIdeal_toModules [Flat f]
-    (hfg : (RingHom.ker (T.infinitesimalRingMap t (Nat.le_succ n)).hom).FG) :
+    [IsNoetherianRing (T.presheaf.stalk t)] :
     ∃ (ι : Type u) (_ : Fintype ι),
       Nonempty ((Modules.pushforward (infinitesimalBaseChangeMapZero f t n)).obj
         ((infinitesimalBaseChange f t 0).freeModules ι) ≅ (thickeningIdeal f t n).toModules) := by
-  obtain ⟨ι, hι, m, hm⟩ := exists_isIso_pushforwardFreeToThickeningIdeal f t n hfg
+  obtain ⟨ι, hι, m, hm⟩ := exists_isIso_pushforwardFreeToThickeningIdeal f t n
   exact ⟨ι, hι, ⟨asIso (pushforwardFreeToThickeningIdeal f t n m)⟩⟩
 
 end AlgebraicGeometry.Scheme

@@ -8,21 +8,24 @@ module
 public import Mathlib.Algebra.Module.Torsion.Basic
 
 /-!
-# Ideals annihilated by an ideal
+# Submodules annihilated by an ideal
 
-If two ideals `J` and `I` of a commutative ring `R` satisfy `J * I = ⊥`, then `I`, viewed as an
-`R`-module, is a torsion module for `J`. Through `Module.IsTorsionBySet.module` this makes `I`
-a module over `R ⧸ J`.
+A submodule `N` of an `R`-module `M` is a torsion module for an ideal `J` of `R` exactly when
+`J • N = ⊥`. Through `Module.IsTorsionBySet.module` this makes `N` a module over `R ⧸ J`.
 
 ## Main results
 
-* `Ideal.isTorsionBySet_of_mul_eq_bot`: an ideal annihilated by `J` is a `J`-torsion module.
+* `Module.isTorsionBySet_iff_smul_eq_bot`: a submodule is `J`-torsion if and only if it is
+  annihilated by `J`.
 -/
 
 @[expose] public section
 
-/-- **An ideal annihilated by `J` is a `J`-torsion module.** Through
-`Module.IsTorsionBySet.module` this makes `I` a module over `R ⧸ J`. -/
-theorem Ideal.isTorsionBySet_of_mul_eq_bot {R : Type*} [CommRing R] {J I : Ideal R}
-    (h : J * I = ⊥) : Module.IsTorsionBySet R I (J : Set R) := fun x a ↦
-  Subtype.ext (Ideal.mem_bot.mp (h.le (Ideal.mul_mem_mul a.2 x.2)))
+/-- **A submodule is `J`-torsion if and only if `J` annihilates it.** Through
+`Module.IsTorsionBySet.module` the forward direction makes `N` a module over `R ⧸ J`. For `N`
+an ideal of `R` the right-hand side is `J * N = ⊥`, by `Ideal.smul_eq_mul`. -/
+theorem Module.isTorsionBySet_iff_smul_eq_bot {R M : Type*} [CommSemiring R] [AddCommMonoid M]
+    [Module R M] {J : Ideal R} {N : Submodule R M} :
+    Module.IsTorsionBySet R N (J : Set R) ↔ J • N = ⊥ :=
+  (Module.isTorsionBySet_iff_subset_annihilator R N).trans
+    (SetLike.coe_subset_coe.trans Submodule.le_annihilator_iff)

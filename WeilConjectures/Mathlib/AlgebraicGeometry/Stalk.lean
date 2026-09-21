@@ -184,6 +184,11 @@ instance (n : ℕ) : IsLocalRing (X.infinitesimalRing x n) :=
   inferInstanceAs
     (IsLocalRing (X.presheaf.stalk x ⧸ maximalIdeal (X.presheaf.stalk x) ^ (n + 1)))
 
+instance (n : ℕ) [IsNoetherianRing (X.presheaf.stalk x)] :
+    IsNoetherianRing (X.infinitesimalRing x n) :=
+  inferInstanceAs
+    (IsNoetherianRing (X.presheaf.stalk x ⧸ maximalIdeal (X.presheaf.stalk x) ^ (n + 1)))
+
 /-- The quotient map `𝒪_{X, x} ⟶ 𝒪_{X, x} ⧸ 𝔪_x ^ (n + 1)`. -/
 noncomputable def toInfinitesimalRing (n : ℕ) : X.presheaf.stalk x ⟶ X.infinitesimalRing x n :=
   CommRingCat.ofHom (Ideal.Quotient.mk _)
