@@ -26,6 +26,11 @@ this answer does not depend on the chart, it is also the dimension of the whole 
   sections of a nonempty affine open, which is the affine case of the above.
 * `AlgebraicGeometry.IsAffineOpen.ringKrullDim_eq_topologicalKrullDim`: consequently the sections
   over a nonempty affine open have Krull dimension the dimension of the whole scheme.
+* `AlgebraicGeometry.topologicalKrullDim_le_coheight_add`: **the lower bound half of the dimension
+  formula**, `dim X ≤ codim z + dim S` for a point `z` of a closed subset `S` of an integral
+  scheme of finite type over a field. It is the dimension formula
+  `height p + dim (A ⧸ p) = dim A` of `Ideal.height_add_ringKrullDim_quotient` read on an affine
+  chart around `z`, the closed subscheme `Spec (A ⧸ p)` being embedded in `S`.
 
 The first two are stated for the `k`-algebra structure on the function field induced by the given
 morphism to `Spec k`, namely `AlgebraicGeometry.Scheme.Hom.functionFieldAlgebra`.
@@ -150,5 +155,49 @@ theorem IsAffineOpen.ringKrullDim_eq_topologicalKrullDim {U : X.Opens} (hU : IsA
     [Nonempty U] : ringKrullDim Γ(X, U) = topologicalKrullDim X := by
   let _ := f.functionFieldAlgebra
   rw [hU.ringKrullDim_eq_trdeg_functionField f, topologicalKrullDim_eq_trdeg_functionField f]
+
+include f in
+/-- **The dimension formula, as a lower bound for the dimension of a closed subset.**
+
+If `X` is an integral scheme locally of finite type over a field `k`, `S` is a closed subset of
+`X` and `z` is a point of `S`, then `dim X ≤ codim z + dim S`, the codimension of `z` being
+`Order.coheight z`.
+
+The two terms on the right are read on an affine chart `U` around `z`: the codimension of `z` is
+the height of the prime `p` of `A = Γ(X, U)` corresponding to it, and `dim (A ⧸ p)` is the
+dimension of the closure of `z` inside `U`, a closed subset of `S`. The dimension formula for the
+finitely generated domain `A` says that the two add up to `dim A = dim X`. -/
+theorem topologicalKrullDim_le_coheight_add {S : Set X} (hS : IsClosed S) {z : X} (hz : z ∈ S) :
+    topologicalKrullDim X ≤ (coheight z : WithBot ℕ∞) + topologicalKrullDim S := by
+  obtain ⟨U, hU, hzU, -⟩ := exists_isAffineOpen_mem_and_subset (Opens.mem_top z)
+  have : Nonempty U := ⟨⟨z, hzU⟩⟩
+  let _ := f.sectionsAlgebra U
+  have : Algebra.FiniteType k Γ(X, U) := f.finiteType_sections hU
+  set p := hU.primeIdealOf ⟨z, hzU⟩ with hpdef
+  have hzp : hU.fromSpec p = z := hU.fromSpec_primeIdealOf ⟨z, hzU⟩
+  -- the closure of `z` inside the chart is the image of `Spec (A ⧸ p)`, a closed subset of `S`
+  have hquot : ringKrullDim (Γ(X, U) ⧸ p.asIdeal) ≤ topologicalKrullDim S := by
+    let g : PrimeSpectrum (Γ(X, U) ⧸ p.asIdeal) → PrimeSpectrum Γ(X, U) :=
+      PrimeSpectrum.comap (Ideal.Quotient.mk p.asIdeal)
+    have hg : Topology.IsClosedEmbedding g :=
+      PrimeSpectrum.isClosedEmbedding_comap_of_surjective _ _ Ideal.Quotient.mk_surjective
+    have hzero : PrimeSpectrum.zeroLocus (p.asIdeal : Set Γ(X, U)) ⊆ hU.fromSpec.base ⁻¹' S := by
+      rw [← PrimeSpectrum.closure_singleton]
+      exact (hS.preimage hU.fromSpec.continuous).closure_subset_iff.2
+        (Set.singleton_subset_iff.2 (by simpa only [Set.mem_preimage, hzp] using hz))
+    have hmem : ∀ q, hU.fromSpec.base (g q) ∈ S := fun q ↦ by
+      refine hzero ?_
+      rw [PrimeSpectrum.mem_zeroLocus, ← Ideal.mk_ker (I := p.asIdeal)]
+      exact Ideal.ker_le_comap _
+    let ψ : PrimeSpectrum (Γ(X, U) ⧸ p.asIdeal) → S := fun q ↦ ⟨hU.fromSpec.base (g q), hmem q⟩
+    have hψ : Topology.IsInducing ψ :=
+      Topology.IsInducing.of_comp ((hU.fromSpec.continuous.comp hg.continuous).subtype_mk _)
+        continuous_subtype_val (hU.fromSpec.isOpenEmbedding.isInducing.comp hg.isInducing)
+    rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+    exact hψ.topologicalKrullDim_le
+  rw [← hU.ringKrullDim_eq_topologicalKrullDim f,
+    ← Ideal.height_add_ringKrullDim_quotient k p.asIdeal,
+    hU.coheight_eq_height_primeIdealOf ⟨z, hzU⟩, ← hpdef]
+  exact add_le_add le_rfl hquot
 
 end AlgebraicGeometry
