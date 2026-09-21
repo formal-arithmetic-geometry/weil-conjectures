@@ -5,9 +5,11 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Artinian
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Properness of morphisms of schemes over a base
@@ -18,6 +20,9 @@ and, separately, universal closedness — of the structure morphism of a scheme-
 which is the corresponding property base changed along `Spec κ(y) ⟶ Y`. Together with the global
 sections of a proper integral scheme over an algebraically closed field, which Mathlib's
 `AlgebraicGeometry.isIntegral_appTop_of_universallyClosed` gives outright.
+
+Finally, a proper affine scheme over an Artinian ring — over a field, in particular — is an
+Artinian scheme, hence a finite discrete space of Krull dimension at most zero.
 
 ## Main results
 
@@ -30,6 +35,10 @@ sections of a proper integral scheme over an algebraically closed field, which M
 - `AlgebraicGeometry.isIso_ΓSpecIso_inv_comp_appTop` (blueprint `lem:cube-global-sections`): for
   `X` proper and integral over an algebraically closed field `K`, the structure map
   `K ⟶ Γ(X, 𝒪_X)` is an isomorphism.
+- `AlgebraicGeometry.isArtinianScheme_of_isProper` and
+  `AlgebraicGeometry.topologicalKrullDim_le_zero_of_isProper` (blueprint
+  `lem:deg-proper-affine-finite`): a proper affine scheme over an Artinian ring is an Artinian
+  scheme, and has dimension at most zero.
 -/
 
 @[expose] public section
@@ -96,5 +105,33 @@ theorem isIso_ΓSpecIso_inv_comp_appTop {K : Type u} [Field K] [IsAlgClosed K] {
   refine IsAlgClosed.ringHom_bijective_of_isIntegral _ ?_
   apply RingHom.isIntegral_respectsIso.2 (e := (Scheme.ΓSpecIso _).symm.commRingCatIsoToRingEquiv)
   exact isIntegral_appTop_of_universallyClosed π
+
+section ProperAffine
+
+variable {R : Type u} [CommRing R] [IsArtinianRing R] {X : Scheme.{u}} (f : X ⟶ Spec (.of R))
+
+/-- **A proper affine scheme over an Artinian ring is an Artinian scheme.**
+
+In particular it is a finite discrete space, all of whose points are closed. Over a field this
+is the blueprint's `lem:deg-proper-affine-finite`. -/
+theorem isArtinianScheme_of_isProper [IsAffine X] [IsProper f] : IsArtinianScheme X := by
+  -- a proper affine morphism is finite, so `Γ(X, 𝒪_X)` is a finite `R`-algebra, hence Artinian
+  have : IsFinite f := IsFinite.iff_isProper_and_isAffineHom.mpr ⟨inferInstance, inferInstance⟩
+  have := IsFinite.finite_ΓSpecIso_inv_comp_appTop f
+  algebraize [((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom]
+  have : IsArtinianRing Γ(X, ⊤) := .of_finite R _
+  have : IsLocallyArtinian (Spec Γ(X, ⊤)) := Scheme.isLocallyArtinianScheme_Spec.mpr ‹_›
+  have : IsLocallyArtinian X := .of_isImmersion X.isoSpec.hom
+  constructor
+
+/-- **A proper affine scheme over an Artinian ring has dimension at most zero.**
+
+Over a field this is the last assertion of the blueprint's `lem:deg-proper-affine-finite`. -/
+theorem topologicalKrullDim_le_zero_of_isProper [IsAffine X] [IsProper f] :
+    topologicalKrullDim X ≤ 0 :=
+  have := isArtinianScheme_of_isProper f
+  topologicalKrullDim_zero_of_discreteTopology X
+
+end ProperAffine
 
 end AlgebraicGeometry
