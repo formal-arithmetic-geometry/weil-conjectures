@@ -7,11 +7,10 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-!
 
@@ -34,9 +33,10 @@ adjunction `CategoryTheory.Limits.sigmaConstAdj G : (∐_{-} G) ⊣ Hom(G, -)` a
 everything: its counit at `X` is the canonical map `∐_{g : G ⟶ X} G ⟶ X`, which is an
 epimorphism exactly because `G` is a separator (`isSeparator_iff_epi`), and it is
 functorial in `X` by construction, so the only thing left to check is that its source is
-flat. That is `ObjectProperty.flat_coproduct`: `tensoring on the left` with `∐ f` is,
-since `curriedTensor A` preserves the coproduct, the colimit of the `tensorLeft (f i)`
-computed pointwise, and a colimit of shape `Discrete I` of left exact functors is left
+flat. That is `ObjectProperty.flat_coproduct` of
+`WeilConjectures.CategoryTheory.Abelian.Flat.Basic`: tensoring on the left with `∐ f`
+is, since `curriedTensor A` preserves the coproduct, the pointwise colimit of the
+`tensorLeft (f i)`, and a colimit of shape `Discrete I` of left exact functors is left
 exact because a Grothendieck abelian category satisfies `AB4`. The forward implication
 reads off a flat separator from a functorial flat resolution of an arbitrary separator:
 the flat cover of a separator is again a separator, since it maps onto it epimorphically.
@@ -44,7 +44,7 @@ the flat cover of a separator is again a separator, since it maps onto it epimor
 Only left exactness has to be tracked in all of this: in a *closed* monoidal category
 `tensorLeft X` is a left adjoint, hence automatically preserves colimits, and the
 braiding carries everything from `tensorLeft` to `tensorRight`. This is
-`ObjectProperty.flat_iff_preservesFiniteLimits`.
+`ObjectProperty.flat_iff_preservesFiniteLimits`, in the same file.
 
 On the coefficient side the criterion is immediately enough: the free module of rank one
 is a flat separator of `ModuleCat.{u} Λ`, so `ModuleCat.hasFunctorialFlatResolution`
@@ -72,7 +72,6 @@ with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
 
 ## Main results
 
-- `CategoryTheory.ObjectProperty.flat_coproduct`: a coproduct of flat objects is flat.
 - `CategoryTheory.Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator`:
   functorial flat resolutions exist exactly when there is a flat separator.
 - `ModuleCat.hasFunctorialFlatResolution`: `ModuleCat.{u} Λ` admits functorial flat
@@ -97,46 +96,6 @@ with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
 universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
-
-namespace CategoryTheory.ObjectProperty
-
-variable {A : Type u'} [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
-  [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
-
-omit [Abelian A] [IsGrothendieckAbelian.{u} A] in
-/-- In a braided *closed* monoidal category, flatness is left exactness of tensoring:
-`tensorLeft X` is a left adjoint, so it preserves colimits for free, and the braiding
-identifies `tensorLeft X` with `tensorRight X`. -/
-lemma flat_iff_preservesFiniteLimits (X : A) :
-    flat X ↔ PreservesFiniteLimits (tensorLeft X) := by
-  refine ⟨fun h ↦ h.1.1, fun h ↦ ⟨⟨h, ?_⟩, ?_, ?_⟩⟩
-  · exact inferInstanceAs (PreservesFiniteColimits (tensorLeft X))
-  · exact preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight X)
-  · exact preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight X)
-
-/-- A coproduct of flat objects of a Grothendieck abelian braided closed monoidal category
-is flat.
-
-`curriedTensor A` preserves the coproduct — colimits in `A ⥤ A` are pointwise, and in
-each variable tensoring is a left adjoint — so `tensorLeft (∐ f)` is the colimit of the
-`tensorLeft (f i)`, that is, the composite of `A ⥤ Discrete I ⥤ A` with
-`colim : (Discrete I ⥤ A) ⥤ A`. The first factor is left exact because each
-`tensorLeft (f i)` is, and `colim` is left exact by `AB4`. -/
-lemma flat_coproduct {I : Type u} (f : I → A) (hf : ∀ i, flat (f i)) :
-    flat (∐ f) := by
-  have (i : I) : PreservesFiniteLimits (tensorLeft (f i)) :=
-    (flat_iff_preservesFiniteLimits (f i)).1 (hf i)
-  rw [flat_iff_preservesFiniteLimits]
-  have : PreservesColimit (Discrete.functor f) (curriedTensor A) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
-  have e : tensorLeft (∐ f) ≅ (Discrete.functor f ⋙ curriedTensor A).flip ⋙ colim :=
-    preservesColimitIso (curriedTensor A) (Discrete.functor f) ≪≫ colimitIsoFlipCompColim _
-  have : PreservesFiniteLimits ((Discrete.functor f ⋙ curriedTensor A).flip) :=
-    preservesFiniteLimits_of_evaluation _ (fun j ↦
-      inferInstanceAs (PreservesFiniteLimits (tensorLeft (f j.as))))
-  exact preservesFiniteLimits_of_natIso e.symm
-
-end CategoryTheory.ObjectProperty
 
 namespace CategoryTheory.Abelian
 

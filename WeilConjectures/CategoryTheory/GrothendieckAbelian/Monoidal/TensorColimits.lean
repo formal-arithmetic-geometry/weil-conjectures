@@ -56,8 +56,8 @@ obtained from the general ones by `inferInstance`.
 
 - `CategoryTheory.GrothendieckTopology.monoidalClosed_sheaf_essentiallySmall`: the category
   of `A`-valued sheaves on an essentially small site is monoidal closed.
-- `CategoryTheory.GrothendieckTopology.preservesColimitsOfSize_tensorLeft_sheaf_essentiallySmall`:
-  tensoring on the left with a fixed sheaf preserves colimits of size `0`.
+- `CategoryTheory.GrothendieckTopology.preservesColimitsOfSize_tensorLeft_sheaf_of_essentiallySmall`
+  and its right variant: tensoring with a fixed sheaf preserves colimits of size `0`.
 - `AlgebraicGeometry.Etale.sheafMonoidalClosed`,
   `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`: the special cases for
   the small étale site.
@@ -101,14 +101,14 @@ preserves colimits of size `0`, since it is left adjoint to the internal hom of
 `monoidalClosed_sheaf_essentiallySmall`. Together with the braiding this gives every
 compatibility between the tensor product of sheaves and colimits that the K-flat left
 derivability structure asks for. -/
-instance preservesColimitsOfSize_tensorLeft_sheaf_essentiallySmall (X : Sheaf J A) :
+instance preservesColimitsOfSize_tensorLeft_sheaf_of_essentiallySmall (X : Sheaf J A) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
   inferInstance
 
 /-- Tensoring on the right with a fixed `A`-valued sheaf on an essentially small site
 preserves colimits of size `0`, by
-`preservesColimitsOfSize_tensorLeft_sheaf_essentiallySmall` and the braiding. -/
-instance preservesColimitsOfSize_tensorRight_sheaf_essentiallySmall (X : Sheaf J A) :
+`preservesColimitsOfSize_tensorLeft_sheaf_of_essentiallySmall` and the braiding. -/
+instance preservesColimitsOfSize_tensorRight_sheaf_of_essentiallySmall (X : Sheaf J A) :
     PreservesColimitsOfSize.{0, 0} (tensorRight X) where
   preservesColimitsOfShape := ⟨inferInstance⟩
 
