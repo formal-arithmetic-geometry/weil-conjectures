@@ -26,6 +26,9 @@ modules in which `DerivedCategory` is replaced by the `@[no_expose]` wrapper
 They are *drop-in replacements*, not extensions: a ported module declares the same names as the
 mathlib module it replaces (for the declarations that live outside the `DerivedCategory`
 namespace, e.g. `CochainComplex.homologyδOfTriangle`). So a ported module must never end up in
-the same import closure as the mathlib module it replaces, and this library is therefore kept
-out of the `WeilConjectures` root module.
+the same import closure as the mathlib module it replaces, and this tree is therefore kept out
+of the `WeilConjectures` root module.
+
+It is consequently not covered by a bare `lake build`; build it with
+`lake build WeilConjectures.EditMathlib`.
 -/
