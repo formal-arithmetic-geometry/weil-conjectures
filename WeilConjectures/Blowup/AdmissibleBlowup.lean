@@ -513,7 +513,7 @@ theorem Scheme.exists_finiteType_ideal_coe_support_eq_compl_of_isLocallyNoetheri
     ∃ I : X.IdealSheafData, I.ofFiniteType ∧ (I.support : Set X) = (U : Set X)ᶜ :=
   ⟨Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set X)ᶜ, U.isOpen.isClosed_compl⟩,
     Scheme.IdealSheafData.ofFiniteType_of_isLocallyNoetherian _,
-    by simp [Scheme.IdealSheafData.coe_support_vanishingIdeal]⟩
+    by simp⟩
 
 /-- **Extension of a constructible closed subset to a finite-type center** (Stacks
 Project Tags 01PH and 01PF): on a quasi-compact quasi-separated scheme `X`, every
