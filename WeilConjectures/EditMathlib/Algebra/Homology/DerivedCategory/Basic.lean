@@ -105,8 +105,9 @@ instance {K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] :
   Localization.inverts Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) _
     (inferInstanceAs (QuasiIso f))
 
+variable (C) in
 lemma Q_map_eq_of_homotopy {K L : CochainComplex C ℤ} {f g : K ⟶ L} (h : Homotopy f g) :
-    (Q (C := C)).map f = Q.map g :=
+    Q.map f = Q.map g :=
   HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy h
 
 /-- The localization functor `HomotopyCategory C (ComplexShape.up ℤ) ⥤ DerivedCategory' C`.
@@ -118,7 +119,7 @@ definitionally `Q` downstream. -/
 @[expose] def Qh : HomotopyCategory C (ComplexShape.up ℤ) ⥤ DerivedCategory' C :=
   CategoryTheory.Quotient.lift _ Q (by
     rintro K L f g ⟨h⟩
-    exact Q_map_eq_of_homotopy h)
+    exact Q_map_eq_of_homotopy _ h)
 
 variable (C) in
 /-- The natural isomorphism `HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh ≅ Q`. -/
@@ -313,8 +314,6 @@ lemma singleFunctorsPostcompQIso_inv_hom (n : ℤ) :
   ext X
   simp [singleFunctorsPostcompQIso, HomotopyCategory.singleFunctorsPostcompQuotientIso]
   rfl
-
-variable {C}
 
 lemma isIso_Q_map_iff_quasiIso {K L : CochainComplex C ℤ} (φ : K ⟶ L) :
     IsIso (Q.map φ) ↔ QuasiIso φ :=
