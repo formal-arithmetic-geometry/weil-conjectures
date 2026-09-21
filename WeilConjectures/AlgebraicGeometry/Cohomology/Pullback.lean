@@ -52,12 +52,14 @@ is assembled from three ingredients:
 
 ## TODO
 
-The composition law for the pullback map on the cohomology of an *abelian sheaf* is
-`AlgebraicGeometry.Scheme.Hom.H.pullbackAddHom_comp`, in
-`WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp`. What is still missing is its
-transport to sheaves of modules: the composition law for `H.pullbackMap` itself
-(`(f ≫ g)^*` is the composite modulo the canonical isomorphism `(f ≫ g)^* ≅ f^* ∘ g^*`),
-and the identity law (`f = 𝟙` gives the identity).
+The composition law for the pullback map is
+`AlgebraicGeometry.Scheme.Modules.H.pullbackMap_comp`, in
+`WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp`. What is still missing is the
+identity law: `H.pullbackMap (𝟙 X)` is the identity modulo the canonical isomorphism
+`(𝟙 X)^* ≅ 𝟭`. It needs the identification `(𝟙 X)^{-1} ≅ 𝟭` of pullback functors on abelian
+sheaves and its compatibility with the identification of constant sheaves, the analogues for
+the identity of `AlgebraicGeometry.Scheme.Hom.pullbackAbComp` and
+`CategoryTheory.Functor.constantSheafsheafPullbackIso_comp`.
 
 -/
 
@@ -107,9 +109,7 @@ noncomputable abbrev pullbackPushforwardAbAdjunction : f.pullbackAb ⊣ f.pushfo
 /-- The pullback of the constant sheaf with values in an abelian group `A` is the constant
 sheaf with values in `A`. -/
 noncomputable def pullbackAbConstantSheafIso (A : AddCommGrpCat.{u}) :
-    f.pullbackAb.obj ((constantSheaf (Opens.grothendieckTopology Y)
-        AddCommGrpCat.{u}).obj A) ≅
-      (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj A :=
+    f.pullbackAb.obj ((constantSheafAb Y).obj A) ≅ (constantSheafAb X).obj A :=
   ((Opens.map f.base).constantSheafsheafPullbackIso AddCommGrpCat.{u}
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
     isTerminalTop isTerminalTop).app A

@@ -69,6 +69,8 @@ vanishes at a point exactly where `g` does.
 - `AlgebraicGeometry.Scheme.Modules.mono_mulSection_iff`: **the nonzerodivisor criterion**,
   multiplication by `s` is a monomorphism `F ⟶ F ⊗ L` if and only if `s` vanishes at no
   associated point of `F`.
+- `AlgebraicGeometry.Scheme.Modules.support_cokernel_mulSection`: **the support of the cokernel
+  is `Supp F ∩ Z(s)`**, the intersection of the support of `F` with the zero locus of `s`.
 - `AlgebraicGeometry.Scheme.Modules.exists_shortExact_tensor_of_forall_not_vanishesAt`: **the
   hyperplane exact sequence**, with the support conditions on its cokernel.
 - `AlgebraicGeometry.Scheme.Modules.exists_shortExact_supportDim_add_one_le`:
@@ -86,9 +88,9 @@ here.
 
 ## TODO
 
-- Identify the cokernel `G` with `(F ⊗ L)|_D`, where `D` is the zero scheme of `s`, and its
-  support with `Supp F ∩ D`. This is the geometric description of the sequence; the analytic
-  content used by Snapper's induction is the support statement proved here.
+- Identify the cokernel `G` with `(F ⊗ L)|_D`, where `D` is the zero scheme of `s`. This is the
+  geometric description of the sequence; its support is already computed here, as
+  `AlgebraicGeometry.Scheme.Modules.support_cokernel_mulSection`.
 -/
 
 @[expose] public section
@@ -652,6 +654,118 @@ theorem notMem_support_cokernel_mulSection (hL : L.Invertible) (F : X.Modules) (
     rfl
   exact hab ((key a).trans (key b).symm)
 
+/-- **The support of `F` is contained in the support of `F ⊗ L`** when `L` is invertible:
+tensoring by a tensor inverse of `L` turns `F ⊗ L` back into `F`, and tensoring cannot enlarge
+the support by `AlgebraicGeometry.Scheme.Modules.support_tensor_subset`. -/
+theorem support_subset_support_tensor (hL : L.Invertible) (F : X.Modules) :
+    F.support ⊆ (F ⊗ L).support := by
+  have e : F ≅ (F ⊗ L) ⊗ hL.tensorInv :=
+    (ρ_ F).symm ≪≫ whiskerLeftIso F hL.tensorInvIso.symm ≪≫ (α_ F L hL.tensorInv).symm
+  rw [support_congr e]
+  exact support_tensor_subset (SheafOfModules.invertible_tensorInv hL) (F ⊗ L)
+
+/-- **Tensoring by an invertible sheaf does not change the support.** -/
+theorem support_tensor (hL : L.Invertible) (F : X.Modules) : (F ⊗ L).support = F.support :=
+  subset_antisymm (support_tensor_subset hL F) (support_subset_support_tensor hL F)
+
+/-- **At a point where the section vanishes, multiplication by it lands in `𝔪ₓ (F ⊗ L)ₓ` on
+stalks.** In a trivialisation `L|_W ≅ 𝒪_W` by a section `m`, the section `s` restricts to
+`g • m`, and `s` vanishes at `x` exactly when `g` is not invertible at `x`
+(`AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_notMem_basicOpen`); the germ of `g` is then a
+scalar in the maximal ideal which factors out of every product `t ⊗ s`. -/
+theorem stalkMap_mulSection_mem_smul_maximalIdeal (hL : L.Invertible) (F : X.Modules)
+    (s : Γ(L, ⊤)) {x : X} (hx : L.VanishesAt s x) (z : F.presheaf.stalk x) :
+    (mulSection F s).stalkMap x z ∈
+      IsLocalRing.maximalIdeal (X.presheaf.stalk x) •
+        (⊤ : Submodule (X.presheaf.stalk x) ((F ⊗ L).presheaf.stalk x)) := by
+  obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
+  have hmi : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
+  have hgW : L.presheaf.map W.leTop.op s = g • m := by
+    rw [← hg, smulSection]
+    simp only [AddMonoidHom.mk'_apply]
+    congr 1
+    rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
+    simp
+  have hgmax : X.presheaf.germ W x hxW g ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x) := by
+    have hxg : x ∉ X.basicOpen g := (vanishesAt_iff_notMem_basicOpen m s g hgW hxW).1 hx
+    rw [Scheme.mem_basicOpen X g x hxW] at hxg
+    exact (IsLocalRing.mem_maximalIdeal _).2 (mem_nonunits_iff.2 hxg)
+  obtain ⟨U, hxU, b, rfl⟩ := F.presheaf.exists_germ_eq z
+  have hxV : x ∈ U ⊓ W := ⟨hxU, hxW⟩
+  rw [← F.presheaf.germ_res_apply (homOfLE (inf_le_left : U ⊓ W ≤ U)) x hxV b,
+    Hom.germ_stalkMap_apply, app_mulSection]
+  have hsV : L.presheaf.map (U ⊓ W).leTop.op s =
+      X.presheaf.map (homOfLE (inf_le_right : U ⊓ W ≤ W)).op g •
+        L.presheaf.map (homOfLE (inf_le_right : U ⊓ W ≤ W)).op m := by
+    rw [show L.presheaf.map (U ⊓ W).leTop.op s =
+      L.presheaf.map (homOfLE (inf_le_right : U ⊓ W ≤ W)).op
+        (L.presheaf.map W.leTop.op s) from by
+          rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]; congr 2,
+      hgW, Scheme.Modules.map_smul]
+  rw [hsV, tensorMk_smul_right, germ_smul,
+    X.presheaf.germ_res_apply (homOfLE (inf_le_right : U ⊓ W ≤ W)) x hxV g]
+  exact Submodule.smul_mem_smul hgmax Submodule.mem_top
+
+/-- **The cokernel of multiplication by a global section is supported at every point of the
+support of `F` where the section vanishes.**
+
+This is Nakayama's lemma. Taking stalks at `x` is exact, so the stalk of the cokernel is the
+quotient of `(F ⊗ L)ₓ` by the image of multiplication by `s`, and that image is contained in
+`𝔪ₓ (F ⊗ L)ₓ` because `s` vanishes at `x`
+(`AlgebraicGeometry.Scheme.Modules.stalkMap_mulSection_mem_smul_maximalIdeal`). A vanishing
+cokernel would therefore give `(F ⊗ L)ₓ = 𝔪ₓ (F ⊗ L)ₓ`, forcing the finite module `(F ⊗ L)ₓ`
+over the local ring `𝒪_{X, x}` to vanish — but it does not, since `x` lies in the support of
+`F`. -/
+theorem mem_support_cokernel_mulSection (hL : L.Invertible) (F : X.Modules) [F.IsCoherent]
+    (s : Γ(L, ⊤)) (hmono : Mono (mulSection F s)) {x : X} (hxF : x ∈ F.support)
+    (hxs : L.VanishesAt s x) : x ∈ (cokernel (mulSection F s)).support := by
+  by_contra hmem
+  have hsub : Subsingleton ((cokernel (mulSection F s)).presheaf.stalk x) :=
+    not_nontrivial_iff_subsingleton.1 fun h ↦ hmem h
+  have hFL : (F ⊗ L).IsCoherent := isCoherent_tensorObj_of_invertible F hL
+  have hfin : Module.Finite (X.presheaf.stalk x) ((F ⊗ L).presheaf.stalk x) :=
+    finite_stalk (F ⊗ L) x
+  have hSE : (ShortComplex.mk (mulSection F s) (cokernel.π (mulSection F s))
+      (cokernel.condition _)).ShortExact :=
+    { exact := ShortComplex.exact_cokernel _
+      mono_f := hmono
+      epi_g := inferInstance }
+  have hex := (hSE.map_stalkFunctor (R := X.ringCatSheaf) x).exact
+  rw [ShortComplex.ab_exact_iff] at hex
+  have hle : (⊤ : Submodule (X.presheaf.stalk x) ((F ⊗ L).presheaf.stalk x)) ≤
+      IsLocalRing.maximalIdeal (X.presheaf.stalk x) • ⊤ := by
+    intro y _
+    obtain ⟨z, hz⟩ := hex y (hsub.elim _ _)
+    rw [← hz]
+    exact stalkMap_mulSection_mem_smul_maximalIdeal hL F s hxs z
+  have htop : (⊤ : Submodule (X.presheaf.stalk x) ((F ⊗ L).presheaf.stalk x)) = ⊥ :=
+    Submodule.eq_bot_of_le_smul_of_le_jacobson_bot _ ⊤ (Module.finite_def.1 hfin) hle
+      (IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top).ge
+  have hnt : Nontrivial ((F ⊗ L).presheaf.stalk x) := support_subset_support_tensor hL F hxF
+  obtain ⟨a, ha⟩ := exists_ne (0 : (F ⊗ L).presheaf.stalk x)
+  have hmem : a ∈ (⊤ : Submodule (X.presheaf.stalk x) ((F ⊗ L).presheaf.stalk x)) :=
+    Submodule.mem_top
+  rw [htop, Submodule.mem_bot] at hmem
+  exact ha hmem
+
+/-- **The support of the cokernel of the hyperplane map is `Supp F ∩ Z(s)`**: the cokernel of
+multiplication by a global section `s` of an invertible sheaf `L` is supported exactly at the
+points of the support of `F` at which `s` vanishes.
+
+The two inclusions are `AlgebraicGeometry.Scheme.Modules.support_cokernel_mulSection_subset`
+together with `AlgebraicGeometry.Scheme.Modules.notMem_support_cokernel_mulSection`, and
+`AlgebraicGeometry.Scheme.Modules.mem_support_cokernel_mulSection`. -/
+theorem support_cokernel_mulSection (hL : L.Invertible) (F : X.Modules) [F.IsCoherent]
+    (s : Γ(L, ⊤)) (hmono : Mono (mulSection F s)) :
+    (cokernel (mulSection F s)).support = F.support ∩ {x | L.VanishesAt s x} := by
+  ext x
+  refine ⟨fun hx ↦ ⟨support_cokernel_mulSection_subset hL F s hx, ?_⟩, ?_⟩
+  · by_contra h
+    exact notMem_support_cokernel_mulSection hL F s h hx
+  · rintro ⟨hxF, hxs⟩
+    exact mem_support_cokernel_mulSection hL F s hmono hxF hxs
+
 end Support
 
 /-- **The nonzerodivisor criterion for an invertible sheaf: necessity.** If multiplication by
@@ -716,10 +830,10 @@ associated point of `F`. Then there is a short exact sequence
 0 ⟶ F ⟶ F ⊗ L ⟶ G ⟶ 0
 ```
 
-in which `G` is coherent, the first map is multiplication by `s`, the support of `G` is
-contained in the support of `F`, and `G` is not supported at any generic point of an irreducible
-component of the support of `F` — that is, at any point of the support of `F` to which no other
-point of the support specialises.
+in which `G` is coherent, the first map is multiplication by `s`, the support of `G` is the
+intersection of the support of `F` with the zero locus of `s`, and `G` is not supported at any
+generic point of an irreducible component of the support of `F` — that is, at any point of the
+support of `F` to which no other point of the support specialises.
 
 This is the form consumed by `exists_shortExact_supportDim_add_one_le` below: the sequence is
 the one along which the Euler characteristic is additive, and the last condition is what makes
@@ -728,7 +842,7 @@ theorem exists_shortExact_tensor_of_forall_not_vanishesAt [IsLocallyNoetherian X
     {L : X.Modules} (hL : L.Invertible) (F : X.Modules) [F.IsCoherent] (s : Γ(L, ⊤))
     (hs : ∀ x ∈ F.associatedPoints, ¬ L.VanishesAt s x) :
     ∃ (G : X.Modules) (_ : G.IsCoherent) (u : F ⟶ F ⊗ L) (v : F ⊗ L ⟶ G) (hw : u ≫ v = 0),
-      (ShortComplex.mk u v hw).ShortExact ∧ G.support ⊆ F.support ∧
+      (ShortComplex.mk u v hw).ShortExact ∧ G.support = F.support ∩ {x | L.VanishesAt s x} ∧
         ∀ x ∈ F.support, (∀ y : X, y ∈ F.support → y ⤳ x → y = x) → x ∉ G.support := by
   have hFL : (F ⊗ L).IsCoherent := isCoherent_tensorObj_of_invertible F hL
   refine ⟨cokernel (mulSection F s),
@@ -737,7 +851,8 @@ theorem exists_shortExact_tensor_of_forall_not_vanishesAt [IsLocallyNoetherian X
     { exact := ShortComplex.exact_cokernel _
       mono_f := mono_mulSection_of_forall_not_vanishesAt hL F s hs
       epi_g := inferInstance },
-    support_cokernel_mulSection_subset hL F s, fun x hx hmin ↦ ?_⟩
+    support_cokernel_mulSection hL F s (mono_mulSection_of_forall_not_vanishesAt hL F s hs),
+    fun x hx hmin ↦ ?_⟩
   obtain ⟨U, hU, hxU⟩ : ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U := by
     obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
       X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
@@ -768,7 +883,8 @@ theorem exists_shortExact_supportDim_add_one_le (k : Type u) [Field k] [Infinite
     exists_shortExact_tensor_of_forall_not_vanishesAt hL F s hs
   have : G.IsCoherent := hG
   exact ⟨G, hG, u, v, hw, hSE,
-    supportDim_add_one_le_supportDim_of_forall_minimal hGF fun x hx hmin' ↦
+    supportDim_add_one_le_supportDim_of_forall_minimal
+      (hGF.subset.trans Set.inter_subset_left) fun x hx hmin' ↦
       hmin x hx fun y hy hyx ↦ hmin' y hy hyx⟩
 
 end AlgebraicGeometry.Scheme.Modules
