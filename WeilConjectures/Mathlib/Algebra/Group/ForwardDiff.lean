@@ -20,11 +20,11 @@ forward difference operator. This file collects the facts one needs about compos
 * `fwdDiff_comm`: the operators `Δ_[h₁]` and `Δ_[h₂]` commute;
 * `fwdDiff_aux.shiftₗ_add`: `h ↦ shiftₗ h` turns addition into multiplication;
 * `fwdDiff_add_arg`: `Δ_[h₁ + h₂] f = Δ_[h₁] f + Δ_[h₂] f + Δ_[h₁] (Δ_[h₂] f)`;
-* `fwdDiffComp`: the composite `Δ_[v 0] ∘ ⋯ ∘ Δ_[v (d - 1)]` attached to a family
-  `v : Fin d → M`, defined as the product of the `fwdDiffₗ (v i)` in the endomorphism ring
-  `Module.End ℤ (M → G)`, applied to `f`;
-* `fwdDiffComp_add`, `fwdDiffComp_zero_fun`: a composite of difference operators is additive in
-  the function it is applied to;
+* `fwdDiff_zero_arg`: differencing in the zero direction gives zero;
+* `fwdDiffCompₗ` and `fwdDiffComp`: the composite `Δ_[v 0] ∘ ⋯ ∘ Δ_[v (d - 1)]` attached to a
+  family `v : Fin d → M`, as an endomorphism of `M → G` and applied to `f`; the bundled form
+  gives `map_add`, `map_zero`, `map_sub`, `map_sum` and `map_zsmul` for free, of which
+  `fwdDiffComp_add` and `fwdDiffComp_zero` are the two used here;
 * `fwdDiffComp_cons_add_arg`: the composite attached to a family whose leading direction is a sum
   `a + b` splits as the sum of the composites for `a`, for `b` and for `a` and `b` in
   succession;
@@ -87,20 +87,33 @@ lemma fwdDiff_add_arg (h₁ h₂ : M) (f : M → G) :
   simp only [fwdDiff, Pi.add_apply, add_assoc]
   abel
 
+/-- Differencing in the zero direction gives zero. -/
+@[simp] lemma fwdDiff_zero_arg (f : M → G) : Δ_[(0 : M)] f = 0 := by
+  ext y
+  simp [fwdDiff]
+
+variable (M G) in
 /-- The composite `Δ_[v 0] ∘ ⋯ ∘ Δ_[v (d - 1)]` of the forward difference operators attached to a
-family of directions `v : Fin d → M`, applied to `f : M → G`.
+family of directions `v : Fin d → M`, as an endomorphism of `M → G`.
 
-It is defined as the product of the endomorphisms `fwdDiffₗ (v i)` in `Module.End ℤ (M → G)`,
-taken in the order `i = 0, 1, …, d - 1`; by `fwdDiff_comm` the order is immaterial. -/
-def fwdDiffComp (v : Fin d → M) (f : M → G) : M → G :=
-  (List.ofFn fun i ↦ fwdDiffₗ M G (v i)).prod f
+It is the product of the endomorphisms `fwdDiffₗ (v i)` in `Module.End ℤ (M → G)`, taken in the
+order `i = 0, 1, …, d - 1`; by `fwdDiff_comm` the order is immaterial. -/
+def fwdDiffCompₗ (v : Fin d → M) : Module.End ℤ (M → G) :=
+  (List.ofFn fun i ↦ fwdDiffₗ M G (v i)).prod
 
-@[simp] lemma fwdDiffComp_zero (v : Fin 0 → M) (f : M → G) : fwdDiffComp v f = f := by
-  simp [fwdDiffComp]
+/-- The composite `Δ_[v 0] ∘ ⋯ ∘ Δ_[v (d - 1)]` of the forward difference operators attached to a
+family of directions `v : Fin d → M`, applied to `f : M → G`. -/
+def fwdDiffComp (v : Fin d → M) (f : M → G) : M → G := fwdDiffCompₗ M G v f
+
+@[simp] lemma coe_fwdDiffCompₗ (v : Fin d → M) : ⇑(fwdDiffCompₗ M G v) = fwdDiffComp v := rfl
+
+@[simp] lemma fwdDiffComp_fin_zero (v : Fin 0 → M) (f : M → G) : fwdDiffComp v f = f := by
+  simp [fwdDiffComp, fwdDiffCompₗ]
 
 lemma fwdDiffComp_succ (v : Fin (d + 1) → M) (f : M → G) :
     fwdDiffComp v f = Δ_[v 0] (fwdDiffComp (fun i ↦ v i.succ) f) := by
-  simp only [fwdDiffComp, List.ofFn_succ, List.prod_cons, Module.End.mul_apply, coe_fwdDiffₗ]
+  simp only [fwdDiffComp, fwdDiffCompₗ, List.ofFn_succ, List.prod_cons, Module.End.mul_apply,
+    coe_fwdDiffₗ]
 
 /-- The composite of `d + 1` difference operators, with the first operator applied to `f`
 first. -/
@@ -111,29 +124,29 @@ lemma fwdDiffComp_succ' (v : Fin (d + 1) → M) (f : M → G) :
     refine Commute.list_prod_right _ _ fun x hx ↦ ?_
     obtain ⟨i, rfl⟩ := List.mem_ofFn.mp hx
     exact commute_fwdDiffₗ _ _
-  simp only [fwdDiffComp, List.ofFn_succ, List.prod_cons]
+  simp only [fwdDiffComp, fwdDiffCompₗ, List.ofFn_succ, List.prod_cons]
   rw [hc]
   simp only [Module.End.mul_apply, coe_fwdDiffₗ]
 
 /-- A composite of forward difference operators is additive in the function it is applied to. -/
 lemma fwdDiffComp_add (v : Fin d → M) (f g : M → G) :
     fwdDiffComp v (f + g) = fwdDiffComp v f + fwdDiffComp v g :=
-  map_add (List.ofFn fun i ↦ fwdDiffₗ M G (v i)).prod f g
+  map_add (fwdDiffCompₗ M G v) f g
 
 /-- A composite of forward difference operators kills the zero function. -/
-@[simp] lemma fwdDiffComp_zero_fun (v : Fin d → M) : fwdDiffComp v (0 : M → G) = 0 :=
-  map_zero (List.ofFn fun i ↦ fwdDiffₗ M G (v i)).prod
+@[simp] lemma fwdDiffComp_zero (v : Fin d → M) : fwdDiffComp v (0 : M → G) = 0 :=
+  map_zero (fwdDiffCompₗ M G v)
 
 /-- **Splitting the leading direction of a composite of difference operators.** Differencing in
 the direction `a + b` first is differencing in the direction `a`, plus differencing in the
 direction `b`, plus differencing in both directions in succession.
 
-This is `fwdDiff_add_arg` propagated through a composite of further difference operators; it is
-the operator identity behind the multilinearity of intersection numbers. -/
+This is the operator identity behind the multilinearity of intersection numbers. -/
 lemma fwdDiffComp_cons_add_arg (a b : M) (v : Fin d → M) (f : M → G) :
     fwdDiffComp (Fin.cons (a + b) v) f =
       fwdDiffComp (Fin.cons a v) f + fwdDiffComp (Fin.cons b v) f +
         fwdDiffComp (Fin.cons a (Fin.cons b v)) f := by
+  -- `fwdDiff_add_arg` propagated through the composite of the remaining difference operators
   simp only [fwdDiffComp_succ', Fin.cons_zero, Fin.cons_succ]
   rw [fwdDiff_add_arg, fwdDiffComp_add, fwdDiffComp_add, fwdDiff_comm a b]
 
@@ -229,7 +242,7 @@ lemma fwdDiffList_replicate (n : ℕ) (a : M) (f : M → G) :
 
 lemma fwdDiffComp_eq_fwdDiffList (v : Fin d → M) (f : M → G) :
     fwdDiffComp v f = fwdDiffList (List.ofFn v) f := by
-  rw [fwdDiffComp, fwdDiffList, List.map_ofFn, Function.comp_def]
+  rw [fwdDiffComp, fwdDiffCompₗ, fwdDiffList, List.map_ofFn, Function.comp_def]
 
 /-- Splitting a sum over the subsets of `Fin (d + 1)` according to whether the subset contains
 `0` or not. -/

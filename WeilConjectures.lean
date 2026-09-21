@@ -313,6 +313,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.ENat.Basic
+public import WeilConjectures.Mathlib.Data.Fintype.BigOperators
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
