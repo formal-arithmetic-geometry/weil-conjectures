@@ -50,10 +50,14 @@ written down with what is available.
 - `AlgebraicGeometry.Scheme.IdealSheafData.unitsToH1` — the connecting homomorphism
   `Γ(W₀, 𝒪^×) ⟶ H¹(W, I)`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.h1ToPic` — the map `H¹(W, I) ⟶ Pic W`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.hMap` — the map `H^k(W, I) ⟶ H^k(W', I')` induced
+  by a morphism `g : W' ⟶ W` and a comparison morphism `g^* I ⟶ I'`, and
+  `AlgebraicGeometry.Scheme.IdealSheafData.hMapOfComapLe`, its value at the canonical
+  comparison morphism.
 - `AlgebraicGeometry.Scheme.IdealSheafData.h1Map` — the vertical map
-  `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder, and
-  `AlgebraicGeometry.Scheme.IdealSheafData.h1MapOfComapLe`, its value at the canonical
-  comparison morphism `g^* I ⟶ I'`.
+  `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder, the degree-one case of `hMap` written
+  multiplicatively, and `AlgebraicGeometry.Scheme.IdealSheafData.h1MapOfComapLe`, its value at
+  the canonical comparison morphism `g^* I ⟶ I'`.
 
 ## Main statements
 
@@ -226,12 +230,41 @@ lemma pic_map_subschemeι_naturality (hg : I.comap g ≤ I') :
 
 variable (φ : (Modules.pullback g).obj I.toModules ⟶ I'.toModules)
 
-/-- The vertical map `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder: the pullback map on
-cohomology along `g`, followed by the comparison `g^* I ⟶ I'`. -/
+/-- **The map `H^k(W, I) ⟶ H^k(W', I')` induced by `g` and a comparison morphism
+`φ : g^* I ⟶ I'`**: the pullback map on cohomology along `g`, followed by `φ`. -/
+noncomputable def hMap (k : ℕ) : I.toModules.H k →+ I'.toModules.H k :=
+  (Modules.H.mapAddHom φ k).comp (Modules.H.pullbackAddHom g I.toModules k)
+
+@[simp]
+lemma hMap_apply (k : ℕ) (x : I.toModules.H k) :
+    hMap I I' g φ k x = Modules.H.map φ k (Modules.H.pullbackAddHom g I.toModules k x) :=
+  rfl
+
+/-- **The map `H^k(W, I) ⟶ H^k(W', I')` taken at the canonical comparison morphism**
+`AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap`. In degree one this is the map the
+two naturality squares hold for without any further hypothesis; see
+`unitsToH1_naturality_comapModulesMap` and `h1ToPic_naturality_comapModulesMap`. -/
+noncomputable def hMapOfComapLe (hg : I.comap g ≤ I') (k : ℕ) :
+    I.toModules.H k →+ I'.toModules.H k :=
+  hMap I I' g (comapModulesMap I I' g hg) k
+
+@[simp]
+lemma hMapOfComapLe_apply (hg : I.comap g ≤ I') (k : ℕ) (x : I.toModules.H k) :
+    hMapOfComapLe I I' g hg k x =
+      Modules.H.map (comapModulesMap I I' g hg) k
+        (Modules.H.pullbackAddHom g I.toModules k x) :=
+  rfl
+
+/-- The vertical map `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder: the degree-one case of
+`AlgebraicGeometry.Scheme.IdealSheafData.hMap`, written multiplicatively. -/
 noncomputable def h1Map :
     Multiplicative (I.toModules.H 1) →* Multiplicative (I'.toModules.H 1) :=
-  AddMonoidHom.toMultiplicative
-    ((Modules.H.mapAddHom φ 1).comp (Modules.H.pullbackAddHom g I.toModules 1))
+  AddMonoidHom.toMultiplicative (hMap I I' g φ 1)
+
+@[simp]
+lemma toAdd_h1Map (x : Multiplicative (I.toModules.H 1)) :
+    Multiplicative.toAdd (h1Map I I' g φ x) = hMap I I' g φ 1 (Multiplicative.toAdd x) :=
+  rfl
 
 /-- The vertical map `H¹(W, I) ⟶ H¹(W', I')` of the naturality ladder, taken at the canonical
 comparison morphism `AlgebraicGeometry.Scheme.IdealSheafData.comapModulesMap`. This is the map
@@ -240,6 +273,13 @@ the two naturality squares hold for without any further hypothesis; see
 noncomputable def h1MapOfComapLe (hg : I.comap g ≤ I') :
     Multiplicative (I.toModules.H 1) →* Multiplicative (I'.toModules.H 1) :=
   h1Map I I' g (comapModulesMap I I' g hg)
+
+@[simp]
+lemma toAdd_h1MapOfComapLe (hg : I.comap g ≤ I')
+    (x : Multiplicative (I.toModules.H 1)) :
+    Multiplicative.toAdd (h1MapOfComapLe I I' g hg x) =
+      hMapOfComapLe I I' g hg 1 (Multiplicative.toAdd x) :=
+  rfl
 
 variable (hI : I ^ 2 = 0) (hI' : I' ^ 2 = 0) (hg : I.comap g ≤ I')
   (hφ : (Modules.pullback g).map I.toModulesι ≫ (Modules.pullbackUnitIso g).hom =

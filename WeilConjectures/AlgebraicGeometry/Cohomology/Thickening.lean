@@ -67,6 +67,18 @@ noncomputable def thickeningH1Map (n : ℕ) :
   IdealSheafData.h1MapOfComapLe _ _ (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
     (comap_thickeningIdeal_le f f' u hu t n)
 
+/-- **The map on deformation classes, additively**: `AlgebraicGeometry.Scheme.thickeningH1Map`
+is `AlgebraicGeometry.Scheme.IdealSheafData.hMapOfComapLe` in degree one, for the base change
+of `u` and the canonical comparison morphism of thickening ideals. -/
+@[simp]
+lemma toAdd_thickeningH1Map (n : ℕ)
+    (x : Multiplicative ((thickeningIdeal f t n).toModules.H 1)) :
+    Multiplicative.toAdd (thickeningH1Map f f' u hu t n x) =
+      IdealSheafData.hMapOfComapLe (thickeningIdeal f t n) (thickeningIdeal f' t n)
+        (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
+        (comap_thickeningIdeal_le f f' u hu t n) 1 (Multiplicative.toAdd x) :=
+  rfl
+
 /-- **The naturality ladder kills the component of an obstruction class along a morphism over
 `T` on which the line bundle is trivial.**
 

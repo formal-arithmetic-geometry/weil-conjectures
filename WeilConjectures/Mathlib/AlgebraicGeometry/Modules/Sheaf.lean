@@ -222,9 +222,8 @@ restriction to the fibre does not depend on the neighbourhood the section is tak
 - `AlgebraicGeometry.Scheme.Modules.restrictFunctorCompMorphismRestrictIso`
 - `AlgebraicGeometry.Scheme.Modules.overEquivInverseRestrictIso`
 - `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
-- `AlgebraicGeometry.Scheme.Modules.pullbackFreeIso`: the pullback of a free sheaf of finite
-  rank is free, compatibly with `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso` on each
-  summand.
+- `AlgebraicGeometry.Scheme.Modules.pullbackFreeIso`: the pullback of a free sheaf is free,
+  compatibly with `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso` on each summand.
 - `AlgebraicGeometry.Scheme.Modules.pullbackOver`
 - `AlgebraicGeometry.Scheme.Modules.pullbackOverObjIso`
 - `AlgebraicGeometry.Scheme.Modules.Hom.naturality`: a morphism of sheaves of modules commutes
@@ -369,6 +368,38 @@ noncomputable def Scheme.isColimitFreeModulesCofan (X : Scheme.{u}) (ι : Type u
 
 instance (X : Scheme.{u}) : HasFiniteBiproducts X.Modules :=
   HasFiniteBiproducts.of_hasFiniteProducts
+
+/-- **The `j`-th inclusion into the biproduct `⨁ (fun _ : ι ↦ 𝒪ₓ)`, read through the comparison
+with the coproduct, is `SheafOfModules.ιFree j`.**
+
+Like `AlgebraicGeometry.Scheme.freeModulesCofan_inj` this is a place where the unfolding
+`X.freeModules ι = ∐ (fun _ ↦ 𝒪ₓ)` is used; downstream proofs should go through it rather than
+rely on that unfolding themselves. -/
+@[reassoc (attr := simp)]
+lemma Scheme.biproduct_ι_comp_isoCoproduct_hom (X : Scheme.{u}) (ι : Type u) [Finite ι]
+    (j : ι) :
+    biproduct.ι (fun _ : ι ↦ X.structureModules) j ≫
+        (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).hom =
+      (SheafOfModules.ιFree j : X.structureModules ⟶ X.freeModules ι) := by
+  rw [biproduct.isoCoproduct_hom, biproduct.ι_desc]
+  exact X.freeModulesCofan_inj ι j
+
+/-- **The `j`-th projection of the biproduct `⨁ (fun _ : ι ↦ 𝒪ₓ)`, read through the comparison
+with the coproduct, is `SheafOfModules.πFree j`**: the companion of
+`AlgebraicGeometry.Scheme.biproduct_ι_comp_isoCoproduct_hom`. -/
+@[reassoc (attr := simp)]
+lemma Scheme.isoCoproduct_inv_comp_biproduct_π (X : Scheme.{u}) (ι : Type u) [Finite ι]
+    (j : ι) :
+    (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).inv ≫
+        biproduct.π (fun _ : ι ↦ X.structureModules) j =
+      (SheafOfModules.πFree j : X.freeModules ι ⟶ X.structureModules) := by
+  rw [Iso.inv_comp_eq]
+  refine biproduct.hom_ext' _ _ fun k ↦ ?_
+  rw [← Category.assoc, X.biproduct_ι_comp_isoCoproduct_hom]
+  by_cases h : k = j
+  · subst h
+    rw [biproduct.ι_π_self, SheafOfModules.ιFree_πFree_self]
+  · rw [biproduct.ι_π_ne _ h, SheafOfModules.ιFree_πFree_of_ne h]
 
 namespace Scheme.Modules
 
@@ -980,23 +1011,23 @@ section Pullback
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
 
+/-- The pullback of sheaves of modules along `f` is a left adjoint, in the form the
+constructions of `Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree` ask for it. -/
+instance : (SheafOfModules.pushforward.{u} f.toRingCatSheafHom).IsRightAdjoint :=
+  (SheafOfModules.pullbackPushforwardAdjunction.{u} f.toRingCatSheafHom).isRightAdjoint
+
 /-- The pullback of the structure sheaf `𝒪_Y` along a morphism of schemes `f : X ⟶ Y`
 is the structure sheaf `𝒪_X`. -/
 noncomputable def pullbackUnitIso :
     (pullback f).obj Y.structureModules ≅ X.structureModules :=
-  have : (SheafOfModules.pushforward f.toRingCatSheafHom).IsRightAdjoint :=
-    inferInstanceAs (Modules.pushforward f).IsRightAdjoint
   have := SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal (φ := f.toRingCatSheafHom)
   asIso (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom)
 
-/-- The pullback of the free sheaf `𝒪_Y^ι` of finite rank along a morphism of schemes
-`f : X ⟶ Y` is the free sheaf `𝒪_X^ι`. It is `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso`
-on each summand, by
+/-- The pullback of the free sheaf `𝒪_Y^ι` along a morphism of schemes `f : X ⟶ Y` is the free
+sheaf `𝒪_X^ι`. It is `AlgebraicGeometry.Scheme.Modules.pullbackUnitIso` on each summand, by
 `AlgebraicGeometry.Scheme.Modules.pullback_map_ιFree_comp_pullbackFreeIso_hom`. -/
 noncomputable def pullbackFreeIso (ι : Type u) :
     (pullback f).obj (Y.freeModules ι) ≅ X.freeModules ι :=
-  have : (SheafOfModules.pushforward f.toRingCatSheafHom).IsRightAdjoint :=
-    inferInstanceAs (Modules.pushforward f).IsRightAdjoint
   SheafOfModules.pullbackObjFreeIso f.toRingCatSheafHom ι
 
 /-- **The identification `f^*(𝒪_Y^ι) ≅ 𝒪_X^ι` is the identification `f^* 𝒪_Y ≅ 𝒪_X` on each
@@ -1004,10 +1035,10 @@ summand**:
 
 ```
   f^*(𝒪_Y) ──f^*(ιFree i)──▶ f^*(𝒪_Y^ι)
-      │                           │ pullbackFreeIso
-      │ pullbackUnitIso           ▼
-      ▼                        𝒪_X^ι
-     𝒪_X ──────ιFree i──────────▶
+      │                           │
+      │ pullbackUnitIso           │ pullbackFreeIso
+      ▼                           ▼
+     𝒪_X ──────ιFree i─────────▶ 𝒪_X^ι
 ```
 -/
 @[reassoc (attr := simp)]

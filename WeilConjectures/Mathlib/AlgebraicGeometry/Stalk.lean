@@ -90,9 +90,7 @@ The last sections base change a morphism `f : W ⟶ T` along `Tₙ ⟶ T` for a 
 - `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver`: the base change
   `W' ×_T Tₙ ⟶ W ×_T Tₙ` of a morphism `W' ⟶ W` over `T`, and
   `AlgebraicGeometry.Scheme.comap_thickeningIdeal_le`, which says that it pulls the thickening
-  ideal of `W` into the thickening ideal of `W'`, and
-  `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMapOver_comp_mapZero`, the commutative square
-  it forms with the closed immersion of the zeroth neighbourhood.
+  ideal of `W` into the thickening ideal of `W'`.
 - the `AlgebraicGeometry.Surjective` instance on
   `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap`: for `m ≤ n` the transition morphism
   `W ×_T Tₘ ⟶ W ×_T Tₙ` is surjective.
@@ -1143,9 +1141,11 @@ change of a morphism `u : W' ⟶ W` over `T`.**
   W ×_T T₀ ───infinitesimalBaseChangeMapZero───▶ W ×_T T_{n+1}
 ```
 
-This is `AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap_comp_mapOver` for `0 ≤ n + 1`, in
-the direction in which `AlgebraicGeometry.Scheme.Modules.baseChange` reads a commutative
-square. -/
+This carries no new content: it is the `@[reassoc (attr := simp)]` lemma
+`AlgebraicGeometry.Scheme.infinitesimalBaseChangeMap_comp_mapOver` for `0 ≤ n + 1`, reversed
+into the direction in which `AlgebraicGeometry.Scheme.Modules.baseChange` reads a commutative
+square. Being the reverse orientation of a `simp` lemma, it must *not* be tagged `simp` or
+`reassoc` itself. -/
 lemma infinitesimalBaseChangeMapOver_comp_mapZero (n : ℕ) :
     infinitesimalBaseChangeMapOver f f' u hu t 0 ≫ infinitesimalBaseChangeMapZero f t n =
       infinitesimalBaseChangeMapZero f' t n ≫

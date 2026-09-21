@@ -46,9 +46,8 @@ is assembled from three ingredients:
 * `AlgebraicGeometry.Scheme.Modules.H.structurePullbackMap` — the composite of the pullback
   map with the identification `f^* 𝒪_Y ≅ 𝒪_X`, that is the pullback map
   `H^n(Y, 𝒪_Y) ⟶ H^n(X, 𝒪_X)` on the cohomology of the structure sheaves.
-* `AlgebraicGeometry.Scheme.Modules.H.map_pullbackFreeIso_pullbackAddHom_freeLinearEquiv_symm` —
-  the identification `H^n(-, 𝒪^ι) ≅ (ι → H^n(-, 𝒪))` of a free sheaf of finite rank is natural
-  for pullback.
+* `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv_symm_naturality` — the identification
+  `H^n(-, 𝒪^ι) ≅ (ι → H^n(-, 𝒪))` of a free sheaf of finite rank is natural for pullback.
 * `AlgebraicGeometry.Scheme.Modules.H.pullbackMapOver` and
   `AlgebraicGeometry.Scheme.Modules.H.structurePullbackMapOver` — the same two maps for a
   morphism of schemes over `Spec R`, where they are `R`-linear.
@@ -340,7 +339,6 @@ lemma H.structurePullbackMap_apply (n : ℕ) (e : Y.structureModules.H n) :
       H.map (pullbackUnitIso f).hom n (H.pullbackAddHom f Y.structureModules n e) :=
   rfl
 
-set_option backward.isDefEq.respectTransparency.types false in
 /-- **The identification `H^n(-, 𝒪^ι) ≅ (ι → H^n(-, 𝒪))` of
 `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv` is natural for pullback**: assembling a
 family of classes on `𝒪_Y` into a class on `𝒪_Y^ι` and pulling that back along `f`, through the
@@ -355,13 +353,12 @@ pulling back each member of the family and assembling the results on `X`.
   (ι → H^n(X, 𝒪_X)) ──────────────────freeLinearEquiv⁻¹───────────────────▶ H^n(X, 𝒪_X^ι)
 ```
 -/
-lemma H.map_pullbackFreeIso_pullbackAddHom_freeLinearEquiv_symm {ι : Type u} [Fintype ι] (n : ℕ)
+lemma H.freeLinearEquiv_symm_naturality {ι : Type u} [Fintype ι] (n : ℕ)
     (p : ι → Y.structureModules.H n) :
     H.map (pullbackFreeIso f ι).hom n
         (H.pullbackAddHom f (Y.freeModules ι) n ((H.freeLinearEquiv Y ι n).symm p)) =
       (H.freeLinearEquiv X ι n).symm fun j ↦ H.structurePullbackMap f n (p j) := by
-  rw [H.freeLinearEquiv_symm_apply_eq_sum, H.freeLinearEquiv_symm_apply_eq_sum,
-    _root_.map_sum, _root_.map_sum]
+  rw [H.freeLinearEquiv_symm_apply, H.freeLinearEquiv_symm_apply, _root_.map_sum, _root_.map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [H.pullbackAddHom_map, ← LinearMap.comp_apply, ← H.map_comp,
     pullback_map_ιFree_comp_pullbackFreeIso_hom, H.map_comp, LinearMap.comp_apply,

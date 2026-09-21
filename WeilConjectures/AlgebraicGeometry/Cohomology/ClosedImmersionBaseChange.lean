@@ -79,9 +79,11 @@ sheaves and is genuinely harder.
   closed immersion commutes with base change**, and
   `AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_pushforwardAddEquiv`, the equivalent form
   using `H.pushforwardAddEquiv` instead of its inverse `H.pushforwardMap`.
-* `AlgebraicGeometry.Scheme.Modules.H.map_pullbackAddHom_pushforwardAddEquiv_freeLinearEquiv_symm`
-  — the base change square for the cohomology of a *free* sheaf of finite rank pushed forward
-  along a closed immersion, read as a family of classes on the structure sheaf.
+* `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv_symm_baseChange` — the base change square
+  for the cohomology of a *free* sheaf of finite rank pushed forward along a closed immersion,
+  read as a family of classes on the structure sheaf, and
+  `AlgebraicGeometry.Scheme.Modules.H.map_freeLinearEquiv_symm_baseChange`, the form in which a
+  comparison morphism out of the free sheaf is carried along.
 -/
 
 @[expose] public section
@@ -278,30 +280,67 @@ theorem H.pullbackAddHom_pushforwardAddEquiv (w : g₀ ≫ i₀ = i'₀ ≫ g) (
   simpa using h
 
 /-- **The cohomology of a free sheaf pushed forward along a closed immersion, read as a family
-of classes on the structure sheaf, is natural in the scheme.**
+of classes on the structure sheaf, commutes with base change.**
+
+Let `g₀ ≫ i₀ = i'₀ ≫ g` be a commutative square with `i₀` and `i'₀` closed immersions.
+Assembling a family of classes on `𝒪_{W₀}` into a class of `H^k(W₁, i₀_*(𝒪^ι))` and pulling
+that back along `g` is assembling the pulled back family on `W'₀`:
+
+```
+  (ι → H^k(W₀, 𝒪)) ──pushforwardAddEquiv ∘ freeLinearEquiv⁻¹──▶ H^k(W₁, i₀_*(𝒪^ι))
+         │                                                               │
+         │ structurePullbackMap g₀ on each member         map ∘ pullbackAddHom g
+         ▼                                                               ▼
+  (ι → H^k(W'₀, 𝒪)) ─pushforwardAddEquiv ∘ freeLinearEquiv⁻¹─▶ H^k(W'₁, i'₀_*(𝒪^ι))
+```
+
+The right-hand map is the base change morphism of
+`AlgebraicGeometry.Scheme.Modules.baseChange` followed by the identification
+`g₀^*(𝒪_{W₀}^ι) ≅ 𝒪_{W'₀}^ι` of `AlgebraicGeometry.Scheme.Modules.pullbackFreeIso`. -/
+theorem H.freeLinearEquiv_symm_baseChange {ι : Type u} [Fintype ι] (w : g₀ ≫ i₀ = i'₀ ≫ g)
+    (k : ℕ) (p : ι → W₀.structureModules.H k) :
+    H.map ((baseChange w).natTrans.app (W₀.freeModules ι) ≫
+        (pushforward i'₀).map (pullbackFreeIso g₀ ι).hom) k
+        (H.pullbackAddHom g ((pushforward i₀).obj (W₀.freeModules ι)) k
+          (H.pushforwardAddEquiv i₀ (W₀.freeModules ι) k
+            ((H.freeLinearEquiv W₀ ι k).symm p))) =
+      H.pushforwardAddEquiv i'₀ (W'₀.freeModules ι) k
+        ((H.freeLinearEquiv W'₀ ι k).symm fun j ↦ H.structurePullbackMap g₀ k (p j)) := by
+  -- the base change square for the pushforward of `𝒪_{W₀}^ι` itself
+  have hbaseChange : H.map ((baseChange w).natTrans.app (W₀.freeModules ι)) k
+        (H.pullbackAddHom g ((pushforward i₀).obj (W₀.freeModules ι)) k
+          (H.pushforwardAddEquiv i₀ (W₀.freeModules ι) k
+            ((H.freeLinearEquiv W₀ ι k).symm p))) =
+      H.pushforwardAddEquiv i'₀ ((pullback g₀).obj (W₀.freeModules ι)) k
+        (H.pullbackAddHom g₀ (W₀.freeModules ι) k ((H.freeLinearEquiv W₀ ι k).symm p)) :=
+    H.pullbackAddHom_pushforwardAddEquiv w _ k _
+  -- the identification `g₀^*(𝒪_{W₀}^ι) ≅ 𝒪_{W'₀}^ι` on the family
+  have hfree : H.map ((pushforward i'₀).map (pullbackFreeIso g₀ ι).hom) k
+        (H.pushforwardAddEquiv i'₀ ((pullback g₀).obj (W₀.freeModules ι)) k
+          (H.pullbackAddHom g₀ (W₀.freeModules ι) k ((H.freeLinearEquiv W₀ ι k).symm p))) =
+      H.pushforwardAddEquiv i'₀ (W'₀.freeModules ι) k
+        ((H.freeLinearEquiv W'₀ ι k).symm fun j ↦ H.structurePullbackMap g₀ k (p j)) := by
+    rw [← H.pushforwardAddEquiv_map, H.freeLinearEquiv_symm_naturality]
+  rw [H.map_comp, LinearMap.comp_apply, hbaseChange, hfree]
+
+/-- **A comparison morphism out of the pushforward of a free sheaf is carried along the base
+change square**, provided it is itself compatible with base change.
 
 Let `g₀ ≫ i₀ = i'₀ ≫ g` be a commutative square with `i₀` and `i'₀` closed immersions, let
-`Φ : i₀_*(𝒪_{X₀}^ι) ⟶ N` and `Φ' : i'₀_*(𝒪_{Y₀}^ι) ⟶ N'` be morphisms of sheaves of modules on
+`Φ : i₀_*(𝒪_{W₀}^ι) ⟶ N` and `Φ' : i'₀_*(𝒪_{W'₀}^ι) ⟶ N'` be morphisms of sheaves of modules on
 the two upper schemes, and let `ψ : g^* N ⟶ N'` compare them across the square (the hypothesis
-`hΦ`). Assembling a family of classes on `𝒪_{X₀}` into a class of `H^k(X₁, N)` and pulling that
-back along `g` is assembling the pulled back family into a class of `H^k(Y₁, N')`:
+`hΦ`). Assembling a family of classes on `𝒪_{W₀}` into a class of `H^k(W₁, N)` and pulling that
+back along `g` is assembling the pulled back family into a class of `H^k(W'₁, N')`:
 
 ```
-  (ι → H^k(X₀, 𝒪)) ─freeLinearEquiv⁻¹─▶ H^k(X₀, 𝒪^ι) ─pushforwardAddEquiv─▶ H^k(X₁, i₀_*(𝒪^ι))
-        │                                                                          │ map Φ
-        │ structurePullbackMap g₀ on each member                                   ▼
-        │                                                                     H^k(X₁, N)
-        │                                                       map ψ ∘ pullbackAddHom g
-        ▼                                                                          ▼
-  (ι → H^k(Y₀, 𝒪)) ─freeLinearEquiv⁻¹─▶ H^k(Y₀, 𝒪^ι) ─pushforwardAddEquiv─▶ ─map Φ'─▶ H^k(Y₁, N')
+  (ι → H^k(W₀, 𝒪)) ──map Φ ∘ pushforwardAddEquiv ∘ freeLinearEquiv⁻¹──▶ H^k(W₁, N)
+         │                                                                   │
+         │ structurePullbackMap g₀ on each member         map ψ ∘ pullbackAddHom g
+         ▼                                                                   ▼
+  (ι → H^k(W'₀, 𝒪)) ─map Φ' ∘ pushforwardAddEquiv ∘ freeLinearEquiv⁻¹─▶ H^k(W'₁, N')
 ```
-
-The three steps of the composite are natural separately: the outer two by
-`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_map` — for the free sheaf through
-`AlgebraicGeometry.Scheme.Modules.H.map_pullbackFreeIso_pullbackAddHom_freeLinearEquiv_symm` —
-and the middle one by
-`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_pushforwardAddEquiv`. -/
-theorem H.map_pullbackAddHom_pushforwardAddEquiv_freeLinearEquiv_symm {ι : Type u} [Fintype ι]
+-/
+theorem H.map_freeLinearEquiv_symm_baseChange {ι : Type u} [Fintype ι]
     {N : W₁.Modules} {N' : W'₁.Modules} (w : g₀ ≫ i₀ = i'₀ ≫ g)
     (Φ : (pushforward i₀).obj (W₀.freeModules ι) ⟶ N)
     (Φ' : (pushforward i'₀).obj (W'₀.freeModules ι) ⟶ N') (ψ : (pullback g).obj N ⟶ N')
@@ -314,24 +353,8 @@ theorem H.map_pullbackAddHom_pushforwardAddEquiv_freeLinearEquiv_symm {ι : Type
           ((H.freeLinearEquiv W₀ ι k).symm p)))) =
       H.map Φ' k (H.pushforwardAddEquiv i'₀ (W'₀.freeModules ι) k
         ((H.freeLinearEquiv W'₀ ι k).symm fun j ↦ H.structurePullbackMap g₀ k (p j))) := by
-  have step2 : H.map ((baseChange w).natTrans.app (W₀.freeModules ι)) k
-        (H.pullbackAddHom g ((pushforward i₀).obj (W₀.freeModules ι)) k
-          (H.pushforwardAddEquiv i₀ (W₀.freeModules ι) k
-            ((H.freeLinearEquiv W₀ ι k).symm p))) =
-      H.pushforwardAddEquiv i'₀ ((pullback g₀).obj (W₀.freeModules ι)) k
-        (H.pullbackAddHom g₀ (W₀.freeModules ι) k ((H.freeLinearEquiv W₀ ι k).symm p)) :=
-    H.pullbackAddHom_pushforwardAddEquiv w _ k _
-  have step3 : H.map ((pushforward i'₀).map (pullbackFreeIso g₀ ι).hom) k
-        (H.pushforwardAddEquiv i'₀ ((pullback g₀).obj (W₀.freeModules ι)) k
-          (H.pullbackAddHom g₀ (W₀.freeModules ι) k ((H.freeLinearEquiv W₀ ι k).symm p))) =
-      H.pushforwardAddEquiv i'₀ (W'₀.freeModules ι) k
-        ((H.freeLinearEquiv W'₀ ι k).symm fun j ↦ H.structurePullbackMap g₀ k (p j)) := by
-    rw [← H.pushforwardAddEquiv_map, H.map_pullbackFreeIso_pullbackAddHom_freeLinearEquiv_symm]
-  rw [H.pullbackAddHom_map, ← LinearMap.comp_apply, ← H.map_comp, hΦ, H.map_comp, H.map_comp,
-    LinearMap.comp_apply, LinearMap.comp_apply]
-  exact congrArg (fun z ↦ H.map Φ' k z)
-    ((congrArg (fun z ↦ H.map ((pushforward i'₀).map (pullbackFreeIso g₀ ι).hom) k z)
-      step2).trans step3)
+  rw [H.pullbackAddHom_map, ← LinearMap.comp_apply, ← H.map_comp, hΦ, ← Category.assoc,
+    H.map_comp, LinearMap.comp_apply, H.freeLinearEquiv_symm_baseChange]
 
 end BaseChange
 
