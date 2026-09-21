@@ -342,7 +342,9 @@ the basic open subset of `g`.
 This identifies `AlgebraicGeometry.Scheme.Modules.VanishesAt` for an invertible sheaf with the
 hypothesis of
 `AlgebraicGeometry.Scheme.Modules.isSMulRegular_iff_associatedPoints_subset_basicOpen`, and
-generalises `AlgebraicGeometry.Scheme.Modules.vanishesAt_structureModules_iff`. -/
+generalises `AlgebraicGeometry.Scheme.Modules.vanishesAt_structureModules_iff`. See
+`AlgebraicGeometry.Scheme.Modules.vanishesAt_smul_iff_notMem_basicOpen` for the global form, where
+the section is literally a multiple `g • s` of a section not vanishing at the point. -/
 theorem vanishesAt_iff_notMem_basicOpen (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)]
     (s : Γ(L, ⊤)) (g : Γ(X, W)) (hg : L.presheaf.map W.leTop.op s = g • m)
     {x : X} (hx : x ∈ W) :

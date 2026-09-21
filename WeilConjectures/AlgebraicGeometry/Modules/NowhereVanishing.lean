@@ -39,9 +39,6 @@ to a unit on every open `V ≤ W` and multiplication by `s` is bijective on the 
   trivialisation `AlgebraicGeometry.Scheme.Modules.isoUnitOfForallNotVanishesAt`, and
   `AlgebraicGeometry.Scheme.Modules.exists_smul_eq_of_forall_not_vanishesAt`: every global
   section of `L` is a multiple of a nowhere vanishing one.
-- `AlgebraicGeometry.Scheme.Modules.vanishesAt_smul_iff_notMem_basicOpen_of_forall_not_vanishesAt`:
-  the multiple `g • s` of a nowhere vanishing section vanishes exactly outside the basic open
-  subset of `g`.
 - `AlgebraicGeometry.Scheme.Modules.eq_zero_or_forall_not_vanishesAt`: **the Liouville
   dichotomy** over a scheme whose global functions form a field, with the pointwise form
   `AlgebraicGeometry.Scheme.Modules.forall_not_vanishesAt_of_isField` and the version
@@ -132,19 +129,6 @@ theorem exists_smul_eq_of_forall_not_vanishesAt (hL : L.Invertible) {s : Γ(L, �
     (ConcreteCategory.bijective_of_isIso (Hom.app (homOfSectionTop L s) ⊤)).2 t
   exact ⟨g, by rw [← hg, homOfSectionTop_app_top]⟩
 
-/-- **A multiple of a nowhere vanishing section vanishes exactly off the basic open subset of the
-multiplier.** -/
-theorem vanishesAt_smul_iff_notMem_basicOpen_of_forall_not_vanishesAt {s : Γ(L, ⊤)}
-    (hs : ∀ x : X, ¬ L.VanishesAt s x) (g : Γ(X, ⊤)) (x : X) :
-    L.VanishesAt (g • s) x ↔ x ∉ X.basicOpen g := by
-  rw [vanishesAt_iff, germ_smul, Scheme.mem_basicOpen_top]
-  refine ⟨fun h hu ↦ hs x ?_, fun h ↦ Submodule.smul_mem_smul
-    (IsLocalRing.mem_maximalIdeal _ |>.2 (mem_nonunits_iff.2 h)) Submodule.mem_top⟩
-  obtain ⟨u, hu⟩ := hu
-  have hmem := Submodule.smul_mem _ ((u⁻¹ : (X.presheaf.stalk x)ˣ) : X.presheaf.stalk x) h
-  rw [smul_smul, ← hu, Units.inv_mul, one_smul] at hmem
-  exact hmem
-
 /-- **The Liouville dichotomy, pointwise.** On a scheme whose ring of global functions is a
 field, if one global section of an invertible sheaf vanishes nowhere, then every non-zero global
 section vanishes nowhere. -/
@@ -156,7 +140,7 @@ theorem forall_not_vanishesAt_of_isField (hX : IsField Γ(X, ⊤)) (hL : L.Inver
     rintro rfl
     exact ht (zero_smul _ _)
   have hgu : IsUnit g := isUnit_iff_exists_inv.2 (hX.mul_inv_cancel hg)
-  rw [vanishesAt_smul_iff_notMem_basicOpen_of_forall_not_vanishesAt hs, not_not,
+  rw [vanishesAt_smul_iff_notMem_basicOpen (hs x), not_not,
     (X.isUnit_iff_basicOpen_eq_top g).1 hgu]
   trivial
 

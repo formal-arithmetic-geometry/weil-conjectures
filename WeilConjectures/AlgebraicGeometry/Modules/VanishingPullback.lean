@@ -26,8 +26,10 @@ The proof has three ingredients.
   pullback of a global section along an open immersion with its restriction.
 * **A globally trivialised sheaf.** If `L` is trivialised by a global section `t`, that is if
   multiplication by `t` is an isomorphism `𝒪ᵧ ≅ L`, then every global section of `L` is `g • t`
-  for a unique global function `g`, and it vanishes exactly outside the basic open subset of
-  `g`. Multiplication by `t` pulls back to multiplication by `a^* t`
+  for a unique global function `g`; since `t` vanishes nowhere
+  (`AlgebraicGeometry.Scheme.Modules.not_vanishesAt_of_isIso_homOfSectionTop`), the section
+  `g • t` vanishes exactly outside the basic open subset of `g`. Multiplication by `t` pulls
+  back to multiplication by `a^* t`
   (`AlgebraicGeometry.Scheme.Modules.map_homOfSectionTop`), so the same description holds
   upstairs with `g` replaced by its pullback, and the basic open subsets correspond.
   This is `vanishesAt_sectionsPullback_iff_of_isIso_homOfSectionTop`.
@@ -46,9 +48,8 @@ The proof has three ingredients.
   the same statement for a sheaf of modules trivialised by a global section.
 - `AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_of_iso`: vanishing is invariant under an
   isomorphism of sheaves of modules.
-- `AlgebraicGeometry.Scheme.Modules.vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop`:
-  a multiple of a trivialising global section vanishes exactly outside the basic open subset of
-  the multiplier.
+- `AlgebraicGeometry.Scheme.Modules.not_vanishesAt_of_isIso_homOfSectionTop`: a global section
+  trivialising a sheaf of modules vanishes at no point.
 -/
 
 @[expose] public section
@@ -170,14 +171,17 @@ lemma vanishesAt_sectionsPullback_iff_of_isOpenImmersion (j : Y ⟶ X) [IsOpenIm
   rw [← restrictFunctorIsoPullback_hom_app_app_top j F s]
   exact vanishesAt_iff_of_iso ((restrictFunctorIsoPullback j).app F) _ y
 
-/-- **A multiple of a trivialising global section vanishes exactly outside the basic open subset
-of the multiplier.** -/
-lemma vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop {M : X.Modules} {t : Γ(M, ⊤)}
-    (ht : IsIso (homOfSectionTop M t)) (g : Γ(X, ⊤)) (x : X) :
-    M.VanishesAt (g • t) x ↔ x ∉ X.basicOpen g := by
-  have h := vanishesAt_iff_of_iso (asIso (homOfSectionTop M t)) g x
-  rw [asIso_hom, homOfSectionTop_app_top] at h
-  exact h.trans (vanishesAt_structureModules_iff x g)
+/-- **A global section trivialising a sheaf of modules vanishes at no point**: it is the image of
+the unit function, which vanishes nowhere because its basic open subset is all of `X`.
+
+With `AlgebraicGeometry.Scheme.Modules.vanishesAt_smul_iff_notMem_basicOpen` this describes the
+vanishing locus of every global section of a trivialised sheaf of modules. -/
+lemma not_vanishesAt_of_isIso_homOfSectionTop {M : X.Modules} {t : Γ(M, ⊤)}
+    (ht : IsIso (homOfSectionTop M t)) (x : X) : ¬ M.VanishesAt t x := by
+  have h := vanishesAt_iff_of_iso (asIso (homOfSectionTop M t)) (1 : Γ(X, ⊤)) x
+  rw [asIso_hom, homOfSectionTop_app_top, one_smul] at h
+  rw [h, vanishesAt_structureModules_iff, not_not, Scheme.basicOpen_one]
+  trivial
 
 /-- **Vanishing is compatible with pullback, for a sheaf of modules trivialised by a global
 section.** -/
@@ -190,14 +194,30 @@ lemma vanishesAt_sectionsPullback_iff_of_isIso_homOfSectionTop (a : X ⟶ Y) {M 
   have ht' : IsIso (homOfSectionTop ((pullback a).obj M) (sectionsPullback a M t)) := by
     rw [← map_homOfSectionTop]
     infer_instance
-  rw [sectionsPullback_smul, vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop ht',
-    vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop ht, not_iff_not,
-    ← Scheme.preimage_basicOpen_top]
+  rw [sectionsPullback_smul,
+    vanishesAt_smul_iff_notMem_basicOpen (not_vanishesAt_of_isIso_homOfSectionTop ht' x),
+    vanishesAt_smul_iff_notMem_basicOpen (not_vanishesAt_of_isIso_homOfSectionTop ht _),
+    not_iff_not, ← Scheme.preimage_basicOpen_top]
   rfl
 
 /-- **Vanishing of a section of a line bundle is compatible with pullback**: a global section
 `s` of an invertible sheaf of modules `L` on `Y` vanishes at `a x` exactly when its pullback
-along `a : X ⟶ Y` vanishes at `x`. -/
+along `a : X ⟶ Y` vanishes at `x`.
+
+The proof localises on an open `W ∋ a x` over which `L` is trivialised, and reads the pullback
+of `s` along the two sides of the commuting square
+
+```
+             a ∣_ W
+   a ⁻¹ᵁ W ──────────▶ W
+      │                │
+      │ (a ⁻¹ᵁ W).ι    │ W.ι
+      ▼                ▼
+      X ──────a──────▶ Y
+```
+
+through `AlgebraicGeometry.Scheme.Modules.pullbackTriangle`: down-then-right is the open
+immersion case, right-then-down the trivialised case. -/
 theorem vanishesAt_sectionsPullback_iff {L : Y.Modules} (hL : L.Invertible) (a : X ⟶ Y)
     (s : Γ(L, ⊤)) (x : X) :
     ((pullback a).obj L).VanishesAt (sectionsPullback a L s) x ↔ L.VanishesAt s (a.base x) := by
