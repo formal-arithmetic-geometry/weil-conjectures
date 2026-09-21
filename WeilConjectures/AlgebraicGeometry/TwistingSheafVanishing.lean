@@ -45,8 +45,11 @@ ring, and more generally whenever the irrelevant ideal is generated in degree on
   vanishes exactly off `D₊(a)`.
 - `AlgebraicGeometry.Proj.not_vanishesAt_homogeneousSection`: unconditionally, the section
   attached to `a` does not vanish at any point of `D₊(a)`.
+- `AlgebraicGeometry.Proj.vanishesAt_homogeneousSection_iff`: as soon as `Proj 𝒜` is covered by
+  basic open sets of homogeneous elements whose degrees divide `j`, the section attached to `a`
+  vanishes at a point exactly when that point lies outside `D₊(a)`.
 - `AlgebraicGeometry.Proj.setOf_not_vanishesAt_homogeneousSection`: the non-vanishing locus of
-  the section attached to `a` is `D₊(a)`, and
+  the section attached to `a` is therefore `D₊(a)`, and
   `AlgebraicGeometry.Proj.exists_isAffineOpen_eq_setOf_not_vanishesAt` records that this locus
   is an affine open subset of `Proj 𝒜` when `a` has positive degree.
 -/
