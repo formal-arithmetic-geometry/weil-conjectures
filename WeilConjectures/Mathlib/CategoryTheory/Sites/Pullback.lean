@@ -106,6 +106,8 @@ lemma unit_sheafPullbackComp_hom_app (ℱ : Sheaf J A) :
     (((F ⋙ G).sheafAdjunctionContinuous A J L).unit_leftAdjointUniq_hom
       ((F.sheafAdjunctionContinuous A J K).comp (G.sheafAdjunctionContinuous A K L))) ℱ
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Adjunction.comp_unit_app] at h
+  -- not `simpa … using h`: the two sides agree only up to the definitional unfolding of
+  -- `sheafPullbackComp`, which `exact` bridges but the closing step of `simpa` does not
   exact h
 
 end Comp

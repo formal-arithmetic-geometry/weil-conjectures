@@ -89,9 +89,13 @@ open CategoryTheory Limits Opposite TopologicalSpace Abelian
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-variable {W₀ W₁ : Scheme.{u}} (i : W₀ ⟶ W₁) [IsClosedImmersion i] (F : W₀.Modules) (n : ℕ)
+variable {W₀ W₁ : Scheme.{u}}
 
 attribute [local instance] Scheme.Hom.preservesFiniteColimits_pushforwardAb
+
+section Pushforward
+
+variable (i : W₀ ⟶ W₁) [IsClosedImmersion i] (F : W₀.Modules) (n : ℕ)
 
 /-- **The restriction map along a closed immersion factors through the pullback map on the
 cohomology of the underlying abelian sheaf**, followed by the counit of the adjunction
@@ -115,14 +119,16 @@ lemma H.pushforwardMap_eq_comp_counit (y : ((pushforward i).obj F).H n) :
   refine congrArg (fun z ↦ (Ext.mk₀ (i.pullbackAbConstantSheafIso
       (AddCommGrpCat.of (ULift ℤ))).inv).comp z (zero_add n)) ?_
   exact i.pullbackPushforwardAbAdjunction.extAddEquiv_symm_apply
-    ((constantSheaf (Opens.grothendieckTopology W₁) AddCommGrpCat.{u}).obj
-      (AddCommGrpCat.of (ULift ℤ))) ((toSheafAb W₀).obj F) n y
+    ((constantSheafAb W₁).obj (AddCommGrpCat.of (ULift ℤ))) ((toSheafAb W₀).obj F) n y
+
+end Pushforward
 
 section BaseChange
 
 variable {W'₀ W'₁ : Scheme.{u}} {i₀ : W₀ ⟶ W₁} {g : W'₁ ⟶ W₁} {g₀ : W'₀ ⟶ W₀}
-  {i'₀ : W'₀ ⟶ W'₁}
+  {i'₀ : W'₀ ⟶ W'₁} [IsClosedImmersion i₀] [IsClosedImmersion i'₀]
 
+omit [IsClosedImmersion i₀] in
 /-- The route `W'₀ → W₀ → W₁` around the square, expressed through the comparison map for the
 composite `g₀ ≫ i₀`:
 
@@ -148,6 +154,7 @@ lemma pullbackAbComp_hom_app_comp_counit (F : W₀.Modules) :
   slice_lhs 1 3 => rw [pullbackAbComparison_comp]
   rw [Category.assoc, ← Functor.map_comp]
 
+omit [IsClosedImmersion i₀] [IsClosedImmersion i'₀] in
 /-- The route `W'₀ → W'₁ → W₁` around the square, expressed through the comparison map for the
 composite `i'₀ ≫ g`; this is where the mate identity
 `AlgebraicGeometry.Scheme.Modules.map_baseChange_comp_counit` for the base change morphism
@@ -180,6 +187,7 @@ lemma pullbackAbComp_hom_app_comp_baseChange (w : g₀ ≫ i₀ = i'₀ ≫ g) (
   slice_lhs 1 3 => rw [pullbackAbComparison_comp]
   rw [Category.assoc, ← Functor.map_comp]
 
+omit [IsClosedImmersion i₀] [IsClosedImmersion i'₀] in
 /-- **The key compatibility**: the base change morphism of sheaves of modules, read through the
 comparison maps between the pullback of abelian sheaves and the pullback of sheaves of modules,
 is the comparison of the two ways of pulling `(i₀_* F)^♭` back around the square:
@@ -229,8 +237,7 @@ transporting it by the base change morphism `g^* i₀_* F ⟶ i'₀_* g₀^* F` 
   H^n(W₀, F) ───────pullbackAddHom g₀────▶ H^n(W'₀, g₀^* F)
 ```
 -/
-theorem H.pushforwardMap_pullbackAddHom (w : g₀ ≫ i₀ = i'₀ ≫ g)
-    [IsClosedImmersion i₀] [IsClosedImmersion i'₀] (F : W₀.Modules) (n : ℕ)
+theorem H.pushforwardMap_pullbackAddHom (w : g₀ ≫ i₀ = i'₀ ≫ g) (F : W₀.Modules) (n : ℕ)
     (y : ((pushforward i₀).obj F).H n) :
     H.pushforwardMap i'₀ ((pullback g₀).obj F) n
         (H.map ((baseChange w).natTrans.app F) n
@@ -256,15 +263,14 @@ isomorphism `H^n(W₀, F) ≃+ H^n(W₁, i₀_* F)` rather than its inverse:
   H^n(W'₀, g₀^* F) ─────pushforwardAddEquiv i'₀────────────────────▶ H^n(W'₁, i'₀_*(g₀^* F))
 ```
 -/
-theorem H.pullbackAddHom_pushforwardAddEquiv (w : g₀ ≫ i₀ = i'₀ ≫ g)
-    [IsClosedImmersion i₀] [IsClosedImmersion i'₀] (F : W₀.Modules) (n : ℕ) (x : F.H n) :
+theorem H.pullbackAddHom_pushforwardAddEquiv (w : g₀ ≫ i₀ = i'₀ ≫ g) (F : W₀.Modules) (n : ℕ)
+    (x : F.H n) :
     H.map ((baseChange w).natTrans.app F) n
         (H.pullbackAddHom g ((pushforward i₀).obj F) n
           (H.pushforwardAddEquiv i₀ F n x)) =
       H.pushforwardAddEquiv i'₀ ((pullback g₀).obj F) n (H.pullbackAddHom g₀ F n x) := by
-  have hx : H.pushforwardMap i₀ F n (H.pushforwardAddEquiv i₀ F n x) = x := by simp
   have h := H.pushforwardMap_pullbackAddHom w F n (H.pushforwardAddEquiv i₀ F n x)
-  rw [hx] at h
+  rw [show H.pushforwardMap i₀ F n (H.pushforwardAddEquiv i₀ F n x) = x by simp] at h
   refine (H.pushforwardAddEquiv i'₀ ((pullback g₀).obj F) n).symm.injective ?_
   simpa using h
 

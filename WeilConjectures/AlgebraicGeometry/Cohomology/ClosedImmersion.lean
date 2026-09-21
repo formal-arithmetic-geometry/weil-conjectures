@@ -81,14 +81,12 @@ noncomputable def H.pushforwardAddEquiv : F.H n ≃+ ((pushforward i).obj F).H n
   (Ext.precompAddEquiv (i.pullbackAbConstantSheafIso (AddCommGrpCat.of (ULift ℤ)))
       ((toSheafAb W₀).obj F) n).trans
     (i.pullbackPushforwardAbAdjunction.extAddEquiv
-      ((constantSheaf (Opens.grothendieckTopology W) AddCommGrpCat.{u}).obj
-        (AddCommGrpCat.of (ULift ℤ))) ((toSheafAb W₀).obj F) n)
+      ((constantSheafAb W).obj (AddCommGrpCat.of (ULift ℤ))) ((toSheafAb W₀).obj F) n)
 
 lemma H.pushforwardAddEquiv_apply (x : F.H n) :
     H.pushforwardAddEquiv i F n x =
       i.pullbackPushforwardAbAdjunction.extAddHom
-        ((constantSheaf (Opens.grothendieckTopology W) AddCommGrpCat.{u}).obj
-          (AddCommGrpCat.of (ULift ℤ))) ((toSheafAb W₀).obj F) n
+        ((constantSheafAb W).obj (AddCommGrpCat.of (ULift ℤ))) ((toSheafAb W₀).obj F) n
         ((Ext.mk₀ (i.pullbackAbConstantSheafIso (AddCommGrpCat.of (ULift ℤ))).hom).comp x
           (zero_add n)) :=
   rfl
