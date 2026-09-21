@@ -226,11 +226,9 @@ lemma Functor.constantSheafsheafPullbackIso_comp :
             ((F.sheafPullback A J K).obj ((constantSheaf J A).obj a))) := by
     have h1 := congrArg ((sheafSections J A).obj (op T)).map
       (F.unit_sheafPullbackComp_hom_app G A J K L ((constantSheaf J A).obj a))
-    simp only [Functor.map_comp] at h1
-    -- not `simpa … using h1`: the two sides agree only up to the definitional unfolding of the
-    -- sections of a pushforward sheaf, which `exact` bridges but the closing step of `simpa`
-    -- does not
-    exact h1
+    simpa only [Functor.map_comp, Functor.comp_obj,
+      Functor.sheafSections_obj_sheafPushforwardContinuous_obj,
+      Functor.sheafSections_map_sheafPushforwardContinuous_map] using h1
   have hnat : ((sheafSections K A).obj (op (F.obj T))).map
         ((G.sheafAdjunctionContinuous A K L).unit.app
           ((F.sheafPullback A J K).obj ((constantSheaf J A).obj a))) ≫
@@ -244,10 +242,9 @@ lemma Functor.constantSheafsheafPullbackIso_comp :
     have h2 := (G.sheafAdjunctionContinuous A K L).unit.naturality
       ((F.constantSheafsheafPullbackIso A J K hT hFT).hom.app a)
     have h3 := congrArg ((sheafSections K A).obj (op (F.obj T))).map h2.symm
-    simp only [Functor.map_comp, Functor.comp_map, Functor.id_map] at h3
-    -- not `simpa … using h3`: as for `h1` above, the two sides agree only up to the definitional
-    -- unfolding of the sections of a pushforward sheaf
-    exact h3
+    simpa only [Functor.map_comp, Functor.comp_map, Functor.comp_obj, Functor.id_map,
+      Functor.sheafSections_obj_sheafPushforwardContinuous_obj,
+      Functor.sheafSections_map_sheafPushforwardContinuous_map] using h3
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.map_comp, Functor.comp_obj]
   rw [hu, Category.assoc, reassoc_of% hg, reassoc_of% hnat,

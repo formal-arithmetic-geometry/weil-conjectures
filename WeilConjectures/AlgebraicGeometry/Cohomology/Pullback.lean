@@ -41,8 +41,11 @@ is assembled from three ingredients:
 * `AlgebraicGeometry.Scheme.Modules.pullbackAbComparison` — the comparison map
   `f^{-1}(G^♭) ⟶ (f^* G)^♭`, together with its compatibility with the units and counits of the
   two adjunctions.
-* `AlgebraicGeometry.Scheme.Modules.H.pullbackMap` — the pullback map
-  `H^n(Y, G) ⟶ H^n(X, f^* G)`, semilinear over `f.appTop`.
+* `AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom` — the pullback map
+  `H^n(Y, G) ⟶ H^n(X, f^* G)` as a map of additive groups; it is the form in which the laws
+  satisfied by the pullback map are stated.
+* `AlgebraicGeometry.Scheme.Modules.H.pullbackMap` — the same map, refined to be semilinear
+  over `f.appTop`.
 * `AlgebraicGeometry.Scheme.Modules.H.structurePullbackMap` — the composite of the pullback
   map with the identification `f^* 𝒪_Y ≅ 𝒪_X`, that is the pullback map
   `H^n(Y, 𝒪_Y) ⟶ H^n(X, 𝒪_X)` on the cohomology of the structure sheaves.
@@ -50,13 +53,15 @@ is assembled from three ingredients:
   `AlgebraicGeometry.Scheme.Modules.H.structurePullbackMapOver` — the same two maps for a
   morphism of schemes over `Spec R`, where they are `R`-linear.
 
-The composition law for the pullback map is
-`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_comp`, in
-`WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp`.
+The composition law for the pullback map is stated for the additive-group form
+`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom`, as
+`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_comp` in
+`WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp`; the `simp` lemma
+`AlgebraicGeometry.Scheme.Modules.H.pullbackMap_apply` rewrites `H.pullbackMap` into it.
 
 ## TODO
 
-What is still missing is the identity law: `H.pullbackMap (𝟙 X)` is the identity modulo the
+What is still missing is the identity law: `H.pullbackAddHom (𝟙 X)` is the identity modulo the
 canonical isomorphism `(𝟙 X)^* ≅ 𝟭`. It needs the identification `(𝟙 X)^{-1} ≅ 𝟭` of pullback
 functors on abelian sheaves and its compatibility with the identification of constant sheaves,
 the analogues for the identity of `AlgebraicGeometry.Scheme.Hom.pullbackAbComp` and
@@ -293,7 +298,7 @@ lemma H.pullbackAddHom_apply (G : Y.Modules) (n : ℕ) (e : G.H n) :
 lemma H.pullbackAddHom_smul (G : Y.Modules) (n : ℕ) (r : Γ(Y, ⊤)) (e : G.H n) :
     H.pullbackAddHom f G n (r • e) = f.appTop.hom r • H.pullbackAddHom f G n e := by
   rw [H.smul_def, H.smul_def]
-  simp only [H.pullbackAddHom_apply, H.mapAddHom, Sheaf.H.map_apply, Ext.mapExactFunctor_comp,
+  simp only [H.pullbackAddHom_apply, H.mapAddHom_apply, Ext.mapExactFunctor_comp,
     Ext.mapExactFunctor_mk₀, Ext.comp_assoc_of_second_deg_zero,
     Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,
     pullbackAb_map_smulEnd_comp_pullbackAbComparison]
@@ -302,7 +307,7 @@ lemma H.pullbackAddHom_smul (G : Y.Modules) (n : ℕ) (r : Γ(Y, ⊤)) (e : G.H 
 lemma H.pullbackAddHom_map {G G' : Y.Modules} (φ : G ⟶ G') (n : ℕ) (e : G.H n) :
     H.pullbackAddHom f G' n (H.map φ n e) =
       H.map ((pullback f).map φ) n (H.pullbackAddHom f G n e) := by
-  simp only [H.map_apply, H.mapAddHom, Sheaf.H.map_apply, H.pullbackAddHom_apply,
+  simp only [H.map_apply, H.mapAddHom_apply, H.pullbackAddHom_apply,
     Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀, Ext.comp_assoc_of_second_deg_zero,
     Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀, pullbackAbComparison_naturality]
 

@@ -159,10 +159,17 @@ noncomputable def H.mapAddHom (φ : M ⟶ N) (n : ℕ) : M.H n →+ N.H n :=
   Sheaf.H.map ((toSheafAb X).map φ) n
 
 /-- The map on cohomology induced by a morphism of sheaves of modules is composition, in the
-category of abelian sheaves, with the degree-zero class of the morphism. -/
-lemma H.mapAddHom_apply_eq_comp (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
+category of abelian sheaves, with the degree-zero class of the morphism:
+
+```
+ℤ_X --x (degree n)--> M^♭ --Ext.mk₀ ((toSheafAb X).map φ) (degree 0)--> N^♭
+  |                                                                     ^
+  +--------------------------H.mapAddHom φ n x--------------------------+
+```
+-/
+lemma H.mapAddHom_apply (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
     H.mapAddHom φ n x = x.comp (Ext.mk₀ ((toSheafAb X).map φ)) (add_zero n) :=
-  rfl
+  Sheaf.H.map_apply _ x
 
 @[simp]
 lemma H.mapAddHom_id (M : X.Modules) (n : ℕ) :

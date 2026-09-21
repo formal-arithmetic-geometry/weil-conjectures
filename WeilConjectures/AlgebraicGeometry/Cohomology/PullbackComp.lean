@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 
 /-!
-# The composition law for the pullback map on cohomology
+# The pullback map on the cohomology of an abelian sheaf, and its composition law
 
 For a morphism of schemes `f : Z ⟶ X` and an abelian sheaf `𝒢` on `X`, this file constructs the
 pullback map
@@ -330,7 +330,7 @@ lemma H.pullbackAddHom_comp (a : Z ⟶ X) (b : X ⟶ Y) (G : Y.Modules) (n : ℕ
       H.map ((pullbackComp a b).inv.app G) n (H.pullbackAddHom (a ≫ b) G n e) := by
   rw [H.pullbackAddHom_eq_comp_pullbackAbComparison a,
     H.pullbackAddHom_eq_comp_pullbackAbComparison b, Scheme.Hom.H.pullbackAddHom_comp_mk₀,
-    Scheme.Hom.H.pullbackAddHom_comp, H.map_apply, H.mapAddHom_apply_eq_comp,
+    Scheme.Hom.H.pullbackAddHom_comp, H.map_apply, H.mapAddHom_apply,
     H.pullbackAddHom_eq_comp_pullbackAbComparison]
   simp only [Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀, Category.assoc]
   rw [pullbackAbComparison_comp a b G]

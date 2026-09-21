@@ -14,7 +14,9 @@ If `adj1 : L₁ ⊣ G` and `adj2 : L₂ ⊣ G` are two adjunctions with the same
 `CategoryTheory.Adjunction.leftAdjointUniq` is the canonical isomorphism `L₁ ≅ L₂`. Mathlib
 records the identity `adj1.unit ≫ whiskerRight (leftAdjointUniq adj1 adj2).hom G = adj2.unit`
 that it satisfies; this file records that this identity *characterises* it, which is what makes
-it possible to compute with composites of such isomorphisms.
+it possible to compute with composites of such isomorphisms. The characterisation is stated
+pointwise (`CategoryTheory.Adjunction.eq_leftAdjointUniq_hom`), the form in which it is used;
+the natural-transformation form is one `CategoryTheory.NatTrans.congr_app` away.
 -/
 
 @[expose] public section

@@ -125,8 +125,7 @@ end Pushforward
 
 section BaseChange
 
-variable {W'₀ W'₁ : Scheme.{u}} {i₀ : W₀ ⟶ W₁} {g : W'₁ ⟶ W₁} {g₀ : W'₀ ⟶ W₀}
-  {i'₀ : W'₀ ⟶ W'₁}
+variable {W'₀ W'₁ : Scheme.{u}} {i₀ : W₀ ⟶ W₁} {g : W'₁ ⟶ W₁} {g₀ : W'₀ ⟶ W₀} {i'₀ : W'₀ ⟶ W'₁}
 
 /-- The route `W'₀ → W₀ → W₁` around the square, expressed through the comparison map for the
 composite `g₀ ≫ i₀`:
@@ -244,7 +243,7 @@ theorem H.pushforwardMap_pullbackAddHom (w : g₀ ≫ i₀ = i'₀ ≫ g) (F : W
         (H.map ((baseChange w).natTrans.app F) n
           (H.pullbackAddHom g ((pushforward i₀).obj F) n y)) =
       H.pullbackAddHom g₀ F n (H.pushforwardMap i₀ F n y) := by
-  rw [H.pullbackAddHom_eq_comp_pullbackAbComparison, H.map_apply, H.mapAddHom_apply_eq_comp,
+  rw [H.pullbackAddHom_eq_comp_pullbackAbComparison, H.map_apply, H.mapAddHom_apply,
     Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀, H.pushforwardMap_eq_comp_counit,
     Scheme.Hom.H.pullbackAddHom_comp_mk₀, Scheme.Hom.H.pullbackAddHom_comp,
     H.pushforwardMap_eq_comp_counit, H.pullbackAddHom_eq_comp_pullbackAbComparison,
@@ -270,9 +269,8 @@ theorem H.pullbackAddHom_pushforwardAddEquiv (w : g₀ ≫ i₀ = i'₀ ≫ g) (
         (H.pullbackAddHom g ((pushforward i₀).obj F) n
           (H.pushforwardAddEquiv i₀ F n x)) =
       H.pushforwardAddEquiv i'₀ ((pullback g₀).obj F) n (H.pullbackAddHom g₀ F n x) := by
-  have hx : H.pushforwardMap i₀ F n (H.pushforwardAddEquiv i₀ F n x) = x := by simp
   have h := H.pushforwardMap_pullbackAddHom w F n (H.pushforwardAddEquiv i₀ F n x)
-  rw [hx] at h
+  rw [H.pushforwardMap_pushforwardAddEquiv] at h
   refine (H.pushforwardAddEquiv i'₀ ((pullback g₀).obj F) n).symm.injective ?_
   simpa using h
 

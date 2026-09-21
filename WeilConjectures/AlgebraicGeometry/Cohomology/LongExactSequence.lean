@@ -106,7 +106,7 @@ lemma H.δAddHom_naturality (h₁ : S₁.ShortExact) (h₂ : S₂.ShortExact) (�
   have hnat := ShortComplex.ShortExact.extClass_naturality h₁.map_toSheafAb h₂.map_toSheafAb
     ((toSheafAb X).mapShortComplex.map φ)
   simp only [Functor.mapShortComplex_map_τ₁, Functor.mapShortComplex_map_τ₃] at hnat
-  rw [H.mapAddHom_apply_eq_comp, H.mapAddHom_apply_eq_comp, H.δAddHom_apply, H.δAddHom_apply,
+  rw [H.mapAddHom_apply, H.mapAddHom_apply, H.δAddHom_apply, H.δAddHom_apply,
     Ext.comp_assoc_of_second_deg_zero, Ext.comp_assoc_of_third_deg_zero, ← hnat]
 
 /-- The connecting homomorphism `H^{n₀}(X, S.X₃) → H^{n₁}(X, S.X₁)` of a short exact sequence
@@ -152,7 +152,7 @@ lemma H.exact₃ (hS : S.ShortExact) (n₀ n₁ : ℕ) (h : n₀ + 1 = n₁) :
   · rintro ⟨y, rfl⟩
     have hz : (Ext.mk₀ ((toSheafAb X).map S.g)).comp hS.map_toSheafAb.extClass (zero_add 1) = 0 :=
       hS.map_toSheafAb.comp_extClass
-    rw [H.δ_apply, H.map_apply, H.mapAddHom_apply_eq_comp, Ext.comp_assoc_of_second_deg_zero, hz,
+    rw [H.δ_apply, H.map_apply, H.mapAddHom_apply, Ext.comp_assoc_of_second_deg_zero, hz,
       Ext.comp_zero]
 
 /-- Exactness of the long exact cohomology sequence at `H^{n₁}(X, S.X₁)`. -/
@@ -165,7 +165,7 @@ lemma H.exact₁ (hS : S.ShortExact) (n₀ n₁ : ℕ) (h : n₀ + 1 = n₁) :
   · rintro ⟨y, rfl⟩
     have hz : hS.map_toSheafAb.extClass.comp (Ext.mk₀ ((toSheafAb X).map S.f)) (add_zero 1) = 0 :=
       hS.map_toSheafAb.extClass_comp
-    rw [H.map_apply, H.mapAddHom_apply_eq_comp, H.δ_apply, Ext.comp_assoc_of_third_deg_zero, hz,
+    rw [H.map_apply, H.mapAddHom_apply, H.δ_apply, Ext.comp_assoc_of_third_deg_zero, hz,
       Ext.comp_zero]
 
 /-- The long exact cohomology sequence starts with an injection `H^0(X, S.X₁) → H^0(X, S.X₂)`. -/

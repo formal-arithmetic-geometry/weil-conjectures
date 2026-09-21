@@ -105,15 +105,15 @@ lemma H.pushforwardAddEquiv_comp_mk₀ (φ : F ⟶ G) (x : F.H n) :
 lemma H.pushforwardAddEquiv_map (φ : F ⟶ G) (x : F.H n) :
     H.pushforwardAddEquiv i G n (H.map φ n x) =
       H.map ((pushforward i).map φ) n (H.pushforwardAddEquiv i F n x) := by
-  rw [H.map_apply, H.mapAddHom_apply_eq_comp, H.pushforwardAddEquiv_comp_mk₀, H.map_apply,
-    H.mapAddHom_apply_eq_comp]
+  rw [H.map_apply, H.mapAddHom_apply, H.pushforwardAddEquiv_comp_mk₀, H.map_apply,
+    H.mapAddHom_apply]
 
 /-- The isomorphism `H^n(W₀, F) ≃+ H^n(W, i_* F)` is semilinear over
 `i.appTop : Γ(W, 𝒪_W) ⟶ Γ(W₀, 𝒪_{W₀})`. -/
 lemma H.pushforwardAddEquiv_smul (r : Γ(W, ⊤)) (x : F.H n) :
     H.pushforwardAddEquiv i F n (i.appTop.hom r • x) = r • H.pushforwardAddEquiv i F n x := by
-  rw [H.smul_def, H.mapAddHom_apply_eq_comp, H.pushforwardAddEquiv_comp_mk₀, H.smul_def,
-    H.mapAddHom_apply_eq_comp, smulEnd_pushforward]
+  rw [H.smul_def, H.mapAddHom_apply, H.pushforwardAddEquiv_comp_mk₀, H.smul_def,
+    H.mapAddHom_apply, smulEnd_pushforward]
 
 /-- The comparison map `H^n(W, i_* F) ⟶ H^n(W₀, F)` on the cohomology of a sheaf of modules
 along a closed immersion `i : W₀ ⟶ W`, semilinear over the ring homomorphism
@@ -131,6 +131,16 @@ noncomputable def H.pushforwardMap :
 lemma H.pushforwardMap_apply (y : ((pushforward i).obj F).H n) :
     H.pushforwardMap i F n y = (H.pushforwardAddEquiv i F n).symm y :=
   rfl
+
+@[simp]
+lemma H.pushforwardMap_pushforwardAddEquiv (x : F.H n) :
+    H.pushforwardMap i F n (H.pushforwardAddEquiv i F n x) = x :=
+  (H.pushforwardAddEquiv i F n).symm_apply_apply x
+
+@[simp]
+lemma H.pushforwardAddEquiv_pushforwardMap (y : ((pushforward i).obj F).H n) :
+    H.pushforwardAddEquiv i F n (H.pushforwardMap i F n y) = y :=
+  (H.pushforwardAddEquiv i F n).apply_symm_apply y
 
 /-- Cohomology is invariant under pushforward along a closed immersion. -/
 lemma H.bijective_pushforwardMap : Function.Bijective (H.pushforwardMap i F n) :=
