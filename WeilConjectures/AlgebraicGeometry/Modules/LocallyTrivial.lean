@@ -267,8 +267,7 @@ lemma smulSection_apply (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r : Γ(X, V
     smulSection m V hV r = r • M.presheaf.map (homOfLE hV).op m := rfl
 
 lemma smulSection_self (m : Γ(M, W)) (r : Γ(X, W)) : smulSection m W le_rfl r = r • m := by
-  rw [smulSection_apply, Subsingleton.elim (homOfLE (le_rfl : W ≤ W)).op (𝟙 (op W))]
-  simp
+  simp [smulSection_apply]
 
 lemma smulSection_smul (m : Γ(M, W)) (V : X.Opens) (hV : V ≤ W) (r z : Γ(X, V)) :
     smulSection m V hV (r • z) = r • smulSection m V hV z :=

@@ -43,8 +43,10 @@ public import WeilConjectures.Mathlib.Topology.Sets.Closeds
 
 open Order Set Set.Notation TopologicalSpace
 
+variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
+
 /-- The Krull dimension of a topological space is `⊥` exactly when the space is empty. -/
-theorem topologicalKrullDim_eq_bot_iff {X : Type*} [TopologicalSpace X] :
+theorem topologicalKrullDim_eq_bot_iff :
     topologicalKrullDim X = ⊥ ↔ IsEmpty X := by
   rw [topologicalKrullDim, krullDim_eq_bot_iff]
   exact ⟨fun h ↦ ⟨fun x ↦ h.elim ⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩,
@@ -62,8 +64,8 @@ Indeed a chain of irreducible closed subsets of `Z` is a chain of irreducible cl
 `S`; its largest member is contained in some irreducible component of `S`, which by hypothesis
 is not contained in `Z` and is therefore strictly larger than every member of the chain. So
 appending it to the chain gives a chain of length one more. -/
-theorem topologicalKrullDim_add_one_le_of_forall_maximal {X : Type*} [TopologicalSpace X]
-    {S Z : Set X} (hZS : Z ⊆ S) (hZ : IsClosed (S ↓∩ Z))
+theorem topologicalKrullDim_add_one_le_of_forall_maximal {S Z : Set X} (hZS : Z ⊆ S)
+    (hZ : IsClosed (S ↓∩ Z))
     (h : ∀ T, Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) T → ¬T ⊆ Z) :
     topologicalKrullDim Z + 1 ≤ topologicalKrullDim S := by
   rcases eq_empty_or_nonempty Z with rfl | hZne
@@ -105,8 +107,8 @@ theorem topologicalKrullDim_add_one_le_of_forall_maximal {X : Type*} [Topologica
 /-- Let `Z ⊆ S` be subsets of a topological space, with `Z` closed in `S` and `S` nonempty of
 finite dimension. If no maximal irreducible subset of `S` is contained in `Z`, then
 `dim Z < dim S`. -/
-theorem topologicalKrullDim_lt_of_forall_maximal {X : Type*} [TopologicalSpace X]
-    {S Z : Set X} (hZS : Z ⊆ S) (hZ : IsClosed (S ↓∩ Z)) (hS : S.Nonempty)
+theorem topologicalKrullDim_lt_of_forall_maximal {S Z : Set X} (hZS : Z ⊆ S)
+    (hZ : IsClosed (S ↓∩ Z)) (hS : S.Nonempty)
     (hfin : topologicalKrullDim S ≠ ⊤)
     (h : ∀ T, Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) T → ¬T ⊆ Z) :
     topologicalKrullDim Z < topologicalKrullDim S := by
@@ -126,8 +128,8 @@ dimension of `Z` is at least one less than the Krull dimension of `X`.
 
 This is the case `S = univ` of `topologicalKrullDim_add_one_le_of_forall_maximal`: in an
 irreducible space the only maximal irreducible subset of `univ` is `univ` itself. -/
-theorem topologicalKrullDim_add_one_le {X : Type*} [TopologicalSpace X] [IrreducibleSpace X]
-    {Z : Set X} (hZc : IsClosed Z) (hZ : Z ≠ univ) :
+theorem topologicalKrullDim_add_one_le [IrreducibleSpace X] {Z : Set X} (hZc : IsClosed Z)
+    (hZ : Z ≠ univ) :
     topologicalKrullDim Z + 1 ≤ topologicalKrullDim X := by
   rw [← topologicalKrullDim_univ X]
   exact topologicalKrullDim_add_one_le_of_forall_maximal (subset_univ Z)
@@ -136,19 +138,19 @@ theorem topologicalKrullDim_add_one_le {X : Type*} [TopologicalSpace X] [Irreduc
 
 /-- A space that embeds into a subset `S` of a topological space has Krull dimension at most
 that of `S`. -/
-theorem Topology.IsInducing.topologicalKrullDim_le_of_range_subset {Y X : Type*}
-    [TopologicalSpace Y] [TopologicalSpace X] {f : Y → X} (hf : IsInducing f) {S : Set X}
-    (hfS : range f ⊆ S) : topologicalKrullDim Y ≤ topologicalKrullDim S :=
+theorem Topology.IsInducing.topologicalKrullDim_le_of_range_subset {f : Y → X}
+    (hf : IsInducing f) {S : Set X} (hfS : range f ⊆ S) :
+    topologicalKrullDim Y ≤ topologicalKrullDim S :=
   (IsInducing.of_comp (hf.continuous.subtype_mk fun y ↦ hfS ⟨y, rfl⟩)
     continuous_subtype_val hf).topologicalKrullDim_le
 
 /-- The Krull dimension of a subset is monotone in the subset. -/
-theorem topologicalKrullDim_mono {X : Type*} [TopologicalSpace X] {Z S : Set X}
-    (hZS : Z ⊆ S) : topologicalKrullDim Z ≤ topologicalKrullDim S :=
+theorem topologicalKrullDim_mono {Z S : Set X} (hZS : Z ⊆ S) :
+    topologicalKrullDim Z ≤ topologicalKrullDim S :=
   (Topology.IsEmbedding.inclusion hZS).isInducing.topologicalKrullDim_le
 
 /-- A subset of a subspace `S` of `X` has the same Krull dimension seen in `S` and seen in `X`. -/
-theorem topologicalKrullDim_image_val {X : Type*} [TopologicalSpace X] {S : Set X} (Z : Set S) :
+theorem topologicalKrullDim_image_val {S : Set X} (Z : Set S) :
     topologicalKrullDim ((↑) '' Z : Set X) = topologicalKrullDim Z :=
   (IsHomeomorph.topologicalKrullDim_eq _
     (Topology.IsEmbedding.subtypeVal.homeomorphImage Z).isHomeomorph).symm
@@ -156,15 +158,15 @@ theorem topologicalKrullDim_image_val {X : Type*} [TopologicalSpace X] {S : Set 
 /-- The height of an irreducible closed subset `T` of a topological space is the Krull dimension
 of `T` as a subspace: the irreducible closed subsets of `T` are exactly the irreducible closed
 subsets of the space contained in `T`. -/
-theorem TopologicalSpace.IrreducibleCloseds.height_eq_topologicalKrullDim {X : Type*}
-    [TopologicalSpace X] (T : IrreducibleCloseds X) :
+theorem TopologicalSpace.IrreducibleCloseds.height_eq_topologicalKrullDim
+    (T : IrreducibleCloseds X) :
     (height T : WithBot ℕ∞) = topologicalKrullDim (T : Set X) := by
   rw [height_eq_krullDim_Iic, ← krullDim_eq_of_orderIso (orderIsoIic T), ← topologicalKrullDim]
 
 /-- The height of an irreducible closed subset `T` of a subspace `S` is the Krull dimension of
 `T`, seen as a subspace of the ambient space. -/
-theorem TopologicalSpace.IrreducibleCloseds.height_eq_topologicalKrullDim_image {X : Type*}
-    [TopologicalSpace X] {S : Set X} (T : IrreducibleCloseds S) :
+theorem TopologicalSpace.IrreducibleCloseds.height_eq_topologicalKrullDim_image {S : Set X}
+    (T : IrreducibleCloseds S) :
     (height T : WithBot ℕ∞) = topologicalKrullDim ((↑) '' (T : Set S) : Set X) :=
   T.height_eq_topologicalKrullDim.trans (topologicalKrullDim_image_val _).symm
 
@@ -174,7 +176,7 @@ components.**
 Every irreducible closed subset is contained in an irreducible component `Z`, so its height is
 at most `dim Z` by `TopologicalSpace.IrreducibleCloseds.height_eq_topologicalKrullDim`;
 conversely every component is a subspace. -/
-theorem topologicalKrullDim_eq_iSup_irreducibleComponents (X : Type*) [TopologicalSpace X] :
+theorem topologicalKrullDim_eq_iSup_irreducibleComponents :
     topologicalKrullDim X = ⨆ Z ∈ irreducibleComponents X, topologicalKrullDim Z := by
   refine le_antisymm ?_ (iSup₂_le fun Z _ ↦ topologicalKrullDim_subspace_le X Z)
   rw [topologicalKrullDim, krullDim_eq_iSup_height]
@@ -182,18 +184,17 @@ theorem topologicalKrullDim_eq_iSup_irreducibleComponents (X : Type*) [Topologic
   obtain ⟨Z, hZmem, hZsub⟩ :=
     exists_mem_irreducibleComponents_subset_of_isIrreducible (W : Set X) W.isIrreducible
   let Z' : IrreducibleCloseds X := ⟨Z, hZmem.1, isClosed_of_mem_irreducibleComponents Z hZmem⟩
-  calc (height W : WithBot ℕ∞) ≤ (height Z' : WithBot ℕ∞) := by
-        exact_mod_cast height_mono (show W ≤ Z' from hZsub)
+  calc (height W : WithBot ℕ∞) ≤ (height Z' : WithBot ℕ∞) := mod_cast height_mono (hZsub : W ≤ Z')
     _ = topologicalKrullDim (Z : Set X) := Z'.height_eq_topologicalKrullDim
     _ ≤ _ := le_biSup (fun Z : Set X ↦ topologicalKrullDim Z) hZmem
 
 /-- **The dimension of a subset is the supremum of the dimensions of its maximal irreducible
 subsets**: the form of `topologicalKrullDim_eq_iSup_irreducibleComponents` for the subspace `S`,
 whose irreducible components are the maximal irreducible subsets of `S`. -/
-theorem topologicalKrullDim_eq_iSup_maximal {X : Type*} [TopologicalSpace X] {S : Set X} :
+theorem topologicalKrullDim_eq_iSup_maximal {S : Set X} :
     topologicalKrullDim S =
-      ⨆ T ∈ {T : Set X | Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) T}, topologicalKrullDim T := by
-  refine le_antisymm ?_ (iSup₂_le fun T hT ↦ topologicalKrullDim_mono hT.out.prop.2)
+      ⨆ (T : Set X) (_ : Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) T), topologicalKrullDim T := by
+  refine le_antisymm ?_ (iSup₂_le fun T hT ↦ topologicalKrullDim_mono hT.prop.2)
   rw [topologicalKrullDim_eq_iSup_irreducibleComponents]
   refine iSup₂_le fun Z hZ ↦ (topologicalKrullDim_image_val Z).ge.trans
     (le_biSup (fun T : Set X ↦ topologicalKrullDim T)
@@ -205,8 +206,7 @@ plus the dimension of the closure of `z` is at most the dimension of the space.
 
 Indeed the chains of irreducible closed subsets contained in `closure {z}` and the chains of
 irreducible closed subsets containing it splice together at `closure {z}`. -/
-theorem coheight_add_topologicalKrullDim_closure_le {X : Type*} [TopologicalSpace X]
-    [QuasiSober X] [T0Space X] (z : X) :
+theorem coheight_add_topologicalKrullDim_closure_le [QuasiSober X] [T0Space X] (z : X) :
     (coheight z : WithBot ℕ∞) + topologicalKrullDim (closure {z} : Set X) ≤
       topologicalKrullDim X := by
   have : Nonempty (IrreducibleCloseds X) := ⟨irreducibleSetEquivPoints.symm z⟩

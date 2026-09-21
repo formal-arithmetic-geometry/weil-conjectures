@@ -299,7 +299,7 @@ variable {L : X.Modules} {W : X.Opens}
 /-- **A section of an invertible sheaf is a function times a trivialising section.** If
 multiplication by `m : Γ(L, W)` is an isomorphism `𝒪_W ≅ L|_W`, then every section `t` of `L`
 over `W` is `g • m` for some function `g` on `W`. -/
-theorem exists_smul_eq (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)] (t : Γ(L, W)) :
+theorem exists_eq_smul (m : Γ(L, W)) [IsIso (unitSmulRestrictHom m)] (t : Γ(L, W)) :
     ∃ g : Γ(X, W), t = g • m := by
   obtain ⟨g, hg⟩ := (bijective_smulSection m le_rfl).2 t
   refine ⟨g, ?_⟩
@@ -399,7 +399,7 @@ theorem coheight_le_one_of_minimal_vanishesAt [IsLocallyNoetherian X] (hL : L.In
     Order.coheight z ≤ 1 := by
   obtain ⟨V, hzV, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom z
   have : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hgV⟩ := exists_smul_eq m (L.presheaf.map V.leTop.op s)
+  obtain ⟨g, hgV⟩ := exists_eq_smul m (L.presheaf.map V.leTop.op s)
   exact coheight_le_one_of_minimal_notMem_basicOpen g hzV
     ((vanishesAt_iff_notMem_basicOpen m s g hgV hzV).1 hz)
     fun y hyV hy hyz ↦ hmin y ((vanishesAt_iff_notMem_basicOpen m s g hgV hyV).2 hy) hyz
@@ -494,7 +494,7 @@ theorem mono_mulSection_of_forall_not_vanishesAt [IsLocallyNoetherian X] {L : X.
       exists_restrict_tmul_eq_zero t (L.presheaf.map U.leTop.op s) ht hxU
     obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
     have : IsIso (unitSmulRestrictHom m) := hm
-    obtain ⟨g, hgW⟩ := exists_smul_eq m (L.presheaf.map W.leTop.op s)
+    obtain ⟨g, hgW⟩ := exists_eq_smul m (L.presheaf.map W.leTop.op s)
     obtain ⟨-, ⟨V, hVaff, rfl⟩, hxV, hVsub⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
       (show x ∈ ((V₀ ⊓ W : X.Opens) : Set X) from ⟨hxV₀, hxW⟩) (V₀ ⊓ W).2
     have hVV₀ : V ≤ V₀ := fun y hy ↦ (hVsub hy).1
@@ -563,7 +563,7 @@ theorem surjective_stalkFunctor_map_mulSection (hL : L.Invertible) (F : X.Module
       ((SheafOfModules.stalkFunctor X.ringCatSheaf x).map (mulSection F s)) := by
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
   have : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hgW⟩ := exists_smul_eq m (L.presheaf.map W.leTop.op s)
+  obtain ⟨g, hgW⟩ := exists_eq_smul m (L.presheaf.map W.leTop.op s)
   have hxg : x ∈ X.basicOpen g := by
     by_contra h
     exact hx ((vanishesAt_iff_notMem_basicOpen m s g hgW hxW).2 h)
@@ -670,7 +670,7 @@ theorem stalkMap_mulSection_mem_smul_maximalIdeal (hL : L.Invertible) (F : X.Mod
         (⊤ : Submodule (X.presheaf.stalk x) ((F ⊗ L).presheaf.stalk x)) := by
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
   have : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hgW⟩ := exists_smul_eq m (L.presheaf.map W.leTop.op s)
+  obtain ⟨g, hgW⟩ := exists_eq_smul m (L.presheaf.map W.leTop.op s)
   have hgmax : X.presheaf.germ W x hxW g ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x) := by
     have hxg : x ∉ X.basicOpen g := (vanishesAt_iff_notMem_basicOpen m s g hgW hxW).1 hx
     rw [Scheme.mem_basicOpen X g x hxW] at hxg
@@ -761,7 +761,7 @@ theorem forall_not_vanishesAt_of_mono_mulSection [IsLocallyNoetherian X] {L : X.
   intro x hx hvan
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
   have : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hgW⟩ := exists_smul_eq m (L.presheaf.map W.leTop.op s)
+  obtain ⟨g, hgW⟩ := exists_eq_smul m (L.presheaf.map W.leTop.op s)
   have hxg : x ∉ X.basicOpen g := (vanishesAt_iff_notMem_basicOpen m s g hgW hxW).1 hvan
   obtain ⟨-, ⟨V, hVaff, rfl⟩, hxV, hVsub⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
     (show x ∈ (W : Set X) from hxW) W.2

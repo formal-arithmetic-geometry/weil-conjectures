@@ -179,7 +179,7 @@ theorem topologicalKrullDim_eq_coheight_add_topologicalKrullDim_closure (z : X) 
   have : Nonempty U := ⟨⟨z, hzU⟩⟩
   let _ := f.sectionsAlgebra U
   have : Algebra.FiniteType k Γ(X, U) := f.finiteType_sections hU
-  set p := hU.primeIdealOf ⟨z, hzU⟩ with hpdef
+  set p := hU.primeIdealOf ⟨z, hzU⟩
   have hzp : hU.fromSpec p = z := hU.fromSpec_primeIdealOf ⟨z, hzU⟩
   -- the closure of `z` inside the chart is the image of `Spec (A ⧸ p)`, a subset of `closure {z}`
   have hquot : ringKrullDim (Γ(X, U) ⧸ p.asIdeal) ≤
@@ -202,7 +202,7 @@ theorem topologicalKrullDim_eq_coheight_add_topologicalKrullDim_closure (z : X) 
     rwa [Set.image_singleton, hzp] at himg
   rw [← hU.ringKrullDim_eq_topologicalKrullDim f,
     ← Ideal.height_add_ringKrullDim_quotient k p.asIdeal,
-    hU.coheight_eq_height_primeIdealOf ⟨z, hzU⟩, ← hpdef]
+    hU.coheight_eq_height_primeIdealOf ⟨z, hzU⟩]
   exact add_le_add le_rfl hquot
 
 end AlgebraicGeometry

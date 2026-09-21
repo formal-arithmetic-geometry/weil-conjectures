@@ -76,14 +76,8 @@ theorem isIso_homOfSectionTop_of_forall_not_vanishesAt (hL : L.Invertible) (s : 
     (hs : ∀ x : X, ¬ L.VanishesAt s x) : IsIso (homOfSectionTop L s) := by
   refine isIso_of_forall_exists_isIso_app _ fun x ↦ ?_
   obtain ⟨W, hxW, m, hm⟩ := hL.exists_isIso_unitSmulRestrictHom x
-  have hmi : IsIso (unitSmulRestrictHom m) := hm
-  obtain ⟨g, hg⟩ := (bijective_smulSection m (le_refl W)).2 (L.presheaf.map W.leTop.op s)
-  have hgW : L.presheaf.map W.leTop.op s = g • m := by
-    rw [← hg, smulSection]
-    simp only [AddMonoidHom.mk'_apply]
-    congr 1
-    rw [show (homOfLE (le_refl W)).op = 𝟙 (op W) from Subsingleton.elim _ _]
-    simp
+  have : IsIso (unitSmulRestrictHom m) := hm
+  obtain ⟨g, hgW⟩ := exists_eq_smul m (L.presheaf.map W.leTop.op s)
   have hWg : W ≤ X.basicOpen g := fun y hy ↦
     not_not.1 fun h ↦ hs y ((vanishesAt_iff_notMem_basicOpen m s g hgW hy).2 h)
   refine ⟨W, hxW, fun V hV ↦ ?_⟩
@@ -106,9 +100,7 @@ theorem isIso_homOfSectionTop_of_forall_not_vanishesAt (hL : L.Invertible) (s : 
   have happ : ∀ r : Γ(X, V), Hom.app (homOfSectionTop L s) V r =
       smulSection m V hV (r * X.presheaf.map (homOfLE hV).op g) := by
     intro r
-    rw [Hom.app_homOfSectionTop, hres, smulSection]
-    simp only [AddMonoidHom.mk'_apply]
-    rw [smul_smul]
+    rw [Hom.app_homOfSectionTop, hres, smulSection_apply, smul_smul]
   have hmul : Function.Bijective
       (fun r : Γ(X, V) ↦ r * X.presheaf.map (homOfLE hV).op g) := by
     rw [← hu]

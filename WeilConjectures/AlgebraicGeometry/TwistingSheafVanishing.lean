@@ -106,9 +106,7 @@ lemma isIso_unitSmulRestrictHom_sectionPow {W : (Proj 𝒜).Opens}
         (sectionPow hf hW k hc)).app V r = sectionPowEquiv hf hV k hc r := by
       intro r
       change smulSection (M := twistingSheaf 𝒜 c) (sectionPow hf hW k hc) _ hle r = _
-      rw [smulSection]
-      simp only [AddMonoidHom.mk'_apply, sectionPowEquiv_apply]
-      rw [map_sectionPow hf hle hW hV k hc]
+      rw [smulSection_apply, sectionPowEquiv_apply, map_sectionPow hf hle hW hV k hc]
     have hbij := (sectionPowEquiv hf hV k hc).bijective
     refine ⟨fun r r' h ↦ hbij.1 ?_, fun t ↦ ?_⟩
     · rw [← happ, ← happ, h]

@@ -23,6 +23,9 @@ isomorphism, in the shape of the open counterpart
   subsets of `α` contained in the range of `f`.
 * `TopologicalSpace.IrreducibleCloseds.orderIsoIic`: its form for the inclusion of an
   irreducible closed subset `T` of `α`, namely `IrreducibleCloseds ↥T ≃o Iic T`.
+
+Both come with a `simp` lemma computing the underlying set of the image of an irreducible closed
+subset.
 -/
 
 @[expose] public section
@@ -50,11 +53,21 @@ def orderIsoOfIsClosedEmbedding (f : β → α) (hf : IsClosedEmbedding f) :
   right_inv V := Subtype.ext (IrreducibleCloseds.ext (image_preimage_eq_of_subset V.2))
   map_rel_iff' := image_subset_image_iff hf.injective
 
+@[simp]
+lemma coe_orderIsoOfIsClosedEmbedding_apply (f : β → α) (hf : IsClosedEmbedding f)
+    (V : IrreducibleCloseds β) :
+    ((orderIsoOfIsClosedEmbedding f hf V : IrreducibleCloseds α) : Set α) = f '' V := rfl
+
 /-- The irreducible closed subsets of an irreducible closed subspace `T` of `α` are order
 isomorphic to the irreducible closed subsets of `α` contained in `T`. Irreducibility of `T` is
 used only to phrase the codomain as an interval of `IrreducibleCloseds α`. -/
 def orderIsoIic (T : IrreducibleCloseds α) : IrreducibleCloseds (T : Set α) ≃o Iic T :=
   (orderIsoOfIsClosedEmbedding _ T.isClosed.isClosedEmbedding_subtypeVal).trans
     (OrderIso.setCongr _ _ (by ext V; simp [← SetLike.coe_subset_coe]))
+
+@[simp]
+lemma coe_orderIsoIic_apply (T : IrreducibleCloseds α) (V : IrreducibleCloseds (T : Set α)) :
+    ((orderIsoIic T V : IrreducibleCloseds α) : Set α) = Subtype.val '' (V : Set (T : Set α)) :=
+  rfl
 
 end TopologicalSpace.IrreducibleCloseds
