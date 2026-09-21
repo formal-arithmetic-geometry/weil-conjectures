@@ -257,6 +257,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
@@ -350,6 +351,7 @@ public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Field
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.RingTheory.Localization.Defs
