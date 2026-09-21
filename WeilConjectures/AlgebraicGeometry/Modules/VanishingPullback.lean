@@ -46,8 +46,9 @@ The proof has three ingredients.
   the same statement for a sheaf of modules trivialised by a global section.
 - `AlgebraicGeometry.Scheme.Modules.vanishesAt_iff_of_iso`: vanishing is invariant under an
   isomorphism of sheaves of modules.
-- `AlgebraicGeometry.Scheme.Modules.vanishesAt_smul_iff_notMem_basicOpen`: a multiple of a
-  trivialising global section vanishes exactly outside the basic open subset of the multiplier.
+- `AlgebraicGeometry.Scheme.Modules.vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop`:
+  a multiple of a trivialising global section vanishes exactly outside the basic open subset of
+  the multiplier.
 -/
 
 @[expose] public section
@@ -171,7 +172,7 @@ lemma vanishesAt_sectionsPullback_iff_of_isOpenImmersion (j : Y ⟶ X) [IsOpenIm
 
 /-- **A multiple of a trivialising global section vanishes exactly outside the basic open subset
 of the multiplier.** -/
-lemma vanishesAt_smul_iff_notMem_basicOpen {M : X.Modules} {t : Γ(M, ⊤)}
+lemma vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop {M : X.Modules} {t : Γ(M, ⊤)}
     (ht : IsIso (homOfSectionTop M t)) (g : Γ(X, ⊤)) (x : X) :
     M.VanishesAt (g • t) x ↔ x ∉ X.basicOpen g := by
   have h := vanishesAt_iff_of_iso (asIso (homOfSectionTop M t)) g x
@@ -189,8 +190,9 @@ lemma vanishesAt_sectionsPullback_iff_of_isIso_homOfSectionTop (a : X ⟶ Y) {M 
   have ht' : IsIso (homOfSectionTop ((pullback a).obj M) (sectionsPullback a M t)) := by
     rw [← map_homOfSectionTop]
     infer_instance
-  rw [sectionsPullback_smul, vanishesAt_smul_iff_notMem_basicOpen ht',
-    vanishesAt_smul_iff_notMem_basicOpen ht, not_iff_not, ← Scheme.preimage_basicOpen_top]
+  rw [sectionsPullback_smul, vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop ht',
+    vanishesAt_smul_iff_notMem_basicOpen_of_isIso_homOfSectionTop ht, not_iff_not,
+    ← Scheme.preimage_basicOpen_top]
   rfl
 
 /-- **Vanishing of a section of a line bundle is compatible with pullback**: a global section
