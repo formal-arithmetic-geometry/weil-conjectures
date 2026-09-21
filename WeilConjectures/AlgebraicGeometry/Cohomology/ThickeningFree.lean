@@ -87,7 +87,6 @@ across the base change. That hypothesis is
 discharges it whenever the two families lie over one family of elements of
 `𝒪_{T, t} ⧸ 𝔪_t ^ (n + 2)` on the base — which is what
 `AlgebraicGeometry.Scheme.exists_span_eq_and_forall_toModulesι_app_eq` produces.
-
 -/
 
 @[expose] public section
@@ -201,12 +200,10 @@ variable {T W W' : Scheme.{u}} (f : W ⟶ T) (f' : W' ⟶ T) (u : W' ⟶ W) (hu 
   (m' : ι → Γ((thickeningIdeal f' t n).toModules, ⊤))
   [IsIso (pushforwardFreeToThickeningIdeal f t n m)]
   [IsIso (pushforwardFreeToThickeningIdeal f' t n m')]
-  (k : ℕ)
 
 variable (hΦ : IsPushforwardFreeToThickeningIdealBaseChange f f' u hu t n m m')
 
-include hΦ
-
+include hΦ in
 /-- **The identification of `H^k` of a free thickening ideal is natural in the scheme**, in the
 form that assembles a family of classes on the zeroth neighbourhood: pulling the assembled class
 back along the base change of `u : W' ⟶ W` is assembling the pullbacks of the members of the
@@ -220,7 +217,7 @@ family.
   (ι → H^k(W' ×_T T₀, 𝒪)) ─thickeningH1FreeAddEquiv⁻¹─▶ H^k(W' ×_T T_{n+1}, I'ₙ)
 ```
 -/
-theorem thickeningH1FreeAddEquiv_symm_naturality
+theorem thickeningH1FreeAddEquiv_symm_naturality (k : ℕ)
     (p : ι → (infinitesimalBaseChange f t 0).structureModules.H k) :
     IdealSheafData.hMapOfComapLe (thickeningIdeal f t n) (thickeningIdeal f' t n)
         (infinitesimalBaseChangeMapOver f f' u hu t (n + 1))
@@ -233,6 +230,7 @@ theorem thickeningH1FreeAddEquiv_symm_naturality
   exact Modules.H.map_freeLinearEquiv_symm_baseChange
     (infinitesimalBaseChangeMapOver_comp_mapZero f f' u hu t n) _ _ _ hΦ k p
 
+include hΦ in
 /-- **The identification of `H^k` of a free thickening ideal is natural in the scheme**: the
 `j`-th component of the identification of a class pulled back along the base change of
 `u : W' ⟶ W` is the pullback of the `j`-th component of the identification of the class.
@@ -245,7 +243,7 @@ theorem thickeningH1FreeAddEquiv_symm_naturality
   H^k(W' ×_T T_{n+1}, I'ₙ) ─thickeningH1FreeAddEquiv─▶ (ι → H^k(W' ×_T T₀, 𝒪))
 ```
 -/
-theorem thickeningH1FreeAddEquiv_naturality
+theorem thickeningH1FreeAddEquiv_naturality (k : ℕ)
     (x : (thickeningIdeal f t n).toModules.H k) (j : ι) :
     thickeningH1FreeAddEquiv f' t n m' k
         (IdealSheafData.hMapOfComapLe (thickeningIdeal f t n) (thickeningIdeal f' t n)
@@ -253,11 +251,12 @@ theorem thickeningH1FreeAddEquiv_naturality
           (comap_thickeningIdeal_le f f' u hu t n) k x) j =
       Modules.H.structurePullbackMap (infinitesimalBaseChangeMapOver f f' u hu t 0) k
         (thickeningH1FreeAddEquiv f t n m k x j) := by
-  have h := thickeningH1FreeAddEquiv_symm_naturality f f' u hu t n m m' k hΦ
+  have h := thickeningH1FreeAddEquiv_symm_naturality f f' u hu t n m m' hΦ k
     (thickeningH1FreeAddEquiv f t n m k x)
   rw [AddEquiv.symm_apply_apply] at h
   rw [h, AddEquiv.apply_symm_apply]
 
+include hΦ in
 /-- **The identification of `H¹` of a free thickening ideal intertwines
 `AlgebraicGeometry.Scheme.thickeningH1Map` with the `ι`-fold power of the pullback map on `H¹`
 of the structure sheaf of the zeroth infinitesimal neighbourhood.**
@@ -273,7 +272,7 @@ theorem thickeningH1FreeMulEquiv_thickeningH1Map
           (Multiplicative.toAdd (thickeningH1FreeMulEquiv f t n m 1 x) j) := by
   refine Multiplicative.toAdd.injective (funext fun j ↦ ?_)
   simp only [thickeningH1FreeMulEquiv_apply, toAdd_ofAdd, toAdd_thickeningH1Map]
-  exact thickeningH1FreeAddEquiv_naturality f f' u hu t n m m' 1 hΦ (Multiplicative.toAdd x) j
+  exact thickeningH1FreeAddEquiv_naturality f f' u hu t n m m' hΦ 1 (Multiplicative.toAdd x) j
 
 end Naturality
 

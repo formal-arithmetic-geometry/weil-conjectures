@@ -402,14 +402,30 @@ noncomputable def H.freeLinearEquiv :
 
 variable {X ι n}
 
+/-- `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv` before the summands of the free sheaf
+are identified with the summands of the biproduct. The form to use is
+`AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv_apply`. -/
+lemma H.freeLinearEquiv_apply_eq_map_isoCoproduct_inv (x : (X.freeModules ι).H n) (i : ι) :
+    H.freeLinearEquiv X ι n x i =
+      H.map (biproduct.π (fun _ : ι ↦ X.structureModules) i) n
+        (H.map (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).inv n x) :=
+  rfl
+
 /-- **The `i`-th component of the identification of `H^n(X, 𝒪_X^ι)` with `ι → H^n(X, 𝒪_X)`** is
 the map induced by the `i`-th projection `SheafOfModules.πFree`. -/
 @[simp]
 lemma H.freeLinearEquiv_apply (x : (X.freeModules ι).H n) (i : ι) :
     H.freeLinearEquiv X ι n x i = H.map (SheafOfModules.πFree i) n x := by
-  change H.map (biproduct.π (fun _ : ι ↦ X.structureModules) i) n
-      (H.map (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).inv n x) = _
-  rw [← LinearMap.comp_apply, ← H.map_comp, X.isoCoproduct_inv_comp_biproduct_π]
+  rw [H.freeLinearEquiv_apply_eq_map_isoCoproduct_inv, ← LinearMap.comp_apply, ← H.map_comp]
+  exact congrArg (fun φ ↦ H.map φ n x) (X.isoCoproduct_inv_comp_biproduct_π ι i)
+
+/-- The inverse of `AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv` before the summands of
+the biproduct are identified with the summands of the free sheaf. The form to use is
+`AlgebraicGeometry.Scheme.Modules.H.freeLinearEquiv_symm_apply`. -/
+lemma H.freeLinearEquiv_symm_apply_eq_map_isoCoproduct (p : ι → X.structureModules.H n) :
+    (H.freeLinearEquiv X ι n).symm p =
+      H.map (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).hom n
+        (∑ i : ι, H.map (biproduct.ι (fun _ : ι ↦ X.structureModules) i) n (p i)) :=
   rfl
 
 /-- **A family of classes on `𝒪_X` assembles into a class on `𝒪_X^ι` summand by summand**: the
@@ -418,12 +434,10 @@ the maps induced by their inclusions `SheafOfModules.ιFree`. -/
 @[simp]
 lemma H.freeLinearEquiv_symm_apply (p : ι → X.structureModules.H n) :
     (H.freeLinearEquiv X ι n).symm p = ∑ i : ι, H.map (SheafOfModules.ιFree i) n (p i) := by
-  change H.map (biproduct.isoCoproduct fun _ : ι ↦ X.structureModules).hom n
-      (∑ i : ι, H.map (biproduct.ι (fun _ : ι ↦ X.structureModules) i) n (p i)) = _
-  rw [_root_.map_sum]
+  rw [H.freeLinearEquiv_symm_apply_eq_map_isoCoproduct, _root_.map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
-  rw [← LinearMap.comp_apply, ← H.map_comp, X.biproduct_ι_comp_isoCoproduct_hom]
-  rfl
+  rw [← LinearMap.comp_apply, ← H.map_comp]
+  exact congrArg (fun φ ↦ H.map φ n (p i)) (X.biproduct_ι_comp_isoCoproduct_hom ι i)
 
 end Free
 

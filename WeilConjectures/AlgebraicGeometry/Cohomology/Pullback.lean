@@ -352,7 +352,11 @@ pulling back each member of the family and assembling the results on `X`.
         ▼                                                                            ▼
   (ι → H^n(X, 𝒪_X)) ──────────────────freeLinearEquiv⁻¹───────────────────▶ H^n(X, 𝒪_X^ι)
 ```
--/
+
+TODO: this is the pullback-naturality of
+`AlgebraicGeometry.Scheme.Modules.H.biproductLinearEquiv` for the constant family
+`fun _ : ι ↦ 𝒪`. State it for an arbitrary finite family `M : ι → Y.Modules` once the
+comparison `f^*(⨁ M) ≅ ⨁ f^* M` is available; the free case is not the final form. -/
 lemma H.freeLinearEquiv_symm_naturality {ι : Type u} [Fintype ι] (n : ℕ)
     (p : ι → Y.structureModules.H n) :
     H.map (pullbackFreeIso f ι).hom n
