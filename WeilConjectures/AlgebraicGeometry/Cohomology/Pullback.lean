@@ -50,15 +50,16 @@ is assembled from three ingredients:
   `AlgebraicGeometry.Scheme.Modules.H.structurePullbackMapOver` — the same two maps for a
   morphism of schemes over `Spec R`, where they are `R`-linear.
 
+The composition law for the pullback map is
+`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_comp`, in
+`WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp`.
+
 ## TODO
 
-The composition law for the pullback map is
-`AlgebraicGeometry.Scheme.Modules.H.pullbackMap_comp`, in
-`WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp`. What is still missing is the
-identity law: `H.pullbackMap (𝟙 X)` is the identity modulo the canonical isomorphism
-`(𝟙 X)^* ≅ 𝟭`. It needs the identification `(𝟙 X)^{-1} ≅ 𝟭` of pullback functors on abelian
-sheaves and its compatibility with the identification of constant sheaves, the analogues for
-the identity of `AlgebraicGeometry.Scheme.Hom.pullbackAbComp` and
+What is still missing is the identity law: `H.pullbackMap (𝟙 X)` is the identity modulo the
+canonical isomorphism `(𝟙 X)^* ≅ 𝟭`. It needs the identification `(𝟙 X)^{-1} ≅ 𝟭` of pullback
+functors on abelian sheaves and its compatibility with the identification of constant sheaves,
+the analogues for the identity of `AlgebraicGeometry.Scheme.Hom.pullbackAbComp` and
 `CategoryTheory.Functor.constantSheafsheafPullbackIso_comp`.
 
 -/

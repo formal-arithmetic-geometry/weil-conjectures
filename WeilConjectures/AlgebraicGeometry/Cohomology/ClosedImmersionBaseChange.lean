@@ -126,9 +126,8 @@ end Pushforward
 section BaseChange
 
 variable {W'₀ W'₁ : Scheme.{u}} {i₀ : W₀ ⟶ W₁} {g : W'₁ ⟶ W₁} {g₀ : W'₀ ⟶ W₀}
-  {i'₀ : W'₀ ⟶ W'₁} [IsClosedImmersion i₀] [IsClosedImmersion i'₀]
+  {i'₀ : W'₀ ⟶ W'₁}
 
-omit [IsClosedImmersion i₀] in
 /-- The route `W'₀ → W₀ → W₁` around the square, expressed through the comparison map for the
 composite `g₀ ≫ i₀`:
 
@@ -154,7 +153,6 @@ lemma pullbackAbComp_hom_app_comp_counit (F : W₀.Modules) :
   slice_lhs 1 3 => rw [pullbackAbComparison_comp]
   rw [Category.assoc, ← Functor.map_comp]
 
-omit [IsClosedImmersion i₀] [IsClosedImmersion i'₀] in
 /-- The route `W'₀ → W'₁ → W₁` around the square, expressed through the comparison map for the
 composite `i'₀ ≫ g`; this is where the mate identity
 `AlgebraicGeometry.Scheme.Modules.map_baseChange_comp_counit` for the base change morphism
@@ -187,7 +185,6 @@ lemma pullbackAbComp_hom_app_comp_baseChange (w : g₀ ≫ i₀ = i'₀ ≫ g) (
   slice_lhs 1 3 => rw [pullbackAbComparison_comp]
   rw [Category.assoc, ← Functor.map_comp]
 
-omit [IsClosedImmersion i₀] [IsClosedImmersion i'₀] in
 /-- **The key compatibility**: the base change morphism of sheaves of modules, read through the
 comparison maps between the pullback of abelian sheaves and the pullback of sheaves of modules,
 is the comparison of the two ways of pulling `(i₀_* F)^♭` back around the square:
@@ -221,6 +218,10 @@ lemma pullbackAbComparison_baseChange (w : g₀ ≫ i₀ = i'₀ ≫ g) (F : W�
   rw [Functor.map_comp]
   slice_lhs 2 3 => rw [← pullbackAbComparison_congr w.symm]
   simp
+
+section ClosedImmersions
+
+variable [IsClosedImmersion i₀] [IsClosedImmersion i'₀]
 
 /-- **Cohomology along a closed immersion commutes with base change.** For a commutative square
 `g₀ ≫ i₀ = i'₀ ≫ g` of schemes whose horizontal arrows `i₀` and `i'₀` are closed immersions,
@@ -269,10 +270,13 @@ theorem H.pullbackAddHom_pushforwardAddEquiv (w : g₀ ≫ i₀ = i'₀ ≫ g) (
         (H.pullbackAddHom g ((pushforward i₀).obj F) n
           (H.pushforwardAddEquiv i₀ F n x)) =
       H.pushforwardAddEquiv i'₀ ((pullback g₀).obj F) n (H.pullbackAddHom g₀ F n x) := by
+  have hx : H.pushforwardMap i₀ F n (H.pushforwardAddEquiv i₀ F n x) = x := by simp
   have h := H.pushforwardMap_pullbackAddHom w F n (H.pushforwardAddEquiv i₀ F n x)
-  rw [show H.pushforwardMap i₀ F n (H.pushforwardAddEquiv i₀ F n x) = x by simp] at h
+  rw [hx] at h
   refine (H.pushforwardAddEquiv i'₀ ((pullback g₀).obj F) n).symm.injective ?_
   simpa using h
+
+end ClosedImmersions
 
 end BaseChange
 

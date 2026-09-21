@@ -14,9 +14,7 @@ If `adj1 : L₁ ⊣ G` and `adj2 : L₂ ⊣ G` are two adjunctions with the same
 `CategoryTheory.Adjunction.leftAdjointUniq` is the canonical isomorphism `L₁ ≅ L₂`. Mathlib
 records the identity `adj1.unit ≫ whiskerRight (leftAdjointUniq adj1 adj2).hom G = adj2.unit`
 that it satisfies; this file records that this identity *characterises* it, which is what makes
-it possible to compute with composites of such isomorphisms. The characterisation is stated
-both pointwise (`CategoryTheory.Adjunction.eq_leftAdjointUniq_hom`) and as an identity of
-natural transformations (`CategoryTheory.Adjunction.eq_leftAdjointUniq_hom_of_unit`).
+it possible to compute with composites of such isomorphisms.
 -/
 
 @[expose] public section
@@ -33,12 +31,5 @@ lemma eq_leftAdjointUniq_hom {L₁ L₂ : C ⥤ D} {G : D ⥤ C} (adj1 : L₁ �
   ext X
   refine (adj1.homEquiv X (L₂.obj X)).injective ?_
   rw [Adjunction.homEquiv_unit, h X, adj1.homEquiv_leftAdjointUniq_hom_app adj2]
-
-/-- The natural-transformation form of `CategoryTheory.Adjunction.eq_leftAdjointUniq_hom`: it is
-the converse of Mathlib's `CategoryTheory.Adjunction.unit_leftAdjointUniq_hom`. -/
-lemma eq_leftAdjointUniq_hom_of_unit {L₁ L₂ : C ⥤ D} {G : D ⥤ C} (adj1 : L₁ ⊣ G) (adj2 : L₂ ⊣ G)
-    (τ : L₁ ⟶ L₂) (h : adj1.unit ≫ Functor.whiskerRight τ G = adj2.unit) :
-    τ = (adj1.leftAdjointUniq adj2).hom :=
-  eq_leftAdjointUniq_hom adj1 adj2 τ fun X ↦ NatTrans.congr_app h X
 
 end CategoryTheory.Adjunction

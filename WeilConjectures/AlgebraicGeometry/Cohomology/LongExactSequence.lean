@@ -72,10 +72,6 @@ lemma _root_.CategoryTheory.ShortComplex.ShortExact.map_toSheafAb
 
 variable {S S₁ S₂ : ShortComplex X.Modules}
 
-lemma H.mapAddHom_apply_eq_comp (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
-    H.mapAddHom φ n x = x.comp (Ext.mk₀ ((toSheafAb X).map φ)) (add_zero n) :=
-  rfl
-
 /-! ### Multiplication by a global section as an endomorphism of a short complex -/
 
 variable (S) in

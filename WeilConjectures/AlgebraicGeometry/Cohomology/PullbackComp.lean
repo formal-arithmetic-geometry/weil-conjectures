@@ -5,13 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 
 /-!
-# The pullback map on the cohomology of an abelian sheaf, and its composition law
+# The composition law for the pullback map on cohomology
 
 For a morphism of schemes `f : Z ⟶ X` and an abelian sheaf `𝒢` on `X`, this file constructs the
 pullback map
@@ -47,7 +46,7 @@ those results to `Opens.map f.base` and assembles them into the pullback map on 
   along `b` and then along `a` is pulling back along `a ≫ b`, modulo `pullbackAbComp`.
 * `AlgebraicGeometry.Scheme.Modules.pullbackAbComparison_comp` — the comparison map between the
   two notions of pullback is compatible with the composition of morphisms of schemes.
-* `AlgebraicGeometry.Scheme.Modules.H.pullbackMap_comp` — **the composition law for the
+* `AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_comp` — **the composition law for the
   pullback map on the cohomology of a sheaf of modules**, obtained from the two previous
   results, modulo the canonical isomorphism `AlgebraicGeometry.Scheme.Modules.pullbackComp`.
 -/
@@ -316,8 +315,9 @@ lemma H.pullbackAddHom_eq_comp_pullbackAbComparison (f : X ⟶ Y) (G : Y.Modules
 
 /-- **The composition law for the pullback map on the cohomology of a sheaf of modules**:
 pulling back along `b` and then along `a` is pulling back along `a ≫ b`, followed by the
-canonical identification `(a ≫ b)^* G ≅ a^* b^* G` of
-`AlgebraicGeometry.Scheme.Modules.pullbackComp`:
+inverse of the canonical identification `a^* b^* G ≅ (a ≫ b)^* G` of
+`AlgebraicGeometry.Scheme.Modules.pullbackComp` (note the orientation, opposite to that of
+`AlgebraicGeometry.Scheme.Hom.pullbackAbComp`):
 
 ```
 H^n(Y, G) --pullbackAddHom b--> H^n(X, b^* G) --pullbackAddHom a--> H^n(Z, a^* b^* G)
@@ -334,14 +334,6 @@ lemma H.pullbackAddHom_comp (a : Z ⟶ X) (b : X ⟶ Y) (G : Y.Modules) (n : ℕ
     H.pullbackAddHom_eq_comp_pullbackAbComparison]
   simp only [Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀, Category.assoc]
   rw [pullbackAbComparison_comp a b G]
-
-/-- The composition law for the semilinear pullback map on the cohomology of a sheaf of modules;
-the `AlgebraicGeometry.Scheme.Modules.H.pullbackMap` form of
-`AlgebraicGeometry.Scheme.Modules.H.pullbackAddHom_comp`. -/
-lemma H.pullbackMap_comp (a : Z ⟶ X) (b : X ⟶ Y) (G : Y.Modules) (n : ℕ) (e : G.H n) :
-    H.pullbackMap a ((pullback b).obj G) n (H.pullbackMap b G n e) =
-      H.map ((pullbackComp a b).inv.app G) n (H.pullbackMap (a ≫ b) G n e) :=
-  H.pullbackAddHom_comp a b G n e
 
 end Scheme.Modules
 

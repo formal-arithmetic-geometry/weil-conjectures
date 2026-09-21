@@ -54,7 +54,7 @@ section `r` of the structure sheaf multiplies `M` by `r`, which is an endomorphi
 
 universe u
 
-open CategoryTheory Limits Opposite TopologicalSpace
+open CategoryTheory Limits Opposite TopologicalSpace Abelian
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -157,6 +157,12 @@ additive groups. See `AlgebraicGeometry.Scheme.Modules.H.map` for the `Γ(X, �
 refinement. -/
 noncomputable def H.mapAddHom (φ : M ⟶ N) (n : ℕ) : M.H n →+ N.H n :=
   Sheaf.H.map ((toSheafAb X).map φ) n
+
+/-- The map on cohomology induced by a morphism of sheaves of modules is composition, in the
+category of abelian sheaves, with the degree-zero class of the morphism. -/
+lemma H.mapAddHom_apply_eq_comp (φ : M ⟶ N) (n : ℕ) (x : M.H n) :
+    H.mapAddHom φ n x = x.comp (Ext.mk₀ ((toSheafAb X).map φ)) (add_zero n) :=
+  rfl
 
 @[simp]
 lemma H.mapAddHom_id (M : X.Modules) (n : ℕ) :
