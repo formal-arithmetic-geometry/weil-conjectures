@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.Cohomology.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ClosedImmersionBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharacteristic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalFunctions
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FormalTriviality
@@ -17,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PicardSquareZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Pullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PullbackComp
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Thickening
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ThickeningFree
@@ -45,6 +47,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Symmetric
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialLineBundle
 public import WeilConjectures.AlgebraicGeometry.Modules.TrivialityCriterion
 public import WeilConjectures.AlgebraicGeometry.Modules.Vanishing
+public import WeilConjectures.AlgebraicGeometry.Modules.VanishingPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.ZPow
 public import WeilConjectures.AlgebraicGeometry.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Basic
@@ -278,6 +281,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Over.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
@@ -313,6 +317,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.ENat.Basic
+public import WeilConjectures.Mathlib.Data.Fintype.BigOperators
 public import WeilConjectures.Mathlib.Data.ZMod.QuotientGroup
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover
 public import WeilConjectures.Mathlib.GroupTheory.FiniteAbelian.Basic
@@ -334,6 +339,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
 public import WeilConjectures.Mathlib.RingTheory.Ideal.GoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Height
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.Idempotents
