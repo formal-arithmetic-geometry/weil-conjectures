@@ -157,7 +157,7 @@ private theorem fwdDiffComp_eulerChar_tensorZPow_eq_zero_aux {r : ℕ} (L : Fin 
   have hL' : ∀ i, (L i).Invertible := fun i ↦ (hL i).invertible
   induction n generalizing F with
   | zero =>
-    rw [fwdDiffComp_zero]
+    rw [fwdDiffComp_fin_zero]
     funext m
     exact eulerChar_eq_zero_of_isZero k ((invertible_zpowProd L hL' m).isZero_tensorObj
       (isZero_of_supportDim_lt_zero F hd))

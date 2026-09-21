@@ -25,6 +25,11 @@ public import WeilConjectures.Mathlib.Topology.Irreducible
   finite dimension.
 * `topologicalKrullDim_add_one_le`: the special case of an irreducible ambient space, where the
   hypothesis on `Z` reads `Z ≠ univ`.
+* `topologicalKrullDim_le_of_subset`: the Krull dimension of a subset is monotone in the subset.
+* `topologicalKrullDim_le_of_forall_maximal`: **the dimension of a subset is controlled by the
+  dimensions of its maximal irreducible subsets.** A chain of irreducible closed subsets of `S`
+  has its largest member inside some maximal irreducible subset of `S`, and therefore lies
+  entirely inside it.
 -/
 
 @[expose] public section
@@ -121,3 +126,50 @@ theorem topologicalKrullDim_add_one_le {X : Type*} [TopologicalSpace X] [Irreduc
   exact topologicalKrullDim_add_one_le_of_forall_maximal (subset_univ Z)
     (hZc.preimage continuous_subtype_val)
     fun _ hT hTZ ↦ hZ (univ_subset_iff.1 (eq_univ_of_maximal_isIrreducible hT ▸ hTZ))
+
+/-- **The Krull dimension of a subset is monotone in the subset.** -/
+theorem topologicalKrullDim_le_of_subset {X : Type*} [TopologicalSpace X] {Z S : Set X}
+    (hZS : Z ⊆ S) : topologicalKrullDim Z ≤ topologicalKrullDim S :=
+  (Topology.IsEmbedding.inclusion hZS).isInducing.topologicalKrullDim_le
+
+/-- **The dimension of a subset is controlled by the dimensions of its maximal irreducible
+subsets**: to bound `dim S` it is enough to bound `dim T` for every maximal irreducible subset
+`T` of `S`.
+
+A chain of irreducible closed subsets of `S` has its largest member contained in some maximal
+irreducible subset `T` of `S`; the whole chain then lies in `T`, and intersecting it with `T`
+gives a chain of the same length of irreducible closed subsets of `T`. -/
+theorem topologicalKrullDim_le_of_forall_maximal {X : Type*} [TopologicalSpace X] {S : Set X}
+    {d : WithBot ℕ∞}
+    (h : ∀ T, Maximal (fun W ↦ IsIrreducible W ∧ W ⊆ S) T → topologicalKrullDim T ≤ d) :
+    topologicalKrullDim S ≤ d := by
+  rw [topologicalKrullDim, krullDim]
+  refine iSup_le fun l ↦ ?_
+  obtain ⟨T, hTmem, hTsub⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible
+    (l.last : Set S) l.last.isIrreducible
+  have hsub : ∀ i, (l i : Set S) ⊆ T := fun i ↦
+    (SetLike.coe_subset_coe.2 (l.monotone (Fin.le_last i))).trans hTsub
+  have himg : ∀ i, ((↑) '' (T ↓∩ (l i : Set S)) : Set S) = (l i : Set S) := fun i ↦ by
+    rw [Subtype.image_preimage_coe, Set.inter_eq_right.2 (hsub i)]
+  let f : Fin (l.length + 1) → IrreducibleCloseds T := fun i ↦
+    ⟨T ↓∩ (l i : Set S), (isIrreducible_preimage_val_iff (hsub i)).2 (l i).isIrreducible,
+      (l i).isClosed.preimage continuous_subtype_val⟩
+  have hfinj : ∀ i j, f i = f j → l i = l j := fun i j hij ↦ by
+    refine IrreducibleCloseds.ext ?_
+    rw [← himg i, ← himg j]
+    exact congrArg _ (congrArg (fun Z : IrreducibleCloseds T ↦ (Z : Set T)) hij)
+  let l' : LTSeries (IrreducibleCloseds T) :=
+    { length := l.length
+      toFun := f
+      step := fun i ↦ by
+        have hst : l i.castSucc < l i.succ := l.step i
+        have hcoe : ((l i.castSucc : Set S)) ⊆ (l i.succ : Set S) := hst.le
+        have hle : f i.castSucc ≤ f i.succ := fun x hx ↦ hcoe hx
+        change f i.castSucc < f i.succ
+        exact lt_of_le_of_ne hle fun heq ↦ hst.ne (hfinj _ _ heq) }
+  calc (l.length : WithBot ℕ∞) = (l'.length : WithBot ℕ∞) := rfl
+    _ ≤ krullDim (IrreducibleCloseds T) := l'.length_le_krullDim
+    _ = topologicalKrullDim (((↑) '' T : Set X)) :=
+        IsHomeomorph.topologicalKrullDim_eq _
+          (Topology.IsEmbedding.subtypeVal.homeomorphImage T).isHomeomorph
+    _ ≤ d := h _ (maximal_isIrreducible_image_val_of_mem_irreducibleComponents hTmem)
