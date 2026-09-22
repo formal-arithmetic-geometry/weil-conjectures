@@ -870,3 +870,42 @@ The open question is therefore narrower than in §7: **why is comparing the two
 `inferInstanceAs (MonoidalCategory (DerivedMonoidal Qh …))` and should delta-reduce
 to the right-hand side in a couple of steps? That is what the `[DELTA]` log of the
 instrumented kernel is meant to answer.
+
+## 12.4 Status of the patched kernel
+
+The patch has been built and run against this project (Lean `v4.33.1`, stage1,
+githash `819816b2…`, existing Mathlib oleans reused, no Mathlib rebuild). It
+streams to stderr *while* the check runs, unlike the Lean-side probes. Running
+`test_tensorObj` (with `debug.skipKernelTC` removed) under
+`LEAN_DEFEQ_TRACE_MS=3000` produces lines such as:
+
+```text
+[DEFEQ-SLOW] depth=30 ms=3955  res=1 lhs=CategoryTheory.Functor.obj/6           rhs=CategoryTheory.Functor.obj/6
+[DEFEQ-SLOW] depth=29 ms=3955  res=1 lhs=CategoryTheory.Functor.obj/6           rhs=CategoryTheory.Functor.obj/6
+[DEFEQ-SLOW] depth=28 ms=5307  res=1 lhs=CategoryTheory.Functor.obj/6           rhs=CategoryTheory.Functor.obj/6
+[DEFEQ-SLOW] depth=27 ms=10566 res=1 lhs=CategoryTheory.NatTrans/6              rhs=CategoryTheory.NatTrans/6
+[DEFEQ-SLOW] depth=26 ms=10566 res=1 lhs=Quiver.Hom/4                           rhs=Quiver.Hom/4
+[DEFEQ-SLOW] depth=32 ms=3652  res=1 lhs=CategoryTheory.NatTrans.mk/8           rhs=CategoryTheory.NatTrans.mk/8
+[DEFEQ-SLOW] depth=31 ms=3652  res=1 lhs=CategoryTheory.Functor.map/8           rhs=CategoryTheory.Functor.map/8
+[DEFEQ-SLOW] depth=30 ms=3652  res=1 lhs=CategoryTheory.Functor.whiskerRight/10 rhs=CategoryTheory.Functor.whiskerRight/10
+```
+
+Read these **bottom-up by depth**: a shallow line's time includes the time of the
+deeper lines nested inside it, so the interesting entry is the *deepest* one whose
+time is still close to its parent's — that is the subproblem actually doing the
+work, and the shallower frames are merely waiting for it. In the excerpt above the
+`Quiver.Hom` / `NatTrans` frame at depth 26-27 costs 10.5 s and its `Functor.obj`
+child at depth 28 costs 5.3 s, i.e. the descent has already reached Hom-level
+structure by depth ~26.
+
+To get the reduction decisions that led there, re-run with
+`LEAN_DELTA_TRACE_N=3000 LEAN_DELTA_TRACE_MINDEPTH=<d>` where `<d>` is a depth just
+above the slow frames, and read the `action=` column: `try-args-then-both` is the
+congruence shortcut being attempted, `unfold-both` / `unfold-lhs(height)` /
+`unfold-rhs(height)` are delta steps. The first `[DELTA]` line mentioning
+`leftDerived`, `localization`, `ShrinkHoms`, `Quot`, `Hom` or `Preadditive` is the
+transition asked for in §10.4.
+
+A caveat when reading the `ms` column: the kernel memoises successful `is_def_eq`
+calls, so an identical pair met a second time is reported as ~0 ms. Times are
+wall-clock for that particular invocation, not the intrinsic cost of the pair.
