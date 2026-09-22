@@ -20,9 +20,9 @@ complete and cocomplete with exact filtered colimits of size `u + 1`, so the
 plus-construction applies and is left exact.
 
 Everything in this file is deduced from that single statement
-(`hasSheafify_essentiallySmall`), which is the only sorry: the small étale site, the small
-pro-étale site and their localizations `J.over V` are essentially small in `u + 1`. The
-localized instances are what lets the constructible-sheaf definitions of
+(`hasSheafify_of_essentiallySmall`), which is the only sorry: the small étale site, the
+small pro-étale site and their localizations `J.over V` are essentially small in `u + 1`.
+The localized instances are what lets the constructible-sheaf definitions of
 `WeilConjectures.ConstructibleSheaf.Defs` restrict a sheaf to a member of an étale cover
 without carrying `HasWeakSheafify` for the localized sites as a hypothesis.
 
@@ -42,7 +42,7 @@ site is equivalent to a small one and `A` is complete and cocomplete with exact 
 colimits of size `u + 1`, so the plus-construction applies and is left exact.
 
 All the other instances in this file are special cases. -/
-instance (priority := high) hasSheafify_essentiallySmall (A : Type u')
+instance (priority := high) hasSheafify_of_essentiallySmall (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {C : Type*} [Category* C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C) :
     HasSheafify J A :=

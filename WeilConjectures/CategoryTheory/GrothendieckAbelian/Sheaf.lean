@@ -37,8 +37,8 @@ namespace CategoryTheory.GrothendieckTopology
 /-- The category of `A`-valued sheaves on an essentially small site is Grothendieck
 abelian, for a Grothendieck abelian coefficient category `A` with `Hom`-types in the
 universe `u + 1`, one above the universe `u` of the base schemes: the site is equivalent to
-a small one, and sheafification is available on both by `hasSheafify_essentiallySmall`. -/
-instance (priority := high) isGrothendieckAbelian_sheaf_essentiallySmall (A : Type u')
+a small one, and sheafification is available on both by `hasSheafify_of_essentiallySmall`. -/
+instance (priority := high) isGrothendieckAbelian_sheaf_of_essentiallySmall (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) :

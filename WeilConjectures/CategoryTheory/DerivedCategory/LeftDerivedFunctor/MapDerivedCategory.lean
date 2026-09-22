@@ -5,11 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
-public import WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerived
-public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # The total left derived functor of an exact functor is `mapDerivedCategory`
@@ -45,11 +42,13 @@ that left derivation commutes with the constructions preserved by `mapDerivedCat
 These are the general inputs needed to identify the derived pullback `Lg^*` of étale
 sheaves (which is left derived from the *exact* functor `g^*`) with the levelwise
 functor, and to obtain its composition, homology, and single-degree compatibilities; see
-`WeilConjectures.SixFunctors.UpperStarMapDerivedCategory`.
+`WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar`.
 
 -/
 
 @[expose] public section
+
+universe wC wD wE vC vD vE uC uD uE
 
 open CategoryTheory Limits
 
@@ -57,23 +56,23 @@ namespace CategoryTheory.Functor
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-section Compatibility
-
 open MonoidalCategory
 
-variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-  [MonoidalCategory C] [MonoidalPreadditive C]
-  [∀ (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) C]
+variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelian C] [Abelian D]
+  [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
+
+variable [MonoidalCategory C] [MonoidalPreadditive C]
+  [HasCountableCoproducts C]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
   [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution C]
-  [HasDerivedCategory C] [HasDerivedCategory D]
   (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+section Compatibility
 
 /-- For an *exact* functor `F` between abelian categories, the total left derived
 functor computed via K-flat resolutions is canonically isomorphic to the functor
@@ -131,39 +130,23 @@ end Compatibility
 
 section Composition
 
-open MonoidalCategory
+variable {E : Type uE} [Category.{vE} E] [Abelian E] [HasDerivedCategory.{wE} E]
 
-variable {C D E : Type*} [Category C] [Category D] [Category E]
-  [Abelian C] [Abelian D] [Abelian E]
-  [MonoidalCategory C] [MonoidalPreadditive C]
-  [∀ (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) C]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
-  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
-  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution C]
-  [MonoidalCategory D] [MonoidalPreadditive D]
-  [∀ (j : ℤ), HasColimitsOfShape
-    (Discrete ((ComplexShape.up ℤ).π (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⁻¹' {j})) D]
+variable [MonoidalCategory D] [MonoidalPreadditive D]
+  [HasCountableCoproducts D]
+  [HasColimitsOfShape ℤ D] [HasExactColimitsOfShape ℤ D]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [HasColimitsOfShape ℤ D] [HasExactColimitsOfShape ℤ D]
   [∀ (X : D), PreservesColimitsOfShape ℤ ((curriedTensor D).obj X)]
   [∀ (X : D), PreservesColimitsOfShape ℤ ((curriedTensor D).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution D]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
 
 /-- The composition isomorphism
 `(F ⋙ G).leftDerivedFunctor ≅ F.leftDerivedFunctor ⋙ G.leftDerivedFunctor` for exact
 functors between abelian categories with functorial flat resolutions, obtained from
 `mapDerivedCategoryCompIso` by transport along the compatibility isomorphisms. -/
-noncomputable def leftDerivedFunctorCompIso (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+noncomputable def leftDerivedFunctorCompIso (G : D ⥤ E) [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).leftDerivedFunctor ≅ F.leftDerivedFunctor ⋙ G.leftDerivedFunctor :=
   (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory ≪≫ mapDerivedCategoryCompIso F G ≪≫
