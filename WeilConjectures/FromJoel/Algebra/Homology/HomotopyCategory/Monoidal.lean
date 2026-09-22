@@ -42,7 +42,8 @@ namespace MonoidalCategory
 
 variable [∀ (K₁ K₂ : HomologicalComplex C c), HasMapBifunctor K₁ K₂ (curriedTensor C) c]
 
-noncomputable abbrev unit : HomotopyCategory C c :=
+@[reducible]
+noncomputable def unit : HomotopyCategory C c :=
   (quotient _ _).obj (𝟙_ _)
 
 noncomputable def bifunctor :

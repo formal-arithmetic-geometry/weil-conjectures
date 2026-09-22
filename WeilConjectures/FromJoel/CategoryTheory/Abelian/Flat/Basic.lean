@@ -86,7 +86,8 @@ end ObjectProperty
 namespace Abelian
 
 variable (A) in
-abbrev HasFunctorialFlatResolution : Prop :=
+@[reducible]
+def HasFunctorialFlatResolution : Prop :=
   Nonempty (LeftResolution (ObjectProperty.flat.ι : _ ⥤ A))
 
 set_option backward.isDefEq.respectTransparency false in

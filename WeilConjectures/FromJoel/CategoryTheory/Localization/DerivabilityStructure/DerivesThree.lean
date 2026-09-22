@@ -36,7 +36,8 @@ namespace LocalizerMorphism
 variable (Φ₁ : LocalizerMorphism W₁₀ W₁) (Φ₂ : LocalizerMorphism W₂₀ W₂)
   (Φ₃ : LocalizerMorphism W₃₀ W₃) (F : C₁ ⥤ C₂ ⥤ C₃ ⥤ H)
 
-abbrev Derives₃ : Prop :=
+@[reducible]
+def Derives₃ : Prop :=
   (Φ₁.prod (Φ₂.prod Φ₃)).Derives (uncurry₃.obj F)
 
 variable [W₁₀.ContainsIdentities] [W₂₀.ContainsIdentities] [W₃₀.ContainsIdentities]

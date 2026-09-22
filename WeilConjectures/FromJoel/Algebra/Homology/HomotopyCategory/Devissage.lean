@@ -23,7 +23,8 @@ on the branch `jriou_localization` of Joël Riou's mathlib fork
 
 open CategoryTheory Limits
 
-noncomputable abbrev CategoryTheory.Iso.ofIsIso {C : Type*} [Category C]
+@[reducible]
+noncomputable def CategoryTheory.Iso.ofIsIso {C : Type*} [Category C]
     {X Y : C} {f : X ⟶ Y} (_ : IsIso f) : X ≅ Y := asIso f
 
 variable {C : Type*} [Category C] [Preadditive C] [HasBinaryBiproducts C] [HasZeroObject C]

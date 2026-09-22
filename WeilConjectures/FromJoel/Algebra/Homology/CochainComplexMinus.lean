@@ -33,7 +33,8 @@ instance [HasZeroMorphisms C] : (CochainComplex.minus C).IsClosedUnderIsomorphis
     rintro _ _ e ⟨n, _⟩
     exact ⟨n, isStrictlyLE_of_iso e n⟩
 
-abbrev Minus [HasZeroMorphisms C] :=
+@[reducible]
+def Minus [HasZeroMorphisms C] :=
   (CochainComplex.minus C).FullSubcategory
 
 namespace Minus
@@ -42,7 +43,8 @@ section
 
 variable [HasZeroMorphisms C]
 
-abbrev ι : Minus C ⥤ CochainComplex C ℤ := ObjectProperty.ι _
+@[reducible]
+def ι : Minus C ⥤ CochainComplex C ℤ := ObjectProperty.ι _
 
 def fullyFaithfulι : (ι C).FullyFaithful :=
   ObjectProperty.fullyFaithfulι _

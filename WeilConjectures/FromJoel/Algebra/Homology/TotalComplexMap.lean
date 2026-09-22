@@ -30,7 +30,8 @@ variable {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
   [DecidableEq I] (K L : HomologicalComplex₂ C c₁ c₂) (φ : K ⟶ L) (c : ComplexShape I)
   [TotalComplexShape c₁ c₂ c]
 
-abbrev _root_.CategoryTheory.Functor.PreservesTotalComplex :=
+@[reducible]
+def _root_.CategoryTheory.Functor.PreservesTotalComplex :=
   ∀ n, PreservesColimit (Discrete.functor
     (K.toGradedObject.mapObjFun (ComplexShape.π c₁ c₂ c) n)) F
 

@@ -42,7 +42,8 @@ noncomputable def cochainComplexFunctor : A ⥤ CochainComplex C ℤ :=
 
 variable (X)
 
-noncomputable abbrev cochainComplex : CochainComplex C ℤ := Λ.cochainComplexFunctor.obj X
+@[reducible]
+noncomputable def cochainComplex : CochainComplex C ℤ := Λ.cochainComplexFunctor.obj X
 
 set_option backward.defeqAttrib.useBackward true in
 noncomputable def cochainComplexXZeroIso : (Λ.cochainComplex X).X 0 ≅ Λ.F.obj X :=

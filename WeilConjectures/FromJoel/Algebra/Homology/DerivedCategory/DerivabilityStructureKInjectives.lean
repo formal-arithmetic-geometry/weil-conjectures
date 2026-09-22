@@ -90,19 +90,22 @@ end CategoryTheory.Abelian
 namespace CochainComplex
 
 variable (C) in
-abbrev KInjectives :=
+@[reducible]
+def KInjectives :=
   ObjectProperty.FullSubcategory (fun (K : CochainComplex C ℤ) ↦ K.IsKInjective)
 
 namespace KInjectives
 
-abbrev mk (K : CochainComplex C ℤ) [K.IsKInjective] : KInjectives C := ⟨K, inferInstance⟩
+@[reducible]
+def mk (K : CochainComplex C ℤ) [K.IsKInjective] : KInjectives C := ⟨K, inferInstance⟩
 
 lemma mk_surjective (X : KInjectives C) :
     ∃ (K : CochainComplex C ℤ) (_ : K.IsKInjective),
       X = mk K :=
   ⟨X.obj, X.property, rfl⟩
 
-abbrev ι : KInjectives C ⥤ CochainComplex C ℤ := ObjectProperty.ι _
+@[reducible]
+def ι : KInjectives C ⥤ CochainComplex C ℤ := ObjectProperty.ι _
 
 variable (C) in
 def quasiIso : MorphismProperty (KInjectives C) :=
@@ -165,12 +168,14 @@ end CochainComplex
 namespace HomotopyCategory
 
 variable (C) in
-abbrev KInjectives :=
+@[reducible]
+def KInjectives :=
   (HomotopyCategory.subcategoryAcyclic C).rightOrthogonal.FullSubcategory
 
 namespace KInjectives
 
-abbrev mk (K : CochainComplex C ℤ) [K.IsKInjective] :
+@[reducible]
+def mk (K : CochainComplex C ℤ) [K.IsKInjective] :
     KInjectives C :=
   ⟨(HomotopyCategory.quotient _ _).obj K, by
     rwa [← CochainComplex.isKInjective_iff_rightOrthogonal]⟩

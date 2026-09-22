@@ -27,7 +27,8 @@ section
 variable (C : Type*) [Category C] [HasZeroMorphisms C] [HasZeroObject C]
   {ι₁ ι₂ : Type*} [DecidableEq ι₂] (c₁ : ComplexShape ι₁) (c₂ : ComplexShape ι₂)
 
-noncomputable abbrev singleRow (i₂ : ι₂) :
+@[reducible]
+noncomputable def singleRow (i₂ : ι₂) :
     HomologicalComplex C c₁ ⥤ HomologicalComplex₂ C c₁ c₂ :=
   (HomologicalComplex.single C c₂ i₂).mapHomologicalComplex c₁
 

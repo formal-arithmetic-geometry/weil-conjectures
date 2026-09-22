@@ -66,9 +66,11 @@ instance [W.RespectsIso] : W.kFlat.IsMonoidal where
       fun _ _ _ hf ↦ (W.arrow_mk_iso_iff
         (Arrow.isoMk (α_ _ _ _) (α_ _ _ _))).1 (hX₂.whiskerRight (hX₁.whiskerRight hf))⟩
 
-abbrev KFlat := W.kFlat.FullSubcategory
+@[reducible]
+def KFlat := W.kFlat.FullSubcategory
 
-abbrev ιKFlat : W.KFlat ⥤ C := W.kFlat.ι
+@[reducible]
+def ιKFlat : W.KFlat ⥤ C := W.kFlat.ι
 
 def WKFlat : MorphismProperty W.KFlat := W.inverseImage W.ιKFlat
 

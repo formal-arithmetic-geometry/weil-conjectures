@@ -148,7 +148,8 @@ instance (K : CochainComplex A ℤ) (i : ℤ) [K.IsStrictlyLE i]
         exact hn k (by omega)
       exact (HomologicalComplex.eval _ _ i₂).map_isZero this
 
-noncomputable abbrev bicomplexπ :
+@[reducible]
+noncomputable def bicomplexπ :
     Λ.bicomplexFunctor ⋙ ι.mapHomologicalComplex₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ) ⟶
       HomologicalComplex₂.singleRow A (ComplexShape.up ℤ) (ComplexShape.up ℤ) 0 :=
   NatTrans.mapHomologicalComplex Λ.cochainComplexNatTransπ (ComplexShape.up ℤ)

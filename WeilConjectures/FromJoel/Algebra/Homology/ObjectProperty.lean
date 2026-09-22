@@ -43,7 +43,8 @@ instance {ι : Type*} (c : ComplexShape ι) [P.IsClosedUnderIsomorphisms] :
     (P.homologicalComplex c).IsClosedUnderIsomorphisms where
   of_iso e h n := P.prop_of_iso ((HomologicalComplex.eval C c n).mapIso e) (h n)
 
-abbrev cochainComplex : ObjectProperty (CochainComplex C ℤ) :=
+@[reducible]
+def cochainComplex : ObjectProperty (CochainComplex C ℤ) :=
     P.homologicalComplex (.up ℤ)
 
 def cochainComplexMinus : ObjectProperty (CochainComplex C ℤ) :=
