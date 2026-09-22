@@ -28,7 +28,7 @@ discharges the goal instantly.
 As everywhere in this folder the statement is for an arbitrary site with `Hom`-types in
 the universe `u` and objects in `u + 1`, essentially small in `u + 1`, and a Grothendieck
 abelian coefficient category `A` with `Hom`-types in `u + 1`; sheafification is then
-available by `CategoryTheory.GrothendieckTopology.hasSheafify_essentiallySmall`. The small
+available by `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. The small
 étale site is such a site, so `AlgebraicGeometry.Etale.hasCountableCoproducts_sheaf` is
 just an instance of it.
 
@@ -48,7 +48,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 sheafifying the coproduct of the underlying presheaves. This is mathlib's
 `CategoryTheory.Sheaf.instHasColimitsOfShape`; see the module docstring for why it has to
 be restated here. -/
-instance (priority := high) hasCountableCoproducts_sheaf_essentiallySmall
+instance (priority := high) hasCountableCoproducts_sheaf_of_essentiallySmall
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) :
     HasCountableCoproducts (Sheaf J A) :=

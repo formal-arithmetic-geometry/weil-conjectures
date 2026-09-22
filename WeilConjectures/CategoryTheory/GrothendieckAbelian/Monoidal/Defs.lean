@@ -93,13 +93,13 @@ variable [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
 /-- The monoidal structure on `A`-valued sheaves on an essentially small site, induced by
 a monoidal structure on the coefficient category `A`: the sheafification of the objectwise
 tensor product of presheaves. -/
-noncomputable instance monoidalCategory_sheaf_essentiallySmall :
+noncomputable instance monoidalCategory_sheaf_of_essentiallySmall :
     MonoidalCategory (Sheaf J A) :=
   Sheaf.monoidalCategory _ _
 
 /-- The braiding of the monoidal structure on `A`-valued sheaves on an essentially small
 site, induced by the braiding of the coefficient category `A`. -/
-noncomputable instance braidedCategory_sheaf_essentiallySmall :
+noncomputable instance braidedCategory_sheaf_of_essentiallySmall :
     BraidedCategory (Sheaf J A) :=
   Sheaf.braidedCategory _ _
 
