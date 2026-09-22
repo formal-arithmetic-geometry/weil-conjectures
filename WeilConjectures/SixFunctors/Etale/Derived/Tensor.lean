@@ -96,7 +96,6 @@ noncomputable instance laxMonoidal_Qh :
     (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
   DerivedCategory.laxMonoidalQh (Sheaf X.smallEtaleTopology A)
 
-/-- This is a slow instance -/
 instance isLeftDerivedFunctor₂_derivedTensor :
     -⊗ᴸ-(X)[A].IsLeftDerivedFunctor₂
       (Functor.LaxMonoidal.μNatTrans DerivedCategory.Qh)
