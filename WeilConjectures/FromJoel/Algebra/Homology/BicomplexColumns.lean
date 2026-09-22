@@ -560,7 +560,8 @@ section
 
 variable (C : Type*) [Category C] [HasZeroMorphisms C] [HasZeroObject C]
 
-noncomputable abbrev stupidFiltrationGEFunctor :
+@[reducible]
+noncomputable def stupidFiltrationGEFunctor :
     ℤᵒᵖ ⥤ CochainComplex C ℤ ⥤ CochainComplex C ℤ :=
   ComplexShape.Embedding.stupidTruncGEFiltration
     (fun n => ComplexShape.embeddingUpIntGE n.unop)
@@ -569,7 +570,8 @@ noncomputable abbrev stupidFiltrationGEFunctor :
 variable {C}
 variable (K L : CochainComplex C ℤ)
 
-noncomputable abbrev stupidFiltrationGE : ℤᵒᵖ ⥤ CochainComplex C ℤ :=
+@[reducible]
+noncomputable def stupidFiltrationGE : ℤᵒᵖ ⥤ CochainComplex C ℤ :=
   stupidFiltrationGEFunctor C ⋙ ((evaluation _ _).obj K)
 
 set_option backward.defeqAttrib.useBackward true in
@@ -672,7 +674,8 @@ section
 variable (C : Type*) [Category C] [HasZeroMorphisms C] [HasZeroObject C]
   {ι₁ ι₂ : Type*} [DecidableEq ι₁] (c₁ : ComplexShape ι₁) (c₂ : ComplexShape ι₂)
 
-noncomputable abbrev singleColumn (i₁ : ι₁) :
+@[reducible]
+noncomputable def singleColumn (i₁ : ι₁) :
     HomologicalComplex C c₂ ⥤ HomologicalComplex₂ C c₁ c₂ :=
   HomologicalComplex.single (HomologicalComplex C c₂) c₁ i₁
 
@@ -746,7 +749,8 @@ variable (C : Type*) [Category C] [Abelian C]
   {D : Type*} [Category D] [Preadditive D] [HasFiniteCoproducts D]
   {ι : Type*} (c : ComplexShape ι)
 
-noncomputable abbrev rowFiltrationGEFunctor :
+@[reducible]
+noncomputable def rowFiltrationGEFunctor :
     ℤᵒᵖ ⥤ HomologicalComplex₂ C (up ℤ) c ⥤ HomologicalComplex₂ C (up ℤ) c :=
   CochainComplex.stupidFiltrationGEFunctor _
 
@@ -760,7 +764,8 @@ instance (n : ℤᵒᵖ) {ι' : Type*} {c' : ComplexShape ι'}
 variable {C c}
 
 set_option backward.defeqAttrib.useBackward true in
-noncomputable abbrev rowFiltrationGE (K : HomologicalComplex₂ C (up ℤ) c) :
+@[reducible]
+noncomputable def rowFiltrationGE (K : HomologicalComplex₂ C (up ℤ) c) :
     ℤᵒᵖ ⥤ HomologicalComplex₂ C (up ℤ) c :=
   rowFiltrationGEFunctor C c ⋙ ((evaluation _ _).obj K)
 
@@ -776,7 +781,8 @@ instance (K : HomologicalComplex₂ C (up ℤ) c) (n x : ℤ) [CochainComplex.Is
   dsimp
   infer_instance
 
-noncomputable abbrev rowFiltrationGEMap {K L : HomologicalComplex₂ C (up ℤ) c} (φ : K ⟶ L) :
+@[reducible]
+noncomputable def rowFiltrationGEMap {K L : HomologicalComplex₂ C (up ℤ) c} (φ : K ⟶ L) :
     K.rowFiltrationGE ⟶ L.rowFiltrationGE :=
   Functor.whiskerLeft _ ((evaluation _ _).map φ)
 

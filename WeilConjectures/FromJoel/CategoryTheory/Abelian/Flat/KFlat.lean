@@ -75,8 +75,11 @@ namespace CochainComplex
 
 open HomologicalComplex
 
-abbrev KFlat := (quasiIso A (.up ℤ)).KFlat
-noncomputable abbrev ιKFlat : KFlat A ⥤ CochainComplex A ℤ := MorphismProperty.ιKFlat _
+@[reducible]
+def KFlat := (quasiIso A (.up ℤ)).KFlat
+
+@[reducible]
+noncomputable def ιKFlat : KFlat A ⥤ CochainComplex A ℤ := MorphismProperty.ιKFlat _
 
 variable {A}
 
@@ -388,14 +391,17 @@ def L : LocalizerMorphism (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).
     rintro ⟨K, hK⟩ ⟨L, hL⟩ ⟨f : K ⟶ L⟩ hf
     simpa [MorphismProperty.WKFlat, HomotopyCategory.quotient_map_mem_quasiIso_iff] using hf
 
-abbrev R : LocalizerMorphism (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
+@[reducible]
+def R : LocalizerMorphism (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
     (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) where
   functor := HomotopyCategory.quotient _ _
   map _ _ _ _ := by simpa [HomotopyCategory.quotient_map_mem_quasiIso_iff]
 
-noncomputable abbrev T := (HomologicalComplex.quasiIso A (.up ℤ)).localizerMorphismKFlat
+@[reducible]
+noncomputable def T := (HomologicalComplex.quasiIso A (.up ℤ)).localizerMorphismKFlat
 
-noncomputable abbrev B := (HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat
+@[reducible]
+noncomputable def B := (HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat
 
 def WL : MorphismProperty (HomologicalComplex.quasiIso A (.up ℤ)).KFlat :=
   (HomologicalComplex.homotopyEquivalences A (.up ℤ)).inverseImage (T A).functor

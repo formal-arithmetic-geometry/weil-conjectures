@@ -143,10 +143,12 @@ def currying₄ : (C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) ≌ (C₁ × C₂ × C
   currying.trans (currying₃.trans ((prod.associativity C₁ C₂ (C₃ × C₄)).congrLeft))
 
 /-- Uncurrying a functor in four variables. -/
-abbrev uncurry₄ : (C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) ⥤ C₁ × C₂ × C₃ × C₄ ⥤ E := currying₄.functor
+@[reducible]
+def uncurry₄ : (C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) ⥤ C₁ × C₂ × C₃ × C₄ ⥤ E := currying₄.functor
 
 /-- Currying a functor in four variables. -/
-abbrev curry₄ : (C₁ × C₂ × C₃ × C₄ ⥤ E) ⥤ C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E := currying₄.inverse
+@[reducible]
+def curry₄ : (C₁ × C₂ × C₃ × C₄ ⥤ E) ⥤ C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E := currying₄.inverse
 
 /-- Uncurrying functors in four variables gives a fully faithful functor. -/
 def fullyFaithfulUncurry₄ :

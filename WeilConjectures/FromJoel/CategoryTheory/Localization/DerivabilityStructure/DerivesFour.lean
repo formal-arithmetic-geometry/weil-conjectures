@@ -38,7 +38,8 @@ variable (Φ₁ : LocalizerMorphism W₁₀ W₁) (Φ₂ : LocalizerMorphism W�
   (Φ₃ : LocalizerMorphism W₃₀ W₃) (Φ₄ : LocalizerMorphism W₄₀ W₄)
   (F : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ H)
 
-abbrev Derives₄ : Prop :=
+@[reducible]
+def Derives₄ : Prop :=
   (Φ₁.prod (Φ₂.prod (Φ₃.prod Φ₄))).Derives (uncurry₄.obj F)
 
 variable [W₁₀.ContainsIdentities] [W₂₀.ContainsIdentities] [W₃₀.ContainsIdentities]

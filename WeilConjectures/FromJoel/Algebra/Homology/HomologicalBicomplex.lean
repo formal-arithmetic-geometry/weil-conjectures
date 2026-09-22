@@ -31,7 +31,8 @@ namespace Functor
 
 /-- The functor `HomologicalComplex₂ C c₁ c₂ ⥤ HomologicalComplex₂ D c₁ c₂` induced
 by a functor `F : C ⥤ D` which preserves zero morphisms. -/
-abbrev mapHomologicalComplex₂ [F.PreservesZeroMorphisms] :
+@[reducible]
+def mapHomologicalComplex₂ [F.PreservesZeroMorphisms] :
     HomologicalComplex₂ C c₁ c₂ ⥤ HomologicalComplex₂ D c₁ c₂ :=
   (F.mapHomologicalComplex c₂).mapHomologicalComplex c₁
 
