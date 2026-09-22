@@ -708,3 +708,165 @@ At this stage:
 The final objective is to identify:
 
 > the highest-level definitional equality that should have stopped at an abstraction boundary, but instead remained transparent enough for the kernel to descend into an extremely expensive implementation path.
+
+---
+
+# 12. How to Run the Diagnostics in This Folder
+
+## 12.1 The Lean-side probes
+
+They live at the bottom of `Tensor.lean`, after `end AlgebraicGeometry`:
+
+| probe | what it answers |
+| --- | --- |
+| `probeKernelDecl` | §9 — `Kernel.check value` vs `Kernel.isDefEq inferred declared`, both orientations |
+| `reportSlow` | §10.1/§10.2 — the **minimal** expensive defeq subproblems, with their raw expressions |
+| `explodeDecl` | times every argument pair of one node, to see whether congruence was available |
+| `drillDecl` | the same, recursively following the most expensive differing argument |
+| `hintsOf` | §8.2 — the reducibility hints `lazy_delta_reduction_step` uses to choose a direction |
+
+Uncomment one of the `run_cmd` driver blocks at the end of the file and run:
+
+```bash
+lake env lean -Dpp.unicode.fun=true -DrelaxedAutoImplicit=false \
+  -Dbackward.isDefEq.respectTransparency=false -Dweak.linter.mathlibStandardSet=true \
+  -Dweak.linter.style.header=false -DmaxSynthPendingDepth=3 -Dwarn.sorry=false \
+  WeilConjectures/SixFunctors/Etale/Derived/Tensor.lean > /tmp/probe.log 2>&1
+```
+
+Two things to know about **where the feedback appears**:
+
+* The `-D` flags are required. `lake env lean` does *not* apply `[leanOptions]` from
+  `lakefile.toml`, and without `backward.isDefEq.respectTransparency=false` the file
+  fails with a spurious "not type-correct under the `implicit` transparency level".
+* `lean` buffers its message log: **nothing is printed until the whole file has
+  finished elaborating.** A probe that runs for five minutes looks completely silent
+  and then prints everything at once. Redirect to a file and wait rather than
+  watching the terminal. In VS Code the same output shows up in the infoview when the
+  cursor is on the `run_cmd`, with the same all-at-the-end behaviour.
+
+Run times on the reference machine: `probeKernelDecl` + `reportSlow` ≈ 4 min 30 s
+total; `explodeDecl` on the `tensorObj` node ≈ 5 min.
+
+## 12.2 The instrumented kernel (§8)
+
+`kernel_defeq_trace.patch` in this folder patches `src/kernel/type_checker.{h,cpp}`
+of Lean `v4.33.1`. It splits `type_checker::is_def_eq_core` into a traced wrapper
+plus `is_def_eq_core_impl`, and logs the branch taken by
+`lazy_delta_reduction_step`. Everything is off unless an environment variable is
+set, so the patched binary behaves exactly like a stock one otherwise:
+
+| variable | effect |
+| --- | --- |
+| `LEAN_DEFEQ_TRACE_MS=<n>` | print `[DEFEQ-SLOW] depth=… ms=… res=… lhs=… rhs=…` for every `is_def_eq_core` call taking ≥ `n` ms |
+| `LEAN_DELTA_TRACE_N=<n>` | print the first `n` `[DELTA] depth=… action=… lhs=… [hint] rhs=… [hint]` decisions |
+| `LEAN_DELTA_TRACE_MINDEPTH=<n>` | restrict the `[DELTA]` log to `is_def_eq_core` depth ≥ `n` |
+
+Both logs go to **stderr**, unbuffered, so unlike the Lean-side probes they stream
+while the check is running.
+
+Build (NixOS; Lean's own dev shell supplies cmake/clang/GMP/libuv):
+
+```bash
+git clone --depth 1 --branch v4.33.1 https://github.com/leanprover/lean4.git
+cd lean4
+git apply /path/to/kernel_defeq_trace.patch
+nix --extra-experimental-features "nix-command flakes" develop -c cmake --preset release
+cd build/release
+nix --extra-experimental-features "nix-command flakes" develop ../.. -c make -j20 stage1
+```
+
+Do **not** commit the patch into the lean4 checkout: the githash is what Lean uses to
+decide whether existing `.olean` files are loadable, and leaving the tree dirty keeps
+it at `819816b2e0a3bf405af45ae5c7af2491d8f5bee6`, which is exactly the githash of the
+released `v4.33.1` toolchain. The resulting `build/release/stage1/bin/lean` therefore
+loads the Mathlib `.olean` files that are already built for this project — Mathlib
+does **not** have to be recompiled.
+
+Run it against the project by borrowing lake's environment:
+
+```bash
+export LEAN_PATH=$(lake env printenv LEAN_PATH)
+LEAN_DEFEQ_TRACE_MS=2000 \
+  .../build/release/stage1/bin/lean <the same -D flags> \
+  WeilConjectures/SixFunctors/Etale/Derived/Tensor.lean
+```
+
+with a copy of the reproducer that does **not** carry `set_option
+debug.skipKernelTC true`, so that the kernel actually performs the check.
+
+## 12.3 Results already obtained with these tools
+
+`probeKernelDecl` on `test_tensorObj_kernelProbe` (stock `v4.33.1`):
+
+```text
+value sizeWithoutSharing: 3095
+declared type sizeWithoutSharing: 18845
+Kernel.check(value): 3 ms
+inferred type sizeWithoutSharing: 5389
+Expr.equal inferred declared: false
+Kernel.isDefEq inferred → declared: result true, time 85110 ms
+Kernel.isDefEq declared → inferred: result true, time 90061 ms
+```
+
+`reportSlow` finds exactly one minimal expensive pair, and it is the whole cost:
+
+```text
+[DEFEQ-SLOW] depth=13 ms=92531 result=some true
+  path = root/∀body×12/a2
+  lhs head = CategoryTheory.MonoidalCategoryStruct.tensorObj/5   (size 2293)
+  rhs head = CategoryTheory.MonoidalCategoryStruct.tensorObj/5   (size 15749)
+```
+
+`explodeDecl` on that node breaks the cost down by argument:
+
+```text
+NODE: ms=145413 res=some true  sizes 2293/15749
+  fn syntactically equal: false; #args 5/5
+  arg0: ms=0      res=some true  sizes  243/1877   DerivedCategory/4 vs CategoryTheory.DerivedMonoidal/6
+  arg1: ms=3      res=some true  sizes  243/1877   instCategoryDerivedCategory/4 vs CategoryTheory.instCategoryDerivedMonoidal/6
+  arg2: ms=135234 res=some true  sizes 1799/11987  inferInstance/2 vs inferInstance/2
+  arg3: SYNTACTICALLY EQUAL
+  arg4: SYNTACTICALLY EQUAL
+```
+
+So the object-level arguments are free, the *category* and its `Category` instance
+are free (0 ms and 3 ms — `DerivedMonoidal L W` unfolds to `D` immediately), and
+essentially the entire cost is the single pair
+
+```text
+MonoidalCategoryStruct (DerivedCategory (Sheaf X.smallEtaleTopology A))
+  =?=
+MonoidalCategoryStruct (DerivedMonoidal Qh (HomotopyCategory.quasiIso … (.up ℤ)))
+```
+
+i.e. the `MonoidalCategory` instance itself, at 135 s.
+
+Reducibility hints of the declarations on that path (from `hintsOf`):
+
+```text
+CategoryTheory.MonoidalCategoryStruct.tensorObj              def/abbrev
+CategoryTheory.DerivedMonoidal                               def/regular:2
+CategoryTheory.MonoidalCategory.ofBifunctor                  def/regular:5
+CategoryTheory.DerivedMonoidal.bifunctor                     def/regular:8
+CategoryTheory.Functor.leftDerived₂                          def/regular:7
+DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory  def/regular:27
+DerivedCategory.Qh                                           def/regular:15
+DerivedCategory.Q                                            def/regular:15
+CategoryTheory.toDerivedMonoidal                             def/regular:2
+CategoryTheory.ShrinkHoms.equivalence                        def/regular:5
+```
+
+`tensorObj` being an *abbreviation* matters: in `lazy_delta_reduction_step` the
+"try the arguments first" shortcut is guarded by `d_t->get_hints().is_regular()`,
+so for `tensorObj` the kernel never attempts congruence and unfolds both sides
+instead. Note also that the two head constants are not syntactically equal
+(`fn syntactically equal: false`), which is why a purely structural descent stops
+at this node.
+
+The open question is therefore narrower than in §7: **why is comparing the two
+`MonoidalCategory` instances expensive**, given that
+`MonoidalCategory (DerivedCategory C)` is *defined* as
+`inferInstanceAs (MonoidalCategory (DerivedMonoidal Qh …))` and should delta-reduce
+to the right-hand side in a couple of steps? That is what the `[DELTA]` log of the
+instrumented kernel is meant to answer.

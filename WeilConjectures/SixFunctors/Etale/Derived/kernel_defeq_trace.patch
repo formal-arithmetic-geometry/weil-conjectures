@@ -1,0 +1,131 @@
+diff --git a/src/kernel/type_checker.cpp b/src/kernel/type_checker.cpp
+index 0fae62c..5e15e16 100644
+--- a/src/kernel/type_checker.cpp
++++ b/src/kernel/type_checker.cpp
+@@ -9,6 +9,9 @@ Author: Leonardo de Moura
+ #include <limits>
+ #include <climits>
+ #include <cstdlib>
++#include <cstdio>
++#include <string>
++#include <chrono>
+ #include "runtime/interrupt.h"
+ #include "runtime/sstream.h"
+ #include "runtime/flet.h"
+@@ -24,6 +27,63 @@ Author: Leonardo de Moura
+ #include "kernel/inductive.h"
+ 
+ namespace lean {
++/* === BEGIN kernel defeq instrumentation (local debug build) ===
++   Runtime-controlled via environment variables (all default to "off"):
++     LEAN_DEFEQ_TRACE_MS=<n>        report every is_def_eq_core call taking >= n ms
++     LEAN_DELTA_TRACE_N=<n>         log the first n lazy_delta_reduction_step decisions
++     LEAN_DELTA_TRACE_MINDEPTH=<n>  only log delta steps at is_def_eq_core depth >= n
++*/
++static bool     g_defeq_trace_init      = false;
++static unsigned g_defeq_trace_ms        = 0;
++static long     g_delta_trace_budget    = 0;
++static unsigned g_delta_trace_mindepth  = 0;
++static thread_local unsigned g_defeq_depth = 0;
++
++static void lean_defeq_trace_init() {
++    if (g_defeq_trace_init) return;
++    g_defeq_trace_init = true;
++    if (char const * v = std::getenv("LEAN_DEFEQ_TRACE_MS")) g_defeq_trace_ms = (unsigned)atol(v);
++    if (char const * v = std::getenv("LEAN_DELTA_TRACE_N"))  g_delta_trace_budget = atol(v);
++    if (char const * v = std::getenv("LEAN_DELTA_TRACE_MINDEPTH")) g_delta_trace_mindepth = (unsigned)atol(v);
++}
++
++static std::string lean_head_desc(expr const & e) {
++    expr const & f = get_app_fn(e);
++    std::string h;
++    if (is_constant(f))    h = const_name(f).to_string();
++    else if (is_fvar(f))   h = "#fvar";
++    else if (is_sort(f))   h = "#Sort";
++    else if (is_lambda(f)) h = "#lam";
++    else if (is_pi(f))     h = "#forall";
++    else if (is_proj(f))   h = "#proj:" + proj_sname(f).to_string();
++    else if (is_lit(f))    h = "#lit";
++    else if (is_let(f))    h = "#let";
++    else if (is_mdata(f))  h = "#mdata";
++    else                   h = "#other";
++    return h + "/" + std::to_string(get_app_num_args(e));
++}
++
++static std::string lean_hint_desc(optional<constant_info> const & d) {
++    if (!d) return std::string("-");
++    reducibility_hints h = d->get_hints();
++    if (h.is_regular()) return std::string("regular:") + std::to_string(h.get_height());
++    if (h.is_abbreviation()) return std::string("abbrev");
++    return std::string("opaque");
++}
++
++static void lean_delta_log(char const * action, expr const & t, expr const & s,
++                           optional<constant_info> const & d_t, optional<constant_info> const & d_s) {
++    if (g_delta_trace_budget <= 0) return;
++    if (g_defeq_depth < g_delta_trace_mindepth) return;
++    g_delta_trace_budget--;
++    fprintf(stderr, "[DELTA] depth=%u action=%-16s lhs=%s [%s]  rhs=%s [%s]\n",
++            g_defeq_depth, action,
++            lean_head_desc(t).c_str(), lean_hint_desc(d_t).c_str(),
++            lean_head_desc(s).c_str(), lean_hint_desc(d_s).c_str());
++    fflush(stderr);
++}
++/* === END kernel defeq instrumentation === */
++
+ static name * g_kernel_fresh = nullptr;
+ static expr * g_dont_care    = nullptr;
+ static name * g_bool_true    = nullptr;
+@@ -999,6 +1059,16 @@ optional<expr> type_checker::try_unfold_proj_app(expr const & e) {
+ auto type_checker::lazy_delta_reduction_step(expr & t_n, expr & s_n) -> reduction_status {
+     auto d_t = is_delta(t_n);
+     auto d_s = is_delta(s_n);
++    if (g_delta_trace_budget > 0) {
++        char const * act = (!d_t && !d_s) ? "no-delta"
++                         : (d_t && !d_s) ? "unfold-lhs?proj-rhs"
++                         : (!d_t && d_s) ? "unfold-rhs?proj-lhs"
++                         : (compare(d_t->get_hints(), d_s->get_hints()) < 0) ? "unfold-lhs(height)"
++                         : (compare(d_t->get_hints(), d_s->get_hints()) > 0) ? "unfold-rhs(height)"
++                         : (is_app(t_n) && is_app(s_n) && is_eqp(*d_t, *d_s) && d_t->get_hints().is_regular()) ? "try-args-then-both"
++                         : "unfold-both";
++        lean_delta_log(act, t_n, s_n, d_t, d_s);
++    }
+     if (!d_t && !d_s) {
+         return reduction_status::DefUnknown;
+     } else if (d_t && !d_s) {
+@@ -1169,6 +1239,23 @@ bool type_checker::is_def_eq_unit_like(expr const & t, expr const & s) {
+ }
+ 
+ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
++    lean_defeq_trace_init();
++    if (g_defeq_trace_ms == 0 && g_delta_trace_budget == 0) return is_def_eq_core_impl(t, s);
++    unsigned d = g_defeq_depth++;
++    auto start = std::chrono::steady_clock::now();
++    bool r;
++    try { r = is_def_eq_core_impl(t, s); } catch (...) { g_defeq_depth = d; throw; }
++    g_defeq_depth = d;
++    long long ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
++    if (g_defeq_trace_ms && ms >= (long long)g_defeq_trace_ms) {
++        fprintf(stderr, "[DEFEQ-SLOW] depth=%u ms=%lld res=%d lhs=%s rhs=%s\n", d, ms, (int)r,
++                lean_head_desc(t).c_str(), lean_head_desc(s).c_str());
++        fflush(stderr);
++    }
++    return r;
++}
++
++bool type_checker::is_def_eq_core_impl(expr const & t, expr const & s) {
+     scope_rec_depth guard;
+     check_system("is_definitionally_equal", /* do_check_interrupted */ true);
+     lbool r = quick_is_def_eq(t, s);
+diff --git a/src/kernel/type_checker.h b/src/kernel/type_checker.h
+index 0625c7c..0946491 100644
+--- a/src/kernel/type_checker.h
++++ b/src/kernel/type_checker.h
+@@ -111,6 +111,7 @@ private:
+     lbool lazy_delta_reduction(expr & t_n, expr & s_n);
+     bool lazy_delta_proj_reduction(expr & t_n, expr & s_n, name const & sname, nat const & idx);
+     bool is_def_eq_core(expr const & t, expr const & s);
++    bool is_def_eq_core_impl(expr const & t, expr const & s);
+     /** \brief Like \c check, but ignores undefined universes */
+     expr check_ignore_undefined_universes(expr const & e);
+     optional<expr> try_unfold_proj_app(expr const & e);
