@@ -43,6 +43,8 @@ universe v'' u'' u' u
 
 open CategoryTheory Abelian Limits
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry
 
 open Scheme
@@ -65,7 +67,7 @@ their total derived functors are the levelwise functors, and the adjunction betw
 total left derived functor of `j_!` and the total right derived functor of `j^*` becomes
 an adjunction between the levelwise functors. -/
 noncomputable def ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction :
-    (j)_!open[A].mapDerivedCategory ⊣ (j)^*[A].mapDerivedCategory :=
+    D((j)_!open[A]) ⊣ D((j)^*[A]) :=
   (ProEtale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryAdjunction
 
 /-- The bounded below version of
@@ -75,7 +77,7 @@ sheaves, obtained by restricting the unbounded one along the fully faithful incl
 which is legitimate since the exact functors `j_!` and `j^*` preserve bounded below
 objects. -/
 noncomputable def ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus :
-    (j)_!open[A].mapDerivedCategoryPlus ⊣ (j)^*[A].mapDerivedCategoryPlus :=
+    D+((j)_!open[A]) ⊣ D+((j)^*[A]) :=
   (ProEtale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryPlusAdjunction
 
 end AlgebraicGeometry

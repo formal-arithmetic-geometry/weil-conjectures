@@ -17,6 +17,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
 
@@ -27,22 +28,31 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
 This is the pro-étale counterpart of
 `WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar`.
 
-# Main Results
+As there, the derived pullback and pushforward of pro-étale sheaves are *not* given
+definitions of their own: they are the generic derived-functor constructions of the folder
+`WeilConjectures.CategoryTheory.DerivedCategory` applied to the underived pullback
+`(g)^*[A]` and pushforward `(g)_*[A]`, and they are written by nesting the generic
+notations inside the underived ones:
 
-- `AlgebraicGeometry.ProEtale.rightDerivedLowerStar` : total right derived of lower star,
-  with scoped notation `R(g)_*[A]`, prefixing the notation `(g)_*[A]` of the underived
-  pushforward by `R`.
+| derived functor | notation | meaning |
+| --- | --- | --- |
+| `Rg_* : D(Z_proét) ⥤ D(Y_proét)` | `R((g)_*[A])` | `(g)_*[A].rightDerivedFunctor` |
+| `Rg_* : D⁺(Z_proét) ⥤ D⁺(Y_proét)` | `R+((g)_*[A])` | `(g)_*[A].rightDerivedFunctorPlus` |
+| `Lg^* : D(Y_proét) ⥤ D(Z_proét)` | `L((g)^*[A])` | `(g)^*[A].leftDerivedFunctor` |
+| `g^* : D(Y_proét) ⥤ D(Z_proét)` | `D((g)^*[A])` | `(g)^*[A].mapDerivedCategory` |
+| `g^* : D⁺(Y_proét) ⥤ D⁺(Z_proét)` | `D+((g)^*[A])` | `(g)^*[A].mapDerivedCategoryPlus` |
 
-- `AlgebraicGeometry.ProEtale.rightDerivedLowerStarPlus` : total right derived of lower star
-  on bounded below derived category, with scoped notation `R(g)_*[A]+`.
+The generic notations `R(-)`, `R+(-)`, `L(-)`, `D(-)` and `D+(-)` are scoped in the
+`CategoryTheory.Functor` namespace, so a file using them needs
+`open scoped CategoryTheory.Functor`. Each row above is recorded below as an `example`,
+at the place where a definition of the corresponding functor would have stood, so that
+the type of the functor is spelled out.
 
-- `AlgebraicGeometry.ProEtale.leftDerivedUpperStar` : total left derivation of upper star,
-  with scoped notation `L(g)^*[A]`, prefixing the notation `(g)^*[A]` of the underived
-  pullback by `L`.
+## Main results
 
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarIsoMapDerivedCategory` : the derived
-  pullback `Lg^*` is the functor `(g)^*[A].mapDerivedCategory` induced levelwise by the
-  exact functor `g^*`.
+  pullback `L((g)^*[A])` is the functor `D((g)^*[A])` induced levelwise by the exact
+  functor `g^*`.
 
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp` : the composition isomorphism
   `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`.
@@ -54,9 +64,10 @@ This is the pro-étale counterpart of
   pullback of a sheaf placed in degree `0` is the pullback of the sheaf placed in degree
   `0`.
 
-- `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` : the derived adjunction
-  `Lg^* ⊣ Rg_*`, and its bounded below version
-  `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunctionPlus`.
+- `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` and
+  `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunctionPlus` : the derived
+  adjunctions `L((g)^*[A]) ⊣ R((g)_*[A])` and `D+((g)^*[A]) ⊣ R+((g)_*[A])`.
+
 -/
 
 @[expose] public section
@@ -64,6 +75,8 @@ This is the pro-étale counterpart of
 universe u' u
 
 open CategoryTheory Abelian Limits
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -79,31 +92,26 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The total right derived functor `Rg_* : D(Z_proét) ⥤ D(Y_proét)` of the pushforward
 `g_*` along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of
-pro-étale sheaves. -/
-noncomputable def rightDerivedLowerStar :
+pro-étale sheaves.
+
+It is not a definition of its own: it is the generic `Functor.rightDerivedFunctor`,
+written `R(-)`, applied to the underived pushforward `(g)_*[A]`. -/
+noncomputable example :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
-  (g)_*[A].rightDerivedFunctor
+  R((g)_*[A])
 
-@[inherit_doc rightDerivedLowerStar]
-scoped notation "R(" g ")_*[" A "]" =>
-  rightDerivedLowerStar A g
-
-/-- The right derived functor `Rg_* : D⁺(Z_proét) ⥤ D⁺(Y_proét)` of the pushforward `g_*` on
-the *bounded below* derived categories of pro-étale sheaves. -/
-noncomputable def rightDerivedLowerStarPlus :
+/-- The right derived functor `Rg_* : D⁺(Z_proét) ⥤ D⁺(Y_proét)` of the pushforward `g_*`
+on the *bounded below* derived categories of pro-étale sheaves: the generic
+`Functor.rightDerivedFunctorPlus`, written `R+(-)`, applied to `(g)_*[A]`. -/
+noncomputable example :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) A) ⥤
       DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) A) :=
-  (g)_*[A].rightDerivedFunctorPlus
-
-@[inherit_doc rightDerivedLowerStarPlus]
-scoped notation "R(" g ")_*[" A "]+" =>
-  rightDerivedLowerStarPlus A g
+  R+((g)_*[A])
 
 end ProEtale
 
 end DerivedLowerStar
-
 
 section DerivedUpperStar
 
@@ -167,18 +175,17 @@ along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of
 sheaves, defined via the K-flat left derivability structure: `Lg^*` is computed by
 applying `g^*` to a K-flat resolution.
 
+It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`,
+written `L(-)`, applied to the underived pullback `(g)^*[A]`.
+
 Since `g^*` is exact, the counit `Lg^* ∘ Q ⟶ Q ∘ g^*` is in fact an isomorphism
 everywhere; the construction via the derivability structure is uniform in the functor
 and applies verbatim once `g^*` is replaced by a non-exact functor (e.g. the pullback
 of sheaves of modules over a varying sheaf of rings). -/
-noncomputable def leftDerivedUpperStar :
+noncomputable example :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) :=
-  (g)^*[A].leftDerivedFunctor
-
-@[inherit_doc leftDerivedUpperStar]
-scoped notation "L(" g ")^*[" A "]" =>
-  leftDerivedUpperStar A g
+  L((g)^*[A])
 
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
 derived functor `Lg^*`, computed via K-flat resolutions, is canonically isomorphic to
@@ -189,13 +196,12 @@ the functor induced by the exact functor `g^*` on the derived categories.
                    -------------------->
         D(Y_proét)           ≅            D(Z_proét)
                    -------------------->
-            (g)^*[A].mapDerivedCategory
+                       D((g)^*[A])
 ```
 
-This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`, restated in terms of
-the notation `L(g)^*[A]`, which the general statement does not mention. -/
+This is `Functor.leftDerivedFunctorIsoMapDerivedCategory` at `g^*`. -/
 noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
-    L(g)^*[A] ≅ (g)^*[A].mapDerivedCategory :=
+    L((g)^*[A]) ≅ D((g)^*[A]) :=
   (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory
 
 /-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ∘ Lg₁^*` of derived pullbacks,
@@ -208,12 +214,12 @@ D(R_proét) -----------------------------> D(T_proét)
       |                                       ^
       |                                       |
       +---------> D(S_proét) -----------------+
-        L(g₂)^*                L(g₁)^*
+          Lg₂^*                  Lg₁^*
 ```
 -/
 noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
     (g₁ : T ⟶ S) (g₂ : S ⟶ R) :
-    L(g₁ ≫ g₂)^*[A] ≅ L(g₂)^*[A] ⋙ L(g₁)^*[A] :=
+    L((g₁ ≫ g₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
   Functor.leftDerivedFunctorNatIso _ (ProEtale.upperStarComp A g₁ g₂) ≪≫
     Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
 
@@ -225,18 +231,18 @@ the derived category computes the `n`-th homology sheaf of the derived pullback.
                     H^n
 D(Y_proét) -----------------> Sh(Y_proét)
     |                              |
-  L(g)^*                        (g)^*
+  Lg^*                            g^*
     |                              |
     v                              v
 D(Z_proét) -----------------> Sh(Z_proét)
                     H^n
 ```
 
-This is `Functor.leftDerivedFunctorHomologyFunctorIso` at `g^*`, restated in terms of the
-notation `L(g)^*[A]`, which the general statement does not mention. -/
+This is `Functor.leftDerivedFunctorHomologyFunctorIso` at `g^*`. -/
 noncomputable def leftDerivedUpperStarHomologyFunctorIso (n : ℤ) :
     DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) A) n ⋙ (g)^*[A] ≅
-      L(g)^*[A] ⋙ DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Z) A) n :=
+      L((g)^*[A]) ⋙
+        DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Z) A) n :=
   (g)^*[A].leftDerivedFunctorHomologyFunctorIso n
 
 /-- The single-degree comparison for the derived pullback: since the underived pullback
@@ -247,17 +253,16 @@ is the pullback of the sheaf placed in degree `0`, `Lg^*(F[0]) ≅ (g^* F)[0]`.
                      (-)[0]
 Sh(Y_proét) -----------------> D(Y_proét)
      |                              |
-   (g)^*                         L(g)^*
+     g^*                          Lg^*
      |                              |
      v                              v
 Sh(Z_proét) -----------------> D(Z_proét)
                      (-)[0]
 ```
 
-This is `Functor.singleFunctorCompLeftDerivedFunctorIso` at `g^*`, restated in terms of
-the notation `L(g)^*[A]`, which the general statement does not mention. -/
+This is `Functor.singleFunctorCompLeftDerivedFunctorIso` at `g^*`. -/
 noncomputable def singleFunctorCompLeftDerivedUpperStarIso :
-    DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology Y) A) 0 ⋙ L(g)^*[A] ≅
+    DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology Y) A) 0 ⋙ L((g)^*[A]) ≅
       (g)^*[A] ⋙ DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology Z) A) 0 :=
   (g)^*[A].singleFunctorCompLeftDerivedFunctorIso
 
@@ -305,18 +310,17 @@ namespace ProEtale
 pullback and the pushforward along an arbitrary morphism `g : Z ⟶ Y` on the unbounded
 derived categories of pro-étale sheaves, induced by the adjunction `g^* ⊣ g_*`. -/
 noncomputable def derivedUpperStarLowerStarAdjunction :
-    L(g)^*[A] ⊣ R(g)_*[A] :=
+    L((g)^*[A]) ⊣ R((g)_*[A]) :=
   (ProEtale.upperStarLowerStarAdjunction A g).derivedAdjunction
 
 /-- The bounded below version of `ProEtale.derivedUpperStarLowerStarAdjunction`: since the
 pullback `g^*` on pro-étale sheaves is exact, its derived functor on the bounded below
-derived categories is the restriction `(g^*).mapDerivedCategoryPlus` of the functor
-induced by `g^*`, and it is left adjoint to the right derived functor
-`(g_*).rightDerivedFunctorPlus` of the pushforward on the bounded below derived
-categories. The right adjoint is derived via injective resolutions, which exist since
-the pro-étale sheaf category is Grothendieck abelian. -/
+derived categories is the restriction `D+((g)^*[A])` of the functor induced by `g^*`,
+and it is left adjoint to the right derived functor `R+((g)_*[A])` of the pushforward on
+the bounded below derived categories. The right adjoint is derived via injective
+resolutions, which exist since the pro-étale sheaf category is Grothendieck abelian. -/
 noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
-    (g)^*[A].mapDerivedCategoryPlus ⊣ R(g)_*[A]+ :=
+    D+((g)^*[A]) ⊣ R+((g)_*[A]) :=
   (ProEtale.upperStarLowerStarAdjunction A g).derivedAdjunctionPlus
 
 end ProEtale
