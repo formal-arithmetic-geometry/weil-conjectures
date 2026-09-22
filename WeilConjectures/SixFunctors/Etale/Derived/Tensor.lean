@@ -73,7 +73,8 @@ variable (X : Scheme.{u})
 
 variable [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
 
-set_option debug.skipKernelTC true in
+/-
+set_option trace.profiler true in
 lemma test_tensorObj_kernelProbe
     (A : Type u')
     [Category.{u + 1, u'} A]
@@ -97,9 +98,9 @@ lemma test_tensorObj_kernelProbe
             (ComplexShape.up ℤ)))
         _ inferInstance K L := by
   rfl
+-/
 
-
-set_option debug.skipKernelTC true in
+set_option trace.profiler true in
 lemma isLeftDerivedFunctor₂_derivedTensor_kernelProbe
     (A : Type u')
     [Category.{u + 1, u'} A]
@@ -124,8 +125,9 @@ lemma isLeftDerivedFunctor₂_derivedTensor_kernelProbe
   DerivedCategory.isLeftDerivedFunctor₂CurriedTensor
     (Sheaf X.smallEtaleTopology A)
 
-
 end AlgebraicGeometry
+
+/-
 
 /-!
 ## Kernel `isDefEq` diagnostics
@@ -497,3 +499,5 @@ The path `["b"×12, "a2"]` reaches the two `tensorObj` applications of
 -- run_cmd
 --   drillDecl ``AlgebraicGeometry.test_tensorObj_kernelProbe
 --     ["b","b","b","b","b","b","b","b","b","b","b","b","a2","a2"] 6
+
+-/
