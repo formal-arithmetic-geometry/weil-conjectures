@@ -8,9 +8,11 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
 
@@ -20,6 +22,13 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
 
 This is the pro-étale counterpart of
 `WeilConjectures.SixFunctors.Etale.Derived.LowerShriek`.
+
+As there, the derived functors entering `Rf_!` are not given definitions of their own:
+they are the generic derived-functor constructions of the folder
+`WeilConjectures.CategoryTheory.DerivedCategory`, written `D(-)`, `D+(-)`, `R(-)` and
+`R+(-)`, applied to the underived six-functor notations `(c.i)_!open[A]` and `(c.g)_*[A]`.
+Those notations are scoped in the `CategoryTheory.Functor` namespace, hence the
+`open scoped CategoryTheory.Functor` below.
 
 # Main Results
 
@@ -38,6 +47,11 @@ This is the pro-étale counterpart of
   category specifying to the chosen compcatification `HasCompactification.compactification`,
   with scoped notation `R(f)_![A]+`.
 
+- `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationPlusCompatibility` and
+  `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekPlusCompatibility` : the bounded below
+  `Rf_!` is the restriction of the unbounded `Rf_!` along the inclusions
+  `DerivedCategory.Plus.ι` of the bounded below derived categories.
+
 - `AlgebraicGeometry.ProEtale.compactlySupportedCohomology` : `H_c`, with scoped notation
   `H_c(f)[A](i)`.
 
@@ -48,6 +62,8 @@ This is the pro-étale counterpart of
 universe u' u
 
 open CategoryTheory Abelian Limits
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -74,10 +90,10 @@ Warning: It is deliberately *not* the total right derived functor of the composi
 `i_! ⋙ g_* = ProEtale.lowerShriek`. In general, `i_!` does not sends injective sheaves to
 `g_*`-acyclic ones, and `Rf_!` is not the derived functor of `f_!`, through its zeroth
 homology is `f_!`. Deligne made explicit calculations on $A^1$, see SGA. -/
-noncomputable def rightDerivedLowerShriekOfCompactification :
+noncomputable abbrev rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
-  (c.i)_!open[A].mapDerivedCategory ⋙ (c.g)_*[A].rightDerivedFunctor
+  D((c.i)_!open[A]) ⋙ R((c.g)_*[A])
 
 /-- The derived lower shriek `Rf_! : D⁺(X_proét) ⥤ D⁺(Y_proét)` attached to a
 compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the *bounded below* derived categories
@@ -85,10 +101,10 @@ of pro-étale sheaves: the bounded below counterpart of
 `rightDerivedLowerShriekOfCompactification`, with `Di_!` the functor
 `Functor.mapDerivedCategoryPlus` induced by the exact `i_!` and `R⁺g_*` the bounded below
 right derived pushforward. -/
-noncomputable def rightDerivedLowerShriekOfCompactificationPlus :
+noncomputable abbrev rightDerivedLowerShriekOfCompactificationPlus :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A) ⥤
       DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) A) :=
-  (c.i)_!open[A].mapDerivedCategoryPlus ⋙ (c.g)_*[A].rightDerivedFunctorPlus
+  D+((c.i)_!open[A]) ⋙ R+((c.g)_*[A])
 
 @[inherit_doc rightDerivedLowerShriekOfCompactification]
 scoped notation "Rf_!("c")[" A "]" =>
@@ -97,6 +113,21 @@ scoped notation "Rf_!("c")[" A "]" =>
 @[inherit_doc rightDerivedLowerShriekOfCompactificationPlus]
 scoped notation "Rf_!("c")[" A "]+" =>
   rightDerivedLowerShriekOfCompactificationPlus A c
+
+/-- The bounded below derived lower shriek attached to a compactification
+`c = (X ⟶[i] Z ⟶[g] Y)` is the restriction of the unbounded one along the inclusions of the
+bounded below derived categories: on the `Di_!` factor this is
+`Functor.mapDerivedCategoryPlusCompatibility` (`i_!` is exact), on the `Rg_*` factor it is
+`Functor.rightDerivedFunctorPlusCompatibility`. -/
+noncomputable def rightDerivedLowerShriekOfCompactificationPlusCompatibility :
+    Rf_!(c)[A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ Rf_!(c)[A] :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft D+((c.i)_!open[A])
+      ((c.g)_*[A]).rightDerivedFunctorPlusCompatibility ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight ((c.i)_!open[A]).mapDerivedCategoryPlusCompatibility
+      R((c.g)_*[A]) ≪≫
+    Functor.associator _ _ _
 
 end ProEtale
 
@@ -138,6 +169,14 @@ lemma rightDerivedLowerShriek_eq : R(f)_![A] =
 lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
     Rf_!(HasCompactification.compactification f)[A]+ := rfl
 
+/-- The bounded below derived lower shriek `Rf_! : D⁺(X_proét) ⥤ D⁺(Y_proét)` is the
+restriction of the unbounded `Rf_! : D(X_proét) ⥤ D(Y_proét)` along the inclusions of the
+bounded below derived categories. -/
+noncomputable def rightDerivedLowerShriekPlusCompatibility :
+    R(f)_![A]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)_![A] :=
+  rightDerivedLowerShriekOfCompactificationPlusCompatibility A
+    (HasCompactification.compactification f)
+
 end ProEtale
 
 end DerivedLowerShriek
@@ -159,7 +198,7 @@ functor of the global sections functor on pro-étale sheaves, which exists since
 pro-étale site has a terminal object. -/
 noncomputable def rightDerivedGlobalSections :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤ DerivedCategory A :=
-  (Sheaf.Γ (Scheme.ProEt.topology X) A).rightDerivedFunctor
+  R(Sheaf.Γ (Scheme.ProEt.topology X) A)
 
 end ProEtale
 
