@@ -73,37 +73,144 @@ variable (X : Scheme.{u})
 
 variable [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
 
-namespace Etale
+set_option debug.skipKernelTC true in
+lemma test_tensorObj_kernelProbe
+    (A : Type u')
+    [Category.{u + 1, u'} A]
+    [Abelian A]
+    [IsGrothendieckAbelian.{u + 1, u + 1, u'} A]
+    [MonoidalCategory A]
+    [MonoidalPreadditive A]
+    [SymmetricCategory A]
+    (X : Scheme)
+    [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (K L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    @tensorObj
+        (DerivedCategory (Sheaf X.smallEtaleTopology A))
+        _ inferInstance K L
+      =
+    @tensorObj
+        (DerivedMonoidal DerivedCategory.Qh
+          (HomotopyCategory.quasiIso
+            (Sheaf X.smallEtaleTopology A)
+            (ComplexShape.up ℤ)))
+        _ inferInstance K L := by
+  rfl
 
-/-- The derived tensor product `- ⊗ᴸ - : D(X_ét) ⥤ D(X_ét) ⥤ D(X_ét)` on the unbounded
-derived category of `A`-valued étale sheaves on `X`: the tensor product of the monoidal
-structure on `D(X_ét)` obtained from the K-flat left derivability structure. -/
-@[implicit_reducible]
-noncomputable def derivedTensor :
-    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
-        DerivedCategory (Sheaf X.smallEtaleTopology A) :=
-  curriedTensor _
 
-@[inherit_doc derivedTensor]
-scoped notation "-⊗ᴸ-(" X ")[" A "]" => derivedTensor A X
-
-noncomputable instance laxMonoidal_Q :
-    (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
-  DerivedCategory.laxMonoidalQ (Sheaf X.smallEtaleTopology A)
-
-noncomputable instance laxMonoidal_Qh :
-    (DerivedCategory.Qh (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
-  DerivedCategory.laxMonoidalQh (Sheaf X.smallEtaleTopology A)
-
-/-- This is a slow instance -/
-instance isLeftDerivedFunctor₂_derivedTensor :
-    -⊗ᴸ-(X)[A].IsLeftDerivedFunctor₂
+set_option debug.skipKernelTC true in
+lemma isLeftDerivedFunctor₂_derivedTensor_kernelProbe
+    (A : Type u')
+    [Category.{u + 1, u'} A]
+    [Abelian A]
+    [IsGrothendieckAbelian.{u + 1, u + 1, u'} A]
+    [MonoidalCategory A]
+    [MonoidalPreadditive A]
+    [SymmetricCategory A]
+    (X : Scheme)
+    [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] :
+    (curriedTensor
+      (DerivedCategory
+        (Sheaf X.smallEtaleTopology A))).IsLeftDerivedFunctor₂
       (Functor.LaxMonoidal.μNatTrans DerivedCategory.Qh)
-      (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ))
-      (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) :=
-  DerivedCategory.isLeftDerivedFunctor₂CurriedTensor (Sheaf X.smallEtaleTopology A)
+      (HomotopyCategory.quasiIso
+        (Sheaf X.smallEtaleTopology A)
+        (ComplexShape.up ℤ))
+      (HomotopyCategory.quasiIso
+        (Sheaf X.smallEtaleTopology A)
+        (ComplexShape.up ℤ)) :=
+  DerivedCategory.isLeftDerivedFunctor₂CurriedTensor
+    (Sheaf X.smallEtaleTopology A)
 
-end Etale
+/-
+open Lean Elab Command
 
+set_option linter.style.emptyLine false in
+private def probeKernelDecl (declName : Name) : CommandElabM Unit := do
+  let env ← getEnv
+  let lctx : LocalContext := default
+
+  let some info := env.find? declName
+    | throwError m!"cannot find declaration {declName}"
+
+  let value := info.value! true
+  let declaredType := info.type
+
+  logInfo m!""
+  logInfo m!"============================================================"
+  logInfo m!"Kernel probe: {declName}"
+  logInfo m!"============================================================"
+
+  logInfo m!"value sizeWithoutSharing: {value.sizeWithoutSharing}"
+  logInfo m!"declared type sizeWithoutSharing: {declaredType.sizeWithoutSharing}"
+
+  /-
+  Phase 1:
+  exactly kernel-check the proof term itself and ask the kernel
+  what type it infers.
+  -/
+  let checkStart ← IO.monoMsNow
+
+  let inferredType ←
+    match Kernel.check env lctx value with
+    | .ok ty =>
+        pure ty
+    | .error _ =>
+        throwError m!"Kernel.check failed for {declName}"
+
+  let checkEnd ← IO.monoMsNow
+
+  logInfo m!"Kernel.check(value): {checkEnd - checkStart} ms"
+  logInfo m!"inferred type sizeWithoutSharing: {inferredType.sizeWithoutSharing}"
+  logInfo m!"Expr.equal inferred declared: {Expr.equal inferredType declaredType}"
+
+  /-
+  Phase 2:
+  this is the SAME ORIENTATION used by the theorem checker:
+
+      val_type =?= declared_type
+  -/
+  let forwardStart ← IO.monoMsNow
+
+  let forwardResult ←
+    match Kernel.isDefEq env lctx inferredType declaredType with
+    | .ok result =>
+        pure result
+    | .error _ =>
+        throwError m!"forward Kernel.isDefEq failed for {declName}"
+
+  let forwardEnd ← IO.monoMsNow
+
+  logInfo m!"Kernel.isDefEq inferred → declared:"
+  logInfo m!"  result: {forwardResult}"
+  logInfo m!"  time:   {forwardEnd - forwardStart} ms"
+
+  /-
+  Phase 3:
+  same equality, opposite orientation.
+
+  This is NOT what theorem checking normally does.
+  It is specifically here to test whether the kernel's
+  lazy-delta strategy is badly asymmetric for this example.
+  -/
+  let reverseStart ← IO.monoMsNow
+
+  let reverseResult ←
+    match Kernel.isDefEq env lctx declaredType inferredType with
+    | .ok result =>
+        pure result
+    | .error _ =>
+        throwError m!"reverse Kernel.isDefEq failed for {declName}"
+
+  let reverseEnd ← IO.monoMsNow
+
+  logInfo m!"Kernel.isDefEq declared → inferred:"
+  logInfo m!"  result: {reverseResult}"
+  logInfo m!"  time:   {reverseEnd - reverseStart} ms"
+
+  logInfo m!"============================================================"
+  logInfo m!""
+-/
 end AlgebraicGeometry
