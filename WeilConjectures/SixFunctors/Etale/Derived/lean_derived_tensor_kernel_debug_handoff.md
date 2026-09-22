@@ -909,3 +909,124 @@ transition asked for in §10.4.
 A caveat when reading the `ms` column: the kernel memoises successful `is_def_eq`
 calls, so an identical pair met a second time is reported as ~0 ms. Times are
 wall-clock for that particular invocation, not the intrinsic cost of the pair.
+
+---
+
+# 13. Result: the `is_def_eq_core` Descent Chain
+
+Obtained with the patched kernel, `LEAN_DEFEQ_TRACE_MS=3000`, on `test_tensorObj`
+with `debug.skipKernelTC` removed. 173 `[DEFEQ-SLOW]` lines; below is the maximum
+time recorded at each recursion depth, which traces the single hot path.
+
+```text
+depth= 0 ms=84589  #forall
+depth= 1 ms=84589  Eq/3
+depth= 2 ms=84589  CategoryTheory.MonoidalCategoryStruct.tensorObj/5
+depth= 3 ms=84588  CategoryTheory.Functor.obj/6
+depth= 4 ms=84588  CategoryTheory.Functor.obj/6
+depth= 5 ms=84588  #proj:CategoryTheory.Functor
+depth= 6 ms=84587  CategoryTheory.Functor.HasDerivedMonoidalCategory.curriedTensor_hasLeftDerivedFunctor₂/10
+depth= 7 ms=84587  CategoryTheory.Functor.HasLeftDerivedFunctor₂/9
+depth= 8 ms=84587  CategoryTheory.Functor.obj/6
+depth= 9 ms=84587  CategoryTheory.Functor.mk/8
+depth=10 ms=59656  #lam
+depth=11 ms=59656  CategoryTheory.Functor.uncurry._proof_3/12
+depth=12 ms=59656  Eq/3
+depth=13 ms=33539  CategoryTheory.CategoryStruct.comp/7
+depth=14 ms=33539  CategoryTheory.CategoryStruct.comp/7
+depth=15 ms=24778  Equiv.toFun/4
+depth=16 ms=24778  CategoryTheory.CategoryStruct.comp/7
+depth=17 ms=24061  DFunLike.coe/6
+depth=18 ms=24060  EquivLike.coe/6
+depth=19 ms=24060  Equiv.toFun/4
+depth=20 ms=24060  Equiv.invFun/4
+depth=21 ms=24060  CategoryTheory.NatTrans.app/8
+depth=22 ms=24060  CategoryTheory.Functor.map/8
+depth=23 ms=24059  CategoryTheory.NatTrans.app/8
+depth=24 ms=24059  #proj:CategoryTheory.NatTrans
+depth=25 ms=24059  Quot.lift/6
+depth=26 ms=19411  Equiv.invFun/4
+depth=27 ms=19411  CategoryTheory.NatTrans.app/8
+depth=28 ms=19411  CategoryTheory.Functor.map/8
+depth=29 ms=19410  CategoryTheory.NatTrans.app/8
+depth=30 ms=19410  #proj:CategoryTheory.NatTrans
+depth=31 ms=19410  Quot.lift/6
+depth=32 ms= 7846  CategoryTheory.Quotient.lift._proof_1/9
+depth=33 ms= 7846  #forall
+depth=34 ms= 7846  Eq/3
+depth=35 ms= 5620  CategoryTheory.Functor.map/8
+depth=36 ms= 3987  CategoryTheory.Functor.map/8
+depth=37 ms= 3987  CategoryTheory.Functor.map/8
+depth=38 ms= 3761  Eq/3
+depth=39 ms= 3212  #forall
+depth=40 ms= 3212  Eq/3
+```
+
+Reading it against the questions in §10:
+
+**1-2. The slow pair.** Depths 0-9 are a single nested chain with no branching and
+essentially no time of their own; all 84.6 s live below depth 9. The pair that
+starts the expensive path is the one at depth 2, already identified by the
+Lean-side probes:
+
+```text
+@MonoidalCategoryStruct.tensorObj (DerivedCategory (Sheaf X.smallEtaleTopology A)) _ inst₁ K L
+  =?=
+@MonoidalCategoryStruct.tensorObj (DerivedMonoidal Qh (HomotopyCategory.quasiIso … (.up ℤ))) _ inst₂ K L
+```
+
+At depth 10 the work splits into two sibling subproblems of 23.4 s and 59.7 s.
+
+**4. Where it enters the implementation.** The transition is at **depth 6**:
+`Functor.HasDerivedMonoidalCategory.curriedTensor_hasLeftDerivedFunctor₂`, i.e. a
+*field projection out of the `HasDerivedMonoidalCategory` class instance*. Rather
+than comparing the two `MonoidalCategory` instances as instances, the kernel has
+by then already projected `tensorObj` out of both (depth 2-5) and is comparing the
+resulting `((bifunctor L W).obj K).obj L` terms structurally. From depth 6 onwards
+it is inside the left-derived-functor construction and can no longer stop.
+
+**3. What happens below.** Depths 8-12 are the giveaway: the kernel compares two
+`Functor.mk` structures *field by field*, reaching the proof field
+`Functor.uncurry._proof_3` at depth 11. Kernel proof irrelevance does not make a
+proof field free — it first has to check that the two proofs' **types** are
+definitionally equal, and those types are equations (`Eq/3` at depth 12) between
+composites of natural transformations. That is what forces the descent into
+`CategoryStruct.comp` (depths 13-16), then into
+
+* `Equiv.toFun` / `Equiv.invFun` / `DFunLike.coe` / `EquivLike.coe` — the
+  `ShrinkHoms` equivalence on Hom types, and
+* `Quot.lift` (depths 25 and 31) — the homotopy-category quotient.
+
+Depths 21-25 and 27-31 are **the same five-step cycle repeated**
+(`NatTrans.app → Functor.map → NatTrans.app → proj NatTrans → Quot.lift`), and
+depth 32 re-enters proof-type comparison at `Quotient.lift._proof_1`. This
+repetition is the multiplier that turns a handful of unfoldings into the ~700k
+`Preadditive.homGroup` / `AddCommGroup.toAddGroup` reductions reported in §5;
+those really are symptoms, as §7 suspected.
+
+**5. Where to intervene.** The highest-level definitional equality that should have
+stopped at an abstraction boundary is the depth-2 → depth-3 step. Two observations
+bear on it:
+
+* `MonoidalCategoryStruct.tensorObj` has reducibility hint `def/abbrev`. In
+  `lazy_delta_reduction_step` the "compare the arguments instead of unfolding"
+  shortcut is guarded by `d_t->get_hints().is_regular()`, so for an abbreviation it
+  is never attempted. The kernel unfolds both sides instead of asking
+  `inst₁ =?= inst₂`.
+* Asking `inst₁ =?= inst₂` directly is *also* expensive (135 s, §12.3), so making
+  the shortcut fire is not by itself a fix. The two instances are
+  `DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory …` and
+  `instMonoidalCategoryDerivedMonoidal …`, and the former is *defined* as
+  `inferInstanceAs` of the latter; they ought to meet after a couple of delta
+  steps. They do not, which means some argument of the instance — one of the
+  `HasDerivedCategory` / `HasDerivedMonoidalCategory` / `Category` instances
+  reconstructed along the two routes — is not syntactically shared, and comparing
+  *it* is what drags in the chain above.
+
+The next measurement to make is therefore a `LEAN_DELTA_TRACE_N` run pinned at
+`LEAN_DELTA_TRACE_MINDEPTH=2`, reading the `action=` column for depths 2-9: it will
+say whether the kernel ever tries `try-args-then-both` on the instance pair, and
+which side it chooses to unfold on the way into
+`curriedTensor_hasLeftDerivedFunctor₂`. Marking `@[no_expose]` further up (§6.5
+tried `bifunctor` and `counit`, which sit *below* depth 6 and so cannot help) would
+have to target the depth-6 projection or the instance itself.
