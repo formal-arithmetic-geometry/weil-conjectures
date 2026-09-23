@@ -592,3 +592,50 @@ reports `sorryAx` in `#print axioms`, from
 `GrothendieckTopology.monoidalClosed_sheaf_of_essentiallySmall` upstream — Day's reflection
 theorem for sheaves is still to be formalised, as its own docstring says. That is
 pre-existing and unrelated.)
+
+## 17. General rules
+
+### Designing
+
+1. **Keep heavy instances out of declared types.** A type should preferably be a constant
+   applied to small arguments. If a type mentions `MonoidalCategory (DerivedCategory …)`,
+   `HasDerivedCategory …`, or any comparably large instance expression in the open, name
+   the thing it is an instance structure *on* and state the declaration over that name.
+2. **The boundary only works if nothing punctures it.** An `X_def : namedThing = big ⋙ expr`
+   lemma undoes the whole benefit. Phrase downstream statements over the name; if some
+   proof really needs the explicit form, that is a signal the name was drawn in the wrong
+   place, not that an unfolding lemma is missing.
+3. **`def` and `theorem` are not equally risky.** `abstractNestedProofs` runs on the value
+   of a `def` and returns immediately for a `theorem`/`lemma`, so a *data* definition whose
+   type contains proof-carrying instances is the dangerous shape. Lemmas about it are
+   cheap.
+4. **Prefer instances as hypotheses where it is honest to do so.** `[MonoidalCategory D]`
+   as a variable is a single fvar; the synthesized instance is a tree with proofs in it
+   (E13: 18 s vs > 600 s). This is what the `Aux` section at the top of this file already
+   does for `εSingleFunctorZero`.
+5. **Shortcut instances defined as `:= inferInstance` are not free.** They give the kernel a
+   fully exposed body to unfold; they help elaboration, not conversion.
+
+### Debugging
+
+6. **Separate elaborator from kernel first** (`debug.skipKernelTC`), then separate
+   `Kernel.check(type)` / `Kernel.check(value)` / `Kernel.isDefEq` — do not assume which of
+   the three it is. Here the type and the value were 3 ms each.
+7. **Three cheap discriminators, before any instrumentation.** Restate as an `axiom` (type
+   only, no conversion); move the expression into value position at type `Type _` (is the
+   expression itself hard?); replace the instance by a hypothesis (is it the concrete
+   instance?). Each is one line and rules out a whole family of explanations.
+8. **When `isDefEq` is the slow step, diff the two sides structurally before timing
+   anything.** `Expr.equal`-based recursive descent gives the minimal differing positions in
+   milliseconds; a histogram of unfolded constants would not have named
+   `abstractNestedProofs`.
+9. **Measure size with sharing, not `sizeWithoutSharing`.** And do not conclude much from
+   either: 337 nodes took more than ten minutes here.
+10. **`IO.println` in `run_cmd` is captured by the frontend** and only appears when the
+    command returns — useless for a step that never returns. Log to an `IO.FS.Handle` and
+    flush.
+11. **Timeouts are not always slowness.** An OOM kill (exit 137) and a `(kernel)
+    deterministic timeout` say different things: the first means the search is fanning out,
+    the second that it is merely deep.
+12. **Record what has been ruled out, with the experiment that ruled it out.** Most of the
+    time in a problem like this goes to re-testing theories someone already disproved.
