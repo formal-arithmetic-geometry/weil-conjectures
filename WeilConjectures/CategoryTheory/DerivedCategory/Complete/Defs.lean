@@ -46,7 +46,8 @@ of the previous one under a functor:
   whose point is the monoidal unit of `Sheaf J (ModuleCat R)`, the constant sheaf on
   `R = 𝟙_ (ModuleCat R)` being that unit;
 * `DerivedCategory.derivedCompletionCone J I K`, the image of the previous cone under
-  `DerivedCategory.singleFunctor _ 0` and then `- ⊗ᴸ K`, whose point is moved to `K` itself
+  `DerivedCategory.singleFunctor _ 0` and then `- ⊗ᴸ K` — a cone over the tower
+  `DerivedCategory.derivedCompletionDiagram J I K` — whose point is moved to `K` itself
   along
 
   ```
@@ -77,6 +78,8 @@ the definition does not assume `IsAdicComplete I R`.
   tower and cone in the category of sheaves of `R`-modules, through the constant sheaf
   functor.
 - `DerivedCategory.quotPowFunctor` : the tower `n ↦ R/Iⁿ` in the derived category.
+- `DerivedCategory.derivedCompletionDiagram` : the tower `n ↦ K ⊗ᴸ R/Iⁿ` of reductions
+  of `K`.
 - `DerivedCategory.derivedCompletionCone` : the cone `K ⟶ K ⊗ᴸ R/Iⁿ`, with point `K`.
 - `DerivedCategory.derivedComplete` : the object property of being derived complete.
 
@@ -97,29 +100,36 @@ which is the form in which it is tensored downstream. The two are compared by
 compatibility with it holds by `rfl`, both sides being quotients of `R` by propositionally
 equal submodules.
 
-The monoidal structure on `Sheaf J (ModuleCat R)` is `CategoryTheory.Sheaf.monoidalCategory`
-(the sheafification of the objectwise tensor product), which mathlib deliberately does not
-register as an instance; as in `WeilConjectures.SixFunctors.Etale.Derived.Tensor` it is
-activated here by `attribute [local instance]`. For the small étale site the repository
-does register it globally, as `AlgebraicGeometry.Etale.sheafMonoidalCategory`, so étale
-applications need no local activation. Note that the type of `derivedComplete` mentions the
-monoidal structure of the derived category but not that of the sheaf category.
+Every piece of structure the constructions below need is found by instance search, for any
+essentially small site and with no local activation or hypothesis: `Sheaf J (ModuleCat R)`
+is Grothendieck abelian and has a derived category; it is monoidal by
+`CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall` (the
+sheafification of the objectwise tensor product) and monoidal closed by
+`…monoidalClosed_sheaf_of_essentiallySmall` (Day's reflection theorem); and it has
+functorial flat resolutions because `ModuleCat R` does
+(`ModuleCat.hasFunctorialFlatResolution`), which through
+`DerivedCategory.hasDerivedMonoidalCategory` supplies the K-flat derived monoidal structure
+`DerivedCategory.Qh.HasDerivedMonoidalCategory` and hence the monoidal structure of
+`DerivedCategory (Sheaf J (ModuleCat R))`.
 
-Two hypotheses on the sheaf category are assumed rather than built here, because the
-repository only supplies them for the small étale site:
-
-* `MonoidalClosed (Sheaf J (ModuleCat R))`, which for the small étale site is
-  `AlgebraicGeometry.Etale.sheafMonoidalClosed`, obtained from Day's reflection theorem —
-  an argument that applies verbatim to any site;
-* `DerivedCategory.Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso _ _)`, the
-  K-flat derived monoidal structure, which follows from functorial flat resolutions
-  (`AlgebraicGeometry.Etale.hasFunctorialFlatResolution_sheaf` in the étale case) through
-  `DerivedCategory.hasDerivedMonoidalCategory`.
-
-Both are found by instance search at étale use sites. All the remaining structure — that
-the sheaf category is Grothendieck abelian, has a derived category, and that the derived
-category is monoidal with `Q` lax monoidal — the repository supplies for any essentially
-small site.
+That convenience has a cost which the declarations below are written to avoid, and which is
+the reason `DerivedCategory.derivedCompletionDiagram` exists as a definition of its own.
+The elaborated `MonoidalCategory (DerivedCategory (Sheaf J (ModuleCat R)))` instance is an
+expression carrying `HasSheafify`, `IsGrothendieckAbelian`, `MonoidalPreadditive` and
+`Qh.HasDerivedMonoidalCategory` proofs inside it. When such an expression occurs in the
+*declared type* of a definition, `Lean.Meta.abstractNestedProofs` — which lifts the proofs
+occurring in a definition's **value** into auxiliary theorems, but does not touch its
+declared type — makes the inferred and the declared type differ in every one of those proof
+positions; the kernel then has to reconcile them through proof irrelevance, which means
+comparing propositions whose own instance arguments differ in the same way, and the descent
+fans out. In practice it does not terminate: stating `derivedCompletionCone` directly over
+`DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K` does not compile even with `sorry` for
+its value, whereas the version below, whose type mentions only the constant
+`DerivedCategory.derivedCompletionDiagram` applied to `J`, `I` and `K`, compiles in a few
+seconds. Keeping the monoidal structure of the derived category inside definition *bodies*
+and out of the types stated here is what makes this file check; the `Aux` section above
+does the same for `DerivedCategory.εSingleFunctorZero`. The diagnosis is recorded in
+`report.md` in this directory.
 
 -/
 
@@ -251,34 +261,35 @@ noncomputable def DerivedCategory.quotPowFunctor :
     ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
   Sheaf.quotPowFunctor J I ⋙ DerivedCategory.singleFunctor _ 0
 
-instance : Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} R) := sorry
+/-- The tower `n ↦ K ⊗ᴸ R/Iⁿ` of reductions of an object `K` of the derived category, the
+image of `DerivedCategory.quotPowFunctor` under `K ⊗ᴸ -`.
 
---#synth MonoidalCategory (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
+This is a definition of its own, rather than `DerivedCategory.quotPowFunctor J I ⋙
+tensorLeft K` spelled out at each use site, so that the monoidal structure of the derived
+category stays out of the *types* of the declarations below; see the implementation notes.
+For the same reason there is deliberately no unfolding lemma
+`derivedCompletionDiagram J I K = quotPowFunctor J I ⋙ tensorLeft K`: its statement puts
+the monoidal structure back into a type, and proving it by `rfl` costs exactly what the
+definition is there to avoid. Downstream statements should be phrased in terms of the
+diagram. -/
+noncomputable def DerivedCategory.derivedCompletionDiagram
+    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
+  DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K
 
-variable (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
-
-#check Cone (DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K)
-
-/-
 /-- The reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, as a cone over the tower
-`DerivedCategory.quotPowFunctor` **whose point is `K` itself**: the cone
+`DerivedCategory.derivedCompletionDiagram` **whose point is `K` itself**: the cone
 `Sheaf.quotPowCone` pushed into the derived category by `DerivedCategory.singleFunctor _ 0`
 and tensored on the left with `K`, its point moved from `K ⊗ᴸ (R in degree 0)` to `K` along
 the inverse right unitor followed by `DerivedCategory.εSingleFunctorZero`. -/
 noncomputable def DerivedCategory.derivedCompletionCone
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    Cone (DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K) :=
-  sorry
--/
-  -- ((tensorLeft K).mapCone
-  --     ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I))).extend
-  --   ((ρ_ K).inv ≫ K ◁ DerivedCategory.εSingleFunctorZero _)
+    Cone (DerivedCategory.derivedCompletionDiagram J I K) :=
+  ((tensorLeft K).mapCone
+      ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I))).extend
+    ((ρ_ K).inv ≫ K ◁ DerivedCategory.εSingleFunctorZero _)
 
 
-
-
-
-/-
 @[simp]
 lemma DerivedCategory.derivedCompletionCone_pt
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
@@ -310,11 +321,12 @@ lemma derivedComplete_iff (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) 
 /-- If the limit `R lim_n (K ⊗ᴸ R/Iⁿ)` exists, then `K` is derived complete precisely when
 the canonical map `K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)` is an isomorphism. -/
 lemma derivedComplete_iff_isIso_lift (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
-    [HasLimit (quotPowFunctor J I ⋙ tensorLeft K)] :
+    [HasLimit (derivedCompletionDiagram J I K)] :
     derivedComplete J I K ↔
-      IsIso (limit.lift (quotPowFunctor J I ⋙ tensorLeft K)
+      IsIso (limit.lift (derivedCompletionDiagram J I K)
         (derivedCompletionCone J I K)) :=
-  (limit.isLimit (quotPowFunctor J I ⋙ tensorLeft K)).nonempty_isLimit_iff_isIso_lift
+  (limit.isLimit (derivedCompletionDiagram J I K)).nonempty_isLimit_iff_isIso_lift
+
 end DerivedCategory
--/
+
 end Derived
