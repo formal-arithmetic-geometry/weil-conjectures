@@ -49,8 +49,9 @@ presheaves, which is a different instance and moreover unavailable here, since t
 coefficient categories of this development are abelian and a non-trivial additive category
 is never cartesian closed.
 
-The small étale site is such a site, so the étale instances at the end of the file are
-obtained from the general ones by `inferInstance`.
+The small étale site and the small pro-étale site are such sites, so the étale and
+pro-étale instances at the end of the file are obtained from the general ones by
+`inferInstance`.
 
 ## Main results
 
@@ -61,6 +62,9 @@ obtained from the general ones by `inferInstance`.
 - `AlgebraicGeometry.Etale.sheafMonoidalClosed`,
   `AlgebraicGeometry.Etale.preservesColimitsOfSize_tensorLeft_sheaf`: the special cases for
   the small étale site.
+- `AlgebraicGeometry.ProEtale.sheafMonoidalClosed`,
+  `AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`: the special cases
+  for the small pro-étale site.
 
 -/
 
@@ -139,6 +143,26 @@ instance Etale.preservesColimitsOfSize_tensorLeft_sheaf (X : Sheaf Y.smallEtaleT
 /-- Tensoring on the right with a fixed `A`-valued étale sheaf preserves colimits of size
 `0`: the instance above applied to the essentially small small étale site. -/
 instance Etale.preservesColimitsOfSize_tensorRight_sheaf (X : Sheaf Y.smallEtaleTopology A) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight X) :=
+  inferInstance
+
+/-- The category of `A`-valued pro-étale sheaves is monoidal closed: the instance above
+applied to the essentially small small pro-étale site. -/
+noncomputable instance ProEtale.sheafMonoidalClosed :
+    MonoidalClosed (Sheaf (Scheme.ProEt.topology Y) A) :=
+  inferInstance
+
+/-- Tensoring on the left with a fixed `A`-valued pro-étale sheaf preserves colimits of
+size `0`: the instance above applied to the essentially small small pro-étale site. -/
+instance ProEtale.preservesColimitsOfSize_tensorLeft_sheaf
+    (X : Sheaf (Scheme.ProEt.topology Y) A) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
+  inferInstance
+
+/-- Tensoring on the right with a fixed `A`-valued pro-étale sheaf preserves colimits of
+size `0`: the instance above applied to the essentially small small pro-étale site. -/
+instance ProEtale.preservesColimitsOfSize_tensorRight_sheaf
+    (X : Sheaf (Scheme.ProEt.topology Y) A) :
     PreservesColimitsOfSize.{0, 0} (tensorRight X) :=
   inferInstance
 
