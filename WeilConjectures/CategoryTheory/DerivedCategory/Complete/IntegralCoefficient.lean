@@ -52,18 +52,18 @@ transported along `PadicAlgCl.shrinkRingEquiv` by `IsAdicComplete.congr_ringEqui
 
 ## Main definitions
 
-- `DerivedCategory.derivedCompleteOE` : the property of an object of `D(J, 𝒪_E)` of being
+- `DerivedCategory.derivedCompleteIntegral` : the property of an object of `D(J, 𝒪_E)` of being
   derived complete with respect to `𝔪_E`.
-- `DerivedCategoryDerivedCompleteOE` : the full subcategory `D_comp(J, 𝒪_E)` of derived
-  complete objects, and `DerivedCategoryDerivedCompleteOE.ι` its inclusion into
+- `DerivedCategoryDerivedCompleteIntegral` : the full subcategory `D_comp(J, 𝒪_E)` of derived
+  complete objects, and `DerivedCategoryDerivedCompleteIntegral.ι` its inclusion into
   `D(J, 𝒪_E)`.
 
 ## Main results
 
-- `DerivedCategory.isTriangulated_derivedCompleteOE` : the derived complete objects form a
+- `DerivedCategory.isTriangulated_derivedCompleteIntegral` : the derived complete objects form a
   triangulated subcategory of `D(J, 𝒪_E)` (currently `sorry`), so that `D_comp(J, 𝒪_E)` is
   an `𝒪_E`-linear triangulated category with `𝒪_E`-linear shift functors.
-- `DerivedCategory.derivedCompleteOE_iff_isIso_lift` : when `R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)`
+- `DerivedCategory.derivedCompleteIntegral_iff_isIso_lift` : when `R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)`
   exists, membership in `D_comp(J, 𝒪_E)` says exactly that the canonical map
   `K ⟶ R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` is an isomorphism.
 
@@ -86,78 +86,79 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 `(C, J)` is *derived complete* if it is derived complete for the maximal ideal `𝔪_E` of
 `𝒪_E` in the sense of `DerivedCategory.derivedComplete`: the cone of the reduction maps
 `K ⟶ K ⊗ᴸ 𝒪_E/𝔪_Eⁿ`, whose point is `K` itself, is a limit cone. -/
-noncomputable abbrev DerivedCategory.derivedCompleteOE :
+noncomputable abbrev DerivedCategory.derivedCompleteIntegral :
     ObjectProperty
       (DerivedCategory (Sheaf J (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))))) :=
   DerivedCategory.derivedComplete J (PadicAlgCl.maximalIdealShrink l E)
 
 /-- The category `D_comp(J, 𝒪_E)` of derived complete objects, realized as the full
-subcategory of `D(J, 𝒪_E)` cut out by `DerivedCategory.derivedCompleteOE`. This is the
+subcategory of `D(J, 𝒪_E)` cut out by `DerivedCategory.derivedCompleteIntegral`. This is the
 integral stage of the `ℓ`-adic formalism: the coefficients are the ring of integers `𝒪_E`
 of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ = PadicAlgCl l`, and completeness is taken with
 respect to the maximal ideal of `𝒪_E`. -/
-noncomputable def DerivedCategoryDerivedCompleteOE : Type _ :=
-  (DerivedCategory.derivedCompleteOE J l E).FullSubcategory
+noncomputable def DerivedCategoryDerivedCompleteIntegral : Type _ :=
+  (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory
 
-noncomputable instance : Category (DerivedCategoryDerivedCompleteOE J l E) :=
-  inferInstanceAs <| Category (DerivedCategory.derivedCompleteOE J l E).FullSubcategory
+noncomputable instance : Category (DerivedCategoryDerivedCompleteIntegral J l E) :=
+  inferInstanceAs <| Category (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory
 
 /-- The inclusion of `D_comp(J, 𝒪_E)` into the derived category of sheaves of
 `𝒪_E`-modules. -/
-noncomputable def DerivedCategoryDerivedCompleteOE.ι :
-    DerivedCategoryDerivedCompleteOE J l E ⥤
+noncomputable def DerivedCategoryDerivedCompleteIntegral.ι :
+    DerivedCategoryDerivedCompleteIntegral J l E ⥤
       DerivedCategory (Sheaf J (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))) :=
-  (DerivedCategory.derivedCompleteOE J l E).ι
+  (DerivedCategory.derivedCompleteIntegral J l E).ι
 
 /-- The derived complete objects of `D(J, 𝒪_E)` form a triangulated subcategory: they
 contain `0` and are stable under shifts and extensions.
 
 The proof is currently `sorry`. -/
-instance DerivedCategory.isTriangulated_derivedCompleteOE :
-    (DerivedCategory.derivedCompleteOE J l E).IsTriangulated :=
+instance DerivedCategory.isTriangulated_derivedCompleteIntegral :
+    (DerivedCategory.derivedCompleteIntegral J l E).IsTriangulated :=
   sorry
 
-noncomputable instance : Preadditive (DerivedCategoryDerivedCompleteOE J l E) :=
-  inferInstanceAs <| Preadditive (DerivedCategory.derivedCompleteOE J l E).FullSubcategory
+noncomputable instance : Preadditive (DerivedCategoryDerivedCompleteIntegral J l E) :=
+  inferInstanceAs <| Preadditive (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory
 
 /-- The `Hom` groups of `D_comp(J, 𝒪_E)` are `𝒪_E`-modules, as those of `D(J, 𝒪_E)` are. -/
 noncomputable instance :
-    Linear (Shrink.{u + 1} (PadicAlgCl.integers l E)) (DerivedCategoryDerivedCompleteOE J l E) :=
+    Linear (Shrink.{u + 1} (PadicAlgCl.integers l E))
+      (DerivedCategoryDerivedCompleteIntegral J l E) :=
   inferInstanceAs <| Linear (Shrink.{u + 1} (PadicAlgCl.integers l E))
-    (DerivedCategory.derivedCompleteOE J l E).FullSubcategory
+    (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory
 
-noncomputable instance : HasZeroObject (DerivedCategoryDerivedCompleteOE J l E) :=
-  inferInstanceAs <| HasZeroObject (DerivedCategory.derivedCompleteOE J l E).FullSubcategory
+noncomputable instance : HasZeroObject (DerivedCategoryDerivedCompleteIntegral J l E) :=
+  inferInstanceAs <| HasZeroObject (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory
 
-noncomputable instance : HasShift (DerivedCategoryDerivedCompleteOE J l E) ℤ :=
-  inferInstanceAs <| HasShift (DerivedCategory.derivedCompleteOE J l E).FullSubcategory ℤ
+noncomputable instance : HasShift (DerivedCategoryDerivedCompleteIntegral J l E) ℤ :=
+  inferInstanceAs <| HasShift (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory ℤ
 
-instance (n : ℤ) : (shiftFunctor (DerivedCategoryDerivedCompleteOE J l E) n).Additive :=
+instance (n : ℤ) : (shiftFunctor (DerivedCategoryDerivedCompleteIntegral J l E) n).Additive :=
   inferInstanceAs <|
-    (shiftFunctor (DerivedCategory.derivedCompleteOE J l E).FullSubcategory n).Additive
+    (shiftFunctor (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory n).Additive
 
 /-- The shift functors of `D_comp(J, 𝒪_E)` are `𝒪_E`-linear, as those of `D(J, 𝒪_E)` are. -/
 instance (n : ℤ) :
-    (shiftFunctor (DerivedCategoryDerivedCompleteOE J l E) n).Linear
+    (shiftFunctor (DerivedCategoryDerivedCompleteIntegral J l E) n).Linear
       (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
   inferInstanceAs <|
-    (shiftFunctor (DerivedCategory.derivedCompleteOE J l E).FullSubcategory n).Linear
+    (shiftFunctor (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory n).Linear
       (Shrink.{u + 1} (PadicAlgCl.integers l E))
 
-noncomputable instance : Pretriangulated (DerivedCategoryDerivedCompleteOE J l E) :=
-  inferInstanceAs <| Pretriangulated (DerivedCategory.derivedCompleteOE J l E).FullSubcategory
+noncomputable instance : Pretriangulated (DerivedCategoryDerivedCompleteIntegral J l E) :=
+  inferInstanceAs <| Pretriangulated (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory
 
-instance : IsTriangulated (DerivedCategoryDerivedCompleteOE J l E) :=
-  inferInstanceAs <| IsTriangulated (DerivedCategory.derivedCompleteOE J l E).FullSubcategory
+instance : IsTriangulated (DerivedCategoryDerivedCompleteIntegral J l E) :=
+  inferInstanceAs <| IsTriangulated (DerivedCategory.derivedCompleteIntegral J l E).FullSubcategory
 
 variable {J l E}
 
 /-- If the limit `R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` exists, then `K` lies in `D_comp(J, 𝒪_E)`
 precisely when the canonical map `K ⟶ R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)` is an isomorphism. -/
-lemma DerivedCategory.derivedCompleteOE_iff_isIso_lift
+lemma DerivedCategory.derivedCompleteIntegral_iff_isIso_lift
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
     [HasLimit (derivedCompletionDiagram J (PadicAlgCl.maximalIdealShrink l E) K)] :
-    derivedCompleteOE J l E K ↔
+    derivedCompleteIntegral J l E K ↔
       IsIso (limit.lift (derivedCompletionDiagram J (PadicAlgCl.maximalIdealShrink l E) K)
         (derivedCompletionCone J (PadicAlgCl.maximalIdealShrink l E) K)) :=
   derivedComplete_iff_isIso_lift K
