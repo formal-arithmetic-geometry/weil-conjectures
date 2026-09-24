@@ -7,63 +7,59 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.OECoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
-public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-!
 
 # Derived complete objects with coefficients in an `ℓ`-adic field
 
 Let `E` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`. This file passes from
-the derived category `D(J, 𝒪_E)` of sheaves of `𝒪_E`-modules on a site `(C, J)`, and its
-full subcategory `D_comp(J, 𝒪_E)` of derived complete objects
-(`WeilConjectures.CategoryTheory.DerivedCategory.Complete.OECoefficient`), to coefficients
-in `E`.
+the category `D_comp(J, 𝒪_E)` of derived complete objects of the derived category of
+sheaves of `𝒪_E`-modules on a site `(C, J)`
+(`WeilConjectures.CategoryTheory.DerivedCategory.Complete.OECoefficient`) to the category
+`D_comp(J, E)` with coefficients in `E`.
 
 ## Inverting the nonzero elements of `𝒪_E`
 
-The category with `E`-coefficients is the rationalization of
+`D_comp(J, E)` is the rationalization of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization`,
 
 ```
-  D(J, E)  :=  D(J, 𝒪_E) / (torsion objects),
+  D_comp(J, E)  :=  D_comp(J, 𝒪_E) / (torsion objects),
 ```
 
-the Verdier quotient of `D(J, 𝒪_E)` by the triangulated subcategory of objects killed by a
-nonzero element of `𝒪_E`; equivalently, the localization of `D(J, 𝒪_E)` at the morphisms
-whose mapping cone is killed by a nonzero element of `𝒪_E`. It is a triangulated category,
-and it is `E`-linear because `E` is the fraction field of `𝒪_E`
+the Verdier quotient of `D_comp(J, 𝒪_E)` by the triangulated subcategory of objects killed
+by a nonzero element of `𝒪_E`; equivalently, the localization of `D_comp(J, 𝒪_E)` at the
+morphisms whose mapping cone is killed by a nonzero element of `𝒪_E`. It is a triangulated
+category, and it is `E`-linear because `E` is the fraction field of `𝒪_E`
 (`ValuativeRel.isFractionRing_uLift`).
 
 Since `𝒪_E` is a discrete valuation ring in which `ℓ` is a nonzero element of the maximal
 ideal, every nonzero element of `𝒪_E` divides a power of `ℓ`, so an object is killed by a
 nonzero element of `𝒪_E` if and only if it is killed by a power of `ℓ`: this is the same
-category as `D(J, 𝒪_E)[1/ℓ]`, the case `M = Submonoid.powers ℓ` of the rationalization.
-Inverting all nonzero elements keeps `ℓ` out of the type of the category, as in
-`WeilConjectures.CategoryTheory.DerivedCategory.Complete.OECoefficient`.
+category as `D_comp(J, 𝒪_E)[1/ℓ]`, the case `M = Submonoid.powers ℓ` of the
+rationalization. Inverting all nonzero elements keeps `ℓ` out of the type of the category,
+as in `WeilConjectures.CategoryTheory.DerivedCategory.Complete.OECoefficient`.
 
-The category `D_comp(J, E)` is the full subcategory of `D(J, E)` on the images of the
-derived complete objects of `D(J, 𝒪_E)`. The rationalization is taken on `D(J, 𝒪_E)`,
-rather than on `D_comp(J, 𝒪_E)` itself, because the Verdier quotient needs a triangulated
-category, and closure of the derived complete objects under shifts and cones is not
-established here.
+The Verdier quotient needs `D_comp(J, 𝒪_E)` to be triangulated, i.e. the derived complete
+objects to form a triangulated subcategory of `D(J, 𝒪_E)`
+(`DerivedCategory.isTriangulated_derivedCompleteOE` in
+`WeilConjectures.CategoryTheory.DerivedCategory.Complete.OECoefficient`); this is currently
+`sorry`.
 
 ## Main definitions
 
 - `ValuativeRel.algebraULift`, `ValuativeRel.isFractionRing_uLift` : `E` is the fraction
   field of the universe `u + 1` copy `ULift 𝒪[E]` of its ring of integers.
-- `DerivedCategoryE` : the triangulated, `E`-linear category `D(J, E)`.
-- `DerivedCategoryE.fromOE` : the localization functor `D(J, 𝒪_E) ⥤ D(J, E)`.
-- `DerivedCategory.derivedCompleteE` : the essential image in `D(J, E)` of the derived
-  complete objects of `D(J, 𝒪_E)`.
-- `DerivedCategoryDerivedCompleteE` : the `E`-linear category `D_comp(J, E)`, with its
-  inclusion `DerivedCategoryDerivedCompleteE.ι` into `D(J, E)` and the functor
-  `DerivedCategoryDerivedCompleteE.fromOE` from `D_comp(J, 𝒪_E)`.
+- `DerivedCategoryDerivedCompleteE` : the triangulated, `E`-linear category `D_comp(J, E)`.
+- `DerivedCategoryDerivedCompleteE.fromOE` : the localization functor
+  `D_comp(J, 𝒪_E) ⥤ D_comp(J, E)`.
 
 -/
 
+
 @[expose] public section
 
-universe uA u
+universe u
 
 open CategoryTheory Limits ValuativeRel
 
@@ -90,60 +86,23 @@ section ECoefficient
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C) (E : Type) [Field E] [ValuativeRel E]
 
-/-- The derived category `D(J, E)` of sheaves with coefficients in the `ℓ`-adic field `E`:
-the rationalization of the derived category `D(J, 𝒪_E)` of sheaves of `𝒪_E`-modules at the
-nonzero elements of `𝒪_E`, i.e. its Verdier quotient by the objects killed by a nonzero
-element of `𝒪_E`. Since `E = 𝒪_E[1/ℓ]`, this is `D(J, 𝒪_E)[1/ℓ]`. It is triangulated
-and `E`-linear. -/
-@[reducible]
-def DerivedCategoryE : Type _ :=
-  Rationalization (nonZeroDivisors (ULift.{u + 1} 𝒪[E]))
-    (DerivedCategory (Sheaf J (ModuleCat.{u + 1} (ULift.{u + 1} 𝒪[E]))))
-
-/-- The `Hom` groups of `D(J, E)` are `E`-vector spaces. -/
-noncomputable example : Linear E (DerivedCategoryE J E) := inferInstance
-
-example : IsTriangulated (DerivedCategoryE J E) := inferInstance
-
-/-- The localization functor `D(J, 𝒪_E) ⥤ D(J, E)`. -/
-@[reducible]
-noncomputable def DerivedCategoryE.fromOE :
-    DerivedCategory (Sheaf J (ModuleCat.{u + 1} (ULift.{u + 1} 𝒪[E]))) ⥤
-      DerivedCategoryE J E :=
-  Rationalization.Q _ _
-
-/-- An object of `D(J, E)` is *derived complete* if it is isomorphic to the image of a
-derived complete object of `D(J, 𝒪_E)` (`DerivedCategory.derivedCompleteOE`). -/
-noncomputable def DerivedCategory.derivedCompleteE : ObjectProperty (DerivedCategoryE J E) :=
-  (DerivedCategory.derivedCompleteOE J E).map (DerivedCategoryE.fromOE J E)
-
 /-- The category `D_comp(J, E)` of derived complete objects with coefficients in the
-`ℓ`-adic field `E`: the full subcategory of `D(J, E)` on the images of the derived complete
-objects of `D(J, 𝒪_E)`. -/
-noncomputable def DerivedCategoryDerivedCompleteE : Type _ :=
-  (DerivedCategory.derivedCompleteE J E).FullSubcategory
-
-noncomputable instance : Category (DerivedCategoryDerivedCompleteE J E) :=
-  inferInstanceAs <| Category (DerivedCategory.derivedCompleteE J E).FullSubcategory
-
-noncomputable instance : Preadditive (DerivedCategoryDerivedCompleteE J E) :=
-  inferInstanceAs <| Preadditive (DerivedCategory.derivedCompleteE J E).FullSubcategory
+`ℓ`-adic field `E`: the rationalization of `D_comp(J, 𝒪_E)` at the nonzero elements of
+`𝒪_E`, i.e. its Verdier quotient by the objects killed by a nonzero element of `𝒪_E`.
+Since `E = 𝒪_E[1/ℓ]`, this is `D_comp(J, 𝒪_E)[1/ℓ]`. It is triangulated and `E`-linear. -/
+@[reducible]
+def DerivedCategoryDerivedCompleteE : Type _ :=
+  Rationalization (nonZeroDivisors (ULift.{u + 1} 𝒪[E])) (DerivedCategoryDerivedCompleteOE J E)
 
 /-- The `Hom` groups of `D_comp(J, E)` are `E`-vector spaces. -/
-noncomputable instance : Linear E (DerivedCategoryDerivedCompleteE J E) :=
-  inferInstanceAs <| Linear E (DerivedCategory.derivedCompleteE J E).FullSubcategory
+noncomputable example : Linear E (DerivedCategoryDerivedCompleteE J E) := inferInstance
 
-/-- The inclusion of `D_comp(J, E)` into `D(J, E)`. -/
-noncomputable def DerivedCategoryDerivedCompleteE.ι :
-    DerivedCategoryDerivedCompleteE J E ⥤ DerivedCategoryE J E :=
-  (DerivedCategory.derivedCompleteE J E).ι
+example : IsTriangulated (DerivedCategoryDerivedCompleteE J E) := inferInstance
 
-/-- The functor `D_comp(J, 𝒪_E) ⥤ D_comp(J, E)`, the restriction of the localization
-functor `DerivedCategoryE.fromOE`. -/
+/-- The localization functor `D_comp(J, 𝒪_E) ⥤ D_comp(J, E)`. -/
+@[reducible]
 noncomputable def DerivedCategoryDerivedCompleteE.fromOE :
     DerivedCategoryDerivedCompleteOE J E ⥤ DerivedCategoryDerivedCompleteE J E :=
-  (DerivedCategory.derivedCompleteE J E).lift
-    (DerivedCategoryDerivedCompleteOE.ι J E ⋙ DerivedCategoryE.fromOE J E)
-    fun K ↦ ObjectProperty.prop_map_obj _ _ K.property
+  Rationalization.Q _ _
 
 end ECoefficient

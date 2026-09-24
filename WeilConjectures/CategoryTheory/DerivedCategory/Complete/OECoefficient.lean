@@ -6,6 +6,9 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
+public import Mathlib.Algebra.Homology.DerivedCategory.Linear
+public import Mathlib.CategoryTheory.Shift.Linear
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.NumberTheory.LocalField.Basic
 public import Mathlib.NumberTheory.Padics.ValuativeRel
 public import Mathlib.RingTheory.AdicCompletion.Topology
@@ -66,9 +69,14 @@ transported along `ValuativeRel.uliftRingEquiv` by `IsAdicComplete.congr_ringEqu
 - `DerivedCategoryDerivedCompleteOE` : the full subcategory `D_comp(J, 𝒪_E)` of derived
   complete objects, and `DerivedCategoryDerivedCompleteOE.ι` its inclusion into
   `D(J, 𝒪_E)`.
+- `CategoryTheory.ObjectProperty.linear_shiftFunctor_fullSubcategory` : the shift functors of
+  a full subcategory stable under shifts are linear if those of the ambient category are.
 
 ## Main results
 
+- `DerivedCategory.isTriangulated_derivedCompleteOE` : the derived complete objects form a
+  triangulated subcategory of `D(J, 𝒪_E)` (currently `sorry`), so that `D_comp(J, 𝒪_E)` is
+  an `𝒪_E`-linear triangulated category with `𝒪_E`-linear shift functors.
 - `ValuativeRel.instIsAdicCompleteMaximalIdealULift` : the coefficient ring
   `ULift 𝒪[E]` is `𝔪_E`-adically complete. Through `Ideal.isLimitQuotPowCone` this says
   that `𝒪_E` is the limit of the tower `n ↦ 𝒪_E / 𝔪_Eⁿ`, which is the classical
@@ -128,6 +136,23 @@ instance ValuativeRel.instIsAdicCompleteMaximalIdealULift [TopologicalSpace E]
 
 end RingOfIntegers
 
+section ShiftLinear
+
+variable {R : Type*} [Ring R] {D : Type*} [Category* D] [Preadditive D] [Linear R D]
+  [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Linear R] (P : ObjectProperty D)
+  [P.IsStableUnderShift ℤ]
+
+/-- The shift functors of a full subcategory stable under shifts are `R`-linear if those of
+the ambient category are. -/
+instance CategoryTheory.ObjectProperty.linear_shiftFunctor_fullSubcategory (n : ℤ) :
+    (shiftFunctor P.FullSubcategory n).Linear R where
+  map_smul {X Y} f r := P.ι.map_injective <| by
+    rw [← cancel_mono ((P.ι.commShiftIso n).hom.app Y), P.ι.commShiftIso_hom_naturality,
+      Functor.map_smul, Functor.map_smul, Linear.comp_smul, Functor.map_smul, Linear.smul_comp,
+      P.ι.commShiftIso_hom_naturality]
+
+end ShiftLinear
+
 section DerivedComplete
 
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
@@ -159,6 +184,45 @@ noncomputable def DerivedCategoryDerivedCompleteOE.ι :
     DerivedCategoryDerivedCompleteOE J E ⥤
       DerivedCategory (Sheaf J (ModuleCat.{u + 1} (ULift.{u + 1} 𝒪[E]))) :=
   (DerivedCategory.derivedCompleteOE J E).ι
+
+/-- The derived complete objects of `D(J, 𝒪_E)` form a triangulated subcategory: they
+contain `0` and are stable under shifts and extensions.
+
+The proof is currently `sorry`. -/
+instance DerivedCategory.isTriangulated_derivedCompleteOE :
+    (DerivedCategory.derivedCompleteOE J E).IsTriangulated :=
+  sorry
+
+noncomputable instance : Preadditive (DerivedCategoryDerivedCompleteOE J E) :=
+  inferInstanceAs <| Preadditive (DerivedCategory.derivedCompleteOE J E).FullSubcategory
+
+/-- The `Hom` groups of `D_comp(J, 𝒪_E)` are `𝒪_E`-modules, as those of `D(J, 𝒪_E)` are. -/
+noncomputable instance : Linear (ULift.{u + 1} 𝒪[E]) (DerivedCategoryDerivedCompleteOE J E) :=
+  inferInstanceAs <|
+    Linear (ULift.{u + 1} 𝒪[E]) (DerivedCategory.derivedCompleteOE J E).FullSubcategory
+
+noncomputable instance : HasZeroObject (DerivedCategoryDerivedCompleteOE J E) :=
+  inferInstanceAs <| HasZeroObject (DerivedCategory.derivedCompleteOE J E).FullSubcategory
+
+noncomputable instance : HasShift (DerivedCategoryDerivedCompleteOE J E) ℤ :=
+  inferInstanceAs <| HasShift (DerivedCategory.derivedCompleteOE J E).FullSubcategory ℤ
+
+instance (n : ℤ) : (shiftFunctor (DerivedCategoryDerivedCompleteOE J E) n).Additive :=
+  inferInstanceAs <|
+    (shiftFunctor (DerivedCategory.derivedCompleteOE J E).FullSubcategory n).Additive
+
+/-- The shift functors of `D_comp(J, 𝒪_E)` are `𝒪_E`-linear, as those of `D(J, 𝒪_E)` are. -/
+instance (n : ℤ) :
+    (shiftFunctor (DerivedCategoryDerivedCompleteOE J E) n).Linear (ULift.{u + 1} 𝒪[E]) :=
+  inferInstanceAs <|
+    (shiftFunctor (DerivedCategory.derivedCompleteOE J E).FullSubcategory n).Linear
+      (ULift.{u + 1} 𝒪[E])
+
+noncomputable instance : Pretriangulated (DerivedCategoryDerivedCompleteOE J E) :=
+  inferInstanceAs <| Pretriangulated (DerivedCategory.derivedCompleteOE J E).FullSubcategory
+
+instance : IsTriangulated (DerivedCategoryDerivedCompleteOE J E) :=
+  inferInstanceAs <| IsTriangulated (DerivedCategory.derivedCompleteOE J E).FullSubcategory
 
 variable {J E}
 
