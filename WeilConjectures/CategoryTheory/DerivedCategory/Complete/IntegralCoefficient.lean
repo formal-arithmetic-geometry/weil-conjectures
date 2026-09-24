@@ -57,6 +57,10 @@ transported along `PadicAlgCl.shrinkRingEquiv` by `IsAdicComplete.congr_ringEqui
 - `DerivedCategoryDerivedCompleteIntegral` : the full subcategory `D_comp(J, 𝒪_E)` of derived
   complete objects, and `DerivedCategoryDerivedCompleteIntegral.ι` its inclusion into
   `D(J, 𝒪_E)`.
+- `DerivedCategoryDerivedCompleteIntegral.completion` : the derived completion
+  `D(J, 𝒪_E) ⥤ D_comp(J, 𝒪_E)`, the left adjoint of the inclusion, for `E` finite over `ℚ_ℓ`
+  (its existence, `DerivedCategoryDerivedCompleteIntegral.isRightAdjoint_ι`, is currently
+  `sorry`).
 
 ## Main results
 
@@ -164,3 +168,35 @@ lemma DerivedCategory.derivedCompleteIntegral_iff_isIso_lift
   derivedComplete_iff_isIso_lift K
 
 end DerivedComplete
+
+section Completion
+
+variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+  (J : GrothendieckTopology C) (l : ℕ) [Fact l.Prime] (E : Type w) [Field E]
+  [Algebra ℚ_[l] E] [Algebra E (PadicAlgCl l)] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+  [FiniteDimensional ℚ_[l] E] [Small.{u + 1} E]
+
+/-- The inclusion of `D_comp(J, 𝒪_E)` into `D(J, 𝒪_E)` has a left adjoint, the *derived
+completion* `K ↦ R lim_n (K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)`. Since `E` is finite over `ℚ_ℓ`, the maximal
+ideal `𝔪_E` is principal and each `𝒪_E/𝔪_Eⁿ` is a perfect `𝒪_E`-module, which is what makes
+the completion derived complete and the unit `K ⟶ K^` universal.
+
+The proof is currently `sorry`. -/
+instance DerivedCategoryDerivedCompleteIntegral.isRightAdjoint_ι :
+    (DerivedCategoryDerivedCompleteIntegral.ι J l E).IsRightAdjoint :=
+  sorry
+
+/-- The derived completion functor `D(J, 𝒪_E) ⥤ D_comp(J, 𝒪_E)`, the left adjoint of the
+inclusion `DerivedCategoryDerivedCompleteIntegral.ι`. -/
+noncomputable def DerivedCategoryDerivedCompleteIntegral.completion :
+    DerivedCategory (Sheaf J (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))) ⥤
+      DerivedCategoryDerivedCompleteIntegral J l E :=
+  (DerivedCategoryDerivedCompleteIntegral.ι J l E).leftAdjoint
+
+/-- The derived completion is left adjoint to the inclusion of the derived complete objects. -/
+noncomputable def DerivedCategoryDerivedCompleteIntegral.completionAdjunction :
+    DerivedCategoryDerivedCompleteIntegral.completion J l E ⊣
+      DerivedCategoryDerivedCompleteIntegral.ι J l E :=
+  Adjunction.ofIsRightAdjoint _
+
+end Completion
