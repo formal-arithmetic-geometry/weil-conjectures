@@ -45,17 +45,15 @@ of the previous one under a functor:
 * `CategoryTheory.Sheaf.quotPowCone J I`, its image under `constantSheaf J (ModuleCat R)`,
   whose point is the monoidal unit of `Sheaf J (ModuleCat R)`, the constant sheaf on
   `R = 𝟙_ (ModuleCat R)` being that unit;
+* `DerivedCategory.quotPowCone J I`, the image of the previous cone under
+  `DerivedCategory.singleFunctor _ 0` — a cone over the tower
+  `DerivedCategory.quotPowFunctor J I` — whose point is moved to the monoidal unit
+  `𝟙_ D(J, R)` along `DerivedCategory.εSingleFunctorZero : 𝟙_ D(J, R) ⟶ (R in degree 0)`;
 * `DerivedCategory.derivedCompletionCone J I K`, the image of the previous cone under
-  `DerivedCategory.singleFunctor _ 0` and then `- ⊗ᴸ K` — a cone over the tower
-  `DerivedCategory.derivedCompletionDiagram J I K` — whose point is moved to `K` itself
-  along
-
-  ```
-    K  ≅  K ⊗ᴸ 𝟙_ D(J, R)  ⟶  K ⊗ᴸ (R in degree 0),
-  ```
-
-  the second map coming from `DerivedCategory.εSingleFunctorZero`. Its legs are therefore
-  the reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, and its point is `K`.
+  `K ⊗ᴸ -` — a cone over the tower `DerivedCategory.derivedCompletionDiagram J I K` —
+  whose point is moved to `K` itself along the inverse right unitor
+  `K ≅ K ⊗ᴸ 𝟙_ D(J, R)`. Its legs are therefore the reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, and
+  its point is `K`.
 
 The object `K` is *derived complete* when this last cone is a limit cone, i.e. when the
 canonical map
@@ -77,7 +75,8 @@ the definition does not assume `IsAdicComplete I R`.
 - `CategoryTheory.Sheaf.quotPowFunctor` and `CategoryTheory.Sheaf.quotPowCone` : the same
   tower and cone in the category of sheaves of `R`-modules, through the constant sheaf
   functor.
-- `DerivedCategory.quotPowFunctor` : the tower `n ↦ R/Iⁿ` in the derived category.
+- `DerivedCategory.quotPowFunctor` and `DerivedCategory.quotPowCone` : the tower
+  `n ↦ R/Iⁿ` in the derived category and the cone over it out of the monoidal unit.
 - `DerivedCategory.derivedCompletionDiagram` : the tower `n ↦ K ⊗ᴸ R/Iⁿ` of reductions
   of `K`.
 - `DerivedCategory.derivedCompletionCone` : the cone `K ⟶ K ⊗ᴸ R/Iⁿ`, with point `K`.
@@ -261,6 +260,19 @@ noncomputable def DerivedCategory.quotPowFunctor :
     ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
   Sheaf.quotPowFunctor J I ⋙ DerivedCategory.singleFunctor _ 0
 
+/-- The tower `n ↦ R/Iⁿ` in the derived category together with the maps out of the monoidal
+unit `𝟙_ D(J, R)`: the cone `Sheaf.quotPowCone` pushed into the derived category by
+`DerivedCategory.singleFunctor _ 0`, its point moved from `R` in degree `0` to `𝟙_ D(J, R)`
+along `DerivedCategory.εSingleFunctorZero`. -/
+noncomputable def DerivedCategory.quotPowCone : Cone (DerivedCategory.quotPowFunctor J I) :=
+  ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I)).extend
+    (DerivedCategory.εSingleFunctorZero _)
+
+@[simp]
+lemma DerivedCategory.quotPowCone_pt :
+    (DerivedCategory.quotPowCone J I).pt = 𝟙_ (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
+  rfl
+
 /-- The tower `n ↦ K ⊗ᴸ R/Iⁿ` of reductions of an object `K` of the derived category, the
 image of `DerivedCategory.quotPowFunctor` under `K ⊗ᴸ -`.
 
@@ -279,16 +291,12 @@ noncomputable def DerivedCategory.derivedCompletionDiagram
 
 /-- The reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, as a cone over the tower
 `DerivedCategory.derivedCompletionDiagram` **whose point is `K` itself**: the cone
-`Sheaf.quotPowCone` pushed into the derived category by `DerivedCategory.singleFunctor _ 0`
-and tensored on the left with `K`, its point moved from `K ⊗ᴸ (R in degree 0)` to `K` along
-the inverse right unitor followed by `DerivedCategory.εSingleFunctorZero`. -/
+`DerivedCategory.quotPowCone` tensored on the left with `K`, its point moved from
+`K ⊗ᴸ 𝟙_ D(J, R)` to `K` along the inverse right unitor. -/
 noncomputable def DerivedCategory.derivedCompletionCone
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     Cone (DerivedCategory.derivedCompletionDiagram J I K) :=
-  ((tensorLeft K).mapCone
-      ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I))).extend
-    ((ρ_ K).inv ≫ K ◁ DerivedCategory.εSingleFunctorZero _)
-
+  ((tensorLeft K).mapCone (DerivedCategory.quotPowCone J I)).extend (ρ_ K).inv
 
 @[simp]
 lemma DerivedCategory.derivedCompletionCone_pt
