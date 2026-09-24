@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
-public import Mathlib.CategoryTheory.Shift.Linear
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-!
@@ -57,8 +57,6 @@ transported along `PadicAlgCl.shrinkRingEquiv` by `IsAdicComplete.congr_ringEqui
 - `DerivedCategoryDerivedCompleteOE` : the full subcategory `D_comp(J, 𝒪_E)` of derived
   complete objects, and `DerivedCategoryDerivedCompleteOE.ι` its inclusion into
   `D(J, 𝒪_E)`.
-- `CategoryTheory.ObjectProperty.linear_shiftFunctor_fullSubcategory` : the shift functors of
-  a full subcategory stable under shifts are linear if those of the ambient category are.
 
 ## Main results
 
@@ -77,23 +75,6 @@ transported along `PadicAlgCl.shrinkRingEquiv` by `IsAdicComplete.congr_ringEqui
 universe w u
 
 open CategoryTheory Limits
-
-section ShiftLinear
-
-variable {R : Type*} [Ring R] {D : Type*} [Category* D] [Preadditive D] [Linear R D]
-  [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Linear R] (P : ObjectProperty D)
-  [P.IsStableUnderShift ℤ]
-
-/-- The shift functors of a full subcategory stable under shifts are `R`-linear if those of
-the ambient category are. -/
-instance CategoryTheory.ObjectProperty.linear_shiftFunctor_fullSubcategory (n : ℤ) :
-    (shiftFunctor P.FullSubcategory n).Linear R where
-  map_smul {X Y} f r := P.ι.map_injective <| by
-    rw [← cancel_mono ((P.ι.commShiftIso n).hom.app Y), P.ι.commShiftIso_hom_naturality,
-      Functor.map_smul, Functor.map_smul, Linear.comp_smul, Functor.map_smul, Linear.smul_comp,
-      P.ι.commShiftIso_hom_naturality]
-
-end ShiftLinear
 
 section DerivedComplete
 
