@@ -24,8 +24,8 @@ Nothing in this folder is specific to the étale site: as in
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`, everything is stated for an
 arbitrary site `C` with `Hom`-types in the universe `u` and objects in `u + 1` which is
 essentially small in `u + 1`, and a Grothendieck abelian coefficient category `A` with
-`Hom`-types in `u + 1`. The small étale site is such a site, so the étale instances are
-obtained from the general ones by `inferInstance`.
+`Hom`-types in `u + 1`. The small étale site and the small pro-étale site are such sites,
+so the étale and pro-étale instances are obtained from the general ones by `inferInstance`.
 
 This file provides the monoidal structure itself, from
 `CategoryTheory.Sheaf.monoidalCategory` (sheafification of the objectwise tensor
@@ -125,6 +125,18 @@ noncomputable instance Etale.sheafMonoidalCategory :
 applied to the essentially small small étale site. -/
 noncomputable instance Etale.sheafBraidedCategory :
     BraidedCategory (Sheaf Y.smallEtaleTopology A) :=
+  inferInstance
+
+/-- The monoidal structure on `A`-valued pro-étale sheaves: the instance above applied to
+the essentially small small pro-étale site. -/
+noncomputable instance ProEtale.sheafMonoidalCategory :
+    MonoidalCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
+  inferInstance
+
+/-- The braiding of the monoidal structure on `A`-valued pro-étale sheaves: the instance
+above applied to the essentially small small pro-étale site. -/
+noncomputable instance ProEtale.sheafBraidedCategory :
+    BraidedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
   inferInstance
 
 end AlgebraicGeometry
