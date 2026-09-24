@@ -57,8 +57,8 @@ With the criterion in hand, the sheaf statement reduces to the transfer of flat
 separators along the site, `exists_flat_separator_sheaf_of_essentiallySmall`, which is the
 one `sorry` left in this file. As in the sibling files it is stated for an arbitrary site
 `C` with `Hom`-types in the universe `u` and objects in `u + 1` which is essentially
-small in `u + 1`; the small étale site is such a site, so the étale instance is obtained
-from the general one by `inferInstance`.
+small in `u + 1`; the small étale site and the small pro-étale site are such sites, so the
+étale and pro-étale instances are obtained from the general one by `inferInstance`.
 
 The intended proof combines a flat separator of the coefficient category with the site.
 For an object `U` of `C` write `j_{U!}` for the extension by zero along the localization
@@ -196,6 +196,12 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 the essentially small small étale site. -/
 instance Etale.hasFunctorialFlatResolution_sheaf [Abelian.HasFunctorialFlatResolution A] :
     Abelian.HasFunctorialFlatResolution (Sheaf Y.smallEtaleTopology A) :=
+  inferInstance
+
+/-- Functorial flat resolutions of `A`-valued pro-étale sheaves: the instance above applied
+to the essentially small small pro-étale site. -/
+instance ProEtale.hasFunctorialFlatResolution_sheaf [Abelian.HasFunctorialFlatResolution A] :
+    Abelian.HasFunctorialFlatResolution (Sheaf (Scheme.ProEt.topology Y) A) :=
   inferInstance
 
 end AlgebraicGeometry

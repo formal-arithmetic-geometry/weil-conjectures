@@ -5,6 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
@@ -249,6 +251,20 @@ instance ProEtale.preservesFiniteLimits_upperStar
 
 /-- The pullback `g^*` on pro-étale sheaves is right exact, being a left adjoint. -/
 example : PreservesFiniteColimits (g)^*[A] := inferInstance
+
+/-- The pullback `g^*` on pro-étale sheaves is additive, being a left adjoint. -/
+instance ProEtale.additive_upperStar : (g)^*[A].Additive :=
+  (ProEtale.upperStarLowerStarAdjunction A g).left_adjoint_additive
+
+/-- The pullback `g^*` on pro-étale sheaves preserves homology, being exact: it preserves
+finite limits by `ProEtale.preservesFiniteLimits_upperStar` and all colimits of size `0`,
+being a left adjoint. -/
+instance ProEtale.preservesHomology_upperStar : (g)^*[A].PreservesHomology := by
+  have : PreservesColimitsOfSize.{0, 0} (g)^*[A] :=
+    (ProEtale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits
+  -- the two fields of `PreservesHomology` are `autoParam`s, found by instance synthesis
+  -- from `ProEtale.preservesFiniteLimits_upperStar` and from `this`
+  exact {}
 
 end Adjunction
 

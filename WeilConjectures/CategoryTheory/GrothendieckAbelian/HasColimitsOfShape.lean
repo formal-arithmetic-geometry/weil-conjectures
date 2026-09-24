@@ -29,8 +29,9 @@ As everywhere in this folder the statement is for an arbitrary site with `Hom`-t
 the universe `u` and objects in `u + 1`, essentially small in `u + 1`, and a Grothendieck
 abelian coefficient category `A` with `Hom`-types in `u + 1`; sheafification is then
 available by `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. The small
-étale site is such a site, so `AlgebraicGeometry.Etale.hasCountableCoproducts_sheaf` is
-just an instance of it.
+étale site and the small pro-étale site are such sites, so
+`AlgebraicGeometry.Etale.hasCountableCoproducts_sheaf` and
+`AlgebraicGeometry.ProEtale.hasCountableCoproducts_sheaf` are just instances of it.
 
 -/
 
@@ -68,6 +69,12 @@ variable (Y : Scheme.{u})
 essentially small small étale site. -/
 instance (priority := high) Etale.hasCountableCoproducts_sheaf :
     HasCountableCoproducts (Sheaf Y.smallEtaleTopology A) :=
+  inferInstance
+
+/-- Countable coproducts of `A`-valued pro-étale sheaves: the instance above applied to the
+essentially small small pro-étale site. -/
+instance (priority := high) ProEtale.hasCountableCoproducts_sheaf :
+    HasCountableCoproducts (Sheaf (Scheme.ProEt.topology Y) A) :=
   inferInstance
 
 end AlgebraicGeometry
