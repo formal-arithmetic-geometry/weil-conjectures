@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Localization.Bifunctor
 public import Mathlib.CategoryTheory.Localization.Opposite
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
 
@@ -31,11 +31,8 @@ pro-étale site `Scheme.ProEt.topology X` of a scheme. It is the pro-étale coun
 
 ## Integral coefficients
 
-The functors are `Lg^*`, `Rg_*`, `Rf_!` and `Rf^!` of
-`WeilConjectures.SixFunctors.ProEtale.Derived`, together with the derived tensor product and
-the internal hom of the monoidal closed structure on `D(X_proét, 𝒪_E)`
-(`WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed`), for the coefficient category
-`ModuleCat 𝒪_E`, transported to `D_comp(-, 𝒪_E)` in one of two ways.
+The functors are those of `WeilConjectures.SixFunctors.ProEtale.Derived` for the coefficient
+category `ModuleCat 𝒪_E`, transported to `D_comp(-, 𝒪_E)` in one of two ways.
 
 * `Rg_*`, `Rf^!` and `RHom(K, -)` preserve derived complete objects, so they are restricted
   to `D_comp` along `ObjectProperty.lift`.
@@ -69,7 +66,7 @@ torsion cones.
 
 universe w u
 
-open CategoryTheory Limits MonoidalCategory
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
 
@@ -173,7 +170,7 @@ noncomputable def integralTensor :
       DerivedCategoryDerivedCompleteIntegral (Scheme.ProEt.topology X) l E ⥤
         DerivedCategoryDerivedCompleteIntegral (Scheme.ProEt.topology X) l E :=
   DerivedCategoryDerivedCompleteIntegral.ι (Scheme.ProEt.topology X) l E ⋙
-    curriedTensor _ ⋙
+    -⊗ᴸ-(X)[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))] ⋙
       (Functor.whiskeringLeft _ _ _).obj
         (DerivedCategoryDerivedCompleteIntegral.ι (Scheme.ProEt.topology X) l E) ⋙
       (Functor.whiskeringRight _ _ _).obj
@@ -186,13 +183,13 @@ lemma derivedCompleteIntegral_derivedHom_obj
         (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
     (hL : DerivedCategory.derivedCompleteIntegral (Scheme.ProEt.topology X) l E L) :
     DerivedCategory.derivedCompleteIntegral (Scheme.ProEt.topology X) l E
-      ((MonoidalClosed.internalHom.obj (Opposite.op K)).obj L) :=
+      (((RHom(X)[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).obj
+        (Opposite.op K)).obj L) :=
   sorry
 
 /-- The derived hom `RHom(-, -) : D_comp(X_proét, 𝒪_E)ᵒᵖ ⥤ D_comp(X_proét, 𝒪_E) ⥤
-D_comp(X_proét, 𝒪_E)`: the restriction of the internal hom of
-`D(X_proét, 𝒪_E)`, which takes values in derived complete objects by
-`derivedCompleteIntegral_derivedHom_obj`. -/
+D_comp(X_proét, 𝒪_E)`: the restriction of the derived hom `RHom(X)[𝒪_E]`, which takes values
+in derived complete objects by `derivedCompleteIntegral_derivedHom_obj`. -/
 noncomputable def integralHom :
     (DerivedCategoryDerivedCompleteIntegral (Scheme.ProEt.topology X) l E)ᵒᵖ ⥤
       DerivedCategoryDerivedCompleteIntegral (Scheme.ProEt.topology X) l E ⥤
@@ -200,7 +197,7 @@ noncomputable def integralHom :
   Functor.curry.obj <| (DerivedCategory.derivedCompleteIntegral (Scheme.ProEt.topology X) l E).lift
     (Functor.uncurry.obj
       ((DerivedCategoryDerivedCompleteIntegral.ι (Scheme.ProEt.topology X) l E).op ⋙
-        MonoidalClosed.internalHom ⋙
+        RHom(X)[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))] ⋙
           (Functor.whiskeringLeft _ _ _).obj
             (DerivedCategoryDerivedCompleteIntegral.ι (Scheme.ProEt.topology X) l E)))
     fun KL ↦ derivedCompleteIntegral_derivedHom_obj l E X _ _ KL.2.property
