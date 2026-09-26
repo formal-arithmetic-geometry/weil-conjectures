@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
+public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
+public import WeilConjectures.DeligneLaumon.AffineLine.Purity
 
 /-!
 # The degree-one estimate for an irreducible factor
@@ -30,21 +31,21 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
-variable (ψ : AddChar k₀ (PadicAlgCl l)) (k : Type u) [Field k] [Algebra k₀ k] [IsAlgClosed k]
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+variable (ψ : AddChar k₀ (PadicAlgCl l))
 
-/-- Blueprint `sk-c-dl-a1-hc1`: The degree-one estimate for an irreducible factor. If `M` is
-irreducible, nonexceptional and punctually `ι`-pure of weight `w` on a dense open `U₀` of the
-affine line, then `H_c^1(A, j_*M)` has weights at most `w + 1`. -/
+/-- If `M` is irreducible, nonexceptional for a nontrivial `ψ` and punctually `ι`-pure of
+weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights at most
+`w + 1`. (blueprint: `sk-c-dl-a1-hc1`) -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
-    (D : LisseOnDenseOpen k₀ l) [Simple D.sheaf] (hne : D.sheaf.IsNonexceptional ψ k)
-    {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
-    (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMost ι (Nat.card k₀)
-      (w + 1) := by
+    (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
+    (hne : D.sheaf.IsNonexceptional ψ) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
+    (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
   sorry
 
 end AlgebraicGeometry

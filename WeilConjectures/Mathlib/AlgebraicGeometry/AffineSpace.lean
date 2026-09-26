@@ -124,6 +124,10 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
+/-- The affine line `𝔸¹_R` over a commutative ring `R`, the relative affine space on a
+one-element index type over `Spec R`. -/
+abbrev affineLine (R : Type u) [CommRing R] : Scheme.{u} :=
+  𝔸(PUnit.{u + 1}; Spec (CommRingCat.of R))
 
 namespace AffineSpace
 

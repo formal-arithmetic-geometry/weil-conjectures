@@ -148,6 +148,7 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.Convergence
+public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
@@ -156,7 +157,6 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
-public import WeilConjectures.DeligneLaumon.AffineLine.Setup
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
@@ -474,10 +474,12 @@ public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
+public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 public import WeilConjectures.ZetaLinearAlgebra.FunctionalEquation
 public import WeilConjectures.ZetaLinearAlgebra.Hankel
 public import WeilConjectures.ZetaLinearAlgebra.IntegralRecurrence

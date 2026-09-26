@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
+public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 
 /-!
 # The generic Fourier sheaf is pure of some weight
@@ -31,19 +31,20 @@ Forming the conjugate envelope *after* extending by zero is what avoids assuming
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
-variable {k₀ : Type u} [Field k₀] {l : ℕ} [Fact l.Prime]
-variable (ψ : AddChar k₀ (PadicAlgCl l)) (k : Type u) [Field k] [Algebra k₀ k] [IsAlgClosed k]
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+variable (ψ : AddChar k₀ (PadicAlgCl l))
 
-/-- Blueprint `sk-p-dl-a1-some-weight`: The generic Fourier sheaf is pure of some weight. For
-an irreducible nonexceptional `M` pure of weight `w`, the irreducible lisse sheaf `M'` of its
-Fourier partner is punctually `ι`-pure of some real weight `v`. -/
+/-- For an irreducible nonexceptional `M` pure of weight `w` and a nontrivial `ψ`, the
+irreducible lisse sheaf `M'` of its Fourier partner is punctually `ι`-pure of some real weight
+`v`. (blueprint: `sk-p-dl-a1-some-weight`) -/
 theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ)
-    (D D' : LisseOnDenseOpen k₀ l) [Simple D.sheaf] (hne : D.sheaf.IsNonexceptional ψ k)
-    {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D') :
+    (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l) [Simple D.sheaf]
+    (hne : D.sheaf.IsNonexceptional ψ) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D') :
     ∃ v : ℝ, D'.sheaf.IsPunctuallyPureOfWeight ι v := by
   sorry
 
