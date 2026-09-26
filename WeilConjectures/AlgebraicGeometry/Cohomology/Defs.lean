@@ -86,22 +86,30 @@ noncomputable def H.map {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) : M.H n →+ 
 
 @[simp]
 lemma H.map_id_apply (M : X.Modules) (n : ℕ) (x : M.H n) : H.map (𝟙 M) n x = x := by
-  simp [H.map, toSheaf_map_id]
+  unfold H.map
+  rw [toSheaf_map_id]
+  exact Sheaf.H.map_id_apply x
 
-@[simp]
 lemma H.map_comp_apply {M N P : X.Modules} (φ : M ⟶ N) (ψ : N ⟶ P) (n : ℕ) (x : M.H n) :
     H.map (φ ≫ ψ) n x = H.map ψ n (H.map φ n x) := by
-  simp [H.map, toSheaf_map_comp, Sheaf.H.map_comp_apply]
+  unfold H.map
+  rw [toSheaf_map_comp]
+  exact Sheaf.H.map_comp_apply _ _ x
 
 @[simp]
 lemma H.map_add_apply {M N : X.Modules} (φ ψ : M ⟶ N) (n : ℕ) (x : M.H n) :
     H.map (φ + ψ) n x = H.map φ n x + H.map ψ n x := by
-  simp [H.map, toSheaf_map_add]
+  unfold H.map
+  rw [toSheaf_map_add]
+  exact Sheaf.H.map_add_apply _ _ x
 
 @[simp]
 lemma H.map_zero_apply {M N : X.Modules} (n : ℕ) (x : M.H n) :
     H.map (0 : M ⟶ N) n x = 0 := by
-  simp [H.map, toSheaf_map_zero]
+  have h := H.map_add_apply (0 : M ⟶ N) 0 n x
+  rw [add_zero] at h
+  nth_rewrite 1 [← add_zero (H.map (0 : M ⟶ N) n x)] at h
+  exact (add_left_cancel h).symm
 
 /-- Multiplication by a global function `a : Γ(X, ⊤)`, as an endomorphism of the underlying
 presheaf of abelian groups of a sheaf of modules `M`. -/
@@ -154,10 +162,22 @@ lemma smulHom_add (M : X.Modules) (a b : Γ(X, ⊤)) :
 ring homomorphism to the additive endomorphisms of `M.H n`. -/
 noncomputable def smulEnd (M : X.Modules) (n : ℕ) : Γ(X, ⊤) →+* AddMonoid.End (M.H n) where
   toFun a := H.map (M.smulHom a) n
-  map_one' := by ext x; simp
-  map_zero' := by ext x; simp
-  map_mul' a b := by ext x; simp [smulHom_mul, H.map_comp_apply]
-  map_add' a b := by ext x; simp [smulHom_add]
+  map_one' := by
+    refine AddMonoidHom.ext fun x ↦ ?_
+    change H.map (M.smulHom 1) n x = x
+    rw [smulHom_one, H.map_id_apply]
+  map_zero' := by
+    refine AddMonoidHom.ext fun x ↦ ?_
+    change H.map (M.smulHom 0) n x = 0
+    rw [smulHom_zero, H.map_zero_apply]
+  map_mul' a b := by
+    refine AddMonoidHom.ext fun x ↦ ?_
+    change H.map (M.smulHom (a * b)) n x = H.map (M.smulHom a) n (H.map (M.smulHom b) n x)
+    rw [smulHom_mul, H.map_comp_apply]
+  map_add' a b := by
+    refine AddMonoidHom.ext fun x ↦ ?_
+    change H.map (M.smulHom (a + b)) n x = H.map (M.smulHom a) n x + H.map (M.smulHom b) n x
+    rw [smulHom_add, H.map_add_apply]
 
 /-- The cohomology of a sheaf of modules on `X` is a module over the global functions of `X`,
 via multiplication by global functions. -/

@@ -63,6 +63,14 @@ lemma sectionBaseChange_snd (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 
     sectionBaseChange f σ hσ T ≫ Limits.pullback.snd f T.hom = 𝟙 T.left :=
   Limits.pullback.lift_snd _ _ _
 
+/-- Pulling back the trivial invertible sheaf gives the trivial invertible sheaf. -/
+@[simp]
+lemma Scheme.Pic.map_mk_unit {Y Z : Scheme.{u}} (g : Y ⟶ Z) :
+    Pic.map g (Pic.mk (SheafOfModules.unit Z.ringCatSheaf)) =
+      Pic.mk (SheafOfModules.unit Y.ringCatSheaf) :=
+  Pic.ext (congr_toSkeleton_of_iso ((Modules.pullback g).mapIso (fromSkeletonToSkeletonIso _) ≪≫
+    Modules.pullbackObjUnitIso g))
+
 /-- The canonical morphism `𝒪_S ⟶ f_* 𝒪_X` of sheaves of `𝒪_S`-modules attached to a morphism
 of schemes `f : X ⟶ S`, obtained from the unit of the adjunction `f^* ⊣ f_*` together with the
 identification `f^* 𝒪_S ≅ 𝒪_X`. -/
@@ -84,6 +92,11 @@ noncomputable def picardFunctor (f : X ⟶ S) :
     Sheaf (Scheme.fppfTopology.over S) (Type (u + 1)) :=
   (presheafToSheaf (Scheme.fppfTopology.over S) (Type (u + 1))).obj (picardPresheaf f)
 
+/-- The canonical map from the Picard presheaf of `f : X ⟶ S` to the relative Picard functor,
+i.e. the unit of the fppf sheafification adjunction. -/
+noncomputable abbrev toPicardFunctor (f : X ⟶ S) : picardPresheaf f ⟶ (picardFunctor f).obj :=
+  toSheafify (Scheme.fppfTopology.over S) (picardPresheaf f)
+
 /-- Blueprint `sk-def-picard-pic`: Picard functor and its `σ`-normalized version.
 
 The `σ`-normalized relative Picard functor `Pic_{X/S,σ}` of a morphism of schemes `f : X ⟶ S`
@@ -94,8 +107,16 @@ noncomputable def picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ
   obj T := {L | Pic.map (sectionBaseChange f σ hσ T.unop) L =
     Pic.mk (SheafOfModules.unit T.unop.left.ringCatSheaf)}
   map := by
-    -- Compatibility of the normalization condition with base change along `Over S`-morphisms.
-    sorry
+    rintro ⟨U⟩ ⟨V⟩ ⟨i⟩ L (hL : Pic.map _ L = _)
+    change Pic.map (sectionBaseChange f σ hσ V) (Pic.map (baseChangeMap f i) L) = _
+    have h : sectionBaseChange f σ hσ V ≫ baseChangeMap f i =
+        i.left ≫ sectionBaseChange f σ hσ U := by
+      refine Limits.pullback.hom_ext ?_ ?_
+      · simp
+      · simp only [Category.assoc, limit.lift_π, PullbackCone.mk_π_app, limit.lift_π_assoc,
+          cospan_right, Category.comp_id]
+        apply Category.id_comp
+    rw [← Pic.map_comp, h, Pic.map_comp, hL, Pic.map_mk_unit]
 
 /-- Blueprint `sk-prop-picard-pic-split`: The split exact sequence.
 
@@ -117,10 +138,10 @@ theorem picard_split (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
       (∀ N : T.left.Pic,
         Pic.map (sectionBaseChange f σ hσ T) (Pic.map (Limits.pullback.snd f T.hom) N) = N) ∧
       Function.Bijective (fun L : (picardFunctorNormalized f σ hσ).toFunctor.obj (.op T) ↦
-        (toSheafify (Scheme.fppfTopology.over S) (picardPresheaf f)).app (.op T) L.1) ∧
+        (toPicardFunctor f).app (.op T) L.1) ∧
       Function.Bijective (fun L : (Limits.pullback f T.hom).Pic ↦
         (Pic.map (sectionBaseChange f σ hσ T) L,
-          (toSheafify (Scheme.fppfTopology.over S) (picardPresheaf f)).app (.op T) L)) := by
+          (toPicardFunctor f).app (.op T) L)) := by
   sorry
 
 /-- Blueprint `sk-cor-picard-pic-sheaf`: Picard functor is an fppf sheaf.
