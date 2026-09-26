@@ -5,9 +5,9 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.FourierTransform.Defs
-public import WeilConjectures.SixFunctors.Etale.TateTwist
+public import WeilConjectures.FourierTransform.TateTwist
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
 
@@ -16,15 +16,16 @@ public import WeilConjectures.SixFunctors.Etale.TateTwist
 The Fourier–Deligne transform of `WeilConjectures.FourierTransform.Defs` is stated for an
 arbitrary pair of `S`-schemes with a pairing. Its main case is affine `n`-space `𝔸(n; S)`
 paired with itself by the standard pairing `⟨x, ξ⟩ = ∑ᵢ xᵢ ξᵢ` and shifted by the relative
-dimension `#n`; this file records that datum and the computation of the transform of the
-two simplest complexes on the affine line, the unit and the skyscraper at the origin.
+dimension `r = #n`; this file records that datum and the computation of the transform of
+the two simplest complexes, the constant sheaf and the skyscraper at the origin.
+
+The affine-space data themselves — the standard pairing, the zero section and the
+reflection `x ↦ -x` — are in
+`WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace`; they have nothing to do with étale
+sheaves.
 
 ## Main definitions
 
-- `AlgebraicGeometry.AffineSpace.stdPairing`: the standard pairing on `𝔸(n; S) ×_S 𝔸(n; S)`.
-- `AlgebraicGeometry.AffineSpace.line`: the affine line `𝔸¹_S`.
-- `AlgebraicGeometry.AffineSpace.neg`: the reflection `x ↦ -x` of `𝔸(n; S)`.
-- `AlgebraicGeometry.AffineSpace.zeroSection`: the zero section `S ⟶ 𝔸(n; S)`.
 - `AlgebraicGeometry.Etale.affineFourierTransform`: the Fourier–Deligne transform of
   `𝔸(n; S)` with the standard pairing.
 - `AlgebraicGeometry.Etale.skyscraperZero`: the skyscraper `δ₀` at the origin.
@@ -32,8 +33,13 @@ two simplest complexes on the affine line, the unit and the skyscraper at the or
 ## Main statements
 
 - `AlgebraicGeometry.Etale.fourierTransformUnitIso` and
-  `AlgebraicGeometry.Etale.fourierTransformSkyscraperZeroIso`: on the affine line the
-  transform exchanges the unit and the skyscraper at the origin.
+  `AlgebraicGeometry.Etale.fourierTransformSkyscraperZeroIso`: the transform exchanges the
+  constant sheaf and the skyscraper at the origin.
+
+## Blueprint
+
+The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
+repository; they are not labels of `blueprint/src` and so are not checked by the build.
 
 -/
 
@@ -45,87 +51,59 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
-namespace AlgebraicGeometry
-
-namespace AffineSpace
-
-variable (n : Type u) [Fintype n] (S : Scheme.{u})
-
-/-- The standard pairing `⟨x, ξ⟩ = ∑ᵢ xᵢ ξᵢ` on `𝔸(n; S) ×_S 𝔸(n; S)`, a global function on
-the product. -/
-noncomputable def stdPairing : Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) :=
-  ∑ i : n, (pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i) *
-    (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i)
-
-/-- The affine line `𝔸¹_S` over `S`. -/
-noncomputable abbrev line : Scheme.{u} := 𝔸(PUnit.{u + 1}; S)
-
-/-- The reflection `x ↦ -x` of `𝔸(n; S)`, the inverse of the group law. -/
-noncomputable def neg : 𝔸(n; S) ⟶ 𝔸(n; S) :=
-  homOfVector (𝔸(n; S) ↘ S) fun i ↦ -coord S i
-
-/-- The zero section `S ⟶ 𝔸(n; S)`, the unit of the group law. -/
-noncomputable def zeroSection : S ⟶ 𝔸(n; S) :=
-  homOfVector (𝟙 S) 0
-
-/-- The diagonal `𝔸(n; S) ⟶ 𝔸(n; S) ×_S 𝔸(n; S)`. -/
-noncomputable def diagonal : 𝔸(n; S) ⟶ pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) :=
-  pullback.lift (𝟙 _) (𝟙 _) rfl
-
-end AffineSpace
-
-namespace Etale
+namespace AlgebraicGeometry.Etale
 
 open AffineSpace
 
-variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime]
+variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
 variable (n : Type u) [Fintype n] (S : Scheme.{u})
 variable [CharP Γ(pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) p]
 variable [HasCompactification (pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
 
 /-- The Fourier–Deligne transform of affine `n`-space over `S`: the transform of
 `AlgebraicGeometry.Etale.fourierTransform` for `𝔸(n; S)` paired with itself by the standard
-pairing and shifted by the relative dimension `#n`. On the affine line this is
-`FT_ψ(K) = Rp₂,!(p₁^* K ⊗ᴸ ℒ_{ψ(xξ)})[1]`. -/
+pairing `⟨x, ξ⟩ = ∑ᵢ xᵢ ξᵢ` and shifted by the relative dimension `r = #n`. On the affine
+line this is `FT_ψ(K) = Rp₂,!(p₁^* K ⊗ᴸ ℒ_{ψ(xξ)})[1]`. -/
 noncomputable def affineFourierTransform (Ψ : AddChar (ZMod p) Λ) :
     DerivedCategory (Sheaf (𝔸(n; S)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf (𝔸(n; S)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   fourierTransform Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S) (Fintype.card n)
 
-/-- The unit complex `Λ` on `𝔸(n; S)`: the constant sheaf with value `Λ`, placed in
-degree `0`. -/
-noncomputable def unitComplex (X : Scheme.{u}) :
-    DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (DerivedCategory.singleFunctor _ 0).obj (𝟙_ _)
-
-/-- The skyscraper `δ₀` at the origin of `𝔸(n; S)`: the direct image of the unit complex
-along the zero section, placed in degree `0`. -/
+/-- The skyscraper `δ₀` at the origin of `𝔸(n; S)`: the direct image of the constant sheaf
+`Λ` along the zero section. -/
 noncomputable def skyscraperZero :
     DerivedCategory (Sheaf (𝔸(n; S)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (R((zeroSection n S)_*[ModuleCat.{u + 1} Λ])).obj (unitComplex Λ S)
+  (R((zeroSection n S)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _)
 
-/-- Blueprint `sk-prop-first-formula`: P4: the constant sheaf and the skyscraper are
-exchanged.
+/-- The Fourier–Deligne transform of the constant sheaf on `𝔸(n; S)` is the skyscraper at
+the origin of the dual, Tate twisted and shifted by the relative dimension `r = #n`:
 
-On the affine line the Fourier–Deligne transform sends the constant sheaf to the skyscraper
-at the origin of the dual line, Tate twisted and shifted: `FT_ψ(Λ) ≅ δ₀(-1)[-1]`. -/
-noncomputable def fourierTransformUnitIso (Ψ : AddChar (ZMod p) Λ) :
-    (affineFourierTransform Λ n S Ψ).obj (unitComplex Λ (𝔸(n; S))) ≅
+`FT_ψ(Λ) ≅ δ₀(-r)[-r]`.
+
+On the affine line, the blueprint's case, this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1]`.
+
+The character must be **nontrivial**: for `Ψ = 1` the kernel is the constant sheaf and the
+transform of `Λ` is `Λ(-r)[-r]`, supported everywhere.
+(sketch blueprint: `sk-prop-first-formula`) -/
+noncomputable def fourierTransformUnitIso (Ψ : AddChar (ZMod p) Λ) (hΨ : Ψ ≠ 1) :
+    (affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
       (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
         ((tateTwist (ModuleCat.{u + 1} Λ) (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
           (skyscraperZero Λ n S)) :=
   sorry
 
-/-- Blueprint `sk-prop-first-formula`: P4: the constant sheaf and the skyscraper are
-exchanged.
+/-- The Fourier–Deligne transform of the skyscraper at the origin of `𝔸(n; S)` is the
+constant sheaf, shifted by the relative dimension `r = #n`:
 
-On the affine line the Fourier–Deligne transform sends the skyscraper at the origin to the
-constant sheaf, shifted: `FT_ψ(δ₀) ≅ Λ[1]`. -/
+`FT_ψ(δ₀) ≅ Λ[r]`.
+
+On the affine line, the blueprint's case, this reads `FT_ψ(δ₀) ≅ Λ[1]`. Unlike
+`AlgebraicGeometry.Etale.fourierTransformUnitIso` this holds for every character: the
+kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero function.
+(sketch blueprint: `sk-prop-first-formula`) -/
 noncomputable def fourierTransformSkyscraperZeroIso (Ψ : AddChar (ZMod p) Λ) :
     (affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
-      (shiftFunctor _ (Fintype.card n : ℤ)).obj (unitComplex Λ (𝔸(n; S))) :=
+      (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _) :=
   sorry
 
-end Etale
-
-end AlgebraicGeometry
+end AlgebraicGeometry.Etale
