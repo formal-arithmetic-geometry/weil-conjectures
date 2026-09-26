@@ -51,6 +51,10 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+/-- `ℙ(n; S)` is the projective `n`-space over `S`; see
+`WeilConjectures.Compactification.ProjectiveSpace` for why this notation is local. -/
+local notation "ℙ(" n "; " S ")" => RelativeProjectiveSpace n S
+
 variable {X S : Scheme.{u}}
 
 /-- **The affine compactification construction**: given an immersion `i : X ⟶ 𝔸(n; S)` of

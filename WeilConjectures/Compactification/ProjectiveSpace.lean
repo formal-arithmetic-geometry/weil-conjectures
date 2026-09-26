@@ -82,10 +82,12 @@ noncomputable def ProjectiveSpaceInt : Scheme.{u} := Proj 𝒪[n]
 noncomputable def RelativeProjectiveSpace : Scheme.{u} :=
   pullback (terminal.from S) (terminal.from (ProjectiveSpaceInt n))
 
-namespace RelativeProjectiveSpace
+/-- `ℙ(n; S)` is the projective `n`-space over `S`. This notation is local to the files
+that use `RelativeProjectiveSpace`, since `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`
+exports the same notation for its own base-change model `AlgebraicGeometry.ProjectiveSpace`. -/
+local notation "ℙ(" n "; " S ")" => RelativeProjectiveSpace n S
 
-/-- `ℙ(n; S)` is the projective `n`-space over `S`. -/
-scoped[AlgebraicGeometry] notation "ℙ(" n "; " S ")" => RelativeProjectiveSpace n S
+namespace RelativeProjectiveSpace
 
 @[simps -isSimp]
 noncomputable instance over : ℙ(n; S).CanonicallyOver S where
