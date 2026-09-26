@@ -111,7 +111,7 @@ lemma Etale.sheafFiber_map_lowerStarComp_hom_app_stalkRestrict (h₁₂ : T ⟶ 
   -- isomorphism `(V ×_R S) ×_S T ≅ V ×_R T`
   set ψ := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) h₁ h₂).hom.app V with hψ
   have hcomp : ((Etale.lowerStarComp A h₁ h₂).hom.app G).hom.app (op V) = G.obj.map ψ.op := by
-    simp only [Etale.lowerStarComp, GrothendieckTopology.lowerStarComp,
+    simp only [Etale.lowerStarComp,
       Functor.sheafPushforwardContinuousComp'_hom_app_hom_app, Iso.symm_inv, hψ]
   rw [hcomp]
   erw [GrothendieckTopology.Point.toPresheafFiber_w]

@@ -160,9 +160,11 @@ noncomputable def rightDerivedLowerShriekPlus :
 scoped notation "R(" f ")_![" A "]+" =>
   rightDerivedLowerShriekPlus A f
 
+omit [HasSmallSiteSheafify A] in
 lemma rightDerivedLowerShriek_eq : R(f)_![A] =
     Rf_!(HasCompactification.compactification f)[A] := rfl
 
+omit [HasSmallSiteSheafify A] in
 lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
     Rf_!(HasCompactification.compactification f)[A]+ := rfl
 

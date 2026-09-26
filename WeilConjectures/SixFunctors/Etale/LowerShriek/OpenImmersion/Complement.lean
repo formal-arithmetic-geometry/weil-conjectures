@@ -136,6 +136,7 @@ noncomputable def Etale.isInitial_openImmersionRestriction_openImmersionLowerShr
       ((Etale.openImmersionLowerShriekAdjunction A j).homEquiv F _))
 
 set_option backward.isDefEq.respectTransparency false in
+omit [HasSmallSiteSheafify A] in
 /-- **The comparison `j_! ⟶ j_*` restricted to a disjoint open is an isomorphism.** Both sides
 are initial, and a morphism out of an initial object is unique, so it agrees with the canonical
 isomorphism between the two. -/

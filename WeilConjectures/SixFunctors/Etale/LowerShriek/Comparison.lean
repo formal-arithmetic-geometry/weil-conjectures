@@ -90,6 +90,7 @@ noncomputable def Etale.openImmersionLowerShriekToLowerStar :
     (Functor.rightUnitor _).hom
 
 set_option backward.isDefEq.respectTransparency false in
+omit [HasSmallSiteSheafify A] in
 /-- The components of the comparison `j_! ⟶ j_*`: the unitors and the associator in its
 definition are identities, so at `F` it is `j_!` of the inverted counit of `j^* ⊣ j_*`,
 followed by the counit of `j_! ⊣ j^*` at `j_* F`. -/
@@ -138,6 +139,7 @@ noncomputable def Etale.lowerShriekToLowerStar :
       (HasCompactification.compactification f).g).hom ≫
     eqToHom (by rw [← (HasCompactification.compactification f).comm])
 
+omit [HasSmallSiteSheafify A] in
 /-- The comparison `ι_f` is an isomorphism as soon as the comparison for the open immersion
 `i` of the chosen compactification is: the remaining two factors of `ι_f` are an isomorphism
 and an `eqToHom` by construction, and whiskering preserves isomorphisms.

@@ -68,6 +68,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
+omit [HasSmallSiteSheafify A] in
 /-- The fibre at a geometric point of the form `t ≫ f` of a morphism of étale sheaves whose
 restriction along `f` is invertible is invertible: by
 `AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso` that fibre is the fibre at `t` of
@@ -82,6 +83,7 @@ lemma Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map {W : Scheme.{u
   infer_instance
 
 include hij in
+omit [HasSmallSiteSheafify A] in
 /-- The fibre at a geometric point `s : Spec Ω ⟶ X` of a morphism of étale sheaves whose
 restrictions along `j` and along `i` are invertible is invertible: `s` factors through `j` or
 through `i` by `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl`, and either case
@@ -104,6 +106,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [hJ : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hij hJ in
+omit [HasSmallSiteSheafify A] in
 /-- **The restrictions to an open and to its closed complement jointly reflect
 isomorphisms.** For an open immersion `j : U ⟶ X` and a closed immersion `i : Z ⟶ X` whose
 range is the complement of the range of `j`, a morphism of `A`-valued sheaves on the small
@@ -125,6 +128,7 @@ theorem Etale.jointlyReflectIsomorphisms_upperStar :
   exact Etale.isIso_uliftSheafFiber_map_of_isIso_upperStar_map A j i hij φ hj hi _
 
 include hij hJ in
+omit [HasSmallSiteSheafify A] in
 /-- A morphism of `A`-valued sheaves on the small étale site of `X` which is invertible after
 restricting along the open immersion `j` and after restricting along the complementary closed
 immersion `i` is invertible. This is the two-hypothesis form of

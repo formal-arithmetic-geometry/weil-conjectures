@@ -120,6 +120,7 @@ noncomputable def lowerStarIdDerivedPlus :
   Functor.rightDerivedFunctorPlusNatIso (Etale.lowerStarId A V) ≪≫
     Functor.rightDerivedFunctorPlusIdIso _
 
+omit [HasSmallSiteSheafify A] in
 /-- The characterization of `AlgebraicGeometry.Etale.lowerStarIdDerivedPlus`: composing the
 unit of the right derived functor with it gives the levelwise image of
 `AlgebraicGeometry.Etale.lowerStarId`. -/
@@ -140,6 +141,7 @@ lemma lowerStarIdDerivedPlus_hom_app_fac
   rw [hid]
   exact Category.comp_id _
 
+omit [HasSmallSiteSheafify A] in
 /-- The inverse form of `AlgebraicGeometry.Etale.lowerStarIdDerivedPlus_hom_app_fac`: on the
 image of a bounded below complex, the inverse of
 `AlgebraicGeometry.Etale.lowerStarIdDerivedPlus` is the levelwise image of the inverse of
@@ -207,6 +209,7 @@ lemma derivedPlus_unit_comp_upperStarIdDerivedPlus :
 
 variable {V}
 
+omit [HasSmallSiteSheafify A] in
 /-- The composition isomorphism `Functor.rightDerivedFunctorPlusCompIso'` cancels the
 identity isomorphism `AlgebraicGeometry.Etale.lowerStarIdDerivedPlus`, provided the
 underlying isomorphism `e` of pushforwards cancels
@@ -270,6 +273,7 @@ noncomputable def upperStarCompDerivedPlus (h₁₂ : T ⟶ R := h₁ ≫ h₂)
   Functor.mapDerivedCategoryPlusNatIso (Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂) ≪≫
     Functor.mapDerivedCategoryPlusCompIso _ _
 
+omit [HasSmallSiteSheafify A] in
 @[reassoc]
 lemma upperStarCompDerivedPlus_hom_app_factorsh (h₁₂ : T ⟶ R := h₁ ≫ h₂)
     (hh₁₂ : h₁₂ = h₁ ≫ h₂ := by cat_disch)

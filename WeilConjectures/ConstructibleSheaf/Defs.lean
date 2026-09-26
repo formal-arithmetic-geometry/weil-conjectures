@@ -147,6 +147,7 @@ abelian groups (`A = Ab.{u + 1}`), of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`),
 class IsLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   nonempty_locallyConstantDatum : Nonempty (LocallyConstantDatum F)
 
+omit [HasSmallSiteSheafify A] in
 /-- A constant sheaf on the small étale site is locally constant, trivialized by the
 identity cover. The right Kan extension hypothesis compares sheafification on the small
 étale site with sheafification on its localizations; it always holds mathematically, see

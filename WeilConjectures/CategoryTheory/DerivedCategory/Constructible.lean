@@ -127,6 +127,7 @@ theorem `thm:constructible-serre`. -/
 def Etale.constructibleSheaf : ObjectProperty (Sheaf X.smallEtaleTopology A) :=
   fun F ↦ IsConstructibleSheaf F
 
+omit [HasSmallSiteSheafify A] in
 lemma Etale.constructibleSheaf_iff (F : Sheaf X.smallEtaleTopology A) :
     Etale.constructibleSheaf A X F ↔ IsConstructibleSheaf F :=
   Iff.rfl
@@ -140,6 +141,7 @@ instance [PreservesFiniteLimits (CategoryTheory.forget A)] :
     (Etale.constructibleSheaf A X).ContainsZero where
   exists_zero := ⟨0, isZero_zero _, IsConstructibleSheaf.of_isZero (isZero_zero _)⟩
 
+omit [HasSmallSiteSheafify A] in
 /-- The constructible-homology property is the homology property of
 `Etale.constructibleSheaf`. -/
 lemma Etale.DerivedCategory.constructibleHomology_eq :

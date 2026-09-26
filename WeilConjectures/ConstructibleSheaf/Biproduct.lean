@@ -129,6 +129,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [PreservesFiniteLimits (CategoryTheory.forget A)]
 
+omit [HasSmallSiteSheafify A] in
 /-- The direct sum of two finite sheaves is finite: the stalk of `F ⊞ G` is the product of the
 stalks. (blueprint: `lemma:constructible-flc-biproduct`) -/
 theorem IsFiniteSheaf.biprod (F G : Sheaf X.smallEtaleTopology A)

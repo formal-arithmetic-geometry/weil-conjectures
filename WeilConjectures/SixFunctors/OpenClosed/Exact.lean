@@ -96,6 +96,7 @@ variable (hji : Disjoint (Set.range j.base) (Set.range i.base))
   (F : Sheaf X.smallEtaleTopology A)
 
 include hJZ in
+omit [HasSmallSiteSheafify A] in
 /-- **The `i^*`-image of the open–closed short complex is short exact**, i.e.
 
 `0 ⟶ i^* j_! j^* F ⟶ i^* F ⟶ i^* i_* i^* F ⟶ 0`
@@ -126,6 +127,7 @@ lemma Etale.shortExact_map_upperStar_openClosedShortComplex_closed :
 variable [hJX : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hJX hJZ in
+omit [HasSmallSiteSheafify A] in
 /-- **The open–closed short complex is short exact**: for an open immersion `j : U ⟶ X`, a
 closed immersion `i : Z ⟶ X` whose range is the complement of the range of `j`, and a sheaf
 `F` on the small étale site of `X`, the sequence

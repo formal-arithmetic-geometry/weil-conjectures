@@ -90,6 +90,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 variable {X Y : Scheme.{u}} (u : X ⟶ Y) [IsUniversalHomeomorphism u]
 
+omit [HasSmallSiteSheafify A] in
 /-- **Constancy descends along a universal homeomorphism**: `u^*` is fully faithful and carries
 constant sheaves to constant sheaves. -/
 lemma _root_.CategoryTheory.Sheaf.isConstant_upperStar_iff (G : Sheaf Y.smallEtaleTopology A) :
@@ -174,6 +175,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 variable {W Z : Scheme.{u}} (p : W ⟶ Z) [IsClosedImmersion p] [Surjective p]
 
+omit [HasSmallSiteSheafify A] in
 /-- **Finiteness descends along a surjective closed immersion** `p : W ⟶ Z`: a geometric
 point of `Z` lifts to `W`, and the stalk of `p^* G` at the lift is the stalk of `G`.
 (blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/

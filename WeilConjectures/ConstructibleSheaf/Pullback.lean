@@ -51,6 +51,7 @@ section Constant
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
 
+omit [HasSmallSiteSheafify A] in
 /-- The pullback of a constant sheaf is constant. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.upperStar (g : Y ⟶ X)
     (F : Sheaf X.smallEtaleTopology A) [F.IsConstant X.smallEtaleTopology] :
@@ -95,6 +96,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
   inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
 
+omit [HasSmallSiteSheafify A] in
 /-- Locally constant sheaves are invariant under isomorphism. -/
 lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf F' := by
@@ -142,6 +144,7 @@ lemma IsFiniteSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     Finite.of_equiv _
       ((CategoryTheory.forget A).mapIso ((pointSmallEtale s).sheafFiber.mapIso i)).toEquiv
 
+omit [HasSmallSiteSheafify A] in
 /-- **Pullback of a finite sheaf is finite**: the stalks of `g^* F` are stalks of `F`.
 (blueprint: `lemma:constructible-pullback-finite`) -/
 theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
@@ -152,6 +155,7 @@ theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
       ((CategoryTheory.forget A).mapIso
         ((Etale.upperStarCompSheafFiberIso A g s).app F)).toEquiv.symm
 
+omit [HasSmallSiteSheafify A] in
 /-- Finite locally constant sheaves are invariant under isomorphism. -/
 lemma IsFiniteLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsFiniteLocallyConstantSheaf F] : IsFiniteLocallyConstantSheaf F' where
@@ -193,6 +197,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
+omit [HasSmallSiteSheafify A] in
 /-- Constructible sheaves are invariant under isomorphism. -/
 lemma IsConstructibleSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsConstructibleSheaf F] : IsConstructibleSheaf F' := by

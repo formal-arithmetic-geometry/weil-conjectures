@@ -95,6 +95,7 @@ noncomputable abbrev Etale.baseChangeSquare (sq : CommSq g' f' f g) :
     (Etale.upperStarLowerStarAdjunction A f')
     (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq).hom)
 
+omit [HasSmallSiteSheafify A] in
 /-- **The adjoint of the base change map** is the square isomorphism followed by the counit:
 for a sheaf `F` on `X`,
 `f'^* (baseChangeMap F) ≫ ε_{f'} = squareUpperStarIso (f_* F) ≫ g'^* (ε_f F)`.
@@ -107,6 +108,7 @@ lemma Etale.upperStar_map_baseChangeMap_app_counit (sq : CommSq g' f' f g)
         ((g')^*[A]).map ((Etale.upperStarLowerStarAdjunction A f).counit.app F) :=
   mateEquiv_counit _ _ _ F
 
+omit [HasSmallSiteSheafify A] in
 /-- **The unit form of the base change map**: for a sheaf `G` on `Y`,
 `g^* (η_f G) ≫ baseChangeMap (f^* G) = η_{f'} (g^* G) ≫ f'_* (squareUpperStarIso G)`. -/
 lemma Etale.map_unit_baseChangeMap_app (sq : CommSq g' f' f g)
@@ -117,6 +119,7 @@ lemma Etale.map_unit_baseChangeMap_app (sq : CommSq g' f' f g)
         ((f')_*[A]).map ((Etale.squareUpperStarIso A sq).hom.app G) :=
   unit_mateEquiv _ _ _ G
 
+omit [HasSmallSiteSheafify A] in
 /-- **Naturality of the base change map** in the sheaf.
 (blueprint: `lemma:weil-pbc-underived-exchange-naturality`) -/
 lemma Etale.baseChangeMap_naturality (sq : CommSq g' f' f g)

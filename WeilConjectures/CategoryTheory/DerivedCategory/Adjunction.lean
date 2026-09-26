@@ -24,7 +24,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 Given an adjunction `adj : f ⊣ g` of additive functors between abelian categories, this
 file lifts `adj` through the stages of the derived formalism:
 
-* `Adjunction.mapHomotopyCategory` (in `WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction`): the induced adjunction
+* `Adjunction.mapHomotopyCategory` (in
+  `WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction`): the induced adjunction
   `f.mapHomotopyCategory c ⊣ g.mapHomotopyCategory c` between the homotopy categories,
   whenever the quotient functors to the homotopy categories are localizations with
   respect to homotopy equivalences (which holds, in particular, for the complex shapes

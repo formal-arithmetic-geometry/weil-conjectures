@@ -108,6 +108,7 @@ noncomputable def Etale.baseChangeMapHomotopyPlus (sq : CommSq g' f' f g) :
       (f')_*[A].rightDerivedFunctorPlus ≫
     (Functor.associator _ _ _).hom
 
+omit [HasSmallSiteSheafify A] in
 /-- The components of `AlgebraicGeometry.Etale.baseChangeMapHomotopyPlus`. -/
 lemma Etale.baseChangeMapHomotopyPlus_app (sq : CommSq g' f' f g)
     (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A)) :
@@ -135,6 +136,7 @@ noncomputable def Etale.derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
   Functor.rightDerivedDesc _ (Etale.rightDerivedLowerStarPlusCompUpperStarUnit A f g)
     (HomotopyCategory.Plus.quasiIso _) _ (Etale.baseChangeMapHomotopyPlus A sq)
 
+omit [HasSmallSiteSheafify A] in
 /-- **The derived base change map is computed by the underived one on resolutions**: for a
 bounded below complex `K` of sheaves on `X`, the composite of `D g^*⁺` of the unit
 `f_* K ⟶ R f_*⁺ K` with the derived base change map is the levelwise underived base change
@@ -159,6 +161,7 @@ lemma Etale.derivedBaseChangeMapPlus_fac_app (sq : CommSq g' f' f g)
   simp only [Etale.rightDerivedLowerStarPlusCompUpperStarUnit, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, comp_id]
 
+omit [HasSmallSiteSheafify A] in
 /-- **Uniqueness of the derived base change map**: a natural transformation
 `R f_*⁺ ⋙ D g^*⁺ ⟶ D g'^*⁺ ⋙ R f'_*⁺` satisfying the formula
 `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app` on every bounded below complex is
@@ -191,6 +194,7 @@ section Exact
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
+omit [HasSmallSiteSheafify A] in
 /-- **Derived base change for exact pushforwards**: if `f_*` and `f'_*` are exact and the
 underived base change map is an isomorphism, then so is the derived base change map: no
 resolutions are involved, the units `f_* ⟶ R f_*⁺`, `f'_* ⟶ R f'_*⁺` being isomorphisms. -/

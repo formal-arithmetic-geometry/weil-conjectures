@@ -236,7 +236,7 @@ noncomputable def Etale.upperStarCompIso :
     (k)^*[A] ≅ (q)^*[A] ⋙ (j)^*[A] :=
   eqToIso (congrArg (fun g : X ⟶ D => (g)^*[A]) hk.symm) ≪≫ Etale.upperStarComp A j q
 
-omit [IsOpenImmersion j] in
+omit [IsOpenImmersion j] [HasSmallSiteSheafify A] in
 @[simp]
 lemma Etale.upperStarCompIso_rfl :
     Etale.upperStarCompIso A j q (j ≫ q) rfl = Etale.upperStarComp A j q := by
@@ -400,6 +400,7 @@ open Etale
 
 variable {X C D E : Scheme.{u}}
 
+omit [HasSmallSiteSheafify A] in
 /-- The composition isomorphism `Etale.upperStarCompIso` is the instance at `k` of the
 generalized composition isomorphism `Etale.upperStarComp`; in this form the unit and
 associativity laws of `Etale.upperStarComp` apply to it. -/
@@ -409,6 +410,7 @@ lemma Etale.upperStarCompIso_eq_upperStarComp (j : X ⟶ C) (q : C ⟶ D) (k : X
   subst hk
   simp
 
+omit [HasSmallSiteSheafify A] in
 /-- The component at a sheaf `F` of the base change map `q_* ⋙ k^* ⟶ j^*`: the composition
 isomorphism evaluated at `q_* F`, followed by the pullback along `j` of the counit of
 `q^* ⊣ q_*`. -/

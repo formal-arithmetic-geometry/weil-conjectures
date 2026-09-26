@@ -76,6 +76,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
+omit [HasSmallSiteSheafify A] in
 /-- **Finiteness is Zariski local**: if the pullbacks of `G` to the members of an open cover
 are finite, so is `G`. -/
 theorem IsFiniteSheaf.of_openCover (𝒰 : OpenCover.{u} X) (G : Sheaf X.smallEtaleTopology A)

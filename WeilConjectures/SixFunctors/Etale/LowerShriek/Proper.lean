@@ -39,6 +39,7 @@ section Closed
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
+omit [HasSmallSiteSheafify A] in
 /-- **The comparison `j_! ⟶ j_*` is an isomorphism for an open immersion `j` with closed
 range.** The open immersion `j` and the inclusion of the open complement `W` of its range
 cover `X`, so restriction along the two of them is jointly conservative; the comparison

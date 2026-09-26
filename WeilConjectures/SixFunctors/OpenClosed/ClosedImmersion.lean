@@ -172,6 +172,7 @@ private lemma Etale.lowerStar_map_skyscraperSheafAdjunction_homEquiv
   -- evaluated at `V` and projected to the factor `y`
   exact hr.symm
 
+omit [HasSmallSiteSheafify A] in
 /-- **The stalk at a geometric point of `Z` of the counit of `i^* ⊣ i_*` is an
 isomorphism**, for a closed immersion `i : Z ⟶ X`.
 
@@ -207,6 +208,7 @@ theorem Etale.isIso_sheafFiber_map_upperStarLowerStarAdjunction_counit_app
       ((Etale.lowerStarCompComapSheafFiberIso A i s).hom.app H)).1 inferInstance M)
   rwa [← key] at h
 
+omit [HasSmallSiteSheafify A] in
 /-- The universe-lifted form of
 `AlgebraicGeometry.Etale.isIso_sheafFiber_map_upperStarLowerStarAdjunction_counit_app`: the
 stalk of the counit of `i^* ⊣ i_*` at a geometric point of `Z`, taken at the universe of

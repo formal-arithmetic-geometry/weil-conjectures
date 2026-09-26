@@ -47,6 +47,7 @@ section Zero
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
 
+omit [HasSmallSiteSheafify A] in
 /-- A zero sheaf is constant. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.of_isZero {F : Sheaf X.smallEtaleTopology A}
     (hF : IsZero F) : F.IsConstant X.smallEtaleTopology :=
@@ -65,6 +66,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [PreservesFiniteLimits (CategoryTheory.forget A)]
 
+omit [HasSmallSiteSheafify A] in
 /-- A zero sheaf is finite: its stalks are zero, whose underlying types are singletons since
 the forgetful functor preserves the terminal object. -/
 lemma IsFiniteSheaf.of_isZero {F : Sheaf X.smallEtaleTopology A} (hF : IsZero F) :

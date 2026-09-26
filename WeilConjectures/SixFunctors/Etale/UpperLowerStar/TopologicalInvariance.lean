@@ -145,6 +145,7 @@ left adjoint to it. -/
 noncomputable def upperStarIsoInverse : (f)^*[A] ≅ (sheafEquivalence A f).inverse :=
   (upperStarLowerStarAdjunction A f).leftAdjointUniq (sheafEquivalence A f).symm.toAdjunction
 
+omit [HasSmallSiteSheafify A] in
 /-- **Topological invariance of the small étale topos**, [Stacks 03SI]: the pullback along a
 universal homeomorphism `f : X ⟶ Y` is an equivalence between the category of `A`-valued
 sheaves on the small étale site of `Y` and that of `X`.
