@@ -8,7 +8,8 @@ module
 public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
 /-!
 # Finite group schemes over a field
@@ -23,13 +24,14 @@ points, insensitive to enlarging the base field.
 
 ## Main statements
 
-- `AlgebraicGeometry.finrankΓ_eq_pow_of_connected`: a connected finite flat group scheme over a
-  field of characteristic `p > 0` has order a power of `p`.
-- `AlgebraicGeometry.etale_of_not_dvd_finrankΓ`: a finite flat group scheme over an
-  algebraically closed field whose order is prime to the characteristic is étale.
-- `AlgebraicGeometry.card_points_of_isFinite_of_etale`: a finite étale group scheme over an
-  algebraically closed field `K` has exactly `|G|` points over `K`, and base change to any
-  algebraically closed extension `K'` is a bijection on points.
+- `AlgebraicGeometry.exists_finrankΓ_eq_pow`: a connected finite group scheme over a field of
+  characteristic `p > 0` has order a power of `p`.
+- `AlgebraicGeometry.etale_of_not_dvd_finrankΓ`: a finite group scheme whose order is prime to
+  the characteristic is étale.
+- `AlgebraicGeometry.card_points_eq_finrankΓ`: a finite étale group scheme over an algebraically
+  closed field `K` has exactly `|G|` points over `K`.
+- `AlgebraicGeometry.bijective_toUnit_comp`: base change of such a `G` to an algebraically
+  closed extension `K'` is a bijection on points.
 -/
 
 @[expose] public section
@@ -44,33 +46,40 @@ variable {K : Type u} [Field K]
 
 /-- Blueprint `sk-prop-av-connected-order`: Connected finite group schemes have `p`-power order
 
-Let `G` be a finite flat group scheme over a field `K` of characteristic `p > 0`. If `G` is
+Let `G` be a finite group scheme over a field `K` of characteristic `p > 0`. If `G` is
 connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`. -/
-theorem finrankΓ_eq_pow_of_connected (p : ℕ) [Fact p.Prime] [CharP K p]
-    (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [Flat G.hom] [ConnectedSpace G.left] :
+theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
+    (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [ConnectedSpace G.left] :
     ∃ r : ℕ, G.hom.finrankΓ = p ^ r :=
   sorry
 
 /-- Blueprint `sk-prop-av-prime-p-etale`: Group schemes of order prime to `p` are étale
 
-Let `G` be a finite flat group scheme over an algebraically closed field `K` of characteristic
-`p`, of order `m`. If `p = 0`, or if `p > 0` and `p ∤ m`, then `G` is étale over `K`. -/
-theorem etale_of_not_dvd_finrankΓ [IsAlgClosed K] (p : ℕ) [CharP K p]
-    (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [Flat G.hom]
-    (hp : p = 0 ∨ ¬ (p ∣ G.hom.finrankΓ)) :
+Let `G` be a finite group scheme over a field `K` of characteristic `p`, of order `m`. If
+`p ∤ m` — which for `p = 0` just says `m ≠ 0` — then `G` is étale over `K`. -/
+theorem etale_of_not_dvd_finrankΓ (p : ℕ) [CharP K p] (G : Over (Spec (.of K))) [GrpObj G]
+    [IsFinite G.hom] (hp : ¬ p ∣ G.hom.finrankΓ) :
     Etale G.hom :=
   sorry
 
 /-- Blueprint `sk-prop-av-finite-etale-points`: Points of finite étale group schemes
 
-Let `G` be a finite étale group scheme of order `m` over an algebraically closed field `K`, and
-let `K'` be an algebraically closed extension of `K`. Then `G` has exactly `m` points with
-values in `K`, and base change along `K ⊆ K'` is a bijection `G(K) ≃ G(K')`. -/
-theorem card_points_of_isFinite_of_etale [IsAlgClosed K] {K' : Type u} [Field K'] [Algebra K K']
+A finite étale group scheme `G` of order `m` over an algebraically closed field `K` has exactly
+`m` points with values in `K`. -/
+theorem card_points_eq_finrankΓ [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpObj G]
+    [IsFinite G.hom] [Etale G.hom] :
+    Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G) = G.hom.finrankΓ :=
+  sorry
+
+/-- Blueprint `sk-prop-av-finite-etale-points`: Points of finite étale group schemes
+
+Let `G` be a finite étale group scheme over an algebraically closed field `K` and let `K'` be an
+algebraically closed extension of `K`. Then base change along `K ⊆ K'`, that is precomposition
+with the structure morphism of `Spec K'` over `K`, is a bijection `G(K) ≃ G(K')`. -/
+theorem bijective_toUnit_comp [IsAlgClosed K] {K' : Type u} [Field K'] [Algebra K K']
     [IsAlgClosed K'] (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [Etale G.hom] :
-    Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G) = G.hom.finrankΓ ∧
-      Function.Bijective (fun s : 𝟙_ (Over (Spec (.of K))) ⟶ G =>
-        (toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫ s)) :=
+    Function.Bijective (fun s : 𝟙_ (Over (Spec (.of K))) ⟶ G ↦
+      toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K K')))) ≫ s) :=
   sorry
 
 end AlgebraicGeometry

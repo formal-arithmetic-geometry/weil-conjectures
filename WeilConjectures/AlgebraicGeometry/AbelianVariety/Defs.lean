@@ -5,84 +5,65 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Group.Abelian
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 
 /-!
-# Abelian varieties: the basic definitions
+# Abelian varieties
 
 Following Mathlib, a group scheme over a field `K` is an object `A` of `Over (Spec (.of K))`
-equipped with `CategoryTheory.GrpObj A`. This file introduces the notions attached to such an
-`A` that the abelian-variety block of the blueprint rests on: the order of a finite group
-scheme, abelian varieties themselves, the multiplication-by-`n` torsion subgroup scheme, and
-isogenies.
+equipped with `CategoryTheory.GrpObj A`. An *abelian variety* is such an `A` whose structure
+morphism is proper and smooth and whose underlying space is connected.
+
+The group structure is deliberately **not** a parameter of `AlgebraicGeometry.IsAbelianVariety`:
+were it one, `IsAbelianVariety A` would be a different proposition for each `GrpObj A` instance
+in scope. A declaration about abelian varieties therefore takes `[GrpObj A] [IsAbelianVariety A]`
+side by side.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Hom.finrankΓ`: the `R`-dimension of the global sections of a
-  scheme over `Spec R`. For a finite group scheme over a field this is its *order*.
-- `AlgebraicGeometry.IsAbelianVariety`: a group scheme over `K` which is proper, smooth and
-  connected.
-- `AlgebraicGeometry.torsionSubgroupScheme`: the `n`-torsion subgroup scheme `A[n]`.
-- `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite kernel.
-- `AlgebraicGeometry.isogenyDegree`: the degree of an isogeny, the order of its kernel.
+- `AlgebraicGeometry.IsAbelianVariety`: proper, smooth and connected over `K`.
+- `AlgebraicGeometry.IsAbelianVariety.dim`: the dimension of an abelian variety.
+
+## Main statements
+
+- `AlgebraicGeometry.IsAbelianVariety.topologicalKrullDim_eq`: the Krull dimension of an abelian
+  variety is the natural number `IsAbelianVariety.dim`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- The `R`-dimension of the ring of global sections of a scheme over `Spec R`.
-
-Blueprint `sk-def-av-group-scheme`: Group schemes, order, and étaleness. For a finite group
-scheme `G` over a field `K` this is the *order* `|G| = dim_K Γ(G, 𝒪_G)`. -/
-noncomputable def Scheme.Hom.finrankΓ {X : Scheme.{u}} {R : CommRingCat.{u}} (f : X ⟶ Spec R) :
-    ℕ :=
-  letI := f.ΓAlgebra
-  Module.finrank R Γ(X, ⊤)
-
 /-- Blueprint `sk-def-av`: Abelian varieties.
 
 An *abelian variety* over a field `K` is a group scheme over `K` which is proper, smooth and
-connected; its *dimension* is the Krull dimension of its underlying space. -/
-class IsAbelianVariety (A : Over (Spec (.of K))) [GrpObj A] : Prop where
-  isProper : IsProper A.hom
-  smooth : Smooth A.hom
-  connectedSpace : ConnectedSpace A.left
+connected; its *dimension* is `AlgebraicGeometry.IsAbelianVariety.dim`, the Krull dimension of
+its underlying space. -/
+class IsAbelianVariety (A : Over (Spec (.of K))) : Prop
+    extends IsProper A.hom, Smooth A.hom, ConnectedSpace A.left
 
-attribute [instance] IsAbelianVariety.isProper IsAbelianVariety.smooth
-  IsAbelianVariety.connectedSpace
+/-- Blueprint `sk-def-av-jacobian`: the dimension of an abelian variety, that is, the Krull
+dimension of its underlying topological space, as a natural number.
 
-/-- Blueprint `sk-def-av-mult-n`: Multiplication by `n` and `n`-torsion.
+`AlgebraicGeometry.IsAbelianVariety.topologicalKrullDim_eq` says that this really is the Krull
+dimension: an abelian variety is nonempty and finite-dimensional. -/
+noncomputable def IsAbelianVariety.dim (A : Over (Spec (.of K))) [IsAbelianVariety A] : ℕ :=
+  ((topologicalKrullDim A.left).unbotD 0).toNat
 
-The `n`-torsion subgroup scheme `A[n]` of a group scheme `A` over `K` is the kernel of the
-`n`-th power map `𝟙 A ^ n`, which on points is `a ↦ a + ⋯ + a`. -/
-noncomputable def torsionSubgroupScheme (A : Over (Spec (.of K))) [GrpObj A] (n : ℕ) :
-    Over (Spec (.of K)) :=
-  GrpObj.ker (𝟙 A ^ n)
-
-/-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
-
-An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphism with finite
-kernel. -/
-structure IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) : Prop where
-  isMonHom : IsMonHom f
-  surjective : Surjective f.left
-  isFinite_ker : IsFinite (GrpObj.ker f).hom
-
-/-- The degree of an isogeny `f : A ⟶ B`: the order of its kernel. -/
-noncomputable def isogenyDegree {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) :
-    ℕ :=
-  (GrpObj.ker f).hom.finrankΓ
+/-- The Krull dimension of an abelian variety is the natural number
+`AlgebraicGeometry.IsAbelianVariety.dim`: it is neither `⊥` (the variety is nonempty, having a
+unit section) nor `⊤` (it is of finite type over `K`). -/
+theorem IsAbelianVariety.topologicalKrullDim_eq (A : Over (Spec (.of K))) [IsAbelianVariety A] :
+    topologicalKrullDim A.left = (IsAbelianVariety.dim A : ℕ∞) :=
+  sorry
 
 end AlgebraicGeometry

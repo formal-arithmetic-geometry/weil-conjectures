@@ -21,8 +21,8 @@ automorphism that acts on étale cohomology in the Weil conjectures.
 
 ## Main statements
 
-- `FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_mul_frobeniusAlgEquivOfAlgebraic`: the
-  geometric and the arithmetic Frobenius are mutually inverse.
+- `FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv`: the geometric Frobenius is the
+  inverse of the arithmetic Frobenius. Both `σ⁻¹ * σ = 1` and `σ * σ⁻¹ = 1` follow by `simp`.
 -/
 
 @[expose] public section
@@ -35,12 +35,13 @@ variable (K L : Type*) [Field K] [Fintype K] [Field L] [Algebra K L] [Algebra.Is
 
 Fix a finite field `K` with `q` elements and an algebraic extension `L`. The *arithmetic
 Frobenius* is `σ : x ↦ x ^ q`; the *geometric Frobenius* is `F = σ⁻¹`. -/
+@[simps!]
 noncomputable def geometricFrobeniusAlgEquivOfAlgebraic : Gal(L/K) :=
   (frobeniusAlgEquivOfAlgebraic K L)⁻¹
 
-/-- The geometric Frobenius is inverse to the arithmetic Frobenius. -/
-theorem geometricFrobeniusAlgEquivOfAlgebraic_mul_frobeniusAlgEquivOfAlgebraic :
-    geometricFrobeniusAlgEquivOfAlgebraic K L * frobeniusAlgEquivOfAlgebraic K L = 1 :=
-  inv_mul_cancel _
+@[simp]
+theorem geometricFrobeniusAlgEquivOfAlgebraic_eq_inv :
+    geometricFrobeniusAlgEquivOfAlgebraic K L = (frobeniusAlgEquivOfAlgebraic K L)⁻¹ :=
+  rfl
 
 end FiniteField

@@ -6,24 +6,27 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Group.Abelian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
-public import WeilConjectures.AlgebraicGeometry.Modules.Ample
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
-# Basic properties of abelian varieties
+# Abelian varieties are geometrically integral, and commutative
 
 An abelian variety, defined as a proper smooth connected group scheme over a field, is
-automatically irreducible and geometrically integral, it is projective, and it carries a
-symmetric ample invertible module.
+automatically irreducible and geometrically integral; combined with Mathlib's
+`AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral` this makes it a
+commutative group scheme.
+
+The converse direction — a proper connected smooth group scheme is an abelian variety — is true
+by definition, so together the statements below say that abelian varieties and complete group
+varieties are the same thing.
 
 ## Main statements
 
-- `AlgebraicGeometry.geometricallyIntegral_of_isAbelianVariety`: abelian varieties are exactly
-  the complete group varieties.
-- `AlgebraicGeometry.exists_isClosedImmersion_projectiveSpace_of_isAbelianVariety`: abelian
-  varieties are projective.
-- `AlgebraicGeometry.isAmple_tensorObj_overPullback_inv`: `L ⊗ [-1]^* L` is ample and symmetric.
+- `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`: an abelian variety is
+  geometrically integral over the base field.
+- `AlgebraicGeometry.IsAbelianVariety.irreducibleSpace`: its underlying space is irreducible.
+- `AlgebraicGeometry.IsAbelianVariety.isCommMonObj`: an abelian variety is commutative.
 -/
 
 @[expose] public section
@@ -34,43 +37,38 @@ open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory MonObj
 
 namespace AlgebraicGeometry
 
-open Scheme.Modules
-
 variable {K : Type u} [Field K]
 
 /-- Blueprint `sk-prop-av-char`: Abelian varieties are the complete group varieties.
 
 Let `G` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
 is, an abelian variety in the sense of `AlgebraicGeometry.IsAbelianVariety`. Then `G` is
-irreducible and geometrically integral. Conversely every abelian variety is a proper connected
-smooth group scheme, by definition; hence "abelian variety" and "complete group variety"
-describe the same class. -/
-theorem geometricallyIntegral_of_isAbelianVariety (G : Over (Spec (.of K))) [GrpObj G]
-    [IsAbelianVariety G] :
-    IrreducibleSpace G.left ∧ GeometricallyIntegral G.hom :=
+geometrically integral over `K`: it has a rational point, the unit, so connectedness gives
+geometric connectedness, and smoothness gives geometric reducedness. -/
+instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpObj G]
+    [IsAbelianVariety G] : GeometricallyIntegral G.hom :=
   sorry
 
-/-- Blueprint `sk-prop-av-projective`: Abelian varieties are projective.
+/-- Blueprint `sk-prop-av-char`: Abelian varieties are the complete group varieties.
 
-Every abelian variety `A` over a field `K` is projective over `K`, that is, it admits a closed
-immersion into a projective space over `Spec K` compatible with the structure morphisms; in
-particular `A` carries an ample invertible `𝒪_A`-module. -/
-theorem exists_isClosedImmersion_projectiveSpace_of_isAbelianVariety (A : Over (Spec (.of K)))
-    [GrpObj A] [IsAbelianVariety A] :
-    (∃ (n : Type u) (_ : Finite n) (j : A.left ⟶ ℙ(n; Spec (.of K))),
-        IsClosedImmersion j ∧ j ≫ ℙ(n; Spec (.of K)) ↘ Spec (.of K) = A.hom) ∧
-      ∃ M : A.left.Modules, M.IsInvertible ∧ IsAmple A.hom M :=
-  sorry
+The underlying space of an abelian variety is irreducible, being geometrically irreducible over
+the one-point space `Spec K`. -/
+instance IsAbelianVariety.irreducibleSpace (G : Over (Spec (.of K))) [GrpObj G]
+    [IsAbelianVariety G] : IrreducibleSpace G.left :=
+  GeometricallyIrreducible.irreducibleSpace_of_subsingleton G.hom
 
-/-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module.
+/-- Blueprint `sk-cor-av-commutative`: Abelian varieties are commutative
 
-Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then
-`N := L ⊗ [-1]^* L` is ample and *symmetric*, that is `[-1]^* N ≅ N`. -/
-theorem isAmple_tensorObj_overPullback_inv (A : Over (Spec (.of K))) [GrpObj A]
-    [IsAbelianVariety A] (L : A.left.Modules) (hL : L.IsInvertible) (hample : IsAmple A.hom L) :
-    IsAmple A.hom (tensorObj L (overPullback ι[A] L)) ∧
-      Nonempty (overPullback ι[A] (tensorObj L (overPullback ι[A] L)) ≅
-        tensorObj L (overPullback ι[A] L)) :=
-  sorry
+Let `A` be an abelian variety over `K`. Then `m ∘ s = m`, where `s` is the swap of the two
+factors of `A ⊗ A`; that is, `A` is a commutative group object, and in particular `A(K)` is an
+abelian group.
+
+This is Mathlib's `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral` applied
+to `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. The blueprint instead deduces it
+from the rigidity lemma, which is recorded in
+`WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity`. -/
+instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
+    [IsAbelianVariety A] : IsCommMonObj A :=
+  isCommMonObj_of_isProper_of_geometricallyIntegral A
 
 end AlgebraicGeometry
