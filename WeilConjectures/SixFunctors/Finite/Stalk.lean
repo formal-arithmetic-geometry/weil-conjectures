@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSection
-public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 

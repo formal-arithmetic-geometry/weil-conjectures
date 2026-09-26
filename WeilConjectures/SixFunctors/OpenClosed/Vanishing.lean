@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Complement
 
 /-!
 # `j^* i_*` and `i^* j_!` vanish for morphisms with disjoint ranges
@@ -26,7 +26,7 @@ disjoint: the composite `j_! j^* F → F → i_* i^* F` is zero because already
 ## The argument
 
 Both statements are the ones of
-`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Complement`, where the second morphism
+`WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Complement`, where the second morphism
 was an open immersion too, and neither proof used that:
 
 - For `T` étale over `U`, the fibre product `T ×_X Z` is empty, because the ranges of `j` and

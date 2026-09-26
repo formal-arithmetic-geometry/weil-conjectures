@@ -30,6 +30,9 @@ produces its data: a partial section `m` of `ψ` whose composite `m ≫ ψ` is a
 immersion and whose range is the full inverse image of the range of `m ≫ ψ` exhibits
 `ψ` as an isomorphism over that range
 (`AlgebraicGeometry.isIso_morphismRestrict_opensRange_of_range_eq`).
+The `MorphismProperty.RespectsRight` instance for open immersions of schemes, and the
+emptiness of a fibre product over disjoint opens
+(`AlgebraicGeometry.isEmpty_pullback_of_disjoint_range`).
 -/
 
 @[expose] public section
@@ -220,5 +223,29 @@ lemma Scheme.isClosed_of_openCover {Q : Scheme.{u}} {κ : Type*} {Z : κ → Sch
     {s : Set Q} (hs : ∀ k, IsClosed ((q k).base ⁻¹' s)) : IsClosed s :=
   isClosed_of_isOpenEmbedding_cover (fun k ↦ (q k).base)
     (fun k ↦ (q k).isOpenEmbedding) hcov hs
+/-! ### Fibre products over disjoint opens -/
+
+section DisjointRange
+
+
+variable {U X : Scheme.{u}}
+
+set_option backward.isDefEq.respectTransparency false in
+/-- If `j` is an open immersion whose range is disjoint from the range of `f`, the fibre
+product `V ×_X U` is empty. -/
+lemma isEmpty_pullback_of_disjoint_range {V : Scheme.{u}} (f : V ⟶ X) (j : U ⟶ X)
+    [IsOpenImmersion j] (h : Set.range f.base ∩ Set.range j.base = ∅) :
+    IsEmpty ↥(Limits.pullback f j) := by
+  have hr : Set.range (Limits.pullback.fst f j).base = ∅ := by
+    rw [IsOpenImmersion.range_pullbackFst]
+    ext x
+    simp only [Set.mem_empty_iff_false, iff_false]
+    intro hx
+    have hmem : f.base x ∈ Set.range f.base ∩ Set.range j.base := ⟨⟨x, rfl⟩, hx⟩
+    rw [h] at hmem
+    exact hmem
+  exact Set.range_eq_empty_iff.mp hr
+
+end DisjointRange
 
 end AlgebraicGeometry

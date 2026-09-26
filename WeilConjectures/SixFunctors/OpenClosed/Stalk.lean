@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 

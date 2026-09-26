@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.ConstructibleSheaf.Pullback
-public import WeilConjectures.SixFunctors.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Descent of locally constant sheaves along universal homeomorphisms

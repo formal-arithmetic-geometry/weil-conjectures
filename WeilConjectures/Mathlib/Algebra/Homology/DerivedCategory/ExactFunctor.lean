@@ -70,6 +70,9 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
   [Abelian C] [Abelian D] [Abelian E]
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
 
+@[inherit_doc mapDerivedCategory]
+scoped notation "D(" F ")" => mapDerivedCategory F
+
 /-- An isomorphism `F ≅ G` of exact functors between abelian categories induces an
 isomorphism `F.mapDerivedCategory ≅ G.mapDerivedCategory` of the functors induced on
 derived categories, compatibly with the localization functors. -/
@@ -284,6 +287,9 @@ noncomputable def mapDerivedCategoryPlus :
     (DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory) (by
       rintro ⟨X, n, hn⟩
       exact ⟨n, F.isGE_mapDerivedCategory_obj X n⟩)
+
+@[inherit_doc mapDerivedCategoryPlus]
+scoped notation "D+(" F ")" => mapDerivedCategoryPlus F
 
 /-- The restriction `F.mapDerivedCategoryPlus` of `F.mapDerivedCategory` to the bounded
 below derived categories is compatible with the inclusions. -/

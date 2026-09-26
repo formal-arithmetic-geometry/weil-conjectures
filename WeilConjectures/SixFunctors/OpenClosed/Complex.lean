@@ -72,7 +72,10 @@ open Etale
 `Etale.openImmersionRestriction`. -/
 instance Etale.isIso_openImmersionLowerShriekUpperStarAdjunction_unit :
     IsIso (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit := by
-  rw [Etale.openImmersionLowerShriekUpperStarAdjunction, Adjunction.ofNatIsoRight_unit]
+  have h : (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit =
+      ((Etale.openImmersionLowerShriekAdjunction A j).ofNatIsoRight
+        (Etale.upperStarIsoOpenImmersionRestriction A j).symm).unit := rfl
+  rw [h, Adjunction.ofNatIsoRight_unit]
   infer_instance
 
 /-- `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf `G` on `X`. This is

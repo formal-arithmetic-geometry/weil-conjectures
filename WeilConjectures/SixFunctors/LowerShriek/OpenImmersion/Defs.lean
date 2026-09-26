@@ -63,7 +63,7 @@ the restriction functor `j_f^*`.
 When `f` is an open immersion (in particular a monomorphism), `j_{f!}` is the *extension by
 zero* functor. It is then fully faithful; for the small étale sites this is
 `AlgebraicGeometry.Etale.fullyFaithfulOpenImmersionLowerShriek` in
-`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.FullyFaithful`, proved from
+`WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful`, proved from
 `localizationAdjunctionTriple` above.
 -/
 
@@ -282,7 +282,7 @@ include hQP in
 /-- `j_{f!}` is a left adjoint. Not an instance, since its statement does not determine
 the inequality `hQP : Q ≤ P` entering the adjunction `j_{f!} ⊣ j_f^*`; for the small
 étale sites the corresponding instance is registered in
-`WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Etale`. -/
+`WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs`. -/
 lemma isLeftAdjoint_localizationLowerShriek : (localizationLowerShriek A P Q f h).IsLeftAdjoint :=
   (localizationLowerShriekAdjunction A P Q hQP f h).isLeftAdjoint
 

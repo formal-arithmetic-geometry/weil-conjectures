@@ -47,7 +47,6 @@ section Zero
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
 
-omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- A zero sheaf is constant. -/
 lemma _root_.CategoryTheory.Sheaf.IsConstant.of_isZero {F : Sheaf X.smallEtaleTopology A}
     (hF : IsZero F) : F.IsConstant X.smallEtaleTopology :=

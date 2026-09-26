@@ -181,7 +181,7 @@ include hQP in
 /-- `g^*` is a left adjoint. Not an instance, since its statement does not determine the
 inequality `hQP : Q ≤ P` entering the adjunction `g^* ⊣ g_*`; for the small étale sites
 the corresponding instance is registered in
-`WeilConjectures.SixFunctors.UpperLowerStar.Etale`. -/
+`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence`. -/
 lemma isLeftAdjoint_upperStar : (upperStar A P Q g).IsLeftAdjoint :=
   (upperStarLowerStarAdjunction A P Q hQP g).isLeftAdjoint
 

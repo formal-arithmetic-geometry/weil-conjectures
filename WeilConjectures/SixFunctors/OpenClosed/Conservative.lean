@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.SixFunctors.OpenClosed.Points
-public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 

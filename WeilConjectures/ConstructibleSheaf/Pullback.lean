@@ -9,7 +9,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.UpperLowerStar.Stalk
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Pullback stability of constructible sheaves
@@ -95,7 +95,6 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
   inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- Locally constant sheaves are invariant under isomorphism. -/
 lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf F' := by

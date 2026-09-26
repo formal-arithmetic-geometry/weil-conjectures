@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Square
-public import WeilConjectures.SixFunctors.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 
 /-!

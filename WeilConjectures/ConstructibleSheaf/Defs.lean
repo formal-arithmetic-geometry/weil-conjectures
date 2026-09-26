@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.SixFunctors.UpperLowerStar.Etale
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Topology.Stratification
 
 /-!
@@ -54,28 +54,28 @@ the `ℓ`-adic formalism, where `Λ` is the finite ring `Λₙ = ℤ/ℓⁿℤ`.
 To restrict `F` to an étale `U ⟶ X` we use the localized site: `F.over U` is the sheaf
 induced by `F` on the localization of the small étale site at `U`, which is equivalent to
 the small étale site of `U`. To restrict `F` to a stratum we use the pullback
-`AlgebraicGeometry.Etale.upperStar` of `WeilConjectures.SixFunctors.UpperLowerStar.Etale`
+`AlgebraicGeometry.Etale.upperStar` of `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`
 along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale.lowerStar`.
 
 ## Implementation notes
 
 - The pullback `Etale.upperStar` is defined by left Kan extension along base change
-  followed by sheafification. The Kan extensions in question exist for an arbitrary `f`
-  without any smallness of the full small étale site, by the instance
-  `CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
-  `WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`: the indexing comma
-  categories have objects in `Type (u + 1)` and `Hom`-types in `Type u`, and `A` has all
-  colimits of size `u + 1`.
-- Sheafification is not assumed separately here. Restricting a sheaf to a member of an
-  étale cover needs it for the *localizations* of the small étale sites, and for `A` with
-  small-site sheafification these are supplied by the instances
-  `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallGrothendieckTopology` and
+  followed by sheafification, and the Kan extensions in question are not known to exist
+  for an arbitrary `f` with current mathlib: the full small étale site is not known to be
+  essentially small (only the small affine étale site
+  `AlgebraicGeometry.Scheme.AffineEtale` is). Mathematically they always exist; they are
+  provided by the sorried instance
+  `AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback` of
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
+- Sheafification is likewise not assumed here. Restricting a sheaf to a member of an étale
+  cover needs it for the *localizations* of the small étale sites, and for a Grothendieck
+  abelian `A` it is supplied by the instance
   `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallEtaleTopology` of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, a slice of a site
-  with objects in `Type (u + 1)` and `Hom`-types in `Type u` being again such a site. This
-  replaces what used to be a `HasWeakSheafify` hypothesis quantified over all schemes and
-  all étale `U`, the quantification being forced by the existential quantifier over
-  stratifications.
+  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, a slice of an
+  essentially small site being again essentially small; it is a case of the sorried
+  `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there. This replaces
+  what used to be a `HasWeakSheafify` hypothesis quantified over all schemes and all étale `U`, the
+  quantification being forced by the existential quantifier over stratifications.
 - Similarly, `CategoryTheory.Sheaf.IsConstant.isLocallyConstantSheaf` assumes the
   existence of the right Kan extensions along `(Over.forget U).op` needed to compare
   sheafification on the small étale site with sheafification on its localizations.
@@ -147,7 +147,6 @@ abelian groups (`A = Ab.{u + 1}`), of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`),
 class IsLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   nonempty_locallyConstantDatum : Nonempty (LocallyConstantDatum F)
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- A constant sheaf on the small étale site is locally constant, trivialized by the
 identity cover. The right Kan extension hypothesis compares sheafification on the small
 étale site with sheafification on its localizations; it always holds mathematically, see
@@ -232,9 +231,9 @@ The stratification records a choice of scheme structure on each stratum via the 
 condition does not depend on this choice.
 
 The left Kan extensions along base change needed by the pullback `Etale.upperStar` are
-provided by the instance
-`CategoryTheory.MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback` of
-`WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`. Stating
+provided by the sorried instance
+`AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`. Stating
 `IsFiniteLocallyConstantSheaf` needs sheafification for the localizations of the small
 étale sites of the strata; since the stratification is existentially quantified, this has
 to be available for all schemes, which is what the hypothesis
