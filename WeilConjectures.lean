@@ -151,6 +151,12 @@ public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
+public import WeilConjectures.FourierTransform.AffineSpace
+public import WeilConjectures.FourierTransform.ArtinSchreier
+public import WeilConjectures.FourierTransform.Defs
+public import WeilConjectures.FourierTransform.Inversion
+public import WeilConjectures.FourierTransform.Properties
+public import WeilConjectures.FourierTransform.TraceFunction
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
 public import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
@@ -424,6 +430,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conser
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.TateTwist
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
