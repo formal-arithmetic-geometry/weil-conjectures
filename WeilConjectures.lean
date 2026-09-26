@@ -6,6 +6,15 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
+public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.AlgebraicGeometry.DensePoints
+public import WeilConjectures.AlgebraicGeometry.Descent
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.Operations
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
@@ -17,6 +26,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+public import WeilConjectures.AlgebraicGeometry.Picard.Representability
+public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
@@ -109,6 +123,8 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.CechToDerived
+public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
@@ -232,6 +248,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.Retract
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientThree
 public import WeilConjectures.FromJoel.CategoryTheory.QuotientTwo
 public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
@@ -351,6 +368,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
@@ -394,6 +412,7 @@ public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
+public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 public import WeilConjectures.Mathlib.Topology.Constructions
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.Sober
