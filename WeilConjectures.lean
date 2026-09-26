@@ -113,6 +113,7 @@ public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.BoundaryPreparation
+public import WeilConjectures.Compactification.Category
 public import WeilConjectures.Compactification.CommonModification
 public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.Constructions
@@ -130,6 +131,8 @@ public import WeilConjectures.Compactification.IsomorphismNearClosure
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.ProjectiveSpace
+public import WeilConjectures.Compactification.ProperTargetExtension
+public import WeilConjectures.Compactification.QuasiDomination
 public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.Compactification.RefinementUniqueness
