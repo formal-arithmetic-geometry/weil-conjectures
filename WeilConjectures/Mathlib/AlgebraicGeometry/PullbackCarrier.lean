@@ -5,20 +5,28 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Gluing
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Pullback squares of schemes along open immersions
 
 In a pullback square of schemes whose bottom is an open immersion, the top is an open
 immersion with range the preimage of the range of the bottom.
+
+We also show that being a cartesian square is local on the target
+(`AlgebraicGeometry.isPullback_of_iSup_opensRange_eq_top`, with the two-chart version
+`AlgebraicGeometry.isPullback_of_opensRange_sup_eq_top`), and that the intersection of the
+preimages of two affine opens in a pullback over an affine scheme is affine
+(`AlgebraicGeometry.isAffineOpen_preimage_inf_preimage_pullback`).
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
@@ -48,5 +56,110 @@ lemma _root_.CategoryTheory.IsPullback.opensRange_fst [IsOpenImmersion g]
     have e : h.isoPullback.inv ≫ fst = Limits.pullback.fst f g := by
       rw [Iso.inv_comp_eq, h.isoPullback_hom_fst]
     exact ⟨h.isoPullback.inv p, by rw [← Scheme.Hom.comp_apply, e]; exact hp⟩
+
+section IsPullbackLocal
+
+/-- **Being a cartesian square is local on the target.** If `Y` is covered by the images of
+open immersions `mₐ : Yₐ ⟶ Y`, if `Xₐ ⟶ X` is the base change of `mₐ` along `h : X ⟶ Y`, and if
+every square `Xₐ ⟶ Yₐ` over `S ⟶ T` is cartesian, then the square `X ⟶ Y` over `S ⟶ T` is
+cartesian. -/
+lemma isPullback_of_iSup_opensRange_eq_top {X Y S T : Scheme.{u}} {h : X ⟶ Y} {g : X ⟶ S}
+    {p : Y ⟶ T} {π : S ⟶ T} (w : h ≫ p = g ≫ π)
+    {ι : Type*} {Ya Xa : ι → Scheme.{u}} {m : ∀ a, Ya a ⟶ Y} {n : ∀ a, Xa a ⟶ X}
+    {k : ∀ a, Xa a ⟶ Ya a} [∀ a, IsOpenImmersion (m a)]
+    (hm : ⨆ a, (m a).opensRange = ⊤)
+    (hchart : ∀ a, IsPullback (k a) (n a) (m a) h)
+    (H : ∀ a, IsPullback (k a) (n a ≫ g) (m a ≫ p) π) :
+    IsPullback h g p π := by
+  set q : X ⟶ pullback p π := pullback.lift h g w with hq
+  have hq₁ : q ≫ pullback.fst p π = h := pullback.lift_fst ..
+  have hq₂ : q ≫ pullback.snd p π = g := pullback.lift_snd ..
+  suffices hiso : IsIso q from IsPullback.of_iso_pullback ⟨w⟩ (asIso q) hq₁ hq₂
+  set μ : ∀ a, pullback (m a ≫ p) π ⟶ pullback p π := fun a ↦
+    pullback.map (m a ≫ p) π p π (m a) (𝟙 S) (𝟙 T) (by simp) (by simp) with hμdef
+  have hμ : ∀ a, IsPullback (pullback.fst (m a ≫ p) π) (μ a) (m a) (pullback.fst p π) :=
+    fun a ↦ isPullback_pullback_map_left (m a) p π
+  have : ∀ a, IsOpenImmersion (μ a) := fun a ↦
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion) (hμ a) inferInstance
+  -- the square `Xₐ ⟶ Yₐ ×_T S` over `X ⟶ Y ×_T S` is cartesian
+  have key : ∀ a, IsPullback ((H a).isoPullback.hom) (n a) (μ a) q := by
+    intro a
+    refine IsPullback.of_right ?_ ?_ (hμ a)
+    · rw [show (H a).isoPullback.hom ≫ pullback.fst (m a ≫ p) π = k a from
+        IsPullback.isoPullback_hom_fst _, hq₁]
+      exact hchart a
+    · have h1 : (H a).isoPullback.hom ≫ pullback.fst (m a ≫ p) π = k a :=
+        IsPullback.isoPullback_hom_fst _
+      have h2 : (H a).isoPullback.hom ≫ pullback.snd (m a ≫ p) π = n a ≫ g :=
+        IsPullback.isoPullback_hom_snd _
+      apply pullback.hom_ext
+      · have : μ a ≫ pullback.fst p π = pullback.fst (m a ≫ p) π ≫ m a := by simp [hμdef]
+        rw [Category.assoc, this, ← Category.assoc, h1, (hchart a).w, Category.assoc, hq₁]
+      · have : μ a ≫ pullback.snd p π = pullback.snd (m a ≫ p) π := by simp [hμdef]
+        rw [Category.assoc, this, h2, Category.assoc, hq₂]
+  let 𝒰 : (pullback p π).OpenCover :=
+    Scheme.Cover.mkOfCovers ι _ μ (fun x ↦ by
+      have hx : pullback.fst p π x ∈ (⨆ a, (m a).opensRange) := by rw [hm]; trivial
+      obtain ⟨a, ⟨y, hy⟩⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+      obtain ⟨z, -, hz⟩ := Scheme.exists_preimage_of_isPullback (hμ a) y x hy
+      exact ⟨a, z, hz⟩)
+  rw [← MorphismProperty.isomorphisms.iff]
+  refine IsZariskiLocalAtTarget.of_openCover 𝒰 fun a ↦ ?_
+  rw [MorphismProperty.isomorphisms.iff]
+  change IsIso (pullback.snd q (μ a))
+  rw [show pullback.snd q (μ a) = (key a).flip.isoPullback.inv ≫ (H a).isoPullback.hom by
+    rw [Iso.eq_inv_comp]
+    exact IsPullback.isoPullback_hom_snd _]
+  infer_instance
+
+/-- **Being a cartesian square is local on the target**, two-chart version. -/
+lemma isPullback_of_opensRange_sup_eq_top {X Y S T : Scheme.{u}} {h : X ⟶ Y} {g : X ⟶ S}
+    {p : Y ⟶ T} {π : S ⟶ T} (w : h ≫ p = g ≫ π) {Y₁ Y₂ X₁ X₂ : Scheme.{u}}
+    (m₁ : Y₁ ⟶ Y) (m₂ : Y₂ ⟶ Y) [IsOpenImmersion m₁] [IsOpenImmersion m₂]
+    {n₁ : X₁ ⟶ X} {n₂ : X₂ ⟶ X} {k₁ : X₁ ⟶ Y₁} {k₂ : X₂ ⟶ Y₂}
+    (hm : m₁.opensRange ⊔ m₂.opensRange = ⊤)
+    (hchart₁ : IsPullback k₁ n₁ m₁ h) (hchart₂ : IsPullback k₂ n₂ m₂ h)
+    (H₁ : IsPullback k₁ (n₁ ≫ g) (m₁ ≫ p) π) (H₂ : IsPullback k₂ (n₂ ≫ g) (m₂ ≫ p) π) :
+    IsPullback h g p π := by
+  have : ∀ b : Bool, IsOpenImmersion (Bool.rec (motive := fun b ↦ (cond b Y₁ Y₂) ⟶ Y) m₂ m₁ b) :=
+    fun b ↦ by cases b <;> assumption
+  refine isPullback_of_iSup_opensRange_eq_top w (ι := Bool) (Ya := fun b ↦ cond b Y₁ Y₂)
+    (Xa := fun b ↦ cond b X₁ X₂)
+    (m := fun b ↦ Bool.rec (motive := fun b ↦ (cond b Y₁ Y₂) ⟶ Y) m₂ m₁ b)
+    (n := fun b ↦ Bool.rec (motive := fun b ↦ (cond b X₁ X₂) ⟶ X) n₂ n₁ b)
+    (k := fun b ↦ Bool.rec (motive := fun b ↦ (cond b X₁ X₂) ⟶ (cond b Y₁ Y₂)) k₂ k₁ b)
+    ?_ ?_ ?_
+  · rw [iSup_bool_eq]
+    exact hm
+  · intro b; cases b
+    · exact hchart₂
+    · exact hchart₁
+  · intro b; cases b
+    · exact H₂
+    · exact H₁
+
+end IsPullbackLocal
+
+/-- If `A` is an affine open of `X` and `B` is an affine open of `Y`, then the intersection of
+their preimages in `X ×[T] Y` is an affine open, provided `T` is affine. -/
+lemma isAffineOpen_preimage_inf_preimage_pullback {X Y T : Scheme.{u}} [IsAffine T]
+    (f : X ⟶ T) (g : Y ⟶ T) {A : X.Opens} {B : Y.Opens} (hA : IsAffineOpen A)
+    (hB : IsAffineOpen B) :
+    IsAffineOpen (pullback.fst f g ⁻¹ᵁ A ⊓ pullback.snd f g ⁻¹ᵁ B) := by
+  have : IsAffine A.toScheme := hA
+  have : IsAffine B.toScheme := hB
+  obtain ⟨m, hm₁, hm₂⟩ : ∃ m : pullback (A.ι ≫ f) (B.ι ≫ g) ⟶ pullback f g,
+      IsOpenImmersion m ∧ Set.range m =
+        pullback.fst f g ⁻¹' (A : Set X) ∩ pullback.snd f g ⁻¹' (B : Set Y) := by
+    refine ⟨pullback.map (A.ι ≫ f) (B.ι ≫ g) f g A.ι B.ι (𝟙 _) (by simp) (by simp), ?_, ?_⟩
+    · exact MorphismProperty.pullbackMap (P := @IsOpenImmersion) inferInstance inferInstance
+        rfl rfl
+    · rw [Scheme.Pullback.range_map]
+      simp
+  have := hm₁
+  have hr : pullback.fst f g ⁻¹ᵁ A ⊓ pullback.snd f g ⁻¹ᵁ B = m.opensRange :=
+    TopologicalSpace.Opens.ext (by rw [Scheme.Hom.coe_opensRange, hm₂]; rfl)
+  rw [hr]
+  exact isAffineOpen_opensRange _
 
 end AlgebraicGeometry

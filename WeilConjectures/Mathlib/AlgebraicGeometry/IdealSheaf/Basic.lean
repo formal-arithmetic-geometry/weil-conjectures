@@ -19,6 +19,9 @@ an ideal sheaf is contained in the kernel of a morphism from a reduced scheme if
 if the range of the morphism lies in its support; and
 `AlgebraicGeometry.Scheme.IdealSheafData.coe_support_sup`, the set-level form of
 `support_sup`.
+
+Finally we record the monotonicity of the product of ideal sheaves, its distributivity over
+suprema and the containment of the support of a power in the support.
 -/
 
 @[expose] public section
@@ -53,5 +56,22 @@ set-level form of `support_sup`. -/
 lemma coe_support_sup (I₁ I₂ : X.IdealSheafData) :
     ((I₁ ⊔ I₂).support : Set X) = (I₁.support : Set X) ∩ (I₂.support : Set X) := by
   rw [support_sup, TopologicalSpace.Closeds.coe_inf]
+
+/-- The product of quasi-coherent ideal sheaves is monotone in both arguments. -/
+lemma mul_mono {I₁ I₂ J₁ J₂ : X.IdealSheafData} (hI : I₁ ≤ I₂) (hJ : J₁ ≤ J₂) :
+    I₁ * J₁ ≤ I₂ * J₂ :=
+  fun U ↦ Ideal.mul_mono (hI U) (hJ U)
+
+/-- The product of quasi-coherent ideal sheaves distributes over suprema. -/
+lemma iSup_mul {ι : Type*} (I : ι → X.IdealSheafData) (J : X.IdealSheafData) :
+    (⨆ i, I i) * J = ⨆ i, I i * J :=
+  Scheme.IdealSheafData.ext <| funext fun U ↦ by
+    simp only [ideal_mul, Pi.mul_apply, ideal_iSup, iSup_apply, Submodule.iSup_mul]
+
+/-- The support of a power of a quasi-coherent ideal sheaf is contained in its support. -/
+lemma support_pow_le {I : X.IdealSheafData} (n : ℕ) : (I ^ n).support ≤ I.support := by
+  cases n with
+  | zero => simp
+  | succ n => simp
 
 end AlgebraicGeometry.Scheme.IdealSheafData

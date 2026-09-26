@@ -10,6 +10,7 @@ public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.PolynomialPresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 
@@ -101,7 +102,7 @@ theorem isClosedImmersion_toProjectiveSpace :
 identifications of `A` with the degree-zero parts of `A[T]` and of `𝓡_A(I)`. -/
 lemma gradeZeroRingHom_reesGradedPresentation_comp :
     (reesGradedPresentation f hf).gradeZeroRingHom.comp
-        (MvPolynomial.homogeneousSubmoduleZeroEquiv σ A).toRingHom =
+        (MvPolynomial.homogeneousSubmoduleZeroEquiv (σ := σ) (R := A)).toRingHom =
       (reesGradingZero I).toRingHom :=
   RingHom.ext fun a ↦ Subtype.ext <| Subtype.ext <| by simp
 

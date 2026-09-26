@@ -58,23 +58,11 @@ section DenseRefinement
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The **scheme-theoretically dense refinement** of a compactification of a
-quasi-compact morphism: replace the ambient scheme by the scheme-theoretic image of
-the open immersion. The refined open immersion is the factor map `c.i.toImage`, an
-open immersion because `c.i` is a quasi-compact immersion; the refined proper
-morphism is the composite of the image closed immersion with `c.g`. The original
-factorization triangle refines as
+quasi-compact morphism (blueprint: `def:nagata-dense-refinement`).
 
-```
-X --c.i.toImage--> c.i.image --c.i.imageι--> c.Z
- \                     |                     /
-  \                    |                    /
-   f            c.i.imageι ≫ c.g        c.g
-    \                  |                 /
-     \                 ↓                /
-      *--------------> Y <-------------*
-```
-
-(Blueprint: `def:nagata-dense-refinement`.) -/
+The refined open immersion is the factor map `c.i.toImage`, an open immersion because
+`c.i` is a quasi-compact immersion; the refined proper morphism is the composite of the
+image closed immersion with `c.g`. -/
 def Compactification.denseRefinement (c : Compactification f) [QuasiCompact f] :
     Compactification f where
   Z := c.i.image
@@ -99,10 +87,9 @@ theorem Compactification.isSchemeTheoreticallyDominant_denseRefinement_i
 
 /-- **Choice of dense compactifications** (blueprint:
 `def:nagata-two-open-dense-compactifications`,
-`lemma:nagata-two-open-dense-compactifications`; proof order item 34): every
-compactifiable quasi-compact morphism admits a compactification whose open immersion
-is scheme-theoretically dominant, namely the dense refinement of any chosen
-compactification. -/
+`lemma:nagata-two-open-dense-compactifications`; proof order item 34).
+
+The compactification produced is the dense refinement of any chosen compactification. -/
 theorem exists_compactification_isSchemeTheoreticallyDominant
     (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] :
     ∃ c : Compactification f, IsSchemeTheoreticallyDominant c.i :=
@@ -138,22 +125,17 @@ theorem IsAdmissible.closure_preimage_subset_range_strictTransformMap
   exact hT htT
 
 /-- **The constructible-boundary separation blow-up** (Stacks Project Tags 080P and
-0F3V): let `X` be qcqs, `U ⊆ X` a quasi-compact open, and let `T₁`, `T₂` be disjoint
-closed subsets of `U` with quasi-compact complements (i.e. constructible closed
-subsets of `U`). Then there is a `U`-admissible blow-up of `X` in which the closures
-of the inverse images of `T₁` and `T₂` are disjoint.
+0F3V; blueprint: `def:nagata-separate-constructible-closed`,
+`lemma:nagata-separate-constructible-closed`,
+`def:nagata-two-open-prepared-boundaries`, `lemma:nagata-prepared-boundaries`;
+proof order item 36).
 
 The blow-up is the boundary-separation blow-up of the sum of two finite-type ideals
 `I₁`, `I₂` extending the vanishing ideals of `T₁`, `T₂` from `U` (Stacks Tags 01PH
 and 01PF, `Scheme.IdealSheafData.exists_finiteType_preimage_coe_support_eq`); the
 closure of the inverse image of `Tᵢ` is contained in the strict transform of `V(Iᵢ)`
 (`IsAdmissible.closure_preimage_subset_range_strictTransformMap`), and these strict
-transforms are
-disjoint by `disjoint_range_strictTransformMap_sup`.
-(Blueprint: `def:nagata-separate-constructible-closed`,
-`lemma:nagata-separate-constructible-closed`,
-`def:nagata-two-open-prepared-boundaries`, `lemma:nagata-prepared-boundaries`;
-proof order item 36.) -/
+transforms are disjoint by `disjoint_range_strictTransformMap_sup`. -/
 theorem exists_admissibleBlowup_disjoint_closures
     [CompactSpace X] [QuasiSeparatedSpace X] (hU : IsCompact (U : Set X))
     {T₁ T₂ : Set U.toScheme} (hT₁ : IsClosed T₁) (hT₂ : IsClosed T₂)

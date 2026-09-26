@@ -588,13 +588,11 @@ theorem UniversallyClosed.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u
     (H : ValuativeCriterion.RelativeTo f h) : UniversallyClosed f :=
   UniversallyClosed.of_valuativeCriterion _ H.existence_of_isDominant
 
-/-- **The dense-source valuative criterion, separatedness** (Stacks Project Tag 0894): a
-quasi-separated morphism satisfying the valuative criterion relative to a quasi-compact
-dominant `h : U ⟶ X` is separated.
+/-- **The dense-source valuative criterion, separatedness** (Stacks Project Tag 0894;
+blueprint: `lemma:nagata-dense-source-valuative`).
 
 The uniqueness half of the hypothesis makes the diagonal satisfy the dense-source criterion
-for universal closedness, and a universally closed immersion is a closed immersion.
-(Blueprint: `lemma:nagata-dense-source-valuative`.) -/
+for universal closedness, and a universally closed immersion is a closed immersion. -/
 @[stacks 0894]
 theorem IsSeparated.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)
     [QuasiSeparated f] (h : U ⟶ X) [QuasiCompact h] [IsDominant h]

@@ -102,7 +102,8 @@ def Proj.projectiveSpaceOverAffine : Scheme.{u} :=
 /-- The structure morphism `ℙ^σ_A ⟶ Spec A` of the projective space over an affine base. -/
 def Proj.projectiveSpaceOverAffineToSpec : Proj.projectiveSpaceOverAffine σ A ⟶ Spec (.of A) :=
   Proj.toSpecZero (MvPolynomial.homogeneousSubmodule σ A) ≫
-    Spec.map (CommRingCat.ofHom (MvPolynomial.homogeneousSubmoduleZeroEquiv σ A).toRingHom)
+    Spec.map (CommRingCat.ofHom
+    (MvPolynomial.homogeneousSubmoduleZeroEquiv (σ := σ) (R := A)).toRingHom)
 
 /-- **Projective space over an affine base is proper**: for a finite index type `σ`, the
 structure morphism `ℙ^σ_A ⟶ Spec A` is proper. -/

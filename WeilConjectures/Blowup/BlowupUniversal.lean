@@ -458,6 +458,14 @@ theorem Scheme.IdealSheafData.comap_mul (f : Y ⟶ X) (I J : X.IdealSheafData) :
       Ideal.map_mul, Scheme.IdealSheafData.ideal_comap_appLE I f V W hle,
       Scheme.IdealSheafData.ideal_comap_appLE J f V W hle]
 
+/-- **Inverse images of ideal sheaves commute with powers** (for arbitrary
+morphisms), by induction from `Scheme.IdealSheafData.comap_mul`. -/
+theorem Scheme.IdealSheafData.comap_pow (f : Y ⟶ X) (I : X.IdealSheafData) (n : ℕ) :
+    (I ^ n).comap f = I.comap f ^ n := by
+  induction n with
+  | zero => simp [Scheme.IdealSheafData.comap_top]
+  | succ n ih => rw [pow_succ, pow_succ, Scheme.IdealSheafData.comap_mul, ih]
+
 end ComapAffineLocality
 
 section InvertibleKit
@@ -471,7 +479,6 @@ blow-up maps. -/
 variable {Y : Scheme.{u}}
 
 namespace Scheme.IdealSheafData.IsInvertible
-
 /-- A span-nonzerodivisor presentation of an ideal sheaf on an affine open restricts to
 a span-nonzerodivisor presentation on any of its affine basic opens. -/
 theorem presentation_restrict_basicOpen {K : Y.IdealSheafData} {U : Y.affineOpens}
