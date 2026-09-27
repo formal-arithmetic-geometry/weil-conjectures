@@ -433,4 +433,14 @@ lemma AffineSpace.homOfVector_coord_comp_map {σ : Type u} {S T Z : Scheme.{u}} 
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
       AffineSpace.homOfVector_appTop_coord]
 
+/-- The zero section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
+whose coordinates are `0`. -/
+noncomputable def AffineSpace.zeroSection (n : Type u) (S : Scheme.{u}) : S ⟶ 𝔸(n; S) :=
+  AffineSpace.homOfVector (𝟙 S) 0
+
+@[simp]
+lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
+    AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
+  AffineSpace.homOfVector_over _ _
+
 end AlgebraicGeometry
