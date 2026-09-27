@@ -555,10 +555,10 @@ end Etale
 
 The comparison `ρ`, its identity law and its composition law depend, beyond the three
 standard axioms `propext`, `Classical.choice` and `Quot.sound`, on `sorryAx`, which enters
-through the sorried sheafification and left-Kan-extension instances of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify` and
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`; the checks below
-are run by the build.
+through the sorried sheafification instance
+`CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`; the checks below are run
+by the build.
 -/
 
 /--
