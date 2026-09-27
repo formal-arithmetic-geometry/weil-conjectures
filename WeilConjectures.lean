@@ -17,6 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
@@ -148,18 +149,6 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.Convergence
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Finiteness
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Kunneth
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Main
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Operations
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Perfect
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Setting
-public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Weil
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
@@ -335,10 +324,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPu
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
@@ -454,6 +443,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Exact
 public import WeilConjectures.SixFunctors.OpenClosed.Points
 public import WeilConjectures.SixFunctors.OpenClosed.Stalk
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek

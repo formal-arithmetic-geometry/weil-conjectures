@@ -16,7 +16,7 @@ The six operations on the small pro-étale site are already available: `Lg^*` an
 (`WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar`), `Rf_!` and `Rf^!`
 (`…Derived.LowerShriek`, `…Derived.UpperShriek`), `- ⊗ᴸ -` and `RHom(-, -)`
 (`…Derived.Tensor`, `…Derived.Hom`), together with `RΓ(X, -)` and `RΓ_c(X/Y, -)`. This file
-adds the three objects the duality chapter builds out of them: the dualizing complex
+adds the three objects the duality theory builds out of them: the dualizing complex
 `ω_{X,Λ} = Ra_X^! Λ`, the Verdier dual `𝔻_X K = RHom(K, ω_{X,Λ})` and the naive dual
 `K^∨ = RHom(K, Λ_X)`, plus the ordinary cohomology functors `H^i(X, -)` completing the
 compactly supported ones.
@@ -24,9 +24,9 @@ compactly supported ones.
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.derivedDual`: the naive dual `K ↦ K^∨ = RHom(K, Λ_X)`.
+- `AlgebraicGeometry.ProEtale.cohomology`: `H^i(X, -)`, with scoped notation `H(X)[A](i)`.
 - `AlgebraicGeometry.ProEtale.dualizingComplex`: `ω_{X,Λ} = Ra_X^! Λ`.
 - `AlgebraicGeometry.ProEtale.verdierDual`: `𝔻_X K = RHom(K, ω_{X,Λ})`.
-- `AlgebraicGeometry.ProEtale.cohomology`: `H^i(X, -)`.
 
 ## Implementation notes
 
@@ -34,13 +34,11 @@ The constant sheaf `Λ_X` is the monoidal unit `𝟙_ D(X_proét)` of the derive
 and the coefficient object `Λ` at the point is the monoidal unit `𝟙_ A` of the coefficient
 category.
 
-The *Tate twist* `K ↦ K(r)` belongs to the coefficient conventions of the six-functor
-chapter (blueprint `sk-def-sf-setting`, `def:coefficient-twists`) and is not constructed
-here; `AlgebraicGeometry.ProEtale.tateTwist` and
-`AlgebraicGeometry.ProEtale.coefficientTateTwist` are placeholders for it, to be replaced by
-the real construction once that chapter is formalised. The same goes for the bounded
-constructible finite-Tor category `D^b_ctf(X, Λ)`, whose placeholder is
-`AlgebraicGeometry.ProEtale.boundedConstructibleFiniteTor`.
+*Perfectness* of `K ∈ D(X_proét)` over `Λ_X` is, in this formalisation, dualizability of `K`
+for the derived tensor product, `CategoryTheory.IsDualizable` of
+`WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic`. That this is equivalent to
+being locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules is a
+theorem, and is not formalised.
 
 -/
 
@@ -60,46 +58,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace ProEtale
 
-section Twist
-
-/-- The Tate twist `K ↦ K(r)` on `D(X_proét)`.
-
-This is a placeholder for the twist fixed by the coefficient conventions of the six-functor
-chapter (blueprint `sk-def-sf-setting`, `def:coefficient-twists`), which is not yet
-formalised. -/
--- TODO(unify): sk-def-sf-setting
-noncomputable def tateTwist (X : Scheme.{u}) (r : ℤ) :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  sorry
-
-/-- The Tate twist `M ↦ M(r)` on the coefficient category `A`; in particular the twisted
-coefficient object `Λ(r) = (𝟙_ A)(r)`, the value line of the trace–cup pairing.
-
-This is a placeholder for the twist fixed by the coefficient conventions of the six-functor
-chapter (blueprint `sk-def-sf-setting`, `def:coefficient-twists`), which is not yet
-formalised. -/
--- TODO(unify): sk-def-sf-setting
-noncomputable def coefficientTateTwist (r : ℤ) : A ⥤ A :=
-  sorry
-
-/-- The twisted coefficient object `Λ(r)`, the value line of the trace–cup pairing. -/
-noncomputable abbrev twistedCoefficients (r : ℤ) : A :=
-  (coefficientTateTwist A r).obj (𝟙_ A)
-
-/-- The bounded constructible finite-Tor category `D^b_ctf(X, Λ)` inside `D(X_proét)`, as an
-object property.
-
-This is a placeholder for the coefficient conventions of the six-functor chapter (blueprint
-`sk-def-sf-setting`, `def:weil-finite-torsion-constructibility` and
-`def:weil-finite-tor-amplitude`), which are not yet formalised. -/
--- TODO(unify): sk-def-sf-setting
-noncomputable def boundedConstructibleFiniteTor (X : Scheme.{u}) :
-    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
-  sorry
-
-end Twist
-
 variable (X : Scheme.{u})
 
 /-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
@@ -118,6 +76,9 @@ supported `AlgebraicGeometry.ProEtale.compactlySupportedCohomology`. -/
 noncomputable def cohomology (i : ℤ) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤ A :=
   rightDerivedGlobalSections A X ⋙ DerivedCategory.homologyFunctor A i
+
+@[inherit_doc cohomology]
+scoped notation "H(" X ")[" A "](" i ")" => cohomology A X i
 
 variable {X} {Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
 
