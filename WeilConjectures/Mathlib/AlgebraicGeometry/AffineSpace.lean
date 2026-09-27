@@ -49,6 +49,9 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
 - `AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`: **Stacks 04II**. If `X` is
   quasi-affine and `π : X ⟶ S` is locally of finite type, there are `n : ℕ` and an immersion
   `i : X ⟶ 𝔸(ULift (Fin n); S)` with `i ≫ 𝔸(ULift (Fin n); S) ↘ S = π`.
+- `AlgebraicGeometry.iteratedAffineLine` and `AlgebraicGeometry.iteratedAffineLineProj`: the
+  `r`-fold relative affine line over `S` and its projection to `S`, the composition of the `r`
+  affine-line projections.
 
 ## Blueprint
 
@@ -436,5 +439,42 @@ lemma AffineSpace.homOfVector_coord_comp_map {σ : Type u} {S T Z : Scheme.{u}} 
       AffineSpace.homOfVector_over, hG]
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
       AffineSpace.homOfVector_appTop_coord]
+
+/-! ### The iterated relative affine line
+
+`AlgebraicGeometry.iteratedAffineLine S r` is the `r`-fold relative affine line over `S`,
+obtained by applying `S ↦ 𝔸¹_S` to `S` exactly `r` times, and
+`AlgebraicGeometry.iteratedAffineLineProj S r` is its projection to `S`, the composition of the
+`r` affine-line projections. This records "a composition of `r` affine-line projections" as a
+single morphism: the relative affine space `𝔸(n; S)` with `n` of cardinality `r` is isomorphic
+to it over `S`, but that isomorphism is not available in mathlib.
+-/
+
+/-- The `r`-fold relative affine line over `S`, the `r`-th iterate of `S ↦ 𝔸¹_S`. -/
+def iteratedAffineLine (S : Scheme.{u}) : ℕ → Scheme.{u}
+  | 0 => S
+  | r + 1 => 𝔸(PUnit.{u + 1}; iteratedAffineLine S r)
+
+/-- The projection of the `r`-fold relative affine line over `S` to `S`: the composition of the
+`r` affine-line projections. -/
+def iteratedAffineLineProj (S : Scheme.{u}) : ∀ r : ℕ, iteratedAffineLine S r ⟶ S
+  | 0 => 𝟙 S
+  | r + 1 => (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r) ≫
+      iteratedAffineLineProj S r
+
+@[simp]
+lemma iteratedAffineLine_zero (S : Scheme.{u}) : iteratedAffineLine S 0 = S := rfl
+
+lemma iteratedAffineLine_succ (S : Scheme.{u}) (r : ℕ) :
+    iteratedAffineLine S (r + 1) = 𝔸(PUnit.{u + 1}; iteratedAffineLine S r) := rfl
+
+@[simp]
+lemma iteratedAffineLineProj_zero (S : Scheme.{u}) : iteratedAffineLineProj S 0 = 𝟙 S := rfl
+
+lemma iteratedAffineLineProj_succ (S : Scheme.{u}) (r : ℕ) :
+    iteratedAffineLineProj S (r + 1) =
+      (𝔸(PUnit.{u + 1}; iteratedAffineLine S r) ↘ iteratedAffineLine S r) ≫
+        iteratedAffineLineProj S r :=
+  rfl
 
 end AlgebraicGeometry
