@@ -17,6 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Finite
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
@@ -165,6 +166,13 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.Convergence
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
@@ -319,6 +327,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
@@ -385,6 +394,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
+public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
@@ -408,6 +419,7 @@ public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
+public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 public import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
@@ -421,6 +433,7 @@ public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.SixFunctors.BaseChange.Derived
