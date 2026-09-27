@@ -22,15 +22,18 @@ does the same for the four other statements of the chapter. The checks are run b
 build, so a change in the axiom dependencies beneath these declarations breaks compilation
 rather than going unnoticed.
 
-All six declarations currently report `sorryAx`. It enters through the single sorried
-instance `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` of
+All six declarations currently report `sorryAx`. It enters through the sorried instance
+`CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is what discharges
-sheafification in the definition of `AlgebraicGeometry.Etale.upperStar`. That definition
-carries no `CategoryTheory.HasSmallSiteSheafify` hypothesis, so the proved sheafification
-of a coefficient category that has one is not in scope there and no reprioritisation of
-instances can reach it: the censuses become sorry-free exactly when that instance is
-proved, which is the Mathlib gap recorded in the `TODO` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.Coefficients`.
+sheafification in the definition of `AlgebraicGeometry.Etale.upperStar`; it is the only
+`sorry` in the transitive imports of this file. Since that definition carries no
+`CategoryTheory.HasSmallSiteSheafify` hypothesis, the proved sheafification instances keyed
+on that class are not in scope there, and raising their priority does not reach it. Two
+routes make the censuses sorry-free: proving that instance, which is the Mathlib gap
+recorded in the `TODO` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Coefficients`, or giving
+`AlgebraicGeometry.Etale.upperStar` the `CategoryTheory.HasSmallSiteSheafify` hypothesis
+that `Coefficients` designs for, as `WeilConjectures.ConstructibleSheaf.Defs` already does.
 
 Note that the census for the `ModuleCat` specialization also covers the instances used to
 discharge the coefficient hypotheses, which the censuses of the general statements do not.

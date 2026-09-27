@@ -554,11 +554,16 @@ end Etale
 /-! ### Axiom census
 
 The comparison `ρ`, its identity law and its composition law depend, beyond the three
-standard axioms `propext`, `Classical.choice` and `Quot.sound`, on `sorryAx`, which enters
+standard axioms `propext`, `Classical.choice` and `Quot.sound`, on `sorryAx`. It enters
 through the sorried sheafification instance
 `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`; the checks below are run
-by the build.
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, and through nothing else:
+that is the only `sorry` in the transitive imports of this file. In particular the derived
+categories these three statements are valued in come from
+`HasDerivedCategory.ofIsGrothendieckAbelian`, which rests on
+`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution` and is proved.
+The checks below are run by the build.
 -/
 
 /--
