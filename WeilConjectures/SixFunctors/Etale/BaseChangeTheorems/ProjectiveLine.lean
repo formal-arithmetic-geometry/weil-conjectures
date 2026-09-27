@@ -5,37 +5,80 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.AlgebraicGeometry.ChowLemma
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 
 /-!
 
 # The projective line, and the reduction of proper base change to it
 
-The proof of the proper base change theorem has two halves. The geometric half is the
-single computation that the projection `ℙ¹_S ⟶ S` satisfies the base change property
-`AlgebraicGeometry.Etale.SatisfiesBaseChange` for every base scheme `S`; it rests on the
-cohomology of curves over a separably closed field. The formal half deduces the general
-theorem from that one case, using Chow's lemma
-(`AlgebraicGeometry.ChowModification.nonempty_data`) to dominate an arbitrary proper
-morphism by a projective one.
+The proof of the proper base change theorem has two halves. The geometric half is the single
+computation that the projection `ℙ¹_S ⟶ S` (`AlgebraicGeometry.ProjectiveLine`) satisfies
+the base change property `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every base
+scheme `S`; it rests on the cohomology of curves over a separably closed field. The formal
+half deduces the general theorem from that one case, using Chow's lemma to dominate an
+arbitrary proper morphism by a projective one.
 
-Both halves are stated here; the theorem they combine into is
+Both halves are stated here and combined into
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`, from which
 `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` of
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`.
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper` is derived.
 
-Following `AlgebraicGeometry.ProjectiveSpace`, whose index type is that of the
-*homogeneous* coordinates, the projective line over `S` is `ℙ(ULift (Fin 2); S)`, with
-structure morphism `ℙ(ULift (Fin 2); S) ↘ S`.
+## The proof of the projective-line case
+
+By `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity` it suffices to
+prove injective acyclicity for the projection. Over a strictly henselian base the
+degree-zero comparison between a proper scheme and its closed fibre, fed through the
+Mayer–Vietoris sequence of the two standard affine charts of the projective line, kills the
+cohomology of an injective sheaf in degrees `≥ 2`, and the finite-étale machinery kills it
+in degree `1`. Over a general base the stalk of the exchange morphism at a geometric point
+is the pullback map `Hᵠ(ℙ¹_{κ(s̄)}, F) ⟶ Hᵠ(ℙ¹_{κ(t̄)}, F)` between separably closed fields,
+an isomorphism by the invariance of the cohomology of a curve under extension of separably
+closed base fields; geometric stalks are conservative.
+
+## The proof of the reduction
+
+The base change property is étale local on the target, so the target may be assumed affine.
+Chow's lemma then dominates a proper `f : X ⟶ Y` by a projective one: `π : X̃ ⟶ X` proper
+surjective with a closed immersion of `X̃` into `ℙⁿ_Y` over `Y`. Closed immersions are
+finite, and finite morphisms satisfy base change unrestrictedly
+(`AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite`, whence
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isBaseChangeIso`). The finite surjective
+symmetric-product morphism `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` passes the hypothesis from `ℙ¹` to `ℙⁿ`.
+Finally the base change property composes and cancels along proper surjections, which
+disposes of `π`.
+
+## Prerequisites not yet formalised
+
+The reduction is stated without a noetherian hypothesis, matching
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`. The Chow factorisation available in
+this repository, `AlgebraicGeometry.ChowModification.nonempty_data` together with
+`AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace`, assumes a
+noetherian base. Closing the gap is the blueprint's `lemma:weil-pbc-chow-factorization`,
+which removes the hypothesis by a finite-presentation envelope and noetherian approximation;
+it is a prerequisite of the proof below and is not formalised yet.
+
+The reduction also absorbs several steps which the blueprint keeps separate — target
+locality, stability under composition, and cancellation along a proper surjection (Stacks
+Project, Tags 0A4D and 0A4C) — none of which is stated on its own here.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.satisfiesBaseChange_projectiveLine`: the projective line over
+- `AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveLine`: the projective line over
   any base satisfies the base change property.
-- `AlgebraicGeometry.Etale.satisfiesBaseChange_of_isProper_of_projectiveLine`: if the
+- `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper`: if the
   projective line over every base satisfies the base change property, then so does every
   proper morphism.
+- `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`: every proper morphism
+  satisfies the base change property.
+
+## References
+
+- Stacks Project, Lemma 59.91.10, the reduction to the projective line,
+  <https://stacks.math.columbia.edu/tag/0A4F>
+- Stacks Project, Theorem 59.91.11, whose proof is the projective-line computation,
+  <https://stacks.math.columbia.edu/tag/095T>
+- [SGA 4, Exp. XII, Théorème 5.1]
 
 -/
 
@@ -43,50 +86,65 @@ structure morphism `ℙ(ULift (Fin 2); S) ↘ S`.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
-open Scheme Etale
+open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `sk-thm-p1`: Curve calculations ⟹ PBC(ℙ¹).
+/-- **The projective line satisfies base change**: for every scheme `S`, the projection
+`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange`, that is, for every
+cartesian square
 
-For every scheme `S`, the projection `ℙ¹_S ⟶ S` satisfies the base change property
-`AlgebraicGeometry.Etale.SatisfiesBaseChange`.
+```
+ℙ¹_T --g'--> ℙ¹_S
+  |            |
+  p'           p
+  v            v
+  T ---g-----> S
+```
 
-By `AlgebraicGeometry.Etale.satisfiesBaseChange_iff_satisfiesInjectiveAcyclicity` it
-suffices to prove injective acyclicity for the projection. Over a strictly henselian base
-the degree-zero comparison between a proper scheme and its closed fibre, fed through the
-Mayer–Vietoris sequence of the two standard affine charts of the projective line, kills the
-cohomology of an injective sheaf in degrees `≥ 2`, and the finite-étale machinery kills it
-in degree `1`. Over a general base the stalk of the exchange morphism at a geometric point
-is the pullback map `Hᵠ(ℙ¹_{κ(s̄)}, F) ⟶ Hᵠ(ℙ¹_{κ(t̄)}, F)` between separably closed
-fields, an isomorphism by the invariance of the cohomology of a curve under extension of
-separably closed base fields; geometric stalks are conservative. -/
-theorem Etale.satisfiesBaseChange_projectiveLine (S : Scheme.{u}) :
-    Etale.SatisfiesBaseChange Λ (ℙ(ULift.{u} (Fin 2); S) ↘ S) :=
+the derived base change map is an isomorphism on every bounded below complex with torsion
+cohomology. This is the geometric half of the proof of proper base change; see the module
+docstring, and Stacks Project, Tag 095T, whose proof it is.
+(blueprint: `prop:weil-pbc-projective-line`) -/
+theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
+    Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
   sorry
 
-/-- Blueprint `sk-thm-reduction`: Reduction to ℙ¹.
+/-- **Reduction of proper base change to the projective line**: if the projection
+`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,
+then so does every proper morphism of schemes.
 
-If the projection `ℙ¹_S ⟶ S` satisfies the base change property
-`AlgebraicGeometry.Etale.SatisfiesBaseChange` for every scheme `S`, then so does every
-proper morphism of schemes.
+The proof is Chow's lemma: a proper `f : X ⟶ Y` is dominated by a projective one,
 
-The base change property is étale local on the target, so the target may be assumed affine.
-Chow's lemma (`AlgebraicGeometry.ChowModification.nonempty_data`) then dominates a proper
-`f : X ⟶ Y` by a projective one, `π : X̃ ⟶ X` proper surjective with a closed immersion
-`X̃ ↪ ℙⁿ_Y` over `Y`. Closed immersions are finite, and finite morphisms satisfy base change
-because their direct image is computed by a finite product of stalks. The finite surjective
-symmetric-product morphism `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` passes the hypothesis from `ℙ¹` to `ℙⁿ`.
-Finally the base change property composes and cancels along proper surjections, which
-disposes of `π`. -/
-theorem Etale.satisfiesBaseChange_of_isProper_of_projectiveLine
-    (h : ∀ S : Scheme.{u}, Etale.SatisfiesBaseChange Λ (ℙ(ULift.{u} (Fin 2); S) ↘ S))
+```
+       X̃ ------------> ℙⁿ_Y
+       |                |
+     π |                | pₙ
+       v                v
+       X ------ f ----> Y
+```
+
+with `π` proper surjective and the horizontal arrow a closed immersion over `Y`; the base
+change property for `pₙ` comes from that of `ℙ¹` by the symmetric-product morphism, and
+transfers to `f` because it composes and cancels along proper surjections. See the module
+docstring for the steps, and for the noetherian-freeness of the Chow factorisation the
+statement uses.
+(blueprint: `prop:weil-pbc-reduction-to-projective-line`) -/
+@[stacks 0A4F]
+theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
+    (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
-    Etale.SatisfiesBaseChange Λ f :=
+    Etale.HasTorsionBaseChange Λ f :=
   sorry
+
+/-- **Proper morphisms satisfy base change**: the two halves of the proof combined. -/
+theorem Etale.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
+    Etale.HasTorsionBaseChange Λ f :=
+  Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper Λ
+    (Etale.hasTorsionBaseChange_projectiveLine Λ) f
 
 end AlgebraicGeometry

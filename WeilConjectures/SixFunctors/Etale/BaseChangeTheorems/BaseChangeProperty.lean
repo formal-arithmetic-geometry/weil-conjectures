@@ -5,45 +5,75 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 
 /-!
 
-# The base change property and injective acyclicity
+# The base change property for torsion coefficients, and injective acyclicity
 
 Fix a commutative ring `Λ` and a morphism of schemes `f : X ⟶ Y`. This file isolates two
-properties of `f`, both quantified over *all* base changes `g : Y' ⟶ Y` of `f`, which the
-proof of the proper base change theorem proceeds by:
+properties of `f`, both quantified over *all* base changes of `f`, which the proof of the
+proper base change theorem proceeds by:
 
-- `AlgebraicGeometry.Etale.SatisfiesBaseChange`, the property `PBC(f)`: the derived
-  base-change morphism of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs`
-  is an isomorphism at every object of `D⁺(X_ét, Λ)` with torsion cohomology;
-- `AlgebraicGeometry.Etale.SatisfiesInjectiveAcyclicity`, the property `IA(f)`: for every
-  injective sheaf `I` on `X_ét`, the base changed sheaf `g'^{-1} I` has no higher direct
+- `AlgebraicGeometry.Etale.HasTorsionBaseChange`, the property `PBC(f)`: the derived base
+  change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` is an isomorphism at every
+  object of `D⁺(X_ét, Λ)` with torsion cohomology;
+- `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`, the property `IA(f)`: for every
+  injective *torsion* sheaf `I` on `X_ét`, the base change `g'^{-1} I` has no higher direct
   images along `f'`.
 
-The two are equivalent for proper `f`
-(`AlgebraicGeometry.Etale.satisfiesBaseChange_iff_satisfiesInjectiveAcyclicity`), and the
-whole proof of proper base change is carried out on the `IA` side, where the statement is a
-vanishing statement about a single sheaf rather than a statement about a complex: `IA`
-composes, cancels along proper surjections, and can be checked on geometric stalks.
+The two are equivalent for proper `f` and torsion coefficients
+(`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`), and the proof
+of proper base change is carried out on the `IA` side, where the statement is a vanishing
+statement about a single sheaf rather than a statement about a complex: `IA` composes,
+cancels along proper surjections, and can be checked on geometric stalks.
 
-`PBC` is already known for proper `f`, by
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`; the content of this file and of
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` is the road leading
-there.
+`PBC` for proper `f` is *stated*, not proved, in
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`; the content of this file and
+of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` is the road leading
+there, and `Proper` derives its theorem from them.
+
+## Relation to `Etale.IsBaseChangeIso`
+
+`AlgebraicGeometry.Etale.IsBaseChangeIso` of
+`WeilConjectures.SixFunctors.BaseChange.Derived` already asks that the same derived base
+change map be an isomorphism, for a general coefficient category and with *no* torsion
+hypothesis. That is the right formulation for a finite morphism, where base change holds
+unrestrictedly (`AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite`), but it is false for
+a proper morphism and non-torsion coefficients, which is why the property used here carries
+the restriction to objects with torsion cohomology. The two are compared by
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isBaseChangeIso` and, when `Λ` is torsion
+as an additive group, `AlgebraicGeometry.Etale.isBaseChangeIso_of_hasTorsionBaseChange`.
+
+## Coefficient rings
+
+The blueprint states `IA` for injective sheaves of `𝐅_r`-modules and one prime `r` at a
+time, and reaches a general torsion coefficient ring by dévissage: `𝐅_r`-modules, then
+`n`-torsion sheaves by induction on the number of prime factors of `n`, then all torsion
+sheaves as a filtered colimit. None of that dévissage is formalised here. Accordingly the
+equivalence below is stated for a coefficient ring `Λ` which is torsion as an additive
+group — the case `Λ = ℤ/ℓⁿℤ` of the `ℓ`-adic formalism — where every sheaf of `Λ`-modules is
+torsion and no dévissage is needed.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.SatisfiesBaseChange`: the property `PBC(f)`.
-- `AlgebraicGeometry.Etale.SatisfiesInjectiveAcyclicity`: the property `IA(f)`.
+- `AlgebraicGeometry.Etale.HasTorsionBaseChange`: the property `PBC(f)`.
+- `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`: the property `IA(f)`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.satisfiesBaseChange_iff_satisfiesInjectiveAcyclicity`:
-  `PBC(f) ↔ IA(f)` for a proper morphism `f`.
+- `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`:
+  `PBC(f) ↔ IA(f)` for a proper morphism `f` and a torsion coefficient ring.
+
+## References
+
+- Stacks Project, Lemma 59.91.6, the equivalence of the two properties,
+  <https://stacks.math.columbia.edu/tag/0A4B>
+- Stacks Project, Section 59.91, *The proper base change theorem*,
+  <https://stacks.math.columbia.edu/tag/095S>
+- [SGA 4, Exp. XII, Théorème 5.1]
 
 -/
 
@@ -51,7 +81,7 @@ there.
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Abelian
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
 
@@ -63,9 +93,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-pbc`: The PBC property.
-
-`PBC(f)` for a morphism of schemes `f : X ⟶ Y`: for every cartesian square
+/-- **The base change property** `PBC(f)` of a morphism of schemes `f : X ⟶ Y`, for torsion
+coefficients: for every cartesian square
 
 ```
 X' --g'--> X
@@ -76,18 +105,43 @@ Y' --g---> Y
 ```
 
 and every object `K` of `D⁺(X_ét, Λ)` whose cohomology sheaves are all torsion, the derived
-base-change morphism `BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)` is an isomorphism. No
-hypothesis is imposed on `g`, and none on `f`: the proper base change theorem says that
-`PBC(f)` holds whenever `f` is proper. -/
-def Etale.SatisfiesBaseChange (f : X ⟶ Y) : Prop :=
+base change map `BC_sq(K) : g^*(Rf_* K) ⟶ Rf'_*(g'^* K)` is an isomorphism. No hypothesis is
+imposed on `g`, and none on `f`: the proper base change theorem says that `PBC(f)` holds
+whenever `f` is proper.
+
+This is the restriction to torsion cohomology of `AlgebraicGeometry.Etale.IsBaseChangeIso`,
+which is the declaration realising the blueprint's `def:weil-pbc-property`; see the module
+docstring. -/
+def Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
     Etale.DerivedCategory.Plus.torsionHomology Λ X K →
-      IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)
+      IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)
 
-/-- Blueprint `sk-def-ia`: Injective acyclicity.
+/-- A morphism for which the derived base change map is an isomorphism on all of `D⁺`
+satisfies the base change property for torsion coefficients. For a finite morphism the
+hypothesis holds by `AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite`. -/
+theorem Etale.hasTorsionBaseChange_of_isBaseChangeIso (f : X ⟶ Y)
+    [Etale.IsBaseChangeIso (ModuleCat.{u + 1} Λ) f] :
+    Etale.HasTorsionBaseChange Λ f :=
+  fun _ _ _ _ _ sq K _ ↦
+    have : IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
+      Etale.IsBaseChangeIso.isIso _ _ _ sq
+    NatIso.isIso_app_of_isIso _ K
 
-`IA(f)` for a morphism of schemes `f : X ⟶ Y`: for every cartesian square
+/-- If the coefficient ring `Λ` is torsion as an additive group, the torsion hypothesis in
+`AlgebraicGeometry.Etale.HasTorsionBaseChange` is vacuous and the property is exactly
+`AlgebraicGeometry.Etale.IsBaseChangeIso`. -/
+theorem Etale.isBaseChangeIso_of_hasTorsionBaseChange (hΛ : IsAddTorsion Λ) {f : X ⟶ Y}
+    (hf : Etale.HasTorsionBaseChange Λ f) :
+    Etale.IsBaseChangeIso (ModuleCat.{u + 1} Λ) f where
+  isIso _ _ _ sq :=
+    have : ∀ K, IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+      fun K ↦ hf sq K (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ K)
+    NatIso.isIso_of_isIso_app _
+
+/-- **Injective acyclicity** `IA(f)` of a morphism of schemes `f : X ⟶ Y`: for every
+cartesian square
 
 ```
 X' --g'--> X
@@ -97,17 +151,22 @@ v          v
 Y' --g---> Y
 ```
 
-and every *injective* sheaf `I` of `Λ`-modules on `X_ét`, the higher direct images of its
-pullback vanish: `Rᵠf'_*(g'^{-1} I) = 0` for `q > 0`. Here `Rᵠf'_* G` is the `q`-th
+and every *injective torsion* sheaf `I` of `Λ`-modules on `X_ét`, the higher direct images
+of its pullback vanish: `Rᵠf'_*(g'^{-1} I) = 0` for `q > 0`. Here `Rᵠf'_* G` is the `q`-th
 cohomology sheaf of `Rf'_*` applied to `G` placed in degree `0`.
+
+The restriction to torsion `I` is what makes `PBC(f) ⇒ IA(f)` correct over a coefficient
+ring which is not itself torsion: `PBC(f)` constrains only objects with torsion cohomology.
+For a torsion `Λ` — the case in which the two properties are compared below — every sheaf of
+`Λ`-modules is torsion and the restriction is vacuous.
 
 This is the form in which the proper base change theorem is actually proved: it is a
 vanishing statement about a single sheaf, it composes, it cancels along proper surjections,
-and it can be checked on geometric stalks. It is equivalent to `PBC(f)` for proper `f`, see
-`AlgebraicGeometry.Etale.satisfiesBaseChange_iff_satisfiesInjectiveAcyclicity`. -/
-def Etale.SatisfiesInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
-  ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄, IsPullback g' f' f g →
-    ∀ (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), Injective I →
+and it can be checked on geometric stalks.
+(blueprint: `def:weil-pbc-injective-acyclicity-property`) -/
+def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
+  ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (_sq : IsPullback g' f' f g)
+    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsTorsionSheaf I → Injective I →
       ∀ q : ℤ, 0 < q →
         IsZero ((DerivedCategory.Plus.homologyFunctor
             (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj
@@ -116,21 +175,33 @@ def Etale.SatisfiesInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
               (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj
                 ((g')^*[ModuleCat.{u + 1} Λ].obj I))))
 
-/-- Blueprint `sk-thm-iff`: PBC ⟺ IA.
+/-- **The base change property is injective acyclicity**: for a proper morphism `f : X ⟶ Y`
+and a coefficient ring `Λ` which is torsion as an additive group, the two properties of the
+preceding definitions agree. That is, for every cartesian square
 
-For a proper morphism `f : X ⟶ Y` the two properties of the preceding definitions agree:
-the derived base-change morphism is an isomorphism on all torsion cohomology after every
-base change if and only if the base changes of injective sheaves have no higher direct
-images.
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+Y' --g---> Y
+```
 
-The implication `PBC ⇒ IA` is immediate, since `Rf_* I = f_* I` for `I` injective. The
-converse runs an injective resolution `E ⟶ I⁻` through the acyclicity criterion
-`CategoryTheory.Functor.nonempty_homologyIso_rightDerived_of_acyclic` on both sides and
-compares the two complexes termwise by the underived exchange morphism, which is an
-isomorphism because at a geometric point of `Y'` both stalks are sections over the same
-proper geometric fibre. -/
-theorem Etale.satisfiesBaseChange_iff_satisfiesInjectiveAcyclicity (f : X ⟶ Y) [IsProper f] :
-    Etale.SatisfiesBaseChange Λ f ↔ Etale.SatisfiesInjectiveAcyclicity Λ f :=
+the derived base change map is an isomorphism on every bounded below complex if and only if
+`Rᵠf'_*(g'^{-1} I) = 0` for `q > 0` and every injective sheaf `I` on `X_ét`.
+
+For `PBC ⇒ IA`, apply `PBC` to the complex `I[0]` concentrated in degree `0`: its source
+`g^*(Rf_* I[0]) = g^*(f_* I)[0]` is again concentrated in degree `0` because `I` is
+injective, hence so is the target `Rf'_*(g'^{-1} I)`, which is the required vanishing. The
+converse resolves a torsion sheaf by injectives, uses `IA` to see that the resolution stays
+`f'_*`-acyclic after base change, and compares the two complexes termwise by the underived
+exchange morphism, which is an isomorphism because at a geometric point of `Y'` both sides
+are sections over the same proper geometric fibre.
+(blueprint: `lemma:weil-pbc-property-iff-acyclicity`) -/
+@[stacks 0A4B]
+theorem Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity (hΛ : IsAddTorsion Λ)
+    (f : X ⟶ Y) [IsProper f] :
+    Etale.HasTorsionBaseChange Λ f ↔ Etale.HasInjectiveAcyclicity Λ f :=
   sorry
 
 end AlgebraicGeometry
