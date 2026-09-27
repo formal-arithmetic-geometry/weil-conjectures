@@ -146,9 +146,10 @@ is determined by its restriction to the unit section `t = 1`: two isomorphisms
 `Li₀^* F ≅ C ≅ Li₁^* F` obtained from such a comparison are canonical, and the invariant is
 *constant* along the `𝔸¹`-direction: its values at `t = 0` and at `t = 1` agree. -/
 theorem eq_of_upperStar_oneSection_eq
-    (F : _root_.DerivedCategory (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (F : _root_.DerivedCategory
+      (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hF : DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); Y) F)
+    (_hF : DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); Y) F)
     (α β : F ≅ (L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj C)
     (h : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map α.hom =
       (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map β.hom) :
