@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 /-!
@@ -16,8 +17,8 @@ flat, locally of finite presentation and has geometrically reduced fibres, with 
 hypothesis on the coefficient sheaf. Smooth morphisms satisfy these hypotheses, so this is
 the starting point of the induction proving smooth base change.
 
-The proof is étale-local on `X`: by `AlgebraicGeometry.Smooth.exists_etaleCover_factorization`
-one may assume `p` factors as `U ⟶ V ⟶ S` with `V ⟶ S` étale and `U ⟶ V` quasi-compact flat
+The proof is étale-local on `X`: by `AlgebraicGeometry.exists_etaleCover_factorization` one
+may assume `p` factors as `U ⟶ V ⟶ S` with `V ⟶ S` étale and `U ⟶ V` quasi-compact flat
 with geometrically connected fibres, and then both sides evaluate to `F(V ×_S T)` because for
 such a morphism the global sections of an inverse image agree with the global sections
 downstairs [Stacks 0A3H].
@@ -26,7 +27,9 @@ downstairs [Stacks 0A3H].
 
 - `AlgebraicGeometry.Etale.baseChangeProperty_zero`: degree-zero base change for a flat,
   locally finitely presented morphism with geometrically reduced fibres.
-- `AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth`: the smooth case.
+- `AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth`: the smooth case, a corollary
+  of the previous statement and the instance
+  `AlgebraicGeometry.Smooth.geometricallyReduced`.
 
 ## References
 
@@ -38,8 +41,6 @@ downstairs [Stacks 0A3H].
 @[expose] public section
 
 universe u
-
-open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
@@ -67,15 +68,12 @@ theorem Etale.baseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]
     Etale.BaseChangeProperty Λ p 0 :=
   sorry
 
-/-- Blueprint `sk-prop-deg0`: Degree-zero flat base change.
-
-The smooth case of `AlgebraicGeometry.Etale.baseChangeProperty_zero`: a smooth morphism is
-flat and locally of finite presentation and its geometric fibres are smooth varieties, hence
-reduced, so `BC(p, Λ, 0)` holds for `p` smooth. This is the degree-zero start of the
+/-- The smooth case of `AlgebraicGeometry.Etale.baseChangeProperty_zero`: a smooth morphism
+is flat and locally of finite presentation and its geometric fibres are smooth varieties,
+hence reduced, so `BC(p, Λ, 0)` holds for `p` smooth. This is the degree-zero start of the
 induction in the smooth base change theorem. -/
-@[stacks 0EYS]
 theorem Etale.baseChangeProperty_zero_of_smooth [Smooth p] :
     Etale.BaseChangeProperty Λ p 0 :=
-  sorry
+  Etale.baseChangeProperty_zero Λ p
 
 end AlgebraicGeometry

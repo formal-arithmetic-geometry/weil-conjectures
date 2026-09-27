@@ -9,9 +9,10 @@ public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 
 /-!
-# The recorded base-change property and the allowed coefficients
+# The degree-`q` base-change map and the recorded base-change property
 
-This file records the two definitions on which the smooth base change theorem is phrased.
+This file records the base-change map of the smooth base change theorem and the property
+of it being an isomorphism.
 
 Fix a morphism `p : X ⟶ S` — the morphism along which one pulls back, smooth in the
 theorem — a coefficient ring `Λ` and a degree `q`. For a Cartesian square
@@ -28,19 +29,43 @@ with `g` quasi-compact quasi-separated, and a sheaf `F` of `Λ`-modules on `T_é
 base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` is the degree-`q` homology of the derived
 base-change morphism `AlgebraicGeometry.Etale.baseChange` of
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs`, evaluated at `F`
-placed in degree `0`; it is `AlgebraicGeometry.Etale.baseChangeHomologyMap`. The property
-`BC(p, Λ, q)` of the blueprint is that this map is an isomorphism for every such square and
-every `F`.
+placed in degree `0`; it is `AlgebraicGeometry.Etale.baseChangeHomologyMap`, the component
+at `F` of the natural transformation
+`AlgebraicGeometry.Etale.baseChangeHomologyNatTrans`. The property `BC(p, Λ, q)` of the
+blueprint is that this map is an isomorphism for every such square and every `F`.
 
-The coefficients allowed in the theorem are the sheaves all of whose geometric stalks are
-torsion of orders invertible on the base, `AlgebraicGeometry.Scheme.IsAllowedTorsionSheaf`.
-A natural number `n` is *invertible on `S`* when `IsUnit (n : Γ(S, ⊤))`; no definition is
-introduced for that, it is written out where it is used.
+The coefficient condition of the theorem is
+`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`, which lives next to the
+torsion condition of proper base change in
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf`. A natural number `n`
+is *invertible on `S`* when `IsUnit (n : Γ(S, ⊤))`; no definition is introduced for that,
+it is written out where it is used.
+
+## Implementation notes
+
+The source and the target of the base-change map are the values of the two functors
+`AlgebraicGeometry.Etale.baseChangeSourceFunctor` and
+`AlgebraicGeometry.Etale.baseChangeTargetFunctor`, namely `H^q(p^*(R g_* F[0]))` and
+`H^q(R h_*(e^*(F[0])))`. Since `p⁻¹` and `e⁻¹` are exact these are the sheaves
+`p⁻¹ R^q g_* F` and `R^q h_* e⁻¹ F` of the blueprint, but the two identifications are not
+yet available: the isomorphisms `Etale.leftDerivedUpperStarHomologyFunctorIso` and
+`Etale.singleFunctorCompLeftDerivedUpperStarIso` of
+`WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar` are stated on the unbounded
+derived category, and their bounded below counterparts are not in Mathlib. Recording them
+is the first thing a file connecting these statements to the classical ones needs.
+
+Two further compatibilities asserted by the blueprint subsection `sk-def-bc` are likewise
+not stated here: compatibility of the base-change map with the composition of two
+Cartesian squares, which the reduction of the smooth base change theorem to relative
+dimension one uses, and compatibility with étale localisation. Naturality in `F`, the
+third, is `AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.IsAllowedTorsionSheaf`: the coefficient condition.
-- `AlgebraicGeometry.Etale.baseChangeHomologyMap`: the degree-`q` base-change map.
+- `AlgebraicGeometry.Etale.constantModSheaf`: the constant sheaf with value `Λ/dΛ`.
+- `AlgebraicGeometry.Etale.higherDirectImage`: the higher direct image `R^q h_* F`.
+- `AlgebraicGeometry.Etale.baseChangeHomologyNatTrans` and
+  `AlgebraicGeometry.Etale.baseChangeHomologyMap`: the degree-`q` base-change map.
 - `AlgebraicGeometry.Etale.BaseChangeProperty`: the recorded property `BC(p, Λ, q)`.
 
 ## References
@@ -52,33 +77,53 @@ introduced for that, it is written out where it is used.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
+
+open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry
 
-open Scheme
-
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `sk-def-smooth`: Smooth and allowed coefficients.
+/-- The constant sheaf on the small étale site of `Y` with value the `Λ`-module `Λ/dΛ`,
+the coefficients `ℤ/dℤ` of the blueprint read over `Λ`. -/
+noncomputable def Etale.constantModSheaf (Y : Scheme.{u}) (d : ℕ) :
+    Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+    (ModuleCat.of Λ (Λ ⧸ (Ideal.span {(d : Λ)} : Ideal Λ)))
 
-A morphism is *smooth* in the sense of the blueprint exactly when it is
-`AlgebraicGeometry.Smooth`: flat, locally of finite presentation, with smooth geometric
-fibres; that notion is Mathlib's and is not repeated here.
+/-- The degree-`q` higher direct image `R^q h_* F` of a sheaf `F` of `Λ`-modules on the
+small étale site of `Y` along `h : Y ⟶ X`: the degree-`q` homology of the derived
+pushforward of `F` placed in degree `0`. -/
+noncomputable def Etale.higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (DerivedCategory.Plus.homologyFunctor _ q).obj
+    (R+((h)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
 
-A sheaf `F` of `Λ`-modules on the small étale site of `T` has *allowed torsion relative to
-the base `S`* if every element of every geometric stalk of `F` is killed by a positive
-integer which is invertible on `S`. These are the coefficient sheaves for which smooth base
-change holds; for `Λ = ℤ/nℤ` with `n` invertible on `S` every sheaf is allowed, and a
-general allowed sheaf is the filtered union of its `n`-torsion subsheaves over the `n`
-invertible on `S`. -/
-def Scheme.IsAllowedTorsionSheaf (S : Scheme.{u}) {T : Scheme.{u}}
-    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop :=
-  ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ T)
-    (x : ↥((pointSmallEtale s).sheafFiber.obj F)),
-    ∃ n : ℕ, 0 < n ∧ IsUnit (n : Γ(S, ⊤)) ∧ n • x = 0
+section BaseChangeMap
 
-variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+variable {X S T Y : Scheme.{u}}
+
+/-- The source of the degree-`q` base-change map, as a functor of the coefficient sheaf:
+`F ↦ H^q(p^*(R g_* F[0]))`. Since `p⁻¹` is exact this is the sheaf `p⁻¹ R^q g_* F`. -/
+noncomputable def Etale.baseChangeSourceFunctor (p : X ⟶ S) (g : T ⟶ S) (q : ℤ) :
+    Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
+      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    ((R+((g)_*[ModuleCat.{u + 1} Λ]) ⋙ D+((p)^*[ModuleCat.{u + 1} Λ])) ⋙
+      DerivedCategory.Plus.homologyFunctor _ q)
+
+/-- The target of the degree-`q` base-change map, as a functor of the coefficient sheaf:
+`F ↦ H^q(R h_*(e^*(F[0])))`. Since `e⁻¹` is exact this is the sheaf `R^q h_* e⁻¹ F`. -/
+noncomputable def Etale.baseChangeTargetFunctor (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ) :
+    Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
+      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    ((D+((e)^*[ModuleCat.{u + 1} Λ]) ⋙ R+((h)_*[ModuleCat.{u + 1} Λ])) ⋙
+      DerivedCategory.Plus.homologyFunctor _ q)
+
+variable {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
 /-- The degree-`q` base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` attached to a Cartesian
 square
@@ -91,17 +136,37 @@ v        v
 X --p--> S
 ```
 
-and a sheaf `F` of `Λ`-modules on `T_ét`: the degree-`q` homology of the derived
-base-change morphism `AlgebraicGeometry.Etale.baseChange` evaluated at `F` placed in degree
-`0`. The pullback `p⁻¹` is exact and `R g_*` is the derived pushforward, so the source and
-target are the sheaves named above. -/
-noncomputable def Etale.baseChangeHomologyMap (sq : IsPullback e h g p) (q : ℤ)
-    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (DerivedCategory.Plus.homologyFunctor _ q).map
-    ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
+as a natural transformation in the coefficient sheaf `F`: the degree-`q` homology of the
+derived base-change morphism `AlgebraicGeometry.Etale.baseChange`, whiskered by the
+inclusion of sheaves in degree `0`. -/
+noncomputable def Etale.baseChangeHomologyNatTrans (sq : IsPullback e h g p) (q : ℤ) :
+    Etale.baseChangeSourceFunctor Λ p g q ⟶ Etale.baseChangeTargetFunctor Λ e h q :=
+  Functor.whiskerLeft _
+    (Functor.whiskerRight (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) _)
 
-variable (p) in
+/-- The degree-`q` base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` at a sheaf `F` of
+`Λ`-modules on `T_ét`: the component at `F` of
+`AlgebraicGeometry.Etale.baseChangeHomologyNatTrans`. -/
+noncomputable def Etale.baseChangeHomologyMap (sq : IsPullback e h g p) (q : ℤ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (Etale.baseChangeSourceFunctor Λ p g q).obj F ⟶
+      (Etale.baseChangeTargetFunctor Λ e h q).obj F :=
+  (Etale.baseChangeHomologyNatTrans Λ sq q).app F
+
+/-- The base-change map is natural in the coefficient sheaf. This is the naturality
+asserted by the blueprint subsection `sk-def-bc`, and the input to the comparison of the
+two long exact sequences in `AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`. -/
+lemma Etale.baseChangeHomologyMap_naturality (sq : IsPullback e h g p) (q : ℤ)
+    {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) :
+    Etale.baseChangeHomologyMap Λ sq q F ≫ (Etale.baseChangeTargetFunctor Λ e h q).map α =
+      (Etale.baseChangeSourceFunctor Λ p g q).map α ≫
+        Etale.baseChangeHomologyMap Λ sq q G :=
+  ((Etale.baseChangeHomologyNatTrans Λ sq q).naturality α).symm
+
+end BaseChangeMap
+
+variable {X S : Scheme.{u}}
+
 /-- Blueprint `sk-def-bc`: The recorded base-change property.
 
 `BC(p, Λ, q)` holds when, for every quasi-compact quasi-separated `g : T ⟶ S`, every sheaf
@@ -119,7 +184,7 @@ the base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` of
 `AlgebraicGeometry.Etale.baseChangeHomologyMap` is an isomorphism. The coefficient ring `Λ`
 plays the role of `ℤ/nℤ` in the blueprint; the hypothesis that `n` be invertible on `S` is
 not part of the property and is carried separately by the statements that need it. -/
-def Etale.BaseChangeProperty (q : ℤ) : Prop :=
+def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
   ∀ {T Y : Scheme.{u}} (g : T ⟶ S) (e : Y ⟶ T) (h : Y ⟶ X)
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)),

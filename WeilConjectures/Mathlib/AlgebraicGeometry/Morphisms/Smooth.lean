@@ -1,0 +1,63 @@
+/-
+Copyright (c) 2026 Nailin Guan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Nailin Guan
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+
+/-!
+# The étale-local normal form of a smooth morphism
+
+A smooth morphism of relative dimension `d` is, étale-locally on the source, the
+projection of an affine space: if `g : X ⟶ Y` is smooth of relative dimension `d` and
+`x : X`, then there are affine open neighbourhoods `V` of `x` and `U` of `g.base x` with
+`V ≤ g ⁻¹ᵁ U` such that the restricted morphism `g.resLE U V` factors as an étale morphism
+`V ⟶ 𝔸(d; U)` followed by the structure morphism `𝔸(d; U) ↘ U`.
+
+The index type of the affine space is `ULift.{u} (Fin d)`, since
+`AlgebraicGeometry.AffineSpace` takes an index type in the same universe as the scheme.
+
+## Main statements
+
+- `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace`: the étale-local normal form of a
+  smooth morphism of relative dimension `d`.
+
+## References
+
+- Stacks Project, Tag `054L`, <https://stacks.math.columbia.edu/tag/054L>
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+/-- Let `g : X ⟶ Y` be smooth of relative dimension `d` and let `x : X`. After replacing
+`X` and `Y` by affine open neighbourhoods `V ∋ x` and `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U`,
+the morphism `g` factors as an étale morphism `e : V ⟶ 𝔸(d; U)` followed by the projection
+`𝔸(d; U) ↘ U`:
+
+```
+V --e--> 𝔸(d; U)
+ \          |
+  \         ↓
+g.resLE     U
+```
+-/
+@[stacks 054L]
+theorem Smooth.exists_etale_to_affineSpace {X Y : Scheme.{u}} (g : X ⟶ Y) (d : ℕ)
+    [SmoothOfRelativeDimension d g] (x : X) :
+    ∃ (U : Y.Opens) (V : X.Opens) (_ : IsAffineOpen U) (_ : IsAffineOpen V)
+      (_ : g.base x ∈ U) (_ : x ∈ V) (hVU : V ≤ g ⁻¹ᵁ U)
+      (e : V.toScheme ⟶ 𝔸(ULift.{u} (Fin d); U.toScheme)),
+      Etale e ∧ e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme) = g.resLE U V hVU :=
+  sorry
+
+end AlgebraicGeometry

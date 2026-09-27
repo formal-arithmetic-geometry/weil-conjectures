@@ -6,10 +6,10 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.NormalForm
 
 /-!
 # The smooth base change theorem
@@ -26,7 +26,7 @@ X --p--> S
 
 with `p` **smooth** and `g` quasi-compact quasi-separated. For every sheaf `F` of
 `Λ`-modules on `T_ét` all of whose geometric stalks are torsion of orders invertible on `S`
-— that is, `AlgebraicGeometry.Scheme.IsAllowedTorsionSheaf` — the base-change map
+— that is, `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder` — the base-change map
 
 `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F`
 
@@ -35,12 +35,34 @@ of `AlgebraicGeometry.Etale.baseChangeHomologyMap` is an isomorphism in every de
 The proof is the second, shorter proof of the Stacks Project: degree zero is
 `AlgebraicGeometry.Etale.baseChangeProperty_zero_of_smooth`; the general coefficient sheaf is
 the filtered colimit of its `n`-torsion subsheaves; the assertion is étale local on `X` and
-`S`, so by `AlgebraicGeometry.Smooth.exists_etaleCover_factorization` and the factorisation of
+`S`, so by `AlgebraicGeometry.exists_etaleCover_factorization`, the étale-local normal form
+`AlgebraicGeometry.Smooth.exists_etale_to_affineSpace` and the factorisation of
 `X ⟶ 𝔸^d_S` into relative curves it suffices to treat relative dimension one; and there
-`AlgebraicGeometry.Etale.baseChangeProperty_of_sub_one` carries out the induction on `q`.
+`AlgebraicGeometry.Etale.BaseChangeProperty.of_sub_one` carries out the induction on `q`.
 
 Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
+
+## Implementation notes
+
+Two steps of that proof have no statement yet, and the theorem below is therefore not
+reachable from the statements of this directory alone. Both concern the passage between the
+theorem, whose coefficient sheaf is an arbitrary sheaf of `Λ`-modules with torsion geometric
+stalks, and `AlgebraicGeometry.Etale.BaseChangeProperty`, which is indexed by a *fixed*
+coefficient ring `Λ` and carries no torsion condition:
+
+- the torsion reduction asserted inside the blueprint subsection `sk-def-smooth`: such an `F`
+  is the filtered colimit of its `n`-torsion subsheaves over the `n` invertible on `S`, and
+  inverse images and `R^q` of a quasi-compact quasi-separated morphism commute with that
+  colimit. The second half, that `R^q g_*` commutes with filtered colimits for `g` qcqs, is
+  independently useful and deserves a statement of its own;
+- the change of rings `Λ ↝ Λ/nΛ` which the first step performs on the coefficients, and its
+  compatibility with `AlgebraicGeometry.Etale.baseChangeHomologyMap`.
+
+The compatibility of the base-change map with the composition of two Cartesian squares,
+which the reduction to relative dimension one uses, is likewise missing; see the
+implementation notes of
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs`.
 
 ## Main statements
 
@@ -58,7 +80,7 @@ theorem, in which the roles of the two legs of the square are exchanged.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
@@ -83,7 +105,7 @@ the base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` is an isomorphism in
 theorem Etale.isIso_baseChangeHomologyMap_of_smooth (p : X ⟶ S) [Smooth p] (g : T ⟶ S)
     (e : Y ⟶ T) (h : Y ⟶ X) [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
     (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : Scheme.IsAllowedTorsionSheaf Λ S F) :
+    [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
   sorry
 
