@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
 
@@ -38,6 +39,9 @@ dual* is `K^∨ = RHom(K, Λ_X)`.
   `K^∨ ⊗ᴸ M ≅ RHom(K, M)` for a perfect `K`.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_derivedHom_tensor_iso`
   (`sk-lem-sf-twist-interchange`): the internal hom commutes with an invertible twist.
+- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_leftDerivedUpperStar_derivedHom_iso`
+  (`sk-thm-sf-internal-hom-pullback`): the internal hom with a site-perfect first variable
+  commutes with pullback.
 
 -/
 
@@ -106,6 +110,26 @@ theorem nonempty_derivedHom_tensor_iso
     {K T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : sitePerfect A X K)
     (hT : invertible A X T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     Nonempty ((RHom(X)[A].obj (op K)).obj (M ⊗ T) ≅ (RHom(X)[A].obj (op K)).obj M ⊗ T) :=
+  sorry
+
+/-- Blueprint `sk-thm-sf-internal-hom-pullback`: Internal Hom versus pullback for a
+site-perfect first variable.
+
+Let `g : Y' ⟶ X` be a morphism of schemes, let `M` be site-perfect — locally on the site, a
+bounded complex of finite free `Λ`-modules — and let `N` be any object of `D(X_ét)`. Then the
+canonical comparison
+
+`Lg^* RHom_Λ(M, N) ⟶ RHom_Λ(Lg^* M, Lg^* N)`
+
+is an isomorphism, natural in both variables and compatible with shifts and with distinguished
+triangles in `N`. Locally `M` is a bounded complex of finite free modules, so the termwise
+identity `Hom(P, N) = P^∨ ⊗ N` turns the internal hom into a tensor product, and both sides
+commute with `Lg^*`. -/
+theorem nonempty_leftDerivedUpperStar_derivedHom_iso {Y' : Scheme.{u}} (g : Y' ⟶ X)
+    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hM : sitePerfect A X M)
+    (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty ((L((g)^*[A])).obj ((RHom(X)[A].obj (op M)).obj N) ≅
+      (RHom(Y')[A].obj (op ((L((g)^*[A])).obj M))).obj ((L((g)^*[A])).obj N)) :=
   sorry
 
 end Etale.DerivedCategory
