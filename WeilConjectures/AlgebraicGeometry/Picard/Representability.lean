@@ -41,8 +41,9 @@ hypotheses.
 That the condition is stable under base change is
 `AlgebraicGeometry.IsInvertibleDirectImage.map`; it is the base-change half of the blueprint's
 `sk-thm-picard-semicon`, which
-`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` does not carry, and it is the one
-`sorry` inside a definition of this file.
+`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` does not carry. It is stated as a
+named lemma rather than left as an anonymous obligation inside
+`picardFunctorInvertibleDirectImage`, so that the dependency is visible.
 
 Every statement here assumes injective resolutions in the fibres, `∀ T,
 HasInjectiveResolutions (X ×[k] T).Modules`. Nothing can discharge that yet; see
