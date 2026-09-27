@@ -5,23 +5,27 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 
 /-!
 # Conventions for smooth purity
 
-This file fixes the coefficient-side vocabulary the smooth-purity chapter runs on: the
-constant complex `Λ_X`, the Tate twist `(m)`, finite Tor amplitude and the category
-`D^b_{ctf}`, ⊗-invertible objects, the dualizing complex `ω_f = Rf^! Λ_Y`, and the *section
-invariant* `𝒞(g, s) = Ls^* ω_g` of a smooth morphism with a closed section.
+This file fixes the twist-side vocabulary the smooth-purity chapter runs on: the Tate twist
+`(m)`, the twist-and-shift `K ↦ K(m)[2m]`, the dualizing complex `ω_f = Rf^! Λ_Y`, and the
+*section invariant* `𝒞(g, s) = Ls^* ω_g` of a morphism with a section. The constant complex
+`Λ_X`, finite Tor amplitude, `D^b_{ctf}` and ⊗-invertibility are framework-level notions and
+live in `WeilConjectures.SixFunctors.Etale.Derived.Coefficients`.
 
 The coefficient stage is the finite one: a commutative ring `Λ` and the abelian category
 `ModuleCat Λ`, so that `D(X_ét, Λ)` is
-`DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat Λ))`. The remaining stages
-`𝒪_E`, `E` and `ℚ̄_ℓ` are the derived-complete and rationalized categories of
+`DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat Λ))`. Every statement of the chapter
+assumes moreover that `Λ` is finite and that its exponent is invertible on the schemes in
+sight (`AlgebraicGeometry.HasInvertibleExponent`); without that hypothesis smooth purity is
+false, already for `Λ = ℤ/p` over a base of characteristic `p`. The remaining stages `𝒪_E`,
+`E` and `ℚ̄_ℓ` are the derived-complete and rationalized categories of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete`; purity is transported to them in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`.
 
@@ -29,22 +33,28 @@ The coefficient stage is the finite one: a commutative ring `Λ` and the abelian
 
 The Tate twist is the one place where a genuinely missing object had to be named. Its
 blueprint home is the framework chapter (`def:coefficient-twists`), not this block, and the
-sheaf of roots of unity `μ_n` it is built from belongs to the Kummer block; so
-`AlgebraicGeometry.Etale.tateTwist` is an `opaque` placeholder, carrying a `TODO(unify)`
-marker. It depends genuinely on its arguments and introduces no `sorryAx`, but it satisfies
-no equations.
+sheaf of roots of unity `μ_n` it is built from belongs to the Kummer block. It is therefore
+taken as a *parameter*: `AlgebraicGeometry.Etale.HasTateTwist` bundles the twisting objects
+`Λ_X(m)` with the normalization `Λ_X(0) = Λ_X`, multiplicativity in `m`, compatibility with
+pullback, and ⊗-invertibility. Every statement of the chapter carries `[HasTateTwist Λ]`, and
+becomes an unconditional theorem once the Kummer block supplies the instance.
+
+Invertibility is a field rather than a consequence of the other two: `Λ_X(m) ⊗ Λ_X(-m) ≅
+Λ_X(0) ≅ Λ_X` is a two-line proof, but checking it forces the kernel to unfold
+`AlgebraicGeometry.Etale.derivedTensor`, and that does not terminate in reasonable time.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.constantComplex`: the constant complex `Λ_X`.
-- `AlgebraicGeometry.Etale.tateTwist`: the Tate twist `(m)` (placeholder).
+- `AlgebraicGeometry.Etale.HasTateTwist`: the Tate twist datum.
+- `AlgebraicGeometry.Etale.tateObject`: the twisting object `Λ_X(m)`.
+- `AlgebraicGeometry.Etale.tateTwist`: the twist `K ↦ K(m)`.
 - `AlgebraicGeometry.Etale.twistShift`: `K ↦ K(m)[2m]`.
-- `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`,
-  `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleFiniteTor`: finite Tor
-  amplitude and `D^b_{ctf}(X, Λ)`.
-- `AlgebraicGeometry.Etale.DerivedCategory.isInvertible`: ⊗-invertible objects.
 - `AlgebraicGeometry.Etale.dualizingComplex`: `ω_f = Rf^! Λ_Y`.
 - `AlgebraicGeometry.Etale.sectionInvariant`: `𝒞(g, s) = Ls^* ω_g`.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.isInvertible_tateObject`
 -/
 
 @[expose] public section
@@ -57,76 +67,69 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-open Scheme Etale
-
-variable (Λ : Type (u + 1)) [CommRing Λ]
+open Scheme
 
 namespace Etale
 
-variable (X : Scheme.{u})
+variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
+/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
-The constant complex `Λ_X ∈ D(X_ét, Λ)`: the constant sheaf with value `Λ` placed in degree
-zero. It is the unit for the derived tensor product, and the coefficient object every
-statement of the purity chapter is normalized against. -/
-noncomputable def constantComplex :
-    DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj
-    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
+A *Tate twist datum* for the coefficient ring `Λ`: for every scheme `X` and every `m : ℤ` a
+⊗-invertible twisting object `Λ_X(m) ∈ D(X_ét, Λ)`, normalized by `Λ_X(0) = Λ_X`,
+multiplicative in `m`, and compatible with pullback.
 
-/-- The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, tensoring with the `m`-th power of the
-invertible object `Λ(1) = μ_{ℓ^N} ⊗ Λ`.
-
-The sheaf of roots of unity `μ_n` belongs to the Kummer block and the twist itself to the
-framework chapter, so this is an `opaque` placeholder here; it satisfies no equations. -/
+The sheaf of roots of unity `μ_n` that `Λ(1)` is built from belongs to the Kummer block and
+the twist itself to the framework chapter, so the datum is taken as a parameter here rather
+than constructed. -/
 -- TODO(unify): def:coefficient-twists
-noncomputable opaque tateTwist (m : ℤ) :
+class HasTateTwist where
+  /-- The twisting object `Λ_X(m)`. -/
+  twistObject (X : Scheme.{u}) (m : ℤ) :
+    DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  /-- `Λ_X(0)` is the constant complex. -/
+  nonempty_iso_twistObject_zero (X : Scheme.{u}) :
+    Nonempty (twistObject X 0 ≅ constantComplex Λ X)
+  /-- `Λ_X(m) ⊗^L Λ_X(m') ≅ Λ_X(m + m')`, which is what makes `Λ(c)[2c]` the `c`-th tensor
+  power of `Λ(1)[2]` in the Künneth iteration of `sk-prop-an`. -/
+  nonempty_iso_twistObject_add (X : Scheme.{u}) (m m' : ℤ) :
+    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (twistObject X m)).obj
+      (twistObject X m') ≅ twistObject X (m + m'))
+  /-- The twist is compatible with pullback, `Lf^* Λ_Y(m) ≅ Λ_X(m)`; this is what makes the
+  purity isomorphisms compatible with base change. -/
+  nonempty_iso_leftDerivedUpperStar_twistObject {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℤ) :
+    Nonempty ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (twistObject Y m) ≅ twistObject X m)
+  /-- Every twisting object is ⊗-invertible, with inverse `Λ_X(-m)`. Mathematically this is
+  the conjunction of the previous two fields; it is a field of its own because deriving it
+  forces the kernel to unfold `AlgebraicGeometry.Etale.derivedTensor`, which is prohibitively
+  expensive. -/
+  isInvertible_twistObject (X : Scheme.{u}) (m : ℤ) :
+    DerivedCategory.isInvertible Λ X (twistObject X m)
+
+variable [HasTateTwist Λ] (X : Scheme.{u})
+
+/-- The twisting object `Λ_X(m) ∈ D(X_ét, Λ)` of a Tate twist datum. -/
+noncomputable def tateObject (m : ℤ) :
+    DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  HasTateTwist.twistObject (Λ := Λ) X m
+
+/-- Every Tate twisting object is ⊗-invertible, `Λ_X(m) ⊗^L Λ_X(-m) ≅ Λ_X`. -/
+theorem isInvertible_tateObject (m : ℤ) :
+    DerivedCategory.isInvertible Λ X (tateObject Λ X m) :=
+  HasTateTwist.isInvertible_twistObject X m
+
+/-- The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, tensoring with the twisting object
+`Λ_X(m)`. -/
+noncomputable def tateTwist (m : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  𝟭 _
+  (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (tateObject Λ X m)
 
 /-- The twist-and-shift functor `K ↦ K(m)[2m]` in which every purity statement is phrased. -/
 noncomputable def twistShift (m : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   tateTwist Λ X m ⋙ shiftFunctor _ (2 * m)
-
-/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
-
-An object `K` of `D(X_ét, Λ)` has *Tor amplitude in `[a, b]`* if for every sheaf `F` of
-`Λ`-modules on `X_ét` the derived tensor product `K ⊗^L F` has vanishing cohomology outside
-`[a, b]`. -/
-def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  fun K ↦ ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), q < a ∨ b < q →
-    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-      ((((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K)).obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
-
-/-- An object of `D(X_ét, Λ)` has *finite Tor amplitude* if it has Tor amplitude in some
-bounded interval. -/
-def DerivedCategory.finiteTorAmplitude :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  fun K ↦ ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn Λ X a b K
-
-/-- Blueprint `sk-def-sf-setting`: Coefficients and sites
-
-The category `D^b_{ctf}(X, Λ)` of the purity chapter, as an object property: bounded with
-constructible cohomology sheaves and of finite Tor amplitude. -/
-def DerivedCategory.boundedConstructibleFiniteTor :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
-    DerivedCategory.finiteTorAmplitude Λ X
-
-/-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a tensor inverse: there is an `M`
-with `L ⊗^L M ≅ Λ_X`. A lisse rank-one sheaf placed in any degree and twisted by any power of
-the Tate object is invertible in this sense, and these are the only invertible objects that
-occur in the purity chapter. -/
-def DerivedCategory.isInvertible :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  fun L ↦ ∃ M, Nonempty
-    (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).obj M ≅ constantComplex Λ X)
 
 variable {X}
 variable {Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
@@ -138,7 +141,7 @@ compactification. Smooth purity is the assertion that `ω_f ≅ Λ_X(d)[2d]` for
 pure relative dimension `d`. -/
 noncomputable def dualizingComplex :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj (constantComplex Λ Y)
+  (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj (constantComplex Λ Y)
 
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 

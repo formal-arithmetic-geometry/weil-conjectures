@@ -24,19 +24,36 @@ are exactly those in the essential image of `ν^*`.
 
 ## Implementation notes
 
-The instances needed to build `ν^*` — that left Kan extensions along `ν_X^{op}` exist, and
-that `ν_X` is continuous for the two topologies — are `sorry`, exactly as the corresponding
-instances for base change in
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` are.
+The two instances needed to *build* `ν^*` — that left Kan extensions along `ν_X^{op}` exist,
+and that `ν_X` is continuous for the two topologies — are `sorry`, exactly as the
+corresponding instances for base change in
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension` are. Both are Prop
+valued, so no datum below carries `sorryAx`, but every statement about `ν^*` rests on them.
+Both are infrastructure rather than blueprint content, and both should be provable outright:
+essential smallness of the two sites together with cocompleteness of `A` gives the Kan
+extension, and an étale covering family of an étale `X`-scheme is a pro-étale covering family
+of the same scheme viewed pro-étale.
+
+The remaining clause of `sk-prop-sf-comparison` — that `ν_T^*` restricts to an equivalence of
+`D^b_c(T_ét, Λ)` onto the constructible subcategory of `D^b_c(T_proét, Λ)` — is not stated:
+the repository has no constructibility notion on the pro-étale site to be an equivalence onto.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.etaleToProEt`: the inclusion `X_ét ⥤ X_proét` of small sites.
 - `AlgebraicGeometry.ProEtale.comparisonUpperStar`: `ν_X^*`.
+- `AlgebraicGeometry.ProEtale.comparisonLowerStar`: `ν_{X*}`.
+- `AlgebraicGeometry.ProEtale.comparisonAdjunction`: `ν^* ⊣ ν_*`.
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.comparisonUpperStar_spec`
+- `AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar` and
+  `AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar`: `ν^*` is exact.
+- `AlgebraicGeometry.ProEtale.full_comparisonUpperStar`,
+  `AlgebraicGeometry.ProEtale.faithful_comparisonUpperStar` and
+  `AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`: `ν^*` is fully faithful, with
+  invertible unit.
+- `AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`
 -/
 
 @[expose] public section
@@ -56,27 +73,30 @@ morphisms. This is the underlying functor of the comparison morphism of sites
 noncomputable def Scheme.etaleToProEt (X : Scheme.{u}) : X.Etale ⥤ X.ProEt :=
   MorphismProperty.Over.changeProp X (fun _ _ _ hf ↦ have := hf; inferInstance) le_rfl
 
+namespace ProEtale
+
 /-- Left Kan extensions along the opposite of the comparison functor exist for `A`-valued
 presheaves: both sites are essentially small and the Grothendieck abelian category `A` is
 cocomplete. -/
-instance ProEtale.hasLeftKanExtension_op_etaleToProEt (A : Type u') [Category.{u + 1} A]
+instance hasLeftKanExtension_op_etaleToProEt (A : Type u') [Category.{u + 1} A]
     [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) (F : X.Etaleᵒᵖ ⥤ A) :
     (Scheme.etaleToProEt X).op.HasLeftKanExtension F :=
   sorry
 
 /-- The comparison functor is continuous: an étale covering family of an étale `X`-scheme is a
 pro-étale covering family of the same scheme viewed pro-étale. -/
-instance ProEtale.isContinuous_etaleToProEt (X : Scheme.{u}) :
+instance isContinuous_etaleToProEt (X : Scheme.{u}) :
     (Scheme.etaleToProEt X).IsContinuous X.smallEtaleTopology (Scheme.ProEt.topology X) :=
   sorry
-
-namespace ProEtale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /-- The comparison pullback `ν_X^* : Sh(X_ét) ⥤ Sh(X_proét)`: left Kan extension along the
 inclusion of small sites followed by pro-étale sheafification, left adjoint to the restriction
-`ν_{X*}`. -/
+`ν_{X*}`.
+
+It is built from the two `sorry`ed instances above, so every statement about it is conditional
+on them; see the implementation notes. -/
 noncomputable def comparisonUpperStar (X : Scheme.{u}) :
     Sheaf X.smallEtaleTopology A ⥤ Sheaf (Scheme.ProEt.topology X) A :=
   Functor.sheafPullbackConstruction.sheafPullback (Scheme.etaleToProEt X) A
@@ -101,56 +121,75 @@ noncomputable def comparisonAdjunction (X : Scheme.{u}) :
 instance additive_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Additive :=
   (comparisonAdjunction A X).left_adjoint_additive
 
-/-- The comparison pullback preserves homology as soon as it is left exact: it preserves all
-colimits, being a left adjoint. -/
-instance preservesHomology_comparisonUpperStar (X : Scheme.{u})
-    [PreservesFiniteLimits (comparisonUpperStar A X)] :
-    (comparisonUpperStar A X).PreservesHomology := by
-  have : PreservesColimitsOfSize.{0, 0} (comparisonUpperStar A X) :=
-    (comparisonAdjunction A X).leftAdjoint_preservesColimits
-  exact {}
+/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+
+*Left exactness.* The comparison pullback preserves finite limits; together with
+`AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar` this is the exactness
+of `ν^*`, which is what lets it be applied degreewise to complexes. -/
+instance preservesFiniteLimits_comparisonUpperStar (X : Scheme.{u}) :
+    PreservesFiniteLimits (comparisonUpperStar A X) :=
+  sorry
 
 /-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
 
-**The comparison theorem.** For the comparison morphism `ν_T : T_proét ⟶ T_ét` and a finite
-coefficient ring, the pullback `ν_T^*` is exact and fully faithful with `id ≅ Rν_{T*} ν_T^*`;
-and the comparison direct image `ν_V^* R u_{ét,*} ≅ R u_{proét,*} ν_U^*` is an isomorphism of
-functors on bounded below derived categories for `u : U ⟶ V` quasi-compact and
-quasi-separated.
+*Right exactness.* The comparison pullback preserves finite colimits — indeed all colimits,
+being a left adjoint. -/
+instance preservesFiniteColimits_comparisonUpperStar (X : Scheme.{u}) :
+    PreservesFiniteColimits (comparisonUpperStar A X) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+
+*Fullness.* The comparison pullback is full. -/
+instance full_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Full :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+
+*Faithfulness.* The comparison pullback is faithful. -/
+instance faithful_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Faithful :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
+
+*Full faithfulness, in the form the chapter uses.* The unit `id ⟶ ν_* ν^*` of the comparison
+adjunction is an isomorphism; this is the assertion `id ≅ Rν_{T*} ν_T^*` of the blueprint, and
+it is strictly stronger than the existence of some isomorphism between the two functors.
 
 Detection of isomorphisms is by covering families and on the affine ind-étale basis, not by
 geometric points: geometric-point stalks are *not* conservative on all pro-étale sheaves, and
-no argument of the purity chapter uses them off the étale-origin objects.
-
-The remaining clause of the blueprint statement — that `ν_T^*` restricts to an equivalence of
-`D^b_c(T_ét, Λ)` onto the constructible subcategory of `D^b_c(T_proét, Λ)` — is not stated
-here: the repository has no constructibility notion on the pro-étale site to be an equivalence
-onto. -/
-theorem full_and_faithful_comparisonUpperStar (X : Scheme.{u}) :
-    PreservesFiniteLimits (comparisonUpperStar A X) ∧
-      PreservesFiniteColimits (comparisonUpperStar A X) ∧
-      (comparisonUpperStar A X).Full ∧ (comparisonUpperStar A X).Faithful ∧
-      Nonempty (𝟭 (Sheaf X.smallEtaleTopology A) ≅
-        comparisonUpperStar A X ⋙ comparisonLowerStar A X) :=
+no argument of the purity chapter uses them off the étale-origin objects. -/
+theorem isIso_comparisonAdjunction_unit (X : Scheme.{u}) :
+    IsIso (comparisonAdjunction A X).unit :=
   sorry
+
+/-- The comparison pullback preserves homology: it is exact and preserves all colimits, being
+a left adjoint. -/
+instance preservesHomology_comparisonUpperStar (X : Scheme.{u}) :
+    (comparisonUpperStar A X).PreservesHomology := by
+  have : PreservesColimitsOfSize.{0, 0} (comparisonUpperStar A X) :=
+    (comparisonAdjunction A X).leftAdjoint_preservesColimits
+  constructor <;> infer_instance
 
 /-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
 
 **The comparison direct image.** For `u : U ⟶ V` quasi-compact and quasi-separated the
 comparison commutes with direct images:
 
-`ν_V^* ∘ R u_{ét,*} ≅ R u_{proét,*} ∘ ν_U^*`
+```
+  D⁺(U_ét) --R u_{ét,*}--> D⁺(V_ét)
+      |                        |
+   ν_U^*                    ν_V^*
+      |                        |
+      v                        v
+  D⁺(U_proét) -R u_{proét,*}-> D⁺(V_proét)
+```
 
-as functors `D⁺(U_ét, Λ) ⥤ D⁺(V_proét, Λ)`. Exactness of `ν^*`, which is what allows it to be
-applied degreewise to complexes, is the first clause of
-`AlgebraicGeometry.ProEtale.full_and_faithful_comparisonUpperStar` and is carried here as a
-hypothesis. -/
+commutes up to isomorphism, `ν_V^* ∘ R u_{ét,*} ≅ R u_{proét,*} ∘ ν_U^*`. Exactness of `ν^*`,
+which is what allows it to be applied degreewise to complexes, is
+`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`. -/
 theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Scheme.{u}}
-    (u : U ⟶ V) [QuasiCompact u] [QuasiSeparated u]
-    [PreservesFiniteLimits (comparisonUpperStar A U)]
-    [PreservesFiniteColimits (comparisonUpperStar A U)]
-    [PreservesFiniteLimits (comparisonUpperStar A V)]
-    [PreservesFiniteColimits (comparisonUpperStar A V)] :
+    (u : U ⟶ V) [QuasiCompact u] [QuasiSeparated u] :
     Nonempty (R+(Etale.lowerStar A u) ⋙ D+(comparisonUpperStar A V) ≅
       D+(comparisonUpperStar A U) ⋙ R+(ProEtale.lowerStar A u)) :=
   sorry

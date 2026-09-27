@@ -21,6 +21,15 @@ repository, as
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`
 together with its identity and composition coherences; it is not restated here.
 
+## Implementation notes
+
+Each statement below records only the *existence* of the isomorphism it names. The unit and
+associativity coherences of `sk-thm-sf-comp-composition`, and the assertion of `sk-lem-sf-mate`
+that `R(gf)^! ≅ Rf^! Rg^!` is the *mate* of the composition isomorphism, cannot be phrased in
+that form; they need the isomorphism as a `def`, which in turn needs the comparison maps of
+the framework chapter. This is the same gap as the TODO already recorded in
+`WeilConjectures.SixFunctors.Etale.Derived.UpperShriek`.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`
@@ -38,7 +47,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-open Scheme Etale
+open Scheme
 
 namespace Etale
 
@@ -47,14 +56,16 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- Blueprint `sk-thm-sf-comp-composition`: The composition law for `Rf_!`
 
-**The composition law.** For `f : X ⟶ Y` and `g : Y ⟶ S` separated of finite type there is a
-canonical isomorphism
+**The composition law.** For `f : X ⟶ Y` and `g : Y ⟶ S` separated of finite type,
 
-`Rg_! ∘ Rf_! ≅ R(g ∘ f)_!`
+```
+  X --f--> Y --g--> S          Rf_! ⋙ Rg_!  ≅  R(f ≫ g)_!
 
-of functors `D(X_ét) ⥤ D(S_ét)`, independent of all compactification choices by the
-coherence of the compactification comparisons, equal to the identity when `f` or `g` is an
-identity, and associative for a third morphism. -/
+                               as functors D(X_ét) ⥤ D(S_ét)
+```
+
+is an isomorphism of functors, independent of all compactification choices by the coherence of
+the compactification comparisons. -/
 theorem nonempty_iso_rightDerivedLowerShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
     Nonempty (R(f)_![A] ⋙ R(g)_![A] ≅ R(f ≫ g)_![A]) :=
@@ -67,11 +78,12 @@ the resulting canonical identification
 
 `Rf_! ≅ Rf_*`
 
-is independent of the compactification. Under it the exchange `Ex_!` is the proper-base-change
-exchange `Ex_*`, so that compact-support base change specializes to proper base change.
+is independent of the compactification.
 
-At the level of sheaves this is `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`; the
-statement here is its derived counterpart. -/
+At the level of sheaves this is `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`, which
+states that the *canonical comparison* `f_! ⟶ f_*` is an isomorphism; the derived comparison
+map has not been constructed, so only the existence of the derived isomorphism is recorded
+here. -/
 theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
     [HasCompactification f] [IsProper f] :
     Nonempty (R(f)_![A] ≅ R((f)_*[A])) :=
@@ -79,14 +91,18 @@ theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
 
 /-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
 
-**The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S`, the
-mate of the composition isomorphism `R(g ∘ f)_! ≅ Rg_! Rf_!` is the isomorphism
+**The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S`,
 
-`R(g ∘ f)^! ≅ Rf^! ∘ Rg^!`,
+```
+  R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!           (left adjoints, sk-thm-sf-comp-composition)
+        ⊣              ⊣
+  R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!           (right adjoints, the mate)
+```
 
-and the units and counits of the composite adjunctions are the pasted ones: the functoriality
-of the mate construction turns an isomorphism of left adjoints into one of right adjoints, and
-the triangle identities of a composite adjunction are the composites of the component ones. -/
+the mate of the composition isomorphism is an isomorphism `R(g ∘ f)^! ≅ Rf^! ∘ Rg^!`: the
+functoriality of the mate construction turns an isomorphism of left adjoints into one of right
+adjoints, and the triangle identities of a composite adjunction are the composites of the
+component ones. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
     Nonempty (R(f ≫ g)^![A] ≅ R(g)^![A] ⋙ R(f)^![A]) :=

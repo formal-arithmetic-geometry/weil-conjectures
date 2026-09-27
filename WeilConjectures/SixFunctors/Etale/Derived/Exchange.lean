@@ -5,40 +5,37 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
-# Exchange and projection transformations for `Rf_!`
+# Compact-support base change and the projection formula
 
-The two natural transformations of the six-functor formalism that are attached to `Rf_!`: the
-exchange `Ex_!` of a cartesian square and the projection map `PF`, together with the theorems
-saying that they are isomorphisms — compact-support base change and the projection formula.
-
-The exchange `Ex_*` for `Rf_*` already exists in this repository, as
-`AlgebraicGeometry.Etale.baseChange` and `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`;
-only the `Rf_!` versions are introduced here.
+The two theorems of the six-functor formalism attached to `Rf_!` that the purity chapter
+consumes: compact-support base change for a cartesian square, and the projection formula.
 
 ## Implementation notes
 
-`Ex_!` and `PF` are the transformations of the framework chapter's `def:exchange-projection`,
-which is not this block's; they are recorded here with `sorry` bodies and a `TODO(unify)`
-marker so that the statements of this chapter can refer to them. The theorems below are
-phrased as the existence of the corresponding isomorphism of functors, which is what the
-purity chapter uses and which does not depend on the placeholder.
+The canonical transformations these theorems are *about* — the exchange
+`Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` and the projection map
+`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` — are the transformations of the framework
+chapter's `def:exchange-projection`, which is not this block's and has not landed. Neither is
+a formal mate of anything currently in the repository, so neither can be constructed here and
+neither is introduced: the statements below assert instead that the two functors in question
+are isomorphic. Once `def:exchange-projection` lands they should be restated as `IsIso Ex_!`
+and `IsIso PF`, in the style of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
 
-## Main definitions
-
-- `AlgebraicGeometry.Etale.derivedLowerShriekExchange`: `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*`.
-- `AlgebraicGeometry.Etale.reduction`: reduction of coefficients `K ↦ K ⊗^L (Λ/J)_X`.
+The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
+`AlgebraicGeometry.Etale.baseChange` and `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_upperStar_comp_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
-- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek_iff_reduction`
+- `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
 -/
 
 @[expose] public section
@@ -51,7 +48,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-open Scheme Etale
+open Scheme
 
 namespace Etale
 
@@ -62,35 +59,31 @@ section Exchange
 variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   [HasCompactification f] [HasCompactification f']
 
-/-- Blueprint `sk-def-sf-exchanges`: Exchange and projection transformations, typed
-
-The exchange transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` attached to a cartesian square,
-as a natural transformation between functors `D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
-
-This is the transformation of the framework chapter, restated here with the source and target
-categories of the purity chapter. The third transformation of the subsection, the projection
-map `PF_{f,K,L} : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`, is not named: the purity chapter uses
-only the assertion that it is an isomorphism, which is
-`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`. -/
--- TODO(unify): def:exchange-projection
-noncomputable def derivedLowerShriekExchange (_sq : IsPullback g' f' f g) :
-    R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⟶
-      L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] :=
-  sorry
-
 /-- Blueprint `sk-prop-sf-cbc`: Compact-support base change
 
 **Compact-support base change.** For `f : X ⟶ Y` separated of finite type, `g : Y' ⟶ Y`
-arbitrary and a cartesian square, the exchange transformation
-`Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of `sk-def-sf-exchanges` is an isomorphism at every
-coefficient stage, naturally in the coefficient complex and coherently for identity and pasted
-squares.
+arbitrary and a cartesian square
+
+```
+  X' --g'--> X            Rf_! ⋙ Lg^*  --Ex_!-->  Lg'^* ⋙ Rf'_!
+  |          |
+  f'         f            as functors D(X_ét, Λ) ⥤ D(Y'_ét, Λ)
+  |          |
+  v          v
+  Y' --g---> Y
+```
+
+the exchange transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of `sk-def-sf-exchanges` is an
+isomorphism; here, in the absence of `Ex_!`, this is recorded as the existence of an
+isomorphism between the two functors.
 
 The proof is the five-stage argument of the compact-support base change chapter: finite
 coefficients on the étale site, degreewise constructibility, the pro-étale finite level for
 objects with an étale-origin witness, completed coefficients, and finite extensions of the
 coefficient field. -/
-theorem nonempty_iso_upperStar_comp_rightDerivedLowerShriek (_sq : IsPullback g' f' f g) :
+-- TODO(unify): def:exchange-projection — restate as `IsIso (Ex_! sq)`.
+theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedLowerShriek [Finite Λ]
+    [HasInvertibleExponent Λ Y] [LocallyOfFiniteType f] (sq : IsPullback g' f' f g) :
     Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
       L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ]) :=
   sorry
@@ -103,62 +96,60 @@ variable (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients
 
-**The projection formula at finite coefficients.** For `Λ` a finite coefficient ring,
-`f : X ⟶ Y` separated of finite type, `K` bounded constructible on `X` and `L` bounded
-constructible of finite Tor amplitude on `Y`, the projection map
+**The projection formula at finite coefficients.** For `Λ` a finite coefficient ring whose
+exponent is invertible on `Y`, `f : X ⟶ Y` separated of finite type, `K` bounded constructible
+on `X` and `L` bounded constructible *of finite Tor amplitude* on `Y`, the projection map
 
-`Rf_! K ⊗^L L ≅ Rf_!(K ⊗^L Lf^* L)`
+`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`
 
-is an isomorphism, naturally in `K` and `L`. -/
-theorem nonempty_iso_derivedTensor_rightDerivedLowerShriek
+is an isomorphism, naturally in `K` and `L`. The finite Tor amplitude of `L` is essential: the
+fibrewise argument represents the stalks of `L` by bounded complexes of finite free modules. -/
+-- TODO(unify): def:exchange-projection — restate as `IsIso (PF f K L)`.
+theorem nonempty_iso_derivedTensor_rightDerivedLowerShriek [Finite Λ]
+    [HasInvertibleExponent Λ Y] [LocallyOfFiniteType f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (_hL : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y L) :
-    Nonempty (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.boundedConstructibleFiniteTor Λ Y L) :
+    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
           ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ≅
       (R(f)_![ModuleCat.{u + 1} Λ]).obj
-        (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
           ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
   sorry
-
-end Projection
-
-/-- Reduction of coefficients along a quotient of the coefficient ring: the functor
-`K ↦ K ⊗^L (Λ/J)_X` on `D(X_ét, Λ)`. For `Λ = A_{E,n}` and `J = ϖ^m` this is the finite
-reduction `K ↦ K_m` of the adic formalism. -/
-noncomputable def reduction (J : Ideal Λ) (X : Scheme.{u}) :
-    _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
-      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj
-    ((_root_.DerivedCategory.singleFunctor _ 0).obj
-      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-        (ModuleCat.of Λ (Λ ⧸ J))))
 
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction
 
-The square comparing the projection map at `(K, L)` with the projection map at the finite
-reductions `(K_m, L_m)`, through the finite-reduction compatibilities of `Rf_!`, `−⊗^L−` and
-`Lf^*`, commutes; hence the projection formula holds at `(K, L)` if and only if it holds at
-`(K_m, L_m)`. This is what reduces the projection formula at level `n` to the projection
-formula at level `m ≤ n`. -/
-theorem nonempty_iso_derivedTensor_rightDerivedLowerShriek_iff_reduction (f : X ⟶ Y)
-    [HasCompactification f] (J : Ideal Λ)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
-          ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ≅
-        (R(f)_![ModuleCat.{u + 1} Λ]).obj
-          (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
-            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) ↔
-      Nonempty (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
-          ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((reduction Λ J X).obj K))).obj
-            ((reduction Λ J Y).obj L) ≅
-        (R(f)_![ModuleCat.{u + 1} Λ]).obj
-          (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((reduction Λ J X).obj K)).obj
-            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((reduction Λ J Y).obj L)))) :=
+**`Rf_!` commutes with finite reduction.** For an ideal `J` of `Λ`,
+
+`Rf_!(K ⊗^L (Λ/J)_X) ≅ (Rf_! K) ⊗^L (Λ/J)_Y`.
+
+This is one of the three compatibilities out of which the comparison square of
+`sk-prop-sf-pf-reduction` is built, and the only one that is not formal; it is what reduces
+the projection formula at level `n` to the projection formula at level `m ≤ n`. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek (J : Ideal Λ) :
+    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
+      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=
   sorry
+
+/-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
+reduction
+
+**`Lf^*` commutes with finite reduction.** For an ideal `J` of `Λ`,
+
+`Lf^*(L ⊗^L (Λ/J)_Y) ≅ (Lf^* L) ⊗^L (Λ/J)_X`,
+
+because `Lf^*` is monoidal and carries the constant complex on `Λ/J` to the constant complex
+on `Λ/J`. Together with the associativity of `⊗^L` and
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` this is what
+makes the comparison square of the blueprint commute. -/
+theorem nonempty_iso_reductionModIdeal_leftDerivedUpperStar (J : Ideal Λ) :
+    Nonempty (reductionModIdeal Λ Y J ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅
+      L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ X J) :=
+  sorry
+
+end Projection
 
 end Etale
 

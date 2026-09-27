@@ -5,9 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import Mathlib.FieldTheory.IsSepClosed
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
@@ -18,17 +19,31 @@ The four finiteness inputs the purity chapter takes from the six-functor formali
 
 * `Rf_*` and `Rf_!` preserve bounded constructibility, with a cohomological-dimension bound
   in terms of the fibre dimension (`sk-prop-sf-finiteness`);
-* compactly supported cohomology and geometric stalks are perfect complexes of `Λ`-modules
+* compactly supported cohomology is a perfect complex of `Λ`-modules
   (`sk-prop-sf-trace-perfectness`);
 * finite Tor amplitude in `[a, b]` is the same as admitting a bounded flat model concentrated
   in `[a, b]` (`sk-lem-sf-flat-model`);
 * the Künneth formula and the projection formula in ordinary étale cohomology
   (`sk-prop-sf-kunneth-ordinary`).
 
+Throughout, `Λ` is a finite coefficient ring whose exponent is invertible on the schemes in
+question (`AlgebraicGeometry.HasInvertibleExponent`) and the schemes are of finite type over a
+field: without the invertibility the Artin–Schreier sequence already defeats constructibility
+of `R¹f_*` in characteristic `p`.
+
+## Implementation notes
+
+`sk-prop-sf-trace-perfectness` concludes that `RΓ_c(X, K)` is *perfect*: bounded, with finite
+cohomology modules, and of finite Tor amplitude. The first two are stated below; the third is
+not, because the repository has no Tor-amplitude notion for objects of `D(ModuleCat Λ)` — only
+for complexes of sheaves. The geometric-stalk half of the same subsection is likewise omitted.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`
-- `AlgebraicGeometry.Etale.finite_homology_compactlySupportedGlobalSections`
+- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`
+- `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`
 - `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`
 - `AlgebraicGeometry.Etale.nonempty_iso_kunneth`
 -/
@@ -43,66 +58,100 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-open Scheme Etale
+open Scheme
 
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
+section Finiteness
+
+variable [Finite Λ] {k : Type u} [Field k]
+
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
-**Finiteness of direct images.** Let `Λ` be a finite ring annihilated by an integer invertible
-on the schemes in question and let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes. Then
-`Rf_*` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)` — separatedness of `f` is not needed — and, if
-`f` is moreover separated, so does `Rf_!`, with `R^q f_! F = 0` for `q > 2e` when `e` bounds
-the dimensions of the geometric fibres.
+**Finiteness of direct images.** Let `Λ` be a finite ring whose exponent is invertible on `X`
+and let `f : X ⟶ Y` be a quasi-compact morphism of finite-type `k`-schemes. Then `Rf_*`
+carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`; separatedness of `f` is not needed.
 
 The underlying numerical input is that the torsion cohomological dimension of a finite-type
 `k`-scheme of dimension `d` over a field of torsion cohomological dimension at most `c` is
 bounded by `2d + c`; in particular it is `0` for the spectrum of a separably closed field. -/
-theorem boundedConstructible_rightDerivedLowerStar [Finite Λ] (f : X ⟶ Y)
-    [LocallyOfFiniteType f] [QuasiCompact f]
+theorem boundedConstructible_rightDerivedLowerStar (f : X ⟶ Y) [QuasiCompact f]
+    [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
   sorry
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
-**Finiteness and the fibre-dimension bound for `Rf_!`.** For `f : X ⟶ Y` separated of finite
-type between finite-type `k`-schemes, `Rf_!` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`, and if
-`e` bounds the dimensions of the geometric fibres of `f` then `R^q f_! F = 0` for `q > 2e`. -/
-theorem boundedConstructible_rightDerivedLowerShriek [Finite Λ] (f : X ⟶ Y)
-    [HasCompactification f] (e : ℕ)
-    (_he : ∀ (Ω : Type u) (_ : Field Ω) (s : Spec (.of Ω) ⟶ Y),
+**Finiteness of compactly supported direct images.** For `f : X ⟶ Y` separated of finite type
+between finite-type `k`-schemes, `Rf_!` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`. -/
+theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
+    [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
+
+**The fibre-dimension bound.** If `e` bounds the dimensions of the *geometric* fibres of a
+separated finite-type `f : X ⟶ Y`, then `R^q f_! K = 0` for `q > 2e` and every bounded
+constructible `K`. -/
+theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
+    [HasInvertibleExponent Λ X] (e : ℕ)
+    (he : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞))
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-        ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧
-      ∀ q : ℤ, (2 * e : ℤ) < q →
-        IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-          ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) :=
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (q : ℤ) (hq : (2 * e : ℤ) < q) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) :=
+  sorry
+
+end Finiteness
+
+section Perfectness
+
+variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
+  (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [HasCompactification aX]
+  [HasInvertibleExponent Λ X]
+
+/-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+geometric stalks
+
+**Boundedness of compactly supported cohomology.** Let `Λ` be a finite coefficient ring, `k`
+separably closed, `X` separated of finite type over `k` with structure morphism `a_X`, and
+`K ∈ D^b_{ctf}(X, Λ)`. Then `RΓ_c(X, K) = Ra_{X!} K` vanishes in all but finitely many
+degrees. Separable closedness of the base is essential: over `Spec ℚ` already
+`H¹_c(Spec ℚ, ℤ/n) = Hom(G_ℚ, ℤ/n)` is infinite. -/
+theorem isZero_compactlySupportedCohomology_of_lt
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
+    ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((H_c(aX)[ModuleCat.{u + 1} Λ](q)).obj K) :=
   sorry
 
 /-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
 geometric stalks
 
-**Perfectness of compactly supported cohomology.** Let `Λ` be a finite coefficient ring, `X`
-separated of finite type over `k` with structure morphism `a_X`, and `K ∈ D^b_{ctf}(X, Λ)`.
-Then `RΓ_c(X, K) = Ra_{X!} K` is a perfect complex of `Λ`-modules: it is bounded, each
-cohomology module is finite, and it has finite Tor amplitude — over the Artinian local ring
-`A_{E,n}` these three conditions are exactly perfectness. The derived geometric stalk
-`K_{x̄} = Lx̄^* K` at any geometric point is perfect for the same reason. -/
-theorem finite_homology_compactlySupportedGlobalSections [Finite Λ] (f : X ⟶ Y)
-    [HasCompactification f]
+**Finiteness of compactly supported cohomology.** In the situation of
+`AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`, every compactly supported
+cohomology module `H^q_c(X, K)` is a finite `Λ`-module. Together with boundedness and finite
+Tor amplitude these are exactly perfectness over the Artinian local ring `A_{E,n}`. -/
+theorem finite_compactlySupportedCohomology
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    ∀ q : ℤ, Module.Finite Λ
-      ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
-        ((Etale.compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) f).obj K)) :=
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (q : ℤ) :
+    Module.Finite Λ ((H_c(aX)[ModuleCat.{u + 1} Λ](q)).obj K) :=
   sorry
+
+end Perfectness
 
 /-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
 
@@ -112,41 +161,75 @@ to a bounded complex `P` of *flat* sheaves of `Λ`-modules with `P^q = 0` for `q
 
 One direction is that a bounded-above complex of flat sheaves is K-flat; the other truncates a
 bounded-above free resolution and checks that the truncation is flat by the Tor criterion. -/
-theorem hasTorAmplitudeIn_iff_exists_flatModel (X : Scheme.{u}) (a b : ℤ)
+theorem hasTorAmplitudeIn_iff_exists_flatModel (a b : ℤ) (hab : a ≤ b)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    (∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), q < a ∨ b < q →
-        IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-          (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
-            ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))) ↔
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.hasTorAmplitudeIn Λ X a b K ↔
       ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
         (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧
         (∀ q : ℤ, ObjectProperty.flat (P.X q)) ∧
         Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P) :=
   sorry
 
+section Kunneth
+
+variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
+  (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+  [LocallyOfFiniteType aX] [LocallyOfFiniteType aY]
+  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
+
 /-- Blueprint `sk-prop-sf-kunneth-ordinary`: Künneth and the projection formula in ordinary
 étale cohomology
 
-**Künneth.** Let `k` be separably closed, let `n` be invertible in `k` and let `X`, `Y` be
-finite-type `k`-schemes with product `X ×_k Y` and projections `p₁`, `p₂`. Then the
-exterior-product map
+**Künneth.** Let `k` be separably closed, let the exponent of `Λ` be invertible on `X` and `Y`
+and let `X`, `Y` be finite-type `k`-schemes. For the cartesian square
+
+```
+  W --p₂--> Y
+  |         |
+  p₁        a_Y
+  |         |
+  v         v
+  X --a_X-> Spec k
+```
+
+exhibiting `W = X ×_k Y`, the exterior-product map
 
 `RΓ(X, E) ⊗^L RΓ(Y, K) ≅ RΓ(X ×_k Y, Lp₁^* E ⊗^L Lp₂^* K)`
 
 is an isomorphism for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` — unbounded, and with no
-properness hypothesis — together with its one-proper-factor and compact-support forms; and for
-`f` proper the projection formula `Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)` is an isomorphism. -/
+properness hypothesis. Without the cartesian hypothesis the statement is false: for `W = ∅`
+and `X = Y = Spec k` the right-hand side is `0` and the left-hand side is `Λ`. -/
 theorem nonempty_iso_kunneth {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
+    (sq : IsPullback p₁ p₂ aX aY)
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗
-        (Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).obj K ≅
-      (Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).obj
-        (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) W).obj
+    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).obj K ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
             ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj E)).obj
           ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj K))) :=
   sorry
+
+/-- Blueprint `sk-prop-sf-kunneth-ordinary`: Künneth and the projection formula in ordinary
+étale cohomology
+
+**The projection formula for a proper morphism.** For `f : X ⟶ Y` proper between finite-type
+`k`-schemes and all `E ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
+
+`Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`. -/
+theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ Y) [IsProper f]
+    (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
+          ((R((f)_*[ModuleCat.{u + 1} Λ])).obj E)).obj L ≅
+      (R((f)_*[ModuleCat.{u + 1} Λ])).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
+          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
+  sorry
+
+end Kunneth
 
 end Etale
 

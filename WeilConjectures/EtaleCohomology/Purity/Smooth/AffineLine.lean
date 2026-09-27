@@ -11,8 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 /-!
 # The affine line, `𝔾ₘ`, and the model purity
 
-The rank-one computation that the whole of smooth purity rests on. Over a separated
-finite-type base `Y`, with `p : 𝔸¹_Y → Y` the projection, `s : Y → 𝔸¹_Y` the zero section and
+The rank-one computation that the whole of smooth purity rests on. The base `Y` is separated
+of finite type over a field `k`, the coefficient ring `Λ` is finite with exponent invertible
+on `Y`, and `p : 𝔸¹_Y → Y` is the projection, `s : Y → 𝔸¹_Y` the zero section and
 `j : 𝔾_{m,Y} → 𝔸¹_Y` the open complement:
 
 * the affine line is acyclic, `Rp_* Λ ≅ Λ_Y`, and `Rπ_* Λ(1)` has `Λ_Y(1)` in degree zero,
@@ -24,26 +25,41 @@ finite-type base `Y`, with `p : 𝔸¹_Y → Y` the projection, `s : Y → 𝔸�
 * iterating the one-dimensional case through Künneth gives the model purity
   `Rz^! Λ(c)[2c] ≅ Λ_B` for the zero section of `𝔸^c_B` (`sk-prop-an`).
 
+The invertibility hypothesis is not decorative: for `Λ = ℤ/p` over a base of characteristic
+`p` the Artin–Schreier sequence gives `H¹(𝔸¹_k, ℤ/p) = k[t]/(F − 1)k[t] ≠ 0`, so the affine
+line is not acyclic and every statement below fails.
+
 ## Implementation notes
 
 `𝔾_m` is not a Mathlib scheme, so the open complement of the zero section is carried as data:
 a scheme `G` with an open immersion `j` whose range is the complement of the range of the
 zero section. This is the same idiom as `AlgebraicGeometry.Etale.openClosedShortComplex`.
 
-The Kummer class `κ(t) ∈ H¹(𝔾_{m,Y}, Λ(1))` generating `R¹π_*Λ(1)` is not named: the sheaf of
-roots of unity and the Kummer sequence are the Kummer block's, and the statements below —
-which only assert what the cohomology sheaves *are* — do not need a chosen generator. The
-vector-bundle Thom class of `sk-prop-an` is likewise omitted: the blueprint records that the
-`Rz^!` form for a general vector bundle is never used downstream, and Mathlib has no vector
-bundles over a scheme.
+Two clauses of the blueprint are stated only in part, and are TODOs.
+
+* The Kummer class `κ(t) ∈ H¹(𝔾_{m,Y}, Λ(1))` generating `R¹π_*Λ(1)` is not named — the sheaf
+  of roots of unity and the Kummer sequence are the Kummer block's — so `sk-prop-a1-kummer`
+  is recorded as what the cohomology sheaves *are* rather than as a statement about the
+  generator, and `sk-prop-a1` correspondingly records only that `Rs^!Λ(1)[2] ≅ Λ_Y`, not that
+  the boundary of `κ(t)` is that isomorphism.
+* Of `sk-prop-a1-inv` (ii) only the uniqueness half is stated; the gluing half — that
+  normalized local comparisons over an étale cover of `Y` glue — needs a formalisation of
+  étale-local data on `Y` that this file does not set up.
+* `sk-prop-an` is stated only in the model case `𝔸^c_B`. The vector-bundle Thom class for a
+  general rank-`c` bundle is not, Mathlib having no vector bundles over a scheme; the normal
+  cone datum of `WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion` records
+  instead that the cone is smooth of relative dimension `c`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_affineLine`
-- `AlgebraicGeometry.Etale.nonempty_iso_homology_rightDerivedLowerStar_multiplicativeGroup`
+- `AlgebraicGeometry.Etale.nonempty_iso_homology_zero_multiplicativeGroup`,
+  `AlgebraicGeometry.Etale.nonempty_iso_homology_one_multiplicativeGroup`,
+  `AlgebraicGeometry.Etale.isZero_homology_multiplicativeGroup`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineLineZero`
-- `AlgebraicGeometry.Etale.injective_upperStar_map_of_isFiniteLocallyConstantSheaf`
-- `AlgebraicGeometry.Etale.eq_of_upperStar_oneSection_eq`
+- `AlgebraicGeometry.Etale.injective_upperStar_map_of_isFiniteLocallyConstantSheaf`,
+  `AlgebraicGeometry.Etale.injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf`
+- `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`
 -/
 
@@ -57,15 +73,16 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-open Scheme Etale
+open Scheme
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 section
 
-variable {Y : Scheme.{u}}
+variable {k : Type u} [Field k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
+  [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y]
 
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
@@ -74,7 +91,7 @@ variable {Y : Scheme.{u}}
 instance of smooth base change, it is compatible with base change on `Y`; on a geometric
 fibre it is the vanishing `H^q(𝔸¹_k, μ_{ℓ^N}) = 0` for `q > 0`, which follows from the
 Kummer sequence, the divisibility of `k^×` and `Pic(𝔸¹_k) = 0`. -/
-theorem nonempty_iso_rightDerivedLowerStar_affineLine (Y : Scheme.{u}) :
+theorem nonempty_iso_rightDerivedLowerStar_affineLine :
     Nonempty ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
         (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y)) ≅ constantComplex Λ Y) :=
   sorry
@@ -83,27 +100,37 @@ variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Y)) [IsOpenImmersio
 
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
-*The Kummer generator and vanishing above degree one.* Let `j : G ↪ 𝔸¹_Y` be the open
-complement of the zero section — so `G = 𝔾_{m,Y}` — and let `π = p ∘ j`. Then
-`R⁰π_* Λ(1) ≅ Λ_Y(1)`, with `p^*` an isomorphism onto it; `R¹π_* Λ(1) ≅ Λ_Y`, free of rank
-one on the Kummer class `κ(t)`; and `R^m π_* Λ(1) = 0` for `m ≥ 2`.
-
-On a geometric fibre these are the Kummer-sequence computation
-`H⁰(𝔾_{m,k}, μ_n) = μ_n(k)`, `H¹(𝔾_{m,k}, μ_n) = ℤ/n` generated by the class of the
-coordinate `t`, and `H^q(𝔾_{m,k}, μ_n) = 0` for `q ≥ 2`, the last by the cohomological
-dimension of an affine curve. -/
-theorem nonempty_iso_homology_rightDerivedLowerStar_multiplicativeGroup
+*Degree zero.* Let `j : G ↪ 𝔸¹_Y` be the open complement of the zero section — so
+`G = 𝔾_{m,Y}` — and let `π = p ∘ j`. Then `R⁰π_* Λ(1) ≅ Λ_Y(1)`; on a geometric fibre this is
+the Kummer computation `H⁰(𝔾_{m,k}, μ_n) = μ_n(k)`. -/
+theorem nonempty_iso_homology_zero_multiplicativeGroup
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
     Nonempty ((_root_.DerivedCategory.homologyFunctor _ 0).obj
         ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
           ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
-      (_root_.DerivedCategory.homologyFunctor _ 0).obj
-        ((tateTwist Λ Y 1).obj (constantComplex Λ Y))) ∧
+      (_root_.DerivedCategory.homologyFunctor _ 0).obj (tateObject Λ Y 1)) :=
+  sorry
+
+/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+
+*Degree one.* In the situation above `R¹π_* Λ(1) ≅ Λ_Y`, free of rank one; on a geometric
+fibre this is `H¹(𝔾_{m,k}, μ_n) = ℤ/n`, generated by the class of the coordinate `t`. -/
+theorem nonempty_iso_homology_one_multiplicativeGroup
+    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ) :
     Nonempty ((_root_.DerivedCategory.homologyFunctor _ 1).obj
         ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
           ((tateTwist Λ G 1).obj (constantComplex Λ G))) ≅
-      (_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ Y)) ∧
-    ∀ m : ℤ, 2 ≤ m → IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
+      (_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ Y)) :=
+  sorry
+
+/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+
+*Vanishing above degree one.* In the situation above `R^m π_* Λ(1) = 0` for `m ≥ 2`, by the
+cohomological dimension of an affine curve. -/
+theorem isZero_homology_multiplicativeGroup
+    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
+    (m : ℤ) (hm : 2 ≤ m) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ m).obj
       ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
         ((tateTwist Λ G 1).obj (constantComplex Λ G)))) :=
   sorry
@@ -113,23 +140,26 @@ theorem nonempty_iso_homology_rightDerivedLowerStar_multiplicativeGroup
 For the zero section `s : Y ↪ 𝔸¹_Y` the complex `Rs^! Λ(1)[2]` is concentrated in degree zero
 with lisse rank-one `H⁰`; the *fundamental class* `pur_s : Λ_Y ⟶ Rs^! Λ(1)[2]` normalized to
 `1` at every geometric point is therefore an isomorphism, and it is the boundary of the
-Kummer class `κ(t)`.
+Kummer class `κ(t)`. Since `κ(t)` is not available (see the implementation notes), only the
+resulting isomorphism is recorded.
 
 The proof applies `Rp_*` to the localization triangle of the closed–open pair `(s, j)` and
 reads off the long exact sequence with `sk-prop-a1-kummer`. -/
+-- TODO(unify): sk-prop-a1 — state `IsIso pur_s` once the Kummer class is available.
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero :
-    Nonempty ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y))) ≅
+        ((twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj
+          (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y))) ≅
       constantComplex Λ Y) :=
   sorry
 
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
-*Uniqueness for lisse sheaf maps.* Two morphisms between finite locally constant sheaves on
-`𝔸¹_Y` that agree after restriction to the open complement `G = 𝔾_{m,Y}` of the zero section
-agree everywhere: the internal Hom is again finite locally constant, a section of a locally
-constant sheaf on a connected scheme is determined by one geometric stalk, and every
+*Uniqueness for lisse sheaf maps on `𝔸¹_Y`.* Two morphisms between finite locally constant
+sheaves on `𝔸¹_Y` that agree after restriction to the open complement `G = 𝔾_{m,Y}` of the
+zero section agree everywhere: the internal Hom is again finite locally constant, a section of
+a locally constant sheaf on a connected scheme is determined by one geometric stalk, and every
 connected component of `𝔸¹_Y` meets `𝔾_{m,Y}`. -/
 theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
@@ -140,16 +170,35 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
 
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
-*Invariance along the line.* A comparison between a complex on `𝔸¹_Y` and a pullback from `Y`
-is determined by its restriction to the unit section `t = 1`: two isomorphisms
-`α, β : F ≅ Lp^* C` with `Li₁^* α = Li₁^* β` are equal. Consequently the identifications
-`Li₀^* F ≅ C ≅ Li₁^* F` obtained from such a comparison are canonical, and the invariant is
-*constant* along the `𝔸¹`-direction: its values at `t = 0` and at `t = 1` agree. -/
-theorem eq_of_upperStar_oneSection_eq
+*Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.* Two morphisms between finite locally constant
+sheaves on `𝔾_{m,Y}` that agree after restriction along the unit section `i₁ : Y ⟶ 𝔾_{m,Y}`
+agree everywhere. This is the second assertion of clause (i), and it is what `sk-thm-dnc`
+Step 2 and `sk-prop-an` Step 3 use. -/
+theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
+    (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base)ᶜ)
+    (i₁ : Y ⟶ G) (hi₁ : i₁ ≫ j = AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)
+    (L M : Sheaf G.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsFiniteLocallyConstantSheaf L] [Scheme.IsFiniteLocallyConstantSheaf M] :
+    Function.Injective fun φ : L ⟶ M ↦ ((i₁)^*[ModuleCat.{u + 1} Λ]).map φ :=
+  sorry
+
+/-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
+
+*Invariance along the line.* A comparison between an invertible complex `F` on `𝔸¹_Y` and a
+pullback from `Y` is determined by its restriction to the unit section `t = 1`: two
+isomorphisms `α, β : F ≅ Lp^* C` with `Li₁^* α = Li₁^* β` are equal. Consequently the
+identifications `Li₀^* F ≅ C ≅ Li₁^* F` obtained from such a comparison are canonical, and the
+invariant is *constant* along the `𝔸¹`-direction: its values at `t = 0` and at `t = 1` agree.
+
+Invertibility of `F` is what puts the comparison inside the lisse rank-one world in which the
+uniqueness statements above apply; it is the hypothesis `sk-prop-a1-inv` (ii) imposes, in the
+weaker form available here (the blueprint asks that `F` be étale-locally a shift and twist of
+a lisse rank-one sheaf). -/
+theorem eq_of_leftDerivedUpperStar_oneSection_eq
     (F : _root_.DerivedCategory
       (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hF : DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); Y) F)
+    (hF : DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); Y) F)
     (α β : F ≅ (L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj C)
     (h : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map α.hom =
       (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map β.hom) :
@@ -167,16 +216,14 @@ For the zero section `z : B ↪ 𝔸^c_B` of relative affine `c`-space,
 canonically and compatibly with base change, the generator being the `c`-fold exterior
 product of the fundamental class of `sk-prop-a1`. The proof writes `𝔸^c_B` as a `c`-fold
 fibre product of copies of `𝔸¹_B`, applies Künneth for cohomology with supports, and uses
-`Λ(c)[2c] = (Λ(1)[2])^{⊗c}`.
-
-The blueprint also records a Thom class `th_E : Λ_Z ≅ Rz^! Λ_E(c)[2c]` for a vector bundle
-`E → Z` of rank `c`, together with the observation that this `Rz^!` form is never used later
-— only the equivalent `Rπ^! Λ_Z ≅ Λ_E(c)[2c]` and `Rπ_! Λ_E(c)[2c] ≅ Λ_Z` are. Mathlib has no
-vector bundles over a scheme, so only the model case is stated here. -/
-theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero (c : ℕ) (B : Scheme.{u}) :
-    Nonempty ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
+`Λ(c)[2c] = (Λ(1)[2])^{⊗c}`. -/
+theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero {k : Type u} [Field k] (c : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B] :
+    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin c); B) c).obj (constantComplex Λ 𝔸(ULift.{u} (Fin c); B))) ≅
+        ((twistShift Λ 𝔸(ULift.{u} (Fin c); B) c).obj
+          (constantComplex Λ 𝔸(ULift.{u} (Fin c); B))) ≅
       constantComplex Λ B) :=
   sorry
 

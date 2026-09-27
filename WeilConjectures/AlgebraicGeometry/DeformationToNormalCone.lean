@@ -19,7 +19,7 @@ normal cone of the section* is
 the blow-up of `V ×_B 𝔸¹_B` along `s(B) × {0}` with the strict transform of the fibre over
 `t = 0` removed. It carries a morphism `g̃ : 𝒟_s V ⟶ 𝔸¹_B` with a section
 `s̃ : 𝔸¹_B ⟶ 𝒟_s V`; the fibre of `(g̃, s̃)` over `t = 1` is `(g, s)` and the fibre over
-`t = 0` is `(N_s → B, 0_N)`, so the deformation interpolates between a smooth morphism with a
+`t = 0` is `(π_N, 0_N)`, so the deformation interpolates between a smooth morphism with a
 section and a vector bundle with its zero section.
 
 Equivalently `𝒟_s V = Spec_V (⨁_{r ∈ ℤ} I_s^r t^{-r})` is the extended Rees construction,
@@ -29,20 +29,26 @@ normal cone.
 ## Implementation notes
 
 The pinned Mathlib has no relative `Spec` of a quasi-coherent graded algebra and the project's
-blow-up is not yet available along an arbitrary closed subscheme of a non-affine scheme, so
-the deformation space and its two structure morphisms are packaged in a single `opaque`
-constant. It depends genuinely on its arguments and introduces no `sorryAx`, but it satisfies
-no equations; the blueprint content is the lemma below, not the construction.
+blow-up is not yet available along an arbitrary closed subscheme of a non-affine scheme, so the
+deformation space cannot be constructed here. As for the normal cone in
+`WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion`, it is carried as *data*: the
+structure `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` bundles the deformation
+space, the two structure morphisms and the four clauses of `sk-lem-geometry`, and the
+blueprint lemma is the statement that such a datum exists.
+
+The punctured trivialisation `κ°` of `sk-lem-geometry` (3) — the identification of the
+deformation over `𝔾_{m,B}` with `V ×_B 𝔾_{m,B}` — is not among the fields: `𝔾_m` is not a
+Mathlib scheme, and the open complement of the zero section is carried as data at the point of
+use in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine`. It is a TODO.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Hom.deformationToNormalCone`: the deformation space `𝒟_s V`.
-- `AlgebraicGeometry.Scheme.Hom.deformationProj`: `g̃ : 𝒟_s V ⟶ 𝔸¹_B`.
-- `AlgebraicGeometry.Scheme.Hom.deformationSection`: `s̃ : 𝔸¹_B ⟶ 𝒟_s V`.
+- `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData`: the deformation space `𝒟_s V`
+  together with `g̃`, `s̃` and the properties characterising them.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.deformationToNormalCone_spec`
+- `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`
 -/
 
 @[expose] public section
@@ -57,60 +63,73 @@ variable {V B : Scheme.{u}}
 
 namespace Scheme.Hom
 
-/-- The deformation to the normal cone of a section, packaged with its two structure
-morphisms: the scheme `𝒟_s V`, the morphism `g̃ : 𝒟_s V ⟶ 𝔸¹_B` and its section
-`s̃ : 𝔸¹_B ⟶ 𝒟_s V`.
+/-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
+
+The deformation to the normal cone of a closed section `s` of a morphism `g : V ⟶ B` smooth of
+pure relative dimension `d`, as data. Writing `𝔸¹_B = 𝔸(Fin 1; B)` with its zero and unit
+sections `i₀`, `i₁`, the datum consists of the deformation space `𝒟_s V`, a morphism
+`g̃ : 𝒟_s V ⟶ 𝔸¹_B` again smooth of relative dimension `d`, a section `s̃` of `g̃`, and the
+identification of the two fibres:
+
+```
+  V ---ι₁---> 𝒟_s V <---ι₀--- N_s          B ---s---> V
+  |             |              |           |          |
+  g             g̃             π_N          ‖          g
+  v             v              v           v          v
+  B ---i₁---> 𝔸¹_B <---i₀---- B           B ---𝟙----> B
+```
+
+both squares cartesian, with `ι₁` carrying `s` to `s̃` and `ι₀` carrying `0_N` to `s̃`.
 
 Mathlib has neither the relative `Spec` of the extended Rees algebra nor a blow-up along an
-arbitrary closed subscheme, so this is an `opaque` placeholder; it satisfies no equations. The
-three components are packaged together because the two morphisms have no type before the
-scheme is known. -/
+arbitrary closed subscheme, so the datum cannot be constructed here; existence is
+`AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`. -/
 -- TODO(unify): sk-def-purity-conv
-noncomputable opaque deformationData (g : V ⟶ B) (s : B ⟶ V) :
-    Σ D : Scheme.{u}, (D ⟶ 𝔸(ULift.{u} (Fin 1); B)) × (𝔸(ULift.{u} (Fin 1); B) ⟶ D) :=
-  ⟨𝔸(ULift.{u} (Fin 1); B), 𝟙 _, 𝟙 _⟩
+structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
+    (N : NormalConeData d s) where
+  /-- The deformation space `𝒟_s V`. -/
+  scheme : Scheme.{u}
+  /-- The structure morphism `g̃ : 𝒟_s V ⟶ 𝔸¹_B`. -/
+  proj : scheme ⟶ 𝔸(ULift.{u} (Fin 1); B)
+  /-- The section `s̃ : 𝔸¹_B ⟶ 𝒟_s V` of `g̃`. -/
+  sect : 𝔸(ULift.{u} (Fin 1); B) ⟶ scheme
+  /-- `s̃` really is a section of `g̃`. -/
+  sect_comp_proj : sect ≫ proj = 𝟙 _
+  /-- `g̃` is again smooth of pure relative dimension `d`. -/
+  smoothOfRelativeDimension_proj : SmoothOfRelativeDimension d proj
+  /-- The inclusion `ι₁ : V ⟶ 𝒟_s V` of the fibre over `t = 1`. -/
+  oneFibre : V ⟶ scheme
+  /-- The fibre of `g̃` over the unit section is `g`. -/
+  isPullback_oneFibre :
+    IsPullback oneFibre g proj (AffineSpace.oneSection (ULift.{u} (Fin 1)) B)
+  /-- `ι₁` carries the section `s` to `s̃`. -/
+  comp_oneFibre : s ≫ oneFibre = AffineSpace.oneSection (ULift.{u} (Fin 1)) B ≫ sect
+  /-- The inclusion `ι₀ : N_s ⟶ 𝒟_s V` of the fibre over `t = 0`. -/
+  zeroFibre : N.scheme ⟶ scheme
+  /-- The fibre of `g̃` over the zero section is the normal cone. -/
+  isPullback_zeroFibre :
+    IsPullback zeroFibre N.proj proj (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)
+  /-- `ι₀` carries the zero section of the normal cone to `s̃`. -/
+  comp_zeroFibre :
+    N.zeroSection ≫ zeroFibre = AffineSpace.zeroSection (ULift.{u} (Fin 1)) B ≫ sect
 
-/-- The deformation to the normal cone `𝒟_s V` of a closed section `s` of `g : V ⟶ B`. -/
-noncomputable def deformationToNormalCone (g : V ⟶ B) (s : B ⟶ V) : Scheme.{u} :=
-  (deformationData g s).1
-
-/-- The structure morphism `g̃ : 𝒟_s V ⟶ 𝔸¹_B` of the deformation to the normal cone. -/
-noncomputable def deformationProj (g : V ⟶ B) (s : B ⟶ V) :
-    deformationToNormalCone g s ⟶ 𝔸(ULift.{u} (Fin 1); B) :=
-  (deformationData g s).2.1
-
-/-- The section `s̃ : 𝔸¹_B ⟶ 𝒟_s V` of the deformation to the normal cone. -/
-noncomputable def deformationSection (g : V ⟶ B) (s : B ⟶ V) :
-    𝔸(ULift.{u} (Fin 1); B) ⟶ deformationToNormalCone g s :=
-  (deformationData g s).2.2
+attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
-Let `g : V ⟶ B` be smooth of pure relative dimension `d` with a closed section `s`, and let
-`N_s ⟶ B` be the normal bundle of `s` with zero section `0_N`. Then:
-
-1. `s̃` really is a section of `g̃`, and `g̃` is again smooth of pure relative dimension `d`:
-   étale-locally there are relative coordinates `x₁, …, x_d` on `V` in which `s` is
-   `x_i = 0`, and on the deformation chart `u_i = x_i / t` the deformation is
-   `𝔸^d × 𝔸¹` over the base;
-2. *the fibre over `t = 1`* is `(g, s)`: there is a morphism `ι₁ : V ⟶ 𝒟_s V` making the
-   square with `g̃` and the unit section cartesian, and carrying `s` to `s̃`;
-3. *the fibre over `t = 0`* is `(π_N, 0_N)`: likewise for the normal cone of `s` and the
-   zero section of the affine line.
+**Existence of the deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure
+relative dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
+with its zero section. Then the deformation datum of
+`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` exists: étale-locally there are
+relative coordinates `x₁, …, x_d` on `V` in which `s` is `x_i = 0`, and on the deformation
+chart `u_i = x_i / t` the deformation is `𝔸^d × 𝔸¹` over the base, which gives both the
+smoothness of `g̃` and the two cartesian squares.
 
 All of this commutes with base change in `B` and with étale localization. -/
-theorem deformationToNormalCone_spec (d : ℕ) (g : V ⟶ B) [SmoothOfRelativeDimension d g]
-    (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
-    deformationSection g s ≫ deformationProj g s = 𝟙 _ ∧
-    SmoothOfRelativeDimension d (deformationProj g s) ∧
-    (∃ ι : V ⟶ deformationToNormalCone g s,
-      IsPullback ι g (deformationProj g s) (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) ∧
-        s ≫ ι = AffineSpace.oneSection (ULift.{u} (Fin 1)) B ≫ deformationSection g s) ∧
-    (∃ ι : s.normalCone ⟶ deformationToNormalCone g s,
-      IsPullback ι s.normalConeProj (deformationProj g s)
-          (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B) ∧
-        s.normalConeZero ≫ ι =
-          AffineSpace.zeroSection (ULift.{u} (Fin 1)) B ≫ deformationSection g s) :=
+theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
+    [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
+    (N : NormalConeData d s) :
+    Nonempty (DeformationToNormalConeData d g s N) :=
   sorry
 
 end Scheme.Hom
