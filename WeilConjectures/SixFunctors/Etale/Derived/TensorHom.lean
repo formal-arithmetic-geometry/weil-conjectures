@@ -25,6 +25,12 @@ Specialising it to `N = ω_Y` and using `Rf^! ω_Y ≅ ω_X` gives the *Verdier-
 route to the exchange goes through the tensor–Hom statement only, and so does not depend on
 the duality theory itself.
 
+## Implementation notes
+
+Canonical comparison maps are not constructed in this repository, so the isomorphisms are
+asserted as `Nonempty (_ ≅ _)`; the blueprint's naturality clauses and its compatibilities
+with finite reduction, scalar extension and shifts are consequently **not stated**.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek`
@@ -40,7 +46,7 @@ the duality theory itself.
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory Opposite Functor
+open CategoryTheory Limits MonoidalCategory Opposite
 
 open scoped CategoryTheory.Functor
 
@@ -71,15 +77,13 @@ internal hom on `Y` from `Rf_! M` into `N`:
 
 `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 
-The isomorphism is natural in `M` and `N` and compatible with finite reduction, scalar
-extension and shifts. It is obtained by Yoneda from the chain of adjunctions
-`Rf_! ⊣ Rf^!`, `Lf^* ⊣ Rf_*` and `- ⊗ᴸ - ⊣ RHom`, the inverse of the projection formula
-supplying the passage `Rf_! M ⊗ᴸ L ≅ Rf_! (M ⊗ᴸ Lf^* L)`. -/
+The blueprint obtains this by Yoneda from the chain of adjunctions `Rf_! ⊣ Rf^!`,
+`Lf^* ⊣ Rf_*` and `- ⊗ᴸ - ⊣ RHom`, together with the projection formula. -/
 theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    (hM : DerivedCategory.boundedConstructible A X M ∧ DerivedCategory.finiteTorAmplitude A X M)
-    (hN : DerivedCategory.boundedConstructible A Y N ∧ DerivedCategory.finiteTorAmplitude A Y N) :
+    (hM : DerivedCategory.constructibleFiniteTor A X M)
+    (hN : DerivedCategory.constructibleFiniteTor A Y N) :
     Nonempty ((R((f)_*[A])).obj ((RHom(X)[A].obj (op M)).obj ((R(f)^![A]).obj N)) ≅
       (RHom(Y)[A].obj (op ((R(f)_![A]).obj M))).obj N) :=
   sorry
@@ -111,14 +115,14 @@ Second half. With `a_Y : Y ⟶ S` the structure morphism of `Y` and `a_X = f ≫
 `X`, the Verdier duals `𝔻_Y = RHom_Y(-, ω_Y)` and `𝔻_X = RHom_X(-, ω_X)` exchange the
 extraordinary and the ordinary direct image: for `M` in `Dctf(X, A)`,
 
-`𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`,
+`𝔻_Y (Rf_! M) ≅ Rf_* 𝔻_X M`.
 
-naturally in `M` and compatibly with finite reduction, scalar extension and shifts. It is
-the tensor–Hom exchange `nonempty_iso_derivedHom_rightDerivedLowerShriek` at `N = ω_Y`,
-combined with `Rf^! ω_Y ≅ ω_X`. -/
+In the blueprint this is the tensor–Hom exchange
+`nonempty_iso_derivedHom_rightDerivedLowerShriek` at `N = ω_Y`, combined with
+`Rf^! ω_Y ≅ ω_X`. -/
 theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hM : DerivedCategory.boundedConstructible A X M ∧ DerivedCategory.finiteTorAmplitude A X M) :
+    (hM : DerivedCategory.constructibleFiniteTor A X M) :
     Nonempty ((verdierDual A aY).obj (op ((R(f)_![A]).obj M)) ≅
       (R((f)_*[A])).obj ((verdierDual A (f ≫ aY)).obj (op M))) :=
   sorry

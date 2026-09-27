@@ -24,9 +24,19 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`
+  (`sk-prop-sf-biduality-general`): `𝔻_X` carries `Dctf(X, A)` into itself.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`
-  (`sk-prop-sf-biduality-general`): `𝔻_X` is a contravariant anti-equivalence of `Dctf(X, A)`,
-  `𝔻_X 𝔻_X ≅ id`.
+  (`sk-prop-sf-biduality-general`): general Verdier biduality, `𝔻_X 𝔻_X ≅ id` on `Dctf(X, A)`.
+
+## Implementation notes
+
+The blueprint's `sk-prop-sf-biduality-general` is stated for a finite-type scheme over a
+separably closed field and for one of the coefficient stages, whose algebraic input is that
+the stage is a quasi-Frobenius ring. Neither hypothesis is expressible for the general
+coefficient category `A` used throughout this directory, so the statements below are made
+relatively, for an arbitrary morphism `a : X ⟶ S` carrying a compactification. This is the
+uniform convention of the `SixFunctors` folder; the absolute case is `S = Spec k`.
 
 -/
 
@@ -34,7 +44,9 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory Opposite Functor
+open CategoryTheory Limits MonoidalCategory Opposite
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -66,17 +78,21 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 /-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
 
-On a scheme whose structure morphism carries the ambient datum — here, admits a
-compactification, so that `Ra^!` and hence `ω_X` are available — the Verdier dual
-`𝔻_X = RHom(-, ω_X)` carries `Dctf(X, A)` into itself and is a contravariant anti-equivalence
-of it: the double-dual morphism `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every object `K` of
-`Dctf(X, A)`. -/
+The Verdier dual `𝔻_X = RHom(-, ω_X)` carries `Dctf(X, A)` into itself. -/
+theorem constructibleFiniteTor_verdierDual
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : DerivedCategory.constructibleFiniteTor A X K) :
+    DerivedCategory.constructibleFiniteTor A X ((verdierDual A a).obj (op K)) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
+
+The Verdier dual is a contravariant anti-equivalence of `Dctf(X, A)`: the double-dual morphism
+`K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every object `K` of `Dctf(X, A)`. -/
 theorem nonempty_iso_verdierDual_verdierDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : DerivedCategory.boundedConstructible A X K ∧ DerivedCategory.finiteTorAmplitude A X K) :
-    (DerivedCategory.boundedConstructible A X ((verdierDual A a).obj (op K)) ∧
-        DerivedCategory.finiteTorAmplitude A X ((verdierDual A a).obj (op K))) ∧
-      Nonempty (K ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op K)))) :=
+    (hK : DerivedCategory.constructibleFiniteTor A X K) :
+    Nonempty (K ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op K)))) :=
   sorry
 
 end Etale

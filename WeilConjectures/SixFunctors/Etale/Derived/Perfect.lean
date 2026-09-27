@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
@@ -16,32 +16,41 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 Let `A` be a monoidal Grothendieck abelian coefficient category and `X` a scheme, so that the
 derived category `D(X_ét)` of `A`-valued étale sheaves on `X` is monoidal closed, with tensor
-product `- ⊗ᴸ -` and internal hom `RHom(-, -)`.
-
-A complex is *site-perfect* — in the `ℓ`-adic formalism, quasi-isomorphic locally on the small
-étale site to a bounded complex of finite projective `Λ_X`-modules — exactly when it is
-dualizable for `- ⊗ᴸ -`, and this is how the property is recorded here: a site-perfect complex
-is one admitting an exact pairing with another complex, the evaluation and coevaluation of the
-pairing being the unit and the counit of the tensor–internal-hom adjunction. The *coefficient
-dual* is `K^∨ = RHom(K, Λ_X)`.
+product `- ⊗ᴸ -` and internal hom `RHom(-, -)`. The *coefficient dual* of a complex is
+`K^∨ = RHom(K, Λ_X)`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`: `K ↦ K^∨ = RHom(K, Λ_X)`.
-- `AlgebraicGeometry.Etale.DerivedCategory.sitePerfect`: dualizability for `- ⊗ᴸ -`.
-- `AlgebraicGeometry.Etale.DerivedCategory.invertible`: the invertible objects, i.e. the
-  `⊗ᴸ`-invertible complexes, of which the Tate twists `Λ(m)` are examples.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_coefficientDual`
-  (`sk-prop-sf-dualizable-biduality`): biduality and the comparison
-  `K^∨ ⊗ᴸ M ≅ RHom(K, M)` for a perfect `K`.
-- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_derivedHom_tensor_iso`
+  (`sk-prop-sf-dualizable-biduality`): biduality `K ≅ K^∨∨` for a dualizable `K`.
+- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`
+  (`sk-prop-sf-dualizable-biduality`): the comparison `K^∨ ⊗ᴸ M ≅ RHom(K, M)`.
+- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor`
   (`sk-lem-sf-twist-interchange`): the internal hom commutes with an invertible twist.
-- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_leftDerivedUpperStar_derivedHom_iso`
-  (`sk-thm-sf-internal-hom-pullback`): the internal hom with a site-perfect first variable
+- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_leftDerivedUpperStar_derivedHom`
+  (`sk-thm-sf-internal-hom-pullback`): the internal hom with a dualizable first variable
   commutes with pullback.
+
+## Implementation notes
+
+In the `ℓ`-adic formalism a complex is called *perfect* when it is, locally on the small étale
+site, quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. That this
+coincides with dualizability for `- ⊗ᴸ -` is a theorem about module coefficients, not a
+definition, and it is not available for a general coefficient category `A`; perfectness is
+therefore *rendered here as* dualizability, `CategoryTheory.IsDualizable` of
+`WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic`. A Tate twist `Λ_X(m)` is
+likewise rendered as an invertible object, `CategoryTheory.IsInvertible`.
+
+Canonical comparison maps are not constructed in this repository, so every isomorphism
+assertion below is of the form `Nonempty (_ ≅ _)`; the naturality clauses of the blueprint,
+and the compatibilities with finite reduction, scalar extension and shifts, are consequently
+not stated. The proofs sketched in the blueprint go through the local description of a perfect
+complex as a bounded complex of finite free modules, which turns the internal hom into a tensor
+product.
 
 -/
 
@@ -49,7 +58,9 @@ dual* is `K^∨ = RHom(K, Λ_X)`.
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory Opposite Functor
+open CategoryTheory Limits MonoidalCategory Opposite
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -70,63 +81,57 @@ noncomputable def coefficientDual :
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (RHom(X)[A]).flip.obj (𝟙_ _)
 
-/-- An object of `D(X_ét)` is *site-perfect* if it is dualizable for the derived tensor
-product, i.e. if it admits an exact pairing with some other object. In the `ℓ`-adic formalism
-this is the class of complexes that are, locally on the small étale site, bounded complexes of
-finite projective `Λ`-modules. -/
-def sitePerfect : ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  fun K ↦ ∃ K', Nonempty (ExactPairing K K')
-
-/-- An object of `D(X_ét)` is *invertible* if it admits a tensor inverse. The Tate twists
-`Λ(m)`, invertible locally constant of rank one, are the examples used in the `ℓ`-adic
-formalism. -/
-def invertible : ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  fun T ↦ ∃ T', Nonempty (T ⊗ T' ≅ 𝟙_ _)
-
 variable {A X}
 
 /-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
 
-For a site-perfect `K` — one that is, locally on the site of `X`, a bounded complex of finite
-projective `Λ_X`-modules — the coefficient dual `K^∨` is again site-perfect, the biduality map
-`K ⟶ K^∨∨` is an isomorphism, and for every `M` the canonical map
-`K^∨ ⊗ᴸ M ⟶ RHom(K, M)` is an isomorphism. -/
+The coefficient dual of a dualizable complex is again dualizable. -/
+theorem isDualizable_coefficientDual
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
+    IsDualizable ((coefficientDual A X).obj (op K)) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+
+For a dualizable `K` the biduality map `K ⟶ K^∨∨` into the double coefficient dual is an
+isomorphism. -/
 theorem nonempty_iso_coefficientDual_coefficientDual
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : sitePerfect A X K) :
-    sitePerfect A X ((coefficientDual A X).obj (op K)) ∧
-      Nonempty (K ≅ (coefficientDual A X).obj
-        (op ((coefficientDual A X).obj (op K)))) ∧
-      ∀ M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A),
-        Nonempty ((coefficientDual A X).obj (op K) ⊗ M ≅ (RHom(X)[A].obj (op K)).obj M) :=
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
+    Nonempty (K ≅ (coefficientDual A X).obj (op ((coefficientDual A X).obj (op K)))) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+
+For a dualizable `K` and every `M` the canonical map `K^∨ ⊗ᴸ M ⟶ RHom(K, M)` is an
+isomorphism. -/
+theorem nonempty_iso_coefficientDual_tensor
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty ((coefficientDual A X).obj (op K) ⊗ M ≅ (RHom(X)[A].obj (op K)).obj M) :=
   sorry
 
 /-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
 
-For a site-perfect `K`, an invertible twist `T` — in the `ℓ`-adic formalism a Tate twist
-`Λ(m)_X`, invertible locally constant of rank one — and any `M`, the canonical map
-`RHom(K, M ⊗ᴸ T) ⟶ RHom(K, M) ⊗ᴸ T` is an isomorphism. In particular
-`RHom(K, Λ_X(m)) ≅ K^∨(m)`. -/
-theorem nonempty_derivedHom_tensor_iso
-    {K T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : sitePerfect A X K)
-    (hT : invertible A X T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+For a dualizable `K`, an invertible twist `T` — in the `ℓ`-adic formalism a Tate twist
+`Λ(m)_X` — and any `M`, the canonical map `RHom(K, M ⊗ᴸ T) ⟶ RHom(K, M) ⊗ᴸ T` is an
+isomorphism. In particular `RHom(K, Λ_X(m)) ≅ K^∨(m)`. -/
+theorem nonempty_iso_derivedHom_tensor
+    {K T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K)
+    (hT : IsInvertible T) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     Nonempty ((RHom(X)[A].obj (op K)).obj (M ⊗ T) ≅ (RHom(X)[A].obj (op K)).obj M ⊗ T) :=
   sorry
 
 /-- Blueprint `sk-thm-sf-internal-hom-pullback`: Internal Hom versus pullback for a
 site-perfect first variable.
 
-Let `g : Y' ⟶ X` be a morphism of schemes, let `M` be site-perfect — locally on the site, a
-bounded complex of finite free `Λ`-modules — and let `N` be any object of `D(X_ét)`. Then the
+For a morphism of schemes `g : Y' ⟶ X`, a dualizable `M` and any `N` in `D(X_ét)`, the
 canonical comparison
 
 `Lg^* RHom_Λ(M, N) ⟶ RHom_Λ(Lg^* M, Lg^* N)`
 
-is an isomorphism, natural in both variables and compatible with shifts and with distinguished
-triangles in `N`. Locally `M` is a bounded complex of finite free modules, so the termwise
-identity `Hom(P, N) = P^∨ ⊗ N` turns the internal hom into a tensor product, and both sides
-commute with `Lg^*`. -/
-theorem nonempty_leftDerivedUpperStar_derivedHom_iso {Y' : Scheme.{u}} (g : Y' ⟶ X)
-    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hM : sitePerfect A X M)
+is an isomorphism. -/
+theorem nonempty_iso_leftDerivedUpperStar_derivedHom {Y' : Scheme.{u}} (g : Y' ⟶ X)
+    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hM : IsDualizable M)
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     Nonempty ((L((g)^*[A])).obj ((RHom(X)[A].obj (op M)).obj N) ≅
       (RHom(Y')[A].obj (op ((L((g)^*[A])).obj M))).obj ((L((g)^*[A])).obj N)) :=
