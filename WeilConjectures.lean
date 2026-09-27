@@ -463,6 +463,12 @@ public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.ZetaFunction
+public import WeilConjectures.ZetaFunction.BettiNumbers
+public import WeilConjectures.ZetaFunction.FunctionalEquation
+public import WeilConjectures.ZetaFunction.HasseWeil
+public import WeilConjectures.ZetaFunction.IntegralFactors
+public import WeilConjectures.ZetaFunction.Purity
+public import WeilConjectures.ZetaFunction.Reciprocity
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
