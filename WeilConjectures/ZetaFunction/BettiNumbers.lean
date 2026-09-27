@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Weil.Definitions
 
 /-!
@@ -13,47 +14,48 @@ public import Weil.Definitions
 Let `P 0, …, P_{2d} ∈ ℤ[T]` be a family of Weil factors of the zeta function of a smooth
 proper geometrically integral scheme of dimension `d` over a finite field with `q` elements,
 in the sense of `AlgebraicGeometry.IsWeilFactorization`. The *Betti numbers* of the family are
-the degrees `b i = deg (P i)` and its *Euler characteristic* is `χ = ∑ᵢ (-1)ⁱ b i`.
+the degrees `b i = deg (P i)`.
 
 Poincaré duality — in the form of `AlgebraicGeometry.WeilFunctionalEquation`, which matches the
 reciprocal roots in degree `i` with those in degree `2 * d - i` — makes the Betti numbers
-symmetric. The endpoint values `b 0 = b (2 * d) = 1` and the endpoint factors `P 0 = 1 - T`,
-`P (2 * d) = 1 - qᵈ T` are part of `AlgebraicGeometry.IsWeilFactorization` itself, through its
-fields `apply_zero` and `apply_last`.
+symmetric.
 
-## Main definitions
-
-- `AlgebraicGeometry.weilEulerChar`: the Euler characteristic `χ = ∑ᵢ (-1)ⁱ deg (P i)`.
+This file formalises the Betti-number symmetry of the blueprint block on zeta functions and the
+Weil conjectures. Three further clauses of that blueprint statement are not restated here:
+the endpoint factors `P 0 = 1 - T` and `P (2 * d) = 1 - qᵈ T` are the fields
+`AlgebraicGeometry.IsWeilFactorization.apply_zero` and
+`AlgebraicGeometry.IsWeilFactorization.apply_last`; the identification `b i = dim H^i (X, ℚ_ℓ)`
+needs étale cohomology, which this repository does not have; and the order of the poles of `Z`
+at `T = 1` and `T = q⁻ᵈ` needs the order of vanishing of the rational function attached to a
+power series, which this repository also does not have.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilFunctionalEquation.natDegree_rev`: Betti symmetry
   `b i = b (2 * d - i)`.
+
+## References
+
+- [J.-P. Serre, *Zeta and L functions*][serre1965]
 -/
 
 @[expose] public section
 
-open scoped Polynomial
-
 namespace AlgebraicGeometry
 
-/-- The Euler characteristic `χ = ∑ᵢ (-1)ⁱ deg (P i)` of a family of Weil factors. -/
-def weilEulerChar {R : Type*} [Semiring R] {n : ℕ} (P : Fin (n + 1) → R[X]) : ℤ :=
-  ∑ i : Fin (n + 1), (-1) ^ (i : ℕ) * ((P i).natDegree : ℤ)
-
-/-- Blueprint `sk-thm-betti`: Betti symmetry and the endpoint factors.
-
-The functional equation matches the reciprocal roots in degree `i` with those in degree
-`2 * d - i`, so the Betti numbers `b i = deg (P i)` satisfy `b i = b (2 * d - i)`. The
-remaining assertions of the blueprint statement are the endpoint factors `P 0 = 1 - T` and
-`P (2 * d) = 1 - qᵈ T`, which are the fields `IsWeilFactorization.apply_zero` and
-`IsWeilFactorization.apply_last`, and `b i = dim H^i (X, ℚ_ℓ)`, which needs étale cohomology
-and is not stated here. -/
-theorem WeilFunctionalEquation.natDegree_rev {q d : ℕ} (hq : 1 < q) {Z : PowerSeries ℚ}
-    {P : Fin (2 * d + 1) → Polynomial ℤ} (hfe : WeilFunctionalEquation q d P)
-    (hfact : IsWeilFactorization q d Z P) (i : Fin (2 * d + 1)) :
-    (P i.rev).natDegree = (P i).natDegree :=
-  sorry
+/-- **Betti symmetry.** The functional equation matches the reciprocal roots in degree `i` with
+those in degree `2 * d - i`, so the two root multisets have the same cardinality; over `ℂ` that
+cardinality is the degree, so the Betti numbers `b i = deg (P i)` satisfy
+`b i = b (2 * d - i)`. -/
+theorem WeilFunctionalEquation.natDegree_rev {q d : ℕ} {P : Fin (2 * d + 1) → Polynomial ℤ}
+    (hfe : WeilFunctionalEquation q d P) (i : Fin (2 * d + 1)) :
+    (P i.rev).natDegree = (P i).natDegree := by
+  have hinj : Function.Injective (Int.castRingHom ℂ) := Int.cast_injective
+  have hcard : ∀ j : Fin (2 * d + 1),
+      Multiset.card ((P j).map (Int.castRingHom ℂ)).roots = (P j).natDegree := fun j ↦ by
+    rw [Polynomial.splits_iff_card_roots.1 (IsAlgClosed.splits _),
+      Polynomial.natDegree_map_eq_of_injective hinj]
+  rw [← hcard, ← hcard, hfe i, Multiset.card_map]
 
 end AlgebraicGeometry
 
