@@ -7,7 +7,9 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
