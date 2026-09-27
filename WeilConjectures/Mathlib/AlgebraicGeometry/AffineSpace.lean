@@ -443,4 +443,21 @@ lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
   AffineSpace.homOfVector_over _ _
 
+/-- The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
+whose coordinates are `1`. -/
+noncomputable def AffineSpace.oneSection (n : Type u) (S : Scheme.{u}) : S ⟶ 𝔸(n; S) :=
+  AffineSpace.homOfVector (𝟙 S) 1
+
+@[simp]
+lemma AffineSpace.oneSection_comp_over (n : Type u) (S : Scheme.{u}) :
+    AffineSpace.oneSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
+  AffineSpace.homOfVector_over _ _
+
+/-- The zero section of relative affine space is a closed immersion: it is the vanishing
+locus of the coordinates, and being a closed immersion is local on the base, where
+`AffineSpace.isClosedImmersion_homOfVector` applies. -/
+instance AffineSpace.isClosedImmersion_zeroSection (n : Type u) (S : Scheme.{u}) :
+    IsClosedImmersion (AffineSpace.zeroSection n S) :=
+  sorry
+
 end AlgebraicGeometry
