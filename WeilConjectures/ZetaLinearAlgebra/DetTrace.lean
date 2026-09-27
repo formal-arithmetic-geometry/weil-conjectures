@@ -29,6 +29,15 @@ The proof reduces to an algebraically closed field, where `det (1 - t F) = ∏ (
 polynomial, so that everything follows from the single factor case
 `t * (1 - λ t)' = - (∑_{n ≥ 1} λ ^ n t ^ n) (1 - λ t)`.
 
+It also records the *trace series* of a Frobenius module, the generating series whose
+exponential is `det (1 - t F)⁻¹`.
+
+## Main definitions
+
+- `LinearMap.traceSeries`: the trace series `∑_{n ≥ 1} tr (F ^ n) t ^ n / n` of an
+  endomorphism, and `LinearMap.alternatingTraceSeries`, its alternating sum over a finite
+  graded family (blueprint `sk-def-frobmod`).
+
 ## Main results
 
 - `LinearMap.X_mul_derivative_charpolyRev`: the logarithmic derivative form
@@ -211,5 +220,32 @@ theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :
   ext n
   exact PowerSeries.coeff_eq_of_X_mul_derivative_eq hlogPinv hlogE hconst hT0
     (m := n) (fun i _ ↦ rfl) n le_rfl
+
+/-- Blueprint `sk-def-frobmod`: Frobenius modules and their trace series.
+
+A *Frobenius module* over a field `K` (in the blueprint, `K = ℚ̄_ℓ`) is a pair `(V, F)` of a
+finite dimensional `K`-vector space and a `K`-linear automorphism of it. No structure is
+introduced for this: such a pair is an `F : Module.End K V` which `IsUnit`, and its
+determinant `P_{(V, F)}(T) = det (1 - T F ∣ V)` is `LinearMap.charpolyRev F`. What is
+genuinely new is the *trace series*
+
+`tr_F(T) = ∑_{n ≥ 1} tr (F ^ n ∣ V) T ^ n / n`,
+
+defined here for an arbitrary endomorphism `F`, since invertibility plays no role in the
+definition and no semisimplicity of `F` is assumed anywhere. Its companion identity
+`exp (tr_F(T)) = det (1 - T F)⁻¹` is the blueprint's `sk-prop-logdet`, already proved above
+as `LinearMap.inv_charpolyRev_eq_exp`, whose statement this definition unfolds to. -/
+noncomputable def traceSeries (F : Module.End K V) : K⟦X⟧ :=
+  PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n
+
+/-- The alternating trace series `str_F(T) = ∑_{n ≥ 1} (∑_i (-1) ^ i tr (F i ^ n ∣ W i))
+T ^ n / n` of a finite graded family `(W i, F i)` of Frobenius modules, indexed by a finite
+set `s` of integers; part of blueprint `sk-def-frobmod`. It is the alternating sum of the
+individual trace series `LinearMap.traceSeries (F i)`, the sign being the parity of the
+degree `i` via `Int.negOnePow`. -/
+noncomputable def alternatingTraceSeries {W : ℤ → Type*} [∀ i, AddCommGroup (W i)]
+    [∀ i, Module K (W i)] [∀ i, FiniteDimensional K (W i)] (s : Finset ℤ)
+    (F : ∀ i, Module.End K (W i)) : K⟦X⟧ :=
+  ∑ i ∈ s, (i.negOnePow : ℤ) • traceSeries (F i)
 
 end LinearMap
