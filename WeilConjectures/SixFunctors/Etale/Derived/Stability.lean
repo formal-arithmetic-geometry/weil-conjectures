@@ -99,7 +99,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 namespace Etale
 
-open DerivedCategory
+open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 /-! ### Extension by zero -/
 
