@@ -102,15 +102,15 @@ unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and 
 `T_c(u) : RΓ_c(X, K) ⟶ RΓ_c(X, Rc₂_* c₂^* K) ≃ RΓ_c(C, c₂^* K) ⟶ RΓ_c(C, c₁^! K)
   ≃ RΓ_c(X, Rc₁_! c₁^! K) ⟶ RΓ_c(X, K)`
 
-on compactly supported cohomology. The composite is not constructed here: several of its
+on compactly supported cohomology `RΓ_c(X, K) = Ra_{X!} K`, an object of `D(s, A)`.
+The composite is not constructed here: several of its
 steps are comparison maps that the package
 `AlgebraicGeometry.ProEtale.GeometricOperations` only postulates, so the definition is
 stated and left with a `sorry` body. -/
 noncomputable def globalOperator (G : GeometricOperations A s)
     (c : Correspondence aX aX K K) [HasCompactification aX] [IsProper c.snd]
     [HasCompactification c.snd] :
-    (compactlySupportedGlobalSections A aX).obj K ⟶
-      (compactlySupportedGlobalSections A aX).obj K :=
+    (rightDerivedLowerShriek A aX).obj K ⟶ (rightDerivedLowerShriek A aX).obj K :=
   sorry
 
 end Correspondence
@@ -140,10 +140,10 @@ noncomputable def borelMoorePushforward {T T' : Scheme.{u}} (h : T ⟶ T') (a : 
 
 /-- The integral `∫_T α ∈ A` of a Borel-Moore section over a geometric scheme `T` that is
 proper over the base: the pushforward of `α` along `a_T`, read in
-`End (A_s) = A` through `ω_s = A_s` and `RΓ(s, -)` (part of blueprint `sk-d-integral`). -/
+`End (A_s) = A`, using `ω_s = a_s^! A = A_s` (part of blueprint `sk-d-integral`). -/
 noncomputable def integral {T : Scheme.{u}} (a : T ⟶ s) [HasCompactification a] [IsProper a]
     (α : 𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology T) A)) ⟶ G.dualizing a) :
-    End (𝟙_ (DerivedCategory A)) :=
+    End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
   sorry
 
 end GeometricOperations
