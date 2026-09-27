@@ -14,8 +14,6 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
-@[expose] public section
-
 /-!
 # Sheaf cohomology of sheaves of modules on a scheme
 
@@ -27,16 +25,33 @@ from the constant sheaf `ℤ` on the small Zariski site of `X`.
 Multiplication by a global function `a : Γ(X, ⊤)` is an endomorphism `M.smulHom a` of `M`,
 and this makes `M.H n` a module over `Γ(X, ⊤)`. If `X` is a scheme over a field `k`, the
 ring map `k →+* Γ(X, ⊤)` induced by the structure morphism turns `M.H n` into a
-`k`-vector space, whose dimension `M.h k n` is the `n`-th cohomological invariant of `M`.
+`k`-vector space, whose dimension `M.finrankH k n` is the `n`-th cohomological invariant of `M`.
+
+## Implementation notes
+
+This is *not* the same construction as the higher direct images of
+`WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage.lean`, which are right derived
+functors computed inside `X.Modules`: `M.H n` is an `Ext`-group in abelian sheaves. The two
+agree — injective objects of `X.Modules` are `Γ`-acyclic — but that is a theorem, recorded as
+`AlgebraicGeometry.Scheme.Modules.nonempty_sections_higherDirectImage_iso_H`.
+
+`M.H n` carries both a `Γ(X, ⊤)`-module structure and, over a base field `k`, a `k`-module
+structure obtained by restricting scalars along
+`AlgebraicGeometry.Scheme.globalSectionsRingHom`. There is no `Algebra k Γ(X, ⊤)` instance —
+adding one would make instance search look for a field `k` from `Γ(X, ⊤)` alone — so the two
+structures are not related by an `IsScalarTower`; their compatibility is the definitional
+lemma `AlgebraicGeometry.Scheme.Modules.smul_H_eq_globalSectionsRingHom_smul`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.H`: the sheaf cohomology of a sheaf of modules.
 - `AlgebraicGeometry.Scheme.Modules.smulHom`: multiplication by a global function.
 - `AlgebraicGeometry.Scheme.Modules.moduleH`: the `Γ(X, ⊤)`-module structure on `M.H n`.
-- `AlgebraicGeometry.Scheme.Modules.h`: the dimension of `M.H n` over a base field.
+- `AlgebraicGeometry.Scheme.Modules.finrankH`: the dimension of `M.H n` over a base field.
 - `AlgebraicGeometry.Scheme.Modules.eulerChar`: the Euler characteristic of `M`.
 -/
+
+@[expose] public section
 
 universe u
 
@@ -47,30 +62,6 @@ namespace AlgebraicGeometry.Scheme
 variable {X : Scheme.{u}}
 
 namespace Modules
-
-/-- Functoriality of `SheafOfModules.toSheaf`, stated for morphisms of `X.Modules`. -/
-lemma toSheaf_map_id (M : X.Modules) :
-    (SheafOfModules.toSheaf X.ringCatSheaf).map (𝟙 M : M ⟶ M) = 𝟙 _ :=
-  (SheafOfModules.toSheaf X.ringCatSheaf).map_id M
-
-/-- Functoriality of `SheafOfModules.toSheaf`, stated for morphisms of `X.Modules`. -/
-lemma toSheaf_map_comp {M N P : X.Modules} (φ : M ⟶ N) (ψ : N ⟶ P) :
-    (SheafOfModules.toSheaf X.ringCatSheaf).map (φ ≫ ψ) =
-      (SheafOfModules.toSheaf X.ringCatSheaf).map φ ≫
-        (SheafOfModules.toSheaf X.ringCatSheaf).map ψ :=
-  (SheafOfModules.toSheaf X.ringCatSheaf).map_comp φ ψ
-
-/-- Additivity of `SheafOfModules.toSheaf`, stated for morphisms of `X.Modules`. -/
-lemma toSheaf_map_add {M N : X.Modules} (φ ψ : M ⟶ N) :
-    (SheafOfModules.toSheaf X.ringCatSheaf).map (φ + ψ) =
-      (SheafOfModules.toSheaf X.ringCatSheaf).map φ +
-        (SheafOfModules.toSheaf X.ringCatSheaf).map ψ :=
-  (SheafOfModules.toSheaf X.ringCatSheaf).map_add
-
-/-- Additivity of `SheafOfModules.toSheaf`, stated for morphisms of `X.Modules`. -/
-lemma toSheaf_map_zero (M N : X.Modules) :
-    (SheafOfModules.toSheaf X.ringCatSheaf).map (0 : M ⟶ N) = 0 :=
-  (SheafOfModules.toSheaf X.ringCatSheaf).map_zero M N
 
 /-- The `n`-th sheaf cohomology of a sheaf of modules on a scheme, as the `Ext`-group from
 the constant sheaf `ℤ` to the underlying abelian sheaf. -/
@@ -86,21 +77,18 @@ noncomputable def H.map {M N : X.Modules} (φ : M ⟶ N) (n : ℕ) : M.H n →+ 
 
 @[simp]
 lemma H.map_id_apply (M : X.Modules) (n : ℕ) (x : M.H n) : H.map (𝟙 M) n x = x := by
-  unfold H.map
-  rw [toSheaf_map_id]
+  simp only [H.map]
   exact Sheaf.H.map_id_apply x
 
 lemma H.map_comp_apply {M N P : X.Modules} (φ : M ⟶ N) (ψ : N ⟶ P) (n : ℕ) (x : M.H n) :
     H.map (φ ≫ ψ) n x = H.map ψ n (H.map φ n x) := by
-  unfold H.map
-  rw [toSheaf_map_comp]
+  simp only [H.map, Functor.map_comp]
   exact Sheaf.H.map_comp_apply _ _ x
 
 @[simp]
 lemma H.map_add_apply {M N : X.Modules} (φ ψ : M ⟶ N) (n : ℕ) (x : M.H n) :
     H.map (φ + ψ) n x = H.map φ n x + H.map ψ n x := by
-  unfold H.map
-  rw [toSheaf_map_add]
+  simp only [H.map, Functor.map_add]
   exact Sheaf.H.map_add_apply _ _ x
 
 @[simp]
@@ -108,19 +96,21 @@ lemma H.map_zero_apply {M N : X.Modules} (n : ℕ) (x : M.H n) :
     H.map (0 : M ⟶ N) n x = 0 := by
   have h := H.map_add_apply (0 : M ⟶ N) 0 n x
   rw [add_zero] at h
-  nth_rewrite 1 [← add_zero (H.map (0 : M ⟶ N) n x)] at h
-  exact (add_left_cancel h).symm
+  exact left_eq_add.mp h
 
 /-- Multiplication by a global function `a : Γ(X, ⊤)`, as an endomorphism of the underlying
 presheaf of abelian groups of a sheaf of modules `M`. -/
 noncomputable def smulPresheafHom (M : X.Modules) (a : Γ(X, ⊤)) : M.presheaf ⟶ M.presheaf where
   app U := M.smul (X.presheaf.map (homOfLE le_top).op a)
   naturality U V i := by
-    obtain ⟨U⟩ := U; obtain ⟨V⟩ := V; obtain ⟨i⟩ := i
+    obtain ⟨U⟩ := U
+    obtain ⟨V⟩ := V
+    obtain ⟨i⟩ := i
     ext x
     have e : X.presheaf.map i.op (X.presheaf.map (homOfLE (le_top (a := U))).op a) =
         X.presheaf.map (homOfLE (le_top (a := V))).op a := by
-      rw [← CategoryTheory.comp_apply, ← Functor.map_comp]; rfl
+      rw [← CategoryTheory.comp_apply, ← Functor.map_comp]
+      rfl
     have h := M.map_smul i (X.presheaf.map (homOfLE (le_top (a := U))).op a) x
     rw [e] at h
     exact h.symm
@@ -164,20 +154,20 @@ noncomputable def smulEnd (M : X.Modules) (n : ℕ) : Γ(X, ⊤) →+* AddMonoid
   toFun a := H.map (M.smulHom a) n
   map_one' := by
     refine AddMonoidHom.ext fun x ↦ ?_
-    change H.map (M.smulHom 1) n x = x
-    rw [smulHom_one, H.map_id_apply]
+    simp only [smulHom_one, H.map_id_apply]
+    rfl
   map_zero' := by
     refine AddMonoidHom.ext fun x ↦ ?_
-    change H.map (M.smulHom 0) n x = 0
-    rw [smulHom_zero, H.map_zero_apply]
+    simp only [smulHom_zero, H.map_zero_apply]
+    rfl
   map_mul' a b := by
     refine AddMonoidHom.ext fun x ↦ ?_
-    change H.map (M.smulHom (a * b)) n x = H.map (M.smulHom a) n (H.map (M.smulHom b) n x)
-    rw [smulHom_mul, H.map_comp_apply]
+    simp only [smulHom_mul, H.map_comp_apply]
+    rfl
   map_add' a b := by
     refine AddMonoidHom.ext fun x ↦ ?_
-    change H.map (M.smulHom (a + b)) n x = H.map (M.smulHom a) n x + H.map (M.smulHom b) n x
-    rw [smulHom_add, H.map_add_apply]
+    simp only [smulHom_add, H.map_add_apply]
+    rfl
 
 /-- The cohomology of a sheaf of modules on `X` is a module over the global functions of `X`,
 via multiplication by global functions. -/
@@ -192,23 +182,38 @@ variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k
 
 /-- The ring homomorphism `k →+* Γ(X, ⊤)` induced by the structure morphism of a
 `k`-scheme `X`. -/
-noncomputable def globalSectionsAlgebraMap : k →+* Γ(X, ⊤) :=
+noncomputable def globalSectionsRingHom : k →+* Γ(X, ⊤) :=
   ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ (X ↘ Spec (CommRingCat.of k)).appTop).hom
 
 namespace Modules
 
-/-- The cohomology of a sheaf of modules on a `k`-scheme is a `k`-vector space. -/
+/-- The cohomology of a sheaf of modules on a `k`-scheme is a `k`-vector space, by restriction
+of scalars along `AlgebraicGeometry.Scheme.globalSectionsRingHom`.
+
+The base field `k` appears in the head `Module k (M.H n)` of the goal, so instance search is
+not asked to guess it. -/
 noncomputable instance moduleHOfField (M : X.Modules) (n : ℕ) : Module k (M.H n) :=
-  Module.compHom (M.H n) (globalSectionsAlgebraMap k (X := X))
+  Module.compHom (M.H n) (globalSectionsRingHom k (X := X))
+
+/-- The `k`-action on `M.H n` is the `Γ(X, ⊤)`-action along the structure morphism. This is
+the compatibility that an `IsScalarTower k Γ(X, ⊤) (M.H n)` instance would record, stated
+without an `Algebra k Γ(X, ⊤)` instance. -/
+lemma smul_H_eq_globalSectionsRingHom_smul (M : X.Modules) (n : ℕ) (c : k) (x : M.H n) :
+    c • x = globalSectionsRingHom k (X := X) c • x :=
+  rfl
 
 /-- The `q`-th cohomological invariant `h^q(X, M)` of a sheaf of modules `M` on a
 `k`-scheme `X`: the dimension of `H^q(X, M)` as a `k`-vector space. -/
-noncomputable def h (M : X.Modules) (q : ℕ) : ℕ := Module.finrank k (M.H q)
+noncomputable def finrankH (M : X.Modules) (q : ℕ) : ℕ := Module.finrank k (M.H q)
 
 /-- The Euler characteristic `χ(X, M) = ∑ (-1)^q h^q(X, M)` of a sheaf of modules `M` on a
-`k`-scheme `X`. The sum is taken as a `finsum`, which is meaningful because all but
-finitely many terms vanish in the situations of interest. -/
-noncomputable def eulerChar (M : X.Modules) : ℤ := ∑ᶠ q : ℕ, (-1) ^ q * (M.h k q : ℤ)
+`k`-scheme `X`.
+
+The sum is a `finsum`, so it is `0` whenever infinitely many terms are nonzero. That makes
+`eulerChar` meaningful only together with a vanishing statement for the higher cohomology; on
+a curve the relevant one is
+`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le`. -/
+noncomputable def eulerChar (M : X.Modules) : ℤ := ∑ᶠ q : ℕ, (-1) ^ q * (M.finrankH k q : ℤ)
 
 end Modules
 

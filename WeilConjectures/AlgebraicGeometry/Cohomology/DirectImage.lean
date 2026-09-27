@@ -5,79 +5,90 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-
-@[expose] public section
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
-# Higher direct images and cohomology and base change
+# Higher direct images, and cohomology and base change
 
 Let `f : X ⟶ T` be a proper morphism of finite presentation and let `ℱ` be an `𝒪_X`-module of
-finite presentation which is flat over `T`. This file states the three fundamental finiteness
-and base-change results about the higher direct images `R^q f_* ℱ`.
+finite presentation which is flat over `T`. This file states the fundamental finiteness and
+base-change results about the higher direct images `R^q f_* ℱ`.
 
 The higher direct images are the right derived functors of the pushforward functor
 `AlgebraicGeometry.Scheme.Modules.pushforward f` between the abelian categories `X.Modules`
-and `T.Modules`.
+and `T.Modules`. This is a different construction from the sheaf cohomology `ℱ.H q` of
+`WeilConjectures/AlgebraicGeometry/Cohomology/Defs.lean`, which is an `Ext`-group in abelian
+sheaves; `nonempty_sections_higherDirectImage_iso_H` below is the comparison between the two,
+and it is what lets the statements of this file be combined with the ones phrased through
+`ℱ.H q`.
+
+## Implementation notes
+
+Every derived-functor statement below needs injective resolutions in `X.Modules`, carried as
+an instance hypothesis `[HasInjectiveResolutions X.Modules]`. Nothing in Mathlib can discharge
+it: there is no `IsGrothendieckAbelian` instance for `SheafOfModules` anywhere. The missing
+prerequisite is recorded as the explicit statement
+`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`; once it is proved and made an
+instance, `EnoughInjectives` and hence `HasInjectiveResolutions` follow, and the hypothesis can
+be dropped from every statement here and downstream.
+
+Mathlib has no `IsCoherent` class for sheaves of modules. Over a locally Noetherian base
+coherence is equivalent to being quasi-coherent and of finite presentation, so that is what the
+statements below use; they should be restated with coherence once it exists.
 
 ## Main definitions
 
-- `SheafOfModules.IsFiniteLocallyFreeOfRank`: a sheaf of modules is finite locally free of
-  rank `r` if it admits locally free local generators data all of whose generating families
-  are indexed by a type with exactly `r` elements.
 - `AlgebraicGeometry.Scheme.Modules.higherDirectImage`: the `q`-th higher direct image
   functor `R^q f_*`, the `q`-th right derived functor of the pushforward.
-- `AlgebraicGeometry.Scheme.Modules.IsFlatOver`: a placeholder for flatness of a sheaf of
-  modules over the base of a morphism.
+- `AlgebraicGeometry.Scheme.Modules.IsFlatOver`: flatness of a sheaf of modules over the base
+  of a morphism, checked on affine opens.
 - `AlgebraicGeometry.Scheme.Modules.hFiber`: the fibre dimension
   `dim_{κ(t)} H^q(X_t, ℱ_t)`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`: coherence of the
-  higher direct images.
-- `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`: semicontinuity and base
-  change.
-- `AlgebraicGeometry.Scheme.Modules.isOpen_setOf_hFiber_eq_zero`: openness of the perfect
-  locus.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_sections_higherDirectImage_iso_H`: over an affine
+  base, the global sections of `R^q f_* ℱ` are `H^q(X, ℱ)`.
+- `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` and
+  `isZero_higherDirectImage_of_le`: coherence of the higher direct images, and their vanishing
+  in large degrees.
+- `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber` and
+  `exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant`: semicontinuity of
+  the fibre dimension, and Grauert's theorem over a reduced base.
+- `AlgebraicGeometry.Scheme.Modules.isOpen_setOf_hFiber_le`,
+  `isZero_higherDirectImage_restrict` and
+  `isFiniteLocallyFreeOfRank_higherDirectImage_restrict`: openness of the perfect locus, and
+  the shape of `R f_* ℱ` over it.
 -/
 
-universe v₁ u₁ u
+@[expose] public section
+
+universe u
 
 open CategoryTheory Limits
-
-namespace SheafOfModules
-
-variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
-  [∀ X, HasWeakSheafify (J.over X) AddCommGrpCat.{u}]
-  [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
-
-/-- A sheaf of modules is *finite locally free of rank `r`* if it admits local generators data
-which is locally free data (`SheafOfModules.LocalGeneratorsData.IsLocallyFreeData`) and whose
-family of generators over each member of the covering is indexed by a type with exactly `r`
-elements. Such a sheaf of modules is in particular locally free, hence quasi-coherent. -/
-@[stacks 01C6]
-class IsFiniteLocallyFreeOfRank (M : SheafOfModules.{u} R) (r : ℕ) : Prop where
-  exists_localGeneratorsData : ∃ q : LocalGeneratorsData.{u₁} M, ∃ _ : q.IsLocallyFreeData,
-    ∀ i, Nonempty ((q.generators i).I ≃ Fin r)
-
-theorem IsFiniteLocallyFreeOfRank.isLocallyFree (M : SheafOfModules.{u} R) (r : ℕ)
-    [h : M.IsFiniteLocallyFreeOfRank r] : M.IsLocallyFree :=
-  have := h.exists_localGeneratorsData.choose_spec.choose
-  ⟨_, this⟩
-
-end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X T : Scheme.{u}}
+
+/-- `X.Modules` is a Grothendieck abelian category.
+
+This is the missing prerequisite of the whole file: together with
+`CategoryTheory.IsGrothendieckAbelian.enoughInjectives` it supplies the
+`HasInjectiveResolutions X.Modules` instance that every statement below, and every statement
+about the Picard functor `F` downstream, currently has to assume. -/
+theorem isGrothendieckAbelian (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Modules :=
+  sorry
 
 /-- The `q`-th **higher direct image** functor `R^q f_*` along a morphism of schemes
 `f : X ⟶ T`: the `q`-th right derived functor of the pushforward functor
@@ -90,89 +101,130 @@ noncomputable def higherDirectImage (f : X ⟶ T) [HasInjectiveResolutions X.Mod
     X.Modules ⥤ T.Modules :=
   (pushforward f).rightDerived q
 
--- TODO(unify): sk-thm-picard-semicon
 /-- `ℱ.IsFlatOver f` says that the `𝒪_X`-module `ℱ` is **flat over the base** of the morphism
-`f : X ⟶ T`, i.e. that for every point `x` of `X` the stalk `ℱ_x` is a flat module over the
-local ring `𝒪_{T, f x}`.
+`f : X ⟶ T`: for every affine open `V` of `T` and every affine open `U` of `X` contained in
+`f ⁻¹ᵁ V`, the sections `Γ(ℱ, U)` form a flat `Γ(T, V)`-module, the module structure being
+restriction of scalars along `f.appLE V U`.
 
-There is no notion of flatness of a sheaf of modules over a base anywhere in Mathlib or in
-this project — neither stalks of sheaves of modules as modules over the stalks of the
-structure sheaf, nor a tensor product of sheaves of modules, are available — so this is a
-placeholder to be replaced once the relevant foundations exist. -/
-def IsFlatOver (ℱ : X.Modules) (_f : X ⟶ T) : Prop := sorry
+This is the affine-local form of the stalkwise condition "`ℱ_x` is flat over `𝒪_{T, f x}` for
+every `x`", and the two are equivalent. -/
+def IsFlatOver (ℱ : X.Modules) (f : X ⟶ T) : Prop :=
+  ∀ (V : T.affineOpens) (U : X.affineOpens) (e : U.1 ≤ f ⁻¹ᵁ V.1),
+    letI : Module Γ(T, V.1) Γ(ℱ, U.1) := Module.compHom _ (f.appLE V.1 U.1 e).hom
+    Module.Flat Γ(T, V.1) Γ(ℱ, U.1)
 
 /-- The `q`-th **fibre dimension** `dim_{κ(t)} H^q(X_t, ℱ_t)` of an `𝒪_X`-module `ℱ` along a
 morphism `f : X ⟶ T` at a point `t` of `T`: the fibre `X_t = f.fiber t` is a scheme over the
 residue field `κ(t) = T.residueField t`, the restriction `ℱ_t` is the pullback of `ℱ` along
-`f.fiberι t`, and the dimension is `AlgebraicGeometry.Scheme.Modules.h` for that base
+`f.fiberι t`, and the dimension is `AlgebraicGeometry.Scheme.Modules.finrankH` for that base
 field. -/
 noncomputable def hFiber (ℱ : X.Modules) (f : X ⟶ T) (q : ℕ) (t : T) : ℕ :=
   letI := f.fiberOverSpecResidueField t
-  ((Modules.pullback (f.fiberι t)).obj ℱ).h (T.residueField t) q
+  ((Modules.pullback (f.fiberι t)).obj ℱ).finrankH (T.residueField t) q
 
 variable (f : X ⟶ T) (ℱ : X.Modules)
 
-/-- Blueprint `sk-thm-picard-coherence`: Coherence of the higher direct images
+/-- Over an affine base the global sections of the `q`-th higher direct image are the sheaf
+cohomology of `ℱ`: `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`.
 
-With `f : X ⟶ T` proper of finite presentation and `ℱ` an `𝒪_X`-module of finite
-presentation which is flat over `T`, the higher direct image `R^q f_* ℱ` is a coherent
-`𝒪_T`-module for every `q`, and it vanishes for `q ≫ 0`.
-
-There is no `IsCoherent` class for sheaves of modules anywhere in Mathlib or in this project.
-Over a locally Noetherian base, coherence is equivalent to being quasi-coherent and of finite
-presentation, so we state the conclusion as
-`SheafOfModules.IsQuasicoherent` together with `SheafOfModules.IsFinitePresentation`, which is
-the usable substitute; it should be replaced by coherence once that notion exists. -/
-theorem isFinitePresentation_higherDirectImage [IsProper f] [LocallyOfFinitePresentation f]
-    [QuasiCompact f] [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
-    (hℱ : ℱ.IsFlatOver f) :
-    (∀ q, ((higherDirectImage f q).obj ℱ).IsQuasicoherent ∧
-        ((higherDirectImage f q).obj ℱ).IsFinitePresentation) ∧
-      ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) :=
+This is the comparison between the two cohomology theories used in the Picard-framework block:
+the right derived functors of `f_*` inside `X.Modules` on the one hand, and the `Ext`-groups in
+abelian sheaves of `AlgebraicGeometry.Scheme.Modules.H` on the other. It holds because
+injective objects of `X.Modules` are `Γ`-acyclic. -/
+theorem nonempty_sections_higherDirectImage_iso_H [IsAffine T] [QuasiCompact f] [IsSeparated f]
+    [HasInjectiveResolutions X.Modules]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    Nonempty (Γ((higherDirectImage f q).obj ℱ, ⊤) ≃+ ℱ.H q) :=
   sorry
 
-/-- Blueprint `sk-thm-picard-semicon`: Semicontinuity and base change
+section Coherence
 
-With `f : X ⟶ T` proper of finite presentation and `ℱ` an `𝒪_X`-module of finite
-presentation which is flat over `T`, the fibre dimension
-`t ↦ dim_{κ(t)} H^q(X_t, ℱ_t)` is upper semicontinuous on `T` for every `q`. If moreover `T`
-is reduced and this function is locally constant, then `R^q f_* ℱ` is finite locally free (in
-particular flat) and the base-change maps in degree `q` are isomorphisms.
+variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+  [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
 
-The blueprint statement also asserts the existence of canonical base-change maps
-`R^q f_* ℱ ⊗_{𝒪_T} κ(t) → H^q(X_t, ℱ_t)` and their bijectivity in the locally constant case.
-There is no tensor product of sheaves of modules in Mathlib or in this project, so that
-comparison map cannot yet be built; only the finite local freeness conclusion is recorded
-here, and the base-change comparison awaits a tensor product of sheaves of modules. -/
-theorem upperSemicontinuous_hFiber [IsProper f] [LocallyOfFinitePresentation f]
-    [QuasiCompact f] [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
-    (hℱ : ℱ.IsFlatOver f) :
-    (∀ q, UpperSemicontinuous (ℱ.hFiber f q)) ∧
-      (IsReduced T → ∀ q, IsLocallyConstant (ℱ.hFiber f q) →
-        ∃ r, ((higherDirectImage f q).obj ℱ).IsFiniteLocallyFreeOfRank r) :=
+/-- **Coherence of the higher direct images.** With `f : X ⟶ T` proper of finite presentation
+and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the higher direct image
+`R^q f_* ℱ` is a coherent `𝒪_T`-module for every `q`; coherence is spelled as quasi-coherence
+together with finite presentation.
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem isFinitePresentation_higherDirectImage (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
+    ((higherDirectImage f q).obj ℱ).IsQuasicoherent ∧
+      ((higherDirectImage f q).obj ℱ).IsFinitePresentation :=
   sorry
 
-/-- Blueprint `sk-thm-picard-perfect`: Openness of the perfect locus
+/-- **Vanishing of the higher direct images in large degrees.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`, `R^q f_* ℱ = 0` for
+all large `q`.
 
-With `f : X ⟶ T` proper of finite presentation and `ℱ` an `𝒪_X`-module of finite
-presentation which is flat over `T`, the locus of points `t` of `T` at which the fibre
-cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension at most `r` in degree
-`i` is open in `T`; over any open subscheme contained in the locus where moreover the `i`-th
-fibre dimension is exactly `r`, the higher direct images `R^q f_* ℱ` vanish for `q ≠ i` and
-`R^i f_* ℱ` is finite locally free of rank `r`.
-
-This is the concrete form of the blueprint statement that `R f_* ℱ` is perfect of amplitude
-`[i, i]` on the locus: there is no derived category of `X.Modules` available, so the
-condition is spelt out by the vanishing of the individual higher direct images together with
-a rank bound. -/
-theorem isOpen_setOf_hFiber_eq_zero [IsProper f] [LocallyOfFinitePresentation f]
-    [QuasiCompact f] [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
-    (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
-    IsOpen {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t ≤ r} ∧
-      ∀ U : T.Opens, (↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧
-          ℱ.hFiber f i t = r}) →
-        (∀ q, q ≠ i → IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι)) ∧
-          (((higherDirectImage f i).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank r :=
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem exists_isZero_higherDirectImage (hℱ : ℱ.IsFlatOver f) :
+    ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) :=
   sorry
+
+/-- **Semicontinuity of the fibre dimension.** With `f : X ⟶ T` proper of finite presentation
+and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the fibre dimension
+`t ↦ dim_{κ(t)} H^q(X_t, ℱ_t)` is upper semicontinuous on `T`.
+
+(blueprint: `sk-thm-picard-semicon`) -/
+theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
+    UpperSemicontinuous (ℱ.hFiber f q) :=
+  sorry
+
+/-- **Grauert's theorem.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, if moreover `T` is reduced and
+the `q`-th fibre dimension is locally constant, then `R^q f_* ℱ` is locally free of finite rank,
+the rank at a point being the fibre dimension there.
+
+The rank is only attached to a neighbourhood of each point, not to `T` as a whole: on a
+disconnected base the fibre dimension can be locally constant without being constant.
+
+(blueprint: `sk-thm-picard-semicon`) -/
+theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant [IsReduced T]
+    (hℱ : ℱ.IsFlatOver f) (q : ℕ) (hq : IsLocallyConstant (ℱ.hFiber f q)) (t : T) :
+    ∃ U : T.Opens, t ∈ U ∧
+      (((higherDirectImage f q).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank
+        (ℱ.hFiber f q t) :=
+  sorry
+
+/-- **Openness of the perfect locus.** With `f : X ⟶ T` proper of finite presentation and `ℱ`
+an `𝒪_X`-module of finite presentation which is flat over `T`, the locus of points `t` of `T`
+at which the fibre cohomology `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension at
+most `r` in degree `i` is open in `T`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isOpen_setOf_hFiber_le (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
+    IsOpen {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t ≤ r} :=
+  sorry
+
+/-- **The higher direct images vanish off degree `i` over the perfect locus.** Over an open
+subscheme of `T` on which the fibre cohomology vanishes outside degree `i` and has dimension
+exactly `r` in degree `i`, the higher direct images `R^q f_* ℱ` vanish for `q ≠ i`.
+
+Together with
+`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_restrict` this is
+the concrete form of "`R f_* ℱ` is perfect of amplitude `[i, i]`" on that locus, there being no
+derived category of `X.Modules` available.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isZero_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ) (U : T.Opens)
+    (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r})
+    (q : ℕ) (hq : q ≠ i) :
+    IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) :=
+  sorry
+
+/-- **The `i`-th higher direct image is finite locally free over the perfect locus.** Over an
+open subscheme of `T` on which the fibre cohomology vanishes outside degree `i` and has
+dimension exactly `r` in degree `i`, the higher direct image `R^i f_* ℱ` is finite locally free
+of rank `r`.
+
+(blueprint: `sk-thm-picard-perfect`) -/
+theorem isFiniteLocallyFreeOfRank_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
+    (U : T.Opens)
+    (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r}) :
+    (((higherDirectImage f i).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank r :=
+  sorry
+
+end Coherence
 
 end AlgebraicGeometry.Scheme.Modules

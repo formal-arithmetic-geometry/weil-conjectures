@@ -28,9 +28,8 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Finite
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.Modules.Operations
-public import WeilConjectures.AlgebraicGeometry.Modules.Pic
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
@@ -140,7 +139,6 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
-public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.CechToDerived
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
@@ -284,6 +282,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
@@ -389,6 +388,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT

@@ -13,8 +13,6 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Descent.IsStack
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
-@[expose] public section
-
 /-!
 # Fpqc descent for quasi-coherent modules and for finite locally free closed subschemes
 
@@ -34,21 +32,34 @@ changes `X ×_T T i` which are finite locally free of degree `d` over `T i` and 
 further base change, there is a unique closed subscheme of `X` restricting to them, and it
 is finite locally free of degree `d` over `T`.
 
+## Implementation notes
+
 Closed subschemes are spelled as ideal sheaves (`AlgebraicGeometry.Scheme.IdealSheafData`),
 which is what makes the cocycle condition of the blueprint degenerate to a plain equality:
 `IdealSheafData` is a *set*, so descent data for it carry no extra structure and (D2) is a
 genuine sheaf condition. Degrees are measured by `AlgebraicGeometry.Scheme.Hom.finrank`.
 
+(D1) is stated as five separate assertions rather than through
+`CategoryTheory.Functor.IsStack`: `Mathlib.CategoryTheory.Sites.Descent.IsStack` asks for
+effectivity of *all* descent data, whereas what holds here is effectivity of the
+quasi-coherent ones, which is not an instance of that class.
+
 Flatness of a sheaf of modules has no name in Mathlib yet, so its preservation under the
-equivalence of (D1) is not part of the statement below.
+equivalence of (D1) is not part of the statements below.
 
 ## Main statements
 
-- `AlgebraicGeometry.isStack_fpqc_quasicoherent`: (D1), the stack condition for
-  quasi-coherent modules relative to an fpqc covering.
+- `AlgebraicGeometry.bijective_toDescentData_map`,
+  `AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso`,
+  `AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso`,
+  `AlgebraicGeometry.isLocallyFree_of_toDescentData_iso` and
+  `AlgebraicGeometry.isInvertible_of_toDescentData_iso`: (D1), fpqc descent for
+  quasi-coherent modules.
 - `AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme`: (D2), the sheaf condition
   for closed subschemes which are finite locally free of a fixed degree.
 -/
+
+@[expose] public section
 
 universe w u
 
@@ -65,44 +76,87 @@ noncomputable abbrev modulesPseudofunctor :
     Pseudofunctor (LocallyDiscrete Scheme.{u}ᵒᵖ) Cat :=
   Scheme.Modules.pseudofunctor.comp Adj.forget₁
 
-/-- Blueprint `sk-thm-picard-descent`: Descent — part (D1), descending modules.
+variable {T : Scheme.{u}} {ι : Type w} {T' : ι → Scheme.{u}} (g : ∀ i, T' i ⟶ T)
 
-Let `{g i : T i ⟶ T}` be an fpqc covering. The comparison functor from sheaves of modules
-on `T` to descent data relative to the covering is fully faithful on quasi-coherent
-objects, and every descent datum whose components are quasi-coherent is effective, i.e.
-comes from a quasi-coherent module on `T`. The resulting equivalence preserves finite
-presentability and local freeness; in particular a compatible family of invertible modules
-`ℒ i` on the `T i` glues to an invertible module `ℒ` on `T` with `ℒ|_{T i} ≅ ℒ i`. -/
-theorem isStack_fpqc_quasicoherent {T : Scheme.{u}} {ι : Type w} {T' : ι → Scheme.{u}}
-    (g : ∀ i, T' i ⟶ T) (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T) :
-    (∀ M N : modulesPseudofunctor.obj (.mk (op T)),
-        (M : T.Modules).IsQuasicoherent → (N : T.Modules).IsQuasicoherent →
-        Function.Bijective ((modulesPseudofunctor.toDescentData g).map : (M ⟶ N) → _)) ∧
-      ∀ D : modulesPseudofunctor.DescentData g,
-        (∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) →
-        ∃ M : modulesPseudofunctor.obj (.mk (op T)),
-          (M : T.Modules).IsQuasicoherent ∧
-          ((∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation) →
-            (M : T.Modules).IsFinitePresentation) ∧
-          ((∀ i, (D.obj i : (T' i).Modules).IsLocallyFree) →
-            (M : T.Modules).IsLocallyFree) ∧
-          ((∀ i, (D.obj i : (T' i).Modules).IsInvertible) →
-            (M : T.Modules).IsInvertible) ∧
-          Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D) :=
+/-- **Fpqc descent for modules: full faithfulness.** For an fpqc covering `{g i : T i ⟶ T}`,
+the comparison functor from sheaves of modules on `T` to descent data relative to the covering
+is fully faithful on quasi-coherent objects.
+
+(blueprint: `sk-thm-picard-descent`, part (D1)) -/
+theorem bijective_toDescentData_map (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (M N : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : (M : T.Modules).IsQuasicoherent) (hN : (N : T.Modules).IsQuasicoherent) :
+    Function.Bijective ((modulesPseudofunctor.toDescentData g).map : (M ⟶ N) → _) :=
   sorry
 
-/-- Blueprint `sk-thm-picard-descent`: Descent — part (D2), effective closed immersions.
+/-- **Fpqc descent for modules: effectivity.** For an fpqc covering `{g i : T i ⟶ T}`, every
+descent datum whose components are quasi-coherent comes from a quasi-coherent module on `T`.
 
-Let `f : X ⟶ T` be a morphism of schemes, let `{g i : T i ⟶ T}` be an fpqc covering and
-let `p i : X i ⟶ X`, `q i : X i ⟶ T i` exhibit `X i` as the base change `X ×_T T i`.
+(blueprint: `sk-thm-picard-descent`, part (D1)) -/
+theorem exists_isQuasicoherent_toDescentData_iso
+    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
+    ∃ M : modulesPseudofunctor.obj (.mk (op T)), (M : T.Modules).IsQuasicoherent ∧
+      Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D) :=
+  sorry
+
+/-- **Finite presentation descends along an fpqc covering.**
+
+(blueprint: `sk-thm-picard-descent`, part (D1)) -/
+theorem isFinitePresentation_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation) :
+    (M : T.Modules).IsFinitePresentation :=
+  sorry
+
+/-- **Local freeness descends along an fpqc covering.**
+
+(blueprint: `sk-thm-picard-descent`, part (D1)) -/
+theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsLocallyFree) :
+    (M : T.Modules).IsLocallyFree :=
+  sorry
+
+/-- **Invertibility descends along an fpqc covering**: a compatible family of invertible
+modules `ℒ i` on the `T i` glues to an invertible module `ℒ` on `T` with `ℒ|_{T i} ≅ ℒ i`.
+
+(blueprint: `sk-thm-picard-descent`, part (D1)) -/
+theorem isInvertible_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsInvertible) :
+    (M : T.Modules).IsInvertible :=
+  sorry
+
+/-- **Fpqc descent for finite locally free closed subschemes.** Let `f : X ⟶ T` be a morphism
+of schemes, let `{g i : T i ⟶ T}` be an fpqc covering and let `p i : X i ⟶ X`,
+`q i : X i ⟶ T i` exhibit `X i` as the base change `X ×_T T i`:
+
+```
+   X' i ──── p i ────▶ X
+     │                 │
+   q i                 f
+     │                 │
+     ▼                 ▼
+   T' i ──── g i ────▶ T
+```
+
 Given closed subschemes `Z i ⊆ X i`, described by ideal sheaves `I i`, which are finite
 locally free of degree `d` over `T i` and whose pullbacks agree over `X i ×_X X j`, there
 is a unique closed subscheme `Z ⊆ X` with `Z ×_T T i = Z i`, and `Z` is finite locally
-free of degree `d` over `T`. -/
-theorem isSheaf_fpqc_finiteLocallyFreeSubscheme {T X : Scheme.{u}} (f : X ⟶ T) (d : ℕ)
-    {ι : Type w} {T' : ι → Scheme.{u}} (g : ∀ i, T' i ⟶ T)
-    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T) {X' : ι → Scheme.{u}}
-    (p : ∀ i, X' i ⟶ X) (q : ∀ i, X' i ⟶ T' i)
+free of degree `d` over `T`.
+
+(blueprint: `sk-thm-picard-descent`, part (D2)) -/
+theorem isSheaf_fpqc_finiteLocallyFreeSubscheme (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    {X : Scheme.{u}} (f : X ⟶ T) (d : ℕ)
+    {X' : ι → Scheme.{u}} (p : ∀ i, X' i ⟶ X) (q : ∀ i, X' i ⟶ T' i)
     (hp : ∀ i, IsPullback (p i) (q i) f (g i)) (I : ∀ i, (X' i).IdealSheafData)
     (hfin : ∀ i, IsFinite ((I i).subschemeι ≫ q i))
     (hflat : ∀ i, Flat ((I i).subschemeι ≫ q i))

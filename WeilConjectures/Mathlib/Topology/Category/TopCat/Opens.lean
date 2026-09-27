@@ -1,13 +1,13 @@
 /-
-Copyright (c) 2026 Orchestra Agent. All rights reserved.
+Copyright (c) 2026 Claude. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Orchestra Agent
+Authors: Claude
 -/
 module
 
-public import Mathlib.Topology.Category.TopCat.Opens
 public import Mathlib.CategoryTheory.Limits.Final
 public import Mathlib.CategoryTheory.Limits.IsConnected
+public import Mathlib.Topology.Category.TopCat.Opens
 
 /-!
 # The functor of preimages of open subsets is final

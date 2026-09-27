@@ -1,14 +1,14 @@
 /-
-Copyright (c) 2026 Orchestra Agent. All rights reserved.
+Copyright (c) 2026 Claude. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Orchestra Agent
+Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
@@ -26,6 +26,13 @@ The auxiliary isomorphisms in the `AlgebraicGeometry.Scheme.Modules` namespace i
 `AlgebraicGeometry.Scheme.Modules.overEquiv`, the restriction `M.over U` of a sheaf of modules
 to an open subset `U` with the pullback of `M` along the open immersion `U.ι`; this is what
 makes invertibility stable under pullback.
+
+## Implementation notes
+
+`Y.Modules` lives in `Type (u + 1)`, so `Y.Pic` as defined here does too, even though `Pic Y`
+is really a small group.  Smallness is not pursued: only the underlying set is needed for the
+`Set`-valued Picard presheaf, and no group law is defined, since the tensor product of sheaves
+of modules is still the placeholder `AlgebraicGeometry.Scheme.Modules.tensorObj`.
 
 ## Main definitions
 
@@ -58,6 +65,8 @@ namespace Modules
 noncomputable def pullbackObjUnitIso (f : X ⟶ Y) :
     (Modules.pullback f).obj (SheafOfModules.unit Y.ringCatSheaf) ≅
       SheafOfModules.unit X.ringCatSheaf :=
+  -- The `IsIso` instance has to be introduced by hand: elaborating `asIso` directly leaves the
+  -- universe metavariables of `pullbackObjUnitToUnit` undetermined when the instance is sought.
   haveI : IsIso (C := SheafOfModules.{u} X.ringCatSheaf)
       (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom) := inferInstance
   asIso (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom)
@@ -99,7 +108,20 @@ noncomputable def overIsoUnitOfPullbackIotaIso {M : Y.Modules} {U : Y.Opens}
     (overEquivObjOverIso M U ≪≫ e ≪≫ (overEquivObjUnitIso U).symm)
 
 /-- The key local computation behind functoriality of the Picard presheaf: if `M` is trivial
-on an open subset `U` of `Y`, then its pullback along `g : X ⟶ Y` is trivial on `g ⁻¹ᵁ U`. -/
+on an open subset `U` of `Y`, then its pullback along `g : X ⟶ Y` is trivial on `g ⁻¹ᵁ U`.
+
+The isomorphism is read off the restriction square of `g` over `U`, in which both composites
+are `g ⁻¹ᵁ U ⟶ Y`, so that pulling `M` back along either path gives the same module:
+
+```
+  (g ⁻¹ᵁ U).toScheme ── g ∣_ U ──▶ U.toScheme
+        │                              │
+  (g ⁻¹ᵁ U).ι                        U.ι
+        │                              │
+        ▼                              ▼
+        X ──────────── g ────────────▶ Y
+```
+-/
 noncomputable def pullbackOverUnitIso (g : X ⟶ Y) (M : Y.Modules) (U : Y.Opens)
     (e : M.over U ≅ SheafOfModules.unit (Y.ringCatSheaf.over U)) :
     ((Modules.pullback g).obj M).over (g ⁻¹ᵁ U) ≅
@@ -118,7 +140,7 @@ This is the functoriality part of blueprint `lem:pc-pic-presheaf-functorial`. -/
 theorem _root_.SheafOfModules.IsInvertible.pullback {g : X ⟶ Y} {M : Y.Modules}
     (hM : M.IsInvertible) : ((Modules.pullback g).obj M).IsInvertible := by
   obtain ⟨q, hq⟩ := hM.exists_isInvertibleData
-  let _ := hq
+  have := hq
   refine SheafOfModules.isInvertible_of_forall_over_unit (M := (Modules.pullback g).obj M)
     (fun i : q.I ↦ g ⁻¹ᵁ q.X i) ?_ ?_
   · have h : IsOpenCover q.X := (Opens.coversTop_iff _ _).mp q.coversTop
@@ -128,15 +150,15 @@ theorem _root_.SheafOfModules.IsInvertible.pullback {g : X ⟶ Y} {M : Y.Modules
     exact Opens.mem_iSup.mpr ⟨i, hi⟩
   · intro i
     obtain ⟨hu⟩ := SheafOfModules.LocalGeneratorsData.IsInvertibleData.nonempty_unique (q := q) i
-    let _ := hu
+    have := hu
     exact ⟨Modules.pullbackOverUnitIso g M (q.X i)
       ((asIso (q.generators i).π).symm ≪≫ SheafOfModules.freeUniqueIso _)⟩
 
-/-- Invertibility of a sheaf of modules only depends on its isomorphism class, so it transfers
-to the chosen representative of that class in the skeleton. -/
 -- The universes of `IsInvertible.of_iso` have to be given explicitly: without them the
 -- instance arguments of `of_iso` are elaborated before its category is known, and the
 -- universe metavariables are defaulted to `0`.
+/-- Invertibility of a sheaf of modules only depends on its isomorphism class, so it transfers
+to the chosen representative of that class in the skeleton. -/
 lemma _root_.SheafOfModules.IsInvertible.fromSkeleton_toSkeleton (M : Y.Modules)
     [M.IsInvertible] : ((fromSkeleton Y.Modules).obj (toSkeleton M)).IsInvertible :=
   SheafOfModules.IsInvertible.of_iso.{u, u, u} (fromSkeletonToSkeletonIso M).symm
@@ -148,9 +170,8 @@ variable (Y) in
 /-- The Picard group of a scheme `Y`: the set of isomorphism classes of invertible sheaves
 of `𝒪_Y`-modules, realized as the invertible classes inside the skeleton of `Y.Modules`.
 
-This lives in `Type (u + 1)` rather than `Type u`: smallness of the Picard group is not
-pursued here. Only the underlying set is defined; no group law is needed for the
-`Set`-valued Picard presheaf. -/
+This lives in `Type (u + 1)` rather than `Type u`; see the implementation notes of this
+module. -/
 def Pic : Type (u + 1) :=
   { L : Skeleton Y.Modules // ((fromSkeleton Y.Modules).obj L).IsInvertible }
 
@@ -209,6 +230,19 @@ lemma map_comp {Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z) (L : Z.Pic) :
   simp only [val_map]
   exact congr_toSkeleton_of_iso (((Modules.pullbackComp g h).app _).symm ≪≫
     (Modules.pullback g).mapIso (fromSkeletonToSkeletonIso _).symm)
+
+/-- Pulling back the trivial invertible sheaf gives the trivial invertible sheaf.
+
+The two invertibility instances are taken as hypotheses rather than synthesised: the instance
+`SheafOfModules.instIsInvertibleUnit` needs sheafification on the over-sites of the small
+Zariski site, which is not available with the imports of this file. -/
+@[simp]
+lemma map_mk_unit (g : X ⟶ Y) [(SheafOfModules.unit Y.ringCatSheaf).IsInvertible]
+    [(SheafOfModules.unit X.ringCatSheaf).IsInvertible] :
+    map g (mk (SheafOfModules.unit Y.ringCatSheaf)) =
+      mk (SheafOfModules.unit X.ringCatSheaf) :=
+  ext (congr_toSkeleton_of_iso ((Modules.pullback g).mapIso (fromSkeletonToSkeletonIso _) ≪≫
+    Modules.pullbackObjUnitIso g))
 
 end Pic
 
