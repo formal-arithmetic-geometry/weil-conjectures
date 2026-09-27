@@ -7,9 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.Compactification.Defs
-
-@[expose] public section
 
 /-!
 # Smooth proper completion of a smooth curve over a finite field
@@ -17,6 +16,11 @@ public import WeilConjectures.Compactification.Defs
 A smooth geometrically connected curve `U₀` over a finite field `K = 𝔽_q` embeds as a dense
 open subscheme of a curve `C₀` which is *proper* over `K` and still smooth and geometrically
 connected, the boundary `C₀ \ U₀` being a finite set of closed points.
+
+Separatedness of `U₀` over `K` is part of `AlgebraicGeometry.IsCurve` and is necessary: a
+compactification of `p` forces `p` to be separated
+(`AlgebraicGeometry.Compactification.isSeparated`), so the affine line with doubled origin has
+none.
 
 The proof, which is not formalised here, runs as follows. Nagata's compactification theorem
 embeds `U₀` into some scheme proper over `K`; replacing that scheme by the scheme-theoretic
@@ -30,14 +34,12 @@ isomorphism over `U₀`, so `U₀ → C₀` is an open immersion whose complemen
 finite set `X \ U₀` under a finite morphism. Finally `C₀` is geometrically connected because the
 geometric base change of `U₀` is connected and dense in that of `C₀`.
 
-This file lives outside `WeilConjectures/EtaleCohomology/Purity/RealSheaves/` because it is a
-statement about schemes, not about sheaves: it only uses the `AlgebraicGeometry.Compactification`
-package and no étale cohomology whatsoever.
-
 ## Main statements
 
 - `AlgebraicGeometry.exists_smooth_properCompactification`
 -/
+
+@[expose] public section
 
 universe u
 
@@ -55,10 +57,10 @@ curve over `K`, and whose boundary `C₀ \ U₀` is a finite set of closed point
 The open immersion `U₀ ⟶ C₀` and the properness of `C₀ ⟶ Spec K` are part of the data of a
 `Compactification`, so they do not appear among the conclusions. -/
 theorem exists_smooth_properCompactification
-    {K : Type u} [Field K] [Finite K] {U : Scheme.{u}} (p : U ⟶ Spec (.of K))
-    [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [QuasiCompact p] :
-    ∃ c : Compactification p, SmoothOfRelativeDimension 1 c.g ∧ GeometricallyConnected c.g ∧
-      (Set.range c.i.base)ᶜ.Finite ∧
+    {K : Type u} [Field K] [Finite K] {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p]
+    [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] :
+    ∃ c : Compactification p, IsCurve c.g ∧ SmoothOfRelativeDimension 1 c.g ∧
+      GeometricallyConnected c.g ∧ (Set.range c.i.base)ᶜ.Finite ∧
       ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z) := by
   sorry
 

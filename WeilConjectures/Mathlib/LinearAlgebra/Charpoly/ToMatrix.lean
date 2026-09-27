@@ -24,6 +24,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
   `finrank K V` and leading coefficient `(-1) ^ finrank K V * det f`.
 * `LinearMap.natDegree_map_charpolyRev`: the degree is unchanged by mapping the coefficients
   along a ring homomorphism out of a field.
+* `LinearMap.charpoly_of_isConj`, `LinearMap.charpolyRev_of_isConj`: the characteristic
+  polynomial and its reverse are invariant under conjugation.
 * `LinearMap.charpoly_dualMap`: the characteristic polynomial is invariant under transposition.
 * `LinearMap.C_det_mul_charpolyRev`: if `f * g = c • 1`, then `det (1 - t • g)` is determined by
   the characteristic polynomial of `f`.
@@ -58,6 +60,40 @@ theorem eval_charpolyRev (f : M →ₗ[R] M) : Polynomial.eval 0 f.charpolyRev =
 @[simp]
 theorem coeff_zero_charpolyRev (f : M →ₗ[R] M) : f.charpolyRev.coeff 0 = 1 := by
   rw [coeff_zero_eq_eval_zero, eval_charpolyRev]
+
+/-- Conjugate endomorphisms have the same characteristic polynomial. -/
+theorem charpoly_of_isConj {f g : Module.End R M} (h : IsConj f g) :
+    f.charpoly = g.charpoly := by
+  obtain ⟨u, hu⟩ := h
+  let e : M ≃ₗ[R] M :=
+    { toFun := (u : Module.End R M)
+      map_add' := map_add _
+      map_smul' := map_smul _
+      invFun := ((u⁻¹ : (Module.End R M)ˣ) : Module.End R M)
+      left_inv := fun x ↦ by
+        have h1 : (((u⁻¹ : (Module.End R M)ˣ) : Module.End R M) * (u : Module.End R M)) x = x := by
+          rw [u.inv_mul]; rfl
+        exact h1
+      right_inv := fun x ↦ by
+        have h1 : ((u : Module.End R M) * ((u⁻¹ : (Module.End R M)ˣ) : Module.End R M)) x = x := by
+          rw [u.mul_inv]; rfl
+        exact h1 }
+  have hg : g = e.conj f := by
+    ext x
+    have hx := congrArg
+      (fun φ : Module.End R M ↦ φ (((u⁻¹ : (Module.End R M)ˣ) : Module.End R M) x)) hu.eq
+    have hux : ∀ y : M,
+        (u : Module.End R M) (((u⁻¹ : (Module.End R M)ˣ) : Module.End R M) y) = y := fun y ↦ by
+      have h1 : ((u : Module.End R M) * ((u⁻¹ : (Module.End R M)ˣ) : Module.End R M)) y = y := by
+        rw [u.mul_inv]; rfl
+      exact h1
+    simpa [e, LinearEquiv.conj_apply, hux] using hx.symm
+  rw [hg, LinearEquiv.charpoly_conj]
+
+/-- Conjugate endomorphisms have the same reverse characteristic polynomial `det (1 - t • f)`. -/
+theorem charpolyRev_of_isConj {f g : Module.End R M} (h : IsConj f g) :
+    f.charpolyRev = g.charpolyRev := by
+  rw [charpolyRev_def, charpolyRev_def, charpoly_of_isConj h]
 
 variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
 

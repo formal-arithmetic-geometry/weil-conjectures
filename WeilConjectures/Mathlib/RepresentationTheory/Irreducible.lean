@@ -7,8 +7,6 @@ module
 
 public import Mathlib.RepresentationTheory.Irreducible
 
-@[expose] public section
-
 /-!
 # Constituents of a representation
 
@@ -16,10 +14,17 @@ The constituents of a finite-dimensional representation are the irreducible succ
 quotients of a composition series, counted with multiplicity; equivalently, by Jordan-Hölder,
 the irreducible subquotients. Irreducibility itself is `Representation.IsIrreducible`.
 
+`Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Recording it would
+need the Jordan-Hölder multiset of composition factors of a finite-dimensional
+representation, which Mathlib does not have; it is what the rank `N_γ` and the weight sum
+`B_γ` of blueprint `sk-d-real-detweights` are sums over.
+
 ## Main definitions
 
 - `Representation.IsConstituent`
 -/
+
+@[expose] public section
 
 namespace Representation
 
@@ -28,10 +33,10 @@ variable {k G V V' : Type*} [Field k] [Monoid G]
 
 /-- Blueprint `sk-d-real-operations`: Operations, constituents and coinvariants.
 
-`σ` is a *constituent* of `ρ` if it is irreducible and isomorphic to a subquotient of `ρ`. By
-Jordan-Hölder these are exactly the irreducible successive quotients of a composition series
-of `ρ`, counted with multiplicity. -/
-def IsConstituent (ρ : Representation k G V) (σ : Representation k G V') : Prop :=
+`σ.IsConstituent ρ` says that `σ` is a *constituent* of `ρ`: it is irreducible and isomorphic
+to a subquotient of `ρ`. By Jordan-Hölder these are exactly the irreducible successive
+quotients of a composition series of `ρ`. -/
+def IsConstituent (σ : Representation k G V') (ρ : Representation k G V) : Prop :=
   σ.IsIrreducible ∧ ∃ N M : Subrepresentation ρ, N ≤ M ∧
     Nonempty (σ.asModule ≃ₗ[MonoidAlgebra k G]
       (M.asSubmodule ⧸ Submodule.comap M.asSubmodule.subtype N.asSubmodule))

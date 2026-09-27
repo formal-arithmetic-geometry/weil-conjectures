@@ -11,8 +11,6 @@ public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 
-@[expose] public section
-
 /-!
 # Purity of real lisse Weil sheaves on curves
 
@@ -20,37 +18,53 @@ This file states the climax of the block: an `ι`-real lisse Weil sheaf on a smo
 geometrically connected curve over a finite field is, constituent by constituent, punctually
 `ι`-pure of the expected weight.
 
-The route is the classical one. A rank-one lisse Weil sheaf has finite geometric image, hence
-is punctually pure of the weight of its Frobenius scalar
-(`AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image_and_isPunctuallyPure`). The
+The route is the classical one. A rank-one lisse Weil sheaf has finite geometric image
+(`AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image`), hence is punctually pure of
+the weight of its Frobenius scalar
+(`AlgebraicGeometry.WeilGroup.IsLisse.isPunctuallyPure_of_finrank_eq_one`). The
 Rankin–Selberg argument, applied to the even tensor powers of a real sheaf on an affine curve,
 turns a bound on the determinant weights of the constituents into a bound on all local
 eigenvalues (`AlgebraicGeometry.WeilGroup.hasWeightsAtMost_of_isReal`). Semi-continuity
 propagates a weight bound across the boundary of an open subcurve
-(`AlgebraicGeometry.BoundaryDatum.weight_le_of_hasWeightsAtMost`). Finally an exterior power
-of the semisimplification squeezes the eigenvalues of a single weight block from both sides
+(`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasWeightsAtMost`). Finally an
+exterior power of the semisimplification squeezes the eigenvalues of a single weight block
+from both sides
 (`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`).
 
-The arithmetic and geometric monodromy groups are the Zariski closures of `ρ (W (C₀))` and
-`ρ (π₁ C)` inside `GL V`. Zariski closures of subgroups of `GL V` belong to the algebraic
-groups block (`sk-d-monodromy`, `sk-d-central`) and do not exist here, so they enter
-`AlgebraicGeometry.WeilGroup.CentralFrobeniusRepresentative` as *parameters* `G` and `H`,
-constrained only by the two containment fields; no placeholder definition of a Zariski closure
-is introduced.
+## Implementation notes
+
+The arithmetic and geometric monodromy groups of `sk-d-real-monodromy` are the Zariski
+closures of `ρ (W (C₀))` and `ρ (π₁ C)` inside `GL V`. Zariski closures of subgroups of `GL V`
+are owned by the algebraic groups block (`sk-d-monodromy`, `sk-d-central`) and do not exist
+here; only the map `AlgebraicGeometry.WeilGroup.toLinearAut` whose images they are closures of
+is recorded, and the positive central Frobenius representative of `sk-d-central` is left to
+that block.
+
+The theorems below quantify over an arbitrary `AlgebraicGeometry.WeilGroup p`, whose data does
+not record that `ker deg` is the geometric fundamental group of `C`. They are therefore not
+consequences of that data alone: their proofs need the Grothendieck–Lefschetz trace formula
+relating `AlgebraicGeometry.WeilGroup.eulerSeries` to compactly supported cohomology, and the
+identification of `H¹(C)` with the dual of a Tate module. Both need the Galois category of
+finite étale covers of a scheme, hence Mathlib's
+`CategoryTheory.PreGaloisCategory.IsFundamentalGroup`, to even be stated. The statements
+recorded here are the blueprint's; they become provable once `AlgebraicGeometry.WeilGroup` is
+rebased on the étale fundamental group and the trace formula is available.
 
 ## Main definitions
 
 - `AlgebraicGeometry.WeilGroup.toLinearAut`
-- `AlgebraicGeometry.WeilGroup.CentralFrobeniusRepresentative`
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image_and_isPunctuallyPure`
+- `AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image`
+- `AlgebraicGeometry.WeilGroup.IsLisse.isPunctuallyPure_of_finrank_eq_one`
 - `AlgebraicGeometry.WeilGroup.hasWeightsAtMost_of_isReal`
-- `AlgebraicGeometry.BoundaryDatum.weight_le_of_hasWeightsAtMost`
+- `AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasWeightsAtMost`
 - `AlgebraicGeometry.BoundaryDatum.isPunctuallyPure_of_isPunctuallyPure_restrict`
 - `AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`
 -/
+
+@[expose] public section
 
 universe u
 
@@ -58,7 +72,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)}
+variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
 
 namespace WeilGroup
 
@@ -70,66 +84,45 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
 
 The Weil representation `ρ` viewed as a homomorphism to the automorphism group of `V`: every
 `ρ g` is invertible because `g` is invertible, so `ρ` factors through `GL V = (V →ₗ V)ˣ`,
-which is multiplicatively equivalent to `V ≃ₗ V`. This is the map whose images generate the
-monodromy groups of `sk-d-monodromy`. -/
+which is multiplicatively equivalent to `V ≃ₗ V`. The arithmetic and geometric monodromy
+groups of `sk-d-monodromy` are the Zariski closures of the images of `W (C₀)` and of `π₁ C`
+under this map. -/
 noncomputable def toLinearAut : W.carrier →* (V ≃ₗ[PadicAlgCl l] V) :=
   (LinearMap.GeneralLinearGroup.generalLinearEquiv (PadicAlgCl l) V).toMonoidHom.comp
     ρ.asGroupHom
-
-/-- Blueprint `sk-d-real-monodromy`: Arithmetic monodromy and a central representative.
-
-The monodromy data of the Weil representation `ρ` are `H = closure (ρ (π₁ C))`,
-`G = closure (ρ (W C₀))` and `F = ρ γ`, the closures being Zariski closures inside `GL V`. A
-*positive central Frobenius representative* for these data is a pair `(N, z)` with `N > 0`
-and `z` a central element of `G` lying in the coset `H * F ^ N`; it exists by
-`sk-d-central`, and it is what makes the eigenvalues of `F ^ N` visible through a single
-scalar.
-
-Zariski closures of subgroups of `GL V` are owned by the algebraic groups block and are not
-available, so the arithmetic and geometric monodromy groups are taken here as the *parameters*
-`G` and `H`, subject only to `arithmetic_mem` and `geometric_mem`, which say that `ρ` maps
-`W (C₀)` into `G` and `π₁ C` into `H`. No placeholder for the closure operation is
-introduced. -/
-structure CentralFrobeniusRepresentative (G H : Subgroup (V ≃ₗ[PadicAlgCl l] V)) where
-  /-- The arithmetic monodromy group contains the image of the whole Weil group. -/
-  arithmetic_mem (g : W.carrier) : W.toLinearAut l ρ g ∈ G
-  /-- The geometric monodromy group contains the image of `π₁ C`. -/
-  geometric_mem (g : W.carrier) (hg : g ∈ W.geometric) : W.toLinearAut l ρ g ∈ H
-  /-- The positive exponent `N` of the Frobenius power that is being represented. -/
-  N : ℕ
-  /-- The exponent is positive. -/
-  N_pos : 0 < N
-  /-- The central representative `z` of the coset `H * F ^ N`. -/
-  z : V ≃ₗ[PadicAlgCl l] V
-  /-- The representative lies in the arithmetic monodromy group. -/
-  z_mem : z ∈ G
-  /-- The representative is central in the arithmetic monodromy group. -/
-  z_mem_center (g : V ≃ₗ[PadicAlgCl l] V) (hg : g ∈ G) : z * g = g * z
-  /-- The representative lies in the coset `H * F ^ N` of the geometric monodromy group, where
-  `F = ρ γ` is the image of the chosen degree-one lift. -/
-  z_mem_coset : ∃ h ∈ H, z = h * W.toLinearAut l ρ W.γ ^ N
 
 variable (ι : PadicAlgCl l →+* ℂ)
 
 /-- Blueprint `sk-p-real-rankone`: Purity of rank-one Weil sheaves.
 
-Let `L` be a rank-one lisse Weil sheaf on a smooth geometrically connected curve `U₀ / 𝔽_q`,
-with character `χ : W (U₀) → ℚ̄_ℓ ˣ`. Then the geometric image `χ (π₁ U)` is finite, and `L`
-is punctually `ι`-pure of weight `w = 2 log |ι c| / log q`, where `c = χ γ` is the value at
-the chosen degree-one lift.
+The geometric image `χ (π₁ U)` of a rank-one lisse Weil sheaf on a smooth geometrically
+connected curve `U₀ / 𝔽_q` is finite.
 
-Finiteness of the geometric image is the heart of the matter: the `ℓ`-adic logarithm turns an
-`N`-th power of `χ` restricted to `π₁ U` into a continuous additive map invariant under
-conjugation by `γ`, and such a map is a Frobenius-fixed class in `H¹ (U, ℚ̄_ℓ)`, which
-vanishes because on a proper curve `H¹` is dual to a Tate module with no Frobenius-fixed
-vector, and the boundary contribution for an open curve is a nonzero power of `q`. Once the
-image is finite, `χ` is a root of unity times the constant character `c ^ deg`, so the local
-scalar at a point of degree `e` has complex modulus `|ι c| ^ e = q ^ (e * w / 2)`. -/
-theorem IsLisse.finite_geometric_image_and_isPunctuallyPure
-    [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [QuasiCompact p]
-    (hrank : Module.finrank (PadicAlgCl l) V = 1) (hρ : W.IsLisse l ρ) :
-    (Set.range fun g : W.geometric ↦ ρ g).Finite ∧
-      W.IsPunctuallyPure l ρ ι (weight ι (Nat.card K) (LinearMap.det (ρ W.γ))) := by
+This is the heart of the matter: the `ℓ`-adic logarithm turns an `N`-th power of `χ`
+restricted to `π₁ U` into a continuous additive map invariant under conjugation by `γ`, and
+such a map is a Frobenius-fixed class in `H¹ (U, ℚ̄_ℓ)`, which vanishes because on a proper
+curve `H¹` is dual to a Tate module with no Frobenius-fixed vector, and the boundary
+contribution for an open curve is a nonzero power of `q`. -/
+theorem IsLisse.finite_geometric_image [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] (hrank : Module.finrank (PadicAlgCl l) V = 1)
+    (hρ : W.IsLisse l ρ) :
+    (Set.range fun g : W.geometric ↦ ρ g).Finite := by
+  sorry
+
+/-- Blueprint `sk-p-real-rankone`: Purity of rank-one Weil sheaves.
+
+A rank-one lisse Weil sheaf `L` on a smooth geometrically connected curve `U₀ / 𝔽_q`, with
+character `χ : W (U₀) → ℚ̄_ℓ ˣ`, is punctually `ι`-pure of weight
+`w = 2 log |ι c| / log q`, where `c = χ γ` is the value at the chosen degree-one lift.
+
+Once the geometric image is finite (`AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image`),
+`χ` is a root of unity times the constant character `c ^ deg`, so the local scalar at a point
+of degree `e` has complex modulus `|ι c| ^ e = q ^ (e * w / 2)`. -/
+theorem IsLisse.isPunctuallyPure_of_finrank_eq_one [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] (hrank : Module.finrank (PadicAlgCl l) V = 1)
+    (hρ : W.IsLisse l ρ) :
+    W.IsPunctuallyPure l ρ ι
+      (frobeniusWeight ι (Nat.card K) (LinearMap.det (ρ W.frobeniusLift))) := by
   sorry
 
 /-- Blueprint `sk-p-real-rankin`: Rankin–Selberg upper bound.
@@ -147,11 +140,11 @@ every inverse local factor nonnegative, so each individual factor inherits that 
 from the product, and a zero of the local denominator at `|ι α| ^ (-2 m / e)` gives
 `wt (α) ≤ d + 1 / m` for every `m`. -/
 theorem hasWeightsAtMost_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [QuasiCompact p] [Nontrivial V] (hρ : W.IsLisse l ρ)
+    [GeometricallyConnected p] [Nontrivial V] (hρ : W.IsLisse l ρ)
     (hreal : W.IsReal l ρ ι) {d : ℝ}
     (hd : ∀ {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
       [FiniteDimensional (PadicAlgCl l) V'] (σ : Representation (PadicAlgCl l) W.carrier V')
-      (γ : ℝ), ρ.IsConstituent σ → W.HasDetWeight l σ ι γ → γ ≤ d) :
+      (γ : ℝ), σ.IsConstituent ρ → W.HasDetWeight l σ ι γ → γ ≤ d) :
     W.HasWeightsAtMost l ρ ι d := by
   sorry
 
@@ -159,8 +152,9 @@ end WeilGroup
 
 namespace BoundaryDatum
 
-variable {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} {j : U ⟶ C} {WU : WeilGroup pU}
-  {WC : WeilGroup p} (D : BoundaryDatum j WU WC) (l : ℕ) [Fact l.Prime] {V : Type u}
+variable {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] {j : U ⟶ C}
+  [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU} {WC : WeilGroup p}
+  (D : BoundaryDatum j WU WC) (l : ℕ) [Fact l.Prime] {V : Type u}
   [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ι : PadicAlgCl l →+* ℂ)
 
@@ -179,11 +173,11 @@ eigenvalues are bounded by `q ^ ((w + 2) / 2)`. The trace formula then confines 
 the boundary factor, giving the preliminary bound `|ι α| ≤ q_s ^ ((w + 2) / 2)`; applying it
 to the tensor powers `ℱ ^ ⊗ n`, whose boundary stalks receive `(V ^ (I_s)) ^ ⊗ n`, improves it
 to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes. -/
-theorem weight_le_of_hasWeightsAtMost (ρ : Representation (PadicAlgCl l) WU.carrier V) {w : ℝ}
-    (hw : WU.HasWeightsAtMost l ρ ι w) {s : C} (hs : s ∈ C.finitePoints)
-    (hsb : s ∈ (Set.range j.base)ᶜ) {α : PadicAlgCl l} {v : V}
+theorem frobeniusWeight_le_of_hasWeightsAtMost
+    (ρ : Representation (PadicAlgCl l) WU.carrier V) {w : ℝ}
+    (hw : WU.HasWeightsAtMost l ρ ι w) (s : ↥((Set.range j.base)ᶜ)) {α : PadicAlgCl l} {v : V}
     (hv : v ∈ D.boundaryStalk l ρ s) (hv0 : v ≠ 0) (hα : ρ (D.residueFrobenius s) v = α • v) :
-    weight ι (C.pointNorm s) α ≤ w := by
+    WeilGroup.frobeniusWeight ι (C.pointNorm s.1) α ≤ w := by
   sorry
 
 /-- Blueprint `sk-p-real-semi`: Semi-continuity of weights.
@@ -195,7 +189,8 @@ weight `w` on all of `C₀`.
 Indeed `𝒢` is the direct image of its restriction, so the previous bound applies to `𝒢` and
 to its dual `𝒢 ᵛ`; the eigenvalues of the dual are the inverses of the eigenvalues of `𝒢`, so
 the upper bound `w` for `𝒢` and the upper bound `-w` for `𝒢 ᵛ` combine into an equality at
-every closed point of the boundary. -/
+every closed point of the boundary. The dual `𝒢 ᵛ` is not defined in this block; the proof
+will need `Representation.dual` on top of the statements recorded here. -/
 theorem isPunctuallyPure_of_isPunctuallyPure_restrict
     (ρ : Representation (PadicAlgCl l) WC.carrier V) {w : ℝ} (hρ : WC.IsLisse l ρ)
     (hpure : WU.IsPunctuallyPure l (ρ.comp D.restrict) ι w) :
@@ -228,10 +223,10 @@ product of the `r` ratios `|ι α_i| / q ^ (e γ / 2)` is `1` while each is at m
 is `1`. That is purity on `U₀`, and semi-continuity of weights extends it over the finitely
 many missing points of `C₀`. -/
 theorem isPunctuallyPure_of_isConstituent_of_isReal [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [QuasiCompact p] (hρ : W.IsLisse l ρ) (hreal : W.IsReal l ρ ι)
+    [GeometricallyConnected p] (hρ : W.IsLisse l ρ) (hreal : W.IsReal l ρ ι)
     {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
     [FiniteDimensional (PadicAlgCl l) V']
-    (σ : Representation (PadicAlgCl l) W.carrier V') (hσ : ρ.IsConstituent σ)
+    (σ : Representation (PadicAlgCl l) W.carrier V') (hσ : σ.IsConstituent ρ)
     {γ : ℝ} (hγ : W.HasDetWeight l σ ι γ) :
     W.IsPunctuallyPure l σ ι γ := by
   sorry

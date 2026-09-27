@@ -394,8 +394,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
-public import WeilConjectures.Mathlib.RepresentationTheory.Rep.Basic
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
