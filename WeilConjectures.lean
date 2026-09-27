@@ -474,7 +474,9 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
