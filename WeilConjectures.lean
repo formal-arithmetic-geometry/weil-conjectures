@@ -6,6 +6,8 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
+public import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+public import WeilConjectures.AlgebraicGeometry.Curve.Defs
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
@@ -155,6 +157,7 @@ public import WeilConjectures.Convergence
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
+public import WeilConjectures.FieldTheory.Cr
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
 public import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
