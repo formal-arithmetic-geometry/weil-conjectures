@@ -21,22 +21,44 @@ integral of the trace class.
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram` (blueprint
-  `sk-d-proper-pushforward`)
+- `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram`: a proper pushforward diagram.
+- `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram.fixMap`: the induced map
+  `h : Fix(c) ⟶ Fix(b)` on fixed schemes.
 - `AlgebraicGeometry.ProEtale.ProperPushforwardDiagram.pushforwardCorrespondence`: the
-  pushed correspondence `(D, b, [f, g]_! u)`
+  pushed correspondence `(D, b, [f, g]_! u)` (blueprint `sk-d-proper-pushforward`).
 
 ## Main results
 
-- `AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward_traceClass`
-  (blueprint `sk-p-proper`)
-- `AlgebraicGeometry.ProEtale.GeometricOperations.trace_globalOperator_eq_integral_traceClass`
-  (blueprint `sk-c-proper-global`)
+- `AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward_traceClass`: the
+  induced map on fixed schemes carries the trace class to the pushed trace class.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.trace_globalOperator_eq_integral_traceClass`:
+  the trace of the global operator is the integral of the trace class.
+
+## Implementation notes
+
+Two departures from the sketch. The structure carries the support `D` of the target
+together with its structure morphism and the statements that the legs `b₁`, `b₂` lie over
+`s`, since that is what makes `b` a correspondence in the sense of blueprint `sk-d-corr`,
+and it carries `f ≫ a_Y = a_X`, which the sketch leaves implicit in writing `Rf_*` between
+geometric categories over `s`. The induced map `h : Fix(c) ⟶ Fix(b)` is *not* a field: the
+fixed schemes are equalisers and the two leg relations force `g` to carry `Fix(c)` into
+`Fix(b)`, so `h` is `ProperPushforwardDiagram.fixMap`, defined by the universal property,
+and its two characterising identities are `fixMap_ι` and `fixMap_str`.
+
+The coefficient map of `pushforwardCorrespondence` is a composite of comparison maps that
+the package only postulates, so it is `opaque` for the reason explained in
+`WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence`.
+
+Properness of `h`, which the blueprint deduces from properness of `f` and `g` by factoring
+`h` through `C ×_D Fix(b)`, is taken as an instance hypothesis, as is the compactification
+needed for the Borel-Moore pushforward.
 -/
 
 @[expose] public section
 
 universe u' u
+
+set_option linter.unusedVariables false
 
 open CategoryTheory Abelian Limits MonoidalCategory MonoidalClosed
 
@@ -47,28 +69,23 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] {s X : Scheme.{u}} {aX : X ⟶ s}
   {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
 
-/-- Blueprint `sk-d-proper-pushforward`: Proper pushforward of a correspondence and its trace.
-
-A *proper pushforward diagram* on an endocorrespondence `(C, c, u)` on `(X, K)` consists of
-a geometric scheme `a_Y : Y ⟶ s`, a proper morphism `f : X ⟶ Y` over `s`, a
+/-- A *proper pushforward diagram* on an endocorrespondence `(C, c, u)` on `(X, K)`: a
+geometric scheme `a_Y : Y ⟶ s`, a proper morphism `f : X ⟶ Y` over `s`, a
 correspondence-shaped target `b = (b₁, b₂) : D ⟶ Y × Y` over `s`, and a morphism
-`g : C ⟶ D` of supports with `bᵢ ∘ g = f ∘ cᵢ` for `i = 1, 2`. No Cartesian condition on
-either leg square is imposed, and nothing is assumed proper over `s`.
+`g : C ⟶ D` of supports with `bᵢ ∘ g = f ∘ cᵢ`:
 
-Out of this data the blueprint builds `K' = Rf_* K` and the pushed coefficient map
-`[f, g]_! u : b₂^* K' ⟶ b₁^! K'`; that construction is
-`ProperPushforwardDiagram.pushforwardCorrespondence`.
+```
+        c₁         c₂
+    X ←──── C ────→ X
+    │       │       │
+   f│      g│       │f
+    ↓       ↓       ↓
+    Y ←──── D ────→ Y
+        b₁         b₂
+```
 
-Two departures from the sketch. First, the structure carries the support `D` of the target
-together with its structure morphism and the statements that the legs `b₁`, `b₂` lie over
-`s`, since that is what makes `b` a correspondence in the sense of blueprint `sk-d-corr`,
-and it carries `f ≫ a_Y = a_X`, which the sketch leaves implicit in writing `Rf_*` between
-geometric categories over `s`. Second, the induced map `h : Fix(c) ⟶ Fix(b)` on fixed
-schemes is carried as a field `fixMap`, pinned down by `fixMap_ι`: the fixed schemes are
-equalisers, so `h` is the unique map with `h ≫ ι_{Fix b} = ι_{Fix c} ≫ g`, and it exists
-because the two leg relations force `g` to carry `Fix(c)` into `Fix(b)`. The further field
-`fixMap_str`, saying that `h` lies over the base, is a consequence of the others; it is
-recorded because it is what makes the trace-class compatibility typecheck. -/
+No Cartesian condition on either leg square is imposed, and nothing is assumed proper over
+`s` (blueprint: `sk-d-proper-pushforward`). -/
 structure ProperPushforwardDiagram (c : Correspondence aX aX K K) where
   /-- the target geometric scheme `Y`. -/
   tgt : Scheme.{u}
@@ -100,31 +117,56 @@ structure ProperPushforwardDiagram (c : Correspondence aX aX K K) where
   g_fst : g ≫ fst = c.fst ≫ f
   /-- the relation `b₂ ∘ g = f ∘ c₂`. -/
   g_snd : g ≫ snd = c.snd ≫ f
-  /-- the induced map `h : Fix(c) ⟶ Fix(b)` on fixed schemes. -/
-  fixMap : c.fix ⟶ equalizer fst snd
-  /-- `h` is induced by `g`; this determines `h`, since `ι_{Fix b}` is a monomorphism. -/
-  fixMap_ι : fixMap ≫ equalizer.ι fst snd = c.fixι ≫ g
-  /-- `h` is a morphism over `s`; a consequence of the remaining fields. -/
-  fixMap_str : fixMap ≫ equalizer.ι fst snd ≫ str = c.fixStr
 
 attribute [instance] ProperPushforwardDiagram.isProper_f
   ProperPushforwardDiagram.hasCompactification_fst
 
+namespace ProperPushforwardDiagram
+
+variable {c : Correspondence aX aX K K} (P : ProperPushforwardDiagram c)
+
+@[simp]
+lemma g_comp_str : P.g ≫ P.str = c.str := by
+  rw [← P.fst_comp, ← Category.assoc, P.g_fst, Category.assoc, P.f_comp, c.fst_comp]
+
+/-- The map `h : Fix(c) ⟶ Fix(b)` induced on fixed schemes: the two leg relations force
+`g` to carry `Fix(c)` into `Fix(b)`, and the fixed schemes are equalisers
+(part of blueprint `sk-d-proper-pushforward`). -/
+noncomputable def fixMap : c.fix ⟶ equalizer P.fst P.snd :=
+  equalizer.lift (c.fixι ≫ P.g) <| by
+    have h : c.fixι ≫ c.fst = c.fixι ≫ c.snd := equalizer.condition _ _
+    rw [Category.assoc, Category.assoc, P.g_fst, P.g_snd, ← Category.assoc, ← Category.assoc,
+      h]
+
+@[simp]
+lemma fixMap_ι : P.fixMap ≫ equalizer.ι P.fst P.snd = c.fixι ≫ P.g :=
+  equalizer.lift_ι _ _
+
+@[simp]
+lemma fixMap_str : P.fixMap ≫ equalizer.ι P.fst P.snd ≫ P.str = c.fixStr := by
+  rw [← Category.assoc, fixMap_ι, Category.assoc, P.g_comp_str, Correspondence.fixStr]
+
+/-- The coefficient map `[f, g]_! u = δ ∘ Rg_* u ∘ γ : b₂^* K' ⟶ b₁^! K'` of the pushed
+correspondence, where `K' = Rf_* K`,
+
+`γ : b₂^* Rf_* K ⟶ Rg_* g^* b₂^* Rf_* K ≃ Rg_* c₂^* f^* Rf_* K ⟶ Rg_* c₂^* K`
+
+is the unit of `g^* ⊣ Rg_*` followed by the leg relation and the counit of `f^* ⊣ Rf_*`,
+and `δ : Rg_* c₁^! K ⟶ b₁^! K'` is the exceptional adjoint of
+
+`Rb_{1!} Rg_* c₁^! K ≃ Rf_! Rc_{1!} c₁^! K ⟶ Rf_! K ≃ K'`,
+
+properness identifying `Rg_* = Rg_!` and `Rf_* = Rf_!`. -/
+noncomputable opaque pushforwardCoeff :
+    ((upperStar A P.snd).leftDerivedFunctor).obj
+        (((lowerStar A P.f).rightDerivedFunctor).obj K) ⟶
+      (rightDerivedUpperShriek A P.fst).obj
+        (((lowerStar A P.f).rightDerivedFunctor).obj K) := 0
+
 /-- The correspondence `(D, b, [f, g]_! u)` obtained by pushing an endocorrespondence
-`(C, c, u)` forward along a proper pushforward diagram. It is an endocorrespondence on
-`(Y, K')` for `K' = Rf_* K`, with legs `b₁`, `b₂` and coefficient map
-
-`[f, g]_! u = δ ∘ Rg_* u ∘ γ : b₂^* K' ⟶ b₁^! K'`,
-
-where `γ : b₂^* Rf_* K ⟶ Rg_* g^* b₂^* Rf_* K ≃ Rg_* c₂^* f^* Rf_* K ⟶ Rg_* c₂^* K` is the
-unit of `g^* ⊣ Rg_*` followed by the leg relation and the counit of `f^* ⊣ Rf_*`, and
-`δ : Rg_* c₁^! K ⟶ b₁^! K'` is the exceptional adjoint of
-`Rb_{1!} Rg_* c₁^! K ≃ Rf_! Rc_{1!} c₁^! K ⟶ Rf_! K ≃ K'`, properness identifying
-`Rg_* = Rg_!` and `Rf_* = Rf_!`. The composite uses comparison maps that the package
-`AlgebraicGeometry.ProEtale.GeometricOperations` only postulates, so the coefficient field
-is stated with its precise type and left with a `sorry` body. -/
-noncomputable def ProperPushforwardDiagram.pushforwardCorrespondence
-    {c : Correspondence aX aX K K} (P : ProperPushforwardDiagram c) :
+`(C, c, u)` forward along a proper pushforward diagram: an endocorrespondence on `(Y, K')`
+for `K' = Rf_* K` (part of blueprint `sk-d-proper-pushforward`). -/
+noncomputable def pushforwardCorrespondence :
     Correspondence P.tgtStr P.tgtStr
       (((lowerStar A P.f).rightDerivedFunctor).obj K)
       (((lowerStar A P.f).rightDerivedFunctor).obj K) where
@@ -134,57 +176,55 @@ noncomputable def ProperPushforwardDiagram.pushforwardCorrespondence
   snd := P.snd
   fst_comp := P.fst_comp
   snd_comp := P.snd_comp
-  coeff := sorry
+  coeff := P.pushforwardCoeff
+
+@[simp]
+lemma fixMap_comp_pushforwardCorrespondence_fixStr :
+    P.fixMap ≫ P.pushforwardCorrespondence.fixStr = c.fixStr :=
+  P.fixMap_str
+
+/-- The dualizing complexes of the two fixed schemes agree: the induced map `h` composed
+with the structure morphism of `Fix(b)` is the structure morphism of `Fix(c)`. -/
+lemma dualizing_fixStr (G : GeometricOperations A s) :
+    G.dualizing c.fixStr =
+      G.dualizing (P.fixMap ≫ P.pushforwardCorrespondence.fixStr) :=
+  congrArg G.dualizing P.fixMap_comp_pushforwardCorrespondence_fixStr.symm
+
+end ProperPushforwardDiagram
 
 namespace GeometricOperations
 
-/-- Blueprint `sk-p-proper`: Proper pushforward compatibility.
+/-- Proper pushforward compatibility: for an endocorrespondence `(C, c, u)` on `(X, K)` and
+a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with `f : X ⟶ Y` and `g : C ⟶ D`
+proper, the induced map `h : Fix(c) ⟶ Fix(b)` on fixed schemes carries the trace class of
+`u` to the trace class of the pushed coefficient map,
 
-For an endocorrespondence `(C, c, u)` on `(X, K)` and a proper pushforward diagram
-`(f, g) : (C, c) ⟶ (D, b)` with `f : X ⟶ Y` and `g : C ⟶ D` proper, the induced map
-`h : Fix(c) ⟶ Fix(b)` on fixed schemes carries the trace class of `u` to the trace class of
-the pushed coefficient map:
+`h_* Tr_c(u) = Tr_b([f, g]_! u)` in `Hom(A_{Fix b}, ω_{Fix b})`.
 
-`h_* Tr_c(u) = Tr_b([f, g]_! u)` in `Hom(A_{Fix b}, ω_{Fix b})`,
-
-where `h_*` is the Borel-Moore pushforward of blueprint `sk-d-integral`. No properness over
-`s` of `X`, `Y`, `C` or `D` is required, and neither leg square is assumed Cartesian.
-
-Properness of `h`, which the blueprint deduces from properness of `f` and `g` by factoring
-`h` through `C ×_D Fix(b)`, is taken as an instance hypothesis, as is the compactification
-needed for the Borel-Moore pushforward. The left-hand side is transported along
-`fixMap_str`, which identifies `h ≫ a_{Fix b}` with `a_{Fix c}`. -/
+No properness over `s` of `X`, `Y`, `C` or `D` is required, and neither leg square is
+assumed Cartesian (blueprint: `sk-p-proper`). -/
 theorem borelMoorePushforward_traceClass (G : GeometricOperations A s)
     {c : Correspondence aX aX K K} (P : ProperPushforwardDiagram c) [IsProper P.g]
     [HasCompactification P.fixMap] [IsProper P.fixMap] :
     G.borelMoorePushforward P.fixMap P.pushforwardCorrespondence.fixStr
-        (G.traceClass c ≫ eqToHom (by rw [← P.fixMap_str]; rfl)) =
+        (G.traceClass c ≫ eqToHom (P.dualizing_fixStr G)) =
       G.traceClass P.pushforwardCorrespondence :=
   sorry
 
-/-- Blueprint `sk-c-proper-global`: Proper global trace comparison.
-
-Let `X` be proper over `s`, let `K` lie in `Dᵇctf(X, A)` and let `(C, c, u)` be an
-endocorrespondence on `(X, K)` whose ordinary leg `c₂` is proper. Then the categorical
-trace of the global operator `T_c(u)` on compactly supported cohomology `RΓ_c(X, K)` is the
-integral of the trace class over the fixed scheme:
+/-- Proper global trace comparison: for `X` proper over `s`, `K` in `Dᵇctf(X, A)` and an
+endocorrespondence `(C, c, u)` on `(X, K)` whose ordinary leg `c₂` is proper, the
+categorical trace of the global operator `T_c(u)` on compactly supported cohomology
+`RΓ_c(X, K)` is the integral of the trace class over the fixed scheme,
 
 `tr_A(T_c(u) ∣ RΓ_c(X, K)) = ∫_{Fix(c)} Tr_c(u)`.
 
 This is the proper pushforward compatibility applied to the diagram with `Y = s`, `f = a_X`
-and `g = a_C = a_X ∘ c₂`, followed by the point normalisation of blueprint `sk-p-pairing`.
-
-Perfectness of `RΓ_c(X, K)`, which the blueprint gets from `K ∈ Dᵇctf(X, A)` and properness
-of `X`, is rendered as `HasRightDual` on that object, and `tr_A` is
-`CategoryTheory.MonoidalCategory.trace`, taken in `D(s, A)`; this project installs a
-monoidal structure on a derived category but not yet a braiding, so the symmetry of
-`D(s, A)` is an instance hypothesis. Properness of `Fix(c)` over `s`, which follows from
-properness of `X` and of `c₂` together with separatedness, is an instance hypothesis too,
-since it is what makes the integral defined. -/
+and `g = a_C = a_X ∘ c₂`, followed by the point normalisation of blueprint `sk-p-pairing`
+(blueprint: `sk-c-proper-global`). -/
 theorem trace_globalOperator_eq_integral_traceClass
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     (G : GeometricOperations A s) [HasCompactification aX] [IsProper aX]
-    (_hK : G.ctf X K) (c : Correspondence aX aX K K) [IsProper c.snd]
+    (hK : G.ctf X K) (c : Correspondence aX aX K K) [IsProper c.snd]
     [HasCompactification c.snd] [HasRightDual ((rightDerivedLowerShriek A aX).obj K)]
     [HasCompactification c.fixStr] [IsProper c.fixStr] :
     MonoidalCategory.trace (Correspondence.globalOperator G c) =

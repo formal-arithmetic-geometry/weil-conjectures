@@ -22,7 +22,13 @@ and `End (𝟙_ C) = R`.
 ## Main definitions
 
 - `CategoryTheory.MonoidalCategory.trace`: the trace of an endomorphism of a dualizable
-  object (blueprint `sk-d-trace`).
+  object.
+
+## Implementation notes
+
+In a merely braided category the two ways of turning `X ⊗ Xᘁ` into `Xᘁ ⊗ X` differ, and
+`trace` uses `(β_ X Xᘁ).hom`. In the symmetric case, which is the one the trace formula
+uses, the two agree.
 -/
 
 @[expose] public section
@@ -31,14 +37,19 @@ namespace CategoryTheory.MonoidalCategory
 
 variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
 
-/-- Blueprint `sk-d-trace`: Ordinary categorical trace.
+/-- The trace of an endomorphism `f : X ⟶ X` of an object with a right dual `Xᘁ` is the
+composite
 
-The trace of an endomorphism `f : X ⟶ X` of an object with a right dual is the composite
-`𝟙_ C ⟶ X ⊗ Xᘁ ⟶ X ⊗ Xᘁ ⟶ Xᘁ ⊗ X ⟶ 𝟙_ C` of the coevaluation, `f ⊗ 𝟙`, the braiding
-and the evaluation. For the symmetric monoidal category `(Perf R, ⊗ᴸ_R, R)` of perfect
-complexes over a commutative ring `R` this is the blueprint's `tr_R(f | P)`, an element of
-`End (𝟙_ C) = R`. -/
+```
+       η_ X Xᘁ        f ▷ Xᘁ        β_ X Xᘁ        ε_ X Xᘁ
+  𝟙_ C ──────→ X ⊗ Xᘁ ──────→ X ⊗ Xᘁ ──────→ Xᘁ ⊗ X ──────→ 𝟙_ C
+```
+
+of the coevaluation, `f ⊗ 𝟙`, the braiding and the evaluation. For the symmetric monoidal
+category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R` this is
+`tr_R(f | P)`, an element of `End (𝟙_ C) = R`
+(blueprint: `sk-d-trace`). -/
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
-  ExactPairing.coevaluation X Xᘁ ≫ (f ▷ Xᘁ) ≫ (β_ X Xᘁ).hom ≫ ExactPairing.evaluation X Xᘁ
+  η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
 
 end CategoryTheory.MonoidalCategory

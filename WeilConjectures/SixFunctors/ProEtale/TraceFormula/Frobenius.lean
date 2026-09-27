@@ -17,28 +17,55 @@ A *Weil datum* on the geometric base change `X` of a separated finite type
 `φ : Φ₁^* K ≃ K`, where `Φ₁` is the geometric `q`-power Frobenius. Its iterates give the
 graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 
-The `q^m`-power Frobenius of a scheme is not formalised anywhere in Mathlib or in this
-project, so `AlgebraicGeometry.ProEtale.WeilComplex` carries it as data: an `s`-morphism
-`Φ₁ : X ⟶ X`. The properties of it that the trace formula uses — being finite and a
-universal homeomorphism — appear as hypotheses where they are needed.
-
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.WeilComplex` (blueprint `sk-d-weil`)
-- `AlgebraicGeometry.ProEtale.relativeFrobenius` (blueprint `sk-d-relative-frob`)
-- `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush` (blueprint `sk-d-weil-push`)
+- `AlgebraicGeometry.ProEtale.WeilComplex`: a complex with a Frobenius coefficient
+  morphism, together with its iterates `frobeniusIterate`, `coeffIterate` and its graph
+  correspondences `WeilComplex.graph`.
+- `AlgebraicGeometry.ProEtale.relativeFrobenius`: the relative Frobenius `r_m` of a
+  morphism compatible with the Frobenius morphisms of its source and target.
+- `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush`: the `!`-pushforward of a Weil
+  complex.
 
 ## Main results
 
-- `AlgebraicGeometry.ProEtale.isFinite_relativeFrobenius_and_isUniversalHomeomorphism`
-  (blueprint `sk-i-relative-frob`)
-- `AlgebraicGeometry.ProEtale.isEquivalence_leftDerivedUpperStar_of_isFinite`
-  (blueprint `sk-i-topology`)
+- `AlgebraicGeometry.ProEtale.isFinite_relativeFrobenius`,
+  `AlgebraicGeometry.ProEtale.isUniversalHomeomorphism_relativeFrobenius`: the relative
+  Frobenius is a finite universal homeomorphism.
+- `AlgebraicGeometry.ProEtale.isEquivalence_leftDerivedUpperStar`,
+  `AlgebraicGeometry.ProEtale.ctf_leftDerivedUpperStar_obj_iff`: topological invariance of
+  the derived pro-étale category along a finite universal homeomorphism.
+
+## Implementation notes
+
+The `q^m`-power Frobenius of a scheme is not formalised anywhere in Mathlib or in this
+project, so `AlgebraicGeometry.ProEtale.WeilComplex` carries it as data: an `s`-morphism
+`Φ₁ : X ⟶ X`. The properties of it that the trace formula uses — being finite and a
+universal homeomorphism — appear as hypotheses where they are needed. The `coeff` field is
+a plain morphism rather than an isomorphism, so that a `WeilComplex` covers both a Weil
+datum (add `IsIso W.coeff`) and the arbitrary *Frobenius coefficient morphism* that the
+coefficient continuation of the argument needs.
+
+`coeffIterate` and the coefficient maps of `graph` and of `lowerShriekPush` are composites
+of comparison maps that the package only postulates, so they are `opaque` for the reason
+explained in `WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence`.
+
+`isUniversalHomeomorphism_relativeFrobenius` is not proved because the cancellation lemma
+it needs — if `g ≫ f` and `f` are universal homeomorphisms then so is `g` — is missing;
+the corresponding cancellation for finite morphisms is `AlgebraicGeometry.IsFinite.of_comp`
+and makes `isFinite_relativeFrobenius` a theorem.
+
+`isEquivalence_leftDerivedUpperStar` is stated on the whole unbounded `D(Y, A) ⥤ D(X, A)`,
+whereas the blueprint states topological invariance on `Dᵇctf`; the generalisation is the
+expected one on the pro-étale site, and `ctf_leftDerivedUpperStar_obj_iff` restricts it
+back to the coefficient stage.
 -/
 
 @[expose] public section
 
 universe u' u
+
+set_option linter.unusedVariables false
 
 open CategoryTheory Abelian Limits MonoidalCategory MonoidalClosed
 
@@ -48,18 +75,10 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {s X Y : Scheme.{u}}
 
-/-- Blueprint `sk-d-weil`: Frobenius and Weil data.
-
-For `X₀/𝐅_q` separated of finite type and `X = X₀ ×_{𝐅_q} k`, the blueprint takes
-`Φ₁ : X ⟶ X` to be the base change of the `q`-power scheme Frobenius of `X₀`; it fixes the
-scalar field, so it is a morphism over `s`. A *Weil datum* is a complex
-`K ∈ Dᵇctf(X, A)` with `φ : Φ₁^* K ≃ K`; for the coefficient continuation of the argument
-one also allows a *Frobenius coefficient morphism*, an arbitrary map `Φ₁^* K ⟶ K` with no
-invertibility requirement.
-
-A `WeilComplex` is the latter, more general notion: the field `coeff` is a plain morphism,
-and a Weil datum in the strict sense is a `WeilComplex` with `IsIso W.coeff`. The scheme
-Frobenius does not exist in this project, so `frobenius` is carried as data. -/
+/-- A *Weil complex* on a geometric scheme `a_X : X ⟶ s`: a geometric `q`-power Frobenius
+`Φ₁ : X ⟶ X` over `s`, a complex `K` and a *Frobenius coefficient morphism*
+`φ : Φ₁^* K ⟶ K`. A *Weil datum* in the strict sense of the blueprint is a `WeilComplex`
+with `IsIso W.coeff` (blueprint: `sk-d-weil`). -/
 structure WeilComplex (aX : X ⟶ s) where
   /-- the geometric `q`-power Frobenius `Φ₁ : X ⟶ X`. -/
   frobenius : X ⟶ X
@@ -74,95 +93,142 @@ namespace WeilComplex
 
 variable {aX : X ⟶ s} (W : WeilComplex (A := A) aX)
 
-/-- The `m`-th iterate `Φ_m = Φ₁^m : X ⟶ X` of the geometric Frobenius. -/
-noncomputable def frobeniusIterate (m : ℕ) : X ⟶ X := (show End X from W.frobenius) ^ m
+/-- The `m`-th iterate `Φ_m = Φ₁^m : X ⟶ X` of the geometric Frobenius
+(part of blueprint `sk-d-weil`). -/
+noncomputable def frobeniusIterate (m : ℕ) : X ⟶ X :=
+  let Φ : End X := W.frobenius
+  Φ ^ m
+
+@[simp]
+lemma frobeniusIterate_zero : W.frobeniusIterate 0 = 𝟙 X := rfl
+
+@[simp]
+lemma frobeniusIterate_succ (m : ℕ) :
+    W.frobeniusIterate (m + 1) = W.frobenius ≫ W.frobeniusIterate m :=
+  (pow_succ (M := End X) W.frobenius m).trans (End.mul_def _ _)
+
+/-- Every iterate of the Frobenius is a morphism over the base. -/
+@[simp]
+lemma frobeniusIterate_comp (m : ℕ) : W.frobeniusIterate m ≫ aX = aX := by
+  induction m with
+  | zero => simp
+  | succ n ih => rw [frobeniusIterate_succ, Category.assoc, ih, W.frobenius_comp]
 
 /-- The iterate `φ_m : Φ_m^* K ⟶ K` of the Frobenius coefficient morphism, obtained by
-composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`. -/
-noncomputable def coeffIterate (m : ℕ) :
-    ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶ W.obj :=
-  sorry
+composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`
+(part of blueprint `sk-d-weil`). -/
+noncomputable opaque coeffIterate (m : ℕ) :
+    ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶ W.obj := 0
+
+/-- The coefficient map of the graph correspondence
+`AlgebraicGeometry.ProEtale.WeilComplex.graph`: the iterate `φ_m` read through the
+comparison `K ≃ 𝟙^! K`. -/
+noncomputable opaque graphCoeff (m : ℕ) :
+    ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj W.obj ⟶
+      (rightDerivedUpperShriek A (𝟙 X)).obj W.obj := 0
 
 /-- The graph correspondence `c_m = (id_X, Φ_m)` of a Weil complex, with coefficient map
-`φ_m`. Its ordinary-pullback leg is `Φ_m` and its exceptional leg is the identity. -/
+`φ_m`. Its ordinary-pullback leg is `Φ_m` and its exceptional leg is the identity
+(part of blueprint `sk-d-weil`). -/
 noncomputable def graph (m : ℕ) : Correspondence aX aX W.obj W.obj where
   supp := X
   str := aX
   fst := 𝟙 X
   snd := W.frobeniusIterate m
   fst_comp := Category.id_comp aX
-  snd_comp := sorry
-  coeff := sorry
+  snd_comp := W.frobeniusIterate_comp m
+  coeff := W.graphCoeff m
 
 end WeilComplex
 
-/-- Blueprint `sk-d-relative-frob`: The relative Frobenius factorization.
+/-- The *relative Frobenius* `r_m = (f, Φ_{X,m}) : X ⟶ X'_m` of a morphism `f : X ⟶ Y`
+compatible with Frobenius morphisms `Φ_X`, `Φ_Y`, where `X'_m = Y ×_{Φ_Y, Y, f} X`:
 
-For `f : X ⟶ Y` and Frobenius morphisms `Φ_X : X ⟶ X`, `Φ_Y : Y ⟶ Y` with
-`f ≫ Φ_Y = Φ_X ≫ f`, the blueprint forms `X'_m = Y ×_{Φ_{Y,m}, Y, f} X` with the two
-projections `p_m : X'_m ⟶ X` and `f'_m : X'_m ⟶ Y`, and the *relative Frobenius*
-`r_m = (f, Φ_{X,m}) : X ⟶ X'_m`. It satisfies `p_m ≫ r_m = Φ_{X,m}` and `r_m ≫ f'_m = f`.
+```
+   X'_m ──f'_m──→ Y           r_m ≫ p_m = Φ_X
+     │            │           r_m ≫ f'_m = f
+  p_m│            │Φ_Y
+     ↓            ↓
+     X ────f────→ Y
+```
 
 Here `X'_m` is `CategoryTheory.Limits.pullback Φ_Y f`, with `f'_m = pullback.fst` and
-`p_m = pullback.snd`. -/
+`p_m = pullback.snd` (blueprint: `sk-d-relative-frob`). -/
 noncomputable def relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y ⟶ Y)
     (h : f ≫ frobY = frobX ≫ f) : X ⟶ pullback frobY f :=
   pullback.lift f frobX h
 
-/-- Blueprint `sk-i-relative-frob`: Relative Frobenius.
+@[simp]
+lemma relativeFrobenius_comp_snd (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y ⟶ Y)
+    (h : f ≫ frobY = frobX ≫ f) :
+    relativeFrobenius f frobX frobY h ≫ pullback.snd frobY f = frobX :=
+  pullback.lift_snd _ _ _
 
-The relative Frobenius `r_m` of the factorization is a finite universal homeomorphism.
+@[simp]
+lemma relativeFrobenius_comp_fst (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y ⟶ Y)
+    (h : f ≫ frobY = frobX ≫ f) :
+    relativeFrobenius f frobX frobY h ≫ pullback.fst frobY f = f :=
+  pullback.lift_fst _ _ _
 
-The `q^m`-power Frobenius itself is not available, so the hypotheses record the two
-properties of it that the argument uses: `Φ_X` and `Φ_Y` are finite universal
-homeomorphisms. Since `relativeFrobenius f Φ_X Φ_Y h` composed with the projection
-`p_m`, itself a base change of `Φ_Y`, is `Φ_X`, cancellation gives the conclusion. -/
-theorem isFinite_relativeFrobenius_and_isUniversalHomeomorphism (f : X ⟶ Y) (frobX : X ⟶ X)
+/-- The relative Frobenius of a morphism between schemes with finite Frobenius morphisms is
+finite: it is a section of the projection `p_m`, a base change of `Φ_Y`, and its composite
+with that projection is the finite morphism `Φ_X` (blueprint: `sk-i-relative-frob`). -/
+instance isFinite_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y ⟶ Y)
+    (h : f ≫ frobY = frobX ≫ f) [IsFinite frobX] [IsFinite frobY] :
+    IsFinite (relativeFrobenius f frobX frobY h) := by
+  have : IsFinite (relativeFrobenius f frobX frobY h ≫ pullback.snd frobY f) := by
+    rw [relativeFrobenius_comp_snd]
+    infer_instance
+  exact .of_comp _ (pullback.snd frobY f)
+
+/-- The relative Frobenius of a morphism between schemes whose Frobenius morphisms are
+finite universal homeomorphisms is a universal homeomorphism
+(blueprint: `sk-i-relative-frob`). -/
+instance isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X)
     (frobY : Y ⟶ Y) (h : f ≫ frobY = frobX ≫ f) [IsFinite frobX] [IsFinite frobY]
     [IsUniversalHomeomorphism frobX] [IsUniversalHomeomorphism frobY] :
-    IsFinite (relativeFrobenius f frobX frobY h) ∧
-      IsUniversalHomeomorphism (relativeFrobenius f frobX frobY h) :=
+    IsUniversalHomeomorphism (relativeFrobenius f frobX frobY h) :=
   sorry
 
-/-- Blueprint `sk-i-topology`: Topological invariance.
-
-For a finite universal homeomorphism `r : X ⟶ Y`, pullback is an equivalence
-`r^* : Dᵇctf(Y, A) ≃ Dᵇctf(X, A)`, with inverse `Rr_* = Rr_!` and invertible unit and
-counit. Reduction of a scheme is a finite universal homeomorphism, so the statement
-includes it.
-
-This is the derived, pro-étale form of the topological invariance of the small étale
-topos, which this project already has at the sheaf level on the étale site as
-`AlgebraicGeometry.Etale.isEquivalence_upperStar`. The stability of `Dᵇctf` is the second
-clause, stated through the coefficient stage `G`. -/
-theorem isEquivalence_leftDerivedUpperStar_of_isFinite (G : GeometricCoefficients A)
-    (r : X ⟶ Y) [IsFinite r] [IsUniversalHomeomorphism r] :
-    ((upperStar A r).leftDerivedFunctor).IsEquivalence ∧
-      ∀ K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A),
-        G.ctf Y K ↔ G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) :=
+/-- Topological invariance: for a finite universal homeomorphism `r : X ⟶ Y`, pullback is
+an equivalence `Lr^* : D(Y, A) ≌ D(X, A)`, with inverse `Rr_* = Rr_!` and invertible unit
+and counit. Reduction of a scheme is a finite universal homeomorphism, so the statement
+covers it (blueprint: `sk-i-topology`). -/
+instance isEquivalence_leftDerivedUpperStar (r : X ⟶ Y) [IsFinite r]
+    [IsUniversalHomeomorphism r] : ((upperStar A r).leftDerivedFunctor).IsEquivalence :=
   sorry
 
-/-- Blueprint `sk-d-weil-push`: Weil `!`-pushforward.
+/-- Topological invariance preserves the coefficient stage: `Lr^*` restricts to an
+equivalence `Dᵇctf(Y, A) ≃ Dᵇctf(X, A)` along a finite universal homeomorphism
+(blueprint: `sk-i-topology`). -/
+theorem ctf_leftDerivedUpperStar_obj_iff (G : GeometricCoefficients A) (r : X ⟶ Y)
+    [IsFinite r] [IsUniversalHomeomorphism r]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) ↔ G.ctf Y K :=
+  sorry
 
-For a Weil complex `(K, φ)` on `X` and `f : X ⟶ Y` compatible with the Frobenius
-morphisms, Cartesian `!`-base change for `X'_m` together with topological invariance for
-the relative Frobenius `r_m` gives the comparison
+/-- The coefficient map of `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush`: the
+composite `ψ = Rf_! φ ∘ θ_{f,1}` of the Weil comparison
 
 `θ_{f,m} : Φ_{Y,m}^* Rf_! K ≃ Rf'_{m!} p_m^* K ⟶ Rf'_{m!} Rr_{m!} r_m^* p_m^* K ≃
   Rf_! Φ_{X,m}^* K`,
 
-whose middle unit is invertible. The pushed forward Weil complex on `Y` is `L = Rf_! K`
-with `ψ = Rf_! φ ∘ θ_{f,1}`, and its iterates are `ψ_m = Rf_! φ_m ∘ θ_{f,m}`. The same
-definition applies to an arbitrary Frobenius coefficient morphism.
+built from Cartesian `!`-base change for `X'_m` and topological invariance for the relative
+Frobenius `r_m`, with `Rf_! φ`. -/
+noncomputable opaque WeilComplex.lowerShriekPushCoeff {aX : X ⟶ s} (W : WeilComplex (A := A) aX)
+    (f : X ⟶ Y) [HasCompactification f] (frobY : Y ⟶ Y) :
+    ((upperStar A frobY).leftDerivedFunctor).obj ((rightDerivedLowerShriek A f).obj W.obj) ⟶
+      (rightDerivedLowerShriek A f).obj W.obj := 0
 
-The comparison `θ` is built from base change and topological invariance, which the package
-only postulates, so the `coeff` field of the result carries a `sorry`. -/
+/-- The `!`-pushforward of a Weil complex `(K, φ)` along `f : X ⟶ Y` compatible with the
+Frobenius morphisms: the Weil complex `L = Rf_! K` on `Y` with coefficient map
+`ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`). -/
 noncomputable def WeilComplex.lowerShriekPush {aX : X ⟶ s} {aY : Y ⟶ s}
     (W : WeilComplex (A := A) aX) (f : X ⟶ Y) [HasCompactification f] (frobY : Y ⟶ Y)
-    (hY : frobY ≫ aY = aY) (_h : f ≫ frobY = W.frobenius ≫ f) : WeilComplex (A := A) aY where
+    (hY : frobY ≫ aY = aY) (h : f ≫ frobY = W.frobenius ≫ f) : WeilComplex (A := A) aY where
   frobenius := frobY
   frobenius_comp := hY
   obj := (rightDerivedLowerShriek A f).obj W.obj
-  coeff := sorry
+  coeff := W.lowerShriekPushCoeff f frobY
 
 end AlgebraicGeometry.ProEtale

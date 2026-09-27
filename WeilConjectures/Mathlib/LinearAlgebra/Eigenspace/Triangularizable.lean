@@ -17,8 +17,19 @@ dimension `i`, so that all graded pieces are one dimensional.
 
 ## Main results
 
-- `Module.End.exists_invariant_flag`: the existence of such a flag (blueprint
-  `sk-p-linear-triangular`).
+- `Module.End.exists_complete_invariant_flag`: the existence of such a flag.
+
+## Implementation notes
+
+The flag is indexed by `Fin (n + 1)`, `n = finrank K V`, rather than by `ℕ`, so that the
+dimension condition pins it down completely. The endpoints `F 0 = ⊥` and
+`F (Fin.last n) = ⊤` and the one-dimensionality of the successive quotients all follow
+from the dimension condition, so they are not recorded separately.
+
+Mathlib has the generalized eigenspace decomposition
+`Module.End.iSup_maxGenEigenspace_eq_top` over an algebraically closed field, but no flag
+statement; indeed `Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean` lists
+triangularizability as a `TODO`.
 -/
 
 @[expose] public section
@@ -27,27 +38,14 @@ namespace Module.End
 
 variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
 
-/-- Blueprint `sk-p-linear-triangular`: Triangularization.
-
-A single endomorphism `f` of a finite dimensional vector space `V` over an algebraically
-closed field `K` admits a full flag of invariant subspaces with one dimensional graded
-pieces: there is a monotone family `F : Fin (n + 1) → Submodule K V`, where
-`n = finrank K V`, with `F 0 = ⊥`, `F (Fin.last n) = ⊤`, each `F i` mapped into itself by
-`f`, and `finrank K (F i) = i`. A basis adapted to such a flag puts `f` in upper triangular
-form, with the eigenvalues of `f` on the diagonal.
-
-The flag is indexed by `Fin (n + 1)` rather than by `ℕ` so that the dimension condition
-pins it down completely; the successive quotients are one dimensional by the dimension
-condition alone, so they are not recorded separately.
-
-Mathlib has the generalized eigenspace decomposition `Module.End.iSup_maxGenEigenspace_eq_top`
-over an algebraically closed field, but no flag statement; indeed its
-`Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean` lists triangularizability as a
-`TODO`. -/
-theorem exists_invariant_flag [IsAlgClosed K] [FiniteDimensional K V] (f : End K V) :
+/-- An endomorphism `f` of a finite dimensional vector space `V` over an algebraically
+closed field `K` admits a complete flag of invariant subspaces: a monotone family
+`F : Fin (finrank K V + 1) → Submodule K V` with each `F i` mapped into itself by `f` and
+`finrank K (F i) = i`. A basis adapted to such a flag puts `f` in upper triangular form,
+with the eigenvalues of `f` on the diagonal (blueprint: `sk-p-linear-triangular`). -/
+theorem exists_complete_invariant_flag [IsAlgClosed K] [FiniteDimensional K V] (f : End K V) :
     ∃ F : Fin (Module.finrank K V + 1) → Submodule K V,
-      Monotone F ∧ F 0 = ⊥ ∧ F (Fin.last _) = ⊤ ∧
-      (∀ i, (F i).map f ≤ F i) ∧ ∀ i, Module.finrank K (F i) = (i : ℕ) :=
+      Monotone F ∧ (∀ i, (F i).map f ≤ F i) ∧ ∀ i, Module.finrank K (F i) = (i : ℕ) :=
   sorry
 
 end Module.End
