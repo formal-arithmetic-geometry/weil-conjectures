@@ -64,7 +64,7 @@ theorem Smooth.exists_etale_to_affineSpace {X Y : Scheme.{u}} (g : X ⟶ Y) (d :
     ∃ (U : Y.Opens) (V : X.Opens) (_ : IsAffineOpen U) (_ : IsAffineOpen V)
       (_ : g.base x ∈ U) (_ : x ∈ V) (hVU : V ≤ g ⁻¹ᵁ U)
       (e : V.toScheme ⟶ 𝔸(ULift.{u} (Fin d); U.toScheme)),
-      Etale e ∧ e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme) = g.resLE U V hVU := by
+      Etale e ∧ e ≫ (𝔸(ULift.{u} (Fin d); U.toScheme) ↘ U.toScheme) = g.resLE U V hVU :=
   sorry
 
 /-- Blueprint `sk-prop-normal-form`: Étale-local normal form and slicing
@@ -80,7 +80,7 @@ theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) 
       (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧
       (∀ i, Etale (r i)) ∧ (∀ i, Smooth (q i)) ∧ (∀ i, IsAffineHom (q i)) ∧
       (∀ i, GeometricallyConnected (q i)) ∧ (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧
-      (∀ i, q i ≫ r i = p i ≫ f) := by
+      (∀ i, q i ≫ r i = p i ≫ f) :=
   sorry
 
 end AlgebraicGeometry

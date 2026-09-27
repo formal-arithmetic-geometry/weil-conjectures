@@ -15,7 +15,7 @@ property `P` of quasi-compact quasi-separated schemes over a fixed quasi-compact
 quasi-separated base `T`, which is invariant under thickenings, compatible with cofiltered
 limits along affine transition morphisms, and which propagates from a scheme to an open
 subscheme or to its closed complement, holds for the spectrum of a field over `T` as soon as
-it holds for `T` itself.  Applied to the failure locus of a base-change map, this says that a
+it holds for `T` itself. Applied to the failure locus of a base-change map, this says that a
 minimal counterexample can be found over a point.
 
 Since Mathlib has no notion of a thickening of schemes, a thickening is spelled out as a
@@ -73,7 +73,7 @@ theorem exists_spec_field_of_isStableUnderThickening (T : Scheme.{u})
       ∀ (i : Z ⟶ T') [IsClosedImmersion i], Set.range i.base = (V : Set T')ᶜ →
       P f → P (V.ι ≫ f) ∨ P (i ≫ f))
     (hP : P (𝟙 T)) :
-    ∃ (K : Type u) (_ : Field K) (g : Spec (CommRingCat.of K) ⟶ T), P g := by
+    ∃ (K : Type u) (_ : Field K) (g : Spec (CommRingCat.of K) ⟶ T), P g :=
   sorry
 
 end AlgebraicGeometry

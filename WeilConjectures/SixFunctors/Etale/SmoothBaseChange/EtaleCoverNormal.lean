@@ -60,7 +60,7 @@ theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] :
     ∃ (ι : Type u) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
-      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) := by
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) :=
   sorry
 
 /-- Blueprint `sk-prop-etale-normal`: Étale covers of a normal scheme with separably closed
@@ -75,7 +75,7 @@ theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] [CompactSpace V] :
     ∃ (ι : Type u) (_ : Finite ι) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
-      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) := by
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) :=
   sorry
 
 end AlgebraicGeometry
