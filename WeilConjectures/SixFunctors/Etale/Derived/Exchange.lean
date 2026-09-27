@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
@@ -31,14 +32,13 @@ purity chapter uses and which does not depend on the placeholder.
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.derivedLowerShriekExchange`: `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*`.
-- `AlgebraicGeometry.Etale.projectionFormulaMap`: `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`.
 - `AlgebraicGeometry.Etale.reduction`: reduction of coefficients `K ↦ K ⊗^L (Λ/J)_X`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_upperStar_comp_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
-- `AlgebraicGeometry.Etale.isIso_projectionFormulaMap_iff_reduction`
+- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek_iff_reduction`
 -/
 
 @[expose] public section
@@ -68,7 +68,10 @@ The exchange transformation `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` attached to a car
 as a natural transformation between functors `D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
 
 This is the transformation of the framework chapter, restated here with the source and target
-categories of the purity chapter. -/
+categories of the purity chapter. The third transformation of the subsection, the projection
+map `PF_{f,K,L} : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`, is not named: the purity chapter uses
+only the assertion that it is an isomorphism, which is
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`. -/
 -- TODO(unify): def:exchange-projection
 noncomputable def derivedLowerShriekExchange (_sq : IsPullback g' f' f g) :
     R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⟶
@@ -97,25 +100,6 @@ end Exchange
 section Projection
 
 variable (f : X ⟶ Y) [HasCompactification f]
-
-/-- Blueprint `sk-def-sf-exchanges`: Exchange and projection transformations, typed
-
-The projection transformation
-
-`PF_{f,K,L} : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`,
-
-natural in `K ∈ D(X_ét, Λ)` and `L ∈ D(Y_ét, Λ)`. This is the transformation of the framework
-chapter, restated here with the source and target categories of the purity chapter. -/
--- TODO(unify): def:exchange-projection
-noncomputable def projectionFormulaMap
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((Etale.derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
-        ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ⟶
-      (R(f)_![ModuleCat.{u + 1} Λ]).obj
-        (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
-          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
-  sorry
 
 /-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients
 
@@ -154,16 +138,26 @@ noncomputable def reduction (J : Ideal Λ) (X : Scheme.{u}) :
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction
 
-The square comparing `PF_{f,K,L}` with `PF_{f,K_m,L_m}` through the finite-reduction
-compatibilities of `Rf_!`, `−⊗^L−` and `Lf^*` commutes; hence `PF_{f,K,L}` is an isomorphism
-if and only if `PF_{f,K_m,L_m}` is. This is what reduces the projection formula at level `n`
-to the projection formula at level `m ≤ n`. -/
-theorem isIso_projectionFormulaMap_iff_reduction (f : X ⟶ Y) [HasCompactification f]
-    (J : Ideal Λ)
+The square comparing the projection map at `(K, L)` with the projection map at the finite
+reductions `(K_m, L_m)`, through the finite-reduction compatibilities of `Rf_!`, `−⊗^L−` and
+`Lf^*`, commutes; hence the projection formula holds at `(K, L)` if and only if it holds at
+`(K_m, L_m)`. This is what reduces the projection formula at level `n` to the projection
+formula at level `m ≤ n`. -/
+theorem nonempty_iso_derivedTensor_rightDerivedLowerShriek_iff_reduction (f : X ⟶ Y)
+    [HasCompactification f] (J : Ideal Λ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (projectionFormulaMap Λ f K L) ↔
-      IsIso (projectionFormulaMap Λ f ((reduction Λ J X).obj K) ((reduction Λ J Y).obj L)) :=
+    Nonempty (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
+          ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ≅
+        (R(f)_![ModuleCat.{u + 1} Λ]).obj
+          (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) ↔
+      Nonempty (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
+          ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((reduction Λ J X).obj K))).obj
+            ((reduction Λ J Y).obj L) ≅
+        (R(f)_![ModuleCat.{u + 1} Λ]).obj
+          (((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((reduction Λ J X).obj K)).obj
+            ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((reduction Λ J Y).obj L)))) :=
   sorry
 
 end Etale
