@@ -22,7 +22,11 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
@@ -67,6 +71,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Coprod
@@ -233,6 +238,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Transport
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.EulerProductAux
 public import WeilConjectures.Evaluation
+public import WeilConjectures.FieldTheory.Cr
 public import WeilConjectures.FourierTransform.AffineSpace
 public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.FourierTransform.Defs
@@ -566,6 +572,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conser
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
