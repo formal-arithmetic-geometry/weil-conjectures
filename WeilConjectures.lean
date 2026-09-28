@@ -116,6 +116,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSh
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension.AxiomCensus
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
@@ -275,6 +276,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.Double
 public import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
@@ -355,6 +357,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shap
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
@@ -365,6 +368,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
@@ -450,14 +454,25 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
+public import WeilConjectures.SixFunctors.Etale.Derived.Package
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChange
