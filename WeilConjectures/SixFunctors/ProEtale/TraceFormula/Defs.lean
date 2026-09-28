@@ -28,8 +28,14 @@ data which this project has not yet built, stated for the pro-étale functors th
   `Dᵇctf(X, A)`.
 - `AlgebraicGeometry.ProEtale.verdierDual`: the Verdier dual `D_X K = RHom(K, ω_X)`.
 - `AlgebraicGeometry.ProEtale.GeometricOperations`: the geometric operation package.
-- `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekId`: the identity isomorphism
-  `(𝟙 X)^! ≃ 𝟭`, conjugate to the field `lowerShriekId`.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekId`,
+  `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekIdIso`,
+  `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekComp`: the identity and
+  composition isomorphisms `(𝟙 X)^! ≃ 𝟭` and `(f ≫ g)^! ≃ f^! g^!`, conjugate to the fields
+  `lowerShriekId` and `lowerShriekComp`.
+- `AlgebraicGeometry.ProEtale.lowerShriekCongr`,
+  `AlgebraicGeometry.ProEtale.leftDerivedUpperStarCongr`: transport of `Rf_!` and `Lf^*`
+  along an equality of morphisms.
 
 ## Implementation notes
 
@@ -117,8 +123,9 @@ end VerdierDual
 operations that the blueprint fixes, namely the dualizing complex `ω_X = a_X^! A` with its
 composition `f^! ω_Y ≃ ω_X`, the identification `Rf_* = Rf_!` for proper `f`, composition
 of exceptional direct images, `!`-base change, the projection formula, open-immersion
-purity, the closed-immersion unit `1 ≃ Ri^! Ri_*`, the pullback `Lf^* A_Y ≃ A_X` of the
-constant sheaf, and biduality `K ≃ D_X D_X K` on `Dᵇctf`. The identity isomorphism
+purity, the closed-immersion unit `1 ≃ Ri^! Ri_*`, the monoidal structure
+`Lf^* A_Y ≃ A_X`, `Lf^* (M ⊗ᴸ N) ≃ Lf^* M ⊗ᴸ Lf^* N` of the pullback, biduality
+`K ≃ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier isomorphism. The identity isomorphism
 `R(𝟙 X)_! ≃ 𝟭` and the pullback of the constant sheaf are tied to `lowerShriekComp` and to
 `leftDerivedUpperStarId` by unit axioms.
 
@@ -191,12 +198,18 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   closedUnit {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i] :
     𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) ≅
       (lowerStar A i).rightDerivedFunctor ⋙ rightDerivedUpperShriek A i
-  /-- the pullback of the constant sheaf: `Lf^* A_Y ≃ A_X`. -/
+  /-- the pullback of the constant sheaf, `Lf^* A_Y ≃ A_X`: the unit of the monoidal
+  structure of `Lf^*`. -/
   upperStarUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((upperStar A f).leftDerivedFunctor).obj (𝟙_ _) ≅ 𝟙_ _
   /-- for `f = 𝟙 X`, `upperStarUnit` is the identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
   upperStarUnit_id (X : Scheme.{u}) :
     upperStarUnit (𝟙 X) = (leftDerivedUpperStarId A X).app (𝟙_ _)
+  /-- `Lf^*` is monoidal: `Lf^* (M ⊗ᴸ N) ≃ Lf^* M ⊗ᴸ Lf^* N`. -/
+  upperStarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
+      (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((upperStar A f).leftDerivedFunctor).obj (M ⊗ N) ≅
+      ((upperStar A f).leftDerivedFunctor).obj M ⊗ ((upperStar A f).leftDerivedFunctor).obj N
   /-- the evaluation-adjoint map `K ⟶ D_X D_X K`. -/
   bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
@@ -205,6 +218,17 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   isIso_bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : ctf X K) :
     IsIso (bidualityMap a K)
+  /-- the Künneth-Verdier isomorphism `κ_{M,N} : M ⊠ D_Y N ≃ RHom(p_Y^* N, p_X^! M)`
+  (blueprint `sk-thm-sf-kunneth-verdier`), stated for every Cartesian square over `s` so
+  that both orientations are available on `pullback aY aX`. -/
+  kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X} {pY : Z ⟶ Y}
+      (sq : IsPullback pX pY aX aY) [HasCompactification pX]
+      (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+      (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((upperStar A pX).leftDerivedFunctor).obj M ⊗
+        ((upperStar A pY).leftDerivedFunctor).obj (verdierDual (dualizing aY) N) ≅
+      (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
+        ((rightDerivedUpperShriek A pX).obj M)
 
 variable {A}
 
@@ -224,5 +248,36 @@ noncomputable def GeometricOperations.upperShriekId {s : Scheme.{u}}
     rightDerivedUpperShriek A (𝟙 X) ≅ 𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
     (G.lowerShriekId X)).symm
+
+/-- The identity isomorphism `𝟭 ≃ (𝟙 X)^!` of the exceptional inverse image: the inverse of
+`GeometricOperations.upperShriekId`. -/
+noncomputable def GeometricOperations.upperShriekIdIso {s : Scheme.{u}}
+    (G : GeometricOperations A s) (X : Scheme.{u}) :
+    𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) ≅
+      rightDerivedUpperShriek A (𝟙 X) :=
+  (G.upperShriekId X).symm
+
+/-- The composition isomorphism `(f ≫ g)^! ≃ g^! ⋙ f^!` of exceptional inverse images:
+the conjugate of `GeometricOperations.lowerShriekComp` along the adjunctions
+`R(f ≫ g)_! ⊣ (f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!`. -/
+noncomputable def GeometricOperations.upperShriekComp {s : Scheme.{u}}
+    (G : GeometricOperations A s) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    rightDerivedUpperShriek A (f ≫ g) ≅
+      rightDerivedUpperShriek A g ⋙ rightDerivedUpperShriek A f :=
+  conjugateIsoEquiv (rightDerivedUpperShriekAdjunction A (f ≫ g))
+    ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
+    (G.lowerShriekComp f g)
+
+/-- Transport of the derived exceptional direct image along an equality of morphisms. -/
+noncomputable abbrev lowerShriekCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g)
+    [HasCompactification f] [HasCompactification g] :
+    rightDerivedLowerShriek A f ≅ rightDerivedLowerShriek A g :=
+  rightDerivedLowerShriekCongr A h
+
+/-- Transport of the derived pullback along an equality of morphisms. -/
+noncomputable def leftDerivedUpperStarCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
+    (upperStar A f).leftDerivedFunctor ≅ (upperStar A g).leftDerivedFunctor :=
+  eqToIso (by subst h; rfl)
 
 end AlgebraicGeometry.ProEtale
