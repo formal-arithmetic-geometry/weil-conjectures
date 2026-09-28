@@ -92,8 +92,10 @@ public import WeilConjectures.Blowup.PartialSectionExtension
 public import WeilConjectures.Blowup.PartialSectionExtensionReduction
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
+public import WeilConjectures.Blowup.ProperTargetExtension
 public import WeilConjectures.Blowup.QuasiAffineGeneral
 public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
+public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
@@ -142,6 +144,7 @@ public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.BoundaryPreparation
+public import WeilConjectures.Compactification.Cofiltered
 public import WeilConjectures.Compactification.CommonModification
 public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.Constructions
