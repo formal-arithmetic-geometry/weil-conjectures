@@ -28,6 +28,9 @@ product* `- ⊗ᴸ -`, the total left derived functor of `- ⊗ -` in two variab
 
 - `AlgebraicGeometry.Etale.derivedTensor` : the derived tensor product
   `- ⊗ᴸ - : D(X_ét) ⥤ D(X_ét) ⥤ D(X_ét)`, with scoped notation `(X)⊗ᴸ[A]`.
+- `AlgebraicGeometry.Etale.derivedTensorRight` : tensoring on the right with a fixed
+  complex, `K ↦ K ⊗ᴸ N`, and `AlgebraicGeometry.Etale.derivedTensorRightFunctor`, the same
+  construction read as a functor of `N`.
 
 ## Main results
 
@@ -87,6 +90,27 @@ noncomputable def derivedTensor :
 
 @[inherit_doc derivedTensor]
 scoped notation "-⊗ᴸ-(" X ")[" A "]" => derivedTensor A X
+
+/-- Tensoring on the right with a fixed complex `N` on `X`: the functor `K ↦ K ⊗ᴸ N` on
+`D(X_ét)`. -/
+noncomputable def derivedTensorRight
+    (N : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology A) :=
+  (-⊗ᴸ-(X)[A]).flip.obj N
+
+/-- `AlgebraicGeometry.Etale.derivedTensorRight` as a functor of the fixed complex: it sends
+`N` to `K ↦ K ⊗ᴸ N`. -/
+noncomputable def derivedTensorRightFunctor :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+        DerivedCategory (Sheaf X.smallEtaleTopology A) :=
+  (-⊗ᴸ-(X)[A]).flip
+
+@[simp]
+lemma derivedTensorRightFunctor_obj (N : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (derivedTensorRightFunctor A X).obj N = derivedTensorRight A X N :=
+  rfl
 
 noncomputable instance laxMonoidal_Q :
     (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=

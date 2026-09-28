@@ -41,6 +41,7 @@ affine charts `standardOpen n S i ≅ 𝔸({j : n // j ≠ i}; S)` are in
 - `AlgebraicGeometry.ProjectiveSpace.map` — functoriality of `ℙ(n; S)` in the base `S`.
 - `AlgebraicGeometry.ProjectiveSpace.liftBaseChange` — the morphism `T ⟶ ℙ(n; X)` induced by a
   morphism `T ⟶ X` and a morphism `T ⟶ ℙ(n; S)` agreeing over `S`.
+- `AlgebraicGeometry.ProjectiveLine` — the projective line `ℙ¹_S = ℙ(ULift (Fin 2); S)`.
 
 ## Main results
 
@@ -372,5 +373,12 @@ instance isClosedImmersion_liftBaseChange [IsSeparated g] [IsClosedImmersion b] 
 end LiftBaseChange
 
 end ProjectiveSpace
+
+/-- The **projective line** `ℙ¹_S` over a scheme `S`, with structure morphism
+`ProjectiveLine S ↘ S`. Following `AlgebraicGeometry.ProjectiveSpace`, whose index type is
+that of the *homogeneous* coordinates, this is `ℙ(ULift (Fin 2); S)`. It is an abbreviation,
+so that the instances of `ℙ(n; S)` — the `CanonicallyOver` structure and properness among
+them — apply to it unchanged. -/
+abbrev ProjectiveLine (S : Scheme.{u}) : Scheme.{u} := ℙ(ULift.{u} (Fin 2); S)
 
 end AlgebraicGeometry

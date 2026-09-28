@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.Algebra.Group.AddChar
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Shift.Basic
@@ -57,7 +59,11 @@ instead, which `FrobeniusModule.IsPureOfWeightOver` names.
 - `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex`: the abelian category of
   constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme and its bounded derived category.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight`,
-  `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost`: the weight conditions.
+  `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost` and `AlgebraicGeometry.WeilSheaf.IsReal`: the
+  weight conditions and the reality condition.
+- `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and
+  `AlgebraicGeometry.WeilComplex.derivedLowerShriek`: the higher direct images with compact
+  support `Rʳf₀!` and the total derived one `Rf₀!`.
 - `AlgebraicGeometry.WeilSheaf.directImage`, `AlgebraicGeometry.WeilSheaf.extensionByZero` and
   `AlgebraicGeometry.WeilSheaf.extensionByZeroToDirectImage`: the two extensions along an open
   immersion and the canonical map between them.
@@ -161,6 +167,13 @@ theorem IsPunctuallyPureOfWeight.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ}
     F.HasWeightsAtMost ι w :=
   fun x hx ↦ (h x hx).hasWeightsAtMost
 
+-- TODO(unify): sk-d-real-weights
+/-- `F` is `ι`-*real* if the realization under `ι` of the local Frobenius characteristic
+polynomial `P_x(F, T) = det(1 - T Fₓ | F_x̄)` has real coefficients at every closed point `x`;
+equivalently, if every complex local eigenvalue multiset is stable under complex conjugation.
+Placeholder; see the module docstring. -/
+def IsReal (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop := sorry
+
 -- TODO(unify): sk-d-real-operations
 /-- The dual `F ↦ F ∨` of a lisse Weil sheaf. -/
 noncomputable def dual (F : WeilSheaf k₀ l X) : WeilSheaf k₀ l X := sorry
@@ -198,6 +211,57 @@ noncomputable def WeilSheaf.compactlySupportedCohomology (r : ℤ) (F : WeilShea
   (WeilSheaf.toComplex.obj F).compactlySupportedCohomology r
 
 end Sheaves
+
+/-! ### Direct images with compact support
+
+The repository already has the étale compact-support formalism: `Rf_!` is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriek` and `H_c` is
+`AlgebraicGeometry.Etale.compactlySupportedCohomology`, both available for every separated
+quasi-compact morphism locally of finite type, the `HasCompactification` hypothesis being
+discharged by the Nagata instance. What is missing is their Frobenius-equivariant form on Weil
+sheaves and Weil complexes, which is what the two placeholders below stand for. Their
+hypotheses are exactly the triple that makes the étale `Rf_!` available.
+-/
+
+section LowerShriek
+
+-- The binders of the next two declarations are spelled out rather than taken from a `variable`
+-- block: their bodies are placeholders, so `l` and the two `Fact` hypotheses do not occur in the
+-- type and would not be included.
+
+-- TODO(unify): sk-thm-sf-package
+/-- The `r`-th higher direct image with compact support `Rʳf₀!` along a separated quasi-compact
+morphism of `k₀`-schemes locally of finite type. Placeholder; see the module docstring. -/
+noncomputable def WeilSheaf.higherLowerShriek (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ)
+    [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (r : ℕ) : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y := sorry
+
+-- TODO(unify): sk-thm-sf-package
+/-- The total derived direct image with compact support `Rf₀!` along a separated quasi-compact
+morphism of `k₀`-schemes locally of finite type. Placeholder; see the module docstring. -/
+noncomputable def WeilComplex.derivedLowerShriek (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ)
+    [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] : WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y := sorry
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+
+-- TODO(unify): sk-thm-sf-package
+instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] (r : ℕ) :
+    (WeilSheaf.higherLowerShriek k₀ l f r).Additive := sorry
+
+-- TODO(unify): sk-thm-sf-package
+instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] :
+    (WeilComplex.derivedLowerShriek k₀ l f).Additive := sorry
+
+end LowerShriek
 
 /-! ### Direct images along an open immersion -/
 
