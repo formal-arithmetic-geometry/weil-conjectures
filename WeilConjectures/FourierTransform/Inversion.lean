@@ -140,15 +140,17 @@ computation with `ψ` in place of `ψ⁻¹`, and is recorded through its consequ
 The character must be **nontrivial**: for `Ψ = 1` both kernels are constant and the
 convolution is `Λ(-r)[-2r]`, supported everywhere.
 (sketch blueprint: `sk-prop-convolution-kernel`) -/
-noncomputable def fourierKernelConvolutionIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : Ψ ≠ 1) :
+noncomputable def fourierKernelConvolutionIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+    (hΨ : Ψ ≠ 1) :
     kernelConvolution Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
         ((DerivedCategory.singleFunctor _ 0).obj
           (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
         ((DerivedCategory.singleFunctor _ 0).obj
           (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ⁻¹ (stdPairing n S))) ≅
       (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj
-        ((tateTwist Λ _ (-(Fintype.card n : ℤ))).obj
-          ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _))) :=
+        ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
+          ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
+            (constantComplex Λ (𝔸(n; S))))) :=
   sorry
 
 /-- **Fourier inversion.** On `𝔸(n; S)` the Fourier–Deligne transform for the inverse
@@ -160,7 +162,8 @@ character inverts the Fourier–Deligne transform up to the Tate twist `(-r)`,
 functorially in `K`. The character must be **nontrivial**: for `Ψ = 1` the transform is
 `Rp₂,! p₁^*(-)[r]`, which is not invertible.
 (sketch blueprint: `sk-thm-inversion`) -/
-noncomputable def fourierTransformInversionIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : Ψ ≠ 1) :
+noncomputable def fourierTransformInversionIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+    (hΨ : Ψ ≠ 1) :
     affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ⁻¹ ≅
       tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ)) :=
   sorry
@@ -174,7 +177,8 @@ functorially in `K`, where `ι' = AlgebraicGeometry.AffineSpace.neg` is `x ↦ -
 character must be **nontrivial**, for the same reason as in
 `AlgebraicGeometry.Etale.fourierTransformInversionIso`.
 (sketch blueprint: `sk-thm-inversion`) -/
-noncomputable def fourierTransformSquareIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : Ψ ≠ 1) :
+noncomputable def fourierTransformSquareIso [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
+    (hΨ : Ψ ≠ 1) :
     affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ ≅
       D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙
         tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ)) :=
