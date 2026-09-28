@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 public import Mathlib.AlgebraicGeometry.QuasiAffine
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -30,6 +31,10 @@ of affine space in the base, in `AlgebraicGeometry.AffineSpace.homOfVector_comp_
 Finally, `AlgebraicGeometry.AffineSpace.isClosedImmersion_homOfVector` is the criterion for a
 morphism into an affine space over an affine base to be a closed immersion.
 
+We also record the part of the additive group structure of relative affine space that is used
+elsewhere: the zero section `AlgebraicGeometry.AffineSpace.zeroSection`, the reflection
+`AlgebraicGeometry.AffineSpace.neg` and the standard pairing
+`AlgebraicGeometry.AffineSpace.stdPairing` on `𝔸(n; S) ×_S 𝔸(n; S)`.
 
 -/
 
@@ -439,6 +444,61 @@ lemma AffineSpace.homOfVector_coord_comp_map {σ : Type u} {S T Z : Scheme.{u}} 
       AffineSpace.homOfVector_over, hG]
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
       AffineSpace.homOfVector_appTop_coord]
+
+namespace AffineSpace
+
+section GroupLaw
+
+variable (n : Type u) (S : Scheme.{u})
+
+/-- The zero section `S ⟶ 𝔸(n; S)`, the unit of the additive group law. -/
+def zeroSection : S ⟶ 𝔸(n; S) :=
+  homOfVector (𝟙 S) 0
+
+@[reassoc (attr := simp)]
+lemma zeroSection_over : zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma zeroSection_appTop_coord (i : n) : (zeroSection n S).appTop (coord S i) = 0 :=
+  homOfVector_appTop_coord _ _ _
+
+/-- The reflection `x ↦ -x` of `𝔸(n; S)`, the inverse of the additive group law. -/
+def neg : 𝔸(n; S) ⟶ 𝔸(n; S) :=
+  homOfVector (𝔸(n; S) ↘ S) fun i ↦ -coord S i
+
+@[reassoc (attr := simp)]
+lemma neg_over : neg n S ≫ 𝔸(n; S) ↘ S = 𝔸(n; S) ↘ S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma neg_appTop_coord (i : n) : (neg n S).appTop (coord S i) = -coord S i :=
+  homOfVector_appTop_coord _ _ _
+
+@[simp]
+lemma neg_comp_neg : neg n S ≫ neg n S = 𝟙 𝔸(n; S) := by
+  refine hom_ext ?_ fun i ↦ ?_
+  · rw [Category.assoc, neg_over, neg_over, Category.id_comp]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, neg_appTop_coord, map_neg,
+      neg_appTop_coord, neg_neg]
+    simp
+
+@[simp]
+lemma zeroSection_comp_neg : zeroSection n S ≫ neg n S = zeroSection n S := by
+  refine hom_ext ?_ fun i ↦ ?_
+  · rw [Category.assoc, neg_over, zeroSection_over]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, neg_appTop_coord, map_neg,
+      zeroSection_appTop_coord, neg_zero]
+
+/-- The standard pairing `⟨x, ξ⟩ = ∑ᵢ xᵢ ξᵢ` on `𝔸(n; S) ×_S 𝔸(n; S)`, a global function on
+the fibre product. -/
+def stdPairing [Fintype n] : Γ(Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) :=
+  ∑ i : n, (Limits.pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i) *
+    (Limits.pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i)
+
+end GroupLaw
+
+end AffineSpace
 
 /-! ### The iterated relative affine line
 
