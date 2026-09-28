@@ -35,13 +35,13 @@ scheme `X : Scheme.{u}` and `M N : X.Modules` all universes are `u`, so `homObj 
 * `PresheafOfModules.homObjMap`: its functoriality, contravariant in `M` and covariant in `N`.
 * `PresheafOfModules.homFunctor`: the internal hom bifunctor.
 
+If `N` is a sheaf, then so is `homObj M N`: this is `PresheafOfModules.isSheaf_homObj` in
+`WeilConjectures/Algebra/Category/ModuleCat/Sheaf/InternalHom.lean`.
+
 ## TODO
 
 * The tensor-hom adjunction `(M ⊗ P ⟶ N) ≃ (P ⟶ homObj M N)`, making `homFunctor` the internal
   hom of a monoidal closed structure.
-* If `N` is a sheaf, then so is `homObj M N`. This should follow from `presheafHom_isSheafFor`
-  by comparing the underlying presheaf of abelian groups of `homObj M N` with a subpresheaf of
-  `presheafHom` of the underlying presheaves of abelian groups.
 -/
 
 @[expose] public section
