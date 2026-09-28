@@ -26,7 +26,7 @@ The Picard group `Pic(C)` of isomorphism classes of invertible `𝒪_C`-modules 
 `WeilConjectures.AlgebraicGeometry.PicardFunctor`; on a curve it carries a *degree* map to `ℤ`,
 whose kernel `Pic⁰(C)` is the subject of the Jacobian.
 
-The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.cotangent`, from
+The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, from
 `WeilConjectures.AlgebraicGeometry.Modules.Differentials`. The pinned Mathlib has no coherent
 cohomology of an `𝒪_X`-module, so the degree map is declared here as an `opaque` constant: it
 depends genuinely on its arguments and introduces no `sorryAx`, but it satisfies no equations,
@@ -36,6 +36,8 @@ so no statement about `picDegree` can be proved before it is replaced.
 
 - `AlgebraicGeometry.IsCurve`: a separated morphism of finite type to `Spec K` whose source has
   topological Krull dimension at most one.
+- `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`: the sheaf `Ω¹_{X/S}` of relative
+  differentials (see `WeilConjectures.AlgebraicGeometry.Modules.Differentials`).
 - `AlgebraicGeometry.Scheme.Hom.genus`: the genus `dim_K Γ(C, Ω¹_{C/K})` of a curve.
 - `AlgebraicGeometry.Scheme.Hom.picDegree`: the degree of an invertible module on a curve
   (placeholder).
@@ -76,8 +78,8 @@ This definition makes sense for an arbitrary morphism `f : C ⟶ Spec K`, but is
 in the intended sense when `f` is a smooth proper connected curve. -/
 noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI := f.ΓAlgebra
-  letI : Module K Γ(f.cotangent, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
-  Module.finrank K Γ(f.cotangent, ⊤)
+  letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
+  Module.finrank K Γ(f.relativeDifferentials, ⊤)
 
 /-- The degree of an invertible module on a curve.
 
