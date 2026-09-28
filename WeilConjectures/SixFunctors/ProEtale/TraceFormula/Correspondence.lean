@@ -44,6 +44,11 @@ forward along a proper morphism, and integrated when `T` is proper over the base
   `AlgebraicGeometry.ProEtale.GeometricOperations.integral`: the pushforward and the
   integral of a Borel-Moore section.
 
+## Main results
+
+- `AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward_id`: pushing forward
+  along the identity gives the section back.
+
 ## Implementation notes
 
 `globalOperator`, `borelMooreRestrict`, `borelMoorePushforward`, `integral` and the
@@ -318,6 +323,33 @@ noncomputable def borelMoorePushforward {T T' : Scheme.{u}} (h : T ⟶ T') (a : 
     (G.properComparison h).inv.app _ ≫
     (rightDerivedLowerShriek A h).map (G.dualizingComp h a).inv ≫
     (rightDerivedUpperShriekAdjunction A h).counit.app (G.dualizing a)
+
+/-- Pushing a Borel-Moore section forward along the identity gives the section back, up to
+the transport `ω_{𝟙 ≫ a} = ω_a`. -/
+lemma borelMoorePushforward_id {T : Scheme.{u}} (a : T ⟶ s)
+    (α : G.borelMooreSections (𝟙 T ≫ a)) :
+    G.borelMoorePushforward (𝟙 T) a α = α ≫ (G.dualizingCongr (Category.id_comp a)).hom := by
+  set c := (conjugateEquiv (derivedUpperStarLowerStarAdjunction A (𝟙 T)) Adjunction.id)
+    (leftDerivedUpperStarId A T).inv
+  have hc := c.naturality
+  have h₁ := unit_conjugateEquiv (derivedUpperStarLowerStarAdjunction A (𝟙 T)) Adjunction.id
+    (leftDerivedUpperStarId A T).inv (𝟙_ _)
+  have h₂ := conjugateEquiv_counit Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 T))
+    (G.lowerShriekId T).hom (G.dualizing a)
+  have h₃ : (((conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 T)))
+      (G.lowerShriekId T)).symm.app (G.dualizing a)).inv =
+      ((conjugateEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 T)))
+        (G.lowerShriekId T).hom).app (G.dualizing a) := rfl
+  have h₄ := (G.lowerShriekId T).inv.naturality
+    (eqToHom (congrArg G.dualizing (Category.id_comp a)))
+  dsimp at hc h₁ h₂
+  dsimp only [Functor.id_obj, Functor.id_map] at h₄
+  simp only [borelMoorePushforward, G.properComparison_id, G.dualizingComp_id,
+    upperStarUnit_hom_id, Iso.trans_inv, NatTrans.comp_app, conjugateIsoEquiv_apply_inv,
+    eqToIso.inv, Functor.map_comp, Category.assoc, dualizingCongr]
+  rw [reassoc_of% (hc α), reassoc_of% (hc ((leftDerivedUpperStarId A T).hom.app (𝟙_ _))),
+    reassoc_of% h₁, h₃, h₂, ← reassoc_of% h₄]
+  simp
 
 /-- The integral `∫_T α ∈ A` of a Borel-Moore section over a geometric scheme `T` that is
 proper over the base: the pushforward of `α` along `a_T`, read in `End (A_s) = A` through
