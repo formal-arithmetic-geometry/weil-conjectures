@@ -26,7 +26,7 @@ not available here, so it enters `AlgebraicGeometry.IsJacobian` as the parameter
 class says that `J` is an abelian variety of dimension `genus C` representing `P`, and any `P`
 whatever may be supplied. It cannot yet be tied to `C` here, because the only degree-zero
 Picard group available, `AlgebraicGeometry.Scheme.Hom.picZero`, lives in `Type (u + 1)` (see
-`WeilConjectures.AlgebraicGeometry.Modules.Pic`) while `GrpCat.{u}`-valued functors take values
+`WeilConjectures.AlgebraicGeometry.PicardFunctor`) while `GrpCat.{u}`-valued functors take values
 in `Type u`. `IsJacobian` should be restated against the relative Picard functor once
 `sec-picard-framework` lands.
 
