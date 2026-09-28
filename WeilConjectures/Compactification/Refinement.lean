@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.CategoryTheory.Category.Basic
 public import WeilConjectures.Compactification.Defs
 
 /-!
@@ -22,7 +23,10 @@ a morphism over `Y` whose source is proper over `Y` and whose target is separate
   compactification `d` by a compactification `c`;
 - `AlgebraicGeometry.Compactification.Refinement.id` and
   `AlgebraicGeometry.Compactification.Refinement.comp`: the identity refinement and the
-  composition of refinements.
+  composition of refinements;
+- `AlgebraicGeometry.Compactification.category`: the category structure on the
+  compactifications of `f` whose morphisms are the refinements, so that `c ⟶ d` is
+  notation for `c.Refinement d`.
 
 ## Main results
 
@@ -89,5 +93,36 @@ theorem comp_assoc {c' : Compactification f} (r : Refinement c d) (s : Refinemen
     (t : Refinement e c') : (r.comp s).comp t = r.comp (s.comp t) := by ext; simp
 
 end Refinement
+
+/-- The compactifications of `f : X ⟶ Y` form a category, with the refinements as
+morphisms: a morphism `r : c ⟶ d` is a morphism `r.hom : c.Z ⟶ d.Z` making both triangles
+below commute.
+
+```text
+              X
+          ╱       ╲
+     c.i ╱         ╲ d.i
+        ↙           ↘
+      c.Z ──r.hom──→ d.Z
+        ╲           ╱
+     c.g ╲         ╱ d.g
+          ↘       ↙
+              Y
+```
+-/
+instance category : Category.{u} (Compactification f) where
+  Hom c d := c.Refinement d
+  id c := Refinement.id c
+  comp r s := r.comp s
+  id_comp := Refinement.id_comp
+  comp_id := Refinement.comp_id
+  assoc := Refinement.comp_assoc
+
+@[simp]
+theorem id_hom (c : Compactification f) : Refinement.hom (𝟙 c) = 𝟙 c.Z := rfl
+
+@[simp]
+theorem comp_hom {c d e : Compactification f} (r : c ⟶ d) (s : d ⟶ e) :
+    Refinement.hom (r ≫ s) = r.hom ≫ s.hom := rfl
 
 end AlgebraicGeometry.Compactification
