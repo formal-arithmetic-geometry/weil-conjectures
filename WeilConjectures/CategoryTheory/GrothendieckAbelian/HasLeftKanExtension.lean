@@ -10,11 +10,12 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
 
-# Left Kan extensions for presheaves on the small sites (base change sorried)
+# Left Kan extensions for presheaves on the small sites
 
 Left Kan extensions along the opposites of base change and of the localization functors
 exist for `A`-valued presheaves on the small étale and the small pro-étale sites, for a
@@ -37,21 +38,36 @@ a zero object. The cancellation `P (α ≫ f) → P f → P α` it uses is
 `P = @WeaklyEtale`. All uses of the localization lower shriek in the `SixFunctors` folder
 are along open immersions, which are monomorphisms.
 
-Base change along an *arbitrary* morphism `g : Z ⟶ Y` has no monomorphism to exploit, so
-neither the existence of the left Kan extensions nor their left exactness comes from the
-combinatorics above. Both are sorried here, for both sites:
+Base change `MorphismProperty.Over.pullback P ⊤ g` along an *arbitrary* morphism
+`g : Z ⟶ Y` sends `W : P.Over ⊤ Y` to the left edge of the cartesian square
 
-- existence holds because the small étale and small pro-étale sites are essentially small
-  in `u + 1` and `A` is cocomplete for `u + 1`-small diagrams, so the pointwise colimit
-  formula applies over the (again essentially small) indexing comma categories;
-- left exactness holds because base change preserves the finite limits of the slice, so
-  the indexing comma categories are cofiltered and the Kan extension is a filtered colimit,
-  which is exact in `A` by AB5.
+```
+  W ×[Y] Z ---> W
+      |         |
+      v         v
+      Z ---g--> Y
+```
 
-For an étale `g` both are proved in
+and has no monomorphism to exploit, so neither the existence of the left Kan extensions
+along its opposite nor their left exactness comes from the combinatorics above. Both are
+the slice-level statements of
+`WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty`, at `P = @Etale` and
+`P = @WeaklyEtale` over `Scheme.{u}`:
+
+- existence is `MorphismProperty.Over.hasPointwiseLeftKanExtension_op_pullback`: the
+  indexing comma categories have objects in `Type (u + 1)` and `Hom`-types in `Type u`, so
+  they are essentially `u + 1`-small and `A` has colimits over them. No smallness of the
+  small sites themselves is needed. That instance applies to the small sites as it stands,
+  so nothing is restated for it here;
+- left exactness is `MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback`: base
+  change preserves the finite limits of the slice, hence is representably flat, so the
+  indexing comma categories are filtered and the Kan extension is computed by filtered
+  colimits, which are exact in `A` by AB5. It is restated for each of the two sites below.
+
+For an étale `g` both are also proved in
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`, and for a weakly étale `g` in
 `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs`, via the adjunction
-`MorphismProperty.Over.mapPullbackAdj`, without any smallness assumption.
+`MorphismProperty.Over.mapPullbackAdj`.
 
 -/
 
@@ -220,16 +236,6 @@ end AlgebraicGeometry.SmallSite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Left Kan extensions along the opposite of base change by an *arbitrary* morphism
-`g : Z ⟶ Y` exist for `A`-valued presheaves on the small étale sites: the sites are
-essentially small and the Grothendieck abelian category `A` is cocomplete. For an étale `g`
-this is proved in `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` via the
-adjunction with the localization functor. -/
-instance hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} (g : Z ⟶ Y) (F : Y.Etaleᵒᵖ ⥤ A) :
-    (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F :=
-  sorry
-
 /-- Along the localization functor of `h : Etale f` with `f` a monomorphism, all pointwise
 left Kan extensions with values in a category with an initial object exist: the indexing
 comma categories are either empty or admit a terminal object. -/
@@ -268,34 +274,25 @@ instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u + 1} A]
   SmallSite.preservesFiniteLimits_op_lan_overMap A h
 
 /-- The left Kan extension along the opposite of base change by an *arbitrary* morphism
-`g : Z ⟶ Y` is left exact for a Grothendieck abelian coefficient category: the indexing
-comma categories of the pointwise left Kan extensions are cofiltered (base change
-preserves the finite limits of the étale slice), so the Kan extension is computed by
-filtered colimits, which are exact in `A` by AB5. For an étale `g` this is proved in
-`WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` via the adjunction with the
-localization functor. -/
+`g : Z ⟶ Y` is left exact for a Grothendieck abelian coefficient category: base change
+preserves the finite limits of the étale slice, hence is representably flat, so the indexing
+comma categories of the pointwise left Kan extensions are filtered and the Kan extension is
+computed by filtered colimits, which are exact in `A` by AB5. This is the case `P = @Etale`
+of `MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback`. For an étale `g` it is
+also proved in `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` via the adjunction
+with the localization functor. -/
 instance preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
     (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
       (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A) :=
-  sorry
+  MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback A @Etale g
 
 end AlgebraicGeometry.Etale
 
 /-! ### The small pro-étale site -/
 
 namespace AlgebraicGeometry.ProEtale
-
-/-- Left Kan extensions along the opposite of base change by an *arbitrary* morphism
-`g : Z ⟶ Y` exist for `A`-valued presheaves on the small pro-étale sites: the sites are
-essentially small and the Grothendieck abelian category `A` is cocomplete. For a weakly
-étale `g` this is proved in `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` via
-the adjunction with the localization functor. -/
-instance hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} (g : Z ⟶ Y) (F : Y.ProEtᵒᵖ ⥤ A) :
-    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.HasLeftKanExtension F :=
-  sorry
 
 /-- Along the localization functor of `h : WeaklyEtale f` with `f` a monomorphism, all
 pointwise left Kan extensions with values in a category with an initial object exist: the
@@ -335,10 +332,12 @@ instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u + 1} A]
   SmallSite.preservesFiniteLimits_op_lan_overMap A h
 
 /-- The left Kan extension along the opposite of base change by an *arbitrary* morphism
-`g : Z ⟶ Y` is left exact for a Grothendieck abelian coefficient category: the indexing
-comma categories of the pointwise left Kan extensions are cofiltered (base change
-preserves the finite limits of the pro-étale slice), so the Kan extension is computed by
-filtered colimits, which are exact in `A` by AB5. For a weakly étale `g` this is proved in
+`g : Z ⟶ Y` is left exact for a Grothendieck abelian coefficient category: base change
+preserves the finite limits of the pro-étale slice, hence is representably flat, so the
+indexing comma categories of the pointwise left Kan extensions are filtered and the Kan
+extension is computed by filtered colimits, which are exact in `A` by AB5. This is the case
+`P = @WeaklyEtale` of `MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback`. For a
+weakly étale `g` it is also proved in
 `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` via the adjunction with the
 localization functor. -/
 instance preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
@@ -346,6 +345,6 @@ instance preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     PreservesFiniteLimits ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.lan :
       (Y.ProEtᵒᵖ ⥤ A) ⥤ Z.ProEtᵒᵖ ⥤ A) :=
-  sorry
+  MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback A @WeaklyEtale g
 
 end AlgebraicGeometry.ProEtale
