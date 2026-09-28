@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
-public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.SetTheory.Cardinal.HasCardinalLT
 
 /-!
@@ -30,8 +29,7 @@ lemma hasCardinalLT_arrow_walkingMulticospan {J : MulticospanShape.{w, w'}}
     (hκ : Cardinal.aleph0 ≤ κ) :
     HasCardinalLT (Arrow (WalkingMulticospan J)) κ := by
   have : HasCardinalLT (J.L ⊕ J.R ⊕ J.R ⊕ J.R) κ := by
-    simp only [hasCardinalLT_sum_iff _ _ _ hκ]
-    exact ⟨hL, hR, hR, hR⟩
+    simpa only [hasCardinalLT_sum_iff _ _ _ hκ] using ⟨hL, hR, hR, hR⟩
   refine this.of_surjective (Sum.elim (fun a ↦ Arrow.mk (𝟙 (WalkingMulticospan.left a)))
     (Sum.elim (fun b ↦ Arrow.mk (𝟙 (WalkingMulticospan.right b)))
       (Sum.elim (fun b ↦ Arrow.mk (WalkingMulticospan.Hom.fst b))
