@@ -225,7 +225,7 @@ theorem trace_globalOperator_eq_integral_traceClass
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     (G : GeometricOperations A s) [HasCompactification aX] [IsProper aX]
     (hK : G.ctf X K) (c : Correspondence aX aX K K) [IsProper c.snd]
-    [HasCompactification c.snd] [HasCompactification c.str]
+    [HasCompactification c.str]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj K)]
     [HasCompactification c.fixStr] [IsProper c.fixStr] :
     MonoidalCategory.trace (Correspondence.globalOperator G c) =

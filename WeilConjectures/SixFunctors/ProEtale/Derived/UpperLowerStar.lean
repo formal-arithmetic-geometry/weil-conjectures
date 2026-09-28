@@ -57,6 +57,9 @@ the type of the functor is spelled out.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp` : the composition isomorphism
   `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`.
 
+- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarId` : the identity isomorphism
+  `L(𝟙 X)^* ≅ 𝟭` of the derived pullback.
+
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarHomologyFunctorIso` : the derived
   pullback commutes with the homology functors, `H^n ⋙ g^* ≅ Lg^* ⋙ H^n`.
 
@@ -222,6 +225,13 @@ noncomputable def leftDerivedUpperStarComp {T S R : Scheme.{u}}
     L((g₁ ≫ g₂)^*[A]) ≅ L((g₂)^*[A]) ⋙ L((g₁)^*[A]) :=
   Functor.leftDerivedFunctorNatIso _ (ProEtale.upperStarComp A g₁ g₂) ≪≫
     Functor.leftDerivedFunctorCompIso (g₂)^*[A] (g₁)^*[A]
+
+/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on pro-étale sheaves:
+the derived functor of `ProEtale.upperStarId`, followed by the identification of the left
+derived functor of the exact functor `𝟭` with `(𝟭 _).mapDerivedCategory ≅ 𝟭`. -/
+noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
+  Functor.leftDerivedFunctorNatIso _ (ProEtale.upperStarId A X) ≪≫
+    (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
 
 /-- The exactness comparison `H^n ∘ g^* ≅ g^* ∘ H^n`: since the underived pullback `g^*`
 on pro-étale sheaves is exact, applying it to the `n`-th homology sheaf of an object of

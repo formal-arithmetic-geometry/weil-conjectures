@@ -139,6 +139,9 @@ noncomputable def graph (m : ℕ) : Correspondence aX aX W.obj W.obj where
   snd_comp := W.frobeniusIterate_comp m
   coeff := W.graphCoeff m
 
+instance [HasCompactification aX] (m : ℕ) : HasCompactification (W.graph m).str :=
+  inferInstanceAs (HasCompactification aX)
+
 end WeilComplex
 
 /-- The *relative Frobenius* `r_m = (f, Φ_{X,m}) : X ⟶ X'_m` of a morphism `f : X ⟶ Y`

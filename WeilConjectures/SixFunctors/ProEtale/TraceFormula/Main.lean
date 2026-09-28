@@ -108,12 +108,9 @@ theorem trace_globalOperator_eq_trace_add_trace (G : GeometricOperations A s)
     (hicoeff : WZ.coeff ≫ eZ.hom =
       cZ.hom ≫ ((upperStar A i).leftDerivedFunctor).map W.coeff)
     (m : ℕ)
-    [IsProper (W.graph m).snd] [HasCompactification (W.graph m).snd]
-    [HasCompactification (W.graph m).str]
-    [IsProper (WU.graph m).snd] [HasCompactification (WU.graph m).snd]
-    [HasCompactification (WU.graph m).str]
-    [IsProper (WZ.graph m).snd] [HasCompactification (WZ.graph m).snd]
-    [HasCompactification (WZ.graph m).str]
+    [IsProper (W.graph m).snd]
+    [IsProper (WU.graph m).snd]
+    [IsProper (WZ.graph m).snd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [HasRightDual ((rightDerivedLowerShriek A aU).obj WU.obj)]
     [HasRightDual ((rightDerivedLowerShriek A aZ).obj WZ.obj)] :
@@ -133,8 +130,7 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius (G : GeometricOperation
     [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))]
     {aX : X ⟶ s} [HasCompactification aX] (W : WeilComplex (A := A) aX)
     (hW : IsIso W.coeff) (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
-    [IsProper (W.graph m).snd] [HasCompactification (W.graph m).snd]
-    [HasCompactification (W.graph m).str]
+    [IsProper (W.graph m).snd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [Fintype {x : s ⟶ X // x ≫ W.frobeniusIterate m = x}]
     [∀ x : s ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)] :
