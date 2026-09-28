@@ -164,6 +164,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
@@ -454,6 +455,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LeftExact
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Localization
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
@@ -466,6 +468,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
+public import WeilConjectures.Mathlib.CategoryTheory.SmallObject.TransfiniteIteration
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
