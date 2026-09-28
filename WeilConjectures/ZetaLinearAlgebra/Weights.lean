@@ -10,6 +10,7 @@ public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Coprime.Lemmas
+public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.ZetaLinearAlgebra.NormalizedGauss
 
 /-!
@@ -20,6 +21,10 @@ Fix a prime power `q`. A polynomial `P ∈ ℂ[X]` with constant coefficient `1`
 of `P` has absolute value `q ^ (w / 2)`. This is the shape in which the Riemann hypothesis part
 of the Weil conjectures is stated in `AlgebraicGeometry.WeilRiemannHypothesis`.
 
+The `≤` half of purity is the *mixedness* condition `Polynomial.IsMixedOfWeightLE`, which is
+what Deligne's weight estimate provides before Poincaré duality is used; the weight index is
+`w : ℕ` throughout, matching `Polynomial.IsPureOfWeight`.
+
 A strictly stronger notion is needed downstream: a scalar `z` is *universally pure of weight `w`*
 if it is algebraic over `ℚ` and *every* conjugate of `z` — every complex root of its minimal
 polynomial over `ℚ` — has absolute value `q ^ (-w / 2)`; a polynomial is universally pure of
@@ -28,9 +33,11 @@ alone, so unlike purity it does not depend on the choice of a complex embedding.
 
 ## Main results
 
-- `Polynomial.IsPureOfWeight`, `IsUniversallyPureOfWeight`,
-  `Polynomial.IsUniversallyPureOfWeight` — the two purity notions, for a polynomial and for a
-  scalar.
+- `Polynomial.IsPureOfWeight`, `Polynomial.IsMixedOfWeightLE`, `IsUniversallyPureOfWeight`,
+  `Polynomial.IsUniversallyPureOfWeight` — the purity and mixedness notions, for a polynomial
+  and for a scalar.
+- `Polynomial.IsPureOfWeight.isMixedOfWeightLE`, `Polynomial.isPureOfWeight_iff` — purity is
+  mixedness of weight at most `w` together with the matching upper bound on the root norms.
 - `Polynomial.IsUniversallyPureOfWeight.isPureOfWeight` — universal purity implies purity.
 - `Polynomial.IsPureOfWeight.disjoint_roots` — polynomials pure of distinct weights have no
   common root.
@@ -42,6 +49,9 @@ alone, so unlike purity it does not depend on the choice of a complex embedding.
   then the odd product is `A` and the even product is `B`.
 - `Polynomial.isAlgebraic_of_mem_roots_of_prod_mul_eq` — in that situation every root of every
   `P i` is algebraic over `ℚ`.
+- `Polynomial.eq_of_isPureOfWeight_of_prod_mul_eq` — **weight separation determines the
+  factors**: two families of pure polynomials of weights `0, 1, …, r` with the same alternating
+  product are equal.
 -/
 
 @[expose] public section
@@ -53,6 +63,13 @@ satisfies `‖z‖ = q ^ (-w / 2)`; equivalently every reciprocal root has absol
 `q ^ (w / 2)`. -/
 def Polynomial.IsPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
   P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, ‖z‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
+
+/-- `P` is *mixed of weight at most `w`* for `q` if `P (0) = 1` and every complex root `z` of
+`P` satisfies `q ^ (-w / 2) ≤ ‖z‖`; equivalently every reciprocal root of `P` has absolute
+value at most `q ^ (w / 2)`. This is the `≤` half of `Polynomial.IsPureOfWeight` and the
+conclusion of Deligne's weight estimate. -/
+def Polynomial.IsMixedOfWeightLE (q w : ℕ) (P : Polynomial ℂ) : Prop :=
+  P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, (q : ℝ) ^ (-(w : ℝ) / 2) ≤ ‖z‖
 
 /-- `z : ℂ` is *universally* pure of weight `w`: it is algebraic over `ℚ` and every
 conjugate of `z` — every complex root of its minimal polynomial over `ℚ` — has absolute
@@ -98,6 +115,26 @@ theorem IsPureOfWeight.ne_zero {q w : ℕ} {P : Polynomial ℂ} (hP : P.IsPureOf
     P ≠ 0 := by
   rintro rfl
   simpa using hP.1
+
+/-- A polynomial that is mixed of some weight is nonzero: its constant coefficient is `1`. -/
+theorem IsMixedOfWeightLE.ne_zero {q w : ℕ} {P : Polynomial ℂ} (hP : P.IsMixedOfWeightLE q w) :
+    P ≠ 0 := by
+  rintro rfl
+  simpa using hP.1
+
+/-- Purity of weight `w` implies mixedness of weight at most `w`. -/
+theorem IsPureOfWeight.isMixedOfWeightLE {q w : ℕ} {P : Polynomial ℂ}
+    (hP : P.IsPureOfWeight q w) : P.IsMixedOfWeightLE q w :=
+  ⟨hP.1, fun z hz ↦ (hP.2 z hz).ge⟩
+
+/-- Purity of weight `w` is mixedness of weight at most `w` together with the matching upper
+bound on the norms of the roots. -/
+theorem isPureOfWeight_iff {q w : ℕ} {P : Polynomial ℂ} :
+    P.IsPureOfWeight q w ↔
+      P.IsMixedOfWeightLE q w ∧ ∀ z ∈ P.roots, ‖z‖ ≤ (q : ℝ) ^ (-(w : ℝ) / 2) := by
+  refine ⟨fun h ↦ ⟨h.isMixedOfWeightLE, fun z hz ↦ (h.2 z hz).le⟩, ?_⟩
+  rintro ⟨⟨h0, hge⟩, hle⟩
+  exact ⟨h0, fun z hz ↦ le_antisymm (hle z hz) (hge z hz)⟩
 
 /-- Polynomials that are pure of distinct weights have no common root. -/
 theorem IsPureOfWeight.disjoint_roots {q v w : ℕ} (hq : 1 < q) {P Q : Polynomial ℂ}
@@ -184,6 +221,66 @@ theorem isAlgebraic_of_mem_roots_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P : Fi
   rcases Nat.even_or_odd i.1 with he | ho
   · exact key _ B hB (by simp [he]) hE
   · exact key _ A hA (by simp [ho]) hO
+
+/-- **Weight separation determines the factors.** Two families `P i` and `P' i` of complex
+polynomials, each with `P i` and `P' i` pure of weight `i`, that have the same alternating
+product — the cross-multiplication `(∏_odd P) (∏_even P') = (∏_odd P') (∏_even P)` — are equal.
+Indeed a root of absolute value `q ^ (-i / 2)` can only come from the degree-`i` member of
+either family, so the two root multisets in degree `i` agree. -/
+theorem eq_of_isPureOfWeight_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P P' : Fin (r + 1) → ℂ[X]}
+    (hP : ∀ i, (P i).IsPureOfWeight q i.1) (hP' : ∀ i, (P' i).IsPureOfWeight q i.1)
+    (h : (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P i) *
+        (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P' i) =
+      (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1, P' i) *
+        (∏ i ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1, P i)) :
+    P = P' := by
+  classical
+  funext j
+  set N : ℂ → Prop := fun z ↦ ‖z‖ = (q : ℝ) ^ (-(j.1 : ℝ) / 2) with hN
+  have hprod_ne : ∀ (Q : Fin (r + 1) → ℂ[X]), (∀ i, (Q i).IsPureOfWeight q i.1) →
+      ∀ s : Finset (Fin (r + 1)), ∏ i ∈ s, Q i ≠ 0 :=
+    fun Q hQ s ↦ Finset.prod_ne_zero_iff.2 fun i _ ↦ (hQ i).ne_zero
+  have hfilter_sum : ∀ (s : Finset (Fin (r + 1))) (g : Fin (r + 1) → Multiset ℂ),
+      Multiset.filter N (∑ i ∈ s, g i) = ∑ i ∈ s, Multiset.filter N (g i) := by
+    intro s g
+    induction s using Finset.induction_on with
+    | empty => simp
+    | insert a s ha ih =>
+      rw [Finset.sum_insert ha, Finset.sum_insert ha, Multiset.filter_add, ih]
+  -- filtering the roots of a product of pure factors by the weight-`j` norm keeps exactly the
+  -- roots of the degree-`j` factor
+  have key : ∀ (Q : Fin (r + 1) → ℂ[X]), (∀ i, (Q i).IsPureOfWeight q i.1) →
+      ∀ s : Finset (Fin (r + 1)),
+      Multiset.filter N (∏ i ∈ s, Q i).roots = if j ∈ s then (Q j).roots else 0 := by
+    intro Q hQ s
+    have hbind : (s.val.bind fun i ↦ (Q i).roots) = ∑ i ∈ s, (Q i).roots := rfl
+    rw [roots_prod _ _ (hprod_ne Q hQ s), hbind, hfilter_sum]
+    rw [Finset.sum_congr rfl fun i (_ : i ∈ s) ↦
+      show Multiset.filter N (Q i).roots = if i = j then (Q j).roots else 0 by
+        by_cases hij : i = j
+        · subst hij
+          rw [if_pos rfl, Multiset.filter_eq_self.2 fun z hz ↦ (hQ i).2 z hz]
+        · rw [if_neg hij, Multiset.filter_eq_nil.2 fun z hz hcon ↦
+            hij (Fin.ext (weight_eq_of_norm_eq hq ((hQ i).2 z hz) hcon))]]
+    exact Finset.sum_ite_eq' s j _
+  have hroots := congrArg Polynomial.roots h
+  rw [roots_mul (mul_ne_zero (hprod_ne P hP _) (hprod_ne P' hP' _)),
+    roots_mul (mul_ne_zero (hprod_ne P' hP' _) (hprod_ne P hP _))] at hroots
+  have hfil := congrArg (Multiset.filter N) hroots
+  rw [Multiset.filter_add, Multiset.filter_add, key P hP, key P' hP', key P' hP', key P hP]
+    at hfil
+  refine eq_of_coeff_zero_eq_one_of_roots_eq (hP j).1 (hP' j).1 ?_
+  rcases Nat.even_or_odd j.1 with he | ho
+  · have hoddj : j ∉ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1 := by
+      simp [Nat.not_odd_iff_even.2 he]
+    have hevenj : j ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1 := by simp [he]
+    rw [if_neg hoddj, if_pos hevenj, if_neg hoddj, if_pos hevenj, zero_add, zero_add] at hfil
+    exact hfil.symm
+  · have hoddj : j ∈ Finset.univ.filter fun i : Fin (r + 1) ↦ Odd i.1 := by simp [ho]
+    have hevenj : j ∉ Finset.univ.filter fun i : Fin (r + 1) ↦ Even i.1 := by
+      simp [Nat.not_even_iff_odd.2 ho]
+    rw [if_pos hoddj, if_neg hevenj, if_pos hoddj, if_neg hevenj, add_zero, add_zero] at hfil
+    exact hfil
 
 end Polynomial
 

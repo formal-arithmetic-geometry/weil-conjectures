@@ -128,6 +128,20 @@ quasi-compact open of the model
 writing `X` as the limit of the closed subschemes of `Y` cut out by the subideal sheaves of
 finite type of the kernel of `X ⟶ Y` (Tag 09ZP).
 
+## Minimal counterexamples over a quasi-compact quasi-separated base
+
+A property `P` of quasi-compact quasi-separated schemes over a fixed quasi-compact
+quasi-separated base `T` — a predicate on morphisms `T' ⟶ T` — is *qcqs-local*
+(`AlgebraicGeometry.Scheme.IsQcqsLocalProperty`) if it is invariant under thickenings,
+compatible with cofiltered limits along affine transition morphisms, and propagates from a
+scheme to a quasi-compact open subscheme or to its closed complement. Such a property holds
+for the spectrum of a field over `T` as soon as it holds for `T` itself
+(`AlgebraicGeometry.exists_spec_field_of_isQcqsLocalProperty`). Applied to the failure locus
+of a base-change map, this says that a minimal counterexample can be found over a point.
+
+Since Mathlib has no notion of a thickening of schemes, a thickening is spelled out as a
+closed immersion which is surjective on points.
+
 ## References
 
 - [Stacks: Tag 01Z7](https://stacks.math.columbia.edu/tag/01Z7)
@@ -4525,5 +4539,48 @@ theorem Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentat
     hj (𝟙 j), F.w j⟩
 
 end FinitePresentationApproximation
+
+section MinimalCounterexample
+
+/-- A property `P` of quasi-compact quasi-separated schemes over a quasi-compact
+quasi-separated base `T`, that is, a predicate on morphisms `T' ⟶ T` with `T'` qcqs, is
+*qcqs-local* when it satisfies the three stability conditions of Stacks `0F06`. -/
+structure Scheme.IsQcqsLocalProperty (T : Scheme.{u})
+    (P : ⦃T' : Scheme.{u}⦄ → (T' ⟶ T) → Prop) : Prop where
+  /-- `P` is invariant under thickenings: if `i : T₁ ⟶ T₂` is a closed immersion which is
+  surjective on points and `f₂ : T₂ ⟶ T`, then `P (i ≫ f₂)` holds if and only if `P f₂`
+  does. -/
+  invariant_under_thickening : ∀ {T₁ T₂ : Scheme.{u}} [CompactSpace T₂]
+    [QuasiSeparatedSpace T₂] (i : T₁ ⟶ T₂) [IsClosedImmersion i], Function.Surjective i.base →
+    ∀ f₂ : T₂ ⟶ T, P (i ≫ f₂) ↔ P f₂
+  /-- `P` is compatible with cofiltered limits with affine transition morphisms: if
+  `D : I ⥤ Over T` is a cofiltered diagram of qcqs schemes over `T` whose transition
+  morphisms are affine and `c` is a cone on `D` whose underlying cone of schemes is a limit
+  cone, then `P` for every stage implies `P` for the limit. -/
+  compatible_with_cofilteredLimit : ∀ {I : Type u} [Category.{u} I] [IsCofiltered I]
+    (D : I ⥤ Over T) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]
+    [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left]
+    (c : Limits.Cone D), Limits.IsLimit ((Over.forget T).mapCone c) →
+    (∀ i, P (D.obj i).hom) → P c.pt.hom
+  /-- `P` propagates to an open or to its closed complement: if `V` is a quasi-compact open
+  of a qcqs scheme `T'` over `T` and `i : Z ⟶ T'` is a closed immersion onto the complement
+  of `V`, then `P` for `T' ⟶ T` implies `P` for `V ⟶ T` or for `Z ⟶ T`. -/
+  of_opens_or_closedComplement : ∀ {T' Z : Scheme.{u}} [CompactSpace T']
+    [QuasiSeparatedSpace T'] (f : T' ⟶ T) (V : T'.Opens), IsCompact (V : Set T') →
+    ∀ (i : Z ⟶ T') [IsClosedImmersion i], Set.range i.base = (V : Set T')ᶜ →
+    P f → P (V.ι ≫ f) ∨ P (i ≫ f)
+
+/-- **Minimal counterexamples occur over a point.** A qcqs-local property `P` of
+quasi-compact quasi-separated schemes over a quasi-compact quasi-separated base `T` which
+holds for `T` itself holds for some morphism `Spec K ⟶ T` with `K` a field. -/
+@[stacks 0F06]
+theorem exists_spec_field_of_isQcqsLocalProperty (T : Scheme.{u})
+    [CompactSpace T] [QuasiSeparatedSpace T]
+    (P : ⦃T' : Scheme.{u}⦄ → (T' ⟶ T) → Prop) (hP' : T.IsQcqsLocalProperty P)
+    (hP : P (𝟙 T)) :
+    ∃ (K : Type u) (_ : Field K) (g : Spec (CommRingCat.of K) ⟶ T), P g :=
+  sorry
+
+end MinimalCounterexample
 
 end AlgebraicGeometry
