@@ -281,24 +281,33 @@ variable (X : Scheme.{u})
 open ProEtale
 
 /-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of the pushforward on pro-étale sheaves: base
-change along `𝟙 X` is the identity functor by `MorphismProperty.Over.pullbackId`. -/
+change along `𝟙 X` is the identity functor by `MorphismProperty.Over.pullbackId`. This is
+the pro-étale counterpart of `AlgebraicGeometry.Etale.lowerStarId`. -/
 noncomputable def ProEtale.lowerStarId : (𝟙 X)_*[A] ≅ 𝟭 _ :=
   Functor.sheafPushforwardContinuousId' (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) A
     (Scheme.ProEt.topology X)
 
 /-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback on pro-étale sheaves, obtained
 from `ProEtale.lowerStarId` by uniqueness of left adjoints: both sides are left adjoint to
-`(𝟙 X)_*`. -/
+`(𝟙 X)_*`. This is the pro-étale counterpart of `AlgebraicGeometry.Etale.upperStarId`. -/
 noncomputable def ProEtale.upperStarId : (𝟙 X)^*[A] ≅ 𝟭 _ :=
-  (conjugateIsoEquiv Adjunction.id (ProEtale.upperStarLowerStarAdjunction A (𝟙 X))).symm
-    (ProEtale.lowerStarId A X).symm
+  (conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A (𝟙 X))).symm
+    (lowerStarId A X).symm
 
 /-- Under the conjugation bijection between the adjunctions `𝟭 ⊣ 𝟭` and `(𝟙 X)^* ⊣ (𝟙 X)_*`,
-the identity isomorphism of the pullback corresponds to the identity isomorphism of the
-pushforward. -/
+the identity isomorphism of the pullback corresponds to the inverse of the identity
+isomorphism of the pushforward:
+
+```
+  (𝟙 X)^* ⊣ (𝟙 X)_*        upperStarId : (𝟙 X)^* ≅ 𝟭
+      ↕ conjugate                  ↦
+      𝟭 ⊣ 𝟭               lowerStarId.symm : 𝟭 ≅ (𝟙 X)_*
+```
+
+This is the pro-étale counterpart of `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarId`. -/
 lemma ProEtale.conjugateIsoEquiv_upperStarId :
-    conjugateIsoEquiv Adjunction.id (ProEtale.upperStarLowerStarAdjunction A (𝟙 X))
-        (ProEtale.upperStarId A X) = (ProEtale.lowerStarId A X).symm :=
+    conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A (𝟙 X))
+        (upperStarId A X) = (lowerStarId A X).symm :=
   Equiv.apply_symm_apply _ _
 
 end Id

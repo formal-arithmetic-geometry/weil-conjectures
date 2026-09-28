@@ -51,10 +51,10 @@ coefficient map of `ofEnd` are defined as composites of the adjunctions of the p
 functors and the comparison data of the package
 `AlgebraicGeometry.ProEtale.GeometricOperations`:
 
-* `ofEndCoeff` uses `leftDerivedUpperStarId` and `GeometricOperations.upperShriekIdIso`,
+* `ofEndCoeff` uses `leftDerivedUpperStarId` and `GeometricOperations.upperShriekId`,
   hence the field `lowerShriekId`;
 * `globalOperator` uses the fields `properComparison` and `lowerShriekComp`, transported
-  along `c₁ ≫ a_X = a_C = c₂ ≫ a_X` by `lowerShriekCongr`;
+  along `c₁ ≫ a_X = a_C = c₂ ≫ a_X` by `rightDerivedLowerShriekCongr`;
 * `borelMooreRestrict` uses the fields `upperStarUnit`, `openPurity` and `dualizingComp`;
 * `borelMoorePushforward` uses the fields `upperStarUnit`, `properComparison` and
   `dualizingComp`, and `integral` is the pushforward along `a_T : T ⟶ s` followed by
@@ -169,7 +169,7 @@ noncomputable def ofEndCoeff (G : GeometricOperations A s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
     ((upperStar A (𝟙 X)).leftDerivedFunctor).obj K ⟶
       (rightDerivedUpperShriek A (𝟙 X)).obj K :=
-  (leftDerivedUpperStarId A X).hom.app K ≫ v ≫ (G.upperShriekIdIso X).hom.app K
+  (leftDerivedUpperStarId A X).hom.app K ≫ v ≫ (G.upperShriekId X).inv.app K
 
 /-- The coefficient map of the diagonal identity `ofEnd G aX K (𝟙 K)` is the comparison
 `L(𝟙)^* K ≃ K ≃ 𝟙^! K`. -/
@@ -177,7 +177,7 @@ noncomputable def ofEndCoeff (G : GeometricOperations A s)
 lemma ofEndCoeff_id (G : GeometricOperations A s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
     ofEndCoeff G K (𝟙 K) =
-      (leftDerivedUpperStarId A X).hom.app K ≫ (G.upperShriekIdIso X).hom.app K := by
+      (leftDerivedUpperStarId A X).hom.app K ≫ (G.upperShriekId X).inv.app K := by
   simp [ofEndCoeff]
 
 /-- The endocorrespondence on `(X, K)` with support `X`, support map the diagonal `Δ_X`,
@@ -199,6 +199,8 @@ instance isIso_fixι_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
     IsIso (ofEnd G aX K v).fixι :=
   inferInstanceAs (IsIso (equalizer.ι (𝟙 X) (𝟙 X)))
 
+/-- The structure morphism of `ofEnd G aX K v` is `aX`, so it admits a compactification
+when `aX` does. -/
 instance hasCompactification_str_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
     [HasCompactification aX] (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (v : K ⟶ K) : HasCompactification (ofEnd G aX K v).str :=
@@ -209,44 +211,58 @@ instance isProper_fixStr_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s) [IsP
     IsProper (ofEnd G aX K v).fixStr :=
   inferInstanceAs (IsProper ((ofEnd G aX K v).fixι ≫ aX))
 
+/-- `c₂ ≫ a_X = a_C` admits a compactification when `a_C` does. -/
 instance hasCompactification_snd_comp (c : Correspondence aX aY K L)
-    [HasCompactification c.str] : HasCompactification (c.snd ≫ aX) := by
-  rw [c.snd_comp]
-  infer_instance
+    [HasCompactification c.str] : HasCompactification (c.snd ≫ aX) :=
+  c.snd_comp ▸ inferInstance
 
+/-- `c₁ ≫ a_Y = a_C` admits a compactification when `a_C` does. -/
 instance hasCompactification_fst_comp (c : Correspondence aX aY K L)
-    [HasCompactification c.str] : HasCompactification (c.fst ≫ aY) := by
-  rw [c.fst_comp]
-  infer_instance
+    [HasCompactification c.str] : HasCompactification (c.fst ≫ aY) :=
+  c.fst_comp ▸ inferInstance
 
-/-- The first half `RΓ_c(X, K) ⟶ RΓ_c(X, Rc₂_* c₂^* K) ≃ RΓ_c(C, c₂^* K)` of the global
-operator: the unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and the
-composition `Ra_{X!} Rc₂_! ≃ Ra_{C!}`. -/
+/-- The first half of the global operator, `RΓ_c(X, K) ⟶ RΓ_c(C, c₂^* K)`: the composite
+
+```
+  Ra_{X!} K ──η──▶ Ra_{X!} Rc₂_* c₂^* K ≅ Ra_{X!} Rc₂_! c₂^* K ≅ Ra_{C!} c₂^* K
+```
+
+of the unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and the
+composition `Ra_{X!} Rc₂_! ≃ R(c₂ ≫ a_X)_! = Ra_{C!}` (part of blueprint `sk-d-operator`). -/
 noncomputable def globalOperatorUnit (G : GeometricOperations A s)
-    (c : Correspondence aX aX K K) [HasCompactification aX] [IsProper c.snd]
+    (c : Correspondence aX aY K L) [HasCompactification aX] [IsProper c.snd]
     [HasCompactification c.str] :
     (rightDerivedLowerShriek A aX).obj K ⟶
       (rightDerivedLowerShriek A c.str).obj (((upperStar A c.snd).leftDerivedFunctor).obj K) :=
   (rightDerivedLowerShriek A aX).map
       ((derivedUpperStarLowerStarAdjunction A c.snd).unit.app K) ≫
     (rightDerivedLowerShriek A aX).map ((G.properComparison c.snd).inv.app _) ≫
-    (G.lowerShriekComp c.snd aX ≪≫ lowerShriekCongr c.snd_comp).hom.app _
+    (G.lowerShriekComp c.snd aX).hom.app _ ≫
+    (rightDerivedLowerShriekCongr A c.snd_comp).hom.app _
 
-/-- The second half `RΓ_c(C, c₁^! K) ≃ RΓ_c(X, Rc₁_! c₁^! K) ⟶ RΓ_c(X, K)` of the global
-operator: the composition `Ra_{C!} ≃ Ra_{X!} Rc₁_!` and the counit of `Rc₁_! ⊣ c₁^!`. -/
+/-- The second half of the global operator, `RΓ_c(C, c₁^! L) ⟶ RΓ_c(Y, L)`: the composite
+
+```
+  Ra_{C!} c₁^! L ≅ Ra_{Y!} Rc₁_! c₁^! L ──ε──▶ Ra_{Y!} L
+```
+
+of the composition `Ra_{C!} = R(c₁ ≫ a_Y)_! ≃ Ra_{Y!} Rc₁_!` and the counit of
+`Rc₁_! ⊣ c₁^!` (part of blueprint `sk-d-operator`). -/
 noncomputable def globalOperatorCounit (G : GeometricOperations A s)
-    (c : Correspondence aX aX K K) [HasCompactification aX] [HasCompactification c.str] :
-    (rightDerivedLowerShriek A c.str).obj ((rightDerivedUpperShriek A c.fst).obj K) ⟶
-      (rightDerivedLowerShriek A aX).obj K :=
-  (lowerShriekCongr c.fst_comp.symm ≪≫
-      (G.lowerShriekComp c.fst aX).symm).hom.app _ ≫
-    (rightDerivedLowerShriek A aX).map ((rightDerivedUpperShriekAdjunction A c.fst).counit.app K)
+    (c : Correspondence aX aY K L) [HasCompactification aY] [HasCompactification c.str] :
+    (rightDerivedLowerShriek A c.str).obj ((rightDerivedUpperShriek A c.fst).obj L) ⟶
+      (rightDerivedLowerShriek A aY).obj L :=
+  (rightDerivedLowerShriekCongr A c.fst_comp.symm).hom.app _ ≫
+    (G.lowerShriekComp c.fst aY).inv.app _ ≫
+    (rightDerivedLowerShriek A aY).map ((rightDerivedUpperShriekAdjunction A c.fst).counit.app L)
 
 /-- The global operator of an endocorrespondence `(C, c, u)` on `(X, K)` whose ordinary leg
 `c₂` is proper: the composite
 
-`T_c(u) : RΓ_c(X, K) ⟶ RΓ_c(X, Rc₂_* c₂^* K) ≃ RΓ_c(C, c₂^* K) ⟶ RΓ_c(C, c₁^! K)
-  ≃ RΓ_c(X, Rc₁_! c₁^! K) ⟶ RΓ_c(X, K)`
+```
+  RΓ_c(X, K) ──η──▶ RΓ_c(X, Rc₂_* c₂^* K) ≅ RΓ_c(C, c₂^* K) ──u──▶ RΓ_c(C, c₁^! K)
+             ≅ RΓ_c(X, Rc₁_! c₁^! K) ──ε──▶ RΓ_c(X, K)
+```
 
 of the unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and the counit of
 `Rc₁_! ⊣ c₁^!`, acting on compactly supported cohomology `RΓ_c(X, K) = Ra_{X!} K`
@@ -275,7 +291,8 @@ open immersion `j : B ⟶ E`: the composite
 `A_B ≃ Lj^* A_E ⟶ Lj^* ω_E ≃ j^! ω_E ≃ ω_B`
 
 of `GeometricOperations.upperStarUnit`, open-immersion purity and the dualizing
-composition (part of blueprint `sk-d-local-term`). -/
+composition (part of blueprint `sk-d-local-term`). An open immersion need not admit a
+compactification, so `[HasCompactification j]` is a hypothesis: `openPurity` needs it. -/
 noncomputable def borelMooreRestrict {E B : Scheme.{u}} {aE : E ⟶ s} (j : B ⟶ E)
     [IsOpenImmersion j] [HasCompactification j] (α : G.borelMooreSections aE) :
     G.borelMooreSections (j ≫ aE) :=
@@ -285,7 +302,10 @@ noncomputable def borelMooreRestrict {E B : Scheme.{u}} {aE : E ⟶ s} (j : B �
 /-- The pushforward of a Borel-Moore section `α : A_T ⟶ ω_T` along a proper `h : T ⟶ T'`
 over `s`: the composite
 
-`A_{T'} ⟶ Rh_* A_T ⟶ Rh_* ω_T ≃ Rh_! h^! ω_{T'} ⟶ ω_{T'}`
+```
+  A_{T'} ──η──▶ Rh_* Lh^* A_{T'} ≅ Rh_* A_T ──α──▶ Rh_* ω_T ≅ Rh_! ω_T ≅ Rh_! h^! ω_{T'}
+         ──ε──▶ ω_{T'}
+```
 
 of the unit of `h^* ⊣ Rh_*`, the proper identification `Rh_* = Rh_!`, the dualizing
 composition `h^! ω_{T'} ≃ ω_T` and the counit of `Rh_! ⊣ h^!`
@@ -306,7 +326,7 @@ noncomputable def integral {T : Scheme.{u}} (a : T ⟶ s) [HasCompactification a
     [IsProper a] (α : G.borelMooreSections a) :
     End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
   G.borelMoorePushforward a (𝟙 s)
-      (α ≫ eqToHom (congrArg G.dualizing (Category.comp_id a).symm)) ≫
+      (α ≫ (G.dualizingCongr (Category.comp_id a).symm).hom) ≫
     G.dualizingBase.hom
 
 end GeometricOperations

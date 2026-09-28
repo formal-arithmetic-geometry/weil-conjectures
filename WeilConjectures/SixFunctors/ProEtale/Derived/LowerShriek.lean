@@ -184,7 +184,14 @@ noncomputable def rightDerivedLowerShriekPlusCompatibility :
 `Rf_! ≅ Rg_!` for `f = g`. -/
 noncomputable def rightDerivedLowerShriekCongr {f g : X ⟶ Y} (h : f = g)
     [HasCompactification f] [HasCompactification g] : R(f)_![A] ≅ R(g)_![A] :=
-  eqToIso (by subst h; rfl)
+  eqToIso <| by
+    subst h
+    rfl
+
+@[simp]
+lemma rightDerivedLowerShriekCongr_rfl {f : X ⟶ Y} [HasCompactification f] :
+    rightDerivedLowerShriekCongr A (rfl : f = f) = Iso.refl _ :=
+  rfl
 
 end ProEtale
 

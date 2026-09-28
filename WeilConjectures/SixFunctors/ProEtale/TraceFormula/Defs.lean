@@ -33,9 +33,11 @@ data which this project has not yet built, stated for the pro-étale functors th
   `AlgebraicGeometry.ProEtale.GeometricOperations.upperShriekComp`: the identity and
   composition isomorphisms `(𝟙 X)^! ≃ 𝟭` and `(f ≫ g)^! ≃ f^! g^!`, conjugate to the fields
   `lowerShriekId` and `lowerShriekComp`.
-- `AlgebraicGeometry.ProEtale.lowerShriekCongr`,
-  `AlgebraicGeometry.ProEtale.leftDerivedUpperStarCongr`: transport of `Rf_!` and `Lf^*`
-  along an equality of morphisms.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.upperStarUnit`,
+  `AlgebraicGeometry.ProEtale.GeometricOperations.upperStarTensor`: the unit and tensor
+  isomorphisms of the monoidal structure `upperStarMonoidal` of `Lf^*`.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.dualizingCongr`: transport of `ω` along an
+  equality of structure morphisms.
 
 ## Implementation notes
 
@@ -58,13 +60,27 @@ than the blueprint's finite ring `𝒪_E/ϖⁿ`; the intended instantiation is
 subcategory `Dᵇctf(X, A) ⊆ D(X, A)` of bounded constructible objects of finite Tor
 amplitude is carried as data by `GeometricCoefficients`.
 
-Two limitations of the package as stated. The comparison isomorphisms `properComparison`
-and `openPurity` are *not* pinned to the canonical natural transformations `Rf_! ⟶ Rf_*`
-and `f^! ⟶ Lf^*`, because this project constructs neither at the level of derived
-categories; and apart from the unit axioms of `lowerShriekId` and `upperStarUnit`, no
-coherence between the comparison isomorphisms themselves — for instance between
-`baseChange` and `lowerShriekComp` — is imposed. Both are part of the six operations
-chapter rather than of this block.
+Two limitations of the package as stated.
+
+* The comparison data are *not* pinned to the canonical maps: `properComparison` and
+  `openPurity` to the natural transformations `Rf_! ⟶ Rf_*` and `f^! ⟶ Lf^*`,
+  `upperStarMonoidal` to the oplax monoidal structure of the left adjoint `Lf^*` of the lax
+  monoidal `Rf_*`, and `kunnethVerdier` to the map `p_X^* M ⊗ᴸ p_Y^* D_Y N ⟶
+  RHom(p_Y^* N, p_X^! M)` built from the projection formula, base change, tensor-hom and the
+  `!`-adjunction. This project constructs none of these at the level of derived categories.
+* The coherence imposed is only at identities: the unit axioms of `lowerShriekId`, and the
+  identifications of `properComparison`, `dualizingBase`, `dualizingComp` and the unit of
+  `upperStarMonoidal` at `f = 𝟙`. The compatibility of `properComparison` and `dualizingComp`
+  with composition (`lowerShriekComp` and the composition of `Rf_*`), and between
+  `baseChange` and `lowerShriekComp`, is not imposed.
+
+Since `Correspondence.globalOperator` and `GeometricOperations.integral` are composites of
+these isomorphisms, the second limitation matters. Rescaling `properComparison f` by a unit
+of `A` at a non-identity `f` rescales `globalOperator` and `integral` without changing the
+stalk traces. So the trace theorems of `Pairing.lean`, `ProperPushforward.lean` and
+`Main.lean` need the composition coherences as extra axioms before they can be proved
+from the package. All of this belongs to the six operations chapter rather than to this
+block.
 
 The dualizing complex `ω_X = a_X^! A` *is* constructible when `a_X` admits a
 compactification, but it is needed for morphisms whose compactification is not in scope, so
@@ -123,11 +139,12 @@ end VerdierDual
 operations that the blueprint fixes, namely the dualizing complex `ω_X = a_X^! A` with its
 composition `f^! ω_Y ≃ ω_X`, the identification `Rf_* = Rf_!` for proper `f`, composition
 of exceptional direct images, `!`-base change, the projection formula, open-immersion
-purity, the closed-immersion unit `1 ≃ Ri^! Ri_*`, the monoidal structure
-`Lf^* A_Y ≃ A_X`, `Lf^* (M ⊗ᴸ N) ≃ Lf^* M ⊗ᴸ Lf^* N` of the pullback, biduality
+purity, the closed-immersion unit `1 ≃ Ri^! Ri_*`, the monoidal structure of the
+pullback `Lf^*`, biduality
 `K ≃ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier isomorphism. The identity isomorphism
-`R(𝟙 X)_! ≃ 𝟭` and the pullback of the constant sheaf are tied to `lowerShriekComp` and to
-`leftDerivedUpperStarId` by unit axioms.
+`R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms, and `properComparison`,
+`dualizingBase`, `dualizingComp` and the unit of `Lf^*` are tied to the identity
+isomorphisms at `f = 𝟙`.
 
 The functors and the two adjunctions are *not* fields: they are the pro-étale functors of
 `WeilConjectures.SixFunctors.ProEtale`, listed in the module docstring
@@ -156,17 +173,58 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   /-- the identity isomorphism of the exceptional direct image: `R(𝟙 X)_! ≃ 𝟭`. -/
   lowerShriekId (X : Scheme.{u}) :
     rightDerivedLowerShriek A (𝟙 X) ≅ 𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-  /-- left unit axiom: `lowerShriekComp (𝟙 X) f` is `lowerShriekId X` whiskered by `Rf_!`. -/
+  /-- left unit axiom: `lowerShriekComp (𝟙 X) f` is `lowerShriekId X` whiskered by `Rf_!`,
+  that is, the square
+
+  ```
+    R(𝟙 X)_! ⋙ Rf_! ──lowerShriekComp (𝟙 X) f──▶ R(𝟙 X ≫ f)_!
+          │                                           │
+    lowerShriekId X ◫ Rf_!           rightDerivedLowerShriekCongr (id_comp f)
+          ▼                                           ▼
+       𝟭 ⋙ Rf_!  ──────────── leftUnitor ──────────▶ Rf_!
+  ```
+
+  commutes. -/
   lowerShriekComp_id_left {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
       [HasCompactification (𝟙 X ≫ f)] :
     lowerShriekComp (𝟙 X) f = Functor.isoWhiskerRight (lowerShriekId X) _ ≪≫
       Functor.leftUnitor _ ≪≫ rightDerivedLowerShriekCongr A (Category.id_comp f).symm
   /-- right unit axiom: `lowerShriekComp f (𝟙 Y)` is `lowerShriekId Y` whiskered by
-  `Rf_!`. -/
+  `Rf_!`, that is, the square
+
+  ```
+    Rf_! ⋙ R(𝟙 Y)_! ──lowerShriekComp f (𝟙 Y)──▶ R(f ≫ 𝟙 Y)_!
+          │                                           │
+    Rf_! ◫ lowerShriekId Y           rightDerivedLowerShriekCongr (comp_id f)
+          ▼                                           ▼
+       Rf_! ⋙ 𝟭  ──────────── rightUnitor ─────────▶ Rf_!
+  ```
+
+  commutes. -/
   lowerShriekComp_id_right {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
       [HasCompactification (f ≫ 𝟙 Y)] :
     lowerShriekComp f (𝟙 Y) = Functor.isoWhiskerLeft _ (lowerShriekId Y) ≪≫
       Functor.rightUnitor _ ≪≫ rightDerivedLowerShriekCongr A (Category.comp_id f).symm
+  /-- for `f = 𝟙 X`, `properComparison` is the composite
+  `R(𝟙 X)_! ≃ 𝟭 ≃ R(𝟙 X)_*` of `lowerShriekId X` and the identity isomorphism of `R(𝟙 X)_*`,
+  the conjugate of `leftDerivedUpperStarId`. -/
+  properComparison_id (X : Scheme.{u}) :
+    properComparison (𝟙 X) = lowerShriekId X ≪≫
+      conjugateIsoEquiv Adjunction.id (derivedUpperStarLowerStarAdjunction A (𝟙 X))
+        (leftDerivedUpperStarId A X)
+  /-- the normalisation `ω_s ≃ A_s` is `ω_s ≃ (𝟙 s)^! A_s ≃ A_s`, the second map being the
+  identity isomorphism of `(𝟙 s)^!`, the conjugate of `lowerShriekId s`. -/
+  dualizingBase_eq :
+    dualizingBase = dualizingIso (𝟙 s) ≪≫
+      (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 s))
+        (lowerShriekId s)).symm.app (𝟙_ _)
+  /-- for `f = 𝟙 X`, `dualizingComp` is `(𝟙 X)^! ω_X ≃ ω_X`, the identity isomorphism of
+  `(𝟙 X)^!` (the conjugate of `lowerShriekId X`), transported along `𝟙 X ≫ a = a`. -/
+  dualizingComp_id {X : Scheme.{u}} (a : X ⟶ s) :
+    dualizingComp (𝟙 X) a =
+      (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
+        (lowerShriekId X)).symm.app (dualizing a) ≪≫
+        eqToIso (congrArg dualizing (Category.id_comp a).symm)
   /-- `!`-base change along a Cartesian square: `Lg^* Rf_! ≃ Rf'_! Lg'^*`, for
 
   ```
@@ -198,18 +256,14 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   closedUnit {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i] :
     𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) ≅
       (lowerStar A i).rightDerivedFunctor ⋙ rightDerivedUpperShriek A i
-  /-- the pullback of the constant sheaf, `Lf^* A_Y ≃ A_X`: the unit of the monoidal
-  structure of `Lf^*`. -/
-  upperStarUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ((upperStar A f).leftDerivedFunctor).obj (𝟙_ _) ≅ 𝟙_ _
-  /-- for `f = 𝟙 X`, `upperStarUnit` is the identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
+  /-- `Lf^*` is monoidal: the unit `A_X ≃ Lf^* A_Y` and the tensor comparison
+  `Lf^* M ⊗ᴸ Lf^* N ≃ Lf^* (M ⊗ᴸ N)`, with their naturality, associativity and unitality. -/
+  upperStarMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ((upperStar A f).leftDerivedFunctor).CoreMonoidal
+  /-- for `f = 𝟙 X`, the pullback `L(𝟙 X)^* A_X ≃ A_X` of the constant sheaf is the
+  identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
   upperStarUnit_id (X : Scheme.{u}) :
-    upperStarUnit (𝟙 X) = (leftDerivedUpperStarId A X).app (𝟙_ _)
-  /-- `Lf^*` is monoidal: `Lf^* (M ⊗ᴸ N) ≃ Lf^* M ⊗ᴸ Lf^* N`. -/
-  upperStarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
-      (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    ((upperStar A f).leftDerivedFunctor).obj (M ⊗ N) ≅
-      ((upperStar A f).leftDerivedFunctor).obj M ⊗ ((upperStar A f).leftDerivedFunctor).obj N
+    (upperStarMonoidal (𝟙 X)).εIso.inv = (leftDerivedUpperStarId A X).hom.app (𝟙_ _)
   /-- the evaluation-adjoint map `K ⟶ D_X D_X K`. -/
   bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
@@ -218,13 +272,17 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A w
   isIso_bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
       (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : ctf X K) :
     IsIso (bidualityMap a K)
-  /-- the Künneth-Verdier isomorphism `κ_{M,N} : M ⊠ D_Y N ≃ RHom(p_Y^* N, p_X^! M)`
-  (blueprint `sk-thm-sf-kunneth-verdier`), stated for every Cartesian square over `s` so
-  that both orientations are available on `pullback aY aX`. -/
+  /-- the Künneth-Verdier isomorphism `κ_{M,N} : M ⊠ D_Y N ≃ RHom(p_Y^* N, p_X^! M)` for
+  `M ∈ Dᵇctf(X)` and `N ∈ Dᵇctf(Y)`, where `X` and `Y` are separated of finite type over a
+  field `s = Spec k` (blueprint `sk-thm-sf-kunneth-verdier`). It is stated for every
+  Cartesian square over `s`, so that both orientations are available on `pullback aY aX`. -/
   kunnethVerdier {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} {pX : Z ⟶ X} {pY : Z ⟶ Y}
+      (hs : ∃ (k : Type u) (_ : Field k), Nonempty (s ≅ Spec (.of k)))
+      [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
+      [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
       (sq : IsPullback pX pY aX aY) [HasCompactification pX]
-      (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-      (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+      (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hM : ctf X M)
+      (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) (hN : ctf Y N) :
     ((upperStar A pX).leftDerivedFunctor).obj M ⊗
         ((upperStar A pY).leftDerivedFunctor).obj (verdierDual (dualizing aY) N) ≅
       (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
@@ -240,19 +298,68 @@ noncomputable def GeometricOperations.verdierDual {s : Scheme.{u}}
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
   _root_.AlgebraicGeometry.ProEtale.verdierDual (G.dualizing a) K
 
+namespace GeometricOperations
+
+variable {s : Scheme.{u}} (G : GeometricOperations A s)
+
+/-- Transport of the dualizing complex along an equality of structure morphisms:
+`ω_a ≅ ω_b` for `a = b`. -/
+noncomputable def dualizingCongr {X : Scheme.{u}} {a b : X ⟶ s} (h : a = b) :
+    G.dualizing a ≅ G.dualizing b :=
+  eqToIso (congrArg G.dualizing h)
+
+@[simp]
+lemma dualizingCongr_rfl {X : Scheme.{u}} {a : X ⟶ s} :
+    G.dualizingCongr (rfl : a = a) = Iso.refl _ :=
+  rfl
+
+/-- The pullback of the constant sheaf, `Lf^* A_Y ≃ A_X`: the inverse of the unit of the
+monoidal structure `GeometricOperations.upperStarMonoidal` of `Lf^*`. -/
+noncomputable def upperStarUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ((upperStar A f).leftDerivedFunctor).obj (𝟙_ _) ≅ 𝟙_ _ :=
+  (G.upperStarMonoidal f).εIso.symm
+
+/-- For `f = 𝟙 X`, `upperStarUnit` is the identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
+@[simp]
+lemma upperStarUnit_hom_id (X : Scheme.{u}) :
+    (G.upperStarUnit (𝟙 X)).hom = (leftDerivedUpperStarId A X).hom.app (𝟙_ _) :=
+  G.upperStarUnit_id X
+
+/-- The tensor comparison `Lf^* (M ⊗ᴸ N) ≃ Lf^* M ⊗ᴸ Lf^* N` of the pullback: the inverse of
+the tensor map of the monoidal structure `GeometricOperations.upperStarMonoidal` of
+`Lf^*`. -/
+noncomputable def upperStarTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((upperStar A f).leftDerivedFunctor).obj (M ⊗ N) ≅
+      ((upperStar A f).leftDerivedFunctor).obj M ⊗ ((upperStar A f).leftDerivedFunctor).obj N :=
+  ((G.upperStarMonoidal f).μIso M N).symm
+
 /-- The identity isomorphism `(𝟙 X)^! ≃ 𝟭` of the exceptional inverse image: the conjugate
 of the field `lowerShriekId : R(𝟙 X)_! ≃ 𝟭` along the adjunctions `R(𝟙 X)_! ⊣ (𝟙 X)^!` and
 `𝟭 ⊣ 𝟭`. -/
-noncomputable def GeometricOperations.upperShriekId {s : Scheme.{u}}
-    (G : GeometricOperations A s) (X : Scheme.{u}) :
+noncomputable def upperShriekId (X : Scheme.{u}) :
     rightDerivedUpperShriek A (𝟙 X) ≅ 𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   (conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
     (G.lowerShriekId X)).symm
 
+/-- Under the conjugation bijection between the adjunctions `R(𝟙 X)_! ⊣ (𝟙 X)^!` and
+`𝟭 ⊣ 𝟭`, the identity isomorphism of the exceptional direct image corresponds to the inverse
+of the identity isomorphism of the exceptional inverse image:
+
+```
+  R(𝟙 X)_! ⊣ (𝟙 X)^!        lowerShriekId : R(𝟙 X)_! ≅ 𝟭
+       ↕ conjugate                   ↦
+       𝟭 ⊣ 𝟭               upperShriekId.symm : 𝟭 ≅ (𝟙 X)^!
+``` -/
+@[simp]
+lemma conjugateIsoEquiv_lowerShriekId (X : Scheme.{u}) :
+    conjugateIsoEquiv Adjunction.id (rightDerivedUpperShriekAdjunction A (𝟙 X))
+        (G.lowerShriekId X) = (G.upperShriekId X).symm := by
+  simp [upperShriekId]
+
 /-- The identity isomorphism `𝟭 ≃ (𝟙 X)^!` of the exceptional inverse image: the inverse of
 `GeometricOperations.upperShriekId`. -/
-noncomputable def GeometricOperations.upperShriekIdIso {s : Scheme.{u}}
-    (G : GeometricOperations A s) (X : Scheme.{u}) :
+noncomputable def upperShriekIdIso (X : Scheme.{u}) :
     𝟭 (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) ≅
       rightDerivedUpperShriek A (𝟙 X) :=
   (G.upperShriekId X).symm
@@ -260,8 +367,7 @@ noncomputable def GeometricOperations.upperShriekIdIso {s : Scheme.{u}}
 /-- The composition isomorphism `(f ≫ g)^! ≃ g^! ⋙ f^!` of exceptional inverse images:
 the conjugate of `GeometricOperations.lowerShriekComp` along the adjunctions
 `R(f ≫ g)_! ⊣ (f ≫ g)^!` and `Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!`. -/
-noncomputable def GeometricOperations.upperShriekComp {s : Scheme.{u}}
-    (G : GeometricOperations A s) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+noncomputable def upperShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
     rightDerivedUpperShriek A (f ≫ g) ≅
       rightDerivedUpperShriek A g ⋙ rightDerivedUpperShriek A f :=
@@ -269,15 +375,31 @@ noncomputable def GeometricOperations.upperShriekComp {s : Scheme.{u}}
     ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
     (G.lowerShriekComp f g)
 
-/-- Transport of the derived exceptional direct image along an equality of morphisms. -/
+/-- Under the conjugation bijection between the adjunctions `R(f ≫ g)_! ⊣ (f ≫ g)^!` and
+`Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!`, the composition isomorphism of the exceptional direct images
+corresponds to the composition isomorphism of the exceptional inverse images:
+
+```
+  R(f ≫ g)_! ⊣ (f ≫ g)^!       lowerShriekComp f g : Rf_! ⋙ Rg_! ≅ R(f ≫ g)_!
+          ↕ conjugate                          ↦
+  Rf_! ⋙ Rg_! ⊣ g^! ⋙ f^!      upperShriekComp f g : (f ≫ g)^! ≅ g^! ⋙ f^!
+``` -/
+@[simp]
+lemma conjugateIsoEquiv_lowerShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    conjugateIsoEquiv (rightDerivedUpperShriekAdjunction A (f ≫ g))
+        ((rightDerivedUpperShriekAdjunction A f).comp (rightDerivedUpperShriekAdjunction A g))
+        (G.lowerShriekComp f g) = G.upperShriekComp f g :=
+  rfl
+
+end GeometricOperations
+
+/-- Transport of the derived exceptional direct image along an equality of morphisms. This
+is `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekCongr`, under the name used by the
+trace formula files. -/
 noncomputable abbrev lowerShriekCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g)
     [HasCompactification f] [HasCompactification g] :
     rightDerivedLowerShriek A f ≅ rightDerivedLowerShriek A g :=
   rightDerivedLowerShriekCongr A h
-
-/-- Transport of the derived pullback along an equality of morphisms. -/
-noncomputable def leftDerivedUpperStarCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
-    (upperStar A f).leftDerivedFunctor ≅ (upperStar A g).leftDerivedFunctor :=
-  eqToIso (by subst h; rfl)
 
 end AlgebraicGeometry.ProEtale
