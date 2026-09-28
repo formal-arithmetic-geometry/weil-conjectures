@@ -14,7 +14,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalize
 
 If the category `C` has fewer than `κ` arrows, for a regular cardinal `κ`, then so does the
 walking multicospan `WalkingMulticospan S.shape` indexing the sheaf condition for a cover
-`S : J.Cover X` (`CategoryTheory.GrothendieckTopology.Cover.hasCardinalLT_arrow_walkingMulticospan`).
+`S : J.Cover X`
+(`CategoryTheory.GrothendieckTopology.Cover.hasCardinalLT_arrow_walkingMulticospan`).
 Together with `CategoryTheory.preservesColimitsOfShape_lim_of_isSeparator`, this shows that
 the multiequalizers expressing the sheaf condition commute with `κ`-filtered colimits in a
 category with a `κ`-presentable separator.
