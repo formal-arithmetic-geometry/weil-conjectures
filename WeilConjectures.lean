@@ -20,6 +20,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Finite
+public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.MatrixGroup
+public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
+public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Tangent
+public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.Pic
@@ -277,6 +281,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
@@ -290,6 +295,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Group.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
@@ -392,14 +398,21 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
+public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
+public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
+public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
+public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
+public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
@@ -438,6 +451,7 @@ public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.NumberTheory.Padics.Logarithm
+public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PointCount
 public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.SixFunctors.BaseChange.Derived
