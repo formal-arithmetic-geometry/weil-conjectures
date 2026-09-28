@@ -38,18 +38,26 @@ forward along a proper morphism, and integrated when `T` is proper over the base
   `T_c(u)` on compactly supported cohomology.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.borelMooreSections`: the Borel-Moore
   sections `A_T ⟶ ω_T` of a geometric scheme.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.borelMooreRestrict`: the restriction of a
+  Borel-Moore section along an open immersion.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward`,
   `AlgebraicGeometry.ProEtale.GeometricOperations.integral`: the pushforward and the
   integral of a Borel-Moore section.
 
 ## Implementation notes
 
-`globalOperator`, `borelMoorePushforward`, `integral` and the coefficient map of `ofEnd`
-are composites of comparison maps that the package
-`AlgebraicGeometry.ProEtale.GeometricOperations` only postulates, so this project cannot
-build them. They are declared `opaque`: their types carry the content, no `sorryAx` enters
-the development, and — unlike a `sorry`-bodied definition, whose value does not mention its
-arguments — they remain genuinely dependent on all of them.
+`globalOperator`, `borelMooreRestrict`, `borelMoorePushforward`, `integral` and the
+coefficient map of `ofEnd` are defined as composites of the adjunctions of the pro-étale
+functors and the comparison data of the package
+`AlgebraicGeometry.ProEtale.GeometricOperations`:
+
+* `ofEndCoeff` uses `leftDerivedUpperStarId` and
+  `GeometricOperations.upperShriekIdIso`, hence the field `openPurity`;
+* `globalOperator` uses the fields `properComparison` and `lowerShriekComp`, transported
+  along `c₁ ≫ a_X = a_C = c₂ ≫ a_X` by `lowerShriekCongr`;
+* `borelMooreRestrict` uses the fields `upperStarUnit`, `openPurity` and `dualizingComp`;
+* `borelMoorePushforward` uses the fields `upperStarUnit`, `properComparison` and
+  `dualizingComp`, and `integral` moreover `dualizingBase`.
 
 The integral takes its values in `End (A_s)`, which is the coefficient ring by the
 normalisation `GeometricOperations.dualizingBase : ω_s ≅ A_s`.
@@ -156,15 +164,16 @@ noncomputable def intersectionStr (c : Correspondence aX aY K L)
 
 /-- The coefficient map of `AlgebraicGeometry.ProEtale.Correspondence.ofEnd`: the
 endomorphism `v` read through the comparisons `L(𝟙)^* K ≃ K ≃ 𝟙^! K`. -/
-noncomputable opaque ofEndCoeff
+noncomputable def ofEndCoeff (G : GeometricOperations A s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
     ((upperStar A (𝟙 X)).leftDerivedFunctor).obj K ⟶
-      (rightDerivedUpperShriek A (𝟙 X)).obj K := 0
+      (rightDerivedUpperShriek A (𝟙 X)).obj K :=
+  (leftDerivedUpperStarId A X).hom.app K ≫ v ≫ (G.upperShriekIdIso X).hom.app K
 
 /-- The endocorrespondence on `(X, K)` with support `X`, support map the diagonal `Δ_X`,
 identity legs, and coefficient map induced by `v : K ⟶ K`. For `v = 𝟙 K` this is the
 blueprint's *diagonal identity* (part of blueprint `sk-d-corr`). -/
-noncomputable def ofEnd (aX : X ⟶ s)
+noncomputable def ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
     Correspondence aX aX K K where
   supp := X
@@ -173,17 +182,17 @@ noncomputable def ofEnd (aX : X ⟶ s)
   snd := 𝟙 X
   fst_comp := Category.id_comp aX
   snd_comp := Category.id_comp aX
-  coeff := ofEndCoeff K v
+  coeff := ofEndCoeff G K v
 
-instance isIso_fixι_ofEnd (aX : X ⟶ s)
+instance isIso_fixι_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    IsIso (ofEnd aX K v).fixι :=
+    IsIso (ofEnd G aX K v).fixι :=
   inferInstanceAs (IsIso (equalizer.ι (𝟙 X) (𝟙 X)))
 
-instance isProper_fixStr_ofEnd (aX : X ⟶ s) [IsProper aX]
+instance isProper_fixStr_ofEnd (G : GeometricOperations A s) (aX : X ⟶ s) [IsProper aX]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (v : K ⟶ K) :
-    IsProper (ofEnd aX K v).fixStr :=
-  inferInstanceAs (IsProper ((ofEnd aX K v).fixι ≫ aX))
+    IsProper (ofEnd G aX K v).fixStr :=
+  inferInstanceAs (IsProper ((ofEnd G aX K v).fixι ≫ aX))
 
 /-- The global operator of an endocorrespondence `(C, c, u)` on `(X, K)` whose ordinary leg
 `c₂` is proper: the composite
@@ -194,10 +203,19 @@ instance isProper_fixStr_ofEnd (aX : X ⟶ s) [IsProper aX]
 of the unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and the counit of
 `Rc₁_! ⊣ c₁^!`, acting on compactly supported cohomology `RΓ_c(X, K) = Ra_{X!} K`
 (blueprint: `sk-d-operator`). -/
-noncomputable opaque globalOperator (G : GeometricOperations A s)
+noncomputable def globalOperator (G : GeometricOperations A s)
     (c : Correspondence aX aX K K) [HasCompactification aX] [IsProper c.snd]
-    [HasCompactification c.snd] :
-    (rightDerivedLowerShriek A aX).obj K ⟶ (rightDerivedLowerShriek A aX).obj K := 0
+    [HasCompactification c.snd] [HasCompactification c.str] :
+    (rightDerivedLowerShriek A aX).obj K ⟶ (rightDerivedLowerShriek A aX).obj K :=
+  have : HasCompactification (c.snd ≫ aX) := c.snd_comp ▸ inferInstance
+  have : HasCompactification (c.fst ≫ aX) := c.fst_comp ▸ inferInstance
+  (rightDerivedLowerShriek A aX).map
+      ((derivedUpperStarLowerStarAdjunction A c.snd).unit.app K) ≫
+    (rightDerivedLowerShriek A aX).map ((G.properComparison c.snd).inv.app _) ≫
+    (G.lowerShriekComp c.snd aX ≪≫ lowerShriekCongr c.snd_comp).hom.app _ ≫
+    (rightDerivedLowerShriek A c.str).map c.coeff ≫
+    (lowerShriekCongr c.fst_comp.symm ≪≫ (G.lowerShriekComp c.fst aX).symm).hom.app _ ≫
+    (rightDerivedLowerShriek A aX).map ((rightDerivedUpperShriekAdjunction A c.fst).counit.app K)
 
 end Correspondence
 
@@ -210,6 +228,19 @@ variable (G : GeometricOperations A s)
 abbrev borelMooreSections {T : Scheme.{u}} (a : T ⟶ s) :=
   𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology T) A)) ⟶ G.dualizing a
 
+/-- The restriction `j^* α : A_B ⟶ ω_B` of a Borel-Moore section `α : A_E ⟶ ω_E` along an
+open immersion `j : B ⟶ E`: the composite
+
+`A_B ≃ Lj^* A_E ⟶ Lj^* ω_E ≃ j^! ω_E ≃ ω_B`
+
+of `GeometricOperations.upperStarUnit`, open-immersion purity and the dualizing
+composition (part of blueprint `sk-d-local-term`). -/
+noncomputable def borelMooreRestrict {E B : Scheme.{u}} {aE : E ⟶ s} (j : B ⟶ E)
+    [IsOpenImmersion j] [HasCompactification j] (α : G.borelMooreSections aE) :
+    G.borelMooreSections (j ≫ aE) :=
+  (G.upperStarUnit j).inv ≫ ((upperStar A j).leftDerivedFunctor).map α ≫
+    (G.openPurity j).inv.app _ ≫ (G.dualizingComp j aE).hom
+
 /-- The pushforward of a Borel-Moore section `α : A_T ⟶ ω_T` along a proper `h : T ⟶ T'`
 over `s`: the composite
 
@@ -218,16 +249,24 @@ over `s`: the composite
 of the unit of `h^* ⊣ Rh_*`, the proper identification `Rh_* = Rh_!`, the dualizing
 composition `h^! ω_{T'} ≃ ω_T` and the counit of `Rh_! ⊣ h^!`
 (blueprint: `sk-d-integral`). -/
-noncomputable opaque borelMoorePushforward {T T' : Scheme.{u}} (h : T ⟶ T') (a : T' ⟶ s)
+noncomputable def borelMoorePushforward {T T' : Scheme.{u}} (h : T ⟶ T') (a : T' ⟶ s)
     [HasCompactification h] [IsProper h] (α : G.borelMooreSections (h ≫ a)) :
-    G.borelMooreSections a := 0
+    G.borelMooreSections a :=
+  (derivedUpperStarLowerStarAdjunction A h).unit.app (𝟙_ _) ≫
+    ((lowerStar A h).rightDerivedFunctor).map ((G.upperStarUnit h).hom ≫ α) ≫
+    (G.properComparison h).inv.app _ ≫
+    (rightDerivedLowerShriek A h).map (G.dualizingComp h a).inv ≫
+    (rightDerivedUpperShriekAdjunction A h).counit.app (G.dualizing a)
 
 /-- The integral `∫_T α ∈ A` of a Borel-Moore section over a geometric scheme `T` that is
 proper over the base: the pushforward of `α` along `a_T`, read in `End (A_s) = A` through
 `GeometricOperations.dualizingBase` (part of blueprint `sk-d-integral`). -/
-noncomputable opaque integral {T : Scheme.{u}} (a : T ⟶ s) [HasCompactification a]
+noncomputable def integral {T : Scheme.{u}} (a : T ⟶ s) [HasCompactification a]
     [IsProper a] (α : G.borelMooreSections a) :
-    End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) := 0
+    End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
+  G.borelMoorePushforward a (𝟙 s)
+      (α ≫ eqToHom (congrArg G.dualizing (Category.comp_id a).symm)) ≫
+    G.dualizingBase.hom
 
 end GeometricOperations
 
