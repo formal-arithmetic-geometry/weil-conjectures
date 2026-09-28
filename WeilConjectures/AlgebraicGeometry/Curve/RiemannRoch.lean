@@ -50,10 +50,10 @@ Ampleness is `AlgebraicGeometry.IsAmple` of
 The dual `ℱᵛ = Hom(ℱ, 𝒪_X)` of a sheaf of modules is the internal hom of
 `WeilConjectures/AlgebraicGeometry/Modules/Dual.lean`; only the tensor product is still the
 `opaque` placeholder of `WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`. The
-canonical module `ω_X = Ω^n_{X/k}` has no placeholder: Serre duality is stated existentially, as the existence of a dualising
-invertible module, which is what is provable before `Ω^n_{X/k}` exists and is strictly stronger
-than a statement about a placeholder. Identifying that module with `Ω^n_{X/k}` is separate
-work.
+canonical module `ω_X = Ω^n_{X/k}` has no placeholder: Serre duality is stated existentially,
+as the existence of a dualising invertible module, which is what is provable before
+`Ω^n_{X/k}` exists and is strictly stronger than a statement about a placeholder. Identifying
+that module with `Ω^n_{X/k}` is separate work.
 
 ## Main definitions
 
