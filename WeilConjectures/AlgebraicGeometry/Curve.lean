@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.AlgebraicGeometry.Modules.Pic
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
@@ -22,7 +22,7 @@ space of global differential forms.
 
 The Picard group `Pic(C)` of isomorphism classes of invertible `𝒪_C`-modules is
 `AlgebraicGeometry.Scheme.Pic`, introduced in
-`WeilConjectures.AlgebraicGeometry.Modules.Pic`; on a curve it carries a *degree* map to `ℤ`,
+`WeilConjectures.AlgebraicGeometry.PicardFunctor`; on a curve it carries a *degree* map to `ℤ`,
 whose kernel `Pic⁰(C)` is the subject of the Jacobian.
 
 The pinned Mathlib has neither a sheaf of relative Kähler differentials for schemes nor

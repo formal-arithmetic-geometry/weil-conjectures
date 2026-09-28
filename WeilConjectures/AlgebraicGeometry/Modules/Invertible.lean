@@ -23,7 +23,8 @@ to `tensorPow`, which is defined by iterating it.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible`: an `𝒪_X`-module locally isomorphic to `𝒪_X`.
-- `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N` (placeholder).
+- `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N` (placeholder),
+  with scoped notation `M ⊗ₘ N`.
 - `AlgebraicGeometry.Scheme.Modules.tensorPow`: the tensor power `M^{⊗ n}`.
 - `AlgebraicGeometry.Scheme.Modules.overPullback`: pullback along a morphism of schemes over a
   base.
@@ -56,6 +57,8 @@ The monoidal structure on sheaves of modules is not available in Mathlib yet, so
 before it is replaced by the real construction. -/
 -- TODO(unify): sk-def-picard-pic
 opaque tensorObj (M N : X.Modules) : X.Modules := M
+
+@[inherit_doc] scoped infixl:70 " ⊗ₘ " => AlgebraicGeometry.Scheme.Modules.tensorObj
 
 /-- Pullback of an `𝒪_B`-module along a morphism `f : A ⟶ B` of schemes over a base `S`. -/
 noncomputable abbrev overPullback {S : Scheme.{u}} {A B : Over S} (f : A ⟶ B)

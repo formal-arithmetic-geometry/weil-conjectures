@@ -36,6 +36,7 @@ since they are needed to state the Weil conjectures in the comparator challenge.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.degreeOver`: the degree `[κ(x) : k]` of a point.
+- `AlgebraicGeometry.Scheme.Hom.residueCard`: the residue cardinality `q_x = q ^ [κ(x) : k]`.
 
 ## Main statements
 
@@ -227,5 +228,11 @@ value `0` if the residue field extension is infinite. -/
 noncomputable def Hom.degreeOver (f : X.Hom (Spec (.of k))) (x : X) : ℕ :=
   let := (f.residueFieldAlgebraMap x).toAlgebra
   Module.finrank k (X.residueField x)
+
+/-- The residue cardinality `q_x = q ^ [κ(x) : k]` at a point `x` of a scheme `X` over a field
+`k` with `q` elements, with junk value `0` if `k` is infinite or the residue field extension
+is infinite. -/
+noncomputable def Hom.residueCard (f : X.Hom (Spec (.of k))) (x : X) : ℕ :=
+  Nat.card k ^ f.degreeOver x
 
 end AlgebraicGeometry.Scheme
