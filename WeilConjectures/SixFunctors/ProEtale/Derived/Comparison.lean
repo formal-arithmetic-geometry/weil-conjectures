@@ -5,29 +5,34 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 
 /-!
 
-# The derived comparison functor `D(ν^*)`
+# The derived comparison functors
 
 The comparison functor `ν^* : Sh(X_ét, A) ⥤ Sh(X_proét, A)` of
-`WeilConjectures.SixFunctors.ProEtale.Comparison.Defs` is exact, so it induces a functor
-`D(ν^*) : D(X_ét) ⥤ D(X_proét)` between the derived categories by applying it termwise to
-complexes, with no derivation needed. It is Mathlib's `Functor.mapDerivedCategory`, whose
-API is recorded in `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`.
+`WeilConjectures.SixFunctors.ProEtale.Comparison.Defs` is exact, so it induces functors
+`D(ν^*) : D(X_ét) ⥤ D(X_proét)` and `D⁺(ν^*) : D⁺(X_ét) ⥤ D⁺(X_proét)` by applying it termwise
+to complexes. As for the pullback in `WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar`,
+these functors and the right derived functor `R⁺ν_*` are not given definitions of their own:
+they are the generic constructions `D(-)`, `D+(-)` and `R+(-)` of the folder
+`WeilConjectures.CategoryTheory.DerivedCategory`, recorded below as `example`s.
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.derivedComparisonUpperStar`: the functor
-  `D(ν^*) : D(X_ét) ⥤ D(X_proét)`.
-- `AlgebraicGeometry.ProEtale.derivedComparisonUpperStarHomologyFunctorIso`: `D(ν^*)`
-  commutes with the homology functors, `H^n ⋙ ν^* ≅ D(ν^*) ⋙ H^n`.
-- `AlgebraicGeometry.ProEtale.derivedComparisonUpperStarPlus`: the restriction
-  `D⁺(X_ét) ⥤ D⁺(X_proét)` of `D(ν^*)` to the bounded below derived categories.
+- `AlgebraicGeometry.ProEtale.derivedComparisonAdjunctionPlus`: the adjunction
+  `D+(ν^*(X)[A]) ⊣ R+(ν_*(X)[A])` between the bounded below derived categories of étale and
+  pro-étale sheaves.
 
 -/
 
@@ -35,36 +40,47 @@ API is recorded in `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Exa
 
 universe u' u
 
-open CategoryTheory Limits
+open CategoryTheory
+
+open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
-
-open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable (X : Scheme.{u})
 
-/-- The functor `D(ν^*) : D(X_ét) ⥤ D(X_proét)` induced on derived categories by the exact
-comparison functor `ν^* = ProEtale.comparisonUpperStar`, applied termwise to complexes. -/
-noncomputable def derivedComparisonUpperStar :
-    _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
-      _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  (comparisonUpperStar A X).mapDerivedCategory
+/-- The functor `D(ν^*) : D(X_ét) ⥤ D(X_proét)` induced by the exact functor `ν^*`. -/
+noncomputable example :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
+  D(ν^*(X)[A])
 
-/-- The functor `D(ν^*)` commutes with the homology functors: `H^n(ν^* K) ≅ ν^* H^n(K)`,
-since `ν^*` is exact. -/
-noncomputable def derivedComparisonUpperStarHomologyFunctorIso (n : ℤ) :
-    _root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology A) n ⋙
-        comparisonUpperStar A X ≅
-      derivedComparisonUpperStar A X ⋙
-        _root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) A) n :=
-  (comparisonUpperStar A X).mapDerivedCategoryHomologyFunctorIso n
+/-- The functor `D⁺(ν^*) : D⁺(X_ét) ⥤ D⁺(X_proét)` induced by the exact functor `ν^*`. -/
+noncomputable example :
+    DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
+      DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A) :=
+  D+(ν^*(X)[A])
 
-/-- The restriction `D⁺(X_ét) ⥤ D⁺(X_proét)` of `D(ν^*)` to the bounded below derived
-categories. -/
-noncomputable def derivedComparisonUpperStarPlus :
-    _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
-      _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A) :=
-  (comparisonUpperStar A X).mapDerivedCategoryPlus
+/-- The right derived functor `R⁺ν_* : D⁺(X_proét) ⥤ D⁺(X_ét)` of the restriction `ν_*`. -/
+noncomputable example :
+    DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A) ⥤
+      DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) :=
+  R+(ν_*(X)[A])
+
+section Adjunction
+
+/- The closed symmetric preadditive monoidal structure and the functorial flat resolutions on
+the coefficient category, as in `WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar`:
+the adjunction is obtained from the unbounded derived adjunction, whose left adjoint is
+derived via K-flat resolutions of étale sheaves. -/
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- The adjunction `D⁺(ν^*) ⊣ R⁺ν_*` between the bounded below derived categories of étale and
+pro-étale sheaves, induced by the adjunction `ν^* ⊣ ν_*`. -/
+noncomputable def derivedComparisonAdjunctionPlus : D+(ν^*(X)[A]) ⊣ R+(ν_*(X)[A]) :=
+  (comparisonAdjunction A X).derivedAdjunctionPlus
+
+end Adjunction
 
 end AlgebraicGeometry.ProEtale

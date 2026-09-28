@@ -347,6 +347,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
