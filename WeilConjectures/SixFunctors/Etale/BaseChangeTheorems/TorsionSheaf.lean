@@ -126,7 +126,19 @@ end TorsionSheaf
 
 section TorsionHomology
 
-variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- `ℤ`-indexed colimits of `Λ`-modules are exact: `ℤ` is a filtered category, and
+`ModuleCat.{u + 1} Λ` is Grothendieck abelian, hence satisfies `AB5` for shapes of size
+`u + 1`; `AB5OfSize_of_univLE` brings that down to the shapes of size `0` in which `ℤ`
+lives. It is not an instance in mathlib because in that generality instance search would
+climb the universes. -/
+instance : HasExactColimitsOfShape ℤ (ModuleCat.{u + 1} Λ) := by
+  have : AB5OfSize.{0, 0} (ModuleCat.{u + 1} Λ) :=
+    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} (ModuleCat.{u + 1} Λ)
+  infer_instance
+
+variable (X : Scheme.{u})
   [HasDerivedCategory.{w} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))]
 
 /-- An object of the bounded below derived category of étale sheaves of `Λ`-modules has
