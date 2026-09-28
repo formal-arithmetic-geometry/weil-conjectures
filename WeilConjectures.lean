@@ -412,6 +412,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FinallySmall
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
@@ -431,6 +432,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
+public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
@@ -439,6 +441,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Grothendieck
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LeftExact
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
