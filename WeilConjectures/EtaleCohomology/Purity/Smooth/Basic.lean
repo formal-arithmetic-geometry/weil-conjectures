@@ -67,7 +67,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
 the form of cohomological smoothness that does not yet name the twist; smooth purity
 identifies `ω_f` with `Λ_X(d)[2d]`. -/
 theorem isInvertible_dualizingComplex :
-    DerivedCategory.isInvertible Λ X (dualizingComplex Λ f) :=
+    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) :=
   sorry
 
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
@@ -85,7 +85,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj (dualizingComplex Λ f) ≅
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :=
   sorry
 
@@ -128,9 +129,10 @@ into another with. It is the mate of the composition law `R(g ≫ f)^! ≅ Rf^! 
 theorem nonempty_iso_dualizingComplex_comp {W : Scheme.{u}} {e : ℕ} (g : W ⟶ X)
     [IsSeparated g] [SmoothOfRelativeDimension e g] [HasCompactification g]
     [HasCompactification (g ≫ f)] [HasInvertibleExponent Λ W] :
-    Nonempty (dualizingComplex Λ (g ≫ f) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj (dualizingComplex Λ g)).obj
-        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ f))) :=
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (g ≫ f) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
+          (dualizingComplex (ModuleCat.{u + 1} Λ) g)).obj
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f))) :=
   sorry
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
@@ -148,7 +150,8 @@ The proof is the blueprint's five moves: the rank-one computation on `𝔸¹`
 deformation to the normal cone of a section (`sk-lem-geometry`, `sk-thm-dnc`), the regularity
 of the diagonal (`sk-lem-diag-reg`), and `𝔸¹`-invariance (`sk-prop-a1-inv`). -/
 theorem nonempty_iso_dualizingComplex_twistShift :
-    Nonempty (dualizingComplex Λ f ≅ (twistShift Λ X d).obj (constantComplex Λ X)) :=
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
+      (twistShift Λ X d).obj (constantComplex Λ X)) :=
   sorry
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity

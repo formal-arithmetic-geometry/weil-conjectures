@@ -88,7 +88,8 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion {k : Type u} [Field 
     [SmoothOfRelativeDimension n aX] [HasCompactification aX]
     [SmoothOfRelativeDimension m (i ≫ aX)] [HasCompactification (i ≫ aX)]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z] :
-    Nonempty (dualizingComplex Λ i ≅ (twistShift Λ Z (-c : ℤ)).obj (constantComplex Λ Z)) :=
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) i ≅
+      (twistShift Λ Z (-c : ℤ)).obj (constantComplex Λ Z)) :=
   sorry
 
 end Etale

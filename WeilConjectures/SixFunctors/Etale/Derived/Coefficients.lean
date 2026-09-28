@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 
 /-!
 # Coefficient-side vocabulary of `D(X_ét, Λ)`
@@ -23,9 +24,9 @@ These belong to the framework, not to any one chapter: the finiteness statements
 
 - `AlgebraicGeometry.Etale.constantComplex`: the constant complex `Λ_X`, the unit of the
   derived tensor product.
-- `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`,
-  `AlgebraicGeometry.Etale.DerivedCategory.finiteTorAmplitude`: Tor amplitude in `[a, b]`
-  and finite Tor amplitude.
+- `AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn`: Tor amplitude in `[a, b]`.
+  Finite Tor amplitude is `AlgebraicGeometry.Etale.DerivedCategory.finiteTorAmplitude` of
+  `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude`, for `A = ModuleCat Λ`.
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleFiniteTor`:
   `D^b_{ctf}(X, Λ)`.
 - `AlgebraicGeometry.Etale.DerivedCategory.isInvertible`: ⊗-invertible objects.
@@ -65,12 +66,6 @@ def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
       ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K)).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
 
-/-- An object of `D(X_ét, Λ)` has *finite Tor amplitude* if it has Tor amplitude in some
-bounded interval. -/
-def DerivedCategory.finiteTorAmplitude :
-    ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  fun K ↦ ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn Λ X a b K
-
 /-- Blueprint `sk-def-sf-setting`: Coefficients and sites
 
 The category `D^b_{ctf}(X, Λ)` of the purity chapter, as an object property: bounded with
@@ -78,7 +73,7 @@ constructible cohomology sheaves and of finite Tor amplitude. -/
 def DerivedCategory.boundedConstructibleFiniteTor :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
-    DerivedCategory.finiteTorAmplitude Λ X
+    DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X
 
 /-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a tensor inverse: there is an `M`
 with `L ⊗^L M ≅ Λ_X`. A lisse rank-one sheaf placed in any degree and twisted by any power of

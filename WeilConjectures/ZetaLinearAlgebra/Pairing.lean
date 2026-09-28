@@ -40,6 +40,8 @@ the pairing is Poincaré duality and `c = qᵈ`.
   is literally the shape of `AlgebraicGeometry.WeilFunctionalEquation`.
 * `LinearMap.natDegree_map_charpolyRev_of_similitude`: both reverse characteristic polynomials
   of a similitude pair have degree `dim V` after mapping into an extension field along `ι`.
+* `LinearMap.det_mul_det_of_similitude`: the determinants of the two members of a similitude
+  pair multiply to `c ^ dim V`.
 
 An auxiliary polynomial lemma `Polynomial.roots_reverse_of_monic` (the roots of the reverse of
 a split monic polynomial with nonzero constant coefficient are the inverses of its roots) also
@@ -151,6 +153,17 @@ theorem charpoly_eq_smul_inverse_dualMap_of_similitude :
   have hinv : Ring.inverse F.dualMap = c⁻¹ • e.conj G :=
     Ring.inverse_unit (⟨F.dualMap, c⁻¹ • e.conj G, hab, hba⟩ : (Module.End L (Dual L V))ˣ)
   rw [hinv, smul_smul, mul_inv_cancel₀ hc, one_smul, LinearEquiv.charpoly_conj]
+
+omit [FiniteDimensional L W] in
+/-- **The determinant product rule.** If `F` and `G` multiply the perfect pairing `p` by the
+similitude factor `c`, then their determinants multiply to `c ^ dim V`. -/
+theorem det_mul_det_of_similitude :
+    LinearMap.det F * LinearMap.det G = c ^ finrank L V := by
+  have h := congrArg LinearMap.det (dualMap_mul_conj_of_similitude (p := p) hFG)
+  rwa [show dualMap F * p.flip.toPerfPair.conj G
+      = dualMap F ∘ₗ p.flip.toPerfPair.conj G from rfl, LinearMap.det_comp,
+    det_dualMap, LinearEquiv.conj_apply, LinearMap.comp_assoc, LinearMap.det_conj,
+    LinearMap.det_smul, map_one, mul_one, Subspace.dual_finrank_eq] at h
 
 /-- The reverse characteristic polynomial of `G` is determined by the characteristic polynomial
 of `F`: it is `det (1 - t • G) = (-1) ^ dim V * det (c * t - F) / det F`. -/

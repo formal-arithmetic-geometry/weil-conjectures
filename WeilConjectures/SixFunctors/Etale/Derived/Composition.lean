@@ -12,9 +12,11 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 /-!
 # The composition law for `Rf_!` and its mate
 
-Three statements of the six-functor bookkeeping that the purity chapter uses: the composition
-isomorphism `Rg_! Rf_! ≅ R(g ∘ f)_!`, the identification `Rf_! ≅ Rf_*` for proper `f`, and the
-mate of the composition isomorphism, `R(g ∘ f)^! ≅ Rf^! Rg^!`.
+Two statements of the six-functor bookkeeping that the purity chapter uses: the
+identification `Rf_! ≅ Rf_*` for proper `f`, and the mate of the composition isomorphism,
+`R(g ∘ f)^! ≅ Rf^! Rg^!`. The composition isomorphism `R(g ∘ f)_! ≅ Rf_! ⋙ Rg_!` itself is
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, in
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`.
 
 The compactification-independence that makes `Rf_!` well defined is already in the
 repository, as
@@ -32,7 +34,6 @@ the framework chapter. This is the same gap as the TODO already recorded in
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`
 -/
@@ -53,23 +54,6 @@ namespace Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A] {X Y S : Scheme.{u}}
-
-/-- Blueprint `sk-thm-sf-comp-composition`: The composition law for `Rf_!`
-
-**The composition law.** For `f : X ⟶ Y` and `g : Y ⟶ S` separated of finite type,
-
-```
-  X --f--> Y --g--> S          Rf_! ⋙ Rg_!  ≅  R(f ≫ g)_!
-
-                               as functors D(X_ét) ⥤ D(S_ét)
-```
-
-is an isomorphism of functors, independent of all compactification choices by the coherence of
-the compactification comparisons. -/
-theorem nonempty_iso_rightDerivedLowerShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
-    Nonempty (R(f)_![A] ⋙ R(g)_![A] ≅ R(f ≫ g)_![A]) :=
-  sorry
 
 /-- Blueprint `sk-prop-sf-comp-proper`: Proper coincidence
 

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 
@@ -17,7 +18,9 @@ This file fixes the twist-side vocabulary the smooth-purity chapter runs on: the
 `(m)`, the twist-and-shift `K ↦ K(m)[2m]`, the dualizing complex `ω_f = Rf^! Λ_Y`, and the
 *section invariant* `𝒞(g, s) = Ls^* ω_g` of a morphism with a section. The constant complex
 `Λ_X`, finite Tor amplitude, `D^b_{ctf}` and ⊗-invertibility are framework-level notions and
-live in `WeilConjectures.SixFunctors.Etale.Derived.Coefficients`.
+live in `WeilConjectures.SixFunctors.Etale.Derived.Coefficients`. The dualizing complex
+`ω_f = Rf^! Λ_Y` is the framework's `AlgebraicGeometry.Etale.dualizingComplex` for
+`A = ModuleCat Λ`, the constant complex `Λ_Y` being the monoidal unit.
 
 The coefficient stage is the finite one: a commutative ring `Λ` and the abelian category
 `ModuleCat Λ`, so that `D(X_ét, Λ)` is
@@ -49,7 +52,6 @@ Invertibility is a field rather than a consequence of the other two: `Λ_X(m) �
 - `AlgebraicGeometry.Etale.tateObject`: the twisting object `Λ_X(m)`.
 - `AlgebraicGeometry.Etale.tateTwist`: the twist `K ↦ K(m)`.
 - `AlgebraicGeometry.Etale.twistShift`: `K ↦ K(m)[2m]`.
-- `AlgebraicGeometry.Etale.dualizingComplex`: `ω_f = Rf^! Λ_Y`.
 - `AlgebraicGeometry.Etale.sectionInvariant`: `𝒞(g, s) = Ls^* ω_g`.
 
 ## Main statements
@@ -131,18 +133,6 @@ noncomputable def twistShift (m : ℤ) :
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   tateTwist Λ X m ⋙ shiftFunctor _ (2 * m)
 
-variable {X}
-variable {Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
-
-The *dualizing complex* `ω_f = Rf^! Λ_Y ∈ D(X_ét, Λ)` of a morphism `f : X ⟶ Y` admitting a
-compactification. Smooth purity is the assertion that `ω_f ≅ Λ_X(d)[2d]` for `f` smooth of
-pure relative dimension `d`. -/
-noncomputable def dualizingComplex :
-    DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj (constantComplex Λ Y)
-
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
 The *section invariant* `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism `g : V ⟶ B`
@@ -151,7 +141,7 @@ closed section, smooth purity identifies it with `Λ_B(d)[2d]`; the deformation 
 cone of the section reduces the general case to the standard pair `(𝔸^d_B → B, 0)`. -/
 noncomputable def sectionInvariant {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g]
     (s : B ⟶ V) : DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ g)
+  (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g)
 
 end Etale
 

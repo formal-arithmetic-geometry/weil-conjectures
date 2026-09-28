@@ -6,13 +6,17 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 
 /-!
-# Étale morphisms lift locally along a closed immersion
+# Two facts about étale morphisms
+
+## Lifting along a closed immersion
 
 Let `i : Z ⟶ X` be a closed immersion of schemes and `p : W ⟶ Z` an étale morphism. Then `W` is,
 in a neighbourhood of any of its points, the base change along `i` of a scheme étale over `X`.
@@ -22,6 +26,16 @@ over a quotient `R ⧸ I` is the base change of a standard étale algebra over `
 (`Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor`): everything is local on `X` and on
 `W`, so the lift is produced inside a single affine chart and no gluing is involved.
 
+## Étale covers of a normal scheme with separably closed function field
+
+Let `S` be an integral normal scheme whose function field is separably closed, and let
+`p : V ⟶ S` be separated and étale. Then `V` is a disjoint union of open subschemes of `S`. This
+is rendered as: there is an index type `ι` and a family of opens `U : ι → V.Opens` which are
+pairwise disjoint, cover `V`, and are such that each composite `(U i).ι ≫ p` is an open
+immersion. Normality of `S` is not a notion available in Mathlib at the level of schemes, so it
+is taken as the explicit hypothesis that every stalk of `S` is integrally closed; together with
+`[IsIntegral S]` this says exactly that `S` is an integral normal scheme.
+
 ## Main results
 
 - `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: for every point `w` of `W`
@@ -30,6 +44,11 @@ over a quotient `R ⧸ I` is the base change of a standard étale algebra over `
 - `AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`: the pointed form. Given a
   morphism `s : Spec Ω ⟶ W` with `Ω` a field — in the application a geometric point of `W` — there
   is an étale `q : V ⟶ X` and a morphism `V ×[X] Z ⟶ W` over `Z` through which `s` factors.
+- `AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: a
+  separated étale scheme over an integral normal base with separably closed function field is a
+  disjoint union of opens of the base.
+- `AlgebraicGeometry.Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField`: the
+  same statement with finitely many pieces when the source is quasi-compact.
 -/
 
 @[expose] public section
@@ -174,5 +193,31 @@ theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i :
   · rw [Category.assoc, Iso.inv_comp_eq]
     exact hpb.isoPullback_hom_snd.symm
   · rw [Category.assoc, Iso.hom_inv_id_assoc, IsOpenImmersion.lift_fac]
+
+/-- **Étale covers of a normal scheme with separably closed function field.** Let `S` be an
+integral normal scheme — normality being spelled out as the hypothesis `hS` that every stalk of
+`S` is integrally closed — whose function field `S.functionField` is separably closed, and let
+`p : V ⟶ S` be separated and étale. Then `V` is the disjoint union of a family of opens `U i`
+each of which maps isomorphically onto an open of `S`. -/
+@[stacks 09Z9]
+theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
+    {V S : Scheme.{u}} [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] :
+    ∃ (ι : Type u) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) :=
+  sorry
+
+/-- The quasi-compact refinement of
+`AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: if `V` is
+in addition quasi-compact, then finitely many opens suffice. -/
+@[stacks 09Z9]
+theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
+    {V S : Scheme.{u}} [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] [CompactSpace V] :
+    ∃ (ι : Type u) (_ : Finite ι) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) :=
+  sorry
 
 end AlgebraicGeometry

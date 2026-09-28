@@ -40,7 +40,7 @@ for complexes of sheaves. The geometric-stalk half of the same subsection is lik
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`
+- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`
 - `AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`
@@ -77,7 +77,7 @@ carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`; separatedness of `f` is not needed.
 The underlying numerical input is that the torsion cohomological dimension of a finite-type
 `k`-scheme of dimension `d` over a field of torsion cohomological dimension at most `c` is
 bounded by `2d + c`; in particular it is `0` for the spectrum of a separably closed field. -/
-theorem boundedConstructible_rightDerivedLowerStar (f : X ⟶ Y) [QuasiCompact f]
+theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f : X ⟶ Y) [QuasiCompact f]
     [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] (hf : f ≫ aY = aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
