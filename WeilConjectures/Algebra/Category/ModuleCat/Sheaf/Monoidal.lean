@@ -81,14 +81,16 @@ variable (M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingC
 /-- The left unitor `R ⊗_R M ≅ M`: the sheafification of the left unitor of presheaves of
 modules, followed by the counit of the sheafification adjunction. -/
 noncomputable def leftUnitor : tensorObj (unit _) M ≅ M :=
-  (sheafificationCommRing R).mapIso 
-    (MonoidalCategoryStruct.leftUnitor (C := PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) M.val) ≪≫
+  (sheafificationCommRing R).mapIso
+      (MonoidalCategoryStruct.leftUnitor
+        (C := PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) M.val) ≪≫
     (asIso (PresheafOfModules.sheafificationAdjunction (𝟙 _)).counit).app M
 
 /-- The braiding `M ⊗_R N ≅ N ⊗_R M`: the sheafification of the braiding of presheaves of
 modules. -/
 noncomputable def braiding : tensorObj M N ≅ tensorObj N M :=
-  (sheafificationCommRing R).mapIso 
-    (BraidedCategory.braiding (C := PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat)) M.val N.val)
+  (sheafificationCommRing R).mapIso
+    (BraidedCategory.braiding (C := PresheafOfModules.{u} (R.obj ⋙ forget₂ CommRingCat RingCat))
+      M.val N.val)
 
 end SheafOfModules
