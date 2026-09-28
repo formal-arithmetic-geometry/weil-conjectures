@@ -357,10 +357,10 @@ def degreePart.mulUnitEquiv {m : ℤ} (u : degreePart 𝒜 x m) (v : degreePart 
     degreePart 𝒜 x n ≃ₗ[HomogeneousLocalization 𝒜 x] degreePart 𝒜 x (n + m) where
   toFun y := ⟨y * u, mul_mem_degreePart y.2 u.2⟩
   invFun z := ⟨z * v, by simpa using mul_mem_degreePart z.2 v.2⟩
-  map_add' y z := by ext; exact add_mul _ _ _
-  map_smul' p y := by ext; exact smul_mul_assoc _ _ _
-  left_inv y := by ext; simp [mul_assoc, huv]
-  right_inv z := by ext; simp [mul_assoc, mul_comm (v : Localization x), huv]
+  map_add' y z := Subtype.ext (add_mul _ _ _)
+  map_smul' p y := Subtype.ext (smul_mul_assoc _ _ _)
+  left_inv y := Subtype.ext (by simp [mul_assoc, huv])
+  right_inv z := Subtype.ext (by simp [mul_assoc, mul_comm (v : Localization x), huv])
 
 @[simp]
 lemma degreePart.coe_mulUnitEquiv_apply {m : ℤ} (u : degreePart 𝒜 x m)
@@ -384,7 +384,9 @@ include hf hfx
 of `Localization x`, for `f ∈ x ∩ 𝒜 d`. -/
 def degreePart.powDivPow {m : ℤ} (k l : ℕ) (h : (d : ℤ) * (k - l) = m) : degreePart 𝒜 x m :=
   degreePart.mk (i := k * d) (j := l * d) ⟨f ^ k, pow_mem_graded_mul hf k⟩
-    ⟨f ^ l, pow_mem_graded_mul hf l⟩ (pow_mem hfx l) (by push_cast; linarith)
+    ⟨f ^ l, pow_mem_graded_mul hf l⟩ (pow_mem hfx l) (by
+      push_cast
+      linarith)
 
 lemma degreePart.coe_powDivPow_mul_coe_powDivPow {m : ℤ} (k l : ℕ) (h : (d : ℤ) * (k - l) = m) :
     (degreePart.powDivPow hf hfx k l h : Localization x) *
