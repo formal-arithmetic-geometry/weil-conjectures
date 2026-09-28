@@ -135,7 +135,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGenerat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGeneratedCover
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Coefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.GabrielPopescu.AxiomCensus
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.GeneratingMonoQuasiIsos
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
@@ -402,6 +401,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategor
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Elements
@@ -411,6 +411,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preser
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian
+public import WeilConjectures.Mathlib.CategoryTheory.Generator.StrongGenerator
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FinallySmall
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
