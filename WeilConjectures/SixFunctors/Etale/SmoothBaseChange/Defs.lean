@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-!
 # The degree-`q` base-change map and the recorded base-change property
