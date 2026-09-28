@@ -439,6 +439,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.LeftExact
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
