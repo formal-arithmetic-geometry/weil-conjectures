@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
@@ -34,14 +35,15 @@ scheme `X : Scheme.{u}` and `M N : X.Modules` all universes are `u`, so `homObj 
   `M ⟶ N`.
 * `PresheafOfModules.homObjMap`: its functoriality, contravariant in `M` and covariant in `N`.
 * `PresheafOfModules.homFunctor`: the internal hom bifunctor.
+* `PresheafOfModules.homObjEquiv`: the tensor-hom adjunction `(M ⊗ P ⟶ N) ≃ (P ⟶ homObj M N)`,
+  natural in `P` (`PresheafOfModules.homObjEquiv_whiskerLeft_comp`).
+
+If `N` is a sheaf, then so is `homObj M N`: see `PresheafOfModules.isSheaf_homObj` in
+`WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom`.
 
 ## TODO
 
-* The tensor-hom adjunction `(M ⊗ P ⟶ N) ≃ (P ⟶ homObj M N)`, making `homFunctor` the internal
-  hom of a monoidal closed structure.
-* If `N` is a sheaf, then so is `homObj M N`. This should follow from `presheafHom_isSheafFor`
-  by comparing the underlying presheaf of abelian groups of `homObj M N` with a subpresheaf of
-  `presheafHom` of the underlying presheaves of abelian groups.
+* Use `homObjEquiv` to make `homFunctor` the internal hom of a monoidal closed structure.
 -/
 
 @[expose] public section
@@ -330,5 +332,163 @@ noncomputable def homFunctor :
     { obj N := homObj M.unop N
       map g := homObjMap (𝟙 M.unop) g }
   map f := { app N := homObjMap f.unop (𝟙 N) }
+
+section TensorHom
+
+open MonoidalCategory
+
+variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
+
+variable {M P N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+
+variable (M) in
+/-- The morphism `M(X) ⟶ (M ⊗ P)(X)` sending `m` to `m ⊗ p`, for a section `p` of `P` over
+`X`. -/
+noncomputable def tmulRight {X : Cᵒᵖ} (p : P.obj X) : M.obj X ⟶ (M ⊗ P).obj X :=
+  ModuleCat.ofHom ((TensorProduct.mk (R.obj X) (M.obj X) (P.obj X)).flip p)
+
+@[simp]
+lemma tmulRight_apply {X : Cᵒᵖ} (p : P.obj X) (m : M.obj X) :
+    tmulRight M p m = m ⊗ₜ[R.obj X] p :=
+  rfl
+
+/-- Auxiliary definition for `homObjEquiv`: a morphism `φ : M ⊗ P ⟶ N` and a section `p` of `P`
+over `U` give the morphism `M|_U ⟶ N|_U` sending a section `m` of `M` over `W ⟶ U` to
+`φ (m ⊗ p|_W)`. -/
+noncomputable def tensorHomCurryApp (φ : M ⊗ P ⟶ N) {U : C} (p : P.obj (op U)) :
+    (restrictOver R U).obj M ⟶ (restrictOver R U).obj N where
+  app W := tmulRight M (P.map W.unop.hom.op p) ≫ φ.app (op W.unop.left)
+  naturality {W W'} f := by
+    ext m
+    refine (congrArg (φ.app (op W'.unop.left)) ?_).trans
+      (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
+    refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
+      M.map f.unop.left.op m ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
+        (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
+    rw [← map_comp_apply, ← op_comp, Over.w]
+
+@[simp]
+lemma tensorHomCurryApp_app_apply (φ : M ⊗ P ⟶ N) {U : C} (p : P.obj (op U))
+    (W : (Over U)ᵒᵖ) (m : M.obj (op W.unop.left)) :
+    ((tensorHomCurryApp φ p).app W).hom m =
+      φ.app (op W.unop.left) (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p) :=
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+lemma tensorHomCurryApp_add (φ : M ⊗ P ⟶ N) {U : C} (p p' : P.obj (op U)) :
+    tensorHomCurryApp φ (p + p') = tensorHomCurryApp φ p + tensorHomCurryApp φ p' := by
+  ext W : 1
+  refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
+  rw [add_app, ModuleCat.hom_add, LinearMap.add_apply, tensorHomCurryApp_app_apply,
+    tensorHomCurryApp_app_apply, tensorHomCurryApp_app_apply, map_add, TensorProduct.tmul_add,
+    map_add]
+
+set_option backward.isDefEq.respectTransparency false in
+lemma tensorHomCurryApp_smul (φ : M ⊗ P ⟶ N) {U : C} (r : R.obj (op U)) (p : P.obj (op U)) :
+    tensorHomCurryApp φ (r • p) = r • tensorHomCurryApp φ p := by
+  ext W : 1
+  refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
+  rw [smul_app, ModuleCat.hom_comp, LinearMap.comp_apply, tensorHomCurryApp_app_apply,
+    tensorHomCurryApp_app_apply, sectionsSMul_app_apply, overSections_coe_apply, map_smul]
+  exact (congrArg _ (TensorProduct.tmul_smul (R.map W.unop.hom.op r) m _)).trans (map_smul _ _ _)
+
+set_option backward.isDefEq.respectTransparency false in
+lemma tensorHomCurryApp_map (φ : M ⊗ P ⟶ N) {U V : C} (g : V ⟶ U) (p : P.obj (op U)) :
+    tensorHomCurryApp (U := V) φ (P.map g.op p) = restrictOverMap g (tensorHomCurryApp φ p) := by
+  ext W : 1
+  refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
+  rw [restrictOverMap_app, tensorHomCurryApp_app_apply, ← map_comp_apply]
+  rfl
+
+/-- Auxiliary definition for `homObjEquiv`: the morphism `P ⟶ homObj M N` corresponding to a
+morphism `φ : M ⊗ P ⟶ N`. -/
+noncomputable def tensorHomCurry (φ : M ⊗ P ⟶ N) : P ⟶ homObj M N where
+  app X := ModuleCat.ofHom (X := P.obj X) (Y := (homObj M N).obj X)
+    { toFun p := tensorHomCurryApp φ p
+      map_add' := tensorHomCurryApp_add φ
+      map_smul' := tensorHomCurryApp_smul φ }
+  naturality {X Y} g := by
+    ext p : 2
+    exact tensorHomCurryApp_map φ g.unop p
+
+@[simp]
+lemma tensorHomCurry_app_apply (φ : M ⊗ P ⟶ N) (X : Cᵒᵖ) (p : P.obj X) :
+    (tensorHomCurry φ).app X p = tensorHomCurryApp φ p :=
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+variable (M N) in
+/-- Evaluation of a section of `homObj M N` over `U` at `Over.mk (𝟙 U)`, as a linear map. -/
+noncomputable def homObjEvalId (U : C) :
+    (homObj M N).obj (op U) →ₗ[R.obj (op U)] M.obj (op U) →ₗ[R.obj (op U)] N.obj (op U) where
+  toFun φ := (φ.app (op (Over.mk (𝟙 U)))).hom
+  map_add' _ _ := rfl
+  map_smul' r φ := by
+    ext m
+    rw [smul_app, ModuleCat.hom_comp, LinearMap.comp_apply, sectionsSMul_app_apply,
+      overSections_coe_apply]
+    simp
+
+@[simp]
+lemma homObjEvalId_apply_apply (U : C) (φ : (homObj M N).obj (op U)) (m : M.obj (op U)) :
+    homObjEvalId M N U φ m = φ.app (op (Over.mk (𝟙 U))) m :=
+  rfl
+
+/-- Auxiliary definition for `homObjEquiv`: the morphism `M ⊗ P ⟶ N` corresponding to a
+morphism `ψ : P ⟶ homObj M N`, sending `m ⊗ p` to `ψ p` evaluated at `m`. -/
+noncomputable def tensorHomUncurry (ψ : P ⟶ homObj M N) : M ⊗ P ⟶ N where
+  app X := ModuleCat.ofHom
+    (TensorProduct.lift ((homObjEvalId M N X.unop).comp (ψ.app X).hom).flip)
+  naturality {X Y} f := by
+    refine ModuleCat.MonoidalCategory.tensor_ext fun m p ↦ ?_
+    refine (congrArg (fun ξ : (restrictOver R Y.unop).obj M ⟶ (restrictOver R Y.unop).obj N ↦
+      ξ.app (op (Over.mk (𝟙 Y.unop))) (M.map f m)) (naturality_apply ψ f p)).trans ?_
+    refine (restrictOver_hom_app_congr (ψ.app X p) (Category.id_comp f.unop) (M.map f m)).trans ?_
+    exact naturality_apply (ψ.app X p) (Over.homMk f.unop : Over.mk f.unop ⟶ Over.mk (𝟙 _)).op m
+
+@[simp]
+lemma tensorHomUncurry_app_tmul (ψ : P ⟶ homObj M N) (X : Cᵒᵖ) (m : M.obj X) (p : P.obj X) :
+    (tensorHomUncurry ψ).app X (m ⊗ₜ[R.obj X] p) =
+      (ψ.app X p).app (op (Over.mk (𝟙 X.unop))) m :=
+  rfl
+
+/-- The tensor-hom adjunction for presheaves of modules: morphisms `M ⊗ P ⟶ N` correspond to
+morphisms `P ⟶ homObj M N`. A morphism `φ : M ⊗ P ⟶ N` is sent to the morphism which sends a
+section `p` of `P` over `U` to `m ↦ φ (m ⊗ p|_W)` for `W ⟶ U` and `m` a section of `M` over
+`W`. -/
+noncomputable def homObjEquiv (M P N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)) :
+    (M ⊗ P ⟶ N) ≃ (P ⟶ homObj M N) where
+  toFun := tensorHomCurry
+  invFun := tensorHomUncurry
+  left_inv φ := by
+    ext X : 1
+    refine ModuleCat.MonoidalCategory.tensor_ext fun m p ↦ ?_
+    refine congrArg (fun q : P.obj X ↦ φ.app X (m ⊗ₜ[R.obj X] q)) (?_ : P.map (𝟙 X) p = p)
+    rw [map_id]
+    rfl
+  right_inv ψ := by
+    ext X : 1
+    refine ModuleCat.hom_ext (LinearMap.ext fun (p : P.obj X) ↦ ?_)
+    refine hom_ext (M₁ := (restrictOver R X.unop).obj M) (M₂ := (restrictOver R X.unop).obj N)
+      fun W ↦ ?_
+    refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
+    refine (congrArg (fun ξ : (restrictOver R W.unop.left).obj M ⟶
+        (restrictOver R W.unop.left).obj N ↦ ξ.app (op (Over.mk (𝟙 W.unop.left))) m)
+      (naturality_apply ψ W.unop.hom.op p)).trans ?_
+    exact restrictOver_hom_app_congr (ψ.app X p) (Category.id_comp W.unop.hom) m
+
+/-- The tensor-hom adjunction `homObjEquiv` is natural in the second factor. -/
+lemma homObjEquiv_whiskerLeft_comp {M P P' N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)}
+    (f : P ⟶ P') (φ : M ⊗ P' ⟶ N) :
+    homObjEquiv M P N (M ◁ f ≫ φ) = f ≫ homObjEquiv M P' N φ := by
+  ext X : 1
+  refine ModuleCat.hom_ext (LinearMap.ext fun (p : P.obj X) ↦ ?_)
+  refine hom_ext (M₁ := (restrictOver R X.unop).obj M) (M₂ := (restrictOver R X.unop).obj N)
+    fun W ↦ ?_
+  refine ModuleCat.hom_ext (LinearMap.ext fun (m : M.obj (op W.unop.left)) ↦ ?_)
+  exact congrArg (fun q : P'.obj (op W.unop.left) ↦
+    φ.app (op W.unop.left) (m ⊗ₜ[R.obj (op W.unop.left)] q)) (naturality_apply f W.unop.hom.op p)
+
+end TensorHom
 
 end PresheafOfModules

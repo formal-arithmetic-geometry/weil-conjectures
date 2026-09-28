@@ -32,9 +32,6 @@ the product `p_{i₁} * ⋯ * p_{i_t}`. Naming the eight vertices of the cube `(
 
 the vertex `(ε₁, ε₂, ε₃)` contributing `m_{i : εᵢ = 1}^* L` with sign `(-1)^(ε₁ + ε₂ + ε₃)`.
 
-Since `AlgebraicGeometry.Scheme.Modules.tensorObj` is still an `opaque` placeholder, neither
-statement below can be proved before it is replaced by the real tensor product.
-
 ## Main statements
 
 - `AlgebraicGeometry.nonempty_iso_cube`: the theorem of the cube.

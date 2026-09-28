@@ -47,9 +47,9 @@ statement of this file about `χ`, `deg` and the genus meaningful.
 
 Ampleness is `AlgebraicGeometry.IsAmple` of
 `WeilConjectures/AlgebraicGeometry/Modules/Ample.lean`, shared with the abelian-variety block.
-The tensor product and the dual of a sheaf of modules are the `opaque` placeholders of
-`WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean` and
-`WeilConjectures/AlgebraicGeometry/Modules/Dual.lean`. The canonical module `ω_X = Ω^n_{X/k}`
+The tensor product of sheaves of modules is the monoidal structure on `X.Modules` of
+`WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean`; the dual is the `opaque`
+placeholder of `WeilConjectures/AlgebraicGeometry/Modules/Dual.lean`. The canonical module `ω_X = Ω^n_{X/k}`
 has no placeholder: Serre duality is stated existentially, as the existence of a dualising
 invertible module, which is what is provable before `Ω^n_{X/k}` exists and is strictly stronger
 than a statement about a placeholder. Identifying that module with `Ω^n_{X/k}` is separate
@@ -79,9 +79,7 @@ work.
 
 universe u
 
-open CategoryTheory Limits
-
-open scoped AlgebraicGeometry.Scheme.Modules
+open CategoryTheory Limits MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme
 
@@ -219,7 +217,7 @@ theorem serreDuality (n : ℕ) (hn : n ≤ 1) [SmoothOfRelativeDimension n (X �
     [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))] :
     ∃ ω : X.Modules, ω.IsInvertible ∧
       ∀ (ℱ : X.Modules) (r : ℕ), ℱ.IsFiniteLocallyFreeOfRank r → ∀ q ≤ n,
-        Nonempty (Module.Dual k (ℱ.H q) ≃ₗ[k] (ℱᵛ ⊗ₘ ω).H (n - q)) :=
+        Nonempty (Module.Dual k (ℱ.H q) ≃ₗ[k] (ℱᵛ ⊗ ω).H (n - q)) :=
   sorry
 
 end Duality
@@ -256,9 +254,9 @@ theorem exists_isInvertible_twist [IsSepClosed k]
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
     [ℒ.IsInvertible] :
     ∃ ℒ₀ : X.Modules, ℒ₀.IsInvertible ∧
-      Modules.finrankH K (ℒ ⊗ₘ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      Modules.finrankH K (ℒ ⊗ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj ℒ₀) 0 = 1 ∧
-      Modules.finrankH K (ℒ ⊗ₘ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      Modules.finrankH K (ℒ ⊗ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj ℒ₀) 1 = 0 :=
   sorry
 

@@ -16,8 +16,10 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible`: an `𝒪_X`-module locally isomorphic to `𝒪_X`.
-- `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N`,
-  with scoped notation `M ⊗ₘ N`.
+- The symmetric monoidal category structure on `X.Modules`, from
+  `SheafOfModules.monoidalCategory`: the tensor product `M ⊗ N` is the tensor product over
+  `𝒪_X`, the sheafification of the tensor product of the underlying presheaves of modules.
+- `AlgebraicGeometry.Scheme.Modules.tensorObj`: the tensor product `M ⊗_{𝒪_X} N`, i.e. `M ⊗ N`.
 - `AlgebraicGeometry.Scheme.Modules.tensorPow`: the tensor power `M^{⊗ n}`.
 - `AlgebraicGeometry.Scheme.Modules.overPullback`: pullback along a morphism of schemes over a
   base.
@@ -27,7 +29,7 @@ An `𝒪_X`-module is *invertible* if it is locally isomorphic to `𝒪_X`.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 namespace AlgebraicGeometry
 
@@ -42,23 +44,40 @@ class IsInvertible (M : X.Modules) : Prop where
   exists_isoUnit : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧
     Nonempty ((Scheme.Modules.pullback U.ι).obj M ≅ SheafOfModules.unit _)
 
-/-- The tensor product `M ⊗_{𝒪_X} N` of two `𝒪_X`-modules: the sheafification of the tensor
-product of the underlying presheaves of modules. -/
--- TODO(unify): sk-def-picard-pic
-noncomputable def tensorObj (M N : X.Modules) : X.Modules :=
-  SheafOfModules.tensorObj (R := X.sheaf) M N
+/-- The monoidal category structure on `𝒪_X`-modules: the tensor product over `𝒪_X`.
+This uses that `X.ringCatSheaf` is by definition the underlying sheaf of rings
+`(sheafCompose _ (forget₂ CommRingCat RingCat)).obj X.sheaf` of `X.sheaf`. -/
+noncomputable instance : MonoidalCategory X.Modules :=
+  SheafOfModules.monoidalCategory X.sheaf
 
-@[inherit_doc] scoped infixl:70 " ⊗ₘ " => AlgebraicGeometry.Scheme.Modules.tensorObj
+/-- The monoidal category structure on `𝒪_X`-modules is symmetric. -/
+noncomputable instance : SymmetricCategory X.Modules :=
+  SheafOfModules.symmetricCategory X.sheaf
+
+/-- The tensor product `M ⊗_{𝒪_X} N` of two `𝒪_X`-modules: the sheafification of the tensor
+product of the underlying presheaves of modules (`SheafOfModules.tensorObjIsoSheafification`).
+It is the tensor product `M ⊗ N` of the monoidal category `X.Modules`. -/
+-- TODO(unify): sk-def-picard-pic
+noncomputable abbrev tensorObj (M N : X.Modules) : X.Modules :=
+  M ⊗ N
 
 /-- Pullback of an `𝒪_B`-module along a morphism `f : A ⟶ B` of schemes over a base `S`. -/
 noncomputable abbrev overPullback {S : Scheme.{u}} {A B : Over S} (f : A ⟶ B)
     (L : B.left.Modules) : A.left.Modules :=
   (Scheme.Modules.pullback f.left).obj L
 
-/-- The `n`-th tensor power `M^{⊗ n}` of an `𝒪_X`-module. -/
+/-- The `n`-th tensor power `M^{⊗ n}` of an `𝒪_X`-module: `M^{⊗ 0} = 𝟙_ X.Modules` and
+`M^{⊗ (n + 1)} = M ⊗ M^{⊗ n}`. -/
 noncomputable def tensorPow (M : X.Modules) : ℕ → X.Modules
-  | 0 => SheafOfModules.unit _
-  | n + 1 => tensorObj M (tensorPow M n)
+  | 0 => 𝟙_ X.Modules
+  | n + 1 => M ⊗ tensorPow M n
+
+@[simp]
+lemma tensorPow_zero (M : X.Modules) : M.tensorPow 0 = 𝟙_ X.Modules :=
+  rfl
+
+lemma tensorPow_succ (M : X.Modules) (n : ℕ) : M.tensorPow (n + 1) = M ⊗ M.tensorPow n :=
+  rfl
 
 end Scheme.Modules
 

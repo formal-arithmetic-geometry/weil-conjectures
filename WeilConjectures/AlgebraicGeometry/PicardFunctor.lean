@@ -31,8 +31,9 @@ makes invertibility stable under pullback.
 
 `Y.Modules` lives in `Type (u + 1)`, so `Y.Pic` as defined here does too, even though `Pic Y`
 is really a small group.  Smallness is not pursued: only the underlying set is needed for the
-`Set`-valued Picard presheaf, and no group law is defined, since the tensor product of sheaves
-of modules is still the placeholder `AlgebraicGeometry.Scheme.Modules.tensorObj`.
+`Set`-valued Picard presheaf. No group law is defined yet: it should come from the monoidal
+structure on `Y.Modules` (`AlgebraicGeometry.Scheme.Modules.tensorObj`), using that the tensor
+product of invertible modules is invertible, which is not proved yet.
 
 ## Main definitions
 

@@ -12,9 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 Mathlib has no internal hom for `SheafOfModules`, hence no dual `M^∨ = Hom(M, 𝒪_X)`. Serre
 duality and the twist lemma of the Picard-framework block both need it, so
-`AlgebraicGeometry.Scheme.Modules.dual` is declared here as an `opaque` constant, in the same
-style as `AlgebraicGeometry.Scheme.Modules.tensorObj`. Being `opaque` rather than
-`sorry`-bodied it genuinely depends on its argument and introduces no `sorryAx`; but it
+`AlgebraicGeometry.Scheme.Modules.dual` is declared here as an `opaque` constant. Being
+`opaque` rather than `sorry`-bodied it genuinely depends on its argument and introduces no `sorryAx`; but it
 satisfies no equations whatsoever, so **no statement mentioning it can be proved before it is
 replaced by the real construction**.
 
