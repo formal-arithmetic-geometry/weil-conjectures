@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-!
 # Ample invertible modules and the Hilbert degree
@@ -22,12 +23,11 @@ tensor power of it is very ample. For an ample invertible module `M` on a proper
 of dimension `g`, the function `m ↦ χ(X, M^{⊗ m})` is a numerical polynomial of degree at most
 `g`, and the *degree of `X` with respect to `M`* is `g!` times its leading coefficient.
 
-Neither the Serre twisting sheaf `𝒪(1)` nor the Euler characteristic of a coherent sheaf is
-available in Mathlib, so `AlgebraicGeometry.IsVeryAmple` and
-`AlgebraicGeometry.Scheme.Hom.degree` are declared here as `opaque` constants. Being `opaque`
-rather than `sorry`-bodied they depend genuinely on their arguments and introduce no `sorryAx`;
-but they satisfy no equations whatsoever, so **none of the statements below can be proved, and
-`IsAmple` carries no information, before the two placeholders are replaced**.
+The Euler characteristic of a coherent sheaf is not available in Mathlib, so
+`AlgebraicGeometry.Scheme.Hom.degree` is declared here as an `opaque` constant. Being `opaque`
+rather than `sorry`-bodied it depends genuinely on its arguments and introduces no `sorryAx`;
+but it satisfies no equations whatsoever, so **none of the statements below can be proved
+before it is replaced**.
 
 ## Main definitions
 
@@ -54,13 +54,15 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {X Y : Scheme.{u}}
 
-/-- An invertible `𝒪_X`-module is *very ample* over `K` if it is the pullback of `𝒪(1)` along a
-closed immersion of `X` into a projective space `ℙ^N_K`.
+/-- An `𝒪_X`-module `M` is *very ample* over `K` if it is the pullback of `𝒪(1)` along a
+closed immersion `i : X ⟶ ℙ(n; Spec K)` over `K` into a projective space with finitely many
+homogeneous coordinates.
 
-The Serre twisting sheaf is not available in Mathlib, so this is an `opaque` placeholder; it
-satisfies no equations. -/
--- TODO(unify): sk-def-av-ample-degree
-opaque IsVeryAmple (f : X ⟶ Spec (.of K)) (M : X.Modules) : Prop
+(blueprint: `sk-def-av-ample-degree`) -/
+def IsVeryAmple (f : X ⟶ Spec (.of K)) (M : X.Modules) : Prop :=
+  ∃ (n : Type u) (_ : Finite n) (i : X ⟶ ℙ(n; Spec (.of K))), IsClosedImmersion i ∧
+    i ≫ (ℙ(n; Spec (.of K)) ↘ Spec (.of K)) = f ∧
+    Nonempty ((Scheme.Modules.pullback i).obj (ProjectiveSpace.twist n _ 1) ≅ M)
 
 /-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
 

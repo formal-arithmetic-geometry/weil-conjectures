@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-!
 # Serre's theorems on the cohomology of projective schemes
@@ -28,15 +28,9 @@ the index type of the *homogeneous* coordinates, so that `ℙᵈ_k` is `ℙ(n; S
 
 ## Implementation notes
 
-There is no twisting sheaf anywhere in Mathlib or in the project, so
-`AlgebraicGeometry.ProjectiveSpace.twist` is declared here as an `opaque` constant, in the
-style of `AlgebraicGeometry.Scheme.Modules.tensorObj`. Being `opaque` rather than
-`sorry`-bodied it genuinely depends on `m`, so the four cohomology statements below say what
-they should; but it satisfies no equations, so **none of them can be proved before it is
-replaced**. The alternative, quantifying existentially over a family
-`𝒪 : ℤ → (ℙ(n; S)).Modules` with `𝒪 0 ≅ 𝒪_X` and the four clauses, would be provable today;
-it is not used here because the twist is also needed by Serre's theorems A and B, which are
-about an arbitrary closed subscheme and would then have to carry the family as a parameter.
+The twisting sheaf `AlgebraicGeometry.ProjectiveSpace.twist` is defined in
+`WeilConjectures/AlgebraicGeometry/ProjectiveSpace/Twist.lean` as the pullback of the twisting
+sheaf of the integral model `Proj ℤ[Tᵢ]`.
 
 The symmetric power `Sᵐ(V)` of `V = k^{d+1}` is realised as the degree-`m` homogeneous part
 `MvPolynomial.homogeneousSubmodule n k m` of the polynomial ring in the homogeneous
@@ -47,11 +41,6 @@ the homogeneous part is anyway the object Serre's theorem produces.
 Mathlib has no `IsCoherent` predicate for sheaves of modules; "coherent" is spelled here as
 `SheafOfModules.IsFinitePresentation` together with `SheafOfModules.IsQuasicoherent`, which
 agrees with coherence on a noetherian scheme such as a closed subscheme of `ℙᵈ_k`.
-
-## Main definitions
-
-- `AlgebraicGeometry.ProjectiveSpace.twist` — the twisting sheaf `𝒪(m)` on `ℙ(n; S)`
-  (placeholder).
 
 ## Main statements
 
@@ -73,15 +62,7 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-variable (n : Type u) (S : Scheme.{u})
-
-/-- The twisting sheaf `𝒪(m)` on projective space.
-
-Neither Mathlib nor the project has the twisting sheaves of a relative `Proj`, so this is an
-`opaque` placeholder: it satisfies no equations, and no statement mentioning it can be proved
-before it is replaced. -/
--- TODO(unify): sk-thm-picard-pn
-opaque ProjectiveSpace.twist (m : ℤ) : (ℙ(n; S)).Modules := SheafOfModules.unit _
+variable (n : Type u)
 
 section Pn
 
