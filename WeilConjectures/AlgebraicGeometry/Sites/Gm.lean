@@ -115,8 +115,9 @@ noncomputable def gmSheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
 /-- The *cohomological Picard group* `H¹(X_ét, 𝔾ₘ)` of a scheme.
 
 It is called cohomological because the Picard group proper, the group of invertible
-`𝒪_X`-modules up to isomorphism, is a different definition; that the two agree is a theorem
-(blueprint: `lem-sc-h1-gm-pic`), and the invertible-module definition together with the degree
+`𝒪_X`-modules up to isomorphism, is a different definition; that the two agree is
+`AlgebraicGeometry.Scheme.bijective_picToCohomologicalPicardGroup`
+(blueprint: `thm-sc-hilbert-90`), and the invertible-module definition together with the degree
 homomorphism and `Pic⁰` belong to the blueprint block `sk-def-av-pic`. Its vanishing for the
 spectrum of a field is
 `AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field`. -/
@@ -139,8 +140,10 @@ computation of `H¹` of the units agree. The three-way comparison
 
 `{invertible 𝒪_X-modules}/≅ ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)`
 
-that precedes it in the blueprint is not stated here: invertible modules belong to another
-blueprint block, so they are not redefined in this one. The proof is `sorry`.
+precedes it in the blueprint; its étale half is
+`AlgebraicGeometry.Scheme.bijective_picToCohomologicalPicardGroup`, in a later file. This
+instance should be derived from it and the triviality of `Pic` of a field. The proof is
+`sorry`.
 (blueprint: `cor-sc-hilbert-90-field`) -/
 instance subsingleton_cohomologicalPicardGroup_of_field (K : Type u) [Field K] :
     Subsingleton (Spec (.of K)).CohomologicalPicardGroup :=
