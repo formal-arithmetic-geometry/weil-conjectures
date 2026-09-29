@@ -28,6 +28,8 @@ if `ι : X → I` is a resolution of `X` by `F`-acyclic objects and `φ : I ⟶ 
 
 ## Main results
 
+* `CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic`: the acyclicity
+  criterion `R^q F X ≅ H^q(F I)` for a resolution `I` of `X` by `F`-acyclic objects.
 * `CategoryTheory.Functor.quasiIso_map_of_isRightAcyclic`: `F` preserves quasi-isomorphisms
   between `ℕ`-indexed cochain complexes of `F`-acyclic objects.
 * `CategoryTheory.Functor.quasiIso_map_of_isRightAcyclic_of_injectiveResolution`: the
@@ -122,5 +124,26 @@ lemma Functor.rightDerivedObjIsoOfIsRightAcyclic_inv (F : C ⥤ D) [F.Additive]
       HomologicalComplex.homologyMap ((F.mapHomologicalComplex _).map φ) q ≫
         (J.isoRightDerivedObj F q).inv :=
   rfl
+
+/-- Let `ι : single₀ X ⟶ I` be a resolution of `X` (a quasi-isomorphism) and let `J` be an
+injective resolution of `X`. Then there is a morphism `φ : I ⟶ J` over `X`, i.e. with
+`ι ≫ φ = J.ι`. -/
+lemma InjectiveResolution.exists_comp_eq_ι_of_quasiIso {X : C} {I : CochainComplex C ℕ}
+    (ι : (CochainComplex.single₀ C).obj X ⟶ I) [QuasiIso ι] (J : InjectiveResolution X) :
+    ∃ φ : I ⟶ J.cocomplex, ι ≫ φ = J.ι := by
+  sorry
+
+/-- **Acyclicity criterion.** Let `F : C ⥤ D` be a left exact additive functor and let
+`ι : X → I` be a resolution of `X` (a quasi-isomorphism from `X` placed in degree `0` to a
+cochain complex `I` indexed by `ℕ`) by `F`-acyclic objects. Then `R^q F X ≅ H^q(F I)` for
+all `q`. (blueprint: `sk-thm-acyclicity`) -/
+theorem Functor.nonempty_rightDerivedObjIso_homology_of_acyclic (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] {X : C} {I : CochainComplex C ℕ}
+    (ι : (CochainComplex.single₀ C).obj X ⟶ I) [QuasiIso ι]
+    (hI : ∀ n, F.IsRightAcyclic (I.X n)) (q : ℕ) :
+    Nonempty ((F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q) :=
+  have J := injectiveResolution X
+  have ⟨φ, hφ⟩ := J.exists_comp_eq_ι_of_quasiIso ι
+  ⟨F.rightDerivedObjIsoOfIsRightAcyclic ι hI J φ hφ q⟩
 
 end CategoryTheory
