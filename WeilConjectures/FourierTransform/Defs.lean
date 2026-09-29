@@ -103,22 +103,20 @@ noncomputable def kernelTransform [HasCompactification (pullback.snd π π')]
       R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ a
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes, the *Fourier kernel* `𝒦_ψ`
-is the Artin–Schreier sheaf `ℒ_{Ψ, b}` of the pairing. On the affine line over a field, with
+is the Artin–Schreier sheaf `ℒ_{Ψ, b} = b^* ℒ_Ψ` of the pairing, the pullback of the
+Artin–Schreier sheaf of `𝔸¹` along `b : V ×_S V' ⟶ 𝔸¹`. On the affine line over a field, with
 `V = V' = 𝔸¹` and the pairing the product `x ξ`, this is the sheaf usually written
 `ℒ_{ψ(xξ)}`.
 
 Being an Artin–Schreier sheaf, it is lisse of rank one
-(`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheaf`,
-`AlgebraicGeometry.Etale.artinSchreierSheafZeroIso`) and multiplicative in the character
-(`AlgebraicGeometry.Etale.artinSchreierSheafMulIso`), with
+(`AlgebraicGeometry.Etale.isLocallyConstantSheaf_artinSchreierSheafOf`) and multiplicative in
+the character (`AlgebraicGeometry.Etale.artinSchreierSheafMulIso`), with
 `AlgebraicGeometry.Etale.artinSchreierSheafInvIso` identifying `𝒦_ψ⁻¹` with `𝒦_{ψ⁻¹}`.
 (sketch blueprint: `sk-def-kernel`, `sk-prop-kernel-lisse`) -/
 noncomputable def fourierKernel [CharP Γ(pullback π π', ⊤) p] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) :
     Sheaf (pullback π π').smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
-  letI := ZMod.algebra Γ(pullback π π', ⊤) p
-  haveI : Invertible (Fintype.card (ZMod p) : Λ) := by rw [ZMod.card]; assumption
-  artinSchreierSheaf (ZMod p) (pullback π π') Ψ b
+  artinSchreierSheafZMod (pullback π π') Ψ b
 
 /-- For a pairing `b ∈ Γ(V ×_S V', 𝒪)` between two `S`-schemes and a relative dimension `r`,
 the *Fourier–Deligne transform* is

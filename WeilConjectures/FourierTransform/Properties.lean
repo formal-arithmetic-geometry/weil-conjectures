@@ -79,10 +79,7 @@ noncomputable def artinSchreierTwist (X : Scheme.{u}) [CharP Γ(X, ⊤) p]
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   derivedTensorRight (ModuleCat.{u + 1} Λ) X
-    ((DerivedCategory.singleFunctor _ 0).obj
-      (letI := ZMod.algebra Γ(X, ⊤) p
-       haveI : Invertible (Fintype.card (ZMod p) : Λ) := by rw [ZMod.card]; assumption
-       artinSchreierSheaf (ZMod p) X Ψ f))
+    ((DerivedCategory.singleFunctor _ 0).obj (artinSchreierSheafZMod X Ψ f))
 
 section Stalk
 

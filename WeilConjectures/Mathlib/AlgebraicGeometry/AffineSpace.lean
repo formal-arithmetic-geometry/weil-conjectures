@@ -7,7 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.FieldTheory.Finite.Basic
 
 public import Mathlib.AlgebraicGeometry.QuasiAffine
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -33,11 +35,15 @@ morphism into an affine space over an affine base to be a closed immersion.
 
 We also record the part of the additive group structure of relative affine space that is used
 elsewhere: the zero section `AlgebraicGeometry.AffineSpace.zeroSection`, the reflection
-`AlgebraicGeometry.AffineSpace.neg` and the standard pairing
-`AlgebraicGeometry.AffineSpace.stdPairing` on `𝔸(n; S) ×_S 𝔸(n; S)`, together with the
-Artin–Schreier map `AlgebraicGeometry.AffineSpace.artinSchreierMap` (`x ↦ x ^ q - x`) and the
-translations `AlgebraicGeometry.AffineSpace.translation`, which leave it invariant in
-characteristic `p` (`AlgebraicGeometry.AffineSpace.translation_comp_artinSchreierMap`).
+`AlgebraicGeometry.AffineSpace.neg`, the addition `AlgebraicGeometry.AffineSpace.add` and the
+standard pairing `AlgebraicGeometry.AffineSpace.stdPairing` on `𝔸(n; S) ×_S 𝔸(n; S)`, together
+with the Artin–Schreier map `AlgebraicGeometry.AffineSpace.artinSchreierMap` (`x ↦ x ^ q - x`)
+and the translations `AlgebraicGeometry.AffineSpace.translation`. The Artin–Schreier map is
+finite (`AlgebraicGeometry.AffineSpace.isFinite_artinSchreierMap`), étale when `q = 0` on the
+base (`AlgebraicGeometry.AffineSpace.etale_artinSchreierMap`), invariant under translations by
+the elements of a finite field with `q` elements
+(`AlgebraicGeometry.AffineSpace.translation_comp_artinSchreierMap_card`) and a torsor under
+them (`AlgebraicGeometry.AffineSpace.isIso_sigmaDesc_translation_artinSchreierMap`).
 
 -/
 
@@ -493,6 +499,20 @@ lemma zeroSection_comp_neg : zeroSection n S ≫ neg n S = zeroSection n S := by
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, neg_appTop_coord, map_neg,
       zeroSection_appTop_coord, neg_zero]
 
+/-- The addition `(x, y) ↦ x + y` of `𝔸(n; S)`, a morphism `𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)`,
+the group law of the additive group scheme. -/
+def add : Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ⟶ 𝔸(n; S) :=
+  homOfVector (Limits.pullback.fst _ _ ≫ 𝔸(n; S) ↘ S) fun i ↦
+    (Limits.pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i) +
+      (Limits.pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i)
+
+@[simp]
+lemma add_appTop_coord (i : n) :
+    (add n S).appTop (coord S i) =
+      (Limits.pullback.fst (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i) +
+        (Limits.pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)).appTop (coord S i) :=
+  homOfVector_appTop_coord _ _ _
+
 /-- The standard pairing `⟨x, ξ⟩ = ∑ᵢ xᵢ ξᵢ` on `𝔸(n; S) ×_S 𝔸(n; S)`, a global function on
 the fibre product. -/
 def stdPairing [Fintype n] : Γ(Limits.pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S), ⊤) :=
@@ -518,28 +538,52 @@ lemma artinSchreierMap_appTop_coord (q : ℕ) (i : n) :
     (artinSchreierMap n S q).appTop (coord S i) = coord S i ^ q - coord S i :=
   homOfVector_appTop_coord _ _ _
 
-/-- For `q > 1` the one-dimensional Artin–Schreier map `x ↦ x ^ q - x` is finite: the ring map
-`T ↦ T ^ q - T` makes `𝒪_S[T]` a free module of rank `q` over itself. -/
-lemma isFinite_artinSchreierMap {q : ℕ} (hq : 1 < q) :
-    IsFinite (artinSchreierMap PUnit.{u + 1} S q) :=
+/-- For `q > 1` and finitely many coordinates, the Artin–Schreier map `x ↦ x ^ q - x` is
+finite. -/
+lemma isFinite_artinSchreierMap [Finite n] {q : ℕ} (hq : 1 < q) :
+    IsFinite (artinSchreierMap n S q) :=
+  -- each coordinate ring map `T ↦ T ^ q - T` makes `𝒪_S[T]` a free module of rank `q`
+  -- over itself
+  sorry
+
+/-- If `q = 0` on `S`, the Artin–Schreier map `x ↦ x ^ q - x` of `𝔸(n; S)` is étale. -/
+lemma etale_artinSchreierMap [Finite n] {q : ℕ} (hq : (q : Γ(S, ⊤)) = 0) :
+    Etale (artinSchreierMap n S q) :=
+  -- the Jacobian of `x ↦ x ^ q - x` is `q x ^ (q - 1) - 1 = -1`, a unit
   sorry
 
 variable {n S}
 
+/-- The Artin–Schreier map commutes with the base change map `map f` of `f : S ⟶ T`:
+
+```
+𝔸(n; S) --map f--> 𝔸(n; T)
+   |                  |
+   | AS_q             | AS_q
+   v                  v
+𝔸(n; S) --map f--> 𝔸(n; T)
+```
+-/
 @[reassoc]
 lemma map_comp_artinSchreierMap {T : Scheme.{u}} (f : S ⟶ T) (q : ℕ) :
-    map n f ≫ artinSchreierMap n T q = artinSchreierMap n S q ≫ map n f := by
-  refine hom_ext (by simp) fun i ↦ ?_
-  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierMap_appTop_coord,
-    map_appTop_coord, map_sub, map_pow]
+    map n f ≫ artinSchreierMap n T q = artinSchreierMap n S q ≫ map n f :=
+  hom_ext (by simp) fun i ↦ by simp
 
-/-- The Artin–Schreier map commutes with base change: over `f : S ⟶ T`, the Artin–Schreier map
-of `𝔸(n; S)` is the base change of that of `𝔸(n; T)`. -/
+/-- The Artin–Schreier map of `𝔸(n; S)` is the base change of that of `𝔸(n; T)` along
+`f : S ⟶ T`, that is, the following square is cartesian:
+
+```
+𝔸(n; S) --map f--> 𝔸(n; T)
+   |                  |
+   | AS_q             | AS_q
+   v                  v
+𝔸(n; S) --map f--> 𝔸(n; T)
+```
+-/
 lemma isPullback_map_artinSchreierMap {T : Scheme.{u}} (f : S ⟶ T) (q : ℕ) :
-    IsPullback (map n f) (artinSchreierMap n S q) (artinSchreierMap n T q) (map n f) := by
-  refine IsPullback.of_bot ?_ (map_comp_artinSchreierMap f q) (isPullback_map (n := n) f)
-  rw [artinSchreierMap_over, artinSchreierMap_over]
-  exact isPullback_map (n := n) f
+    IsPullback (map n f) (artinSchreierMap n S q) (artinSchreierMap n T q) (map n f) :=
+  IsPullback.of_bot (by simpa using isPullback_map (n := n) f)
+    (map_comp_artinSchreierMap f q) (isPullback_map (n := n) f)
 
 /-- The translation `x ↦ x + a` of `𝔸(n; S)` by a vector `a` of global functions on `S`. -/
 def translation (a : n → Γ(S, ⊤)) : 𝔸(n; S) ⟶ 𝔸(n; S) :=
@@ -555,20 +599,67 @@ lemma translation_appTop_coord (a : n → Γ(S, ⊤)) (i : n) :
   homOfVector_appTop_coord _ _ _
 
 /-- In characteristic `p`, the Artin–Schreier map `x ↦ x ^ (p ^ m) - x` is invariant under
-translation by a vector `a` with `a ^ (p ^ m) = a`. -/
-@[reassoc (attr := simp)]
+translation by a vector `a` with `a ^ (p ^ m) = a`:
+
+```
+𝔸(n; S) --translation a--> 𝔸(n; S)
+      \                       |
+       \ AS_{p^m}             | AS_{p^m}
+        \                     v
+         -----------------> 𝔸(n; S)
+```
+-/
+@[reassoc]
 lemma translation_comp_artinSchreierMap {p : ℕ} [Fact p.Prime] (hp : (p : Γ(S, ⊤)) = 0)
     (m : ℕ) (a : n → Γ(S, ⊤)) (ha : ∀ i, a i ^ p ^ m = a i) :
     translation a ≫ artinSchreierMap n S (p ^ m) = artinSchreierMap n S (p ^ m) := by
-  refine hom_ext ?_ fun i ↦ ?_
-  · simp
-  · nontriviality Γ(𝔸(n; S), ⊤)
-    have : CharP Γ(𝔸(n; S), ⊤) p := by
-      rw [CharP.charP_iff_prime_eq_zero Fact.out, ← map_natCast (𝔸(n; S) ↘ S).appTop.hom, hp,
-        map_zero]
-    rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierMap_appTop_coord, map_sub,
-      map_pow, translation_appTop_coord, add_pow_char_pow, ← map_pow, ha]
-    ring
+  refine hom_ext (by simp) fun i ↦ ?_
+  nontriviality Γ(𝔸(n; S), ⊤)
+  have : CharP Γ(𝔸(n; S), ⊤) p := by
+    rw [CharP.charP_iff_prime_eq_zero Fact.out, ← map_natCast (𝔸(n; S) ↘ S).appTop.hom, hp,
+      map_zero]
+  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierMap_appTop_coord, map_sub,
+    map_pow, translation_appTop_coord, add_pow_char_pow, ← map_pow, ha]
+  ring
+
+/-- Over a scheme `S` with a ring map `φ : k →+* Γ(S, 𝒪_S)` from a finite field `k` with `q`
+elements, translation by a vector `a` with entries in `k` leaves the Artin–Schreier map
+`x ↦ x ^ q - x` of `𝔸(n; S)` invariant:
+
+```
+𝔸(n; S) --translation (φ ∘ a)--> 𝔸(n; S)
+      \                             |
+       \ AS_q                       | AS_q
+        \                           v
+         -----------------------> 𝔸(n; S)
+```
+-/
+@[reassoc]
+lemma translation_comp_artinSchreierMap_card (k : Type*) [Field k] [Fintype k]
+    (φ : k →+* Γ(S, ⊤)) (a : n → k) :
+    translation (fun i ↦ φ (a i)) ≫ artinSchreierMap n S (Fintype.card k) =
+      artinSchreierMap n S (Fintype.card k) := by
+  obtain ⟨m, hp, hm⟩ := FiniteField.card k (ringChar k)
+  have : Fact (ringChar k).Prime := ⟨hp⟩
+  rw [hm]
+  refine translation_comp_artinSchreierMap ?_ _ _ fun _ ↦ ?_
+  · rw [← map_natCast φ, ringChar.Nat.cast_ringChar, map_zero]
+  · rw [← map_pow, ← hm, FiniteField.pow_card]
+
+/-- Over a scheme `S` with a ring map `φ : k →+* Γ(S, 𝒪_S)` from a finite field `k` with `q`
+elements, the Artin–Schreier map `AS_q` of `𝔸(n; S)` is a torsor under `kⁿ` acting by
+translations: the map `∐_{a ∈ kⁿ} 𝔸(n; S) ⟶ 𝔸(n; S) ×_{AS_q} 𝔸(n; S)`, `(a, x) ↦ (x, x + a)`,
+is an isomorphism. -/
+lemma isIso_sigmaDesc_translation_artinSchreierMap [Finite n] (k : Type u) [Field k]
+    [Fintype k] (φ : k →+* Γ(S, ⊤)) :
+    IsIso (Sigma.desc fun a : n → k ↦
+      pullback.lift (𝟙 𝔸(n; S)) (translation fun i ↦ φ (a i))
+        (by rw [Category.id_comp, translation_comp_artinSchreierMap_card]) :
+      ∐ (fun _ : n → k ↦ 𝔸(n; S)) ⟶
+        pullback (artinSchreierMap n S (Fintype.card k)) (artinSchreierMap n S (Fintype.card k))) :=
+  -- both sides are finite étale over `𝔸(n; S)` of degree `qⁿ`, and the map is a monomorphism
+  -- since the translations by distinct vectors have disjoint graphs
+  sorry
 
 end ArtinSchreier
 

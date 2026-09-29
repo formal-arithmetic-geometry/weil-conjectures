@@ -115,6 +115,13 @@ def upperStarConstantSheafIso (f : X ⟶ Y) :
         (fun α ↦ (α.hom.naturality _).symm)))
     (constantSheafAdj X.smallEtaleTopology A terminalIsTerminal)
 
+variable (Λ : Type (u + 1)) [CommRing Λ] in
+/-- The constant sheaf `Λ` on the small étale site of `X`, as a sheaf of `Λ`-modules. It is
+written with `constantSheaf` rather than as the monoidal unit, so that
+`AlgebraicGeometry.Scheme.upperStarConstantSheafIso` applies to it. -/
+abbrev constantSheafSelf (X : Scheme.{u}) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (constantSheaf _ _).obj (ModuleCat.of Λ Λ)
+
 end PullbackFunctor
 
 section LocallyConstant
