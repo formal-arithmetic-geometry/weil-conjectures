@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
@@ -32,14 +33,15 @@ sheafification.
 
 - `AlgebraicGeometry.Scheme.Hom.isZero_relativeDifferentials`: `Ω¹_{X/S} = 0` for an open
   immersion `f`; in particular `Ω¹_{X/X} = 0` (`isZero_relativeDifferentials_id`).
+- `AlgebraicGeometry.Scheme.Hom.nonempty_relativeDifferentials_Spec_iso_tilde`: for an
+  `A`-algebra `B`, `Ω¹_{Spec B / Spec A}` is the quasi-coherent sheaf `Ω[B⁄A]^~`.
+- `AlgebraicGeometry.Scheme.Hom.nonempty_relativeDifferentials_Spec_Γ_linearEquiv`: for an
+  `A`-algebra `B`, `Γ(Spec B, Ω¹_{Spec B / Spec A}) ≃ Ω[B⁄A]` as `B`-modules.
 
 ## TODO
 
 - Show that the definition does not change when `f⁻¹𝒪_S` is replaced by its sheafification,
   which is the inverse image used in the Stacks project.
-- Compute `Ω¹_{Spec B / Spec A}` as the quasi-coherent sheaf `AlgebraicGeometry.tilde` of the
-  `B`-module `Ω[B⁄A]`, compatibly with `d` and `KaehlerDifferential.D`, and deduce the `B`-linear
-  identification of its global sections with `Ω[B⁄A]`.
 
 ## References
 
@@ -119,5 +121,26 @@ variable (X) in
 /-- The sheaf of relative differentials of the identity morphism vanishes: `Ω¹_{X/X} = 0`. -/
 lemma isZero_relativeDifferentials_id : IsZero (𝟙 X : X ⟶ X).relativeDifferentials :=
   isZero_relativeDifferentials _
+
+section Affine
+
+variable (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]
+
+/-- For an `A`-algebra `B`, the sheaf of relative differentials `Ω¹_{Spec B / Spec A}` is the
+quasi-coherent sheaf `Ω[B⁄A]^~` associated to the `B`-module of Kähler differentials. -/
+lemma nonempty_relativeDifferentials_Spec_iso_tilde :
+    Nonempty ((Spec.map (CommRingCat.ofHom (algebraMap A B))).relativeDifferentials ≅
+      tilde (ModuleCat.of (CommRingCat.of B) Ω[B⁄A])) := by
+  sorry
+
+/-- For an `A`-algebra `B`, the global sections of the sheaf of relative differentials
+`Ω¹_{Spec B / Spec A}`, with their `B`-module structure from `moduleSpecΓFunctor`, are the
+`B`-module `Ω[B⁄A]` of Kähler differentials. -/
+lemma nonempty_relativeDifferentials_Spec_Γ_linearEquiv :
+    Nonempty ((moduleSpecΓFunctor (R := .of B)).obj
+      (Spec.map (CommRingCat.ofHom (algebraMap A B))).relativeDifferentials ≃ₗ[B] Ω[B⁄A]) := by
+  sorry
+
+end Affine
 
 end AlgebraicGeometry.Scheme.Hom
